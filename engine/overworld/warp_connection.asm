@@ -17,13 +17,49 @@ EnterMapConnection:
 ; Return carry if a connection has been entered.
 	ld a, [wPlayerStepDirection]
 	and a ; DOWN
-	jmp z, .south
-	cp UP
-	jmp z, .north
-	cp LEFT
-	jr z, .west
-	cp RIGHT
-	jr z, .east
+	jp z, .south
+	dec a ; UP
+	jp z, .north
+	dec a ; LEFT
+	jp z, .west
+	dec a ; RIGHT
+	ret nz
+	; fallthrough
+
+.east
+	ld a, [wEastConnectedMapGroup]
+	ld [wMapGroup], a
+	ld a, [wEastConnectedMapNumber]
+	ld [wMapNumber], a
+	ld a, [wEastConnectionStripXOffset]
+	ld [wXCoord], a
+	ld a, [wEastConnectionStripYOffset]
+	ld hl, wYCoord
+	add [hl]
+	ld [hl], a
+	ld c, a
+	ld hl, wEastConnectionWindow
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	srl c
+	jr z, .skip_to_load
+	ld a, [wEastConnectedMapWidth]
+	add 6
+	ld e, a
+	ld d, 0
+
+.loop
+	add hl, de
+	dec c
+	jr nz, .loop
+
+.skip_to_load
+	ld a, l
+	ld [wOverworldMapAnchor], a
+	ld a, h
+	ld [wOverworldMapAnchor + 1], a
+	scf
 	ret
 
 .west
@@ -43,43 +79,8 @@ EnterMapConnection:
 	ld h, [hl]
 	ld l, a
 	srl c
-	jr z, .skip_to_load
-	ld a, [wWestConnectedMapWidth]
-	add 6
-	ld e, a
-	ld d, 0
-
-.loop
-	add hl, de
-	dec c
-	jr nz, .loop
-
-.skip_to_load
-	ld a, l
-	ld [wOverworldMapAnchor], a
-	ld a, h
-	ld [wOverworldMapAnchor + 1], a
-	jmp .done
-
-.east
-	ld a, [wEastConnectedMapGroup]
-	ld [wMapGroup], a
-	ld a, [wEastConnectedMapNumber]
-	ld [wMapNumber], a
-	ld a, [wEastConnectionStripXOffset]
-	ld [wXCoord], a
-	ld a, [wEastConnectionStripYOffset]
-	ld hl, wYCoord
-	add [hl]
-	ld [hl], a
-	ld c, a
-	ld hl, wEastConnectionWindow
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	srl c
 	jr z, .skip_to_load2
-	ld a, [wEastConnectedMapWidth]
+	ld a, [wWestConnectedMapWidth]
 	add 6
 	ld e, a
 	ld d, 0
@@ -94,7 +95,8 @@ EnterMapConnection:
 	ld [wOverworldMapAnchor], a
 	ld a, h
 	ld [wOverworldMapAnchor + 1], a
-	jr .done
+	scf
+	ret
 
 .north
 	ld a, [wNorthConnectedMapGroup]
@@ -119,7 +121,8 @@ EnterMapConnection:
 	ld [wOverworldMapAnchor], a
 	ld a, h
 	ld [wOverworldMapAnchor + 1], a
-	jr .done
+	scf
+	ret
 
 .south
 	ld a, [wSouthConnectedMapGroup]
@@ -144,7 +147,6 @@ EnterMapConnection:
 	ld [wOverworldMapAnchor], a
 	ld a, h
 	ld [wOverworldMapAnchor + 1], a
-.done
 	scf
 	ret
 
