@@ -345,7 +345,15 @@ endc
 
 .TrySurf:
 	call .CheckSurfPerms
+	push af
 	ld [wWalkingIntoLand], a
+	ld a, [wPlayerStepType]
+	cp STEP_TYPE_TURN
+	jr nz, .not_surf_turning
+	xor a
+	ld [wWalkingIntoLand], a
+.not_surf_turning
+	pop af
 	jr c, .surf_bump
 
 	call .CheckNPC
@@ -490,13 +498,13 @@ endc
 	table_width 2, DoPlayerMovement.Steps
 	dw .SlowStep
 	dw .NormalStep
-	dw .FastStep
+	dw .RunStep
+	dw .BikeStep
 	dw .JumpStep
 	dw .SlideStep
 	dw .TurningStep
 	dw .BackJumpStep
 	dw .FinishFacing
-	dw .RunStep
 	assert_table_length NUM_STEPS
 
 .SlowStep:
@@ -509,11 +517,16 @@ endc
 	step UP
 	step LEFT
 	step RIGHT
-.FastStep:
+.RunStep:
 	big_step DOWN
 	big_step UP
 	big_step LEFT
 	big_step RIGHT
+.BikeStep:
+	bike_step DOWN
+	bike_step UP
+	bike_step LEFT
+	bike_step RIGHT
 .JumpStep:
 	jump_step DOWN
 	jump_step UP
@@ -539,11 +552,6 @@ endc
 	db $80 | UP
 	db $80 | LEFT
 	db $80 | RIGHT
-.RunStep
-	run_step DOWN
-	run_step UP
-	run_step LEFT
-	run_step RIGHT
 
 .StandInPlace:
 	ld a, 0
