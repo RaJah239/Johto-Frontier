@@ -200,6 +200,8 @@ ClearActorHud:
 
 BattleAnim_ClearOAM:
 	ld a, [wBattleAnimFlags]
+	bit BATTLEANIM_KEEPOAM_F, a
+	ret nz
 	bit BATTLEANIM_KEEPSPRITES_F, a
 	jr z, .delete
 
@@ -330,7 +332,7 @@ BattleAnimCommands::
 	dw BattleAnimCmd_OBP0
 	dw BattleAnimCmd_OBP1
 	dw BattleAnimCmd_KeepSprites
-	dw BattleAnimCmd_F5
+	dw BattleAnimCmd_KeepSpritesAndOAM
 	dw BattleAnimCmd_F6
 	dw BattleAnimCmd_F7
 	dw BattleAnimCmd_IfParamEqual
@@ -1137,7 +1139,10 @@ BattleAnimCmd_KeepSprites:
 	set BATTLEANIM_KEEPSPRITES_F, [hl]
 	ret
 
-BattleAnimCmd_F5:
+BattleAnimCmd_KeepSpritesAndOAM:
+	ld hl, wBattleAnimFlags
+	set BATTLEANIM_KEEPSPRITES_F, [hl]
+	set BATTLEANIM_KEEPOAM_F, [hl]
 	ret
 
 BattleAnimCmd_F6:
@@ -1339,6 +1344,10 @@ ClearBattleAnims::
 	jp DelayFrame
 
 BattleAnim_RevertPals:
+	ld a, [wBattleAnimFlags]
+	bit BATTLEANIM_KEEPSPRITES_F, a
+	ret nz
+
 	call WaitTop
 	ld a, %11100100
 	ld [wBGP], a
