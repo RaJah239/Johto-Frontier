@@ -291,10 +291,10 @@ WaitTileAnimation:
 	ret
 
 StandingTileFrame8:
-; Tick the wTileAnimationTimer, wrapping from 7 to 0.
+; Tick the wTileAnimationTimer, wrapping from 15 to 0.
 	ld a, [wTileAnimationTimer]
 	inc a
-	and %111
+	and %1111
 	ld [wTileAnimationTimer], a
 	ret
 
@@ -302,9 +302,9 @@ ScrollTileRightLeft:
 ; Scroll right for 4 ticks, then left for 4 ticks.
 	ld a, [wTileAnimationTimer]
 	inc a
-	and %111
+	and %1111
 	ld [wTileAnimationTimer], a
-	and %100
+	and %1000
 	jr nz, ScrollTileLeft
 	jr ScrollTileRight
 
@@ -312,9 +312,9 @@ ScrollTileUpDown: ; unreferenced
 ; Scroll up for 4 ticks, then down for 4 ticks.
 	ld a, [wTileAnimationTimer]
 	inc a
-	and %111
+	and %1111
 	ld [wTileAnimationTimer], a
-	and %100
+	and %1000
 	jr nz, ScrollTileDown
 	jr ScrollTileUp
 
@@ -410,6 +410,7 @@ AnimateFountainTile:
 
 ; A cycle of 8 frames, updating every tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	and %111
 
 ; hl = [.FountainTileFramePointers + a * 2]
@@ -453,6 +454,7 @@ AnimateWaterTile:
 
 ; A cycle of 4 frames, updating every other tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	and %110
 
 ; hl = .WaterTileFrames + a * 8
@@ -491,6 +493,7 @@ ForestTreeLeftAnimation:
 .do_animation
 ; A cycle of 2 frames, updating every tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	call GetForestTreeFrame
 
 ; hl = ForestTreeLeftFrames + a * 8
@@ -534,6 +537,7 @@ ForestTreeRightAnimation:
 .do_animation
 ; A cycle of 2 frames, updating every tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	call GetForestTreeFrame
 
 ; hl = ForestTreeRightFrames + a * 8
@@ -573,6 +577,7 @@ ForestTreeLeftAnimation2:
 .do_animation
 ; A cycle of 2 frames, updating every tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	call GetForestTreeFrame
 
 ; Offset by 1 frame from ForestTreeLeftAnimation
@@ -611,6 +616,7 @@ ForestTreeRightAnimation2:
 .do_animation
 ; A cycle of 2 frames, updating every tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	call GetForestTreeFrame
 
 ; Offset by 1 frame from ForestTreeRightAnimation
@@ -651,6 +657,7 @@ AnimateFlowerTile:
 
 ; A cycle of 2 frames, updating every other tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	and %10
 
 ; CGB has different tile graphics for flowers
@@ -685,6 +692,7 @@ AnimateLavaBubbleTile1:
 
 ; A cycle of 4 frames, updating every other tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	and %110
 
 ; Offset by 2 frames from AnimateLavaBubbleTile2
@@ -713,6 +721,7 @@ AnimateLavaBubbleTile2:
 
 ; A cycle of 4 frames, updating every other tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	and %110
 
 ; hl = LavaBubbleTileFrames + a * 8
@@ -746,6 +755,7 @@ AnimateTowerPillarTile:
 
 ; A cycle of 8 frames, updating every tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	and %111
 
 ; a = [.TowerPillarTileFrameOffsets + a]
@@ -814,6 +824,7 @@ AnimateWhirlpoolTile:
 
 ; A cycle of 4 frames, updating every tick
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	and %11
 
 ; hl = the source tile frames + a * 16
@@ -899,6 +910,7 @@ AnimateWaterPalette:
 
 ; Only update on even ticks
 	ld a, [wTileAnimationTimer]
+	srl a ; account for 60fps
 	ld l, a
 	and 1 ; odd
 	ret nz
