@@ -1,5 +1,14 @@
 INCLUDE "engine/gfx/sgb_layouts.asm"
 
+LoadPokemonPalette:
+	ld a, [wCurPartySpecies]
+	; hl = palette
+	call GetMonPalettePointer
+	; load palette into de (set by caller)
+	ld bc, PAL_COLOR_SIZE * 2
+	ld a, BANK(wBGPals1)
+	jmp FarCopyWRAM
+
 DEF SHINY_ATK_MASK EQU %0010
 DEF SHINY_DEF_DV EQU 10
 DEF SHINY_SPD_DV EQU 10
