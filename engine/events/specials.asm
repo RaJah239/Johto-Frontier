@@ -322,15 +322,13 @@ CheckPokerus:
 	jr ScriptReturnCarry
 
 ResetLuckyNumberShowFlag:
-	farcall RestartLuckyNumberCountdown
-	ld hl, wLuckyNumberShowFlag
-	res LUCKYNUMBERSHOW_GAME_OVER_F, [hl]
 	farcall LoadOrRegenerateLuckyIDNumber
 	ret
 
 CheckLuckyNumberShowFlag:
-	farcall _CheckLuckyNumberShowFlag
-	jr ScriptReturnCarry
+	ld hl, wLuckyNumberShowFlag
+	bit LUCKYNUMBERSHOW_GAME_OVER_F, [hl]
+	ret
 
 SnorlaxAwake:
 ; Check if the Poké Flute channel is playing, and if the player is standing

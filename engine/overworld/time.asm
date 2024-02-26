@@ -112,6 +112,7 @@ endr					; this to tells rept 2 to only clear wDailyFlag1 up to here
 	ld [hli], a ; wDailyFlags2
 	ld [hli], a ; wSwarmFlags
 	ld [hl], a  ; wSwarmFlags + 1
+	ld [wLuckyNumberShowFlag], a
 	ld hl, wDailyRematchFlags
 rept 4
 	ld [hli], a
