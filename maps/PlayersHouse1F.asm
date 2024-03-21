@@ -266,11 +266,7 @@ ComeHomeForDSTText:
 	done
 
 KnowTheInstructionsText:
-	text "Don't you just"
-	line "turn the #GEAR"
-
-	para "on and select the"
-	line "PHONE icon?"
+	text "Great!"
 	done
 
 DontKnowTheInstructionsText:
@@ -280,10 +276,8 @@ DontKnowTheInstructionsText:
 	para "Turn the #GEAR"
 	line "on and select the"
 	cont "PHONE icon."
-	done
 
-InstructionsNextText:
-	text "Phone numbers are"
+	para "Phone numbers are"
 	line "stored in memory."
 
 	para "Just choose a name"
@@ -291,6 +285,10 @@ InstructionsNextText:
 
 	para "Gee, isn't that"
 	line "convenient?"
+	done
+
+InstructionsNextText:
+	text "Hurry along now."
 	done
 
 HurryUpElmIsWaitingText:
