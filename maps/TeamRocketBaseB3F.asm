@@ -102,7 +102,7 @@ RocketBaseBoss:
 	applymovement TEAMROCKETBASEB3F_ROCKET1, RocketBaseBossApproachesPlayerMovement
 	winlosstext ExecutiveM4BeatenText, 0
 	setlasttalked TEAMROCKETBASEB3F_ROCKET1
-	loadtrainer EXECUTIVEM, EXECUTIVEM_4
+	loadtrainer PETREL, PETREL1
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_ROCKET_EXECUTIVEM_4
@@ -384,30 +384,41 @@ RocketBaseRivalText:
 	done
 
 ExecutiveM4BeforeText:
-	text "What? Who are you?"
-	line "This is the office"
+	text "Looks like we've"
+ 	line "got a stray mouse"
+	cont "wandering around."
 
-	para "of our leader,"
-	line "GIOVANNI."
+	para "<PLAY_G> is it?"
 
-	para "Since disbanding"
-	line "TEAM ROCKET three"
+	para "I am PETREL, a"
+	line "TEAM ROCKET"
+	cont "EXECUTIVE."
 
-	para "years ago, he has"
-	line "been in training."
+	para "PROTON warned me"
+	line "about you."
 
-	para "But we're certain"
-	line "he will be back"
+	para "You poked your"
+	line "nose into our"
 
-	para "some day to assume"
-	line "command again."
+	para "affairs at the"
+	line "SLOWPOKE WELL."
 
-	para "That's why we're"
-	line "standing guard."
+	para "You must be trying"
+	line "to sneak into the"
 
-	para "I won't let any-"
-	line "one disturb this"
-	cont "place!"
+	para "radio-transmitter"
+	line "room this time."
+
+	para "Well, that's not"
+	line "going to happen."
+
+	para "That room is"
+	line "protected by a"
+	cont "special password."
+
+	para "Not that you'll"
+	line "ever get to hear"
+	cont "it!"
 	done
 
 ExecutiveM4BeatenText:
@@ -419,11 +430,26 @@ ExecutiveM4BeatenText:
 	done
 
 ExecutiveM4AfterText:
-	text "No, I can't let"
-	line "this affect me."
+	text "Since disbanding"
+	line "TEAM ROCKET three"
 
-	para "I have to inform"
-	line "the others…"
+	para "ago, our glorious"
+	line "leader, GIOVANNI"
+	cont "disappeared."
+
+	para "But he's waiting"
+	line "for our revivial."
+
+	para "Losing to you is"
+	line "but a small set-"
+	cont "back."
+	
+	para "You still can't"
+	line "access the radio-"
+
+	para "transmitter room"
+	line "without the pass-"
+	cont "word."
 	done
 
 RocketBaseMurkrowText:
@@ -589,7 +615,7 @@ TeamRocketBaseB3F_MapEvents:
 
 	def_object_events
 	object_event 25, 14, SPRITE_LANCE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, LanceGetPasswordScript, EVENT_TEAM_ROCKET_BASE_B3F_LANCE_PASSWORDS
-	object_event  8,  3, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_TEAM_ROCKET_BASE_B3F_EXECUTIVE
+	object_event  8,  3, SPRITE_PETREL, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_TEAM_ROCKET_BASE_B3F_EXECUTIVE
 	object_event  7,  2, SPRITE_MOLTRES, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RocketBaseMurkrow, EVENT_TEAM_ROCKET_BASE_POPULATION
 	object_event 21,  7, SPRITE_ROCKET_GIRL, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 0, SlowpokeTailGrunt, EVENT_TEAM_ROCKET_BASE_POPULATION
 	object_event  5, 14, SPRITE_ROCKET, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, OBJECTTYPE_TRAINER, 3, RaticateTailGrunt, EVENT_TEAM_ROCKET_BASE_POPULATION
