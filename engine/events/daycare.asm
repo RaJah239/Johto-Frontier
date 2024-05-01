@@ -396,7 +396,11 @@ DayCareManOutside:
 	jr .Load0
 
 .Declined:
+	ld hl, wDayCareMan
+	res DAYCAREMAN_HAS_EGG_F, [hl]
+	call DayCare_InitBreeding
 	ld hl, .IllKeepItThanksText
+	jr .Load0
 
 .Load0:
 	call PrintText
@@ -512,25 +516,22 @@ DayCare_GetCurrentPartyMember:
 	ret
 
 DayCare_InitBreeding:
-	ld a, [wDayCareLady]
-	bit DAYCARELADY_HAS_MON_F, a
-	ret z
-	ld a, [wDayCareMan]
-	bit DAYCAREMAN_HAS_MON_F, a
-	ret z
-	callfar CheckBreedmonCompatibility
-	ld a, [wBreedingCompatibility]
-	and a
-	ret z
-	inc a
-	ret z
-	ld hl, wDayCareMan
-	set DAYCAREMAN_MONS_COMPATIBLE_F, [hl]
-.loop
-	call Random
-	cp 150
-	jr c, .loop
-	ld [wStepsToEgg], a
+    ld a, [wDayCareLady]
+    bit DAYCARELADY_HAS_MON_F, a
+    ret z
+    ld a, [wDayCareMan]
+    bit DAYCAREMAN_HAS_MON_F, a
+    ret z
+    callfar CheckBreedmonCompatibility
+    ld a, [wBreedingCompatibility]
+    and a
+    ret z
+    inc a
+    ret z
+    ld hl, wDayCareMan
+    set DAYCAREMAN_MONS_COMPATIBLE_F, [hl]
+    ld a, 255	; number of steps to get egg
+    ld [wStepsToEgg], a
 	xor a
 	ld hl, wEggMon
 	ld bc, BOXMON_STRUCT_LENGTH

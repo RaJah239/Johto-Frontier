@@ -186,35 +186,15 @@ DayCareStep::
 	ld [hl], a
 
 .check_egg
-	ld hl, wDayCareMan
-	bit DAYCAREMAN_MONS_COMPATIBLE_F, [hl]
-	ret z
-	ld hl, wStepsToEgg
-	dec [hl]
-	ret nz
+    ld hl, wDayCareMan
+    bit DAYCAREMAN_MONS_COMPATIBLE_F, [hl]
+    ret z           ; Return if Pokémon aren't compatible for breeding
 
-	call Random
-	ld [hl], a
-	callfar CheckBreedmonCompatibility
-	ld a, [wBreedingCompatibility]
-	cp 230
-	ld b, 31 percent + 1
-	jr nc, .okay
-	ld a, [wBreedingCompatibility]
-	cp 170
-	ld b, 16 percent
-	jr nc, .okay
-	ld a, [wBreedingCompatibility]
-	cp 110
-	ld b, 12 percent
-	jr nc, .okay
-	ld b, 4 percent
+    ld hl, wStepsToEgg
+    dec [hl]        ; Decrement the steps to egg
+    ret nz          ; If it's not zero, return
 
-.okay
-	call Random
-	cp b
-	ret nc
-	ld hl, wDayCareMan
-	res DAYCAREMAN_MONS_COMPATIBLE_F, [hl]
-	set DAYCAREMAN_HAS_EGG_F, [hl]
-	ret
+    ; If we've reached zero, an egg should be generated.
+    ld hl, wDayCareMan
+    set DAYCAREMAN_HAS_EGG_F, [hl]   ; Set flag to indicate there's an egg
+    ret
