@@ -161,7 +161,7 @@ SavedTheGame:
 	ld a, [wOptions]
 	push af
 	; set text speed to medium
-	ld a, TEXT_DELAY_MED
+	ld a, TEXT_DELAY_NONE
 	ld [wOptions], a
 	; <PLAYER> saved the game!
 	ld hl, SavedTheGameText
@@ -300,7 +300,7 @@ SavingDontTurnOffThePower:
 	ld a, [wOptions]
 	push af
 	; Set the text speed to medium
-	ld a, TEXT_DELAY_MED
+	ld a, TEXT_DELAY_NONE
 	ld [wOptions], a
 	; SAVING... DON'T TURN OFF THE POWER.
 	ld hl, SavingDontTurnOffThePowerText
