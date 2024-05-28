@@ -479,7 +479,7 @@ endc
 	ld a, [hl]
 	push af
 	and 1 << STEREO
-	or TEXT_DELAY_MED
+	or TEXT_DELAY_NONE
 	ld [hl], a
 	ld hl, wOTPlayerName
 	ld de, wOTClassName
