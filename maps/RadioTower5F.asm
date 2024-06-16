@@ -87,7 +87,7 @@ RadioTower5FRocketBossScript:
 	closetext
 	winlosstext RadioTower5FRocketBossWinText, 0
 	setlasttalked RADIOTOWER5F_ROCKET
-	loadtrainer EXECUTIVEM, EXECUTIVEM_1
+	loadtrainer ARCHER, ARCHER1
 	startbattle
 	reloadmapafterbattle
 	opentext
@@ -316,7 +316,9 @@ RadioTower5FRocketBossBeforeText:
 	done
 
 RadioTower5FRocketBossWinText:
-	text "No! Forgive me,"
+	text "That's impossible…"
+	
+	para "No! Forgive me,"
 	line "GIOVANNI!"
 	done
 
@@ -326,8 +328,15 @@ RadioTower5FRocketBossAfterText:
 	para "Our dreams have"
 	line "come to naught."
 
-	para "I wasn't up to the"
-	line "task after all."
+	para "Did we all mis-"
+	line "understand the"
+
+	para "reason behind"
+	line "GIOVANNI's dis-"
+	cont "bandment?"
+
+	para "I need to mull"
+	line "this over."
 
 	para "Like GIOVANNI did"
 	line "before me, I will"
@@ -454,7 +463,7 @@ RadioTower5F_MapEvents:
 
 	def_object_events
 	object_event  3,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Director, -1
-	object_event 13,  5, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event 13,  5, SPRITE_ARCHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
 	object_event 17,  2, SPRITE_ARIANA, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerExecutivef1, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
 	object_event 13,  5, SPRITE_ROCKER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Ben, EVENT_RADIO_TOWER_CIVILIANS_AFTER
 	object_event  8,  5, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, RadioTower5FUltraBall, EVENT_RADIO_TOWER_5F_ULTRA_BALL
