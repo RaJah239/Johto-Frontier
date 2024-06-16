@@ -38,7 +38,7 @@ FakeDirectorScript:
 	closetext
 	winlosstext FakeDirectorWinText, 0
 	setlasttalked RADIOTOWER5F_DIRECTOR
-	loadtrainer EXECUTIVEM, EXECUTIVEM_3
+	loadtrainer PETREL, PETREL2
 	startbattle
 	reloadmapafterbattle
 	opentext
@@ -197,22 +197,32 @@ FakeDirectorTextBefore2:
 	text "Is that what you"
 	line "were expecting?"
 
-	para "Wrong!"
-	line "I'm an imposter!"
+	para "Wrong! I'm a"
+	line "charlatan, an"
+	cont "imposter!"
 
-	para "I pretended to be"
-	line "the real thing to"
+	para "It is I, PETREL!"
 
-	para "prepare for our"
-	line "takeover."
+	para "I posed as the"
+	line "Director to sway"
+
+	para "the entire region"
+	line "in favor of"
+	cont "TEAM ROCKET!"
 
 	para "Do you want to"
 	line "know where we hid"
-	cont "the real DIRECTOR?"
+	cont "the DIRECTOR?"
 
 	para "Sure, I'll tell"
-	line "you. But only if"
-	cont "you can beat me!"
+	line "but only if you"
+	cont "can beat me!"
+
+	para "It's time to pay"
+	line "for what you did"
+
+	para "at MAHOGANY TOWN"
+	line "<PLAY_G>!"
 	done
 
 FakeDirectorWinText:
@@ -221,7 +231,9 @@ FakeDirectorWinText:
 	done
 
 FakeDirectorTextAfter:
-	text "We stashed the"
+	text "Listen carefully."
+
+	para "We stashed the"
 	line "real DIRECTOR in"
 
 	para "the UNDERGROUND"
@@ -230,6 +242,10 @@ FakeDirectorTextAfter:
 	para "It's at the far"
 	line "end of the UNDER-"
 	cont "GROUND."
+
+	para "Since, I'm a such"
+	line "a nice guy, take"
+	cont "the BASEMENT KEY."
 
 	para "But I doubt you'll"
 	line "get that far."
