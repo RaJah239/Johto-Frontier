@@ -67,7 +67,7 @@ Director:
 	end
 
 TrainerExecutivef1:
-	trainer EXECUTIVEF, EXECUTIVEF_1, EVENT_BEAT_ROCKET_EXECUTIVEF_1, Executivef1SeenText, Executivef1BeatenText, 0, .Script
+	trainer ARIANA, ARIANA2, EVENT_BEAT_ROCKET_EXECUTIVEF_1, Executivef1SeenText, Executivef1BeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
@@ -256,13 +256,15 @@ Executivef1SeenText:
 	line "the HIDEOUT in"
 	cont "MAHOGANY TOWN?"
 
-	para "I lost then, but I"
-	line "won't this time."
+	para "Looks like you're"
+	line "all alone this"
+	cont "time. So, let's"
+	cont "finish this!"
 	done
 
 Executivef1BeatenText:
-	text "This can't be"
-	line "happening!"
+	text "Wh…Wha…Why are you"
+	line "so strong!?!"
 
 	para "I fought hard, but"
 	line "I still lost…"
@@ -271,15 +273,17 @@ Executivef1BeatenText:
 Executivef1AfterBattleText:
 	text "<PLAYER>, isn't it?"
 
-	para "A brat like you"
-	line "won't appreciate"
+	para "What a waste… You"
+	line "could've used your"
+	cont "power for more."
+	
+	para "People like you"
+	line "will never grasp"
+	cont "our brilliance!"
 
-	para "the magnificence"
-	line "of TEAM ROCKET."
-
-	para "That's too bad."
-	line "I really admire"
-	cont "your power."
+	para "It's a shame… I've"
+	line "come to respect"
+	cont "your strength."
 	done
 
 RadioTower5FRocketBossBeforeText:
@@ -451,6 +455,6 @@ RadioTower5F_MapEvents:
 	def_object_events
 	object_event  3,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Director, -1
 	object_event 13,  5, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	object_event 17,  2, SPRITE_ROCKET_GIRL, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerExecutivef1, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event 17,  2, SPRITE_ARIANA, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerExecutivef1, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
 	object_event 13,  5, SPRITE_ROCKER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Ben, EVENT_RADIO_TOWER_CIVILIANS_AFTER
 	object_event  8,  5, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, RadioTower5FUltraBall, EVENT_RADIO_TOWER_5F_ULTRA_BALL
