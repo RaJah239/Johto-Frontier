@@ -29,7 +29,7 @@ TrainerGruntM29:
 	end
 
 TrainerGruntM1:
-	trainer GRUNTM, GRUNTM_1, EVENT_BEAT_ROCKET_GRUNTM_1, GruntM1SeenText, GruntM1BeatenText, 0, .Script
+	trainer PROTON, PROTON1, EVENT_BEAT_ROCKET_GRUNTM_1, GruntM1SeenText, GruntM1BeatenText, 0, .Script
 
 .Script:
 	opentext
@@ -224,15 +224,19 @@ GruntM29AfterBattleText:
 GruntM1SeenText:
 	text "What do you want?"
 
-	para "If you interrupt"
-	line "our work, don't"
-	cont "expect any mercy!"
+	para "I'm often labeled"
+	line "as the scariest"
+
+	para "and cruelest guy"
+	line "in TEAM ROCKET!"
+	
+	para "Don't meddle in"
+	line "our business!"
 	done
 
 GruntM1BeatenText:
-	text "You did OK today,"
-	line "but wait till next"
-	cont "time!"
+	text "Grr… Impressive"
+	line "for a kid."
 	done
 
 TrainerGruntM1WhenTalkText:
@@ -244,9 +248,11 @@ TrainerGruntM1WhenTalkText:
 	line "our activities"
 	cont "underground."
 
-	para "Now you can have"
-	line "fun watching us"
-	cont "stir up trouble!"
+	para "You're just a minor"
+	line "hurdle."
+
+	para "Beware of what's to"
+	line "come!"
 	done
 
 GruntM2SeenText:
@@ -328,7 +334,7 @@ SlowpokeWellB1F_MapEvents:
 
 	def_object_events
 	object_event 15,  7, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_TRAINER, 3, TrainerGruntM29, EVENT_SLOWPOKE_WELL_ROCKETS
-	object_event  5,  2, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_TRAINER, 1, TrainerGruntM1, EVENT_SLOWPOKE_WELL_ROCKETS
+	object_event  5,  2, SPRITE_PROTON, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_TRAINER, 1, TrainerGruntM1, EVENT_SLOWPOKE_WELL_ROCKETS
 	object_event  5,  6, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_TRAINER, 2, TrainerGruntM2, EVENT_SLOWPOKE_WELL_ROCKETS
 	object_event 10,  4, SPRITE_ROCKET_GIRL, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerGruntF1, EVENT_SLOWPOKE_WELL_ROCKETS
 	object_event  7,  4, SPRITE_SLOWPOKE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, SlowpokeWellB1FSlowpokeWithMailScript, EVENT_SLOWPOKE_WELL_SLOWPOKES
