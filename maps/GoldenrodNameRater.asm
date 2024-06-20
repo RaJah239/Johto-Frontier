@@ -1,5 +1,7 @@
 	object_const_def
 	const GOLDENRODNAMERATER_NAME_RATER
+	const GOLDENRODNAMERATER_SWARM_GRAMPS
+	const GOLDENRODNAMERATER_MOVE_RELEARNER
 
 GoldenrodNameRater_MapScripts:
 	def_scene_scripts
@@ -12,6 +14,7 @@ GoldenrodNameRater:
 	special NameRater
 	waitbutton
 	closetext
+	turnobject GOLDENRODNAMERATER_NAME_RATER, LEFT
 	end
 
 SwarmGrampsScript:
@@ -195,6 +198,15 @@ SkipSwarmText:
 	line "another day too."
 	done
 
+MoveRelearnerScript:
+	faceplayer
+	opentext
+	special MoveRelearner
+	waitbutton
+	closetext
+	turnobject GOLDENRODNAMERATER_MOVE_RELEARNER, RIGHT
+	end
+
 GoldenrodNameRaterBookshelf:
 	jumpstd DifficultBookshelfScript
 
@@ -214,5 +226,6 @@ GoldenrodNameRater_MapEvents:
 	bg_event  7,  1, BGEVENT_READ, GoldenrodNameRaterRadio
 
 	def_object_events
-	object_event  2,  3, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_RIGHT, 2, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodNameRater, -1
+	object_event  5,  3, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_LEFT, 2, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodNameRater, -1
 	object_event  2,  4, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, SwarmGrampsScript, -1
+	object_event  2,  3, SPRITE_SAGE, SPRITEMOVEDATA_STANDING_RIGHT, 2, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, MoveRelearnerScript, -1

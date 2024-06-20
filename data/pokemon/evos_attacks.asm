@@ -14,6 +14,8 @@ SECTION "Evolutions and Attacks", ROMX
 
 INCLUDE "data/pokemon/evos_attacks_pointers.asm"
 
+EvosAttacks::
+
 CyndaquilEvosAttacks:
 QuilavaEvosAttacks:
 TyphlosionEvosAttacks:
