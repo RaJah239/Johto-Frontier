@@ -617,8 +617,8 @@ ThunderDescription:
 	line "cause paralysis.@"
 
 RockThrowDescription:
-	db   "Drops rocks on the"
-	line "enemy.@"
+	db   "Tosses rocks at"
+	line "the foe.@"
 
 EarthquakeDescription:
 	db   "Tough but useless"
