@@ -1679,32 +1679,18 @@ CoinVendor_IntroScript:
 	verticalmenu
 	closewindow
 	ifequal 1, .Buy50
-	ifequal 2, .Buy500
 	sjump .Cancel
 
 .Buy50:
-	checkcoins MAX_COINS - 50
-	ifequal HAVE_MORE, .CoinCaseFull
-	checkmoney YOUR_MONEY, 1000
-	ifequal HAVE_LESS, .NotEnoughMoney
-	givecoins 50
-	takemoney YOUR_MONEY, 1000
-	waitsfx
-	playsound SFX_TRANSACTION
-	farwritetext CoinVendor_Buy50CoinsText
-	waitbutton
-	sjump .loop
-
-.Buy500:
-	checkcoins MAX_COINS - 500
+	checkcoins MAX_COINS - 10
 	ifequal HAVE_MORE, .CoinCaseFull
 	checkmoney YOUR_MONEY, 10000
 	ifequal HAVE_LESS, .NotEnoughMoney
-	givecoins 500
+	givecoins 10
 	takemoney YOUR_MONEY, 10000
 	waitsfx
 	playsound SFX_TRANSACTION
-	farwritetext CoinVendor_Buy500CoinsText
+	farwritetext CoinVendor_Buy50CoinsText
 	waitbutton
 	sjump .loop
 
@@ -1734,9 +1720,8 @@ CoinVendor_IntroScript:
 
 .MenuData:
 	db STATICMENU_CURSOR ; flags
-	db 3 ; items
-	db " 50 :  ¥1000@"
-	db "500 : ¥10000@"
+	db 2 ; items
+	db " 10 : ¥10000@"
 	db "CANCEL@"
 
 HappinessCheckScript:

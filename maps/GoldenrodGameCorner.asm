@@ -507,18 +507,18 @@ GoldenrodGameCorner_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  6,  6, BGEVENT_READ, GoldenrodGameCornerSlotsMachineScript
+	bg_event  6,  6, BGEVENT_READ, GoldenrodGameCornerLuckySlotsMachineScript
 	bg_event  6,  7, BGEVENT_READ, GoldenrodGameCornerSlotsMachineScript
 	bg_event  6,  8, BGEVENT_READ, GoldenrodGameCornerSlotsMachineScript
 	bg_event  6,  9, BGEVENT_READ, GoldenrodGameCornerSlotsMachineScript
 	bg_event  6, 10, BGEVENT_READ, GoldenrodGameCornerSlotsMachineScript
-	bg_event  6, 11, BGEVENT_RIGHT, GoldenrodGameCornerSlotsMachineScript
-	bg_event  7,  6, BGEVENT_READ, GoldenrodGameCornerSlotsMachineScript
+	bg_event  6, 11, BGEVENT_RIGHT, GoldenrodGameCornerLuckySlotsMachineScript
+	bg_event  7,  6, BGEVENT_READ, GoldenrodGameCornerLuckySlotsMachineScript
 	bg_event  7,  7, BGEVENT_READ, GoldenrodGameCornerLuckySlotsMachineScript
 	bg_event  7,  8, BGEVENT_READ, GoldenrodGameCornerSlotsMachineScript
 	bg_event  7,  9, BGEVENT_READ, GoldenrodGameCornerSlotsMachineScript
 	bg_event  7, 10, BGEVENT_READ, GoldenrodGameCornerSlotsMachineScript
-	bg_event  7, 11, BGEVENT_LEFT, GoldenrodGameCornerSlotsMachineScript
+	bg_event  7, 11, BGEVENT_LEFT, GoldenrodGameCornerLuckySlotsMachineScript
 	bg_event 12,  6, BGEVENT_READ, GoldenrodGameCornerVoltorbFlipMachineScript
 	bg_event 12,  7, BGEVENT_READ, GoldenrodGameCornerVoltorbFlipMachineScript
 	bg_event 12,  8, BGEVENT_READ, GoldenrodGameCornerVoltorbFlipMachineScript
