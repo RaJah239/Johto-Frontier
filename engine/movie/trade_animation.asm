@@ -317,6 +317,7 @@ TradeAnim_TubeToOT1:
 	call TradeAnim_PlaceTrademonStatsOnTubeAnim
 	ld a, [wLinkTradeSendmonSpecies]
 	ld [wTempIconSpecies], a
+	ld hl, wPlayerTrademonDVs
 	xor a
 	depixel 5, 11, 4, 0
 	ld b, $0
@@ -327,6 +328,7 @@ TradeAnim_TubeToPlayer1:
 	call TradeAnim_PlaceTrademonStatsOnTubeAnim
 	ld a, [wLinkTradeGetmonSpecies]
 	ld [wTempIconSpecies], a
+	ld hl, wOTTrademonDVs
 	ld a, TRADEANIMSTATE_2
 	depixel 9, 18, 4, 4
 	ld b, $4
@@ -335,6 +337,8 @@ TradeAnim_InitTubeAnim:
 	push de
 	push bc
 	push de
+
+	push hl ; wPlayerTrademonDVs or wOTTrademonDVs
 
 	push af
 	call DisableLCD
@@ -354,6 +358,7 @@ TradeAnim_InitTubeAnim:
 	ld a, $70
 	ldh [hWY], a
 	call EnableLCD
+	pop hl ; wPlayerTrademonDVs or wOTTrademonDVs
 	call LoadTradeBubbleGFX
 
 	pop de
@@ -1362,9 +1367,11 @@ LoadTradeBallAndCableGFX:
 	ret
 
 LoadTradeBubbleGFX:
+	push hl ; wPlayerTrademonDVs or wOTTrademonDVs
 	call DelayFrame
 	ld e, MONICON_TRADE
-	callfar LoadMenuMonIcon
+	pop bc ; wPlayerTrademonDVs or wOTTrademonDVs
+	farcall LoadMenuMonIcon
 	ld de, TradeBubbleGFX
 	ld hl, vTiles0 tile $72
 	lb bc, BANK(TradeBubbleGFX), 4
