@@ -59,11 +59,14 @@ CherrygroveMartYoungsterText:
 	line "in the grass, a"
 
 	para "bug #MON poi-"
-	line "soned my #MON!"
+	line "soned my own!"
 
 	para "I just kept going,"
-	line "but then my"
-	cont "#MON fainted."
+	line "but my #MON"
+	
+	para "steadily lost its"
+	line "health until it"
+	cont "almost fainted!"
 
 	para "You should keep an"
 	line "ANTIDOTE with you."
