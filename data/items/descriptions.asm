@@ -855,8 +855,8 @@ TeruSama20Desc:
 	db   "?@"
 
 SacredAshDesc:
-	db   "Fully revives all"
-	next "fainted #MON.@"
+	db   "Fully heals all"
+	next "player's #MON.@"
 
 HeavyBallDesc:
 	db   "A BALL for catch-"

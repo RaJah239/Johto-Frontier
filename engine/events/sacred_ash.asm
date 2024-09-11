@@ -1,22 +1,9 @@
 _SacredAsh:
-	xor a
-	ld [wItemEffectSucceeded], a
-	call CheckAnyFaintedMon
-	ret nc
-
 	ld hl, SacredAshScript
 	call QueueScript
 	ld a, $1
 	ld [wItemEffectSucceeded], a
 	ret
-
-CheckAnyFaintedMon:
-	ld de, PARTYMON_STRUCT_LENGTH
-	ld bc, wPartySpecies
-	ld hl, wPartyMon1HP
-	ld a, [wPartyCount]
-	and a
-	ret z
 
 .loop
 	push af
