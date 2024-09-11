@@ -3,7 +3,7 @@ _NameRater:
 	ld hl, NameRaterHelloText
 	call PrintText
 	call YesNoBox
-	jmp c, .cancel
+	jr c, .cancel
 ; Select a Pokemon from your party
 	ld hl, NameRaterWhichMonText
 	call PrintText
@@ -13,10 +13,7 @@ _NameRater:
 	ld a, [wCurPartySpecies]
 	cp EGG
 	jr z, .egg
-; ... or a Pokemon you got from a trade.
 	call GetCurNickname
-	call CheckIfMonIsYourOT
-	jr c, .traded
 ; This name is good, but we can do better.  How about it?
 	ld hl, NameRaterBetterNameText
 	call PrintText
@@ -63,10 +60,6 @@ _NameRater:
 	pop hl
 	jr .done
 
-.traded
-	ld hl, NameRaterPerfectNameText
-	jr .done
-
 .cancel
 	ld hl, NameRaterComeAgainText
 	jr .done
@@ -76,38 +69,6 @@ _NameRater:
 
 .done
 	call PrintText
-	ret
-
-CheckIfMonIsYourOT:
-; Checks to see if the partymon loaded in [wCurPartyMon] has the different OT as you.  Returns carry if not.
-	ld hl, wPartyMonOTs
-	ld bc, NAME_LENGTH
-	ld a, [wCurPartyMon]
-	call AddNTimes
-	ld de, wPlayerName
-	ld c, NAME_LENGTH
-	call .loop
-	jr c, .nope
-
-	ld hl, wPartyMon1ID
-	ld bc, PARTYMON_STRUCT_LENGTH
-	ld a, [wCurPartyMon]
-	call AddNTimes
-	ld de, wPlayerID
-	ld c, 2 ; number of bytes in which your ID is stored
-.loop
-	ld a, [de]
-	cp [hl]
-	jr nz, .nope
-	inc hl
-	inc de
-	dec c
-	jr nz, .loop
-	and a
-	ret
-
-.nope
-	scf
 	ret
 
 IsNewNameEmpty:
@@ -200,10 +161,6 @@ NameRaterFinishedText:
 
 NameRaterComeAgainText:
 	text_far _NameRaterComeAgainText
-	text_end
-
-NameRaterPerfectNameText:
-	text_far _NameRaterPerfectNameText
 	text_end
 
 NameRaterEggText:
