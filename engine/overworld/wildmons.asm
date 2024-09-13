@@ -950,6 +950,32 @@ RandomPhoneMon:
 	inc hl
 ; b = trainer type
 	ld b, a
+
+; TRAINERTYPE_RANDOM is a completely different format
+       bit TRAINERTYPE_RANDOM_F, b
+       jr z, .continue_checks
+       inc hl
+       ld a, [wTrainerGroupBank]
+       call GetFarByte
+       ld b, a
+       ld a, BANK(RandomPartyLists)
+       ld [wTrainerGroupBank], a
+       ld hl, RandomPartyLists
+.skip_randoms
+       inc hl
+       ld a, b
+       and a
+       jr z, .got_mon
+.skip_randoms_inner
+       ld a, [wTrainerGroupBank]
+       call GetFarByte
+       inc hl
+       cp -1
+       jr nz, .skip_randoms_inner
+       dec b
+       jr .skip_randoms
+.continue_checks
+
 ; TRAINERTYPE_NICKNAME has uneven length, so always use the first mon
 	bit TRAINERTYPE_NICKNAME_F, b
 	jr nz, .got_mon
