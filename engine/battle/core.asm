@@ -7130,6 +7130,13 @@ GiveExperiencePoints:
 	ld b, a
 	jr .ev_loop
 .evs_done
+	pop bc
+	ld hl, MON_LEVEL
+	add hl, bc
+	ld a, [hl]
+	cp MAX_LEVEL
+	jmp nc, .next_mon
+	push bc
 	xor a
 	ldh [hMultiplicand + 0], a
 	ldh [hMultiplicand + 1], a
