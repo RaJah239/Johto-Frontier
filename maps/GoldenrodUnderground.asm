@@ -390,6 +390,7 @@ BasementDoorScript::
 	changeblock 18, 6, $2e ; unlocked door
 	refreshmap
 	closetext
+	takeitem BASEMENT_KEY
 	setevent EVENT_USED_BASEMENT_KEY
 	end
 
