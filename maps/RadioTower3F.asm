@@ -139,6 +139,7 @@ CardKeySlotScript::
 .HaveCardKey:
 	writetext InsertedTheCardKeyText
 	waitbutton
+	takeitem CARD_KEY
 	setevent EVENT_USED_THE_CARD_KEY_IN_THE_RADIO_TOWER
 	playsound SFX_ENTER_DOOR
 	changeblock 14, 2, $2a ; open shutter
