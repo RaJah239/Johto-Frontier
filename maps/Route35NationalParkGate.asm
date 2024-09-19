@@ -2,6 +2,7 @@
 	const ROUTE35NATIONALPARKGATE_OFFICER1
 	const ROUTE35NATIONALPARKGATE_YOUNGSTER
 	const ROUTE35NATIONALPARKGATE_OFFICER2
+	const ROUTE35NATIONALPARKGATE_CHANSEY
 
 Route35NationalParkGate_MapScripts:
 	def_scene_scripts
@@ -435,6 +436,9 @@ BugCatchingContestExplanationText:
 	line "the contest."
 	done
 
+Route35NationalParkGateChanseyScript:
+	jumpstd ChanseyHealsOWScript
+
 Route35NationalParkGate_MapEvents:
 	db 0, 0 ; filler
 
@@ -453,3 +457,4 @@ Route35NationalParkGate_MapEvents:
 	object_event  2,  1, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route35OfficerScriptContest, EVENT_ROUTE_35_NATIONAL_PARK_GATE_OFFICER_CONTEST_DAY
 	object_event  6,  5, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route35NationalParkGateYoungsterScript, EVENT_ROUTE_35_NATIONAL_PARK_GATE_YOUNGSTER
 	object_event  0,  3, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route35NationalParkGateOfficerScript, EVENT_ROUTE_35_NATIONAL_PARK_GATE_OFFICER_NOT_CONTEST_DAY
+	object_event  0,  7, SPRITE_CHANSEY_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route35NationalParkGateChanseyScript, -1
