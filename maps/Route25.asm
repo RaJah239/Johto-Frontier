@@ -82,7 +82,7 @@ TrainerSchoolboyDudley:
 .Script:
 	endifjustbattled
 	opentext
-	writetext SchoolboyDudleyAfterBattleText
+	writetext IDidMyBestAfterBattleText
 	waitbutton
 	closetext
 	end
@@ -93,7 +93,7 @@ TrainerLassEllen:
 .Script:
 	endifjustbattled
 	opentext
-	writetext LassEllenAfterBattleText
+	writetext IDidMyBestAfterBattleText
 	waitbutton
 	closetext
 	end
@@ -104,7 +104,7 @@ TrainerSchoolboyJoe:
 .Script:
 	endifjustbattled
 	opentext
-	writetext SchoolboyJoeAfterBattleText
+	writetext IDidMyBestAfterBattleText
 	waitbutton
 	closetext
 	end
@@ -115,7 +115,7 @@ TrainerLassLaura:
 .Script:
 	endifjustbattled
 	opentext
-	writetext LassLauraAfterBattleText
+	writetext IDidMyBestAfterBattleText
 	waitbutton
 	closetext
 	end
@@ -126,7 +126,7 @@ TrainerCamperLloyd:
 .Script:
 	endifjustbattled
 	opentext
-	writetext CamperLloydAfterBattleText
+	writetext IDidMyBestAfterBattleText
 	waitbutton
 	closetext
 	end
@@ -137,7 +137,7 @@ TrainerLassShannon:
 .Script:
 	endifjustbattled
 	opentext
-	writetext LassShannonAfterBattleText
+	writetext IDidMyBestAfterBattleText
 	waitbutton
 	closetext
 	end
@@ -146,7 +146,6 @@ TrainerSupernerdPat:
 	trainer SUPER_NERD, PAT, EVENT_BEAT_SUPER_NERD_PAT, SupernerdPatSeenText, SupernerdPatBeatenText, 0, .Script
 
 .Script:
-	endifjustbattled
 	opentext
 	writetext SupernerdPatAfterBattleText
 	waitbutton
@@ -282,7 +281,7 @@ SchoolboyDudleyBeatenText:
 	text "Whoo! Good stuff."
 	done
 
-SchoolboyDudleyAfterBattleText:
+IDidMyBestAfterBattleText:
 	text "I did my best."
 	line "I have no regrets."
 	done
@@ -296,11 +295,6 @@ LassEllenBeatenText:
 	text "How could I lose?"
 	done
 
-LassEllenAfterBattleText:
-	text "I did my best."
-	line "I have no regrets."
-	done
-
 SchoolboyJoeSeenText:
 	text "Here's No. 3!"
 	line "I won't be easy."
@@ -308,11 +302,6 @@ SchoolboyJoeSeenText:
 
 SchoolboyJoeBeatenText:
 	text "Ow! Stomped flat!"
-	done
-
-SchoolboyJoeAfterBattleText:
-	text "I did my best."
-	line "I have no regrets."
 	done
 
 LassLauraSeenText:
@@ -324,11 +313,6 @@ LassLauraBeatenText:
 	text "I lost too…"
 	done
 
-LassLauraAfterBattleText:
-	text "I did my best."
-	line "I have no regrets."
-	done
-
 CamperLloydSeenText:
 	text "OK! I'm No. 5."
 	line "I'll stomp you!"
@@ -336,11 +320,6 @@ CamperLloydSeenText:
 
 CamperLloydBeatenText:
 	text "Whoa! Too much."
-	done
-
-CamperLloydAfterBattleText:
-	text "I did my best."
-	line "I have no regrets."
 	done
 
 LassShannonSeenText:
@@ -351,11 +330,6 @@ LassShannonSeenText:
 
 LassShannonBeatenText:
 	text "You're kidding."
-	done
-
-LassShannonAfterBattleText:
-	text "I did my best."
-	line "I have no regrets."
 	done
 
 SupernerdPatSeenText:
