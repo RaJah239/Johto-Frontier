@@ -5,7 +5,6 @@
 	const ROUTE34_LASS
 	const ROUTE34_OFFICER
 	const ROUTE34_POKEFAN_M
-	const ROUTE34_GRAMPS
 	const ROUTE34_DAY_CARE_MON_1
 	const ROUTE34_DAY_CARE_MON_2
 	const ROUTE34_COOLTRAINER_F1
@@ -20,15 +19,6 @@ Route34_MapScripts:
 	callback MAPCALLBACK_OBJECTS, Route34EggCheckCallback
 
 Route34EggCheckCallback:
-	checkflag ENGINE_DAY_CARE_MAN_HAS_EGG
-	iftrue .PutDayCareManOutside
-	clearevent EVENT_DAY_CARE_MAN_IN_DAY_CARE
-	setevent EVENT_DAY_CARE_MAN_ON_ROUTE_34
-	sjump .CheckMon1
-
-.PutDayCareManOutside:
-	setevent EVENT_DAY_CARE_MAN_IN_DAY_CARE
-	clearevent EVENT_DAY_CARE_MAN_ON_ROUTE_34
 	sjump .CheckMon1
 
 .CheckMon1:
@@ -50,28 +40,6 @@ Route34EggCheckCallback:
 .HideMon2:
 	setevent EVENT_DAY_CARE_MON_2
 	endcallback
-
-DayCareManScript_Outside:
-	faceplayer
-	opentext
-	special DayCareManOutside
-	waitbutton
-	closetext
-	ifequal TRUE, .end_fail
-	clearflag ENGINE_DAY_CARE_MAN_HAS_EGG
-	readvar VAR_FACING
-	ifequal RIGHT, .walk_around_player
-	applymovement ROUTE34_GRAMPS, Route34MovementData_DayCareManWalksBackInside
-	playsound SFX_ENTER_DOOR
-	disappear ROUTE34_GRAMPS
-.end_fail
-	end
-
-.walk_around_player
-	applymovement ROUTE34_GRAMPS, Route34MovementData_DayCareManWalksBackInside_WalkAroundPlayer
-	playsound SFX_ENTER_DOOR
-	disappear ROUTE34_GRAMPS
-	end
 
 DayCareMon1Script:
 	opentext
@@ -456,20 +424,6 @@ Route34HiddenRareCandy:
 Route34HiddenSuperPotion:
 	hiddenitem SUPER_POTION, EVENT_ROUTE_34_HIDDEN_SUPER_POTION
 
-Route34MovementData_DayCareManWalksBackInside:
-	slow_step LEFT
-	slow_step LEFT
-	slow_step UP
-	step_end
-
-Route34MovementData_DayCareManWalksBackInside_WalkAroundPlayer:
-	slow_step DOWN
-	slow_step LEFT
-	slow_step LEFT
-	slow_step UP
-	slow_step UP
-	step_end
-
 YoungsterSamuelSeenText:
 	text "This is where I do"
 	line "my training!"
@@ -739,7 +693,6 @@ Route34_MapEvents:
 	object_event 10, 26, SPRITE_LASS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerPicnickerGina1, -1
 	object_event  9, 11, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, OfficerKeithScript, -1
 	object_event 18, 28, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerPokefanmBrandon, -1
-	object_event 15, 16, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareManScript_Outside, EVENT_DAY_CARE_MAN_ON_ROUTE_34
 	object_event 13, 18, SPRITE_DAY_CARE_MON_1, SPRITEMOVEDATA_POKEMON, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareMon1Script, EVENT_DAY_CARE_MON_1
 	object_event 16, 18, SPRITE_DAY_CARE_MON_2, SPRITEMOVEDATA_POKEMON, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareMon2Script, EVENT_DAY_CARE_MON_2
 	object_event  8, 48, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 5, TrainerCooltrainerfIrene, -1
