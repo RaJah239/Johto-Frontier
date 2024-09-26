@@ -7701,7 +7701,7 @@ AnimateExpBar:
 	ldh [hBGMapMode], a
 	dec d
 	jr nz, .min_number_of_frames
-	ld d, 1
+	inc d
 .min_number_of_frames
 	pop bc
 	ld a, c
@@ -8033,7 +8033,7 @@ PlaceExpBar:
 	sub $8
 	jr c, .next
 	ld b, a
-	ld a, $6a ; full bar
+	ld a, $5d ; full bar
 	ld [hld], a
 	dec c
 	jr z, .finish
@@ -8042,15 +8042,15 @@ PlaceExpBar:
 .next
 	add $8
 	jr z, .loop2
-	add $54 ; tile to the left of small exp bar tile
+	add $55 ; tile to the left of small exp bar tile
 	jr .skip
 
 .loop2
-	ld a, $62 ; empty bar
+	ld a, $55 ; empty bar
 
 .skip
 	ld [hld], a
-	ld a, $62 ; empty bar
+	ld a, $55 ; empty bar
 	dec c
 	jr nz, .loop2
 
