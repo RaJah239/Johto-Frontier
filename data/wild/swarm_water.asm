@@ -2,6 +2,11 @@
 
 SwarmWaterWildMons:
 
-	; No swarms encountered while surfing in Crystal
+       ; qwilfish
+       map_id ROUTE_32
+       db 6 percent ; encounter rate
+	db 15, TENTACOOL
+	db 15, TENTACOOL
+	db 20, TENTACOOL
 
 	db -1 ; end
