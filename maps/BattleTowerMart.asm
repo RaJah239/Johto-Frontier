@@ -1,5 +1,6 @@
     object_const_def
 	const BATTLETOWERMART_CLERK_ALL_TMS
+	const BATTLETOWERMART_PORYGON_PC
 
 BattleTowerMart_MapScripts:
     def_scene_scripts
@@ -402,6 +403,9 @@ YoureACollectorText:
 	line "99! Pick another?"
 	done
 
+BattleTowerMartPorygonPCScript:
+	jumpstd PorygonPCScript
+
 BattleTowerMart_MapEvents:
 
     def_warp_events
@@ -415,3 +419,4 @@ BattleTowerMart_MapEvents:
 
     def_object_events
 	object_event 12,  1, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BattleTowerMartTMCoinTraderScript, -1
+	object_event 10,  1, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, BattleTowerMartPorygonPCScript, -1
