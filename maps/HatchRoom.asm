@@ -69,15 +69,16 @@ HatchRoom_MapEvents:
     db 0, 0 ; filler
 
     def_warp_events
-	warp_event  2, 59, ROUTE_34, 6
+	warp_event  2, 135, ROUTE_34, 6
 	warp_event  3,  2, ROUTE_34, 7
-	warp_event  3, 59, ROUTE_34, 7
-	warp_event  3, 56, HATCH_ROOM, 2; looping tile
+	warp_event  3, 135, ROUTE_34, 7
+	warp_event  3, 132, HATCH_ROOM, 2 ; looping tile
 
     def_coord_events
 
     def_bg_events
 
     def_object_events
-	object_event  1, 56, SPRITE_GRAMPS, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareManScript_Outside, EVENT_DAY_CARE_MAN_ON_ROUTE_34
-	object_event  4, 57, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareHatchRoomPorygonPCScript, -1
+
+	object_event  1, 132, SPRITE_GRAMPS, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareManScript_Outside, EVENT_DAY_CARE_MAN_ON_ROUTE_34
+	object_event  4, 133, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareHatchRoomPorygonPCScript, -1
