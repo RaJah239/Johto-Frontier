@@ -114,7 +114,6 @@ SpecialsPointers::
 	add_special PlayCurMonCry
 	add_special ProfOaksPCBoot
 	add_special TrainerHouse
-	add_special PhotoStudio
 	add_special InitRoamMons
 	add_special FadeOutMusic
 	add_special Diploma

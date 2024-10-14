@@ -1625,19 +1625,3 @@ _IllKeepItThanksText::
 	text "Well then, I'll"
 	line "keep it."
 	done
-
-_WhichMonPhotoText::
-	text "Which #MON"
-	line "should I photo-"
-	cont "graph?"
-	prompt
-
-_HoldStillText::
-	text "All righty. Hold"
-	line "still for a bit."
-	prompt
-
-_PrestoAllDoneText::
-	text "Presto! All done."
-	line "Come again, OK?"
-	done
