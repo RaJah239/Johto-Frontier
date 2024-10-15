@@ -1,0 +1,17 @@
+FloatMons::
+	db BEEDRILL
+	db BUTTERFREE
+	db VENOMOTH
+	db MAGNEMITE
+	db MAGNETON
+	db GASTLY
+	db HAUNTER
+	db GENGAR
+	db KOFFING
+	db WEEZING
+	db MEW
+	db MISDREAVUS
+	db UNOWN
+	db CELEBI
+	db CHARIZARD
+	db -1 ; end
