@@ -1431,6 +1431,8 @@ PlaceMoveData:
 	lb bc, 1, 3
 	hlcoord 5, 13
 	call PrintNum
+	ld [hl], "<%>" ; displays percent symbol
+	hlcoord 8, 8
 	jr .skip_null_chance
 
 .if_null_chance
@@ -1454,6 +1456,8 @@ PlaceMoveData:
 	lb bc, 1, 3
 	hlcoord 5, 12
 	call PrintNum
+	ld [hl], "<%>" ; displays percent symbol
+	hlcoord 7, 8
 
 ; Print move type
 	ld a, [wCurSpecies]
