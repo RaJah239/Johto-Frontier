@@ -22,6 +22,11 @@ Route32_MapScripts:
 
 	def_callbacks
 	callback MAPCALLBACK_OBJECTS, Route32FriedaCallback
+	callback MAPCALLBACK_NEWMAP, .Flypoint
+
+.Flypoint:
+	setflag ENGINE_FLYPOINT_UNION_CAVE
+	return
 
 Route32Noop1Scene:
 	end

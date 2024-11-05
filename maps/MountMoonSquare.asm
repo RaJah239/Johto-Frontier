@@ -19,6 +19,7 @@ MountMoonSquareDisappearMoonStoneCallback:
 	endcallback
 
 MountMoonSquareDisappearRockCallback:
+	setflag ENGINE_FLYPOINT_MT_MOON
 	disappear MOUNTMOONSQUARE_ROCK
 	endcallback
 

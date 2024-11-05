@@ -10,6 +10,7 @@ Route20_MapScripts:
 	callback MAPCALLBACK_NEWMAP, Route20ClearRocksCallback
 
 Route20ClearRocksCallback:
+	setflag ENGINE_FLYPOINT_ROUTE_20
 	setevent EVENT_CINNABAR_ROCKS_CLEARED
 	endcallback
 

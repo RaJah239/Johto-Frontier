@@ -18,6 +18,11 @@ NationalPark_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
+	callback MAPCALLBACK_NEWMAP, .Flypoint
+
+.Flypoint:
+	setflag ENGINE_FLYPOINT_NATIONAL_PARK
+	return
 
 NationalParkLassScript:
 	jumptextfaceplayer NationalParkLassText
