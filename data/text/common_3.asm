@@ -1404,7 +1404,7 @@ _KnowsMoveText::
 _MoveKnowsOneText::
 	text "That #MON knows"
 	line "only one move."
-	done
+	prompt
 
 _AskDeleteMoveText::
 	text "Oh, make it forget"
@@ -1416,16 +1416,16 @@ _AskDeleteMoveText::
 _DeleterForgotMoveText::
 	text "Done! Your #MON"
 	line "forgot the move."
-	done
+	prompt
 
 _DeleterEggText::
 	text "An EGG doesn't"
 	line "know any moves!"
-	done
+	prompt
 
 _DeleterNoComeAgainText::
-	text "No? Come visit me"
-	line "again."
+	text "Come visit us any-"
+	line "time."
 	done
 
 _DeleterAskWhichMoveText::

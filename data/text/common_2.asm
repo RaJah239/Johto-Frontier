@@ -51,7 +51,7 @@ _NameRaterFinishedText::
 	line "name than before!"
 
 	para "Well done!"
-	done
+	prompt
 
 _NameRaterComeAgainText::
 	text "OK, then. Come"
@@ -61,7 +61,7 @@ _NameRaterComeAgainText::
 _NameRaterEggText::
 	text "Whoa… That's just"
 	line "an EGG."
-	done
+	prompt
 
 _NameRaterSameNameText::
 	text "It might look the"
@@ -71,7 +71,7 @@ _NameRaterSameNameText::
 	line "is much better!"
 
 	para "Well done!"
-	done
+	prompt
 
 _NameRaterNamedText::
 	text "All right. This"

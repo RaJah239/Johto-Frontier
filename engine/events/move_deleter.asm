@@ -5,6 +5,7 @@ MoveDeletion:
 	jr c, .declined
 	ld hl, .DeleterAskWhichMonText
 	call PrintText
+.loop_party_menu
 	farcall SelectMonFromParty
 	jr c, .declined
 	ld a, [wCurPartySpecies]
@@ -19,6 +20,7 @@ MoveDeletion:
 	jr z, .onlyonemove
 	ld hl, .DeleterAskWhichMoveText
 	call PrintText
+
 	call LoadStandardMenuHeader
 	farcall ChooseMoveToDelete
 	push af
@@ -42,12 +44,13 @@ MoveDeletion:
 	call WaitSFX
 	ld hl, .DeleterForgotMoveText
 	call PrintText
-	ret
+
+	jr .loop_party_menu
 
 .egg
 	ld hl, .MailEggText
 	call PrintText
-	ret
+	jr .loop_party_menu
 
 .declined
 	ld hl, .DeleterNoComeAgainText
@@ -57,7 +60,7 @@ MoveDeletion:
 .onlyonemove
 	ld hl, .MoveKnowsOneText
 	call PrintText
-	ret
+	jr .loop_party_menu
 
 .MoveKnowsOneText:
 	text_far _MoveKnowsOneText
