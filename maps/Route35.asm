@@ -35,55 +35,10 @@ TrainerJugglerIrwin:
 	trainer JUGGLER, IRWIN1, EVENT_BEAT_JUGGLER_IRWIN, JugglerIrwin1SeenText, JugglerIrwin1BeatenText, 0, .Script
 
 .Script:
-	loadvar VAR_CALLERID, PHONE_JUGGLER_IRWIN
-	endifjustbattled
 	opentext
-	checkcellnum PHONE_JUGGLER_IRWIN
-	iftrue Route35NumberAcceptedM
-	checkevent EVENT_IRWIN_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
 	writetext JugglerIrwinAfterBattleText
-	promptbutton
-	setevent EVENT_IRWIN_ASKED_FOR_PHONE_NUMBER
-	scall Route35AskNumber1M
-	sjump .AskForNumber
-
-.AskedAlready:
-	scall Route35AskNumber2M
-.AskForNumber:
-	askforphonenumber PHONE_JUGGLER_IRWIN
-	ifequal PHONE_CONTACTS_FULL, Route35PhoneFullM
-	ifequal PHONE_CONTACT_REFUSED, Route35NumberDeclinedM
-	gettrainername STRING_BUFFER_3, JUGGLER, IRWIN1
-	scall Route35RegisteredNumberM
-	sjump Route35NumberAcceptedM
-
-Route35AskNumber1M:
-	jumpstd AskNumber1MScript
-	end
-
-Route35AskNumber2M:
-	jumpstd AskNumber2MScript
-	end
-
-Route35RegisteredNumberM:
-	jumpstd RegisteredNumberMScript
-	end
-
-Route35NumberAcceptedM:
-	jumpstd NumberAcceptedMScript
-	end
-
-Route35NumberDeclinedM:
-	jumpstd NumberDeclinedMScript
-	end
-
-Route35PhoneFullM:
-	jumpstd PhoneFullMScript
-	end
-
-Route35RematchM:
-	jumpstd RematchMScript
+	waitbutton
+	closetext
 	end
 
 TrainerCamperIvan:
@@ -136,10 +91,10 @@ TrainerBugCatcherArnie:
 .Script:
 	loadvar VAR_CALLERID, PHONE_BUG_CATCHER_ARNIE
 	opentext
+	checkevent EVENT_ARNIE_SILVERPOWDER
+	iftrue .RematchGift
 	checkflag ENGINE_ARNIE_READY_FOR_REMATCH
 	iftrue .WantsBattle
-	checkflag ENGINE_YANMA_SWARM
-	iftrue .YanmaSwarming
 	checkcellnum PHONE_BUG_CATCHER_ARNIE
 	iftrue Route35NumberAcceptedM
 	checkevent EVENT_ARNIE_ASKED_FOR_PHONE_NUMBER
@@ -147,14 +102,13 @@ TrainerBugCatcherArnie:
 	writetext BugCatcherArnieAfterBattleText
 	promptbutton
 	setevent EVENT_ARNIE_ASKED_FOR_PHONE_NUMBER
-	scall Route35AskNumber1M
+	scall Route35AskNumber
 	sjump .AskForNumber
 
 .AskedAlready:
-	scall Route35AskNumber2M
+	scall Route35AskNumber
 .AskForNumber:
 	askforphonenumber PHONE_BUG_CATCHER_ARNIE
-	ifequal PHONE_CONTACTS_FULL, Route35PhoneFullM
 	ifequal PHONE_CONTACT_REFUSED, Route35NumberDeclinedM
 	gettrainername STRING_BUFFER_3, BUG_CATCHER, ARNIE1
 	scall Route35RegisteredNumberM
@@ -203,12 +157,46 @@ TrainerBugCatcherArnie:
 	startbattle
 	reloadmapafterbattle
 	clearflag ENGINE_ARNIE_READY_FOR_REMATCH
+	opentext
+	writetext BugCatcherArnie_GiveSilverPowderAfterBattleText
+	waitbutton
+	verbosegiveitem SILVERPOWDER
+	iffalse .PackFull
+	closetext
 	end
 
-.YanmaSwarming:
-	writetext BugCatcherArnieYanmaText
+.RematchGift
+	writetext BugCatcherArnie_AgainGiveSilverPowderAfterBattleText
 	waitbutton
+	verbosegiveitem SILVERPOWDER
+	iffalse .PackFull
+	clearevent EVENT_ARNIE_SILVERPOWDER
 	closetext
+	end
+
+.PackFull:
+	setevent EVENT_ARNIE_SILVERPOWDER
+	jumpstd PackFullMScript
+	end
+
+Route35AskNumber:
+	jumpstd AskNumber1MScript
+	end
+
+Route35RegisteredNumberM:
+	jumpstd RegisteredNumberMScript
+	end
+
+Route35NumberAcceptedM:
+	jumpstd NumberAcceptedMScript
+	end
+
+Route35NumberDeclinedM:
+	jumpstd NumberDeclinedMScript
+	end
+
+Route35RematchM:
+	jumpstd RematchMScript
 	end
 
 TrainerFirebreatherWalt:
@@ -391,14 +379,6 @@ BugCatcherArnieAfterBattleText:
 	line "NATIONAL PARK."
 	done
 
-BugCatcherArnieYanmaText:
-	text "Wow… Look at all"
-	line "those YANMA!"
-
-	para "I'm so blown away,"
-	line "I can't move."
-	done
-
 FirebreatherWaltSeenText:
 	text "I'm practicing my"
 	line "fire breathing."
@@ -560,6 +540,16 @@ Route35HeyItsBerryApricornText:
 Route35FoundItemText:
 	text_far _ObtainedFruitText
 	text_end
+
+BugCatcherArnie_GiveSilverPowderAfterBattleText:
+	text "Oh well. Take this"
+	line "for your victory!"
+	done
+
+BugCatcherArnie_AgainGiveSilverPowderAfterBattleText:
+	text "Made room have"
+	line "you? Take it."
+	done
 
 Route35NoRoomInBagText:
 	text_far _CantCarryItemText

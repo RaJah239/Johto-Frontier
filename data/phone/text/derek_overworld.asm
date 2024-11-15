@@ -1,4 +1,4 @@
-DerekAskNumber1Text:
+DerekAskNumberText:
 	text "Oh, wow! PIKACHU!"
 	line "It's so soft and"
 	cont "furry! How cute!"
@@ -8,14 +8,6 @@ DerekAskNumber1Text:
 	cont "never bad people!"
 
 	para "Let's chat about"
-	line "PIKACHU!"
-
-	para "Can I get your"
-	line "phone number?"
-	done
-
-DerekAskNumber2Text:
-	text "Let's chat about"
 	line "PIKACHU!"
 
 	para "Can I get your"
@@ -35,11 +27,6 @@ DerekNumberDeclinedText:
 
 	para "I bet you don't"
 	line "even like PIKACHU…"
-	done
-
-DerekPhoneFullText:
-	text "Wait a sec! Your"
-	line "phone list's full!"
 	done
 
 DerekGiftText:

@@ -54,6 +54,8 @@ TrainerYoungsterJoey:
 .Script:
 	loadvar VAR_CALLERID, PHONE_YOUNGSTER_JOEY
 	opentext
+	checkevent EVENT_JOEY_HP_UP
+	iftrue .RematchGift
 	checkflag ENGINE_JOEY_READY_FOR_REMATCH
 	iftrue .Rematch
 	checkcellnum PHONE_YOUNGSTER_JOEY
@@ -63,14 +65,13 @@ TrainerYoungsterJoey:
 	writetext YoungsterJoey1AfterText
 	promptbutton
 	setevent EVENT_JOEY_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
+	scall .AskNumber
 	sjump .RequestNumber
 
 .AskAgain:
-	scall .AskNumber2
+	scall .AskNumber
 .RequestNumber:
 	askforphonenumber PHONE_YOUNGSTER_JOEY
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
 	gettrainername STRING_BUFFER_3, YOUNGSTER, JOEY1
 	scall .RegisteredNumber
@@ -119,35 +120,25 @@ TrainerYoungsterJoey:
 	startbattle
 	reloadmapafterbattle
 	clearflag ENGINE_JOEY_READY_FOR_REMATCH
-	checkevent EVENT_JOEY_HP_UP
-	iftrue .GiveHPUp
-	checkevent EVENT_GOT_HP_UP_FROM_JOEY
-	iftrue .done
-	scall .RematchGift
-	verbosegiveitem HP_UP
-	iffalse .PackFull
-	setevent EVENT_GOT_HP_UP_FROM_JOEY
-	sjump .NumberAccepted
-
-.done
-	end
-
-.GiveHPUp:
 	opentext
 	writetext YoungsterJoeyText_GiveHPUpAfterBattle
 	waitbutton
 	verbosegiveitem HP_UP
 	iffalse .PackFull
-	clearevent EVENT_JOEY_HP_UP
-	setevent EVENT_GOT_HP_UP_FROM_JOEY
-	sjump .NumberAccepted
-
-.AskNumber1:
-	jumpstd AskNumber1MScript
+	closetext
 	end
 
-.AskNumber2:
-	jumpstd AskNumber2MScript
+.RematchGift
+	writetext YoungsterJoeyText_GiveHPUpAfterBattleAgain
+	waitbutton
+	verbosegiveitem HP_UP
+	iffalse .PackFull
+	clearevent EVENT_JOEY_HP_UP
+	closetext
+	end	
+
+.AskNumber:
+	jumpstd AskNumber1MScript
 	end
 
 .RegisteredNumber:
@@ -162,10 +153,6 @@ TrainerYoungsterJoey:
 	jumpstd NumberDeclinedMScript
 	end
 
-.PhoneFull:
-	jumpstd PhoneFullMScript
-	end
-
 .RematchStd:
 	jumpstd RematchMScript
 	end
@@ -173,10 +160,6 @@ TrainerYoungsterJoey:
 .PackFull:
 	setevent EVENT_JOEY_HP_UP
 	jumpstd PackFullMScript
-	end
-
-.RematchGift:
-	jumpstd RematchGiftMScript
 	end
 
 TrainerYoungsterMikey:
@@ -389,15 +372,19 @@ YoungsterJoeyText_GiveHPUpAfterBattle:
 	text "I lost again…"
 	line "Gee, you're tough!"
 
-	para "Oh yeah, I almost"
-	line "forgot that I had"
-	cont "to give you this."
+	para "I want you to have"
+	line "this."
 
 	para "Use it to get even"
 	line "tougher, OK?"
 
 	para "I'm going to get"
 	line "tougher too."
+	done
+
+YoungsterJoeyText_GiveHPUpAfterBattleAgain:
+	text "Made space for the"
+	line "HP UP? Take it!"
 	done
 
 Route30BerryTree1:

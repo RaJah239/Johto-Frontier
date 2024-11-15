@@ -1,38 +1,3 @@
-GinaGettingInSyncWithMonText:
-	text "My @"
-	text_ram wStringBuffer4
-	text " and"
-	line "I are getting more"
-
-	para "in sync with each"
-	line "other."
-	done
-
-GinaDefeatedMonText:
-	text "We battled a wild"
-	line "@"
-	text_ram wStringBuffer4
-	text " and"
-
-	para "managed to drop it"
-	line "in a close match."
-
-	para "We're getting into"
-	line "the groove!"
-	done
-
-GinaLostAMonText:
-	text "But, you know?"
-
-	para "I still haven't"
-	line "caught @"
-	text_ram wStringBuffer4
-	text "."
-
-	para "It's getting past"
-	line "frustrating…"
-	done
-
 GinaBattleRematchText:
 	text "Would you be my"
 	line "practice partner"
@@ -51,18 +16,6 @@ GinaBattleRematchText:
 GinaHangUpText:
 	text "Bye! Let's chat"
 	line "again!"
-	done
-
-GinaRocketTakeoverRumorText:
-	text "Have you heard"
-	line "about TEAM ROCKET?"
-
-	para "They've taken over"
-	line "the RADIO TOWER in"
-	cont "GOLDENROD."
-
-	para "Are the people"
-	line "inside safe?"
 	done
 
 GinaFoundItemText:

@@ -168,6 +168,8 @@ TrainerFisherRalph1:
 .Script:
 	loadvar VAR_CALLERID, PHONE_FISHER_RALPH
 	opentext
+	checkevent EVENT_RALPH_NUGGET
+	iftrue .RematchGift
 	checkflag ENGINE_RALPH_READY_FOR_REMATCH
 	iftrue .Rematch
 	checkcellnum PHONE_FISHER_RALPH
@@ -177,14 +179,13 @@ TrainerFisherRalph1:
 	writetext FisherRalphAfterText
 	promptbutton
 	setevent EVENT_RALPH_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
+	scall .AskNumber
 	sjump .AskForNumber
 
 .AskAgain:
-	scall .AskNumber2
+	scall .AskNumber
 .AskForNumber:
 	askforphonenumber PHONE_FISHER_RALPH
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
 	gettrainername STRING_BUFFER_3, FISHER, RALPH1
 	scall .RegisteredNumber
@@ -233,20 +234,30 @@ TrainerFisherRalph1:
 	startbattle
 	reloadmapafterbattle
 	clearflag ENGINE_RALPH_READY_FOR_REMATCH
-	end
-
-.Swarm:
-	writetext FisherRalphSwarmText
+	opentext
+	writetext FisherRalphText_GiveNuggetAfterBattleText
 	waitbutton
+	verbosegiveitem NUGGET
+	iffalse .PackFull
 	closetext
 	end
 
-.AskNumber1:
-	jumpstd AskNumber1MScript
+.RematchGift
+	writetext FisherRalphText_AgainGiveNuggetAfterBattleText
+	waitbutton
+	verbosegiveitem NUGGET
+	iffalse .PackFull
+	clearevent EVENT_RALPH_NUGGET
+	closetext
 	end
 
-.AskNumber2:
-	jumpstd AskNumber2MScript
+.PackFull:
+	setevent EVENT_RALPH_NUGGET
+	jumpstd PackFullMScript
+	end
+
+.AskNumber:
+	jumpstd AskNumber1MScript
 	end
 
 .RegisteredNumber:
@@ -259,10 +270,6 @@ TrainerFisherRalph1:
 
 .NumberDeclined:
 	jumpstd NumberDeclinedMScript
-	end
-
-.PhoneFull:
-	jumpstd PhoneFullMScript
 	end
 
 .RematchStd:
@@ -286,6 +293,8 @@ TrainerPicnickerLiz1:
 .Script:
 	loadvar VAR_CALLERID, PHONE_PICNICKER_LIZ
 	opentext
+	checkevent EVENT_LIZ_MAX_REVIVE
+	iftrue .RematchGift
 	checkflag ENGINE_LIZ_READY_FOR_REMATCH
 	iftrue .Rematch
 	checkcellnum PHONE_PICNICKER_LIZ
@@ -295,14 +304,13 @@ TrainerPicnickerLiz1:
 	writetext PicnickerLiz1AfterText
 	promptbutton
 	setevent EVENT_LIZ_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
+	scall .AskNumber
 	sjump .AskForNumber
 
 .AskAgain:
-	scall .AskNumber2
+	scall .AskNumber
 .AskForNumber:
 	askforphonenumber PHONE_PICNICKER_LIZ
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
 	gettrainername STRING_BUFFER_3, PICNICKER, LIZ1
 	scall .RegisteredNumber
@@ -351,14 +359,30 @@ TrainerPicnickerLiz1:
 	startbattle
 	reloadmapafterbattle
 	clearflag ENGINE_LIZ_READY_FOR_REMATCH
+	opentext
+	writetext PicnickerLiz_GiveMaxReviveAfterBattleText
+	waitbutton
+	verbosegiveitem MAX_REVIVE
+	iffalse .PackFull
+	closetext
 	end
 
-.AskNumber1:
+.RematchGift
+	writetext PicnickerLiz_AgainGiveMaxReviveAfterBattleText
+	waitbutton
+	verbosegiveitem MAX_REVIVE
+	iffalse .PackFull
+	clearevent EVENT_LIZ_MAX_REVIVE
+	closetext
+	end
+
+.PackFull:
+	setevent EVENT_LIZ_MAX_REVIVE
+	jumpstd PackFullFScript
+	end
+
+.AskNumber:
 	jumpstd AskNumber1FScript
-	end
-
-.AskNumber2:
-	jumpstd AskNumber2FScript
 	end
 
 .RegisteredNumber:
@@ -371,10 +395,6 @@ TrainerPicnickerLiz1:
 
 .NumberDeclined:
 	jumpstd NumberDeclinedFScript
-	end
-
-.PhoneFull:
-	jumpstd PhoneFullFScript
 	end
 
 .RematchStd:
@@ -617,17 +637,6 @@ FisherRalphAfterText:
 	line "long friends!"
 	done
 
-FisherRalphSwarmText:
-	text "One, two, three…"
-	line "Muahahaha, what a"
-
-	para "great haul!"
-	line "I'm done! Go ahead"
-
-	para "and catch as many"
-	line "as you can, kid!"
-	done
-
 FisherHenrySeenText:
 	text "My #MON?"
 	line "Freshly caught!"
@@ -823,6 +832,29 @@ Route32RuinsSignText:
 Route32UnionCaveSignText:
 	text "UNION CAVE"
 	line "AHEAD"
+	done
+
+FisherRalphText_GiveNuggetAfterBattleText:
+	text "You won after that"
+	line "much gas!"
+	
+	para "Fine. Take this!"
+	line "It yours to keep."
+	done
+
+FisherRalphText_AgainGiveNuggetAfterBattleText:
+	text "Ah! You're back!"
+	line "Accept it kiddo!"
+	done
+
+PicnickerLiz_GiveMaxReviveAfterBattleText:
+	text "That was a great"
+	line "battle! Have this!"
+	done
+
+PicnickerLiz_AgainGiveMaxReviveAfterBattleText:
+	text "Made room right?"
+	line "All yours!"
 	done
 
 Route32_MapEvents:

@@ -1,33 +1,15 @@
-JackAskNumber1Text:
-	text "Your knowledge is"
-	line "impressive!"
-
-	para "I like that!"
-
-	para "Want to trade"
-	line "battle tips?"
-
-	para "I'll phone if I"
-	line "get good info."
-
-	para "Would you tell me"
-	line "your number?"
-	done
-
-JackAskNumber2Text:
+JackAskNumberText:
 	text "Want to trade"
-	line "battle tips?"
+	line "battle tips"
+	cont "through battling?"
 
-	para "I'll phone if I"
-	line "get good info."
-
-	para "Would you tell me"
-	line "your number?"
+	para "Then let's trade"
+	line "phone numbers!"
 	done
 
 JackNumberAcceptedText:
-	text "I'll call you if I"
-	line "hear anything!"
+	text "I'll call you when"
+	line "I've learned more!"
 	done
 
 JackNumberDeclinedText:
@@ -38,12 +20,9 @@ JackNumberDeclinedText:
 	cont "come see me, OK?"
 	done
 
-JackPhoneFullText:
-	text "Oh?"
-	line "Your phone's full."
-
-	para "It can't register"
-	line "my number."
+JackPackFullText:
+	text "Your PACK's full…"
+	line "Make room for it."
 	done
 
 JackRematchText:

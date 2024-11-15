@@ -36,6 +36,8 @@ TrainerPicnickerErin1:
 .Script:
 	loadvar VAR_CALLERID, PHONE_PICNICKER_ERIN
 	opentext
+	checkevent EVENT_ERIN_CALCIUM
+	iftrue .HasCalcium
 	checkflag ENGINE_ERIN_READY_FOR_REMATCH
 	iftrue .WantsBattle
 	checkcellnum PHONE_PICNICKER_ERIN
@@ -45,14 +47,13 @@ TrainerPicnickerErin1:
 	writetext PicnickerErinAfterBattleText
 	promptbutton
 	setevent EVENT_ERIN_ASKED_FOR_PHONE_NUMBER
-	scall Route46AskNumber1F
+	scall Route46AskNumber
 	sjump .AskForNumber
 
 .AskedAlready:
-	scall Route46AskNumber2F
+	scall Route46AskNumber
 .AskForNumber:
 	askforphonenumber PHONE_PICNICKER_ERIN
-	ifequal PHONE_CONTACTS_FULL, Route46PhoneFullF
 	ifequal PHONE_CONTACT_REFUSED, Route46NumberDeclinedF
 	gettrainername STRING_BUFFER_3, PICNICKER, ERIN1
 	scall Route46RegisteredNumberF
@@ -83,35 +84,23 @@ TrainerPicnickerErin1:
 	startbattle
 	reloadmapafterbattle
 	clearflag ENGINE_ERIN_READY_FOR_REMATCH
-	checkevent EVENT_ERIN_CALCIUM
-	iftrue .HasCalcium
-	checkevent EVENT_GOT_CALCIUM_FROM_ERIN
-	iftrue .GotCalciumAlready
 	scall Route46RematchGiftF
 	verbosegiveitem CALCIUM
 	iffalse ErinNoRoomForCalcium
-	setevent EVENT_GOT_CALCIUM_FROM_ERIN
-	sjump Route46NumberAcceptedF
-
-.GotCalciumAlready:
+	closetext
 	end
 
 .HasCalcium:
-	opentext
-	writetext PicnickerErin2BeatenText
+	writetext PicnickerErin_GiveCalciumAfterBattleAgain
 	waitbutton
 	verbosegiveitem CALCIUM
 	iffalse ErinNoRoomForCalcium
 	clearevent EVENT_ERIN_CALCIUM
-	setevent EVENT_GOT_CALCIUM_FROM_ERIN
-	sjump Route46NumberAcceptedF
-
-Route46AskNumber1F:
-	jumpstd AskNumber1FScript
+	closetext
 	end
 
-Route46AskNumber2F:
-	jumpstd AskNumber2FScript
+Route46AskNumber:
+	jumpstd AskNumber1FScript
 	end
 
 Route46RegisteredNumberF:
@@ -124,10 +113,6 @@ Route46NumberAcceptedF:
 
 Route46NumberDeclinedF:
 	jumpstd NumberDeclinedFScript
-	end
-
-Route46PhoneFullF:
-	jumpstd PhoneFullFScript
 	end
 
 Route46RematchF:
@@ -233,6 +218,11 @@ PicnickerErin2BeatenText:
 	para "and again. Here's"
 	line "that present from"
 	cont "the other time."
+	done
+
+PicnickerErin_GiveCalciumAfterBattleAgain:
+	text "Nice! You're back"
+	line "for my gift!"
 	done
 
 Route46SignText:

@@ -75,7 +75,7 @@ BrentReminderScript:
 	end
 
 TiffanyAsleepScript:
-	farwritetext TiffanyAsleepText
+	farwritetext TiffanyHurryText
 	end
 
 VanceHurryHurryScript:

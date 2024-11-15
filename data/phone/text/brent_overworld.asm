@@ -1,57 +1,27 @@
-BrentAskNumber1Text:
+BrentAskNumberText:
 	text "By the way, you're"
 	line "a #MANIAC…"
 
 	para "I can tell."
 	line "Yes, you are."
 
-	para "But your knowledge"
-	line "is shallow still!"
+	para "We have a lot in"
+	line "common so leave"
+	cont "your phone number."
 
-	para "Do you know BILL?"
-	line "He's an incredible"
-
-	para "#MANIAC."
-	line "I revere him."
-
-	para "I'll teach you all"
-	line "I know about BILL,"
-
-	para "so leave me your"
-	line "phone number."
-	done
-
-BrentAskNumber2Text:
-	text "I'll teach you all"
-	line "I know about BILL,"
-
-	para "so leave me your"
-	line "phone number."
+	para "I'll call you to"
+	line "show you my rare"
+	cont "#MON!"
 	done
 
 BrentNumberAcceptedText:
-	text "BILL--he's more"
-	line "than amazing!"
-
-	para "To be a #MANIAC"
-	line "like him someday…"
-
-	para "That's my dream."
+	text "Get ready to see"
+	line "some cool #MON!"
 	done
 
 BrentNumberDeclinedText:
-	text "You're going to"
-	line "regret it…"
-
-	para "And I won't care…"
-	done
-
-BrentPhoneFullText:
-	text "Huh? Your phone"
-	line "list's full."
-
-	para "A #MANIAC has"
-	line "to be more tidy!"
+	text "Aww… We could be"
+	line "great friends…"
 	done
 
 BrentRematchText:
@@ -59,4 +29,9 @@ BrentRematchText:
 
 	para "Look, check out my"
 	line "#MON!"
+	done
+
+BrentPackFullText:
+	text "You don't have"
+	line "room for a BERRY?"
 	done

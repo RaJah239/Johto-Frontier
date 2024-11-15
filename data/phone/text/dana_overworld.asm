@@ -1,4 +1,4 @@
-DanaAskNumber1Text:
+DanaAskNumberText:
 	text "You're really good"
 	line "at #MON!"
 
@@ -13,14 +13,6 @@ DanaAskNumber1Text:
 
 	para "want. Let me get"
 	line "your phone number."
-	done
-
-DanaAskNumber2Text:
-	text "I'll share my"
-	line "gifts with you."
-
-	para "Let me get your"
-	line "phone number."
 	done
 
 DanaNumberAcceptedText:
@@ -40,11 +32,6 @@ DanaNumberDeclinedText:
 
 	para "But it's all for"
 	line "free…"
-	done
-
-DanaPhoneFullText:
-	text "But your phone's"
-	line "out of memory!"
 	done
 
 DanaRematchText:

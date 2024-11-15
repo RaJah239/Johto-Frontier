@@ -27,10 +27,10 @@ TrainerHikerAnthony:
 .Script:
 	loadvar VAR_CALLERID, PHONE_HIKER_ANTHONY
 	opentext
+	checkevent EVENT_ANTHONY_BERRY_JUICE
+	iftrue .RematchGift
 	checkflag ENGINE_ANTHONY_READY_FOR_REMATCH
 	iftrue .Rematch
-	checkflag ENGINE_DUNSPARCE_SWARM
-	iftrue .Swarm
 	checkcellnum PHONE_HIKER_ANTHONY
 	iftrue .NumberAccepted
 	checkevent EVENT_ANTHONY_ASKED_FOR_PHONE_NUMBER
@@ -38,14 +38,13 @@ TrainerHikerAnthony:
 	writetext HikerAnthony2AfterText
 	promptbutton
 	setevent EVENT_ANTHONY_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
+	scall .AskNumber
 	sjump .AskForPhoneNumber
 
 .AskAgain:
-	scall .AskNumber2
+	scall .AskNumber
 .AskForPhoneNumber:
 	askforphonenumber PHONE_HIKER_ANTHONY
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
 	gettrainername STRING_BUFFER_3, HIKER, ANTHONY2
 	scall .RegisteredNumber
@@ -94,20 +93,30 @@ TrainerHikerAnthony:
 	startbattle
 	reloadmapafterbattle
 	clearflag ENGINE_ANTHONY_READY_FOR_REMATCH
-	end
-
-.Swarm:
-	writetext HikerAnthonyDunsparceText
+	opentext
+	writetext HikerAnthony_GiveBerryJuiceAfterBattleText
 	waitbutton
+	verbosegiveitem BERRY_JUICE
+	iffalse .PackFull
 	closetext
 	end
 
-.AskNumber1:
-	jumpstd AskNumber1MScript
+.RematchGift
+	writetext HikerAnthony_AgainGiveBerryJuiceAfterBattleText
+	waitbutton
+	verbosegiveitem BERRY_JUICE
+	iffalse .PackFull
+	clearevent EVENT_ANTHONY_BERRY_JUICE
+	closetext
 	end
 
-.AskNumber2:
-	jumpstd AskNumber2MScript
+.PackFull:
+	setevent EVENT_ANTHONY_BERRY_JUICE
+	jumpstd PackFullMScript
+	end
+
+.AskNumber:
+	jumpstd AskNumber1MScript
 	end
 
 .RegisteredNumber:
@@ -120,10 +129,6 @@ TrainerHikerAnthony:
 
 .NumberDeclined:
 	jumpstd NumberDeclinedMScript
-	end
-
-.PhoneFull:
-	jumpstd PhoneFullMScript
 	end
 
 .RematchStd:
@@ -150,17 +155,6 @@ HikerAnthony2AfterText:
 	text "We HIKERS are at"
 	line "our best in the"
 	cont "mountains."
-	done
-
-HikerAnthonyDunsparceText:
-	text "Hey, did you get a"
-	line "DUNSPARCE?"
-
-	para "I caught one too."
-
-	para "Take a look at it"
-	line "in the light. It's"
-	cont "got a funny face!"
 	done
 
 Route33LassText:
@@ -302,6 +296,18 @@ Route33FoundItemText:
 Route33NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
+
+HikerAnthony_GiveBerryJuiceAfterBattleText:
+	text "I found this in"
+	line "the mountains."
+	
+	para "Go on, take it!"
+	done
+
+HikerAnthony_AgainGiveBerryJuiceAfterBattleText:
+	text "Ready to collect"
+	line "it? Go on now."
+	done
 
 Route33_MapEvents:
 	def_warp_events

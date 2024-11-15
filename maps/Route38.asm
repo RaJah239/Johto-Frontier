@@ -41,10 +41,10 @@ TrainerLassDana1:
 .Script
 	loadvar VAR_CALLERID, PHONE_LASS_DANA
 	opentext
-	checkflag ENGINE_DANA_READY_FOR_REMATCH
-	iftrue .DanaRematch
 	checkflag ENGINE_DANA_HAS_THUNDERSTONE
 	iftrue .TryGiveThunderstone
+	checkflag ENGINE_DANA_READY_FOR_REMATCH
+	iftrue .DanaRematch
 	checkcellnum PHONE_LASS_DANA
 	iftrue .NumberAccepted
 	checkevent EVENT_DANA_ASKED_FOR_PHONE_NUMBER
@@ -52,14 +52,13 @@ TrainerLassDana1:
 	writetext LassDanaMoomooMilkText
 	promptbutton
 	setevent EVENT_DANA_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1F
+	scall .AskNumber
 	sjump .AskForPhoneNumber
 
 .SecondTimeAsking:
-	scall .AskNumber2F
+	scall .AskNumber
 .AskForPhoneNumber:
 	askforphonenumber PHONE_LASS_DANA
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .DeclinedPhoneNumber
 	gettrainername STRING_BUFFER_3, LASS, DANA1
 	scall .RegisteredPhoneNumber
@@ -115,18 +114,14 @@ TrainerLassDana1:
 	verbosegiveitem THUNDERSTONE
 	iffalse .NoRoomForThunderstone
 	clearflag ENGINE_DANA_HAS_THUNDERSTONE
-	setevent EVENT_DANA_GAVE_THUNDERSTONE
-	sjump .NumberAccepted
+	closetext
+	end
 
 .NoRoomForThunderstone:
 	sjump .PackFull
 
-.AskNumber1F:
+.AskNumber:
 	jumpstd AskNumber1FScript
-	end
-
-.AskNumber2F:
-	jumpstd AskNumber2FScript
 	end
 
 .RegisteredPhoneNumber:
@@ -139,10 +134,6 @@ TrainerLassDana1:
 
 .DeclinedPhoneNumber:
 	jumpstd NumberDeclinedFScript
-	end
-
-.PhoneFull:
-	jumpstd PhoneFullFScript
 	end
 
 .Rematch:
@@ -163,6 +154,8 @@ TrainerSchoolboyChad1:
 .Script
 	loadvar VAR_CALLERID, PHONE_SCHOOLBOY_CHAD
 	opentext
+	checkevent EVENT_CHAD_TWISTEDSPOON
+	iftrue .RematchGift
 	checkflag ENGINE_CHAD_READY_FOR_REMATCH
 	iftrue .ChadRematch
 	checkcellnum PHONE_SCHOOLBOY_CHAD
@@ -172,14 +165,13 @@ TrainerSchoolboyChad1:
 	writetext SchoolboyChadSoManyTestsText
 	promptbutton
 	setevent EVENT_CHAD_ASKED_FOR_PHONE_NUMBER
-	scall .AskPhoneNumber1
+	scall .AskPhoneNumber
 	sjump .AskToRegisterNumber
 
 .SecondTimeAsking:
-	scall .AskPhoneNumber2
+	scall .AskPhoneNumber
 .AskToRegisterNumber:
 	askforphonenumber PHONE_SCHOOLBOY_CHAD
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .SaidNo
 	gettrainername STRING_BUFFER_3, SCHOOLBOY, CHAD1
 	scall .RegisteredChad
@@ -228,14 +220,30 @@ TrainerSchoolboyChad1:
 	startbattle
 	reloadmapafterbattle
 	clearflag ENGINE_CHAD_READY_FOR_REMATCH
+	opentext
+	writetext SchoolboyChad_GiveTwistedSpoonAfterBattleText
+	waitbutton
+	verbosegiveitem TWISTEDSPOON
+	iffalse .PackFull
+	closetext
 	end
 
-.AskPhoneNumber1:
+.RematchGift
+	writetext SchoolboyChad_AgainGiveTwistedSpoonAfterBattleText
+	waitbutton
+	verbosegiveitem TWISTEDSPOON
+	iffalse .PackFull
+	clearevent EVENT_CHAD_TWISTEDSPOON
+	closetext
+	end
+
+.PackFull:
+	setevent EVENT_CHAD_TWISTEDSPOON
+	jumpstd PackFullMScript
+	end
+
+.AskPhoneNumber:
 	jumpstd AskNumber1MScript
-	end
-
-.AskPhoneNumber2:
-	jumpstd AskNumber2MScript
 	end
 
 .RegisteredChad:
@@ -248,10 +256,6 @@ TrainerSchoolboyChad1:
 
 .SaidNo:
 	jumpstd NumberDeclinedMScript
-	end
-
-.PhoneFull:
-	jumpstd PhoneFullMScript
 	end
 
 .Rematch:
@@ -504,6 +508,16 @@ Route38FoundItemText:
 Route38NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
+
+SchoolboyChad_GiveTwistedSpoonAfterBattleText:
+	text "Take this small"
+	line "item."
+	done
+
+SchoolboyChad_AgainGiveTwistedSpoonAfterBattleText:
+	text "Can a spoon fit"
+	line "now?"
+	done
 
 Route38_MapEvents:
 	def_warp_events

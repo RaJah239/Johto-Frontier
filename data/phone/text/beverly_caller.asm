@@ -1,55 +1,11 @@
-BeverlyMadeMonEvenCuterText:
-	text "I fancied up my"
-	line "@"
-	text_ram wStringBuffer4
-	text " and"
-
-	para "made it even cuter"
-	line "than before!"
-	done
-
-BeverlyDefeatedMonText:
-	text "I happened to come"
-	line "across a wild"
-	cont "SNUBBULL recently."
-
-	para "My SNUBBULL, I"
-	line "assure you, was"
-
-	para "far cuter than the"
-	line "wild one."
-	done
-
-BeverlyLostAMonText:
-	text "I happened to see"
-	line "a wild MARILL the"
-
-	para "other day."
-	line "Or so I thought."
-
-	para "A closer look"
-	line "showed it was"
-
-	para "@"
-	text_ram wStringBuffer4
-	text ". I was"
-	line "quite miffed."
-	done
-
 BeverlyHangUpText:
-	text "You can expect a"
-	line "call from me."
+	text "Until then, bye!"
 	done
 
 BeverlyFoundItemText:
-	text "My husband got"
-	line "some NUGGETS."
-
-	para "If you'd like, you"
-	line "could have one as"
-
-	para "thanks for helping"
-	line "me out."
+	text "I found a NUGGET."
+	line "If you'd like, you"
+	cont "could have it."
 
 	para "I'll be at"
 	line "@"
@@ -64,8 +20,8 @@ BeverlyLetsChatAboutMonAgainText:
 	text "Are your #MON"
 	line "in prime form?"
 
-	para "Let's chat about"
-	line "#MON again."
+	para "I'll call you if I"
+	line "find any items."
 	done
 
 BeverlyComePickUpText:

@@ -1,4 +1,4 @@
-GinaAskNumber1Text:
+GinaAskNumberText:
 	text "Whenever I see a"
 	line "strong trainer, I"
 
@@ -19,14 +19,6 @@ GinaAskNumber1Text:
 	line "as I get anything."
 	done
 
-GinaAskNumber2Text:
-	text "If I find an item,"
-	line "you can have it!"
-
-	para "Want to give me"
-	line "your number?"
-	done
-
 GinaNumberAcceptedText:
 	text "I'll call as soon"
 	line "as I get anything!"
@@ -36,11 +28,6 @@ GinaNumberDeclinedText:
 	text "Is that so? Well,"
 	line "I'll still be"
 	cont "rooting for you!"
-	done
-
-GinaPhoneFullText:
-	text "But your phone is"
-	line "all filled up!"
 	done
 
 GinaRematchText:

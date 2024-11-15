@@ -42,14 +42,13 @@ TrainerPokefanmDerek:
 	writetext PokefanMDerekText_NotBragging
 	promptbutton
 	setevent EVENT_DEREK_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
+	scall .AskNumber
 	sjump .AskForNumber
 
 .AskedAlready:
-	scall .AskNumber2
+	scall .AskNumber
 .AskForNumber:
 	askforphonenumber PHONE_POKEFANM_DEREK
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
 	gettrainername STRING_BUFFER_3, POKEFANM, DEREK1
 	scall .RegisteredNumber
@@ -60,7 +59,8 @@ TrainerPokefanmDerek:
 	verbosegiveitem NUGGET
 	iffalse .NoRoom
 	clearflag ENGINE_DEREK_HAS_NUGGET
-	sjump .NumberAccepted
+	closetext
+	end
 
 .NoRoom:
 	sjump .PackFull
@@ -71,12 +71,8 @@ TrainerPokefanmDerek:
 	closetext
 	end
 
-.AskNumber1:
+.AskNumber:
 	jumpstd AskNumber1MScript
-	end
-
-.AskNumber2:
-	jumpstd AskNumber2MScript
 	end
 
 .RegisteredNumber:
@@ -89,10 +85,6 @@ TrainerPokefanmDerek:
 
 .NumberDeclined:
 	jumpstd NumberDeclinedMScript
-	end
-
-.PhoneFull:
-	jumpstd PhoneFullMScript
 	end
 
 .Gift:
@@ -254,6 +246,9 @@ PokefanfRuthAfterBattleText:
 PokefanMDerekPikachuIsItText:
 	text "PIKACHU is it!"
 	line "Don't you agree?"
+	
+	para "If you had one, we"
+	line "could be friends!"
 	done
 
 PsychicNormanSeenText:

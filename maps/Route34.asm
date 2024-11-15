@@ -59,6 +59,8 @@ TrainerCamperTodd1:
 .Script:
 	loadvar VAR_CALLERID, PHONE_CAMPER_TODD
 	opentext
+	checkevent EVENT_TODD_MAX_ELIXER
+	iftrue .RematchGift
 	checkflag ENGINE_TODD_READY_FOR_REMATCH
 	iftrue .Rematch
 	checkflag ENGINE_GOLDENROD_DEPT_STORE_SALE_IS_ON
@@ -74,10 +76,9 @@ TrainerCamperTodd1:
 	sjump .FinishAsk
 
 .AskAgain:
-	scall .AskNumber2
+	scall .AskNumber
 .FinishAsk:
 	askforphonenumber PHONE_CAMPER_TODD
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
 	gettrainername STRING_BUFFER_3, CAMPER, TODD1
 	scall .RegisteredNumber
@@ -126,6 +127,26 @@ TrainerCamperTodd1:
 	startbattle
 	reloadmapafterbattle
 	clearflag ENGINE_TODD_READY_FOR_REMATCH
+	opentext
+	writetext CamperTodd_GiveMaxElixirAfterBattleText
+	waitbutton
+	verbosegiveitem MAX_ELIXER
+	iffalse .PackFull
+	closetext
+	end
+
+.RematchGift
+	writetext CamperTodd_AgainGiveMaxElixirAfterBattleText
+	waitbutton
+	verbosegiveitem MAX_ELIXER
+	iffalse .PackFull
+	clearevent EVENT_TODD_MAX_ELIXER
+	closetext
+	end
+
+.PackFull:
+	setevent EVENT_TODD_MAX_ELIXER
+	jumpstd PackFullMScript
 	end
 
 .SaleIsOn:
@@ -136,10 +157,6 @@ TrainerCamperTodd1:
 
 .AskNumber:
 	jumpstd AskNumber1MScript
-	end
-
-.AskNumber2:
-	jumpstd AskNumber2MScript
 	end
 
 .RegisteredNumber:
@@ -154,10 +171,6 @@ TrainerCamperTodd1:
 	jumpstd NumberDeclinedMScript
 	end
 
-.PhoneFull:
-	jumpstd PhoneFullMScript
-	end
-
 .RematchStd:
 	jumpstd RematchMScript
 	end
@@ -168,10 +181,10 @@ TrainerPicnickerGina1:
 .Script:
 	loadvar VAR_CALLERID, PHONE_PICNICKER_GINA
 	opentext
-	checkflag ENGINE_GINA_READY_FOR_REMATCH
-	iftrue .Rematch
 	checkflag ENGINE_GINA_HAS_LEAF_STONE
 	iftrue .LeafStone
+	checkflag ENGINE_GINA_READY_FOR_REMATCH
+	iftrue .Rematch
 	checkcellnum PHONE_PICNICKER_GINA
 	iftrue .NumberAccepted
 	checkevent EVENT_GINA_ASKED_FOR_PHONE_NUMBER
@@ -179,14 +192,13 @@ TrainerPicnickerGina1:
 	writetext PicnickerGina1AfterText
 	promptbutton
 	setevent EVENT_GINA_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
+	scall .AskNumber
 	sjump .FinishAsk
 
 .AskAgain:
-	scall .AskNumber2
+	scall .AskNumber
 .FinishAsk:
 	askforphonenumber PHONE_PICNICKER_GINA
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
 	gettrainername STRING_BUFFER_3, PICNICKER, GINA1
 	scall .RegisteredNumber
@@ -242,18 +254,14 @@ TrainerPicnickerGina1:
 	verbosegiveitem LEAF_STONE
 	iffalse .BagFull
 	clearflag ENGINE_GINA_HAS_LEAF_STONE
-	setevent EVENT_GINA_GAVE_LEAF_STONE
-	sjump .NumberAccepted
+	closetext
+	end
 
 .BagFull:
 	sjump .PackFull
 
-.AskNumber1:
+.AskNumber:
 	jumpstd AskNumber1FScript
-	end
-
-.AskNumber2:
-	jumpstd AskNumber2FScript
 	end
 
 .RegisteredNumber:
@@ -266,10 +274,6 @@ TrainerPicnickerGina1:
 
 .NumberDeclined:
 	jumpstd NumberDeclinedFScript
-	end
-
-.PhoneFull:
-	jumpstd PhoneFullFScript
 	end
 
 .RematchStd:
@@ -664,6 +668,15 @@ DayCareSignText:
 
 	para "LET US RAISE YOUR"
 	line "#MON FOR YOU!"
+	done
+
+CamperTodd_GiveMaxElixirAfterBattleText:
+	text "Great battle!"
+	line "Have this item!"
+	done
+
+CamperTodd_AgainGiveMaxElixirAfterBattleText:
+	text "Made space right?"
 	done
 
 Route34_MapEvents:

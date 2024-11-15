@@ -1,39 +1,3 @@
-WiltonMonHasGrownText:
-	text "My @"
-	text_ram wStringBuffer4
-	text "'s"
-	line "grown impressive!"
-
-	para "My fishing skills"
-	line "have improved too!"
-	done
-
-WiltonDefeatedMonText:
-	text "We beat a wild"
-	line "@"
-	text_ram wStringBuffer4
-	text "…"
-
-	para "You know, I have"
-	line "more fun fishing"
-
-	para "than beating wild"
-	line "#MON."
-	done
-
-WiltonLostAMonText:
-	text "But a while back,"
-	line "we came this close"
-
-	para "to landing a wild"
-	line "@"
-	text_ram wStringBuffer4
-	text "."
-
-	para "I tell you, it was"
-	line "huge. Believe me."
-	done
-
 WiltonBattleRematchText:
 	text "I'm fishing on"
 	line "@"
@@ -43,9 +7,8 @@ WiltonBattleRematchText:
 	para "but nothing's"
 	line "biting today."
 
-	para "Help me while my"
-	line "time away, come"
-	cont "over for a battle."
+	para "Come battle me to"
+	line "pass some time."
 	done
 
 WiltonHangUpText:
@@ -64,10 +27,7 @@ WiltonFoundItemText:
 
 WiltonHaventFoundAnythingText:
 	text "Nah, I haven't"
-	line "found anything"
-
-	para "that's worth your"
-	line "time."
+	line "found anything."
 
 	para "You have to have"
 	line "patience."
@@ -89,9 +49,6 @@ WiltonNotBitingText:
 WiltonWantThisText:
 	text "Don't you want"
 	line "this item?"
-
-	para "Hah? You don't"
-	line "know where?"
 
 	para "@"
 	text_ram wStringBuffer5

@@ -33,32 +33,31 @@ TrainerBugCatcherWade1:
 .skipthis
 	loadvar VAR_CALLERID, PHONE_BUG_CATCHER_WADE
 	opentext
-	checkflag ENGINE_WADE_READY_FOR_REMATCH
-	iftrue .WadeRematch
 	checkflag ENGINE_WADE_HAS_ITEM
 	iftrue .WadeItem
+	checkflag ENGINE_WADE_READY_FOR_REMATCH
+	iftrue .WadeRematch
 	checkcellnum PHONE_BUG_CATCHER_WADE
-	iftrue .AcceptedNumberSTD
+	iftrue .AcceptedNumber
 	checkevent EVENT_WADE_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskAgain
 	writetext BugCatcherWade1AfterText
 	waitbutton
 	setevent EVENT_WADE_ASKED_FOR_PHONE_NUMBER
-	scall .AskPhoneNumberSTD
+	scall .AskPhoneNumber
 	sjump .Continue
 
 .AskAgain:
-	scall .AskAgainSTD
+	scall .AskPhoneNumber
 .Continue:
 	askforphonenumber PHONE_BUG_CATCHER_WADE
-	ifequal PHONE_CONTACTS_FULL, .PhoneFullSTD
-	ifequal PHONE_CONTACT_REFUSED, .DeclinedNumberSTD
+	ifequal PHONE_CONTACT_REFUSED, .DeclinedNumber
 	gettrainername STRING_BUFFER_3, BUG_CATCHER, WADE1
-	scall .RegisterNumberSTD
-	sjump .AcceptedNumberSTD
+	scall .RegisterNumber
+	sjump .AcceptedNumber
 
 .WadeRematch:
-	scall .RematchSTD
+	scall .Rematch
 	winlosstext BugCatcherWade1BeatenText, 0
 	checkevent EVENT_BEAT_ELITE_FOUR
 	iftrue .LoadFight4
@@ -103,69 +102,41 @@ TrainerBugCatcherWade1:
 	end
 
 .WadeItem:
-	scall .ItemSTD
-	checkevent EVENT_WADE_HAS_BERRY
-	iftrue .Berry
-	checkevent EVENT_WADE_HAS_PSNCUREBERRY
-	iftrue .Psncureberry
-	checkevent EVENT_WADE_HAS_PRZCUREBERRY
-	iftrue .Przcureberry
-	checkevent EVENT_WADE_HAS_BITTER_BERRY
-	iftrue .BitterBerry
-.Berry:
-	verbosegiveitem BERRY
-	iffalse .PackFull
-	sjump .Done
-.Psncureberry:
-	verbosegiveitem PSNCUREBERRY
-	iffalse .PackFull
-	sjump .Done
-.Przcureberry:
-	verbosegiveitem PRZCUREBERRY
-	iffalse .PackFull
-	sjump .Done
-.BitterBerry:
-	verbosegiveitem BITTER_BERRY
-	iffalse .PackFull
-.Done:
+	scall .Item
+	verbosegiveitem MIRACLEBERRY
+	iffalse .NoRoom
 	clearflag ENGINE_WADE_HAS_ITEM
-	sjump .AcceptedNumberSTD
-.PackFull:
-	sjump .PackFullSTD
+	closetext
+	end
 
-.AskPhoneNumberSTD:
+.NoRoom:
+	sjump .PackFull
+
+.AskPhoneNumber:
 	jumpstd AskNumber1MScript
 	end
 
-.AskAgainSTD:
-	jumpstd AskNumber2MScript
-	end
-
-.RegisterNumberSTD:
+.RegisterNumber:
 	jumpstd RegisteredNumberMScript
 	end
 
-.AcceptedNumberSTD:
+.AcceptedNumber:
 	jumpstd NumberAcceptedMScript
 	end
 
-.DeclinedNumberSTD:
+.DeclinedNumber:
 	jumpstd NumberDeclinedMScript
 	end
 
-.PhoneFullSTD:
-	jumpstd PhoneFullMScript
-	end
-
-.RematchSTD:
+.Rematch:
 	jumpstd RematchMScript
 	end
 
-.ItemSTD:
+.Item:
 	jumpstd GiftMScript
 	end
 
-.PackFullSTD:
+.PackFull:
 	jumpstd PackFullMScript
 	end
 

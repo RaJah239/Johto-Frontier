@@ -1,26 +1,18 @@
-BeverlyAskNumber1Text:
+BeverlyAskNumberText:
 	text "Your MARILL is so"
 	line "cute and adorable!"
 
-	para "You love #MON"
-	line "just like I do!"
+	para "We'll get along"
+	line "just great!"
 
-	para "Want to trade"
-	line "phone numbers?"
-
-	para "Let's chat! It'll"
-	line "be so much fun!"
-	done
-
-BeverlyAskNumber2Text:
-	text "Your MARILL is so"
-	line "cute and adorable!"
-
-	para "We should chat, it"
-	line "will be fun."
+	para "While walking, I"
+	line "may to find items."
 
 	para "Can I have your"
 	line "phone number?"
+
+	para "I'll share them"
+	line "them with you!"
 	done
 
 BeverlyNumberAcceptedText:
@@ -36,11 +28,6 @@ BeverlyNumberDeclinedText:
 	line "disappointing…"
 
 	para "Goodbye, MARILL…"
-	done
-
-BeverlyPhoneFullText:
-	text "Oh? Your phone's"
-	line "memory is full."
 	done
 
 BeverlyGiftText:

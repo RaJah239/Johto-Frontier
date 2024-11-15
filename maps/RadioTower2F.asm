@@ -143,17 +143,17 @@ Buena:
 	waitsfx
 	playsound SFX_TRANSACTION
 	setflag ENGINE_BUENAS_PASSWORD_2
-	pause 20
+	pause 10
 	turnobject RADIOTOWER2F_BUENA, RIGHT
 	opentext
 	writetext RadioTower2FBuenaThanksForComingText
 	waitbutton
 	closetext
 	special FadeOutMusic
-	pause 20
+	pause 10
 	special RestartMapMusic
 	readvar VAR_BLUECARDBALANCE
-	ifequal BLUE_CARD_POINT_CAP, .BlueCardCapped1
+	ifequal BLUE_CARD_POINT_CAP, .BlueCardCapped0 ; supposed to be ".BlueCardCapped1" when figure out how to take 30 Points at once.
 	end
 
 .Introduction:
@@ -165,11 +165,6 @@ Buena:
 	writetext RadioTower2FBuenaTuneInToMyShowText
 	waitbutton
 	closetext
-	checkcellnum PHONE_BUENA
-	iftrue .Registered0
-	checkevent EVENT_BUENA_OFFERED_HER_PHONE_NUMBER
-	iftrue .OfferedNumberBefore
-.Registered0:
 	turnobject RADIOTOWER2F_BUENA, RIGHT
 	end
 
@@ -179,7 +174,7 @@ Buena:
 	closetext
 	turnobject RADIOTOWER2F_BUENA, RIGHT
 	special FadeOutMusic
-	pause 20
+	pause 10
 	special RestartMapMusic
 	end
 
@@ -187,13 +182,8 @@ Buena:
 	writetext RadioTower2FBuenaAlreadyPlayedText
 	waitbutton
 	closetext
-	checkcellnum PHONE_BUENA
-	iftrue .Registered1
-	checkevent EVENT_BUENA_OFFERED_HER_PHONE_NUMBER
-	iftrue .OfferedNumberBefore
-.Registered1:
-	turnobject RADIOTOWER2F_BUENA, RIGHT
 	pause 10
+	turnobject RADIOTOWER2F_BUENA, RIGHT
 	end
 
 .WrongAnswer:
@@ -203,7 +193,7 @@ Buena:
 	waitbutton
 	closetext
 	turnobject RADIOTOWER2F_BUENA, RIGHT
-	pause 20
+	pause 10
 	opentext
 	writetext RadioTower2FBuenaThanksForComingText
 	waitbutton
@@ -212,6 +202,7 @@ Buena:
 	special FadeOutMusic
 	pause 20
 	special RestartMapMusic
+	turnobject RADIOTOWER2F_BUENA, RIGHT
 	end
 
 .MidRocketTakeover:
@@ -224,11 +215,6 @@ Buena:
 	writetext RadioTower2FBuenaNoBlueCardText
 	waitbutton
 	closetext
-	checkcellnum PHONE_BUENA
-	iftrue .Registered2
-	checkevent EVENT_BUENA_OFFERED_HER_PHONE_NUMBER_NO_BLUE_CARD
-	iftrue .OfferedNumberBefore
-.Registered2:
 	turnobject RADIOTOWER2F_BUENA, RIGHT
 	end
 
@@ -236,11 +222,6 @@ Buena:
 	writetext RadioTower2FBuenaCardIsFullText
 	waitbutton
 	closetext
-	checkcellnum PHONE_BUENA
-	iftrue .Registered3
-	checkevent EVENT_BUENA_OFFERED_HER_PHONE_NUMBER_NO_BLUE_CARD
-	iftrue .OfferedNumberBefore
-.Registered3:
 	turnobject RADIOTOWER2F_BUENA, RIGHT
 	end
 
@@ -248,62 +229,75 @@ Buena:
 	writetext RadioTower2FBuenaTuneInAfterSixText
 	waitbutton
 	closetext
-	checkcellnum PHONE_BUENA
-	iftrue .Registered4
-	checkevent EVENT_BUENA_OFFERED_HER_PHONE_NUMBER
-	iftrue .OfferedNumberBefore
-.Registered4:
-	end
-
-.BlueCardCapped1:
-	checkcellnum PHONE_BUENA
-	iftrue .HasNumber
-	pause 20
-	turnobject RADIOTOWER2F_BUENA, DOWN
-	pause 15
-	turnobject PLAYER, UP
-	pause 15
-	checkevent EVENT_BUENA_OFFERED_HER_PHONE_NUMBER_NO_BLUE_CARD
-	iftrue .OfferedNumberBefore
-	showemote EMOTE_SHOCK, RADIOTOWER2F_BUENA, 15
-	setevent EVENT_BUENA_OFFERED_HER_PHONE_NUMBER_NO_BLUE_CARD
-	setevent EVENT_BUENA_OFFERED_HER_PHONE_NUMBER
-	opentext
-	writetext RadioTower2FBuenaOfferPhoneNumberText
-	sjump .AskForNumber
-
-.OfferedNumberBefore:
-	opentext
-	writetext RadioTower2FBuenaOfferNumberAgainText
-.AskForNumber:
-	askforphonenumber PHONE_BUENA
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	writetext RadioTower2FRegisteredBuenasNumberText
-	playsound SFX_REGISTER_PHONE_NUMBER
-	waitsfx
-	promptbutton
-	writetext RadioTower2FBuenaCallMeText
-	waitbutton
-	closetext
-	turnobject RADIOTOWER2F_BUENA, RIGHT
-	addcellnum PHONE_BUENA
-	end
-
-.NumberDeclined:
-	writetext RadioTower2FBuenaSadRejectedText
-	waitbutton
-	closetext
 	turnobject RADIOTOWER2F_BUENA, RIGHT
 	end
 
-.PhoneFull:
-	writetext RadioTower2FBuenaYourPhoneIsFullText
-	waitbutton
-	closetext
-	turnobject RADIOTOWER2F_BUENA, RIGHT
-.HasNumber:
-	end
+;.BlueCardCapped1:
+;	pause 10
+;	turnobject RADIOTOWER2F_BUENA, DOWN
+;	pause 10
+;	turnobject PLAYER, UP
+;	pause 10
+;	showemote EMOTE_SHOCK, RADIOTOWER2F_BUENA, 10
+;	opentext
+;	writetext RadioTower2FBuenaBlueCardFullDealText
+;	yesorno
+;	iftrue .Give3SacredAsh
+;	writetext SureNoProblemText
+;	closetext
+;	turnobject RADIOTOWER2F_BUENA, RIGHT
+;	end
+;
+;.Give3SacredAsh:
+;	giveitem SACRED_ASH, 4
+;	iffalse Script_YourPackIsStuffedFullTrainer
+;	writetext PlayerGotFourSacredAsh
+;	promptbutton
+;	writetext BuenaHoOhFlyingOverText
+;	closetext
+;	turnobject RADIOTOWER2F_BUENA, RIGHT
+;	end
+;
+;Script_YourPackIsStuffedFullTrainer:
+;	writetext PackIsFullMakeRoomText
+;	waitbutton
+;	closetext
+;	turnobject RADIOTOWER2F_BUENA, RIGHT
+;	end
+;
+;PlayerGotFourSacredAsh:
+;	text "<PLAYER> got four"
+;	line "SACRED ASH!@"
+;	sound_item
+;	text_promptbutton
+;	text_end
+;
+;PackIsFullMakeRoomText:
+;	text "Oops, your Items"
+;	line "POCKET is full."
+;
+;	para "Please make room"
+;	line "and come back."
+;	done
+;
+;SureNoProblemText:
+;	text "Sure, no problem!"
+;	line "Maybe next time?"
+;	done
+;
+;BuenaHoOhFlyingOverText:
+;	text "A rainbow colored"
+;	line "#MON sometimes"
+;	
+;	para "fly over this city"
+;	line "and drop these."
+;	
+;	para "I still have more,"
+;	line "so you can trade"
+;	
+;	para "your points again"
+;	line "in the future."
+;	done
 
 RadioTowerBuenaPrizeReceptionist:
 	faceplayer
@@ -619,58 +613,20 @@ RadioTower2FBuenaNoBlueCardText:
 	cont "don't have it."
 	done
 
-RadioTower2FBuenaOfferPhoneNumberText:
-	text "BUENA: Oh! Your"
-	line "BLUE CARD reached"
-
-	para "{d:BLUE_CARD_POINT_CAP} points today!"
-	line "That's so wild!"
-
-	para "Hmm… There isn't a"
-	line "prize for hitting"
-	cont "{d:BLUE_CARD_POINT_CAP} points, but…"
-
-	para "You came by so"
-	line "often, <PLAY_G>."
-
-	para "I'll make you a"
-	line "special deal!"
-
-	para "How would you like"
-	line "my phone number?"
-	done
-
-RadioTower2FBuenaOfferNumberAgainText:
-	text "BUENA: <PLAY_G>,"
-	line "do you want to"
-
-	para "register my phone"
-	line "number?"
-	done
-
-RadioTower2FRegisteredBuenasNumberText:
-	text "<PLAYER> registered"
-	line "BUENA's number."
-	done
-
-RadioTower2FBuenaCallMeText:
-	text "BUENA: I look"
-	line "forward to hearing"
-	cont "from you!"
-	done
-
-RadioTower2FBuenaSadRejectedText:
-	text "BUENA: Aww… It's a"
-	line "special prize…"
-	done
-
-RadioTower2FBuenaYourPhoneIsFullText:
-	text "BUENA: <PLAY_G>,"
-	line "your phone list"
-
-	para "has no room left"
-	line "for me…"
-	done
+;RadioTower2FBuenaBlueCardFullDealText:
+;	text "BUENA: Oh! Your"
+;	line "BLUE CARD reached"
+;
+;	para "{d:BLUE_CARD_POINT_CAP} points today!"
+;	line "That's so wild!"
+;
+;	para "Hmm… I'll give you"
+;	line "special prize!"
+;
+;	para "How about trading"
+;	line "all your points"
+;	cont "for 4x SACRED ASH?"
+;	done
 
 RadioTower2FBuenaReceptionistPointsForPrizesText:
 	text "You can cash in"

@@ -1,34 +1,24 @@
-AnthonyAskNumber1Text:
+AnthonyAskNumberText:
 	text "By the way, I'm a"
 	line "HIKER, so I often"
 
 	para "go to mountains"
 	line "and caves."
 
-	para "I occasionally see"
-	line "rare #MON."
-
-	para "I could call you"
-	line "the next time I"
-	cont "see one."
+	para "I thought I was"
+	line "tough but you're"
+	cont "even tougher!"
 
 	para "Feel like swapping"
 	line "phone numbers?"
-	done
 
-AnthonyAskNumber2Text:
-	text "I could call you"
-	line "when I see some"
-	cont "rare #MON."
-
-	para "Feel like swapping"
-	line "phone numbers?"
+	para "I'd love to battle"
+	line "you again!"
 	done
 
 AnthonyNumberAcceptedText:
-	text "Be patient. I'll"
-	line "find some rare"
-	cont "#MON for you!"
+	text "I'll call you when"
+	line "I'm stronger!"
 	done
 
 AnthonyNumberDeclinedText:
@@ -37,16 +27,17 @@ AnthonyNumberDeclinedText:
 	cont "the mountains…"
 	done
 
-AnthonyPhoneFullText:
-	text "Your phone's full."
-
-	para "It can't register"
-	line "my phone number."
-	done
-
 AnthonyRematchText:
 	text "All righty, then!"
 
 	para "My #MON and I"
 	line "are raring to go!"
+	done
+
+AnthonyPackFullText:
+	text "You're out of"
+	line "space… I'll hold"
+	
+	para "onto it until you"
+	line "do."
 	done

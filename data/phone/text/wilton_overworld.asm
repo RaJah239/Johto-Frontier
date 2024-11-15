@@ -12,14 +12,6 @@ WiltonAskNumber1Text:
 	line "What's the number?"
 	done
 
-WiltonAskNumber2Text:
-	text "If I snag an item"
-	line "while I'm fishing,"
-
-	para "it's yours. What's"
-	line "your number?"
-	done
-
 WiltonNumberAcceptedText:
 	text "If I snag anything"
 	line "good, I'll be sure"
@@ -32,14 +24,9 @@ WiltonNumberDeclinedText:
 	cont "change of heart."
 	done
 
-WiltonPhoneFullText:
-	text "You can't register"
-	line "another number."
-	done
-
 WiltonRematchText:
 	text "Argh! You startled"
-	line "POLIWAG into"
+	line "the #MON into"
 	cont "fleeing again!"
 	done
 

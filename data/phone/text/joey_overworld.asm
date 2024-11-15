@@ -1,16 +1,4 @@
-JoeyAskNumber1Text:
-	text "Listen, can I get"
-	line "your phone number?"
-
-	para "I'll ring you for"
-	line "some battles."
-
-	para "I'm a rookie too, "
-	line "so I think it'd be"
-	cont "a good motivator."
-	done
-
-JoeyAskNumber2Text:
+JoeyAskNumberText:
 	text "Can I get your"
 	line "phone number?"
 
@@ -34,11 +22,6 @@ JoeyNumberDeclinedText:
 	line "to you again!"
 	done
 
-JoeyPhoneFullText:
-	text "Huh, what? Your"
-	line "phone's full."
-	done
-
 JoeyRematchText:
 	text "I've been waiting!"
 	line "Let's battle now!"
@@ -50,22 +33,4 @@ JoeyPackFullText:
 
 	para "Well, we'll leave"
 	line "it till next time."
-	done
-
-JoeyRematchGiftText:
-	text "And yet another"
-	line "loss…"
-
-	para "No doubt about"
-	line "it--you're tough."
-
-	para "Being beaten this"
-	line "often actually"
-	cont "feels good now!"
-
-	para "Here, take this. "
-	line "Use it to get even"
-
-	para "tougher. That will"
-	line "toughen me up too!"
 	done

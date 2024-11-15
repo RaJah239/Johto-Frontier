@@ -1,4 +1,4 @@
-WadeAskNumber1Text:
+WadeAskNumberText:
 	text "You're awesome!"
 	line "I like you!"
 
@@ -6,18 +6,6 @@ WadeAskNumber1Text:
 	line "here every day."
 
 	para "When I'm in the"
-	line "grass, I find all"
-	cont "kinds of BERRIES."
-
-	para "If you'd like,"
-	line "I'll share some."
-
-	para "Could I get your"
-	line "phone number?"
-	done
-
-WadeAskNumber2Text:
-	text "When I'm in the"
 	line "grass, I find all"
 	cont "kinds of BERRIES."
 
@@ -42,12 +30,6 @@ WadeNumberDeclinedText:
 	cont "get my number."
 	done
 
-WadePhoneFullText:
-	text "Your phone list"
-	line "has no room for my"
-	cont "number."
-	done
-
 WadeRematchText:
 	text "I was waiting for"
 	line "you. Let's battle!"
@@ -55,10 +37,7 @@ WadeRematchText:
 
 WadeGiftText:
 	text "Good to see you!"
-	line "See? This is what"
-
-	para "I found."
-	line "It's for you!"
+	line "This is for you!"
 	done
 
 WadePackFullText:

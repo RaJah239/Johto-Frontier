@@ -24,6 +24,8 @@ TrainerSailorHuey:
 .Script:
 	loadvar VAR_CALLERID, PHONE_SAILOR_HUEY
 	opentext
+	checkevent EVENT_GOT_PROTEIN_FROM_HUEY
+	iftrue .RematchGift
 	checkflag ENGINE_HUEY_READY_FOR_REMATCH
 	iftrue .WantsBattle
 	checkcellnum PHONE_SAILOR_HUEY
@@ -31,14 +33,13 @@ TrainerSailorHuey:
 	checkevent EVENT_HUEY_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskedBefore
 	setevent EVENT_HUEY_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
+	scall .AskNumber
 	sjump .AskForNumber
 
 .AskedBefore:
-	scall .AskNumber2
+	scall .AskNumber
 .AskForNumber:
 	askforphonenumber PHONE_SAILOR_HUEY
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
 	gettrainername STRING_BUFFER_3, SAILOR, HUEY1
 	scall .RegisteredNumber
@@ -78,35 +79,25 @@ TrainerSailorHuey:
 	startbattle
 	reloadmapafterbattle
 	clearflag ENGINE_HUEY_READY_FOR_REMATCH
-	checkevent EVENT_HUEY_PROTEIN
-	iftrue .HasProtein
-	checkevent EVENT_GOT_PROTEIN_FROM_HUEY
-	iftrue .SkipGift
-	scall .RematchGift
-	verbosegiveitem PROTEIN
-	iffalse .PackFull
-	setevent EVENT_GOT_PROTEIN_FROM_HUEY
-	sjump .NumberAccepted
-
-.SkipGift:
-	end
-
-.HasProtein:
 	opentext
 	writetext SailorHueyGiveProteinText
 	waitbutton
 	verbosegiveitem PROTEIN
 	iffalse .PackFull
-	clearevent EVENT_HUEY_PROTEIN
-	setevent EVENT_GOT_PROTEIN_FROM_HUEY
-	sjump .NumberAccepted
-
-.AskNumber1:
-	jumpstd AskNumber1MScript
+	closetext
 	end
 
-.AskNumber2:
-	jumpstd AskNumber2MScript
+.RematchGift
+	writetext SailorHueyGiveProteinAgainText
+	waitbutton
+	verbosegiveitem PROTEIN
+	iffalse .PackFull
+	clearevent EVENT_GOT_PROTEIN_FROM_HUEY
+	closetext
+	end	
+
+.AskNumber:
+	jumpstd AskNumber1MScript
 	end
 
 .RegisteredNumber:
@@ -121,21 +112,13 @@ TrainerSailorHuey:
 	jumpstd NumberDeclinedMScript
 	end
 
-.PhoneFull:
-	jumpstd PhoneFullMScript
-	end
-
 .Rematch:
 	jumpstd RematchMScript
 	end
 
 .PackFull:
-	setevent EVENT_HUEY_PROTEIN
+	setevent EVENT_GOT_PROTEIN_FROM_HUEY
 	jumpstd PackFullMScript
-	end
-
-.RematchGift:
-	jumpstd RematchGiftMScript
 	end
 
 SailorHueySeenText:
@@ -175,9 +158,14 @@ SailorHueyGiveProteinText:
 	text "Man! You're as"
 	line "tough as ever!"
 
-	para "Anyway, here's"
-	line "that medicine from"
-	cont "before."
+	para "Anyway, take this!"
+	done
+
+SailorHueyGiveProteinAgainText:
+	text "Here's the PROTEIN"
+	line "from last time."
+	
+	para "Made space right?"
 	done
 
 OlivineLighthouse2F_MapEvents:

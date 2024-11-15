@@ -1,4 +1,4 @@
-VanceAskNumber1Text:
+VanceAskNumberText:
 	text "You know, you are"
 	line "really strong."
 
@@ -12,18 +12,6 @@ VanceAskNumber1Text:
 	line "more battles!"
 	done
 
-VanceAskNumber2Text:
-	text "I want to battle"
-	line "tough trainers as"
-	cont "often as I can!"
-
-	para "Could I get your"
-	line "number?"
-
-	para "Let's meet up for"
-	line "more battles!"
-	done
-
 VanceNumberAcceptedText:
 	text "Don't forget to"
 	line "come see me when I"
@@ -31,18 +19,8 @@ VanceNumberAcceptedText:
 	done
 
 VanceNumberDeclinedText:
-	text "A bird-user friend"
-	line "isn't a bad thing"
-	cont "to have, I think…"
-
-	para "Won't you"
+	text "Won't you"
 	line "reconsider?"
-	done
-
-VancePhoneFullText:
-	text "Your phone's out"
-	line "of memory. Delete"
-	cont "a number for me!"
 	done
 
 VanceRematchText:
@@ -56,18 +34,4 @@ VancePackFullText:
 
 	para "I'll give it to"
 	line "you next time!"
-	done
-
-VanceRematchGiftText:
-	text "You are really,"
-	line "really strong!"
-
-	para "Thanks for taking"
-	line "me on so often--I"
-
-	para "learned a whole"
-	line "lot from you."
-
-	para "I know! This will"
-	line "do as my thanks!"
 	done

@@ -24,6 +24,8 @@ TrainerBirdKeeperVance1:
 .Script:
 	loadvar VAR_CALLERID, PHONE_BIRDKEEPER_VANCE
 	opentext
+	checkevent EVENT_GOT_CARBOS_FROM_VANCE
+	iftrue .ReceivedCarbosBefore
 	checkflag ENGINE_VANCE_READY_FOR_REMATCH
 	iftrue .WantsBattle
 	checkcellnum PHONE_BIRDKEEPER_VANCE
@@ -33,14 +35,13 @@ TrainerBirdKeeperVance1:
 	writetext BirdKeeperVanceLegendaryBirdsText
 	promptbutton
 	setevent EVENT_VANCE_ASKED_FOR_PHONE_NUMBER
-	scall Route44AskNumber1M
+	scall Route44AskNumber
 	sjump .AskForNumber
 
 .AskedAlready:
-	scall Route44AskNumber2M
+	scall Route44AskNumber
 .AskForNumber:
 	askforphonenumber PHONE_BIRDKEEPER_VANCE
-	ifequal PHONE_CONTACTS_FULL, Route44PhoneFullM
 	ifequal PHONE_CONTACT_REFUSED, Route44NumberDeclinedM
 	gettrainername STRING_BUFFER_3, BIRD_KEEPER, VANCE1
 	scall Route44RegisteredNumberM
@@ -56,7 +57,6 @@ TrainerBirdKeeperVance1:
 	loadtrainer BIRD_KEEPER, VANCE1
 	startbattle
 	reloadmapafterbattle
-	clearflag ENGINE_VANCE_READY_FOR_REMATCH
 	end
 
 .LoadFight1:
@@ -71,35 +71,30 @@ TrainerBirdKeeperVance1:
 	startbattle
 	reloadmapafterbattle
 	clearflag ENGINE_VANCE_READY_FOR_REMATCH
-	checkevent EVENT_VANCE_CARBOS
-	iftrue .Carbos
-	checkevent EVENT_GOT_CARBOS_FROM_VANCE
-	iftrue .ReceivedCarbosBefore
-	scall Route44RematchGiftM
-	verbosegiveitem CARBOS
-	iffalse VancePackFull
-	setevent EVENT_GOT_CARBOS_FROM_VANCE
-	sjump Route44NumberAcceptedM
-
-.ReceivedCarbosBefore:
-	end
-
-.Carbos:
 	opentext
-	writetext BirdKeeperVance2BeatenText
+	writetext VanceRematchGiftText
 	waitbutton
 	verbosegiveitem CARBOS
-	iffalse VancePackFull
-	clearevent EVENT_VANCE_CARBOS
-	setevent EVENT_GOT_CARBOS_FROM_VANCE
-	sjump Route44NumberAcceptedM
-
-Route44AskNumber1M:
-	jumpstd AskNumber1MScript
+	iffalse .PackFull
+	closetext
 	end
 
-Route44AskNumber2M:
-	jumpstd AskNumber2MScript
+.ReceivedCarbosBefore
+	writetext VanceRematchGiftAgainText
+	waitbutton
+	verbosegiveitem CARBOS
+	iffalse .PackFull
+	clearevent EVENT_GOT_CARBOS_FROM_VANCE
+	closetext
+	end
+
+.PackFull:
+	setevent EVENT_GOT_CARBOS_FROM_VANCE
+	jumpstd PackFullMScript
+	end
+
+Route44AskNumber:
+	jumpstd AskNumber1MScript
 	end
 
 Route44RegisteredNumberM:
@@ -112,10 +107,6 @@ Route44NumberAcceptedM:
 
 Route44NumberDeclinedM:
 	jumpstd NumberDeclinedMScript
-	end
-
-Route44PhoneFullM:
-	jumpstd PhoneFullMScript
 	end
 
 Route44RematchM:
@@ -135,10 +126,6 @@ VancePackFull:
 	jumpstd PackFullMScript
 	end
 
-Route44RematchGiftM:
-	jumpstd RematchGiftMScript
-	end
-
 TrainerPsychicPhil:
 	trainer PSYCHIC_T, PHIL, EVENT_BEAT_PSYCHIC_PHIL, PsychicPhilSeenText, PsychicPhilBeatenText, 0, .Script
 
@@ -156,10 +143,10 @@ TrainerFisherWilton1:
 .Script:
 	loadvar VAR_CALLERID, PHONE_FISHER_WILTON
 	opentext
-	checkflag ENGINE_WILTON_READY_FOR_REMATCH
-	iftrue .WantsBattle
 	checkflag ENGINE_WILTON_HAS_ITEM
 	iftrue .HasItem
+	checkflag ENGINE_WILTON_READY_FOR_REMATCH
+	iftrue .WantsBattle
 	checkcellnum PHONE_FISHER_WILTON
 	iftrue Route44NumberAcceptedM
 	checkevent EVENT_WILTON_ASKED_FOR_PHONE_NUMBER
@@ -167,14 +154,13 @@ TrainerFisherWilton1:
 	writetext FisherWiltonHugePoliwagText
 	promptbutton
 	setevent EVENT_WILTON_ASKED_FOR_PHONE_NUMBER
-	scall Route44AskNumber1M
+	scall Route44AskNumber1
 	sjump .AskForNumber
 
 .AskedAlready:
-	scall Route44AskNumber2M
+	scall Route44AskNumber1
 .AskForNumber:
 	askforphonenumber PHONE_FISHER_WILTON
-	ifequal PHONE_CONTACTS_FULL, Route44PhoneFullM
 	ifequal PHONE_CONTACT_REFUSED, Route44NumberDeclinedM
 	gettrainername STRING_BUFFER_3, FISHER, WILTON1
 	scall Route44RegisteredNumberM
@@ -209,31 +195,20 @@ TrainerFisherWilton1:
 
 .HasItem:
 	scall Route44GiftM
-	checkevent EVENT_WILTON_HAS_ULTRA_BALL
-	iftrue .UltraBall
-	checkevent EVENT_WILTON_HAS_GREAT_BALL
-	iftrue .GreatBall
-	checkevent EVENT_WILTON_HAS_POKE_BALL
-	iftrue .PokeBall
-.UltraBall:
 	verbosegiveitem ULTRA_BALL
-	iffalse .Route44PackFullM
-	sjump .ItemReceived
-
-.GreatBall:
-	verbosegiveitem GREAT_BALL
-	iffalse .Route44PackFullM
-	sjump .ItemReceived
-
-.PokeBall:
-	verbosegiveitem POKE_BALL
-	iffalse .Route44PackFullM
-.ItemReceived:
+	iffalse .BagFull
 	clearflag ENGINE_WILTON_HAS_ITEM
-	sjump Route44NumberAcceptedM
+	closetext
+	end
 
-.Route44PackFullM:
-	sjump Route44PackFullM
+.BagFull:
+	setflag ENGINE_WILTON_HAS_ITEM
+	jumpstd PackFullMScript
+	end
+
+Route44AskNumber1:
+	jumpstd AskNumber1MScript
+	end
 
 TrainerFisherEdgar:
 	trainer FISHER, EDGAR, EVENT_BEAT_FISHER_EDGAR, FisherEdgarSeenText, FisherEdgarBeatenText, 0, .Script
@@ -299,7 +274,7 @@ Route44HiddenElixer:
 
 FisherWilton1SeenText:
 	text "Aack! You made me"
-	line "lose a POLIWAG!"
+	line "lose a #MON!"
 
 	para "What are you going"
 	line "to do about it?"
@@ -311,7 +286,7 @@ FisherWilton1BeatenText:
 	done
 
 FisherWiltonHugePoliwagText:
-	text "That POLIWAG that"
+	text "That #MON that"
 	line "got away…"
 	cont "It was huge."
 
@@ -367,15 +342,17 @@ BirdKeeperVanceLegendaryBirdsText:
 	cont "birds, though."
 	done
 
-BirdKeeperVance2BeatenText:
-	text "Why can't I ever"
-	line "beat you?"
+VanceRematchGiftText:
+	text "Thanks for taking"
+	line "me on so often!"
 
-	para "Oh yeah, here you"
-	line "go. It's that gift"
+	para "I know! This will"
+	line "do as my thanks!"
+	done
 
-	para "I couldn't give"
-	line "you last time."
+VanceRematchGiftAgainText:
+	text "Can you take my"
+	line "gift now? Here!"
 	done
 
 PsychicPhilSeenText:

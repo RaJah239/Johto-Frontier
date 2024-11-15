@@ -1,62 +1,9 @@
-WadeAreYourMonGrowingText:
-	text "Are your #MON"
-	line "growing?"
-
-	para "My #MON are"
-	line "growing a bit too"
-
-	para "quickly for me."
-	line "It's overwhelming!"
-
-	para "@"
-	text_ram wStringBuffer4
-	text "'s grow-"
-	line "ing especially"
-
-	para "quickly. I think"
-	line "it'll get tough."
-	done
-
-WadeDefeatedMonText:
-	text "Oh yeah, we KO'd a"
-	line "wild @"
-	text_ram wStringBuffer4
-	text_start
-	para "with one hit a"
-	line "while back."
-
-	para "It went down so"
-	line "easily, I felt a"
-
-	para "little sorry for"
-	line "the poor thing."
-	done
-
-WadeLostAMonText:
-	text "Oh yeah, a wild"
-	line "@"
-	text_ram wStringBuffer4
-	text " got"
-
-	para "away from me at"
-	line "the last second."
-
-	para "I know it's a"
-	line "common #MON…"
-
-	para "But it does annoy"
-	line "me that it got"
-
-	para "away when I almost"
-	line "had it."
-	done
-
 WadeBattleRematchText:
 	text "Do you feel like a"
 	line "#MON battle?"
 
-	para "It won't be like"
-	line "last time!"
+	para "I think I am ready"
+	line "for you now!"
 
 	para "@"
 	text_ram wStringBuffer5
@@ -71,26 +18,10 @@ WadeHangUpText:
 	text "See you later!"
 	done
 
-WadeBugCatchingContestText:
-	text "The Bug-Catching"
-	line "Contest is at the"
-
-	para "NATIONAL PARK"
-	line "today."
-
-	para "Are you going,"
-	line "<PLAY_G>?"
-
-	para "I'm trying to make"
-	line "up my mind."
-	done
-
 WadeFoundItemText:
-	text "I found all kinds"
-	line "of BERRIES. If you"
-
-	para "want, I'll share"
-	line "some with you."
+	text "I found an awesome"
+	line "BERRY. If you want"
+	cont "it, drop on by."
 
 	para "I'll be waiting on"
 	line "@"

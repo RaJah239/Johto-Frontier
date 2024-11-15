@@ -90,6 +90,8 @@ TrainerSchoolboyJack1:
 .Script:
 	loadvar VAR_CALLERID, PHONE_SCHOOLBOY_JACK
 	opentext
+	checkevent EVENT_JACK_ZINC
+	iftrue .RematchGift
 	checkflag ENGINE_JACK_READY_FOR_REMATCH
 	iftrue .Rematch
 	checkcellnum PHONE_SCHOOLBOY_JACK
@@ -99,14 +101,13 @@ TrainerSchoolboyJack1:
 	writetext SchoolboyJackTradeMonText
 	promptbutton
 	setevent EVENT_JACK_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
+	scall .AskNumber
 	sjump .RequestNumber
 
 .AskAgain:
-	scall .AskNumber2
+	scall .AskNumber
 .RequestNumber:
 	askforphonenumber PHONE_SCHOOLBOY_JACK
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
 	gettrainername STRING_BUFFER_3, SCHOOLBOY, JACK1
 	scall .RegisteredNumber
@@ -155,14 +156,30 @@ TrainerSchoolboyJack1:
 	startbattle
 	reloadmapafterbattle
 	clearflag ENGINE_JACK_READY_FOR_REMATCH
+	opentext
+	writetext SchoolboyJackZincText
+	waitbutton
+	verbosegiveitem ZINC
+	iffalse .PackFull
+	closetext
 	end
 
-.AskNumber1:
+.RematchGift
+	writetext SchoolboyJackZincAgainText
+	waitbutton
+	verbosegiveitem ZINC
+	iffalse .PackFull
+	clearevent EVENT_JACK_ZINC
+	closetext
+	end
+
+.PackFull:
+	setevent EVENT_JACK_ZINC
+	jumpstd PackFullMScript
+	end
+
+.AskNumber:
 	jumpstd AskNumber1MScript
-	end
-
-.AskNumber2:
-	jumpstd AskNumber2MScript
 	end
 
 .RegisteredNumber:
@@ -175,10 +192,6 @@ TrainerSchoolboyJack1:
 
 .NumberDeclined:
 	jumpstd NumberDeclinedMScript
-	end
-
-.PhoneFull:
-	jumpstd PhoneFullMScript
 	end
 
 .RematchStd:
@@ -214,14 +227,13 @@ TrainerPokefanfBeverly1:
 	writetext PokefanBeverlyCuteMonText
 	promptbutton
 	setevent EVENT_BEVERLY_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
+	scall .AskNumber
 	sjump .RequestNumber
 
 .AskAgain:
-	scall .AskNumber2
+	scall .AskNumber
 .RequestNumber:
 	askforphonenumber PHONE_POKEFAN_BEVERLY
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
 	gettrainername STRING_BUFFER_3, POKEFANF, BEVERLY1
 	scall .RegisteredNumber
@@ -232,7 +244,8 @@ TrainerPokefanfBeverly1:
 	verbosegiveitem NUGGET
 	iffalse .NoRoom
 	clearflag ENGINE_BEVERLY_HAS_NUGGET
-	sjump .NumberAccepted
+	closetext
+	end
 
 .NoRoom:
 	sjump .PackFull
@@ -243,12 +256,8 @@ TrainerPokefanfBeverly1:
 	closetext
 	end
 
-.AskNumber1:
+.AskNumber:
 	jumpstd AskNumber1FScript
-	end
-
-.AskNumber2:
-	jumpstd AskNumber2FScript
 	end
 
 .RegisteredNumber:
@@ -261,10 +270,6 @@ TrainerPokefanfBeverly1:
 
 .NumberDeclined:
 	jumpstd NumberDeclinedFScript
-	end
-
-.PhoneFull:
-	jumpstd PhoneFullFScript
 	end
 
 .Gift:
@@ -420,6 +425,19 @@ SchoolboyJackTradeMonText:
 	line "level up faster."
 	done
 
+SchoolboyJackZincText:
+	text "What a practical"
+	line "battle!"
+	
+	para "Take this won't"
+	line "you!"
+	done
+
+SchoolboyJackZincAgainText:
+	text "Hope you made room"
+	line "for it. Here!"
+	done
+
 PokefanfBeverly1SeenText:
 	text "My #MON are"
 	line "simply darling."
@@ -468,8 +486,8 @@ PokefanFBeverlyMarillFriendText:
 	para "I find them very"
 	line "endearing."
 
-	para "Oh, I wish for a"
-	line "MARILL of my own…"
+	para "Oh, I wish to see"
+	line "one soon…"
 	done
 
 LassKriseSeenText:

@@ -1,46 +1,5 @@
-ToddLooksCuteLikeMeText:
-	text "My @"
-	text_ram wStringBuffer4
-	text " is"
-	line "looking more and"
-
-	para "more like me. It's"
-	line "getting cuter!"
-	done
-
-ToddDefeatedMonText:
-	text "And, you know?"
-
-	para "Now we can KO"
-	line "@"
-	text_ram wStringBuffer4
-	text " easily."
-
-	para "I should challenge"
-	line "the GOLDENROD GYM."
-	done
-
-ToddLostAMonText:
-	text "And, you know?"
-	line "We just failed to"
-
-	para "beat @"
-	text_ram wStringBuffer4
-	text " by"
-	line "a tiny margin."
-
-	para "I'm guessing my"
-	line "#MON's levels"
-
-	para "aren't high enough"
-	line "yet…"
-	done
-
 ToddBattleRematchText:
-	text "You must be a lot"
-	line "better now, huh?"
-
-	para "How about showing"
+	text "How about showing"
 	line "me your technique"
 
 	para "in a real battle"
@@ -70,16 +29,7 @@ ToddDepartmentStoreBargainSaleText:
 
 	para "Don't miss this"
 	line "GOLDENROD chance!"
-
-	para "Huh? I sound like"
-	line "a huckster?"
-
-	para "Well, yeah. I was"
-	line "mimicking them…"
-
-	para "Anyway, you've got"
-	line "to get there as"
-	cont "soon as you can!"
+	cont "Get over here now!"
 	done
 
 ToddSavingUpForBargainSaleText:
@@ -91,8 +41,9 @@ ToddSavingUpForBargainSaleText:
 	done
 
 ToddLookingForwardToBattleText:
-	text "Where are you?"
-
+	text "TODD here."
+	line "Hi <PLAY_G>!"
+	
 	para "Let's have our"
 	line "battle soon!"
 

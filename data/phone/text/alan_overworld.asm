@@ -1,4 +1,4 @@
-AlanAskNumber1Text:
+AlanAskNumberText:
 	text "Reading textbooks"
 	line "is worthwhile"
 	cont "every so often."
@@ -18,14 +18,6 @@ AlanAskNumber1Text:
 	line "phone number?"
 	done
 
-AlanAskNumber2Text:
-	text "If I find some-"
-	line "thing, it's yours."
-
-	para "So may I have your"
-	line "phone number?"
-	done
-
 AlanNumberAcceptedText:
 	text "I'll call you as"
 	line "soon as I find"
@@ -40,11 +32,6 @@ AlanNumberDeclinedText:
 
 	para "break to call you"
 	line "when I'm studying…"
-	done
-
-AlanPhoneFullText:
-	text "There's no room"
-	line "for my number."
 	done
 
 AlanRematchText:

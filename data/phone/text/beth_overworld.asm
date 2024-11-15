@@ -1,4 +1,4 @@
-BethAskNumber1Text:
+BethAskNumberText:
 	text "It's been a while"
 	line "since I lost…"
 
@@ -9,19 +9,6 @@ BethAskNumber1Text:
 	line "again sometime."
 
 	para "By challenging a"
-	line "tough trainer like"
-
-	para "you, I think I can"
-	line "get better too."
-
-	para "So how about it?"
-
-	para "Would you give me"
-	line "your phone number?"
-	done
-
-BethAskNumber2Text:
-	text "By challenging a"
 	line "tough trainer like"
 
 	para "you, I think I can"
@@ -45,12 +32,15 @@ BethNumberDeclinedText:
 	line "change your mind."
 	done
 
-BethPhoneFullText:
-	text "Oh no. Your phone"
-	line "is out of memory."
-	done
-
 BethRematchText:
 	text "You sure kept me"
 	line "waiting! Let's go!"
+	done
+
+BethPackFullText:
+	text "Your PACK's all"
+	line "filled up!"
+	
+	para "I'll keep it until"
+	line "you've made space."
 	done

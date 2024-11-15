@@ -1,4 +1,4 @@
-TullyAskNumber1Text:
+TullyAskNumberText:
 	text "Hey, you're trying"
 	line "to be the ultimate"
 
@@ -6,17 +6,6 @@ TullyAskNumber1Text:
 	line "we're comrades!"
 
 	para "If I find any more"
-	line "items by the"
-
-	para "water, I'll give"
-	line "you some."
-
-	para "Just give me your"
-	line "phone number."
-	done
-
-TullyAskNumber2Text:
-	text "If I find any more"
 	line "items by the"
 
 	para "water, I'll give"

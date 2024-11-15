@@ -1,37 +1,3 @@
-AlanGettingStrongerText:
-	text "My @"
-	text_ram wStringBuffer4
-	text "'s"
-	line "getting stronger,"
-
-	para "exactly as I"
-	line "calculated!"
-	done
-
-AlanDefeatedMonText:
-	text "By the way, we"
-	line "knocked out a wild"
-
-	para "@"
-	text_ram wStringBuffer4
-	text " just"
-	line "the other day."
-
-	para "Studying up in"
-	line "advance worked!"
-	done
-
-AlanLostAMonText:
-	text "By the way, a wild"
-	line "@"
-	text_ram wStringBuffer4
-	text " escaped"
-	cont "on me yesterday."
-
-	para "A computational"
-	line "error on my part…"
-	done
-
 AlanBattleRematchText:
 	text "I've studied quite"
 	line "a bit since then,"

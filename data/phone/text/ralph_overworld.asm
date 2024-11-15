@@ -1,58 +1,35 @@
-RalphAskNumber1Text:
+RalphAskNumberText:
 	text "Don't young people"
 	line "fish anymore?"
 
-	para "I've seen rare"
-	line "#MON while I've"
-	cont "been fishing…"
-
-	para "You young people"
-	line "like that, right?"
+	para "I also battle!"
 
 	para "Want to trade"
 	line "phone numbers?"
 
-	para "I'll let you know"
-	line "if I see anything."
-	done
-
-RalphAskNumber2Text:
-	text "Hm? So you do want"
-	line "me to phone if I"
-	cont "see rare #MON?"
+	para "I'll call you when"
+	line "I'm up for one."
 	done
 
 RalphNumberAcceptedText:
-	text "Yep, phone if I"
-	line "see rare #MON."
-
-	para "Don't worry, I"
-	line "won't forget!"
+	text "Yep, I'll phone"
+	line "you sometime soon."
 	done
 
 RalphNumberDeclinedText:
-	text "Oh…"
-	line "My own kids won't"
-
-	para "even give me their"
-	line "phone numbers…"
-
-	para "Is that how young"
-	line "people are today?"
-	done
-
-RalphPhoneFullText:
-	text "Your phone's"
-	line "memory is full."
-
-	para "It seems that"
-	line "young people all"
-	cont "have #GEAR."
+	text "Oh… Let me know if"
+	line "change your mind…"
 	done
 
 RalphRematchText:
-	text "Hey, kid!"
+	text "Hey, kid! I won't"
+	line "lose today!"
+	done
 
-	para "No losing for me"
-	line "this day!"
+RalphPackFullText:
+	text "Your PACK's all"
+	line "filled kiddo!"
+	
+	para "Return for it when"
+	line "you've made space."
 	done

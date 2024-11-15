@@ -1,4 +1,4 @@
-ChadAskNumber1Text:
+ChadAskNumberText:
 	text "Huh? Is that thing"
 	line "a #DEX? Have"
 	cont "you met PROF.OAK?"
@@ -6,51 +6,45 @@ ChadAskNumber1Text:
 	para "Huh? You have? "
 	line "That's way cool!"
 
-	para "I have a dream of"
-	line "becoming a #MON"
-
-	para "researcher like"
-	line "PROF.OAK."
+	para "Did you know he"
+	line "used to be a great"
+	
+	para "trainer back in"
+	line "his heyday?"
+	
+	para "He is also skilled"
+	line "at identifying"
+	
+	para "trainers with lots"
+	line "of potential!"
+	
+	para "You must be one"
+	line "with considerable"
+	cont "latent talent!"
 
 	para "May I please have"
 	line "your phone number?"
 
-	para "We should chat"
-	line "about PROF.OAK."
-
-	para "I'm sure it will"
-	line "be loads of fun!"
-	done
-
-ChadAskNumber2Text:
-	text "May I please have"
-	line "your phone number?"
-
-	para "We should chat"
-	line "about PROF.OAK."
-
-	para "I'm sure it will"
-	line "be loads of fun!"
+	para "I'd love to battle"
+	line "you again to see"
+	cont "your progress!"
 	done
 
 ChadNumberAcceptedText:
-	text "You must listen to"
-	line "PROF.OAK'S #MON"
-	cont "TALK, right?"
+	text "I'll call you soon"
+	line "for battles!"
 	done
 
 ChadNumberDeclinedText:
-	text "Oh… I wish I had a"
-	line "chance to meet"
-	cont "PROF.OAK…"
-	done
-
-ChadPhoneFullText:
-	text "Your phone list is"
-	line "completely full!"
+	text "Oh… Alright…"
 	done
 
 ChadRematchText:
 	text "I've been waiting!"
 	line "Let's battle now!"
+	done
+
+ChadPackFullText:
+	text "You don't have"
+	line "room for a spoon?"
 	done

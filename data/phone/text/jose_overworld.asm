@@ -1,26 +1,4 @@
-JoseAskNumber1Text:
-	text "If my @"
-	text_ram wStringBuffer4
-	text_start
-	line "sees anything"
-
-	para "pretty, it goes"
-	line "and gets it."
-
-	para "Do you like pretty"
-	line "things?"
-
-	para "I could share if"
-	line "it gets some more."
-
-	para "What's your phone"
-	line "number? I'll call."
-
-	para "Don't expect a"
-	line "whole lot, OK?"
-	done
-
-JoseAskNumber2Text:
+JoseAskNumberText:
 	text "Do you like pretty"
 	line "things?"
 

@@ -1,4 +1,4 @@
-ReenaAskNumber1Text:
+ReenaAskNumberText:
 	text "Not bad…"
 	line "It's something to"
 
@@ -10,15 +10,6 @@ ReenaAskNumber1Text:
 
 	para "You can be my"
 	line "practice partner!"
-	done
-
-ReenaAskNumber2Text:
-	text "Give me your phone"
-	line "number!"
-
-	para "You are going to"
-	line "be my practice"
-	cont "partner!"
 	done
 
 ReenaNumberAcceptedText:
@@ -34,12 +25,16 @@ ReenaNumberDeclinedText:
 	cont "to regret this!"
 	done
 
-ReenaPhoneFullText:
-	text "What? Your phone"
-	line "list has no room!"
-	done
-
 ReenaRematchText:
 	text "What took you?"
 	line "Start right away!"
+	done
+
+ReenaPackFullText:
+	text "How dare you have"
+	line "a full PACK when I"
+	
+	para "have a gift for"
+	line "you!? Go make room"
+	cont "and return!"
 	done

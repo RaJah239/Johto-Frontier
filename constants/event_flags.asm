@@ -263,11 +263,11 @@
 	const_skip
 	const_skip
 	const EVENT_BURNED_TOWER_1F_HIDDEN_ULTRA_BALL
-	const EVENT_GINA_GAVE_LEAF_STONE
-	const EVENT_ALAN_GAVE_FIRE_STONE
-	const EVENT_DANA_GAVE_THUNDERSTONE
-	const EVENT_TULLY_GAVE_WATER_STONE
-	const EVENT_TIFFANY_GAVE_PINK_BOW
+	const EVENT_BRENT_GOLD_BERRY
+	const_skip ; unused in Crystal
+	const_skip ; unused in Crystal
+	const_skip ; unused in Crystal
+	const_skip ; unused in Crystal
 ; Johto Frontier events
 	const EVENT_MET_VIOLET
 	const EVENT_CIANWOOD_GYM_BLOCKER
@@ -369,11 +369,11 @@
 	const EVENT_HUEY_ASKED_FOR_PHONE_NUMBER
 	const_skip ; unused in Crystal
 	const EVENT_GOT_PROTEIN_FROM_HUEY
-	const EVENT_GOT_HP_UP_FROM_JOEY
+	const_skip ; unused in Crystal
 	const EVENT_GOT_CARBOS_FROM_VANCE
-	const EVENT_GOT_IRON_FROM_PARRY
-	const EVENT_GOT_CALCIUM_FROM_ERIN
-	const EVENT_KENJI_ON_BREAK
+	const_skip ; unused in Crystal
+	const_skip ; unused in Crystal
+	const_skip ; unused in Crystal
 	const EVENT_GAVEN_ASKED_FOR_PHONE_NUMBER
 	const_skip ; unused in Crystal
 	const EVENT_BETH_ASKED_FOR_PHONE_NUMBER
@@ -396,7 +396,7 @@
 	const_skip ; unused in Crystal
 	const EVENT_GINA_ASKED_FOR_PHONE_NUMBER
 	const_skip ; unused in Crystal
-	const EVENT_IRWIN_ASKED_FOR_PHONE_NUMBER
+	const_skip ; unused in Crystal
 	const_skip ; unused in Crystal
 	const EVENT_ARNIE_ASKED_FOR_PHONE_NUMBER
 	const_skip ; unused in Crystal
@@ -420,13 +420,13 @@
 	const_skip ; unused in Crystal
 	const EVENT_WILTON_ASKED_FOR_PHONE_NUMBER
 	const_skip ; unused in Crystal
-	const EVENT_KENJI_ASKED_FOR_PHONE_NUMBER
+	const EVENT_CHAD_TWISTEDSPOON
 	const_skip ; unused in Crystal
 	const EVENT_PARRY_ASKED_FOR_PHONE_NUMBER
 	const_skip ; unused in Crystal
 	const EVENT_ERIN_ASKED_FOR_PHONE_NUMBER
-	const EVENT_BUENA_OFFERED_HER_PHONE_NUMBER_NO_BLUE_CARD
-	const_skip ; unused
+	const_skip ; unused in Crystal
+	const EVENT_ARNIE_SILVERPOWDER
 ; Ruins of Alph puzzles
 	const EVENT_SOLVED_HO_OH_PUZZLE
 	const EVENT_SOLVED_KABUTO_PUZZLE
@@ -551,7 +551,7 @@
 	const EVENT_CONTEST_OFFICER_HAS_BERRY
 	const EVENT_FOUGHT_HO_OH
 	const EVENT_FOUGHT_LUGIA
-	const_skip
+	const EVENT_REENA_MOON_STONE
 	const_skip
 	const_skip
 	const_skip
@@ -570,28 +570,28 @@
 	const EVENT_WALL_OPENED_IN_OMANYTE_CHAMBER
 	const EVENT_WALL_OPENED_IN_AERODACTYL_CHAMBER
 	const EVENT_WELCOMED_TO_POKECOM_CENTER
-	const EVENT_WADE_HAS_BERRY
-	const EVENT_WADE_HAS_PSNCUREBERRY
-	const EVENT_WADE_HAS_PRZCUREBERRY
-	const EVENT_WADE_HAS_BITTER_BERRY
-	const EVENT_WILTON_HAS_ULTRA_BALL
-	const EVENT_WILTON_HAS_GREAT_BALL
-	const EVENT_WILTON_HAS_POKE_BALL
+	const EVENT_TODD_MAX_ELIXER
+	const EVENT_ANTHONY_BERRY_JUICE
+	const EVENT_LIZ_MAX_REVIVE
+	const EVENT_RALPH_NUGGET
+	const_skip ; unused
+	const_skip ; unused
+	const_skip ; unused
 	const EVENT_HOLE_IN_BURNED_TOWER
 	const EVENT_FOUGHT_EUSINE
 	const EVENT_KOJI_ALLOWS_YOU_PASSAGE_TO_TIN_TOWER
 	const EVENT_FOUGHT_SUICUNE
 	const EVENT_GOT_RAINBOW_WING
-	const EVENT_HUEY_PROTEIN
+	const EVENT_JACK_ZINC
 	const EVENT_JOEY_HP_UP
 	const EVENT_VANCE_CARBOS
 	const EVENT_PARRY_IRON
 	const EVENT_ERIN_CALCIUM
-	const EVENT_BUENA_OFFERED_HER_PHONE_NUMBER
+	const_skip ; unused
 	const EVENT_MET_BUENA
 	const EVENT_GOT_ODD_EGG
-	const_skip ; unused
-	const_skip ; unused
+	const EVENT_GAVEN_CRYSTAL
+	const EVENT_BETH_RARE_CANDY
 ; Unused: next 167 events
 
 	const_next 1000
@@ -804,7 +804,7 @@
 ; Blackbelt
 	const_skip
 	const EVENT_BEAT_BLACKBELT_YOSHI
-	const EVENT_BEAT_BLACKBELT_KENJI3
+	const_skip ; unused
 	const EVENT_BEAT_BLACKBELT_LAO
 	const EVENT_BEAT_SAILOR_STEELE
 	const EVENT_BEAT_BLACKBELT_KIYO

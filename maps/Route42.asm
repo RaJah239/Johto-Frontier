@@ -40,10 +40,10 @@ TrainerFisherTully:
 .Script:
 	loadvar VAR_CALLERID, PHONE_FISHER_TULLY
 	opentext
-	checkflag ENGINE_TULLY_READY_FOR_REMATCH
-	iftrue .WantsBattle
 	checkflag ENGINE_TULLY_HAS_WATER_STONE
 	iftrue .HasWaterStone
+	checkflag ENGINE_TULLY_READY_FOR_REMATCH
+	iftrue .WantsBattle
 	checkcellnum PHONE_FISHER_TULLY
 	iftrue .NumberAccepted
 	checkevent EVENT_TULLY_ASKED_FOR_PHONE_NUMBER
@@ -51,14 +51,13 @@ TrainerFisherTully:
 	writetext FisherTullyAfterBattleText
 	promptbutton
 	setevent EVENT_TULLY_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
+	scall .AskNumber
 	sjump .AskForNumber
 
 .AskedAlready:
-	scall .AskNumber2
+	scall .AskNumber
 .AskForNumber:
 	askforphonenumber PHONE_FISHER_TULLY
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
 	gettrainername STRING_BUFFER_3, FISHER, TULLY1
 	scall .RegisteredNumber
@@ -105,18 +104,14 @@ TrainerFisherTully:
 	verbosegiveitem WATER_STONE
 	iffalse .NoRoom
 	clearflag ENGINE_TULLY_HAS_WATER_STONE
-	setevent EVENT_TULLY_GAVE_WATER_STONE
-	sjump .NumberAccepted
+	closetext
+	end
 
 .NoRoom:
 	sjump .PackFull
 
-.AskNumber1:
+.AskNumber:
 	jumpstd AskNumber1MScript
-	end
-
-.AskNumber2:
-	jumpstd AskNumber2MScript
 	end
 
 .RegisteredNumber:
@@ -129,10 +124,6 @@ TrainerFisherTully:
 
 .NumberDeclined:
 	jumpstd NumberDeclinedMScript
-	end
-
-.PhoneFull:
-	jumpstd PhoneFullMScript
 	end
 
 .Rematch:

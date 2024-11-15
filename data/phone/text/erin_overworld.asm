@@ -1,4 +1,4 @@
-ErinAskNumber1Text:
+ErinAskNumberText:
 	text "It really made me"
 	line "angry to lose."
 
@@ -10,14 +10,6 @@ ErinAskNumber1Text:
 
 	para "forget! Want to"
 	line "battle me again?"
-	done
-
-ErinAskNumber2Text:
-	text "I want to battle"
-	line "with you again."
-
-	para "Do you want to"
-	line "exchange numbers?"
 	done
 
 ErinNumberAcceptedText:
@@ -32,11 +24,6 @@ ErinNumberDeclinedText:
 
 	para "battle, come see"
 	line "ERIN--that's me!"
-	done
-
-ErinPhoneFullText:
-	text "Oh no. Your phone"
-	line "is all filled up."
 	done
 
 ErinRematchText:
