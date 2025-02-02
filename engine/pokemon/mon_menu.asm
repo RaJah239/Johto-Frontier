@@ -219,6 +219,17 @@ GiveTakePartyMonItem:
 	cp EGG
 	jr z, .cancel
 
+	call GetPartyItemLocation
+	ld a, [hl]
+	and a
+	ld de, .noItemString
+	jr z, .not_holding_anything
+	ld [wNamedObjectIndex], a
+	call GetItemName
+	ld de, wStringBuffer1
+.not_holding_anything
+	hlcoord 1, 16
+	call PlaceString
 	ld hl, GiveTakeItemMenuData
 	call LoadMenuHeader
 	call VerticalMenu
@@ -231,8 +242,11 @@ GiveTakePartyMonItem:
 	ld bc, MON_NAME_LENGTH
 	call CopyBytes
 	ld a, [wMenuCursorY]
-	cp 1
-	jr nz, .take
+	cp 2 ; 2 = take
+	jr z, .take
+	cp 3 ; 3 = swap
+	jr z, .swap
+	; 1 = give
 
 	call LoadStandardMenuHeader
 	call ClearPalettes
@@ -248,9 +262,17 @@ GiveTakePartyMonItem:
 	ld a, 3
 	ret
 
+.swap
+	call SwapPartyItem
+	ld a, 3
+	ret
+
 .cancel
 	ld a, 3
 	ret
+
+.noItemString
+	db "No held item@"
 
 .GiveItem:
 	call GetItemToGive
@@ -339,6 +361,59 @@ PCGiveItem:
 	newfarcall ItemIsMail
 	ret nc
 	jmp ComposeMailMessage
+
+SwapPartyItem:
+	ld a, [wPartyCount]
+	cp 2
+	jr c, .DontSwap
+	ld a, [wCurPartyMon]
+	inc a
+	ld [wSwitchMon], a
+	farcall HoldSwitchmonIcon
+	farcall InitPartyMenuNoCancel
+	ld a, 4
+	ld [wPartyMenuActionText], a
+	farcall WritePartyMenuTilemap
+	farcall PlacePartyMenuText
+	hlcoord 0, 1
+	ld bc, 20 * 2
+	ld a, [wSwitchMon]
+	dec a
+	call AddNTimes
+	ld [hl], "▷"
+	call WaitBGMap
+	call SetDefaultBGPAndOBP
+	call DelayFrame
+	farcall PartyMenuSelect
+	bit 1, b
+	jr c, .DontSwap
+	; wSwitchMon contains first selected pkmn
+	; wCurPartyMon contains second selected pkmn
+	; getting pkmn2 item and putting into stack item addr + item id
+	call GetPartyItemLocation
+	ld a, [hl] ; a pkmn2 contains item
+	push hl
+	push af
+	; getting pkmn 1 item and putting item id into b
+	ld a, [wSwitchMon]
+	dec a
+	ld [wCurPartyMon], a
+	call GetPartyItemLocation
+	ld a, [hl] ; a pkmn1 contains item
+	ld b, a
+	; actual swap
+	pop af
+	ld [hl], a ; pkmn1 get pkm2 item
+	pop hl
+	ld a, b
+	ld [hl], a ; pkmn1 get pkm2 item
+	xor a
+	ld [wPartyMenuActionText], a
+	jmp CancelPokemonAction
+.DontSwap
+	xor a
+	ld [wPartyMenuActionText], a
+	jmp CancelPokemonAction
 
 TryGiveItemToPartymon:
 	call SpeechTextbox
@@ -449,15 +524,16 @@ TakePartyItem:
 
 GiveTakeItemMenuData:
 	db MENU_SPRITE_ANIMS | MENU_BACKUP_TILES ; flags
-	menu_coords 12, 12, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1
+	menu_coords 13, 10, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1
 	dw .Items
 	db 1 ; default option
 
 .Items:
 	db STATICMENU_CURSOR ; flags
-	db 2 ; # items
+	db 3 ; # items
 	db "GIVE@"
 	db "TAKE@"
+	db "SWAP@"
 
 PokemonSwapItemText:
 	text_far _PokemonSwapItemText
@@ -1049,7 +1125,7 @@ MoveScreenLoop:
 	pop bc
 	ld a, [wCurPartyMon]
 	cp b
-	jp z, .joy_loop
+	jmp z, .joy_loop
 	ld de, SFX_SWITCH_POCKETS
 	call PlaySFX
 	jmp MoveScreenLoop
