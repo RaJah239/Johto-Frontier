@@ -760,6 +760,7 @@ LoadGreenPage:
 
 LoadBluePage:
 	call .PlaceOTInfo
+	call StatsScreen_PrintAffection
 	hlcoord 10, 8
 	ld de, SCREEN_WIDTH
 	ld b, 10
@@ -819,6 +820,53 @@ IDNoString:
 
 OTString:
 	db "OT/@"
+
+StatsScreen_PrintAffection:
+	ld de, AffectionString
+	hlcoord 0, 15
+	call PlaceString
+
+	ld a, [wTempMonHappiness]
+	ld de, MaxString
+	cp 255
+	jr z, .got_happiness
+	ld de, PoorString
+	cp 30
+	jr c, .got_happiness
+	ld de, LowString
+	cp 70
+	jr c, .got_happiness
+	ld de, MidString
+	cp 150
+	jr c, .got_happiness
+	ld de, GoodString
+	cp 220
+ 	jr c, .got_happiness
+	ld de, HighString
+.got_happiness
+	hlcoord 1, 16
+	jmp PlaceString
+
+AffectionString:
+	db "CONDITION/@"
+	
+MaxString:
+	db "OVERJOYED@"
+	
+HighString:
+	db "HAPPY@"
+	
+GoodString:
+	db "CONTENT@"
+	
+MidString:
+	db "AVERAGE@"
+	
+LowString:
+	db "UNHAPPY@"
+	
+PoorString:
+	db "MISERABLE@"
 
 StatsScreen_PlaceFrontpic:
 	ld hl, wTempMonDVs
