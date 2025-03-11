@@ -680,6 +680,10 @@ INCLUDE "engine/events/battle_tower/load_trainer.asm"
 INCLUDE "engine/events/odd_egg.asm"
 
 
+SECTION "Custom GFX", ROMX
+INCLUDE "gfx/rangi_gfx.asm"
+
+
 SECTION "Newbox", ROMX
 
 INCLUDE "engine/pc/bills_pc.asm"
