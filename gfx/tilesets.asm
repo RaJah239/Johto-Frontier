@@ -234,9 +234,6 @@ INCBIN "data/tilesets/johto_modern_metatiles.bin"
 TilesetJohtoModernColl::
 INCLUDE "data/tilesets/johto_modern_collision.asm"
 
-TilesetTraditionalHouseGFX::
-INCBIN "gfx/tilesets/traditional_house.2bpp.lz"
-
 TilesetTraditionalHouseMeta::
 INCBIN "data/tilesets/traditional_house_metatiles.bin"
 
@@ -335,3 +332,6 @@ INCBIN "data/tilesets/omanyte_word_room_metatiles.bin"
 
 TilesetAerodactylWordRoomMeta::
 INCBIN "data/tilesets/aerodactyl_word_room_metatiles.bin"
+
+TilesetTraditionalHouseGFX::
+INCBIN "gfx/tilesets/traditional_house.2bpp.lz"
