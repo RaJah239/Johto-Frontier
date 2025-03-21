@@ -968,7 +968,9 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  	jp nz, .toggle_shininess
  	ld a, [hl]
  	and START
+ 	push hl
  	call nz, .toCry
+ 	pop hl
  	ld a, [hl]
  	bit B_BUTTON_F, a
  	jr nz, .sprite_b
