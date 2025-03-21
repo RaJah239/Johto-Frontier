@@ -77,7 +77,6 @@ Pokedex_PlayMonCry_AnimateFrontpic:
 	jr nz, .try_anim
 	bit 5, [hl]
 	jr nz, .finish
-	call DelayFrame
 	ret
 .try_anim
 	farcall SetUpPokeAnim
