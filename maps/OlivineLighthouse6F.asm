@@ -97,9 +97,6 @@ OlivineLighthouseJasmine:
 	closetext
 	end
 
-.Unused: ; unreferenced
-	end
-
 OlivineLighthouseAmphy:
 	faceplayer
 	opentext
