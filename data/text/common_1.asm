@@ -1464,60 +1464,16 @@ _MomJustDoWhatYouCanText::
 	line "you can."
 	done
 
-_DaycareDummyText::
-	text_start
-	done
-
 _DayCareManIntroText::
 	text "I'm the DAY-CARE"
 	line "MAN. Want me to"
 	cont "raise a #MON?"
 	done
 
-_DayCareManIntroEggText::
-	text "I'm the DAY-CARE"
-	line "MAN. Do you know"
-	cont "about EGGS?"
-
-	para "I was raising"
-	line "#MON with my"
-	cont "wife, you see."
-
-	para "We were shocked to"
-	line "find an EGG!"
-
-	para "How incredible is"
-	line "that?"
-
-	para "So, want me to"
-	line "raise a #MON?"
-	done
-
 _DayCareLadyIntroText::
 	text "I'm the DAY-CARE"
-	line "LADY."
-
-	para "Should I raise a"
-	line "#MON for you?"
-	done
-
-_DayCareLadyIntroEggText::
-	text "I'm the DAY-CARE"
-	line "LADY. Do you know"
-	cont "about EGGS?"
-
-	para "My husband and I"
-	line "were raising some"
-	cont "#MON, you see."
-
-	para "We were shocked to"
-	line "find an EGG!"
-
-	para "How incredible"
-	line "could that be?"
-
-	para "Should I raise a"
-	line "#MON for you?"
+	line "LADY. Want me to"
+	cont "raise a #MON?"
 	done
 
 _WhatShouldIRaiseText::
@@ -1541,9 +1497,8 @@ _RemoveMailText::
 	prompt
 
 _LastHealthyMonText::
-	text "If you give me"
-	line "that, what will"
-	cont "you battle with?"
+	text "That's your last"
+	line "healthy #MON…"
 	prompt
 
 _IllRaiseYourMonText::
@@ -1559,29 +1514,22 @@ _ComeBackLaterText::
 	done
 
 _AreWeGeniusesText::
-	text "Are we geniuses or"
-	line "what? Want to see"
-	cont "your @"
+	text "Want to see"
+	line "your @"
 	text_ram wStringBuffer1
 	text "?"
 	done
 
 _YourMonHasGrownText::
-	text "Your @"
-	text_ram wStringBuffer1
-	text_start
-	line "has grown a lot."
-
-	para "By level, it's"
-	line "grown by @"
+	text "It's up in levels"
+	line "by @"
 	text_decimal wStringBuffer2 + 1, 1, 3
-	text "."
+	text "!"
 
-	para "If you want your"
-	line "#MON back, it"
-	cont "will cost ¥@"
+	para "It'll cost ¥@"
 	text_decimal wStringBuffer2 + 2, 3, 4
 	text "."
+	line "How about it?"
 	done
 
 _PerfectHeresYourMonText::
@@ -1610,17 +1558,19 @@ _BackAlreadyText::
 	done
 
 _HaveNoRoomText::
-	text "You have no room"
-	line "for it."
+	text "You've no room…"
 	prompt
 
+_NoRoomForEggText::
+	text "You've no room…"
+	done
+
 _NotEnoughMoneyText::
-	text "You don't have"
-	line "enough money."
+	text "Not enough money…"
 	prompt
 
 _OhFineThenText::
-	text "Oh, fine then."
+	text "Ok."
 	prompt
 
 _ComeAgainText::
@@ -1632,22 +1582,8 @@ _NotYetText::
 	done
 
 _FoundAnEggText::
-	text "Ah, it's you!"
-
-	para "We were raising"
-	line "your #MON, and"
-
-	para "my goodness, were"
-	line "we surprised!"
-
-	para "Your #MON had"
-	line "an EGG!"
-
-	para "We don't know how"
-	line "it got there, but"
-
-	para "your #MON had"
-	line "it. You want it?"
+	text "Your #MON had"
+	line "an EGG! Want it?"
 	done
 
 _ReceivedEggText::
@@ -1656,19 +1592,12 @@ _ReceivedEggText::
 	done
 
 _TakeGoodCareOfEggText::
-	text "Take good care of"
-	line "it."
+	text "Take care of it."
 	done
 
 _IllKeepItThanksText::
 	text "Well then, I'll"
-	line "keep it. Thanks!"
-	done
-
-_NoRoomForEggText::
-	text "You have no room"
-	line "in your party."
-	cont "Come back later."
+	line "keep it."
 	done
 
 _WhichMonPhotoText::

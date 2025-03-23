@@ -908,46 +908,27 @@ DayCareMonCompatibilityText:
 	call CheckBreedmonCompatibility
 	pop bc
 	ld a, [wBreedingCompatibility]
-	ld hl, .BreedBrimmingWithEnergyText
+	ld hl, .BreedNoInterestText
 	cp -1
 	jr z, .done
 	ld hl, .BreedNoInterestText
 	and a
 	jr z, .done
-	ld hl, .BreedAppearsToCareForText
+	ld hl, .BreedShowsInterestText
 	cp 230
 	jr nc, .done
 	cp 70
-	ld hl, .BreedFriendlyText
+	ld hl, .BreedShowsInterestText
 	jr nc, .done
 	ld hl, .BreedShowsInterestText
 
 .done
 	ret
 
-.BreedBrimmingWithEnergyText:
-	text_far _BreedBrimmingWithEnergyText
-	text_end
-
 .BreedNoInterestText:
 	text_far _BreedNoInterestText
-	text_end
-
-.BreedAppearsToCareForText:
-	text_far _BreedAppearsToCareForText
-	text_end
-
-.BreedFriendlyText:
-	text_far _BreedFriendlyText
 	text_end
 
 .BreedShowsInterestText:
 	text_far _BreedShowsInterestText
 	text_end
-
-DayCareMonPrintEmptyString: ; unreferenced
-	ld hl, .string
-	ret
-
-.string
-	db "@"

@@ -270,9 +270,9 @@ PrintDayCareText:
 .TextTable:
 ; entries correspond to DAYCARETEXT_* constants
 	dw .DayCareManIntroText ; 00
-	dw .DayCareManIntroEggText ; 01
+	dw .DayCareManIntroText ; 01
 	dw .DayCareLadyIntroText ; 02
-	dw .DayCareLadyIntroEggText ; 03
+	dw .DayCareLadyIntroText ; 03
 	dw .WhatShouldIRaiseText ; 04
 	dw .IllRaiseYourMonText ; 05
 	dw .CantAcceptEggText ; 06
@@ -294,16 +294,8 @@ PrintDayCareText:
 	text_far _DayCareManIntroText
 	text_end
 
-.DayCareManIntroEggText:
-	text_far _DayCareManIntroEggText
-	text_end
-
 .DayCareLadyIntroText:
 	text_far _DayCareLadyIntroText
-	text_end
-
-.DayCareLadyIntroEggText:
-	text_far _DayCareLadyIntroEggText
 	text_end
 
 .WhatShouldIRaiseText:
