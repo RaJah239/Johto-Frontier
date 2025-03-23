@@ -39,7 +39,6 @@ MobileBattleRoomConsoleScript:
 	special RestartMapMusic
 	reanchormap
 .two_
-	special StubbedTrainerRankings_Healings
 	special HealParty
 	special Function10383c
 	iftrue .false

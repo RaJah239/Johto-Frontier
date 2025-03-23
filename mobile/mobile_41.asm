@@ -310,16 +310,11 @@ StubbedTrainerRankings_EggsHatched:
 StubbedTrainerRankings_MonsEvolved:
 	ret
 	ld hl, sTrainerRankingMonsEvolved
-	jmp StubbedTrainerRankings_Increment3Byte
+	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_FruitPicked:
 	ret
 	ld hl, sTrainerRankingFruitPicked
-	jr StubbedTrainerRankings_Increment3Byte
-
-StubbedTrainerRankings_Healings:
-	ret
-	ld hl, sTrainerRankingHealings
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_MysteryGift:
