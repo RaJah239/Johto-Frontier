@@ -5779,18 +5779,26 @@ MoveInfoBox:
 	hlcoord 2, 10
 	predef PrintMoveType
 
+; print "PP/"
+	ld de, .pp_string ; "PP"
+	hlcoord 1, 11
+	call PlaceString
+
 .done
 	ret
+
+.pp_string:
+	db "PP@"
 
 .Disabled:
 	db "Disabled!@"
 
 .PrintPP:
-	hlcoord 5, 11
+	hlcoord 4, 11
 	ld a, [wLinkMode] ; What's the point of this check?
 	cp LINK_MOBILE
 	jr c, .ok
-	hlcoord 5, 11
+	hlcoord 4, 11
 .ok
 	push hl
 	ld de, wStringBuffer1
