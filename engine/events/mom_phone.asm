@@ -227,6 +227,3 @@ MomFoundADollText:
 MomItsInYourRoomText:
 	text_far _MomItsInYourRoomText
 	text_end
-
-DummyPredef3A:
-	ret

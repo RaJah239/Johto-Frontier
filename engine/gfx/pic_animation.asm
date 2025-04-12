@@ -1,21 +1,5 @@
 ; Pic animation arrangement.
 
-Unused_AnimateMon_Slow_Normal:
-	hlcoord 12, 0
-	ld a, [wBattleMode]
-	cp WILD_BATTLE
-	jr z, .wild
-	ld e, ANIM_MON_SLOW
-	ld d, $0
-	call AnimateFrontpic
-	ret
-
-.wild
-	ld e, ANIM_MON_NORMAL
-	ld d, $0
-	call AnimateFrontpic
-	ret
-
 AnimateMon_Menu:
 	ld e, ANIM_MON_MENU
 	ld d, $0

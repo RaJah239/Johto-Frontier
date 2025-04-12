@@ -8,7 +8,6 @@ ENDM
 
 PredefPointers::
 	add_predef LearnMove
-	add_predef DummyPredef1
 	add_predef HealParty ; this is both a special and a predef
 	add_predef SmallFarFlagAction
 	add_predef ComputeHPBarPixels
@@ -53,18 +52,12 @@ PredefPointers::
 	add_predef PrintMonTypes
 	add_predef GetUnownLetter
 	add_predef LoadPoisonBGPals
-	add_predef DummyPredef2F
 	add_predef InitSGBBorder
 	add_predef LoadSGBLayout
 	add_predef Pokedex_GetArea
 	add_predef Unused_CheckShininess
 	add_predef DoBattleTransition
-	add_predef DummyPredef35
-	add_predef DummyPredef36
 	add_predef PlayBattleAnim
-	add_predef DummyPredef38
-	add_predef DummyPredef39
-	add_predef DummyPredef3A
 	add_predef PartyMonItemName
 	add_predef GetMonFrontpic
 	add_predef GetMonBackpic
@@ -74,11 +67,9 @@ PredefPointers::
 	add_predef CheckTypeMatchup
 	add_predef ConvertMon_1to2
 	add_predef NewPokedexEntry
-	add_predef Unused_AnimateMon_Slow_Normal
 	add_predef PlaceStatusString
 	add_predef LoadMonAnimation
 	add_predef AnimateFrontpic
 	add_predef Unused_HOF_AnimateAlignedFrontpic
 	add_predef HOF_AnimateFrontpic
 	add_predef GetMonTypeIndex
-	dbw -1, DummyEndPredef ; pointless
