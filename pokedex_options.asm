@@ -18,7 +18,7 @@ DEF USE_GEN3_STYLE_TYPE_GFX EQU TRUE
  		
  
  	; using 'Increase Pokémon sprite animation size'?
- DEF USING_INCREASED_SPRITE_ANIMATION EQU FALSE
+ DEF USING_INCREASED_SPRITE_ANIMATION EQU TRUE
  	; https://github.com/pret/pokecrystal/wiki/Increase-Pok%C3%A9mon-sprite-animation-size
  		; NOTE this should only be enabled if you've already implemented the tutorial
 
