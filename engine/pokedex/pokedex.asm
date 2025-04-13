@@ -1109,8 +1109,7 @@ Pokedex_UpdateOptionScreen:
 
 .return_to_main_screen
 	call Pokedex_BlackOutBG
-	ld a, DEXSTATE_OPTION_SCR ; go back to options menu after selecting the color
- 	; ld a, DEXSTATE_MAIN_SCR ; do not go back to options menu, go to main screen
+	ld a, DEXSTATE_MAIN_SCR
 	ld [wJumptableIndex], a
 	ret
 
