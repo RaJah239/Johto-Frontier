@@ -2667,7 +2667,7 @@ ItemCantUseOnEggText:
 	text_end
 
 ItemOakWarningText:
-	text_far _ItemOakWarningText
+	text_far _OakThisIsntTheTimeText
 	text_end
 
 ItemBelongsToSomeoneElseText:

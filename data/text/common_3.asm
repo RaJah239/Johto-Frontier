@@ -1313,12 +1313,6 @@ _ItemCantUseOnEggText::
 	line "on an EGG."
 	prompt
 
-_ItemOakWarningText::
-	text "OAK: <PLAYER>!"
-	line "This isn't the"
-	cont "time to use that!"
-	prompt
-
 _ItemBelongsToSomeoneElseText::
 	text "That belongs to"
 	line "someone else!"
