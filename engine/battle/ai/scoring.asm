@@ -3169,7 +3169,7 @@ AI_Status:
 
 AI_Risky:
 ; Use any move that will KO the target.
-; Risky moves will often be an exception (see below).
+; Selfdestructing moves will often be an exception (see below).
 
 	ld hl, wEnemyAIMoveScores - 1
 	ld de, wEnemyMonMoves
@@ -3193,12 +3193,10 @@ AI_Risky:
 	and a
 	jr z, .nextmove
 
-; Don't use risky moves at max hp.
+; Don't use selfdestructing moves at max hp.
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
-	ld de, 1
-	ld hl, RiskyEffects
-	call IsInArray
-	jr nc, .checkko
+	cp EFFECT_SELFDESTRUCT
+	jr nz, .checkko
 
 	call AICheckEnemyMaxHP
 	jr c, .nextmove
@@ -3232,9 +3230,6 @@ endr
 	pop bc
 	pop de
 	jr .checkmove
-
-INCLUDE "data/battle/ai/risky_effects.asm"
-
 
 AI_None:
 	ret
