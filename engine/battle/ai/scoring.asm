@@ -3157,8 +3157,8 @@ AI_Status:
 	jr z, .poisonimmunity
 	cp EFFECT_POISON
 	jr z, .poisonimmunity
-	cp EFFECT_SLEEP
-	jr z, .typeimmunity
+	cp EFFECT_LEECH_SEED
+	jr z, .leechseedimmunity
 	cp EFFECT_PARALYZE
 	jr z, .typeimmunity
 
@@ -3172,8 +3172,21 @@ AI_Status:
 	ld a, [wBattleMonType1]
 	cp POISON
 	jr z, .immune
+	cp STEEL
+	jr z, .immune
 	ld a, [wBattleMonType2]
 	cp POISON
+	jr z, .immune
+	cp STEEL
+	jr z, .immune
+	jr .typeimmunity
+
+.leechseedimmunity
+	ld a, [wBattleMonType1]
+	cp GRASS
+	jr z, .immune
+	ld a, [wBattleMonType2]
+	cp GRASS
 	jr z, .immune
 
 .typeimmunity
