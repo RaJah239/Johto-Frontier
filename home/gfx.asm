@@ -375,7 +375,7 @@ Get2bpp::
 	jmp nz, Request2bpp
 	; fallthrough
 
-Copy2bpp:
+Copy2bpp::
 	call CheckGDMA
 	jmp c, SafeHDMATransfer
 
