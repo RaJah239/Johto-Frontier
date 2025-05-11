@@ -177,7 +177,7 @@ FalknerTMMudSlapText:
 	line "MUD-SLAP."
 
 	para "It reduces the"
-	line "enemy's accuracy"
+	line "foe's accuracy"
 
 	para "while it causes"
 	line "damage."
