@@ -20,6 +20,7 @@ RuinsOfAlphOutsideNoop2Scene:
 	end
 
 RuinsOfAlphOutsideScientistCallback:
+	setflag ENGINE_FLYPOINT_RUINS_OF_ALPH
 	checkflag ENGINE_UNOWN_DEX
 	iftrue .NoScientist
 	checkevent EVENT_MADE_UNOWN_APPEAR_IN_RUINS

@@ -721,7 +721,7 @@ PokegearMap_KantoMap:
 	jr PokegearMap_ContinueMap
 
 PokegearMap_JohtoMap:
-	ld d, LANDMARK_SILVER_CAVE
+	ld d, LANDMARK_INDIGO_PLATEAU
 	ld e, LANDMARK_NEW_BARK_TOWN
 PokegearMap_ContinueMap:
 	ld hl, hJoyLast

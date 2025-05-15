@@ -75,7 +75,6 @@ EngineFlags:
 	; fly
 	engine_flag wVisitedSpawns, SPAWN_HOME
 	engine_flag wVisitedSpawns, SPAWN_DEBUG
-	engine_flag wVisitedSpawns, SPAWN_TOHJO_FALLS
 	engine_flag wVisitedSpawns, SPAWN_ROUTE_26
 	engine_flag wVisitedSpawns, SPAWN_PALLET
 	engine_flag wVisitedSpawns, SPAWN_VIRIDIAN
@@ -94,6 +93,7 @@ EngineFlags:
 	engine_flag wVisitedSpawns, SPAWN_NEW_BARK
 	engine_flag wVisitedSpawns, SPAWN_CHERRYGROVE
 	engine_flag wVisitedSpawns, SPAWN_VIOLET
+	engine_flag wVisitedSpawns, SPAWN_RUINS_OF_ALPH
 	engine_flag wVisitedSpawns, SPAWN_UNION_CAVE
 	engine_flag wVisitedSpawns, SPAWN_AZALEA
 	engine_flag wVisitedSpawns, SPAWN_CIANWOOD
