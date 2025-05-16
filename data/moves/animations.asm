@@ -3868,13 +3868,9 @@ BattleAnim_Attract:
 	anim_ret
 
 BattleAnim_SleepTalk:
-	anim_1gfx BATTLE_ANIM_GFX_STATUS
-.loop
 	anim_sound 0, 0, SFX_STRENGTH
 	anim_obj BATTLE_ANIM_OBJ_ASLEEP, 64, 80, $0
-	anim_wait 40
-	anim_loop 2, .loop
-	anim_wait 32
+	anim_wait 48
 	anim_ret
 
 BattleAnim_HealBell:
