@@ -296,7 +296,7 @@ endc
 
 ; Downhill riding is slower when not moving down.
 	call .BikeCheck
-	jr nz, .walk
+	jr nz, .run
 
 	ld hl, wBikeFlags
 	bit BIKEFLAGS_DOWNHILL_F, [hl]
@@ -317,11 +317,11 @@ endc
 	scf
 	ret
 
-.walk
+.run
 	ld a, [wCurInput]
 	and B_BUTTON
-	jr nz, .run
-	ld a, STEP_WALK
+	jr nz, .walk
+	ld a, STEP_RUN
 	call .DoStep
 	scf
 	ret
@@ -332,8 +332,8 @@ endc
 	scf
 	ret
 
-.run
-	ld a, STEP_RUN
+.walk
+	ld a, STEP_WALK
 	call .DoStep
 	push af
 	ld a, [wWalkingDirection]
@@ -371,6 +371,16 @@ endc
 	and a
 	jr nz, .ExitWater
 
+.FastSurfCheck:
+	ld a, [wCurInput]
+	and B_BUTTON
+	jr nz, .SlowSurf
+	ld a, STEP_RUN
+	call .DoStep
+	scf
+	ret
+
+.SlowSurf:
 	ld a, STEP_WALK
 	call .DoStep
 	scf
