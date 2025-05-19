@@ -123,6 +123,16 @@ FadeOutToWhite::
 	call ConvertTimePalsIncHL
 	ret
 
+FadeInPalettes::
+	ld c, 10
+	call FadePalettes
+	ret
+
+FadeOutPalettes::
+	ld c, 10
+	call FadeToWhite
+	ret
+
 BattleTowerFade:
 	call FillWhiteBGColor
 	ld c, $9

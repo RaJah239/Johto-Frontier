@@ -1882,7 +1882,7 @@ Function17dc1f:
 Function17dc9f:
 	call IncCrashCheckPointer
 	call HlToCrashCheckPointer
-	call RotateFourPalettesLeft
+;	call RotateFourPalettesLeft
 	ret
 
 Function17dca9:
@@ -1905,7 +1905,7 @@ Function17dcaf:
 	add hl, de
 	dec c
 	jr nz, .asm_17dcbb
-	call RotateThreePalettesRight
+;	call RotateThreePalettesRight
 	ld a, $4
 	ldh [rSVBK], a
 	ret
