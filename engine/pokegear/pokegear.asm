@@ -245,11 +245,6 @@ InitPokegearTilemap:
 	ld a, $4f
 	call ByteFill
 
-	ld de, PokeGear_TimeofDayIcons
- 	ld hl, vTiles2 tile $6d
- 	lb bc, BANK(PokeGear_TimeofDayIcons), 3
- 	call Request2bpp
-
 	ld a, [wPokegearCard]
 	maskbits NUM_POKEGEAR_CARDS
 	add a
@@ -644,21 +639,21 @@ Pokegear_UpdateClock:
 	; inc hl
  	call PlaceString
  
-	hlcoord 9, 0 ; hlcoord 11, 0
+	hlcoord 10, 0 ; hlcoord 11, 0
  	ld [hl], $30 ; round edge
  	inc hl
 	ld a, $7f
  	ld [hli], a
  	ld [hli], a
  	ld [hl], a
- 	hlcoord 9, 2 ; hlcoord 11, 2
+ 	hlcoord 10, 2 ; hlcoord 11, 2
  	ld [hl], $32
  	inc hl
 	ld a, $7f
  	ld [hli], a
  	ld [hli], a
  	ld [hl], a
- 	hlcoord 9, 1
+ 	hlcoord 10, 1
  	; ld [hli], a
  	ld [hl], a
  	ret
@@ -3006,9 +3001,6 @@ LoadTownMapGFX:
 	lb bc, BANK(TownMapGFX), 48
 	call DecompressRequest2bpp
 	ret
-
-PokeGear_TimeofDayIcons:
-INCBIN "gfx/pokegear/pokegear_timeofday_icons.2bpp"
 
 JohtoMap:
 INCBIN "gfx/pokegear/johto.bin"
