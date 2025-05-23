@@ -2624,32 +2624,12 @@ BillsPC_CanReleaseMon:
 	jr c, .done
 	; fallthrough
 .not_last_healthy
-
-	; Ensure that the mon doesn't know any HMs.
 	push de
 	push hl
 	push bc
-	ld hl, wBufferMonMoves
-	ld b, NUM_MOVES
-.loop
-	ld a, [hli]
-	and a
-	jr z, .hm_check_done
-	push hl
-	push bc
-	call IsHMMove
-	pop bc
-	pop hl
-	ld a, 2
-	jr c, .hm_check_done
-	dec b
-	jr nz, .loop
 	xor a
-.hm_check_done
 	pop bc
 	pop hl
-	; fallthrough
-.pop_de_done
 	pop de
 .done
 	and a
@@ -2666,7 +2646,7 @@ BillsPC_ReleaseAll:
 
 	ld hl, .CantRecallReleasedMons
 	call PrintText
-	call NoYesBox
+	call YesNoBox
 	jr c, .done
 
 	; We want to give 3 possible messages:
@@ -2705,18 +2685,8 @@ BillsPC_ReleaseAll:
 	ld hl, .NothingThere
 	jr z, .print
 	and d
-	ld hl, .NothingReleased
-	jr z, .print2
 	ld hl, .ReleasedXMon
 .print
-	push de
-	call PrintText
-	pop de
-	ld a, e
-	and a
-	ld hl, .TheRestWasnt
-	jr z, .done
-.print2
 	call PrintText
 .done
 	call BillsPC_UpdateCursorLocation
@@ -2728,18 +2698,12 @@ BillsPC_ReleaseAll:
 	done
 
 .CantRecallReleasedMons:
-	text "You can't recall"
-	line "released #MON."
-	cont "Are you sure?"
+	text "Can't be undone!"
+	line "Final answer?"
 	done
 
 .NothingThere:
 	text "The BOX is empty."
-	prompt
-
-.NothingReleased:
-	text "#MON with HMs"
-	line "can't be released."
 	prompt
 
 .ReleasedXMon:
@@ -2747,11 +2711,6 @@ BillsPC_ReleaseAll:
 	text_decimal wTextDecimalByte, 1, 2
 	text ""
 	line "#MON."
-	prompt
-
-.TheRestWasnt:
-	text "The rest know"
-	line "HM moves."
 	prompt
 
 BillsPC_Release:
