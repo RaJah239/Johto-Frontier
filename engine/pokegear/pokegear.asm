@@ -636,10 +636,11 @@ Pokegear_UpdateClock:
  	jr z, .Morn
  	cp 1
  	jr z, .Day
-	ld [hl], $6f ; nite icon
- 	ld de, .NiteStr
+	cp 2
+ 	jr z, .Nite
+ 	ld de, .EveStr
 .got_tod		
- 	hlcoord 14, 6
+ 	hlcoord 12, 6
 	; inc hl
  	call PlaceString
  
@@ -662,21 +663,25 @@ Pokegear_UpdateClock:
  	ld [hl], a
  	ret
 .Morn
-	ld [hl], $6d ; morn icon
  	ld de, .MornStr
  	jr .got_tod
 .Day
-	ld [hl], $6e ; day icon
  	ld de, .DayStr
  	jr .got_tod
  
+.Nite
+ 	ld de, .NiteStr
+ 	jr .got_tod
+ 
 .MornStr:
- 	db "MORN@"
+ 	db "MORNING@"
 .DayStr:
  	db "DAY@"
 .NiteStr:
- 	db "NITE@"
- 	; db "NIGHT@"
+ 	db "NIGHT@"
+.EveStr:
+ 	db "EVENING@"
+ 
 .FishGrpStr:
  	db "FISH:@"
 
