@@ -32,7 +32,13 @@ GetTimeOfDayNotEve:
 	ld a, [wTimeOfDay]
 	cp EVE_F
 	ret nz
-	ld a, NITE_F ; ld a, DAY_F to make evening use day encounters
+
+	call Random
+	cp 60 percent
+	ld a, DAY_F
+	ret c            ; if a < 60% chance, return DAY_F
+
+	ld a, NITE_F     ; otherwise (40% chance), return NITE_F
 	ret
 
 FindNest:
