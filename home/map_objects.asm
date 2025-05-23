@@ -253,6 +253,7 @@ CheckObjectTime::
 	db MORN
 	db DAY
 	db NITE
+	db EVE
 
 UnmaskCopyMapObjectStruct::
 	ldh [hMapObjectIndex], a
