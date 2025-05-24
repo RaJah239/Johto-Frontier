@@ -1347,20 +1347,6 @@ CopyMysteryGiftReceivedDecorationsToPC:
 	jr c, .loop
 	jmp CloseSRAM
 
-UnlockMysteryGift:
-; If [sMysteryGiftUnlocked] was -1, this sets both
-; [sMysteryGiftUnlocked] and [sMysteryGiftItem] to 0.
-	call GetMysteryGiftBank
-	ld hl, sMysteryGiftUnlocked
-	ld a, [hl]
-	inc a
-	jr nz, .ok
-	ld [hld], a
-	assert sMysteryGiftUnlocked - 1 == sMysteryGiftItem
-	ld [hl], a
-.ok
-	jmp CloseSRAM
-
 ResetDailyMysteryGiftLimitIfUnlocked:
 	call GetMysteryGiftBank
 	ld a, [sNumDailyMysteryGiftPartnerIDs]

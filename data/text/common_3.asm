@@ -25,29 +25,13 @@ _OakText7::
 	line "later!"
 	done
 
-_ClockTimeMayBeWrongText::
-	text "The clock's time"
-	line "may be wrong."
-
-	para "Please reset the"
-	line "time."
-	prompt
-
 _ClockSetWithControlPadText::
-	text "Set with the"
-	line "Control Pad."
-
-	para "Confirm: A Button"
-	line "Cancel:  B Button"
+	text "  Please set the"
+	line "   clock's time."
 	done
 
 _ClockIsThisOKText::
 	text "Is this OK?"
-	done
-
-_ClockHasResetText::
-	text "The clock has been"
-	line "reset."
 	done
 
 _LinkTimeoutText::
@@ -880,23 +864,8 @@ _PhoneThankYouText::
 	text "Thank you!"
 	done
 
-_PasswordAskResetText::
-	text "Password OK."
-	line "Select CONTINUE &"
-	cont "reset settings."
-	prompt
-
-_PasswordWrongText::
-	text "Wrong password!"
-	prompt
-
 _PasswordAskResetClockText::
 	text "Reset the clock?"
-	done
-
-_PasswordAskEnterText::
-	text "Please enter the"
-	line "password."
 	done
 
 _ClearAllSaveDataText::
