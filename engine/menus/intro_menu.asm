@@ -1132,8 +1132,8 @@ TitleScreenMain:
 	call GetJoypad
 	ld hl, hJoyDown
 	ld a, [hl]
-	and D_UP + B_BUTTON + SELECT
-	cp  D_UP + B_BUTTON + SELECT
+	and D_UP + START
+	cp  D_UP + START
 	jr z, .delete_save_data
 
 ; Press Start or A to start the game.
