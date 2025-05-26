@@ -542,6 +542,9 @@ PokeBallEffect:
 
 	call ClearSprites
 
+	ld c, 15
+	call FadeToWhite
+
 	ld a, [wEnemyMonSpecies]
 	ld [wTempSpecies], a
 	predef NewPokedexEntry

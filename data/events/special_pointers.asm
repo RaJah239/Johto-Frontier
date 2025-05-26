@@ -189,3 +189,4 @@ SpecialsPointers::
 	add_special BackupPartyHeldItems
 	add_special RestorePartyHeldItems
 	add_special FadeInPalettes_EnableDynNoApply
+	add_special FadeOutPalettes

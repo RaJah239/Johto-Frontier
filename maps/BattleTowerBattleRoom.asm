@@ -32,7 +32,7 @@ Script_BattleRoomLoop:
 	promptbutton
 	closetext
 	special BattleTowerBattle ; predef StartBattle
-	special FadeOutToWhite
+	special FadeOutPalettes
 	reloadmap
 	ifnotequal $0, Script_FailedBattleTowerChallenge
 	readmem wNrOfBeatenBattleTowerTrainers
@@ -47,7 +47,7 @@ Script_BattleRoomLoop:
 	waitbutton
 	closetext
 	playmusic MUSIC_HEAL
-	special FadeOutToWhite
+	special FadeOutPalettes
 	special LoadMapPalettes
 	pause 60
 	special FadeInPalettes_EnableDynNoApply
@@ -72,9 +72,11 @@ Script_DontBattleNextOpponent:
 	special BattleTowerAction
 	setval BATTLETOWERACTION_SAVE_AND_QUIT ; quicksave
 	special BattleTowerAction
+	pause 5
 	playsound SFX_SAVE
 	waitsfx
-	special FadeOutToWhite
+	pause 10
+	special FadeOutPalettes
 	special Reset
 Script_DontSaveAndEndTheSession:
 	writetext Text_CancelYourBattleRoomChallenge
@@ -85,7 +87,7 @@ Script_DontSaveAndEndTheSession:
 	setval BATTLETOWERACTION_06
 	special BattleTowerAction
 	closetext
-	special FadeOutToWhite
+	special FadeOutPalettes
 	warpfacing UP, BATTLE_TOWER_1F, 7, 7
 	opentext
 	sjump Script_BattleTowerHopeToServeYouAgain

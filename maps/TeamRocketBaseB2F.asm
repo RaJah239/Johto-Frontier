@@ -163,10 +163,11 @@ LanceHealsCommon:
 	writetext LanceHealsText1
 	waitbutton
 	closetext
-	special FadeOutToWhite
+	special FadeOutPalettes
+	special LoadMapPalettes
 	playsound SFX_FULL_HEAL
 	special HealParty
-	special FadeInFromWhite
+	special FadeInPalettes_EnableDynNoApply
 	opentext
 	writetext LanceHealsText2
 	waitbutton
