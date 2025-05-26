@@ -71,6 +71,12 @@ RuinsOfAlphResearchCenterScientist3Script:
 	writetext RuinsOfAlphResearchCenterScientist3_PrinterAvailable
 	waitbutton
 	closetext
+	checkevent EVENT_CAUGHT_ALL_UNOWN
+	iffalse .ShowHiddenPowerOnStatsScreen
+	end
+
+.ShowHiddenPowerOnStatsScreen
+	setevent EVENT_CAUGHT_ALL_UNOWN
 	end
 
 RuinsOfAlphResearchCenterScientist1Script:

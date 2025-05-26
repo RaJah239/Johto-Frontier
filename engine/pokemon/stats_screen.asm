@@ -815,13 +815,304 @@ OTString:
 	db "OT/@"
 
 LoadOrangePage:
-	ld de, HelloWorldString
-	hlcoord 1, 9
+	call StatsScreen_placeCaughtLevel
+	call StatsScreen_placeCaughtTime
+	call StatsScreen_placeCaughtLocation
+	call StatsScreen_PrintEVs
+	
+	; check if we've caught all the unown, Event flag set by talking to printer guy at ruins lab
+	ld de, EVENT_CAUGHT_ALL_UNOWN
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld a, c
+	and a
+	ret z ; flag was not set
+	call StatsScreen_Print_HiddenPow_Info
+	ret
+
+StatsScreen_Print_HiddenPow_Info:
+	ld de, HiddenPowerTypeString
+	hlcoord 1, 16
+	call PlaceString
+	
+	ld hl, wTempMonDVs
+	; Type:
+
+	; Def & 3
+	ld a, [hl]
+	and %0011
+	ld b, a
+
+	; + (Atk & 3) << 2
+	ld a, [hl]
+	and %0011 << 4
+	swap a
+	add a
+	add a
+	or b
+
+; Skip Normal
+	inc a
+
+; Skip Bird
+	cp BIRD
+	jr c, .done
+	inc a
+
+; Skip unused types
+	cp UNUSED_TYPES
+	jr c, .done
+	add UNUSED_TYPES_END - UNUSED_TYPES
+
+.done
+    ld [wNamedObjectIndex], a
+	farcall GetTypeName
+	ld de, wStringBuffer1
+	hlcoord 2, 17
 	call PlaceString
 	ret
 
-HelloWorldString:
-	db "Hello world!@"
+HiddenPowerTypeString:
+	db "HIDDEN POWER:@"
+
+StatsScreen_PrintEVs:
+	hlcoord 1, 11
+	ld de, .EffortValuesString
+	call PlaceString
+	hlcoord 2, 12
+	ld de, .EVstring1
+	call PlaceString
+	hlcoord 2, 13
+	ld de, .EVstring2
+	call PlaceString
+	hlcoord 2, 14
+	ld de, .EVstring3
+	call PlaceString
+
+	; HP EVs
+	ld a, [wTempMonHPEV]
+	ld [wPokedexStatus], a
+	pop bc
+	jr z, .handle_this
+	ld a, c
+	add 4
+	ld b, 0
+	ld c, a
+.handle_this
+	push bc
+	ld de, wPokedexStatus
+	lb bc, 1, 3 ; 3 digits
+	hlcoord 6, 12
+	call PrintNum
+
+	; ATK EVs
+	ld a, [wTempMonAtkEV]
+	ld [wPokedexStatus], a
+	ld c, 0
+	and 1
+	jr z, .atk_not_odd
+	ld a, 0
+	add 8
+	ld b, 0
+	ld c, a
+.atk_not_odd
+	push bc
+	ld de, wPokedexStatus
+	lb bc, 1, 3 ; 3 digits
+	hlcoord 6, 13
+	call PrintNum
+
+	; DEF EVs
+	ld a, [wTempMonDefEV]
+	ld [wPokedexStatus], a 
+	pop bc
+	and 1
+	jr z, .def_not_odd
+	ld a, c
+	add 4
+	ld b, 0
+	ld c, a
+.def_not_odd
+	push bc
+	ld de, wPokedexStatus
+	lb bc, 1, 3 ; 3 digits
+	hlcoord 6, 14
+	call PrintNum
+
+	; SPE EVs
+	ld a, [wTempMonSpdEV]
+	ld [wPokedexStatus], a
+	pop bc
+	and 1
+	jr z, .speed_not_odd
+	ld a, c
+	add 2
+	ld b, 0
+	ld c, a
+.speed_not_odd
+	push bc
+	ld de, wPokedexStatus
+	lb bc, 1, 3 ; 3 digits
+	hlcoord 14, 12
+	call PrintNum
+
+	; SpAtk EVs
+	ld a, [wTempMonSpclAtkEV]
+	ld [wPokedexStatus], a
+	pop bc
+	and 1
+	jr z, .spc_not_odd
+	ld a, c
+	add 1
+	ld b, 0
+	ld c, a
+.spc_not_odd
+	push bc
+	ld de, wPokedexStatus
+	lb bc, 1, 3 ; 3 digits
+	hlcoord 14, 13
+	call PrintNum
+
+	; SpDef EVs
+	ld a, [wTempMonSpclDefEV]
+	ld [wPokedexStatus], a
+	pop bc
+	and 1
+	jr z, .spc_not_odd1
+	ld a, c
+	add 1
+	ld b, 0
+	ld c, a
+.spc_not_odd1
+	push bc
+	ld de, wPokedexStatus
+	lb bc, 1, 3 ; 3 digits
+	hlcoord 14, 14
+	call PrintNum
+
+	pop bc
+	ld a, c
+	ld [wPokedexStatus], a
+	ld de, wPokedexStatus
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 2 ; bytes, digits
+	ret
+
+.EffortValuesString:
+	db "EFFORT VALUES:@"
+.EVstring1:	
+	db "HP      SPE@"
+.EVstring2:
+ 	db "ATK     SPA@"
+.EVstring3:
+ 	db "DEF     SPD@"
+
+StatsScreen_placeCaughtLocation:
+	ld de, .MetAtMapString
+	hlcoord 1, 8
+	call PlaceString
+	ld a, [wTempMonCaughtLocation]
+	and CAUGHT_LOCATION_MASK
+	jr z, .unknown_location
+	cp LANDMARK_EVENT
+	jr z, .unknown_location
+	cp LANDMARK_GIFT
+	jr z, .unknown_location
+	ld e, a
+	farcall GetLandmarkName
+	ld de, wStringBuffer1
+	hlcoord 2, 9
+	call PlaceString
+	ret	
+.unknown_location:
+	ld de, .MetUnknownMapString
+	hlcoord 2, 9
+	call PlaceString
+	ret
+.MetAtMapString:
+	db "MET: @"
+.MetUnknownMapString:
+	db "TRADE@"
+
+StatsScreen_placeCaughtTime:
+	ld a, [wTempMonCaughtTime]
+	and CAUGHT_TIME_MASK
+	jr z, .unknown_time
+	rlca
+	rlca
+	dec a
+	ld hl, .times
+	call GetNthString
+	ld d, h
+	ld e, l
+	call CopyName1
+	ld de, wStringBuffer2
+	hlcoord 6, 8
+	call PlaceString
+	ret
+.unknown_time
+	ld a, 0
+	ld hl, .unknown_time_text
+	call GetNthString
+	ld d, h
+	ld e, l
+	call CopyName1
+	ld de, wStringBuffer2
+	hlcoord 6, 8
+	call PlaceString
+	ret
+.times
+	db "MORN@"
+	db "DAY@"
+	db "NITE@"
+.unknown_time_text
+	db "TRADE@"
+
+StatsScreen_placeCaughtLevel:
+	; caught level
+	ld a, [wTempMonCaughtLevel]
+	and CAUGHT_LEVEL_MASK	
+	and a
+	jr z, .unknown_level
+	cp CAUGHT_EGG_LEVEL ; egg marker value
+	jr nz, .print
+	ld a, EGG_LEVEL ; egg hatch level
+
+.print
+	ld [wTextDecimalByte], a
+	hlcoord 12, 8
+	ld de, wTextDecimalByte
+	lb bc, PRINTNUM_LEFTALIGN | 1, 3
+	call PrintNum
+	hlcoord 11, 8
+	ld [hl], "<LV>"
+	ret
+
+.unknown_level
+	ld de, .MetUnknownLevelString
+	hlcoord 11, 8
+	call PlaceString
+	ret   
+.MetUnknownLevelString:
+	db "@"
+
+StatsScreen_LoadUnownFont:
+	ld a, BANK(sScratch)
+	call OpenSRAM
+	ld hl, UnownFont
+	; sScratch + $188 was the address of sDecompressBuffer in pokegold
+	ld de, sScratch + $188
+	ld bc, 38 tiles
+	ld a, BANK(UnownFont)
+	call FarCopyBytes
+	; ld hl, sScratch + $188
+	; ld bc, (NUM_UNOWN + 1) tiles
+	;call Pokedex_InvertTiles
+	ld de, sScratch + $188
+	ld hl, vTiles1 tile $3a ;FIRST_UNOWN_CHAR
+	lb bc, BANK(Pokedex_LoadUnownFont), NUM_UNOWN
+	call Request2bpp
+	call CloseSRAM
+	ret
 
 StatsScreen_PrintAffection:
 	ld de, AffectionString

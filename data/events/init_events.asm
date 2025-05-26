@@ -124,6 +124,11 @@ InitialEvents:
 	dw EVENT_INDIGO_PLATEAU_POKECENTER_RIVAL
 	dw EVENT_INITIALIZED_EVENTS
 
+; Debug Events
+if DEF(_DEBUG)
+	dw EVENT_CAUGHT_ALL_UNOWN
+endc
+
 ; Place new events that initialises on game start
 	dw -1 ; end
 
