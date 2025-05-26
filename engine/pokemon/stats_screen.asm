@@ -818,16 +818,22 @@ LoadOrangePage:
 	call StatsScreen_placeCaughtLevel
 	call StatsScreen_placeCaughtTime
 	call StatsScreen_placeCaughtLocation
-	call StatsScreen_PrintEVs
 	
-	; check if we've caught all the unown, Event flag set by talking to printer guy at ruins lab
+	; Check if we've caught all the Unown
 	ld de, EVENT_CAUGHT_ALL_UNOWN
 	ld b, CHECK_FLAG
 	call EventFlagAction
 	ld a, c
 	and a
-	ret z ; flag was not set
-	call StatsScreen_Print_HiddenPow_Info
+	call nz, StatsScreen_Print_HiddenPow_Info
+
+	; Add sidequest to show Effort Values, presently if DragonBreadth's TM has been obtained
+	ld de, EVENT_GOT_TM24_DRAGONBREATH
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld a, c
+	and a
+	call nz, StatsScreen_PrintEVs
 	ret
 
 StatsScreen_Print_HiddenPow_Info:
