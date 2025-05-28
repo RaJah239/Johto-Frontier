@@ -176,6 +176,7 @@ Route40BattleTowerGate_Blocks:
 Route2Gate_Blocks:
 Route29Route46Gate_Blocks:
 Route5SaffronGate_Blocks:
+Route39_SilverCaveGate_Blocks:
 	INCBIN "maps/NorthSouthGate.blk"
 
 CinnabarIsland_Blocks:
