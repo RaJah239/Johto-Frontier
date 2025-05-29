@@ -745,9 +745,6 @@ TrainerHouse1F_Blocks:
 TrainerHouseB1F_Blocks:
 	INCBIN "maps/TrainerHouseB1F.blk"
 
-RedsHouse1F_Blocks:
-	INCBIN "maps/RedsHouse1F.blk"
-
 OaksLab_Blocks:
 	INCBIN "maps/OaksLab.blk"
 

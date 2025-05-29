@@ -333,7 +333,6 @@ Pallet_Map_Names: ;newgroup PALLET
 	table_width 2, Pallet_Map_Names                                               ; 13
 	dw Pallet_Map_Name1 ; map_const ROUTE_1,                                     10, 18 ;  1
 	dw Pallet_Map_Name2 ; map_const PALLET_TOWN,                                 10,  9 ;  2
-	dw Pallet_Map_Name3 ; map_const REDS_HOUSE_1F ;  3
 	dw Pallet_Map_Name6 ; map_const OAKS_LAB ;  6
 	assert_table_length NUM_PALLET_MAPS
 
@@ -1011,8 +1010,6 @@ Pallet_Map_Name1: ; map_const ROUTE_1,;  1
 	db "ROUTE 1@"
 Pallet_Map_Name2: ; map_const PALLET_TOWN,;  2
 	db "PALLET TOWN@"
-Pallet_Map_Name3: ; map_const REDS_HOUSE_1F ;  3
-	db "RED'S HOUSE 1F@"
 Pallet_Map_Name6: ; map_const OAKS_LAB ;  6  ; 14
 	db "OAK'S LAB@"
 
