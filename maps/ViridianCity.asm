@@ -14,7 +14,6 @@ ViridianCity_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events
-	warp_event 32,  7, VIRIDIAN_GYM, 1
 	warp_event 21,  9, VIRIDIAN_NICKNAME_SPEECH_HOUSE, 1
 	warp_event 23, 15, TRAINER_HOUSE_1F, 1
 	warp_event 29, 19, VIRIDIAN_MART, 2

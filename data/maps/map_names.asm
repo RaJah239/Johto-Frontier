@@ -483,7 +483,6 @@ Viridian_Map_Names: ;newgroup VIRIDIAN ; 23
 	dw Viridian_Map_Name1 ; map_const ROUTE_2,                                     10, 27 ;  1
 	dw Viridian_Map_Name2 ; map_const ROUTE_22,                                    20,  9 ;  2
 	dw Viridian_Map_Name3 ; map_const VIRIDIAN_CITY,                               20, 18 ;  3
-	dw Viridian_Map_Name4 ; map_const VIRIDIAN_GYM ;  4
 	dw Viridian_Map_Name5 ; map_const VIRIDIAN_NICKNAME_SPEECH_HOUSE ;  5
 	dw Viridian_Map_Name6 ; map_const TRAINER_HOUSE_1F ;  6
 	dw Viridian_Map_Name7 ; map_const TRAINER_HOUSE_B1F ;  7
@@ -1240,8 +1239,6 @@ Viridian_Map_Name2: ; map_const ROUTE_22,  2
 	db "ROUTE 22@"
 Viridian_Map_Name3: ; map_const VIRIDIAN_CITY,  3
 	db "VIRIDIAN CITY@"
-Viridian_Map_Name4: ; map_const VIRIDIAN_GYM ;  4
-	db "VIRIDIAN GYM@"
 Viridian_Map_Name5: ; map_const VIRIDIAN_NICKNAME_SPEECH_HOUSE ;  5
 	db "VIRIDIAN HOUSE 2@"
 Viridian_Map_Name6: ; map_const TRAINER_HOUSE_1F ;  6
