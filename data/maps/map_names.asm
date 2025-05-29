@@ -61,7 +61,6 @@ Olivine_Map_Names: ;newgroup OLIVINE ;  1
 	dw Olivine_Map_Name1 ; map_const OLIVINE_POKECENTER_1F ;  1
 	dw Olivine_Map_Name2 ; map_const OLIVINE_GYM ;  2
 	dw Olivine_Map_Name3 ; map_const OLIVINE_TIMS_HOUSE ;  3
-	dw Olivine_Map_Name4 ; map_const OLIVINE_HOUSE_BETA ;  4
 	dw Olivine_Map_Name5 ; map_const OLIVINE_PUNISHMENT_SPEECH_HOUSE ;  5
 	dw Olivine_Map_Name6 ; map_const OLIVINE_GOOD_ROD_HOUSE ;  6
 	dw Olivine_Map_Name7 ; map_const OLIVINE_CAFE ;  7
@@ -544,8 +543,6 @@ Olivine_Map_Name2: ; map_const OLIVINE_GYM ;  2
 	db "OLIVINE GYM@"
 Olivine_Map_Name3: ; map_const OLIVINE_TIMS_HOUSE ;  3
 	db "TIM'S HOUSE@"
-Olivine_Map_Name4: ; map_const OLIVINE_HOUSE_BETA ;  4
-	db "OLIVINE HOUSE BETA@"
 Olivine_Map_Name5: ; map_const OLIVINE_PUNISHMENT_SPEECH_HOUSE ;  5
 	db "OLIVINE HOUSE 1@"
 Olivine_Map_Name6: ; map_const OLIVINE_GOOD_ROD_HOUSE ;  6
