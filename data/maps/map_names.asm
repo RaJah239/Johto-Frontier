@@ -420,7 +420,6 @@ Silver_Map_Names: ;newgroup SILVER
 	dw Silver_Map_Name2 ; map_const SILVER_CAVE_OUTSIDE,                         20, 18 ;  2
 	dw Silver_Map_Name3 ; map_const SILVER_CAVE_POKECENTER_1F ;  3
 	dw Silver_Map_Name5 ; map_const ROUTE_39_SILVER_CAVE_GATE,                    5,  4 ;  4
-	dw Silver_Map_Name4 ; map_const ROUTE_28_STEEL_WING_HOUSE ;  4
 	assert_table_length NUM_SILVER_MAPS
 
 Cable_Club_Map_Names: ;newgroup CABLE_CLUB
@@ -1147,8 +1146,6 @@ Silver_Map_Name3: ; map_const SILVER_CAVE_POKECENTER_1F ;  3
 	db "SILVER CAVE CENTER@"
 Silver_Map_Name5: ; map_const SILVER_CAVE_POKECENTER_1F ;  3
 	db "ROUTE 39 GATE@"
-Silver_Map_Name4: ; map_const ROUTE_28_STEEL_WING_HOUSE ;  4
-	db "ROUTE 28 CABIN@"                                       ; 20
 
 Cable_Club_Map_Name1: ; map_const POKECENTER_2F ;  1
 	db "<PKMN> CENTER 2F@"

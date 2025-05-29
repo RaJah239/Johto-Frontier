@@ -142,7 +142,6 @@ BillsBrothersHouse_Blocks:
 LavenderSpeechHouse_Blocks:
 LavenderNameRater_Blocks:
 Route12SuperRodHouse_Blocks:
-Route28SteelWingHouse_Blocks:
 CeladonMansionRoofHouse_Blocks:
 Route16FuchsiaSpeechHouse_Blocks:
 ManiasHouse_Blocks:
