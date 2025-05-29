@@ -12,9 +12,6 @@ Route36_Blocks:
 Route44_Blocks:
 	INCBIN "maps/Route44.blk"
 
-Route28_Blocks:
-	INCBIN "maps/Route28.blk"
-
 CeladonCity_Blocks:
 	INCBIN "maps/CeladonCity.blk"
 

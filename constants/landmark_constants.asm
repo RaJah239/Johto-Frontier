@@ -96,8 +96,7 @@ DEF KANTO_LANDMARK EQU const_value
 	const LANDMARK_CINNABAR_ISLAND   ; 55
 	const LANDMARK_ROUTE_21          ; 56
 	const LANDMARK_ROUTE_22          ; 57
-	const LANDMARK_ROUTE_28          ; 5e
-	const LANDMARK_FAST_SHIP         ; 5f
+	const LANDMARK_FAST_SHIP         ; 58
 DEF NUM_LANDMARKS EQU const_value
 
 ; used in CaughtData

@@ -884,12 +884,12 @@ TownMap_GetKantoLandmarkLimits:
 	ld a, [wStatusFlags]
 	bit STATUSFLAGS_HALL_OF_FAME_F, a
 	jr z, .not_hof
-	ld d, LANDMARK_ROUTE_28
+	ld d, LANDMARK_ROUTE_22
 	ld e, LANDMARK_PALLET_TOWN
 	ret
 
 .not_hof
-	ld d, LANDMARK_ROUTE_28
+	ld d, LANDMARK_ROUTE_22
 	ld e, LANDMARK_VICTORY_ROAD
 	ret
 

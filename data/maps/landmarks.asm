@@ -102,7 +102,6 @@ Landmarks:
 	landmark  52, 132, CinnabarIslandName
 	landmark  52, 120, Route21Name
 	landmark  36,  68, Route22Name
-	landmark  20,  68, Route28Name
 	landmark 140, 116, FastShipName
 	assert_table_length NUM_LANDMARKS
 
@@ -174,7 +173,6 @@ Route24Name:         db "ROUTE 24@"
 Route25Name:         db "ROUTE 25@"
 Route26Name:         db "ROUTE 26@"
 Route27Name:         db "ROUTE 27@"
-Route28Name:         db "ROUTE 28@"
 Route29Name:         db "ROUTE 29@"
 Route30Name:         db "ROUTE 30@"
 Route31Name:         db "ROUTE 31@"

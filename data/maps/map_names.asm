@@ -416,10 +416,9 @@ Lavender_Map_Names: ;newgroup LAVENDER
 
 Silver_Map_Names: ;newgroup SILVER
 	table_width 2, Silver_Map_Names                                              ; 19
-	dw Silver_Map_Name1 ; map_const ROUTE_28,                                    20,  9 ;  1
+	dw Silver_Map_Name1 ; map_const ROUTE_39_SILVER_CAVE_GATE,                    5,  4 ;  4
 	dw Silver_Map_Name2 ; map_const SILVER_CAVE_OUTSIDE,                         20, 18 ;  2
 	dw Silver_Map_Name3 ; map_const SILVER_CAVE_POKECENTER_1F ;  3
-	dw Silver_Map_Name5 ; map_const ROUTE_39_SILVER_CAVE_GATE,                    5,  4 ;  4
 	assert_table_length NUM_SILVER_MAPS
 
 Cable_Club_Map_Names: ;newgroup CABLE_CLUB
@@ -1138,14 +1137,12 @@ Lavender_Map_Name13: ; map_const ROUTE_8_SAFFRON_GATE ; 13
 Lavender_Map_Name14: ; map_const ROUTE_12_SUPER_ROD_HOUSE ; 14
 	db "ROUTE 12 HOUSE@"
 
-Silver_Map_Name1: ; map_const ROUTE_28,;  1
-	db "ROUTE 28@"
+Silver_Map_Name1: ; map_const SILVER_CAVE_POKECENTER_1F ;  3
+	db "ROUTE 39 GATE@"
 Silver_Map_Name2: ; map_const SILVER_CAVE_OUTSIDE,;  2
 	db "SILVER CAVE@"	
 Silver_Map_Name3: ; map_const SILVER_CAVE_POKECENTER_1F ;  3
 	db "SILVER CAVE CENTER@"
-Silver_Map_Name5: ; map_const SILVER_CAVE_POKECENTER_1F ;  3
-	db "ROUTE 39 GATE@"
 
 Cable_Club_Map_Name1: ; map_const POKECENTER_2F ;  1
 	db "<PKMN> CENTER 2F@"
