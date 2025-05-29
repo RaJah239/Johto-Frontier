@@ -478,7 +478,6 @@ Viridian_Map_Names: ;newgroup VIRIDIAN ; 23
 	dw Viridian_Map_Name7 ; map_const TRAINER_HOUSE_B1F ;  7
 	dw Viridian_Map_Name8 ; map_const VIRIDIAN_MART ;  8
 	dw Viridian_Map_Name9 ; map_const VIRIDIAN_POKECENTER_1F ;  9
-	dw Viridian_Map_Name10 ; map_const VIRIDIAN_POKECENTER_2F_BETA ; 10
 	dw Viridian_Map_Name11 ; map_const ROUTE_2_NUGGET_HOUSE ; 11
 	dw Viridian_Map_Name12 ; map_const ROUTE_2_GATE ; 12
 	dw Viridian_Map_Name13 ; map_const VICTORY_ROAD_GATE,                           10,  9 ; 13
@@ -1219,8 +1218,6 @@ Viridian_Map_Name8: ; map_const VIRIDIAN_MART ;  8
 	db "VIRIDIAN #MART@"
 Viridian_Map_Name9: ; map_const VIRIDIAN_POKECENTER_1F ;  9
 	db "VIRIDIAN CENTER@"
-Viridian_Map_Name10: ; map_const VIRIDIAN_POKECENTER_2F_BETA ; 10
-	db "VIRIDIAN PC BETA@"
 Viridian_Map_Name11: ; map_const ROUTE_2_NUGGET_HOUSE ; 11
 	db "ROUTE 2 HOUSE@"
 Viridian_Map_Name12: ; map_const ROUTE_2_GATE ; 12
