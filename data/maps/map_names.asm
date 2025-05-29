@@ -335,7 +335,6 @@ Pallet_Map_Names: ;newgroup PALLET
 	dw Pallet_Map_Name2 ; map_const PALLET_TOWN,                                 10,  9 ;  2
 	dw Pallet_Map_Name3 ; map_const REDS_HOUSE_1F ;  3
 	dw Pallet_Map_Name4 ; map_const REDS_HOUSE_2F ;  4
-	dw Pallet_Map_Name5 ; map_const BLUES_HOUSE ;  5
 	dw Pallet_Map_Name6 ; map_const OAKS_LAB ;  6
 	assert_table_length NUM_PALLET_MAPS
 
@@ -1017,8 +1016,6 @@ Pallet_Map_Name3: ; map_const REDS_HOUSE_1F ;  3
 	db "RED'S HOUSE 1F@"
 Pallet_Map_Name4: ; map_const REDS_HOUSE_2F ;  4
 	db "RED'S HOUSE 2F@"
-Pallet_Map_Name5: ; map_const BLUES_HOUSE ;  5
-	db "BLUE'S HOUSE@"
 Pallet_Map_Name6: ; map_const OAKS_LAB ;  6  ; 14
 	db "OAK'S LAB@"
 
