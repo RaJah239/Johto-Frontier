@@ -210,7 +210,6 @@ Blackthorn_Map_Names: ;newgroup BLACKTHORN
 Cinnabar_Map_Names: ;newgroup CINNABAR
 	table_width 2, Cinnabar_Map_Names                                        ;  6
 	dw Cinnabar_Map_Name1 ; map_const CINNABAR_POKECENTER_1F ;  1
-	dw Cinnabar_Map_Name2 ; map_const CINNABAR_POKECENTER_2F_BETA ;  2
 	dw Cinnabar_Map_Name3 ; map_const ROUTE_19_FUCHSIA_GATE ;  3
 	dw Cinnabar_Map_Name4 ; map_const SEAFOAM_GYM ;  4
 	dw Cinnabar_Map_Name5 ; map_const ROUTE_19,                                    10, 18 ;  5
@@ -810,8 +809,6 @@ Blackthorn_Map_Name10: ; map_const BLACKTHORN_CITY,;  6
 
 Cinnabar_Map_Name1: ; map_const CINNABAR_POKECENTER_1F ;  1
 	db "CINNABAR CENTER@"
-Cinnabar_Map_Name2: ; map_const CINNABAR_POKECENTER_2F_BETA ;  2
-	db "CINNABAR PC BETA@"
 Cinnabar_Map_Name3: ; map_const ROUTE_19_FUCHSIA_GATE ;  3
 	db "ROUTE 19 GATE@"
 Cinnabar_Map_Name4: ; map_const SEAFOAM_GYM ;  4

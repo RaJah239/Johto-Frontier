@@ -37,7 +37,6 @@ Route10South_Blocks:
 	INCBIN "maps/Route10South.blk"
 
 Pokecenter2F_Blocks:
-CinnabarPokecenter2FBeta_Blocks:
 CeruleanPokecenter2FBeta_Blocks:
 Route10Pokecenter2FBeta_Blocks:
 VermilionPokecenter2FBeta_Blocks:
