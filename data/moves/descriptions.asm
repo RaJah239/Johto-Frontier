@@ -117,7 +117,7 @@ MoveDescriptions::
 	dw HazeDescription
 	dw ReflectDescription
 	dw FocusEnergyDescription
-	dw BideDescription
+	dw DarkPulseDescription
 	dw MetronomeDescription
 	dw MirrorMoveDescription
 	dw SelfdestructDescription
@@ -379,6 +379,7 @@ SandAttackDescription:
 	db   "Reduces accuracy"
 	line "by throwing sand.@"
 
+DarkPulseDescription:
 HeadbuttDescription:
 	db   "An attack that may"
 	line "cause flinching.@"
@@ -730,10 +731,6 @@ ReflectDescription:
 FocusEnergyDescription:
 	db   "Raises the criti-"
 	line "cal hit ratio.@"
-
-BideDescription:
-	db   "Waits 2-3 turns &"
-	line "hits back double.@"
 
 MetronomeDescription:
 	db   "Randomly uses any"
