@@ -224,7 +224,6 @@ Cerulean_Map_Names: ;newgroup CERULEAN
 	dw Cerulean_Map_Name2 ; map_const CERULEAN_POLICE_STATION ;  2
 	dw Cerulean_Map_Name3 ; map_const CERULEAN_TRADE_SPEECH_HOUSE ;  3
 	dw Cerulean_Map_Name4 ; map_const CERULEAN_POKECENTER_1F ;  4
-	dw Cerulean_Map_Name5 ; map_const CERULEAN_POKECENTER_2F_BETA ;  5
 	dw Cerulean_Map_Name6 ; map_const CERULEAN_GYM ;  6
 	dw Cerulean_Map_Name7 ; map_const CERULEAN_MART ;  7
 	dw Cerulean_Map_Name8 ; map_const ROUTE_10_POKECENTER_1F ;  8
@@ -830,8 +829,6 @@ Cerulean_Map_Name3: ; map_const CERULEAN_TRADE_SPEECH_HOUSE ;  3
 	db "CERULEAN HOUSE 2@"
 Cerulean_Map_Name4: ; map_const CERULEAN_POKECENTER_1F ;  4
 	db "CERULEAN CENTER@"
-Cerulean_Map_Name5: ; map_const CERULEAN_POKECENTER_2F_BETA ;  5
-	db "CERULEAN PC BETA@"
 Cerulean_Map_Name6: ; map_const CERULEAN_GYM ;  6
 	db "CERULEAN GYM@"
 Cerulean_Map_Name7: ; map_const CERULEAN_MART ;  7
