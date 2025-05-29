@@ -12,6 +12,8 @@ Route39_SilverCaveGate_MapEvents:
     def_warp_events
 	warp_event  4,  7, ROUTE_39, 4
 	warp_event  5,  7, ROUTE_39, 4
+	warp_event  4,  0, SILVER_CAVE_OUTSIDE, 3
+	warp_event  5,  0, SILVER_CAVE_OUTSIDE, 4
 
     def_coord_events
 
