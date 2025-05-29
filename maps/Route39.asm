@@ -168,6 +168,9 @@ TrainerPokefanfJaime:
 Route39Sign:
 	jumptext Route39SignText
 
+Route39MtSilverSign:
+	jumptext Route39MtSilverSignText
+
 MoomooFarmSign:
 	jumptext MoomooFarmSignText
 
@@ -319,6 +322,11 @@ Route39SignText:
 	line "ECRUTEAK CITY"
 	done
 
+Route39MtSilverSignText:
+	text "DANGER!"
+	line "MT.SILVER AHEAD!"
+	done
+
 MoomooFarmSignText:
 	text "MOOMOO FARM"
 
@@ -356,6 +364,7 @@ Route39_MapEvents:
 	bg_event  5, 45, BGEVENT_READ, Route39TrainerTips
 	bg_event  9, 19, BGEVENT_READ, MoomooFarmSign
 	bg_event 15, 21, BGEVENT_READ, Route39Sign
+	bg_event 11,  7, BGEVENT_READ, Route39MtSilverSign
 	bg_event  5, 27, BGEVENT_ITEM, Route39HiddenNugget
 
 	def_object_events
