@@ -657,7 +657,6 @@ ENDM
 	map_attributes SaffronGym, SAFFRON_GYM, $00, 0
 	map_attributes SaffronMart, SAFFRON_MART, $00, 0
 	map_attributes SaffronPokecenter1F, SAFFRON_POKECENTER_1F, $00, 0
-	map_attributes SaffronPokecenter2FBeta, SAFFRON_POKECENTER_2F_BETA, $00, 0
 	map_attributes MrPsychicsHouse, MR_PSYCHICS_HOUSE, $00, 0
 	map_attributes SaffronMagnetTrainStation, SAFFRON_MAGNET_TRAIN_STATION, $00, 0
 	map_attributes SilphCo1F, SILPH_CO_1F, $00, 0
