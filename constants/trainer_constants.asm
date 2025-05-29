@@ -131,7 +131,7 @@ DEF KRIS EQU __trainer_class__
 	const KIPP
 	const ALAN1
 	const JOHNNY
-	const DANNY
+	const DANNY ; unused
 	const TOMMY
 	const DUDLEY
 	const JOE
@@ -231,7 +231,7 @@ DEF KRIS EQU __trainer_class__
 	const MEGAN
 	const BETH2
 	const CAROL
-	const QUINN
+	const QUINN ; unused
 	const EMMA
 	const CYBIL
 	const JENN
