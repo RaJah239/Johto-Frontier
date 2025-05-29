@@ -546,7 +546,6 @@ ENDM
 	map_attributes DayCare, DAY_CARE, $00, 0
 	map_attributes VermilionFishingSpeechHouse, VERMILION_FISHING_SPEECH_HOUSE, $00, 0
 	map_attributes VermilionPokecenter1F, VERMILION_POKECENTER_1F, $00, 0
-	map_attributes VermilionPokecenter2FBeta, VERMILION_POKECENTER_2F_BETA, $00, 0
 	map_attributes PokemonFanClub, POKEMON_FAN_CLUB, $00, 0
 	map_attributes VermilionMagnetTrainSpeechHouse, VERMILION_MAGNET_TRAIN_SPEECH_HOUSE, $00, 0
 	map_attributes VermilionMart, VERMILION_MART, $00, 0

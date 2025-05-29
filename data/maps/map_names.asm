@@ -314,7 +314,6 @@ Vermilion_Map_Names: ;newgroup VERMILION
 	dw Vermilion_Map_Name3 ; map_const VERMILION_CITY,                              20, 18 ;  3
 	dw Vermilion_Map_Name4 ; map_const VERMILION_FISHING_SPEECH_HOUSE ;  4
 	dw Vermilion_Map_Name5 ; map_const VERMILION_POKECENTER_1F ;  5
-	dw Vermilion_Map_Name6 ; map_const VERMILION_POKECENTER_2F_BETA ;  6
 	dw Vermilion_Map_Name7 ; map_const POKEMON_FAN_CLUB ;  7
 	dw Vermilion_Map_Name8 ; map_const VERMILION_MAGNET_TRAIN_SPEECH_HOUSE ;  8
 	dw Vermilion_Map_Name9 ; map_const VERMILION_MART ;  9
@@ -973,8 +972,6 @@ Vermilion_Map_Name4: ; map_const VERMILION_FISHING_SPEECH_HOUSE ;  4
 	db "VERMILION HOUSE 1@"
 Vermilion_Map_Name5: ; map_const VERMILION_POKECENTER_1F ;  5
 	db "VERMILION CENTER@"
-Vermilion_Map_Name6: ; map_const VERMILION_POKECENTER_2F_BETA ;  6
-	db "VERMILION PC BETA@"
 Vermilion_Map_Name7: ; map_const POKEMON_FAN_CLUB ;  7
 	db "VERMILION FANCLUB@"
 Vermilion_Map_Name8: ; map_const VERMILION_MAGNET_TRAIN_SPEECH_HOUSE ;  8

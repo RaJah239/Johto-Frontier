@@ -279,7 +279,6 @@ ENDM
 	map_const VERMILION_CITY,                              20, 18 ;  3
 	map_const VERMILION_FISHING_SPEECH_HOUSE,               4,  4 ;  4
 	map_const VERMILION_POKECENTER_1F,                      5,  4 ;  5
-	map_const VERMILION_POKECENTER_2F_BETA,                 8,  4 ;  6
 	map_const POKEMON_FAN_CLUB,                             5,  4 ;  7
 	map_const VERMILION_MAGNET_TRAIN_SPEECH_HOUSE,          4,  4 ;  8
 	map_const VERMILION_MART,                               6,  4 ;  9
