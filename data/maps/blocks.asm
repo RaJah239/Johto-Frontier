@@ -748,9 +748,6 @@ TrainerHouseB1F_Blocks:
 RedsHouse1F_Blocks:
 	INCBIN "maps/RedsHouse1F.blk"
 
-RedsHouse2F_Blocks:
-	INCBIN "maps/RedsHouse2F.blk"
-
 OaksLab_Blocks:
 	INCBIN "maps/OaksLab.blk"
 
