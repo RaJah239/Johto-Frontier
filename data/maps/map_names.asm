@@ -392,7 +392,6 @@ Lavender_Map_Names: ;newgroup LAVENDER
 	dw Lavender_Map_Name3 ; map_const ROUTE_10_SOUTH,                              10,  9 ;  3
 	dw Lavender_Map_Name4 ; map_const LAVENDER_TOWN,                               10,  9 ;  4
 	dw Lavender_Map_Name5 ; map_const LAVENDER_POKECENTER_1F ;  5
-	dw Lavender_Map_Name6 ; map_const LAVENDER_POKECENTER_2F_BETA ;  6
 	dw Lavender_Map_Name7 ; map_const MR_FUJIS_HOUSE ;  7
 	dw Lavender_Map_Name8 ; map_const LAVENDER_SPEECH_HOUSE ;  8
 	dw Lavender_Map_Name9 ; map_const LAVENDER_NAME_RATER ;  9
@@ -1084,8 +1083,6 @@ Lavender_Map_Name4: ; map_const LAVENDER_TOWN,;  4
 	db "LAVENDER TOWN@"
 Lavender_Map_Name5: ; map_const LAVENDER_POKECENTER_1F ;  5
 	db "LAVENDER CENTER@"
-Lavender_Map_Name6: ; map_const LAVENDER_POKECENTER_2F_BETA ;  6
-	db "LAVENDER PC BETA@"
 Lavender_Map_Name7: ; map_const MR_FUJIS_HOUSE ;  7
 	db "MR. FUJI'S HOUSE@"
 Lavender_Map_Name8: ; map_const LAVENDER_SPEECH_HOUSE ;  8
