@@ -381,7 +381,6 @@ Fuchsia_Map_Names: ;newgroup FUCHSIA
 	dw Fuchsia_Map_Name8 ; map_const FUCHSIA_GYM ;  8
 	dw Fuchsia_Map_Name9 ; map_const BILLS_BROTHERS_HOUSE ;  9
 	dw Fuchsia_Map_Name10 ; map_const FUCHSIA_POKECENTER_1F ; 10
-	dw Fuchsia_Map_Name11 ; map_const FUCHSIA_POKECENTER_2F_BETA ; 11
 	dw Fuchsia_Map_Name12 ; map_const SAFARI_ZONE_WARDENS_HOME ; 12
 	dw Fuchsia_Map_Name13 ; map_const ROUTE_15_FUCHSIA_GATE ; 13
 	assert_table_length NUM_FUCHSIA_MAPS
@@ -1070,8 +1069,6 @@ Fuchsia_Map_Name9: ; map_const BILLS_BROTHERS_HOUSE ;  9
 	db "BILL'S SIS'S HOUSE@"
 Fuchsia_Map_Name10: ; map_const FUCHSIA_POKECENTER_1F ; 10
 	db "FUCHSIA <PKMN> CENTER@"
-Fuchsia_Map_Name11: ; map_const FUCHSIA_POKECENTER_2F_BETA ; 11
-	db "FUCHSIA PC BETA@"
 Fuchsia_Map_Name12: ; map_const SAFARI_ZONE_WARDENS_HOME ; 12
 	db "WARDEN'S HOUSE@"
 Fuchsia_Map_Name13: ; map_const ROUTE_15_FUCHSIA_GATE ; 13
