@@ -37,7 +37,6 @@ Route10South_Blocks:
 	INCBIN "maps/Route10South.blk"
 
 Pokecenter2F_Blocks:
-PewterPokecenter2FBeta_Blocks:
 FuchsiaPokecenter2FBeta_Blocks:
 LavenderPokecenter2FBeta_Blocks:
 CeladonPokecenter2FBeta_Blocks:

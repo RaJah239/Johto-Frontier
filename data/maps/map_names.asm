@@ -338,7 +338,6 @@ Pewter_Map_Names: ;newgroup PEWTER
 	dw Pewter_Map_Name4 ; map_const PEWTER_GYM ;  4
 	dw Pewter_Map_Name5 ; map_const PEWTER_MART ;  5
 	dw Pewter_Map_Name6 ; map_const PEWTER_POKECENTER_1F ;  6
-	dw Pewter_Map_Name7 ; map_const PEWTER_POKECENTER_2F_BETA ;  7
 	dw Pewter_Map_Name8 ; map_const PEWTER_SNOOZE_SPEECH_HOUSE ;  8
 	assert_table_length NUM_PEWTER_MAPS
 
@@ -1006,8 +1005,6 @@ Pewter_Map_Name5: ; map_const PEWTER_MART ;  5
 	db "PEWTER #MART@"
 Pewter_Map_Name6: ; map_const PEWTER_POKECENTER_1F ;  6
 	db "PEWTER <PKMN> CENTER@"
-Pewter_Map_Name7: ; map_const PEWTER_POKECENTER_2F_BETA ;  7
-	db "PEWTER PC BETA@"
 Pewter_Map_Name8: ; map_const PEWTER_SNOOZE_SPEECH_HOUSE ;  8
 	db "PEWTER HOUSE 2@"                                          ; 15
 
