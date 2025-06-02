@@ -82,7 +82,6 @@ BillsFamilysHouse_Blocks:
 GoldenrodPPSpeechHouse_Blocks:
 GoldenrodNameRater_Blocks:
 CeladonMansionRoofHouse_Blocks:
-Route16FuchsiaSpeechHouse_Blocks:
 ManiasHouse_Blocks:
 CianwoodPharmacy_Blocks:
 CianwoodPhotoStudio_Blocks:
@@ -143,7 +142,6 @@ Route38EcruteakGate_Blocks:
 Route42EcruteakGate_Blocks:
 Route32RuinsOfAlphGate_Blocks:
 IlexForestAzaleaGate_Blocks:
-Route16Gate_Blocks:
 Route17Route18Gate_Blocks:
 Route31VioletGate_Blocks:
 	INCBIN "maps/EastWestGate.blk"

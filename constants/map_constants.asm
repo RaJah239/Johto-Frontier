@@ -322,8 +322,6 @@ ENDM
 	map_const CELADON_MANSION_3F,                           4,  5 ; 14
 	map_const CELADON_MANSION_ROOF,                         4,  5 ; 15
 	map_const CELADON_MANSION_ROOF_HOUSE,                   4,  4 ; 16
-	map_const ROUTE_16_FUCHSIA_SPEECH_HOUSE,                4,  4 ; 23
-	map_const ROUTE_16_GATE,                                5,  4 ; 24
 	map_const ROUTE_17_ROUTE_18_GATE,                       5,  4 ; 26
 	endgroup
 

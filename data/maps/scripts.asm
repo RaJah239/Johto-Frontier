@@ -102,8 +102,6 @@ INCLUDE "maps/CeladonMansion2F.asm"
 INCLUDE "maps/CeladonMansion3F.asm"
 INCLUDE "maps/CeladonMansionRoof.asm"
 INCLUDE "maps/CeladonMansionRoofHouse.asm"
-INCLUDE "maps/Route16FuchsiaSpeechHouse.asm"
-INCLUDE "maps/Route16Gate.asm"
 INCLUDE "maps/Route17Route18Gate.asm"
 
 
