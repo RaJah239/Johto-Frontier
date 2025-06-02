@@ -292,7 +292,6 @@ Vermilion_Map_Names: ;newgroup VERMILION
 	table_width 2, Vermilion_Map_Names                                            ; 12
 	dw Vermilion_Map_Name2 ; map_const ROUTE_11,                                    20,  9 ;  2
 	dw Vermilion_Map_Name3 ; map_const VERMILION_CITY,                              20, 18 ;  3
-	dw Vermilion_Map_Name4 ; map_const VERMILION_FISHING_SPEECH_HOUSE ;  4
 	dw Vermilion_Map_Name5 ; map_const VERMILION_POKECENTER_1F ;  5
 	dw Vermilion_Map_Name7 ; map_const POKEMON_FAN_CLUB ;  7
 	dw Vermilion_Map_Name8 ; map_const VERMILION_MAGNET_TRAIN_SPEECH_HOUSE ;  8
@@ -863,8 +862,6 @@ Vermilion_Map_Name2: ; map_const ROUTE_11,;  2
 	db "ROUTE 11@"
 Vermilion_Map_Name3: ; map_const VERMILION_CITY, ;  3
 	db "VERMILION CITY@"
-Vermilion_Map_Name4: ; map_const VERMILION_FISHING_SPEECH_HOUSE ;  4
-	db "VERMILION HOUSE 1@"
 Vermilion_Map_Name5: ; map_const VERMILION_POKECENTER_1F ;  5
 	db "VERMILION CENTER@"
 Vermilion_Map_Name7: ; map_const POKEMON_FAN_CLUB ;  7
