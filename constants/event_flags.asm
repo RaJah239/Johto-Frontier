@@ -250,7 +250,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_ROUTE_12_HIDDEN_ELIXER
+	const_skip
 	const EVENT_ROUTE_13_HIDDEN_CALCIUM
 	const EVENT_ROUTE_11_HIDDEN_REVIVE
 	const EVENT_ROUTE_17_HIDDEN_MAX_ETHER
@@ -629,7 +629,7 @@
 	const EVENT_BEAT_FISHER_JUSTIN
 	const EVENT_BEAT_FISHER_RALPH
 	const EVENT_BEAT_FISHER_ARNOLD
-	const EVENT_BEAT_FISHER_KYLE
+	const_skip
 	const EVENT_BEAT_FISHER_HENRY
 	const EVENT_BEAT_FISHER_MARVIN
 	const EVENT_BEAT_FISHER_TULLY
@@ -638,9 +638,9 @@
 	const EVENT_BEAT_FISHER_WILTON
 	const EVENT_BEAT_FISHER_EDGAR
 	const EVENT_BEAT_FISHER_JONAH
-	const EVENT_BEAT_FISHER_MARTIN
-	const EVENT_BEAT_FISHER_STEPHEN
-	const EVENT_BEAT_FISHER_BARNEY
+	const_skip
+	const_skip
+	const_skip
 	const EVENT_BEAT_FISHER_RALPH2
 	const EVENT_BEAT_FISHER_RALPH3
 	const EVENT_BEAT_FISHER_TULLY2
@@ -1386,8 +1386,8 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_ROUTE_12_CALCIUM
-	const EVENT_ROUTE_12_NUGGET
+	const_skip
+	const_skip
 	const EVENT_ROUTE_15_PP_UP
 	const_skip
 ; New to Crystal

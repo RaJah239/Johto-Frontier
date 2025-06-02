@@ -353,7 +353,7 @@ DEF KRIS EQU __trainer_class__
 	const JUSTIN
 	const RALPH1
 	const ARNOLD
-	const KYLE
+	const KYLE ; unused
 	const HENRY
 	const MARVIN
 	const TULLY1
@@ -362,9 +362,9 @@ DEF KRIS EQU __trainer_class__
 	const WILTON1
 	const EDGAR
 	const JONAH
-	const MARTIN
-	const STEPHEN
-	const BARNEY
+	const MARTIN ; unused
+	const STEPHEN ; unused
+	const BARNEY ; unused
 	const RALPH2
 	const RALPH3
 	const TULLY2
