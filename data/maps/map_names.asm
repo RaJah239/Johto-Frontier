@@ -219,7 +219,6 @@ Cerulean_Map_Names: ;newgroup CERULEAN
 	table_width 2, Cerulean_Map_Names                                             ;  7
 	dw Cerulean_Map_Name4 ; map_const CERULEAN_POKECENTER_1F ;  4
 	dw Cerulean_Map_Name6 ; map_const CERULEAN_GYM ;  6
-	dw Cerulean_Map_Name7 ; map_const CERULEAN_MART ;  7
 	dw Cerulean_Map_Name8 ; map_const ROUTE_10_POKECENTER_1F ;  8
 	dw Cerulean_Map_Name10 ; map_const POWER_PLANT,                                 10,  9 ; 10
 	dw Cerulean_Map_Name13 ; map_const ROUTE_9,                                     30,  9 ; 13
@@ -789,8 +788,6 @@ Cerulean_Map_Name4: ; map_const CERULEAN_POKECENTER_1F ;  4
 	db "CERULEAN CENTER@"
 Cerulean_Map_Name6: ; map_const CERULEAN_GYM ;  6
 	db "CERULEAN GYM@"
-Cerulean_Map_Name7: ; map_const CERULEAN_MART ;  7
-	db "CERULEAN #MART@"
 Cerulean_Map_Name8: ; map_const ROUTE_10_POKECENTER_1F ;  8
 	db "ROUTE 10 CENTER@"
 Cerulean_Map_Name10: ; map_const POWER_PLANT,; 10

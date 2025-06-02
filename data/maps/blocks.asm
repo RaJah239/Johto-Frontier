@@ -212,7 +212,6 @@ Route14_Blocks:
 OlivineMart_Blocks:
 EcruteakMart_Blocks:
 BlackthornMart_Blocks:
-CeruleanMart_Blocks:
 AzaleaMart_Blocks:
 VioletMart_Blocks:
 VermilionMart_Blocks:
