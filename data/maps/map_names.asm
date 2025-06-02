@@ -207,8 +207,6 @@ Cinnabar_Map_Names: ;newgroup CINNABAR
 
 Cerulean_Map_Names: ;newgroup CERULEAN
 	table_width 2, Cerulean_Map_Names                                             ;  7
-	dw Cerulean_Map_Name4 ; map_const CERULEAN_POKECENTER_1F ;  4
-	dw Cerulean_Map_Name17 ; map_const CERULEAN_CITY,                               20, 18 ; 17
 	assert_table_length NUM_CERULEAN_MAPS
 
 Azalea_Map_Names: ;newgroup AZALEA
@@ -675,11 +673,6 @@ Blackthorn_Map_Name9: ; map_const ROUTE_46,;  9
 Blackthorn_Map_Name10: ; map_const BLACKTHORN_CITY,;  6
 	db "BLACKTHORN CITY@"
 
-
-Cerulean_Map_Name4: ; map_const CERULEAN_POKECENTER_1F ;  4
-	db "CERULEAN CENTER@"
-Cerulean_Map_Name17: ; map_const CERULEAN_CITY,;  8
-	db "CERULEAN CITY@"
 
 Azalea_Map_Name1: ; map_const AZALEA_POKECENTER_1F ;  1
 	db "AZALEA <PKMN> CENTER@"

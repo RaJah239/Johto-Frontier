@@ -206,7 +206,6 @@ INCLUDE "maps/HallOfFame.asm"
 
 SECTION "Map Scripts 14", ROMX
 
-INCLUDE "maps/CeruleanCity.asm"
 INCLUDE "maps/SproutTower1F.asm"
 INCLUDE "maps/SproutTower2F.asm"
 INCLUDE "maps/SproutTower3F.asm"
@@ -225,7 +224,6 @@ INCLUDE "maps/BurnedTowerB1F.asm"
 
 SECTION "Map Scripts 15", ROMX
 
-INCLUDE "maps/CeruleanPokecenter1F.asm"
 
 
 SECTION "Map Scripts 16", ROMX

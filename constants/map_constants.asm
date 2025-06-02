@@ -177,8 +177,6 @@ ENDM
 	endgroup
 
 	newgroup CERULEAN                                             ;  7
-	map_const CERULEAN_POKECENTER_1F,                       5,  4 ;  4
-	map_const CERULEAN_CITY,                               20, 18 ; 17
 	endgroup
 
 	newgroup AZALEA                                               ;  8

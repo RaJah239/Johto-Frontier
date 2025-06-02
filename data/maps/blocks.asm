@@ -129,8 +129,6 @@ Route31VioletGate_Blocks:
 ElmsLab_Blocks:
 	INCBIN "maps/ElmsLab.blk"
 
-CeruleanCity_Blocks:
-	INCBIN "maps/CeruleanCity.blk"
 
 SECTION "Map Blocks 2", ROMX
 
@@ -146,7 +144,6 @@ OlivinePokecenter1F_Blocks:
 MahoganyPokecenter1F_Blocks:
 EcruteakPokecenter1F_Blocks:
 BlackthornPokecenter1F_Blocks:
-CeruleanPokecenter1F_Blocks:
 AzaleaPokecenter1F_Blocks:
 VioletPokecenter1F_Blocks:
 Route32Pokecenter1F_Blocks:

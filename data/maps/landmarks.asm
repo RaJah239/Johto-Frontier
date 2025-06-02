@@ -64,7 +64,6 @@ Landmarks:
 	landmark  52, 108, PalletTownName
 	landmark  52,  76, ViridianCityName
 	landmark  52,  52, PewterCityName
-	landmark 100,  52, CeruleanCityName
 	landmark 108,  76, UndergroundName
 	landmark 140, 116, FastShipName
 	assert_table_length NUM_LANDMARKS
@@ -96,7 +95,6 @@ IcePathName:         db "ICE PATH@"
 PalletTownName:      db "PALLET TOWN@"
 ViridianCityName:    db "VIRIDIAN<BSP>CITY@"
 PewterCityName:      db "PEWTER CITY@"
-CeruleanCityName:    db "CERULEAN<BSP>CITY@"
 IndigoPlateauName:   db "INDIGO<BSP>PLATEAU@"
 VictoryRoadName:     db "VICTORY<BSP>ROAD@"
 Route23Name:         db "ROUTE 23@"

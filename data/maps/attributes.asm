@@ -338,7 +338,6 @@ ENDM
 	map_attributes BlackthornMart, BLACKTHORN_MART, $00, 0
 	map_attributes BlackthornPokecenter1F, BLACKTHORN_POKECENTER_1F, $00, 0
 	map_attributes MoveDeletersHouse, MOVE_DELETERS_HOUSE, $00, 0
-	map_attributes CeruleanPokecenter1F, CERULEAN_POKECENTER_1F, $00, 0
 	map_attributes AzaleaPokecenter1F, AZALEA_POKECENTER_1F, $00, 0
 	map_attributes CharcoalKiln, CHARCOAL_KILN, $00, 0
 	map_attributes AzaleaMart, AZALEA_MART, $00, 0
@@ -451,5 +450,4 @@ ENDM
 	map_attributes SilverCaveOutside, SILVER_CAVE_OUTSIDE, $00, 0
 	map_attributes PewterCity, PEWTER_CITY, $0f, 0
 	map_attributes ViridianCity, VIRIDIAN_CITY, $0f, 0
-	map_attributes CeruleanCity, CERULEAN_CITY, $0f, 0
 	map_attributes PalletTown, PALLET_TOWN, $0f, 0
