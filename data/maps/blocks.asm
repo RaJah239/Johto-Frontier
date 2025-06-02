@@ -203,7 +203,6 @@ AzaleaMart_Blocks:
 VioletMart_Blocks:
 VermilionMart_Blocks:
 FuchsiaMart_Blocks:
-LavenderMart_Blocks:
 SaffronMart_Blocks:
 CherrygroveMart_Blocks:
 	INCBIN "maps/Mart.blk"

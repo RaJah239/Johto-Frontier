@@ -15,7 +15,6 @@ LavenderTown_MapEvents:
 
 	def_warp_events
 	warp_event  5,  5, LAVENDER_POKECENTER_1F, 1
-	warp_event  1,  5, LAVENDER_MART, 2
 	warp_event 14,  5, LAV_RADIO_TOWER_1F, 1
 
 	def_coord_events
