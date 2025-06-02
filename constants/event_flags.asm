@@ -212,7 +212,7 @@
 	const_skip
 	const_skip
 	const EVENT_RESTORED_POWER_TO_KANTO
-	const EVENT_GOT_COINS_FROM_GAMBLER_AT_CELADON
+	const_skip
 	const_skip
 	const_skip
 	const_skip

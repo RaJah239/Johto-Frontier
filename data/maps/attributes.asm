@@ -455,7 +455,6 @@ ENDM
 	map_attributes CeladonMansionRoof, CELADON_MANSION_ROOF, $01, 0
 	map_attributes CeladonMansionRoofHouse, CELADON_MANSION_ROOF_HOUSE, $00, 0
 	map_attributes CeladonPokecenter1F, CELADON_POKECENTER_1F, $00, 0
-	map_attributes CeladonGameCorner, CELADON_GAME_CORNER, $00, 0
 	map_attributes CeladonGameCornerPrizeRoom, CELADON_GAME_CORNER_PRIZE_ROOM, $00, 0
 	map_attributes Route16FuchsiaSpeechHouse, ROUTE_16_FUCHSIA_SPEECH_HOUSE, $00, 0
 	map_attributes Route16Gate, ROUTE_16_GATE, $00, 0
