@@ -159,7 +159,6 @@ INCLUDE "maps/Route29Route46Gate.asm"
 
 SECTION "Map Scripts 10", ROMX
 
-INCLUDE "maps/Route22.asm"
 INCLUDE "maps/GoldenrodUnderground.asm"
 INCLUDE "maps/GoldenrodUndergroundSwitchRoomEntrances.asm"
 INCLUDE "maps/GoldenrodDeptStoreB1F.asm"

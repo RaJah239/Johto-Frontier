@@ -217,10 +217,6 @@ Route5_Blocks:
 Route9_Blocks:
 	INCBIN "maps/Route9.blk"
 
-Route22_Blocks:
-	INCBIN "maps/Route22.blk"
-
-
 SECTION "Map Blocks 2", ROMX
 
 Route14_Blocks:

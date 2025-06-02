@@ -462,7 +462,6 @@ Cianwood_Map_Names: ;newgroup CIANWOOD
 
 Viridian_Map_Names: ;newgroup VIRIDIAN ; 23
 	table_width 2, Viridian_Map_Names
-	dw Viridian_Map_Name2 ; map_const ROUTE_22,                                    20,  9 ;  2
 	dw Viridian_Map_Name3 ; map_const VIRIDIAN_CITY,                               20, 18 ;  3
 	dw Viridian_Map_Name6 ; map_const TRAINER_HOUSE_1F ;  6
 	dw Viridian_Map_Name7 ; map_const TRAINER_HOUSE_B1F ;  7
@@ -1172,8 +1171,6 @@ Cianwood_Map_Name15: ; map_const ROUTE_40_BATTLE_TOWER_GATE ; 15
 Cianwood_Map_Name16: ; map_const BATTLE_TOWER_OUTSIDE ; 16
 	db "BATTLE TOWER@"
 
-Viridian_Map_Name2: ; map_const ROUTE_22,  2
-	db "ROUTE 22@"
 Viridian_Map_Name3: ; map_const VIRIDIAN_CITY,  3
 	db "VIRIDIAN CITY@"
 Viridian_Map_Name6: ; map_const TRAINER_HOUSE_1F ;  6

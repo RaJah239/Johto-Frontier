@@ -223,12 +223,6 @@ ENDM
 	connection south, Route29, ROUTE_29, -10
 	connection east, Route45, ROUTE_45, -36
 
-	map_attributes ViridianCity, VIRIDIAN_CITY, $0f, WEST
-	connection west, Route22, ROUTE_22, 4
-
-	map_attributes Route22, ROUTE_22, $2c, EAST
-	connection east, ViridianCity, VIRIDIAN_CITY, -4
-
 	map_attributes PalletTown, PALLET_TOWN, $0f, SOUTH
 	connection south, Route21, ROUTE_21, 0
 
@@ -645,3 +639,5 @@ ENDM
 	map_attributes Route31VioletGate, ROUTE_31_VIOLET_GATE, $00, 0
 	map_attributes SilverCaveOutside, SILVER_CAVE_OUTSIDE, $00, 0
 	map_attributes PewterCity, PEWTER_CITY, $0f, 0
+	map_attributes ViridianCity, VIRIDIAN_CITY, $0f, 0
+	
