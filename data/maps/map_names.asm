@@ -300,7 +300,6 @@ Vermilion_Map_Names: ;newgroup VERMILION
 	dw Vermilion_Map_Name9 ; map_const VERMILION_MART ;  9
 	dw Vermilion_Map_Name10 ; map_const VERMILION_DIGLETTS_CAVE_SPEECH_HOUSE ; 10
 	dw Vermilion_Map_Name11 ; map_const VERMILION_GYM ; 11
-	dw Vermilion_Map_Name13 ; map_const ROUTE_6_UNDERGROUND_PATH_ENTRANCE ; 13
 	assert_table_length NUM_VERMILION_MAPS
 
 Pallet_Map_Names: ;newgroup PALLET
@@ -881,8 +880,7 @@ Vermilion_Map_Name10: ; map_const VERMILION_DIGLETTS_CAVE_SPEECH_HOUSE ; 10
 	db "VERMILION HOUSE 3@"
 Vermilion_Map_Name11: ; map_const VERMILION_GYM ; 11
 	db "VERMILION GYM@"
-Vermilion_Map_Name13: ; map_const ROUTE_6_UNDERGROUND_PATH_ENTRANCE ; 13
-	db "ROUTE 6 UNDERGRND@"
+
 
 Pallet_Map_Name2: ; map_const PALLET_TOWN,;  2
 	db "PALLET TOWN@"
