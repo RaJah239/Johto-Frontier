@@ -706,9 +706,6 @@ LancesRoom_Blocks:
 HallOfFame_Blocks:
 	INCBIN "maps/HallOfFame.blk"
 
-CopycatsHouse1F_Blocks:
-	INCBIN "maps/CopycatsHouse1F.blk"
-
 GoldenrodFlowerShop_Blocks:
 	INCBIN "maps/GoldenrodFlowerShop.blk"
 
