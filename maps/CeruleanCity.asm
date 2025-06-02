@@ -14,7 +14,6 @@ CeruleanCity_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events
-	warp_event 13, 19, CERULEAN_TRADE_SPEECH_HOUSE, 1
 	warp_event 19, 21, CERULEAN_POKECENTER_1F, 1
 	warp_event 30, 23, CERULEAN_GYM, 1
 	warp_event 25, 29, CERULEAN_MART, 2

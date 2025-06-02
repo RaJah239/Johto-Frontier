@@ -217,7 +217,6 @@ Cinnabar_Map_Names: ;newgroup CINNABAR
 
 Cerulean_Map_Names: ;newgroup CERULEAN
 	table_width 2, Cerulean_Map_Names                                             ;  7
-	dw Cerulean_Map_Name3 ; map_const CERULEAN_TRADE_SPEECH_HOUSE ;  3
 	dw Cerulean_Map_Name4 ; map_const CERULEAN_POKECENTER_1F ;  4
 	dw Cerulean_Map_Name6 ; map_const CERULEAN_GYM ;  6
 	dw Cerulean_Map_Name7 ; map_const CERULEAN_MART ;  7
@@ -786,8 +785,6 @@ Cinnabar_Map_Name7: ; map_const ROUTE_21,;  7
 Cinnabar_Map_Name8: ; map_const CINNABAR_ISLAND,;  7
 	db "CINNABAR ISLAND@"
 
-Cerulean_Map_Name3: ; map_const CERULEAN_TRADE_SPEECH_HOUSE ;  3
-	db "CERULEAN HOUSE 2@"
 Cerulean_Map_Name4: ; map_const CERULEAN_POKECENTER_1F ;  4
 	db "CERULEAN CENTER@"
 Cerulean_Map_Name6: ; map_const CERULEAN_GYM ;  6
