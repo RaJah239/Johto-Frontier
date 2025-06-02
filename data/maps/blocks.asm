@@ -672,9 +672,6 @@ VermilionGym_Blocks:
 SaffronGym_Blocks:
 	INCBIN "maps/SaffronGym.blk"
 
-PowerPlant_Blocks:
-	INCBIN "maps/PowerPlant.blk"
-
 PokemonFanClub_Blocks:
 SafariZoneWardensHome_Blocks:
 	INCBIN "maps/PokemonFanClub.blk"

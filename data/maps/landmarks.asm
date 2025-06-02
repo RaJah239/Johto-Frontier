@@ -73,7 +73,6 @@ Landmarks:
 	landmark 116,  68, Route8Name
 	landmark 132,  52, RockTunnelName
 	landmark 132,  56, Route10Name
-	landmark 132,  60, PowerPlantName
 	landmark 132,  68, LavenderTownName
 	landmark 140,  68, LavRadioTowerName
 	landmark  76,  68, CeladonCityName
@@ -112,7 +111,6 @@ RuinsOfAlphName:     db "RUINS<BSP>OF ALPH@"
 UnionCaveName:       db "UNION CAVE@"
 SlowpokeWellName:    db "SLOWPOKE<BSP>WELL@"
 RadioTowerName:      db "RADIO TOWER@"
-PowerPlantName:      db "POWER PLANT@"
 NationalParkName:    db "NATIONAL<BSP>PARK@"
 TinTowerName:        db "TIN TOWER@"
 LighthouseName:      db "LIGHTHOUSE@"

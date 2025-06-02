@@ -208,7 +208,7 @@
 ; Kanto story events
 	const_skip
 	const EVENT_RETURNED_MACHINE_PART
-	const EVENT_MET_MANAGER_AT_POWER_PLANT
+	const_skip
 	const_skip
 	const_skip
 	const EVENT_RESTORED_POWER_TO_KANTO
@@ -229,7 +229,7 @@
 	const EVENT_GOT_TM19_GIGA_DRAIN
 	const EVENT_GOT_TM06_TOXIC
 	const EVENT_GOT_UP_GRADE
-	const EVENT_GOT_TM07_ZAP_CANNON
+	const_skip
 	const_skip
 	const EVENT_TALKED_TO_OAK_IN_KANTO
 	const EVENT_GOT_HP_UP_FROM_VERMILION_GUY

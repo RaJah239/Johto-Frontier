@@ -259,7 +259,6 @@ SECTION "Map Scripts 15", ROMX
 
 INCLUDE "maps/CeruleanPokecenter1F.asm"
 INCLUDE "maps/Route10Pokecenter1F.asm"
-INCLUDE "maps/PowerPlant.asm"
 INCLUDE "maps/FightingDojo.asm"
 INCLUDE "maps/SaffronGym.asm"
 INCLUDE "maps/SaffronMart.asm"
