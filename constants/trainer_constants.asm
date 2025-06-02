@@ -162,8 +162,8 @@ DEF KRIS EQU __trainer_class__
 	const VANCE1
 	const HANK ; unused
 	const ROY ; unused
-	const BORIS
-	const BOB
+	const BORIS ; unused
+	const BOB ; unused
 	const JOSE1
 	const PETER
 	const JOSE2
@@ -352,7 +352,7 @@ DEF KRIS EQU __trainer_class__
 	trainerclass FISHER ; 25
 	const JUSTIN
 	const RALPH1
-	const ARNOLD
+	const ARNOLD ; unused
 	const KYLE ; unused
 	const HENRY
 	const MARVIN
@@ -377,7 +377,7 @@ DEF KRIS EQU __trainer_class__
 	const TULLY4
 
 	trainerclass SWIMMERM ; 26
-	const HAROLD
+	const HAROLD ; unused
 	const SIMON
 	const RANDALL
 	const CHARLIE
@@ -390,11 +390,11 @@ DEF KRIS EQU __trainer_class__
 	const DARYL ; unused
 	const WALTER ; unused
 	const TONY ; unused
-	const JEROME
-	const TUCKER
+	const JEROME ; unused
+	const TUCKER ; unused
 	const RICK ; unused
-	const CAMERON
-	const SETH
+	const CAMERON ; unused
+	const SETH ; unused
 	const JAMES ; unused
 	const LEWIS ; unused
 	const PARKER ; unused
@@ -411,12 +411,12 @@ DEF KRIS EQU __trainer_class__
 	const JILL ; unused
 	const MARY ; unused
 	const KATIE ; unused
-	const DAWN
+	const DAWN ; unused
 	const TARA ; unused
-	const NICOLE
-	const LORI
+	const NICOLE ; unused
+	const LORI ; unused
 	const JODY ; unused
-	const NIKKI
+	const NIKKI ; unused
 	const DIANA ; unused
 	const BRIANA ; unused
 
@@ -493,10 +493,10 @@ DEF KRIS EQU __trainer_class__
 	const DWAYNE ; unused
 	const HARRIS ; unused
 	const ZEKE ; unused
-	const CHARLES
-	const RILEY
-	const JOEL
-	const GLENN
+	const CHARLES ; unused
+	const RILEY ; unused
+	const JOEL ; unused
+	const GLENN ; unused
 
 	trainerclass BLAINE ; 2e
 	const BLAINE1

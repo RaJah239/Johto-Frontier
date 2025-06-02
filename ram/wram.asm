@@ -3117,8 +3117,6 @@ wColosseumSceneID::                               db
 wTimeCapsuleSceneID::                             db
 wTrainerHouseB1FSceneID::                         db
 wVictoryRoadGateSceneID::                         db
-wRoute16GateSceneID::                             db
-wRoute17Route18GateSceneID::                      db
 wIndigoPlateauPokecenter1FSceneID::               db
 wWillsRoomSceneID::                               db
 wKogasRoomSceneID::                               db
@@ -3185,7 +3183,7 @@ wMountMoonSquareSceneID::                         db
 wMobileTradeRoomSceneID::                         db
 wMobileBattleRoomSceneID::                        db
 
-	ds 179
+	ds 181
 
 wEventFlags:: flag_array NUM_EVENTS
 

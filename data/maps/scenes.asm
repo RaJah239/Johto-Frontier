@@ -11,8 +11,6 @@ MapScenes::
 	scene_var TIME_CAPSULE,                                wTimeCapsuleSceneID
 	scene_var TRAINER_HOUSE_B1F,                           wTrainerHouseB1FSceneID
 	scene_var VICTORY_ROAD_GATE,                           wVictoryRoadGateSceneID
-	scene_var ROUTE_16_GATE,                               wRoute16GateSceneID
-	scene_var ROUTE_17_ROUTE_18_GATE,                      wRoute17Route18GateSceneID
 	scene_var INDIGO_PLATEAU_POKECENTER_1F,                wIndigoPlateauPokecenter1FSceneID
 	scene_var WILLS_ROOM,                                  wWillsRoomSceneID
 	scene_var KOGAS_ROOM,                                  wKogasRoomSceneID

@@ -221,7 +221,7 @@
 	const_skip
 	const EVENT_TALKED_TO_SEAFOAM_GYM_GUIDE_ONCE
 	const EVENT_ENABLE_DIPLOMA_PRINTING
-	const EVENT_CINNABAR_ROCKS_CLEARED
+	const_skip
 	const_skip
 	const EVENT_TALKED_TO_WARDENS_GRANDDAUGHTER
 	const EVENT_GOT_TM03_CURSE
@@ -253,8 +253,8 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_ROUTE_17_HIDDEN_MAX_ETHER
-	const EVENT_ROUTE_17_HIDDEN_MAX_ELIXER
+	const_skip
+	const_skip
 	const_skip
 	const EVENT_FOUND_LEFTOVERS_IN_CELADON_CAFE
 	const_skip
@@ -526,12 +526,12 @@
 	const EVENT_BEAT_SWIMMERF_JILL
 	const EVENT_BEAT_SWIMMERF_MARY
 	const EVENT_BEAT_SWIMMERF_KATIE
-	const EVENT_BEAT_SWIMMERF_DAWN
+	const_skip
 	const EVENT_BEAT_SWIMMERF_TARA
-	const EVENT_BEAT_SWIMMERF_NICOLE
-	const EVENT_BEAT_SWIMMERF_LORI
+	const_skip
+	const_skip
 	const EVENT_BEAT_SWIMMERF_JODY
-	const EVENT_BEAT_SWIMMERF_NIKKI
+	const_skip
 	const_skip
 	const_skip
 ; Bird Keeper
@@ -544,8 +544,8 @@
 	const EVENT_BEAT_BIRD_KEEPER_VANCE
 	const_skip
 	const_skip
-	const EVENT_BEAT_BIRD_KEEPER_BORIS
-	const EVENT_BEAT_BIRD_KEEPER_BOB
+	const_skip
+	const_skip
 	const EVENT_BEAT_BIRD_KEEPER_JOSE
 	const EVENT_BEAT_BIRD_KEEPER_PETER
 	const EVENT_BEAT_BIRD_KEEPER_JOSE2
@@ -599,10 +599,10 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_BIKER_CHARLES
-	const EVENT_BEAT_BIKER_RILEY
-	const EVENT_BEAT_BIKER_JOEL
-	const EVENT_BEAT_BIKER_GLENN
+	const_skip
+	const_skip
+	const_skip
+	const_skip
 ; Psychic
 	const EVENT_BEAT_PSYCHIC_NATHAN
 	const_skip
@@ -628,7 +628,7 @@
 ; Fisher
 	const EVENT_BEAT_FISHER_JUSTIN
 	const EVENT_BEAT_FISHER_RALPH
-	const EVENT_BEAT_FISHER_ARNOLD
+	const_skip
 	const_skip
 	const EVENT_BEAT_FISHER_HENRY
 	const EVENT_BEAT_FISHER_MARVIN
@@ -982,7 +982,7 @@
 	const EVENT_BEAT_SKIER_ROXANNE
 	const EVENT_BEAT_SKIER_CLARISSA
 ; SwimmerM
-	const EVENT_BEAT_SWIMMERM_HAROLD
+	const_skip
 	const EVENT_BEAT_SWIMMERM_SIMON
 	const EVENT_BEAT_SWIMMERM_RANDALL
 	const EVENT_BEAT_SWIMMERM_CHARLIE
@@ -994,14 +994,14 @@
 	const EVENT_BEAT_SWIMMERM_PATON
 	const EVENT_BEAT_SWIMMERM_DARYL
 	const EVENT_BEAT_SWIMMERM_WALTER
-	const EVENT_BEAT_SWIMMERM_TONY
-	const EVENT_BEAT_SWIMMERM_JEROME
-	const EVENT_BEAT_SWIMMERM_TUCKER
-	const EVENT_BEAT_SWIMMERM_RICK
-	const EVENT_BEAT_SWIMMERM_CAMERON
-	const EVENT_BEAT_SWIMMERM_SETH
-	const EVENT_BEAT_SWIMMERM_JAMES
-	const EVENT_BEAT_SWIMMERM_LEWIS
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
 	const_skip
 ; Youngster
 	const EVENT_BEAT_YOUNGSTER_JOEY
