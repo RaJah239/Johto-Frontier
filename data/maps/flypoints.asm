@@ -23,5 +23,4 @@ Flypoints:
 
 ; Kanto
 	db LANDMARK_PALLET_TOWN,      SPAWN_PALLET
-	db LANDMARK_VIRIDIAN_CITY,    SPAWN_VIRIDIAN
 	db -1 ; end
