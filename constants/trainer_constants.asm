@@ -160,7 +160,7 @@ DEF KRIS EQU __trainer_class__
 	const TOBY
 	const DENIS
 	const VANCE1
-	const HANK
+	const HANK ; unused
 	const ROY
 	const BORIS
 	const BOB
@@ -561,8 +561,8 @@ DEF KRIS EQU __trainer_class__
 	const BROOKE
 	const KIM
 	const CINDY
-	const HOPE
-	const SHARON
+	const HOPE ; unused
+	const SHARON ; unused
 	const DEBRA
 	const GINA2
 	const ERIN1

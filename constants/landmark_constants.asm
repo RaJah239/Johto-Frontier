@@ -58,7 +58,6 @@ DEF KANTO_LANDMARK EQU const_value
 	const LANDMARK_PALLET_TOWN       ; 2f
 	const LANDMARK_VIRIDIAN_CITY     ; 31
 	const LANDMARK_PEWTER_CITY       ; 33
-	const LANDMARK_ROUTE_4           ; 36
 	const LANDMARK_CERULEAN_CITY     ; 37
 	const LANDMARK_ROUTE_24          ; 38
 	const LANDMARK_ROUTE_25          ; 39
