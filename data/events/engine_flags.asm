@@ -79,7 +79,6 @@ EngineFlags:
 	engine_flag wVisitedSpawns, SPAWN_PALLET
 	engine_flag wVisitedSpawns, SPAWN_VIRIDIAN
 	engine_flag wVisitedSpawns, SPAWN_PEWTER
-	engine_flag wVisitedSpawns, SPAWN_CERULEAN
 	engine_flag wVisitedSpawns, SPAWN_INDIGO
 	engine_flag wVisitedSpawns, SPAWN_NEW_BARK
 	engine_flag wVisitedSpawns, SPAWN_CHERRYGROVE

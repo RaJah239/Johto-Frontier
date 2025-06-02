@@ -81,7 +81,6 @@ DEF NUM_FISHGROUPS EQU const_value - 1
 	const SPAWN_PALLET
 	const SPAWN_VIRIDIAN
 	const SPAWN_PEWTER
-	const SPAWN_CERULEAN
 
 ; johto
 	const SPAWN_NEW_BARK
@@ -134,5 +133,4 @@ DEF KANTO_FLYPOINT EQU const_value
 	const FLY_PALLET
 	const FLY_VIRIDIAN
 	const FLY_PEWTER
-	const FLY_CERULEAN
 DEF NUM_FLYPOINTS EQU const_value
