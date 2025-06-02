@@ -635,7 +635,6 @@ ENDM
 	map_attributes BattleTowerHallway, BATTLE_TOWER_HALLWAY, $00, 0
 	map_attributes Route40BattleTowerGate, ROUTE_40_BATTLE_TOWER_GATE, $00, 0
 	map_attributes BattleTowerOutside, BATTLE_TOWER_OUTSIDE, $05, 0
-	map_attributes ViridianNicknameSpeechHouse, VIRIDIAN_NICKNAME_SPEECH_HOUSE, $00, 0
 	map_attributes TrainerHouse1F, TRAINER_HOUSE_1F, $00, 0
 	map_attributes TrainerHouseB1F, TRAINER_HOUSE_B1F, $00, 0
 	map_attributes ViridianPokecenter1F, VIRIDIAN_POKECENTER_1F, $00, 0

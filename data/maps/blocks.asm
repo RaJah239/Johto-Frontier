@@ -134,7 +134,6 @@ CianwoodPharmacy_Blocks:
 CianwoodPhotoStudio_Blocks:
 CianwoodLugiaSpeechHouse_Blocks:
 PokeSeersHouse_Blocks:
-ViridianNicknameSpeechHouse_Blocks:
 Route2NuggetHouse_Blocks:
 PlayersNeighborsHouse_Blocks:
 Route26HealHouse_Blocks:
