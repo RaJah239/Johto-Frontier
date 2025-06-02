@@ -258,7 +258,6 @@ INCLUDE "maps/BurnedTowerB1F.asm"
 SECTION "Map Scripts 15", ROMX
 
 INCLUDE "maps/CeruleanPokecenter1F.asm"
-INCLUDE "maps/CeruleanGym.asm"
 INCLUDE "maps/Route10Pokecenter1F.asm"
 INCLUDE "maps/PowerPlant.asm"
 INCLUDE "maps/FightingDojo.asm"

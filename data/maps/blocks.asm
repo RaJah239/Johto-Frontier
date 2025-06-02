@@ -668,9 +668,6 @@ PlayersHouse2F_Blocks:
 SaffronMagnetTrainStation_Blocks:
 	INCBIN "maps/SaffronMagnetTrainStation.blk"
 
-CeruleanGym_Blocks:
-	INCBIN "maps/CeruleanGym.blk"
-
 VermilionGym_Blocks:
 	INCBIN "maps/VermilionGym.blk"
 

@@ -188,7 +188,6 @@ ENDM
 
 	newgroup CERULEAN                                             ;  7
 	map_const CERULEAN_POKECENTER_1F,                       5,  4 ;  4
-	map_const CERULEAN_GYM,                                 5,  8 ;  6
 	map_const ROUTE_10_POKECENTER_1F,                       5,  4 ;  8
 	map_const POWER_PLANT,                                 10,  9 ; 10
 	map_const ROUTE_9,                                     30,  9 ; 13

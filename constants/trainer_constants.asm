@@ -397,7 +397,7 @@ DEF KRIS EQU __trainer_class__
 	const SETH
 	const JAMES ; unused
 	const LEWIS ; unused
-	const PARKER
+	const PARKER ; unused
 
 	trainerclass SWIMMERF ; 27
 	const ELAINE
@@ -417,8 +417,8 @@ DEF KRIS EQU __trainer_class__
 	const LORI
 	const JODY ; unused
 	const NIKKI
-	const DIANA
-	const BRIANA
+	const DIANA ; unused
+	const BRIANA ; unused
 
 	trainerclass SAILOR ; 28
 	const EUGENE
