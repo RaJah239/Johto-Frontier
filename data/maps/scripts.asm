@@ -257,7 +257,6 @@ INCLUDE "maps/BurnedTowerB1F.asm"
 
 SECTION "Map Scripts 15", ROMX
 
-INCLUDE "maps/CeruleanPoliceStation.asm"
 INCLUDE "maps/CeruleanTradeSpeechHouse.asm"
 INCLUDE "maps/CeruleanPokecenter1F.asm"
 INCLUDE "maps/CeruleanGym.asm"
