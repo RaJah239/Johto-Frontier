@@ -97,13 +97,6 @@ INCLUDE "maps/IlexForest.asm"
 SECTION "Map Scripts 7", ROMX
 
 INCLUDE "maps/LakeOfRage.asm"
-INCLUDE "maps/CeladonDeptStore1F.asm"
-INCLUDE "maps/CeladonDeptStore2F.asm"
-INCLUDE "maps/CeladonDeptStore3F.asm"
-INCLUDE "maps/CeladonDeptStore4F.asm"
-INCLUDE "maps/CeladonDeptStore5F.asm"
-INCLUDE "maps/CeladonDeptStore6F.asm"
-INCLUDE "maps/CeladonDeptStoreElevator.asm"
 INCLUDE "maps/CeladonMansion1F.asm"
 INCLUDE "maps/CeladonMansion2F.asm"
 INCLUDE "maps/CeladonMansion3F.asm"

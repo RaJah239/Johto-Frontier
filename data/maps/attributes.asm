@@ -449,13 +449,6 @@ ENDM
 	map_attributes TimeCapsule, TIME_CAPSULE, $00, 0
 	map_attributes MobileTradeRoom, MOBILE_TRADE_ROOM, $00, 0
 	map_attributes MobileBattleRoom, MOBILE_BATTLE_ROOM, $00, 0
-	map_attributes CeladonDeptStore1F, CELADON_DEPT_STORE_1F, $00, 0
-	map_attributes CeladonDeptStore2F, CELADON_DEPT_STORE_2F, $00, 0
-	map_attributes CeladonDeptStore3F, CELADON_DEPT_STORE_3F, $00, 0
-	map_attributes CeladonDeptStore4F, CELADON_DEPT_STORE_4F, $00, 0
-	map_attributes CeladonDeptStore5F, CELADON_DEPT_STORE_5F, $00, 0
-	map_attributes CeladonDeptStore6F, CELADON_DEPT_STORE_6F, $00, 0
-	map_attributes CeladonDeptStoreElevator, CELADON_DEPT_STORE_ELEVATOR, $00, 0
 	map_attributes CeladonMansion1F, CELADON_MANSION_1F, $00, 0
 	map_attributes CeladonMansion2F, CELADON_MANSION_2F, $00, 0
 	map_attributes CeladonMansion3F, CELADON_MANSION_3F, $00, 0

@@ -362,13 +362,6 @@ Celadon_Map_Names: ;newgroup CELADON
 	dw Celadon_Map_Name2 ; map_const ROUTE_16,                                    10,  9 ;  2
 	dw Celadon_Map_Name3 ; map_const ROUTE_17,                                    10, 45 ;  3
 	dw Celadon_Map_Name4 ; map_const CELADON_CITY,                                20, 18 ;  4
-	dw Celadon_Map_Name5 ; map_const CELADON_DEPT_STORE_1F ;  5
-	dw Celadon_Map_Name6 ; map_const CELADON_DEPT_STORE_2F ;  6
-	dw Celadon_Map_Name7 ; map_const CELADON_DEPT_STORE_3F ;  7
-	dw Celadon_Map_Name8 ; map_const CELADON_DEPT_STORE_4F ;  8
-	dw Celadon_Map_Name9 ; map_const CELADON_DEPT_STORE_5F ;  9
-	dw Celadon_Map_Name10 ; map_const CELADON_DEPT_STORE_6F ; 10
-	dw Celadon_Map_Name11 ; map_const CELADON_DEPT_STORE_ELEVATOR ; 11
 	dw Celadon_Map_Name12 ; map_const CELADON_MANSION_1F ; 12
 	dw Celadon_Map_Name13 ; map_const CELADON_MANSION_2F ; 13
 	dw Celadon_Map_Name14 ; map_const CELADON_MANSION_3F ; 14
@@ -917,20 +910,6 @@ Celadon_Map_Name3: ; map_const ROUTE_17,  3
 	db "ROUTE 17@"
 Celadon_Map_Name4: ; map_const CELADON_CITY, 4
 	db "CELADON CITY@"
-Celadon_Map_Name5: ; map_const CELADON_DEPT_STORE_1F ;  5
-	db "CELADON DEPT. 1F@"
-Celadon_Map_Name6: ; map_const CELADON_DEPT_STORE_2F ;  6
-	db "CELADON DEPT. 2F@"
-Celadon_Map_Name7: ; map_const CELADON_DEPT_STORE_3F ;  7
-	db "CELADON DEPT. 3F@"
-Celadon_Map_Name8: ; map_const CELADON_DEPT_STORE_4F ;  8
-	db "CELADON DEPT. 4F@"
-Celadon_Map_Name9: ; map_const CELADON_DEPT_STORE_5F ;  9
-	db "CELADON DEPT. 5F@"
-Celadon_Map_Name10: ; map_const CELADON_DEPT_STORE_6F ; 10
-	db "CELADON DEPT. 6F@"
-Celadon_Map_Name11: ; map_const CELADON_DEPT_STORE_ELEVATOR ; 11
-	db "CELADON DEPT. LIFT@"
 Celadon_Map_Name12: ; map_const CELADON_MANSION_1F ; 12
 	db "CELADON MANSION 1F@"
 Celadon_Map_Name13: ; map_const CELADON_MANSION_2F ; 13

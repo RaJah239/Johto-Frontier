@@ -318,13 +318,6 @@ ENDM
 	map_const ROUTE_16,                                    10,  9 ;  2
 	map_const ROUTE_17,                                    10, 45 ;  3
 	map_const CELADON_CITY,                                20, 18 ;  4
-	map_const CELADON_DEPT_STORE_1F,                        8,  4 ;  5
-	map_const CELADON_DEPT_STORE_2F,                        8,  4 ;  6
-	map_const CELADON_DEPT_STORE_3F,                        8,  4 ;  7
-	map_const CELADON_DEPT_STORE_4F,                        8,  4 ;  8
-	map_const CELADON_DEPT_STORE_5F,                        8,  4 ;  9
-	map_const CELADON_DEPT_STORE_6F,                        8,  4 ; 10
-	map_const CELADON_DEPT_STORE_ELEVATOR,                  2,  2 ; 11
 	map_const CELADON_MANSION_1F,                           4,  5 ; 12
 	map_const CELADON_MANSION_2F,                           4,  5 ; 13
 	map_const CELADON_MANSION_3F,                           4,  5 ; 14
