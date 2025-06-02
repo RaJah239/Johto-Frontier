@@ -365,7 +365,6 @@ Lavender_Map_Names: ;newgroup LAVENDER
 	table_width 2, Lavender_Map_Names                                            ; 18
 	dw Lavender_Map_Name2 ; map_const ROUTE_12,                                    10, 27 ;  2
 	dw Lavender_Map_Name4 ; map_const LAVENDER_TOWN,                               10,  9 ;  4
-	dw Lavender_Map_Name5 ; map_const LAVENDER_POKECENTER_1F ;  5
 	dw Lavender_Map_Name13 ; map_const ROUTE_8_SAFFRON_GATE ; 13
 	dw Lavender_Map_Name14 ; map_const ROUTE_12_SUPER_ROD_HOUSE ; 14
 	assert_table_length NUM_LAVENDER_MAPS
@@ -984,8 +983,6 @@ Lavender_Map_Name2: ; map_const ROUTE_12,;  2
 	db "ROUTE 12@"
 Lavender_Map_Name4: ; map_const LAVENDER_TOWN,;  4
 	db "LAVENDER TOWN@"
-Lavender_Map_Name5: ; map_const LAVENDER_POKECENTER_1F ;  5
-	db "LAVENDER CENTER@"
 Lavender_Map_Name7: ; map_const MR_FUJIS_HOUSE ;  7
 	db "MR. FUJI'S HOUSE@"
 Lavender_Map_Name13: ; map_const ROUTE_8_SAFFRON_GATE ; 13
