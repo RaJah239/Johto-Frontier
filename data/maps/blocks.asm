@@ -60,9 +60,6 @@ Route34_Blocks:
 Route46_Blocks:
 	INCBIN "maps/Route46.blk"
 
-FuchsiaCity_Blocks:
-	INCBIN "maps/FuchsiaCity.blk"
-
 Route38_Blocks:
 	INCBIN "maps/Route38.blk"
 
@@ -97,7 +94,6 @@ CherrygroveEvolutionSpeechHouse_Blocks:
 Route30BerryHouse_Blocks:
 	INCBIN "maps/House1.blk"
 
-Route19FuchsiaGate_Blocks:
 Route43MahoganyGate_Blocks:
 Route43Gate_Blocks:
 Route35GoldenrodGate_Blocks:
@@ -169,7 +165,6 @@ VioletPokecenter1F_Blocks:
 Route32Pokecenter1F_Blocks:
 GoldenrodPokecenter1F_Blocks:
 PewterPokecenter1F_Blocks:
-FuchsiaPokecenter1F_Blocks:
 SilverCavePokecenter1F_Blocks:
 CianwoodPokecenter1F_Blocks:
 ViridianPokecenter1F_Blocks:

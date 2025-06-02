@@ -238,12 +238,8 @@ ENDM
 	connection west, CinnabarIsland, CINNABAR_ISLAND, 0
 	connection east, Route19, ROUTE_19, -9
 
-	map_attributes Route19, ROUTE_19, $43, NORTH | WEST
-	connection north, FuchsiaCity, FUCHSIA_CITY, 0
+	map_attributes Route19, ROUTE_19, $43, WEST
 	connection west, Route20, ROUTE_20, 9
-
-	map_attributes FuchsiaCity, FUCHSIA_CITY, $0f, SOUTH
-	connection south, Route19, ROUTE_19, 0
 
 	map_attributes Route23, ROUTE_23, $0f, 0
 	map_attributes SproutTower1F, SPROUT_TOWER_1F, $00, 0
@@ -360,7 +356,6 @@ ENDM
 	map_attributes BlackthornPokecenter1F, BLACKTHORN_POKECENTER_1F, $00, 0
 	map_attributes MoveDeletersHouse, MOVE_DELETERS_HOUSE, $00, 0
 	map_attributes CinnabarPokecenter1F, CINNABAR_POKECENTER_1F, $00, 0
-	map_attributes Route19FuchsiaGate, ROUTE_19_FUCHSIA_GATE, $00, 0
 	map_attributes CeruleanPokecenter1F, CERULEAN_POKECENTER_1F, $00, 0
 	map_attributes AzaleaPokecenter1F, AZALEA_POKECENTER_1F, $00, 0
 	map_attributes CharcoalKiln, CHARCOAL_KILN, $00, 0
@@ -424,7 +419,6 @@ ENDM
 	map_attributes KarensRoom, KARENS_ROOM, $00, 0
 	map_attributes LancesRoom, LANCES_ROOM, $00, 0
 	map_attributes HallOfFame, HALL_OF_FAME, $00, 0
-	map_attributes FuchsiaPokecenter1F, FUCHSIA_POKECENTER_1F, $00, 0
 	map_attributes SilverCavePokecenter1F, SILVER_CAVE_POKECENTER_1F, $00, 0
 	map_attributes Route39_SilverCaveGate, ROUTE_39_SILVER_CAVE_GATE, $00, 0
 	map_attributes Pokecenter2F, POKECENTER_2F, $00, 0

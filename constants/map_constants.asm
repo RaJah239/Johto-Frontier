@@ -175,7 +175,6 @@ ENDM
 
 	newgroup CINNABAR                                             ;  6
 	map_const CINNABAR_POKECENTER_1F,                       5,  4 ;  1
-	map_const ROUTE_19_FUCHSIA_GATE,                        5,  4 ;  3
 	map_const ROUTE_19,                                    10, 18 ;  5
 	map_const ROUTE_20,                                    30,  9 ;  6
 	map_const ROUTE_21,                                    10, 18 ;  7
@@ -291,8 +290,6 @@ ENDM
 	endgroup
 
 	newgroup FUCHSIA                                              ; 17
-	map_const FUCHSIA_CITY,                                20, 18 ;  5
-	map_const FUCHSIA_POKECENTER_1F,                        5,  4 ; 10
 	endgroup
 
 	newgroup LAVENDER                                             ; 18

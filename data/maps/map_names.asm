@@ -204,7 +204,6 @@ Blackthorn_Map_Names: ;newgroup BLACKTHORN
 Cinnabar_Map_Names: ;newgroup CINNABAR
 	table_width 2, Cinnabar_Map_Names                                        ;  6
 	dw Cinnabar_Map_Name1 ; map_const CINNABAR_POKECENTER_1F ;  1
-	dw Cinnabar_Map_Name3 ; map_const ROUTE_19_FUCHSIA_GATE ;  3
 	dw Cinnabar_Map_Name5 ; map_const ROUTE_19,                                    10, 18 ;  5
 	dw Cinnabar_Map_Name6 ; map_const ROUTE_20,                                    30,  9 ;  6
 	dw Cinnabar_Map_Name7 ; map_const ROUTE_21,                                    10, 18 ;  7
@@ -331,8 +330,6 @@ Indigo_Map_Names: ;newgroup INDIGO
 
 Fuchsia_Map_Names: ;newgroup FUCHSIA
 	table_width 2, Fuchsia_Map_Names                                              ; 17
-	dw Fuchsia_Map_Name5 ; map_const FUCHSIA_CITY,                                20, 18 ;  5
-	dw Fuchsia_Map_Name10 ; map_const FUCHSIA_POKECENTER_1F ; 10
 	assert_table_length NUM_FUCHSIA_MAPS
 
 Lavender_Map_Names: ;newgroup LAVENDER
@@ -685,8 +682,6 @@ Blackthorn_Map_Name10: ; map_const BLACKTHORN_CITY,;  6
 
 Cinnabar_Map_Name1: ; map_const CINNABAR_POKECENTER_1F ;  1
 	db "CINNABAR CENTER@"
-Cinnabar_Map_Name3: ; map_const ROUTE_19_FUCHSIA_GATE ;  3
-	db "ROUTE 19 GATE@"
 Cinnabar_Map_Name5: ; map_const ROUTE_19, ;  5
 	db "ROUTE 19@"
 Cinnabar_Map_Name6: ; map_const ROUTE_20,;  6
@@ -861,14 +856,6 @@ Indigo_Map_Name7: ; map_const LANCES_ROOM,;  7
 Indigo_Map_Name8: ; map_const HALL_OF_FAME ;  8
 	db "E4 HALL OF FAME@"                                           ; 17
 
-Fuchsia_Map_Name5: ; map_const FUCHSIA_CITY,;  5
-	db "FUCHSIA CITY@"
-Fuchsia_Map_Name10: ; map_const FUCHSIA_POKECENTER_1F ; 10
-	db "FUCHSIA <PKMN> CENTER@"
-
-
-Lavender_Map_Name7: ; map_const MR_FUJIS_HOUSE ;  7
-	db "MR. FUJI'S HOUSE@"
 
 Silver_Map_Name1: ; map_const SILVER_CAVE_OUTSIDE;  1
 	db "MT. SILVER@"

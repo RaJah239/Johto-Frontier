@@ -271,7 +271,6 @@ INCLUDE "maps/MobileBattleRoom.asm"
 SECTION "Map Scripts 18", ROMX
 
 INCLUDE "maps/Route36.asm"
-INCLUDE "maps/FuchsiaCity.asm"
 INCLUDE "maps/BlackthornGym1F.asm"
 INCLUDE "maps/BlackthornGym2F.asm"
 INCLUDE "maps/BlackthornDragonSpeechHouse.asm"
@@ -279,7 +278,6 @@ INCLUDE "maps/BlackthornEmysHouse.asm"
 INCLUDE "maps/BlackthornMart.asm"
 INCLUDE "maps/BlackthornPokecenter1F.asm"
 INCLUDE "maps/MoveDeletersHouse.asm"
-INCLUDE "maps/FuchsiaPokecenter1F.asm"
 INCLUDE "maps/CherrygroveMart.asm"
 INCLUDE "maps/CherrygrovePokecenter1F.asm"
 INCLUDE "maps/CherrygroveGymSpeechHouse.asm"
@@ -346,7 +344,6 @@ INCLUDE "maps/Route42.asm"
 INCLUDE "maps/Route46.asm"
 INCLUDE "maps/ViridianCity.asm"
 INCLUDE "maps/CinnabarPokecenter1F.asm"
-INCLUDE "maps/Route19FuchsiaGate.asm"
 
 
 SECTION "Map Scripts 24", ROMX
