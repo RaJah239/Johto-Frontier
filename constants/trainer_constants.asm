@@ -480,7 +480,7 @@ DEF KRIS EQU __trainer_class__
 	const NOLAND
 	const SIDNEY ; unused
 	const KENNY
-	const JIM
+	const JIM ; unused
 	const DANIEL
 	const PARRY2
 	const PARRY3
@@ -642,7 +642,7 @@ DEF KRIS EQU __trainer_class__
 	trainerclass POKEFANM ; 3b
 	const WILLIAM
 	const DEREK1
-	const ROBERT
+	const ROBERT ; unused
 	const JOSHUA
 	const CARTER
 	const TREVOR
