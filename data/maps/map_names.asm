@@ -359,7 +359,6 @@ Cable_Club_Map_Names: ;newgroup CABLE_CLUB
 
 Celadon_Map_Names: ;newgroup CELADON
 	table_width 2, Celadon_Map_Names                                              ; 21
-	dw Celadon_Map_Name1 ; map_const ROUTE_7,                                     10,  9 ;  1
 	dw Celadon_Map_Name2 ; map_const ROUTE_16,                                    10,  9 ;  2
 	dw Celadon_Map_Name3 ; map_const ROUTE_17,                                    10, 45 ;  3
 	dw Celadon_Map_Name4 ; map_const CELADON_CITY,                                20, 18 ;  4
@@ -912,8 +911,6 @@ Cable_Club_Map_Name5: ; map_const MOBILE_TRADE_ROOM ;  5
 Cable_Club_Map_Name6: ; map_const MOBILE_BATTLE_ROOM ;  6
 	db "MOBILE BATTLE@"                                          ; 21
 
-Celadon_Map_Name1: ; map_const ROUTE_7,;  1
-	db "ROUTE 7@"
 Celadon_Map_Name2: ; map_const ROUTE_16,;  2
 	db "ROUTE 16@"
 Celadon_Map_Name3: ; map_const ROUTE_17,  3

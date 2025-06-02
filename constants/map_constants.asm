@@ -315,7 +315,6 @@ ENDM
 	endgroup
 
 	newgroup CELADON                                              ; 21
-	map_const ROUTE_7,                                     10,  9 ;  1
 	map_const ROUTE_16,                                    10,  9 ;  2
 	map_const ROUTE_17,                                    10, 45 ;  3
 	map_const CELADON_CITY,                                20, 18 ;  4

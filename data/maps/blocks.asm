@@ -339,9 +339,6 @@ BlackthornCity_Blocks:
 SilverCaveOutside_Blocks:
 	INCBIN "maps/SilverCaveOutside.blk"
 
-Route7_Blocks:
-	INCBIN "maps/Route7.blk"
-
 Route16_Blocks:
 	INCBIN "maps/Route16.blk"
 

@@ -258,12 +258,8 @@ ENDM
 	connection south, Route17, ROUTE_17, 0
 	connection east, CeladonCity, CELADON_CITY, -9
 
-	map_attributes CeladonCity, CELADON_CITY, $0f, WEST | EAST
+	map_attributes CeladonCity, CELADON_CITY, $0f, WEST
 	connection west, Route16, ROUTE_16, 9
-	connection east, Route7, ROUTE_7, 5
-
-	map_attributes Route7, ROUTE_7, $0f, WEST
-	connection west, CeladonCity, CELADON_CITY, -5
 
 	map_attributes Route23, ROUTE_23, $0f, 0
 	map_attributes SproutTower1F, SPROUT_TOWER_1F, $00, 0
