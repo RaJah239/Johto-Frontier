@@ -595,9 +595,6 @@ SafariZoneMainOffice_Blocks:
 PlayersHouse2F_Blocks:
 	INCBIN "maps/PlayersHouse2F.blk"
 
-SafariZoneWardensHome_Blocks:
-	INCBIN "maps/PokemonFanClub.blk"
-
 TrainerHouse1F_Blocks:
 	INCBIN "maps/TrainerHouse1F.blk"
 

@@ -223,7 +223,7 @@
 	const EVENT_ENABLE_DIPLOMA_PRINTING
 	const_skip
 	const_skip
-	const EVENT_TALKED_TO_WARDENS_GRANDDAUGHTER
+	const_skip
 	const EVENT_GOT_TM03_CURSE
 	const_skip
 	const EVENT_GOT_TM19_GIGA_DRAIN

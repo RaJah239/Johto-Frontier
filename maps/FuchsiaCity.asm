@@ -14,7 +14,6 @@ FuchsiaCity_MapEvents:
 	warp_event  8, 27, FUCHSIA_GYM, 1
 	warp_event 11, 27, BILLS_BROTHERS_HOUSE, 1
 	warp_event 19, 27, FUCHSIA_POKECENTER_1F, 1
-	warp_event 27, 27, SAFARI_ZONE_WARDENS_HOME, 1
 	warp_event  7, 35, ROUTE_19_FUCHSIA_GATE, 1
 	warp_event  8, 35, ROUTE_19_FUCHSIA_GATE, 2
 
