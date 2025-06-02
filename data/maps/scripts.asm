@@ -252,7 +252,6 @@ INCLUDE "maps/SaffronPokecenter1F.asm"
 INCLUDE "maps/MrPsychicsHouse.asm"
 INCLUDE "maps/SilphCo1F.asm"
 INCLUDE "maps/CopycatsHouse1F.asm"
-INCLUDE "maps/CopycatsHouse2F.asm"
 
 
 SECTION "Map Scripts 16", ROMX

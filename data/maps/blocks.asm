@@ -709,9 +709,6 @@ HallOfFame_Blocks:
 CopycatsHouse1F_Blocks:
 	INCBIN "maps/CopycatsHouse1F.blk"
 
-CopycatsHouse2F_Blocks:
-	INCBIN "maps/CopycatsHouse2F.blk"
-
 GoldenrodFlowerShop_Blocks:
 	INCBIN "maps/GoldenrodFlowerShop.blk"
 

@@ -420,7 +420,6 @@ ENDM
 	map_const MR_PSYCHICS_HOUSE,                            4,  4 ;  8
 	map_const SILPH_CO_1F,                                  8,  4 ; 10
 	map_const COPYCATS_HOUSE_1F,                            4,  4 ; 11
-	map_const COPYCATS_HOUSE_2F,                            5,  3 ; 12
 	endgroup
 
 	newgroup CHERRYGROVE                                          ; 26

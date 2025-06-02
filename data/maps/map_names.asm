@@ -471,7 +471,6 @@ Saffron_Map_Names: ; 25
 	dw Saffron_Map_Name8 ; map_const MR_PSYCHICS_HOUSE ;  8
 	dw Saffron_Map_Name10 ; map_const SILPH_CO_1F ; 10
 	dw Saffron_Map_Name11 ; map_const COPYCATS_HOUSE_1F ; 11
-	dw Saffron_Map_Name12 ; map_const COPYCATS_HOUSE_2F ; 12
 	assert_table_length NUM_SAFFRON_MAPS
 
 	; CHERRYGROVE, 26
@@ -1138,8 +1137,6 @@ Saffron_Map_Name10: ; map_const SILPH_CO_1F ; 10
 	db "SILPH CO.@"
 Saffron_Map_Name11: ; map_const COPYCATS_HOUSE_1F ; 11
 	db "COPYCAT HOUSE 1F@"
-Saffron_Map_Name12: ; map_const COPYCATS_HOUSE_2F ; 12
-	db "COPYCAT HOUSE 2F@"
 
 
 Cherrygrove_Map_Name1: ; map_const ROUTE_30         ;  1

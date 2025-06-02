@@ -3,7 +3,7 @@ IrwinRumorScript:
 	iftrue .MtSilver
 	checkevent EVENT_FOUGHT_SNORLAX
 	iftrue .Snorlax
-	checkevent EVENT_GOT_PASS_FROM_COPYCAT
+	checkevent EVENT_GOT_DRATINI
 	iftrue .TrainPass
 	checkflag ENGINE_MARSHBADGE
 	iftrue .MarshBadge
