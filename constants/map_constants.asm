@@ -294,7 +294,6 @@ ENDM
 	newgroup FUCHSIA                                              ; 17
 	map_const ROUTE_18,                                    10,  9 ;  4
 	map_const FUCHSIA_CITY,                                20, 18 ;  5
-	map_const BILLS_BROTHERS_HOUSE,                         4,  4 ;  9
 	map_const FUCHSIA_POKECENTER_1F,                        5,  4 ; 10
 	endgroup
 
