@@ -396,7 +396,6 @@ INCLUDE "maps/Route38.asm"
 INCLUDE "maps/Route13.asm"
 INCLUDE "maps/PewterGym.asm"
 INCLUDE "maps/PewterPokecenter1F.asm"
-INCLUDE "maps/PewterSnoozeSpeechHouse.asm"
 
 
 SECTION "Map Scripts 22", ROMX

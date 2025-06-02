@@ -118,7 +118,6 @@ GoldenrodNameRater_Blocks:
 VermilionFishingSpeechHouse_Blocks:
 VermilionMagnetTrainSpeechHouse_Blocks:
 VermilionDiglettsCaveSpeechHouse_Blocks:
-PewterSnoozeSpeechHouse_Blocks:
 BillsBrothersHouse_Blocks:
 LavenderSpeechHouse_Blocks:
 LavenderNameRater_Blocks:
