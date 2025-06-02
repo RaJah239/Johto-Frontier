@@ -80,7 +80,6 @@ EngineFlags:
 	engine_flag wVisitedSpawns, SPAWN_VIRIDIAN
 	engine_flag wVisitedSpawns, SPAWN_PEWTER
 	engine_flag wVisitedSpawns, SPAWN_CERULEAN
-	engine_flag wVisitedSpawns, SPAWN_FUCHSIA
 	engine_flag wVisitedSpawns, SPAWN_CINNABAR
 	engine_flag wVisitedSpawns, SPAWN_ROUTE_20
 	engine_flag wVisitedSpawns, SPAWN_INDIGO
