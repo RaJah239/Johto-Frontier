@@ -236,8 +236,8 @@
 	const_skip
 ; Kanto hidden items
 	const_skip
-	const EVENT_UNDERGROUND_PATH_HIDDEN_FULL_RESTORE
-	const EVENT_UNDERGROUND_PATH_HIDDEN_X_SPECIAL
+	const_skip
+	const_skip
 	const_skip
 	const_skip
 	const_skip

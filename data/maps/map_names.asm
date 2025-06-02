@@ -170,7 +170,6 @@ Dungeons_Map_Names: ;newgroup DUNGEONS
 	dw Dungeons_Map_Name81 ; map_const DRAGONS_DEN_B1F,                             20, 18 ; 81
 	dw Dungeons_Map_Name82 ; map_const DRAGON_SHRINE ; 82
 	dw Dungeons_Map_Name83 ; map_const TOHJO_FALLS,                                 15,  9 ; 83
-	dw Dungeons_Map_Name86 ; map_const UNDERGROUND_PATH,                             3, 14 ; 86
 	dw Dungeons_Map_Name91 ; map_const VICTORY_ROAD,; 91
 	assert_table_length NUM_DUNGEONS_MAPS
 	
@@ -685,8 +684,6 @@ Dungeons_Map_Name82: ; map_const DRAGON_SHRINE ; 82
 	db "DRAGON SHRINE@"
 Dungeons_Map_Name83: ; map_const TOHJO_FALLS,; 83
 	db "TOHJO FALLS@"
-Dungeons_Map_Name86: ; map_const UNDERGROUND_PATH,; 86
-	db "UNDERGROUND PATH@"
 Dungeons_Map_Name91: ; map_const VICTORY_ROAD,;  4
 	db "VICTORY ROAD@"
 

@@ -670,9 +670,6 @@ VermilionPortPassage_Blocks:
 FuchsiaGym_Blocks:
 	INCBIN "maps/FuchsiaGym.blk"
 
-UndergroundPath_Blocks:
-	INCBIN "maps/UndergroundPath.blk"
-
 Route39Barn_Blocks:
 	INCBIN "maps/Route39Barn.blk"
 

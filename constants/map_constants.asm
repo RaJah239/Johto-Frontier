@@ -145,7 +145,6 @@ ENDM
 	map_const DRAGONS_DEN_B1F,                             20, 18 ; 81
 	map_const DRAGON_SHRINE,                                5,  5 ; 82
 	map_const TOHJO_FALLS,                                 15,  9 ; 83
-	map_const UNDERGROUND_PATH,                             3, 14 ; 86
 	map_const VICTORY_ROAD,                                10, 36 ; 91
 	endgroup
 
