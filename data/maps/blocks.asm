@@ -735,9 +735,6 @@ DayCare_Blocks:
 SoulHouse_Blocks:
 	INCBIN "maps/SoulHouse.blk"
 
-PewterGym_Blocks:
-	INCBIN "maps/PewterGym.blk"
-
 CeladonGym_Blocks:
 	INCBIN "maps/CeladonGym.blk"
 

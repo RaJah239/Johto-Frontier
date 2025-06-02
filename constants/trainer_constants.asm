@@ -601,7 +601,7 @@ DEF KRIS EQU __trainer_class__
 	const LEROY ; unused
 	const DAVID ; unused
 	const JOHN ; unused
-	const JERRY
+	const JERRY ; unused
 	const SPENCER
 	const TODD4
 	const TODD5

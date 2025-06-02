@@ -394,7 +394,6 @@ INCLUDE "maps/Route29.asm"
 INCLUDE "maps/Route30.asm"
 INCLUDE "maps/Route38.asm"
 INCLUDE "maps/Route13.asm"
-INCLUDE "maps/PewterGym.asm"
 INCLUDE "maps/PewterPokecenter1F.asm"
 
 
