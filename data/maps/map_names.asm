@@ -367,7 +367,6 @@ Lavender_Map_Names: ;newgroup LAVENDER
 	dw Lavender_Map_Name2 ; map_const ROUTE_12,                                    10, 27 ;  2
 	dw Lavender_Map_Name4 ; map_const LAVENDER_TOWN,                               10,  9 ;  4
 	dw Lavender_Map_Name5 ; map_const LAVENDER_POKECENTER_1F ;  5
-	dw Lavender_Map_Name7 ; map_const MR_FUJIS_HOUSE ;  7
 	dw Lavender_Map_Name10 ; map_const LAVENDER_MART ; 10
 	dw Lavender_Map_Name12 ; map_const LAV_RADIO_TOWER_1F,                          10,  4 ; 12
 	dw Lavender_Map_Name13 ; map_const ROUTE_8_SAFFRON_GATE ; 13
