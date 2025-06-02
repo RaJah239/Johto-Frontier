@@ -260,7 +260,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_CELADON_CITY_HIDDEN_PP_UP
+	const_skip
 	const_skip
 	const EVENT_BURNED_TOWER_1F_HIDDEN_ULTRA_BALL
 	const EVENT_GINA_GAVE_LEAF_STONE
