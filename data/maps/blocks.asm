@@ -12,9 +12,6 @@ Route36_Blocks:
 Route44_Blocks:
 	INCBIN "maps/Route44.blk"
 
-CeladonCity_Blocks:
-	INCBIN "maps/CeladonCity.blk"
-
 ElmsHouse_Blocks:
 	INCBIN "maps/ElmsHouse.blk"
 
@@ -180,7 +177,6 @@ GoldenrodPokecenter1F_Blocks:
 PewterPokecenter1F_Blocks:
 FuchsiaPokecenter1F_Blocks:
 SilverCavePokecenter1F_Blocks:
-CeladonPokecenter1F_Blocks:
 CianwoodPokecenter1F_Blocks:
 ViridianPokecenter1F_Blocks:
 CherrygrovePokecenter1F_Blocks:

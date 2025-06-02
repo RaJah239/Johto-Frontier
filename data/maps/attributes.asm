@@ -254,12 +254,8 @@ ENDM
 	connection north, Route16, ROUTE_16, 0
 	connection east, Route18, ROUTE_18, 38
 
-	map_attributes Route16, ROUTE_16, $0f, SOUTH | EAST
+	map_attributes Route16, ROUTE_16, $0f, SOUTH
 	connection south, Route17, ROUTE_17, 0
-	connection east, CeladonCity, CELADON_CITY, -9
-
-	map_attributes CeladonCity, CELADON_CITY, $0f, WEST
-	connection west, Route16, ROUTE_16, 9
 
 	map_attributes Route23, ROUTE_23, $0f, 0
 	map_attributes SproutTower1F, SPROUT_TOWER_1F, $00, 0
@@ -454,7 +450,6 @@ ENDM
 	map_attributes CeladonMansion3F, CELADON_MANSION_3F, $00, 0
 	map_attributes CeladonMansionRoof, CELADON_MANSION_ROOF, $01, 0
 	map_attributes CeladonMansionRoofHouse, CELADON_MANSION_ROOF_HOUSE, $00, 0
-	map_attributes CeladonPokecenter1F, CELADON_POKECENTER_1F, $00, 0
 	map_attributes Route16FuchsiaSpeechHouse, ROUTE_16_FUCHSIA_SPEECH_HOUSE, $00, 0
 	map_attributes Route16Gate, ROUTE_16_GATE, $00, 0
 	map_attributes Route17Route18Gate, ROUTE_17_ROUTE_18_GATE, $00, 0

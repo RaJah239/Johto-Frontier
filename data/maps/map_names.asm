@@ -361,13 +361,11 @@ Celadon_Map_Names: ;newgroup CELADON
 	table_width 2, Celadon_Map_Names                                              ; 21
 	dw Celadon_Map_Name2 ; map_const ROUTE_16,                                    10,  9 ;  2
 	dw Celadon_Map_Name3 ; map_const ROUTE_17,                                    10, 45 ;  3
-	dw Celadon_Map_Name4 ; map_const CELADON_CITY,                                20, 18 ;  4
 	dw Celadon_Map_Name12 ; map_const CELADON_MANSION_1F ; 12
 	dw Celadon_Map_Name13 ; map_const CELADON_MANSION_2F ; 13
 	dw Celadon_Map_Name14 ; map_const CELADON_MANSION_3F ; 14
 	dw Celadon_Map_Name15 ; map_const CELADON_MANSION_ROOF ; 15
 	dw Celadon_Map_Name16 ; map_const CELADON_MANSION_ROOF_HOUSE ; 16
-	dw Celadon_Map_Name17 ; map_const CELADON_POKECENTER_1F ; 17                       10,  7 ; 19
 	dw Celadon_Map_Name23 ; map_const ROUTE_16_FUCHSIA_SPEECH_HOUSE ; 23
 	dw Celadon_Map_Name24 ; map_const ROUTE_16_GATE ; 24
 	dw Celadon_Map_Name26 ; map_const ROUTE_17_ROUTE_18_GATE ; 26
@@ -904,8 +902,6 @@ Celadon_Map_Name2: ; map_const ROUTE_16,;  2
 	db "ROUTE 16@"
 Celadon_Map_Name3: ; map_const ROUTE_17,  3
 	db "ROUTE 17@"
-Celadon_Map_Name4: ; map_const CELADON_CITY, 4
-	db "CELADON CITY@"
 Celadon_Map_Name12: ; map_const CELADON_MANSION_1F ; 12
 	db "CELADON MANSION 1F@"
 Celadon_Map_Name13: ; map_const CELADON_MANSION_2F ; 13
@@ -916,8 +912,6 @@ Celadon_Map_Name15: ; map_const CELADON_MANSION_ROOF ; 15
 	db "CEL. MANSION ROOF@"
 Celadon_Map_Name16: ; map_const CELADON_MANSION_ROOF_HOUSE ; 16
 	db "CELADON MANSION 4F@"
-Celadon_Map_Name17: ; map_const CELADON_POKECENTER_1F ; 17
-	db "CELADON <PKMN> CENTER@"
 Celadon_Map_Name23: ; map_const ROUTE_16_FUCHSIA_SPEECH_HOUSE ; 23
 	db "ROUTE 16 HOUSE@"
 Celadon_Map_Name24: ; map_const ROUTE_16_GATE ; 24
