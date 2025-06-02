@@ -10,7 +10,6 @@ VermilionCity_MapEvents:
 
 	def_warp_events
 	warp_event  9,  5, VERMILION_POKECENTER_1F, 1
-	warp_event 13, 13, VERMILION_MAGNET_TRAIN_SPEECH_HOUSE, 1
 	warp_event 21, 13, VERMILION_MART, 2
 	warp_event 21, 17, VERMILION_DIGLETTS_CAVE_SPEECH_HOUSE, 1
 	warp_event 10, 19, VERMILION_GYM, 1
