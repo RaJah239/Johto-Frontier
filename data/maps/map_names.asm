@@ -471,7 +471,6 @@ Saffron_Map_Names: ; 25
 	dw Saffron_Map_Name5 ; map_const SAFFRON_MART ;  5
 	dw Saffron_Map_Name6 ; map_const SAFFRON_POKECENTER_1F ;  6
 	dw Saffron_Map_Name8 ; map_const MR_PSYCHICS_HOUSE ;  8
-	dw Saffron_Map_Name9 ; map_const SAFFRON_MAGNET_TRAIN_STATION,                10,  9 ;  9
 	dw Saffron_Map_Name10 ; map_const SILPH_CO_1F ; 10
 	dw Saffron_Map_Name11 ; map_const COPYCATS_HOUSE_1F ; 11
 	dw Saffron_Map_Name12 ; map_const COPYCATS_HOUSE_2F ; 12
@@ -1141,8 +1140,6 @@ Saffron_Map_Name6: ; map_const SAFFRON_POKECENTER_1F ;  6
 	db "SAFFRON <POKE>CENTER@"
 Saffron_Map_Name8: ; map_const MR_PSYCHICS_HOUSE ;  8
 	db "MR.PSYCHIC'S HOUSE@"
-Saffron_Map_Name9: ; map_const SAFFRON_MAGNET_TRAIN_STATION,;  9
-	db "SAFFRON STATION@"
 Saffron_Map_Name10: ; map_const SILPH_CO_1F ; 10
 	db "SILPH CO.@"
 Saffron_Map_Name11: ; map_const COPYCATS_HOUSE_1F ; 11

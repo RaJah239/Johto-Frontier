@@ -641,9 +641,6 @@ SafariZoneMainOffice_Blocks:
 PlayersHouse2F_Blocks:
 	INCBIN "maps/PlayersHouse2F.blk"
 
-SaffronMagnetTrainStation_Blocks:
-	INCBIN "maps/SaffronMagnetTrainStation.blk"
-
 VermilionGym_Blocks:
 	INCBIN "maps/VermilionGym.blk"
 
