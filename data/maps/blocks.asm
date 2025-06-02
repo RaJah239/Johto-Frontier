@@ -57,9 +57,6 @@ LavenderTown_Blocks:
 PalletTown_Blocks:
 	INCBIN "maps/PalletTown.blk"
 
-Route25_Blocks:
-	INCBIN "maps/Route25.blk"
-
 Route24_Blocks:
 	INCBIN "maps/Route24.blk"
 

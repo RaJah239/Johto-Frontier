@@ -133,8 +133,8 @@ DEF KRIS EQU __trainer_class__
 	const JOHNNY
 	const DANNY ; unused
 	const TOMMY
-	const DUDLEY
-	const JOE
+	const DUDLEY ; unused
+	const JOE ; unused
 	const BILLY
 	const CHAD1
 	const NATE
@@ -180,11 +180,11 @@ DEF KRIS EQU __trainer_class__
 	const KRISE
 	const CONNIE1
 	const LINDA
-	const LAURA
-	const SHANNON
+	const LAURA ; unused
+	const SHANNON ; unused
 	const MICHELLE
 	const DANA1
-	const ELLEN
+	const ELLEN ; unused
 	const CONNIE2 ; unused
 	const CONNIE3 ; unused
 	const DANA2
@@ -443,7 +443,7 @@ DEF KRIS EQU __trainer_class__
 	const DAVE ; unused
 	const SAM
 	const TOM
-	const PAT
+	const PAT ; unused
 	const SHAWN
 	const TERU
 	const RUSS ; unused
@@ -589,7 +589,7 @@ DEF KRIS EQU __trainer_class__
 	const IVAN
 	const ELLIOT
 	const BARRY
-	const LLOYD
+	const LLOYD ; unused
 	const DEAN
 	const SID
 	const HARVEY ; unused

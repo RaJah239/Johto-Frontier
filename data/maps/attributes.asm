@@ -320,13 +320,6 @@ ENDM
 	connection south, Route10North, ROUTE_10_NORTH, 20
 	connection west, CeruleanCity, CERULEAN_CITY, -9
 
-	map_attributes Route24, ROUTE_24, $2c, NORTH | SOUTH
-	connection north, Route25, ROUTE_25, 0
-	connection south, CeruleanCity, CERULEAN_CITY, -6
-
-	map_attributes Route25, ROUTE_25, $2c, SOUTH
-	connection south, Route24, ROUTE_24, 0
-
 	map_attributes Route8, ROUTE_8, $2c, WEST | EAST
 	connection west, SaffronCity, SAFFRON_CITY, -9
 	connection east, LavenderTown, LAVENDER_TOWN, 0

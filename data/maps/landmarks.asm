@@ -66,7 +66,6 @@ Landmarks:
 	landmark  52,  52, PewterCityName
 	landmark 100,  52, CeruleanCityName
 	landmark 100,  44, Route24Name
-	landmark 108,  36, Route25Name
 	landmark 100,  60, Route5Name
 	landmark 108,  76, UndergroundName
 	landmark 100,  76, Route6Name
@@ -157,7 +156,6 @@ Route20Name:         db "ROUTE 20@"
 Route21Name:         db "ROUTE 21@"
 Route23Name:         db "ROUTE 23@"
 Route24Name:         db "ROUTE 24@"
-Route25Name:         db "ROUTE 25@"
 Route26Name:         db "ROUTE 26@"
 Route27Name:         db "ROUTE 27@"
 Route29Name:         db "ROUTE 29@"

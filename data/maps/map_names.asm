@@ -228,7 +228,6 @@ Cerulean_Map_Names: ;newgroup CERULEAN
 	dw Cerulean_Map_Name13 ; map_const ROUTE_9,                                     30,  9 ; 13
 	dw Cerulean_Map_Name14 ; map_const ROUTE_10_NORTH,                              10,  9 ; 14
 	dw Cerulean_Map_Name15 ; map_const ROUTE_24,                                    10,  9 ; 15
-	dw Cerulean_Map_Name16 ; map_const ROUTE_25,                                    30,  9 ; 16
 	dw Cerulean_Map_Name17 ; map_const CERULEAN_CITY,                               20, 18 ; 17
 	assert_table_length NUM_CERULEAN_MAPS
 
@@ -812,8 +811,6 @@ Cerulean_Map_Name14: ; map_const ROUTE_10_NORTH,; 14
 	db "ROUTE 10, NORTH@"
 Cerulean_Map_Name15: ; map_const ROUTE_24,; 15
 	db "ROUTE 24@"
-Cerulean_Map_Name16: ; map_const ROUTE_25,; 16
-	db "ROUTE 25@"
 Cerulean_Map_Name17: ; map_const CERULEAN_CITY,;  8
 	db "CERULEAN CITY@"
 
