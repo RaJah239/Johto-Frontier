@@ -8,18 +8,13 @@ MountMoonSquare_MapScripts:
 	scene_script MountMoonSquareNoopScene, SCENE_MOUNTMOONSQUARE_CLEFAIRY_DANCE
 
 	def_callbacks
-	callback MAPCALLBACK_NEWMAP, MountMoonSquareDisappearMoonStoneCallback
 	callback MAPCALLBACK_OBJECTS, MountMoonSquareDisappearRockCallback
 
 MountMoonSquareNoopScene:
 	end
 
-MountMoonSquareDisappearMoonStoneCallback:
-	setevent EVENT_MOUNT_MOON_SQUARE_HIDDEN_MOON_STONE
-	endcallback
 
 MountMoonSquareDisappearRockCallback:
-	setflag ENGINE_FLYPOINT_MT_MOON
 	disappear MOUNTMOONSQUARE_ROCK
 	endcallback
 

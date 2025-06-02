@@ -167,6 +167,12 @@ if DEF(_DEBUG)
 	setflag ENGINE_FLYPOINT_BATTLE_TOWER
 
 	; credits skip
+	; new fly points
+	setflag ENGINE_FLYPOINT_ROUTE_26
+	setflag ENGINE_FLYPOINT_ROUTE_20
+	setflag ENGINE_FLYPOINT_UNION_CAVE
+	setflag ENGINE_FLYPOINT_NATIONAL_PARK
+	setflag ENGINE_FLYPOINT_BATTLE_TOWER
 	setflag ENGINE_CREDITS_SKIP
 
 	; magnet train works
