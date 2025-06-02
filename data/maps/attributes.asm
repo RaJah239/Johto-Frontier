@@ -242,20 +242,8 @@ ENDM
 	connection north, FuchsiaCity, FUCHSIA_CITY, 0
 	connection west, Route20, ROUTE_20, 9
 
-	map_attributes FuchsiaCity, FUCHSIA_CITY, $0f, SOUTH | WEST
+	map_attributes FuchsiaCity, FUCHSIA_CITY, $0f, SOUTH
 	connection south, Route19, ROUTE_19, 0
-	connection west, Route18, ROUTE_18, 7
-
-	map_attributes Route18, ROUTE_18, $43, WEST | EAST
-	connection west, Route17, ROUTE_17, -38
-	connection east, FuchsiaCity, FUCHSIA_CITY, -7
-
-	map_attributes Route17, ROUTE_17, $43, NORTH | EAST
-	connection north, Route16, ROUTE_16, 0
-	connection east, Route18, ROUTE_18, 38
-
-	map_attributes Route16, ROUTE_16, $0f, SOUTH
-	connection south, Route17, ROUTE_17, 0
 
 	map_attributes Route23, ROUTE_23, $0f, 0
 	map_attributes SproutTower1F, SPROUT_TOWER_1F, $00, 0
@@ -450,7 +438,6 @@ ENDM
 	map_attributes CeladonMansion3F, CELADON_MANSION_3F, $00, 0
 	map_attributes CeladonMansionRoof, CELADON_MANSION_ROOF, $01, 0
 	map_attributes CeladonMansionRoofHouse, CELADON_MANSION_ROOF_HOUSE, $00, 0
-	map_attributes Route17Route18Gate, ROUTE_17_ROUTE_18_GATE, $00, 0
 	map_attributes ManiasHouse, MANIAS_HOUSE, $00, 0
 	map_attributes CianwoodGym, CIANWOOD_GYM, $00, 0
 	map_attributes CianwoodPokecenter1F, CIANWOOD_POKECENTER_1F, $00, 0

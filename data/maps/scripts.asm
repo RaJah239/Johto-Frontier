@@ -102,7 +102,6 @@ INCLUDE "maps/CeladonMansion2F.asm"
 INCLUDE "maps/CeladonMansion3F.asm"
 INCLUDE "maps/CeladonMansionRoof.asm"
 INCLUDE "maps/CeladonMansionRoofHouse.asm"
-INCLUDE "maps/Route17Route18Gate.asm"
 
 
 SECTION "Map Scripts 8", ROMX
@@ -357,9 +356,6 @@ INCLUDE "maps/PalletTown.asm"
 INCLUDE "maps/Route21.asm"
 INCLUDE "maps/CinnabarIsland.asm"
 INCLUDE "maps/Route20.asm"
-INCLUDE "maps/Route18.asm"
-INCLUDE "maps/Route17.asm"
-INCLUDE "maps/Route16.asm"
 INCLUDE "maps/Route23.asm"
 INCLUDE "maps/SilverCavePokecenter1F.asm"
 INCLUDE "maps/Route39_SilverCaveGate.asm"

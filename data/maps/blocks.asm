@@ -117,9 +117,6 @@ ViridianCity_Blocks:
 Route21_Blocks:
 	INCBIN "maps/Route21.blk"
 
-Route17_Blocks:
-	INCBIN "maps/Route17.blk"
-
 Route31_Blocks:
 	INCBIN "maps/Route31.blk"
 
@@ -142,7 +139,6 @@ Route38EcruteakGate_Blocks:
 Route42EcruteakGate_Blocks:
 Route32RuinsOfAlphGate_Blocks:
 IlexForestAzaleaGate_Blocks:
-Route17Route18Gate_Blocks:
 Route31VioletGate_Blocks:
 	INCBIN "maps/EastWestGate.blk"
 
@@ -319,12 +315,6 @@ BlackthornCity_Blocks:
 
 SilverCaveOutside_Blocks:
 	INCBIN "maps/SilverCaveOutside.blk"
-
-Route16_Blocks:
-	INCBIN "maps/Route16.blk"
-
-Route18_Blocks:
-	INCBIN "maps/Route18.blk"
 
 GoldenrodUnderground_Blocks:
 	INCBIN "maps/GoldenrodUnderground.blk"

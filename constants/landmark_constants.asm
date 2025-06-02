@@ -60,9 +60,6 @@ DEF KANTO_LANDMARK EQU const_value
 	const LANDMARK_PEWTER_CITY       ; 33
 	const LANDMARK_CERULEAN_CITY     ; 37
 	const LANDMARK_UNDERGROUND_PATH  ; 3b
-	const LANDMARK_ROUTE_16          ; 4e
-	const LANDMARK_ROUTE_17          ; 4f
-	const LANDMARK_ROUTE_18          ; 50
 	const LANDMARK_FUCHSIA_CITY      ; 51
 	const LANDMARK_ROUTE_19          ; 52
 	const LANDMARK_ROUTE_20          ; 53

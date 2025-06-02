@@ -66,9 +66,6 @@ Landmarks:
 	landmark  52,  52, PewterCityName
 	landmark 100,  52, CeruleanCityName
 	landmark 108,  76, UndergroundName
-	landmark  68,  68, Route16Name
-	landmark  68,  92, Route17Name
-	landmark  80, 116, Route18Name
 	landmark  92, 116, FuchsiaCityName
 	landmark  92, 128, Route19Name
 	landmark  76, 132, Route20Name
@@ -109,9 +106,6 @@ FuchsiaCityName:     db "FUCHSIA<BSP>CITY@"
 CinnabarIslandName:  db "CINNABAR<BSP>ISLAND@"
 IndigoPlateauName:   db "INDIGO<BSP>PLATEAU@"
 VictoryRoadName:     db "VICTORY<BSP>ROAD@"
-Route16Name:         db "ROUTE 16@"
-Route17Name:         db "ROUTE 17@"
-Route18Name:         db "ROUTE 18@"
 Route19Name:         db "ROUTE 19@"
 Route20Name:         db "ROUTE 20@"
 Route21Name:         db "ROUTE 21@"

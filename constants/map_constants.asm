@@ -291,7 +291,6 @@ ENDM
 	endgroup
 
 	newgroup FUCHSIA                                              ; 17
-	map_const ROUTE_18,                                    10,  9 ;  4
 	map_const FUCHSIA_CITY,                                20, 18 ;  5
 	map_const FUCHSIA_POKECENTER_1F,                        5,  4 ; 10
 	endgroup
@@ -315,14 +314,12 @@ ENDM
 	endgroup
 
 	newgroup CELADON                                              ; 21
-	map_const ROUTE_16,                                    10,  9 ;  2
-	map_const ROUTE_17,                                    10, 45 ;  3
+
 	map_const CELADON_MANSION_1F,                           4,  5 ; 12
 	map_const CELADON_MANSION_2F,                           4,  5 ; 13
 	map_const CELADON_MANSION_3F,                           4,  5 ; 14
 	map_const CELADON_MANSION_ROOF,                         4,  5 ; 15
 	map_const CELADON_MANSION_ROOF_HOUSE,                   4,  4 ; 16
-	map_const ROUTE_17_ROUTE_18_GATE,                       5,  4 ; 26
 	endgroup
 
 	newgroup CIANWOOD                                             ; 22

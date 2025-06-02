@@ -331,7 +331,6 @@ Indigo_Map_Names: ;newgroup INDIGO
 
 Fuchsia_Map_Names: ;newgroup FUCHSIA
 	table_width 2, Fuchsia_Map_Names                                              ; 17
-	dw Fuchsia_Map_Name4 ; map_const ROUTE_18,                                    10,  9 ;  4
 	dw Fuchsia_Map_Name5 ; map_const FUCHSIA_CITY,                                20, 18 ;  5
 	dw Fuchsia_Map_Name10 ; map_const FUCHSIA_POKECENTER_1F ; 10
 	assert_table_length NUM_FUCHSIA_MAPS
@@ -359,14 +358,11 @@ Cable_Club_Map_Names: ;newgroup CABLE_CLUB
 
 Celadon_Map_Names: ;newgroup CELADON
 	table_width 2, Celadon_Map_Names                                              ; 21
-	dw Celadon_Map_Name2 ; map_const ROUTE_16,                                    10,  9 ;  2
-	dw Celadon_Map_Name3 ; map_const ROUTE_17,                                    10, 45 ;  3
 	dw Celadon_Map_Name12 ; map_const CELADON_MANSION_1F ; 12
 	dw Celadon_Map_Name13 ; map_const CELADON_MANSION_2F ; 13
 	dw Celadon_Map_Name14 ; map_const CELADON_MANSION_3F ; 14
 	dw Celadon_Map_Name15 ; map_const CELADON_MANSION_ROOF ; 15
 	dw Celadon_Map_Name16 ; map_const CELADON_MANSION_ROOF_HOUSE ; 16
-	dw Celadon_Map_Name26 ; map_const ROUTE_17_ROUTE_18_GATE ; 26
 	assert_table_length NUM_CELADON_MAPS
 
 Cianwood_Map_Names: ;newgroup CIANWOOD
@@ -865,8 +861,6 @@ Indigo_Map_Name7: ; map_const LANCES_ROOM,;  7
 Indigo_Map_Name8: ; map_const HALL_OF_FAME ;  8
 	db "E4 HALL OF FAME@"                                           ; 17
 
-Fuchsia_Map_Name4: ; map_const ROUTE_18,;  4
-	db "ROUTE 18@"
 Fuchsia_Map_Name5: ; map_const FUCHSIA_CITY,;  5
 	db "FUCHSIA CITY@"
 Fuchsia_Map_Name10: ; map_const FUCHSIA_POKECENTER_1F ; 10
@@ -896,10 +890,7 @@ Cable_Club_Map_Name5: ; map_const MOBILE_TRADE_ROOM ;  5
 Cable_Club_Map_Name6: ; map_const MOBILE_BATTLE_ROOM ;  6
 	db "MOBILE BATTLE@"                                          ; 21
 
-Celadon_Map_Name2: ; map_const ROUTE_16,;  2
-	db "ROUTE 16@"
-Celadon_Map_Name3: ; map_const ROUTE_17,  3
-	db "ROUTE 17@"
+
 Celadon_Map_Name12: ; map_const CELADON_MANSION_1F ; 12
 	db "CELADON MANSION 1F@"
 Celadon_Map_Name13: ; map_const CELADON_MANSION_2F ; 13
@@ -910,8 +901,7 @@ Celadon_Map_Name15: ; map_const CELADON_MANSION_ROOF ; 15
 	db "CEL. MANSION ROOF@"
 Celadon_Map_Name16: ; map_const CELADON_MANSION_ROOF_HOUSE ; 16
 	db "CELADON MANSION 4F@"
-Celadon_Map_Name26: ; map_const ROUTE_17_ROUTE_18_GATE ; 26 
-	db "ROUTE 17 - 18 GATE@"                                        ; 22
+                                      ; 22
 
 Cianwood_Map_Name1: ; map_const ROUTE_40,  1
 	db "ROUTE 40@"
