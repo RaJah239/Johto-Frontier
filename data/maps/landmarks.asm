@@ -71,7 +71,6 @@ Landmarks:
 	landmark  88,  68, Route7Name
 	landmark 116,  68, Route8Name
 	landmark 132,  68, LavenderTownName
-	landmark 140,  68, LavRadioTowerName
 	landmark  76,  68, CeladonCityName
 	landmark 100,  68, SaffronCityName
 	landmark 116,  84, Route11Name
@@ -127,7 +126,6 @@ FuchsiaCityName:     db "FUCHSIA<BSP>CITY@"
 CinnabarIslandName:  db "CINNABAR<BSP>ISLAND@"
 IndigoPlateauName:   db "INDIGO<BSP>PLATEAU@"
 VictoryRoadName:     db "VICTORY<BSP>ROAD@"
-LavRadioTowerName:   db "RADIO TOWER@"
 SeafoamIslandsName:  db "SEAFOAM¯ISLANDS@"
 Route6Name:          db "ROUTE 6@"
 Route7Name:          db "ROUTE 7@"

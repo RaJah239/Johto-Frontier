@@ -674,9 +674,6 @@ TrainerHouseB1F_Blocks:
 OaksLab_Blocks:
 	INCBIN "maps/OaksLab.blk"
 
-LavRadioTower1F_Blocks:
-	INCBIN "maps/LavRadioTower1F.blk"
-
 SilverCaveItemRooms_Blocks:
 	INCBIN "maps/SilverCaveItemRooms.blk"
 
