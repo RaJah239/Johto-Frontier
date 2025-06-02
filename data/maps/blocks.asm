@@ -626,9 +626,6 @@ VictoryRoadGate_Blocks:
 OlivinePortPassage_Blocks:
 	INCBIN "maps/PortPassage.blk"
 
-FuchsiaGym_Blocks:
-	INCBIN "maps/FuchsiaGym.blk"
-
 Route39Barn_Blocks:
 	INCBIN "maps/Route39Barn.blk"
 

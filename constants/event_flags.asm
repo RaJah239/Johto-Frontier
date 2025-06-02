@@ -227,7 +227,7 @@
 	const EVENT_GOT_TM03_CURSE
 	const_skip
 	const EVENT_GOT_TM19_GIGA_DRAIN
-	const EVENT_GOT_TM06_TOXIC
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -573,7 +573,7 @@
 	const EVENT_BEAT_CAMPER_TODD
 	const EVENT_BEAT_CAMPER_IVAN
 	const EVENT_BEAT_CAMPER_ELLIOT
-	const EVENT_BEAT_CAMPER_BARRY
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -681,7 +681,7 @@
 	const EVENT_BEAT_PICNICKER_GINA
 	const EVENT_BEAT_PICNICKER_BROOKE
 	const EVENT_BEAT_PICNICKER_KIM
-	const EVENT_BEAT_PICNICKER_CINDY
+	const_skip
 	const_skip
 	const_skip
 	const EVENT_BEAT_PICNICKER_DEBRA
@@ -760,7 +760,7 @@
 	const_skip
 	const_skip
 	const EVENT_BEAT_ERIKA
-	const EVENT_BEAT_JANINE
+	const_skip
 	const_skip
 	const EVENT_BEAT_BLAINE
 	const_skip
@@ -845,10 +845,10 @@
 ; Lass
 	const EVENT_BEAT_LASS_CARRIE
 	const EVENT_BEAT_LASS_BRIDGET
-	const EVENT_BEAT_LASS_ALICE
+	const_skip
 	const EVENT_BEAT_LASS_KRISE
 	const EVENT_BEAT_LASS_CONNIE
-	const EVENT_BEAT_LASS_LINDA
+	const_skip
 	const_skip
 	const_skip
 	const EVENT_BEAT_LASS_MICHELLE

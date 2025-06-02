@@ -176,10 +176,10 @@ DEF KRIS EQU __trainer_class__
 	trainerclass LASS ; 19
 	const CARRIE
 	const BRIDGET
-	const ALICE
+	const ALICE ; unused
 	const KRISE
 	const CONNIE1
-	const LINDA
+	const LINDA ; unused
 	const LAURA ; unused
 	const SHANNON ; unused
 	const MICHELLE
@@ -560,7 +560,7 @@ DEF KRIS EQU __trainer_class__
 	const GINA1
 	const BROOKE
 	const KIM
-	const CINDY
+	const CINDY ; unused
 	const HOPE ; unused
 	const SHARON ; unused
 	const DEBRA
@@ -588,7 +588,7 @@ DEF KRIS EQU __trainer_class__
 	const TODD1
 	const IVAN
 	const ELLIOT
-	const BARRY
+	const BARRY ; unused
 	const LLOYD ; unused
 	const DEAN ; unused
 	const SID ; unused
