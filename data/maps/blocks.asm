@@ -219,9 +219,6 @@ ElmsLab_Blocks:
 CeruleanCity_Blocks:
 	INCBIN "maps/CeruleanCity.blk"
 
-Route1_Blocks:
-	INCBIN "maps/Route1.blk"
-
 Route5_Blocks:
 	INCBIN "maps/Route5.blk"
 

@@ -323,7 +323,6 @@ Vermilion_Map_Names: ;newgroup VERMILION
 
 Pallet_Map_Names: ;newgroup PALLET
 	table_width 2, Pallet_Map_Names                                               ; 13
-	dw Pallet_Map_Name1 ; map_const ROUTE_1,                                     10, 18 ;  1
 	dw Pallet_Map_Name2 ; map_const PALLET_TOWN,                                 10,  9 ;  2
 	dw Pallet_Map_Name6 ; map_const OAKS_LAB ;  6
 	assert_table_length NUM_PALLET_MAPS
@@ -971,8 +970,6 @@ Vermilion_Map_Name12: ; map_const ROUTE_6_SAFFRON_GATE ; 12
 Vermilion_Map_Name13: ; map_const ROUTE_6_UNDERGROUND_PATH_ENTRANCE ; 13
 	db "ROUTE 6 UNDERGRND@"
 
-Pallet_Map_Name1: ; map_const ROUTE_1,;  1
-	db "ROUTE 1@"
 Pallet_Map_Name2: ; map_const PALLET_TOWN,;  2
 	db "PALLET TOWN@"
 Pallet_Map_Name6: ; map_const OAKS_LAB ;  6  ; 14
