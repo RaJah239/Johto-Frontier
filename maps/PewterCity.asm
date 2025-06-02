@@ -15,7 +15,6 @@ PewterCity_MapEvents:
 
 	def_warp_events
 	warp_event 16, 17, PEWTER_GYM, 1
-	warp_event 23, 17, PEWTER_MART, 2
 	warp_event 13, 25, PEWTER_POKECENTER_1F, 1
 	warp_event  7, 29, PEWTER_SNOOZE_SPEECH_HOUSE, 1
 

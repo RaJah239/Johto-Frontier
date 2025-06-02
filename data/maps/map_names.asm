@@ -332,7 +332,6 @@ Pewter_Map_Names: ;newgroup PEWTER
 	dw Pewter_Map_Name1 ; map_const ROUTE_3,                                     30,  9 ;  1
 	dw Pewter_Map_Name2 ; map_const PEWTER_CITY,                                 20, 18 ;  2
 	dw Pewter_Map_Name4 ; map_const PEWTER_GYM ;  4
-	dw Pewter_Map_Name5 ; map_const PEWTER_MART ;  5
 	dw Pewter_Map_Name6 ; map_const PEWTER_POKECENTER_1F ;  6
 	dw Pewter_Map_Name8 ; map_const PEWTER_SNOOZE_SPEECH_HOUSE ;  8
 	assert_table_length NUM_PEWTER_MAPS
@@ -979,8 +978,6 @@ Pewter_Map_Name2: ; map_const PEWTER_CITY,;  2
 	db "PEWTER CITY@"
 Pewter_Map_Name4: ; map_const PEWTER_GYM ;  4
 	db "PEWTER GYM@"
-Pewter_Map_Name5: ; map_const PEWTER_MART ;  5
-	db "PEWTER #MART@"
 Pewter_Map_Name6: ; map_const PEWTER_POKECENTER_1F ;  6
 	db "PEWTER <PKMN> CENTER@"
 Pewter_Map_Name8: ; map_const PEWTER_SNOOZE_SPEECH_HOUSE ;  8

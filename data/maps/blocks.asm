@@ -237,7 +237,6 @@ CeruleanMart_Blocks:
 AzaleaMart_Blocks:
 VioletMart_Blocks:
 VermilionMart_Blocks:
-PewterMart_Blocks:
 FuchsiaMart_Blocks:
 LavenderMart_Blocks:
 SaffronMart_Blocks:
