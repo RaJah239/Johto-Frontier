@@ -451,7 +451,6 @@ ENDM
 	map_attributes BillsBrothersHouse, BILLS_BROTHERS_HOUSE, $00, 0
 	map_attributes FuchsiaPokecenter1F, FUCHSIA_POKECENTER_1F, $00, 0
 	map_attributes SafariZoneWardensHome, SAFARI_ZONE_WARDENS_HOME, $00, 0
-	map_attributes Route15FuchsiaGate, ROUTE_15_FUCHSIA_GATE, $00, 0
 	map_attributes SilverCavePokecenter1F, SILVER_CAVE_POKECENTER_1F, $00, 0
 	map_attributes Route39_SilverCaveGate, ROUTE_39_SILVER_CAVE_GATE, $00, 0
 	map_attributes Pokecenter2F, POKECENTER_2F, $00, 0

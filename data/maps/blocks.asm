@@ -147,7 +147,6 @@ Route38EcruteakGate_Blocks:
 Route42EcruteakGate_Blocks:
 Route32RuinsOfAlphGate_Blocks:
 IlexForestAzaleaGate_Blocks:
-Route15FuchsiaGate_Blocks:
 Route16Gate_Blocks:
 Route17Route18Gate_Blocks:
 Route31VioletGate_Blocks:
