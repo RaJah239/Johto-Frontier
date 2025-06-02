@@ -330,8 +330,8 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass BUG_CATCHER ; 24
 	const DON
-	const ROB
-	const ED
+	const ROB ; unused
+	const ED ; unused
 	const WADE1
 	const BUG_CATCHER_BENNY
 	const AL
@@ -340,7 +340,7 @@ DEF KRIS EQU __trainer_class__
 	const KEN
 	const WADE2
 	const WADE3
-	const DOUG
+	const DOUG ; unused
 	const ARNIE2
 	const ARNIE3
 	const WADE4
