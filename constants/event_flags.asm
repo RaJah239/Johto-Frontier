@@ -1375,7 +1375,7 @@
 	const EVENT_INDIGO_PLATEAU_POKECENTER_RIVAL
 	const EVENT_TELEPORT_GUY
 ; Kanto itemballs
-	const EVENT_PICKED_UP_FOCUS_BAND
+	const_skip
 	const_skip
 	const_skip
 	const_skip
