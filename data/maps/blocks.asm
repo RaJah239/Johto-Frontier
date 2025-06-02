@@ -644,9 +644,6 @@ PlayersHouse2F_Blocks:
 VermilionGym_Blocks:
 	INCBIN "maps/VermilionGym.blk"
 
-SaffronGym_Blocks:
-	INCBIN "maps/SaffronGym.blk"
-
 PokemonFanClub_Blocks:
 SafariZoneWardensHome_Blocks:
 	INCBIN "maps/PokemonFanClub.blk"

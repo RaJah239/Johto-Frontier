@@ -543,7 +543,7 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass PSYCHIC_T ; 34
 	const NATHAN
-	const FRANKLIN
+	const FRANKLIN ; unused 
 	const HERMAN
 	const FIDEL
 	const GREG
@@ -552,7 +552,7 @@ DEF KRIS EQU __trainer_class__
 	const PHIL
 	const RICHARD
 	const GILBERT
-	const JARED
+	const JARED ; unused
 	const RODNEY
 
 	trainerclass PICNICKER ; 35
@@ -631,8 +631,8 @@ DEF KRIS EQU __trainer_class__
 	const BETHANY ; unused
 	const MARGRET ; unused
 	const ETHEL ; unused
-	const REBECCA
-	const DORIS
+	const REBECCA ; unused
+	const DORIS ; unused
 
 	trainerclass BOARDER ; 3a
 	const RONALD
