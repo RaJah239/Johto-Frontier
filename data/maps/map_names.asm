@@ -468,7 +468,6 @@ Saffron_Map_Names: ; 25
 	dw Saffron_Map_Name2 ; map_const SAFFRON_CITY,                                20, 18 ;  2
 	dw Saffron_Map_Name6 ; map_const SAFFRON_POKECENTER_1F ;  6
 	dw Saffron_Map_Name8 ; map_const MR_PSYCHICS_HOUSE ;  8
-	dw Saffron_Map_Name10 ; map_const SILPH_CO_1F ; 10
 	assert_table_length NUM_SAFFRON_MAPS
 
 	; CHERRYGROVE, 26
@@ -1129,8 +1128,6 @@ Saffron_Map_Name6: ; map_const SAFFRON_POKECENTER_1F ;  6
 	db "SAFFRON <POKE>CENTER@"
 Saffron_Map_Name8: ; map_const MR_PSYCHICS_HOUSE ;  8
 	db "MR.PSYCHIC'S HOUSE@"
-Saffron_Map_Name10: ; map_const SILPH_CO_1F ; 10
-	db "SILPH CO.@"
 
 
 Cherrygrove_Map_Name1: ; map_const ROUTE_30         ;  1

@@ -228,7 +228,7 @@
 	const_skip
 	const EVENT_GOT_TM19_GIGA_DRAIN
 	const EVENT_GOT_TM06_TOXIC
-	const EVENT_GOT_UP_GRADE
+	const_skip
 	const_skip
 	const_skip
 	const EVENT_TALKED_TO_OAK_IN_KANTO

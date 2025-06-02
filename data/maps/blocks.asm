@@ -647,9 +647,6 @@ PokemonFanClub_Blocks:
 SafariZoneWardensHome_Blocks:
 	INCBIN "maps/PokemonFanClub.blk"
 
-SilphCo1F_Blocks:
-	INCBIN "maps/SilphCo1F.blk"
-
 TrainerHouse1F_Blocks:
 	INCBIN "maps/TrainerHouse1F.blk"
 
