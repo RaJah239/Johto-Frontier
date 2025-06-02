@@ -14,7 +14,7 @@ else
 	spawn PLAYERS_HOUSE_2F,            3,  3
 endc
 	spawn PLAYERS_HOUSE_2F,            3,  3
-	spawn PALLET_TOWN,                 5,  6
+	spawn PALLET_TOWN,                 4,  6
 	spawn NEW_BARK_TOWN,              13,  6
 	spawn CHERRYGROVE_CITY,           29,  4
 	spawn VIOLET_CITY,                31, 26

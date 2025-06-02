@@ -249,7 +249,7 @@ ENDM
 	endgroup
 
 	newgroup PALLET                                               ; 13
-	map_const PALLET_TOWN,                                 10,  9 ;  2
+	map_const PALLET_TOWN,                                  5,  4 ;  2
 	map_const OAKS_LAB,                                     5,  6 ;  6
 	endgroup
 
