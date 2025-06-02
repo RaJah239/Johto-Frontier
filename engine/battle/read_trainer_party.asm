@@ -343,8 +343,14 @@ Battle_GetTrainerName::
 
 GetTrainerName::
 	ld a, c
+	ld hl, wRivalName
+	cp RIVAL1
+	jr z, CopyTrainerName
+	cp RIVAL2
+	jr z, CopyTrainerName
 	cp CAL
 	jr nz, .not_cal2
+	; fallthrough
 
 	ld a, BANK(sMysteryGiftTrainerHouseFlag)
 	call OpenSRAM
