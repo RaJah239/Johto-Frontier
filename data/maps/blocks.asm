@@ -104,7 +104,6 @@ VermilionMagnetTrainSpeechHouse_Blocks:
 VermilionDiglettsCaveSpeechHouse_Blocks:
 BillsBrothersHouse_Blocks:
 LavenderSpeechHouse_Blocks:
-LavenderNameRater_Blocks:
 Route12SuperRodHouse_Blocks:
 CeladonMansionRoofHouse_Blocks:
 Route16FuchsiaSpeechHouse_Blocks:
