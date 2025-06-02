@@ -278,17 +278,13 @@ ENDM
 	connection north, Route12, ROUTE_12, 20
 	connection south, Route14, ROUTE_14, 0
 
-	map_attributes Route12, ROUTE_12, $43, NORTH | SOUTH | WEST
-	connection north, LavenderTown, LAVENDER_TOWN, 0
+	map_attributes Route12, ROUTE_12, $43, SOUTH | WEST
 	connection south, Route13, ROUTE_13, -20
 	connection west, Route11, ROUTE_11, 9
 
 	map_attributes Route11, ROUTE_11, $0f, WEST | EAST
 	connection west, VermilionCity, VERMILION_CITY, 0
 	connection east, Route12, ROUTE_12, -9
-
-	map_attributes LavenderTown, LAVENDER_TOWN, $2c, SOUTH
-	connection south, Route12, ROUTE_12, 0
 
 	map_attributes VermilionCity, VERMILION_CITY, $43, EAST
 	connection east, Route11, ROUTE_11, 0

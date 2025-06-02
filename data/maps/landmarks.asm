@@ -68,7 +68,6 @@ Landmarks:
 	landmark 108,  76, UndergroundName
 	landmark 100,  84, VermilionCityName
 	landmark  88,  68, Route7Name
-	landmark 132,  68, LavenderTownName
 	landmark  76,  68, CeladonCityName
 	landmark 116,  84, Route11Name
 	landmark 132,  80, Route12Name
@@ -115,7 +114,6 @@ PalletTownName:      db "PALLET TOWN@"
 ViridianCityName:    db "VIRIDIAN<BSP>CITY@"
 PewterCityName:      db "PEWTER CITY@"
 CeruleanCityName:    db "CERULEAN<BSP>CITY@"
-LavenderTownName:    db "LAVENDER<BSP>TOWN@"
 VermilionCityName:   db "VERMILION<BSP>CITY@"
 CeladonCityName:     db "CELADON<BSP>CITY@"
 FuchsiaCityName:     db "FUCHSIA<BSP>CITY@"

@@ -311,7 +311,6 @@ ENDM
 
 	newgroup LAVENDER                                             ; 18
 	map_const ROUTE_12,                                    10, 27 ;  2
-	map_const LAVENDER_TOWN,                               10,  9 ;  4
 	endgroup
 
 	newgroup SILVER                                               ; 19

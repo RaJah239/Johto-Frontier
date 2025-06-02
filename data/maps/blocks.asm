@@ -45,9 +45,6 @@ Route29_Blocks:
 Route37_Blocks:
 	INCBIN "maps/Route37.blk"
 
-LavenderTown_Blocks:
-	INCBIN "maps/LavenderTown.blk"
-
 PalletTown_Blocks:
 	INCBIN "maps/PalletTown.blk"
 
