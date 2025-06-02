@@ -466,7 +466,6 @@ New_Bark_Map_Names: ; newgroup NEW_BARK ; 24
 Saffron_Map_Names: ; 25
 	table_width 2, Saffron_Map_Names
 	dw Saffron_Map_Name2 ; map_const SAFFRON_CITY,                                20, 18 ;  2
-	dw Saffron_Map_Name5 ; map_const SAFFRON_MART ;  5
 	dw Saffron_Map_Name6 ; map_const SAFFRON_POKECENTER_1F ;  6
 	dw Saffron_Map_Name8 ; map_const MR_PSYCHICS_HOUSE ;  8
 	dw Saffron_Map_Name10 ; map_const SILPH_CO_1F ; 10
@@ -1126,8 +1125,6 @@ New_Bark_Map_Name13: ; map_const ROUTE_29_ROUTE_46_GATE ; 13
 
 Saffron_Map_Name2: ; map_const SAFFRON_CITY ;  2
 	db "SAFFRON CITY@"
-Saffron_Map_Name5: ; map_const SAFFRON_MART ;  5
-	db "SAFFRON #MART@"
 Saffron_Map_Name6: ; map_const SAFFRON_POKECENTER_1F ;  6
 	db "SAFFRON <POKE>CENTER@"
 Saffron_Map_Name8: ; map_const MR_PSYCHICS_HOUSE ;  8

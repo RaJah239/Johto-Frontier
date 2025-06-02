@@ -247,7 +247,6 @@ INCLUDE "maps/BurnedTowerB1F.asm"
 SECTION "Map Scripts 15", ROMX
 
 INCLUDE "maps/CeruleanPokecenter1F.asm"
-INCLUDE "maps/SaffronMart.asm"
 INCLUDE "maps/SaffronPokecenter1F.asm"
 INCLUDE "maps/MrPsychicsHouse.asm"
 INCLUDE "maps/SilphCo1F.asm"

@@ -9,7 +9,6 @@ SaffronCity_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events
-	warp_event 25, 11, SAFFRON_MART, 2
 	warp_event  9, 29, SAFFRON_POKECENTER_1F, 1
 	warp_event 27, 29, MR_PSYCHICS_HOUSE, 1
 	warp_event 18, 21, SILPH_CO_1F, 1
