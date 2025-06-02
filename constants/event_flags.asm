@@ -242,7 +242,7 @@
 	const_skip
 	const_skip
 	const EVENT_OLIVINE_PORT_HIDDEN_PROTEIN
-	const EVENT_VERMILION_PORT_HIDDEN_IRON
+	const_skip
 	const EVENT_MOUNT_MOON_SQUARE_HIDDEN_MOON_STONE
 	const_skip
 	const_skip

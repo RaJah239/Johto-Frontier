@@ -10,8 +10,6 @@ VermilionCity_MapEvents:
 
 	def_warp_events
 	warp_event  9,  5, VERMILION_POKECENTER_1F, 1
-	warp_event 19, 31, VERMILION_PORT_PASSAGE, 1
-	warp_event 20, 31, VERMILION_PORT_PASSAGE, 2
 
 	def_coord_events
 

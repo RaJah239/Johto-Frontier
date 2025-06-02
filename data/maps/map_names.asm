@@ -310,14 +310,12 @@ Pewter_Map_Names: ;newgroup PEWTER
 Fast_Ship_Map_Names: ;newgroup FAST_SHIP
 	table_width 2, Fast_Ship_Map_Names                                            ; 15
 	dw Fast_Ship_Map_Name1 ; map_const OLIVINE_PORT,                                10, 18 ;  1
-	dw Fast_Ship_Map_Name2 ; map_const VERMILION_PORT,                              10, 18 ;  2
 	dw Fast_Ship_Map_Name3 ; map_const FAST_SHIP_1F,                                16,  9 ;  3
 	dw Fast_Ship_Map_Name4 ; map_const FAST_SHIP_CABINS_NNW_NNE_NE,                  4, 16 ;  4
 	dw Fast_Ship_Map_Name5 ; map_const FAST_SHIP_CABINS_SW_SSW_NW,                   4, 16 ;  5
 	dw Fast_Ship_Map_Name6 ; map_const FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN,       5, 17 ;  6
 	dw Fast_Ship_Map_Name7 ; map_const FAST_SHIP_B1F,                               16,  8 ;  7
 	dw Fast_Ship_Map_Name8 ; map_const OLIVINE_PORT_PASSAGE,                        10,  9 ;  8
-	dw Fast_Ship_Map_Name9 ; map_const VERMILION_PORT_PASSAGE,                      10,  9 ;  9
 	dw Fast_Ship_Map_Name10 ; map_const MOUNT_MOON_SQUARE,                           15,  9 ; 10
 	dw Fast_Ship_Map_Name11 ; map_const MOUNT_MOON_GIFT_SHOP ; 11
 	dw Fast_Ship_Map_Name12 ; map_const TIN_TOWER_ROOF,                              10,  9 ; 12
@@ -873,8 +871,6 @@ Pewter_Map_Name6: ; map_const PEWTER_POKECENTER_1F ;  6
 
 Fast_Ship_Map_Name1: ; map_const OLIVINE_PORT,;  1
 	db "OLIVINE MARINA@"
-Fast_Ship_Map_Name2: ; map_const VERMILION_PORT,;  2
-	db "VERMILION MARINA@"
 Fast_Ship_Map_Name3: ; map_const FAST_SHIP_1F,;  3
 	db "S.S. AQUA@"
 Fast_Ship_Map_Name4: ; map_const FAST_SHIP_CABINS_NNW_NNE_NE,;  4
@@ -887,8 +883,6 @@ Fast_Ship_Map_Name7: ; map_const FAST_SHIP_B1F,;  7
 	db "S.S. AQUA GALLEY@"
 Fast_Ship_Map_Name8: ; map_const OLIVINE_PORT_PASSAGE,;  8
 	db "JOHTO PORT PASSAGE@"
-Fast_Ship_Map_Name9: ; map_const VERMILION_PORT_PASSAGE,;  9
-	db "KANTO PORT PASSAGE@"
 Fast_Ship_Map_Name10: ; map_const MOUNT_MOON_SQUARE,; 10
 	db "MT. MOON SQUARE@"
 Fast_Ship_Map_Name11: ; map_const MOUNT_MOON_GIFT_SHOP ; 11
