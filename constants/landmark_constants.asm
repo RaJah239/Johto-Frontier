@@ -60,10 +60,6 @@ DEF KANTO_LANDMARK EQU const_value
 	const LANDMARK_PEWTER_CITY       ; 33
 	const LANDMARK_CERULEAN_CITY     ; 37
 	const LANDMARK_UNDERGROUND_PATH  ; 3b
-	const LANDMARK_ROUTE_19          ; 52
-	const LANDMARK_ROUTE_20          ; 53
-	const LANDMARK_CINNABAR_ISLAND   ; 55
-	const LANDMARK_ROUTE_21          ; 56
 	const LANDMARK_FAST_SHIP         ; 58
 DEF NUM_LANDMARKS EQU const_value
 

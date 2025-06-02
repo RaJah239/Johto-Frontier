@@ -223,23 +223,6 @@ ENDM
 	connection south, Route29, ROUTE_29, -10
 	connection east, Route45, ROUTE_45, -36
 
-	map_attributes PalletTown, PALLET_TOWN, $0f, SOUTH
-	connection south, Route21, ROUTE_21, 0
-
-	map_attributes Route21, ROUTE_21, $43, NORTH | SOUTH
-	connection north, PalletTown, PALLET_TOWN, 0
-	connection south, CinnabarIsland, CINNABAR_ISLAND, 0
-
-	map_attributes CinnabarIsland, CINNABAR_ISLAND, $43, NORTH | EAST
-	connection north, Route21, ROUTE_21, 0
-	connection east, Route20, ROUTE_20, 0
-
-	map_attributes Route20, ROUTE_20, $43, WEST | EAST
-	connection west, CinnabarIsland, CINNABAR_ISLAND, 0
-	connection east, Route19, ROUTE_19, -9
-
-	map_attributes Route19, ROUTE_19, $43, WEST
-	connection west, Route20, ROUTE_20, 9
 
 	map_attributes Route23, ROUTE_23, $0f, 0
 	map_attributes SproutTower1F, SPROUT_TOWER_1F, $00, 0
@@ -355,7 +338,6 @@ ENDM
 	map_attributes BlackthornMart, BLACKTHORN_MART, $00, 0
 	map_attributes BlackthornPokecenter1F, BLACKTHORN_POKECENTER_1F, $00, 0
 	map_attributes MoveDeletersHouse, MOVE_DELETERS_HOUSE, $00, 0
-	map_attributes CinnabarPokecenter1F, CINNABAR_POKECENTER_1F, $00, 0
 	map_attributes CeruleanPokecenter1F, CERULEAN_POKECENTER_1F, $00, 0
 	map_attributes AzaleaPokecenter1F, AZALEA_POKECENTER_1F, $00, 0
 	map_attributes CharcoalKiln, CHARCOAL_KILN, $00, 0
@@ -470,3 +452,4 @@ ENDM
 	map_attributes PewterCity, PEWTER_CITY, $0f, 0
 	map_attributes ViridianCity, VIRIDIAN_CITY, $0f, 0
 	map_attributes CeruleanCity, CERULEAN_CITY, $0f, 0
+	map_attributes PalletTown, PALLET_TOWN, $0f, 0

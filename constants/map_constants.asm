@@ -174,11 +174,6 @@ ENDM
 	endgroup
 
 	newgroup CINNABAR                                             ;  6
-	map_const CINNABAR_POKECENTER_1F,                       5,  4 ;  1
-	map_const ROUTE_19,                                    10, 18 ;  5
-	map_const ROUTE_20,                                    30,  9 ;  6
-	map_const ROUTE_21,                                    10, 18 ;  7
-	map_const CINNABAR_ISLAND,                             10,  9 ;  8
 	endgroup
 
 	newgroup CERULEAN                                             ;  7

@@ -310,7 +310,6 @@ INCLUDE "maps/Route35.asm"
 INCLUDE "maps/Route43.asm"
 INCLUDE "maps/Route44.asm"
 INCLUDE "maps/Route45.asm"
-INCLUDE "maps/Route19.asm"
 
 
 SECTION "Map Scripts 21", ROMX
@@ -343,16 +342,12 @@ INCLUDE "maps/Route37.asm"
 INCLUDE "maps/Route42.asm"
 INCLUDE "maps/Route46.asm"
 INCLUDE "maps/ViridianCity.asm"
-INCLUDE "maps/CinnabarPokecenter1F.asm"
 
 
 SECTION "Map Scripts 24", ROMX
 
 INCLUDE "maps/Route33.asm"
 INCLUDE "maps/PalletTown.asm"
-INCLUDE "maps/Route21.asm"
-INCLUDE "maps/CinnabarIsland.asm"
-INCLUDE "maps/Route20.asm"
 INCLUDE "maps/Route23.asm"
 INCLUDE "maps/SilverCavePokecenter1F.asm"
 INCLUDE "maps/Route39_SilverCaveGate.asm"

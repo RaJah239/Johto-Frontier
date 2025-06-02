@@ -203,11 +203,6 @@ Blackthorn_Map_Names: ;newgroup BLACKTHORN
 
 Cinnabar_Map_Names: ;newgroup CINNABAR
 	table_width 2, Cinnabar_Map_Names                                        ;  6
-	dw Cinnabar_Map_Name1 ; map_const CINNABAR_POKECENTER_1F ;  1
-	dw Cinnabar_Map_Name5 ; map_const ROUTE_19,                                    10, 18 ;  5
-	dw Cinnabar_Map_Name6 ; map_const ROUTE_20,                                    30,  9 ;  6
-	dw Cinnabar_Map_Name7 ; map_const ROUTE_21,                                    10, 18 ;  7
-	dw Cinnabar_Map_Name8 ; map_const CINNABAR_ISLAND,                             10,  9 ;  8
 	assert_table_length NUM_CINNABAR_MAPS
 
 Cerulean_Map_Names: ;newgroup CERULEAN
@@ -680,16 +675,6 @@ Blackthorn_Map_Name9: ; map_const ROUTE_46,;  9
 Blackthorn_Map_Name10: ; map_const BLACKTHORN_CITY,;  6
 	db "BLACKTHORN CITY@"
 
-Cinnabar_Map_Name1: ; map_const CINNABAR_POKECENTER_1F ;  1
-	db "CINNABAR CENTER@"
-Cinnabar_Map_Name5: ; map_const ROUTE_19, ;  5
-	db "ROUTE 19@"
-Cinnabar_Map_Name6: ; map_const ROUTE_20,;  6
-	db "ROUTE 20@"
-Cinnabar_Map_Name7: ; map_const ROUTE_21,;  7
-	db "ROUTE 21@"
-Cinnabar_Map_Name8: ; map_const CINNABAR_ISLAND,;  7
-	db "CINNABAR ISLAND@"
 
 Cerulean_Map_Name4: ; map_const CERULEAN_POKECENTER_1F ;  4
 	db "CERULEAN CENTER@"

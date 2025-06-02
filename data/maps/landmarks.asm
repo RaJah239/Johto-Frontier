@@ -66,10 +66,6 @@ Landmarks:
 	landmark  52,  52, PewterCityName
 	landmark 100,  52, CeruleanCityName
 	landmark 108,  76, UndergroundName
-	landmark  92, 128, Route19Name
-	landmark  76, 132, Route20Name
-	landmark  52, 132, CinnabarIslandName
-	landmark  52, 120, Route21Name
 	landmark 140, 116, FastShipName
 	assert_table_length NUM_LANDMARKS
 
@@ -101,12 +97,8 @@ PalletTownName:      db "PALLET TOWN@"
 ViridianCityName:    db "VIRIDIAN<BSP>CITY@"
 PewterCityName:      db "PEWTER CITY@"
 CeruleanCityName:    db "CERULEAN<BSP>CITY@"
-CinnabarIslandName:  db "CINNABAR<BSP>ISLAND@"
 IndigoPlateauName:   db "INDIGO<BSP>PLATEAU@"
 VictoryRoadName:     db "VICTORY<BSP>ROAD@"
-Route19Name:         db "ROUTE 19@"
-Route20Name:         db "ROUTE 20@"
-Route21Name:         db "ROUTE 21@"
 Route23Name:         db "ROUTE 23@"
 Route26Name:         db "ROUTE 26@"
 Route27Name:         db "ROUTE 27@"

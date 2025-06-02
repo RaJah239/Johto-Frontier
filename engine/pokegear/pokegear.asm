@@ -894,12 +894,12 @@ TownMap_GetKantoLandmarkLimits:
 	ld a, [wStatusFlags]
 	bit STATUSFLAGS_HALL_OF_FAME_F, a
 	jr z, .not_hof
-	ld d, LANDMARK_CINNABAR_ISLAND
-	ld e, LANDMARK_PALLET_TOWN
+	ld d, LANDMARK_PALLET_TOWN
+	ld e, LANDMARK_VICTORY_ROAD
 	ret
 
 .not_hof
-	ld d, LANDMARK_CINNABAR_ISLAND
+	ld d, LANDMARK_PALLET_TOWN
 	ld e, LANDMARK_VICTORY_ROAD
 	ret
 

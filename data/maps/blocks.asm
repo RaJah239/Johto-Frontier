@@ -15,9 +15,6 @@ Route44_Blocks:
 ElmsHouse_Blocks:
 	INCBIN "maps/ElmsHouse.blk"
 
-Route19_Blocks:
-	INCBIN "maps/Route19.blk"
-
 Pokecenter2F_Blocks:
 	INCBIN "maps/Pokecenter2F.blk"
 
@@ -41,9 +38,6 @@ PalletTown_Blocks:
 
 PewterCity_Blocks:
 	INCBIN "maps/PewterCity.blk"
-
-Route20_Blocks:
-	INCBIN "maps/Route20.blk"
 
 Route30_Blocks:
 	INCBIN "maps/Route30.blk"
@@ -104,14 +98,8 @@ Route29Route46Gate_Blocks:
 Route39_SilverCaveGate_Blocks:
 	INCBIN "maps/NorthSouthGate.blk"
 
-CinnabarIsland_Blocks:
-	INCBIN "maps/CinnabarIsland.blk"
-
 ViridianCity_Blocks:
 	INCBIN "maps/ViridianCity.blk"
-
-Route21_Blocks:
-	INCBIN "maps/Route21.blk"
 
 Route31_Blocks:
 	INCBIN "maps/Route31.blk"
@@ -158,7 +146,6 @@ OlivinePokecenter1F_Blocks:
 MahoganyPokecenter1F_Blocks:
 EcruteakPokecenter1F_Blocks:
 BlackthornPokecenter1F_Blocks:
-CinnabarPokecenter1F_Blocks:
 CeruleanPokecenter1F_Blocks:
 AzaleaPokecenter1F_Blocks:
 VioletPokecenter1F_Blocks:
