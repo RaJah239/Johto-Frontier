@@ -96,7 +96,6 @@ GoldenrodHappinessRater_Blocks:
 BillsFamilysHouse_Blocks:
 GoldenrodPPSpeechHouse_Blocks:
 GoldenrodNameRater_Blocks:
-VermilionDiglettsCaveSpeechHouse_Blocks:
 BillsBrothersHouse_Blocks:
 Route12SuperRodHouse_Blocks:
 CeladonMansionRoofHouse_Blocks:
