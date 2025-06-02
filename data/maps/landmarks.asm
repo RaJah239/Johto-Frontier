@@ -71,7 +71,6 @@ Landmarks:
 	landmark 100,  84, VermilionCityName
 	landmark  88,  68, Route7Name
 	landmark 116,  68, Route8Name
-	landmark 116,  52, Route9Name
 	landmark 132,  52, RockTunnelName
 	landmark 132,  56, Route10Name
 	landmark 132,  60, PowerPlantName
@@ -140,7 +139,6 @@ Route5Name:          db "ROUTE 5@"
 Route6Name:          db "ROUTE 6@"
 Route7Name:          db "ROUTE 7@"
 Route8Name:          db "ROUTE 8@"
-Route9Name:          db "ROUTE 9@"
 Route10Name:         db "ROUTE 10@"
 Route11Name:         db "ROUTE 11@"
 Route12Name:         db "ROUTE 12@"

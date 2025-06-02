@@ -201,8 +201,6 @@ CeruleanCity_Blocks:
 Route5_Blocks:
 	INCBIN "maps/Route5.blk"
 
-Route9_Blocks:
-	INCBIN "maps/Route9.blk"
 
 SECTION "Map Blocks 2", ROMX
 

@@ -65,7 +65,6 @@ DEF KANTO_LANDMARK EQU const_value
 	const LANDMARK_VERMILION_CITY    ; 3d
 	const LANDMARK_ROUTE_7           ; 3f
 	const LANDMARK_ROUTE_8           ; 40
-	const LANDMARK_ROUTE_9           ; 41
 	const LANDMARK_ROCK_TUNNEL       ; 42
 	const LANDMARK_ROUTE_10          ; 43
 	const LANDMARK_POWER_PLANT       ; 44

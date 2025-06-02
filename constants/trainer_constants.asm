@@ -476,9 +476,9 @@ DEF KRIS EQU __trainer_class__
 	const TIMOTHY
 	const BAILEY
 	const ANTHONY3
-	const TIM
+	const TIM ; unused
 	const NOLAND
-	const SIDNEY
+	const SIDNEY ; unused
 	const KENNY
 	const JIM
 	const DANIEL
@@ -568,8 +568,8 @@ DEF KRIS EQU __trainer_class__
 	const ERIN1
 	const LIZ2
 	const LIZ3
-	const HEIDI
-	const EDNA
+	const HEIDI ; unused
+	const EDNA ; unused
 	const GINA3
 	const TIFFANY1
 	const TIFFANY2
@@ -590,8 +590,8 @@ DEF KRIS EQU __trainer_class__
 	const ELLIOT
 	const BARRY
 	const LLOYD ; unused
-	const DEAN
-	const SID
+	const DEAN ; unused
+	const SID ; unused
 	const HARVEY ; unused
 	const DALE ; unused
 	const TED
