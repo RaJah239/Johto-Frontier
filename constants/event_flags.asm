@@ -251,8 +251,8 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_ROUTE_13_HIDDEN_CALCIUM
-	const EVENT_ROUTE_11_HIDDEN_REVIVE
+	const_skip
+	const_skip
 	const EVENT_ROUTE_17_HIDDEN_MAX_ETHER
 	const EVENT_ROUTE_17_HIDDEN_MAX_ELIXER
 	const_skip
@@ -543,14 +543,14 @@
 	const EVENT_BEAT_BIRD_KEEPER_DENIS
 	const EVENT_BEAT_BIRD_KEEPER_VANCE
 	const_skip
-	const EVENT_BEAT_BIRD_KEEPER_ROY
+	const_skip
 	const EVENT_BEAT_BIRD_KEEPER_BORIS
 	const EVENT_BEAT_BIRD_KEEPER_BOB
 	const EVENT_BEAT_BIRD_KEEPER_JOSE
 	const EVENT_BEAT_BIRD_KEEPER_PETER
 	const EVENT_BEAT_BIRD_KEEPER_JOSE2
-	const EVENT_BEAT_BIRD_KEEPER_PERRY
-	const EVENT_BEAT_BIRD_KEEPER_BRET
+	const_skip
+	const_skip
 	const EVENT_BEAT_BIRD_KEEPER_JOSE3
 	const EVENT_BEAT_BIRD_KEEPER_VANCE2
 	const EVENT_BEAT_BIRD_KEEPER_VANCE3
@@ -606,8 +606,8 @@
 ; Psychic
 	const EVENT_BEAT_PSYCHIC_NATHAN
 	const_skip
-	const EVENT_BEAT_PSYCHIC_HERMAN
-	const EVENT_BEAT_PSYCHIC_FIDEL
+	const_skip
+	const_skip
 	const EVENT_BEAT_PSYCHIC_GREG
 	const EVENT_BEAT_PSYCHIC_NORMAN
 	const EVENT_BEAT_PSYCHIC_MARK
@@ -659,14 +659,14 @@
 	const EVENT_BEAT_TWINS_MEG_AND_PEG2
 ; Schoolboy
 	const EVENT_BEAT_SCHOOLBOY_JACK
-	const EVENT_BEAT_SCHOOLBOY_KIP
+	const_skip
 	const EVENT_BEAT_SCHOOLBOY_ALAN
-	const EVENT_BEAT_SCHOOLBOY_JOHNNY
-	const_skip
-	const EVENT_BEAT_SCHOOLBOY_TOMMY
 	const_skip
 	const_skip
-	const EVENT_BEAT_SCHOOLBOY_BILLY
+	const_skip
+	const_skip
+	const_skip
+	const_skip
 	const EVENT_BEAT_SCHOOLBOY_CHAD
 	const EVENT_BEAT_SCHOOLBOY_NATE
 	const EVENT_BEAT_SCHOOLBOY_RICKY
@@ -768,15 +768,15 @@
 	const EVENT_BEAT_POKEFANM_WILLIAM
 	const EVENT_BEAT_POKEFANM_DEREK
 	const_skip
-	const EVENT_BEAT_POKEFANM_JOSHUA
-	const EVENT_BEAT_POKEFANM_CARTER
-	const EVENT_BEAT_POKEFANM_TREVOR
+	const_skip
+	const_skip
+	const_skip
 	const EVENT_BEAT_POKEFANM_BRANDON
 	const EVENT_BEAT_POKEFANM_JEREMY
 	const EVENT_BEAT_POKEFANM_COLIN
 	const EVENT_BEAT_POKEFANM_DEREK2
 	const EVENT_BEAT_POKEFANM_DEREK3
-	const EVENT_BEAT_POKEFANM_ALEX
+	const_skip
 ; PokefanF
 	const EVENT_BEAT_POKEFANF_BEVERLY
 	const EVENT_BEAT_POKEFANF_RUTH
@@ -874,7 +874,7 @@
 	const_skip
 	const EVENT_BEAT_HIKER_NOLAND
 	const_skip
-	const EVENT_BEAT_HIKER_KENNY
+	const_skip
 	const_skip
 	const EVENT_BEAT_HIKER_DANIEL
 	const EVENT_BEAT_HIKER_PARRY2
@@ -1014,11 +1014,11 @@
 	const EVENT_BEAT_YOUNGSTER_JOEY3
 	const_skip
 	const_skip
-	const EVENT_BEAT_YOUNGSTER_OWEN
-	const EVENT_BEAT_YOUNGSTER_JASON
+	const_skip
+	const_skip
 ; Teacher
-	const EVENT_BEAT_TEACHER_COLETTE
-	const EVENT_BEAT_TEACHER_HILLARY
+	const_skip
+	const_skip
 	const EVENT_BEAT_TEACHER_SHIRLEY
 ; Elite Four and Champion
 	const EVENT_BEAT_ELITE_4_WILL
@@ -1388,7 +1388,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_ROUTE_15_PP_UP
+	const_skip
 	const_skip
 ; New to Crystal
 	const EVENT_KURTS_HOUSE_GRANDDAUGHTER_1

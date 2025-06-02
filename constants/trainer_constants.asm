@@ -121,21 +121,21 @@ DEF KRIS EQU __trainer_class__
 	const JOEY3
 	const WARREN ; unused
 	const JIMMY ; unused
-	const OWEN
-	const JASON
+	const OWEN ; unused
+	const JASON ; unused
 	const JOEY4
 	const JOEY5
 
 	trainerclass SCHOOLBOY ; 17
 	const JACK1
-	const KIPP
+	const KIPP ; unused
 	const ALAN1
-	const JOHNNY
+	const JOHNNY ; unused
 	const DANNY ; unused
-	const TOMMY
+	const TOMMY ; unused
 	const DUDLEY ; unused
 	const JOE ; unused
-	const BILLY
+	const BILLY ; unused
 	const CHAD1
 	const NATE
 	const RICKY
@@ -161,14 +161,14 @@ DEF KRIS EQU __trainer_class__
 	const DENIS
 	const VANCE1
 	const HANK ; unused
-	const ROY
+	const ROY ; unused
 	const BORIS
 	const BOB
 	const JOSE1
 	const PETER
 	const JOSE2
-	const PERRY
-	const BRET
+	const PERRY ; unused
+	const BRET ; unused
 	const JOSE3
 	const VANCE2
 	const VANCE3
@@ -321,8 +321,8 @@ DEF KRIS EQU __trainer_class__
 	const CLARISSA
 
 	trainerclass TEACHER ; 22
-	const COLETTE
-	const HILLARY
+	const COLETTE ; unused
+	const HILLARY ; unused
 	const SHIRLEY
 
 	trainerclass SABRINA ; 23
@@ -479,7 +479,7 @@ DEF KRIS EQU __trainer_class__
 	const TIM ; unused
 	const NOLAND
 	const SIDNEY ; unused
-	const KENNY
+	const KENNY ; unused
 	const JIM ; unused
 	const DANIEL
 	const PARRY2
@@ -544,8 +544,8 @@ DEF KRIS EQU __trainer_class__
 	trainerclass PSYCHIC_T ; 34
 	const NATHAN
 	const FRANKLIN ; unused 
-	const HERMAN
-	const FIDEL
+	const HERMAN ; unused
+	const FIDEL ; unused
 	const GREG
 	const NORMAN
 	const MARK
@@ -643,15 +643,15 @@ DEF KRIS EQU __trainer_class__
 	const WILLIAM
 	const DEREK1
 	const ROBERT ; unused
-	const JOSHUA
-	const CARTER
-	const TREVOR
+	const JOSHUA ; unused
+	const CARTER ; unused
+	const TREVOR ; unused
 	const BRANDON
 	const JEREMY
 	const COLIN
 	const DEREK2 ; unused
 	const DEREK3 ; unused
-	const ALEX
+	const ALEX ; unused
 	const REX ; unused
 	const ALLAN ; unused
 
