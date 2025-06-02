@@ -280,7 +280,6 @@ SECTION "Map Scripts 17", ROMX
 INCLUDE "maps/MahoganyTown.asm"
 INCLUDE "maps/Route32.asm"
 INCLUDE "maps/VermilionPokecenter1F.asm"
-INCLUDE "maps/PokemonFanClub.asm"
 INCLUDE "maps/VermilionMagnetTrainSpeechHouse.asm"
 INCLUDE "maps/VermilionMart.asm"
 INCLUDE "maps/VermilionDiglettsCaveSpeechHouse.asm"

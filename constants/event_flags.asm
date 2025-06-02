@@ -207,7 +207,7 @@
 	const_next 200
 ; Kanto story events
 	const_skip
-	const EVENT_RETURNED_MACHINE_PART
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -216,9 +216,9 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_GOT_LOST_ITEM_FROM_FAN_CLUB
-	const EVENT_LISTENED_TO_FAN_CLUB_PRESIDENT_BUT_BAG_WAS_FULL
-	const EVENT_LISTENED_TO_FAN_CLUB_PRESIDENT
+	const_skip
+	const_skip
+	const_skip
 	const EVENT_TALKED_TO_SEAFOAM_GYM_GUIDE_ONCE
 	const EVENT_ENABLE_DIPLOMA_PRINTING
 	const EVENT_CINNABAR_ROCKS_CLEARED
