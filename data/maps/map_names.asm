@@ -487,7 +487,6 @@ Saffron_Map_Names: ; 25
 	dw Saffron_Map_Name12 ; map_const COPYCATS_HOUSE_2F ; 12
 	dw Saffron_Map_Name13 ; map_const ROUTE_5_UNDERGROUND_PATH_ENTRANCE ; 13
 	dw Saffron_Map_Name14 ; map_const ROUTE_5_SAFFRON_GATE ; 14
-	dw Saffron_Map_Name15 ; map_const ROUTE_5_CLEANSE_TAG_HOUSE ; 15
 	assert_table_length NUM_SAFFRON_MAPS
 
 	; CHERRYGROVE, 26
@@ -1184,8 +1183,7 @@ Saffron_Map_Name13: ; map_const ROUTE_5_UNDERGROUND_PATH_ENTRANCE ; 13
 	db "ROUTE 5 UNDERGRND@"
 Saffron_Map_Name14: ; map_const ROUTE_5_SAFFRON_GATE ; 14
 	db "ROUTE 5 GATE@"
-Saffron_Map_Name15: ; map_const ROUTE_5_CLEANSE_TAG_HOUSE ; 15
-	db "ROUTE 5 HOUSE@"
+
 
 Cherrygrove_Map_Name1: ; map_const ROUTE_30         ;  1
 	db "ROUTE 30@"

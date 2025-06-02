@@ -267,7 +267,6 @@ INCLUDE "maps/CopycatsHouse1F.asm"
 INCLUDE "maps/CopycatsHouse2F.asm"
 INCLUDE "maps/Route5UndergroundPathEntrance.asm"
 INCLUDE "maps/Route5SaffronGate.asm"
-INCLUDE "maps/Route5CleanseTagHouse.asm"
 
 
 SECTION "Map Scripts 16", ROMX
