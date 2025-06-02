@@ -363,7 +363,6 @@ Fuchsia_Map_Names: ;newgroup FUCHSIA
 
 Lavender_Map_Names: ;newgroup LAVENDER
 	table_width 2, Lavender_Map_Names                                            ; 18
-	dw Lavender_Map_Name1 ; map_const ROUTE_8,                                     20,  9 ;  1
 	dw Lavender_Map_Name2 ; map_const ROUTE_12,                                    10, 27 ;  2
 	dw Lavender_Map_Name4 ; map_const LAVENDER_TOWN,                               10,  9 ;  4
 	dw Lavender_Map_Name5 ; map_const LAVENDER_POKECENTER_1F ;  5
@@ -981,8 +980,6 @@ Fuchsia_Map_Name12: ; map_const SAFARI_ZONE_WARDENS_HOME ; 12
 Fuchsia_Map_Name13: ; map_const ROUTE_15_FUCHSIA_GATE ; 13
 	db "FUCHSIA GATE@"
 
-Lavender_Map_Name1: ; map_const ROUTE_8,;  1
-	db "ROUTE 8@"
 Lavender_Map_Name2: ; map_const ROUTE_12,;  2
 	db "ROUTE 12@"
 Lavender_Map_Name4: ; map_const LAVENDER_TOWN,;  4

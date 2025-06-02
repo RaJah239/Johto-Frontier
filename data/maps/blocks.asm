@@ -137,9 +137,6 @@ Route39_SilverCaveGate_Blocks:
 CinnabarIsland_Blocks:
 	INCBIN "maps/CinnabarIsland.blk"
 
-Route8_Blocks:
-	INCBIN "maps/Route8.blk"
-
 ViridianCity_Blocks:
 	INCBIN "maps/ViridianCity.blk"
 

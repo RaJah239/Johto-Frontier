@@ -88,7 +88,6 @@ INCLUDE "maps/Route36NationalParkGate.asm"
 
 SECTION "Map Scripts 6", ROMX
 
-INCLUDE "maps/Route8.asm"
 INCLUDE "maps/MahoganyMart1F.asm"
 INCLUDE "maps/TeamRocketBaseB1F.asm"
 INCLUDE "maps/TeamRocketBaseB2F.asm"

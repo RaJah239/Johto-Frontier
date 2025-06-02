@@ -441,8 +441,8 @@ DEF KRIS EQU __trainer_class__
 	const GREGG ; unused
 	const JAY ; unused
 	const DAVE ; unused
-	const SAM
-	const TOM
+	const SAM ; unused
+	const TOM ; unused
 	const PAT ; unused
 	const SHAWN
 	const TERU
@@ -490,9 +490,9 @@ DEF KRIS EQU __trainer_class__
 	trainerclass BIKER ; 2d
 	const BIKER_BENNY ; unused
 	const KAZU ; unused
-	const DWAYNE
-	const HARRIS
-	const ZEKE
+	const DWAYNE ; unused
+	const HARRIS ; unused
+	const ZEKE ; unused
 	const CHARLES
 	const RILEY
 	const JOEL
