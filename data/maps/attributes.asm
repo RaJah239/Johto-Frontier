@@ -457,7 +457,6 @@ ENDM
 	map_attributes CeladonPokecenter1F, CELADON_POKECENTER_1F, $00, 0
 	map_attributes CeladonGameCorner, CELADON_GAME_CORNER, $00, 0
 	map_attributes CeladonGameCornerPrizeRoom, CELADON_GAME_CORNER_PRIZE_ROOM, $00, 0
-	map_attributes CeladonCafe, CELADON_CAFE, $00, 0
 	map_attributes Route16FuchsiaSpeechHouse, ROUTE_16_FUCHSIA_SPEECH_HOUSE, $00, 0
 	map_attributes Route16Gate, ROUTE_16_GATE, $00, 0
 	map_attributes Route17Route18Gate, ROUTE_17_ROUTE_18_GATE, $00, 0

@@ -256,7 +256,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_FOUND_LEFTOVERS_IN_CELADON_CAFE
+	const_skip
 	const_skip
 	const_skip
 	const_skip
