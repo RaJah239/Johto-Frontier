@@ -23,12 +23,6 @@ CasinoMons::
 	casinomon DITTO, GOLDENRODGAMECORNER_CUBONE_COINS
 	casinomon TORCHIC, GOLDENRODGAMECORNER_TORCHIC_COINS 
 	db -1
-	; kanto, from maps\celadongamecornerprizeroom.asm
-	map_id CELADON_GAME_CORNER_PRIZE_ROOM
-	casinomon PIKACHU, CELADONGAMECORNERPRIZEROOM_PIKACHU_COINS 
-	casinomon PORYGON, CELADONGAMECORNERPRIZEROOM_PORYGON_COINS 
-	casinomon LARVITAR, CELADONGAMECORNERPRIZEROOM_LARVITAR_COINS 
-	db -1
 
 NPCTradeMons_Locations::
 ; corresponds to NPCTrades:: in data\events\npc_trades.asm

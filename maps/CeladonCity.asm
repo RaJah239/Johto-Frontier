@@ -13,7 +13,6 @@ CeladonCity_MapEvents:
 	warp_event 16,  3, CELADON_MANSION_1F, 3
 	warp_event 17,  3, CELADON_MANSION_1F, 3
 	warp_event 29,  9, CELADON_POKECENTER_1F, 1
-	warp_event 23, 19, CELADON_GAME_CORNER_PRIZE_ROOM, 1
 
 	def_coord_events
 

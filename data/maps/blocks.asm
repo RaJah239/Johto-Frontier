@@ -222,9 +222,6 @@ CeladonMansion3F_Blocks:
 CeladonMansionRoof_Blocks:
 	INCBIN "maps/CeladonMansionRoof.blk"
 
-CeladonGameCornerPrizeRoom_Blocks:
-	INCBIN "maps/CeladonGameCornerPrizeRoom.blk"
-
 Colosseum_Blocks:
 	INCBIN "maps/Colosseum.blk"
 
