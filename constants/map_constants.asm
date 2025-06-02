@@ -254,8 +254,6 @@ ENDM
 	endgroup
 
 	newgroup PEWTER                                               ; 14
-	map_const PEWTER_CITY,                                 20, 18 ;  2
-	map_const PEWTER_POKECENTER_1F,                         5,  4 ;  6
 	endgroup
 
 	newgroup FAST_SHIP                                            ; 15

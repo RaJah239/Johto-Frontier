@@ -228,7 +228,6 @@ SECTION "Map Scripts 15", ROMX
 
 SECTION "Map Scripts 16", ROMX
 
-INCLUDE "maps/PewterCity.asm"
 INCLUDE "maps/WhirlIslandNW.asm"
 INCLUDE "maps/WhirlIslandNE.asm"
 INCLUDE "maps/WhirlIslandSW.asm"
@@ -317,7 +316,6 @@ INCLUDE "maps/Route27.asm"
 INCLUDE "maps/Route29.asm"
 INCLUDE "maps/Route30.asm"
 INCLUDE "maps/Route38.asm"
-INCLUDE "maps/PewterPokecenter1F.asm"
 
 
 SECTION "Map Scripts 22", ROMX

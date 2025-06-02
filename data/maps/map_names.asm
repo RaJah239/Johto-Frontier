@@ -291,8 +291,6 @@ Pallet_Map_Names: ;newgroup PALLET
 
 Pewter_Map_Names: ;newgroup PEWTER
 	table_width 2, Pewter_Map_Names                                               ; 14
-	dw Pewter_Map_Name2 ; map_const PEWTER_CITY,                                 20, 18 ;  2
-	dw Pewter_Map_Name6 ; map_const PEWTER_POKECENTER_1F ;  6
 	assert_table_length NUM_PEWTER_MAPS
 
 Fast_Ship_Map_Names: ;newgroup FAST_SHIP
@@ -790,11 +788,6 @@ Pallet_Map_Name2: ; map_const PALLET_TOWN,;  2
 	db "PALLET TOWN@"
 Pallet_Map_Name6: ; map_const OAKS_LAB ;  6  ; 14
 	db "OAK'S LAB@"
-
-Pewter_Map_Name2: ; map_const PEWTER_CITY,;  2
-	db "PEWTER CITY@"
-Pewter_Map_Name6: ; map_const PEWTER_POKECENTER_1F ;  6
-	db "PEWTER <PKMN> CENTER@"
 
 Fast_Ship_Map_Name1: ; map_const OLIVINE_PORT,;  1
 	db "OLIVINE MARINA@"

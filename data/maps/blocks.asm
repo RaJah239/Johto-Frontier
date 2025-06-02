@@ -36,9 +36,6 @@ Route37_Blocks:
 PalletTown_Blocks:
 	INCBIN "maps/PalletTown.blk"
 
-PewterCity_Blocks:
-	INCBIN "maps/PewterCity.blk"
-
 Route30_Blocks:
 	INCBIN "maps/Route30.blk"
 
@@ -148,7 +145,6 @@ AzaleaPokecenter1F_Blocks:
 VioletPokecenter1F_Blocks:
 Route32Pokecenter1F_Blocks:
 GoldenrodPokecenter1F_Blocks:
-PewterPokecenter1F_Blocks:
 SilverCavePokecenter1F_Blocks:
 CianwoodPokecenter1F_Blocks:
 ViridianPokecenter1F_Blocks:
