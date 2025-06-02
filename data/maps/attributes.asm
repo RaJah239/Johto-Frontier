@@ -311,8 +311,7 @@ ENDM
 	connection north, CeruleanCity, CERULEAN_CITY, -5
 	connection south, SaffronCity, SAFFRON_CITY, -5
 
-	map_attributes CeruleanCity, CERULEAN_CITY, $0f, NORTH | SOUTH | EAST
-	connection north, Route24, ROUTE_24, 6
+	map_attributes CeruleanCity, CERULEAN_CITY, $0f, SOUTH | EAST
 	connection south, Route5, ROUTE_5, 5
 	connection east, Route9, ROUTE_9, 9
 

@@ -44,7 +44,6 @@ CeruleanGymGruntRunsOutScript:
 	playsound SFX_EXIT_BUILDING
 	disappear CERULEANGYM_ROCKET
 	setevent EVENT_MET_ROCKET_GRUNT_AT_CERULEAN_GYM
-	clearevent EVENT_ROUTE_24_ROCKET
 	setscene SCENE_CERULEANGYM_NOOP
 	setmapscene POWER_PLANT, SCENE_POWERPLANT_NOOP
 	waitsfx

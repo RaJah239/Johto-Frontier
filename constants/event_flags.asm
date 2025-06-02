@@ -1357,7 +1357,7 @@
 
 	const_next 1900
 ; Kanto people
-	const EVENT_ROUTE_24_ROCKET
+	const_skip
 	const EVENT_CERULEAN_GYM_ROCKET
 	const_skip
 	const EVENT_TRAINERS_IN_CERULEAN_GYM
