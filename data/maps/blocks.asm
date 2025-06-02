@@ -97,7 +97,6 @@ BillsFamilysHouse_Blocks:
 GoldenrodPPSpeechHouse_Blocks:
 GoldenrodNameRater_Blocks:
 BillsBrothersHouse_Blocks:
-Route12SuperRodHouse_Blocks:
 CeladonMansionRoofHouse_Blocks:
 Route16FuchsiaSpeechHouse_Blocks:
 ManiasHouse_Blocks:

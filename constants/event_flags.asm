@@ -30,7 +30,7 @@
 ; Rods
 	const EVENT_GOT_OLD_ROD
 	const EVENT_GOT_GOOD_ROD
-	const EVENT_GOT_SUPER_ROD
+	const_skip
 ; Johto story events
 	const EVENT_GOT_A_POKEMON_FROM_ELM
 	const EVENT_GOT_CYNDAQUIL_FROM_ELM
