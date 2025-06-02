@@ -165,9 +165,6 @@ Route17Route18Gate_Blocks:
 Route31VioletGate_Blocks:
 	INCBIN "maps/EastWestGate.blk"
 
-VermilionCity_Blocks:
-	INCBIN "maps/VermilionCity.blk"
-
 ElmsLab_Blocks:
 	INCBIN "maps/ElmsLab.blk"
 
@@ -198,7 +195,6 @@ AzaleaPokecenter1F_Blocks:
 VioletPokecenter1F_Blocks:
 Route32Pokecenter1F_Blocks:
 GoldenrodPokecenter1F_Blocks:
-VermilionPokecenter1F_Blocks:
 PewterPokecenter1F_Blocks:
 FuchsiaPokecenter1F_Blocks:
 SilverCavePokecenter1F_Blocks:

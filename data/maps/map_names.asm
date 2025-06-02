@@ -291,8 +291,6 @@ Goldenrod_Map_Names: ;newgroup GOLDENROD
 Vermilion_Map_Names: ;newgroup VERMILION
 	table_width 2, Vermilion_Map_Names                                            ; 12
 	dw Vermilion_Map_Name2 ; map_const ROUTE_11,                                    20,  9 ;  2
-	dw Vermilion_Map_Name3 ; map_const VERMILION_CITY,                              20, 18 ;  3
-	dw Vermilion_Map_Name5 ; map_const VERMILION_POKECENTER_1F ;  5
 	assert_table_length NUM_VERMILION_MAPS
 
 Pallet_Map_Names: ;newgroup PALLET
@@ -851,10 +849,6 @@ Goldenrod_Map_Name24: ; map_const DAY_CARE ; 24 ; 12
 
 Vermilion_Map_Name2: ; map_const ROUTE_11,;  2
 	db "ROUTE 11@"
-Vermilion_Map_Name3: ; map_const VERMILION_CITY, ;  3
-	db "VERMILION CITY@"
-Vermilion_Map_Name5: ; map_const VERMILION_POKECENTER_1F ;  5
-	db "VERMILION CENTER@"
 
 
 Pallet_Map_Name2: ; map_const PALLET_TOWN,;  2

@@ -282,12 +282,9 @@ ENDM
 	connection south, Route13, ROUTE_13, -20
 	connection west, Route11, ROUTE_11, 9
 
-	map_attributes Route11, ROUTE_11, $0f, WEST | EAST
-	connection west, VermilionCity, VERMILION_CITY, 0
+	map_attributes Route11, ROUTE_11, $0f, EAST
 	connection east, Route12, ROUTE_12, -9
 
-	map_attributes VermilionCity, VERMILION_CITY, $43, EAST
-	connection east, Route11, ROUTE_11, 0
 
 	map_attributes Route23, ROUTE_23, $0f, 0
 	map_attributes SproutTower1F, SPROUT_TOWER_1F, $00, 0
@@ -450,7 +447,6 @@ ENDM
 	map_attributes IlexForestAzaleaGate, ILEX_FOREST_AZALEA_GATE, $00, 0
 	map_attributes Route34IlexForestGate, ROUTE_34_ILEX_FOREST_GATE, $00, 0
 	map_attributes DayCare, DAY_CARE, $00, 0
-	map_attributes VermilionPokecenter1F, VERMILION_POKECENTER_1F, $00, 0
 	map_attributes OaksLab, OAKS_LAB, $00, 0
 	map_attributes PewterPokecenter1F, PEWTER_POKECENTER_1F, $00, 0
 	map_attributes OlivinePort, OLIVINE_PORT, $0a, 0
