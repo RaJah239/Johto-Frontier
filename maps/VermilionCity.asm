@@ -9,7 +9,6 @@ VermilionCity_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events
-	warp_event  9,  5, VERMILION_POKECENTER_1F, 1
 	warp_event  7, 13, POKEMON_FAN_CLUB, 1
 	warp_event 13, 13, VERMILION_MAGNET_TRAIN_SPEECH_HOUSE, 1
 	warp_event 21, 13, VERMILION_MART, 2
