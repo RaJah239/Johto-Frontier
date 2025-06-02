@@ -250,7 +250,6 @@ VermilionMart_Blocks:
 PewterMart_Blocks:
 FuchsiaMart_Blocks:
 LavenderMart_Blocks:
-ViridianMart_Blocks:
 SaffronMart_Blocks:
 CherrygroveMart_Blocks:
 	INCBIN "maps/Mart.blk"

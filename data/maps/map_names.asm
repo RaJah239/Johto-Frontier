@@ -475,7 +475,6 @@ Viridian_Map_Names: ;newgroup VIRIDIAN ; 23
 	dw Viridian_Map_Name5 ; map_const VIRIDIAN_NICKNAME_SPEECH_HOUSE ;  5
 	dw Viridian_Map_Name6 ; map_const TRAINER_HOUSE_1F ;  6
 	dw Viridian_Map_Name7 ; map_const TRAINER_HOUSE_B1F ;  7
-	dw Viridian_Map_Name8 ; map_const VIRIDIAN_MART ;  8
 	dw Viridian_Map_Name9 ; map_const VIRIDIAN_POKECENTER_1F ;  9
 	dw Viridian_Map_Name11 ; map_const ROUTE_2_NUGGET_HOUSE ; 11
 	dw Viridian_Map_Name12 ; map_const ROUTE_2_GATE ; 12
