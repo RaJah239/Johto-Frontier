@@ -652,8 +652,8 @@ DEF KRIS EQU __trainer_class__
 	const DEREK2 ; unused
 	const DEREK3 ; unused
 	const ALEX
-	const REX
-	const ALLAN
+	const REX ; unused
+	const ALLAN ; unused
 
 	trainerclass KIMONO_GIRL ; 3c
 	const NAOKO_UNUSED ; unused

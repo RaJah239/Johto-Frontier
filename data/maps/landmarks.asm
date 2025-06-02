@@ -66,7 +66,6 @@ Landmarks:
 	landmark  52,  52, PewterCityName
 	landmark 100,  52, CeruleanCityName
 	landmark 108,  76, UndergroundName
-	landmark 100,  76, Route6Name
 	landmark 100,  84, VermilionCityName
 	landmark  88,  68, Route7Name
 	landmark 132,  68, LavenderTownName
@@ -124,7 +123,6 @@ CinnabarIslandName:  db "CINNABAR<BSP>ISLAND@"
 IndigoPlateauName:   db "INDIGO<BSP>PLATEAU@"
 VictoryRoadName:     db "VICTORY<BSP>ROAD@"
 SeafoamIslandsName:  db "SEAFOAM¯ISLANDS@"
-Route6Name:          db "ROUTE 6@"
 Route7Name:          db "ROUTE 7@"
 Route11Name:         db "ROUTE 11@"
 Route12Name:         db "ROUTE 12@"

@@ -291,7 +291,6 @@ Goldenrod_Map_Names: ;newgroup GOLDENROD
 
 Vermilion_Map_Names: ;newgroup VERMILION
 	table_width 2, Vermilion_Map_Names                                            ; 12
-	dw Vermilion_Map_Name1 ; map_const ROUTE_6,                                     10,  9 ;  1
 	dw Vermilion_Map_Name2 ; map_const ROUTE_11,                                    20,  9 ;  2
 	dw Vermilion_Map_Name3 ; map_const VERMILION_CITY,                              20, 18 ;  3
 	dw Vermilion_Map_Name4 ; map_const VERMILION_FISHING_SPEECH_HOUSE ;  4
@@ -864,8 +863,6 @@ Goldenrod_Map_Name23: ; map_const ROUTE_34_ILEX_FOREST_GATE ; 23
 Goldenrod_Map_Name24: ; map_const DAY_CARE ; 24 ; 12
 	db "ROUTE 34 DAY CARE@"
 
-Vermilion_Map_Name1: ; map_const ROUTE_6,;  1
-	db "ROUTE 6@"
 Vermilion_Map_Name2: ; map_const ROUTE_11,;  2
 	db "ROUTE 11@"
 Vermilion_Map_Name3: ; map_const VERMILION_CITY, ;  3

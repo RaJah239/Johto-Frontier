@@ -256,7 +256,6 @@ ENDM
 	endgroup
 
 	newgroup VERMILION                                            ; 12
-	map_const ROUTE_6,                                     10,  9 ;  1
 	map_const ROUTE_11,                                    20,  9 ;  2
 	map_const VERMILION_CITY,                              20, 18 ;  3
 	map_const VERMILION_FISHING_SPEECH_HOUSE,               4,  4 ;  4

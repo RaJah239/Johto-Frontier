@@ -290,11 +290,7 @@ ENDM
 	map_attributes LavenderTown, LAVENDER_TOWN, $2c, SOUTH
 	connection south, Route12, ROUTE_12, 0
 
-	map_attributes Route6, ROUTE_6, $0f, SOUTH
-	connection south, VermilionCity, VERMILION_CITY, -5
-
-	map_attributes VermilionCity, VERMILION_CITY, $43, NORTH | EAST
-	connection north, Route6, ROUTE_6, 5
+	map_attributes VermilionCity, VERMILION_CITY, $43, EAST
 	connection east, Route11, ROUTE_11, 0
 
 	map_attributes Route23, ROUTE_23, $0f, 0
