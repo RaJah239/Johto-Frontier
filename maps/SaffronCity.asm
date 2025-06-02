@@ -10,8 +10,6 @@ SaffronCity_MapEvents:
 
 	def_warp_events
 	warp_event  9, 29, SAFFRON_POKECENTER_1F, 1
-	warp_event  0, 24, ROUTE_7_SAFFRON_GATE, 3
-	warp_event  0, 25, ROUTE_7_SAFFRON_GATE, 4
 
 	def_coord_events
 

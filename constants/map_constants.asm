@@ -365,7 +365,6 @@ ENDM
 	map_const CELADON_CAFE,                                 6,  4 ; 22
 	map_const ROUTE_16_FUCHSIA_SPEECH_HOUSE,                4,  4 ; 23
 	map_const ROUTE_16_GATE,                                5,  4 ; 24
-	map_const ROUTE_7_SAFFRON_GATE,                         5,  4 ; 25
 	map_const ROUTE_17_ROUTE_18_GATE,                       5,  4 ; 26
 	endgroup
 
