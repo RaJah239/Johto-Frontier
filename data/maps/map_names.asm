@@ -474,7 +474,6 @@ New_Bark_Map_Names: ; newgroup NEW_BARK ; 24
 	; newgroup SAFFRON
 Saffron_Map_Names: ; 25
 	table_width 2, Saffron_Map_Names
-	dw Saffron_Map_Name1 ; map_const ROUTE_5,                                     10,  9 ;  1
 	dw Saffron_Map_Name2 ; map_const SAFFRON_CITY,                                20, 18 ;  2
 	dw Saffron_Map_Name3 ; map_const FIGHTING_DOJO ;  3
 	dw Saffron_Map_Name4 ; map_const SAFFRON_GYM,                                 10,  9 ;  4
@@ -485,8 +484,6 @@ Saffron_Map_Names: ; 25
 	dw Saffron_Map_Name10 ; map_const SILPH_CO_1F ; 10
 	dw Saffron_Map_Name11 ; map_const COPYCATS_HOUSE_1F ; 11
 	dw Saffron_Map_Name12 ; map_const COPYCATS_HOUSE_2F ; 12
-	dw Saffron_Map_Name13 ; map_const ROUTE_5_UNDERGROUND_PATH_ENTRANCE ; 13
-	dw Saffron_Map_Name14 ; map_const ROUTE_5_SAFFRON_GATE ; 14
 	assert_table_length NUM_SAFFRON_MAPS
 
 	; CHERRYGROVE, 26
@@ -1157,8 +1154,6 @@ New_Bark_Map_Name12: ; map_const ROUTE_27_SANDSTORM_HOUSE ; 12
 New_Bark_Map_Name13: ; map_const ROUTE_29_ROUTE_46_GATE ; 13
 	db "ROUTE 29 GATE@"
 
-Saffron_Map_Name1: ; map_const ROUTE_5,;  1
-	db "ROUTE 5@"
 Saffron_Map_Name2: ; map_const SAFFRON_CITY ;  2
 	db "SAFFRON CITY@"
 Saffron_Map_Name3: ; map_const FIGHTING_DOJO ;  3
@@ -1179,10 +1174,6 @@ Saffron_Map_Name11: ; map_const COPYCATS_HOUSE_1F ; 11
 	db "COPYCAT HOUSE 1F@"
 Saffron_Map_Name12: ; map_const COPYCATS_HOUSE_2F ; 12
 	db "COPYCAT HOUSE 2F@"
-Saffron_Map_Name13: ; map_const ROUTE_5_UNDERGROUND_PATH_ENTRANCE ; 13
-	db "ROUTE 5 UNDERGRND@"
-Saffron_Map_Name14: ; map_const ROUTE_5_SAFFRON_GATE ; 14
-	db "ROUTE 5 GATE@"
 
 
 Cherrygrove_Map_Name1: ; map_const ROUTE_30         ;  1

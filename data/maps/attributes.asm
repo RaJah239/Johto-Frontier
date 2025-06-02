@@ -300,18 +300,10 @@ ENDM
 	connection north, SaffronCity, SAFFRON_CITY, -5
 	connection south, VermilionCity, VERMILION_CITY, -5
 
-	map_attributes SaffronCity, SAFFRON_CITY, $0f, NORTH | SOUTH | WEST | EAST
-	connection north, Route5, ROUTE_5, 5
+	map_attributes SaffronCity, SAFFRON_CITY, $0f, SOUTH | WEST | EAST
 	connection south, Route6, ROUTE_6, 5
 	connection west, Route7, ROUTE_7, 9
 	connection east, Route8, ROUTE_8, 9
-
-	map_attributes Route5, ROUTE_5, $0f, NORTH | SOUTH
-	connection north, CeruleanCity, CERULEAN_CITY, -5
-	connection south, SaffronCity, SAFFRON_CITY, -5
-
-	map_attributes CeruleanCity, CERULEAN_CITY, $0f, SOUTH
-	connection south, Route5, ROUTE_5, 5
 
 	map_attributes Route8, ROUTE_8, $2c, WEST | EAST
 	connection west, SaffronCity, SAFFRON_CITY, -9
@@ -589,8 +581,6 @@ ENDM
 	map_attributes SilphCo1F, SILPH_CO_1F, $00, 0
 	map_attributes CopycatsHouse1F, COPYCATS_HOUSE_1F, $00, 0
 	map_attributes CopycatsHouse2F, COPYCATS_HOUSE_2F, $00, 0
-	map_attributes Route5UndergroundPathEntrance, ROUTE_5_UNDERGROUND_PATH_ENTRANCE, $00, 0
-	map_attributes Route5SaffronGate, ROUTE_5_SAFFRON_GATE, $00, 0
 	map_attributes CherrygroveMart, CHERRYGROVE_MART, $00, 0
 	map_attributes CherrygrovePokecenter1F, CHERRYGROVE_POKECENTER_1F, $00, 0
 	map_attributes CherrygroveGymSpeechHouse, CHERRYGROVE_GYM_SPEECH_HOUSE, $00, 0
@@ -602,4 +592,4 @@ ENDM
 	map_attributes SilverCaveOutside, SILVER_CAVE_OUTSIDE, $00, 0
 	map_attributes PewterCity, PEWTER_CITY, $0f, 0
 	map_attributes ViridianCity, VIRIDIAN_CITY, $0f, 0
-	
+	map_attributes CeruleanCity, CERULEAN_CITY, $0f, 0

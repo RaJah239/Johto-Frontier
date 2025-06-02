@@ -133,7 +133,6 @@ Route34IlexForestGate_Blocks:
 Route6SaffronGate_Blocks:
 Route40BattleTowerGate_Blocks:
 Route29Route46Gate_Blocks:
-Route5SaffronGate_Blocks:
 Route39_SilverCaveGate_Blocks:
 	INCBIN "maps/NorthSouthGate.blk"
 
@@ -193,10 +192,6 @@ ElmsLab_Blocks:
 
 CeruleanCity_Blocks:
 	INCBIN "maps/CeruleanCity.blk"
-
-Route5_Blocks:
-	INCBIN "maps/Route5.blk"
-
 
 SECTION "Map Blocks 2", ROMX
 
@@ -312,7 +307,6 @@ NationalPark_Blocks:
 NationalParkBugContest_Blocks:
 	INCBIN "maps/NationalPark.blk"
 
-Route5UndergroundPathEntrance_Blocks:
 Route6UndergroundPathEntrance_Blocks:
 	INCBIN "maps/UndergroundPathEntrance.blk"
 

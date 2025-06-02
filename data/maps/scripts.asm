@@ -265,8 +265,6 @@ INCLUDE "maps/SaffronMagnetTrainStation.asm"
 INCLUDE "maps/SilphCo1F.asm"
 INCLUDE "maps/CopycatsHouse1F.asm"
 INCLUDE "maps/CopycatsHouse2F.asm"
-INCLUDE "maps/Route5UndergroundPathEntrance.asm"
-INCLUDE "maps/Route5SaffronGate.asm"
 
 
 SECTION "Map Scripts 16", ROMX
@@ -426,7 +424,6 @@ INCLUDE "maps/Route7.asm"
 INCLUDE "maps/Route14.asm"
 INCLUDE "maps/LavenderTown.asm"
 INCLUDE "maps/Route6.asm"
-INCLUDE "maps/Route5.asm"
 INCLUDE "maps/Route23.asm"
 INCLUDE "maps/SilverCavePokecenter1F.asm"
 INCLUDE "maps/Route39_SilverCaveGate.asm"

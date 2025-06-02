@@ -65,7 +65,6 @@ Landmarks:
 	landmark  52,  76, ViridianCityName
 	landmark  52,  52, PewterCityName
 	landmark 100,  52, CeruleanCityName
-	landmark 100,  60, Route5Name
 	landmark 108,  76, UndergroundName
 	landmark 100,  76, Route6Name
 	landmark 100,  84, VermilionCityName
@@ -130,7 +129,6 @@ IndigoPlateauName:   db "INDIGO<BSP>PLATEAU@"
 VictoryRoadName:     db "VICTORY<BSP>ROAD@"
 LavRadioTowerName:   db "RADIO TOWER@"
 SeafoamIslandsName:  db "SEAFOAM¯ISLANDS@"
-Route5Name:          db "ROUTE 5@"
 Route6Name:          db "ROUTE 6@"
 Route7Name:          db "ROUTE 7@"
 Route8Name:          db "ROUTE 8@"
