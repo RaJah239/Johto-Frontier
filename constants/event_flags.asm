@@ -233,7 +233,7 @@
 	const_skip
 	const EVENT_TALKED_TO_OAK_IN_KANTO
 	const EVENT_GOT_HP_UP_FROM_VERMILION_GUY
-	const EVENT_GOT_TM29_PSYCHIC
+	const_skip
 ; Kanto hidden items
 	const_skip
 	const EVENT_UNDERGROUND_PATH_HIDDEN_FULL_RESTORE
