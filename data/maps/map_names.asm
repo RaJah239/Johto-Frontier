@@ -205,7 +205,6 @@ Cinnabar_Map_Names: ;newgroup CINNABAR
 	table_width 2, Cinnabar_Map_Names                                        ;  6
 	dw Cinnabar_Map_Name1 ; map_const CINNABAR_POKECENTER_1F ;  1
 	dw Cinnabar_Map_Name3 ; map_const ROUTE_19_FUCHSIA_GATE ;  3
-	dw Cinnabar_Map_Name4 ; map_const SEAFOAM_GYM ;  4
 	dw Cinnabar_Map_Name5 ; map_const ROUTE_19,                                    10, 18 ;  5
 	dw Cinnabar_Map_Name6 ; map_const ROUTE_20,                                    30,  9 ;  6
 	dw Cinnabar_Map_Name7 ; map_const ROUTE_21,                                    10, 18 ;  7
@@ -708,8 +707,6 @@ Cinnabar_Map_Name1: ; map_const CINNABAR_POKECENTER_1F ;  1
 	db "CINNABAR CENTER@"
 Cinnabar_Map_Name3: ; map_const ROUTE_19_FUCHSIA_GATE ;  3
 	db "ROUTE 19 GATE@"
-Cinnabar_Map_Name4: ; map_const SEAFOAM_GYM ;  4
-	db "SEAFOAM GYM@"
 Cinnabar_Map_Name5: ; map_const ROUTE_19, ;  5
 	db "ROUTE 19@"
 Cinnabar_Map_Name6: ; map_const ROUTE_20,;  6

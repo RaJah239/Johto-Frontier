@@ -74,7 +74,6 @@ Landmarks:
 	landmark  92, 116, FuchsiaCityName
 	landmark  92, 128, Route19Name
 	landmark  76, 132, Route20Name
-	landmark  68, 132, SeafoamIslandsName
 	landmark  52, 132, CinnabarIslandName
 	landmark  52, 120, Route21Name
 	landmark 140, 116, FastShipName
@@ -113,7 +112,6 @@ FuchsiaCityName:     db "FUCHSIA<BSP>CITY@"
 CinnabarIslandName:  db "CINNABAR<BSP>ISLAND@"
 IndigoPlateauName:   db "INDIGO<BSP>PLATEAU@"
 VictoryRoadName:     db "VICTORY<BSP>ROAD@"
-SeafoamIslandsName:  db "SEAFOAM¯ISLANDS@"
 Route7Name:          db "ROUTE 7@"
 Route16Name:         db "ROUTE 16@"
 Route17Name:         db "ROUTE 17@"

@@ -613,9 +613,6 @@ CeladonGym_Blocks:
 CeladonCafe_Blocks:
 	INCBIN "maps/CeladonCafe.blk"
 
-SeafoamGym_Blocks:
-	INCBIN "maps/SeafoamGym.blk"
-
 MrPokemonsHouse_Blocks:
 	INCBIN "maps/MrPokemonsHouse.blk"
 

@@ -219,7 +219,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_TALKED_TO_SEAFOAM_GYM_GUIDE_ONCE
+	const_skip
 	const EVENT_ENABLE_DIPLOMA_PRINTING
 	const_skip
 	const_skip
@@ -762,7 +762,7 @@
 	const EVENT_BEAT_ERIKA
 	const_skip
 	const_skip
-	const EVENT_BEAT_BLAINE
+	const_skip
 	const_skip
 ; PokefanM
 	const EVENT_BEAT_POKEFANM_WILLIAM
@@ -1368,7 +1368,7 @@
 	const EVENT_VERMILION_FAN_CLUB_DOLL
 	const EVENT_BLUE_IN_CINNABAR
 	const EVENT_VIRIDIAN_GYM_BLUE
-	const EVENT_SEAFOAM_GYM_GYM_GUIDE
+	const_skip
 	const EVENT_MT_MOON_SQUARE_ROCK
 	const EVENT_MT_MOON_SQUARE_CLEFAIRY
 	const_skip
