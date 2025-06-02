@@ -18,12 +18,6 @@ CeladonCity_Blocks:
 ElmsHouse_Blocks:
 	INCBIN "maps/ElmsHouse.blk"
 
-Route11_Blocks:
-	INCBIN "maps/Route11.blk"
-
-Route15_Blocks:
-	INCBIN "maps/Route15.blk"
-
 Route19_Blocks:
 	INCBIN "maps/Route19.blk"
 
@@ -50,9 +44,6 @@ PalletTown_Blocks:
 
 PewterCity_Blocks:
 	INCBIN "maps/PewterCity.blk"
-
-Route12_Blocks:
-	INCBIN "maps/Route12.blk"
 
 Route20_Blocks:
 	INCBIN "maps/Route20.blk"
@@ -128,9 +119,6 @@ CinnabarIsland_Blocks:
 ViridianCity_Blocks:
 	INCBIN "maps/ViridianCity.blk"
 
-Route13_Blocks:
-	INCBIN "maps/Route13.blk"
-
 Route21_Blocks:
 	INCBIN "maps/Route21.blk"
 
@@ -172,9 +160,6 @@ CeruleanCity_Blocks:
 	INCBIN "maps/CeruleanCity.blk"
 
 SECTION "Map Blocks 2", ROMX
-
-Route14_Blocks:
-	INCBIN "maps/Route14.blk"
 
 OlivineMart_Blocks:
 EcruteakMart_Blocks:

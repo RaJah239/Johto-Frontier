@@ -242,10 +242,9 @@ ENDM
 	connection north, FuchsiaCity, FUCHSIA_CITY, 0
 	connection west, Route20, ROUTE_20, 9
 
-	map_attributes FuchsiaCity, FUCHSIA_CITY, $0f, SOUTH | WEST | EAST
+	map_attributes FuchsiaCity, FUCHSIA_CITY, $0f, SOUTH | WEST
 	connection south, Route19, ROUTE_19, 0
 	connection west, Route18, ROUTE_18, 7
-	connection east, Route15, ROUTE_15, 9
 
 	map_attributes Route18, ROUTE_18, $43, WEST | EAST
 	connection west, Route17, ROUTE_17, -38
@@ -265,26 +264,6 @@ ENDM
 
 	map_attributes Route7, ROUTE_7, $0f, WEST
 	connection west, CeladonCity, CELADON_CITY, -5
-
-	map_attributes Route15, ROUTE_15, $0f, WEST | EAST
-	connection west, FuchsiaCity, FUCHSIA_CITY, -9
-	connection east, Route14, ROUTE_14, -9
-
-	map_attributes Route14, ROUTE_14, $43, NORTH | WEST
-	connection north, Route13, ROUTE_13, 0
-	connection west, Route15, ROUTE_15, 9
-
-	map_attributes Route13, ROUTE_13, $43, NORTH | SOUTH
-	connection north, Route12, ROUTE_12, 20
-	connection south, Route14, ROUTE_14, 0
-
-	map_attributes Route12, ROUTE_12, $43, SOUTH | WEST
-	connection south, Route13, ROUTE_13, -20
-	connection west, Route11, ROUTE_11, 9
-
-	map_attributes Route11, ROUTE_11, $0f, EAST
-	connection east, Route12, ROUTE_12, -9
-
 
 	map_attributes Route23, ROUTE_23, $0f, 0
 	map_attributes SproutTower1F, SPROUT_TOWER_1F, $00, 0

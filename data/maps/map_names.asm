@@ -290,7 +290,6 @@ Goldenrod_Map_Names: ;newgroup GOLDENROD
 
 Vermilion_Map_Names: ;newgroup VERMILION
 	table_width 2, Vermilion_Map_Names                                            ; 12
-	dw Vermilion_Map_Name2 ; map_const ROUTE_11,                                    20,  9 ;  2
 	assert_table_length NUM_VERMILION_MAPS
 
 Pallet_Map_Names: ;newgroup PALLET
@@ -333,9 +332,6 @@ Indigo_Map_Names: ;newgroup INDIGO
 
 Fuchsia_Map_Names: ;newgroup FUCHSIA
 	table_width 2, Fuchsia_Map_Names                                              ; 17
-	dw Fuchsia_Map_Name1 ; map_const ROUTE_13,                                    30,  9 ;  1
-	dw Fuchsia_Map_Name2 ; map_const ROUTE_14,                                    10, 18 ;  2
-	dw Fuchsia_Map_Name3 ; map_const ROUTE_15,                                    20,  9 ;  3
 	dw Fuchsia_Map_Name4 ; map_const ROUTE_18,                                    10,  9 ;  4
 	dw Fuchsia_Map_Name5 ; map_const FUCHSIA_CITY,                                20, 18 ;  5
 	dw Fuchsia_Map_Name6 ; map_const FUCHSIA_MART ;  6
@@ -349,7 +345,6 @@ Fuchsia_Map_Names: ;newgroup FUCHSIA
 
 Lavender_Map_Names: ;newgroup LAVENDER
 	table_width 2, Lavender_Map_Names                                            ; 18
-	dw Lavender_Map_Name2 ; map_const ROUTE_12,                                    10, 27 ;  2
 	assert_table_length NUM_LAVENDER_MAPS
 
 Silver_Map_Names: ;newgroup SILVER
@@ -847,10 +842,6 @@ Goldenrod_Map_Name23: ; map_const ROUTE_34_ILEX_FOREST_GATE ; 23
 Goldenrod_Map_Name24: ; map_const DAY_CARE ; 24 ; 12
 	db "ROUTE 34 DAY CARE@"
 
-Vermilion_Map_Name2: ; map_const ROUTE_11,;  2
-	db "ROUTE 11@"
-
-
 Pallet_Map_Name2: ; map_const PALLET_TOWN,;  2
 	db "PALLET TOWN@"
 Pallet_Map_Name6: ; map_const OAKS_LAB ;  6  ; 14
@@ -899,12 +890,6 @@ Indigo_Map_Name7: ; map_const LANCES_ROOM,;  7
 Indigo_Map_Name8: ; map_const HALL_OF_FAME ;  8
 	db "E4 HALL OF FAME@"                                           ; 17
 
-Fuchsia_Map_Name1: ; map_const ROUTE_13,;  1
-	db "ROUTE 13@"
-Fuchsia_Map_Name2: ; map_const ROUTE_14,;  2
-	db "ROUTE 14@"
-Fuchsia_Map_Name3: ; map_const ROUTE_15,;  3
-	db "ROUTE 15@"
 Fuchsia_Map_Name4: ; map_const ROUTE_18,;  4
 	db "ROUTE 18@"
 Fuchsia_Map_Name5: ; map_const FUCHSIA_CITY,;  5
@@ -924,8 +909,6 @@ Fuchsia_Map_Name12: ; map_const SAFARI_ZONE_WARDENS_HOME ; 12
 Fuchsia_Map_Name13: ; map_const ROUTE_15_FUCHSIA_GATE ; 13
 	db "FUCHSIA GATE@"
 
-Lavender_Map_Name2: ; map_const ROUTE_12,;  2
-	db "ROUTE 12@"
 Lavender_Map_Name7: ; map_const MR_FUJIS_HOUSE ;  7
 	db "MR. FUJI'S HOUSE@"
 

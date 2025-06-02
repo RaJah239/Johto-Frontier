@@ -68,11 +68,6 @@ Landmarks:
 	landmark 108,  76, UndergroundName
 	landmark  88,  68, Route7Name
 	landmark  76,  68, CeladonCityName
-	landmark 116,  84, Route11Name
-	landmark 132,  80, Route12Name
-	landmark 124, 100, Route13Name
-	landmark 116, 112, Route14Name
-	landmark 104, 116, Route15Name
 	landmark  68,  68, Route16Name
 	landmark  68,  92, Route17Name
 	landmark  80, 116, Route18Name
@@ -120,11 +115,6 @@ IndigoPlateauName:   db "INDIGO<BSP>PLATEAU@"
 VictoryRoadName:     db "VICTORY<BSP>ROAD@"
 SeafoamIslandsName:  db "SEAFOAM¯ISLANDS@"
 Route7Name:          db "ROUTE 7@"
-Route11Name:         db "ROUTE 11@"
-Route12Name:         db "ROUTE 12@"
-Route13Name:         db "ROUTE 13@"
-Route14Name:         db "ROUTE 14@"
-Route15Name:         db "ROUTE 15@"
 Route16Name:         db "ROUTE 16@"
 Route17Name:         db "ROUTE 17@"
 Route18Name:         db "ROUTE 18@"

@@ -71,7 +71,6 @@ INCLUDE "maps/DayCare.asm"
 
 SECTION "Map Scripts 5", ROMX
 
-INCLUDE "maps/Route11.asm"
 INCLUDE "maps/VioletMart.asm"
 INCLUDE "maps/VioletGym.asm"
 INCLUDE "maps/EarlsPokemonAcademy.asm"
@@ -344,7 +343,6 @@ INCLUDE "maps/Route27.asm"
 INCLUDE "maps/Route29.asm"
 INCLUDE "maps/Route30.asm"
 INCLUDE "maps/Route38.asm"
-INCLUDE "maps/Route13.asm"
 INCLUDE "maps/PewterPokecenter1F.asm"
 
 
@@ -357,7 +355,6 @@ INCLUDE "maps/Route31.asm"
 INCLUDE "maps/Route39.asm"
 INCLUDE "maps/Route40.asm"
 INCLUDE "maps/Route41.asm"
-INCLUDE "maps/Route12.asm"
 
 
 SECTION "Map Scripts 23", ROMX
@@ -370,7 +367,6 @@ INCLUDE "maps/Route42.asm"
 INCLUDE "maps/Route46.asm"
 INCLUDE "maps/ViridianCity.asm"
 INCLUDE "maps/CeladonCity.asm"
-INCLUDE "maps/Route15.asm"
 INCLUDE "maps/CinnabarPokecenter1F.asm"
 INCLUDE "maps/Route19FuchsiaGate.asm"
 INCLUDE "maps/SeafoamGym.asm"
@@ -387,7 +383,6 @@ INCLUDE "maps/Route18.asm"
 INCLUDE "maps/Route17.asm"
 INCLUDE "maps/Route16.asm"
 INCLUDE "maps/Route7.asm"
-INCLUDE "maps/Route14.asm"
 INCLUDE "maps/Route23.asm"
 INCLUDE "maps/SilverCavePokecenter1F.asm"
 INCLUDE "maps/Route39_SilverCaveGate.asm"

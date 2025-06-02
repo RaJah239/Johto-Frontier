@@ -62,11 +62,6 @@ DEF KANTO_LANDMARK EQU const_value
 	const LANDMARK_UNDERGROUND_PATH  ; 3b
 	const LANDMARK_ROUTE_7           ; 3f
 	const LANDMARK_CELADON_CITY      ; 47
-	const LANDMARK_ROUTE_11          ; 49
-	const LANDMARK_ROUTE_12          ; 4a
-	const LANDMARK_ROUTE_13          ; 4b
-	const LANDMARK_ROUTE_14          ; 4c
-	const LANDMARK_ROUTE_15          ; 4d
 	const LANDMARK_ROUTE_16          ; 4e
 	const LANDMARK_ROUTE_17          ; 4f
 	const LANDMARK_ROUTE_18          ; 50

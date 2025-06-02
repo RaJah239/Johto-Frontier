@@ -255,7 +255,6 @@ ENDM
 	endgroup
 
 	newgroup VERMILION                                            ; 12
-	map_const ROUTE_11,                                    20,  9 ;  2
 	endgroup
 
 	newgroup PALLET                                               ; 13
@@ -293,9 +292,6 @@ ENDM
 	endgroup
 
 	newgroup FUCHSIA                                              ; 17
-	map_const ROUTE_13,                                    30,  9 ;  1
-	map_const ROUTE_14,                                    10, 18 ;  2
-	map_const ROUTE_15,                                    20,  9 ;  3
 	map_const ROUTE_18,                                    10,  9 ;  4
 	map_const FUCHSIA_CITY,                                20, 18 ;  5
 	map_const FUCHSIA_MART,                                 6,  4 ;  6
@@ -308,7 +304,6 @@ ENDM
 	endgroup
 
 	newgroup LAVENDER                                             ; 18
-	map_const ROUTE_12,                                    10, 27 ;  2
 	endgroup
 
 	newgroup SILVER                                               ; 19
