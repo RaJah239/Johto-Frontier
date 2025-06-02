@@ -15,9 +15,6 @@ Route44_Blocks:
 CeladonCity_Blocks:
 	INCBIN "maps/CeladonCity.blk"
 
-SaffronCity_Blocks:
-	INCBIN "maps/SaffronCity.blk"
-
 ElmsHouse_Blocks:
 	INCBIN "maps/ElmsHouse.blk"
 
@@ -216,7 +213,6 @@ SilverCavePokecenter1F_Blocks:
 CeladonPokecenter1F_Blocks:
 CianwoodPokecenter1F_Blocks:
 ViridianPokecenter1F_Blocks:
-SaffronPokecenter1F_Blocks:
 CherrygrovePokecenter1F_Blocks:
 	INCBIN "maps/Pokecenter1F.blk"
 

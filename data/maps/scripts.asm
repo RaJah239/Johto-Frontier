@@ -246,7 +246,6 @@ INCLUDE "maps/BurnedTowerB1F.asm"
 SECTION "Map Scripts 15", ROMX
 
 INCLUDE "maps/CeruleanPokecenter1F.asm"
-INCLUDE "maps/SaffronPokecenter1F.asm"
 
 
 SECTION "Map Scripts 16", ROMX
@@ -329,7 +328,6 @@ SECTION "Map Scripts 19", ROMX
 
 INCLUDE "maps/AzaleaTown.asm"
 INCLUDE "maps/GoldenrodCity.asm"
-INCLUDE "maps/SaffronCity.asm"
 INCLUDE "maps/MahoganyRedGyaradosSpeechHouse.asm"
 INCLUDE "maps/MahoganyGym.asm"
 INCLUDE "maps/MahoganyPokecenter1F.asm"

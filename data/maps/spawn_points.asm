@@ -19,7 +19,6 @@ endc
 	spawn PEWTER_CITY,                13, 26
 	spawn CERULEAN_CITY,              19, 22
 	spawn VERMILION_CITY,              9,  6
-	spawn SAFFRON_CITY,                9, 30
 	spawn CELADON_CITY,               29, 10
 	spawn FUCHSIA_CITY,               19, 28
 	spawn CINNABAR_ISLAND,            11, 12

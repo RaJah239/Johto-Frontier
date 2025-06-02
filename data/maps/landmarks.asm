@@ -71,7 +71,6 @@ Landmarks:
 	landmark  88,  68, Route7Name
 	landmark 132,  68, LavenderTownName
 	landmark  76,  68, CeladonCityName
-	landmark 100,  68, SaffronCityName
 	landmark 116,  84, Route11Name
 	landmark 132,  80, Route12Name
 	landmark 124, 100, Route13Name
@@ -120,7 +119,6 @@ CeruleanCityName:    db "CERULEAN<BSP>CITY@"
 LavenderTownName:    db "LAVENDER<BSP>TOWN@"
 VermilionCityName:   db "VERMILION<BSP>CITY@"
 CeladonCityName:     db "CELADON<BSP>CITY@"
-SaffronCityName:     db "SAFFRON<BSP>CITY@"
 FuchsiaCityName:     db "FUCHSIA<BSP>CITY@"
 CinnabarIslandName:  db "CINNABAR<BSP>ISLAND@"
 IndigoPlateauName:   db "INDIGO<BSP>PLATEAU@"

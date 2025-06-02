@@ -463,8 +463,6 @@ New_Bark_Map_Names: ; newgroup NEW_BARK ; 24
 	; newgroup SAFFRON
 Saffron_Map_Names: ; 25
 	table_width 2, Saffron_Map_Names
-	dw Saffron_Map_Name2 ; map_const SAFFRON_CITY,                                20, 18 ;  2
-	dw Saffron_Map_Name6 ; map_const SAFFRON_POKECENTER_1F ;  6
 	assert_table_length NUM_SAFFRON_MAPS
 
 	; CHERRYGROVE, 26
@@ -1114,11 +1112,6 @@ New_Bark_Map_Name12: ; map_const ROUTE_27_SANDSTORM_HOUSE ; 12
 	db "ROUTE 27 HOUSE@"
 New_Bark_Map_Name13: ; map_const ROUTE_29_ROUTE_46_GATE ; 13
 	db "ROUTE 29 GATE@"
-
-Saffron_Map_Name2: ; map_const SAFFRON_CITY ;  2
-	db "SAFFRON CITY@"
-Saffron_Map_Name6: ; map_const SAFFRON_POKECENTER_1F ;  6
-	db "SAFFRON <POKE>CENTER@"
 
 
 Cherrygrove_Map_Name1: ; map_const ROUTE_30         ;  1
