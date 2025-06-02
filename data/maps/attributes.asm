@@ -288,8 +288,7 @@ ENDM
 	connection west, VermilionCity, VERMILION_CITY, 0
 	connection east, Route12, ROUTE_12, -9
 
-	map_attributes LavenderTown, LAVENDER_TOWN, $2c, NORTH | SOUTH | WEST
-	connection north, Route10South, ROUTE_10_SOUTH, 0
+	map_attributes LavenderTown, LAVENDER_TOWN, $2c, SOUTH | WEST
 	connection south, Route12, ROUTE_12, 0
 	connection west, Route8, ROUTE_8, 0
 
@@ -317,13 +316,6 @@ ENDM
 	map_attributes Route8, ROUTE_8, $2c, WEST | EAST
 	connection west, SaffronCity, SAFFRON_CITY, -9
 	connection east, LavenderTown, LAVENDER_TOWN, 0
-
-	map_attributes Route10North, ROUTE_10_NORTH, $2c, SOUTH
-	connection south, Route10South, ROUTE_10_SOUTH, 0
-
-	map_attributes Route10South, ROUTE_10_SOUTH, $2c, NORTH | SOUTH
-	connection north, Route10North, ROUTE_10_NORTH, 0
-	connection south, LavenderTown, LAVENDER_TOWN, 0
 
 	map_attributes Route23, ROUTE_23, $0f, 0
 	map_attributes SproutTower1F, SPROUT_TOWER_1F, $00, 0

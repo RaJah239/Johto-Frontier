@@ -186,7 +186,6 @@ ENDM
 
 	newgroup CERULEAN                                             ;  7
 	map_const CERULEAN_POKECENTER_1F,                       5,  4 ;  4
-	map_const ROUTE_10_NORTH,                              10,  9 ; 14
 	map_const CERULEAN_CITY,                               20, 18 ; 17
 	endgroup
 
@@ -325,7 +324,6 @@ ENDM
 	newgroup LAVENDER                                             ; 18
 	map_const ROUTE_8,                                     20,  9 ;  1
 	map_const ROUTE_12,                                    10, 27 ;  2
-	map_const ROUTE_10_SOUTH,                              10,  9 ;  3
 	map_const LAVENDER_TOWN,                               10,  9 ;  4
 	map_const LAVENDER_POKECENTER_1F,                       5,  4 ;  5
 	map_const MR_FUJIS_HOUSE,                               5,  4 ;  7

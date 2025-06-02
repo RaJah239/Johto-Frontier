@@ -216,7 +216,6 @@ Cinnabar_Map_Names: ;newgroup CINNABAR
 Cerulean_Map_Names: ;newgroup CERULEAN
 	table_width 2, Cerulean_Map_Names                                             ;  7
 	dw Cerulean_Map_Name4 ; map_const CERULEAN_POKECENTER_1F ;  4
-	dw Cerulean_Map_Name14 ; map_const ROUTE_10_NORTH,                              10,  9 ; 14
 	dw Cerulean_Map_Name17 ; map_const CERULEAN_CITY,                               20, 18 ; 17
 	assert_table_length NUM_CERULEAN_MAPS
 
@@ -366,7 +365,6 @@ Lavender_Map_Names: ;newgroup LAVENDER
 	table_width 2, Lavender_Map_Names                                            ; 18
 	dw Lavender_Map_Name1 ; map_const ROUTE_8,                                     20,  9 ;  1
 	dw Lavender_Map_Name2 ; map_const ROUTE_12,                                    10, 27 ;  2
-	dw Lavender_Map_Name3 ; map_const ROUTE_10_SOUTH,                              10,  9 ;  3
 	dw Lavender_Map_Name4 ; map_const LAVENDER_TOWN,                               10,  9 ;  4
 	dw Lavender_Map_Name5 ; map_const LAVENDER_POKECENTER_1F ;  5
 	dw Lavender_Map_Name7 ; map_const MR_FUJIS_HOUSE ;  7
@@ -776,8 +774,6 @@ Cinnabar_Map_Name8: ; map_const CINNABAR_ISLAND,;  7
 
 Cerulean_Map_Name4: ; map_const CERULEAN_POKECENTER_1F ;  4
 	db "CERULEAN CENTER@"
-Cerulean_Map_Name14: ; map_const ROUTE_10_NORTH,; 14
-	db "ROUTE 10, NORTH@"
 Cerulean_Map_Name17: ; map_const CERULEAN_CITY,;  8
 	db "CERULEAN CITY@"
 
@@ -999,8 +995,6 @@ Lavender_Map_Name1: ; map_const ROUTE_8,;  1
 	db "ROUTE 8@"
 Lavender_Map_Name2: ; map_const ROUTE_12,;  2
 	db "ROUTE 12@"
-Lavender_Map_Name3: ; map_const ROUTE_10_SOUTH,;  3
-	db "ROUTE 10, SOUTH@"
 Lavender_Map_Name4: ; map_const LAVENDER_TOWN,;  4
 	db "LAVENDER TOWN@"
 Lavender_Map_Name5: ; map_const LAVENDER_POKECENTER_1F ;  5

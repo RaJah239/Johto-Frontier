@@ -71,7 +71,6 @@ Landmarks:
 	landmark 100,  84, VermilionCityName
 	landmark  88,  68, Route7Name
 	landmark 116,  68, Route8Name
-	landmark 132,  56, Route10Name
 	landmark 132,  68, LavenderTownName
 	landmark 140,  68, LavRadioTowerName
 	landmark  76,  68, CeladonCityName
@@ -135,7 +134,6 @@ Route5Name:          db "ROUTE 5@"
 Route6Name:          db "ROUTE 6@"
 Route7Name:          db "ROUTE 7@"
 Route8Name:          db "ROUTE 8@"
-Route10Name:         db "ROUTE 10@"
 Route11Name:         db "ROUTE 11@"
 Route12Name:         db "ROUTE 12@"
 Route13Name:         db "ROUTE 13@"
