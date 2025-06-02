@@ -127,7 +127,6 @@ Route43Gate_Blocks:
 Route35GoldenrodGate_Blocks:
 Route36RuinsOfAlphGate_Blocks:
 Route34IlexForestGate_Blocks:
-Route6SaffronGate_Blocks:
 Route40BattleTowerGate_Blocks:
 Route29Route46Gate_Blocks:
 Route39_SilverCaveGate_Blocks:

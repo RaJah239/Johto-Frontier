@@ -266,7 +266,6 @@ ENDM
 	map_const VERMILION_MART,                               6,  4 ;  9
 	map_const VERMILION_DIGLETTS_CAVE_SPEECH_HOUSE,         4,  4 ; 10
 	map_const VERMILION_GYM,                                5,  9 ; 11
-	map_const ROUTE_6_SAFFRON_GATE,                         5,  4 ; 12
 	map_const ROUTE_6_UNDERGROUND_PATH_ENTRANCE,            4,  4 ; 13
 	endgroup
 
