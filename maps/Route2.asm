@@ -18,10 +18,7 @@ Route2_MapEvents:
 
 	def_warp_events
 	warp_event 15, 15, ROUTE_2_NUGGET_HOUSE, 1
-	warp_event 15, 31, ROUTE_2_GATE, 3
-	warp_event 16, 27, ROUTE_2_GATE, 1
-	warp_event 17, 27, ROUTE_2_GATE, 2
-	warp_event 12,  7, DIGLETTS_CAVE, 3
+	warp_event 12,  7, DIGLETTS_CAVE, 1
 
 	def_coord_events
 
