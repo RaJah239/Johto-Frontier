@@ -622,9 +622,6 @@ SafariZoneMainOffice_Blocks:
 PlayersHouse2F_Blocks:
 	INCBIN "maps/PlayersHouse2F.blk"
 
-VermilionGym_Blocks:
-	INCBIN "maps/VermilionGym.blk"
-
 SafariZoneWardensHome_Blocks:
 	INCBIN "maps/PokemonFanClub.blk"
 

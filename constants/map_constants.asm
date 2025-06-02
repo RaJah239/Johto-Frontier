@@ -258,7 +258,6 @@ ENDM
 	map_const ROUTE_11,                                    20,  9 ;  2
 	map_const VERMILION_CITY,                              20, 18 ;  3
 	map_const VERMILION_POKECENTER_1F,                      5,  4 ;  5
-	map_const VERMILION_GYM,                                5,  9 ; 11
 	endgroup
 
 	newgroup PALLET                                               ; 13

@@ -312,7 +312,7 @@ DEF KRIS EQU __trainer_class__
 	trainerclass GENTLEMAN ; 20
 	const PRESTON
 	const EDWARD
-	const GREGORY
+	const GREGORY ; unused
 	const VIRGIL ; unused
 	const ALFRED
 
@@ -461,7 +461,7 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass GUITARIST ; 2b
 	const CLYDE
-	const VINCENT
+	const VINCENT ; unused
 
 	trainerclass HIKER ; 2c
 	const ANTHONY1
@@ -519,7 +519,7 @@ DEF KRIS EQU __trainer_class__
 	trainerclass JUGGLER ; 31
 	const IRWIN1
 	const FRITZ
-	const HORTON
+	const HORTON ; unused
 	const IRWIN2 ; unused
 	const IRWIN3 ; unused
 	const IRWIN4 ; unused

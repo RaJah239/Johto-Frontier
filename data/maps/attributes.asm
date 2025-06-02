@@ -455,7 +455,6 @@ ENDM
 	map_attributes Route34IlexForestGate, ROUTE_34_ILEX_FOREST_GATE, $00, 0
 	map_attributes DayCare, DAY_CARE, $00, 0
 	map_attributes VermilionPokecenter1F, VERMILION_POKECENTER_1F, $00, 0
-	map_attributes VermilionGym, VERMILION_GYM, $00, 0
 	map_attributes OaksLab, OAKS_LAB, $00, 0
 	map_attributes PewterPokecenter1F, PEWTER_POKECENTER_1F, $00, 0
 	map_attributes OlivinePort, OLIVINE_PORT, $0a, 0
