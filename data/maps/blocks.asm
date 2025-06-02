@@ -95,9 +95,6 @@ Route29Route46Gate_Blocks:
 Route39_SilverCaveGate_Blocks:
 	INCBIN "maps/NorthSouthGate.blk"
 
-ViridianCity_Blocks:
-	INCBIN "maps/ViridianCity.blk"
-
 Route31_Blocks:
 	INCBIN "maps/Route31.blk"
 
@@ -147,7 +144,6 @@ Route32Pokecenter1F_Blocks:
 GoldenrodPokecenter1F_Blocks:
 SilverCavePokecenter1F_Blocks:
 CianwoodPokecenter1F_Blocks:
-ViridianPokecenter1F_Blocks:
 CherrygrovePokecenter1F_Blocks:
 	INCBIN "maps/Pokecenter1F.blk"
 

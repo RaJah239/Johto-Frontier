@@ -162,7 +162,6 @@ INCLUDE "maps/EcruteakGym.asm"
 INCLUDE "maps/EcruteakItemfinderHouse.asm"
 INCLUDE "maps/TrainerHouse1F.asm"
 INCLUDE "maps/TrainerHouseB1F.asm"
-INCLUDE "maps/ViridianPokecenter1F.asm"
 INCLUDE "maps/VictoryRoadGate.asm"
 
 
@@ -337,7 +336,6 @@ INCLUDE "maps/OlivineCity.asm"
 INCLUDE "maps/Route37.asm"
 INCLUDE "maps/Route42.asm"
 INCLUDE "maps/Route46.asm"
-INCLUDE "maps/ViridianCity.asm"
 
 
 SECTION "Map Scripts 24", ROMX

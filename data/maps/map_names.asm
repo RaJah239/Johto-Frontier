@@ -375,10 +375,8 @@ Cianwood_Map_Names: ;newgroup CIANWOOD
 
 Viridian_Map_Names: ;newgroup VIRIDIAN ; 23
 	table_width 2, Viridian_Map_Names
-	dw Viridian_Map_Name3 ; map_const VIRIDIAN_CITY,                               20, 18 ;  3
 	dw Viridian_Map_Name6 ; map_const TRAINER_HOUSE_1F ;  6
 	dw Viridian_Map_Name7 ; map_const TRAINER_HOUSE_B1F ;  7
-	dw Viridian_Map_Name9 ; map_const VIRIDIAN_POKECENTER_1F ;  9
 	dw Viridian_Map_Name13 ; map_const VICTORY_ROAD_GATE,                           10,  9 ; 13
 	assert_table_length NUM_VIRIDIAN_MAPS
 
@@ -894,14 +892,10 @@ Cianwood_Map_Name15: ; map_const ROUTE_40_BATTLE_TOWER_GATE ; 15
 Cianwood_Map_Name16: ; map_const BATTLE_TOWER_OUTSIDE ; 16
 	db "BATTLE TOWER@"
 
-Viridian_Map_Name3: ; map_const VIRIDIAN_CITY,  3
-	db "VIRIDIAN CITY@"
 Viridian_Map_Name6: ; map_const TRAINER_HOUSE_1F ;  6
 	db "VIRIDIAN HOUSE 1F@"
 Viridian_Map_Name7: ; map_const TRAINER_HOUSE_B1F ;  7
 	db "VIRIDIAN HOUSE B1F@"
-Viridian_Map_Name9: ; map_const VIRIDIAN_POKECENTER_1F ;  9
-	db "VIRIDIAN CENTER@"
 Viridian_Map_Name13: ; map_const VICTORY_ROAD_GATE, 13
 	db "VICTORY ROAD GATE@"
 

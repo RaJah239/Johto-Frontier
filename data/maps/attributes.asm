@@ -427,7 +427,6 @@ ENDM
 	map_attributes BattleTowerOutside, BATTLE_TOWER_OUTSIDE, $05, 0
 	map_attributes TrainerHouse1F, TRAINER_HOUSE_1F, $00, 0
 	map_attributes TrainerHouseB1F, TRAINER_HOUSE_B1F, $00, 0
-	map_attributes ViridianPokecenter1F, VIRIDIAN_POKECENTER_1F, $00, 0
 	map_attributes VictoryRoadGate, VICTORY_ROAD_GATE, $00, 0
 	map_attributes ElmsLab, ELMS_LAB, $00, 0
 	map_attributes PlayersHouse1F, PLAYERS_HOUSE_1F, $00, 0
@@ -447,5 +446,4 @@ ENDM
 	map_attributes MrPokemonsHouse, MR_POKEMONS_HOUSE, $00, 0
 	map_attributes Route31VioletGate, ROUTE_31_VIOLET_GATE, $00, 0
 	map_attributes SilverCaveOutside, SILVER_CAVE_OUTSIDE, $00, 0
-	map_attributes ViridianCity, VIRIDIAN_CITY, $0f, 0
 	map_attributes PalletTown, PALLET_TOWN, $0f, 0
