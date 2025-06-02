@@ -170,7 +170,6 @@ Dungeons_Map_Names: ;newgroup DUNGEONS
 	dw Dungeons_Map_Name81 ; map_const DRAGONS_DEN_B1F,                             20, 18 ; 81
 	dw Dungeons_Map_Name82 ; map_const DRAGON_SHRINE ; 82
 	dw Dungeons_Map_Name83 ; map_const TOHJO_FALLS,                                 15,  9 ; 83
-	dw Dungeons_Map_Name84 ; map_const DIGLETTS_CAVE,                               10, 18 ; 84
 	dw Dungeons_Map_Name85 ; map_const MOUNT_MOON,                                  15,  9 ; 85
 	dw Dungeons_Map_Name86 ; map_const UNDERGROUND_PATH,                             3, 14 ; 86
 	dw Dungeons_Map_Name87 ; map_const ROCK_TUNNEL_1F,                              15, 18 ; 87
@@ -738,8 +737,6 @@ Dungeons_Map_Name82: ; map_const DRAGON_SHRINE ; 82
 	db "DRAGON SHRINE@"
 Dungeons_Map_Name83: ; map_const TOHJO_FALLS,; 83
 	db "TOHJO FALLS@"
-Dungeons_Map_Name84: ; map_const DIGLETTS_CAVE,; 84
-	db "DIGLETT'S CAVE@"
 Dungeons_Map_Name85: ; map_const MOUNT_MOON,; 85
 	db "MT. MOON@"
 Dungeons_Map_Name86: ; map_const UNDERGROUND_PATH,; 86
