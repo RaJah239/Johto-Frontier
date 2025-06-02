@@ -16,7 +16,6 @@ endc
 	spawn VIRIDIAN_POKECENTER_1F,      5,  3
 	spawn PALLET_TOWN,                 5,  6
 	spawn VIRIDIAN_CITY,              23, 26
-	spawn PEWTER_CITY,                13, 26
 	spawn NEW_BARK_TOWN,              13,  6
 	spawn CHERRYGROVE_CITY,           29,  4
 	spawn VIOLET_CITY,                31, 26
