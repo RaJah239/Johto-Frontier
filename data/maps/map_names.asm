@@ -335,7 +335,6 @@ Fuchsia_Map_Names: ;newgroup FUCHSIA
 	dw Fuchsia_Map_Name4 ; map_const ROUTE_18,                                    10,  9 ;  4
 	dw Fuchsia_Map_Name5 ; map_const FUCHSIA_CITY,                                20, 18 ;  5
 	dw Fuchsia_Map_Name6 ; map_const FUCHSIA_MART ;  6
-	dw Fuchsia_Map_Name7 ; map_const SAFARI_ZONE_MAIN_OFFICE ;  7
 	dw Fuchsia_Map_Name8 ; map_const FUCHSIA_GYM ;  8
 	dw Fuchsia_Map_Name9 ; map_const BILLS_BROTHERS_HOUSE ;  9
 	dw Fuchsia_Map_Name10 ; map_const FUCHSIA_POKECENTER_1F ; 10
@@ -894,8 +893,6 @@ Fuchsia_Map_Name5: ; map_const FUCHSIA_CITY,;  5
 	db "FUCHSIA CITY@"
 Fuchsia_Map_Name6: ; map_const FUCHSIA_MART ;  6
 	db "FUCHSIA #MART@"
-Fuchsia_Map_Name7: ; map_const SAFARI_ZONE_MAIN_OFFICE ;  7
-	db "SAFARI ZONE HQ@"
 Fuchsia_Map_Name8: ; map_const FUCHSIA_GYM ;  8
 	db "FUCHSIA GYM@"
 Fuchsia_Map_Name9: ; map_const BILLS_BROTHERS_HOUSE ;  9

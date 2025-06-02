@@ -589,7 +589,6 @@ OlivinePort_Blocks:
 	INCBIN "maps/OlivinePort.blk"
 
 OlivineCafe_Blocks:
-SafariZoneMainOffice_Blocks:
 	INCBIN "maps/OlivineCafe.blk"
 
 PlayersHouse2F_Blocks:
