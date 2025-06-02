@@ -165,7 +165,6 @@ EcruteakMart_Blocks:
 BlackthornMart_Blocks:
 AzaleaMart_Blocks:
 VioletMart_Blocks:
-FuchsiaMart_Blocks:
 CherrygroveMart_Blocks:
 	INCBIN "maps/Mart.blk"
 

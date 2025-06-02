@@ -445,7 +445,6 @@ ENDM
 	map_attributes KarensRoom, KARENS_ROOM, $00, 0
 	map_attributes LancesRoom, LANCES_ROOM, $00, 0
 	map_attributes HallOfFame, HALL_OF_FAME, $00, 0
-	map_attributes FuchsiaMart, FUCHSIA_MART, $00, 0
 	map_attributes FuchsiaGym, FUCHSIA_GYM, $00, 0
 	map_attributes BillsBrothersHouse, BILLS_BROTHERS_HOUSE, $00, 0
 	map_attributes FuchsiaPokecenter1F, FUCHSIA_POKECENTER_1F, $00, 0
