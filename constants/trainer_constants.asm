@@ -182,7 +182,7 @@ DEF KRIS EQU __trainer_class__
 	const LINDA ; unused
 	const LAURA ; unused
 	const SHANNON ; unused
-	const MICHELLE
+	const MICHELLE ; unused
 	const DANA1
 	const ELLEN ; unused
 	const CONNIE2 ; unused
@@ -254,7 +254,7 @@ DEF KRIS EQU __trainer_class__
 	const ANGELICA ; unused
 	const KENDRA ; unused
 	const VERONICA ; unused
-	const JULIA
+	const JULIA ; unused
 	const THERESA ; unused
 	const VALERIE
 	const OLIVIA
@@ -574,7 +574,7 @@ DEF KRIS EQU __trainer_class__
 	const TIFFANY1
 	const TIFFANY2
 	const ERIN2
-	const TANYA
+	const TANYA ; unused
 	const TIFFANY3
 	const ERIN3
 	const LIZ4
@@ -668,8 +668,8 @@ DEF KRIS EQU __trainer_class__
 	const ANNANDANNE1
 	const ANNANDANNE2
 	const AMYANDMAY2
-	const JOANDZOE1
-	const JOANDZOE2
+	const JOANDZOE1 ; unused
+	const JOANDZOE2 ; unused
 	const MEGANDPEG1
 	const MEGANDPEG2
 	const LEAANDPIA1

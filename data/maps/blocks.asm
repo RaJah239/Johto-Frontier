@@ -597,9 +597,6 @@ SilverCaveItemRooms_Blocks:
 DayCare_Blocks:
 	INCBIN "maps/DayCare.blk"
 
-CeladonGym_Blocks:
-	INCBIN "maps/CeladonGym.blk"
-
 CeladonCafe_Blocks:
 	INCBIN "maps/CeladonCafe.blk"
 

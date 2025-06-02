@@ -370,7 +370,6 @@ Celadon_Map_Names: ;newgroup CELADON
 	dw Celadon_Map_Name17 ; map_const CELADON_POKECENTER_1F ; 17
 	dw Celadon_Map_Name19 ; map_const CELADON_GAME_CORNER,                         10,  7 ; 19
 	dw Celadon_Map_Name20 ; map_const CELADON_GAME_CORNER_PRIZE_ROOM ; 20
-	dw Celadon_Map_Name21 ; map_const CELADON_GYM ; 21
 	dw Celadon_Map_Name22 ; map_const CELADON_CAFE ; 22
 	dw Celadon_Map_Name23 ; map_const ROUTE_16_FUCHSIA_SPEECH_HOUSE ; 23
 	dw Celadon_Map_Name24 ; map_const ROUTE_16_GATE ; 24
@@ -926,8 +925,6 @@ Celadon_Map_Name19: ; map_const CELADON_GAME_CORNER, 19
 	db "CELADON GAMECORNER@"
 Celadon_Map_Name20: ; map_const CELADON_GAME_CORNER_PRIZE_ROOM ; 20
 	db "CELADON PRIZE ROOM@"
-Celadon_Map_Name21: ; map_const CELADON_GYM ; 21
-	db "CELADON GYM@"
 Celadon_Map_Name22: ; map_const CELADON_CAFE ; 22
 	db "CELADON CAFE@"
 Celadon_Map_Name23: ; map_const ROUTE_16_FUCHSIA_SPEECH_HOUSE ; 23

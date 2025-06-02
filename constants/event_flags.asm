@@ -226,7 +226,7 @@
 	const_skip
 	const EVENT_GOT_TM03_CURSE
 	const_skip
-	const EVENT_GOT_TM19_GIGA_DRAIN
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -653,8 +653,8 @@
 	const EVENT_BEAT_TWINS_ANN_AND_ANNE
 	const EVENT_BEAT_TWINS_ANN_AND_ANNE2
 	const EVENT_BEAT_TWINS_AMY_AND_MAY2
-	const EVENT_BEAT_TWINS_JO_AND_ZOE
-	const EVENT_BEAT_TWINS_JO_AND_ZOE2
+	const_skip
+	const_skip
 	const EVENT_BEAT_TWINS_MEG_AND_PEG
 	const EVENT_BEAT_TWINS_MEG_AND_PEG2
 ; Schoolboy
@@ -695,7 +695,7 @@
 	const EVENT_BEAT_PICNICKER_TIFFANY2
 	const EVENT_BEAT_PICNICKER_TIFFANY3
 	const EVENT_BEAT_PICNICKER_ERIN2
-	const EVENT_BEAT_PICNICKER_TANYA
+	const_skip
 	const EVENT_BEAT_PICNICKER_TIFFANY
 	const EVENT_BEAT_PICNICKER_ERIN3
 ; Guitarist
@@ -743,7 +743,7 @@
 	const EVENT_BEAT_BEAUTY_ANGELICA
 	const EVENT_BEAT_BEAUTY_KENDRA
 	const EVENT_BEAT_BEAUTY_VERONICA
-	const EVENT_BEAT_BEAUTY_JULIA
+	const_skip
 	const EVENT_BEAT_BEAUTY_THERESA
 	const EVENT_BEAT_BEAUTY_VALERIE
 ; Johto Gym Leaders
@@ -759,7 +759,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_ERIKA
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -851,7 +851,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_LASS_MICHELLE
+	const_skip
 	const EVENT_BEAT_LASS_DANA
 	const_skip
 	const EVENT_BEAT_LASS_CONNIE2
