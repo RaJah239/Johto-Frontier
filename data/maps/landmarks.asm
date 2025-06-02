@@ -64,7 +64,6 @@ Landmarks:
 	landmark  52, 108, PalletTownName
 	landmark  52,  76, ViridianCityName
 	landmark  52,  52, PewterCityName
-	landmark  64,  52, Route3Name
 	landmark  76,  52, MtMoonName
 	landmark  88,  52, Route4Name
 	landmark 100,  52, CeruleanCityName
@@ -143,7 +142,6 @@ MtMoonName:          db "MT.MOON@"
 RockTunnelName:      db "ROCK TUNNEL@"
 LavRadioTowerName:   db "RADIO TOWER@"
 SeafoamIslandsName:  db "SEAFOAM¯ISLANDS@"
-Route3Name:          db "ROUTE 3@"
 Route4Name:          db "ROUTE 4@"
 Route5Name:          db "ROUTE 5@"
 Route6Name:          db "ROUTE 6@"

@@ -119,8 +119,8 @@ DEF KRIS EQU __trainer_class__
 	const IAN
 	const JOEY2
 	const JOEY3
-	const WARREN
-	const JIMMY
+	const WARREN ; unused
+	const JIMMY ; unused
 	const OWEN
 	const JASON
 	const JOEY4
@@ -507,10 +507,10 @@ DEF KRIS EQU __trainer_class__
 	const COREY
 
 	trainerclass FIREBREATHER ; 30
-	const OTIS
+	const OTIS ; unused
 	const DICK ; unused
 	const NED ; unused
-	const BURT
+	const BURT ; unused
 	const BILL
 	const WALT
 	const RAY
