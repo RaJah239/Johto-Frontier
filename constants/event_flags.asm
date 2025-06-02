@@ -206,7 +206,7 @@
 
 	const_next 200
 ; Kanto story events
-	const EVENT_GOT_NUGGET_FROM_GUY
+	const_skip
 	const EVENT_RETURNED_MACHINE_PART
 	const EVENT_MET_MANAGER_AT_POWER_PLANT
 	const EVENT_MET_ROCKET_GRUNT_AT_CERULEAN_GYM

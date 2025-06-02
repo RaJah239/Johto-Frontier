@@ -198,7 +198,6 @@ INCLUDE "maps/EcruteakItemfinderHouse.asm"
 INCLUDE "maps/TrainerHouse1F.asm"
 INCLUDE "maps/TrainerHouseB1F.asm"
 INCLUDE "maps/ViridianPokecenter1F.asm"
-INCLUDE "maps/Route2NuggetHouse.asm"
 INCLUDE "maps/VictoryRoadGate.asm"
 
 
