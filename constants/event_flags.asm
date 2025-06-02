@@ -258,10 +258,10 @@
 	const_skip
 	const EVENT_FOUND_LEFTOVERS_IN_CELADON_CAFE
 	const_skip
-	const EVENT_FOUND_MACHINE_PART_IN_CERULEAN_GYM
+	const_skip
 	const_skip
 	const EVENT_CELADON_CITY_HIDDEN_PP_UP
-	const EVENT_CINNABAR_ISLAND_HIDDEN_RARE_CANDY
+	const_skip
 	const EVENT_BURNED_TOWER_1F_HIDDEN_ULTRA_BALL
 	const EVENT_GINA_GAVE_LEAF_STONE
 	const EVENT_ALAN_GAVE_FIRE_STONE
@@ -1365,15 +1365,15 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_VERMILION_FAN_CLUB_DOLL
-	const EVENT_BLUE_IN_CINNABAR
-	const EVENT_VIRIDIAN_GYM_BLUE
+	const_skip
+	const_skip
+	const_skip
 	const_skip
 	const EVENT_MT_MOON_SQUARE_ROCK
 	const EVENT_MT_MOON_SQUARE_CLEFAIRY
 	const_skip
 	const EVENT_INDIGO_PLATEAU_POKECENTER_RIVAL
-	const EVENT_TELEPORT_GUY
+	const_skip
 ; Kanto itemballs
 	const_skip
 	const_skip
