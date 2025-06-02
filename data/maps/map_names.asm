@@ -368,7 +368,6 @@ Lavender_Map_Names: ;newgroup LAVENDER
 	dw Lavender_Map_Name4 ; map_const LAVENDER_TOWN,                               10,  9 ;  4
 	dw Lavender_Map_Name5 ; map_const LAVENDER_POKECENTER_1F ;  5
 	dw Lavender_Map_Name7 ; map_const MR_FUJIS_HOUSE ;  7
-	dw Lavender_Map_Name8 ; map_const LAVENDER_SPEECH_HOUSE ;  8
 	dw Lavender_Map_Name10 ; map_const LAVENDER_MART ; 10
 	dw Lavender_Map_Name11 ; map_const SOUL_HOUSE ; 11
 	dw Lavender_Map_Name12 ; map_const LAV_RADIO_TOWER_1F,                          10,  4 ; 12
@@ -996,8 +995,6 @@ Lavender_Map_Name5: ; map_const LAVENDER_POKECENTER_1F ;  5
 	db "LAVENDER CENTER@"
 Lavender_Map_Name7: ; map_const MR_FUJIS_HOUSE ;  7
 	db "MR. FUJI'S HOUSE@"
-Lavender_Map_Name8: ; map_const LAVENDER_SPEECH_HOUSE ;  8
-	db "LAVENDER HOUSE 1@"
 Lavender_Map_Name10: ; map_const LAVENDER_MART ; 10
 	db "LAVENDER #MART@"
 Lavender_Map_Name11: ; map_const SOUL_HOUSE ; 11

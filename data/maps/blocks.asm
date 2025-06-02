@@ -103,7 +103,6 @@ VermilionFishingSpeechHouse_Blocks:
 VermilionMagnetTrainSpeechHouse_Blocks:
 VermilionDiglettsCaveSpeechHouse_Blocks:
 BillsBrothersHouse_Blocks:
-LavenderSpeechHouse_Blocks:
 Route12SuperRodHouse_Blocks:
 CeladonMansionRoofHouse_Blocks:
 Route16FuchsiaSpeechHouse_Blocks:
