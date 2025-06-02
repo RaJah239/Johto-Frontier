@@ -712,12 +712,6 @@ CeladonGym_Blocks:
 CeladonCafe_Blocks:
 	INCBIN "maps/CeladonCafe.blk"
 
-RockTunnel1F_Blocks:
-	INCBIN "maps/RockTunnel1F.blk"
-
-RockTunnelB1F_Blocks:
-	INCBIN "maps/RockTunnelB1F.blk"
-
 SeafoamGym_Blocks:
 	INCBIN "maps/SeafoamGym.blk"
 

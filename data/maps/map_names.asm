@@ -171,8 +171,6 @@ Dungeons_Map_Names: ;newgroup DUNGEONS
 	dw Dungeons_Map_Name82 ; map_const DRAGON_SHRINE ; 82
 	dw Dungeons_Map_Name83 ; map_const TOHJO_FALLS,                                 15,  9 ; 83
 	dw Dungeons_Map_Name86 ; map_const UNDERGROUND_PATH,                             3, 14 ; 86
-	dw Dungeons_Map_Name87 ; map_const ROCK_TUNNEL_1F,                              15, 18 ; 87
-	dw Dungeons_Map_Name88 ; map_const ROCK_TUNNEL_B1F,                             15, 18 ; 88
 	dw Dungeons_Map_Name91 ; map_const VICTORY_ROAD,; 91
 	assert_table_length NUM_DUNGEONS_MAPS
 	
@@ -719,10 +717,6 @@ Dungeons_Map_Name83: ; map_const TOHJO_FALLS,; 83
 	db "TOHJO FALLS@"
 Dungeons_Map_Name86: ; map_const UNDERGROUND_PATH,; 86
 	db "UNDERGROUND PATH@"
-Dungeons_Map_Name87: ; map_const ROCK_TUNNEL_1F,; 87
-	db "ROCK TUNNEL 1F@"
-Dungeons_Map_Name88: ; map_const ROCK_TUNNEL_B1F,; 88
-	db "ROCK TUNNEL B1F@"
 Dungeons_Map_Name91: ; map_const VICTORY_ROAD,;  4
 	db "VICTORY ROAD@"
 

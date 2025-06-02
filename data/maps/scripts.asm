@@ -125,8 +125,6 @@ INCLUDE "maps/Route17Route18Gate.asm"
 SECTION "Map Scripts 8", ROMX
 
 INCLUDE "maps/UndergroundPath.asm"
-INCLUDE "maps/RockTunnel1F.asm"
-INCLUDE "maps/RockTunnelB1F.asm"
 INCLUDE "maps/VictoryRoad.asm"
 INCLUDE "maps/OlivinePort.asm"
 INCLUDE "maps/VermilionPort.asm"

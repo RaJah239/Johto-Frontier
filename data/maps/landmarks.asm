@@ -71,7 +71,6 @@ Landmarks:
 	landmark 100,  84, VermilionCityName
 	landmark  88,  68, Route7Name
 	landmark 116,  68, Route8Name
-	landmark 132,  52, RockTunnelName
 	landmark 132,  56, Route10Name
 	landmark 132,  68, LavenderTownName
 	landmark 140,  68, LavRadioTowerName
@@ -130,7 +129,6 @@ FuchsiaCityName:     db "FUCHSIA<BSP>CITY@"
 CinnabarIslandName:  db "CINNABAR<BSP>ISLAND@"
 IndigoPlateauName:   db "INDIGO<BSP>PLATEAU@"
 VictoryRoadName:     db "VICTORY<BSP>ROAD@"
-RockTunnelName:      db "ROCK TUNNEL@"
 LavRadioTowerName:   db "RADIO TOWER@"
 SeafoamIslandsName:  db "SEAFOAM¯ISLANDS@"
 Route5Name:          db "ROUTE 5@"
