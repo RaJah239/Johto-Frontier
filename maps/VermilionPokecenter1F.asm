@@ -15,8 +15,6 @@ VermilionPokecenter1FNurseScript:
 VermilionPokecenter1FFishingGuruScript:
 	faceplayer
 	opentext
-	checkevent EVENT_FOUGHT_SNORLAX
-	iftrue .FoughtSnorlax
 	writetext VermilionPokecenter1FFishingGuruText
 	waitbutton
 	closetext

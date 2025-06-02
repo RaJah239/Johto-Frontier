@@ -1,7 +1,7 @@
 IrwinRumorScript:
 	checkevent EVENT_OPENED_MT_SILVER
 	iftrue .MtSilver
-	checkevent EVENT_FOUGHT_SNORLAX
+	checkevent EVENT_GOT_DRATINI
 	iftrue .Snorlax
 	checkevent EVENT_GOT_DRATINI
 	iftrue .TrainPass
