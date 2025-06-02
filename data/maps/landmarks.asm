@@ -64,7 +64,6 @@ Landmarks:
 	landmark  52, 108, PalletTownName
 	landmark  52,  76, ViridianCityName
 	landmark  52,  52, PewterCityName
-	landmark  76,  52, MtMoonName
 	landmark  88,  52, Route4Name
 	landmark 100,  52, CeruleanCityName
 	landmark 100,  44, Route24Name
@@ -137,7 +136,6 @@ FuchsiaCityName:     db "FUCHSIA<BSP>CITY@"
 CinnabarIslandName:  db "CINNABAR<BSP>ISLAND@"
 IndigoPlateauName:   db "INDIGO<BSP>PLATEAU@"
 VictoryRoadName:     db "VICTORY<BSP>ROAD@"
-MtMoonName:          db "MT.MOON@"
 RockTunnelName:      db "ROCK TUNNEL@"
 LavRadioTowerName:   db "RADIO TOWER@"
 SeafoamIslandsName:  db "SEAFOAM¯ISLANDS@"

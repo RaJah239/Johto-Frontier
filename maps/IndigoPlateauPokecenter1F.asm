@@ -42,7 +42,7 @@ IndigoPlateauPokecenter1FPrepareElite4Callback:
 	endcallback
 
 PlateauRivalBattle1:
-	checkevent EVENT_BEAT_RIVAL_IN_MT_MOON
+	checkevent EVENT_BEAT_CHAMPION_LANCE
 	iffalse PlateauRivalScriptDone
 	checkflag ENGINE_INDIGO_PLATEAU_RIVAL_FIGHT
 	iftrue PlateauRivalScriptDone
@@ -64,7 +64,7 @@ PlateauRivalBattle1:
 	sjump PlateauRivalBattleCommon
 
 PlateauRivalBattle2:
-	checkevent EVENT_BEAT_RIVAL_IN_MT_MOON
+	checkevent EVENT_BEAT_CHAMPION_LANCE
 	iffalse PlateauRivalScriptDone
 	checkflag ENGINE_INDIGO_PLATEAU_RIVAL_FIGHT
 	iftrue PlateauRivalScriptDone

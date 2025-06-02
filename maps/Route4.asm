@@ -122,7 +122,6 @@ Route4_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events
-	warp_event  2,  5, MOUNT_MOON, 2
 
 	def_coord_events
 

@@ -3161,7 +3161,6 @@ wBattleTowerElevatorSceneID::                     db
 wBattleTowerHallwaySceneID::                      db
 wBattleTowerOutsideSceneID::                      db
 wRoute43GateSceneID::                             db
-wMountMoonSceneID::                               db
 wSproutTower3FSceneID::                           db
 wTinTower1FSceneID::                              db
 wBurnedTower1FSceneID::                           db
@@ -3191,7 +3190,7 @@ wMountMoonSquareSceneID::                         db
 wMobileTradeRoomSceneID::                         db
 wMobileBattleRoomSceneID::                        db
 
-	ds 173
+	ds 174
 
 wEventFlags:: flag_array NUM_EVENTS
 

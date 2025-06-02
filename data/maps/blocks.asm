@@ -740,9 +740,6 @@ RockTunnel1F_Blocks:
 RockTunnelB1F_Blocks:
 	INCBIN "maps/RockTunnelB1F.blk"
 
-MountMoon_Blocks:
-	INCBIN "maps/MountMoon.blk"
-
 SeafoamGym_Blocks:
 	INCBIN "maps/SeafoamGym.blk"
 
