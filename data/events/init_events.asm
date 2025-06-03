@@ -127,10 +127,10 @@ MACRO initvarsprite
 ; variable sprite, appearance sprite
 	db \1 - SPRITE_VARS, \2
 ENDM
-	initvarsprite SPRITE_FUCHSIA_GYM_1, SPRITE_JANINE
-	initvarsprite SPRITE_FUCHSIA_GYM_2, SPRITE_JANINE
-	initvarsprite SPRITE_FUCHSIA_GYM_3, SPRITE_JANINE
-	initvarsprite SPRITE_FUCHSIA_GYM_4, SPRITE_JANINE
-	initvarsprite SPRITE_COPYCAT, SPRITE_LASS
-	initvarsprite SPRITE_JANINE_IMPERSONATOR, SPRITE_LASS
+	initvarsprite SPRITE_FUCHSIA_GYM_1, SPRITE_JANINE     ; to remove
+	initvarsprite SPRITE_FUCHSIA_GYM_2, SPRITE_JANINE     ; to remove
+	initvarsprite SPRITE_FUCHSIA_GYM_3, SPRITE_JANINE     ; to remove
+	initvarsprite SPRITE_FUCHSIA_GYM_4, SPRITE_JANINE     ; to remove
+	initvarsprite SPRITE_COPYCAT, SPRITE_LASS             ; to remove
+	initvarsprite SPRITE_JANINE_IMPERSONATOR, SPRITE_LASS ; to remove
 	db -1 ; end

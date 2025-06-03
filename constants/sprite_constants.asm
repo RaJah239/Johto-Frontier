@@ -152,10 +152,10 @@ DEF SPRITE_VARS EQU const_value
 	const SPRITE_DOLL_1 ; f1
 	const SPRITE_DOLL_2 ; f2
 	const SPRITE_BIG_DOLL ; f3
-	const SPRITE_FUCHSIA_GYM_1 ; f4
-	const SPRITE_FUCHSIA_GYM_2 ; f5
-	const SPRITE_FUCHSIA_GYM_3 ; f6
-	const SPRITE_FUCHSIA_GYM_4 ; f7
-	const SPRITE_COPYCAT ; f8
-	const SPRITE_JANINE_IMPERSONATOR ; f9
+	const SPRITE_FUCHSIA_GYM_1 ; f4 unused to remove
+	const SPRITE_FUCHSIA_GYM_2 ; f5 unused to remove
+	const SPRITE_FUCHSIA_GYM_3 ; f6 unused to remove
+	const SPRITE_FUCHSIA_GYM_4 ; f7 unused to remove
+	const SPRITE_COPYCAT ; f8 unused to remove
+	const SPRITE_JANINE_IMPERSONATOR ; f9 unused to remove
 	const SPRITE_LINK_TRAINER ; fa
