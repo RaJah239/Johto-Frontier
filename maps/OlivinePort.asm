@@ -47,8 +47,6 @@ OlivinePortSailorAtGangwayScript:
 	special FadeOutToWhite
 	waitsfx
 	iffalse .FirstTime
-	clearevent EVENT_FAST_SHIP_PASSENGERS_EASTBOUND
-	setevent EVENT_FAST_SHIP_PASSENGERS_WESTBOUND
 	clearevent EVENT_BEAT_COOLTRAINERM_SEAN
 	clearevent EVENT_BEAT_COOLTRAINERF_CAROL
 	clearevent EVENT_BEAT_GENTLEMAN_EDWARD
