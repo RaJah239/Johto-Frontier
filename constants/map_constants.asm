@@ -259,7 +259,6 @@ ENDM
 	newgroup FAST_SHIP                                            ; 15
 	map_const OLIVINE_PORT,                                10, 18 ;  1
 	map_const FAST_SHIP_CABINS_SW_SSW_NW,                   4, 16 ;  5
-	map_const FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN,       5, 17 ;  6
 	map_const FAST_SHIP_B1F,                               16,  8 ;  7
 	map_const OLIVINE_PORT_PASSAGE,                        10,  9 ;  8
 	map_const MOUNT_MOON_SQUARE,                           15,  9 ; 10

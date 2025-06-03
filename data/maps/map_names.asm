@@ -297,7 +297,6 @@ Fast_Ship_Map_Names: ;newgroup FAST_SHIP
 	table_width 2, Fast_Ship_Map_Names                                            ; 15
 	dw Fast_Ship_Map_Name1 ; map_const OLIVINE_PORT,                                10, 18 ;  1
 	dw Fast_Ship_Map_Name5 ; map_const FAST_SHIP_CABINS_SW_SSW_NW,                   4, 16 ;  5
-	dw Fast_Ship_Map_Name6 ; map_const FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN,       5, 17 ;  6
 	dw Fast_Ship_Map_Name7 ; map_const FAST_SHIP_B1F,                               16,  8 ;  7
 	dw Fast_Ship_Map_Name8 ; map_const OLIVINE_PORT_PASSAGE,                        10,  9 ;  8
 	dw Fast_Ship_Map_Name10 ; map_const MOUNT_MOON_SQUARE,                           15,  9 ; 10
@@ -792,8 +791,6 @@ Fast_Ship_Map_Name1: ; map_const OLIVINE_PORT,;  1
 	db "OLIVINE MARINA@"
 Fast_Ship_Map_Name5: ; map_const FAST_SHIP_CABINS_SW_SSW_NW,;  5
 	db "S.S. AQUA CABIN@"
-Fast_Ship_Map_Name6: ; map_const FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN,;  6
-	db "S.S. AQUA@"
 Fast_Ship_Map_Name7: ; map_const FAST_SHIP_B1F,;  7
 	db "S.S. AQUA GALLEY@"
 Fast_Ship_Map_Name8: ; map_const OLIVINE_PORT_PASSAGE,;  8
