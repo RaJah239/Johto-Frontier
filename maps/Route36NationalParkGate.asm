@@ -670,13 +670,13 @@ BugCatchingContestant1BStillCompetingText:
 	done
 
 BugCatchingContestant2BText:
-	text "ED: I envy you."
+	text "AL: I envy you."
 	line "I just couldn't"
 	cont "do it this time."
 	done
 
 BugCatchingContestant2BStillCompetingText:
-	text "ED: Maybe you win"
+	text "AL: Maybe you win"
 	line "with big #MON?"
 	done
 
@@ -721,13 +721,13 @@ BugCatchingContestant5BStillCompetingText:
 	done
 
 BugCatchingContestant6BText:
-	text "BARRY: That #-"
+	text "TED: That #-"
 	line "MON you caught…"
 	cont "it's awesome!"
 	done
 
 BugCatchingContestant6BStillCompetingText:
-	text "BARRY: It's easier"
+	text "TED: It's easier"
 	line "to win if you get"
 
 	para "a high-level bug"
@@ -739,7 +739,7 @@ BugCatchingContestant6BStillCompetingText:
 	done
 
 BugCatchingContestant7BText:
-	text "CINDY: You won?"
+	text "ERIN: You won?"
 	line "That's great!"
 
 	para "Do you feel like"
@@ -748,7 +748,7 @@ BugCatchingContestant7BText:
 	done
 
 BugCatchingContestant7BStillCompetingText:
-	text "CINDY: I really"
+	text "ERIN: I really"
 	line "love bug #MON!"
 	done
 
@@ -776,7 +776,7 @@ BugCatchingContestant9BStillCompetingText:
 	done
 
 BugCatchingContestant10BText:
-	text "KIPP: Could you"
+	text "ALAN: Could you"
 	line "give me some tips?"
 
 	para "I want to study"
@@ -784,7 +784,7 @@ BugCatchingContestant10BText:
 	done
 
 BugCatchingContestant10BStillCompetingText:
-	text "KIPP: I study a"
+	text "ALAN: I study a"
 	line "lot, but that's"
 
 	para "not good enough to"

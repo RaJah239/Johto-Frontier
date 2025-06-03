@@ -522,15 +522,15 @@
 	const EVENT_BEAT_SWIMMERF_DENISE
 	const EVENT_BEAT_SWIMMERF_KARA
 	const EVENT_BEAT_SWIMMERF_WENDY
-	const EVENT_BEAT_SWIMMERF_LISA
-	const EVENT_BEAT_SWIMMERF_JILL
-	const EVENT_BEAT_SWIMMERF_MARY
-	const EVENT_BEAT_SWIMMERF_KATIE
-	const_skip
-	const EVENT_BEAT_SWIMMERF_TARA
 	const_skip
 	const_skip
-	const EVENT_BEAT_SWIMMERF_JODY
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -577,15 +577,15 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_CAMPER_HERVEY
-	const EVENT_BEAT_CAMPER_DALE
+	const_skip
+	const_skip
 	const EVENT_BEAT_CAMPER_TED
 	const EVENT_BEAT_CAMPER_TODD2
 	const EVENT_BEAT_CAMPER_TODD3
-	const EVENT_BEAT_CAMPER_THOMAS
-	const EVENT_BEAT_CAMPER_LEROY
-	const EVENT_BEAT_CAMPER_DAVID
-	const EVENT_BEAT_CAMPER_JOHN
+	const_skip
+	const_skip
+	const_skip
+	const_skip
 	const_skip
 	const EVENT_BEAT_CAMPER_SPENCER
 ; Burglar
@@ -595,7 +595,7 @@
 	const_skip
 ; Biker
 	const EVENT_BEAT_BIKER_BENNY
-	const EVENT_BEAT_BIKER_KAZU
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -618,8 +618,8 @@
 	const_skip
 ; Firebreather
 	const_skip
-	const EVENT_BEAT_FIREBREATHER_DICK
-	const EVENT_BEAT_FIREBREATHER_NED
+	const_skip
+	const_skip
 	const_skip
 	const EVENT_BEAT_FIREBREATHER_BILL
 	const EVENT_BEAT_FIREBREATHER_WALT
@@ -705,13 +705,13 @@
 	const EVENT_BEAT_JUGGLER_IRWIN
 	const_skip
 	const_skip
-	const EVENT_BEAT_JUGGLER_IRWIN2
-	const EVENT_BEAT_JUGGLER_IRWIN3
+	const_skip
+	const_skip
 ; Gentleman
 	const EVENT_BEAT_GENTLEMAN_PRESTON
 	const_skip
 	const_skip
-	const EVENT_BEAT_GENTLEMAN_VIRGIL
+	const_skip
 	const EVENT_BEAT_GENTLEMAN_ALFRED
 ; Scientist
 	const EVENT_BEAT_SCIENTIST_ROSS
@@ -720,7 +720,7 @@
 	const EVENT_BEAT_SCIENTIST_MARC
 	const EVENT_BEAT_SCIENTIST_RICH
 ; Blackbelt
-	const EVENT_BEAT_BLACKBELT_KENJI2
+	const_skip
 	const EVENT_BEAT_BLACKBELT_YOSHI
 	const EVENT_BEAT_BLACKBELT_KENJI3
 	const EVENT_BEAT_BLACKBELT_LAO
@@ -732,19 +732,19 @@
 ; Beauty
 	const EVENT_BEAT_BEAUTY_VICTORIA
 	const EVENT_BEAT_BEAUTY_SAMANTHA
-	const EVENT_BEAT_BEAUTY_JULIE
-	const EVENT_BEAT_BEAUTY_JACLYN
-	const EVENT_BEAT_BEAUTY_BRENDA
 	const_skip
-	const EVENT_BEAT_BEAUTY_CAROLINE
-	const EVENT_BEAT_BEAUTY_CARLENE
-	const EVENT_BEAT_BEAUTY_JESSICA
-	const EVENT_BEAT_BEAUTY_RACHAEL
-	const EVENT_BEAT_BEAUTY_ANGELICA
-	const EVENT_BEAT_BEAUTY_KENDRA
-	const EVENT_BEAT_BEAUTY_VERONICA
 	const_skip
-	const EVENT_BEAT_BEAUTY_THERESA
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
 	const EVENT_BEAT_BEAUTY_VALERIE
 ; Johto Gym Leaders
 	const EVENT_BEAT_FALKNER
@@ -774,14 +774,14 @@
 	const EVENT_BEAT_POKEFANM_BRANDON
 	const_skip
 	const_skip
-	const EVENT_BEAT_POKEFANM_DEREK2
-	const EVENT_BEAT_POKEFANM_DEREK3
+	const_skip
+	const_skip
 	const_skip
 ; PokefanF
 	const EVENT_BEAT_POKEFANF_BEVERLY
 	const EVENT_BEAT_POKEFANF_RUTH
-	const EVENT_BEAT_POKEFANF_BEVERLY2
-	const EVENT_BEAT_POKEFANF_BEVERLY3
+	const_skip
+	const_skip
 	const_skip
 ; Kimono Girl
 	const_skip ; unused
@@ -816,7 +816,7 @@
 	const EVENT_BEAT_ROCKET_GRUNTM_9
 	const EVENT_BEAT_ROCKET_GRUNTM_10
 	const EVENT_BEAT_ROCKET_GRUNTM_11
-	const EVENT_BEAT_ROCKET_GRUNTM_12
+	const_skip
 	const EVENT_BEAT_ROCKET_GRUNTM_13
 	const EVENT_BEAT_ROCKET_GRUNTM_14
 	const EVENT_BEAT_ROCKET_GRUNTM_15
@@ -826,16 +826,16 @@
 	const EVENT_BEAT_ROCKET_GRUNTM_19
 	const EVENT_BEAT_ROCKET_GRUNTM_20
 	const EVENT_BEAT_ROCKET_GRUNTM_21
-	const EVENT_BEAT_ROCKET_GRUNTM_22
-	const EVENT_BEAT_ROCKET_GRUNTM_23
+	const_skip
+	const_skip
 	const EVENT_BEAT_ROCKET_GRUNTM_24
 	const EVENT_BEAT_ROCKET_GRUNTM_25
-	const EVENT_BEAT_ROCKET_GRUNTM_26
-	const EVENT_BEAT_ROCKET_GRUNTM_27
+	const_skip
+	const_skip
 	const EVENT_BEAT_ROCKET_GRUNTM_28
 	const EVENT_BEAT_ROCKET_GRUNTM_29
-	const EVENT_BEAT_ROCKET_GRUNTM_30
-	const EVENT_BEAT_ROCKET_GRUNTM_31
+	const_skip
+	const_skip
 ; GruntF
 	const EVENT_BEAT_ROCKET_GRUNTF_1
 	const EVENT_BEAT_ROCKET_GRUNTF_2
@@ -854,8 +854,8 @@
 	const_skip
 	const EVENT_BEAT_LASS_DANA
 	const_skip
-	const EVENT_BEAT_LASS_CONNIE2
-	const EVENT_BEAT_LASS_CONNIE3
+	const_skip
+	const_skip
 	const EVENT_BEAT_LASS_DANA2
 	const EVENT_BEAT_LASS_DANA3
 ; Hiker
@@ -910,12 +910,12 @@
 	const EVENT_BEAT_COOLTRAINERM_GAVEN
 	const EVENT_BEAT_COOLTRAINERM_BLAKE
 	const EVENT_BEAT_COOLTRAINERM_BRIAN
-	const EVENT_BEAT_COOLTRAINERM_ERICK
-	const EVENT_BEAT_COOLTRAINERM_ANDY
-	const EVENT_BEAT_COOLTRAINERM_TYLER
 	const_skip
 	const_skip
-	const EVENT_BEAT_COOLTRAINERM_STEVE
+	const_skip
+	const_skip
+	const_skip
+	const_skip
 	const EVENT_BEAT_COOLTRAINERM_ALLEN
 ; CooltrainerF
 	const EVENT_BEAT_COOLTRAINERF_GWEN
@@ -962,9 +962,9 @@
 ; Super Nerd
 	const EVENT_BEAT_SUPER_NERD_STAN
 	const EVENT_BEAT_SUPER_NERD_ERIC
-	const EVENT_BEAT_SUPER_NERD_GREGG
-	const EVENT_BEAT_SUPER_NERD_JAY
-	const EVENT_BEAY_SUPER_NERD_DAVE
+	const_skip
+	const_skip
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -973,9 +973,9 @@
 ; Medium
 	const EVENT_BEAT_MEDIUM_MARTHA
 	const EVENT_BEAT_MEDIUM_GRACE
-	const EVENT_BEAT_MEDIUM_BETHANY
-	const EVENT_BEAT_MEDIUM_MARGRET
-	const EVENT_BEAT_MEDIUM_ETHEL
+	const_skip
+	const_skip
+	const_skip
 	const_skip
 	const_skip
 ; Skier
@@ -990,10 +990,10 @@
 	const EVENT_BEAT_SWIMMERM_BERKE
 	const EVENT_BEAT_SWIMMERM_KIRK
 	const EVENT_BEAT_SWIMMERM_MATHEW
-	const EVENT_BEAT_SWIMMERM_HAL
-	const EVENT_BEAT_SWIMMERM_PATON
-	const EVENT_BEAT_SWIMMERM_DARYL
-	const EVENT_BEAT_SWIMMERM_WALTER
+	const_skip
+	const_skip
+	const_skip
+	const_skip
 	const_skip
 	const_skip
 	const_skip

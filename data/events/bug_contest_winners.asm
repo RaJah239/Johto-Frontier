@@ -1,5 +1,5 @@
 BugContestantPointers:
-	table_width 2, BugContestantPointers
+	table_width 2
 	dw BugContestant_BugCatcherDon ; this reverts back to the player
 	dw BugContestant_BugCatcherDon
 	dw BugContestant_BugCatcherEd
@@ -22,59 +22,59 @@ BugContestantPointers:
 BugContestant_BugCatcherDon:
 	db BUG_CATCHER, DON
 	dbw RAIKOU,     300
-	dbw SUICUNE,    285
-	dbw ENTEI,      226
+	dbw ENTEI,      285
+	dbw SUICUNE,    226
 
 BugContestant_BugCatcherEd:
-	db BUG_CATCHER, ED
-	dbw RAIKOU,     286
-	dbw SUICUNE,    251
-	dbw ENTEI,      237
+	db BUG_CATCHER, JOSH
+	dbw RAIKOU,     300
+	dbw ENTEI,      285
+	dbw SUICUNE,    226
 
 BugContestant_CooltrainerMNick:
 	db COOLTRAINERM, NICK
-	dbw RAIKOU,     357
-	dbw SUICUNE,    349
-	dbw HERACROSS,  368
+	dbw RAIKOU,     300
+	dbw ENTEI,      285
+	dbw SUICUNE,    226
 
 BugContestant_PokefanMWilliam:
 	db POKEFANM, WILLIAM
-	dbw RAIKOU,     332
-	dbw SUICUNE,    324
-	dbw HERACROSS,  321
+	dbw RAIKOU,     300
+	dbw ENTEI,      285
+	dbw SUICUNE,    226
 
 BugContestant_BugCatcherBenny:
 	db BUG_CATCHER, BUG_CATCHER_BENNY
-	dbw RAIKOU,     318
-	dbw SUICUNE,    295
+	dbw RAIKOU,     300
 	dbw ENTEI,      285
+	dbw SUICUNE,    226
 
 BugContestant_CamperBarry:
-	db CAMPER, BARRY
-	dbw RAIKOU,     366
-	dbw SUICUNE,    329
-	dbw HERACROSS,  314
+	db CAMPER, ROLAND
+	dbw RAIKOU,     300
+	dbw ENTEI,      285
+	dbw SUICUNE,    226
 
 BugContestant_PicnickerCindy:
-	db PICNICKER, CINDY
-	dbw RAIKOU, 341
-	dbw SUICUNE,    301
-	dbw ENTEI,      264
+	db PICNICKER, KIM
+	dbw RAIKOU,     300
+	dbw ENTEI,      285
+	dbw SUICUNE,    226
 
 BugContestant_BugCatcherJosh:
-	db BUG_CATCHER, JOSH
-	dbw RAIKOU,     326
-	dbw SUICUNE,    292
-	dbw HERACROSS,  282
+	db BUG_CATCHER, ARNIE1
+	dbw RAIKOU,     300
+	dbw ENTEI,      285
+	dbw SUICUNE,    226
 
 BugContestant_YoungsterSamuel:
 	db YOUNGSTER, SAMUEL
-	dbw RAIKOU,     270
-	dbw SUICUNE,    282
-	dbw ENTEI,      251
+	dbw RAIKOU,     300
+	dbw ENTEI,      285
+	dbw SUICUNE,    226
 
 BugContestant_SchoolboyKipp:
-	db SCHOOLBOY, KIPP
-	dbw RAIKOU,     267
-	dbw SUICUNE,    254
-	dbw HERACROSS,  259
+	db SCHOOLBOY, CHAD5
+	dbw RAIKOU,     300
+	dbw ENTEI,      285
+	dbw SUICUNE,    226

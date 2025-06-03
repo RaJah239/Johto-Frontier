@@ -122,9 +122,9 @@ BugCatchingContestant1AText:
 	done
 
 BugCatchingContestant2AText:
-	text "ED: My PARASECT"
-	line "puts #MON to"
-	cont "sleep with SPORE."
+	text "AL: My PARAS stuns"
+	line "#MON with its"
+	cont "STUN SPORE."
 	done
 
 BugCatchingContestant3AText:
@@ -151,7 +151,7 @@ BugCatchingContestant5AText:
 	done
 
 BugCatchingContestant6AText:
-	text "BARRY: You should"
+	text "TED: You should"
 	line "weaken bug #MON"
 
 	para "first, then throw"
@@ -159,7 +159,7 @@ BugCatchingContestant6AText:
 	done
 
 BugCatchingContestant7AText:
-	text "CINDY: I love bug"
+	text "ERIN: I love bug"
 	line "#MON."
 
 	para "I guess you must"
@@ -186,7 +186,7 @@ BugCatchingContestant9AText:
 	done
 
 BugCatchingContestant10AText:
-	text "KIPP: I've studied"
+	text "ALAN: I've studied"
 	line "about bug #MON"
 	cont "a lot."
 
