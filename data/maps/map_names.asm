@@ -788,7 +788,7 @@ Pallet_Map_Name6: ; map_const OAKS_LAB ;  6  ; 14
 Fast_Ship_Map_Name1: ; map_const OLIVINE_PORT,;  1
 	db "OLIVINE MARINA@"
 Fast_Ship_Map_Name8: ; map_const OLIVINE_PORT_PASSAGE,;  8
-	db "JOHTO PORT PASSAGE@"
+	db "OLIVINE PASSAGE@"
 Fast_Ship_Map_Name10: ; map_const MOUNT_MOON_SQUARE,; 10
 	db "MT. MOON SQUARE@"
 Fast_Ship_Map_Name11: ; map_const MOUNT_MOON_GIFT_SHOP ; 11
@@ -882,7 +882,7 @@ Cianwood_Map_Name16: ; map_const BATTLE_TOWER_OUTSIDE ; 16
 Cianwood_Map_Name17: ; map_const CIANWOOD_PORT, ; 17
 	db "CIANWOOD MARINA@"
 Cianwood_Map_Name18: ; map_const CIANWOOD_PORT_PASSAGE, ; 18
-	db "CIANWOOD PORT@"
+	db "CIANWOOD PASSAGE@"
 
 
 Viridian_Map_Name6: ; map_const TRAINER_HOUSE_1F ;  6

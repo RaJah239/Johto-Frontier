@@ -3176,13 +3176,11 @@ wSilverCaveRoom3SceneID::                         db
 wVictoryRoadSceneID::                             db
 wDragonsDenB1FSceneID::                           db
 wDragonShrineSceneID::                            db
-wOlivinePortSceneID::                             db
-wFastShip1FSceneID::                              db
 wMountMoonSquareSceneID::                         db
 wMobileTradeRoomSceneID::                         db
 wMobileBattleRoomSceneID::                        db
 
-	ds 182
+	ds 184
 
 wEventFlags:: flag_array NUM_EVENTS
 

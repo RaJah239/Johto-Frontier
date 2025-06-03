@@ -241,7 +241,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_OLIVINE_PORT_HIDDEN_PROTEIN
+	const_skip
 	const_skip
 	const EVENT_MOUNT_MOON_SQUARE_HIDDEN_MOON_STONE
 	const_skip
@@ -1298,8 +1298,8 @@
 	const EVENT_ROUTE_35_NATIONAL_PARK_GATE_YOUNGSTER
 	const EVENT_LAKE_OF_RAGE_CIVILIANS
 	const EVENT_MAHOGANY_MART_OWNERS
-	const EVENT_OLIVINE_PORT_SPRITES_BEFORE_HALL_OF_FAME
-	const EVENT_OLIVINE_PORT_SPRITES_AFTER_HALL_OF_FAME
+	const_skip
+	const_skip
 	const_skip
 	const_skip
 	const_skip
