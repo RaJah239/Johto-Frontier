@@ -79,7 +79,6 @@ FastShipBed:
 	waitbutton
 	closetext
 	iftrue .AlreadyArrived
-	checkevent EVENT_FAST_SHIP_FOUND_GIRL
 	iftrue .CanArrive
 	iftrue .CanArrive
 .AlreadyArrived:

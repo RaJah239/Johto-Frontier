@@ -137,8 +137,8 @@ DEF KRIS EQU __trainer_class__
 	const JOE ; unused
 	const BILLY ; unused
 	const CHAD1
-	const NATE
-	const RICKY
+	const NATE ; unused
+	const RICKY ; unused
 	const JACK2
 	const JACK3
 	const ALAN2
@@ -323,7 +323,7 @@ DEF KRIS EQU __trainer_class__
 	trainerclass TEACHER ; 22
 	const COLETTE ; unused
 	const HILLARY ; unused
-	const SHIRLEY
+	const SHIRLEY ; unused
 
 	trainerclass SABRINA ; 23
 	const SABRINA1
@@ -361,7 +361,7 @@ DEF KRIS EQU __trainer_class__
 	const RAYMOND
 	const WILTON1
 	const EDGAR
-	const JONAH
+	const JONAH ; unused
 	const MARTIN ; unused
 	const STEPHEN ; unused
 	const BARNEY ; unused
@@ -426,9 +426,9 @@ DEF KRIS EQU __trainer_class__
 	const TERRELL
 	const KENT
 	const ERNEST
-	const JEFF
-	const GARRETT
-	const KENNETH
+	const JEFF ; unused
+	const GARRETT ; unused
+	const KENNETH ; unused
 	const STANLY
 	const HARRY
 	const HUEY2
@@ -518,7 +518,7 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass JUGGLER ; 31
 	const IRWIN1
-	const FRITZ
+	const FRITZ ; unused
 	const HORTON ; unused
 	const IRWIN2 ; unused
 	const IRWIN3 ; unused
@@ -533,7 +533,7 @@ DEF KRIS EQU __trainer_class__
 	const KIYO
 	const LUNG
 	const KENJI3
-	const WAI
+	const WAI ; unused
 
 	trainerclass EXECUTIVEM ; 33
 	const EXECUTIVEM_1
@@ -563,7 +563,7 @@ DEF KRIS EQU __trainer_class__
 	const CINDY ; unused
 	const HOPE ; unused
 	const SHARON ; unused
-	const DEBRA
+	const DEBRA ; unused
 	const GINA2
 	const ERIN1
 	const LIZ2

@@ -108,7 +108,6 @@ SSAquaMetalCoatAndDocking:
 	opentext
 	writetext SSAquaHasArrivedVermilionText
 	waitbutton
-	setevent EVENT_FAST_SHIP_FOUND_GIRL
 	closetext
 	end
 
