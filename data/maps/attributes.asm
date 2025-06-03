@@ -383,7 +383,6 @@ ENDM
 	map_attributes DayCare, DAY_CARE, $00, 0
 	map_attributes OaksLab, OAKS_LAB, $00, 0
 	map_attributes OlivinePort, OLIVINE_PORT, $0a, 0
-	map_attributes FastShipB1F, FAST_SHIP_B1F, $00, 0
 	map_attributes OlivinePortPassage, OLIVINE_PORT_PASSAGE, $00, 0
 	map_attributes MountMoonSquare, MOUNT_MOON_SQUARE, $2d, 0
 	map_attributes MountMoonGiftShop, MOUNT_MOON_GIFT_SHOP, $00, 0

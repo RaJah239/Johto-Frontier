@@ -296,7 +296,6 @@ Pewter_Map_Names: ;newgroup PEWTER
 Fast_Ship_Map_Names: ;newgroup FAST_SHIP
 	table_width 2, Fast_Ship_Map_Names                                            ; 15
 	dw Fast_Ship_Map_Name1 ; map_const OLIVINE_PORT,                                10, 18 ;  1
-	dw Fast_Ship_Map_Name7 ; map_const FAST_SHIP_B1F,                               16,  8 ;  7
 	dw Fast_Ship_Map_Name8 ; map_const OLIVINE_PORT_PASSAGE,                        10,  9 ;  8
 	dw Fast_Ship_Map_Name10 ; map_const MOUNT_MOON_SQUARE,                           15,  9 ; 10
 	dw Fast_Ship_Map_Name11 ; map_const MOUNT_MOON_GIFT_SHOP ; 11
@@ -788,8 +787,6 @@ Pallet_Map_Name6: ; map_const OAKS_LAB ;  6  ; 14
 
 Fast_Ship_Map_Name1: ; map_const OLIVINE_PORT,;  1
 	db "OLIVINE MARINA@"
-Fast_Ship_Map_Name7: ; map_const FAST_SHIP_B1F,;  7
-	db "S.S. AQUA GALLEY@"
 Fast_Ship_Map_Name8: ; map_const OLIVINE_PORT_PASSAGE,;  8
 	db "JOHTO PORT PASSAGE@"
 Fast_Ship_Map_Name10: ; map_const MOUNT_MOON_SQUARE,; 10
