@@ -184,13 +184,8 @@ INCLUDE "maps/CianwoodPharmacy.asm"
 INCLUDE "maps/CianwoodPhotoStudio.asm"
 INCLUDE "maps/CianwoodLugiaSpeechHouse.asm"
 INCLUDE "maps/PokeSeersHouse.asm"
-INCLUDE "maps/BattleTower1F.asm"
-INCLUDE "maps/BattleTowerBattleRoom.asm"
-INCLUDE "maps/BattleTowerElevator.asm"
-INCLUDE "maps/BattleTowerHallway.asm"
-INCLUDE "maps/Route40BattleTowerGate.asm"
-INCLUDE "maps/BattleTowerOutside.asm"
-
+INCLUDE "maps/CianwoodPort.asm"
+INCLUDE "maps/CianwoodPortPassage.asm"
 
 SECTION "Map Scripts 13", ROMX
 
@@ -222,7 +217,12 @@ INCLUDE "maps/BurnedTowerB1F.asm"
 
 
 SECTION "Map Scripts 15", ROMX
-
+INCLUDE "maps/BattleTower1F.asm"
+INCLUDE "maps/BattleTowerBattleRoom.asm"
+INCLUDE "maps/BattleTowerElevator.asm"
+INCLUDE "maps/BattleTowerHallway.asm"
+INCLUDE "maps/Route40BattleTowerGate.asm"
+INCLUDE "maps/BattleTowerOutside.asm"
 
 
 SECTION "Map Scripts 16", ROMX

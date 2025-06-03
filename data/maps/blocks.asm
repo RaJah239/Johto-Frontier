@@ -552,6 +552,10 @@ MrPokemonsHouse_Blocks:
 VictoryRoadGate_Blocks:
 	INCBIN "maps/VictoryRoadGate.blk"
 
+CianwoodPort_Blocks:
+	INCBIN "maps/CianwoodPort.blk"
+
+CianwoodPortPassage_Blocks:
 OlivinePortPassage_Blocks:
 	INCBIN "maps/PortPassage.blk"
 
