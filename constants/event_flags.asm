@@ -119,7 +119,7 @@
 	const EVENT_MET_MONICA_OF_MONDAY
 	const EVENT_GOT_SHARP_BEAK_FROM_MONICA
 	const EVENT_GOT_SOFT_SAND_FROM_KATE
-	const EVENT_GOT_METAL_COAT_FROM_GRANDPA_ON_SS_AQUA
+	const_skip
 	const EVENT_GOT_BLACKGLASSES_IN_DARK_CAVE
 	const EVENT_GOT_KINGS_ROCK_IN_SLOWPOKE_WELL
 	const_skip
@@ -615,7 +615,7 @@
 	const EVENT_BEAT_PSYCHIC_RICHARD
 	const EVENT_BEAT_PSYCHIC_GILBERT
 	const_skip
-	const EVENT_BEAT_PSYCHIC_RODNEY
+	const_skip
 ; Firebreather
 	const_skip
 	const EVENT_BEAT_FIREBREATHER_DICK
@@ -655,8 +655,8 @@
 	const EVENT_BEAT_TWINS_AMY_AND_MAY2
 	const_skip
 	const_skip
-	const EVENT_BEAT_TWINS_MEG_AND_PEG
-	const EVENT_BEAT_TWINS_MEG_AND_PEG2
+	const_skip
+	const_skip
 ; Schoolboy
 	const EVENT_BEAT_SCHOOLBOY_JACK
 	const_skip
@@ -772,8 +772,8 @@
 	const_skip
 	const_skip
 	const EVENT_BEAT_POKEFANM_BRANDON
-	const EVENT_BEAT_POKEFANM_JEREMY
-	const EVENT_BEAT_POKEFANM_COLIN
+	const_skip
+	const_skip
 	const EVENT_BEAT_POKEFANM_DEREK2
 	const EVENT_BEAT_POKEFANM_DEREK3
 	const_skip
@@ -782,7 +782,7 @@
 	const EVENT_BEAT_POKEFANF_RUTH
 	const EVENT_BEAT_POKEFANF_BEVERLY2
 	const EVENT_BEAT_POKEFANF_BEVERLY3
-	const EVENT_BEAT_POKEFANF_GEORGIA
+	const_skip
 ; Kimono Girl
 	const_skip ; unused
 	const EVENT_BEAT_KIMONO_GIRL_NAOKO
@@ -968,7 +968,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_SUPER_NERD_SHAWN
+	const_skip
 	const EVENT_BEAT_SUPER_NERD_TERU
 ; Medium
 	const EVENT_BEAT_MEDIUM_MARTHA
@@ -1291,9 +1291,9 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_FAST_SHIP_CABINS_SE_SSE_GENTLEMAN
-	const EVENT_FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN_TWIN_1
-	const EVENT_FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN_TWIN_2
+	const_skip
+	const_skip
+	const_skip
 	const EVENT_OLIVINE_PORT_PASSAGE_POKEFAN_M
 	const EVENT_ROUTE_35_NATIONAL_PARK_GATE_YOUNGSTER
 	const EVENT_LAKE_OF_RAGE_CIVILIANS
