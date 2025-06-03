@@ -510,9 +510,6 @@ Route36NationalParkGate_Blocks:
 FastShipB1F_Blocks:
 	INCBIN "maps/FastShipB1F.blk"
 
-FastShipCabins_NNW_NNE_NE_Blocks:
-	INCBIN "maps/FastShipCabins_NNW_NNE_NE.blk"
-
 FastShipCabins_SW_SSW_NW_Blocks:
 	INCBIN "maps/FastShipCabins_SW_SSW_NW.blk"
 

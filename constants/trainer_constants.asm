@@ -211,7 +211,7 @@ DEF KRIS EQU __trainer_class__
 	const ERICK ; unused
 	const ANDY ; unused
 	const TYLER ; unused
-	const SEAN
+	const SEAN ; unused
 	const KEVIN
 	const STEVE ; unused
 	const ALLEN
@@ -230,7 +230,7 @@ DEF KRIS EQU __trainer_class__
 	const REENA1
 	const MEGAN
 	const BETH2
-	const CAROL
+	const CAROL ; unused
 	const QUINN ; unused
 	const EMMA
 	const CYBIL
@@ -267,7 +267,7 @@ DEF KRIS EQU __trainer_class__
 	const BEN
 	const BRENT1
 	const RON
-	const ETHAN
+	const ETHAN ; unused
 	const BRENT2
 	const BRENT3
 	const ISSAC
@@ -311,7 +311,7 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass GENTLEMAN ; 20
 	const PRESTON
-	const EDWARD
+	const EDWARD ; unused
 	const GREGORY ; unused
 	const VIRGIL ; unused
 	const ALFRED
@@ -429,7 +429,7 @@ DEF KRIS EQU __trainer_class__
 	const JEFF ; unused
 	const GARRETT ; unused
 	const KENNETH ; unused
-	const STANLY
+	const STANLY ; unused
 	const HARRY
 	const HUEY2
 	const HUEY3
@@ -477,7 +477,7 @@ DEF KRIS EQU __trainer_class__
 	const BAILEY
 	const ANTHONY3
 	const TIM ; unused
-	const NOLAND
+	const NOLAND ; unused
 	const SIDNEY ; unused
 	const KENNY ; unused
 	const JIM ; unused
@@ -504,7 +504,7 @@ DEF KRIS EQU __trainer_class__
 	trainerclass BURGLAR ; 2f
 	const DUNCAN
 	const EDDIE
-	const COREY
+	const COREY ; unused
 
 	trainerclass FIREBREATHER ; 30
 	const OTIS ; unused
