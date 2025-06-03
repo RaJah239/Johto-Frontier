@@ -15,7 +15,6 @@
 	const SPRITE_KURT ; 0b
 	const SPRITE_MOM ; 0c
 	const SPRITE_BLAINE ; 0d
-	const SPRITE_REDS_MOM ; 0e
 	const SPRITE_DAISY ; 0f
 	const SPRITE_ELM ; 10
 	const SPRITE_WILL ; 11
