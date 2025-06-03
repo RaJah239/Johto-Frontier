@@ -46,20 +46,7 @@ OlivinePortSailorAtGangwayScript:
 	playsound SFX_EXIT_BUILDING
 	special FadeOutToWhite
 	waitsfx
-	iffalse .FirstTime
-	clearevent EVENT_BEAT_COOLTRAINERM_SEAN
-	clearevent EVENT_BEAT_COOLTRAINERF_CAROL
-	clearevent EVENT_BEAT_GENTLEMAN_EDWARD
-	clearevent EVENT_BEAT_BEAUTY_CASSIE
-	clearevent EVENT_BEAT_PSYCHIC_RODNEY
-	clearevent EVENT_BEAT_SUPER_NERD_SHAWN
-	clearevent EVENT_BEAT_SAILOR_GARRETT
-	clearevent EVENT_BEAT_FISHER_JONAH
-	clearevent EVENT_BEAT_BLACKBELT_WAI
-.FirstTime:
 	appear OLIVINEPORT_SAILOR1
-	setmapscene FAST_SHIP_1F, SCENE_FASTSHIP1F_ENTER_SHIP
-	warp FAST_SHIP_1F, 25, 1
 	end
 
 OlivinePortAlreadyRodeScript:
