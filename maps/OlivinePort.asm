@@ -46,7 +46,6 @@ OlivinePortSailorAtGangwayScript:
 	playsound SFX_EXIT_BUILDING
 	special FadeOutToWhite
 	waitsfx
-	checkevent EVENT_FAST_SHIP_FIRST_TIME
 	iffalse .FirstTime
 	clearevent EVENT_FAST_SHIP_PASSENGERS_EASTBOUND
 	setevent EVENT_FAST_SHIP_PASSENGERS_WESTBOUND
@@ -60,7 +59,6 @@ OlivinePortSailorAtGangwayScript:
 	clearevent EVENT_BEAT_FISHER_JONAH
 	clearevent EVENT_BEAT_BLACKBELT_WAI
 .FirstTime:
-	clearevent EVENT_FAST_SHIP_DESTINATION_OLIVINE
 	appear OLIVINEPORT_SAILOR1
 	setmapscene FAST_SHIP_1F, SCENE_FASTSHIP1F_ENTER_SHIP
 	warp FAST_SHIP_1F, 25, 1
@@ -80,7 +78,6 @@ OlivinePortWalkUpToShipScript:
 	iftrue .skip
 	turnobject PLAYER, LEFT
 	opentext
-	checkevent EVENT_FAST_SHIP_FIRST_TIME
 	iffalse .FirstTime
 	readvar VAR_WEEKDAY
 	ifequal SUNDAY, .NextShipMonday
@@ -145,7 +142,6 @@ OlivinePortSailorAfterHOFScript:
 	opentext
 	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
 	iftrue OlivinePortAlreadyRodeScript
-	checkevent EVENT_FAST_SHIP_FIRST_TIME
 	iffalse .FirstTime
 	readvar VAR_WEEKDAY
 	ifequal SUNDAY, .NextShipMonday
@@ -396,7 +392,7 @@ OlivinePort_MapEvents:
 	bg_event  1, 22, BGEVENT_ITEM, OlivinePortHiddenProtein
 
 	def_object_events
-	object_event 10, 15, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, OlivinePortSailorAtGangwayScript, EVENT_OLIVINE_PORT_SAILOR_AT_GANGWAY
+	object_event 10, 15, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, OlivinePortSailorAtGangwayScript, -1
 	object_event  6, 14, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, OlivinePortSailorBeforeHOFScript, EVENT_OLIVINE_PORT_SPRITES_BEFORE_HALL_OF_FAME
 	object_event  6, 15, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, OlivinePortSailorAfterHOFScript, EVENT_OLIVINE_PORT_SPRITES_AFTER_HALL_OF_FAME
 	object_event  4, 14, SPRITE_FISHING_GURU, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, OlivinePortFishingGuru1Script, EVENT_OLIVINE_PORT_SPRITES_BEFORE_HALL_OF_FAME

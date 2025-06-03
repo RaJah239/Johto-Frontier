@@ -19,7 +19,6 @@ FastShipCabins_SE_SSE_CaptainsCabin_MapScripts:
 SSAquaCaptain:
 	faceplayer
 	opentext
-	checkevent EVENT_FAST_SHIP_FIRST_TIME
 	iftrue .LaterTrip
 	writetext SSAquaCaptainExhaustingText
 	waitbutton
@@ -79,7 +78,6 @@ SSAquaGranddaughterBefore:
 	opentext
 	writetext SSAquaEntertainedGranddaughterText
 	promptbutton
-	setevent EVENT_VERMILION_PORT_SAILOR_AT_GANGWAY
 	setmapscene FAST_SHIP_1F, SCENE_FASTSHIP1F_NOOP
 	sjump SSAquaMetalCoatAndDocking
 
@@ -110,7 +108,6 @@ SSAquaMetalCoatAndDocking:
 	opentext
 	writetext SSAquaHasArrivedVermilionText
 	waitbutton
-	setevent EVENT_FAST_SHIP_HAS_ARRIVED
 	setevent EVENT_FAST_SHIP_FOUND_GIRL
 	closetext
 	end

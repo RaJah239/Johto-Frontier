@@ -51,7 +51,6 @@ FastShipB1FAlreadyBlocked:
 FastShipB1FSailorScript:
 	faceplayer
 	opentext
-	checkevent EVENT_FAST_SHIP_FIRST_TIME
 	iftrue .FirstTime
 	checkevent EVENT_FAST_SHIP_LAZY_SAILOR
 	iftrue .LazySailor

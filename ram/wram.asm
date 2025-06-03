@@ -3178,12 +3178,11 @@ wDragonsDenB1FSceneID::                           db
 wDragonShrineSceneID::                            db
 wOlivinePortSceneID::                             db
 wFastShip1FSceneID::                              db
-wFastShipB1FSceneID::                             db
 wMountMoonSquareSceneID::                         db
 wMobileTradeRoomSceneID::                         db
 wMobileBattleRoomSceneID::                        db
 
-	ds 181
+	ds 182
 
 wEventFlags:: flag_array NUM_EVENTS
 

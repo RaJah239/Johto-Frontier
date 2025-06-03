@@ -78,11 +78,9 @@ FastShipBed:
 	writetext FastShipBedText2
 	waitbutton
 	closetext
-	checkevent EVENT_FAST_SHIP_HAS_ARRIVED
 	iftrue .AlreadyArrived
 	checkevent EVENT_FAST_SHIP_FOUND_GIRL
 	iftrue .CanArrive
-	checkevent EVENT_FAST_SHIP_FIRST_TIME
 	iftrue .CanArrive
 .AlreadyArrived:
 	end
@@ -90,13 +88,11 @@ FastShipBed:
 .CanArrive:
 	playsound SFX_ELEVATOR_END
 	pause 30
-	checkevent EVENT_FAST_SHIP_DESTINATION_OLIVINE
 	iftrue .ArrivedOlivine
 	opentext
 	writetext FastShipArrivedVermilionText
 	waitbutton
 	closetext
-	setevent EVENT_FAST_SHIP_HAS_ARRIVED
 	end
 
 .ArrivedOlivine:
@@ -104,7 +100,6 @@ FastShipBed:
 	writetext FastShipArrivedOlivineText
 	waitbutton
 	closetext
-	setevent EVENT_FAST_SHIP_HAS_ARRIVED
 	end
 
 FastShipCabinsNorthwestCabinTrashcan:

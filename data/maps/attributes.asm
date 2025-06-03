@@ -383,7 +383,6 @@ ENDM
 	map_attributes DayCare, DAY_CARE, $00, 0
 	map_attributes OaksLab, OAKS_LAB, $00, 0
 	map_attributes OlivinePort, OLIVINE_PORT, $0a, 0
-	map_attributes FastShip1F, FAST_SHIP_1F, $00, 0
 	map_attributes FastShipCabins_NNW_NNE_NE, FAST_SHIP_CABINS_NNW_NNE_NE, $00, 0
 	map_attributes FastShipCabins_SW_SSW_NW, FAST_SHIP_CABINS_SW_SSW_NW, $00, 0
 	map_attributes FastShipCabins_SE_SSE_CaptainsCabin, FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN, $00, 0

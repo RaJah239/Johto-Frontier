@@ -507,9 +507,6 @@ Route35NationalParkGate_Blocks:
 Route36NationalParkGate_Blocks:
 	INCBIN "maps/Route36NationalParkGate.blk"
 
-FastShip1F_Blocks:
-	INCBIN "maps/FastShip1F.blk"
-
 FastShipB1F_Blocks:
 	INCBIN "maps/FastShipB1F.blk"
 
