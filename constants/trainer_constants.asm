@@ -246,7 +246,7 @@ DEF KRIS EQU __trainer_class__
 	const JULIE ; unused
 	const JACLYN ; unused
 	const BRENDA ; unused
-	const CASSIE
+	const CASSIE ; unused
 	const CAROLINE ; unused
 	const CARLENE ; unused
 	const JESSICA ; unused
@@ -337,7 +337,7 @@ DEF KRIS EQU __trainer_class__
 	const AL
 	const JOSH
 	const ARNIE1
-	const KEN
+	const KEN ; unused
 	const WADE2
 	const WADE3
 	const DOUG ; unused
@@ -460,7 +460,7 @@ DEF KRIS EQU __trainer_class__
 	const RIVAL2_2_TOTODILE
 
 	trainerclass GUITARIST ; 2b
-	const CLYDE
+	const CLYDE ; unused
 	const VINCENT ; unused
 
 	trainerclass HIKER ; 2c
@@ -514,7 +514,7 @@ DEF KRIS EQU __trainer_class__
 	const BILL
 	const WALT
 	const RAY
-	const LYLE
+	const LYLE ; unused
 
 	trainerclass JUGGLER ; 31
 	const IRWIN1
