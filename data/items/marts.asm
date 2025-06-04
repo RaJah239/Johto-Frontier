@@ -55,9 +55,9 @@ MartViolet:
 	db ANTIDOTE
 	db PARLYZ_HEAL
 	db AWAKENING
+	db REPEL
 	db X_DEFEND
 	db X_ATTACK
-	db X_SPEED
 	db FLOWER_MAIL
 	db -1 ; end
 
