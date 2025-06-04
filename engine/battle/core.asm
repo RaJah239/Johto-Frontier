@@ -3457,8 +3457,10 @@ CheckWhetherToAskSwitch:
 	ld a, [wLinkMode]
 	and a
 	jr nz, .return_nc
-	ld a, [wOptions]
-	bit BATTLE_SHIFT, a
+
+	ld a, [wBattleMode]
+	bit WILD_BATTLE, a
+
 	jr nz, .return_nc
 	ld a, [wCurPartyMon]
 	push af
@@ -5007,6 +5009,10 @@ BattleMenu_Pack:
 
 	ld a, [wInBattleTowerBattle]
 	and a
+	jr nz, .ItemsCantBeUsed
+
+	ld a, [wBattleMode]
+	bit WILD_BATTLE, a
 	jr nz, .ItemsCantBeUsed
 
 	call LoadStandardMenuHeader
