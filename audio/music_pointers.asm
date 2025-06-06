@@ -105,5 +105,4 @@ Music:
 	dba Music_BattleTowerTheme
 	dba Music_SuicuneBattle
 	dba Music_BattleTowerLobby
-	dba Music_MobileCenter
 	assert_table_length NUM_MUSIC_SONGS
