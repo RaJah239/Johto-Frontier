@@ -4,7 +4,7 @@
 	const OPT_BATTLE_SCENE  ; 1
 	const OPT_EXP_SHARE     ; 2
 	const OPT_SOUND         ; 3
-	const OPT_PRINT         ; 4
+	const OPT_MINIMAL_DIALOGUE ; 4
 	const OPT_TRIVIAL_CALLS ; 5
 	const OPT_FRAME         ; 6
 	const OPT_CANCEL        ; 7
@@ -83,7 +83,7 @@ StringOptions:
 	db "        :<LF>"
 	db "SOUND<LF>"
 	db "        :<LF>"
-	db "PRINT<LF>"
+	db "DIALOGUE<LF>"
 	db "        :<LF>"
 	db "TRIVIAL CALLS<LF>"
 	db "        :<LF>"
@@ -100,7 +100,7 @@ GetOptionPointer:
 	dw Options_BattleScene
 	dw Options_ExpShare
 	dw Options_Sound
-	dw Options_Print
+	dw Options_MinimalDialogue
 	dw Options_TrivialCalls
 	dw Options_Frame
 	dw Options_Cancel
@@ -305,107 +305,49 @@ Options_Sound:
 .Mono:   db "MONO  @"
 .Stereo: db "STEREO@"
 
-	const_def
-	const OPT_PRINT_LIGHTEST ; 0
-	const OPT_PRINT_LIGHTER  ; 1
-	const OPT_PRINT_NORMAL   ; 2
-	const OPT_PRINT_DARKER   ; 3
-	const OPT_PRINT_DARKEST  ; 4
 
-Options_Print:
-	call GetPrinterSetting
+Options_MinimalDialogue:
+	ld hl, wOptions2
 	ldh a, [hJoyPressed]
 	bit D_LEFT_F, a
 	jr nz, .LeftPressed
 	bit D_RIGHT_F, a
 	jr z, .NonePressed
-	ld a, c
-	cp OPT_PRINT_DARKEST
-	jr c, .Increase
-	ld c, OPT_PRINT_LIGHTEST - 1
-
-.Increase:
-	inc c
-	ld a, e
-	jr .Save
+	bit MINIMAL_DIALOGUE, [hl]
+	jr nz, .ToggleMinimum
+	jr .ToggleNormal
 
 .LeftPressed:
-	ld a, c
-	and a
-	jr nz, .Decrease
-	ld c, OPT_PRINT_DARKEST + 1
-
-.Decrease:
-	dec c
-	ld a, d
-
-.Save:
-	ld b, a
-	ld [wGBPrinterBrightness], a
+	bit MINIMAL_DIALOGUE, [hl]
+	jr z, .ToggleNormal
+	jr .ToggleMinimum
 
 .NonePressed:
-	ld b, 0
-	ld hl, .Strings
-	add hl, bc
-	add hl, bc
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
+	bit MINIMAL_DIALOGUE, [hl]
+	jr nz, .ToggleNormal
+
+.ToggleMinimum:
+	res MINIMAL_DIALOGUE, [hl]
+	ld de, .Minimum
+	jr .Display
+
+.ToggleNormal:
+	set MINIMAL_DIALOGUE, [hl]
+	ld de, .Normal
+
+.Display:
 	hlcoord 11, 11
 	call PlaceString
 	and a
 	ret
 
 .Strings:
-; entries correspond to OPT_PRINT_* constants
-	dw .Lightest
-	dw .Lighter
+; entries correspond to OPT_DIALOGUE_* constants
 	dw .Normal
-	dw .Darker
-	dw .Darkest
+	dw .Minimum
 
-.Lightest: db "LIGHTEST@"
-.Lighter:  db "LIGHTER @"
-.Normal:   db "NORMAL  @"
-.Darker:   db "DARKER  @"
-.Darkest:  db "DARKEST @"
-
-GetPrinterSetting:
-; converts GBPRINTER_* value in a to OPT_PRINT_* value in c,
-; with previous/next GBPRINTER_* values in d/e
-	ld a, [wGBPrinterBrightness]
-	and a
-	jr z, .IsLightest
-	cp GBPRINTER_LIGHTER
-	jr z, .IsLight
-	cp GBPRINTER_DARKER
-	jr z, .IsDark
-	cp GBPRINTER_DARKEST
-	jr z, .IsDarkest
-	; none of the above
-	ld c, OPT_PRINT_NORMAL
-	lb de, GBPRINTER_LIGHTER, GBPRINTER_DARKER
-	ret
-
-.IsLightest:
-	ld c, OPT_PRINT_LIGHTEST
-	lb de, GBPRINTER_DARKEST, GBPRINTER_LIGHTER
-	ret
-
-.IsLight:
-	ld c, OPT_PRINT_LIGHTER
-	lb de, GBPRINTER_LIGHTEST, GBPRINTER_NORMAL
-	ret
-
-.IsDark:
-	ld c, OPT_PRINT_DARKER
-	lb de, GBPRINTER_NORMAL, GBPRINTER_DARKEST
-	ret
-
-.IsDarkest:
-	ld c, OPT_PRINT_DARKEST
-	lb de, GBPRINTER_DARKER, GBPRINTER_LIGHTEST
-	ret
+.Normal:   db "NORMAL @"
+.Minimum:  db "MINIMAL@"
 
 Options_TrivialCalls:
  	ld hl, wOptions2
