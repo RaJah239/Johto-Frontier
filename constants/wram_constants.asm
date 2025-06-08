@@ -80,7 +80,7 @@ DEF GBPRINTER_DARKEST  EQU $7f
 
 ; wOptions2::
 	const_def
-	const TRIVIAL_CALLS ; 0
+	const CASUAL_CALLS ; 0
 	const EXP_SHARE     ; 1
 	const MINIMAL_DIALOGUE ; 2
 
