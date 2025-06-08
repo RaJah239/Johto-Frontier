@@ -34,7 +34,7 @@ MeetMomRightScript:
 	applymovement PLAYERSHOUSE1F_MOM1, MomWalksToPlayerMovement
 MeetMomScript:
 	opentext
-	writetext ElmsLookingForYouText
+	writetextcheckdialogue ElmsLookingForYouText, ElmsLookingForYouTextMin
 	promptbutton
 	getstring STRING_BUFFER_4, PokegearName
 	scall PlayersHouse1FReceiveItemStd
@@ -44,7 +44,7 @@ MeetMomScript:
 	setscene SCENE_PLAYERSHOUSE1F_NOOP
 	setevent EVENT_PLAYERS_HOUSE_MOM_1
 	clearevent EVENT_PLAYERS_HOUSE_MOM_2
-	writetext MomGivesPokegearText
+	writetextcheckdialogue MomGivesPokegearText, MomGivesPokegearTextMin
 	promptbutton
 	special SetDayOfWeek
 .SetDayOfWeek:
@@ -61,6 +61,8 @@ MeetMomScript:
 	yesorno
 	iffalse .SetDayOfWeek
 .DayOfWeekDone:
+	isdialogueminimal
+	iftrue .skipthis
 	writetext ComeHomeForDSTText
 	yesorno
 	iffalse .ExplainPhone
@@ -79,6 +81,7 @@ MeetMomScript:
 .FinishPhone:
 	writetext InstructionsNextText
 	waitbutton
+.skipthis
 	closetext
 	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
 	iftrue .FromRight
@@ -370,6 +373,15 @@ PlayersHouse1FFridgeText:
 
 	para "FRESH WATER and"
 	line "tasty LEMONADE!"
+	done
+
+ElmsLookingForYouTextMin:
+	text "Take along your"
+	line "#GEAR…"
+	done
+
+MomGivesPokegearTextMin:
+	text "Set the day…"
 	done
 
 PlayersHouse1FTVText:
