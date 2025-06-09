@@ -1431,6 +1431,11 @@ _OakText4::
 	cont "battle with them."
 	prompt
 
+_OakText4Min::
+	text "We work and live"
+	line "together…"
+	prompt
+
 _OakText5::
 	text "But we don't know"
 	line "everything about"
@@ -1442,4 +1447,8 @@ _OakText5::
 
 	para "That's why I study"
 	line "#MON every day."
+	prompt
+
+_OakText5Min::
+	text "Alright…"
 	prompt

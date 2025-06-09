@@ -624,7 +624,11 @@ else
 	call GetSGBLayout
 	call Intro_RotatePalettesLeftFrontpic
 
+	ld hl, OakText1Min
+	call CheckDialogueMode
+	jr z, .minimal_dialogue1
 	ld hl, OakText1
+.minimal_dialogue1
 	call PrintText
 	ld c, 15
 	call FadeToWhite
@@ -646,9 +650,17 @@ else
 	call GetSGBLayout
 	call Intro_WipeInFrontpic
 
+	ld hl, OakText2Min
+	call CheckDialogueMode
+	jr z, .minimal_dialogue2
 	ld hl, OakText2
+.minimal_dialogue2
 	call PrintText
+	ld hl, OakText4Min
+	call CheckDialogueMode
+	jr z, .minimal_dialogue4
 	ld hl, OakText4
+.minimal_dialogue4
 	call PrintText
 	ld c, 15
 	call FadeToWhite
@@ -664,7 +676,11 @@ else
 	call GetSGBLayout
 	call Intro_RotatePalettesLeftFrontpic
 
+	ld hl, OakText5Min
+	call CheckDialogueMode
+	jr z, .minimal_dialogue5
 	ld hl, OakText5
+.minimal_dialogue5
 	call PrintText
 endc
 	ld c, 10
@@ -679,12 +695,20 @@ endc
 	call GetSGBLayout
 	call Intro_RotatePalettesLeftFrontpic
 
+	ld hl, OakText6Min
+	call CheckDialogueMode
+	jr z, .minimal_dialogue6
 	ld hl, OakText6
+.minimal_dialogue6
 	call PrintText
 	call NamePlayer
 if DEF(_DEBUG)
 else
+	ld hl, OakText7Min
+	call CheckDialogueMode
+	jr z, .minimal_dialogue7
 	ld hl, OakText7
+.minimal_dialogue7
 	call PrintText
 endc
 	ret
@@ -693,8 +717,21 @@ OakText1:
 	text_far _OakText1
 	text_end
 
+OakText1Min:
+	text_far _OakText1Min
+	text_end
+
 OakText2:
 	text_far _OakText2
+	text_asm
+	ld a, WOOPER
+	call PlayMonCry
+	call WaitSFX
+	ld hl, OakText3
+	ret
+
+OakText2Min:
+	text_far _OakText2Min
 	text_asm
 	ld a, WOOPER
 	call PlayMonCry
@@ -710,16 +747,32 @@ OakText4:
 	text_far _OakText4
 	text_end
 
+OakText4Min:
+	text_far _OakText4Min
+	text_end
+
 OakText5:
 	text_far _OakText5
+	text_end
+
+OakText5Min:
+	text_far _OakText5Min
 	text_end
 
 OakText6:
 	text_far _OakText6
 	text_end
 
+OakText6Min:
+	text_far _OakText6Min
+	text_end
+
 OakText7:
 	text_far _OakText7
+	text_end
+
+OakText7Min:
+	text_far _OakText7Min
 	text_end
 
 NamePlayer:

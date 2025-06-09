@@ -162,6 +162,10 @@ _OakTimeWokeUpText::
 	line "clock for me?"
 	prompt
 
+_OakTimeWokeUpTextMin::
+	text "Zzz…"
+	prompt
+
 _OakTimeWhatTimeIsItText::
 	text "What time is it?"
 	done
@@ -472,10 +476,18 @@ _OPT_OakText1::
 	text_ram wMonOrItemNameBuffer
 	text_end
 
+_OakText1Min::
+	text "Why hello there!"
+	prompt
+
 _OPT_OakText2::
 	text_start
 	line "may be seen around"
 	done
+
+_OakText2Min::
+	text "#MON…"
+	prompt
 
 _OPT_OakText3::
 	text_start

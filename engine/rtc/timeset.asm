@@ -44,7 +44,11 @@ InitClock:
 	call SetDefaultBGPAndOBP
 if DEF(_DEBUG)
 else
+	ld hl, OakTimeWokeUpTextMin
+	call CheckDialogueMode
+	jr z, .minimal_dialogue
 	ld hl, OakTimeWokeUpText
+.minimal_dialogue
 	call PrintText
 endc
 	ld hl, wTimeSetBuffer
@@ -295,6 +299,10 @@ PrintTwoDigitNumberLeftAlign:
 
 OakTimeWokeUpText:
 	text_far _OakTimeWokeUpText
+	text_end
+
+OakTimeWokeUpTextMin:
+	text_far _OakTimeWokeUpTextMin
 	text_end
 
 OakTimeWhatTimeIsItText:
