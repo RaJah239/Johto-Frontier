@@ -769,11 +769,11 @@ BattleCommand_CheckObedience:
 	jmp .EndDisobedience
 
 .Nap:
-	call BattleRandom
-	add a
-	swap a
-	and SLP_MASK
-	jr z, .Nap
+	call BattleRandom     ; Get a random number in A (0–255)
+	and %00000011         ; Mask with 00000011 to get value 0–3
+	inc a                 ; Now A is 1–4
+	cp 4                  ; Check if it's 4
+	jr z, .Nap            ; If 4, try again (we only want 1–3) otherwise, A is 1–3 — sleep duration
 
 	ld [wBattleMonStatus], a
 
@@ -3727,17 +3727,11 @@ BattleCommand_SleepTarget:
 	jr nz, .fail
 
 	call AnimateCurrentMove
-	ld b, SLP_MASK
-	ld a, [wInBattleTowerBattle]
-	and a
-	jr z, .random_loop
 	ld b, %011
 
 .random_loop
 	call BattleRandom
 	and b
-	jr z, .random_loop
-	cp SLP_MASK
 	jr z, .random_loop
 	inc a
 	ld [de], a
