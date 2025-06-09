@@ -1064,4 +1064,16 @@ MACRO checksave
 	db checksave_command
 ENDM
 
+	const isdialogueminimal_command ; $aa
+MACRO isdialogueminimal
+	db isdialogueminimal_command
+ENDM
+
+	const writetextcheckdialogue_command ; $ab
+MACRO writetextcheckdialogue
+	db writetextcheckdialogue_command
+	dw \1 ; Pointer to normal text
+	dw \2 ; Pointer to minimal text
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value
