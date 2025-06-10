@@ -1354,8 +1354,9 @@ HeadbuttFromMenuScript:
 HeadbuttScript:
 	callasm GetPartyNickname
 	writetext UseHeadbuttText
-
-	refreshmap
+	setflag ENGINE_HEADBUTT_ACTIVE
+AutoHeadbuttScript:
+	reanchormap
 	callasm ShakeHeadbuttTree
 
 	callasm TreeMonEncounter
@@ -1402,6 +1403,8 @@ TryHeadbuttOW::
 	ret
 
 AskHeadbuttScript:
+	checkflag ENGINE_HEADBUTT_ACTIVE
+	iftrue AutoHeadbuttScript
 	opentext
 	writetext AskHeadbuttText
 	yesorno
