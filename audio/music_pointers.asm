@@ -10,7 +10,6 @@ Music:
 	dba Music_Route12
 	dba Music_MagnetTrain
 	dba Music_KantoGymBattle
-	dba Music_KantoTrainerBattle
 	dba Music_KantoWildBattle
 	dba Music_PokemonCenter
 	dba Music_LookHiker

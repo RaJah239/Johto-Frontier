@@ -8,7 +8,6 @@
 	const MUSIC_ROUTE_12                     ; 04
 	const MUSIC_MAGNET_TRAIN                 ; 05
 	const MUSIC_KANTO_GYM_LEADER_BATTLE      ; 06
-	const MUSIC_KANTO_TRAINER_BATTLE         ; 07
 	const MUSIC_KANTO_WILD_BATTLE            ; 08
 	const MUSIC_POKEMON_CENTER               ; 09
 	const MUSIC_HIKER_ENCOUNTER              ; 0a
