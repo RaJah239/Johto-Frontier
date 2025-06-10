@@ -1,515 +1,549 @@
 Music_Bicycle:
-	channel_count 4
-	channel 1, Music_Bicycle_Ch1
-	channel 2, Music_Bicycle_Ch2
-	channel 3, Music_Bicycle_Ch3
-	channel 4, Music_Bicycle_Ch4
+	dbw $C0, KalosBicycle_Ch1
+	dbw $01, KalosBicycle_Ch2
+	dbw $02, KalosBicycle_Ch3
+	dbw $03, KalosBicycle_Ch4
 
-Music_Bicycle_Ch1:
-	tempo 140
-	volume 7, 7
-	duty_cycle 3
-	pitch_offset 1
-	stereo_panning FALSE, TRUE
-	vibrato 8, 1, 5
-	note_type 12, 11, 4
+KalosBicycle_Ch1::
+	tempo 120
+	volume $77
+	stereopanning $ff
+	dutycycle $1
+	vibrato $10, $22
+	notetype $c, $a7
+
+KalosBicycle_Ch1_sub_0:
+	note __, 2
 	octave 3
+	note E_, 4
+	octave 2
+	note G#, 2
+	note G#, 2
+	note __, 2
+	note G#, 4
+	note E_, 2
+	note F#, 4
+	note A_, 2
+	note A_, 2
+	note __, 2
+	note A_, 4
+	note A_, 2
+	note A_, 2
+	note A_, 2
+	note __, 16
+	note G#, 5
+	note __, 1
+	note G#, 1
+	note __, 3
+	note G#, 6
+	octave 3
+	note A_, 6
 	note B_, 6
-	note A_, 6
-	note G_, 4
-	volume_envelope 11, 0
-	note A_, 6
-	volume_envelope 11, 6
-	note A_, 8
-	volume_envelope 11, 2
-	note F#, 2
-.mainloop:
-	stereo_panning FALSE, TRUE
-	volume_envelope 11, 2
-	note G_, 2
-	note G_, 2
-	note E_, 2
-	note E_, 2
-	note F#, 1
-	note E_, 1
-	note D#, 2
-	note D_, 2
-	note D_, 2
-	note E_, 2
-	note E_, 2
-	note C_, 2
-	note C_, 2
-	octave 2
-	note B_, 2
-	note G_, 2
-	note A_, 2
-	note B_, 2
-	octave 3
-	note C_, 2
-	note C_, 2
-	note E_, 2
-	note E_, 2
-	note C#, 2
-	note E_, 2
-	note F#, 2
-	note E_, 2
-	note D_, 2
-	note E_, 2
-	note D_, 2
-	note C#, 2
-	note D_, 2
-	note D_, 2
-	note C#, 2
-	note D_, 2
-	note G_, 2
-	note G_, 2
-	note E_, 2
-	note E_, 2
-	note F#, 1
-	note E_, 1
-	note D#, 2
-	note D_, 2
-	note D_, 2
-	note E_, 2
-	note E_, 2
-	note C_, 2
-	note C_, 2
-	octave 2
-	note B_, 2
-	note B_, 2
-	note A#, 2
-	note B_, 2
-	octave 3
-	note C_, 2
-	octave 2
-	note B_, 2
-	octave 3
-	note C_, 2
-	note E_, 2
-	note C_, 2
-	note E_, 2
-	note F#, 2
-	note G_, 2
-	note F#, 2
-	volume_envelope 8, 2
-	note F#, 2
-	volume_envelope 11, 2
-	note A_, 2
-	note G_, 2
-	note F#, 2
-	note G_, 2
-	note G#, 2
-	note A_, 2
-	stereo_panning TRUE, FALSE
-	volume_envelope 11, 6
-	note B_, 4
-	note G_, 4
-	octave 4
-	note D_, 4
-	octave 3
-	note G_, 4
 	note A_, 4
-	note F#, 4
-	octave 4
-	note D_, 4
-	octave 3
-	note F#, 4
-	note G_, 4
-	note E_, 4
-	octave 4
-	note C_, 4
-	octave 3
-	note E_, 4
-	note F#, 4
-	note D_, 2
-	note F#, 2
-	note G_, 2
-	note G#, 2
-	note A_, 4
-	octave 4
-	note D_, 2
-	octave 3
-	note B_, 2
-	note G_, 2
-	note B_, 2
-	octave 4
-	note D_, 2
-	note G_, 2
-	note D_, 2
-	octave 3
-	note B_, 2
-	octave 4
-	note C_, 2
-	octave 3
-	note A_, 2
-	note F#, 2
-	note A_, 2
-	octave 4
-	note C_, 2
-	note F#, 2
-	note C_, 2
-	octave 3
-	note A_, 2
-	note G_, 2
-	note E_, 2
-	note C_, 2
-	note E_, 2
-	note G_, 2
-	note G#, 2
-	note A_, 2
-	note B_, 2
-	octave 4
-	note C_, 2
-	note C_, 2
-	octave 3
-	note A_, 2
-	note G_, 2
-	note F#, 2
-	note G_, 2
-	note G#, 2
-	note A_, 2
-	sound_loop 0, .mainloop
-
-Music_Bicycle_Ch2:
-	duty_cycle 2
-	vibrato 16, 2, 4
-	stereo_panning TRUE, FALSE
-	note_type 12, 12, 6
-	octave 4
-	note D_, 6
-	note C_, 6
-	octave 3
-	note B_, 4
-	volume_envelope 12, 2
-	octave 4
-	note D_, 2
-	note D_, 1
-	note E_, 1
-	note D_, 2
-	note D_, 1
-	note E_, 1
-	note D_, 2
-	volume_envelope 12, 3
-	note C_, 2
-	octave 3
-	note B_, 2
-	note A_, 2
-.mainloop:
-	stereo_panning TRUE, TRUE
-	duty_cycle 2
-	volume_envelope 12, 3
-	octave 3
-	note B_, 4
-	note G_, 4
-	note A_, 4
-	note F#, 4
-	volume_envelope 12, 2
-	note G_, 2
-	note F#, 2
-	note E_, 2
-	note F#, 2
-	volume_envelope 12, 5
-	note D_, 8
-	volume_envelope 12, 4
-	note E_, 4
-	note G_, 4
-	volume_envelope 12, 2
-	note E_, 2
-	note B_, 2
-	note A_, 2
-	note G_, 2
-	note F#, 2
-	note G_, 2
-	note A_, 2
-	note G_, 2
-	volume_envelope 12, 5
-	note F#, 8
-	volume_envelope 12, 3
-	note B_, 4
-	note G_, 4
-	note A_, 4
-	note F#, 4
-	volume_envelope 12, 2
-	note G_, 2
-	note F#, 2
-	note E_, 2
-	note F#, 2
-	volume_envelope 12, 5
-	note D_, 8
-	volume_envelope 12, 4
-	note E_, 4
-	note G_, 4
-	volume_envelope 12, 2
-	note E_, 2
-	octave 4
-	note E_, 2
-	note D_, 2
-	note C_, 2
-	octave 3
-	note B_, 2
-	octave 4
-	note C_, 2
-	note D_, 2
-	note E_, 2
-	volume_envelope 12, 7
-	note F#, 8
-	stereo_panning FALSE, TRUE
-	sound_call .sub1
-	note F#, 4
-	volume_envelope 12, 3
-	note A_, 2
-	note D_, 2
-	note E_, 2
-	note F_, 2
-	note F#, 4
-	volume_envelope 12, 7
-	sound_call .sub1
-	note F#, 4
-	volume_envelope 12, 3
-	note A_, 2
-	note B_, 2
-	note A_, 2
-	note G_, 2
-	note F#, 4
-	sound_loop 0, .mainloop
-
-.sub1:
-	note G_, 6
-	note B_, 6
-	note G_, 4
-	note F#, 6
-	note A_, 6
-	note F#, 4
+	note G#, 6
 	note E_, 6
-	note G_, 6
-	note E_, 4
-	sound_ret
-
-Music_Bicycle_Ch3:
-	note_type 12, 1, 4
-	rest 16
-	octave 3
-	note A_, 2
-	octave 4
-	note C_, 2
-	octave 3
-	note B_, 2
-	octave 4
-	note D_, 2
-	note C_, 2
-	note E_, 2
-	note D_, 2
-	octave 3
-	note A_, 1
-	rest 1
-.mainloop:
-	sound_call .sub1
-	note E_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note D_, 1
-	rest 1
+	note G#, 4
+	note __, 16
 	octave 2
-	note B_, 1
-	rest 1
+	note E_, 5
+	note __, 1
+	note E_, 1
+	note __, 3
 	octave 3
-	note C_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note C_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note C_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note F#, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note F#, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note F#, 1
-	rest 1
-	sound_call .sub1
-	note E_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note F#, 1
-	rest 1
+	note E_, 2
+	note D#, 2
+	note E_, 2
+	octave 2
+	note G#, 2
+	note G#, 2
+	note __, 2
+	note G#, 4
+	octave 3
+	note E_, 2
+	note D#, 2
+	note E_, 2
+	octave 2
+	note A_, 4
+	note B_, 4
+	octave 3
+	note C#, 4
+	note E_, 4
+	note F#, 4
+	note E_, 4
+	note F#, 4
+	note G#, 4
+	octave 2
+	note G#, 5
+	note __, 1
+	note G#, 1
+	note __, 3
+	note G#, 6
+	octave 3
+	note A_, 6
+	note B_, 6
+	note A_, 4
+	note G#, 6
+	note E_, 8
+	note __, 2
+	note E_, 6
+	note D#, 2
+	note __, 2
+	note E_, 2
+	note __, 2
+	note E_, 8
+	note D#, 10
+	note G#, 2
+	note __, 2
+	note G#, 2
+	note __, 2
+	note G#, 2
+	note __, 2
+	note G#, 2
+	note __, 2
+	note F#, 2
+	note __, 2
+	octave 2
+	note B_, 2
+	octave 3
+	note F#, 2
+	note __, 2
+	note G#, 6
+	note G#, 2
+	note __, 2
+	note G#, 2
+	note __, 2
+	note G#, 2
+	note __, 2
+	note G#, 2
+	note __, 2
+	note F#, 2
+	note __, 2
+	octave 2
+	note B_, 2
+	octave 3
+	note F#, 2
+	note __, 2
+	note B_, 6
+	note G#, 2
+	note __, 2
+	note G#, 2
+	note __, 2
+	note G#, 2
+	note __, 2
+	note G#, 2
+	note __, 2
+	note F#, 2
+	note __, 2
+	octave 2
+	note B_, 2
+	octave 3
+	note F#, 2
+	note __, 2
+	note G#, 4
+	note G#, 10
+	note __, 6
+	note G#, 8
+	note B_, 4
+	loopchannel 0, KalosBicycle_Ch1_sub_0
+
+KalosBicycle_Ch2::
+	dutycycle $1
+	notetype $c, $c7
+	vibrato $10, $00
+
+KalosBicycle_Ch2_sub_0:
+	notetype $c, $c8
+	dutycycle $2
+	octave 4
+	note E_, 2
+	note D#, 2
+	note E_, 2
+	octave 3
+	note G#, 8
+	note __, 2
+	octave 4
+	note E_, 2
+	note D#, 2
+	note E_, 2
+	octave 3
+	note A_, 4
+	note B_, 4
+	octave 4
+	note C#, 4
+	notetype $6, $c7
+	note E_, 7
 	note F_, 1
-	rest 1
+	notetype $c, $c7
+	note F#, 4
+	note E_, 4
+	note F#, 4
+	note G#, 4
+	vibrato $0, $23
+	note E_, 5
+	vibrato $10, $00
+	note __, 1
 	note E_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note C_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note C_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note F#, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note A_, 1
-	rest 1
+	note __, 3
+	note D_, 6
+	note C#, 6
+	note D#, 6
+	note C#, 3
+	note __, 1
+	octave 3
+	note B_, 6
 	octave 4
-	note D_, 1
-	rest 1
-	note C_, 1
-	rest 1
+	note E_, 4
 	octave 3
-	note B_, 1
-	rest 1
-	note A_, 1
-	rest 1
-.loop1:
-	note G_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note B_, 1
-	rest 1
+	note G#, 2
+	note A_, 2
+	note B_, 2
+	note A_, 4
+	note G#, 4
+	note F#, 4
+	note E_, 4
+	note F#, 5
+	note __, 1
 	note F#, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note F#, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note C_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note C_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note F#, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note F#, 1
-	rest 1
+	dutycycle $3
+	notetype $6, $c7
+	vibrato $8, $23
+	octave 5
+	note __, 5
+	note D#, 1
+	notetype $c, $c7
+	note E_, 2
+	note D#, 2
+	note E_, 2
 	octave 4
-	note C_, 1
-	rest 1
-	octave 3
-	note B_, 1
-	rest 1
-	note A_, 1
-	rest 1
-	sound_loop 2, .loop1
-	sound_loop 0, .mainloop
+	note G#, 8
+	notetype $6, $c7
+	note __, 3
+	octave 5
+	note D#, 1
+	notetype $c, $c7
+	note E_, 2
+	note D#, 2
+	note E_, 2
+	octave 4
+	note A_, 4
+	note B_, 4
+	octave 5
+	note C#, 4
+	note E_, 4
+	note F#, 4
+	note E_, 4
+	note F#, 4
+	note G#, 4
+	note E_, 5
+	note __, 1
+	note E_, 1
+	note __, 3
+	note D_, 6
+	note C#, 6
+	note D#, 6
+	note C#, 3
+	note __, 1
+	octave 4
+	note B_, 6
+	octave 5
+	note E_, 8
+	note __, 2
+	note E_, 6
+	note D#, 2
+	note __, 2
+	note E_, 2
+	note __, 2
+	note E_, 8
+	note D#, 10
+	vibrato $10, $23
+	notetype $c, $c4
+	dutycycle $1
+	octave 4
+	note G#, 8
+	note E_, 4
+	octave 5
+	note C#, 4
+	octave 4
+	note B_, 2
+	note A_, 2
+	note G#, 2
+	note E_, 2
+	note __, 2
+	note E_, 6
+	note G#, 8
+	note E_, 4
+	octave 5
+	note E_, 4
+	note D#, 2
+	note E_, 2
+	note F#, 2
+	note G#, 2
+	note __, 2
+	note G#, 6
+	note C#, 8
+	octave 4
+	note G#, 4
+	octave 5
+	note E_, 4
+	note D#, 2
+	note C#, 2
+	octave 4
+	note B_, 2
+	note G#, 2
+	note __, 2
+	note G#, 4
+	octave 5
+	note C_, 10
+	octave 4
+	note G#, 4
+	octave 5
+	note D#, 2
+	note C#, 8
+	note D#, 4
+	loopchannel 0, KalosBicycle_Ch2_sub_0
 
-.sub1:
-	octave 3
-	note G_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	sound_ret
+KalosBicycle_Ch3::
+	stereopanning $ff
+	vibrato $0, $0
+	notetype $c, $16
 
-Music_Bicycle_Ch4:
-	toggle_noise 0
-	drum_speed 12
-	rest 16
-	rest 16
-.mainloop:
-	rest 2
-.loop1:
-	stereo_panning TRUE, FALSE
-	drum_note 6, 4
-	sound_loop 12, .loop1
-	drum_note 6, 4
-	drum_note 6, 4
-	stereo_panning TRUE, TRUE
-	drum_note 6, 2
-	drum_note 6, 2
-	drum_note 6, 2
-	sound_loop 0, .mainloop
+KalosBicycle_Ch3_sub_0:
+	note __, 6
+
+	octave 2
+	note E_, 2
+	note E_, 3
+	note __, 1
+	note B_, 4
+	note E_, 2
+	note F#, 2
+	note G#, 2
+	note F#, 2
+	note F#, 3
+	note __, 1
+	octave 3
+	note C#, 4
+	octave 2
+	note F#, 2
+	note A_, 2
+	note A_, 2
+	octave 3
+	note C_, 2
+	note C_, 2
+	octave 2
+	note G#, 2
+	note G#, 2
+	note F#, 2
+	note E_, 2
+	note F#, 2
+	note C#, 2
+	octave 3
+	note C#, 5
+	note __, 1
+	note C#, 1
+	note __, 3
+	octave 2
+	note B_, 6
+	note A_, 2
+	note A_, 2
+	note __, 2
+	octave 3
+	note E_, 4
+	octave 2
+	note A_, 2
+	note B_, 2
+	note A_, 2
+	note G#, 2
+	note F#, 2
+	note G#, 2
+	octave 3
+	note C#, 4
+	note C#, 2
+	note E_, 2
+	note C#, 2
+	note D_, 2
+	note D_, 2
+	octave 2
+	note A_, 2
+	note A_, 2
+	octave 3
+	note D_, 2
+	note D_, 2
+	octave 2
+	note F#, 2
+	note F#, 2
+	note B_, 5
+	note __, 1
+	note B_, 1
+	note __, 9
+	note E_, 2
+	note E_, 3
+	note __, 1
+	note B_, 4
+	note E_, 2
+	note F#, 2
+	note G#, 2
+	note F#, 2
+	note F#, 3
+	note __, 1
+	octave 3
+	note C#, 4
+	octave 2
+	note F#, 2
+	note A_, 2
+	note A_, 2
+	octave 3
+	note C_, 2
+	note C_, 2
+	octave 2
+	note G#, 2
+	note G#, 2
+	note F#, 2
+	note E_, 2
+	note F#, 2
+	note C#, 2
+	octave 3
+	note C#, 5
+	note __, 1
+	note C#, 1
+	note __, 3
+	octave 2
+	note B_, 6
+	note A_, 2
+	note A_, 2
+	note __, 2
+	octave 3
+	note D#, 4
+	octave 2
+	note A_, 2
+	note B_, 2
+	note A_, 2
+	note G#, 2
+	note F#, 2
+	note G#, 2
+	octave 3
+	note C#, 4
+	note C#, 2
+	note E_, 2
+	note C#, 2
+	octave 2
+	note F#, 6
+	note B_, 2
+	note __, 2
+	note B_, 2
+	note __, 2
+	octave 3
+	note E_, 8
+	note F#, 10
+	note E_, 2
+	note __, 2
+	note E_, 2
+	note __, 2
+	note E_, 2
+	note __, 2
+	note E_, 2
+	note __, 2
+	octave 2
+	note B_, 2
+	note A_, 2
+	note G#, 2
+	note E_, 2
+	note __, 2
+	note E_, 6
+	octave 3
+	note E_, 2
+	note __, 2
+	note E_, 2
+	note __, 2
+	note E_, 2
+	note __, 2
+	note E_, 2
+	note __, 2
+	octave 2
+	note B_, 2
+	note A_, 2
+	note G#, 2
+	note E_, 2
+	note __, 2
+	note E_, 6
+	octave 3
+	note E_, 2
+	note __, 2
+	note E_, 2
+	note __, 2
+	note E_, 2
+	note __, 2
+	note E_, 2
+	note __, 2
+	octave 2
+	note B_, 2
+	note A_, 2
+	note G#, 2
+	note E_, 2
+	note __, 2
+	note E_, 4
+	octave 3
+	note D#, 2
+	note G#, 2
+	note G#, 2
+	note C_, 2
+	note C_, 2
+	note D#, 2
+	note D#, 2
+	note C_, 2
+	note A_, 4
+	note D#, 2
+	note F#, 2
+	note B_, 4
+	loopchannel 0, KalosBicycle_Ch3_sub_0
+
+KalosBicycle_Ch4::
+	togglenoise $3
+	notetype $c
+	note __, 6
+
+KalosBicycle_Ch4_0:
+	callchannel KalosBicycle_Ch4_sub_0
+	callchannel KalosBicycle_Ch4_sub_0
+	callchannel KalosBicycle_Ch4_sub_0
+	callchannel KalosBicycle_Ch4_sub_0
+	callchannel KalosBicycle_Ch4_sub_0
+	callchannel KalosBicycle_Ch4_sub_0
+	callchannel KalosBicycle_Ch4_sub_0
+	callchannel KalosBicycle_Ch4_sub_0
+	callchannel KalosBicycle_Ch4_sub_1
+	callchannel KalosBicycle_Ch4_sub_1
+	callchannel KalosBicycle_Ch4_sub_1
+	callchannel KalosBicycle_Ch4_sub_1
+	callchannel KalosBicycle_Ch4_sub_1
+	callchannel KalosBicycle_Ch4_sub_1
+	note __, 4
+	note A#, 4
+	note B_, 8
+	note __, 4
+	note A#, 4
+	note B_, 8
+	loopchannel 0, KalosBicycle_Ch4_0
+
+KalosBicycle_Ch4_sub_0:
+	note C#, 4
+	note D_, 4
+	note C#, 4
+	note D_, 4
+	note C#, 4
+	note D_, 4
+	note C#, 2
+	note D_, 2
+	note D_, 4
+	endchannel
+
+KalosBicycle_Ch4_sub_1:
+	note C#, 2
+	note D_, 2
+	note C#, 2
+	note D_, 2
+	note C#, 2
+	note D_, 2
+	note C#, 2
+	note D_, 2
+	endchannel
