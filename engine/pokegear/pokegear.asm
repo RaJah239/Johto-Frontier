@@ -2570,12 +2570,9 @@ Pokedex_GetArea:
 	ld a, [hl]
 	and B_BUTTON
  	jr nz, .b
- 	and A_BUTTON
- 	jr nz, .a
 	ldh a, [hJoypadDown]
 	and SELECT
 	jr nz, .select
-	call .LeftRightInput
 	call .BlinkNestIcons
 	jr .next
 
@@ -2585,49 +2582,12 @@ Pokedex_GetArea:
 	call DelayFrame
 	jr .loop
 
-.a
- 	
 .b
 	call ClearSprites
 	pop af
 	ld [wTownMapCursorLandmark], a
 	pop af
 	ld [wTownMapPlayerIconLandmark], a
-	ret
-
-.LeftRightInput:
-	ld a, [hl]
-	and D_LEFT
-	jr nz, .left
-	ld a, [hl]
-	and D_RIGHT
-	jr nz, .right
-	ret
-
-.left
-	ldh a, [hWY]
-	cp SCREEN_HEIGHT_PX
-	ret z
-	call ClearSprites
-	ld a, SCREEN_HEIGHT_PX
-	ldh [hWY], a
-	xor a ; JOHTO_REGION
-	call .GetAndPlaceNest
-	ret
-
-.right
-; only reveal Kanto map if beaten league
- 	ld a, [wStatusFlags]
- 	bit STATUSFLAGS_HALL_OF_FAME_F, a
- 	ret z
-	ldh a, [hWY]
-	and a
-	ret z
-	call ClearSprites
-	xor a
-	ldh [hWY], a
-	ld a, KANTO_REGION
-	call .GetAndPlaceNest
 	ret
 
 .BlinkNestIcons:
