@@ -106,7 +106,9 @@ CheckDailyResetTimer::
 	ret nc
 	xor a
 	ld hl, wDailyFlags1
+rept 2					; This clears wDailyFlags1 2 times - therefore this must be the same number as wDailyFlags1:: ds 2 in wram.asm
 	ld [hli], a ; wDailyFlags1
+endr					; this to tells rept 2 to only clear wDailyFlag1 up to here
 	ld [hli], a ; wDailyFlags2
 	ld [hli], a ; wSwarmFlags
 	ld [hl], a  ; wSwarmFlags + 1

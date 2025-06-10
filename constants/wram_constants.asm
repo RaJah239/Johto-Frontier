@@ -316,6 +316,9 @@ DEF CELEBIEVENT_FOREST_IS_RESTLESS_F EQU 2
 	const DAILYFLAGS1_GOLDENROD_UNDERGROUND_BARGAIN_F ; 6
 	const DAILYFLAGS1_TRAINER_HOUSE_F                 ; 7
 
+; Overworld states that get reset daily
+	const DAILYFLAGS1_HEADBUTT_ACTIVE
+
 ; wDailyFlags2::
 	const_def
 	const DAILYFLAGS2_MT_MOON_SQUARE_CLEFAIRY_F           ; 0

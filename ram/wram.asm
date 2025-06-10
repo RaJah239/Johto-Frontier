@@ -3239,10 +3239,10 @@ wWhichMomItemSet:: db
 wMomItemTriggerBalance:: ds 3
 
 wDailyResetTimer:: dw
-wDailyFlags1:: db
+wDailyFlags1:: ds 2 ; Has 16 right now but only uses 9
 wDailyFlags2:: db
 wSwarmFlags:: db
-	ds 2
+	ds 1
 wTimerEventStartDay:: db
 
 wFruitTreeFlags:: flag_array NUM_FRUIT_TREES
