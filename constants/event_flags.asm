@@ -270,7 +270,8 @@
 	const EVENT_TIFFANY_GAVE_PINK_BOW
 ; Johto Frontier events
 	const EVENT_MET_VIOLET
-; Unused: next 338 events
+	const EVENT_CIANWOOD_GYM_BLOCKER
+; Unused: next 337 events
 
 	const_next 600
 ; Kurt Apricorn events
