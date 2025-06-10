@@ -22,7 +22,7 @@ ResetCianwoodGymTrainersCallback:
 .ResetTrainers
 	clearevent EVENT_BEAT_BLACKBELT_YOSHI
 	clearevent EVENT_BEAT_BLACKBELT_LAO
-	clearevent EVENT_BEAT_BLACKBELT_NOB
+	clearevent EVENT_BEAT_SAILOR_STEELE
 	clearevent EVENT_BEAT_BLACKBELT_LUNG
     endcallback
 
@@ -66,7 +66,7 @@ CianwoodGymChuckScript:
 	iftrue .AlreadyGotTM
 	setevent EVENT_BEAT_BLACKBELT_YOSHI
 	setevent EVENT_BEAT_BLACKBELT_LAO
-	setevent EVENT_BEAT_BLACKBELT_NOB
+	setevent EVENT_BEAT_SAILOR_STEELE
 	setevent EVENT_BEAT_BLACKBELT_LUNG
 	writetext ChuckExplainBadgeText
 	promptbutton
@@ -118,13 +118,13 @@ TrainerBlackbeltLao:
 	closetext
 	end
 
-TrainerBlackbeltNob:
-	trainer BLACKBELT_T, NOB, EVENT_BEAT_BLACKBELT_NOB, BlackbeltNobSeenText, BlackbeltNobBeatenText, 0, .Script
+TrainerSailorSteele:
+	trainer SAILOR, STEELE, EVENT_BEAT_SAILOR_STEELE, SailorSteeleSeenText, SailorSteeleBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
 	opentext
-	writetext BlackbeltNobAfterText
+	writetext SailorSteeleAfterText
 	waitbutton
 	closetext
 	end
@@ -284,19 +284,17 @@ BlackbeltLaoAfterText:
 	cont "chics…"
 	done
 
-BlackbeltNobSeenText:
-	text "Words are useless."
-	line "Let your fists do"
-	cont "the talking!"
+SailorSteeleSeenText:
+	text "I'm all rested now"
+	line "so let's battle!"
 	done
 
-BlackbeltNobBeatenText:
-	text "…"
+SailorSteeleBeatenText:
+	text "You're tough!"
 	done
 
-BlackbeltNobAfterText:
-	text "I lost! "
-	line "I'm speechless!"
+SailorSteeleAfterText:
+	text "I'm tired again…"
 	done
 
 BlackbeltLungSeenText:
@@ -332,7 +330,7 @@ CianwoodGym_MapEvents:
 	object_event  4,  1, SPRITE_CHUCK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, CianwoodGymChuckScript, -1
 	object_event  2, 12, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerBlackbeltYoshi, -1
 	object_event  7, 12, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerBlackbeltLao, -1
-	object_event  3,  9, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 2, TrainerBlackbeltNob, -1
+	object_event  3,  9, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_TRAINER, 2, TrainerSailorSteele, -1
 	object_event  5,  5, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 1, TrainerBlackbeltLung, -1
 	object_event  5,  1, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CianwoodGymBoulder, -1
 	object_event  3,  7, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CianwoodGymBoulder, -1
