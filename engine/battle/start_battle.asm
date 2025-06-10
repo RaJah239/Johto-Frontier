@@ -53,19 +53,10 @@ PlayBattleMusic:
 	and a
 	jr nz, .trainermusic
 
-	farcall RegionCheck
-	ld a, e
-	and a
-	jr nz, .kantowild
-
 	ld de, MUSIC_JOHTO_WILD_BATTLE
 	ld a, [wTimeOfDay]
 	cp NITE_F
 	jr c, .done ; not NITE_F or EVE_F
-	ld de, MUSIC_JOHTO_WILD_BATTLE_NIGHT
-	jr .done
-
-.kantowild
 	ld de, MUSIC_KANTO_WILD_BATTLE
 	jr .done
 

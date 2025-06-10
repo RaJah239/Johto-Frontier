@@ -99,8 +99,6 @@ INCLUDE "audio/music/cherrygrovecity.asm"
 INCLUDE "audio/music/unioncave.asm"
 
 INCLUDE "audio/music/johtowildbattle.asm"
-INCLUDE "audio/music/johtowildbattlenight.asm"
-assert BANK(Music_JohtoWildBattle) == BANK(Music_JohtoWildBattleNight)
 
 INCLUDE "audio/music/johtotrainerbattle.asm"
 INCLUDE "audio/music/lookyoungster.asm"

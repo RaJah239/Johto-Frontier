@@ -74,7 +74,6 @@
 	const MUSIC_ROUTE_37                     ; 47
 	const MUSIC_ROCKET_HIDEOUT               ; 48
 	const MUSIC_DRAGONS_DEN                  ; 49
-	const MUSIC_JOHTO_WILD_BATTLE_NIGHT      ; 4a
 	const MUSIC_RUINS_OF_ALPH_RADIO          ; 4b
 	const MUSIC_CAPTURE                      ; 4c
 	const MUSIC_ROUTE_26                     ; 4d
