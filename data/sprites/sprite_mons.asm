@@ -17,7 +17,7 @@ SpriteMons:
 	db PIKACHU
 	db CLEFAIRY
 	db CHARMANDER
-	db JYNX
+	db NATU
 	db STARMIE
 	db DITTO
 	db RAIKOU
