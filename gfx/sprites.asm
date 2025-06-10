@@ -104,3 +104,4 @@ SECTION "Sprites 3", ROMX
 ChrisSurfSpriteGFX::           INCBIN "gfx/sprites/chris_surf.2bpp"
 KrisSurfSpriteGFX::            INCBIN "gfx/sprites/kris_surf.2bpp"
 ChanseyOWSpriteGFX::           INCBIN "gfx/sprites/chansey_ow.2bpp"
+PorygonOWSpriteGFX::           INCBIN "gfx/sprites/porygon_ow.2bpp"
