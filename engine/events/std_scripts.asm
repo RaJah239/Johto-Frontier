@@ -56,6 +56,7 @@ StdScripts::
 	add_stdscript GameCornerCoinVendorScript
 	add_stdscript HappinessCheckScript
 	add_stdscript ChanseyHealsOWScript
+	add_stdscript PorygonPCScript
 
 ChanseyHealsOWScript:
 	faceplayer
@@ -248,6 +249,9 @@ Radio2Script:
 TrashCanScript:
 	farjumptext TrashCanText
 
+PorygonPCScript:
+	faceplayer
+	cry PORYGON
 PCScript:
 	opentext
 	special PokemonCenterPC
