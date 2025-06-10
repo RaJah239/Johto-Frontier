@@ -4,7 +4,6 @@
 
 TimeCapsule_CatchRateItems:
 	db ITEM_2D, BITTER_BERRY
-	db ITEM_64, BERRY
 	db ITEM_78, BERRY
 	db ITEM_87, BERRY
 	db ITEM_BE, BERRY

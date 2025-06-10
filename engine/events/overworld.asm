@@ -742,10 +742,6 @@ WaterfallFunction:
 	ret
 
 .TryWaterfall:
-	ld de, ENGINE_RISINGBADGE
-	farcall CheckBadge
-	ld a, $80
-	ret c
 	call CheckMapCanWaterfall
 	jr c, .failed
 	ld hl, Script_WaterfallFromMenu
@@ -809,29 +805,12 @@ Script_UsedWaterfall:
 	text_end
 
 TryWaterfallOW::
-; Step 1
-	ld de, ENGINE_RISINGBADGE
-	call CheckEngineFlag
-	jr c, .failed
-
-; Step 2
-	ld a, HM_WATERFALL
+	ld a, GEYSER_BOOTS
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem
-	jr z, .failed
+	jr nc, .failed
 
-; Step 3
-	ld d, WATERFALL
-	call CheckPartyCanLearnMove
-	and a
-	jr z, .yes
-
-; Step 4
-	ld d, WATERFALL
-	call CheckPartyMove
-	jr c, .failed
-.yes
 	call CheckMapCanWaterfall
 	jr c, .failed
 	ld a, BANK(Script_AskWaterfall)

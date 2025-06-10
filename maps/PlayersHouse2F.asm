@@ -59,6 +59,7 @@ if DEF(_DEBUG)
 	giveitem POWER_GLOVE
 	giveitem PADDLE_BOAT
 	giveitem STABILIZER
+	giveitem GEYSER_BOOTS
 	; good party
 	givepoke MEW, 50, LEFTOVERS
 	givepoke SMEARGLE, 50, FOCUS_BAND

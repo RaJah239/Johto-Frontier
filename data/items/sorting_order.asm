@@ -242,6 +242,7 @@ ItemNameOrder:
 	db PADDLE_BOAT
 	db POWER_GLOVE
 	db STABILIZER
+	db GEYSER_BOOTS
 
 ; Temporary Key Items
 	db BASEMENT_KEY
@@ -262,7 +263,6 @@ ItemNameOrder:
 	db EGG_TICKET
 	db POKE_FLUTE
 	db ITEM_2D
-	db ITEM_64
 	db ITEM_78
 	db ITEM_87
 	db ITEM_88
