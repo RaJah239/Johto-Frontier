@@ -6,6 +6,7 @@
 	const UNIONCAVEB1F_POKE_BALL1
 	const UNIONCAVEB1F_BOULDER
 	const UNIONCAVEB1F_POKE_BALL2
+	const UNIONCAVEB1F_CHANSEY
 
 UnionCaveB1F_MapScripts:
 	def_scene_scripts
@@ -150,6 +151,9 @@ PokemaniacCalvinAfterBattleText:
 	cont "PROF.ELM."
 	done
 
+UnionCaveChanseyScript:
+	jumpstd ChanseyHealsOWScript
+
 UnionCaveB1F_MapEvents:
 	db 0, 0 ; filler
 
@@ -172,3 +176,4 @@ UnionCaveB1F_MapEvents:
 	object_event  2, 16, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, UnionCaveB1FTMSwift, EVENT_UNION_CAVE_B1F_TM_SWIFT
 	object_event  7, 10, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, UnionCaveB1FBoulder, -1
 	object_event 17, 23, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, UnionCaveB1FXDefend, EVENT_UNION_CAVE_B1F_X_DEFEND
+	object_event  5, 19, SPRITE_CHANSEY_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, UnionCaveChanseyScript, -1
