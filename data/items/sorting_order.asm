@@ -233,12 +233,12 @@ ItemNameOrder:
 
 ; Key Items that are possibly seldom used
 	db CLEAR_BELL
-	db S_S_TICKET
 	db SILVER_WING
 	db RAINBOW_WING
 
 ; HM items
 	db AXE
+	db LANTERN
 	db PADDLE_BOAT
 	db POWER_GLOVE
 

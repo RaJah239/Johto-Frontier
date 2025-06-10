@@ -68,7 +68,7 @@ ItemDescriptions:
 	dw ElixerDesc
 	dw RedScaleDesc
 	dw SecretPotionDesc
-	dw SSTicketDesc
+	dw LanternDesc
 	dw MysteryEggDesc
 	dw ClearBellDesc
 	dw SilverWingDesc
@@ -525,9 +525,9 @@ SecretPotionDesc:
 	db   "Fully heals any"
 	next "#MON.@"
 
-SSTicketDesc:
-	db   "A ticket for the"
-	next "S.S.AQUA.@"
+LanternDesc:
+	db   "Illuminates the"
+	next "darkest areas!@"
 
 MysteryEggDesc:
 	db   "An EGG obtained"

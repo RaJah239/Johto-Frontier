@@ -67,7 +67,7 @@ ItemNames::
 	li "ELIXER"
 	li "RED SCALE"
 	li "SECRETPOTION"
-	li "S.S.TICKET"
+	li "LANTERN"
 	li "MYSTERY EGG"
 	li "CLEAR BELL"
 	li "SILVER WING"

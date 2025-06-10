@@ -369,15 +369,7 @@ MonSubMenu_GetNextEvoAttackByte:
 	ret
 
 CanUseFlash:
-; Step 1: Badge Check
-	ld de, ENGINE_ZEPHYRBADGE
-	ld b, CHECK_FLAG
-	farcall EngineFlagAction
-	ld a, c
-	and a
-	ret z ; .fail, dont have needed badge
-
-; Step 2: Location Check
+; Location Check
 	farcall SpecialAerodactylChamber
 	jr c, .valid_location ; can use flash
 	ld a, [wTimeOfDayPalset]
@@ -385,34 +377,10 @@ CanUseFlash:
 	ret nz ; .fail ; not a darkcave
 
 .valid_location
-; Step 3: Check if Mon knows Move
-	ld a, FLASH
-	call CheckMonKnowsMove
-	and a
-	jr z, .yes
-
-; Step 4: Check for TM/HM in bag
-	ld a, HM_FLASH
-	ld [wCurItem], a
-	ld hl, wNumItems
-	call CheckItem
-	ret nc ; hm isnt in bag
-
-; Step 5: Check if Mon can learn move from TM/HM/Move Tutor
-	ld a, FLASH
-	call CheckMonCanLearn_TM_HM
-	jr c, .yes
-
-; Step 6: Check if Mon can learn move from LVL-UP
-	ld a, FLASH
-	call CheckLvlUpMoves
-	ret c ; fail
-
-.yes
 	ld a, MONMENUITEM_FLASH
 	call AddMonMenuItem
 	ret
-	
+
 	CanUseFly:
 ; Step 1: Badge Check
 	ld de, ENGINE_STORMBADGE
