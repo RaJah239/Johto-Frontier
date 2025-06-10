@@ -1199,9 +1199,6 @@ WhirlpoolFunction:
 	dw .FailWhirlpool
 
 .TryWhirlpool:
-	ld de, ENGINE_GLACIERBADGE
-	call CheckBadge
-	jr c, .noglacierbadge
 	call TryWhirlpoolMenu
 	jr c, .failed
 	ld a, $1
@@ -1209,10 +1206,6 @@ WhirlpoolFunction:
 
 .failed
 	ld a, $2
-	ret
-
-.noglacierbadge
-	ld a, $80
 	ret
 
 .DoWhirlpool:
@@ -1310,33 +1303,12 @@ Script_UsedWhirlpool:
 	step_end
 
 TryWhirlpoolOW::
-; Step 1
-	ld de, ENGINE_GLACIERBADGE
-	ld b, CHECK_FLAG
-	farcall EngineFlagAction
-	ld a, c
-	and a
-	jr z, .failed  ; .fail, dont have needed badge
-
-; Step 2
-	ld a, HM_WHIRLPOOL
+	ld a, STABILIZER
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem
-	jr z, .failed
+	jr nc, .failed
 
-; Step 3
-	ld d, WHIRLPOOL
-	call CheckPartyCanLearnMove
-       and a
-	jr z, .yes
-
-; Step 4
-	ld d, WHIRLPOOL
-	call CheckPartyMove
-	jr c, .failed
-
-.yes
 	call TryWhirlpoolMenu
 	jr c, .failed
 	ld a, BANK(Script_AskWhirlpoolOW)

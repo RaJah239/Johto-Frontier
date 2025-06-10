@@ -405,25 +405,22 @@ _BouldersMayMoveText::
 	done
 
 _UseWhirlpoolText::
-	text_ram wStringBuffer2
-	text " used"
-	line "WHIRLPOOL!"
+	text "Crossing gently…"
 	prompt
 
 _MayPassWhirlpoolText::
 	text "It's a vicious"
-	line "whirlpool!"
-
-	para "A #MON may be"
-	line "able to pass it."
+	line "WHIRLPOOL!"
+	
+	para "An item is needed"
+	line "to get past it."
 	done
 
 _AskWhirlpoolText::
-	text "A whirlpool is in"
+	text "A WHIRLPOOL is in"
 	line "the way."
 
-	para "Want to use"
-	line "WHIRLPOOL?"
+	para "Want to cross it?"
 	done
 
 _UseHeadbuttText::
