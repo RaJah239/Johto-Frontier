@@ -12,6 +12,18 @@ GoldenrodGym_MapScripts:
 	scene_script GoldenrodGymNoop2Scene, SCENE_GOLDENRODGYM_WHITNEY_STOPS_CRYING
 
 	def_callbacks
+    callback MAPCALLBACK_NEWMAP, ResetGoldenrodGymTrainersCallback
+
+ResetGoldenrodGymTrainersCallback:
+    checkevent EVENT_BEAT_WHITNEY
+    iffalse .ResetTrainers
+    endcallback
+.ResetTrainers
+	clearevent EVENT_BEAT_BEAUTY_VICTORIA
+	clearevent EVENT_BEAT_BEAUTY_SAMANTHA
+	clearevent EVENT_BEAT_LASS_CARRIE
+	clearevent EVENT_BEAT_LASS_BRIDGET
+    endcallback
 
 GoldenrodGymNoop1Scene:
 	end

@@ -13,6 +13,18 @@ CianwoodGym_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
+    callback MAPCALLBACK_NEWMAP, ResetCianwoodGymTrainersCallback
+
+ResetCianwoodGymTrainersCallback:
+    checkevent EVENT_BEAT_CHUCK
+    iffalse .ResetTrainers
+    endcallback
+.ResetTrainers
+	clearevent EVENT_BEAT_BLACKBELT_YOSHI
+	clearevent EVENT_BEAT_BLACKBELT_LAO
+	clearevent EVENT_BEAT_BLACKBELT_NOB
+	clearevent EVENT_BEAT_BLACKBELT_LUNG
+    endcallback
 
 CianwoodGymChuckScript:
 	faceplayer

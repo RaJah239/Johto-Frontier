@@ -10,6 +10,19 @@ BlackthornGym1F_MapScripts:
 
 	def_callbacks
 	callback MAPCALLBACK_TILES, BlackthornGym1FBouldersCallback
+    callback MAPCALLBACK_NEWMAP, ResetBlackthornGymTrainersCallback
+
+ResetBlackthornGymTrainersCallback:
+    checkevent EVENT_BEAT_CLAIR
+    iffalse .ResetTrainers
+    endcallback
+.ResetTrainers
+	clearevent EVENT_BEAT_COOLTRAINERM_PAUL
+	clearevent EVENT_BEAT_COOLTRAINERM_CODY
+	clearevent EVENT_BEAT_COOLTRAINERM_MIKE
+	clearevent EVENT_BEAT_COOLTRAINERF_FRAN
+	clearevent EVENT_BEAT_COOLTRAINERF_LOLA
+    endcallback
 
 BlackthornGym1FBouldersCallback:
 	checkevent EVENT_BOULDER_IN_BLACKTHORN_GYM_1

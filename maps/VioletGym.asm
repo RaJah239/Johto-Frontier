@@ -8,6 +8,16 @@ VioletGym_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
+    callback MAPCALLBACK_NEWMAP, ResetVioletGymTrainersCallback
+
+ResetVioletGymTrainersCallback:
+    checkevent EVENT_BEAT_FALKNER
+    iffalse .ResetTrainers
+    endcallback
+.ResetTrainers
+    clearevent EVENT_BEAT_BIRD_KEEPER_ROD
+    clearevent EVENT_BEAT_BIRD_KEEPER_ABE
+    endcallback
 
 VioletGymFalknerScript:
 	faceplayer

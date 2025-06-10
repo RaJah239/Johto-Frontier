@@ -11,6 +11,18 @@ AzaleaGym_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
+    callback MAPCALLBACK_NEWMAP, ResetAzaleaGymTrainersCallback
+
+ResetAzaleaGymTrainersCallback:
+    checkevent EVENT_BEAT_BUGSY
+    iffalse .ResetTrainers
+    endcallback
+.ResetTrainers
+	clearevent EVENT_BEAT_TWINS_AMY_AND_MAY
+	clearevent EVENT_BEAT_BUG_CATCHER_BENNY
+	clearevent EVENT_BEAT_BUG_CATCHER_AL
+	clearevent EVENT_BEAT_BUG_CATCHER_JOSH
+    endcallback
 
 AzaleaGymBugsyScript:
 	faceplayer
