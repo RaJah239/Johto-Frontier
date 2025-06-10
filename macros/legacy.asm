@@ -401,6 +401,7 @@ DEF receivetogepiegg      EQUS "ReceiveTogepiEggScript"
 DEF pcscript              EQUS "PCScript"
 DEF gamecornercoinvendor  EQUS "GameCornerCoinVendorScript"
 DEF happinesschecknpc     EQUS "HappinessCheckScript"
+DEF chanseyhealow         EQUS "ChanseyHealsOWScript"
 
 ; constants/charmap.asm
 charmap "%", "<BSP>"
