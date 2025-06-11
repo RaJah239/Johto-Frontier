@@ -101,6 +101,10 @@
 
 ; Overworld states that get reset daily
 	const ENGINE_HEADBUTT_ACTIVE
+	const ENGINE_SURF_ACTIVE
+	const ENGINE_WHIRPOOL_ACTIVE
+	const ENGINE_WATERFALL_ACTIVE
+	const ENGINE_ROCK_SMASH_ACTIVE
 
 
 ; wDailyFlags2

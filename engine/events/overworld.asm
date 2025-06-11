@@ -497,9 +497,8 @@ UsedSurfScript:
 	writetext UsedSurfText ; "used SURF!"
 	waitbutton
 	closetext
-
-	callasm .stubbed_fn
-
+	setflag ENGINE_SURF_ACTIVE
+AutoSurfScript:
 	readmem wSurfingPlayerState
 	writevar VAR_MOVEMENT
 
@@ -507,10 +506,6 @@ UsedSurfScript:
 	special PlayMapMusic
 	special SurfStartStep
 	end
-
-.stubbed_fn
-	farcall StubbedTrainerRankings_Surf
-	ret
 
 UsedSurfText:
 	text_far _UsedSurfText
@@ -631,6 +626,8 @@ TrySurfOW::
 	ret
 
 AskSurfScript:
+	checkflag ENGINE_SURF_ACTIVE
+	iftrue AutoSurfScript
 	opentext
 	writetext AskSurfText
 	yesorno
@@ -775,9 +772,13 @@ Script_WaterfallFromMenu:
 
 Script_UsedWaterfall:
 	callasm GetPartyNickname
-	writetext .UseWaterfallText
+	farwritetext _UseWaterfallText
 	waitbutton
 	closetext
+	setflag ENGINE_WATERFALL_ACTIVE
+	; fallthrough
+Script_AutoWaterfall:
+	waitsfx
 	playsound SFX_BUBBLEBEAM
 .loop
 	applymovement PLAYER, .WaterfallStep
@@ -799,10 +800,6 @@ Script_UsedWaterfall:
 .WaterfallStep:
 	turn_waterfall UP
 	step_end
-
-.UseWaterfallText:
-	text_far _UseWaterfallText
-	text_end
 
 TryWaterfallOW::
 	ld a, GEYSER_BOOTS
@@ -834,6 +831,8 @@ Script_CantDoWaterfall:
 	text_end
 
 Script_AskWaterfall:
+	checkflag ENGINE_WATERFALL_ACTIVE
+	iftrue Script_AutoWaterfall
 	opentext
 	writetext .AskWaterfallText
 	yesorno
@@ -1240,8 +1239,11 @@ Script_UsedWhirlpool:
 	callasm GetPartyNickname
 	writetext UseWhirlpoolText
 	refreshmap
+	setflag ENGINE_WHIRPOOL_ACTIVE
+	; fallthrough
+Script_AutoWhirlpool:
 	waitsfx
-	playsound SFX_SURF
+	playsound SFX_2_BOOPS
 	checkcode VAR_FACING
 	if_equal UP, .Up
 	if_equal DOWN, .Down
@@ -1311,6 +1313,8 @@ Script_MightyWhirlpool:
 	text_end
 
 Script_AskWhirlpoolOW:
+	checkflag ENGINE_WHIRPOOL_ACTIVE
+	iftrue Script_AutoWhirlpool
 	opentext
 	writetext AskWhirlpoolText
 	yesorno
@@ -1469,7 +1473,9 @@ RockSmashScript:
 	callasm GetPartyNickname
 	writetext UseRockSmashText
 	closetext
-	special WaitSFX
+	setflag ENGINE_ROCK_SMASH_ACTIVE
+AutoRockSmashScript:
+	waitsfx
 	playsound SFX_STRENGTH
 	earthquake 84
 	applymovementlasttalked MovementData_RockSmash
@@ -1502,12 +1508,13 @@ AskRockSmashScript:
 	callasm HasRockSmash
 	ifequal 1, .no
 
+	checkflag ENGINE_ROCK_SMASH_ACTIVE
+	iftrue AutoRockSmashScript
 	opentext
 	writetext AskRockSmashText
 	yesorno
 	iftrue RockSmashScript
-	closetext
-	end
+
 .no
 	jumptext MaySmashText
 
