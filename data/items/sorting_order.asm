@@ -223,26 +223,26 @@ ItemNameOrder:
 ; Items that are possibly frequently used
 	db BICYCLE
 	db COIN_CASE
-	db BLUE_CARD
 	db ITEMFINDER
+	db BLUE_CARD
 
 ; Rods
 	db OLD_ROD
 	db GOOD_ROD
 	db SUPER_ROD
 
-; Key Items that are possibly seldom used
-	db CLEAR_BELL
-	db SILVER_WING
-	db RAINBOW_WING
-
 ; HM items
-	db AXE
 	db LANTERN
+	db AXE
 	db PADDLE_BOAT
 	db POWER_GLOVE
 	db STABILIZER
 	db GEYSER_BOOTS
+
+; Key Items that are possibly seldom used
+	db CLEAR_BELL
+	db SILVER_WING
+	db RAINBOW_WING
 
 ; Temporary Key Items
 	db BASEMENT_KEY
