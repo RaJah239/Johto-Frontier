@@ -368,38 +368,30 @@ MonSubMenu_GetNextEvoAttackByte:
 	ret
 
 	CanUseFly:
-; Step 1: Badge Check
-	ld de, ENGINE_STORMBADGE
-	ld b, CHECK_FLAG
-	farcall EngineFlagAction
-	ld a, c
-	and a
-	ret z ; .fail, dont have needed badge
-
-; Step 2: Location Check
+; Step 1: Location Check
 	call GetMapEnvironment
 	call CheckOutdoorMap
 	ret nz ; not outdoors, cant fly
 
-; Step 3: Check if Mon knows Move
+; Step 2: Check if Mon knows Move
 	ld a, FLY
 	call CheckMonKnowsMove
 	and a
 	jr z, .yes
 
-; Step 4: Check if HM is in bag
+; Step 3: Check if HM is in bag
 	ld a, HM_FLY
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem
 	ret nc ; .fail, hm isnt in bag
 
-; Step 5: Check if mon can learn move via HM/TM/Move Tutor
+; Step 4: Check if mon can learn move via HM/TM/Move Tutor
 	ld a, FLY
 	call CheckMonCanLearn_TM_HM
 	jr c, .yes
 
-; Step 6: Check if Mon can learn move via LVL-UP
+; Step 5: Check if Mon can learn move via LVL-UP
 	ld a, FLY
 	call CheckLvlUpMoves
 	ret c ; fail
