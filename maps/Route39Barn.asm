@@ -121,8 +121,12 @@ MoomooScript:
 .HappyCow:
 	writetext MoomooHappyMooText
 	cry MILTANK
-	waitbutton
 	closetext
+	special FadeOutPalettes
+	special LoadMapPalettes
+	playsound SFX_FULL_HEAL
+	special HealParty
+	special FadeInPalettes_EnableDynNoApply
 	end
 
 Route39BarnTwinMoomooIsSickText:
