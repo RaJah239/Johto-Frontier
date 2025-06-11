@@ -600,41 +600,36 @@ TrySurfOW::
 	call CheckDirection
 	jr c, .quit
 
-; Step 1
 	ld de, ENGINE_FOGBADGE
 	call CheckEngineFlag
 	jr c, .quit
 
-; Step 2
-	ld a, HM_SURF
-	ld [wCurItem], a
-	ld hl, wNumItems
-	call CheckItem
-	jr z, .quit
-
-; Step 3
-  	ld d, SURF
-	call CheckPartyCanLearnMove
-	and a
-	jr z, .yes
-
-; Step 4
-	ld d, SURF
-	call CheckPartyMove
-	jr c, .quit
-.yes
 	ld hl, wBikeFlags
 	bit BIKEFLAGS_ALWAYS_ON_BIKE_F, [hl]
 	jr nz, .quit
 
+	ld d, SURF
+	call CheckPartyMove
+	jr c, .check_mon_move
+
 	call GetSurfType
 	ld [wSurfingPlayerState], a
-	call GetPartyNickname
+	jr .finish
 
+.check_mon_move
+	ld a, PADDLE_BOAT
+	ld [wCurItem], a
+	ld hl, wNumItems
+	call CheckItem
+	jr nc, .quit
+
+	ld a, PLAYER_SURF
+	ld [wSurfingPlayerState], a
+
+.finish
 	ld a, BANK(AskSurfScript)
 	ld hl, AskSurfScript
 	call CallScript
-
 	scf
 	ret
 
