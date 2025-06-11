@@ -3,6 +3,7 @@
 	const OLIVINELIGHTHOUSE3F_GENTLEMAN
 	const OLIVINELIGHTHOUSE3F_YOUNGSTER
 	const OLIVINELIGHTHOUSE3F_POKE_BALL
+	const OLIVINELIGHTHOUSE3F_CHANSEY
 
 OlivineLighthouse3F_MapScripts:
 	def_scene_scripts
@@ -110,6 +111,9 @@ GentlemanPrestonAfterBattleText:
 	cont "like ONIX."
 	done
 
+OlivineLightHouseChanseyScript:
+	jumpstd ChanseyHealsOWScript
+
 OlivineLighthouse3F_MapEvents:
 	db 0, 0 ; filler
 
@@ -133,3 +137,4 @@ OlivineLighthouse3F_MapEvents:
 	object_event 13,  5, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 4, TrainerGentlemanPreston, -1
 	object_event  3,  9, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerBirdKeeperTheo, -1
 	object_event  8,  2, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, OlivineLighthouse3FEther, EVENT_OLIVINE_LIGHTHOUSE_3F_ETHER
+	object_event 13, 13, SPRITE_CHANSEY_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, OlivineLightHouseChanseyScript, -1
