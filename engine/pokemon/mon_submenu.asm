@@ -123,7 +123,6 @@ GetMonSubmenuItems:
 	and a
 	jr nz, .skip_moves
 	
-	call CanUseFlash
 	call CanUseFly
 	call CanUseDig
 	call Can_Use_Sweet_Scent
@@ -366,19 +365,6 @@ MonSubMenu_GetNextEvoAttackByte:
 	ld a, BANK(EvosAttacksPointers)
 	call GetFarByte
 	inc hl
-	ret
-
-CanUseFlash:
-; Location Check
-	farcall SpecialAerodactylChamber
-	jr c, .valid_location ; can use flash
-	ld a, [wTimeOfDayPalset]
-	cp DARKNESS_PALSET
-	ret nz ; .fail ; not a darkcave
-
-.valid_location
-	ld a, MONMENUITEM_FLASH
-	call AddMonMenuItem
 	ret
 
 	CanUseFly:

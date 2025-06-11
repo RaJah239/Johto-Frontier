@@ -137,7 +137,6 @@ PokemonActionSubmenu:
 	dbw MONMENUITEM_FLY,        MonMenu_Fly
 	dbw MONMENUITEM_SURF,       MonMenu_Surf
 	dbw MONMENUITEM_STRENGTH,   MonMenu_Strength
-	dbw MONMENUITEM_FLASH,      MonMenu_Flash
 	dbw MONMENUITEM_WHIRLPOOL,  MonMenu_Whirlpool
 	dbw MONMENUITEM_DIG,        MonMenu_Dig
 	dbw MONMENUITEM_TELEPORT,   MonMenu_Teleport
@@ -789,19 +788,6 @@ MonMenu_Fly:
 
 .NoReload: ; unreferenced
 	ld a, $1
-	ret
-
-MonMenu_Flash:
-	farcall FlashFunction
-	ld a, [wFieldMoveSucceeded]
-	cp $1
-	jr nz, .Fail
-	ld b, $4
-	ld a, $2
-	ret
-
-.Fail:
-	ld a, $3
 	ret
 
 MonMenu_Strength:
