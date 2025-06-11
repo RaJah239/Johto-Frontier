@@ -237,6 +237,9 @@ ItemNameOrder:
 	db SILVER_WING
 	db RAINBOW_WING
 
+; HM items
+	db HEDGER
+
 ; Temporary Key Items
 	db BASEMENT_KEY
 	db CARD_KEY
@@ -255,7 +258,6 @@ ItemNameOrder:
 ; Unused Items - 27 total
 	db EGG_TICKET
 	db POKE_FLUTE
-	db TOWN_MAP
 	db ITEM_19
 	db ITEM_2D
 	db ITEM_32

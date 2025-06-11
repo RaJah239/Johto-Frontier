@@ -5,7 +5,7 @@ ItemNames::
 	li "BRIGHTPOWDER"
 	li "GREAT BALL"
 	li "POKé BALL" ; VWF can't print "# BALL"
-	li "TERU-SAMA"
+	li "AXE"
 	li "BICYCLE"
 	li "MOON STONE"
 	li "ANTIDOTE"

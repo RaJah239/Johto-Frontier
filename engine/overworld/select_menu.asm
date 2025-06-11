@@ -123,6 +123,8 @@ UseRegisteredItem:
 	ld a, [wItemAttributeValue]
 	ld hl, .SwitchTo
 	rst JumpTable
+	xor a
+	ld [wUsingHMItem], a
 	ret
 
 .SwitchTo:
@@ -177,7 +179,11 @@ UseRegisteredItem:
 	call ReanchorMap
 
 ._cantuse
+	ld a, [wUsingHMItem]
+	and a
+	jr nz, .skip_neither_time_nor_place
 	call CantUseItem
+.skip_neither_time_nor_place
 	call CloseText
 	and a
 	ret

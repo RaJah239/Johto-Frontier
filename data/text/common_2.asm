@@ -293,9 +293,8 @@ _CantUseItemText::
 	prompt
 
 _UseCutText::
-	text_ram wStringBuffer2
-	text " used"
-	line "CUT!"
+	text "You swung your"
+	line "AXE!"
 	prompt
 
 _CutNothingText::
@@ -501,7 +500,7 @@ _AskCutText::
 	text "This tree can be"
 	line "CUT!"
 
-	para "Want to use CUT?"
+	para "Use your AXE?"
 	done
 
 _CanCutText::

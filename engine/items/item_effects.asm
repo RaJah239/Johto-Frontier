@@ -19,7 +19,7 @@ ItemEffects:
 	dw NoEffect            ; BRIGHTPOWDER
 	dw PokeBallEffect      ; GREAT_BALL
 	dw PokeBallEffect      ; POKE_BALL
-	dw TownMapEffect       ; TOWN_MAP
+	dw AxeEffect           ; AXE
 	dw BicycleEffect       ; BICYCLE
 	dw EvoStoneEffect      ; MOON_STONE
 	dw StatusHealingEffect ; ANTIDOTE
@@ -1128,10 +1128,6 @@ AskGiveNicknameText:
 
 ReturnToBattle_UseBall:
 	farcall _ReturnToBattle_UseBall
-	ret
-
-TownMapEffect:
-	farcall PokegearMap
 	ret
 
 BicycleEffect:
@@ -2986,4 +2982,10 @@ GetMthMoveOfCurrentMon:
 	ld c, a
 	ld b, 0
 	add hl, bc
+	ret
+
+AxeEffect:
+	ld a, 1
+	ld [wUsingHMItem], a
+	farcall CutFunction
 	ret
