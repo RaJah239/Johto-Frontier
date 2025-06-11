@@ -218,7 +218,7 @@ ItemNameOrder:
 
 
 ; NEXT POCKET
-; Key Items Pocket - 23 total
+; Key Items Pocket - 24 total
 ; Permanent Key Items
 ; Items that are possibly frequently used
 	db BICYCLE
@@ -240,6 +240,7 @@ ItemNameOrder:
 ; HM items
 	db AXE
 	db PADDLE_BOAT
+	db POWER_GLOVE
 
 ; Temporary Key Items
 	db BASEMENT_KEY
@@ -256,11 +257,10 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 25 total
+; Unused Items - 24 total
 	db EGG_TICKET
 	db POKE_FLUTE
 	db ITEM_2D
-	db ITEM_32
 	db ITEM_5A
 	db ITEM_64
 	db ITEM_78

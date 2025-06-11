@@ -54,7 +54,8 @@ if DEF(_DEBUG)
 	giveitem BICYCLE
 	giveitem COIN_CASE
 	givecoins MAX_COINS
-	giveitem HEDGER
+	giveitem AXE
+	giveitem POWER_GLOVE
 	giveitem PADDLE_BOAT
 	; good party
 	givepoke MEW, 50, LEFTOVERS

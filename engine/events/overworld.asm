@@ -1091,24 +1091,14 @@ StrengthFunction:
 	ret
 
 .TryStrength:
-	ld de, ENGINE_PLAINBADGE
-	call CheckBadge
-	jr c, .Failed
-	jr .UseStrength
-
-.AlreadyUsingStrengthText:
-	text_far _AlreadyUsingStrengthText
-	text_end
-
-.Failed:
-	ld a, $80
-	ret
-
-.UseStrength:
 	ld hl, Script_StrengthFromMenu
 	call QueueScript
 	ld a, $81
 	ret
+
+.AlreadyUsingStrengthText:
+	text_far _AlreadyUsingStrengthText
+	text_end
 
 SetStrengthFlag:
 	ld hl, wBikeFlags
@@ -1130,9 +1120,7 @@ Script_StrengthFromMenu:
 Script_UsedStrength:
 	callasm SetStrengthFlag
 	writetext .UseStrengthText
-	readmem wStrengthSpecies
-	cry 0 ; plays [wStrengthSpecies] cry
-	pause 3
+	promptbutton
 	writetext .MoveBoulderText
 	closetext
 	end
@@ -1178,30 +1166,12 @@ BouldersMayMoveText:
 	text_end
 
 TryStrengthOW:
-; Step 1
-	ld de, ENGINE_PLAINBADGE
-	call CheckEngineFlag
-	jr c, .nope
-
-; Step 2
-	ld a, HM_STRENGTH
+	ld a, POWER_GLOVE
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem
-	jr z, .nope
+	jr nc, .nope
 
-; Step 3
-	ld d, STRENGTH
-	call CheckPartyCanLearnMove
-	and a
-	jr z, .yes
-
-; Step 4
-	ld d, STRENGTH
-	call CheckPartyMove
-	jr c, .nope
-
-.yes
 	ld hl, wBikeFlags
 	bit BIKEFLAGS_STRENGTH_ACTIVE_F, [hl]
 	jr z, .already_using
@@ -1215,7 +1185,6 @@ TryStrengthOW:
 
 .already_using
 	xor a
-	jr .done
 
 .done
 	ld [wScriptVar], a
