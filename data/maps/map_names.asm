@@ -277,6 +277,7 @@ Goldenrod_Map_Names: ;newgroup GOLDENROD
 	dw Goldenrod_Map_Name22 ; map_const ILEX_FOREST_AZALEA_GATE ; 22
 	dw Goldenrod_Map_Name23 ; map_const ROUTE_34_ILEX_FOREST_GATE ; 23
 	dw Goldenrod_Map_Name24 ; map_const DAY_CARE ; 24
+	dw Goldenrod_Map_Name96 ; map_const DAY_CARE ; 25
 	assert_table_length NUM_GOLDENROD_MAPS
 
 Vermilion_Map_Names: ;newgroup VERMILION
@@ -779,6 +780,8 @@ Goldenrod_Map_Name23: ; map_const ROUTE_34_ILEX_FOREST_GATE ; 23
 	db "ILEX - RT. 34 GATE@"
 Goldenrod_Map_Name24: ; map_const DAY_CARE ; 24 ; 12
 	db "ROUTE 34 DAY CARE@"
+Goldenrod_Map_Name96: ; map_const HATCH_ROOM ; 24 ; 12
+	db "HATCH ROOM@"
 
 Pallet_Map_Name2: ; map_const PALLET_TOWN,;  2
 	db "PALLET TOWN@"
