@@ -11,12 +11,12 @@ OlivineCafe_MapScripts:
 OlivineCafeStrengthSailorScript:
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_HM04_STRENGTH
+	checkevent EVENT_GOT_POWER_GLOVE
 	iftrue .GotStrength
 	writetext OlivineCafeStrengthSailorText
 	promptbutton
-	verbosegiveitem HM_STRENGTH
-	setevent EVENT_GOT_HM04_STRENGTH
+	verbosegiveitem POWER_GLOVE
+	setevent EVENT_GOT_POWER_GLOVE
 .GotStrength:
 	writetext OlivineCafeStrengthSailorText_GotStrength
 	waitbutton
