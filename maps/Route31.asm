@@ -26,6 +26,10 @@ TrainerBugCatcherWade1:
 	trainer BUG_CATCHER, WADE1, EVENT_BEAT_BUG_CATCHER_WADE, BugCatcherWade1SeenText, BugCatcherWade1BeatenText, 0, .Script
 
 .Script:
+	isdialogueminimal
+	iffalse .skipthis
+	endifjustbattled
+.skipthis
 	loadvar VAR_CALLERID, PHONE_BUG_CATCHER_WADE
 	opentext
 	checkflag ENGINE_WADE_READY_FOR_REMATCH
