@@ -9,6 +9,8 @@
 	const MOUNTMORTAR1FINSIDE_SUPER_NERD2
 	const MOUNTMORTAR1FINSIDE_POKE_BALL6
 	const MOUNTMORTAR1FINSIDE_POKE_BALL7
+	const MOUNTMORTAR1FINSIDE_PORYGON_PC
+	const MOUNTMORTAR1FINSIDE_CHANSEY
 
 MountMortar1FInside_MapScripts:
 	def_scene_scripts
@@ -114,6 +116,12 @@ SupernerdMarkusAfterBattleText:
 	line "WATERFALL?"
 	done
 
+MtMortarPorygonPCScript:
+	jumpstd PorygonPCScript
+
+MountMortar1FInsideChanseyScript:
+	jumpstd ChanseyHealsOWScript
+
 MountMortar1FInside_MapEvents:
 	db 0, 0 ; filler
 
@@ -141,3 +149,5 @@ MountMortar1FInside_MapEvents:
 	object_event 24, 28, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerSupernerdMarkus, -1
 	object_event  8, 16, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, MountMortar1FInsideIron, EVENT_MOUNT_MORTAR_1F_INSIDE_IRON
 	object_event 17, 17, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, MountMortar1FInsideUltraBall, EVENT_MOUNT_MORTAR_1F_INSIDE_ULTRA_BALL
+	object_event 15,  2, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MtMortarPorygonPCScript, -1
+	object_event 13,  2, SPRITE_CHANSEY_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MountMortar1FInsideChanseyScript, -1
