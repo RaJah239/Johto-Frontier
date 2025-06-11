@@ -399,6 +399,6 @@ RegisteredNumber2Text:
 	done
 
 ChanseyCryText:
-	text "Seyyyy!"
+	text "CHANSEY: Seyyyy!"
 	done
 
