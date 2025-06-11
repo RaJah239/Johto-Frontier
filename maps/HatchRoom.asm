@@ -1,5 +1,6 @@
 	object_const_def
 	const HATCH_ROOM_GRAMPS
+	const HATCH_ROOM_PORYGON_PC
 
 HatchRoom_MapScripts:
 	def_scene_scripts
@@ -61,6 +62,9 @@ HatchRoomMovementData_DayCareManWalksBackInside_WalkAroundPlayer:
 	slow_step DOWN
 	step_end
 
+DayCareHatchRoomPorygonPCScript:
+   jumpstd PorygonPCScript
+
 HatchRoom_MapEvents:
     db 0, 0 ; filler
 
@@ -76,3 +80,4 @@ HatchRoom_MapEvents:
 
     def_object_events
 	object_event  1, 56, SPRITE_GRAMPS, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareManScript_Outside, EVENT_DAY_CARE_MAN_ON_ROUTE_34
+	object_event  4, 57, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareHatchRoomPorygonPCScript, -1
