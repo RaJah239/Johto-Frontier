@@ -1057,12 +1057,11 @@ _BuenaOffTheAirText::
 	done
 
 _EnemyWithdrewText::
-	text "<ENEMY>"
-	line "withdrew"
-	cont "@"
+	text "@" 
 	text_ram wEnemyMonNickname
-	text "!"
-	prompt
+	text " was"
+	line "withdrawn!"
+	done
 
 _EnemyUsedOnText::
 	text "<ENEMY>"
