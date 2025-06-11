@@ -356,8 +356,8 @@ WaterStoneDesc:
 	next "kinds of #MON.@"
 
 PaddleBoatDesc:
-	db   "Paddle boat used"
-	next "to cross water!@"
+	db   "Used to traverse"
+	next "water@"
 
 HPUpDesc:
 	db   "Raises the HP of"
@@ -455,8 +455,8 @@ XAttackDesc:
 	next "(1 BTL)@"
 
 PowerGloveDesc:
-	db   "Gives the STRENGTH"
-	next "to push boulders.@"
+	db   "Used to push large"
+	next "boulders.@"
 
 XDefendDesc:
 	db   "Raises DEFENSE."
@@ -527,7 +527,7 @@ SecretPotionDesc:
 
 LanternDesc:
 	db   "Illuminates the"
-	next "darkest areas!@"
+	next "darkest areas.@"
 
 MysteryEggDesc:
 	db   "An EGG obtained"
@@ -613,7 +613,7 @@ BluApricornDesc:
 
 StabilizerDesc:
 	db   "Calms whirlpools"
-	next "enough to cross!@"
+	next "enough to cross.@"
 
 AmuletCoinDesc:
 	db   "Doubles monetary"
@@ -650,7 +650,7 @@ BlkApricornDesc:
 
 GeyserBootsDesc:
 	db   "Makes one able to"
-	next "scale waterfalls!@"
+	next "scale waterfalls.@"
 
 PnkApricornDesc:
 	db   "A pink APRICORN."
