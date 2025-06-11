@@ -24,6 +24,7 @@ GoldenrodBikeShopClerkScript:
 	itemnotify
 	setflag ENGINE_BIKE_SHOP_CALL_ENABLED
 	setevent EVENT_GOT_BICYCLE
+	setmapscene DAY_CARE, SCENE_DAYCARE_NOOP
 .GotBicycle:
 	writetext GoldenrodBikeShopClerkFirstRateBikesText
 	waitbutton

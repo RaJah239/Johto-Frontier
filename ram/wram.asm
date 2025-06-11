@@ -3183,8 +3183,9 @@ wDragonShrineSceneID::                            db
 wMountMoonSquareSceneID::                         db
 wMobileTradeRoomSceneID::                         db
 wMobileBattleRoomSceneID::                        db
+wDayCareSceneID::                                 db
 
-	ds 184
+	ds 183
 
 wEventFlags:: flag_array NUM_EVENTS
 
