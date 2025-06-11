@@ -357,7 +357,7 @@ WaterStoneDesc:
 
 PaddleBoatDesc:
 	db   "Used to traverse"
-	next "water@"
+	next "water.@"
 
 HPUpDesc:
 	db   "Raises the HP of"
