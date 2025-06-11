@@ -1,5 +1,7 @@
 	object_const_def
 	const LAKEOFRAGEMAGIKARPHOUSE_FISHING_GURU
+	const LAKEOFRAGEMAGIKARPHOUSE_CHANSEY
+	const LAKEOFRAGEMAGIKARPHOUSE_PORYGON_PC
 
 LakeOfRageMagikarpHouse_MapScripts:
 	def_scene_scripts
@@ -201,6 +203,12 @@ LakeOfRageMagikarpHouseUnusedRecordText:
 	text_ram wStringBuffer4
 	text_end
 
+LakeOfRageMagikarpHousePorygonPCScript:
+	jumpstd PorygonPCScript
+
+LakeOfRageMagikarpHouseChanseyScript:
+	jumpstd ChanseyHealsOWScript
+
 LakeOfRageMagikarpHouse_MapEvents:
 	db 0, 0 ; filler
 
@@ -215,4 +223,6 @@ LakeOfRageMagikarpHouse_MapEvents:
 	bg_event  1,  1, BGEVENT_READ, MagikarpHouseBookshelf
 
 	def_object_events
-	object_event  2,  3, SPRITE_FISHING_GURU, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MagikarpLengthRaterScript, -1
+	object_event  2,  4, SPRITE_FISHING_GURU, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MagikarpLengthRaterScript, -1
+	object_event  7,  5, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, LakeOfRageMagikarpHousePorygonPCScript, -1
+	object_event  6,  4, SPRITE_CHANSEY_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, LakeOfRageMagikarpHouseChanseyScript, -1
