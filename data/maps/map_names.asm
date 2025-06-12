@@ -82,6 +82,7 @@ Mahogany_Map_Names: ;newgroup MAHOGANY
 	dw Mahogany_Map_Name5 ; map_const ROUTE_42,  ;  5
 	dw Mahogany_Map_Name6 ; map_const ROUTE_44, ;  6
 	dw Mahogany_Map_Name7 ; map_const MAHOGANY_TOWN,  ;  7
+	dw Mahogany_Map_Name8 ; map_const MAHOGANY_TRADE_BACK_KID_HOUSE ; 8
 	assert_table_length NUM_MAHOGANY_MAPS
 	
 
@@ -461,6 +462,8 @@ Mahogany_Map_Name6: ; map_const ROUTE_44, ;  6
 	db "ROUTE 44@"
 Mahogany_Map_Name7: ; map_const MAHOGANY_TOWN,  ;  7
 	db "MAHOGANY TOWN@"
+Mahogany_Map_Name8:
+	db "TRADE BACK HOUSE@"
 Dungeons_Map_Name1: ; map_const SPROUT_TOWER_1F, ;  1
 	db "SPROUT TOWER 1F@"
 Dungeons_Map_Name2: ; map_const SPROUT_TOWER_2F, ;  2

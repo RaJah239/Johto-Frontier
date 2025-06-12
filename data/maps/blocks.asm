@@ -59,6 +59,7 @@ OlivinePunishmentSpeechHouse_Blocks:
 OlivineGoodRodHouse_Blocks:
 Route39Farmhouse_Blocks:
 MahoganyRedGyaradosSpeechHouse_Blocks:
+MahoganyTradeBackKidHouse_Blocks:
 BlackthornDragonSpeechHouse_Blocks:
 BlackthornEmysHouse_Blocks:
 MoveDeletersHouse_Blocks:
