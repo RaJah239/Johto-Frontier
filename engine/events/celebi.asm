@@ -47,26 +47,7 @@ CelebiShrineEvent:
 .done
 	pop af
 	ld [wStateFlags], a
-	call .RestorePlayerSprite_DespawnLeaves
 	call CelebiEvent_SetBattleType
-	ret
-
-.RestorePlayerSprite_DespawnLeaves:
-	ld hl, wShadowOAMSprite00TileID
-	xor a
-	ld c, 4
-.OAMloop:
-	ld [hli], a ; tile id
-rept SPRITEOAMSTRUCT_LENGTH - 1
-	inc hl
-endr
-	inc a
-	dec c
-	jr nz, .OAMloop
-	ld hl, wShadowOAMSprite04
-	ld bc, wShadowOAMEnd - wShadowOAMSprite04
-	xor a
-	call ByteFill
 	ret
 
 LoadCelebiGFX:
