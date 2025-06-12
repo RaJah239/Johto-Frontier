@@ -180,7 +180,6 @@ SpecialsPointers::
 
 	add_special InitialSetDSTFlag
 	add_special InitialClearDSTFlag
-	add_special UnusedDummySpecial ; unused
 
 ; New specials starts here
 	add_special DebugColourPicker
@@ -189,3 +188,4 @@ SpecialsPointers::
 	add_special RestorePartyHeldItems
 	add_special FadeInPalettes_EnableDynNoApply
 	add_special FadeOutPalettes
+	add_special TradebackNPC

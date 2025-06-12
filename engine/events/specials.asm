@@ -15,9 +15,6 @@ Special::
 
 INCLUDE "data/events/special_pointers.asm"
 
-UnusedDummySpecial:
-	ret
-
 GameCornerPrizeMonCheckDex:
 	ld a, [wScriptVar]
 	dec a
@@ -463,4 +460,8 @@ RestorePartyHeldItems:
 	pop bc
 	dec c
 	jr nz, .loop
+	ret
+
+TradebackNPC:
+	farcall TradebackKid
 	ret
