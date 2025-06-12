@@ -152,9 +152,9 @@
 	const DRAGON_FANG  ; 90
 	const ITEM_91      ; 91
 	const LEFTOVERS    ; 92
-	const ITEM_93      ; 93
-	const ITEM_94      ; 94
-	const ITEM_95      ; 95
+	const OLD_AMBER    ; 87
+	const DOME_FOSSIL  ; 88
+	const HELIX_FOSSIL ; 89
 	const MYSTERYBERRY ; 96
 	const DRAGON_SCALE ; 97
 	const BERSERK_GENE ; 98

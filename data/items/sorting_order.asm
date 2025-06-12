@@ -199,7 +199,7 @@ ItemNameOrder:
 
 
 ; NEXT POCKET
-; Loot Items Pocket - 11 total
+; Loot Items Pocket - 14 total
 ; Leaves
 	db SILVER_LEAF
 	db GOLD_LEAF
@@ -215,7 +215,10 @@ ItemNameOrder:
 	db BRICK_PIECE
 	db SLOWPOKETAIL
 
-
+; Fossils
+	db DOME_FOSSIL
+	db HELIX_FOSSIL
+	db OLD_AMBER
 
 ; NEXT POCKET
 ; Key Items Pocket - 25 total
@@ -259,7 +262,7 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 23 total
+; Unused Items - 20 total
 	db EGG_TICKET
 	db POKE_FLUTE
 	db ITEM_2D
@@ -269,9 +272,6 @@ ItemNameOrder:
 	db ITEM_8D
 	db ITEM_8E
 	db ITEM_91
-	db ITEM_93
-	db ITEM_94
-	db ITEM_95
 	db ITEM_99
 	db ITEM_9A 
 	db ITEM_9B

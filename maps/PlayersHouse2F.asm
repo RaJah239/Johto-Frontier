@@ -51,6 +51,8 @@ PlayersHouseRadioScript:
 if DEF(_DEBUG)
 	opentext
 	givemoney YOUR_MONEY, MAX_MONEY
+	
+	; key items
 	giveitem BICYCLE
 	giveitem COIN_CASE
 	givecoins MAX_COINS
@@ -63,6 +65,7 @@ if DEF(_DEBUG)
 	giveitem PADDLE_BOAT
 	giveitem STABILIZER
 	giveitem GEYSER_BOOTS
+
 	; good party
 	givepoke MEW, 50, LEFTOVERS
 	givepoke SMEARGLE, 50, FOCUS_BAND
@@ -173,6 +176,11 @@ if DEF(_DEBUG)
 	giveitem CALCIUM, MAX_ITEM_STACK
 	giveitem ZINC, MAX_ITEM_STACK
 	giveitem CARBOS, MAX_ITEM_STACK
+
+	; fossils
+	giveitem OLD_AMBER
+	giveitem DOME_FOSSIL
+	giveitem HELIX_FOSSIL
 
 	; all balls
 	giveitem MASTER_BALL, MAX_ITEM_STACK

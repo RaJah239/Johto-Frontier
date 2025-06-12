@@ -147,9 +147,9 @@ ItemDescriptions:
 	dw DragonFangDesc
 	dw TeruSama14Desc
 	dw LeftoversDesc
-	dw TeruSama15Desc
-	dw TeruSama16Desc
-	dw TeruSama17Desc
+	dw OldAmberDesc
+	dw DomeFossilDesc
+	dw HelixFossilDesc
 	dw MysteryBerryDesc
 	dw DragonScaleDesc
 	dw BerserkGeneDesc
@@ -829,14 +829,11 @@ LeftoversDesc:
 	db   "Restores HP during"
 	next "battle. (HOLD)@"
 
-TeruSama15Desc:
-	db   "?@"
-
-TeruSama16Desc:
-	db   "?@"
-
-TeruSama17Desc:
-	db   "?@"
+OldAmberDesc:
+DomeFossilDesc:
+HelixFossilDesc:
+	db   "Contains DNA of an"
+	next "ancient #MON.@"
 
 MysteryBerryDesc:
 	db   "A self-restore"

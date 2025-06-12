@@ -106,6 +106,9 @@ RockItemEncounter:
 	db 2, THICK_CLUB
 	db 4, NUGGET
 	db 6, STAR_PIECE
+	db 10, DOME_FOSSIL
+	db 10, HELIX_FOSSIL
+	db 10, OLD_AMBER
 	db 12, BIG_PEARL
 	db 18, ETHER
 	db 24, HARD_STONE

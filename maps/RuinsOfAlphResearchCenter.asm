@@ -3,6 +3,7 @@
 	const RUINSOFALPHRESEARCHCENTER_SCIENTIST2
 	const RUINSOFALPHRESEARCHCENTER_SCIENTIST3
 	const RUINSOFALPHRESEARCHCENTER_PORYGON_PC
+	const RUINSOFALPHRESEARCHCENTER_FOSSIL_SCIENTIST
 
 RuinsOfAlphResearchCenter_MapScripts:
 	def_scene_scripts
@@ -192,6 +193,242 @@ RuinsOfAlphResearchCenterLeavesPlayerMovement:
 	step UP
 	step_end
 
+FossilScientist:
+	faceplayer
+	opentext
+FossilScientistAgain:
+;	faceplayer
+	checkevent EVENT_MET_FOSSIL_SCIENTIST
+	iftrue .HaveAFossilForMe
+	writetext FossilScientistIntroText	
+	setevent EVENT_MET_FOSSIL_SCIENTIST
+	sjump .FirstVisit
+
+.HaveAFossilForMe
+	writetext FossilScientistHaveAFossilText
+.FirstVisit
+	checkevent EVENT_GAVE_SCIENTIST_OLD_AMBER
+	iftrue .GiveAerodactyl
+	checkevent EVENT_GAVE_SCIENTIST_DOME_FOSSIL
+	iftrue .GiveKabuto
+	checkevent EVENT_GAVE_SCIENTIST_HELIX_FOSSIL
+	iftrue .GiveOmanyte
+	waitbutton
+	loadmenu .MoveMenuHeader
+	verticalmenu
+	closewindow
+	ifequal REVIVE_OLD_AMBER, .OldAmber
+	ifequal REVIVE_DOME_FOSSIL, .DomeFossil
+	ifequal REVIVE_HELIX_FOSSIL, .HelixFossil
+	sjump .No
+ 
+.OldAmber
+	checkitem OLD_AMBER
+	iffalse .No
+	getmonname STRING_BUFFER_3, AERODACTYL
+	writetext FossilScientistMonText
+	promptbutton
+	setevent EVENT_GAVE_SCIENTIST_OLD_AMBER
+	takeitem OLD_AMBER
+	writetext FossilScientistGiveText
+	waitbutton
+	sjump .GaveScientistFossil
+ 
+.DomeFossil:
+	checkitem DOME_FOSSIL
+	iffalse .No
+	getmonname STRING_BUFFER_3, LILEEP
+	writetext FossilScientistMonText
+	promptbutton
+	setevent EVENT_GAVE_SCIENTIST_DOME_FOSSIL
+	takeitem DOME_FOSSIL
+	writetext FossilScientistGiveText
+	waitbutton
+	sjump .GaveScientistFossil
+ 
+.HelixFossil:
+	checkitem HELIX_FOSSIL
+	iffalse .No
+	getmonname STRING_BUFFER_3, OMANYTE
+	writetext FossilScientistMonText
+	promptbutton
+	setevent EVENT_GAVE_SCIENTIST_HELIX_FOSSIL
+	takeitem HELIX_FOSSIL
+	writetext FossilScientistGiveText
+	waitbutton
+	sjump .GaveScientistFossil
+ 
+.No
+	writetext FossilScientistNoText
+	waitbutton
+	closetext
+	end
+ 
+.GaveScientistFossil:
+	writetext FossilScientistTimeText
+	playsound SFX_ZAP_CANNON
+	waitsfx
+	promptbutton
+	sjump FossilScientistAgain
+	closetext
+ 
+.GiveAerodactyl:
+	readvar VAR_PARTYCOUNT
+	ifequal PARTY_LENGTH, .NoRoom
+	clearevent EVENT_GAVE_SCIENTIST_OLD_AMBER
+	writetext FossilScientistDoneText
+	promptbutton
+	getmonname STRING_BUFFER_3, AERODACTYL
+	writetext FossilScientistReceiveText
+	playsound SFX_CAUGHT_MON
+	waitsfx
+	waitbutton
+	givepoke AERODACTYL, 5
+	writetext DropByWithFossilsText
+	waitbutton
+	closetext
+	end
+ 
+.GiveKabuto:
+	readvar VAR_PARTYCOUNT
+	ifequal PARTY_LENGTH, .NoRoom
+	clearevent EVENT_GAVE_SCIENTIST_DOME_FOSSIL
+	writetext FossilScientistDoneText
+	promptbutton
+	getmonname STRING_BUFFER_3, LILEEP
+	writetext FossilScientistReceiveText
+	playsound SFX_CAUGHT_MON
+	waitsfx
+	waitbutton
+	givepoke LILEEP, 5
+	writetext DropByWithFossilsText
+	waitbutton
+	closetext
+	end
+ 
+.GiveOmanyte:
+	readvar VAR_PARTYCOUNT
+	ifequal PARTY_LENGTH, .NoRoom
+	clearevent EVENT_GAVE_SCIENTIST_HELIX_FOSSIL
+	writetext FossilScientistDoneText
+	promptbutton
+	getmonname STRING_BUFFER_3, OMANYTE
+	writetext FossilScientistReceiveText
+	playsound SFX_CAUGHT_MON
+	waitsfx
+	waitbutton
+	givepoke OMANYTE, 5
+	writetext DropByWithFossilsText
+	waitbutton
+	closetext
+	end
+ 
+.NoRoom:
+	writetext FossilScientistPartyFullText
+	waitbutton
+	closetext
+	end
+ 
+.MoveMenuHeader:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 0, 2, 15, TEXTBOX_Y - 1
+	dw .MenuData
+	db 1 ; default option
+ 
+.MenuData:
+	db STATICMENU_CURSOR ; flags
+	db 4 ; items
+	db "OLD AMBER@"
+	db "DOME FOSSIL@"
+	db "HELIX FOSSIL@"
+	db "CANCEL@"
+
+FossilScientistIntroText:
+	text "Well, Hello there."
+	line "I'm a researcher."
+
+	para "I study ancient"
+	line "#MON fossils."
+
+	para "Do you have a"
+	line "fossil?"
+	done
+
+FossilScientistHaveAFossilText:
+	text "Welcome once more!"
+	line "Found any fossils?"
+	done
+
+FossilScientistNoText:
+	text "No? That's alright."
+
+	para "Fossils may be"
+	line "found inside of"
+	cont "breakable rocks."
+
+	para "Come visit again"
+	line "if you find any."
+	done 
+
+FossilScientistMonText:
+	text "Oh? That's"
+	line "a fossil!"
+
+	para "It's a fossil of"
+	line "@"
+	text_ram wStringBuffer3
+	text ", a"
+
+	para "#MON that is"
+	line "already extinct!"
+
+	para "My Resurrection"
+	line "Machine will make"
+
+	para "that #MON live"
+	line "again!"
+	done
+
+FossilScientistGiveText:
+	text "Allow me to have"
+	line "it for a moment?"
+
+	para "<PLAYER> handed"
+	line "over the fossil."
+	done
+
+FossilScientistTimeText:
+	text "This'll just"
+	line "take a moment!"
+	done
+
+FossilScientistPartyFullText:
+	text "Hmmm…?"
+
+	para "Your party is"
+	line "already full…"
+	
+	para "Return when you"
+	line "have a free slot."
+	done
+
+FossilScientistDoneText:
+	text "Your fossil has"
+	line "been resurrected!"
+	done
+
+FossilScientistReceiveText:
+	text "<PLAYER> received"
+	line "@"
+	text_ram wStringBuffer3
+	text "!"
+	done
+
+DropByWithFossilsText:
+	text "Drop in if you get"
+	line "more fossils."
+	done
+
 RuinsOfAlphResearchCenterModifiedDexText:
 	text "Done!"
 
@@ -377,3 +614,4 @@ RuinsOfAlphResearchCenter_MapEvents:
 	object_event  5,  2, SPRITE_SCIENTIST, SPRITEMOVEDATA_WANDER, 2, 1, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RuinsOfAlphResearchCenterScientist2Script, -1
 	object_event  2,  5, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RuinsOfAlphResearchCenterScientist3Script, EVENT_RUINS_OF_ALPH_RESEARCH_CENTER_SCIENTIST
 	object_event  0,  2, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RuinsOfAlphResearchCenterPorygonPCScript, -1
+	object_event  2,  2, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, FossilScientist, -1
