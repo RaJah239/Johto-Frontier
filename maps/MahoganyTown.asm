@@ -112,6 +112,9 @@ MahoganyTownLassScript:
 MahoganyTownSign:
 	jumptext MahoganyTownSignText
 
+MahoganyTradeBackKidSign:
+	jumptext MahoganyTradeBackKidSignText
+
 MahoganyTownRagecandybarSign:
 	jumptext MahoganyTownRagecandybarSignText
 
@@ -240,6 +243,11 @@ MahoganyGymSignText:
 	line "Winter's Harshness"
 	done
 
+MahoganyTradeBackKidSignText:
+	text "TRADEBACK KID'S"
+	line "HOUSE"
+	done
+
 MahoganyTown_MapEvents:
 	db 0, 0 ; filler
 
@@ -255,10 +263,11 @@ MahoganyTown_MapEvents:
 	coord_event 19,  9, SCENE_MAHOGANYTOWN_TRY_RAGECANDYBAR, MahoganyTownTryARageCandyBarScript
 
 	def_bg_events
-	bg_event  1,  5, BGEVENT_READ, MahoganyTownSign
+	bg_event  3,  9, BGEVENT_READ, MahoganyTownSign
 	bg_event  9,  7, BGEVENT_READ, MahoganyTownRagecandybarSign
 	bg_event  3, 13, BGEVENT_READ, MahoganyGymSign
 	bg_event 16, 13, BGEVENT_READ, MahoganyTownPokecenterSign
+	bg_event  1,  5, BGEVENT_READ, MahoganyTradeBackKidSign
 
 	def_object_events
 	object_event 19,  8, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MahoganyTownPokefanMScript, EVENT_MAHOGANY_TOWN_POKEFAN_M_BLOCKS_EAST
