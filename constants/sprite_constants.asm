@@ -100,6 +100,16 @@
 	const SPRITE_KRIS_SURF ; 66
 	const SPRITE_CHANSEY_OW ; 67
 	const SPRITE_PORYGON_OW ; 68
+	const SPRITE_GIOVANNI
+	const SPRITE_PROTON
+	const SPRITE_PETREL
+	const SPRITE_AGATHA
+	const SPRITE_LORELEI
+	const SPRITE_SCARLET
+	const SPRITE_ARIANA
+	const SPRITE_ARCHER
+	const SPRITE_EUSINE
+	const SPRITE_MAXIMA
 DEF NUM_OVERWORLD_SPRITES EQU const_value - 1
 
 ; SpriteMons indexes (see data/sprites/sprite_mons.asm)
