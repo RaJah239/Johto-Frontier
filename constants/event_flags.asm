@@ -272,7 +272,9 @@
 	const EVENT_MET_VIOLET
 	const EVENT_CIANWOOD_GYM_BLOCKER
 	const EVENT_MET_FOSSIL_SCIENTIST
-; Unused: next 336 events
+	const EVENT_MET_TRADE_KID
+	const EVENT_COMPLETED_TRADE_WITH_TRADE_BACK_KID
+; Unused: next 334 events
 
 	const_next 600
 ; Kurt Apricorn events

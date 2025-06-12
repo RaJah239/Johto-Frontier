@@ -1,11 +1,8 @@
-; Fun fact, the 'trade' part of a trade isn't checked to evolve a Pokémon.
+	; Fun fact, the 'trade' part of a trade isn't checked to evolve a Pokémon.
 	; It seems that just the trade animation and the link state are enough.
 	; No Pokémon is actualy ever moved to or from your party because of that fact.
 
 TradebackKid::
-	ld hl, TradebackKidText
-	call PrintText
-	call YesNoBox
 	ld hl, TradebackKidCanceledText
 	jr c, .done
 
@@ -22,9 +19,13 @@ TradebackKid::
 	call TradeWithTradebackKid
 	call RestartMapMusic
 
-	ld hl, TradebackKidCompleteText
-	call PrintText
+	; here we set an event to tell the Trade Back Kid
+	; yes we did trade so take a Silver Leaf
+	ld de, EVENT_COMPLETED_TRADE_WITH_TRADE_BACK_KID
+	ld b, SET_FLAG
+	call EventFlagAction
 	ret
+
 .done
 	call PrintText
 	ret
@@ -114,30 +115,9 @@ TradeWithTradebackKid:
 	ld [wLinkMode], a
 	ret
 
-TradebackKidText::
-	text "Hello there! I'm"
-	line "the TRADEBACK KID."
-
-	para "I can trade a"
-	line "#MON of your"
-	
-	para "choosing back to"
-	line "you."
-
-	para "Would you like to"
-	line "trade?"
-	done
-
 TradebackKidCanceledText::
 	text "Oh, ok then."
 
 	para "Come back if you"
 	line "change your mind."
-	done
-
-TradebackKidCompleteText::
-	text "And… Done!"
-
-	para "I hope that"
-	line "was helpful!"
 	done

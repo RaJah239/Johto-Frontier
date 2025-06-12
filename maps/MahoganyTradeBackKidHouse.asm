@@ -9,11 +9,99 @@ MahoganyTradeBackKidHouse_MapScripts:
 TradebackKidScript:
 	faceplayer
 	opentext
-	special TradebackNPC
+	clearevent EVENT_COMPLETED_TRADE_WITH_TRADE_BACK_KID
+	checkevent EVENT_MET_TRADE_KID
+	iftrue .WantToTrade
+	writetext TradebackIntroKidText
+	setevent EVENT_MET_TRADE_KID
+	waitbutton
+.WantToTrade
+	writetext TradebackKidWantToTradeText
+	yesorno
+	iftrue .DoYouHaveASilverLeaf
+	writetext TradebackKidNoTradeText
 	waitbutton
 	closetext
 	turnobject MAHOGANYTRADEBACKKIDHOUSE_TRADEKID, DOWN
 	end
+
+.DoYouHaveASilverLeaf
+	checkitem SILVER_LEAF
+	iftrue .LetsLinkUp
+	writetext TradeBackKidNoSilverLeafText
+	waitbutton
+	closetext
+	turnobject MAHOGANYTRADEBACKKIDHOUSE_TRADEKID, DOWN
+	end
+
+.LetsLinkUp
+	special TradebackNPC
+	checkevent EVENT_COMPLETED_TRADE_WITH_TRADE_BACK_KID
+	iftrue .TakeSilverLeaf
+	waitbutton
+	closetext
+	turnobject MAHOGANYTRADEBACKKIDHOUSE_TRADEKID, DOWN
+	end
+
+.TakeSilverLeaf
+	writetext ThanksForTheSilverLeafText
+	takeitem SILVER_LEAF
+	waitsfx
+	playsound SFX_TRANSACTION
+	waitbutton
+	closetext
+	turnobject MAHOGANYTRADEBACKKIDHOUSE_TRADEKID, DOWN
+	end
+
+TradebackIntroKidText:
+	text "Hello there! I'm"
+	line "the TRADEBACK KID."
+
+	para "Some #MON can"
+	line "only evolve by"
+	cont "being traded."
+
+	para "Your #DEX has"
+	line "this information."
+
+	para "I can trade any"
+	line "#MON you want"
+
+	para "back to you for a"
+	line "SILVER LEAF."
+	done
+
+TradebackKidWantToTradeText:
+	text "Want me to trade"
+	line "back one of your"
+
+	para "own #MON for"
+	line "a SILVER LEAF?"
+	done
+
+TradebackKidNoTradeText:
+	text "Oh, ok then."
+
+	para "Come back if you"
+	line "change your mind."
+	done
+
+TradeBackKidNoSilverLeafText:
+	text "Aww… You don't have"
+	line "a SILVER LEAF…"
+
+	para "Come back when you"
+	line "get one alright?"
+	done
+
+ThanksForTheSilverLeafText:
+	text "And… Done!"
+
+	para "I'll take that"
+	line "SILVER LEAF now."
+
+	para "Swing by anytime."
+	done
 
 MahoganyTradeBackKidHouse_MapEvents:
 	db 0, 0 ; filler
