@@ -497,7 +497,14 @@ UsedSurfScript:
 	writetext UsedSurfText ; "used SURF!"
 	waitbutton
 	closetext
+
 	setflag ENGINE_SURF_ACTIVE
+
+	clearflag ENGINE_HEADBUTT_ACTIVE
+	clearflag ENGINE_WHIRPOOL_ACTIVE
+	clearflag ENGINE_WATERFALL_ACTIVE
+	clearflag ENGINE_ROCK_SMASH_ACTIVE
+	; fallthrough
 AutoSurfScript:
 	readmem wSurfingPlayerState
 	writevar VAR_MOVEMENT
@@ -768,7 +775,13 @@ Script_UsedWaterfall:
 	farwritetext _UseWaterfallText
 	waitbutton
 	closetext
+
 	setflag ENGINE_WATERFALL_ACTIVE
+
+	clearflag ENGINE_HEADBUTT_ACTIVE
+	clearflag ENGINE_SURF_ACTIVE
+	clearflag ENGINE_WHIRPOOL_ACTIVE
+	clearflag ENGINE_ROCK_SMASH_ACTIVE
 	; fallthrough
 Script_AutoWaterfall:
 	waitsfx
@@ -1233,6 +1246,11 @@ Script_UsedWhirlpool:
 	writetext UseWhirlpoolText
 	refreshmap
 	setflag ENGINE_WHIRPOOL_ACTIVE
+
+	clearflag ENGINE_HEADBUTT_ACTIVE
+	clearflag ENGINE_SURF_ACTIVE
+	clearflag ENGINE_WATERFALL_ACTIVE
+	clearflag ENGINE_ROCK_SMASH_ACTIVE
 	; fallthrough
 Script_AutoWhirlpool:
 	waitsfx
@@ -1351,7 +1369,14 @@ HeadbuttFromMenuScript:
 HeadbuttScript:
 	callasm GetPartyNickname
 	writetext UseHeadbuttText
+
 	setflag ENGINE_HEADBUTT_ACTIVE
+
+	clearflag ENGINE_SURF_ACTIVE
+	clearflag ENGINE_WHIRPOOL_ACTIVE
+	clearflag ENGINE_WATERFALL_ACTIVE
+	clearflag ENGINE_ROCK_SMASH_ACTIVE
+	; fallthrough
 AutoHeadbuttScript:
 	reanchormap
 	callasm ShakeHeadbuttTree
@@ -1466,7 +1491,14 @@ RockSmashScript:
 	callasm GetPartyNickname
 	writetext UseRockSmashText
 	closetext
+
 	setflag ENGINE_ROCK_SMASH_ACTIVE
+
+	clearflag ENGINE_HEADBUTT_ACTIVE
+	clearflag ENGINE_SURF_ACTIVE
+	clearflag ENGINE_WHIRPOOL_ACTIVE
+	clearflag ENGINE_WATERFALL_ACTIVE
+	; fallthrough
 AutoRockSmashScript:
 	waitsfx
 	playsound SFX_STRENGTH
