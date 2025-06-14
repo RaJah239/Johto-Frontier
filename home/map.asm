@@ -388,8 +388,6 @@ ReadMapEvents::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	inc hl
-	inc hl
 	call ReadWarpEvents
 	call ReadCoordEvents
 	call ReadBGEvents
@@ -636,21 +634,16 @@ ClearObjectStructs::
 	ret
 
 GetWarpDestCoords::
-	call GetMapScriptsBank
-	rst Bankswitch
+	call SwitchToMapScriptsBank
 
 	ld hl, wMapEventsPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-rept 3 ; get to the warp coords
-	inc hl
-endr
+	inc hl ; get to the warp coords
 	ld a, [wWarpNumber]
 	dec a
-	ld c, a
-	ld b, 0
-	ld a, WARP_EVENT_SIZE
+	ld bc, WARP_EVENT_SIZE
 	call AddNTimes
 	ld a, [hli]
 	ld [wYCoord], a
@@ -659,10 +652,7 @@ endr
 	; destination warp number
 	ld a, [hli]
 	cp -1
-	jr nz, .skip
-	call .backup
-
-.skip
+	call z, .backup
 	farcall GetMapScreenCoords
 	ret
 

@@ -113,7 +113,6 @@ SpecialsPointers::
 	add_special DaisysGrooming
 	add_special PlayCurMonCry
 	add_special ProfOaksPCBoot
-	add_special GameboyCheck
 	add_special TrainerHouse
 	add_special PhotoStudio
 	add_special InitRoamMons

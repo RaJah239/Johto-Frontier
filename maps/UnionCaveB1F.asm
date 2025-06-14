@@ -155,8 +155,6 @@ UnionCaveChanseyScript:
 	jumpstd ChanseyHealsOWScript
 
 UnionCaveB1F_MapEvents:
-	db 0, 0 ; filler
-
 	def_warp_events
 	warp_event  3,  3, RUINS_OF_ALPH_OUTSIDE, 7
 	warp_event  3, 11, RUINS_OF_ALPH_OUTSIDE, 8

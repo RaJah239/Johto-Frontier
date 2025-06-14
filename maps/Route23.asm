@@ -22,8 +22,6 @@ IndigoPlateauSignText:
 	done
 
 Route23_MapEvents:
-	db 0, 0 ; filler
-
 	def_warp_events
 	warp_event  9,  5, INDIGO_PLATEAU_POKECENTER_1F, 1
 	warp_event 10,  5, INDIGO_PLATEAU_POKECENTER_1F, 2

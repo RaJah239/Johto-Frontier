@@ -24,7 +24,6 @@ MACRO scene_script
 ;\1: script pointer
 ;\2: scene id constant
 	dw \1
-	dw 0 ; filler
 	if _NARG == 2
 		scene_const \2
 	else
@@ -74,9 +73,7 @@ MACRO coord_event
 ;\3: scene id: a SCENE_* constant; controlled by setscene/setmapscene
 ;\4: script pointer
 	db \3, \2, \1
-	db 0 ; filler
 	dw \4
-	dw 0 ; filler
 	DEF {_NUM_COORD_EVENTS} += 1
 ENDM
 
@@ -173,13 +170,6 @@ MACRO conditional_event
 ;\1: flag: an EVENT_* constant
 ;\2: script pointer
 	dw \1, \2
-ENDM
-
-MACRO cmdqueue
-;\1: type: a CMDQUEUE_* constant
-;\2: data pointer
-	dbw \1, \2
-	dw 0 ; filler
 ENDM
 
 MACRO stonetable

@@ -2232,8 +2232,8 @@ wCurCoordEvent::
 wCurCoordEventSceneID:: db
 wCurCoordEventMapY:: db
 wCurCoordEventMapX:: db
-	ds 1
 wCurCoordEventScriptAddr:: dw
+	ds 1
 
 NEXTU
 ; BG event data

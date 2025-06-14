@@ -115,8 +115,6 @@ OlivineLightHouseChanseyScript:
 	jumpstd ChanseyHealsOWScript
 
 OlivineLighthouse3F_MapEvents:
-	db 0, 0 ; filler
-
 	def_warp_events
 	warp_event 13,  3, OLIVINE_LIGHTHOUSE_4F, 1
 	warp_event  5,  3, OLIVINE_LIGHTHOUSE_2F, 2

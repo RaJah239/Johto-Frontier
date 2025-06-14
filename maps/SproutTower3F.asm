@@ -332,8 +332,6 @@ SproutTower3FChanseyScript:
 	jumpstd ChanseyHealsOWScript
 
 SproutTower3F_MapEvents:
-	db 0, 0 ; filler
-
 	def_warp_events
 	warp_event 10, 14, SPROUT_TOWER_2F, 4
 

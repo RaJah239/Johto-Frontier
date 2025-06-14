@@ -66,9 +66,7 @@ DayCareHatchRoomPorygonPCScript:
    jumpstd PorygonPCScript
 
 HatchRoom_MapEvents:
-    db 0, 0 ; filler
-
-    def_warp_events
+   def_warp_events
 	warp_event  2, 135, ROUTE_34, 6
 	warp_event  3,  2, ROUTE_34, 7
 	warp_event  3, 135, ROUTE_34, 7

@@ -6,8 +6,6 @@ OlivinePort_MapScripts:
 	def_callbacks
 
 OlivinePort_MapEvents:
-	db 0, 0 ; filler
-
 	def_warp_events
 	warp_event 11,  7, OLIVINE_PORT_PASSAGE, 5
 	warp_event  7, 23, CIANWOOD_PORT, 2

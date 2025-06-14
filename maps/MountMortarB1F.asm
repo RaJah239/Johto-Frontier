@@ -133,8 +133,6 @@ MountMortarB1FKiyoFullPartyText:
 	done
 
 MountMortarB1F_MapEvents:
-	db 0, 0 ; filler
-
 	def_warp_events
 	warp_event  3,  3, MOUNT_MORTAR_1F_INSIDE, 5
 	warp_event 19, 29, MOUNT_MORTAR_1F_OUTSIDE, 7

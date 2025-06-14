@@ -286,8 +286,6 @@ VioletGymGuideWinText:
 	done
 
 VioletGym_MapEvents:
-	db 0, 0 ; filler
-
 	def_warp_events
 	warp_event  4, 15, VIOLET_CITY, 2
 	warp_event  5, 15, VIOLET_CITY, 2

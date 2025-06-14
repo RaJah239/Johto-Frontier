@@ -128,8 +128,6 @@ KogaScript_KogaDefeatText:
 	done
 
 KogasRoom_MapEvents:
-	db 0, 0 ; filler
-
 	def_warp_events
 	warp_event  4, 17, WILLS_ROOM, 2
 	warp_event  5, 17, WILLS_ROOM, 3

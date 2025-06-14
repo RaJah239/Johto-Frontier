@@ -79,10 +79,6 @@ SeerAction1:
 	ret
 
 SeerAction2:
-	ld a, SEER_CANT_TELL
-	call PrintSeerText
-	ret
-
 SeerAction3:
 	ld a, SEER_CANT_TELL
 	call PrintSeerText

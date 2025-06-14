@@ -7,8 +7,6 @@ CianwoodPort_MapScripts:
 
 
 CianwoodPort_MapEvents:
-	db 0, 0 ; filler
-
 	def_warp_events
 	warp_event  9,  5, CIANWOOD_PORT_PASSAGE, 5
 	warp_event  7, 17, OLIVINE_PORT, 2
