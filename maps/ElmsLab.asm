@@ -309,11 +309,12 @@ ElmsLabHealingMachine:
 
 ElmsLabHealingMachine_HealParty:
 	special HealParty
+	special SaveMusic
 	playmusic MUSIC_NONE
 	setval HEALMACHINE_ELMS_LAB
 	special HealMachineAnim
 	pause 30
-	special RestartMapMusic
+	special RestoreMusic
 	closetext
 	end
 

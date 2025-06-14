@@ -91,6 +91,7 @@ AzaleaTownRivalBattleScript:
 	sjump .AfterBattle
 
 .AfterBattle:
+	special DeleteSavedMusic
 	playmusic MUSIC_RIVAL_AFTER
 	opentext
 	writetext AzaleaTownRivalAfterText

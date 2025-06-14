@@ -3537,6 +3537,9 @@ SECTION "News Script RAM", WRAMX
 
 w4_d000:: ds $1000
 
+SECTION "WRAM 4 RM", WRAMX[$d200], BANK [4]
+
+wSoundEngineBackup::
 
 SECTION "GBC Video", WRAMX, ALIGN[8]
 

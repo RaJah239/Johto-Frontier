@@ -76,6 +76,7 @@ CianwoodCitySuicuneAndEusine:
 	disappear CIANWOODCITY_EUSINE
 	pause 20
 	special FadeOutMusic
+	special DeleteSavedMusic
 	playmapmusic
 	pause 10
 .Done:

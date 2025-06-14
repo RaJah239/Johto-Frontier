@@ -130,6 +130,7 @@ EnterMap:
 	ldh [hMapEntryMethod], a
 	ld a, MAPSTATUS_HANDLE
 	ld [wMapStatus], a
+	farcall DeleteSavedMusic
 	ret
 
 UnusedWait30Frames: ; unreferenced

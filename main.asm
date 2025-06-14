@@ -781,3 +781,8 @@ INCLUDE "engine/gfx/dynamic_pals.asm"
 SECTION "Fade System", ROMX
 
 INCLUDE "engine/gfx/fade.asm"
+
+
+SECTION "Restore Music", ROMX
+
+INCLUDE "home/restore_music.asm"

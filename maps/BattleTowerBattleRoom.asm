@@ -46,12 +46,13 @@ Script_BattleRoomLoop:
 	writetext Text_YourMonWillBeHealedToFullHealth
 	waitbutton
 	closetext
+	special SaveMusic
 	playmusic MUSIC_HEAL
 	special FadeOutPalettes
 	special LoadMapPalettes
 	pause 60
 	special FadeInPalettes_EnableDynNoApply
-	special RestartMapMusic
+	special RestoreMusic
 	opentext
 	writetext Text_NextUpOpponentNo
 	yesorno

@@ -2817,6 +2817,7 @@ ClearChannel:
 
 PlayTrainerEncounterMusic::
 ; input: e = trainer type
+	farcall SaveMusic
 	; turn fade off
 	xor a
 	ld [wMusicFade], a

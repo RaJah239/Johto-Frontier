@@ -121,6 +121,7 @@ PlateauRivalBattleCommon:
 	sjump PlateauRivalPostBattle
 
 PlateauRivalPostBattle:
+	special DeleteSavedMusic
 	playmusic MUSIC_RIVAL_AFTER
 	opentext
 	writetext PlateauRivalText2
