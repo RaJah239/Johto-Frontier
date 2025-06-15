@@ -879,7 +879,7 @@ StatsScreen_Print_HiddenPow_Info:
 	ret
 
 HiddenPowerTypeString:
-	db "HIDDEN ATTRIBUTE:@"
+	db "INNER ATTRIBUTE:@"
 
 StatsScreen_PrintEVs:
 	hlcoord 1, 11
