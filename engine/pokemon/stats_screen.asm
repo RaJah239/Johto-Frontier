@@ -896,6 +896,12 @@ StatsScreen_PrintEVs:
 	call PlaceString
 
 	; HP EVs
+	; Print 3 start is Def EVs are maxed
+	ld a, [wTempMonHPEV]
+	cp 252
+	jr z, .print_text1
+
+	xor a ; need to load 0 into a before continuing
 	ld a, [wTempMonHPEV]
 	ld [wPokedexStatus], a
 	pop bc
@@ -910,8 +916,20 @@ StatsScreen_PrintEVs:
 	lb bc, 1, 3 ; 3 digits
 	hlcoord 6, 12
 	call PrintNum
+	jr .done1
 
+.print_text1:
+	ld de, .EVMaxThreeStars
+	hlcoord 6, 12
+	call PlaceString
+
+.done1:
 	; ATK EVs
+	; Print 3 start is Def EVs are maxed
+	ld a, [wTempMonAtkEV]
+	cp 252
+	jr z, .print_text2
+
 	ld a, [wTempMonAtkEV]
 	ld [wPokedexStatus], a
 	ld c, 0
@@ -927,8 +945,21 @@ StatsScreen_PrintEVs:
 	lb bc, 1, 3 ; 3 digits
 	hlcoord 6, 13
 	call PrintNum
+	jr .done2
 
+.print_text2:
+	ld de, .EVMaxThreeStars
+	hlcoord 6, 13
+	call PlaceString
+
+.done2:
 	; DEF EVs
+	; Print 3 start is Def EVs are maxed
+	ld a, [wTempMonDefEV]
+	cp 252
+	jr z, .print_text3
+
+	; Print actual number is Def EVs are not maxed
 	ld a, [wTempMonDefEV]
 	ld [wPokedexStatus], a 
 	pop bc
@@ -944,8 +975,20 @@ StatsScreen_PrintEVs:
 	lb bc, 1, 3 ; 3 digits
 	hlcoord 6, 14
 	call PrintNum
+	jr .done3
 
+.print_text3:
+	ld de, .EVMaxThreeStars
+	hlcoord 6, 14
+	call PlaceString
+
+.done3:
 	; SPE EVs
+	; Print 3 start is Def EVs are maxed
+	ld a, [wTempMonSpdEV]
+	cp 252
+	jr z, .print_text4
+
 	ld a, [wTempMonSpdEV]
 	ld [wPokedexStatus], a
 	pop bc
@@ -961,8 +1004,20 @@ StatsScreen_PrintEVs:
 	lb bc, 1, 3 ; 3 digits
 	hlcoord 14, 12
 	call PrintNum
+	jr .done4
 
+.print_text4:
+	ld de, .EVMaxThreeStars
+	hlcoord 14, 12
+	call PlaceString
+
+.done4:
 	; SpAtk EVs
+	; Print 3 start is Def EVs are maxed
+	ld a, [wTempMonSpclAtkEV]
+	cp 252
+	jr z, .print_text5
+
 	ld a, [wTempMonSpclAtkEV]
 	ld [wPokedexStatus], a
 	pop bc
@@ -978,8 +1033,20 @@ StatsScreen_PrintEVs:
 	lb bc, 1, 3 ; 3 digits
 	hlcoord 14, 13
 	call PrintNum
+	jr .done5
 
+.print_text5:
+	ld de, .EVMaxThreeStars
+	hlcoord 14, 13
+	call PlaceString
+
+.done5:
 	; SpDef EVs
+	; Print 3 start is Def EVs are maxed
+	ld a, [wTempMonSpclDefEV]
+	cp 252
+	jr z, .print_text6
+
 	ld a, [wTempMonSpclDefEV]
 	ld [wPokedexStatus], a
 	pop bc
@@ -995,7 +1062,14 @@ StatsScreen_PrintEVs:
 	lb bc, 1, 3 ; 3 digits
 	hlcoord 14, 14
 	call PrintNum
+	jr .done6
 
+.print_text6:
+	ld de, .EVMaxThreeStars
+	hlcoord 14, 14
+	call PlaceString
+
+.done6:
 	pop bc
 	ld a, c
 	ld [wPokedexStatus], a
@@ -1011,6 +1085,8 @@ StatsScreen_PrintEVs:
  	db "ATK     SPA@"
 .EVstring3:
  	db "DEF     SPD@"
+.EVMaxThreeStars:
+	db "<star><star><star>@" ;     252 EVs
 
 StatsScreen_placeCaughtLocation:
 	ld de, .MetAtMapString
