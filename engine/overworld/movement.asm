@@ -546,19 +546,19 @@ Movement_turn_in_right:
 
 Movement_turn_waterfall_down:
 	ld a, STEP_RUN << 2 | DOWN
-	jmp TurningStep
+	jmp SlideStep
 
 Movement_turn_waterfall_up:
 	ld a, STEP_RUN << 2 | UP
-	jmp TurningStep
+	jmp SlideStep
 
 Movement_turn_waterfall_left:
 	ld a, STEP_RUN << 2 | LEFT
-	jmp TurningStep
+	jmp SlideStep
 
 Movement_turn_waterfall_right:
 	ld a, STEP_RUN << 2 | RIGHT
-	jmp TurningStep
+	jmp SlideStep
 
 Movement_slow_slide_step_down:
 	ld a, STEP_SLOW << 2 | DOWN

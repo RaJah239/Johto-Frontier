@@ -329,7 +329,7 @@ _AskSurfText::
 	done
 
 _UseWaterfallText::
-	text "Scaling upwards!"
+	text "Geronimooooo!"
 	done
 
 _HugeWaterfallText::
@@ -341,7 +341,7 @@ _AskWaterfallText::
 	text "Wow, it's a huge"
 	line "waterfall."
 
-	para "Want to climb it?"
+	para "Want to ascend it?"
 	done
 
 _UseDigText::
