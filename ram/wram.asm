@@ -2590,7 +2590,7 @@ wFishingRodUsed:: db
 wCutWhirlpoolOverworldBlockAddr:: dw
 wCutWhirlpoolReplacementBlock:: db
 wCutWhirlpoolAnimationType::
-wStrengthSpecies::
+wOverworldMoveSpecies::
 wFishingResult:: db
 	ds 1
 wFieldMoveDataEnd::

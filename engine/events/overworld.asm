@@ -213,6 +213,16 @@ OW_GetNextEvoAttackByte:
 	inc hl
 	ret
 
+FieldMovePokepicScript:
+	readmem wOverworldMoveSpecies
+	reanchormap
+	pokepic 0
+	cry 0
+	waitsfx
+	closepokepic
+	refreshmap
+	end
+
 FieldMoveFailed:
 	ld hl, .CantUseItemText
 	call MenuTextboxBackup
@@ -709,6 +719,8 @@ FlyFunction:
 	refreshmap
 	callasm HideSprites
 	callasm ClearSavedObjPals
+	callasm PrepareOverworldMove
+	scall FieldMovePokepicScript
 	callasm CopyBGGreenToOBPal7
 	special UpdateTimePals
 	callasm FlyFromAnim
@@ -953,6 +965,8 @@ EscapeRopeOrDig:
 .UsedDigScript:
 	refreshmap
 	special UpdateTimePals
+	callasm PrepareOverworldMove
+	scall FieldMovePokepicScript
 	writetext .UseDigText
 
 .UsedDigOrEscapeRopeScript:
@@ -1039,8 +1053,10 @@ TeleportFunction:
 .TeleportScript:
 	refreshmap
 	special UpdateTimePals
+	callasm PrepareOverworldMove
+	scall FieldMovePokepicScript
 	writetext .TeleportReturnText
-	pause 60
+	pause 16
 	refreshmap
 	closetext
 	playsound SFX_WARP_TO
@@ -1080,13 +1096,14 @@ StrengthFunction:
 SetStrengthFlag:
 	ld hl, wBikeFlags
 	set BIKEFLAGS_STRENGTH_ACTIVE_F, [hl]
+PrepareOverworldMove:
 	ld a, [wCurPartyMon]
 	ld e, a
 	ld d, 0
 	ld hl, wPartySpecies
 	add hl, de
 	ld a, [hl]
-	ld [wStrengthSpecies], a
+	ld [wOverworldMoveSpecies], a
 	call GetPartyNickname
 	ret
 
@@ -1367,8 +1384,9 @@ HeadbuttFromMenuScript:
 	special UpdateTimePals
 
 HeadbuttScript:
-	callasm GetPartyNickname
+	callasm PrepareOverworldMove
 	writetext UseHeadbuttText
+	scall FieldMovePokepicScript
 
 	setflag ENGINE_HEADBUTT_ACTIVE
 
@@ -1488,8 +1506,9 @@ RockSmashFromMenuScript:
 	special UpdateTimePals
 
 RockSmashScript:
-	callasm GetPartyNickname
-	writetext UseRockSmashText
+	callasm PrepareOverworldMove
+	farwritetext _UseRockSmashText
+	scall FieldMovePokepicScript
 	closetext
 
 	setflag ENGINE_ROCK_SMASH_ACTIVE
@@ -1524,10 +1543,6 @@ AutoRockSmashScript:
 MovementData_RockSmash:
 	rock_smash 10
 	step_end
-
-UseRockSmashText:
-	text_far _UseRockSmashText
-	text_end
 
 AskRockSmashScript:
 	callasm HasRockSmash
