@@ -572,9 +572,8 @@ _PoisonFaintText::
 	prompt
 
 _UseSweetScentText::
-	text_ram wStringBuffer3
-	text " used"
-	line "SWEET SCENT!"
+	text "TANGELA sends out"
+	line "a viney lure!"
 	done
 
 _SweetScentNothingText::

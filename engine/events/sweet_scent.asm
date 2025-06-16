@@ -8,8 +8,12 @@ SweetScentFromMenu:
 .SweetScent:
 	refreshmap
 	special UpdateTimePals
-	callasm PrepareOverworldMove
-	farscall FieldMovePokepicScript
+	reanchormap
+	pokepic TANGELA
+	cry TANGELA
+	waitsfx
+	closepokepic
+	refreshmap
 	writetext UseSweetScentText
 	waitbutton
 	callasm SweetScentEncounter

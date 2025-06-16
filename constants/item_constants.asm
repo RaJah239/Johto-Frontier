@@ -135,7 +135,7 @@
 	const CARD_KEY     ; 7f
 	const MACHINE_PART ; 80
 	const EGG_TICKET   ; 81
-	const LOST_ITEM    ; 82
+	const TANGELA_CALL ; 82
 	const STARDUST     ; 83
 	const STAR_PIECE   ; 84
 	const BASEMENT_KEY ; 85

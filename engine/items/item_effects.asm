@@ -143,7 +143,7 @@ ItemEffects:
 	dw CardKeyEffect       ; CARD_KEY
 	dw NoEffect            ; MACHINE_PART
 	dw NoEffect            ; EGG_TICKET
-	dw NoEffect            ; LOST_ITEM
+	dw TangelaCallEffect   ; TANGELA_CALL
 	dw NoEffect            ; STARDUST
 	dw NoEffect            ; STAR_PIECE
 	dw BasementKeyEffect   ; BASEMENT_KEY
@@ -3018,4 +3018,10 @@ MiloticCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
 	farcall WaterfallFunction
+	ret
+
+TangelaCallEffect:
+	ld a, 1
+	ld [wUsingHMItem], a
+	farcall SweetScentFromMenu
 	ret

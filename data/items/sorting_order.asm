@@ -237,6 +237,7 @@ ItemNameOrder:
 ; HM items
 	db MAREEP_CALL
 	db SCYTHER_CALL
+	db TANGELA_CALL
 	db LANTURN_CALL
 	db DONPHAN_CALL
 	db KINGDRA_CALL
@@ -251,7 +252,6 @@ ItemNameOrder:
 	db BASEMENT_KEY
 	db CARD_KEY
 	db GS_BALL
-	db LOST_ITEM
 	db MACHINE_PART
 	db MYSTERY_EGG
 	db PASS

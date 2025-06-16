@@ -130,7 +130,7 @@ ItemDescriptions:
 	dw CardKeyDesc
 	dw MachinePartDesc
 	dw EggTicketDesc
-	dw LostItemDesc
+	dw TangelaCallDesc
 	dw StardustDesc
 	dw StarPieceDesc
 	dw BasementKeyDesc
@@ -767,9 +767,9 @@ EggTicketDesc:
 	db   "May use at Golden-"
 	next "rod trade corner.@"
 
-LostItemDesc:
-	db   "The # DOLL lost"
-	next "by the COPYCAT.@"
+TangelaCallDesc:
+	db   "Calls a TANGELA to"
+	next "ensnare #MON.@"
 
 StardustDesc:
 	db   "Pretty, red sand."
