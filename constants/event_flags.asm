@@ -274,7 +274,8 @@
 	const EVENT_MET_FOSSIL_SCIENTIST
 	const EVENT_MET_TRADE_KID
 	const EVENT_COMPLETED_TRADE_WITH_TRADE_BACK_KID
-; Unused: next 334 events
+	const EVENT_PIKA_SURF
+; Unused: next 333 events
 
 	const_next 600
 ; Kurt Apricorn events

@@ -516,6 +516,20 @@ SurfFromMenuScript:
 	special UpdateTimePals
 
 UsedSurfScript:
+	reanchormap
+	checkevent EVENT_PIKA_SURF
+	iftrue .PikaSurfs
+	pokepic LANTURN
+	cry LANTURN
+	sjump .continue
+
+.PikaSurfs:
+	pokepic PIKACHU
+	cry PIKACHU
+.continue:
+	waitsfx
+	closepokepic
+	refreshmap
 	writetext UsedSurfText ; "used SURF!"
 	waitbutton
 	closetext
@@ -551,6 +565,9 @@ AlreadySurfingText:
 GetSurfType:
 ; Surfing on Pikachu uses an alternate sprite.
 ; This is done by using a separate movement type.
+; If the current surfing Pokémon is Pikachu, return
+; PLAYER_SURF_PIKA and set EVENT_PIKA_SURF.
+; Otherwise, return PLAYER_SURF.
 
 	ld a, [wCurPartyMon]
 	ld e, a
@@ -560,8 +577,17 @@ GetSurfType:
 
 	ld a, [hl]
 	cp PIKACHU
+	jr nz, .not_pikachu
+
+	; Pikachu is our surfer
+	ld de, EVENT_PIKA_SURF
+	ld b, SET_FLAG
+	call EventFlagAction
+
 	ld a, PLAYER_SURF_PIKA
-	ret z
+	ret
+
+.not_pikachu
 	ld a, PLAYER_SURF
 	ret
 
@@ -601,6 +627,12 @@ TrySurfOW::
 ; Return carry if fail is allowed.
 
 ; Don't ask to surf if already fail.
+
+	; Pikachu is not our surfer
+	ld de, EVENT_PIKA_SURF
+	ld b, RESET_FLAG
+	call EventFlagAction
+
 	ld a, [wPlayerState]
 	cp PLAYER_SURF_PIKA
 	jr z, .quit
@@ -658,7 +690,14 @@ AskSurfScript:
 	checkflag ENGINE_SURF_ACTIVE
 	iftrue AutoSurfScript
 	opentext
+	checkevent EVENT_PIKA_SURF
+	iftrue .AskPikaSurf
 	writetext AskSurfText
+	sjump .YesOrNoSurf
+
+.AskPikaSurf:
+	writetext AskPikaSurfText
+.YesOrNoSurf:
 	yesorno
 	iftrue UsedSurfScript
 	closetext
@@ -666,6 +705,10 @@ AskSurfScript:
 
 AskSurfText:
 	text_far _AskSurfText
+	text_end
+
+AskPikaSurfText:
+	text_far _AskPikaSurfText
 	text_end
 
 FlyFunction:

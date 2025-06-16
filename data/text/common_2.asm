@@ -324,6 +324,11 @@ _AlreadySurfingText::
 	prompt
 
 _AskSurfText::
+	text "The water is calm."
+	line  "Call LANTURN?"
+	done
+
+_AskPikaSurfText::
 	text "Want to traverse"
 	line "the calm water?"
 	done
