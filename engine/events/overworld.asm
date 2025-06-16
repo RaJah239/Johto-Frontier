@@ -317,6 +317,11 @@ Script_CutFromMenu:
 Script_Cut:
 	writetext UseCutText
 	refreshmap
+	pokepic SCYTHER
+	cry SCYTHER
+	waitsfx
+	closepokepic
+	refreshmap
 	callasm CutDownTreeOrGrass
 	closetext
 	end
@@ -419,7 +424,6 @@ Script_UseFlash:
 	waitsfx
 	closepokepic
 	refreshmap
-	opentext
 	writetext UseFlashTextScript
 	closetext
 	callasm BlindingFlash
@@ -1952,7 +1956,7 @@ GotOffBikeText:
 	text_end
 
 TryCutOW::
-	ld a, AXE
+	ld a, SCYTHER_CALL
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem

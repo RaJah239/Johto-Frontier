@@ -293,8 +293,8 @@ _CantUseItemText::
 	prompt
 
 _UseCutText::
-	text "You swung your"
-	line "AXE!"
+	text "SCYTHER appeared"
+	line "and CUT!"
 	prompt
 
 _CutNothingText::
@@ -493,7 +493,8 @@ _AskCutText::
 	text "This tree can be"
 	line "CUT!"
 
-	para "Use your AXE?"
+	para "Want to call"
+	line "SCYTHER?"
 	done
 
 _CanCutText::

@@ -236,7 +236,7 @@ ItemNameOrder:
 
 ; HM items
 	db MAREEP_CALL
-	db AXE
+	db SCYTHER_CALL
 	db PADDLE_BOAT
 	db POWER_GLOVE
 	db STABILIZER

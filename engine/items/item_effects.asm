@@ -19,7 +19,7 @@ ItemEffects:
 	dw NoEffect            ; BRIGHTPOWDER
 	dw PokeBallEffect      ; GREAT_BALL
 	dw PokeBallEffect      ; POKE_BALL
-	dw AxeEffect           ; AXE
+	dw ScytherCallEffect   ; SCYTHER_CALL
 	dw BicycleEffect       ; BICYCLE
 	dw EvoStoneEffect      ; MOON_STONE
 	dw StatusHealingEffect ; ANTIDOTE
@@ -2984,7 +2984,7 @@ GetMthMoveOfCurrentMon:
 	add hl, bc
 	ret
 
-AxeEffect:
+ScytherCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
 	farcall CutFunction

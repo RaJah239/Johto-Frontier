@@ -6,7 +6,7 @@ ItemDescriptions:
 	dw BrightpowderDesc
 	dw GreatBallDesc
 	dw PokeBallDesc
-	dw AxeDesc
+	dw ScytherCallDesc
 	dw BicycleDesc
 	dw MoonStoneDesc
 	dw AntidoteDesc
@@ -279,9 +279,9 @@ PokeBallDesc:
 	db   "An item for catch-"
 	next "ing #MON.@"
 
-AxeDesc:
-	db   "Used to cut grass"
-	next "and small trees.@"
+ScytherCallDesc:
+	db   "Calls a SCYTHER"
+	next "to CUT trees.@"
 
 BicycleDesc:
 	db   "A collapsible bike"
@@ -526,7 +526,7 @@ SecretPotionDesc:
 	next "#MON.@"
 
 MareepCallDesc:
-	db   "Calls an Mareep"
+	db   "Calls a MAREEP"
 	next "to light the way.@"
 
 MysteryEggDesc:
