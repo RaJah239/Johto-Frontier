@@ -302,9 +302,9 @@ _CutNothingText::
 	line "CUT here."
 	prompt
 
-_BlindingFlashText::
-	text "The LANTERN lit"
-	line "the area!@"
+_MareepLit::
+	text "MAREEP lit the"
+	line "path ahead!@"
 	text_promptbutton
 	text_end
 

@@ -68,7 +68,7 @@ ItemDescriptions:
 	dw ElixerDesc
 	dw RedScaleDesc
 	dw SecretPotionDesc
-	dw LanternDesc
+	dw MareepCallDesc
 	dw MysteryEggDesc
 	dw ClearBellDesc
 	dw SilverWingDesc
@@ -525,9 +525,9 @@ SecretPotionDesc:
 	db   "Fully heals any"
 	next "#MON.@"
 
-LanternDesc:
-	db   "Illuminates the"
-	next "darkest areas.@"
+MareepCallDesc:
+	db   "Calls an Mareep"
+	next "to light the way.@"
 
 MysteryEggDesc:
 	db   "An EGG obtained"

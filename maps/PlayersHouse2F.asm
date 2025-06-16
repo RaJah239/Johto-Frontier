@@ -59,8 +59,8 @@ if DEF(_DEBUG)
 	giveitem OLD_ROD
 	giveitem GOOD_ROD
 	giveitem SUPER_ROD
+	giveitem MAREEP_CALL
 	giveitem AXE
-	giveitem LANTERN
 	giveitem POWER_GLOVE
 	giveitem PADDLE_BOAT
 	giveitem STABILIZER

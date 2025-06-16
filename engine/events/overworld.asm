@@ -413,13 +413,21 @@ UseFlash:
 Script_UseFlash:
 	refreshmap
 	special UpdateTimePals
+	reanchormap
+	pokepic MAREEP
+	cry MAREEP
+	waitsfx
+	closepokepic
+	refreshmap
+	opentext
 	writetext UseFlashTextScript
+	closetext
 	callasm BlindingFlash
 	closetext
 	end
 
 UseFlashTextScript:
-	text_far _BlindingFlashText
+	text_far _MareepLit
 	text_asm
 	call WaitSFX
 	ld de, SFX_FLASH

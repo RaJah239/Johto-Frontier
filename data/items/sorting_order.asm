@@ -235,7 +235,7 @@ ItemNameOrder:
 	db SUPER_ROD
 
 ; HM items
-	db LANTERN
+	db MAREEP_CALL
 	db AXE
 	db PADDLE_BOAT
 	db POWER_GLOVE

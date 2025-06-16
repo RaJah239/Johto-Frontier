@@ -65,7 +65,7 @@ SproutTower3FRivalScene:
 SageLiScript:
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_LANTERN
+	checkevent EVENT_GOT_MAREEP_CALL
 	iftrue .GotFlash
 	writetext SageLiSeenText
 	waitbutton
@@ -77,8 +77,8 @@ SageLiScript:
 	opentext
 	writetext SageLiTakeThisFlashText
 	promptbutton
-	verbosegiveitem LANTERN
-	setevent EVENT_GOT_LANTERN
+	verbosegiveitem MAREEP_CALL
+	setevent EVENT_GOT_MAREEP_CALL
 	setevent EVENT_BEAT_SAGE_LI
 	writetext SageLiFlashExplanationText
 	waitbutton

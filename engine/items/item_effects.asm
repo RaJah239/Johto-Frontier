@@ -81,7 +81,7 @@ ItemEffects:
 	dw RestorePPEffect     ; ELIXER
 	dw NoEffect            ; RED_SCALE
 	dw NoEffect            ; SECRETPOTION
-	dw LanternEffect       ; LANTERN
+	dw MareepCallEffect    ; MAREEP_CALL
 	dw NoEffect            ; MYSTERY_EGG
 	dw NoEffect            ; CLEAR_BELL
 	dw NoEffect            ; SILVER_WING
@@ -3013,7 +3013,7 @@ PowerGloveEffect:
 	farcall StrengthFunction
 	ret
 
-LanternEffect:
+MareepCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
 	farcall FlashFunction
