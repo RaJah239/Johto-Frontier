@@ -239,7 +239,7 @@ ItemNameOrder:
 	db SCYTHER_CALL
 	db LANTURN_CALL
 	db DONPHAN_CALL
-	db STABILIZER
+	db KINGDRA_CALL
 	db GEYSER_BOOTS
 
 ; Key Items that are possibly seldom used

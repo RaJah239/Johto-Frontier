@@ -1316,9 +1316,15 @@ Script_WhirlpoolFromMenu:
 	special UpdateTimePals
 
 Script_UsedWhirlpool:
-	callasm GetPartyNickname
-	writetext UseWhirlpoolText
+	reanchormap
+	pokepic KINGDRA
+	cry KINGDRA
+	waitsfx
+	closepokepic
 	refreshmap
+	writetext UseWhirlpoolText
+	closetext
+
 	setflag ENGINE_WHIRPOOL_ACTIVE
 
 	clearflag ENGINE_HEADBUTT_ACTIVE
@@ -1369,7 +1375,7 @@ Script_AutoWhirlpool:
 	step_end
 
 TryWhirlpoolOW::
-	ld a, STABILIZER
+	ld a, KINGDRA_CALL
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem

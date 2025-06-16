@@ -90,7 +90,7 @@ ItemDescriptions:
 	dw BigMushroomDesc
 	dw SilverPowderDesc
 	dw BluApricornDesc
-	dw StabilizerDesc
+	dw KingdraCallDesc
 	dw AmuletCoinDesc
 	dw YlwApricornDesc
 	dw GrnApricornDesc
@@ -611,9 +611,9 @@ SilverPowderDesc:
 BluApricornDesc:
 	db   "A blue APRICORN.@"
 
-StabilizerDesc:
-	db   "Calms whirlpools"
-	next "enough to cross.@"
+KingdraCallDesc:
+	db "Calls a KINGDRA to"
+	next "cross WHIRLPOOLS.@"
 
 AmuletCoinDesc:
 	db   "Doubles monetary"

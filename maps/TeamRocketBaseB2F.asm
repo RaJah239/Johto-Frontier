@@ -284,8 +284,8 @@ RocketBaseElectrodeScript:
 	opentext
 	writetext RocketBaseLanceElectrodeDoneText
 	promptbutton
-	verbosegiveitem STABILIZER
-	setevent EVENT_GOT_STABILIZER
+	verbosegiveitem KINGDRA_CALL
+	setevent EVENT_GOT_KINGDRA_CALL
 	writetext RocketBaseLanceWhirlpoolText
 	waitbutton
 	closetext

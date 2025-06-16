@@ -403,22 +403,19 @@ _BouldersMayMoveText::
 	done
 
 _UseWhirlpoolText::
-	text "Crossing gently…"
+	text "Crossing…"
 	prompt
 
 _MayPassWhirlpoolText::
 	text "It's a vicious"
 	line "WHIRLPOOL!"
-	
-	para "An item is needed"
-	line "to get past it."
 	done
 
 _AskWhirlpoolText::
 	text "A WHIRLPOOL is in"
 	line "the way."
 
-	para "Want to cross it?"
+	para "Call KINGDRA?"
 	done
 
 _UseHeadbuttText::

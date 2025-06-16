@@ -63,7 +63,7 @@ if DEF(_DEBUG)
 	giveitem SCYTHER_CALL
 	giveitem DONPHAN_CALL
 	giveitem LANTURN_CALL
-	giveitem STABILIZER
+	giveitem KINGDRA_CALL
 	giveitem GEYSER_BOOTS
 
 	; good party

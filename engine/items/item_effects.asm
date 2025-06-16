@@ -103,7 +103,7 @@ ItemEffects:
 	dw NoEffect            ; BIG_MUSHROOM
 	dw NoEffect            ; SILVERPOWDER
 	dw NoEffect            ; BLU_APRICORN
-	dw StabilizerEffect    ; STABILIZER
+	dw KingdraCallEffect   ; KINGDRA_CALL
 	dw NoEffect            ; AMULET_COIN
 	dw NoEffect            ; YLW_APRICORN
 	dw NoEffect            ; GRN_APRICORN
@@ -3008,7 +3008,7 @@ MareepCallEffect:
 	farcall FlashFunction
 	ret
 
-StabilizerEffect:
+KingdraCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
 	farcall WhirlpoolFunction
