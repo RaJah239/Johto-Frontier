@@ -38,7 +38,7 @@ ItemEffects:
 	dw EvoStoneEffect      ; FIRE_STONE
 	dw EvoStoneEffect      ; THUNDERSTONE
 	dw EvoStoneEffect      ; WATER_STONE
-	dw PaddleBoatEffect    ; PADDLE_BOAT
+	dw LanturnCallEffect   ; LANTURN_CALL
 	dw VitaminEffect       ; HP_UP
 	dw VitaminEffect       ; PROTEIN
 	dw VitaminEffect       ; IRON
@@ -2990,21 +2990,10 @@ ScytherCallEffect:
 	farcall CutFunction
 	ret
 
-PaddleBoatEffect:
+LanturnCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
 	farcall SurfFunction
-	ld a, [wFieldMoveSucceeded]
-	and a
-	jr z, FailHMItem
-	ld b, $4
-	ld a, $2
-	ret
-
-FailHMItem:
-	xor a
-	ld [wItemEffectSucceeded], a
-	ld a, $3
 	ret
 
 PowerGloveEffect:

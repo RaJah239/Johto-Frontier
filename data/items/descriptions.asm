@@ -25,7 +25,7 @@ ItemDescriptions:
 	dw FireStoneDesc
 	dw ThunderStoneDesc
 	dw WaterStoneDesc
-	dw PaddleBoatDesc
+	dw LanturnCallDesc
 	dw HPUpDesc
 	dw ProteinDesc
 	dw IronDesc
@@ -355,9 +355,9 @@ WaterStoneDesc:
 	db   "Evolves certain"
 	next "kinds of #MON.@"
 
-PaddleBoatDesc:
-	db   "Used to traverse"
-	next "water.@"
+LanturnCallDesc:
+	db   "Calls a LANTURN to"
+	next "ferry you.@"
 
 HPUpDesc:
 	db   "Raises the HP of"

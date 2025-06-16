@@ -634,7 +634,7 @@ TrySurfOW::
 	jr .finish
 
 .check_mon_move
-	ld a, PADDLE_BOAT
+	ld a, LANTURN_CALL
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem

@@ -74,7 +74,7 @@ DanceTheaterSurfGuy:
 	opentext
 	writetext SurfGuyNeverLeftAScratchText
 	promptbutton
-	checkevent EVENT_GOT_PADDLE_BOAT
+	checkevent EVENT_GOT_LANTURN_CALL
 	iftrue SurfGuyAlreadyGaveSurf
 	checkevent EVENT_BEAT_KIMONO_GIRL_NAOKO
 	iffalse .KimonoGirlsUndefeated
@@ -105,8 +105,8 @@ DanceTheaterSurfGuy:
 .GetSurf:
 	writetext SurfGuyLikeADanceText
 	promptbutton
-	verbosegiveitem PADDLE_BOAT
-	setevent EVENT_GOT_PADDLE_BOAT
+	verbosegiveitem LANTURN_CALL
+	setevent EVENT_GOT_LANTURN_CALL
 	writetext SurfGuySurfExplanationText
 	waitbutton
 	closetext

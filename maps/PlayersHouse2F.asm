@@ -62,7 +62,7 @@ if DEF(_DEBUG)
 	giveitem MAREEP_CALL
 	giveitem SCYTHER_CALL
 	giveitem POWER_GLOVE
-	giveitem PADDLE_BOAT
+	giveitem LANTURN_CALL
 	giveitem STABILIZER
 	giveitem GEYSER_BOOTS
 
