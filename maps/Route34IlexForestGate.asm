@@ -47,13 +47,13 @@ Route34IlexForestGateTeacherScript:
 	opentext
 	checkevent EVENT_FOREST_IS_RESTLESS
 	iftrue .ForestIsRestless
-	checkevent EVENT_GOT_TM12_SWEET_SCENT
+	checkevent EVENT_GOT_TANGELA_CALL
 	iftrue .GotSweetScent
 	writetext Route34IlexForestGateTeacherText
 	promptbutton
-	verbosegiveitem TM_SWEET_SCENT
+	verbosegiveitem TANGELA_CALL
 	iffalse .NoRoom
-	setevent EVENT_GOT_TM12_SWEET_SCENT
+	setevent EVENT_GOT_TANGELA_CALL
 .GotSweetScent:
 	writetext Route34IlexForestGateTeacher_GotSweetScent
 	waitbutton
