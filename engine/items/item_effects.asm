@@ -63,7 +63,7 @@ ItemEffects:
 	dw RestoreHPEffect     ; SODA_POP
 	dw RestoreHPEffect     ; LEMONADE
 	dw XItemEffect         ; X_ATTACK
-	dw PowerGloveEffect    ; POWER_GLOVE
+	dw DonphanCallEffect   ; DONPHAN_CALL
 	dw XItemEffect         ; X_DEFEND
 	dw XItemEffect         ; X_SPEED
 	dw XItemEffect         ; X_SPECIAL
@@ -2996,7 +2996,7 @@ LanturnCallEffect:
 	farcall SurfFunction
 	ret
 
-PowerGloveEffect:
+DonphanCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
 	farcall StrengthFunction

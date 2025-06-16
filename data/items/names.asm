@@ -49,7 +49,7 @@ ItemNames::
 	li "SODA POP"
 	li "LEMONADE"
 	li "X ATTACK"
-	li "POWER GLOVE"
+	li "DONPHAN CALL"
 	li "X DEFEND"
 	li "X SPEED"
 	li "X SPECIAL"

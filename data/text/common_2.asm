@@ -377,14 +377,9 @@ _CantUseTeleportText::
 	para ""
 	done
 
-_AlreadyUsingStrengthText::
-	text "Already using the"
-	line "POWER GLOVE!"
-	prompt
-
 _UseStrengthText::
-	text "Equipped the"
-	line "POWER GLOVE!"
+	text "DONPHAN used its"
+	line "STRENGTH!"
 	done
 
 _MoveBoulderText::
@@ -393,10 +388,8 @@ _MoveBoulderText::
 	prompt
 
 _AskStrengthText::
-	text "An item is needed"
-	line "to push this."
-	
-	para "Use POWER GLOVE?"
+	text "This can be moved."
+	line "Call DONPHAN?"
 	done
 
 _BouldersMoveText::

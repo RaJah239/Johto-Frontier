@@ -61,7 +61,7 @@ if DEF(_DEBUG)
 	giveitem SUPER_ROD
 	giveitem MAREEP_CALL
 	giveitem SCYTHER_CALL
-	giveitem POWER_GLOVE
+	giveitem DONPHAN_CALL
 	giveitem LANTURN_CALL
 	giveitem STABILIZER
 	giveitem GEYSER_BOOTS

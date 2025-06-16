@@ -1144,10 +1144,6 @@ StrengthFunction:
 	ld a, $81
 	ret
 
-.AlreadyUsingStrengthText:
-	text_far _AlreadyUsingStrengthText
-	text_end
-
 SetStrengthFlag:
 	ld hl, wBikeFlags
 	set BIKEFLAGS_STRENGTH_ACTIVE_F, [hl]
@@ -1169,7 +1165,13 @@ Script_StrengthFromMenu:
 Script_UsedStrength:
 	callasm SetStrengthFlag
 	writetext .UseStrengthText
-	promptbutton
+	waitbutton
+	reanchormap
+	pokepic DONPHAN
+	cry DONPHAN
+	waitsfx
+	closepokepic
+	refreshmap
 	writetext .MoveBoulderText
 	closetext
 	end
@@ -1215,7 +1217,7 @@ BouldersMayMoveText:
 	text_end
 
 TryStrengthOW:
-	ld a, POWER_GLOVE
+	ld a, DONPHAN_CALL
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem

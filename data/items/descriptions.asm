@@ -50,7 +50,7 @@ ItemDescriptions:
 	dw SodaPopDesc
 	dw LemonadeDesc
 	dw XAttackDesc
-	dw PowerGloveDesc
+	dw DonphanCallDesc
 	dw XDefendDesc
 	dw XSpeedDesc
 	dw XSpecialDesc
@@ -454,9 +454,9 @@ XAttackDesc:
 	db   "Raises ATTACK."
 	next "(1 BTL)@"
 
-PowerGloveDesc:
-	db   "Used to push large"
-	next "boulders.@"
+DonphanCallDesc:
+	db   "Calls a DONPHAN to"
+	next "move boulders.@"
 
 XDefendDesc:
 	db   "Raises DEFENSE."
