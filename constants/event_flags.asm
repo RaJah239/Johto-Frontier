@@ -277,8 +277,8 @@
 	const EVENT_PIKA_SURF
 	const EVENT_RADIO_TOWER_5F_DIRECTOR_FAKE
 	const EVENT_RADIO_TOWER_5F_REAL_DIRECTOR
-; Unused: next 331 events
-
+	const EVENT_BATTLE_TOWER_TM_MART_INTRO
+; Unused: next 330 events
 
 	const_next 600
 ; Kurt Apricorn events
