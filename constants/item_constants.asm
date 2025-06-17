@@ -308,6 +308,7 @@ DEF MT01 EQU const_value
 	add_mt ROCK_SLIDE
 	add_mt SKY_ATTACK
 	add_mt OUTRAGE
+	add_mt SURF
 DEF NUM_TUTORS = __tmhm_value__ - NUM_TMS - NUM_HMS - 1
 
 DEF NUM_TM_HM_TUTOR EQU NUM_TMS + NUM_HMS + NUM_TUTORS

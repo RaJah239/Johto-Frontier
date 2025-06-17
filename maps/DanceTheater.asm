@@ -8,6 +8,7 @@
 	const DANCETHEATER_RHYDON
 	const DANCETHEATER_COOLTRAINER_M
 	const DANCETHEATER_GRANNY
+	const DANCETHEATER_SURF_TUTOR
 
 DanceTheater_MapScripts:
 	def_scene_scripts
@@ -334,6 +335,45 @@ DanceTheaterFancyPanelText:
 	cont "with flowers."
 	done
 
+DanceTheaterTutorSurfScript:
+	faceplayer
+	opentext
+	writetext DanceTheaterTutorSurfText
+	yesorno
+	iffalse .TutorRefused
+	setval SURF
+	writetext DanceTheaterTutorSurfClear
+	special MoveTutor
+	ifequal FALSE, .TeachMove
+.TutorRefused:
+	writetext DanceTheaterTutorSurfRefused
+	waitbutton
+	closetext
+	end
+
+.TeachMove:
+	writetext DanceTheaterTutorSurfTaught
+	waitbutton
+	closetext
+	end
+
+DanceTheaterTutorSurfText:
+	text "Hello there!"
+	line "Teach SURF?"
+	done
+
+DanceTheaterTutorSurfRefused:
+	text "OK then."
+	done
+
+DanceTheaterTutorSurfClear:
+	text_start
+	done
+
+DanceTheaterTutorSurfTaught:
+	text "Ride the waves!"
+	done
+
 DanceTheater_MapEvents:
 	def_warp_events
 	warp_event  5, 13, ECRUTEAK_CITY, 8
@@ -355,3 +395,4 @@ DanceTheater_MapEvents:
 	object_event  6,  8, SPRITE_RHYDON, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, DanceTheaterRhydon, -1
 	object_event 10, 10, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, DanceTheaterCooltrainerMScript, -1
 	object_event  3,  6, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DanceTheaterGrannyScript, -1
+	object_event 10,  6, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, DanceTheaterTutorSurfScript, -1
