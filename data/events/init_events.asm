@@ -115,6 +115,7 @@ if DEF(_DEBUG)
 endc
 
 ; Place new events that initialises on game start
+	dw EVENT_RADIO_TOWER_5F_REAL_DIRECTOR
 	dw -1 ; end
 
 InitialEngineFlags:
@@ -127,10 +128,5 @@ MACRO initvarsprite
 ; variable sprite, appearance sprite
 	db \1 - SPRITE_VARS, \2
 ENDM
-	initvarsprite SPRITE_FUCHSIA_GYM_1, SPRITE_JANINE     ; to remove
-	initvarsprite SPRITE_FUCHSIA_GYM_2, SPRITE_JANINE     ; to remove
-	initvarsprite SPRITE_FUCHSIA_GYM_3, SPRITE_JANINE     ; to remove
-	initvarsprite SPRITE_FUCHSIA_GYM_4, SPRITE_JANINE     ; to remove
-	initvarsprite SPRITE_COPYCAT, SPRITE_LASS             ; to remove
-	initvarsprite SPRITE_JANINE_IMPERSONATOR, SPRITE_LASS ; to remove
+	initvarsprite SPRITE_DIRECTOR_IMPERSONATOR, SPRITE_GENTLEMAN
 	db -1 ; end

@@ -1,9 +1,10 @@
 	object_const_def
-	const RADIOTOWER5F_DIRECTOR
+	const RADIOTOWER5F_FAKE_DIRECTOR
 	const RADIOTOWER5F_ROCKET
 	const RADIOTOWER5F_ROCKET_GIRL
 	const RADIOTOWER5F_ROCKER
 	const RADIOTOWER5F_POKE_BALL
+	const RADIOTOWER5F_REAL_DIRECTOR
 
 RadioTower5F_MapScripts:
 	def_scene_scripts
@@ -22,22 +23,29 @@ RadioTower5FNoop2Scene:
 RadioTower5FNoop3Scene:
 	end
 
-FakeDirectorScript:
-	turnobject RADIOTOWER5F_DIRECTOR, UP
-	showemote EMOTE_SHOCK, RADIOTOWER5F_DIRECTOR, 15
+FakeDirectorApproachesScript:
+	turnobject RADIOTOWER5F_FAKE_DIRECTOR, UP
+	showemote EMOTE_SHOCK, RADIOTOWER5F_FAKE_DIRECTOR, 15
 	opentext
 	writetext FakeDirectorTextBefore1
 	waitbutton
 	closetext
-	applymovement RADIOTOWER5F_DIRECTOR, FakeDirectorMovement
+	applymovement RADIOTOWER5F_FAKE_DIRECTOR, FakeDirectorMovement
 	special SaveMusic
 	playmusic MUSIC_ROCKET_ENCOUNTER
 	opentext
 	writetext FakeDirectorTextBefore2
 	waitbutton
 	closetext
+	applymovement RADIOTOWER5F_FAKE_DIRECTOR, FakeDirectorImpersonatorSpinMovement
+	faceplayer
+	variablesprite SPRITE_DIRECTOR_IMPERSONATOR, SPRITE_PETREL
+	special LoadUsedSpritesGFX
+	opentext
+	writetext PetrelRevealsHimselfText
+	waitbutton
 	winlosstext FakeDirectorWinText, 0
-	setlasttalked RADIOTOWER5F_DIRECTOR
+	setlasttalked RADIOTOWER5F_FAKE_DIRECTOR
 	loadtrainer PETREL, PETREL2
 	startbattle
 	reloadmapafterbattle
@@ -50,17 +58,33 @@ FakeDirectorScript:
 	setevent EVENT_BEAT_ROCKET_EXECUTIVEM_3
 	end
 
-Director:
+FakeDirectorImpersonatorSpinMovement:
+	turn_head DOWN
+	turn_head LEFT
+	turn_head UP
+	turn_head RIGHT
+	turn_head DOWN
+	turn_head LEFT
+	turn_head UP
+	turn_head RIGHT
+	turn_head DOWN
+	turn_head LEFT
+	turn_head UP
+	turn_head RIGHT
+	turn_head DOWN
+	step_end
+
+FakeDirectorScript:
 	faceplayer
 	opentext
-	checkevent EVENT_CLEARED_RADIO_TOWER
-	iftrue .TrueDirector
 	writetext FakeDirectorTextAfter
 	waitbutton
 	closetext
 	end
 
-.TrueDirector:
+TrueDirector:
+	faceplayer
+	opentext
 	writetext RadioTower5FDirectorText
 	waitbutton
 	closetext
@@ -113,10 +137,10 @@ RadioTower5FRocketBossScript:
 	setevent EVENT_BLACKTHORN_CITY_SUPER_NERD_BLOCKS_GYM
 	clearevent EVENT_BLACKTHORN_CITY_SUPER_NERD_DOES_NOT_BLOCK_GYM
 	special PlayMapMusic
-	disappear RADIOTOWER5F_DIRECTOR
-	moveobject RADIOTOWER5F_DIRECTOR, 12, 0
-	appear RADIOTOWER5F_DIRECTOR
-	applymovement RADIOTOWER5F_DIRECTOR, RadioTower5FDirectorWalksIn
+	disappear RADIOTOWER5F_FAKE_DIRECTOR
+	moveobject RADIOTOWER5F_REAL_DIRECTOR, 12, 0
+	appear RADIOTOWER5F_REAL_DIRECTOR
+	applymovement RADIOTOWER5F_REAL_DIRECTOR, RadioTower5FDirectorWalksIn
 	turnobject PLAYER, RIGHT
 	opentext
 	writetext RadioTower5FDirectorThankYouText
@@ -129,9 +153,10 @@ RadioTower5FRocketBossScript:
 	setmapscene ECRUTEAK_TIN_TOWER_ENTRANCE, SCENE_ECRUTEAKTINTOWERENTRANCE_SAGE_BLOCKS
 	setevent EVENT_GOT_CLEAR_BELL
 	setevent EVENT_TEAM_ROCKET_DISBANDED
-	applymovement RADIOTOWER5F_DIRECTOR, RadioTower5FDirectorWalksOut
+	applymovement RADIOTOWER5F_REAL_DIRECTOR, RadioTower5FDirectorWalksOut
 	playsound SFX_EXIT_BUILDING
-	disappear RADIOTOWER5F_DIRECTOR
+	disappear RADIOTOWER5F_REAL_DIRECTOR
+	clearevent EVENT_RADIO_TOWER_5F_REAL_DIRECTOR
 	end
 
 Ben:
@@ -202,8 +227,10 @@ FakeDirectorTextBefore2:
 	cont "imposter!"
 
 	para "It is I, PETREL!"
+	done
 
-	para "I posed as the"
+PetrelRevealsHimselfText:
+	text "I posed as the"
 	line "Director to sway"
 
 	para "the entire region"
@@ -451,7 +478,7 @@ RadioTower5F_MapEvents:
 	warp_event 12,  0, RADIO_TOWER_4F, 3
 
 	def_coord_events
-	coord_event  0,  3, SCENE_RADIOTOWER5F_FAKE_DIRECTOR, FakeDirectorScript
+	coord_event  0,  3, SCENE_RADIOTOWER5F_FAKE_DIRECTOR, FakeDirectorApproachesScript
 	coord_event 16,  5, SCENE_RADIOTOWER5F_ROCKET_BOSS, RadioTower5FRocketBossScript
 
 	def_bg_events
@@ -462,8 +489,9 @@ RadioTower5F_MapEvents:
 	bg_event 17,  1, BGEVENT_READ, RadioTower5FBookshelf
 
 	def_object_events
-	object_event  3,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Director, -1
+	object_event  3,  6, SPRITE_DIRECTOR_IMPERSONATOR, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1,PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, FakeDirectorScript, EVENT_RADIO_TOWER_5F_DIRECTOR_FAKE
 	object_event 13,  5, SPRITE_ARCHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
 	object_event 17,  2, SPRITE_ARIANA, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerExecutivef1, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
 	object_event 13,  5, SPRITE_ROCKER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Ben, EVENT_RADIO_TOWER_CIVILIANS_AFTER
 	object_event  8,  5, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, RadioTower5FUltraBall, EVENT_RADIO_TOWER_5F_ULTRA_BALL
+	object_event  3,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1,PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, TrueDirector, EVENT_RADIO_TOWER_5F_REAL_DIRECTOR

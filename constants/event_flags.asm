@@ -275,7 +275,10 @@
 	const EVENT_MET_TRADE_KID
 	const EVENT_COMPLETED_TRADE_WITH_TRADE_BACK_KID
 	const EVENT_PIKA_SURF
-; Unused: next 333 events
+	const EVENT_RADIO_TOWER_5F_DIRECTOR_FAKE
+	const EVENT_RADIO_TOWER_5F_REAL_DIRECTOR
+; Unused: next 331 events
+
 
 	const_next 600
 ; Kurt Apricorn events
