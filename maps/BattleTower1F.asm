@@ -596,6 +596,8 @@ BattleTower1F_MapEvents:
 	warp_event  7,  9, BATTLE_TOWER_OUTSIDE, 3
 	warp_event  8,  9, BATTLE_TOWER_OUTSIDE, 4
 	warp_event  7,  0, BATTLE_TOWER_ELEVATOR, 1
+	warp_event  3,  0, BATTLE_TOWER_MART, 1
+	warp_event 12,  0, BATTLE_TOWER_MART, 4
 
 	def_coord_events
 

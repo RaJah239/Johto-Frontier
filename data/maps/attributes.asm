@@ -417,6 +417,7 @@ ENDM
 	map_attributes CianwoodLugiaSpeechHouse, CIANWOOD_LUGIA_SPEECH_HOUSE, $00, 0
 	map_attributes PokeSeersHouse, POKE_SEERS_HOUSE, $00, 0
 	map_attributes BattleTower1F, BATTLE_TOWER_1F, $00, 0
+	map_attributes BattleTowerMart, BATTLE_TOWER_MART, $00, 0
 	map_attributes BattleTowerBattleRoom, BATTLE_TOWER_BATTLE_ROOM, $00, 0
 	map_attributes BattleTowerElevator, BATTLE_TOWER_ELEVATOR, $00, 0
 	map_attributes BattleTowerHallway, BATTLE_TOWER_HALLWAY, $00, 0

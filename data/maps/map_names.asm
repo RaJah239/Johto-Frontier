@@ -370,6 +370,7 @@ Cianwood_Map_Names: ;newgroup CIANWOOD
 	dw Cianwood_Map_Name16 ; map_const BATTLE_TOWER_OUTSIDE ; 16
 	dw Cianwood_Map_Name17 ; map_const CIANWOOD_PORT ; 17
 	dw Cianwood_Map_Name18 ; map_const CIANWOOD_PORT_PASSAGE ; 18
+	dw Cianwood_Map_Name19 ; map_const BATTLE_TOWER_MART ; 19
 	assert_table_length NUM_CIANWOOD_MAPS
 
 
@@ -889,7 +890,8 @@ Cianwood_Map_Name17: ; map_const CIANWOOD_PORT, ; 17
 	db "CIANWOOD MARINA@"
 Cianwood_Map_Name18: ; map_const CIANWOOD_PORT_PASSAGE, ; 18
 	db "CIANWOOD PASSAGE@"
-
+Cianwood_Map_Name19: ; map_const BATTLE_TOWER_MART ; Crystal Trove
+	db "BATTLE TOWER MART@"
 
 Viridian_Map_Name6: ; map_const TRAINER_HOUSE_1F ;  6
 	db "VIRIDIAN HOUSE 1F@"
