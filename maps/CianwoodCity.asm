@@ -421,8 +421,8 @@ CianwoodPhotoStudioSignText:
 	text "CIANWOOD CITY"
 	line "PHOTO STUDIO"
 
-	para "Take a Snapshot as"
-	line "a Keepsake!"
+	para "Boost affection"
+	line "with a picture!"
 	done
 
 CianwoodPokeSeerSignText:
