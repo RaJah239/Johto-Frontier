@@ -14,6 +14,7 @@ MoveDeleter:
 	special MoveDeletion
 	waitbutton
 	closetext
+	turnobject MOVEDELETERSHOUSE_SUPER_NERD, UP
 	end
 
 EggTutorScript:
@@ -198,6 +199,6 @@ MoveDeletersHouse_MapEvents:
 	bg_event  1,  1, BGEVENT_READ, MoveDeletersHouseBookshelf
 
 	def_object_events
-	object_event  2,  3, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MoveDeleter, -1
+	object_event  2,  2, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MoveDeleter, -1
 	object_event  2,  4, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, EggTutorScript, -1
 	object_event  5,  4, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, BlackthornTutor1Script, -1
