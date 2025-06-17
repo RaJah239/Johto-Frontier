@@ -4,6 +4,7 @@
 	const VIOLETPOKECENTER1F_GENTLEMAN
 	const VIOLETPOKECENTER1F_YOUNGSTER
 	const VIOLETPOKECENTER1F_ELMS_AIDE
+	const VIOLETPOKECENTER1F_CHANSEY
 
 VioletPokecenter1F_MapScripts:
 	def_scene_scripts
@@ -190,6 +191,9 @@ VioletPokecenter1FYoungsterText:
 	line "they please."
 	done
 
+VioletPokecenterChanseyScript:
+	jumpstd ChanseyPokeCenterScript
+
 VioletPokecenter1F_MapEvents:
 	def_warp_events
 	warp_event  3,  7, VIOLET_CITY, 5
@@ -206,3 +210,4 @@ VioletPokecenter1F_MapEvents:
 	object_event  1,  4, SPRITE_GENTLEMAN, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, VioletPokecenter1FGentlemanScript, -1
 	object_event  8,  1, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, VioletPokecenter1FYoungsterScript, -1
 	object_event  4,  3, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, VioletPokecenter1F_ElmsAideScript, EVENT_ELMS_AIDE_IN_VIOLET_POKEMON_CENTER
+	object_event  4,  1, SPRITE_CHANSEY, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, VioletPokecenterChanseyScript, -1

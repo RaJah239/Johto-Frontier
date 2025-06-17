@@ -3,6 +3,7 @@
 	const GOLDENRODPOKECENTER1F_GAMEBOY_KID
 	const GOLDENRODPOKECENTER1F_LASS
 	const GOLDENRODPOKECENTER1F_POKEFAN_F
+	const GOLDENRODPOKECENTER1F_CHANSEY
 
 GoldenrodPokecenter1F_MapScripts:
 	def_scene_scripts
@@ -128,6 +129,9 @@ GoldenrodPokecenter1FPlayerGaveAwayTheEonMailText:
 	line "the EON MAIL."
 	done
 
+GoldenrodPokecenterChanseyScript:
+	jumpstd ChanseyPokeCenterScript
+
 GoldenrodPokecenter1F_MapEvents:
 	def_warp_events
 	warp_event  3,  7, GOLDENROD_CITY, 15
@@ -144,3 +148,4 @@ GoldenrodPokecenter1F_MapEvents:
 	object_event  6,  1, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, GoldenrodPokecenter1FGameboyKidScript, -1
 	object_event  1,  4, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodPokecenter1FLassScript, -1
 	object_event  7,  5, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, GoldenrodPokecenter1FPokefanF, -1
+	object_event  4,  1, SPRITE_CHANSEY, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodPokecenterChanseyScript, -1

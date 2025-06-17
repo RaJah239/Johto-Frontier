@@ -1,6 +1,7 @@
 	object_const_def
 	const SILVERCAVEPOKECENTER1F_NURSE
 	const SILVERCAVEPOKECENTER1F_GRANNY
+	const SILVERCAVEPOKECENTER1F_CHANSEY
 
 SilverCavePokecenter1F_MapScripts:
 	def_scene_scripts
@@ -27,6 +28,9 @@ SilverCavePokecenter1FGrannyText:
 	line "anywhere…"
 	done
 
+SilverCavePokecenterChanseyScript:
+	jumpstd ChanseyPokeCenterScript
+
 SilverCavePokecenter1F_MapEvents:
 	def_warp_events
 	warp_event  3,  7, SILVER_CAVE_OUTSIDE, 1
@@ -40,3 +44,4 @@ SilverCavePokecenter1F_MapEvents:
 	def_object_events
 	object_event  3,  1, SPRITE_NURSE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SilverCavePokecenter1FNurseScript, -1
 	object_event  1,  5, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_LEFT, 2, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SilverCavePokecenter1FGrannyScript, -1
+	object_event  4,  1, SPRITE_CHANSEY, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SilverCavePokecenterChanseyScript, -1
