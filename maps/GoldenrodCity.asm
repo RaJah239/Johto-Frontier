@@ -345,12 +345,13 @@ GoldenrodCityYoungster2Text:
 	done
 
 GoldenrodCityLassText:
-	text "The man at that"
-	line "house rates your"
-	cont "#MON names."
+	text "The men in that"
+	line "house are super"
+	cont "helpful!"
 
-	para "He can even rename"
-	line "your #MON."
+	para "I'll be revisit-"
+	line "ing them in the"
+	cont "future."
 	done
 
 GoldenrodCityGrampsText:
@@ -460,10 +461,10 @@ GoldenrodCityGameCornerSignText:
 	done
 
 GoldenrodCityNameRaterSignText:
-	text "NAME RATER"
+	text "#-BROS."
 
-	para "Get Your #MON"
-	line "Nicknames Rated"
+	para "We can help you"
+	line "and your friends!"
 	done
 
 GoldenrodCityUndergroundSignNorthText:
