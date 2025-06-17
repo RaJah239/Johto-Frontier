@@ -26,6 +26,11 @@ MaleTrainers:
 	db SAGE
 	db BIKER
 	db SCIENTIST
+	db GIOVANNI
+	db PROTON
+	db PETREL
+	db ARCHER
+	db MAXIMA
 .End
 
 FemaleTrainers:
@@ -40,4 +45,8 @@ FemaleTrainers:
 	db POKEFANF
 	db COOLTRAINERF
 	db SPRITE_KRIS
+	db LORELEI
+	db AGATHA
+	db SCARLET
+	db ARIANA
 .End

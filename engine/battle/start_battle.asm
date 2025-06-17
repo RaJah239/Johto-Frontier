@@ -45,9 +45,9 @@ PlayBattleMusic:
 	ld a, [wBattleType]
 	cp BATTLETYPE_SUICUNE
 	ld de, MUSIC_SUICUNE_BATTLE
-	jr z, .done
+	jmp z, .done
 	cp BATTLETYPE_ROAMING
-	jr z, .done
+	jmp z, .done
 
 	; Are we fighting a trainer?
 	ld a, [wOtherTrainerClass]
@@ -69,6 +69,8 @@ PlayBattleMusic:
 	jr z, .done
 
     ld de, MUSIC_FINAL_BATTLE
+    cp POKEMON_PROF
+    jr z, .done
     cp BLUE
     jr z, .done
 
@@ -80,6 +82,14 @@ PlayBattleMusic:
 	cp EXECUTIVEM
  	jr z, .done
  	cp EXECUTIVEF
+ 	jr z, .done
+ 	cp PROTON
+ 	jr z, .done
+  	cp PETREL
+ 	jr z, .done
+  	cp ARIANA
+ 	jr z, .done
+  	cp ARCHER
  	jr z, .done
 
 	ld de, MUSIC_KANTO_GYM_LEADER_BATTLE

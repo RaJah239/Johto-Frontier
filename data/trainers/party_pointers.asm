@@ -71,4 +71,13 @@ TrainerGroups:
 	dba GruntFGroup
 	dba MysticalmanGroup
 	dba KrisGroup
+	dba GiovanniGroup
+	dba ProtonGroup
+	dba PetrelGroup
+	dba LoreleiGroup
+	dba AgathaGroup
+	dba ScarletGroup
+	dba ArianaGroup
+	dba ArcherGroup
+	dba MaximaGroup
 	assert_table_length NUM_TRAINER_CLASSES

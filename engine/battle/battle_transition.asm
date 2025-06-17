@@ -691,6 +691,16 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	jr z, .load_rocket_pals
 	cp EXECUTIVEF
 	jr z, .load_rocket_pals
+	cp PROTON
+	jr z, .load_rocket_pals
+	cp PETREL
+	jr z, .load_rocket_pals
+	cp ARIANA
+	jr z, .load_rocket_pals
+	cp ARCHER
+	jr z, .load_rocket_pals
+	cp GIOVANNI
+	jr z, .load_rocket_pals
 	ld hl, .pals
 .load_rocket_pals
 	ld a, [wTimeOfDayPalset]
@@ -765,6 +775,16 @@ INCLUDE "gfx/overworld/rocket_battle.pal"
 	cp EXECUTIVEM
 	ret z
 	cp EXECUTIVEF
+	ret z
+	cp PROTON
+	ret z
+	cp PETREL
+	ret z
+	cp ARIANA
+	ret z
+	cp ARCHER
+	ret z
+	cp GIOVANNI
 	ret z
 	ld de, PokeBallTransition
 	ret

@@ -95,6 +95,15 @@ BlueGroup:
 OfficerGroup:
 GruntFGroup:
 MysticalmanGroup:
+GiovanniGroup:
+ProtonGroup:
+PetrelGroup:
+ArianaGroup:
+ArcherGroup:
+LoreleiGroup:
+AgathaGroup:
+MaximaGroup:
+ScarletGroup:
 	db "L@", TRAINERTYPE_NORMAL
 	db 2, ZUBAT
 	db -1 ; end
