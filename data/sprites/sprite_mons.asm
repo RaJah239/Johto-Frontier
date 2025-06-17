@@ -23,7 +23,7 @@ SpriteMons:
 	db RAIKOU
 	db GRIMER
 	db SKORUPI
-	db SKORUPI
+	db AMPHAROS
 	db TENTACOOL
 	db TAUROS
 	db DITTO

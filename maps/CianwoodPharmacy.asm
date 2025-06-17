@@ -19,11 +19,7 @@ CianwoodPharmacist:
 	iffalse .Mart
 	writetext PharmacistGiveSecretpotionText
 	promptbutton
-	giveitem SECRETPOTION
-	writetext ReceivedSecretpotionText
-	playsound SFX_KEY_ITEM
-	waitsfx
-	itemnotify
+	verbosegiveitem SECRETPOTION
 	setevent EVENT_GOT_SECRETPOTION_FROM_PHARMACY
 	writetext PharmacistDescribeSecretpotionText
 	waitbutton
@@ -55,11 +51,6 @@ PharmacistGiveSecretpotionText:
 
 	para "This ought to do"
 	line "the trick."
-	done
-
-ReceivedSecretpotionText:
-	text "<PLAYER> received"
-	line "SECRETPOTION."
 	done
 
 PharmacistDescribeSecretpotionText:
