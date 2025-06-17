@@ -11,7 +11,7 @@ SpriteMons:
 	db ZUBAT
 	db MAGIKARP
 	db SQUIRTLE
-	db TOGEPI
+	db CHANSEY
 	db DITTO
 	db FEEBAS
 	db PIKACHU
