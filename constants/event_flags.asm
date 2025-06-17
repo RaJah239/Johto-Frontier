@@ -278,7 +278,8 @@
 	const EVENT_RADIO_TOWER_5F_DIRECTOR_FAKE
 	const EVENT_RADIO_TOWER_5F_REAL_DIRECTOR
 	const EVENT_BATTLE_TOWER_TM_MART_INTRO
-; Unused: next 330 events
+	const EVENT_MET_EGG_TUTOR
+; Unused: next 329 events
 
 	const_next 600
 ; Kurt Apricorn events
