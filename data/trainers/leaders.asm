@@ -29,4 +29,8 @@ KantoGymLeaders:
 	db SABRINA
 	db BLAINE
 	db BLUE
+	db WILL
+	db KOGA
+	db BRUNO
+	db KAREN
 	db -1

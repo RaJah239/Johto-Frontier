@@ -103,5 +103,12 @@ Music:
 	dba Music_BattleTowerTheme
 	dba Music_SuicuneBattle
 	dba Music_BattleTowerLobby
+; trove
 	dba Music_FinalBattle
+	dba Music_MaxieArchieBattle
+	dba Music_GymLeaderBattle
+	dba Music_HoennRivalBattle
+	dba Music_UnovaEliteFourBattle
+	dba Music_CaveOfOrigin
+	dba Music_MayEncounter
 	assert_table_length NUM_MUSIC_SONGS

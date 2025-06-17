@@ -57,22 +57,40 @@ PlayBattleMusic:
 	ld de, MUSIC_JOHTO_WILD_BATTLE
 	ld a, [wTimeOfDay]
 	cp NITE_F
-	jr c, .done ; not NITE_F or EVE_F
+	jp c, .done ; not NITE_F or EVE_F
 	ld de, MUSIC_KANTO_WILD_BATTLE
-	jr .done
+	jp .done
 
 .trainermusic
 	ld de, MUSIC_CHAMPION_BATTLE
 	cp CHAMPION
-	jr z, .done
+	jp z, .done
 	cp RED
-	jr z, .done
+	jp z, .done
 
     ld de, MUSIC_FINAL_BATTLE
     cp POKEMON_PROF
     jr z, .done
     cp BLUE
     jr z, .done
+
+	ld de, MUSIC_MAXIE_ARCHIE_BATTLE
+	cp GIOVANNI
+	jp z, .done
+
+	ld de, MUSIC_GYM_LEADER_BATTLE
+	cp LORELEI
+	jp z, .done
+	cp AGATHA
+	jp z, .done
+
+	ld de, MUSIC_HOENN_RIVAL_BATTLE
+	cp SCARLET
+	jp z, .done
+
+	ld de, MUSIC_UNOVA_ELITE_FOUR_BATTLE
+	cp MAXIMA
+	jp z, .done
 
 	ld de, MUSIC_ROCKET_BATTLE
 	cp GRUNTM

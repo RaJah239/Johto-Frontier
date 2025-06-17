@@ -102,6 +102,12 @@
 	const MUSIC_SUICUNE_BATTLE               ; 64
 	const MUSIC_BATTLE_TOWER_LOBBY           ; 65
 	const MUSIC_FINAL_BATTLE
+	const MUSIC_MAXIE_ARCHIE_BATTLE
+	const MUSIC_GYM_LEADER_BATTLE
+	const MUSIC_HOENN_RIVAL_BATTLE
+	const MUSIC_UNOVA_ELITE_FOUR_BATTLE
+	const MUSIC_CAVE_OF_ORIGIN
+	const MUSIC_SCARLET
 DEF NUM_MUSIC_SONGS EQU const_value
 
 ; GetMapMusic picks music for these values (see home/map.asm)
