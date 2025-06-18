@@ -408,9 +408,11 @@ WrapDescription:
 	db   "Squeezes the foe"
 	line "for 2-5 turns.@"
 
+SkyAttackDescription:
+OutrageDescription:
 TakeDownDescription:
-	db   "A tackle that also"
-	line "hurts the user.@"
+	db "An attack with"
+	line "counterimpact.@"
 
 ThrashDescription:
 	db   "Works 2-3 turns"
@@ -832,10 +834,6 @@ LovelyKissDescription:
 	db   "May cause the foe"
 	line "to fall asleep.@"
 
-SkyAttackDescription:
-	db   "1st turn: Prepare"
-	line "2nd turn: Attack@"
-
 TransformDescription:
 	db   "The user assumes"
 	line "the foe's guise.@"
@@ -1059,10 +1057,6 @@ BoneRushDescription:
 LockOnDescription:
 	db   "Ensures the next"
 	line "attack will hit.@"
-
-OutrageDescription:
-	db   "Works 2-3 turns"
-	line "and confuses user.@"
 
 SandstormDescription:
 	db   "Inflicts damage"
