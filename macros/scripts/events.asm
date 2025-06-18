@@ -370,6 +370,12 @@ MACRO setflag
 	dw \1 ; engine_flag
 ENDM
 
+MACRO ResetEventFlag
+	ld de, \1 ; load into de EVENT_FLAG
+	ld b, RESET_FLAG ; reset flag/ clearevent
+	call EventFlagAction
+ENDM
+
 	const wildon_command ; $37
 MACRO wildon
 	db wildon_command

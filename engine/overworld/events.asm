@@ -867,6 +867,9 @@ CountStep:
 
 	farcall StepHappiness
 
+	; Reset multiple event flags every 256 steps
+;	ResetEventFlag EVENT_RED_IN_MT_SILVER ; example
+
 .skip_happiness
 	; Every 256 steps, offset from the happiness incrementor by 128 steps,
 	; decrease the hatch counter of all your eggs until you reach the first
