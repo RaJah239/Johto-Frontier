@@ -112,6 +112,8 @@
 	const SPRITE_MAXIMA
 	const SPRITE_S_MUSHROOM
 	const SPRITE_L_MUSHROOM
+	const SPRITE_BERRY
+	const SPRITE_APRICORN
 DEF NUM_OVERWORLD_SPRITES EQU const_value - 1
 
 ; SpriteMons indexes (see data/sprites/sprite_mons.asm)
