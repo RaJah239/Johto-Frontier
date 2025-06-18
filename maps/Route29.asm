@@ -2,11 +2,11 @@
 	const ROUTE29_COOLTRAINER_M1
 	const ROUTE29_YOUNGSTER
 	const ROUTE29_TEACHER1
-	const ROUTE29_FRUIT_TREE
 	const ROUTE29_FISHER
 	const ROUTE29_COOLTRAINER_M2
 	const ROUTE29_TUSCANY
 	const ROUTE29_POKE_BALL
+	const ROUTE29_APRICORN1
 
 Route29_MapScripts:
 	def_scene_scripts
@@ -205,9 +205,6 @@ Route29Sign1:
 
 Route29Sign2:
 	jumptext Route29Sign2Text
-
-Route29FruitTree:
-	fruittree FRUITTREE_ROUTE_29
 
 Route29Potion:
 	itemball POTION
@@ -408,6 +405,58 @@ Route29Sign2Text:
 	line "NEW BARK TOWN"
 	done
 
+Route29PinkApricornTree:
+	opentext
+	getitemname STRING_BUFFER_3, PNK_APRICORN
+	writetext Route29TreeText
+	promptbutton
+	writetext Route29HeyItsBerryApricornText
+	promptbutton
+	giveitem PNK_APRICORN
+	iffalse Route29NoRoomInBag
+	disappear ROUTE29_APRICORN1
+	writetext Route29FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route29NoBerryOrApricorn:
+	opentext
+	writetext Route29TreeText
+	promptbutton
+	writetext Route29NothingHereText
+	waitbutton
+	closetext
+	end
+
+Route29NoRoomInBag:
+	writetext Route29NoRoomInBagText
+	waitbutton
+	closetext
+	end
+
+Route29TreeText:
+	text_far _FruitBearingTreeText
+	text_end
+
+Route29NothingHereText:
+	text_far _NothingHereText
+	text_end
+
+Route29HeyItsBerryApricornText:
+	text_far _HeyItsFruitText
+	text_end
+
+Route29FoundItemText:
+	text_far _ObtainedFruitText
+	text_end
+
+Route29NoRoomInBagText:
+	text_far _CantCarryItemText
+	text_end
+
 Route29_MapEvents:
 	def_warp_events
 	warp_event 27,  1, ROUTE_29_ROUTE_46_GATE, 3
@@ -419,13 +468,14 @@ Route29_MapEvents:
 	def_bg_events
 	bg_event 51,  7, BGEVENT_READ, Route29Sign1
 	bg_event  3,  5, BGEVENT_READ, Route29Sign2
+	bg_event 12,  2, BGEVENT_READ, Route29NoBerryOrApricorn
 
 	def_object_events
 	object_event 50, 12, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, CatchingTutorialDudeScript, -1
 	object_event 27, 16, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route29YoungsterScript, -1
 	object_event 15, 11, SPRITE_TEACHER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route29TeacherScript, -1
-	object_event 12,  2, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route29FruitTree, -1
 	object_event 25,  3, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route29FisherScript, -1
 	object_event 13,  4, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route29CooltrainerMScript, -1
 	object_event 29, 12, SPRITE_TEACHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, TuscanyScript, EVENT_ROUTE_29_TUSCANY_OF_TUESDAY
 	object_event 48,  2, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route29Potion, EVENT_ROUTE_29_POTION
+	object_event 12,  2, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route29PinkApricornTree, EVENT_ROUTE_1_APRICORN

@@ -851,7 +851,7 @@ CountStep:
 
 	; If there is a special phone call, don't count the step.
 	farcall CheckSpecialPhoneCall
-	jr c, .doscript
+	jp c, .doscript
 
 	; If Repel wore off, don't count the step.
 	call DoRepelStep
@@ -886,6 +886,7 @@ CountStep:
 	ResetEventFlag EVENT_ILEX_FOREST_TINY_MUSHROOM1
 	ResetEventFlag EVENT_ILEX_FOREST_TINY_MUSHROOM2
 	ResetEventFlag EVENT_ILEX_FOREST_LARGE_MUSHROOM
+	ResetEventFlag EVENT_ROUTE_1_APRICORN
 
 .skip_resetting_steps_event:
 
