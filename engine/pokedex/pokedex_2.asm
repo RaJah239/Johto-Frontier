@@ -373,7 +373,7 @@ ELSE
  	ld b, a
  	ld a, [wBaseType2]
 	cp b
- 	ret z
+ 	jr z, .check_floatmon
 
 IF SWAP_DARK_GHOST_TYPES == TRUE
  	call Pokedex_swap_GhostDark_Indexes
@@ -406,6 +406,15 @@ IF USE_GEN3_STYLE_TYPE_GFX == TRUE
 	ld [hl], $7e
  	ld a, $0
  	ldh [rVBK], a
+.check_floatmon
+	ld a, [wCurSpecies]
+	ld hl, FloatMons
+	call IsInByteArray
+	ret nc
+	hlcoord 17, 4
+	ld [hl], "<float>"
+	ret
+
 ELSE
  ; IF USE_GEN3_STYLE_TYPE_GFX == FALSE
  	hlcoord 14, 4
