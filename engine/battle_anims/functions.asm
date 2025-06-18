@@ -94,6 +94,7 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_AncientPower
 	dw BattleAnimFunc_RockSmash
 	dw BattleAnimFunc_Cotton
+	dw BattleAnimFunction_PowerGem
 	assert_table_length NUM_BATTLE_ANIM_FUNCS
 
 BattleAnimFunc_Null:
@@ -4285,3 +4286,71 @@ BattleAnim_Cosine_e:
 
 BattleAnimSineWave:
 	sine_table 32
+
+BattleAnimFunction_PowerGem:
+	call BattleAnim_AnonJumptable
+.anon_dw
+	dw PowerGemFunction1
+	dw PowerGemFunction2
+	dw PowerGemFunction3
+
+PowerGemFunction1:
+	ld hl, BATTLEANIMSTRUCT_YOFFSET
+	add hl, bc
+	ld a, [hl]
+	cp $ff
+	jr nz, .move_up
+	call BattleAnim_IncAnonJumptableIndex
+	ld hl, BATTLEANIMSTRUCT_VAR1
+	add hl, bc
+	ld [hl], $2
+	ret
+
+.move_up
+	ld d, a
+	ld hl, BATTLEANIMSTRUCT_VAR1
+	add hl, bc
+	ld e, [hl]
+	ld hl, hTransferShadowOAM
+	add hl, de
+	ld e, l
+	ld d, h
+	ld hl, BATTLEANIMSTRUCT_YOFFSET
+	add hl, bc
+	ld [hl], d
+	ld hl, BATTLEANIMSTRUCT_VAR1
+	add hl, bc
+	ld [hl], e
+	ret
+
+PowerGemFunction2:
+	ld hl, BATTLEANIMSTRUCT_VAR2
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .switch_position
+	dec [hl]
+	ret
+
+.switch_position
+	ld [hl], $4
+	ld hl, BATTLEANIMSTRUCT_VAR1
+	add hl, bc
+	ld a, [hl]
+	cpl
+	inc a
+	ld [hl], a
+	ld hl, BATTLEANIMSTRUCT_YOFFSET
+	add hl, bc
+	add [hl]
+	ld [hl], a
+	ret
+
+PowerGemFunction3:
+	ld hl, BATTLEANIMSTRUCT_XCOORD
+	add hl, bc
+	ld a, [hl]
+	cp $c0
+	ret nc
+	ld a, $8
+	jp BattleAnim_StepToTarget
