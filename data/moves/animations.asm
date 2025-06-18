@@ -22,7 +22,7 @@ BattleAnimations::
 	dw BattleAnim_Whirlwind
 	dw BattleAnim_Fly
 	dw BattleAnim_Bind
-	dw BattleAnim_Slam
+	dw BattleAnim_PowerGem
 	dw BattleAnim_VineWhip
 	dw BattleAnim_Stomp
 	dw BattleAnim_DoubleKick
@@ -3075,14 +3075,6 @@ BattleAnim_WingAttack:
 	anim_sound 0, 1, SFX_WING_ATTACK
 	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 140, 56, $0
 	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 124, 56, $0
-	anim_wait 16
-	anim_ret
-
-BattleAnim_Slam:
-	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_sound 0, 1, SFX_WING_ATTACK
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $2
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 124, 40, $0
 	anim_wait 16
 	anim_ret
 
