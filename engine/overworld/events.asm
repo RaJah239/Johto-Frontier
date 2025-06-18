@@ -847,7 +847,7 @@ CountStep:
 	; Don't count steps in link communication rooms.
 	ld a, [wLinkMode]
 	and a
-	jr nz, .done
+	jp nz, .done
 
 	; If there is a special phone call, don't count the step.
 	farcall CheckSpecialPhoneCall
@@ -860,15 +860,40 @@ CountStep:
 	; Count the step for poison and total steps
 	ld hl, wPoisonStepCount
 	inc [hl]
+	
+	; Increment 16-bit step count (wStepCount + wStepCountHi)
 	ld hl, wStepCount
 	inc [hl]
+
+	jr nz, .skip_step_hi
+	ld hl, wStepCountHi
+	inc [hl]
+.skip_step_hi:
+	; Check for 1,000 steps (0x01F4)
+	ld a, [wStepCount]
+	cp $e8
+	jr nz, .skip_resetting_steps_event
+	ld a, [wStepCountHi]
+	cp $03
+	jr nz, .skip_resetting_steps_event
+
+	; Reset step counter to 0
+	xor a
+	ld [wStepCount], a
+	ld [wStepCountHi], a
+
+	; Reset multiple event flags every 1,000 steps
+;	ResetEventFlag EVENT_RED_IN_MT_SILVER ; example
+
+.skip_resetting_steps_event:
+
+	; Original happiness routine
+	ld a, [wStepCount]
+
 	; Every 256 steps, increase the happiness of all your Pokemon.
 	jr nz, .skip_happiness
 
 	farcall StepHappiness
-
-	; Reset multiple event flags every 256 steps
-;	ResetEventFlag EVENT_RED_IN_MT_SILVER ; example
 
 .skip_happiness
 	; Every 256 steps, offset from the happiness incrementor by 128 steps,
