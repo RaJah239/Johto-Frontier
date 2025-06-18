@@ -7,6 +7,9 @@
 	const ROUTE29_TUSCANY
 	const ROUTE29_POKE_BALL
 	const ROUTE29_APRICORN1
+	const ROUTE29_BERRY1
+	const ROUTE29_BERRY2
+
 
 Route29_MapScripts:
 	def_scene_scripts
@@ -422,6 +425,40 @@ Route29PinkApricornTree:
 	closetext
 	end
 
+Route29BerryTree1:
+	opentext
+	getitemname STRING_BUFFER_3, BERRY
+	writetext Route29TreeText
+	promptbutton
+	writetext Route29HeyItsBerryApricornText
+	promptbutton
+	giveitem BERRY
+	iffalse Route29NoRoomInBag
+	disappear ROUTE29_BERRY1
+	writetext Route29FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route29BerryTree2:
+	opentext
+	getitemname STRING_BUFFER_3, BERRY
+	writetext Route29TreeText
+	promptbutton
+	writetext Route29HeyItsBerryApricornText
+	promptbutton
+	giveitem BERRY
+	iffalse Route29NoRoomInBag
+	disappear ROUTE29_BERRY2
+	writetext Route29FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
 Route29NoBerryOrApricorn:
 	opentext
 	writetext Route29TreeText
@@ -469,13 +506,17 @@ Route29_MapEvents:
 	bg_event 51,  7, BGEVENT_READ, Route29Sign1
 	bg_event  3,  5, BGEVENT_READ, Route29Sign2
 	bg_event 12,  2, BGEVENT_READ, Route29NoBerryOrApricorn
+	bg_event 13,  3, BGEVENT_READ, Route29NoBerryOrApricorn
+	bg_event 24, 12, BGEVENT_READ, Route29NoBerryOrApricorn
 
 	def_object_events
 	object_event 50, 12, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, CatchingTutorialDudeScript, -1
 	object_event 27, 16, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route29YoungsterScript, -1
 	object_event 15, 11, SPRITE_TEACHER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route29TeacherScript, -1
 	object_event 25,  3, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route29FisherScript, -1
-	object_event 13,  4, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route29CooltrainerMScript, -1
+	object_event 14,  4, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route29CooltrainerMScript, -1
 	object_event 29, 12, SPRITE_TEACHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, TuscanyScript, EVENT_ROUTE_29_TUSCANY_OF_TUESDAY
 	object_event 48,  2, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route29Potion, EVENT_ROUTE_29_POTION
 	object_event 12,  2, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route29PinkApricornTree, EVENT_ROUTE_1_APRICORN
+	object_event 13,  3, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route29BerryTree1, EVENT_ROUTE_1_BERRY1
+	object_event 24,  12, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route29BerryTree2, EVENT_ROUTE_1_BERRY2

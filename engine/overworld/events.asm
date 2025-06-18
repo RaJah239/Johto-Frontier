@@ -855,7 +855,7 @@ CountStep:
 
 	; If Repel wore off, don't count the step.
 	call DoRepelStep
-	jr c, .doscript
+	jp c, .doscript
 
 	; Count the step for poison and total steps
 	ld hl, wPoisonStepCount
@@ -887,6 +887,8 @@ CountStep:
 	ResetEventFlag EVENT_ILEX_FOREST_TINY_MUSHROOM2
 	ResetEventFlag EVENT_ILEX_FOREST_LARGE_MUSHROOM
 	ResetEventFlag EVENT_ROUTE_1_APRICORN
+	ResetEventFlag EVENT_ROUTE_1_BERRY1
+	ResetEventFlag EVENT_ROUTE_1_BERRY2
 
 .skip_resetting_steps_event:
 
