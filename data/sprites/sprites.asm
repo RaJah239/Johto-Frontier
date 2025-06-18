@@ -115,4 +115,6 @@ OverworldSprites:
 	overworld_sprite ArcherSpriteGFX, 12, WALKING_SPRITE, PAL_OW_BLUE
 	overworld_sprite EusineSpriteGFX, 12, WALKING_SPRITE, PAL_OW_PURPLE
 	overworld_sprite MaximaSpriteGFX, 12, WALKING_SPRITE, PAL_OW_RED
+	overworld_sprite SMushroomSpriteGFX, 4, STILL_SPRITE, PAL_OW_RED
+	overworld_sprite LMushroomSpriteGFX, 4, STILL_SPRITE, PAL_OW_RED
 	assert_table_length NUM_OVERWORLD_SPRITES

@@ -110,6 +110,8 @@
 	const SPRITE_ARCHER
 	const SPRITE_EUSINE
 	const SPRITE_MAXIMA
+	const SPRITE_S_MUSHROOM
+	const SPRITE_L_MUSHROOM
 DEF NUM_OVERWORLD_SPRITES EQU const_value - 1
 
 ; SpriteMons indexes (see data/sprites/sprite_mons.asm)
