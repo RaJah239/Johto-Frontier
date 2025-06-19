@@ -6,10 +6,12 @@
 	const ROUTE30_YOUNGSTER4
 	const ROUTE30_MONSTER1
 	const ROUTE30_MONSTER2
-	const ROUTE30_FRUIT_TREE1
-	const ROUTE30_FRUIT_TREE2
 	const ROUTE30_COOLTRAINER_F
 	const ROUTE30_POKE_BALL
+	const ROUTE30_BERRY_TREE1
+	const ROUTE30_APRICORN_TREE1
+	const ROUTE30_BERRY_TREE2
+	const ROUTE30_APRICORN_TREE2
 
 Route30_MapScripts:
 	def_scene_scripts
@@ -389,6 +391,109 @@ YoungsterJoeyText_GiveHPUpAfterBattle:
 	line "tougher too."
 	done
 
+Route30BerryTree1:
+	opentext
+	getitemname STRING_BUFFER_3, BERRY
+	writetext Route30TreeText
+	promptbutton
+	writetext Route30HeyItsBerryApricornText
+	promptbutton
+	giveitem BERRY
+	iffalse Route30NoRoomInBag
+	disappear ROUTE30_BERRY_TREE1
+	writetext Route30FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route30BerryTree2:
+	opentext
+	getitemname STRING_BUFFER_3, PSNCUREBERRY
+	writetext Route30TreeText
+	promptbutton
+	writetext Route30HeyItsBerryApricornText
+	promptbutton
+	giveitem PSNCUREBERRY
+	iffalse Route30NoRoomInBag
+	disappear ROUTE30_BERRY_TREE2
+	writetext Route30FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route30ApricornTree1:
+	opentext
+	getitemname STRING_BUFFER_3, YLW_APRICORN
+	writetext Route30TreeText
+	promptbutton
+	writetext Route30HeyItsBerryApricornText
+	promptbutton
+	giveitem YLW_APRICORN
+	iffalse Route30NoRoomInBag
+	disappear ROUTE30_APRICORN_TREE1
+	writetext Route30FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route30ApricornTree2:
+	opentext
+	getitemname STRING_BUFFER_3, GRN_APRICORN
+	writetext Route30TreeText
+	promptbutton
+	writetext Route30HeyItsBerryApricornText
+	promptbutton
+	giveitem GRN_APRICORN
+	iffalse Route30NoRoomInBag
+	disappear ROUTE30_APRICORN_TREE2
+	writetext Route30FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route30NoBerryOrApricorn:
+	opentext
+	writetext Route30TreeText
+	promptbutton
+	writetext Route30NothingHereText
+	waitbutton
+	closetext
+	end
+
+Route30NoRoomInBag:
+	writetext Route30NoRoomInBagText
+	waitbutton
+	closetext
+	end
+
+Route30TreeText:
+	text_far _FruitBearingTreeText
+	text_end
+
+Route30NothingHereText:
+	text_far _NothingHereText
+	text_end
+
+Route30HeyItsBerryApricornText:
+	text_far _HeyItsFruitText
+	text_end
+
+Route30FoundItemText:
+	text_far _ObtainedFruitText
+	text_end
+
+Route30NoRoomInBagText:
+	text_far _CantCarryItemText
+	text_end
+
 Route30_MapEvents:
 	def_warp_events
 	warp_event  7, 39, ROUTE_30_BERRY_HOUSE, 1
@@ -402,6 +507,10 @@ Route30_MapEvents:
 	bg_event 15,  5, BGEVENT_READ, MrPokemonsHouseSign
 	bg_event  3, 21, BGEVENT_READ, Route30TrainerTips
 	bg_event 14,  9, BGEVENT_ITEM, Route30HiddenPotion
+	bg_event  5, 39, BGEVENT_READ, Route30NoBerryOrApricorn
+	bg_event  4, 39, BGEVENT_READ, Route30NoBerryOrApricorn
+	bg_event 11,  5, BGEVENT_READ, Route30NoBerryOrApricorn
+	bg_event 12,  6, BGEVENT_READ, Route30NoBerryOrApricorn
 
 	def_object_events
 	object_event  5, 26, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, YoungsterJoey_ImportantBattleScript, EVENT_ROUTE_30_BATTLE
@@ -411,7 +520,9 @@ Route30_MapEvents:
 	object_event  7, 30, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route30YoungsterScript, -1
 	object_event  5, 24, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROUTE_30_BATTLE
 	object_event  5, 25, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROUTE_30_BATTLE
-	object_event  5, 39, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route30FruitTree1, -1
-	object_event 11,  5, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route30FruitTree2, -1
 	object_event  2, 13, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route30CooltrainerFScript, -1
 	object_event  8, 35, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route30Antidote, EVENT_ROUTE_30_ANTIDOTE
+	object_event  5, 39, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route30BerryTree1, EVENT_ROUTE_2_BERRY1
+	object_event  4, 39, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route30ApricornTree1, EVENT_ROUTE_2_APRICORN1
+	object_event 11,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route30BerryTree2, EVENT_ROUTE_2_BERRY2
+	object_event 12,  6, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route30ApricornTree2, EVENT_ROUTE_2_APRICORN2
