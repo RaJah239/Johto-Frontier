@@ -872,7 +872,7 @@ CountStep:
 	; Check for 1,000 steps (0x01F4)
 	ld a, [wStepCount]
 	cp $e8
-	jr nz, .skip_resetting_steps_event
+	jp nz, .skip_resetting_steps_event
 	ld a, [wStepCountHi]
 	cp $03
 	jr nz, .skip_resetting_steps_event
@@ -895,6 +895,9 @@ CountStep:
 	ResetEventFlag EVENT_ROUTE_2_APRICORN2
 	ResetEventFlag EVENT_ROUTE_3_BERRY
 	ResetEventFlag EVENT_ROUTE_3_APRICORN
+	ResetEventFlag EVENT_VIOLET_CITY_BERRY
+	ResetEventFlag EVENT_VIOLET_CITY_APRICORN_1
+	ResetEventFlag EVENT_VIOLET_CITY_APRICORN_2
 
 .skip_resetting_steps_event:
 
