@@ -168,9 +168,10 @@ AzaleaGroupSprites:
 	db SPRITE_RIVAL
 	db SPRITE_LASS
 	; 6 of max 9 walking sprites
-	db SPRITE_FRUIT_TREE
 	db SPRITE_SLOWPOKE
 	db SPRITE_KURT
+	db SPRITE_BERRY
+	db SPRITE_APRICORN
 	db 0 ; end
 
 GoldenrodGroupSprites:

@@ -294,7 +294,12 @@
 	const EVENT_VIOLET_CITY_BERRY
 	const EVENT_VIOLET_CITY_APRICORN_1
 	const EVENT_VIOLET_CITY_APRICORN_2
-; Unused: next 314 events
+	const EVENT_ROUTE_33_BERRY_1
+	const EVENT_ROUTE_33_BERRY_2
+	const EVENT_ROUTE_33_APRICORN_1
+	const EVENT_ROUTE_33_APRICORN_2
+	const EVENT_ROUTE_33_APRICORN_3
+; Unused: next 309 events
 
 	const_next 600
 ; Kurt Apricorn events

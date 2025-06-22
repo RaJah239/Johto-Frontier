@@ -875,7 +875,7 @@ CountStep:
 	jp nz, .skip_resetting_steps_event
 	ld a, [wStepCountHi]
 	cp $03
-	jr nz, .skip_resetting_steps_event
+	jp nz, .skip_resetting_steps_event
 
 	; Reset step counter to 0
 	xor a
@@ -898,6 +898,11 @@ CountStep:
 	ResetEventFlag EVENT_VIOLET_CITY_BERRY
 	ResetEventFlag EVENT_VIOLET_CITY_APRICORN_1
 	ResetEventFlag EVENT_VIOLET_CITY_APRICORN_2
+	ResetEventFlag EVENT_ROUTE_33_BERRY_1
+	ResetEventFlag EVENT_ROUTE_33_BERRY_2
+	ResetEventFlag EVENT_ROUTE_33_APRICORN_1
+	ResetEventFlag EVENT_ROUTE_33_APRICORN_2
+	ResetEventFlag EVENT_ROUTE_33_APRICORN_3
 
 .skip_resetting_steps_event:
 
