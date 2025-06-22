@@ -60,18 +60,21 @@ StdScripts::
 	add_stdscript ChanseyPokeCenterScript
 
 ChanseyPokeCenterScript:
+	faceplayer
+	reanchormap
+	pokepic CHANSEY
+	cry CHANSEY
+	waitsfx
+	closepokepic
+	refreshmap
 	opentext
 	farwritetext ChanseyCryText
-	cry CHANSEY
+	pause 20
 	closetext
 	end
 
 ChanseyHealsOWScript:
-	faceplayer
-	opentext
-	farwritetext ChanseyCryText
-	cry CHANSEY
-	closetext
+	scall ChanseyPokeCenterScript
 	special FadeOutPalettes
 	special LoadMapPalettes
 	playsound SFX_FULL_HEAL
@@ -260,7 +263,14 @@ TrashCanScript:
 
 PorygonPCScript:
 	faceplayer
+	reanchormap
+	pokepic PORYGON
 	cry PORYGON
+	waitsfx
+	closepokepic
+	refreshmap
+	; fallthrough
+
 PCScript:
 	opentext
 	special PokemonCenterPC
