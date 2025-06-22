@@ -11,6 +11,9 @@
 	const ILEXFOREST_POKE_BALL3
 	const ILEXFOREST_POKE_BALL4
 	const ILEXFOREST_CHANSEY
+	const ILEXFOREST_S_MUSHROOM1
+	const ILEXFOREST_S_MUSHROOM2
+	const ILEXFOREST_L_MUSHROOM
 
 IlexForest_MapScripts:
 	def_scene_scripts
@@ -930,6 +933,142 @@ BugCatcherWayneAfterBattleText:
 	cont "places too."
 	done
 
+IlexForestLargeMushroomScript:
+; This whole script is written out rather than as an itemball
+	scall .IlexForestParasBattle
+	giveitem BIG_MUSHROOM
+	getitemname STRING_BUFFER_3, BIG_MUSHROOM
+	iffalse .IlexForestNoRoomInBagForMushroom
+	disappear ILEXFOREST_L_MUSHROOM
+	opentext
+	writetext IlexForestFoundMushroomText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+
+	sjump .EndingThisMushroomScript
+
+.IlexForestParasBattle:
+	random 3
+	ifnotequal 0, .skip
+; 33% chance
+	loadvar VAR_BATTLETYPE, BATTLETYPE_TRAP
+	loadwildmon SHROOMISH, 8
+	cry SHROOMISH
+	startbattle
+	reloadmapafterbattle
+.skip
+	end
+
+.IlexForestNoRoomInBagForMushroom:
+	opentext
+	getitemname STRING_BUFFER_3, TINYMUSHROOM
+	writetext IlexForestFoundMushroomText
+	promptbutton
+	writetext IlexForestNoRoomForMushroomText
+	waitbutton
+.EndingThisMushroomScript:
+	closetext
+	end
+
+IlexForestTinyMushroomScript1:
+; This whole script is written out rather than as an itemball
+	scall .IlexForestParasBattle
+	random 10
+; 10% chance of Big Mushroom
+	ifequal 0, .BigMushroon
+	giveitem TINYMUSHROOM
+	getitemname STRING_BUFFER_3, TINYMUSHROOM
+	sjump .SmallMushroon
+.BigMushroon:
+	giveitem BIG_MUSHROOM
+	getitemname STRING_BUFFER_3, BIG_MUSHROOM
+.SmallMushroon:
+	iffalse .IlexForestNoRoomInBagForMushroom
+	disappear ILEXFOREST_S_MUSHROOM1
+	opentext
+	writetext IlexForestFoundMushroomText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	sjump .EndingThisMushroomScript
+
+.IlexForestParasBattle:
+	random 3
+	ifnotequal 0, .skip
+; 33% chance
+	loadvar VAR_BATTLETYPE, BATTLETYPE_TRAP
+	loadwildmon SHROOMISH, 8
+	cry SHROOMISH
+	startbattle
+	reloadmapafterbattle
+.skip
+	end
+
+.IlexForestNoRoomInBagForMushroom:
+	opentext
+	getitemname STRING_BUFFER_3, TINYMUSHROOM
+	writetext IlexForestFoundMushroomText
+	promptbutton
+	writetext IlexForestNoRoomForMushroomText
+	waitbutton
+.EndingThisMushroomScript:
+	closetext
+	end
+
+IlexForestTinyMushroomScript2:
+; This whole script is written out rather than as an itemball
+	scall .IlexForestParasBattle
+; 10% chance of Big Mushroom
+	random 10
+	ifequal 0, .BigMushroon
+	giveitem TINYMUSHROOM
+	getitemname STRING_BUFFER_3, TINYMUSHROOM
+	sjump .SmallMushroon
+.BigMushroon:
+	giveitem BIG_MUSHROOM
+	getitemname STRING_BUFFER_3, BIG_MUSHROOM
+.SmallMushroon:
+	iffalse .IlexForestNoRoomInBagForMushroom
+	disappear ILEXFOREST_S_MUSHROOM2
+	opentext
+	writetext IlexForestFoundMushroomText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	sjump .EndingThisMushroomScript
+
+.IlexForestParasBattle:
+	random 3
+	ifnotequal 0, .skip
+; 33% chance
+	loadvar VAR_BATTLETYPE, BATTLETYPE_TRAP
+	loadwildmon SHROOMISH, 8
+	cry SHROOMISH
+	startbattle
+	reloadmapafterbattle
+.skip
+	end
+
+.IlexForestNoRoomInBagForMushroom:
+	opentext
+	getitemname STRING_BUFFER_3, TINYMUSHROOM
+	writetext IlexForestFoundMushroomText
+	promptbutton
+	writetext IlexForestNoRoomForMushroomText
+	waitbutton
+.EndingThisMushroomScript:
+	closetext
+	end
+
+IlexForestFoundMushroomText:
+	text_far _PlayerFoundItemText
+	text_end
+
+IlexForestNoRoomForMushroomText:
+	text_far _CantCarryItemText
+	text_end
+
 IlexForestChanseyScript:
 	jumpstd ChanseyHealsOWScript
 
@@ -961,3 +1100,6 @@ IlexForest_MapEvents:
 	object_event 17,  7, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IlexForestAntidote, EVENT_ILEX_FOREST_ANTIDOTE
 	object_event 27,  1, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IlexForestEther, EVENT_ILEX_FOREST_ETHER
 	object_event 10,  4, SPRITE_CHANSEY_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, IlexForestChanseyScript, -1
+	object_event  3, 40, SPRITE_S_MUSHROOM, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, IlexForestTinyMushroomScript1, EVENT_ILEX_FOREST_TINY_MUSHROOM1
+	object_event  1,  7, SPRITE_S_MUSHROOM, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, IlexForestTinyMushroomScript2, EVENT_ILEX_FOREST_TINY_MUSHROOM2
+	object_event 26, 22, SPRITE_L_MUSHROOM, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, IlexForestLargeMushroomScript, EVENT_ILEX_FOREST_LARGE_MUSHROOM

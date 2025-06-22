@@ -883,7 +883,9 @@ CountStep:
 	ld [wStepCountHi], a
 
 	; Reset multiple event flags every 1,000 steps
-;	ResetEventFlag EVENT_RED_IN_MT_SILVER ; example
+	ResetEventFlag EVENT_ILEX_FOREST_TINY_MUSHROOM1
+	ResetEventFlag EVENT_ILEX_FOREST_TINY_MUSHROOM2
+	ResetEventFlag EVENT_ILEX_FOREST_LARGE_MUSHROOM
 
 .skip_resetting_steps_event:
 
