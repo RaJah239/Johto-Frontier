@@ -444,12 +444,12 @@ Route30ApricornTree1:
 
 Route30ApricornTree2:
 	opentext
-	getitemname STRING_BUFFER_3, MINT_BERRY
+	getitemname STRING_BUFFER_3, GRN_APRICORN
 	writetext Route30TreeText
 	promptbutton
 	writetext Route30HeyItsBerryApricornText
 	promptbutton
-	giveitem MINT_BERRY
+	giveitem GRN_APRICORN
 	iffalse Route30NoRoomInBag
 	disappear ROUTE30_APRICORN_TREE2
 	writetext Route30FoundItemText
