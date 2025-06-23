@@ -925,6 +925,9 @@ CountStep:
 	ResetEventFlag EVENT_ROUTE_42_APRICORN_3
 	ResetEventFlag EVENT_ROUTE_43_BERRY_1
 	ResetEventFlag EVENT_ROUTE_43_APRICORN_1
+	ResetEventFlag EVENT_ROUTE_44_BERRY_1
+	ResetEventFlag EVENT_ROUTE_44_BERRY_2
+	ResetEventFlag EVENT_ROUTE_44_APRICORN_1
 
 .skip_resetting_steps_event:
 

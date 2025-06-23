@@ -6,10 +6,12 @@
 	const ROUTE44_YOUNGSTER2
 	const ROUTE44_COOLTRAINER_M
 	const ROUTE44_COOLTRAINER_F
-	const ROUTE44_FRUIT_TREE
 	const ROUTE44_POKE_BALL1
 	const ROUTE44_POKE_BALL2
 	const ROUTE44_POKE_BALL3
+	const ROUTE44_BERRY_TREE1
+	const ROUTE44_BERRY_TREE2
+	const ROUTE44_APRICORN_TREE1
 
 Route44_MapScripts:
 	def_scene_scripts
@@ -283,9 +285,6 @@ Route44Sign1:
 Route44Sign2:
 	jumptext Route44Sign2Text
 
-Route44FruitTree:
-	fruittree FRUITTREE_ROUTE_44
-
 Route44MaxRevive:
 	itemball MAX_REVIVE
 
@@ -484,6 +483,92 @@ Route44Sign2Text:
 	line "BLACKTHORN CITY"
 	done
 
+Route44BerryTree1:
+	opentext
+	getitemname STRING_BUFFER_3, BURNT_BERRY
+	writetext Route44TreeText
+	promptbutton
+	writetext Route44HeyItsBerryApricornText
+	promptbutton
+	giveitem BURNT_BERRY
+	iffalse Route44NoRoomInBag
+	disappear ROUTE44_BERRY_TREE1
+	writetext Route44FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route44BerryTree2:
+	opentext
+	getitemname STRING_BUFFER_3, MIRACLEBERRY
+	writetext Route44TreeText
+	promptbutton
+	writetext Route44HeyItsBerryApricornText
+	promptbutton
+	giveitem MIRACLEBERRY
+	iffalse Route44NoRoomInBag
+	disappear ROUTE44_BERRY_TREE2
+	writetext Route44FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route44ApricornTree1:
+	opentext
+	getitemname STRING_BUFFER_3, WHT_APRICORN
+	writetext Route44TreeText
+	promptbutton
+	writetext Route44HeyItsBerryApricornText
+	promptbutton
+	giveitem WHT_APRICORN
+	iffalse Route44NoRoomInBag
+	disappear ROUTE44_APRICORN_TREE1
+	writetext Route44FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route44NoBerryOrApricorn:
+	opentext
+	writetext Route44TreeText
+	promptbutton
+	writetext Route44NothingHereText
+	waitbutton
+	closetext
+	end
+
+Route44NoRoomInBag:
+	writetext Route44NoRoomInBagText
+	waitbutton
+	closetext
+	end
+
+Route44TreeText:
+	text_far _FruitBearingTreeText
+	text_end
+
+Route44NothingHereText:
+	text_far _NothingHereText
+	text_end
+
+Route44HeyItsBerryApricornText:
+	text_far _HeyItsFruitText
+	text_end
+
+Route44FoundItemText:
+	text_far _ObtainedFruitText
+	text_end
+
+Route44NoRoomInBagText:
+	text_far _CantCarryItemText
+	text_end
+
 Route44_MapEvents:
 	def_warp_events
 	warp_event 56,  7, ICE_PATH_1F, 1
@@ -494,6 +579,9 @@ Route44_MapEvents:
 	bg_event 53,  7, BGEVENT_READ, Route44Sign1
 	bg_event  6, 10, BGEVENT_READ, Route44Sign2
 	bg_event 32,  9, BGEVENT_ITEM, Route44HiddenElixer
+	bg_event  9,  5, BGEVENT_READ, Route44NoBerryOrApricorn
+	bg_event 53,  4, BGEVENT_READ, Route44NoBerryOrApricorn
+	bg_event  8,  4, BGEVENT_READ, Route44NoBerryOrApricorn
 
 	def_object_events
 	object_event 35,  3, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerFisherWilton1, -1
@@ -503,7 +591,9 @@ Route44_MapEvents:
 	object_event 51,  5, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, TrainerBirdKeeperVance1, -1
 	object_event 41, 15, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 5, TrainerCooltrainermAllen, -1
 	object_event 31, 14, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 5, TrainerCooltrainerfCybil, -1
-	object_event  9,  5, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route44FruitTree, -1
 	object_event 30,  8, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route44MaxRevive, EVENT_ROUTE_44_MAX_REVIVE
 	object_event 45,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route44UltraBall, EVENT_ROUTE_44_ULTRA_BALL
 	object_event 14,  9, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route44MaxRepel, EVENT_ROUTE_44_MAX_REPEL
+	object_event  9,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route44BerryTree1, EVENT_ROUTE_44_BERRY_1
+	object_event 53,  4, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route44BerryTree2, EVENT_ROUTE_44_BERRY_2
+	object_event  8,  4, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_WHITE, OBJECTTYPE_SCRIPT, 0, Route44ApricornTree1, EVENT_ROUTE_44_APRICORN_1
