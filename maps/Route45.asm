@@ -6,12 +6,14 @@
 	const ROUTE45_BLACK_BELT
 	const ROUTE45_COOLTRAINER_M
 	const ROUTE45_COOLTRAINER_F
-	const ROUTE45_FRUIT_TREE
 	const ROUTE45_POKE_BALL1
 	const ROUTE45_POKE_BALL2
 	const ROUTE45_POKE_BALL3
 	const ROUTE45_POKE_BALL4
 	const ROUTE45_YOUNGSTER
+	const ROUTE45_BERRY_TREE1
+	const ROUTE45_BERRY_TREE2
+	const ROUTE45_BERRY_TREE3
 
 Route45_MapScripts:
 	def_scene_scripts
@@ -278,9 +280,6 @@ TrainerCamperQuentin:
 Route45Sign:
 	jumptext Route45SignText
 
-Route45FruitTree:
-	fruittree FRUITTREE_ROUTE_45
-
 Route45Nugget:
 	itemball NUGGET
 
@@ -504,6 +503,92 @@ Route45SignText:
 	line "MOUNTAIN RD. AHEAD"
 	done
 
+Route45BerryTree1:
+	opentext
+	getitemname STRING_BUFFER_3, MYSTERYBERRY
+	writetext Route45TreeText
+	promptbutton
+	writetext Route45HeyItsBerryApricornText
+	promptbutton
+	giveitem MYSTERYBERRY
+	iffalse Route45NoRoomInBag
+	disappear ROUTE45_BERRY_TREE1
+	writetext Route45FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route45BerryTree2:
+	opentext
+	getitemname STRING_BUFFER_3, MIRACLEBERRY
+	writetext Route45TreeText
+	promptbutton
+	writetext Route45HeyItsBerryApricornText
+	promptbutton
+	giveitem MIRACLEBERRY
+	iffalse Route45NoRoomInBag
+	disappear ROUTE45_BERRY_TREE2
+	writetext Route45FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route45BerryTree3:
+	opentext
+	getitemname STRING_BUFFER_3, GOLD_BERRY
+	writetext Route45TreeText
+	promptbutton
+	writetext Route45HeyItsBerryApricornText
+	promptbutton
+	giveitem GOLD_BERRY
+	iffalse Route45NoRoomInBag
+	disappear ROUTE45_BERRY_TREE3
+	writetext Route45FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route45NoBerryOrApricorn:
+	opentext
+	writetext Route45TreeText
+	promptbutton
+	writetext Route45NothingHereText
+	waitbutton
+	closetext
+	end
+
+Route45NoRoomInBag:
+	writetext Route45NoRoomInBagText
+	waitbutton
+	closetext
+	end
+
+Route45TreeText:
+	text_far _FruitBearingTreeText
+	text_end
+
+Route45NothingHereText:
+	text_far _NothingHereText
+	text_end
+
+Route45HeyItsBerryApricornText:
+	text_far _HeyItsFruitText
+	text_end
+
+Route45FoundItemText:
+	text_far _ObtainedFruitText
+	text_end
+
+Route45NoRoomInBagText:
+	text_far _CantCarryItemText
+	text_end
+
 Route45_MapEvents:
 	def_warp_events
 	warp_event  2,  5, DARK_CAVE_BLACKTHORN_ENTRANCE, 1
@@ -513,6 +598,9 @@ Route45_MapEvents:
 	def_bg_events
 	bg_event 10,  4, BGEVENT_READ, Route45Sign
 	bg_event 13, 80, BGEVENT_ITEM, Route45HiddenPpUp
+	bg_event 16, 82, BGEVENT_READ, Route45NoBerryOrApricorn
+	bg_event 15, 82, BGEVENT_READ, Route45NoBerryOrApricorn
+	bg_event 14, 82, BGEVENT_READ, Route45NoBerryOrApricorn
 
 	def_object_events
 	object_event 10, 16, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 1, TrainerHikerErik, -1
@@ -522,9 +610,11 @@ Route45_MapEvents:
 	object_event 11, 50, SPRITE_BLACK_BELT, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 2, TrainerBlackbeltKenji, -1
 	object_event 17, 18, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerCooltrainermRyan, -1
 	object_event  5, 36, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainerfKelly, -1
-	object_event 16, 82, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route45FruitTree, -1
 	object_event  6, 51, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route45Nugget, EVENT_ROUTE_45_NUGGET
 	object_event  5, 66, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route45Revive, EVENT_ROUTE_45_REVIVE
 	object_event  6, 20, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route45Elixer, EVENT_ROUTE_45_ELIXER
 	object_event  7, 33, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route45MaxPotion, EVENT_ROUTE_45_MAX_POTION
 	object_event  4, 70, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, TrainerCamperQuentin, -1
+	object_event 16, 82, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_ORANGE, OBJECTTYPE_SCRIPT, 0, Route45BerryTree1, EVENT_ROUTE_45_BERRY_1
+	object_event 15, 82, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route45BerryTree2, EVENT_ROUTE_45_BERRY_2
+	object_event 14, 82, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, Route45BerryTree3, EVENT_ROUTE_45_BERRY_3
