@@ -4,10 +4,12 @@
 	const ROUTE36_WEIRD_TREE
 	const ROUTE36_LASS1
 	const ROUTE36_FISHER
-	const ROUTE36_FRUIT_TREE
 	const ROUTE36_ARTHUR
 	const ROUTE36_FLORIA
 	const ROUTE36_SUICUNE
+	const ROUTE36_BERRY_TREE1
+	const ROUTE36_BERRY_TREE2
+	const ROUTE36_APRICORN_TREE1
 
 Route36_MapScripts:
 	def_scene_scripts
@@ -625,6 +627,92 @@ Route36TrainerTips2Text:
 	line "landmarks."
 	done
 
+Route36BerryTree1:
+	opentext
+	getitemname STRING_BUFFER_3, ICE_BERRY
+	writetext Route36TreeText
+	promptbutton
+	writetext Route36HeyItsBerryApricornText
+	promptbutton
+	giveitem ICE_BERRY
+	iffalse Route36NoRoomInBag
+	disappear ROUTE36_BERRY_TREE1
+	writetext Route36FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route36BerryTree2:
+	opentext
+	getitemname STRING_BUFFER_3, BERRY
+	writetext Route36TreeText
+	promptbutton
+	writetext Route36HeyItsBerryApricornText
+	promptbutton
+	giveitem BERRY
+	iffalse Route36NoRoomInBag
+	disappear ROUTE36_BERRY_TREE2
+	writetext Route36FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route36ApricornTree1:
+	opentext
+	getitemname STRING_BUFFER_3, PNK_APRICORN
+	writetext Route36TreeText
+	promptbutton
+	writetext Route36HeyItsBerryApricornText
+	promptbutton
+	giveitem PNK_APRICORN
+	iffalse Route36NoRoomInBag
+	disappear ROUTE36_APRICORN_TREE1
+	writetext Route36FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route36NoBerryOrApricorn:
+	opentext
+	writetext Route36TreeText
+	promptbutton
+	writetext Route36NothingHereText
+	waitbutton
+	closetext
+	end
+
+Route36NoRoomInBag:
+	writetext Route36NoRoomInBagText
+	waitbutton
+	closetext
+	end
+
+Route36TreeText:
+	text_far _FruitBearingTreeText
+	text_end
+
+Route36NothingHereText:
+	text_far _NothingHereText
+	text_end
+
+Route36HeyItsBerryApricornText:
+	text_far _HeyItsFruitText
+	text_end
+
+Route36FoundItemText:
+	text_far _ObtainedFruitText
+	text_end
+
+Route36NoRoomInBagText:
+	text_far _CantCarryItemText
+	text_end
+
 Route36_MapEvents:
 	def_warp_events
 	warp_event 18,  8, ROUTE_36_NATIONAL_PARK_GATE, 3
@@ -641,6 +729,9 @@ Route36_MapEvents:
 	bg_event 45, 11, BGEVENT_READ, RuinsOfAlphNorthSign
 	bg_event 55,  7, BGEVENT_READ, Route36Sign
 	bg_event 21,  7, BGEVENT_READ, Route36TrainerTips1
+	bg_event 21,  4, BGEVENT_READ, Route36NoBerryOrApricorn
+	bg_event 50,  4, BGEVENT_READ, Route36NoBerryOrApricorn
+	bg_event 51,  5, BGEVENT_READ, Route36NoBerryOrApricorn
 
 	def_object_events
 	object_event 20, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerPsychicMark, -1
@@ -648,7 +739,9 @@ Route36_MapEvents:
 	object_event 35,  9, SPRITE_SUDOWOODO, SPRITEMOVEDATA_SUDOWOODO, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SudowoodoScript, EVENT_ROUTE_36_SUDOWOODO
 	object_event 51,  8, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route36LassScript, -1
 	object_event 44,  9, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route36RockSmashGuyScript, -1
-	object_event 21,  4, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route36FruitTree, -1
 	object_event 46,  6, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ArthurScript, EVENT_ROUTE_36_ARTHUR_OF_THURSDAY
 	object_event 33, 12, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route36FloriaScript, EVENT_FLORIA_AT_SUDOWOODO
 	object_event 21,  6, SPRITE_SUICUNE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_SAW_SUICUNE_ON_ROUTE_36
+	object_event 21,  4, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_WHITE, OBJECTTYPE_SCRIPT, 0, Route36BerryTree1, EVENT_ROUTE_36_BERRY_1
+	object_event 51,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route36BerryTree2, EVENT_ROUTE_36_BERRY_2
+	object_event 50,  4, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route36ApricornTree1, EVENT_ROUTE_36_APRICORN_1
