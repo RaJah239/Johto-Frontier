@@ -438,12 +438,12 @@ Route38TrainerTipsText:
 
 Route38BerryTree1:
 	opentext
-	getitemname STRING_BUFFER_3, BERRY
+	getitemname STRING_BUFFER_3, BURNT_BERRY
 	writetext Route38TreeText
 	promptbutton
 	writetext Route38HeyItsBerryApricornText
 	promptbutton
-	giveitem BERRY
+	giveitem BURNT_BERRY
 	iffalse Route38NoRoomInBag
 	disappear ROUTE38_BERRY_TREE1
 	writetext Route38FoundItemText
@@ -525,5 +525,5 @@ Route38_MapEvents:
 	object_event 19,  9, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 1, TrainerBeautyValerie, -1
 	object_event 24,  5, SPRITE_SAILOR, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, TrainerSailorHarry, -1
 	object_event  5,  8, SPRITE_BEAUTY, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 1, TrainerBeautyOlivia, -1
-	object_event 12, 10, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route38BerryTree1, EVENT_ROUTE_38_BERRY_1
+	object_event 12, 10, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route38BerryTree1, EVENT_ROUTE_38_BERRY_1
 	object_event 12,  9, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_ORANGE, OBJECTTYPE_SCRIPT, 0, Route38BerryTree2, EVENT_ROUTE_38_BERRY_2
