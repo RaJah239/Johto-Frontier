@@ -8,8 +8,12 @@
 	const ROUTE35_BUG_CATCHER
 	const ROUTE35_SUPER_NERD
 	const ROUTE35_OFFICER
-	const ROUTE35_FRUIT_TREE
 	const ROUTE35_POKE_BALL
+	const ROUTE35_BERRY_TREE1
+	const ROUTE35_BERRY_TREE2
+	const ROUTE35_APRICORN_TREE1
+	const ROUTE35_APRICORN_TREE2
+	const ROUTE35_APRICORN_TREE3
 
 Route35_MapScripts:
 	def_scene_scripts
@@ -444,6 +448,126 @@ Route35SignText:
 	text "ROUTE 35"
 	done
 
+Route35BerryTree1:
+	opentext
+	getitemname STRING_BUFFER_3, MYSTERYBERRY
+	writetext Route35TreeText
+	promptbutton
+	writetext Route35HeyItsBerryApricornText
+	promptbutton
+	giveitem MYSTERYBERRY
+	iffalse Route35NoRoomInBag
+	disappear ROUTE35_BERRY_TREE1
+	writetext Route35FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route35BerryTree2:
+	opentext
+	getitemname STRING_BUFFER_3, PRZCUREBERRY
+	writetext Route35TreeText
+	promptbutton
+	writetext Route35HeyItsBerryApricornText
+	promptbutton
+	giveitem PRZCUREBERRY
+	iffalse Route35NoRoomInBag
+	disappear ROUTE35_BERRY_TREE2
+	writetext Route35FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route35ApricornTree1:
+	opentext
+	getitemname STRING_BUFFER_3, BLU_APRICORN
+	writetext Route35TreeText
+	promptbutton
+	writetext Route35HeyItsBerryApricornText
+	promptbutton
+	giveitem BLU_APRICORN
+	iffalse Route35NoRoomInBag
+	disappear ROUTE35_APRICORN_TREE1
+	writetext Route35FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route35ApricornTree2:
+	opentext
+	getitemname STRING_BUFFER_3, YLW_APRICORN
+	writetext Route35TreeText
+	promptbutton
+	writetext Route35HeyItsBerryApricornText
+	promptbutton
+	giveitem YLW_APRICORN
+	iffalse Route35NoRoomInBag
+	disappear ROUTE35_APRICORN_TREE2
+	writetext Route35FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route35ApricornTree3:
+	opentext
+	getitemname STRING_BUFFER_3, RED_APRICORN
+	writetext Route35TreeText
+	promptbutton
+	writetext Route35HeyItsBerryApricornText
+	promptbutton
+	giveitem RED_APRICORN
+	iffalse Route35NoRoomInBag
+	disappear ROUTE35_APRICORN_TREE3
+	writetext Route35FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route35NoBerryOrApricorn:
+	opentext
+	writetext Route35TreeText
+	promptbutton
+	writetext Route35NothingHereText
+	waitbutton
+	closetext
+	end
+
+Route35NoRoomInBag:
+	writetext Route35NoRoomInBagText
+	waitbutton
+	closetext
+	end
+
+Route35TreeText:
+	text_far _FruitBearingTreeText
+	text_end
+
+Route35NothingHereText:
+	text_far _NothingHereText
+	text_end
+
+Route35HeyItsBerryApricornText:
+	text_far _HeyItsFruitText
+	text_end
+
+Route35FoundItemText:
+	text_far _ObtainedFruitText
+	text_end
+
+Route35NoRoomInBagText:
+	text_far _CantCarryItemText
+	text_end
+
 Route35_MapEvents:
 	def_warp_events
 	warp_event  9, 33, ROUTE_35_GOLDENROD_GATE, 1
@@ -455,16 +579,25 @@ Route35_MapEvents:
 	def_bg_events
 	bg_event  1,  7, BGEVENT_READ, Route35Sign
 	bg_event 11, 31, BGEVENT_READ, Route35Sign
+	bg_event  2, 25, BGEVENT_READ, Route35NoBerryOrApricorn
+	bg_event  3, 27, BGEVENT_READ, Route35NoBerryOrApricorn
+	bg_event  2, 27, BGEVENT_READ, Route35NoBerryOrApricorn
+	bg_event 14, 29, BGEVENT_READ, Route35NoBerryOrApricorn
+	bg_event 15, 28, BGEVENT_READ, Route35NoBerryOrApricorn
 
 	def_object_events
 	object_event  4, 19, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 2, TrainerCamperIvan, -1
 	object_event  8, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerCamperElliot, -1
 	object_event  7, 20, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerPicnickerBrooke, -1
 	object_event 10, 26, SPRITE_LASS, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerPicnickerKim, -1
-	object_event 14, 28, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 0, TrainerBirdKeeperBryan, -1
+	object_event 13, 28, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 0, TrainerBirdKeeperBryan, -1
 	object_event  2, 10, SPRITE_FISHER, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 2, TrainerFirebreatherWalt, -1
 	object_event 16,  7, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_DOWN, 2, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerBugCatcherArnie, -1
 	object_event  5, 10, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, TrainerJugglerIrwin, -1
 	object_event  5,  6, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TrainerOfficerDirk, -1
-	object_event  2, 25, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route35FruitTree, -1
-	object_event 13, 16, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route35TMRollout, EVENT_ROUTE_35_TM_ROLLOUT
+	object_event  7, 11, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route35TMRollout, EVENT_ROUTE_35_TM_ROLLOUT
+	object_event  2, 25, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_ORANGE, OBJECTTYPE_SCRIPT, 0, Route35BerryTree1, EVENT_ROUTE_35_BERRY_1
+	object_event  3, 27, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route35BerryTree2, EVENT_ROUTE_35_BERRY_2
+	object_event  2, 27, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route35ApricornTree1, EVENT_ROUTE_35_APRICORN_1
+	object_event 14, 29, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route35ApricornTree2, EVENT_ROUTE_35_APRICORN_2
+	object_event 15, 28, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route35ApricornTree3, EVENT_ROUTE_35_APRICORN_1

@@ -905,6 +905,11 @@ CountStep:
 	ResetEventFlag EVENT_ROUTE_33_APRICORN_3
 	ResetEventFlag EVENT_AZALEA_TOWN_APRICORN_1
 	ResetEventFlag EVENT_AZALEA_TOWN_APRICORN_2
+	ResetEventFlag EVENT_ROUTE_35_BERRY_1
+	ResetEventFlag EVENT_ROUTE_35_BERRY_2
+	ResetEventFlag EVENT_ROUTE_35_APRICORN_1
+	ResetEventFlag EVENT_ROUTE_35_APRICORN_2
+	ResetEventFlag EVENT_ROUTE_35_APRICORN_3
 
 .skip_resetting_steps_event:
 
