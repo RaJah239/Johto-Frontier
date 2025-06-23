@@ -1006,13 +1006,18 @@ Intro_PlacePlayerSprite:
 DEF NUM_TITLESCREENOPTIONS EQU const_value
 
 IntroSequence:
+	call SkipIntroMode
+	jr nz, .skip_intro
 	callfar SplashScreen
 	jr c, StartTitleScreen
 	farcall CrystalIntro
 
+.skip_intro
 	; fallthrough
 
 StartTitleScreen:
+	call SkipIntroMode
+	jr nz, .skip_splash_screen
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wLYOverrides)
@@ -1030,6 +1035,7 @@ StartTitleScreen:
 	pop af
 	ldh [rSVBK], a
 
+.skip_splash_screen
 	ld hl, rLCDC
 	res rLCDC_SPRITE_SIZE, [hl] ; 8x8
 	call ClearScreen

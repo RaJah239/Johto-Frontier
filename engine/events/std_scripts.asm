@@ -58,6 +58,24 @@ StdScripts::
 	add_stdscript ChanseyHealsOWScript
 	add_stdscript PorygonPCScript
 	add_stdscript ChanseyPokeCenterScript
+	add_stdscript SkipIntroScript
+
+SkipIntroScript:
+	opentext
+	farwritetext SkipIntroText
+	yesorno
+	iffalse .No
+	callasm YesSkipIntroMode
+	playsound SFX_TWO_PC_BEEPS
+	waitsfx
+	closetext
+	end
+.No:
+	callasm DontSkipIntroMode
+	playsound SFX_TWINKLE
+	waitsfx
+	closetext
+	end
 
 ChanseyPokeCenterScript:
 	faceplayer

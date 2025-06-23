@@ -83,6 +83,7 @@ DEF GBPRINTER_DARKEST  EQU $7f
 	const CASUAL_CALLS ; 0
 	const EXP_SHARE     ; 1
 	const MINIMAL_DIALOGUE ; 2
+	const SKIP_INTRO ; 3
 
 ; wWalkingDirection::
 	const_def -1
