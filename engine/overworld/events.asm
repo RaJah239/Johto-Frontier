@@ -931,6 +931,10 @@ CountStep:
 	ResetEventFlag EVENT_ROUTE_45_BERRY_1
 	ResetEventFlag EVENT_ROUTE_45_BERRY_2
 	ResetEventFlag EVENT_ROUTE_45_BERRY_3
+	ResetEventFlag EVENT_ROUTE_46_BERRY_1
+	ResetEventFlag EVENT_ROUTE_46_BERRY_2
+	ResetEventFlag EVENT_ROUTE_46_BERRY_3
+	ResetEventFlag EVENT_ROUTE_46_BERRY_4
 
 .skip_resetting_steps_event:
 

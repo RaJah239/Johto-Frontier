@@ -2,9 +2,11 @@
 	const ROUTE46_POKEFAN_M
 	const ROUTE46_YOUNGSTER
 	const ROUTE46_LASS
-	const ROUTE46_FRUIT_TREE1
-	const ROUTE46_FRUIT_TREE2
 	const ROUTE46_POKE_BALL
+	const ROUTE46_BERRY_TREE1
+	const ROUTE46_BERRY_TREE2
+	const ROUTE46_BERRY_TREE3
+	const ROUTE46_BERRY_TREE4
 
 Route46_MapScripts:
 	def_scene_scripts
@@ -152,12 +154,6 @@ Route46Sign:
 Route46XSpeed:
 	itemball X_SPEED
 
-Route46FruitTree1:
-	fruittree FRUITTREE_ROUTE_46_1
-
-Route46FruitTree2:
-	fruittree FRUITTREE_ROUTE_46_2
-
 HikerBaileySeenText:
 	text "Awright! I'll show"
 	line "you the power of"
@@ -238,6 +234,109 @@ Route46SignText:
 	line "MOUNTAIN RD. AHEAD"
 	done
 
+Route46BerryTree1:
+	opentext
+	getitemname STRING_BUFFER_3, PRZCUREBERRY
+	writetext Route46TreeText
+	promptbutton
+	writetext Route46HeyItsBerryApricornText
+	promptbutton
+	giveitem PRZCUREBERRY
+	iffalse Route46NoRoomInBag
+	disappear ROUTE46_BERRY_TREE1
+	writetext Route46FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route46BerryTree2:
+	opentext
+	getitemname STRING_BUFFER_3, BITTER_BERRY
+	writetext Route46TreeText
+	promptbutton
+	writetext Route46HeyItsBerryApricornText
+	promptbutton
+	giveitem BITTER_BERRY
+	iffalse Route46NoRoomInBag
+	disappear ROUTE46_BERRY_TREE2
+	writetext Route46FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route46BerryTree3:
+	opentext
+	getitemname STRING_BUFFER_3, BERRY
+	writetext Route46TreeText
+	promptbutton
+	writetext Route46HeyItsBerryApricornText
+	promptbutton
+	giveitem BERRY
+	iffalse Route46NoRoomInBag
+	disappear ROUTE46_BERRY_TREE3
+	writetext Route46FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route46BerryTree4:
+	opentext
+	getitemname STRING_BUFFER_3, PSNCUREBERRY
+	writetext Route46TreeText
+	promptbutton
+	writetext Route46HeyItsBerryApricornText
+	promptbutton
+	giveitem PSNCUREBERRY
+	iffalse Route46NoRoomInBag
+	disappear ROUTE46_BERRY_TREE4
+	writetext Route46FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route46NoBerryOrApricorn:
+	opentext
+	writetext Route46TreeText
+	promptbutton
+	writetext Route46NothingHereText
+	waitbutton
+	closetext
+	end
+
+Route46NoRoomInBag:
+	writetext Route46NoRoomInBagText
+	waitbutton
+	closetext
+	end
+
+Route46TreeText:
+	text_far _FruitBearingTreeText
+	text_end
+
+Route46NothingHereText:
+	text_far _NothingHereText
+	text_end
+
+Route46HeyItsBerryApricornText:
+	text_far _HeyItsFruitText
+	text_end
+
+Route46FoundItemText:
+	text_far _ObtainedFruitText
+	text_end
+
+Route46NoRoomInBagText:
+	text_far _CantCarryItemText
+	text_end
+
 Route46_MapEvents:
 	def_warp_events
 	warp_event  7, 33, ROUTE_29_ROUTE_46_GATE, 1
@@ -248,11 +347,17 @@ Route46_MapEvents:
 
 	def_bg_events
 	bg_event  9, 27, BGEVENT_READ, Route46Sign
+	bg_event  7,  5, BGEVENT_READ, Route46NoBerryOrApricorn
+	bg_event  8,  6, BGEVENT_READ, Route46NoBerryOrApricorn
+	bg_event  7,  6, BGEVENT_READ, Route46NoBerryOrApricorn
+	bg_event  8,  5, BGEVENT_READ, Route46NoBerryOrApricorn
 
 	def_object_events
 	object_event 12, 19, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 2, TrainerHikerBailey, -1
 	object_event  4, 14, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 2, TrainerCamperTed, -1
 	object_event  2, 13, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 2, TrainerPicnickerErin1, -1
-	object_event  7,  5, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route46FruitTree1, -1
-	object_event  8,  6, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route46FruitTree2, -1
-	object_event  1, 15, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route46XSpeed, EVENT_ROUTE_46_X_SPEED
+	object_event  2, 18, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route46XSpeed, EVENT_ROUTE_46_X_SPEED
+	object_event  7,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route46BerryTree1, EVENT_ROUTE_46_BERRY_1
+	object_event  8,  6, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route46BerryTree2, EVENT_ROUTE_46_BERRY_2
+	object_event  7,  6, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route46BerryTree3, EVENT_ROUTE_46_BERRY_3
+	object_event  8,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route46BerryTree4, EVENT_ROUTE_46_BERRY_4
