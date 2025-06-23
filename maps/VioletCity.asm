@@ -82,9 +82,6 @@ VioletCityPPUp:
 VioletCityRareCandy:
 	itemball RARE_CANDY
 
-VioletCityFruitTree:
-	fruittree FRUITTREE_VIOLET_CITY
-
 VioletCityHiddenHyperPotion:
 	hiddenitem HYPER_POTION, EVENT_VIOLET_CITY_HIDDEN_HYPER_POTION
 
