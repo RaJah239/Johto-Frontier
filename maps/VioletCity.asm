@@ -6,7 +6,8 @@
 	const VIOLETCITY_YOUNGSTER
 	const VIOLETCITY_POKE_BALL1
 	const VIOLETCITY_POKE_BALL2
-	const VIOLETCITY_BERRY_TREE
+	const VIOLETCITY_BERRY_TREE1
+	const VIOLETCITY_BERRY_TREE2
 	const VIOLETCITY_APRICORN_TREE1
 	const VIOLETCITY_APRICORN_TREE2
 
@@ -221,7 +222,7 @@ EarlsPokemonAcademySignText:
 	line "ACADEMY"
 	done
 
-VioletCityBerryTree:
+VioletCityBerryTree1:
 	opentext
 	getitemname STRING_BUFFER_3, PRZCUREBERRY
 	writetext VioletCityTreeText
@@ -230,7 +231,24 @@ VioletCityBerryTree:
 	promptbutton
 	giveitem PRZCUREBERRY
 	iffalse VioletCityNoRoomInBag
-	disappear VIOLETCITY_BERRY_TREE
+	disappear VIOLETCITY_BERRY_TREE1
+	writetext VioletCityFoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+VioletCityBerryTree2:
+	opentext
+	getitemname STRING_BUFFER_3, BURNT_BERRY
+	writetext VioletCityTreeText
+	promptbutton
+	writetext VioletCityHeyItsBerryApricornText
+	promptbutton
+	giveitem BURNT_BERRY
+	iffalse VioletCityNoRoomInBag
+	disappear VIOLETCITY_BERRY_TREE2
 	writetext VioletCityFoundItemText
 	playsound SFX_ITEM
 	waitsfx
@@ -332,6 +350,7 @@ VioletCity_MapEvents:
 	bg_event 14, 29, BGEVENT_READ, VioletCityNoBerryOrApricorn
 	bg_event 12, 17, BGEVENT_READ, VioletCityNoBerryOrApricorn
 	bg_event 13, 17, BGEVENT_READ, VioletCityNoBerryOrApricorn
+	bg_event 13, 29, BGEVENT_READ, VioletCityNoBerryOrApricorn
 
 
 
@@ -343,7 +362,7 @@ VioletCity_MapEvents:
 	object_event  5, 18, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, VioletCityYoungsterScript, -1
 	object_event  4,  1, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, VioletCityPPUp, EVENT_VIOLET_CITY_PP_UP
 	object_event 35,  5, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, VioletCityRareCandy, EVENT_VIOLET_CITY_RARE_CANDY
-
-	object_event 14, 29, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, VioletCityBerryTree, EVENT_VIOLET_CITY_BERRY
+	object_event 14, 29, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, VioletCityBerryTree1, EVENT_VIOLET_CITY_BERRY1
+	object_event 13, 29, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, VioletCityBerryTree2, EVENT_VIOLET_CITY_BERRY2
 	object_event 12, 17, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_WHITE, OBJECTTYPE_SCRIPT, 0, VioletCityApricornTree1, EVENT_VIOLET_CITY_APRICORN_1
 	object_event 13, 17, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLACK, OBJECTTYPE_SCRIPT, 0, VioletCityApricornTree2, EVENT_VIOLET_CITY_APRICORN_2
