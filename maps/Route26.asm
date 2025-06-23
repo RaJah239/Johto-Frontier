@@ -5,8 +5,14 @@
 	const ROUTE26_COOLTRAINER_F2
 	const ROUTE26_YOUNGSTER
 	const ROUTE26_FISHER
-	const ROUTE26_FRUIT_TREE
 	const ROUTE26_POKE_BALL
+	const ROUTE26_BERRY_TREE1
+	const ROUTE26_BERRY_TREE2
+	const ROUTE26_BERRY_TREE3
+	const ROUTE26_BERRY_TREE4
+	const ROUTE26_BERRY_TREE5
+	const ROUTE26_APRICORN_TREE1
+	const ROUTE26_APRICORN_TREE2
 
 Route26_MapScripts:
 	def_scene_scripts
@@ -231,9 +237,6 @@ TrainerFisherScott:
 Route26Sign:
 	jumptext Route26SignText
 
-Route26FruitTree:
-	fruittree FRUITTREE_ROUTE_26
-
 Route26MaxElixer:
 	itemball MAX_ELIXER
 
@@ -395,6 +398,160 @@ Route26SignText:
 	line "RECEPTION GATE"
 	done
 
+Route26BerryTree1:
+	opentext
+	getitemname STRING_BUFFER_3, GOLD_BERRY
+	writetext Route26TreeText
+	promptbutton
+	writetext Route26HeyItsBerryApricornText
+	promptbutton
+	giveitem GOLD_BERRY
+	iffalse Route26NoRoomInBag
+	disappear ROUTE26_BERRY_TREE1
+	writetext Route26FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route26BerryTree2:
+	opentext
+	getitemname STRING_BUFFER_3, MIRACLEBERRY
+	writetext Route26TreeText
+	promptbutton
+	writetext Route26HeyItsBerryApricornText
+	promptbutton
+	giveitem MIRACLEBERRY
+	iffalse Route26NoRoomInBag
+	disappear ROUTE26_BERRY_TREE2
+	writetext Route26FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route26BerryTree3:
+	opentext
+	getitemname STRING_BUFFER_3, GOLD_BERRY
+	writetext Route26TreeText
+	promptbutton
+	writetext Route26HeyItsBerryApricornText
+	promptbutton
+	giveitem GOLD_BERRY
+	iffalse Route26NoRoomInBag
+	disappear ROUTE26_BERRY_TREE3
+	writetext Route26FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route26BerryTree4:
+	opentext
+	getitemname STRING_BUFFER_3, MIRACLEBERRY
+	writetext Route26TreeText
+	promptbutton
+	writetext Route26HeyItsBerryApricornText
+	promptbutton
+	giveitem MIRACLEBERRY
+	iffalse Route26NoRoomInBag
+	disappear ROUTE26_BERRY_TREE4
+	writetext Route26FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route26BerryTree5:
+	opentext
+	getitemname STRING_BUFFER_3, MINT_BERRY
+	writetext Route26TreeText
+	promptbutton
+	writetext Route26HeyItsBerryApricornText
+	promptbutton
+	giveitem MINT_BERRY
+	iffalse Route26NoRoomInBag
+	disappear ROUTE26_BERRY_TREE5
+	writetext Route26FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route26ApricornTree1:
+	opentext
+	getitemname STRING_BUFFER_3, RED_APRICORN
+	writetext Route26TreeText
+	promptbutton
+	writetext Route26HeyItsBerryApricornText
+	promptbutton
+	giveitem RED_APRICORN
+	iffalse Route26NoRoomInBag
+	disappear ROUTE26_APRICORN_TREE1
+	writetext Route26FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route26ApricornTree2:
+	opentext
+	getitemname STRING_BUFFER_3, BLU_APRICORN
+	writetext Route26TreeText
+	promptbutton
+	writetext Route26HeyItsBerryApricornText
+	promptbutton
+	giveitem BLU_APRICORN
+	iffalse Route26NoRoomInBag
+	disappear ROUTE26_APRICORN_TREE2
+	writetext Route26FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route26NoBerryOrApricorn:
+	opentext
+	writetext Route26TreeText
+	promptbutton
+	writetext Route26NothingHereText
+	waitbutton
+	closetext
+	end
+
+Route26NoRoomInBag:
+	writetext Route26NoRoomInBagText
+	waitbutton
+	closetext
+	end
+
+Route26TreeText:
+	text_far _FruitBearingTreeText
+	text_end
+
+Route26NothingHereText:
+	text_far _NothingHereText
+	text_end
+
+Route26HeyItsBerryApricornText:
+	text_far _HeyItsFruitText
+	text_end
+
+Route26FoundItemText:
+	text_far _ObtainedFruitText
+	text_end
+
+Route26NoRoomInBagText:
+	text_far _CantCarryItemText
+	text_end
+
 Route26_MapEvents:
 	def_warp_events
 	warp_event  7,  5, VICTORY_ROAD_GATE, 1
@@ -405,6 +562,13 @@ Route26_MapEvents:
 
 	def_bg_events
 	bg_event  8,  6, BGEVENT_READ, Route26Sign
+	bg_event 14, 54, BGEVENT_READ, Route26NoBerryOrApricorn
+	bg_event 14, 53, BGEVENT_READ, Route26NoBerryOrApricorn
+	bg_event 13, 53, BGEVENT_READ, Route26NoBerryOrApricorn
+	bg_event 13, 54, BGEVENT_READ, Route26NoBerryOrApricorn
+	bg_event  4, 95, BGEVENT_READ, Route26NoBerryOrApricorn
+	bg_event  4, 96, BGEVENT_READ, Route26NoBerryOrApricorn
+	bg_event  5, 96, BGEVENT_READ, Route26NoBerryOrApricorn
 
 	def_object_events
 	object_event 14, 24, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 2, TrainerCooltrainermJake, -1
@@ -413,5 +577,12 @@ Route26_MapEvents:
 	object_event  5,  8, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerCooltrainerfBeth1, -1
 	object_event 13, 79, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, TrainerPsychicRichard, -1
 	object_event 10, 92, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerFisherScott, -1
-	object_event 14, 54, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route26FruitTree, -1
 	object_event  9, 15, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route26MaxElixer, EVENT_ROUTE_26_MAX_ELIXER
+	object_event 14, 54, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, Route26BerryTree1, EVENT_ROUTE_26_BERRY_1
+	object_event 14, 53, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route26BerryTree2, EVENT_ROUTE_26_BERRY_2
+	object_event 13, 53, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, Route26BerryTree3, EVENT_ROUTE_26_BERRY_3
+	object_event 13, 54, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route26BerryTree4, EVENT_ROUTE_26_BERRY_4
+
+	object_event  4, 95, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, Route26BerryTree5, EVENT_ROUTE_26_BERRY_5
+	object_event  4, 96, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route26ApricornTree1, EVENT_ROUTE_26_APRICORN_1
+	object_event  5, 96, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route26ApricornTree2, EVENT_ROUTE_26_APRICORN_2
