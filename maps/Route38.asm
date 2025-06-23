@@ -4,8 +4,9 @@
 	const ROUTE38_STANDING_YOUNGSTER2
 	const ROUTE38_BEAUTY1
 	const ROUTE38_SAILOR
-	const ROUTE38_FRUIT_TREE
 	const ROUTE38_BEAUTY2
+	const ROUTE38_BERRY_TREE1
+	const ROUTE38_BERRY_TREE2
 
 Route38_MapScripts:
 	def_scene_scripts
@@ -285,9 +286,6 @@ Route38Sign:
 Route38TrainerTips:
 	jumptext Route38TrainerTipsText
 
-Route38FruitTree:
-	fruittree FRUITTREE_ROUTE_38
-
 BirdKeeperTobySeenText:
 	text "Fly high into the"
 	line "sky, my beloved"
@@ -438,6 +436,75 @@ Route38TrainerTipsText:
 	cont "its evolution."
 	done
 
+Route38BerryTree1:
+	opentext
+	getitemname STRING_BUFFER_3, BERRY
+	writetext Route38TreeText
+	promptbutton
+	writetext Route38HeyItsBerryApricornText
+	promptbutton
+	giveitem BERRY
+	iffalse Route38NoRoomInBag
+	disappear ROUTE38_BERRY_TREE1
+	writetext Route38FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route38BerryTree2:
+	opentext
+	getitemname STRING_BUFFER_3, MYSTERYBERRY
+	writetext Route38TreeText
+	promptbutton
+	writetext Route38HeyItsBerryApricornText
+	promptbutton
+	giveitem MYSTERYBERRY
+	iffalse Route38NoRoomInBag
+	disappear ROUTE38_BERRY_TREE2
+	writetext Route38FoundItemText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	closetext
+	end
+
+Route38NoBerryOrApricorn:
+	opentext
+	writetext Route38TreeText
+	promptbutton
+	writetext Route38NothingHereText
+	waitbutton
+	closetext
+	end
+
+Route38NoRoomInBag:
+	writetext Route38NoRoomInBagText
+	waitbutton
+	closetext
+	end
+
+Route38TreeText:
+	text_far _FruitBearingTreeText
+	text_end
+
+Route38NothingHereText:
+	text_far _NothingHereText
+	text_end
+
+Route38HeyItsBerryApricornText:
+	text_far _HeyItsFruitText
+	text_end
+
+Route38FoundItemText:
+	text_far _ObtainedFruitText
+	text_end
+
+Route38NoRoomInBagText:
+	text_far _CantCarryItemText
+	text_end
+
 Route38_MapEvents:
 	def_warp_events
 	warp_event 35,  8, ROUTE_38_ECRUTEAK_GATE, 1
@@ -448,6 +515,8 @@ Route38_MapEvents:
 	def_bg_events
 	bg_event 33,  7, BGEVENT_READ, Route38Sign
 	bg_event  5, 13, BGEVENT_READ, Route38TrainerTips
+	bg_event 12, 10, BGEVENT_READ, Route38NoBerryOrApricorn
+	bg_event 12,  9, BGEVENT_READ, Route38NoBerryOrApricorn
 
 	def_object_events
 	object_event  4,  1, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 1, TrainerSchoolboyChad1, -1
@@ -455,5 +524,6 @@ Route38_MapEvents:
 	object_event 12, 15, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 1, TrainerBirdKeeperToby, -1
 	object_event 19,  9, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 1, TrainerBeautyValerie, -1
 	object_event 24,  5, SPRITE_SAILOR, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, TrainerSailorHarry, -1
-	object_event 12, 10, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route38FruitTree, -1
 	object_event  5,  8, SPRITE_BEAUTY, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 1, TrainerBeautyOlivia, -1
+	object_event 12, 10, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route38BerryTree1, EVENT_ROUTE_38_BERRY_1
+	object_event 12,  9, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_ORANGE, OBJECTTYPE_SCRIPT, 0, Route38BerryTree2, EVENT_ROUTE_38_BERRY_2
