@@ -54,7 +54,6 @@ CinnabarGroupSprites:
 	db SPRITE_SWIMMER_GUY
 	; max 9 of 9 walking sprites
 	db SPRITE_POKE_BALL
-	db SPRITE_FRUIT_TREE
 	db 0 ; end
 
 ; CeruleanCity and Route5 are connected
@@ -87,7 +86,6 @@ CeladonGroupSprites:
 	; 6 of max 9 walking sprites
 	db SPRITE_POLIWAG
 	db SPRITE_POKE_BALL
-	db SPRITE_FRUIT_TREE
 	db 0 ; end
 
 ; Route11, Route12 and Route13 are connected
@@ -108,7 +106,6 @@ FuchsiaGroupSprites:
 	db SPRITE_BIG_SNORLAX
 	db SPRITE_MACHOP
 	db SPRITE_POKE_BALL
-	db SPRITE_FRUIT_TREE
 	db 0 ; end
 
 IndigoGroupSprites:

@@ -88,7 +88,6 @@
 	const SPRITE_BOULDER ; 5a
 	const SPRITE_SNES ; 5b
 	const SPRITE_FAMICOM ; 5c
-	const SPRITE_FRUIT_TREE ; 5d
 	const SPRITE_GOLD_TROPHY ; 5e
 	const SPRITE_SILVER_TROPHY ; 5f
 	const SPRITE_KRIS ; 60
