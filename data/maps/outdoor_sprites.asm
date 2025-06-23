@@ -241,7 +241,8 @@ LakeOfRageGroupSprites:
 	db SPRITE_YOUNGSTER
 	; 8 of max 9 walking sprites
 	db SPRITE_GYARADOS
-	db SPRITE_FRUIT_TREE
+	db SPRITE_BERRY
+	db SPRITE_APRICORN
 	db SPRITE_POKE_BALL
 	db 0 ; end
 
