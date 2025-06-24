@@ -116,6 +116,7 @@ endc
 
 ; Place new events that initialises on game start
 	dw EVENT_RADIO_TOWER_5F_REAL_DIRECTOR
+	dw EVENT_ROUTE_30_BERRY_TEACHER
 	dw -1 ; end
 
 InitialEngineFlags:

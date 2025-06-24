@@ -16,6 +16,7 @@ Route30BerryHousePokefanMScript:
 	verbosegiveitem BERRY
 	iffalse .NoRoom
 	setevent EVENT_GOT_BERRY_FROM_ROUTE_30_HOUSE
+	setmapscene ROUTE_30, SCENE_ROUTE_30_NOOP
 .GotBerry:
 	writetext Route30BerrySpeechHouseCheckTreesText
 	waitbutton
@@ -42,6 +43,9 @@ Route30BerrySpeechHouseCheckTreesText:
 	text "Check trees for"
 	line "BERRIES. They just"
 	cont "drop right off."
+
+	para "Picked BERRIES re-"
+	line "grow you travel."
 	done
 
 Route30BerryHouse_MapEvents:
@@ -56,4 +60,4 @@ Route30BerryHouse_MapEvents:
 	bg_event  1,  1, BGEVENT_READ, Route30BerryHouseBookshelf
 
 	def_object_events
-	object_event  2,  3, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, Route30BerryHousePokefanMScript, -1
+	object_event  2,  3, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route30BerryHousePokefanMScript, -1

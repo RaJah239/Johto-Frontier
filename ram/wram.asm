@@ -3183,8 +3183,9 @@ wMountMoonSquareSceneID::                         db
 wMobileTradeRoomSceneID::                         db
 wMobileBattleRoomSceneID::                        db
 wDayCareSceneID::                                 db
+wRoute30SceneID::                                 db
 
-	ds 184
+	ds 183
 
 wEventFlags:: flag_array NUM_EVENTS
 

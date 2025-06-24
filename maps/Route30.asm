@@ -12,11 +12,20 @@
 	const ROUTE30_APRICORN_TREE1
 	const ROUTE30_BERRY_TREE2
 	const ROUTE30_APRICORN_TREE2
+	const ROUTE30_BERRY_TEACHER
 
 Route30_MapScripts:
 	def_scene_scripts
+	scene_script Route30Noop1Scene, SCENE_ROUTE_30_TEACHER_STOPS_YOU
+	scene_script Route30Noop2Scene, SCENE_ROUTE_30_NOOP
 
 	def_callbacks
+
+Route30Noop1Scene:
+	end
+
+Route30Noop2Scene:
+	end
 
 YoungsterJoey_ImportantBattleScript:
 	waitsfx
@@ -494,12 +503,64 @@ Route30NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
+Route30BerryTeacher2Script:
+	moveobject ROUTE30_BERRY_TEACHER, 8, 40
+Route30BerryTeacher1Script:
+	playsound SFX_ENTER_DOOR
+	turnobject PLAYER, LEFT
+	showemote EMOTE_SHOCK, PLAYER, 15
+	appear ROUTE30_BERRY_TEACHER
+	applymovement ROUTE30_BERRY_TEACHER, Route30BerryTeacherMovement
+	turnobject PLAYER, LEFT
+	opentext
+	writetext DidYouJustPastThisObviousHouseText
+	waitbutton
+	closetext
+	applymovement ROUTE30_BERRY_TEACHER, Route30BerryTeacherMovementExits
+	playsound SFX_ENTER_DOOR
+	disappear ROUTE30_BERRY_TEACHER
+	setscene SCENE_ROUTE_30_NOOP
+	end
+
+Route30BerryTeacherMovement:
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step_end
+
+Route30BerryTeacherMovementExits:
+	step LEFT
+	step LEFT
+	step LEFT
+	step LEFT
+	step UP
+	step_end
+
+DidYouJustPastThisObviousHouseText:
+	text "Well hello there"
+	line "trainer."
+	
+	para "What's the rush?"
+
+	para "What if I was MR."
+	line "#MON? Fine, I'm"
+
+	para "not but I have"
+	line "important tips!"
+
+	para "Come and join me"
+	line "inside won't you?"
+	done
+
 Route30_MapEvents:
 	def_warp_events
 	warp_event  7, 39, ROUTE_30_BERRY_HOUSE, 1
 	warp_event 17,  5, MR_POKEMONS_HOUSE, 1
 
 	def_coord_events
+	coord_event 12, 40, SCENE_ROUTE_30_TEACHER_STOPS_YOU, Route30BerryTeacher1Script
+	coord_event 13, 40, SCENE_ROUTE_30_TEACHER_STOPS_YOU, Route30BerryTeacher2Script
 
 	def_bg_events
 	bg_event  9, 43, BGEVENT_READ, Route30Sign
@@ -526,3 +587,4 @@ Route30_MapEvents:
 	object_event  4, 39, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route30ApricornTree1, EVENT_ROUTE_2_APRICORN1
 	object_event 11,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route30BerryTree2, EVENT_ROUTE_2_BERRY2
 	object_event 12,  6, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route30ApricornTree2, EVENT_ROUTE_2_APRICORN2
+	object_event  7, 40, SPRITE_TEACHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROUTE_30_BERRY_TEACHER
