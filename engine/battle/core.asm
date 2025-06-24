@@ -2305,6 +2305,14 @@ WinTrainerBattle:
 	predef HealParty
 .skip_heal
 
+	call PrintWinLossText
+
+; Don't show money award text if base reward = 0
+	ld a, [wEnemyTrainerBaseReward]
+	cp 0
+	ret z
+	jr .give_money
+
 	ld a, [wDebugFlags]
 	bit DEBUG_BATTLE_F, a
 	jr nz, .skip_win_loss_text
