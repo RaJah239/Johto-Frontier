@@ -149,7 +149,7 @@ ItemEffects:
 	dw BasementKeyEffect   ; BASEMENT_KEY
 	dw NoEffect            ; PASS
 	dw NoEffect            ; ITEM_87
-	dw NoEffect            ; ITEM_88
+	dw NoEffect            ; SHINY_CHARM
 	dw VitaminEffect       ; ZINC
 	dw NoEffect            ; CHARCOAL
 	dw RestoreHPEffect     ; BERRY_JUICE

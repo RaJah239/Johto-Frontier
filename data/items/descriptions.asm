@@ -136,7 +136,7 @@ ItemDescriptions:
 	dw BasementKeyDesc
 	dw PassDesc
 	dw TeruSama9Desc
-	dw TeruSama10Desc
+	dw ShinyCharmDesc
 	dw ZincDesc
 	dw CharcoalDesc
 	dw BerryJuiceDesc
@@ -790,8 +790,9 @@ PassDesc:
 TeruSama9Desc:
 	db   "?@"
 
-TeruSama10Desc:
-	db   "?@"
+ShinyCharmDesc:
+	db "Raises chance of"
+	next "SHINY #MON.@"
 
 ZincDesc:
 	db   "Raises SPCL.DEF"

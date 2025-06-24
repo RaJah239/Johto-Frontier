@@ -66,6 +66,7 @@ if DEF(_DEBUG)
 	giveitem LANTURN_CALL
 	giveitem KINGDRA_CALL
 	giveitem MILOTIC_CALL
+	giveitem SHINY_CHARM
 
 	; good party
 	givepoke MEW, 50, LEFTOVERS

@@ -135,7 +135,7 @@ ItemNames::
 	li "BASEMENT KEY"
 	li "PASS"
 	li "TERU-SAMA"
-	li "TERU-SAMA"
+	li "SHINY CHARM"
 	li "ZINC"
 	li "CHARCOAL"
 	li "BERRY JUICE"
