@@ -123,10 +123,9 @@ Script_GivePlayerHisPrize:
 	special BattleTowerAction
 	setval BATTLETOWERACTION_GIVEREWARD
 	special BattleTowerAction
-	ifequal POTION, Script_YourPackIsStuffedFull
-	getitemname STRING_BUFFER_4, USE_SCRIPT_VAR
-	giveitem ITEM_FROM_MEM, 5
-	writetext Text_PlayerGotFive
+	giveitem CRYSTAL, 3
+	iffalse Script_YourPackIsStuffedFull
+	writetext Text_PlayerGotThree
 	setval BATTLETOWERACTION_1D
 	special BattleTowerAction
 	closetext
@@ -367,18 +366,16 @@ Text_CongratulationsYouveBeatenAllTheTrainers:
 	para ""
 	done
 
-Text_PlayerGotFive:
-	text "<PLAYER> got five"
-	line "@"
-	text_ram wStringBuffer4
-	text "!@"
+Text_PlayerGotThree:
+	text "<PLAYER> got three"
+	line "CRYSTAL!@"
 	sound_item
 	text_promptbutton
 	text_end
 
 Text_YourPackIsStuffedFull:
-	text "Oops, your PACK is"
-	line "stuffed full."
+	text "Oops, your Items"
+	line "POCKET is full."
 
 	para "Please make room"
 	line "and come back."
