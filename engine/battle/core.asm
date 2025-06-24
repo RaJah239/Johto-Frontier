@@ -3071,7 +3071,6 @@ EnemySwitch:
 .skip
 	; 'b' contains the PartyNr of the mon the AI will switch to
 	call LoadEnemyMonToSwitchTo
-	call OfferSwitch
 	push af
 	call ClearEnemyMonBox
 	call ShowBattleTextEnemySentOut
@@ -3420,54 +3419,6 @@ CheckWhetherToAskSwitch:
 
 .return_nc
 	and a
-	ret
-
-OfferSwitch:
-	ld a, [wCurPartyMon]
-	push af
-	callfar Battle_GetTrainerName
-	call IsPluralTrainer
-	ld hl, BattleText_PluralEnemyAreAboutToUseWillPlayerChangeMon
-	jr z, .got_switch_phrase
-	ld hl, BattleText_EnemyIsAboutToUseWillPlayerChangeMon
-.got_switch_phrase:
-	call StdBattleTextbox
-	lb bc, 1, 7
-	call PlaceYesNoBox
-	ld a, [wMenuCursorY]
-	dec a
-	jr nz, .said_no
-	call SetUpBattlePartyMenu
-	call PickSwitchMonInBattle
-	jr c, .canceled_switch
-	ld a, [wCurBattleMon]
-	ld [wLastPlayerMon], a
-	ld a, [wCurPartyMon]
-	ld [wCurBattleMon], a
-	call ClearPalettes
-	call DelayFrame
-	call _LoadHPBar
-	call GetBattleMonBackpic
-	call WaitBGMap
-	pop af
-	ld [wCurPartyMon], a
-	xor a
-	ld [wCurEnemyMove], a
-	ld [wCurPlayerMove], a
-	and a
-	ret
-
-.canceled_switch
-	call ClearPalettes
-	call DelayFrame
-	call _LoadHPBar
-	call GetBattleMonBackpic
-	call WaitBGMap
-
-.said_no
-	pop af
-	ld [wCurPartyMon], a
-	scf
 	ret
 
 ClearEnemyMonBox:

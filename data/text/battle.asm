@@ -234,28 +234,6 @@ LostAgainstText:
 	line "<ENEMY>!"
 	prompt
 
-BattleText_EnemyIsAboutToUseWillPlayerChangeMon:
-	text "<ENEMY>"
-	line "is about to use"
-	cont "@"
-	text_ram wEnemyMonNickname
-	text "."
-
-	para "Will <PLAYER>"
-	line "change #MON?"
-	done
-
-BattleText_PluralEnemyAreAboutToUseWillPlayerChangeMon:
-	text "<ENEMY>"
-	line "are about to use"
-	cont "@"
-	text_ram wEnemyMonNickname
-	text "."
-
-	para "Will <PLAYER>"
-	line "change #MON?"
-	done
-
 BattleText_EnemySentOut:
 	text "@" 
 	text_ram wEnemyMonNickname
