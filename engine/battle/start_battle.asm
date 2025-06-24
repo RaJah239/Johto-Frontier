@@ -70,9 +70,9 @@ PlayBattleMusic:
 
     ld de, MUSIC_FINAL_BATTLE
     cp POKEMON_PROF
-    jr z, .done
+    jp z, .done
     cp BLUE
-    jr z, .done
+    jp z, .done
 
 	ld de, MUSIC_MAXIE_ARCHIE_BATTLE
 	cp GIOVANNI
@@ -113,6 +113,14 @@ PlayBattleMusic:
 	ld de, MUSIC_KANTO_GYM_LEADER_BATTLE
 	farcall IsKantoGymLeader
 	jr c, .done
+	cp WILL
+	jp z, .done
+	cp KOGA
+	jp z, .done
+	cp BRUNO
+	jr z, .done
+	cp KAREN
+	jr z, .done
 
 	; IsGymLeader also counts CHAMPION, RED, and the Kanto gym leaders
 	; but they have been taken care of before this
