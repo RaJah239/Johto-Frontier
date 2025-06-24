@@ -519,8 +519,8 @@ AuroraBeamDescription:
 	line "lower ATTACK.@"
 
 HyperBeamDescription:
-	db   "1st turn: Attack"
-	line "2nd turn: Rest@"
+    db "Attack, then skip"
+    line "a turn if no KO.@"
 
 PeckDescription:
 	db   "Jabs the foe with"

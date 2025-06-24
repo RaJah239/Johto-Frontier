@@ -1088,8 +1088,8 @@ HyperBeam:
 	applydamage
 	criticaltext
 	supereffectivetext
-	rechargenextturn
 	checkfaint
+	rechargenextturn
 	buildopponentrage
 	endmove
 
