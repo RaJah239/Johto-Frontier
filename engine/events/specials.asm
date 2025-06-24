@@ -444,3 +444,10 @@ RestorePartyHeldItems:
 TradebackNPC:
 	farcall TradebackKid
 	ret
+
+PlayerGivesAwayAPokemon:
+	farcall SelectMonFromParty
+	ld [wMonType], a ; PARTYMON
+	ld [wPokemonWithdrawDepositParameter], a ; REMOVE_PARTY
+	callfar RemoveMonFromParty
+	ret
