@@ -1430,3 +1430,27 @@ _OakText5::
 _OakText5Min::
 	text "Alright…"
 	prompt
+
+_AboutText::
+	text "This is a Johto"
+	line "only region game."
+
+	para "You many do what-"
+	line "ever you want,"
+
+	para "whenever you want,"
+	line "or nothing at all."
+
+	para "A Generation Two"
+	line "#MON experience"
+
+	para "with QOL features,"
+	line "collecting all"
+	
+	para "#MON infinitely"
+	line "in one save file,"
+	
+	para "increased replay"
+	line "value; especially"
+	cont "in the post game."
+	prompt

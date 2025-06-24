@@ -16,7 +16,7 @@
 	const MAINMENUITEM_NEW_GAME       ; 1
 	const MAINMENUITEM_OPTION         ; 2
 	const MAINMENUITEM_CLOCK_RESET    ; 3
-	const MAINMENUITEM_MOBILE         ; 4
+	const MAINMENUITEM_ABOUT          ; 4
 	const MAINMENUITEM_MOBILE_STUDIUM ; 5
 	const MAINMENUITEM_DEBUG_ROOM     ; 6
 
@@ -54,7 +54,7 @@ MainMenu:
 
 .MenuHeader:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 0, 16, 7
+	menu_coords 0, 0, 13, 7
 	dw .MenuData
 	db 1 ; default option
 
@@ -71,7 +71,7 @@ MainMenu:
 	db "NEW GAME@"
 	db "OPTIONS@"
 	db "RESET CLOCK@"
-	db "MOBILE@"
+	db "ABOUT@"
 	db "MOBILE STUDIUM@"
 if DEF(_DEBUG)
 	db "DEBUG ROOM@"
@@ -83,7 +83,7 @@ endc
 	dw MainMenu_NewGame
 	dw MainMenu_Option
 	dw MainMenu_ClockReset
-	dw MainMenu_Mobile
+	dw MainMenu_About
 	dw MainMenu_MobileStudium
 if DEF(_DEBUG)
 	dw MainMenu_DebugRoom
@@ -93,17 +93,19 @@ MainMenuItems:
 ; entries correspond to MAINMENU_* constants
 
 	; MAINMENU_NEW_GAME
-	db 2
+	db 3
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION
+	db MAINMENUITEM_ABOUT
 	db -1
 
 	; MAINMENU_CONTINUE
-	db 4 + DEF(_DEBUG)
+	db 5 + DEF(_DEBUG)
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION
 	db MAINMENUITEM_CLOCK_RESET
+	db MAINMENUITEM_ABOUT
 if DEF(_DEBUG)
 	db MAINMENUITEM_DEBUG_ROOM
 endc
@@ -115,29 +117,27 @@ endc
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION
 	db MAINMENUITEM_CLOCK_RESET
-	db MAINMENUITEM_MOBILE
+	db MAINMENUITEM_ABOUT
 if DEF(_DEBUG)
 	db MAINMENUITEM_DEBUG_ROOM
 endc
 	db -1
 
 	; MAINMENU_MOBILE
-	db 4 + DEF(_DEBUG)
+	db 3 + DEF(_DEBUG)
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION
-	db MAINMENUITEM_MOBILE
 if DEF(_DEBUG)
 	db MAINMENUITEM_DEBUG_ROOM
 endc
 	db -1
 
 	; MAINMENU_MOBILE_STUDIUM
-	db 5 + DEF(_DEBUG)
+	db 4 + DEF(_DEBUG)
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION
-	db MAINMENUITEM_MOBILE
 	db MAINMENUITEM_MOBILE_STUDIUM
 if DEF(_DEBUG)
 	db MAINMENUITEM_DEBUG_ROOM
@@ -145,12 +145,11 @@ endc
 	db -1
 
 	; MAINMENU_MYSTERY_MOBILE_STUDIUM
-	db 6 + DEF(_DEBUG)
+	db 5 + DEF(_DEBUG)
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION
 	db MAINMENUITEM_CLOCK_RESET
-	db MAINMENUITEM_MOBILE
 	db MAINMENUITEM_MOBILE_STUDIUM
 if DEF(_DEBUG)
 	db MAINMENUITEM_DEBUG_ROOM
@@ -396,4 +395,8 @@ MainMenu_Continue:
 
 MainMenu_ClockReset:
 	farcall _ResetClock
+	ret
+
+MainMenu_About:
+	farcall AboutSpeech
 	ret

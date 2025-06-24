@@ -9,6 +9,33 @@ Intro_MainMenu:
 	farcall MainMenu
 	jmp StartTitleScreen
 
+AboutSpeech:
+	call ClearTilemap
+
+	; prepare for sprite display
+	ld c, 15
+	call FadeToWhite
+	ld a, SMEARGLE ; change this to show a different pokemon
+	ld [wCurSpecies], a
+	ld [wCurPartySpecies], a
+	call GetBaseData
+	hlcoord 6, 4
+	call PrepMonFrontpic
+	xor a
+	ld [wTempMonDVs], a
+	ld [wTempMonDVs + 1], a
+	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
+	call GetSGBLayout
+	call Intro_WipeInFrontpic ; actually display the sprite
+
+	; Display text
+	ld hl, AboutText1
+	jp PrintText
+
+AboutText1:
+	text_far _AboutText
+	text_end
+
 PrintDayOfWeek:
 	push de
 	ld hl, .Days
