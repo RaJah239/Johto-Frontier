@@ -370,7 +370,7 @@ _CantUseTeleportText::
 
 _UseStrengthText::
 	text "DONPHAN used its"
-	line "STRENGTH!"
+	line "strength!"
 	done
 
 _MoveBoulderText::
