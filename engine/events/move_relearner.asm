@@ -583,12 +583,9 @@ ChooseMoveToLearn:
 	ld a, [wCurSpecies]
 	ld b, a
 	farcall GetMoveCategoryName
-	hlcoord 11, 12
+	hlcoord 10, 12
 	ld de, wStringBuffer1
 	call PlaceString
-	hlcoord 10, 12
-	ld [hl], "/"
-	inc hl
 ; This code falls through into the ".print_move_chance" local jump.
 
 ; This prints the move's status effect chance number.

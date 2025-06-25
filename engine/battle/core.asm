@@ -5617,9 +5617,9 @@ MoveInfoBox:
 	xor a
 	ldh [hBGMapMode], a
 
-	hlcoord 0, 8
-	ld b, 3
-	ld c, 9
+	hlcoord 0, 8 ; upper right corner of the textbox
+	ld b, 3 ; Box height
+	ld c, 9 ; Box length
 	call Textbox
 	call MobileTextBorder
 
@@ -5637,7 +5637,7 @@ MoveInfoBox:
 	hlcoord 1, 10
 	ld de, .Disabled
 	call PlaceString
-	jr .done
+	jp .done
 
 .not_disabled
 	ld hl, wMenuCursorY
@@ -5671,40 +5671,75 @@ MoveInfoBox:
 	farcall UpdateMoveData
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
 	ld b, a
-	farcall GetMoveCategoryName
-	hlcoord 1, 9
+	farcall BattleGetMoveCategoryName
+	hlcoord 1, 9 ; Category coordinates
 	ld de, wStringBuffer1
 	call PlaceString
 
-	ld h, b
-	ld l, c
-	ld [hl], "/"
-
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
 	ld b, a
-	hlcoord 2, 10
+	hlcoord 2, 9
 	predef PrintMoveType
 
-; print "PP/"
-	ld de, .pp_string ; "PP"
-	hlcoord 1, 11
+; print "pp"
+	ld de, .pp_string ; "p"
+	hlcoord 2, 11
 	call PlaceString
+
+; print move BP (Base Power)
+	ld de, .power_string ; "p/"
+	hlcoord 4, 10
+	call PlaceString
+
+	hlcoord 1, 10
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	jr nz, .haspower
+	ld de, .nopower_string ; "---"
+	call PlaceString
+	jr .place_accuracy
+
+.haspower	
+	ld [wTextDecimalByte], a
+	ld de, wTextDecimalByte
+	lb bc, 1, 3 ; number of bytes this number is in, in 'b', number of possible digits in 'c'
+	call PrintNum
+
+; print move's accuracy
+.place_accuracy
+	ld a, [wCurSpecies]
+	ld bc, MOVE_LENGTH
+	ld hl, (Moves + MOVE_ACC) - MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	Call Adjust_Percent_Battle
+	ld [wBuffer1], a
+	ld de, wBuffer1
+	lb bc, 1, 3
+	hlcoord 6, 10
+	call PrintNum
+	ld [hl], "<%>" ; displays percent symbol
+	hlcoord 9, 9
 
 .done
 	ret
 
+.nopower_string:
+	db "---@"
+.power_string:
+	db "p/@"
 .pp_string:
-	db "PP@"
-
+	db "<boldp><boldp>@"
 .Disabled:
 	db "Disabled!@"
 
 .PrintPP:
-	hlcoord 4, 11
+	hlcoord 5, 11
 	ld a, [wLinkMode] ; What's the point of this check?
 	cp LINK_MOBILE
 	jr c, .ok
-	hlcoord 4, 11
+	hlcoord 5, 11
 .ok
 	push hl
 	ld de, wStringBuffer1
@@ -5718,6 +5753,55 @@ MoveInfoBox:
 	ld de, wNamedObjectIndex
 	lb bc, 1, 2
 	call PrintNum
+	ret
+
+; This converts values out of 256 into a value
+; out of 100. It achieves this by multiplying
+; the value by 100 and dividing it by 256.
+Adjust_Percent_Battle:
+
+	; Overwrite the "hl" register.
+	ld l, a
+	ld h, 0
+	push af
+
+	; Multiplies the value of the "hl" register by 3.
+	add hl, hl
+	add a, l
+	ld l, a
+	adc h
+	sub l
+	ld h, a
+
+	; Multiplies the value of the "hl" register
+	; by 8. The value of the "hl" register
+	; is now 24 times its original value.
+	add hl, hl
+	add hl, hl
+	add hl, hl
+
+	; Add the original value of the "hl" value to itself,
+	; making it 25 times its original value.
+	pop af
+	add a, l
+	ld l, a
+	adc h
+	sbc l
+	ld h, a
+
+	; Multiply the value of the "hl" register by
+	; 4, making it 100 times its original value.
+	add hl, hl
+	add hl, hl
+
+	; Set the "l" register to 0.5, otherwise the rounded
+	; value may be lower than expected. Round the
+	; high byte to nearest and drop the low byte.
+	ld l, 0.5
+	sla l
+	sbc a
+	and 1
+	add a, h
 	ret
 
 CheckPlayerHasUsableMoves:
