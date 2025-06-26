@@ -410,6 +410,7 @@ BattleTowerMartPorygonPCScript:
 BattleTowerMartTutorScientistScript:
     faceplayer
     opentext
+    special CrystalCountInBag
     checkevent EVENT_BATTLE_TOWER_TUTOR
     iftrue .WelcomeBackWantMeToTeach
     writetext BattleTowerMartTutorWantMeToTeachText
@@ -609,6 +610,7 @@ BattleTowerMartTutorScientistScript:
     writetext BattleTowerMartTutorExcellentText
     playsound SFX_TRANSACTION
     waitsfx
+    special CrystalCountInBag
 .EndingOffBattleTowerMartMoveTutor:
     waitbutton
     closetext
