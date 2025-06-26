@@ -625,10 +625,22 @@ ChooseMoveToLearn:
 .print_move_accuracy
 	ld a, [wMenuSelection]
 	ld bc, MOVE_LENGTH
+	ld hl, (Moves + MOVE_EFFECT) - MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+
+	ld hl, PerfectAccuracyEffects
+	call IsInByteArray
+	jr c, .imperfect
+
+	ld a, [wMenuSelection]
+	ld bc, MOVE_LENGTH
 	ld hl, (Moves + MOVE_ACC) - MOVE_LENGTH
 	call AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
+
 	Call ConvertPercentagesMoveRelearner
 	ld [wBuffer1], a
 	ld de, wBuffer1
@@ -637,7 +649,14 @@ ChooseMoveToLearn:
 	call PrintNum
 	ld [hl], "<%>" ; displays percent symbol
 	hlcoord 7, 8
+	jr .print_move_attack
 ; This code falls through into the ".print_move_attack" local jump.
+
+.imperfect:
+	ld de, MoveNullValueString
+	ld bc, 3
+	hlcoord 5, 11
+	call PlaceString
 
 ; This prints the move's attack number.
 .print_move_attack
@@ -724,7 +743,7 @@ MoveTypeBottomString:
 ; This is the string that precedes
 ; the move's attack number.
 MoveAttackString:
-	db "POW/@"
+	db "Pow/@"
 
 ; This displays when a move has
 ; a metric with a null value.
@@ -734,12 +753,12 @@ MoveNullValueString:
 ; This is the string that precedes
 ; the move's accuracy number.
 MoveAccuracyString:
-	db "ACC/@"
+	db "Acc/@"
 
 ; This is the string that precedes the
 ; move's status effect chance number.
 MoveChanceString:
-	db "EFF/@"
+	db "Eff/@"
 
 ; This is the text that displays when the player
 ; first talks to the move reminder.

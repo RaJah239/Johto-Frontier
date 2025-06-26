@@ -346,11 +346,11 @@ ChooseEggMoveToLearn:
 
 .print_move_stat_strings
     hlcoord 0, 9
-    ld de, EggMoveTypeTopString
+    ld de, MoveTypeTopString
     call PlaceString
 
     hlcoord 0, 10
-    ld de, EggMoveTypeBottomString
+    ld de, MoveTypeBottomString
     call PlaceString
 
     ld a, [wCurSpecies]
@@ -361,13 +361,13 @@ ChooseEggMoveToLearn:
     call PlaceString
 
     hlcoord 1, 10
-    ld de, EggMoveAttackString
+    ld de, MoveAttackString
     call PlaceString
     hlcoord  1, 12
-    ld de, EggMoveChanceString
+    ld de, MoveChanceString
     call PlaceString
     hlcoord 1, 11
-    ld de, EggMoveAccuracyString
+    ld de, MoveAccuracyString
     call PlaceString
 
 .print_move_chance
@@ -398,10 +398,22 @@ ChooseEggMoveToLearn:
 .print_move_accuracy
     ld a, [wMenuSelection]
     ld bc, MOVE_LENGTH
+    ld hl, (Moves + MOVE_EFFECT) - MOVE_LENGTH
+    call AddNTimes
+    ld a, BANK(Moves)
+    call GetFarByte
+
+    ld hl, PerfectAccuracyEffects
+    call IsInByteArray
+    jr c, .imperfect
+
+    ld a, [wMenuSelection]
+    ld bc, MOVE_LENGTH
     ld hl, (Moves + MOVE_ACC) - MOVE_LENGTH
     call AddNTimes
     ld a, BANK(Moves)
     call GetFarByte
+
     call EggConvertPercentages
     ld [wBuffer1], a
     ld de, wBuffer1
@@ -410,7 +422,16 @@ ChooseEggMoveToLearn:
     call PrintNum
     ld [hl], "<%>" ; displays percent symbol
     hlcoord 7, 8
+    jr .print_move_attack
+; This code falls through into the ".print_move_attack" local jump.
 
+.imperfect:
+    ld de, MoveNullValueString
+    ld bc, 3
+    hlcoord 5, 11
+    call PlaceString
+
+.print_move_attack:
     ld a, [wMenuSelection]
     ld bc, MOVE_LENGTH
     ld hl, (Moves + MOVE_POWER) - MOVE_LENGTH
@@ -458,24 +479,6 @@ EggConvertPercentages:
     and 1
     add a, h
     ret
-
-EggMoveTypeTopString:
-    db "┌───────┐@"
-
-EggMoveTypeBottomString:
-    db "│       └──────────┐@"
-
-EggMoveAttackString:
-    db "POW/@"
-
-EggMoveNullValueString:
-    db "---@"
-
-EggMoveAccuracyString:
-    db "ACC/@"
-
-EggMoveChanceString:
-    db "EFF/@"
 
 ; This is the text that displays if the player
 ; does not have enough money to learn a move.
