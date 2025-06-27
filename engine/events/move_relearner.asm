@@ -185,7 +185,7 @@ CheckCostAgainstPlayerMoney:
 
 ; The cost for learning a move.
 MoveCost:
-	dt 5000
+	dt 9800
 
 ; Checks for moves that can be learned and returns
 ; a zero flag if there are none.
@@ -766,7 +766,7 @@ MoveReminderIntroText:
 	text "Hi, I'm the Move"
 	line "Reminder!"
 
-	para "For ¥5000, I can"
+	para "For ¥9,800 I can"
 	line "make #MON"
 	cont "remember a move."
 
