@@ -411,10 +411,10 @@ BattleTowerMartTutorScientistScript:
     faceplayer
     opentext
     special CrystalCountInBag
-    checkevent EVENT_BATTLE_TOWER_TUTOR
+    checkevent EVENT_MET_BATTLE_TOWER_MOVE_TUTOR
     iftrue .WelcomeBackWantMeToTeach
     writetext BattleTowerMartTutorWantMeToTeachText
-    setevent EVENT_BATTLE_TOWER_TUTOR
+    setevent EVENT_MET_BATTLE_TOWER_MOVE_TUTOR
     sjump .TeachAnotherMove
 .WelcomeBackWantMeToTeach:
     writetext BattleTowerMartTutorWelcomeBackWantMeToTeachText
