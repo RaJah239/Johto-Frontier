@@ -517,7 +517,7 @@ BattleTowerMartTutorScientistScript:
     db "Cost×@"
 
 .ExitString:
-    db "A: Exit@"
+    db "@"
 
 .DisplayAmountOkNotReally:
 ; this is usually for displaying something on the right
