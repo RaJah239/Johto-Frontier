@@ -460,9 +460,12 @@ SurfFunction:
 	dw .AlreadySurfing
 
 .TrySurf:
+if DEF(_DEBUG)
+else
 	ld de, ENGINE_FOGBADGE
 	call CheckBadge
 	jr c, .nofogbadge
+endc
 	ld hl, wBikeFlags
 	bit BIKEFLAGS_ALWAYS_ON_BIKE_F, [hl]
 	jr nz, .cannotsurf
@@ -648,11 +651,12 @@ TrySurfOW::
 ; Check tile permissions.
 	call CheckDirection
 	jr c, .quit
-
+if DEF(_DEBUG)
+else
 	ld de, ENGINE_FOGBADGE
 	call CheckEngineFlag
 	jr c, .quit
-
+endc
 	ld hl, wBikeFlags
 	bit BIKEFLAGS_ALWAYS_ON_BIKE_F, [hl]
 	jr nz, .quit
