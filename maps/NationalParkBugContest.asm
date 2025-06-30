@@ -11,6 +11,7 @@
 	const NATIONALPARKBUGCONTEST_YOUNGSTER7
 	const NATIONALPARKBUGCONTEST_POKE_BALL1
 	const NATIONALPARKBUGCONTEST_POKE_BALL2
+	const NATIONALPARKBUGCONTEST_YOUNGSTER8
 
 NationalParkBugContest_MapScripts:
 	def_scene_scripts
@@ -218,6 +219,13 @@ NationalParkBugContestTrainerTipsText:
 	cont "pressing START."
 	done
 
+BugCatchingYoungsterBlockerScript:
+	jumptextfaceplayer NationalParkBugContestYoungsterBlockerText
+
+NationalParkBugContestYoungsterBlockerText:
+	text "Let's do our best!"
+	done
+
 NationalParkBugContest_MapEvents:
 	def_warp_events
 	warp_event 33, 18, ROUTE_36_NATIONAL_PARK_GATE, 1
@@ -246,3 +254,4 @@ NationalParkBugContest_MapEvents:
 	object_event 17, 34, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 3, 3, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, BugCatchingContestant10AScript, EVENT_BUG_CATCHING_CONTESTANT_10A
 	object_event 35, 12, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, NationalParkBugContestParlyzHeal, EVENT_NATIONAL_PARK_PARLYZ_HEAL
 	object_event  1, 43, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, NationalParkBugContestTMDig, EVENT_NATIONAL_PARK_TM_DIG
+	object_event 21, 45, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 1, 1, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, BugCatchingYoungsterBlockerScript, -1

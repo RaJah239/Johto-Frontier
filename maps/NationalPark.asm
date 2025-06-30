@@ -13,6 +13,7 @@
 	const NATIONALPARK_POKE_BALL1
 	const NATIONALPARK_GAMEBOY_KID
 	const NATIONALPARK_POKE_BALL2
+	const NATIONALPARK_GHOLDENGO
 
 NationalPark_MapScripts:
 	def_scene_scripts
@@ -353,14 +354,17 @@ NationalParkYoungster2Text:
 	done
 
 NationalParkTeacher2Text:
-	text "I take walks in"
-	line "the PARK, but I"
+	text "Rumor has it, if a"
+	line "kind trainer makes"
 
-	para "never go into the"
-	line "grass."
+	para "a wish then tosses"
+	line "99 Nuggets into"
 
-	para "Trainers always"
-	line "want to battle…"
+	para "the fountain lower"
+	line "and walk around it"
+
+	para "once, something"
+	line "unique will occur…"
 	done
 
 NationalParkPersianText:
@@ -500,6 +504,98 @@ NationalParkTrainerTipsText:
 	cont "pressing START."
 	done
 
+NationalParkGholdengoEvent:
+	faceplayer
+	opentext
+	special NuggetCountInBag
+	writetext WantToTossIn99Nuggets
+	yesorno
+	iftrue .CheckIf99Nuggets
+	closetext
+	end
+
+.CheckIf99Nuggets:
+	checkitem NUGGET, 99
+	iftrue .GholdengoAppears
+	writetext NotEnoughNuggetsToMakeAWishText
+	waitbutton
+	closetext
+	end
+
+.GholdengoAppears:
+	playsound SFX_WATER_GUN
+	waitsfx
+	special NuggetCountInBag
+	writetext PlayerTossNuggetsInText
+	takeitem NUGGET, 99
+	special NuggetCountInBag
+	promptbutton
+	closetext
+	applymovement PLAYER, PlayerWalkAroundFountain
+	turnobject PLAYER, UP
+	playsound SFX_SHINE
+	waitsfx
+    cry GHOLDENGO
+    pause 15
+	showemote EMOTE_SHOCK, PLAYER, 15
+	appear NATIONALPARK_GHOLDENGO
+	end
+
+PlayerWalkAroundFountain:
+	step DOWN
+	step LEFT
+	step LEFT
+	step UP
+	step UP
+	step UP
+	step UP
+	step UP
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step DOWN
+	step DOWN
+	step DOWN
+	step DOWN
+	step DOWN
+	step LEFT
+	step LEFT
+	step_end
+
+WantToTossIn99Nuggets:
+	text "Toss in 99 Nuggets"
+	line "and make a wish?"
+	done
+
+PlayerTossNuggetsInText:
+	text "<PLAYER> tossed in"
+	line "the Nuggets."
+	done
+
+NotEnoughNuggetsToMakeAWishText:
+	text "More Nuggets need-"
+	line "ed to make a wish…"
+	done
+
+NationalParkGholdengoScript:
+	faceplayer
+	opentext
+	writetext GholdengoText
+    cry GHOLDENGO
+    pause 15
+    closetext
+    loadwildmon GHOLDENGO, 5
+    loadvar VAR_BATTLETYPE, BATTLETYPE_TRAP
+    startbattle
+    disappear NATIONALPARK_GHOLDENGO
+    reloadmapafterbattle
+    end
+
+GholdengoText:
+	text "Gholdengo: Guyoo…!"
+	done
+
 NationalPark_MapEvents:
 	def_warp_events
 	warp_event 33, 18, ROUTE_36_NATIONAL_PARK_GATE, 1
@@ -514,6 +610,7 @@ NationalPark_MapEvents:
 	bg_event 27, 31, BGEVENT_READ, NationalParkBattleNoticeSign
 	bg_event  6, 47, BGEVENT_ITEM, NationalParkHiddenFullHeal
 	bg_event 12,  4, BGEVENT_READ, NationalParkTrainerTipsSign
+	bg_event 24, 51, BGEVENT_READ, NationalParkGholdengoEvent
 
 	def_object_events
 	object_event 15, 24, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, NationalParkLassScript, -1
@@ -530,3 +627,4 @@ NationalPark_MapEvents:
 	object_event 35, 12, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, NationalParkParlyzHeal, EVENT_NATIONAL_PARK_PARLYZ_HEAL
 	object_event 26,  6, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, NationalParkGameboyKidScript, -1
 	object_event  1, 43, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, NationalParkTMDig, EVENT_NATIONAL_PARK_TM_DIG
+	object_event 24, 52, SPRITE_GHOLDENGO, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, NationalParkGholdengoScript, EVENT_NATIONAL_PARK_GHOLDENGO
