@@ -1260,9 +1260,6 @@ _CGB_GamefreakLogo:
 	ld hl, .GamefreakDittoPalette
 	ld de, wOBPals1 palette 1
 	call LoadHLPaletteIntoDE
-	call WipeAttrmap
-	call ApplyAttrmap
-	call ApplyPals
 	ret
 
 .GamefreakDittoPalette:

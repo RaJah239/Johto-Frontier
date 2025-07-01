@@ -19,19 +19,22 @@ SplashScreen:
 	call WaitBGMap
 	ld b, SCGB_GAMEFREAK_LOGO
 	call GetSGBLayout
-	call SetDefaultBGPAndOBP
-	ld c, 10
-	call DelayFrames
 
 ; Draw copyright screen
 	callfar Copyright
+; Stop here if not in GBC mode
+	farcall GBCOnlyScreen
+
 	call WaitBGMap
-	ld c, 100
+	ld c, 31
+	call FadePalettes
+	ld c, 60
 	call DelayFrames
 	call ClearTilemap
 
-; Stop here if not in GBC mode
-	farcall GBCOnlyScreen
+	ld b, SCGB_GAMEFREAK_LOGO
+	call GetSGBLayout
+	call SetDefaultBGPAndOBP
 
 ; Play GameFreak logo animation
 	call GameFreakPresentsInit
