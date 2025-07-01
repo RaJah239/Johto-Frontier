@@ -901,21 +901,13 @@ LureBallMultiplier:
 	cp BATTLETYPE_FISH
 	ret nz
 
-	ld a, b
-	add a
+	sla b
 	jr c, .max
 
-rept 2
-	add b
-	jr c, .max
-endr
-
-	add b
-	jr nc, .done
+	sla b ; x4
+	ret nc
 .max
-	ld a, $ff
-.done
-	ld b, a
+	ld b, $ff
 	ret
 
 MoonBallMultiplier:
