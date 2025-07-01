@@ -13,7 +13,7 @@
 	INCBIN "gfx/pokemon/nidorina/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)
 	db GROWTH_MEDIUM_SLOW ; growth rate
-	dn EGG_NONE, EGG_NONE ; egg groups
+	dn EGG_MONSTER, EGG_GROUND ; egg groups
 
 	; tm/hm learnset
 	tmhm
