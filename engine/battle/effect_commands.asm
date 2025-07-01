@@ -3001,16 +3001,6 @@ BattleCommand_DamageCalc:
 	call GetBattleVar
 	and TYPE_MASK
 
-; Selfdestruct and Explosion halve defense.
-	cp EFFECT_SELFDESTRUCT
-	jr nz, .dont_selfdestruct
-
-	srl c
-	jr nz, .dont_selfdestruct
-	inc c
-
-.dont_selfdestruct
-
 ; Variable-hit moves and Conversion can have a power of 0.
 	cp EFFECT_MULTI_HIT
 	jr z, .skip_zero_damage_check
