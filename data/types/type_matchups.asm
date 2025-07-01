@@ -12,6 +12,7 @@ TypeMatchups:
 	db FIRE,         STEEL,        SUPER_EFFECTIVE
 	db WATER,        FIRE,         SUPER_EFFECTIVE
 	db WATER,        WATER,        NOT_VERY_EFFECTIVE
+	db WATER,        ICE,          NOT_VERY_EFFECTIVE
 	db WATER,        GRASS,        NOT_VERY_EFFECTIVE
 	db WATER,        GROUND,       SUPER_EFFECTIVE
 	db WATER,        ROCK,         SUPER_EFFECTIVE
@@ -19,10 +20,12 @@ TypeMatchups:
 	db ELECTRIC,     WATER,        SUPER_EFFECTIVE
 	db ELECTRIC,     ELECTRIC,     NOT_VERY_EFFECTIVE
 	db ELECTRIC,     GRASS,        NOT_VERY_EFFECTIVE
+	db ELECTRIC,     ICE,          NOT_VERY_EFFECTIVE
 	db ELECTRIC,     GROUND,       NO_EFFECT
 	db ELECTRIC,     FLYING,       SUPER_EFFECTIVE
 	db ELECTRIC,     DRAGON,       NOT_VERY_EFFECTIVE
 	db GRASS,        FIRE,         NOT_VERY_EFFECTIVE
+	db GRASS,        ICE,          NOT_VERY_EFFECTIVE
 	db GRASS,        WATER,        SUPER_EFFECTIVE
 	db GRASS,        GRASS,        NOT_VERY_EFFECTIVE
 	db GRASS,        POISON,       NOT_VERY_EFFECTIVE
@@ -143,6 +146,7 @@ InverseTypeMatchups:
    db FIRE,         STEEL,        NOT_VERY_EFFECTIVE
    db WATER,        FIRE,         NOT_VERY_EFFECTIVE
    db WATER,        WATER,        SUPER_EFFECTIVE
+   db WATER,        ICE,          SUPER_EFFECTIVE
    db WATER,        GRASS,        SUPER_EFFECTIVE
    db WATER,        GROUND,       NOT_VERY_EFFECTIVE
    db WATER,        ROCK,         NOT_VERY_EFFECTIVE
@@ -151,12 +155,14 @@ InverseTypeMatchups:
    db ELECTRIC,     ELECTRIC,     SUPER_EFFECTIVE
    db ELECTRIC,     GRASS,        SUPER_EFFECTIVE
    db ELECTRIC,     GROUND,       SUPER_EFFECTIVE
+   db ELECTRIC,     ICE,          SUPER_EFFECTIVE
    db ELECTRIC,     FLYING,       NOT_VERY_EFFECTIVE
    db ELECTRIC,     DRAGON,       SUPER_EFFECTIVE
    db GRASS,        FIRE,         SUPER_EFFECTIVE
    db GRASS,        WATER,        NOT_VERY_EFFECTIVE
    db GRASS,        GRASS,        SUPER_EFFECTIVE
    db GRASS,        POISON,       SUPER_EFFECTIVE
+   db GRASS,        ICE,          SUPER_EFFECTIVE
    db GRASS,        GROUND,       NOT_VERY_EFFECTIVE
    db GRASS,        FLYING,       SUPER_EFFECTIVE
    db GRASS,        BUG,          SUPER_EFFECTIVE
