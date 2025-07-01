@@ -262,3 +262,13 @@ MonMenuIconPals:
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG
+
+MonMenuIconPalToNPCPalTable:
+	db PAL_OW_RED
+	db PAL_OW_BLUE
+	db PAL_OW_GREEN
+	db PAL_OW_BROWN
+	db PAL_OW_PINK
+	db PAL_OW_GRAY
+	db PAL_OW_YELLOW
+	db PAL_OW_PURPLE

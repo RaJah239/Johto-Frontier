@@ -205,6 +205,7 @@ GetMenuMonIconPalette_PredeterminedShininess:
 	jr c, .shiny
 	swap a
 .shiny
+	ld e, a
 	and $f
 	ret
 
