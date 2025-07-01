@@ -721,8 +721,8 @@ MiracleSeedDesc:
 	next "type moves. (HOLD)@"
 
 ThickClubDesc:
-	db   "A bone of some"
-	next "sort. Sell low.@"
+	db   "Boost Cubone's and"
+	next "Marowak's Attack.@"
 
 FocusBandDesc:
 	db   "May prevent faint-"
@@ -886,8 +886,8 @@ TeruSama21Desc:
 	db   "?@"
 
 LightBallDesc:
-	db   "An odd, electrical"
-	next "orb. (HOLD)@"
+	db   "Boost Pikachu's"
+	next "Attack and Sp.Atk.@"
 
 FriendBallDesc:
 	db   "A BALL that makes"
