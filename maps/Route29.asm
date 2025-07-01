@@ -53,7 +53,10 @@ Route29Tutorial1:
 	follow ROUTE29_COOLTRAINER_M1, PLAYER
 	applymovement ROUTE29_COOLTRAINER_M1, DudeMovementData1b
 	stopfollow
-	loadwildmon BUNEARY, 5
+	checktime MORN | DAY
+	iftrue .day_morn
+	loadwildmon HOOTHOOT, 5
+.loaded_mon:
 	catchtutorial BATTLETYPE_TUTORIAL
 	turnobject ROUTE29_COOLTRAINER_M1, UP
 	opentext
@@ -63,6 +66,10 @@ Route29Tutorial1:
 	setscene SCENE_ROUTE29_NOOP
 	setevent EVENT_LEARNED_TO_CATCH_POKEMON
 	end
+
+.day_morn:
+	loadwildmon BUNEARY, 5
+	sjump .loaded_mon
 
 Route29Tutorial2:
 	turnobject ROUTE29_COOLTRAINER_M1, UP
@@ -78,7 +85,10 @@ Route29Tutorial2:
 	follow ROUTE29_COOLTRAINER_M1, PLAYER
 	applymovement ROUTE29_COOLTRAINER_M1, DudeMovementData2b
 	stopfollow
-	loadwildmon BUNEARY, 5
+	checktime MORN | DAY
+	iftrue .day_morn
+	loadwildmon HOOTHOOT, 5
+.loaded_mon:
 	catchtutorial BATTLETYPE_TUTORIAL
 	turnobject ROUTE29_COOLTRAINER_M1, UP
 	opentext
@@ -88,6 +98,10 @@ Route29Tutorial2:
 	setscene SCENE_ROUTE29_NOOP
 	setevent EVENT_LEARNED_TO_CATCH_POKEMON
 	end
+
+.day_morn:
+	loadwildmon BUNEARY, 5
+	sjump .loaded_mon
 
 Script_RefusedTutorial1:
 	writetext CatchingTutorialDeclinedText
@@ -118,7 +132,10 @@ CatchingTutorialDudeScript:
 	yesorno
 	iffalse .Declined
 	closetext
-	loadwildmon BUNEARY, 5
+	checktime MORN | DAY
+	iftrue .day_morn
+	loadwildmon HOOTHOOT, 5
+.loaded_mon:
 	catchtutorial BATTLETYPE_TUTORIAL
 	opentext
 	writetext CatchingTutorialDebriefText
@@ -126,6 +143,10 @@ CatchingTutorialDudeScript:
 	closetext
 	setevent EVENT_LEARNED_TO_CATCH_POKEMON
 	end
+
+.day_morn:
+	loadwildmon BUNEARY, 5
+	sjump .loaded_mon
 
 .BoxFull:
 	writetext CatchingTutorialBoxFullText
