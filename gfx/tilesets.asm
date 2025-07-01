@@ -79,13 +79,16 @@ TilesetCaveGFX::
 INCBIN "gfx/tilesets/cave.2bpp.lz"
 
 TilesetCaveMeta::
-TilesetDarkCaveMeta::
 INCBIN "data/tilesets/cave_metatiles.bin"
 
 TilesetCaveColl::
-TilesetDarkCaveColl::
 INCLUDE "data/tilesets/cave_collision.asm"
 
+TilesetDarkCaveMeta::
+INCBIN "data/tilesets/dark_cave_metatiles.bin"
+
+TilesetDarkCaveColl::
+INCLUDE "data/tilesets/dark_cave_collision.asm"
 
 SECTION "Tileset Data 3", ROMX
 
