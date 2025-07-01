@@ -421,7 +421,7 @@ BattleAnim_SendOutMon:
 	anim_sound 0, 0, SFX_BALL_POOF
 	anim_obj BATTLE_ANIM_OBJ_BETA_BALL_POOF, 48, 96, $0
 	anim_bgeffect BATTLE_BG_EFFECT_ENTER_MON, $0, BG_EFFECT_USER, $0
-	anim_wait 128
+	anim_wait 32
 	anim_wait 4
 	anim_call BattleAnim_ShowMon_0
 	anim_ret
@@ -436,7 +436,7 @@ BattleAnim_SendOutMon:
 	anim_sound 0, 0, SFX_BALL_POOF
 	anim_obj BATTLE_ANIM_OBJ_BETA_BALL_POOF, 48, 96, $0
 	anim_incbgeffect BATTLE_BG_EFFECT_BETA_SEND_OUT_MON1
-	anim_wait 96
+	anim_wait 32
 	anim_incbgeffect BATTLE_BG_EFFECT_BETA_SEND_OUT_MON1
 	anim_call BattleAnim_ShowMon_0
 	anim_ret
@@ -555,7 +555,7 @@ BattleAnim_Par:
 	anim_sound 0, 0, SFX_THUNDERSHOCK
 	anim_obj BATTLE_ANIM_OBJ_PARALYZED, 20, 88, $42
 	anim_obj BATTLE_ANIM_OBJ_PARALYZED, 76, 88, $c2
-	anim_wait 128
+	anim_wait 96
 	anim_ret
 
 BattleAnim_InLove:
