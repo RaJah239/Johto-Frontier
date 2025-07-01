@@ -859,7 +859,7 @@ endr
 
 .compare
 	ld c, a
-	cp HIGH(1024) ; 102.4 kg
+	cp HIGH(512) ; 51.2 kg
 	jr c, .lightmon
 
 	ld hl, .WeightsTable
@@ -890,10 +890,9 @@ endr
 
 .WeightsTable:
 ; weight factor, boost
-	db HIGH(2048),   0
-	db HIGH(3072),  20
-	db HIGH(4096),  30
-	db HIGH(65280), 40
+	db HIGH(1024),   0
+	db HIGH(2048),  20
+	db HIGH(65280), 30
 
 LureBallMultiplier:
 ; multiply catch rate by 5 if this is a fishing rod battle
@@ -950,14 +949,11 @@ MoonBallMultiplier:
 .done
 	ret
 
-LoveBallMultiplier:
-
-	; does species match?
-	ld a, [wTempEnemyMonSpecies]
-	ld c, a
-	ld a, [wTempBattleMonSpecies]
-	cp c
-	ret nz
+LoveBallMultiplier: ; Cath rate = x4
+	push bc
+	farcall CheckBattleEggGroupCompatibility
+	pop bc
+	ret nc
 
 	; check player mon species
 	push bc
@@ -995,11 +991,9 @@ LoveBallMultiplier:
 	pop bc
 	ret z
 
-	sla b
+	sla b ; x2
 	jr c, .max
-	sla b
-	jr c, .max
-	sla b
+	sla b ; x4
 	ret nc
 .max
 	ld b, $ff
