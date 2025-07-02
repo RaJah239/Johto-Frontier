@@ -29,6 +29,31 @@ _OakText7::
 	line "later!"
 	done
 
+_WarnVBAText::
+	text "WARNING!"
+
+	para "This Game Boy"
+	line "emulator has bugs"
+
+	para "that may crash"
+	line "the game."
+
+	para "Please use another"
+	line "emulator. For PC,"
+
+	para "BGB or Gambatte"
+	line "are advised."
+
+	para "Sameboy, mGBA or"
+	line "RetroArch with"
+
+	para "mGBA's core work"
+	line "well for handheld."
+
+	para "Continue at your"
+	line "own risk…"
+	prompt
+
 _OakText7Min::
 	text "I'll be seeing you"
 	line "later!"

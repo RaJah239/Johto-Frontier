@@ -88,6 +88,7 @@ NewGame:
 	call ResetWRAM
 	farcall ClearSavedObjPals
 	call NewGame_ClearTilemapEtc
+	call CheckVBA
 	call PlayerProfileSetup
 	call OakSpeech
 	call InitializeWorld
@@ -345,6 +346,7 @@ Continue:
 	jr .FailToLoad
 
 .Check1Pass:
+	call CheckVBA
 	call Continue_CheckRTC_RestartClock
 	jr nc, .Check2Pass
 	call CloseWindow
@@ -455,6 +457,20 @@ ConfirmContinue:
 
 .PressA:
 	ret
+
+CheckVBA:
+	xor a
+	ldh [rSC], a
+	ldh a, [rSC]
+	and %01111100
+	cp %01111100
+	ret z
+	ld hl, .WarnVBAText
+	jp PrintText
+
+.WarnVBAText:
+	text_jump _WarnVBAText
+	text_end
 
 Continue_CheckRTC_RestartClock:
 	call CheckRTCStatus
