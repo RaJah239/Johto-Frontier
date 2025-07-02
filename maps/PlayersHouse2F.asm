@@ -207,6 +207,9 @@ if DEF(_DEBUG)
 	giveitem GOOD_ROD
 	giveitem SUPER_ROD
 
+	; events
+	setevent EVENT_BATTLE_TOWER_TYPE_MODES_UNLOCKED
+
 	; intro events
 	addcellnum PHONE_MOM
 	setmapscene PLAYERS_HOUSE_1F, $1

@@ -198,3 +198,4 @@ SpecialsPointers::
 	add_special MoveTutor2
 	add_special CrystalCountInBag
 	add_special NuggetCountInBag
+	add_special Menu_BattleTowerSettings
