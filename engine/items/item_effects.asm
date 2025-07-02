@@ -347,7 +347,7 @@ PokeBallEffect:
 	ld b, a
 	ld a, [wEnemyMonStatus]
 	and 1 << FRZ | SLP_MASK
-	ld c, 10
+	ld c, 15
 	jr nz, .addstatus
 	ld a, [wEnemyMonStatus]
 	and a
