@@ -4295,6 +4295,7 @@ BattleAnim_VitalThrow:
 	anim_ret
 
 BattleAnim_MorningSun:
+	anim_if_param_equal $1, BattleAnim_Moonlight
 	anim_1gfx BATTLE_ANIM_GFX_SHINE
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $0, $0
 	anim_sound 0, 0, SFX_MORNING_SUN
@@ -4308,6 +4309,26 @@ BattleAnim_MorningSun:
 	anim_ret
 
 .zero
+	anim_call BattleAnimSub_Glimmer2
+	anim_ret
+
+BattleAnim_Moonlight:
+	anim_1gfx BATTLE_ANIM_GFX_SHINE
+	anim_bgp $1b
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $0, $0
+	anim_obj BATTLE_ANIM_OBJ_MOONLIGHT, 0, 40, $0
+	anim_obj BATTLE_ANIM_OBJ_MOONLIGHT, 16, 56, $0
+	anim_obj BATTLE_ANIM_OBJ_MOONLIGHT, 32, 72, $0
+	anim_obj BATTLE_ANIM_OBJ_MOONLIGHT, 48, 88, $0
+	anim_obj BATTLE_ANIM_OBJ_MOONLIGHT, 64, 104, $0
+	anim_wait 1
+	anim_sound 0, 0, SFX_MOONLIGHT
+	anim_wait 63
+	anim_if_param_equal $3, .three
+	anim_call BattleAnimSub_Glimmer
+	anim_ret
+
+.three
 	anim_call BattleAnimSub_Glimmer2
 	anim_ret
 
@@ -4341,26 +4362,6 @@ BattleAnim_Crunch:
 	anim_sound 0, 1, SFX_BITE
 	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 128, 64, $18
 	anim_wait 8
-	anim_ret
-
-BattleAnim_Moonlight:
-	anim_1gfx BATTLE_ANIM_GFX_SHINE
-	anim_bgp $1b
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $0, $0
-	anim_obj BATTLE_ANIM_OBJ_MOONLIGHT, 0, 40, $0
-	anim_obj BATTLE_ANIM_OBJ_MOONLIGHT, 16, 56, $0
-	anim_obj BATTLE_ANIM_OBJ_MOONLIGHT, 32, 72, $0
-	anim_obj BATTLE_ANIM_OBJ_MOONLIGHT, 48, 88, $0
-	anim_obj BATTLE_ANIM_OBJ_MOONLIGHT, 64, 104, $0
-	anim_wait 1
-	anim_sound 0, 0, SFX_MOONLIGHT
-	anim_wait 63
-	anim_if_param_equal $3, .three
-	anim_call BattleAnimSub_Glimmer
-	anim_ret
-
-.three
-	anim_call BattleAnimSub_Glimmer2
 	anim_ret
 
 BattleAnim_HiddenPower:
