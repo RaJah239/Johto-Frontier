@@ -239,7 +239,7 @@
 	const IRON_TAIL    ; e7
 	const METAL_CLAW   ; e8
 	const VITAL_THROW  ; e9
-	const MORNING_SUN  ; ea
+	const HEALING_LIGHT; ea
 	const HAIL         ; eb
 	const MOONLIGHT    ; ec
 	const HIDDEN_POWER ; ed

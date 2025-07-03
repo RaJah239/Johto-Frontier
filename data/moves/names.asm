@@ -233,7 +233,7 @@ MoveNames::
 	li "Iron Tail"
 	li "Metal Claw"
 	li "Vital Throw"
-	li "Morning Sun"
+	li "HealingLight"
 	li "Hail"
 	li "Moonlight"
 	li "Hidden Power"

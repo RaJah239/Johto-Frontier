@@ -247,7 +247,7 @@ Moves:
 	move IRON_TAIL,    EFFECT_DEFENSE_DOWN_HIT,  100, STEEL,         PHYSICAL,  75, 15,  30
 	move METAL_CLAW,   EFFECT_ATTACK_UP_HIT,      50, STEEL,         PHYSICAL,  95, 35,  10
 	move VITAL_THROW,  EFFECT_ALWAYS_HIT,         70, FIGHTING,      PHYSICAL, 100, 10,   0
-	move MORNING_SUN,  EFFECT_WEATHER_HEAL,        0, NORMAL,        STATUS,   100,  5,   0
+	move HEALING_LIGHT,EFFECT_WEATHER_HEAL,        0, NORMAL,        STATUS,   100,  8,   0
 	move HAIL,         EFFECT_HAIL,                0, ICE,           STATUS,   100,  8,   0
 	move MOONLIGHT,    EFFECT_WEATHER_HEAL,        0, FAIRY,         STATUS,   100,  5,   0
 	move HIDDEN_POWER, EFFECT_HIDDEN_POWER,       70, CURSE_TYPE,    SPECIAL,  100, 15,   0

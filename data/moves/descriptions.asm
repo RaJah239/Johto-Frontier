@@ -234,7 +234,7 @@ MoveDescriptions::
 	dw IronTailDescription
 	dw MetalClawDescription
 	dw VitalThrowDescription
-	dw MorningSunDescription
+	dw HealingLightDescription
 	dw HailDescription
 	dw MoonlightDescription
 	dw HiddenPowerDescription
@@ -1190,9 +1190,9 @@ VitalThrowDescription:
 	db   "A 2nd-strike move"
 	line "that never misses.@"
 
-MorningSunDescription:
-	db   "Restores HP"
-	line "(varies by time).@"
+HealingLightDescription:
+	db   "Restores HP based"
+	line "on weather.@"
 
 HailDescription:
 	db   "Inflicts damage"
