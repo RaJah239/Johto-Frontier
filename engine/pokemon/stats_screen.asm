@@ -212,7 +212,7 @@ if DEF(_DEBUG)
 	jr StatsScreen_JoypadAction
 
 .HatchSoonString:
-	db "▶HATCH SOON!@"
+	db "▶Hatch Soon!@"
 endc
 
 StatsScreen_LoadPage:
@@ -688,20 +688,20 @@ LoadPinkPage:
 	ret
 
 .Status_Type:
-	db   "STATUS/"
-	next "TYPE/@"
+	db   "Status/"
+	next "Type/@"
 
 .OK_str:
 	db "OK @"
 
 .ExpPointStr:
-	db "EXP POINTS@"
+	db "Exp Points@"
 
 .LevelUpStr:
-	db "LEVEL UP@"
+	db "Level Up@"
 
 .ToStr:
-	db "TO@"
+	db "To@"
 
 .PkrsStr:
 	db "#RUS@"
@@ -743,13 +743,13 @@ LoadGreenPage:
 	ret
 
 .Item:
-	db "ITEM@"
+	db "Item@"
 
 .ThreeDashes:
 	db "---@"
 
 .Move:
-	db "MOVE@"
+	db "Move@"
 
 LoadBluePage:
 	call .PlaceOTInfo
@@ -815,9 +815,10 @@ OTString:
 	db "OT/@"
 
 LoadOrangePage:
-	call StatsScreen_placeCaughtLevel
+	; these need to be in order
 	call StatsScreen_placeCaughtTime
 	call StatsScreen_placeCaughtLocation
+	call StatsScreen_placeCaughtLevel
 	
 	; Check if we've caught all the Unown
 	ld de, EVENT_CAUGHT_ALL_UNOWN
@@ -879,7 +880,7 @@ StatsScreen_Print_HiddenPow_Info:
 	ret
 
 HiddenPowerTypeString:
-	db "INNER ATTRIBUTE:@"
+	db "Inner Attribute:@"
 
 StatsScreen_PrintEVs:
 	hlcoord 1, 11
@@ -1078,13 +1079,13 @@ StatsScreen_PrintEVs:
 	ret
 
 .EffortValuesString:
-	db "EFFORT VALUES:@"
+	db "Effort Values:@"
 .EVstring1:	
-	db "HP      SPE@"
+	db "HP      Spe@"
 .EVstring2:
- 	db "ATK     SPA@"
+ 	db "Atk     SpA@"
 .EVstring3:
- 	db "DEF     SPD@"
+ 	db "Def     SpD@"
 .EVMaxThreeStars:
 	db "<star><star><star>@" ;     252 EVs
 
@@ -1111,17 +1112,33 @@ StatsScreen_placeCaughtLocation:
 	call PlaceString
 	ret
 .MetAtMapString:
-	db "MET: @"
+	db "Met:@"
 .MetUnknownMapString:
-	db "TRADE@"
+	db "Trade@"
 
 StatsScreen_placeCaughtTime:
+	; caught level
+	ld a, [wTempMonCaughtLevel]
+	and CAUGHT_LEVEL_MASK	
+	and a
+	jr z, .unknown_time
+
+	; caught level
+	xor a
+	ld a, [wTempMonCaughtLevel]
+	and CAUGHT_LEVEL_MASK	
+	and a
+	jr z, .printnoneegg
+	cp 1 ; egg level
+	jr z, .printegginfo
+
+.printnoneegg:
 	ld a, [wTempMonCaughtTime]
 	and CAUGHT_TIME_MASK
-	jr z, .unknown_time
 	rlca
 	rlca
 	dec a
+	maskbits NUM_DAYTIMES
 	ld hl, .times
 	call GetNthString
 	ld d, h
@@ -1131,23 +1148,37 @@ StatsScreen_placeCaughtTime:
 	hlcoord 6, 8
 	call PlaceString
 	ret
-.unknown_time
-	ld a, 0
-	ld hl, .unknown_time_text
+
+.printegginfo:
+	ld a, [wTempMonCaughtTime]
+	and CAUGHT_TIME_MASK
+	rlca
+	rlca
+	dec a
+	maskbits NUM_DAYTIMES
+	ld hl, .times
 	call GetNthString
 	ld d, h
 	ld e, l
 	call CopyName1
 	ld de, wStringBuffer2
+	hlcoord 10, 8
+	call PlaceString
+	ret
+
+.unknown_time:
+	ld de, .unknown_time_text
 	hlcoord 6, 8
 	call PlaceString
 	ret
+
 .times
-	db "MORN@"
-	db "DAY@"
-	db "NITE@"
+	db "Morn@"
+	db "Day@"
+	db "Nite@"
+	db "Eve@"
 .unknown_time_text
-	db "TRADE@"
+	db "@"
 
 StatsScreen_placeCaughtLevel:
 	; caught level
@@ -1155,11 +1186,9 @@ StatsScreen_placeCaughtLevel:
 	and CAUGHT_LEVEL_MASK	
 	and a
 	jr z, .unknown_level
-	cp CAUGHT_EGG_LEVEL ; egg marker value
-	jr nz, .print
-	ld a, EGG_LEVEL ; egg hatch level
+	cp 1 ; egg level
+	jr z, .printegg
 
-.print
 	ld [wTextDecimalByte], a
 	hlcoord 12, 8
 	ld de, wTextDecimalByte
@@ -1169,11 +1198,20 @@ StatsScreen_placeCaughtLevel:
 	ld [hl], "<LV>"
 	ret
 
+.printegg:
+	ld de, .HatchedString
+	hlcoord 1, 8
+	call PlaceString
+	ret   
+
 .unknown_level
 	ld de, .MetUnknownLevelString
 	hlcoord 11, 8
 	call PlaceString
-	ret   
+	ret
+
+.HatchedString:
+	db "Hatched:"
 .MetUnknownLevelString:
 	db "@"
 
@@ -1223,25 +1261,25 @@ StatsScreen_PrintAffection:
 	jmp PlaceString
 
 AffectionString:
-	db "CONDITION/@"
+	db "Condition/@"
 	
 MaxString:
-	db "OVERJOYED@"
+	db "Overjoyed@"
 	
 HighString:
-	db "HAPPY@"
+	db "Happy@"
 	
 GoodString:
-	db "CONTENT@"
+	db "Content@"
 	
 MidString:
-	db "AVERAGE@"
+	db "Average@"
 	
 LowString:
-	db "UNHAPPY@"
+	db "Unhappy@"
 	
 PoorString:
-	db "MISERABLE@"
+	db "Miserable@"
 
 StatsScreen_PlaceFrontpic:
 	ld hl, wTempMonDVs
@@ -1424,7 +1462,7 @@ if DEF(_DEBUG)
 	jr .placed_push_start
 
 .PushStartString:
-	db "▶PUSH START.@"
+	db "▶Push Start.@"
 
 .placed_push_start
 endc
