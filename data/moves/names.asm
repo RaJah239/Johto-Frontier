@@ -235,7 +235,7 @@ MoveNames::
 	li "Vital Throw"
 	li "HealingLight"
 	li "Hail"
-	li "Moonlight"
+	li "X-Scissor"
 	li "Hidden Power"
 	li "Cross Chop"
 	li "Twister"

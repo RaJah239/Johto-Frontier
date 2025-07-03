@@ -236,7 +236,7 @@ MoveDescriptions::
 	dw VitalThrowDescription
 	dw HealingLightDescription
 	dw HailDescription
-	dw MoonlightDescription
+	dw XScissorDescription
 	dw HiddenPowerDescription
 	dw CrossChopDescription
 	dw TwisterDescription
@@ -271,6 +271,7 @@ PoundDescription:
 	db   "Pounds with fore-"
 	line "legs or tail.@"
 
+XScissorDescription:
 KarateChopDescription:
 	db   "Has a high criti-"
 	line "cal hit ratio.@"
@@ -1197,10 +1198,6 @@ HealingLightDescription:
 HailDescription:
 	db   "Inflicts damage"
 	line "very turn.@"
-
-MoonlightDescription:
-	db   "Restores HP"
-	line "(varies by time).@"
 
 HiddenPowerDescription:
 	db   "The power varies"

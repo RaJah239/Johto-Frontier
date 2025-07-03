@@ -241,7 +241,7 @@
 	const VITAL_THROW  ; e9
 	const HEALING_LIGHT; ea
 	const HAIL         ; eb
-	const MOONLIGHT    ; ec
+	const X_SCISSOR    ; ec
 	const HIDDEN_POWER ; ed
 	const CROSS_CHOP   ; ee
 	const TWISTER      ; ef
