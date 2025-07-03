@@ -72,7 +72,7 @@ Moves:
 	move HYDRO_PUMP,   EFFECT_NORMAL_HIT,        120, WATER,         SPECIAL,   80,  5,   0
 	move SURF,         EFFECT_NORMAL_HIT,         95, WATER,         SPECIAL,  100, 15,   0
 	move ICE_BEAM,     EFFECT_FREEZE_HIT,         95, ICE,           SPECIAL,  100, 24,  10
-	move BLIZZARD,     EFFECT_FREEZE_HIT,        120, ICE,           SPECIAL,   70,  5,  10
+	move BLIZZARD,     EFFECT_BLIZZARD,          110, ICE,           SPECIAL,   70, 16,  30
 	move PSYBEAM,      EFFECT_CONFUSE_HIT,        65, PSYCHIC_TYPE,  SPECIAL,  100, 20,  10
 	move BUBBLEBEAM,   EFFECT_SPEED_DOWN_HIT,     65, WATER,         SPECIAL,  100, 20,  10
 	move AURORA_BEAM,  EFFECT_ATTACK_DOWN_HIT,    65, ICE,           SPECIAL,  100, 20,  10
@@ -248,7 +248,7 @@ Moves:
 	move METAL_CLAW,   EFFECT_ATTACK_UP_HIT,      50, STEEL,         PHYSICAL,  95, 35,  10
 	move VITAL_THROW,  EFFECT_ALWAYS_HIT,         70, FIGHTING,      PHYSICAL, 100, 10,   0
 	move MORNING_SUN,  EFFECT_WEATHER_HEAL,        0, NORMAL,        STATUS,   100,  5,   0
-	move SYNTHESIS,    EFFECT_WEATHER_HEAL,        0, GRASS,         STATUS,   100,  5,   0
+	move HAIL,         EFFECT_HAIL,                0, ICE,           STATUS,   100,  8,   0
 	move MOONLIGHT,    EFFECT_WEATHER_HEAL,        0, FAIRY,         STATUS,   100,  5,   0
 	move HIDDEN_POWER, EFFECT_HIDDEN_POWER,       70, CURSE_TYPE,    SPECIAL,  100, 15,   0
 	move CROSS_CHOP,   EFFECT_NORMAL_HIT,         80, FIGHTING,      PHYSICAL, 100, 24,   0

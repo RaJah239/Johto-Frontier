@@ -235,7 +235,7 @@ MoveDescriptions::
 	dw MetalClawDescription
 	dw VitalThrowDescription
 	dw MorningSunDescription
-	dw SynthesisDescription
+	dw HailDescription
 	dw MoonlightDescription
 	dw HiddenPowerDescription
 	dw CrossChopDescription
@@ -1194,9 +1194,9 @@ MorningSunDescription:
 	db   "Restores HP"
 	line "(varies by time).@"
 
-SynthesisDescription:
-	db   "Restores HP"
-	line "(varies by time).@"
+HailDescription:
+	db   "Inflicts damage"
+	line "very turn.@"
 
 MoonlightDescription:
 	db   "Restores HP"

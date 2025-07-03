@@ -259,7 +259,7 @@ HandleBetweenTurnEffects:
 	jr z, .CheckEnemyFirst
 	call CheckFaint_PlayerThenEnemy
 	ret c
-	call HandleFutureSight
+	farcall HandleFutureSight
 	call CheckFaint_PlayerThenEnemy
 	ret c
 	call HandleWeather
@@ -276,7 +276,7 @@ HandleBetweenTurnEffects:
 .CheckEnemyFirst:
 	call CheckFaint_EnemyThenPlayer
 	ret c
-	call HandleFutureSight
+	farcall HandleFutureSight
 	call CheckFaint_EnemyThenPlayer
 	ret c
 	call HandleWeather
@@ -1498,64 +1498,6 @@ HandleMysteryberry:
 	ld hl, BattleText_UserRecoveredPPUsing
 	jmp StdBattleTextbox
 
-HandleFutureSight:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .enemy_first
-	call SetPlayerTurn
-	call .do_it
-	call SetEnemyTurn
-	jr .do_it
-
-.enemy_first
-	call SetEnemyTurn
-	call .do_it
-	call SetPlayerTurn
-
-.do_it
-	ld hl, wPlayerFutureSightCount
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .okay
-	ld hl, wEnemyFutureSightCount
-
-.okay
-	ld a, [hl]
-	and a
-	ret z
-	dec a
-	ld [hl], a
-	cp $1
-	ret nz
-
-	ld hl, BattleText_TargetWasHitByFutureSight
-	call StdBattleTextbox
-
-	ld a, BATTLE_VARS_MOVE
-	call GetBattleVarAddr
-	push af
-	ld a, FUTURE_SIGHT
-	ld [hl], a
-
-	callfar UpdateMoveData
-	xor a
-	ld [wAttackMissed], a
-	ld [wAlreadyDisobeyed], a
-	ld a, EFFECTIVE
-	ld [wTypeModifier], a
-	callfar DoMove
-	xor a
-	ld [wCurDamage], a
-	ld [wCurDamage + 1], a
-
-	ld a, BATTLE_VARS_MOVE
-	call GetBattleVarAddr
-	pop af
-	ld [hl], a
-
-	call UpdateBattleMonInParty
-	jmp UpdateEnemyMonInParty
-
 HandleSafeguard:
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
@@ -1665,14 +1607,22 @@ HandleWeather:
 
 	ld hl, wWeatherCount
 	dec [hl]
-	jr z, .ended
+	jr nz, .continues
 
+; ended
+	ld hl, .WeatherEndedMessages
+	call .PrintWeatherMessage
+	xor a
+	ld [wBattleWeather], a
+	ret
+
+.continues
 	ld hl, .WeatherMessages
 	call .PrintWeatherMessage
 
 	ld a, [wBattleWeather]
 	cp WEATHER_SANDSTORM
-	ret nz
+	jr nz, .check_hail
 
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
@@ -1729,12 +1679,58 @@ HandleWeather:
 	ld hl, SandstormHitsText
 	jmp StdBattleTextbox
 
-.ended
-	ld hl, .WeatherEndedMessages
-	call .PrintWeatherMessage
+.check_hail
+	ld a, [wBattleWeather]
+	cp WEATHER_HAIL
+	ret nz
+	
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .enemy_first_hail
+	
+; player first
+	call SetPlayerTurn
+	call .HailDamage
+	call SetEnemyTurn
+	jr .HailDamage
+	
+.enemy_first_hail
+	call SetEnemyTurn
+	call .HailDamage
+	call SetPlayerTurn
+	
+.HailDamage:
+	ld a, BATTLE_VARS_SUBSTATUS3
+	call GetBattleVar
+	bit SUBSTATUS_UNDERGROUND, a
+	ret nz
+	
+	ld hl, wBattleMonType1
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .ok1
+	ld hl, wEnemyMonType1
+.ok1
+	ld a, [hli]
+	cp ICE
+	ret z
+	
+	ld a, [hl]
+	cp ICE
+	ret z
+
+	call SwitchTurnCore
 	xor a
-	ld [wBattleWeather], a
-	ret
+	ld [wNumHits], a
+	ld de, ANIM_IN_HAIL
+	call Call_PlayBattleAnim
+	call SwitchTurnCore
+
+	call GetEighthMaxHP
+	call SubtractHPFromUser
+	
+	ld hl, PeltedByHailText
+	jp StdBattleTextbox
 
 .PrintWeatherMessage:
 	ld a, [wBattleWeather]
@@ -1753,12 +1749,14 @@ HandleWeather:
 	dw BattleText_RainContinuesToFall
 	dw BattleText_TheSunlightIsStrong
 	dw BattleText_TheSandstormRages
+	dw BattleText_HailContinuesToFall
 
 .WeatherEndedMessages:
 ; entries correspond to WEATHER_* constants
 	dw BattleText_TheRainStopped
 	dw BattleText_TheSunlightFaded
 	dw BattleText_TheSandstormSubsided
+	dw BattleText_TheHailStopped
 
 SubtractHPFromTarget:
 	call SubtractHP
@@ -9037,41 +9035,8 @@ InitBattleDisplay:
 	ret
 
 .InitBackPic:
-	call GetTrainerBackpic
+	farcall GetTrainerBackpic
 	call CopyBackpic
-	ret
-
-GetTrainerBackpic:
-; Load the player character's backpic (6x6) into VRAM starting from vTiles2 tile $31.
-
-; Special exception for Dude.
-	ld b, BANK(DudeBackpic)
-	ld hl, DudeBackpic
-	ld a, [wBattleType]
-	cp BATTLETYPE_TUTORIAL
-	jr z, .Decompress
-
-; What gender are we?
-	ld a, [wPlayerSpriteSetupFlags]
-	bit PLAYERSPRITESETUP_FEMALE_TO_MALE_F, a
-	jr nz, .Chris
-	ld a, [wPlayerGender]
-	bit PLAYERGENDER_FEMALE_F, a
-	jr z, .Chris
-
-; It's a girl.
-	farcall GetKrisBackpic
-	ret
-
-.Chris:
-; It's a boy.
-	ld b, BANK(ChrisBackpic)
-	ld hl, ChrisBackpic
-
-.Decompress:
-	ld de, vTiles2 tile $31
-	ld c, 7 * 7
-	predef DecompressGet2bpp
 	ret
 
 CopyBackpic:
@@ -9219,15 +9184,19 @@ GetWeatherImage:
 	ret z
 	ld de, RainWeatherImage
 	lb bc, PAL_BATTLE_OB_BLUE, 4
-	cp WEATHER_RAIN
+	dec a
 	jr z, .done
 	ld de, SunWeatherImage
 	ld b, PAL_BATTLE_OB_YELLOW
-	cp WEATHER_SUN
+	dec a
 	jr z, .done
 	ld de, SandstormWeatherImage
 	ld b, PAL_BATTLE_OB_BROWN
-	cp WEATHER_SANDSTORM
+	dec a
+	jr z, .done
+	ld de, HailWeatherImage
+	ld b, PAL_BATTLE_OB_BLUE
+	dec a
 	ret nz
 	
 .done

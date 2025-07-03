@@ -188,6 +188,7 @@ BattleAnimFrameData:
 	dw .Frameset_PlayerHead2Row      ; BATTLE_ANIM_FRAMESET_PLAYERHEAD_2ROW
 	dw .Frameset_PowerGem            ; BATTLEANIMFRAMESET_POWER_GEM
 	dw .Frameset_bb                  ; BATTLEANIMFRAMESET_BB
+	dw .Frameset_Hail                ; BATTLEANIMFRAMESET_HAIL
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
 .Frameset_HitBig:
@@ -1279,3 +1280,7 @@ BattleAnimFrameData:
 .Frameset_bb:
 	frame BATTLE_ANIM_OAMSET_54, 40
 	endanim
+
+.Frameset_Hail:
+	oamframe BATTLEANIMOAMSET_HAIL, 32
+	oamend

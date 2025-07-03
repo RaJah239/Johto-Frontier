@@ -226,6 +226,7 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const ANIM_OBJ_MOON_CHARGE
 	const BATTLE_ANIM_OBJ_HEART_BURST
  	const BATTLE_ANIM_OBJ_STAR_BURST
+ 	const ANIM_OBJ_HAIL
 DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 
 ; DoBattleAnimFrame arguments (see engine/battle_anims/functions.asm)
@@ -503,6 +504,7 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_PLAYERHEAD_2ROW       ; b8
 	const BATTLEANIMFRAMESET_POWER_GEM
 	const BATTLEANIMFRAMESET_BB
+	const BATTLEANIMFRAMESET_HAIL
 DEF NUM_BATTLE_ANIM_FRAMESETS EQU const_value
 
 ; BattleAnimOAMData indexes (see data/battle_anims/oam.asm)
@@ -723,6 +725,7 @@ DEF NUM_BATTLE_ANIM_FRAMESETS EQU const_value
 	const BATTLE_ANIM_OAMSET_D5
 	const BATTLE_ANIM_OAMSET_D6
 	const BATTLE_ANIM_OAMSET_D7
+	const BATTLEANIMOAMSET_HAIL
 DEF NUM_BATTLE_ANIM_OAMSETS EQU const_value
 
 assert NUM_BATTLE_ANIM_OAMSETS <= FIRST_OAM_CMD, \

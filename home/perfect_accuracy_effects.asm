@@ -43,4 +43,5 @@ PerfectAccuracyEffects::
   db EFFECT_BELLY_DRUM
   db EFFECT_PSYCH_UP
   db EFFECT_DEFENSE_CURL
+  db EFFECT_HAIL
   db -1 ; end

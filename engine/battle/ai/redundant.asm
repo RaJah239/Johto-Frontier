@@ -42,7 +42,14 @@ AI_Redundant:
 	dbw EFFECT_WEATHER_HEAL, .Heal
 	dbw EFFECT_SWAGGER,      .Swagger
 	dbw EFFECT_FUTURE_SIGHT, .FutureSight
+	dbw EFFECT_HAIL,         .Hail
 	db -1
+
+.Hail:
+	ld a, [wBattleWeather]
+	cp WEATHER_HAIL
+	jp z, .Redundant
+	jp .NotRedundant
 
 .LightScreen:
 	ld a, [wEnemyScreens]

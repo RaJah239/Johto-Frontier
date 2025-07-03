@@ -155,4 +155,6 @@ MoveEffectsPointers:
 	dw BeatUp
 	dw Fly
 	dw DefenseCurl
+	dw FreezeHit ; Blizzard
+	dw Hail
 	assert_table_length NUM_MOVE_EFFECTS
