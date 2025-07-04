@@ -9180,8 +9180,10 @@ BattleStartMessage:
 
 GetWeatherImage:
 	ld a, [wBattleWeather]
-	and a
-	ret z
+	ld de, ClearWeatherImage
+	lb bc, PAL_BATTLE_OB_BLUE, 4
+	cp WEATHER_NONE
+	jr z, .done
 	ld de, RainWeatherImage
 	lb bc, PAL_BATTLE_OB_BLUE, 4
 	dec a
