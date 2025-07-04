@@ -266,7 +266,7 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 18 total
+; Unused Items - 27 total
 	db EGG_TICKET
 	db POKE_FLUTE
 	db ITEM_2D
@@ -284,6 +284,18 @@ ItemNameOrder:
 	db ITEM_BE
 	db ITEM_C3
  	db ITEM_DC
+ 	db ITEM_DE
+ 	db ITEM_DF
+ 	db ITEM_E0
+ 	db ITEM_E1
+ 	db ITEM_E2
+ 	db ITEM_E3
+ 	db ITEM_E4
+ 	db ITEM_E5
+ 	db ITEM_E6
+ 	db ITEM_E7
+ 	db ITEM_E8
+
 
 	assert_table_length NUM_ITEMS + 1
 	db -1 ; end

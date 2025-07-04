@@ -192,10 +192,25 @@ ItemEffects:
 	dw NoEffect            ; ITEM_B0
 	dw PokeBallEffect      ; PARK_BALL
 	dw NoEffect            ; RAINBOW_WING
+	dw NoEffect            ; BRICK_PIECE
 	dw NoEffect            ; ITEM_B3
-	assert_table_length ITEM_B3
-; The items past ITEM_B3 do not have effect entries:
-;	BRICK_PIECE
+	dw NoEffect            ; ITEM_BE
+	dw NoEffect            ; ITEM_C3
+	dw NoEffect            ; ITEM_DC
+	dw NoEffect            ; ITEM_DE
+	dw NoEffect            ; ITEM_DF
+	dw NoEffect            ; ITEM_E0
+	dw NoEffect            ; ITEM_E1
+	dw NoEffect            ; ITEM_E2
+	dw NoEffect            ; ITEM_E3
+	dw NoEffect            ; ITEM_E4
+	dw NoEffect            ; ITEM_E5
+	dw NoEffect            ; ITEM_E6
+	dw NoEffect            ; ITEM_E7
+	dw NoEffect            ; ITEM_E8
+	assert_table_length ITEM_E8
+
+; The items past ITEM_E8 do not have effect entries:
 ;	SURF_MAIL
 ;	LITEBLUEMAIL
 ;	PORTRAITMAIL
@@ -205,7 +220,6 @@ ItemEffects:
 ;	BLUESKY_MAIL
 ;	MUSIC_MAIL
 ;	MIRAGE_MAIL
-;	ITEM_BE
 ; They all have the ITEMMENU_NOUSE attribute so they can't be used anyway.
 ; NoEffect would be appropriate, with the table then being NUM_ITEMS long.
 

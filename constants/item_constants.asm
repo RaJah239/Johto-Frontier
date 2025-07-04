@@ -186,18 +186,35 @@
 	const RAINBOW_WING ; b2
 	const ITEM_B3      ; b3
 	const BRICK_PIECE  ; b4
-	const SURF_MAIL    ; b5
-	const LITEBLUEMAIL ; b6
-	const PORTRAITMAIL ; b7
-	const LOVELY_MAIL  ; b8
-	const EON_MAIL     ; b9
-	const MORPH_MAIL   ; ba
-	const BLUESKY_MAIL ; bb
-	const MUSIC_MAIL   ; bc
-	const MIRAGE_MAIL  ; bd
 	const ITEM_BE      ; be
-	const ITEM_C3       ; c3
- 	const ITEM_DC       ; dc
+	const ITEM_C3      ; c3
+ 	const ITEM_DC      ; dc
+ 	const ITEM_DE
+ 	const ITEM_DF
+ 	const ITEM_E0
+ 	const ITEM_E1
+ 	const ITEM_E2
+ 	const ITEM_E3
+ 	const ITEM_E4
+ 	const ITEM_E5
+ 	const ITEM_E6
+ 	const ITEM_E7
+ 	const ITEM_E8
+ 
+
+
+
+
+ 	const SURF_MAIL
+	const LITEBLUEMAIL
+	const PORTRAITMAIL
+	const LOVELY_MAIL
+	const EON_MAIL
+	const MORPH_MAIL
+	const BLUESKY_MAIL
+	const MUSIC_MAIL
+	const MIRAGE_MAIL
+
 DEF NUM_ITEMS EQU const_value - 1
 
 DEF __tmhm_value__ = 1

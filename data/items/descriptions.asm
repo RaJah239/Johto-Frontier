@@ -181,6 +181,20 @@ ItemDescriptions:
 	dw RainbowWingDesc
 	dw TeruSama24Desc
 	dw BrickPieceDesc
+	dw TeruSama25Desc
+	dw TeruSama27Desc
+ 	dw TeruSama28Desc
+	dw TeruSama26Desc
+	dw TeruSama26Desc
+	dw TeruSama26Desc
+	dw TeruSama26Desc
+	dw TeruSama26Desc
+	dw TeruSama27Desc
+	dw TeruSama27Desc
+	dw TeruSama27Desc
+	dw TeruSama27Desc
+	dw TeruSama27Desc
+	dw TeruSama27Desc
 	dw SurfMailDesc
 	dw LiteBlueMailDesc
 	dw PortraitMailDesc
@@ -190,21 +204,8 @@ ItemDescriptions:
 	dw BlueSkyMailDesc
 	dw MusicMailDesc
 	dw MirageMailDesc
-	dw TeruSama25Desc
-	dw TeruSama27Desc
- 	dw TeruSama28Desc
+
 	assert_table_length NUM_ITEMS
-	dw TeruSama26Desc
-	dw TeruSama26Desc
-	dw TeruSama26Desc
-	dw TeruSama26Desc
-	dw TeruSama26Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
-	dw TeruSama27Desc
 	dw TeruSama27Desc
 	dw TeruSama27Desc
 	dw TeruSama27Desc
