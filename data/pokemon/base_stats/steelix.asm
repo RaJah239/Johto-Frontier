@@ -1,8 +1,8 @@
 	db STEELIX ; 208
 
-	db  75,  85, 200,  30,  55,  65
-	evs  0,   0,   2,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
+	db 100,  85, 160,  30,  30, 100 ; BST 505
+	evs  0,   0,   3,   0,   0,   2
 
 	db STEEL, GROUND ; type
 	db 25 ; catch rate
