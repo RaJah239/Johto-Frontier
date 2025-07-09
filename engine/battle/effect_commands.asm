@@ -5323,11 +5323,20 @@ BattleCommand_EndLoop:
 
 .not_triple_kick
 	call BattleRandom
-	and $3
-	cp 2
-	jr c, .got_number_hits
+	and $1
+	jr z, .middle_hits
 	call BattleRandom
-	and $3
+	and $1
+	jr z, .more_hits
+	call BattleRandom
+	and $1
+	jr z, .got_number_hits
+	xor a
+	inc a
+.more_hits
+	inc a
+.middle_hits
+	inc a
 .got_number_hits
 	inc a
 .double_hit
