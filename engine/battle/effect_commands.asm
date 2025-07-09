@@ -1569,6 +1569,16 @@ BattleCommand_CheckHit:
 	cp STRUGGLE
 	ret z
 
+; Heracross always hit with Megahorn
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp MEGAHORN
+	jr nz, .notMegahorn
+    call GetCurrentMon
+	cp HERACROSS
+	ret z
+.notMegahorn
+
 	call .StatModifiers
 
 	ld a, [wPlayerMoveStruct + MOVE_ACC]
@@ -6845,3 +6855,13 @@ HailDefenseBoost:
 	cp ICE
 	ret nz
 	jr FinishWeatherStatBoost
+
+; this needs to be in effect_commands.asm
+GetCurrentMon:
+    ldh a, [hBattleTurn]
+	and a
+	ld a, [wBattleMonSpecies]
+	jr z, .done
+	ld a, [wEnemyMonSpecies]
+.done
+    ret
