@@ -2243,6 +2243,16 @@ AI_Smart_Rollout:
 	cp BASE_STAT_LEVEL + 1
 	jr nc, .maybe_discourage
 
+; If the mon has Defense Curl, and hasn't used it yet,
+; don't encourage Rollout
+	ld b, EFFECT_DEFENSE_CURL
+	call AIHasMoveEffect
+	jr nc, .no_defense_curl
+	ld a, [wEnemySubStatus2]
+	bit SUBSTATUS_CURLED, a
+	ret z
+
+.no_defense_curl
 ; 80% chance to greatly encourage this move otherwise.
 	call Random
 	cp 79 percent - 1
