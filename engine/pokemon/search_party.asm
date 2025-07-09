@@ -8,7 +8,7 @@ _FindPartyMonAtLeastThatHappy:
 	call FindAtLeastThatHappy
 	ret
 
-_FindPartyMonThatSpecies:
+_FindPartyMonThatSpecies::
 	ld hl, wPartyMon1Species
 	jr FindThatSpecies
 
