@@ -939,14 +939,36 @@ AI_Smart_ResetStats:
 AI_Smart_ForceSwitch:
 ; Whirlwind, Roar.
 
+; Strongly encourage this move if the player has
+; a stat buff of at least 2 in any stat
+	push hl
+	ld hl, wPlayerAtkLevel
+	ld c, $8
+.check_next_stat
+	dec c
+	jr z, .no_stat_buff
+	ld a, [hli]
+	cp $9
+	jr c, .check_next_stat
+	pop hl
+; player has a stat buffed by at least 2
+	dec [hl]
+	cp $a
+	ret c
+; encourage more if buffed by >2
+	dec [hl]
+	ret
+
 ; Discourage this move if the player has not shown
 ; a super-effective move against the enemy.
 ; Consider player's type(s) if its moves are unknown.
 
+.no_stat_buff
+	pop hl
 	push hl
 	callfar CheckPlayerMoveTypeMatchups
 	ld a, [wEnemyAISwitchScore]
-	cp BASE_AI_SWITCH_SCORE
+	cp 10 ; neutral // forely BASE_AI_SWITCH_SCORE
 	pop hl
 	ret c
 	inc [hl]
