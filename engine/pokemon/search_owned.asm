@@ -21,6 +21,10 @@ BeastsCheck:
 	; they exist
 	ld a, 1
 	ld [wScriptVar], a
+
+	ld de, EVENT_THREE_BEASTS_CAUGHT
+	ld b, SET_FLAG
+	call EventFlagAction
 	ret
 
 .notexist

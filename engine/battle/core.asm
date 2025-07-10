@@ -825,6 +825,11 @@ TryEnemyFlee:
 	and SLP_MASK
 	jr nz, .Stay
 
+	ld de, EVENT_THREE_BEASTS_CAUGHT
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	jr nz, .Stay
+
 	ld a, [wTempEnemyMonSpecies]
 	ld de, 1
 	ld hl, AlwaysFleeMons
