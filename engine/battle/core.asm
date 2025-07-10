@@ -5610,13 +5610,19 @@ MoveInfoBox:
 
 	hlcoord 1, 10
 	ld a, [wPlayerMoveStruct + MOVE_POWER]
-	and a
-	jr nz, .haspower
-	ld de, .nopower_string ; "---"
+	cp 2
+	jr c, .nopower
+	; MOVE_POWER is 2 or higher
+
+	; code for moves with power 2+
+	jr .haspower
+
+.nopower:
+	ld de, .nopower_string
 	call PlaceString
 	jr .place_accuracy
 
-.haspower	
+.haspower:
 	ld [wTextDecimalByte], a
 	ld de, wTextDecimalByte
 	lb bc, 1, 3 ; number of bytes this number is in, in 'b', number of possible digits in 'c'
