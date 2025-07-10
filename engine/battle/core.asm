@@ -3657,9 +3657,12 @@ TryToRunAwayFromBattle:
 	call WaitPlaySFX
 	pop de
 	call WaitSFX
+	call CheckDialogueMode
+	jr z, .skip
 	ld hl, BattleText_GotAwaySafely
 	call StdBattleTextbox
 	call WaitSFX
+.skip:
 	call LoadTilemapToTempTilemap
 	scf
 	ret
