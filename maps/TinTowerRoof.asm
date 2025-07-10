@@ -8,6 +8,12 @@ TinTowerRoof_MapScripts:
 	callback MAPCALLBACK_OBJECTS, TinTowerRoofHoOhCallback
 
 TinTowerRoofHoOhCallback:
+    checktime EVE | NITE
+    iftrue .skipWeather
+	setval WEATHER_SUN
+	writemem wFieldWeather
+.skipWeather
+
 	checkevent EVENT_FOUGHT_HO_OH
 	iftrue .NoAppear
 	checkitem RAINBOW_WING

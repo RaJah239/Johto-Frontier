@@ -76,11 +76,49 @@ SuspendMapAnims:
 	ret
 
 LoadMapObjects:
+	call HandleMapDefaultWeather
 	ld a, MAPCALLBACK_OBJECTS
 	call RunMapCallback
 	farcall LoadObjectMasks
 	farcall InitializeVisibleSprites
 	ret
+
+; By default outdoor maps have
+; 35% chance of rain
+; 35% chance of sun unless it is night
+HandleMapDefaultWeather:
+    ld a, [wMapGroup]
+	ld b, a
+	ld a, [wMapNumber]
+	ld c, a
+	call GetMapEnvironment
+	cp ROUTE
+	jr z, .outdoor
+	cp TOWN
+	jr z, .outdoor
+	jr .noWeather
+.outdoor
+    call Random
+    cp 35 percent
+    jr c, .rain
+    cp 70 percent
+    jr c, .sun
+.noWeather
+    ld a, WEATHER_NONE
+    jr .done
+.rain
+    ld a, WEATHER_RAIN
+    jr .done
+.sun
+    ld a, [wTimeOfDay]
+	cp NITE_F
+	ret z
+	cp EVE_F
+	ret z
+    ld a, WEATHER_SUN
+.done
+    ld [wFieldWeather], a
+    ret
 
 MapSetup_DummyFunction: ; unreferenced
 	ret

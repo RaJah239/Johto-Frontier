@@ -20,6 +20,15 @@ NationalPark_MapScripts:
 
 	def_callbacks
 	callback MAPCALLBACK_NEWMAP, .Flypoint
+	callback MAPCALLBACK_OBJECTS, .Weather
+
+.Weather:
+    checktime EVE | NITE
+    iftrue .skipWeather
+	setval WEATHER_SUN
+	writemem wFieldWeather
+.skipWeather
+		endcallback
 
 .Flypoint:
 	setflag ENGINE_FLYPOINT_NATIONAL_PARK

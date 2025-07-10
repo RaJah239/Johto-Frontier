@@ -32,6 +32,9 @@ LakeOfRageFlypointCallback:
 	endcallback
 
 LakeOfRageWesleyCallback:
+	setval WEATHER_RAIN
+	writemem wFieldWeather
+
 	readvar VAR_WEEKDAY
 	ifequal WEDNESDAY, .WesleyAppears
 	disappear LAKEOFRAGE_WESLEY

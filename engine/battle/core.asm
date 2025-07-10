@@ -54,7 +54,7 @@ DoBattle:
 	call SafeLoadTempTilemapToTilemap
 	ld a, [wBattleType]
 	cp BATTLETYPE_DEBUG
-	jr z, .tutorial_debug
+	jmp z, .tutorial_debug
 	cp BATTLETYPE_TUTORIAL
 	jr z, .tutorial_debug
 	xor a
@@ -110,6 +110,7 @@ DoBattle:
 	call SpikesDamage
 
 .not_linked_2
+	call FieldWeather
 	jr BattleTurn
 
 .tutorial_debug
@@ -9157,3 +9158,48 @@ GetWeatherImage:
 	db $88, $14 ; y/x - bottom left
 	db $80, $1c ; y/x - top right
 	db $80, $14 ; y/x - top left
+
+FieldWeather:
+; is weather already set up
+    ld a, [wBattleWeather]
+	cp WEATHER_NONE
+	jr nz, .doWeather
+
+; set weather and count to 255 turns
+    ld a, 255
+	ld [wWeatherCount], a
+	ld a, [wFieldWeather]
+    ld [wBattleWeather], a
+.doWeather
+    cp WEATHER_RAIN
+    jr z, .rain
+    cp WEATHER_SUN
+    jr z, .sun
+    cp WEATHER_SANDSTORM
+    jr z, .sand
+    cp WEATHER_HAIL
+    jr z, .hail
+    ret
+
+.hail
+	ld de, ANIM_IN_HAIL
+	call Call_PlayBattleAnim
+	ld hl, ItStartedToHailText
+	jp StdBattleTextbox
+
+.sand
+	ld de, ANIM_IN_SANDSTORM
+	call Call_PlayBattleAnim
+	ld hl, SandstormBrewedText
+	jp StdBattleTextbox
+
+.rain
+	ld de, RAIN_DANCE
+	call Call_PlayBattleAnim
+	ld hl, DownpourText
+	jp StdBattleTextbox
+.sun
+	ld de, SUNNY_DAY
+	call Call_PlayBattleAnim
+	ld hl, SunGotBrightText
+	jp StdBattleTextbox

@@ -3121,7 +3121,15 @@ wUndergroundSwitchPositions:: db
 wFarfetchdPosition:: db
 wExpShareToggle:: db
 
-	ds 12
+wFieldWeather::
+; 00 normal
+; 01 rain
+; 02 sun
+; 03 sandstorm
+; 04 hail
+	db
+
+	ds 11
 
 ; map scene ids
 wPokecenter2FSceneID::                            db
