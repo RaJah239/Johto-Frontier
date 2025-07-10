@@ -67,14 +67,14 @@ MainMenu:
 
 .Strings:
 ; entries correspond to MAINMENUITEM_* constants
-	db "CONTINUE@"
-	db "NEW GAME@"
-	db "OPTIONS@"
-	db "RESET CLOCK@"
-	db "ABOUT@"
-	db "MOBILE STUDIUM@"
+	db "Continue@"
+	db "New Game@"
+	db "Options@"
+	db "Reset Clock@"
+	db "About@"
+	db "Mobile Studium@"
 if DEF(_DEBUG)
-	db "DEBUG ROOM@"
+	db "Debug Room@"
 endc
 
 .Jumptable:
@@ -344,7 +344,7 @@ MainMenu_PrintCurrentTimeAndDay:
 	ret
 
 .TimeNotSetString:
-	db "TIME NOT SET@"
+	db "Time Not Set@"
 
 .PrintDayOfWeek:
 	push de
@@ -362,15 +362,15 @@ MainMenu_PrintCurrentTimeAndDay:
 	ret
 
 .Days:
-	db "SUN@"
-	db "MON@"
-	db "TUES@"
-	db "WEDNES@"
-	db "THURS@"
-	db "FRI@"
-	db "SATUR@"
+	db "Sun@"
+	db "Mon@"
+	db "Tues@"
+	db "Wednes@"
+	db "Thurs@"
+	db "Fri@"
+	db "Satur@"
 .Day:
-	db "DAY@"
+	db "day@"
 
 ClearTilemapEtc:
 	xor a

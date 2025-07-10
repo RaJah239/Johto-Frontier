@@ -295,17 +295,17 @@ VioletScript:
 .MenuData:
 	db STATICMENU_CURSOR ; flags
 	db 4 ; items
-	db "SACRED ASH x5@"
-	db "EON MAIL   x1@"
-	db "CRYSTAL   x11@"
-	db "CANCEL@"
+	db "Sacred Ash x5@"
+	db "Eon Mail   x1@"
+	db "Crystal   x11@"
+	db "Cancel@"
 
 VioletIntroText:
-	text "Hello. I'm VIOLET."
+	text "Hello. I'm Violet."
 	line "I enjoy collecting"
 	cont "coins."
 
-	para "A COIN COLLECTOR"
+	para "A Coin Collector"
 	line "of sorts."
 
 	para "And you are?"
@@ -333,7 +333,7 @@ VioletIntroText:
 	done
 
 UpForATradeText:
-	text "VIOLET: Up for a"
+	text "Violet: Up for a"
 	line "trade <PLAY_G>?"
 
 	para "9,999 coins for"
@@ -367,21 +367,21 @@ ValueOurTradeText:
 
 PlayerGotFiveSacredAshText:
 	text "<PLAYER> got"
-	line "5 SACRED ASH!@"
+	line "5 Sacred Ashes!@"
 	sound_item
 	text_promptbutton
 	text_end
 
 PlayerGotEonMailText:
 	text "<PLAYER> got"
-	line "EON MAIL!@"
+	line "Eon Mail!@"
 	sound_item
 	text_promptbutton
 	text_end
 
 PlayerGotNinetyElevenCrystalsText:
 	text "<PLAYER> got"
-	line "11 CRYSTAL!@"
+	line "11 Crystals!@"
 	sound_item
 	text_promptbutton
 	text_end

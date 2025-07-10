@@ -679,16 +679,16 @@ Pokegear_UpdateClock:
  	jr .got_tod
  
 .MornStr:
- 	db "MORNING@"
+ 	db "Morning@"
 .DayStr:
- 	db "DAY@"
+ 	db "Day@"
 .NiteStr:
- 	db "NIGHT@"
+ 	db "Night@"
 .EveStr:
- 	db "EVENING@"
+ 	db "Evening@"
  
 .FishGrpStr:
- 	db "FISH:@"
+ 	db "Fish:@"
 
 .GearTodayText:
 	text_far _GearTodayText

@@ -60,10 +60,10 @@ PokemonCenterPC:
 	dw TurnOffPC,    .String_TurnOff
 
 .String_PlayersPC:  db "<PLAYER>'s PC@"
-.String_BillsPC:    db "BILL's PC@"
-.String_OaksPC:     db "PROF.OAK's PC@"
-.String_HallOfFame: db "HALL OF FAME@"
-.String_TurnOff:    db "TURN OFF@"
+.String_BillsPC:    db "Bill's PC@"
+.String_OaksPC:     db "Prof.Oak's PC@"
+.String_HallOfFame: db "Hall Of Fame@"
+.String_TurnOff:    db "Turn Off@"
 
 .WhichPC:
 ; entries correspond to PCPC_* constants

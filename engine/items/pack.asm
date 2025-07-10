@@ -190,9 +190,9 @@ Pack:
 .MenuData_2:
 	db STATICMENU_CURSOR | STATICMENU_NO_TOP_SPACING ; flags
 	db 3 ; items
-	db "USE@"
-	db "GIVE@"
-	db "QUIT@"
+	db "Use@"
+	db "Give@"
+	db "Quit@"
 
 .Jumptable2:
 	dw .UseItem
@@ -381,11 +381,11 @@ MenuHeader_UsableKeyItem:
 .MenuData:
 	db STATICMENU_CURSOR | STATICMENU_NO_TOP_SPACING ; flags
 	db 5 ; items
-	db "USE@"
-	db "GIVE@"
-	db "TOSS@"
+	db "Use@"
+	db "Give@"
+	db "Toss@"
 	db "SEL@"
-	db "QUIT@"
+	db "Quit@"
 
 Jumptable_UseGiveTossRegisterQuit:
 	dw UseItem
@@ -457,10 +457,10 @@ MenuHeader_HoldableKeyItem:
 .MenuData:
 	db STATICMENU_CURSOR | STATICMENU_NO_TOP_SPACING ; flags
 	db 4 ; items
-	db "GIVE@"
-	db "TOSS@"
+	db "Give@"
+	db "Toss@"
 	db "SEL@"
-	db "QUIT@"
+	db "Quit@"
 
 Jumptable_GiveTossRegisterQuit:
 	dw GiveItem
@@ -477,9 +477,9 @@ MenuHeader_HoldableItem:
 .MenuData:
 	db STATICMENU_CURSOR | STATICMENU_NO_TOP_SPACING ; flags
 	db 3 ; items
-	db "GIVE@"
-	db "TOSS@"
-	db "QUIT@"
+	db "Give@"
+	db "Toss@"
+	db "Quit@"
 
 Jumptable_GiveTossQuit:
 	dw GiveItem

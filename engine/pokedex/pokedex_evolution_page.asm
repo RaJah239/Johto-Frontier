@@ -346,7 +346,7 @@ IF DEF(EVOLVE_HELD)
 .cont_page_text:
 	db $63, $64, $65, $66, "@"
 .doesnt_evo_text:
-	db "DOES NOT EVOLVE@"
+	db "Does Not Evolve@"
 .exit_early_print_cont
 	pop af
 .exit_early_print_cont2
@@ -428,7 +428,7 @@ EVO_item:
 	call EVO_inchlcoord
 	ret
 .item_text:
-	db "ITEM@"
+	db "Item@"
 
 EVO_trade:
 	ld a, BANK("Evolutions and Attacks")
@@ -459,7 +459,7 @@ EVO_trade:
 	call EVO_inchlcoord
 	ret
 .trade_text:
-	db "TRADE@"
+	db "Trade@"
 .hold_text:
 	db " ", "+","@"
 
@@ -482,16 +482,16 @@ EVO_happiness:
 	call EVO_inchlcoord
 	ret
 .happiness_text:
-	db $6e, "@"; "HAPPINESS@"
+	db $6e, "@"; "Happiness@"
 .anytime_text:
 	db $6e, "@"
-	; db "ANYTIME@"
+	; db "Anytime@"
 .sunup_text:
 	db $6e, $71, $72, "@"
-	; db "MORN/DAY@"
+	; db "Morn/Day@"
 .nite_text:
 	db $6e, $73, "@"
-	; db "NITE@"
+	; db "Nite@"
 
 EVO_stats:
 	push hl ; level Needed byte
@@ -530,11 +530,11 @@ EVO_stats:
 	ret
 
 .atk_eq_def_text:
-	db "ATK = DEF@"
+	db "Atk = Def@"
 .atk_gt_def_text:
-	db "ATK > DEF@"
+	db "Atk > Def@"
 .atk_lt_def_text:
-	db "ATK < DEF@"
+	db "Atk < Def@"
 
 IF DEF(EVOLVE_HELD)
  EVO_held:
@@ -555,7 +555,7 @@ IF DEF(EVOLVE_HELD)
  	call EVO_inchlcoord
  	ret
  .hold_text:
- 	db "HOLD@"
+ 	db "Hold@"
  ENDC
  
  IF DEF(EVOLVE_HELD_LEVEL)
@@ -591,7 +591,7 @@ IF DEF(EVOLVE_HELD)
  	call EVO_inchlcoord
  	ret
  .hold_text:
- 	db "<DEX_LV_VRAM1>   + HOLD@"
+ 	db "<DEX_LV_VRAM1>   + Hold@"
  ENDC
 
 EVO_place_Mon_Types:
@@ -1204,24 +1204,24 @@ ENDC
  	jmp PlaceString
  
  .Types
-	db "NRM@"
- 	db "FIT@"
- 	db "FLY@"
- 	db "PSN@"
- 	db "GRD@"
- 	db "RCK@"
- 	db "BUG@"
- 	db "GHS@"
- 	db "STL@"
- 	db "FIR@"
- 	db "WAT@"
- 	db "GRS@"
- 	db "ELC@"
- 	db "PSY@"
- 	db "ICE@"
- 	db "DRG@"
- 	db "DRK@"
- 	db "FAI@"
+	db "Nrm@"
+ 	db "Fit@"
+ 	db "Fly@"
+ 	db "Psn@"
+ 	db "Grd@"
+ 	db "Rck@"
+ 	db "Bug@"
+ 	db "Ghs@"
+ 	db "Stl@"
+ 	db "Fir@"
+ 	db "Wat@"
+ 	db "Grs@"
+ 	db "Elc@"
+ 	db "Psy@"
+ 	db "Ice@"
+ 	db "Drg@"
+ 	db "Drk@"
+ 	db "Fai@"
  	db "???@"
 ENDC
  

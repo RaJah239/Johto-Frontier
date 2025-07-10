@@ -37,7 +37,7 @@ EggTutorScript:
 
 EggTutorIntroText:
     text "I'm the one and"
-    line "only EGG TUTOR!"
+    line "only Egg Tutor!"
 
     para "I can teach your"
     line "#MON moves that"
@@ -56,7 +56,7 @@ EggTutorMoneyForEggMoveText:
 	text "Hi again! Want me"
 	line "me to teach your"
 
-	para "#MON an EGG"
+	para "#mon an Egg"
 	line "move for ¥500,000?"
 	done
 
@@ -138,14 +138,14 @@ BlackthornTutor1Script:
 .MenuData:
 	db STATICMENU_CURSOR ; flags
 	db 4 ; items
-	db "ROCK SLIDE@"
-	db "SKY ATTACK@"
-	db "OUTRAGE@"
-	db "CANCEL@"
+	db "Rock Slide@"
+	db "Sky Attack@"
+	db "Outrage@"
+	db "Cancel@"
 	
 BlackthornMoveTutor1IntroText:
 	text "Hello. I am a"
-	line "MOVE TUTOR."
+	line "Move Tutor."
 	
 	para "For 9,999 coins,"
 	line "I'll teach your"

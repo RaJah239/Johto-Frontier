@@ -888,9 +888,9 @@ DecoSideMenuHeader:
 .MenuData:
 	db STATICMENU_CURSOR ; flags
 	db 3 ; items
-	db "RIGHT SIDE@"
-	db "LEFT SIDE@"
-	db "CANCEL@"
+	db "Right Side@"
+	db "Left Side@"
+	db "Cancel@"
 
 PutAwayTheDecoText:
 	text_far _PutAwayTheDecoText

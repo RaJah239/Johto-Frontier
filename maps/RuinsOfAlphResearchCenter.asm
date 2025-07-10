@@ -338,17 +338,17 @@ FossilScientistAgain:
 .MenuData:
 	db STATICMENU_CURSOR ; flags
 	db 4 ; items
-	db "OLD AMBER@"
-	db "DOME FOSSIL@"
-	db "HELIX FOSSIL@"
-	db "CANCEL@"
+	db "Old Amber@"
+	db "Dome Fossil@"
+	db "Helix Fossil@"
+	db "Cancel@"
 
 FossilScientistIntroText:
 	text "Well, Hello there."
 	line "I'm a researcher."
 
 	para "I study ancient"
-	line "#MON fossils."
+	line "#mon fossils."
 
 	para "Do you have a"
 	line "fossil?"
@@ -379,13 +379,13 @@ FossilScientistMonText:
 	text_ram wStringBuffer3
 	text ", a"
 
-	para "#MON that is"
+	para "#mon that is"
 	line "already extinct!"
 
 	para "My Resurrection"
 	line "Machine will make"
 
-	para "that #MON live"
+	para "that #mon live"
 	line "again!"
 	done
 
@@ -433,10 +433,10 @@ RuinsOfAlphResearchCenterModifiedDexText:
 	text "Done!"
 
 	para "I modified your"
-	line "#DEX."
+	line "#dex."
 
 	para "I added an"
-	line "optional #DEX"
+	line "optional #dex"
 
 	para "to store UNOWN"
 	line "data."
@@ -447,12 +447,12 @@ RuinsOfAlphResearchCenterModifiedDexText:
 	done
 
 RuinsOfAlphResearchCenterDexUpgradedText:
-	text "<PLAYER>'s #DEX"
+	text "<PLAYER>'s #dex"
 	line "was upgraded."
 	done
 
 RuinsOfAlphResearchCenterScientist3Text:
-	text "The UNOWN you"
+	text "The Unown you"
 	line "catch will all be"
 	cont "recorded."
 
@@ -462,21 +462,21 @@ RuinsOfAlphResearchCenterScientist3Text:
 
 RuinsOfAlphResearchCenterScientist3_PrinterAvailable:
 	text "You caught all the"
-	line "UNOWN variations?"
+	line "Unown variations?"
 
 	para "That's a great"
 	line "achievement!"
 
 	para "I've set up the"
 	line "printer here for"
-	cont "handling UNOWN."
+	cont "handling Unown."
 
 	para "Feel free to use"
 	line "it anytime."
 	done
 
 RuinsOfAlphResearchCenterScientist1Text:
-	text "The RUINS are"
+	text "The Ruins are"
 	line "about 1500 years"
 	cont "old."
 
@@ -487,13 +487,13 @@ RuinsOfAlphResearchCenterScientist1Text:
 
 RuinsOfAlphResearchCenterScientist1Text_GotUnownDex:
 	text "I wonder how many"
-	line "kinds of #MON"
-	cont "are in the RUINS?"
+	line "kinds of #mon"
+	cont "are in the Ruins?"
 	done
 
 RuinsOfAlphResearchCenterScientist1Text_UnownAppeared:
-	text "#MON appeared"
-	line "in the RUINS?"
+	text "#Mon appeared"
+	line "in the Ruins?"
 
 	para "That's incredible"
 	line "news!"
@@ -507,13 +507,13 @@ RuinsOfAlphResearchCenterScientist1Text_GotAllUnown:
 	line "with your help, is"
 
 	para "giving us insight"
-	line "into the RUINS."
+	line "into the Ruins."
 
-	para "The RUINS appear"
+	para "The Ruins appear"
 	line "to have been built"
 
 	para "as a habitat for"
-	line "#MON."
+	line "#mon."
 	done
 
 RuinsOfAlphResearchCenterScientist2Text:
@@ -521,18 +521,18 @@ RuinsOfAlphResearchCenterScientist2Text:
 	line "terns drawn on the"
 
 	para "walls of the"
-	line "RUINS."
+	line "Ruins."
 
 	para "They must be the"
 	line "keys for unravel-"
 	cont "ing the mystery"
-	cont "of the RUINS."
+	cont "of the Ruins."
 	done
 
 RuinsOfAlphResearchCenterScientist2Text_UnownAppeared:
 	text "The strange #-"
-	line "MON you saw in the"
-	cont "RUINS?"
+	line "mon you saw in the"
+	cont "Ruins?"
 
 	para "They appear to be"
 	line "very much like the"
@@ -559,15 +559,15 @@ RuinsOfAlphResearchCenterScientist2Text_GotAllUnown:
 	done
 
 RuinsOfAlphResearchCenterComputerText:
-	text "RUINS OF ALPH"
+	text "Ruins Of Alph"
 
 	para "Exploration"
 	line "Year 10"
 	done
 
 RuinsOfAlphResearchCenterComputerText_GotAllUnown:
-	text "Mystery #MON"
-	line "Name: UNOWN"
+	text "Mystery #mon"
+	line "Name: Unown"
 
 	para "A total of {d:NUM_UNOWN}"
 	line "kinds found."
@@ -579,7 +579,7 @@ RuinsOfAlphResearchCenterPrinterText_DoesntWork:
 	done
 
 RuinsOfAlphResearchCenterUnownPrinterText:
-	text "UNOWN may be"
+	text "Unown may be"
 	line "printed out."
 	done
 

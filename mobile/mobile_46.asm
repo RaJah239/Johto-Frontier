@@ -3887,10 +3887,10 @@ Strings_Ll0ToL40:
 	db " L:20 @@"
 	db " L:30 @@"
 	db " L:40 @@"
-	db "CANCEL@@"
+	db "Cancel@@"
 
 BattleTowerCancelString: ; unreferenced
-	db "CANCEL@"
+	db "Cancel@"
 
 BattleTower_LevelCheck:
 	ldh a, [rSVBK]
@@ -4627,10 +4627,10 @@ BattleTowerRoomMenu2_UpdateYesNoMenu:
 	ret
 
 String_11a2cf:
-	db "YES@"
+	db "Yes@"
 
 String_11a2d3:
-	db "NO@"
+	db "No@"
 
 MenuHeader_11a2d6: ; unreferenced
 	db MENU_BACKUP_TILES ; flags

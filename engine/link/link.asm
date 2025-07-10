@@ -2049,8 +2049,8 @@ InitTradeMenuDisplay_Delay:
 	jmp InitTradeMenuDisplay
 
 String_TradeCancel:
-	db   "TRADE"
-	next "CANCEL@"
+	db   "Trade"
+	next "Cancel@"
 
 LinkAskTradeForText:
 	text_far _LinkAskTradeForText

@@ -1518,27 +1518,27 @@ ManageBoxes:
 	db -1
 
 BillsPC_MenuStrings:
-	db "CANCEL@"
+	db "Cancel@"
 	; pokémon management options
-	db "WITHDRAW@"
-	db "DEPOSIT@"
-	db "STATS@"
-	db "SWITCH@"
-	db "MOVES@"
-	db "ITEM@"
-	db "RELEASE@"
+	db "Withdraw@"
+	db "Deposit@"
+	db "Stats@"
+	db "Switch@"
+	db "Moves@"
+	db "Item@"
+	db "Release@"
 	; box options
-	db "RENAME@"
-	db "THEME@"
-	db "RELEASE@"
+	db "Rename@"
+	db "Theme@"
+	db "Release@"
 	; holding a mail
-	db "TAKE@"
-	db "READ@"
+	db "Take@"
+	db "Read@"
 	; holding an item
-	db "MOVE@"
-	db "BAG@"
+	db "Move@"
+	db "Bag@"
 	; doesn't hold an item
-	db "GIVE@"
+	db "Give@"
 
 BillsPC_MenuJumptable:
 	dw DoNothing

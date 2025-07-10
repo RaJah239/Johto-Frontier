@@ -6445,7 +6445,7 @@ Function102e3e:
 	ret
 
 .CancelString:
-	db "CANCEL@"
+	db "Cancel@"
 
 Function102e4f:
 	farcall LoadMobileTradeBorderTilemap

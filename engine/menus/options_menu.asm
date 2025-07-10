@@ -75,21 +75,21 @@ _Option:
 	ret
 
 StringOptions:
-	db "TEXT SPEED<LF>"
+	db "Text Speed<LF>"
 	db "        :<LF>"
-	db "BATTLE SCENE<LF>"
+	db "Battle Scene<LF>"
 	db "        :<LF>"
-	db "EXP.SHARE<LF>"
+	db "Exp.Share<LF>"
 	db "        :<LF>"
-	db "SOUND<LF>"
+	db "Sound<LF>"
 	db "        :<LF>"
-	db "DIALOGUE<LF>"
+	db "Dialogue<LF>"
 	db "        :<LF>"
-	db "CASUAL CALLS<LF>"
+	db "Casual Calls<LF>"
 	db "        :<LF>"
-	db "FRAME<LF>"
-	db "        :TYPE<LF>"
-	db "CANCEL@"
+	db "Frame<LF>"
+	db "        :Type<LF>"
+	db "Cancel@"
 
 GetOptionPointer:
 	jumptable .Pointers, wJumptableIndex
@@ -161,8 +161,8 @@ Options_TextSpeed:
 	dw .Fast
 	dw .None
 
-.Fast: db "FAST   @"
-.None: db "INSTANT@"
+.Fast: db "Fast   @"
+.None: db "Instant@"
 
 GetTextSpeed:
 ; converts TEXT_DELAY_* value in a to OPT_TEXT_SPEED_* value in c,
@@ -219,8 +219,8 @@ Options_BattleScene:
 	and a
 	ret
 
-.On:  db "ON @"
-.Off: db "OFF@"
+.On:  db "On @"
+.Off: db "Off@"
 
 Options_ExpShare:
 	ld hl, wExpShareToggle
@@ -257,8 +257,8 @@ Options_ExpShare:
 	and a
 	ret
 
-.Off: db "OFF@"
-.On:  db "ON @"
+.Off: db "Off@"
+.On:  db "On @"
 
 Options_Sound:
 	ld hl, wOptions
@@ -302,8 +302,8 @@ Options_Sound:
 	and a
 	ret
 
-.Mono:   db "MONO  @"
-.Stereo: db "STEREO@"
+.Mono:   db "Mono  @"
+.Stereo: db "Stereo@"
 
 
 Options_MinimalDialogue:
@@ -346,8 +346,8 @@ Options_MinimalDialogue:
 	dw .Normal
 	dw .Minimum
 
-.Normal:   db "NORMAL @"
-.Minimum:  db "MINIMAL@"
+.Normal:   db "Normal @"
+.Minimum:  db "Minimal@"
 
 Options_CasualCalls:
  	ld hl, wOptions2
@@ -384,8 +384,8 @@ Options_CasualCalls:
  	and a
  	ret
  
-.On:  db "ON @"
-.Off: db "OFF@"
+.On:  db "On @"
+.Off: db "Off@"
 
 
 Options_Frame:
