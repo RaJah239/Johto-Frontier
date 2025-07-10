@@ -70,7 +70,7 @@ ENDC ; done handling EVs/StatExp differences
 	ld [wPokedexEntryPageNum], a
 	ret
 .Base_stats_text:
-	db "BASE STATS@"
+	db "Base Stats@"
 
 Pokedex_GBS_Stats:
 	hlcoord 1, 9

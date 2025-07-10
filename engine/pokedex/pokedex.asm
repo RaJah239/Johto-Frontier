@@ -1700,9 +1700,9 @@ Pokedex_DrawMainScreenBG:
 	ret
 
 String_SEEN:
-	db "SEEN", -1
+	db "Seen", -1
 String_OWN:
-	db "OWN", -1
+	db "Own", -1
 String_SELECT_OPTION:
 	db $3b, $48, $49, $4a, $44, $45, $46, $47 ; SELECT > OPTION
 	; fallthrough
@@ -1863,22 +1863,22 @@ Pokedex_DrawOptionScreenBG:
 	ret
 
 .Title:
-	db $3b, " OPTION ", $3c, -1
+	db $3b, " Option ", $3c, -1
 
 .NewMode:
- 	db "NEW #DEX MODE@"
+ 	db "New #dex Mode@"
  
 .OldMode:
- 	db "OLD #DEX MODE@"
+ 	db "Old #dex Mode@"
  
 .AtoZMode:
- 	db "A to Z MODE@"
+ 	db "A to Z Mode@"
  	
 .Color:
- 	db "#DEX COLOR@"
+ 	db "#dex Color@"
 
 .UnownMode:
-	db "UNOWN MODE@"
+	db "Unown Mode@"
 
 Pokedex_DrawColorScreenBG:
  	call Pokedex_FillBackgroundColor2
@@ -1920,37 +1920,37 @@ Pokedex_DrawColorScreenBG:
  	; jmp Pokedex_PlaceString
  
 .Title:
- 	db $3b, " COLORS ", $3c, -1
+ 	db $3b, " Colors ", $3c, -1
  
 .Red
- 	db "RED    ", $4f, -1
+ 	db "Red    ", $4f, -1
  	
 .Blue
- 	db "BLUE   ", $4f, -1
+ 	db "Blue   ", $4f, -1
  
 .Purple
- 	db "PURPLE ", $4f, -1
+ 	db "Purple ", $4f, -1
  
 .Brown
- 	db "BROWN  ", $4f, -1
+ 	db "Brown  ", $4f, -1
  
 .Green
- 	db "GREEN  ", $4f, -1	
+ 	db "Green  ", $4f, -1	
  	
 .Pink
- 	db "PINK   ", $4f, -1	
+ 	db "Pink   ", $4f, -1	
  	
 .Yellow
- 	db "YELLOW ", $4f, -1	
+ 	db "Yellow ", $4f, -1	
  	
 .Cyan
- 	db "CYAN   ", $4f, -1
+ 	db "Cyan   ", $4f, -1
  	
 .Gray
- 	db "GRAY   ", $4f, -1	
+ 	db "Gray   ", $4f, -1	
  	
   ; .Mewtwo
- ; 	db "MEWTWO ", $4f, -1	
+ ; 	db "Mewtwo ", $4f, -1	
  
 Pokedex_UpdateColorOption:
  	ld de, .ArrowCursorData
@@ -2077,19 +2077,19 @@ Pokedex_DrawSearchScreenBG:
 	ret
 
 .Title:
-	db $3b, " SEARCH ", $3c, -1
+	db $3b, " Search ", $3c, -1
 
 .TypeLeftRightArrows:
 	db $3d, "        ", $3e, -1
 
 .Types:
-	db   "TYPE1"
-	next "TYPE2"
+	db   "Type1"
+	next "Type2"
 	db   "@"
 
 .Menu:
-	db   "BEGIN SEARCH!!"
-	next "CANCEL"
+	db   "Begin Search!!"
+	next "Cancel"
 	db   "@"
 
 Pokedex_DrawSearchResultsScreenBG:
@@ -2123,9 +2123,9 @@ Pokedex_DrawSearchResultsScreenBG:
 	ret
 
 .BottomWindowText:
-	db   "SEARCH RESULTS"
-	next "  TYPE"
-	next "    FOUND!"
+	db   "Search Results"
+	next "  Type"
+	next "    Found!"
 	db   "@"
 
 Pokedex_PlaceSearchResultsTypeStrings:

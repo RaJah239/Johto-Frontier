@@ -71,7 +71,7 @@ PlaceItemInBagQuantity:
 	jr ClearItemInBagQuantitysBox
 
 .InBagString:
-	db "BAG@"
+	db "Bag@"
 
 ClearItemInBagQuantitysBox:
 	hlcoord 0, 0
@@ -162,9 +162,9 @@ DisplayMoneyAndCoinBalance:
 	ret
 
 MoneyString:
-	db "MONEY@"
+	db "Money@"
 CoinString:
-	db "COIN@"
+	db "Coin@"
 ShowMoney_TerminatorString:
 	db "@"
 
@@ -252,13 +252,13 @@ StartMenu_PrintBugContestStatus:
 	ret
 
 .CaughtString:
-	db "CAUGHT@"
+	db "Caught@"
 .BallsString:
-	db "BALLS:@"
+	db "Balls:@"
 .NoneString:
 	db "None@"
 .LevelString:
-	db "LEVEL@"
+	db "Level@"
 
 FindApricornsInBag:
 ; Checks the bag for Apricorns.
