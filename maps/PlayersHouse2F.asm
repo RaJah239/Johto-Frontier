@@ -163,7 +163,6 @@ if DEF(_DEBUG)
 
 	; magnet train works
 	setevent EVENT_RESTORED_POWER_TO_KANTO
-	giveitem PASS
 
 	; useful items
 	giveitem MAX_REPEL, MAX_ITEM_STACK
@@ -191,6 +190,7 @@ if DEF(_DEBUG)
 	giveitem HELIX_FOSSIL
 
 	; all balls
+	giveitem SHINY_BALL, MAX_ITEM_STACK
 	giveitem MASTER_BALL, MAX_ITEM_STACK
 	giveitem POKE_BALL, MAX_ITEM_STACK
 	giveitem GREAT_BALL, MAX_ITEM_STACK

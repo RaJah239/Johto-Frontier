@@ -45,11 +45,12 @@ ItemNameOrder:
 
 
 ; NEXT POCKET
-; Ball Pocket - 12 total
+; Ball Pocket - 13 total
 ; Generic Pokéballs
 	db POKE_BALL
 	db GREAT_BALL
 	db ULTRA_BALL
+	db SHINY_BALL
 	db MASTER_BALL 
 	db PARK_BALL
 
@@ -258,7 +259,6 @@ ItemNameOrder:
 	db GS_BALL
 	db MACHINE_PART
 	db MYSTERY_EGG
-	db PASS
 	db RED_SCALE
 	db SECRETPOTION
 	db SQUIRTBOTTLE

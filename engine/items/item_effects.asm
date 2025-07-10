@@ -147,7 +147,7 @@ ItemEffects:
 	dw NoEffect            ; STARDUST
 	dw NoEffect            ; STAR_PIECE
 	dw BasementKeyEffect   ; BASEMENT_KEY
-	dw NoEffect            ; PASS
+	dw PokeBallEffect      ; SHINY_BALL
 	dw NoEffect            ; ITEM_87
 	dw NoEffect            ; SHINY_CHARM
 	dw VitaminEffect       ; ZINC
@@ -768,6 +768,7 @@ BallMultiplierFunctionTable:
 	dbw MOON_BALL,   MoonBallMultiplier
 	dbw LOVE_BALL,   LoveBallMultiplier
 	dbw PARK_BALL,   ParkBallMultiplier
+	dbw SHINY_BALL,  ShinyBallMultiplier
 	db -1 ; end
 
 UltraBallMultiplier:
@@ -775,6 +776,16 @@ UltraBallMultiplier:
 	sla b
 	ret nc
 	ld b, $ff
+	ret
+
+ShinyBallMultiplier:
+	push af
+	ld a, $ff ; best possible shiny atk/def
+	ld [wEnemyMonDVs], a
+	ld a, $ff ; best possible shiny spc/spd
+	ld [wEnemyMonDVs + 1], a
+	pop af
+	ld b, $ff ; max catch rate, same as pokeball
 	ret
 
 SafariBallMultiplier:

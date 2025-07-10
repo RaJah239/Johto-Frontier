@@ -133,7 +133,7 @@ ItemNames::
 	li "Stardust"
 	li "Star Piece"
 	li "Basement Key"
-	li "Pass"
+	li "Shiny Ball"
 	li "Exp.Share"
 	li "Shiny Charm"
 	li "Zinc"

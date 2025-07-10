@@ -139,7 +139,7 @@
 	const STARDUST     ; 83
 	const STAR_PIECE   ; 84
 	const BASEMENT_KEY ; 85
-	const PASS         ; 86
+	const SHINY_BALL   ; 86
 	const ITEM_87      ; 87
 	const SHINY_CHARM  ; 88
 	const ZINC         ; 89
