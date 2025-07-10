@@ -1534,7 +1534,7 @@ BattleCommand_DamageVariation:
 
 BattleCommand_CheckHit:
 	call .DreamEater
-	jr z, .Miss
+	jmp z, .Miss
 
 	call .Protect
 	jr nz, .Miss
@@ -1556,6 +1556,30 @@ BattleCommand_CheckHit:
 
 	call .XAccuracy
 	ret nz
+
+	ld a, [hBattleTurn]
+	and a
+	jr nz, .enemy_target
+
+	; Check if either side is asleep
+	; Sleeping Pokemon can't dodge any moves
+	; player attacking enemy
+	ld a, [wEnemyMonStatus]
+	jr .check_sleep
+
+.enemy_target
+	; enemy attacking player
+	ld a, [wBattleMonStatus]
+
+.check_sleep
+	and SLP_MASK
+	jr z, .not_asleep
+
+	; target is asleep ⇒ always hit
+	scf
+	ret
+
+.not_asleep
 
 	; Perfect-accuracy moves
 	ld a, BATTLE_VARS_MOVE_EFFECT
