@@ -270,10 +270,6 @@ BattleText_AnEGGCantBattle:
 	line "battle!"
 	prompt
 
-BattleText_CantEscape2:
-	text "Can't escape!"
-	prompt
-
 BattleText_TheresNoEscapeFromTrainerBattle:
 	text "Can't run from a"
 	line "trainer battle!"
@@ -281,14 +277,6 @@ BattleText_TheresNoEscapeFromTrainerBattle:
 
 BattleText_GotAwaySafely:
 	text "Got away safely!"
-	prompt
-
-BattleText_UserFledUsingAStringBuffer1:
-	text "<USER>"
-	line "fled using a"
-	cont "@"
-	text_ram wStringBuffer1
-	text "!"
 	prompt
 
 BattleText_CantEscape:
