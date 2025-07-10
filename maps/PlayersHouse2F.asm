@@ -86,8 +86,8 @@ if DEF(_DEBUG)
 	loadmem wPartyMon3DVs+1, $ff
 
 	; useful moves
-	loadmem wPartyMon1Moves+0, ICE_BEAM
-	loadmem wPartyMon1Moves+1, THUNDERBOLT
+	loadmem wPartyMon1Moves+0, HAIL
+	loadmem wPartyMon1Moves+1, SANDSTORM
 	loadmem wPartyMon1Moves+2, FLAMETHROWER
 	; overworld moves
 	loadmem wPartyMon1Moves+3, RECOVER
