@@ -326,12 +326,12 @@ endr
 
 .DrawDayTimeBox:
 	; place white box
-	hlcoord 0, 14
-	lb bc, 4, 10
+	hlcoord 0, 15
+	lb bc, 3, 10
 	call ClearBox
 
 	; grab white text box palette
-	hlcoord 0, 14
+	hlcoord 0, 15
 	lb bc, 2, 8
 	jmp TextboxPalette
 
@@ -345,7 +345,66 @@ endr
 	ld c, a
 	decoord 1, 16
 	farcall PrintHoursMins
+
+
+	ld a, [wFieldWeather]
+	cp WEATHER_RAIN
+	jr z, .PrintRaining
+
+	cp WEATHER_SUN
+	jr z, .PrintSunny
+
+	cp WEATHER_SANDSTORM
+	jr z, .PrintSandstorm
+
+	cp WEATHER_HAIL
+	jr z, .PrintHailing
+
+	cp WEATHER_NONE
+	jr z, .PrintClearSkies
 	ret
+
+.PrintRaining:
+	hlcoord 1, 17
+	ld de, .RainingStr
+	call PlaceString
+	jr .done
+
+.PrintSunny:
+	hlcoord 1, 17
+	ld de, .SunnyStr
+	call PlaceString
+	jr .done
+
+.PrintSandstorm:
+	hlcoord 1, 17
+	ld de, .SandstormStr
+	call PlaceString
+	jr .done
+
+.PrintHailing:
+	hlcoord 1, 17
+	ld de, .HailingStr
+	call PlaceString
+	jr .done
+
+.PrintClearSkies:
+	hlcoord 1, 17
+	ld de, .ClearStr
+	call PlaceString
+.done:
+	ret
+
+.RainingStr:
+ 	db "Raining@"
+.SunnyStr:
+ 	db "Sunny@"
+.HailingStr:
+ 	db "Hailing@"
+.SandstormStr:
+ 	db "Sandstorm@"
+.ClearStr:
+	db "Clear@"
 
 .DrawBugContestStatusBox:
 	ld hl, wStatusFlags2
