@@ -1014,10 +1014,10 @@ LoveBallMultiplier: ; Cath rate = x4
 	ret
 
 FastBallMultiplier:
-	ld hl, wEnemyMonBaseStats + 3
-	ld a, [hl]
+; Multiply catch rate by 4 if enemy's base speed >=100
+	ld a, [wEnemyMonBaseStats + 3]
 	cp 100
-	ret c ; If enemy speed < 100, return b as it is.
+	ret c ; If enemy speed < 100, catch rate x1
 
 	sla b ; 2x
 	jr c, .max
