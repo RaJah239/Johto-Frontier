@@ -3606,10 +3606,6 @@ TryToRunAwayFromBattle:
 	bit SUBSTATUS_CANT_RUN, a
 	jmp nz, .cant_escape
 
-	ld a, [wPlayerWrapCount]
-	and a
-	jmp nz, .cant_escape
-
 	push hl
 	push de
 	ld a, [wBattleMonItem]
