@@ -146,7 +146,7 @@ ItemNameOrder:
 
 
 ; NEXT POCKET
-; Battle Pocket - 45 total
+; Battle Pocket - 47 total
 
 ; Stat altering Battle Items
 	db GUARD_SPEC
@@ -165,6 +165,8 @@ ItemNameOrder:
 	db BLACKGLASSES
 	db BRIGHTPOWDER
 	db CHARCOAL
+	db CHOICE_BAND
+	db CHOICE_SPECS
 	db CLEANSE_TAG
 	db DRAGON_FANG
 	db EVERSTONE
@@ -173,12 +175,12 @@ ItemNameOrder:
 	db HARD_STONE
 	db KINGS_ROCK
 	db LEFTOVERS
+	db LIFE_ORB
 	db LIGHT_BALL
 	db LUCKY_EGG
 	db LUCKY_PUNCH
 	db MAGNET
 	db METAL_COAT
-	db METAL_POWDER
 	db MIRACLE_SEED
 	db MYSTIC_WATER
 	db NEVERMELTICE
@@ -271,8 +273,6 @@ ItemNameOrder:
 	db POKE_FLUTE
 	db ITEM_2D
 	db ITEM_87
-	db ITEM_8D
-	db ITEM_8E
 	db ITEM_91
 	db ITEM_99
 	db ITEM_9A 

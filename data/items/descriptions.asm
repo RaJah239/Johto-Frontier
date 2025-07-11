@@ -35,7 +35,7 @@ ItemDescriptions:
 	dw RareCandyDesc
 	dw XAccuracyDesc
 	dw LeafStoneDesc
-	dw MetalPowderDesc
+	dw ChoiceSpecsDesc
 	dw NuggetDesc
 	dw PokeDollDesc
 	dw FullHealDesc
@@ -141,8 +141,8 @@ ItemDescriptions:
 	dw CharcoalDesc
 	dw BerryJuiceDesc
 	dw ScopeLensDesc
-	dw TeruSama12Desc
-	dw TeruSama13Desc
+	dw LifeOrbDesc
+	dw ChoiceBandDesc
 	dw MetalCoatDesc
 	dw DragonFangDesc
 	dw TeruSama14Desc
@@ -396,9 +396,9 @@ LeafStoneDesc:
 	db   "Evolves certain"
 	next "kinds of #MON.@"
 
-MetalPowderDesc:
-	db   "Raises DEFENSE of"
-	next "DITTO. (HOLD)@"
+ChoiceSpecsDesc:
+	db   "Boost Spcl.Atk"
+	next "but lock moves@"
 
 NuggetDesc:
 	db   "Made of pure gold."
@@ -811,11 +811,13 @@ ScopeLensDesc:
 	db   "Raises critical"
 	next "hit ratio. (HOLD)@"
 
-TeruSama12Desc:
-	db   "?@"
+LifeOrbDesc:
+	db   "Convert life to"
+	next "boost power.@"
 
-TeruSama13Desc:
-	db   "?@"
+ChoiceBandDesc:
+	db   "Boost Atk"
+	next "but lock moves@"
 
 MetalCoatDesc:
 	db   "Powers up steel-"

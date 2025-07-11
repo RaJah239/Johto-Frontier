@@ -1070,6 +1070,11 @@ BellyDrumText:
 	cont "maximized ATTACK!"
 	prompt
 
+BattleText_UserLostSomeOfItsHP:
+	text "<USER>"
+	line "lost a bit of HP!"
+	prompt
+
 CopiedStatsText:
 	text "<USER>"
 	line "copied the stat"

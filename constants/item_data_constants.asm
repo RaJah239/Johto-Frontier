@@ -77,7 +77,7 @@ DEF MAIL_STRUCT_LENGTH_JP EQU $2a ; mailmsg_jp struct
 	const_def
 	const HELD_NONE
 	const HELD_BERRY
-	const HELD_2
+	const HELD_LIFE_ORB
 	const HELD_BERRY_4TH
 	const HELD_LEFTOVERS
 	const_skip
@@ -117,7 +117,6 @@ DEF MAIL_STRUCT_LENGTH_JP EQU $2a ; mailmsg_jp struct
 	const_next 40
 	const_skip
 	const_skip
-	const HELD_METAL_POWDER
 	const HELD_EVIOLITE
 
 	const_next 50
