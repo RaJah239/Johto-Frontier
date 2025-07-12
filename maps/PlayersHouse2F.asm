@@ -207,6 +207,8 @@ if DEF(_DEBUG)
 	giveitem LIFE_ORB, MAX_ITEM_STACK
 	giveitem CHOICE_BAND, MAX_ITEM_STACK
 	giveitem CHOICE_SPECS, MAX_ITEM_STACK
+	giveitem MUSCLE_BAND, MAX_ITEM_STACK
+	giveitem WISE_GLASSES, MAX_ITEM_STACK
 
 	; all rods
 	giveitem OLD_ROD

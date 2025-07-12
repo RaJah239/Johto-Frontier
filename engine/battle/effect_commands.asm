@@ -3222,12 +3222,46 @@ ConfusionDamageCalc:
 	ld a, b
 	cp HELD_CHOICE_SPECS
 	pop hl
+	jr nz, .muscleBand
+    ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp SPECIAL
+	jr c, .muscleBand
+    call FiftyPercentBoost
+
+.muscleBand
+; ========================
+; ===== Muscle Band ======
+; ========================
+; DevNote - muscle band - x1.1 damage
+    push hl
+	call GetUserItem
+	ld a, b
+	cp HELD_MUSCLE_BAND
+	pop hl
+	jr nz, .wiseGlasses
+    ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp SPECIAL
+	jr nc, .wiseGlasses
+	call TenPercentBoost
+
+.wiseGlasses
+; =========================
+; ===== Wise Glasses ======
+; =========================
+; DevNote - wise glasses - x1.1 damage
+    push hl
+	call GetUserItem
+	ld a, b
+	cp HELD_WISE_GLASSES
+	pop hl
 	jr nz, .continue
     ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar
 	cp SPECIAL
 	jr c, .continue
-    call FiftyPercentBoost
+	call TenPercentBoost
 
 .continue
 ; Critical hits
@@ -6966,6 +7000,15 @@ FiftyPercentBoost:
 
 HalfDamage:
 	ld a, 2
+	ldh [hDivisor], a
+	ld b, 4
+	jmp Divide
+
+TenPercentBoost:
+    ld a, 11
+	ldh [hMultiplier], a
+	call Multiply
+	ld a, 10
 	ldh [hDivisor], a
 	ld b, 4
 	jmp Divide

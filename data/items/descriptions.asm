@@ -153,8 +153,8 @@ ItemDescriptions:
 	dw MysteryBerryDesc
 	dw DragonScaleDesc
 	dw BerserkGeneDesc
-	dw TeruSama18Desc
-	dw TeruSama19Desc
+	dw MuscleBandDesc
+	dw WiseGlassesDesc
 	dw TeruSama20Desc
 	dw SacredAshDesc
 	dw HeavyBallDesc
@@ -398,7 +398,7 @@ LeafStoneDesc:
 
 ChoiceSpecsDesc:
 	db   "Boost Spcl.Atk"
-	next "but lock moves@"
+	next "but lock moves.@"
 
 NuggetDesc:
 	db   "Made of pure gold."
@@ -816,8 +816,8 @@ LifeOrbDesc:
 	next "boost power.@"
 
 ChoiceBandDesc:
-	db   "Boost Atk"
-	next "but lock moves@"
+	db   "Boost Attack"
+	next "but lock moves.@"
 
 MetalCoatDesc:
 	db   "Powers up steel-"
@@ -852,11 +852,13 @@ BerserkGeneDesc:
 	db   "Boosts ATTACK but"
 	next "causes confusion.@"
 
-TeruSama18Desc:
-	db   "?@"
+MuscleBandDesc:
+	db   "Slightly boosts"
+	next "physical moves.@"
 
-TeruSama19Desc:
-	db   "?@"
+WiseGlassesDesc:
+	db   "Slightly boosts"
+	next "special moves.@"
 
 TeruSama20Desc:
 	db   "?@"

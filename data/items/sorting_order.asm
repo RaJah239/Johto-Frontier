@@ -146,7 +146,7 @@ ItemNameOrder:
 
 
 ; NEXT POCKET
-; Battle Pocket - 47 total
+; Battle Pocket - 49 total
 
 ; Stat altering Battle Items
 	db GUARD_SPEC
@@ -182,6 +182,7 @@ ItemNameOrder:
 	db MAGNET
 	db METAL_COAT
 	db MIRACLE_SEED
+	db MUSCLE_BAND
 	db MYSTIC_WATER
 	db NEVERMELTICE
 	db PINK_BOW
@@ -198,6 +199,7 @@ ItemNameOrder:
 	db THICK_CLUB
 	db TWISTEDSPOON
 	db UP_GRADE
+	db WISE_GLASSES
 
 
 
@@ -268,14 +270,12 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 27 total
+; Unused Items - 13 total
 	db EGG_TICKET
 	db POKE_FLUTE
 	db ITEM_2D
 	db ITEM_87
 	db ITEM_91
-	db ITEM_99
-	db ITEM_9A 
 	db ITEM_9B
 	db ITEM_A2
 	db ITEM_AB

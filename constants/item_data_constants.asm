@@ -104,7 +104,7 @@ DEF MAIL_STRUCT_LENGTH_JP EQU $2a ; mailmsg_jp struct
 	const HELD_PREVENT_CONFUSE
 
 	const_next 30
-	const HELD_30
+	const HELD_MUSCLE_BAND
 	const HELD_ATTACK_UP
 	const HELD_DEFENSE_UP
 	const HELD_SPEED_UP
@@ -112,7 +112,7 @@ DEF MAIL_STRUCT_LENGTH_JP EQU $2a ; mailmsg_jp struct
 	const HELD_SP_DEFENSE_UP
 	const HELD_ACCURACY_UP
 	const HELD_EVASION_UP
-	const HELD_38
+	const HELD_WISE_GLASSES
 
 	const_next 40
 	const HELD_CHOICE_BAND
