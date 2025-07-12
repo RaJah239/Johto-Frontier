@@ -128,7 +128,7 @@ ItemDescriptions:
 	dw HardStoneDesc
 	dw LuckyEggDesc
 	dw CardKeyDesc
-	dw MachinePartDesc
+	dw HeavyBootsDesc
 	dw EggTicketDesc
 	dw TangelaCallDesc
 	dw StardustDesc
@@ -761,9 +761,9 @@ CardKeyDesc:
 	db   "Opens shutters in"
 	next "the RADIO TOWER.@"
 
-MachinePartDesc:
-	db   "A machine part for"
-	next "the POWER PLANT.@"
+HeavyBootsDesc:
+	db   "Grants immunity"
+	next "to field hazards.@"
 
 EggTicketDesc:
 	db   "May use at Golden-"

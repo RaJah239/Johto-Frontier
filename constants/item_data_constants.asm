@@ -141,7 +141,7 @@ DEF MAIL_STRUCT_LENGTH_JP EQU $2a ; mailmsg_jp struct
 
 	const_next 70
 	const HELD_CATCH_CHANCE
-	const HELD_71
+	const HELD_HEAVY_BOOTS
 	const HELD_ESCAPE
 	const HELD_CRITICAL_UP
 	const HELD_QUICK_CLAW

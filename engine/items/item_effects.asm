@@ -141,7 +141,7 @@ ItemEffects:
 	dw NoEffect            ; HARD_STONE
 	dw NoEffect            ; LUCKY_EGG
 	dw CardKeyEffect       ; CARD_KEY
-	dw NoEffect            ; MACHINE_PART
+	dw NoEffect            ; HEAVY_BOOTS
 	dw NoEffect            ; EGG_TICKET
 	dw TangelaCallEffect   ; TANGELA_CALL
 	dw NoEffect            ; STARDUST

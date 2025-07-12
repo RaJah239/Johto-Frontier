@@ -133,7 +133,7 @@
 	const HARD_STONE   ; 7d
 	const LUCKY_EGG    ; 7e
 	const CARD_KEY     ; 7f
-	const MACHINE_PART ; 80
+	const HEAVY_BOOTS  ; 80
 	const EGG_TICKET   ; 81
 	const TANGELA_CALL ; 82
 	const STARDUST     ; 83

@@ -127,7 +127,7 @@ ItemNames::
 	li "Hard Stone"
 	li "Lucky Egg"
 	li "Card Key"
-	li "Machine Part"
+	li "Heavy Boots"
 	li "Egg Ticket"
 	li "Tangela Call"
 	li "Stardust"

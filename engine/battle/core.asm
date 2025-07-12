@@ -3643,6 +3643,17 @@ BreakAttraction:
 	ret
 
 SpikesDamage:
+	ld a, [wBattleHasJustStarted]
+	and a
+	ret nz
+
+	callfar GetUserItem
+	ld a, b
+	cp HELD_HEAVY_BOOTS
+	ret z
+
+    call ClearFailures
+
 	ld hl, wPlayerScreens
 	ld de, wBattleMonType
 	ld bc, UpdatePlayerHUD
@@ -8911,3 +8922,10 @@ FieldWeather:
 	call Call_PlayBattleAnim
 	ld hl, SunGotBrightText
 	jp StdBattleTextbox
+
+ClearFailures:
+	xor a
+	ld [wFailedMessage], a
+	ld [wEffectFailed], a
+	ld [wAttackMissed], a
+	ret
