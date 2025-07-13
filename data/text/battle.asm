@@ -588,6 +588,11 @@ UnaffectedText:
 	line "unaffected!"
 	prompt
 
+ClearFieldText:
+	text "The field was"
+	line "swept clear!"
+	prompt
+
 DoesntAffectText:
 	text "It doesn't affect"
 	line "<TARGET>!"

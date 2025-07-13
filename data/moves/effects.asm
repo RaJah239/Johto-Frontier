@@ -2059,3 +2059,10 @@ StickyWeb:
 	doturn
 	stickyweb
 	endmove
+
+Defog:
+	checkobedience
+	usedmovetext
+	doturn
+	defog
+	endmove

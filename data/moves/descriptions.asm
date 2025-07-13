@@ -217,7 +217,7 @@ MoveDescriptions::
 	dw SleepTalkDescription
 	dw HealBellDescription
 	dw ReturnDescription
-	dw PresentDescription
+	dw DefogDescription
 	dw FrustrationDescription
 	dw SafeguardDescription
 	dw PainSplitDescription
@@ -1123,9 +1123,9 @@ ReturnDescription:
 	db   "An attack that is"
 	line "based on loyalty.@"
 
-PresentDescription:
-	db   "A bomb that may"
-	line "restore HP.@"
+DefogDescription:
+	db   "Clears the field"
+	line "of all effects.@"
 
 FrustrationDescription:
 	db   "An attack based on"

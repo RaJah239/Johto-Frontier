@@ -177,6 +177,7 @@ ENDM
 	command stealthrock
 	command toxicspikes
 	command stickyweb
+	command defog
 DEF NUM_EFFECT_COMMANDS EQU const_value - 1
 
 	const_def -1, -1

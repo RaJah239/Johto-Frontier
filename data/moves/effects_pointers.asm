@@ -159,4 +159,5 @@ MoveEffectsPointers:
 	dw StealthRock
 	dw ToxicSpikes
 	dw StickyWeb
+	dw Defog
 	assert_table_length NUM_MOVE_EFFECTS

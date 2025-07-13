@@ -216,7 +216,7 @@ MoveNames::
 	li "Sleep Talk"
 	li "Heal Bell"
 	li "Return"
-	li "Present"
+	li "Defog"
 	li "Frustration"
 	li "Safeguard"
 	li "Pain Split"
