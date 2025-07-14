@@ -127,7 +127,7 @@ MoveNames::
 	li "Bone Club"
 	li "Fire Blast"
 	li "Waterfall"
-	li "Clamp"
+	li "Bullet Punch"
 	li "Swift"
 	li "Skull Bash"
 	li "Spike Cannon"
