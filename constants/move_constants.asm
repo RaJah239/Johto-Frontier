@@ -15,9 +15,9 @@
 	const FIRE_PUNCH   ; 07
 	const ICE_PUNCH    ; 08
 	const THUNDERPUNCH ; 09
-	const AQUA_JET      ; 0a
+	const AQUA_JET     ; 0a
 	const BULK_UP      ; 0b
-	const GUILLOTINE   ; 0c
+	const FLASH_CANNON ; 0c
 	const RAZOR_WIND   ; 0d
 	const SWORDS_DANCE ; 0e
 	const CUT          ; 0f

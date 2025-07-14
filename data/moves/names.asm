@@ -11,7 +11,7 @@ MoveNames::
 	li "ThunderPunch"
 	li "Aqua Jet"
 	li "Bulk Up"
-	li "Guillotine"
+	li "Flash Cannon"
 	li "Razor Wind"
 	li "Swords Dance"
 	li "Cut"

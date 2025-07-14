@@ -13,7 +13,7 @@ BattleAnimations::
 	dw BattleAnim_Thunderpunch
 	dw BattleAnim_AquaJet
 	dw BattleAnim_BulkUp
-	dw BattleAnim_Guillotine
+	dw BattleAnim_FlashCannon
 	dw BattleAnim_RazorWind
 	dw BattleAnim_SwordsDance
 	dw BattleAnim_Cut
@@ -2710,20 +2710,50 @@ BattleAnim_DrillPeck:
 	anim_wait 16
 	anim_ret
 
-BattleAnim_Guillotine:
-	anim_1gfx BATTLE_ANIM_GFX_CUT
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $10
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $40, $2, $0
-	anim_sound 0, 1, SFX_VICEGRIP
-	anim_obj BATTLE_ANIM_OBJ_CUT_DOWN_LEFT, 156, 44, $0
-	anim_obj BATTLE_ANIM_OBJ_CUT_DOWN_LEFT, 152, 40, $0
-	anim_obj BATTLE_ANIM_OBJ_CUT_DOWN_LEFT, 148, 36, $0
-	anim_obj BATTLE_ANIM_OBJ_CUT_UP_RIGHT, 124, 76, $0
-	anim_obj BATTLE_ANIM_OBJ_CUT_UP_RIGHT, 120, 72, $0
-	anim_obj BATTLE_ANIM_OBJ_CUT_UP_RIGHT, 116, 68, $0
-	anim_obj BATTLE_ANIM_OBJ_CUT_UP_RIGHT, 120, 72, $0
+BattleAnim_FlashCannon:
+	anim_2gfx BATTLE_ANIM_GFX_ICE, BATTLE_ANIM_GFX_SPEED
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_bgeffect BATTLE_BG_EFFECT_ALTERNATE_HUES, $0, $2, $0
+	anim_sound 0, 0, SFX_FLASH
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $0
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $8
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $10
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $18
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $20
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $28
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $30
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $38
+	anim_wait 16
+	
+.loop
+	anim_sound 6, 2, SFX_SHINE
+	anim_obj ANIM_OBJ_POWER_GEM2, 64, 92, $4
+	anim_wait 4
+	anim_loop 20, .loop
 	anim_wait 32
 	anim_ret
+
+;BattleAnim_FlashCannon:
+;	anim_1gfx BATTLE_ANIM_GFX_CUT
+;	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $10
+;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $40, $2, $0
+;	anim_sound 0, 1, SFX_VICEGRIP
+;	anim_obj BATTLE_ANIM_OBJ_CUT_DOWN_LEFT, 156, 44, $0
+;	anim_obj BATTLE_ANIM_OBJ_CUT_DOWN_LEFT, 152, 40, $0
+;	anim_obj BATTLE_ANIM_OBJ_CUT_DOWN_LEFT, 148, 36, $0
+;	anim_obj BATTLE_ANIM_OBJ_CUT_UP_RIGHT, 124, 76, $0
+;	anim_obj BATTLE_ANIM_OBJ_CUT_UP_RIGHT, 120, 72, $0
+;	anim_obj BATTLE_ANIM_OBJ_CUT_UP_RIGHT, 116, 68, $0
+;	anim_obj BATTLE_ANIM_OBJ_CUT_UP_RIGHT, 120, 72, $0
+;	anim_wait 32
+;	anim_ret
 
 BattleAnim_Flash:
 	anim_1gfx BATTLE_ANIM_GFX_SPEED
