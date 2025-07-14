@@ -49,7 +49,7 @@ MoveDescriptions::
 	dw RoarDescription
 	dw SingDescription
 	dw SupersonicDescription
-	dw SonicboomDescription
+	dw NastyPlotDescription
 	dw DisableDescription
 	dw AcidDescription
 	dw EmberDescription
@@ -463,9 +463,9 @@ SupersonicDescription:
 	db   "Sound waves that"
 	line "cause confusion.@"
 
-SonicboomDescription:
-	db   "Always inflicts"
-	line "20HP damage.@"
+NastyPlotDescription:
+	db   "Sharply increases"
+	line "user's Spcl.Atk.@"
 
 DisableDescription:
 	db   "Disables the foe's"

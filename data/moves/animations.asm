@@ -50,7 +50,7 @@ BattleAnimations::
 	dw BattleAnim_Roar
 	dw BattleAnim_Sing
 	dw BattleAnim_Supersonic
-	dw BattleAnim_Sonicboom
+	dw BattleAnim_NastyPlot
 	dw BattleAnim_Disable
 	dw BattleAnim_Acid
 	dw BattleAnim_Ember
@@ -1393,7 +1393,6 @@ BattleAnim_RazorWind:
 	anim_ret
 
 BattleAnim_Gust:
-BattleAnim_Sonicboom:
 	anim_2gfx BATTLE_ANIM_GFX_WIND, BATTLE_ANIM_GFX_HIT
 .loop
 	anim_sound 0, 1, SFX_RAZOR_WIND
@@ -4522,6 +4521,22 @@ BattleAnim_ToxicSpikes:
 	anim_sound 6, 2, SFX_TOXIC
 	anim_obj BATTLE_ANIM_OBJ_SLUDGE_BOMB, 48, 88, $28
 	anim_wait 64
+	anim_ret
+
+;BattleAnim_PsychUp:
+BattleAnim_NastyPlot:
+	anim_1gfx BATTLE_ANIM_GFX_STATUS
+	anim_call BattleAnim_TargetObj_1Row
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, BG_EFFECT_USER, $20
+	anim_sound 0, 0, SFX_PSYBEAM
+	anim_obj BATTLE_ANIM_OBJ_PSYCH_UP, 44, 88, $0
+	anim_obj BATTLE_ANIM_OBJ_PSYCH_UP, 44, 88, $10
+	anim_obj BATTLE_ANIM_OBJ_PSYCH_UP, 44, 88, $20
+	anim_obj BATTLE_ANIM_OBJ_PSYCH_UP, 44, 88, $30
+	anim_wait 64
+	anim_incbgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING
+	anim_call BattleAnim_ShowMon_0
+	anim_wait 16
 	anim_ret
 
 BattleAnim_Extremespeed:

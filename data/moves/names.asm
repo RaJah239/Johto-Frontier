@@ -48,7 +48,7 @@ MoveNames::
 	li "Roar"
 	li "Sing"
 	li "Supersonic"
-	li "Sonicboom"
+	li "Nasty Plot"
 	li "Disable"
 	li "Acid"
 	li "Ember"
