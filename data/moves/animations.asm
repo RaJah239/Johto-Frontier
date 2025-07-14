@@ -3563,22 +3563,21 @@ BattleAnim_Spite:
 	anim_ret
 
 BattleAnim_PowderSnow:
-	anim_1gfx BATTLE_ANIM_GFX_ICE
-.loop
-	anim_sound 6, 2, SFX_SHINE
-	anim_obj BATTLE_ANIM_OBJ_POWDER_SNOW, 64, 88, $23
-	anim_wait 2
-	anim_sound 6, 2, SFX_SHINE
-	anim_obj BATTLE_ANIM_OBJ_POWDER_SNOW, 64, 80, $24
-	anim_wait 2
-	anim_sound 6, 2, SFX_SHINE
-	anim_obj BATTLE_ANIM_OBJ_POWDER_SNOW, 64, 96, $23
-	anim_wait 2
-	anim_loop 2, .loop
+	anim_1gfx BATTLE_ANIM_GFX_POWDER
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
 	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
-	anim_wait 40
-	anim_call BattleAnimSub_Ice
-	anim_wait 32
+	anim_obj BATTLE_ANIM_OBJ_HAIL, 11, 0,  0, 0, $0
+	anim_wait 8
+	anim_obj BATTLE_ANIM_OBJ_HAIL,  9, 0,  0, 0, $1
+	anim_wait 8
+	anim_obj BATTLE_ANIM_OBJ_HAIL,  7, 0,  0, 0, $2
+.loop
+	anim_sound 0, 1, SFX_SHINE
+	anim_wait 4
+	anim_sound 0, 0, SFX_SHINE
+	anim_wait 4
+	anim_loop 7, .loop
+	anim_wait 8
 	anim_ret
 
 BattleAnim_Protect:
@@ -5085,4 +5084,23 @@ BattleAnimSub_SpeedLines:
 ;	anim_wait 24
 ;	anim_incbgeffect BATTLE_BG_EFFECT_DOUBLE_TEAM
 ;	anim_call BattleAnim_ShowMon_0
+;	anim_ret
+
+;BattleAnim_PowderSnow:
+;	anim_1gfx BATTLE_ANIM_GFX_ICE
+;.loop
+;	anim_sound 6, 2, SFX_SHINE
+;	anim_obj BATTLE_ANIM_OBJ_POWDER_SNOW, 64, 88, $23
+;	anim_wait 2
+;	anim_sound 6, 2, SFX_SHINE
+;	anim_obj BATTLE_ANIM_OBJ_POWDER_SNOW, 64, 80, $24
+;	anim_wait 2
+;	anim_sound 6, 2, SFX_SHINE
+;	anim_obj BATTLE_ANIM_OBJ_POWDER_SNOW, 64, 96, $23
+;	anim_wait 2
+;	anim_loop 2, .loop
+;	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
+;	anim_wait 40
+;	anim_call BattleAnimSub_Ice
+;	anim_wait 32
 ;	anim_ret
