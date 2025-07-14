@@ -2,7 +2,7 @@ BattleAnimations::
 ; entries correspond to constants/move_constants.asm
 	table_width 2, BattleAnimations
 	dw BattleAnim_Dummy
-	dw BattleAnim_Pound
+	dw BattleAnim_ZenHeadbutt
 	dw BattleAnim_KarateChop
 	dw BattleAnim_BugBite
 	dw BattleAnim_CometPunch
@@ -629,15 +629,6 @@ BattleAnim_Wobble:
 BattleAnim_Shake:
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $20, $2, $40
 	anim_wait 40
-	anim_ret
-
-BattleAnim_Pound:
-	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_sound 0, 1, SFX_POUND
-	anim_obj BATTLE_ANIM_OBJ_PALM, 136, 56, $0
-	anim_wait 6
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
-	anim_wait 16
 	anim_ret
 
 BattleAnim_KarateChop:
@@ -3060,15 +3051,29 @@ BattleAnim_SeismicToss:
 	anim_wait 16
 	anim_ret
 
+BattleAnim_ZenHeadbutt:
+	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_HIT
+	anim_call BattleAnim_TargetObj_1Row
+	;anim_battlergfx_1row
+	anim_sound 0, 0, SFX_PSYCHIC
+	anim_bgeffect BATTLE_BG_EFFECT_TELEPORT, $0, $1, $0
+	anim_wait 32
+	anim_call BattleAnim_PartialHeadbutt
+	anim_ret
+
 BattleAnim_Headbutt:
 	anim_1gfx BATTLE_ANIM_GFX_HIT
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $14, $2, $0
 	anim_wait 32
 	anim_call BattleAnim_TargetObj_1Row
+	anim_call BattleAnim_PartialHeadbutt
+	anim_ret
+
+BattleAnim_PartialHeadbutt:
 	anim_bgeffect BATTLE_BG_EFFECT_TACKLE, $0, BG_EFFECT_USER, $0
 	anim_wait 4
 	anim_sound 0, 1, SFX_HEADBUTT
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
+	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 56, $0
 	anim_wait 8
 	anim_call BattleAnim_ShowMon_0
 	anim_ret

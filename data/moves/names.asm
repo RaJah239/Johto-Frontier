@@ -1,6 +1,6 @@
 MoveNames::
 	list_start MoveNames
-	li "Pound"
+	li "Zen Headbutt"
 	li "Karate Chop"
 	li "Bug Bite"
 	li "Comet Punch"

@@ -6,7 +6,7 @@
 ; - BattleAnimations (see data/moves/animations.asm)
 	const_def
 	const NO_MOVE      ; 00
-	const POUND        ; 01
+	const ZEN_HEADBUTT ; 01
 	const KARATE_CHOP  ; 02
 	const BUG_BITE     ; 03
 	const COMET_PUNCH  ; 04
