@@ -9,7 +9,7 @@ MoveNames::
 	li "Fire Punch"
 	li "Ice Punch"
 	li "ThunderPunch"
-	li "Scratch"
+	li "Aqua Jet"
 	li "Bulk Up"
 	li "Guillotine"
 	li "Razor Wind"
