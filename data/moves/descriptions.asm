@@ -222,7 +222,7 @@ MoveDescriptions::
 	dw SafeguardDescription
 	dw PainSplitDescription
 	dw SacredFireDescription
-	dw MagnitudeDescription
+	dw QuiverDanceDescription
 	dw DynamicpunchDescription
 	dw MegahornDescription
 	dw DragonbreathDescription
@@ -1143,9 +1143,9 @@ SacredFireDescription:
 	db   "An attack that may"
 	line "inflict a burn.@"
 
-MagnitudeDescription:
-	db   "A ground attack"
-	line "with random power.@"
+QuiverDanceDescription:
+	db   "Raises Special"
+	line "stats and Speed.@"
 
 DynamicpunchDescription:
 	db   "An attack that"

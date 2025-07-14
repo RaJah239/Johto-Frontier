@@ -221,7 +221,7 @@ MoveNames::
 	li "Safeguard"
 	li "Pain Split"
 	li "Sacred Fire"
-	li "Magnitude"
+	li "Quiver Dance"
 	li "Dynamicpunch"
 	li "Megahorn"
 	li "DragonBreath"

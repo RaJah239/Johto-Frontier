@@ -223,7 +223,7 @@ BattleAnimations::
 	dw BattleAnim_Safeguard
 	dw BattleAnim_PainSplit
 	dw BattleAnim_SacredFire
-	dw BattleAnim_Magnitude
+	dw BattleAnim_QuiverDance
 	dw BattleAnim_Dynamicpunch
 	dw BattleAnim_Megahorn
 	dw BattleAnim_Dragonbreath
@@ -3223,6 +3223,7 @@ BattleAnim_SpiderWeb:
 	anim_wait 64
 	anim_ret
 
+BattleAnim_QuiverDance:
 BattleAnim_DragonDance:
 	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_CHARGE
 	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
@@ -4114,25 +4115,6 @@ BattleAnim_SacredFire:
 	anim_wait 4
 	anim_incobj 9
 	anim_wait 8
-	anim_ret
-
-BattleAnim_Magnitude:
-	anim_1gfx BATTLE_ANIM_GFX_ROCKS
-.loop
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $e, $4, $0
-	anim_sound 0, 1, SFX_STRENGTH
-	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 128, 64, $40
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 120, 68, $30
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 152, 68, $30
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 144, 64, $40
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 136, 68, $30
-	anim_wait 2
-	anim_jumpuntil .loop
-	anim_wait 96
 	anim_ret
 
 BattleAnim_Dynamicpunch:

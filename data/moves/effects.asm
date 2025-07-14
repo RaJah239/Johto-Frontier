@@ -2087,3 +2087,10 @@ DragonDance:
 	doturn
 	dragondance
 	endmove
+
+QuiverDance:
+	checkobedience
+	usedmovetext
+	doturn
+	quiverdance
+	endmove
