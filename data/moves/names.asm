@@ -98,7 +98,7 @@ MoveNames::
 	li "Meditate"
 	li "Agility"
 	li "Quick Attack"
-	li "Rage"
+	li "Iron Head"
 	li "Teleport"
 	li "Night Shade"
 	li "Mimic"
