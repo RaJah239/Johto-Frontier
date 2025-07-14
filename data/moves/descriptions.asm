@@ -152,7 +152,7 @@ MoveDescriptions::
 	dw PsywaveDescription
 	dw SplashDescription
 	dw AcidArmorDescription
-	dw CrabhammerDescription
+	dw FairyFlashDescription
 	dw ExplosionDescription
 	dw FurySwipesDescription
 	dw BonemerangDescription
@@ -507,9 +507,10 @@ BubblebeamDescription:
 	db   "An attack that may"
 	line "lower SPEED.@"
 
+FairyFlashDescription:
 AuroraBeamDescription:
 	db   "An attack that may"
-	line "lower ATTACK.@"
+	line "lower Attack.@"
 
 HyperBeamDescription:
     db "Attack, then skip"
@@ -849,10 +850,6 @@ SplashDescription:
 AcidArmorDescription:
 	db   "Sharply raises the"
 	line "user's DEFENSE.@"
-
-CrabhammerDescription:
-	db   "Has a high criti-"
-	line "cal hit ratio.@"
 
 ExplosionDescription:
 	db   "Very powerful but"

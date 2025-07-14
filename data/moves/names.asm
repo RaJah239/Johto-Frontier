@@ -151,7 +151,7 @@ MoveNames::
 	li "Psywave"
 	li "Splash"
 	li "Acid Armor"
-	li "Crabhammer"
+	li "Fairy Flash"
 	li "Explosion"
 	li "Fury Swipes"
 	li "Bonemerang"

@@ -7,7 +7,5 @@ RainDanceMoves:
 	db BUBBLEBEAM
 	db THUNDER
 	db WATERFALL
-	db CRABHAMMER
-	db OCTAZOOKA
 	db WHIRLPOOL
 	db -1 ; end
