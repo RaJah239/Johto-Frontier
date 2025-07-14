@@ -6472,6 +6472,8 @@ INCLUDE "engine/battle/move_effects/curse.asm"
 
 INCLUDE "engine/battle/move_effects/protect.asm"
 
+INCLUDE "engine/battle/move_effects/bulk_up.asm"
+
 INCLUDE "engine/battle/move_effects/stealth_rock.asm"
 
 INCLUDE "engine/battle/move_effects/defog.asm"

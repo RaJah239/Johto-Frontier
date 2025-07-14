@@ -10,7 +10,7 @@ MoveNames::
 	li "Ice Punch"
 	li "ThunderPunch"
 	li "Scratch"
-	li "Vicegrip"
+	li "Bulk Up"
 	li "Guillotine"
 	li "Razor Wind"
 	li "Swords Dance"

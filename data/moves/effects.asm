@@ -2066,3 +2066,10 @@ Defog:
 	doturn
 	defog
 	endmove
+
+BulkUp:
+	checkobedience
+	usedmovetext
+	doturn
+	bulkup
+	endmove
