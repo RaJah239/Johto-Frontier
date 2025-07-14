@@ -161,4 +161,5 @@ MoveEffectsPointers:
 	dw StickyWeb
 	dw Defog
 	dw BulkUp
+	dw CalmMind
 	assert_table_length NUM_MOVE_EFFECTS

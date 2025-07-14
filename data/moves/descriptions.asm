@@ -145,7 +145,7 @@ MoveDescriptions::
 	dw LovelyKissDescription
 	dw SkyAttackDescription
 	dw TransformDescription
-	dw BubbleDescription
+	dw CalmMindDescription
 	dw DizzyPunchDescription
 	dw SporeDescription
 	dw FlashDescription
@@ -839,9 +839,9 @@ TransformDescription:
 	db   "The user assumes"
 	line "the foe's guise.@"
 
-BubbleDescription:
-	db   "An attack that may"
-	line "reduce SPEED.@"
+CalmMindDescription:
+	db   "Raise Sp.Atk and"
+	line "Sp.Def stats.@"
 
 DizzyPunchDescription:
 	db   "An attack that may"

@@ -2073,3 +2073,10 @@ BulkUp:
 	doturn
 	bulkup
 	endmove
+
+CalmMind:
+	checkobedience
+	usedmovetext
+	doturn
+	calmmind
+	endmove

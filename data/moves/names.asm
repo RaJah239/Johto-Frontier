@@ -144,7 +144,7 @@ MoveNames::
 	li "Lovely Kiss"
 	li "Sky Attack"
 	li "Transform"
-	li "Bubble"
+	li "Calm Mind"
 	li "Dizzy Punch"
 	li "Spore"
 	li "Flash"
