@@ -5,13 +5,6 @@ BattleText_QuickClaw:
 	line "Quick Claw procs!"
 	prompt
 
-BattleText_PlayerPickedUpPayDayMoney:
-	text "<PLAYER> picked up"
-	line "¥@"
-	text_decimal wPayDayMoney, 3, 6
-	text "!"
-	prompt
-
 WildPokemonAppearedText:
 	text "Wild @"
 	text_ram wEnemyMonNickname
@@ -845,11 +838,6 @@ WasDisabledText:
 	text_ram wStringBuffer1
 	text " was"
 	cont "DISABLED!"
-	prompt
-
-CoinsScatteredText:
-	text "Coins scattered"
-	line "everywhere!"
 	prompt
 
 TransformedTypeText:

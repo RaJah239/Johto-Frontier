@@ -749,27 +749,6 @@ AllUpHit:
 	buildopponentrage
 	endmove
 
-PayDay:
-	checkobedience
-	usedmovetext
-	doturn
-	critical
-	damagestats
-	damagecalc
-	stab
-	damagevariation
-	checkhit
-	moveanim
-	failuretext
-	applydamage
-	criticaltext
-	supereffectivetext
-	payday
-	checkfaint
-	buildopponentrage
-	kingsrock
-	endmove
-
 Conversion:
 	checkobedience
 	usedmovetext

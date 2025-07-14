@@ -572,9 +572,8 @@ BattleTowerMartTutorScientistScript:
     ret
 
 .FullMoveList:
-    db 20 ; list length
+    db 19 ; list length
 ; list items
-    db PAY_DAY, 4
     db TELEPORT, 1
     db MEGA_PUNCH, 3
     db PSYWAVE, 2

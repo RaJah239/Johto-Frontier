@@ -33,7 +33,6 @@ ENDM
 	command selfdestruct            ; 1a
 	command statup                  ; 1c
 	command statdown                ; 1d
-	command payday                  ; 1e
 	command conversion              ; 1f
 	command resetstats              ; 20
 	command forceswitch             ; 23

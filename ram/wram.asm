@@ -505,7 +505,7 @@ wEnemyItemState:: db
 wCurEnemyMoveNum:: db
 
 wEnemyHPAtTimeOfPlayerSwitch:: dw
-wPayDayMoney:: ds 3
+wPayDayMoney:: ds 3 ; need to remove this
 
 wSafariMonEating:: db
 	ds 1

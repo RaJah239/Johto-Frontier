@@ -320,7 +320,6 @@ DEF MT01 EQU const_value
 	add_mt SKY_ATTACK
 	add_mt OUTRAGE
 	add_mt SURF
-	add_mt PAY_DAY
 	add_mt TELEPORT
 	add_mt MEGA_PUNCH
 	add_mt PSYWAVE

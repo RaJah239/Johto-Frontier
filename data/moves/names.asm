@@ -5,7 +5,7 @@ MoveNames::
 	li "Bug Bite"
 	li "Comet Punch"
 	li "Mega Punch"
-	li "Pay Day"
+	li "Play Rough"
 	li "Fire Punch"
 	li "Ice Punch"
 	li "ThunderPunch"

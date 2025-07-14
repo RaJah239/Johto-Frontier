@@ -7,7 +7,7 @@ BattleAnimations::
 	dw BattleAnim_BugBite
 	dw BattleAnim_CometPunch
 	dw BattleAnim_MegaPunch
-	dw BattleAnim_PayDay
+	dw BattleAnim_PlayRough
 	dw BattleAnim_FirePunch
 	dw BattleAnim_IcePunch
 	dw BattleAnim_Thunderpunch
@@ -1018,7 +1018,7 @@ BattleAnim_MoonBlast: ; unused atm
 	anim_wait 21
 	anim_ret
 
-BattleAnim_PlayRough: ; unused atm
+BattleAnim_PlayRough:
 	anim_1gfx BATTLE_ANIM_GFX_SPEED
 	anim_sound 6, 2, SFX_THROW_BALL
 	anim_bgeffect BATTLE_BG_EFFECT_HIDE_MON, $0, $1, $0
@@ -2560,15 +2560,15 @@ BattleAnim_Barrage:
 	anim_wait 16
 	anim_ret
 
-BattleAnim_PayDay:
-	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_STATUS
-	anim_sound 0, 1, SFX_POUND
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 128, 56, $0
-	anim_wait 16
-	anim_sound 0, 1, SFX_PAY_DAY
-	anim_obj BATTLE_ANIM_OBJ_PAY_DAY, 120, 76, $1
-	anim_wait 64
-	anim_ret
+;BattleAnim_PayDay:
+;	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_STATUS
+;	anim_sound 0, 1, SFX_POUND
+;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 128, 56, $0
+;	anim_wait 16
+;	anim_sound 0, 1, SFX_PAY_DAY
+;	anim_obj BATTLE_ANIM_OBJ_PAY_DAY, 120, 76, $1
+;	anim_wait 64
+;	anim_ret
 
 BattleAnim_Mimic:
 	anim_1gfx BATTLE_ANIM_GFX_SPEED

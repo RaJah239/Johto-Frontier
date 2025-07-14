@@ -6,7 +6,7 @@ MoveDescriptions::
 	dw BugBiteDescription
 	dw CometPunchDescription
 	dw MegaPunchDescription
-	dw PayDayDescription
+	dw PlayRoughDescription
 	dw FirePunchDescription
 	dw IcePunchDescription
 	dw ThunderpunchDescription
@@ -284,10 +284,6 @@ MegaPunchDescription:
 	db   "A powerful punch"
 	line "thrown very hard.@"
 
-PayDayDescription:
-	db   "Throws coins. Gets"
-	line "them back later.@"
-
 FirePunchDescription:
 	db   "A fiery punch. May"
 	line "cause a burn.@"
@@ -507,6 +503,7 @@ BubblebeamDescription:
 	db   "An attack that may"
 	line "lower SPEED.@"
 
+PlayRoughDescription:
 FairyFlashDescription:
 AuroraBeamDescription:
 	db   "An attack that may"
