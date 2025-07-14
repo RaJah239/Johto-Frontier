@@ -5,7 +5,7 @@ MoveDescriptions::
 	dw KarateChopDescription
 	dw BugBiteDescription
 	dw CometPunchDescription
-	dw MegaPunchDescription
+	dw MoonblastDescription
 	dw PlayRoughDescription
 	dw FirePunchDescription
 	dw IcePunchDescription
@@ -279,10 +279,6 @@ KarateChopDescription:
 CometPunchDescription:
 	db   "Repeatedly punches"
 	line "2-5 times.@"
-
-MegaPunchDescription:
-	db   "A powerful punch"
-	line "thrown very hard.@"
 
 FirePunchDescription:
 	db   "A fiery punch. May"
@@ -637,6 +633,10 @@ BugBuzzDescription:
 PsychicMDescription:
 	db   "An attack that may"
 	line "lower Spcl.Def.@"
+
+MoonblastDescription:
+	db   "An attack that may"
+	line "lower Spcl.Atk.@"
 
 HypnosisDescription:
 	db   "May put the foe to"

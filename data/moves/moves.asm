@@ -18,7 +18,7 @@ Moves:
 	move KARATE_CHOP,  EFFECT_NORMAL_HIT,         50, FIGHTING,      PHYSICAL, 100, 25,   0
 	move BUG_BITE,     EFFECT_THIEF,              40, BUG,           PHYSICAL, 100, 24, 100
 	move COMET_PUNCH,  EFFECT_MULTI_HIT,          18, NORMAL,        PHYSICAL,  85, 15,   0
-	move MEGA_PUNCH,   EFFECT_NORMAL_HIT,         80, NORMAL,        PHYSICAL,  85, 20,   0
+	move MOONBLAST,    EFFECT_SP_ATK_DOWN_HIT,    95, FAIRY,         SPECIAL,  100, 24,  30
 	move PLAY_ROUGH,   EFFECT_ATTACK_DOWN_HIT,    90, FAIRY,         PHYSICAL, 100, 24,  10
 	move FIRE_PUNCH,   EFFECT_BURN_HIT,           75, FIRE,          PHYSICAL, 100, 15,  10
 	move ICE_PUNCH,    EFFECT_FREEZE_HIT,         75, ICE,           PHYSICAL, 100, 15,  10

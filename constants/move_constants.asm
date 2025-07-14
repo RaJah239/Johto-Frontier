@@ -10,7 +10,7 @@
 	const KARATE_CHOP  ; 02
 	const BUG_BITE     ; 03
 	const COMET_PUNCH  ; 04
-	const MEGA_PUNCH   ; 05
+	const MOONBLAST    ; 05
 	const PLAY_ROUGH   ; 06
 	const FIRE_PUNCH   ; 07
 	const ICE_PUNCH    ; 08

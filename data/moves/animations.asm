@@ -6,7 +6,7 @@ BattleAnimations::
 	dw BattleAnim_KarateChop
 	dw BattleAnim_BugBite
 	dw BattleAnim_CometPunch
-	dw BattleAnim_MegaPunch
+	dw BattleAnim_Moonblast
 	dw BattleAnim_PlayRough
 	dw BattleAnim_FirePunch
 	dw BattleAnim_IcePunch
@@ -734,21 +734,6 @@ BattleAnim_CometPunch:
 	anim_wait 8
 	anim_ret
 
-BattleAnim_MegaPunch:
-	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $40, $2, $0
-	anim_wait 48
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $3
-.loop
-	anim_sound 0, 1, SFX_MEGA_PUNCH
-	anim_obj BATTLE_ANIM_OBJ_PUNCH, 136, 56, $0
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 56, $0
-	anim_wait 6
-	anim_obj BATTLE_ANIM_OBJ_PUNCH, 136, 56, $0
-	anim_wait 6
-	anim_loop 3, .loop
-	anim_ret
-
 BattleAnim_Stomp:
 	anim_1gfx BATTLE_ANIM_GFX_HIT
 	anim_sound 0, 1, SFX_STOMP
@@ -990,7 +975,7 @@ BattleAnim_IcePunch:
 	anim_wait 32
 	anim_ret
 
-BattleAnim_MoonBlast: ; unused atm
+BattleAnim_Moonblast:
 	anim_3gfx BATTLE_ANIM_GFX_GLOBE, BATTLE_ANIM_GFX_SHINE, BATTLE_ANIM_GFX_CHARGE
 	anim_bgp $1b
 	anim_obj ANIM_OBJ_MOON, 44, 104, $1

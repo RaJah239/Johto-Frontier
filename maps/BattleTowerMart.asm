@@ -572,11 +572,9 @@ BattleTowerMartTutorScientistScript:
     ret
 
 .FullMoveList:
-    db 19 ; list length
+    db 17 ; list length
 ; list items
     db TELEPORT, 1
-    db MEGA_PUNCH, 3
-    db PSYWAVE, 2
     db SEISMIC_TOSS, 6
     db BUBBLEBEAM, 6
     db REFLECT, 4
