@@ -140,7 +140,6 @@ ROMX $31
 	"Sprites 2"
 ROMX $32
 	"bank32"
-	"The End"
 ROMX $33
 	"Move Animations"
 ROMX $34
@@ -296,6 +295,8 @@ ROMX $73
 	"Pokedex Entries 129-192"
 ROMX $74
 	"Pokedex Entries 193-251"
+ROMX $75
+	"The End"
 ROMX $77
 	"Unown Font"
 	"Print Party"

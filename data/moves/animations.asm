@@ -4,7 +4,7 @@ BattleAnimations::
 	dw BattleAnim_Dummy
 	dw BattleAnim_Pound
 	dw BattleAnim_KarateChop
-	dw BattleAnim_Doubleslap
+	dw BattleAnim_BugBite
 	dw BattleAnim_CometPunch
 	dw BattleAnim_MegaPunch
 	dw BattleAnim_PayDay
@@ -664,14 +664,27 @@ BattleAnim_KarateChop:
 	anim_wait 16
 	anim_ret
 
-BattleAnim_Doubleslap:
-	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_if_param_equal $1, .alternate
-	anim_sound 0, 1, SFX_DOUBLESLAP
-	anim_obj BATTLE_ANIM_OBJ_PALM, 144, 48, $0
-	anim_wait 6
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 144, 48, $0
-	anim_wait 8
+BattleAnim_BugBite:
+	anim_2gfx BATTLE_ANIM_GFX_ROCKS, BATTLE_ANIM_GFX_HIT
+.loop
+	anim_sound 0, 1, SFX_BITE
+	anim_obj BATTLE_ANIM_OBJ_HIT_SMALL_YFIX, 132, 64, $0
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 132, 64, $5c
+	anim_wait 4
+	anim_sound 0, 1, SFX_BITE
+	anim_obj BATTLE_ANIM_OBJ_HIT_SMALL_YFIX, 128, 48, $0
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 48, $5c
+	anim_wait 4
+	anim_sound 0, 1, SFX_BITE
+	anim_obj BATTLE_ANIM_OBJ_HIT_SMALL_YFIX, 144, 56, $0
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 144, 56, $d0
+	anim_wait 4
+	anim_sound 0, 1, SFX_BITE
+	anim_obj BATTLE_ANIM_OBJ_HIT_SMALL_YFIX, 122, 52, $0
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 122, 52, $50
+	anim_wait 4
+	anim_loop 5, .loop
+	anim_wait 32
 	anim_ret
 
 .alternate:

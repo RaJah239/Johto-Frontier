@@ -8,7 +8,7 @@
 	const NO_MOVE      ; 00
 	const POUND        ; 01
 	const KARATE_CHOP  ; 02
-	const DOUBLESLAP   ; 03
+	const BUG_BITE     ; 03
 	const COMET_PUNCH  ; 04
 	const MEGA_PUNCH   ; 05
 	const PAY_DAY      ; 06

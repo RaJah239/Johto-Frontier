@@ -2,7 +2,7 @@ MoveNames::
 	list_start MoveNames
 	li "Pound"
 	li "Karate Chop"
-	li "DoubleSlap"
+	li "Bug Bite"
 	li "Comet Punch"
 	li "Mega Punch"
 	li "Pay Day"

@@ -3,7 +3,7 @@ MoveDescriptions::
 	table_width 2, MoveDescriptions
 	dw PoundDescription
 	dw KarateChopDescription
-	dw DoubleslapDescription
+	dw BugBiteDescription
 	dw CometPunchDescription
 	dw MegaPunchDescription
 	dw PayDayDescription
@@ -275,10 +275,6 @@ XScissorDescription:
 KarateChopDescription:
 	db   "Has a high criti-"
 	line "cal hit ratio.@"
-
-DoubleslapDescription:
-	db   "Repeatedly slaps"
-	line "2-5 times.@"
 
 CometPunchDescription:
 	db   "Repeatedly punches"
@@ -928,6 +924,7 @@ TripleKickDescription:
 	db   "Hits three times"
 	line "with rising power.@"
 
+BugBiteDescription:
 ThiefDescription:
 	db   "An attack that may"
 	line "steal a held item.@"
