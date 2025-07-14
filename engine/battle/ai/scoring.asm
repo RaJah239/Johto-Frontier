@@ -408,7 +408,31 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_THUNDER,          AI_Smart_Thunder
 	dbw EFFECT_FLY,              AI_Smart_Fly
 	dbw EFFECT_HAIL,             AI_Smart_Hail
+	dbw EFFECT_FACADE,           AI_Smart_Facade
+	dbw EFFECT_HEX,              AI_Smart_Hex
 	db -1 ; end
+
+AI_Smart_Facade:
+; Greatly encourage this move if the player has a status condition.
+
+	ld a, [wEnemyMonStatus]
+	and a
+	ret z
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	ret
+
+AI_Smart_Hex:
+; Greatly encourage this move if the player has a status condition.
+
+	ld a, [wBattleMonStatus]
+	and a
+	ret z
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	ret
 
 AI_Smart_Sleep:
 ; Greatly encourage sleep inducing moves if the enemy has either Dream Eater or Nightmare.

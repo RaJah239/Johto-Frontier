@@ -186,4 +186,5 @@ BattleCommandPointers:
 	dw BattleCommand_Burn
 	dw BattleCommand_CloseCombat
 	dw BattleCommand_Hex
+	dw BattleCommand_Facade
 	assert_table_length NUM_EFFECT_COMMANDS

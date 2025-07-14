@@ -2167,3 +2167,23 @@ Hex:
 	buildopponentrage
 	kingsrock
 	endmove
+
+Facade:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	facade
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	kingsrock
+	endmove

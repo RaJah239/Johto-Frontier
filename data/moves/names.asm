@@ -158,7 +158,7 @@ MoveNames::
 	li "Rest"
 	li "Rock Slide"
 	li "Hyper Fang"
-	li "Sharpen"
+	li "Facade"
 	li "Hex"
 	li "Tri Attack"
 	li "Super Fang"

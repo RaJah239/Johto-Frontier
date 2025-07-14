@@ -164,7 +164,7 @@
 	const REST         ; 9c
 	const ROCK_SLIDE   ; 9d
 	const HYPER_FANG   ; 9e
-	const SHARPEN      ; 9f
+	const FACADE       ; 9f
 	const HEX          ; a0
 	const TRI_ATTACK   ; a1
 	const SUPER_FANG   ; a2

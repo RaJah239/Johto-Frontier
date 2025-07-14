@@ -172,8 +172,8 @@ Moves:
 	move REST,         EFFECT_HEAL,                0, PSYCHIC_TYPE,  STATUS,   100, 10,   0
 	move ROCK_SLIDE,   EFFECT_FLINCH_HIT,         75, ROCK,          PHYSICAL,  95, 16,  25
 	move HYPER_FANG,   EFFECT_FLINCH_HIT,         80, NORMAL,        PHYSICAL,  90, 15,  10
-	move SHARPEN,      EFFECT_ATTACK_UP,           0, NORMAL,        STATUS,   100, 30,   0
-	move HEX,          EFFECT_HEX,                65, GHOST,        SPECIAL,   100, 16,   0
+	move FACADE,       EFFECT_FACADE,             70, NORMAL,        PHYSICAL, 100, 24,   0
+	move HEX,          EFFECT_HEX,                65, GHOST,         SPECIAL,  100, 16,   0
 	move TRI_ATTACK,   EFFECT_TRI_ATTACK,         80, NORMAL,        SPECIAL,  100, 10,  20
 	move SUPER_FANG,   EFFECT_SUPER_FANG,          1, NORMAL,        PHYSICAL,  90, 10,   0
 	move SLASH,        EFFECT_NORMAL_HIT,         70, NORMAL,        PHYSICAL, 100, 20,   0

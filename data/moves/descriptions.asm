@@ -159,7 +159,7 @@ MoveDescriptions::
 	dw RestDescription
 	dw RockSlideDescription
 	dw HyperFangDescription
-	dw SharpenDescription
+	dw FacadeDescription
 	dw HexDescription
 	dw TriAttackDescription
 	dw SuperFangDescription
@@ -895,9 +895,9 @@ HyperFangDescription:
 	db   "An attack that may"
 	line "cause flinching.@"
 
-SharpenDescription:
-	db   "A move that raises"
-	line "the user's ATTACK.@"
+FacadeDescription:
+	db   "Doubles damage if"
+	line "Psn, Brn, or Prz.@"
 
 HexDescription:
 	db "Double damage to"

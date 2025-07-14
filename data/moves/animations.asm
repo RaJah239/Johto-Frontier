@@ -160,7 +160,7 @@ BattleAnimations::
 	dw BattleAnim_Rest
 	dw BattleAnim_RockSlide
 	dw BattleAnim_HyperFang
-	dw BattleAnim_Sharpen
+	dw BattleAnim_Facade
 	dw BattleAnim_Hex
 	dw BattleAnim_TriAttack
 	dw BattleAnim_SuperFang
@@ -2942,18 +2942,47 @@ BattleAnim_Meditate:
 	anim_call BattleAnim_ShowMon_0
 	anim_ret
 
-BattleAnim_Sharpen:
-	anim_1gfx BATTLE_ANIM_GFX_SHAPES
-	anim_obp0 $e4
+BattleAnim_Facade:
+	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_WATER
 	anim_call BattleAnim_TargetObj_1Row
-	anim_sound 0, 0, SFX_SHARPEN
-	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING, $0, BG_EFFECT_USER, $40
-	anim_obj BATTLE_ANIM_OBJ_SHARPEN, 48, 88, $0
-	anim_wait 96
+	anim_bgeffect BATTLE_BG_EFFECT_FLAIL, $0, $1, $0
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, $1, $20
+	anim_wait 8
+.loop
+	anim_sound 0, 0, SFX_RETURN
+	anim_obj BATTLE_ANIM_OBJ_WATER_GUN, 56, 80, $0
+	anim_wait 14
 	anim_incobj 2
-	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
-	anim_call BattleAnim_ShowMon_0
-	anim_ret
+	anim_clearobjs
+	anim_call BattleAnim_TargetObj_1Row
+	anim_obj BATTLE_ANIM_OBJ_WATER_GUN, 56, 80, $0
+	anim_wait 14
+	anim_incobj 2
+	anim_clearobjs
+	anim_call BattleAnim_TargetObj_1Row
+	anim_obj BATTLE_ANIM_OBJ_WATER_GUN, 56, 80, $0
+	anim_wait 14
+	anim_incobj 2
+	anim_clearobjs
+	anim_call BattleAnim_TargetObj_1Row
+	anim_sound 0, 1, SFX_COMET_PUNCH
+	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 48, $0
+	anim_wait 24
+	anim_incbgeffect BATTLE_BG_EFFECT_FLAIL
+	anim_jump BattleAnim_ShowMon_0
+
+;BattleAnim_Sharpen:
+;	anim_1gfx BATTLE_ANIM_GFX_SHAPES
+;	anim_obp0 $e4
+;	anim_call BattleAnim_TargetObj_1Row
+;	anim_sound 0, 0, SFX_SHARPEN
+;	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING, $0, BG_EFFECT_USER, $40
+;	anim_obj BATTLE_ANIM_OBJ_SHARPEN, 48, 88, $0
+;	anim_wait 96
+;	anim_incobj 2
+;	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
+;	anim_call BattleAnim_ShowMon_0
+;	anim_ret
 
 BattleAnim_DefenseCurl:
 	anim_1gfx BATTLE_ANIM_GFX_SHAPES
