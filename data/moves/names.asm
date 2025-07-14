@@ -133,7 +133,7 @@ MoveNames::
 	li "Spike Cannon"
 	li "Constrict"
 	li "Amnesia"
-	li "Kinesis"
+	li "Bug Buzz"
 	li "Softboiled"
 	li "Hi Jump Kick"
 	li "Glare"
