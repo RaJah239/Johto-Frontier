@@ -29,7 +29,7 @@ BattleAnimations::
 	dw BattleAnim_MegaKick
 	dw BattleAnim_StickyWeb
 	dw BattleAnim_RollingKick
-	dw BattleAnim_SandAttack
+	dw BattleAnim_DrainKiss
 	dw BattleAnim_Headbutt
 	dw BattleAnim_HornAttack
 	dw BattleAnim_FuryAttack
@@ -2180,9 +2180,19 @@ BattleAnim_Dig:
 	anim_wait 32
 	anim_ret
 
-BattleAnim_SandAttack:
-	anim_1gfx BATTLE_ANIM_GFX_SAND
-	anim_call BattleAnimSub_SandOrMud
+; Drain Kiss animation from Pokémon Prism
+BattleAnim_DrainKiss:
+	anim_3gfx BATTLE_ANIM_GFX_OBJECTS, BATTLE_ANIM_GFX_ANGELS, BATTLE_ANIM_GFX_BUBBLE
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_obj BATTLE_ANIM_OBJ_SWEET_KISS, 12, 0,  5, 0, $0
+	anim_sound 0, 1, SFX_SWEET_KISS
+	anim_wait 32
+	anim_sound 0, 1, SFX_SWEET_KISS_2
+	anim_obj BATTLE_ANIM_OBJ_HEART, 15, 0,  5, 0, $0
+	anim_wait 40
+	anim_sound 6, 3, SFX_WATER_GUN
+	anim_call BattleAnimSub_Drain
+	anim_wait 176
 	anim_ret
 
 BattleAnim_StringShot:

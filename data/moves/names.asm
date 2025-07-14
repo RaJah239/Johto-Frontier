@@ -27,7 +27,7 @@ MoveNames::
 	li "Mega Kick"
 	li "Sticky Web"
 	li "Rolling Kick"
-	li "Sand-Attack"
+	li "Drain Kiss"
 	li "Headbutt"
 	li "Horn Attack"
 	li "Fury Attack"
