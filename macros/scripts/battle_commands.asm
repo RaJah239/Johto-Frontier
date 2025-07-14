@@ -181,6 +181,7 @@ ENDM
 	command flameorb
 	command bulkup                  ; 57
 	command calmmind                ; b8
+	command dragondance             ; b9
 DEF NUM_EFFECT_COMMANDS EQU const_value - 1
 
 	const_def -1, -1

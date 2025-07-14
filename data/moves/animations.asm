@@ -171,7 +171,7 @@ BattleAnimations::
 	dw BattleAnim_TripleKick
 	dw BattleAnim_Thief
 	dw BattleAnim_SpiderWeb
-	dw BattleAnim_MindReader
+	dw BattleAnim_DragonDance
 	dw BattleAnim_Nightmare
 	dw BattleAnim_FlameWheel
 	dw BattleAnim_Snore
@@ -3223,18 +3223,32 @@ BattleAnim_SpiderWeb:
 	anim_wait 64
 	anim_ret
 
-BattleAnim_MindReader:
-	anim_1gfx BATTLE_ANIM_GFX_MISC
-	anim_sound 0, 1, SFX_MIND_READER
+BattleAnim_DragonDance:
+	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_CHARGE
+	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
+	anim_sound 0, 0, SFX_OUTRAGE
 .loop
-	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 132, 48, $3
-	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 132, 48, $12
-	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 132, 48, $20
-	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 132, 48, $31
-	anim_wait 16
-	anim_loop 2, .loop
-	anim_wait 32
+	anim_obj BATTLE_ANIM_OBJ_GROWTH, 48, 108, $0
+	anim_obj BATTLE_ANIM_OBJ_GROWTH, 48, 108, $20
+	anim_wait 4
+	anim_loop 4, .loop
+	anim_wait 24
+	anim_call BattleAnim_FocusEnergy
+	anim_wait 24
 	anim_ret
+
+;BattleAnim_MindReader:
+;	anim_1gfx BATTLE_ANIM_GFX_MISC
+;	anim_sound 0, 1, SFX_MIND_READER
+;.loop
+;	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 132, 48, $3
+;	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 132, 48, $12
+;	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 132, 48, $20
+;	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 132, 48, $31
+;	anim_wait 16
+;	anim_loop 2, .loop
+;	anim_wait 32
+;	anim_ret
 
 BattleAnim_Nightmare:
 	anim_1gfx BATTLE_ANIM_GFX_ANGELS

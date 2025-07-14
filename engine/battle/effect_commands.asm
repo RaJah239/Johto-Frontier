@@ -6476,6 +6476,8 @@ INCLUDE "engine/battle/move_effects/bulk_up.asm"
 
 INCLUDE "engine/battle/move_effects/calmmind.asm"
 
+INCLUDE "engine/battle/move_effects/dragondance.asm"
+
 INCLUDE "engine/battle/move_effects/stealth_rock.asm"
 
 INCLUDE "engine/battle/move_effects/defog.asm"

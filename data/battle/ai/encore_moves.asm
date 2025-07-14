@@ -26,6 +26,5 @@ EncoreMoves:
 	db SUBSTITUTE
 	db TRIPLE_KICK
 	db SPIDER_WEB
-	db MIND_READER
 	db COTTON_SPORE
 	db -1 ; end

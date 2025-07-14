@@ -169,7 +169,7 @@ MoveNames::
 	li "Triple Kick"
 	li "Thief"
 	li "Spider Web"
-	li "Mind Reader"
+	li "Dragon Dance"
 	li "Nightmare"
 	li "Flame Wheel"
 	li "Snore"
