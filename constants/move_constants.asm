@@ -177,7 +177,7 @@
 	const SPIDER_WEB   ; a9
 	const DRAGON_DANCE ; aa
 	const NIGHTMARE    ; ab
-	const FLAME_WHEEL  ; ac
+	const FLAME_CHARGE ; ac
 	const SNORE        ; ad
 	const CURSE        ; ae
 	const FLAIL        ; af

@@ -172,7 +172,7 @@ MoveDescriptions::
 	dw SpiderWebDescription
 	dw DragonDanceDescription
 	dw NightmareDescription
-	dw FlameWheelDescription
+	dw FlameChargeDescription
 	dw SnoreDescription
 	dw CurseDescription
 	dw FlailDescription
@@ -947,9 +947,9 @@ NightmareDescription:
 	db   "A sleeper loses"
 	line "1/4 HP every turn.@"
 
-FlameWheelDescription:
-	db   "An attack that may"
-	line "cause a burn.@"
+FlameChargeDescription:
+	db   "An attack that ups"
+	line "user's Speed.@"
 
 SnoreDescription:
 	db   "An attack useable"

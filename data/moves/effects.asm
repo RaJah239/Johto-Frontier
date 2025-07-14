@@ -2125,3 +2125,24 @@ CloseCombat:
 	checkfaint
 	kingsrock
 	endmove
+
+	SpeedUpHit:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	effectchance
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	speedup
+	statupmessage
+	checkfaint
+	endmove

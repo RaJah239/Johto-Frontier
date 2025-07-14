@@ -171,7 +171,7 @@ MoveNames::
 	li "Spider Web"
 	li "Dragon Dance"
 	li "Nightmare"
-	li "Flame Wheel"
+	li "Flame Charge"
 	li "Snore"
 	li "Curse"
 	li "Flail"

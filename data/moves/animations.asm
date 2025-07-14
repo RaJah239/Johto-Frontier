@@ -173,7 +173,7 @@ BattleAnimations::
 	dw BattleAnim_SpiderWeb
 	dw BattleAnim_DragonDance
 	dw BattleAnim_Nightmare
-	dw BattleAnim_FlameWheel
+	dw BattleAnim_FlameCharge
 	dw BattleAnim_Snore
 	dw BattleAnim_Curse
 	dw BattleAnim_Flail
@@ -3298,7 +3298,7 @@ BattleAnim_Nightmare:
 	anim_wait 96
 	anim_ret
 
-BattleAnim_FlameWheel:
+BattleAnim_FlameCharge:
 	anim_1gfx BATTLE_ANIM_GFX_FIRE
 .loop
 	anim_sound 0, 0, SFX_EMBER

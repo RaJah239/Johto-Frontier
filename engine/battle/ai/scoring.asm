@@ -379,7 +379,6 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_THIEF,            AI_Smart_Thief
 	dbw EFFECT_MEAN_LOOK,        AI_Smart_MeanLook
 	dbw EFFECT_NIGHTMARE,        AI_Smart_Nightmare
-	dbw EFFECT_FLAME_WHEEL,      AI_Smart_FlameWheel
 	dbw EFFECT_CURSE,            AI_Smart_Curse
 	dbw EFFECT_PROTECT,          AI_Smart_Protect
 	dbw EFFECT_FORESIGHT,        AI_Smart_Foresight
@@ -1833,17 +1832,6 @@ AI_Smart_Nightmare:
 	call AI_50_50
 	ret c
 	dec [hl]
-	ret
-
-AI_Smart_FlameWheel:
-; Use this move if the enemy is frostbitten.
-
-	ld a, [wEnemyMonStatus]
-	bit FRZ, a
-	ret z
-rept 5
-	dec [hl]
-endr
 	ret
 
 AI_Smart_Curse:
