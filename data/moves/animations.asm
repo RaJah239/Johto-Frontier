@@ -40,7 +40,7 @@ BattleAnimations::
 	dw BattleAnim_TakeDown
 	dw BattleAnim_Thrash
 	dw BattleAnim_DoubleEdge
-	dw BattleAnim_TailWhip
+	dw BattleAnim_DrainPunch
 	dw BattleAnim_PoisonSting
 	dw BattleAnim_Twineedle
 	dw BattleAnim_PinMissile
@@ -1764,15 +1764,15 @@ BattleAnim_Absorb:
 .loop
 	anim_sound 6, 3, SFX_WATER_GUN
 	anim_obj BATTLE_ANIM_OBJ_ABSORB, 128, 48, $2
-	anim_wait 6
+	anim_wait 3
 	anim_sound 6, 3, SFX_WATER_GUN
 	anim_obj BATTLE_ANIM_OBJ_ABSORB, 136, 64, $3
-	anim_wait 6
+	anim_wait 3
 	anim_sound 6, 3, SFX_WATER_GUN
 	anim_obj BATTLE_ANIM_OBJ_ABSORB, 136, 32, $4
-	anim_wait 6
+	anim_wait 3
 	anim_loop 5, .loop
-	anim_wait 32
+	anim_wait 24
 	anim_ret
 
 BattleAnim_MegaDrain:
@@ -3341,15 +3341,16 @@ BattleAnim_Disable:
 	anim_wait 96
 	anim_ret
 
-BattleAnim_TailWhip:
-	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_call BattleAnim_TargetObj_2Row
-	anim_sound 0, 0, SFX_TAIL_WHIP
-	anim_bgeffect BATTLE_BG_EFFECT_WOBBLE_MON, $0, BG_EFFECT_USER, $0
-	anim_wait 32
-	anim_incbgeffect BATTLE_BG_EFFECT_WOBBLE_MON
-	anim_call BattleAnim_ShowMon_0
-	anim_ret
+BattleAnim_DrainPunch:
+	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_HIT
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $20, $1, $0
+	anim_sound 0, 1, SFX_SUBMISSION
+	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 17, 0,  7, 0, $0
+	anim_wait 6
+	anim_sound 0, 1, SFX_PLACE_PUZZLE_PIECE_DOWN
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 17, 0,  7, 0, $0
+	anim_wait 20
+	anim_jump BattleAnim_Absorb
 
 BattleAnim_Struggle:
 	anim_1gfx BATTLE_ANIM_GFX_HIT
