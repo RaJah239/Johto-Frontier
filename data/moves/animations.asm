@@ -219,7 +219,7 @@ BattleAnimations::
 	dw BattleAnim_HealBell
 	dw BattleAnim_Return
 	dw BattleAnim_Defog
-	dw BattleAnim_Frustration
+	dw BattleAnim_AuraSphere
 	dw BattleAnim_Safeguard
 	dw BattleAnim_PainSplit
 	dw BattleAnim_SacredFire
@@ -4124,27 +4124,19 @@ BattleAnim_Return:
 	anim_call BattleAnim_ShowMon_0
 	anim_ret
 
-BattleAnim_Frustration:
-	anim_1gfx BATTLE_ANIM_GFX_MISC
-	anim_sound 0, 0, SFX_KINESIS_2
-	anim_obj BATTLE_ANIM_OBJ_ANGER, 72, 80, $0
-	anim_wait 40
-	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_call BattleAnim_TargetObj_1Row
-	anim_bgeffect BATTLE_BG_EFFECT_WOBBLE_MON, $0, BG_EFFECT_USER, $0
-	anim_wait 8
-	anim_sound 0, 1, SFX_COMET_PUNCH
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 120, 48, $0
-	anim_wait 8
-	anim_sound 0, 1, SFX_COMET_PUNCH
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 152, 48, $0
-	anim_wait 8
-	anim_sound 0, 1, SFX_COMET_PUNCH
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 48, $0
-	anim_wait 8
-	anim_incbgeffect BATTLE_BG_EFFECT_WOBBLE_MON
-	anim_wait 1
-	anim_call BattleAnim_ShowMon_0
+BattleAnim_AuraSphere:
+	anim_3gfx BATTLE_ANIM_GFX_EGG, BATTLE_ANIM_GFX_AEROBLAST, BATTLE_ANIM_GFX_EXPLOSION
+	anim_bgp $1b
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_sound 0, 0, SFX_AEROBLAST
+	anim_obj BATTLE_ANIM_OBJ_AEROBLAST, 72, 88, $0
+	anim_wait 32
+	anim_sound 6, 2, SFX_SLUDGE_BOMB
+	anim_obj BATTLE_ANIM_OBJ_OCTAZOOKA, 64, 92, $4
+	anim_wait 16
+	anim_sound 0, 1, SFX_EGG_BOMB
+	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 136, 56, $0
+	anim_wait 16
 	anim_ret
 
 BattleAnim_Safeguard:
@@ -5090,4 +5082,27 @@ BattleAnimSub_SpeedLines:
 ;	anim_wait 40
 ;	anim_call BattleAnimSub_Ice
 ;	anim_wait 32
+;	anim_ret
+
+;BattleAnim_Frustration:
+;	anim_1gfx BATTLE_ANIM_GFX_MISC
+;	anim_sound 0, 0, SFX_KINESIS_2
+;	anim_obj BATTLE_ANIM_OBJ_ANGER, 72, 80, $0
+;	anim_wait 40
+;	anim_1gfx BATTLE_ANIM_GFX_HIT
+;	anim_call BattleAnim_TargetObj_1Row
+;	anim_bgeffect BATTLE_BG_EFFECT_WOBBLE_MON, $0, BG_EFFECT_USER, $0
+;	anim_wait 8
+;	anim_sound 0, 1, SFX_COMET_PUNCH
+;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 120, 48, $0
+;	anim_wait 8
+;	anim_sound 0, 1, SFX_COMET_PUNCH
+;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 152, 48, $0
+;	anim_wait 8
+;	anim_sound 0, 1, SFX_COMET_PUNCH
+;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 48, $0
+;	anim_wait 8
+;	anim_incbgeffect BATTLE_BG_EFFECT_WOBBLE_MON
+;	anim_wait 1
+;	anim_call BattleAnim_ShowMon_0
 ;	anim_ret

@@ -185,7 +185,7 @@ BattleTowerMartTMCoinTraderScript:
     sjump .ConcludeTransaction
 
 .TMFrustration:
-    verbosegiveitem TM_FRUSTRATION
+    verbosegiveitem TM_AURA_SPHERE
     iffalse .NoRoom
     sjump .ConcludeTransaction
 

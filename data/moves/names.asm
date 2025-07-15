@@ -217,7 +217,7 @@ MoveNames::
 	li "Heal Bell"
 	li "Return"
 	li "Defog"
-	li "Frustration"
+	li "Aura Sphere"
 	li "Safeguard"
 	li "Pain Split"
 	li "Sacred Fire"
