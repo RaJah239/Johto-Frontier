@@ -197,7 +197,7 @@ MoveNames::
 	li "Perish Song"
 	li "Icy Wind"
 	li "Detect"
-	li "Bone Rush"
+	li "Snarl"
 	li "Lock-On"
 	li "Outrage"
 	li "Sandstorm"

@@ -199,7 +199,7 @@ BattleAnimations::
 	dw BattleAnim_PerishSong
 	dw BattleAnim_IcyWind
 	dw BattleAnim_Detect
-	dw BattleAnim_BoneRush
+	dw BattleAnim_Snarl
 	dw BattleAnim_LockOn
 	dw BattleAnim_Outrage
 	dw BattleAnim_Sandstorm
@@ -3436,7 +3436,16 @@ BattleAnim_Snore:
 	anim_wait 32
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $2, $0
 	anim_sound 0, 0, SFX_SNORE
-.loop
+	anim_jump BattleAnim_SnoreAssist
+
+BattleAnim_Snarl:
+	anim_1gfx BATTLE_ANIM_GFX_NOISE
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $2, $0
+	anim_sound 0, 0, SFX_SNORE
+	anim_jump BattleAnim_SnoreAssist
+
+BattleAnim_SnoreAssist:
+	.loop
 	anim_call BattleAnimSub_Sound
 	anim_wait 16
 	anim_loop 2, .loop
@@ -3867,19 +3876,6 @@ BattleAnim_Detect:
 	anim_sound 0, 0, SFX_FORESIGHT
 	anim_obj BATTLE_ANIM_OBJ_FORESIGHT, 64, 88, $0
 	anim_wait 24
-	anim_ret
-
-BattleAnim_BoneRush:
-	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_MISC
-	anim_sound 0, 1, SFX_BONE_CLUB
-	anim_obj BATTLE_ANIM_OBJ_BONE_RUSH, 132, 56, $2
-	anim_wait 16
-	anim_sound 0, 1, SFX_COMET_PUNCH
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 120, 48, $0
-	anim_wait 16
-	anim_sound 0, 1, SFX_COMET_PUNCH
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 144, 64, $0
-	anim_wait 16
 	anim_ret
 
 BattleAnim_LockOn:
@@ -5175,4 +5171,15 @@ BattleAnimSub_SpeedLines:
 ;	anim_wait 64
 ;	anim_ret
 
-
+;BattleAnim_BoneRush:
+;	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_MISC
+;	anim_sound 0, 1, SFX_BONE_CLUB
+;	anim_obj BATTLE_ANIM_OBJ_BONE_RUSH, 132, 56, $2
+;	anim_wait 16
+;	anim_sound 0, 1, SFX_COMET_PUNCH
+;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 120, 48, $0
+;	anim_wait 16
+;	anim_sound 0, 1, SFX_COMET_PUNCH
+;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 144, 64, $0
+;	anim_wait 16
+;	anim_ret
