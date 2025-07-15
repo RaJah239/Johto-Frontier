@@ -36,7 +36,7 @@
 	const DRAIN_KISS   ; 1c
 	const HEADBUTT     ; 1d
 	const HORN_ATTACK  ; 1e
-	const FURY_ATTACK  ; 1f
+	const GIGA_IMPACT  ; 1f
 	const ROCK_TOMB    ; 20
 	const TACKLE       ; 21
 	const BODY_SLAM    ; 22

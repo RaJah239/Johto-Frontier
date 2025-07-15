@@ -44,7 +44,7 @@ Moves:
 	move DRAIN_KISS,   EFFECT_LEECH_HIT,          50, FAIRY,         SPECIAL,  100, 16,   0
 	move HEADBUTT,     EFFECT_FLINCH_HIT,         70, NORMAL,        PHYSICAL, 100, 15,  30
 	move HORN_ATTACK,  EFFECT_NORMAL_HIT,         65, NORMAL,        PHYSICAL, 100, 25,   0
-	move FURY_ATTACK,  EFFECT_MULTI_HIT,          15, NORMAL,        PHYSICAL,  85, 20,   0
+	move GIGA_IMPACT,  EFFECT_HYPER_BEAM,        140, NORMAL,        SPECIAL,  100,  8,   0
 	move ROCK_TOMB,    EFFECT_SPEED_DOWN_HIT,     60, ROCK,          PHYSICAL, 100, 24, 100
 	move TACKLE,       EFFECT_NORMAL_HIT,         35, NORMAL,        PHYSICAL,  95, 35,   0
 	move BODY_SLAM,    EFFECT_PARALYZE_HIT,       85, NORMAL,        PHYSICAL, 100, 15,  30

@@ -30,7 +30,7 @@ MoveNames::
 	li "Drain Kiss"
 	li "Headbutt"
 	li "Horn Attack"
-	li "Fury Attack"
+	li "Giga Impact"
 	li "Rock Tomb"
 	li "Tackle"
 	li "Body Slam"
