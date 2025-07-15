@@ -162,7 +162,7 @@ BattleAnimations::
 	dw BattleAnim_HyperFang
 	dw BattleAnim_Facade
 	dw BattleAnim_Hex
-	dw BattleAnim_TriAttack
+	dw BattleAnim_PhotonBlast
 	dw BattleAnim_SuperFang
 	dw BattleAnim_Slash
 	dw BattleAnim_Substitute
@@ -2761,16 +2761,34 @@ BattleAnim_Lick:
 	anim_wait 64
 	anim_ret
 
-BattleAnim_TriAttack:
-	anim_3gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_ICE, BATTLE_ANIM_GFX_LIGHTNING
-	anim_call BattleAnimSub_Fire
+BattleAnim_PhotonBlast:
+	anim_2gfx BATTLE_ANIM_GFX_ICE, BATTLE_ANIM_GFX_SPEED
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_bgeffect BATTLE_BG_EFFECT_ALTERNATE_HUES, $0, $2, $0
+	anim_sound 0, 0, SFX_FLASH
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $0
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $8
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $10
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $18
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $20
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $28
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $30
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $38
 	anim_wait 16
-	anim_call BattleAnimSub_Ice
-	anim_wait 16
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $4
-	anim_sound 0, 1, SFX_THUNDER
-	anim_obj BATTLE_ANIM_OBJ_THUNDER_RIGHT, 152, 68, $0
-	anim_wait 16
+	
+.loop
+	anim_sound 6, 2, SFX_SHINE
+	anim_obj ANIM_OBJ_POWER_GEM2, 64, 92, $4
+	anim_wait 4
+	anim_loop 20, .loop
+	anim_wait 32
 	anim_ret
 
 BattleAnim_Withdraw:

@@ -166,7 +166,7 @@
 	const HYPER_FANG   ; 9e
 	const FACADE       ; 9f
 	const HEX          ; a0
-	const TRI_ATTACK   ; a1
+	const PHOTON_BLAST ; a1
 	const SUPER_FANG   ; a2
 	const SLASH        ; a3
 	const SUBSTITUTE   ; a4

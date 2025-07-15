@@ -328,7 +328,7 @@ DEF MT01 EQU const_value
 	add_mt BODY_SLAM
 	add_mt MIMIC
 	add_mt THUNDER_WAVE
-	add_mt TRI_ATTACK
+	add_mt PHOTON_BLAST
 	add_mt MEGA_DRAIN
 	add_mt SUBSTITUTE
 	add_mt METRONOME

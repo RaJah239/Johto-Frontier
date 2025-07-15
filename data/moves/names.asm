@@ -160,7 +160,7 @@ MoveNames::
 	li "Hyper Fang"
 	li "Facade"
 	li "Hex"
-	li "Tri Attack"
+	li "Photon Blast"
 	li "Super Fang"
 	li "Slash"
 	li "Substitute"

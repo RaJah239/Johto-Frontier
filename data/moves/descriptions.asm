@@ -161,7 +161,7 @@ MoveDescriptions::
 	dw HyperFangDescription
 	dw FacadeDescription
 	dw HexDescription
-	dw TriAttackDescription
+	dw PhotonBlastDescription
 	dw SuperFangDescription
 	dw SlashDescription
 	dw SubstituteDescription
@@ -828,9 +828,9 @@ HexDescription:
 	db "Double damage to"
 	line "statused foes.@"
 
-TriAttackDescription:
-	db   "Fires three kinds"
-	line "of beams at once.@"
+PhotonBlastDescription:
+	db   "May paralyze, burn"
+	line "or frostbite foe.@"
 
 SuperFangDescription:
 	db   "Cuts the foe's HP"

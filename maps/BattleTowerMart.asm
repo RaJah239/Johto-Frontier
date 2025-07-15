@@ -581,7 +581,7 @@ BattleTowerMartTutorScientistScript:
     db BODY_SLAM, 12
     db MIMIC, 10
     db THUNDER_WAVE, 12
-    db TRI_ATTACK, 18
+    db PHOTON_BLAST, 18
     db MEGA_DRAIN, 17
     db SUBSTITUTE, 20
     db METRONOME, 15
