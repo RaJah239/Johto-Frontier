@@ -104,7 +104,7 @@ MoveDescriptions::
 	dw NightShadeDescription
 	dw MimicDescription
 	dw ScreechDescription
-	dw DoubleTeamDescription
+	dw GunkShotDescription
 	dw RecoverDescription
 	dw HardenDescription
 	dw MinimizeDescription
@@ -657,10 +657,6 @@ ScreechDescription:
 	db   "Sharply reduces"
 	line "the foe's DEFENSE.@"
 
-DoubleTeamDescription:
-	db   "Heightens evasive-"
-	line "ness.@"
-
 RecoverDescription:
 	db   "Restores HP by 1/2"
 	line "the max HP.@"
@@ -729,6 +725,7 @@ SmogDescription:
 	db   "An attack that may"
 	line "poison the foe.@"
 
+GunkShotDescription:
 SludgeDescription:
 	db   "An attack that may"
 	line "poison the foe.@"

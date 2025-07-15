@@ -57,7 +57,7 @@ BattleTowerMartTMCoinTraderScript:
     ifequal 29, .TMPsychic
     ifequal 30, .TMShadowBall
     ifequal 31, .TMMudSlap
-    ifequal 32, .TMDoulbeTeam
+    ifequal 32, .TMGunkShot
     ifequal 33, .TMIcePunch
     ifequal 34, .TMSwagger
     ifequal 35, .TMSleepTalk
@@ -239,8 +239,8 @@ BattleTowerMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMDoulbeTeam:
-    verbosegiveitem TM_DOUBLE_TEAM
+.TMGunkShot:
+    verbosegiveitem TM_GUNK_SHOT
     iffalse .NoRoom
     sjump .ConcludeTransaction
 

@@ -103,7 +103,7 @@ MoveNames::
 	li "Night Shade"
 	li "Mimic"
 	li "Screech"
-	li "Double Team"
+	li "Gunk Shot"
 	li "Recover"
 	li "Harden"
 	li "Minimize"
