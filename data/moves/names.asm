@@ -207,7 +207,7 @@ MoveNames::
 	li "Rollout"
 	li "False Swipe"
 	li "Swagger"
-	li "Milk Drink"
+	li "Scald"
 	li "Spark"
 	li "Fury Cutter"
 	li "Steel Wing"

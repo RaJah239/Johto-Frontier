@@ -208,7 +208,7 @@ MoveDescriptions::
 	dw RolloutDescription
 	dw FalseSwipeDescription
 	dw SwaggerDescription
-	dw MilkDrinkDescription
+	dw ScaldDescription
 	dw SparkDescription
 	dw FuryCutterDescription
 	dw SteelWingDescription
@@ -433,6 +433,7 @@ AcidDescription:
 	db   "An attack that may"
 	line "lower DEFENSE.@"
 
+ScaldDescription:
 SeedBombDescription:
 EmberDescription:
 FlamethrowerDescription:
@@ -1011,10 +1012,6 @@ FalseSwipeDescription:
 SwaggerDescription:
 	db   "Causes confusion"
 	line "and raises ATTACK.@"
-
-MilkDrinkDescription:
-	db   "Restores HP by 1/2"
-	line "the max HP.@"
 
 SparkDescription:
 	db   "An attack that may"

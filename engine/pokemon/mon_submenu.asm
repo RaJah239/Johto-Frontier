@@ -127,7 +127,6 @@ GetMonSubmenuItems:
 	call CanUseDig
 	call CanUseTeleport
 	call CanUseSoftboiled
-	call CanUseMilkdrink
 
 .skip_moves
 	ld a, MONMENUITEM_STATS
@@ -474,15 +473,5 @@ MonSubMenu_GetNextEvoAttackByte:
 	and a
 	ret nz
 	ld a, MONMENUITEM_SOFTBOILED
-	call AddMonMenuItem
-	ret
-	
-	CanUseMilkdrink:
-	ld a, MILK_DRINK
-	call CheckMonKnowsMove
-	and a
-	ret nz
-
-	ld a, MONMENUITEM_MILKDRINK
 	call AddMonMenuItem
 	ret
