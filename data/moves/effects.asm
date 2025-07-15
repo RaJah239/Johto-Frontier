@@ -1802,31 +1802,6 @@ MirrorCoat:
 	kingsrock
 	endmove
 
-SkullBash:
-	checkcharge
-	checkobedience
-	doturn
-	charge
-	usedmovetext
-	critical
-	damagestats
-	damagecalc
-	stab
-	damagevariation
-	checkhit
-	moveanim
-	failuretext
-	applydamage
-	criticaltext
-	supereffectivetext
-	checkfaint
-	buildopponentrage
-	kingsrock
-	endturn
-	defenseup
-	statupmessage
-	endmove
-
 Earthquake:
 	checkobedience
 	usedmovetext

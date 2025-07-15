@@ -141,7 +141,6 @@ MoveEffectsPointers:
 	dw BellyDrum
 	dw PsychUp
 	dw MirrorCoat
-	dw SkullBash
 	dw Earthquake
 	dw Gust
 	dw Stomp

@@ -135,7 +135,7 @@
 	const WATERFALL    ; 7f
 	const BULLET_PUNCH ; 80
 	const SWIFT        ; 81
-	const SKULL_BASH   ; 82
+	const NIGHT_SLASH  ; 82
 	const SPIKE_CANNON ; 83
 	const CONSTRICT    ; 84
 	const AMNESIA      ; 85

@@ -8,4 +8,5 @@ CriticalHitMoves:
 	db X_SCISSOR
 	db DRAGON_CLAW
 	db THROAT_CHOP
+	db NIGHT_SLASH
 	db -1

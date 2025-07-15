@@ -129,7 +129,7 @@ MoveNames::
 	li "Waterfall"
 	li "Bullet Punch"
 	li "Swift"
-	li "Skull Bash"
+	li "Night Slash"
 	li "Spike Cannon"
 	li "Constrict"
 	li "Amnesia"

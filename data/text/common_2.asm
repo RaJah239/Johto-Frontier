@@ -698,16 +698,6 @@ _BattleTookSunlightText::
 	line "took in sunlight!"
 	prompt
 
-_BattleLoweredHeadText::
-	text_start
-	line "lowered its head!"
-	prompt
-
-_BattleGlowingText::
-	text_start
-	line "is glowing!"
-	prompt
-
 _BattleFlewText::
 	text_start
 	line "flew up high!"
