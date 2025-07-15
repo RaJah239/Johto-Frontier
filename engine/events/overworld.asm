@@ -1072,12 +1072,6 @@ TeleportFunction:
 	dw .FailTeleport
 
 .TryTeleport:
-	call GetMapEnvironment
-	call CheckOutdoorMap
-	jr z, .CheckIfSpawnPoint
-	jr .nope
-
-.CheckIfSpawnPoint:
 	ld a, [wLastSpawnMapGroup]
 	ld d, a
 	ld a, [wLastSpawnMapNumber]

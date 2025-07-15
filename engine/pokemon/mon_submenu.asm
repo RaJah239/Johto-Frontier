@@ -436,30 +436,25 @@ MonSubMenu_GetNextEvoAttackByte:
 	ret
 	
 	CanUseTeleport:
-; Step 1: Location Check
-	call GetMapEnvironment
-	call CheckOutdoorMap
-	ret nz ; .fail
-	
-; Step 2: Check if mon knows move
+; Step 1: Check if mon knows move
 	ld a, TELEPORT
 	call CheckMonKnowsMove
 	and a
 	jr z, .yes
 
-; Step 3: Check if TM/HM is in bag
+; Step 2: Check if TM/HM is in bag
 ;	ld a, TM_TELEPORT
 ;	ld [wCurItem], a
 ;	ld hl, wNumItems
 ;	call CheckItem
 ;	ret nc ; .fail ; TM not in bag
 
-; Step 4: Check if Mon can learn Teleport via TM/HM/Move Tutor
+; Step 3: Check if Mon can learn Teleport via TM/HM/Move Tutor
 ;	ld a, TELEPORT
 ;	call CheckMonCanLearn_TM_HM
 ;	jr c, .yes
 
-; Step 5: Check if mon learns move via LVL-UP
+; Step 4: Check if mon learns move via LVL-UP
 	ld a, TELEPORT
 	call CheckLvlUpMoves
 	ret c ; fail
