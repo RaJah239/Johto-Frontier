@@ -53,4 +53,5 @@ AnimObjGFX:
 	anim_obj_gfx  5, AnimObjHeartsGFX
  	anim_obj_gfx  5, AnimObjStarsGFX
  	anim_obj_gfx 10, AnimObjGlowGFX
+ 	anim_obj_gfx  6, AnimObjIcicleCrashGFX
 	assert_table_length NUM_BATTLE_ANIM_GFX + 1

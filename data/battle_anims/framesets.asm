@@ -191,6 +191,7 @@ BattleAnimFrameData:
 	dw .Frameset_Hail                ; BATTLEANIMFRAMESET_HAIL
 	dw .Frameset_DragonPulse         ; BATTLE_ANIM_FRAMESET_DRAGON_PULSE
 	dw .Frameset_SmallGlow           ; BATTLE_ANIM_FRAMESET_SMALL_GLOW
+	dw .Frameset_Icicle              ; BATTLE_ANIM_FRAMESET_ICICLE
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
 .Frameset_HitBig:
@@ -1294,7 +1295,11 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_53,  3
 	oamdelete
 
-.Frameset_SmallGlow
+.Frameset_SmallGlow:
 	oamframe BATTLE_ANIM_OAMSET_54,  1
 	oamframe BATTLE_ANIM_OAMSET_53,  1
 	oamrestart
+
+.Frameset_Icicle:
+	oamframe BATTLE_ANIM_OAMSET_ICICLE, 8
+	oamend

@@ -1850,23 +1850,31 @@ BattleAnim_DarkPulse:
 	anim_ret
 
 BattleAnim_IcicleCrash:
-	anim_2gfx BATTLE_ANIM_GFX_HORN, BATTLE_ANIM_GFX_HIT
-	anim_obj BATTLE_ANIM_OBJ_ICICLE,   9, 0,  10, 0, $3
-	anim_wait 8
-.loop
-	anim_sound 0, 1, SFX_HORN_ATTACK
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, -16, 4,   5, 0, $0
-	anim_wait 8
-	anim_sound 0, 1, SFX_HORN_ATTACK
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, -15, 4,   6, 0, $0
-	anim_wait 8
-	anim_sound 0, 1, SFX_HORN_ATTACK
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, -16, 4,   7, 0, $0
-	anim_wait 8
-	anim_sound 0, 1, SFX_HORN_ATTACK
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX,  15, 4,   6, 0, $0
-	anim_wait 8
-	anim_loop 3, .loop
+	anim_2gfx BATTLE_ANIM_GFX_ICICLECRASH, BATTLE_ANIM_GFX_ICE
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $1, $0
+	anim_sound 0, 1, SFX_STRENGTH
+	anim_obj BATTLE_ANIM_OBJ_ICICLE_CRASH, 120, 64, $40
+	anim_wait 2
+	anim_sound 0, 1, SFX_STRENGTH
+	anim_obj BATTLE_ANIM_OBJ_ICICLE_CRASH, 112, 68, $30
+	anim_wait 2
+	anim_sound 0, 1, SFX_STRENGTH
+	anim_obj BATTLE_ANIM_OBJ_ICICLE_CRASH, 142, 68, $30
+	anim_wait 2
+	anim_sound 0, 1, SFX_STRENGTH
+	anim_obj BATTLE_ANIM_OBJ_ICICLE_CRASH, 136, 64, $40
+	anim_wait 2
+	anim_sound 0, 1, SFX_STRENGTH
+	anim_obj BATTLE_ANIM_OBJ_ICICLE_CRASH, 128, 68, $30
+	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
+	anim_wait 40
+	anim_obj BATTLE_ANIM_OBJ_ICE_SPLASH, 128, 66, $28
+	anim_obj BATTLE_ANIM_OBJ_ICE_SPLASH, 120, 66, $9c
+	anim_obj BATTLE_ANIM_OBJ_ICE_SPLASH, 152, 66, $28
+	anim_obj BATTLE_ANIM_OBJ_ICE_SPLASH, 152, 66, $9c
+	anim_obj BATTLE_ANIM_OBJ_ICE_SPLASH, 144, 66, $28
+	anim_obj BATTLE_ANIM_OBJ_ICE_SPLASH, 136, 66, $9c
+	anim_wait 32
 	anim_ret
 
 BattleAnim_Wrap:
