@@ -109,7 +109,7 @@ MoveNames::
 	li "Minimize"
 	li "Smokescreen"
 	li "Confuse Ray"
-	li "Withdraw"
+	li "Wild Charge"
 	li "Defense Curl"
 	li "Barrier"
 	li "Light Screen"
