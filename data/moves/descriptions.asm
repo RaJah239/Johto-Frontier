@@ -140,7 +140,7 @@ MoveDescriptions::
 	dw GlareDescription
 	dw DreamEaterDescription
 	dw PoisonGasDescription
-	dw BarrageDescription
+	dw EarthPowerDescription
 	dw LeechLifeDescription
 	dw LovelyKissDescription
 	dw SkyAttackDescription
@@ -595,6 +595,9 @@ ConfusionDescription:
 	db   "An attack that may"
 	line "cause confusion.@"
 
+EarthPowerDescription:
+FocusBlastDescription:
+ShadowBallDescription:
 FlashCannonDescription:
 BugBuzzDescription:
 PsychicMDescription:
@@ -757,10 +760,6 @@ DreamEaterDescription:
 PoisonGasDescription:
 	db   "A move that may"
 	line "poison the foe.@"
-
-BarrageDescription:
-	db   "Throws orbs to hit"
-	line "2-5 times.@"
 
 LovelyKissDescription:
 	db   "May cause the foe"
@@ -1147,11 +1146,6 @@ ExtremespeedDescription:
 AncientpowerDescription:
 	db   "An attack that may"
 	line "raise all stats.@"
-
-FocusBlastDescription:
-ShadowBallDescription:
-	db   "An attack that may"
-	line "lower Spcl.Def.@"
 
 StealthRockDescription:
 	db   "Hurts foes when"

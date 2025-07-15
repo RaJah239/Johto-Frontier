@@ -139,7 +139,7 @@ MoveNames::
 	li "Glare"
 	li "Dream Eater"
 	li "Poison Gas"
-	li "Barrage"
+	li "Earth Power"
 	li "Leech Life"
 	li "Lovely Kiss"
 	li "Sky Attack"

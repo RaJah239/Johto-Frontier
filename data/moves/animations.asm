@@ -141,7 +141,7 @@ BattleAnimations::
 	dw BattleAnim_Glare
 	dw BattleAnim_DreamEater
 	dw BattleAnim_PoisonGas
-	dw BattleAnim_Barrage
+	dw BattleAnim_EarthPower
 	dw BattleAnim_LeechLife
 	dw BattleAnim_LovelyKiss
 	dw BattleAnim_SkyAttack
@@ -2449,14 +2449,26 @@ BattleAnim_PetalDance:
 	anim_wait 16
 	anim_ret
 
-BattleAnim_Barrage:
-	anim_2gfx BATTLE_ANIM_GFX_EGG, BATTLE_ANIM_GFX_EXPLOSION
-	anim_sound 6, 2, SFX_THROW_BALL
-	anim_obj BATTLE_ANIM_OBJ_SLUDGE_BOMB, 64, 92, $10
-	anim_wait 36
-	anim_sound 0, 1, SFX_EGG_BOMB
-	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 136, 56, $0
+BattleAnim_EarthPower:
+	anim_1gfx BATTLE_ANIM_GFX_WATER
+	anim_call BattleAnim_UserObj_2Row
+.loop1
+	anim_sound 0, 0, SFX_SPARK
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $14, $2, $0
+	anim_wait 32
+	anim_loop 2, .loop1
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $c0, $1, $0
+.loop
+	anim_sound 0, 1, SFX_EMBER
+	anim_obj ANIM_OBJ_EARTH_POWER, 116, 72, $0
+	anim_wait 2
+	anim_obj ANIM_OBJ_EARTH_POWER, 132, 72, $0
+	anim_wait 2
+	anim_obj ANIM_OBJ_EARTH_POWER, 148, 72, $0
 	anim_wait 16
+	anim_loop 3, .loop
+	anim_wait 32
+	anim_call BattleAnim_ShowMon_1
 	anim_ret
 
 BattleAnim_Mimic:
@@ -5162,3 +5174,5 @@ BattleAnimSub_SpeedLines:
 ;	anim_loop 10, .loop
 ;	anim_wait 64
 ;	anim_ret
+
+
