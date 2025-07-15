@@ -231,7 +231,7 @@ MoveDescriptions::
 	dw PursuitDescription
 	dw RapidSpinDescription
 	dw WillOWispDescription
-	dw IronTailDescription
+	dw SilverWindDescription
 	dw MetalClawDescription
 	dw VitalThrowDescription
 	dw HealingLightDescription
@@ -1080,10 +1080,6 @@ WillOWispDescription:
 	db   "A move that may"
 	line "cause a burn.@"
 
-IronTailDescription:
-	db   "An attack that may"
-	line "reduce DEFENSE.@"
-
 ShadowPunchDescription:
 MeteorMashDescription:
 MetalClawDescription:
@@ -1136,6 +1132,7 @@ ExtremespeedDescription:
 	db   "A powerful first-"
 	line "strike move.@"
 
+SilverWindDescription:
 AncientpowerDescription:
 	db   "An attack that may"
 	line "raise all stats.@"

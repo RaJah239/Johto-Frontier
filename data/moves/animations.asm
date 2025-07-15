@@ -232,7 +232,7 @@ BattleAnimations::
 	dw BattleAnim_Pursuit
 	dw BattleAnim_RapidSpin
 	dw BattleAnim_WillOWisp
-	dw BattleAnim_IronTail
+	dw BattleAnim_SilverWind
 	dw BattleAnim_MetalClaw
 	dw BattleAnim_VitalThrow
 	dw BattleAnim_MorningSun
@@ -3824,6 +3824,7 @@ BattleAnim_PerishSong:
 	anim_wait 112
 	anim_ret
 
+BattleAnim_SilverWind:
 BattleAnim_FairyWind:
 BattleAnim_IcyWind:
 	anim_1gfx BATTLE_ANIM_GFX_SPEED
@@ -4343,7 +4344,6 @@ BattleAnim_RapidSpin:
 	anim_ret
 
 BattleAnim_IronHead:
-BattleAnim_IronTail:
 	anim_1gfx BATTLE_ANIM_GFX_REFLECT
 	anim_obp0 $0
 	anim_sound 0, 0, SFX_RAGE

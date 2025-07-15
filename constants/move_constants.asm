@@ -236,7 +236,7 @@
 	const PURSUIT      ; e4
 	const RAPID_SPIN   ; e5
 	const WILL_O_WISP  ; e6
-	const IRON_TAIL    ; e7
+	const SILVER_WIND  ; e7
 	const METAL_CLAW   ; e8
 	const VITAL_THROW  ; e9
 	const HEALING_LIGHT; ea

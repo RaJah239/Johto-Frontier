@@ -195,7 +195,7 @@ BattleTowerMartTMCoinTraderScript:
     sjump .ConcludeTransaction
 
 .TMIronTail:
-    verbosegiveitem TM_IRON_TAIL
+    verbosegiveitem TM_SILVER_WIND
     iffalse .NoRoom
     sjump .ConcludeTransaction
 

@@ -230,7 +230,7 @@ MoveNames::
 	li "Pursuit"
 	li "Rapid Spin"
 	li "Will-O-Wisp"
-	li "Iron Tail"
+	li "Silver Wind"
 	li "Metal Claw"
 	li "Vital Throw"
 	li "HealingLight"
