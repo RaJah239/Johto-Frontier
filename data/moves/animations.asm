@@ -1,3 +1,167 @@
+; USE THIS ONE
+;BattleAnim_ShadowPunch: ; c95c3
+;	anim_1gfx BATTLE_ANIM_GFX_HIT
+;	anim_bgeffect BATTLE_BG_EFFECT_HIDE_MON, $0, $1, $0
+;	anim_bgp $1b
+;	;anim_obp0 $0
+;	anim_wait 24
+;	anim_sound 0, 1, SFX_MEGA_PUNCH
+;	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 56, $43
+;	anim_wait 16
+;	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
+;	anim_ret
+
+; Add this
+;BattleAnim_MudShot: ; c95c3
+;	anim_2gfx BATTLE_ANIM_GFX_SAND, BATTLE_ANIM_GFX_HIT
+;	anim_obp0 $fc
+;.loop
+;	anim_sound 6, 2, SFX_MENU
+;	anim_obj BATTLE_ANIM_OBJ_SAND, 64, 92, $4
+;	anim_wait 4
+;	anim_loop 8, .loop
+;	anim_wait 32
+;	anim_sound 0, 1, SFX_TACKLE
+;	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 48, $0
+;	anim_wait 32
+;	anim_ret
+
+; Unused
+;BattleAnim_HammerArm:
+;	anim_1gfx BATTLE_ANIM_GFX_HIT
+;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $14, $2, $0
+;	anim_wait 48
+;	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $3
+;	anim_sound 0, 1, SFX_MEGA_PUNCH
+;	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 24, $0
+;	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 24, $0
+;	anim_wait 12
+;	anim_sound 0, 1, SFX_MEGA_PUNCH
+;	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 40, $0
+;	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 40, $0
+;	anim_wait 12
+;	anim_sound 0, 1, SFX_MEGA_PUNCH
+;	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 56, $0
+;	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 56, $0
+;	anim_wait 12
+;	anim_ret
+
+; USE THIS ONE
+;BattleAnim_SignalBeam: ; c95c3
+;	anim_1gfx BATTLE_ANIM_GFX_BEAM
+;	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+;	anim_bgeffect BATTLE_BG_EFFECT_ALTERNATE_HUES, $0, $2, $0
+;	anim_wait 64
+;	anim_sound 0, 0, SFX_PERISH_SONG
+;	anim_obj BATTLE_ANIM_OBJ_BEAM, 64, 92, $0
+;	anim_wait 4
+;	anim_sound 0, 0, SFX_PERISH_SONG
+;	anim_obj BATTLE_ANIM_OBJ_BEAM, 80, 84, $0
+;	anim_wait 4
+;	anim_sound 0, 1, SFX_PERISH_SONG
+;	anim_obj BATTLE_ANIM_OBJ_BEAM, 96, 76, $0
+;	anim_wait 4
+;	anim_sound 0, 1, SFX_PERISH_SONG
+;	anim_obj BATTLE_ANIM_OBJ_BEAM, 112, 68, $0
+;	anim_obj BATTLE_ANIM_OBJ_BEAM_TIP, 126, 62, $0
+;	anim_wait 48
+;	anim_incobj  5
+;	anim_wait 64
+;	anim_ret
+
+; Unused
+;BattleAnim_IceShard:
+;	anim_1gfx BATTLE_ANIM_GFX_ICE
+;.loop
+;	anim_sound 6, 2, SFX_SHINE
+;	anim_obj BATTLE_ANIM_OBJ_ICE_BEAM, 64, 92, $4
+;	anim_wait 4
+;	anim_loop 5, .loop
+;	anim_wait 48
+;	anim_ret
+
+; Unused - this one might be more compact too
+;BattleAnim_Scald:
+;	anim_2gfx BATTLE_ANIM_GFX_HAZE, BATTLE_ANIM_GFX_WATER
+;	anim_sound 0, 1, SFX_HYDRO_PUMP
+;	anim_obj BATTLE_ANIM_OBJ_HYDRO_PUMP, 124, 72, $0
+;	anim_wait 8
+;	anim_sound 0, 1, SFX_HYDRO_PUMP
+;	anim_obj BATTLE_ANIM_OBJ_HYDRO_PUMP, 132, 72, $0
+;	anim_wait 8
+;	anim_sound 0, 1, SFX_HYDRO_PUMP
+;	anim_obj BATTLE_ANIM_OBJ_HYDRO_PUMP, 140, 72, $0
+;	anim_wait 16
+;.loop
+;	anim_obj BATTLE_ANIM_GFX_SMOKE, 132, 60, $20
+;	anim_wait 8
+;	anim_loop 5, .loop
+;	anim_wait 128
+;	anim_ret
+
+; Unused
+;BattleAnim_LavaPlume:
+;	anim_1gfx BATTLE_ANIM_GFX_FIRE
+;	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+;.loop
+;	anim_sound 0, 1, SFX_EMBER
+;	anim_obj BATTLE_ANIM_OBJ_FIRE_BLAST, 136, 48, $1
+;	anim_obj BATTLE_ANIM_OBJ_FIRE_BLAST, 136, 48, $4
+;	anim_obj BATTLE_ANIM_OBJ_FIRE_BLAST, 136, 48, $5
+;	anim_wait 8
+;	anim_loop 8, .loop
+;	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $0, $0
+;	anim_wait 4
+;	anim_incobj 9
+;	anim_wait 8
+;	anim_ret
+
+; Unused
+;BattleAnim_AquaTail:
+;	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_WATER
+;	anim_call BattleAnim_TargetObj_1Row
+;	anim_bgeffect BATTLE_BG_EFFECT_WOBBLE_MON, $0, $1, $0
+;	anim_wait 16
+;	anim_sound 0, 1, SFX_MEGA_KICK
+;	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 48, $0
+;	anim_wait 16
+;	anim_incbgeffect BATTLE_BG_EFFECT_WOBBLE_MON
+;	anim_sound 0, 1, SFX_HYDRO_PUMP
+;	anim_obj BATTLE_ANIM_OBJ_HYDRO_PUMP, 124, 72, $0
+;	anim_wait 8
+;	anim_sound 0, 1, SFX_HYDRO_PUMP
+;	anim_obj BATTLE_ANIM_OBJ_HYDRO_PUMP, 132, 72, $0
+;	anim_wait 8
+;	anim_sound 0, 1, SFX_HYDRO_PUMP
+;	anim_obj BATTLE_ANIM_OBJ_HYDRO_PUMP, 140, 72, $0
+;	anim_wait 16
+;	anim_call BattleAnim_ShowMon_0
+;	anim_ret
+
+; Unused
+;BattleAnim_CrossPoison:
+;	anim_2gfx BATTLE_ANIM_GFX_CUT, BATTLE_ANIM_GFX_POISON
+;	anim_sound 0, 1, SFX_CUT
+;	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 150, 30, $0
+;	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_RIGHT, 120, 30, $0
+;	anim_wait 32
+;	anim_jump BattleAnimSub_Sludge
+
+
+; Unused
+;BattleAnim_LeafBlade:
+;	anim_2gfx BATTLE_ANIM_GFX_PLANT, BATTLE_ANIM_GFX_CUT
+;	anim_sound 0, 1, SFX_CUT
+;	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 152, 40, $0
+;	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $28
+;	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $5c
+;	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $10
+;	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $e8
+;	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $9c
+;	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $d0
+;	anim_wait 32
+;	anim_ret
+
 BattleAnimations::
 ; entries correspond to constants/move_constants.asm
 	table_width 2, BattleAnimations
