@@ -192,6 +192,7 @@ BattleAnimFrameData:
 	dw .Frameset_DragonPulse         ; BATTLE_ANIM_FRAMESET_DRAGON_PULSE
 	dw .Frameset_SmallGlow           ; BATTLE_ANIM_FRAMESET_SMALL_GLOW
 	dw .Frameset_Icicle              ; BATTLE_ANIM_FRAMESET_ICICLE
+	dw .Frameset_WaterBall           ; BATTLE_ANIM_FRAMESET_WATER_BALL
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
 .Frameset_HitBig:
@@ -1303,3 +1304,11 @@ BattleAnimFrameData:
 .Frameset_Icicle:
 	oamframe BATTLE_ANIM_OAMSET_ICICLE, 8
 	oamend
+
+.Frameset_WaterBall:
+	oamframe BATTLE_ANIM_OAMSET_1B,  2
+	oamframe BATTLE_ANIM_OAMSET_7F,  2
+	oamframe BATTLE_ANIM_OAMSET_1B,  2
+	oamframe BATTLE_ANIM_OAMSET_7F,  2
+	oamframe BATTLE_ANIM_OAMSET_01,  2 ; HIT
+	oamrestart
