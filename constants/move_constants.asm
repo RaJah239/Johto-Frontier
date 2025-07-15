@@ -30,7 +30,7 @@
 	const VINE_WHIP    ; 16
 	const STOMP        ; 17
 	const DOUBLE_KICK  ; 18
-	const MEGA_KICK    ; 19
+	const FOCUS_BLAST  ; 19
 	const STICKY_WEB   ; 1a
 	const ROLLING_KICK ; 1b
 	const DRAIN_KISS   ; 1c

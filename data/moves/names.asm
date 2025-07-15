@@ -24,7 +24,7 @@ MoveNames::
 	li "Vine Whip"
 	li "Stomp"
 	li "Double Kick"
-	li "Mega Kick"
+	li "Focus Blast"
 	li "Sticky Web"
 	li "Rolling Kick"
 	li "Drain Kiss"

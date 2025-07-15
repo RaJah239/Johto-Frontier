@@ -325,7 +325,6 @@ DEF MT01 EQU const_value
 	add_mt SEISMIC_TOSS
 	add_mt BUBBLEBEAM
 	add_mt REFLECT
-	add_mt MEGA_KICK
 	add_mt BODY_SLAM
 	add_mt MIMIC
 	add_mt SELFDESTRUCT
