@@ -2399,23 +2399,24 @@ BattleAnim_FuryAttack:
 	anim_ret
 
 BattleAnim_RockTomb:
-	anim_2gfx BATTLE_ANIM_GFX_ROCKS, BATTLE_ANIM_GFX_HIT
-	anim_sound 0, 1, SFX_EGG_BOMB
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 77, $0
-	anim_obj BATTLE_ANIM_OBJ_ANCIENTPOWER, 136, 77, $20
+	anim_1gfx BATTLE_ANIM_GFX_ROCKS
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $4, $2, $0
+	anim_obj BATTLE_ANIM_OBJ_ROCK_TOMB, 128, 18, $10
+	anim_wait 12
+	anim_sound 0, 1, SFX_EGG_BOMB	
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $4, $2, $0
+	anim_obj BATTLE_ANIM_OBJ_ROCK_TOMB, 152, 17, $10
 	anim_wait 12
 	anim_sound 0, 1, SFX_EGG_BOMB
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 120, 77, $0
-	anim_obj BATTLE_ANIM_OBJ_ANCIENTPOWER, 120, 77, $20
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $4, $2, $0
+	anim_obj BATTLE_ANIM_OBJ_ROCK_TOMB, 112, 17, $10
 	anim_wait 12
 	anim_sound 0, 1, SFX_EGG_BOMB
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 152, 77, $0
-	anim_obj BATTLE_ANIM_OBJ_ANCIENTPOWER, 152, 77, $20
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $20, $2, $0
+	anim_obj BATTLE_ANIM_OBJ_ROCK_TOMB, 136, 16, $10
 	anim_wait 12
 	anim_sound 0, 1, SFX_EGG_BOMB
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 77, $0
-	anim_obj BATTLE_ANIM_OBJ_ANCIENTPOWER, 136, 77, $20
-	anim_wait 12
+	anim_wait 48
 	anim_ret
 
 BattleAnim_PoisonSting:

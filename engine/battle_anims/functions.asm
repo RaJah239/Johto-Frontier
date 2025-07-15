@@ -97,6 +97,7 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_Cotton
 	dw BattleAnimFunction_PowerGem
 	dw BattleAnimFunc_IceSplash
+	dw BattleAnimFunc_RockTomb
 	assert_table_length NUM_BATTLE_ANIM_FUNCS
 
 BattleAnimFunc_Null:
@@ -4388,3 +4389,36 @@ PowerGemFunction3:
 	ret nc
 	ld a, $8
 	jp BattleAnim_StepToTarget
+
+BattleAnimFunc_RockTomb:
+	call BattleAnim_AnonJumptable
+
+	dw .zero
+	dw .one
+	dw .two
+
+.zero
+	call BattleAnim_IncAnonJumptableIndex
+	ld hl, BATTLEANIMSTRUCT_VAR1
+	add hl, bc
+	ld a, $30
+	ld [hli], a
+	ld [hl], $48
+.one
+	ld hl, BATTLEANIMSTRUCT_VAR1
+	add hl, bc
+	ld a, [hli]
+	ld d, [hl]
+	call Sine
+	ld hl, BATTLEANIMSTRUCT_YOFFSET
+	add hl, bc
+	ld [hl], a
+	ld hl, BATTLEANIMSTRUCT_VAR1
+	add hl, bc
+	inc [hl]
+	ld a, [hl]
+	and $3f
+	ret nz
+	jp BattleAnim_IncAnonJumptableIndex
+.two
+	ret
