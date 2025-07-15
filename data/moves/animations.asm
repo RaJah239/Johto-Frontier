@@ -4286,17 +4286,10 @@ BattleAnim_IronHead:
 	anim_sound 0, 0, SFX_RAGE
 	anim_call BattleAnim_TargetObj_1Row
 	anim_call BattleAnimSub_Metallic
-	anim_wait 4
-	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_resetobp0
-	anim_bgeffect BATTLE_BG_EFFECT_WOBBLE_MON, $0, BG_EFFECT_USER, $0
-	anim_wait 16
-	anim_sound 0, 1, SFX_MEGA_KICK
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 48, $0
-	anim_wait 16
-	anim_incbgeffect BATTLE_BG_EFFECT_WOBBLE_MON
 	anim_call BattleAnim_ShowMon_0
-	anim_ret
+	anim_1gfx BATTLE_ANIM_GFX_CUT
+	anim_resetobp0
+	anim_jump BattleAnim_Headbutt
 
 BattleAnim_MetalClaw:
 	anim_1gfx BATTLE_ANIM_GFX_REFLECT
