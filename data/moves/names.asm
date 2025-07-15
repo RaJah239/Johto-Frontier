@@ -145,7 +145,7 @@ MoveNames::
 	li "Sky Attack"
 	li "Transform"
 	li "Calm Mind"
-	li "Dizzy Punch"
+	li "Shadow Sneak"
 	li "Spore"
 	li "Flash"
 	li "Psywave"

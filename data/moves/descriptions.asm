@@ -146,7 +146,7 @@ MoveDescriptions::
 	dw SkyAttackDescription
 	dw TransformDescription
 	dw CalmMindDescription
-	dw DizzyPunchDescription
+	dw ShadowSneakDescription
 	dw SporeDescription
 	dw FlashDescription
 	dw PsywaveDescription
@@ -617,6 +617,7 @@ AgilityDescription:
 	db   "Sharply increases"
 	line "the user's SPEED.@"
 
+ShadowSneakDescription:
 BulletPunchDescription:
 AquaJetDescription:
 QuickAttackDescription:
@@ -772,10 +773,6 @@ TransformDescription:
 CalmMindDescription:
 	db   "Raise Sp.Atk and"
 	line "Sp.Def stats.@"
-
-DizzyPunchDescription:
-	db   "An attack that may"
-	line "cause confusion.@"
 
 SporeDescription:
 	db   "A move that"

@@ -147,7 +147,7 @@ BattleAnimations::
 	dw BattleAnim_SkyAttack
 	dw BattleAnim_Transform
 	dw BattleAnim_CalmMind
-	dw BattleAnim_DizzyPunch
+	dw BattleAnim_ShadowSneak
 	dw BattleAnim_Spore
 	dw BattleAnim_Flash
 	dw BattleAnim_Psywave
@@ -2044,19 +2044,6 @@ BattleAnim_Amnesia:
 	anim_wait 64
 	anim_ret
 
-BattleAnim_DizzyPunch:
-	anim_2gfx BATTLE_ANIM_GFX_STATUS, BATTLE_ANIM_GFX_HIT
-	anim_sound 0, 1, SFX_MEGA_PUNCH
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 40, $0
-	anim_obj BATTLE_ANIM_OBJ_HIT_SMALL_YFIX, 136, 64, $0
-	anim_wait 16
-	anim_sound 0, 1, SFX_KINESIS
-	anim_obj BATTLE_ANIM_OBJ_CHICK, 136, 24, $15
-	anim_obj BATTLE_ANIM_OBJ_CHICK, 136, 24, $aa
-	anim_obj BATTLE_ANIM_OBJ_CHICK, 136, 24, $bf
-	anim_wait 96
-	anim_ret
-
 BattleAnim_AcidArmor:
 	anim_1gfx BATTLE_ANIM_GFX_HIT
 	anim_call BattleAnim_TargetObj_2Row
@@ -3628,6 +3615,36 @@ BattleAnim_ScaryFace:
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
 	anim_call BattleAnimSub_EyeBeams
 	anim_wait 64
+	anim_ret
+
+BattleAnim_ShadowSneak:
+	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_HIT
+	anim_sound 0, 0, SFX_LICK
+	anim_bgeffect BATTLE_BG_EFFECT_REMOVE_MON, $0, $1, $0
+	anim_wait 48
+	anim_sound 0, 1, SFX_COMET_PUNCH
+	anim_obj BATTLE_ANIM_OBJ_HIT, 104, 34, $0
+	anim_wait 2
+	anim_sound 0, 1, SFX_COMET_PUNCH
+	anim_obj BATTLE_ANIM_OBJ_HIT, 124, 34, $0
+	anim_wait 2
+	anim_sound 0, 1, SFX_COMET_PUNCH
+	anim_obj BATTLE_ANIM_OBJ_HIT, 144, 34, $0
+	anim_wait 16
+	anim_sound 0, 1, SFX_COMET_PUNCH
+	anim_obj BATTLE_ANIM_OBJ_HIT, 156, 52, $0
+	anim_wait 2
+	anim_sound 0, 1, SFX_COMET_PUNCH
+	anim_obj BATTLE_ANIM_OBJ_HIT, 138, 52, $0
+	anim_wait 2
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $2
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 122, 52, $0
+	anim_wait 12
+	anim_call BattleAnimSub_SpeedLines
+	anim_wait 8
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
+	anim_wait 4
 	anim_ret
 
 BattleAnim_FaintAttack:
