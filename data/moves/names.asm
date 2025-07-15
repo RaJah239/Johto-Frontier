@@ -196,7 +196,7 @@ MoveNames::
 	li "Destiny Bond"
 	li "Perish Song"
 	li "Icy Wind"
-	li "Detect"
+	li "Fairy Wind"
 	li "Snarl"
 	li "Lock-On"
 	li "Outrage"

@@ -295,7 +295,7 @@ BattleTowerMartTMCoinTraderScript:
     sjump .ConcludeTransaction
 
 .TMDetect:
-    verbosegiveitem TM_DETECT
+    verbosegiveitem TM_FAIRY_WIND
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
