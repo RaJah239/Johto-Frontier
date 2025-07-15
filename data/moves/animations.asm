@@ -21,7 +21,7 @@ BattleAnimations::
 	dw BattleAnim_WingAttack
 	dw BattleAnim_Whirlwind
 	dw BattleAnim_Fly
-	dw BattleAnim_Bind
+	dw BattleAnim_IcicleCrash
 	dw BattleAnim_PowerGem
 	dw BattleAnim_VineWhip
 	dw BattleAnim_Stomp
@@ -1849,20 +1849,24 @@ BattleAnim_DarkPulse:
 	anim_bgp $e4
 	anim_ret
 
-BattleAnim_Bind:
-	anim_1gfx BATTLE_ANIM_GFX_ROPE
-	anim_sound 0, 1, SFX_BIND
-	anim_obj BATTLE_ANIM_OBJ_BIND1, 132, 64, $0
+BattleAnim_IcicleCrash:
+	anim_2gfx BATTLE_ANIM_GFX_HORN, BATTLE_ANIM_GFX_HIT
+	anim_obj BATTLE_ANIM_OBJ_ICICLE,   9, 0,  10, 0, $3
 	anim_wait 8
-	anim_obj BATTLE_ANIM_OBJ_BIND2, 132, 56, $0
+.loop
+	anim_sound 0, 1, SFX_HORN_ATTACK
+	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, -16, 4,   5, 0, $0
 	anim_wait 8
-	anim_obj BATTLE_ANIM_OBJ_BIND1, 132, 48, $0
-	anim_wait 64
-	anim_sound 0, 1, SFX_BIND
-	anim_incobj 1
-	anim_incobj 2
-	anim_incobj 3
-	anim_wait 96
+	anim_sound 0, 1, SFX_HORN_ATTACK
+	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, -15, 4,   6, 0, $0
+	anim_wait 8
+	anim_sound 0, 1, SFX_HORN_ATTACK
+	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, -16, 4,   7, 0, $0
+	anim_wait 8
+	anim_sound 0, 1, SFX_HORN_ATTACK
+	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX,  15, 4,   6, 0, $0
+	anim_wait 8
+	anim_loop 3, .loop
 	anim_ret
 
 BattleAnim_Wrap:

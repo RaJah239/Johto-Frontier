@@ -19,7 +19,7 @@ MoveNames::
 	li "Wing Attack"
 	li "Whirlwind"
 	li "Fly"
-	li "Bind"
+	li "Icicle Crash"
 	li "Power Gem"
 	li "Vine Whip"
 	li "Stomp"

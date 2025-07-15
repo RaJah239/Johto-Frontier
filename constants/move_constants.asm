@@ -25,7 +25,7 @@
 	const WING_ATTACK  ; 11
 	const WHIRLWIND    ; 12
 	const FLY          ; 13
-	const BIND         ; 14
+	const ICICLE_CRASH ; 14
 	const POWER_GEM    ; 15
 	const VINE_WHIP    ; 16
 	const STOMP        ; 17

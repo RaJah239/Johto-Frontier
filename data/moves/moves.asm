@@ -33,7 +33,7 @@ Moves:
 	move WING_ATTACK,  EFFECT_NORMAL_HIT,         60, FLYING,        PHYSICAL, 100, 35,   0
 	move WHIRLWIND,    EFFECT_FORCE_SWITCH,        0, NORMAL,        STATUS,   100, 20,   0
 	move FLY,          EFFECT_FLY,                70, FLYING,        PHYSICAL,  95, 15,   0
-	move BIND,         EFFECT_TRAP_TARGET,        15, NORMAL,        PHYSICAL,  75, 20,   0
+	move ICICLE_CRASH, EFFECT_FLINCH_HIT,         85, ICE,           PHYSICAL,  90, 24,  30
 	move POWER_GEM,    EFFECT_NORMAL_HIT,         80, ROCK,          SPECIAL,  100, 24,   0
 	move VINE_WHIP,    EFFECT_NORMAL_HIT,         35, GRASS,         PHYSICAL, 100, 10,   0
 	move STOMP,        EFFECT_STOMP,              65, NORMAL,        PHYSICAL, 100, 20,  30
