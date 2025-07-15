@@ -119,7 +119,7 @@ MoveNames::
 	li "Dark Pulse"
 	li "Metronome"
 	li "Bulldoze"
-	li "Selfdestruct"
+	li "Throat Chop"
 	li "Egg Bomb"
 	li "Lick"
 	li "Smog"

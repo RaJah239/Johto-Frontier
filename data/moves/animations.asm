@@ -121,7 +121,7 @@ BattleAnimations::
 	dw BattleAnim_DarkPulse
 	dw BattleAnim_Metronome
 	dw BattleAnim_Bulldoze
-	dw BattleAnim_Selfdestruct
+	dw BattleAnim_ThroatChop
 	dw BattleAnim_EggBomb
 	dw BattleAnim_Lick
 	dw BattleAnim_Smog
@@ -1384,21 +1384,9 @@ BattleAnim_Gust:
 	anim_wait 16
 	anim_ret
 
-BattleAnim_Selfdestruct:
-	anim_1gfx BATTLE_ANIM_GFX_EXPLOSION
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $24
-	anim_if_param_equal $1, .loop
-	anim_call BattleAnimSub_Explosion2
-	anim_wait 16
-	anim_ret
-
-.loop
-	anim_call BattleAnimSub_Explosion1
-	anim_wait 5
-	anim_bgeffect BATTLE_BG_EFFECT_HIDE_MON, $0, BG_EFFECT_USER, $0
-	anim_loop 2, .loop
-	anim_wait 16
-	anim_ret
+BattleAnim_ThroatChop:
+	anim_call BattleAnim_InvertScreenColoursSub
+	anim_jump BattleAnim_CrossChop
 
 BattleAnim_Explosion:
 	anim_1gfx BATTLE_ANIM_GFX_EXPLOSION
@@ -1757,11 +1745,7 @@ BattleAnim_FocusEnergy:
 	anim_ret
 
 BattleAnim_DarkPulse:
-	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_EGG
-	anim_sound 0, 0, SFX_RAGE
-	anim_bgp $1b
-	anim_wait 32
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $2, $0
+	anim_call BattleAnim_InvertScreenColoursSub
 .loop
 	anim_sound 0, 0, SFX_AEROBLAST
 	anim_obj BATTLE_ANIM_OBJ_SHADOW_BALL,  7, 6, 11, 4, $2
@@ -1774,6 +1758,14 @@ BattleAnim_DarkPulse:
 	anim_call BattleAnim_ShowMon_1
 	anim_wait 1
 	anim_bgp $e4
+	anim_ret
+
+BattleAnim_InvertScreenColoursSub:
+	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_EGG
+	anim_sound 0, 0, SFX_RAGE
+	anim_bgp $1b
+	anim_wait 32
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $2, $0
 	anim_ret
 
 BattleAnim_IcicleCrash:

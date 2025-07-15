@@ -125,7 +125,7 @@
 	const DARK_PULSE   ; 75
 	const METRONOME    ; 76
 	const BULLDOZE     ; 77
-	const SELFDESTRUCT ; 78
+	const THROAT_CHOP  ; 78
 	const EGG_BOMB     ; 79
 	const LICK         ; 7a
 	const SMOG         ; 7b

@@ -120,7 +120,7 @@ MoveDescriptions::
 	dw DarkPulseDescription
 	dw MetronomeDescription
 	dw BulldozeDescription
-	dw SelfdestructDescription
+	dw ThroatChopDescription
 	dw EggBombDescription
 	dw LickDescription
 	dw SmogDescription
@@ -694,10 +694,6 @@ MetronomeDescription:
 	db   "Randomly uses any"
 	line "#MON move.@"
 
-SelfdestructDescription:
-	db   "Powerful but makes"
-	line "the user faint.@"
-
 EggBombDescription:
 	db   "Eggs are hurled at"
 	line "the foe.@"
@@ -1137,6 +1133,7 @@ HiddenPowerDescription:
 	db   "The type varies"
 	line "with the #MON.@"
 
+ThroatChopDescription:
 CrossChopDescription:
 	db   "Has a high criti-"
 	line "cal hit ratio.@"
