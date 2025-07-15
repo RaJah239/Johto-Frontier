@@ -211,7 +211,7 @@ BattleAnimations::
 	dw BattleAnim_Swagger
 	dw BattleAnim_Scald
 	dw BattleAnim_Spark
-	dw BattleAnim_FuryCutter
+	dw BattleAnim_ShadowPunch
 	dw BattleAnim_SteelWing
 	dw BattleAnim_MeanLook
 	dw BattleAnim_Attract
@@ -1174,7 +1174,6 @@ BattleAnim_SeedBomb:
 
 BattleAnim_MeteorMash:
 	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_EXPLOSION
-
 	anim_sound 0, 1, SFX_SUBMISSION
 	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 17, 0,  7, 0, $0
 	anim_wait 6
@@ -3673,7 +3672,7 @@ BattleAnim_FaintAttack:
 	anim_sound 0, 0, SFX_CURSE
 	anim_call BattleAnim_TargetObj_1Row
 	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_WHITE_WAIT_FADE_BACK, $0, BG_EFFECT_USER, $80
-	anim_wait 96
+	anim_wait 36
 	anim_sound 0, 1, SFX_COMET_PUNCH
 	anim_obj BATTLE_ANIM_OBJ_HIT, 120, 32, $0
 	anim_wait 8
@@ -3687,6 +3686,14 @@ BattleAnim_FaintAttack:
 	anim_call BattleAnim_ShowMon_0
 	anim_wait 4
 	anim_ret
+
+BattleAnim_ShadowPunch:
+	anim_1gfx BATTLE_ANIM_GFX_HIT
+	anim_sound 0, 0, SFX_CURSE
+	anim_call BattleAnim_TargetObj_1Row
+	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_WHITE_WAIT_FADE_BACK, $0, BG_EFFECT_USER, $80
+	anim_wait 36
+	anim_jump BattleAnim_ImpactfulPunchSub
 
 BattleAnim_SweetKiss:
 	anim_2gfx BATTLE_ANIM_GFX_OBJECTS, BATTLE_ANIM_GFX_ANGELS
@@ -4077,21 +4084,6 @@ BattleAnim_Spark:
 	anim_obj BATTLE_ANIM_OBJ_THUNDERBOLT_BALL, 136, 56, $2
 	anim_obj BATTLE_ANIM_OBJ_SPARKS_CIRCLE, 136, 56, $0
 	anim_wait 32
-	anim_ret
-
-BattleAnim_FuryCutter:
-	anim_1gfx BATTLE_ANIM_GFX_CUT
-.loop
-	anim_sound 0, 1, SFX_CUT
-	anim_if_param_and %00000001, .obj1
-	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 152, 40, $0
-	anim_jump .okay
-
-.obj1
-	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_RIGHT, 112, 40, $0
-.okay
-	anim_wait 16
-	anim_jumpuntil .loop
 	anim_ret
 
 BattleAnim_SteelWing:

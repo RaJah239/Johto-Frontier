@@ -325,7 +325,7 @@ BattleTowerMartTMCoinTraderScript:
     sjump .ConcludeTransaction
 
 .TMFuryCutter:
-    verbosegiveitem TM_FURY_CUTTER
+    verbosegiveitem TM_SHADOW_PUNCH
     iffalse .NoRoom
     sjump .ConcludeTransaction
 

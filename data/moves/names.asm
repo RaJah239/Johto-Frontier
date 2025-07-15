@@ -209,7 +209,7 @@ MoveNames::
 	li "Swagger"
 	li "Scald"
 	li "Spark"
-	li "Fury Cutter"
+	li "Shadow Punch"
 	li "Steel Wing"
 	li "Mean Look"
 	li "Attract"
