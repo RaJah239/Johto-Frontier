@@ -225,7 +225,7 @@ MoveDescriptions::
 	dw QuiverDanceDescription
 	dw MeteorMashDescription
 	dw MegahornDescription
-	dw DragonbreathDescription
+	dw DragonPulseDescription
 	dw BatonPassDescription
 	dw EncoreDescription
 	dw PursuitDescription
@@ -1097,9 +1097,9 @@ MegahornDescription:
 	db   "A powerful charge"
 	line "attack.@"
 
-DragonbreathDescription:
-	db   "A strong breath"
-	line "attack.@"
+DragonPulseDescription:
+	db   "An attack that may"
+	line "increase Sp.Atk.@"
 
 BatonPassDescription:
 	db   "Switches while"

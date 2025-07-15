@@ -224,7 +224,7 @@ MoveNames::
 	li "Quiver Dance"
 	li "Meteor Mash"
 	li "Megahorn"
-	li "DragonBreath"
+	li "Dragon Pulse"
 	li "Baton Pass"
 	li "Encore"
 	li "Pursuit"

@@ -226,7 +226,7 @@ BattleAnimations::
 	dw BattleAnim_QuiverDance
 	dw BattleAnim_MeteorMash
 	dw BattleAnim_Megahorn
-	dw BattleAnim_Dragonbreath
+	dw BattleAnim_DragonPulse
 	dw BattleAnim_BatonPass
 	dw BattleAnim_Encore
 	dw BattleAnim_Pursuit
@@ -4209,14 +4209,21 @@ BattleAnim_Megahorn:
 	anim_loop 3, .loop
 	anim_ret
 
-BattleAnim_Dragonbreath:
-	anim_1gfx BATTLE_ANIM_GFX_FIRE
-	anim_sound 6, 2, SFX_EMBER
+BattleAnim_DragonPulse:
+	anim_2gfx BATTLE_ANIM_GFX_GLOW, BATTLE_ANIM_GFX_CHARGE
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $55, $1, $0
+	anim_bgeffect BATTLE_BG_EFFECT_ALTERNATE_HUES, $0, $2, $0
+	anim_obj BATTLE_ANIM_OBJ_SMALL_GLOW, 48, 96, $0
 .loop
-	anim_obj BATTLE_ANIM_OBJ_DRAGONBREATH, 64, 92, $4
+	anim_sound 0, 0, SFX_AEROBLAST
+	anim_obj BATTLE_ANIM_OBJ_DRAGON_PULSE, 64, 88, $4
 	anim_wait 4
-	anim_loop 10, .loop
-	anim_wait 64
+	anim_loop 16, .loop
+	anim_incobj 1
+	anim_wait 16
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
+	anim_wait 4
 	anim_ret
 
 BattleAnim_BatonPass:
@@ -5109,4 +5116,14 @@ BattleAnimSub_SpeedLines:
 ;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $38
 ;	anim_wait 128
 ;	anim_wait 48
+;	anim_ret
+
+;BattleAnim_Dragonbreath:
+;	anim_1gfx BATTLE_ANIM_GFX_FIRE
+;	anim_sound 6, 2, SFX_EMBER
+;.loop
+;	anim_obj BATTLE_ANIM_OBJ_DRAGONBREATH, 64, 92, $4
+;	anim_wait 4
+;	anim_loop 10, .loop
+;	anim_wait 64
 ;	anim_ret

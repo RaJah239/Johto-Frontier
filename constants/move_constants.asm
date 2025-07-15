@@ -230,7 +230,7 @@
 	const QUIVER_DANCE ; de
 	const METEOR_MASH  ; df
 	const MEGAHORN     ; e0
-	const DRAGONBREATH ; e1
+	const DRAGON_PULSE ; e1
 	const BATON_PASS   ; e2
 	const ENCORE       ; e3
 	const PURSUIT      ; e4

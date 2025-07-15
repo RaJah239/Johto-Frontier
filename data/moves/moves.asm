@@ -238,7 +238,7 @@ Moves:
 	move QUIVER_DANCE, EFFECT_QUIVER_DANCE,        0, BUG,           STATUS,   100, 24,   0
 	move METEOR_MASH,  EFFECT_ATTACK_UP_HIT,     100, STEEL,         PHYSICAL,  90, 16,  20
 	move MEGAHORN,     EFFECT_NORMAL_HIT,        120, BUG,           PHYSICAL,  85, 16,   0
-	move DRAGONBREATH, EFFECT_PARALYZE_HIT,       60, DRAGON,        SPECIAL,  100, 20,  30
+	move DRAGON_PULSE, EFFECT_SP_ATK_UP_HIT,      85, DRAGON,        SPECIAL,  100, 24,  20
 	move BATON_PASS,   EFFECT_BATON_PASS,          0, NORMAL,        STATUS,   100, 40,   0
 	move ENCORE,       EFFECT_ENCORE,              0, NORMAL,        STATUS,   100,  5,   0
 	move PURSUIT,      EFFECT_PURSUIT,            40, DARK,          PHYSICAL, 100, 20,   0

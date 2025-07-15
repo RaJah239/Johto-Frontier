@@ -200,7 +200,7 @@ BattleTowerMartTMCoinTraderScript:
     sjump .ConcludeTransaction
 
 .TMDragonBreadth:
-    verbosegiveitem TM_DRAGONBREATH
+    verbosegiveitem TM_DRAGON_PULSE
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
