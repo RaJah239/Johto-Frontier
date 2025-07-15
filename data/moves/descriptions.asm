@@ -440,6 +440,7 @@ AcidDescription:
 	db   "An attack that may"
 	line "lower DEFENSE.@"
 
+EggBombDescription:
 ScaldDescription:
 SeedBombDescription:
 EmberDescription:
@@ -697,10 +698,6 @@ FocusEnergyDescription:
 MetronomeDescription:
 	db   "Randomly uses any"
 	line "#MON move.@"
-
-EggBombDescription:
-	db   "Eggs are hurled at"
-	line "the foe.@"
 
 LickDescription:
 	db   "An attack that may"
