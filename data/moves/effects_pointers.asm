@@ -142,7 +142,6 @@ MoveEffectsPointers:
 	dw PsychUp
 	dw MirrorCoat
 	dw SkullBash
-	dw Twister
 	dw Earthquake
 	dw Gust
 	dw Stomp

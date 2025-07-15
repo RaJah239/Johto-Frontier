@@ -1827,28 +1827,6 @@ SkullBash:
 	statupmessage
 	endmove
 
-Twister:
-	checkobedience
-	usedmovetext
-	doturn
-	critical
-	damagestats
-	damagecalc
-	stab
-	damagevariation
-	doubleflyingdamage
-	checkhit
-	effectchance
-	moveanim
-	failuretext
-	applydamage
-	criticaltext
-	supereffectivetext
-	checkfaint
-	buildopponentrage
-	flinchtarget
-	endmove
-
 Earthquake:
 	checkobedience
 	usedmovetext

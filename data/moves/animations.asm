@@ -240,7 +240,7 @@ BattleAnimations::
 	dw BattleAnim_XScissor
 	dw BattleAnim_HiddenPower
 	dw BattleAnim_CrossChop
-	dw BattleAnim_Twister
+	dw BattleAnim_DragonClaw
 	dw BattleAnim_RainDance
 	dw BattleAnim_SunnyDay
 	dw BattleAnim_Crunch
@@ -4488,47 +4488,23 @@ BattleAnim_CrossChop:
 	anim_wait 16
 	anim_ret
 
-BattleAnim_Twister:
-	anim_2gfx BATTLE_ANIM_GFX_WIND, BATTLE_ANIM_GFX_HIT
-.loop1
-	anim_sound 0, 0, SFX_RAZOR_WIND
-	anim_obj BATTLE_ANIM_OBJ_GUST, 64, 112, $0
-	anim_wait 6
-	anim_loop 9, .loop1
-.loop2
-	anim_sound 0, 0, SFX_RAZOR_WIND
+BattleAnim_DragonClaw:
+	anim_2gfx BATTLE_ANIM_GFX_CUT, BATTLE_ANIM_GFX_FIRE
+	anim_obp0 0, 1, 2, 3
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $40, $2, $0
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $3
+	anim_sound 0, 1, SFX_CUT
+	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 19, 0,  5, 0, $0
+	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 18, 4,  4, 4, $0
+	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 18, 0,  4, 0, $0
+	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 17, 4,  3, 4, $0
 	anim_wait 8
-	anim_loop 8, .loop2
-	anim_incobj 1
-	anim_incobj 2
-	anim_incobj 3
-	anim_incobj 4
-	anim_incobj 5
-	anim_incobj 6
-	anim_incobj 7
-	anim_incobj 8
-	anim_incobj 9
-	anim_wait 64
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 144, 64, $18
-.loop3
-	anim_sound 0, 1, SFX_RAZOR_WIND
-	anim_wait 8
-	anim_loop 4, .loop3
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 128, 32, $18
-.loop4
-	anim_sound 0, 1, SFX_RAZOR_WIND
-	anim_wait 8
-	anim_loop 4, .loop4
-	anim_incobj 1
-	anim_incobj 2
-	anim_incobj 3
-	anim_incobj 4
-	anim_incobj 5
-	anim_incobj 6
-	anim_incobj 7
-	anim_incobj 8
-	anim_incobj 9
-	anim_wait 32
+	anim_obj BATTLE_ANIM_OBJ_BURNED,  15, 0, 8, 4, 6
+	anim_obj BATTLE_ANIM_OBJ_BURNED,  14, 0, 7, 4, 7
+	anim_obj BATTLE_ANIM_OBJ_BURNED,  13, 0, 6, 4, 8
+	anim_wait 16
+	anim_sound 0, 0, SFX_BURN
+	anim_wait 16
 	anim_ret
 
 BattleAnim_RainDance:

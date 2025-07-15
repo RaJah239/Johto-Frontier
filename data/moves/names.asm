@@ -238,7 +238,7 @@ MoveNames::
 	li "X-Scissor"
 	li "Hidden Power"
 	li "Cross Chop"
-	li "Twister"
+	li "Dragon Claw"
 	li "Rain Dance"
 	li "Sunny Day"
 	li "Crunch"

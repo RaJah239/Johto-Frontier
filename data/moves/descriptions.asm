@@ -239,7 +239,7 @@ MoveDescriptions::
 	dw XScissorDescription
 	dw HiddenPowerDescription
 	dw CrossChopDescription
-	dw TwisterDescription
+	dw DragonClawDescription
 	dw RainDanceDescription
 	dw SunnyDayDescription
 	dw CrunchDescription
@@ -267,6 +267,7 @@ MoveFFDescription:
 Move00Description:
 	db "?@"
 
+DragonClawDescription:
 XScissorDescription:
 KarateChopDescription:
 	db   "Has a high criti-"
@@ -1139,10 +1140,6 @@ HiddenPowerDescription:
 CrossChopDescription:
 	db   "Has a high criti-"
 	line "cal hit ratio.@"
-
-TwisterDescription:
-	db   "Whips up a tornado"
-	line "to attack.@"
 
 RainDanceDescription:
 	db   "Boosts water-type"

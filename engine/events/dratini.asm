@@ -73,7 +73,7 @@ GiveDratini:
 ; Dratini does not normally learn Extremespeed. This is a special gift.
 	db WRAP
 	db THUNDER_WAVE
-	db TWISTER
+	db TACKLE
 	db EXTREMESPEED
 	db 0
 .Moveset1:
@@ -81,7 +81,7 @@ GiveDratini:
 	db WRAP
 	db LEER
 	db THUNDER_WAVE
-	db TWISTER
+	db TACKLE
 	db 0
 
 .GetNthPartyMon:

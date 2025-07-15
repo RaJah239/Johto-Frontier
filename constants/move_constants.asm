@@ -244,7 +244,7 @@
 	const X_SCISSOR    ; ec
 	const HIDDEN_POWER ; ed
 	const CROSS_CHOP   ; ee
-	const TWISTER      ; ef
+	const DRAGON_CLAW  ; ef
 	const RAIN_DANCE   ; f0
 	const SUNNY_DAY    ; f1
 	const CRUNCH       ; f2
