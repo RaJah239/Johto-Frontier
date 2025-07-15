@@ -154,7 +154,7 @@ MoveNames::
 	li "Fairy Flash"
 	li "Explosion"
 	li "Fury Stripes"
-	li "Bonemerang"
+	li "Hidden Force"
 	li "Rest"
 	li "Rock Slide"
 	li "Hyper Fang"

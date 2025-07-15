@@ -156,7 +156,7 @@ BattleAnimations::
 	dw BattleAnim_FairyFlash
 	dw BattleAnim_Explosion
 	dw BattleAnim_FuryStrikes
-	dw BattleAnim_Bonemerang
+	dw BattleAnim_HiddenForce
 	dw BattleAnim_Rest
 	dw BattleAnim_RockSlide
 	dw BattleAnim_HyperFang
@@ -2496,16 +2496,6 @@ BattleAnim_LovelyKiss:
 	anim_wait 40
 	anim_ret
 
-BattleAnim_Bonemerang:
-	anim_2gfx BATTLE_ANIM_GFX_MISC, BATTLE_ANIM_GFX_HIT
-	anim_sound 6, 2, SFX_HYDRO_PUMP
-	anim_obj BATTLE_ANIM_OBJ_BONEMERANG, 88, 56, $1c
-	anim_wait 24
-	anim_sound 0, 1, SFX_MOVE_PUZZLE_PIECE
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
-	anim_wait 24
-	anim_ret
-
 BattleAnim_Swift:
 	anim_1gfx BATTLE_ANIM_GFX_OBJECTS
 	anim_sound 6, 2, SFX_METRONOME
@@ -4502,7 +4492,7 @@ BattleAnim_HiddenPower:
 .loop
 	anim_sound 0, 0, SFX_SWORDS_DANCE
 	anim_wait 8
-	anim_loop 12, .loop
+	anim_loop 4, .loop
 	anim_incbgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING
 	anim_call BattleAnim_ShowMon_0
 	anim_wait 1
@@ -4517,7 +4507,44 @@ BattleAnim_HiddenPower:
 	anim_wait 16
 	anim_1gfx BATTLE_ANIM_GFX_HIT
 	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 56, $0
-	anim_wait 32
+	anim_wait 10
+	anim_ret
+
+BattleAnim_HiddenForce:
+	anim_1gfx BATTLE_ANIM_GFX_CHARGE
+	anim_call BattleAnim_TargetObj_1Row
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, BG_EFFECT_USER, $20
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $0
+	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $8
+	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $10
+	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $18
+	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $20
+	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $28
+	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $30
+	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $38
+.loop
+	anim_sound 0, 0, SFX_SWORDS_DANCE
+	anim_wait 8
+	anim_loop 4, .loop
+	anim_incbgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING
+	anim_call BattleAnim_ShowMon_0
+	anim_wait 1
+	anim_incobj 2
+	anim_incobj 3
+	anim_incobj 4
+	anim_incobj 5
+	anim_incobj 6
+	anim_incobj 7
+	anim_incobj 8
+	anim_incobj 9
+	anim_wait 16
+	anim_2gfx BATTLE_ANIM_GFX_EGG, BATTLE_ANIM_GFX_EXPLOSION; bombs start here
+	anim_sound 0, 0, SFX_SWITCH_POKEMON
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $3
+	anim_sound 0, 1, SFX_EGG_BOMB
+	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 136, 56, $0
+	anim_wait 10
 	anim_ret
 
 BattleAnim_CrossChop:
@@ -5192,4 +5219,14 @@ BattleAnimSub_SpeedLines:
 ;	anim_wait 1
 ;	anim_incbgeffect BATTLE_BG_EFFECT_WITHDRAW
 ;	anim_call BattleAnim_ShowMon_0
+;	anim_ret
+
+;BattleAnim_Bonemerang:
+;	anim_2gfx BATTLE_ANIM_GFX_MISC, BATTLE_ANIM_GFX_HIT
+;	anim_sound 6, 2, SFX_HYDRO_PUMP
+;	anim_obj BATTLE_ANIM_OBJ_BONEMERANG, 88, 56, $1c
+;	anim_wait 24
+;	anim_sound 0, 1, SFX_MOVE_PUZZLE_PIECE
+;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
+;	anim_wait 24
 ;	anim_ret

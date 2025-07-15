@@ -113,6 +113,8 @@ PrintMoveType:
 	ld a, b
 	cp HIDDEN_POWER
 	jr z, .print_hidden_power
+	cp HIDDEN_FORCE
+	jr z, .print_hidden_power
 	dec a
 	ld bc, MOVE_LENGTH
 	ld hl, Moves
