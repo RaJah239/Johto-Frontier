@@ -326,14 +326,14 @@ endr
 
 .DrawDayTimeBox:
 	; place white box
-	hlcoord 0, 15
-	lb bc, 3, 10
+	hlcoord 0, 13
+	lb bc, 5, 11
 	call ClearBox
 
-	; grab white text box palette
-	hlcoord 0, 15
-	lb bc, 2, 8
-	jmp TextboxPalette
+	; text box
+	hlcoord 0, 13
+	lb bc, 3, 9
+	jp Textbox
 
 .PrintDayTime:
 	call .DrawDayTimeBox
@@ -343,7 +343,7 @@ endr
 	ld b, a
 	ld a, [hMinutes]
 	ld c, a
-	decoord 1, 16
+	decoord 1, 14
 	farcall PrintHoursMins
 
 
@@ -365,31 +365,31 @@ endr
 	ret
 
 .PrintRaining:
-	hlcoord 1, 17
+	hlcoord 1, 16
 	ld de, .RainingStr
 	call PlaceString
 	jr .done
 
 .PrintSunny:
-	hlcoord 1, 17
+	hlcoord 1, 16
 	ld de, .SunnyStr
 	call PlaceString
 	jr .done
 
 .PrintSandstorm:
-	hlcoord 1, 17
+	hlcoord 1, 16
 	ld de, .SandstormStr
 	call PlaceString
 	jr .done
 
 .PrintHailing:
-	hlcoord 1, 17
+	hlcoord 1, 16
 	ld de, .HailingStr
 	call PlaceString
 	jr .done
 
 .PrintClearSkies:
-	hlcoord 1, 17
+	hlcoord 1, 16
 	ld de, .ClearStr
 	call PlaceString
 .done:
