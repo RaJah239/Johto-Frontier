@@ -33,7 +33,7 @@ BattleAnimations::
 	dw BattleAnim_Headbutt
 	dw BattleAnim_HornAttack
 	dw BattleAnim_FuryAttack
-	dw BattleAnim_HornDrill
+	dw BattleAnim_RockTomb
 	dw BattleAnim_Tackle
 	dw BattleAnim_BodySlam
 	dw BattleAnim_Wrap
@@ -2398,25 +2398,24 @@ BattleAnim_FuryAttack:
 	anim_wait 8
 	anim_ret
 
-BattleAnim_HornDrill:
-	anim_2gfx BATTLE_ANIM_GFX_HORN, BATTLE_ANIM_GFX_HIT
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $40
-	anim_obj BATTLE_ANIM_OBJ_HORN, 72, 80, $3
-	anim_wait 8
-.loop
-	anim_sound 0, 1, SFX_HORN_ATTACK
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 132, 40, $0
-	anim_wait 8
-	anim_sound 0, 1, SFX_HORN_ATTACK
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 140, 48, $0
-	anim_wait 8
-	anim_sound 0, 1, SFX_HORN_ATTACK
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 132, 56, $0
-	anim_wait 8
-	anim_sound 0, 1, SFX_HORN_ATTACK
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 124, 48, $0
-	anim_wait 8
-	anim_loop 3, .loop
+BattleAnim_RockTomb:
+	anim_2gfx BATTLE_ANIM_GFX_ROCKS, BATTLE_ANIM_GFX_HIT
+	anim_sound 0, 1, SFX_EGG_BOMB
+	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 77, $0
+	anim_obj BATTLE_ANIM_OBJ_ANCIENTPOWER, 136, 77, $20
+	anim_wait 12
+	anim_sound 0, 1, SFX_EGG_BOMB
+	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 120, 77, $0
+	anim_obj BATTLE_ANIM_OBJ_ANCIENTPOWER, 120, 77, $20
+	anim_wait 12
+	anim_sound 0, 1, SFX_EGG_BOMB
+	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 152, 77, $0
+	anim_obj BATTLE_ANIM_OBJ_ANCIENTPOWER, 152, 77, $20
+	anim_wait 12
+	anim_sound 0, 1, SFX_EGG_BOMB
+	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 77, $0
+	anim_obj BATTLE_ANIM_OBJ_ANCIENTPOWER, 136, 77, $20
+	anim_wait 12
 	anim_ret
 
 BattleAnim_PoisonSting:

@@ -32,7 +32,7 @@ MoveDescriptions::
 	dw HeadbuttDescription
 	dw HornAttackDescription
 	dw FuryAttackDescription
-	dw HornDrillDescription
+	dw RockTombDescription
 	dw TackleDescription
 	dw BodySlamDescription
 	dw WrapDescription
@@ -359,10 +359,6 @@ HornAttackDescription:
 FuryAttackDescription:
 	db   "Jabs the target"
 	line "2-5 times.@"
-
-HornDrillDescription:
-	db   "A one-hit KO,"
-	line "drill attack.@"
 
 TackleDescription:
 	db   "A full-body charge"
@@ -980,6 +976,7 @@ PerishSongDescription:
 	db   "Both user and foe"
 	line "faint in 3 turns.@"
 
+RockTombDescription:
 BulldozeDescription:
 IcyWindDescription:
 	db   "An attack that"

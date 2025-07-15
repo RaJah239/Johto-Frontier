@@ -31,7 +31,7 @@ MoveNames::
 	li "Headbutt"
 	li "Horn Attack"
 	li "Fury Attack"
-	li "Horn Drill"
+	li "Rock Tomb"
 	li "Tackle"
 	li "Body Slam"
 	li "Wrap"
