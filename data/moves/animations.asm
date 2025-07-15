@@ -177,7 +177,7 @@ BattleAnimations::
 	dw BattleAnim_Snore
 	dw BattleAnim_Curse
 	dw BattleAnim_Flail
-	dw BattleAnim_Conversion2
+	dw BattleAnim_Hurricane
 	dw BattleAnim_Aeroblast
 	dw BattleAnim_CottonSpore
 	dw BattleAnim_Reversal
@@ -2904,19 +2904,22 @@ BattleAnim_Growth:
 	anim_wait 64
 	anim_ret
 
-BattleAnim_Conversion2:
-	anim_1gfx BATTLE_ANIM_GFX_EXPLOSION
-	anim_sound 63, 3, SFX_SHARPEN
-	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $0
-	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $8
-	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $10
-	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $18
-	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $20
-	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $28
-	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $30
-	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $38
-	anim_wait 128
-	anim_wait 48
+BattleAnim_Hurricane:
+	anim_2gfx BATTLE_ANIM_GFX_WIND, BATTLE_ANIM_GFX_HIT
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $90, $4, $10
+	anim_obp0 $30
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $6, $20
+.loop
+	anim_sound 0, 1, SFX_RAZOR_WIND
+	anim_obj BATTLE_ANIM_OBJ_GUST, 136, 72, $0
+	anim_wait 4
+	anim_sound 0, 1, SFX_RAZOR_WIND
+	anim_wait 4
+	anim_loop 12, .loop
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 144, 64, $18
+	anim_wait 8
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 128, 32, $18
+	anim_wait 16
 	anim_ret
 
 BattleAnim_Smokescreen:
@@ -5105,4 +5108,19 @@ BattleAnimSub_SpeedLines:
 ;	anim_incbgeffect BATTLE_BG_EFFECT_WOBBLE_MON
 ;	anim_wait 1
 ;	anim_call BattleAnim_ShowMon_0
+;	anim_ret
+
+;BattleAnim_Conversion2:
+;	anim_1gfx BATTLE_ANIM_GFX_EXPLOSION
+;	anim_sound 63, 3, SFX_SHARPEN
+;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $0
+;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $8
+;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $10
+;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $18
+;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $20
+;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $28
+;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $30
+;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $38
+;	anim_wait 128
+;	anim_wait 48
 ;	anim_ret

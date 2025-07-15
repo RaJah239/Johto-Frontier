@@ -175,7 +175,7 @@ MoveNames::
 	li "Snore"
 	li "Curse"
 	li "Flail"
-	li "Conversion2"
+	li "Hurricane"
 	li "Aeroblast"
 	li "Cotton Spore"
 	li "Reversal"

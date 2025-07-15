@@ -176,7 +176,7 @@ MoveDescriptions::
 	dw SnoreDescription
 	dw CurseDescription
 	dw FlailDescription
-	dw Conversion2Description
+	dw HurricaneDescription
 	dw AeroblastDescription
 	dw CottonSporeDescription
 	dw ReversalDescription
@@ -477,6 +477,7 @@ BlizzardDescription:
 	db   "An attack that may"
 	line "cause frostbite.@"
 
+HurricaneDescription:
 PsybeamDescription:
 	db   "An attack that may"
 	line "confuse the foe.@"
@@ -909,10 +910,6 @@ CurseDescription:
 FlailDescription:
 	db   "Stronger if the"
 	line "user's HP is low.@"
-
-Conversion2Description:
-	db   "The user's type is"
-	line "made resistant.@"
 
 AeroblastDescription:
 	db   "Has a high criti-"

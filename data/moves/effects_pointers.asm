@@ -167,4 +167,5 @@ MoveEffectsPointers:
 	dw SpeedUpHit
 	dw Hex
 	dw Facade
+	dw Hurricane
 	assert_table_length NUM_MOVE_EFFECTS

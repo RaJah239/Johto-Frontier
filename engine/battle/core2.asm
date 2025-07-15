@@ -413,6 +413,8 @@ FlyDigMovesMiss:
 	ret z
 	cp THUNDER
 	ret z
+	cp HURRICANE
+	ret z
 	ret
 
 .DigMoves:
@@ -421,6 +423,17 @@ FlyDigMovesMiss:
 	cp EARTHQUAKE
 	ret z
 	cp FISSURE
+	ret
+
+HurricaneRain:
+; Return z if the current move always hits in rain, and it is raining.
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_HURRICANE
+	ret nz
+
+	ld a, [wBattleWeather]
+	cp WEATHER_RAIN
 	ret
 
 DreamEaterMiss:

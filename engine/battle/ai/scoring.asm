@@ -409,6 +409,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_HAIL,             AI_Smart_Hail
 	dbw EFFECT_FACADE,           AI_Smart_Facade
 	dbw EFFECT_HEX,              AI_Smart_Hex
+	dbw EFFECT_HURRICANE,        AI_Smart_Hurricane
 	db -1 ; end
 
 AI_Smart_Facade:
@@ -2588,6 +2589,7 @@ AI_Smart_Solarbeam:
 	ret
 
 AI_Smart_Thunder:
+AI_Smart_Hurricane:
 ; 90% chance to discourage this move when it's sunny.
 
 	ld a, [wBattleWeather]

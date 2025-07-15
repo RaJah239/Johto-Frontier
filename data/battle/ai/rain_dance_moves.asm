@@ -8,4 +8,5 @@ RainDanceMoves:
 	db THUNDER
 	db WATERFALL
 	db WHIRLPOOL
+	db HURRICANE
 	db -1 ; end

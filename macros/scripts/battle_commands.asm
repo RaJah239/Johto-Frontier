@@ -185,6 +185,7 @@ ENDM
 	command closecombat
 	command hex
 	command facade                  ; be
+	command hurricaneaccuracy       ; bf
 DEF NUM_EFFECT_COMMANDS EQU const_value - 1
 
 	const_def -1, -1
