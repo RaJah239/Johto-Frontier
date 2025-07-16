@@ -1,16 +1,3 @@
-; USE THIS ONE
-;BattleAnim_ShadowPunch: ; c95c3
-;	anim_1gfx BATTLE_ANIM_GFX_HIT
-;	anim_bgeffect BATTLE_BG_EFFECT_HIDE_MON, $0, $1, $0
-;	anim_bgp $1b
-;	;anim_obp0 $0
-;	anim_wait 24
-;	anim_sound 0, 1, SFX_MEGA_PUNCH
-;	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 56, $43
-;	anim_wait 16
-;	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
-;	anim_ret
-
 ; Add this
 ;BattleAnim_MudShot: ; c95c3
 ;	anim_2gfx BATTLE_ANIM_GFX_SAND, BATTLE_ANIM_GFX_HIT
@@ -3800,13 +3787,27 @@ BattleAnim_FaintAttack:
 	anim_wait 4
 	anim_ret
 
+; Ported from https://github.com/AzureKeys/BW3G
 BattleAnim_ShadowPunch:
 	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_sound 0, 0, SFX_CURSE
-	anim_call BattleAnim_TargetObj_1Row
-	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_WHITE_WAIT_FADE_BACK, $0, BG_EFFECT_USER, $80
-	anim_wait 36
-	anim_jump BattleAnim_ImpactfulPunchSub
+	anim_bgeffect BATTLE_BG_EFFECT_HIDE_MON, $0, $1, $0
+	anim_bgp $1b
+	;anim_obp0 $0
+	anim_wait 24
+	anim_sound 0, 1, SFX_MEGA_PUNCH
+	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 56, $43
+	anim_wait 16
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
+	anim_ret
+
+; First version
+;BattleAnim_ShadowPunch:
+;	anim_1gfx BATTLE_ANIM_GFX_HIT
+;	anim_sound 0, 0, SFX_CURSE
+;	anim_call BattleAnim_TargetObj_1Row
+;	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_WHITE_WAIT_FADE_BACK, $0, BG_EFFECT_USER, $80
+;	anim_wait 36
+;	anim_jump BattleAnim_ImpactfulPunchSub
 
 BattleAnim_SweetKiss:
 	anim_2gfx BATTLE_ANIM_GFX_OBJECTS, BATTLE_ANIM_GFX_ANGELS
