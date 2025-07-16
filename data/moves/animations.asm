@@ -1,3 +1,17 @@
+;=============================
+;============NOTES============
+;=============================
+
+; If more space is needed, replace Rock Tomb's animation
+; with Vanilla Rock throws'. It's right next to it
+
+;Poison Jab:
+;	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_POISON
+;	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 56, $43
+;	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $2
+;	anim_wait 16
+;	anim_jump BattleAnimSub_Sludge
+
 ; Add this
 ;BattleAnim_MudShot: ; c95c3
 ;	anim_2gfx BATTLE_ANIM_GFX_SAND, BATTLE_ANIM_GFX_HIT
@@ -146,6 +160,45 @@
 ;	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $e8
 ;	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $9c
 ;	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $d0
+;	anim_wait 32
+;	anim_ret
+
+;BattleAnim_RockWrecker:
+;	anim_2gfx BATTLE_ANIM_GFX_ROCKS, BATTLE_ANIM_GFX_HIT
+;	anim_sound 0, 0, SFX_STRENGTH
+;	anim_obj BATTLE_ANIM_OBJ_STRENGTH, 64, 104, $1
+;	anim_wait 75
+;	anim_incobj 1
+;	anim_sound 0, 1, SFX_MEGA_PUNCH
+;	anim_wait 20
+;	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 128, 48, $0
+;	anim_call BattleAnim_TargetObj_1Row
+;	anim_bgeffect BATTLE_BG_EFFECT_TACKLE, $0, BG_EFFECT_USER, $0
+;	anim_wait 3
+;	anim_sound 0, 1, SFX_STRENGTH
+;	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $2
+;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 128, 56, $0
+;	anim_wait 3
+;	anim_call BattleAnim_ShowMon_0
+;	anim_sound 0, 1, SFX_STRENGTH
+;	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $2
+;	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 128, 64, $0
+;	anim_sound 0, 1, SFX_STRENGTH
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $28
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $5c
+;	anim_sound 0, 1, SFX_STRENGTH
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $10
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $e8
+;	anim_sound 0, 1, SFX_STRENGTH
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $9c
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $d0
+;	anim_wait 6
+;	anim_sound 0, 1, SFX_STRENGTH
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $1c
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $50
+;	anim_sound 0, 1, SFX_STRENGTH
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $dc
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $90
 ;	anim_wait 32
 ;	anim_ret
 
@@ -2504,6 +2557,26 @@ BattleAnim_RockTomb:
 	anim_sound 0, 1, SFX_EGG_BOMB
 	anim_wait 48
 	anim_ret
+
+;BattleAnim_RockThrow:
+;	anim_1gfx BATTLE_ANIM_GFX_ROCKS
+;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $1, $0
+;	anim_sound 0, 1, SFX_STRENGTH
+;	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 128, 64, $40
+;	anim_wait 2
+;	anim_sound 0, 1, SFX_STRENGTH
+;	anim_obj BATTLE_ANIM_OBJ_BIG_ROCK, 120, 68, $30
+;	anim_wait 2
+;	anim_sound 0, 1, SFX_STRENGTH
+;	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 152, 68, $30
+;	anim_wait 2
+;	anim_sound 0, 1, SFX_STRENGTH
+;	anim_obj BATTLE_ANIM_OBJ_BIG_ROCK, 144, 64, $40
+;	anim_wait 2
+;	anim_sound 0, 1, SFX_STRENGTH
+;	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 136, 68, $30
+;	anim_wait 96
+;	anim_ret
 
 BattleAnim_PoisonSting:
 	anim_2gfx BATTLE_ANIM_GFX_HORN, BATTLE_ANIM_GFX_HIT
