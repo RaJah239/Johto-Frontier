@@ -271,11 +271,18 @@ TrainerCard_Page1_PrintDexCaught_GameTime:
 	ld de, .Dex_PlayTime
 	call PlaceString
 
+; Check if Battle Points have been unlocked, else skip
+	ld de, EVENT_BATTLE_POINTS_UNLOCKED
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	jr z, .skip1
+
 ; Battle Point string
 	hlcoord 2, 14
 	ld de, .Battle_Points
 	call PlaceString
 
+.skip1
 	hlcoord 10, 16
 	ld de, .Badges
 	call PlaceString
@@ -287,12 +294,19 @@ TrainerCard_Page1_PrintDexCaught_GameTime:
 	lb bc, 1, 3
 	call PrintNum
 
+; Check if Battle Points have been unlocked, else skip
+	ld de, EVENT_BATTLE_POINTS_UNLOCKED
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	jr z, .skip2
+
 ; Battle Points	
 	ld de, wBattlePoints
 	hlcoord 15, 15
 	lb bc, 1, 3
 	call PrintNum
 
+.skip2
 	call TrainerCard_Page1_PrintGameTime
 	hlcoord 2, 8
 	ld de, .StatusTilemap
