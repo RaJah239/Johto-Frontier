@@ -64,6 +64,7 @@ _GetVarAction::
 	dwb wCurCaller,                     RETVAR_ADDR_DE
 	dwb wBlueCardBalance,               RETVAR_ADDR_DE
 	dwb wBuenasPassword,                RETVAR_ADDR_DE
+	dwb wBattlePoints,                  RETVAR_ADDR_DE
 	dwb NULL,                           RETVAR_STRBUF2
 
 .CountCaughtMons:

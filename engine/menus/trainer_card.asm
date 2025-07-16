@@ -280,6 +280,12 @@ TrainerCard_Page1_PrintDexCaught_GameTime:
 	hlcoord 15, 10
 	lb bc, 1, 3
 	call PrintNum
+	
+	ld de, wBattlePoints
+	hlcoord 15, 14
+	lb bc, 1, 3
+	call PrintNum
+
 	call TrainerCard_Page1_PrintGameTime
 	hlcoord 2, 8
 	ld de, .StatusTilemap

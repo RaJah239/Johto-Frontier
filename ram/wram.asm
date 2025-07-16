@@ -3221,7 +3221,9 @@ wDayCareSceneID::                                 db
 wRoute30SceneID::                                 db
 wRoute26MagnetTrainStationSceneID::               db
 
-	ds 173
+	ds 172
+
+wBattlePoints:: db
 
 wAbilityPageMode:: db
 
