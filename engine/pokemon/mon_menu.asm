@@ -136,7 +136,8 @@ PokemonActionSubmenu:
 	dbw MONMENUITEM_FLY,        MonMenu_Fly
 	dbw MONMENUITEM_DIG,        MonMenu_Dig
 	dbw MONMENUITEM_TELEPORT,   MonMenu_Teleport
-	dbw MONMENUITEM_SOFTBOILED, MonMenu_Softboiled
+	dbw MONMENUITEM_SOFTBOILED, MonMenu_Softboiled_Recover
+	dbw MONMENUITEM_RECOVER,    MonMenu_Softboiled_Recover
 	dbw MONMENUITEM_HEADBUTT,   MonMenu_Headbutt
 	dbw MONMENUITEM_ROCKSMASH,  MonMenu_RockSmash
 	dbw MONMENUITEM_STATS,      OpenPartyStats
@@ -805,10 +806,10 @@ MonMenu_Dig:
 	ld a, $3
 	ret
 
-MonMenu_Softboiled:
+MonMenu_Softboiled_Recover:
 	call .CheckMonHasEnoughHP
 	jr nc, .NotEnoughHP
-	farcall Softboiled_Function
+	farcall Softboiled_RecoverFunction
 	jr .finish
 
 .NotEnoughHP:

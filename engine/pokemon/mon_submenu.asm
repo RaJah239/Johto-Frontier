@@ -127,6 +127,7 @@ GetMonSubmenuItems:
 	call CanUseDig
 	call CanUseTeleport
 	call CanUseSoftboiled
+	call CanUseRecover
 
 .skip_moves
 	ld a, MONMENUITEM_STATS
@@ -473,5 +474,15 @@ MonSubMenu_GetNextEvoAttackByte:
 	and a
 	ret nz
 	ld a, MONMENUITEM_SOFTBOILED
+	call AddMonMenuItem
+	ret
+	
+	CanUseRecover:
+	ld a, RECOVER
+	call CheckMonKnowsMove
+	and a
+	ret nz
+
+	ld a, MONMENUITEM_RECOVER
 	call AddMonMenuItem
 	ret
