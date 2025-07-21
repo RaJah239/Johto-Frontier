@@ -90,7 +90,6 @@ MoveEffectsPointers:
 	dw Encore
 	dw PainSplit
 	dw Snore
-	dw LockOn
 	dw Sketch
 	dw DefrostOpponent
 	dw SleepTalk

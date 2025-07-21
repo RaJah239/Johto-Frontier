@@ -1269,14 +1269,6 @@ Snore:
 	kingsrock
 	endmove
 
-LockOn:
-	checkobedience
-	usedmovetext
-	doturn
-	checkhit
-	lockon
-	endmove
-
 Sketch:
 	checkobedience
 	usedmovetext

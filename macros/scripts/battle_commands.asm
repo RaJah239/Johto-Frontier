@@ -64,7 +64,6 @@ ENDM
 	command counter                 ; 40
 	command encore                  ; 41
 	command snore                   ; 43
-	command lockon                  ; 45
 	command sketch                  ; 46
 	command defrostopponent         ; 47
 	command sleeptalk               ; 48
