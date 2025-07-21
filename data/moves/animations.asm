@@ -1344,9 +1344,20 @@ BattleAnim_LeechSeed:
 	anim_ret
 
 BattleAnim_SeedBomb:
-	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_EXPLOSION
-	anim_call BattleAnim_SeedingFlyingSub
-	anim_jump BattleAnim_EnemyBombingSub
+	anim_3gfx BATTLE_ANIM_GFX_PLANT, BATTLE_ANIM_GFX_EGG, BATTLE_ANIM_GFX_EXPLOSION
+	anim_sound 6, 2, SFX_THROW_BALL
+	anim_obj BATTLE_ANIM_OBJ_SLUDGE_BOMB, 64, 92, $10
+	anim_wait 36
+	anim_sound 0, 1, SFX_EGG_BOMB
+	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 136, 56, $0
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $28
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $5c
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $10
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $e8
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $9c
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $d0
+	anim_wait 32
+	anim_ret
 
 BattleAnim_MeteorMash:
 	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_EXPLOSION
