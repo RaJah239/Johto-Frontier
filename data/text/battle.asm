@@ -429,6 +429,11 @@ BattleText_UserWasReleasedFromStringBuffer1:
 	text "!"
 	prompt
 
+SandTombTrapText:
+	text "<TARGET>"
+	line "was trapped!"
+	prompt
+
 WhirlpoolTrapText:
 	text "<TARGET>"
 	line "was trapped!"

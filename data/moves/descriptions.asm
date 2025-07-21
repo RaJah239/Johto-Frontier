@@ -197,7 +197,7 @@ MoveDescriptions::
 	dw DestinyBondDescription
 	dw PerishSongDescription
 	dw IcyWindDescription
-	dw FairyWindDescription
+	dw SandTombDescription
 	dw SnarlDescription
 	dw FreezeDryDescription
 	dw OutrageDescription
@@ -307,7 +307,6 @@ CutDescription:
 	db   "Cuts using claws,"
 	line "scythes, etc.@"
 
-FairyWindDescription:
 GustDescription:
 	db   "Whips up a strong"
 	line "gust of wind.@"
@@ -372,6 +371,7 @@ SnarlDescription:
 	db "An attack that"
 	line "lowers Sp.Atk.@"
 
+SandTombDescription:
 WhirlpoolDescription:
 WrapDescription:
 	db   "Traps the foe for"

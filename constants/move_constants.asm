@@ -202,7 +202,7 @@
 	const DESTINY_BOND ; c2
 	const PERISH_SONG  ; c3
 	const ICY_WIND     ; c4
-	const FAIRY_WIND   ; c5
+	const SAND_TOMB    ; c5
 	const SNARL        ; c6
 	const FREEZE_DRY   ; c7
 	const OUTRAGE      ; c8

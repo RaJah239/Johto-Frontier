@@ -5663,6 +5663,7 @@ BattleCommand_TrapTarget:
 	dbw WRAP,      WrappedByText     ; 'was WRAPPED by'
 	dbw FIRE_SPIN, FireSpinTrapText  ; 'was trapped!'
 	dbw WHIRLPOOL, WhirlpoolTrapText ; 'was trapped!'
+	dbw SAND_TOMB, SandTombTrapText  ; 'was trapped!'
 
 INCLUDE "engine/battle/move_effects/mist.asm"
 

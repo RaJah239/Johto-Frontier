@@ -210,7 +210,7 @@ Moves:
 	move DESTINY_BOND, EFFECT_DESTINY_BOND,        0, GHOST,         STATUS,   100,  5,   0
 	move PERISH_SONG,  EFFECT_PERISH_SONG,         0, NORMAL,        STATUS,   100,  5,   0
 	move ICY_WIND,     EFFECT_SPEED_DOWN_HIT,     60, ICE,           SPECIAL,  100, 24, 100
-	move FAIRY_WIND,   EFFECT_GUST,               40, FAIRY,         SPECIAL,  100, 32,   0
+	move SAND_TOMB,    EFFECT_TRAP_TARGET,        35, GROUND,        PHYSICAL,  85, 24,   0
 	move SNARL,        EFFECT_SP_ATK_DOWN_HIT,    55, DARK,          SPECIAL,  100, 24, 100
 	move FREEZE_DRY,   EFFECT_FREEZE_DRY,         70, ICE,           SPECIAL,  100, 32,  10
 	move OUTRAGE,      EFFECT_RECOIL_HIT,        100, DRAGON,        PHYSICAL, 100, 24,   0

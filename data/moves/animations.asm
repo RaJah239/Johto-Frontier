@@ -372,7 +372,7 @@ BattleAnimations::
 	dw BattleAnim_DestinyBond
 	dw BattleAnim_PerishSong
 	dw BattleAnim_IcyWind
-	dw BattleAnim_FairyWind
+	dw BattleAnim_SandTomb
 	dw BattleAnim_Snarl
 	dw BattleAnim_FreezeDry
 	dw BattleAnim_Outrage
@@ -3964,6 +3964,7 @@ BattleAnim_MudSlap:
 	anim_1gfx BATTLE_ANIM_GFX_SAND
 	anim_obp0 $fc
 	anim_call BattleAnimSub_SandOrMud
+	anim_wait 32
 	anim_ret
 
 BattleAnim_Spikes:
@@ -4055,8 +4056,18 @@ BattleAnim_PerishSong:
 	anim_wait 112
 	anim_ret
 
+BattleAnim_SandTomb:
+	anim_2gfx BATTLE_ANIM_GFX_SAND, BATTLE_ANIM_GFX_WIND
+	anim_call BattleAnimSub_SandOrMud
+.loop
+	anim_sound 0, 1, SFX_MENU
+	anim_obj BATTLE_ANIM_OBJ_GUST, 132, 72, $0
+	anim_wait 6
+	anim_loop 9, .loop
+	anim_wait 24
+	anim_ret
+
 BattleAnim_SilverWind:
-BattleAnim_FairyWind:
 BattleAnim_IcyWind:
 	anim_1gfx BATTLE_ANIM_GFX_SPEED
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
@@ -5083,8 +5094,7 @@ BattleAnimSub_SandOrMud:
 	anim_sound 6, 2, SFX_MENU
 	anim_obj BATTLE_ANIM_OBJ_SAND, 64, 92, $4
 	anim_wait 4
-	anim_loop 8, .loop
-	anim_wait 32
+	anim_loop 3, .loop
 	anim_ret
 
 BattleAnimSub_Glimmer:

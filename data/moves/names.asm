@@ -196,7 +196,7 @@ MoveNames::
 	li "Destiny Bond"
 	li "Perish Song"
 	li "Icy Wind"
-	li "Fairy Wind"
+	li "Sand Tomb"
 	li "Snarl"
 	li "Freeze-Dry"
 	li "Outrage"
