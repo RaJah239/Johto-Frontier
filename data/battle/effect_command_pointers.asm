@@ -138,7 +138,6 @@ BattleCommandPointers:
 	dw BattleCommand_SwitchTurn
 	dw BattleCommand_FakeOut
 	dw BattleCommand_BellyDrum
-	dw BattleCommand_PsychUp
 	dw BattleCommand_Rage
 	dw BattleCommand_DoubleFlyingDamage
 	dw BattleCommand_DoubleUndergroundDamage

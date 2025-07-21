@@ -1697,13 +1697,6 @@ BellyDrum:
 	bellydrum
 	endmove
 
-PsychUp:
-	checkobedience
-	usedmovetext
-	doturn
-	psychup
-	endmove
-
 MirrorCoat:
 	checkobedience
 	usedmovetext

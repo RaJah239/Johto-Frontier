@@ -6960,6 +6960,3 @@ TenPercentBoost:
 	ldh [hDivisor], a
 	ld b, 4
 	jmp Divide
-
-BattleCommand_PsychUp:
-	ret

@@ -135,7 +135,6 @@ MoveEffectsPointers:
 	dw AllUpHit
 	dw FakeOut
 	dw BellyDrum
-	dw PsychUp
 	dw MirrorCoat
 	dw Earthquake
 	dw Gust
