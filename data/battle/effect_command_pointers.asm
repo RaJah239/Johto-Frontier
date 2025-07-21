@@ -30,7 +30,6 @@ BattleCommandPointers:
 	dw BattleCommand_BurnTarget
 	dw BattleCommand_FreezeTarget
 	dw BattleCommand_ParalyzeTarget
-	dw BattleCommand_Selfdestruct
 	dw BattleCommand_StatUp
 	dw BattleCommand_StatDown
 	dw BattleCommand_Conversion

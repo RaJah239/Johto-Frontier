@@ -6272,8 +6272,6 @@ CheckSubstituteOpp:
 	bit SUBSTATUS_SUBSTITUTE, a
 	ret
 
-INCLUDE "engine/battle/move_effects/selfdestruct.asm"
-
 INCLUDE "engine/battle/move_effects/metronome.asm"
 
 CheckUserMove:

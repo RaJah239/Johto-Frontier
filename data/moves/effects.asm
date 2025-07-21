@@ -147,7 +147,7 @@ Selfdestruct:
 	stab
 	damagevariation
 	checkhit
-	selfdestruct
+	farcommand
 	moveanimnosub
 	failuretext
 	applydamage
