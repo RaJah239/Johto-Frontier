@@ -166,7 +166,6 @@ ENDM
 	command supereffectivelooptext  ; ad
 	command startloop               ; ae
 	command curl                    ; af
-	command starthail               ; b0
 	command stealthrock
 	command stickyweb
 	command defog

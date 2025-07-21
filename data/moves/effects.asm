@@ -1961,7 +1961,7 @@ Hail:
 	checkobedience
 	usedmovetext
 	doturn
-	starthail
+	farcommand
 	endmove
 
 StealthRock:

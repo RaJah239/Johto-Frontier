@@ -23,4 +23,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_THIEF, 			BattleCommand_Thief
 	dbw EFFECT_TOXIC_SPIKES,	BattleCommand_ToxicSpikes
 	dbw EFFECT_THUNDER,			BattleCommand_ThunderAccuracy
+	dbw EFFECT_HAIL,			BattleCommand_StartHail
 	db -1 ; end
