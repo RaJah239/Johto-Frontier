@@ -2120,7 +2120,7 @@ BattleCommand_ApplyDamage:
 	bit SUBSTATUS_ENDURE, a
 	jr z, .check_item
 
-	call BattleCommand_FalseSwipe
+	farcall BattleCommand_FalseSwipe
 	ld b, 0
 	jr nc, .damage
 	ld b, 1
@@ -2137,7 +2137,7 @@ BattleCommand_ApplyDamage:
 	jr z, .focus_band
 	cp HELD_FOCUS_SASH
 	jr nz, .damage
-	call BattleCommand_FalseSwipe
+	farcall BattleCommand_FalseSwipe
 	ld b, 0
 	jr nc, .damage
 	callfar ConsumeHeldItem
@@ -2152,7 +2152,7 @@ BattleCommand_ApplyDamage:
 	call BattleRandom
 	cp c
 	jr nc, .damage
-	call BattleCommand_FalseSwipe
+	farcall BattleCommand_FalseSwipe
 	ld b, 0
 	jr nc, .damage
 	ld b, 2
@@ -3514,8 +3514,6 @@ INCLUDE "engine/battle/move_effects/sleep_talk.asm"
 INCLUDE "engine/battle/move_effects/destiny_bond.asm"
 
 INCLUDE "engine/battle/move_effects/spite.asm"
-
-INCLUDE "engine/battle/move_effects/false_swipe.asm"
 
 INCLUDE "engine/battle/move_effects/heal_bell.asm"
 
@@ -6415,6 +6413,9 @@ INCLUDE "engine/battle/move_effects/attract.asm"
 INCLUDE "engine/battle/move_effects/return.asm"
 
 INCLUDE "engine/battle/move_effects/safeguard.asm"
+
+BattleCommand_FarCommand:
+	farjp Find_Command
 
 SafeCheckSafeguard:
 	push hl

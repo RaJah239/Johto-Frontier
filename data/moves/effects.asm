@@ -1337,7 +1337,7 @@ FalseSwipe:
 	damagecalc
 	stab
 	damagevariation
-	falseswipe
+	farcommand
 	checkhit
 	moveanim
 	failuretext

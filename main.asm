@@ -153,6 +153,12 @@ SECTION "Effect Commands", ROMX
 
 INCLUDE "engine/battle/effect_commands.asm"
 
+
+SECTION "Effect Commands 2", ROMX
+
+INCLUDE "engine/battle/effect_commands_2.asm"
+
+
 SECTION "Type Matchups", ROMX
 
 INCLUDE "data/types/type_matchups.asm"
