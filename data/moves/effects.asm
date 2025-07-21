@@ -1400,7 +1400,7 @@ Thief:
 	applydamage
 	criticaltext
 	supereffectivetext
-	thief
+	farcommand
 	checkfaint
 	buildopponentrage
 	kingsrock

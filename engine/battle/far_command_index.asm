@@ -20,4 +20,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_PAIN_SPLIT,      BattleCommand_PainSplit
 	dbw EFFECT_DISABLE, 		BattleCommand_Disable
 	dbw EFFECT_SELFDESTRUCT, 	BattleCommand_Selfdestruct
+	dbw EFFECT_THIEF, 			BattleCommand_Thief
 	db -1 ; end
