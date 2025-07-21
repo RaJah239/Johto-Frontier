@@ -9,4 +9,5 @@ CriticalHitMoves:
 	db DRAGON_CLAW
 	db THROAT_CHOP
 	db NIGHT_SLASH
+	db PSYCHO_CUT
 	db -1

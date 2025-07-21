@@ -89,7 +89,7 @@ MoveNames::
 	li "Thunder"
 	li "Rock Blast"
 	li "Earthquake"
-	li "Fissure"
+	li "Psycho Cut"
 	li "Dig"
 	li "Toxic"
 	li "Confusion"

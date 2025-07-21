@@ -95,7 +95,7 @@
 	const THUNDER      ; 57
 	const ROCK_BLAST   ; 58
 	const EARTHQUAKE   ; 59
-	const FISSURE      ; 5a
+	const PSYCHO_CUT   ; 5a
 	const DIG          ; 5b
 	const TOXIC        ; 5c
 	const CONFUSION    ; 5d

@@ -421,8 +421,6 @@ FlyDigMovesMiss:
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	cp EARTHQUAKE
-	ret z
-	cp FISSURE
 	ret
 
 HurricaneRain:

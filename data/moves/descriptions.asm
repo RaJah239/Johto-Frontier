@@ -90,7 +90,7 @@ MoveDescriptions::
 	dw ThunderDescription
 	dw RockBlastDescription
 	dw EarthquakeDescription
-	dw FissureDescription
+	dw PsychoCutDescription
 	dw DigDescription
 	dw ToxicDescription
 	dw ConfusionDescription
@@ -266,6 +266,7 @@ MoveFFDescription:
 Move00Description:
 	db "?@"
 
+PsychoCutDescription:
 NightSlashDescription:
 SlashDescription:
 DragonClawDescription:
@@ -581,10 +582,6 @@ RockThrowDescription:
 EarthquakeDescription:
 	db   "Tough but useless"
 	line "vs. flying foes.@"
-
-FissureDescription:
-	db   "A ground-type,"
-	line "one-hit KO attack.@"
 
 DigDescription:
 	db   "1st turn: Burrow"
