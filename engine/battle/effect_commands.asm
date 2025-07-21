@@ -1191,8 +1191,6 @@ INCLUDE "data/moves/critical_hit_moves.asm"
 
 INCLUDE "data/battle/critical_hit_chances.asm"
 
-INCLUDE "engine/battle/move_effects/triple_kick.asm"
-
 GetNextTypeMatchupsByte:
    ld a, BANK(TypeMatchups)
    call GetFarByte
@@ -1976,12 +1974,9 @@ BattleCommand_MoveAnimNoSub:
 	jr z, .alternate_anim
 	cp EFFECT_POISON_MULTI_HIT
 	jr z, .alternate_anim
-	cp EFFECT_TRIPLE_KICK
-	jr z, .triplekick
 	xor a
 	ld [wBattleAnimParam], a
 
-.triplekick
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	ld e, a
@@ -2423,8 +2418,6 @@ BattleCommand_CheckFaint:
 	cp EFFECT_DOUBLE_HIT
 	jr z, .multiple_hit_raise_sub
 	cp EFFECT_POISON_MULTI_HIT
-	jr z, .multiple_hit_raise_sub
-	cp EFFECT_TRIPLE_KICK
 	jr z, .multiple_hit_raise_sub
 
 .multiple_hit_raise_sub
@@ -3721,8 +3714,6 @@ DoSubstituteDamage:
 	cp EFFECT_DOUBLE_HIT
 	jr z, .ok
 	cp EFFECT_POISON_MULTI_HIT
-	jr z, .ok
-	cp EFFECT_TRIPLE_KICK
 	jr z, .ok
 	xor a
 	ld [hl], a
@@ -5336,20 +5327,7 @@ BattleCommand_EndLoop:
 	cp EFFECT_DOUBLE_HIT
 	ld a, 1
 	jr z, .double_hit
-	ld a, [hl]
-	cp EFFECT_TRIPLE_KICK
-	jr nz, .not_triple_kick
-.reject_triple_kick_sample
-	call BattleRandom
-	and $3
-	jr z, .reject_triple_kick_sample
-	dec a
-	jr nz, .double_hit
-	ld a, 1
-	ld [bc], a
-	jr .done_loop
 
-.not_triple_kick
 	call BattleRandom
 	and $1
 	jr z, .middle_hits
@@ -5382,7 +5360,6 @@ BattleCommand_EndLoop:
 	dec a
 	ld [de], a
 	jr nz, .loop_back_to_critical
-.done_loop
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVarAddr
 	res SUBSTATUS_IN_LOOP, [hl]

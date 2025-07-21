@@ -72,8 +72,6 @@ ENDM
 	command falseswipe              ; 4b
 	command healbell                ; 4c
 	command kingsrock               ; 4d
-	command triplekick              ; 4e
-	command kickcounter             ; 4f
 	command arenatrap               ; 51
 	command nightmare               ; 52
 	command defrost                 ; 53

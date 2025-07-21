@@ -1333,34 +1333,6 @@ HealBell:
 	healbell
 	endmove
 
-TripleKick:
-	checkobedience
-	usedmovetext
-	doturn
-	startloop
-	lowersub
-	checkhit
-	critical
-	damagestats
-	damagecalc
-	triplekick
-	stab
-	damagevariation
-	clearmissdamage
-	moveanimnosub
-	failuretext
-	applydamage
-	criticaltext
-	cleartext
-	supereffectivelooptext
-	checkfaint
-	buildopponentrage
-	kickcounter
-	endloop
-	raisesub
-	kingsrock
-	endmove
-
 Thief:
 	checkobedience
 	usedmovetext
