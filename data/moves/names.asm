@@ -178,7 +178,7 @@ MoveNames::
 	li "Hurricane"
 	li "Aeroblast"
 	li "Cotton Spore"
-	li "Reversal"
+	li "Iron Bash"
 	li "Spite"
 	li "Powder Snow"
 	li "Protect"

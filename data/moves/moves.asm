@@ -192,7 +192,7 @@ Moves:
 	move HURRICANE,    EFFECT_HURRICANE,         110, FLYING,        SPECIAL,   70, 16,  30
 	move AEROBLAST,    EFFECT_NORMAL_HIT,        100, FLYING,        SPECIAL,   95,  5,   0
 	move COTTON_SPORE, EFFECT_SPEED_DOWN_2,        0, GRASS,         STATUS,    85, 40,   0
-	move REVERSAL,     EFFECT_REVERSAL,            1, FIGHTING,      PHYSICAL, 100, 15,   0
+	move IRON_BASH,    EFFECT_BODY_PRESS,         80, STEEL,         PHYSICAL, 100, 16,   0
 	move SPITE,        EFFECT_SPITE,               0, GHOST,         STATUS,   100, 10,   0
 	move POWDER_SNOW,  EFFECT_FREEZE_HIT,         40, ICE,           SPECIAL,  100, 25,  10
 	move PROTECT,      EFFECT_PROTECT,             0, NORMAL,        STATUS,   100, 10,   0
@@ -246,7 +246,7 @@ Moves:
 	move WILL_O_WISP,  EFFECT_BURN,                0, FIRE,          STATUS,    85, 24, 100
 	move SILVER_WIND,  EFFECT_ALL_UP_HIT,         60, BUG,           SPECIAL,  100, 16,  10
 	move METAL_CLAW,   EFFECT_ATTACK_UP_HIT,      50, STEEL,         PHYSICAL,  95, 35,  10
-	move BODY_PRESS,   EFFECT_BODY_PRESS,         80, STEEL,         PHYSICAL, 100, 16,   0
+	move BODY_PRESS,   EFFECT_BODY_PRESS,         80, FIGHTING,      PHYSICAL, 100, 16,   0
 	move HEALING_LIGHT,EFFECT_WEATHER_HEAL,        0, NORMAL,        STATUS,   100,  8,   0
 	move HAIL,         EFFECT_HAIL,                0, ICE,           STATUS,   100,  8,   0
 	move X_SCISSOR,    EFFECT_NORMAL_HIT,         80, BUG,           PHYSICAL, 100, 24,   0
