@@ -22,4 +22,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_SELFDESTRUCT, 	BattleCommand_Selfdestruct
 	dbw EFFECT_THIEF, 			BattleCommand_Thief
 	dbw EFFECT_TOXIC_SPIKES,	BattleCommand_ToxicSpikes
+	dbw EFFECT_THUNDER,			BattleCommand_ThunderAccuracy
 	db -1 ; end
