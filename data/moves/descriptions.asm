@@ -251,7 +251,7 @@ MoveDescriptions::
 	dw StealthRockDescription
 	dw RockSmashDescription
 	dw WhirlpoolDescription
-	dw BeatUpDescription
+	dw FlareBlitzDescription
 	assert_table_length NUM_ATTACKS
 	dw MoveFCDescription
 	dw MoveFDDescription
@@ -1142,6 +1142,6 @@ RockSmashDescription:
 	db   "An attack that may"
 	line "lower DEFENSE.@"
 
-BeatUpDescription:
-	db   "Party #MON join"
-	line "in the attack.@"
+FlareBlitzDescription:
+	db   "Hurts the user but"
+	line "may cause a burn.@"

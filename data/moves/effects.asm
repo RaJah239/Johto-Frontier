@@ -1998,3 +1998,26 @@ SpAtkUpHit:
 	specialattackup
 	statupmessage
 	endmove
+
+FlareBlitz:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	effectchance
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	recoil
+	defrost
+	checkfaint
+	kingsrock
+	burntarget
+	endmove
