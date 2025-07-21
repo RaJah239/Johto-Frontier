@@ -89,7 +89,6 @@ ENDM
 	command endure                  ; 5a
 	command checkcurl               ; 5b
 	command rolloutpower            ; 5c
-	command furycutter              ; 5e
 	command attract                 ; 5f
 	command happinesspower          ; 60
 	command damagecalc              ; 62
