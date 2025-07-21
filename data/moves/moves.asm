@@ -264,5 +264,5 @@ Moves:
 	move STEALTH_ROCK, EFFECT_STEALTH_ROCK,        0, ROCK,           STATUS,  100, 16,   0
 	move ROCK_SMASH,   EFFECT_DEFENSE_DOWN_HIT,   50, FIGHTING,      PHYSICAL, 100, 24,  30
 	move WHIRLPOOL,    EFFECT_TRAP_TARGET,        15, WATER,         SPECIAL,   70, 15,   0
-	move BEAT_UP,      EFFECT_BEAT_UP,            10, DARK,          PHYSICAL, 100, 10,   0
+	move BEAT_UP,      EFFECT_NORMAL_HIT,         10, DARK,          PHYSICAL, 100, 10,   0
 	assert_table_length NUM_ATTACKS
