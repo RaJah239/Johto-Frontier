@@ -91,7 +91,6 @@ ENDM
 	command attract                 ; 5f
 	command happinesspower          ; 60
 	command damagecalc              ; 62
-	command frustrationpower        ; 63
 	command safeguard               ; 64
 	command checksafeguard          ; 65
 	command batonpass               ; 67
