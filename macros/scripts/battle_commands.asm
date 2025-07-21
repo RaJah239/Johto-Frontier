@@ -32,7 +32,6 @@ ENDM
 	command paralyzetarget          ; 19
 	command statup                  ; 1c
 	command statdown                ; 1d
-	command conversion              ; 1f
 	command resetstats              ; 20
 	command forceswitch             ; 23
 	command endloop                 ; 24
@@ -65,7 +64,6 @@ ENDM
 	command counter                 ; 40
 	command encore                  ; 41
 	command snore                   ; 43
-	command conversion2             ; 44
 	command lockon                  ; 45
 	command sketch                  ; 46
 	command defrostopponent         ; 47

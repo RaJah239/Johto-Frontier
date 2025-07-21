@@ -749,13 +749,6 @@ AllUpHit:
 	buildopponentrage
 	endmove
 
-Conversion:
-	checkobedience
-	usedmovetext
-	doturn
-	conversion
-	endmove
-
 ResetStats:
 	checkobedience
 	usedmovetext
@@ -1274,14 +1267,6 @@ Snore:
 	buildopponentrage
 	flinchtarget
 	kingsrock
-	endmove
-
-Conversion2:
-	checkobedience
-	usedmovetext
-	doturn
-	checkhit
-	conversion2
 	endmove
 
 LockOn:

@@ -1972,8 +1972,6 @@ BattleCommand_MoveAnimNoSub:
 	call GetBattleVar
 	cp EFFECT_MULTI_HIT
 	jr z, .alternate_anim
-	cp EFFECT_CONVERSION
-	jr z, .alternate_anim
 	cp EFFECT_DOUBLE_HIT
 	jr z, .alternate_anim
 	cp EFFECT_POISON_MULTI_HIT
@@ -3013,9 +3011,6 @@ BattleCommand_DamageCalc:
 	cp EFFECT_MULTI_HIT
 	jr z, .skip_zero_damage_check
 
-	cp EFFECT_CONVERSION
-	jr z, .skip_zero_damage_check
-
 ; No damage if move power is 0.
 	ld a, d
 	and a
@@ -3493,8 +3488,6 @@ INCLUDE "engine/battle/move_effects/counter.asm"
 INCLUDE "engine/battle/move_effects/encore.asm"
 
 INCLUDE "engine/battle/move_effects/snore.asm"
-
-INCLUDE "engine/battle/move_effects/conversion2.asm"
 
 INCLUDE "engine/battle/move_effects/lock_on.asm"
 
@@ -6050,8 +6043,6 @@ INCLUDE "engine/battle/move_effects/mimic.asm"
 INCLUDE "engine/battle/move_effects/leech_seed.asm"
 
 INCLUDE "engine/battle/move_effects/splash.asm"
-
-INCLUDE "engine/battle/move_effects/conversion.asm"
 
 BattleCommand_ResetStats:
 	ld a, BASE_STAT_LEVEL
