@@ -166,7 +166,7 @@ MoveNames::
 	li "Substitute"
 	li "Struggle"
 	li "Sketch"
-	li "Triple Kick"
+	li "Aerial Ace"
 	li "Thief"
 	li "Spider Web"
 	li "Dragon Dance"

@@ -22,7 +22,6 @@ EncoreMoves:
 	db SPLASH
 	db SUPER_FANG
 	db SUBSTITUTE
-	db TRIPLE_KICK
 	db SPIDER_WEB
 	db COTTON_SPORE
 	db -1 ; end
