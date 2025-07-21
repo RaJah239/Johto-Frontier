@@ -98,7 +98,6 @@ ENDM
 	command frustrationpower        ; 63
 	command safeguard               ; 64
 	command checksafeguard          ; 65
-	command getmagnitude            ; 66
 	command batonpass               ; 67
 	command pursuit                 ; 68
 	command clearhazards            ; 69

@@ -124,7 +124,6 @@ MoveEffectsPointers:
 	dw Frustration
 	dw Safeguard
 	dw SacredFire
-	dw Magnitude
 	dw BatonPass
 	dw Pursuit
 	dw RapidSpin

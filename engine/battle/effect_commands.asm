@@ -6964,7 +6964,6 @@ TenPercentBoost:
 	ld b, 4
 	jmp Divide
 
-BattleCommand_GetMagnitude:
 BattleCommand_PsychUp:
 BattleCommand_FuryCutter:
 BattleCommand_Foresight:

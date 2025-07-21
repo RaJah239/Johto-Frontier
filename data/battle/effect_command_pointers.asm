@@ -98,7 +98,6 @@ BattleCommandPointers:
 	dw BattleCommand_FrustrationPower
 	dw BattleCommand_Safeguard
 	dw BattleCommand_CheckSafeguard
-	dw BattleCommand_GetMagnitude
 	dw BattleCommand_BatonPass
 	dw BattleCommand_Pursuit
 	dw BattleCommand_ClearHazards
