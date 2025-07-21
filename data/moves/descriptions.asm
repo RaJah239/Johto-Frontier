@@ -70,7 +70,7 @@ MoveDescriptions::
 	dw LowKickDescription
 	dw CounterDescription
 	dw SeismicTossDescription
-	dw StrengthDescription
+	dw RockThrowDescription
 	dw AbsorbDescription
 	dw MegaDrainDescription
 	dw LeechSeedDescription
@@ -88,7 +88,7 @@ MoveDescriptions::
 	dw ThunderboltDescription
 	dw ThunderWaveDescription
 	dw ThunderDescription
-	dw RockThrowDescription
+	dw RockBlastDescription
 	dw EarthquakeDescription
 	dw FissureDescription
 	dw DigDescription
@@ -514,10 +514,6 @@ SeismicTossDescription:
 	db   "The user's level"
 	line "equals damage HP.@"
 
-StrengthDescription:
-	db   "A powerful physi-"
-	line "cal attack.@"
-
 LeechSeedDescription:
 	db   "Steals HP from the"
 	line "foe on every turn.@"
@@ -579,7 +575,7 @@ ThunderDescription:
 	line "cause paralysis.@"
 
 RockThrowDescription:
-	db   "Tosses rocks at"
+	db   "Tosses a rock at"
 	line "the foe.@"
 
 EarthquakeDescription:
@@ -960,6 +956,7 @@ IcyWindDescription:
 	db   "An attack that"
 	line "lowers Speed.@"
 
+RockBlastDescription:
 BoneRushDescription:
 	db   "An attack that"
 	line "hits 2-5 times.@"

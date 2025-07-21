@@ -268,7 +268,7 @@ BattleAnimations::
 	dw BattleAnim_LowKick
 	dw BattleAnim_Counter
 	dw BattleAnim_SeismicToss
-	dw BattleAnim_Strength
+	dw BattleAnim_RockThrow
 	dw BattleAnim_Absorb
 	dw BattleAnim_MegaDrain
 	dw BattleAnim_LeechSeed
@@ -286,7 +286,7 @@ BattleAnimations::
 	dw BattleAnim_Thunderbolt
 	dw BattleAnim_ThunderWave
 	dw BattleAnim_Thunder
-	dw BattleAnim_RockThrow
+	dw BattleAnim_RockBlast
 	dw BattleAnim_Earthquake
 	dw BattleAnim_Fissure
 	dw BattleAnim_Dig
@@ -1644,7 +1644,7 @@ BattleAnim_Acid:
 	anim_wait 64
 	anim_ret
 
-BattleAnim_RockThrow:
+BattleAnim_RockBlast:
 	anim_2gfx BATTLE_ANIM_GFX_ROCKS, BATTLE_ANIM_GFX_HIT
 	anim_sound 6, 2, SFX_SPARK
 	anim_obj BATTLE_ANIM_OBJ_ROCK_BLAST, 64, 92, $4
@@ -3136,7 +3136,7 @@ BattleAnim_Smokescreen:
 	anim_wait 128
 	anim_ret
 
-BattleAnim_Strength:
+BattleAnim_RockThrow:
 	anim_2gfx BATTLE_ANIM_GFX_ROCKS, BATTLE_ANIM_GFX_HIT
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_Y, $10, $1, $20
 	anim_sound 0, 0, SFX_STRENGTH
@@ -3244,7 +3244,7 @@ BattleAnim_SeismicToss:
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_Y, $10, $1, $20
 	anim_sound 0, 0, SFX_STRENGTH
 	anim_obj BATTLE_ANIM_OBJ_SEISMIC_TOSS, 64, 104, $1
-	anim_jump BattleAnim_Strength.hit
+	anim_jump BattleAnim_RockThrow.hit
 
 BattleAnim_ZenHeadbutt:
 	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_HIT

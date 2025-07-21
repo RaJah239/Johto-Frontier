@@ -75,7 +75,7 @@
 	const LOW_KICK     ; 43
 	const COUNTER      ; 44
 	const SEISMIC_TOSS ; 45
-	const STRENGTH     ; 46
+	const ROCK_THROW   ; 46
 	const ABSORB       ; 47
 	const MEGA_DRAIN   ; 48
 	const LEECH_SEED   ; 49
@@ -93,7 +93,7 @@
 	const THUNDERBOLT  ; 55
 	const THUNDER_WAVE ; 56
 	const THUNDER      ; 57
-	const ROCK_THROW   ; 58
+	const ROCK_BLAST   ; 58
 	const EARTHQUAKE   ; 59
 	const FISSURE      ; 5a
 	const DIG          ; 5b
