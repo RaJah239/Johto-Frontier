@@ -5427,6 +5427,15 @@ MoveInfoBox:
 	call PlaceString
 
 	hlcoord 1, 10
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_LEVEL_DAMAGE
+	jr z, .has_variable_power
+	cp EFFECT_MIRROR_COAT
+	jr z, .has_variable_power
+	cp EFFECT_COUNTER
+	jr z, .has_variable_power
+
 	ld a, [wPlayerMoveStruct + MOVE_POWER]
 	cp 2
 	jr c, .nopower
@@ -5434,6 +5443,11 @@ MoveInfoBox:
 
 	; code for moves with power 2+
 	jr .haspower
+
+.has_variable_power:
+	ld de, .place_var_string
+	call PlaceString
+	jr .place_accuracy
 
 .nopower:
 	ld de, .nopower_string
@@ -5489,6 +5503,8 @@ MoveInfoBox:
 
 .nopower_string:
 	db "---@"
+.place_var_string:
+	db " var@"
 .power_string:
 	db "p/@"
 .pp_string:
