@@ -17,4 +17,5 @@ Find_Command:
 
 FarCommand_BattleCommands:
 	dbw EFFECT_FALSE_SWIPE, 	BattleCommand_FalseSwipe
+	dbw EFFECT_PAIN_SPLIT,      BattleCommand_PainSplit
 	db -1 ; end

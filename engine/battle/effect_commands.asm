@@ -3474,8 +3474,6 @@ INCLUDE "engine/battle/move_effects/counter.asm"
 
 INCLUDE "engine/battle/move_effects/encore.asm"
 
-INCLUDE "engine/battle/move_effects/pain_split.asm"
-
 INCLUDE "engine/battle/move_effects/snore.asm"
 
 INCLUDE "engine/battle/move_effects/conversion2.asm"

@@ -1250,7 +1250,7 @@ PainSplit:
 	usedmovetext
 	doturn
 	checkhit
-	painsplit
+	farcommand
 	endmove
 
 Snore:
