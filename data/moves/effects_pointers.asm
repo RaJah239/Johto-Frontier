@@ -161,4 +161,5 @@ MoveEffectsPointers:
 	dw FreezeDry
 	dw NormalHit	; EFFECT_BODY_PRESS
 	dw SuckerPunch
+	dw Revenge
 	assert_table_length NUM_MOVE_EFFECTS

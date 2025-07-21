@@ -80,7 +80,7 @@ MoveDescriptions::
 	dw PoisonpowderDescription
 	dw StunSporeDescription
 	dw SleepPowderDescription
-	dw PetalDanceDescription
+	dw AvalancheDescription
 	dw StringShotDescription
 	dw DragonRageDescription
 	dw FireSpinDescription
@@ -282,6 +282,10 @@ CometPunchDescription:
 FirePunchDescription:
 	db   "A fiery punch. May"
 	line "cause a burn.@"
+
+AvalancheDescription:
+	db   "Damage doubles if"
+	line "user is hit first.@"
 
 IcePunchDescription:
 	db   "An icy punch. May"
@@ -543,10 +547,6 @@ StunSporeDescription:
 SleepPowderDescription:
 	db   "May cause the foe"
 	line "to fall asleep.@"
-
-PetalDanceDescription:
-	db   "Works 2-3 turns"
-	line "and confuses user.@"
 
 StringShotDescription:
 	db   "A move that lowers"

@@ -2062,3 +2062,23 @@ SuckerPunch:
 	supereffectivetext
 	checkfaint
 	endmove
+
+Revenge:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	farcommand
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	kingsrock
+	endmove

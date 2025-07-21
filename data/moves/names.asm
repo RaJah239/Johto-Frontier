@@ -79,7 +79,7 @@ MoveNames::
 	li "PoisonPowder"
 	li "Stun Spore"
 	li "Sleep Powder"
-	li "Petal Dance"
+	li "Avalanche"
 	li "String Shot"
 	li "Dragon Rage"
 	li "Fire Spin"

@@ -28,4 +28,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_FAKE_OUT,        BattleCommand_FakeOut
 	dbw EFFECT_FREEZE_DRY,      BattleCommand_FreezeDry
 	dbw EFFECT_SUCKER_PUNCH,    BattleCommand_SuckerPunch
+	dbw EFFECT_AVALANCHE,       BattleCommand_Avalanche
 	db -1 ; end

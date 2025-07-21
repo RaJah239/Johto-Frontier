@@ -255,7 +255,7 @@ BattleAnimations::
 	dw BattleAnim_Poisonpowder
 	dw BattleAnim_StunSpore
 	dw BattleAnim_SleepPowder
-	dw BattleAnim_PetalDance
+	dw BattleAnim_Avalanche
 	dw BattleAnim_StringShot
 	dw BattleAnim_DragonRage
 	dw BattleAnim_FireSpin
@@ -2029,6 +2029,27 @@ BattleAnim_InvertScreenColoursSub:
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $2, $0
 	anim_ret
 
+BattleAnim_Avalanche:
+    anim_2gfx BATTLE_ANIM_GFX_ROCKS, BATTLE_ANIM_GFX_ICE
+    anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $1, $0
+    anim_sound 0, 1, SFX_STRENGTH
+    anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 128, 64, $40
+    anim_wait 4
+    anim_sound 0, 1, SFX_STRENGTH
+    anim_obj BATTLE_ANIM_OBJ_BIG_ROCK, 120, 68, $30
+    anim_wait 4
+    anim_sound 0, 1, SFX_STRENGTH
+    anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 152, 68, $30
+    anim_wait 4
+    anim_sound 0, 1, SFX_STRENGTH
+    anim_obj BATTLE_ANIM_OBJ_BIG_ROCK, 144, 64, $40
+    anim_wait 4
+	anim_call BattleAnimSub_Ice
+    anim_sound 0, 1, SFX_SHINE
+    anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 136, 68, $30
+    anim_wait 32
+    anim_ret
+
 BattleAnim_IcicleCrash:
 	anim_2gfx BATTLE_ANIM_GFX_ICICLECRASH, BATTLE_ANIM_GFX_ICE
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $1, $0
@@ -2675,20 +2696,6 @@ BattleAnim_Transform:
 	anim_incbgeffect BATTLE_BG_EFFECT_WAVE_DEFORM_MON
 	anim_wait 16
 	anim_jump BattleAnim_ShowMon_0
-
-BattleAnim_PetalDance:
-	anim_sound 0, 0, SFX_MENU
-	anim_2gfx BATTLE_ANIM_GFX_FLOWER, BATTLE_ANIM_GFX_HIT
-.loop
-	anim_obj BATTLE_ANIM_OBJ_PETAL_DANCE, 48, 56, $0
-	anim_wait 11
-	anim_loop 8, .loop
-	anim_wait 128
-	anim_wait 64
-	anim_sound 0, 1, SFX_COMET_PUNCH
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 56, $0
-	anim_wait 16
-	anim_ret
 
 BattleAnim_EarthPower:
 	anim_1gfx BATTLE_ANIM_GFX_WATER
@@ -5437,5 +5444,19 @@ BattleAnimSub_SpeedLines:
 ;	anim_wait 32
 ;	anim_sound 0, 1, SFX_BONE_CLUB
 ;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
+;	anim_wait 16
+;	anim_ret
+
+;BattleAnim_PetalDance:
+;	anim_sound 0, 0, SFX_MENU
+;	anim_2gfx BATTLE_ANIM_GFX_FLOWER, BATTLE_ANIM_GFX_HIT
+;.loop
+;	anim_obj BATTLE_ANIM_OBJ_PETAL_DANCE, 48, 56, $0
+;	anim_wait 11
+;	anim_loop 8, .loop
+;	anim_wait 128
+;	anim_wait 64
+;	anim_sound 0, 1, SFX_COMET_PUNCH
+;	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 56, $0
 ;	anim_wait 16
 ;	anim_ret
