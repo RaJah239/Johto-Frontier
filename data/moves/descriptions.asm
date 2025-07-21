@@ -125,7 +125,7 @@ MoveDescriptions::
 	dw LickDescription
 	dw SmogDescription
 	dw SludgeDescription
-	dw BoneClubDescription
+	dw DisarmVoiceDescription
 	dw FireBlastDescription
 	dw WaterfallDescription
 	dw BulletPunchDescription
@@ -707,10 +707,6 @@ SludgeDescription:
 	db   "An attack that may"
 	line "poison the foe.@"
 
-BoneClubDescription:
-	db   "An attack that may"
-	line "cause flinching.@"
-
 FireBlastDescription:
 	db   "An attack that"
 	line "may cause a burn.@"
@@ -719,6 +715,7 @@ WaterfallDescription:
 	db   "An aquatic charge"
 	line "attack.@"
 
+DisarmVoiceDescription:
 AuraSphereDescription:
 SwiftDescription:
 	db   "An attack that"

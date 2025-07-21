@@ -300,7 +300,7 @@ BattleAnimations::
 	dw BattleAnim_Lick
 	dw BattleAnim_Smog
 	dw BattleAnim_Sludge
-	dw BattleAnim_BoneClub
+	dw BattleAnim_DisarmVoice
 	dw BattleAnim_FireBlast
 	dw BattleAnim_Waterfall
 	dw BattleAnim_BulletPunch
@@ -1134,6 +1134,28 @@ BattleAnim_Moonblast:
 	anim_wait 5
 	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 144, 68, $0
 	anim_wait 21
+	anim_ret
+
+BattleAnim_DisarmVoice:
+	anim_2gfx BATTLE_ANIM_GFX_HEARTS, BATTLE_ANIM_GFX_PSYCHIC
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_battlergfx_2row
+.loop
+	anim_sound 0, 0, SFX_ATTRACT
+	anim_obj BATTLE_ANIM_OBJ_SHOOTING_HEART, 64, 88, $4
+	anim_wait 6
+	anim_obj BATTLE_ANIM_OBJ_SHOOTING_HEART, 64, 80, $4
+	anim_obj BATTLE_ANIM_OBJ_WAVE, 64, 88, $2
+	anim_wait 6
+	anim_obj BATTLE_ANIM_OBJ_SHOOTING_HEART, 64, 96, $4
+	anim_wait 6
+	anim_loop 3, .loop
+	anim_wait 16
+	anim_bgeffect BATTLE_BG_EFFECT_BATTLEROBJ_1ROW, $0, $1, $0
+	anim_wait 6
+	anim_bgeffect BATTLE_BG_EFFECT_VIBRATE_MON, $0, $0, $0
+	anim_wait 32
+	anim_call BattleAnim_ShowMon_1
 	anim_ret
 
 BattleAnim_PlayRough:
@@ -3289,15 +3311,6 @@ BattleAnim_Agility:
 	anim_call BattleAnim_ShowMon_0
 	anim_ret
 
-BattleAnim_BoneClub:
-	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_MISC
-	anim_obj BATTLE_ANIM_OBJ_BONE_CLUB, 64, 88, $2
-	anim_wait 32
-	anim_sound 0, 1, SFX_BONE_CLUB
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
-	anim_wait 16
-	anim_ret
-
 BattleAnim_Barrier:
 	anim_1gfx BATTLE_ANIM_GFX_REFLECT
 	anim_battlergfx_2row
@@ -5420,5 +5433,14 @@ BattleAnimSub_SpeedLines:
 ;	anim_call BattleAnim_ShowMon_0
 ;	anim_sound 0, 1, SFX_MEGA_PUNCH
 ;	anim_obj BATTLE_ANIM_OBJ_HIT_BIG, 132, 56, $0
+;	anim_wait 16
+;	anim_ret
+
+;BattleAnim_BoneClub:
+;	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_MISC
+;	anim_obj BATTLE_ANIM_OBJ_BONE_CLUB, 64, 88, $2
+;	anim_wait 32
+;	anim_sound 0, 1, SFX_BONE_CLUB
+;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
 ;	anim_wait 16
 ;	anim_ret
