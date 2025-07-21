@@ -1122,7 +1122,7 @@ Disable:
 	usedmovetext
 	doturn
 	checkhit
-	disable
+	farcommand
 	endmove
 
 RazorWind:
