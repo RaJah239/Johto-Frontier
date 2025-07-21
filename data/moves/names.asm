@@ -36,7 +36,7 @@ MoveNames::
 	li "Body Slam"
 	li "Wrap"
 	li "Take Down"
-	li "Thrash"
+	li "Sucker Punch"
 	li "Double-Edge"
 	li "Drain Punch"
 	li "Poison Sting"

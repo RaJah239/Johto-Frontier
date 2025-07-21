@@ -212,7 +212,7 @@ BattleAnimations::
 	dw BattleAnim_BodySlam
 	dw BattleAnim_Wrap
 	dw BattleAnim_TakeDown
-	dw BattleAnim_Thrash
+	dw BattleAnim_SuckerPunch
 	dw BattleAnim_DoubleEdge
 	dw BattleAnim_DrainPunch
 	dw BattleAnim_PoisonSting
@@ -3095,22 +3095,6 @@ BattleAnim_Glare:
 	anim_wait 16
 	anim_ret
 
-BattleAnim_Thrash:
-	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_sound 0, 1, SFX_POUND
-	anim_obj BATTLE_ANIM_OBJ_PALM, 120, 72, $0
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 120, 72, $0
-	anim_wait 6
-	anim_sound 0, 1, SFX_MOVE_PUZZLE_PIECE
-	anim_obj BATTLE_ANIM_OBJ_PUNCH, 136, 56, $0
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 56, $0
-	anim_wait 6
-	anim_sound 0, 1, SFX_DOUBLE_KICK
-	anim_obj BATTLE_ANIM_OBJ_KICK, 152, 40, $0
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 152, 40, $0
-	anim_wait 16
-	anim_ret
-
 BattleAnim_CalmMind:
 BattleAnim_Growth:
 	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
@@ -3829,6 +3813,7 @@ BattleAnim_ScaryFace:
 	anim_wait 64
 	anim_ret
 
+BattleAnim_SuckerPunch:
 BattleAnim_ShadowSneak:
 	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_HIT
 	anim_sound 0, 0, SFX_LICK

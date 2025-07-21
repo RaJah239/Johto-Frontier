@@ -2042,3 +2042,23 @@ FreezeDry:
 	kingsrock
 	freezetarget
 	endmove
+
+SuckerPunch:
+	checkobedience
+	usedmovetext
+	doturn
+	farcommand
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	effectchance
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	endmove
