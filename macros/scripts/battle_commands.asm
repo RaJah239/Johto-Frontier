@@ -83,7 +83,6 @@ ENDM
 	command curse                   ; 54
 	command protect                 ; 55
 	command spikes                  ; 56
-	command foresight               ; 57
 	command perishsong              ; 58
 	command startsandstorm          ; 59
 	command endure                  ; 5a

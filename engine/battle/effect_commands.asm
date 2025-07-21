@@ -6962,6 +6962,5 @@ TenPercentBoost:
 	jmp Divide
 
 BattleCommand_PsychUp:
-BattleCommand_Foresight:
 BattleCommand_FrustrationPower:
 	ret

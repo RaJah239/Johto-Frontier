@@ -24,4 +24,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_TOXIC_SPIKES,	BattleCommand_ToxicSpikes
 	dbw EFFECT_THUNDER,			BattleCommand_ThunderAccuracy
 	dbw EFFECT_HAIL,			BattleCommand_StartHail
+	dbw EFFECT_FORESIGHT,       BattleCommand_Foresight
 	db -1 ; end

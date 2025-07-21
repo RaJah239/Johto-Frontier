@@ -1468,7 +1468,7 @@ Foresight:
 	usedmovetext
 	doturn
 	checkhit
-	foresight
+	farcommand
 	endmove
 
 PerishSong:
