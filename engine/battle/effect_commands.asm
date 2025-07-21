@@ -2612,7 +2612,17 @@ PlayerAttackDamage:
 	jr .thickcluborlightball
 
 .special
+; Psyshock is a special move, but targets the foe's defense stat.
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_PSYSHOCK
+	jr nz, .get_special_defense
+	ld hl, wEnemyMonDefense
+	jr .psyshock_done
+
+.get_special_defense
 	ld hl, wEnemyMonSpclDef
+.psyshock_done
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
@@ -2893,7 +2903,17 @@ EnemyAttackDamage:
 	jr c, .thickcluborlightball
 
 .special
+; Psyshock is a special move, but targets the player's defense stat.
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_PSYSHOCK
+	jr nz, .get_special_defense
+	ld hl, wBattleMonDefense
+	jr .psyshock_done
+
+.get_special_defense
 	ld hl, wBattleMonSpclDef
+.psyshock_done
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]

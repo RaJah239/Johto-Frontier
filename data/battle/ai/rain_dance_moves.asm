@@ -9,4 +9,6 @@ RainDanceMoves:
 	db WATERFALL
 	db WHIRLPOOL
 	db HURRICANE
+	db SCALD
+	db AQUA_JET
 	db -1 ; end

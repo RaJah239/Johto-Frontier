@@ -190,7 +190,7 @@ MoveDescriptions::
 	dw BellyDrumDescription
 	dw SludgeBombDescription
 	dw MudSlapDescription
-	dw OctazookaDescription
+	dw PsyshockDescription
 	dw SpikesDescription
 	dw ZapCannonDescription
 	dw ForesightDescription
@@ -930,9 +930,9 @@ MudSlapDescription:
 	db   "Reduces the foe's"
 	line "accuracy.@"
 
-OctazookaDescription:
-	db   "An attack that may"
-	line "reduce accuracy.@"
+PsyshockDescription:
+	db   "A move that does"
+	line "physical damage.@"
 
 SpikesDescription:
 	db   "Hurts foes when"

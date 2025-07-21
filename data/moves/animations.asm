@@ -395,7 +395,7 @@ BattleAnimations::
 	dw BattleAnim_BellyDrum
 	dw BattleAnim_SludgeBomb
 	dw BattleAnim_MudSlap
-	dw BattleAnim_Octazooka
+	dw BattleAnim_Psyshock
 	dw BattleAnim_Spikes
 	dw BattleAnim_ZapCannon
 	dw BattleAnim_Foresight
@@ -932,6 +932,7 @@ BattleAnim_HiJumpKick:
 	anim_wait 16
 	anim_ret
 
+BattleAnim_Psyshock:
 BattleAnim_FocusBlast:
 	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_BEAM
 	anim_call BattleAnim_TargetObj_1Row
@@ -3945,22 +3946,6 @@ BattleAnim_MudSlap:
 	anim_1gfx BATTLE_ANIM_GFX_SAND
 	anim_obp0 $fc
 	anim_call BattleAnimSub_SandOrMud
-	anim_ret
-
-BattleAnim_Octazooka:
-	anim_3gfx BATTLE_ANIM_GFX_HAZE, BATTLE_ANIM_GFX_EGG, BATTLE_ANIM_GFX_SMOKE
-	anim_sound 6, 2, SFX_SLUDGE_BOMB
-	anim_obj BATTLE_ANIM_OBJ_OCTAZOOKA, 64, 92, $4
-	anim_wait 16
-	anim_obj BATTLE_ANIM_OBJ_BALL_POOF, 132, 56, $10
-	anim_wait 8
-	anim_if_param_equal $0, .done
-.loop
-	anim_obj BATTLE_ANIM_OBJ_SMOKE, 132, 60, $20
-	anim_wait 8
-	anim_loop 5, .loop
-	anim_wait 128
-.done
 	anim_ret
 
 BattleAnim_Spikes:
