@@ -147,7 +147,7 @@ MoveNames::
 	li "Calm Mind"
 	li "Shadow Sneak"
 	li "Spore"
-	li "Flash"
+	li "Mirror Shot"
 	li "Psywave"
 	li "Splash"
 	li "Acid Armor"

@@ -161,7 +161,7 @@ Moves:
 	move CALM_MIND,    EFFECT_CALM_MIND,           0, PSYCHIC_TYPE,   STATUS,  100, 24,   0
 	move SHADOW_SNEAK, EFFECT_PRIORITY_HIT,       40, GHOST,         PHYSICAL, 100, 24,   0
 	move SPORE,        EFFECT_SLEEP,               0, GRASS,         STATUS,   100, 15,   0
-	move FLASH,        EFFECT_ACCURACY_DOWN,       0, NORMAL,        STATUS,    70, 20,   0
+	move MIRROR_SHOT,  EFFECT_ACCURACY_DOWN_HIT,  40, STEEL,         SPECIAL,  100, 32,  10
 	move PSYWAVE,      EFFECT_PSYWAVE,             1, PSYCHIC_TYPE,  SPECIAL,   80, 15,   0
 	move SPLASH,       EFFECT_SPLASH,              0, NORMAL,        STATUS,   100, 40,   0
 	move ACID_ARMOR,   EFFECT_DEFENSE_UP_2,        0, POISON,        STATUS,   100, 40,   0

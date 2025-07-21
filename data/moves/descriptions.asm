@@ -148,7 +148,7 @@ MoveDescriptions::
 	dw CalmMindDescription
 	dw ShadowSneakDescription
 	dw SporeDescription
-	dw FlashDescription
+	dw MirrorShotDescription
 	dw PsywaveDescription
 	dw SplashDescription
 	dw AcidArmorDescription
@@ -773,8 +773,8 @@ SporeDescription:
 	db   "A move that"
 	line "induces sleep.@"
 
-FlashDescription:
-	db   "Blinds the foe to"
+MirrorShotDescription:
+	db   "An attack thay may"
 	line "reduce accuracy.@"
 
 PsywaveDescription:

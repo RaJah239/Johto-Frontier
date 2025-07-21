@@ -346,7 +346,7 @@ BattleAnimations::
 	dw BattleAnim_CalmMind
 	dw BattleAnim_ShadowSneak
 	dw BattleAnim_Spore
-	dw BattleAnim_Flash
+	dw BattleAnim_MirrorShot
 	dw BattleAnim_Psywave
 	dw BattleAnim_Splash
 	dw BattleAnim_AcidArmor
@@ -2865,7 +2865,7 @@ BattleAnim_FlashCannon:
 	anim_wait 4
 	anim_ret
 
-BattleAnim_Flash:
+BattleAnim_MirrorShot:
 	anim_1gfx BATTLE_ANIM_GFX_SPEED
 	anim_sound 0, 1, SFX_FLASH
 	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $6, $20

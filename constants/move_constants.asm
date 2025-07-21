@@ -153,7 +153,7 @@
 	const CALM_MIND    ; 91
 	const SHADOW_SNEAK ; 92
 	const SPORE        ; 93
-	const FLASH        ; 94
+	const MIRROR_SHOT  ; 94
 	const PSYWAVE      ; 95
 	const SPLASH       ; 96
 	const ACID_ARMOR   ; 97
