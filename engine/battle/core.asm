@@ -8064,6 +8064,7 @@ InitEnemyWildmon:
 	ret
 
 ExitBattle:
+	farcall UpdatePartyStats
 	call .HandleEndOfBattle
 	call CleanUpBattleRAM
 	ret
