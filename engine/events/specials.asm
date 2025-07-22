@@ -204,6 +204,44 @@ CardFlip:
 	call StartGameCornerGame
 	ret
 
+GetPartyCountWithoutEggs::
+	push hl
+	push de
+
+	ld a, [wPartyCount]
+	ld e, a ; E will be the return value.
+
+	ld a, [wPartyCount]
+	ld d, a
+	xor a
+	ld hl, wPartySpecies
+
+.loop
+	cp d
+	jr nc, .end_loop
+
+	push af
+	ld a, [hl]
+	cp EGG
+	jr nz, .go_on
+
+	dec e
+
+.go_on
+	pop af
+	
+	inc a
+	inc hl
+	jr .loop
+
+.end_loop
+	ld a, e
+	ld [wScriptVar], a
+
+	pop de
+	pop hl
+	ret
+
 UnusedMemoryGame:
 	call CheckCoinsAndCoinCase
 	ret c
