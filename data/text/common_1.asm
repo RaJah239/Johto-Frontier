@@ -1547,10 +1547,18 @@ _AreWeGeniusesText::
 	done
 
 _YourMonHasGrownText::
-	text "It's up in levels"
-	line "by @"
+	text "Your @"
+	text_ram wStringBuffer1
+	text_start
+	line "has grown a lot."
+
+	para "By level, it's"
+	line "grown by @"
 	text_decimal wStringBuffer2 + 1, 1, 3
-	text "!"
+	text " and"
+	cont "is now level @"
+	text_decimal wStringBuffer2 + 5, 1, 3
+	text "."
 
 	para "It'll cost ¥@"
 	text_decimal wStringBuffer2 + 2, 3, 4
