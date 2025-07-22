@@ -6627,9 +6627,9 @@ AnimateFailedMove:
 	jmp BattleCommand_RaiseSub
 
 BattleCommand_MoveDelay:
-; Wait 30 frames.
-	ld c, 30
-	jmp DelayFrames
+; Wait 10 frames.
+	ld c, 10
+	jp DelayFrames
 
 BattleCommand_ClearText:
 ; Used in multi-hit moves.
