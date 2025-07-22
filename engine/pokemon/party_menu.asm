@@ -749,14 +749,12 @@ PartyMenuSelect:
 	ld a, [hl]
 	ld de, SFX_READ_TEXT_2
 	call PlaySFX
-	call WaitSFX
 	and a
 	ret
 
 .exitmenu
 	ld de, SFX_READ_TEXT_2
 	call PlaySFX
-	call WaitSFX
 	scf
 	ret
 
