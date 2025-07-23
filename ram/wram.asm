@@ -1837,7 +1837,9 @@ wOBP1:: db
 
 wNumHits:: db
 
-	ds 1
+;NEXTU
+wItemFinderDistance:: db
+;ENDU
 
 wOptions::
 ; bit 0-2: number of frames to delay when printing text
