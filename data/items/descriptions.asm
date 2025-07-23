@@ -56,7 +56,7 @@ ItemDescriptions:
 	dw XSpecialDesc
 	dw CoinCaseDesc
 	dw ItemfinderDesc
-	dw TeruSama5Desc
+	dw LightClayDesc
 	dw FocusSashDesc
 	dw OldRodDesc
 	dw GoodRodDesc
@@ -479,8 +479,9 @@ ItemfinderDesc:
 	db   "Checks for unseen"
 	next "items in the area.@"
 
-TeruSama5Desc:
-	db   "?@"
+LightClayDesc:
+	db   "Extends screens"
+	next "to 8 turns. (HOLD)@"
 
 FocusSashDesc:
 	db   "Endures 1 OHKO at"

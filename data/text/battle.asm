@@ -136,13 +136,13 @@ BattleText_SafeguardFaded:
 	prompt
 
 BattleText_MonsLightScreenFell:
-	text "<TARGET>'s"
-	line "Light Screen fell!"
+	text "The Light Screen"
+	line "faded away."
 	prompt
 
 BattleText_MonsReflectFaded:
-	text "<TARGET>'s"
-	line "Reflect faded!"
+	text "The Reflect wall"
+	line "faded away."
 	prompt
 
 BattleText_RainContinuesToFall:

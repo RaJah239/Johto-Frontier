@@ -55,7 +55,7 @@ ItemNames::
 	li "X Special"
 	li "Coin Case"
 	li "ItemFinder"
-	li "?"
+	li "Light Clay"
 	li "Focus Sash"
 	li "Old Rod"
 	li "Good Rod"

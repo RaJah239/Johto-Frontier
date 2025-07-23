@@ -2133,10 +2133,9 @@ SECTION UNION "Miscellaneous WRAM 1", WRAMX
 ; miscellaneous
 wTempDayOfWeek::
 wPrevPartyLevel::
-	ds 1
+	ds 2
 wUnownPuzzleCornerTile::
 wKeepSevenBiasChance::
-wPokeFluteCuredSleep::
 wTempRestorePPItem::
 wApricorns::
 wSuicuneFrame::

@@ -1205,25 +1205,6 @@ _RepelUsedEarlierIsStillInEffectText::
 	cont "in effect."
 	prompt
 
-_PlayedFluteText::
-	text "Played the #"
-	line "FLUTE."
-
-	para "Now, that's a"
-	line "catchy tune!"
-	prompt
-
-_FluteWakeUpText::
-	text "All sleeping"
-	line "#MON woke up."
-	prompt
-
-Text_PlayedPokeFlute::
-	text "<PLAYER> played the"
-	line "# FLUTE.@"
-	text_promptbutton
-	text_end
-
 _BlueCardBalanceText::
 	text "You now have"
 	line "@"
