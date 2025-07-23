@@ -157,6 +157,7 @@ INCLUDE "audio/music/hoennrivalbattle.asm"
 INCLUDE "audio/music/unovaelitefourbattle.asm"
 INCLUDE "audio/music/caveoforigin.asm"
 INCLUDE "audio/music/mayencounter.asm"
+INCLUDE "audio/music/surfingpikachu.asm"
 
 SECTION "Sound Effects", ROMX
 

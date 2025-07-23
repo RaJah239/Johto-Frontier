@@ -390,7 +390,7 @@ SpecialMapMusic::
 	cp PLAYER_SURF
 	jr z, .surf
 	cp PLAYER_SURF_PIKA
-	jr z, .surf
+	jr z, .surf_pika
 
 	ld a, [wStatusFlags2]
 	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, a
@@ -400,8 +400,8 @@ SpecialMapMusic::
 	and a
 	ret
 
-.bike ; unreferenced
-	ld de, MUSIC_BICYCLE
+.surf_pika
+	ld de, MUSIC_SURFING_PIKACHU
 	scf
 	ret
 
