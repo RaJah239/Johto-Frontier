@@ -58,7 +58,7 @@ ItemEffects:
 	dw SuperRepelEffect    ; SUPER_REPEL
 	dw MaxRepelEffect      ; MAX_REPEL
 	dw DireHitEffect       ; DIRE_HIT
-	dw NoEffect            ; ITEM_2D
+	dw Restore4THHPEffect  ; SILVER_BERRY
 	dw RestoreHPEffect     ; FRESH_WATER
 	dw RestoreHPEffect     ; SODA_POP
 	dw RestoreHPEffect     ; LEMONADE
@@ -187,7 +187,7 @@ ItemEffects:
 	dw NoEffect            ; ITEM_AB
 	dw NoEffect            ; UP_GRADE
 	dw RestoreHPEffect     ; BERRY
-	dw Restore4THHPEffect  ; GOLD_BERRY
+	dw Restore3RDHPEffect  ; GOLD_BERRY
 	dw SquirtbottleEffect  ; SQUIRTBOTTLE
 	dw HyperEVUpEffect     ; HYPER_EV_UP
 	dw PokeBallEffect      ; PARK_BALL
@@ -3027,3 +3027,47 @@ HyperEVUpText:
 	text_far _HyperEVUpText
 	text_end
     done
+
+Restore3RDHPEffect:
+	ld b, PARTYMENUACTION_HEALING_ITEM
+	call UseItem_SelectMon
+	ld a, 2
+	ret c
+
+	call IsMonFainted
+	ld a, 1
+	ret z
+
+	call IsMonAtFullHealth
+	ld a, 1
+	ret nc
+
+	xor a
+	ld [wLowHealthAlarm], a
+	call ItemEffects_GetThirdMaxHP
+	call RestoreHealth
+	call BattlemonRestoreHealth
+	call HealHP_SFX_GFX
+	ld a, PARTYMENUTEXT_HEAL_HP
+	ld [wPartyMenuActionText], a
+	call ItemActionTextWaitButton
+	call UseDisposableItem
+	ld a, 0
+	jp StatusHealer_Jumptable
+
+ItemEffects_GetThirdMaxHP:
+	xor a
+	inc d
+.loop
+	dec d
+	inc a
+	dec de
+	dec de
+	dec de
+	inc d
+	jr nz, .loop
+	dec a
+	ld e, a
+	ret nz
+	inc e ; At least 1.
+	ret

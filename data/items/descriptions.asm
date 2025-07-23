@@ -45,7 +45,7 @@ ItemDescriptions:
 	dw SuperRepelDesc
 	dw MaxRepelDesc
 	dw DireHitDesc
-	dw TeruSama3Desc
+	dw SilverBerryDesc
 	dw FreshWaterDesc
 	dw SodaPopDesc
 	dw LemonadeDesc
@@ -435,9 +435,6 @@ MaxRepelDesc:
 DireHitDesc:
 	db   "Ups critical hit"
 	next "ratio. (1 BTL)@"
-
-TeruSama3Desc:
-	db   "?@"
 
 FreshWaterDesc:
 	db   "Restores #MON"
@@ -937,6 +934,10 @@ BerryDesc:
 	next "item. (10HP, HOLD)@"
 
 GoldBerryDesc:
+	db "Self-restore item."
+	next "(1/3 max HP, HOLD)@"
+
+SilverBerryDesc:
 	db "Self-restore item."
 	next "(1/4 max HP, HOLD)@"
 

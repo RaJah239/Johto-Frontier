@@ -44,7 +44,7 @@ ItemNames::
 	li "Super Repel"
 	li "Max Repel"
 	li "Dire Hit"
-	li "?"
+	li "Silver Berry"
 	li "Fresh Water"
 	li "Soda Pop"
 	li "Lemonade"
