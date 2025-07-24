@@ -69,6 +69,8 @@ PlayBattleMusic:
  	ld de, MUSIC_CHAMPION_BATTLE
  	jr z, .done
 
+    ld a, [wOtherTrainerClass]
+
 .othertrainer
 	ld a, [wOtherTrainerClass]
 	ld hl, BattleMusic_Trainers

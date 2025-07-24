@@ -6047,6 +6047,7 @@ LoadEnemyMon:
 	ld c, a
 
 .UpdateDVs:
+	farcall SetUpSelfDVs
 ; Input DVs in register bc
 	ld hl, wEnemyMonDVs
 	ld a, b
@@ -8026,6 +8027,12 @@ InitEnemyTrainer:
 	xor a
 	ld [wTempEnemyMonSpecies], a
 	callfar GetTrainerAttributes
+	ld a, [wOtherTrainerClass]
+	cp CAL
+	jr nz, .notCal
+	callfar ReadPlayerPartyAsTrainerParty
+	jr .ok
+.notCal
 	callfar ReadTrainerParty
 
 .ok

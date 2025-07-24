@@ -40,7 +40,6 @@ ClairGroup:
 Rival1Group:
 PokemonProfGroup:
 WillGroup:
-PKMNTrainerGroup:
 BrunoGroup:
 KarenGroup:
 KogaGroup:
@@ -228,4 +227,10 @@ KrisGroup:
 	; KRIS (1)
 	db "KRIS@", TRAINERTYPE_NORMAL
 	db 5, CYNDAQUIL
+	db -1 ; end
+
+PKMNTrainerGroup:
+	; CAL (1)
+	db "Self@", TRAINERTYPE_NORMAL
+	db 5, HO_OH
 	db -1 ; end

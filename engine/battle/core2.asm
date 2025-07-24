@@ -510,3 +510,17 @@ ToxicPoison:
 	ld a, [hl]
 	cp POISON
 	ret
+
+; used by trainer SELF to set DVS in bc
+SetUpSelfDVs:
+    ld a, [wOtherTrainerClass]
+    cp CAL
+    jr nz, .notSelf
+    ld a, [wCurPartyMon]
+	ld hl, wOTPartyMon1DVs
+	call GetPartyLocation
+	ld b, [hl]
+	inc hl
+	ld c, [hl]
+.notSelf
+    ret
