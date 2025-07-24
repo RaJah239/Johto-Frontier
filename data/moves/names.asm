@@ -153,7 +153,7 @@ MoveNames::
 	li "Acid Armor"
 	li "Fairy Flash"
 	li "Explosion"
-	li "Fury Stripes"
+	li "Fury Strikes"
 	li "Hidden Force"
 	li "Rest"
 	li "Rock Slide"
