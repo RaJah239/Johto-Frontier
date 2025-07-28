@@ -667,8 +667,8 @@ DefenseCurlDescription:
 	line "user's DEFENSE.@"
 
 BarrierDescription:
-	db   "Sharply increases"
-	line "user's DEFENSE.@"
+	db   "Increases Defense"
+	line "Sp.Def of user.@"
 
 LightScreenDescription:
 	db   "Ups SPCL.DEF with"

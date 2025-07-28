@@ -2082,3 +2082,10 @@ Revenge:
 	checkfaint
 	kingsrock
 	endmove
+
+Barrier:
+	checkobedience
+	usedmovetext
+	doturn
+	farcommand
+	endmove
