@@ -1821,7 +1821,7 @@ wInBattleTowerBattle::
 ; 1 BattleTower-Battle
 	db
 
-	ds 1
+wCurOptionsPage:: db
 
 wFXAnimID:: dw
 

@@ -1,14 +1,4 @@
-; GetOptionPointer.Pointers indexes
-	const_def
-	const OPT_TEXT_SPEED    ; 0
-	const OPT_BATTLE_SCENE  ; 1
-	const OPT_EXP_SHARE     ; 2
-	const OPT_SOUND         ; 3
-	const OPT_MINIMAL_DIALOGUE ; 4
-	const OPT_CASUAL_CALLS ; 5
-	const OPT_FRAME         ; 6
-	const OPT_CANCEL        ; 7
-DEF NUM_OPTIONS EQU const_value ; 8
+DEF NUM_OPTIONS EQU 7
 
 _Option:
 	call ClearJoypad
@@ -18,33 +8,18 @@ _Option:
 	ld [hl], TRUE
 	call ClearBGPalettes
 	hlcoord 0, 0
-	ld b, SCREEN_HEIGHT - 2
-	ld c, SCREEN_WIDTH - 2
+	lb bc, SCREEN_HEIGHT - 2, SCREEN_WIDTH - 2
 	call Textbox
 	hlcoord 2, 2
-	ld de, StringOptions
+	ld de, StringOptions1
 	call PlaceString
 	xor a
-	ld [wJumptableIndex], a
+	ld [wCurOptionsPage], a
 
-; display the settings of each option when the menu is opened
-	ld c, NUM_OPTIONS - 2 ; omit frame type, the last option
-.print_text_loop
-	push bc
-	xor a
-	ldh [hJoyLast], a
-	call GetOptionPointer
-	pop bc
-	ld hl, wJumptableIndex
-	inc [hl]
-	dec c
-	jr nz, .print_text_loop
-	call UpdateFrame ; display the frame type
+	call OptionsMenu_LoadOptions
 
 	xor a
 	ld [wJumptableIndex], a
-	inc a
-	ldh [hBGMapMode], a
 	call WaitBGMap
 	ld b, SCGB_DIPLOMA
 	call GetSGBLayout
@@ -67,14 +42,36 @@ _Option:
 	jr .joypad_loop
 
 .ExitOptions:
-	ld de, SFX_TRANSACTION
+	ld de, SFX_SAVE
 	call PlaySFX
 	call WaitSFX
 	pop af
 	ldh [hInMenu], a
 	ret
 
-StringOptions:
+OptionsMenu_LoadOptions:
+	xor a
+	ld [wJumptableIndex], a
+	ldh [hJoyPressed], a
+	ld c, $6 ; number of items on the menu minus 1 (for done)
+.print_text_loop ; this next will display the settings of each option when the menu is opened
+	push bc
+	xor a
+	ldh [hJoyLast], a
+	call GetOptionPointer
+	pop bc
+	ld hl, wJumptableIndex
+	inc [hl]
+	dec c
+	jr nz, .print_text_loop
+	ld a, [wCurOptionsPage]
+	and a
+	call z, UpdateFrame
+	ld a, 1
+	ldh [hBGMapMode], a
+	ret
+
+StringOptions1:
 	db "Text Speed<LF>"
 	db "        :<LF>"
 	db "Battle Scene<LF>"
@@ -83,27 +80,58 @@ StringOptions:
 	db "        :<LF>"
 	db "Sound<LF>"
 	db "        :<LF>"
-	db "Dialogue<LF>"
-	db "        :<LF>"
 	db "Casual Calls<LF>"
 	db "        :<LF>"
 	db "Frame<LF>"
 	db "        :Type<LF>"
-	db "Cancel@"
+	db "Next<LF>"
+	db "         <LF>"
+	db "Done@"
+
+StringOptions2:
+	db "Dialogue<LF>"
+	db "        :<LF>"
+	db "Fast Boot<LF>"
+	db "        :<LF>"
+	db "Background Music<LF>"
+	db "        :<LF>"
+	db "Placholder<LF>"
+	db "        :<LF>"
+	db "Placholder<LF>"
+	db "        :<LF>"
+	db "Placholder<LF>"
+	db "        :<LF>"
+	db "Previous<LF>"
+	db "         <LF>"
+	db "Done@"
 
 GetOptionPointer:
-	jumptable .Pointers, wJumptableIndex
+	ld a, [wCurOptionsPage]
+	and a
+	ld a, [wJumptableIndex]
+	jr z, .page1
+	add NUM_OPTIONS + 1
+.page1
+	call StackJumpTable
 
 .Pointers:
-; entries correspond to OPT_* constants
 	dw Options_TextSpeed
 	dw Options_BattleScene
 	dw Options_ExpShare
 	dw Options_Sound
-	dw Options_MinimalDialogue
 	dw Options_CasualCalls
 	dw Options_Frame
-	dw Options_Cancel
+	dw Options_NextPrevious
+	dw Options_Done
+
+	dw Options_MinimalDialogue
+	dw Options_FastBoot
+	dw Options_BackgroundMusic
+	dw Options_FastBoot
+	dw Options_FastBoot
+	dw Options_FastBoot
+	dw Options_NextPrevious
+	dw Options_Done
 
 	const_def
 	const OPT_TEXT_SPEED_FAST ; 1
@@ -305,6 +333,9 @@ Options_Sound:
 .Mono:   db "Mono  @"
 .Stereo: db "Stereo@"
 
+Options_BackgroundMusic: ; place holder
+Options_FastBoot: ; place holder
+	ret
 
 Options_MinimalDialogue:
 	ld hl, wOptions2
@@ -336,7 +367,7 @@ Options_MinimalDialogue:
 	ld de, .Normal
 
 .Display:
-	hlcoord 11, 11
+	hlcoord 11, 3
 	call PlaceString
 	and a
 	ret
@@ -379,7 +410,7 @@ Options_CasualCalls:
  	ld de, .Off
  
  .Display:
- 	hlcoord 11, 13
+ 	hlcoord 11, 11
  	call PlaceString
  	and a
  	ret
@@ -412,14 +443,43 @@ Options_Frame:
 	ld [hl], a
 UpdateFrame:
 	ld a, [wTextboxFrame]
-	hlcoord 16, 15 ; where on the screen the number is drawn
+	hlcoord 16, 13 ; where on the screen the number is drawn
 	add "1"
 	ld [hl], a
 	call LoadFontsExtra
 	and a
 	ret
 
-Options_Cancel:
+Options_NextPrevious:
+	ld hl, wCurOptionsPage
+	ldh a, [hJoyPressed]
+	and A_BUTTON | D_LEFT | D_RIGHT
+	jr z, .NonePressed
+	bit 0, [hl]
+	jr z, .Page2
+;.Page1:
+	res 0, [hl]
+	ld de, StringOptions1
+	jr .Display
+.Page2:
+	set 0, [hl]
+	ld de, StringOptions2
+.Display:
+	push de
+	hlcoord 0, 0
+	lb bc, 16, 18
+	call Textbox
+	pop de
+	hlcoord 2, 2
+	call PlaceString
+	call OptionsMenu_LoadOptions
+	ld a, $6
+	ld [wJumptableIndex], a
+.NonePressed:
+	and a
+	ret
+
+Options_Done:
 	ldh a, [hJoyPressed]
 	and A_BUTTON
 	jr nz, .Exit
@@ -441,18 +501,11 @@ OptionsControl:
 	ret
 
 .DownPressed:
-	ld a, [hl]
-	cp OPT_CANCEL ; maximum option index
-	jr nz, .CheckDoNotDisturbMode
-	ld [hl], OPT_TEXT_SPEED ; first option
-	scf
-	ret
-
-.CheckDoNotDisturbMode: ; I have no idea why this exists...
-	cp OPT_CASUAL_CALLS
+	ld a, [hl] ; load the cursor position to a
+	cp NUM_OPTIONS ; maximum number of items in option menu
 	jr nz, .Increase
-	ld [hl], OPT_CASUAL_CALLS
-
+	ld [hl], -1
+	; fallthrough
 .Increase:
 	inc [hl]
 	scf
@@ -460,19 +513,10 @@ OptionsControl:
 
 .UpPressed:
 	ld a, [hl]
-
-; Another thing where I'm not sure why it exists
-	cp OPT_FRAME
-	jr nz, .NotFrame
-	ld [hl], OPT_CASUAL_CALLS
-	scf
-	ret
-
-.NotFrame:
-	and a ; OPT_TEXT_SPEED, minimum option index
+	and a
 	jr nz, .Decrease
-	ld [hl], NUM_OPTIONS ; decrements to OPT_CANCEL, maximum option index
-
+	ld [hl], NUM_OPTIONS + 1 ; number of option items + 1
+	; fallthrough
 .Decrease:
 	dec [hl]
 	scf
@@ -493,3 +537,16 @@ Options_UpdateCursorPosition:
 	call AddNTimes
 	ld [hl], "▶"
 	ret
+
+StackJumpTable::
+	pop hl
+	push de
+	ld e, a
+	ld d, 0
+	add hl, de
+	add hl, de
+	pop de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jp hl
