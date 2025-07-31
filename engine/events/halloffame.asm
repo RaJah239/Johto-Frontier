@@ -589,9 +589,25 @@ HOF_AnimatePlayerPic:
 	ld de, wGameTimeMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	call PrintNum
+
+	ld a, [wOptions2]
+	bit HARD_MODE, a
+	jr z, .HardModeOff
+
+	hlcoord 0, 0
+	lb bc, 1, 9
+	call Textbox
+
+	hlcoord 1, 1
+	ld de, .HardMode
+	call PlaceString
+
+.HardModeOff:
 	call WaitBGMap
 	farcall ProfOaksPCRating
 	ret
 
 .PlayTime:
-	db "PLAY TIME@"
+	db "Play Time@"
+.HardMode:
+	db "Hard Mode@"
