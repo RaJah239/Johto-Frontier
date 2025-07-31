@@ -99,7 +99,7 @@ StringOptions2:
 	db "        :<LF>"
 	db "Placholder<LF>"
 	db "        :<LF>"
-	db "Placholder<LF>"
+	db "Hard Mode<LF>"
 	db "        :<LF>"
 	db "Previous<LF>"
 	db "         <LF>"
@@ -129,7 +129,7 @@ GetOptionPointer:
 	dw Options_BackgroundMusic
 	dw Options_FastBoot
 	dw Options_FastBoot
-	dw Options_FastBoot
+	dw Options_HardMode
 	dw Options_NextPrevious
 	dw Options_Done
 
@@ -281,6 +281,44 @@ Options_ExpShare:
 
 .Display:
 	hlcoord 11, 7
+	call PlaceString
+	and a
+	ret
+
+.Off: db "Off@"
+.On:  db "On @"
+
+Options_HardMode:
+	ld hl, wOptions2
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit HARD_MODE, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+
+.LeftPressed:
+	bit HARD_MODE, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+
+.NonePressed:
+	bit HARD_MODE, [hl]
+	jr nz, .ToggleOn
+
+.ToggleOff:
+	res HARD_MODE, [hl]
+	ld de, .Off
+	jr .Display
+
+.ToggleOn:
+	set HARD_MODE, [hl]
+	ld de, .On
+
+.Display:
+	hlcoord 11, 13
 	call PlaceString
 	and a
 	ret

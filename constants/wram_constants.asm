@@ -84,6 +84,7 @@ DEF GBPRINTER_DARKEST  EQU $7f
 	const EXP_SHARE     ; 1
 	const MINIMAL_DIALOGUE ; 2
 	const FAST_BOOT ; 3
+	const HARD_MODE ; 4
 
 ; wWalkingDirection::
 	const_def -1
