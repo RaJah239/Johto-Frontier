@@ -127,6 +127,11 @@ ReadTrainerPartyPieces:
 	cp -1
 	ret z
 
+	; apply level scaling
+	ld b, a
+	ld a, [wBaseLevel]
+	add a, b
+
 ; level
 	ld [wCurPartyLevel], a
 

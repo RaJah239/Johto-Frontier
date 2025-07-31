@@ -3200,7 +3200,9 @@ wMobileBattleRoomSceneID::                        db
 wDayCareSceneID::                                 db
 wRoute30SceneID::                                 db
 
-	ds 183
+	ds 182
+
+wBaseLevel:: db 
 
 wEventFlags:: flag_array NUM_EVENTS
 
