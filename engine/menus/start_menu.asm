@@ -335,6 +335,20 @@ endr
 	; text box
 	hlcoord 0, 13
 	lb bc, 3, 9
+	call Textbox
+
+	ld a, [wOptions2]
+	bit HARD_MODE, a
+	ret z
+
+	; place white box
+	hlcoord 0, 9
+	lb bc, 3, 10
+	call ClearBox
+
+	; hard mode's text box
+	hlcoord 0, 9
+	lb bc, 1, 9
 	jp Textbox
 
 .PrintDayTime:
@@ -347,7 +361,6 @@ endr
 	ld c, a
 	decoord 1, 14
 	farcall PrintHoursMins
-
 
 	ld a, [wFieldWeather]
 	cp WEATHER_RAIN
@@ -364,7 +377,6 @@ endr
 
 	cp WEATHER_NONE
 	jr z, .PrintClearSkies
-	ret
 
 .PrintRaining:
 	hlcoord 1, 16
@@ -395,7 +407,13 @@ endr
 	ld de, .ClearStr
 	call PlaceString
 .done:
-	ret
+	ld a, [wOptions2]
+	bit HARD_MODE, a
+	ret z
+
+	hlcoord 1, 10
+	ld de, .HardModeString
+	jp PlaceString
 
 .RainingStr:
  	db "Raining@"
@@ -407,6 +425,8 @@ endr
  	db "Sandstorm@"
 .ClearStr:
 	db "Clear@"
+.HardModeString:
+	db "Hard Mode@"
 
 .DrawBugContestStatusBox:
 	ld hl, wStatusFlags2
