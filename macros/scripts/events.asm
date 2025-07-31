@@ -382,6 +382,18 @@ MACRO ResetEventFlag
 	call EventFlagAction
 ENDM
 
+MACRO SetEventFlag
+	ld de, \1 ; load into de EVENT_FLAG
+	ld b, SET_FLAG ; set flag/ setevent
+	call EventFlagAction
+ENDM
+
+MACRO CheckEventFlag
+	ld de, \1 ; load into de EVENT_FLAG
+	ld b, CHECK_FLAG ; set checkflag/ checkevent
+	call EventFlagAction
+ENDM
+
 	const wildon_command ; $37
 MACRO wildon
 	db wildon_command
