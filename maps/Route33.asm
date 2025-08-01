@@ -11,6 +11,12 @@ Route33_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
+	callback MAPCALLBACK_OBJECTS, .Weather
+
+.Weather:
+	setval WEATHER_RAIN
+	writemem wFieldWeather
+	endcallback
 
 Route33LassScript:
 	jumptextfaceplayer Route33LassText
