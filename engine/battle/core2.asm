@@ -638,19 +638,33 @@ FieldWeather:
 GetTimeOfDayImage:
 	ld a, [wTimeOfDay]
 	cp MORN_F
-	jr z, .DayImage
+	jr z, .MornImage
+
 	cp DAY_F
 	jr z, .DayImage
-	cp NITE_F
-	jr z, .NightImage
-.DayImage
- ld de, DayTimeImage
- lb bc, PAL_BATTLE_OB_YELLOW, 4
- jr .done	
 	
- .NightImage
- ld de, NightTimeImage
- lb bc, PAL_BATTLE_OB_BLUE, 4
+	cp EVE_F
+	jr z, .EveImage
+	jr .NightImage
+
+.MornImage:
+ 	ld de, MorningTimeImage
+ 	lb bc, PAL_BATTLE_OB_BLUE, 4
+ 	jr .done
+
+.DayImage:
+ 	ld de, DayTimeImage
+ 	lb bc, PAL_BATTLE_OB_YELLOW, 4
+ 	jr .done	
+
+ .EveImage:
+ 	ld de, EveningTimeImage
+ 	lb bc, PAL_BATTLE_OB_RED, 4
+ 	jr .done
+
+ .NightImage:
+ 	ld de, NightTimeImage
+ 	lb bc, PAL_BATTLE_OB_GRAY, 4
 
 .done
 	push bc
