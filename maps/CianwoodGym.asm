@@ -315,8 +315,8 @@ BlackbeltLungAfterText:
 
 CianwoodGym_MapEvents:
 	def_warp_events
-	warp_event  4, 17, CIANWOOD_CITY, 2
-	warp_event  5, 17, CIANWOOD_CITY, 2
+	warp_event  4, 17, CIANWOOD_CITY, 3
+	warp_event  5, 17, CIANWOOD_CITY, 3
 
 	def_coord_events
 

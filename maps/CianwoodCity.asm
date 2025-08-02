@@ -432,9 +432,9 @@ CianwoodPokeSeerSignText:
 
 CianwoodCity_MapEvents:
 	def_warp_events
+	warp_event 23, 43, CIANWOOD_POKECENTER_1F, 1
 	warp_event 17, 41, MANIAS_HOUSE, 1
 	warp_event  8, 43, CIANWOOD_GYM, 1
-	warp_event 23, 43, CIANWOOD_POKECENTER_1F, 1
 	warp_event 15, 47, CIANWOOD_PHARMACY, 1
 	warp_event  9, 31, CIANWOOD_PHOTO_STUDIO, 1
 	warp_event 15, 37, CIANWOOD_LUGIA_SPEECH_HOUSE, 1

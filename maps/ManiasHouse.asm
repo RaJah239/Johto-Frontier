@@ -182,8 +182,8 @@ ManiaText_HappinessSpeech:
 
 ManiasHouse_MapEvents:
 	def_warp_events
-	warp_event  2,  7, CIANWOOD_CITY, 1
-	warp_event  3,  7, CIANWOOD_CITY, 1
+	warp_event  2,  7, CIANWOOD_CITY, 2
+	warp_event  3,  7, CIANWOOD_CITY, 2
 
 	def_coord_events
 
