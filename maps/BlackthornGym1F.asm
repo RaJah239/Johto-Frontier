@@ -399,8 +399,8 @@ BlackthornGymGuideWinText:
 
 BlackthornGym1F_MapEvents:
 	def_warp_events
-	warp_event  4, 17, BLACKTHORN_CITY, 1
-	warp_event  5, 17, BLACKTHORN_CITY, 1
+	warp_event  4, 17, BLACKTHORN_CITY, 2
+	warp_event  5, 17, BLACKTHORN_CITY, 2
 	warp_event  1,  7, BLACKTHORN_GYM_2F, 1
 	warp_event  7,  9, BLACKTHORN_GYM_2F, 2
 	warp_event  2,  6, BLACKTHORN_GYM_2F, 3

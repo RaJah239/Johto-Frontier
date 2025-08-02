@@ -46,8 +46,8 @@ BlackthornMartBlackBeltText:
 
 BlackthornMart_MapEvents:
 	def_warp_events
-	warp_event  2,  7, BLACKTHORN_CITY, 4
-	warp_event  3,  7, BLACKTHORN_CITY, 4
+	warp_event  2,  7, BLACKTHORN_CITY, 5
+	warp_event  3,  7, BLACKTHORN_CITY, 5
 
 	def_coord_events
 

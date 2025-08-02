@@ -38,8 +38,8 @@ BlackthornDragonSpeechHouseDratiniText:
 
 BlackthornDragonSpeechHouse_MapEvents:
 	def_warp_events
-	warp_event  2,  7, BLACKTHORN_CITY, 2
-	warp_event  3,  7, BLACKTHORN_CITY, 2
+	warp_event  2,  7, BLACKTHORN_CITY, 3
+	warp_event  3,  7, BLACKTHORN_CITY, 3
 
 	def_coord_events
 
