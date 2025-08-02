@@ -136,8 +136,8 @@ GoldenrodHappinessRaterTwinText:
 
 GoldenrodHappinessRater_MapEvents:
 	def_warp_events
-	warp_event  2,  7, GOLDENROD_CITY, 3
-	warp_event  3,  7, GOLDENROD_CITY, 3
+	warp_event  2,  7, GOLDENROD_CITY, 4
+	warp_event  3,  7, GOLDENROD_CITY, 4
 
 	def_coord_events
 

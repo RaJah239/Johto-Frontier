@@ -190,8 +190,8 @@ BillsSisterStorageSystemText:
 
 BillsFamilysHouse_MapEvents:
 	def_warp_events
-	warp_event  2,  7, GOLDENROD_CITY, 4
-	warp_event  3,  7, GOLDENROD_CITY, 4
+	warp_event  2,  7, GOLDENROD_CITY, 5
+	warp_event  3,  7, GOLDENROD_CITY, 5
 
 	def_coord_events
 
