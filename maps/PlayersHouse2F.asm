@@ -120,7 +120,7 @@ if DEF(_DEBUG)
 	setflag ENGINE_PHONE_CARD
 	setflag ENGINE_MAP_CARD
 	setflag ENGINE_RADIO_CARD
-	setflag ENGINE_EXPN_CARD
+	setflag ENGINE_START_MENU_WARP
 
 	; pokedex
 	setflag ENGINE_POKEDEX

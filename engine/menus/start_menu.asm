@@ -9,6 +9,7 @@
 	const STARTMENUITEM_EXIT     ; 6
 	const STARTMENUITEM_POKEGEAR ; 7
 	const STARTMENUITEM_QUIT     ; 8
+	const STARTMENUITEM_WARP     ; 9
 
 StartMenu::
 	call ClearWindowData
@@ -184,6 +185,7 @@ StartMenu::
 	dw StartMenu_Exit,     .ExitString,     .EmptyDesc
 	dw StartMenu_Pokegear, .PokegearString, .EmptyDesc
 	dw StartMenu_Quit,     .QuitString,     .EmptyDesc
+	dw StartMenu_Warp,     .WarpString,     .EmptyDesc
 
 .PokedexString:  db "#dex@"
 .PartyString:    db "#mon@"
@@ -193,7 +195,8 @@ StartMenu::
 .OptionString:   db "Options@"
 .ExitString:     db "Exit@"
 .PokegearString: db "<POKE>Gear@"
-.QuitString:     db "QUIT@"
+.QuitString:     db "Quit@"
+.WarpString:     db "Warp@"
 
 .EmptyDesc:
 	db   "@"
@@ -303,8 +306,24 @@ endr
 
 	ld a, STARTMENUITEM_OPTION
 	call .AppendMenuList
+
+	; Bug Catching contest must always have the Exit Option
+	ld hl, wStatusFlags2
+	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, [hl]
+	jr nz, .bug_contest_or_fast_travel_not_obtained
+
+	; check if end game fast travel has been obtained
+	ld hl, wPokegearFlags
+	bit ENGINE_START_MENU_WARP_F, [hl]
+	jr z, .bug_contest_or_fast_travel_not_obtained
+	ld a, STARTMENUITEM_WARP
+	call .AppendMenuList
+	jr .next
+
+.bug_contest_or_fast_travel_not_obtained
 	ld a, STARTMENUITEM_EXIT
 	call .AppendMenuList
+.next
 	ld a, c
 	ld [wMenuItemsList], a
 	ret
@@ -458,9 +477,12 @@ AEqualsTwo:
 	ld a, 2
 	ret
 
+StartMenu_Warp:
+	call Fast_Travel_Warp
+	; fallthrough
+
 StartMenu_Exit:
 ; Exit the menu.
-
 	ld a, 1
 	ret
 
@@ -595,4 +617,150 @@ StartMenu_Pokemon:
 	push af
 	call ExitAllMenus
 	pop af
+	ret
+
+Fast_Travel_Warp_Locations:
+	table_width 2
+	map_id NEW_BARK_TOWN
+	map_id CHERRYGROVE_CITY
+	map_id VIOLET_CITY
+	map_id AZALEA_TOWN
+	map_id GOLDENROD_CITY
+	map_id ECRUTEAK_CITY
+	map_id OLIVINE_CITY
+	map_id BATTLE_TOWER_OUTSIDE
+	map_id CIANWOOD_CITY
+	map_id MAHOGANY_TOWN
+	map_id BLACKTHORN_CITY
+DEF NUM_FAST_TRAVEL_WARP_MAPS EQU (@ - {CURRENT_TABLE_START}) / CURRENT_TABLE_WIDTH
+
+Fast_Travel_Warp_Strings:
+	table_width 3
+	dba New_Bark_Map_Name4
+	dba Cherrygrove_Map_Name3
+	dba Violet_Map_Name5
+	dba Azalea_Map_Name7
+	dba Goldenrod_Map_Name2
+	dba Ecruteak_Map_Name9
+	dba Olivine_Map_Name14
+	dba Cianwood_Map_Name16
+	dba Cianwood_Map_Name3
+	dba Mahogany_Map_Name7
+	dba Blackthorn_Map_Name10
+	assert_table_length NUM_FAST_TRAVEL_WARP_MAPS
+
+Fast_Travel_Warp:
+	xor a
+	ld [wMenuScrollPosition], a
+	ld a, $1
+	ld [wMenuSelection], a
+	call SetUpTextbox
+.loop
+	ld hl, .WhereToText
+	call PrintText
+	call DelayFrame
+	call UpdateSprites
+	call Fast_Travel_LocationMenu
+	ret z
+	
+	ld hl, Fast_Travel_Warp_Locations
+	ld bc, 2
+	dec a
+	call AddNTimes
+	push hl
+	pop hl
+
+	; Default warp number 
+	; change if your maps use 0-based or a different default
+	ld a, 1
+	ld [wNextWarp], a
+	ld a, [hli]
+	ld [wNextMapGroup], a
+	ld a, [hli]
+	ld [wNextMapNumber], a
+	ld a, MAPSETUP_DOOR
+	ldh [hMapEntryMethod], a
+	ld a, MAPSTATUS_ENTER
+	call LoadMapStatus
+
+	; play warping sound effect
+    call WaitSFX
+    ld de, SFX_WARP_TO
+    call PlaySFX
+	ret
+
+.WhereToText
+	text "Where would you"
+	line "like to be warped?"
+	done
+
+Fast_Travel_LocationMenu:
+	ld hl, .MenuHeader
+	call CopyMenuHeader
+	ld a, [wMenuSelection]
+	ld [wMenuCursorPosition], a
+	xor a
+	ld [wWhichIndexSet], a
+	ldh [hBGMapMode], a
+	call InitScrollingMenu
+	call UpdateSprites
+	call ScrollingMenu
+	ld a, [wMenuJoypad]
+	cp B_BUTTON
+	jr z, .cancel
+	ld a, [wMenuSelection]
+	cp -1
+	jr nz, .done
+
+.cancel
+	xor a
+	ret
+
+.done
+	ret
+
+.MenuHeader:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 1, 1, 18, 10
+	dw .MenuData
+	db 1 ; default option
+
+	db 0
+
+.MenuData:
+	db SCROLLINGMENU_DISPLAY_ARROWS ; flags
+	; if "columns" is > 0, a second menu function is expected,
+	; and the game will crash if it does not exist!
+	db 5, 0 ; rows, columns
+	db SCROLLINGMENU_ITEMS_NORMAL ; item format
+	dba .Maps
+	dba .PrintMapNames
+	dba NULL
+	dba NULL
+
+.Maps:
+	db NUM_FAST_TRAVEL_WARP_MAPS
+for x, NUM_FAST_TRAVEL_WARP_MAPS
+	db x + 1
+endr
+	db -1
+
+.PrintMapNames:
+	push de
+	ld a, [wMenuSelection]
+	call Fast_Travel_GetName
+	pop hl
+	call FarPlaceString
+	ret
+
+Fast_Travel_GetName:
+	ld hl, Fast_Travel_Warp_Strings
+	ld bc, 3
+	dec a
+	call AddNTimes
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld e, a
+	ld d, [hl]
 	ret

@@ -5,6 +5,7 @@
 	const ENGINE_MAP_CARD
 	const ENGINE_PHONE_CARD
 	const ENGINE_EXPN_CARD ; need to check what use this will be off now..
+	const ENGINE_START_MENU_WARP
 	const ENGINE_POKEGEAR
 ; wDayCareMan
 	const ENGINE_DAY_CARE_MAN_HAS_EGG

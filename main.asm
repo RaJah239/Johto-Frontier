@@ -48,7 +48,6 @@ INCLUDE "engine/overworld/time.asm"
 INCLUDE "engine/items/tmhm2.asm"
 INCLUDE "engine/menus/naming_screen.asm"
 INCLUDE "engine/events/misc_scripts.asm"
-INCLUDE "engine/events/heal_machine_anim.asm"
 INCLUDE "engine/events/forced_movement.asm"
 INCLUDE "engine/events/itemfinder.asm"
 INCLUDE "engine/menus/start_menu.asm"
@@ -62,6 +61,11 @@ INCLUDE "engine/events/std_collision.asm"
 INCLUDE "engine/events/bug_contest/judging.asm"
 INCLUDE "engine/events/pokerus/apply_pokerus_tick.asm"
 INCLUDE "engine/events/bug_contest/contest_2.asm"
+
+
+SECTION "Start Menu", ROMX
+
+INCLUDE "engine/events/heal_machine_anim.asm"
 
 
 SECTION "Whiteout", ROMX
