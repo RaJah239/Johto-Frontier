@@ -54,8 +54,8 @@ MahoganyRedGyaradosSpeechHouseTeacherText_RocketsInRadioTower:
 
 MahoganyRedGyaradosSpeechHouse_MapEvents:
 	def_warp_events
-	warp_event  2,  7, MAHOGANY_TOWN, 2
-	warp_event  3,  7, MAHOGANY_TOWN, 2
+	warp_event  2,  7, MAHOGANY_TOWN, 3
+	warp_event  3,  7, MAHOGANY_TOWN, 3
 
 	def_coord_events
 
