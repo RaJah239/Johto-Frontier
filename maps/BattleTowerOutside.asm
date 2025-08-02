@@ -75,9 +75,9 @@ BattleTowerOutsideSignText:
 
 BattleTowerOutside_MapEvents:
 	def_warp_events
+	warp_event  8,  9, BATTLE_TOWER_1F, 1
 	warp_event  8, 21, ROUTE_40_BATTLE_TOWER_GATE, 3
 	warp_event  9, 21, ROUTE_40_BATTLE_TOWER_GATE, 4
-	warp_event  8,  9, BATTLE_TOWER_1F, 1
 	warp_event  9,  9, BATTLE_TOWER_1F, 2
 
 	def_coord_events
