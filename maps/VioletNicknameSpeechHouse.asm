@@ -44,8 +44,8 @@ VioletNicknameSpeechHouseBirdText:
 
 VioletNicknameSpeechHouse_MapEvents:
 	def_warp_events
-	warp_event  3,  7, VIOLET_CITY, 4
-	warp_event  4,  7, VIOLET_CITY, 4
+	warp_event  3,  7, VIOLET_CITY, 5
+	warp_event  4,  7, VIOLET_CITY, 5
 
 	def_coord_events
 
