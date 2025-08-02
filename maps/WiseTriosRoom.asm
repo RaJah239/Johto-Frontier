@@ -344,8 +344,8 @@ SageKojiAfterBattleFinalText:
 
 WiseTriosRoom_MapEvents:
 	def_warp_events
-	warp_event  7,  4, ECRUTEAK_CITY, 4
-	warp_event  7,  5, ECRUTEAK_CITY, 5
+	warp_event  7,  4, ECRUTEAK_CITY, 5
+	warp_event  7,  5, ECRUTEAK_CITY, 6
 	warp_event  1,  4, ECRUTEAK_TIN_TOWER_ENTRANCE, 5
 
 	def_coord_events
