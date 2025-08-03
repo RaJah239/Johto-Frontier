@@ -907,7 +907,7 @@ New_Bark_Map_Name2: ; map_const ROUTE_27,  2
 New_Bark_Map_Name3: ; map_const ROUTE_29, ;  3
 	db "Route 29@"
 New_Bark_Map_Name4: ; map_const NEW_BARK_TOWN,;  4
-	db "New BarK Town@"
+	db "New Bark Town@"
 New_Bark_Map_Name5: ; map_const ELMS_LAB ;  5
 	db "Elm's Lab@"
 New_Bark_Map_Name6: ; map_const PLAYERS_HOUSE_1F ;  6
