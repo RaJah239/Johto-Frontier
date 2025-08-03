@@ -638,6 +638,7 @@ Fast_Travel_Warp_Locations:
 	map_id MAHOGANY_TOWN
 	map_id LAKE_OF_RAGE
 	map_id BLACKTHORN_CITY
+	map_id ROUTE_26
 DEF NUM_FAST_TRAVEL_WARP_MAPS EQU (@ - {CURRENT_TABLE_START}) / CURRENT_TABLE_WIDTH
 
 ; map_names.asm
@@ -659,6 +660,7 @@ Fast_Travel_Warp_Strings:
 	dba Mahogany_Map_Name7
 	dba Lake_of_Rage_Map_Name6
 	dba Blackthorn_Map_Name10
+	dba New_Bark_Map_Name1
 	assert_table_length NUM_FAST_TRAVEL_WARP_MAPS
 
 Fast_Travel_Warp:

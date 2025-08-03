@@ -69,8 +69,8 @@ VictoryRoadGateEightBadgesText:
 
 VictoryRoadGate_MapEvents:
 	def_warp_events
-	warp_event  5, 17, ROUTE_26, 1
-	warp_event  6, 17, ROUTE_26, 1
+	warp_event  5, 17, ROUTE_26, 2
+	warp_event  6, 17, ROUTE_26, 2
 	warp_event  5,  0, VICTORY_ROAD, 1
 	warp_event  6,  0, VICTORY_ROAD, 1
 
