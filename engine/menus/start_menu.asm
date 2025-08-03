@@ -636,6 +636,7 @@ Fast_Travel_Warp_Locations:
 	map_id BATTLE_TOWER_OUTSIDE
 	map_id CIANWOOD_CITY
 	map_id MAHOGANY_TOWN
+	map_id LAKE_OF_RAGE
 	map_id BLACKTHORN_CITY
 DEF NUM_FAST_TRAVEL_WARP_MAPS EQU (@ - {CURRENT_TABLE_START}) / CURRENT_TABLE_WIDTH
 
@@ -656,6 +657,7 @@ Fast_Travel_Warp_Strings:
 	dba Cianwood_Map_Name16
 	dba Cianwood_Map_Name3
 	dba Mahogany_Map_Name7
+	dba Lake_of_Rage_Map_Name6
 	dba Blackthorn_Map_Name10
 	assert_table_length NUM_FAST_TRAVEL_WARP_MAPS
 
