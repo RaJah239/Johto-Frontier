@@ -53,7 +53,7 @@ OptionsMenu_LoadOptions:
 	xor a
 	ld [wJumptableIndex], a
 	ldh [hJoyPressed], a
-	ld c, $6 ; number of items on the menu minus 1 (for done)
+	ld c, $7 ; number of items on the menu minus 1 (for done)
 .print_text_loop ; this next will display the settings of each option when the menu is opened
 	push bc
 	xor a
@@ -84,9 +84,9 @@ StringOptions1:
 	db "        :<LF>"
 	db "Frame<LF>"
 	db "        :Type<LF>"
-	db "Next Page<LF>"
+	db "Placholder<LF>"
 	db "         <LF>"
-	db "Done@"
+	db "Next Page@"
 
 StringOptions2:
 	db "Dialogue<LF>"
@@ -101,9 +101,9 @@ StringOptions2:
 	db "        :<LF>"
 	db "Hard Mode<LF>"
 	db "        :<LF>"
-	db "Previous Page<LF>"
+	db "Placholder<LF>"
 	db "         <LF>"
-	db "Done@"
+	db "Previous Page@"
 
 GetOptionPointer:
 	ld a, [wCurOptionsPage]
@@ -121,8 +121,8 @@ GetOptionPointer:
 	dw Options_Sound
 	dw Options_CasualCalls
 	dw Options_Frame
+	dw Options_FastBoot
 	dw Options_NextPrevious
-	dw Options_Done
 
 	dw Options_MinimalDialogue
 	dw Options_FastBoot
@@ -130,8 +130,8 @@ GetOptionPointer:
 	dw Options_FastBoot
 	dw Options_FastBoot
 	dw Options_HardMode
+	dw Options_FastBoot
 	dw Options_NextPrevious
-	dw Options_Done
 
 	const_def
 	const OPT_TEXT_SPEED_FAST ; 1
@@ -511,7 +511,7 @@ Options_NextPrevious:
 	hlcoord 2, 2
 	call PlaceString
 	call OptionsMenu_LoadOptions
-	ld a, $6
+	ld a, $7
 	ld [wJumptableIndex], a
 .NonePressed:
 	and a
