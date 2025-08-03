@@ -626,6 +626,7 @@ Fast_Travel_Warp_Locations:
 	map_id CHERRYGROVE_CITY
 	map_id VIOLET_CITY
 	map_id RUINS_OF_ALPH_OUTSIDE
+	map_id ROUTE_32
 	map_id AZALEA_TOWN
 	map_id GOLDENROD_CITY
 	map_id ECRUTEAK_CITY
@@ -643,6 +644,7 @@ Fast_Travel_Warp_Strings:
 	dba Cherrygrove_Map_Name3
 	dba Violet_Map_Name5
 	dba Dungeons_Map_Name22
+	dba Violet_Map_Name1
 	dba Azalea_Map_Name7
 	dba Goldenrod_Map_Name2
 	dba Ecruteak_Map_Name9
