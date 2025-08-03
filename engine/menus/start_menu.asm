@@ -629,6 +629,7 @@ Fast_Travel_Warp_Locations:
 	map_id ROUTE_32
 	map_id AZALEA_TOWN
 	map_id GOLDENROD_CITY
+	map_id NATIONAL_PARK
 	map_id ECRUTEAK_CITY
 	map_id OLIVINE_CITY
 	map_id BATTLE_TOWER_OUTSIDE
@@ -647,6 +648,7 @@ Fast_Travel_Warp_Strings:
 	dba Violet_Map_Name1
 	dba Azalea_Map_Name7
 	dba Goldenrod_Map_Name2
+	dba Dungeons_Map_Name15
 	dba Ecruteak_Map_Name9
 	dba Olivine_Map_Name14
 	dba Cianwood_Map_Name16
