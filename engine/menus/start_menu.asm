@@ -619,11 +619,13 @@ StartMenu_Pokemon:
 	pop af
 	ret
 
+; map_constants.asm
 Fast_Travel_Warp_Locations:
 	table_width 2
 	map_id NEW_BARK_TOWN
 	map_id CHERRYGROVE_CITY
 	map_id VIOLET_CITY
+	map_id RUINS_OF_ALPH_OUTSIDE
 	map_id AZALEA_TOWN
 	map_id GOLDENROD_CITY
 	map_id ECRUTEAK_CITY
@@ -634,11 +636,13 @@ Fast_Travel_Warp_Locations:
 	map_id BLACKTHORN_CITY
 DEF NUM_FAST_TRAVEL_WARP_MAPS EQU (@ - {CURRENT_TABLE_START}) / CURRENT_TABLE_WIDTH
 
+; map_names.asm
 Fast_Travel_Warp_Strings:
 	table_width 3
 	dba New_Bark_Map_Name4
 	dba Cherrygrove_Map_Name3
 	dba Violet_Map_Name5
+	dba Dungeons_Map_Name22
 	dba Azalea_Map_Name7
 	dba Goldenrod_Map_Name2
 	dba Ecruteak_Map_Name9

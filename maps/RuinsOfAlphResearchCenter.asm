@@ -597,8 +597,8 @@ RuinsOfAlphResearchCenterPorygonPCScript:
 
 RuinsOfAlphResearchCenter_MapEvents:
 	def_warp_events
-	warp_event  2,  7, RUINS_OF_ALPH_OUTSIDE, 6
-	warp_event  3,  7, RUINS_OF_ALPH_OUTSIDE, 6
+	warp_event  2,  7, RUINS_OF_ALPH_OUTSIDE, 1
+	warp_event  3,  7, RUINS_OF_ALPH_OUTSIDE, 1
 
 	def_coord_events
 
