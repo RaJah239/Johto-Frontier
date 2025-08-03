@@ -631,6 +631,7 @@ Fast_Travel_Warp_Locations:
 	map_id GOLDENROD_CITY
 	map_id NATIONAL_PARK
 	map_id ECRUTEAK_CITY
+	map_id SILVER_CAVE_OUTSIDE
 	map_id OLIVINE_CITY
 	map_id BATTLE_TOWER_OUTSIDE
 	map_id CIANWOOD_CITY
@@ -650,6 +651,7 @@ Fast_Travel_Warp_Strings:
 	dba Goldenrod_Map_Name2
 	dba Dungeons_Map_Name15
 	dba Ecruteak_Map_Name9
+	dba Silver_Map_Name1
 	dba Olivine_Map_Name14
 	dba Cianwood_Map_Name16
 	dba Cianwood_Map_Name3
