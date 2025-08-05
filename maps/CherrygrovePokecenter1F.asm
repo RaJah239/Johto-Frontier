@@ -67,9 +67,6 @@ CherrygrovePokecenter1FTeacherText_CommCenterOpen:
 	line "there already!"
 	done
 
-CherrygrovePokecenterSkipIntro:
-	jumpstd SkipIntroScript
-
 CherrygrovePokecenterChanseyScript:
 	jumpstd ChanseyPokeCenterScript
 
@@ -82,7 +79,6 @@ CherrygrovePokecenter1F_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event 5,  2, BGEVENT_READ, CherrygrovePokecenterSkipIntro
 
 	def_object_events
 	object_event  3,  1, SPRITE_NURSE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CherrygrovePokecenter1FNurseScript, -1

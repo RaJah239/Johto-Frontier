@@ -404,7 +404,6 @@ DEF happinesschecknpc     EQUS "HappinessCheckScript"
 DEF chanseyhealow         EQUS "ChanseyHealsOWScript"
 DEF porygonpc             EQUS "PorygonPCScript"
 DEF chanseypokecenter     EQUS "ChanseyPokeCenterScript"
-DEF skipintroscript       EQUS "SkipIntroScript"
 
 ; constants/charmap.asm
 charmap "%", "<BSP>"

@@ -401,8 +401,3 @@ RegisteredNumber2Text:
 ChanseyCryText:
 	text "CHANSEY: Seyyyy!"
 	done
-
-SkipIntroText:
-	text "Quick load save"
-	line "file on boot?"
-	done
