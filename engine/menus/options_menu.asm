@@ -89,19 +89,19 @@ StringOptions1:
 	db "Next Page@"
 
 StringOptions2:
-	db "Dialogue<LF>"
+	db "#mon Center<LF>"
+	db "        :<LF>"
+	db "#mon Calls<LF>"
+	db "        :<LF>"
+	db "Battles<LF>"
+	db "        :<LF>"
+	db "Exp.Share<LF>"
+	db "        :<LF>"
+	db "Dialogue/Text<LF>"
 	db "        :<LF>"
 	db "Fast Boot<LF>"
 	db "        :<LF>"
-	db "Background Music<LF>"
-	db "        :<LF>"
-	db "Placholder<LF>"
-	db "        :<LF>"
-	db "Placholder<LF>"
-	db "        :<LF>"
 	db "Hard Mode<LF>"
-	db "        :<LF>"
-	db "Placholder<LF>"
 	db "         <LF>"
 	db "Previous Page@"
 
@@ -124,18 +124,24 @@ GetOptionPointer:
 	dw Options_Frame
 	dw Options_NextPrevious
 
+	dw Options_QuickNurse
+	dw Options_QuickPokeCalls
+	dw Options_FasterBattles
+	dw Options_ExpShare
 	dw Options_MinimalDialogue
 	dw Options_FastBoot
-	dw Options_BackgroundMusic
-	dw Options_FastBoot
-	dw Options_FastBoot
 	dw Options_HardMode
-	dw Options_FastBoot
 	dw Options_NextPrevious
 
 	const_def
 	const OPT_TEXT_SPEED_FAST ; 1
 	const OPT_TEXT_SPEED_NONE ; 2
+
+Options_QuickNurse:
+Options_QuickPokeCalls:
+Options_FasterBattles:
+Options_FastBoot: ; place holder
+	ret
 
 Options_TextSpeed:
 	call GetTextSpeed
@@ -318,7 +324,7 @@ Options_HardMode:
 	ld de, .On
 
 .Display:
-	hlcoord 11, 13
+	hlcoord 11, 15
 	call PlaceString
 	and a
 	ret
@@ -371,10 +377,6 @@ Options_Sound:
 .Mono:   db "Mono  @"
 .Stereo: db "Stereo@"
 
-Options_BackgroundMusic: ; place holder
-Options_FastBoot: ; place holder
-	ret
-
 Options_MinimalDialogue:
 	ld hl, wOptions2
 	ldh a, [hJoyPressed]
@@ -405,7 +407,7 @@ Options_MinimalDialogue:
 	ld de, .Normal
 
 .Display:
-	hlcoord 11, 3
+	hlcoord 11, 11
 	call PlaceString
 	and a
 	ret
