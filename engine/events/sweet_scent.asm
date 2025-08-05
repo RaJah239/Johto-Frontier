@@ -8,8 +8,8 @@ SweetScentFromMenu:
 .SweetScent:
 	refreshmap
 	special UpdateTimePals
-	isdialogueminimal
-	iftrue .skipthis
+	checkevent EVENT_QUICK_FIELD_ACTION
+	iftrue .skip
 	reanchormap
 	pokepic TANGELA
 	cry TANGELA
@@ -18,7 +18,7 @@ SweetScentFromMenu:
 	refreshmap
 	writetext UseSweetScentText
 	waitbutton
-.skipthis
+.skip
 	callasm SweetScentEncounter
 	iffalse SweetScentNothing
 	checkflag ENGINE_BUG_CONTEST_TIMER

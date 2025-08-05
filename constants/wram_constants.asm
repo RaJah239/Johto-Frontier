@@ -88,6 +88,10 @@ DEF GBPRINTER_DARKEST  EQU $7f
 	const AUTO_BICYCLE ; 5
 	const NURSE_HEAL ; 6
 
+; wOptions3::
+	const_def
+	const FIELD_ACTIONS ; 1
+
 ; wWalkingDirection::
 	const_def -1
 	const STANDING ; -1
@@ -321,11 +325,6 @@ DEF CELEBIEVENT_FOREST_IS_RESTLESS_F EQU 2
 	const DAILYFLAGS1_TRAINER_HOUSE_F                 ; 7
 
 ; Overworld states that get reset daily
-	const DAILYFLAGS1_HEADBUTT_ACTIVE
-	const DAILYFLAGS1_SURF_ACTIVE
-	const DAILYFLAGS1_WHIRPOOL_ACTIVE
-	const DAILYFLAGS1_WATERFALL_ACTIVE
-	const DAILYFLAGS1_ROCK_SMASH_ACTIVE
 	const DAILYFLAGS1_CIANWOOD_PHOTOGRAPH
 
 ; wDailyFlags2::

@@ -91,7 +91,7 @@ StringOptions1:
 StringOptions2:
 	db "#mon Center<LF>"
 	db "        :<LF>"
-	db "#mon Calls<LF>"
+	db "Field Actions<LF>"
 	db "        :<LF>"
 	db "Battles<LF>"
 	db "        :<LF>"
@@ -125,7 +125,7 @@ GetOptionPointer:
 	dw Options_NextPrevious
 
 	dw Options_QuickNurse
-	dw Options_QuickPokeCalls
+	dw Options_FieldActions
 	dw Options_FasterBattles
 	dw Options_ExpShare
 	dw Options_MinimalDialogue
@@ -137,7 +137,6 @@ GetOptionPointer:
 	const OPT_TEXT_SPEED_FAST ; 1
 	const OPT_TEXT_SPEED_NONE ; 2
 
-Options_QuickPokeCalls:
 Options_FasterBattles:
 	ret
 
@@ -533,6 +532,46 @@ Options_FastBoot:
 
 .On:  db "On @"
 .Off: db "Off@"
+
+Options_FieldActions:
+ 	ld hl, wOptions2
+ 	ldh a, [hJoyPressed]
+ 	bit D_LEFT_F, a
+ 	jr nz, .LeftPressed
+ 	bit D_RIGHT_F, a
+ 	jr z, .NonePressed
+ 	bit FIELD_ACTIONS, [hl]
+ 	jr nz, .ToggleOff
+ 	jr .ToggleOn
+ 
+ .LeftPressed:
+ 	bit FIELD_ACTIONS, [hl]
+ 	jr z, .ToggleOn
+ 	jr .ToggleOff
+ 
+ .NonePressed:
+ 	bit FIELD_ACTIONS, [hl]
+ 	jr nz, .ToggleOn
+ 
+ .ToggleOff:
+ 	res FIELD_ACTIONS, [hl]
+ 	ResetEventFlag EVENT_QUICK_FIELD_ACTION
+ 	ld de, .Normal
+ 	jr .Display
+ 
+ .ToggleOn:
+ 	set FIELD_ACTIONS, [hl]
+ 	SetEventFlag EVENT_QUICK_FIELD_ACTION
+ 	ld de, .Quick
+ 
+ .Display:
+ 	hlcoord 11, 5
+ 	call PlaceString
+ 	and a
+ 	ret
+
+.Quick:  db "Quick @"
+.Normal: db "Normal@"
 
 Options_AutoBicycle:
  	ld hl, wOptions2

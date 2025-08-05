@@ -111,11 +111,6 @@ EngineFlags:
 	engine_flag wDailyFlags1, DAILYFLAGS1_TRAINER_HOUSE_F
 
 ; Overworld states that get reset daily
-	engine_flag wDailyFlags1, DAILYFLAGS1_HEADBUTT_ACTIVE
-	engine_flag wDailyFlags1, DAILYFLAGS1_SURF_ACTIVE
-	engine_flag wDailyFlags1, DAILYFLAGS1_WHIRPOOL_ACTIVE
-	engine_flag wDailyFlags1, DAILYFLAGS1_WATERFALL_ACTIVE
-	engine_flag wDailyFlags1, DAILYFLAGS1_ROCK_SMASH_ACTIVE
 	engine_flag wDailyFlags1, DAILYFLAGS1_CIANWOOD_PHOTOGRAPH
 
 	engine_flag wDailyFlags2, DAILYFLAGS2_MT_MOON_SQUARE_CLEFAIRY_F

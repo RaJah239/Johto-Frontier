@@ -470,6 +470,10 @@ _AskCutText::
 	line "SCYTHER?"
 	done
 
+_SycterUsedCutText::
+	text "Scyther used Cut!"
+	done
+
 _CanCutText::
 	text "This tree can be"
 	line "CUT!"

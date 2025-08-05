@@ -100,14 +100,8 @@
 	const ENGINE_GOLDENROD_UNDERGROUND_MERCHANT_CLOSED
 	const ENGINE_FOUGHT_IN_TRAINER_HALL_TODAY
 
-; Overworld states that get reset daily
-	const ENGINE_HEADBUTT_ACTIVE
-	const ENGINE_SURF_ACTIVE
-	const ENGINE_WHIRPOOL_ACTIVE
-	const ENGINE_WATERFALL_ACTIVE
-	const ENGINE_ROCK_SMASH_ACTIVE
+; Overworld states that get reset daily - can have 8 right now
 	const ENGINE_CIANWOOD_PHOTOGRAPH
-
 
 ; wDailyFlags2
 	const ENGINE_MT_MOON_SQUARE_CLEFAIRY

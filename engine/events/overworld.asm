@@ -315,12 +315,15 @@ Script_CutFromMenu:
 	special UpdateTimePals
 
 Script_Cut:
+	checkevent EVENT_QUICK_FIELD_ACTION
+	iftrue .skip
 	writetext UseCutText
 	refreshmap
 	pokepic SCYTHER
 	cry SCYTHER
 	waitsfx
 	closepokepic
+.skip
 	refreshmap
 	callasm CutDownTreeOrGrass
 	closetext
@@ -417,6 +420,8 @@ UseFlash:
 
 Script_UseFlash:
 	refreshmap
+	checkevent EVENT_QUICK_FIELD_ACTION
+	iftrue .skip
 	special UpdateTimePals
 	reanchormap
 	pokepic MAREEP
@@ -426,6 +431,7 @@ Script_UseFlash:
 	refreshmap
 	writetext UseFlashTextScript
 	closetext
+.skip
 	callasm BlindingFlash
 	closetext
 	end
@@ -536,14 +542,8 @@ UsedSurfScript:
 	writetext UsedSurfText ; "used SURF!"
 	waitbutton
 	closetext
-
-	setflag ENGINE_SURF_ACTIVE
-
-	clearflag ENGINE_HEADBUTT_ACTIVE
-	clearflag ENGINE_WHIRPOOL_ACTIVE
-	clearflag ENGINE_WATERFALL_ACTIVE
-	clearflag ENGINE_ROCK_SMASH_ACTIVE
 	; fallthrough
+
 AutoSurfScript:
 	readmem wSurfingPlayerState
 	writevar VAR_MOVEMENT
@@ -691,7 +691,7 @@ endc
 	ret
 
 AskSurfScript:
-	checkflag ENGINE_SURF_ACTIVE
+	checkevent EVENT_QUICK_FIELD_ACTION
 	iftrue AutoSurfScript
 	opentext
 	checkevent EVENT_PIKA_SURF
@@ -775,6 +775,8 @@ FlyFunction:
 	ret
 
 .FlyScript:
+	checkevent EVENT_QUICK_FIELD_ACTION
+	iftrue .skip
 	refreshmap
 	callasm HideSprites
 	callasm ClearSavedObjPals
@@ -783,6 +785,7 @@ FlyFunction:
 	callasm CopyBGGreenToOBPal7
 	special UpdateTimePals
 	callasm FlyFromAnim
+.skip:
 	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
 	callasm SkipUpdateMapSprites
@@ -851,14 +854,8 @@ Script_UsedWaterfall:
 	farwritetext _UseWaterfallText
 	waitbutton
 	closetext
-
-	setflag ENGINE_WATERFALL_ACTIVE
-
-	clearflag ENGINE_HEADBUTT_ACTIVE
-	clearflag ENGINE_SURF_ACTIVE
-	clearflag ENGINE_WHIRPOOL_ACTIVE
-	clearflag ENGINE_ROCK_SMASH_ACTIVE
 	; fallthrough
+
 Script_AutoWaterfall:
 	waitsfx
 	playsound SFX_BUBBLEBEAM
@@ -913,7 +910,7 @@ Script_CantDoWaterfall:
 	text_end
 
 Script_AskWaterfall:
-	checkflag ENGINE_WATERFALL_ACTIVE
+	checkevent EVENT_QUICK_FIELD_ACTION
 	iftrue Script_AutoWaterfall
 	opentext
 	writetext .AskWaterfallText
@@ -1021,12 +1018,16 @@ EscapeRopeOrDig:
 	text_end
 
 .UsedEscapeRopeScript:
+	checkevent EVENT_QUICK_FIELD_ACTION
+	iftrue .skip
 	refreshmap
 	special UpdateTimePals
 	writetext .UseEscapeRopeText
 	sjump .UsedDigOrEscapeRopeScript
 
 .UsedDigScript:
+	checkevent EVENT_QUICK_FIELD_ACTION
+	iftrue .skip
 	refreshmap
 	special UpdateTimePals
 	callasm PrepareOverworldMove
@@ -1036,6 +1037,7 @@ EscapeRopeOrDig:
 .UsedDigOrEscapeRopeScript:
 	waitbutton
 	closetext
+.skip
 	playsound SFX_WARP_TO
 	applymovement PLAYER, .DigOut
 	farscall Script_AbortBugContest
@@ -1109,6 +1111,8 @@ TeleportFunction:
 	text_end
 
 .TeleportScript:
+	checkevent EVENT_QUICK_FIELD_ACTION
+	iftrue .skip
 	refreshmap
 	special UpdateTimePals
 	callasm PrepareOverworldMove
@@ -1118,6 +1122,7 @@ TeleportFunction:
 	refreshmap
 	closetext
 	playsound SFX_WARP_TO
+.skip
 	applymovement PLAYER, .TeleportFrom
 	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
@@ -1167,6 +1172,8 @@ Script_StrengthFromMenu:
 
 Script_UsedStrength:
 	callasm SetStrengthFlag
+	checkevent EVENT_QUICK_FIELD_ACTION
+	iftrue .skip
 	writetext .UseStrengthText
 	waitbutton
 	reanchormap
@@ -1176,6 +1183,11 @@ Script_UsedStrength:
 	closepokepic
 	refreshmap
 	writetext .MoveBoulderText
+	closetext
+	end
+
+.skip:
+	refreshmap
 	closetext
 	end
 
@@ -1200,9 +1212,12 @@ AskStrengthScript:
 	jumptext BouldersMoveText
 
 .AskStrength:
+	checkevent EVENT_QUICK_FIELD_ACTION
+	iftrue .skip
 	opentext
 	writetext AskStrengthText
 	yesorno
+.skip
 	iftrue Script_UsedStrength
 	closetext
 	end
@@ -1327,14 +1342,8 @@ Script_UsedWhirlpool:
 	refreshmap
 	writetext UseWhirlpoolText
 	closetext
-
-	setflag ENGINE_WHIRPOOL_ACTIVE
-
-	clearflag ENGINE_HEADBUTT_ACTIVE
-	clearflag ENGINE_SURF_ACTIVE
-	clearflag ENGINE_WATERFALL_ACTIVE
-	clearflag ENGINE_ROCK_SMASH_ACTIVE
 	; fallthrough
+
 Script_AutoWhirlpool:
 	waitsfx
 	playsound SFX_2_BOOPS
@@ -1407,7 +1416,7 @@ Script_MightyWhirlpool:
 	text_end
 
 Script_AskWhirlpoolOW:
-	checkflag ENGINE_WHIRPOOL_ACTIVE
+	checkevent EVENT_QUICK_FIELD_ACTION
 	iftrue Script_AutoWhirlpool
 	opentext
 	writetext AskWhirlpoolText
@@ -1453,14 +1462,8 @@ HeadbuttScript:
 	callasm PrepareOverworldMove
 	writetext UseHeadbuttText
 	scall FieldMovePokepicScript
-
-	setflag ENGINE_HEADBUTT_ACTIVE
-
-	clearflag ENGINE_SURF_ACTIVE
-	clearflag ENGINE_WHIRPOOL_ACTIVE
-	clearflag ENGINE_WATERFALL_ACTIVE
-	clearflag ENGINE_ROCK_SMASH_ACTIVE
 	; fallthrough
+
 AutoHeadbuttScript:
 	reanchormap
 	callasm ShakeHeadbuttTree
@@ -1509,7 +1512,7 @@ TryHeadbuttOW::
 	ret
 
 AskHeadbuttScript:
-	checkflag ENGINE_HEADBUTT_ACTIVE
+	checkevent EVENT_QUICK_FIELD_ACTION
 	iftrue AutoHeadbuttScript
 	opentext
 	writetext AskHeadbuttText
@@ -1576,14 +1579,8 @@ RockSmashScript:
 	farwritetext _UseRockSmashText
 	scall FieldMovePokepicScript
 	closetext
-
-	setflag ENGINE_ROCK_SMASH_ACTIVE
-
-	clearflag ENGINE_HEADBUTT_ACTIVE
-	clearflag ENGINE_SURF_ACTIVE
-	clearflag ENGINE_WHIRPOOL_ACTIVE
-	clearflag ENGINE_WATERFALL_ACTIVE
 	; fallthrough
+
 AutoRockSmashScript:
 	waitsfx
 	playsound SFX_STRENGTH
@@ -1614,7 +1611,7 @@ AskRockSmashScript:
 	callasm HasRockSmash
 	ifequal 1, .no
 
-	checkflag ENGINE_ROCK_SMASH_ACTIVE
+	checkevent EVENT_QUICK_FIELD_ACTION
 	iftrue AutoRockSmashScript
 	opentext
 	writetext AskRockSmashText
@@ -2031,9 +2028,19 @@ TryCutOW::
 
 AskCutScript:
 	opentext
+	checkevent EVENT_QUICK_FIELD_ACTION
+	iftrue .skip
+	sjump .regularscript
+
+.skip:
+	writetext SycterUsedCut
+	promptbutton
+	sjump .next
+.regularscript:
 	writetext AskCutText
 	yesorno
 	iffalse .declined
+.next:
 	callasm .CheckMap
 	iftrue Script_Cut
 .declined
@@ -2051,6 +2058,10 @@ AskCutScript:
 
 AskCutText:
 	text_far _AskCutText
+	text_end
+
+SycterUsedCut:
+	text_far _SycterUsedCutText
 	text_end
 
 CantCutScript:

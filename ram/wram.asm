@@ -1876,7 +1876,12 @@ wOptions2::
 ; bit 7: nurse heal normal/quick
 ; bit 8: exp share off/on
 	db
-	ds 2
+
+wOptions3::
+; bit 1: field actions normal/quick
+	db
+
+	ds 1
 wOptionsEnd::
 
 ; Time buffer, for counting the amount of time since
