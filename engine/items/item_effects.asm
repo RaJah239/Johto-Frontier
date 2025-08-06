@@ -2617,7 +2617,7 @@ OpenBox:
 	text_end
 
 NoEffect:
-	jr IsntTheTimeMessage
+	jmp IsntTheTimeMessage
 
 Play_SFX_FULL_HEAL:
 	push de
