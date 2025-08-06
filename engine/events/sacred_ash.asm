@@ -42,12 +42,15 @@ rept 3
 	special FadeInPalettes_EnableDynNoApply
 endr
 	waitsfx
+	checkevent EVENT_QUICK_FIELD_ACTION
+	iftrue .skip
 	opentext
 	writetext .UseSacredAshText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	waitbutton
 	closetext
+.skip:
 	end
 
 .UseSacredAshText:
