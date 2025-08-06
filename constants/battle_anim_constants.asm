@@ -864,6 +864,7 @@ DEF NUM_BATTLE_BG_EFFECTS EQU const_value - 1
  	const BATTLE_ANIM_GFX_GLOW       ; 32
  	const BATTLE_ANIM_GFX_ICICLECRASH ; 33
  	const BATTLE_ANIM_GFX_WATER_BALL
+ 	const BATTLE_ANIM_GFX_BEAM_LIGHT
 DEF NUM_BATTLE_ANIM_GFX EQU const_value - 1
 
 ; battle_bg_effect struct members (see macros/ram.asm)
@@ -919,6 +920,7 @@ DEF NUM_BG_EFFECTS EQU 5 ; see wActiveBGEffects
 	const PAL_BTLCUSTOM_PURPLE   ; 7
 	const PAL_BTLCUSTOM_ICE      ; 8
 	const PAL_BTLCUSTOM_FIRE     ; 9
+	const PAL_BTLCUSTOM_AURORA   ; a
 DEF NUM_CUSTOM_BATTLE_PALETTES EQU const_value
 
 DEF PAL_BTLCUSTOM_DEFAULT EQU -1
