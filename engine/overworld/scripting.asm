@@ -263,11 +263,22 @@ ScriptCommandTable:
 	dw Script_isdialogueminimal			 ; aa
 	dw Script_writetextcheckdialogue	 ; ab
 	dw Script_isquicknurseset            ; ac
+	dw Script_isfieldactionsset          ; ad
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
 	ld hl, wScriptFlags
 	set SCRIPT_RUNNING, [hl]
+	ret
+
+Script_isfieldactionsset:
+	xor a
+	ld [wScriptVar], a
+	call CheckFieldActions
+	ret nz ; if z=0 we're in normal mode, therefore return since we already wrote 0 to wScriptVar (False)
+	xor a
+	inc a
+	ld [wScriptVar], a
 	ret
 
 Script_isquicknurseset:

@@ -1099,9 +1099,14 @@ MACRO writetextcheckdialogue
 	dw \2 ; Pointer to minimal text
 ENDM
 
-	const isquicknurseset_command ; $aa
+	const isquicknurseset_command ; $ac
 MACRO isquicknurseset
 	db isquicknurseset_command
+ENDM
+
+	const isfieldactionsset_command ; $ad
+MACRO isfieldactionsset
+	db isfieldactionsset_command
 ENDM
 
 DEF NUM_EVENT_COMMANDS EQU const_value
