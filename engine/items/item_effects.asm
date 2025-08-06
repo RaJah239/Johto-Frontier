@@ -250,7 +250,7 @@ PokeBallEffect:
 	res NO_TEXT_SCROLL, [hl]
 
 	; Skip Item Used text if field actions is set to quick
-	CheckEventFlag EVENT_QUICK_FIELD_ACTION
+	call CheckFieldActions
 	jr nz, .skip
 	ld hl, ItemUsedText
 	call PrintText
@@ -1459,7 +1459,7 @@ HealPowderEffect:
 	farcall ChangeHappiness
 
 	; Skip LooksBitter text if field actions is set to quick
-	CheckEventFlag EVENT_QUICK_FIELD_ACTION
+	call CheckFieldActions
 	jr nz, .skip
 	call LooksBitterMessage
 
@@ -1598,7 +1598,7 @@ RevivalHerbEffect:
 	farcall ChangeHappiness
 
 	; Skip LooksBitter text if field actions is set to quick
-	CheckEventFlag EVENT_QUICK_FIELD_ACTION
+	call CheckFieldActions
 	jr nz, .skip
 	call LooksBitterMessage
 
@@ -1769,7 +1769,7 @@ EnergypowderEnergyRootCommon:
 	farcall ChangeHappiness
 
 	; Skip LooksBitter text if field actions is set to quick
-	CheckEventFlag EVENT_QUICK_FIELD_ACTION
+	call CheckFieldActions
 	jr nz, .skip
 	call LooksBitterMessage
 
@@ -2628,7 +2628,7 @@ Play_SFX_FULL_HEAL:
 
 UseItemText:
 	; Skip Item Used text if field actions is set to quick
-	CheckEventFlag EVENT_QUICK_FIELD_ACTION
+	call CheckFieldActions
 	jr nz, .skip
 
 	ld hl, ItemUsedText

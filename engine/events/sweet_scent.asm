@@ -8,8 +8,8 @@ SweetScentFromMenu:
 .SweetScent:
 	refreshmap
 	special UpdateTimePals
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue .skip
+	isfieldactionsset
+	iffalse .skip
 	reanchormap
 	pokepic TANGELA
 	cry TANGELA

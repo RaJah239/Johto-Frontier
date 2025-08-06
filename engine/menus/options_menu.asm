@@ -626,13 +626,11 @@ Options_FieldActions:
  
  .ToggleOff:
  	res FIELD_ACTIONS, [hl]
- 	ResetEventFlag EVENT_QUICK_FIELD_ACTION
  	ld de, .Normal
  	jr .Display
  
  .ToggleOn:
  	set FIELD_ACTIONS, [hl]
- 	SetEventFlag EVENT_QUICK_FIELD_ACTION
  	ld de, .Quick
  
  .Display:

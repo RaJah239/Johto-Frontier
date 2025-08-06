@@ -315,8 +315,8 @@ Script_CutFromMenu:
 	special UpdateTimePals
 
 Script_Cut:
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue .skip
+	isfieldactionsset
+	iffalse .skip
 	writetext UseCutText
 	refreshmap
 	pokepic SCYTHER
@@ -420,8 +420,8 @@ UseFlash:
 
 Script_UseFlash:
 	refreshmap
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue .skip
+	isfieldactionsset
+	iffalse .skip
 	special UpdateTimePals
 	reanchormap
 	pokepic MAREEP
@@ -691,8 +691,8 @@ endc
 	ret
 
 AskSurfScript:
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue AutoSurfScript
+	isfieldactionsset
+	iffalse AutoSurfScript
 	opentext
 	checkevent EVENT_PIKA_SURF
 	iftrue .AskPikaSurf
@@ -775,8 +775,8 @@ FlyFunction:
 	ret
 
 .FlyScript:
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue .skip
+	isfieldactionsset
+	iffalse .skip
 	refreshmap
 	callasm HideSprites
 	callasm ClearSavedObjPals
@@ -910,8 +910,8 @@ Script_CantDoWaterfall:
 	text_end
 
 Script_AskWaterfall:
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue Script_AutoWaterfall
+	isfieldactionsset
+	iffalse Script_AutoWaterfall
 	opentext
 	writetext .AskWaterfallText
 	yesorno
@@ -1018,16 +1018,16 @@ EscapeRopeOrDig:
 	text_end
 
 .UsedEscapeRopeScript:
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue .skip
+	isfieldactionsset
+	iffalse .skip
 	refreshmap
 	special UpdateTimePals
 	writetext .UseEscapeRopeText
 	sjump .UsedDigOrEscapeRopeScript
 
 .UsedDigScript:
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue .skip
+	isfieldactionsset
+	iffalse .skip
 	refreshmap
 	special UpdateTimePals
 	callasm PrepareOverworldMove
@@ -1111,8 +1111,8 @@ TeleportFunction:
 	text_end
 
 .TeleportScript:
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue .skip
+	isfieldactionsset
+	iffalse .skip
 	refreshmap
 	special UpdateTimePals
 	callasm PrepareOverworldMove
@@ -1172,8 +1172,8 @@ Script_StrengthFromMenu:
 
 Script_UsedStrength:
 	callasm SetStrengthFlag
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue .skip
+	isfieldactionsset
+	iffalse .skip
 	writetext .UseStrengthText
 	waitbutton
 	reanchormap
@@ -1212,15 +1212,17 @@ AskStrengthScript:
 	jumptext BouldersMoveText
 
 .AskStrength:
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue .skip
+	isfieldactionsset
+	iffalse .skip
 	opentext
 	writetext AskStrengthText
 	yesorno
-.skip
 	iftrue Script_UsedStrength
 	closetext
 	end
+
+.skip:
+	sjump Script_UsedStrength
 
 AskStrengthText:
 	text_far _AskStrengthText
@@ -1416,8 +1418,8 @@ Script_MightyWhirlpool:
 	text_end
 
 Script_AskWhirlpoolOW:
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue Script_AutoWhirlpool
+	isfieldactionsset
+	iffalse Script_AutoWhirlpool
 	opentext
 	writetext AskWhirlpoolText
 	yesorno
@@ -1512,8 +1514,8 @@ TryHeadbuttOW::
 	ret
 
 AskHeadbuttScript:
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue AutoHeadbuttScript
+	isfieldactionsset
+	iffalse AutoHeadbuttScript
 	opentext
 	writetext AskHeadbuttText
 	yesorno
@@ -1611,8 +1613,8 @@ AskRockSmashScript:
 	callasm HasRockSmash
 	ifequal 1, .no
 
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue AutoRockSmashScript
+	isfieldactionsset
+	iffalse AutoRockSmashScript
 	opentext
 	writetext AskRockSmashText
 	yesorno
@@ -1756,8 +1758,8 @@ Script_NotEvenANibble:
 	closetext
 	end
 .no_item
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue .skip1
+	isfieldactionsset
+	iffalse .skip1
 	writetext RodNothingText
 .skip1
 	sjump Script_NotEvenANibble_FallThrough
@@ -1771,8 +1773,8 @@ Script_NotEvenANibble2:
 	closetext
 	end
 .no_item
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue .skip2
+	isfieldactionsset
+	iffalse .skip2
 	writetext RodNothingText
 .skip2
 	; fallthrough
@@ -1797,8 +1799,8 @@ Script_GotABite:
 	pause 20
 	applymovement PLAYER, .Movement_RestoreRod
 
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue .skip
+	isfieldactionsset
+	iffalse .skip
 	writetext RodBiteText
 .skip
 	callasm PutTheRodAway
@@ -1970,8 +1972,8 @@ Script_GetOnBike:
 	refreshmap
 	special UpdateTimePals
 	loadvar VAR_MOVEMENT, PLAYER_BIKE
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue .skip
+	isfieldactionsset
+	iffalse .skip
 	writetext GotOnBikeText
 	waitbutton
 .skip
@@ -1989,8 +1991,8 @@ Script_GetOffBike:
 	refreshmap
 	special UpdateTimePals
 	loadvar VAR_MOVEMENT, PLAYER_NORMAL
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue .skip
+	isfieldactionsset
+	iffalse .skip
 	writetext GotOffBikeText
 	waitbutton
 .skip
@@ -2046,8 +2048,8 @@ TryCutOW::
 
 AskCutScript:
 	opentext
-	checkevent EVENT_QUICK_FIELD_ACTION
-	iftrue .skip
+	isfieldactionsset
+	iffalse .skip
 	sjump .regularscript
 
 .skip:
