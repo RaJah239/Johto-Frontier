@@ -1756,7 +1756,10 @@ Script_NotEvenANibble:
 	closetext
 	end
 .no_item
+	checkevent EVENT_QUICK_FIELD_ACTION
+	iftrue .skip1
 	writetext RodNothingText
+.skip1
 	sjump Script_NotEvenANibble_FallThrough
 
 Script_NotEvenANibble2:
@@ -1768,7 +1771,11 @@ Script_NotEvenANibble2:
 	closetext
 	end
 .no_item
+	checkevent EVENT_QUICK_FIELD_ACTION
+	iftrue .skip2
 	writetext RodNothingText
+.skip2
+	; fallthrough
 
 Script_NotEvenANibble_FallThrough:
 	loademote EMOTE_SHADOW
@@ -1789,7 +1796,11 @@ Script_GotABite:
 .FightTheHookedPokemon:
 	pause 20
 	applymovement PLAYER, .Movement_RestoreRod
+
+	checkevent EVENT_QUICK_FIELD_ACTION
+	iftrue .skip
 	writetext RodBiteText
+.skip
 	callasm PutTheRodAway
 	closetext
 	randomwildmon
