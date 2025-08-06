@@ -248,9 +248,14 @@ PokeBallEffect:
 
 	ld hl, wOptions
 	res NO_TEXT_SCROLL, [hl]
+
+	; Skip Item Used text if field actions is set to quick
+	CheckEventFlag EVENT_QUICK_FIELD_ACTION
+	jr nz, .skip
 	ld hl, ItemUsedText
 	call PrintText
 
+.skip:
 	ld a, [wEnemyMonCatchRate]
 	ld b, a
 	ld a, [wBattleType]
@@ -2606,9 +2611,20 @@ Play_SFX_FULL_HEAL:
 	ret
 
 UseItemText:
+	; Skip Item Used text if field actions is set to quick
+	CheckEventFlag EVENT_QUICK_FIELD_ACTION
+	jr nz, .skip
+
 	ld hl, ItemUsedText
 	call PrintText
 	call Play_SFX_FULL_HEAL
+	jr .regular_effect
+
+.skip:
+	call Play_SFX_FULL_HEAL
+	jr UseDisposableItem
+
+.regular_effect:
 	call WaitPressAorB_BlinkCursor
 UseDisposableItem:
 	ld hl, wNumItems
