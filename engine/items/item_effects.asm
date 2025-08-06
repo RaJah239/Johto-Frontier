@@ -1457,8 +1457,13 @@ HealPowderEffect:
 
 	ld c, HAPPINESS_BITTERPOWDER
 	farcall ChangeHappiness
+
+	; Skip LooksBitter text if field actions is set to quick
+	CheckEventFlag EVENT_QUICK_FIELD_ACTION
+	jr nz, .skip
 	call LooksBitterMessage
 
+.skip:
 	ld a, $0
 
 .not_used
@@ -1591,8 +1596,13 @@ RevivalHerbEffect:
 
 	ld c, HAPPINESS_REVIVALHERB
 	farcall ChangeHappiness
+
+	; Skip LooksBitter text if field actions is set to quick
+	CheckEventFlag EVENT_QUICK_FIELD_ACTION
+	jr nz, .skip
 	call LooksBitterMessage
 
+.skip:
 	ld a, $0
 
 .not_used
@@ -1757,7 +1767,13 @@ EnergypowderEnergyRootCommon:
 	jr nz, .skip_happiness
 
 	farcall ChangeHappiness
+
+	; Skip LooksBitter text if field actions is set to quick
+	CheckEventFlag EVENT_QUICK_FIELD_ACTION
+	jr nz, .skip
 	call LooksBitterMessage
+
+.skip:
 	ld a, 0
 
 .skip_happiness
