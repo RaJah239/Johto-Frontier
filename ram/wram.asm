@@ -1879,6 +1879,7 @@ wOptions2::
 
 wOptions3::
 ; bit 1: field actions normal/quick
+; bit 2: fast battles normal/quick
 	db
 
 	ds 1

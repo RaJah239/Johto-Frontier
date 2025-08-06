@@ -4,3 +4,8 @@ CheckDialogueMode::
 	ld a, [wOptions2]
 	bit MINIMAL_DIALOGUE, a
 	ret
+
+CheckIfFastBattlesIsOn::
+	ld a, [wOptions3]
+	bit FAST_BATTLES, a
+	ret

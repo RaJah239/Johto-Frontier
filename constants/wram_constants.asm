@@ -90,7 +90,8 @@ DEF GBPRINTER_DARKEST  EQU $7f
 
 ; wOptions3::
 	const_def
-	const FIELD_ACTIONS ; 1
+	const FIELD_ACTIONS ; 0
+	const FAST_BATTLES ; 1
 
 ; wWalkingDirection::
 	const_def -1
