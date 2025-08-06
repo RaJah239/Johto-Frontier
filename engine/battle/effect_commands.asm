@@ -2320,6 +2320,11 @@ BattleCommand_SuperEffectiveText:
 	and $7f
 	cp EFFECTIVE
 	ret z
+	
+	; Skip effectiveness text if fast battles is on
+	call CheckIfFastBattlesIsOn
+	ret nz
+
 	ld hl, SuperEffectiveText
 	jr nc, .print
 	ld hl, NotVeryEffectiveText
