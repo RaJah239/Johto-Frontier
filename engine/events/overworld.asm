@@ -1856,7 +1856,7 @@ Script_FishCastRod:
 	callasm LoadFishingGFX
 	loademote EMOTE_SHOCK
 	applymovement PLAYER, MovementData_CastRod
-	pause 40
+	pause 10 ; wait time after casting rod
 	end
 
 MovementData_CastRod:
