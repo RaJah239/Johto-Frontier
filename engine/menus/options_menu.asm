@@ -550,13 +550,11 @@ Options_QuickNurse:
  
  .ToggleOff:
  	res NURSE_HEAL, [hl]
- 	ResetEventFlag EVENT_NURSE_QUICK_HEAL
  	ld de, .Off
  	jr .Display
  
  .ToggleOn:
  	set NURSE_HEAL, [hl]
- 	SetEventFlag EVENT_NURSE_QUICK_HEAL
  	ld de, .On
  
 .Display:

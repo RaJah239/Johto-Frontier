@@ -86,8 +86,8 @@ PokecenterNurseScript:
 ; EVENT_WELCOMED_TO_POKECOM_CENTER is never set
 
 	opentext
-	checkevent EVENT_NURSE_QUICK_HEAL
-	iftrue .QuickNurse
+	isquicknurseset
+	iffalse .QuickNurse
 	checktime MORN
 	iftrue .morn
 	checktime DAY
@@ -171,8 +171,8 @@ PokecenterNurseScript:
 	special CheckPokerus
 	iftrue .pokerus
 .no
-	checkevent EVENT_NURSE_QUICK_HEAL
-	iftrue .done
+	isquicknurseset
+	iffalse .done
 
 	farwritetext NurseReturnPokemonText
 	pause 20
