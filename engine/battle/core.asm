@@ -3938,50 +3938,47 @@ HandleHPHealingItem:
 	callfar GetOpponentItem
 	ld a, b
 	cp HELD_BERRY_4TH
-	jr z, .get_4th
+	jr z, .quarter
 	cp HELD_BERRY_3RD
-	jr z, .get_3rd
+	jr z, .third
 	cp HELD_BERRY
 	jr z, .proceed
 	ret
 
-.get_3rd
+.third
 	ld a, [hBattleTurn]
 	and a
 	push bc
-	jr z, .swapZeroToOne1
-.swapOneToZero1
+	jr z, .third_enemy
+.third_player
 	call SetPlayerTurn
-	call GetThirdMaxHP ; This will set the value of "c" to 1/3th of the max HP of the mon
+	call GetThirdMaxHP
 	call SetEnemyTurn
-	jr .next
-.swapZeroToOne1
+	jr .finish
+.third_enemy
 	call SetEnemyTurn
-	call GetThirdMaxHP ; This will set the value of "c" to 1/3th of the max HP of the mon
+	call GetThirdMaxHP
 	call SetPlayerTurn
-.next
-	ld a, c
-	pop bc ;Restore b's value while keeping c
-	ld c, a
-	jr .proceed
+	jr .finish
 
-.get_4th ; Used for Gold berries - recovers one quarter of Max HP
+.quarter
 	ld a, [hBattleTurn]
 	and a
 	push bc
-	jr z, .swapZeroToOne2
-.swapOneToZero
+	jr z, .quarter_enemy
+.quarter_player
 	call SetPlayerTurn
-	call GetQuarterMaxHP ; This will set the value of "c" to 1/4th of the max HP of the mon
+	call GetQuarterMaxHP
 	call SetEnemyTurn
-	jr .preproceed
-.swapZeroToOne2
+	jr .finish
+.quarter_enemy
 	call SetEnemyTurn
-	call GetQuarterMaxHP ; This will set the value of "c" to 1/4th of the max HP of the mon
+	call GetQuarterMaxHP
 	call SetPlayerTurn
-.preproceed
+
+.finish
 	ld a, c
-	pop bc ;Restore b's value while keeping c
+	pop bc
 	ld c, a
 .proceed
 	ld de, wEnemyMonHP + 1
