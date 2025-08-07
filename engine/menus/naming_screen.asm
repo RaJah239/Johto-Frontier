@@ -689,6 +689,15 @@ MailComposition_TryAddCharacter:
 	cp c
 	ret nc
 
+	ld c, 0
+	cp c
+	jp nz,.skipLowercase
+
+	push de
+	ld de, NameInputLower
+	call NamingScreen_ApplyTextInputMode
+	pop de
+.skipLowercase
 	ld a, [wNamingScreenLastCharacter]
 
 NamingScreen_LoadNextCharacter:
@@ -734,8 +743,15 @@ NamingScreen_DeleteCharacter:
 	inc hl
 	ld a, [hl]
 	cp NAMINGSCREEN_UNDERLINE
-	ret nz
+	jp nz,.middleline
 	ld [hl], NAMINGSCREEN_MIDDLELINE
+.middleline
+	ld hl, wNamingScreenCurNameLength
+	ld a, [hl]
+	and a
+	ret nz
+	ld de, NameInputUpper
+	call NamingScreen_ApplyTextInputMode
 	ret
 
 NamingScreen_GetTextCursorPosition:
