@@ -508,9 +508,8 @@ wEnemyHPAtTimeOfPlayerSwitch:: dw
 wPayDayMoney:: ds 3 ; need to remove this
 
 wSafariMonEating:: db
-	ds 1
+	ds 2
 wEnemyBackupDVs:: dw ; used when enemy is transformed
-wAlreadyDisobeyed:: db
 
 wDisabledMove:: db
 wEnemyDisabledMove:: db

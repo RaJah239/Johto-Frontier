@@ -708,11 +708,6 @@ _UsedMoveText::
 	line "used @"
 	text_end
 
-_UsedInsteadText::
-	text "instead,"
-	cont "@"
-	text_end
-
 _MoveNameText::
 	text_ram wStringBuffer2
 	text "!"

@@ -479,42 +479,6 @@ DisabledMoveText:
 	cont "DISABLED!"
 	prompt
 
-LoafingAroundText:
-	text_ram wBattleMonNickname
-	text " is"
-	line "loafing around."
-	prompt
-
-BeganToNapText:
-	text_ram wBattleMonNickname
-	text " began"
-	line "to nap!"
-	prompt
-
-WontObeyText:
-	text_ram wBattleMonNickname
-	text " won't"
-	line "obey!"
-	prompt
-
-TurnedAwayText:
-	text_ram wBattleMonNickname
-	text " turned"
-	line "away!"
-	prompt
-
-IgnoredOrdersText:
-	text_ram wBattleMonNickname
-	text " ignored"
-	line "orders!"
-	prompt
-
-IgnoredSleepingText:
-	text_ram wBattleMonNickname
-	text " ignored"
-	line "orders…sleeping!"
-	prompt
-
 NoPPLeftText:
 	text "But no PP is left"
 	line "for the move!"
@@ -1050,30 +1014,6 @@ BellyDrumText:
 BattleText_UserLostSomeOfItsHP:
 	text "<USER>"
 	line "lost a bit of HP!"
-	prompt
-
-CopiedStatsText:
-	text "<USER>"
-	line "copied the stat"
-
-	para "changes of"
-	line "<TARGET>!"
-	prompt
-
-BeatUpAttackText:
-	text_ram wStringBuffer1
-	text "'s"
-	line "attack!"
-	done
-
-PresentFailedText:
-	text "<TARGET>"
-	line "refused the gift!"
-	prompt
-
-IgnoredOrders2Text:
-	text "<USER>"
-	line "ignored orders!"
 	prompt
 
 BattleText_LinkErrorBattleCanceled:
