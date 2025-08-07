@@ -561,9 +561,41 @@ Pokegear_UpdateClock:
 	ld b, a
 	ldh a, [hMinutes]
 	ld c, a
+	decoord 9, 1
+    ld a, [wOptions]
+    bit CLOCK_SECONDS, a
+    jr z, .show_time
 	decoord 11, 1
+.show_time:
+    push de
 	farcall PrintHoursMins
-	ld hl, .GearTodayText
+ 
+    ; show seconds
+    pop hl
+    ld de, 5
+    add hl, de
+    ld de, hSeconds
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
+    ld [hl], ":" ; XXX update clock.tilemap.rle instead
+    inc hl
+	call PrintNum
+
+    ; HACK: show AM/PM since we clobbered it
+    ld a, [wOptions]
+    bit CLOCK_SECONDS,a
+    jr nz, .skip_ampm
+    ld a,[hHours]
+    cp 12
+    ld a, "p"
+    jr nc, .place_ampm
+    ld a, "a"
+.place_ampm:
+    inc hl
+    ld [hli], a
+    ld [hl], "m"
+
+.skip_ampm:
+    ld hl, .GearTodayText
 	bccoord 2, 6
  	call PrintTextboxTextAt ; PlaceHLTextAtBC bccoord 6, 6
 
@@ -649,22 +681,19 @@ Pokegear_UpdateClock:
 	; inc hl
  	call PlaceString
  
-	hlcoord 10, 0 ; hlcoord 11, 0
+	hlcoord 9, 0 ; hlcoord 11, 0
  	ld [hl], $30 ; round edge
  	inc hl
 	ld a, $7f
  	ld [hli], a
  	ld [hli], a
  	ld [hl], a
- 	hlcoord 10, 2 ; hlcoord 11, 2
+ 	hlcoord 9, 2 ; hlcoord 11, 2
  	ld [hl], $32
  	inc hl
 	ld a, $7f
  	ld [hli], a
  	ld [hli], a
- 	ld [hl], a
- 	hlcoord 10, 1
- 	; ld [hli], a
  	ld [hl], a
  	ret
 .Morn
