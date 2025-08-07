@@ -1823,7 +1823,7 @@ LoadStation_BuenasPassword:
 	ld de, BuenasPasswordName
 	ret
 
-BuenasPasswordName:    db "BUENA'S PASSWORD@"
+BuenasPasswordName:    db "Buena's Password@"
 NotBuenasPasswordName: db "@"
 
 LoadStation_UnownRadio:
@@ -1967,16 +1967,16 @@ NoRadioName:
 	call Textbox
 	ret
 
-OaksPKMNTalkName:     db "OAK's <PK><MN> Talk@"
-PokedexShowName:      db "#DEX Show@"
-PokemonMusicName:     db "#MON Music@"
+OaksPKMNTalkName:     db "Oak's <PK><MN> Talk@"
+PokedexShowName:      db "#dex Show@"
+PokemonMusicName:     db "#mon Music@"
 LuckyChannelName:     db "Lucky Channel@"
 UnownStationName:     db "?????@"
 NationalParkRadioName: db "National Park@"
 
 PlacesAndPeopleName:  db "Places & People@"
 LetsAllSingName:      db "Let's All Sing!@"
-PokeFluteStationName: db "# FLUTE@"
+PokeFluteStationName: db "# Flute@"
 
 _TownMap:
 	ld hl, wOptions
@@ -2674,7 +2674,7 @@ Pokedex_GetArea:
 	ret
 
 .String_SNest:
-	db "'S NEST@"
+	db "'S Nest@"
 
 .GetAndPlaceNest:
 	ld [wTownMapCursorLandmark], a
