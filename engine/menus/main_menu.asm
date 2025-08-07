@@ -15,7 +15,7 @@
 	const MAINMENUITEM_CONTINUE       ; 0
 	const MAINMENUITEM_NEW_GAME       ; 1
 	const MAINMENUITEM_OPTION         ; 2
-	const MAINMENUITEM_CLOCK_RESET    ; 3
+	const MAINMENUITEM_SET_TIME       ; 3
 	const MAINMENUITEM_ABOUT          ; 4
 	const MAINMENUITEM_MOBILE_STUDIUM ; 5
 	const MAINMENUITEM_DEBUG_ROOM     ; 6
@@ -70,7 +70,7 @@ MainMenu:
 	db "Continue@"
 	db "New Game@"
 	db "Options@"
-	db "Reset Clock@"
+	db "Set Time@"
 	db "About@"
 	db "Mobile Studium@"
 if DEF(_DEBUG)
@@ -82,7 +82,7 @@ endc
 	dw MainMenu_Continue
 	dw MainMenu_NewGame
 	dw MainMenu_Option
-	dw MainMenu_ClockReset
+	dw MainMenu_SetTime
 	dw MainMenu_About
 	dw MainMenu_MobileStudium
 if DEF(_DEBUG)
@@ -104,7 +104,7 @@ MainMenuItems:
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION
-	db MAINMENUITEM_CLOCK_RESET
+	db MAINMENUITEM_SET_TIME
 	db MAINMENUITEM_ABOUT
 if DEF(_DEBUG)
 	db MAINMENUITEM_DEBUG_ROOM
@@ -116,7 +116,7 @@ endc
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION
-	db MAINMENUITEM_CLOCK_RESET
+	db MAINMENUITEM_SET_TIME
 	db MAINMENUITEM_ABOUT
 if DEF(_DEBUG)
 	db MAINMENUITEM_DEBUG_ROOM
@@ -149,7 +149,7 @@ endc
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION
-	db MAINMENUITEM_CLOCK_RESET
+	db MAINMENUITEM_SET_TIME
 	db MAINMENUITEM_MOBILE_STUDIUM
 if DEF(_DEBUG)
 	db MAINMENUITEM_DEBUG_ROOM
@@ -161,7 +161,7 @@ endc
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION
-	db MAINMENUITEM_CLOCK_RESET
+	db MAINMENUITEM_SET_TIME
 if DEF(_DEBUG)
 	db MAINMENUITEM_DEBUG_ROOM
 endc
@@ -172,7 +172,7 @@ endc
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION
-	db MAINMENUITEM_CLOCK_RESET
+	db MAINMENUITEM_SET_TIME
 	db MAINMENUITEM_MOBILE_STUDIUM
 if DEF(_DEBUG)
 	db MAINMENUITEM_DEBUG_ROOM
@@ -265,12 +265,27 @@ MainMenu_PrintCurrentVersion:
 	ld a, [wSaveFileExists]
 	and a
 	jr nz, .has_save_file
-; no save file
+
+	; no save file
 	hlcoord 14, 15
 	call Textbox
 	hlcoord 15, 16
 	jr .no_save_file
+
+.time_unset_version_number
+	; shift version number box for unset time
+	hlcoord 14, 9
+	call Textbox
+	hlcoord 15, 10
+	jr .no_save_file
+
 .has_save_file
+	; check if time is unset
+	call CheckRTCStatus
+	and $80
+	jr nz, .time_unset_version_number
+
+	; continue normally for set time
 	hlcoord 14, 11
 	call Textbox
 	hlcoord 15, 12
@@ -339,12 +354,12 @@ MainMenu_PrintCurrentTimeAndDay:
 
 .PrintTimeNotSet:
 	hlcoord 1, 14
-	ld de, .TimeNotSetString
-	call PlaceString
-	ret
+	ld de, .SetTimeString
+	jp PlaceString
 
-.TimeNotSetString:
-	db "Time Not Set@"
+.SetTimeString:
+	db "Select Continue to"
+	next "set the time.@"
 
 .PrintDayOfWeek:
 	push de
@@ -393,7 +408,7 @@ MainMenu_Continue:
 	farcall Continue
 	ret
 
-MainMenu_ClockReset:
+MainMenu_SetTime:
 	farcall _ResetClock
 	ret
 

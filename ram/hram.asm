@@ -174,7 +174,6 @@ hSystemBooted:: db
 if DEF(_DEBUG)
 hDebugRoomMenuPage::
 endc
-hClockResetTrigger:: db
 
 hFarCallSavedA:: db
 hFarCallSavedHL::
@@ -191,6 +190,6 @@ hDelayFrameLY:: db
 
 hWaitForBButtonRelease:: db
 
-	ds 11
+	ds 12
 
 ENDSECTION
