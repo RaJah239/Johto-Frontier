@@ -337,17 +337,29 @@ MainMenu_PrintCurrentTimeAndDay:
 	and $80
 	jr nz, .PrintTimeNotSet
 	call UpdateTime
+
+	 ; day
 	call GetWeekday
 	ld b, a
 	decoord 1, 15
 	call .PrintDayOfWeek
-	decoord 4, 16
+
+    ; hour
+    decoord 4, 16
 	ldh a, [hHours]
 	ld c, a
-	farcall PrintHour
-	ld [hl], ":"
+    farcall PrintHour
+
+    ; minute
+    ld [hl], ":"
 	inc hl
 	ld de, hMinutes
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
+	call PrintNum
+    ; second
+    ld [hl], ":"
+	inc hl
+	ld de, hSeconds
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	call PrintNum
 	ret
