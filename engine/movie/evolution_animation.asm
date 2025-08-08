@@ -57,7 +57,10 @@ EvolutionAnimation:
 	ld a, [wEvolutionOldSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	call .PlaceFrontpic
+
+	call GetBaseData
+	hlcoord 7, 2
+	call PrepMonFrontpic
 
 	ld de, vTiles2
 	ld hl, vTiles2 tile $31
@@ -70,7 +73,14 @@ EvolutionAnimation:
 	ld a, [wEvolutionNewSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	call .LoadFrontpic
+
+	call GetBaseData
+	ld a, $1
+	ld [wBoxAlignment], a
+	ld de, vTiles2
+	predef GetAnimatedFrontpic
+	xor a
+	ld [wBoxAlignment], a
 
 	ld a, [wEvolutionOldSpecies]
 	ld [wCurPartySpecies], a
@@ -113,7 +123,7 @@ EvolutionAnimation:
 	call .PlayEvolvedSFX
 	farcall ClearSpriteAnims
 	call .check_statused
-	jr c, .no_anim
+	ret c
 
 	ld a, [wBoxAlignment]
 	push af
@@ -133,9 +143,6 @@ EvolutionAnimation:
 	ld [wCurPartySpecies], a
 	pop af
 	ld [wBoxAlignment], a
-	ret
-
-.no_anim
 	ret
 
 .cancel_evo
@@ -160,21 +167,6 @@ EvolutionAnimation:
 .GetSGBLayout:
 	ld b, SCGB_EVOLUTION
 	jmp GetSGBLayout
-
-.PlaceFrontpic:
-	call GetBaseData
-	hlcoord 7, 2
-	jmp PrepMonFrontpic
-
-.LoadFrontpic:
-	call GetBaseData
-	ld a, $1
-	ld [wBoxAlignment], a
-	ld de, vTiles2
-	predef GetAnimatedFrontpic
-	xor a
-	ld [wBoxAlignment], a
-	ret
 
 .AnimationSequence:
 	call ClearJoypad
