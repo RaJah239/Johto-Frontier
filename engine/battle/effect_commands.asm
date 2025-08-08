@@ -6484,6 +6484,7 @@ BattleCommand_FlameOrb:
 	ret nz
 	farcall ShouldIgniteFlameOrb
 	ret nc
+    call ClearSprites
     ld hl, FlameOrbText
 	call StdBattleTextbox
     ld a, BATTLE_VARS_STATUS
