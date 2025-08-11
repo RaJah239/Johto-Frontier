@@ -507,7 +507,13 @@ wCurEnemyMoveNum:: db
 wEnemyHPAtTimeOfPlayerSwitch:: dw
 wPayDayMoney:: ds 3 ; need to remove this
 
-wSafariMonEating:: db
+wCurrentBattleWindow:: db
+; 0 - Main menu
+; 1 - Selecting move
+; 2 - BackPack
+; 3 - Party
+; 4 - Run
+
 	ds 2
 wEnemyBackupDVs:: dw ; used when enemy is transformed
 
