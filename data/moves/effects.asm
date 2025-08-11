@@ -1422,14 +1422,16 @@ RapidSpin:
 	stab
 	damagevariation
 	checkhit
+	effectchance
 	moveanim
 	failuretext
 	applydamage
 	criticaltext
 	supereffectivetext
 	clearhazards
+	speedup
+	statupmessage
 	checkfaint
-	buildopponentrage
 	kingsrock
 	endmove
 
