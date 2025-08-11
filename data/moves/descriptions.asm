@@ -421,10 +421,6 @@ SingDescription:
 	db   "May cause the foe"
 	line "to fall asleep.@"
 
-SupersonicDescription:
-	db   "Sound waves that"
-	line "cause confusion.@"
-
 NastyPlotDescription:
 	db   "Sharply increases"
 	line "user's Spcl.Atk.@"
@@ -586,6 +582,7 @@ ToxicDescription:
 	db   "A poison move with"
 	line "increasing damage.@"
 
+SupersonicDescription:
 ConfusionDescription:
 	db   "An attack that may"
 	line "cause confusion.@"
