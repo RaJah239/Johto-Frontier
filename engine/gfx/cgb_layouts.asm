@@ -5,6 +5,10 @@ CheckCGB:
 	and a
 	ret
 
+LoadSGBLayout:
+	; SGB is not supported
+	; fallthrough
+
 LoadSGBLayoutCGB:
 	ld a, b
 	cp SCGB_DEFAULT

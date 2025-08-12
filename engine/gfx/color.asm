@@ -1,5 +1,3 @@
-INCLUDE "engine/gfx/sgb_layouts.asm"
-
 LoadPokemonPalette:
 	ld a, [wCurPartySpecies]
 	; hl = palette
