@@ -119,11 +119,13 @@ TrainerCard_Page1_Joypad:
 	call TrainerCard_Page1_PrintGameTime
 	ld hl, hJoyLast
 	ld a, [hl]
-	and D_RIGHT | A_BUTTON
-	jr nz, .pressed_right_a
-	ret
+	and D_RIGHT
+	jr nz, .badge_page
+	ld a, [hl]
+	and D_LEFT
+	ret z
 
-.pressed_right_a
+.badge_page
 	ld a, TRAINERCARDSTATE_PAGE2_LOADGFX
 	ld [wJumptableIndex], a
 	ret
@@ -163,10 +165,12 @@ TrainerCard_Page2_Joypad:
 	jr nz, .Quit
 	ld a, [hl]
 	and D_LEFT
-	jr nz, .d_left
-	ret
+	jr nz, .status_page
+	ld a, [hl]
+	and D_RIGHT
+	ret z
 
-.d_left
+.status_page
 	ld a, TRAINERCARDSTATE_PAGE1_LOADGFX
 	ld [wJumptableIndex], a
 	ret
@@ -283,7 +287,7 @@ TrainerCard_Page1_PrintDexCaught_GameTime:
 	call PlaceString
 
 .skip1
-	hlcoord 10, 16
+	hlcoord 11, 16
 	ld de, .Badges
 	call PlaceString
 	ld hl, wPokedexCaught
@@ -327,7 +331,7 @@ TrainerCard_Page1_PrintDexCaught_GameTime:
 	db "Battle Points:@"
 
 .Badges:
-	db "  Badges▶@"
+	db "←Badges→@"
 
 .StatusTilemap:
 	db $29, $2a, $2b, $2c, $2d, -1
