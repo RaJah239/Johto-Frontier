@@ -5016,21 +5016,6 @@ BattleAnimSub_SpeedLines:
 ;	anim_wait 16
 ;	anim_ret
 
-;BattleAnim_SweetScent:
-;	anim_2gfx BATTLE_ANIM_GFX_FLOWER, BATTLE_ANIM_GFX_MISC
-;	anim_sound 0, 0, SFX_SWEET_SCENT
-;	anim_obj BATTLE_ANIM_OBJ_FLOWER, 64, 96, $2
-;	anim_wait 2
-;	anim_obj BATTLE_ANIM_OBJ_FLOWER, 64, 80, $2
-;	anim_wait 96
-;	anim_obp0 $54
-;	anim_sound 0, 1, SFX_SWEET_SCENT_2
-;	anim_obj BATTLE_ANIM_OBJ_COTTON, 136, 40, $15
-;	anim_obj BATTLE_ANIM_OBJ_COTTON, 136, 40, $2a
-;	anim_obj BATTLE_ANIM_OBJ_COTTON, 136, 40, $3f
-;	anim_wait 128
-;	anim_ret
-
 ;BattleAnim_Present:
 ;	anim_2gfx BATTLE_ANIM_GFX_STATUS, BATTLE_ANIM_GFX_BUBBLE
 ;	anim_sound 0, 1, SFX_PRESENT

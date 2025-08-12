@@ -60,7 +60,6 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_PoisonGas
 	dw BattleAnimFunc_Horn
 	dw BattleAnimFunc_Needle
-	dw BattleAnimFunc_PetalDance
 	dw BattleAnimFunc_ThiefPayday
 	dw BattleAnimFunc_AbsorbCircle
 	dw BattleAnimFunc_Bonemerang
@@ -2769,48 +2768,6 @@ BattleAnimFunc_SpiralDescent:
 	ret
 
 .delete
-	call DeinitBattleAnimation
-	ret
-
-BattleAnimFunc_PetalDance:
-; Object moves downwards in a spiral around the user. Object disappears at y coord $28
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hl]
-	ld d, $18
-	push af
-	push de
-	call BattleAnim_Sine
-	sra a
-	sra a
-	sra a
-	ld hl, BATTLEANIMSTRUCT_VAR2
-	add hl, bc
-	add [hl]
-	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], a
-	pop de
-	pop af
-	call BattleAnim_Cosine
-	ld hl, BATTLEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	inc [hl]
-	ld a, [hl]
-	and $3
-	ret nz
-	ld hl, BATTLEANIMSTRUCT_VAR2
-	add hl, bc
-	ld a, [hl]
-	cp $28
-	jr nc, .end
-	inc [hl]
-	ret
-
-.end
 	call DeinitBattleAnimation
 	ret
 
