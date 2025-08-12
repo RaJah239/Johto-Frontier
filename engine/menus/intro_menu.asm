@@ -1312,7 +1312,7 @@ DeleteSaveData:
 	jmp Init
 
 ResetClock:
-	farcall _ResetClock
+	farcall _SetTime
 	jmp Init
 
 Copyright:

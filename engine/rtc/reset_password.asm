@@ -1,4 +1,4 @@
-_ResetClock:
+_SetTime:
 	ld a, BANK(sRTCStatusFlags)
 	call OpenSRAM
 	ld a, $80
