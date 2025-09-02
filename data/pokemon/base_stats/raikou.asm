@@ -1,8 +1,8 @@
 	db RAIKOU ; 243
 
-	db  90,  85,  75, 115, 115, 100
-	evs  0,   0,   0,   2,   1,   0
 	;   hp  atk  def  spd  sat  sdf
+	db  90,  85,  75, 125, 125, 100 ; 600 BST
+	evs  2,   1,   1,   3,   3,   2
 
 	db ELECTRIC, ELECTRIC ; type
 	db 3 ; catch rate

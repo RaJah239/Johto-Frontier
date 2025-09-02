@@ -1,8 +1,8 @@
 	db SUICUNE ; 245
 
-	db 100,  75, 115,  85,  90, 115
-	evs  0,   0,   1,   0,   0,   2
 	;   hp  atk  def  spd  sat  sdf
+	db 100,  75, 125,  85,  90, 125 ; 600 BST
+	evs  2,   1,   3,   1,   2,   3
 
 	db WATER, WATER ; type
 	db 3 ; catch rate
