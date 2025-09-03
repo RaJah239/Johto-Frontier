@@ -55,7 +55,6 @@ PredefPointers::
 	add_predef InitSGBBorder
 	add_predef LoadSGBLayout
 	add_predef Pokedex_GetArea
-	add_predef Unused_CheckShininess
 	add_predef DoBattleTransition
 	add_predef PlayBattleAnim
 	add_predef PartyMonItemName
@@ -70,7 +69,6 @@ PredefPointers::
 	add_predef PlaceStatusString
 	add_predef LoadMonAnimation
 	add_predef AnimateFrontpic
-	add_predef Unused_HOF_AnimateAlignedFrontpic
 	add_predef HOF_AnimateFrontpic
 	add_predef GetMonTypeIndex
 	add_predef PrintEnemyMonTypes

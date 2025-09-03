@@ -1052,10 +1052,6 @@ PokeAnim_GetSpeciesOrUnown:
 	ld a, [wPokeAnimUnownLetter]
 	ret
 
-Unused_HOF_AnimateAlignedFrontpic:
-	ld a, $1
-	ld [wBoxAlignment], a
-
 HOF_AnimateFrontpic:
 	call AnimateMon_CheckIfPokemon
 	jr c, .fail
