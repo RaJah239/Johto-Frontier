@@ -42,23 +42,19 @@ DrawGBCOnlyScreen:
 
 	; Pokemon
 	hlcoord 3, 2
-	ld b, 14
-	ld c, 4
+	lb bc, 14, 4
 	ld a, $8
 	call DrawGBCOnlyGraphic
 
 	; Crystal
 	hlcoord 5, 6
-	ld b, 10
-	ld c, 2
+	lb bc, 10, 2
 	ld a, $40
 	call DrawGBCOnlyGraphic
 
-	ld de, GBCOnlyString
+	ld de, CrashString
 	hlcoord 1, 10
-	call PlaceString
-
-	ret
+	jmp PlaceString
 
 DrawGBCOnlyBorder:
 	hlcoord 0, 0
@@ -123,11 +119,11 @@ DrawGBCOnlyGraphic:
 	jr nz, .y
 	ret
 
-GBCOnlyString:
-	db   "This Game Pak is"
-	next "designed only for"
-	next "use on the"
-	next "Game Boy Color.@"
+CrashString:
+	db   "Looks like another"
+	next "crash! Contact the"
+	next "dev to fix this on"
+	next "Github/Discord.@"
 
 GBCOnlyGFX:
 INCBIN "gfx/sgb/gbc_only.2bpp.lz"
