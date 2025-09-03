@@ -444,8 +444,7 @@ EVO_trade:
 	push af ; trade item index
 	
 	call EVO_inchlcoord
-	ld b, 0
-	ld c, 5
+	lb bc, 0, 5
 	add hl, bc
 	ld de, .hold_text
 	call PlaceString
@@ -837,8 +836,7 @@ EVO_type_gethlcoord:
 	push bc
 	push af
 	call EVO_gethlcoord
-	ld b, 0
-	ld c, 11
+	lb bc, 0, 11
 	add hl, bc
 
 	dec hl
@@ -850,8 +848,7 @@ EVO_type2_gethlcoord:
 	push bc
 	push af
 	call EVO_gethlcoord
-	ld b, 0
-	ld c, 11
+	lb bc, 0, 11
 	add hl, bc
 	ld b, 0
 	ld c, SCREEN_WIDTH
