@@ -819,8 +819,7 @@ PokeAnim_PlaceGraphic:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld b, 7
-	ld c, 7
+	lb bc, 7, 7
 	call ClearBox
 	ret
 
@@ -839,8 +838,7 @@ PokeAnim_SetVBank1:
 
 .SetFlag:
 	call PokeAnim_GetAttrmapCoord
-	ld b, 7
-	ld c, 7
+	lb bc, 7, 7
 	ld de, SCREEN_WIDTH
 .row
 	push bc
@@ -861,8 +859,7 @@ PokeAnim_SetVBank1:
 
 PokeAnim_SetVBank0:
 	call PokeAnim_GetAttrmapCoord
-	ld b, 7
-	ld c, 7
+	lb bc, 7, 7
 	ld de, SCREEN_WIDTH
 .row
 	push bc
