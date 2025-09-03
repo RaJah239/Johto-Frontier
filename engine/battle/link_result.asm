@@ -59,8 +59,7 @@ DetermineLinkBattleResult:
 	ret
 
 .CountMonsRemaining:
-	ld c, 0
-	ld b, 3
+	lb bc, 0, 3
 	ld de, PARTYMON_STRUCT_LENGTH - 1
 .loop
 	ld a, [hli]
