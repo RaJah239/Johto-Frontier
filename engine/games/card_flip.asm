@@ -488,8 +488,7 @@ CardFlip_UpdateCoinBalanceDisplay:
 
 CardFlip_PrintCoinBalance:
 	hlcoord 9, 15
-	ld b, 1
-	ld c, 9
+	lb bc, 1, 9
 	call Textbox
 	hlcoord 10, 16
 	ld de, .CoinStr
