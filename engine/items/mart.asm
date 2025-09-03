@@ -686,8 +686,7 @@ CheckQuantityInBag:
 CrystalCountInBag:
 	; Place a text box of size 1x7 at 11, 0.
 	hlcoord 11, 0
-	ld b, 1
-	ld c, 7
+	lb bc, 1, 7
 	call Textbox
 	hlcoord 12, 0
 	ld de, CrystalString
@@ -713,8 +712,7 @@ CrystalString:
 NuggetCountInBag:
 	; Place a text box of size 1x7 at 11, 0.
 	hlcoord 11, 0
-	ld b, 1
-	ld c, 7
+	lb bc, 1, 7
 	call Textbox
 	hlcoord 12, 0
 	ld de, NuggetString
