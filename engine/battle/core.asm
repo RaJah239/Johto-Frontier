@@ -7732,6 +7732,11 @@ InitEnemyTrainer:
 	xor a
 	ld [wTempEnemyMonSpecies], a
 	callfar GetTrainerAttributes
+	
+	ld a, [wLinkMode]
+	and a
+	jr nz, .notCal
+
 	ld a, [wOtherTrainerClass]
 	cp CAL
 	jr nz, .notCal
