@@ -45,6 +45,9 @@ used_space.png
 *.sa*
 *.sg1
 
+# bgb configuration file
+*.ini
+
 # vim configuration
 # http://www.vim.org/scripts/script.php?script_id=441
 .lvimrc
