@@ -1,14 +1,6 @@
 #!/usr/bin/gawk -f
 
 # Usage:  tools/free_space.awk [BANK=<bank_spec>] pokecrystal.map
-
-# The BANK argument allows printing free space in one, all, or none of the ROM's banks.
-# Valid arguments are numbers (in decimal "42" or hexadecimal "0x2a"), "all" or "none".
-# If not specified, defaults to "none".
-# The `BANK` argument MUST be before the map file name, otherwise it has no effect!
-# Yes:  tools/free_space.awk BANK=all pokecrystal.map
-# No:   tools/free_space.awk pokecrystal.map BANK=42
-
 # Copyright (c) 2020, Eldred Habert.
 # SPDX-License-Identifier: MIT
 
@@ -16,9 +8,6 @@ BEGIN {
 	nb_banks = 0
 	free = 0
 	rom_bank = 0 # Safety net for malformed files
-
-	# Default settings
-	# Variables assigned via the command-line (except through `-v`) are *after* `BEGIN`
 	BANK="none"
 }
 
@@ -33,11 +22,9 @@ toupper($0) ~ /^[ \t]*ROM[0X][ \t]+BANK[ \t]+#/ {
 function register_bank(amount) {
 	free += amount
 	rom_bank = 0 # Reject upcoming banks by default
-
-	if (BANK ~ /all/ || BANK == bank_num) {
-		printf "Bank %3d: %5d/16384 (%.2f%%)\n", bank_num, amount, amount * 100 / 16384
-	}
+	# Removed per-bank printing
 }
+
 function register_bank_str(str) {
     if (str ~ /\$[0-9A-F]+/) {
         register_bank(strtonum("0x" substr(str, 2)))
@@ -47,26 +34,21 @@ function register_bank_str(str) {
 }
 
 rom_bank && toupper($0) ~ /^[ \t]*EMPTY$/ {
-	# Empty bank
 	register_bank(16384)
 }
 rom_bank && toupper($0) ~ /^[ \t]*SLACK:[ \t]/ {
-    # Old (rgbds <=0.6.0) end-of-bank free space
     register_bank_str($2)
 }
 rom_bank && toupper($0) ~ /^[ \t]*TOTAL EMPTY:[ \t]/ {
-    # New (rgbds >=0.6.1) total free space
     register_bank_str($3)
 }
 
 END {
-	# Determine number of banks, by rounding to upper power of 2
-	total_banks = 2 # Smallest size is 2 banks
+	total_banks = 2
 	while (total_banks < nb_banks) {
 		total_banks *= 2
 	}
 
-	# RGBLINK omits "trailing" ROM banks, so fake them
 	bank_num = nb_banks
 	while (bank_num < total_banks) {
 		register_bank(16384)
