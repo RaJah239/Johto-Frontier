@@ -194,6 +194,16 @@ _AnotherSaveFileText::
 	line "exists! Overwrite?"
 	done
 
+_AreYouReallyReallySureText::
+	text "Are you really,"
+	line "REALLY sure??"
+	done
+
+_ThisCantBeUndoneText::
+	text "This can't be un-"
+	line "done! Overwrite???"
+	done
+
 _SaveFileCorruptedText::
 	text "The save file is"
 	line "corrupted!"
