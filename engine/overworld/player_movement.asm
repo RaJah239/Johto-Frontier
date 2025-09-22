@@ -314,6 +314,9 @@ endc
 	ret
 
 .walk
+	ld a, [wCurInput]
+	and B_BUTTON
+	jr nz, .run
 	ld a, STEP_WALK
 	call .DoStep
 	scf
@@ -325,8 +328,10 @@ endc
 	scf
 	ret
 
-.unused ; unreferenced
-	xor a
+.run
+	ld a, STEP_RUN
+	call .DoStep
+	scf
 	ret
 
 .bump
@@ -486,6 +491,7 @@ endc
 	dw .TurningStep
 	dw .BackJumpStep
 	dw .FinishFacing
+	dw .RunStep
 	assert_table_length NUM_STEPS
 
 .SlowStep:
@@ -528,6 +534,11 @@ endc
 	db $80 | UP
 	db $80 | LEFT
 	db $80 | RIGHT
+.RunStep
+	run_step DOWN
+	run_step UP
+	run_step LEFT
+	run_step RIGHT
 
 .StandInPlace:
 	ld a, 0
