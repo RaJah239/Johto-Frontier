@@ -5,7 +5,7 @@
  	const DEXENTRY_FIELD     ; 3 ; bit 3, $8
  	const DEXENTRY_EGG		 ; 4 ; bit 4, $10, 16
  	const DEXENTRY_TMS       ; 5 ; bit 5, $20, 32
- 	; const DEXENTRY_HMS       ; bit 6, $40, 64
+ 	const DEXENTRY_HMS       ; bit 6, $40, 64
  	const DEXENTRY_MTS       ; 6 ;bit 7, $80, 128
  	const DEXENTRY_EVO		 ; 7
  	const DEXENTRY_PICS      ; 8
@@ -33,7 +33,7 @@
  EXPORT DEXENTRY_FIELD
  EXPORT DEXENTRY_EGG
  EXPORT DEXENTRY_TMS
- ; EXPORT DEXENTRY_HMS
+ EXPORT DEXENTRY_HMS
  EXPORT DEXENTRY_MTS
  EXPORT DEXENTRY_EVO		 ; 7
  EXPORT DEXENTRY_PICS      ; 8
