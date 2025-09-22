@@ -54,51 +54,51 @@ Pokedex_DetailedArea:
 
 	ld hl, JohtoGrassWildMons
 	cp DEXENTRY_AREA_GRASS_JOHTO
-	jp z, .grass ; _johto
+	jmp z, .grass ; _johto
 	ld hl, KantoGrassWildMons
 	cp DEXENTRY_AREA_GRASS_KANTO
-	jp z, .grass ; _kanto
+	jmp z, .grass ; _kanto
 	ld hl, SwarmGrassWildMons
 	cp DEXENTRY_AREA_GRASS_SWARM
-	jp z, .grass ; _swarm
+	jr z, .grass ; _swarm
 	
 	ld hl,JohtoWaterWildMons
 	cp DEXENTRY_AREA_SURF_JOHTO
-	jp z, .surf
+	jr z, .surf
 	ld hl, KantoWaterWildMons
 	cp DEXENTRY_AREA_SURF_KANTO
-	jp z, .surf
+	jr z, .surf
 	ld hl, SwarmWaterWildMons
 	cp DEXENTRY_AREA_SURF_SWARM
-	jp z, .surf
+	jr z, .surf
 	
 	cp DEXENTRY_AREA_RODS
-	jp z, .rods
+	jr z, .rods
 
 	cp DEXENTRY_AREA_TREES_COMMON
-	jp z, .trees
+	jr z, .trees
 	cp DEXENTRY_AREA_TREES_RARE
-	jp z, .trees	
+	jr z, .trees	
 	cp DEXENTRY_AREA_ROCKSMASH
-	jp z, .rocksmash
+	jr z, .rocksmash
 
 	cp DEXENTRY_AREA_CONTEST
-	jp z, .bugcontest
+	jr z, .bugcontest
 
 	cp DEXENTRY_AREA_ROAMING
-	jp z, .roaming
+	jr z, .roaming
 
 	cp DEXENTRY_AREA_CASINO
-	jp z, .casino
+	jr z, .casino
 
 	cp DEXENTRY_AREA_NPCTRADES
-	jp z, .npctrades
+	jr z, .npctrades
 
 	cp DEXENTRY_AREA_EVENTWILDMONS
-	jp z, .eventwildmons
+	jr z, .eventwildmons
 
 	cp DEXENTRY_AREA_GIFTMONS
-	jp z, .giftmons
+	jr z, .giftmons
 	
 	; loop back around as if we are arriving for the first time, creating a closed-loop rotation
 .first
@@ -177,7 +177,7 @@ Pokedex_DetailedArea:
 	; fallthrough
 .skip_empty_area_check
 	cp -1 ; -1 means we skipped, ;;;; 0 is normal
-	jp z, .checkpoint
+	jmp z, .checkpoint
 ; .done
 	xor a
 	ret
@@ -191,7 +191,7 @@ Dex_FindFirstList:
 	ld a, BANK(JohtoGrassWildMons)
 	call Dex_Check_Grass
 	and a
-	jp z, .grass_johto
+	jmp z, .grass_johto
 	ld hl, KantoGrassWildMons
 	ld a, BANK(KantoGrassWildMons)
 	call Dex_Check_Grass
@@ -424,7 +424,7 @@ Pokedex_DetailedArea_grass:
 	pop hl ; in case we are about to exit
 	ld a, b
 	and a
-	jp nz, Pokedex_Skip_Empty_Area_Category
+	jr nz, Pokedex_Skip_Empty_Area_Category
 
 	push hl ; JohtoGrassWildMons, KantoGrassWildMons, or SwarmGrassWildMons
 	ld a, [wPokedexEntryType]
@@ -685,7 +685,7 @@ Pokedex_DetailedArea_surf:
 	pop hl ; in case we are about to exit
 	ld a, b
 	and a
-	jp nz, Pokedex_Skip_Empty_Area_Category
+	jmp nz, Pokedex_Skip_Empty_Area_Category
 
 	push hl ; JohtoWaterWildMons, KantoWaterWildMons, or SwarmWaterWildMons
 	ld a, [wPokedexEntryType]
@@ -1098,7 +1098,7 @@ Dex_Check_bugcontest:
 Pokedex_DetailedArea_bugcontest:
 	call Dex_Check_bugcontest
 	and a
-	jp nz, Pokedex_Skip_Empty_Area_Category
+	jmp nz, Pokedex_Skip_Empty_Area_Category
 	
 	xor a
 	ld [wPokedexEvoStage2], a
@@ -1241,7 +1241,7 @@ Dex_Check_roaming:
 Pokedex_DetailedArea_roaming:
 	call Dex_Check_roaming
 	and a
-	jp nz, Pokedex_Skip_Empty_Area_Category
+	jmp nz, Pokedex_Skip_Empty_Area_Category
 	
 	xor a
 	ld [wPokedexEvoStage2], a
@@ -1423,7 +1423,7 @@ Pokedex_DetailedArea_casino:
 ; 2 lines per entry: map name, coins
 	call Dex_Check_casino
 	and a
-	jp nz, Pokedex_Skip_Empty_Area_Category
+	jmp nz, Pokedex_Skip_Empty_Area_Category
 	
 	xor a
 	ld [wPokedexEvoStage2], a ; 0 if we havent printed a johto casino mon
@@ -1598,7 +1598,7 @@ Pokedex_DetailedArea_npctrades:
 ; 1 full page per entry
 	call Dex_Check_npctrades
 	and a
-	jp nz, Pokedex_Skip_Empty_Area_Category
+	jmp nz, Pokedex_Skip_Empty_Area_Category
 	
 	xor a
 	ld [wPokedexEvoStage2], a ; signals additional species entries
@@ -1920,7 +1920,7 @@ Pokedex_DetailedArea_eventwildmons:
 	ld hl, EventWildMons
 	call Dex_Check_eventmons
 	and a
-	jp nz, Pokedex_Skip_Empty_Area_Category
+	jmp nz, Pokedex_Skip_Empty_Area_Category
 	
 	xor a
 	ld [wPokedexEvoStage2], a
@@ -1932,7 +1932,7 @@ Pokedex_DetailedArea_eventwildmons:
 	call Print_Category_text	
 
 	ld hl, EventWildMons
-	jp Pokedex_DetailedArea_eventmons
+	jmp Pokedex_DetailedArea_eventmons
 	
 .eventwildmon_text:
 	db "SPECIAL   @"
@@ -1946,7 +1946,7 @@ Pokedex_DetailedArea_giftmons:
 	ld hl, GiftMons
 	call Dex_Check_eventmons
 	and a
-	jp nz, Pokedex_Skip_Empty_Area_Category
+	jmp nz, Pokedex_Skip_Empty_Area_Category
 	
 	xor a
 	ld [wPokedexEvoStage2], a
@@ -1958,7 +1958,7 @@ Pokedex_DetailedArea_giftmons:
 	call Print_Category_text	
 
 	ld hl, GiftMons
-	jp Pokedex_DetailedArea_eventmons
+	jmp Pokedex_DetailedArea_eventmons
 
 .giftmon_text:
 	db "GIFT      @"

@@ -12,7 +12,7 @@ LoadSGBLayoutCGB:
 	ld a, [wDefaultSGBLayout]
 .not_default
 	cp SCGB_PARTY_MENU_HP_BARS
-	jp z, CGB_ApplyPartyMenuHPPals
+	jmp z, CGB_ApplyPartyMenuHPPals
 	call ResetBGPals
 	ld l, a
 	ld h, 0
@@ -656,9 +656,9 @@ BillsPC_PreviewTheme:
 	call LoadHLPaletteIntoDE
 	ld hl, BillsPC_WhitePalette
 	ld de, wOBPals1 palette 6
-	jp LoadHLPaletteIntoDE
+	jmp LoadHLPaletteIntoDE
 .apply_pals
-	newfarjp BillsPC_SetPals
+	newfarjmp BillsPC_SetPals
 
 .GetMonPalette:
 	ld bc, wTempMonDVs

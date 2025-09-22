@@ -184,7 +184,7 @@ if DEF(_DEBUG)
 	jr z, .hatch
 endc
 	and D_DOWN | D_UP | A_BUTTON | B_BUTTON
-	jp StatsScreen_JoypadAction
+	jr StatsScreen_JoypadAction
 
 .quit
 	ld h, 7
@@ -218,7 +218,7 @@ if DEF(_DEBUG)
 	pop bc
 .skip
 	xor a
-	jp StatsScreen_JoypadAction
+	jr StatsScreen_JoypadAction
 
 .HatchSoonString:
 	db "▶HATCH SOON!@"
@@ -242,7 +242,7 @@ MonStatsJoypad:
 
 .next
 	and D_DOWN | D_UP | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON
-	jp StatsScreen_JoypadAction
+	jr StatsScreen_JoypadAction
 
 StatsScreenWaitCry:
 	call IsSFXPlaying
@@ -252,38 +252,6 @@ StatsScreenWaitCry:
 	ld [wJumptableIndex], a
 	ret
 
-StatsScreen_CopyToTempMon:
-	ld a, [wMonType]
-	cp BUFFERMON
-	jr nz, .not_tempmon
-	ld a, [wBufferMonSpecies]
-	ld [wCurSpecies], a
-	call GetBaseData
-	ld hl, wBufferMon
-	ld de, wTempMon
-	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyBytes
-	jr .done
-
-.not_tempmon
-	farcall CopyMonToTempMon
-	ld a, [wCurPartySpecies]
-	cp EGG
-	jr z, .done
-	ld a, [wMonType]
-	cp BOXMON
-	jr c, .done
-	farcall CalcTempmonStats
-.done
-	and a
-	ret
-
-StatsScreen_GetJoypad:
-	call GetJoypad
-	ldh a, [hJoyPressed]
-	and a
-	ret
-
 StatsScreen_JoypadAction:
 	push af
 	ld a, [wStatsScreenFlags]
@@ -291,7 +259,7 @@ StatsScreen_JoypadAction:
 	ld c, a
 	pop af
 	bit B_BUTTON_F, a
-	jp nz, .b_button
+	jmp nz, .b_button
 	bit D_LEFT_F, a
 	jr nz, .d_left
 	bit D_RIGHT_F, a
@@ -396,6 +364,38 @@ StatsScreen_JoypadAction:
 .b_button
 	ld h, 7
 	call StatsScreen_SetJumptableIndex
+	ret
+
+StatsScreen_CopyToTempMon:
+	ld a, [wMonType]
+	cp BUFFERMON
+	jr nz, .not_tempmon
+	ld a, [wBufferMonSpecies]
+	ld [wCurSpecies], a
+	call GetBaseData
+	ld hl, wBufferMon
+	ld de, wTempMon
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call CopyBytes
+	jr .done
+
+.not_tempmon
+	farcall CopyMonToTempMon
+	ld a, [wCurPartySpecies]
+	cp EGG
+	jr z, .done
+	ld a, [wMonType]
+	cp BOXMON
+	jr c, .done
+	farcall CalcTempmonStats
+.done
+	and a
+	ret
+
+StatsScreen_GetJoypad:
+	call GetJoypad
+	ldh a, [hJoyPressed]
+	and a
 	ret
 
 StatsScreen_InitUpperHalf:
@@ -1136,7 +1136,7 @@ GetNicknamePointer:
 	cp BUFFERMON
 	ret z
 	ld a, [wCurPartyMon]
-	jp SkipNames
+	jmp SkipNames
 
 CheckFaintedFrzSlp:
 	ld hl, MON_HP

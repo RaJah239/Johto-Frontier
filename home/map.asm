@@ -185,7 +185,7 @@ endr
 	pop de
 	inc de
 	dec c
-	jp nz, .col
+	jr nz, .col
 	; Next metarow
 	pop hl
 	ld de, SURROUNDING_WIDTH * METATILE_WIDTH
@@ -199,7 +199,7 @@ endr
 	inc d
 .ok2
 	dec b
-	jp nz, .row
+	jmp nz, .row
 	ret
 
 ReturnToMapFromSubmenu::

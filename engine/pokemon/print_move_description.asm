@@ -11,6 +11,6 @@ PrintMoveDescription:
 	ld e, a
 	ld d, [hl]
 	pop hl
-	jp PlaceString
+	jmp PlaceString
 
 INCLUDE "data/moves/descriptions.asm"

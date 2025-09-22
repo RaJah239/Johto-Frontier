@@ -243,9 +243,9 @@ IF DEF(EVOLVE_HELD)
 	push af
 	ld a, c ; ld a, [wStatsScreenFlags]
 	cp 3
-	jp z, .exit_early_print_cont
+	jmp z, .exit_early_print_cont
 	pop af
-	jp .main_loop
+	jmp .main_loop
 .done_stage
 	xor a
 	cp b
@@ -255,7 +255,7 @@ IF DEF(EVOLVE_HELD)
 	cp $1
 	jr nz, .done
 	cp 3
-	jp z, .exit_early_print_cont2
+	jmp z, .exit_early_print_cont2
 	push bc ; count and stage
 	ld a, [wCurPartySpecies] ; stage 1 evo
 	dec a
@@ -311,7 +311,7 @@ IF DEF(EVOLVE_HELD)
 	pop af ; manner of evo
 	pop hl ; manner of evo byte
 	inc hl ; manner of evo byte +1
-	jp .main_loop
+	jmp .main_loop
 .done
 	xor a
 	ld [wPokedexEvoStage2], a
@@ -717,7 +717,7 @@ ENDC
 	ld b, a
 	ld a, [wBaseType2]
 	cp b
-	jp z, .done
+	jr z, .done
 
 IF SWAP_DARK_GHOST_TYPES == TRUE
  	call Evo_page_Swap_Dark_Ghost
@@ -1201,7 +1201,7 @@ ENDC
  	ld e, l
  	pop hl
 	inc hl
- 	jp PlaceString
+ 	jmp PlaceString
  
  .Types
 	db "NRM@"

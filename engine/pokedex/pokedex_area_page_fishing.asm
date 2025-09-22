@@ -9,7 +9,7 @@ Pokedex_DetailedArea_rods:
 	ld hl, FishGroups ; we want to start at the beginning
 	call Dex_Check_Fishing ; from prev category, we automatically roll into this category, we need to check if there's even anything there for us, so we use same func as first pass/check
 	and a ; if a is 0, means species was found somewhere
-	jp nz, Pokedex_Skip_Empty_Area_Category
+	jmp nz, Pokedex_Skip_Empty_Area_Category
 
 .auto_cont
 	xor a
@@ -34,7 +34,7 @@ Pokedex_DetailedArea_rods:
 	jr nz, .print
 	ld a, [wPokedexEvoStage3] ; nite
 	and a
-	jp z, .prep_loop
+	jmp z, .prep_loop
 .print
 	; when we arrive here, we are printing our first rod for this Fishing Group, could be any
 	; print the first rod, then check if we're super, if not, inc Index and check
@@ -149,7 +149,7 @@ Pokedex_DetailedArea_rods:
 	jr nz, .max_print
 
 	push bc ; print counter
-	jp .landmark_loop
+	jmp .landmark_loop
 .reached_end
 	xor a
 	ld [wPokedexStatus], a ; wildmon entry index

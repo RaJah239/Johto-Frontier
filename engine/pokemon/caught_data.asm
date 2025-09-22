@@ -1,14 +1,14 @@
 CheckPartyFullAfterContest:
 	ld a, [wContestMonSpecies]
 	and a
-	jp z, .DidntCatchAnything
+	jmp z, .DidntCatchAnything
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	call GetBaseData
 	ld hl, wPartyCount
 	ld a, [hl]
 	cp PARTY_LENGTH
-	jp nc, .TryAddToBox
+	jmp nc, .TryAddToBox
 	inc a
 	ld [hl], a
 	ld c, a
@@ -149,7 +149,7 @@ CheckPartyFullAfterContest:
 GiveANickname_YesNo:
 	ld hl, CaughtAskNicknameText
 	call PrintText
-	jp YesNoBox
+	jmp YesNoBox
 
 CaughtAskNicknameText:
 	text_far _CaughtAskNicknameText
@@ -196,12 +196,12 @@ SetBoxmonOrEggmonCaughtData:
 SetBoxMonCaughtData:
 	ld hl, wBufferMonCaughtData
 	call SetBoxmonOrEggmonCaughtData
-	newfarjp UpdateStorageBoxMonFromTemp
+	newfarjmp UpdateStorageBoxMonFromTemp
 
 SetGiftBoxMonCaughtData:
 	ld hl, wBufferMonCaughtLevel
 	call SetGiftMonCaughtData
-	newfarjp UpdateStorageBoxMonFromTemp
+	newfarjmp UpdateStorageBoxMonFromTemp
 
 SetGiftPartyMonCaughtData:
 	ld a, [wPartyCount]

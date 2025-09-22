@@ -18,10 +18,10 @@ String_TUTOR_text:
 	db " Tutor     @"
 Print_Category_MOVES_text:
 	ld hl, String_MOVES_text
-	jp Print_Category_text
+	jmp Print_Category_text
 Print_Category_MACHINES_text:
 	ld hl, String_MACHINES_text
-	jp Print_Category_text
+	jmp Print_Category_text
 
 DisplayDexMonMoves::
 	ld a, [wTempSpecies]
@@ -62,7 +62,7 @@ DisplayDexMonMoves::
 
 	ld a, DEXENTRY_TMS
 	ld [wPokedexEntryType], a
-	jp Pokedex_PrintTMs
+	jmp Pokedex_PrintTMs
 .HMs
 ; place category name
 	ld de, String_HIDDEN_text
@@ -70,7 +70,7 @@ DisplayDexMonMoves::
 
  	ld a, DEXENTRY_HMS
  	ld [wPokedexEntryType], a
- 	jp Pokedex_PrintHMs
+ 	jmp Pokedex_PrintHMs
 .MTs
 ; place category name
 	ld de, String_MOVE_text
@@ -79,7 +79,7 @@ DisplayDexMonMoves::
 
 	ld a, DEXENTRY_MTS
 	ld [wPokedexEntryType], a
-	jp Pokedex_PrintMTs
+	jmp Pokedex_PrintMTs
 .EggMoves
 ; place category name
 	ld de, String_EGG_text
@@ -89,7 +89,7 @@ DisplayDexMonMoves::
 	ld [wPokedexEntryType], a
 	call Pokedex_Calc_EggMovesPtr
 	ret z
-	jp Pokedex_Print_Egg_moves
+	jmp Pokedex_Print_Egg_moves
 
 Pokedex_Calc_LvlMovesPtr:
 	ld a, [wTempSpecies]
@@ -165,11 +165,11 @@ Pokedex_Print_NextLvlMoves:
 	call GetFarByte
 	and a
 	jr z, .FoundEnd
-	jp DexEntry_IncPageNum
+	jmp DexEntry_IncPageNum
 
 .FoundEnd
 	ld a, DEXENTRY_TMS
-	jp DexEntry_NextCategory
+	jmp DexEntry_NextCategory
 
 Pokedex_PrintTMs:
 	call Pokedex_PrintPageNum ; page num is also returned in a
@@ -216,7 +216,7 @@ Pokedex_PrintTMs:
 	call Pokedex_anymoreTMs
 	jr z, .done ; there are no moves left
 	; there are moves left
-	jp DexEntry_IncPageNum
+	jmp DexEntry_IncPageNum
 
 .notcompatible
 	ld a, NUM_TMS - 1
@@ -235,7 +235,7 @@ Pokedex_PrintTMs:
 	ret nz
 	hlcoord 4, 9
 	ld de, DexEntry_NONE_text
-	jp PlaceString
+	jmp PlaceString
 
 Pokedex_anymoreTMs:
 	; b has the current TM index
@@ -316,7 +316,7 @@ Pokedex_PrintHMs:
 	call Pokedex_anymoreHMs
 	jr z, .done ; there are no moves left
 	; there are moves left
-	jp DexEntry_IncPageNum
+	jmp DexEntry_IncPageNum
 
 .notcompatible
 	ld a, NUM_HMS - 1
@@ -335,7 +335,7 @@ Pokedex_PrintHMs:
 	ret nz
 	hlcoord 4, 9
 	ld de, DexEntry_NONE_text
-	jp PlaceString
+	jmp PlaceString
 
 Pokedex_anymoreHMs:
 	; b has the current HM index
@@ -407,7 +407,7 @@ Pokedex_PrintMTs:
 	call Pokedex_anymoreMTs
 	jr z, .done ; there are no moves left
 	; there are moves left
-	jp DexEntry_IncPageNum
+	jmp DexEntry_IncPageNum
 
 .notcompatible
 	ld a, NUM_TUTORS - 1
@@ -426,7 +426,7 @@ Pokedex_PrintMTs:
 	ret nz
 	hlcoord 4, 9
 	ld de, DexEntry_NONE_text
-	jp PlaceString
+	jmp PlaceString
 
 Pokedex_anymoreMTs:
 	ld a, NUM_TUTORS - 1
@@ -506,7 +506,7 @@ Pokedex_Calc_EggMovesPtr:
 	hlcoord 3, 9
 	ld de, DexEntry_NONE_text
 	call PlaceString
-	jp PlaceString
+	jmp PlaceString
 
 Pokedex_Print_Egg_moves:
 ; Print No more than MAX_NUM_MOVES moves

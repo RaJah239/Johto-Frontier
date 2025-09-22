@@ -190,7 +190,7 @@ LoadRandomBattleTowerMon:
 	ld [wNamedObjectIndex], a
 	pop bc
 	dec c
-	jp nz, .loop
+	jmp nz, .loop
 
 	ld a, [sBTMonPrevTrainer1]
 	ld [sBTMonPrevPrevTrainer1], a

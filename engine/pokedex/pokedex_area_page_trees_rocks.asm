@@ -6,7 +6,7 @@ Pokedex_DetailedArea_Trees:
 	jr nz, .start
 	call Dex_Check_Trees
 	and a
-	jp nz, Pokedex_Skip_Empty_Area_Category
+	jmp nz, Pokedex_Skip_Empty_Area_Category
 .start
 	xor a
 	ld [wPokedexEvoStage2], a ; lines printed
@@ -353,7 +353,7 @@ Pokedex_DetailedArea_rocksmash:
 	jr nz, .start
 	call Dex_Check_rocksmash
 	and a
-	jp nz, Pokedex_Skip_Empty_Area_Category
+	jmp nz, Pokedex_Skip_Empty_Area_Category
 .start
 	xor a
 	ld [wPokedexEvoStage2], a ; lines printed

@@ -12,7 +12,7 @@ MACRO newfarcall ; bank, address
 	dbw BANK(\1), \1
 ENDM
 
-MACRO newfarjp
+MACRO newfarjmp
 	rst BetterFarCall
 	dbw BANK(\1) | $80, \1
 ENDM

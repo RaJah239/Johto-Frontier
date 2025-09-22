@@ -17,7 +17,7 @@ BattleCommand_MirrorMove:
 
 	ld hl, MirrorMoveFailedText
 	call StdBattleTextbox
-	jp EndMoveEffect
+	jmp EndMoveEffect
 
 .use
 	ld a, b
@@ -46,4 +46,4 @@ BattleCommand_MirrorMove:
 
 .done
 	call BattleCommand_MoveDelay
-	jp ResetTurn
+	jr ResetTurn

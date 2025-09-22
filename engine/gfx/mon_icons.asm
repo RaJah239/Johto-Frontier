@@ -11,7 +11,7 @@ _LoadOverworldMonIcon:
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
-	jp GetIconBank
+	jmp GetIconBank
 
 SetMenuMonIconColor:
 	push hl
@@ -23,7 +23,7 @@ SetMenuMonIconColor:
 	ld [wCurPartySpecies], a
 	call GetMenuMonIconPalette
 	ld hl, wShadowOAMSprite00Attributes
-	jp _ApplyMenuMonIconColor
+	jmp _ApplyMenuMonIconColor
 
 SetMenuMonIconColor_NoShiny:
 	push hl
@@ -36,7 +36,7 @@ SetMenuMonIconColor_NoShiny:
 	and a
 	call GetMenuMonIconPalette_PredeterminedShininess
 	ld hl, wShadowOAMSprite00Attributes
-	jp _ApplyMenuMonIconColor
+	jmp _ApplyMenuMonIconColor
 
 SetDexMonIconColor_NoShiny:
  	push hl
@@ -56,7 +56,7 @@ SetDexMonIconColor_NoShiny:
  	ld e, a
  	add hl, de
  	pop af
- 	jp _ApplyMenuMonIconColor
+ 	jr _ApplyMenuMonIconColor
 
  SetDexMonIconColor_SpritePage:
  	push hl
@@ -82,7 +82,7 @@ SetDexMonIconColor_NoShiny:
  	ld e, a
  	add hl, de
  	pop af
- 	jp _ApplyMenuMonIconColor
+ 	jr _ApplyMenuMonIconColor
 
 LoadPartyMenuMonIconColors:
 	push hl
@@ -609,8 +609,8 @@ GetIconBank:
 GetGFXUnlessMobile:
 	ld a, [wLinkMode]
 	cp LINK_MOBILE
-	jp nz, Request2bpp
-	jp Get2bppViaHDMA
+	jmp nz, Request2bpp
+	jmp Get2bppViaHDMA
 
 
 GetStorageIcon_a:
@@ -629,7 +629,7 @@ GetStorageIcon:
 	call _LoadOverworldMonIcon
 	ld c, 4
 	pop hl
-	newfarjp BillsPC_SafeGet2bpp
+	newfarjmp BillsPC_SafeGet2bpp
 
 FreezeMonIcons:
 	ld hl, wSpriteAnimationStructs

@@ -53,7 +53,7 @@ LoadMonBaseTypePal:
  	ld b, 0
  	add hl, bc
  	ld bc, 2
- 	jp FarCopyColorWRAM
+ 	jmp FarCopyColorWRAM
  
  LoadSingleBlackPal:
  	; Destination address of the Palette and Slot is passed in 'de'
@@ -196,7 +196,7 @@ Intro_LoadAllPal0: ; unreferenced
 	and a
 	ret z
 	ld hl, BlkPacket_AllPal0
-	jp PushSGBPals
+	jmp PushSGBPals
 
 Intro_LoadBetaIntroVenusaurPalettes: ; unreferenced
 	call CheckCGB
@@ -205,13 +205,13 @@ Intro_LoadBetaIntroVenusaurPalettes: ; unreferenced
 	and a
 	ret z
 	ld hl, PalPacket_BetaIntroVenusaur
-	jp PushSGBPals
+	jmp PushSGBPals
 
 .cgb
 	ld de, wOBPals1
 	ld a, PREDEFPAL_BETA_INTRO_VENUSAUR
 	call GetPredefPal
-	jp LoadHLPaletteIntoDE
+	jmp LoadHLPaletteIntoDE
 
 Intro_LoadPackPalettes: ; unreferenced
 	call CheckCGB
@@ -220,13 +220,13 @@ Intro_LoadPackPalettes: ; unreferenced
 	and a
 	ret z
 	ld hl, PalPacket_Pack
-	jp PushSGBPals
+	jmp PushSGBPals
 
 .cgb
 	ld de, wOBPals1
 	ld a, PREDEFPAL_PACK
 	call GetPredefPal
-	jp LoadHLPaletteIntoDE
+	jmp LoadHLPaletteIntoDE
 
 GSIntro_LoadMonPalette: ; unreferenced
 	call CheckCGB
@@ -251,7 +251,7 @@ GSIntro_LoadMonPalette: ; unreferenced
 	ld a, [hl]
 	ld [wSGBPals + 6], a
 	ld hl, wSGBPals
-	jp PushSGBPals
+	jmp PushSGBPals
 
 .cgb
 	ld de, wOBPals1
@@ -301,7 +301,7 @@ LoadBetaPokerPalettes: ; unreferenced
 	and a
 	jr nz, .cgb
 	ld hl, wBetaPokerSGBPals
-	jp PushSGBPals
+	jmp PushSGBPals
 
 .cgb
 	ld a, [wBetaPokerSGBCol]
@@ -700,7 +700,7 @@ SetFirstOBJPalette::
 	call FarCopyWRAM
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
-	jp ApplyPals
+	jmp ApplyPals
 
 GetBattlemonBackpicPalettePointer:
 	push de
@@ -724,7 +724,7 @@ GetEnemyFrontpicPalettePointer:
 
 GetPlayerOrMonPalettePointer:
 	and a
-	jp nz, GetMonNormalOrShinyPalettePointer
+	jmp nz, GetMonNormalOrShinyPalettePointer
 	ld a, [wPlayerSpriteSetupFlags]
 	bit PLAYERSPRITESETUP_FEMALE_TO_MALE_F, a
 	jr nz, .male
@@ -740,7 +740,7 @@ GetPlayerOrMonPalettePointer:
 
 GetFrontpicPalettePointer:
 	and a
-	jp nz, GetMonNormalOrShinyPalettePointer
+	jmp nz, GetMonNormalOrShinyPalettePointer
 	ld a, [wTrainerClass]
 
 GetTrainerPalettePointer:
@@ -1076,7 +1076,7 @@ endr
 	ld hl, MltReq1Packet
 	call _PushSGBPals
 	vc_hook Unknown_network_reset ; Unknown why this hook is here, doesn't seem to be needed
-	jp SGBDelayCycles
+	jmp SGBDelayCycles
 
 SGBBorder_PushBGPals:
 	call DisableLCD

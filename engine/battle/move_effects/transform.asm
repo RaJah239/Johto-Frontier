@@ -3,9 +3,9 @@ BattleCommand_Transform:
 	ld a, BATTLE_VARS_SUBSTATUS5_OPP
 	call GetBattleVarAddr
 	bit SUBSTATUS_TRANSFORMED, [hl]
-	jp nz, BattleEffect_ButItFailed
+	jmp nz, BattleEffect_ButItFailed
 	call CheckHiddenOpponent
-	jp nz, BattleEffect_ButItFailed
+	jmp nz, BattleEffect_ButItFailed
 	xor a
 	ld [wNumHits], a
 	ld [wFXAnimID + 1], a
@@ -133,7 +133,7 @@ BattleCommand_Transform:
 	ld a, SUBSTITUTE
 	call nz, LoadAnim
 	ld hl, TransformedText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox
 
 BattleSideCopy:
 ; Copy bc bytes from hl to de if it's the player's turn.
@@ -148,4 +148,4 @@ BattleSideCopy:
 	ld l, e
 	pop de
 .copy
-	jp CopyBytes
+	jmp CopyBytes

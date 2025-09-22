@@ -133,7 +133,7 @@ UpdateCelebiPosition:
 	add hl, bc
 	ld a, [hl]
 	cp 10 * TILE_WIDTH + 2
-	jp nc, .FreezeCelebiPosition
+	jr nc, .FreezeCelebiPosition
 	ld hl, SPRITEANIMSTRUCT_YCOORD
 	add hl, bc
 	inc [hl]

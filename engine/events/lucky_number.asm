@@ -85,7 +85,7 @@ CheckForLuckyNumberWinners:
 	farcall GetBoxName ; loads box name into wStringBuffer1
 	ld hl, .MatchInStorage
 .got_text
-	jp PrintText
+	jmp PrintText
 
 .MatchInParty:
 	; Congratulations! We have a match with the ID number of @  in your party.

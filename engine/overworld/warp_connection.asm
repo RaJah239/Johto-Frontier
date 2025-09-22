@@ -18,13 +18,13 @@ EnterMapConnection:
 ; Return carry if a connection has been entered.
 	ld a, [wPlayerStepDirection]
 	and a ; DOWN
-	jp z, .south
+	jmp z, .south
 	cp UP
-	jp z, .north
+	jmp z, .north
 	cp LEFT
-	jp z, .west
+	jr z, .west
 	cp RIGHT
-	jp z, .east
+	jr z, .east
 	ret
 
 .west
@@ -60,7 +60,7 @@ EnterMapConnection:
 	ld [wOverworldMapAnchor], a
 	ld a, h
 	ld [wOverworldMapAnchor + 1], a
-	jp .done
+	jmp .done
 
 .east
 	ld a, [wEastConnectedMapGroup]
@@ -95,7 +95,7 @@ EnterMapConnection:
 	ld [wOverworldMapAnchor], a
 	ld a, h
 	ld [wOverworldMapAnchor + 1], a
-	jp .done
+	jr .done
 
 .north
 	ld a, [wNorthConnectedMapGroup]
@@ -120,7 +120,7 @@ EnterMapConnection:
 	ld [wOverworldMapAnchor], a
 	ld a, h
 	ld [wOverworldMapAnchor + 1], a
-	jp .done
+	jr .done
 
 .south
 	ld a, [wSouthConnectedMapGroup]
@@ -310,7 +310,7 @@ LoadMapGraphics:
 
 LoadMapPalettes:
 	ld b, SCGB_MAPPALS
-	jp GetSGBLayout
+	jmp GetSGBLayout
 
 RefreshMapSprites:
 	call ClearSprites

@@ -202,14 +202,14 @@ PlaceVerticalMenuItems::
 	inc de
 	ld b, 0
 	add hl, bc
-	jp PlaceString
+	jmp PlaceString
 
 MenuBox::
 	call MenuBoxCoord2Tile
 	call GetMenuBoxDims
 	dec b
 	dec c
-	jp Textbox
+	jmp Textbox
 
 GetMenuTextStartCoord::
 	ld a, [wMenuBorderTopCoord]
@@ -329,7 +329,7 @@ MenuTextbox::
 	push hl
 	call LoadMenuTextbox
 	pop hl
-	jp PrintText
+	jmp PrintText
 
 Menu_DummyFunction:: ; unreferenced
 	ret
@@ -426,7 +426,7 @@ PlaceGenericTwoOptionBox:: ; unreferenced
 	jr InterpretTwoOptionMenu
 
 NoYesBox::
-	newfarjp _NoYesBox
+	newfarjmp _NoYesBox
 
 _YesNoBox::
 ; Return nc (yes) or c (no).
