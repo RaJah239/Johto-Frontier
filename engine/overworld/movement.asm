@@ -200,7 +200,7 @@ Movement_step_loop:
 	jmp ContinueReadingMovement
 
 Movement_step_end:
-	jr Movement_48
+	call RestoreDefaultMovement
 	ld hl, OBJECT_MOVEMENT_TYPE
 	add hl, bc
 	ld [hl], a

@@ -138,9 +138,8 @@ UnusedWait30Frames: ; unreferenced
 	ret
 
 HandleMap:
-	call ResetOverworldDelay
 	call HandleMapTimeAndJoypad
-	farcall HandleCmdQueue ; no need to farcall
+	call HandleCmdQueue
 	call MapEvents
 
 ; Not immediately entering a connected map will cause problems.
@@ -152,6 +151,7 @@ HandleMap:
 	call NextOverworldFrame
 	call HandleMapBackground
 	call CheckPlayerState
+	xor a
 	ret
 
 MapEvents:
@@ -163,22 +163,14 @@ MapEvents:
 	farcall ScriptEvents
 	ret
 
-ResetOverworldDelay:
-	ld hl, wOverworldDelay
-	bit 7, [hl]
-	res 7, [hl]
-	ret nz
-	ld [hl], 2
-	ret
-
 NextOverworldFrame:
-	ld a, [wOverworldDelay]
-	and a
+	; If we haven't already performed a delay outside DelayFrame as a result
+	; of a busy LY overflow, perform that now.
+	ld a, [hDelayFrameLY]
+	inc a
 	jmp nz, DelayFrame
-; reset overworld delay to leak into the next frame
-	ld a, $82
-	ld [wOverworldDelay], a
-	ret
+	xor a
+	ld [hDelayFrameLY], a
 	ret
 
 HandleMapTimeAndJoypad:
