@@ -408,7 +408,7 @@ Function110231:
 	jr Function110228
 
 Function110235:
-	nop
+	; fallthrough
 
 Function110236:
 	ld a, [wMobileAPIIndex]
@@ -3227,7 +3227,7 @@ Function11148c:
 	jr .asm_1114d2
 
 Function111540:
-	nop
+	; fallthrough
 
 MobileAPI_TelephoneStatus:
 	ld hl, wc821

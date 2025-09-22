@@ -96,7 +96,6 @@ SkipUpdateMapSprites:
 	ret
 
 CheckUpdatePlayerSprite:
-	nop
 	call .CheckForcedBiking
 	jr c, .ok
 	call .CheckSurfing
