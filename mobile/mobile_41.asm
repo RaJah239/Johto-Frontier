@@ -1012,7 +1012,6 @@ Function106453:
 
 Stubbed_Function106462:
 	ret
-	ret
 
 Function106464::
 	ld de, MobileDialingFrameGFX
