@@ -8,7 +8,11 @@ SpawnPoints:
 ; entries correspond to SPAWN_* constants
 	table_width 4, SpawnPoints
 
+if DEF(_DEBUG)
+	spawn PLAYERS_HOUSE_2F,            3,  2
+else
 	spawn PLAYERS_HOUSE_2F,            3,  3
+endc
 	spawn VIRIDIAN_POKECENTER_1F,      5,  3
 
 	spawn PALLET_TOWN,                 5,  6
