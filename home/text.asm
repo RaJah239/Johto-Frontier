@@ -373,7 +373,7 @@ PlaceGenderedPlayerName::
 	ld de, KunSuffixText
 	jr z, PlaceCommandCharacter
 	ld de, ChanSuffixText
-	jr PlaceCommandCharacter
+	; fallthrough
 
 PlaceCommandCharacter::
 	call PlaceString
@@ -616,9 +616,6 @@ Text_WaitBGMap::
 	pop bc
 	ret
 
-Diacritic::
-	ret
-
 LoadBlinkingCursor::
 	ld a, "▼"
 	ldcoord_a 18, 17
@@ -750,8 +747,7 @@ TextCommand_FAR::
 	ld d, a
 	ld a, [hli]
 
-	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	rst Bankswitch
 
 	push hl
 	ld h, d
@@ -760,8 +756,7 @@ TextCommand_FAR::
 	pop hl
 
 	pop af
-	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	rst Bankswitch
 	ret
 
 TextCommand_BCD::

@@ -298,11 +298,8 @@ ClearVBank1::
 	xor a
 	call ByteFill
 
-	ld a, 0
+	xor a
 	ldh [rVBK], a
-	ret
-
-GSReloadPalettes:: ; dummied out
 	ret
 
 ReloadSpritesNoPalettes::

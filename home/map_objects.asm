@@ -115,23 +115,14 @@ CheckGrassTile::
 	ld d, a
 	and $f0
 	cp HI_NYBBLE_TALL_GRASS
-	jr z, .grass
+	jr z, .check
 	cp HI_NYBBLE_WATER
-	jr z, .water
-	scf
-	ret
-
-.grass
+	jr nz, .nope
+.check
 	ld a, d
 	and LO_NYBBLE_GRASS
 	ret z
-	scf
-	ret
-; For some reason, the above code is duplicated down here.
-.water
-	ld a, d
-	and LO_NYBBLE_GRASS
-	ret z
+.nope
 	scf
 	ret
 
@@ -272,31 +263,22 @@ CheckObjectTime::
 	ld hl, hHours
 	ld a, d
 	cp e
-	jr z, .yes
+	ret z
 	jr c, .check_timeofday
 	ld a, [hl]
 	cp d
-	jr nc, .yes
+	ret nc
 	cp e
-	jr c, .yes
-	jr z, .yes
-	jr .no
+	ret z
+	ccf
+	ret
 
 .check_timeofday
 	ld a, e
 	cp [hl]
-	jr c, .no
+	ret c
 	ld a, [hl]
 	cp d
-	jr nc, .yes
-	jr .no
-
-.yes
-	and a
-	ret
-
-.no
-	scf
 	ret
 
 UnmaskCopyMapObjectStruct::

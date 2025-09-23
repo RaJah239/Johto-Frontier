@@ -3,9 +3,8 @@
 ClearUnusedMapBuffer::
 	ld hl, wUnusedMapBuffer
 	ld bc, wUnusedMapBufferEnd - wUnusedMapBuffer
-	ld a, 0
-	call ByteFill
-	ret
+	xor a
+	jmp ByteFill
 
 CheckScenes::
 ; Checks wCurMapSceneScriptPointer.  If it's empty, returns -1 in a.  Otherwise, returns the active scene ID in a.
@@ -64,8 +63,7 @@ GetMapSceneID::
 	jr nz, .next ; map group did not match
 	ld a, [hli] ; map number
 	cp c
-	jr nz, .next ; map number did not match
-	jr .found ; we found our map
+	jr z, .found ; we found our map
 
 .next
 	pop hl
@@ -457,12 +455,9 @@ GetMapConnections::
 .no_west
 
 	bit EAST_F, b
-	jr z, .no_east
+	ret z
 	ld de, wEastMapConnection
-	call GetMapConnection
-.no_east
-
-	ret
+	; fallthrough
 
 GetMapConnection::
 ; Load map connection struct at hl into de.
@@ -815,7 +810,7 @@ FillMapConnections::
 .East:
 	ld a, [wEastConnectedMapGroup]
 	cp $ff
-	jr z, .Done
+	ret z
 	ld b, a
 	ld a, [wEastConnectedMapNumber]
 	ld c, a
@@ -833,10 +828,7 @@ FillMapConnections::
 	ld b, a
 	ld a, [wEastConnectedMapWidth]
 	ldh [hConnectionStripLength], a
-	call FillEastConnectionStrip
-
-.Done:
-	ret
+	jmp FillEastConnectionStrip
 
 FillNorthConnectionStrip::
 FillSouthConnectionStrip::
@@ -1463,6 +1455,7 @@ LoadConnectionBlockData::
 	ld de, wScreenSave
 	ld b, SCREEN_META_WIDTH
 	ld c, SCREEN_META_HEIGHT
+	; fallthrough
 
 SaveScreen_LoadConnection::
 .row
@@ -1904,16 +1897,14 @@ CloseSubmenu::
 	call ClearBGPalettes
 	call ReloadTilesetAndPalettes
 	call UpdateSprites
-	call Call_ExitMenu
-	call GSReloadPalettes
+	call ExitMenu
 	jr FinishExitMenu
 
 ExitAllMenus::
 	call ClearBGPalettes
-	call Call_ExitMenu
+	call ExitMenu
 	call ReloadTilesetAndPalettes
 	call UpdateSprites
-	call GSReloadPalettes
 FinishExitMenu::
 	ld b, SCGB_MAPPALS
 	call GetSGBLayout
@@ -2268,11 +2259,4 @@ LoadMapTileset::
 
 	pop bc
 	pop hl
-	ret
-
-DummyEndPredef::
-; Unused function at the end of PredefPointers.
-rept 16
-	nop
-endr
 	ret

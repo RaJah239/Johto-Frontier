@@ -228,10 +228,8 @@ GetMenuTextStartCoord::
 ; bit 7: if set, leave extra room on the left
 	ld a, [wMenuDataFlags]
 	bit 7, a
-	jr z, .bit_7_clear
+	ret z
 	inc c
-
-.bit_7_clear
 	ret
 
 ClearMenuBoxInterior::
@@ -361,10 +359,6 @@ LoadStandardMenuHeader::
 	dw 0
 	db 1 ; default option
 
-Call_ExitMenu::
-	call ExitMenu
-	ret
-
 VerticalMenu::
 	xor a
 	ldh [hBGMapMode], a
@@ -415,12 +409,6 @@ CopyNameFromMenu::
 	pop hl
 	ret
 
-YesNoBox::
-	lb bc, SCREEN_WIDTH - 6, 7
-
-PlaceYesNoBox::
-	jr _YesNoBox
-
 PlaceGenericTwoOptionBox:: ; unreferenced
 	call LoadMenuHeader
 	jr InterpretTwoOptionMenu
@@ -428,7 +416,11 @@ PlaceGenericTwoOptionBox:: ; unreferenced
 NoYesBox::
 	newfarjmp _NoYesBox
 
-_YesNoBox::
+YesNoBox::
+	lb bc, SCREEN_WIDTH - 6, 7
+	; fallthrough
+
+PlaceYesNoBox::
 ; Return nc (yes) or c (no).
 	push bc
 	ld hl, YesNoMenuHeader
@@ -452,6 +444,7 @@ _YesNoBox::
 	add 4
 	ld [wMenuBorderBottomCoord], a
 	call PushWindow
+	; fallthrough
 
 InterpretTwoOptionMenu::
 	call VerticalMenu
@@ -631,11 +624,9 @@ InitMenuCursorAndButtonPermissions::
 .disallow_select
 	ld a, [wMenuDataFlags]
 	bit 2, a
-	jr z, .disallow_left_right
+	ret z
 	set D_LEFT_F, [hl]
 	set D_RIGHT_F, [hl]
-
-.disallow_left_right
 	ret
 
 GetScrollingMenuJoypad::
@@ -648,6 +639,7 @@ GetStaticMenuJoypad::
 	xor a
 	ld [wMenuJoypad], a
 	call StaticMenuJoypad
+	; fallthrough
 
 ContinueGettingMenuJoypad:
 	bit A_BUTTON_F, a

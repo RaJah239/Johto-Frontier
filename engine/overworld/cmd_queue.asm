@@ -154,11 +154,8 @@ CmdQueues_DecAnonJumptableIndex:
 	dec [hl]
 	ret
 
-CmdQueue_Null:
-	ret
-
 CmdQueue_Type1:
-	call SetXYCompareFlags
+CmdQueue_Null:
 	ret
 
 CmdQueue_Type4:

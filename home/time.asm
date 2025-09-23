@@ -185,18 +185,13 @@ InitTime::
 	ret
 
 ClearClock::
-	call .ClearhRTC
-	call SetClock
-	ret
-
-.ClearhRTC:
 	xor a
 	ldh [hRTCSeconds], a
 	ldh [hRTCMinutes], a
 	ldh [hRTCHours], a
 	ldh [hRTCDayLo], a
 	ldh [hRTCDayHi], a
-	ret
+	; fallthrough
 
 SetClock::
 ; set clock data from hram
@@ -211,13 +206,6 @@ SetClock::
 	call LatchClock
 	ld hl, MBC3SRamBank
 	ld de, MBC3RTC
-
-; seems to be a halt check that got partially commented out
-; this block is totally pointless
-	ld [hl], RTC_DH
-	ld a, [de]
-	bit 6, a ; halt
-	ld [de], a
 
 ; seconds
 	ld [hl], RTC_S
