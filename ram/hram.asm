@@ -12,20 +12,20 @@ hRTCHours::   db
 hRTCMinutes:: db
 hRTCSeconds:: db
 
+hMetatileCountWidth:: db
+hMetatileCountHeight:: db
+
 hLZAddress:: dw
 
 hHours:: db
-	ds 1
 hMinutes:: db
-	ds 1
 hSeconds:: db
-	ds 1
-
-	ds 1
 
 hVBlankCounter:: db
 
-	ds 1
+hMapBorderBlock:: db
+hMapWidthPlus6:: db
+hTilesetBlocksAddress:: db
 
 hROMBank:: db
 hVBlank:: db

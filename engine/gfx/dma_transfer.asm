@@ -115,9 +115,9 @@ Function1040d4: ; unreferenced
 .Function
 	ld a, $1
 	ldh [rVBK], a
-	ld a, BANK(w3_d800)
+;	ld a, BANK(w3_d800)
 	ldh [rSVBK], a
-	ld de, w3_d800
+;	ld de, w3_d800
 	ldh a, [hBGMapAddress + 1]
 	ldh [rHDMA1], a
 	ldh a, [hBGMapAddress]
@@ -138,9 +138,9 @@ Function1040fb: ; unreferenced
 .Function
 	ld a, $1
 	ldh [rVBK], a
-	ld a, BANK(w3_d800)
+;	ld a, BANK(w3_d800)
 	ldh [rSVBK], a
-	ld hl, w3_d800
+;	ld hl, w3_d800
 	call HDMATransferToWRAMBank3
 	ret
 
