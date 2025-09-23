@@ -329,7 +329,7 @@ WRAM0
 	"Sprites"
 	"Tilemap"
 	"Miscellaneous"
-	"Unused Map Buffer"
+;	"Unused Map Buffer" used to be here	
 	align 8
 	"Overworld Map"
 	align 4
