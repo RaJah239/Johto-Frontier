@@ -1,10 +1,10 @@
 FarDecompress::
 ; Decompress graphics data from a:hl to de.
 
-	ld [wLZBank], a
+	ldh [hTempBank], a
 	ldh a, [hROMBank]
 	push af
-	ld a, [wLZBank]
+	ldh a, [hTempBank]
 	rst Bankswitch
 
 	call Decompress
@@ -14,7 +14,7 @@ FarDecompress::
 	ret
 
 Decompress::
-; Pokemon GSC uses an lz variant (lz3) for compression.
+; Pokemon Crystal uses an lz variant for compression.
 ; This is mainly (but not necessarily) used for graphics.
 
 ; This function decompresses lz-compressed data from hl to de.
@@ -61,40 +61,44 @@ DEF LZ_LONG_HI   EQU %00000011
 ; x: the new control command
 ; y: the length
 
+; For more information, refer to the code below and in extras/gfx.py.
+
+	; Swap de and hl for speed.
+	call SwapHLDE
+
 	; Save the output address
 	; for rewrite commands.
-	ld a, e
-	ld [wLZAddress], a
-	ld a, d
-	ld [wLZAddress + 1], a
+	ld a, l
+	ldh [hLZAddress], a
+	ld a, h
+	ldh [hLZAddress + 1], a
 
 .Main:
-	ld a, [hl]
-	cp LZ_END
-	ret z
-
-	and LZ_CMD
-
+	ld a, [de]
 	cp LZ_LONG
-	jr nz, .short
+	jr c, .short
+	cp LZ_END
+	jmp z, SwapHLDE
 
+.long
 ; The count is now 10 bits.
 
 	; Read the next 3 bits.
 	; %00011100 -> %11100000
-	ld a, [hl]
 	add a
 	add a ; << 3
 	add a
 
 	; This is our new control code.
 	and LZ_CMD
-	push af
+	ldh [hBuffer], a
 
-	ld a, [hli]
+	ld a, [de]
+	inc de
 	and LZ_LONG_HI
 	ld b, a
-	ld a, [hli]
+	ld a, [de]
+	inc de
 	ld c, a
 
 	; read at least 1 byte
@@ -102,9 +106,11 @@ DEF LZ_LONG_HI   EQU %00000011
 	jr .command
 
 .short
-	push af
+	and LZ_CMD
+	ldh [hBuffer], a
 
-	ld a, [hli]
+	ld a, [de]
+	inc de
 	and LZ_LEN
 	ld c, a
 	ld b, 0
@@ -115,10 +121,13 @@ DEF LZ_LONG_HI   EQU %00000011
 .command
 	; Increment loop counts.
 	; We bail the moment they hit 0.
+	ld a, c
+	and a
+	jr z, .even
 	inc b
-	inc c
+.even
 
-	pop af
+	ldh a, [hBuffer]
 
 	bit LZ_RW, a
 	jr nz, .rewrite
@@ -130,116 +139,103 @@ DEF LZ_LONG_HI   EQU %00000011
 	cp LZ_ZERO
 	jr z, .Zero
 
-; Literal
+.Literal:
 ; Read literal data for bc bytes.
 .lloop
-	dec c
-	jr nz, .lnext
-	dec b
-	jr z, .Main
-
-.lnext
-	ld a, [hli]
-	ld [de], a
+	ld a, [de]
+	ld [hli], a
 	inc de
-	jr .lloop
+	dec c
+	jr nz, .lloop
+	dec b
+	jr nz, .lloop
+	jr .Main
 
 .Iter:
 ; Write the same byte for bc bytes.
-	ld a, [hli]
-
-.iloop
-	dec c
-	jr nz, .inext
-	dec b
-	jr z, .Main
-
-.inext
-	ld [de], a
+	ld a, [de]
 	inc de
-	jr .iloop
+.iloop
+	ld [hli], a
+	dec c
+	jr nz, .iloop
+	dec b
+	jr nz, .iloop
+	jr .Main
 
 .Alt:
 ; Alternate two bytes for bc bytes.
-	dec c
-	jr nz, .anext1
-	dec b
-	jr z, .adone1
-.anext1
-	ld a, [hli]
-	ld [de], a
+	; Store alternating bytes in d and e.
+	ld a, [de]
 	inc de
-
+	push de
+	ldh [hBuffer], a
+	ld a, [de]
+	ld e, a
+	ldh a, [hBuffer]
+	ld d, a
+.aloop
+	ld a, d
+	ld [hli], a
 	dec c
-	jr nz, .anext2
+	jr nz, .anext
 	dec b
-	jr z, .adone2
-.anext2
-	ld a, [hld]
-	ld [de], a
-	inc de
-
-	jr .Alt
-
+	jr z, .adone
+.anext
+	ld a, e
+	ld [hli], a
+	dec c
+	jr nz, .aloop
+	dec b
+	jr nz, .aloop
+.adone
 	; Skip past the bytes we were alternating.
-.adone1
-	inc hl
-.adone2
-	inc hl
+	pop de
+	inc de
 	jr .Main
 
 .Zero:
 ; Write 0 for bc bytes.
 	xor a
-
-.zloop
-	dec c
-	jr nz, .znext
-	dec b
-	jr z, .Main
-
-.znext
-	ld [de], a
-	inc de
-	jr .zloop
+	jr .iloop
 
 .rewrite
 ; Repeat decompressed data from output.
+	push de
 	push hl
-	push af
 
-	ld a, [hli]
+	ld a, [de]
 	bit 7, a ; sign
 	jr z, .positive
 
-; negative
-	; hl = de + -a
-	and %01111111
+	; Relative offsets count backwards from hl and contain an excess of $7f.
+	; In other words, $80 = hl - 1, $81 = hl - 2, ..., $ff = hl - 128.
 	cpl
-	add e
-	ld l, a
-	ld a, -1
-	adc d
-	ld h, a
+	sub $80
+	ld e, a
+	ld d, $ff
 	jr .ok
 
 .positive
 ; Positive offsets are two bytes.
-	ld l, [hl]
 	ld h, a
-	; add to starting output address
-	ld a, [wLZAddress]
-	add l
+	inc de
+	ld a, [de]
 	ld l, a
-	ld a, [wLZAddress + 1]
-	adc h
-	ld h, a
+	ldh a, [hLZAddress]
+	ld e, a
+	ldh a, [hLZAddress + 1]
+	ld d, a
 
 .ok
-	pop af
+	; add to starting output address
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
 
-	cp LZ_REPEAT
-	jr z, .Repeat
+	ldh a, [hBuffer]
+
 	cp LZ_FLIP
 	jr z, .Flip
 	cp LZ_REVERSE
@@ -256,62 +252,61 @@ DEF LZ_LONG_HI   EQU %00000011
 
 .Repeat:
 ; Copy decompressed data for bc bytes.
-	dec c
-	jr nz, .rnext
-	dec b
-	jr z, .donerw
-
-.rnext
-	ld a, [hli]
-	ld [de], a
+.rloop
+	ld a, [de]
 	inc de
-	jr .Repeat
+
+	ld [hli], a
+
+	dec c
+	jr nz, .rloop
+	dec b
+	jr nz, .rloop
+	jr .donerw
 
 .Flip:
 ; Copy bitflipped decompressed data for bc bytes.
-	dec c
-	jr nz, .fnext
-	dec b
-	jr z, .donerw
-
-.fnext
-	ld a, [hli]
-	push bc
-	lb bc, 0, 8
-
 .floop
+	ld a, [de]
+	inc de
+
+	ld [hl], b
+	ld b, 0
+rept 8
 	rra
 	rl b
+endr
+	ld a, b
+	ld b, [hl]
+
+	ld [hli], a
+
 	dec c
 	jr nz, .floop
-
-	ld a, b
-	pop bc
-
-	ld [de], a
-	inc de
-	jr .Flip
+	dec b
+	jr nz, .floop
+	jr .donerw
 
 .Reverse:
-; Copy reversed decompressed data for bc bytes.
+; Copy byte-reversed data for bc bytes.
+.rvloop
+	ld a, [de]
+	dec de
+
+	ld [hli], a
+
 	dec c
-	jr nz, .rvnext
-
+	jr nz, .rvloop
 	dec b
-	jr z, .donerw
-
-.rvnext
-	ld a, [hld]
-	ld [de], a
-	inc de
-	jr .Reverse
+	jr nz, .rvloop
 
 .donerw
-	pop hl
+	pop de
 
-	bit 7, [hl]
-	jr nz, .next
-	inc hl ; positive offset is two bytes
+	ld a, [de]
+	add a
+	jr c, .next
+	inc de ; positive offset is two bytes
 .next
-	inc hl
-	jmp .Main
+	inc de
+	jp .Main
