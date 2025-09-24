@@ -139,6 +139,7 @@
 	charmap "└",         $be
 	charmap "┘",         $bf
 
+	charmap "<⁂>",      $ca
 	charmap "′",         $ce
 	charmap "″",         $cf
 
