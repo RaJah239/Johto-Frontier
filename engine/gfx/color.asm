@@ -1232,6 +1232,9 @@ INCLUDE "gfx/battle/hp_bar.pal"
 ExpBarPalette:
 INCLUDE "gfx/battle/exp_bar.pal"
 
+BattleIconsPalette:
+INCLUDE "gfx/battle/battle_icons.pal"
+
 INCLUDE "data/pokemon/palettes.asm"
 
 INCLUDE "data/trainers/palettes.asm"
