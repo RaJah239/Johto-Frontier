@@ -4716,7 +4716,16 @@ PrintPlayerHUD:
 	hlcoord 18, 8
 	ld [hl], a
 
-.not_own_shiny
+.not_shiny
+	; place floaticon
+	ld a, [wCurSpecies]
+	ld hl, FloatMons
+	call IsInByteArray
+	jr nc, .skip_floaticon
+	hlcoord 19, 8
+	ld [hl], "<float>"
+.skip_floaticon
+
 	ld a, TEMPMON
 	ld [wMonType], a
 	callfar GetGender
