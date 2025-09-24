@@ -54,7 +54,7 @@ StageDataForMysteryGift:
 	ld hl, wMysteryGiftStaging
 	ld de, wMysteryGiftPlayerData
 	ld bc, wMysteryGiftPlayerDataEnd - wMysteryGiftPlayerData
-	jp CopyBytes
+	jmp CopyBytes
 
 .RandomSample:
 	push de

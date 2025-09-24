@@ -375,7 +375,7 @@ Pokedex_UpdateDexEntryScreen:
 	jr nz, .do_menu_action
 	ld a, [hl] ;
  	and START ;
- 	jp nz, Area_Page_map ; .toCry ;
+ 	jmp nz, Area_Page_map ; .toCry ;
  	ld a, [hl]
  	and SELECT ;
  	call nz, Pokedex_toggle_shininess_Entry
@@ -579,13 +579,13 @@ Pokedex_ReinitDexEntryScreen:
 	dec [hl]
 	ld a, [wLastDexMode]
  	cp -2
- 	jp z, Pokedex_Handle_Reinit_Evo
+ 	jr z, Pokedex_Handle_Reinit_Evo
  	ret
  
  Pokedex_Handle_Reinit_Evo:
  	ld a, [wCurDexMode]
  	ld [wLastDexMode], a
- 	jp Pokedex_IncrementDexPointer
+ 	jmp Pokedex_IncrementDexPointer
 	ret
 
 DexEntryScreen_ArrowCursorData:
@@ -790,11 +790,11 @@ Evos_Page:
  	ld hl, hJoyPressed
  	ld a, [hl]
  	bit A_BUTTON_F, a
- 	jp nz, .right_dpad
+ 	jmp nz, .right_dpad
  	ld hl, hJoyLast
  	ld a, [hl]
  	and D_RIGHT
- 	jp nz, .right_dpad
+ 	jmp nz, .right_dpad
  	ld a, [hl]
  .no_second_page
  	ld hl, hJoyLast
@@ -842,9 +842,9 @@ Evos_Page:
  	ld [wPokedexEntryPageNum], a
  	ld a, [wLastDexMode]
  	cp -1
- 	jp z, Evos_Page
+ 	jmp z, Evos_Page
  	cp -2
- 	jp z, Pokedex_ReinitDexEntryScreen
+ 	jmp z, Pokedex_ReinitDexEntryScreen
  
  	hlcoord 8, 1
  	ld a, [wPokedexShinyToggle]
@@ -861,15 +861,15 @@ Evos_Page:
  .right_dpad
  	ld a, [wCurDamage + 1]
  	cp -1
- 	jp nz, .inc_evopage; .nextpage_jump
+ 	jr nz, .inc_evopage; .nextpage_jump
  	xor a
  	ld [wCurDamage], a
- 	jp .nextpage_jump
+ 	jmp .nextpage_jump
  .inc_evopage
  	ld a, [wCurDamage]
  	inc a
  	ld [wCurDamage], a
- 	jp .nextpage_jump
+ 	jmp .nextpage_jump
  
  ; SpriteAnim:
  Pics_Page:
@@ -965,7 +965,7 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  	ld hl, hJoyPressed
  	ld a, [hl]
  	and SELECT ; toggle shininess
- 	jp nz, .toggle_shininess
+ 	jmp nz, .toggle_shininess
  	ld a, [hl]
  	and START
  	push hl
@@ -998,7 +998,7 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  	ld [wPokedexEntryType], a
  	ld a, d
  	ld [wPokedexEntryPageNum], a
- 	jp Pics_Page
+ 	jmp Pics_Page
  .sprite_b
  	call Pokedex_BlackOutBG
  	call DelayFrame
@@ -1030,7 +1030,7 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  	ld [wPokedexEntryPageNum], a
  	ld a, [wLastDexMode]
  	cp -2
- 	jp z, Pokedex_ReinitDexEntryScreen
+ 	jmp z, Pokedex_ReinitDexEntryScreen
  	hlcoord 8, 1
  	ld a, [wPokedexShinyToggle]
  	bit 0, a
@@ -1050,7 +1050,7 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  	ldh [hObjectStructIndex], a
  	farcall SetDexMonIconColor_SpritePage
  	call WaitBGMap
- 	jp .spritepage_loop
+ 	jmp .spritepage_loop
  
  .toCry:
  	call Pokedex_GetSelectedMon
@@ -1396,7 +1396,7 @@ Pokedex_UpdateUnownMode:
 IF USE_COMPRESSED_POKEDEX_GFX == TRUE
  	jr nz, .decompress
 ELSE
-	jp nz, Pokedex_LoadGFX
+	jmp nz, Pokedex_LoadGFX
 ENDC
 	farcall LoadSGBPokedexGFX2
 IF USE_COMPRESSED_POKEDEX_GFX == TRUE
@@ -1914,10 +1914,10 @@ Pokedex_DrawColorScreenBG:
  	call Pokedex_PlaceString
  	hlcoord 3, 11
  	ld de, .Gray
- 	jp Pokedex_PlaceString
+ 	jmp Pokedex_PlaceString
  	; hlcoord 3, 12
  	; ld de, .Mewtwo
- 	; jp Pokedex_PlaceString
+ 	; jmp Pokedex_PlaceString
  
 .Title:
  	db $3b, " COLORS ", $3c, -1
@@ -2813,7 +2813,7 @@ Pokedex_DisplayTypeNotFoundMessage:
 Pokedex_UpdateCursorOAM:
 	ld a, [wCurDexMode]
 	cp DEXMODE_OLD
-	jp z, Pokedex_PutOldModeCursorOAM
+	jr z, Pokedex_PutOldModeCursorOAM
 	call Pokedex_PutNewModeABCModeCursorOAM
 	call Pokedex_PutScrollbarOAM
 	ret
@@ -2915,7 +2915,7 @@ Pokedex_PutNewModeABCModeCursorOAM:
 Pokedex_UpdateSearchResultsCursorOAM:
 	ld a, [wCurDexMode]
 	cp DEXMODE_OLD
-	jp z, Pokedex_PutOldModeCursorOAM
+	jmp z, Pokedex_PutOldModeCursorOAM
 	ld hl, .CursorOAM
 	call Pokedex_LoadCursorOAM
 	ret
@@ -3145,7 +3145,7 @@ Pokedex_ArrowCursorDelay:
 	ret
 
 Pokedex_FillBox:
-	jp FillBoxWithByte
+	jmp FillBoxWithByte
 
 Pokedex_BlackOutBG:
 	ldh a, [rSVBK]
@@ -3530,4 +3530,4 @@ Pokedex_InitColorOption:
  	call WaitBGMap
  	ld a, SCGB_POKEDEX_SEARCH_OPTION
  	call Pokedex_GetSGBLayout
- 	jp Pokedex_IncrementDexPointer
+ 	jmp Pokedex_IncrementDexPointer

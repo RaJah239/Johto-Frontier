@@ -894,7 +894,7 @@ Function17d48d:
 	call Function17e55b
 	call Function17e5af
 	farcall HDMATransferTilemapAndAttrmap_Overworld
-	jp Function17e438
+	jmp Function17e438
 
 Function17d5be:
 	call SetDefaultBGPAndOBP
@@ -1626,7 +1626,7 @@ Function17da9c:
 	call Function17e55b
 	call Function17e5af
 .asm_17daba
-	jp IncCrashCheckPointer
+	jmp IncCrashCheckPointer
 
 .asm_17dabd
 	ld a, [wcd2f]
@@ -1667,7 +1667,7 @@ Function17dadc:
 	call Function17e5af
 
 .asm_17db0e
-	jp IncCrashCheckPointer
+	jmp IncCrashCheckPointer
 
 .asm_17db11
 	ld hl, wcd24
@@ -1701,7 +1701,7 @@ Function17db2d:
 	call Function17e5af
 
 .asm_17db53
-	jp IncCrashCheckPointer
+	jmp IncCrashCheckPointer
 
 Function17db56:
 	ld a, [wcd30]
@@ -1718,7 +1718,7 @@ Function17db56:
 	call Function17e5af
 
 .asm_17db74
-	jp IncCrashCheckPointer
+	jmp IncCrashCheckPointer
 
 Function17db77:
 	ld hl, wcd2d
@@ -1749,7 +1749,7 @@ Function17db77:
 	call Function17e5af
 
 .asm_17dbae
-	jp IncCrashCheckPointer
+	jmp IncCrashCheckPointer
 
 Function17dbb1:
 	ld hl, wcd2f
@@ -1817,7 +1817,7 @@ Function17dbe9:
 	call Function17e451
 	call Function17e55b
 	call Function17e5af
-	jp IncCrashCheckPointer
+	jmp IncCrashCheckPointer
 
 Function17dc1f:
 	call IncCrashCheckPointer
@@ -1955,7 +1955,7 @@ Function17dccf:
 
 .asm_17dd0d
 	pop hl
-	jp HlToCrashCheckPointer
+	jmp HlToCrashCheckPointer
 
 .asm_17dd11
 	pop hl
@@ -2261,7 +2261,7 @@ Function17ded9:
 	ld b, a
 	ld a, [wPartyCount]
 	cp $6
-	jp nc, Function17e026
+	jmp nc, Function17e026
 	xor a
 	ld [wMonType], a
 	push hl
@@ -2440,12 +2440,12 @@ Function17ded9:
 	predef FillPP
 	pop hl
 	pop bc
-	jp asm_17e0ee
+	jr asm_17e0ee
 
 .asm_17e01f
 	ld de, $4
 	add hl, de
-	jp asm_17e0ee
+	jr asm_17e0ee
 
 Function17e026:
 	ret

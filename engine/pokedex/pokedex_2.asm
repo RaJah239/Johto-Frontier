@@ -216,7 +216,7 @@ DisplayDexEntry:
 	call CheckCaughtMon
 	pop hl ; dex entry ptr
  	pop bc ; bank?
-	jp z, UncaughtMon_Info_Erase_PageNum ; ret z ; leave if we havent caught
+	jmp z, UncaughtMon_Info_Erase_PageNum ; ret z ; leave if we havent caught
 ; Get the height of the Pokemon.
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
@@ -439,7 +439,7 @@ DEX_NO_CUSTOM_GFX_PrintType_Short:
  	ld d, h
  	ld e, l
  	pop hl
- 	jp PlaceString
+ 	jmp PlaceString
  
 .Types
  	db "NORM@"

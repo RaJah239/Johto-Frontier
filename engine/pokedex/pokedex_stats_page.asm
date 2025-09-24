@@ -38,14 +38,14 @@ ENDC
 .print_page1
 	call Pokedex_GBS_Stats ; 4 lines
 	call Pokedex_Get_Items ; 3 lines
-	jp DexEntry_IncPageNum
+	jmp DexEntry_IncPageNum
 .print_page2
 IF DEF(MON_STAT_EXP) ; handling EVs/StatExp differences
 	call Pokedex_CatchRate ; 1 line
 	call Pokedex_Get_Growth ; 1 lines
 	call Pokedex_PrintBaseExp ; 1 line
 	call Pokedex_HeightWeight ; 1 line
-	jp DexEntry_IncPageNum
+	jmp DexEntry_IncPageNum
 .print_page3
 ; Vanilla: Handling EVs/StatExp differences
 	; these ones NEED to be in this order
@@ -55,12 +55,12 @@ IF DEF(MON_STAT_EXP) ; handling EVs/StatExp differences
 ELSE
 	call Pokedex_CatchRate ; 1 line
 	call Pokedex_PrintBaseEVs ; 4 lines
-	jp DexEntry_IncPageNum
+	jmp DexEntry_IncPageNum
  .print_page3
  	call Pokedex_Get_Growth ; 1 lines
  	call Pokedex_PrintBaseExp ; 1 line
  	call Pokedex_HeightWeight ; 1 line
-	jp DexEntry_IncPageNum
+	jmp DexEntry_IncPageNum
 .print_page4
 	call Pokedex_EggG_SetUp ; 3 lines
 	call Pokedex_PrintHatchSteps ; 1 line
@@ -521,7 +521,7 @@ Pokedex_PrintBaseEVs:
 	
 	ld a, $6
 	ld [wStatsScreenFlags], a
-	jp .prep_stack
+	jmp .prep_stack
 .start_print
 	ld a, [wBaseHPAtkDefSpdEVs]
 	and %11000000
@@ -635,7 +635,7 @@ Pokedex_PrintBaseEVs:
 	push hl
 	hlcoord 7, 10
 	push hl
-	jp .start_print
+	jmp .start_print
 .dec_stack_count:
 	ld a, [wStatsScreenFlags]
 	dec a

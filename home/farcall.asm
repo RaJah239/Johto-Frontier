@@ -67,13 +67,13 @@ RstBetterFarCall::
 	ld a, [hli]
 	ldh [hTempBank], a
 	add a
-	jr c, .farjp
+	jr c, .farjmp
 	inc hl
 	inc hl
 	push hl
 	dec hl
 	dec hl
-.farjp
+.farjmp
 	ldh a, [hROMBank]
 	push af
 	ld a, [hli]

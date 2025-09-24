@@ -70,7 +70,7 @@ ReadTrainerParty:
 	jp hl
 
 .done
-	jp ComputeTrainerReward
+	jmp ComputeTrainerReward
 
 .cal2
 	ld a, BANK(sMysteryGiftTrainer)
@@ -325,7 +325,7 @@ Battle_GetTrainerName::
 	ld a, [wInBattleTowerBattle]
 	bit 0, a
 	ld hl, wOTPlayerName
-	jp nz, CopyTrainerName
+	jr nz, CopyTrainerName
 
 	ld a, [wOtherTrainerID]
 	ld b, a
@@ -348,7 +348,7 @@ GetTrainerName::
 	call OpenSRAM
 	ld hl, sMysteryGiftPartnerName
 	call CopyTrainerName
-	jp CloseSRAM
+	jmp CloseSRAM
 
 .not_cal2
 	dec c

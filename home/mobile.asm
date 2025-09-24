@@ -26,7 +26,7 @@ MobileAPI::
 	ld [wc981], a
 	rst Bankswitch
 
-	jp _MobileAPI
+	jmp _MobileAPI
 
 ReturnMobileAPI::
 ; Return from _MobileAPI
