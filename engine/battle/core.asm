@@ -4732,6 +4732,15 @@ PrintPlayerHUD:
 	ld [hl], "<float>"
 .skip_floaticon
 
+	ld a, [wBattleMonItem]
+	cp NO_ITEM
+	jr z, .NoItemHeld
+
+	; Draw the held item icon
+	hlcoord 10, 8 ; coordinates of held item
+	ld [hl], $70 ; caught held icon
+.NoItemHeld:
+
 	ld a, TEMPMON
 	ld [wMonType], a
 	callfar GetGender
