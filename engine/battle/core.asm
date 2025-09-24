@@ -4832,6 +4832,15 @@ DrawEnemyHUD:
 	call PrintLevel
 .skip_level
 
+	; place floaticon
+	ld a, [wCurSpecies]
+	ld hl, FloatMons
+	call IsInByteArray
+	jr nc, .skip_floaticon
+	hlcoord 10, 1
+	ld [hl], "<float>"
+.skip_floaticon
+
 	ld hl, wEnemyMonHP
 	ld a, [hli]
 	ldh [hMultiplicand + 1], a
