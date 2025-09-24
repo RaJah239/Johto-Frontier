@@ -433,6 +433,14 @@ StatsScreen_InitUpperHalf:
 	call StatsScreen_PlaceHorizontalDivider
 	call StatsScreen_PlacePageSwitchArrows
 	call StatsScreen_PlaceShinyIcon
+
+	; Place float icon if user levitates
+	ld a, [wCurPartySpecies]
+	ld hl, FloatMons
+	call IsInByteArray
+	ret nc
+	hlcoord 7, 2
+	ld [hl], "<float>"
 	ret
 
 .PlaceHPBar:

@@ -140,6 +140,7 @@
 	charmap "┘",         $bf
 
 	charmap "<⁂>",      $ca
+	charmap "<float>",   $cc
 	charmap "′",         $ce
 	charmap "″",         $cf
 
