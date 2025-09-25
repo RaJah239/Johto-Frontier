@@ -5,6 +5,8 @@
 	const PLAYERSHOUSE2F_BIG_DOLL
 if DEF(_DEBUG)
 	const PLAYERSHOUSE2F_TEST
+	const PLAYERSHOUSE2F_TEST_MON_REGULAR
+	const PLAYERSHOUSE2F_TEST_MON_SHINY
 endc
 
 PlayersHouse2F_MapScripts:
@@ -63,9 +65,13 @@ if DEF(_DEBUG)
 	givepoke MEW, 100, LEFTOVERS
 	givepoke SMEARGLE, 100, FOCUS_BAND
 	givepoke GYARADOS, 100, GOLD_BERRY
-	givepoke DIGLETT, 17
-	givepoke DITTO, 5, METAL_POWDER
-	givepoke ABRA, 5, EVERSTONE
+
+	; 4th, 5th & 6th mons
+	; unneeded presently
+;	givepoke DIGLETT, 17
+;	givepoke DITTO, 5, METAL_POWDER
+;	givepoke ABRA, 5, EVERSTONE
+
 	; first mon shiny
 	loadmem wPartyMon1DVs+0, $ea
 	loadmem wPartyMon1DVs+1, $aa
@@ -263,6 +269,25 @@ TestText:
 	text "<……>"
 	line "<……>"
 	done
+
+RegularMon:
+	faceplayer
+	special HealParty
+	loadwildmon MOLTRES, 5
+	startbattle
+	reloadmap
+	special HealParty
+	end
+
+ShinyMon:
+	faceplayer
+	special HealParty
+	loadwildmon MOLTRES, 5
+	loadvar VAR_BATTLETYPE, BATTLETYPE_FORCESHINY
+	startbattle
+	reloadmap
+	special HealParty
+	end
 endc
 
 PlayersHouse2F_MapEvents:
@@ -286,4 +311,6 @@ PlayersHouse2F_MapEvents:
 	object_event  0,  1, SPRITE_BIG_DOLL, SPRITEMOVEDATA_BIGDOLL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseBigDollScript, EVENT_PLAYERS_HOUSE_2F_BIG_DOLL
 if DEF(_DEBUG)
 	object_event  4,  2, SPRITE_RED, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TestScript, -1
+	object_event  2,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RegularMon, -1
+	object_event  3,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ShinyMon, -1
 endc
