@@ -3718,7 +3718,7 @@ TryToRunAwayFromBattle:
 	cp BATTLETYPE_CELEBI
 	jmp z, .cant_escape
 	cp BATTLETYPE_FORCESHINY
-	jmp z, .cant_escape
+	jmp z, .can_escape
 	cp BATTLETYPE_SUICUNE
 	jmp z, .cant_escape
 
