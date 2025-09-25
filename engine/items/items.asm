@@ -16,6 +16,8 @@ _ReceiveItem::
 	dw .KeyItem
 	dw .Ball
 	dw .TMHM
+	dw .Fruit
+	dw .Battle
 
 .Item:
 	ld h, d
@@ -29,6 +31,14 @@ _ReceiveItem::
 
 .Ball:
 	ld hl, wNumBalls
+	jmp PutItemInPocket
+
+.Fruit:
+	ld hl, wNumFruits
+	jmp PutItemInPocket
+
+.Battle:
+	ld hl, wNumBattles
 	jmp PutItemInPocket
 
 .TMHM:
@@ -57,9 +67,19 @@ _TossItem::
 	dw .KeyItem
 	dw .Ball
 	dw .TMHM
+	dw .Fruit
+	dw .Battle
 
 .Ball:
 	ld hl, wNumBalls
+	jmp RemoveItemFromPocket
+
+.Fruit:
+	ld hl, wNumFruits
+	jmp RemoveItemFromPocket
+
+.Battle:
+	ld hl, wNumBattles
 	jmp RemoveItemFromPocket
 
 .TMHM:
@@ -100,9 +120,19 @@ _CheckItem::
 	dw .KeyItem
 	dw .Ball
 	dw .TMHM
+	dw .Fruit
+	dw .Battle
 
 .Ball:
 	ld hl, wNumBalls
+	jmp CheckTheItem
+
+.Fruit:
+	ld hl, wNumFruits
+	jmp CheckTheItem
+	
+.Battle:
+	ld hl, wNumBattles
 	jmp CheckTheItem
 
 .TMHM:
@@ -137,12 +167,12 @@ GetPocketCapacity:
 	ld c, MAX_ITEMS
 	ld a, e
 	cp LOW(wNumItems)
-	jr nz, .not_bag
+	jr nz, .not_items
 	ld a, d
 	cp HIGH(wNumItems)
 	ret z
 
-.not_bag
+.not_items:
 	ld c, MAX_PC_ITEMS
 	ld a, e
 	cp LOW(wNumPCItems)
@@ -151,7 +181,25 @@ GetPocketCapacity:
 	cp HIGH(wNumPCItems)
 	ret z
 
-.not_pc
+.not_pc:
+	ld c, MAX_FRUITS
+	ld a, e
+	cp LOW(wNumFruits)
+	jr nz, .not_fruits
+	ld a, d
+	cp HIGH(wNumFruits)
+	ret z
+
+.not_fruits:
+	ld c, MAX_BATTLES
+	ld a, e
+	cp LOW(wNumBattles)
+	jr nz, .not_battle
+	ld a, d
+	cp HIGH(wNumBattles)
+	ret z
+
+.not_battle:
 	ld c, MAX_BALLS
 	ret
 

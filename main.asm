@@ -63,7 +63,7 @@ INCLUDE "engine/events/std_collision.asm"
 INCLUDE "engine/events/bug_contest/judging.asm"
 INCLUDE "engine/events/pokerus/apply_pokerus_tick.asm"
 INCLUDE "engine/events/bug_contest/contest_2.asm"
-INCLUDE "engine/pokemon/correct_party_errors.asm"
+
 
 
 SECTION "bank5", ROMX
@@ -83,6 +83,11 @@ INCLUDE "engine/events/daycare.asm"
 INCLUDE "engine/events/print_unown.asm"
 INCLUDE "engine/events/print_photo.asm"
 INCLUDE "engine/pokemon/breeding.asm"
+
+
+SECTION "bank6", ROMX
+
+INCLUDE "engine/pokemon/correct_party_errors.asm"
 
 
 SECTION "Roofs", ROMX
@@ -740,7 +745,6 @@ INCLUDE "engine/gfx/copy_tilemap_at_once.asm"
 SECTION "VWF", ROMX
 
 INCLUDE "engine/gfx/vwf.asm"
-
 
 SECTION "Stadium 2 Checksums", ROMX[$7DE0], BANK[$7F]
 

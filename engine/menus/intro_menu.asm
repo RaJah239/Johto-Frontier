@@ -154,6 +154,12 @@ _ResetWRAM:
 	ld hl, wNumPCItems
 	call .InitList
 
+	ld hl, wNumFruits
+	call .InitList
+	
+	ld hl, wNumBattles
+	call .InitList
+
 	xor a
 	ld [wRoamMon1Species], a
 	ld [wRoamMon2Species], a
