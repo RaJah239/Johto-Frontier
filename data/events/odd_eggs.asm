@@ -36,9 +36,9 @@ DEF prob_total = 0
 OddEggs:
 	table_width NICKNAMED_MON_STRUCT_LENGTH, OddEggs
 
-	db PICHU
+	db PIKACHU
 	db NO_ITEM
-	db THUNDERSHOCK, CHARM, DIZZY_PUNCH, 0
+	db SPLASH, 0, 0, 0
 	dw 02048 ; OT ID
 	dt 125 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
@@ -58,9 +58,9 @@ OddEggs:
 	bigdw 8 ; SDef
 	db "EGG@@@@@@@@"
 
-	db PICHU
+	db RAIKOU
 	db NO_ITEM
-	db THUNDERSHOCK, CHARM, DIZZY_PUNCH, 0
+	db SPLASH, 0, 0, 0
 	dw 00256 ; OT ID
 	dt 125 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
@@ -80,9 +80,9 @@ OddEggs:
 	bigdw 9 ; SDef
 	db "EGG@@@@@@@@"
 
-	db CLEFFA
+	db RAICHU
 	db NO_ITEM
-	db POUND, CHARM, DIZZY_PUNCH, 0
+	db SPLASH, 0, 0, 0
 	dw 04096 ; OT ID
 	dt 125 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
@@ -102,9 +102,9 @@ OddEggs:
 	bigdw 10 ; SDef
 	db "EGG@@@@@@@@"
 
-	db CLEFFA
+	db CHANSEY
 	db NO_ITEM
-	db POUND, CHARM, DIZZY_PUNCH, 0
+	db SPLASH, 0, 0, 0
 	dw 00768 ; OT ID
 	dt 125 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
@@ -124,9 +124,9 @@ OddEggs:
 	bigdw 11 ; SDef
 	db "EGG@@@@@@@@"
 
-	db IGGLYBUFF
+	db BLISSEY
 	db NO_ITEM
-	db SING, CHARM, DIZZY_PUNCH, 0
+	db SPLASH, 0, 0, 0
 	dw 04096 ; OT ID
 	dt 125 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
@@ -146,9 +146,9 @@ OddEggs:
 	bigdw 7 ; SDef
 	db "EGG@@@@@@@@"
 
-	db IGGLYBUFF
+	db SNORLAX
 	db NO_ITEM
-	db SING, CHARM, DIZZY_PUNCH, 0
+	db SPLASH, 0, 0, 0
 	dw 00768 ; OT ID
 	dt 125 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
@@ -168,9 +168,9 @@ OddEggs:
 	bigdw 8 ; SDef
 	db "EGG@@@@@@@@"
 
-	db SMOOCHUM
+	db MEW
 	db NO_ITEM
-	db POUND, LICK, DIZZY_PUNCH, 0
+	db SPLASH, 0, 0, 0
 	dw 03584 ; OT ID
 	dt 125 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
@@ -190,9 +190,9 @@ OddEggs:
 	bigdw 11 ; SDef
 	db "EGG@@@@@@@@"
 
-	db SMOOCHUM
+	db MEWTWO
 	db NO_ITEM
-	db POUND, LICK, DIZZY_PUNCH, 0
+	db SPLASH, 0, 0, 0
 	dw 00512 ; OT ID
 	dt 125 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
@@ -212,9 +212,9 @@ OddEggs:
 	bigdw 12 ; SDef
 	db "EGG@@@@@@@@"
 
-	db MAGBY
+	db TENTACOOL
 	db NO_ITEM
-	db EMBER, DIZZY_PUNCH, 0, 0
+	db SPLASH, 0, 0, 0
 	dw 02560 ; OT ID
 	dt 125 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
@@ -234,9 +234,9 @@ OddEggs:
 	bigdw 10 ; SDef
 	db "EGG@@@@@@@@"
 
-	db MAGBY
+	db TENTACRUEL
 	db NO_ITEM
-	db EMBER, DIZZY_PUNCH, 0, 0
+	db SPLASH, 0, 0, 0
 	dw 00512 ; OT ID
 	dt 125 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
@@ -256,9 +256,9 @@ OddEggs:
 	bigdw 11 ; SDef
 	db "EGG@@@@@@@@"
 
-	db ELEKID
+	db TEDDIURSA
 	db NO_ITEM
-	db QUICK_ATTACK, LEER, DIZZY_PUNCH, 0
+	db SPLASH, 0, 0, 0
 	dw 03072 ; OT ID
 	dt 125 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
@@ -278,9 +278,9 @@ OddEggs:
 	bigdw 10 ; SDef
 	db "EGG@@@@@@@@"
 
-	db ELEKID
+	db LAPRAS
 	db NO_ITEM
-	db QUICK_ATTACK, LEER, DIZZY_PUNCH, 0
+	db SPLASH, 0, 0, 0
 	dw 00512 ; OT ID
 	dt 125 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
@@ -300,9 +300,9 @@ OddEggs:
 	bigdw 11 ; SDef
 	db "EGG@@@@@@@@"
 
-	db TYROGUE
+	db LARVITAR
 	db NO_ITEM
-	db TACKLE, DIZZY_PUNCH, 0, 0
+	db SPLASH, 0, 0, 0
 	dw 02560 ; OT ID
 	dt 125 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
@@ -322,9 +322,9 @@ OddEggs:
 	bigdw 8 ; SDef
 	db "EGG@@@@@@@@"
 
-	db TYROGUE
+	db PUPITAR
 	db NO_ITEM
-	db TACKLE, DIZZY_PUNCH, 0, 0
+	db SPLASH, 0, 0, 0
 	dw 00256 ; OT ID
 	dt 125 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
