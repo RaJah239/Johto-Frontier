@@ -122,7 +122,7 @@ Pokered_MonIndices:
 	db DEWGONG
 	db KINGDRA ; MISSINGNO.
 	db PHANPY ; MISSINGNO.
-	db CATERPIE
+	db TORCHIC
 	db METAPOD
 	db BUTTERFREE
 	db MACHAMP
@@ -253,4 +253,5 @@ Pokered_MonIndices:
 	db QWILFISH
 	db WOBBUFFET
 	db WOBBUFFET
+	db GHOLDENGO
 	assert_table_length NUM_POKEMON + 1

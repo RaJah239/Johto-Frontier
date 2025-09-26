@@ -15,7 +15,7 @@ MonMenuIconPals:
 	icon_pals BLUE,   TEAL   ; SQUIRTLE
 	icon_pals BLUE,   TEAL   ; WARTORTLE
 	icon_pals BLUE,   TEAL   ; BLASTOISE
-	icon_pals GREEN,  BROWN  ; CATERPIE
+	icon_pals RED,    BROWN  ; TORCHIC
 	icon_pals GREEN,  BROWN  ; METAPOD
 	icon_pals TEAL,   PINK   ; BUTTERFREE
 	icon_pals RED,    GREEN  ; WEEDLE
@@ -121,11 +121,11 @@ MonMenuIconPals:
 	icon_pals PINK,   GREEN  ; CHANSEY
 	icon_pals BLUE,   GREEN  ; TANGELA
 	icon_pals BROWN,  GRAY   ; KANGASKHAN
-	icon_pals BLUE,   BLUE   ; HORSEA
-	icon_pals BLUE,   BLUE   ; SEADRA
+	icon_pals BLUE,   TEAL   ; HORSEA
+	icon_pals BLUE,   PURPLE ; SEADRA
 	icon_pals PINK,   BROWN  ; GOLDEEN
 	icon_pals RED,    BROWN  ; SEAKING
-	icon_pals BROWN,  BLUE   ; STARYU
+	icon_pals BROWN,  GRAY   ; STARYU
 	icon_pals PURPLE, BLUE   ; STARMIE
 	icon_pals PINK,   GREEN  ; MR__MIME
 	icon_pals GREEN,  GREEN  ; SCYTHER
@@ -165,7 +165,7 @@ MonMenuIconPals:
 	icon_pals PINK,   PURPLE ; TYPHLOSION
 	icon_pals BLUE,   TEAL   ; TOTODILE
 	icon_pals BLUE,   TEAL   ; CROCONAW
-	icon_pals BLUE,   GREEN  ; FERALIGATR
+	icon_pals BLUE,   TEAL  ; FERALIGATR
 	icon_pals BROWN,  PURPLE ; SENTRET
 	icon_pals BROWN,  PURPLE ; FURRET
 	icon_pals BROWN,  BROWN  ; HOOTHOOT
@@ -257,7 +257,7 @@ MonMenuIconPals:
 	icon_pals BLUE,   TEAL   ; LUGIA
 	icon_pals RED,    BROWN  ; HO_OH
 	icon_pals GREEN,  PINK   ; CELEBI
+	icon_pals BROWN,  BLUE   ; GHOLDENGO
 	assert_table_length NUM_POKEMON
-	icon_pals RED,    RED    ; unused
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

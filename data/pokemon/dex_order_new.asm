@@ -25,7 +25,7 @@ NewPokedexOrder:
 	db PICHU
 	db PIKACHU
 	db RAICHU
-	db CATERPIE
+	db TORCHIC
 	db METAPOD
 	db BUTTERFREE
 	db WEEDLE
@@ -253,4 +253,5 @@ NewPokedexOrder:
 	db MEWTWO
 	db MEW
 	db CELEBI
+	db GHOLDENGO
 	assert_table_length NUM_POKEMON

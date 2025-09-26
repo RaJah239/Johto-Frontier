@@ -9,7 +9,7 @@ FramesPointers:
 	dw SquirtleFrames
 	dw WartortleFrames
 	dw BlastoiseFrames
-	dw CaterpieFrames
+	dw TorchicFrames
 	dw MetapodFrames
 	dw ButterfreeFrames
 	dw WeedleFrames
@@ -251,4 +251,5 @@ FramesPointers:
 	dw LugiaFrames
 	dw HoOhFrames
 	dw CelebiFrames
+	dw GholdengoFrames
 	assert_table_length NUM_POKEMON

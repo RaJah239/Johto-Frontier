@@ -28,7 +28,7 @@
 	const SQUIRTLE   ; 07
 	const WARTORTLE  ; 08
 	const BLASTOISE  ; 09
-	const CATERPIE   ; 0a
+	const TORCHIC    ; 0a
 	const METAPOD    ; 0b
 	const BUTTERFREE ; 0c
 	const WEEDLE     ; 0d
@@ -271,8 +271,8 @@ DEF JOHTO_POKEMON EQU const_value
 	const LUGIA      ; f9
 	const HO_OH      ; fa
 	const CELEBI     ; fb
+	const GHOLDENGO  ; fc
 DEF NUM_POKEMON EQU const_value - 1
-	const_skip       ; fc
 	const EGG        ; fd
 
 ; Unown forms

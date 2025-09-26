@@ -10,7 +10,7 @@ PokedexDataPointerTable:
  	dba SquirtlePokedexEntry
  	dba WartortlePokedexEntry
  	dba BlastoisePokedexEntry
- 	dba CaterpiePokedexEntry
+ 	dba TorchicPokedexEntry
  	dba MetapodPokedexEntry
  	dba ButterfreePokedexEntry
  	dba WeedlePokedexEntry
@@ -252,4 +252,5 @@ PokedexDataPointerTable:
  	dba LugiaPokedexEntry
  	dba HoOhPokedexEntry
  	dba CelebiPokedexEntry
+ 	dba GholdengoiPokedexEntry
 	assert_table_length NUM_POKEMON

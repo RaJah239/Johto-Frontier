@@ -11,7 +11,7 @@ IconPointers:
 	dw SquirtleIcon
 	dw WartortleIcon
 	dw BlastoiseIcon
-	dw CaterpieIcon
+	dw TorchicIcon
 	dw MetapodIcon
 	dw ButterfreeIcon
 	dw WeedleIcon
@@ -253,7 +253,7 @@ IconPointers:
 	dw LugiaIcon
 	dw HoOhIcon
 	dw CelebiIcon
+	dw GholdengoIcon
 	assert_table_length NUM_POKEMON + 1
-	dw NullIcon ; unused
 	dw EggIcon
 	assert_table_length EGG + 1

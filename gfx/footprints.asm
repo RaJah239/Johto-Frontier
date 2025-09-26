@@ -18,7 +18,7 @@ Footprints:
  
  ; 009-016  
  INCBIN "gfx/footprints/blastoise.1bpp"
- INCBIN "gfx/footprints/caterpie.1bpp"
+ INCBIN "gfx/footprints/torchic.1bpp"
  INCBIN "gfx/footprints/metapod.1bpp"
  INCBIN "gfx/footprints/butterfree.1bpp"
  INCBIN "gfx/footprints/weedle.1bpp"
@@ -319,7 +319,7 @@ Footprints:
  INCBIN "gfx/footprints/lugia.1bpp"  
  INCBIN "gfx/footprints/ho_oh.1bpp"  
  INCBIN "gfx/footprints/celebi.1bpp"  
- INCBIN "gfx/footprints/252.1bpp"
+ INCBIN "gfx/footprints/gholdengo.1bpp"
  INCBIN "gfx/footprints/253.1bpp"
  INCBIN "gfx/footprints/254.1bpp"  
  INCBIN "gfx/footprints/255.1bpp"  

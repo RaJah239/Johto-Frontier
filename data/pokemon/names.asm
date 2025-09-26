@@ -9,7 +9,7 @@ PokemonNames::
 	db "SQUIRTLE@@"
 	db "WARTORTLE@"
 	db "BLASTOISE@"
-	db "CATERPIE@@"
+	db "Torchic@@@"
 	db "METAPOD@@@"
 	db "BUTTERFREE"
 	db "WEEDLE@@@@"
@@ -251,8 +251,8 @@ PokemonNames::
 	db "LUGIA@@@@@"
 	db "HO-OH@@@@@"
 	db "CELEBI@@@@"
+	db "Gholdengo@"
 	assert_table_length NUM_POKEMON
-	db "?????@@@@@"
 	db "EGG@@@@@@@"
 	assert_table_length EGG
 	db "?????@@@@@"

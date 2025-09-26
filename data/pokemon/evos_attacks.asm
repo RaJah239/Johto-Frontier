@@ -23,7 +23,7 @@ CharizardEvosAttacks:
 SquirtleEvosAttacks:
 WartortleEvosAttacks:
 BlastoiseEvosAttacks:
-CaterpieEvosAttacks:
+TorchicEvosAttacks:
 MetapodEvosAttacks:
 ButterfreeEvosAttacks:
 WeedleEvosAttacks:
@@ -265,6 +265,7 @@ TyranitarEvosAttacks:
 LugiaEvosAttacks:
 HoOhEvosAttacks:
 CelebiEvosAttacks:
+GholdengoEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, SPLASH
 	db 0 ; no more level-up moves

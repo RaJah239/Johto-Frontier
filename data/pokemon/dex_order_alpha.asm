@@ -20,7 +20,7 @@ AlphabeticalPokedexOrder:
 	db BLISSEY
 	db BULBASAUR
 	db BUTTERFREE
-	db CATERPIE
+	db TORCHIC
 	db CELEBI
 	db CHANSEY
 	db CHARIZARD
@@ -69,6 +69,7 @@ AlphabeticalPokedexOrder:
 	db GASTLY
 	db GENGAR
 	db GEODUDE
+	db GHOLDENGO
 	db GIRAFARIG
 	db GLIGAR
 	db GLOOM

@@ -21,8 +21,8 @@ PokemonPicPointers::
  	dba WartortleBackpic
  	dba BlastoiseFrontpic
  	dba BlastoiseBackpic
- 	dba CaterpieFrontpic
- 	dba CaterpieBackpic
+ 	dba TorchicFrontpic
+ 	dba TorchicBackpic
  	dba MetapodFrontpic
  	dba MetapodBackpic
  	dba ButterfreeFrontpic
@@ -508,9 +508,9 @@ PokemonPicPointers::
  	dba HoOhBackpic
  	dba CelebiFrontpic
  	dba CelebiBackpic
+  	dba GholdengoFrontpic
+ 	dba GholdengoBackpic
  	assert_table_length NUM_POKEMON
- 	dbw -1, -1 ; unused
- 	dbw -1, -1 ; unused
 	dba EggPic
  	dbw -1, -1 ; unused
 	assert_table_length EGG
