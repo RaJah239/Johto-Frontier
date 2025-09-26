@@ -1552,14 +1552,6 @@ Pack_InitGFX:
 	lb bc, 11, 15
 	call ClearBox
 ; ◀▶ POCKET       ▼▲ ITEMS
-	hlcoord 0, 0
-	ld a, $28
-	ld c, SCREEN_WIDTH
-.loop
-	ld [hli], a
-	inc a
-	dec c
-	jr nz, .loop
 	call DrawPocketName
 	call PlacePackGFX
 ; Place the textbox for displaying the item description
@@ -1588,6 +1580,37 @@ PlacePackGFX:
 	ret
 
 DrawPocketName:
+	; Draw the top line.
+	ld a, [wCurPocket]
+	ld e, a
+	ld d, 0
+	ld hl, .separator
+	add hl, de
+	ld b, [hl] ; Stores the X coord of the separator (arrow).
+	ld a, SCREEN_WIDTH
+	sub b
+	ld b, a ; Stores the X coord of the separator (arrow).
+
+	hlcoord 0, 0
+	ld c, $29
+	ld d, SCREEN_WIDTH
+.loop
+	ld a, d
+	cp b
+	jr nz, .regular_char
+
+	ld a, $28
+	jr .display_char
+
+.regular_char
+	ld a, c
+	inc c
+.display_char
+	ld [hli], a
+	dec d
+	jr nz, .loop
+
+	; Draw the box.
 	ld a, [wCurPocket]
 	; * 15
 	ld d, a
@@ -1616,6 +1639,15 @@ DrawPocketName:
 	dec c
 	jr nz, .row
 	ret
+
+; needs to be in this order
+.separator:
+	db 0 ; Items Pocket
+	db 3 ; Balls Pocket
+	db 13; Key Pocket
+	db 17; TM/HMs Pocket
+	db 6 ; Fruit Pocket
+	db 9; Battle Pocket
 
 .tilemap: ; 5x12
 ; the 5x3 pieces correspond to *_POCKET constants

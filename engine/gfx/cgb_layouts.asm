@@ -1137,51 +1137,63 @@ _CGB_PokedexSearchOption:
 
 _CGB_PackPals:
 ; pack pals
-	ld a, [wBattleType]
-	cp BATTLETYPE_TUTORIAL
-	jr z, .tutorial_male
+    ld a, [wBattleType]
+    cp BATTLETYPE_TUTORIAL
+    jr z, .tutorial_male
 
-	ld a, [wPlayerGender]
-	bit PLAYERGENDER_FEMALE_F, a
-	jr z, .tutorial_male
+    ld a, [wPlayerGender]
+    bit PLAYERGENDER_FEMALE_F, a
+    jr z, .tutorial_male
 
-	ld hl, .KrisPackPals
-	jr .got_gender
+    ld hl, .KrisPackPals
+    jr .got_gender
 
 .tutorial_male
-	ld hl, .ChrisPackPals
+    ld hl, .ChrisPackPals
 
 .got_gender
-	ld de, wBGPals1
-	ld bc, 6 palettes
-	ld a, BANK(wBGPals1)
-	call FarCopyWRAM
-	call WipeAttrmap
-	hlcoord 0, 0, wAttrmap
-	lb bc, 1, 10
-	ld a, $1
-	call FillBoxCGB
-	hlcoord 10, 0, wAttrmap
-	lb bc, 1, 10
-	ld a, $2
-	call FillBoxCGB
-	hlcoord 7, 2, wAttrmap
-	lb bc, 9, 1
-	ld a, $3
-	call FillBoxCGB
-	hlcoord 0, 7, wAttrmap
-	lb bc, 3, 5
-	ld a, $4
-	call FillBoxCGB
-	hlcoord 0, 3, wAttrmap
-	lb bc, 3, 5
-	ld a, $5
-	call FillBoxCGB
-	call ApplyAttrmap
-	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+    ld de, wBGPals1
+    ld bc, 7 palettes
+    ld a, BANK(wBGPals1)
+    call FarCopyWRAM
+    call WipeAttrmap
+    hlcoord 7, 2, wAttrmap ; red bag arrow
+    lb bc, 9, 1
+    ld a, $1
+    call FillBoxCGB
+    hlcoord 0, 0, wAttrmap ; ribbon 1st
+    lb bc, 1, 6
+    ld a, $2
+    call FillBoxCGB
+    hlcoord 6, 0, wAttrmap  ; ribbon 2nd
+    lb bc, 1, 5
+    ld a, $3
+    call FillBoxCGB
+    hlcoord 9, 0, wAttrmap  ; ribbon 3rd
+    lb bc, 1, 6
+    ld a, $4
+    call FillBoxCGB
+    hlcoord 13, 0, wAttrmap  ; ribbon 4th
+    lb bc, 1, 5
+    ld a, $5
+    call FillBoxCGB
+    hlcoord 18, 0, wAttrmap  ; ribbon 5th
+    lb bc, 1, 2
+    ld a, $6
+    call FillBoxCGB
+;    hlcoord 0, 7, wAttrmap ; box with pocket name
+;    lb bc, 3, 5
+;    ld a, $4
+;    call FillBoxCGB
+    hlcoord 0, 3, wAttrmap ; bag graphic
+    lb bc, 3, 5
+    ld a, $1
+    call FillBoxCGB
+    call ApplyAttrmap
+    call ApplyPals
+    ld a, TRUE
+    ldh [hCGBPalUpdate], a
+    ret
 
 .ChrisPackPals:
 INCLUDE "gfx/pack/pack.pal"
