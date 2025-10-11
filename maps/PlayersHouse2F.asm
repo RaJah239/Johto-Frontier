@@ -4,9 +4,10 @@
 	const PLAYERSHOUSE2F_DOLL_2
 	const PLAYERSHOUSE2F_BIG_DOLL
 if DEF(_DEBUG)
-	const PLAYERSHOUSE2F_TEST
+	const PLAYERSHOUSE2F_TEST_TRAINER
 	const PLAYERSHOUSE2F_TEST_MON_REGULAR
 	const PLAYERSHOUSE2F_TEST_MON_SHINY
+	const PLAYERSHOUSE2F_DEBUGCOLOURPICKER
 endc
 
 PlayersHouse2F_MapScripts:
@@ -254,7 +255,7 @@ PlayersRadioText4:
 	done
 
 if DEF(_DEBUG)
-TestScript:
+TestTrainerScript:
 	faceplayer
 	special HealParty
 	winlosstext TestText, TestText
@@ -269,7 +270,7 @@ TestText:
 	line "<……>"
 	done
 
-RegularMon:
+RegularMonScript:
 	faceplayer
 	special HealParty
 	loadwildmon MOLTRES, 5
@@ -278,7 +279,7 @@ RegularMon:
 	special HealParty
 	end
 
-ShinyMon:
+ShinyMonScript:
 	faceplayer
 	special HealParty
 	loadwildmon MOLTRES, 5
@@ -286,6 +287,10 @@ ShinyMon:
 	startbattle
 	reloadmap
 	special HealParty
+	end
+
+DebugColourPickerScript:
+	special DebugColourPicker
 	end
 endc
 
@@ -309,7 +314,8 @@ PlayersHouse2F_MapEvents:
 	object_event  5,  4, SPRITE_DOLL_2, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseDoll2Script, EVENT_PLAYERS_HOUSE_2F_DOLL_2
 	object_event  0,  1, SPRITE_BIG_DOLL, SPRITEMOVEDATA_BIGDOLL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseBigDollScript, EVENT_PLAYERS_HOUSE_2F_BIG_DOLL
 if DEF(_DEBUG)
-	object_event  4,  2, SPRITE_RED, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TestScript, -1
-	object_event  2,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RegularMon, -1
-	object_event  3,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ShinyMon, -1
+	object_event  4,  2, SPRITE_RED, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TestTrainerScript, -1
+	object_event  2,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RegularMonScript, -1
+	object_event  3,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ShinyMonScript, -1
+	object_event  7,  5, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_TREE, OBJECTTYPE_SCRIPT, 0, DebugColourPickerScript, -1
 endc

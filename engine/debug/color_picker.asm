@@ -32,7 +32,7 @@
 	const DEBUGCOLORMAIN_INITTMHM       ; 4
 	const DEBUGCOLORMAIN_TMHMJOYPAD     ; 5
 
-DebugColorPicker: ; unreferenced
+DebugColourPicker:
 ; A debug menu to test monster and trainer palettes at runtime.
 	ldh a, [hCGB]
 	and a
@@ -385,13 +385,13 @@ DebugColor_InitScreen:
 	ret
 
 .ShinyText:
-	db "レア", DEBUGTEST_BLACK, DEBUGTEST_BLACK, "@" ; Rare (shiny)
+	db "Shiny", DEBUGTEST_BLACK, DEBUGTEST_BLACK, "@" ; Rare (shiny)
 
 .NormalText:
-	db "ノーマル@" ; Normal
+	db "Normal@" ; Normal
 
 .SwitchText:
-	db DEBUGTEST_A, "きりかえ▶@" ; (A) Switches
+	db DEBUGTEST_A, "Swap▶@" ; (A) Switches
 
 DebugColor_LoadRGBMeter:
 	decoord 0, 11, wAttrmap
@@ -794,10 +794,10 @@ DebugColor_PrintTMHMMove:
 	ret
 
 .AbleText:
-	db "おぼえられる@" ; Learnable
+	db "Learns@" ; Learnable
 
 .NotAbleText:
-	db "おぼえられない@" ; Not learnable
+	db "Nope@" ; Not learnable
 
 .GetNumberedTMHM:
 	cp NUM_TMS
@@ -1058,9 +1058,9 @@ DebugColor_PlaceCursor:
 	ret
 
 DebugColor_AreYouFinishedString:
-	db   "おわりますか？"                        ; Are you finished?
-	next "はい<DOT><DOT><DOT>", DEBUGTEST_A ; YES...(A)
-	next "いいえ<DOT><DOT>", DEBUGTEST_B     ; NO..(B)
+	db   "Done?"                        ; Are you finished?
+	next "Y<DOT><DOT><DOT>", DEBUGTEST_A ; YES...(A)
+	next "N<DOT><DOT>", DEBUGTEST_B     ; NO..(B)
 	db   "@"
 
 DebugColor_UpArrowGFX:
