@@ -591,10 +591,17 @@ Continue_DisplayGameTime:
 	jp PrintNum
 
 OakSpeech:
+if DEF(_DEBUG)
+ 	ld hl, wOptions
+	set BATTLE_SHIFT, [hl] ; SET MODE
+endc
+
 	farcall InitClock
 	call RotateFourPalettesLeft
 	call ClearTilemap
 
+if DEF(_DEBUG)
+else
 	ld de, MUSIC_ROUTE_30
 	call PlayMusic
 
@@ -650,6 +657,7 @@ OakSpeech:
 
 	ld hl, OakText5
 	call PrintText
+endc
 	call RotateThreePalettesRight
 	call ClearTilemap
 
@@ -664,8 +672,11 @@ OakSpeech:
 	ld hl, OakText6
 	call PrintText
 	call NamePlayer
+if DEF(_DEBUG)
+else
 	ld hl, OakText7
 	call PrintText
+endc
 	ret
 
 OakText1:
