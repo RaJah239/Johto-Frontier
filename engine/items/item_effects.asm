@@ -351,7 +351,6 @@ PokeBallEffect:
 	ld a, $ff
 .max_1
 
-; BUG: HELD_CATCH_CHANCE has no effect (see docs/bugs_and_glitches.md)
 	ld d, a
 	push de
 	ld a, [wBattleMonItem]
@@ -438,8 +437,6 @@ PokeBallEffect:
 	ld a, [hl]
 	push af
 	set SUBSTATUS_TRANSFORMED, [hl]
-
-; BUG: Catching a Transformed Pokémon always catches a Ditto (see docs/bugs_and_glitches.md)
 	bit SUBSTATUS_TRANSFORMED, a
 	jr nz, .load_data
 
