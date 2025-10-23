@@ -2,9 +2,9 @@
 
 KantoMonSpecials:
 	table_width 1, KantoMonSpecials
-	db  65 ; BULBASAUR
-	db  80 ; IVYSAUR
-	db 100 ; VENUSAUR
+	db  65 ; ROTOM
+	db  80 ; VICTINI
+	db 100 ; DURALUDON
 	db  50 ; CHARMANDER
 	db  65 ; CHARMELEON
 	db  85 ; CHARIZARD
@@ -12,24 +12,24 @@ KantoMonSpecials:
 	db  65 ; WARTORTLE
 	db  85 ; BLASTOISE
 	db  20 ; TORCHIC
-	db  25 ; METAPOD
-	db  80 ; BUTTERFREE
-	db  20 ; WEEDLE
-	db  25 ; KAKUNA
-	db  45 ; BEEDRILL
+	db  25 ; COMBUSKEN
+	db  80 ; BLAZIKEN
+	db  20 ; TURTWIG
+	db  25 ; GROTLE
+	db  45 ; TORTERRA
 	db  35 ; PIDGEY
 	db  50 ; PIDGEOTTO
 	db  70 ; PIDGEOT
-	db  25 ; RATTATA
-	db  50 ; RATICATE
-	db  31 ; SPEAROW
-	db  61 ; FEAROW
-	db  40 ; EKANS
-	db  65 ; ARBOK
+	db  25 ; BUNEARY
+	db  50 ; LOPUNNY
+	db  31 ; SHROOMISH
+	db  61 ; BRELOOM
+	db  40 ; SKORUPI
+	db  65 ; DRAPION
 	db  50 ; PIKACHU
 	db  90 ; RAICHU
-	db  30 ; SANDSHREW
-	db  55 ; SANDSLASH
+	db  30 ; DRILBUR
+	db  55 ; EXCADRILL
 	db  40 ; NIDORAN_F
 	db  55 ; NIDORINA
 	db  75 ; NIDOQUEEN
@@ -38,119 +38,119 @@ KantoMonSpecials:
 	db  75 ; NIDOKING
 	db  60 ; CLEFAIRY
 	db  85 ; CLEFABLE
-	db  65 ; VULPIX
-	db 100 ; NINETALES
-	db  25 ; JIGGLYPUFF
-	db  50 ; WIGGLYTUFF
+	db  65 ; MAKUHITA
+	db 100 ; HARIYAMA
+	db  25 ; BALTOY
+	db  50 ; CLAYDOL
 	db  40 ; ZUBAT
 	db  75 ; GOLBAT
-	db  75 ; ODDISH
-	db  85 ; GLOOM
-	db 100 ; VILEPLUME
-	db  55 ; PARAS
-	db  80 ; PARASECT
-	db  40 ; VENONAT
-	db  90 ; VENOMOTH
-	db  45 ; DIGLETT
-	db  70 ; DUGTRIO
+	db  75 ; RHYHORN
+	db  85 ; OMANYTE
+	db 100 ; WYRDEER
+	db  55 ; LARVESTA
+	db  80 ; LILEEP
+	db  40 ; JOLTIK
+	db  90 ; GALVANTULA
+	db  45 ; AXEW
+	db  70 ; FRAXURE
 	db  40 ; MEOWTH
 	db  65 ; PERSIAN
-	db  50 ; PSYDUCK
-	db  80 ; GOLDUCK
+	db  50 ; SWABLU
+	db  80 ; ALTARIA
 	db  35 ; MANKEY
 	db  60 ; PRIMEAPE
 	db  50 ; GROWLITHE
 	db  80 ; ARCANINE
-	db  40 ; POLIWAG
-	db  50 ; POLIWHIRL
-	db  70 ; POLIWRATH
-	db 105 ; ABRA
-	db 120 ; KADABRA
-	db 135 ; ALAKAZAM
-	db  35 ; MACHOP
-	db  50 ; MACHOKE
-	db  65 ; MACHAMP
+	db  40 ; GIBLE
+	db  50 ; GABITE
+	db  70 ; GARCHOMP
+	db 105 ; ROWLET
+	db 120 ; DARTRIX
+	db 135 ; DECIDUEYE
+	db  35 ; VENIPEDE
+	db  50 ; WHIRLIPEDE
+	db  65 ; SCOLIPEDE
 	db  70 ; BELLSPROUT
 	db  85 ; WEEPINBELL
 	db 100 ; VICTREEBEL
 	db 100 ; TENTACOOL
 	db 120 ; TENTACRUEL
-	db  30 ; GEODUDE
-	db  45 ; GRAVELER
-	db  55 ; GOLEM
+	db  30 ; SNORUNT
+	db  45 ; GLALIE
+	db  55 ; FROSLASS
 	db  65 ; PONYTA
 	db  80 ; RAPIDASH
 	db  40 ; SLOWPOKE
 	db  80 ; SLOWBRO
 	db  95 ; MAGNEMITE
 	db 120 ; MAGNETON
-	db  58 ; FARFETCH_D
+	db  58 ; TROPIUS
 	db  35 ; DODUO
 	db  60 ; DODRIO
 	db  70 ; SEEL
 	db  95 ; DEWGONG
 	db  40 ; GRIMER
 	db  65 ; MUK
-	db  45 ; SHELLDER
-	db  85 ; CLOYSTER
+	db  45 ; RIOLU
+	db  85 ; LUCARIO
 	db 100 ; GASTLY
 	db 115 ; HAUNTER
 	db 130 ; GENGAR
 	db  30 ; ONIX
 	db  90 ; DROWZEE
 	db 115 ; HYPNO
-	db  25 ; KRABBY
-	db  50 ; KINGLER
+	db  25 ; BRONZOR
+	db  50 ; BRONZONG
 	db  55 ; VOLTORB
 	db  80 ; ELECTRODE
-	db  60 ; EXEGGCUTE
-	db 125 ; EXEGGUTOR
-	db  40 ; CUBONE
-	db  50 ; MAROWAK
-	db  35 ; HITMONLEE
-	db  35 ; HITMONCHAN
-	db  60 ; LICKITUNG
+	db  60 ; WIMPOD
+	db 125 ; GOLISOPOD
+	db  40 ; LITWICK
+	db  50 ; LAMPENT
+	db  35 ; RALTS
+	db  35 ; KIRLIA
+	db  60 ; YANMEGA
 	db  60 ; KOFFING
 	db  85 ; WEEZING
-	db  30 ; RHYHORN
-	db  45 ; RHYDON
+	db  30 ; MAGNEZONE
+	db  45 ; URSALUNA
 	db 105 ; CHANSEY
 	db 100 ; TANGELA
-	db  40 ; KANGASKHAN
+	db  40 ; GLISCOR
 	db  70 ; HORSEA
 	db  95 ; SEADRA
-	db  50 ; GOLDEEN
-	db  80 ; SEAKING
+	db  50 ; VOLCARONA
+	db  80 ; SMOOCHUM
 	db  70 ; STARYU
 	db 100 ; STARMIE
-	db 100 ; MR__MIME
+	db 100 ; MISMAGIUS
 	db  55 ; SCYTHER
 	db  95 ; JYNX
 	db  85 ; ELECTABUZZ
-	db  85 ; MAGMAR
-	db  55 ; PINSIR
+	db  85 ; KATU
+	db  55 ; ANNIHILAPE
 	db  70 ; TAUROS
 	db  20 ; MAGIKARP
 	db 100 ; GYARADOS
 	db  95 ; LAPRAS
 	db  48 ; DITTO
 	db  65 ; EEVEE
-	db 110 ; VAPOREON
-	db 110 ; JOLTEON
-	db 110 ; FLAREON
+	db 110 ; KLEAVOR
+	db 110 ; TANGROWTH
+	db 110 ; MAMOSWINE
 	db  75 ; PORYGON
-	db  90 ; OMANYTE
+	db  90 ; WEAVILE
 	db 115 ; OMASTAR
-	db  45 ; KABUTO
-	db  70 ; KABUTOPS
+	db  45 ; SNEASLER
+	db  70 ; DARKRAI
 	db  60 ; AERODACTYL
 	db  65 ; SNORLAX
 	db 125 ; ARTICUNO
 	db 125 ; ZAPDOS
 	db 125 ; MOLTRES
-	db  50 ; DRATINI
-	db  70 ; DRAGONAIR
-	db 100 ; DRAGONITE
+	db  50 ; BAGON
+	db  70 ; SHELGON
+	db 100 ; SALAMENCE
 	db 154 ; MEWTWO
 	db 100 ; MEW
 	assert_table_length JOHTO_POKEMON - 1

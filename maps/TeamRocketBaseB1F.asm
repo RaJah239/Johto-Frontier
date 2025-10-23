@@ -457,11 +457,10 @@ VoltorbExplodingTrap:
 
 GeodudeExplodingTrap:
 	special FadeOutToWhite
-	cry GEODUDE
 	special FadeInFromWhite
 	setlasttalked -1
 	loadvar VAR_BATTLETYPE, BATTLETYPE_TRAP
-	loadwildmon GEODUDE, 21
+	loadwildmon DITTO, 21
 	startbattle
 	end
 

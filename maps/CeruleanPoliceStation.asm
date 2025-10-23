@@ -17,7 +17,6 @@ CeruleanPoliceStationPokefanFScript:
 CeruleanDiglett:
 	opentext
 	writetext CeruleanDiglettText
-	cry DIGLETT
 	waitbutton
 	closetext
 	end

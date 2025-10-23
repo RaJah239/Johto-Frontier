@@ -2,9 +2,9 @@ IconPointers:
 ; entries correspond to ICON_* constants (see constants/icon_constants.asm)
 	table_width 2, IconPointers
 	dw NullIcon
-	dw BulbasaurIcon
-	dw IvysaurIcon
-	dw VenusaurIcon
+	dw RotomIcon
+	dw VictiniIcon
+	dw DuraludonIcon
 	dw CharmanderIcon
 	dw CharmeleonIcon
 	dw CharizardIcon
@@ -12,24 +12,24 @@ IconPointers:
 	dw WartortleIcon
 	dw BlastoiseIcon
 	dw TorchicIcon
-	dw MetapodIcon
-	dw ButterfreeIcon
-	dw WeedleIcon
-	dw KakunaIcon
-	dw BeedrillIcon
+	dw CombuskenIcon
+	dw BlazikenIcon
+	dw TurtwigIcon
+	dw GrotleIcon
+	dw TorterraIcon
 	dw PidgeyIcon
 	dw PidgeottoIcon
 	dw PidgeotIcon
-	dw RattataIcon
-	dw RaticateIcon
-	dw SpearowIcon
-	dw FearowIcon
-	dw EkansIcon
-	dw ArbokIcon
+	dw BunearyIcon
+	dw LopunnyIcon
+	dw ShroomishIcon
+	dw BreloomIcon
+	dw SkorupiIcon
+	dw DrapionIcon
 	dw PikachuIcon
 	dw RaichuIcon
-	dw SandshrewIcon
-	dw SandslashIcon
+	dw DrilburIcon
+	dw ExcadrillIcon
 	dw NidoranFIcon
 	dw NidorinaIcon
 	dw NidoqueenIcon
@@ -38,119 +38,119 @@ IconPointers:
 	dw NidokingIcon
 	dw ClefairyIcon
 	dw ClefableIcon
-	dw VulpixIcon
-	dw NinetalesIcon
-	dw JigglypuffIcon
-	dw WigglytuffIcon
+	dw MakuhitaIcon
+	dw HariyamaIcon
+	dw BaltoyIcon
+	dw ClaydolIcon
 	dw ZubatIcon
 	dw GolbatIcon
-	dw OddishIcon
-	dw GloomIcon
-	dw VileplumeIcon
-	dw ParasIcon
-	dw ParasectIcon
-	dw VenonatIcon
-	dw VenomothIcon
-	dw DiglettIcon
-	dw DugtrioIcon
+	dw RhyhornIcon
+	dw OmanyteIcon
+	dw WyrdeerIcon
+	dw LarvestaIcon
+	dw LileepIcon
+	dw JoltikIcon
+	dw GalvantulaIcon
+	dw AxewIcon
+	dw FraxureIcon
 	dw MeowthIcon
 	dw PersianIcon
-	dw PsyduckIcon
-	dw GolduckIcon
+	dw SwabluIcon
+	dw AltariaIcon
 	dw MankeyIcon
 	dw PrimeapeIcon
 	dw GrowlitheIcon
 	dw ArcanineIcon
-	dw PoliwagIcon
-	dw PoliwhirlIcon
-	dw PoliwrathIcon
-	dw AbraIcon
-	dw KadabraIcon
-	dw AlakazamIcon
-	dw MachopIcon
-	dw MachokeIcon
-	dw MachampIcon
+	dw GibleIcon
+	dw GabiteIcon
+	dw GarchompIcon
+	dw RowletIcon
+	dw DartrixIcon
+	dw DecidueyeIcon
+	dw VenipedeIcon
+	dw WhirlipedeIcon
+	dw ScolipedeIcon
 	dw BellsproutIcon
 	dw WeepinbellIcon
 	dw VictreebelIcon
 	dw TentacoolIcon
 	dw TentacruelIcon
-	dw GeodudeIcon
-	dw GravelerIcon
-	dw GolemIcon
+	dw SnoruntIcon
+	dw GlalieIcon
+	dw FroslassIcon
 	dw PonytaIcon
 	dw RapidashIcon
 	dw SlowpokeIcon
 	dw SlowbroIcon
 	dw MagnemiteIcon
 	dw MagnetonIcon
-	dw FarfetchdIcon
+	dw TropiusIcon
 	dw DoduoIcon
 	dw DodrioIcon
 	dw SeelIcon
 	dw DewgongIcon
 	dw GrimerIcon
 	dw MukIcon
-	dw ShellderIcon
-	dw CloysterIcon
+	dw RioluIcon
+	dw LucarioIcon
 	dw GastlyIcon
 	dw HaunterIcon
 	dw GengarIcon
 	dw OnixIcon
 	dw DrowzeeIcon
 	dw HypnoIcon
-	dw KrabbyIcon
-	dw KinglerIcon
+	dw BronzorIcon
+	dw BronzongIcon
 	dw VoltorbIcon
 	dw ElectrodeIcon
-	dw ExeggcuteIcon
-	dw ExeggutorIcon
-	dw CuboneIcon
-	dw MarowakIcon
-	dw HitmonleeIcon
-	dw HitmonchanIcon
-	dw LickitungIcon
+	dw WimpodIcon
+	dw GolisopodIcon
+	dw LitwickIcon
+	dw LampentIcon
+	dw RaltsIcon
+	dw KirliaIcon
+	dw YanmegaIcon
 	dw KoffingIcon
 	dw WeezingIcon
-	dw RhyhornIcon
-	dw RhydonIcon
+	dw MagnezoneIcon
+	dw UrsalunaIcon
 	dw ChanseyIcon
 	dw TangelaIcon
-	dw KangaskhanIcon
+	dw GliscorIcon
 	dw HorseaIcon
 	dw SeadraIcon
-	dw GoldeenIcon
-	dw SeakingIcon
+	dw VolcaronaIcon
+	dw SmoochumIcon
 	dw StaryuIcon
 	dw StarmieIcon
-	dw MrMimeIcon
+	dw MismagiusIcon
 	dw ScytherIcon
 	dw JynxIcon
 	dw ElectabuzzIcon
-	dw MagmarIcon
-	dw PinsirIcon
+	dw KatuIcon
+	dw AnnihilapeIcon
 	dw TaurosIcon
 	dw MagikarpIcon
 	dw GyaradosIcon
 	dw LaprasIcon
 	dw DittoIcon
 	dw EeveeIcon
-	dw VaporeonIcon
-	dw JolteonIcon
-	dw FlareonIcon
+	dw KleavorIcon
+	dw TangrowthIcon
+	dw MamoswineIcon
 	dw PorygonIcon
-	dw OmanyteIcon
+	dw WeavileIcon
 	dw OmastarIcon
-	dw KabutoIcon
-	dw KabutopsIcon
+	dw SneaslerIcon
+	dw DarkraiIcon
 	dw AerodactylIcon
 	dw SnorlaxIcon
 	dw ArticunoIcon
 	dw ZapdosIcon
 	dw MoltresIcon
-	dw DratiniIcon
-	dw DragonairIcon
-	dw DragoniteIcon
+	dw BagonIcon
+	dw ShelgonIcon
+	dw SalamenceIcon
 	dw MewtwoIcon
 	dw MewIcon
 	dw ChikoritaIcon
@@ -162,20 +162,20 @@ IconPointers:
 	dw TotodileIcon
 	dw CroconawIcon
 	dw FeraligatrIcon
-	dw SentretIcon
-	dw FurretIcon
+	dw WurmpleIcon
+	dw SilcoonIcon
 	dw HoothootIcon
 	dw NoctowlIcon
-	dw LedybaIcon
-	dw LedianIcon
+	dw BeautiflyIcon
+	dw DustoxIcon
 	dw SpinarakIcon
 	dw AriadosIcon
 	dw CrobatIcon
 	dw ChinchouIcon
 	dw LanturnIcon
-	dw PichuIcon
-	dw CleffaIcon
-	dw IgglybuffIcon
+	dw RegirockIcon
+	dw RegiceIcon
+	dw RegisteelIcon
 	dw TogepiIcon
 	dw TogeticIcon
 	dw NatuIcon
@@ -183,44 +183,44 @@ IconPointers:
 	dw MareepIcon
 	dw FlaaffyIcon
 	dw AmpharosIcon
-	dw BellossomIcon
+	dw CascoonIcon
 	dw MarillIcon
 	dw AzumarillIcon
 	dw SudowoodoIcon
-	dw PolitoedIcon
-	dw HoppipIcon
-	dw SkiploomIcon
-	dw JumpluffIcon
-	dw AipomIcon
+	dw CradilyIcon
+	dw SnoverIcon
+	dw AbomasnowIcon
+	dw SolrockIcon
+	dw LunatoneIcon
 	dw SunkernIcon
 	dw SunfloraIcon
 	dw YanmaIcon
 	dw WooperIcon
 	dw QuagsireIcon
-	dw EspeonIcon
+	dw PorygonZIcon
 	dw UmbreonIcon
-	dw MurkrowIcon
-	dw SlowkingIcon
+	dw RhydonIcon
+	dw TogekissIcon
 	dw MisdreavusIcon
 	dw UnownIcon
-	dw WobbuffetIcon
-	dw GirafarigIcon
-	dw PinecoIcon
-	dw ForretressIcon
-	dw DunsparceIcon
+	dw SylveonIcon
+	dw ChandelureIcon
+	dw FerrothornIcon
+	dw FerroseedIcon
+	dw HaxorusIcon
 	dw GligarIcon
 	dw SteelixIcon
 	dw SnubbullIcon
 	dw GranbullIcon
-	dw QwilfishIcon
+	dw ElekidIcon
 	dw ScizorIcon
 	dw ShuckleIcon
 	dw HeracrossIcon
 	dw SneaselIcon
 	dw TeddiursaIcon
 	dw UrsaringIcon
-	dw SlugmaIcon
-	dw MagcargoIcon
+	dw FeebasIcon
+	dw MiloticIcon
 	dw SwinubIcon
 	dw Piloswine
 	dw CorsolaIcon
@@ -237,11 +237,11 @@ IconPointers:
 	dw Porygon2Icon
 	dw StantlerIcon
 	dw SmeargleIcon
-	dw TyrogueIcon
-	dw HitmontopIcon
-	dw SmoochumIcon
-	dw ElekidIcon
-	dw MagbyIcon
+	dw GalladeIcon
+	dw GardevoirIcon
+	dw AbsolIcon
+	dw RegigigasIcon
+	dw NownIcon
 	dw MiltankIcon
 	dw BlisseyIcon
 	dw RaikouIcon

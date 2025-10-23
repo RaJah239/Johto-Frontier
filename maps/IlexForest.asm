@@ -119,7 +119,6 @@ IlexForestFarfetchdScript:
 	writetext Text_ItsTheMissingPokemon
 	promptbutton
 	writetext Text_Kwaaaa
-	cry FARFETCH_D
 	waitbutton
 	closetext
 	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetchd_Pos1_Pos2
@@ -327,7 +326,6 @@ IlexForestFarfetchdScript:
 	faceplayer
 	opentext
 	writetext Text_Kwaaaa
-	cry FARFETCH_D
 	waitbutton
 	closetext
 	end
@@ -336,7 +334,6 @@ IlexForestFarfetchdScript:
 	faceplayer
 	opentext
 	writetext Text_Kwaaaa
-	cry FARFETCH_D
 	waitbutton
 	closetext
 	readvar VAR_FACING

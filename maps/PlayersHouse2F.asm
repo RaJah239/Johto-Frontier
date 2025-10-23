@@ -68,9 +68,8 @@ if DEF(_DEBUG)
 
 	; 4th, 5th & 6th mons
 	; unneeded presently
-;	givepoke DIGLETT, 17
+;	givepoke RAIKOU, 17
 ;	givepoke DITTO, 5, METAL_POWDER
-;	givepoke ABRA, 5, EVERSTONE
 
 	; first mon shiny
 	loadmem wPartyMon1DVs+0, $ea

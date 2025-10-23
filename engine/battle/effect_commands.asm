@@ -1150,7 +1150,7 @@ BattleCommand_Critical:
 	jr .Tally
 
 .Farfetchd:
-	cp FARFETCH_D
+	cp TROPIUS
 	jr nz, .FocusEnergy
 	ld a, [hl]
 	cp STICK
@@ -2720,8 +2720,8 @@ ThickClubBoost:
 ; it's holding a Thick Club, double it.
 	push bc
 	push de
-	ld b, CUBONE
-	ld c, MAROWAK
+	ld b, DITTO
+	ld c, DITTO
 	ld d, THICK_CLUB
 	call SpeciesItemBoost
 	pop de

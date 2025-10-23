@@ -5,11 +5,8 @@ SometimesFleeMons:
 	db MAGNEMITE
 	db GRIMER
 	db TANGELA
-	db MR__MIME
 	db EEVEE
 	db PORYGON
-	db DRATINI
-	db DRAGONAIR
 	db TOGETIC
 	db UMBREON
 	db UNOWN
@@ -18,7 +15,6 @@ SometimesFleeMons:
 	db -1
 
 OftenFleeMons:
-	db CUBONE
 	db ARTICUNO
 	db ZAPDOS
 	db MOLTRES

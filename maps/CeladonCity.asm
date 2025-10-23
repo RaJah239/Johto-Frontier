@@ -25,7 +25,6 @@ CeladonCityFisherScript:
 CeladonCityPoliwrath:
 	opentext
 	writetext CeladonCityPoliwrathText
-	cry POLIWRATH
 	waitbutton
 	closetext
 	end

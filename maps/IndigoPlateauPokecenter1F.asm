@@ -170,7 +170,6 @@ TeleportGuyScript:
 AbraScript:
 	opentext
 	writetext AbraText
-	cry ABRA
 	waitbutton
 	closetext
 	end

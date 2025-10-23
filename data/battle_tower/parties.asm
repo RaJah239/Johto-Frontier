@@ -444,7 +444,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "KENTAROSU@@"
 
-	db MR__MIME
+	db FEEBAS
 	db QUICK_CLAW
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -909,7 +909,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "KENTAROSU@@"
 
-	db MR__MIME
+	db FEEBAS
 	db QUICK_CLAW
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1373,7 +1373,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "KENTAROSU@@"
 
-	db MR__MIME
+	db FEEBAS
 	db QUICK_CLAW
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1837,7 +1837,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "KENTAROSU@@"
 
-	db MR__MIME
+	db FEEBAS
 	db QUICK_CLAW
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2302,7 +2302,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "KENTAROSU@@"
 
-	db MR__MIME
+	db FEEBAS
 	db QUICK_CLAW
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2767,7 +2767,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "KENTAROSU@@"
 
-	db MR__MIME
+	db FEEBAS
 	db QUICK_CLAW
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -3232,7 +3232,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "KENTAROSU@@"
 
-	db MR__MIME
+	db FEEBAS
 	db QUICK_CLAW
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -3697,7 +3697,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "KENTAROSU@@"
 
-	db MR__MIME
+	db FEEBAS
 	db QUICK_CLAW
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -4162,7 +4162,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "KENTAROSU@@"
 
-	db MR__MIME
+	db FEEBAS
 	db QUICK_CLAW
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -4627,7 +4627,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "KENTAROSU@@"
 
-	db MR__MIME
+	db FEEBAS
 	db QUICK_CLAW
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID

@@ -19,7 +19,6 @@ MrFujisHouseLassScript:
 MrFujisPsyduck:
 	opentext
 	writetext MrFujisPsyduckText
-	cry PSYDUCK
 	waitbutton
 	closetext
 	end

@@ -19,7 +19,6 @@ PewterPokecenter1FTeacherScript:
 PewterJigglypuff:
 	opentext
 	writetext PewterJigglypuffText
-	cry JIGGLYPUFF
 	waitbutton
 	closetext
 	end

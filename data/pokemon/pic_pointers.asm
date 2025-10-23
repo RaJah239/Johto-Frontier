@@ -3,12 +3,12 @@
 PokemonPicPointers::
 ; entries correspond to Pokémon species, two apiece
 	table_width 3 * 2, PokemonPicPointers
-	dba BulbasaurFrontpic
- 	dba BulbasaurBackpic
- 	dba IvysaurFrontpic
- 	dba IvysaurBackpic
- 	dba VenusaurFrontpic
- 	dba VenusaurBackpic
+	dba RotomFrontpic
+ 	dba RotomBackpic
+ 	dba VictiniFrontpic
+ 	dba VictiniBackpic
+ 	dba DuraludonFrontpic
+ 	dba DuraludonBackpic
  	dba CharmanderFrontpic
  	dba CharmanderBackpic
  	dba CharmeleonFrontpic
@@ -23,42 +23,42 @@ PokemonPicPointers::
  	dba BlastoiseBackpic
  	dba TorchicFrontpic
  	dba TorchicBackpic
- 	dba MetapodFrontpic
- 	dba MetapodBackpic
- 	dba ButterfreeFrontpic
- 	dba ButterfreeBackpic
- 	dba WeedleFrontpic
- 	dba WeedleBackpic
- 	dba KakunaFrontpic
- 	dba KakunaBackpic
- 	dba BeedrillFrontpic
- 	dba BeedrillBackpic
+ 	dba CombuskenFrontpic
+ 	dba CombuskenBackpic
+ 	dba BlazikenFrontpic
+ 	dba BlazikenBackpic
+ 	dba TurtwigFrontpic
+ 	dba TurtwigBackpic
+ 	dba GrotleFrontpic
+ 	dba GrotleBackpic
+ 	dba TorterraFrontpic
+ 	dba TorterraBackpic
  	dba PidgeyFrontpic
  	dba PidgeyBackpic
  	dba PidgeottoFrontpic
  	dba PidgeottoBackpic
  	dba PidgeotFrontpic
  	dba PidgeotBackpic
- 	dba RattataFrontpic
- 	dba RattataBackpic
- 	dba RaticateFrontpic
- 	dba RaticateBackpic
- 	dba SpearowFrontpic
- 	dba SpearowBackpic
- 	dba FearowFrontpic
- 	dba FearowBackpic
- 	dba EkansFrontpic
- 	dba EkansBackpic
- 	dba ArbokFrontpic
- 	dba ArbokBackpic
+ 	dba BunearyFrontpic
+ 	dba BunearyBackpic
+ 	dba LopunnyFrontpic
+ 	dba LopunnyBackpic
+ 	dba ShroomishFrontpic
+ 	dba ShroomishBackpic
+ 	dba BreloomFrontpic
+ 	dba BreloomBackpic
+ 	dba SkorupiFrontpic
+ 	dba SkorupiBackpic
+ 	dba DrapionFrontpic
+ 	dba DrapionBackpic
  	dba PikachuFrontpic
  	dba PikachuBackpic
  	dba RaichuFrontpic
  	dba RaichuBackpic
- 	dba SandshrewFrontpic
- 	dba SandshrewBackpic
- 	dba SandslashFrontpic
- 	dba SandslashBackpic
+ 	dba DrilburFrontpic
+ 	dba DrilburBackpic
+ 	dba ExcadrillFrontpic
+ 	dba ExcadrillBackpic
  	dba NidoranFFrontpic
  	dba NidoranFBackpic
  	dba NidorinaFrontpic
@@ -75,44 +75,44 @@ PokemonPicPointers::
  	dba ClefairyBackpic
  	dba ClefableFrontpic
  	dba ClefableBackpic
- 	dba VulpixFrontpic
- 	dba VulpixBackpic
- 	dba NinetalesFrontpic
- 	dba NinetalesBackpic
- 	dba JigglypuffFrontpic
- 	dba JigglypuffBackpic
- 	dba WigglytuffFrontpic
- 	dba WigglytuffBackpic
+ 	dba MakuhitaFrontpic
+ 	dba MakuhitaBackpic
+ 	dba HariyamaFrontpic
+ 	dba HariyamaBackpic
+ 	dba BaltoyFrontpic
+ 	dba BaltoyBackpic
+ 	dba ClaydolFrontpic
+ 	dba ClaydolBackpic
  	dba ZubatFrontpic
  	dba ZubatBackpic
  	dba GolbatFrontpic
  	dba GolbatBackpic
- 	dba OddishFrontpic
- 	dba OddishBackpic
- 	dba GloomFrontpic
- 	dba GloomBackpic
- 	dba VileplumeFrontpic
- 	dba VileplumeBackpic
- 	dba ParasFrontpic
- 	dba ParasBackpic
- 	dba ParasectFrontpic
- 	dba ParasectBackpic
- 	dba VenonatFrontpic
- 	dba VenonatBackpic
- 	dba VenomothFrontpic
- 	dba VenomothBackpic
- 	dba DiglettFrontpic
- 	dba DiglettBackpic
- 	dba DugtrioFrontpic
- 	dba DugtrioBackpic
+ 	dba RhyhornFrontpic
+ 	dba RhyhornBackpic
+ 	dba OmanyteFrontpic
+ 	dba OmanyteBackpic
+ 	dba WyrdeerFrontpic
+ 	dba WyrdeerBackpic
+ 	dba LarvestaFrontpic
+ 	dba LarvestaBackpic
+ 	dba LileepFrontpic
+ 	dba LileepBackpic
+ 	dba JoltikFrontpic
+ 	dba JoltikBackpic
+ 	dba GalvantulaFrontpic
+ 	dba GalvantulaBackpic
+ 	dba AxewFrontpic
+ 	dba AxewBackpic
+ 	dba FraxureFrontpic
+ 	dba FraxureBackpic
  	dba MeowthFrontpic
  	dba MeowthBackpic
  	dba PersianFrontpic
  	dba PersianBackpic
- 	dba PsyduckFrontpic
- 	dba PsyduckBackpic
- 	dba GolduckFrontpic
- 	dba GolduckBackpic
+ 	dba SwabluFrontpic
+ 	dba SwabluBackpic
+ 	dba AltariaFrontpic
+ 	dba AltariaBackpic
  	dba MankeyFrontpic
  	dba MankeyBackpic
  	dba PrimeapeFrontpic
@@ -121,24 +121,24 @@ PokemonPicPointers::
  	dba GrowlitheBackpic
  	dba ArcanineFrontpic
  	dba ArcanineBackpic
- 	dba PoliwagFrontpic
- 	dba PoliwagBackpic
- 	dba PoliwhirlFrontpic
- 	dba PoliwhirlBackpic
- 	dba PoliwrathFrontpic
- 	dba PoliwrathBackpic
- 	dba AbraFrontpic
- 	dba AbraBackpic
- 	dba KadabraFrontpic
- 	dba KadabraBackpic
- 	dba AlakazamFrontpic
- 	dba AlakazamBackpic
- 	dba MachopFrontpic
- 	dba MachopBackpic
- 	dba MachokeFrontpic
- 	dba MachokeBackpic
- 	dba MachampFrontpic
- 	dba MachampBackpic
+ 	dba GibleFrontpic
+ 	dba GibleBackpic
+ 	dba GabiteFrontpic
+ 	dba GabiteBackpic
+ 	dba GarchompFrontpic
+ 	dba GarchompBackpic
+ 	dba RowletFrontpic
+ 	dba RowletBackpic
+ 	dba DartrixFrontpic
+ 	dba DartrixBackpic
+ 	dba DecidueyeFrontpic
+ 	dba DecidueyeBackpic
+ 	dba VenipedeFrontpic
+ 	dba VenipedeBackpic
+ 	dba WhirlipedeFrontpic
+ 	dba WhirlipedeBackpic
+ 	dba ScolipedeFrontpic
+ 	dba ScolipedeBackpic
  	dba BellsproutFrontpic
  	dba BellsproutBackpic
  	dba WeepinbellFrontpic
@@ -149,12 +149,12 @@ PokemonPicPointers::
  	dba TentacoolBackpic
  	dba TentacruelFrontpic
  	dba TentacruelBackpic
- 	dba GeodudeFrontpic
- 	dba GeodudeBackpic
- 	dba GravelerFrontpic
- 	dba GravelerBackpic
- 	dba GolemFrontpic
- 	dba GolemBackpic
+ 	dba SnoruntFrontpic
+ 	dba SnoruntBackpic
+ 	dba GlalieFrontpic
+ 	dba GlalieBackpic
+ 	dba FroslassFrontpic
+ 	dba FroslassBackpic
  	dba PonytaFrontpic
  	dba PonytaBackpic
  	dba RapidashFrontpic
@@ -167,8 +167,8 @@ PokemonPicPointers::
  	dba MagnemiteBackpic
  	dba MagnetonFrontpic
  	dba MagnetonBackpic
- 	dba FarfetchDFrontpic
- 	dba FarfetchDBackpic
+ 	dba TropiusFrontpic
+ 	dba TropiusBackpic
  	dba DoduoFrontpic
  	dba DoduoBackpic
  	dba DodrioFrontpic
@@ -181,10 +181,10 @@ PokemonPicPointers::
  	dba GrimerBackpic
  	dba MukFrontpic
  	dba MukBackpic
- 	dba ShellderFrontpic
- 	dba ShellderBackpic
- 	dba CloysterFrontpic
- 	dba CloysterBackpic
+ 	dba RioluFrontpic
+ 	dba RioluBackpic
+ 	dba LucarioFrontpic
+ 	dba LucarioBackpic
  	dba GastlyFrontpic
  	dba GastlyBackpic
  	dba HaunterFrontpic
@@ -197,66 +197,66 @@ PokemonPicPointers::
  	dba DrowzeeBackpic
  	dba HypnoFrontpic
  	dba HypnoBackpic
- 	dba KrabbyFrontpic
- 	dba KrabbyBackpic
- 	dba KinglerFrontpic
- 	dba KinglerBackpic
+ 	dba BronzorFrontpic
+ 	dba BronzorBackpic
+ 	dba BronzongFrontpic
+ 	dba BronzongBackpic
  	dba VoltorbFrontpic
  	dba VoltorbBackpic
  	dba ElectrodeFrontpic
  	dba ElectrodeBackpic
- 	dba ExeggcuteFrontpic
- 	dba ExeggcuteBackpic
- 	dba ExeggutorFrontpic
- 	dba ExeggutorBackpic
- 	dba CuboneFrontpic
- 	dba CuboneBackpic
- 	dba MarowakFrontpic
- 	dba MarowakBackpic
- 	dba HitmonleeFrontpic
- 	dba HitmonleeBackpic
- 	dba HitmonchanFrontpic
- 	dba HitmonchanBackpic
- 	dba LickitungFrontpic
- 	dba LickitungBackpic
+ 	dba WimpodFrontpic
+ 	dba WimpodBackpic
+ 	dba GolisopodFrontpic
+ 	dba GolisopodBackpic
+ 	dba LitwickFrontpic
+ 	dba LitwickBackpic
+ 	dba LampentFrontpic
+ 	dba LampentBackpic
+ 	dba RaltsFrontpic
+ 	dba RaltsBackpic
+ 	dba KirliaFrontpic
+ 	dba KirliaBackpic
+ 	dba YanmegaFrontpic
+ 	dba YanmegaBackpic
  	dba KoffingFrontpic
  	dba KoffingBackpic
  	dba WeezingFrontpic
  	dba WeezingBackpic
- 	dba RhyhornFrontpic
- 	dba RhyhornBackpic
- 	dba RhydonFrontpic
- 	dba RhydonBackpic
+ 	dba MagnezoneFrontpic
+ 	dba MagnezoneBackpic
+ 	dba UrsalunaFrontpic
+ 	dba UrsalunaBackpic
  	dba ChanseyFrontpic
  	dba ChanseyBackpic
  	dba TangelaFrontpic
  	dba TangelaBackpic
- 	dba KangaskhanFrontpic
- 	dba KangaskhanBackpic
+ 	dba GliscorFrontpic
+ 	dba GliscorBackpic
  	dba HorseaFrontpic
  	dba HorseaBackpic
  	dba SeadraFrontpic
  	dba SeadraBackpic
- 	dba GoldeenFrontpic
- 	dba GoldeenBackpic
- 	dba SeakingFrontpic
- 	dba SeakingBackpic
+ 	dba VolcaronaFrontpic
+ 	dba VolcaronaBackpic
+ 	dba SmoochumFrontpic
+ 	dba SmoochumBackpic
  	dba StaryuFrontpic
  	dba StaryuBackpic
  	dba StarmieFrontpic
  	dba StarmieBackpic
- 	dba MrMimeFrontpic
- 	dba MrMimeBackpic
+ 	dba MismagiusFrontpic
+ 	dba MismagiusBackpic
  	dba ScytherFrontpic
  	dba ScytherBackpic
  	dba JynxFrontpic
  	dba JynxBackpic
  	dba ElectabuzzFrontpic
  	dba ElectabuzzBackpic
- 	dba MagmarFrontpic
- 	dba MagmarBackpic
- 	dba PinsirFrontpic
- 	dba PinsirBackpic
+ 	dba KatuFrontpic
+ 	dba KatuBackpic
+ 	dba AnnihilapeFrontpic
+ 	dba AnnihilapeBackpic
  	dba TaurosFrontpic
  	dba TaurosBackpic
  	dba MagikarpFrontpic
@@ -269,22 +269,22 @@ PokemonPicPointers::
  	dba DittoBackpic
  	dba EeveeFrontpic
  	dba EeveeBackpic
- 	dba VaporeonFrontpic
- 	dba VaporeonBackpic
- 	dba JolteonFrontpic
- 	dba JolteonBackpic
- 	dba FlareonFrontpic
- 	dba FlareonBackpic
+ 	dba KleavorFrontpic
+ 	dba KleavorBackpic
+ 	dba TangrowthFrontpic
+ 	dba TangrowthBackpic
+ 	dba MamoswineFrontpic
+ 	dba MamoswineBackpic
  	dba PorygonFrontpic
  	dba PorygonBackpic
- 	dba OmanyteFrontpic
- 	dba OmanyteBackpic
+ 	dba WeavileFrontpic
+ 	dba WeavileBackpic
  	dba OmastarFrontpic
  	dba OmastarBackpic
- 	dba KabutoFrontpic
- 	dba KabutoBackpic
- 	dba KabutopsFrontpic
- 	dba KabutopsBackpic
+ 	dba SneaslerFrontpic
+ 	dba SneaslerBackpic
+ 	dba DarkraiFrontpic
+ 	dba DarkraiBackpic
  	dba AerodactylFrontpic
  	dba AerodactylBackpic
  	dba SnorlaxFrontpic
@@ -295,12 +295,12 @@ PokemonPicPointers::
  	dba ZapdosBackpic
  	dba MoltresFrontpic
  	dba MoltresBackpic
- 	dba DratiniFrontpic
- 	dba DratiniBackpic
- 	dba DragonairFrontpic
- 	dba DragonairBackpic
- 	dba DragoniteFrontpic
- 	dba DragoniteBackpic
+ 	dba BagonFrontpic
+ 	dba BagonBackpic
+ 	dba ShelgonFrontpic
+ 	dba ShelgonBackpic
+ 	dba SalamenceFrontpic
+ 	dba SalamenceBackpic
  	dba MewtwoFrontpic
  	dba MewtwoBackpic
  	dba MewFrontpic
@@ -323,18 +323,18 @@ PokemonPicPointers::
  	dba CroconawBackpic
  	dba FeraligatrFrontpic
  	dba FeraligatrBackpic
- 	dba SentretFrontpic
- 	dba SentretBackpic
- 	dba FurretFrontpic
- 	dba FurretBackpic
+ 	dba WurmpleFrontpic
+ 	dba WurmpleBackpic
+ 	dba SilcoonFrontpic
+ 	dba SilcoonBackpic
  	dba HoothootFrontpic
  	dba HoothootBackpic
  	dba NoctowlFrontpic
  	dba NoctowlBackpic
- 	dba LedybaFrontpic
- 	dba LedybaBackpic
- 	dba LedianFrontpic
- 	dba LedianBackpic
+ 	dba BeautiflyFrontpic
+ 	dba BeautiflyBackpic
+ 	dba DustoxFrontpic
+ 	dba DustoxBackpic
  	dba SpinarakFrontpic
  	dba SpinarakBackpic
  	dba AriadosFrontpic
@@ -345,12 +345,12 @@ PokemonPicPointers::
  	dba ChinchouBackpic
  	dba LanturnFrontpic
  	dba LanturnBackpic
- 	dba PichuFrontpic
- 	dba PichuBackpic
- 	dba CleffaFrontpic
- 	dba CleffaBackpic
- 	dba IgglybuffFrontpic
- 	dba IgglybuffBackpic
+ 	dba RegirockFrontpic
+ 	dba RegirockBackpic
+ 	dba RegiceFrontpic
+ 	dba RegiceBackpic
+ 	dba RegisteelFrontpic
+ 	dba RegisteelBackpic
  	dba TogepiFrontpic
  	dba TogepiBackpic
  	dba TogeticFrontpic
@@ -365,24 +365,24 @@ PokemonPicPointers::
  	dba FlaaffyBackpic
  	dba AmpharosFrontpic
  	dba AmpharosBackpic
- 	dba BellossomFrontpic
- 	dba BellossomBackpic
+ 	dba CascoonFrontpic
+ 	dba CascoonBackpic
  	dba MarillFrontpic
  	dba MarillBackpic
  	dba AzumarillFrontpic
  	dba AzumarillBackpic
  	dba SudowoodoFrontpic
  	dba SudowoodoBackpic
- 	dba PolitoedFrontpic
- 	dba PolitoedBackpic
- 	dba HoppipFrontpic
- 	dba HoppipBackpic
- 	dba SkiploomFrontpic
- 	dba SkiploomBackpic
- 	dba JumpluffFrontpic
- 	dba JumpluffBackpic
- 	dba AipomFrontpic
- 	dba AipomBackpic
+ 	dba CradilyFrontpic
+ 	dba CradilyBackpic
+ 	dba SnoverFrontpic
+ 	dba SnoverBackpic
+ 	dba AbomasnowFrontpic
+ 	dba AbomasnowBackpic
+ 	dba SolrockFrontpic
+ 	dba SolrockBackpic
+ 	dba LunatoneFrontpic
+ 	dba LunatoneBackpic
  	dba SunkernFrontpic
  	dba SunkernBackpic
  	dba SunfloraFrontpic
@@ -393,14 +393,14 @@ PokemonPicPointers::
  	dba WooperBackpic
  	dba QuagsireFrontpic
  	dba QuagsireBackpic
- 	dba EspeonFrontpic
- 	dba EspeonBackpic
+ 	dba PorygonZFrontpic
+ 	dba PorygonZBackpic
  	dba UmbreonFrontpic
  	dba UmbreonBackpic
- 	dba MurkrowFrontpic
- 	dba MurkrowBackpic
- 	dba SlowkingFrontpic
- 	dba SlowkingBackpic
+ 	dba RhydonFrontpic
+ 	dba RhydonBackpic
+ 	dba TogekissFrontpic
+ 	dba TogekissBackpic
  	dba MisdreavusFrontpic
  	dba MisdreavusBackpic
  
@@ -408,16 +408,16 @@ PokemonPicPointers::
  	dbw -1, -1
  	dbw -1, -1
 
-	dba WobbuffetFrontpic
- 	dba WobbuffetBackpic
- 	dba GirafarigFrontpic
- 	dba GirafarigBackpic
- 	dba PinecoFrontpic
- 	dba PinecoBackpic
- 	dba ForretressFrontpic
- 	dba ForretressBackpic
- 	dba DunsparceFrontpic
- 	dba DunsparceBackpic
+	dba SylveonFrontpic
+ 	dba SylveonBackpic
+ 	dba ChandelureFrontpic
+ 	dba ChandelureBackpic
+ 	dba FerrothornFrontpic
+ 	dba FerrothornBackpic
+ 	dba FerroseedFrontpic
+ 	dba FerroseedBackpic
+ 	dba HaxorusFrontpic
+ 	dba HaxorusBackpic
  	dba GligarFrontpic
  	dba GligarBackpic
  	dba SteelixFrontpic
@@ -426,8 +426,8 @@ PokemonPicPointers::
  	dba SnubbullBackpic
  	dba GranbullFrontpic
  	dba GranbullBackpic
- 	dba QwilfishFrontpic
- 	dba QwilfishBackpic
+ 	dba ElekidFrontpic
+ 	dba ElekidBackpic
  	dba ScizorFrontpic
  	dba ScizorBackpic
  	dba ShuckleFrontpic
@@ -440,10 +440,10 @@ PokemonPicPointers::
  	dba TeddiursaBackpic
  	dba UrsaringFrontpic
  	dba UrsaringBackpic
- 	dba SlugmaFrontpic
- 	dba SlugmaBackpic
- 	dba MagcargoFrontpic
- 	dba MagcargoBackpic
+ 	dba FeebasFrontpic
+ 	dba FeebasBackpic
+ 	dba MiloticFrontpic
+ 	dba MiloticBackpic
  	dba SwinubFrontpic
  	dba SwinubBackpic
  	dba PiloswineFrontpic
@@ -476,16 +476,16 @@ PokemonPicPointers::
  	dba StantlerBackpic
  	dba SmeargleFrontpic
  	dba SmeargleBackpic
- 	dba TyrogueFrontpic
- 	dba TyrogueBackpic
- 	dba HitmontopFrontpic
- 	dba HitmontopBackpic
- 	dba SmoochumFrontpic
- 	dba SmoochumBackpic
- 	dba ElekidFrontpic
- 	dba ElekidBackpic
- 	dba MagbyFrontpic
- 	dba MagbyBackpic
+ 	dba GalladeFrontpic
+ 	dba GalladeBackpic
+ 	dba GardevoirFrontpic
+ 	dba GardevoirBackpic
+ 	dba AbsolFrontpic
+ 	dba AbsolBackpic
+ 	dba RegigigasFrontpic
+ 	dba RegigigasBackpic
+ 	dba NownFrontpic
+ 	dba NownBackpic
  	dba MiltankFrontpic
  	dba MiltankBackpic
  	dba BlisseyFrontpic
