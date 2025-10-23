@@ -1,5 +1,6 @@
 Pokered_MonIndices:
 	table_width 1, Pokered_MonIndices
+	db CYNDAQUIL
 	db URSALUNA
 	db GLISCOR
 	db NIDORAN_M
@@ -189,12 +190,11 @@ Pokered_MonIndices:
 	db WYRDEER
 	db BELLSPROUT
 	db WEEPINBELL
-	db VICTREEBEL
 	assert_table_length 190 ; gen 1 mon indexes
+	db VICTREEBEL
 	db CHIKORITA
 	db BAYLEEF
 	db MEGANIUM
-	db CYNDAQUIL
 	db QUILAVA
 	db TYPHLOSION
 	db TOTODILE

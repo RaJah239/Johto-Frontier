@@ -600,7 +600,7 @@ endr
 
 GetIconBank:
 	ld a, [wCurIcon]
-	cp MAGIKARP ; first species in "Mon Icons 2"
+	cp MANKEY ; first species in "Mon Icons 2"
 	lb bc, BANK("Mon Icons 1"), 8
 	ret c
 	ld b, BANK("Mon Icons 2")
