@@ -6,10 +6,6 @@ Footprints:
 ; Entries correspond to Pokémon species, two apiece, 8 tops then 8 bottoms
 	table_width LEN_1BPP_TILE * 4, Footprints
 
-; Note:
-; Repeated footprints : staryu, skorupi, 
-
-; 001-008  
  INCBIN "gfx/footprints/cyndaquil.1bpp" 
  INCBIN "gfx/footprints/quilava.1bpp"
  INCBIN "gfx/footprints/typhlosion.1bpp"
@@ -133,8 +129,8 @@ Footprints:
  INCBIN "gfx/footprints/scolipede.1bpp"
  INCBIN "gfx/footprints/joltik.1bpp" 
  INCBIN "gfx/footprints/galvantula.1bpp"
- INCBIN "gfx/footprints/skorupi.1bpp" 
- INCBIN "gfx/footprints/skorupi.1bpp" ; DRAPION
+ INCBIN "gfx/footprints/skorupi_line.1bpp" 
+ INCBIN "gfx/footprints/skorupi_line.1bpp" ; DRAPION
  INCBIN "gfx/footprints/larvesta.1bpp" 
  INCBIN "gfx/footprints/blank.1bpp" ; VOLCARONA
  INCBIN "gfx/footprints/tropius.1bpp"
@@ -174,8 +170,8 @@ Footprints:
  INCBIN "gfx/footprints/magneton.1bpp" ; MAGNEZONE
  INCBIN "gfx/footprints/shuckle.1bpp"
  INCBIN "gfx/footprints/corsola.1bpp"  
- INCBIN "gfx/footprints/staryu.1bpp"  
- INCBIN "gfx/footprints/staryu.1bpp" ; STARMIE
+ INCBIN "gfx/footprints/dot.1bpp"  
+ INCBIN "gfx/footprints/dot.1bpp" ; STARMIE
  INCBIN "gfx/footprints/blank.1bpp" ; REMORAID
  INCBIN "gfx/footprints/octillery.1bpp" 
  INCBIN "gfx/footprints/blank.1bpp" ; CHINCHOU
@@ -209,7 +205,7 @@ Footprints:
  INCBIN "gfx/footprints/sneasler.1bpp"
  INCBIN "gfx/footprints/snover.1bpp"  
  INCBIN "gfx/footprints/abomasnow.1bpp"
- INCBIN "gfx/footprints/staryu.1bpp" ; BALTOY
+ INCBIN "gfx/footprints/dot.1bpp" ; BALTOY
  INCBIN "gfx/footprints/claydol.1bpp"
  INCBIN "gfx/footprints/riolu.1bpp"
  INCBIN "gfx/footprints/lucario.1bpp"
@@ -244,7 +240,7 @@ Footprints:
  INCBIN "gfx/footprints/gholdengo.1bpp"
  INCBIN "gfx/footprints/darkrai.1bpp"
  INCBIN "gfx/footprints/regirock.1bpp"
- INCBIN "gfx/footprints/staryu.1bpp" ; REGICE
+ INCBIN "gfx/footprints/dot.1bpp" ; REGICE
  INCBIN "gfx/footprints/registeel.1bpp"
  INCBIN "gfx/footprints/regigigas.1bpp"  
  INCBIN "gfx/footprints/articuno.1bpp"
@@ -266,39 +262,4 @@ Footprints:
  INCBIN "gfx/footprints/blank.1bpp" ; 254
  INCBIN "gfx/footprints/blank.1bpp" ; 255
  INCBIN "gfx/footprints/blank.1bpp" ; 256 
-
-
- 
- ; 009-016  
- ; 017-024  
- ; 025-032   
- ; 033-040   
- ; 041-048   
- ; 049-056   
- ; 057-064   
- ; 065-072   
- ; 073-080    
- ; 081-088    
- ; 089-096    
- ; 097-104    
- ; 105-112    
- ; 113-120    
- ; 121-128    
- ; 129-136    
- ; 137-144    
- ; 145-152    
- ; 153-160    
- ; 161-168       
- ; 169-176    
- ; 177-184    
- ; 185-192    
- ; 193-200    
- ; 201-208    
- ; 209-216    
- ; 217-224    
- ; 225-232    
- ; 233-240    
- ; 241-248    
- ; 249-256    
-   
  	assert_table_length $100

@@ -4,12 +4,10 @@ Cries:
 	dba Cry_Nidoran_M
 	dba Cry_Nidoran_F
 	dba Cry_Slowpoke
-	dba Cry_Kangaskhan
 	dba Cry_Charmander
 	dba Cry_Grimer
 	dba Cry_Voltorb
 	dba Cry_Muk
-	dba Cry_Oddish
 	dba Cry_Raichu
 	dba Cry_Nidoqueen
 	dba Cry_Diglett
@@ -33,7 +31,6 @@ Cries:
 	dba Cry_Squirtle
 	dba Cry_Paras
 	dba Cry_Growlithe
-	dba Cry_Krabby
 	dba Cry_Psyduck
 	dba Cry_Rattata
 	dba Cry_Vileplume
@@ -55,7 +52,6 @@ Cries:
 	dba Cry_Gligar
 	dba Cry_Cleffa
 	dba Cry_Slugma
-	dba Cry_Ledyba
 	dba Cry_Entei
 	dba Cry_Wooper
 	dba Cry_Mantine
@@ -69,4 +65,9 @@ Cries:
 	dba Cry_Aipom
 	dba Cry_Dunsparce
 	dba Cry_Donphan
+	dba Cry_Buneary
+	dba Cry_Sneasler
+	dba Cry_Rotom
+	dba Cry_Shroomish
+	dba Cry_Breloom
 	assert_table_length NUM_CRIES

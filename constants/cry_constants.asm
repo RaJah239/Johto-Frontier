@@ -5,12 +5,10 @@
 	const CRY_NIDORAN_M
 	const CRY_NIDORAN_F
 	const CRY_SLOWPOKE
-	const CRY_KANGASKHAN
 	const CRY_CHARMANDER
 	const CRY_GRIMER
 	const CRY_VOLTORB
 	const CRY_MUK
-	const CRY_ODDISH
 	const CRY_RAICHU
 	const CRY_NIDOQUEEN
 	const CRY_DIGLETT
@@ -34,7 +32,6 @@
 	const CRY_SQUIRTLE
 	const CRY_PARAS
 	const CRY_GROWLITHE
-	const CRY_KRABBY
 	const CRY_PSYDUCK
 	const CRY_RATTATA
 	const CRY_VILEPLUME
@@ -58,7 +55,6 @@
 	const CRY_GLIGAR
 	const CRY_CLEFFA
 	const CRY_SLUGMA
-	const CRY_LEDYBA
 	const CRY_ENTEI
 	const CRY_WOOPER
 	const CRY_MANTINE
@@ -73,4 +69,10 @@
 	const CRY_DUNSPARCE
 	const CRY_DONPHAN
 
+; custom
+	const CRY_BUNEARY
+	const CRY_SNEASLER
+	const CRY_ROTOM
+	const CRY_SHROOMISH
+	const CRY_BRELOOM
 DEF NUM_CRIES EQU const_value
