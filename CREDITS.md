@@ -78,9 +78,10 @@ If you see an error or missing credit in this file, please let me know on [Disco
 
 # Trainer sprites
 - ShadowOne333 - Chris' overworld sprite
+- rjd1922 - Scientist's overworld sprite
 
 # Code
-- Timkun55 - Lots of general code help, colouring Bag Tabs + Battle icons, Pokédex bug fixes, Bag graphic, 
+- Timkun55 - Lots of general code help, colouring Bag Tabs + Battle icons, Pokédex bug fixes, Bag graphic
 - Grate Oracle Lewot - Lots of code help
 - AndrewC101 - Lots of code used from AndrewC101's amazing Pokémon Abrosia
 - 8bitZeta - General code help
@@ -119,3 +120,4 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - 4rdorin: https://github.com/4rdorin
 - 8bitZeta: https://github.com/8bitZeta
 - DamienDoury: https://github.com/DamienDoury/pokecrystal
+- rjd1922: https://github.com/rjd1922
