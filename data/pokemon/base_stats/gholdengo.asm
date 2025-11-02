@@ -1,8 +1,8 @@
 	db GHOLDENGO ; 252
 
-	db  87,  60,  95,  84, 133,  84
-	evs  0,   0,   0,   0,   2,   0
 	;   hp  atk  def  spd  sat  sdf
+	db  87,  60,  95,  84, 133,  91 ; 550 BST
+	evs  0,   0,   0,   0,   2,   0
 
 	db STEEL, GHOST ; type
 	db 45 ; catch rate
