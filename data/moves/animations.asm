@@ -1126,11 +1126,9 @@ BattleAnim_HydroPump:
 BattleAnim_Surf:
 	anim_1gfx BATTLE_ANIM_GFX_BUBBLE
 	anim_bgeffect BATTLE_BG_EFFECT_SURF, $0, $0, $0
-	anim_obj BATTLE_ANIM_OBJ_SURF, 88, 104, $8
-.loop
+	anim_obj BATTLE_ANIM_OBJ_SURF, 11, 0,  13, 0, $8
 	anim_sound 0, 1, SFX_SURF
-	anim_wait 32
-	anim_loop 4, .loop
+	anim_wait 112
 	anim_incobj 1
 	anim_wait 56
 	anim_ret
