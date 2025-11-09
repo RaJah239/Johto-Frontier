@@ -433,10 +433,6 @@ Function100320:
 	farcall Mobile_HDMATransferTilemapAndAttrmap_Overworld
 	ret
 
-Function100327: ; unreferenced
-	farcall HDMATransferTilemapToWRAMBank3
-	ret
-
 Function10032e:
 	call Function10034d
 	ld e, a
@@ -2955,28 +2951,6 @@ Function1013dd:
 	call CGBOnly_CopyTilemapAtOnce
 	ret
 
-Function1013e1: ; unreferenced
-	push de
-	inc de
-	ld b, a
-	ld c, 0
-.asm_1013e6
-	inc c
-	ld a, [hli]
-	ld [de], a
-	inc de
-	and a
-	jr z, .asm_1013f1
-	dec b
-	jr nz, .asm_1013e6
-	scf
-
-.asm_1013f1
-	pop de
-	ld a, c
-	ld [de], a
-	ret
-
 Function1013f5:
 	ld a, [hli]
 	ld [de], a
@@ -2989,13 +2963,6 @@ Function1013f5:
 	dec c
 	jr nz, .asm_1013f9
 	ret
-
-Function101400: ; unreferenced
-	ld a, [de]
-	inc de
-	cp [hl]
-	jr nz, asm_101416
-	inc hl
 
 Function101406:
 	ld c, a
@@ -3159,14 +3126,6 @@ Function101507:
 	ld hl, $40
 	ld bc, $40
 	ld a, MOBILEAPI_01
-	call MobileAPI
-	ld a, [wMobileCommsJumptableIndex]
-	inc a
-	ld [wMobileCommsJumptableIndex], a
-	ret
-
-Function10151d: ; unreferenced
-	ld a, MOBILEAPI_1A
 	call MobileAPI
 	ld a, [wMobileCommsJumptableIndex]
 	inc a
@@ -4179,11 +4138,6 @@ Function101cbc:
 	ld [wcd2b], a
 	ret
 
-Function101cc2: ; unreferenced
-	ld a, $02
-	ld [wcd2b], a
-	ret
-
 Function101cc8:
 	ld a, $01
 	ld [wc314], a
@@ -4845,10 +4799,6 @@ Function1021e0:
 	call ExitMenu
 	ret
 
-StartingLinkText: ; unreferenced
-	text_far _StartingLinkText
-	text_end
-
 LinkTerminatedText:
 	text_far _LinkTerminatedText
 	text_end
@@ -5202,28 +5152,9 @@ Function10246a:
 	ld [wcd49], a
 	ret
 
-Function102480: ; unreferenced
-	ld c, $32
-	call DelayFrames
-	ld a, [wcd49]
-	inc a
-	ld [wcd49], a
-	ret
-
 Function10248d:
 	ld a, [wcd49]
 	set 7, a
-	ld [wcd49], a
-	ret
-
-Function102496: ; unreferenced
-	ld hl, wcd4e
-	dec [hl]
-	ret nz
-	ld a, 0
-	ld [wcd4a], a
-	ld a, [wcd49]
-	inc a
 	ld [wcd49], a
 	ret
 
@@ -6149,13 +6080,6 @@ Function102b4e:
 	ld [wMenuCursorY], a
 	ld a, [wOTPartyCount]
 	ld [w2DMenuNumRows], a
-	ret
-
-Function102b68: ; unreferenced
-	xor a
-	ld hl, wWindowStackPointer
-	ld bc, $10
-	call ByteFill
 	ret
 
 MenuData_102b73:

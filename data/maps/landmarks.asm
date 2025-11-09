@@ -131,7 +131,6 @@ WhirlIslandsName:    db "WHIRL<BSP>ISLANDS@"
 MtMortarName:        db "MT.MORTAR@"
 DragonsDenName:      db "DRAGON'S<BSP>DEN@"
 IcePathName:         db "ICE PATH@"
-NotApplicableName:   db "N/A@" ; unreferenced ; "オバケやしき" ("HAUNTED HOUSE") in Japanese
 PalletTownName:      db "PALLET TOWN@"
 ViridianCityName:    db "VIRIDIAN<BSP>CITY@"
 PewterCityName:      db "PEWTER CITY@"
@@ -146,12 +145,8 @@ IndigoPlateauName:   db "INDIGO<BSP>PLATEAU@"
 VictoryRoadName:     db "VICTORY<BSP>ROAD@"
 MtMoonName:          db "MT.MOON@"
 RockTunnelName:      db "ROCK TUNNEL@"
-LavRadioTowerName:   db "LAV<BSP>RADIO TOWER@"
-SilphCoName:         db "SILPH CO.@" ; unreferenced
-SafariZoneName:      db "SAFARI ZONE@" ; unreferenced
-SeafoamIslandsName:  db "SEAFOAM<BSP>ISLANDS@"
-PokemonMansionName:  db "#MON<BSP>MANSION@" ; unreferenced
-CeruleanCaveName:    db "CERULEAN<BSP>CAVE@" ; unreferenced
+LavRadioTowerName:   db "LAV¯RADIO TOWER@"
+SeafoamIslandsName:  db "SEAFOAM¯ISLANDS@"
 Route1Name:          db "ROUTE 1@"
 Route2Name:          db "ROUTE 2@"
 Route3Name:          db "ROUTE 3@"
