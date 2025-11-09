@@ -3539,6 +3539,8 @@ OfferSwitch:
 	call ClearPalettes
 	call DelayFrame
 	call _LoadHPBar
+	call GetBattleMonBackpic
+	call WaitBGMap
 	pop af
 	ld [wCurPartyMon], a
 	xor a
@@ -3551,6 +3553,8 @@ OfferSwitch:
 	call ClearPalettes
 	call DelayFrame
 	call _LoadHPBar
+	call GetBattleMonBackpic
+	call WaitBGMap
 
 .said_no
 	pop af
@@ -5147,7 +5151,9 @@ BattleMenuPKMN_Loop:
 	jmp z, TryPlayerSwitch
 	cp $2 ; STATS
 	jr z, .Stats
-	cp $3 ; CANCEL
+	cp $3 ; MOVES
+	jr z, .Moves
+	cp $4 ; CANCEL
 	jr z, .Cancel
 	jr .loop
 
@@ -5162,12 +5168,21 @@ BattleMenuPKMN_Loop:
 	jr c, .Cancel
 	jr BattleMenuPKMN_ReturnFromStats
 
+.Moves:
+	ld a, [wCurPartySpecies]
+	cp EGG
+	jr z, .Cancel
+	farcall ManagePokemonMoves
+	jr BattleMenuPKMN_ReturnFromStats
+
 .Cancel:
 	call ClearSprites
 	call ClearPalettes
 	call DelayFrame
 	call _LoadHPBar
 	call CloseWindow
+	call GetBattleMonBackpic
+	call WaitBGMap
 	call LoadTilemapToTempTilemap
 	call GetMemSGBLayout
 	call SetDefaultBGPAndOBP
@@ -5254,6 +5269,8 @@ TryPlayerSwitch:
 	call DelayFrame
 	call ClearSprites
 	call _LoadHPBar
+	call GetBattleMonBackpic
+	call WaitBGMap
 	call CloseWindow
 	call GetMemSGBLayout
 	call SetDefaultBGPAndOBP
