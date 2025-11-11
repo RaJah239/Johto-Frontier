@@ -1,14 +1,33 @@
-INCLUDE "data/trainers/party_pointers.asm"
-
-Trainers:
 ; Trainer data structure:
-; - db "NAME@", TRAINERTYPE_* constant
+; - db "NAME@", TRAINERTYPE_* constants |ed together
 ; - 1 to 6 Pokémon:
-;    * for TRAINERTYPE_NORMAL:     db level, species
-;    * for TRAINERTYPE_MOVES:      db level, species, 4 moves
-;    * for TRAINERTYPE_ITEM:       db level, species, item
-;    * for TRAINERTYPE_ITEM_MOVES: db level, species, item, 4 moves
+;    * in all cases:              db level, species
+;    * with TRAINERTYPE_NICKNAME: db "NICKNAME@"
+;    * with TRAINERTYPE_DVS:      db atk|def dv, spd|spc dv
+;    * with TRAINERTYPE_EVS: 	  db hp, atk, def, spd, sat, sdf 
+;    * with TRAINERTYPE_ITEM:     db item
+;    * with TRAINERTYPE_MOVES:    db move 1, move 2, move 3, move 4
+;    (TRAINERTYPE_ITEM_MOVES is just TRAINERTYPE_ITEM | TRAINERTYPE_MOVES)
 ; - db -1 ; end
+
+; EXAMPLE
+;	; RED (1)
+;	db "Red@", TRAINERTYPE_NICKNAME | TRAINERTYPE_DVS | TRAINERTYPE_EVS | TRAINERTYPE_ITEM_MOVES
+;	db 100, PIKACHU
+;		db "ZAPPY@"
+;		db $EA, $AA ; dvs - atk|def dv, spd|spc dv
+;		ds 6, MAX_EV ; evs - hp, atk, def, spd, sat, sdf 
+;		db LIGHT_BALL
+;		db PROTECT, EXTREMESPEED, THUNDERBOLT, SURF
+;	db 100, SNORLAX
+;		db "BIGFOOT@"
+;		db $EC, PERFECT_DV ; dvs - atk|def dv, spd|spc dv
+;		db 12, 16, 12, 16, 16, 12 ; evs - hp, atk, def, spd, sat, sdf 
+;		db LEFTOVERS
+;		db CURSE, REST, EARTHQUAKE, BODY_SLAM
+;	db -1 ; end
+
+SECTION "Enemy Trainer Parties 1", ROMX
 
 RedGroup:
 	; RED (1)

@@ -1047,12 +1047,12 @@ CalcMonStatC:
 
 	ld a, d
 	and a
-	jr z, .no_stat_exp
+	jr z, .no_evs
 	add hl, bc
 	ld a, [hl]
 	ld b, a
 
-.no_stat_exp
+.no_evs
 	pop hl
 	push bc
 	ld bc, MON_DVS - MON_HP_EV + 1
