@@ -603,7 +603,7 @@ MenuHeader_Buy:
 	dbw 0, wCurMartCount
 	dba PlaceMartMenuItemName
 	dba .PrintBCDPrices
-	dba UpdateItemDescription
+	dba MartPlaceInBagQuantity
 
 .PrintBCDPrices:
 	ld a, [wScrollingMenuCursorPosition]
@@ -622,6 +622,65 @@ MenuHeader_Buy:
 	ld c, PRINTNUM_LEADINGZEROS | PRINTNUM_MONEY | 3
 	call PrintBCDNumber
 	ret
+
+MartPlaceInBagQuantity:
+	farcall UpdateItemDescription
+	farcall CheckItemPocket
+	ld a, [wItemAttributeValue]
+	cp ITEM
+	jr z, .get_item_pocket
+	cp BALL
+	jr z, .get_ball_pocket
+	cp BATTLE
+	jr z, .get_battle_pocket
+	cp TM01
+	jr z, .ClearItemInBagQuantitysBox
+	; cp FRUITS
+	ld hl, wNumFruits
+	jr z, .check_bag
+
+.ClearItemInBagQuantitysBox
+	farjp ClearItemInBagQuantitysBox
+
+.get_item_pocket
+	ld hl, wNumItems
+	jr .check_bag
+
+.get_ball_pocket
+	ld hl, wNumBalls
+	jr .check_bag
+
+.get_battle_pocket
+	ld hl, wNumBattles
+.check_bag
+	ld a, [wCurItem]
+	ld c, a
+	ld b, $0
+.loop
+	inc hl
+	ld a, [hli]
+	cp -1
+	jr z, .done
+	cp c
+	jr nz, .loop
+	ld a, [hl]
+	add b
+	ld b, a
+	jr nc, .loop
+	ld b, -1
+
+.done
+	ld a, b
+	sub 99
+	jr c, .done2
+	ld b, 99
+
+.done2
+	ld a, b
+	ld [wMenuSelectionQuantity], a
+	and a
+
+	farjp PlaceItemInBagQuantity
 
 HerbShopLadyIntroText:
 	text_far _HerbShopLadyIntroText
