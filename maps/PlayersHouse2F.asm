@@ -165,6 +165,13 @@ if DEF(_DEBUG)
 	giveitem ESCAPE_ROPE, MAX_ITEM_STACK
 	giveitem SACRED_ASH, MAX_ITEM_STACK
 	giveitem RARE_CANDY, MAX_ITEM_STACK
+	; vitamins
+	giveitem HP_UP, MAX_ITEM_STACK
+	giveitem PROTEIN, MAX_ITEM_STACK
+	giveitem IRON, MAX_ITEM_STACK
+	giveitem CALCIUM, MAX_ITEM_STACK
+	giveitem ZINC, MAX_ITEM_STACK
+	giveitem CARBOS, MAX_ITEM_STACK
 	; all balls
 	giveitem MASTER_BALL, MAX_ITEM_STACK
 	giveitem POKE_BALL, MAX_ITEM_STACK
