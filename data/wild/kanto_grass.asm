@@ -114,62 +114,6 @@ KantoGrassWildMons:
 	db 5, TORCHIC
 	end_grass_wildmons
 
-	def_grass_wildmons VICTORY_ROAD
-	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
-	; morn
-	db 3, TORCHIC
-	db 4, TORCHIC
-	db 5, TORCHIC
-	db 3, TORCHIC
-	db 6, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	; day
-	db 3, TORCHIC
-	db 4, TORCHIC
-	db 5, TORCHIC
-	db 3, TORCHIC
-	db 6, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	; nite
-	db 3, TORCHIC
-	db 4, TORCHIC
-	db 5, TORCHIC
-	db 3, TORCHIC
-	db 6, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	end_grass_wildmons
-
-	def_grass_wildmons TOHJO_FALLS
-	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
-	; morn
-	db 3, TORCHIC
-	db 4, TORCHIC
-	db 5, TORCHIC
-	db 3, TORCHIC
-	db 6, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	; day
-	db 3, TORCHIC
-	db 4, TORCHIC
-	db 5, TORCHIC
-	db 3, TORCHIC
-	db 6, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	; nite
-	db 3, TORCHIC
-	db 4, TORCHIC
-	db 5, TORCHIC
-	db 3, TORCHIC
-	db 6, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	end_grass_wildmons
-
 	def_grass_wildmons ROUTE_1
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
@@ -758,61 +702,7 @@ KantoGrassWildMons:
 	db 5, TORCHIC
 	end_grass_wildmons
 
-	def_grass_wildmons ROUTE_26
-	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-	; morn
-	db 3, TORCHIC
-	db 4, TORCHIC
-	db 5, TORCHIC
-	db 3, TORCHIC
-	db 6, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	; day
-	db 3, TORCHIC
-	db 4, TORCHIC
-	db 5, TORCHIC
-	db 3, TORCHIC
-	db 6, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	; nite
-	db 3, TORCHIC
-	db 4, TORCHIC
-	db 5, TORCHIC
-	db 3, TORCHIC
-	db 6, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	end_grass_wildmons
 
-	def_grass_wildmons ROUTE_27
-	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-	; morn
-	db 3, TORCHIC
-	db 4, TORCHIC
-	db 5, TORCHIC
-	db 3, TORCHIC
-	db 6, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	; day
-	db 3, TORCHIC
-	db 4, TORCHIC
-	db 5, TORCHIC
-	db 3, TORCHIC
-	db 6, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	; nite
-	db 3, TORCHIC
-	db 4, TORCHIC
-	db 5, TORCHIC
-	db 3, TORCHIC
-	db 6, TORCHIC
-	db 5, TORCHIC
-	db 5, TORCHIC
-	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_28
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite

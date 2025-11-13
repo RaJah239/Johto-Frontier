@@ -2,13 +2,6 @@
 
 KantoWaterWildMons:
 
-	def_water_wildmons TOHJO_FALLS
-	db 4 percent ; encounter rate
-	db 15, WOOPER
-	db 20, QUAGSIRE
-	db 15, QUAGSIRE
-	end_water_wildmons
-
 	def_water_wildmons VERMILION_PORT
 	db 2 percent ; encounter rate
 	db 15, WOOPER
@@ -95,20 +88,6 @@ KantoWaterWildMons:
 
 	def_water_wildmons ROUTE_25
 	db 4 percent ; encounter rate
-	db 15, WOOPER
-	db 20, QUAGSIRE
-	db 15, QUAGSIRE
-	end_water_wildmons
-
-	def_water_wildmons ROUTE_26
-	db 6 percent ; encounter rate
-	db 15, WOOPER
-	db 20, QUAGSIRE
-	db 15, QUAGSIRE
-	end_water_wildmons
-
-	def_water_wildmons ROUTE_27
-	db 6 percent ; encounter rate
 	db 15, WOOPER
 	db 20, QUAGSIRE
 	db 15, QUAGSIRE

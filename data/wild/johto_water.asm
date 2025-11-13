@@ -268,4 +268,25 @@ JohtoWaterWildMons:
 	db 15, QUAGSIRE
 	end_water_wildmons
 
+	def_water_wildmons TOHJO_FALLS
+	db 4 percent ; encounter rate
+	db 15, WOOPER
+	db 20, QUAGSIRE
+	db 15, QUAGSIRE
+	end_water_wildmons
+
+	def_water_wildmons ROUTE_26
+	db 6 percent ; encounter rate
+	db 15, WOOPER
+	db 20, QUAGSIRE
+	db 15, QUAGSIRE
+	end_water_wildmons
+
+	def_water_wildmons ROUTE_27
+	db 6 percent ; encounter rate
+	db 15, WOOPER
+	db 20, QUAGSIRE
+	db 15, QUAGSIRE
+	end_water_wildmons
+
 	db -1 ; end
