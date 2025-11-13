@@ -8,6 +8,7 @@ if DEF(_DEBUG)
 	const PLAYERSHOUSE2F_TEST_MON_REGULAR
 	const PLAYERSHOUSE2F_TEST_MON_SHINY
 	const PLAYERSHOUSE2F_DEBUGCOLOURPICKER
+	const PLAYERSHOUSE2F_KANTO_WARP
 endc
 
 PlayersHouse2F_MapScripts:
@@ -321,6 +322,12 @@ ShinyMonScript:
 DebugColourPickerScript:
 	special DebugColourPicker
 	end
+
+TestWarpScript:
+	faceplayer
+	special FadeOutToWhite
+	warp PALLET_TOWN, 12,  12 ; Map, coordinates via Polished Map
+	end
 endc
 
 PlayersHouse2F_MapEvents:
@@ -347,4 +354,5 @@ if DEF(_DEBUG)
 	object_event  2,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RegularMonScript, -1
 	object_event  3,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ShinyMonScript, -1
 	object_event  7,  5, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, DebugColourPickerScript, -1
+	object_event  6,  2, SPRITE_BLUE, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TestWarpScript, -1
 endc
