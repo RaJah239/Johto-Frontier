@@ -283,11 +283,13 @@ PlayersRadioText4:
 if DEF(_DEBUG)
 TestTrainerScript:
 	faceplayer
+	special BackupPartyHeldItems
 	special HealParty
 	winlosstext TestText, TestText
 	loadtrainer RED, RED2
 	startbattle
 	reloadmap
+	special RestorePartyHeldItems
 	special HealParty
 	end
 

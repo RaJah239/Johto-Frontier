@@ -3243,7 +3243,6 @@ wDailyFlags2:: db
 wSwarmFlags:: db
 	ds 2
 wTimerEventStartDay:: db
-	ds 3
 
 wFruitTreeFlags:: flag_array NUM_FRUIT_TREES
 
@@ -3252,7 +3251,6 @@ wFruitTreeFlags:: flag_array NUM_FRUIT_TREES
 wLuckyNumberDayTimer:: dw
 	ds 2
 wSpecialPhoneCallID:: db
-	ds 3
 wBugContestStartTime:: ds 4 ; day, hour, min, sec
 wUnusedTwoDayTimerOn:: db
 wUnusedTwoDayTimer:: db
@@ -3356,6 +3354,8 @@ endr
 wPartyMonNicknamesEnd::
 
 	ds 22
+
+wPartyMonItemBackup:: ds PARTY_LENGTH
 
 wPokedexCaught:: flag_array NUM_POKEMON
 wEndPokedexCaught::
