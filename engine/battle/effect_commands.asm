@@ -2574,14 +2574,14 @@ PlayerAttackDamage:
 .physicalcrit
 	ld hl, wBattleMonAttack
 	call CheckDamageStatsCritical
-	jr c, .thickclub
+	jr c, .thickcluborlightball
 
 	ld hl, wEnemyDefense
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
 	ld hl, wPlayerAttack
-	jr .thickclub
+	jr .thickcluborlightball
 
 .special
 	ld hl, wEnemyMonSpclDef
@@ -2611,9 +2611,9 @@ PlayerAttackDamage:
 	call LightBallBoost
 	jr .done
 
-.thickclub
+.thickcluborlightball
 ; Note: Returns player attack at hl in hl.
-	call ThickClubBoost
+	call ThickClubOrLightBallBoost
 
 .done
 	push hl
@@ -2716,17 +2716,40 @@ CheckDamageStatsCritical:
 	pop hl
 	ret
 
-ThickClubBoost:
+ThickClubOrLightBallBoost:
 ; Return in hl the stat value at hl.
 
 ; If the attacking monster is Cubone or Marowak and
-; it's holding a Thick Club, double it.
+; it's holding a Thick Club, or if it's Pikachu and
+; it's holding a Light Ball, double it.
 	push bc
 	push de
+
+	push hl
+	ld a, MON_SPECIES
+	call BattlePartyAttr
+	ld a, [hBattleTurn]
+	and a
+	ld a, [hl]
+	jr z, .checkpikachu
+	ld a, [wTempEnemyMonSpecies]
+.checkpikachu:
+	pop hl
+	cp PIKACHU
+	jr z, .lightball
 	ld b, DITTO
 	ld c, DITTO
 	ld d, THICK_CLUB
 	call SpeciesItemBoost
+	jr .done
+
+.lightball
+	ld b, PIKACHU
+	ld c, PIKACHU
+	ld d, LIGHT_BALL
+	call SpeciesItemBoost
+
+.done
 	pop de
 	pop bc
 	ret
@@ -2827,14 +2850,14 @@ EnemyAttackDamage:
 .physicalcrit
 	ld hl, wEnemyMonAttack
 	call CheckDamageStatsCritical
-	jr c, .thickclub
+	jr c, .thickcluborlightball
 
 	ld hl, wPlayerDefense
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
 	ld hl, wEnemyAttack
-	jr .thickclub
+	jr c, .thickcluborlightball
 
 .special
 	ld hl, wBattleMonSpclDef
@@ -2862,8 +2885,8 @@ EnemyAttackDamage:
 	call LightBallBoost
 	jr .done
 
-.thickclub
-	call ThickClubBoost
+.thickcluborlightball
+	call ThickClubOrLightBallBoost
 
 .done
 	push hl
