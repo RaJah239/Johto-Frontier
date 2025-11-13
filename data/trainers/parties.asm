@@ -29,19 +29,6 @@
 
 SECTION "Enemy Trainer Parties 1", ROMX
 
-RedGroup:
-	; RED (1)
-	db "RED@", TRAINERTYPE_NORMAL
-	db 5, PIKACHU
-	db -1 ; end
-
-if DEF(_DEBUG)
-	db "TEST@", TRAINERTYPE_ITEM_MOVES
-	db 5, PIKACHU,   NO_ITEM,     THUNDERBOLT, NO_MOVE, NO_MOVE, NO_MOVE
-	db 5, PIKACHU,   NO_ITEM,     DOUBLE_EDGE, NO_MOVE, NO_MOVE, NO_MOVE
-	db -1 ; end
-endc
-
 FalknerGroup:
 WhitneyGroup:
 BugsyGroup:

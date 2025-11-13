@@ -499,9 +499,7 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass RED ; 3f
 	const RED1
-if DEF(_DEBUG)
 	const RED2
-endc
 
 	trainerclass BLUE ; 40
 	const BLUE1
@@ -525,5 +523,6 @@ endc
 
  	const_def
  	const RANDOMLIST_0
+ 	const RANDOMLIST_1
 
 DEF NUM_TRAINER_CLASSES EQU __trainer_class__ - 1
