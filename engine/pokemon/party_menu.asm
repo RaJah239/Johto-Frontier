@@ -730,7 +730,7 @@ PartyMenuSelect:
 
 	ldh a, [hJoyLast]
 	cp SELECT
-	jp nz, .play_sfx
+	jr nz, .play_sfx
 
 	; If the player presses select, either we start the switch process,
 	; or we validate it.

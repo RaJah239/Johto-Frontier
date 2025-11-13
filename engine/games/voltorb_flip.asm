@@ -69,7 +69,7 @@ VoltorbFlip::;this is where the magic happens
 	ld [$ffd8], a ;disable sprite update
 	ld [$c41a], a
 	call VFInitLevel
-	jp VFMainLoop
+	jmp VFMainLoop
 	
 VFInitLevel:
 	ld hl, $c440
@@ -295,16 +295,16 @@ VFInput:
 	ld e, a
 	ld a, [$ffa4]
 	bit 1, a
-	jp nz, .bbutton
+	jmp nz, .bbutton
 	ld a, [$ffa3]
 	and a
 	ret z
 	bit 0, a
 	jr nz, .abutton
 	bit 2, a
-	jp nz, VFKeepCoins
+	jmp nz, VFKeepCoins
 	bit 3, a
-	jp nz, VFExit
+	jmp nz, VFExit
 	push af
 	ld a, [$c41b]
 	ld [$c41d], a
@@ -316,13 +316,13 @@ VFInput:
 	pop de
 	pop af
 	bit 4, a
-	jp nz, .rightbutton
+	jmp nz, .rightbutton
 	bit 5, a
-	jp nz, .leftbutton
+	jmp nz, .leftbutton
 	bit 6, a
-	jp nz, .upbutton
+	jmp nz, .upbutton
 	bit 7, a
-	jp nz, .downbutton
+	jmp nz, .downbutton
 	
 	ret
 
@@ -354,7 +354,7 @@ VFInput:
 	call VFFlipAnimation
 	ld a, [de]
 	and 3
-	jp z, VFBoom
+	jmp z, VFBoom
 	call VFMultiplyCoins
 	ld hl, $c41f
 	ld a, [$c41a]
@@ -423,7 +423,7 @@ VFInput:
 	ld [wCoins], a
 	ld a, e
 	ld [wCoins + 1], a
-	jp VFInitLevel
+	jmp VFInitLevel
 .caplevel
 	dec a
 	ret
@@ -541,7 +541,7 @@ VFLoadGFX:
 	ld bc, $7f80 ;load the gfx
 	ld de, VoltorbFlipGFX
 	ld hl, $9000
-	jp Copy2bpp
+	jmp Copy2bpp
 	
 VFLoadPalette:	
 	ld a, [rSVBK] ; $ff00+$70
@@ -554,7 +554,7 @@ VFLoadPalette:
 	call CopyPals
 	pop af
 	ld [rSVBK], a
-	jp ForceUpdateCGBPals
+	jmp ForceUpdateCGBPals
 
 VFInitRAM:
 	ld hl,$c400
@@ -810,9 +810,9 @@ VFRefreshMap:
 .checkflip
 	ld [de], a
 	bit 2, a ;is the card flipped
-	jp nz, .flipped
+	jmp nz, .flipped
 	bit 7, a ;is 0 marked?
-	jp nz, .marked0
+	jmp nz, .marked0
 	ld a, 0 ;upper left corner blank
 	ldi [hl], a
 .g2x1
@@ -853,7 +853,7 @@ VFRefreshMap:
 .g3x1
 	ld a, [de]
 	bit 6, a ;is 1 marked?
-	jp nz, .marked1
+	jmp nz, .marked1
 	ld a, 2 ;upper right corner blank
 	ld [hl], a
 .g1x2	
@@ -876,7 +876,7 @@ VFRefreshMap:
 	pop de
 	ld a, [de]
 	bit 5, a ;is 2 marked?
-	jp nz, .marked2
+	jmp nz, .marked2
 	ld a, 32 ;lower left corner blank
 	ldi [hl], a
 .g2x3
@@ -885,7 +885,7 @@ VFRefreshMap:
 .g3x3
 	ld a, [de]
 	bit 4, a ;is 3 marked?
-	jp nz, .marked3
+	jmp nz, .marked3
 	ld a, 34 ;lower right corner blank
 	ld [hl], a
 .carddone
@@ -900,7 +900,7 @@ VFRefreshMap:
 	ld de, $ffd9
 	add hl, de
 	pop de
-	jp .g1x1
+	jmp .g1x1
 .highlight
 	push bc
 	push de
@@ -932,7 +932,7 @@ VFRefreshMap:
 	ld de, $0006
 	add hl, de
 	pop de
-	jp .g1x1
+	jmp .g1x1
 .done
 	hlcoord 15, 16
 	ld de, .blank
@@ -947,7 +947,7 @@ VFRefreshMap:
 	inc hl
 	ld de, wCoins
 	ld bc, $0204
-	jp PrintNum
+	jmp PrintNum
 .coinstring
 	db "COINS@"
 .blank
@@ -1007,23 +1007,23 @@ VFRefreshMap:
 	ldi [hl], a
 	inc a
 	ld [hl], a
-	jp .carddone
+	jmp .carddone
 .marked0
 	ld a, 6 ;upper left corner marked
 	ldi [hl], a
-	jp .g2x1
+	jmp .g2x1
 .marked1
 	ld a, 8 ;upper right corner marked
 	ld [hl], a
-	jp .g1x2
+	jmp .g1x2
 .marked2
 	ld a, 22 ;lower left corner marked
 	ldi [hl], a
-	jp .g2x3
+	jmp .g2x3
 .marked3
 	ld a, 24 ;lower right corner marked
 	ld [hl], a
-	jp .carddone
+	jmp .carddone
 .voltorb
 	ld a, 3
 	ldi [hl], a
@@ -1076,7 +1076,7 @@ VFRefreshMap:
 	ldi [hl], a
 	inc a
 	ld [hl], a
-	jp .finishcard ;a voltorb card will never have a highlighted palette
+	jmp .finishcard ;a voltorb card will never have a highlighted palette
 
 VFRefreshScreen: ;bc is the coordinates to refresh (3x3 tiles)
 	push bc
@@ -1367,12 +1367,12 @@ VFFlipAnimation:
 	cp a, 12
 	jr z, .switchdir
 	cp a, $fd
-	jp nz, .flipframe
+	jr nz, .flipframe
 	pop de
 	ret
 .switchdir
 	ld de, $06fd
-	jp .flipframe
+	jr .flipframe
 .finish
 	ld hl, $c41b
 	ld a, [hli]
@@ -1384,7 +1384,7 @@ VFFlipAnimation:
 	call VFRefreshScreen
 	pop hl
 	ei
-	jp DelayFrame
+	jmp DelayFrame
 
 VFBoom:
 	call VFRefreshMap
@@ -1407,7 +1407,7 @@ VFBoom:
 	jr z, .level0
 .reset
 	ld [$c41a], a
-	jp VFInitLevel
+	jmp VFInitLevel
 .level0
 	ld a, 1
 	jr .reset
@@ -1520,7 +1520,7 @@ VFKeepCoins:
 	ld [wCoins], a
 	ld a, e
 	ld [wCoins + 1], a
-	jp VFInitLevel
+	jmp VFInitLevel
 .maybecap
 	cp $27
 	jr nz, .capcoins

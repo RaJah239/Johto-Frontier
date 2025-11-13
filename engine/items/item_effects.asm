@@ -1649,7 +1649,7 @@ RestoreHPEffect:
 
 Restore4THHPEffect:
 	call ItemRestore4THHP
-	jp StatusHealer_Jumptable
+	jmp StatusHealer_Jumptable
 
 EnergypowderEffect:
 	ld c, HAPPINESS_BITTERPOWDER
