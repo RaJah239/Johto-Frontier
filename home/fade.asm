@@ -6,7 +6,7 @@ SetBlackPals::
 
 .Function:
 	xor a
-	jp DoSetPals
+	jr DoSetPals
 
 SetWhitePals::
 	ld a, BANK(wBGPals1)
@@ -20,21 +20,11 @@ DoSetPals:
 	call ByteFill
 	ret
 
-;FadeBGPalettes::
-;	ld a, PALFADE_BG
-;	ld [wPalFadeMode], a
-;	jr DoFadePalettes
-
-;FadeOBPalettes::
-;	ld a, PALFADE_OBJ
-;	ld [wPalFadeMode], a
-;	jr DoFadePalettes
-
 FadeToWhite::
 	push bc
 	call SetWhitePals
 	pop bc
-	jp FadePalettes
+	jr FadePalettes
 
 FadeToBlack::
 	push bc

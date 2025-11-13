@@ -1372,7 +1372,7 @@ _CGB_Plain:
 	call LoadHLBytesIntoDE
 
 	call WipeAttrmap
-	jp ApplyAttrmap
+	jmp ApplyAttrmap
 
 Gen1DiplomaPalette:
 INCLUDE "gfx/diploma/plain.pal" ; todo: replace this polished port

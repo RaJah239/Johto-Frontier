@@ -57,8 +57,7 @@ OverworldBGMap:
 	call ClearSprites
 	ld a, CGB_PLAIN
 	call GetSGBLayout
-	jp SetDefaultBGPAndOBP
-	ret
+	jmp SetDefaultBGPAndOBP
 
 BattleBGMap:
 	ld b, SCGB_BATTLE_GRAYSCALE

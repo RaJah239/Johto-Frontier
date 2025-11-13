@@ -1341,7 +1341,7 @@ ClearBattleAnims::
 	add hl, de
 	call GetBattleAnimPointer
 	call BattleAnimAssignPals
-	jp DelayFrame
+	jmp DelayFrame
 
 BattleAnim_RevertPals:
 	ld a, [wBattleAnimFlags]

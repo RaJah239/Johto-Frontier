@@ -9,7 +9,7 @@ GetSpritePalette::
 	farcall _GetSpritePalette
 
 	ld a, c
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 GetSpriteVTile::
 	push hl

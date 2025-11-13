@@ -216,4 +216,4 @@ ClearsScratch::
 	ld bc, $20
 	xor a
 	call ByteFill
-	jp CloseSRAM
+	jmp CloseSRAM

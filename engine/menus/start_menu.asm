@@ -340,7 +340,7 @@ endr
 	; grab white text box palette
 	hlcoord 0, 14
 	lb bc, 2, 8
-	jp TextboxPalette
+	jmp TextboxPalette
 
 .PrintDayTime:
 	call .DrawDayTimeBox

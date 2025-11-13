@@ -1905,7 +1905,6 @@ Function17dcaf:
 	add hl, de
 	dec c
 	jr nz, .asm_17dcbb
-;	call RotateThreePalettesRight
 	ld a, $4
 	ldh [rSVBK], a
 	ret

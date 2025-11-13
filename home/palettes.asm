@@ -153,7 +153,7 @@ DmgToCgbObjPals::
 	pop af
 	ldh [rSVBK], a
 
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 DmgToCgbObjPal0::
 	ldh [rOBP0], a

@@ -132,7 +132,7 @@ DecompressRequest2bpp::
 
 	ld de, sScratch
 	call Request2bpp
-	jp CloseSRAM
+	jmp CloseSRAM
 
 FarCopyBytes::
 ; copy bc bytes from a:hl to de

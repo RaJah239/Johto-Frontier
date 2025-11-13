@@ -70,7 +70,7 @@ DrawBattleHPBar::
 	ld [hl], a
 
 .done
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 PrepMonFrontpic::
 	ld a, $1
@@ -146,7 +146,7 @@ _PlayMonCry::
 	call PlayCry
 
 .done
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 LoadCry::
 ; Load cry bc.
@@ -280,7 +280,7 @@ GetBaseData::
 
 	pop af
 	rst Bankswitch
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 GetCurNickname::
 	ld a, [wCurPartyMon]

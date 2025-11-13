@@ -2102,7 +2102,7 @@ GetAnyMapBlocksBank::
 	call GetFarByte
 	rst Bankswitch
 
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 GetMapAttributesPointer::
 ; returns the current map's data pointer in hl.
@@ -2123,7 +2123,7 @@ GetMapEnvironment::
 	ld de, MAP_ENVIRONMENT
 	call GetMapField
 	ld a, c
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 Map_DummyFunction:: ; unreferenced
 	ret
@@ -2135,7 +2135,7 @@ GetAnyMapEnvironment::
 	ld de, MAP_ENVIRONMENT
 	call GetAnyMapField
 	ld a, c
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 GetAnyMapTileset::
 	ld de, MAP_TILESET
@@ -2153,7 +2153,7 @@ GetWorldMapLocation::
 	call GetAnyMapField
 	ld a, c
 
-	jp PopBCDEHL
+	jmp PopBCDEHL
 
 GetMapMusic::
 	push hl
