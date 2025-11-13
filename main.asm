@@ -766,3 +766,9 @@ INCLUDE "engine/gfx/vwf.asm"
 SECTION "Battle Weather Images", ROMX
 
 INCLUDE "gfx/weather_images.asm"
+
+
+SECTION "Dynamic Pals System", ROMX
+
+INCLUDE "engine/gfx/sprite_palettes.asm"
+INCLUDE "engine/gfx/dynamic_pals.asm"
