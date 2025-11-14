@@ -113,7 +113,7 @@ ItemEffects:
 	dw NoEffect            ; WHT_APRICORN
 	dw NoEffect            ; BLACKBELT_I
 	dw NoEffect            ; BLK_APRICORN
-	dw GeyserBootsEffect   ; GEYSER_BOOTS
+	dw MiloticCallEffect   ; MILOTIC_CALL
 	dw NoEffect            ; PNK_APRICORN
 	dw NoEffect            ; BLACKGLASSES
 	dw NoEffect            ; SLOWPOKETAIL
@@ -3014,7 +3014,7 @@ KingdraCallEffect:
 	farcall WhirlpoolFunction
 	ret
 
-GeyserBootsEffect:
+MiloticCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
 	farcall WaterfallFunction

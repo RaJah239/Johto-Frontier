@@ -100,7 +100,7 @@ ItemDescriptions:
 	dw WhtApricornDesc
 	dw BlackbeltDesc
 	dw BlkApricornDesc
-	dw GeyserBootsDesc
+	dw MiloticCallDesc
 	dw PnkApricornDesc
 	dw BlackGlassesDesc
 	dw SlowpokeTailDesc
@@ -281,7 +281,7 @@ PokeBallDesc:
 
 ScytherCallDesc:
 	db   "Calls a SCYTHER"
-	next "to CUT trees.@"
+	next "to cut trees.@"
 
 BicycleDesc:
 	db   "A collapsible bike"
@@ -613,7 +613,7 @@ BluApricornDesc:
 
 KingdraCallDesc:
 	db "Calls a KINGDRA to"
-	next "cross WHIRLPOOLS.@"
+	next "cross whirlpools.@"
 
 AmuletCoinDesc:
 	db   "Doubles monetary"
@@ -648,9 +648,9 @@ BlkApricornDesc:
 	db   "A black APRICORN."
 	next "@"
 
-GeyserBootsDesc:
-	db   "Makes one able to"
-	next "scale waterfalls.@"
+MiloticCallDesc:
+	db   "A Milotic helps"
+	next "climb waterfalls.@"
 
 PnkApricornDesc:
 	db   "A pink APRICORN."

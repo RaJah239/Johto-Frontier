@@ -9,7 +9,7 @@ IcePath1F_MapScripts:
 	def_callbacks
 
 IcePath1FHMWaterfall:
-	itemball GEYSER_BOOTS
+	itemball MILOTIC_CALL
 
 IcePath1FPPUp:
 	itemball PP_UP
@@ -29,6 +29,6 @@ IcePath1F_MapEvents:
 	def_bg_events
 
 	def_object_events
-	object_event 31,  7, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IcePath1FHMWaterfall, EVENT_GOT_GEYSER_BOOTS
+	object_event 31,  7, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IcePath1FHMWaterfall, EVENT_GOT_MILOTIC_CALL
 	object_event 32, 23, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IcePath1FPPUp, EVENT_ICE_PATH_1F_PP_UP
 	object_event 35,  9, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IcePath1FProtein, EVENT_ICE_PATH_1F_PROTEIN

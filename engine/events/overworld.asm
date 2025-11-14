@@ -838,7 +838,12 @@ Script_WaterfallFromMenu:
 	special UpdateTimePals
 
 Script_UsedWaterfall:
-	callasm GetPartyNickname
+	reanchormap
+	pokepic MILOTIC
+	cry MILOTIC
+	waitsfx
+	closepokepic
+	refreshmap
 	farwritetext _UseWaterfallText
 	waitbutton
 	closetext
@@ -875,7 +880,7 @@ Script_AutoWaterfall:
 	step_end
 
 TryWaterfallOW::
-	ld a, GEYSER_BOOTS
+	ld a, MILOTIC_CALL
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem

@@ -294,7 +294,7 @@ _CantUseItemText::
 
 _UseCutText::
 	text "SCYTHER appeared"
-	line "and CUT!"
+	line "and cut!"
 	prompt
 
 _CutNothingText::
@@ -334,7 +334,8 @@ _AskPikaSurfText::
 	done
 
 _UseWaterfallText::
-	text "Geronimooooo!"
+	text "Ascending the"
+	line "waterfall!"
 	done
 
 _HugeWaterfallText::
@@ -346,7 +347,7 @@ _AskWaterfallText::
 	text "Wow, it's a huge"
 	line "waterfall."
 
-	para "Want to ascend it?"
+	para "Call Milotic?"
 	done
 
 _UseDigText::

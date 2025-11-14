@@ -99,7 +99,7 @@ ItemNames::
 	li "WHT APRICORN"
 	li "BLACKBELT"
 	li "BLK APRICORN"
-	li "GEYSER BOOTS"
+	li "Milotic Call"
 	li "PNK APRICORN"
 	li "BLACKGLASSES"
 	li "SLOWPOKETAIL"

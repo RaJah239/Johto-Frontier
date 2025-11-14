@@ -105,7 +105,7 @@
 	const WHT_APRICORN ; 61
 	const BLACKBELT_I  ; 62
 	const BLK_APRICORN ; 63
-	const GEYSER_BOOTS ; 64
+	const MILOTIC_CALL ; 64
 	const PNK_APRICORN ; 65
 	const BLACKGLASSES ; 66
 	const SLOWPOKETAIL ; 67

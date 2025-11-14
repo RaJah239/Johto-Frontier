@@ -240,7 +240,7 @@ ItemNameOrder:
 	db LANTURN_CALL
 	db DONPHAN_CALL
 	db KINGDRA_CALL
-	db GEYSER_BOOTS
+	db MILOTIC_CALL
 
 ; Key Items that are possibly seldom used
 	db CLEAR_BELL
