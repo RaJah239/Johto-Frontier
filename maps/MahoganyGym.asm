@@ -248,8 +248,8 @@ PryceText_CherishYourPokemon:
 	done
 
 BoarderRonaldSeenText:
-	text "I'll freeze your"
-	line "#MON, so you"
+	text "I'll frostbite"
+	line "your #MON, so you"
 	cont "can't do a thing!"
 	done
 
@@ -259,11 +259,11 @@ BoarderRonaldBeatenText:
 	done
 
 BoarderRonaldAfterBattleText:
-	text "I think there's a"
-	line "move a #MON"
+	text "Frostbites are can"
+	line "make the migthiest"
 
-	para "can use while it's"
-	line "frozen."
+	para "special attackers"
+	line "look weak."
 	done
 
 BoarderBradSeenText:
