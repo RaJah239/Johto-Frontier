@@ -195,4 +195,4 @@ SpecialsPointers::
 	add_special CianwoodPhotograph
 	add_special EggMaster
 	add_special PlayerGivesAwayAPokemon
-
+	add_special MoveTutor2

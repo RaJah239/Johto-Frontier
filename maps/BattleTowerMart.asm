@@ -1,6 +1,7 @@
     object_const_def
-	const BATTLETOWERMART_CLERK_ALL_TMS
-	const BATTLETOWERMART_PORYGON_PC
+    const BATTLETOWERMART_CLERK_ALL_TMS
+    const BATTLETOWERMART_PORYGON_PC
+    const BATTLETOWERMART_TUTOR
 
 BattleTowerMart_MapScripts:
     def_scene_scripts
@@ -399,24 +400,297 @@ ReturnAnytimeText:
     done
 
 YoureACollectorText:
-	text "You already have"
-	line "99! Pick another?"
-	done
+    text "You already have"
+    line "99! Pick another?"
+    done
 
 BattleTowerMartPorygonPCScript:
-	jumpstd PorygonPCScript
+    jumpstd PorygonPCScript
+
+BattleTowerMartTutorScientistScript:
+    faceplayer
+    opentext
+    checkevent EVENT_BATTLE_TOWER_TUTOR
+    iftrue .WelcomeBackWantMeToTeach
+    writetext BattleTowerMartTutorWantMeToTeachText
+    setevent EVENT_BATTLE_TOWER_TUTOR
+    sjump .TeachAnotherMove
+.WelcomeBackWantMeToTeach:
+    writetext BattleTowerMartTutorWelcomeBackWantMeToTeachText
+.TeachAnotherMove:
+    yesorno
+    iffalse .Refused
+    writetext BattleTowerMartTutorShallITeachText
+    callasm .SetupMovesMenu
+    callasm .LoadMovesMenu
+    writetext BattleTowerMartTutorMoveText
+    ifequal 2, .NotEnough
+    iffalse .CloseTutor
+    special MoveTutor2
+    iffalse .TeachMove
+.CloseTutor
+    sjump .Refused
+
+.LoadMovesMenu:
+    call ClearSprites
+    call LoadStandardMenuHeader
+    ld hl, .MovesMenu
+    call LoadMenuHeader
+    xor a
+    ld [wMenuCursorPosition], a
+    ld [wMenuScrollPosition], a
+    ldh [hBGMapMode], a
+    call InitScrollingMenu
+    call ScrollingMenu
+    ld a, [wMenuJoypad]
+    cp B_BUTTON
+    jr z, .cancel_selection
+    ld a, [wMenuSelection]
+    cp -1 ; CANCEL
+    jr z, .cancel_selection
+; selection confirmed
+    assert wMenuSelectionQuantity == wMenuSelection + 1
+    ld hl, wMenuSelection
+    ld a, [hli]
+    ld [wNamedObjectIndex], a
+    ld a, [hl]
+    ld [wBattleTowerCrystalMoveTutor], a ; not used for menus anymore at this point
+    ld b, a
+    call .GetAmountOfCrystals
+    cp b
+    jr c, .not_enough_crystals
+    ld a, TRUE
+    ld [wScriptVar], a
+    ret
+.cancel_selection:
+    ld a, FALSE
+    ld [wScriptVar], a
+    ret
+
+.not_enough_crystals:
+    ld a, 2
+    ld [wScriptVar], a
+    ret
+
+.MovesMenu:
+    db MENU_BACKUP_TILES
+    menu_coords 1, 4, 18, 10
+    dw .MovesMenuData
+    db 1
+
+.MovesMenuData:
+    db SCROLLINGMENU_DISPLAY_ARROWS | SCROLLINGMENU_ENABLE_FUNCTION3
+    db 3 ; height
+    db 1 ; width ("1" triggers Function 2 to run)
+    db SCROLLINGMENU_ITEMS_QUANTITY ; item format
+    dba wBattleTowerCrystalMoveTutor
+    dba .DisplayMoveName
+    dba .DisplayAmountOkNotReally
+    dba .UpdateNeededCrystalIndicator
+
+.UpdateNeededCrystalIndicator:
+; update quantity
+    hlcoord 0, 0
+    lb bc, 1, 7
+    call Textbox
+    ld a, [wMenuSelection]
+    cp -1 ; CANCEL
+    hlcoord 1, 1 ; text starting position
+    jr nz, .display_needed_amount
+
+    ld de, .ExitString
+    call PlaceString
+    jr .done
+
+.display_needed_amount
+    ld de, .CrystalText
+    call PlaceString
+    hlcoord 6, 1
+    ld de, wMenuSelectionQuantity
+    lb bc, PRINTNUM_LEADINGZEROS | 1, 2
+    call PrintNum
+.done
+    ret
+
+.CrystalText:
+    db "Cost×@"
+
+.ExitString:
+    db "A: Exit@"
+
+.DisplayAmountOkNotReally:
+; this is usually for displaying something on the right
+; hand side of the menu, but we don't need that here
+    ret
+
+.DisplayMoveName:
+    push de
+    ld a, [wMenuSelection]
+    ld [wNamedObjectIndex], a
+    call GetMoveName
+    pop hl
+    jp PlaceString
+
+.SetupMovesMenu:
+; copy the whole move list
+    ld hl, .FullMoveList
+    ld de, wBattleTowerCrystalMoveTutor
+    ld bc, .FullMoveListEnd - .FullMoveList
+    call CopyBytes
+
+; move the CANCEL indicator
+    sla a ; a *= 2, because quantity is factored in
+    add l
+    ld l, a
+    ld a, -1
+    ld [hl], a
+.got_menu
+    ret
+
+.GetAmountOfCrystals:
+; returns: a = qty. of Crystals
+    ld hl, wItems ; pocket of CRYSTAL, see attributes.asm
+    ld c, MAX_ITEMS ; search bound
+.keep_looking
+    ld a, [hli]
+    cp -1
+    jr z, .no_crystal
+    dec c
+    jr z, .no_crystal
+    cp CRYSTAL
+    jr z, .found_crystal
+    inc hl ; skip quantity
+    jr .keep_looking
+.found_crystal
+    ld a, [hl] ; get quantity
+    jr .write_result
+.no_crystal
+    xor a
+.write_result
+    ld [wMenuSelectionQuantity], a
+    ret
+
+.FullMoveList:
+    db 20 ; list length
+; list items
+    db PAY_DAY, 4
+    db TELEPORT, 1
+    db MEGA_PUNCH, 3
+    db PSYWAVE, 2
+    db SEISMIC_TOSS, 6
+    db BUBBLEBEAM, 6
+    db REFLECT, 4
+    db MEGA_KICK, 5
+    db BODY_SLAM, 12
+    db MIMIC, 10
+    db SELFDESTRUCT, 16
+    db THUNDER_WAVE, 12
+    db TRI_ATTACK, 18
+    db MEGA_DRAIN, 17
+    db SUBSTITUTE, 20
+    db METRONOME, 15
+    db ROCK_SLIDE, 25
+    db SWORDS_DANCE, 23
+    db DOUBLE_EDGE, 24
+    db EXPLOSION, 23
+    db -1 ; terminator
+.FullMoveListEnd:
+
+.NotEnough:
+    writetext BattleTowerMartTutorNotEnoughCrystalsText
+    sjump .EndingOffBattleTowerMartMoveTutor
+
+.Refused:
+    writetext BattleTowerMartTutorDropByAnytimeText
+    sjump .EndingOffBattleTowerMartMoveTutor
+
+.TeachMove:
+    callasm .PayTutorInCrystals
+    writetext BattleTowerMartTutorExcellentText
+    playsound SFX_TRANSACTION
+    waitsfx
+.EndingOffBattleTowerMartMoveTutor:
+    waitbutton
+    closetext
+    turnobject BATTLETOWERMART_TUTOR, DOWN
+    end
+
+.PayTutorInCrystals:
+; this is a variable `takeitem`, and idk what the script equivalent of this
+; is soooo...
+    ld a, CRYSTAL
+    ld [wCurItem], a
+    ld a, [wBattleTowerCrystalMoveTutor] ; should have been set back in .LoadMovesMenu
+    ld [wItemQuantityChange], a
+    ld a, -1
+    ld [wCurItemQuantity], a
+    ld hl, wNumItems
+    call TossItem
+    ret
+
+BattleTowerMartTutorWantMeToTeachText:
+    text "Welcome! I'm am"
+    line "the Battle Tower's"
+    cont "Move Tutor."
+
+    para "I can teach your"
+    line "precious #MON"
+
+    para "special moves for"
+    line "a varied amount"
+    cont "of Crystals each."
+
+    para "Want me to teach"
+    line "your #MON some"
+    cont "moves?"
+    done
+
+BattleTowerMartTutorWelcomeBackWantMeToTeachText:
+    text "Welcome once more"
+    line "esteemed trainer!"
+    
+    para "Shall I tutor a"
+    line "move onto your"
+
+    para "#MON for a set"
+    line "sum of Crystals?"
+    done
+
+BattleTowerMartTutorShallITeachText:
+    text "Which move shall"
+    line "I teach?"
+    done
+
+BattleTowerMartTutorNotEnoughCrystalsText:
+    text "You've not enough"
+    line "Crystals…"
+    done
+
+BattleTowerMartTutorDropByAnytimeText:
+    text "Drop by anytime!"
+    done
+
+BattleTowerMartTutorExcellentText:
+    text "Do visit again!"
+    line "We're always open!"
+    done
+
+BattleTowerMartTutorMoveText:
+    text_start
+    done
 
 BattleTowerMart_MapEvents:
 
     def_warp_events
-	warp_event  4,  9, BATTLE_TOWER_1F, 4
-	warp_event 12,  9, BATTLE_TOWER_1F, 5
-	warp_event  3,  9, BATTLE_TOWER_1F, 4
-	warp_event 11,  9, BATTLE_TOWER_1F, 5
+    warp_event  4,  9, BATTLE_TOWER_1F, 4
+    warp_event 12,  9, BATTLE_TOWER_1F, 5
+    warp_event  3,  9, BATTLE_TOWER_1F, 4
+    warp_event 11,  9, BATTLE_TOWER_1F, 5
     def_coord_events
 
     def_bg_events
 
     def_object_events
-	object_event 12,  1, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BattleTowerMartTMCoinTraderScript, -1
-	object_event 10,  1, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, BattleTowerMartPorygonPCScript, -1
+    object_event 12,  1, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BattleTowerMartTMCoinTraderScript, -1
+    object_event 10,  1, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, BattleTowerMartPorygonPCScript, -1
+    object_event 13,  1, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, BattleTowerMartTutorScientistScript, -1

@@ -340,7 +340,8 @@
 	const EVENT_ROUTE_26_APRICORN_1    ; RED_APRICORN
 	const EVENT_ROUTE_26_APRICORN_2    ; BLU_APRICORN
 	const EVENT_ROUTE_30_BERRY_TEACHER
-; Unused: next 269 events
+	const EVENT_BATTLE_TOWER_TUTOR
+; Unused: next 268 events
 
 	const_next 600
 ; Kurt Apricorn events
