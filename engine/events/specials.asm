@@ -445,9 +445,24 @@ TradebackNPC:
 	farcall TradebackKid
 	ret
 
-PlayerGivesAwayAPokemon:
+PlayerGivesAwayAnEggForAdoption:
 	farcall SelectMonFromParty
+	jr c, .done
+	
+	ld a, [wCurPartySpecies]
+	cp EGG
+	jr nz, .not_an_egg
+
 	ld [wMonType], a ; PARTYMON
 	ld [wPokemonWithdrawDepositParameter], a ; REMOVE_PARTY
-	callfar RemoveMonFromParty
+	callfar AdoptMonFromParty
+	jr .done
+
+.not_an_egg:
+	; here we set an event to tell the Day Care Granddaughter that this is not an Egg
+	ld de, EVENT_DAY_CARE_GRANDDAUGHTER_THIS_IS_NOT_AN_EGG
+	ld b, SET_FLAG
+	call EventFlagAction
+
+.done:
 	ret
