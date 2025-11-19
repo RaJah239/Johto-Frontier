@@ -8443,7 +8443,7 @@ ShowLinkBattleParticipantsAfterEnd:
 
 DisplayLinkBattleResult:
 	farcall CheckMobileBattleError
-	jmp c, .Mobile_InvalidBattle
+	jr c, .Mobile_InvalidBattle
 	call IsMobileBattle2
 	jr nz, .proceed
 
