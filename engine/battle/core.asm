@@ -514,8 +514,8 @@ DetermineMoveOrder:
 	jmp nz, .player_first
 	call CompareMovePriority
 	jr z, .equal_priority
-	jr c, .player_first ; player goes first
-	jr .enemy_first
+	jmp c, .player_first ; player goes first
+	jmp .enemy_first
 
 .equal_priority
 	call SetPlayerTurn
@@ -532,7 +532,9 @@ DetermineMoveOrder:
 	call BattleRandom
 	cp e
 	jr nc, .speed_check
-	jr .player_first
+	ld hl, BattleText_QuickClaw
+	call StdBattleTextbox
+	jmp .player_first
 
 .player_no_quick_claw
 	ld a, b
@@ -541,6 +543,9 @@ DetermineMoveOrder:
 	call BattleRandom
 	cp c
 	jr nc, .speed_check
+	call SetEnemyTurn
+	ld hl, BattleText_QuickClaw
+	call StdBattleTextbox
 	jr .enemy_first
 
 .both_have_quick_claw
@@ -549,20 +554,34 @@ DetermineMoveOrder:
 	jr z, .player_2b
 	call BattleRandom
 	cp c
-	jr c, .enemy_first
+	jr nc, .check_player_claw
+	call SetEnemyTurn
+	ld hl, BattleText_QuickClaw
+	call StdBattleTextbox
+	jr .enemy_first
+.check_player_claw
 	call BattleRandom
 	cp e
-	jr c, .player_first
-	jr .speed_check
+	jr nc, .speed_check
+	ld hl, BattleText_QuickClaw
+	call StdBattleTextbox
+	jr .player_first
 
 .player_2b
 	call BattleRandom
 	cp e
-	jr c, .player_first
+	jr nc, .check_enemy_claw
+	ld hl, BattleText_QuickClaw
+	call StdBattleTextbox
+	jr .player_first
+.check_enemy_claw
 	call BattleRandom
 	cp c
-	jr c, .enemy_first
-	jr .speed_check
+	jr nc, .speed_check
+	call SetEnemyTurn
+	ld hl, BattleText_QuickClaw
+	call StdBattleTextbox
+	jr .enemy_first
 
 .speed_check
 	ld de, wBattleMonSpeed

@@ -1,5 +1,10 @@
 BattleText:: ; used only for BANK(BattleText)
 
+BattleText_QuickClaw:
+	text "<USER>'s"
+	line "Quick Claw procs!"
+	prompt
+
 BattleText_PlayerPickedUpPayDayMoney:
 	text "<PLAYER> picked up"
 	line "¥@"
