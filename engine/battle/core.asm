@@ -4647,21 +4647,18 @@ CheckDanger:
 	jr z, .no_danger
 	ld a, [wBattleLowHealthAlarm]
 	and a
-	jr nz, .done
+	ret nz
+	ld hl, wLowHealthAlarm
 	ld a, [wPlayerHPPal]
 	cp HP_RED
 	jr z, .danger
 
 .no_danger
-	ld hl, wLowHealthAlarm
-	res DANGER_ON_F, [hl]
-	jr .done
+	ld [hl], 0
+	ret
 
 .danger
-	ld hl, wLowHealthAlarm
 	set DANGER_ON_F, [hl]
-
-.done
 	ret
 
 PrintPlayerHUD:
