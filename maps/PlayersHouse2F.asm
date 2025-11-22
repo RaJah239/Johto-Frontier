@@ -197,6 +197,11 @@ if DEF(_DEBUG)
 	giveitem MOON_BALL, MAX_ITEM_STACK
 	giveitem LOVE_BALL, MAX_ITEM_STACK
 
+	; all rods
+	giveitem OLD_ROD
+	giveitem GOOD_ROD
+	giveitem SUPER_ROD
+
 	; intro events
 	addcellnum PHONE_MOM
 	setmapscene PLAYERS_HOUSE_1F, $1
