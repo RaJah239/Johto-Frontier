@@ -50,25 +50,7 @@ Pokecenter2F_AppearMysteryGiftDeliveryGuy:
 	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
 	end
 
-Script_TradeCenterClosed:
-	faceplayer
-	opentext
-	writetext Text_TradeRoomClosed
-	waitbutton
-	closetext
-	end
-
-Script_BattleRoomClosed:
-	faceplayer
-	opentext
-	writetext Text_BattleRoomClosed
-	waitbutton
-	closetext
-	end
-
 LinkReceptionistScript_Trade:
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iffalse Script_TradeCenterClosed
 	opentext
 	writetext Text_TradeReceptionistIntro
 	yesorno
@@ -169,8 +151,6 @@ BattleTradeMobile_WalkIn:
 	end
 
 LinkReceptionistScript_Battle:
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iffalse Script_BattleRoomClosed
 	opentext
 	writetext Text_BattleReceptionistIntro
 	yesorno
@@ -918,18 +898,6 @@ Text_RejectMonWithMail:
 Text_TimeCapsuleClosed:
 	text "I'm sorry--the"
 	line "TIME CAPSULE is"
-	cont "being adjusted."
-	done
-
-Text_TradeRoomClosed:
-	text "I'm sorry--the"
-	line "TRADE MACHINE is"
-	cont "being adjusted."
-	done
-
-Text_BattleRoomClosed:
-	text "I'm sorry--the"
-	line "BATTLE MACHINE is"
 	cont "being adjusted."
 	done
 
