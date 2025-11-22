@@ -1163,60 +1163,31 @@ VitaminEffect:
 	ld b, PARTYMENUACTION_HEALING_ITEM
 	call UseItem_SelectMon
 
-	jmp c, RareCandy_StatBooster_ExitMenu
+	jr c, RareCandy_StatBooster_ExitMenu
 
 	call RareCandy_StatBooster_GetParameters
 
 	call GetEVRelativePointer
 
-	ld a, MON_EVS
-	call GetPartyParamLocation
+    ld a, MON_EVS
+    call GetPartyParamLocation
 
-	ld d, 10
-	push bc
-	push hl
-	ld e, NUM_STATS
-	ld bc, 0
-.count_evs
-	ld a, [hli]
-	add c
-	ld c, a
-	jr nc, .cont
-	inc b
-.cont
-	dec e
-	jr nz, .count_evs
-	ld a, d
-	add c
-	ld c, a
-	adc b
-	sub c 
-	ld b, a
-	ld e, d
-.decrease_evs_gained
-	farcall IsEvsGreaterThan510
-	jr nc, .check_ev_overflow
-	dec e
-	dec bc
-	jr .decrease_evs_gained
-.check_ev_overflow
-	pop hl 
-	pop bc 
+    add hl, bc
+    ld a, [hl]
+    cp MAX_EV
+    jr nc, NoEffectMessage
 
-	ld a, e
-	and a
-	jr z, NoEffectMessage
+    add 10
+    jr c, .ev_overflow
+    cp MAX_EV + 1
+    jr c, .got_ev
+.ev_overflow
+    ld a, MAX_EV
+.got_ev
+    ld [hl], a
+    call UpdateStatsAfterItem
 
-	add hl, bc
-	ld a, [hl]
-	cp 100
-	jr nc, NoEffectMessage
-
-	add e
-	ld [hl], a
-	call UpdateStatsAfterItem
-
-	call GetEVRelativePointer
+    call GetEVRelativePointer 
 
 	ld hl, StatStrings
 	add hl, bc

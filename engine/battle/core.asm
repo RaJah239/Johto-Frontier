@@ -7113,47 +7113,6 @@ GiveExperiencePoints:
 	jr z, .no_pokerus_boost
 	add a
 .no_pokerus_boost
-; Make sure total EVs never surpass 510
-	push bc
-	push hl
-	ld d, a
-	ld a, c
-.find_correct_ev_address
-	; If address of first EV is changed, find the correct one.
-	cp NUM_STATS
-	jr z, .found_address
-	dec hl
-	inc a
-	jr .find_correct_ev_address
-.found_address
-	ld e, NUM_STATS
-	ld bc, 0
-.count_evs
-	ld a, [hli]
-	add c
-	ld c, a
-	jr nc, .cont
-	inc b
-.cont
-	dec e
-	jr nz, .count_evs
-	ld a, d
-	add c
-	ld c, a
-	adc b
-	sub c
-	ld b, a
-	ld e, d
-.decrease_evs_gained
-	call IsEvsGreaterThan510
-	jr nc, .check_ev_overflow
-	dec e
-	dec bc
-	jr .decrease_evs_gained
-.check_ev_overflow
-	pop hl 
-	pop bc 
-	ld a, e
 	add [hl]
 	jr c, .ev_overflow
 	cp MAX_EV + 1
@@ -7491,15 +7450,6 @@ GiveExperiencePoints:
 	call Divide
 	ldh a, [hQuotient + 3]
 	ld [hl], a
-	ret
-
-IsEvsGreaterThan510:
-; Total EVs in bc. Set Carry flag if bc > 510.
-	ld a, HIGH(MAX_TOTAL_EV)
-	cp b
-	ret nz
-	ld a, LOW(MAX_TOTAL_EV)
-	cp c
 	ret
 
 BoostExp:
