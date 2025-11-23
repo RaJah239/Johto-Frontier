@@ -29,6 +29,7 @@ StartMenu::
 	call .SetUpMenuItems
 	ld a, [wBattleMenuCursorPosition]
 	ld [wMenuCursorPosition], a
+	call .DrawDayTimeBox
 	call .DrawMenuAccount
 	call DrawVariableLengthMenuBox
 	call .DrawBugContestStatusBox
@@ -49,6 +50,7 @@ StartMenu::
 .Select:
 	call .GetInput
 	jr c, .Exit
+	call .DrawDayTimeBox
 	call ._DrawMenuAccount
 	ld a, [wMenuCursorPosition]
 	ld [wBattleMenuCursorPosition], a
@@ -96,11 +98,13 @@ StartMenu::
 ; Return carry on exit, and no-carry on selection.
 	xor a
 	ldh [hBGMapMode], a
+	call .DrawDayTimeBox
 	call ._DrawMenuAccount
 	call SetUpMenu
 	ld a, $ff
 	ld [wMenuSelection], a
 .loop
+	call .PrintDayTime
 	call .PrintMenuAccount
 	call GetScrollingMenuJoypad
 	ld a, [wMenuJoypad]
@@ -147,6 +151,7 @@ StartMenu::
 	call ClearBGPalettes
 	call Call_ExitMenu
 	call ReloadTilesetAndPalettes
+	call .DrawDayTimeBox
 	call .DrawMenuAccount
 	call DrawVariableLengthMenuBox
 	call .DrawBugContestStatus
@@ -384,6 +389,29 @@ endr
 .IsMenuAccountOn:
 	ld a, [wOptions2]
 	and 1 << MENU_ACCOUNT
+	ret
+
+.DrawDayTimeBox:
+	; place white box
+	hlcoord 0, 14
+	lb bc, 4, 10
+	call ClearBox
+
+	; grab white text box palette
+	hlcoord 0, 14
+	lb bc, 2, 8
+	jp TextboxPalette
+
+.PrintDayTime:
+	call .DrawDayTimeBox
+	bccoord 1, 15
+	call TextCommand_DAY
+	ld a, [hHours]
+	ld b, a
+	ld a, [hMinutes]
+	ld c, a
+	decoord 1, 16
+	farcall PrintHoursMins
 	ret
 
 .DrawBugContestStatusBox:
