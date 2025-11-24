@@ -1496,17 +1496,9 @@ Pack_InterpretJoypad:
 	ret
 
 .start
-	ld hl, Text_SortItems
-	call PrintText
-	ld c, 30
-	call DelayFrames
 	farcall SortItemsInBag
 	ld de, SFX_TALLY
 	call WaitPlaySFX
-	ld hl, Text_SortComplete
-	call PrintText
-	ld c, 30
-	call DelayFrames
 	scf
 	ret
 
@@ -1852,14 +1844,6 @@ PC_Mart_BattlePocketMenuHeader:
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
 	dba UpdateItemDescription
-
-Text_SortItems:
-	text "Sorting items…"
-	done
-
-Text_SortComplete:
-	text "Sorting complete!"
-	done
 
 PackNoItemText: ; unreferenced
 	text_far _PackNoItemText
