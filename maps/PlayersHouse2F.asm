@@ -55,9 +55,9 @@ if DEF(_DEBUG)
 	giveitem COIN_CASE
 	givecoins MAX_COINS
 	; good party
-	givepoke MEW, 100, LEFTOVERS
-	givepoke SMEARGLE, 100, FOCUS_BAND
-	givepoke GYARADOS, 100, GOLD_BERRY
+	givepoke MEW, 50, LEFTOVERS
+	givepoke SMEARGLE, 50, FOCUS_BAND
+	givepoke GYARADOS, 50, GOLD_BERRY
 
 	; 4th, 5th & 6th mons
 	; unneeded presently
