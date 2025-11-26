@@ -183,6 +183,9 @@ if DEF(_DEBUG)
 	giveitem SILVER_LEAF
 	giveitem GOLD_LEAF
 
+	; crystal
+	giveitem CRYSTAL, MAX_ITEM_STACK
+
 	; fossils
 	giveitem OLD_AMBER
 	giveitem DOME_FOSSIL
