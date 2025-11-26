@@ -177,6 +177,10 @@ if DEF(_DEBUG)
 	giveitem ZINC, MAX_ITEM_STACK
 	giveitem CARBOS, MAX_ITEM_STACK
 
+	; leaves
+	giveitem SILVER_LEAF
+	giveitem GOLD_LEAF
+
 	; fossils
 	giveitem OLD_AMBER
 	giveitem DOME_FOSSIL
