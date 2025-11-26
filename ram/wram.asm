@@ -582,11 +582,7 @@ wLastEnemyMove:: db
 wPlayerFutureSightCount:: db
 wEnemyFutureSightCount:: db
 
-wGivingExperienceToExpShareHolders:: db
-
-wBackupEnemyMonBaseStats:: ds NUM_EXP_STATS
-wBackupEnemyMonCatchRate:: db
-wBackupEnemyMonBaseExp:: db
+	ds 8
 
 wPlayerFutureSightDamage:: dw
 wEnemyFutureSightDamage:: dw
@@ -3107,8 +3103,9 @@ wEmotePal:: db
 wMooMooBerries:: db
 wUndergroundSwitchPositions:: db
 wFarfetchdPosition:: db
+wExpShareToggle:: db
 
-	ds 13
+	ds 12
 
 ; map scene ids
 wPokecenter2FSceneID::                            db

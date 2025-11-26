@@ -51,6 +51,7 @@ if DEF(_DEBUG)
 	opentext
 	givemoney YOUR_MONEY, MAX_MONEY
 	giveitem BICYCLE
+	giveitem EXP_SHARE
 	giveitem COIN_CASE
 	givecoins MAX_COINS
 	; good party
