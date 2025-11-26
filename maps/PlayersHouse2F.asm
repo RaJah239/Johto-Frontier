@@ -179,12 +179,11 @@ if DEF(_DEBUG)
 	giveitem ZINC, MAX_ITEM_STACK
 	giveitem CARBOS, MAX_ITEM_STACK
 
-	; leaves
+	; loot
+	giveitem CRYSTAL, MAX_ITEM_STACK
+	giveitem NUGGET, MAX_ITEM_STACK
 	giveitem SILVER_LEAF
 	giveitem GOLD_LEAF
-
-	; crystal
-	giveitem CRYSTAL, MAX_ITEM_STACK
 
 	; fossils
 	giveitem OLD_AMBER
