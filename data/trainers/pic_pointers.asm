@@ -70,7 +70,6 @@ TrainerPicPointers::
  	dba OfficerPic
  	dba GruntfPic
  	dba MysticalmanPic
- 	dba KrisPic
 	dba GiovanniPic
 	dba ProtonPic
 	dba PetrelPic

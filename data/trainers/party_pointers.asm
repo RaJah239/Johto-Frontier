@@ -70,7 +70,6 @@ TrainerGroups:
 	dba OfficerGroup
 	dba GruntFGroup
 	dba MysticalmanGroup
-	dba KrisGroup
 	dba GiovanniGroup
 	dba ProtonGroup
 	dba PetrelGroup

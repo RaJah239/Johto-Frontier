@@ -152,8 +152,7 @@ wScriptVar:: db
 wPlayerNextMovement:: db
 wPlayerMovement:: db
 
-wLinkOtherPlayerGender:: db
-	ds 1
+	ds 2
 
 wMovementObject::
 	db
