@@ -222,7 +222,7 @@ VioletScript:
 	closewindow
 	ifequal 1, .SacredAsh
 	ifequal 2, .EonMail
-	ifequal 3, .Nuggets
+	ifequal 3, .Crystals
 	writetext NotTradingText
 	waitbutton
 	closetext
@@ -244,12 +244,12 @@ VioletScript:
 	writetext PlayerGotEonMailText
 	sjump .WrappingUpThisCoinTrade
 
-.Nuggets:
+.Crystals:
 	checkcoins 9999
 	ifequal HAVE_LESS, .CoinCaseNotAtMax
-	giveitem NUGGET, 99
+	giveitem CRYSTAL, 11
 	iffalse .NoRoom
-	writetext PlayerGotNinetyNineNuggetsText
+	writetext PlayerGotNinetyElevenCrystalsText
 .WrappingUpThisCoinTrade:
 	ifequal TRUE, .ConcludeTransaction
 	waitbutton
@@ -297,7 +297,7 @@ VioletScript:
 	db 4 ; items
 	db "SACRED ASH x5@"
 	db "EON MAIL   x1@"
-	db "NUGGET    x99@"
+	db "CRYSTAL   x11@"
 	db "CANCEL@"
 
 VioletIntroText:
@@ -379,9 +379,9 @@ PlayerGotEonMailText:
 	text_promptbutton
 	text_end
 
-PlayerGotNinetyNineNuggetsText:
+PlayerGotNinetyElevenCrystalsText:
 	text "<PLAYER> got"
-	line "99 NUGGET!@"
+	line "11 CRYSTAL!@"
 	sound_item
 	text_promptbutton
 	text_end
