@@ -7436,6 +7436,38 @@ BoostExp:
 	pop bc
 	ret
 
+; This entire HP block should be moved elsewhere and be farcall if possible
+CheckOpponentFullHP:
+; check if the opponent has full HP
+; z: yes, nz: no
+	ld hl, wEnemyMonHP
+	ld a, [hBattleTurn]
+	and a
+	jr z, DoCheckFullHP
+	ld hl, wBattleMonHP
+	jr DoCheckFullHP
+	
+CheckFullHP:
+; check if the user has full HP
+; z: yes, nz: no
+	ld hl, wBattleMonHP
+	ld a, [hBattleTurn]
+	and a
+	jr z, DoCheckFullHP
+	ld hl, wEnemyMonHP
+	; fallthrough
+DoCheckFullHP:
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	cp b
+	ret nz
+	ld a, [hl]
+	cp c
+	ret
+
 Text_MonGainedExpPoint:
 	text_far Text_Gained
 	text_asm

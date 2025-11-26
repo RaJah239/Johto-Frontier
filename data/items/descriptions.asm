@@ -57,7 +57,7 @@ ItemDescriptions:
 	dw CoinCaseDesc
 	dw ItemfinderDesc
 	dw TeruSama5Desc
-	dw ExpShareDesc
+	dw FocusSashDesc
 	dw OldRodDesc
 	dw GoodRodDesc
 	dw SilverLeafDesc
@@ -478,9 +478,9 @@ ItemfinderDesc:
 TeruSama5Desc:
 	db   "?@"
 
-ExpShareDesc:
-	db   "Shares battle EXP."
-	next "Points.@"
+FocusSashDesc:
+	db   "Endures 1 OHKO at"
+	next "full HP. (HOLD)@"
 
 OldRodDesc:
 	db   "Use by water to"

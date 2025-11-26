@@ -56,7 +56,7 @@ ItemNames::
 	li "COIN CASE"
 	li "ITEMFINDER"
 	li "TERU-SAMA"
-	li "EXP.SHARE"
+	li "FOCUS SASH"
 	li "OLD ROD"
 	li "GOOD ROD"
 	li "SILVER LEAF"

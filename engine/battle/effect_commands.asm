@@ -2119,7 +2119,7 @@ BattleCommand_ApplyDamage:
 	ld a, BATTLE_VARS_SUBSTATUS1_OPP
 	call GetBattleVar
 	bit SUBSTATUS_ENDURE, a
-	jr z, .focus_band
+	jr z, .check_item
 
 	call BattleCommand_FalseSwipe
 	ld b, 0
@@ -2127,11 +2127,27 @@ BattleCommand_ApplyDamage:
 	ld b, 1
 	jr .damage
 
-.focus_band
+.check_item
 	call GetOpponentItem
+	ld a, [hl]
+	ld [wNamedObjectIndex], a
+	call GetItemName
 	ld a, b
 	cp HELD_FOCUS_BAND
 	ld b, 0
+	jr z, .focus_band
+	cp HELD_FOCUS_SASH
+	jr nz, .damage
+	call BattleCommand_FalseSwipe
+	ld b, 0
+	jr nc, .damage
+	callfar ConsumeHeldItem
+	ld b, 2
+	jr .damage
+
+.focus_band
+; check if target is at full hp
+	farcall CheckOpponentFullHP
 	jr nz, .damage
 
 	call BattleRandom
@@ -2167,10 +2183,6 @@ BattleCommand_ApplyDamage:
 	jmp StdBattleTextbox
 
 .focus_band_text
-	call GetOpponentItem
-	ld a, [hl]
-	ld [wNamedObjectIndex], a
-	call GetItemName
 	ld hl, HungOnText
 	jmp StdBattleTextbox
 

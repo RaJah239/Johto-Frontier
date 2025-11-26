@@ -2,7 +2,7 @@
 	const_def
 	const OPT_TEXT_SPEED    ; 0
 	const OPT_BATTLE_SCENE  ; 1
-	const OPT_BATTLE_STYLE  ; 2
+	const OPT_EXP_SHARE     ; 2
 	const OPT_SOUND         ; 3
 	const OPT_PRINT         ; 4
 	const OPT_TRIVIAL_CALLS ; 5
@@ -79,7 +79,7 @@ StringOptions:
 	db "        :<LF>"
 	db "BATTLE SCENE<LF>"
 	db "        :<LF>"
-	db "BATTLE STYLE<LF>"
+	db "EXP.SHARE<LF>"
 	db "        :<LF>"
 	db "SOUND<LF>"
 	db "        :<LF>"
@@ -98,7 +98,7 @@ GetOptionPointer:
 ; entries correspond to OPT_* constants
 	dw Options_TextSpeed
 	dw Options_BattleScene
-	dw Options_BattleStyle
+	dw Options_ExpShare
 	dw Options_Sound
 	dw Options_Print
 	dw Options_TrivialCalls
@@ -222,34 +222,34 @@ Options_BattleScene:
 .On:  db "ON @"
 .Off: db "OFF@"
 
-Options_BattleStyle:
-	ld hl, wOptions
+Options_ExpShare:
+	ld hl, wExpShareToggle
 	ldh a, [hJoyPressed]
 	bit D_LEFT_F, a
 	jr nz, .LeftPressed
 	bit D_RIGHT_F, a
 	jr z, .NonePressed
-	bit BATTLE_SHIFT, [hl]
-	jr nz, .ToggleShift
-	jr .ToggleSet
+	bit EXP_SHARE, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
 
 .LeftPressed:
-	bit BATTLE_SHIFT, [hl]
-	jr z, .ToggleSet
-	jr .ToggleShift
+	bit EXP_SHARE, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
 
 .NonePressed:
-	bit BATTLE_SHIFT, [hl]
-	jr nz, .ToggleSet
+	bit EXP_SHARE, [hl]
+	jr nz, .ToggleOn
 
-.ToggleShift:
-	res BATTLE_SHIFT, [hl]
-	ld de, .Shift
+.ToggleOff:
+	res EXP_SHARE, [hl]
+	ld de, .Off
 	jr .Display
 
-.ToggleSet:
-	set BATTLE_SHIFT, [hl]
-	ld de, .Set
+.ToggleOn:
+	set EXP_SHARE, [hl]
+	ld de, .On
 
 .Display:
 	hlcoord 11, 7
@@ -257,8 +257,8 @@ Options_BattleStyle:
 	and a
 	ret
 
-.Shift: db "SHIFT@"
-.Set:   db "SET  @"
+.Off: db "OFF@"
+.On:  db "ON @"
 
 Options_Sound:
 	ld hl, wOptions

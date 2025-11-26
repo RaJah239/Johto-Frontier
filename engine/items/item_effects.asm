@@ -70,7 +70,7 @@ ItemEffects:
 	dw CoinCaseEffect      ; COIN_CASE
 	dw ItemfinderEffect    ; ITEMFINDER
 	dw PokeFluteEffect     ; POKE_FLUTE
-	dw ExpShareEffect      ; EXP_SHARE
+	dw NoEffect            ; FOCUS_SASH
 	dw OldRodEffect        ; OLD_ROD
 	dw GoodRodEffect       ; GOOD_ROD
 	dw NoEffect            ; SILVER_LEAF
@@ -2987,22 +2987,3 @@ GetMthMoveOfCurrentMon:
 	ld b, 0
 	add hl, bc
 	ret
-
-ExpShareEffect:
-	ld a, [wExpShareToggle]
-	xor 1
-	ld [wExpShareToggle], a
-	and a
-	ld hl, ExpShareToggleOn
-	jmp nz, PrintText
-
-	ld hl, ExpShareToggleOff
-	jmp PrintText
-
-ExpShareToggleOff:
-	text_far _ExpShareToggleOff
-	text_end
- 
-ExpShareToggleOn:
-	text_far _ExpShareToggleOn
-	text_end

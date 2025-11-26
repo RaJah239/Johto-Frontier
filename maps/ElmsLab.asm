@@ -474,7 +474,6 @@ AideScript_GivePotion:
 	writetext AideText_GiveYouPotion
 	promptbutton
 	verbosegiveitem POTION
-	verbosegiveitem EXP_SHARE
 	writetext AideText_AlwaysBusy
 	waitbutton
 	closetext
@@ -1262,6 +1261,16 @@ AideText_ExplainBalls:
 	para "Throw # BALLS"
 	line "at wild #MON"
 	cont "to get them."
+
+	para "More #MON means"
+	line "more training but"
+	
+	para "you have EXP.SHARE"
+	line "in your OPTIONS."
+
+	para "Set it ON to share"
+	line "EXP. Points with"
+	cont "all your #MON."
 	done
 
 ElmsLabOfficerText1:

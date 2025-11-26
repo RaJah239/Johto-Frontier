@@ -9,14 +9,13 @@ ItemNameOrder:
 
 
 
-; Item Pocket - 25 total
+; Item Pocket - 24 total
 ; Forever useful items
 	db REPEL
 	db SUPER_REPEL
 	db MAX_REPEL
 	db POKE_DOLL
 	db ESCAPE_ROPE
-	db EXP_SHARE
 
 ; Evolution Items
 	db FIRE_STONE
@@ -146,7 +145,7 @@ ItemNameOrder:
 
 
 ; NEXT POCKET
-; Battle Pocket - 44 total
+; Battle Pocket - 45 total
 
 ; Stat altering Battle Items
 	db GUARD_SPEC
@@ -169,6 +168,7 @@ ItemNameOrder:
 	db DRAGON_FANG
 	db EVERSTONE
 	db FOCUS_BAND
+	db FOCUS_SASH
 	db HARD_STONE
 	db KINGS_ROCK
 	db LEFTOVERS
