@@ -305,7 +305,7 @@ StubbedTrainerRankings_HookedEncounters:
 StubbedTrainerRankings_EggsHatched:
 	ret
 	ld hl, sTrainerRankingEggsHatched
-	jmp StubbedTrainerRankings_Increment3Byte
+	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_MonsEvolved:
 	ret
