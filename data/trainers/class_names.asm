@@ -68,6 +68,7 @@ TrainerClassNames::
 	li "OFFICER"
 	li "ROCKET"
 	li "MYSTICALMAN"
+	li "<PKMN> TRAINER"
 	li "BOSS"
 	li "TEAM ROCKET"
 	li "TEAM ROCKET"

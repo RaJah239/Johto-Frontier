@@ -69,6 +69,7 @@ TrainerClassDVs:
 	dn  9,  8,  8,  8 ; OFFICER
 	dn  7, 14, 10,  8 ; GRUNTF
 	dn  9,  8,  8,  8 ; MYSTICALMAN
+	dn 13, 12, 13, 13 ; KRIS
 	dn 15, 15, 15, 15 ; GIOVANNI
 	dn  0,  0,  0,  0 ; PROTON
 	dn  0,  0,  0,  0 ; PETREL

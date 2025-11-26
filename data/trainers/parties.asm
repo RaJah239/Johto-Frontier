@@ -223,3 +223,9 @@ ScarletGroup:
 	db "L@", TRAINERTYPE_NORMAL
 	db 2, ZUBAT
 	db -1 ; end
+
+KrisGroup:
+	; KRIS (1)
+	db "KRIS@", TRAINERTYPE_NORMAL
+	db 5, CYNDAQUIL
+	db -1 ; end

@@ -70,6 +70,7 @@ BTTrainerClassGenders:
 	db MALE   ; OFFICER
 	db FEMALE ; GRUNTF
 	db MALE   ; MYSTICALMAN
+	db FEMALE ; KRIS
 	db MALE   ; GIOVANNI
 	db MALE   ; PROTON
 	db MALE   ; PETREL

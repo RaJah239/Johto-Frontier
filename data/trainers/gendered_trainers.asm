@@ -44,6 +44,7 @@ FemaleTrainers:
 	db KIMONO_GIRL
 	db POKEFANF
 	db COOLTRAINERF
+	db SPRITE_KRIS
 	db LORELEI
 	db AGATHA
 	db SCARLET
