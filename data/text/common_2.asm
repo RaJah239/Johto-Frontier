@@ -19,6 +19,11 @@ _NameRaterHelloText::
 	line "to rate names?"
 	done
 
+_TeamGainedExpText::
+	text "Remaining team got"
+	line "EXP via EXP.SHARE!"
+	prompt
+
 _NameRaterWhichMonText::
 	text "Which #MON's"
 	line "nickname should I"

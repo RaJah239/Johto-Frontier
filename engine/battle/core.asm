@@ -2191,12 +2191,17 @@ UpdateBattleStateAndExperienceAfterEnemyFaint:
 
 ApplyExperienceAfterEnemyCaught:
 	; Preserve bits of non-fainted participants
+	xor a
+	ld[wExpShare], a
+	ld[wExpShareText], a
 	ld a, [wBattleParticipantsNotFainted]
 	ld d, a
 	push de
 	call GiveExperiencePoints
 	pop de
 	; If Exp. Share is ON, give 50% EXP to non-participants
+	ld a, 1
+	ld[wExpShare], a
 	ld a, [wExpShareToggle]
 	and a
 	ret z
@@ -6973,6 +6978,7 @@ GiveExperiencePoints:
 	bit 0, a
 	ret nz
 
+	call EvenlyDivideExpAmongParticipants
 	xor a
 	ld [wCurPartyMon], a
 	ld bc, wPartyMon1Species
@@ -7101,13 +7107,27 @@ GiveExperiencePoints:
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
 	call GetNickname
+	ld a, [wExpShare]
+	and a
+	jr nz, .ExpShareON
 	ld hl, Text_MonGainedExpPoint
+	jr .Text
+.ExpShareON
+	ld a, [wExpShareText]
+	and a
+	jr nz, .AfterText
+	inc a
+	ld [wExpShareText], a
+	ld hl, Text_TeamGainedExpPoint
+.Text
 	call BattleTextbox
+.AfterText
 	ld a, [wStringBuffer2 + 1]
 	ldh [hQuotient + 3], a
 	ld a, [wStringBuffer2]
 	ldh [hQuotient + 2], a
 	pop bc
+; Give Exp
 	call AnimateExpBar
 	push bc
 	call LoadTilemapToTempTilemap
@@ -7342,6 +7362,60 @@ GiveExperiencePoints:
 .done
 	jmp ResetBattleParticipants
 
+EvenlyDivideExpAmongParticipants:
+; Only if there is Exp Share is not active
+	ld a, [wExpShareToggle]
+	and a
+	ret nz
+; Count number of battle participants
+	ld a, [wBattleParticipantsNotFainted]
+	ld b, a
+	ld c, PARTY_LENGTH
+	ld de, 0
+.count_loop
+push bc
+	push de
+	ld a, e
+	ld hl, wPartyMon1Level
+	call GetPartyLocation
+	ld a, [hl]
+	cp MAX_LEVEL
+	pop de
+	pop bc
+	jr c, .gains_exp
+	srl b
+	ld a, d
+	jr .no_exp
+.gains_exp
+	xor a
+	srl b
+	adc d
+	ld d, a
+.no_exp
+	inc e
+	dec c
+	jr nz, .count_loop
+	cp 2
+	ret c
+
+	ld [wTempByteValue], a
+	ld hl, wEnemyMonBaseStats
+	ld c, wEnemyMonEnd - wEnemyMonBaseStats
+.base_stat_division_loop
+	xor a
+	ldh [hDividend + 0], a
+	ld a, [hl]
+	ldh [hDividend + 1], a
+	ld a, [wTempByteValue]
+	ldh [hDivisor], a
+	ld b, 2
+	call Divide
+	ldh a, [hQuotient + 3]
+	ld [hli], a
+	dec c
+	jr nz, .base_stat_division_loop
+	ret
+
 BoostExp:
 ; Multiply experience by 1.5x
 	push bc
@@ -7372,6 +7446,15 @@ Text_MonGainedExpPoint:
 
 	ld hl, BoostedExpPointsText
 	ret
+
+Text_TeamGainedExpPoint:
+	text_asm
+	ld hl, TeamGainedExpPointText
+	ret
+
+TeamGainedExpPointText:
+	text_far _TeamGainedExpText
+	text_end
 
 BoostedExpPointsText:
 	text_far _BoostedExpPointsText
