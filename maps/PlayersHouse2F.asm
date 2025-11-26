@@ -65,11 +65,11 @@ if DEF(_DEBUG)
 	; givepoke DITTO, 5, METAL_POWDER
 
 	; first mon shiny
-	loadmem wPartyMon1DVs+0, $ea
-	loadmem wPartyMon1DVs+1, $aa
+	loadmem wPartyMon1DVs+0, $ff
+	loadmem wPartyMon1DVs+1, $ff
 	; third mon shiny
-	loadmem wPartyMon3DVs+0, $ea
-	loadmem wPartyMon3DVs+1, $aa
+	loadmem wPartyMon3DVs+0, $ff
+	loadmem wPartyMon3DVs+1, $ff
 
 	; useful moves
 	loadmem wPartyMon1Moves+0, ICE_BEAM
