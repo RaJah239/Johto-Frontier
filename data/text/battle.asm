@@ -140,19 +140,17 @@ BattleText_TargetWasHitByFutureSight:
 
 BattleText_SafeguardFaded:
 	text "<USER>'s"
-	line "SAFEGUARD faded!"
+	line "Safeguard faded!"
 	prompt
 
 BattleText_MonsLightScreenFell:
-	text_ram wStringBuffer1
-	text " #MON's"
-	line "LIGHT SCREEN fell!"
+	text "<TARGET>'s"
+	line "Light Screen fell!"
 	prompt
 
 BattleText_MonsReflectFaded:
-	text_ram wStringBuffer1
-	text " #MON's"
-	line "REFLECT faded!"
+	text "<TARGET>'s"
+	line "Reflect faded!"
 	prompt
 
 BattleText_RainContinuesToFall:
@@ -879,12 +877,12 @@ TransformedText:
 
 LightScreenEffectText:
 	text "<USER>'s"
-	line "SPCL.DEF rose!"
+	line "Spcl.Def rose!"
 	prompt
 
 ReflectEffectText:
 	text "<USER>'s"
-	line "DEFENSE rose!"
+	line "Defense rose!"
 	prompt
 
 NothingHappenedText:
