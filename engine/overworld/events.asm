@@ -505,11 +505,14 @@ CheckAPressOW:
 	ret
 
 PlayTalkObject:
-	push de
-	ld de, SFX_READ_TEXT_2
-	call PlaySFX
-	pop de
-	ret
+    push de
+    ld de, SFX_READ_TEXT_2
+    call PlaySFX
+    pop de
+    push bc
+    call SFXDelay3
+    pop bc
+    ret
 
 TryObjectEvent:
 	farcall CheckFacingObject
