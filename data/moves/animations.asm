@@ -2435,17 +2435,14 @@ BattleAnim_SpikeCannon:
 	anim_ret
 
 BattleAnim_Transform:
-	anim_1gfx BATTLE_ANIM_GFX_HIT
 	anim_call BattleAnim_TargetObj_2Row
 	anim_transform
-	anim_sound 0, 0, SFX_PSYBEAM
 	anim_bgeffect BATTLE_BG_EFFECT_WAVE_DEFORM_MON, $0, BG_EFFECT_USER, $0
-	anim_wait 48
+	anim_wait 16
 	anim_updateactorpic
 	anim_incbgeffect BATTLE_BG_EFFECT_WAVE_DEFORM_MON
-	anim_wait 48
-	anim_call BattleAnim_ShowMon_0
-	anim_ret
+	anim_wait 16
+	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_PetalDance:
 	anim_sound 0, 0, SFX_MENU
