@@ -202,6 +202,12 @@ if DEF(_DEBUG)
 	giveitem MOON_BALL, MAX_ITEM_STACK
 	giveitem LOVE_BALL, MAX_ITEM_STACK
 
+	; battle items
+	giveitem EVERSTONE, MAX_ITEM_STACK
+	giveitem LIFE_ORB, MAX_ITEM_STACK
+	giveitem CHOICE_BAND, MAX_ITEM_STACK
+	giveitem CHOICE_SPECS, MAX_ITEM_STACK
+
 	; all rods
 	giveitem OLD_ROD
 	giveitem GOOD_ROD
