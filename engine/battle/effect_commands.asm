@@ -915,6 +915,29 @@ CheckUserIsCharging:
 	ret
 
 BattleCommand_DoTurn:
+; DevNote - lock into choice item move here
+	call GetUserItem
+	ld a, b
+	cp HELD_CHOICE_BAND
+	jr z, .lock
+	cp HELD_CHOICE_SPECS
+	jr z, .lock
+	jr .continue
+.lock
+	ld a, BATTLE_VARS_SUBSTATUS5
+	call GetBattleVarAddr
+	set SUBSTATUS_ENCORED, [hl]
+    ldh a, [hBattleTurn]
+  	and a
+  	jr nz, .enemy
+	ld a, 255
+	ld [wPlayerEncoreCount], a
+	jr .continue
+.enemy
+	ld a, 255
+	ld [wEnemyEncoreCount], a
+.continue
+
 	call CheckUserIsCharging
 	ret nz
 
@@ -3171,6 +3194,40 @@ ConfusionDamageCalc:
 	ldh [hDivisor], a
 	ld b, 4
 	call Divide
+
+.choiceBand
+; ========================
+; ===== Choice Band ======
+; ========================
+; DevNote - choice band - x1.5 damage but permanent encore
+    push hl
+	call GetUserItem
+	ld a, b
+	cp HELD_CHOICE_BAND
+	pop hl
+	jr nz, .choiceSpecs
+    ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp SPECIAL
+	jr nc, .choiceSpecs
+	call FiftyPercentBoost
+
+.choiceSpecs
+; =========================
+; ===== Choice Specs ======
+; =========================
+; DevNote - choice specs - x1.5 damage but permanent encore
+    push hl
+	call GetUserItem
+	ld a, b
+	cp HELD_CHOICE_SPECS
+	pop hl
+	jr nz, .continue
+    ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp SPECIAL
+	jr c, .continue
+    call FiftyPercentBoost
 
 .continue
 ; Critical hits
@@ -6900,3 +6957,15 @@ GetCurrentMon:
 	ld a, [wEnemyMonSpecies]
 .done
     ret
+
+FiftyPercentBoost:
+    ld a, 3
+	ldh [hMultiplier], a
+	call Multiply
+	; fallthrough
+
+HalfDamage:
+	ld a, 2
+	ldh [hDivisor], a
+	ld b, 4
+	jmp Divide
