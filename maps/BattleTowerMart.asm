@@ -125,7 +125,7 @@ BattleTowerMartTMCoinTraderScript:
     sjump .ConcludeTransaction
 
 .TMPsychUp:
-    verbosegiveitem TM_PSYCH_UP
+    verbosegiveitem TM_TACKLE
     iffalse .NoRoom
     sjump .ConcludeTransaction
 

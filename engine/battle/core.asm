@@ -3660,6 +3660,7 @@ SpikesDamage:
 .ok
 	call .Spikes
 	call .StealthRock
+	call .ToxicSpikes
 	ret
 
 .Spikes:
@@ -3685,7 +3686,7 @@ SpikesDamage:
 	call GetEighthMaxHP
 	call SubtractHPFromTarget
 	call WaitBGMap
-	jr .pop
+	jmp .pop
 
 .StealthRock:
 	bit SCREENS_STEALTH_ROCK, [hl]
@@ -3718,6 +3719,73 @@ SpikesDamage:
 .finish
 	call SubtractHPFromTarget
 	call WaitBGMap
+	jr .pop
+
+.ToxicSpikes:
+
+; End if there aren't Toxic Spikes down.
+	bit SCREENS_TOXIC_SPIKES, [hl]
+	ret z
+
+; Toxic Spikes can't poison a Flying-, Steel-, or Poison-type
+	ld a, [de]
+	cp FLYING
+	ret z
+	cp STEEL
+	ret z
+	cp POISON
+	jr z, .AbsorbToxicSpikes
+	inc de
+	ld a, [de]
+	dec de
+	cp FLYING
+	ret z
+	cp STEEL
+	ret z
+	cp POISON
+	jr z, .AbsorbToxicSpikes
+
+	push bc
+	push hl
+	push de
+
+; Toxic Spikes can't poison a Safeguarded target
+	farcall SafeCheckSafeguard
+	jr nz, .pop
+
+; Toxic Spikes can't poison a Pokemon that already has a status condition
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	and a
+	jr nz, .pop
+
+; Apply poison
+	set PSN, [hl]
+	ld de, ANIM_PSN
+	call Call_PlayBattleAnim
+	call RefreshBattleHuds
+
+	ld hl, WasPoisonedText
+	call SwitchTurnCore
+	call StdBattleTextbox
+	call SwitchTurnCore
+	jr .pop
+
+.AbsorbToxicSpikes:
+; Poison/Flying Pokemon won't absorb toxic spikes
+	inc de
+	ld a, [de]
+	dec de
+	cp FLYING
+	ret z
+
+	push bc
+	push hl
+	push de
+
+	res SCREENS_TOXIC_SPIKES, [hl]
+	ld hl, AbsorbedToxicSpikesText
+	call StdBattleTextbox
 	jr .pop
 
 .pop

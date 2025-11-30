@@ -41,7 +41,6 @@ PerfectAccuracyEffects::
   db EFFECT_RAIN_DANCE
   db EFFECT_SUNNY_DAY
   db EFFECT_BELLY_DRUM
-  db EFFECT_PSYCH_UP
   db EFFECT_DEFENSE_CURL
   db EFFECT_HAIL
   db -1 ; end

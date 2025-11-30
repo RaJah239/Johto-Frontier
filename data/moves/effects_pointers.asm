@@ -157,4 +157,5 @@ MoveEffectsPointers:
 	dw FreezeHit ; Blizzard
 	dw Hail
 	dw StealthRock
+	dw ToxicSpikes
 	assert_table_length NUM_MOVE_EFFECTS

@@ -245,7 +245,7 @@ BattleAnimations::
 	dw BattleAnim_SunnyDay
 	dw BattleAnim_Crunch
 	dw BattleAnim_MirrorCoat
-	dw BattleAnim_PsychUp
+	dw BattleAnim_ToxicSpikes
 	dw BattleAnim_Extremespeed
 	dw BattleAnim_Ancientpower
 	dw BattleAnim_ShadowBall
@@ -4519,19 +4519,17 @@ BattleAnim_MirrorCoat:
 	anim_wait 32
 	anim_ret
 
-BattleAnim_PsychUp:
-	anim_1gfx BATTLE_ANIM_GFX_STATUS
-	anim_call BattleAnim_TargetObj_1Row
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, BG_EFFECT_USER, $20
-	anim_sound 0, 0, SFX_PSYBEAM
-	anim_obj BATTLE_ANIM_OBJ_PSYCH_UP, 44, 88, $0
-	anim_obj BATTLE_ANIM_OBJ_PSYCH_UP, 44, 88, $10
-	anim_obj BATTLE_ANIM_OBJ_PSYCH_UP, 44, 88, $20
-	anim_obj BATTLE_ANIM_OBJ_PSYCH_UP, 44, 88, $30
+BattleAnim_ToxicSpikes:
+	anim_1gfx BATTLE_ANIM_GFX_MISC
+	anim_sound 6, 2, SFX_TOXIC
+	anim_obj BATTLE_ANIM_OBJ_SLUDGE_BOMB, 48, 88, $20
+	anim_wait 8
+	anim_sound 6, 2, SFX_TOXIC
+	anim_obj BATTLE_ANIM_OBJ_SLUDGE_BOMB, 48, 88, $30
+	anim_wait 8
+	anim_sound 6, 2, SFX_TOXIC
+	anim_obj BATTLE_ANIM_OBJ_SLUDGE_BOMB, 48, 88, $28
 	anim_wait 64
-	anim_incbgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING
-	anim_call BattleAnim_ShowMon_0
-	anim_wait 16
 	anim_ret
 
 BattleAnim_Extremespeed:

@@ -534,7 +534,10 @@ wPlayerScreens::
 ; 2 safeguard
 ; 3 light screen
 ; 4 reflect
-; 5-7 unused
+; DeNote - Hazards - adding the following
+; 5 stealth rock
+; 6 toxic spikes
+; 7 sticky web
 	db
 
 wEnemyScreens::

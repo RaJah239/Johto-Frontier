@@ -996,6 +996,18 @@ BattleText_UserHurtByStealthRock:
 	text "Stones dug in!"
 	prompt
 
+ToxicSpikesText:
+	text "Toxic Spikes scat-"
+	line "tered all around"
+	cont "<TARGET>!"
+	prompt
+
+AbsorbedToxicSpikesText:
+	text "<USER>"
+	line "absorbed the"
+	cont "Toxic Spikes!"
+	prompt
+
 IdentifiedText:
 	text "<USER>"
 	line "identified"

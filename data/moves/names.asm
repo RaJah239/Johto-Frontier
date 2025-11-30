@@ -243,7 +243,7 @@ MoveNames::
 	li "Sunny Day"
 	li "Crunch"
 	li "Mirror Coat"
-	li "Psych Up"
+	li "Toxic Spikes"
 	li "ExtremeSpeed"
 	li "AncientPower"
 	li "Shadow Ball"
