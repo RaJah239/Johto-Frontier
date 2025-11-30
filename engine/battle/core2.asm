@@ -328,3 +328,42 @@ GetTrainerBackpic:
 	ld c, 7 * 7
 	predef DecompressGet2bpp
 	ret
+
+ShouldIgniteFlameOrb:
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	and a
+	jr nz, .no
+
+    ldh a, [hBattleTurn]
+	and a
+	jr z, .playerTurn
+	ld a, [wEnemyMonType1]
+	ld b, a
+	ld a, [wEnemyMonType2]
+	ld c, a
+	ld a, [wEnemyMonSpecies]
+	jr .checkDetails
+.playerTurn
+	ld a, [wBattleMonType1]
+	ld b, a
+	ld a, [wBattleMonType2]
+	ld c, a
+	ld a, [wBattleMonSpecies]
+.checkDetails
+;	cp SYLVEON
+;	jr z, .no
+;   cp MEW
+;   jr z, .no
+    ld a, b
+    cp FIRE
+    jr z, .no
+    ld a, c
+    cp FIRE
+    jr z, .no
+.yes
+    scf
+    ret
+.no
+    xor a
+    ret

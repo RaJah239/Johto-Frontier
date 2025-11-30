@@ -19,6 +19,11 @@ WildPokemonAppearedText:
 	line "appeared!"
 	prompt
 
+FlameOrbText:
+    text "Flame Orb"
+    line "ignites!"
+    prompt
+
 HookedPokemonAttackedText:
 	text "The hooked"
 	line "@"

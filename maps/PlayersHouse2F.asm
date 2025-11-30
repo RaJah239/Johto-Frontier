@@ -210,6 +210,7 @@ if DEF(_DEBUG)
 	giveitem MUSCLE_BAND, MAX_ITEM_STACK
 	giveitem WISE_GLASSES, MAX_ITEM_STACK
 	giveitem HEAVY_BOOTS, MAX_ITEM_STACK
+	giveitem FLAME_ORB, MAX_ITEM_STACK
 
 	; all rods
 	giveitem OLD_ROD

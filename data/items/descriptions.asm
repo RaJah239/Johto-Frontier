@@ -145,7 +145,7 @@ ItemDescriptions:
 	dw ChoiceBandDesc
 	dw MetalCoatDesc
 	dw DragonFangDesc
-	dw TeruSama14Desc
+	dw FlameOrbDesc
 	dw LeftoversDesc
 	dw OldAmberDesc
 	dw DomeFossilDesc
@@ -827,8 +827,9 @@ DragonFangDesc:
 	db   "Powers up dragon-"
 	next "type moves. (HOLD)@"
 
-TeruSama14Desc:
-	db   "?@"
+FlameOrbDesc:
+	db   "Inflicts BRN on"
+	next "the holder.@"
 
 LeftoversDesc:
 	db   "Restores HP during"

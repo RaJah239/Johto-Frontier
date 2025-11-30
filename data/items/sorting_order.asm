@@ -170,6 +170,7 @@ ItemNameOrder:
 	db CLEANSE_TAG
 	db DRAGON_FANG
 	db EVERSTONE
+	db FLAME_ORB
 	db FOCUS_BAND
 	db FOCUS_SASH
 	db HEAVY_BOOTS
@@ -275,7 +276,6 @@ ItemNameOrder:
 	db POKE_FLUTE
 	db ITEM_2D
 	db ITEM_87
-	db ITEM_91
 	db ITEM_9B
 	db ITEM_A2
 	db ITEM_AB

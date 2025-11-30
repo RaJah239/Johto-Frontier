@@ -6992,6 +6992,32 @@ HailDefenseBoost:
 	ret nz
 	jr FinishWeatherStatBoost
 
+BattleCommand_FlameOrb:
+	call GetUserItem
+	ld a, b
+	cp HELD_FLAME_ORB
+	ret nz
+	farcall ShouldIgniteFlameOrb
+	ret nc
+    ld hl, FlameOrbText
+	call StdBattleTextbox
+    ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	set BRN, [hl]
+	call UpdateUserInParty
+	call BattleCommand_SwitchTurn
+	ld hl, ApplyBrnEffectOnAttack
+	call CallBattleCore
+    ld a, [wBattleHasJustStarted]
+    and a
+    jr nz, .skipAnim
+	ld de, ANIM_BRN
+	call PlayOpponentBattleAnim
+	call RefreshBattleHuds
+.skipAnim
+	call BattleCommand_SwitchTurn
+    ret
+
 ; this needs to be in effect_commands.asm
 GetCurrentMon:
     ldh a, [hBattleTurn]

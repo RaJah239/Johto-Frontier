@@ -42,8 +42,7 @@ DoBattle:
 	call EnemySwitch
 
 .wild
-	ld c, 40
-	call DelayFrames
+	call SwitchInEffects
 
 .player_2
 	call LoadTilemapToTempTilemap
@@ -56,7 +55,7 @@ DoBattle:
 	cp BATTLETYPE_DEBUG
 	jmp z, .tutorial_debug
 	cp BATTLETYPE_TUTORIAL
-	jr z, .tutorial_debug
+	jmp z, .tutorial_debug
 	xor a
 	ld [wCurPartyMon], a
 .loop2
@@ -94,6 +93,7 @@ DoBattle:
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call SpikesDamage
+	call SwitchInEffects
 	ld a, [wLinkMode]
 	and a
 	jr z, .not_linked_2
@@ -108,6 +108,7 @@ DoBattle:
 	call EnemySwitch
 	call SetEnemyTurn
 	call SpikesDamage
+	call SwitchInEffects
 
 .not_linked_2
 	call FieldWeather
@@ -498,6 +499,7 @@ DetermineMoveOrder:
 	callfar AI_Switch
 	call SetEnemyTurn
 	call SpikesDamage
+	call SwitchInEffects
 	jmp .enemy_first
 
 .use_move
@@ -1970,6 +1972,7 @@ EnemyPartyMonEntrance:
 	call ResetBattleParticipants
 	call SetEnemyTurn
 	call SpikesDamage
+	call SwitchInEffects
 	xor a
 	ld [wEnemyMoveStruct + MOVE_ANIM], a
 	ld [wBattlePlayerAction], a
@@ -2426,6 +2429,7 @@ ForcePlayerMonChoice:
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call SpikesDamage
+	call SwitchInEffects
 	ld a, $1
 	and a
 	ld c, a
@@ -2446,7 +2450,8 @@ PlayerPartyMonEntrance:
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
-	jmp SpikesDamage
+	call SpikesDamage
+	jmp SwitchInEffects
 
 CheckMobileBattleError:
 	ld a, [wLinkMode]
@@ -4980,7 +4985,8 @@ PlayerSwitch:
 EnemyMonEntrance:
 	callfar AI_Switch
 	call SetEnemyTurn
-	jmp SpikesDamage
+	call SpikesDamage
+	jmp SwitchInEffects
 
 BattleMonEntrance:
 	call WithdrawMonText
@@ -5014,6 +5020,7 @@ BattleMonEntrance:
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call SpikesDamage
+	call SwitchInEffects
 	ld a, $2
 	ld [wMenuCursorY], a
 	ret
@@ -5037,7 +5044,8 @@ PassedBattleMonEntrance:
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
-	jmp SpikesDamage
+	call SpikesDamage
+	jmp SwitchInEffects
 
 BattleMenu_Run:
 	call SafeLoadTempTilemapToTilemap
@@ -9052,6 +9060,11 @@ FieldWeather:
 	call Call_PlayBattleAnim
 	ld hl, SunGotBrightText
 	jp StdBattleTextbox
+
+; DevNote - function for Pokemon with effects on switching in
+SwitchInEffects:
+   call ClearFailures
+   farjp BattleCommand_FlameOrb
 
 ClearFailures:
 	xor a

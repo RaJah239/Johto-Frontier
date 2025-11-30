@@ -144,7 +144,7 @@ ItemNames::
 	li "Choice Band"
 	li "Metal Coat"
 	li "Dragon Fang"
-	li "?"
+	li "Flame Orb"
 	li "Leftovers"
 	li "Old Amber"
 	li "Dome Fossil"

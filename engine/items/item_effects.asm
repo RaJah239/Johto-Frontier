@@ -158,7 +158,7 @@ ItemEffects:
 	dw NoEffect            ; CHOICE_BAND
 	dw NoEffect            ; METAL_COAT
 	dw NoEffect            ; DRAGON_FANG
-	dw NoEffect            ; ITEM_91
+	dw NoEffect            ; FLAME_ORB
 	dw NoEffect            ; LEFTOVERS
 	dw NoEffect            ; OLD_AMBER
 	dw NoEffect            ; DOME_FOSSIL
