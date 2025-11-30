@@ -2052,3 +2052,10 @@ ToxicSpikes:
 	doturn
 	toxicspikes
 	endmove
+
+StickyWeb:
+	checkobedience
+	usedmovetext
+	doturn
+	stickyweb
+	endmove

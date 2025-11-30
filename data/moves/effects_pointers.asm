@@ -158,4 +158,5 @@ MoveEffectsPointers:
 	dw Hail
 	dw StealthRock
 	dw ToxicSpikes
+	dw StickyWeb
 	assert_table_length NUM_MOVE_EFFECTS

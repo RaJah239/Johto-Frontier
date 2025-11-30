@@ -3539,6 +3539,8 @@ INCLUDE "data/moves/flail_reversal_power.asm"
 
 INCLUDE "engine/battle/move_effects/toxic_spikes.asm"
 
+INCLUDE "engine/battle/move_effects/sticky_web.asm"
+
 INCLUDE "engine/battle/move_effects/counter.asm"
 
 INCLUDE "engine/battle/move_effects/encore.asm"

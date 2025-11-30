@@ -176,4 +176,5 @@ BattleCommandPointers:
 	dw BattleCommand_StartHail
 	dw BattleCommand_StealthRock
 	dw BattleCommand_ToxicSpikes
+	dw BattleCommand_StickyWeb
 	assert_table_length NUM_EFFECT_COMMANDS

@@ -3661,6 +3661,7 @@ SpikesDamage:
 	call .Spikes
 	call .StealthRock
 	call .ToxicSpikes
+	call .StickyWeb
 	ret
 
 .Spikes:
@@ -3719,7 +3720,7 @@ SpikesDamage:
 .finish
 	call SubtractHPFromTarget
 	call WaitBGMap
-	jr .pop
+	jmp .pop
 
 .ToxicSpikes:
 
@@ -3787,6 +3788,34 @@ SpikesDamage:
 	ld hl, AbsorbedToxicSpikesText
 	call StdBattleTextbox
 	jr .pop
+
+.StickyWeb:
+
+; End if there isn't a Sticky Web down.
+	bit SCREENS_STICKY_WEB, [hl]
+	ret z
+
+; Flying-types aren't affected by Sticky Web.
+	ld a, [de]
+	cp FLYING
+	ret z
+	inc de
+	ld a, [de]
+	dec de
+	cp FLYING
+	ret z
+
+	push bc
+	push hl
+	push de
+
+	ld de, ANIM_ENEMY_STAT_DOWN
+	call SwitchTurnCore
+	call Call_PlayBattleAnim
+	farcall BattleCommand_SpeedDown
+	farcall BattleCommand_StatDownMessage
+	call SwitchTurnCore
+	; fallthrough
 
 .pop
     pop de

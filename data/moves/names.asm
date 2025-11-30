@@ -25,7 +25,7 @@ MoveNames::
 	li "Stomp"
 	li "Double Kick"
 	li "Mega Kick"
-	li "Jump Kick"
+	li "Sticky Web"
 	li "Rolling Kick"
 	li "Sand-Attack"
 	li "Headbutt"
