@@ -2297,12 +2297,6 @@ GetFailureResultText:
 	ld a, [wTypeModifier]
 	and $7f
 	jr z, .got_text
-	ld a, BATTLE_VARS_MOVE_EFFECT
-	call GetBattleVar
-	cp EFFECT_FUTURE_SIGHT
-	ld hl, ButItFailedText
-	ld de, ItFailedText
-	jr z, .got_text
 	ld hl, AttackMissedText
 	ld de, AttackMissed2Text
 	ld a, [wCriticalHit]
@@ -6666,8 +6660,6 @@ BattleCommand_SkipSunCharge:
 	ret nz
 	ld b, charge_command
 	jmp SkipToBattleCommand
-
-INCLUDE "engine/battle/move_effects/future_sight.asm"
 
 INCLUDE "engine/battle/move_effects/thunder.asm"
 

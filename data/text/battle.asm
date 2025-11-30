@@ -132,12 +132,6 @@ BattleText_UserRecoveredPPUsing:
 	text "."
 	prompt
 
-BattleText_TargetWasHitByFutureSight:
-	text "<TARGET>"
-	line "was hit by FUTURE"
-	cont "SIGHT!"
-	prompt
-
 BattleText_SafeguardFaded:
 	text "<USER>'s"
 	line "Safeguard faded!"
@@ -1088,11 +1082,6 @@ CopiedStatsText:
 
 	para "changes of"
 	line "<TARGET>!"
-	prompt
-
-ForesawAttackText:
-	text "<USER>"
-	line "foresaw an attack!"
 	prompt
 
 BeatUpAttackText:

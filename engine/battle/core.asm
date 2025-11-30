@@ -260,9 +260,6 @@ HandleBetweenTurnEffects:
 	jr z, .CheckEnemyFirst
 	call CheckFaint_PlayerThenEnemy
 	ret c
-	farcall HandleFutureSight
-	call CheckFaint_PlayerThenEnemy
-	ret c
 	call HandleWeather
 	call CheckFaint_PlayerThenEnemy
 	ret c
@@ -275,9 +272,6 @@ HandleBetweenTurnEffects:
 	jr .NoMoreFaintingConditions
 
 .CheckEnemyFirst:
-	call CheckFaint_EnemyThenPlayer
-	ret c
-	farcall HandleFutureSight
 	call CheckFaint_EnemyThenPlayer
 	ret c
 	call HandleWeather

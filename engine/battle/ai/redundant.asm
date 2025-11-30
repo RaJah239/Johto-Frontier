@@ -41,7 +41,6 @@ AI_Redundant:
 	dbw EFFECT_TELEPORT,     .Teleport
 	dbw EFFECT_WEATHER_HEAL, .Heal
 	dbw EFFECT_SWAGGER,      .Swagger
-	dbw EFFECT_FUTURE_SIGHT, .FutureSight
 	dbw EFFECT_HAIL,         .Hail
 	db -1
 
@@ -184,11 +183,6 @@ AI_Redundant:
 .Swagger:
 	ld a, [wPlayerSubStatus3]
 	bit SUBSTATUS_CONFUSED, a
-	ret
-
-.FutureSight:
-	ld a, [wEnemyFutureSightCount]
- 	and a
 	ret
 
 .Heal:

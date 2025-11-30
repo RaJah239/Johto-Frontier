@@ -588,16 +588,11 @@ wLastPlayerMon:: db
 wLastPlayerMove:: db
 wLastEnemyMove:: db
 
-wPlayerFutureSightCount:: db
-wEnemyFutureSightCount:: db
-
 wExpShare:: db
 wExpShareText:: db
 
-	ds 6
+	ds 10
 
-wPlayerFutureSightDamage:: dw
-wEnemyFutureSightDamage:: dw
 wPlayerRageCounter:: db
 wEnemyRageCounter:: db
 
