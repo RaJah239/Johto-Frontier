@@ -3664,7 +3664,11 @@ SpikesDamage:
 	ld de, wEnemyMonType
 	ld bc, UpdateEnemyHUD
 .ok
+	call .Spikes
+	call .StealthRock
+	ret
 
+.Spikes:
 	bit SCREENS_SPIKES, [hl]
 	ret z
 
@@ -3678,20 +3682,55 @@ SpikesDamage:
 	ret z
 
 	push bc
+	push hl
+	push de
 
 	ld hl, BattleText_UserHurtBySpikes ; "hurt by SPIKES!"
 	call StdBattleTextbox
 
 	call GetEighthMaxHP
 	call SubtractHPFromTarget
+	call WaitBGMap
+	jr .pop
 
+.StealthRock:
+	bit SCREENS_STEALTH_ROCK, [hl]
+	ret z
+
+	push bc
+	push hl
+	push de
+
+	ld hl, BattleText_UserHurtByStealthRock
+	call StdBattleTextbox
+
+    pop de
+    ld h, d
+	ld l, e
+	callfar CheckStealthRockTypeMatchup
+	push de
+	ld a, [wTypeMatchup]
+	cp EFFECTIVE + 1
+	jr nc, .doubleDamage
+	cp EFFECTIVE - 1
+	jr c, .halfDamage
+	call GetEighthMaxHP
+	jr .finish
+.halfDamage
+    call GetSixteenthMaxHP
+    jr .finish
+.doubleDamage
+    call GetQuarterMaxHP
+.finish
+	call SubtractHPFromTarget
+	call WaitBGMap
+	jr .pop
+
+.pop
+    pop de
 	pop hl
-	call .hl
-
-	jmp WaitBGMap
-
-.hl
-	jp hl
+	pop bc
+	ret
 
 PursuitSwitch:
 	ld a, BATTLE_VARS_MOVE

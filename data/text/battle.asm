@@ -993,6 +993,15 @@ SpikesText:
 	cont "<TARGET>!"
 	prompt
 
+StealthRockText:
+	text "Pointed stones"
+	line "float all around!"
+	prompt
+
+BattleText_UserHurtByStealthRock:
+	text "Stones dug in!"
+	prompt
+
 IdentifiedText:
 	text "<USER>"
 	line "identified"

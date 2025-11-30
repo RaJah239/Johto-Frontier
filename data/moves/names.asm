@@ -247,7 +247,7 @@ MoveNames::
 	li "ExtremeSpeed"
 	li "AncientPower"
 	li "Shadow Ball"
-	li "Future Sight"
+	li "Stealth Rock"
 	li "Rock Smash"
 	li "Whirlpool"
 	li "Beat Up"

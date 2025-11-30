@@ -249,7 +249,7 @@ BattleAnimations::
 	dw BattleAnim_Extremespeed
 	dw BattleAnim_Ancientpower
 	dw BattleAnim_ShadowBall
-	dw BattleAnim_FutureSight
+	dw BattleAnim_StealthRock
 	dw BattleAnim_RockSmash
 	dw BattleAnim_Whirlpool
 	dw BattleAnim_BeatUp
@@ -4590,24 +4590,17 @@ BattleAnim_ShadowBall:
 	anim_wait 24
 	anim_ret
 
-BattleAnim_FutureSight:
-	anim_1gfx BATTLE_ANIM_GFX_WIND
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
-	anim_bgeffect BATTLE_BG_EFFECT_ALTERNATE_HUES, $0, $2, $0
-	anim_bgeffect BATTLE_BG_EFFECT_PSYCHIC, $0, $0, $0
-	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 24, $10
-	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 48, $2
-	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 88, $8
-	anim_wait 4
-	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 32, $6
-	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 56, $c
-	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 80, $4
-	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 104, $e
-.loop
-	anim_sound 0, 0, SFX_THROW_BALL
-	anim_wait 16
-	anim_loop 4, .loop
-	anim_incbgeffect BATTLE_BG_EFFECT_PSYCHIC
+BattleAnim_StealthRock:
+	anim_1gfx BATTLE_ANIM_GFX_ROCKS
+	anim_sound 6, 2, SFX_MENU
+	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 116, 68, $40
+	anim_wait 8
+	anim_sound 6, 2, SFX_MENU
+	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 156, 68, $30
+	anim_wait 8
+	anim_sound 6, 2, SFX_MENU
+	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 136, 68, $30
+	anim_wait 64
 	anim_ret
 
 BattleAnim_RockSmash:

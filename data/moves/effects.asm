@@ -2055,3 +2055,10 @@ Hail:
 	doturn
 	starthail
 	endmove
+
+StealthRock:
+	checkobedience
+	usedmovetext
+	doturn
+	stealthrock
+	endmove

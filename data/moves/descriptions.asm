@@ -248,7 +248,7 @@ MoveDescriptions::
 	dw ExtremespeedDescription
 	dw AncientpowerDescription
 	dw ShadowBallDescription
-	dw FutureSightDescription
+	dw StealthRockDescription
 	dw RockSmashDescription
 	dw WhirlpoolDescription
 	dw BeatUpDescription
@@ -1243,9 +1243,9 @@ ShadowBallDescription:
 	db   "An attack that may"
 	line "lower SPCL.DEF.@"
 
-FutureSightDescription:
-	db   "An attack that"
-	line "hits on 3rd turn.@"
+StealthRockDescription:
+	db   "Hurts foes when"
+	line "they switch in.@"
 
 RockSmashDescription:
 	db   "An attack that may"
