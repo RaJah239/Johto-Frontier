@@ -171,6 +171,7 @@ if DEF(_DEBUG)
 	giveitem RARE_CANDY, MAX_ITEM_STACK
 
 	; vitamins
+	giveitem HYPER_EV_UP, MAX_ITEM_STACK
 	giveitem HP_UP, MAX_ITEM_STACK
 	giveitem PROTEIN, MAX_ITEM_STACK
 	giveitem IRON, MAX_ITEM_STACK

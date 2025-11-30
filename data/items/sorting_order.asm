@@ -110,6 +110,7 @@ ItemNameOrder:
 
 ; Vitamins
 	db RARE_CANDY
+	db HYPER_EV_UP
 	db PP_UP
 	db HP_UP
 	db PROTEIN
@@ -279,7 +280,6 @@ ItemNameOrder:
 	db ITEM_9B
 	db ITEM_A2
 	db ITEM_AB
-	db ITEM_B0
 	db ITEM_B3
 	db ITEM_BE
 	db ITEM_C3

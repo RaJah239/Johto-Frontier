@@ -175,7 +175,7 @@ ItemNames::
 	li "Berry"
 	li "Gold Berry"
 	li "SquirtBottle"
-	li "?"
+	li "Hyper EV Up"
 	li "Park Ball"
 	li "Rainbow Wing"
 	li "?"

@@ -1459,3 +1459,8 @@ _MomLostGearBookletText::
 	para "Come back again in"
 	line "a while."
 	prompt
+
+_HyperEVUpText::
+    text "All Effort Values"
+    line "were maximized!"
+    prompt

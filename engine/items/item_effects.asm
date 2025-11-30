@@ -189,7 +189,7 @@ ItemEffects:
 	dw RestoreHPEffect     ; BERRY
 	dw Restore4THHPEffect  ; GOLD_BERRY
 	dw SquirtbottleEffect  ; SQUIRTBOTTLE
-	dw NoEffect            ; ITEM_B0
+	dw HyperEVUpEffect     ; HYPER_EV_UP
 	dw PokeBallEffect      ; PARK_BALL
 	dw NoEffect            ; RAINBOW_WING
 	dw NoEffect            ; BRICK_PIECE
@@ -3020,3 +3020,129 @@ TangelaCallEffect:
 	ld [wUsingHMItem], a
 	farcall SweetScentFromMenu
 	ret
+
+HyperEVUpEffect:
+	ld b, PARTYMENUACTION_HEALING_ITEM
+	call UseItem_SelectMon
+	jmp c, RareCandy_StatBooster_ExitMenu
+
+	call AreAllEVsMaxed
+	jmp nc, NoEffectMessage
+
+	call RareCandy_StatBooster_GetParameters
+
+    ld a, HP_UP
+	call HyperEVUpStatIncrease
+
+    ld a, PROTEIN
+	call HyperEVUpStatIncrease
+
+    ld a, IRON
+	call HyperEVUpStatIncrease
+
+    ld a, CARBOS
+	call HyperEVUpStatIncrease
+
+    ld a, CALCIUM
+	call HyperEVUpStatIncrease
+
+    ld a, ZINC
+	call HyperEVUpStatIncrease
+
+	call Play_SFX_FULL_HEAL
+	ld hl, HyperEVUpText
+	call PrintText
+
+    ld a, HYPER_EV_UP
+    ld [wCurItem], a
+	jmp UseDisposableItem
+
+AreAllEVsMaxed:
+	; Are HP EVs maxed?
+    ld a, HP_UP
+    ld [wCurItem], a
+    call GetEVRelativePointer
+	ld a, MON_EVS
+	call GetPartyParamLocation
+	add hl, bc
+	ld a, [hl]
+	cp 252
+	jr nz, .yes
+
+	; Are Attack EVs maxed?
+    ld a, PROTEIN
+    ld [wCurItem], a
+    call GetEVRelativePointer
+	ld a, MON_EVS
+	call GetPartyParamLocation
+	add hl, bc
+	ld a, [hl]
+	cp 252
+	jr nz, .yes
+
+	; Are Defense EVs maxed?
+    ld a, IRON
+    ld [wCurItem], a
+    call GetEVRelativePointer
+	ld a, MON_EVS
+	call GetPartyParamLocation
+	add hl, bc
+	ld a, [hl]
+	cp 252
+	jr nz, .yes
+
+	; Are Special Attack EVs maxed?
+    ld a, CALCIUM
+    ld [wCurItem], a
+    call GetEVRelativePointer
+	ld a, MON_EVS
+	call GetPartyParamLocation
+	add hl, bc
+	ld a, [hl]
+	cp 252
+	jr nz, .yes
+
+	; Are Special Defense EVs maxed?
+    ld a, ZINC
+    ld [wCurItem], a
+    call GetEVRelativePointer
+	ld a, MON_EVS
+	call GetPartyParamLocation
+	add hl, bc
+	ld a, [hl]
+	cp 252
+	jr nz, .yes
+
+	; Are Speed EVs maxed?
+    ld a, CARBOS
+    ld [wCurItem], a
+    call GetEVRelativePointer
+	ld a, MON_EVS
+	call GetPartyParamLocation
+	add hl, bc
+	ld a, [hl]
+	cp 252
+	jr nz, .yes
+
+	; if all Effort Values are maxed, then don't use
+	xor a
+	ret
+
+.yes
+    scf
+    ret
+
+HyperEVUpStatIncrease:
+	ld [wCurItem], a
+	call GetEVRelativePointer
+	ld a, MON_EVS
+	call GetPartyParamLocation
+	add hl, bc
+	ld a, 252
+	ld [hl], a
+	jmp UpdateStatsAfterItem
+
+HyperEVUpText:
+	text_far _HyperEVUpText
+	text_end
+    done
