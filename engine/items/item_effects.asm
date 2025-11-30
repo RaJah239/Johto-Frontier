@@ -1168,7 +1168,7 @@ VitaminEffect:
 
 	call RareCandy_StatBooster_GetParameters
 
-	call GetEVRelativePointer
+	call GetRelativeEVPointer
 
     ld a, MON_EVS
     call GetPartyParamLocation
@@ -1188,7 +1188,7 @@ VitaminEffect:
     ld [hl], a
     call UpdateStatsAfterItem
 
-    call GetEVRelativePointer 
+    call GetRelativeEVPointer 
 
 	ld hl, StatStrings
 	add hl, bc
@@ -1249,7 +1249,7 @@ StatStrings:
 .sp_atk  db "Spcl.Atk@"
 .sp_def  db "Spcl.Def@"
 
-GetEVRelativePointer:
+GetRelativeEVPointer:
 	ld a, [wCurItem]
 	ld hl, EVItemPointerOffsets
 .next
@@ -3058,83 +3058,54 @@ HyperEVUpEffect:
 	jmp UseDisposableItem
 
 AreAllEVsMaxed:
-	; Are HP EVs maxed?
+    ; Are HP EVs maxed?
     ld a, HP_UP
-    ld [wCurItem], a
-    call GetEVRelativePointer
-	ld a, MON_EVS
-	call GetPartyParamLocation
-	add hl, bc
-	ld a, [hl]
-	cp 252
-	jr nz, .yes
+    call CheckEVMax
+    ret nz
 
-	; Are Attack EVs maxed?
+    ; Are Attack EVs maxed?
     ld a, PROTEIN
-    ld [wCurItem], a
-    call GetEVRelativePointer
-	ld a, MON_EVS
-	call GetPartyParamLocation
-	add hl, bc
-	ld a, [hl]
-	cp 252
-	jr nz, .yes
+    call CheckEVMax
+    ret nz
 
-	; Are Defense EVs maxed?
+    ; Are Defense EVs maxed?
     ld a, IRON
-    ld [wCurItem], a
-    call GetEVRelativePointer
-	ld a, MON_EVS
-	call GetPartyParamLocation
-	add hl, bc
-	ld a, [hl]
-	cp 252
-	jr nz, .yes
+    call CheckEVMax
+    ret nz
 
-	; Are Special Attack EVs maxed?
+    ; Are Special Attack EVs maxed?
     ld a, CALCIUM
-    ld [wCurItem], a
-    call GetEVRelativePointer
-	ld a, MON_EVS
-	call GetPartyParamLocation
-	add hl, bc
-	ld a, [hl]
-	cp 252
-	jr nz, .yes
+    call CheckEVMax
+    ret nz
 
-	; Are Special Defense EVs maxed?
+    ; Are Special Defense EVs maxed?
     ld a, ZINC
-    ld [wCurItem], a
-    call GetEVRelativePointer
-	ld a, MON_EVS
-	call GetPartyParamLocation
-	add hl, bc
-	ld a, [hl]
-	cp 252
-	jr nz, .yes
+    call CheckEVMax
+    ret nz
 
-	; Are Speed EVs maxed?
+    ; Are Speed EVs maxed?
     ld a, CARBOS
+    call CheckEVMax
+    ret nz
+
+    ; if all Effort Values are maxed, then don't use
+    xor a
+    ret
+    
+CheckEVMax:
     ld [wCurItem], a
-    call GetEVRelativePointer
-	ld a, MON_EVS
-	call GetPartyParamLocation
-	add hl, bc
-	ld a, [hl]
-	cp 252
-	jr nz, .yes
-
-	; if all Effort Values are maxed, then don't use
-	xor a
-	ret
-
-.yes
+    call GetRelativeEVPointer
+    ld a, MON_EVS
+    call GetPartyParamLocation
+    add hl, bc
+    ld a, [hl]
+    cp MAX_EV
     scf
     ret
 
 HyperEVUpStatIncrease:
 	ld [wCurItem], a
-	call GetEVRelativePointer
+	call GetRelativeEVPointer
 	ld a, MON_EVS
 	call GetPartyParamLocation
 	add hl, bc
