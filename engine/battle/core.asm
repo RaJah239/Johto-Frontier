@@ -164,7 +164,6 @@ BattleTurn:
  	ld a, 1 ; or "xor a" for the value 0
  	ldh [hInMenu], a
 .loop
-	call Stubbed_Increments5_a89a
 	call CheckContestBattleOver
 	jmp c, .quit
 
@@ -235,24 +234,6 @@ BattleTurn:
 .quit
 	pop af
  	ldh [hInMenu], a
-	ret
-
-Stubbed_Increments5_a89a:
-	ret
-	ld a, BANK(s5_a89a) ; MBC30 bank used by JP Crystal; inaccessible by MBC3
-	call OpenSRAM
-	ld hl, s5_a89a + 1 ; address of MBC30 bank
-	inc [hl]
-	jr nz, .finish
-	dec hl
-	inc [hl]
-	jr nz, .finish
-	dec [hl]
-	inc hl
-	dec [hl]
-
-.finish
-	call CloseSRAM
 	ret
 
 HandleBetweenTurnEffects:
