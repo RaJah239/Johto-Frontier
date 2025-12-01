@@ -420,7 +420,6 @@ wPlayerToxicCount:: db
 wPlayerDisableCount:: db
 wPlayerEncoreCount:: db
 wPlayerPerishCount:: db
-wPlayerFuryCutterCount:: db
 wPlayerProtectCount:: db
 
 wEnemyRolloutCount:: db
@@ -429,8 +428,9 @@ wEnemyToxicCount:: db
 wEnemyDisableCount:: db
 wEnemyEncoreCount:: db
 wEnemyPerishCount:: db
-wEnemyFuryCutterCount:: db
 wEnemyProtectCount:: db
+
+	ds 3
 
 wPlayerDamageTaken:: dw
 wEnemyDamageTaken::  dw

@@ -221,7 +221,6 @@ AI_TryItem:
 	res SUBSTATUS_BIDE, [hl]
 
 	xor a
-	ld [wEnemyFuryCutterCount], a
 	ld [wEnemyProtectCount], a
 	ld [wEnemyRageCounter], a
 

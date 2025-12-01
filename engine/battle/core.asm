@@ -652,7 +652,7 @@ CheckPlayerLockedIn:
 
 ParsePlayerAction:
 	call CheckPlayerLockedIn
-	jmp c, .locked_in
+	jr c, .locked_in
 	ld hl, wPlayerSubStatus5
 	bit SUBSTATUS_ENCORED, [hl]
 	jr z, .not_encored
@@ -694,13 +694,6 @@ ParsePlayerAction:
 	xor a
 	ld [wPlayerCharging], a
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
-	cp EFFECT_FURY_CUTTER
-	jr z, .continue_fury_cutter
-	xor a
-	ld [wPlayerFuryCutterCount], a
-
-.continue_fury_cutter
-	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
 	cp EFFECT_RAGE
 	jr z, .continue_rage
 	ld hl, wPlayerSubStatus4
@@ -724,7 +717,6 @@ ParsePlayerAction:
 
 .locked_in
 	xor a
-	ld [wPlayerFuryCutterCount], a
 	ld [wPlayerProtectCount], a
 	ld [wPlayerRageCounter], a
 	ld hl, wPlayerSubStatus4
@@ -737,7 +729,6 @@ ParsePlayerAction:
 
 .reset_rage
 	xor a
-	ld [wPlayerFuryCutterCount], a
 	ld [wPlayerProtectCount], a
 	ld [wPlayerRageCounter], a
 	ld hl, wPlayerSubStatus4
@@ -3212,7 +3203,6 @@ rept 4
 endr
 	ld [hl], a
 	ld [wEnemyDisableCount], a
-	ld [wEnemyFuryCutterCount], a
 	ld [wEnemyProtectCount], a
 	ld [wEnemyRageCounter], a
 	ld [wEnemyDisabledMove], a
@@ -3612,7 +3602,6 @@ endr
 	ld [hli], a
 	ld [hl], a
 	ld [wPlayerDisableCount], a
-	ld [wPlayerFuryCutterCount], a
 	ld [wPlayerProtectCount], a
 	ld [wPlayerRageCounter], a
 	ld [wDisabledMove], a
@@ -5704,7 +5693,7 @@ ParseEnemyAction:
 .loop
 	ld a, [hl]
 	and a
-	jmp z, .struggle
+	jr z, .struggle
 	ld a, [wEnemyDisabledMove]
 	cp [hl]
 	jr z, .disabled
@@ -5763,13 +5752,6 @@ ParseEnemyAction:
 
 .raging
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
-	cp EFFECT_FURY_CUTTER
-	jr z, .fury_cutter
-	xor a
-	ld [wEnemyFuryCutterCount], a
-
-.fury_cutter
-	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
 	cp EFFECT_RAGE
 	jr z, .no_rage
 	ld hl, wEnemySubStatus4
@@ -5793,7 +5775,6 @@ ParseEnemyAction:
 
 ResetVarsForSubstatusRage:
 	xor a
-	ld [wEnemyFuryCutterCount], a
 	ld [wEnemyProtectCount], a
 	ld [wEnemyRageCounter], a
 	ld hl, wEnemySubStatus4
@@ -8159,7 +8140,6 @@ CleanUpBattleRAM:
 	ld [wItemsPocketScrollPosition], a
 	ld [wBallsPocketScrollPosition], a
 	ld hl, wPlayerSubStatus1
-	ld b, wEnemyFuryCutterCount - wPlayerSubStatus1
 .loop
 	ld [hli], a
 	dec b

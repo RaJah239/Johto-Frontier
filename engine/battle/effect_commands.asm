@@ -322,7 +322,6 @@ CantMove:
 	and ~(1 << SUBSTATUS_RAMPAGE | 1 << SUBSTATUS_CHARGED)
 	ld [hl], a
 
-	call ResetFuryCutterCount
 
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
@@ -1625,10 +1624,10 @@ BattleCommand_CheckHit:
 	jmp z, .Miss
 
 	call .Protect
-	jr nz, .Miss
+	jmp nz, .Miss
 
 	call .DrainSub
-	jr z, .Miss
+	jmp z, .Miss
 
 	call .LockOn
 	ret nz
@@ -6342,7 +6341,6 @@ PrintDidntAffect:
 
 PrintDidntAffect2:
 	call AnimateFailedMove
-	farcall BattleMissAnim
 	ld hl, EvadedText ; 'evaded the attack'
 	ld de, ProtectingItselfText ; 'protecting itself'
 	jmp FailText_CheckOpponentProtect
@@ -6479,8 +6477,6 @@ INCLUDE "engine/battle/move_effects/endure.asm"
 
 INCLUDE "engine/battle/move_effects/spikes.asm"
 
-INCLUDE "engine/battle/move_effects/foresight.asm"
-
 INCLUDE "engine/battle/move_effects/perish_song.asm"
 
 INCLUDE "engine/battle/move_effects/sandstorm.asm"
@@ -6490,16 +6486,9 @@ INCLUDE "engine/battle/move_effects/rollout.asm"
 BattleCommand_Unused5D:
 ; effect0x5d
 	ret
-
-INCLUDE "engine/battle/move_effects/fury_cutter.asm"
-
 INCLUDE "engine/battle/move_effects/attract.asm"
 
 INCLUDE "engine/battle/move_effects/return.asm"
-
-INCLUDE "engine/battle/move_effects/present.asm"
-
-INCLUDE "engine/battle/move_effects/frustration.asm"
 
 INCLUDE "engine/battle/move_effects/safeguard.asm"
 
@@ -6531,8 +6520,6 @@ BattleCommand_CheckSafeguard:
 	ld hl, SafeguardProtectText
 	call StdBattleTextbox
 	jmp EndMoveEffect
-
-INCLUDE "engine/battle/move_effects/magnitude.asm"
 
 INCLUDE "engine/battle/move_effects/baton_pass.asm"
 
@@ -6633,8 +6620,6 @@ INCLUDE "engine/battle/move_effects/rain_dance.asm"
 INCLUDE "engine/battle/move_effects/sunny_day.asm"
 
 INCLUDE "engine/battle/move_effects/belly_drum.asm"
-
-INCLUDE "engine/battle/move_effects/psych_up.asm"
 
 INCLUDE "engine/battle/move_effects/mirror_coat.asm"
 
@@ -7047,3 +7032,11 @@ TenPercentBoost:
 	ldh [hDivisor], a
 	ld b, 4
 	jmp Divide
+
+BattleCommand_GetMagnitude:
+BattleCommand_PsychUp:
+BattleCommand_FuryCutter:
+BattleCommand_Foresight:
+BattleCommand_FrustrationPower:
+BattleCommand_Present:
+	ret

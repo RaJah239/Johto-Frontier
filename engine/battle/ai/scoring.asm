@@ -388,7 +388,6 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_ENDURE,           AI_Smart_Endure
 	dbw EFFECT_ROLLOUT,          AI_Smart_Rollout
 	dbw EFFECT_SWAGGER,          AI_Smart_Swagger
-	dbw EFFECT_FURY_CUTTER,      AI_Smart_FuryCutter
 	dbw EFFECT_ATTRACT,          AI_Smart_Attract
 	dbw EFFECT_SAFEGUARD,        AI_Smart_Safeguard
 	dbw EFFECT_MAGNITUDE,        AI_Smart_Magnitude
@@ -692,10 +691,7 @@ AI_Smart_EvasionUp:
 	cp b
 	jr c, .discourage
 
-; Greatly encourage this move if the player is in the middle of Fury Cutter or Rollout.
-	ld a, [wPlayerFuryCutterCount]
-	and a
-	jr nz, .greatly_encourage
+; Greatly encourage this move if the player is in the middle of Rollout.
 
 	ld a, [wPlayerSubStatus1]
 	bit SUBSTATUS_ROLLOUT, a
@@ -859,10 +855,7 @@ AI_Smart_AccuracyDown:
 	cp b
 	jr c, .discourage
 
-; Greatly encourage this move if the player is in the middle of Fury Cutter or Rollout.
-	ld a, [wPlayerFuryCutterCount]
-	and a
-	jr nz, .greatly_encourage
+; Greatly encourage this move if the player is in the middle of Rollout.
 
 	ld a, [wPlayerSubStatus1]
 	bit SUBSTATUS_ROLLOUT, a
@@ -1944,11 +1937,6 @@ AI_Smart_Protect:
 	bit SUBSTATUS_LOCK_ON, a
 	jr nz, .discourage
 
-; Encourage this move if the player's Fury Cutter is boosted enough.
-	ld a, [wPlayerFuryCutterCount]
-	cp 3
-	jr nc, .encourage
-
 ; Encourage this move if the player has charged a two-turn move.
 	ld a, [wPlayerSubStatus3]
 	bit SUBSTATUS_CHARGED, a
@@ -2191,27 +2179,6 @@ AI_Smart_Endure:
 .discourage
 	inc [hl]
 	ret
-
-AI_Smart_FuryCutter:
-; Encourage this move based on Fury Cutter's count.
-
-	ld a, [wEnemyFuryCutterCount]
-	and a
-	jr z, AI_Smart_Rollout
-	dec [hl]
-
-	cp 2
-	jr c, AI_Smart_Rollout
-	dec [hl]
-	dec [hl]
-
-	cp 3
-	jr c, AI_Smart_Rollout
-	dec [hl]
-	dec [hl]
-	dec [hl]
-
-	; fallthrough
 
 AI_Smart_Rollout:
 ; Rollout, Fury Cutter
