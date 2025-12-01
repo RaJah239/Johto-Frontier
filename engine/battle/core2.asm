@@ -395,3 +395,30 @@ BlizzardHail:
 	ld a, [wBattleWeather]
 	cp WEATHER_HAIL
 	ret
+
+FlyDigMovesMiss:
+; Check for moves that can hit underground/flying opponents.
+; Return z if the current move can hit the opponent.
+	ld a, BATTLE_VARS_SUBSTATUS3_OPP
+	call GetBattleVar
+	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
+	ret z
+	bit SUBSTATUS_FLYING, a
+	jr z, .DigMoves
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp GUST
+	ret z
+	cp WHIRLWIND
+	ret z
+	cp THUNDER
+	ret z
+	ret
+
+.DigMoves:
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp EARTHQUAKE
+	ret z
+	cp FISSURE
+	ret
