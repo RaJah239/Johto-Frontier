@@ -1,19 +1,20 @@
 BattleCommand_LockOn:
-	call CheckSubstituteOpp
-	jr nz, .fail
-
-	ld a, [wAttackMissed]
-	and a
-	jr nz, .fail
-
-	ld a, BATTLE_VARS_SUBSTATUS5_OPP
-	call GetBattleVarAddr
-	set SUBSTATUS_LOCK_ON, [hl]
-	call AnimateCurrentMove
-
-	ld hl, TookAimText
-	jmp StdBattleTextbox
-
-.fail
-	call AnimateFailedMove
-	jmp PrintDidntAffect
+	ret
+;	call CheckSubstituteOpp
+;	jr nz, .fail
+;
+;	ld a, [wAttackMissed]
+;	and a
+;	jr nz, .fail
+;
+;	ld a, BATTLE_VARS_SUBSTATUS5_OPP
+;	call GetBattleVarAddr
+;	set SUBSTATUS_LOCK_ON, [hl]
+;	call AnimateCurrentMove
+;
+;	ld hl, TookAimText
+;	jmp StdBattleTextbox
+;
+;.fail
+;	call AnimateFailedMove
+;	jmp PrintDidntAffect
