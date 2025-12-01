@@ -367,3 +367,31 @@ ShouldIgniteFlameOrb:
 .no
     xor a
     ret
+
+XAccuracy:
+	ld a, BATTLE_VARS_SUBSTATUS4
+	call GetBattleVar
+	bit SUBSTATUS_X_ACCURACY, a
+	ret
+
+ThunderRain:
+; Return z if the current move always hits in rain, and it is raining.
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_THUNDER
+	ret nz
+
+	ld a, [wBattleWeather]
+	cp WEATHER_RAIN
+	ret
+
+BlizzardHail:
+; Return z if the current mova always hits in hail, and it is hailing
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_BLIZZARD
+	ret nz
+	
+	ld a, [wBattleWeather]
+	cp WEATHER_HAIL
+	ret

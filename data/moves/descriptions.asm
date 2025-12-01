@@ -230,7 +230,7 @@ MoveDescriptions::
 	dw EncoreDescription
 	dw PursuitDescription
 	dw RapidSpinDescription
-	dw SweetScentDescription
+	dw WillOWispDescription
 	dw IronTailDescription
 	dw MetalClawDescription
 	dw VitalThrowDescription
@@ -1175,9 +1175,9 @@ RapidSpinDescription:
 	db   "A high-speed"
 	line "spinning attack.@"
 
-SweetScentDescription:
-	db   "Reduces the foe's"
-	line "evasiveness.@"
+WillOWispDescription:
+	db   "A move that may"
+	line "cause a burn.@"
 
 IronTailDescription:
 	db   "An attack that may"

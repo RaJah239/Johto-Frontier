@@ -1515,6 +1515,61 @@ BattleCommand_ResetTypeMatchup:
 
 INCLUDE "engine/battle/ai/switch.asm"
 
+BattleCommand_Burn:
+; burn
+
+	ld a, BATTLE_VARS_STATUS_OPP
+	call GetBattleVar
+	bit BRN, a
+	jr nz, .burn
+	ld a, [wTypeModifier]
+	and $7f
+	jr z, .didnt_affect
+
+	ld a, BATTLE_VARS_STATUS_OPP
+	call GetBattleVarAddr
+	and a
+	jr nz, .failed
+	ld a, [wAttackMissed]
+	and a
+	jr nz, .failed
+	ld a, [wEffectFailed]
+	and a
+	jr nz, .failed
+	call CheckSubstituteOpp
+	jr nz, .failed
+	ld c, 30
+	call DelayFrames
+	call AnimateCurrentMove
+	ld a, $1
+	ldh [hBGMapMode], a
+	ld a, BATTLE_VARS_STATUS_OPP
+	call GetBattleVarAddr
+	set BRN, [hl]
+	call UpdateOpponentInParty
+	ld hl, ApplyBrnEffectOnAttack
+	call CallBattleCore
+	call UpdateBattleHuds
+	call PrintBurn
+	ld hl, UseHeldStatusHealingItem
+	jp CallBattleCore
+
+.burn
+	call AnimateFailedMove
+	ld hl, AlreadyBurnedText
+	jp StdBattleTextbox
+
+.failed
+	jp PrintDidntAffect2
+
+.didnt_affect
+	call AnimateFailedMove
+	jp PrintDoesntAffect
+
+PrintBurn:
+	ld hl, WasBurnedText
+	jp StdBattleTextbox
+
 BattleCommand_DamageVariation:
 ; Modify the damage spread between 85% and 100%.
 
@@ -1581,13 +1636,13 @@ BattleCommand_CheckHit:
 	call .FlyDigMoves
 	jr nz, .Miss
 
-	call .ThunderRain
+	farcall ThunderRain
 	ret z
 
-	call .BlizzardHail
+	farcall BlizzardHail
 	ret z
 
-	call .XAccuracy
+	farcall XAccuracy
 	ret nz
 
 	ld a, [hBattleTurn]
@@ -1797,34 +1852,6 @@ BattleCommand_CheckHit:
 	cp EARTHQUAKE
 	ret z
 	cp FISSURE
-	ret
-
-.ThunderRain:
-; Return z if the current move always hits in rain, and it is raining.
-	ld a, BATTLE_VARS_MOVE_EFFECT
-	call GetBattleVar
-	cp EFFECT_THUNDER
-	ret nz
-
-	ld a, [wBattleWeather]
-	cp WEATHER_RAIN
-	ret
-
-.BlizzardHail:
-; Return z if the current mova always hits in hail, and it is hailing
-	ld a, BATTLE_VARS_MOVE_EFFECT
-	call GetBattleVar
-	cp EFFECT_BLIZZARD
-	ret nz
-	
-	ld a, [wBattleWeather]
-	cp WEATHER_HAIL
-	ret
-
-.XAccuracy:
-	ld a, BATTLE_VARS_SUBSTATUS4
-	call GetBattleVar
-	bit SUBSTATUS_X_ACCURACY, a
 	ret
 
 .StatModifiers:
@@ -6348,6 +6375,7 @@ PrintDidntAffect:
 
 PrintDidntAffect2:
 	call AnimateFailedMove
+	farcall BattleMissAnim
 	ld hl, EvadedText ; 'evaded the attack'
 	ld de, ProtectingItselfText ; 'protecting itself'
 	jmp FailText_CheckOpponentProtect

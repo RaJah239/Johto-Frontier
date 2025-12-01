@@ -2492,22 +2492,12 @@ JumpToPartyMenuAndPrintText:
 	call DelayFrame
 	ret
 
-SelectBattleMon:
-	call IsMobileBattle
-	jr z, .mobile
-	farcall PartyMenuSelect
-	ret
-
-.mobile
-	farcall Mobile_PartyMenuSelect
-	ret
-
 PickPartyMonInBattle:
 .loop
 	ld a, PARTYMENUACTION_SWITCH ; Which PKMN?
 	ld [wPartyMenuActionText], a
 	call JumpToPartyMenuAndPrintText
-	call SelectBattleMon
+	farcall PartyMenuSelect
 	ret c
 	call CheckIfCurPartyMonIsFitToFight
 	jr z, .loop
@@ -4796,7 +4786,7 @@ BattleMenuPKMN_Loop:
 	xor a
 	ld [wPartyMenuActionText], a
 	call JumpToPartyMenuAndPrintText
-	call SelectBattleMon
+	farcall PartyMenuSelect
 	jr c, .Cancel
 .loop
 	farcall FreezeMonIcons

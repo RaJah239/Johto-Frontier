@@ -231,7 +231,7 @@ BattleAnimations::
 	dw BattleAnim_Encore
 	dw BattleAnim_Pursuit
 	dw BattleAnim_RapidSpin
-	dw BattleAnim_SweetScent
+	dw BattleAnim_WillOWisp
 	dw BattleAnim_IronTail
 	dw BattleAnim_MetalClaw
 	dw BattleAnim_VitalThrow
@@ -821,6 +821,15 @@ BattleAnim_SuperFang:
 	anim_obj BATTLE_ANIM_OBJ_FANG, 136, 56, $0
 	anim_wait 6
 	anim_loop 3, .loop
+	anim_ret
+
+BattleAnim_WillOWisp:
+	anim_2gfx BATTLE_ANIM_GFX_ANGELS, BATTLE_ANIM_GFX_FIRE
+	anim_obj BATTLE_ANIM_OBJ_SPITE, 132, 16, $0
+	anim_sound 0, 1, SFX_SPITE
+	anim_wait 32
+	anim_call BattleAnimSub_Fire
+	anim_wait 8
 	anim_ret
 
 BattleAnim_Ember:
@@ -4219,20 +4228,20 @@ BattleAnim_RapidSpin:
 	anim_wait 1
 	anim_ret
 
-BattleAnim_SweetScent:
-	anim_2gfx BATTLE_ANIM_GFX_FLOWER, BATTLE_ANIM_GFX_MISC
-	anim_sound 0, 0, SFX_SWEET_SCENT
-	anim_obj BATTLE_ANIM_OBJ_FLOWER, 64, 96, $2
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_FLOWER, 64, 80, $2
-	anim_wait 96
-	anim_obp0 $54
-	anim_sound 0, 1, SFX_SWEET_SCENT_2
-	anim_obj BATTLE_ANIM_OBJ_COTTON, 136, 40, $15
-	anim_obj BATTLE_ANIM_OBJ_COTTON, 136, 40, $2a
-	anim_obj BATTLE_ANIM_OBJ_COTTON, 136, 40, $3f
-	anim_wait 128
-	anim_ret
+;BattleAnim_SweetScent:
+;	anim_2gfx BATTLE_ANIM_GFX_FLOWER, BATTLE_ANIM_GFX_MISC
+;	anim_sound 0, 0, SFX_SWEET_SCENT
+;	anim_obj BATTLE_ANIM_OBJ_FLOWER, 64, 96, $2
+;	anim_wait 2
+;	anim_obj BATTLE_ANIM_OBJ_FLOWER, 64, 80, $2
+;	anim_wait 96
+;	anim_obp0 $54
+;	anim_sound 0, 1, SFX_SWEET_SCENT_2
+;	anim_obj BATTLE_ANIM_OBJ_COTTON, 136, 40, $15
+;	anim_obj BATTLE_ANIM_OBJ_COTTON, 136, 40, $2a
+;	anim_obj BATTLE_ANIM_OBJ_COTTON, 136, 40, $3f
+;	anim_wait 128
+;	anim_ret
 
 BattleAnim_IronTail:
 	anim_1gfx BATTLE_ANIM_GFX_REFLECT

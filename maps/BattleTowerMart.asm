@@ -140,7 +140,7 @@ BattleTowerMartTMCoinTraderScript:
     sjump .ConcludeTransaction
 
 .TMSweetScent:
-    verbosegiveitem TM_SWEET_SCENT
+    verbosegiveitem TM_BULK_UP
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
