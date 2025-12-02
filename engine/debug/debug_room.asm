@@ -30,6 +30,7 @@ DEF DEBUGROOMMENU_NUM_PAGES EQU const_value
 	const DEBUGROOMMENUITEM_BT_BUG_POKE  ; 14
 
 _DebugRoom:
+	ret
 	ldh a, [hJoyDown]
 ; Press "A" alone to enter the Debug Room
 	ret nz
