@@ -56,10 +56,14 @@ if DEF(_DEBUG)
 	giveitem BICYCLE
 	giveitem COIN_CASE
 	givecoins MAX_COINS
+
+	; all rods
 	giveitem OLD_ROD
 	giveitem GOOD_ROD
 	giveitem SUPER_ROD
 	giveitem SHINY_CHARM
+
+	; overworld calls
 	giveitem TANGELA_CALL
 	giveitem MAREEP_CALL
 	giveitem SCYTHER_CALL
@@ -215,11 +219,6 @@ if DEF(_DEBUG)
 	giveitem WISE_GLASSES, MAX_ITEM_STACK
 	giveitem HEAVY_BOOTS, MAX_ITEM_STACK
 	giveitem FLAME_ORB, MAX_ITEM_STACK
-
-	; all rods
-	giveitem OLD_ROD
-	giveitem GOOD_ROD
-	giveitem SUPER_ROD
 
 	; events
 	setevent EVENT_BATTLE_TOWER_TYPE_MODES_UNLOCKED
