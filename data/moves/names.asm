@@ -222,7 +222,7 @@ MoveNames::
 	li "Pain Split"
 	li "Sacred Fire"
 	li "Quiver Dance"
-	li "Dynamicpunch"
+	li "Meteor Mash"
 	li "Megahorn"
 	li "DragonBreath"
 	li "Baton Pass"

@@ -98,7 +98,7 @@ GetTMs:
 	ret
 
 TMMenuItems:
-	db TM_DYNAMICPUNCH
+	db TM_METEOR_MASH
 	db TM_HEADBUTT
 	db TM_CURSE
 	db TM_ROLLOUT

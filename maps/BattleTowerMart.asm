@@ -26,7 +26,7 @@ BattleTowerMartTMCoinTraderScript:
     ifequal HAVE_LESS, .NotEnoughCoins
 .WantToBuyADifferentTM:
     special CoinsTMTrader
-    ifequal 1,  .TMDynamicPunch
+    ifequal 1,  .TMMeteorMash
     ifequal 2,  .TMHeadbutt
     ifequal 3,  .TMCurse
     ifequal 4,  .TMRollout
@@ -84,8 +84,8 @@ BattleTowerMartTMCoinTraderScript:
     waitbutton
     sjump .WantToBuyADifferentTM
 
-.TMDynamicPunch:
-    verbosegiveitem TM_DYNAMICPUNCH
+.TMMeteorMash:
+    verbosegiveitem TM_METEOR_MASH
     iffalse .NoRoom
     sjump .ConcludeTransaction
 

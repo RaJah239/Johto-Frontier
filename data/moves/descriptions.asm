@@ -223,7 +223,7 @@ MoveDescriptions::
 	dw PainSplitDescription
 	dw SacredFireDescription
 	dw QuiverDanceDescription
-	dw DynamicpunchDescription
+	dw MeteorMashDescription
 	dw MegahornDescription
 	dw DragonbreathDescription
 	dw BatonPassDescription
@@ -1147,10 +1147,6 @@ QuiverDanceDescription:
 	db   "Raises Special"
 	line "stats and Speed.@"
 
-DynamicpunchDescription:
-	db   "An attack that"
-	line "always confuses.@"
-
 MegahornDescription:
 	db   "A powerful charge"
 	line "attack.@"
@@ -1183,9 +1179,10 @@ IronTailDescription:
 	db   "An attack that may"
 	line "reduce DEFENSE.@"
 
+MeteorMashDescription:
 MetalClawDescription:
 	db   "An attack that may"
-	line "up user's ATTACK.@"
+	line "up user's Attack.@"
 
 VitalThrowDescription:
 	db   "A 2nd-strike move"

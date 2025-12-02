@@ -224,7 +224,7 @@ BattleAnimations::
 	dw BattleAnim_PainSplit
 	dw BattleAnim_SacredFire
 	dw BattleAnim_QuiverDance
-	dw BattleAnim_Dynamicpunch
+	dw BattleAnim_MeteorMash
 	dw BattleAnim_Megahorn
 	dw BattleAnim_Dragonbreath
 	dw BattleAnim_BatonPass
@@ -4154,7 +4154,7 @@ BattleAnim_SacredFire:
 	anim_wait 8
 	anim_ret
 
-BattleAnim_Dynamicpunch:
+BattleAnim_MeteorMash:
 	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_EXPLOSION
 	anim_sound 0, 1, SFX_COMET_PUNCH
 	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 56, $43
