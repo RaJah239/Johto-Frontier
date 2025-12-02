@@ -53,20 +53,20 @@ if DEF(_DEBUG)
 	givemoney YOUR_MONEY, MAX_MONEY
 	
 	; key items
-	giveitem TANGELA_CALL
 	giveitem BICYCLE
 	giveitem COIN_CASE
 	givecoins MAX_COINS
 	giveitem OLD_ROD
 	giveitem GOOD_ROD
 	giveitem SUPER_ROD
+	giveitem SHINY_CHARM
+	giveitem TANGELA_CALL
 	giveitem MAREEP_CALL
 	giveitem SCYTHER_CALL
 	giveitem DONPHAN_CALL
 	giveitem LANTURN_CALL
 	giveitem KINGDRA_CALL
 	giveitem MILOTIC_CALL
-	giveitem SHINY_CHARM
 
 	; good party
 	givepoke MEW, 50, LEFTOVERS
@@ -76,25 +76,28 @@ if DEF(_DEBUG)
 	; 4th, 5th & 6th mons
 	; unneeded presently
 	; givepoke RAIKOU, 17
-	; givepoke DITTO, 5, METAL_POWDER
+	; givepoke DITTO, 5, QUICK_CLAW
 
 	; first mon shiny
-	loadmem wPartyMon1DVs+0, $ff
-	loadmem wPartyMon1DVs+1, $ff
+	;loadmem wPartyMon1DVs+0, $ff
+	;loadmem wPartyMon1DVs+1, $ff
 	; third mon shiny
 	loadmem wPartyMon3DVs+0, $ff
 	loadmem wPartyMon3DVs+1, $ff
 
-	; useful moves
+	; 1st mon moves
 	loadmem wPartyMon1Moves+0, HAIL
 	loadmem wPartyMon1Moves+1, SANDSTORM
 	loadmem wPartyMon1Moves+2, FLAMETHROWER
-	; overworld moves
 	loadmem wPartyMon1Moves+3, RECOVER
+
+	; 2nd mon moves
 	loadmem wPartyMon2Moves+0, SPORE
 	loadmem wPartyMon2Moves+1, SWORDS_DANCE
 	loadmem wPartyMon2Moves+2, BATON_PASS
 	loadmem wPartyMon2Moves+3, AGILITY
+
+	; 3rd mon moves
 	loadmem wPartyMon3Moves+0, EARTHQUAKE
 	loadmem wPartyMon3Moves+1, OUTRAGE
 	loadmem wPartyMon3Moves+2, WATERFALL
@@ -365,8 +368,8 @@ PlayersHouse2F_MapEvents:
 	object_event  0,  1, SPRITE_BIG_DOLL, SPRITEMOVEDATA_BIGDOLL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseBigDollScript, EVENT_PLAYERS_HOUSE_2F_BIG_DOLL
 if DEF(_DEBUG)
 	object_event  4,  2, SPRITE_RED, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TestTrainerScript, -1
-	object_event  2,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RegularMonScript, -1
-	object_event  3,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ShinyMonScript, -1
+	object_event  3,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RegularMonScript, -1
+	object_event  2,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ShinyMonScript, -1
 	object_event  7,  5, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, DebugColourPickerScript, -1
 	object_event  6,  2, SPRITE_BLUE, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TestWarpScript, -1
 endc
