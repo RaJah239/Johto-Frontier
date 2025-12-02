@@ -422,3 +422,56 @@ FlyDigMovesMiss:
 	ret z
 	cp FISSURE
 	ret
+
+DreamEaterMiss:
+; Return z if we're trying to eat the dream of
+; a monster that isn't sleeping.
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_DREAM_EATER
+	ret nz
+	ld a, BATTLE_VARS_STATUS_OPP
+	call GetBattleVar
+	and SLP_MASK
+	ret
+
+ProtectMiss:
+; Return nz if the opponent is protected.
+	ld a, BATTLE_VARS_SUBSTATUS1_OPP
+	call GetBattleVar
+	bit SUBSTATUS_PROTECT, a
+	ret z
+	ld c, 40
+	call DelayFrames
+; 'protecting itself!'
+	ld hl, ProtectingItselfText
+	call StdBattleTextbox
+	ld c, 40
+	call DelayFrames
+	ld a, 1
+	and a
+	ret
+
+LockOnMiss:
+; Return nz if we are locked-on and aren't trying to use Earthquake,
+; Fissure or Magnitude on a monster that is flying.
+	ld a, BATTLE_VARS_SUBSTATUS5_OPP
+	call GetBattleVarAddr
+	bit SUBSTATUS_LOCK_ON, [hl]
+	res SUBSTATUS_LOCK_ON, [hl]
+	ret z
+	ld a, BATTLE_VARS_SUBSTATUS3_OPP
+	call GetBattleVar
+	bit SUBSTATUS_FLYING, a
+	jr z, .LockedOn
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp EARTHQUAKE
+	ret z
+	cp FISSURE
+	ret z
+
+.LockedOn:
+	ld a, 1
+	and a
+	ret

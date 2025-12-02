@@ -56,7 +56,7 @@ RandomPartyLists::
 			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
 			ds 6, MAX_EV	; EVs - hp, atk, def, spd, sat, sdf 
 			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-			db RECOVER, PSYCHIC_M, FIRE_BLAST, SUBMISSION ; Moveset - NO_MOVE is a thing
+			db RECOVER, PSYCHIC_M, FIRE_BLAST, CLOSE_COMBAT ; Moveset - NO_MOVE is a thing
 			db $fe ; End of Pokemon
 	db 50, SNORLAX
 			db "LAX@"		; Nickname

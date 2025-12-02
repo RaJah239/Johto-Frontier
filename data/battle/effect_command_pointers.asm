@@ -184,4 +184,5 @@ BattleCommandPointers:
 	dw BattleCommand_DragonDance
 	dw BattleCommand_QuiverDance
 	dw BattleCommand_Burn
+	dw BattleCommand_CloseCombat
 	assert_table_length NUM_EFFECT_COMMANDS

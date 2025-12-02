@@ -65,7 +65,7 @@ MoveNames::
 	li "Hyper Beam"
 	li "Peck"
 	li "Drill Peck"
-	li "Submission"
+	li "Close Combat"
 	li "Low Kick"
 	li "Counter"
 	li "Seismic Toss"

@@ -66,7 +66,7 @@ MoveDescriptions::
 	dw HyperBeamDescription
 	dw PeckDescription
 	dw DrillPeckDescription
-	dw SubmissionDescription
+	dw CloseCombatDescription
 	dw LowKickDescription
 	dw CounterDescription
 	dw SeismicTossDescription
@@ -531,9 +531,9 @@ DrillPeckDescription:
 	db   "A strong, spin-"
 	line "ning-peck attack.@"
 
-SubmissionDescription:
-	db   "An attack that al-"
-	line "so hurts the user.@"
+CloseCombatDescription:
+	db "Lowers the user's"
+	line "Def and Sp.Def.@"
 
 LowKickDescription:
 	db   "An attack that may"
