@@ -167,4 +167,5 @@ MoveEffectsPointers:
 	dw DoBurn
 	dw CloseCombat
 	dw SpeedUpHit
+	dw Hex
 	assert_table_length NUM_MOVE_EFFECTS

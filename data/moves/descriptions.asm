@@ -160,7 +160,7 @@ MoveDescriptions::
 	dw RockSlideDescription
 	dw HyperFangDescription
 	dw SharpenDescription
-	dw ConversionDescription
+	dw HexDescription
 	dw TriAttackDescription
 	dw SuperFangDescription
 	dw SlashDescription
@@ -899,9 +899,9 @@ SharpenDescription:
 	db   "A move that raises"
 	line "the user's ATTACK.@"
 
-ConversionDescription:
-	db   "Change user's type"
-	line "to a move's type.@"
+HexDescription:
+	db "Double damage to"
+	line "statused foes.@"
 
 TriAttackDescription:
 	db   "Fires three kinds"

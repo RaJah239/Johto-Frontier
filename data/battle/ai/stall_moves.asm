@@ -29,8 +29,6 @@ StallMoves:
 	db TRANSFORM
 	db SPLASH
 	db ACID_ARMOR
-	db SHARPEN
-	db CONVERSION
 	db SUBSTITUTE
 	db QUIVER_DANCE
 	db -1 ; end

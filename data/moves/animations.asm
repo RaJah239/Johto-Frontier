@@ -161,7 +161,7 @@ BattleAnimations::
 	dw BattleAnim_RockSlide
 	dw BattleAnim_HyperFang
 	dw BattleAnim_Sharpen
-	dw BattleAnim_Conversion
+	dw BattleAnim_Hex
 	dw BattleAnim_TriAttack
 	dw BattleAnim_SuperFang
 	dw BattleAnim_Slash
@@ -3394,19 +3394,33 @@ BattleAnim_Flail:
 	anim_call BattleAnim_ShowMon_0
 	anim_ret
 
-BattleAnim_Conversion:
-	anim_1gfx BATTLE_ANIM_GFX_EXPLOSION
-	anim_bgeffect BATTLE_BG_EFFECT_ALTERNATE_HUES, $0, $2, $0
-	anim_sound 63, 3, SFX_SHARPEN
-	anim_obj BATTLE_ANIM_OBJ_CONVERSION, 48, 88, $0
-	anim_obj BATTLE_ANIM_OBJ_CONVERSION, 48, 88, $8
-	anim_obj BATTLE_ANIM_OBJ_CONVERSION, 48, 88, $10
-	anim_obj BATTLE_ANIM_OBJ_CONVERSION, 48, 88, $18
-	anim_obj BATTLE_ANIM_OBJ_CONVERSION, 48, 88, $20
-	anim_obj BATTLE_ANIM_OBJ_CONVERSION, 48, 88, $28
-	anim_obj BATTLE_ANIM_OBJ_CONVERSION, 48, 88, $30
-	anim_obj BATTLE_ANIM_OBJ_CONVERSION, 48, 88, $38
-	anim_wait 128
+BattleAnim_Hex:
+	anim_2gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_SPEED
+	anim_bgp $f8
+	anim_wait 8
+	anim_sound 6, 2, SFX_SLUDGE_BOMB
+	anim_wait 40
+	anim_bgp $1b
+	anim_sound 0, 0, SFX_CURSE
+.loop
+	anim_obj ANIM_OBJ_HEX, 136, 72, $6
+	anim_wait 2
+	anim_obj ANIM_OBJ_HEX, 128, 72, $6
+	anim_wait 2
+	anim_obj ANIM_OBJ_BLUE_FLAME, 128, 54, $10
+	anim_obj ANIM_OBJ_HEX, 144, 72, $8
+	anim_wait 2
+	anim_obj ANIM_OBJ_HEX, 120, 72, $8
+	anim_wait 2
+	anim_obj ANIM_OBJ_HEX, 152, 72, $6
+	anim_wait 2
+	anim_obj ANIM_OBJ_BLUE_FLAME, 144, 38, $90
+	anim_obj ANIM_OBJ_HEX, 112, 72, $8
+	anim_wait 2
+	anim_obj ANIM_OBJ_HEX, 160, 72, $8
+	anim_wait 2
+	anim_loop 3, .loop
+	anim_wait 24
 	anim_ret
 
 BattleAnim_Aeroblast:

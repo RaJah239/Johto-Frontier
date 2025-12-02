@@ -159,7 +159,7 @@ MoveNames::
 	li "Rock Slide"
 	li "Hyper Fang"
 	li "Sharpen"
-	li "Conversion"
+	li "Hex"
 	li "Tri Attack"
 	li "Super Fang"
 	li "Slash"
