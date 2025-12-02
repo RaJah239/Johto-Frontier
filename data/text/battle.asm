@@ -946,11 +946,6 @@ ProtectedByText:
 	text "!"
 	prompt
 
-MirrorMoveFailedText:
-	text "The MIRROR MOVE"
-	next "failed!"
-	prompt
-
 StoleText:
 	text_ram wStringBuffer1
 	text " was"

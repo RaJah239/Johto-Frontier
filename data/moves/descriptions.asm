@@ -119,7 +119,7 @@ MoveDescriptions::
 	dw FocusEnergyDescription
 	dw DarkPulseDescription
 	dw MetronomeDescription
-	dw MirrorMoveDescription
+	dw BulldozeDescription
 	dw SelfdestructDescription
 	dw EggBombDescription
 	dw LickDescription
@@ -733,10 +733,6 @@ MetronomeDescription:
 	db   "Randomly uses any"
 	line "#MON move.@"
 
-MirrorMoveDescription:
-	db   "Counters with the"
-	line "same move.@"
-
 SelfdestructDescription:
 	db   "Powerful but makes"
 	line "the user faint.@"
@@ -1034,9 +1030,10 @@ PerishSongDescription:
 	db   "Both user and foe"
 	line "faint in 3 turns.@"
 
+BulldozeDescription:
 IcyWindDescription:
-	db   "An icy attack that"
-	line "lowers SPEED.@"
+	db   "An attack that"
+	line "lowers Speed.@"
 
 DetectDescription:
 	db   "Evades attack that"

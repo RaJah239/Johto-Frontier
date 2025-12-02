@@ -118,7 +118,7 @@ MoveNames::
 	li "Focus Energy"
 	li "Dark Pulse"
 	li "Metronome"
-	li "Mirror Move"
+	li "Bulldoze"
 	li "Selfdestruct"
 	li "Egg Bomb"
 	li "Lick"

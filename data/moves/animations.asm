@@ -120,7 +120,7 @@ BattleAnimations::
 	dw BattleAnim_FocusEnergy
 	dw BattleAnim_DarkPulse
 	dw BattleAnim_Metronome
-	dw BattleAnim_MirrorMove
+	dw BattleAnim_Bulldoze
 	dw BattleAnim_Selfdestruct
 	dw BattleAnim_EggBomb
 	dw BattleAnim_Lick
@@ -286,7 +286,28 @@ BattleAnimations::
 	assert_table_length NUM_BATTLE_ANIMS + 1
 
 BattleAnim_Dummy:
-BattleAnim_MirrorMove:
+	anim_ret
+
+BattleAnim_Bulldoze:
+	anim_1gfx BATTLE_ANIM_GFX_HIT
+	anim_call BattleAnim_TargetObj_2Row
+	anim_bgeffect BATTLE_BG_EFFECT_WITHDRAW, $0, $1, $50
+	anim_wait 4
+	anim_incbgeffect BATTLE_BG_EFFECT_WITHDRAW
+	anim_call BattleAnim_ShowMon_0
+	anim_wait 1
+.loop
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $08, $2, $0
+	anim_sound 0, 1, SFX_SPARK
+	anim_wait 8
+	anim_loop 6, .loop
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $40, $2, $0
+.loop2
+	anim_sound 0, 1, SFX_SPARK
+	anim_wait 4
+	anim_loop 12, .loop2
+	anim_wait 48
+	anim_incbgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X
 	anim_ret
 
 BattleAnim_SweetScent2:
