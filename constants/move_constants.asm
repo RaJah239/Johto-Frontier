@@ -32,7 +32,7 @@
 	const DOUBLE_KICK  ; 18
 	const FOCUS_BLAST  ; 19
 	const STICKY_WEB   ; 1a
-	const ROLLING_KICK ; 1b
+	const SEED_BOMB    ; 1b
 	const DRAIN_KISS   ; 1c
 	const HEADBUTT     ; 1d
 	const HORN_ATTACK  ; 1e

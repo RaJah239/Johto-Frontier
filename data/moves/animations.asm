@@ -28,7 +28,7 @@ BattleAnimations::
 	dw BattleAnim_DoubleKick
 	dw BattleAnim_FocusBlast
 	dw BattleAnim_StickyWeb
-	dw BattleAnim_RollingKick
+	dw BattleAnim_SeedBomb
 	dw BattleAnim_DrainKiss
 	dw BattleAnim_Headbutt
 	dw BattleAnim_HornAttack
@@ -757,16 +757,6 @@ BattleAnim_HiJumpKick:
 	anim_wait 16
 	anim_ret
 
-BattleAnim_RollingKick:
-	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_sound 0, 1, SFX_DOUBLE_KICK
-	anim_obj BATTLE_ANIM_OBJ_KICK, 112, 56, $0
-	anim_setobj $1, $3
-	anim_wait 12
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 48, $0
-	anim_wait 16
-	anim_ret
-
 BattleAnim_FocusBlast:
 	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_BEAM
 	anim_call BattleAnim_TargetObj_1Row
@@ -1158,7 +1148,7 @@ BattleAnim_VineWhip:
 	anim_wait 4
 	anim_ret
 
-BattleAnim_LeechSeed:
+BattleAnim_SeedingFlyingSub:
 	anim_1gfx BATTLE_ANIM_GFX_PLANT
 	anim_sound 16, 2, SFX_VINE_WHIP
 	anim_obj BATTLE_ANIM_OBJ_LEECH_SEED, 48, 80, $20
@@ -1168,9 +1158,51 @@ BattleAnim_LeechSeed:
 	anim_wait 8
 	anim_sound 16, 2, SFX_VINE_WHIP
 	anim_obj BATTLE_ANIM_OBJ_LEECH_SEED, 48, 80, $28
+	anim_ret
+
+BattleAnim_LeechSeed:
+	anim_call BattleAnim_SeedingFlyingSub
 	anim_wait 32
 	anim_sound 0, 1, SFX_CHARGE
 	anim_wait 128
+	anim_ret
+
+BattleAnim_SeedBomb:
+	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_EXPLOSION
+	anim_call BattleAnim_SeedingFlyingSub
+	anim_jump BattleAnim_EnemyBombingSub
+
+BattleAnim_MeteorMash:
+	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_EXPLOSION
+
+	anim_sound 0, 1, SFX_SUBMISSION
+	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 17, 0,  7, 0, $0
+	anim_wait 6
+	anim_sound 0, 1, SFX_PLACE_PUZZLE_PIECE_DOWN
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 17, 0,  7, 0, $0
+	anim_wait 20
+	anim_call BattleAnim_ImpactfulPunchSub
+	anim_jump BattleAnim_EnemyBombingSub
+
+BattleAnim_DrainPunch:
+	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_HIT
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $20, $1, $0
+	anim_call BattleAnim_ImpactfulPunchSub
+	anim_jump BattleAnim_Absorb
+
+BattleAnim_ImpactfulPunchSub:
+	anim_sound 0, 1, SFX_SUBMISSION
+	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 17, 0,  7, 0, $0
+	anim_wait 6
+	anim_sound 0, 1, SFX_PLACE_PUZZLE_PIECE_DOWN
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 17, 0,  7, 0, $0
+	anim_wait 20
+	anim_ret
+
+BattleAnim_EnemyBombingSub:
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $12
+	anim_call BattleAnimSub_Explosion2
+	anim_wait 16
 	anim_ret
 
 BattleAnim_RazorLeaf:
@@ -3257,17 +3289,6 @@ BattleAnim_Disable:
 	anim_wait 96
 	anim_ret
 
-BattleAnim_DrainPunch:
-	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_HIT
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $20, $1, $0
-	anim_sound 0, 1, SFX_SUBMISSION
-	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 17, 0,  7, 0, $0
-	anim_wait 6
-	anim_sound 0, 1, SFX_PLACE_PUZZLE_PIECE_DOWN
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 17, 0,  7, 0, $0
-	anim_wait 20
-	anim_jump BattleAnim_Absorb
-
 BattleAnim_Struggle:
 	anim_1gfx BATTLE_ANIM_GFX_HIT
 	anim_sound 0, 1, SFX_POUND
@@ -4181,16 +4202,6 @@ BattleAnim_SacredFire:
 	anim_wait 4
 	anim_incobj 9
 	anim_wait 8
-	anim_ret
-
-BattleAnim_MeteorMash:
-	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_EXPLOSION
-	anim_sound 0, 1, SFX_COMET_PUNCH
-	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 56, $43
-	anim_wait 16
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $12
-	anim_call BattleAnimSub_Explosion2
-	anim_wait 16
 	anim_ret
 
 BattleAnim_Megahorn:

@@ -27,7 +27,7 @@ MoveDescriptions::
 	dw DoubleKickDescription
 	dw FocusBlastDescription
 	dw StickyWebDescription
-	dw RollingKickDescription
+	dw SeedBombDescription
 	dw DrainKissDescription
 	dw HeadbuttDescription
 	dw HornAttackDescription
@@ -343,10 +343,6 @@ StickyWebDescription:
 	db   "Slows foes when"
 	line "they switch in.@"
 
-RollingKickDescription:
-	db   "A fast, spinning"
-	line "kick.@"
-
 IcicleCrashDescription:
 ZenHeadbuttDescription:
 IronHeadDescription:
@@ -437,10 +433,8 @@ AcidDescription:
 	db   "An attack that may"
 	line "lower DEFENSE.@"
 
+SeedBombDescription:
 EmberDescription:
-	db   "An attack that may"
-	line "inflict a burn.@"
-
 FlamethrowerDescription:
 	db   "An attack that may"
 	line "inflict a burn.@"

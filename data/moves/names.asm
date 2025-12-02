@@ -26,7 +26,7 @@ MoveNames::
 	li "Double Kick"
 	li "Focus Blast"
 	li "Sticky Web"
-	li "Rolling Kick"
+	li "Seed Bomb"
 	li "Drain Kiss"
 	li "Headbutt"
 	li "Horn Attack"
