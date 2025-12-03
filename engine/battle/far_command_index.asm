@@ -26,4 +26,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_HAIL,			BattleCommand_StartHail
 	dbw EFFECT_FORESIGHT,       BattleCommand_Foresight
 	dbw EFFECT_FAKE_OUT,        BattleCommand_FakeOut
+	dbw EFFECT_FREEZE_DRY,      BattleCommand_FreezeDry
 	db -1 ; end

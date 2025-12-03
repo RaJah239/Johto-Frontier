@@ -198,7 +198,7 @@ MoveNames::
 	li "Icy Wind"
 	li "Fairy Wind"
 	li "Snarl"
-	li "Lock-On"
+	li "Freeze-Dry"
 	li "Outrage"
 	li "Sandstorm"
 	li "Giga Drain"

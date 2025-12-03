@@ -204,7 +204,7 @@
 	const ICY_WIND     ; c4
 	const FAIRY_WIND   ; c5
 	const SNARL        ; c6
-	const LOCK_ON      ; c7
+	const FREEZE_DRY   ; c7
 	const OUTRAGE      ; c8
 	const SANDSTORM    ; c9
 	const GIGA_DRAIN   ; ca

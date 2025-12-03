@@ -199,7 +199,7 @@ MoveDescriptions::
 	dw IcyWindDescription
 	dw FairyWindDescription
 	dw SnarlDescription
-	dw LockOnDescription
+	dw FreezeDryDescription
 	dw OutrageDescription
 	dw SandstormDescription
 	dw GigaDrainDescription
@@ -961,9 +961,9 @@ BoneRushDescription:
 	db   "An attack that"
 	line "hits 2-5 times.@"
 
-LockOnDescription:
-	db   "Ensures the next"
-	line "attack will hit.@"
+FreezeDryDescription:
+	db   "Strong vs Water."
+	line "May frostbite foe.@"
 
 SandstormDescription:
 	db   "Inflicts damage"

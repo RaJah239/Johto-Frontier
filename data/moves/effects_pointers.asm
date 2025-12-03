@@ -159,4 +159,5 @@ MoveEffectsPointers:
 	dw SpAtkUpHit
 	dw NormalHit
 	dw FlareBlitz
+	dw FreezeDry
 	assert_table_length NUM_MOVE_EFFECTS

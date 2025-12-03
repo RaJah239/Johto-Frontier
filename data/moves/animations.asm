@@ -397,7 +397,7 @@ BattleAnimations::
 	dw BattleAnim_IcyWind
 	dw BattleAnim_FairyWind
 	dw BattleAnim_Snarl
-	dw BattleAnim_LockOn
+	dw BattleAnim_FreezeDry
 	dw BattleAnim_Outrage
 	dw BattleAnim_Sandstorm
 	dw BattleAnim_GigaDrain
@@ -1210,6 +1210,10 @@ BattleAnim_Blizzard:
 	anim_obj BATTLE_ANIM_OBJ_BLIZZARD, 64, 96, $63
 	anim_wait 2
 	anim_loop 3, .loop
+	anim_jump BattleAnim_FreezeDry
+
+BattleAnim_FreezeDry:
+	anim_1gfx BATTLE_ANIM_GFX_ICE
 	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
 	anim_wait 32
 	anim_obj BATTLE_ANIM_OBJ_ICE_BUILDUP, 136, 74, $10
@@ -4077,19 +4081,6 @@ BattleAnim_IcyWind:
 	anim_wait 1
 	anim_ret
 
-BattleAnim_LockOn:
-	anim_1gfx BATTLE_ANIM_GFX_MISC
-	anim_sound 0, 1, SFX_MIND_READER
-.loop
-	anim_obj BATTLE_ANIM_OBJ_LOCK_ON, 132, 48, $3
-	anim_obj BATTLE_ANIM_OBJ_LOCK_ON, 132, 48, $12
-	anim_obj BATTLE_ANIM_OBJ_LOCK_ON, 132, 48, $20
-	anim_obj BATTLE_ANIM_OBJ_LOCK_ON, 132, 48, $31
-	anim_wait 16
-	anim_loop 2, .loop
-	anim_wait 32
-	anim_ret
-
 BattleAnim_Outrage:
 	anim_1gfx BATTLE_ANIM_GFX_HIT
 	anim_call BattleAnim_TargetObj_1Row
@@ -5427,4 +5418,17 @@ BattleAnimSub_SpeedLines:
 ;	anim_sound 0, 1, SFX_MOVE_PUZZLE_PIECE
 ;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
 ;	anim_wait 24
+;	anim_ret
+
+;BattleAnim_LockOn:
+;	anim_1gfx BATTLE_ANIM_GFX_MISC
+;	anim_sound 0, 1, SFX_MIND_READER
+;.loop
+;	anim_obj BATTLE_ANIM_OBJ_LOCK_ON, 132, 48, $3
+;	anim_obj BATTLE_ANIM_OBJ_LOCK_ON, 132, 48, $12
+;	anim_obj BATTLE_ANIM_OBJ_LOCK_ON, 132, 48, $20
+;	anim_obj BATTLE_ANIM_OBJ_LOCK_ON, 132, 48, $31
+;	anim_wait 16
+;	anim_loop 2, .loop
+;	anim_wait 32
 ;	anim_ret

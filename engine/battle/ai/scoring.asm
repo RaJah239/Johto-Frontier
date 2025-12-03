@@ -406,7 +406,22 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_HEX,              AI_Smart_Hex
 	dbw EFFECT_HURRICANE,        AI_Smart_Hurricane
 	dbw EFFECT_FAKE_OUT,         AI_Smart_Fake_Out
+	dbw EFFECT_FREEZE_DRY,         AI_Smart_FreezeDry
 	db -1 ; end
+
+AI_Smart_FreezeDry:
+	ld a, [wBattleMonType1]
+	cp WATER
+	jr z, .encourage
+	ld a, [wBattleMonType2]
+	cp WATER
+	ret nz
+
+.encourage
+	call AI_80_20
+	ret c
+	dec [hl]
+	ret
 
 AI_Smart_Facade:
 ; Greatly encourage this move if the player has a status condition.
