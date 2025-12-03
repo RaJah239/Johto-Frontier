@@ -42,7 +42,13 @@ AI_Redundant:
 	dbw EFFECT_WEATHER_HEAL, .Heal
 	dbw EFFECT_SWAGGER,      .Swagger
 	dbw EFFECT_HAIL,         .Hail
+	dbw EFFECT_FAKE_OUT,     .FakeOut
 	db -1
+
+.FakeOut:
+	ld a, [wPlayerTurnsTaken]
+	and a
+	ret
 
 .Hail:
 	ld a, [wBattleWeather]

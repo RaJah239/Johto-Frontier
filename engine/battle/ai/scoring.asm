@@ -405,6 +405,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_FACADE,           AI_Smart_Facade
 	dbw EFFECT_HEX,              AI_Smart_Hex
 	dbw EFFECT_HURRICANE,        AI_Smart_Hurricane
+	dbw EFFECT_FAKE_OUT,         AI_Smart_Fake_Out
 	db -1 ; end
 
 AI_Smart_Facade:
@@ -413,6 +414,18 @@ AI_Smart_Facade:
 	ld a, [wEnemyMonStatus]
 	and a
 	ret z
+
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	ret
+
+AI_Smart_Fake_Out:
+; Always encourage this move on our first turn.
+	ld a, [wEnemyTurnsTaken]
+	and a
+	ret nz
+
 	dec [hl]
 	dec [hl]
 	dec [hl]
