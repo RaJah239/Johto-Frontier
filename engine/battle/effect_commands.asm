@@ -1062,7 +1062,6 @@ BattleCommand_DoTurn:
 	ret
 
 .continuousmoves
-	db EFFECT_RAZOR_WIND
 	db EFFECT_SOLARBEAM
 	db EFFECT_FLY
 	db EFFECT_ROLLOUT
@@ -1897,8 +1896,6 @@ BattleCommand_LowerSub:
 
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
-	cp EFFECT_RAZOR_WIND
-	jr z, .charge_turn
 	cp EFFECT_SOLARBEAM
 	jr z, .charge_turn
 	cp EFFECT_FLY
