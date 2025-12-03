@@ -296,6 +296,32 @@ HandleScreens:
 	ld hl, BattleText_MonsReflectFaded
 	jp StdBattleTextbox
 
+ExitBattle:
+	farcall UpdatePartyStats
+	call .HandleEndOfBattle
+	farcall CleanUpBattleRAM
+	ret
+
+.HandleEndOfBattle:
+	ld a, [wLinkMode]
+	and a
+	jr z, .not_linked
+	farcall ShowLinkBattleParticipantsAfterEnd
+	ld c, 150
+	call DelayFrames
+	farcall DisplayLinkBattleResult
+	ret
+
+.not_linked
+	ld a, [wBattleResult]
+	and $f
+	ret nz
+	xor a
+	ld [wForceEvolution], a
+	predef EvolveAfterBattle
+	farcall GivePokerusAndConvertBerries
+	ret
+
 GetTrainerBackpic:
 ; Load the player character's backpic (6x6) into VRAM starting from vTiles2 tile $31.
 
