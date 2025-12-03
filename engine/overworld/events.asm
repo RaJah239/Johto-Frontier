@@ -1067,14 +1067,12 @@ PlayerEventScriptPointers:
 	dba InvalidEventScript      ; (NUM_PLAYER_EVENTS)
 	assert_table_length NUM_PLAYER_EVENTS + 1
 
-InvalidEventScript:
-	end
-
 UnusedPlayerEventScript: ; unreferenced
 	end
 
 HatchEggScript:
 	callasm OverworldHatchEgg
+InvalidEventScript:
 	end
 
 WarpToNewMapScript:
