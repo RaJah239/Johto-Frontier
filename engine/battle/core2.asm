@@ -488,3 +488,25 @@ ProtectMiss:
 	ld a, 1
 	and a
 	ret
+
+ToxicPoison:
+; Return z if the used move is Toxic, and the user is Poison type.
+; Which means Toxic should always hit.
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_TOXIC
+	ret nz
+
+	ld hl, wBattleMonType1
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .cur_mon_own_type_found
+	ld hl, wEnemyMonType1
+.cur_mon_own_type_found
+	ld a, [hli]
+	cp POISON
+	ret z
+
+	ld a, [hl]
+	cp POISON
+	ret
