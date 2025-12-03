@@ -169,7 +169,6 @@ BattleCommandPointers:
 	dw BattleCommand_Curl
 	dw BattleCommand_StartHail
 	dw BattleCommand_StealthRock
-	dw BattleCommand_ToxicSpikes
 	dw BattleCommand_StickyWeb
 	dw BattleCommand_Defog
 	dw BattleCommand_FlameOrb

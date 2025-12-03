@@ -169,7 +169,6 @@ ENDM
 	command curl                    ; af
 	command starthail               ; b0
 	command stealthrock
-	command toxicspikes
 	command stickyweb
 	command defog
 	command flameorb
