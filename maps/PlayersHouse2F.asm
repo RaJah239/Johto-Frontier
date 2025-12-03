@@ -208,6 +208,10 @@ if DEF(_DEBUG)
 	giveitem MOON_BALL, MAX_ITEM_STACK
 	giveitem LOVE_BALL, MAX_ITEM_STACK
 
+	; fruits
+	giveitem SILVER_BERRY, MAX_ITEM_STACK
+	giveitem GOLD_BERRY, MAX_ITEM_STACK
+
 	; battle items
 	giveitem EVERSTONE, MAX_ITEM_STACK
 	giveitem LIFE_ORB, MAX_ITEM_STACK
