@@ -3320,9 +3320,6 @@ BattleCommand_ConstantDamage:
 
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
-	cp EFFECT_PSYWAVE
-	jr z, .psywave
-
 	cp EFFECT_SUPER_FANG
 	jr z, .super_fang
 
@@ -3333,21 +3330,6 @@ BattleCommand_ConstantDamage:
 	call GetBattleVar
 	ld b, a
 	ld a, $0
-	jr .got_power
-
-.psywave
-	ld a, b
-	srl a
-	add b
-	ld b, a
-.psywave_loop
-	call BattleRandom
-	and a
-	jr z, .psywave_loop
-	cp b
-	jr nc, .psywave_loop
-	ld b, a
-	ld a, 0
 	jr .got_power
 
 .super_fang
@@ -3371,7 +3353,7 @@ BattleCommand_ConstantDamage:
 	ld a, 0
 	jr nz, .got_power
 	ld b, 1
-	jr .got_power
+	;jr .got_power ; commented out to save space
 
 .got_power
 	ld hl, wCurDamage
