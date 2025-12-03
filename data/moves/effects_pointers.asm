@@ -159,4 +159,5 @@ MoveEffectsPointers:
 	dw NormalHit
 	dw FlareBlitz
 	dw FreezeDry
+	dw NormalHit	; EFFECT_BODY_PRESS
 	assert_table_length NUM_MOVE_EFFECTS

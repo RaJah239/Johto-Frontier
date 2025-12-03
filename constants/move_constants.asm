@@ -238,7 +238,7 @@
 	const WILL_O_WISP  ; e6
 	const SILVER_WIND  ; e7
 	const METAL_CLAW   ; e8
-	const VITAL_THROW  ; e9
+	const BODY_PRESS   ; e9
 	const HEALING_LIGHT; ea
 	const HAIL         ; eb
 	const X_SCISSOR    ; ec

@@ -232,7 +232,7 @@ MoveNames::
 	li "Will-O-Wisp"
 	li "Silver Wind"
 	li "Metal Claw"
-	li "Vital Throw"
+	li "Body Press"
 	li "HealingLight"
 	li "Hail"
 	li "X-Scissor"
