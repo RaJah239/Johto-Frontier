@@ -366,6 +366,7 @@ Continue:
 	farcall ClearSavedObjPals
 	ld c, 20
 	call DelayFrames
+.Go:
 	farcall JumpRoamMons
 	farcall CopyMysteryGiftReceivedDecorationsToPC
 	farcall ClockContinue
@@ -641,8 +642,8 @@ Continue_DisplayGameTime:
 
 OakSpeech:
 if DEF(_DEBUG)
- 	ld hl, wOptions
-	set BATTLE_SHIFT, [hl] ; SET MODE
+ 	ld hl, wOptions2
+	set FAST_BOOT, [hl]
 endc
 
 	farcall InitClock
@@ -1049,18 +1050,12 @@ Intro_PlacePlayerSprite:
 DEF NUM_TITLESCREENOPTIONS EQU const_value
 
 IntroSequence:
-	call SkipIntroMode
-	jr nz, .skip_intro
 	callfar SplashScreen
 	jr c, StartTitleScreen
 	farcall CrystalIntro
-
-.skip_intro
 	; fallthrough
 
 StartTitleScreen:
-	call SkipIntroMode
-	jr nz, .skip_splash_screen
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wLYOverrides)
@@ -1078,7 +1073,6 @@ StartTitleScreen:
 	pop af
 	ldh [rSVBK], a
 
-.skip_splash_screen
 	ld hl, rLCDC
 	res rLCDC_SPRITE_SIZE, [hl] ; 8x8
 	call ClearScreen
@@ -1352,4 +1346,18 @@ GameInit::
 	ld a, $90
 	ldh [hWY], a
 	call WaitBGMap
-	jmp IntroSequence
+
+	ld a, [wSaveFileExists]
+	and a
+	jp z, IntroSequence
+
+	ld a, [wOptions2]
+	bit FAST_BOOT, a
+	jmp z, IntroSequence
+
+	; Fast boot.
+	farcall TryLoadSaveFile
+	jp c, IntroSequence ; If loading failed.
+
+	farcall _LoadData
+	jmp Continue.Go

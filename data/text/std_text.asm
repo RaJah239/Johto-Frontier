@@ -403,6 +403,6 @@ ChanseyCryText:
 	done
 
 SkipIntroText:
-	text "Skip this game's"
-	line "intro scenes?"
+	text "Quick load save"
+	line "file on boot?"
 	done
