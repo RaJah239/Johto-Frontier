@@ -1633,7 +1633,7 @@ FakeOut:
 	checkobedience
 	usedmovetext
 	doturn
-	fakeout
+	farcommand
 	critical
 	damagestats
 	damagecalc
