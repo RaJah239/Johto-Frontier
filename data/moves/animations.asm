@@ -409,7 +409,7 @@ BattleAnimations::
 	dw BattleAnim_SilverWind
 	dw BattleAnim_MetalClaw
 	dw BattleAnim_BodyPress
-	dw BattleAnim_MorningSun
+	dw BattleAnim_HealingLight
 	dw BattleAnim_Hail
 	dw BattleAnim_XScissor
 	dw BattleAnim_HiddenPower
@@ -4533,7 +4533,8 @@ BattleAnim_MetalClaw:
 	anim_wait 32
 	anim_ret
 
-BattleAnim_MorningSun:
+; Morning Sun's animation during the morning & day
+BattleAnim_HealingLight:
 	anim_if_param_equal $1, BattleAnim_Moonlight
 	anim_1gfx BATTLE_ANIM_GFX_SHINE
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $0, $0
@@ -4543,12 +4544,9 @@ BattleAnim_MorningSun:
 	anim_wait 6
 	anim_loop 5, .loop
 	anim_wait 32
-	anim_if_param_equal 0, .zero
 	anim_jump BattleAnimSub_Glimmer
 
-.zero
-	anim_jump BattleAnimSub_Glimmer2
-
+; Moonlight's animation during the evening and night
 BattleAnim_Moonlight:
 	anim_1gfx BATTLE_ANIM_GFX_SHINE
 	anim_bgp $1b
@@ -4561,11 +4559,7 @@ BattleAnim_Moonlight:
 	anim_wait 1
 	anim_sound 0, 0, SFX_MOONLIGHT
 	anim_wait 63
-	anim_if_param_equal $3, .three
 	anim_jump BattleAnimSub_Glimmer
-
-.three
-	anim_jump BattleAnimSub_Glimmer2
 
 BattleAnim_Hail:
 BattleAnim_InHail:
@@ -5058,23 +5052,6 @@ BattleAnimSub_Glimmer:
 	anim_wait 5
 	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 56, 104, $0
 	anim_wait 24
-	anim_ret
-
-BattleAnimSub_Glimmer2:
-	anim_sound 0, 0, SFX_METRONOME
-.loop
-	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 24, 64, $0
-	anim_wait 5
-	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 56, 104, $0
-	anim_wait 5
-	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 24, 104, $0
-	anim_wait 5
-	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 56, 64, $0
-	anim_wait 5
-	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 40, 84, $0
-	anim_wait 5
-	anim_loop 2, .loop
-	anim_wait 16
 	anim_ret
 
 BattleAnim_TargetObj_1Row:
