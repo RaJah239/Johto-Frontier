@@ -209,7 +209,7 @@ DEF ALL_STATUS EQU (1 << PSN) | (1 << BRN) | (1 << FRZ) | (1 << PAR) | SLP_MASK
 	const_skip
 	const SUBSTATUS_TRANSFORMED
 	const SUBSTATUS_ENCORED
-	const SUBSTATUS_LOCK_ON
+	const_skip
 	const SUBSTATUS_DESTINY_BOND
 	const SUBSTATUS_CANT_RUN
 

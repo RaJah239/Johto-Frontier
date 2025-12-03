@@ -1782,11 +1782,6 @@ AI_Smart_Protect:
 	and a
 	jr nz, .greatly_discourage
 
-; Discourage this move if the player is locked on.
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_LOCK_ON, a
-	jr nz, .discourage
-
 ; Encourage this move if the player has charged a two-turn move.
 	ld a, [wPlayerSubStatus3]
 	bit SUBSTATUS_CHARGED, a
@@ -2011,11 +2006,6 @@ AI_Smart_Endure:
 	ret
 
 .no_reversal
-; If the enemy is not locked on, do nothing.
-	ld a, [wEnemySubStatus5]
-	bit SUBSTATUS_LOCK_ON, a
-	ret z
-
 ; 50% chance to greatly encourage this move.
 	call AI_50_50
 	ret c

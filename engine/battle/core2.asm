@@ -464,27 +464,3 @@ ProtectMiss:
 	ld a, 1
 	and a
 	ret
-
-LockOnMiss:
-; Return nz if we are locked-on and aren't trying to use Earthquake,
-; Fissure or Magnitude on a monster that is flying.
-	ld a, BATTLE_VARS_SUBSTATUS5_OPP
-	call GetBattleVarAddr
-	bit SUBSTATUS_LOCK_ON, [hl]
-	res SUBSTATUS_LOCK_ON, [hl]
-	ret z
-	ld a, BATTLE_VARS_SUBSTATUS3_OPP
-	call GetBattleVar
-	bit SUBSTATUS_FLYING, a
-	jr z, .LockedOn
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	cp EARTHQUAKE
-	ret z
-	cp FISSURE
-	ret z
-
-.LockedOn:
-	ld a, 1
-	and a
-	ret
