@@ -1874,7 +1874,11 @@ FaintEnemyPokemon:
 	lb bc, 4, 10
 	call ClearBox
 	ld hl, BattleText_EnemyMonFainted
+	call CheckDialogueMode
+	jr z, .skip
 	jmp StdBattleTextbox
+.skip
+	ret
 
 CheckEnemyTrainerDefeated:
 	ld a, [wOTPartyCount]
@@ -2748,7 +2752,10 @@ EnemySwitch:
 	push af
 	call ClearEnemyMonBox
 	call ShowBattleTextEnemySentOut
+	call CheckDialogueMode
+	jr z, .skip2
 	call ShowSetEnemyMonAndSendOutAnimation
+.skip2
 	pop af
 	ret c
 	; If we're here, then we're switching too
@@ -2772,7 +2779,10 @@ EnemySwitch_SetMode:
 	ld a, 1
 	ld [wEnemyIsSwitching], a
 	call ClearEnemyMonBox
+	call CheckDialogueMode
+	jr z, .skip3
 	call ShowBattleTextEnemySentOut
+.skip3
 	jmp ShowSetEnemyMonAndSendOutAnimation
 
 CheckWhetherSwitchmonIsPredetermined:
@@ -3789,7 +3799,7 @@ PursuitSwitch:
 	call GetMoveEffect
 	ld a, b
 	cp EFFECT_PURSUIT
-	jr nz, .done
+	jmp nz, .done
 
 	ld a, [wCurBattleMon]
 	push af
@@ -3852,10 +3862,13 @@ PursuitSwitch:
 	call PlaySFX
 	call WaitSFX
 	call EnemyMonFaintedAnimation
+	call CheckDialogueMode
+	jr z, .skip
 	ld hl, BattleText_EnemyMonFainted
 
 .done_fainted
 	call StdBattleTextbox
+.skip
 	scf
 	ret
 
