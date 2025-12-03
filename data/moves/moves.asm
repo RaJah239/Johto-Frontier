@@ -214,7 +214,7 @@ Moves:
 	move SNARL,        EFFECT_SP_ATK_DOWN_HIT,    55, DARK,          SPECIAL,  100, 24, 100
 	move FREEZE_DRY,   EFFECT_FREEZE_DRY,         70, ICE,           SPECIAL,  100, 32,  10
 	move OUTRAGE,      EFFECT_RECOIL_HIT,        100, DRAGON,        PHYSICAL, 100, 24,   0
-	move SANDSTORM,    EFFECT_SANDSTORM,           0, ROCK,          STATUS,   100, 10,   0
+	move SANDSTORM,    EFFECT_SANDSTORM,           0, ROCK,          STATUS,   100,  8,   0
 	move GIGA_DRAIN,   EFFECT_LEECH_HIT,          60, GRASS,         SPECIAL,  100,  5,   0
 	move ENDURE,       EFFECT_ENDURE,              0, NORMAL,        STATUS,   100, 10,   0
 	move CHARM,        EFFECT_ATTACK_DOWN_2,       0, FAIRY,         STATUS,   100, 20,   0
@@ -253,8 +253,8 @@ Moves:
 	move HIDDEN_POWER, EFFECT_HIDDEN_POWER,       70, CURSE_TYPE,    SPECIAL,  100, 24,   0
 	move CROSS_CHOP,   EFFECT_NORMAL_HIT,         80, FIGHTING,      PHYSICAL, 100, 24,   0
 	move DRAGON_CLAW,  EFFECT_NORMAL_HIT,         80, DRAGON,        PHYSICAL, 100, 24,  00
-	move RAIN_DANCE,   EFFECT_RAIN_DANCE,          0, WATER,         STATUS,   100,  5,   0
-	move SUNNY_DAY,    EFFECT_SUNNY_DAY,           0, FIRE,          STATUS,   100,  5,   0
+	move RAIN_DANCE,   EFFECT_RAIN_DANCE,          0, WATER,         STATUS,   100,  8,   0
+	move SUNNY_DAY,    EFFECT_SUNNY_DAY,           0, FIRE,          STATUS,   100,  8,   0
 	move CRUNCH,       EFFECT_SP_DEF_DOWN_HIT,    80, DARK,          PHYSICAL, 100, 15,  20
 	move MIRROR_COAT,  EFFECT_MIRROR_COAT,         1, PSYCHIC_TYPE,  SPECIAL,  100, 20,   0
 	move TOXIC_SPIKES, EFFECT_TOXIC_SPIKES,        0, POISON,        STATUS,   100, 24,   0

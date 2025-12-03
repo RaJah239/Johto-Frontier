@@ -949,10 +949,6 @@ FreezeDryDescription:
 	db   "Strong vs Water."
 	line "May frostbite foe.@"
 
-SandstormDescription:
-	db   "Inflicts damage"
-	line "every turn.@"
-
 DrainPunchDescription:
 LeechLifeDescription:
 DrainKissDescription:
@@ -1073,10 +1069,6 @@ HealingLightDescription:
 	db   "Restores HP based"
 	line "on weather.@"
 
-HailDescription:
-	db   "Inflicts damage"
-	line "very turn.@"
-
 HiddenForceDescription:
 HiddenPowerDescription:
 	db   "The type varies"
@@ -1089,11 +1081,16 @@ CrossChopDescription:
 
 RainDanceDescription:
 	db   "Boosts water-type"
-	line "moves for 5 turns.@"
+	line "moves for 8 turns.@"
 
 SunnyDayDescription:
 	db   "Boosts fire-type"
-	line "moves for 5 turns.@"
+	line "moves for 8 turns.@"
+
+SandstormDescription:
+HailDescription:
+	db   "Inflicts damage"
+	line "for 8 turns.@"
 
 CrunchDescription:
 	db   "An attack that may"

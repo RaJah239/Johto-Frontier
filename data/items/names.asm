@@ -161,7 +161,7 @@ ItemNames::
 	li "Level Ball"
 	li "Lure Ball"
 	li "Fast Ball"
-	li "?"
+	li "Weather Rock"
 	li "Light Ball"
 	li "Friend Ball"
 	li "Moon Ball"

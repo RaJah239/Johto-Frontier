@@ -79,7 +79,6 @@ ENDM
 	command protect                 ; 55
 	command spikes                  ; 56
 	command perishsong              ; 58
-	command startsandstorm          ; 59
 	command endure                  ; 5a
 	command checkcurl               ; 5b
 	command rolloutpower            ; 5c
@@ -93,8 +92,6 @@ ENDM
 	command clearhazards            ; 69
 	command weatherheal
 	command hiddenpower             ; 6d
-	command startrain               ; 6e
-	command startsun                ; 6f
 	command attackup                ; 70
 	command defenseup               ; 71
 	command speedup                 ; 72

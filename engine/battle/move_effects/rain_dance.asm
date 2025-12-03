@@ -1,8 +1,18 @@
 BattleCommand_StartRain:
+; start run
+
+	ld a, [wBattleWeather]
+	cp WEATHER_RAIN
+	jr z, .failed
+
 	ld a, WEATHER_RAIN
 	ld [wBattleWeather], a
-	ld a, 5
+	call GetWeatherMoveDuration
 	ld [wWeatherCount], a
-	call AnimateCurrentMove
+	farcall AnimateCurrentMove
 	ld hl, DownpourText
 	jmp StdBattleTextbox
+
+.failed
+	farcall AnimateFailedMove
+	farjp PrintButItFailed

@@ -6297,8 +6297,6 @@ INCLUDE "engine/battle/move_effects/spikes.asm"
 
 INCLUDE "engine/battle/move_effects/perish_song.asm"
 
-INCLUDE "engine/battle/move_effects/sandstorm.asm"
-
 INCLUDE "engine/battle/move_effects/rollout.asm"
 
 INCLUDE "engine/battle/move_effects/attract.asm"
@@ -6432,10 +6430,6 @@ BattleCommand_WeatherBasedHeal:
 	dw GetMaxHP
 
 INCLUDE "engine/battle/move_effects/hidden_power.asm"
-
-INCLUDE "engine/battle/move_effects/rain_dance.asm"
-
-INCLUDE "engine/battle/move_effects/sunny_day.asm"
 
 INCLUDE "engine/battle/move_effects/belly_drum.asm"
 

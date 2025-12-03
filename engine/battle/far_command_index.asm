@@ -29,4 +29,7 @@ FarCommand_BattleCommands:
 	dbw EFFECT_FREEZE_DRY,      BattleCommand_FreezeDry
 	dbw EFFECT_SUCKER_PUNCH,    BattleCommand_SuckerPunch
 	dbw EFFECT_AVALANCHE,       BattleCommand_Avalanche
+	dbw EFFECT_RAIN_DANCE,      BattleCommand_StartRain
+	dbw EFFECT_SUNNY_DAY,       BattleCommand_StartSun
+	dbw EFFECT_SANDSTORM,       BattleCommand_StartSandstorm
 	db -1 ; end

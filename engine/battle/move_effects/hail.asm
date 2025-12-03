@@ -1,5 +1,5 @@
 BattleCommand_StartHail:
-; starthail
+; start hail
 
 	ld a, [wBattleWeather]
 	cp WEATHER_HAIL
@@ -7,13 +7,12 @@ BattleCommand_StartHail:
 
 	ld a, WEATHER_HAIL
 	ld [wBattleWeather], a
-	ld a, 5
+	call GetWeatherMoveDuration
 	ld [wWeatherCount], a
 	farcall AnimateCurrentMove
 	ld hl, ItStartedToHailText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox
 
 .failed
 	farcall AnimateFailedMove
-	farcall PrintButItFailed
-	ret
+	farjp PrintButItFailed

@@ -1430,7 +1430,7 @@ Sandstorm:
 	checkobedience
 	usedmovetext
 	doturn
-	startsandstorm
+	farcommand
 	endmove
 
 Endure:
@@ -1618,14 +1618,14 @@ RainDance:
 	checkobedience
 	usedmovetext
 	doturn
-	startrain
+	farcommand
 	endmove
 
 SunnyDay:
 	checkobedience
 	usedmovetext
 	doturn
-	startsun
+	farcommand
 	endmove
 
 FakeOut:

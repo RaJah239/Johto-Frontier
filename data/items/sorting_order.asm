@@ -147,7 +147,7 @@ ItemNameOrder:
 
 
 ; NEXT POCKET
-; Battle Pocket - 51 total
+; Battle Pocket - 52 total
 
 ; Stat altering Battle Items
 	db GUARD_SPEC
@@ -202,6 +202,7 @@ ItemNameOrder:
 	db THICK_CLUB
 	db TWISTEDSPOON
 	db UP_GRADE
+	db WEATHER_ROCK
 	db WISE_GLASSES
 
 
@@ -272,13 +273,12 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 13 total
+; Unused Items - 21 total
 	db EGG_TICKET
 	db POKE_FLUTE
 	db ITEM_2D
 	db ITEM_87
 	db ITEM_9B
-	db ITEM_A2
 	db ITEM_AB
 	db ITEM_B3
 	db ITEM_BE

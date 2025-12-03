@@ -79,7 +79,6 @@ BattleCommandPointers:
 	dw BattleCommand_Protect
 	dw BattleCommand_Spikes
 	dw BattleCommand_PerishSong
-	dw BattleCommand_StartSandstorm
 	dw BattleCommand_Endure
 	dw BattleCommand_CheckCurl
 	dw BattleCommand_RolloutPower
@@ -93,8 +92,6 @@ BattleCommandPointers:
 	dw BattleCommand_ClearHazards
 	dw BattleCommand_WeatherBasedHeal
 	dw BattleCommand_HiddenPower
-	dw BattleCommand_StartRain
-	dw BattleCommand_StartSun
 	dw BattleCommand_AttackUp
 	dw BattleCommand_DefenseUp
 	dw BattleCommand_SpeedUp
