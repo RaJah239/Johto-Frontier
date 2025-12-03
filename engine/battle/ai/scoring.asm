@@ -1936,6 +1936,14 @@ AI_Smart_PerishSong:
 	ret
 
 AI_Smart_Sandstorm:
+; Encourage using the move when the Weather Rock is held.
+	ld a, [wEnemyMonItem]
+	cp WEATHER_ROCK
+	jr nz, .continue
+
+	dec [hl]
+
+.continue
 ; Greatly discourage this move if the player is immune to Sandstorm damage.
 	ld a, [wBattleMonType1]
 	push hl
@@ -1977,6 +1985,14 @@ AI_Smart_Sandstorm:
 	db -1 ; end
 
 AI_Smart_Hail:
+; Encourage using the move when the Weather Rock is held.
+	ld a, [wEnemyMonItem]
+	cp WEATHER_ROCK
+	jr nz, .continue
+
+	dec [hl]
+
+.continue
 ; Greatly discourage this move if the player is immune to Hail damage.
 	ld a, [wBattleMonType1]
 	cp ICE
@@ -2250,6 +2266,14 @@ AI_Smart_HiddenPower:
 	ret
 
 AI_Smart_RainDance:
+; Encourage using the move when the Weather Rock is held.
+	ld a, [wEnemyMonItem]
+	cp WEATHER_ROCK
+	jr nz, .continue
+
+	dec [hl]
+
+.continue
 ; Greatly discourage this move if it would favour the player type-wise.
 ; Particularly, if the player is a Water-type.
 	ld a, [wBattleMonType1]
@@ -2271,6 +2295,14 @@ AI_Smart_RainDance:
 INCLUDE "data/battle/ai/rain_dance_moves.asm"
 
 AI_Smart_SunnyDay:
+; Encourage using the move when the Weather Rock is held.
+	ld a, [wEnemyMonItem]
+	cp WEATHER_ROCK
+	jr nz, .continue
+
+	dec [hl]
+
+.continue
 ; Greatly discourage this move if it would favour the player type-wise.
 ; Particularly, if the player is a Fire-type.
 	ld a, [wBattleMonType1]
