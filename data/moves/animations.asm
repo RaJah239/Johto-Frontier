@@ -40,29 +40,6 @@
 ;	anim_wait 12
 ;	anim_ret
 
-; USE THIS ONE
-;BattleAnim_SignalBeam: ; c95c3
-;	anim_1gfx BATTLE_ANIM_GFX_BEAM
-;	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
-;	anim_bgeffect BATTLE_BG_EFFECT_ALTERNATE_HUES, $0, $2, $0
-;	anim_wait 64
-;	anim_sound 0, 0, SFX_PERISH_SONG
-;	anim_obj BATTLE_ANIM_OBJ_BEAM, 64, 92, $0
-;	anim_wait 4
-;	anim_sound 0, 0, SFX_PERISH_SONG
-;	anim_obj BATTLE_ANIM_OBJ_BEAM, 80, 84, $0
-;	anim_wait 4
-;	anim_sound 0, 1, SFX_PERISH_SONG
-;	anim_obj BATTLE_ANIM_OBJ_BEAM, 96, 76, $0
-;	anim_wait 4
-;	anim_sound 0, 1, SFX_PERISH_SONG
-;	anim_obj BATTLE_ANIM_OBJ_BEAM, 112, 68, $0
-;	anim_obj BATTLE_ANIM_OBJ_BEAM_TIP, 126, 62, $0
-;	anim_wait 48
-;	anim_incobj  5
-;	anim_wait 64
-;	anim_ret
-
 ; Unused
 ;BattleAnim_IceShard:
 ;	anim_1gfx BATTLE_ANIM_GFX_ICE
@@ -347,7 +324,7 @@ BattleAnimations::
 	dw BattleAnim_ShadowSneak
 	dw BattleAnim_Spore
 	dw BattleAnim_MirrorShot
-	dw BattleAnim_Psywave
+	dw BattleAnim_SignalBeam
 	dw BattleAnim_Splash
 	dw BattleAnim_AcidArmor
 	dw BattleAnim_FairyFlash
@@ -930,6 +907,28 @@ BattleAnim_HiJumpKick:
 	anim_sound 0, 0, SFX_DOUBLE_KICK
 	anim_obj BATTLE_ANIM_OBJ_HIT, 44, 88, $0
 	anim_wait 16
+	anim_ret
+
+BattleAnim_SignalBeam:
+	anim_1gfx BATTLE_ANIM_GFX_BEAM
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_bgeffect BATTLE_BG_EFFECT_ALTERNATE_HUES, $0, $2, $0
+	anim_wait 64
+	anim_sound 0, 0, SFX_PERISH_SONG
+	anim_obj BATTLE_ANIM_OBJ_BEAM, 64, 92, $0
+	anim_wait 4
+	anim_sound 0, 0, SFX_PERISH_SONG
+	anim_obj BATTLE_ANIM_OBJ_BEAM, 80, 84, $0
+	anim_wait 4
+	anim_sound 0, 1, SFX_PERISH_SONG
+	anim_obj BATTLE_ANIM_OBJ_BEAM, 96, 76, $0
+	anim_wait 4
+	anim_sound 0, 1, SFX_PERISH_SONG
+	anim_obj BATTLE_ANIM_OBJ_BEAM, 112, 68, $0
+	anim_obj BATTLE_ANIM_OBJ_BEAM_TIP, 126, 62, $0
+	anim_wait 48
+	anim_incobj  5
+	anim_wait 64
 	anim_ret
 
 BattleAnim_Psyshock:
@@ -3063,25 +3062,6 @@ BattleAnim_Harden:
 	anim_call BattleAnim_TargetObj_1Row
 	anim_call BattleAnimSub_Metallic
 	anim_call BattleAnim_ShowMon_0
-	anim_ret
-
-BattleAnim_Psywave:
-	anim_1gfx BATTLE_ANIM_GFX_PSYCHIC
-	anim_bgeffect BATTLE_BG_EFFECT_PSYCHIC, $0, $0, $0
-.loop
-	anim_sound 6, 2, SFX_PSYCHIC
-	anim_obj BATTLE_ANIM_OBJ_WAVE, 64, 80, $2
-	anim_wait 8
-	anim_sound 6, 2, SFX_PSYCHIC
-	anim_obj BATTLE_ANIM_OBJ_WAVE, 64, 88, $3
-	anim_wait 8
-	anim_sound 6, 2, SFX_PSYCHIC
-	anim_obj BATTLE_ANIM_OBJ_WAVE, 64, 96, $4
-	anim_wait 8
-	anim_loop 3, .loop
-	anim_wait 32
-	anim_incbgeffect BATTLE_BG_EFFECT_PSYCHIC
-	anim_wait 4
 	anim_ret
 
 BattleAnim_Glare:

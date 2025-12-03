@@ -149,7 +149,7 @@ MoveDescriptions::
 	dw ShadowSneakDescription
 	dw SporeDescription
 	dw MirrorShotDescription
-	dw PsywaveDescription
+	dw SignalBeamDescription
 	dw SplashDescription
 	dw AcidArmorDescription
 	dw FairyFlashDescription
@@ -472,6 +472,7 @@ BlizzardDescription:
 	db   "An attack that may"
 	line "cause frostbite.@"
 
+SignalBeamDescription:
 HurricaneDescription:
 PsybeamDescription:
 	db   "An attack that may"
@@ -773,10 +774,6 @@ SporeDescription:
 MirrorShotDescription:
 	db   "An attack thay may"
 	line "reduce accuracy.@"
-
-PsywaveDescription:
-	db   "An attack with"
-	line "variable power.@"
 
 SplashDescription:
 	db   "Has no effect"

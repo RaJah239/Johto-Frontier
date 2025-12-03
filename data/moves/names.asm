@@ -148,7 +148,7 @@ MoveNames::
 	li "Shadow Sneak"
 	li "Spore"
 	li "Mirror Shot"
-	li "Psywave"
+	li "Singal Beam"
 	li "Splash"
 	li "Acid Armor"
 	li "Fairy Flash"

@@ -154,7 +154,7 @@
 	const SHADOW_SNEAK ; 92
 	const SPORE        ; 93
 	const MIRROR_SHOT  ; 94
-	const PSYWAVE      ; 95
+	const SIGNAL_BEAM  ; 95
 	const SPLASH       ; 96
 	const ACID_ARMOR   ; 97
 	const FAIRY_FLASH  ; 98

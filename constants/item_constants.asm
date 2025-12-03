@@ -321,7 +321,6 @@ DEF MT01 EQU const_value
 	add_mt OUTRAGE
 	add_mt SURF
 	add_mt TELEPORT
-	add_mt PSYWAVE
 	add_mt SEISMIC_TOSS
 	add_mt BUBBLEBEAM
 	add_mt REFLECT
