@@ -407,7 +407,45 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_HURRICANE,        AI_Smart_Hurricane
 	dbw EFFECT_FAKE_OUT,         AI_Smart_Fake_Out
 	dbw EFFECT_FREEZE_DRY,         AI_Smart_FreezeDry
+	dbw EFFECT_BODY_PRESS,       AI_Smart_BodyPress
+	dbw EFFECT_AVALANCHE,        AI_Smart_Avalanche
 	db -1 ; end
+
+AI_Smart_BodyPress:
+; Encourage this move if enemy's defense level is at least +1.
+	ld a, [wEnemyDefLevel]
+	cp BASE_STAT_LEVEL + 1
+	ret c
+	dec [hl]
+	ret
+
+AI_Smart_Avalanche:
+; Discourage this move if the enemy has less than 25% HP left.
+	call AICheckEnemyQuarterHP
+	jr nc, .discourage
+
+; 80% chance to encourage this move if the player used
+; a damaging move last.
+	ld a, [wLastPlayerCounterMove]
+	and a
+	jr z, .done
+
+	call AIGetEnemyMove
+
+	ld a, [wEnemyMoveStruct + MOVE_POWER]
+	and a
+	jr z, .done
+
+	call AI_80_20
+	jr c, .done
+	dec [hl]
+	dec [hl]
+	ret
+
+.discourage
+	inc [hl]
+.done
+	ret
 
 AI_Smart_FreezeDry:
 	ld a, [wBattleMonType1]
