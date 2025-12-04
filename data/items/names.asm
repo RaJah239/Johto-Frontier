@@ -90,7 +90,7 @@ ItemNames::
 	li "SilverPowder"
 	li "Blu Apricorn"
 	li "Kingdra Call"
-	li "AmuleT Coin"
+	li "Amulet Coin"
 	li "Ylw Apricorn"
 	li "Grn Apricorn"
 	li "Cleanse Tag"
