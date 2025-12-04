@@ -63,7 +63,7 @@ INCLUDE "engine/events/pokerus/apply_pokerus_tick.asm"
 INCLUDE "engine/events/bug_contest/contest_2.asm"
 
 
-SECTION "Start Menu", ROMX
+SECTION "Heal Machine Animation", ROMX
 
 INCLUDE "engine/events/heal_machine_anim.asm"
 
