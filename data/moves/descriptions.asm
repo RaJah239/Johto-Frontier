@@ -266,6 +266,7 @@ MoveFFDescription:
 Move00Description:
 	db "?@"
 
+RazorWindDescription:
 PsychoCutDescription:
 NightSlashDescription:
 SlashDescription:
@@ -298,10 +299,6 @@ ThunderpunchDescription:
 BulkUpDescription:
 	db   "Increases Attack"
 	line "and Defense.@"
-
-RazorWindDescription:
-	db   "1st turn: Prepare"
-	line "2nd turn: Attack@"
 
 SwordsDanceDescription:
 	db   "A dance that in-"

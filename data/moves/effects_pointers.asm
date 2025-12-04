@@ -36,7 +36,6 @@ MoveEffectsPointers:
 	dw TriAttack
 	dw NormalHit
 	dw OHKOHit
-	dw RazorWind
 	dw SuperFang
 	dw StaticDamage
 	dw TrapTarget
@@ -72,7 +71,6 @@ MoveEffectsPointers:
 	dw SpecialDefenseDownHit
 	dw AccuracyDownHit
 	dw EvasionDownHit
-	dw SkyAttack
 	dw ConfuseHit
 	dw PoisonMultiHit
 	dw NormalHit
