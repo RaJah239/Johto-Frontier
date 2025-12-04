@@ -4357,7 +4357,6 @@ CheckDanger:
 PrintPlayerHUD:
 	ld de, wBattleMonNickname
 	hlcoord 10, 7
-	call Battle_DummyFunction
 	call PlaceString
 
 	push bc
@@ -4464,7 +4463,6 @@ DrawEnemyHUD:
 	call GetBaseData
 	ld de, wEnemyMonNickname
 	hlcoord 1, 0
-	call Battle_DummyFunction
 	call PlaceString
 	ld h, b
 	ld l, c
@@ -4603,10 +4601,6 @@ UpdateHPPal:
 	cp b
 	ret z
 	jmp FinishBattleAnim
-
-Battle_DummyFunction:
-; called before placing either battler's nickname in the HUD
-	ret
 
 BattleMenu:
 	xor a
