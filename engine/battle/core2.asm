@@ -579,6 +579,51 @@ GetWeatherImage:
 	db $80, $1c ; y/x - top right
 	db $80, $14 ; y/x - top left
 
+FieldWeather:
+	; is weather already set up
+	ld a, [wBattleWeather]
+	cp WEATHER_NONE
+	jr nz, .doWeather
+
+	; set weather and count to 255 turns
+	ld a, 255
+	ld [wWeatherCount], a
+	ld a, [wFieldWeather]
+	ld [wBattleWeather], a
+.doWeather
+	cp WEATHER_RAIN
+	jr z, .rain
+	cp WEATHER_SUN
+	jr z, .sun
+	cp WEATHER_SANDSTORM
+	jr z, .sand
+	cp WEATHER_HAIL
+	ret nz
+
+.hail
+	ld de, ANIM_IN_HAIL
+	farcall Call_PlayBattleAnim
+	ld hl, ItStartedToHailText
+	jmp StdBattleTextbox
+
+.sand
+	ld de, ANIM_IN_SANDSTORM
+	farcall Call_PlayBattleAnim
+	ld hl, SandstormBrewedText
+	jmp StdBattleTextbox
+
+.rain
+	ld de, RAIN_DANCE
+	farcall Call_PlayBattleAnim
+	ld hl, DownpourText
+	jmp StdBattleTextbox
+
+.sun
+	ld de, SUNNY_DAY
+	farcall Call_PlayBattleAnim
+	ld hl, SunGotBrightText
+	jmp StdBattleTextbox
+
 GetTimeOfDayImage:
 	ld a, [wTimeOfDay]
 	cp MORN_F
