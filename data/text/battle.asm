@@ -547,14 +547,24 @@ OneHitKOText:
 	text "It's a one-hit KO!"
 	prompt
 
+ExtremelyEffectiveText:
+	text "It's extremely"
+	line "effective!"
+	prompt
+
 SuperEffectiveText:
-	text "It's super-"
+	text "It's super"
 	line "effective!"
 	prompt
 
 NotVeryEffectiveText:
 	text "It's not very"
 	line "effective…"
+	prompt
+
+MostlyIneffectiveText:
+	text "It's mostly"
+	line "ineffective…"
 	prompt
 
 TookDownWithItText:

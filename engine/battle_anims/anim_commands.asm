@@ -1394,7 +1394,7 @@ PlayHitSound:
 
 .okay
 	ld a, [wTypeModifier]
-	and $7f
+	and EFFECTIVENESS_MASK
 	ret z
 
 	cp EFFECTIVE
