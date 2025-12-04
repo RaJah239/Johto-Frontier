@@ -1870,8 +1870,6 @@ WinTrainerBattle:
 .got_defeat_phrase:
 	call StdBattleTextbox
 
-	call IsMobileBattle
-	jr z, .mobile
 	ld a, [wLinkMode]
 	and a
 	ret nz
@@ -1890,8 +1888,8 @@ WinTrainerBattle:
 	cp BATTLETYPE_INVERSE
 	jr nz, .skip_heal
 	predef HealParty
-.skip_heal
 
+.skip_heal
 	call PrintWinLossText
 
 ; Don't show money award text if base reward = 0
@@ -1899,20 +1897,6 @@ WinTrainerBattle:
 	cp 0
 	ret z
 	jr .give_money
-
-	ld a, [wDebugFlags]
-	bit DEBUG_BATTLE_F, a
-	jr nz, .skip_win_loss_text
-	call PrintWinLossText
-.skip_win_loss_text
-
-	jr .give_money
-
-.mobile
-	call BattleWinSlideInEnemyTrainerFrontpic
-	ld c, $4 ; win
-	farcall Mobile_PrintOpponentBattleMessage
-	ret
 
 .battle_tower
 	call BattleWinSlideInEnemyTrainerFrontpic
@@ -2316,11 +2300,6 @@ PlayerPartyMonEntrance:
 	call SpikesDamage
 	jmp SwitchInEffects
 
-IsMobileBattle:
-	ld a, [wLinkMode]
-	cp LINK_MOBILE
-	ret
-
 SetUpBattlePartyMenu:
 	call ClearBGPalettes
 SetUpBattlePartyMenu_Loop: ; switch to fullscreen menu?
@@ -2467,28 +2446,11 @@ LostBattle:
 
 .not_tied
 	ld hl, LostAgainstText
-	call IsMobileBattle
-	jr z, .mobile
 
 .text
 	call StdBattleTextbox
 
 .end
-	scf
-	ret
-
-.mobile
-; Remove the enemy from the screen.
-	hlcoord 0, 0
-	lb bc, 8, 21
-	call ClearBox
-	call BattleWinSlideInEnemyTrainerFrontpic
-
-	ld c, 40
-	call DelayFrames
-
-	ld c, $3 ; lost
-	farcall Mobile_PrintOpponentBattleMessage
 	scf
 	ret
 
@@ -4515,26 +4477,8 @@ BattleMenu_Fight:
 	ret
 
 LoadBattleMenu2:
-	call IsMobileBattle
-	jr z, .mobile
-
 	farcall LoadBattleMenu
 	and a
-	ret
-
-.mobile
-	farcall Mobile_LoadBattleMenu
-	ld a, [wcd2b]
-	and a
-	ret z
-
-	ld hl, wcd2a
-	bit 4, [hl]
-	jr nz, .error
-	ld hl, BattleText_LinkErrorBattleCanceled
-	call StdBattleTextbox
-.error
-	scf
 	ret
 
 BattleMenu_Pack:
@@ -4703,14 +4647,7 @@ BattleMenuPKMN_Loop:
 	jmp BattleMenu
 
 .GetMenu:
-	call IsMobileBattle
-	jr z, .mobile
-	farcall BattleMonMenu
-	ret
-
-.mobile
-	farcall MobileBattleMonMenu
-	ret
+	farjp BattleMonMenu
 
 Battle_StatsScreen:
 	call DisableLCD
