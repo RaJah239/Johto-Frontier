@@ -5172,7 +5172,7 @@ MoveSelectionScreen:
 
 .battle_player_moves
 	call MoveInfoBox
-	call GetWeatherImage
+	farcall GetWeatherImage
 	ld a, [wSwappingMove]
 	and a
 	jr z, .interpret_joypad
@@ -8893,60 +8893,6 @@ BattleStartMessage:
 	farcall Mobile_PrintOpponentBattleMessage
 
 	ret
-
-GetWeatherImage:
-	ld a, [wBattleWeather]
-	ld de, ClearWeatherImage
-	lb bc, PAL_BATTLE_OB_BLUE, 4
-	cp WEATHER_NONE
-	jr z, .done
-	ld de, RainWeatherImage
-	lb bc, PAL_BATTLE_OB_BLUE, 4
-	dec a
-	jr z, .done
-	ld de, SunWeatherImage
-	ld b, PAL_BATTLE_OB_YELLOW
-	dec a
-	jr z, .done
-	ld de, SandstormWeatherImage
-	ld b, PAL_BATTLE_OB_BROWN
-	dec a
-	jr z, .done
-	ld de, HailWeatherImage
-	ld b, PAL_BATTLE_OB_BLUE
-	dec a
-	ret nz
-	
-.done
-	push bc
-	ld b, BANK(WeatherImages) ; c = 4
-	ld hl, vTiles0
-	call Request2bpp
-	pop bc
-	ld hl, wShadowOAMSprite00
-	ld de, .WeatherImageOAMData
-.loop
-	ld a, [de]
-	inc de
-	ld [hli], a
-	ld a, [de]
-	inc de
-	ld [hli], a
-	dec c
-	ld a, c
-	ld [hli], a
-	ld a, b
-	ld [hli], a
-	jr nz, .loop
-	ret
-
-.WeatherImageOAMData
-; positions are backwards since
-; we load them in reverse order
-	db $88, $1c ; y/x - bottom right
-	db $88, $14 ; y/x - bottom left
-	db $80, $1c ; y/x - top right
-	db $80, $14 ; y/x - top left
 
 FieldWeather:
 ; is weather already set up
