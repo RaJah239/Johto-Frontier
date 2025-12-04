@@ -52,8 +52,6 @@ DoBattle:
 	jmp z, LostBattle
 	call SafeLoadTempTilemapToTilemap
 	ld a, [wBattleType]
-	cp BATTLETYPE_DEBUG
-	jmp z, .tutorial_debug
 	cp BATTLETYPE_TUTORIAL
 	jmp z, .tutorial_debug
 	xor a
@@ -3269,8 +3267,6 @@ CheckIfCurPartyMonIsFitToFight:
 TryToRunAwayFromBattle:
 ; Run away from battle, with or without item
 	ld a, [wBattleType]
-	cp BATTLETYPE_DEBUG
-	jr z, .can_escape
 	cp BATTLETYPE_CONTEST
 	jr z, .can_escape
 	cp BATTLETYPE_TRAP
@@ -4620,8 +4616,6 @@ BattleMenu:
 	farcall GetTimeOfDayImage
 
 	ld a, [wBattleType]
-	cp BATTLETYPE_DEBUG
-	jr z, .ok
 	cp BATTLETYPE_TUTORIAL
 	jr z, .ok
 	call EmptyBattleTextbox
