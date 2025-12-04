@@ -320,12 +320,21 @@ endc
 	scf
 	ret
 
-.run
-	ld a, [wCurInput]
-	and B_BUTTON
-	jr nz, .walk
+.walk
+	ld a, [wOptions2]
+	bit RUNNING_SHOES, a
+	jr nz, .runningshoesareinactive
 	ld a, STEP_RUN
+	jr .runinstead
+.runningshoesareinactive:
+	ld a, STEP_WALK
+.runinstead:
 	call .DoStep
+	push af
+	ld a, [wWalkingDirection]
+	cp STANDING
+	call nz, CheckTrainerRun
+	pop af
 	scf
 	ret
 
@@ -335,14 +344,20 @@ endc
 	scf
 	ret
 
-.walk
+.run
+	ld a, [wCurInput]
+	and B_BUTTON
+	jr nz, .walk
+
+	ld a, [wOptions2]
+	bit RUNNING_SHOES, a
+	jr nz, .runningshoesareactive
 	ld a, STEP_WALK
+	jr .walkinstead
+.runningshoesareactive:
+	ld a, STEP_RUN
+.walkinstead
 	call .DoStep
-	push af
-	ld a, [wWalkingDirection]
-	cp STANDING
-	call nz, CheckTrainerRun
-	pop af
 	scf
 	ret
 

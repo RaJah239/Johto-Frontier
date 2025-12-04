@@ -118,7 +118,7 @@ GetOptionPointer:
 	dw Options_TextSpeed
 	dw Options_BattleScene
 	dw Options_Sound
-	dw Options_ExpShare
+	dw Options_RunningShoes
 	dw Options_AutoBicycle
 	dw Options_CasualCalls
 	dw Options_Frame
@@ -277,6 +277,44 @@ Options_ExpShare:
 
 .ToggleOn:
 	set EXP_SHARE, [hl]
+	ld de, .On
+
+.Display:
+	hlcoord 11, 9
+	call PlaceString
+	and a
+	ret
+
+.Off: db "Off@"
+.On:  db "On @"
+
+Options_RunningShoes:
+	ld hl, wOptions2
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit RUNNING_SHOES, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+
+.LeftPressed:
+	bit RUNNING_SHOES, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+
+.NonePressed:
+	bit RUNNING_SHOES, [hl]
+	jr nz, .ToggleOn
+
+.ToggleOff:
+	res RUNNING_SHOES, [hl]
+	ld de, .Off
+	jr .Display
+
+.ToggleOn:
+	set RUNNING_SHOES, [hl]
 	ld de, .On
 
 .Display:
