@@ -649,6 +649,10 @@ if DEF(_DEBUG)
 	set FAST_BOOT, [hl]
 	set AUTO_BICYCLE, [hl]
 	set RUNNING_SHOES, [hl]
+
+	ld hl, wOptions3
+	set FIELD_ACTIONS, [hl]
+	set FAST_BATTLES, [hl]
 endc
 
 	farcall InitClock
