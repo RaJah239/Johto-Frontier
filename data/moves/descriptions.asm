@@ -664,7 +664,7 @@ DefenseCurlDescription:
 	line "user's DEFENSE.@"
 
 BarrierDescription:
-	db   "Increases Defense"
+	db   "Ups Defense and"
 	line "Sp.Def of user.@"
 
 LightScreenDescription:
