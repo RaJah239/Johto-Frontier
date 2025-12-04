@@ -355,6 +355,17 @@ GetTrainerBackpic:
 	predef DecompressGet2bpp
 	ret
 
+CheckAmuletCoin:
+	ld a, [wBattleMonItem]
+	ld b, a
+	farcall GetItemHeldEffect
+	ld a, b
+	cp HELD_AMULET_COIN
+	ret nz
+	ld a, 1
+	ld [wAmuletCoin], a
+	ret
+
 ShouldIgniteFlameOrb:
 	ld a, BATTLE_VARS_STATUS
 	call GetBattleVarAddr

@@ -3535,7 +3535,7 @@ SendOutPlayerMon:
 	ld [wLastPlayerCounterMove], a
 	ld [wLastEnemyCounterMove], a
 	ld [wLastPlayerMove], a
-	call CheckAmuletCoin
+	farcall CheckAmuletCoin
 	call FinishBattleAnim
 	xor a
 	ld [wEnemyWrapCount], a
@@ -5047,17 +5047,6 @@ BattleMenu_Run:
 	and a ; BATTLEPLAYERACTION_USEMOVE?
 	ret nz
 	jmp BattleMenu
-
-CheckAmuletCoin:
-	ld a, [wBattleMonItem]
-	ld b, a
-	callfar GetItemHeldEffect
-	ld a, b
-	cp HELD_AMULET_COIN
-	ret nz
-	ld a, 1
-	ld [wAmuletCoin], a
-	ret
 
 MoveSelectionScreen:
 	call IsMobileBattle
