@@ -607,7 +607,7 @@ Options_FastBoot:
 .Off: db "Off@"
 
 Options_FieldActions:
- 	ld hl, wOptions2
+ 	ld hl, wOptions3
  	ldh a, [hJoyPressed]
  	bit D_LEFT_F, a
  	jr nz, .LeftPressed
