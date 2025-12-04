@@ -137,7 +137,6 @@ GetOptionPointer:
 	const OPT_TEXT_SPEED_FAST ; 1
 	const OPT_TEXT_SPEED_NONE ; 2
 
-Options_QuickNurse:
 Options_QuickPokeCalls:
 Options_FasterBattles:
 	ret
@@ -456,6 +455,46 @@ Options_CasualCalls:
  
 .On:  db "On @"
 .Off: db "Off@"
+
+Options_QuickNurse:
+ 	ld hl, wOptions2
+ 	ldh a, [hJoyPressed]
+ 	bit D_LEFT_F, a
+ 	jr nz, .LeftPressed
+ 	bit D_RIGHT_F, a
+ 	jr z, .NonePressed
+ 	bit NURSE_HEAL, [hl]
+ 	jr nz, .ToggleOff
+ 	jr .ToggleOn
+ 
+ .LeftPressed:
+ 	bit NURSE_HEAL, [hl]
+ 	jr z, .ToggleOn
+ 	jr .ToggleOff
+ 
+ .NonePressed:
+ 	bit NURSE_HEAL, [hl]
+ 	jr nz, .ToggleOn
+ 
+ .ToggleOff:
+ 	res NURSE_HEAL, [hl]
+ 	ResetEventFlag EVENT_NURSE_QUICK_HEAL
+ 	ld de, .Off
+ 	jr .Display
+ 
+ .ToggleOn:
+ 	set NURSE_HEAL, [hl]
+ 	SetEventFlag EVENT_NURSE_QUICK_HEAL
+ 	ld de, .On
+ 
+.Display:
+	hlcoord 11, 3
+	call PlaceString
+	and a
+	ret
+
+.On:  db "Quick @"
+.Off: db "Normal@"
 
 Options_FastBoot:
  	ld hl, wOptions2
