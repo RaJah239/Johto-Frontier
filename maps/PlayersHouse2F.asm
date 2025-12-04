@@ -264,13 +264,7 @@ else
 endc
 
 PlayersHouseBookshelfScript:
-if DEF(_DEBUG)
-	special FadeOutToWhite
-	warp CHERRYGROVE_CITY, 29,  4 ; Map, coordinates via Polished Map
-	end
-else
 	jumpstd PictureBookshelfScript
-endc
 
 PlayersHousePCScript:
 	opentext
