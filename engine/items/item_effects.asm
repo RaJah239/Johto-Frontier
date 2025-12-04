@@ -779,16 +779,79 @@ UltraBallMultiplier:
 	ret
 
 ShinyBallMultiplier:
+; Genderless wild Pokemon
+	farcall GetGender
+	jr c, .ShinyBallGenderlessAndMaleMultiplier
+
+; Male wild Pokemon
+	farcall GetGender
+	jr nz, .ShinyBallGenderlessAndMaleMultiplier
+
+; female wild Pokemon
+.loop_f
+	call Random
+	and %00001111
+	cp 8
+	jr c, .ok_f
+	jr .loop_f
+.ok_f
+	ld hl, ShinyBallFTable
+	jr .ShinyBallJump
+
+.ShinyBallGenderlessAndMaleMultiplier:
+	call Random
+	and %00001111 ; now gives 0–15
+	ld hl, ShinyBallMnGTable
+	;jr .ShinyBallJump
+	; fallthrough
+
+.ShinyBallJump:
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld a, [hl]
+	; fallthrough
+
+; Common DV handler
+SetShinyDV:
 	push af
-	ld a, $ff ; best possible shiny atk/def
 	ld [wEnemyMonDVs], a
-	ld a, $ff ; best possible shiny spc/spd
+	ld a, $ff
 	ld [wEnemyMonDVs + 1], a
 	pop af
-	ld b, $ff ; max catch rate, same as pokeball
+	ld b, $ff
 	ret
 
-SafariBallMultiplier:
+; Female Table - 8 entries
+ShinyBallFTable:
+	db $00 ; fighting
+	db $01 ; flying
+	db $02 ; poison
+	db $03 ; ground
+	db $10 ; rock
+	db $11 ; bug
+	db $12 ; ghost
+	db $13 ; steel
+
+; Male and Genderless Table - 16 entries
+ShinyBallMnGTable:
+	db $20 ; fire
+	db $21 ; water
+	db $22 ; grass
+	db $23 ; electric
+	db $30 ; psychic
+	db $31 ; ice
+	db $32 ; dragon
+	db $33 ; dark
+	db $40 ; fighting
+	db $41 ; flying
+	db $42 ; poison
+	db $43 ; ground
+	db $50 ; rock
+	db $51 ; bug
+	db $52 ; ghost
+	db $53 ; steel
+
 GreatBallMultiplier:
 ParkBallMultiplier:
 ; multiply catch rate by 1.5
