@@ -524,3 +524,51 @@ SetUpSelfDVs:
 	ld c, [hl]
 .notSelf
     ret
+
+GetTimeOfDayImage:
+	ld a, [wTimeOfDay]
+	cp MORN_F
+	jr z, .DayImage
+	cp DAY_F
+	jr z, .DayImage
+	cp NITE_F
+	jr z, .NightImage
+.DayImage
+ ld de, DayTimeImage
+ lb bc, PAL_BATTLE_OB_YELLOW, 4
+ jr .done	
+	
+ .NightImage
+ ld de, NightTimeImage
+ lb bc, PAL_BATTLE_OB_BLUE, 4
+
+.done
+	push bc
+	ld b, BANK(TimeOfDayImages) ; c = 4
+	ld hl, vTiles0
+	call Request2bpp
+	pop bc
+	ld hl, wShadowOAMSprite00
+	ld de, .TimeOfDayImageOAMData
+.loop
+	ld a, [de]
+	inc de
+	ld [hli], a
+	ld a, [de]
+	inc de
+	ld [hli], a
+	dec c
+	ld a, c
+	ld [hli], a
+	ld a, b
+	ld [hli], a
+	jr nz, .loop
+	ret
+
+.TimeOfDayImageOAMData
+; positions are backwards since
+; we load them in reverse order
+	db $88, $1c ; y/x - bottom right
+	db $88, $14 ; y/x - bottom left
+	db $80, $1c ; y/x - top right
+	db $80, $14 ; y/x - top left
