@@ -84,7 +84,7 @@ StringOptions1:
 	db "        :<LF>"
 	db "Frame<LF>"
 	db "        :Type<LF>"
-	db "Next<LF>"
+	db "Next Page<LF>"
 	db "         <LF>"
 	db "Done@"
 
@@ -101,7 +101,7 @@ StringOptions2:
 	db "        :<LF>"
 	db "Hard Mode<LF>"
 	db "        :<LF>"
-	db "Previous<LF>"
+	db "Previous Page<LF>"
 	db "         <LF>"
 	db "Done@"
 
