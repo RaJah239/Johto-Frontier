@@ -517,17 +517,6 @@ Options_NextPrevious:
 	and a
 	ret
 
-Options_Done:
-	ldh a, [hJoyPressed]
-	and A_BUTTON
-	jr nz, .Exit
-	and a
-	ret
-
-.Exit:
-	scf
-	ret
-
 OptionsControl:
 	ld hl, wJumptableIndex
 	ldh a, [hJoyLast]
