@@ -77,6 +77,7 @@ SuspendMapAnims:
 
 LoadMapObjects:
 	call HandleMapDefaultWeather
+	call HandleAutoBicycle
 	ld a, MAPCALLBACK_OBJECTS
 	call RunMapCallback
 	farcall LoadObjectMasks
@@ -119,6 +120,72 @@ HandleMapDefaultWeather:
 .done
     ld [wFieldWeather], a
     ret
+
+HandleAutoBicycle:
+	; check if Auto Bicycle is turned on
+	ld a, [wOptions2]
+	bit AUTO_BICYCLE, a
+	ret z
+
+	; check if we own the Bicycle
+	ld a, BICYCLE
+	ld [wCurItem], a
+	ld hl, wNumItems
+	call CheckItem
+	ret nc
+
+	; don't use the bike on water tiles
+	; ensure we aren't on a water tile like between
+	; newbark town and route 27
+	; or between route 40, 41 and cianwood city
+	call IsOnWaterTile
+	ret c
+
+	; get on the bike in every environment except indoors
+	ld a, [wMapGroup]
+	ld b, a
+	ld a, [wMapNumber]
+	ld c, a
+	call GetMapEnvironment
+	cp ROUTE
+	jr z, .HopOnBike
+	cp TOWN
+	jr z, .HopOnBike
+	cp CAVE
+	jr z, .HopOnBike
+	cp GATE
+	jr z, .HopOnBike
+	cp DUNGEON
+	jr z, .HopOnBike
+	ret nc
+
+.HopOnBike
+	push bc
+	ld a, PLAYER_BIKE
+	ld [wPlayerState], a
+	call UpdatePlayerSprite ; UpdateSprites
+	pop bc
+
+.done
+	ret
+
+IsOnWaterTile::
+	ld a, [wPlayerTileCollision]
+	and $f0
+	cp HI_NYBBLE_CURRENT
+	jr z, .water
+	cp HI_NYBBLE_WALK
+	jr z, .not_water
+	cp HI_NYBBLE_WALK_ALT
+	jr z, .not_water
+	cp HI_NYBBLE_WARPS
+	jr z, .not_water
+.water
+	scf         ; set carry flag = TRUE (on water)
+	ret
+.not_water
+	xor a
+	ret         ; carry clear = FALSE (not on water)
 
 MapSetup_DummyFunction: ; unreferenced
 	ret

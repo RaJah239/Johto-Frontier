@@ -80,12 +80,12 @@ StringOptions1:
 	db "        :<LF>"
 	db "Running Shoes<LF>"
 	db "        :<LF>"
+	db "Auto Bicycle<LF>"
+	db "        :<LF>"
 	db "Casual Calls<LF>"
 	db "        :<LF>"
 	db "Frame<LF>"
 	db "        :Type<LF>"
-	db "Placholder<LF>"
-	db "         <LF>"
 	db "Next Page@"
 
 StringOptions2:
@@ -119,9 +119,9 @@ GetOptionPointer:
 	dw Options_BattleScene
 	dw Options_Sound
 	dw Options_ExpShare
+	dw Options_AutoBicycle
 	dw Options_CasualCalls
 	dw Options_Frame
-	dw Options_FastBoot
 	dw Options_NextPrevious
 
 	dw Options_MinimalDialogue
@@ -448,7 +448,7 @@ Options_CasualCalls:
  	ld de, .Off
  
  .Display:
- 	hlcoord 11, 11
+ 	hlcoord 11, 13
  	call PlaceString
  	and a
  	ret
@@ -456,6 +456,43 @@ Options_CasualCalls:
 .On:  db "On @"
 .Off: db "Off@"
 
+Options_AutoBicycle:
+ 	ld hl, wOptions2
+ 	ldh a, [hJoyPressed]
+ 	bit D_LEFT_F, a
+ 	jr nz, .LeftPressed
+ 	bit D_RIGHT_F, a
+ 	jr z, .NonePressed
+ 	bit AUTO_BICYCLE, [hl]
+ 	jr nz, .ToggleOff
+ 	jr .ToggleOn
+ 
+ .LeftPressed:
+ 	bit AUTO_BICYCLE, [hl]
+ 	jr z, .ToggleOn
+ 	jr .ToggleOff
+ 
+ .NonePressed:
+ 	bit AUTO_BICYCLE, [hl]
+ 	jr nz, .ToggleOn
+ 
+ .ToggleOff:
+ 	res AUTO_BICYCLE, [hl]
+ 	ld de, .Off
+ 	jr .Display
+ 
+ .ToggleOn:
+ 	set AUTO_BICYCLE, [hl]
+ 	ld de, .On
+ 
+ .Display:
+ 	hlcoord 11, 11
+ 	call PlaceString
+ 	and a
+ 	ret
+
+.On:  db "On @"
+.Off: db "Off@"
 
 Options_Frame:
 	ld hl, wTextboxFrame
@@ -481,7 +518,7 @@ Options_Frame:
 	ld [hl], a
 UpdateFrame:
 	ld a, [wTextboxFrame]
-	hlcoord 16, 13 ; where on the screen the number is drawn
+	hlcoord 16, 15 ; where on the screen the number is drawn
 	add "1"
 	ld [hl], a
 	call LoadFontsExtra

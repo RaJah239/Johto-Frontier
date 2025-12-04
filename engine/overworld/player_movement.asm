@@ -862,7 +862,27 @@ ENDM
 
 .GetOutOfWater:
 	push bc
+
+	; check if we own the Bicycle
+	ld a, BICYCLE
+	ld [wCurItem], a
+	ld hl, wNumItems
+	call CheckItem
+	jr nc, .NoBicycleOwned
+
+	; check if Auto Bicycle is turned on
+	ld a, [wOptions2]
+	bit AUTO_BICYCLE, a
+	jr nz, .AutoBicycle
+
+.NoBicycleOwned
 	ld a, PLAYER_NORMAL
+	jr .WalkingState
+
+.AutoBicycle:
+	ld a, PLAYER_BIKE
+
+.WalkingState:
 	ld [wPlayerState], a
 	call UpdatePlayerSprite ; UpdateSprites
 	pop bc
