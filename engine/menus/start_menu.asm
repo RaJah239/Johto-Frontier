@@ -337,6 +337,11 @@ endr
 	lb bc, 3, 9
 	call Textbox
 
+	ld de, ENGINE_BUG_CONTEST_TIMER
+	ld b, CHECK_FLAG
+	farcall EngineFlagAction
+	ret nz
+
 	ld a, [wOptions2]
 	bit HARD_MODE, a
 	ret z
@@ -411,9 +416,14 @@ endr
 	bit HARD_MODE, a
 	ret z
 
+	ld de, ENGINE_BUG_CONTEST_TIMER
+	ld b, CHECK_FLAG
+	farcall EngineFlagAction
+	ret nz
+
 	hlcoord 1, 1
 	ld de, .HardModeString
-	jp PlaceString
+	jmp PlaceString
 
 .RainingStr:
  	db "Raining@"
