@@ -20,6 +20,223 @@
 ;	anim_wait 32
 ;	anim_ret
 
+; check if this is the same as my hex
+;BattleAnim_WillOWisp:
+;	anim_1gfx BATTLE_ANIM_GFX_FIRE
+;	anim_bgp $1b
+;	anim_sound 0, 1, SFX_SPITE
+;	anim_obj BATTLE_ANIM_OBJ_DRAGON_RAGE, 8, 0, 11, 4, 0
+;	anim_wait 48
+;.loop
+;	anim_sound 0, 0, SFX_SPARK
+;	anim_obj BATTLE_ANIM_OBJ_BURNED, 17, 0,  7, 0, $a0
+;	anim_obj BATTLE_ANIM_OBJ_BURNED, 17, 0,  7, 0, $20
+;	anim_wait 8
+;	anim_loop 4, .loop
+;	anim_wait 16
+;	anim_sound 0, 0, SFX_BURN
+;	anim_obj BATTLE_ANIM_OBJ_FIRE_BLAST, 17, 0,  6, 0, $1
+;	anim_obj BATTLE_ANIM_OBJ_FIRE_BLAST, 17, 0,  6, 0, $2
+;	anim_obj BATTLE_ANIM_OBJ_FIRE_BLAST, 17, 0,  6, 0, $3
+;	anim_obj BATTLE_ANIM_OBJ_FIRE_BLAST, 17, 0,  6, 0, $4
+;	anim_obj BATTLE_ANIM_OBJ_FIRE_BLAST, 17, 0,  6, 0, $5
+;	anim_wait 32
+;	anim_bgp $e4
+;	anim_ret
+
+;BattleAnim_EarthPower:
+;	anim_2gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_ROCKS
+;	anim_sound 0, 0, SFX_EGG_BOMB
+;	anim_bgp $1b
+;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $28, $2, $0
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 120, 68, $5c
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 120, 68, $e8
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 120, 68, $9c
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 120, 68, $50
+;	anim_obj BATTLE_ANIM_OBJ_EMBER, 120, 68, $30
+;	anim_wait 40
+;	anim_clearobjs
+;	anim_wait 8
+;	anim_sound 0, 0, SFX_EGG_BOMB
+;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $28, $2, $0
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 144, 68, $5c
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 144, 68, $e8
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 144, 68, $d0
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 144, 68, $10
+;	anim_obj BATTLE_ANIM_OBJ_EMBER, 144, 68, $30
+;	anim_wait 40
+;	anim_clearobjs
+;	anim_wait 8
+;	anim_sound 0, 0, SFX_EGG_BOMB
+;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $28, $2, $0
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 132, 68, $28
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 132, 68, $e8
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 132, 68, $d0
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 132, 68, $50
+;	anim_obj BATTLE_ANIM_OBJ_EMBER, 132, 68, $30
+;	anim_wait 48
+;	anim_ret
+
+; vanilla mind reader I think
+;BattleAnim_CalmMind:
+;	anim_1gfx BATTLE_ANIM_GFX_MISC
+;	anim_sound 0, 1, SFX_MIND_READER
+;.loop
+;	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 48, 88, $3
+;	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 48, 88, $12
+;	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 48, 88, $20
+;	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 48, 88, $31
+;	anim_wait 16
+;	anim_loop 2, .loop
+;	anim_wait 32
+;	anim_ret
+
+;BattleAnim_MysticFire:
+;	anim_2gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_SPEED
+;	anim_bgp $f8
+;	anim_wait 8
+;	anim_sound 6, 2, SFX_SLUDGE_BOMB
+;	anim_bgeffect BATTLE_BG_EFFECT_VIBRATE_MON, $0, $0, $0
+;	anim_wait 40
+;	anim_bgp $1b
+;	anim_sound 0, 0, SFX_CURSE
+;	anim_bgeffect BATTLE_BG_EFFECT_VIBRATE_MON, $0, $0, $0
+;.loop
+;	anim_obj BATTLE_ANIM_OBJ_HEX, 136, 72, $6
+;	anim_wait 2
+;	anim_obj BATTLE_ANIM_OBJ_HEX, 128, 72, $6
+;	anim_wait 2
+;	anim_obj BATTLE_ANIM_OBJ_BLUE_FLAME, 128, 54, $10
+;	anim_obj BATTLE_ANIM_OBJ_HEX, 144, 72, $8
+;	anim_wait 2
+;	anim_obj BATTLE_ANIM_OBJ_HEX, 120, 72, $8
+;	anim_wait 2
+;	anim_obj BATTLE_ANIM_OBJ_HEX, 152, 72, $6
+;	anim_wait 2
+;	anim_obj BATTLE_ANIM_OBJ_BLUE_FLAME, 144, 38, $90
+;	anim_obj BATTLE_ANIM_OBJ_HEX, 112, 72, $8
+;	anim_wait 2
+;	anim_obj BATTLE_ANIM_OBJ_HEX, 160, 72, $8
+;	anim_wait 2
+;	anim_loop 3, .loop
+;	anim_wait 8
+;	anim_wait 16
+;	anim_ret
+
+;BattleAnim_Boomburst:
+;	anim_2gfx BATTLE_ANIM_GFX_NOISE, BATTLE_ANIM_GFX_PSYCHIC
+;.loop
+;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $14, $2, $0
+;	anim_sound 0, 0, SFX_SNORE
+;	anim_call BattleAnimSub_Sound
+;	anim_obj BATTLE_ANIM_OBJ_WAVE,  7, 0, 11, 0, $2
+;	anim_obj BATTLE_ANIM_OBJ_WAVE,  7, 0, 13, 0, $2
+;	anim_obj BATTLE_ANIM_OBJ_WAVE,  9, 0, 11, 0, $2
+;	anim_obj BATTLE_ANIM_OBJ_WAVE,  9, 0, 13, 0, $2
+;	anim_sound 6, 2, SFX_SCREECH
+;	anim_wait 24
+;	anim_loop 2, .loop
+;	anim_wait 24
+;	anim_ret
+
+;BattleAnim_ShadowClaw:
+;	anim_1gfx BATTLE_ANIM_GFX_CUT
+;	anim_sound 0, 0, SFX_CURSE
+;	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_WHITE_WAIT_FADE_BACK, $0, $1, $80
+;	anim_wait 64
+;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $40, $2, $0
+;	anim_sound 0, 1, SFX_CUT
+;	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 19, 0,  5, 0, $0
+;	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 18, 4,  4, 4, $0
+;	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 18, 0,  4, 0, $0
+;	anim_wait 16
+;	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_WHITE_WAIT_FADE_BACK
+;	anim_wait 4
+;	anim_ret
+
+;BattleAnim_SandScorch:
+;	anim_2gfx BATTLE_ANIM_GFX_SAND, BATTLE_ANIM_GFX_FIRE
+;	anim_call BattleAnimSub_SandOrMud
+;	anim_call BattleAnimSub_Fire
+;	anim_ret
+
+;BattleAnim_RockBlast:
+;	anim_2gfx BATTLE_ANIM_GFX_ROCKS, BATTLE_ANIM_GFX_HIT
+;	anim_sound 6, 2, SFX_SPARK
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_BLAST, 64, 92, $4
+;	anim_wait 16
+;	anim_sound 0, 1, SFX_KARATE_CHOP
+;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 128, 56, $0
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 56, $5c
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 56, $e8
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 56, $d0
+;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 56, $50
+;	anim_wait 32
+;	anim_ret
+
+;BattleAnim_WaterPulse:
+;	anim_2gfx BATTLE_ANIM_GFX_BUBBLE, BATTLE_ANIM_GFX_PSYCHIC
+;	anim_bgeffect BATTLE_BG_EFFECT_WHIRLPOOL, $0, $0, $0
+;	anim_wait 64
+;.loop
+;	anim_sound 0, 1, SFX_TOXIC
+;	anim_obj BATTLE_ANIM_OBJ_WATER_PULSE, 64, 88, $2
+;	anim_wait 6
+;	anim_loop 3, .loop
+;	anim_wait 6
+;	anim_incbgeffect BATTLE_BG_EFFECT_WHIRLPOOL
+;	anim_bgeffect BATTLE_BG_EFFECT_VIBRATE_MON, $0, $0, $0
+;.loop2
+;	anim_sound 0, 1, SFX_LICK
+;	anim_wait 3
+;	anim_loop 3, .loop2
+;	anim_wait 40
+;	anim_ret
+
+; Unused
+;BattleAnim_SeedBomb:
+;	anim_2gfx BATTLE_ANIM_GFX_PLANT, BATTLE_ANIM_GFX_EXPLOSION
+;	anim_sound 16, 2, SFX_VINE_WHIP
+;	anim_obj BATTLE_ANIM_OBJ_LEECH_SEED,  6, 0, 10, 0, $20
+;	anim_wait 2
+;	anim_sound 16, 2, SFX_VINE_WHIP
+;	anim_obj BATTLE_ANIM_OBJ_LEECH_SEED,  6, 0, 10, 0, $28
+;	anim_wait 2
+;	anim_sound 16, 2, SFX_VINE_WHIP
+;	anim_obj BATTLE_ANIM_OBJ_LEECH_SEED,  6, 0, 10, 0, $30
+;	anim_wait 28
+;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $4, $10
+;	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $24
+;	anim_clearobjs
+;	anim_call BattleAnimSub_Explosion2
+;	anim_wait 16
+;	anim_bgp $e4
+;	anim_ret
+
+; Unused
+;BattleAnim_DrillRun:
+;	anim_1gfx BATTLE_ANIM_GFX_HIT
+;.loop
+;	anim_sound 0, 1, SFX_PECK
+;	anim_obj BATTLE_ANIM_OBJ_HIT_SMALL_YFIX, 124, 56, $0
+;	anim_wait 4
+;	anim_sound 0, 1, SFX_PECK
+;	anim_obj BATTLE_ANIM_OBJ_HIT_SMALL_YFIX, 132, 48, $0
+;	anim_wait 4
+;	anim_sound 0, 1, SFX_PECK
+;	anim_obj BATTLE_ANIM_OBJ_HIT_SMALL_YFIX, 140, 56, $0
+;	anim_wait 4
+;	anim_sound 0, 1, SFX_PECK
+;	anim_obj BATTLE_ANIM_OBJ_HIT_SMALL_YFIX, 132, 64, $0
+;	anim_wait 4
+;	anim_loop 5, .loop
+;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $4, $10
+;.loop2
+;	anim_sound 0, 1, SFX_EMBER
+;	anim_wait 24
+;	anim_loop 4, .loop2
+;	anim_ret
+
 ; Unused
 ;BattleAnim_HammerArm:
 ;	anim_1gfx BATTLE_ANIM_GFX_HIT
