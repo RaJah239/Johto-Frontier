@@ -4361,13 +4361,11 @@ DrawEnemyHUD:
 	ld [wWhichHPBar], a
 	hlcoord 2, 2
 	ld b, 0
-	call DrawBattleHPBar
-	ret
+	jmp DrawBattleHPBar
 
 UpdateEnemyHPPal:
 	ld hl, wEnemyHPPal
-	call UpdateHPPal
-	ret
+	; fallthrough
 
 UpdateHPPal:
 	ld b, [hl]
@@ -4466,24 +4464,21 @@ BattleMenu_Pack:
 	ld a, [wBattlePlayerAction]
 	and a ; BATTLEPLAYERACTION_USEMOVE?
 	jr z, .didnt_use_item
-	jr .got_item
+	jr .UseItem
 
 .tutorial
 	farcall TutorialPack
 	ld a, POKE_BALL
 	ld [wCurItem], a
 	call DoItemEffect
-	jr .got_item
+	jr .UseItem
 
 .contest
 	call ClearSprites
 	ld a, PARK_BALL
 	ld [wCurItem], a
 	call DoItemEffect
-
-.got_item
-	call .UseItem
-	ret
+	jr .UseItem
 
 .didnt_use_item
 	call ClearPalettes
@@ -4552,10 +4547,14 @@ BattleMenu_PKMN:
 	ld a, 3
 	ld [wCurrentBattleWindow], a
 	call LoadStandardMenuHeader
+	; fallthrough
+
 BattleMenuPKMN_ReturnFromStats:
 	call ExitMenu
 	call LoadStandardMenuHeader
 	call ClearBGPalettes
+	; fallthrough
+
 BattleMenuPKMN_Loop:
 	call SetUpBattlePartyMenu_Loop
 	xor a
@@ -4638,8 +4637,7 @@ Battle_StatsScreen:
 	ld bc, $31 tiles
 	call CopyBytes
 
-	call EnableLCD
-	ret
+	jmp EnableLCD
 
 TryPlayerSwitch:
 	ld a, [wCurBattleMon]
@@ -4682,6 +4680,8 @@ TryPlayerSwitch:
 	call SetDefaultBGPAndOBP
 	ld a, [wCurPartyMon]
 	ld [wCurBattleMon], a
+	; fallthrough
+
 PlayerSwitch:
 	ld a, 1
 	ld [wPlayerIsSwitching], a
@@ -4713,8 +4713,7 @@ PlayerSwitch:
 	jr c, .switch
 	cp BATTLEACTION_FORFEIT
 	jr nz, .dont_run
-	call WildFled_EnemyFled_LinkBattleCanceled
-	ret
+	jmp WildFled_EnemyFled_LinkBattleCanceled
 
 .dont_run
 	ldh a, [hSerialConnectionStatus]
@@ -5138,8 +5137,7 @@ MoveInfoBox:
 
 	hlcoord 1, 10
 	ld de, .Disabled
-	call PlaceString
-	jp .done
+	jmp PlaceString
 
 .not_disabled
 	ld hl, wMenuCursorY
@@ -5244,8 +5242,7 @@ MoveInfoBox:
 	ld de, .nopower_string
 	ld bc, 3
 	hlcoord 6, 10
-	call PlaceString
-	jr .done
+	jmp PlaceString
 
 .imperfect
 	ld a, [wCurSpecies]
@@ -5256,7 +5253,7 @@ MoveInfoBox:
 	ld a, BANK(Moves)
 	call GetFarByte
 
-	Call Adjust_Percent_Battle
+	call Adjust_Percent_Battle
 	ld [wBuffer1], a
 	ld de, wBuffer1
 	lb bc, 1, 3
@@ -5264,8 +5261,6 @@ MoveInfoBox:
 	call PrintNum
 	ld [hl], "<%>" ; displays percent symbol
 	hlcoord 9, 9
-
-.done
 	ret
 
 .nopower_string:
@@ -5292,8 +5287,7 @@ MoveInfoBox:
 	inc hl
 	ld de, wNamedObjectIndex
 	lb bc, 1, 2
-	call PrintNum
-	ret
+	jmp PrintNum
 
 ; This converts values out of 256 into a value
 ; out of 100. It achieves this by multiplying
