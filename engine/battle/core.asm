@@ -2244,7 +2244,6 @@ ForcePlayerMonChoice:
 	or [hl]
 	jr nz, .send_out_pokemon
 
-.enemy_fainted_mobile_error
 	call ClearSprites
 	call ClearBGPalettes
 	call _LoadHPBar
@@ -4853,12 +4852,6 @@ BattleMenu_Run:
 	jmp BattleMenu
 
 MoveSelectionScreen:
-	call IsMobileBattle
-	jr nz, .not_mobile
-	farcall Mobile_MoveSelectionScreen
-	ret
-
-.not_mobile
 	ld hl, wEnemyMonMoves
 	ld a, [wMoveSelectionMenuType]
 	dec a
@@ -8020,23 +8013,6 @@ DisplayLinkBattleResult:
 .Draw:
 	db "  DRAW@"
 
-.Mobile_InvalidBattle:
-	hlcoord 6, 8
-	ld de, .InvalidBattle
-	call PlaceString
-	ld c, 200
-	call DelayFrames
-	call ClearTilemap
-	ret
-
-.InvalidBattle:
-	db "INVALID BATTLE@"
-
-IsMobileBattle2:
-	ld a, [wLinkMode]
-	cp LINK_MOBILE
-	ret
-
 _DisplayLinkRecord:
 	ld a, BANK(sLinkBattleStats)
 	call OpenSRAM
@@ -8702,14 +8678,9 @@ BattleStartMessage:
 	; need to do this or the game would crash
 	call CheckIfFastBattlesIsOn
 	jr nz, .skip
+
 	call StdBattleTextbox
-
 .skip
-	call IsMobileBattle2
-	ret nz
-
-	ld c, $2 ; start
-	farcall Mobile_PrintOpponentBattleMessage
 	ret
 
 ; DevNote - function for Pokemon with effects on switching in
