@@ -891,12 +891,14 @@ HasUserFainted:
 	ldh a, [hBattleTurn]
 	and a
 	jr z, HasPlayerFainted
+
 HasEnemyFainted:
 	ld hl, wEnemyMonHP
 	jr CheckIfHPIsZero
 
 HasPlayerFainted:
 	ld hl, wBattleMonHP
+	; fallthrough
 
 CheckIfHPIsZero:
 	ld a, [hli]
@@ -1248,12 +1250,6 @@ HandleWeather:
 	cp STEEL
 	ret z
 
-;	call SwitchTurnCore
-;	xor a
-;	ld [wNumHits], a
-;	ld de, ANIM_IN_SANDSTORM
-;	call Call_PlayBattleAnim
-;	call SwitchTurnCore
 	call GetSixteenthMaxHP
 	call SubtractHPFromUser
 
@@ -1300,18 +1296,11 @@ HandleWeather:
 	cp ICE
 	ret z
 
-;	call SwitchTurnCore
-;	xor a
-;	ld [wNumHits], a
-;	ld de, ANIM_IN_HAIL
-;	call Call_PlayBattleAnim
-;	call SwitchTurnCore
-
 	call GetSixteenthMaxHP
 	call SubtractHPFromUser
 	
 	ld hl, PeltedByHailText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox
 
 .PrintWeatherMessage:
 	ld a, [wBattleWeather]
@@ -1387,9 +1376,8 @@ GetSixteenthMaxHP:
 ; at least 1
 	ld a, c
 	and a
-	jr nz, .ok
+	ret nz
 	inc c
-.ok
 	ret
 
 GetEighthMaxHP:
@@ -1401,9 +1389,8 @@ GetEighthMaxHP:
 ; at least 1
 	ld a, c
 	and a
-	jr nz, .end
+	ret nz
 	inc c
-.end
 	ret
 
 GetQuarterMaxHP:
@@ -1420,9 +1407,8 @@ GetQuarterMaxHP:
 ; at least 1
 	ld a, c
 	and a
-	jr nz, .end
+	ret nz
 	inc c
-.end
 	ret
 
 GetHalfMaxHP:
@@ -1436,9 +1422,8 @@ GetHalfMaxHP:
 ; at least 1
 	ld a, c
 	or b
-	jr nz, .end
+	ret nz
 	inc c
-.end
 	ret
 
 GetThirdMaxHP:
@@ -1915,8 +1900,7 @@ WinTrainerBattle:
 	or [hl]
 	ret nz
 	call ClearTilemap
-	call ClearBGPalettes
-	ret
+	jmp ClearBGPalettes
 
 .give_money
 	ld a, [wAmuletCoin]
@@ -2192,8 +2176,6 @@ UpdateFaintedPlayerMon:
 	ld [wBattleResult], a
 	ld a, [wWhichMonFaintedFirst]
 	and a
-	ret z
-	; code was probably dummied out here
 	ret
 
 AskUseNextPokemon:
@@ -2309,16 +2291,14 @@ SetUpBattlePartyMenu_Loop: ; switch to fullscreen menu?
 	farcall LoadPartyMenuGFX
 	farcall InitPartyMenuWithCancel
 	farcall InitPartyMenuBGPal7
-	farcall InitPartyMenuGFX
-	ret
+	farjp InitPartyMenuGFX
 
 JumpToPartyMenuAndPrintText:
 	farcall WritePartyMenuTilemap
 	farcall PlacePartyMenuText
 	call WaitBGMap
 	call SetDefaultBGPAndOBP
-	call DelayFrame
-	ret
+	jmp DelayFrame
 
 PickPartyMonInBattle:
 .loop
@@ -2400,12 +2380,7 @@ LostBattle:
 	ld c, 40
 	call DelayFrames
 
-	ld a, [wDebugFlags]
-	bit DEBUG_BATTLE_F, a
-	jr nz, .skip_win_loss_text
-	call PrintWinLossText
-.skip_win_loss_text
-	ret
+	jmp PrintWinLossText
 
 .battle_tower
 ; Remove the enemy from the screen.
@@ -2422,8 +2397,7 @@ LostBattle:
 	farcall BattleTowerText
 	call WaitPressAorB_BlinkCursor
 	call ClearTilemap
-	call ClearBGPalettes
-	ret
+	jmp ClearBGPalettes
 
 .not_canlose
 	ld a, [wLinkMode]
@@ -2576,8 +2550,7 @@ ForceEnemySwitch:
 	call ResetEnemyStatLevels
 	call ShowSetEnemyMonAndSendOutAnimation
 	call BreakAttraction
-	call ResetBattleParticipants
-	ret
+	jmp ResetBattleParticipants
 
 EnemySwitch:
 	call CheckWhetherToAskSwitch
@@ -2744,10 +2717,10 @@ LookUpTheEffectivenessOfEveryMove:
 	ld e, NUM_MOVES + 1
 .loop
 	dec e
-	jr z, .done
+	ret z
 	ld a, [hli]
 	and a
-	jr z, .done
+	ret z
 	push hl
 	push de
 	push bc
@@ -2768,8 +2741,6 @@ LookUpTheEffectivenessOfEveryMove:
 	jr c, .loop
 	ld hl, wEnemyEffectivenessVsPlayerMons
 	set 0, [hl]
-	ret
-.done
 	ret
 
 IsThePlayerMonTypesEffectiveAgainstOTMon:
