@@ -192,6 +192,10 @@ BattleTurn:
 	and a
 	ret nz
 
+	ld a, [wBattleEnded]
+	and a
+	ret nz
+
 	call HandleBetweenTurnEffects
 	ld a, [wBattleEnded]
 	and a
