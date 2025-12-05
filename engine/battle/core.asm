@@ -3963,6 +3963,11 @@ UseConfusionHealingItem:
 	ret
 
 HandleStatBoostingHeldItems:
+	; prevent use in link battles
+	ld a, [wLinkMode]
+	and a
+	ret nz
+
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
 	jr z, .player_1
