@@ -32,11 +32,7 @@ SaveMusic::
 	pop af
 	ld [rSVBK], a
 
-	pop af
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopAFBCDEHL
 
 RestoreMusic::
 	push hl
@@ -77,11 +73,7 @@ RestoreMusic::
 	pop af
 	ld [rSVBK], a
 
-	pop af
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopAFBCDEHL
 
 DeleteSavedMusic::
 	push af

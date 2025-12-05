@@ -93,11 +93,7 @@ PlayBattleMusic:
 
 .done
 	call PlayMusic
-
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 .loadfromarray
 	ld de, 2

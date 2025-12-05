@@ -4058,10 +4058,7 @@ UpdateBattleHUDs:
 	call DrawEnemyHUD
 	ld hl, wEnemyHPPal
 	call SetHPPal
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 UpdatePlayerHUD::
 	push hl
@@ -4070,10 +4067,7 @@ UpdatePlayerHUD::
 	call DrawPlayerHUD
 	call UpdatePlayerHPPal
 	call CheckDanger
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 DrawPlayerHUD:
 	xor a
@@ -4225,10 +4219,7 @@ UpdateEnemyHUD::
 	push bc
 	call DrawEnemyHUD
 	call UpdateEnemyHPPal
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 DrawEnemyHUD:
 	xor a
@@ -6244,11 +6235,7 @@ BattleWinSlideInEnemyTrainerFrontpic:
 	inc d
 	dec e
 	jr nz, .loop
-
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 ApplyStatusEffectOnPlayerStats:
 	ld a, 1

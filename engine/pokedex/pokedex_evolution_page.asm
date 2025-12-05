@@ -964,11 +964,7 @@ EVO_DrawSpriteBox:
 	inc hl
 	ld [hl], $7b ; VRAM1
 .notslot4
-	pop af
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopAFBCDEHL
 
 EVO_set_multi_page_ptr:
 	ld c, a
@@ -1082,11 +1078,7 @@ EVO_place_CaughtIcon:
 .start
 	ld [hl], $70 ; pokeball icon, VRAM1
 .done
-	pop af
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopAFBCDEHL
 
 EVO_Draw_border:
 ; Request1bpp

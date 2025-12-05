@@ -1862,10 +1862,7 @@ UseItem_SelectMon:
 	push bc
 	call ClearBGPalettes
 	call ChooseMonToUseItemOn
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 ChooseMonToUseItemOn:
 	farcall LoadPartyMenuGFX

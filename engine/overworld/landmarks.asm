@@ -37,11 +37,7 @@ GetLandmarkName::
 	inc de
 	dec c
 	jr nz, .copy
-
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 INCLUDE "data/maps/landmarks.asm"
 

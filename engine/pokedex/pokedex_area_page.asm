@@ -631,10 +631,7 @@ Grass_check_any_remaining:
 	jr nz, .landmark_loop
  	xor a ; ret with 0 means none left, shift to next area category
  .done
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 .entries_remaining
 ; since we've been incrementing the index, it now doesn't have to do so much searching to "find" this pointer again
  	ld a, 1 ; if a is not 0 when we return, it means that the pokemon is ahead in an upcoming entry, increment page and index

@@ -76,10 +76,7 @@ PrintLetterDelay::
 .end
 	pop af
 	ldh [hOAMUpdate], a
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 CopyDataUntil::
 ; Copy [hl .. bc) to de.

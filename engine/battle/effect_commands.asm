@@ -1172,10 +1172,7 @@ CheckTypeMatchup:
 	jr .TypesLoop
 
 .End:
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 BattleCommand_ResetTypeMatchup:
 ; Reset the type matchup multiplier to 1.0, if the type matchup is not 0.
@@ -6233,10 +6230,7 @@ AnimateCurrentMoveEitherSide:
 	ld [wBattleAnimParam], a
 	call PlayDamageAnim
 	call BattleCommand_RaiseSub
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 AnimateCurrentMove:
 	push hl
@@ -6249,10 +6243,7 @@ AnimateCurrentMove:
 	ld [wBattleAnimParam], a
 	call LoadMoveAnim
 	call BattleCommand_RaiseSub
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 PlayDamageAnim:
 	xor a
@@ -6319,10 +6310,7 @@ PlayOpponentBattleAnim:
 	callfar PlayBattleAnim
 
 	call BattleCommand_SwitchTurn
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 CallBattleCore:
 	ld a, BANK("Battle Core")
@@ -6403,10 +6391,7 @@ _CheckBattleScene:
 	push de
 	push bc
 	farcall CheckBattleScene
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 BattleCommand_CheckPowder:
 ; Checks if the move is powder/spore-based and 

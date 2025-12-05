@@ -2628,10 +2628,7 @@ AICheckEnemyHalfHP:
 	cp c
 	ld a, [hl]
 	sbc b
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 AICheckEnemyQuarterHP:
 	push hl
@@ -2651,10 +2648,7 @@ AICheckEnemyQuarterHP:
 	cp c
 	ld a, [hl]
 	sbc b
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 AICheckPlayerQuarterHP:
 	push hl
@@ -2734,10 +2728,7 @@ AIHasMoveInArray:
 	scf
 
 .done
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 INCLUDE "data/battle/ai/useful_moves.asm"
 
@@ -3145,11 +3136,7 @@ AIGetEnemyMove:
 	ld de, wEnemyMoveStruct
 	ld a, BANK(Moves)
 	call FarCopyBytes
-
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 AI_80_20:
 	call Random

@@ -607,8 +607,4 @@ ClearSpriteAnims2:
 	ld a, c
 	or b
 	jr nz, .loop
-	pop af
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopAFBCDEHL
