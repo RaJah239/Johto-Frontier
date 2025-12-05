@@ -2815,7 +2815,7 @@ ScoreMonTypeMatchups:
 	inc b
 	sla c
 	jr nc, .loop3
-	jr .quit
+	ret
 
 .okay2
 	ld b, -1
@@ -2825,7 +2825,7 @@ ScoreMonTypeMatchups:
 	inc b
 	sla c
 	jr c, .loop4
-	jr .quit
+	ret
 
 .loop5
 	ld a, [wOTPartyCount]
@@ -2848,8 +2848,6 @@ ScoreMonTypeMatchups:
 	ld a, [hl]
 	or c
 	jr z, .loop5
-
-.quit
 	ret
 
 LoadEnemyMonToSwitchTo:
@@ -3194,8 +3192,7 @@ InitBattleMon:
 	ld de, wPlayerStats
 	ld bc, PARTYMON_STRUCT_LENGTH - MON_ATK
 	call CopyBytes
-	call ApplyStatusEffectOnPlayerStats
-	ret
+	jmp ApplyStatusEffectOnPlayerStats
 
 BattleCheckPlayerShininess:
 	call GetPartyMonDVs
@@ -3203,12 +3200,12 @@ BattleCheckPlayerShininess:
 
 BattleCheckEnemyShininess:
 	call GetEnemyMonDVs
+	; fallthrough
 
 BattleCheckShininess:
 	ld b, h
 	ld c, l
-	callfar CheckShininess
-	ret
+	farjp CheckShininess
 
 GetPartyMonDVs:
 	ld hl, wBattleMonDVs
@@ -3429,8 +3426,7 @@ SpikesDamage:
 	call .Spikes
 	call .StealthRock
 	call .ToxicSpikes
-	call .StickyWeb
-	ret
+	jmp .StickyWeb
 
 .Spikes:
 	bit SCREENS_SPIKES, [hl]
@@ -3843,6 +3839,8 @@ HandleHPHealingItem:
 .got_hp_bar_coords
 	ld [wWhichHPBar], a
 	predef AnimateHPBar
+	; fallthrough
+
 UseOpponentItem:
 	call RefreshBattleHuds
 	callfar GetOpponentItem
@@ -3866,10 +3864,7 @@ ItemRecoveryAnim:
 	ld [wFXAnimID + 1], a
 	predef PlayBattleAnim
 	call SwitchTurnCore
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 UseHeldStatusHealingItem:
 	callfar GetOpponentItem
