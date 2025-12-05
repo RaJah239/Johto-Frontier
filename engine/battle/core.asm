@@ -8493,11 +8493,8 @@ BattleStartMessage:
 	; Skip PokemonAttacked text if fast battles is on
 	; need to do this or the game would crash
 	call CheckIfFastBattlesIsOn
-	jr nz, .skip
-
-	call StdBattleTextbox
-.skip
-	ret
+	ret nz
+	jmp StdBattleTextbox
 
 ; DevNote - function for Pokemon with effects on switching in
 SwitchInEffects:
