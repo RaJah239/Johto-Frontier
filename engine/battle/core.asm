@@ -5498,8 +5498,7 @@ CheckEnemyLockedIn:
 	ret
 
 LinkBattleSendReceiveAction:
-	farcall _LinkBattleSendReceiveAction
-	ret
+	farjp _LinkBattleSendReceiveAction
 
 LoadEnemyMon:
 ; Initialize enemy monster parameters
@@ -6044,8 +6043,7 @@ LoadEnemyMon:
 	ld bc, NUM_BATTLE_STATS * 2
 	call CopyBytes
 
-	call ApplyStatusEffectOnEnemyStats
-	ret
+	jmp ApplyStatusEffectOnEnemyStats
 
 CheckSleepingTreeMon:
 ; Return carry if species is in the list
@@ -6064,6 +6062,7 @@ CheckSleepingTreeMon:
 	ld hl, AsleepTreeMonsDay
 	jr z, .Check
 	ld hl, AsleepTreeMonsNite
+	; fallthrough
 
 .Check:
 	ld a, [wTempEnemyMonSpecies]
@@ -6409,12 +6408,10 @@ ApplyStatLevelMultiplier:
 INCLUDE "data/battle/stat_multipliers_2.asm"
 
 _LoadBattleFontsHPBar:
-	callfar LoadBattleFontsHPBar
-	ret
+	farjp LoadBattleFontsHPBar
 
 _LoadHPBar:
-	callfar LoadHPBar
-	ret
+	farjp LoadHPBar
 
 EmptyBattleTextbox:
 	ld hl, .empty
@@ -7029,6 +7026,7 @@ CheckFullHP:
 	jr z, DoCheckFullHP
 	ld hl, wEnemyMonHP
 	; fallthrough
+
 DoCheckFullHP:
 	ld a, [hli]
 	ld b, a
@@ -7547,7 +7545,7 @@ PlaceExpBar:
 	ld a, $5d ; full bar
 	ld [hld], a
 	dec c
-	jr z, .finish
+	ret z
 	jr .loop1
 
 .next
@@ -7564,8 +7562,6 @@ PlaceExpBar:
 	ld a, $55 ; empty bar
 	dec c
 	jr nz, .loop2
-
-.finish
 	ret
 
 GetBattleMonBackpic:
@@ -7573,6 +7569,7 @@ GetBattleMonBackpic:
 	bit SUBSTATUS_SUBSTITUTE, a
 	ld hl, BattleAnimCmd_RaiseSub
 	jr nz, GetBattleMonBackpic_DoAnim ; substitute
+	; fallthrough
 
 DropPlayerSub:
 	ld a, [wPlayerMinimized]
@@ -7607,6 +7604,7 @@ GetEnemyMonFrontpic:
 	bit SUBSTATUS_SUBSTITUTE, a
 	ld hl, BattleAnimCmd_RaiseSub
 	jr nz, GetEnemyMonFrontpic_DoAnim
+	; fallthrough
 
 DropEnemySub:
 	ld a, [wEnemyMinimized]
@@ -7816,8 +7814,7 @@ InitEnemyWildmon:
 	ldh [hGraphicStartTile], a
 	hlcoord 12, 0
 	lb bc, 7, 7
-	predef PlaceGraphic
-	ret
+	predef_jump PlaceGraphic
 
 CleanUpBattleRAM:
 	call BattleEnd_HandleRoamMons
@@ -7846,8 +7843,7 @@ CleanUpBattleRAM:
 	ld [hli], a
 	dec b
 	jr nz, .loop
-	call WaitSFX
-	ret
+	jmp WaitSFX
 
 ShowLinkBattleParticipantsAfterEnd:
 	farcall BackupGSBallFlag
@@ -7857,8 +7853,7 @@ ShowLinkBattleParticipantsAfterEnd:
 	ld a, [wEnemyMonStatus]
 	ld [hl], a
 	call ClearTilemap
-	farcall _ShowLinkBattleParticipants
-	ret
+	farjp _ShowLinkBattleParticipants
 
 DisplayLinkBattleResult:
 	ld a, [wBattleResult]
@@ -7894,15 +7889,14 @@ DisplayLinkBattleResult:
 	call CloseSRAM
 
 	call WaitPressAorB_BlinkCursor
-	call ClearTilemap
-	ret
+	jmp ClearTilemap
 
 .YouWin:
-	db "YOU WIN@"
+	db "You Win@"
 .YouLose:
-	db "YOU LOSE@"
+	db "You Lose@"
 .Draw:
-	db "  DRAW@"
+	db "  Draw@"
 
 _DisplayLinkRecord:
 	ld a, BANK(sLinkBattleStats)
@@ -7921,8 +7915,7 @@ _DisplayLinkRecord:
 	call SetDefaultBGPAndOBP
 	ld c, 8
 	call DelayFrames
-	call WaitPressAorB_BlinkCursor
-	ret
+	jmp WaitPressAorB_BlinkCursor
 
 ReadAndPrintLinkBattleRecord:
 	call ClearTilemap
@@ -8011,7 +8004,7 @@ ReadAndPrintLinkBattleRecord:
 	hlcoord 6, 4
 	ld de, sLinkBattleWins
 	call .PrintZerosIfNoSaveFileExists
-	jr c, .quit
+	ret c
 
 	lb bc, 2, 4
 	call PrintNum
@@ -8028,10 +8021,7 @@ ReadAndPrintLinkBattleRecord:
 	call .PrintZerosIfNoSaveFileExists
 
 	lb bc, 2, 4
-	call PrintNum
-
-.quit
-	ret
+	jmp PrintNum
 
 .PrintZerosIfNoSaveFileExists:
 	ld a, [wSavedAtLeastOnce]
@@ -8049,11 +8039,11 @@ ReadAndPrintLinkBattleRecord:
 	db "  ---  <LF>"
 	db "         -    -    -@"
 .Record:
-	db "<PLAYER>'s RECORD@"
+	db "<PLAYER>'s Record@"
 .Result:
-	db "RESULT WIN LOSE DRAW@"
+	db "Result Win Lose Draw@"
 .Total:
-	db "TOTAL  WIN LOSE DRAW@"
+	db "Total  Win Lose Draw@"
 
 BattleEnd_HandleRoamMons:
 	ld a, [wBattleType]
@@ -8084,8 +8074,7 @@ BattleEnd_HandleRoamMons:
 	ret nz
 
 .update_roam_mons
-	callfar UpdateRoamMons
-	ret
+	farjp UpdateRoamMons
 
 GetRoamMonMapGroup:
 	ld a, [wTempEnemyMonSpecies]
@@ -8209,8 +8198,7 @@ AddLastLinkBattleToLinkRecord:
 
 .done
 	call .StoreResult
-	call .FindOpponentAndAppendRecord
-	ret
+	jr .FindOpponentAndAppendRecord
 
 .StoreResult:
 	ld a, [wBattleResult]
@@ -8332,8 +8320,7 @@ AddLastLinkBattleToLinkRecord:
 	ld hl, wLinkBattleRecordBuffer
 	ld bc, LINK_BATTLE_RECORD_LENGTH
 	pop de
-	call CopyBytes
-	ret
+	jmp CopyBytes
 
 .LoadPointer:
 	ld e, $0
@@ -8364,8 +8351,7 @@ AddLastLinkBattleToLinkRecord:
 InitBattleDisplay:
 	call .InitBackPic
 	hlcoord 0, 12
-	ld b, 4
-	ld c, 18
+	lb bc, 4, 18
 	call Textbox
 	farcall MobileTextBorder
 	hlcoord 1, 5
