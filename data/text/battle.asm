@@ -294,6 +294,10 @@ BattleText_UsersStringBuffer1Activated:
 	cont "activated!"
 	prompt
 
+BattleText_Null:
+	text " "
+	done
+
 BattleText_ItemsCantBeUsedHere:
 	text "Items can't be"
 	line "used here."

@@ -89,8 +89,6 @@ DoBattle:
 	call SendOutPlayerMon
 	call EmptyBattleTextbox
 	call HandleStatBoostingHeldItems
-
-	farcall GetTimeOfDayImage
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call SpikesDamage
@@ -113,6 +111,7 @@ DoBattle:
 
 .not_linked_2
 	farcall FieldWeather
+	farcall GetTimeOfDayImage
 	jr BattleTurn
 
 WildFled_EnemyFled_LinkBattleCanceled:

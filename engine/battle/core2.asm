@@ -693,6 +693,11 @@ FieldWeather:
 	jmp StdBattleTextbox
 
 GetTimeOfDayImage:
+	; wipes out text before TimeOfDayImage
+	; mixes with text for split second
+	ld hl, BattleText_Null
+	call StdBattleTextbox
+
 	ld a, [wTimeOfDay]
 	cp MORN_F
 	jr z, .MornImage
