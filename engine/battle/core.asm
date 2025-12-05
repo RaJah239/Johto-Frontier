@@ -42,8 +42,6 @@ DoBattle:
 	call EnemySwitch
 
 .wild
-	call SwitchInEffects
-
 .player_2
 	call LoadTilemapToTempTilemap
 	call CheckPlayerPartyForFitMon
@@ -110,6 +108,14 @@ DoBattle:
 	call SwitchInEffects
 
 .not_linked_2
+    ld a, [wLinkMode]
+    and a
+    jr nz, .skipEffects
+	call SetEnemyTurn
+	call SpikesDamage
+	call SwitchInEffects
+
+.skipEffects
 	farcall FieldWeather
 	farcall GetTimeOfDayImage
 	jr BattleTurn
