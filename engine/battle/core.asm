@@ -4023,8 +4023,7 @@ HandleStatBoostingHeldItems:
 	call GetItemName
 	ld hl, BattleText_UsersStringBuffer1Activated
 	call StdBattleTextbox
-	callfar BattleCommand_StatUpMessage
-	ret
+	farjp BattleCommand_StatUpMessage
 
 .finish
 	pop bc
