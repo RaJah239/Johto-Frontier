@@ -369,6 +369,11 @@ HatchEggs:
 	call AddNTimes
 	ld d, h
 	ld e, l
+
+	; skip nicknaming hatched mon
+	call CheckIfFastBattlesIsOn
+	jr nz, .nonickname
+
 	push de
 	ld hl, .BreedAskNicknameText
 	call PrintText

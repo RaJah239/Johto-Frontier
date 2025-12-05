@@ -598,6 +598,11 @@ PokeBallEffect:
 	ld [hl], a
 
 .SkipPartyMonFriendBall:
+
+	; skip nicknaming caught mon
+	call CheckIfFastBattlesIsOn
+	jmp nz, .return_from_capture
+
 	ld hl, AskGiveNicknameText
 	call PrintText
 
@@ -653,6 +658,11 @@ PokeBallEffect:
 	ld a, FRIEND_BALL_HAPPINESS
 	ld [wBufferMonHappiness], a
 .SkipBoxMonFriendBall:
+
+	; skip nicknaming caught mon if it goes to the PC
+	call CheckIfFastBattlesIsOn
+	jr nz, .SkipBoxMonNickname
+
 	ld hl, AskGiveNicknameText
 	call PrintText
 
