@@ -4611,7 +4611,7 @@ BattleMenuPKMN_Loop:
 	jr c, .Cancel
 .loop
 	farcall FreezeMonIcons
-	call .GetMenu
+	farcall BattleMonMenu
 	jr c, BattleMenuPKMN_Loop ; .PressedB
 	call PlaceHollowCursor
 	ld a, [wMenuCursorY]
@@ -4649,9 +4649,6 @@ BattleMenuPKMN_Loop:
 	call SetDefaultBGPAndOBP
 	farcall GetTimeOfDayImage
 	jmp BattleMenu
-
-.GetMenu:
-	farjp BattleMonMenu
 
 Battle_StatsScreen:
 	call DisableLCD
