@@ -88,6 +88,8 @@ DoBattle:
 	call BreakAttraction
 	call SendOutPlayerMon
 	call EmptyBattleTextbox
+	call HandleStatBoostingHeldItems
+
 	farcall GetTimeOfDayImage
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
@@ -231,7 +233,6 @@ HandleBetweenTurnEffects:
 
 .NoMoreFaintingConditions:
 	farcall Core2_NewTurnEndEffects
-	call HandleStatBoostingHeldItems
 	call HandleHealingItems
 	call UpdateBattleMonInParty
 	call LoadTilemapToTempTilemap
@@ -3964,7 +3965,6 @@ UseConfusionHealingItem:
 	ret
 
 HandleStatBoostingHeldItems:
-; The effects handled here are not used in-game.
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
 	jr z, .player_1
@@ -4021,6 +4021,9 @@ HandleStatBoostingHeldItems:
 	ld [bc], a
 	ld [de], a
 	call GetItemName
+	call SwitchTurnCore
+	call ItemRecoveryAnim
+	call SwitchTurnCore
 	ld hl, BattleText_UsersStringBuffer1Activated
 	call StdBattleTextbox
 	farjp BattleCommand_StatUpMessage
