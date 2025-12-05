@@ -53,7 +53,7 @@ DoBattle:
 	call SafeLoadTempTilemapToTilemap
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
-	jmp z, .tutorial_debug
+	jmp z, BattleMenu
 	xor a
 	ld [wCurPartyMon], a
 .loop2
@@ -112,9 +112,6 @@ DoBattle:
 .not_linked_2
 	farcall FieldWeather
 	jr BattleTurn
-
-.tutorial_debug
-	jmp BattleMenu
 
 WildFled_EnemyFled_LinkBattleCanceled:
 	call SafeLoadTempTilemapToTilemap
