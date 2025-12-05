@@ -2380,9 +2380,6 @@ LostBattle:
 	call ClearBox
 	call BattleWinSlideInEnemyTrainerFrontpic
 
-	ld c, 40
-	call DelayFrames
-
 	jmp PrintWinLossText
 
 .battle_tower
@@ -2391,9 +2388,6 @@ LostBattle:
 	lb bc, 8, 21
 	call ClearBox
 	call BattleWinSlideInEnemyTrainerFrontpic
-
-	ld c, 40
-	call DelayFrames
 
 	call EmptyBattleTextbox
 	ld c, BATTLETOWERTEXT_WIN_TEXT
@@ -8426,9 +8420,6 @@ BattleStartMessage:
 	ld de, SFX_SHINE
 	call PlaySFX
 	call WaitSFX
-
-	ld c, 20
-	call DelayFrames
 
 	farcall Battle_GetTrainerName
 
