@@ -3316,8 +3316,7 @@ SendOutPlayerMon:
 	ld hl, wBattleMonDVs
 	predef GetUnownLetter
 	hlcoord 1, 5
-	ld b, 7
-	ld c, 8
+	lb bc, 7, 8
 	call ClearBox
 	call WaitBGMap
 	xor a
@@ -4829,14 +4828,12 @@ MoveSelectionScreen:
 	ldh [hBGMapMode], a
 
 	hlcoord 4, 17 - NUM_MOVES - 1
-	ld b, 4
-	ld c, 14
+	lb bc, 4, 14
 	ld a, [wMoveSelectionMenuType]
 	cp $2
 	jr nz, .got_dims
 	hlcoord 4, 17 - NUM_MOVES - 1 - 4
-	ld b, 4
-	ld c, 14
+	lb bc, 4, 14
 .got_dims
 	call Textbox
 
@@ -5119,8 +5116,7 @@ MoveInfoBox:
 	ldh [hBGMapMode], a
 
 	hlcoord 0, 8 ; upper right corner of the textbox
-	ld b, 3 ; Box height
-	ld c, 9 ; Box length
+	lb bc, 3, 9
 	call Textbox
 	call MobileTextBorder
 
@@ -5670,8 +5666,7 @@ LoadEnemyMon:
 	cp BATTLETYPE_FORCESHINY
 	jr nz, .GenerateDVs
 
-	ld b, ATKDEFDV_SHINY ; $ea
-	ld c, SPDSPCDV_SHINY ; $aa
+	lb bc, ATKDEFDV_SHINY, SPDSPCDV_SHINY ; $ff / $ff
 	jr .UpdateDVs
 
 .GenerateDVs:
@@ -6876,8 +6871,7 @@ GiveExperiencePoints:
 	jr nz, .skip
 
 	hlcoord 9, 0
-	ld b, 10
-	ld c, 9
+	lb bc, 10, 9
 	call Textbox
 	hlcoord 11, 1
 	ld bc, 4
