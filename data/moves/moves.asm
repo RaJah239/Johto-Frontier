@@ -134,7 +134,7 @@ Moves:
 	move METRONOME,    EFFECT_METRONOME,           0, NORMAL,        STATUS,   100, 10,   0
 	move BULLDOZE,     EFFECT_SPEED_DOWN_HIT,     60, GROUND,        PHYSICAL, 100, 24, 100
 	move THROAT_CHOP,  EFFECT_NORMAL_HIT,         80, DARK,          PHYSICAL, 100, 24,   0
-	move EGG_BOMB,     EFFECT_BURN_HIT,          100, FIRE,          PHYSICAL, 100, 16,  30
+	move EGG_BOMB,     EFFECT_BURN_HIT,          100, FIRE,          PHYSICAL,  90, 16,  30
 	move LICK,         EFFECT_PARALYZE_HIT,       20, GHOST,         PHYSICAL, 100, 30,  30
 	move SMOG,         EFFECT_POISON_HIT,         20, POISON,        SPECIAL,   70, 20,  40
 	move SLUDGE,       EFFECT_POISON_HIT,         65, POISON,        SPECIAL,  100, 20,  30
@@ -174,7 +174,7 @@ Moves:
 	move HYPER_FANG,   EFFECT_FLINCH_HIT,         80, NORMAL,        PHYSICAL,  90, 15,  10
 	move FACADE,       EFFECT_FACADE,             70, NORMAL,        PHYSICAL, 100, 24,   0
 	move HEX,          EFFECT_HEX,                65, GHOST,         SPECIAL,  100, 16,   0
-	move PHOTON_BLAST, EFFECT_TRI_ATTACK,         80, NORMAL,        SPECIAL,  100, 16,  20
+	move PHOTON_BLAST, EFFECT_TRI_ATTACK,         80, NORMAL,        SPECIAL,  100, 16,  30
 	move SUPER_FANG,   EFFECT_SUPER_FANG,          1, NORMAL,        PHYSICAL,  90, 10,   0
 	move SLASH,        EFFECT_NORMAL_HIT,         70, NORMAL,        PHYSICAL, 100, 20,   0
 	move SUBSTITUTE,   EFFECT_SUBSTITUTE,          0, NORMAL,        STATUS,   100, 10,   0
