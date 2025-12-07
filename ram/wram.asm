@@ -481,7 +481,8 @@ wEnemySAtkLevel:: db
 wEnemySDefLevel:: db
 wEnemyAccLevel::  db
 wEnemyEvaLevel::  db
-	ds 1
+
+wTeamMaxLevel:: db
 
 wEnemyTurnsTaken::  db
 wPlayerTurnsTaken:: db
