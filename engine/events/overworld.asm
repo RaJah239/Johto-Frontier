@@ -390,6 +390,27 @@ CheckOverworldTileArrays:
 
 INCLUDE "data/collision/field_move_blocks.asm"
 
+TryFlashOW::
+	ld a, [wTimeOfDayPalset]
+	cp DARKNESS_PALSET
+	jr nz, .quit
+
+	; check if we own the the Lanturn Call
+	ld a, MAREEP_CALL
+	ld [wCurItem], a
+	ld hl, wNumItems
+	call CheckItem
+	jr nc, .quit
+
+.yes
+	ld a, BANK(Script_UseFlash)
+	ld hl, Script_UseFlash
+	jmp CallScript
+
+.quit
+	xor a
+	ret
+
 FlashFunction:
 	call .CheckUseFlash
 	and $7f
