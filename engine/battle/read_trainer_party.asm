@@ -227,10 +227,6 @@ ReadTrainerPartyPieces:
 
 .no_dvs
 ; evs?
-	ld a, [wOtherTrainerType]
-	bit TRAINERTYPE_EVS_F, a
-	jr z, .no_evs
-
 	push hl
 	ld a, [wOTPartyCount]
 	dec a
@@ -238,7 +234,13 @@ ReadTrainerPartyPieces:
 	call GetPartyLocation
 	ld d, h
 	ld e, l
+
+	ld a, [wOtherTrainerType]
+	bit TRAINERTYPE_EVS_F, a
+	jr z, .auto_evs
+
 	pop hl
+
 	ld c, NUM_STATS
 .evs_loop
 	call GetNextTrainerDataByte
@@ -246,8 +248,111 @@ ReadTrainerPartyPieces:
 	inc de
 	dec c
 	jr nz, .evs_loop
+	jmp .evs_done
 
-.no_evs
+.auto_evs
+	; auto-set EVs based on badge
+    ld hl, wJohtoBadges
+    bit RISINGBADGE, [hl]
+	jr nz, .252EVs
+
+    bit GLACIERBADGE, [hl]
+    jr nz, .223EVs
+
+    bit MINERALBADGE, [hl]
+    jr nz, .191EVs
+
+    bit STORMBADGE, [hl]
+    jr nz, .159EVs
+
+    bit FOGBADGE, [hl]
+	jmp nz, .127EVs
+
+    bit PLAINBADGE, [hl]
+    jmp nz, .95EVs
+
+    bit HIVEBADGE, [hl]
+    jmp nz, .63EVs
+
+    bit ZEPHYRBADGE, [hl]
+    jmp nz, .31EVs
+
+    pop hl
+    jmp .evs_done ; 0 Evs
+
+.252EVs:
+rept NUM_STATS
+    ld a, 252 ; EVs for each stat
+    ld [de], a
+    inc de
+endr
+	pop hl
+	jmp .evs_done
+
+.223EVs:
+rept NUM_STATS
+    ld a, 223 ; EVs for each stat
+    ld [de], a
+    inc de
+endr
+	pop hl
+	jmp .evs_done
+
+.191EVs:
+rept NUM_STATS
+    ld a, 191 ; EVs for each stat
+    ld [de], a
+    inc de
+endr
+	pop hl
+	jmp .evs_done
+
+.159EVs:
+rept NUM_STATS
+    ld a, 159 ; EVs for each stat
+    ld [de], a
+    inc de
+endr
+	pop hl
+	jr .evs_done
+
+.127EVs:
+rept NUM_STATS
+    ld a, 127 ; EVs for each stat
+    ld [de], a
+    inc de
+endr
+	pop hl
+	jr .evs_done
+
+.95EVs:
+rept NUM_STATS
+    ld a, 95 ; EVs for each stat
+    ld [de], a
+    inc de
+endr
+	pop hl
+	jr .evs_done
+
+.63EVs:
+rept NUM_STATS
+    ld a, 63 ; EVs for each stat
+    ld [de], a
+    inc de
+endr
+	pop hl
+	jr .evs_done
+
+.31EVs:
+rept NUM_STATS
+    ld a, 31 ; EVs for each stat
+    ld [de], a
+    inc de
+endr
+	pop hl
+	; fallthrough
+
+.evs_done
 ; item?
 	ld a, [wOtherTrainerType]
 	bit TRAINERTYPE_ITEM_F, a
