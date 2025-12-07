@@ -379,7 +379,7 @@ ChooseEggMoveToLearn:
     call GetFarByte
     cp 1
     jr c, .print_move_null_chance
-    call EggConvertPercentages
+    call ConvertPercentages
     ld [wBuffer1], a
     ld de, wBuffer1
     lb bc, 1, 3
@@ -414,7 +414,7 @@ ChooseEggMoveToLearn:
     ld a, BANK(Moves)
     call GetFarByte
 
-    call EggConvertPercentages
+    call ConvertPercentages
     ld [wBuffer1], a
     ld de, wBuffer1
     lb bc, 1, 3
@@ -451,34 +451,6 @@ ChooseEggMoveToLearn:
     ld de, MoveNullValueString
     ld bc, 3
     jmp PlaceString
-
-EggConvertPercentages:
-    ld l, a
-    ld h, 0
-    push af
-    add hl, hl
-    add a, l
-    ld l, a
-    adc h
-    sub l
-    ld h, a
-    add hl, hl
-    add hl, hl
-    add hl, hl
-    pop af
-    add a, l
-    ld l, a
-    adc h
-    sbc l
-    ld h, a
-    add hl, hl
-    add hl, hl
-    ld l, 0.5
-    sla l
-    sbc a
-    and 1
-    add a, h
-    ret
 
 ; This is the text that displays if the player
 ; does not have enough money to learn a move.
