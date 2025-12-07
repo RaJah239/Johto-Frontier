@@ -1,5 +1,3 @@
-; HM moves can't be forgotten
-
 IsHM::
 	cp HM01
 	jr c, .NotHM
@@ -8,12 +6,3 @@ IsHM::
 .NotHM:
 	and a
 	ret
-
-IsHMMove::
-	ld hl, .HMMoves
-	ld de, 1
-	jmp IsInArray
-
-.HMMoves:
-	db FLY
-	db -1 ; end
