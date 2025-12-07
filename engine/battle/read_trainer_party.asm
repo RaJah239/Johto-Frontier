@@ -248,109 +248,54 @@ ReadTrainerPartyPieces:
 	inc de
 	dec c
 	jr nz, .evs_loop
-	jmp .evs_done
+	jr .evs_done
 
 .auto_evs
-	; auto-set EVs based on badge
+	; auto-set all trainer EVs based on badges
     ld hl, wJohtoBadges
-    bit RISINGBADGE, [hl]
-	jr nz, .252EVs
 
-    bit GLACIERBADGE, [hl]
-    jr nz, .223EVs
+	bit RISINGBADGE, [hl]
+	ld a, 252
+	jr nz, .write_evs
 
-    bit MINERALBADGE, [hl]
-    jr nz, .191EVs
+	bit GLACIERBADGE, [hl]
+	ld a, 223
+	jr nz, .write_evs
 
-    bit STORMBADGE, [hl]
-    jr nz, .159EVs
+	bit MINERALBADGE, [hl]
+	ld a, 191
+	jr nz, .write_evs
 
-    bit FOGBADGE, [hl]
-	jmp nz, .127EVs
+	bit STORMBADGE, [hl]
+	ld a, 159
+	jr nz, .write_evs
 
-    bit PLAINBADGE, [hl]
-    jmp nz, .95EVs
+	bit FOGBADGE, [hl]
+	ld a, 127
+	jr nz, .write_evs
 
-    bit HIVEBADGE, [hl]
-    jmp nz, .63EVs
+	bit PLAINBADGE, [hl]
+	ld a, 95
+	jr nz, .write_evs
 
-    bit ZEPHYRBADGE, [hl]
-    jmp nz, .31EVs
+	bit HIVEBADGE, [hl]
+	ld a, 63
+	jr nz, .write_evs
 
+	bit ZEPHYRBADGE, [hl]
+	ld a, 31
+	jr nz, .write_evs
+
+    ; No badges → 0 EVs
+    xor a
+    ; fallthrough
+
+.write_evs:
+rept NUM_STATS
+    ld [de], a ; 'a' contains EV value
+    inc de
+endr
     pop hl
-    jmp .evs_done ; 0 Evs
-
-.252EVs:
-rept NUM_STATS
-    ld a, 252 ; EVs for each stat
-    ld [de], a
-    inc de
-endr
-	pop hl
-	jmp .evs_done
-
-.223EVs:
-rept NUM_STATS
-    ld a, 223 ; EVs for each stat
-    ld [de], a
-    inc de
-endr
-	pop hl
-	jmp .evs_done
-
-.191EVs:
-rept NUM_STATS
-    ld a, 191 ; EVs for each stat
-    ld [de], a
-    inc de
-endr
-	pop hl
-	jmp .evs_done
-
-.159EVs:
-rept NUM_STATS
-    ld a, 159 ; EVs for each stat
-    ld [de], a
-    inc de
-endr
-	pop hl
-	jr .evs_done
-
-.127EVs:
-rept NUM_STATS
-    ld a, 127 ; EVs for each stat
-    ld [de], a
-    inc de
-endr
-	pop hl
-	jr .evs_done
-
-.95EVs:
-rept NUM_STATS
-    ld a, 95 ; EVs for each stat
-    ld [de], a
-    inc de
-endr
-	pop hl
-	jr .evs_done
-
-.63EVs:
-rept NUM_STATS
-    ld a, 63 ; EVs for each stat
-    ld [de], a
-    inc de
-endr
-	pop hl
-	jr .evs_done
-
-.31EVs:
-rept NUM_STATS
-    ld a, 31 ; EVs for each stat
-    ld [de], a
-    inc de
-endr
-	pop hl
-	; fallthrough
 
 .evs_done
 ; item?
