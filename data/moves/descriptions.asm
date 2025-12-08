@@ -146,7 +146,7 @@ MoveDescriptions::
 	dw SkyAttackDescription
 	dw TransformDescription
 	dw CalmMindDescription
-	dw ShadowSneakDescription
+	dw HyperVoiceDescription
 	dw SporeDescription
 	dw MirrorShotDescription
 	dw SignalBeamDescription
@@ -609,7 +609,6 @@ AgilityDescription:
 	line "the user's SPEED.@"
 
 AerialAceDescriptionDescription:
-ShadowSneakDescription:
 BulletPunchDescription:
 AquaJetDescription:
 QuickAttackDescription:
@@ -1014,6 +1013,7 @@ MegahornDescription:
 	db   "A powerful charge"
 	line "attack.@"
 
+HyperVoiceDescription:
 DragonPulseDescription:
 	db   "An attack that may"
 	line "increase Sp.Atk.@"

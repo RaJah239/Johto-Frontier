@@ -538,7 +538,7 @@ BattleAnimations::
 	dw BattleAnim_SkyAttack
 	dw BattleAnim_Transform
 	dw BattleAnim_CalmMind
-	dw BattleAnim_ShadowSneak
+	dw BattleAnim_HyperVoice
 	dw BattleAnim_Spore
 	dw BattleAnim_MirrorShot
 	dw BattleAnim_SignalBeam
@@ -4037,8 +4037,33 @@ BattleAnim_ScaryFace:
 	anim_wait 64
 	anim_ret
 
+BattleAnim_HyperVoice:
+	anim_2gfx BATTLE_ANIM_GFX_NOISE, BATTLE_ANIM_GFX_SPEED
+	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_BLACK_REPEATING
+	anim_wait 1
+	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT, $0, BG_EFFECT_USER, $40, $0, $1, $40
+.loop1
+	anim_call BattleAnim_SubFocusingAnim
+	anim_loop 2, .loop1
+	anim_wait 8
+	anim_battlergfx_2row
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_cry $0
+.loop2
+	anim_call BattleAnimSub_Sound
+	anim_wait 16
+	anim_loop 3, .loop2
+	anim_wait 9
+	anim_bgeffect BATTLE_BG_EFFECT_BATTLEROBJ_1ROW, $0, $1, $0
+	anim_wait 8
+	anim_wait 1
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
+	anim_wait 5
+	anim_incobj 10
+	anim_wait 8
+	anim_ret
+
 BattleAnim_SuckerPunch:
-BattleAnim_ShadowSneak:
 	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_HIT
 	anim_sound 0, 0, SFX_LICK
 	anim_bgeffect BATTLE_BG_EFFECT_REMOVE_MON, $0, $1, $0

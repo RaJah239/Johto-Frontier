@@ -145,7 +145,7 @@ MoveNames::
 	li "Sky Attack"
 	li "Transform"
 	li "Calm Mind"
-	li "Shadow Sneak"
+	li "Hyper Voice"
 	li "Spore"
 	li "Mirror Shot"
 	li "Singal Beam"
