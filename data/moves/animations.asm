@@ -1607,19 +1607,22 @@ BattleAnim_LeechSeed:
 	anim_ret
 
 BattleAnim_SeedBomb:
-	anim_3gfx BATTLE_ANIM_GFX_PLANT, BATTLE_ANIM_GFX_EGG, BATTLE_ANIM_GFX_EXPLOSION
-	anim_sound 6, 2, SFX_THROW_BALL
-	anim_obj BATTLE_ANIM_OBJ_SLUDGE_BOMB, 64, 92, $10
-	anim_wait 36
-	anim_sound 0, 1, SFX_EGG_BOMB
-	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 136, 56, $0
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $28
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $5c
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $10
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $e8
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $9c
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $d0
-	anim_wait 32
+	anim_2gfx BATTLE_ANIM_GFX_PLANT, BATTLE_ANIM_GFX_EXPLOSION
+	anim_sound 16, 2, SFX_VINE_WHIP
+	anim_obj BATTLE_ANIM_OBJ_LEECH_SEED,  6, 0, 10, 0, $20
+	anim_wait 2
+	anim_sound 16, 2, SFX_VINE_WHIP
+	anim_obj BATTLE_ANIM_OBJ_LEECH_SEED,  6, 0, 10, 0, $28
+	anim_wait 2
+	anim_sound 16, 2, SFX_VINE_WHIP
+	anim_obj BATTLE_ANIM_OBJ_LEECH_SEED,  6, 0, 10, 0, $30
+	anim_wait 28
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $4, $10
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $24
+	anim_clearobjs
+	anim_call BattleAnimSub_Explosion2
+	anim_wait 16
+	anim_bgp $e4
 	anim_ret
 
 BattleAnim_MeteorMash:
