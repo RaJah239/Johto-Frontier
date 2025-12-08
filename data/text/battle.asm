@@ -663,7 +663,7 @@ AlreadyPoisonedText:
 	prompt
 
 SuckedHealthText:
-	text "Sucked health from"
+	text "Drew energy from"
 	line "<TARGET>!"
 	prompt
 
