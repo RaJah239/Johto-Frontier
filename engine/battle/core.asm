@@ -6530,7 +6530,6 @@ GiveExperiencePoints:
 	bit 0, a
 	ret nz
 
-	call EvenlyDivideExpAmongParticipants
 	xor a
 	ld [wCurPartyMon], a
 	ld bc, wPartyMon1Species
@@ -6988,60 +6987,6 @@ GiveExperiencePoints:
 
 .done
 	jmp ResetBattleParticipants
-
-EvenlyDivideExpAmongParticipants:
-; Only if there is Exp Share is not active
-	ld a, [wExpShareToggle]
-	and a
-	ret nz
-; Count number of battle participants
-	ld a, [wBattleParticipantsNotFainted]
-	ld b, a
-	ld c, PARTY_LENGTH
-	ld de, 0
-.count_loop
-push bc
-	push de
-	ld a, e
-	ld hl, wPartyMon1Level
-	call GetPartyLocation
-	ld a, [hl]
-	cp MAX_LEVEL
-	pop de
-	pop bc
-	jr c, .gains_exp
-	srl b
-	ld a, d
-	jr .no_exp
-.gains_exp
-	xor a
-	srl b
-	adc d
-	ld d, a
-.no_exp
-	inc e
-	dec c
-	jr nz, .count_loop
-	cp 2
-	ret c
-
-	ld [wTempByteValue], a
-	ld hl, wEnemyMonBaseStats
-	ld c, wEnemyMonEnd - wEnemyMonBaseStats
-.base_stat_division_loop
-	xor a
-	ldh [hDividend + 0], a
-	ld a, [hl]
-	ldh [hDividend + 1], a
-	ld a, [wTempByteValue]
-	ldh [hDivisor], a
-	ld b, 2
-	call Divide
-	ldh a, [hQuotient + 3]
-	ld [hli], a
-	dec c
-	jr nz, .base_stat_division_loop
-	ret
 
 BoostExp:
 ; Multiply experience by 1.5x
