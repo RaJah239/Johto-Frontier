@@ -1,3 +1,22 @@
+BattleAnim_Psyshock:
+BattleAnim_FocusBlast:
+	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_BEAM
+	anim_call BattleAnim_TargetObj_1Row
+	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT, $0, BG_EFFECT_USER, $40
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+.loop
+	anim_call BattleAnim_SubFocusingAnim
+	anim_loop 2, .loop
+	anim_wait 8
+	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT
+	anim_call BattleAnim_ShowMon_0
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $30, $4, $10
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $40
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_call BattleAnimSub_Beam
+	anim_wait 24
+	anim_ret
+
 ;=============================
 ;============NOTES============
 ;=============================
@@ -20,7 +39,7 @@
 ;	anim_wait 32
 ;	anim_ret
 
-; check if this is the same as my hex
+; Use this if more space is needed
 ;BattleAnim_WillOWisp:
 ;	anim_1gfx BATTLE_ANIM_GFX_FIRE
 ;	anim_bgp $1b
@@ -1067,24 +1086,6 @@ BattleAnim_SignalBeam:
 	anim_wait 64
 	anim_ret
 
-BattleAnim_Psyshock:
-BattleAnim_FocusBlast:
-	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_BEAM
-	anim_call BattleAnim_TargetObj_1Row
-	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT, $0, BG_EFFECT_USER, $40
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
-.loop
-	anim_call BattleAnim_SubFocusingAnim
-	anim_loop 2, .loop
-	anim_wait 8
-	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT
-	anim_call BattleAnim_ShowMon_0
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $30, $4, $10
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $40
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
-	anim_call BattleAnimSub_Beam
-	anim_wait 24
-	anim_ret
 
 BattleAnim_RunicPower:
 	anim_1gfx ANIM_GFX_UNOWN
