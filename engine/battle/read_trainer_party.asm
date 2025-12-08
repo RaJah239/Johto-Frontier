@@ -380,11 +380,8 @@ endr
 .no_moves
 ; Custom DVs or EVs affect stats, so recalculate them 
 ; after TryAddMonToParty
-	ld a, [wOtherTrainerType]
-	and TRAINERTYPE_DVS | TRAINERTYPE_EVS
-	jr z, .no_stat_recalc
-
 	push hl
+
 	ld a, [wOTPartyCount]
 	dec a
 	ld hl, wOTPartyMon1MaxHP
@@ -412,8 +409,9 @@ endr
 	ld [hl], c
 	dec hl
 	ld [hl], b
+
 	pop hl
-.no_stat_recalc
+
 	ld a, [wOtherTrainerType]
 	bit TRAINERTYPE_RANDOM_F, a
 	jr nz, .random_loop
@@ -766,7 +764,6 @@ ReadPlayerPartyAsTrainerPartyPieces:
 	dec hl
 	ld [hl], b
 	pop hl
-.no_stat_recalc
 
     pop bc
     inc b
