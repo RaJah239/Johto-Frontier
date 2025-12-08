@@ -6524,11 +6524,11 @@ GiveExperiencePoints:
 	and a
 	ret nz
 
-	farcall GetTeamHighestLevel
-
 	ld a, [wInBattleTowerBattle]
 	bit 0, a
 	ret nz
+
+	farcall GetTeamHighestLevel
 
 	xor a
 	ld [wCurPartyMon], a
