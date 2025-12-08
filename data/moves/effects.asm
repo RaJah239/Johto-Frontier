@@ -70,6 +70,28 @@ LeechHit:
 	kingsrock
 	endmove
 
+SacredFire:
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	effectchance
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	defrost
+	draintarget
+	checkfaint
+	buildopponentrage
+	burntarget
+	endmove
+
 BurnHit:
 	usedmovetext
 	doturn
@@ -1364,27 +1386,6 @@ Safeguard:
 	usedmovetext
 	doturn
 	safeguard
-	endmove
-
-SacredFire:
-	usedmovetext
-	doturn
-	critical
-	damagestats
-	damagecalc
-	stab
-	damagevariation
-	checkhit
-	effectchance
-	moveanim
-	failuretext
-	applydamage
-	criticaltext
-	supereffectivetext
-	defrost
-	checkfaint
-	buildopponentrage
-	burntarget
 	endmove
 
 BatonPass:

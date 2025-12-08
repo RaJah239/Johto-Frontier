@@ -853,10 +853,6 @@ FlailDescription:
 	db   "Stronger if the"
 	line "user's HP is low.@"
 
-AeroblastDescription:
-	db   "Has a high criti-"
-	line "cal hit ratio.@"
-
 CottonSporeDescription:
 	db   "Sharply reduces"
 	line "the foe's SPEED.@"
@@ -949,6 +945,14 @@ GigaDrainDescription:
 	db   "Steals 1/2 of the"
 	line "damage inflicted.@"
 
+SacredFireDescription:
+	db   "Absorbs 1/2 hit."
+	line "May burn foe.@"
+
+AeroblastDescription:
+	db   "Absorbs 1/2 hit."
+	line "Crit hit chance.@"
+
 EndureDescription:
 	db   "Always leaves at"
 	line "least 1HP.@"
@@ -1008,10 +1012,6 @@ SafeguardDescription:
 PainSplitDescription:
 	db   "Adds user & foe's"
 	line "HPs. Shares total.@"
-
-SacredFireDescription:
-	db   "An attack that may"
-	line "inflict a burn.@"
 
 QuiverDanceDescription:
 	db   "Raises Special"
