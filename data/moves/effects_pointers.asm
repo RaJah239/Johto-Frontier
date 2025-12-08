@@ -162,4 +162,5 @@ MoveEffectsPointers:
 	dw Revenge
 	dw Barrier
 	dw Venoshock
+	dw Overdrive
 	assert_table_length NUM_MOVE_EFFECTS

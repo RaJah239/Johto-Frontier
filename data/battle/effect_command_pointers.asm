@@ -162,4 +162,5 @@ BattleCommandPointers:
 	dw BattleCommand_HurricaneAccuracy
 	dw BattleCommand_FarCommand
 	dw BattleCommand_Venoshock
+	dw BattleCommand_Overdrive
 	assert_table_length NUM_EFFECT_COMMANDS

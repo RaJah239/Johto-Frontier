@@ -1923,3 +1923,9 @@ Venoshock:
 	buildopponentrage
 	kingsrock
 	endmove
+
+Overdrive:
+	usedmovetext
+	doturn
+	overdrive
+	endmove
