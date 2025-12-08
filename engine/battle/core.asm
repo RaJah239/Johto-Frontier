@@ -7008,7 +7008,6 @@ BoostExp:
 	pop bc
 	ret
 
-; This entire HP block should be moved elsewhere and be farcall if possible
 CheckOpponentFullHP:
 ; check if the opponent has full HP
 ; z: yes, nz: no

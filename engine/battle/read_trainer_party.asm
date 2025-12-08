@@ -1086,7 +1086,7 @@ SetDynamicLevel:
 	add b
 	cp MAX_LEVEL
 	ret c
-; cap overflowflow at level 100
+; cap overflow at MAX_LEVEL
 	cp LEVEL_FROM_PARTY
 	ld a, MAX_LEVEL
 	ret c
