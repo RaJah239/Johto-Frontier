@@ -1811,6 +1811,10 @@ BattleCommand_ApplyDamage:
 	jr z, .focus_band
 	cp HELD_FOCUS_SASH
 	jr nz, .damage
+
+; check if target is at full hp
+	farcall CheckOpponentFullHP
+	jr nz, .damage
 	farcall BattleCommand_FalseSwipe
 	ld b, 0
 	jr nc, .damage
@@ -1819,10 +1823,6 @@ BattleCommand_ApplyDamage:
 	jr .damage
 
 .focus_band
-; check if target is at full hp
-	farcall CheckOpponentFullHP
-	jr nz, .damage
-
 	call BattleRandom
 	cp c
 	jr nc, .damage
