@@ -59,7 +59,7 @@ _InterpretMobileMenu::
 	ld a, [wMenuJoypadFilter]
 	and c
 	jr z, .loop
-	jmp Mobile_GetMenuSelection
+	jr Mobile_GetMenuSelection
 
 .quit
 	ld a, [w2DMenuNumCols]
@@ -74,7 +74,7 @@ Draw2DMenu:
 	xor a
 	ldh [hBGMapMode], a
 	call MenuBox
-	jmp Place2DMenuItemStrings
+	jr Place2DMenuItemStrings
 
 Get2DMenuSelection:
 	call Init2DMenuCursorPosition
