@@ -80,7 +80,7 @@
 	const MEGA_DRAIN   ; 48
 	const LEECH_SEED   ; 49
 	const GROWTH       ; 4a
-	const RAZOR_LEAF   ; 4b
+	const LEAF_BLADE   ; 4b
 	const SOLARBEAM    ; 4c
 	const POISONPOWDER ; 4d
 	const STUN_SPORE   ; 4e

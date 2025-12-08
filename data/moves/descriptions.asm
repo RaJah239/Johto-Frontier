@@ -75,7 +75,7 @@ MoveDescriptions::
 	dw MegaDrainDescription
 	dw LeechSeedDescription
 	dw GrowthDescription
-	dw RazorLeafDescription
+	dw LeafBladeDescription
 	dw SolarbeamDescription
 	dw PoisonpowderDescription
 	dw StunSporeDescription
@@ -266,6 +266,9 @@ MoveFFDescription:
 Move00Description:
 	db "?@"
 
+ThroatChopDescription:
+CrossChopDescription:
+LeafBladeDescription:
 RazorWindDescription:
 PsychoCutDescription:
 NightSlashDescription:
@@ -517,10 +520,6 @@ LeechSeedDescription:
 GrowthDescription:
 	db   "Raises the SPCL."
 	line "ATK rating.@"
-
-RazorLeafDescription:
-	db   "Has a high criti-"
-	line "cal hit ratio.@"
 
 SolarbeamDescription:
 	db   "1st turn: Prepare"
@@ -1057,11 +1056,6 @@ HiddenForceDescription:
 HiddenPowerDescription:
 	db   "The type varies"
 	line "with the #MON.@"
-
-ThroatChopDescription:
-CrossChopDescription:
-	db   "Has a high criti-"
-	line "cal hit ratio.@"
 
 RainDanceDescription:
 	db   "Boosts water-type"

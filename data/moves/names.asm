@@ -74,7 +74,7 @@ MoveNames::
 	li "Mega Drain"
 	li "Leech Seed"
 	li "Growth"
-	li "Razor Leaf"
+	li "Leaf Blade"
 	li "Solarbeam"
 	li "PoisonPowder"
 	li "Stun Spore"

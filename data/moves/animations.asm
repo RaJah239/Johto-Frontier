@@ -273,21 +273,6 @@
 ;	anim_wait 32
 ;	anim_jump BattleAnimSub_Sludge
 
-
-; Unused
-;BattleAnim_LeafBlade:
-;	anim_2gfx BATTLE_ANIM_GFX_PLANT, BATTLE_ANIM_GFX_CUT
-;	anim_sound 0, 1, SFX_CUT
-;	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 152, 40, $0
-;	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $28
-;	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $5c
-;	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $10
-;	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $e8
-;	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $9c
-;	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $d0
-;	anim_wait 32
-;	anim_ret
-
 ;BattleAnim_RockWrecker:
 ;	anim_2gfx BATTLE_ANIM_GFX_ROCKS, BATTLE_ANIM_GFX_HIT
 ;	anim_sound 0, 0, SFX_STRENGTH
@@ -405,7 +390,7 @@ BattleAnimations::
 	dw BattleAnim_MegaDrain
 	dw BattleAnim_LeechSeed
 	dw BattleAnim_Growth
-	dw BattleAnim_RazorLeaf
+	dw BattleAnim_LeafBlade
 	dw BattleAnim_Solarbeam
 	dw BattleAnim_Poisonpowder
 	dw BattleAnim_StunSpore
@@ -1625,51 +1610,17 @@ BattleAnim_IronBash:
 	anim_loop 3, .loop
 	anim_ret
 
-BattleAnim_RazorLeaf:
-	anim_1gfx BATTLE_ANIM_GFX_PLANT
-	anim_sound 0, 0, SFX_VINE_WHIP
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 48, 80, $28
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 48, 80, $5c
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 48, 80, $10
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 48, 80, $e8
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 48, 80, $9c
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 48, 80, $d0
-	anim_wait 6
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 48, 80, $1c
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 48, 80, $50
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 48, 80, $dc
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 48, 80, $90
-	anim_wait 80
-	anim_sound 16, 2, SFX_VINE_WHIP
-	anim_incobj 3
-	anim_wait 2
-	anim_sound 16, 2, SFX_VINE_WHIP
-	anim_incobj 5
-	anim_wait 2
-	anim_sound 16, 2, SFX_VINE_WHIP
-	anim_incobj 7
-	anim_wait 2
-	anim_sound 16, 2, SFX_VINE_WHIP
-	anim_incobj 9
-	anim_wait 2
-	anim_sound 16, 2, SFX_VINE_WHIP
-	anim_incobj 1
-	anim_wait 2
-	anim_sound 16, 2, SFX_VINE_WHIP
-	anim_incobj 2
-	anim_wait 2
-	anim_sound 16, 2, SFX_VINE_WHIP
-	anim_incobj 4
-	anim_wait 2
-	anim_sound 16, 2, SFX_VINE_WHIP
-	anim_incobj 6
-	anim_wait 2
-	anim_sound 16, 2, SFX_VINE_WHIP
-	anim_incobj 8
-	anim_wait 2
-	anim_sound 16, 2, SFX_VINE_WHIP
-	anim_incobj 10
-	anim_wait 64
+BattleAnim_LeafBlade:
+	anim_2gfx BATTLE_ANIM_GFX_PLANT, BATTLE_ANIM_GFX_CUT
+	anim_sound 0, 1, SFX_CUT
+	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 152, 40, $0
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $28
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $5c
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $10
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $e8
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $9c
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $d0
+	anim_wait 32
 	anim_ret
 
 BattleAnim_Solarbeam:
