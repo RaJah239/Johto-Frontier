@@ -161,6 +161,7 @@ ENDM
 	command facade                  ; be
 	command hurricaneaccuracy       ; bf
 	command farcommand              ; c0
+	command venoshock
 DEF NUM_EFFECT_COMMANDS EQU const_value - 1
 
 	const_def -1, -1

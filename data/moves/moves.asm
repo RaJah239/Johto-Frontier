@@ -191,7 +191,7 @@ Moves:
 	move FLAIL,        EFFECT_REVERSAL,            1, NORMAL,        PHYSICAL, 100, 15,   0
 	move HURRICANE,    EFFECT_HURRICANE,         110, FLYING,        SPECIAL,   70, 16,  30
 	move AEROBLAST,    EFFECT_LEECH_HIT,          95, FLYING,        SPECIAL,   90, 24,   0
-	move VENOSHOCK,    EFFECT_NORMAL_HIT,         65, POISON,        SPECIAL,  100, 24,   0
+	move VENOSHOCK,    EFFECT_VENOSHOCK,          65, POISON,        SPECIAL,  100, 24,   0
 	move IRON_BASH,    EFFECT_BODY_PRESS,         80, STEEL,         PHYSICAL, 100, 16,   0
 	move SPITE,        EFFECT_SPITE,               0, GHOST,         STATUS,   100, 10,   0
 	move POWDER_SNOW,  EFFECT_FREEZE_HIT,         40, ICE,           SPECIAL,  100, 25,  10
