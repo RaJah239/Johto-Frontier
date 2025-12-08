@@ -72,7 +72,7 @@ if DEF(_DEBUG)
 
 	; good party
 	givepoke MEW, 50, LEFTOVERS
-	givepoke SMEARGLE, 50, FOCUS_BAND
+	givepoke NOWN, 50, FOCUS_SASH
 	givepoke GYARADOS, 50, GOLD_BERRY
 
 	; 4th, 5th & 6th mons
@@ -94,10 +94,10 @@ if DEF(_DEBUG)
 	loadmem wPartyMon1Moves+3, DIVE_BOMB
 
 	; 2nd mon moves
-	loadmem wPartyMon2Moves+0, SPORE
-	loadmem wPartyMon2Moves+1, SWORDS_DANCE
-	loadmem wPartyMon2Moves+2, BATON_PASS
-	loadmem wPartyMon2Moves+3, AGILITY
+;	loadmem wPartyMon2Moves+0, SPORE
+;	loadmem wPartyMon2Moves+1, SWORDS_DANCE
+;	loadmem wPartyMon2Moves+2, BATON_PASS
+;	loadmem wPartyMon2Moves+3, AGILITY
 
 	; 3rd mon moves
 	loadmem wPartyMon3Moves+0, EARTHQUAKE

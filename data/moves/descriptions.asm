@@ -158,7 +158,7 @@ MoveDescriptions::
 	dw HiddenForceDescription
 	dw RestDescription
 	dw RockSlideDescription
-	dw HyperFangDescription
+	dw RunicPowerDescription
 	dw FacadeDescription
 	dw HexDescription
 	dw PhotonBlastDescription
@@ -785,10 +785,6 @@ RockSlideDescription:
 	db   "An attack that may"
 	line "cause flinching.@"
 
-HyperFangDescription:
-	db   "An attack that may"
-	line "cause flinching.@"
-
 FacadeDescription:
 	db   "Doubles damage if"
 	line "Psn, Brn, or Prz.@"
@@ -1096,6 +1092,7 @@ ExtremespeedDescription:
 	db   "A powerful first-"
 	line "strike move.@"
 
+RunicPowerDescription:
 SilverWindDescription:
 AncientpowerDescription:
 	db   "An attack that may"

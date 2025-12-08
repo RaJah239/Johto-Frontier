@@ -550,7 +550,7 @@ BattleAnimations::
 	dw BattleAnim_HiddenForce
 	dw BattleAnim_Rest
 	dw BattleAnim_RockSlide
-	dw BattleAnim_HyperFang
+	dw BattleAnim_RunicPower
 	dw BattleAnim_Facade
 	dw BattleAnim_Hex
 	dw BattleAnim_PhotonBlast
@@ -1163,14 +1163,35 @@ BattleAnim_FocusBlast:
 	anim_wait 24
 	anim_ret
 
-BattleAnim_HyperFang:
-	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $20, $1, $0
-	anim_sound 0, 1, SFX_BITE
-	anim_obj BATTLE_ANIM_OBJ_FANG, 136, 56, $0
-	anim_wait 6
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
+BattleAnim_RunicPower:
+	anim_1gfx ANIM_GFX_UNOWN
+	anim_call BattleAnim_TargetObj_1Row
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, $1, $20
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_obj ANIM_OBJ_UNOWN, 44, 88, $0
+	anim_obj ANIM_OBJ_UNOWN, 44, 88, $e
+	anim_obj ANIM_OBJ_UNOWN, 44, 88, $1c
+	anim_obj ANIM_OBJ_UNOWN, 44, 88, $2a
+	anim_obj ANIM_OBJ_UNOWN, 44, 88, $38
+.loop
+	anim_sound 0, 4, SFX_SWORDS_DANCE
+	anim_wait 8
+	anim_loop 6, .loop
+	anim_incbgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING
+	anim_call BattleAnim_ShowMon_0
+	anim_wait 1
+	anim_incobj  2
+	anim_incobj  3
+	anim_incobj  4
+	anim_incobj  5
+	anim_incobj  6
+	anim_incobj  7
+	anim_incobj  8
+	anim_incobj  9
 	anim_wait 16
+	anim_1gfx BATTLE_ANIM_GFX_EXPLOSION
+	anim_call BattleAnimSub_Explosion2
+	anim_wait 32
 	anim_ret
 
 BattleAnim_SuperFang:

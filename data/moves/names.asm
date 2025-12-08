@@ -157,7 +157,7 @@ MoveNames::
 	li "Hidden Force"
 	li "Rest"
 	li "Rock Slide"
-	li "Hyper Fang"
+	li "Runic Power"
 	li "Facade"
 	li "Hex"
 	li "Photon Blast"

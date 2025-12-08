@@ -163,7 +163,7 @@
 	const HIDDEN_FORCE ; 9b
 	const REST         ; 9c
 	const ROCK_SLIDE   ; 9d
-	const HYPER_FANG   ; 9e
+	const RUNIC_POWER  ; 9e
 	const FACADE       ; 9f
 	const HEX          ; a0
 	const PHOTON_BLAST ; a1

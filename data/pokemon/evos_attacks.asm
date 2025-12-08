@@ -263,7 +263,6 @@ EnteiEvosAttacks:
 SuicuneEvosAttacks:
 HoOhEvosAttacks:
 UnownEvosAttacks:
-NownEvosAttacks:
 VictiniEvosAttacks:
 CelebiEvosAttacks:
 DittoEvosAttacks:
@@ -271,4 +270,11 @@ MewEvosAttacks:
 MewtwoEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, SPLASH
+	db 0 ; no more level-up moves
+
+NownEvosAttacks:
+	db 0 ; no more evolutions
+	db 1, HIDDEN_POWER
+	db 1, HIDDEN_FORCE
+	db 1, RUNIC_POWER
 	db 0 ; no more level-up moves
