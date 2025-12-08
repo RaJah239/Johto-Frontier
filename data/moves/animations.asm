@@ -77,20 +77,6 @@
 ;	anim_wait 48
 ;	anim_ret
 
-; vanilla mind reader I think
-;BattleAnim_CalmMind:
-;	anim_1gfx BATTLE_ANIM_GFX_MISC
-;	anim_sound 0, 1, SFX_MIND_READER
-;.loop
-;	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 48, 88, $3
-;	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 48, 88, $12
-;	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 48, 88, $20
-;	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 48, 88, $31
-;	anim_wait 16
-;	anim_loop 2, .loop
-;	anim_wait 32
-;	anim_ret
-
 ;BattleAnim_MysticFire:
 ;	anim_2gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_SPEED
 ;	anim_bgp $f8
@@ -3333,6 +3319,18 @@ BattleAnim_Glare:
 	anim_ret
 
 BattleAnim_CalmMind:
+	anim_1gfx BATTLE_ANIM_GFX_MISC
+	anim_sound 0, 1, SFX_MIND_READER
+.loop
+	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 48, 88, $3
+	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 48, 88, $12
+	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 48, 88, $20
+	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 48, 88, $31
+	anim_wait 16
+	anim_loop 2, .loop
+	anim_wait 32
+	anim_ret
+
 BattleAnim_Growth:
 	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
 	anim_1gfx BATTLE_ANIM_GFX_CHARGE
@@ -5431,19 +5429,6 @@ BattleAnimSub_SpeedLines:
 ;	anim_wait 8
 ;	anim_loop 8, .loop2
 ;	anim_wait 128
-;	anim_ret
-
-;BattleAnim_MindReader:
-;	anim_1gfx BATTLE_ANIM_GFX_MISC
-;	anim_sound 0, 1, SFX_MIND_READER
-;.loop
-;	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 132, 48, $3
-;	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 132, 48, $12
-;	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 132, 48, $20
-;	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 132, 48, $31
-;	anim_wait 16
-;	anim_loop 2, .loop
-;	anim_wait 32
 ;	anim_ret
 
 ;BattleAnim_Meditate:
