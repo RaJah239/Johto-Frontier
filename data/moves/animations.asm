@@ -2502,6 +2502,11 @@ BattleAnim_LightScreen:
 	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_REFLECT
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
 	anim_sound 0, 0, SFX_FLASH
+	anim_call BattleAnim_LightScreen_Branch
+	anim_wait 64
+	anim_ret
+
+BattleAnim_LightScreen_Branch:
 	anim_obj BATTLE_ANIM_OBJ_SCREEN, 72, 80, $0
 	anim_wait 4
 	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $0
@@ -2520,7 +2525,6 @@ BattleAnim_LightScreen:
 	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $30
 	anim_wait 4
 	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $38
-	anim_wait 64
 	anim_ret
 
 BattleAnim_Amnesia:
@@ -3156,26 +3160,25 @@ BattleAnim_FlashCannon:
 	anim_ret
 
 BattleAnim_MirrorShot:
-	anim_1gfx BATTLE_ANIM_GFX_SPEED
+	anim_3gfx BATTLE_ANIM_GFX_REFLECT, BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_BEAM
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_sound 0, 0, SFX_FLASH
+	anim_call BattleAnim_LightScreen_Branch
+	anim_wait 24
+	anim_obj BATTLE_ANIM_OBJ_BEAM, 64, 92, $0
+	anim_wait 4
+	anim_sound 0, 0, SFX_FLASH
+	anim_obj BATTLE_ANIM_OBJ_BEAM, 80, 84, $0
+	anim_wait 4
 	anim_sound 0, 1, SFX_FLASH
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $6, $20
+	anim_obj BATTLE_ANIM_OBJ_BEAM, 96, 76, $0
 	anim_wait 4
-	anim_obj BATTLE_ANIM_OBJ_FLASH, 136, 56, $0
-	anim_wait 4
-	anim_obj BATTLE_ANIM_OBJ_FLASH, 136, 56, $8
-	anim_wait 4
-	anim_obj BATTLE_ANIM_OBJ_FLASH, 136, 56, $10
-	anim_wait 4
-	anim_obj BATTLE_ANIM_OBJ_FLASH, 136, 56, $18
-	anim_wait 4
-	anim_obj BATTLE_ANIM_OBJ_FLASH, 136, 56, $20
-	anim_wait 4
-	anim_obj BATTLE_ANIM_OBJ_FLASH, 136, 56, $28
-	anim_wait 4
-	anim_obj BATTLE_ANIM_OBJ_FLASH, 136, 56, $30
-	anim_wait 4
-	anim_obj BATTLE_ANIM_OBJ_FLASH, 136, 56, $38
-	anim_wait 32
+	anim_sound 0, 1, SFX_FLASH
+	anim_obj BATTLE_ANIM_OBJ_BEAM, 112, 68, $0
+	anim_obj BATTLE_ANIM_OBJ_BEAM_TIP, 126, 62, $0
+	anim_wait 16
+	anim_incobj  5
+	anim_wait 64
 	anim_ret
 
 BattleAnim_Substitute:
