@@ -178,7 +178,7 @@ MoveDescriptions::
 	dw FlailDescription
 	dw HurricaneDescription
 	dw AeroblastDescription
-	dw CottonSporeDescription
+	dw VenoshockDescription
 	dw IronBashDescription
 	dw SpiteDescription
 	dw PowderSnowDescription
@@ -845,9 +845,9 @@ FlailDescription:
 	db   "Stronger if the"
 	line "user's HP is low.@"
 
-CottonSporeDescription:
-	db   "Sharply reduces"
-	line "the foe's SPEED.@"
+VenoshockDescription:
+	db   "Double damage to"
+	line "poisoned foes.@"
 
 SpiteDescription:
 	db   "Cuts the PP of the"

@@ -183,7 +183,7 @@
 	const FLAIL        ; af
 	const HURRICANE    ; b0
 	const AEROBLAST    ; b1
-	const COTTON_SPORE ; b2
+	const VENOSHOCK    ; b2
 	const IRON_BASH    ; b3
 	const SPITE        ; b4
 	const POWDER_SNOW  ; b5

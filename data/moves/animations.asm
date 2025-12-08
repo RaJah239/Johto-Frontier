@@ -570,7 +570,7 @@ BattleAnimations::
 	dw BattleAnim_Flail
 	dw BattleAnim_Hurricane
 	dw BattleAnim_Aeroblast
-	dw BattleAnim_CottonSpore
+	dw BattleAnim_Venoshock
 	dw BattleAnim_IronBash
 	dw BattleAnim_Spite
 	dw BattleAnim_PowderSnow
@@ -3967,16 +3967,20 @@ BattleAnim_Aeroblast:
 	anim_wait 48
 	anim_ret
 
-BattleAnim_CottonSpore:
-	anim_obp0 $54
-	anim_1gfx BATTLE_ANIM_GFX_MISC
-	anim_sound 0, 1, SFX_POWDER
-.loop
-	anim_obj BATTLE_ANIM_OBJ_COTTON_SPORE, 132, 32, $0
+BattleAnim_Venoshock:
+	anim_1gfx BATTLE_ANIM_GFX_POISON
+	anim_call BattleAnim_UserObj_1Row
+	anim_bgeffect BATTLE_BG_EFFECT_BLACK_HUES, $0, $8, $0
+	anim_sound 6, 2, SFX_SLUDGE_BOMB
+	anim_obj BATTLE_ANIM_OBJ_ACID, 64, 92, $10
+	anim_wait 36
+	anim_sound 0, 1, SFX_THUNDER
 	anim_wait 8
-	anim_loop 5, .loop
-	anim_wait 96
-	anim_ret
+	anim_bgp $1b
+	anim_obp0 $30
+	anim_bgeffect BATTLE_BG_EFFECT_VIBRATE_MON, $0, $0, $0
+	anim_call BattleAnimSub_Sludge
+	anim_jump BattleAnim_ShowMon_1
 
 BattleAnim_Spite:
 	anim_1gfx BATTLE_ANIM_GFX_ANGELS
@@ -5286,7 +5290,7 @@ BattleAnimSub_Sludge:
 	anim_obj BATTLE_ANIM_OBJ_SLUDGE, 148, 72, $0
 	anim_wait 8
 	anim_loop 3, .loop
-	anim_wait 48
+	anim_wait 36
 	anim_ret
 
 BattleAnimSub_Acid:
@@ -5692,4 +5696,14 @@ BattleAnimSub_SpeedLines:
 ;	anim_sound 0, 1, SFX_SHINE
 ;	anim_obj BATTLE_ANIM_OBJ_FORESIGHT, 152, 40, $0
 ;	anim_wait 24
+;	anim_ret
+
+;	anim_obp0 $54
+;	anim_1gfx BATTLE_ANIM_GFX_MISC
+;	anim_sound 0, 1, SFX_POWDER
+;.loop
+;	anim_obj BATTLE_ANIM_OBJ_COTTON_SPORE, 132, 32, $0
+;	anim_wait 8
+;	anim_loop 5, .loop
+;	anim_wait 96
 ;	anim_ret

@@ -177,7 +177,7 @@ MoveNames::
 	li "Flail"
 	li "Hurricane"
 	li "Aeroblast"
-	li "Cotton Spore"
+	li "Venoshock"
 	li "Iron Bash"
 	li "Spite"
 	li "Powder Snow"

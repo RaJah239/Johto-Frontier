@@ -22,5 +22,4 @@ EncoreMoves:
 	db SUPER_FANG
 	db SUBSTITUTE
 	db SPIDER_WEB
-	db COTTON_SPORE
 	db -1 ; end
