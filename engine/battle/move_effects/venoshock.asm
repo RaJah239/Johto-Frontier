@@ -1,5 +1,6 @@
 BattleCommand_Venoshock:
 ; venoshock
+; note: can't seem to `farcommand` this
 
 ; get the opponent's status condition
 	ld a, BATTLE_VARS_STATUS_OPP
