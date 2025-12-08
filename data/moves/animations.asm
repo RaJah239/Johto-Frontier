@@ -524,7 +524,7 @@ BattleAnimations::
 	dw BattleAnim_Swift
 	dw BattleAnim_NightSlash
 	dw BattleAnim_SpikeCannon
-	dw BattleAnim_Constrict
+	dw BattleAnim_Overdrive
 	dw BattleAnim_Amnesia
 	dw BattleAnim_BugBuzz
 	dw BattleAnim_Softboiled
@@ -2249,6 +2249,7 @@ BattleAnim_Softboiled:
 	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
 	anim_jump BattleAnim_ShowMon_0
 
+BattleAnim_Overdrive:
 BattleAnim_BulkUp:
 BattleAnim_FocusEnergy:
 	anim_1gfx BATTLE_ANIM_GFX_SPEED
@@ -2359,19 +2360,6 @@ BattleAnim_Confusion:
 	anim_wait 128
 	anim_incbgeffect BATTLE_BG_EFFECT_NIGHT_SHADE
 	anim_jump BattleAnim_ShowMon_1
-
-BattleAnim_Constrict:
-	anim_1gfx BATTLE_ANIM_GFX_ROPE
-	anim_sound 0, 1, SFX_BIND
-	anim_obj BATTLE_ANIM_OBJ_BIND2, 132, 64, $0
-	anim_wait 8
-	anim_obj BATTLE_ANIM_OBJ_BIND1, 132, 48, $0
-	anim_wait 8
-	anim_obj BATTLE_ANIM_OBJ_BIND2, 132, 40, $0
-	anim_wait 8
-	anim_obj BATTLE_ANIM_OBJ_BIND1, 132, 56, $0
-	anim_wait 64
-	anim_ret
 
 BattleAnim_Earthquake:
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $4, $10
@@ -5706,4 +5694,17 @@ BattleAnimSub_SpeedLines:
 ;	anim_wait 8
 ;	anim_loop 5, .loop
 ;	anim_wait 96
+;	anim_ret
+
+;BattleAnim_Constrict:
+;	anim_1gfx BATTLE_ANIM_GFX_ROPE
+;	anim_sound 0, 1, SFX_BIND
+;	anim_obj BATTLE_ANIM_OBJ_BIND2, 132, 64, $0
+;	anim_wait 8
+;	anim_obj BATTLE_ANIM_OBJ_BIND1, 132, 48, $0
+;	anim_wait 8
+;	anim_obj BATTLE_ANIM_OBJ_BIND2, 132, 40, $0
+;	anim_wait 8
+;	anim_obj BATTLE_ANIM_OBJ_BIND1, 132, 56, $0
+;	anim_wait 64
 ;	anim_ret

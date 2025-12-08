@@ -132,7 +132,7 @@ MoveDescriptions::
 	dw SwiftDescription
 	dw NightSlashDescription
 	dw SpikeCannonDescription
-	dw ConstrictDescription
+	dw OverdriveDescription
 	dw AmnesiaDescription
 	dw BugBuzzDescription
 	dw SoftboiledDescription
@@ -711,9 +711,9 @@ SpikeCannonDescription:
 	db   "Fires spikes to"
 	line "hit 2-5 times.@"
 
-ConstrictDescription:
-	db   "An attack that may"
-	line "lower SPEED.@"
+OverdriveDescription:
+	db "Drop Defenses to"
+	line "Up Attack & Speed.@"
 
 AmnesiaDescription:
 	db   "Sharply raises the"

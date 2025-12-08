@@ -137,7 +137,7 @@
 	const SWIFT        ; 81
 	const NIGHT_SLASH  ; 82
 	const SPIKE_CANNON ; 83
-	const CONSTRICT    ; 84
+	const OVERDRIVE    ; 84
 	const AMNESIA      ; 85
 	const BUG_BUZZ     ; 86
 	const SOFTBOILED   ; 87

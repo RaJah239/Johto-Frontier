@@ -145,7 +145,7 @@ Moves:
 	move SWIFT,        EFFECT_ALWAYS_HIT,         60, STEEL,         SPECIAL,  100, 32,   0
 	move NIGHT_SLASH,  EFFECT_NORMAL_HIT,         70, DARK,          PHYSICAL, 100, 32,   0
 	move SPIKE_CANNON, EFFECT_MULTI_HIT,          20, NORMAL,        PHYSICAL, 100, 15,   0
-	move CONSTRICT,    EFFECT_SPEED_DOWN_HIT,     10, NORMAL,        PHYSICAL, 100, 35,  10
+	move OVERDRIVE,    EFFECT_OVERDRIVE,           0, NORMAL,        STATUS,   100, 24,   0
 	move AMNESIA,      EFFECT_SP_DEF_UP_2,         0, PSYCHIC_TYPE,  STATUS,   100, 20,   0
 	move BUG_BUZZ,     EFFECT_SP_DEF_DOWN_HIT,    95, BUG,           SPECIAL,  100, 24,  30
 	move SOFTBOILED,   EFFECT_HEAL,                0, NORMAL,        STATUS,   100, 10,   0
