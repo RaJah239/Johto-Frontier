@@ -6,8 +6,7 @@ _2DMenu_::
 	call Draw2DMenu
 	call UpdateSprites
 	call ApplyTilemap
-	call Get2DMenuSelection
-	ret
+	jmp Get2DMenuSelection
 
 _InterpretBattleMenu::
 	ld hl, CopyMenuData
@@ -60,8 +59,7 @@ _InterpretMobileMenu::
 	ld a, [wMenuJoypadFilter]
 	and c
 	jr z, .loop
-	call Mobile_GetMenuSelection
-	ret
+	jmp Mobile_GetMenuSelection
 
 .quit
 	ld a, [w2DMenuNumCols]
@@ -76,8 +74,7 @@ Draw2DMenu:
 	xor a
 	ldh [hBGMapMode], a
 	call MenuBox
-	call Place2DMenuItemStrings
-	ret
+	jmp Place2DMenuItemStrings
 
 Get2DMenuSelection:
 	call Init2DMenuCursorPosition
@@ -326,19 +323,17 @@ MenuJoypadLoop:
 	call Move2DMenuCursor
 	call .BGMap_OAM
 	call Do2DMenuRTCJoypad
-	jr nc, .done
+	ret nc
 	call _2DMenuInterpretJoypad
-	jr c, .done
+	ret c
 	ld a, [w2DMenuFlags1]
 	bit 7, a
-	jr nz, .done
+	ret nz
 	call GetMenuJoypad
 	ld b, a
 	ld a, [wMenuJoypadFilter]
 	and b
 	jr z, .loop
-
-.done
 	ret
 
 .BGMap_OAM:
@@ -386,13 +381,13 @@ Menu_WasButtonPressed:
 _2DMenuInterpretJoypad:
 	call GetMenuJoypad
 	bit A_BUTTON_F, a
-	jmp nz, .a_b_start_select
+	jmp nz, .finish
 	bit B_BUTTON_F, a
-	jmp nz, .a_b_start_select
+	jmp nz, .finish
 	bit SELECT_F, a
-	jmp nz, .a_b_start_select
+	jmp nz, .finish
 	bit START_F, a
-	jmp nz, .a_b_start_select
+	jmp nz, .finish
 	bit D_RIGHT_F, a
 	jr nz, .d_right
 	bit D_LEFT_F, a
@@ -416,8 +411,7 @@ _2DMenuInterpretJoypad:
 	cp [hl]
 	jr z, .check_wrap_around_down
 	inc [hl]
-	xor a
-	ret
+	jr .finish
 
 .check_wrap_around_down
 	ld a, [w2DMenuFlags1]
@@ -425,13 +419,11 @@ _2DMenuInterpretJoypad:
 	jr nz, .wrap_around_down
 	bit 3, a
 	jr nz, .set_bit_7
-	xor a
-	ret
+	jr .finish
 
 .wrap_around_down
 	ld [hl], $1
-	xor a
-	ret
+	jr .finish
 
 .d_up
 	ld hl, wMenuCursorY
@@ -439,8 +431,7 @@ _2DMenuInterpretJoypad:
 	dec a
 	jr z, .check_wrap_around_up
 	ld [hl], a
-	xor a
-	ret
+	jr .finish
 
 .check_wrap_around_up
 	ld a, [w2DMenuFlags1]
@@ -448,14 +439,12 @@ _2DMenuInterpretJoypad:
 	jr nz, .wrap_around_up
 	bit 2, a
 	jr nz, .set_bit_7
-	xor a
-	ret
+	jr .finish
 
 .wrap_around_up
 	ld a, [w2DMenuNumRows]
 	ld [hl], a
-	xor a
-	ret
+	jr .finish
 
 .d_left
 	ld hl, wMenuCursorX
@@ -463,8 +452,7 @@ _2DMenuInterpretJoypad:
 	dec a
 	jr z, .check_wrap_around_left
 	ld [hl], a
-	xor a
-	ret
+	jr .finish
 
 .check_wrap_around_left
 	ld a, [w2DMenuFlags1]
@@ -472,14 +460,12 @@ _2DMenuInterpretJoypad:
 	jr nz, .wrap_around_left
 	bit 1, a
 	jr nz, .set_bit_7
-	xor a
-	ret
+	jr .finish
 
 .wrap_around_left
 	ld a, [w2DMenuNumCols]
 	ld [hl], a
-	xor a
-	ret
+	jr .finish
 
 .d_right
 	ld hl, wMenuCursorX
@@ -487,8 +473,7 @@ _2DMenuInterpretJoypad:
 	cp [hl]
 	jr z, .check_wrap_around_right
 	inc [hl]
-	xor a
-	ret
+	jr .finish
 
 .check_wrap_around_right
 	ld a, [w2DMenuFlags1]
@@ -496,15 +481,11 @@ _2DMenuInterpretJoypad:
 	jr nz, .wrap_around_right
 	bit 0, a
 	jr nz, .set_bit_7
-	xor a
-	ret
+	jr .finish
 
 .wrap_around_right
 	ld [hl], $1
-	xor a
-	ret
-
-.a_b_start_select
+.finish
 	xor a
 	ret
 
@@ -622,7 +603,6 @@ _PushWindow::
 
 .done
 	pop hl
-	call .ret ; empty function
 	ld a, h
 	ld [de], a
 	dec de
@@ -644,7 +624,6 @@ _PushWindow::
 	call GetMenuBoxDims
 	inc b
 	inc c
-	call .ret ; empty function
 
 .row
 	push bc
@@ -663,10 +642,6 @@ _PushWindow::
 	pop bc
 	dec b
 	jr nz, .row
-
-	ret
-
-.ret
 	ret
 
 _ExitMenu::
@@ -706,38 +681,6 @@ _ExitMenu::
 	ldh [rSVBK], a
 	ld hl, wWindowStackSize
 	dec [hl]
-	ret
-
-RestoreOverworldMapTiles: ; unreferenced
-	ld a, [wStateFlags]
-	bit SPRITE_UPDATES_DISABLED_F, a
-	ret z
-	xor a ; sScratch
-	call OpenSRAM
-	hlcoord 0, 0
-	ld de, sScratch
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call CopyBytes
-	call CloseSRAM
-	call LoadOverworldTilemapAndAttrmapPals
-	xor a ; sScratch
-	call OpenSRAM
-	ld hl, sScratch
-	decoord 0, 0
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-.loop
-	ld a, [hl]
-	cp $61
-	jr c, .next
-	ld [de], a
-.next
-	inc hl
-	inc de
-	dec bc
-	ld a, c
-	or b
-	jr nz, .loop
-	call CloseSRAM
 	ret
 
 Error_Cant_ExitMenu:
