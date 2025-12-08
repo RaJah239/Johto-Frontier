@@ -378,26 +378,18 @@ MonSubMenu_GetNextEvoAttackByte:
 	and a
 	jr z, .yes
 
-; Step 3: Check if HM is in bag
-	ld a, HM_FLY
-	ld [wCurItem], a
-	ld hl, wNumItems
-	call CheckItem
-	ret nc ; .fail, hm isnt in bag
-
-; Step 4: Check if mon can learn move via HM/TM/Move Tutor
+; Step 3: Check if mon can learn move via HM/TM/Move Tutor
 	ld a, FLY
 	call CheckMonCanLearn_TM_HM
 	jr c, .yes
 
-; Step 5: Check if Mon can learn move via LVL-UP
+; Step 4: Check if Mon can learn move via LVL-UP
 	ld a, FLY
 	call CheckLvlUpMoves
 	ret c ; fail
 .yes
 	ld a, MONMENUITEM_FLY
-	call AddMonMenuItem
-	ret
+	jmp AddMonMenuItem
 	
 	CanUseDig:
 ; Step 1: Location Check
