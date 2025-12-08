@@ -95,7 +95,7 @@ MoveNames::
 	li "Confusion"
 	li "Psychic"
 	li "Hypnosis"
-	li "Meditate"
+	li "Dive Bomb"
 	li "Agility"
 	li "Quick Attack"
 	li "Iron Head"

@@ -91,7 +91,7 @@ if DEF(_DEBUG)
 	loadmem wPartyMon1Moves+0, PSYSHOCK
 	loadmem wPartyMon1Moves+1, SACRED_FIRE
 	loadmem wPartyMon1Moves+2, AEROBLAST
-	loadmem wPartyMon1Moves+3, RECOVER
+	loadmem wPartyMon1Moves+3, DIVE_BOMB
 
 	; 2nd mon moves
 	loadmem wPartyMon2Moves+0, SPORE

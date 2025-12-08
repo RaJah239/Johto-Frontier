@@ -488,7 +488,7 @@ BattleAnimations::
 	dw BattleAnim_Confusion
 	dw BattleAnim_PsychicM
 	dw BattleAnim_Hypnosis
-	dw BattleAnim_Meditate
+	dw BattleAnim_DiveBomb
 	dw BattleAnim_Agility
 	dw BattleAnim_QuickAttack
 	dw BattleAnim_IronHead
@@ -3405,15 +3405,18 @@ BattleAnim_QuickAttack:
 	anim_wait 16
 	anim_ret
 
-BattleAnim_Meditate:
-	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_call BattleAnim_TargetObj_1Row
-	anim_sound 0, 0, SFX_PSYBEAM
-	anim_bgeffect BATTLE_BG_EFFECT_WAVE_DEFORM_MON, $0, BG_EFFECT_USER, $0
-	anim_wait 48
-	anim_incbgeffect BATTLE_BG_EFFECT_WAVE_DEFORM_MON
-	anim_wait 48
-	anim_jump BattleAnim_ShowMon_0
+BattleAnim_DiveBomb:
+	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_HIT
+	anim_if_param_equal $1, BattleAnim_HiJumpKick
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $1, $0
+	anim_bgeffect BATTLE_BG_EFFECT_HIDE_MON, $0, $1, $0
+	anim_sound 0, 0, SFX_OUTRAGE
+	anim_call BattleAnim_DiveBomb_Branch
+	anim_wait 32
+	anim_call BattleAnim_OutrageHit
+	anim_wait 16
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
+	anim_ret
 
 BattleAnim_Facade:
 	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_WATER
@@ -4282,6 +4285,7 @@ BattleAnim_Outrage:
 	anim_wait 72
 	anim_incbgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING
 	anim_call BattleAnim_ShowMon_0
+BattleAnim_OutrageHit:
 	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $3
 	anim_sound 0, 1, SFX_MOVE_PUZZLE_PIECE
 	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 120, 72, $0
@@ -5124,6 +5128,7 @@ BattleAnimSub_EyeBeams:
 
 BattleAnimSub_WarpAway:
 	anim_sound 0, 0, SFX_WARP_TO
+BattleAnim_DiveBomb_Branch:
 	anim_obj BATTLE_ANIM_OBJ_WARP, 44, 108, $0
 	anim_obj BATTLE_ANIM_OBJ_WARP, 44, 100, $0
 	anim_obj BATTLE_ANIM_OBJ_WARP, 44, 92, $0

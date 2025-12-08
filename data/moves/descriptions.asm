@@ -96,7 +96,7 @@ MoveDescriptions::
 	dw ConfusionDescription
 	dw PsychicMDescription
 	dw HypnosisDescription
-	dw MeditateDescription
+	dw DiveBombDescription
 	dw AgilityDescription
 	dw QuickAttackDescription
 	dw IronHeadDescription
@@ -604,10 +604,6 @@ HypnosisDescription:
 	db   "May put the foe to"
 	line "sleep.@"
 
-MeditateDescription:
-	db   "Raises the user's"
-	line "ATTACK.@"
-
 AgilityDescription:
 	db   "Sharply increases"
 	line "the user's SPEED.@"
@@ -728,6 +724,7 @@ SoftboiledDescription:
 	db   "Restores HP by 1/2"
 	line "the user's max HP.@"
 
+DiveBombDescription:
 HiJumpKickDescription:
 	db   "May miss and hurt"
 	line "the user.@"
