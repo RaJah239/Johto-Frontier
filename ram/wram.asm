@@ -491,8 +491,9 @@ wPlayerTurnsTaken:: db
 wPlayerSubstituteHP:: db
 wEnemySubstituteHP::  db
 
+wTeamHighestLevel:: db
+
 wUnusedPlayerLockedMove:: db
-	ds 1
 
 wCurPlayerMove:: db
 wCurEnemyMove::  db
