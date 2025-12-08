@@ -77,54 +77,6 @@
 ;	anim_wait 48
 ;	anim_ret
 
-;BattleAnim_MysticFire:
-;	anim_2gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_SPEED
-;	anim_bgp $f8
-;	anim_wait 8
-;	anim_sound 6, 2, SFX_SLUDGE_BOMB
-;	anim_bgeffect BATTLE_BG_EFFECT_VIBRATE_MON, $0, $0, $0
-;	anim_wait 40
-;	anim_bgp $1b
-;	anim_sound 0, 0, SFX_CURSE
-;	anim_bgeffect BATTLE_BG_EFFECT_VIBRATE_MON, $0, $0, $0
-;.loop
-;	anim_obj BATTLE_ANIM_OBJ_HEX, 136, 72, $6
-;	anim_wait 2
-;	anim_obj BATTLE_ANIM_OBJ_HEX, 128, 72, $6
-;	anim_wait 2
-;	anim_obj BATTLE_ANIM_OBJ_BLUE_FLAME, 128, 54, $10
-;	anim_obj BATTLE_ANIM_OBJ_HEX, 144, 72, $8
-;	anim_wait 2
-;	anim_obj BATTLE_ANIM_OBJ_HEX, 120, 72, $8
-;	anim_wait 2
-;	anim_obj BATTLE_ANIM_OBJ_HEX, 152, 72, $6
-;	anim_wait 2
-;	anim_obj BATTLE_ANIM_OBJ_BLUE_FLAME, 144, 38, $90
-;	anim_obj BATTLE_ANIM_OBJ_HEX, 112, 72, $8
-;	anim_wait 2
-;	anim_obj BATTLE_ANIM_OBJ_HEX, 160, 72, $8
-;	anim_wait 2
-;	anim_loop 3, .loop
-;	anim_wait 8
-;	anim_wait 16
-;	anim_ret
-
-;BattleAnim_Boomburst:
-;	anim_2gfx BATTLE_ANIM_GFX_NOISE, BATTLE_ANIM_GFX_PSYCHIC
-;.loop
-;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $14, $2, $0
-;	anim_sound 0, 0, SFX_SNORE
-;	anim_call BattleAnimSub_Sound
-;	anim_obj BATTLE_ANIM_OBJ_WAVE,  7, 0, 11, 0, $2
-;	anim_obj BATTLE_ANIM_OBJ_WAVE,  7, 0, 13, 0, $2
-;	anim_obj BATTLE_ANIM_OBJ_WAVE,  9, 0, 11, 0, $2
-;	anim_obj BATTLE_ANIM_OBJ_WAVE,  9, 0, 13, 0, $2
-;	anim_sound 6, 2, SFX_SCREECH
-;	anim_wait 24
-;	anim_loop 2, .loop
-;	anim_wait 24
-;	anim_ret
-
 ;BattleAnim_ShadowClaw:
 ;	anim_1gfx BATTLE_ANIM_GFX_CUT
 ;	anim_sound 0, 0, SFX_CURSE
@@ -4028,29 +3980,16 @@ BattleAnim_ScaryFace:
 	anim_ret
 
 BattleAnim_HyperVoice:
-	anim_2gfx BATTLE_ANIM_GFX_NOISE, BATTLE_ANIM_GFX_SPEED
-	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_BLACK_REPEATING
-	anim_wait 1
-	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT, $0, BG_EFFECT_USER, $40, $0, $1, $40
-.loop1
-	anim_call BattleAnim_SubFocusingAnim
-	anim_loop 2, .loop1
-	anim_wait 8
-	anim_battlergfx_2row
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
-	anim_cry $0
-.loop2
+	anim_2gfx BATTLE_ANIM_GFX_NOISE, BATTLE_ANIM_GFX_PSYCHIC
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $14, $2, $0
+	anim_sound 0, 0, SFX_SNORE
 	anim_call BattleAnimSub_Sound
-	anim_wait 16
-	anim_loop 3, .loop2
-	anim_wait 9
-	anim_bgeffect BATTLE_BG_EFFECT_BATTLEROBJ_1ROW, $0, $1, $0
-	anim_wait 8
-	anim_wait 1
-	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
-	anim_wait 5
-	anim_incobj 10
-	anim_wait 8
+	anim_obj BATTLE_ANIM_OBJ_WAVE,  7, 0, 11, 0, $2
+	anim_obj BATTLE_ANIM_OBJ_WAVE,  7, 0, 13, 0, $2
+	anim_obj BATTLE_ANIM_OBJ_WAVE,  9, 0, 11, 0, $2
+	anim_obj BATTLE_ANIM_OBJ_WAVE,  9, 0, 13, 0, $2
+	anim_cry $0
+	anim_wait 48
 	anim_ret
 
 BattleAnim_SuckerPunch:
