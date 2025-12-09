@@ -1993,8 +1993,18 @@ BattleAnim_Softboiled:
 	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
 	anim_jump BattleAnim_ShowMon_0
 
-BattleAnim_Overdrive:
 BattleAnim_BulkUp:
+	anim_2gfx BATTLE_ANIM_GFX_MISC, BATTLE_ANIM_GFX_WIND
+.loop
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, 8, $2, $0
+	anim_sound 0, 0, SFX_NOT_VERY_EFFECTIVE
+	anim_obj BATTLE_ANIM_OBJ_SWAGGER,  9, 4, 11, 0, $44
+	anim_wait 32
+	anim_loop 2, .loop
+	anim_wait 16
+	anim_ret
+
+BattleAnim_Overdrive:
 BattleAnim_FocusEnergy:
 	anim_1gfx BATTLE_ANIM_GFX_SPEED
 	anim_call BattleAnim_TargetObj_1Row
