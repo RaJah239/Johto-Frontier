@@ -190,7 +190,7 @@ Moves:
 	move CURSE,        EFFECT_CURSE,               0, CURSE_TYPE,    STATUS,   100, 10,   0
 	move FLAIL,        EFFECT_REVERSAL,            1, NORMAL,        PHYSICAL, 100, 15,   0
 	move HURRICANE,    EFFECT_HURRICANE,         110, FLYING,        SPECIAL,   70, 16,  30
-	move AEROBLAST,    EFFECT_LEECH_HIT,          95, FLYING,        SPECIAL,   90, 24,   0
+	move AEROBLAST,    EFFECT_LEECH_HIT,          95, FLYING,        SPECIAL,   95, 24,   0
 	move VENOSHOCK,    EFFECT_VENOSHOCK,          65, POISON,        SPECIAL,  100, 24,   0
 	move IRON_BASH,    EFFECT_BODY_PRESS,         80, STEEL,         PHYSICAL, 100, 16,   0
 	move SPITE,        EFFECT_SPITE,               0, GHOST,         STATUS,   100, 10,   0
@@ -234,7 +234,7 @@ Moves:
 	move AURA_SPHERE,  EFFECT_ALWAYS_HIT,         80, FIGHTING,      SPECIAL,  100, 24,   0
 	move SAFEGUARD,    EFFECT_SAFEGUARD,           0, NORMAL,        STATUS,   100, 25,   0
 	move PAIN_SPLIT,   EFFECT_PAIN_SPLIT,          0, NORMAL,        STATUS,   100, 20,   0
-	move SACRED_FIRE,  EFFECT_SACRED_FIRE,        95, FIRE,          PHYSICAL,  90, 24,  10
+	move SACRED_FIRE,  EFFECT_SACRED_FIRE,        95, FIRE,          PHYSICAL,  95, 24,  10
 	move QUIVER_DANCE, EFFECT_QUIVER_DANCE,        0, BUG,           STATUS,   100, 24,   0
 	move METEOR_MASH,  EFFECT_ATTACK_UP_HIT,     100, STEEL,         PHYSICAL,  90, 16,  20
 	move MEGAHORN,     EFFECT_NORMAL_HIT,        120, BUG,           PHYSICAL,  85, 16,   0
