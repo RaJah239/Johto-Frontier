@@ -1071,7 +1071,26 @@ BattleAnim_FireBlast:
 BattleAnim_IcePunch:
 	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_ICE
 	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 56, $43
-	anim_call BattleAnimSub_Ice
+	; fallthrough
+
+BattleAnimSub_Ice:
+	anim_sound 0, 1, SFX_SHINE
+	anim_obj BATTLE_ANIM_OBJ_ICE, 128, 42, $0
+	anim_wait 6
+	anim_sound 0, 1, SFX_SHINE
+	anim_obj BATTLE_ANIM_OBJ_ICE, 144, 70, $0
+	anim_wait 6
+	anim_sound 0, 1, SFX_SHINE
+	anim_obj BATTLE_ANIM_OBJ_ICE, 120, 56, $0
+	anim_wait 6
+	anim_sound 0, 1, SFX_SHINE
+	anim_obj BATTLE_ANIM_OBJ_ICE, 152, 56, $0
+	anim_wait 6
+	anim_sound 0, 1, SFX_SHINE
+	anim_obj BATTLE_ANIM_OBJ_ICE, 144, 42, $0
+	anim_wait 6
+	anim_sound 0, 1, SFX_SHINE
+	anim_obj BATTLE_ANIM_OBJ_ICE, 128, 70, $0
 	anim_wait 32
 	anim_ret
 
@@ -1205,9 +1224,6 @@ BattleAnim_Blizzard:
 	anim_obj BATTLE_ANIM_OBJ_BLIZZARD, 64, 96, $63
 	anim_wait 2
 	anim_loop 3, .loop
-	; fallthrough
-
-BattleAnim_FreezeDry:
 	anim_1gfx BATTLE_ANIM_GFX_ICE
 	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
 	anim_wait 32
@@ -1218,6 +1234,23 @@ BattleAnim_FreezeDry:
 	anim_sound 0, 1, SFX_SHINE
 	anim_wait 24
 	anim_ret
+
+BattleAnim_FreezeDry:
+	anim_1gfx BATTLE_ANIM_GFX_ICE
+.loop
+	anim_sound 6, 2, SFX_SHINE
+	anim_obj BATTLE_ANIM_OBJ_POWDER_SNOW, 64, 88, $23
+	anim_wait 2
+	anim_sound 6, 2, SFX_SHINE
+	anim_obj BATTLE_ANIM_OBJ_POWDER_SNOW, 64, 80, $24
+	anim_wait 2
+	anim_sound 6, 2, SFX_SHINE
+	anim_obj BATTLE_ANIM_OBJ_POWDER_SNOW, 64, 96, $23
+	anim_wait 2
+	anim_loop 2, .loop
+	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
+	anim_wait 40
+	anim_jump BattleAnimSub_Ice
 
 BattleAnim_Bubblebeam:
 	anim_1gfx BATTLE_ANIM_GFX_BUBBLE
@@ -2031,9 +2064,7 @@ BattleAnim_Avalanche:
     anim_obj BATTLE_ANIM_OBJ_BIG_ROCK, 144, 64, $40
     anim_wait 4
 	anim_call BattleAnimSub_Ice
-    anim_sound 0, 1, SFX_SHINE
     anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 136, 68, $30
-    anim_wait 32
     anim_ret
 
 BattleAnim_IcicleCrash:
@@ -4885,26 +4916,6 @@ BattleAnimSub_Sound:
 	anim_obj BATTLE_ANIM_OBJ_SOUND, 64, 100, $2
 	anim_ret
 
-BattleAnimSub_Ice:
-	anim_sound 0, 1, SFX_SHINE
-	anim_obj BATTLE_ANIM_OBJ_ICE, 128, 42, $0
-	anim_wait 6
-	anim_sound 0, 1, SFX_SHINE
-	anim_obj BATTLE_ANIM_OBJ_ICE, 144, 70, $0
-	anim_wait 6
-	anim_sound 0, 1, SFX_SHINE
-	anim_obj BATTLE_ANIM_OBJ_ICE, 120, 56, $0
-	anim_wait 6
-	anim_sound 0, 1, SFX_SHINE
-	anim_obj BATTLE_ANIM_OBJ_ICE, 152, 56, $0
-	anim_wait 6
-	anim_sound 0, 1, SFX_SHINE
-	anim_obj BATTLE_ANIM_OBJ_ICE, 144, 42, $0
-	anim_wait 6
-	anim_sound 0, 1, SFX_SHINE
-	anim_obj BATTLE_ANIM_OBJ_ICE, 128, 70, $0
-	anim_ret
-
 BattleAnimSub_Acid:
 .loop
 	anim_sound 6, 2, SFX_BUBBLEBEAM
@@ -5089,25 +5100,6 @@ BattleAnimSub_SpeedLines:
 ;	anim_wait 24
 ;	anim_incbgeffect BATTLE_BG_EFFECT_DOUBLE_TEAM
 ;	anim_call BattleAnim_ShowMon_0
-;	anim_ret
-
-;BattleAnim_PowderSnow:
-;	anim_1gfx BATTLE_ANIM_GFX_ICE
-;.loop
-;	anim_sound 6, 2, SFX_SHINE
-;	anim_obj BATTLE_ANIM_OBJ_POWDER_SNOW, 64, 88, $23
-;	anim_wait 2
-;	anim_sound 6, 2, SFX_SHINE
-;	anim_obj BATTLE_ANIM_OBJ_POWDER_SNOW, 64, 80, $24
-;	anim_wait 2
-;	anim_sound 6, 2, SFX_SHINE
-;	anim_obj BATTLE_ANIM_OBJ_POWDER_SNOW, 64, 96, $23
-;	anim_wait 2
-;	anim_loop 2, .loop
-;	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
-;	anim_wait 40
-;	anim_call BattleAnimSub_Ice
-;	anim_wait 32
 ;	anim_ret
 
 ;BattleAnim_Frustration:
