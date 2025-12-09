@@ -89,9 +89,9 @@ if DEF(_DEBUG)
 
 	; 1st mon moves
 	loadmem wPartyMon1Moves+0, PSYSHOCK
-	loadmem wPartyMon1Moves+1, SHADOW_BALL
-	loadmem wPartyMon1Moves+2, RUNIC_POWER
-;	loadmem wPartyMon1Moves+3, DIVE_BOMB
+	loadmem wPartyMon1Moves+1, AEROBLAST
+	loadmem wPartyMon1Moves+2, SACRED_FIRE
+	loadmem wPartyMon1Moves+3, DIVE_BOMB
 
 	; 2nd mon moves
 ;	loadmem wPartyMon2Moves+0, SPORE
