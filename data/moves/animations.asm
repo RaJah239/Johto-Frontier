@@ -2414,9 +2414,11 @@ BattleAnim_FocusBlast:
 	anim_incbgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING
 	anim_bgp $1b
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $2, $0
-	anim_sound 0, 0, SFX_AEROBLAST
+.loop
+	anim_sound 6, 2, SFX_AEROBLAST
 	anim_obj BATTLE_ANIM_OBJ_WAVE, 64, 88, $2
-	anim_call BattleAnim_UserObj_1Row
+	anim_wait 8
+	anim_loop 6, .loop
 	anim_bgeffect BATTLE_BG_EFFECT_VIBRATE_MON, $0, $0, $0
 	anim_wait 32
 	anim_call BattleAnim_ShowMon_1
