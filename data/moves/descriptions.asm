@@ -275,8 +275,8 @@ TrickRoomDescription:
 	line "order for 5 turns.@"
 
 FakeOutDescription:
-	db   "A first-turn,"
-	next "first-strike move.@"
+	db   "A first-turn only"
+	line "flinching move.@"
 
 StoneEdgeDescription:
 ThroatChopDescription:

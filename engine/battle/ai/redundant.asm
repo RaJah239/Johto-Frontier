@@ -46,7 +46,7 @@ AI_Redundant:
 	db -1
 
 .FakeOut:
-	ld a, [wPlayerTurnsTaken]
+	ld a, [wEnemyTurnsTaken]
 	and a
 	ret
 
