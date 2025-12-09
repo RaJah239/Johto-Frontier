@@ -194,6 +194,7 @@ BattleAnimFrameData:
 	dw .Frameset_Icicle              ; BATTLE_ANIM_FRAMESET_ICICLE
 	dw .Frameset_WaterBall           ; BATTLE_ANIM_FRAMESET_WATER_BALL
 	dw .Frameset_GrowingHeart        ; BATTLE_ANIM_FRAMESET_GROWING_HEART
+	dw .Frameset_StoneEdge           ; BATTLE_ANIM_FRAMESET_STONE_EDGE
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
 .Frameset_HitBig:
@@ -1301,6 +1302,10 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_54,  1
 	oamframe BATTLE_ANIM_OAMSET_53,  1
 	oamrestart
+
+.Frameset_StoneEdge:
+	oamframe BATTLE_ANIM_OAMSET_STONE_EDGE, 50
+	oamdelete
 
 .Frameset_Icicle:
 	oamframe BATTLE_ANIM_OAMSET_ICICLE, 8
