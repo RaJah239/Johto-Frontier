@@ -915,37 +915,6 @@ BattleAnim_SignalBeam:
 	anim_wait 64
 	anim_ret
 
-BattleAnim_RunicPower:
-	anim_1gfx ANIM_GFX_UNOWN
-	anim_call BattleAnim_TargetObj_1Row
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, $1, $20
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
-	anim_obj ANIM_OBJ_UNOWN, 44, 88, $0
-	anim_obj ANIM_OBJ_UNOWN, 44, 88, $e
-	anim_obj ANIM_OBJ_UNOWN, 44, 88, $1c
-	anim_obj ANIM_OBJ_UNOWN, 44, 88, $2a
-	anim_obj ANIM_OBJ_UNOWN, 44, 88, $38
-.loop
-	anim_sound 0, 4, SFX_SWORDS_DANCE
-	anim_wait 8
-	anim_loop 6, .loop
-	anim_incbgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING
-	anim_call BattleAnim_ShowMon_0
-	anim_wait 1
-	anim_incobj  2
-	anim_incobj  3
-	anim_incobj  4
-	anim_incobj  5
-	anim_incobj  6
-	anim_incobj  7
-	anim_incobj  8
-	anim_incobj  9
-	anim_wait 16
-	anim_1gfx BATTLE_ANIM_GFX_EXPLOSION
-	anim_call BattleAnimSub_Explosion2
-	anim_wait 32
-	anim_ret
-
 BattleAnim_SuperFang:
 	anim_1gfx BATTLE_ANIM_GFX_HIT
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $40, $2, $0
@@ -4597,32 +4566,17 @@ BattleAnim_Crunch:
 BattleAnim_HiddenPower:
 	anim_1gfx BATTLE_ANIM_GFX_CHARGE
 	anim_call BattleAnim_TargetObj_1Row
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, BG_EFFECT_USER, $20
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, $1, $20
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
 	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $0
-	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $8
-	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $10
-	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $18
-	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $20
-	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $28
-	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $30
+	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $e
+	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $1c
+	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $2a
 	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $38
-.loop
-	anim_sound 0, 0, SFX_SWORDS_DANCE
-	anim_wait 8
-	anim_loop 4, .loop
+	anim_call BattleAnim_HiddenSfxSub
 	anim_incbgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING
 	anim_call BattleAnim_ShowMon_0
-	anim_wait 1
-	anim_incobj 2
-	anim_incobj 3
-	anim_incobj 4
-	anim_incobj 5
-	anim_incobj 6
-	anim_incobj 7
-	anim_incobj 8
-	anim_incobj 9
-	anim_wait 16
+	anim_call BattleAnim_HiddenSpinningSub
 	anim_1gfx BATTLE_ANIM_GFX_HIT
 	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 56, $0
 	anim_wait 16
@@ -4631,37 +4585,61 @@ BattleAnim_HiddenPower:
 BattleAnim_HiddenForce:
 	anim_1gfx BATTLE_ANIM_GFX_CHARGE
 	anim_call BattleAnim_TargetObj_1Row
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, BG_EFFECT_USER, $20
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, $1, $20
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
 	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $0
-	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $8
-	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $10
-	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $18
-	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $20
-	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $28
-	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $30
+	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $e
+	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $1c
+	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $2a
 	anim_obj BATTLE_ANIM_OBJ_HIDDEN_POWER, 44, 88, $38
-.loop
-	anim_sound 0, 0, SFX_SWORDS_DANCE
-	anim_wait 8
-	anim_loop 4, .loop
+	anim_call BattleAnim_HiddenSfxSub
 	anim_incbgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING
 	anim_call BattleAnim_ShowMon_0
-	anim_wait 1
-	anim_incobj 2
-	anim_incobj 3
-	anim_incobj 4
-	anim_incobj 5
-	anim_incobj 6
-	anim_incobj 7
-	anim_incobj 8
-	anim_incobj 9
-	anim_wait 16
+	anim_call BattleAnim_HiddenSpinningSub
 	anim_2gfx BATTLE_ANIM_GFX_EGG, BATTLE_ANIM_GFX_EXPLOSION; bombs start here
 	anim_sound 0, 0, SFX_SWITCH_POKEMON
 	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $3
 	anim_sound 0, 1, SFX_EGG_BOMB
 	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 136, 56, $0
+	anim_wait 16
+	anim_ret
+
+BattleAnim_RunicPower:
+	anim_1gfx ANIM_GFX_UNOWN
+	anim_call BattleAnim_TargetObj_1Row
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, $1, $20
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_obj ANIM_OBJ_UNOWN, 44, 88, $0
+	anim_obj ANIM_OBJ_UNOWN, 44, 88, $e
+	anim_obj ANIM_OBJ_UNOWN, 44, 88, $1c
+	anim_obj ANIM_OBJ_UNOWN, 44, 88, $2a
+	anim_obj ANIM_OBJ_UNOWN, 44, 88, $38
+	anim_call BattleAnim_HiddenSfxSub
+	anim_incbgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING
+	anim_call BattleAnim_ShowMon_0
+	anim_call BattleAnim_HiddenSpinningSub
+	anim_1gfx BATTLE_ANIM_GFX_EXPLOSION
+	anim_call BattleAnimSub_Explosion2
+	anim_wait 32
+	anim_ret
+
+BattleAnim_HiddenSfxSub:
+.loop
+	anim_sound 0, 4, SFX_SWORDS_DANCE
+	anim_wait 8
+	anim_loop 6, .loop
+	anim_ret
+
+BattleAnim_HiddenSpinningSub:
+	anim_wait 1
+	anim_incobj  2
+	anim_incobj  3
+	anim_incobj  4
+	anim_incobj  5
+	anim_incobj  6
+	anim_incobj  7
+	anim_incobj  8
+	anim_incobj  9
 	anim_wait 16
 	anim_ret
 
