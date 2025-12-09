@@ -71,7 +71,7 @@ if DEF(_DEBUG)
 	giveitem MILOTIC_CALL
 
 	; good party
-	givepoke MEW, 50, LEFTOVERS
+	givepoke MAGIKARP, 50, LEFTOVERS
 	givepoke NOWN, 50, FOCUS_SASH
 	givepoke GYARADOS, 50, GOLD_BERRY
 
@@ -88,10 +88,10 @@ if DEF(_DEBUG)
 	loadmem wPartyMon3DVs+1, $ff
 
 	; 1st mon moves
-	loadmem wPartyMon1Moves+0, PSYSHOCK
-	loadmem wPartyMon1Moves+1, SACRED_FIRE
-	loadmem wPartyMon1Moves+2, AEROBLAST
-	loadmem wPartyMon1Moves+3, DIVE_BOMB
+	loadmem wPartyMon1Moves+0, DRAIN_KISS
+	loadmem wPartyMon1Moves+1, GIGA_DRAIN
+	loadmem wPartyMon1Moves+2, SCARY_FACE
+;	loadmem wPartyMon1Moves+3, DIVE_BOMB
 
 	; 2nd mon moves
 ;	loadmem wPartyMon2Moves+0, SPORE
@@ -126,14 +126,14 @@ if DEF(_DEBUG)
 	setflag ENGINE_POKEDEX
 
 	; all badges
-	setflag ENGINE_ZEPHYRBADGE
-	setflag ENGINE_HIVEBADGE
-	setflag ENGINE_PLAINBADGE
-	setflag ENGINE_FOGBADGE
-	setflag ENGINE_STORMBADGE
-	setflag ENGINE_MINERALBADGE
-	setflag ENGINE_GLACIERBADGE
-	setflag ENGINE_RISINGBADGE
+;	setflag ENGINE_ZEPHYRBADGE
+;	setflag ENGINE_HIVEBADGE
+;	setflag ENGINE_PLAINBADGE
+;	setflag ENGINE_FOGBADGE
+;	setflag ENGINE_STORMBADGE
+;	setflag ENGINE_MINERALBADGE
+;	setflag ENGINE_GLACIERBADGE
+;	setflag ENGINE_RISINGBADGE
 
 	; fly points
 	setflag ENGINE_FLYPOINT_NEW_BARK
@@ -231,6 +231,7 @@ if DEF(_DEBUG)
 	setevent EVENT_PLAYERS_HOUSE_MOM_1
 	clearevent EVENT_PLAYERS_HOUSE_MOM_2
 	special HealParty
+	warp NONE, 0, 0
 	end
 else
 	checkevent EVENT_GOT_A_POKEMON_FROM_ELM

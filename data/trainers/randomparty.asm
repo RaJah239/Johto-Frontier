@@ -19,7 +19,7 @@ RedGroup:
 	db -1 ; end
 
 	; RED (1)
-	db "RED2@", TRAINERTYPE_RANDOM | TRAINERTYPE_NICKNAME | TRAINERTYPE_DVS | TRAINERTYPE_ITEM | TRAINERTYPE_MOVES, 6, RANDOMLIST_1
+	db "RED2@", TRAINERTYPE_RANDOM | TRAINERTYPE_NICKNAME | TRAINERTYPE_DVS | TRAINERTYPE_ITEM | TRAINERTYPE_MOVES, 1, RANDOMLIST_1
 	db -1 ; end
 
 RandomPartyLists::
@@ -43,41 +43,41 @@ RandomPartyLists::
 	db -1 ; end
 
 	; RANDOMLIST_1
-	db 6
-	db LEVEL_FROM_PARTY, PIKACHU
-			db "PIKA@"		; Nickname
+	db 1
+	db LEVEL_FROM_PARTY, MAGIKARP
+			db "Magikarp@"		; Nickname
 			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
-			db LIGHT_BALL	; ITEM/ NO_ITEM is a thing
-			db THUNDERBOLT, SURF, EXTREMESPEED, SWAGGER ; Moveset - NO_MOVE is a thing
+			db NO_ITEM	; ITEM/ NO_ITEM is a thing
+			db SHADOW_PUNCH, NO_MOVE, NO_MOVE, NO_MOVE ; Moveset - NO_MOVE is a thing
 			db $fe ; End of Pokemon
-	db LEVEL_FROM_PARTY, MEWTWO
-			db "TWO@"		; Nickname
-			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
-			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-			db RECOVER, PSYSHOCK, FIRE_BLAST, CLOSE_COMBAT ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
-	db LEVEL_FROM_PARTY, SNORLAX
-			db "LAX@"		; Nickname
-			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
-			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-			db REST, SLEEP_TALK, BODY_SLAM, ROCK_SLIDE ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
-	db LEVEL_FROM_PARTY, TORTERRA
-			db "SAUR@"		; Nickname
-			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
-			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-			db SLEEP_POWDER, LEECH_SEED, GIGA_DRAIN, ROCK_SLIDE ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
-	db LEVEL_FROM_PARTY, CHARIZARD
-			db "ZARD@"		; Nickname
-			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
-			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-			db FLAMETHROWER, WING_ATTACK, EARTHQUAKE, SWAGGER ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
-	db LEVEL_FROM_PARTY, BLASTOISE
-			db "TORPEDO@"		; Nickname
-			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
-			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-			db SURF, BLIZZARD, EARTHQUAKE, ROCK_SLIDE ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
+;	db LEVEL_FROM_PARTY, MEWTWO
+;			db "TWO@"		; Nickname
+;			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
+;			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+;			db RECOVER, PSYSHOCK, FIRE_BLAST, CLOSE_COMBAT ; Moveset - NO_MOVE is a thing
+;			db $fe ; End of Pokemon
+;	db LEVEL_FROM_PARTY, SNORLAX
+;			db "LAX@"		; Nickname
+;			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
+;			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+;			db REST, SLEEP_TALK, BODY_SLAM, ROCK_SLIDE ; Moveset - NO_MOVE is a thing
+;			db $fe ; End of Pokemon
+;	db LEVEL_FROM_PARTY, TORTERRA
+;			db "SAUR@"		; Nickname
+;			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
+;			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+;			db SLEEP_POWDER, LEECH_SEED, GIGA_DRAIN, ROCK_SLIDE ; Moveset - NO_MOVE is a thing
+;			db $fe ; End of Pokemon
+;	db LEVEL_FROM_PARTY, CHARIZARD
+;			db "ZARD@"		; Nickname
+;			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
+;			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+;			db FLAMETHROWER, WING_ATTACK, EARTHQUAKE, SWAGGER ; Moveset - NO_MOVE is a thing
+;			db $fe ; End of Pokemon
+;	db LEVEL_FROM_PARTY, BLASTOISE
+;			db "TORPEDO@"		; Nickname
+;			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
+;			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+;			db SURF, BLIZZARD, EARTHQUAKE, ROCK_SLIDE ; Moveset - NO_MOVE is a thing
+;			db $fe ; End of Pokemon
 	db -1 ; end
