@@ -88,8 +88,8 @@ if DEF(_DEBUG)
 	loadmem wPartyMon3DVs+1, $ff
 
 	; 1st mon moves
-	loadmem wPartyMon1Moves+0, BODY_PRESS
-	loadmem wPartyMon1Moves+1, BODY_SLAM
+	loadmem wPartyMon1Moves+0, PSYSHOCK
+	loadmem wPartyMon1Moves+1, SHADOW_BALL
 	loadmem wPartyMon1Moves+2, RUNIC_POWER
 ;	loadmem wPartyMon1Moves+3, DIVE_BOMB
 

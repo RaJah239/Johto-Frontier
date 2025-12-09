@@ -1,20 +1,3 @@
-BattleAnim_Psyshock:
-BattleAnim_FocusBlast:
-	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_BEAM
-	anim_call BattleAnim_TargetObj_1Row
-	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT, $0, BG_EFFECT_USER, $40
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
-.loop
-	anim_call BattleAnim_SubFocusingAnim
-	anim_loop 2, .loop
-	anim_wait 8
-	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT
-	anim_call BattleAnim_ShowMon_0
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $30, $4, $10
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $40
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
-	anim_jump BattleAnimSub_Beam
-
 ;=============================
 ;============NOTES============
 ;=============================
@@ -2424,6 +2407,34 @@ BattleAnim_BodySlam:
 	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 144, 48, $0
 	anim_wait 3
 	anim_jump BattleAnim_ShowMon_0
+
+BattleAnim_Psyshock:
+	anim_3gfx BATTLE_ANIM_GFX_PSYCHIC, BATTLE_ANIM_GFX_EGG, BATTLE_ANIM_GFX_SMOKE
+	anim_sound 6, 2, SFX_SLUDGE_BOMB
+	anim_obj BATTLE_ANIM_OBJ_OCTAZOOKA, 64, 92, $4
+	anim_wait 16
+	anim_obj BATTLE_ANIM_OBJ_BALL_POOF, 132, 56, $10
+	anim_sound 0, 1, SFX_PSYCHIC
+	anim_bgeffect BATTLE_BG_EFFECT_NIGHT_SHADE, $0, BG_EFFECT_TARGET, $8
+	anim_wait 96
+	anim_incbgeffect BATTLE_BG_EFFECT_NIGHT_SHADE
+	anim_ret
+
+BattleAnim_FocusBlast:
+	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_BEAM
+	anim_call BattleAnim_TargetObj_1Row
+	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT, $0, BG_EFFECT_USER, $40
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+.loop
+	anim_call BattleAnim_SubFocusingAnim
+	anim_loop 2, .loop
+	anim_wait 8
+	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT
+	anim_call BattleAnim_ShowMon_0
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $30, $4, $10
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $40
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_jump BattleAnimSub_Beam
 
 BattleAnim_TakeDown:
 	anim_1gfx BATTLE_ANIM_GFX_HIT
