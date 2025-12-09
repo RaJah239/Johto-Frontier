@@ -1380,13 +1380,9 @@ BattleAnim_SeedBomb:
 
 BattleAnim_MeteorMash:
 	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_EXPLOSION
-	anim_sound 0, 1, SFX_SUBMISSION
-	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 17, 0,  7, 0, $0
-	anim_wait 6
-	anim_sound 0, 1, SFX_PLACE_PUZZLE_PIECE_DOWN
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 17, 0,  7, 0, $0
-	anim_wait 20
-	anim_call BattleAnim_ImpactfulPunchSub
+	anim_sound 0, 1, SFX_COMET_PUNCH
+	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 56, $43
+	anim_wait 16
 	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $12
 	anim_call BattleAnimSub_Explosion2
 	anim_wait 16
@@ -1395,7 +1391,7 @@ BattleAnim_MeteorMash:
 BattleAnim_DrainPunch:
 	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_HIT
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $20, $1, $0
-	anim_call BattleAnim_ImpactfulPunchSub
+	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 56, $43
 	; fallthrough
 
 BattleAnim_Absorb:
@@ -1417,19 +1413,13 @@ BattleAnim_Absorb:
 
 BattleAnim_ShadowPunch:
 	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_sound 0, 0, SFX_CURSE
-	anim_call BattleAnim_TargetObj_1Row
-	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_WHITE_WAIT_FADE_BACK, $0, BG_EFFECT_USER, $80
-	anim_wait 36
-	; fallthrough
-
-BattleAnim_ImpactfulPunchSub:
-	anim_sound 0, 1, SFX_SUBMISSION
-	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 17, 0,  7, 0, $0
-	anim_wait 6
-	anim_sound 0, 1, SFX_PLACE_PUZZLE_PIECE_DOWN
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 17, 0,  7, 0, $0
-	anim_wait 20
+	anim_bgeffect BATTLE_BG_EFFECT_HIDE_MON, $0, $1, $0
+	anim_bgp $1b
+	anim_wait 24
+	anim_sound 0, 1, SFX_MEGA_PUNCH
+	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 56, $43
+	anim_wait 16
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
 	anim_ret
 
 BattleAnim_IronBash:
