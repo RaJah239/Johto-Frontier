@@ -3615,7 +3615,7 @@ BattleAnim_DragonDance:
 	anim_jump BattleAnim_SubFocusingAnim
 
 BattleAnim_QuiverDance:
-	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_CHARGE
+	anim_2gfx BATTLE_ANIM_GFX_CHARGE, BATTLE_ANIM_GFX_SPEED
 	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
 	anim_sound 0, 0, SFX_OUTRAGE
 .loop
@@ -3624,9 +3624,7 @@ BattleAnim_QuiverDance:
 	anim_wait 4
 	anim_loop 4, .loop
 	anim_wait 24
-	anim_call BattleAnim_FocusEnergy
-	anim_wait 24
-	anim_ret
+	anim_jump BattleAnim_SubFocusingAnim
 
 BattleAnim_Nightmare:
 	anim_1gfx BATTLE_ANIM_GFX_ANGELS
