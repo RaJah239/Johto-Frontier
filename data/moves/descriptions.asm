@@ -4,7 +4,7 @@ MoveDescriptions::
 	dw ZenHeadbuttDescription
 	dw KarateChopDescription
 	dw BugBiteDescription
-	dw CometPunchDescription
+	dw StoneEdgeDescription
 	dw MoonblastDescription
 	dw PlayRoughDescription
 	dw FirePunchDescription
@@ -36,12 +36,12 @@ MoveDescriptions::
 	dw TackleDescription
 	dw BodySlamDescription
 	dw WrapDescription
-	dw TakeDownDescription
+	dw PsyblastDescription
 	dw SuckerPunchDescription
 	dw DoubleEdgeDescription
 	dw DrainPunchDescription
 	dw PoisonStingDescription
-	dw TwineedleDescription
+	dw PikaThunderDescription
 	dw PinMissileDescription
 	dw LeerDescription
 	dw BiteDescription
@@ -131,15 +131,15 @@ MoveDescriptions::
 	dw BulletPunchDescription
 	dw SwiftDescription
 	dw NightSlashDescription
-	dw SpikeCannonDescription
+	dw FakeOutDescription
 	dw FuryDriveDescription
 	dw AmnesiaDescription
 	dw BugBuzzDescription
 	dw SoftboiledDescription
 	dw HiJumpKickDescription
-	dw GlareDescription
+	dw IceShardDescription
 	dw DreamEaterDescription
-	dw PoisonGasDescription
+	dw TauntDescription
 	dw EarthPowerDescription
 	dw LeechLifeDescription
 	dw LovelyKissDescription
@@ -151,7 +151,7 @@ MoveDescriptions::
 	dw MirrorShotDescription
 	dw SignalBeamDescription
 	dw SplashDescription
-	dw AcidArmorDescription
+	dw TrickRoomDescription
 	dw FairyFlashDescription
 	dw ExplosionDescription
 	dw FuryStrikesDescription
@@ -186,7 +186,7 @@ MoveDescriptions::
 	dw MachPunchDescription
 	dw ScaryFaceDescription
 	dw FaintAttackDescription
-	dw SweetKissDescription
+	dw LavaPlumeDescription
 	dw BellyDrumDescription
 	dw SludgeBombDescription
 	dw MudSlapDescription
@@ -266,6 +266,19 @@ MoveFFDescription:
 Move00Description:
 	db "?@"
 
+TauntDescription:
+	db   "Provokes enemy"
+	line "into attacking.@"
+
+TrickRoomDescription:
+	db   "Reverses the move"
+	line "order for 5 turns.@"
+
+FakeOutDescription:
+	db   "A first-turn,"
+	next "first-strike move.@"
+
+StoneEdgeDescription:
 ThroatChopDescription:
 CrossChopDescription:
 LeafBladeDescription:
@@ -279,10 +292,6 @@ KarateChopDescription:
 	db   "Has a high criti-"
 	line "cal hit ratio.@"
 
-CometPunchDescription:
-	db   "Repeatedly punches"
-	line "2-5 times.@"
-
 FirePunchDescription:
 	db   "A fiery punch. May"
 	line "cause a burn.@"
@@ -294,10 +303,6 @@ AvalancheDescription:
 IcePunchDescription:
 	db   "An icy punch. May"
 	line "cause frostbite.@"
-
-ThunderpunchDescription:
-	db   "An electric punch."
-	line "It may paralyze.@"
 
 BulkUpDescription:
 	db   "Increases Attack"
@@ -379,7 +384,6 @@ WrapDescription:
 
 SkyAttackDescription:
 OutrageDescription:
-TakeDownDescription:
 	db "An attack with"
 	line "counterimpact.@"
 
@@ -394,10 +398,6 @@ DoubleEdgeDescription:
 PoisonStingDescription:
 	db   "An attack that may"
 	line "poison the target.@"
-
-TwineedleDescription:
-	db   "Jabs the foe twice"
-	line "using stingers.@"
 
 PinMissileDescription:
 	db   "Fires pins that"
@@ -435,6 +435,7 @@ AcidDescription:
 	db   "An attack that may"
 	line "lower DEFENSE.@"
 
+LavaPlumeDescription:
 EggBombDescription:
 ScaldDescription:
 SeedBombDescription:
@@ -548,18 +549,12 @@ FireSpinDescription:
 	db   "Traps foe in fire"
 	line "for 2-5 turns.@"
 
+ThunderpunchDescription:
+SparkDescription:
+PikaThunderDescription:
 ThundershockDescription:
-	db   "An attack that may"
-	line "cause paralysis.@"
-
 ThunderboltDescription:
-	db   "An attack that may"
-	line "cause paralysis.@"
-
 ThunderWaveDescription:
-	db   "A move that may"
-	line "cause paralysis.@"
-
 ThunderDescription:
 	db   "An attack that may"
 	line "cause paralysis.@"
@@ -606,6 +601,7 @@ AgilityDescription:
 	db   "Sharply increases"
 	line "the user's SPEED.@"
 
+IceShardDescription:
 AerialAceDescriptionDescription:
 BulletPunchDescription:
 AquaJetDescription:
@@ -705,10 +701,6 @@ SwiftDescription:
 	db   "An attack that"
 	line "never misses.@"
 
-SpikeCannonDescription:
-	db   "Fires spikes to"
-	line "hit 2-5 times.@"
-
 FuryDriveDescription:
 	db "Drop Defenses to"
 	line "Up Attack & Speed.@"
@@ -727,17 +719,9 @@ HiJumpKickDescription:
 	db   "May miss and hurt"
 	line "the user.@"
 
-GlareDescription:
-	db   "A move that may"
-	line "cause paralysis.@"
-
 DreamEaterDescription:
 	db   "Steals HP from a"
 	line "sleeping victim.@"
-
-PoisonGasDescription:
-	db   "A move that may"
-	line "poison the foe.@"
 
 LovelyKissDescription:
 	db   "May cause the foe"
@@ -762,10 +746,6 @@ MirrorShotDescription:
 SplashDescription:
 	db   "Has no effect"
 	line "whatsoever.@"
-
-AcidArmorDescription:
-	db   "Sharply raises the"
-	line "user's DEFENSE.@"
 
 ExplosionDescription:
 	db   "Very powerful but"
@@ -872,10 +852,6 @@ FaintAttackDescription:
 	db   "An attack that"
 	line "never misses.@"
 
-SweetKissDescription:
-	db   "A move that causes"
-	line "confusion.@"
-
 BellyDrumDescription:
 	db   "Reduces own HP to"
 	line "maximize ATTACK.@"
@@ -888,6 +864,7 @@ MudSlapDescription:
 	db   "Reduces the foe's"
 	line "accuracy.@"
 
+PsyblastDescription:
 PsyshockDescription:
 	db   "A move that does"
 	line "physical damage.@"
@@ -963,10 +940,6 @@ FalseSwipeDescription:
 SwaggerDescription:
 	db   "Causes confusion"
 	line "and raises ATTACK.@"
-
-SparkDescription:
-	db   "An attack that may"
-	line "cause paralysis.@"
 
 SteelWingDescription:
 	db   "Stiff wings strike"

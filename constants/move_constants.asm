@@ -9,7 +9,7 @@
 	const ZEN_HEADBUTT ; 01
 	const KARATE_CHOP  ; 02
 	const BUG_BITE     ; 03
-	const COMET_PUNCH  ; 04
+	const STONE_EDGE   ; 04
 	const MOONBLAST    ; 05
 	const PLAY_ROUGH   ; 06
 	const FIRE_PUNCH   ; 07
@@ -41,12 +41,12 @@
 	const TACKLE       ; 21
 	const BODY_SLAM    ; 22
 	const WRAP         ; 23
-	const TAKE_DOWN    ; 24
+	const PSYBLAST     ; 24
 	const SUCKER_PUNCH ; 25
 	const DOUBLE_EDGE  ; 26
 	const DRAIN_PUNCH  ; 27
 	const POISON_STING ; 28
-	const TWINEEDLE    ; 29
+	const PIKA_THUNDER ; 29
 	const PIN_MISSILE  ; 2a
 	const LEER         ; 2b
 	const BITE         ; 2c
@@ -136,15 +136,15 @@
 	const BULLET_PUNCH ; 80
 	const SWIFT        ; 81
 	const NIGHT_SLASH  ; 82
-	const SPIKE_CANNON ; 83
+	const FAKE_OUT     ; 83
 	const FURY_DRIVE   ; 84
 	const AMNESIA      ; 85
 	const BUG_BUZZ     ; 86
 	const SOFTBOILED   ; 87
 	const HI_JUMP_KICK ; 88
-	const GLARE        ; 89
+	const ICE_SHARD    ; 89
 	const DREAM_EATER  ; 8a
-	const POISON_GAS   ; 8b
+	const TAUNT        ; 8b
 	const EARTH_POWER  ; 8c
 	const LEECH_LIFE   ; 8d
 	const LOVELY_KISS  ; 8e
@@ -156,7 +156,7 @@
 	const MIRROR_SHOT  ; 94
 	const SIGNAL_BEAM  ; 95
 	const SPLASH       ; 96
-	const ACID_ARMOR   ; 97
+	const TRICK_ROOM   ; 97
 	const FAIRY_FLASH  ; 98
 	const EXPLOSION    ; 99
 	const FURY_STRIKES ; 9a
@@ -191,7 +191,7 @@
 	const MACH_PUNCH   ; b7
 	const SCARY_FACE   ; b8
 	const FAINT_ATTACK ; b9
-	const SWEET_KISS   ; ba
+	const LAVA_PLUME   ; ba
 	const BELLY_DRUM   ; bb
 	const SLUDGE_BOMB  ; bc
 	const MUD_SLAP     ; bd

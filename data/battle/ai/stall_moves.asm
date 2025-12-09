@@ -24,7 +24,6 @@ StallMoves:
 	db AMNESIA
 	db TRANSFORM
 	db SPLASH
-	db ACID_ARMOR
 	db SUBSTITUTE
 	db QUIVER_DANCE
 	db -1 ; end

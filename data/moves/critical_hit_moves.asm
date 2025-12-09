@@ -10,4 +10,5 @@ CriticalHitMoves:
 	db THROAT_CHOP
 	db NIGHT_SLASH
 	db PSYCHO_CUT
+	db STONE_EDGE
 	db -1
