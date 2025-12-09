@@ -377,7 +377,6 @@ WrapDescription:
 	db   "Traps the foe for"
 	line "2-5 turns.@"
 
-WildChargeDescription:
 SkyAttackDescription:
 OutrageDescription:
 TakeDownDescription:
@@ -722,6 +721,7 @@ SoftboiledDescription:
 	db   "Restores HP by 1/2"
 	line "the user's max HP.@"
 
+WildChargeDescription:
 DiveBombDescription:
 HiJumpKickDescription:
 	db   "May miss and hurt"
