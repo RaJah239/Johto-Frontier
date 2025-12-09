@@ -5,7 +5,12 @@
 ; If more space is needed, replace Rock Tomb's animation
 ; with Vanilla Rock throws'. It's right next to it
 
-; Add this
+;Add this
+;BattleAnim_LavaPlume:
+;	anim_2gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_SPEED
+;	anim_call BattleAnim_UserFlames
+;	anim_jump BattleAnim_SubFocusingAnim
+
 ;BattleAnim_MudShot: ; c95c3
 ;	anim_2gfx BATTLE_ANIM_GFX_SAND, BATTLE_ANIM_GFX_HIT
 ;	anim_obp0 $fc
@@ -3600,9 +3605,13 @@ BattleAnim_SpiderWeb:
 	anim_wait 64
 	anim_ret
 
-
 BattleAnim_DragonDance:
 	anim_2gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_SPEED
+	anim_call BattleAnim_UserFlames
+	anim_jump BattleAnim_SubFocusingAnim
+
+BattleAnim_UserFlames:
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
 .loop
 	anim_sound 0, 0, SFX_EMBER
 	anim_obj BATTLE_ANIM_OBJ_FLAME_WHEEL,   6, 0,  12, 0, $0
@@ -3612,7 +3621,7 @@ BattleAnim_DragonDance:
 	anim_wait 6
 	anim_loop 4, .loop
 	anim_wait 96
-	anim_jump BattleAnim_SubFocusingAnim
+	anim_ret
 
 BattleAnim_QuiverDance:
 	anim_2gfx BATTLE_ANIM_GFX_CHARGE, BATTLE_ANIM_GFX_SPEED
