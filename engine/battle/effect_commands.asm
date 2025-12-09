@@ -1196,59 +1196,78 @@ BattleCommand_ResetTypeMatchup:
 INCLUDE "engine/battle/ai/switch.asm"
 
 BattleCommand_Burn:
-; burn
-
-	ld a, BATTLE_VARS_STATUS_OPP
-	call GetBattleVar
-	bit BRN, a
-	jr nz, .burn
+	ld hl, DoesntAffectText
 	ld a, [wTypeModifier]
 	and EFFECTIVENESS_MASK
-	jr z, .didnt_affect
+	jr z, .failed
 
+	ld a, FIRE
+	call CheckIfTargetIsGivenType
+	jr z, .failed
+
+	call CheckForStatusIfAlreadyHasAny
+	jr nz, .failed
+
+	call GetOpponentItem
+	ld a, b
+	cp HELD_PREVENT_BURN
+	jr nz, .do_burn
+	ld a, [hl]
+	ld [wNamedObjectIndex], a
+	call GetItemName
+	ld hl, ProtectedByText
+	jr .failed
+
+.do_burn
+	ld hl, DidntAffect1Text
 	ld a, BATTLE_VARS_STATUS_OPP
-	call GetBattleVarAddr
+	call GetBattleVar
 	and a
 	jr nz, .failed
+
+	ld hl, ProtectingItselfText
+	call CheckSubstituteOpp
+	jr nz, .failed
+	
+	ld hl, EvadedText
 	ld a, [wAttackMissed]
 	and a
 	jr nz, .failed
-	ld a, [wEffectFailed]
-	and a
-	jr nz, .failed
-	call CheckSubstituteOpp
-	jr nz, .failed
-	ld c, 30
-	call DelayFrames
+	
+	call .apply_burn
+	ld hl, WasBurnedText
+	call StdBattleTextbox
+	farjp UseHeldStatusHealingItem
+
+.failed
+	push hl
+	call AnimateFailedMove
+	pop hl
+	jmp StdBattleTextbox
+
+.apply_burn
 	call AnimateCurrentMove
-	ld a, $1
-	ldh [hBGMapMode], a
+	call BurnOpponent
+	ld b, SCGB_BATTLE_COLORS
+	call GetSGBLayout
+	call SetDefaultBGPAndOBP
+	call DelayFrame	
+	call UpdateBattleHuds
+	ld c, 3
+	call DelayFrames
+	jmp WaitBGMap
+
+BurnOpponent:
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVarAddr
 	set BRN, [hl]
 	call UpdateOpponentInParty
 	ld hl, ApplyBrnEffectOnAttack
 	call CallBattleCore
-	call UpdateBattleHuds
-	call PrintBurn
-	ld hl, UseHeldStatusHealingItem
-	jp CallBattleCore
-
-.burn
-	call AnimateFailedMove
-	ld hl, AlreadyBurnedText
-	jp StdBattleTextbox
-
-.failed
-	jp PrintDidntAffect2
-
-.didnt_affect
-	call AnimateFailedMove
-	jp PrintDoesntAffect
-
-PrintBurn:
-	ld hl, WasBurnedText
-	jp StdBattleTextbox
+	ld de, ANIM_BRN
+	call PlayOpponentBattleAnim
+	call RefreshBattleHuds
+	jmp UpdateOpponentInParty
 
 BattleCommand_DamageVariation:
 ; Modify the damage spread between 85% and 100%.
