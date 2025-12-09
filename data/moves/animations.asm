@@ -2488,6 +2488,7 @@ BattleAnim_CloseCombat:
 	anim_wait 16
 	anim_ret
 
+BattleAnim_Defog:
 BattleAnim_Whirlwind:
 	anim_1gfx BATTLE_ANIM_GFX_WIND
 .loop
@@ -2523,7 +2524,6 @@ BattleAnim_Hypnosis:
 	anim_wait 56
 	anim_ret
 
-BattleAnim_Defog:
 BattleAnim_Haze:
 	anim_1gfx BATTLE_ANIM_GFX_HAZE
 	anim_sound 0, 1, SFX_SURF
