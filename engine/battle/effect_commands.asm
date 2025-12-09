@@ -6014,7 +6014,7 @@ INCLUDE "engine/battle/move_effects/hex.asm"
 
 INCLUDE "engine/battle/move_effects/venoshock.asm"
 
-INCLUDE "engine/battle/move_effects/overdrive.asm"
+INCLUDE "engine/battle/move_effects/fury_drive.asm"
 
 INCLUDE "engine/battle/move_effects/quiver_dance.asm"
 

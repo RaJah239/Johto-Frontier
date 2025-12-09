@@ -1924,8 +1924,8 @@ Venoshock:
 	kingsrock
 	endmove
 
-Overdrive:
+FuryDrive:
 	usedmovetext
 	doturn
-	overdrive
+	furydrive
 	endmove

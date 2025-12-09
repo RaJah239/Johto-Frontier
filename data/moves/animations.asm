@@ -291,7 +291,7 @@ BattleAnimations::
 	dw BattleAnim_Swift
 	dw BattleAnim_NightSlash
 	dw BattleAnim_SpikeCannon
-	dw BattleAnim_Overdrive
+	dw BattleAnim_FuryDrive
 	dw BattleAnim_Amnesia
 	dw BattleAnim_BugBuzz
 	dw BattleAnim_Softboiled
@@ -2004,7 +2004,7 @@ BattleAnim_BulkUp:
 	anim_wait 16
 	anim_ret
 
-BattleAnim_Overdrive:
+BattleAnim_FuryDrive:
 	anim_1gfx BATTLE_ANIM_GFX_MISC
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $c0, $1, $0
 	anim_sound 0, 0, SFX_KINESIS_2

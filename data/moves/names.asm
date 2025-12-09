@@ -131,7 +131,7 @@ MoveNames::
 	li "Swift"
 	li "Night Slash"
 	li "Spike Cannon"
-	li "Overdrive"
+	li "Fury Drive"
 	li "Amnesia"
 	li "Bug Buzz"
 	li "Softboiled"

@@ -132,7 +132,7 @@ MoveDescriptions::
 	dw SwiftDescription
 	dw NightSlashDescription
 	dw SpikeCannonDescription
-	dw OverdriveDescription
+	dw FuryDriveDescription
 	dw AmnesiaDescription
 	dw BugBuzzDescription
 	dw SoftboiledDescription
@@ -710,7 +710,7 @@ SpikeCannonDescription:
 	db   "Fires spikes to"
 	line "hit 2-5 times.@"
 
-OverdriveDescription:
+FuryDriveDescription:
 	db "Drop Defenses to"
 	line "Up Attack & Speed.@"
 

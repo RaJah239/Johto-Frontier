@@ -1,5 +1,5 @@
-BattleCommand_Overdrive:
-; overdrive
+BattleCommand_FuryDrive:
+; fury drive
 ; note: can't seem to `farcommand` this
 
 	ld bc, wPlayerStatLevels
