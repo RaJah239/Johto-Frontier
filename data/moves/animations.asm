@@ -2005,6 +2005,13 @@ BattleAnim_BulkUp:
 	anim_ret
 
 BattleAnim_Overdrive:
+	anim_1gfx BATTLE_ANIM_GFX_MISC
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $c0, $1, $0
+	anim_sound 0, 0, SFX_KINESIS_2
+	anim_obj BATTLE_ANIM_OBJ_ANGER, 72, 80, $0
+	anim_wait 40
+	; fallthrough
+
 BattleAnim_FocusEnergy:
 	anim_1gfx BATTLE_ANIM_GFX_SPEED
 	anim_call BattleAnim_TargetObj_1Row
@@ -3707,16 +3714,19 @@ BattleAnim_Curse:
 BattleAnim_Flail:
 	anim_1gfx BATTLE_ANIM_GFX_HIT
 	anim_call BattleAnim_TargetObj_1Row
-	anim_sound 0, 0, SFX_SUBMISSION
-	anim_bgeffect BATTLE_BG_EFFECT_FLAIL, $0, BG_EFFECT_USER, $0
+	anim_bgeffect BATTLE_BG_EFFECT_WOBBLE_MON, $0, BG_EFFECT_USER, $0
 	anim_wait 8
+	anim_sound 0, 1, SFX_COMET_PUNCH
 	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 120, 48, $0
 	anim_wait 8
+	anim_sound 0, 1, SFX_COMET_PUNCH
 	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 152, 48, $0
 	anim_wait 8
+	anim_sound 0, 1, SFX_COMET_PUNCH
 	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 48, $0
 	anim_wait 8
-	anim_incbgeffect BATTLE_BG_EFFECT_FLAIL
+	anim_incbgeffect BATTLE_BG_EFFECT_WOBBLE_MON
+	anim_wait 1
 	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_Hex:
