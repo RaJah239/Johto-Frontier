@@ -3585,6 +3585,14 @@ BattleAnim_SpiderWeb:
 	anim_ret
 
 BattleAnim_QuiverDance:
+	anim_1gfx BATTLE_ANIM_GFX_HIT
+	anim_call BattleAnim_TargetObj_2Row
+	anim_sound 0, 0, SFX_RETURN
+	anim_bgeffect BATTLE_BG_EFFECT_WOBBLE_MON, $0, BG_EFFECT_USER, $0
+	anim_wait 32
+	anim_incbgeffect BATTLE_BG_EFFECT_WOBBLE_MON
+	anim_jump BattleAnim_ShowMon_0
+
 BattleAnim_DragonDance:
 	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_CHARGE
 	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
