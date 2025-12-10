@@ -3,7 +3,18 @@ Core2_NewTurnEndEffects:
 	call HandleMysteryberry
 	call HandleSafeguard
 	call HandleScreens
+	call HandleTrickRoom
 	ret
+
+HandleTrickRoom:
+	ld hl, wTrickRoomCount
+	ld a, [hl]
+	and a
+	ret z
+	dec [hl]
+	ret nz
+	ld hl, TrickRoomEndedText
+	jmp StdBattleTextbox
 
 HandleLeftovers:
 	ldh a, [hSerialConnectionStatus]

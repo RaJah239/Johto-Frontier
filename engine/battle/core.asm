@@ -458,8 +458,8 @@ DetermineMoveOrder:
 	jmp nz, .player_first
 	call CompareMovePriority
 	jr z, .equal_priority
-	jr c, .player_first ; player goes first
-	jr .enemy_first
+	jmp c, .player_first ; player goes first
+	jmp .enemy_first
 
 .equal_priority
 	call SetPlayerTurn
@@ -475,16 +475,16 @@ DetermineMoveOrder:
 	jr z, .both_have_quick_claw
 	call BattleRandom
 	cp e
-	jr nc, .speed_check
+	jr nc, .trick_room_check
 	jr .player_first
 
 .player_no_quick_claw
 	ld a, b
 	cp HELD_QUICK_CLAW
-	jr nz, .speed_check
+	jr nz, .trick_room_check
 	call BattleRandom
 	cp c
-	jr nc, .speed_check
+	jr nc, .trick_room_check
 	jr .enemy_first
 
 .both_have_quick_claw
@@ -497,7 +497,7 @@ DetermineMoveOrder:
 	call BattleRandom
 	cp e
 	jr c, .player_first
-	jr .speed_check
+	jr .trick_room_check
 
 .player_2b
 	call BattleRandom
@@ -507,14 +507,32 @@ DetermineMoveOrder:
 	cp c
 	jr c, .enemy_first
 
-.speed_check
+	; Trick Room
+	; The slower Pokemon attacks first
+.trick_room_check
+	ld a, [wTrickRoomCount]
+	and a
+	jr z, .speed_check
+
 	ld de, wBattleMonSpeed
 	ld hl, wEnemyMonSpeed
 	ld c, 2
 	call CompareBytes
 	jr z, .speed_tie
-	jr nc, .player_first
-	jr .enemy_first
+	jr nc, .enemy_first
+	jr .player_first
+
+.speed_check
+	ld de, wBattleMonSpeed
+	ld hl, wEnemyMonSpeed
+	jr .continue
+
+.continue
+	ld c, 2
+	call CompareBytes
+	jr z, .speed_tie
+	jp nc, .player_first
+	jp .enemy_first
 
 .speed_tie
 	ldh a, [hSerialConnectionStatus]
