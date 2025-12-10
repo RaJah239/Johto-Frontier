@@ -2127,10 +2127,18 @@ BattleAnim_Confusion:
 	anim_jump BattleAnim_ShowMon_1
 
 BattleAnim_Earthquake:
+	anim_1gfx BATTLE_ANIM_GFX_ROCKS
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $4, $10
 .loop
 	anim_sound 0, 1, SFX_EMBER
-	anim_wait 24
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 72, $5c
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 136, 72, $d0
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 144, 72, $e8
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 152, 72, $50
+	anim_wait 4
 	anim_loop 4, .loop
 	anim_ret
 
