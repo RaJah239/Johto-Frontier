@@ -23,9 +23,9 @@ BattleCommand_Taunt:
     ld [wEnemyTauntCount], a
 
 .finish
-	call AnimateCurrentMove
+	farcall AnimateCurrentMove
 	ld hl, GotTauntedText
 	jmp StdBattleTextbox
 
 .failed
-	jmp PrintDidntAffect2
+	farjp PrintDidntAffect2

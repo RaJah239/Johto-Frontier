@@ -1940,5 +1940,5 @@ Taunt:
 	usedmovetext
 	doturn
 	checkhit
-	taunt
+	farcommand
 	endmove
