@@ -905,6 +905,16 @@ WasDefrostedText:
 	line "was defrosted!"
 	prompt
 
+TauntedNoMoreText:
+	text "<USER>'s"
+	line "Taunt wore off!"
+	prompt
+
+GotTauntedText:
+	text "<TARGET>"
+	line "received a Taunt!"
+	prompt
+
 TrickRoomText:
 	text "The dimensions"
 	line "were twisted!"

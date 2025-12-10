@@ -217,6 +217,23 @@ BattleCommand_CheckTurn:
 
 .not_disabled
 
+	; Taunt
+	; decrement the player taunt count and
+	; print a message when it ends
+	ld hl, wPlayerTauntCount
+	ld a, [hl]
+	and a
+	jr z, .not_taunted
+
+	dec a
+	ld [hl], a
+	and $f
+	jr nz, .not_taunted
+
+	ld hl, TauntedNoMoreText
+	call StdBattleTextbox
+
+.not_taunted
 	ld a, [wPlayerSubStatus3]
 	add a
 	jr nc, .not_confused
@@ -294,6 +311,19 @@ BattleCommand_CheckTurn:
 
 .no_disabled_move
 
+	; Taunt
+	; Block player move on the turn taunt is used
+	ld a, [wPlayerTauntCount]
+	and a
+	jr z, .no_taunt
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	jr nz, .no_taunt
+	call MoveDisabled
+	call CantMove
+	jmp EndTurn
+
+.no_taunt
 	ld hl, wBattleMonStatus
 	bit PAR, [hl]
 	ret z
@@ -425,6 +455,23 @@ CheckEnemyTurn:
 
 .not_disabled
 
+	; Taunt
+	; decrement the enemy taunt count and
+	; print a message when ended
+	ld hl, wEnemyTauntCount
+	ld a, [hl]
+	and a
+	jr z, .not_taunted
+
+	dec a
+	ld [hl], a
+	and $f
+	jr nz, .not_taunted
+
+	ld hl, TauntedNoMoreText
+	call StdBattleTextbox
+
+.not_taunted
 	ld a, [wEnemySubStatus3]
 	add a ; bit SUBSTATUS_CONFUSED
 	jr nc, .not_confused
@@ -524,6 +571,19 @@ CheckEnemyTurn:
 
 .no_disabled_move
 
+	; Taunt
+	; Block enemy move on the turn taunt is used
+	ld a, [wEnemyTauntCount]
+	and a
+	jr z, .no_taunt
+	ld a, [wEnemyMoveStruct + MOVE_POWER]
+	and a
+	jr nz, .no_taunt
+	call MoveDisabled
+	call CantMove
+	jr EndTurn
+
+.no_taunt
 	ld hl, wEnemyMonStatus
 	bit PAR, [hl]
 	ret z
@@ -3203,6 +3263,8 @@ BattleCommand_ConstantDamage:
 	ret
 
 INCLUDE "data/moves/flail_reversal_power.asm"
+
+INCLUDE "engine/battle/move_effects/taunt.asm"
 
 INCLUDE "engine/battle/move_effects/sticky_web.asm"
 

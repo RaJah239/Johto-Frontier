@@ -3023,6 +3023,7 @@ endr
 	ld [wPlayerWrapCount], a
 	ld [wEnemyWrapCount], a
 	ld [wEnemyTurnsTaken], a
+	ld [wEnemyTauntCount], a
 	ld hl, wPlayerSubStatus5
 	res SUBSTATUS_CANT_RUN, [hl]
 	ret
@@ -3407,6 +3408,7 @@ endr
 	ld [wEnemyWrapCount], a
 	ld [wPlayerWrapCount], a
 	ld [wPlayerTurnsTaken], a
+	ld [wPlayerTauntCount], a
 	ld hl, wEnemySubStatus5
 	res SUBSTATUS_CANT_RUN, [hl]
 	ret
@@ -4947,9 +4949,9 @@ MoveSelectionScreen:
 	ldh [hBGMapMode], a
 	call ScrollingMenuJoypad
 	bit D_UP_F, a
-	jr nz, .pressed_up
+	jmp nz, .pressed_up
 	bit D_DOWN_F, a
-	jr nz, .pressed_down
+	jmp nz, .pressed_down
 	bit SELECT_F, a
 	jmp nz, .pressed_select
 	bit B_BUTTON_F, a
@@ -5005,6 +5007,21 @@ MoveSelectionScreen:
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
+
+	; Taunt
+	; block the use of moves with 0 power when taunted
+	; maybe we can just use the taunt count and not actually care about the taunt substatus
+	ld b, a                         ; a and b are the index of the current move
+	ld a, [wPlayerTauntCount]       ; a is now the player taunt count
+	and a                           ; is the player taunt count 0
+    ld a, b                         ; a is again the index of the current move
+	jr z, .skip2                    ; if player taunt count is 0 we continue
+	push bc                         ; save b
+    call GetMovePower               ; get the move power in a
+    pop bc                          ; retrieve b
+    and a                           ; is the move power 0
+    ld a, b                         ; a in now index of the current move
+    jr z, .move_disabled            ; if power is 0 the move is disabled
 
 .skip2
 	ld [wCurPlayerMove], a
@@ -5315,6 +5332,11 @@ CheckPlayerHasUsableMoves:
 	and a
 	ld hl, wBattleMonPP
 	jr nz, .disabled
+
+	; Taunt
+	; force struggle if there are no usable moves
+	; if the move has 0 power and 
+	; taunted maybe we can jump to disabled
 
 	ld a, [hli]
 	or [hl]
@@ -7863,6 +7885,7 @@ CleanUpBattleRAM:
 	ld [wItemsPocketScrollPosition], a
 	ld [wBallsPocketScrollPosition], a
 	ld hl, wPlayerSubStatus1
+	ld b, wEnemyTauntCount - wPlayerSubStatus1
 .loop
 	ld [hli], a
 	dec b
@@ -8527,4 +8550,15 @@ ClearFailures:
 	ld [wFailedMessage], a
 	ld [wEffectFailed], a
 	ld [wAttackMissed], a
+	ret
+
+GetMovePower:
+	ld a, b
+	dec a
+	ld hl, Moves + MOVE_POWER
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	ld b, a
 	ret

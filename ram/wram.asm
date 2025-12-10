@@ -430,7 +430,9 @@ wEnemyEncoreCount:: db
 wEnemyPerishCount:: db
 wEnemyProtectCount:: db
 
-	ds 3
+wEnemyTauntCount:: db
+wPlayerTauntCount:: db
+	ds 1
 
 wPlayerDamageTaken:: dw
 wEnemyDamageTaken::  dw

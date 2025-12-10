@@ -1935,3 +1935,10 @@ TrickRoom:
 	doturn
 	farcommand
 	endmove
+
+Taunt:
+	usedmovetext
+	doturn
+	checkhit
+	taunt
+	endmove
