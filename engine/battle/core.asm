@@ -476,7 +476,7 @@ DetermineMoveOrder:
 	call BattleRandom
 	cp e
 	jr nc, .trick_room_check
-	jr .player_first
+	jr .player_first_due_to_quick_claw
 
 .player_no_quick_claw
 	ld a, b
@@ -485,7 +485,7 @@ DetermineMoveOrder:
 	call BattleRandom
 	cp c
 	jr nc, .trick_room_check
-	jr .enemy_first
+	jr .enemy_first_due_to_quick_claw
 
 .both_have_quick_claw
 	ldh a, [hSerialConnectionStatus]
@@ -493,19 +493,19 @@ DetermineMoveOrder:
 	jr z, .player_2b
 	call BattleRandom
 	cp c
-	jr c, .enemy_first
+	jr c, .enemy_first_due_to_quick_claw
 	call BattleRandom
 	cp e
-	jr c, .player_first
+	jr c, .player_first_due_to_quick_claw
 	jr .trick_room_check
 
 .player_2b
 	call BattleRandom
 	cp e
-	jr c, .player_first
+	jr c, .player_first_due_to_quick_claw
 	call BattleRandom
 	cp c
-	jr c, .enemy_first
+	jr c, .enemy_first_due_to_quick_claw
 
 	; Trick Room
 	; The slower Pokemon attacks first
@@ -552,6 +552,21 @@ DetermineMoveOrder:
 	ret
 
 .enemy_first
+	and a
+	ret
+
+.player_first_due_to_quick_claw
+	call SwitchCoreItemRecoveryAnim
+	ld hl, BattleText_QuickClaw
+	call StdBattleTextbox
+	scf
+	ret
+
+.enemy_first_due_to_quick_claw
+	call SetEnemyTurn
+	call SwitchCoreItemRecoveryAnim
+	ld hl, BattleText_QuickClaw
+	call StdBattleTextbox
 	and a
 	ret
 
@@ -1177,6 +1192,11 @@ HandleWrap:
 
 .print_text
 	jmp StdBattleTextbox
+
+SwitchCoreItemRecoveryAnim:
+	call SwitchTurnCore
+	call ItemRecoveryAnim
+	; fallthrough
 
 SwitchTurnCore:
 	ldh a, [hBattleTurn]
