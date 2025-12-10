@@ -163,4 +163,5 @@ MoveEffectsPointers:
 	dw Barrier
 	dw Venoshock
 	dw FuryDrive
+	dw TrickRoom
 	assert_table_length NUM_MOVE_EFFECTS

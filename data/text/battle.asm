@@ -905,6 +905,16 @@ WasDefrostedText:
 	line "was defrosted!"
 	prompt
 
+TrickRoomText:
+	text "The dimensions"
+	line "were twisted!"
+	prompt
+
+TrickRoomEndedText:
+	text "The dimensions"
+	line "stabilized!"
+	prompt
+
 PutACurseText:
 	text "<USER>"
 	line "cut its own HP to"

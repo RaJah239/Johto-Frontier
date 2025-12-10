@@ -163,4 +163,5 @@ BattleCommandPointers:
 	dw BattleCommand_FarCommand
 	dw BattleCommand_Venoshock
 	dw BattleCommand_FuryDrive
+	dw BattleCommand_TrickRoom
 	assert_table_length NUM_EFFECT_COMMANDS

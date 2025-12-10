@@ -606,7 +606,7 @@ wExpShareText:: db
 wPlayerRageCounter:: db
 wEnemyRageCounter:: db
 
-	ds 1
+wTrickRoomCount:: db
 
 wPlayerTrappingMove:: db
 wEnemyTrappingMove:: db

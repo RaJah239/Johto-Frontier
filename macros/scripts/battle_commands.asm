@@ -163,6 +163,7 @@ ENDM
 	command farcommand              ; c0
 	command venoshock
 	command furydrive
+	command trickroom               ; b6
 DEF NUM_EFFECT_COMMANDS EQU const_value - 1
 
 	const_def -1, -1

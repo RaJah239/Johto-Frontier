@@ -3204,6 +3204,8 @@ BattleCommand_ConstantDamage:
 
 INCLUDE "data/moves/flail_reversal_power.asm"
 
+INCLUDE "engine/battle/move_effects/trick_room.asm"
+
 INCLUDE "engine/battle/move_effects/sticky_web.asm"
 
 INCLUDE "engine/battle/move_effects/hurricane.asm"

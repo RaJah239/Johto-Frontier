@@ -1929,3 +1929,9 @@ FuryDrive:
 	doturn
 	furydrive
 	endmove
+
+TrickRoom:
+	usedmovetext
+	doturn
+	trickroom
+	endmove
