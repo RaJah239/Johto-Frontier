@@ -126,14 +126,14 @@ if DEF(_DEBUG)
 	setflag ENGINE_POKEDEX
 
 	; all badges
-;	setflag ENGINE_ZEPHYRBADGE
-;	setflag ENGINE_HIVEBADGE
-;	setflag ENGINE_PLAINBADGE
-;	setflag ENGINE_FOGBADGE
-;	setflag ENGINE_STORMBADGE
-;	setflag ENGINE_MINERALBADGE
-;	setflag ENGINE_GLACIERBADGE
-;	setflag ENGINE_RISINGBADGE
+	setflag ENGINE_ZEPHYRBADGE
+	setflag ENGINE_HIVEBADGE
+	setflag ENGINE_PLAINBADGE
+	setflag ENGINE_FOGBADGE
+	setflag ENGINE_STORMBADGE
+	setflag ENGINE_MINERALBADGE
+	setflag ENGINE_GLACIERBADGE
+	setflag ENGINE_RISINGBADGE
 
 	; fly points
 	setflag ENGINE_FLYPOINT_NEW_BARK
@@ -318,7 +318,7 @@ TestText:
 RegularMonScript:
 	faceplayer
 	special HealParty
-	loadwildmon MOLTRES, 5
+	loadwildmon MAGIKARP, 10
 	startbattle
 	reloadmap
 	special HealParty
@@ -327,7 +327,7 @@ RegularMonScript:
 ShinyMonScript:
 	faceplayer
 	special HealParty
-	loadwildmon MOLTRES, 5
+	loadwildmon MAGIKARP, 10
 	loadvar VAR_BATTLETYPE, BATTLETYPE_FORCESHINY
 	startbattle
 	reloadmap
