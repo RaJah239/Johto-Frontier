@@ -3459,6 +3459,22 @@ BattleAnim_Toxic:
 	anim_jump BattleAnimSub_Sludge
 
 BattleAnim_Taunt:
+	anim_1gfx BATTLE_ANIM_GFX_MISC
+	anim_obj BATTLE_ANIM_OBJ_METRONOME_HAND, 72, 84, $0
+	anim_wait 16
+.loop
+	anim_sound 0, 0, SFX_SQUEAK 
+	anim_wait 32
+	anim_loop 2, .loop
+	anim_clearobjs
+	anim_sound 0, 1, SFX_KINESIS_2
+	anim_obj BATTLE_ANIM_OBJ_ANGER, 112, 50, $0
+	anim_wait 16
+	anim_sound 0, 1, SFX_KINESIS_2
+	anim_obj BATTLE_ANIM_OBJ_ANGER, 148, 32, $0
+	anim_wait 32
+	anim_ret
+
 BattleAnim_Metronome:
 	anim_2gfx BATTLE_ANIM_GFX_MISC, BATTLE_ANIM_GFX_SPEED
 	anim_sound 0, 0, SFX_METRONOME
