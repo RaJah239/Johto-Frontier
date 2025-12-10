@@ -4324,7 +4324,6 @@ BattleAnim_Scald:
 	anim_ret
 
 BattleAnim_WildCharge:
-	anim_if_param_equal $1, BattleAnim_HiJumpKick
 	anim_call BattleAnim_ChargedUpSub
 	anim_call BattleAnim_TargetObj_1Row
 	anim_bgeffect BATTLE_BG_EFFECT_TACKLE, $0, BG_EFFECT_USER, $0

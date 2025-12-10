@@ -713,7 +713,6 @@ SoftboiledDescription:
 	db   "Restores HP by 1/2"
 	line "the user's max HP.@"
 
-WildChargeDescription:
 DiveBombDescription:
 HiJumpKickDescription:
 	db   "May miss and hurt"
@@ -1076,3 +1075,7 @@ RockSmashDescription:
 FlareBlitzDescription:
 	db   "Hurts the user but"
 	line "may cause a burn.@"
+
+WildChargeDescription:
+	db   "Hurts the user but"
+	line "may paralyze.@"

@@ -165,4 +165,5 @@ MoveEffectsPointers:
 	dw FuryDrive
 	dw TrickRoom
 	dw Taunt
+	dw WildCharge
 	assert_table_length NUM_MOVE_EFFECTS

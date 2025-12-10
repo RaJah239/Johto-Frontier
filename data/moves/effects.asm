@@ -1839,6 +1839,27 @@ FlareBlitz:
 	burntarget
 	endmove
 
+WildCharge:
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	effectchance
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	recoil
+	checkfaint
+	kingsrock
+	paralyzetarget
+	endmove
+
 FreezeDry:
 	usedmovetext
 	doturn
