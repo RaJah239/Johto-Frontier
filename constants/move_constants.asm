@@ -145,7 +145,7 @@
 	const ICE_SHARD    ; 89
 	const DREAM_EATER  ; 8a
 	const TAUNT        ; 8b
-	const EARTH_POWER  ; 8c
+	const TREMOR       ; 8c
 	const LEECH_LIFE   ; 8d
 	const LOVELY_KISS  ; 8e
 	const SKY_ATTACK   ; 8f

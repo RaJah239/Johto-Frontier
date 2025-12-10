@@ -153,7 +153,7 @@ Moves:
 	move ICE_SHARD,    EFFECT_PRIORITY_HIT,       40, ICE,           PHYSICAL, 100, 32,   0
 	move DREAM_EATER,  EFFECT_DREAM_EATER,       100, PSYCHIC_TYPE,  SPECIAL,  100, 15,   0
 	move TAUNT,        EFFECT_TAUNT,               0, DARK,          STATUS,   100, 32,   0
-	move EARTH_POWER,  EFFECT_SP_DEF_DOWN_HIT,    90, GROUND,        SPECIAL,  100, 24,  10
+	move TREMOR,       EFFECT_EARTHQUAKE,         40, GROUND,        PHYSICAL, 100, 40,   0
 	move LEECH_LIFE,   EFFECT_LEECH_HIT,          20, BUG,           PHYSICAL, 100, 15,   0
 	move LOVELY_KISS,  EFFECT_SLEEP,               0, NORMAL,        STATUS,    75, 10,   0
 	move SKY_ATTACK,   EFFECT_RECOIL_HIT,        110, FLYING,        PHYSICAL, 100, 24,   0

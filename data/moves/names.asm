@@ -139,7 +139,7 @@ MoveNames::
 	li "Ice Shard"
 	li "Dream Eater"
 	li "Taunt"
-	li "Earth Power"
+	li "Tremor"
 	li "Leech Life"
 	li "Lovely Kiss"
 	li "Sky Attack"

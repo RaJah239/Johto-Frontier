@@ -140,7 +140,7 @@ MoveDescriptions::
 	dw IceShardDescription
 	dw DreamEaterDescription
 	dw TauntDescription
-	dw EarthPowerDescription
+	dw TremorDescription
 	dw LeechLifeDescription
 	dw LovelyKissDescription
 	dw SkyAttackDescription
@@ -563,9 +563,10 @@ RockThrowDescription:
 	db   "Tosses a rock at"
 	line "the foe.@"
 
+TremorDescription:
 EarthquakeDescription:
-	db   "Tough but useless"
-	line "vs. flying foes.@"
+	db   "Double power"
+	line "vs burrowed foes.@"
 
 DigDescription:
 	db   "1st turn: Burrow"
@@ -580,7 +581,6 @@ ConfusionDescription:
 	db   "An attack that may"
 	line "cause confusion.@"
 
-EarthPowerDescription:
 FocusBlastDescription:
 ShadowBallDescription:
 FlashCannonDescription:

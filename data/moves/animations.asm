@@ -289,7 +289,7 @@ BattleAnimations::
 	dw BattleAnim_IceShard
 	dw BattleAnim_DreamEater
 	dw BattleAnim_Taunt
-	dw BattleAnim_EarthPower
+	dw BattleAnim_Tremor
 	dw BattleAnim_LeechLife
 	dw BattleAnim_LovelyKiss
 	dw BattleAnim_SkyAttack
@@ -2128,6 +2128,7 @@ BattleAnim_Confusion:
 
 BattleAnim_Earthquake:
 	anim_1gfx BATTLE_ANIM_GFX_ROCKS
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $40
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $4, $10
 .loop
 	anim_sound 0, 1, SFX_EMBER
@@ -2139,7 +2140,7 @@ BattleAnim_Earthquake:
 	anim_wait 4
 	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 152, 72, $50
 	anim_wait 4
-	anim_loop 4, .loop
+	anim_loop 5, .loop
 	anim_ret
 
 BattleAnim_Growl:
@@ -2725,26 +2726,11 @@ BattleAnim_Transform:
 	anim_wait 16
 	anim_jump BattleAnim_ShowMon_0
 
-BattleAnim_EarthPower:
-	anim_1gfx BATTLE_ANIM_GFX_WATER
-	anim_call BattleAnim_UserObj_2Row
-.loop1
-	anim_sound 0, 0, SFX_SPARK
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $14, $2, $0
-	anim_wait 32
-	anim_loop 2, .loop1
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $c0, $1, $0
-.loop
+BattleAnim_Tremor:
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $4, $10
 	anim_sound 0, 1, SFX_EMBER
-	anim_obj ANIM_OBJ_EARTH_POWER, 116, 72, $0
-	anim_wait 2
-	anim_obj ANIM_OBJ_EARTH_POWER, 132, 72, $0
-	anim_wait 2
-	anim_obj ANIM_OBJ_EARTH_POWER, 148, 72, $0
-	anim_wait 16
-	anim_loop 3, .loop
-	anim_wait 32
-	anim_jump BattleAnim_ShowMon_1
+	anim_wait 24
+	anim_ret
 
 BattleAnim_Mimic:
 	anim_1gfx BATTLE_ANIM_GFX_SPEED
