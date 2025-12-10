@@ -278,6 +278,8 @@ FakeOutDescription:
 	db   "A first-turn only"
 	line "flinching move.@"
 
+RockThrowDescription:
+CutDescription:
 StoneEdgeDescription:
 ThroatChopDescription:
 CrossChopDescription:
@@ -312,17 +314,9 @@ SwordsDanceDescription:
 	db   "A dance that in-"
 	line "creases ATTACK.@"
 
-CutDescription:
-	db   "Cuts using claws,"
-	line "scythes, etc.@"
-
 GustDescription:
 	db   "Whips up a strong"
 	line "gust of wind.@"
-
-WingAttackDescription:
-	db   "Strikes the target"
-	line "with wings.@"
 
 WhirlwindDescription:
 	db   "Blows away the foe"
@@ -332,18 +326,6 @@ FlyDescription:
 	db   "1st turn: Fly"
 	line "2nd turn: Attack@"
 
-PowerGemDescription:
-	db "Attacks with a ray"
-	line "of gem-like light.@"
-
-VineWhipDescription:
-	db   "Whips the foe with"
-	line "slender vines.@"
-
-StompDescription:
-	db   "An attack that may"
-	line "cause flinching.@"
-
 DoubleKickDescription:
 	db   "A double kicking"
 	line "attack.@"
@@ -352,6 +334,11 @@ StickyWebDescription:
 	db   "Slows foes when"
 	line "they switch in.@"
 
+RockSlideDescription:
+LowKickDescription:
+BiteDescription:
+StompDescription:
+DrillPeckDescription:
 IcicleCrashDescription:
 ZenHeadbuttDescription:
 IronHeadDescription:
@@ -359,10 +346,6 @@ DarkPulseDescription:
 HeadbuttDescription:
 	db   "An attack that may"
 	line "cause flinching.@"
-
-HornAttackDescription:
-	db   "An attack using a"
-	line "horn to jab.@"
 
 TackleDescription:
 	db   "A full-body charge"
@@ -383,9 +366,12 @@ WrapDescription:
 	line "2-5 turns.@"
 
 SkyAttackDescription:
-OutrageDescription:
 	db "An attack with"
 	line "counterimpact.@"
+
+OutrageDescription:
+	db   "Works 2-3 turns"
+	next "and confuses user.@"
 
 SuckerPunchDescription:
 	db   "Attacks first if"
@@ -406,10 +392,6 @@ PinMissileDescription:
 LeerDescription:
 	db   "Reduces the foe's"
 	line "DEFENSE.@"
-
-BiteDescription:
-	db   "An attack that may"
-	line "cause flinching.@"
 
 GrowlDescription:
 	db   "Reduces the foe's"
@@ -448,14 +430,6 @@ MistDescription:
 	db   "Prevents stat"
 	line "reduction.@"
 
-WaterGunDescription:
-	db   "Squirts water to"
-	line "attack.@"
-
-HydroPumpDescription:
-	db   "A powerful water-"
-	line "type attack.@"
-
 SurfDescription:
 	db   "A strong water-"
 	line "type attack.@"
@@ -489,21 +463,9 @@ HyperBeamDescription:
     db "Attack, then skip"
     line "a turn if no KO.@"
 
-PeckDescription:
-	db   "Jabs the foe with"
-	line "a beak, etc.@"
-
-DrillPeckDescription:
-	db   "A strong, spin-"
-	line "ning-peck attack.@"
-
 CloseCombatDescription:
 	db "Lowers the user's"
 	line "Def and Sp.Def.@"
-
-LowKickDescription:
-	db   "An attack that may"
-	line "cause flinching.@"
 
 CounterDescription:
 	db   "Returns a physical"
@@ -559,10 +521,6 @@ ThunderDescription:
 	db   "An attack that may"
 	line "cause paralysis.@"
 
-RockThrowDescription:
-	db   "Tosses a rock at"
-	line "the foe.@"
-
 TremorDescription:
 EarthquakeDescription:
 	db   "Double power"
@@ -581,6 +539,8 @@ ConfusionDescription:
 	db   "An attack that may"
 	line "cause confusion.@"
 
+NightShadeDescription:
+PowerGemDescription:
 FocusBlastDescription:
 ShadowBallDescription:
 FlashCannonDescription:
@@ -612,10 +572,6 @@ QuickAttackDescription:
 TeleportDescription:
 	db   "A move for fleeing"
 	line "from battle.@"
-
-NightShadeDescription:
-	db   "The user's level"
-	line "equals damage HP.@"
 
 MimicDescription:
 	db   "Copies a move used"
@@ -738,6 +694,7 @@ SporeDescription:
 	db   "A move that"
 	line "induces sleep.@"
 
+MudSlapDescription:
 MirrorShotDescription:
 	db   "An attack thay may"
 	line "reduce accuracy.@"
@@ -757,10 +714,6 @@ FuryStrikesDescription:
 RestDescription:
 	db   "Sleep for 2 turns"
 	line "to fully recover.@"
-
-RockSlideDescription:
-	db   "An attack that may"
-	line "cause flinching.@"
 
 FacadeDescription:
 	db   "Doubles damage if"
@@ -790,6 +743,7 @@ SketchDescription:
 	db   "Copies the foe's"
 	line "move permanently.@"
 
+PeckDescription:
 BugBiteDescription:
 ThiefDescription:
 	db   "Steals foe's item"
@@ -858,10 +812,6 @@ BellyDrumDescription:
 SludgeBombDescription:
 	db   "An attack that may"
 	line "poison the foe.@"
-
-MudSlapDescription:
-	db   "Reduces the foe's"
-	line "accuracy.@"
 
 PsyblastDescription:
 PsyshockDescription:
@@ -984,6 +934,8 @@ MegahornDescription:
 	db   "A powerful charge"
 	line "attack.@"
 
+WaterGunDescription:
+HydroPumpDescription:
 HyperVoiceDescription:
 DragonPulseDescription:
 	db   "An attack that may"
@@ -1068,9 +1020,12 @@ StealthRockDescription:
 	db   "Hurts foes when"
 	line "they switch in.@"
 
+HornAttackDescription:
+VineWhipDescription:
+WingAttackDescription:
 RockSmashDescription:
 	db   "An attack that may"
-	line "lower DEFENSE.@"
+	line "lower Defense.@"
 
 FlareBlitzDescription:
 	db   "Hurts the user but"

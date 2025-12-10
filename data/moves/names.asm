@@ -135,7 +135,7 @@ MoveNames::
 	li "Amnesia"
 	li "Bug Buzz"
 	li "Softboiled"
-	li "Hi Jump Kick"
+	li "Hi-Jump Kick"
 	li "Ice Shard"
 	li "Dream Eater"
 	li "Taunt"
