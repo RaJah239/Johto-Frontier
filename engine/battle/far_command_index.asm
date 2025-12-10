@@ -33,4 +33,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_SUNNY_DAY,       BattleCommand_StartSun
 	dbw EFFECT_SANDSTORM,       BattleCommand_StartSandstorm
 	dbw EFFECT_BARRIER,         BattleCommand_Barrier
+	dbw EFFECT_TRICK_ROOM,		BattleCommand_TrickRoom
 	db -1 ; end

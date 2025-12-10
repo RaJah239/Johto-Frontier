@@ -19,6 +19,7 @@ INCLUDE "engine/battle/move_effects/rain_dance.asm"
 INCLUDE "engine/battle/move_effects/sunny_day.asm"
 INCLUDE "engine/battle/move_effects/sandstorm.asm"
 INCLUDE "engine/battle/move_effects/barrier.asm"
+INCLUDE "engine/battle/move_effects/trick_room.asm"
 
 ; Weather duration when Weather Rock is equipped
 ; Rock: 16, No Rock: 8

@@ -1933,5 +1933,5 @@ FuryDrive:
 TrickRoom:
 	usedmovetext
 	doturn
-	trickroom
+	farcommand
 	endmove
