@@ -829,8 +829,8 @@ SwaggerDescription:
 	line "and raises Attack.@"
 
 SteelWingDescription:
-	db   "May increase"
-	line "user's Defense.@"
+	db   "May up Attack and"
+	line "Defense.@"
 
 SpiderWebDescription:
 MeanLookDescription:

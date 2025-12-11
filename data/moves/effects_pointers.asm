@@ -166,4 +166,5 @@ MoveEffectsPointers:
 	dw TrickRoom
 	dw Taunt
 	dw WildCharge
+	dw AtkDefUpHit
 	assert_table_length NUM_MOVE_EFFECTS

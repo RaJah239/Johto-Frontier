@@ -1963,3 +1963,26 @@ Taunt:
 	checkhit
 	farcommand
 	endmove
+
+AtkDefUpHit:
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	effectchance
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	attackup
+	statupmessage
+	defenseup
+	statupmessage
+	checkfaint
+	kingsrock
+	endmove
