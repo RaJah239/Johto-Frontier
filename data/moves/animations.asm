@@ -1813,6 +1813,14 @@ BattleAnim_FuryStrikes:
 	anim_ret
 
 BattleAnim_Cut:
+	anim_2gfx BATTLE_ANIM_GFX_REFLECT, BATTLE_ANIM_GFX_HIT
+	anim_obp0 $0
+	anim_sound 0, 0, SFX_RAGE
+	anim_call BattleAnim_TargetObj_1Row
+	anim_call BattleAnimSub_Metallic
+	anim_call BattleAnim_ShowMon_0
+	anim_resetobp0
+	anim_call BattleAnim_TargetObj_1Row
 	anim_1gfx BATTLE_ANIM_GFX_CUT
 	anim_sound 0, 1, SFX_CUT
 	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 152, 40, $0
