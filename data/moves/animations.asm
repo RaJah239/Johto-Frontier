@@ -398,7 +398,7 @@ BattleAnimations::
 	dw BattleAnim_Ancientpower
 	dw BattleAnim_ShadowBall
 	dw BattleAnim_StealthRock
-	dw BattleAnim_RockSmash
+	dw BattleAnim_BrickBreak
 	dw BattleAnim_Whirlpool
 	dw BattleAnim_FlareBlitz
 	dw BattleAnim_PoisonJab
@@ -4920,27 +4920,22 @@ BattleAnim_StealthRock:
 	anim_wait 64
 	anim_ret
 
-BattleAnim_RockSmash:
-	anim_2gfx BATTLE_ANIM_GFX_ROCKS, BATTLE_ANIM_GFX_HIT
-	anim_sound 0, 1, SFX_SPARK
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 128, 56, $0
-	anim_sound 0, 1, SFX_SPARK
-	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $28
-	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $5c
-	anim_sound 0, 1, SFX_SPARK
-	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $10
-	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $e8
-	anim_sound 0, 1, SFX_SPARK
-	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $9c
-	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $d0
-	anim_wait 6
-	anim_sound 0, 1, SFX_SPARK
-	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $1c
-	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $50
-	anim_sound 0, 1, SFX_SPARK
-	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $dc
-	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $90
-	anim_wait 32
+BattleAnim_BrickBreak:
+	anim_1gfx BATTLE_ANIM_GFX_HIT
+	anim_sound 6, 2, SFX_SHINE
+	anim_obj BATTLE_ANIM_OBJ_PUNCH, 136, 24, $30
+	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 24, $30
+	anim_wait 16
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $55, $2, $0
+	anim_wait 64
+	anim_clearobjs
+	anim_obj BATTLE_ANIM_OBJ_PUNCH, 136, 82, $30
+	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 82, $30
+	anim_wait 8
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $3
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
+	anim_wait 34
 	anim_ret
 
 BattleAnim_InWhirlpool:

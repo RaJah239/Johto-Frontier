@@ -1654,19 +1654,19 @@ AskRockSmashText:
 
 HasRockSmash:
 ; Step 1
-	ld d, ROCK_SMASH
+	ld d, BRICK_BREAK
 	call CheckPartyMove
 	jr nc, .yes
 
 ; Step 2
-	ld a, TM_ROCK_SMASH
+	ld a, TM_BRICK_BREAK
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem
 	jr z, .no
 
 ; Step 3
-	ld d, ROCK_SMASH
+	ld d, BRICK_BREAK
 	call CheckPartyCanLearnMove
        and a
 	jr z, .yes

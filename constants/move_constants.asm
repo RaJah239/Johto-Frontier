@@ -254,7 +254,7 @@
 	const ANCIENTPOWER ; f6
 	const SHADOW_BALL  ; f7
 	const STEALTH_ROCK ; f8
-	const ROCK_SMASH   ; f9
+	const BRICK_BREAK  ; f9
 	const WHIRLPOOL    ; fa
 	const FLARE_BLITZ  ; fb
 	const POISON_JAB   ; fc

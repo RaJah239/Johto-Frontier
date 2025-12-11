@@ -21,6 +21,7 @@ INCLUDE "engine/battle/move_effects/sandstorm.asm"
 INCLUDE "engine/battle/move_effects/barrier.asm"
 INCLUDE "engine/battle/move_effects/trick_room.asm"
 INCLUDE "engine/battle/move_effects/taunt.asm"
+INCLUDE "engine/battle/move_effects/brick_break.asm"
 
 ; Weather duration when Weather Rock is equipped
 ; Rock: 16, No Rock: 8

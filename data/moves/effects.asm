@@ -1965,3 +1965,22 @@ AtkDefUpHit:
 	checkfaint
 	kingsrock
 	endmove
+
+BrickBreak:
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	checkhit
+	damagevariation
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	farcommand
+	checkfaint
+	kingsrock
+	endmove

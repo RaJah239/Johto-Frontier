@@ -249,7 +249,7 @@ MoveDescriptions::
 	dw AncientpowerDescription
 	dw ShadowBallDescription
 	dw StealthRockDescription
-	dw RockSmashDescription
+	dw BrickBreakDescription
 	dw WhirlpoolDescription
 	dw FlareBlitzDescription
 	dw PoisonJabDescription
@@ -955,11 +955,14 @@ StealthRockDescription:
 	db   "Hurts foes when"
 	line "they switch in.@"
 
+BrickBreakDescription:
+	db	 "Breaks Reflect and"
+	line "Light Screen.@"
+
 CrunchDescription:
 HornAttackDescription:
 VineWhipDescription:
 WingAttackDescription:
-RockSmashDescription:
 	db   "An attack that may"
 	line "lower Defense.@"
 

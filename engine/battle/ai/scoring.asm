@@ -408,7 +408,28 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_FREEZE_DRY,       AI_Smart_FreezeDry
 	dbw EFFECT_BODY_PRESS,       AI_Smart_BodyPress
 	dbw EFFECT_AVALANCHE,        AI_Smart_Avalanche
+	dbw EFFECT_BRICK_BREAK,      AI_Smart_BrickBreak
 	db -1 ; end
+
+AI_Smart_BrickBreak:
+    ; 90% chance to greatly encourage this move if the player used LIGHT_SCREEN or REFLECT.
+
+    ; Load the player's field conditions
+	ld a, [wPlayerMoveStruct + MOVE_ANIM]
+	cp LIGHT_SCREEN
+	call z, EncourageBrickBreak
+	cp REFLECT
+	call z, EncourageBrickBreak
+	ret ; If neither LIGHT_SCREEN nor REFLECT is active, skip the encouragement
+
+EncourageBrickBreak:
+	; 90% chance to encourage this move
+	call Random
+	cp 12 percent ; 90% chance (256 * 0.9 = 230, so cp 256 - 230 = 26)
+	ret c
+	dec [hl]
+	dec [hl]
+	ret
 
 AI_Smart_BodyPress:
 ; Encourage this move if enemy's defense level is at least +1.

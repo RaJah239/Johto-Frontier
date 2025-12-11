@@ -411,6 +411,18 @@ BattleText_UsersHurtByStringBuffer1:
 	text "!"
 	prompt
 
+BrokeReflectText:
+	text "<TARGET>'s"
+	line "Reflect was"
+	cont "shattered!"
+	prompt
+
+BrokeLightScreenText:
+	text "<TARGET>'s"
+	line "Light Screen was"
+	cont "shattered!"
+	prompt
+
 BattleText_UserWasReleasedFromStringBuffer1:
 	text "<USER>"
 	line "was released from"

@@ -248,7 +248,7 @@ MoveNames::
 	li "AncientPower"
 	li "Shadow Ball"
 	li "Stealth Rock"
-	li "Rock Smash"
+	li "Brick Break"
 	li "Whirlpool"
 	li "Flare Blitz"
 	li "Poison Jab"

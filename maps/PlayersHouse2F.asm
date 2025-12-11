@@ -107,7 +107,7 @@ if DEF(_DEBUG)
 	closetext
 
 	; tms
-	giveitem TM_ROCK_SMASH, 50
+	giveitem TM_BRICK_BREAK, 50
 	giveitem TM_HEADBUTT, 50
 	giveitem TM_DIG, 50
 	giveitem TM_HIDDEN_POWER, 50

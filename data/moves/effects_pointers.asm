@@ -166,4 +166,5 @@ MoveEffectsPointers:
 	dw Taunt
 	dw WildCharge
 	dw AtkDefUpHit
+	dw BrickBreak
 	assert_table_length NUM_MOVE_EFFECTS

@@ -138,7 +138,7 @@ Route36RockSmashGuyScript:
 .ClearedSudowoodo:
 	writetext RockSmashGuyText2
 	promptbutton
-	verbosegiveitem TM_ROCK_SMASH
+	verbosegiveitem TM_BRICK_BREAK
 	iffalse .NoRoomForTM
 	setevent EVENT_GOT_TM08_ROCK_SMASH
 .AlreadyGotRockSmash:
@@ -466,7 +466,7 @@ RockSmashGuyText2:
 
 RockSmashGuyText3:
 	text "That happens to be"
-	line "ROCK SMASH."
+	line "Brick Break."
 
 	para "You can shatter"
 	line "rocks with just a"
@@ -477,6 +477,10 @@ RockSmashGuyText3:
 	para "If any rocks are"
 	line "in your way, just"
 	cont "smash 'em up!"
+
+	para "It breaks Reflect"
+	line "and Light Screen"
+	cont "in battle too!"
 	done
 
 Route36LassText:

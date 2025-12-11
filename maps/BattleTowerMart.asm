@@ -33,7 +33,7 @@ BattleTowerMartTMCoinTraderScript:
     ifequal 5,  .TMRoar
     ifequal 6,  .TMToxic
     ifequal 7,  .TMZapCannon
-    ifequal 8,  .TMRockSmash
+    ifequal 8,  .TMBrickBreak
     ifequal 9,  .TMPsychUp
     ifequal 10, .TMHiddenPower
     ifequal 11, .TMSunnyDay
@@ -119,8 +119,8 @@ BattleTowerMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMRockSmash:
-    verbosegiveitem TM_ROCK_SMASH
+.TMBrickBreak:
+    verbosegiveitem TM_BRICK_BREAK
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
