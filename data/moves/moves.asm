@@ -88,7 +88,7 @@ Moves:
 	move MEGA_DRAIN,   EFFECT_LEECH_HIT,          60, GRASS,         SPECIAL,  100, 32,   0
 	move LEECH_SEED,   EFFECT_LEECH_SEED,          0, GRASS,         STATUS,    95,  8,   0
 	move GROWTH,       EFFECT_SP_ATK_UP_2,         0, NORMAL,        STATUS,   100, 32,   0
-	move LEAF_BLADE,   EFFECT_NORMAL_HIT,         55, GRASS,         PHYSICAL, 100, 32,   0
+	move LEAF_BLADE,   EFFECT_NORMAL_HIT,         70, GRASS,         PHYSICAL, 100, 32,   0
 	move SOLARBEAM,    EFFECT_SOLARBEAM,         140, GRASS,         SPECIAL,  100, 24,   0
 	move POISONPOWDER, EFFECT_POISON,              0, POISON,        STATUS,    85, 24,   0
 	move STUN_SPORE,   EFFECT_PARALYZE,            0, GRASS,         STATUS,    85, 24,   0
