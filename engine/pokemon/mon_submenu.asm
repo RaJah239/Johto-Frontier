@@ -127,7 +127,7 @@ GetMonSubmenuItems:
 	call CanUseDig
 	call CanUseTeleport
 	call CanUseSoftboiled
-	call CanUseRecover
+	call CanUseMilkDrink
 
 .skip_moves
 	ld a, MONMENUITEM_STATS
@@ -464,12 +464,12 @@ MonSubMenu_GetNextEvoAttackByte:
 	call AddMonMenuItem
 	ret
 	
-	CanUseRecover:
-	ld a, RECOVER
+	CanUseMilkDrink:
+	ld a, MILK_DRINK
 	call CheckMonKnowsMove
 	and a
 	ret nz
 
-	ld a, MONMENUITEM_RECOVER
+	ld a, MONMENUITEM_MILK_DRINK
 	call AddMonMenuItem
 	ret

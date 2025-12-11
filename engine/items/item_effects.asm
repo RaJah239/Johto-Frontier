@@ -2123,8 +2123,8 @@ GetHealingItemAmount:
 
 INCLUDE "data/items/heal_hp.asm"
 
-Softboiled_RecoverFunction:
-; Softboiled/Recover in the field
+Softboiled_MilkDrinkFunction:
+; Softboiled/Milk Drink in the field
 	ld a, [wPartyMenuCursor]
 	dec a
 	ld b, a

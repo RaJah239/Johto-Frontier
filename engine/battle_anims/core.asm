@@ -250,12 +250,12 @@ InitBattleAnimBuffer:
 	ld d, a
 	ld a, [wBattleAnimTempFixY]
 	cp $ff
-	jr nz, .check_softboiled_recover
+	jr nz, .check_softboiled_milk_drink
 	ld a, 5 * TILE_WIDTH
 	add d
 	jr .done
 
-.check_softboiled_recover
+.check_softboiled_milk_drink
 	sub d
 	push af
 	ld a, [wFXAnimID + 1]
@@ -264,7 +264,7 @@ InitBattleAnimBuffer:
 	ld a, [wFXAnimID]
 	cp SOFTBOILED
 	jr z, .do_sub
-	cp RECOVER
+	cp MILK_DRINK
 	jr nz, .no_sub
 .do_sub
 	pop af
