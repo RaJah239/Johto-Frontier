@@ -40,7 +40,7 @@ MoveNames::
 	li "Double-Edge"
 	li "Drain Punch"
 	li "Poison Sting"
-	li "Pika Thunder"
+	li "Milk Drink"
 	li "Thrash"
 	li "Leer"
 	li "Bite"

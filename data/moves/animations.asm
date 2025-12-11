@@ -190,7 +190,7 @@ BattleAnimations::
 	dw BattleAnim_DoubleEdge
 	dw BattleAnim_DrainPunch
 	dw BattleAnim_PoisonSting
-	dw BattleAnim_PikaThunder
+	dw BattleAnim_MilkDrink
 	dw BattleAnim_Thrash
 	dw BattleAnim_Leer
 	dw BattleAnim_Bite
@@ -1530,7 +1530,21 @@ BattleAnim_ThunderWave:
 	anim_wait 96
 	anim_ret
 
-BattleAnim_PikaThunder:
+BattleAnim_MilkDrink:
+	anim_2gfx BATTLE_ANIM_GFX_MISC, BATTLE_ANIM_GFX_BUBBLE
+	anim_call BattleAnim_TargetObj_1Row
+	anim_obj BATTLE_ANIM_OBJ_MILK_DRINK, 74, 104, $0
+	anim_wait 16
+	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING, $0, BG_EFFECT_USER, $40
+	anim_sound 0, 0, SFX_MILK_DRINK
+.loop
+	anim_obj BATTLE_ANIM_OBJ_RECOVER, 44, 88, $20
+	anim_wait 8
+	anim_loop 8, .loop
+	anim_wait 128
+	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
+	anim_jump BattleAnim_ShowMon_0
+
 BattleAnim_Thunder:
 	anim_1gfx BATTLE_ANIM_GFX_LIGHTNING
 	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $6, $20

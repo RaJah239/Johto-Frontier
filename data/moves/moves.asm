@@ -54,7 +54,7 @@ Moves:
 	move DOUBLE_EDGE,  EFFECT_RECOIL_HIT,        120, NORMAL,        PHYSICAL, 100, 24,   0
 	move DRAIN_PUNCH,  EFFECT_LEECH_HIT,          85, FIGHTING,      PHYSICAL, 100, 24,   0
 	move POISON_STING, EFFECT_POISON_HIT,         40, POISON,        PHYSICAL, 100, 40,  30
-	move PIKA_THUNDER, EFFECT_THUNDER,           120, ELECTRIC,      STATUS,   100, 16,  30 ; to replace
+	move MILK_DRINK,   EFFECT_HEAL,                0, NORMAL,        STATUS,   100, 24,   0
 	move THRASH,       EFFECT_RAMPAGE,           120, NORMAL,        PHYSICAL, 100, 16,   0
 	move LEER,         EFFECT_DEFENSE_DOWN,        0, NORMAL,        STATUS,   100, 40,   0
 	move BITE,         EFFECT_FLINCH_HIT,         60, DARK,          PHYSICAL, 100, 32,  30

@@ -41,7 +41,7 @@ MoveDescriptions::
 	dw DoubleEdgeDescription
 	dw DrainPunchDescription
 	dw PoisonStingDescription
-	dw PikaThunderDescription
+	dw MilkDrinkDescription
 	dw ThrashDescription
 	dw LeerDescription
 	dw BiteDescription
@@ -489,7 +489,6 @@ ScaryFaceDescription:
 BodySlamDescription:
 ThunderpunchDescription:
 SparkDescription:
-PikaThunderDescription:
 ThundershockDescription:
 ThunderboltDescription:
 ThunderDescription:
@@ -547,6 +546,7 @@ ScreechDescription:
 	db   "Sharply reduces"
 	line "the foe's DEFENSE.@"
 
+MilkDrinkDescription:
 RecoverDescription:
 SoftboiledDescription:
 	db   "Restores HP by 1/2"

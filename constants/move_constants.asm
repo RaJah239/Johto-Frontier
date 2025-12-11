@@ -46,7 +46,7 @@
 	const DOUBLE_EDGE  ; 26
 	const DRAIN_PUNCH  ; 27
 	const POISON_STING ; 28
-	const PIKA_THUNDER ; 29
+	const MILK_DRINK   ; 29
 	const THRASH       ; 2a
 	const LEER         ; 2b
 	const BITE         ; 2c
