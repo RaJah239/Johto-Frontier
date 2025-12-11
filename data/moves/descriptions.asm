@@ -294,17 +294,9 @@ KarateChopDescription:
 	db   "Has a high criti-"
 	line "cal hit ratio.@"
 
-FirePunchDescription:
-	db   "A fiery punch. May"
-	line "cause a burn.@"
-
 AvalancheDescription:
 	db   "Damage doubles if"
 	line "user is hit first.@"
-
-IcePunchDescription:
-	db   "An icy punch. May"
-	line "cause frostbite.@"
 
 BulkUpDescription:
 	db   "Increases Attack"
@@ -312,11 +304,11 @@ BulkUpDescription:
 
 SwordsDanceDescription:
 	db   "A dance that in-"
-	line "creases ATTACK.@"
+	line "creases Attack.@"
 
 GustDescription:
-	db   "Whips up a strong"
-	line "gust of wind.@"
+	db   "Double damage to"
+	line "airborne foes.@"
 
 WhirlwindDescription:
 	db   "Blows away the foe"
@@ -351,20 +343,18 @@ TackleDescription:
 	db   "A full-body charge"
 	line "attack.@"
 
-BodySlamDescription:
-	db   "An attack that may"
-	line "cause paralysis.@"
-
 SnarlDescription:
 	db "An attack that"
 	line "lowers Sp.Atk.@"
 
+FireSpinDescription:
 SandTombDescription:
 WhirlpoolDescription:
 WrapDescription:
 	db   "Traps the foe for"
 	line "2-5 turns.@"
 
+DoubleEdgeDescription:
 SkyAttackDescription:
 	db "An attack with"
 	line "counterimpact.@"
@@ -377,34 +367,19 @@ SuckerPunchDescription:
 	db   "Attacks first if"
 	line "the foe attacks.@"
 
-DoubleEdgeDescription:
-	db   "A tackle that also"
-	line "hurts the user.@"
-
-PoisonStingDescription:
-	db   "An attack that may"
-	line "poison the target.@"
-
-PinMissileDescription:
-	db   "Fires pins that"
-	line "strike 2-5 times.@"
-
 LeerDescription:
 	db   "Reduces the foe's"
-	line "DEFENSE.@"
+	line "Defense.@"
 
 GrowlDescription:
 	db   "Reduces the foe's"
-	line "ATTACK.@"
+	line "Attack.@"
 
 RoarDescription:
 	db   "Scares wild foes"
 	line "to end battle.@"
 
-SingDescription:
-	db   "May cause the foe"
-	line "to fall asleep.@"
-
+GrowthDescription:
 NastyPlotDescription:
 	db   "Sharply increases"
 	line "user's Spcl.Atk.@"
@@ -413,10 +388,9 @@ DisableDescription:
 	db   "Disables the foe's"
 	line "most recent move.@"
 
+DragonRageDescription:
 AcidDescription:
-	db   "An attack that may"
-	line "lower DEFENSE.@"
-
+FirePunchDescription:
 LavaPlumeDescription:
 EggBombDescription:
 ScaldDescription:
@@ -434,23 +408,27 @@ SurfDescription:
 	db   "A strong water-"
 	line "type attack.@"
 
+PowderSnowDescription:
+IcePunchDescription:
 IceBeamDescription:
-	db   "An attack that may"
-	line "cause frostbite.@"
-
 BlizzardDescription:
 	db   "An attack that may"
 	line "cause frostbite.@"
 
+SupersonicDescription:
+ConfusionDescription:
 SignalBeamDescription:
-HurricaneDescription:
 PsybeamDescription:
 	db   "An attack that may"
+	line "cause confusion.@"
+
+HurricaneDescription:
+	db   "Hits in rain. May"
 	line "confuse the foe.@"
 
 BubblebeamDescription:
 	db   "An attack that may"
-	line "lower SPEED.@"
+	line "lower Speed.@"
 
 PlayRoughDescription:
 FairyFlashDescription:
@@ -461,7 +439,7 @@ AuroraBeamDescription:
 GigaImpactDescription:
 HyperBeamDescription:
     db "Attack, then skip"
-    line "a turn if no KO.@"
+    line "a turn if no K.O.@"
 
 CloseCombatDescription:
 	db "Lowers the user's"
@@ -479,10 +457,6 @@ LeechSeedDescription:
 	db   "Steals HP from the"
 	line "foe on every turn.@"
 
-GrowthDescription:
-	db   "Raises the SPCL."
-	line "ATK rating.@"
-
 SolarbeamDescription:
 	db   "1st turn: Prepare"
 	line "2nd turn: Attack@"
@@ -491,32 +465,32 @@ PoisonpowderDescription:
 	db   "A move that may"
 	line "poison the foe.@"
 
+ThunderWaveDescription:
+	db   "A move that causes"
+	line "paralysis.@"
+
 StunSporeDescription:
 	db   "A move that may"
 	line "paralyze the foe.@"
 
+LovelyKissDescription:
+HypnosisDescription:
+SingDescription:
 SleepPowderDescription:
 	db   "May cause the foe"
 	line "to fall asleep.@"
 
 StringShotDescription:
-	db   "A move that lowers"
-	line "the foe's SPEED.@"
+ScaryFaceDescription:
+	db   "Sharply reduces"
+	line "the foe's Speed.@"
 
-DragonRageDescription:
-	db   "Always inflicts"
-	line "40HP damage.@"
-
-FireSpinDescription:
-	db   "Traps foe in fire"
-	line "for 2-5 turns.@"
-
+BodySlamDescription:
 ThunderpunchDescription:
 SparkDescription:
 PikaThunderDescription:
 ThundershockDescription:
 ThunderboltDescription:
-ThunderWaveDescription:
 ThunderDescription:
 	db   "An attack that may"
 	line "cause paralysis.@"
@@ -534,11 +508,6 @@ ToxicDescription:
 	db   "A poison move with"
 	line "increasing damage.@"
 
-SupersonicDescription:
-ConfusionDescription:
-	db   "An attack that may"
-	line "cause confusion.@"
-
 NightShadeDescription:
 PowerGemDescription:
 FocusBlastDescription:
@@ -552,10 +521,6 @@ PsychicMDescription:
 MoonblastDescription:
 	db   "An attack that may"
 	line "lower Spcl.Atk.@"
-
-HypnosisDescription:
-	db   "May put the foe to"
-	line "sleep.@"
 
 AgilityDescription:
 	db   "Sharply increases"
@@ -582,8 +547,9 @@ ScreechDescription:
 	line "the foe's DEFENSE.@"
 
 RecoverDescription:
+SoftboiledDescription:
 	db   "Restores HP by 1/2"
-	line "the max HP.@"
+	line "the user's max HP.@"
 
 HardenDescription:
 	db   "Raises the user's"
@@ -633,10 +599,9 @@ LickDescription:
 	db   "An attack that may"
 	line "cause paralysis.@"
 
+SludgeBombDescription:
 SmogDescription:
-	db   "An attack that may"
-	line "poison the foe.@"
-
+PoisonStingDescription:
 PoisonJabDescription:
 GunkShotDescription:
 SludgeDescription:
@@ -665,10 +630,6 @@ AmnesiaDescription:
 	db   "Sharply raises the"
 	line "user's SPCL.DEF.@"
 
-SoftboiledDescription:
-	db   "Restores HP by 1/2"
-	line "the user's max HP.@"
-
 DiveBombDescription:
 HiJumpKickDescription:
 	db   "May miss and hurt"
@@ -677,10 +638,6 @@ HiJumpKickDescription:
 DreamEaterDescription:
 	db   "Steals HP from a"
 	line "sleeping victim.@"
-
-LovelyKissDescription:
-	db   "May cause the foe"
-	line "to fall asleep.@"
 
 TransformDescription:
 	db   "The user assumes"
@@ -706,10 +663,6 @@ SplashDescription:
 ExplosionDescription:
 	db   "Very powerful but"
 	line "makes user faint.@"
-
-FuryStrikesDescription:
-	db   "Quickly attacks"
-	line "2-5 times.@"
 
 RestDescription:
 	db   "Sleep for 2 turns"
@@ -749,10 +702,6 @@ ThiefDescription:
 	db   "Steals foe's item"
 	line "if none is held.@"
 
-SpiderWebDescription:
-	db   "Prevents fleeing"
-	line "or switching.@"
-
 DragonDanceDescription:
 	db   "Increases Attack"
 	line "and Speed.@"
@@ -785,10 +734,6 @@ SpiteDescription:
 	db   "Cuts the PP of the"
 	line "foe's last move.@"
 
-PowderSnowDescription:
-	db   "An attack that may"
-	line "cause frostbite.@"
-
 ProtectDescription:
 	db   "Foils attack that"
 	line "turn. It may fail.@"
@@ -797,10 +742,6 @@ MachPunchDescription:
 	db   "A fast punch that"
 	line "lands first.@"
 
-ScaryFaceDescription:
-	db   "Sharply reduces"
-	line "the foe's SPEED.@"
-
 FaintAttackDescription:
 	db   "An attack that"
 	line "never misses.@"
@@ -808,10 +749,6 @@ FaintAttackDescription:
 BellyDrumDescription:
 	db   "Reduces own HP to"
 	line "maximize ATTACK.@"
-
-SludgeBombDescription:
-	db   "An attack that may"
-	line "poison the foe.@"
 
 PsyblastDescription:
 PsyshockDescription:
@@ -844,8 +781,9 @@ IcyWindDescription:
 	db   "An attack that"
 	line "lowers Speed.@"
 
+PinMissileDescription:
+FuryStrikesDescription:
 RockBlastDescription:
-BoneRushDescription:
 	db   "An attack that"
 	line "hits 2-5 times.@"
 
@@ -876,7 +814,7 @@ EndureDescription:
 
 CharmDescription:
 	db   "Sharply lowers the"
-	line "foe's ATTACK.@"
+	line "foe's Attack.@"
 
 RolloutDescription:
 	db   "Attacks 5 turns"
@@ -888,12 +826,13 @@ FalseSwipeDescription:
 
 SwaggerDescription:
 	db   "Causes confusion"
-	line "and raises ATTACK.@"
+	line "and raises Attack.@"
 
 SteelWingDescription:
-	db   "Stiff wings strike"
-	line "the foe.@"
+	db   "May increase"
+	line "user's Defense.@"
 
+SpiderWebDescription:
 MeanLookDescription:
 	db   "Prevents fleeing"
 	line "or switching.@"
@@ -907,7 +846,7 @@ SleepTalkDescription:
 	line "while asleep.@"
 
 HealBellDescription:
-	db   "Eliminates all"
+	db   "Eliminates team's"
 	line "status problems.@"
 
 ReturnDescription:
@@ -994,10 +933,6 @@ HailDescription:
 	db   "Inflicts damage"
 	line "for 8 turns.@"
 
-CrunchDescription:
-	db   "An attack that may"
-	line "lower SPCL.DEF.@"
-
 MirrorCoatDescription:
 	db   "Counters a SPCL."
 	line "ATK move double.@"
@@ -1020,6 +955,7 @@ StealthRockDescription:
 	db   "Hurts foes when"
 	line "they switch in.@"
 
+CrunchDescription:
 HornAttackDescription:
 VineWhipDescription:
 WingAttackDescription:
