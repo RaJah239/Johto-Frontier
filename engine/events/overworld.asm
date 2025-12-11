@@ -440,7 +440,7 @@ UseFlash:
 	jmp QueueScript
 
 Script_UseFlash:
-	refreshmap
+	reanchormap
 	isfieldactionsset
 	iffalse .skip
 	special UpdateTimePals
@@ -449,7 +449,7 @@ Script_UseFlash:
 	cry MAREEP
 	waitsfx
 	closepokepic
-	refreshmap
+	reanchormap
 	writetext UseFlashTextScript
 	closetext
 .skip
