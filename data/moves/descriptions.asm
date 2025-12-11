@@ -42,7 +42,7 @@ MoveDescriptions::
 	dw DrainPunchDescription
 	dw PoisonStingDescription
 	dw PikaThunderDescription
-	dw PinMissileDescription
+	dw ThrashDescription
 	dw LeerDescription
 	dw BiteDescription
 	dw GrowlDescription
@@ -359,9 +359,10 @@ SkyAttackDescription:
 	db "An attack with"
 	line "counterimpact.@"
 
+ThrashDescription:
 OutrageDescription:
 	db   "Works 2-3 turns"
-	next "and confuses user.@"
+	line "and confuses user.@"
 
 SuckerPunchDescription:
 	db   "Attacks first if"
@@ -781,7 +782,6 @@ IcyWindDescription:
 	db   "An attack that"
 	line "lowers Speed.@"
 
-PinMissileDescription:
 FuryStrikesDescription:
 RockBlastDescription:
 	db   "An attack that"

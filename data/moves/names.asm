@@ -41,7 +41,7 @@ MoveNames::
 	li "Drain Punch"
 	li "Poison Sting"
 	li "Pika Thunder"
-	li "Pin Missile"
+	li "Thrash"
 	li "Leer"
 	li "Bite"
 	li "Growl"

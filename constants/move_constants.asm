@@ -47,7 +47,7 @@
 	const DRAIN_PUNCH  ; 27
 	const POISON_STING ; 28
 	const PIKA_THUNDER ; 29
-	const PIN_MISSILE  ; 2a
+	const THRASH       ; 2a
 	const LEER         ; 2b
 	const BITE         ; 2c
 	const GROWL        ; 2d
