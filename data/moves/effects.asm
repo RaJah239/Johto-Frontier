@@ -662,27 +662,6 @@ EvasionDownHit:
 	statdownmessage
 	endmove
 
-DefenseUpHit:
-	usedmovetext
-	doturn
-	critical
-	damagestats
-	damagecalc
-	stab
-	damagevariation
-	checkhit
-	effectchance
-	moveanim
-	failuretext
-	applydamage
-	criticaltext
-	supereffectivetext
-	defenseup
-	statupmessage
-	checkfaint
- 	buildopponentrage
-	endmove
-
 AttackUpHit:
 	usedmovetext
 	doturn

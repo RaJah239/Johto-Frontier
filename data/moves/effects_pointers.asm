@@ -123,7 +123,6 @@ MoveEffectsPointers:
 	dw HiddenPower
 	dw RainDance
 	dw SunnyDay
-	dw DefenseUpHit
 	dw AttackUpHit
 	dw AllUpHit
 	dw FakeOut
