@@ -128,7 +128,7 @@
 	const THROAT_CHOP  ; 78
 	const EGG_BOMB     ; 79
 	const LICK         ; 7a
-	const SMOG         ; 7b
+	const POUNCE       ; 7b
 	const SLUDGE       ; 7c
 	const DISARM_VOICE ; 7d
 	const FIRE_BLAST   ; 7e

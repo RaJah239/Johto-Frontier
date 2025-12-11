@@ -272,7 +272,7 @@ BattleAnimations::
 	dw BattleAnim_ThroatChop
 	dw BattleAnim_EggBomb
 	dw BattleAnim_Lick
-	dw BattleAnim_Smog
+	dw BattleAnim_Pounce
 	dw BattleAnim_Sludge
 	dw BattleAnim_DisarmVoice
 	dw BattleAnim_FireBlast
@@ -2602,16 +2602,6 @@ BattleAnim_Mist:
 	anim_wait 96
 	anim_ret
 
-BattleAnim_Smog:
-	anim_1gfx BATTLE_ANIM_GFX_HAZE
-	anim_sound 0, 1, SFX_BUBBLEBEAM
-.loop
-	anim_obj BATTLE_ANIM_OBJ_SMOG, 132, 16, $0
-	anim_wait 8
-	anim_loop 10, .loop
-	anim_wait 96
-	anim_ret
-
 BattleAnim_HornAttack:
 	anim_2gfx BATTLE_ANIM_GFX_HORN, BATTLE_ANIM_GFX_HIT
 	anim_obj BATTLE_ANIM_OBJ_HORN, 72, 80, $1
@@ -3238,6 +3228,20 @@ BattleAnim_QuickAttack:
 	anim_wait 8
 	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, BG_EFFECT_USER, $0
 	anim_wait 16
+	anim_ret
+
+BattleAnim_Pounce:
+	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_HIT
+	anim_if_param_equal $1, BattleAnim_HiJumpKick
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $1, $0
+	anim_bgeffect BATTLE_BG_EFFECT_HIDE_MON, $0, $1, $0
+	anim_sound 0, 0, SFX_OUTRAGE
+	anim_call BattleAnim_DiveBomb_Branch
+	anim_wait 32
+	anim_sound 0, 1, SFX_HEADBUTT
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
+	anim_wait 16
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
 	anim_ret
 
 BattleAnim_DiveBomb:

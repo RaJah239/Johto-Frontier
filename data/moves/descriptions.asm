@@ -123,7 +123,7 @@ MoveDescriptions::
 	dw ThroatChopDescription
 	dw EggBombDescription
 	dw LickDescription
-	dw SmogDescription
+	dw PounceDescription
 	dw SludgeDescription
 	dw DisarmVoiceDescription
 	dw FireBlastDescription
@@ -600,7 +600,6 @@ LickDescription:
 	line "cause paralysis.@"
 
 SludgeBombDescription:
-SmogDescription:
 PoisonStingDescription:
 PoisonJabDescription:
 GunkShotDescription:
@@ -775,6 +774,7 @@ PerishSongDescription:
 	db   "Both user and foe"
 	line "faint in 3 turns.@"
 
+PounceDescription:
 RockTombDescription:
 BulldozeDescription:
 IcyWindDescription:

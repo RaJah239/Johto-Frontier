@@ -136,7 +136,7 @@ Moves:
 	move THROAT_CHOP,  EFFECT_NORMAL_HIT,         80, DARK,          PHYSICAL, 100, 24,   0
 	move EGG_BOMB,     EFFECT_BURN_HIT,          100, NORMAL,        PHYSICAL,  95, 16,  30
 	move LICK,         EFFECT_PARALYZE_HIT,       40, GHOST,         PHYSICAL, 100, 40,  30
-	move SMOG,         EFFECT_POISON_HIT,         40, POISON,        SPECIAL,  100, 32,  50 ; to replace
+	move POUNCE,       EFFECT_SPEED_DOWN_HIT,     60, BUG,           PHYSICAL, 100, 24, 100
 	move SLUDGE,       EFFECT_POISON_HIT,         65, POISON,        SPECIAL,  100, 24,  30
 	move DISARM_VOICE, EFFECT_ALWAYS_HIT,         40, FAIRY,         SPECIAL,  100, 40,   0
 	move FIRE_BLAST,   EFFECT_BURN_HIT,          120, FIRE,          SPECIAL,   85, 16,  10

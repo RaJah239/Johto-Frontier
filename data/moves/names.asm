@@ -122,7 +122,7 @@ MoveNames::
 	li "Throat Chop"
 	li "Egg Bomb"
 	li "Lick"
-	li "Smog"
+	li "Pounce"
 	li "Sludge"
 	li "Disarm Voice"
 	li "Fire Blast"
