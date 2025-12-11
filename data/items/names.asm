@@ -178,7 +178,7 @@ ItemNames::
 	li "Hyper EV Up"
 	li "Park Ball"
 	li "Rainbow Wing"
-	li "?"
+	li "Assault Vest"
 	li "Brick Piece"
 	li "?"
 	li "?"

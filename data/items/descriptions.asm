@@ -179,7 +179,7 @@ ItemDescriptions:
 	dw HyperEVUpDesc
 	dw ParkBallDesc
 	dw RainbowWingDesc
-	dw TeruSama24Desc
+	dw AssaultVestDesc
 	dw BrickPieceDesc
 	dw TeruSama25Desc
 	dw TeruSama27Desc
@@ -957,8 +957,9 @@ RainbowWingDesc:
 	db   "A mystical feather"
 	next "of rainbow colors.@"
 
-TeruSama24Desc:
-	db   "?@"
+AssaultVestDesc:
+	db   "Boost Sp.Def but"
+	next "forces attacks.@"
 
 BrickPieceDesc:
 	db   "A rare chunk of"

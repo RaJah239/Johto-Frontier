@@ -184,7 +184,7 @@
 	const HYPER_EV_UP  ; b0
 	const PARK_BALL    ; b1
 	const RAINBOW_WING ; b2
-	const ITEM_B3      ; b3
+	const ASSAULT_VEST ; b3
 	const BRICK_PIECE  ; b4
 	const ITEM_BE      ; be
 	const ITEM_C3      ; c3

@@ -161,6 +161,7 @@ ItemNameOrder:
 
 ; Battle related Held Items
 	db AMULET_COIN
+	db ASSAULT_VEST
 	db BERRY_JUICE
 	db BERSERK_GENE
 	db BLACKBELT_I
@@ -275,12 +276,11 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 19 total
+; Unused Items - 18 total
 	db EGG_TICKET
 	db ITEM_87
 	db ITEM_9B
 	db ITEM_AB
-	db ITEM_B3
 	db ITEM_BE
 	db ITEM_C3
  	db ITEM_DC
