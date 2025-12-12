@@ -4005,6 +4005,33 @@ BattleCommand_ParalyzeTarget:
 	ld a, b
 	cp HELD_PREVENT_PARALYZE
 	ret z
+
+; certain Pokemon always paralyze with T-bolt
+	; check move
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp THUNDERBOLT
+	jr nz, .done
+	
+	; check user species
+	call GetCurrentMon
+	cp PIKACHU
+	jr z, .paralyze
+	cp MAGNEMITE
+	jr z, .paralyze
+	cp MAGNETON
+	jr z, .paralyze
+	cp MAGNEZONE
+	jr z, .paralyze
+	jr .done
+
+	; 100% paralyze foe
+.paralyze
+	xor a
+	ld [wEffectFailed], a
+	; fallthrough
+
+.done
 	ld a, [wEffectFailed]
 	and a
 	ret nz
@@ -6619,7 +6646,7 @@ BattleCommand_FlameOrb:
 
 ; this needs to be in effect_commands.asm
 GetCurrentMon:
-    ldh a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ld a, [wBattleMonSpecies]
 	jr z, .done
