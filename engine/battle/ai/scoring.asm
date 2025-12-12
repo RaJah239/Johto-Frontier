@@ -409,7 +409,39 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_BODY_PRESS,       AI_Smart_BodyPress
 	dbw EFFECT_AVALANCHE,        AI_Smart_Avalanche
 	dbw EFFECT_BRICK_BREAK,      AI_Smart_BrickBreak
+	dbw EFFECT_PARALYZE_HIT,     AI_Smart_ParalyzeTarget
 	db -1 ; end
+
+AI_Smart_ParalyzeTarget:
+	; check move
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	cp THUNDERBOLT
+	ret nz
+
+	; check specie
+	ld a, [wEnemyMonSpecies]
+	cp PIKACHU
+	jr z, .go
+	cp MAGNEMITE
+	jr z, .go
+	cp MAGNETON
+	jr z, .go
+	cp MAGNEZONE
+	ret nz
+
+.go
+	; if slower
+	call AICompareSpeed
+	ret c
+
+	; then use Thunderbolt first
+	; since it always paralyzes
+	call Random
+	cp 10 percent
+	ret c
+	dec [hl]
+	dec [hl]
+	ret
 
 AI_Smart_BrickBreak:
     ; 90% chance to greatly encourage this move if the player used LIGHT_SCREEN or REFLECT.
