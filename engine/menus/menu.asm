@@ -367,7 +367,7 @@ Menu_WasButtonPressed:
 
 .skip_to_joypad
 	ldh a, [hJoyPressed]
-	cp SELECT
+	cp START
 	call z, DisplayEnemyTypes
 	call JoyTextDelay
 	call GetMenuJoypad
