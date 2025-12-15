@@ -266,4 +266,5 @@ Moves:
 	move WHIRLPOOL,    EFFECT_TRAP_TARGET,        40, WATER,         SPECIAL,   95, 32,   0
 	move FLARE_BLITZ,  EFFECT_FLARE_BLITZ,       120, FIRE,          PHYSICAL, 100, 24,  10
 	move POISON_JAB,   EFFECT_POISON_HIT,         80, POISON,        PHYSICAL, 100, 32,  30
+	move WOOD_BASH,    EFFECT_RECOIL_DEF_DN_HIT, 120, GRASS,         PHYSICAL, 100, 24,  10
 	assert_table_length NUM_ATTACKS

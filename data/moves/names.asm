@@ -252,4 +252,5 @@ MoveNames::
 	li "Whirlpool"
 	li "Flare Blitz"
 	li "Poison Jab"
+	li "Wood Bash"
 	assert_list_length NUM_ATTACKS

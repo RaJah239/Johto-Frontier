@@ -168,4 +168,5 @@ MoveEffectsPointers:
 	dw AtkDefUpHit
 	dw BrickBreak
 	dw Acrobatics
+	dw WoodBash
 	assert_table_length NUM_MOVE_EFFECTS

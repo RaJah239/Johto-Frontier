@@ -253,14 +253,13 @@ MoveDescriptions::
 	dw WhirlpoolDescription
 	dw FlareBlitzDescription
 	dw PoisonJabDescription
+	dw WoodBashDescription
 	assert_table_length NUM_ATTACKS
-	dw MoveFDDescription
 	dw MoveFEDescription
 	dw MoveFFDescription
 	dw Move00Description
 	assert_table_length $100
 
-MoveFDDescription:
 MoveFEDescription:
 MoveFFDescription:
 Move00Description:
@@ -970,3 +969,7 @@ FlareBlitzDescription:
 WildChargeDescription:
 	db   "Hurts the user but"
 	line "may paralyze.@"
+
+WoodBashDescription:
+	db   "Hurts the user but"
+	line "may lower Defense.@"

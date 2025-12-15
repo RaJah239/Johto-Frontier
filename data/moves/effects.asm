@@ -2003,3 +2003,25 @@ Acrobatics:
 	checkfaint
 	kingsrock
 	endmove
+
+WoodBash:
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	effectchance
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	recoil
+	checkfaint
+	defensedown
+	statdownmessage
+	kingsrock
+	endmove
