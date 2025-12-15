@@ -85,7 +85,6 @@ MoveEffectsPointers:
 	dw PainSplit
 	dw Snore
 	dw Sketch
-	dw DefrostOpponent
 	dw SleepTalk
 	dw DestinyBond
 	dw Reversal

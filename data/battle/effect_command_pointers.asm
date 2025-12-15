@@ -64,7 +64,6 @@ BattleCommandPointers:
 	dw BattleCommand_Encore
 	dw BattleCommand_Snore
 	dw BattleCommand_Sketch
-	dw BattleCommand_DefrostOpponent
 	dw BattleCommand_SleepTalk
 	dw BattleCommand_DestinyBond
 	dw BattleCommand_Spite

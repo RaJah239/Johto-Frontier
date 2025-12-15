@@ -64,7 +64,6 @@ ENDM
 	command encore                  ; 41
 	command snore                   ; 43
 	command sketch                  ; 46
-	command defrostopponent         ; 47
 	command sleeptalk               ; 48
 	command destinybond             ; 49
 	command spite                   ; 4a

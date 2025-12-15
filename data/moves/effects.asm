@@ -1148,12 +1148,6 @@ Sketch:
 	sketch
 	endmove
 
-DefrostOpponent:
-	usedmovetext
-	doturn
-	defrostopponent
-	endmove
-
 SleepTalk:
 	usedmovetext
 	doturn
