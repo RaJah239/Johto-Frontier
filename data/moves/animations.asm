@@ -262,7 +262,7 @@ BattleAnimations::
 	dw BattleAnim_Transform
 	dw BattleAnim_CalmMind
 	dw BattleAnim_HyperVoice
-	dw BattleAnim_Spore
+	dw BattleAnim_Acrobatics
 	dw BattleAnim_MirrorShot
 	dw BattleAnim_SignalBeam
 	dw BattleAnim_Splash
@@ -1745,9 +1745,48 @@ BattleAnim_Sing:
 	anim_wait 64
 	anim_ret
 
+BattleAnim_Acrobatics:
+	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_HIT
+	anim_battlergfx_1row
+	anim_bgeffect BATTLE_BG_EFFECT_BATTLEROBJ_2ROW, $0, $0, $0
+	anim_wait 1
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $0, $11, $4
+.loop
+	anim_sound 0, 0, SFX_SQUEAK
+	anim_wait 8
+	anim_loop 3, .loop
+	anim_sound 0, 0, SFX_RAZOR_WIND
+	anim_bgeffect BATTLE_BG_EFFECT_HIDE_MON, $0, $1, $0
+	anim_incbgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X
+	anim_call BattleAnimSub_SpeedLines
+	anim_wait 12
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $0, $0
+	anim_wait 12
+	anim_clearobjs
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $0, $0
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 140, 44, $0
+	anim_wait 4
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 124, 60, $0
+	anim_wait 4
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 140, 60, $0
+	anim_wait 4
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 124, 44, $0
+	anim_wait 4
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 132, 52, $0
+	anim_wait 8
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $a, $0
+	anim_wait 8
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
+	anim_wait 16
+	anim_ret
+
 BattleAnim_Poisonpowder:
 BattleAnim_SleepPowder:
-BattleAnim_Spore:
 BattleAnim_StunSpore:
 	anim_1gfx BATTLE_ANIM_GFX_POWDER
 .loop

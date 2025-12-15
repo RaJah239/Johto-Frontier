@@ -146,7 +146,7 @@ MoveNames::
 	li "Transform"
 	li "Calm Mind"
 	li "Hyper Voice"
-	li "Spore"
+	li "Acrobatics"
 	li "Mirror Shot"
 	li "Singal Beam"
 	li "Splash"

@@ -152,7 +152,7 @@
 	const TRANSFORM    ; 90
 	const CALM_MIND    ; 91
 	const HYPER_VOICE  ; 92
-	const SPORE        ; 93
+	const ACROBATICS   ; 93
 	const MIRROR_SHOT  ; 94
 	const SIGNAL_BEAM  ; 95
 	const SPLASH       ; 96

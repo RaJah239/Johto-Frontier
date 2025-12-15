@@ -147,7 +147,7 @@ MoveDescriptions::
 	dw TransformDescription
 	dw CalmMindDescription
 	dw HyperVoiceDescription
-	dw SporeDescription
+	dw AcrobaticsDescription
 	dw MirrorShotDescription
 	dw SignalBeamDescription
 	dw SplashDescription
@@ -469,6 +469,10 @@ StunSporeDescription:
 	db   "A move that may"
 	line "paralyze the foe.@"
 
+AcrobaticsDescription:
+	db   "Damage doubles if"
+	line "user has no item.@"
+
 LovelyKissDescription:
 HypnosisDescription:
 SingDescription:
@@ -647,10 +651,6 @@ TransformDescription:
 CalmMindDescription:
 	db   "Raise Sp.Atk and"
 	line "Sp.Def stats.@"
-
-SporeDescription:
-	db   "A move that"
-	line "induces sleep.@"
 
 MudSlapDescription:
 MirrorShotDescription:

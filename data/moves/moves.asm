@@ -160,7 +160,7 @@ Moves:
 	move TRANSFORM,    EFFECT_TRANSFORM,           0, NORMAL,        STATUS,   100, 40,   0
 	move CALM_MIND,    EFFECT_CALM_MIND,           0, PSYCHIC_TYPE,  STATUS,   100, 32,   0
 	move HYPER_VOICE,  EFFECT_SP_ATK_UP_HIT,      90, NORMAL,        SPECIAL,  100, 24,  10
-	move SPORE,        EFFECT_SLEEP,               0, GRASS,         STATUS,   100, 24,   0 ; to replace
+	move ACROBATICS,   EFFECT_EARTHQUAKE,         55, FLYING,        PHYSICAL, 100, 24,   0
 	move MIRROR_SHOT,  EFFECT_ACCURACY_DOWN_HIT,  60, STEEL,         SPECIAL,  100, 32,  10
 	move SIGNAL_BEAM,  EFFECT_CONFUSE_HIT,        80, BUG,           SPECIAL,  100, 24,  20
 	move SPLASH,       EFFECT_SPLASH,              0, NORMAL,        STATUS,   100, 40,   0
