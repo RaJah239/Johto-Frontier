@@ -191,7 +191,7 @@ MoveNames::
 	li "Mud-Slap"
 	li "Psyshock"
 	li "Spikes"
-	li "Zap Cannon"
+	li "Shriek"
 	li "Foresight"
 	li "Destiny Bond"
 	li "Perish Song"

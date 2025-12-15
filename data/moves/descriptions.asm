@@ -192,7 +192,7 @@ MoveDescriptions::
 	dw MudSlapDescription
 	dw PsyshockDescription
 	dw SpikesDescription
-	dw ZapCannonDescription
+	dw ShriekDescription
 	dw ForesightDescription
 	dw DestinyBondDescription
 	dw PerishSongDescription
@@ -538,9 +538,13 @@ MimicDescription:
 	db   "Copies a move used"
 	line "by the foe.@"
 
+ShriekDescription:
+	db   "Sharply reduces"
+	line "the foe's Sp.Def.@"
+
 ScreechDescription:
 	db   "Sharply reduces"
-	line "the foe's DEFENSE.@"
+	line "the foe's Defense.@"
 
 RoostDescription:
 MilkDrinkDescription:
@@ -755,10 +759,6 @@ PsyshockDescription:
 SpikesDescription:
 	db   "Hurts foes when"
 	line "they switch out.@"
-
-ZapCannonDescription:
-	db   "An attack that"
-	line "always paralyzes.@"
 
 ForesightDescription:
 	db   "Negates accuracy"

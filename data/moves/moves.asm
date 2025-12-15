@@ -205,7 +205,7 @@ Moves:
 	move MUD_SLAP,     EFFECT_ACCURACY_DOWN_HIT,  40, GROUND,        SPECIAL,  100, 40,  10
 	move PSYSHOCK,     EFFECT_PSYSHOCK,           80, PSYCHIC_TYPE,  SPECIAL,  100, 16,   0
 	move SPIKES,       EFFECT_SPIKES,              0, GROUND,        STATUS,   100, 32,   0
-	move ZAP_CANNON,   EFFECT_PARALYZE_HIT,      100, ELECTRIC,      SPECIAL,   65, 16, 100
+	move SHRIEK,       EFFECT_SP_DEF_DOWN_2 ,      0, NORMAL,        STATUS,   100, 32,   0
 	move FORESIGHT,    EFFECT_FORESIGHT,           0, NORMAL,        STATUS,   100, 40,   0
 	move DESTINY_BOND, EFFECT_DESTINY_BOND,        0, GHOST,         STATUS,   100,  8,   0
 	move PERISH_SONG,  EFFECT_PERISH_SONG,         0, NORMAL,        STATUS,   100,  8,   0

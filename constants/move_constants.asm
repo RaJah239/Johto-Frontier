@@ -197,7 +197,7 @@
 	const MUD_SLAP     ; bd
 	const PSYSHOCK     ; be
 	const SPIKES       ; bf
-	const ZAP_CANNON   ; c0
+	const SHRIEK       ; c0
 	const FORESIGHT    ; c1
 	const DESTINY_BOND ; c2
 	const PERISH_SONG  ; c3

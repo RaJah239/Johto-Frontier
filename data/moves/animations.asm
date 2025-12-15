@@ -307,7 +307,7 @@ BattleAnimations::
 	dw BattleAnim_MudSlap
 	dw BattleAnim_Psyshock
 	dw BattleAnim_Spikes
-	dw BattleAnim_ZapCannon
+	dw BattleAnim_Shriek
 	dw BattleAnim_Foresight
 	dw BattleAnim_DestinyBond
 	dw BattleAnim_PerishSong
@@ -2204,6 +2204,7 @@ BattleAnim_Supersonic:
 	anim_wait 64
 	anim_ret
 
+BattleAnim_Shriek:
 BattleAnim_Screech:
 	anim_1gfx BATTLE_ANIM_GFX_PSYCHIC
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $8, $1, $20
@@ -4030,36 +4031,6 @@ BattleAnim_ToxicSpikes:
 	anim_call BattleAnim_Spikes
 	anim_1gfx BATTLE_ANIM_GFX_POISON
 	anim_jump BattleAnimSub_Sludge
-
-BattleAnim_ZapCannon:
-	anim_2gfx BATTLE_ANIM_GFX_LIGHTNING, BATTLE_ANIM_GFX_EXPLOSION
-	anim_bgp $1b
-	anim_sound 6, 2, SFX_ZAP_CANNON
-	anim_obj BATTLE_ANIM_OBJ_ZAP_CANNON, 64, 92, $2
-	anim_wait 40
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $2, $0
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
-	anim_sound 0, 1, SFX_THUNDERBOLT
-	anim_obj BATTLE_ANIM_OBJ_THUNDERBOLT_BALL, 132, 52, $2
-	anim_wait 16
-	anim_obj BATTLE_ANIM_OBJ_SPARKS_CIRCLE_BIG, 132, 52, $0
-	anim_wait 80
-	anim_ret
-
-; Vanilla animation
-;BattleAnim_ZapCannon:
-;	anim_2gfx BATTLE_ANIM_GFX_LIGHTNING, BATTLE_ANIM_GFX_EXPLOSION
-;	anim_bgp $1b
-;	anim_obp0 $30
-;	anim_sound 6, 2, SFX_ZAP_CANNON
-;	anim_obj BATTLE_ANIM_OBJ_ZAP_CANNON, 64, 92, $2
-;	anim_wait 40
-;	anim_sound 0, 1, SFX_THUNDERSHOCK
-;	anim_obj BATTLE_ANIM_OBJ_THUNDERBOLT_BALL, 136, 56, $2
-;	anim_wait 16
-;	anim_obj BATTLE_ANIM_OBJ_SPARKS_CIRCLE_BIG, 136, 56, $0
-;	anim_wait 128
-;	anim_ret
 
 BattleAnim_Foresight:
 	anim_1gfx BATTLE_ANIM_GFX_SHINE
