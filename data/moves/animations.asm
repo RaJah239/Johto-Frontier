@@ -1,117 +1,3 @@
-;=============================
-;============NOTES============
-;=============================
-
-; If more space is needed, replace Rock Tomb's animation
-; with Vanilla Rock throws'. It's right next to it
-
-
-
-;BattleAnim_MudShot: ; c95c3
-;	anim_2gfx BATTLE_ANIM_GFX_SAND, BATTLE_ANIM_GFX_HIT
-;	anim_obp0 $fc
-;.loop
-;	anim_sound 6, 2, SFX_MENU
-;	anim_obj BATTLE_ANIM_OBJ_SAND, 64, 92, $4
-;	anim_wait 4
-;	anim_loop 8, .loop
-;	anim_wait 32
-;	anim_sound 0, 1, SFX_TACKLE
-;	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 48, $0
-;	anim_wait 32
-;	anim_ret
-
-; Use this if more space is needed
-;BattleAnim_WillOWisp:
-;	anim_1gfx BATTLE_ANIM_GFX_FIRE
-;	anim_bgp $1b
-;	anim_sound 0, 1, SFX_SPITE
-;	anim_obj BATTLE_ANIM_OBJ_DRAGON_RAGE, 8, 0, 11, 4, 0
-;	anim_wait 48
-;.loop
-;	anim_sound 0, 0, SFX_SPARK
-;	anim_obj BATTLE_ANIM_OBJ_BURNED, 17, 0,  7, 0, $a0
-;	anim_obj BATTLE_ANIM_OBJ_BURNED, 17, 0,  7, 0, $20
-;	anim_wait 8
-;	anim_loop 4, .loop
-;	anim_wait 16
-;	anim_sound 0, 0, SFX_BURN
-;	anim_obj BATTLE_ANIM_OBJ_FIRE_BLAST, 17, 0,  6, 0, $1
-;	anim_obj BATTLE_ANIM_OBJ_FIRE_BLAST, 17, 0,  6, 0, $2
-;	anim_obj BATTLE_ANIM_OBJ_FIRE_BLAST, 17, 0,  6, 0, $3
-;	anim_obj BATTLE_ANIM_OBJ_FIRE_BLAST, 17, 0,  6, 0, $4
-;	anim_obj BATTLE_ANIM_OBJ_FIRE_BLAST, 17, 0,  6, 0, $5
-;	anim_wait 32
-;	anim_bgp $e4
-;	anim_ret
-
-;BattleAnim_ShadowClaw:
-;	anim_1gfx BATTLE_ANIM_GFX_CUT
-;	anim_sound 0, 0, SFX_CURSE
-;	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_WHITE_WAIT_FADE_BACK, $0, $1, $80
-;	anim_wait 64
-;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $40, $2, $0
-;	anim_sound 0, 1, SFX_CUT
-;	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 19, 0,  5, 0, $0
-;	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 18, 4,  4, 4, $0
-;	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 18, 0,  4, 0, $0
-;	anim_wait 16
-;	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_WHITE_WAIT_FADE_BACK
-;	anim_wait 4
-;	anim_ret
-
-;BattleAnim_SandScorch:
-;	anim_2gfx BATTLE_ANIM_GFX_SAND, BATTLE_ANIM_GFX_FIRE
-;	anim_call BattleAnimSub_SandOrMud
-;	anim_call BattleAnimSub_Fire
-;	anim_ret
-
-; Unused
-;BattleAnim_HammerArm:
-;	anim_1gfx BATTLE_ANIM_GFX_HIT
-;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $14, $2, $0
-;	anim_wait 48
-;	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $3
-;	anim_sound 0, 1, SFX_MEGA_PUNCH
-;	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 24, $0
-;	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 24, $0
-;	anim_wait 12
-;	anim_sound 0, 1, SFX_MEGA_PUNCH
-;	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 40, $0
-;	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 40, $0
-;	anim_wait 12
-;	anim_sound 0, 1, SFX_MEGA_PUNCH
-;	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 56, $0
-;	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 56, $0
-;	anim_wait 12
-;	anim_ret
-
-; Unused
-;BattleAnim_LavaPlume:
-;	anim_1gfx BATTLE_ANIM_GFX_FIRE
-;	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
-;.loop
-;	anim_sound 0, 1, SFX_EMBER
-;	anim_obj BATTLE_ANIM_OBJ_FIRE_BLAST, 136, 48, $1
-;	anim_obj BATTLE_ANIM_OBJ_FIRE_BLAST, 136, 48, $4
-;	anim_obj BATTLE_ANIM_OBJ_FIRE_BLAST, 136, 48, $5
-;	anim_wait 8
-;	anim_loop 8, .loop
-;	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $0, $0
-;	anim_wait 4
-;	anim_incobj 9
-;	anim_wait 8
-;	anim_ret
-
-; Unused
-;BattleAnim_CrossPoison:
-;	anim_2gfx BATTLE_ANIM_GFX_CUT, BATTLE_ANIM_GFX_POISON
-;	anim_sound 0, 1, SFX_CUT
-;	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 150, 30, $0
-;	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_RIGHT, 120, 30, $0
-;	anim_wait 32
-;	anim_jump BattleAnimSub_Sludge
-
 BattleAnimations::
 ; entries correspond to constants/move_constants.asm
 	table_width 2, BattleAnimations
@@ -399,6 +285,7 @@ BattleAnimations::
 	dw BattleAnim_InHail
 	assert_table_length NUM_BATTLE_ANIMS + 1
 
+BattleAnim_SweetScent2:
 BattleAnim_Miss:
 BattleAnim_Dummy:
 	anim_ret
@@ -451,19 +338,6 @@ BattleAnim_Bulldoze:
 	anim_loop 12, .loop2
 	anim_wait 48
 	anim_incbgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X
-	anim_ret
-
-BattleAnim_SweetScent2:
-	anim_2gfx BATTLE_ANIM_GFX_FLOWER, BATTLE_ANIM_GFX_MISC
-	anim_obj BATTLE_ANIM_OBJ_FLOWER, 64, 96, $2
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_FLOWER, 64, 80, $2
-	anim_wait 64
-	anim_obj BATTLE_ANIM_OBJ_COTTON, 136, 40, $15
-	anim_obj BATTLE_ANIM_OBJ_COTTON, 136, 40, $2a
-	anim_obj BATTLE_ANIM_OBJ_COTTON, 136, 40, $3f
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
-	anim_wait 128
 	anim_ret
 
 BattleAnim_ThrowPokeBall:
