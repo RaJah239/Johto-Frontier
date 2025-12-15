@@ -1429,18 +1429,11 @@ BattleAnim_ThunderWave:
 
 BattleAnim_MilkDrink:
 	anim_2gfx BATTLE_ANIM_GFX_MISC, BATTLE_ANIM_GFX_BUBBLE
-	anim_call BattleAnim_TargetObj_1Row
 	anim_obj BATTLE_ANIM_OBJ_MILK_DRINK, 74, 104, $0
 	anim_wait 16
 	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING, $0, BG_EFFECT_USER, $40
 	anim_sound 0, 0, SFX_MILK_DRINK
-.loop
-	anim_obj BATTLE_ANIM_OBJ_RECOVER, 44, 88, $20
-	anim_wait 8
-	anim_loop 8, .loop
-	anim_wait 128
-	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
-	anim_jump BattleAnim_ShowMon_0
+	anim_jump BattleAnimSub_SoftboiledHeal
 
 BattleAnim_Thunder:
 	anim_1gfx BATTLE_ANIM_GFX_LIGHTNING
@@ -1879,10 +1872,16 @@ BattleAnimSub_Sludge:
 	anim_ret
 
 BattleAnim_Recover:
-	anim_1gfx BATTLE_ANIM_GFX_BUBBLE
-	anim_call BattleAnim_TargetObj_1Row
-	anim_sound 0, 0, SFX_FULL_HEAL
+	anim_2gfx BATTLE_ANIM_GFX_BUBBLE, BATTLE_ANIM_GFX_SHINE
+	anim_sound 0, 0, SFX_SHARPEN
 	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING, $0, BG_EFFECT_USER, $40
+	anim_call BattleAnim_Recover_branch
+	anim_wait 32
+	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $0, $0
+	anim_jump BattleAnimSub_Glimmer
+
+BattleAnim_Recover_branch:
 	anim_obj BATTLE_ANIM_OBJ_RECOVER, 44, 88, $30
 	anim_obj BATTLE_ANIM_OBJ_RECOVER, 44, 88, $31
 	anim_obj BATTLE_ANIM_OBJ_RECOVER, 44, 88, $32
@@ -1892,8 +1891,7 @@ BattleAnim_Recover:
 	anim_obj BATTLE_ANIM_OBJ_RECOVER, 44, 88, $36
 	anim_obj BATTLE_ANIM_OBJ_RECOVER, 44, 88, $37
 	anim_wait 64
-	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
-	anim_jump BattleAnim_ShowMon_0
+	anim_ret
 
 BattleAnim_MegaDrain:
 	anim_1gfx BATTLE_ANIM_GFX_CHARGE
@@ -1944,22 +1942,24 @@ BattleAnim_EggBomb:
 
 BattleAnim_Softboiled:
 	anim_2gfx BATTLE_ANIM_GFX_EGG, BATTLE_ANIM_GFX_BUBBLE
-	anim_call BattleAnim_TargetObj_1Row
 	anim_sound 0, 0, SFX_SWITCH_POKEMON
 	anim_obj BATTLE_ANIM_OBJ_EGG, 44, 104, $6
-	anim_wait 64
-	anim_incobj 2
+	anim_wait 128
+	anim_incobj 1
 	anim_obj BATTLE_ANIM_OBJ_EGG, 76, 104, $b
 	anim_wait 16
 	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING, $0, BG_EFFECT_USER, $40
 	anim_sound 0, 0, SFX_METRONOME
+	;fallthrough
+
+BattleAnimSub_SoftboiledHeal:
 .loop
 	anim_obj BATTLE_ANIM_OBJ_RECOVER, 44, 88, $20
 	anim_wait 8
 	anim_loop 8, .loop
-	anim_wait 64
+	anim_wait 128
 	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
-	anim_jump BattleAnim_ShowMon_0
+	anim_ret
 
 BattleAnim_BulkUp:
 	anim_2gfx BATTLE_ANIM_GFX_MISC, BATTLE_ANIM_GFX_WIND
