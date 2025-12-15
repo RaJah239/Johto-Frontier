@@ -302,13 +302,7 @@ BattleAnim_WoodBash:
 	anim_call BattleAnim_ShowMon_0
 	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $3
 	anim_sound 0, 1, SFX_MOVE_PUZZLE_PIECE
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 120, 72, $0
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $28
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $5c
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $10
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $e8
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $9c
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $d0
+	anim_call BattleAnim_LeavesStub
 	anim_wait 6
 	anim_sound 0, 1, SFX_COMET_PUNCH
 	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 56, $0
@@ -316,6 +310,15 @@ BattleAnim_WoodBash:
 	anim_sound 0, 1, SFX_MEGA_PUNCH
 	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 152, 40, $0
 	anim_wait 16
+	anim_ret
+
+BattleAnim_LeavesStub:
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $28
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $5c
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $10
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $e8
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $9c
+	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $d0
 	anim_ret
 
 BattleAnim_Bulldoze:
@@ -1308,12 +1311,7 @@ BattleAnim_LeafBlade:
 	anim_2gfx BATTLE_ANIM_GFX_PLANT, BATTLE_ANIM_GFX_CUT
 	anim_sound 0, 1, SFX_CUT
 	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 152, 40, $0
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $28
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $5c
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $10
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $e8
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $9c
-	anim_obj BATTLE_ANIM_OBJ_RAZOR_LEAF, 136, 56, $d0
+	anim_call BattleAnim_LeavesStub
 	anim_wait 32
 	anim_ret
 
