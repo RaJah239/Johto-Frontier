@@ -34,12 +34,10 @@ MoveEffectsPointers:
 	dw Toxic
 	dw LightScreen
 	dw TriAttack
-	dw NormalHit
 	dw OHKOHit
 	dw SuperFang
 	dw StaticDamage
 	dw TrapTarget
-	dw NormalHit
 	dw MultiHit
 	dw NormalHit
 	dw Mist
@@ -73,7 +71,6 @@ MoveEffectsPointers:
 	dw EvasionDownHit
 	dw ConfuseHit
 	dw PoisonMultiHit
-	dw NormalHit
 	dw Substitute
 	dw HyperBeam
 	dw Rage
@@ -99,9 +96,7 @@ MoveEffectsPointers:
 	dw Thief
 	dw MeanLook
 	dw Nightmare
-	dw FlameWheel
 	dw Curse
-	dw NormalHit
 	dw Protect
 	dw Spikes
 	dw Foresight
@@ -117,8 +112,6 @@ MoveEffectsPointers:
 	dw BatonPass
 	dw Pursuit
 	dw RapidSpin
-	dw NormalHit
-	dw NormalHit
 	dw WeatherHeal
 	dw HiddenPower
 	dw RainDance

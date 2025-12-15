@@ -1232,27 +1232,6 @@ Nightmare:
 	nightmare
 	endmove
 
-FlameWheel:
-	usedmovetext
-	doturn
-	critical
-	damagestats
-	damagecalc
-	stab
-	damagevariation
-	checkhit
-	effectchance
-	moveanim
-	failuretext
-	applydamage
-	criticaltext
-	supereffectivetext
-	defrost
-	checkfaint
-	buildopponentrage
-	burntarget
-	endmove
-
 Curse:
 	usedmovetext
 	doturn
