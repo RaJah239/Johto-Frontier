@@ -23,7 +23,7 @@ MoveNames::
 	li "Power Gem"
 	li "Vine Whip"
 	li "Stomp"
-	li "Double Kick"
+	li "Roost"
 	li "Focus Blast"
 	li "Sticky Web"
 	li "Seed Bomb"

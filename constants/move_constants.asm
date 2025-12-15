@@ -29,7 +29,7 @@
 	const POWER_GEM    ; 15
 	const VINE_WHIP    ; 16
 	const STOMP        ; 17
-	const DOUBLE_KICK  ; 18
+	const ROOST        ; 18
 	const FOCUS_BLAST  ; 19
 	const STICKY_WEB   ; 1a
 	const SEED_BOMB    ; 1b

@@ -37,7 +37,7 @@ Moves:
 	move POWER_GEM,    EFFECT_SP_DEF_DOWN_HIT,    80, ROCK,          SPECIAL,  100, 24,  20
 	move VINE_WHIP,    EFFECT_DEFENSE_DOWN_HIT,   40, GRASS,         PHYSICAL, 100, 40,  10
 	move STOMP,        EFFECT_STOMP,              65, NORMAL,        PHYSICAL, 100, 32,  30
-	move DOUBLE_KICK,  EFFECT_DOUBLE_HIT,         30, FIGHTING,      PHYSICAL, 100, 30,   0 ; to replace
+	move ROOST,        EFFECT_HEAL,                0, FLYING,        STATUS,   100, 24,   0
 	move FOCUS_BLAST,  EFFECT_SP_DEF_DOWN_HIT,   120, FIGHTING,      SPECIAL,  70,   8,  30
 	move STICKY_WEB,   EFFECT_STICKY_WEB,          0, BUG,           STATUS,   100, 32,   0
 	move SEED_BOMB,    EFFECT_BURN_HIT,          100, GRASS,         PHYSICAL, 100, 24,  10

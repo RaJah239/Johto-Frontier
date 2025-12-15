@@ -24,7 +24,7 @@ MoveDescriptions::
 	dw PowerGemDescription
 	dw VineWhipDescription
 	dw StompDescription
-	dw DoubleKickDescription
+	dw RoostDescription
 	dw FocusBlastDescription
 	dw StickyWebDescription
 	dw SeedBombDescription
@@ -318,10 +318,6 @@ FlyDescription:
 	db   "1st turn: Fly"
 	line "2nd turn: Attack@"
 
-DoubleKickDescription:
-	db   "A double kicking"
-	line "attack.@"
-
 StickyWebDescription:
 	db   "Slows foes when"
 	line "they switch in.@"
@@ -546,6 +542,7 @@ ScreechDescription:
 	db   "Sharply reduces"
 	line "the foe's DEFENSE.@"
 
+RoostDescription:
 MilkDrinkDescription:
 RecoverDescription:
 SoftboiledDescription:

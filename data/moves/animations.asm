@@ -173,7 +173,7 @@ BattleAnimations::
 	dw BattleAnim_PowerGem
 	dw BattleAnim_VineWhip
 	dw BattleAnim_Stomp
-	dw BattleAnim_DoubleKick
+	dw BattleAnim_Roost
 	dw BattleAnim_FocusBlast
 	dw BattleAnim_StickyWeb
 	dw BattleAnim_SeedBomb
@@ -814,22 +814,23 @@ BattleAnim_Stomp:
 	anim_wait 16
 	anim_ret
 
-BattleAnim_DoubleKick:
-	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_if_param_equal $1, .alternate
-	anim_sound 0, 1, SFX_DOUBLE_KICK
-	anim_obj BATTLE_ANIM_OBJ_KICK, 144, 48, $0
-	anim_wait 6
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 144, 48, $0
-	anim_wait 8
-	anim_ret
-
-.alternate:
-	anim_sound 0, 1, SFX_DOUBLE_KICK
-	anim_obj BATTLE_ANIM_OBJ_KICK, 120, 64, $0
-	anim_wait 6
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 120, 64, $0
-	anim_wait 8
+BattleAnim_Roost:
+	anim_2gfx BATTLE_ANIM_GFX_MISC, BATTLE_ANIM_GFX_SHINE
+	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING, $0, $1, $40
+	anim_wait 16
+.loop
+	anim_call BattleAnim_SwordsStub
+	anim_wait 34
+	anim_loop 2, .loop
+	anim_wait 28
+	anim_sound 0, 0, SFX_METRONOME
+	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 44, 64, $0
+	anim_wait 5
+	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 24, 96, $0
+	anim_wait 5
+	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 56, 104, $0
+	anim_wait 21
+	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
 	anim_ret
 
 BattleAnim_HiJumpKick:
@@ -3220,13 +3221,17 @@ BattleAnim_RockThrow:
 
 BattleAnim_SwordsDance:
 	anim_1gfx BATTLE_ANIM_GFX_WHIP
+	anim_call BattleAnim_SwordsStub
+	anim_wait 56
+	anim_ret
+
+BattleAnim_SwordsStub:
 	anim_sound 0, 0, SFX_SWORDS_DANCE
 	anim_obj BATTLE_ANIM_OBJ_SWORDS_DANCE, 48, 108, $0
 	anim_obj BATTLE_ANIM_OBJ_SWORDS_DANCE, 48, 108, $d
 	anim_obj BATTLE_ANIM_OBJ_SWORDS_DANCE, 48, 108, $1a
 	anim_obj BATTLE_ANIM_OBJ_SWORDS_DANCE, 48, 108, $27
 	anim_obj BATTLE_ANIM_OBJ_SWORDS_DANCE, 48, 108, $34
-	anim_wait 56
 	anim_ret
 
 BattleAnim_QuickAttack:
