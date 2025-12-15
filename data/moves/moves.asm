@@ -26,7 +26,7 @@ Moves:
 	move AQUA_JET,     EFFECT_PRIORITY_HIT,       40, WATER,         PHYSICAL, 100, 32,   0
 	move BULK_UP,      EFFECT_BULK_UP,             0, FIGHTING,      STATUS,   100, 32,   0
 	move FLASH_CANNON, EFFECT_SP_DEF_DOWN_HIT,    80, STEEL,         SPECIAL,  100, 24,  20
-	move RAZOR_WIND,   EFFECT_NORMAL_HIT,         80, FLYING,        SPECIAL,  100, 24,   0
+	move RAZOR_WIND,   EFFECT_NORMAL_HIT,         85, FLYING,        SPECIAL,  100, 24,   0
 	move SWORDS_DANCE, EFFECT_ATTACK_UP_2,         0, NORMAL,        STATUS,   100, 32,   0
 	move CUT,          EFFECT_NORMAL_HIT,         55, STEEL,         PHYSICAL, 100, 32,   0
 	move GUST,         EFFECT_GUST,               40, FLYING,        SPECIAL,  100, 40,   0
