@@ -186,7 +186,7 @@ MoveDescriptions::
 	dw MachPunchDescription
 	dw ScaryFaceDescription
 	dw FaintAttackDescription
-	dw LavaPlumeDescription
+	dw EarthPowerDescription
 	dw BellyDrumDescription
 	dw SludgeBombDescription
 	dw MudSlapDescription
@@ -388,7 +388,6 @@ DisableDescription:
 DragonRageDescription:
 AcidDescription:
 FirePunchDescription:
-LavaPlumeDescription:
 EggBombDescription:
 ScaldDescription:
 SeedBombDescription:
@@ -504,6 +503,7 @@ ToxicDescription:
 	db   "A poison move with"
 	line "increasing damage.@"
 
+EarthPowerDescription:
 NightShadeDescription:
 PowerGemDescription:
 FocusBlastDescription:

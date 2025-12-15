@@ -185,7 +185,7 @@ MoveNames::
 	li "Mach Punch"
 	li "Scary Face"
 	li "Faint Attack"
-	li "Lava Plume"
+	li "Earth Power"
 	li "Belly Drum"
 	li "Sludge Bomb"
 	li "Mud-Slap"

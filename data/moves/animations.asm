@@ -45,40 +45,6 @@
 ;	anim_bgp $e4
 ;	anim_ret
 
-; use this is space allows later on
-;BattleAnim_EarthPower:
-;	anim_2gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_ROCKS
-;	anim_sound 0, 0, SFX_EGG_BOMB
-;	anim_bgp $1b
-;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $28, $2, $0
-;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 120, 68, $5c
-;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 120, 68, $e8
-;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 120, 68, $9c
-;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 120, 68, $50
-;	anim_obj BATTLE_ANIM_OBJ_EMBER, 120, 68, $30
-;	anim_wait 40
-;	anim_clearobjs
-;	anim_wait 8
-;	anim_sound 0, 0, SFX_EGG_BOMB
-;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $28, $2, $0
-;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 144, 68, $5c
-;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 144, 68, $e8
-;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 144, 68, $d0
-;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 144, 68, $10
-;	anim_obj BATTLE_ANIM_OBJ_EMBER, 144, 68, $30
-;	anim_wait 40
-;	anim_clearobjs
-;	anim_wait 8
-;	anim_sound 0, 0, SFX_EGG_BOMB
-;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $28, $2, $0
-;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 132, 68, $28
-;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 132, 68, $e8
-;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 132, 68, $d0
-;	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 132, 68, $50
-;	anim_obj BATTLE_ANIM_OBJ_EMBER, 132, 68, $30
-;	anim_wait 48
-;	anim_ret
-
 ;BattleAnim_ShadowClaw:
 ;	anim_1gfx BATTLE_ANIM_GFX_CUT
 ;	anim_sound 0, 0, SFX_CURSE
@@ -335,7 +301,7 @@ BattleAnimations::
 	dw BattleAnim_MachPunch
 	dw BattleAnim_ScaryFace
 	dw BattleAnim_FaintAttack
-	dw BattleAnim_LavaPlume
+	dw BattleAnim_EarthPower
 	dw BattleAnim_BellyDrum
 	dw BattleAnim_SludgeBomb
 	dw BattleAnim_MudSlap
@@ -790,10 +756,38 @@ BattleAnim_BugBite:
 	anim_wait 32
 	anim_ret
 
-BattleAnim_LavaPlume:
-	anim_2gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_SPEED
-	anim_call BattleAnim_UserFlames
-	anim_jump BattleAnim_Flamethrower
+BattleAnim_EarthPower:
+	anim_2gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_ROCKS
+	anim_sound 0, 0, SFX_EGG_BOMB
+	anim_bgp $1b
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $28, $2, $0
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 120, 68, $5c
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 120, 68, $e8
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 120, 68, $9c
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 120, 68, $50
+	anim_obj BATTLE_ANIM_OBJ_EMBER, 120, 68, $30
+	anim_wait 40
+	anim_clearobjs
+	anim_wait 8
+	anim_sound 0, 0, SFX_EGG_BOMB
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $28, $2, $0
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 144, 68, $5c
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 144, 68, $e8
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 144, 68, $d0
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 144, 68, $10
+	anim_obj BATTLE_ANIM_OBJ_EMBER, 144, 68, $30
+	anim_wait 40
+	anim_clearobjs
+	anim_wait 8
+	anim_sound 0, 0, SFX_EGG_BOMB
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $28, $2, $0
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 132, 68, $28
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 132, 68, $e8
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 132, 68, $d0
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 132, 68, $50
+	anim_obj BATTLE_ANIM_OBJ_EMBER, 132, 68, $30
+	anim_wait 48
+	anim_ret
 
 BattleAnim_Stomp:
 	anim_1gfx BATTLE_ANIM_GFX_HIT
