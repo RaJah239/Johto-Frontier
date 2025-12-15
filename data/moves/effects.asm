@@ -1563,13 +1563,14 @@ Solarbeam:
 	stab
 	damagevariation
 	checkhit
+	effectchance
 	moveanim
 	failuretext
 	applydamage
 	criticaltext
 	supereffectivetext
 	checkfaint
-	buildopponentrage
+	burntarget
 	kingsrock
 	endmove
 

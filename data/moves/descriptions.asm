@@ -453,8 +453,8 @@ LeechSeedDescription:
 	line "foe on every turn.@"
 
 SolarbeamDescription:
-	db   "1st turn: Prepare"
-	line "2nd turn: Attack@"
+	db   "1st: prepare, then"
+	line "attack! May burn.@"
 
 PoisonpowderDescription:
 	db   "A move that may"
