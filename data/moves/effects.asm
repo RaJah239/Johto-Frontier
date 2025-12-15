@@ -1984,3 +1984,22 @@ BrickBreak:
 	checkfaint
 	kingsrock
 	endmove
+
+Acrobatics:
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	acrobatics
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	kingsrock
+	endmove

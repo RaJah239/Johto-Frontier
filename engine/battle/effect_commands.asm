@@ -6139,6 +6139,8 @@ INCLUDE "engine/battle/move_effects/return.asm"
 
 INCLUDE "engine/battle/move_effects/safeguard.asm"
 
+INCLUDE "engine/battle/move_effects/acrobatics.asm"
+
 BattleCommand_FarCommand:
 	farjp Find_Command
 

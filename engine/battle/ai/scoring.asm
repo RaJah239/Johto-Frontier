@@ -410,7 +410,17 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_AVALANCHE,        AI_Smart_Avalanche
 	dbw EFFECT_BRICK_BREAK,      AI_Smart_BrickBreak
 	dbw EFFECT_PARALYZE_HIT,     AI_Smart_ParalyzeTarget
+	dbw EFFECT_ACROBATICS,       AI_Smart_Acrobatics
 	db -1 ; end
+
+AI_Smart_Acrobatics:
+; Greatly encourage this move if the user does not have an item.
+	ld a, [wEnemyMonItem]
+	and a
+	ret nz  ; Return if the enemy has a status condition
+	dec [hl]
+	dec [hl]
+	ret
 
 AI_Smart_ParalyzeTarget:
 	; check move

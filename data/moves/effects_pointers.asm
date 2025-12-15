@@ -167,4 +167,5 @@ MoveEffectsPointers:
 	dw WildCharge
 	dw AtkDefUpHit
 	dw BrickBreak
+	dw Acrobatics
 	assert_table_length NUM_MOVE_EFFECTS
