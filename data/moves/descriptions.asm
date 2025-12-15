@@ -185,7 +185,7 @@ MoveDescriptions::
 	dw ProtectDescription
 	dw MachPunchDescription
 	dw ScaryFaceDescription
-	dw FaintAttackDescription
+	dw FeintAttackDescription
 	dw EarthPowerDescription
 	dw BellyDrumDescription
 	dw SludgeBombDescription
@@ -743,7 +743,7 @@ MachPunchDescription:
 	db   "A fast punch that"
 	line "lands first.@"
 
-FaintAttackDescription:
+FeintAttackDescription:
 	db   "An attack that"
 	line "never misses.@"
 
