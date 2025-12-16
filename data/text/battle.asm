@@ -150,9 +150,9 @@ BattleText_RainContinuesToFall:
 	line "fall."
 	prompt
 
-BattleText_TheSunlightIsStrong:
-	text "The sunlight is"
-	line "strong."
+BattleText_TheSunlightContinuesToShine:
+	text "The sun continues"
+	line "to shine brightly!"
 	prompt
 
 BattleText_TheSandstormRages:
@@ -1044,9 +1044,9 @@ DownpourText:
 	line "started!"
 	prompt
 
-SunGotBrightText:
-	text "The sunlight got"
-	line "bright!"
+SunsRaysIntensifiedText:
+	text "The sun's rays"
+	line "intensified!"
 	prompt
 
 BellyDrumText:

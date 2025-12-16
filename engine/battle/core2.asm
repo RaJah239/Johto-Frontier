@@ -862,7 +862,7 @@ FieldWeather:
 .sun
 	ld de, SUNNY_DAY
 	farcall Call_PlayBattleAnim
-	ld hl, SunGotBrightText
+	ld hl, SunsRaysIntensifiedText
 	jmp StdBattleTextbox
 
 GetTimeOfDayImage:

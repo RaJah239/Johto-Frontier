@@ -1338,7 +1338,7 @@ HandleWeather:
 .WeatherMessages:
 ; entries correspond to WEATHER_* constants
 	dw BattleText_RainContinuesToFall
-	dw BattleText_TheSunlightIsStrong
+	dw BattleText_TheSunlightContinuesToShine
 	dw BattleText_TheSandstormRages
 	dw BattleText_HailContinuesToFall
 

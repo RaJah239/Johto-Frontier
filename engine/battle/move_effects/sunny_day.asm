@@ -10,7 +10,7 @@ BattleCommand_StartSun:
 	call GetWeatherMoveDuration
 	ld [wWeatherCount], a
 	farcall AnimateCurrentMove
-	ld hl, SunGotBrightText
+	ld hl, SunsRaysIntensifiedText
 	jmp StdBattleTextbox
 
 .failed
