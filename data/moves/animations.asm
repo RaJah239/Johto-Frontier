@@ -4101,21 +4101,6 @@ BattleAnim_OutrageHit:
 	anim_wait 16
 	anim_ret
 
-BattleAnim_InSandstorm:
-BattleAnim_Sandstorm:
-	anim_1gfx BATTLE_ANIM_GFX_POWDER
-	anim_obj BATTLE_ANIM_OBJ_SANDSTORM, 88, 0, $0
-	anim_wait 8
-	anim_obj BATTLE_ANIM_OBJ_SANDSTORM, 72, 0, $1
-	anim_wait 8
-	anim_obj BATTLE_ANIM_OBJ_SANDSTORM, 56, 0, $2
-.loop
-	anim_sound 0, 1, SFX_MENU
-	anim_wait 8
-	anim_loop 16, .loop
-	anim_wait 8
-	anim_ret
-
 BattleAnim_GigaDrain:
 	anim_2gfx BATTLE_ANIM_GFX_BUBBLE, BATTLE_ANIM_GFX_CHARGE
 	anim_call BattleAnim_TargetObj_1Row
@@ -4580,6 +4565,21 @@ BattleAnimSub_Glimmer:
 	anim_wait 24
 	anim_ret
 
+BattleAnim_InSandstorm:
+BattleAnim_Sandstorm:
+	anim_1gfx BATTLE_ANIM_GFX_POWDER
+	anim_obj BATTLE_ANIM_OBJ_SANDSTORM, 88, 0, $0
+	anim_wait 8
+	anim_obj BATTLE_ANIM_OBJ_SANDSTORM, 72, 0, $1
+	anim_wait 8
+	anim_obj BATTLE_ANIM_OBJ_SANDSTORM, 56, 0, $2
+.loop
+	anim_sound 0, 1, SFX_MENU
+	anim_wait 8
+	anim_loop 8, .loop
+	anim_wait 8
+	anim_ret
+
 BattleAnim_Hail:
 BattleAnim_InHail:
 	anim_1gfx BATTLE_ANIM_GFX_ICE
@@ -4721,7 +4721,7 @@ BattleAnim_RainDance:
 	anim_obj BATTLE_ANIM_OBJ_RAIN, 88, 0, $1
 	anim_wait 8
 	anim_obj BATTLE_ANIM_OBJ_RAIN, 88, 0, $2
-	anim_wait 128
+	anim_wait 96
 	anim_ret
 
 BattleAnim_SunnyDay:
@@ -4733,7 +4733,7 @@ BattleAnim_SunnyDay:
 	anim_obj BATTLE_ANIM_OBJ_RAIN, 88, 0, $2
 	anim_wait 8
 	anim_obj BATTLE_ANIM_OBJ_RAIN, 88, 0, $2
-	anim_wait 128
+	anim_wait 96
 	anim_ret
 
 BattleAnim_MirrorCoat:
