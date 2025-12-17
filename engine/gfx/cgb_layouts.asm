@@ -1233,15 +1233,15 @@ _CGB_PackPals:
     ld a, $3
     call FillBoxCGB
     hlcoord 9, 0, wAttrmap  ; ribbon 3rd
-    lb bc, 1, 6
+    lb bc, 1, 5
     ld a, $4
     call FillBoxCGB
     hlcoord 13, 0, wAttrmap  ; ribbon 4th
-    lb bc, 1, 5
+    lb bc, 1, 3
     ld a, $5
     call FillBoxCGB
-    hlcoord 18, 0, wAttrmap  ; ribbon 5th
-    lb bc, 1, 2
+    hlcoord 16, 0, wAttrmap  ; ribbon 5th
+    lb bc, 1, 4
     ld a, $6
     call FillBoxCGB
 ;    hlcoord 0, 7, wAttrmap ; box with pocket name
