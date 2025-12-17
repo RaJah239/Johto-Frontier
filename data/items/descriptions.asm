@@ -887,8 +887,8 @@ FastBallDesc:
 	next "ing fast #MON.@"
 
 WeatherRockDesc:
-	db   "Weather moves last"
-	next "16 turns. (HOLD)@"
+	db   "8-turn priority"
+	next "weather. (Hold)@"
 
 LightBallDesc:
 	db   "Boost Pikachu's"

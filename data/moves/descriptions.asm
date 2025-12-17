@@ -918,16 +918,16 @@ HiddenPowerDescription:
 
 RainDanceDescription:
 	db   "Boosts water-type"
-	line "moves for 8 turns.@"
+	line "moves for 5 turns.@"
 
 SunnyDayDescription:
 	db   "Boosts fire-type"
-	line "moves for 8 turns.@"
+	line "moves for 5 turns.@"
 
 SandstormDescription:
 HailDescription:
 	db   "Inflicts damage"
-	line "for 8 turns.@"
+	line "for 5 turns.@"
 
 MirrorCoatDescription:
 	db   "Counters a SPCL."
