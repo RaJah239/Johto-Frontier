@@ -741,10 +741,14 @@ CompareMovePriority:
 ; Compare the priority of the player and enemy's moves.
 ; Return carry if the player goes first, or z if they match.
 
+	ld a, [wBattleMonItem]
+	ld c, a
 	ld a, [wCurPlayerMove]
 	call GetMovePriority
 	ld b, a
 	push bc
+	ld a, [wEnemyMonItem]
+	ld c, a
 	ld a, [wCurEnemyMove]
 	call GetMovePriority
 	pop bc
@@ -761,6 +765,18 @@ GetMovePriority:
 ;	ld a, 0
 ;	ret z
 
+	; check if a Weather move was used
+	cp SUNNY_DAY
+	jr z, .check_rock
+	cp RAIN_DANCE
+	jr z, .check_rock
+	cp SANDSTORM
+	jr z, .check_rock
+	cp HAIL
+	jr z, .check_rock
+
+	; standard priority
+.regular_priority
 	call GetMoveEffect
 	ld hl, MoveEffectPriorities
 .loop
@@ -772,6 +788,17 @@ GetMovePriority:
 	jr nz, .loop
 
 	ld a, BASE_PRIORITY
+	ret
+
+.check_rock
+	; check if Weather Rock is equipped
+	ld a, c
+	cp WEATHER_ROCK
+	jr nz, .regular_priority
+
+	; if rock is equipped
+	; give Weather moves priority 2
+	ld a, 2
 	ret
 
 .done
