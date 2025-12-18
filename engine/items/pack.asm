@@ -91,7 +91,7 @@ Pack:
 	ld a, [wMenuCursorY]
 	ld [wItemsPocketCursor], a
 	ld b, PACKSTATE_INITBATTLEPOCKET ; left
-	ld c, PACKSTATE_INITBALLSPOCKET ; right
+	ld c, PACKSTATE_INITFRUITPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
 	call .ItemBallsKey_LoadSubmenu
@@ -119,7 +119,7 @@ Pack:
 	ld a, [wMenuCursorY]
 	ld [wKeyItemsPocketCursor], a
 	ld b, PACKSTATE_INITFRUITPOCKET ; left
-	ld c, PACKSTATE_INITTMHMPOCKET ; right
+	ld c, PACKSTATE_INITBALLSPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
 	call .ItemBallsKey_LoadSubmenu
@@ -138,7 +138,7 @@ Pack:
 
 .TMHMPocketMenu:
 	farcall TMHMPocket
-	ld b, PACKSTATE_INITKEYITEMSPOCKET ; left
+	ld b, PACKSTATE_INITBALLSPOCKET ; left
 	ld c, PACKSTATE_INITBATTLEPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
@@ -182,8 +182,8 @@ Pack:
 	ld [wBallsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
 	ld [wBallsPocketCursor], a
-	ld b, PACKSTATE_INITITEMSPOCKET ; left
-	ld c, PACKSTATE_INITFRUITPOCKET ; right
+	ld b, PACKSTATE_INITKEYITEMSPOCKET ; left
+	ld c, PACKSTATE_INITTMHMPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
 	call .ItemBallsKey_LoadSubmenu
@@ -210,7 +210,7 @@ Pack:
 	ld [wFruitPocketScrollPosition], a
 	ld a, [wMenuCursorY]
 	ld [wFruitPocketCursor], a
-	ld b, PACKSTATE_INITBALLSPOCKET ; left
+	ld b, PACKSTATE_INITITEMSPOCKET ; left
 	ld c, PACKSTATE_INITKEYITEMSPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
@@ -679,7 +679,7 @@ BattlePack:
 	ld a, [wMenuCursorY]
 	ld [wItemsPocketCursor], a
 	ld b, PACKSTATE_INITBATTLEPOCKET ; left
-	ld c, PACKSTATE_INITBALLSPOCKET ; right
+	ld c, PACKSTATE_INITFRUITPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
 	call ItemSubmenu
@@ -707,7 +707,7 @@ BattlePack:
 	ld a, [wMenuCursorY]
 	ld [wKeyItemsPocketCursor], a
 	ld b, PACKSTATE_INITFRUITPOCKET ; left
-	ld c, PACKSTATE_INITTMHMPOCKET ; right
+	ld c, PACKSTATE_INITBALLSPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
 	call ItemSubmenu
@@ -728,7 +728,7 @@ BattlePack:
 
 .TMHMPocketMenu:
 	farcall TMHMPocket
-	ld b, PACKSTATE_INITKEYITEMSPOCKET ; left
+	ld b, PACKSTATE_INITBALLSPOCKET ; left
 	ld c, PACKSTATE_INITBATTLEPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
@@ -757,8 +757,8 @@ BattlePack:
 	ld [wBallsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
 	ld [wBallsPocketCursor], a
-	ld b, PACKSTATE_INITITEMSPOCKET ; left
-	ld c, PACKSTATE_INITFRUITPOCKET ; right
+	ld b, PACKSTATE_INITKEYITEMSPOCKET ; left
+	ld c, PACKSTATE_INITTMHMPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
 	call ItemSubmenu
@@ -785,7 +785,7 @@ BattlePack:
 	ld [wFruitPocketScrollPosition], a
 	ld a, [wMenuCursorY]
 	ld [wFruitPocketCursor], a
-	ld b, PACKSTATE_INITBALLSPOCKET ; left
+	ld b, PACKSTATE_INITITEMSPOCKET ; left
 	ld c, PACKSTATE_INITKEYITEMSPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
@@ -984,9 +984,9 @@ DepositSellPack:
 .Jumptable:
 ; entries correspond to *_POCKET constants
 	dw .ItemsPocket
-	dw .BallsPocket
 	dw .FruitPocket
 	dw .KeyItemsPocket
+	dw .BallsPocket
 	dw .TMHMPocket
 	dw .BattlePocket
 
@@ -1582,11 +1582,11 @@ DrawPocketName:
 ; needs to be in this order
 .separator:
 	db 0 ; Items Pocket
-	db 3 ; Balls Pocket
-	db 9; Battle Pocket
-	db 13; Key Pocket
-	db 6 ; Fruit Pocket
-	db 15; TM/HMs Pocket
+	db 10; Balls Pocket
+	db 6 ; Special Pocket
+	db 13; TMs Pocket
+	db 3 ; Fruits Pocket
+	db 15; Battle Pocket
 
 .tilemap: ; 5x12
 ; the 5x3 pieces correspond to *_POCKET constants
