@@ -22,6 +22,7 @@ INCLUDE "engine/battle/move_effects/barrier.asm"
 INCLUDE "engine/battle/move_effects/trick_room.asm"
 INCLUDE "engine/battle/move_effects/taunt.asm"
 INCLUDE "engine/battle/move_effects/brick_break.asm"
+INCLUDE "engine/battle/move_effects/ohko.asm"
 
 ; Weather duration when Weather Rock is equipped
 ; Rock: 8, No Rock: 5

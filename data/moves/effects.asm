@@ -814,7 +814,7 @@ OHKOHit:
 	usedmovetext
 	doturn
 	stab
-	ohko
+	farcommand
 	moveanim
 	failuretext
 	applydamage

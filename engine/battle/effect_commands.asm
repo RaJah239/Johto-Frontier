@@ -5278,9 +5278,6 @@ BattleCommand_HeldFlinch:
 	set SUBSTATUS_FLINCHED, [hl]
 	ret
 
-BattleCommand_OHKO:
-	ret
-
 BattleCommand_CheckCharge:
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVarAddr
