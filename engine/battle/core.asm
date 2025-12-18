@@ -2348,6 +2348,15 @@ JumpToPartyMenuAndPrintText:
 	call SetDefaultBGPAndOBP
 	jmp DelayFrame
 
+BattleMenuPKMN_ReturnFromStats_Forced:
+	call Battle_StatsScreen
+	call ExitMenu
+	call LoadStandardMenuHeader
+	call ClearBGPalettes
+.setup
+	call SetUpBattlePartyMenu_Loop
+	; fallthrough
+
 PickPartyMonInBattle:
 .loop
 	ld a, PARTYMENUACTION_SWITCH ; Which PKMN?
@@ -2357,8 +2366,30 @@ PickPartyMonInBattle:
 	ret c
 	call CheckIfCurPartyMonIsFitToFight
 	jr z, .loop
-	xor a
-	ret
+
+.submenu_loop
+	farcall FreezeMonIcons
+	farcall BattleMonMenu
+	jr c, BattleMenuPKMN_ReturnFromStats_Forced.setup
+
+	call PlaceHollowCursor
+	ld a, [wMenuCursorY]
+	cp $1 ; SWITCH
+	ret z ; No need for xor a.
+	
+	cp $2 ; Stats
+	jr z, BattleMenuPKMN_ReturnFromStats_Forced
+
+	cp $3 ; Moves
+	jr z, .check_moves
+
+	cp $4 ; Cancel
+	jr z, BattleMenuPKMN_ReturnFromStats_Forced.setup
+	jr .submenu_loop
+
+.check_moves
+	farcall ManagePokemonMoves
+	jr BattleMenuPKMN_ReturnFromStats_Forced.setup
 
 SwitchMonAlreadyOut:
 	ld hl, wCurBattleMon
