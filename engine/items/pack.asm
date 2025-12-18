@@ -1168,10 +1168,10 @@ TutorialPack:
 .dw
 ; entries correspond to *_POCKET constants
 	dw .Items
-	dw .Balls
-	dw .KeyItems
-	dw .TMHM
 	dw .Fruits
+	dw .KeyItems
+	dw .Balls
+	dw .TMHM
 	dw .Battle
 
 .Items:

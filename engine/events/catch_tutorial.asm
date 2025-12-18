@@ -54,28 +54,38 @@ CatchTutorial::
 
 .LoadDudeData:
 	ld hl, wDudeNumItems
-	ld [hl], 1
-	inc hl
-	ld [hl], POTION
-	inc hl
-	ld [hl], 1
+	ld de, .DudeItems
+	call .CopyDudeData
+
+	ld hl, wDudeNumFruits
+	ld [hl], 0
 	inc hl
 	ld [hl], -1
+
 	ld hl, wDudeNumKeyItems
 	ld [hl], 0
 	inc hl
 	ld [hl], -1
+
 	ld hl, wDudeNumBalls
-	ld a, 1
+	ld de, .DudeBalls
+	; fallthrough
+
+.CopyDudeData:
+	ld a, [de]
+	inc de
 	ld [hli], a
-	ld a, POKE_BALL
-	ld [hli], a
-	ld [hli], a
-	ld [hl], -1
+	cp -1
+	jr nz, .CopyDudeData
 	ret
 
 .Dude:
-	db "DUDE@"
+	db "Dude@"
+
+.DudeItems:
+	db 4, SACRED_ASH, 99,  CRYSTAL, 99, HYPER_EV_UP, 99, RARE_CANDY, 99, -1
+.DudeBalls:
+	db 3, POKE_BALL, 1, MASTER_BALL, 99, SHINY_BALL, 99, -1
 
 .AutoInput:
 	db NO_INPUT, $ff ; end
