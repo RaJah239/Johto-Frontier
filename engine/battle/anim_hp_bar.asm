@@ -288,8 +288,7 @@ HPBarAnim_BGMapUpdate:
 	ldh a, [hCGB]
 	and a
 	jr nz, .cgb
-	call DelayFrame
-	jmp DelayFrame
+	ret
 
 .cgb
 	ld a, [wWhichHPBar]
