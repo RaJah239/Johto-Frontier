@@ -3220,7 +3220,10 @@ wMobileBattleRoomSceneID::                        db
 wDayCareSceneID::                                 db
 wRoute30SceneID::                                 db
 
-	ds 182
+	ds 175
+
+wTempMonLevelUpStatGain:: ds NUM_BATTLE_STATS
+wTempMonStatGainDisplay:: db
 
 wBaseLevel:: db 
 
