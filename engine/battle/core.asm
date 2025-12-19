@@ -2374,7 +2374,7 @@ PickPartyMonInBattle:
 
 	call PlaceHollowCursor
 	ld a, [wMenuCursorY]
-	cp $1 ; SWITCH
+	cp $1 ; Switch
 	ret z ; No need for xor a.
 	
 	cp $2 ; Stats
