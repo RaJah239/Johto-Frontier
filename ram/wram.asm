@@ -3221,7 +3221,9 @@ wDayCareSceneID::                                 db
 wRoute30SceneID::                                 db
 wRoute26MagnetTrainStationSceneID::               db
 
-	ds 174
+	ds 173
+
+wAbilityPageMode:: db
 
 wTempMonLevelUpStatGain:: ds NUM_BATTLE_STATS
 wTempMonStatGainDisplay:: db

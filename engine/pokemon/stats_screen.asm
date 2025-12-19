@@ -62,6 +62,7 @@ StatsScreenInit_gotaddress:
 
 StatsScreenMain:
 	xor a
+	ld [wAbilityPageMode], a
 	ld [wJumptableIndex], a
 	ld [wStatsScreenFlags], a ; PINK_PAGE
 .loop
@@ -232,7 +233,7 @@ MonStatsJoypad:
 	ret
 
 .next
-	and D_DOWN | D_UP | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON
+	and D_DOWN | D_UP | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON | SELECT
 	jr StatsScreen_JoypadAction
 
 StatsScreenWaitCry:
@@ -250,7 +251,7 @@ StatsScreen_JoypadAction:
 	bit B_BUTTON_F, a
 	jmp nz, .b_button
 	bit D_LEFT_F, a
-	jr nz, .d_left
+	jmp nz, .d_left
 	bit D_RIGHT_F, a
 	jr nz, .d_right
 	bit A_BUTTON_F, a
@@ -259,7 +260,29 @@ StatsScreen_JoypadAction:
 	jr nz, .d_up
 	bit D_DOWN_F, a
 	jr nz, .d_down
-	jr .done
+	bit SELECT_F, a
+	jr nz, .select
+	jmp .done
+
+.select
+	ld a, c
+	cp ORANGE_PAGE
+	jr nz, .select_done
+	ld a, [wAbilityPageMode]
+	and a
+	jr nz, .showStatExp
+.showStats
+	ld a, 1
+	ld [wAbilityPageMode], a
+	jr .refresh
+.showStatExp
+	xor a
+	ld [wAbilityPageMode], a
+.refresh
+	ld c, ORANGE_PAGE ; last page
+	jr .set_page
+.select_done
+	ret
 
 .d_down
 	ld a, [wMonType]
@@ -813,6 +836,15 @@ OTString:
 	db "OT/@"
 
 LoadOrangePage:
+	ld a, [wAbilityPageMode]
+	and a
+	jr z, .print_default_screen
+	ld de, AbilityText
+	hlcoord 1, 9
+	call PlaceString
+	farjp DisplayAbility
+
+.print_default_screen:
 	; these need to be in order
 	call StatsScreen_placeCaughtTime
 	call StatsScreen_placeCaughtLocation
@@ -834,6 +866,9 @@ LoadOrangePage:
 	and a
 	call nz, StatsScreen_PrintEVs
 	ret
+
+AbilityText:
+    db "Ability:@"
 
 StatsScreen_Print_HiddenPow_Info:
 	ld de, HiddenPowerTypeString
