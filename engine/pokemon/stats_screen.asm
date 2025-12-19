@@ -270,12 +270,11 @@ StatsScreen_JoypadAction:
 	jr nz, .select_done
 	ld a, [wAbilityPageMode]
 	and a
-	jr nz, .showStatExp
-.showStats
+	jr nz, .show_more_details_page
 	ld a, 1
 	ld [wAbilityPageMode], a
 	jr .refresh
-.showStatExp
+.show_more_details_page
 	xor a
 	ld [wAbilityPageMode], a
 .refresh
@@ -839,15 +838,6 @@ LoadOrangePage:
 	ld a, [wAbilityPageMode]
 	and a
 	jr z, .print_default_screen
-	ld de, AbilityText
-	hlcoord 1, 9
-	call PlaceString
-	farcall DisplayAbility
-	ld de, SelectSwapToPreviousPageText
-	hlcoord 11, 8
-	jmp PlaceString
-
-.print_default_screen:
 	ld de, SelectSwapToAbilitiesPageText
 	hlcoord 11, 17
 	call PlaceString
@@ -874,12 +864,21 @@ LoadOrangePage:
 	call nz, StatsScreen_PrintEVs
 	ret
 
+.print_default_screen:
+	ld de, AbilityText
+	hlcoord 1, 9
+	call PlaceString
+	farcall DisplayAbility
+	ld de, SelectSwapToPreviousPageText
+	hlcoord 11, 8
+	jmp PlaceString
+
 AbilityText:
     db "Ability:@"
 SelectSwapToAbilitiesPageText:
-    db "<se><le><ct>▶Next@"
-SelectSwapToPreviousPageText:
 	db "<se><le><ct>▶Back@"
+SelectSwapToPreviousPageText:
+	db "<se><le><ct>▶Next@"
 
 StatsScreen_Print_HiddenPow_Info:
 	ld de, HiddenPowerTypeString
