@@ -235,7 +235,7 @@ DisplayDexEntry:
 	pop de
 	inc de
 	pop af
-	hlcoord 2, 10
+	hlcoord 2, 9
 	push af
 	call PlaceFarString
 	pop bc
@@ -246,24 +246,18 @@ DisplayDexEntry:
  	pop de
  	inc de
  	pop af
- 	hlcoord 2, 10
+ 	hlcoord 2, 9
  	push af
  	call PlaceFarString
  	pop bc
 	push bc
 	push de
 	lb bc, 5, SCREEN_WIDTH - 1
-	hlcoord 1, 10
-	call ClearBox
- 	hlcoord 1, 8
- 	ld bc, 19
- 	ld a, $55
-	call ByteFill
 	call Pokedex_PrintPageNum
 	pop de
 	inc de
 	pop af
-	hlcoord 2, 10
+	hlcoord 2, 9
 	call PlaceFarString
 	xor a
  	ld [wPokedexEntryPageNum], a
