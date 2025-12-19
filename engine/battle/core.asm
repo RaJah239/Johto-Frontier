@@ -1796,6 +1796,8 @@ FaintYourPokemon:
 	call PlayStereoCry
 
 .skip_player_mon_faint_cry:
+	ld de, SFX_KINESIS
+	call PlaySFX	
 	call PlayerMonFaintedAnimation
 	hlcoord 9, 7
 	lb bc, 5, 11
