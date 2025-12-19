@@ -87,6 +87,8 @@ ChooseMonToLearnTMHM_NoRefresh:
 	cp EGG
 	pop bc ; now contains the former contents of af
 	jr z, .egg
+    call IsAPokemon
+    ret c
 	push bc
 	ld hl, wTMHMMoveNameBackup
 	ld de, wStringBuffer2
