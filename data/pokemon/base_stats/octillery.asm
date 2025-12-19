@@ -1,10 +1,10 @@
 	db OCTILLERY ; 224
 
-	db  75, 105,  75,  45, 105,  75
-	evs  0,   1,   0,   0,   1,   0
 	;   hp  atk  def  spd  sat  sdf
+	db  80,  80,  80,  70, 115,  80 ; BST - 505
+	evs  1,   1,   1,   1,   2,   1
 
-	db WATER, WATER ; type
+	db WATER, FIRE ; type
 	db 75 ; catch rate
 	db 164 ; base exp
 	db NO_ITEM, NO_ITEM ; items
