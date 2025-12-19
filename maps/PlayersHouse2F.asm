@@ -73,7 +73,8 @@ if DEF(_DEBUG)
 	; good party
 	givepoke MAGIKARP, 50, LEFTOVERS
 	givepoke NOWN, 50, FOCUS_SASH
-	givepoke GYARADOS, 50, GOLD_BERRY
+	givepoke MEW, 50, MIRACLEBERRY
+
 
 	; 4th, 5th & 6th mons
 	; unneeded presently
@@ -100,10 +101,10 @@ if DEF(_DEBUG)
 ;	loadmem wPartyMon2Moves+3, AGILITY
 
 	; 3rd mon moves
-	loadmem wPartyMon3Moves+0, EARTHQUAKE
-	loadmem wPartyMon3Moves+1, OUTRAGE
-	loadmem wPartyMon3Moves+2, WATERFALL
-	loadmem wPartyMon3Moves+3, CRUNCH
+	loadmem wPartyMon3Moves+0, PSYSHOCK
+	loadmem wPartyMon3Moves+1, AURA_SPHERE
+	loadmem wPartyMon3Moves+2, FLAMETHROWER
+	loadmem wPartyMon3Moves+3, RECOVER
 	closetext
 
 	; tms
