@@ -298,11 +298,6 @@ BattleText_Null:
 	text " "
 	done
 
-BattleText_ItemsCantBeUsedHere:
-	text "Items can't be"
-	line "used here."
-	prompt
-
 BattleText_MonIsAlreadyOut:
 	text_ram wBattleMonNickname
 	text_start

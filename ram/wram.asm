@@ -505,7 +505,8 @@ wLinkBattleRNCount::
 	db
 
 wEnemyItemState:: db
-	ds 2
+	ds 1
+wTypeChartInBattle:: db
 wCurEnemyMoveNum:: db
 
 wEnemyHPAtTimeOfPlayerSwitch:: dw
