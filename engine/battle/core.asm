@@ -1784,12 +1784,18 @@ StopDangerSound:
 FaintYourPokemon:
 	call StopDangerSound
 	call WaitSFX
+
+	; Skip player mon's cry when fainting
+	call CheckIfFastBattlesIsOn
+	jr nz, .skip_player_mon_faint_cry
 	
 	; plays player mon's cry when fainting
 	ld a, $f0
 	ld [wCryTracks], a
 	ld a, [wBattleMonSpecies]
 	call PlayStereoCry
+
+.skip_player_mon_faint_cry:
 	call PlayerMonFaintedAnimation
 	hlcoord 9, 7
 	lb bc, 5, 11
@@ -1805,12 +1811,17 @@ FaintYourPokemon:
 FaintEnemyPokemon:
 	call WaitSFX
 
+	; Skip enemy mon's cry when fainting
+	call CheckIfFastBattlesIsOn
+	jr nz, .skip_enemy_mon_faint_cry
+
 	; plays enemy mon's cry when fainting
 	ld a, $f
 	ld [wCryTracks], a
 	ld a, [wTempEnemyMonSpecies]
 	call PlayStereoCry
 
+.skip_enemy_mon_faint_cry:
 	ld de, SFX_KINESIS
 	call PlaySFX
 	call EnemyMonFaintedAnimation
