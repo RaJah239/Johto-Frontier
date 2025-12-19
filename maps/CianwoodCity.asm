@@ -305,7 +305,7 @@ CianwoodCityPokefanMText:
 	line "something."
 
 	para "Your #MON could"
-	line "use Brick Bream to"
+	line "use Brick Break to"
 	cont "smash them."
 	done
 
