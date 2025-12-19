@@ -10,6 +10,7 @@ MoveTutor:
 	call .GetMoveTutorMove
 	ld [wNamedObjectIndex], a
 	ld [wPutativeTMHMMove], a
+
 .Continue: ; ref'd by MoveTutor2
 	call GetMoveName
 	call CopyName1
@@ -60,6 +61,7 @@ CheckCanLearnMoveTutorMove:
 	ld a, BANK(TMHMNotCompatibleText)
 	ld hl, TMHMNotCompatibleText
 	call FarPrintText
+
 .didnt_learn
 	call ExitMenu
 	and a
@@ -76,7 +78,6 @@ CheckCanLearnMoveTutorMove:
 
 	ld c, HAPPINESS_LEARNMOVE
 	callfar ChangeHappiness
-	;.learned_move
 	call ExitMenu
 	scf
 	ret
@@ -100,4 +101,4 @@ MoveTutor2:
 	ld [wItemAttributeValue], a
 	ld a, [wNamedObjectIndex]
 	ld [wPutativeTMHMMove], a
-	jp MoveTutor.Continue
+	jmp MoveTutor.Continue
