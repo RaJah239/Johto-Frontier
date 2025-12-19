@@ -3219,8 +3219,9 @@ wMobileTradeRoomSceneID::                         db
 wMobileBattleRoomSceneID::                        db
 wDayCareSceneID::                                 db
 wRoute30SceneID::                                 db
+wRoute26MagnetTrainStationSceneID::               db
 
-	ds 175
+	ds 174
 
 wTempMonLevelUpStatGain:: ds NUM_BATTLE_STATS
 wTempMonStatGainDisplay:: db

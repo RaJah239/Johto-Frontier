@@ -447,3 +447,4 @@ ENDM
 	map_attributes PalletTown, PALLET_TOWN, $0f, 0
 	map_attributes CianwoodPort, CIANWOOD_PORT, $0a, 0
 	map_attributes CianwoodPortPassage, CIANWOOD_PORT_PASSAGE, $00, 0
+	map_attributes Route26MagnetTrainStation, ROUTE_26_MAGNET_TRAIN_STATION, $00, 0

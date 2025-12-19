@@ -337,6 +337,7 @@ ENDM
 
 	newgroup NEW_BARK                                             ; 24
 	map_const ROUTE_26,                                    10, 54 ;  1
+	map_const ROUTE_26_MAGNET_TRAIN_STATION,               10,  9 ;  9
 	map_const ROUTE_27,                                    40,  9 ;  2
 	map_const ROUTE_29,                                    30,  9 ;  3
 	map_const NEW_BARK_TOWN,                               10,  9 ;  4

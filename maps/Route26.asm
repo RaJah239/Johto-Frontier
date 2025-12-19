@@ -417,6 +417,14 @@ FisherScottAfterBattleText:
 	line "give up."
 	done
 
+Route26TrainSign:
+	jumptext Route26TrainSignText
+
+Route26TrainSignText:
+	text "Route 26"
+	line "Train Station"
+	done
+
 Route26SignText:
 	text "ROUTE 26"
 
@@ -606,13 +614,14 @@ Route26NoRoomInBagText:
 Route26_MapEvents:
 	def_warp_events
 	warp_event 15, 57, ROUTE_26_HEAL_HOUSE, 1
-	warp_event  7,  5, VICTORY_ROAD_GATE, 1
+	warp_event 13,  5, VICTORY_ROAD_GATE, 1
 	warp_event  5, 71, DAY_OF_WEEK_SIBLINGS_HOUSE, 1
+	warp_event  7,  7, ROUTE_26_MAGNET_TRAIN_STATION, 1
 
 	def_coord_events
 
 	def_bg_events
-	bg_event  8,  6, BGEVENT_READ, Route26Sign
+	bg_event 14,  6, BGEVENT_READ, Route26Sign
 	bg_event 14, 54, BGEVENT_READ, Route26NoBerryOrApricorn
 	bg_event 14, 53, BGEVENT_READ, Route26NoBerryOrApricorn
 	bg_event 13, 53, BGEVENT_READ, Route26NoBerryOrApricorn
@@ -620,12 +629,13 @@ Route26_MapEvents:
 	bg_event  4, 95, BGEVENT_READ, Route26NoBerryOrApricorn
 	bg_event  4, 96, BGEVENT_READ, Route26NoBerryOrApricorn
 	bg_event  5, 96, BGEVENT_READ, Route26NoBerryOrApricorn
+	bg_event  6,  8, BGEVENT_READ, Route26TrainSign
 
 	def_object_events
 	object_event 14, 24, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 2, TrainerCooltrainermJake, -1
 	object_event  9, 38, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainermGaven3, -1
 	object_event 10, 56, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainerfJoyce, -1
-	object_event  5,  8, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerCooltrainerfBeth1, -1
+	object_event 10,  6, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerCooltrainerfBeth1, -1
 	object_event 13, 79, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, TrainerPsychicRichard, -1
 	object_event 10, 92, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerFisherScott, -1
 	object_event  9, 15, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route26MaxElixer, EVENT_ROUTE_26_MAX_ELIXER
@@ -633,7 +643,6 @@ Route26_MapEvents:
 	object_event 14, 53, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route26BerryTree2, EVENT_ROUTE_26_BERRY_2
 	object_event 13, 53, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, Route26BerryTree3, EVENT_ROUTE_26_BERRY_3
 	object_event 13, 54, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route26BerryTree4, EVENT_ROUTE_26_BERRY_4
-
 	object_event  4, 95, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, Route26BerryTree5, EVENT_ROUTE_26_BERRY_5
 	object_event  4, 96, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route26ApricornTree1, EVENT_ROUTE_26_APRICORN_1
 	object_event  5, 96, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route26ApricornTree2, EVENT_ROUTE_26_APRICORN_2

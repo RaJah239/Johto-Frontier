@@ -37,7 +37,7 @@ GoldenrodMagnetTrainStationOfficerScript:
 	warpcheck
 	newloadmap MAPSETUP_TRAIN
 	applymovement PLAYER, .MovementBoardTheTrain
-	wait 20
+	wait 5
 	end
 
 .MovementBoardTheTrain:
@@ -166,6 +166,8 @@ GoldenrodMagnetTrainStation_MapEvents:
 	def_warp_events
 	warp_event  8, 17, GOLDENROD_CITY, 6
 	warp_event  9, 17, GOLDENROD_CITY, 6
+	warp_event  6,  5, ROUTE_26_MAGNET_TRAIN_STATION, 4
+	warp_event 11,  5, ROUTE_26_MAGNET_TRAIN_STATION, 3
 
 	def_coord_events
 	coord_event 11,  6, SCENE_GOLDENRODMAGNETTRAINSTATION_ARRIVE_FROM_SAFFRON, Script_ArriveFromSaffron

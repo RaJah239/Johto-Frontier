@@ -74,4 +74,5 @@ MapScenes::
 	scene_var MOBILE_BATTLE_ROOM,                          wMobileBattleRoomSceneID
 	scene_var DAY_CARE,                                    wDayCareSceneID
 	scene_var ROUTE_30,                                    wRoute30SceneID
+	scene_var ROUTE_26_MAGNET_TRAIN_STATION,               wRoute26MagnetTrainStationSceneID
 	db -1 ; end

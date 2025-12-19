@@ -397,6 +397,7 @@ New_Bark_Map_Names: ; newgroup NEW_BARK ; 24
 	dw New_Bark_Map_Name11 ; map_const DAY_OF_WEEK_SIBLINGS_HOUSE ; 11
 	dw New_Bark_Map_Name12 ; map_const ROUTE_27_SANDSTORM_HOUSE ; 12
 	dw New_Bark_Map_Name13 ; map_const ROUTE_29_ROUTE_46_GATE ; 13
+	dw New_Bark_Map_Name14 ; map_const ROUTE_26__MAGNET_TRAIN_STATION ; 14
 	assert_table_length NUM_NEW_BARK_MAPS
 
 
@@ -926,7 +927,8 @@ New_Bark_Map_Name12: ; map_const ROUTE_27_SANDSTORM_HOUSE ; 12
 	db "Route 27 House@"
 New_Bark_Map_Name13: ; map_const ROUTE_29_ROUTE_46_GATE ; 13
 	db "Route 29 Gate@"
-
+New_Bark_Map_Name14: ; map_const ROUTE_26__MAGNET_TRAIN_STATION ; 14
+	db "Route 29 Station@"
 
 Cherrygrove_Map_Name1: ; map_const ROUTE_30         ;  1
 	db "Route 30@"
