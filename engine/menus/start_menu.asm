@@ -402,9 +402,7 @@ endr
 
 	cp WEATHER_HAIL
 	jr z, .PrintHailing
-
-	cp WEATHER_NONE
-	jr z, .PrintClearSkies
+	jr .PrintClearSkies
 
 .PrintRaining:
 	hlcoord 1, 16
