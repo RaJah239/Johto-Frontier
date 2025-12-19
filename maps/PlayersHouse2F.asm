@@ -51,6 +51,7 @@ if DEF(_DEBUG)
 	givemoney YOUR_MONEY, MAX_MONEY
 	
 	; key items
+	giveitem TYPE_CODEX
 	giveitem BICYCLE
 	giveitem COIN_CASE
 	givecoins MAX_COINS

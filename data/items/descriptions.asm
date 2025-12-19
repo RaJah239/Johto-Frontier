@@ -181,7 +181,7 @@ ItemDescriptions:
 	dw RainbowWingDesc
 	dw AssaultVestDesc
 	dw BrickPieceDesc
-	dw TeruSama25Desc
+	dw TypeCodexDesc
 	dw TeruSama27Desc
  	dw TeruSama28Desc
 	dw TeruSama26Desc
@@ -1001,8 +1001,9 @@ MirageMailDesc:
 	db   "MEW-print MAIL."
 	next "(HOLD)@"
 
-TeruSama25Desc:
-	db   "?@"
+TypeCodexDesc:
+	db   "Summarizes all"
+	next "type advantages.@"
 
 TeruSama26Desc:
 	db   "?@"

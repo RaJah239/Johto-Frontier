@@ -192,9 +192,9 @@ ItemEffects:
 	dw HyperEVUpEffect     ; HYPER_EV_UP
 	dw PokeBallEffect      ; PARK_BALL
 	dw NoEffect            ; RAINBOW_WING
+	dw NoEffect            ; ASSAULT_VEST
 	dw NoEffect            ; BRICK_PIECE
-	dw NoEffect            ; ITEM_B3
-	dw NoEffect            ; ITEM_BE
+	dw TypeCodexEffect     ; TYPE_CODEX
 	dw NoEffect            ; ITEM_C3
 	dw NoEffect            ; ITEM_DC
 	dw NoEffect            ; ITEM_DE
@@ -3161,3 +3161,18 @@ ItemEffects_GetThirdMaxHP:
 	ret nz
 	inc e ; At least 1.
 	ret
+
+TypeCodexEffect:
+	farcall LoadFontsBattleExtra
+	call FadeToMenu
+	farcall BlankScreen
+	farcall LoadOW_BGPal7
+	call FadePalettes
+	farcall TypeChart
+	call Call_ExitMenu
+	xor a
+	ldh [hBGMapMode], a
+	farcall Pack_InitGFX
+	farcall WaitBGMap_DrawPackGFX
+	farjp Pack_InitColors
+	

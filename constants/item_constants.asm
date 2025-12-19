@@ -186,7 +186,7 @@
 	const RAINBOW_WING ; b2
 	const ASSAULT_VEST ; b3
 	const BRICK_PIECE  ; b4
-	const ITEM_BE      ; be
+	const TYPE_CODEX   ; be
 	const ITEM_C3      ; c3
  	const ITEM_DC      ; dc
  	const ITEM_DE

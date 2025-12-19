@@ -180,7 +180,7 @@ ItemNames::
 	li "Rainbow Wing"
 	li "Assault Vest"
 	li "Brick Piece"
-	li "?"
+	li "Type Codex"
 	li "?"
 	li "?"
 	li "?"
