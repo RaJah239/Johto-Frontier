@@ -23,7 +23,7 @@ DelCellNum::
 	ret
 
 CheckCellNum::
-	jr _CheckCellNum ; useless
+	; fallthrough
 
 _CheckCellNum:
 	ld hl, wPhoneList
@@ -570,7 +570,7 @@ Phone_StartRinging:
 	ret
 
 HangUp_Wait20Frames:
-	jr Phone_Wait20Frames
+	; fallthrough
 
 Phone_Wait20Frames:
 	ld c, 20
