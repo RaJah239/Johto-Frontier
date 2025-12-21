@@ -23,7 +23,7 @@ StatsScreenInit:
 
 _MobileStatsScreenInit:
 	ld hl, StatsScreenMobile
-	jr StatsScreenInit_gotaddress
+	; fallthrough
 
 StatsScreenInit_gotaddress:
 	ldh a, [hMapAnims]
@@ -1428,7 +1428,7 @@ StatsScreen_GetAnimationParam:
 .Buffermon
 .Tempmon:
 	ld bc, wTempMonSpecies
-	jr .CheckEggFaintedFrzSlp ; utterly pointless
+	; fallthrough
 
 .CheckEggFaintedFrzSlp:
 	ld a, [wCurPartySpecies]
