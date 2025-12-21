@@ -187,7 +187,13 @@ HandleMapTimeAndJoypad:
 HandleMapObjects:
 	farcall HandleNPCStep
 	farcall _HandlePlayerStep
-	call _CheckObjectEnteringVisibleRange
+	; fallthrough
+
+_CheckObjectEnteringVisibleRange:
+	ld hl, wPlayerStepFlags
+	bit PLAYERSTEP_STOP_F, [hl]
+	ret z
+	farcall CheckObjectEnteringVisibleRange
 	ret
 
 HandleMapBackground:
@@ -213,13 +219,6 @@ CheckPlayerState:
 .noevents
 	ld a, MAPEVENTS_OFF
 	ld [wMapEventStatus], a
-	ret
-
-_CheckObjectEnteringVisibleRange:
-	ld hl, wPlayerStepFlags
-	bit PLAYERSTEP_STOP_F, [hl]
-	ret z
-	farcall CheckObjectEnteringVisibleRange
 	ret
 
 PlayerEvents:
