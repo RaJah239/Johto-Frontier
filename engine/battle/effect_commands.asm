@@ -6389,10 +6389,7 @@ PlayUserBattleAnim:
 	push de
 	push bc
 	callfar PlayBattleAnim
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopBCDEHL
 
 PlayOpponentBattleAnim:
 	ld a, e

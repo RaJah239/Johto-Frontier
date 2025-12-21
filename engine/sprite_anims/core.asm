@@ -24,12 +24,7 @@ PlaySpriteAnimations:
 	ld a, LOW(wShadowOAM)
 	ld [wCurSpriteOAMAddr], a
 	call DoNextFrameForAllSprites
-
-	pop af
-	pop bc
-	pop de
-	pop hl
-	ret
+	jmp PopAFBCDEHL
 
 DoNextFrameForAllSprites:
 	ld hl, wSpriteAnimationStructs
