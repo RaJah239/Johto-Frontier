@@ -2534,7 +2534,7 @@ EnemyMonFaintedAnimation:
 PlayerMonFaintedAnimation:
 	hlcoord 1, 10
 	decoord 1, 11
-	jr MonFaintedAnimation
+	; fallthrough
 
 MonFaintedAnimation:
 	ld a, [wJoypadDisable]
