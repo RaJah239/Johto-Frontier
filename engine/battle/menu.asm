@@ -49,7 +49,7 @@ BattleMenuHeaderWild:
 
 BattleMenuHeaderTrainer:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 8, 12, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1
+	menu_coords 6, 12, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1
 	dw .MenuData
 	db 1 ; default option
 
@@ -64,7 +64,7 @@ BattleMenuHeaderTrainer:
 	db "Fight@"
 	db "<PKMN>@"
 	db "Codex@"
-	db "EXT@"
+	db "Extra@"
 
 SafariBattleMenuHeader:
 	db MENU_BACKUP_TILES ; flags
