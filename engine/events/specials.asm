@@ -62,7 +62,7 @@ FindPartyMonThatSpeciesYourTrainerID:
 	ld b, a
 	farcall _FindPartyMonThatSpeciesYourTrainerID
 	jr z, FoundNone
-	jr FoundOne
+	; fallthrough
 
 FoundOne:
 	ld a, TRUE
