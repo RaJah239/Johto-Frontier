@@ -906,13 +906,7 @@ PlayerTurn_EndOpponentProtectEndureDestinyBond:
 	call SetPlayerTurn
 	call EndUserDestinyBond
 	callfar DoPlayerTurn
-	jr EndOpponentProtectEndureDestinyBond
-
-EnemyTurn_EndOpponentProtectEndureDestinyBond:
-	call SetEnemyTurn
-	call EndUserDestinyBond
-	callfar DoEnemyTurn
-	jr EndOpponentProtectEndureDestinyBond
+	; fallthrough
 
 EndOpponentProtectEndureDestinyBond:
 	ld a, BATTLE_VARS_SUBSTATUS1_OPP
@@ -923,6 +917,12 @@ EndOpponentProtectEndureDestinyBond:
 	call GetBattleVarAddr
 	res SUBSTATUS_DESTINY_BOND, [hl]
 	ret
+
+EnemyTurn_EndOpponentProtectEndureDestinyBond:
+	call SetEnemyTurn
+	call EndUserDestinyBond
+	callfar DoEnemyTurn
+	jr EndOpponentProtectEndureDestinyBond
 
 EndUserDestinyBond:
 	ld a, BATTLE_VARS_SUBSTATUS5
