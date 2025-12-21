@@ -576,8 +576,8 @@ Fishing_Inc_Index:
 	sra a
 	sra a
 	inc a
-	sla a
-	sla a
+	add a
+	add a
 	ld [wPokedexStatus], a ; wildmon index, also zeros the rod type
 	inc hl
 	inc hl

@@ -343,10 +343,10 @@ Function11c254:
 	call OpenSRAM
 	ld hl, sEZChatMessages
 	pop af
-	sla a
-	sla a
+	add a
+	add a
 	ld c, a
-	sla a
+	add a
 	add c
 	ld c, a
 	ld b, 0
@@ -1105,7 +1105,7 @@ Function11c770:
 	jr z, .cd21_is_zero
 	; load from data array
 	dec a
-	sla a
+	add a
 	ld hl, MobileEZChatData_WordAndPageCounts
 	ld c, a
 	ld b, 0
@@ -1436,7 +1436,7 @@ Function11c8f6:
 	jr .asm_11c912
 
 Function11c95d:
-	sla a
+	add a
 	ld c, a
 	ld b, 0
 	ld hl, Unknown_11c986
@@ -1767,10 +1767,10 @@ Function11cb66:
 	ld hl, sEZChatMessages
 	ld a, [wMenuCursorY]
 	dec a
-	sla a
-	sla a
+	add a
+	add a
 	ld c, a
-	sla a
+	add a
 	add c
 	ld c, a
 	ld b, 0
@@ -2032,8 +2032,8 @@ Function11ce0b:
 
 Function11ce2b:
 	ld a, [wcd22]
-	sla a
-	sla a
+	add a
+	add a
 	ld c, a
 	ld b, 0
 	ld hl, Unknown_11ceb9
@@ -2472,14 +2472,14 @@ AnimateEZChatCursor:
 
 .zero
 	ld a, [wcd20]
-	sla a
+	add a
 	ld hl, .Coords_Zero
 	ld e, $1
 	jr .load
 
 .one
 	ld a, [wcd21]
-	sla a
+	add a
 	ld hl, .Coords_One
 	ld e, $2
 	jr .load
@@ -2494,7 +2494,7 @@ AnimateEZChatCursor:
 	call ReinitSpriteAnimFrame
 
 	ld a, [wcd22]
-	sla a
+	add a
 	ld hl, .Coords_Two
 	ld e, $4
 	jr .load
@@ -2503,7 +2503,7 @@ AnimateEZChatCursor:
 	ld a, SPRITE_ANIM_FRAMESET_EZCHAT_CURSOR_2
 	call ReinitSpriteAnimFrame
 	ld a, [wMobileCommsJumptableIndex]
-	sla a
+	add a
 	ld hl, .Coords_Three
 	ld e, $8
 .load
@@ -2529,7 +2529,7 @@ AnimateEZChatCursor:
 	ld a, SPRITE_ANIM_FRAMESET_EZCHAT_CURSOR_2
 	call ReinitSpriteAnimFrame
 	ld a, [wcd2a]
-	sla a
+	add a
 	ld hl, .Coords_Four
 	ld e, $10
 	jr .load
@@ -2538,7 +2538,7 @@ AnimateEZChatCursor:
 	ld a, SPRITE_ANIM_FRAMESET_EZCHAT_CURSOR_2
 	call ReinitSpriteAnimFrame
 	ld a, [wcd2c]
-	sla a
+	add a
 	ld hl, .Coords_Five
 	ld e, $20
 	jr .load
@@ -2548,9 +2548,9 @@ AnimateEZChatCursor:
 	call ReinitSpriteAnimFrame
 	; X = [wcd4a] * 8 + 24
 	ld a, [wcd4a]
-	sla a
-	sla a
-	sla a
+	add a
+	add a
+	add a
 	add $18
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
@@ -2580,19 +2580,19 @@ AnimateEZChatCursor:
 	jr z, .asm_11d1b1
 	; X = [wEZChatCursorXCoord] * 8 + 32
 	ld a, [wEZChatCursorXCoord]
-	sla a
-	sla a
-	sla a
+	add a
+	add a
+	add a
 	add $20
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld [hli], a
 	; Y = [wEZChatCursorYCoord] * 16 + 72
 	ld a, [wEZChatCursorYCoord]
-	sla a
-	sla a
-	sla a
-	sla a
+	add a
+	add a
+	add a
+	add a
 	add $48
 	ld [hl], a
 	ld a, $2
@@ -2603,12 +2603,12 @@ AnimateEZChatCursor:
 .asm_11d1b1
 	; X = [wEZChatCursorXCoord] * 40 + 24
 	ld a, [wEZChatCursorXCoord]
-	sla a
-	sla a
-	sla a
+	add a
+	add a
+	add a
 	ld e, a
-	sla a
-	sla a
+	add a
+	add a
 	add e
 	add $18
 	ld hl, SPRITEANIMSTRUCT_XCOORD
@@ -2634,11 +2634,11 @@ AnimateEZChatCursor:
 	push de
 	call ReinitSpriteAnimFrame
 	ld a, [wcd4a]
-	sla a
-	sla a
-	sla a
+	add a
+	add a
+	add a
 	ld e, a
-	sla a
+	add a
 	add e
 	add 8 * TILE_WIDTH
 	ld hl, SPRITEANIMSTRUCT_YCOORD

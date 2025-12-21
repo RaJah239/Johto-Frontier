@@ -540,7 +540,7 @@ BattleTowerMartTutorScientistScript:
     call CopyBytes
 
 ; move the CANCEL indicator
-    sla a ; a *= 2, because quantity is factored in
+    add a ; a *= 2, because quantity is factored in
     add l
     ld l, a
     ld a, -1

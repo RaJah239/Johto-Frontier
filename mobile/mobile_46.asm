@@ -933,11 +933,11 @@ Function11878d:
 	ld de, w6_d000
 	ld bc, $1000
 	ld a, [hl]
-	sla a
+	add a
 	jr c, .asm_1187f9
-	sla a
+	add a
 	jr c, .asm_1187fd
-	sla a
+	add a
 	jr c, .asm_1187f5
 	ld a, MOBILEAPI_12
 	jr .asm_1187ff
@@ -1095,7 +1095,7 @@ Function1188e7:
 	call CloseSRAM
 	and a
 	ret z
-	sla a
+	add a
 	ld c, a
 .asm_1188fa
 	ld a, [de]
@@ -1513,10 +1513,10 @@ Function118d35: ; unreferenced
 	cp $5
 	jr nz, .asm_118d7b
 	ld a, [wcd4f]
-	sla a
+	add a
 	ld b, a
-	sla a
-	sla a
+	add a
+	add a
 	add b
 	ld b, a
 	ld a, BANK(s5_b2fb)
@@ -2947,10 +2947,10 @@ Function1196de:
 	; b = ([de] - 48) * 2
 	; c = ([de] - 48) * 10
 	sub $30
-	sla a
+	add a
 	ld b, a
-	sla a
-	sla a
+	add a
+	add a
 	add b
 	ld c, a
 	add hl, bc
@@ -5231,7 +5231,7 @@ Function11a884:
 
 Function11a88c:
 	ld a, [bc]
-	sla a
+	add a
 	ld c, a
 	xor a
 	ld b, a
