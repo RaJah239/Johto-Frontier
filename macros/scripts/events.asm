@@ -1109,4 +1109,9 @@ MACRO isfieldactionsset
 	db isfieldactionsset_command
 ENDM
 
+	const nooryes_command ; $ae
+MACRO nooryes
+	db nooryes_command
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value
