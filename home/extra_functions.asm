@@ -10,11 +10,6 @@ CheckIfFastBattlesIsOn::
 	bit FAST_BATTLES, a
 	ret
 
-CheckFieldActions::
-	ld a, [wOptions3]
-	bit FIELD_ACTIONS, a
-	ret
-
 ; This converts values out of 256 into a value
 ; out of 100. It achieves this by multiplying
 ; the value by 100 and dividing it by 256.
