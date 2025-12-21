@@ -42,8 +42,7 @@ AI_Basic:
 	push de
 	push bc
 	ld hl, StatusOnlyEffects
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 
 	pop bc
 	pop de
@@ -1292,8 +1291,7 @@ AI_Smart_Mimic:
 	ld a, [wLastPlayerCounterMove]
 	push hl
 	ld hl, UsefulMoves
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 
 	pop hl
 	ret nc
@@ -1407,8 +1405,7 @@ AI_Smart_Encore:
 	push hl
 	ld a, [wLastPlayerCounterMove]
 	ld hl, EncoreMoves
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 	pop hl
 	jr nc, .discourage
 
@@ -1637,8 +1634,7 @@ AI_Smart_Disable:
 	push hl
 	ld a, [wLastPlayerCounterMove]
 	ld hl, UsefulMoves
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 
 	pop hl
 	jr nc, .notencourage
@@ -1950,16 +1946,14 @@ AI_Smart_Sandstorm:
 	ld a, [wBattleMonType1]
 	push hl
 	ld hl, .SandstormImmuneTypes
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 	pop hl
 	jr c, .greatly_discourage
 
 	ld a, [wBattleMonType2]
 	push hl
 	ld hl, .SandstormImmuneTypes
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 	pop hl
 	jr c, .greatly_discourage
 
@@ -2769,8 +2763,7 @@ AI_Opportunist:
 	push de
 	push bc
 	ld hl, StallMoves
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 
 	pop bc
 	pop de
@@ -2877,8 +2870,7 @@ AI_Aggressive:
 	push bc
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
 	ld hl, RecklessMoves
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 	pop bc
 	pop de
 	pop hl
@@ -2939,8 +2931,7 @@ AI_Cautious:
 	push de
 	push bc
 	ld hl, ResidualMoves
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 
 	pop bc
 	pop de

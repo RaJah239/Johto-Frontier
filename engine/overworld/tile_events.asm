@@ -56,9 +56,7 @@ CheckWarpFacingDown:
 CheckGrassCollision::
 	ld a, [wPlayerTileCollision]
 	ld hl, .blocks
-	ld de, 1
-	call IsInArray
-	ret
+	jmp IsInByteArray
 
 .blocks
 	db COLL_CUT_08
@@ -76,9 +74,7 @@ CheckGrassCollision::
 CheckCutCollision:
 	ld a, c
 	ld hl, .blocks
-	ld de, 1
-	call IsInArray
-	ret
+	jmp IsInByteArray
 
 .blocks
 	db COLL_CUT_TREE
