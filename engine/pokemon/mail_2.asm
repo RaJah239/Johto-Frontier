@@ -737,7 +737,7 @@ InvertBytes: ; unreferenced
 ; invert bc bytes starting at hl
 .loop
 	ld a, [hl]
-	xor $ff
+	cpl
 	ld [hli], a
 	dec bc
 	ld a, b

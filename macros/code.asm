@@ -61,7 +61,7 @@ MACRO calc_sine_wave
 	and %011111
 	call .apply\@
 	ld a, h
-	xor $ff
+	cpl
 	inc a
 	ret
 .apply\@

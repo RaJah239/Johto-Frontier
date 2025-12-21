@@ -3393,7 +3393,7 @@ Pokedex_LoadInvertedFont:
 Pokedex_InvertTiles:
 .loop
 	ld a, [hl]
-	xor $ff
+	cpl
 	ld [hli], a
 	dec bc
 	ld a, b

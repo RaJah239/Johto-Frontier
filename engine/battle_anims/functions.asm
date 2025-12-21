@@ -708,7 +708,7 @@ BattleAnimFunc_Shake:
 	ld hl, BATTLEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld a, [hl]
-	xor $ff
+	cpl
 	inc a
 	ld [hl], a
 	ret
@@ -2350,7 +2350,7 @@ BattleAnimFunc_Sound:
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
 	ld a, [hl]
-	xor $ff
+	cpl
 	add $3
 	ld [hl], a
 .got_turn
@@ -2409,7 +2409,7 @@ BattleAnimFunc_Sound:
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld a, d
-	xor $ff
+	cpl
 	inc a
 	ld [hl], a
 	ret
@@ -2699,7 +2699,7 @@ BattleAnimFunc_Paralyzed:
 .right
 	ld a, e
 	and $f
-	xor $ff
+	cpl
 	inc a
 	ld [hl], a
 	ld a, BATTLE_ANIM_FRAMESET_PARALYZED_FLIPPED
@@ -2725,7 +2725,7 @@ BattleAnimFunc_Paralyzed:
 	ld hl, BATTLEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld a, [hl]
-	xor $ff
+	cpl
 	inc a
 	ld [hl], a
 	ret
@@ -2933,7 +2933,7 @@ BattleAnimFunc_PresentSmokescreen:
 	call BattleAnim_Sine
 	bit 7, a
 	jr nz, .negative
-	xor $ff
+	cpl
 	inc a
 .negative
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
@@ -3008,7 +3008,7 @@ BattleAnimFunc_Horn:
 	add hl, bc
 	ld [hl], a
 	sra a
-	xor $ff
+	cpl
 	inc a
 	ld hl, BATTLEANIMSTRUCT_VAR1
 	add hl, bc
@@ -3480,7 +3480,7 @@ BattleAnimFunc_StrengthSeismicToss:
 	ld hl, BATTLEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
-	xor $ff
+	cpl
 	inc a
 	ld [hl], a
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
@@ -3797,7 +3797,7 @@ BattleAnimFunc_BatonPass:
 	call BattleAnim_Sine
 	bit 7, a
 	jr nz, .negative
-	xor $ff
+	cpl
 	inc a
 .negative
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
@@ -4191,7 +4191,7 @@ BattleAnimFunc_AncientPower:
 	add hl, bc
 	ld d, [hl]
 	call BattleAnim_Sine
-	xor $ff
+	cpl
 	inc a
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
 	add hl, bc
