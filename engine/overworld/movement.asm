@@ -427,7 +427,7 @@ Movement_turn_head_left:
 
 Movement_turn_head_right:
 	ld a, OW_RIGHT
-	jr TurnHead
+	; fallthrough
 
 TurnHead:
 	ld hl, OBJECT_DIRECTION
@@ -670,7 +670,7 @@ Movement_turn_step_left:
 
 Movement_turn_step_right:
 	ld a, OW_RIGHT
-	jr TurnStep
+	; fallthrough
 
 TurnStep:
 	ld hl, OBJECT_1D ; new facing
