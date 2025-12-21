@@ -791,7 +791,7 @@ IF USE_GEN3_STYLE_TYPE_GFX == TRUE
 	ret z
 	ld b, $48
 	ld hl, vTiles2 tile $48
-	cp 0
+	and a
 	ret z
 	ld b, $50
 	ld hl, vTiles2 tile $50
@@ -808,7 +808,7 @@ IF USE_GEN3_STYLE_TYPE_GFX == TRUE
 	ret z
 	ld b, $4c
 	ld hl, vTiles2 tile $4c
-	cp 0
+	and a
 	ret z
 	ld b, $54
 	ld hl, vTiles2 tile $54
@@ -824,7 +824,7 @@ IF USE_GEN3_STYLE_TYPE_GFX == TRUE
 	cp -1
 	ret z
 	ld de, wBGPals1 palette 2 ; + 2
-	cp 0
+	and a
 	ret z
 	ld de, wBGPals1 palette 3 ; + 2
 	cp 1

@@ -3564,7 +3564,7 @@ InfoBoxLeftPress:
 	call PlaySFX
 
 	ld a, [wTrainerInfoPage]
-	cp 0
+	and a
 	jr z, .jump_to_page_5
 	cp 1
 	jr z, .jump_to_page_1
@@ -3608,7 +3608,7 @@ InfoBoxRightPress:
 	call PlaySFX
 
 	ld a, [wTrainerInfoPage]
-	cp 0
+	and a
 	jr z, .jump_to_page_2
 	cp 1
 	jr z, .jump_to_page_3
