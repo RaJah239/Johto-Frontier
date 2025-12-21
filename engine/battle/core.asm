@@ -3189,7 +3189,7 @@ TryToRunAwayFromBattle:
 
 	ld a, [wBattleMode]
 	dec a
-	jr nz, .cant_run_from_trainer
+	jr nz, .trainer_battle_info
 
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
@@ -3200,8 +3200,8 @@ TryToRunAwayFromBattle:
 	ld hl, BattleText_CantEscape
 	jr .print_inescapable_text
 
-.cant_run_from_trainer
-	ld hl, BattleText_TheresNoEscapeFromTrainerBattle
+.trainer_battle_info
+	farjp TrainerBattleInfo
 
 .print_inescapable_text
 	call StdBattleTextbox

@@ -260,11 +260,6 @@ BattleText_AnEGGCantBattle:
 	line "battle!"
 	prompt
 
-BattleText_TheresNoEscapeFromTrainerBattle:
-	text "Can't run from a"
-	line "trainer battle!"
-	prompt
-
 BattleText_GotAwaySafely:
 	text "Got away safely!"
 	prompt
