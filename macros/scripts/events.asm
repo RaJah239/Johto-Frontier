@@ -1114,4 +1114,10 @@ MACRO nooryes
 	db nooryes_command
 ENDM
 
+	const writetextend_command ; $af
+MACRO writetextend
+	db writetextend_command
+	dw \1 ; text_pointer
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value
