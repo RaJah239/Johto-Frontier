@@ -284,7 +284,8 @@ Script_isfieldactionsset:
 Script_isquicknurseset:
 	xor a
 	ld [wScriptVar], a
-	call CheckQuickNurseHeal
+	ld a, [wOptions2]
+	bit NURSE_HEAL, a
 	ret nz ; if z=0 we're in normal mode, therefore return since we already wrote 0 to wScriptVar (False)
 	xor a
 	inc a

@@ -10,11 +10,6 @@ CheckIfFastBattlesIsOn::
 	bit FAST_BATTLES, a
 	ret
 
-CheckQuickNurseHeal::
-	ld a, [wOptions2]
-	bit NURSE_HEAL, a
-	ret
-
 CheckFieldActions::
 	ld a, [wOptions3]
 	bit FIELD_ACTIONS, a
