@@ -649,7 +649,7 @@ BGEventJumptable:
 
 .left:
 	ld b, OW_LEFT
-	jr .checkdir
+	; fallthrough
 
 .checkdir:
 	ld a, [wPlayerDirection]
