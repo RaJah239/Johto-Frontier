@@ -155,8 +155,8 @@ Moves:
 	move TAUNT,        EFFECT_TAUNT,               0, DARK,          STATUS,   100, 32,   0
 	move TREMOR,       EFFECT_EARTHQUAKE,         40, GROUND,        PHYSICAL, 100, 40,   0
 	move LEECH_LIFE,   EFFECT_LEECH_HIT,          80, BUG,           PHYSICAL, 100, 24,   0
-	move LOVELY_KISS,  EFFECT_SLEEP,               0, NORMAL,        STATUS,    75, 16,   0
-	move SKY_ATTACK,   EFFECT_RECOIL_HIT,        110, FLYING,        PHYSICAL, 100, 24,   0
+	move LOVELY_KISS,  EFFECT_SLEEP,               0, NORMAL,        STATUS,    85, 16,   0
+	move SKY_ATTACK,   EFFECT_RECOIL_HIT,        120, FLYING,        PHYSICAL, 100, 24,   0
 	move TRANSFORM,    EFFECT_TRANSFORM,           0, NORMAL,        STATUS,   100, 40,   0
 	move CALM_MIND,    EFFECT_CALM_MIND,           0, PSYCHIC_TYPE,  STATUS,   100, 32,   0
 	move HYPER_VOICE,  EFFECT_SP_ATK_UP_HIT,      90, NORMAL,        SPECIAL,  100, 24,  10
