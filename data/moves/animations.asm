@@ -285,6 +285,7 @@ BattleAnimations::
 	dw BattleAnim_InHail
 	assert_table_length NUM_BATTLE_ANIMS + 1
 
+BattleAnim_Mimic:
 BattleAnim_SweetScent2:
 BattleAnim_Miss:
 BattleAnim_Dummy:
@@ -2674,21 +2675,6 @@ BattleAnim_Tremor:
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $4, $10
 	anim_sound 0, 1, SFX_EMBER
 	anim_wait 24
-	anim_ret
-
-BattleAnim_Mimic:
-	anim_1gfx BATTLE_ANIM_GFX_SPEED
-	anim_obp0 $fc
-	anim_sound 63, 3, SFX_LICK
-	anim_obj BATTLE_ANIM_OBJ_MIMIC, 132, 44, $0
-	anim_obj BATTLE_ANIM_OBJ_MIMIC, 132, 44, $8
-	anim_obj BATTLE_ANIM_OBJ_MIMIC, 132, 44, $10
-	anim_obj BATTLE_ANIM_OBJ_MIMIC, 132, 44, $18
-	anim_obj BATTLE_ANIM_OBJ_MIMIC, 132, 44, $20
-	anim_obj BATTLE_ANIM_OBJ_MIMIC, 132, 44, $28
-	anim_obj BATTLE_ANIM_OBJ_MIMIC, 132, 44, $30
-	anim_obj BATTLE_ANIM_OBJ_MIMIC, 132, 44, $38
-	anim_wait 176
 	anim_ret
 
 BattleAnim_LovelyKiss:
