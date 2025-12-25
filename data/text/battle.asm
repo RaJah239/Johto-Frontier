@@ -5,6 +5,11 @@ BattleText_QuickClaw:
 	line "Quick Claw procs!"
 	prompt
 
+BattleText_TargetRegenerates:
+	text "<TARGET>"
+	line "regenerates."
+	prompt
+
 WildPokemonAppearedText:
 	text "Wild @"
 	text_ram wEnemyMonNickname

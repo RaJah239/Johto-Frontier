@@ -1,10 +1,66 @@
 Core2_NewTurnEndEffects:
+	call HandleRegenerator
 	call HandleLeftovers
 	call HandleMysteryberry
 	call HandleSafeguard
 	call HandleScreens
 	call HandleTrickRoom
 	ret
+
+Core_RegeneratorPokemon:
+    db MEW
+    db -1
+
+HandleRegenerator:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .DoEnemyFirst
+	call SetPlayerTurn
+    ld a, [wBattleMonSpecies]
+	call .do_it
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	jr .do_it
+
+.DoEnemyFirst:
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	call .do_it
+	call SetPlayerTurn
+	ld a, [wBattleMonSpecies]
+.do_it
+	ld hl, Core_RegeneratorPokemon
+	call IsInByteArray
+	ret nc
+
+    ld hl, wBattleMonHP
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_hp
+	ld hl, wEnemyMonHP
+
+.got_hp
+; Don't restore if we're already at max HP
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	cp b
+	jr nz, .restore
+	ld a, [hl]
+	cp c
+	ret z
+
+.restore
+	farcall GetSixteenthMaxHP
+	farcall SwitchTurnCore
+	farcall RestoreHP
+
+	call CheckIfFastBattlesIsOn
+	ret nz
+	ld hl, BattleText_TargetRegenerates
+	jmp StdBattleTextbox
 
 HandleTrickRoom:
 	ld hl, wTrickRoomCount
