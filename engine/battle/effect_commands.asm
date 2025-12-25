@@ -6595,25 +6595,19 @@ BattleCommand_FlameOrb:
 	ret nz
 	farcall ShouldIgniteFlameOrb
 	ret nc
-    call ClearSprites
-    ld hl, FlameOrbText
+	call ClearSprites
+	ld hl, FlameOrbText
 	call StdBattleTextbox
-    ld a, BATTLE_VARS_STATUS
+	ld a, BATTLE_VARS_STATUS
 	call GetBattleVarAddr
 	set BRN, [hl]
 	call UpdateUserInParty
 	call BattleCommand_SwitchTurn
 	ld hl, ApplyBrnEffectOnAttack
 	call CallBattleCore
-    ld a, [wBattleHasJustStarted]
-    and a
-    jr nz, .skipAnim
 	ld de, ANIM_BRN
 	call PlayOpponentBattleAnim
-	call RefreshBattleHuds
-.skipAnim
-	call BattleCommand_SwitchTurn
-    ret
+	jmp BattleCommand_SwitchTurn
 
 ; this needs to be in effect_commands.asm
 GetCurrentMon:
