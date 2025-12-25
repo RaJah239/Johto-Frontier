@@ -4689,9 +4689,10 @@ BattleAnim_DragonClaw:
 	anim_ret
 
 BattleAnim_RainDance:
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_WATER
 	anim_1gfx BATTLE_ANIM_GFX_WATER
 	anim_bgp $f8
-	anim_obp0 $7c
+;	anim_obp0 $7c
 	anim_sound 0, 1, SFX_RAIN_DANCE
 	anim_obj BATTLE_ANIM_OBJ_RAIN, 88, 0, $0
 	anim_wait 8
@@ -4699,9 +4700,11 @@ BattleAnim_RainDance:
 	anim_wait 8
 	anim_obj BATTLE_ANIM_OBJ_RAIN, 88, 0, $2
 	anim_wait 96
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_SunnyDay:
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_YELLOW
 	anim_1gfx BATTLE_ANIM_GFX_WATER
 	anim_bgp $90
 	anim_sound 0, 1, SFX_MORNING_SUN
@@ -4711,6 +4714,7 @@ BattleAnim_SunnyDay:
 	anim_wait 8
 	anim_obj BATTLE_ANIM_OBJ_RAIN, 88, 0, $2
 	anim_wait 96
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_MirrorCoat:
