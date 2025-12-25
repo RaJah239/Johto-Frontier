@@ -90,7 +90,6 @@ DoBattle:
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call SpikesDamage
-	call SwitchInEffects
 	ld a, [wLinkMode]
 	and a
 	jr z, .not_linked_2
@@ -105,7 +104,6 @@ DoBattle:
 	call EnemySwitch
 	call SetEnemyTurn
 	call SpikesDamage
-	call SwitchInEffects
 
 .not_linked_2
     ld a, [wLinkMode]
@@ -113,7 +111,6 @@ DoBattle:
     jr nz, .skipEffects
 	call SetEnemyTurn
 	call SpikesDamage
-	call SwitchInEffects
 
 .skipEffects
 	farcall FieldWeather
@@ -449,7 +446,6 @@ DetermineMoveOrder:
 	callfar AI_Switch
 	call SetEnemyTurn
 	call SpikesDamage
-	call SwitchInEffects
 	jmp .enemy_first
 
 .use_move
@@ -1904,7 +1900,6 @@ EnemyPartyMonEntrance:
 	call ResetBattleParticipants
 	call SetEnemyTurn
 	call SpikesDamage
-	call SwitchInEffects
 	xor a
 	ld [wEnemyMoveStruct + MOVE_ANIM], a
 	ld [wBattlePlayerAction], a
@@ -2331,7 +2326,6 @@ ForcePlayerMonChoice:
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call SpikesDamage
-	call SwitchInEffects
 	ld a, $1
 	and a
 	ld c, a
@@ -2352,8 +2346,7 @@ PlayerPartyMonEntrance:
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
-	call SpikesDamage
-	jmp SwitchInEffects
+	jmp SpikesDamage
 
 SetUpBattlePartyMenu:
 	call ClearBGPalettes
@@ -3510,7 +3503,11 @@ SpikesDamage:
 	cp HELD_HEAVY_BOOTS
 	ret z
 
-    call ClearFailures
+	; ClearFailures
+	xor a
+	ld [wFailedMessage], a
+	ld [wEffectFailed], a
+	ld [wAttackMissed], a
 
 	ld hl, wPlayerScreens
 	ld de, wBattleMonType
@@ -4852,8 +4849,7 @@ PlayerSwitch:
 EnemyMonEntrance:
 	callfar AI_Switch
 	call SetEnemyTurn
-	call SpikesDamage
-	jmp SwitchInEffects
+	jmp SpikesDamage
 
 BattleMonEntrance:
 	call WithdrawMonText
@@ -4884,7 +4880,6 @@ BattleMonEntrance:
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call SpikesDamage
-	call SwitchInEffects
 	ld a, $2
 	ld [wMenuCursorY], a
 	ret
@@ -4905,8 +4900,7 @@ PassedBattleMonEntrance:
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
-	call SpikesDamage
-	jmp SwitchInEffects
+	jmp SpikesDamage
 
 BattleMenu_Run:
 	call ClearSprites
@@ -8643,18 +8637,6 @@ BattleStartMessage:
 	call CheckIfFastBattlesIsOn
 	ret nz
 	jmp StdBattleTextbox
-
-; DevNote - function for Pokemon with effects on switching in
-SwitchInEffects:
-   call ClearFailures
-   farjp BattleCommand_FlameOrb
-
-ClearFailures:
-	xor a
-	ld [wFailedMessage], a
-	ld [wEffectFailed], a
-	ld [wAttackMissed], a
-	ret
 
 GetMovePower:
 	ld a, b

@@ -5,7 +5,30 @@ Core2_NewTurnEndEffects:
 	call HandleSafeguard
 	call HandleScreens
 	call HandleTrickRoom
+	call HandleFlameOrb
 	ret
+
+HandleFlameOrb:
+	; ClearFailures
+	xor a
+	ld [wFailedMessage], a
+	ld [wEffectFailed], a
+	ld [wAttackMissed], a
+
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .DoEnemyFirst
+	call SetPlayerTurn
+	call .do_it
+	call SetEnemyTurn
+	jp .do_it
+
+.DoEnemyFirst:
+	call SetEnemyTurn
+	call .do_it
+	call SetPlayerTurn
+.do_it
+	farjp BattleCommand_FlameOrb
 
 Core_RegeneratorPokemon:
     db MEW
