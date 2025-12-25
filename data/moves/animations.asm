@@ -257,7 +257,7 @@ BattleAnimations::
 	dw BattleAnim_WoodBash
 	assert_table_length NUM_ATTACKS + 1
 	dw BattleAnim_Dummy
-	dw BattleAnim_SweetScent2
+	dw BattleAnim_AnimBattleMiss
 	assert_table_length $100
 ; $100
 	dw BattleAnim_ThrowPokeBall
@@ -286,10 +286,18 @@ BattleAnimations::
 	assert_table_length NUM_BATTLE_ANIMS + 1
 
 BattleAnim_Mimic:
-BattleAnim_SweetScent2:
 BattleAnim_Miss:
 BattleAnim_Dummy:
 	anim_ret
+
+BattleAnim_AnimBattleMiss:
+	anim_1gfx BATTLE_ANIM_GFX_HIT
+	anim_call BattleAnim_TargetObj_1Row
+	anim_sound 0, 0, SFX_SUBMISSION
+	anim_bgeffect BATTLE_BG_EFFECT_FLAIL, $0, BG_EFFECT_USER, $0
+	anim_wait 32
+	anim_incbgeffect BATTLE_BG_EFFECT_FLAIL
+	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_WoodBash:
 	anim_2gfx BATTLE_ANIM_GFX_PLANT, BATTLE_ANIM_GFX_HIT

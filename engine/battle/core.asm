@@ -3965,6 +3965,22 @@ ItemRecoveryAnim:
 	call SwitchTurnCore
 	jmp PopBCDEHL
 
+; must stay in this file
+BattleMissAnim:
+	push hl
+	push de
+	push bc
+	call EmptyBattleTextbox
+	ld a, ANIM_BATTLE_MISS
+	ld [wFXAnimID], a
+	call SwitchTurnCore
+	xor a
+	ld [wNumHits], a
+	ld [wFXAnimID + 1], a
+	predef PlayBattleAnim
+	call SwitchTurnCore
+	jmp PopBCDEHL
+
 UseHeldStatusHealingItem:
 	callfar GetOpponentItem
 	ld hl, HeldStatusHealingEffects

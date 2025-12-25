@@ -1988,6 +1988,7 @@ GetFailureResultText:
 	ld a, [wTypeModifier]
 	and EFFECTIVENESS_MASK
 	jr z, .got_text
+	farcall BattleMissAnim
 	ld hl, AttackMissedText
 	ld de, AttackMissed2Text
 	ld a, [wCriticalHit]
