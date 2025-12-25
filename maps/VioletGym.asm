@@ -78,6 +78,7 @@ TrainerBirdKeeperRod:
 	trainer BIRD_KEEPER, ROD, EVENT_BEAT_BIRD_KEEPER_ROD, BirdKeeperRodSeenText, BirdKeeperRodBeatenText, 0, .Script
 
 .Script:
+	loadmem wNoRematch, 1
 	endifjustbattled
 	opentext
 	writetext BirdKeeperRodAfterBattleText
@@ -89,6 +90,7 @@ TrainerBirdKeeperAbe:
 	trainer BIRD_KEEPER, ABE, EVENT_BEAT_BIRD_KEEPER_ABE, BirdKeeperAbeSeenText, BirdKeeperAbeBeatenText, 0, .Script
 
 .Script:
+	loadmem wNoRematch, 1
 	endifjustbattled
 	opentext
 	writetext BirdKeeperAbeAfterBattleText

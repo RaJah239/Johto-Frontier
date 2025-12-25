@@ -1,7 +1,7 @@
 TalkToTrainerScript::
 	faceplayer
 	trainerflagaction CHECK_FLAG
-	iftrue AlreadyBeatenTrainerScript
+	iftrue RematchScript
 	loadtemptrainer
 	encountermusic
 	sjump StartBattleWithMapTrainerScript
@@ -14,7 +14,7 @@ SeenByTrainerScript::
 	applymovementlasttalked wMovementBuffer
 	writeobjectxy LAST_TALKED
 	faceobject PLAYER, LAST_TALKED
-	sjump StartBattleWithMapTrainerScript
+	; fallthrough
 
 StartBattleWithMapTrainerScript:
 	opentext
@@ -26,6 +26,32 @@ StartBattleWithMapTrainerScript:
 	reloadmapafterbattle
 	trainerflagaction SET_FLAG
 	loadmem wRunningTrainerBattleScript, -1
+	; fallthrough
 
 AlreadyBeatenTrainerScript:
 	scripttalkafter
+
+RematchScript:
+	scall AlreadyBeatenTrainerScript
+	readmem wNoRematch
+	iftrue .NoRematch
+	opentext
+	writetext AskForARematchText
+	yesorno
+	iffalse .refused
+    loadtemptrainer
+	encountermusic
+	sjump StartBattleWithMapTrainerScript
+
+.refused:
+	closetext
+	end
+
+.NoRematch:
+	loadmem wNoRematch, 0
+	closetext
+	end
+
+AskForARematchText:
+	text "Up for a rematch?"
+	done

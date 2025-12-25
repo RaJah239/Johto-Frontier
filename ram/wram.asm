@@ -3148,7 +3148,11 @@ wFieldWeather::
 ; 04 hail
 	db
 
-	ds 11
+; used to skip rematches of select trainers
+; like gym trainers
+wNoRematch:: db
+
+	ds 10
 
 ; map scene ids
 wPokecenter2FSceneID::                            db
