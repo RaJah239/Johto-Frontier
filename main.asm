@@ -190,6 +190,12 @@ SECTION "Battle Core 2", ROMX
 
 INCLUDE "engine/battle/core2.asm"
 
+
+SECTION "Turn End Effects", ROMX
+
+INCLUDE "engine/battle/turn_end_effects.asm"
+
+
 SECTION "bank10", ROMX
 
 INCLUDE "data/moves/moves.asm"
