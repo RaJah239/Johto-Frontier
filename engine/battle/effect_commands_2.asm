@@ -25,12 +25,12 @@ INCLUDE "engine/battle/move_effects/brick_break.asm"
 INCLUDE "engine/battle/move_effects/ohko.asm"
 
 ; Weather duration when Weather Rock is equipped
-; Rock: 8, No Rock: 5
+; Rock: 16, No Rock: 5
 GetWeatherMoveDuration:
 	farcall GetUserItem
 	ld a, [hl]
 	cp WEATHER_ROCK
-	ld a, 8
+	ld a, 16
 	ret z
 
 	ld a, 5
