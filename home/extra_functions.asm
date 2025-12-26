@@ -11,14 +11,14 @@ CheckIfFastBattlesIsOn::
 	ret
 
 GetCurrentMon::
-    ldh a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ld hl, wBattleMonHP
 	ld a, [wBattleMonSpecies]
 	ret z
 	ld hl, wEnemyMonHP
 	ld a, [wEnemyMonSpecies]
-    ret
+	ret
 
 ; This converts values out of 256 into a value
 ; out of 100. It achieves this by multiplying
