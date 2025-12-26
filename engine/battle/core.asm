@@ -86,7 +86,6 @@ DoBattle:
 	call BreakAttraction
 	call SendOutPlayerMon
 	call EmptyBattleTextbox
-	call HandleStatBoostingHeldItems
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call SpikesDamage
@@ -234,7 +233,7 @@ HandleBetweenTurnEffects:
 	ret c
 
 .NoMoreFaintingConditions:
-	farcall Core2_NewTurnEndEffects
+	farcall FarTurnEndEffects
 	call HandleHealingItems
 	call UpdateBattleMonInParty
 	call LoadTilemapToTempTilemap
@@ -4092,82 +4091,6 @@ UseConfusionHealingItem:
 	ld [bc], a
 	ld [hl], a
 	ret
-
-HandleStatBoostingHeldItems:
-	; prevent use in link battles
-	ld a, [wLinkMode]
-	and a
-	ret nz
-
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .player_1
-	call .DoPlayer
-	jr .DoEnemy
-
-.player_1
-	call .DoEnemy
-	jr .DoPlayer
-
-.DoPlayer:
-	call GetPartymonItem
-	ld a, $0
-	jr .HandleItem
-
-.DoEnemy:
-	call GetOTPartymonItem
-	ld a, $1
-.HandleItem:
-	ldh [hBattleTurn], a
-	ld d, h
-	ld e, l
-	push de
-	push bc
-	ld a, [bc]
-	ld b, a
-	callfar GetItemHeldEffect
-	ld hl, HeldStatUpItems
-.loop
-	ld a, [hli]
-	cp -1
-	jr z, .finish
-	inc hl
-	inc hl
-	cp b
-	jr nz, .loop
-	pop bc
-	ld a, [bc]
-	ld [wNamedObjectIndex], a
-	push bc
-	dec hl
-	dec hl
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, BANK(BattleCommand_AttackUp)
-	rst FarCall
-	pop bc
-	pop de
-	ld a, [wFailedMessage]
-	and a
-	ret nz
-	xor a
-	ld [bc], a
-	ld [de], a
-	call GetItemName
-	call SwitchTurnCore
-	call ItemRecoveryAnim
-	call SwitchTurnCore
-	ld hl, BattleText_UsersStringBuffer1Activated
-	call StdBattleTextbox
-	farjp BattleCommand_StatUpMessage
-
-.finish
-	pop bc
-	pop de
-	ret
-
-INCLUDE "data/battle/held_stat_up.asm"
 
 GetPartymonItem:
 	ld hl, wPartyMon1Item
