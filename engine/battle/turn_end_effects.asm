@@ -5,6 +5,7 @@ Core2_NewTurnEndEffects:
 	call HandleSafeguard
 	call HandleScreens
 	call HandleFlameOrb
+	call HandleSpeedBoost
 	; fallthrough
 
 HandleTrickRoom:
@@ -382,3 +383,30 @@ HandleFlameOrb:
 	call SetPlayerTurn
 .do_it
 	farjp BattleCommand_FlameOrb
+
+HandleSpeedBoost:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .DoEnemyFirst
+	call SetPlayerTurn
+    ld a, [wBattleMonSpecies]
+	call .do_it
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	jr .do_it
+
+.DoEnemyFirst:
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	call .do_it
+	call SetPlayerTurn
+	ld a, [wBattleMonSpecies]
+.do_it
+	ld hl, SpeedBoostPokemon
+	call IsInByteArray
+	ret nc
+	ld b, SPEED
+	farcall BattleCommand_StatUp
+	farjp BattleCommand_StatUpMessage
+
+INCLUDE "data/abilities/speed_boost_mons.asm"
