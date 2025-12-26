@@ -1,4 +1,4 @@
-EntryAbilities:
+EntryAbilities1:
 	call HandleDrought
 	call HandleSandStream
 	call HandleSnowWarning
@@ -121,3 +121,82 @@ DoNaturalCure:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/natural_cure_mons.asm"
+
+ResetVolatileAbilityPlayer:
+	ResetEventFlag EVENT_REFLECT_BARRIER_PLAYER
+	ret
+
+ResetVolatileAbilityFoe:
+	ResetEventFlag EVENT_REFLECT_BARRIER_FOE
+	ret
+
+EntryAbilities2:
+	; fallthrough
+
+HandleReflectBarrier:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_REFLECT_BARRIER_PLAYER
+	ret nz
+	SetEventFlag EVENT_REFLECT_BARRIER_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_REFLECT_BARRIER_FOE
+	ret nz
+	SetEventFlag EVENT_REFLECT_BARRIER_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has reflect barrier
+	call GetCurrentMon
+	ld hl, ReflectBarrierPokemon
+	call IsInByteArray
+	ret nc
+
+	; select correct screen + counter
+	ld hl, wPlayerScreens
+	ld bc, wPlayerReflectCount
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_pointers
+	ld hl, wEnemyScreens
+	ld bc, wEnemyReflectCount
+
+.got_pointers
+	; don't reapply if Reflect already up
+	bit SCREENS_REFLECT, [hl]
+	ret nz
+
+	; set Reflect for 5 turns
+	set SCREENS_REFLECT, [hl]
+	ld a, 5
+	ld [bc], a
+
+	; don't play damage effect when animation goes off
+	xor a
+	ld [wNumHits], a
+	call Call_PlayBattleAnim_OnlyIfVisible
+
+	; play reflect animation
+	ld de, REFLECT
+	farcall Call_PlayBattleAnim
+
+	ld hl, ReflectBarrierText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/reflect_barrier_mons.asm"

@@ -156,7 +156,9 @@ BattleTurn:
 	ld [wCurDamage], a
 	ld [wCurDamage + 1], a
 
+	farcall EntryAbilities2
 	farcall HandleBerserkGene
+
 	call UpdateBattleMonInParty
 	farcall AIChooseMove
 
@@ -3031,6 +3033,8 @@ endr
 	ret
 
 ResetEnemyStatLevels:
+	farcall ResetVolatileAbilityFoe
+
 	ld a, BASE_STAT_LEVEL
 	ld b, NUM_LEVEL_STATS
 	ld hl, wEnemyStatLevels
@@ -3251,6 +3255,8 @@ GetEnemyMonDVs:
 	jmp GetPartyLocation
 
 ResetPlayerStatLevels:
+	farcall ResetVolatileAbilityPlayer
+
 	ld a, BASE_STAT_LEVEL
 	ld b, NUM_LEVEL_STATS
 	ld hl, wPlayerStatLevels
@@ -3423,7 +3429,7 @@ BreakAttraction:
 	ret
 
 SpikesDamage:
-	farcall EntryAbilities
+	farcall EntryAbilities1
 
 	ld a, [wBattleHasJustStarted]
 	and a

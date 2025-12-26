@@ -844,6 +844,15 @@ ReflectEffectText:
 	line "Defense rose!"
 	prompt
 
+ReflectBarrierText:
+	text "<USER>'s"
+	line "Reflect Barrier"
+	cont "activated!"
+
+	para "<USER>'s"
+	line "Defense rose!"
+	prompt
+
 NothingHappenedText:
 	text "But nothing"
 	line "happened."

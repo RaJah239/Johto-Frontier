@@ -351,7 +351,9 @@
 	const EVENT_BATTLE_TOWER_TYPE_MODES_UNLOCKED
 	const EVENT_THREE_BEASTS_CAUGHT
 	const EVENT_BATTLE_POINTS_UNLOCKED
-; Unused: next 258 events
+	const EVENT_REFLECT_BARRIER_PLAYER
+	const EVENT_REFLECT_BARRIER_FOE
+; Unused: next 256 events
 
 	const_next 600
 ; Kurt Apricorn events
