@@ -1055,6 +1055,15 @@ BattleText_DroughtText:
 	line "intensified!"
 	prompt
 
+BattleText_SandStreamText:
+	text "<USER>'s"
+	line "Sand Stream"
+	cont "activated!"
+	
+	para "A sandstorm"
+	line "brewed!"
+	prompt
+
 SunsRaysIntensifiedText:
 	text "The sun's rays"
 	line "intensified!"
