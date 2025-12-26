@@ -10,6 +10,16 @@ CheckIfFastBattlesIsOn::
 	bit FAST_BATTLES, a
 	ret
 
+GetCurrentMon::
+    ldh a, [hBattleTurn]
+	and a
+	ld hl, wBattleMonHP
+	ld a, [wBattleMonSpecies]
+	ret z
+	ld hl, wEnemyMonHP
+	ld a, [wEnemyMonSpecies]
+    ret
+
 ; This converts values out of 256 into a value
 ; out of 100. It achieves this by multiplying
 ; the value by 100 and dividing it by 256.

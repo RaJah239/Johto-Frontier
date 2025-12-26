@@ -1039,6 +1039,22 @@ DownpourText:
 	line "started!"
 	prompt
 
+BattleText_DrizzleText:
+	text "<USER>'s"
+	line "Drizzle activated!"
+	
+	para "A downpour"
+	line "started!"
+	prompt
+
+BattleText_DroughtText:
+	text "<USER>'s"
+	line "Drought activated!"
+	
+	para "The sun's rays"
+	line "intensified!"
+	prompt
+
 SunsRaysIntensifiedText:
 	text "The sun's rays"
 	line "intensified!"

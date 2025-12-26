@@ -6609,16 +6609,6 @@ BattleCommand_FlameOrb:
 	call PlayOpponentBattleAnim
 	jmp BattleCommand_SwitchTurn
 
-; this needs to be in effect_commands.asm
-GetCurrentMon:
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wBattleMonSpecies]
-	jr z, .done
-	ld a, [wEnemyMonSpecies]
-.done
-    ret
-
 FiftyPercentBoost:
     ld a, 3
 	ldh [hMultiplier], a

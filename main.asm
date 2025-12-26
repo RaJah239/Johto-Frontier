@@ -789,3 +789,8 @@ INCLUDE "engine/events/poisonstep_pals.asm"
 SECTION "Time Of Day Images", ROMX
 
 INCLUDE "gfx/timeofday_images.asm"
+
+
+SECTION "Abilities", ROMX
+
+INCLUDE "data/abilities/entry_abilities.asm"

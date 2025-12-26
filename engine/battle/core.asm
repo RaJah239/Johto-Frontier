@@ -3510,6 +3510,8 @@ BreakAttraction:
 	ret
 
 SpikesDamage:
+	farcall EntryAbilities
+
 	ld a, [wBattleHasJustStarted]
 	and a
 	ret nz
