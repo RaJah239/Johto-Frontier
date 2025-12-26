@@ -15,6 +15,12 @@ BecameHealthyText:
 	line "became healthy!"
 	prompt
 
+MoltingText:
+	text "<USER>'s"
+	line "Molting made"
+	cont "itself healthy!"
+	prompt
+
 WildPokemonAppearedText:
 	text "Wild @"
 	text_ram wEnemyMonNickname

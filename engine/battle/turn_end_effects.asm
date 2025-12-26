@@ -7,6 +7,7 @@ FarTurnEndEffects:
 	call HandleScreens
 	call HandleFlameOrb
 	call HandleSpeedBoost
+	call HandleMolting
 	call HandleTrickRoom
 	; fallthrough
 
@@ -541,3 +542,47 @@ HandleSpeedBoost:
 	farjp BattleCommand_StatUpMessage
 
 INCLUDE "data/abilities/speed_boost_mons.asm"
+
+HandleMolting:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .DoEnemyFirst
+	call SetPlayerTurn
+    ld a, [wBattleMonSpecies]
+	call .do_it
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	jr .do_it
+
+.DoEnemyFirst:
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	call .do_it
+	call SetPlayerTurn
+	ld a, [wBattleMonSpecies]
+.do_it
+	ld hl, MoltingPokemon
+	call IsInByteArray
+	ret nc
+
+	call Random
+	cp 33 percent + 1
+	ret nc ; 1/3 chance
+
+	call DoMolting
+	farjp CalcPokemonStats
+
+DoMolting:
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	and a
+	ret z
+	xor a
+	ld [hl], a
+	farcall SwitchTurnCore
+	farcall ItemRecoveryAnim
+	farcall SwitchTurnCore
+	ld hl, MoltingText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/molting_mons.asm"
