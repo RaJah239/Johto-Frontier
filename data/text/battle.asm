@@ -1064,6 +1064,15 @@ BattleText_SandStreamText:
 	line "brewed!"
 	prompt
 
+BattleText_SnowWarningText:
+	text "<USER>'s"
+	line "Snow Warning"
+	cont "activated!"
+	
+	para "It started to"
+	line "Hail!"
+	prompt
+
 SunsRaysIntensifiedText:
 	text "The sun's rays"
 	line "intensified!"

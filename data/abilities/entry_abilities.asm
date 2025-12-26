@@ -1,6 +1,7 @@
 EntryAbilities:
 	call HandleDrought
 	call HandleSandStream
+	call HandleSnowWarning
 	; fallthrough
 
 HandleDrizzle:
@@ -71,3 +72,26 @@ HandleSandStream:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/sand_stream_mons.asm"
+
+HandleSnowWarning:
+	; check if switched in pokemon has snow warning
+	call GetCurrentMon
+	ld hl, SnowWarningPokemon
+	call IsInByteArray
+	ret nc
+
+	; if hail is up, don't activate
+    ld a, [wBattleWeather]
+    cp WEATHER_HAIL
+    ret z
+
+    ; Set up hail for 255 turns
+	ld a, WEATHER_HAIL
+	ld [wBattleWeather], a
+	ld a, 255
+	ld [wWeatherCount], a
+
+	ld hl, BattleText_SnowWarningText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/snow_warning_mons.asm"
