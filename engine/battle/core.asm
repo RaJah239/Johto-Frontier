@@ -236,8 +236,7 @@ HandleBetweenTurnEffects:
 	farcall FarTurnEndEffects
 	call HandleHealingItems
 	call UpdateBattleMonInParty
-	call LoadTilemapToTempTilemap
-	farjp HandleEncore
+	jmp LoadTilemapToTempTilemap
 
 HasAnyoneFainted:
  	call HasPlayerFainted
