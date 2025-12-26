@@ -839,6 +839,15 @@ LightScreenEffectText:
 	line "Spcl.Def rose!"
 	prompt
 
+LightBarrierText:
+	text "<USER>'s"
+	line "Light Barrier"
+	cont "activated!"
+
+	para "<USER>'s"
+	line "Spcl.Def rose!"
+	prompt
+
 ReflectEffectText:
 	text "<USER>'s"
 	line "Defense rose!"

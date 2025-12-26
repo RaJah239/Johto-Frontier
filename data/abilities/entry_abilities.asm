@@ -124,13 +124,16 @@ INCLUDE "data/abilities/natural_cure_mons.asm"
 
 ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_REFLECT_BARRIER_PLAYER
+	ResetEventFlag EVENT_LIGHT_BARRIER_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_REFLECT_BARRIER_FOE
+	ResetEventFlag EVENT_LIGHT_BARRIER_FOE
 	ret
 
 EntryAbilities2:
+	call HandleLightBarrier
 	; fallthrough
 
 HandleReflectBarrier:
@@ -200,3 +203,71 @@ HandleReflectBarrier:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/reflect_barrier_mons.asm"
+
+HandleLightBarrier:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_LIGHT_BARRIER_PLAYER
+	ret nz
+	SetEventFlag EVENT_LIGHT_BARRIER_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_LIGHT_BARRIER_FOE
+	ret nz
+	SetEventFlag EVENT_LIGHT_BARRIER_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has light barrier
+	call GetCurrentMon
+	ld hl, LightBarrierPokemon
+	call IsInByteArray
+	ret nc
+
+	; select correct screen + counter
+	ld hl, wPlayerScreens
+	ld bc, wPlayerLightScreenCount
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_pointers
+	ld hl, wEnemyScreens
+	ld bc, wEnemyLightScreenCount
+
+.got_pointers
+	; don't reapply if light screen already up
+	bit SCREENS_LIGHT_SCREEN, [hl]
+	ret nz
+
+	; set Light Screen for 5 turns
+	set SCREENS_LIGHT_SCREEN, [hl]
+	ld a, 5
+	ld [bc], a
+
+	; don't play damage effect when animation goes off
+	xor a
+	ld [wNumHits], a
+	call Call_PlayBattleAnim_OnlyIfVisible
+
+	; play light screen animation
+	ld de, LIGHT_SCREEN
+	farcall Call_PlayBattleAnim
+
+	ld hl, LightBarrierText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/light_barrier_mons.asm"
