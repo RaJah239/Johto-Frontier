@@ -4694,6 +4694,12 @@ BattleCommand_LowerSubNoAnim:
 	call CallBattleCore
 	jmp WaitBGMap
 
+CalcPokemonStats:
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, CalcEnemyStats
+	; fallthrough
+
 CalcPlayerStats:
 	ld hl, wPlayerAtkLevel
 	ld de, wPlayerStats

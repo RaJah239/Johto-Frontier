@@ -10,6 +10,11 @@ BattleText_TargetRegenerates:
 	line "regenerates."
 	prompt
 
+BecameHealthyText:
+	text "<USER>"
+	line "became healthy!"
+	prompt
+
 WildPokemonAppearedText:
 	text "Wild @"
 	text_ram wEnemyMonNickname

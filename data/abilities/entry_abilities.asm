@@ -2,6 +2,7 @@ EntryAbilities:
 	call HandleDrought
 	call HandleSandStream
 	call HandleSnowWarning
+	call HandleNaturalCure
 	; fallthrough
 
 HandleDrizzle:
@@ -95,3 +96,28 @@ HandleSnowWarning:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/snow_warning_mons.asm"
+
+HandleNaturalCure:
+	; check if switched in pokemon has natural cure
+	call GetCurrentMon
+	ld hl, NaturalCurePokemon
+	call IsInByteArray
+	ret nc
+
+	call DoNaturalCure
+	farjp CalcPokemonStats
+
+DoNaturalCure:
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	and a
+	ret z
+	xor a
+	ld [hl], a
+	farcall SwitchTurnCore
+	farcall ItemRecoveryAnim
+	farcall SwitchTurnCore
+	ld hl, BecameHealthyText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/natural_cure_mons.asm"
