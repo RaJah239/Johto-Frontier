@@ -355,7 +355,9 @@
 	const EVENT_REFLECT_BARRIER_FOE
 	const EVENT_LIGHT_BARRIER_PLAYER
 	const EVENT_LIGHT_BARRIER_FOE
-; Unused: next 254 events
+	const EVENT_INTIMIDATE_PLAYER
+	const EVENT_INTIMIDATE_FOE
+; Unused: next 252 events
 
 	const_next 600
 ; Kurt Apricorn events

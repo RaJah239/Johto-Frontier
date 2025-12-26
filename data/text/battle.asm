@@ -862,6 +862,14 @@ ReflectBarrierText:
 	line "Defense rose!"
 	prompt
 
+IntimidateText:
+	text "<USER>'s"
+	line "Intimidate cuts"
+
+	para "<TARGET>'s"
+	line "attack!"
+	prompt
+
 NothingHappenedText:
 	text "But nothing"
 	line "happened."

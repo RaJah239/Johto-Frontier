@@ -125,15 +125,18 @@ INCLUDE "data/abilities/natural_cure_mons.asm"
 ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_REFLECT_BARRIER_PLAYER
 	ResetEventFlag EVENT_LIGHT_BARRIER_PLAYER
+	ResetEventFlag EVENT_INTIMIDATE_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_REFLECT_BARRIER_FOE
 	ResetEventFlag EVENT_LIGHT_BARRIER_FOE
+	ResetEventFlag EVENT_INTIMIDATE_FOE
 	ret
 
 EntryAbilities2:
 	call HandleLightBarrier
+	call HandleIntimidate
 	; fallthrough
 
 HandleReflectBarrier:
@@ -271,3 +274,57 @@ HandleLightBarrier:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/light_barrier_mons.asm"
+
+HandleIntimidate:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_INTIMIDATE_PLAYER
+	ret nz
+	SetEventFlag EVENT_INTIMIDATE_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_INTIMIDATE_FOE
+	ret nz
+	SetEventFlag EVENT_INTIMIDATE_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has intimidate
+	call GetCurrentMon
+	ld hl, IntimidatePokemon
+	call IsInByteArray
+	ret nc
+
+	; don't play damage effect when animation goes off
+	xor a
+	ld [wNumHits], a
+	call Call_PlayBattleAnim_OnlyIfVisible
+
+	; play leer animation
+	ld de, LEER
+	farcall Call_PlayBattleAnim
+
+	; play stat down animation
+	ld de, ANIM_ENEMY_STAT_DOWN
+	farcall Call_PlayBattleAnim
+
+	farcall BattleCommand_AttackDown
+	ld hl, IntimidateText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/intimidate_mons.asm"
