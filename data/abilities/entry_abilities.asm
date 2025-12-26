@@ -126,17 +126,20 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_REFLECT_BARRIER_PLAYER
 	ResetEventFlag EVENT_LIGHT_BARRIER_PLAYER
 	ResetEventFlag EVENT_INTIMIDATE_PLAYER
+	ResetEventFlag EVENT_ROCK_SNARE_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_REFLECT_BARRIER_FOE
 	ResetEventFlag EVENT_LIGHT_BARRIER_FOE
 	ResetEventFlag EVENT_INTIMIDATE_FOE
+	ResetEventFlag EVENT_ROCK_SNARE_FOE
 	ret
 
 EntryAbilities2:
 	call HandleLightBarrier
 	call HandleIntimidate
+	call HandleRockSnare
 	; fallthrough
 
 HandleReflectBarrier:
@@ -328,3 +331,63 @@ HandleIntimidate:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/intimidate_mons.asm"
+
+HandleRockSnare:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_ROCK_SNARE_PLAYER
+	ret nz
+	SetEventFlag EVENT_ROCK_SNARE_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_ROCK_SNARE_FOE
+	ret nz
+	SetEventFlag EVENT_ROCK_SNARE_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has rock snare
+	call GetCurrentMon
+	ld hl, RockSnarePokemon
+	call IsInByteArray
+	ret nc
+
+	ld hl, wEnemyScreens
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_screens
+	ld hl, wPlayerScreens
+.got_screens
+    bit SCREENS_STEALTH_ROCK, [hl]
+    ret nz
+	set SCREENS_STEALTH_ROCK, [hl]
+    ld de, STEALTH_ROCK
+
+	; don't play damage effect when animation goes off
+	xor a
+	ld [wNumHits], a
+	call Call_PlayBattleAnim_OnlyIfVisible
+
+	; play stealth rock animation
+	ld de, STEALTH_ROCK
+	farcall Call_PlayBattleAnim
+
+	ld hl, RockSnareText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/rock_snare_mons.asm"

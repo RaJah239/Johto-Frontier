@@ -870,6 +870,15 @@ IntimidateText:
 	line "attack!"
 	prompt
 
+RockSnareText:
+	text "<USER>'s"
+	line "Rock Snare"
+	cont "activated!"
+
+	para "Pointed stones"
+	line "float all around!"
+	prompt
+
 NothingHappenedText:
 	text "But nothing"
 	line "happened."
