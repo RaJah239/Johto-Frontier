@@ -761,6 +761,10 @@ GetMovePriority:
 ;	ld a, 0
 ;	ret z
 
+	; check move
+	cp IRON_HEAD
+	jr z, .mon_check
+
 	; check if a Weather move was used
 	cp SUNNY_DAY
 	jr z, .check_rock
@@ -786,14 +790,28 @@ GetMovePriority:
 	ld a, BASE_PRIORITY
 	ret
 
+.mon_check
+	; check if player is using Blastoise
+	ld a, [wBattleMonSpecies]
+	cp BLASTOISE
+	jr z, .priority_2
+
+	; check if foe is using Blastoise
+	ld a, [wEnemyMonSpecies]
+	cp BLASTOISE
+	jr z, .priority_2
+
+	; Neither is Blastoise
+	jr .regular_priority
+
 .check_rock
 	; check if Weather Rock is equipped
 	ld a, c
 	cp WEATHER_ROCK
 	jr nz, .regular_priority
 
-	; if rock is equipped
-	; give Weather moves priority 2
+	; give priority 2
+.priority_2
 	ld a, 2
 	ret
 
