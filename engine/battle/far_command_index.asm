@@ -38,4 +38,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_BRICK_BREAK,     BattleCommand_BreakScreens
 	dbw EFFECT_OHKO,            BattleCommand_OHKO
 	dbw EFFECT_SPLASH,          BattleCommand_Splash
+	dbw EFFECT_LEECH_SEED,      BattleCommand_LeechSeed
 	db -1 ; end

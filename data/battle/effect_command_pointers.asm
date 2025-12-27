@@ -50,7 +50,6 @@ BattleCommandPointers:
 	dw BattleCommand_RechargeNextTurn
 	dw BattleCommand_Mimic
 	dw BattleCommand_Metronome
-	dw BattleCommand_LeechSeed
 	dw BattleCommand_ClearText
 	dw BattleCommand_Charge
 	dw BattleCommand_CheckCharge

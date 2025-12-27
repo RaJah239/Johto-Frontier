@@ -5731,8 +5731,6 @@ DoubleDamage:
 
 INCLUDE "engine/battle/move_effects/mimic.asm"
 
-INCLUDE "engine/battle/move_effects/leech_seed.asm"
-
 BattleCommand_ResetStats:
 	ld a, BASE_STAT_LEVEL
 	ld hl, wPlayerStatLevels

@@ -1006,7 +1006,7 @@ LeechSeed:
 	usedmovetext
 	doturn
 	checkhit
-	leechseed
+	farcommand
 	endmove
 
 Splash:
