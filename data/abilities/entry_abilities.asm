@@ -131,6 +131,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_VENOM_FIELD_PLAYER
 	ResetEventFlag EVENT_SILK_SNARE_PLAYER
 	ResetEventFlag EVENT_CHRONO_SHIFT_PLAYER
+	ResetEventFlag EVENT_FORTIFY_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -142,6 +143,7 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_VENOM_FIELD_FOE
 	ResetEventFlag EVENT_SILK_SNARE_FOE
 	ResetEventFlag EVENT_CHRONO_SHIFT_FOE
+	ResetEventFlag EVENT_FORTIFY_FOE
 	ret
 
 EntryAbilities2:
@@ -152,6 +154,7 @@ EntryAbilities2:
 	call HandleVenomField
 	call HandleSilkSnare
 	call HandleChronoShift
+	call HandleFortify
 	; fallthrough
 
 HandleReflectBarrier:
@@ -604,3 +607,48 @@ HandleChronoShift:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/chrono_shift_mons.asm"
+
+HandleFortify:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_FORTIFY_PLAYER
+	ret nz
+	SetEventFlag EVENT_FORTIFY_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_FORTIFY_FOE
+	ret nz
+	SetEventFlag EVENT_FORTIFY_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has fortify
+	call GetCurrentMon
+	ld hl, FortifyPokemon
+	call IsInByteArray
+	ret nc
+
+	; play barrier animation
+	ld de, BARRIER
+	farcall Call_PlayBattleAnim
+
+	ld hl, FortifyText
+	call StdBattleTextbox
+	farjp BattleCommand_Barrier
+
+INCLUDE "data/abilities/fortify_mons.asm"

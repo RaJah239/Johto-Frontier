@@ -920,6 +920,12 @@ ChronoShiftText:
 	line "were twisted!"
 	prompt
 
+FortifyText:
+	text "<USER>'s"
+	line "Fortify"
+	cont "activated!"
+	prompt
+
 VigorousSplashText:
 	text "<USER>"
 	line "moves vigorously"

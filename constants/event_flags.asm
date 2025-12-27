@@ -369,7 +369,9 @@
 	const EVENT_SILK_SNARE_FOE
 	const EVENT_CHRONO_SHIFT_PLAYER
 	const EVENT_CHRONO_SHIFT_FOE
-; Unused: next 242 events
+	const EVENT_FORTIFY_PLAYER
+	const EVENT_FORTIFY_FOE
+; Unused: next 240 events
 
 	const_next 600
 ; Kurt Apricorn events
