@@ -3486,3 +3486,35 @@ ShadowTag:
 	ret
 
 INCLUDE "data/abilities/shadow_tag_mons.asm"
+
+ArenaTrap:
+	ld a, [wEnemyMonSpecies]
+	ld hl, ArenaTrapPokemon
+	call IsInByteArray
+	ret nc
+
+	; check type
+	ld de, wEnemyMonType1
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .ok
+	ld de, wBattleMonType1
+.ok
+
+	; check if flying type
+	ld a, [de]
+	cp FLYING
+	ret z
+	inc de
+	ld a, [de]
+	cp FLYING
+	ret z
+
+	; trap player if not flying type
+	ld hl, wEnemySubStatus5
+	bit SUBSTATUS_CANT_RUN, [hl]
+	ret nz
+	set SUBSTATUS_CANT_RUN, [hl]
+	ret
+
+INCLUDE "data/abilities/arena_trap_mons.asm"

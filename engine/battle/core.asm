@@ -164,6 +164,11 @@ BattleTurn:
 ; ===================
 	farcall ShadowTag
 
+; ===================
+; === Arena Trap ====
+; ===================
+	farcall ArenaTrap
+
 	call UpdateBattleMonInParty
 	farcall AIChooseMove
 
