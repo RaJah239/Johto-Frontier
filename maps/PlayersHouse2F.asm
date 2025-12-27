@@ -90,7 +90,7 @@ if DEF(_DEBUG)
 	loadmem wPartyMon3DVs+1, $ff
 
 	; 1st mon moves
-	loadmem wPartyMon1Moves+0, PSYSHOCK
+	loadmem wPartyMon1Moves+0, SPLASH
 	loadmem wPartyMon1Moves+1, AEROBLAST
 	loadmem wPartyMon1Moves+2, SACRED_FIRE
 	loadmem wPartyMon1Moves+3, DIVE_BOMB

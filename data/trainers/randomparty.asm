@@ -48,7 +48,7 @@ RandomPartyLists::
 			db "Magikarp@"		; Nickname
 			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
 			db NO_ITEM	; ITEM/ NO_ITEM is a thing
-			db SHADOW_PUNCH, NO_MOVE, NO_MOVE, NO_MOVE ; Moveset - NO_MOVE is a thing
+			db SPLASH, NO_MOVE, NO_MOVE, NO_MOVE ; Moveset - NO_MOVE is a thing
 			db $fe ; End of Pokemon
 ;	db LEVEL_FROM_PARTY, MEWTWO
 ;			db "TWO@"		; Nickname
