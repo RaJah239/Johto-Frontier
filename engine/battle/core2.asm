@@ -3471,3 +3471,18 @@ HLMultiply:
 	add hl, bc
 	pop bc
 	ret
+
+ShadowTag:
+	ld a, [wEnemyMonSpecies]
+	ld hl, ShadowTagPokemon
+	call IsInByteArray
+	ret nc
+
+	; trap player
+	ld hl, wEnemySubStatus5
+	bit SUBSTATUS_CANT_RUN, [hl]
+	ret nz
+	set SUBSTATUS_CANT_RUN, [hl]
+	ret
+
+INCLUDE "data/abilities/shadow_tag_mons.asm"

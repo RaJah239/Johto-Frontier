@@ -159,6 +159,11 @@ BattleTurn:
 	farcall EntryAbilities2
 	farcall HandleBerserkGene
 
+; ===================
+; === Shadow Tag ====
+; ===================
+	farcall ShadowTag
+
 	call UpdateBattleMonInParty
 	farcall AIChooseMove
 
