@@ -159,20 +159,10 @@ BattleTurn:
 	farcall EntryAbilities2
 	farcall HandleBerserkGene
 
-; ===================
-; === Shadow Tag ====
-; ===================
-	farcall ShadowTag
-
-; ===================
-; === Arena Trap ====
-; ===================
-	farcall ArenaTrap
-
-; ====================
-; === Magnet Pull ====
-; ====================
-	farcall MagnetPull
+; ======================
+; === Trap Abilities ===
+; ======================
+	farcall TrapAbilities
 
 	call UpdateBattleMonInParty
 	farcall AIChooseMove

@@ -791,6 +791,11 @@ SECTION "Time Of Day Images", ROMX
 INCLUDE "gfx/timeofday_images.asm"
 
 
-SECTION "Abilities", ROMX
+SECTION "Entry Abilities", ROMX
 
 INCLUDE "data/abilities/entry_abilities.asm"
+
+
+SECTION "Trapping Abilities", ROMX
+
+INCLUDE "data/abilities/trapping_abilities.asm"
