@@ -880,6 +880,16 @@ RockSnareText:
 	line "float all around!"
 	prompt
 
+CaltropperText:
+	text "<USER>'s"
+	line "Caltropper"
+	cont "activated!"
+
+	para "Spikes scattered"
+	line "all around"
+	cont "<TARGET>!"
+	prompt
+
 VigorousSplashText:
 	text "<USER>"
 	line "moves vigorously"

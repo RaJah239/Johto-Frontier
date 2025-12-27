@@ -127,6 +127,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_LIGHT_BARRIER_PLAYER
 	ResetEventFlag EVENT_INTIMIDATE_PLAYER
 	ResetEventFlag EVENT_ROCK_SNARE_PLAYER
+	ResetEventFlag EVENT_CALTROPPER_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -134,12 +135,14 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_LIGHT_BARRIER_FOE
 	ResetEventFlag EVENT_INTIMIDATE_FOE
 	ResetEventFlag EVENT_ROCK_SNARE_FOE
+	ResetEventFlag EVENT_CALTROPPER_FOE
 	ret
 
 EntryAbilities2:
 	call HandleLightBarrier
 	call HandleIntimidate
 	call HandleRockSnare
+	call HandleCaltropper
 	; fallthrough
 
 HandleReflectBarrier:
@@ -390,3 +393,62 @@ HandleRockSnare:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/rock_snare_mons.asm"
+
+HandleCaltropper:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_CALTROPPER_PLAYER
+	ret nz
+	SetEventFlag EVENT_CALTROPPER_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_CALTROPPER_FOE
+	ret nz
+	SetEventFlag EVENT_CALTROPPER_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has caltropper
+	call GetCurrentMon
+	ld hl, CaltropperPokemon
+	call IsInByteArray
+	ret nc
+
+	ld hl, wEnemyScreens
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_screens
+	ld hl, wPlayerScreens
+.got_screens
+    bit SCREENS_SPIKES, [hl]
+    ret nz
+	set SCREENS_SPIKES, [hl]
+
+	; don't play damage effect when animation goes off
+	xor a
+	ld [wNumHits], a
+	call Call_PlayBattleAnim_OnlyIfVisible
+
+	; play stealth rock animation
+	ld de, SPIKES
+	farcall Call_PlayBattleAnim
+
+	ld hl, CaltropperText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/caltropper_mons.asm"

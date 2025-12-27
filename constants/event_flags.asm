@@ -359,7 +359,9 @@
 	const EVENT_INTIMIDATE_FOE
 	const EVENT_ROCK_SNARE_PLAYER
 	const EVENT_ROCK_SNARE_FOE
-; Unused: next 252 events
+	const EVENT_CALTROPPER_PLAYER
+	const EVENT_CALTROPPER_FOE
+; Unused: next 248 events
 
 	const_next 600
 ; Kurt Apricorn events
