@@ -376,7 +376,6 @@ HandleRockSnare:
     bit SCREENS_STEALTH_ROCK, [hl]
     ret nz
 	set SCREENS_STEALTH_ROCK, [hl]
-    ld de, STEALTH_ROCK
 
 	; don't play damage effect when animation goes off
 	xor a
