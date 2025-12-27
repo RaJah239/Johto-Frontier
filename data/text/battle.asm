@@ -877,7 +877,8 @@ RockSnareText:
 	cont "activated!"
 
 	para "Pointed stones"
-	line "float all around!"
+	line "float all around"
+	cont "<TARGET>!"
 	prompt
 
 CaltropperText:
