@@ -29,8 +29,9 @@ WildPokemonAppearedText:
 	prompt
 
 FlameOrbText:
-    text "Flame Orb"
-    line "ignites!"
+ 	text "<USER>'s"
+    line "Flame Orb ignited"
+    cont "and burned itself!"
     prompt
 
 HookedPokemonAttackedText:
