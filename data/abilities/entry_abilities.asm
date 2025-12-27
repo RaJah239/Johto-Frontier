@@ -128,6 +128,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_INTIMIDATE_PLAYER
 	ResetEventFlag EVENT_ROCK_SNARE_PLAYER
 	ResetEventFlag EVENT_CALTROPPER_PLAYER
+	ResetEventFlag EVENT_VENOM_FIELD_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -136,6 +137,7 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_INTIMIDATE_FOE
 	ResetEventFlag EVENT_ROCK_SNARE_FOE
 	ResetEventFlag EVENT_CALTROPPER_FOE
+	ResetEventFlag EVENT_VENOM_FIELD_FOE
 	ret
 
 EntryAbilities2:
@@ -143,6 +145,7 @@ EntryAbilities2:
 	call HandleIntimidate
 	call HandleRockSnare
 	call HandleCaltropper
+	call HandleVenomField
 	; fallthrough
 
 HandleReflectBarrier:
@@ -429,7 +432,7 @@ HandleCaltropper:
     ret nz
 	set SCREENS_SPIKES, [hl]
 
-	; play stealth rock animation
+	; play spikes animation
 	ld de, SPIKES
 	farcall Call_PlayBattleAnim
 
@@ -437,3 +440,57 @@ HandleCaltropper:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/caltropper_mons.asm"
+
+HandleVenomField:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_VENOM_FIELD_PLAYER
+	ret nz
+	SetEventFlag EVENT_VENOM_FIELD_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_VENOM_FIELD_FOE
+	ret nz
+	SetEventFlag EVENT_VENOM_FIELD_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has venom field
+	call GetCurrentMon
+	ld hl, VenomFieldPokemon
+	call IsInByteArray
+	ret nc
+
+	ld hl, wEnemyScreens
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_screens
+	ld hl, wPlayerScreens
+.got_screens
+    bit SCREENS_TOXIC_SPIKES, [hl]
+    ret nz
+	set SCREENS_TOXIC_SPIKES, [hl]
+
+	; play toxic spikes animation
+	ld de, TOXIC_SPIKES
+	farcall Call_PlayBattleAnim
+
+	ld hl, VenomFieldText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/venom_field_mons.asm"

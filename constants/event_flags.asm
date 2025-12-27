@@ -361,7 +361,9 @@
 	const EVENT_ROCK_SNARE_FOE
 	const EVENT_CALTROPPER_PLAYER
 	const EVENT_CALTROPPER_FOE
-; Unused: next 248 events
+	const EVENT_VENOM_FIELD_PLAYER
+	const EVENT_VENOM_FIELD_FOE
+; Unused: next 246 events
 
 	const_next 600
 ; Kurt Apricorn events

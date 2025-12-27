@@ -891,6 +891,16 @@ CaltropperText:
 	cont "<TARGET>!"
 	prompt
 
+VenomFieldText:
+	text "<USER>'s"
+	line "Venom Field"
+	cont "activated!"
+
+	para "Toxic Spikes scat-"
+	line "tered all around"
+	cont "<TARGET>!"
+	prompt
+
 VigorousSplashText:
 	text "<USER>"
 	line "moves vigorously"
@@ -1024,7 +1034,8 @@ SpikesText:
 
 StealthRockText:
 	text "Pointed stones"
-	line "float all around!"
+	line "float all around"
+	cont "<TARGET>!"
 	prompt
 
 BattleText_UserHurtByStealthRock:
@@ -1034,6 +1045,7 @@ BattleText_UserHurtByStealthRock:
 ToxicSpikesText:
 	text "Toxic Spikes scat-"
 	line "tered all around!"
+	cont "<TARGET>!"
 	prompt
 
 StickyWebText:
