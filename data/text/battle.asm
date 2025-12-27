@@ -879,6 +879,14 @@ RockSnareText:
 	line "float all around!"
 	prompt
 
+VigorousSplashText:
+	text "<USER>"
+	line "moves vigorously"
+
+	para "but <TARGET>"
+	line "is unimpressed!"
+	prompt
+
 NothingHappenedText:
 	text "But nothing"
 	line "happened."

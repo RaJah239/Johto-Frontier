@@ -1,4 +1,12 @@
 BattleCommand_Splash:
-	call AnimateCurrentMove
-	farcall StubbedTrainerRankings_Splash
-	jmp PrintNothingHappened
+	farcall AnimateCurrentMove
+	call GetCurrentMon
+	cp MAGIKARP
+	jr z, .vigor
+	cp FEEBAS
+	jr z, .vigor
+	farjp PrintNothingHappened
+
+.vigor
+	ld hl, VigorousSplashText
+	jmp StdBattleTextbox

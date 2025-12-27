@@ -37,4 +37,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_TAUNT,           BattleCommand_Taunt
 	dbw EFFECT_BRICK_BREAK,     BattleCommand_BreakScreens
 	dbw EFFECT_OHKO,            BattleCommand_OHKO
+	dbw EFFECT_SPLASH,          BattleCommand_Splash
 	db -1 ; end

@@ -51,7 +51,6 @@ BattleCommandPointers:
 	dw BattleCommand_Mimic
 	dw BattleCommand_Metronome
 	dw BattleCommand_LeechSeed
-	dw BattleCommand_Splash
 	dw BattleCommand_ClearText
 	dw BattleCommand_Charge
 	dw BattleCommand_CheckCharge

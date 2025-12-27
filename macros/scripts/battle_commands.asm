@@ -51,7 +51,6 @@ ENDM
 	command mimic                   ; 33
 	command metronome               ; 34
 	command leechseed               ; 35
-	command splash                  ; 36
 	command cleartext               ; 38
 	command charge                  ; 39
 	command checkcharge             ; 3a

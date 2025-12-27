@@ -1012,7 +1012,7 @@ LeechSeed:
 Splash:
 	usedmovetext
 	doturn
-	splash
+	farcommand
 	endmove
 
 Disable:
