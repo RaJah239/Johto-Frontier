@@ -129,6 +129,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_ROCK_SNARE_PLAYER
 	ResetEventFlag EVENT_CALTROPPER_PLAYER
 	ResetEventFlag EVENT_VENOM_FIELD_PLAYER
+	ResetEventFlag EVENT_SILK_SNARE_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -138,6 +139,7 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_ROCK_SNARE_FOE
 	ResetEventFlag EVENT_CALTROPPER_FOE
 	ResetEventFlag EVENT_VENOM_FIELD_FOE
+	ResetEventFlag EVENT_SILK_SNARE_FOE
 	ret
 
 EntryAbilities2:
@@ -146,6 +148,7 @@ EntryAbilities2:
 	call HandleRockSnare
 	call HandleCaltropper
 	call HandleVenomField
+	call HandleSilkSnare
 	; fallthrough
 
 HandleReflectBarrier:
@@ -494,3 +497,57 @@ HandleVenomField:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/venom_field_mons.asm"
+
+HandleSilkSnare:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_SILK_SNARE_PLAYER
+	ret nz
+	SetEventFlag EVENT_SILK_SNARE_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_SILK_SNARE_FOE
+	ret nz
+	SetEventFlag EVENT_SILK_SNARE_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has silk snare
+	call GetCurrentMon
+	ld hl, SilkSnarePokemon
+	call IsInByteArray
+	ret nc
+
+	ld hl, wEnemyScreens
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_screens
+	ld hl, wPlayerScreens
+.got_screens
+    bit SCREENS_STICKY_WEB, [hl]
+    ret nz
+	set SCREENS_STICKY_WEB, [hl]
+
+	; play sticky web animation
+	ld de, STICKY_WEB
+	farcall Call_PlayBattleAnim
+
+	ld hl, SilkSnareText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/silk_snare_mons.asm"

@@ -901,6 +901,16 @@ VenomFieldText:
 	cont "<TARGET>!"
 	prompt
 
+SilkSnareText:
+	text "<USER>'s"
+	line "Silk Snare"
+	cont "activated!"
+
+	para "A Sticky Web has"
+	line "been laid beneath"
+	cont "<TARGET>!"
+	prompt
+
 VigorousSplashText:
 	text "<USER>"
 	line "moves vigorously"
@@ -1050,7 +1060,8 @@ ToxicSpikesText:
 
 StickyWebText:
 	text "A Sticky Web has"
-	line "been laid beneath!"
+	line "been laid beneath"
+	cont "<TARGET>!"
 	prompt
 
 AbsorbedToxicSpikesText:
