@@ -1802,7 +1802,7 @@ BattleCommand_StatDownAnim:
 	and a
 	ld a, BATTLEANIM_ENEMY_STAT_DOWN
 	jr z, BattleCommand_StatUpDownAnim
-	ld a, BATTLEANIM_WOBBLE
+	ld a, BATTLEANIM_ENEMY_STAT_DOWN
 
 	; fallthrough
 
