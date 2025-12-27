@@ -6587,8 +6587,13 @@ BattleCommand_FlameOrb:
 	farcall ShouldIgniteFlameOrb
 	ret nc
 	call ClearSprites
+
+	call CheckIfFastBattlesIsOn
+	jr nz, .skip
+
 	ld hl, FlameOrbText
 	call StdBattleTextbox
+.skip
 	ld a, BATTLE_VARS_STATUS
 	call GetBattleVarAddr
 	set BRN, [hl]
