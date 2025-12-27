@@ -169,6 +169,11 @@ BattleTurn:
 ; ===================
 	farcall ArenaTrap
 
+; ====================
+; === Magnet Pull ====
+; ====================
+	farcall MagnetPull
+
 	call UpdateBattleMonInParty
 	farcall AIChooseMove
 
