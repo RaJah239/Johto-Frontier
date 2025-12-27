@@ -428,13 +428,12 @@ AI_Smart_ParalyzeTarget:
 
 	; check specie
 	ld a, [wEnemyMonSpecies]
-	cp PIKACHU
-	jr z, .go
-	cp MAGNEMITE
-	jr z, .go
-	cp MAGNETON
-	jr z, .go
-	cp MAGNEZONE
+	push hl
+	ld hl, ThunderboltParalyzePokemon
+	call IsInByteArray
+	pop hl
+
+	jr nc, .go
 	ret nz
 
 .go

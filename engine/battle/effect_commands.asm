@@ -3990,14 +3990,9 @@ BattleCommand_ParalyzeTarget:
 	
 	; check user species
 	call GetCurrentMon
-	cp PIKACHU
-	jr z, .paralyze
-	cp MAGNEMITE
-	jr z, .paralyze
-	cp MAGNETON
-	jr z, .paralyze
-	cp MAGNEZONE
-	jr z, .paralyze
+	ld hl, ThunderboltParalyzePokemon
+	call IsInByteArray
+	jr c, .paralyze
 	jr .done
 
 	; 100% paralyze foe
@@ -4024,6 +4019,8 @@ BattleCommand_ParalyzeTarget:
 	call PrintParalyze
 	ld hl, UseHeldStatusHealingItem
 	jmp CallBattleCore
+
+INCLUDE "data/abilities/thunderbolt_para_mons.asm"
 
 BattleCommand_AttackUp:
 	ld b, ATTACK
