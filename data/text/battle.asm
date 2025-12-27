@@ -911,6 +911,15 @@ SilkSnareText:
 	cont "<TARGET>!"
 	prompt
 
+ChronoShiftText:
+	text "<USER>'s"
+	line "Chrono Shift"
+	cont "activated!"
+
+	para "The dimensions"
+	line "were twisted!"
+	prompt
+
 VigorousSplashText:
 	text "<USER>"
 	line "moves vigorously"

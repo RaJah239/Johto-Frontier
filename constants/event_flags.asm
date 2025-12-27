@@ -367,7 +367,9 @@
 	const EVENT_VENOM_FIELD_FOE
 	const EVENT_SILK_SNARE_PLAYER
 	const EVENT_SILK_SNARE_FOE
-; Unused: next 244 events
+	const EVENT_CHRONO_SHIFT_PLAYER
+	const EVENT_CHRONO_SHIFT_FOE
+; Unused: next 242 events
 
 	const_next 600
 ; Kurt Apricorn events

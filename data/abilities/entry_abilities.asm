@@ -130,6 +130,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_CALTROPPER_PLAYER
 	ResetEventFlag EVENT_VENOM_FIELD_PLAYER
 	ResetEventFlag EVENT_SILK_SNARE_PLAYER
+	ResetEventFlag EVENT_CHRONO_SHIFT_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -140,6 +141,7 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_CALTROPPER_FOE
 	ResetEventFlag EVENT_VENOM_FIELD_FOE
 	ResetEventFlag EVENT_SILK_SNARE_FOE
+	ResetEventFlag EVENT_CHRONO_SHIFT_FOE
 	ret
 
 EntryAbilities2:
@@ -149,6 +151,7 @@ EntryAbilities2:
 	call HandleCaltropper
 	call HandleVenomField
 	call HandleSilkSnare
+	call HandleChronoShift
 	; fallthrough
 
 HandleReflectBarrier:
@@ -551,3 +554,53 @@ HandleSilkSnare:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/silk_snare_mons.asm"
+
+HandleChronoShift:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_CHRONO_SHIFT_PLAYER
+	ret nz
+	SetEventFlag EVENT_CHRONO_SHIFT_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_CHRONO_SHIFT_FOE
+	ret nz
+	SetEventFlag EVENT_CHRONO_SHIFT_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has chrono shift
+	call GetCurrentMon
+	ld hl, ChronoShiftPokemon
+	call IsInByteArray
+	ret nc
+
+	ld a, [wTrickRoomCount]
+	and a
+	ret nz
+	ld a, 5
+	ld [wTrickRoomCount], a
+
+	; play sticky web animation
+	ld de, TRICK_ROOM
+	farcall Call_PlayBattleAnim
+
+	ld hl, ChronoShiftText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/chrono_shift_mons.asm"
