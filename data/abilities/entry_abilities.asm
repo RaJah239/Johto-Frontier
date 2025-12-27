@@ -316,11 +316,6 @@ HandleIntimidate:
 	call IsInByteArray
 	ret nc
 
-	; don't play damage effect when animation goes off
-	xor a
-	ld [wNumHits], a
-	call Call_PlayBattleAnim_OnlyIfVisible
-
 	; play leer animation
 	ld de, LEER
 	farcall Call_PlayBattleAnim
@@ -380,11 +375,6 @@ HandleRockSnare:
     ret nz
 	set SCREENS_STEALTH_ROCK, [hl]
 
-	; don't play damage effect when animation goes off
-	xor a
-	ld [wNumHits], a
-	call Call_PlayBattleAnim_OnlyIfVisible
-
 	; play stealth rock animation
 	ld de, STEALTH_ROCK
 	farcall Call_PlayBattleAnim
@@ -438,11 +428,6 @@ HandleCaltropper:
     bit SCREENS_SPIKES, [hl]
     ret nz
 	set SCREENS_SPIKES, [hl]
-
-	; don't play damage effect when animation goes off
-	xor a
-	ld [wNumHits], a
-	call Call_PlayBattleAnim_OnlyIfVisible
 
 	; play stealth rock animation
 	ld de, SPIKES
