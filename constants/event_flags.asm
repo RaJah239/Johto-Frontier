@@ -371,7 +371,9 @@
 	const EVENT_CHRONO_SHIFT_FOE
 	const EVENT_FORTIFY_PLAYER
 	const EVENT_FORTIFY_FOE
-; Unused: next 240 events
+	const EVENT_IMPOSTER_PLAYER
+	const EVENT_IMPOSTER_FOE
+; Unused: next 238 events
 
 	const_next 600
 ; Kurt Apricorn events

@@ -926,6 +926,12 @@ FortifyText:
 	cont "activated!"
 	prompt
 
+ImposterText:
+	text "<USER>'s"
+	line "Imposter"
+	cont "activated!"
+	prompt
+
 VigorousSplashText:
 	text "<USER>"
 	line "moves vigorously"

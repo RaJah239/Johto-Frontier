@@ -132,6 +132,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_SILK_SNARE_PLAYER
 	ResetEventFlag EVENT_CHRONO_SHIFT_PLAYER
 	ResetEventFlag EVENT_FORTIFY_PLAYER
+	ResetEventFlag EVENT_IMPOSTER_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -144,6 +145,7 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_SILK_SNARE_FOE
 	ResetEventFlag EVENT_CHRONO_SHIFT_FOE
 	ResetEventFlag EVENT_FORTIFY_FOE
+	ResetEventFlag EVENT_IMPOSTER_FOE
 	ret
 
 EntryAbilities2:
@@ -155,6 +157,7 @@ EntryAbilities2:
 	call HandleSilkSnare
 	call HandleChronoShift
 	call HandleFortify
+	call HandleImposter
 	; fallthrough
 
 HandleReflectBarrier:
@@ -652,3 +655,48 @@ HandleFortify:
 	farjp BattleCommand_Barrier
 
 INCLUDE "data/abilities/fortify_mons.asm"
+
+HandleImposter:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_IMPOSTER_PLAYER
+	ret nz
+	SetEventFlag EVENT_IMPOSTER_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_IMPOSTER_FOE
+	ret nz
+	SetEventFlag EVENT_IMPOSTER_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has imposter
+	call GetCurrentMon
+	ld hl, ImposterPokemon
+	call IsInByteArray
+	ret nc
+
+	; play transform animation
+	ld de, TRANSFORM
+	farcall Call_PlayBattleAnim
+
+	ld hl, ImposterText
+	call StdBattleTextbox
+	farjp BattleCommand_Transform
+
+INCLUDE "data/abilities/imposter_mons.asm"
