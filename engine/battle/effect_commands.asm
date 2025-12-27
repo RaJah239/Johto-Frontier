@@ -6525,15 +6525,7 @@ AssaultVestSpDefBoost:
 	cp HELD_ASSAULT_VEST
 	pop bc
 	ret nz
-
-	ld h, b
-	ld l, c
-	srl b
-	rr c
-	add hl, bc
-	ld b, h
-	ld c, l
-	ret
+	jr SpDefBoost
 
 SandstormSpDefBoost: 
 ; First, check if Sandstorm is active.
@@ -6550,13 +6542,13 @@ SandstormSpDefBoost:
 .ok
 	ld a, [hli]
 	cp ROCK
-	jr z, FinishWeatherStatBoost
+	jr z, SpDefBoost
 	ld a, [hl]
 	cp ROCK
 	ret nz
 	; fallthrough
 
-FinishWeatherStatBoost:
+SpDefBoost:
 	ld h, b
 	ld l, c
 	srl b
@@ -6581,11 +6573,11 @@ HailDefenseBoost:
 .ok
 	ld a, [hli]
 	cp ICE
-	jr z, FinishWeatherStatBoost
+	jr z, SpDefBoost
 	ld a, [hl]
 	cp ICE
 	ret nz
-	jr FinishWeatherStatBoost
+	jr SpDefBoost
 
 BattleCommand_FlameOrb:
 	call GetUserItem
