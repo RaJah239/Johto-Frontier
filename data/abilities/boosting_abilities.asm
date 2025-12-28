@@ -1,5 +1,6 @@
 CheckBoostingAbilities:
 	call HandleGuts
+	call HandleRivalry
 	ret
 
 HandleGuts:
@@ -20,6 +21,28 @@ HandleGuts:
 
 INCLUDE "data/abilities/ability_mons/guts_mons.asm"
 
+HandleRivalry:
+	call GetCurrentMon
+	ld hl, RivalryPokemon
+	call IsInByteArray
+	ret nc
+
+	farcall CheckOppositeGender
+	ret c
+	jr z, TwentyFivePercentBoost
+	jr TwentyFivePercentNerf
+
+INCLUDE "data/abilities/ability_mons/rivalry_mons.asm"
+
+TwentyFivePercentNerf:
+	ld a, 75
+	ldh [hMultiplier], a
+	call Multiply
+
+	ld a, 100
+	ldh [hDivisor], a
+	ld b, 4
+	jmp Divide
 
 HundredPercentBoost:
 	ld a, 100
