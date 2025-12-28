@@ -1393,6 +1393,9 @@ BattleCommand_DamageVariation:
 	ret
 
 BattleCommand_CheckHit:
+	
+	farcall DefensiveAbilities
+
 	farcall DreamEaterMiss
 	jmp z, .Miss
 

@@ -15,6 +15,11 @@ BecameHealthyText:
 	line "became healthy!"
 	prompt
 
+LevitateText:
+	text "But <TARGET>"
+	line "is levitating!"
+	prompt
+
 MoltingText:
 	text "<USER>'s"
 	line "Molting made"

@@ -809,3 +809,8 @@ INCLUDE "data/abilities/turn_end_abilities.asm"
 SECTION "Boosting Abilities", ROMX
 
 INCLUDE "data/abilities/boosting_abilities.asm"
+
+
+SECTION "Defensive Abilities", ROMX
+
+INCLUDE "data/abilities/defensive_abilities.asm"

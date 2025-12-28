@@ -527,7 +527,7 @@ IF USE_GEN3_STYLE_TYPE_GFX == TRUE
  	ldh [rVBK], a
 .check_floatmon
 	ld a, [wCurSpecies]
-	ld hl, FloatMons
+	ld hl, LevitatePokemon
 	call IsInByteArray
 	ret nc
 	hlcoord 17, 4

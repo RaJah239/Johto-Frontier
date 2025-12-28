@@ -4358,7 +4358,7 @@ PrintPlayerHUD:
 .not_shiny
 	; place floaticon
 	ld a, [wCurSpecies]
-	ld hl, FloatMons
+	ld hl, LevitatePokemon
 	call IsInByteArray
 	jr nc, .skip_floaticon
 	hlcoord 19, 8
@@ -4476,7 +4476,7 @@ DrawEnemyHUD:
 
 	; place floaticon
 	ld a, [wCurSpecies]
-	ld hl, FloatMons
+	ld hl, LevitatePokemon
 	call IsInByteArray
 	jr nc, .skip_floaticon
 	hlcoord 10, 1
