@@ -82,7 +82,7 @@ HandleHugePower:
 	call IsInByteArray
 	ret nc
 
-	jmp HundredPercentBoost
+	jr HundredPercentBoost
 
 INCLUDE "data/abilities/ability_mons/huge_power_mons.asm"
 
