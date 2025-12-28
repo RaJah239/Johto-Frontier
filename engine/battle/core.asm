@@ -156,14 +156,17 @@ BattleTurn:
 	ld [wCurDamage], a
 	ld [wCurDamage + 1], a
 
+; ============================
+; === Entrance Abilities 2 ===
+; ============================
 	farcall EntryAbilities2
-	farcall HandleBerserkGene
 
 ; ======================
 ; === Trap Abilities ===
 ; ======================
 	farcall TrapAbilities
 
+	farcall HandleBerserkGene
 	call UpdateBattleMonInParty
 	farcall AIChooseMove
 
@@ -3435,6 +3438,9 @@ BreakAttraction:
 	ret
 
 SpikesDamage:
+; ============================
+; === Entrance Abilities 1 ===
+; ============================
 	farcall EntryAbilities1
 
 	ld a, [wBattleHasJustStarted]
