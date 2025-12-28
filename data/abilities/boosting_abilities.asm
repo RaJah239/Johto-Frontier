@@ -2,6 +2,7 @@ CheckBoostingAbilities:
 	call HandleGuts
 	call HandleRivalry
 	call HandleSandForce
+	call HandleTechnician
 	ret
 
 HandleGuts:
@@ -18,7 +19,7 @@ HandleGuts:
 	call GetBattleVar
 	cp SPECIAL
 	ret nc
-	jr FiftyPercentBoost
+	jmp FiftyPercentBoost
 
 INCLUDE "data/abilities/ability_mons/guts_mons.asm"
 
@@ -59,6 +60,20 @@ HandleSandForce:
 	jr ThirtyPercentBoost
 
 INCLUDE "data/abilities/ability_mons/sand_force_mons.asm"
+
+HandleTechnician:
+	call GetCurrentMon
+	ld hl, TechnicianPokemon
+	call IsInByteArray
+	ret nc
+
+	ld a, BATTLE_VARS_MOVE_POWER
+	call GetBattleVar
+	cp 61            ; power < 61 → boost
+	ret nc           ; power >= 61, no boost
+	jr FiftyPercentBoost
+
+INCLUDE "data/abilities/ability_mons/technician_mons.asm"
 
 TwentyFivePercentNerf:
 	ld a, 75
