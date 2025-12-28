@@ -1,6 +1,7 @@
 CheckBoostingAbilities:
 	call HandleGuts
 	call HandleRivalry
+	call HandleSandForce
 	ret
 
 HandleGuts:
@@ -33,6 +34,31 @@ HandleRivalry:
 	jr TwentyFivePercentNerf
 
 INCLUDE "data/abilities/ability_mons/rivalry_mons.asm"
+
+HandleSandForce:
+	call GetCurrentMon
+	ld hl, SandForcePokemon
+	call IsInByteArray
+	ret nc
+
+	ld a, [wBattleWeather]
+	cp WEATHER_SANDSTORM
+	ret nz
+
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	and TYPE_MASK
+	cp ROCK
+	jr z, .SandForceBoost
+	cp GROUND
+	jr z, .SandForceBoost
+	cp STEEL
+	ret nz
+
+.SandForceBoost:
+	jr ThirtyPercentBoost
+
+INCLUDE "data/abilities/ability_mons/sand_force_mons.asm"
 
 TwentyFivePercentNerf:
 	ld a, 75
