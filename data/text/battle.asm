@@ -26,6 +26,12 @@ WaterAbsorbText:
 	cont "water attacks!"
 	prompt
 
+FireAbsorbText:
+	text "<TARGET> is"
+	line "unaffected by fire"
+	cont "attacks!"
+	prompt
+
 MoltingText:
 	text "<USER>'s"
 	line "Molting made"
