@@ -201,7 +201,7 @@ HandleRegenerator:
 	ld hl, BattleText_TargetRegenerates
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/regenerator_mons.asm"
+INCLUDE "data/abilities/ability_mons/regenerator_mons.asm"
 
 HandleLeftovers:
 	ldh a, [hSerialConnectionStatus]
@@ -541,7 +541,7 @@ HandleSpeedBoost:
 	farcall BattleCommand_StatUp
 	farjp BattleCommand_StatUpMessage
 
-INCLUDE "data/abilities/speed_boost_mons.asm"
+INCLUDE "data/abilities/ability_mons/speed_boost_mons.asm"
 
 HandleMolting:
 	ldh a, [hSerialConnectionStatus]
@@ -585,4 +585,4 @@ DoMolting:
 	ld hl, MoltingText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/molting_mons.asm"
+INCLUDE "data/abilities/ability_mons/molting_mons.asm"

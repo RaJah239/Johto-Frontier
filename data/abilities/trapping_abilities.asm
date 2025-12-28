@@ -16,7 +16,7 @@ ShadowTag:
 	set SUBSTATUS_CANT_RUN, [hl]
 	ret
 
-INCLUDE "data/abilities/shadow_tag_mons.asm"
+INCLUDE "data/abilities/ability_mons/shadow_tag_mons.asm"
 
 ArenaTrap:
 	ld a, [wEnemyMonSpecies]
@@ -48,7 +48,7 @@ ArenaTrap:
 	set SUBSTATUS_CANT_RUN, [hl]
 	ret
 
-INCLUDE "data/abilities/arena_trap_mons.asm"
+INCLUDE "data/abilities/ability_mons/arena_trap_mons.asm"
 
 MagnetPull:
 	ld a, [wEnemyMonSpecies]
@@ -81,4 +81,4 @@ MagnetPull:
 	set SUBSTATUS_CANT_RUN, [hl]
 	ret
 
-INCLUDE "data/abilities/magnet_pull_mons.asm"
+INCLUDE "data/abilities/ability_mons/magnet_pull_mons.asm"

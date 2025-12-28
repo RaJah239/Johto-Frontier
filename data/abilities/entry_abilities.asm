@@ -26,7 +26,7 @@ HandleDrizzle:
 	ld hl, BattleText_DrizzleText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/drizzle_mons.asm"
+INCLUDE "data/abilities/ability_mons/drizzle_mons.asm"
 
 HandleDrought:
 	; check if switched in pokemon has drought
@@ -49,7 +49,7 @@ HandleDrought:
 	ld hl, BattleText_DroughtText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/drought_mons.asm"
+INCLUDE "data/abilities/ability_mons/drought_mons.asm"
 
 HandleSandStream:
 	; check if switched in pokemon has sand stream
@@ -72,7 +72,7 @@ HandleSandStream:
 	ld hl, BattleText_SandStreamText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/sand_stream_mons.asm"
+INCLUDE "data/abilities/ability_mons/sand_stream_mons.asm"
 
 HandleSnowWarning:
 	; check if switched in pokemon has snow warning
@@ -95,7 +95,7 @@ HandleSnowWarning:
 	ld hl, BattleText_SnowWarningText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/snow_warning_mons.asm"
+INCLUDE "data/abilities/ability_mons/snow_warning_mons.asm"
 
 HandleNaturalCure:
 	; check if switched in pokemon has natural cure
@@ -120,7 +120,7 @@ DoNaturalCure:
 	ld hl, BecameHealthyText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/natural_cure_mons.asm"
+INCLUDE "data/abilities/ability_mons/natural_cure_mons.asm"
 
 ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_REFLECT_BARRIER_PLAYER
@@ -226,7 +226,7 @@ HandleReflectBarrier:
 	ld hl, ReflectBarrierText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/reflect_barrier_mons.asm"
+INCLUDE "data/abilities/ability_mons/reflect_barrier_mons.asm"
 
 HandleLightBarrier:
 	ldh a, [hSerialConnectionStatus]
@@ -294,7 +294,7 @@ HandleLightBarrier:
 	ld hl, LightBarrierText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/light_barrier_mons.asm"
+INCLUDE "data/abilities/ability_mons/light_barrier_mons.asm"
 
 HandleIntimidate:
 	ldh a, [hSerialConnectionStatus]
@@ -343,7 +343,7 @@ HandleIntimidate:
 	ld hl, IntimidateText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/intimidate_mons.asm"
+INCLUDE "data/abilities/ability_mons/intimidate_mons.asm"
 
 HandleRockSnare:
 	ldh a, [hSerialConnectionStatus]
@@ -397,7 +397,7 @@ HandleRockSnare:
 	ld hl, RockSnareText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/rock_snare_mons.asm"
+INCLUDE "data/abilities/ability_mons/rock_snare_mons.asm"
 
 HandleCaltropper:
 	ldh a, [hSerialConnectionStatus]
@@ -451,7 +451,7 @@ HandleCaltropper:
 	ld hl, CaltropperText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/caltropper_mons.asm"
+INCLUDE "data/abilities/ability_mons/caltropper_mons.asm"
 
 HandleVenomField:
 	ldh a, [hSerialConnectionStatus]
@@ -505,7 +505,7 @@ HandleVenomField:
 	ld hl, VenomFieldText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/venom_field_mons.asm"
+INCLUDE "data/abilities/ability_mons/venom_field_mons.asm"
 
 HandleSilkSnare:
 	ldh a, [hSerialConnectionStatus]
@@ -559,7 +559,7 @@ HandleSilkSnare:
 	ld hl, SilkSnareText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/silk_snare_mons.asm"
+INCLUDE "data/abilities/ability_mons/silk_snare_mons.asm"
 
 HandleChronoShift:
 	ldh a, [hSerialConnectionStatus]
@@ -609,7 +609,7 @@ HandleChronoShift:
 	ld hl, ChronoShiftText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/chrono_shift_mons.asm"
+INCLUDE "data/abilities/ability_mons/chrono_shift_mons.asm"
 
 HandleFortify:
 	ldh a, [hSerialConnectionStatus]
@@ -654,7 +654,7 @@ HandleFortify:
 	call StdBattleTextbox
 	farjp BattleCommand_Barrier
 
-INCLUDE "data/abilities/fortify_mons.asm"
+INCLUDE "data/abilities/ability_mons/fortify_mons.asm"
 
 HandleImposter:
 	ldh a, [hSerialConnectionStatus]
@@ -699,4 +699,4 @@ HandleImposter:
 	call StdBattleTextbox
 	farjp BattleCommand_Transform
 
-INCLUDE "data/abilities/imposter_mons.asm"
+INCLUDE "data/abilities/ability_mons/imposter_mons.asm"

@@ -4020,7 +4020,7 @@ BattleCommand_ParalyzeTarget:
 	ld hl, UseHeldStatusHealingItem
 	jmp CallBattleCore
 
-INCLUDE "data/abilities/thunderbolt_para_mons.asm"
+INCLUDE "data/abilities/ability_mons/thunderbolt_para_mons.asm"
 
 BattleCommand_AttackUp:
 	ld b, ATTACK
