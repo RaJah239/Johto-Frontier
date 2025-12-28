@@ -20,6 +20,12 @@ LevitateText:
 	line "is levitating!"
 	prompt
 
+WaterAbsorbText:
+	text "<TARGET> is"
+	line "unaffected by"
+	cont "water attacks!"
+	prompt
+
 MoltingText:
 	text "<USER>'s"
 	line "Molting made"
