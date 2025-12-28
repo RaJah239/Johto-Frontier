@@ -10,6 +10,18 @@ BattleCommand_ClearHazards:
     SetEventFlag EVENT_VENOM_FIELD_FOE
     SetEventFlag EVENT_SILK_SNARE_FOE
 
+; clear all hazards
+    ld hl, wPlayerScreens
+    res SCREENS_SPIKES, [hl]
+	res SCREENS_STEALTH_ROCK, [hl]
+	res SCREENS_TOXIC_SPIKES, [hl]
+	res SCREENS_STICKY_WEB, [hl]
+    ld hl, wEnemyScreens
+    res SCREENS_SPIKES, [hl]
+	res SCREENS_STEALTH_ROCK, [hl]
+	res SCREENS_TOXIC_SPIKES, [hl]
+	res SCREENS_STICKY_WEB, [hl]
+
 	ld a, BATTLE_VARS_SUBSTATUS4
 	call GetBattleVarAddr
 	bit SUBSTATUS_LEECH_SEED, [hl]

@@ -1151,7 +1151,8 @@ ShedLeechSeedText:
 
 BlewSpikesText:
 	text "<USER>"
-	line "blew away SPIKES!"
+	line "blew away field"
+	cont "hazards!"
 	prompt
 
 DownpourText:
