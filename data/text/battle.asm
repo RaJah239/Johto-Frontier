@@ -1160,6 +1160,12 @@ DownpourText:
 	line "started!"
 	prompt
 
+HydrationText:
+	text "<USER>'s"
+	line "Hydration made"
+	cont "itself healthy!"
+	prompt
+
 BattleText_DrizzleText:
 	text "<USER>'s"
 	line "Drizzle activated!"

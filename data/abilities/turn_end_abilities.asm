@@ -1,7 +1,7 @@
 TurnEndAbilities:
 	call HandleRegenerator
 	call HandleSpeedBoost
-	call HandleMolting
+	call HandleHydration
 	; fallthrough
 
 HandleMolting:
@@ -127,3 +127,49 @@ HandleSpeedBoost:
 	farjp BattleCommand_StatUpMessage
 
 INCLUDE "data/abilities/ability_mons/speed_boost_mons.asm"
+
+HandleHydration:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .DoEnemyFirst
+	call SetPlayerTurn
+    ld a, [wBattleMonSpecies]
+	call .do_it
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	jr .do_it
+
+.DoEnemyFirst:
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	call .do_it
+	call SetPlayerTurn
+	ld a, [wBattleMonSpecies]
+.do_it
+
+	ld hl, HydrationPokemon
+	call IsInByteArray
+	ret nc
+
+	; if it is raining, activate
+	ld a, [wBattleWeather]
+	cp WEATHER_RAIN
+	ret nz
+
+	call DoHydration
+	farjp CalcPokemonStats
+
+DoHydration:
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	and a
+	ret z
+	xor a
+	ld [hl], a
+	farcall SwitchTurnCore
+	farcall ItemRecoveryAnim
+	farcall SwitchTurnCore
+	ld hl, HydrationText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/ability_mons/hydration_mons.asm"
