@@ -1718,6 +1718,7 @@ StopDangerSound:
 	ret
 
 FaintYourPokemon:
+	call Aftermath
 	call StopDangerSound
 	call WaitSFX
 
@@ -1747,6 +1748,7 @@ FaintYourPokemon:
 	jmp StdBattleTextbox
 
 FaintEnemyPokemon:
+	call Aftermath
 	call WaitSFX
 
 	; Skip enemy mon's cry when fainting
@@ -8520,4 +8522,29 @@ GetMovePower:
 	ld a, BANK(Moves)
 	call GetFarByte
 	ld b, a
+	ret
+
+; ==========================
+; === Ability: Aftermath ===
+; ==========================
+Aftermath:
+	call GetOpposingMonCore
+	ld hl, AftermathPokemon
+	call IsInByteArray
+	ret nc
+
+	; deal 1/4 max HP of damage to opponent
+	ld hl, BattleText_Aftermath
+	call StdBattleTextbox
+	call GetQuarterMaxHP
+	jmp SubtractHPFromUser
+
+INCLUDE "data/abilities/ability_mons/aftermath_mons.asm"
+
+GetOpposingMonCore:
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wBattleMonSpecies]
+	ret nz
+	ld a, [wEnemyMonSpecies]
 	ret

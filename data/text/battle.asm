@@ -932,6 +932,16 @@ ImposterText:
 	cont "activated!"
 	prompt
 
+BattleText_Aftermath:
+	text "<TARGET>'s"
+	line "Aftermath"
+	cont "activated!"
+
+	para "Unleashed a final"
+	line "desperate attack"
+	cont "on <USER>!"
+	prompt
+
 VigorousSplashText:
 	text "<USER>"
 	line "moves vigorously"
