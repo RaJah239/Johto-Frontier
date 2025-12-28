@@ -394,7 +394,7 @@ DetermineMoveOrder:
 	call BattleRandom
 	cp e
 	jr nc, .trick_room_check
-	jr .player_first_due_to_quick_claw
+	jmp .player_first_due_to_quick_claw
 
 .player_no_quick_claw
 	ld a, b
@@ -403,7 +403,7 @@ DetermineMoveOrder:
 	call BattleRandom
 	cp c
 	jr nc, .trick_room_check
-	jr .enemy_first_due_to_quick_claw
+	jmp .enemy_first_due_to_quick_claw
 
 .both_have_quick_claw
 	ldh a, [hSerialConnectionStatus]
@@ -411,19 +411,19 @@ DetermineMoveOrder:
 	jr z, .player_2b
 	call BattleRandom
 	cp c
-	jr c, .enemy_first_due_to_quick_claw
+	jmp c, .enemy_first_due_to_quick_claw
 	call BattleRandom
 	cp e
-	jr c, .player_first_due_to_quick_claw
+	jmp c, .player_first_due_to_quick_claw
 	jr .trick_room_check
 
 .player_2b
 	call BattleRandom
 	cp e
-	jr c, .player_first_due_to_quick_claw
+	jmp c, .player_first_due_to_quick_claw
 	call BattleRandom
 	cp c
-	jr c, .enemy_first_due_to_quick_claw
+	jmp c, .enemy_first_due_to_quick_claw
 
 	; Trick Room
 	; The slower Pokemon attacks first
@@ -432,20 +432,102 @@ DetermineMoveOrder:
 	and a
 	jr z, .speed_check
 
+	; if Trick Room is active
+	; reverse the turn order
 	ld de, wBattleMonSpeed
 	ld hl, wEnemyMonSpeed
 	ld c, 2
 	call CompareBytes
-	jr z, .speed_tie
-	jr nc, .enemy_first
-	jr .player_first
+	jmp z, .speed_tie
+	jmp nc, .enemy_first
+	jmp .player_first
 
 .speed_check
-	ld de, wBattleMonSpeed
-	ld hl, wEnemyMonSpeed
+	; check player Pokémon
+	ld a, [wBattleMonSpecies]
+	ld hl, QuickDrawPokemon
+	call IsInByteArray
+	jr nc, .quick_draw_mon_not_in_list
+
+	; check enemy Pokémon
+	ld a, [wEnemyMonSpecies]
+	ld hl, QuickDrawPokemon
+	call IsInByteArray
+	jr nc, .quick_draw_mon_not_in_list
+
+	; if we reach here
+	; both player and foe are Quick Draw Pokemon
 	jr .continue
 
+.quick_draw_mon_not_in_list
+	; check if player is using a Quick Draw Pokemon
+	ld a, [wBattleMonSpecies]
+	ld hl, QuickDrawPokemon
+	call IsInByteArray
+	jr c, .SimulatePlayerQuickDrawDoubleSpeed
+
+	; check if foe is using a Quick Draw Pokemon
+	ld a, [wEnemyMonSpecies]
+	ld hl, QuickDrawPokemon
+	call IsInByteArray
+	jr c, .SimulateEnemyQuickDrawDoubleSpeed
+	jr .continue
+
+; enemy moves first unless enemy is paralysed
+; or enemy is >+2 speed
+; in which case compare speed as normal
+
+.SimulateEnemyQuickDrawDoubleSpeed
+	call Random
+	cp 33 percent + 1
+	ret nc ; 1/3 chance
+
+	call ItemRecoveryAnim
+	ld hl, BattleText_QuickDrawFoe
+	call StdBattleTextbox
+	; fallthrough
+
+.simulateEnemyDoubleSpeed
+	ld a, [wEnemyMonStatus]
+	and 1 << PAR
+	jr nz, .continue
+	ld a, [wPlayerSpdLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .continue
+	ld a, [wEnemySpdLevel]
+	cp BASE_STAT_LEVEL - 1
+	jr c, .continue
+	jr .enemy_first
+
+; player moves first unless player is paralysed
+; or enemy is >+2 speed
+; in which case compare speed as normal
+
+.SimulatePlayerQuickDrawDoubleSpeed
+	call Random
+	cp 33 percent + 1
+	ret nc ; 1/3 chance
+
+	call SwitchCoreItemRecoveryAnim
+	ld hl, BattleText_QuickDrawPlayer
+	call StdBattleTextbox
+	; fallthrough
+
+.simulatePlayerDoubleSpeed
+	ld a, [wBattleMonStatus]
+	and 1 << PAR
+	jr nz, .continue
+	ld a, [wEnemySpdLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .continue
+	ld a, [wPlayerSpdLevel]
+	cp BASE_STAT_LEVEL - 1
+	jr c, .continue
+	jr .player_first
+
 .continue
+	ld de, wBattleMonSpeed
+	ld hl, wEnemyMonSpeed
 	ld c, 2
 	call CompareBytes
 	jr z, .speed_tie
@@ -487,6 +569,8 @@ DetermineMoveOrder:
 	call StdBattleTextbox
 	and a
 	ret
+
+INCLUDE "data/abilities/ability_mons/quick_draw_mons.asm"
 
 CheckContestBattleOver:
 	ld a, [wBattleType]
