@@ -3,6 +3,7 @@ TurnEndAbilities:
 	call HandleSpeedBoost
 	call HandleHydration
 	call HandleIceBody
+	call HandleRainDish
 	; fallthrough
 
 HandleMolting:
@@ -219,3 +220,48 @@ HandleIceBody:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/ability_mons/ice_body_mons.asm"
+
+HandleRainDish:
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	call .do_it
+	call SetPlayerTurn
+	ld a, [wBattleMonSpecies]
+.do_it
+
+	ld hl, RainDishPokemon
+	call IsInByteArray
+	ret nc
+
+	; if it is raining, if so, activate
+	ld a, [wBattleWeather]
+	cp WEATHER_RAIN
+	ret nz
+
+	ld hl, wBattleMonHP
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_hp
+	ld hl, wEnemyMonHP
+
+.got_hp
+; Don't restore if we're already at max HP
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	cp b
+	jr nz, .restore
+	ld a, [hl]
+	cp c
+	ret z
+
+.restore
+	farcall GetSixteenthMaxHP
+	farcall SwitchTurnCore
+	farcall RestoreHP
+	ld hl, RainDishText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/ability_mons/rain_dish_mons.asm"

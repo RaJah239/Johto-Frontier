@@ -148,6 +148,12 @@ IceBodyText:
 	cont "to its Ice Body!"
 	prompt
 
+RainDishText:
+	text "<TARGET>"
+	line "recovered HP due"
+	cont "to its Rain Dish!"
+	prompt
+
 PerishCountText:
 	text "<USER>'s"
 	line "PERISH count is @"
