@@ -1,9 +1,67 @@
+; ==============
+; === Note 1 ===
+; ==============
+
+; these abilties work correctly
+; switch in battle and immediately use its effect
 EntryAbilities1:
+	call HandleDrizzle
 	call HandleDrought
 	call HandleSandStream
 	call HandleSnowWarning
 	call HandleNaturalCure
-	; fallthrough
+	ret
+
+; ==============
+; === Note 2 ===
+; ==============
+
+; these abilities work at the start of turn 1
+; so if a mon was switched in mid-battle,
+; the foe will get their move off and even ko'd
+; before this ability triggers
+EntryAbilities2:
+	call HandleLightBarrier
+	call HandleIntimidate
+	call HandleRockSnare
+	call HandleCaltropper
+	call HandleVenomField
+	call HandleSilkSnare
+	call HandleChronoShift
+	call HandleFortify
+	call HandleImposter
+	call HandleReflectBarrier
+	ret
+
+ResetVolatileAbilityPlayer:
+	ResetEventFlag EVENT_REFLECT_BARRIER_PLAYER
+	ResetEventFlag EVENT_LIGHT_BARRIER_PLAYER
+	ResetEventFlag EVENT_INTIMIDATE_PLAYER
+	ResetEventFlag EVENT_ROCK_SNARE_PLAYER
+	ResetEventFlag EVENT_CALTROPPER_PLAYER
+	ResetEventFlag EVENT_VENOM_FIELD_PLAYER
+	ResetEventFlag EVENT_SILK_SNARE_PLAYER
+	ResetEventFlag EVENT_CHRONO_SHIFT_PLAYER
+	ResetEventFlag EVENT_FORTIFY_PLAYER
+	ResetEventFlag EVENT_IMPOSTER_PLAYER
+	ret
+
+ResetVolatileAbilityFoe:
+	ResetEventFlag EVENT_REFLECT_BARRIER_FOE
+	ResetEventFlag EVENT_LIGHT_BARRIER_FOE
+	ResetEventFlag EVENT_INTIMIDATE_FOE
+	ResetEventFlag EVENT_ROCK_SNARE_FOE
+	ResetEventFlag EVENT_CALTROPPER_FOE
+	ResetEventFlag EVENT_VENOM_FIELD_FOE
+	ResetEventFlag EVENT_SILK_SNARE_FOE
+	ResetEventFlag EVENT_CHRONO_SHIFT_FOE
+	ResetEventFlag EVENT_FORTIFY_FOE
+	ResetEventFlag EVENT_IMPOSTER_FOE
+	ret
+
+; ========================
+; === EntryAbilities 1 ===
+; ========================
 
 HandleDrizzle:
 	; check if switched in pokemon has drizzle
@@ -122,43 +180,9 @@ DoNaturalCure:
 
 INCLUDE "data/abilities/ability_mons/natural_cure_mons.asm"
 
-ResetVolatileAbilityPlayer:
-	ResetEventFlag EVENT_REFLECT_BARRIER_PLAYER
-	ResetEventFlag EVENT_LIGHT_BARRIER_PLAYER
-	ResetEventFlag EVENT_INTIMIDATE_PLAYER
-	ResetEventFlag EVENT_ROCK_SNARE_PLAYER
-	ResetEventFlag EVENT_CALTROPPER_PLAYER
-	ResetEventFlag EVENT_VENOM_FIELD_PLAYER
-	ResetEventFlag EVENT_SILK_SNARE_PLAYER
-	ResetEventFlag EVENT_CHRONO_SHIFT_PLAYER
-	ResetEventFlag EVENT_FORTIFY_PLAYER
-	ResetEventFlag EVENT_IMPOSTER_PLAYER
-	ret
-
-ResetVolatileAbilityFoe:
-	ResetEventFlag EVENT_REFLECT_BARRIER_FOE
-	ResetEventFlag EVENT_LIGHT_BARRIER_FOE
-	ResetEventFlag EVENT_INTIMIDATE_FOE
-	ResetEventFlag EVENT_ROCK_SNARE_FOE
-	ResetEventFlag EVENT_CALTROPPER_FOE
-	ResetEventFlag EVENT_VENOM_FIELD_FOE
-	ResetEventFlag EVENT_SILK_SNARE_FOE
-	ResetEventFlag EVENT_CHRONO_SHIFT_FOE
-	ResetEventFlag EVENT_FORTIFY_FOE
-	ResetEventFlag EVENT_IMPOSTER_FOE
-	ret
-
-EntryAbilities2:
-	call HandleLightBarrier
-	call HandleIntimidate
-	call HandleRockSnare
-	call HandleCaltropper
-	call HandleVenomField
-	call HandleSilkSnare
-	call HandleChronoShift
-	call HandleFortify
-	call HandleImposter
-	; fallthrough
+; ========================
+; === EntryAbilities 2 ===
+; ========================
 
 HandleReflectBarrier:
 	ldh a, [hSerialConnectionStatus]
