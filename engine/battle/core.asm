@@ -241,6 +241,7 @@ HandleBetweenTurnEffects:
 
 .NoMoreFaintingConditions:
 	farcall FarTurnEndEffects
+	farcall TurnEndAbilities
 	call HandleHealingItems
 	call UpdateBattleMonInParty
 	jmp LoadTilemapToTempTilemap
