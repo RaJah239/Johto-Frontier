@@ -3,6 +3,7 @@ CheckBoostingAbilities:
 	call HandleRivalry
 	call HandleSandForce
 	call HandleTechnician
+	call HandleHugePower
 	ret
 
 HandleGuts:
@@ -74,6 +75,17 @@ HandleTechnician:
 	jr FiftyPercentBoost
 
 INCLUDE "data/abilities/ability_mons/technician_mons.asm"
+
+HandleHugePower:
+	call GetCurrentMon
+	ld hl, HugePowerPokemon
+	call IsInByteArray
+	ret nc
+
+	jmp HundredPercentBoost
+
+INCLUDE "data/abilities/ability_mons/huge_power_mons.asm"
+
 
 TwentyFivePercentNerf:
 	ld a, 75
