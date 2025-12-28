@@ -804,3 +804,8 @@ INCLUDE "data/abilities/trapping_abilities.asm"
 SECTION "Turn End Abilities", ROMX
 
 INCLUDE "data/abilities/turn_end_abilities.asm"
+
+
+SECTION "Boosting Abilities", ROMX
+
+INCLUDE "data/abilities/boosting_abilities.asm"

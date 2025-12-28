@@ -2902,7 +2902,9 @@ ConfusionDamageCalc:
  	ld a, [wIsConfusionDamage]
  	and a
  	jr nz, .DoneItem
- 
+
+ 	farcall CheckBoostingAbilities
+
 	call GetUserItem
 
 	ld a, b
@@ -2975,7 +2977,7 @@ ConfusionDamageCalc:
 	call GetBattleVar
 	cp SPECIAL
 	jr nc, .choiceSpecs
-	call FiftyPercentBoost
+	call Fifty_PercentBoost
 
 .choiceSpecs
 ; =========================
@@ -2992,7 +2994,7 @@ ConfusionDamageCalc:
 	call GetBattleVar
 	cp SPECIAL
 	jr c, .muscleBand
-    call FiftyPercentBoost
+    call Fifty_PercentBoost
 
 .muscleBand
 ; ========================
@@ -6605,8 +6607,8 @@ BattleCommand_FlameOrb:
 	call PlayOpponentBattleAnim
 	jmp BattleCommand_SwitchTurn
 
-FiftyPercentBoost:
-    ld a, 3
+Fifty_PercentBoost:
+	ld a, 3
 	ldh [hMultiplier], a
 	call Multiply
 	; fallthrough
@@ -6618,7 +6620,7 @@ HalfDamage:
 	jmp Divide
 
 TenPercentBoost:
-    ld a, 11
+	ld a, 11
 	ldh [hMultiplier], a
 	call Multiply
 	ld a, 10

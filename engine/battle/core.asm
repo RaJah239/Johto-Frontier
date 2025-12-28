@@ -6471,6 +6471,13 @@ ApplyBrnEffectOnAttack:
 	ldh a, [hBattleTurn]
 	and a
 	jr z, .enemy
+
+	; prevent attack reduction on guts mons
+	call GetCurrentMon
+	ld hl, GutsPokemon
+	call IsInByteArray
+	ret nc
+
 	ld a, [wBattleMonStatus]
 	and 1 << BRN
 	ret z
@@ -6490,6 +6497,12 @@ ApplyBrnEffectOnAttack:
 	ret
 
 .enemy
+	; prevent attack reduction on guts mons
+	call GetCurrentMon
+	ld hl, GutsPokemon
+	call IsInByteArray
+	ret nc
+
 	ld a, [wEnemyMonStatus]
 	and 1 << BRN
 	ret z
