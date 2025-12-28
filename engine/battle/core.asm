@@ -531,8 +531,8 @@ DetermineMoveOrder:
 	ld c, 2
 	call CompareBytes
 	jr z, .speed_tie
-	jp nc, .player_first
-	jp .enemy_first
+	jr nc, .player_first
+	jr .enemy_first
 
 .speed_tie
 	ldh a, [hSerialConnectionStatus]
@@ -5880,7 +5880,7 @@ LoadEnemyMon:
 ; Try again if length >= 1616 mm (i.e. if LOW(length) >= 4 inches)
 	ld a, [wMagikarpLength + 1]
 	cp 4
-	jp nc, .GenerateDVs
+	jmp nc, .GenerateDVs
 
 ; 20% chance of skipping this check
 	call Random
@@ -5889,7 +5889,7 @@ LoadEnemyMon:
 ; Try again if length >= 1600 mm (i.e. if LOW(length) >= 3 inches)
 	ld a, [wMagikarpLength + 1]
 	cp 3
-	jp nc, .GenerateDVs
+	jmp nc, .GenerateDVs
 
 .CheckMagikarpArea:
 	ld a, [wMapGroup]
@@ -5905,7 +5905,7 @@ LoadEnemyMon:
 ; Try again if length < 1024 mm (i.e. if HIGH(length) < 3 feet)
 	ld a, [wMagikarpLength]
 	cp 3
-	jp c, .GenerateDVs ; try again
+	jmp c, .GenerateDVs ; try again
 
 ; Finally done with DVs
 
