@@ -142,6 +142,12 @@ PeltedByHailText:
 	line "is pelted by HAIL!"
 	prompt
 
+IceBodyText:
+	text "<TARGET>"
+	line "recovered HP due"
+	cont "to its Ice Body!"
+	prompt
+
 PerishCountText:
 	text "<USER>'s"
 	line "PERISH count is @"
