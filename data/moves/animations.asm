@@ -1773,8 +1773,8 @@ BattleAnim_Cut:
 	anim_1gfx BATTLE_ANIM_GFX_CUT
 	anim_sound 0, 1, SFX_CUT
 	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 152, 40, $0
-	anim_wait 32
-	anim_ret
+	anim_wait 24
+	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_Slash:
 	anim_1gfx BATTLE_ANIM_GFX_CUT
@@ -2026,23 +2026,25 @@ BattleAnim_InvertScreenColoursSub:
 	anim_ret
 
 BattleAnim_Avalanche:
-    anim_2gfx BATTLE_ANIM_GFX_ROCKS, BATTLE_ANIM_GFX_ICE
-    anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $1, $0
-    anim_sound 0, 1, SFX_STRENGTH
-    anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 128, 64, $40
-    anim_wait 4
-    anim_sound 0, 1, SFX_STRENGTH
-    anim_obj BATTLE_ANIM_OBJ_BIG_ROCK, 120, 68, $30
-    anim_wait 4
-    anim_sound 0, 1, SFX_STRENGTH
-    anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 152, 68, $30
-    anim_wait 4
-    anim_sound 0, 1, SFX_STRENGTH
-    anim_obj BATTLE_ANIM_OBJ_BIG_ROCK, 144, 64, $40
-    anim_wait 4
+	anim_2gfx BATTLE_ANIM_GFX_ROCKS, BATTLE_ANIM_GFX_ICE
+	anim_setobjpal PAL_BATTLE_OB_BROWN, PAL_BTLCUSTOM_WATER
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $1, $0
+	anim_sound 0, 1, SFX_STRENGTH
+	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 128, 64, $40
+	anim_wait 4
+	anim_sound 0, 1, SFX_STRENGTH
+	anim_obj BATTLE_ANIM_OBJ_BIG_ROCK, 120, 68, $30
+	anim_wait 4
+	anim_sound 0, 1, SFX_STRENGTH
+	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 152, 68, $30
+	anim_wait 4
+	anim_sound 0, 1, SFX_STRENGTH
+	anim_obj BATTLE_ANIM_OBJ_BIG_ROCK, 144, 64, $40
+	anim_wait 4
 	anim_call BattleAnimSub_Ice
-    anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 136, 68, $30
-    anim_ret
+	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 136, 68, $30
+	anim_setobjpal PAL_BATTLE_OB_BROWN, PAL_BTLCUSTOM_BROWN
+	anim_ret
 
 BattleAnim_IcicleCrash:
 	anim_2gfx BATTLE_ANIM_GFX_ICICLECRASH, BATTLE_ANIM_GFX_ICE
@@ -2472,9 +2474,10 @@ BattleAnimSub_Agility:
 	anim_ret
 
 BattleAnim_CloseCombat:
-	anim_2gfx BATTLE_ANIM_GFX_WIND, BATTLE_ANIM_GFX_HIT
+	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_HIT
 	anim_sound 0, 0, SFX_RAZOR_WIND
-	anim_call BattleAnimSub_Agility
+	anim_bgeffect BATTLE_BG_EFFECT_HIDE_MON, $0, BG_EFFECT_USER, $0
+	anim_call BattleAnimSub_SpeedLines
 	anim_wait 12
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $2, $0
 	anim_bgp $90
@@ -2505,7 +2508,10 @@ BattleAnim_CloseCombat:
 	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 114, 52, $0
 	anim_wait 2
 	anim_loop 4, .loop
-	anim_wait 16
+	anim_wait 8
+	anim_call BattleAnimSub_SpeedLines
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, BG_EFFECT_USER, $0
+	anim_wait 8
 	anim_ret
 
 BattleAnim_Defog:
@@ -4345,6 +4351,7 @@ BattleAnim_AuraSphere:
 	anim_sound 6, 2, SFX_SLUDGE_BOMB
 	anim_obj BATTLE_ANIM_OBJ_OCTAZOOKA, 64, 92, $4
 	anim_wait 16
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $30, $3, $0
 	anim_sound 0, 1, SFX_EGG_BOMB
 	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 136, 56, $0
 	anim_wait 16
