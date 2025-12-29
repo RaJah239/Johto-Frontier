@@ -12,6 +12,7 @@ LevitatePokemon::
 	db MEW
 	db MISDREAVUS
 	db UNOWN
+	db NOWN
 	db CELEBI
 	db CHARIZARD
 	db -1 ; end
