@@ -24,6 +24,12 @@ InnerFocusText:
 	cont "flinching!"
 	prompt
 
+ClearBodyText:
+	text "<TARGET>'s"
+	line "Clear Body negates"
+	cont "stat drops!"
+	prompt
+
 BecameHealthyText:
 	text "<USER>"
 	line "became healthy!"

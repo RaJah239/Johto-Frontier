@@ -4316,15 +4316,30 @@ BattleCommand_StatDown:
 	ld [wLoweredStat], a
 
 	call CheckMist
-	jr nz, .Mist
+	jmp nz, .Mist
 
 	ld hl, wEnemyStatLevels
 	ldh a, [hBattleTurn]
 	and a
-	jr z, .GetStatLevel
+	ld a, [wEnemyMonSpecies]
+	jr z, .check_clear_body
 	ld hl, wPlayerStatLevels
+	ld a, [wBattleMonSpecies]
 
-.GetStatLevel:
+.check_clear_body
+; ===========================
+; === Ability: Clear Body ===
+; ===========================
+	push hl
+	push de
+	push bc
+	ld hl, ClearBodyPokemon
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jr c, .clear_body
+
 ; Attempt to lower the stat.
 	ld a, [wLoweredStat]
 	and $f
@@ -4403,6 +4418,22 @@ BattleCommand_StatDown:
 	ld a, 1
 	ld [wAttackMissed], a
 	ret
+
+.clear_body:
+	; add some delay so the text 
+	; isn't instantly skipped
+	ld c, 30
+	call DelayFrames
+
+	ld hl, ClearBodyText
+	call StdBattleTextbox
+	ld a, 2
+	ld [wFailedMessage], a
+	ld a, 1
+	ld [wAttackMissed], a
+	ret
+
+INCLUDE "data/abilities/ability_mons/clear_body_mons.asm"
 
 CheckMist:
 	ld a, BATTLE_VARS_MOVE_EFFECT
