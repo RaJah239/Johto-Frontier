@@ -5,6 +5,7 @@ CheckBoostingAbilities:
 	call HandleTechnician
 	call HandleHugePower
 	call HandleMultiscale
+	call HandleThickFat
 	ret
 
 HandleGuts:
@@ -59,7 +60,7 @@ HandleSandForce:
 	ret nz
 
 .SandForceBoost:
-	jr ThirtyPercentBoost
+	jmp ThirtyPercentBoost
 
 INCLUDE "data/abilities/ability_mons/sand_force_mons.asm"
 
@@ -98,6 +99,23 @@ HandleMultiscale:
 	jr FiftyPercentNerf
 
 INCLUDE "data/abilities/ability_mons/multiscale_mons.asm"
+
+HandleThickFat:
+	call GetOpposingMon
+	ld hl, ThickFatPokemon
+	call IsInByteArray
+	ret nc
+
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	and TYPE_MASK
+	cp FIRE
+	jr z, FiftyPercentNerf
+	cp ICE
+	ret nz
+	jr FiftyPercentNerf
+
+INCLUDE "data/abilities/ability_mons/thick_fat_mons.asm"
 
 FiftyPercentNerf:
 	ld a, 50
