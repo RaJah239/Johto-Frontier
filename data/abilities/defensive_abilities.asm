@@ -2,6 +2,7 @@ DefensiveAbilities:
 	call HandleLevitate
 	call HandleWaterAbsorb
 	call HandleFireAbsorb
+	call HandleVoltAbsorb
 	ret
 
 HandleLevitate:
@@ -106,3 +107,38 @@ HandleFireAbsorb:
 	ret
 
 INCLUDE "data/abilities/ability_mons/fire_absorb_mons.asm"
+
+HandleVoltAbsorb:
+    ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	jr nz, .checkType
+	ld a, [wPlayerMoveStruct + MOVE_TYPE]
+.checkType
+	and TYPE_MASK
+	cp ELECTRIC
+    ret nz
+
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMonSpecies]
+	jr z, .check_volt_absorb
+	ld a, [wBattleMonSpecies]
+
+.check_volt_absorb
+	ld hl, VoltAbsorbPokemon
+	call IsInByteArray
+    ret nc
+
+    ; add some delay so the text 
+    ; isn't instantly skipped
+	ld c, 30
+	call DelayFrames
+
+	ld hl, VoltAbsorbText
+	call StdBattleTextbox
+	ld a, 1
+	ld [wAttackMissed], a
+	ret
+
+INCLUDE "data/abilities/ability_mons/volt_absorb_mons.asm"

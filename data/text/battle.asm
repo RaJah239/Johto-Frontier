@@ -32,6 +32,12 @@ FireAbsorbText:
 	cont "attacks!"
 	prompt
 
+VoltAbsorbText:
+	text "<TARGET> is"
+	line "unaffected by"
+	cont "electric attacks!"
+	prompt
+
 MoltingText:
 	text "<USER>'s"
 	line "Molting made"
