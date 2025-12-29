@@ -913,6 +913,31 @@ BattleCommand_Critical:
 	inc c
 
 .CheckCritical:
+; ============================
+; === Ability: Slash Crits === 
+; ============================
+	call GetCurrentMon
+	push hl
+	push de
+	push bc
+	ld hl, SlashCritsPokemon
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jr c, .check_slash
+	jr .continue
+
+.check_slash
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp SLASH
+	jr nz, .continue
+	ld a, 1
+	ld [wCriticalHit], a
+	ret
+
+.continue
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	ld de, 1
@@ -951,6 +976,7 @@ BattleCommand_Critical:
 INCLUDE "data/moves/critical_hit_moves.asm"
 
 INCLUDE "data/battle/critical_hit_chances.asm"
+INCLUDE "data/abilities/ability_mons/slash_crits_mons.asm"
 
 GetNextTypeMatchupsByte:
    ld a, BANK(TypeMatchups)
