@@ -5559,6 +5559,7 @@ INCLUDE "engine/battle/move_effects/mist.asm"
 INCLUDE "engine/battle/move_effects/focus_energy.asm"
 
 BattleCommand_Recoil:
+; recoil
 	ld hl, wBattleMonMaxHP
 	ldh a, [hBattleTurn]
 	and a
@@ -5589,19 +5590,27 @@ BattleCommand_Recoil:
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	ld d, a
-; get 1/4 damage or 1 HP, whichever is higher
+; get 1/3 damage or 1 HP, whichever is higher
 	ld a, [wCurDamage]
 	ld b, a
 	ld a, [wCurDamage + 1]
 	ld c, a
-	srl b
-	rr c
-	srl b
-	rr c
-	ld a, b
-	or c
+	xor a
+	inc b
+.third_hp_loop
+	dec b
+	inc a
+	dec bc
+	dec bc
+	dec bc
+	inc b
+	jr nz, .third_hp_loop
+	dec a
+	ld c, a
 	jr nz, .min_damage
 	inc c
+	jr .min_damage
+
 .min_damage
 	ld a, [hli]
 	ld [wHPBuffer1 + 1], a
@@ -5638,6 +5647,11 @@ BattleCommand_Recoil:
 	ld [wWhichHPBar], a
 	predef AnimateHPBar
 	call RefreshBattleHuds
+
+	; skip recoil text if quick battles are on
+	call CheckIfFastBattlesIsOn
+	ret nz
+
 	ld hl, RecoilText
 	jmp StdBattleTextbox
 
