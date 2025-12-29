@@ -827,6 +827,12 @@ MistText:
 	line "shrouded in MIST!"
 	prompt
 
+RockHeadText:
+	text "<USER>'s"
+	line "Rock Head prevents"
+	cont "recoil!"
+	prompt
+
 ProtectedByMistText:
 	text "<TARGET>'s"
 	line "protected by MIST."

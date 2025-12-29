@@ -5562,9 +5562,30 @@ BattleCommand_Recoil:
 	ld hl, wBattleMonMaxHP
 	ldh a, [hBattleTurn]
 	and a
+	ld a, [wBattleMonSpecies]
 	jr z, .got_hp
 	ld hl, wEnemyMonMaxHP
+	ld a, [wEnemyMonSpecies]
 .got_hp
+; ===========================
+; === Ability: Rock Head ====
+; ===========================
+	push bc
+	push de
+	push hl
+	ld hl, RockHeadPokemon
+	call IsInByteArray
+	pop hl
+	pop de
+	pop bc
+	jr c, .rock_head
+	jr .finish_rock_head
+
+.rock_head
+	ld hl, RockHeadText
+	jmp StdBattleTextbox
+
+.finish_rock_head
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	ld d, a
@@ -5619,6 +5640,8 @@ BattleCommand_Recoil:
 	call RefreshBattleHuds
 	ld hl, RecoilText
 	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/ability_mons/rock_head_mons.asm"
 
 BattleCommand_ConfuseTarget:
 	call GetOpponentItem
