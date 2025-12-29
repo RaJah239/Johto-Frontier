@@ -1911,7 +1911,12 @@ StopDangerSound:
 	ret
 
 FaintYourPokemon:
+	; placed before KOBoost should the winner
+	; be knocked it by Aftermath first
 	call Aftermath
+
+	farcall KOBoost
+
 	call StopDangerSound
 	call WaitSFX
 
@@ -1941,7 +1946,12 @@ FaintYourPokemon:
 	jmp StdBattleTextbox
 
 FaintEnemyPokemon:
+	; placed before KOBoost should the winner
+	; be knocked it by Aftermath first
 	call Aftermath
+
+	farcall KOBoost
+
 	call WaitSFX
 
 	; Skip enemy mon's cry when fainting

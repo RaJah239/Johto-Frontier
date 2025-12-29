@@ -814,3 +814,8 @@ INCLUDE "engine/abilities/boosting_abilities.asm"
 SECTION "Defensive Abilities", ROMX
 
 INCLUDE "engine/abilities/defensive_abilities.asm"
+
+
+SECTION "Knock Out Abilities", ROMX
+
+INCLUDE "engine/abilities/knock_out_abilities.asm"
