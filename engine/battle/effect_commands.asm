@@ -5028,9 +5028,24 @@ BattleCommand_Rampage:
 	ld de, wPlayerRolloutCount
 	ldh a, [hBattleTurn]
 	and a
-	jr z, .ok
+	jr z, .playerTurn
 	ld de, wEnemyRolloutCount
+	ld a, [wEnemyMonSpecies]
+	jr z, .ok
+.playerTurn
+	ld de, wPlayerRolloutCount
+	ld a, [wBattleMonSpecies]	
 .ok
+
+; ============================
+; === Ability: Feral Focus ===
+; ============================
+	; freely use rapage moves
+	call GetCurrentMon
+	ld hl, FeralFocusPokemon
+	call IsInByteArray
+	ret c
+
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVarAddr
 	set SUBSTATUS_RAMPAGE, [hl]
@@ -5043,6 +5058,7 @@ BattleCommand_Rampage:
 	ld [wSomeoneIsRampaging], a
 	ret
 
+INCLUDE "data/abilities/ability_mons/feral_focus_mons.asm"
 INCLUDE "engine/battle/move_effects/teleport.asm"
 
 SetBattleDraw:
