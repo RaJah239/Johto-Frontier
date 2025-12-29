@@ -4122,6 +4122,9 @@ BattleCommand_ParalyzeTarget:
 	cp HELD_PREVENT_PARALYZE
 	ret z
 
+; ===========================
+; === Ability: Sure Shock ===
+; ===========================
 ; certain Pokemon always paralyze with T-bolt
 	; check move
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -4131,7 +4134,7 @@ BattleCommand_ParalyzeTarget:
 	
 	; check user species
 	call GetCurrentMon
-	ld hl, ThunderboltParalyzePokemon
+	ld hl, SureShockPokemon
 	call IsInByteArray
 	jr c, .paralyze
 	jr .done
@@ -4161,7 +4164,7 @@ BattleCommand_ParalyzeTarget:
 	ld hl, UseHeldStatusHealingItem
 	jmp CallBattleCore
 
-INCLUDE "data/abilities/ability_mons/thunderbolt_para_mons.asm"
+INCLUDE "data/abilities/ability_mons/sure_shock_mons.asm"
 
 BattleCommand_AttackUp:
 	ld b, ATTACK

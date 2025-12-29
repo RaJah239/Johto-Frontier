@@ -1,6 +1,6 @@
 ; List of all Pokemon that have 100% paralysis with the move thunderbolt
 
-ThunderboltParalyzePokemon:
+SureShockPokemon:
 	db PIKACHU
 	db MAGNEMITE
 	db MAGNETON
