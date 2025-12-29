@@ -1,9 +1,8 @@
 DefensiveAbilities:
-	call HandleLevitate
 	call HandleWaterAbsorb
 	call HandleFireAbsorb
 	call HandleVoltAbsorb
-	ret
+	; fallthrough
 
 HandleLevitate:
     ldh a, [hBattleTurn]
@@ -34,9 +33,7 @@ HandleLevitate:
 
 	ld hl, LevitateText
 	call StdBattleTextbox
-	ld a, 1
-	ld [wAttackMissed], a
-	ret
+	jmp AttackedMissted
 
 HandleWaterAbsorb:
     ldh a, [hBattleTurn]
@@ -67,9 +64,7 @@ HandleWaterAbsorb:
 
 	ld hl, WaterAbsorbText
 	call StdBattleTextbox
-	ld a, 1
-	ld [wAttackMissed], a
-	ret
+	jr AttackedMissted
 
 INCLUDE "data/abilities/ability_mons/water_absorb_mons.asm"
 
@@ -102,9 +97,7 @@ HandleFireAbsorb:
 
 	ld hl, FireAbsorbText
 	call StdBattleTextbox
-	ld a, 1
-	ld [wAttackMissed], a
-	ret
+	jr AttackedMissted
 
 INCLUDE "data/abilities/ability_mons/fire_absorb_mons.asm"
 
@@ -137,8 +130,11 @@ HandleVoltAbsorb:
 
 	ld hl, VoltAbsorbText
 	call StdBattleTextbox
+	jr AttackedMissted
+
+INCLUDE "data/abilities/ability_mons/volt_absorb_mons.asm"
+
+AttackedMissted:
 	ld a, 1
 	ld [wAttackMissed], a
 	ret
-
-INCLUDE "data/abilities/ability_mons/volt_absorb_mons.asm"
