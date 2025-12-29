@@ -1887,7 +1887,7 @@ BattleCommand_ApplyDamage:
 	ld a, BATTLE_VARS_SUBSTATUS1_OPP
 	call GetBattleVar
 	bit SUBSTATUS_ENDURE, a
-	jr z, .check_item
+	jr z, .sturdy
 
 	farcall BattleCommand_FalseSwipe
 	ld b, 0
@@ -1895,7 +1895,15 @@ BattleCommand_ApplyDamage:
 	ld b, 1
 	jr .damage
 
-.check_item
+.sturdy
+; =================================
+; ========== Sturdy ===============
+; =================================
+	call GetOpposingMon
+	ld hl, SturdyPokemon
+	call IsInByteArray
+	jr c, .focus_sash_effect
+
 	call GetOpponentItem
 	ld a, [hl]
 	ld [wNamedObjectIndex], a
@@ -1908,12 +1916,12 @@ BattleCommand_ApplyDamage:
 	jr nz, .damage
 
 ; check if target is at full hp
+.focus_sash_effect
 	farcall CheckOpponentFullHP
 	jr nz, .damage
 	farcall BattleCommand_FalseSwipe
 	ld b, 0
 	jr nc, .damage
-	callfar ConsumeHeldItem
 	ld b, 2
 	jr .damage
 
@@ -1951,7 +1959,22 @@ BattleCommand_ApplyDamage:
 	jmp StdBattleTextbox
 
 .focus_band_text
+	call GetOpponentItem
+    ld a, b
+	cp HELD_FOCUS_BAND
+	jr z, .hungontext
+	cp HELD_FOCUS_SASH
+	jr nz, .sturdytext
+
+.hungontext:
+	ld a, [hl]
+	ld [wNamedObjectIndex], a
+	call GetItemName
 	ld hl, HungOnText
+	jmp StdBattleTextbox
+
+.sturdytext
+	ld hl, SturdyText
 	jmp StdBattleTextbox
 
 .update_damage_taken
@@ -1984,6 +2007,8 @@ BattleCommand_ApplyDamage:
 	inc de
 	ld [de], a
 	ret
+
+INCLUDE "data/abilities/ability_mons/sturdy_mons.asm"
 
 GetFailureResultText:
 	ld hl, DoesntAffectText

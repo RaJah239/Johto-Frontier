@@ -10,6 +10,14 @@ BattleText_TargetRegenerates:
 	line "regenerates."
 	prompt
 
+SturdyText:
+	text "<TARGET>'s"
+	line "Stury activated!"
+
+	para "Held on from being"
+	line "knocked out!"
+	prompt
+
 BecameHealthyText:
 	text "<USER>"
 	line "became healthy!"
