@@ -1641,10 +1641,31 @@ BattleCommand_EffectChance:
 	ld hl, wPlayerMoveStruct + MOVE_CHANCE
 	ldh a, [hBattleTurn]
 	and a
+	ld a, [wBattleMonSpecies]
 	jr z, .got_move_chance
 	ld hl, wEnemyMoveStruct + MOVE_CHANCE
+	ld a, [wEnemyMonSpecies]
 .got_move_chance
 
+; ==============================
+; === Ability: Serene Grace ====
+; ==============================
+	push bc
+	push de
+	push hl
+	ld hl, SereneGracePokemon
+	call IsInByteArray
+	pop hl
+	pop de
+	pop bc
+	jr c, .serene_grace
+	jr .finish_serene_grace
+
+	; double effect chance
+.serene_grace
+	sla [hl]
+
+.finish_serene_grace
  	ld a, [hl]
  	sub 100 percent
  	; If chance was 100%, RNG won't be called (carry not set)
@@ -1659,6 +1680,8 @@ BattleCommand_EffectChance:
 	ld [wEffectFailed], a
 	and a
 	ret
+
+INCLUDE "data/abilities/ability_mons/serene_grace_mons.asm"
 
 BattleCommand_LowerSub:
 	ld a, BATTLE_VARS_SUBSTATUS4
