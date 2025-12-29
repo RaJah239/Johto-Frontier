@@ -3190,6 +3190,26 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 	and a
 	ret z
 
+; =======================
+; === Ability: Sniper === 
+; =======================
+	call GetCurrentMon
+	push hl
+	push de
+	push bc
+	ld hl, SniperPokemon
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jr c, .extra_damage
+	jr .fifty_percent_boost
+
+; sniper pokemon crits deal 1.5 x 1.5 = 2.25 x base damage
+.extra_damage
+	call Fifty_PercentBoost
+
+.fifty_percent_boost
 	; critcal hits do 50% more damage
 	call Fifty_PercentBoost
 
@@ -3202,6 +3222,7 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 
 	ret
 
+INCLUDE "data/abilities/ability_mons/sniper_mons.asm"
 INCLUDE "data/types/type_boost_items.asm"
 
 BattleCommand_ConstantDamage:
