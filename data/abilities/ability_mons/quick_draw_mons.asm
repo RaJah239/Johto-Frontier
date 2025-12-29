@@ -3,4 +3,5 @@
 QuickDrawPokemon:
     db SLOWPOKE
     db SLOWBRO
+    db SMEARGLE ; because pun
     db -1 ; end
