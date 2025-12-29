@@ -793,24 +793,24 @@ INCLUDE "gfx/timeofday_images.asm"
 
 SECTION "Entry Abilities", ROMX
 
-INCLUDE "data/abilities/entry_abilities.asm"
+INCLUDE "engine/abilities/entry_abilities.asm"
 
 
 SECTION "Trapping Abilities", ROMX
 
-INCLUDE "data/abilities/trapping_abilities.asm"
+INCLUDE "engine/abilities/trapping_abilities.asm"
 
 
 SECTION "Turn End Abilities", ROMX
 
-INCLUDE "data/abilities/turn_end_abilities.asm"
+INCLUDE "engine/abilities/turn_end_abilities.asm"
 
 
 SECTION "Boosting Abilities", ROMX
 
-INCLUDE "data/abilities/boosting_abilities.asm"
+INCLUDE "engine/abilities/boosting_abilities.asm"
 
 
 SECTION "Defensive Abilities", ROMX
 
-INCLUDE "data/abilities/defensive_abilities.asm"
+INCLUDE "engine/abilities/defensive_abilities.asm"
