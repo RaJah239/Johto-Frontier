@@ -20,6 +20,14 @@ GetCurrentMon::
 	ld a, [wEnemyMonSpecies]
 	ret
 
+GetOpposingMon::
+    ldh a, [hBattleTurn]
+	and a
+	ld a, [wBattleMonSpecies]
+	ret nz
+	ld a, [wEnemyMonSpecies]
+    ret
+
 ; This converts values out of 256 into a value
 ; out of 100. It achieves this by multiplying
 ; the value by 100 and dividing it by 256.

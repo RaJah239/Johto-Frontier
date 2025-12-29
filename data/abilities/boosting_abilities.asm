@@ -4,6 +4,7 @@ CheckBoostingAbilities:
 	call HandleSandForce
 	call HandleTechnician
 	call HandleHugePower
+	call HandleMultiscale
 	ret
 
 HandleGuts:
@@ -32,8 +33,8 @@ HandleRivalry:
 
 	farcall CheckOppositeGender
 	ret c
-	jr z, TwentyFivePercentBoost
-	jr TwentyFivePercentNerf
+	jmp z, TwentyFivePercentBoost
+	jmp TwentyFivePercentNerf
 
 INCLUDE "data/abilities/ability_mons/rivalry_mons.asm"
 
@@ -86,6 +87,27 @@ HandleHugePower:
 
 INCLUDE "data/abilities/ability_mons/huge_power_mons.asm"
 
+HandleMultiscale:
+	call GetOpposingMon
+	ld hl, MultiscalePokemon
+	call IsInByteArray
+	ret nc
+
+	farcall CheckOpponentFullHP
+	ret nz
+	jr FiftyPercentNerf
+
+INCLUDE "data/abilities/ability_mons/multiscale_mons.asm"
+
+FiftyPercentNerf:
+	ld a, 50
+	ldh [hMultiplier], a
+	call Multiply
+
+	ld a, 100
+	ldh [hDivisor], a
+	ld b, 4
+	jmp Divide
 
 TwentyFivePercentNerf:
 	ld a, 75
