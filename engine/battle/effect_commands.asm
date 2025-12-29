@@ -5924,10 +5924,22 @@ BattleCommand_Paralyze:
 INCLUDE "engine/battle/move_effects/substitute.asm"
 
 BattleCommand_RechargeNextTurn:
+; rechargenextturn
+
+; ==========================
+; === Ability: Overdrive ===
+; ==========================
+	call GetCurrentMon
+	ld hl, OverdrivePokemon
+	call IsInByteArray
+	ret c
+
 	ld a, BATTLE_VARS_SUBSTATUS4
 	call GetBattleVarAddr
 	set SUBSTATUS_RECHARGE, [hl]
 	ret
+
+INCLUDE "data/abilities/ability_mons/overdrive_mons.asm"
 
 EndRechargeOpp:
 	push hl
