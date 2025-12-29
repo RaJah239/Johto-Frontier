@@ -5260,7 +5260,20 @@ BattleCommand_FlinchTarget:
 	and a
 	ret nz
 
-	; fallthrough
+; ====================
+; === Inner Focus ====
+; ====================
+	call GetOpposingMon
+	ld hl, InnerFocusPokemon
+	call IsInByteArray
+	jr c, .no_flinch
+	jr FlinchTarget
+
+.no_flinch
+	ld hl, InnerFocusText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/ability_mons/inner_focus_mons.asm"
 
 FlinchTarget:
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP

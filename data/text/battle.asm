@@ -18,6 +18,12 @@ SturdyText:
 	line "knocked out!"
 	prompt
 
+InnerFocusText:
+	text "<TARGET>'s"
+	line "Inner Focus barred"
+	cont "flinching!"
+	prompt
+
 BecameHealthyText:
 	text "<USER>"
 	line "became healthy!"
