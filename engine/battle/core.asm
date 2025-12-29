@@ -8734,7 +8734,7 @@ GetMovePower:
 ; === Ability: Aftermath ===
 ; ==========================
 Aftermath:
-	call GetOpposingMonCore
+	call GetOpposingMon
 	ld hl, AftermathPokemon
 	call IsInByteArray
 	ret nc
@@ -8746,11 +8746,3 @@ Aftermath:
 	jmp SubtractHPFromUser
 
 INCLUDE "data/abilities/ability_mons/aftermath_mons.asm"
-
-GetOpposingMonCore:
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wBattleMonSpecies]
-	ret nz
-	ld a, [wEnemyMonSpecies]
-	ret
