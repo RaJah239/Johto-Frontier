@@ -926,18 +926,39 @@ BattleCommand_Critical:
 	pop de
 	pop hl
 	jr c, .check_slash
-	jr .continue
+	jr .continue1
 
 .check_slash
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	cp SLASH
-	jr nz, .continue
+	jr nz, .continue1
 	ld a, 1
 	ld [wCriticalHit], a
 	ret
 
-.continue
+.continue1
+; ===========================
+; === Ability: Super Luck ===
+; ===========================
+	call GetCurrentMon
+	push hl
+	push de
+	push bc
+	ld hl, SuperLuckPokemon
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jr c, .increase_critical
+	jr .continue2
+
+; super luck mons have an innate +2 critical hit level
+.increase_critical
+	inc c
+	inc c
+
+.continue2
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	ld de, 1
@@ -977,6 +998,7 @@ INCLUDE "data/moves/critical_hit_moves.asm"
 
 INCLUDE "data/battle/critical_hit_chances.asm"
 INCLUDE "data/abilities/ability_mons/slash_crits_mons.asm"
+INCLUDE "data/abilities/ability_mons/super_luck_mons.asm"
 
 GetNextTypeMatchupsByte:
    ld a, BANK(TypeMatchups)
