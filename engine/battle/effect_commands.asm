@@ -1507,15 +1507,22 @@ BattleCommand_CheckHit:
 	cp STRUGGLE
 	ret z
 
-; Heracross always hit with Megahorn
+; ==========================
+; === Ability: True Horn ===
+; ==========================
+	; check if megahorn was used
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	cp MEGAHORN
-	jr nz, .notMegahorn
-    call GetCurrentMon
-	cp HERACROSS
-	ret z
-.notMegahorn
+	jr nz, .not_megahorn_or_true_horn_mon
+
+	; check it is was a true horn pokemon
+	call GetCurrentMon
+	ld hl, TrueHornPokemon
+	call IsInByteArray
+	ret c
+
+.not_megahorn_or_true_horn_mon
 
 	call .StatModifiers
 
@@ -1696,6 +1703,7 @@ BattleCommand_CheckHit:
 	ld [hl], a
 	ret
 
+INCLUDE "data/abilities/ability_mons/true_horn_mons.asm"
 INCLUDE "data/battle/accuracy_multipliers.asm"
 INCLUDE "data/abilities/ability_mons/sand_veil_mons.asm"
 INCLUDE "data/abilities/ability_mons/compound_eyes_mons.asm"
