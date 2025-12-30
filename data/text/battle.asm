@@ -30,6 +30,12 @@ InnerFocusText:
 	cont "flinching!"
 	prompt
 
+SerenityText:
+	text "<TARGET>'s"
+	line "Serenity nullifies"
+	cont "status problems!"
+	prompt
+
 ClearBodyText:
 	text "<TARGET>'s"
 	line "Clear Body negates"
@@ -1082,14 +1088,6 @@ FullyParalyzedText:
 AlreadyParalyzedText:
 	text "<TARGET>'s"
 	line "already paralyzed!"
-	prompt
-
-ProtectedByText:
-	text "<TARGET>'s"
-	line "protected by"
-	cont "@"
-	text_ram wStringBuffer1
-	text "!"
 	prompt
 
 StoleText:

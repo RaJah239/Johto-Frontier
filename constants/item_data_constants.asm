@@ -96,12 +96,12 @@ DEF MAIL_STRUCT_LENGTH_JP EQU $2a ; mailmsg_jp struct
 	const HELD_HEAL_CONFUSION
 
 	const_next 20
-	const HELD_PREVENT_POISON
-	const HELD_PREVENT_BURN
-	const HELD_PREVENT_FREEZE
-	const HELD_PREVENT_SLEEP
-	const HELD_PREVENT_PARALYZE
-	const HELD_PREVENT_CONFUSE
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
 
 	const_next 30
 	const HELD_MUSCLE_BAND

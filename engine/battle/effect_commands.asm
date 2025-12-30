@@ -1329,17 +1329,15 @@ BattleCommand_Burn:
 	call CheckForStatusIfAlreadyHasAny
 	jr nz, .failed
 
-	call GetOpponentItem
-	ld a, b
-	cp HELD_PREVENT_BURN
-	jr nz, .do_burn
-	ld a, [hl]
-	ld [wNamedObjectIndex], a
-	call GetItemName
-	ld hl, ProtectedByText
-	jr .failed
+; ================================
+; === Ability: Serenity - Burn ===
+; ================================
+	call GetOpposingMon
+	ld hl, SerenityPokemon
+	call IsInByteArray
+	jmp c, Serenity
+	; fallthrough
 
-.do_burn
 	ld hl, DidntAffect1Text
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVar
@@ -3697,18 +3695,15 @@ CheckForStatusIfAlreadyHasAny:
 	ret
 
 BattleCommand_SleepTarget:
-	call GetOpponentItem
-	ld a, b
-	cp HELD_PREVENT_SLEEP
-	jr nz, .not_protected_by_item
+; ========================================
+; === Ability: Serenity - Sleep Target ===
+; ========================================
+	call GetOpposingMon
+	ld hl, SerenityPokemon
+	call IsInByteArray
+	jr c, Serenity
+	; fallthrough
 
-	ld a, [hl]
-	ld [wNamedObjectIndex], a
-	call GetItemName
-	ld hl, ProtectedByText
-	jr .fail
-
-.not_protected_by_item
 	call CheckForStatusIfAlreadyHasAny
 	jr nz, .fail
 
@@ -3747,6 +3742,15 @@ BattleCommand_SleepTarget:
 	pop hl
 	jmp StdBattleTextbox
 
+Serenity:
+	; add some delay so the text 
+	; isn't instantly skipped
+	ld c, 30
+	call DelayFrames
+
+	ld hl, SerenityText
+	jmp StdBattleTextbox
+
 BattleCommand_PoisonTarget:
 	call CheckSubstituteOpp
 	ret nz
@@ -3763,10 +3767,16 @@ BattleCommand_PoisonTarget:
 	ld a, STEEL ; Don't poison a Steel-type
 	call CheckIfTargetIsGivenType
 	ret z
-	call GetOpponentItem
-	ld a, b
-	cp HELD_PREVENT_POISON
-	ret z
+
+; =========================================
+; === Ability: Serenity - Poison Target ===
+; =========================================
+	call GetOpposingMon
+	ld hl, SerenityPokemon
+	call IsInByteArray
+	ret nc
+	; fallthrough
+
 	ld a, [wEffectFailed]
 	and a
 	ret nz
@@ -3801,17 +3811,15 @@ BattleCommand_Poison:
 	call CheckForStatusIfAlreadyHasAny
 	jr nz, .failed
 
-	call GetOpponentItem
-	ld a, b
-	cp HELD_PREVENT_POISON
-	jr nz, .do_poison
-	ld a, [hl]
-	ld [wNamedObjectIndex], a
-	call GetItemName
-	ld hl, ProtectedByText
-	jr .failed
+; ==================================
+; === Ability: Serenity - Poison ===
+; ==================================
+	call GetOpposingMon
+	ld hl, SerenityPokemon
+	call IsInByteArray
+	jr c, Serenity
+	; fallthrough
 
-.do_poison
 	ld hl, DidntAffect1Text
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVar
@@ -4012,10 +4020,16 @@ BattleCommand_BurnTarget:
 	ld a, FIRE ; Don't burn a Fire-type
 	call CheckIfTargetIsGivenType
 	ret z
-	call GetOpponentItem
-	ld a, b
-	cp HELD_PREVENT_BURN
-	ret z
+
+; =======================================
+; === Ability: Serenity - Burn Target ===
+; =======================================
+	call GetOpposingMon
+	ld hl, SerenityPokemon
+	call IsInByteArray
+	ret nc
+	; fallthrough
+
 	ld a, [wEffectFailed]
 	and a
 	ret nz
@@ -4080,10 +4094,16 @@ BattleCommand_FreezeTarget:
 	ld a, ICE ; Don't freeze an Ice-type
 	call CheckIfTargetIsGivenType
 	ret z
-	call GetOpponentItem
-	ld a, b
-	cp HELD_PREVENT_FREEZE
-	ret z
+
+; ===========================================
+; === Ability: Serenity - Frostbite Target ==
+; ===========================================
+	call GetOpposingMon
+	ld hl, SerenityPokemon
+	call IsInByteArray
+	ret nc
+	; fallthrough
+
 	ld a, [wEffectFailed]
 	and a
 	ret nz
@@ -4117,10 +4137,16 @@ BattleCommand_ParalyzeTarget:
 	ld a, [wTypeModifier]
 	and EFFECTIVENESS_MASK
 	ret z
-	call GetOpponentItem
-	ld a, b
-	cp HELD_PREVENT_PARALYZE
-	ret z
+	; fallthrough
+
+; ===========================================
+; === Ability: Serenity - Paralyze Target ===
+; ===========================================
+	call GetOpposingMon
+	ld hl, SerenityPokemon
+	call IsInByteArray
+	ret nc
+	; fallthrough
 
 ; ===========================
 ; === Ability: Sure Shock ===
@@ -4165,6 +4191,7 @@ BattleCommand_ParalyzeTarget:
 	jmp CallBattleCore
 
 INCLUDE "data/abilities/ability_mons/sure_shock_mons.asm"
+INCLUDE "data/abilities/ability_mons/serenity_mons.asm"
 
 BattleCommand_AttackUp:
 	ld b, ATTACK
@@ -5769,10 +5796,14 @@ BattleCommand_Recoil:
 INCLUDE "data/abilities/ability_mons/rock_head_mons.asm"
 
 BattleCommand_ConfuseTarget:
-	call GetOpponentItem
-	ld a, b
-	cp HELD_PREVENT_CONFUSE
-	ret z
+; ===========================================
+; === Ability: Serenity - Confuse Target ===
+; ===========================================
+	call GetOpposingMon
+	ld hl, SerenityPokemon
+	call IsInByteArray
+	ret nc
+
 	ld a, [wEffectFailed]
 	and a
 	ret nz
@@ -5787,18 +5818,15 @@ BattleCommand_ConfuseTarget:
 	jr BattleCommand_FinishConfusingTarget
 
 BattleCommand_Confuse:
-	call GetOpponentItem
-	ld a, b
-	cp HELD_PREVENT_CONFUSE
-	jr nz, .no_item_protection
-	ld a, [hl]
-	ld [wNamedObjectIndex], a
-	call GetItemName
-	call AnimateFailedMove
-	ld hl, ProtectedByText
-	jmp StdBattleTextbox
+; ===================================
+; === Ability: Serenity - Confuse ===
+; ===================================
+	call GetOpposingMon
+	ld hl, SerenityPokemon
+	call IsInByteArray
+	jmp c, Serenity
+	; fallthrough
 
-.no_item_protection
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
 	call GetBattleVarAddr
 	bit SUBSTATUS_CONFUSED, [hl]
@@ -5875,18 +5903,16 @@ BattleCommand_Paralyze:
 	ld a, [wTypeModifier]
 	and EFFECTIVENESS_MASK
 	jr z, .didnt_affect
-	call GetOpponentItem
-	ld a, b
-	cp HELD_PREVENT_PARALYZE
-	jr nz, .no_item_protection
-	ld a, [hl]
-	ld [wNamedObjectIndex], a
-	call GetItemName
-	call AnimateFailedMove
-	ld hl, ProtectedByText
-	jmp StdBattleTextbox
 
-.no_item_protection
+; =====================================
+; === Ability: Serenity - Paralyze ===
+; =====================================
+	call GetOpposingMon
+	ld hl, SerenityPokemon
+	call IsInByteArray
+	jmp c, Serenity
+	; fallthrough
+
 	ld a, [wAttackMissed]
 	and a
 	jr nz, .failed
