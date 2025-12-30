@@ -1175,17 +1175,34 @@ ResidualDamage:
 	ld a, BATTLE_VARS_SUBSTATUS1
 	call GetBattleVarAddr
 	bit SUBSTATUS_NIGHTMARE, [hl]
+	jr nz, .nightmare
+
+; =============================
+; ==== Ability: Bad Dreams ====
+; =============================
+	call GetOpposingMon
+	ld hl, BadDreamsPokemon
+	call IsInByteArray
+	jr c, .check_if_asleep
+	jr .not_nightmare
+
+.check_if_asleep
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	and SLP_MASK
 	jr z, .not_nightmare
+
+.nightmare
 	xor a
 	ld [wNumHits], a
 	ld de, ANIM_IN_NIGHTMARE
 	call Call_PlayBattleAnim_OnlyIfVisible
-	call GetQuarterMaxHP
+	call GetEighthMaxHP ; Nightmare now does 1/8 max HP for balance
 	call SubtractHPFromUser
 	ld hl, HasANightmareText
 	call StdBattleTextbox
-.not_nightmare
 
+.not_nightmare
 	call HasUserFainted
 	jr z, .fainted
 
@@ -1219,6 +1236,8 @@ ResidualDamage:
 	call RefreshBattleHuds
 	xor a
 	ret
+
+INCLUDE "data/abilities/ability_mons/bad_dreams_mons.asm"
 
 HandlePerishSong:
 	ldh a, [hSerialConnectionStatus]
