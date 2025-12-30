@@ -267,6 +267,7 @@ HandleRainDish:
 
 INCLUDE "data/abilities/ability_mons/rain_dish_mons.asm"
 
+; handle boosted attack in engine/abilities/boosting_abilities.asm
 HandleSolarPowerHPLoss:
 	call GetCurrentMon
 	push hl

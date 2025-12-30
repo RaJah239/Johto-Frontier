@@ -118,6 +118,7 @@ HandleThickFat:
 
 INCLUDE "data/abilities/ability_mons/thick_fat_mons.asm"
 
+; handle the HP loss in engine/abilities/turn_end_abilities.asm 
 HandleSolarPowerBoost:
 	call GetCurrentMon
 	ld hl, SolarPowerPokemon
