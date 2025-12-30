@@ -4,6 +4,7 @@ TurnEndAbilities:
 	call HandleHydration
 	call HandleIceBody
 	call HandleRainDish
+	call HandleSolarPowerHPLoss
 	; fallthrough
 
 HandleMolting:
@@ -265,3 +266,26 @@ HandleRainDish:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/ability_mons/rain_dish_mons.asm"
+
+HandleSolarPowerHPLoss:
+	call GetCurrentMon
+	push hl
+	push de
+	push bc
+	ld hl, SolarPowerPokemon
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	ret nc
+
+	; check if it is sunny
+	ld a, [wBattleWeather]
+	cp WEATHER_SUN
+	ret nz
+
+	; subtract 1/8 max hp end of each turn
+	farcall GetEighthMaxHP
+	farcall SubtractHPFromUser
+	ld hl, SolarPowerText
+	jmp StdBattleTextbox

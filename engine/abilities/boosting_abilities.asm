@@ -6,6 +6,7 @@ CheckBoostingAbilities:
 	call HandleHugePower
 	call HandleMultiscale
 	call HandleThickFat
+	call HandleSolarPowerBoost
 	ret
 
 HandleGuts:
@@ -74,7 +75,7 @@ HandleTechnician:
 	call GetBattleVar
 	cp 61            ; power < 61 → boost
 	ret nc           ; power >= 61, no boost
-	jr FiftyPercentBoost
+	jmp FiftyPercentBoost
 
 INCLUDE "data/abilities/ability_mons/technician_mons.asm"
 
@@ -84,7 +85,7 @@ HandleHugePower:
 	call IsInByteArray
 	ret nc
 
-	jr HundredPercentBoost
+	jmp HundredPercentBoost
 
 INCLUDE "data/abilities/ability_mons/huge_power_mons.asm"
 
@@ -116,6 +117,26 @@ HandleThickFat:
 	jr FiftyPercentNerf
 
 INCLUDE "data/abilities/ability_mons/thick_fat_mons.asm"
+
+HandleSolarPowerBoost:
+	call GetCurrentMon
+	ld hl, SolarPowerPokemon
+	call IsInByteArray
+	ret nc
+
+	; check if it is sunny
+	ld a, [wBattleWeather]
+	cp WEATHER_SUN
+	ret nz
+
+	; boost physical type attacks by 50 percent
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp SPECIAL
+	ret c
+	jr FiftyPercentBoost
+
+INCLUDE "data/abilities/ability_mons/solar_power_mons.asm"
 
 FiftyPercentNerf:
 	ld a, 50

@@ -10,6 +10,12 @@ BattleText_TargetRegenerates:
 	line "regenerates."
 	prompt
 
+SolarPowerText:
+	text "<USER> is"
+	line "hurt by its"
+	cont "Solar Power!"
+	prompt
+
 SturdyText:
 	text "<TARGET>'s"
 	line "Stury activated!"
