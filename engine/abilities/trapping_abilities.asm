@@ -8,13 +8,7 @@ ShadowTag:
 	ld hl, ShadowTagPokemon
 	call IsInByteArray
 	ret nc
-
-	; trap player
-	ld hl, wEnemySubStatus5
-	bit SUBSTATUS_CANT_RUN, [hl]
-	ret nz
-	set SUBSTATUS_CANT_RUN, [hl]
-	ret
+	jr TrapOpponent
 
 INCLUDE "data/abilities/ability_mons/shadow_tag_mons.asm"
 
@@ -25,12 +19,7 @@ ArenaTrap:
 	ret nc
 
 	; check type
-	ld de, wEnemyMonType1
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .ok
 	ld de, wBattleMonType1
-.ok
 
 	; check if flying type
 	ld a, [de]
@@ -40,13 +29,7 @@ ArenaTrap:
 	ld a, [de]
 	cp FLYING
 	ret z
-
-	; trap player if not flying type
-	ld hl, wEnemySubStatus5
-	bit SUBSTATUS_CANT_RUN, [hl]
-	ret nz
-	set SUBSTATUS_CANT_RUN, [hl]
-	ret
+	jr TrapOpponent
 
 INCLUDE "data/abilities/ability_mons/arena_trap_mons.asm"
 
@@ -57,24 +40,19 @@ MagnetPull:
 	ret nc
 
 	; check type
-	ld de, wEnemyMonType1
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .ok
 	ld de, wBattleMonType1
-.ok
 
 	; check if steel type
 	ld a, [de]
 	cp STEEL
-	jr z, .trap
+	jr z, TrapOpponent
 	inc de
 	ld a, [de]
 	cp STEEL
 	ret nz
+	; fallthrough
 
-	; trap player if steel type
-.trap
+TrapOpponent:
 	ld hl, wEnemySubStatus5
 	bit SUBSTATUS_CANT_RUN, [hl]
 	ret nz
