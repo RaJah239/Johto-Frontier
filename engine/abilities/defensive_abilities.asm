@@ -33,7 +33,7 @@ HandleLevitate:
 
 	ld hl, LevitateText
 	call StdBattleTextbox
-	jmp AttackedMissted
+	jmp AttackedMissed
 
 HandleWaterAbsorb:
     ldh a, [hBattleTurn]
@@ -64,7 +64,7 @@ HandleWaterAbsorb:
 
 	ld hl, WaterAbsorbText
 	call StdBattleTextbox
-	jr AttackedMissted
+	jr AttackedMissed
 
 INCLUDE "data/abilities/ability_mons/water_absorb_mons.asm"
 
@@ -97,7 +97,7 @@ HandleFireAbsorb:
 
 	ld hl, FireAbsorbText
 	call StdBattleTextbox
-	jr AttackedMissted
+	jr AttackedMissed
 
 INCLUDE "data/abilities/ability_mons/fire_absorb_mons.asm"
 
@@ -130,11 +130,11 @@ HandleVoltAbsorb:
 
 	ld hl, VoltAbsorbText
 	call StdBattleTextbox
-	jr AttackedMissted
+	jr AttackedMissed
 
 INCLUDE "data/abilities/ability_mons/volt_absorb_mons.asm"
 
-AttackedMissted:
+AttackedMissed:
 	ld a, 1
 	ld [wAttackMissed], a
 	ret
