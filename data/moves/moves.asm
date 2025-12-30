@@ -151,7 +151,7 @@ Moves:
 	move SOFTBOILED,   EFFECT_HEAL,                0, NORMAL,        STATUS,   100, 32,   0
 	move HI_JUMP_KICK, EFFECT_JUMP_KICK,         120, FIGHTING,      PHYSICAL,  95, 16,   0
 	move ICE_SHARD,    EFFECT_PRIORITY_HIT,       40, ICE,           PHYSICAL, 100, 32,   0
-	move DREAM_EATER,  EFFECT_DREAM_EATER,       110, PSYCHIC_TYPE,  SPECIAL,  100, 24,   0
+	move DREAM_EATER,  EFFECT_DREAM_EATER,       120, PSYCHIC_TYPE,  SPECIAL,  100, 24,   0
 	move TAUNT,        EFFECT_TAUNT,               0, DARK,          STATUS,   100, 32,   0
 	move TREMOR,       EFFECT_EARTHQUAKE,         40, GROUND,        PHYSICAL, 100, 40,   0
 	move LEECH_LIFE,   EFFECT_LEECH_HIT,          80, BUG,           PHYSICAL, 100, 24,   0
