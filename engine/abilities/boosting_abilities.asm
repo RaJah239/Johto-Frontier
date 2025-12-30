@@ -172,10 +172,6 @@ ThirtyPercentBoost:
 
 TwentyFivePercentBoost:
 	ld a, 25
-	jr FinishBoost
-
-TwentyPercentBoost:
-	ld a, 20
 	; fallthrough
 
 FinishBoost:
