@@ -1162,6 +1162,9 @@ ResidualDamage:
 	ld a, $1
 	ldh [hBGMapMode], a
 	call RestoreHP
+
+	call CheckIfFastBattlesIsOn
+	jr nz, .not_seeded
 	ld hl, LeechSeedSapsText
 	call StdBattleTextbox
 .not_seeded
