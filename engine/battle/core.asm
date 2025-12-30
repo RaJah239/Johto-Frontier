@@ -1912,10 +1912,20 @@ ApplyExperienceAfterEnemyCaught:
 	and a
 	ret z
 	ld hl, wEnemyMonBaseExp
-	
+
+; Note: Exp Share
+; gives 1/2 exp to all non-participating Pokemon
+; until all league is beaten
+; then gives full exp to all
+
+	ld a, [wHallOfFameCount]
+	and a
+	jr nz, .continue
+
 	; havling experience points in done here
 	srl [hl]
 
+.continue
 	ld a, [wBattleParticipantsNotFainted]
 	push af
 	ld a, d
