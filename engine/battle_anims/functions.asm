@@ -97,6 +97,7 @@ DoBattleAnimFrame:
 	dw BattleAnimFunction_PowerGem
 	dw BattleAnimFunc_IceSplash
 	dw BattleAnimFunc_RockTomb
+	dw BattleAnimFunction_55
 	assert_table_length NUM_BATTLE_ANIM_FUNCS
 
 BattleAnimFunc_Null:
@@ -4379,3 +4380,37 @@ BattleAnimFunc_RockTomb:
 	jp BattleAnim_IncAnonJumptableIndex
 .two
 	ret
+
+BattleAnimFunction_55:
+	call BattleAnim_AnonJumptable
+
+	dw .zero
+	dw .one
+	dw .two
+
+.zero
+	ld d, 24
+	ld hl, BATTLEANIMSTRUCT_PARAM
+	add hl, bc
+	ld a, [hl]
+	inc [hl]
+	jp BattleAnim_StepCircle
+
+.one
+	call BattleAnim_IncAnonJumptableIndex
+	ld hl, BATTLEANIMSTRUCT_VAR1
+	add hl, bc
+	ld [hl], 24
+.two
+	ld hl, BATTLEANIMSTRUCT_VAR1
+	add hl, bc
+	ld a, [hl]
+	cp 160
+	jp nc, DeinitBattleAnimation
+	ld d, a
+	add 3
+	ld [hl], a
+	ld hl, BATTLEANIMSTRUCT_PARAM
+	add hl, bc
+	ld a, [hl]
+	jmp BattleAnim_StepCircle

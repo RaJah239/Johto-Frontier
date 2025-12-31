@@ -2002,19 +2002,28 @@ BattleAnim_FocusEnergy:
 	anim_jump BattleAnim_SubFocusingAnim
 
 BattleAnim_DarkPulse:
-	anim_call BattleAnim_InvertScreenColoursSub
-.loop
-	anim_sound 0, 0, SFX_AEROBLAST
-	anim_obj BATTLE_ANIM_OBJ_SHADOW_BALL,  7, 6, 11, 4, $2
-	anim_wait 3
-	anim_obj BATTLE_ANIM_OBJ_SHADOW_BALL,  8, 2, 11, 4, $2
-	anim_wait 3
-	anim_loop 8, .loop
-	anim_bgeffect BATTLE_BG_EFFECT_VIBRATE_MON, $0, $0, $0
-	anim_wait 32
-	anim_call BattleAnim_ShowMon_1
-	anim_wait 1
-	anim_bgp $e4
+	anim_1gfx BATTLE_ANIM_GFX_CHARGE
+	anim_bgeffect BATTLE_BG_EFFECT_WHIRLPOOL, $0, $0, $0
+	anim_bgp $1b
+	anim_sound 0, 1, SFX_SPITE
+	anim_obj ANIM_OBJ_DARK_PULSE, 44, 88, $0
+	anim_obj ANIM_OBJ_DARK_PULSE, 44, 88, $8
+	anim_obj ANIM_OBJ_DARK_PULSE, 44, 88, $10
+	anim_obj ANIM_OBJ_DARK_PULSE, 44, 88, $18
+	anim_obj ANIM_OBJ_DARK_PULSE, 44, 88, $20
+	anim_obj ANIM_OBJ_DARK_PULSE, 44, 88, $28
+	anim_obj ANIM_OBJ_DARK_PULSE, 44, 88, $30
+	anim_obj ANIM_OBJ_DARK_PULSE, 44, 88, $38
+	anim_incobj 1
+	anim_incobj 2
+	anim_incobj 3
+	anim_incobj 4
+	anim_incobj 5
+	anim_incobj 6
+	anim_incobj 7
+	anim_incobj 8
+	anim_wait 96
+	anim_incbgeffect BATTLE_BG_EFFECT_WHIRLPOOL
 	anim_ret
 
 BattleAnim_InvertScreenColoursSub:
