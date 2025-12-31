@@ -1,9 +1,11 @@
-; List of all Pokemon that levitate above ground
-; can't be hit by ground moves
-; ensure this table and the levitating mons in
-; data/residual_damage/spike_immune_mons.asm matches up!
+; List of all Pokemon that are immune to Spike damage on switch
+; consists of all levitating and magic guard mons
+; ensure both lists are in this list
 
-LevitatePokemon::
+; Levitating Pokemon list: data/abilities/ability_mons/levitate_mons.asm
+
+SpikesImmunePokemon:
+; 26 levitating pokemon
 	db CHARIZARD
 	db BEAUTIFLY
 	db DUSTOX
@@ -30,4 +32,6 @@ LevitatePokemon::
 	db VICTINI
 	db CELEBI
 	db MEW
-	db -1 ; end
+
+; magic guard pokemon
+    db -1 ; end

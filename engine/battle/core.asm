@@ -3723,12 +3723,27 @@ SpikesDamage:
 	cp FLYING
 	ret z
 
+	push hl
+	push de
+	push bc
+	call GetCurrentMon
+	ld hl, SpikesImmunePokemon
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	ret c
+
 	push bc
 	push hl
 	push de
 
+	call CheckIfFastBattlesIsOn
+	jr nz, .skip_spikes_text
+
 	ld hl, BattleText_UserHurtBySpikes ; "hurt by SPIKES!"
 	call StdBattleTextbox
+.skip_spikes_text
 
 	call GetEighthMaxHP
 	call SubtractHPFromTarget
@@ -3868,6 +3883,8 @@ SpikesDamage:
 	pop hl
 	pop bc
 	ret
+
+INCLUDE "data/residual_damage/spike_immune_mons.asm"
 
 PursuitSwitch:
 	ld a, BATTLE_VARS_MOVE
