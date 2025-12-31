@@ -8,6 +8,7 @@ CheckBoostingAbilities:
 	call HandleThickFat
 	call HandleSolarPowerBoost
 	call HandleSteelWorker
+	call HandleIronFist
 	ret
 
 HandleGuts:
@@ -155,6 +156,22 @@ HandleSteelWorker:
 
 INCLUDE "data/abilities/steel_worker_mons.asm"
 
+HandleIronFist:
+	call GetCurrentMon
+	ld hl, IronFistPokemon
+	call IsInByteArray
+	ret nc
+
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	ld hl, PunchingMoves
+	call IsInByteArray
+	ret nc
+
+	jr ThirtyPercentBoost
+
+INCLUDE "data/abilities/iron_fist_mons.asm"
+
 FiftyPercentNerf:
 	ld a, 50
 	ldh [hMultiplier], a
@@ -200,3 +217,13 @@ FinishBoost:
 	ldh [hDivisor], a
 	ld b, 4
 	jmp Divide
+
+PunchingMoves:
+	db FIRE_PUNCH
+	db ICE_PUNCH
+	db THUNDERPUNCH
+	db DRAIN_PUNCH
+	db BULLET_PUNCH
+	db MACH_PUNCH
+	db SHADOW_PUNCH
+	db -1 ; end
