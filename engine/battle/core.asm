@@ -675,11 +675,11 @@ DetermineMoveOrder:
 	and a
 	ret
 
-INCLUDE "data/abilities/ability_mons/quick_draw_mons.asm"
-INCLUDE "data/abilities/ability_mons/swift_swim_mons.asm"
-INCLUDE "data/abilities/ability_mons/chlorophyll_mons.asm"
-INCLUDE "data/abilities/ability_mons/sand_rush_mons.asm"
-INCLUDE "data/abilities/ability_mons/slush_rush_mons.asm"
+INCLUDE "data/abilities/quick_draw_mons.asm"
+INCLUDE "data/abilities/swift_swim_mons.asm"
+INCLUDE "data/abilities/chlorophyll_mons.asm"
+INCLUDE "data/abilities/sand_rush_mons.asm"
+INCLUDE "data/abilities/slush_rush_mons.asm"
 
 CheckContestBattleOver:
 	ld a, [wBattleType]
@@ -1249,7 +1249,7 @@ ResidualDamage:
 	xor a
 	ret
 
-INCLUDE "data/abilities/ability_mons/bad_dreams_mons.asm"
+INCLUDE "data/abilities/bad_dreams_mons.asm"
 
 HandlePerishSong:
 	ldh a, [hSerialConnectionStatus]
@@ -3957,7 +3957,7 @@ SpikesDamage:
 	ret
 
 INCLUDE "data/residual_damage/spike_immune_mons.asm"
-INCLUDE "data/abilities/ability_mons/magic_guard_mons.asm"
+INCLUDE "data/abilities/magic_guard_mons.asm"
 
 PursuitSwitch:
 	ld a, BATTLE_VARS_MOVE
@@ -8877,4 +8877,4 @@ Aftermath:
 	call GetQuarterMaxHP
 	jmp SubtractHPFromUser
 
-INCLUDE "data/abilities/ability_mons/aftermath_mons.asm"
+INCLUDE "data/abilities/aftermath_mons.asm"

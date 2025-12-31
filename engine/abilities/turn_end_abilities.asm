@@ -49,7 +49,7 @@ DoMolting:
 	ld hl, MoltingText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/ability_mons/molting_mons.asm"
+INCLUDE "data/abilities/molting_mons.asm"
 
 HandleRegenerator:
 	ldh a, [hSerialConnectionStatus]
@@ -102,7 +102,7 @@ HandleRegenerator:
 	ld hl, BattleText_TargetRegenerates
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/ability_mons/regenerator_mons.asm"
+INCLUDE "data/abilities/regenerator_mons.asm"
 
 HandleSpeedBoost:
 	ldh a, [hSerialConnectionStatus]
@@ -129,7 +129,7 @@ HandleSpeedBoost:
 	farcall BattleCommand_StatUp
 	farjp BattleCommand_StatUpMessage
 
-INCLUDE "data/abilities/ability_mons/speed_boost_mons.asm"
+INCLUDE "data/abilities/speed_boost_mons.asm"
 
 HandleHydration:
 	ldh a, [hSerialConnectionStatus]
@@ -175,7 +175,7 @@ DoHydration:
 	ld hl, HydrationText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/ability_mons/hydration_mons.asm"
+INCLUDE "data/abilities/hydration_mons.asm"
 
 HandleIceBody:
 	call SetEnemyTurn
@@ -220,7 +220,7 @@ HandleIceBody:
 	ld hl, IceBodyText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/ability_mons/ice_body_mons.asm"
+INCLUDE "data/abilities/ice_body_mons.asm"
 
 HandleRainDish:
 	call SetEnemyTurn
@@ -265,7 +265,7 @@ HandleRainDish:
 	ld hl, RainDishText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/ability_mons/rain_dish_mons.asm"
+INCLUDE "data/abilities/rain_dish_mons.asm"
 
 ; handle boosted attack in engine/abilities/boosting_abilities.asm
 HandleSolarPowerHPLoss:

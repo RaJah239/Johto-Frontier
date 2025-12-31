@@ -25,7 +25,7 @@ HandleGuts:
 	ret nc
 	jmp FiftyPercentBoost
 
-INCLUDE "data/abilities/ability_mons/guts_mons.asm"
+INCLUDE "data/abilities/guts_mons.asm"
 
 HandleRivalry:
 	call GetCurrentMon
@@ -38,7 +38,7 @@ HandleRivalry:
 	jmp z, TwentyFivePercentBoost
 	jmp TwentyFivePercentNerf
 
-INCLUDE "data/abilities/ability_mons/rivalry_mons.asm"
+INCLUDE "data/abilities/rivalry_mons.asm"
 
 HandleSandForce:
 	call GetCurrentMon
@@ -63,7 +63,7 @@ HandleSandForce:
 .SandForceBoost:
 	jmp ThirtyPercentBoost
 
-INCLUDE "data/abilities/ability_mons/sand_force_mons.asm"
+INCLUDE "data/abilities/sand_force_mons.asm"
 
 HandleTechnician:
 	call GetCurrentMon
@@ -77,7 +77,7 @@ HandleTechnician:
 	ret nc           ; power >= 61, no boost
 	jmp FiftyPercentBoost
 
-INCLUDE "data/abilities/ability_mons/technician_mons.asm"
+INCLUDE "data/abilities/technician_mons.asm"
 
 HandleHugePower:
 	call GetCurrentMon
@@ -87,7 +87,7 @@ HandleHugePower:
 
 	jmp HundredPercentBoost
 
-INCLUDE "data/abilities/ability_mons/huge_power_mons.asm"
+INCLUDE "data/abilities/huge_power_mons.asm"
 
 HandleMultiscale:
 	call GetOpposingMon
@@ -99,7 +99,7 @@ HandleMultiscale:
 	ret nz
 	jr FiftyPercentNerf
 
-INCLUDE "data/abilities/ability_mons/multiscale_mons.asm"
+INCLUDE "data/abilities/multiscale_mons.asm"
 
 HandleThickFat:
 	call GetOpposingMon
@@ -116,7 +116,7 @@ HandleThickFat:
 	ret nz
 	jr FiftyPercentNerf
 
-INCLUDE "data/abilities/ability_mons/thick_fat_mons.asm"
+INCLUDE "data/abilities/thick_fat_mons.asm"
 
 ; handle the HP loss in engine/abilities/turn_end_abilities.asm 
 HandleSolarPowerBoost:
@@ -137,7 +137,7 @@ HandleSolarPowerBoost:
 	ret c
 	jr FiftyPercentBoost
 
-INCLUDE "data/abilities/ability_mons/solar_power_mons.asm"
+INCLUDE "data/abilities/solar_power_mons.asm"
 
 FiftyPercentNerf:
 	ld a, 50

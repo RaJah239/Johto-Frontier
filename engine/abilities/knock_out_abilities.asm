@@ -89,9 +89,9 @@ FlashStepText:
 	line "Speed went up!"
 	prompt
 
-INCLUDE "data/abilities/ability_mons/moxie_mons.asm"
-INCLUDE "data/abilities/ability_mons/ignis_mons.asm"
-INCLUDE "data/abilities/ability_mons/flash_step_mons.asm"
+INCLUDE "data/abilities/moxie_mons.asm"
+INCLUDE "data/abilities/ignis_mons.asm"
+INCLUDE "data/abilities/flash_step_mons.asm"
 
 PlayBoostAnimation:
 	; fast battles skip this animation

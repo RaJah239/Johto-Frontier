@@ -66,7 +66,7 @@ HandleWaterAbsorb:
 	call StdBattleTextbox
 	jr AttackedMissed
 
-INCLUDE "data/abilities/ability_mons/water_absorb_mons.asm"
+INCLUDE "data/abilities/water_absorb_mons.asm"
 
 HandleFireAbsorb:
     ldh a, [hBattleTurn]
@@ -99,7 +99,7 @@ HandleFireAbsorb:
 	call StdBattleTextbox
 	jr AttackedMissed
 
-INCLUDE "data/abilities/ability_mons/fire_absorb_mons.asm"
+INCLUDE "data/abilities/fire_absorb_mons.asm"
 
 HandleVoltAbsorb:
     ldh a, [hBattleTurn]
@@ -132,7 +132,7 @@ HandleVoltAbsorb:
 	call StdBattleTextbox
 	jr AttackedMissed
 
-INCLUDE "data/abilities/ability_mons/volt_absorb_mons.asm"
+INCLUDE "data/abilities/volt_absorb_mons.asm"
 
 AttackedMissed:
 	ld a, 1

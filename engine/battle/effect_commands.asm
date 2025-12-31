@@ -997,8 +997,8 @@ BattleCommand_Critical:
 INCLUDE "data/moves/critical_hit_moves.asm"
 
 INCLUDE "data/battle/critical_hit_chances.asm"
-INCLUDE "data/abilities/ability_mons/slash_crits_mons.asm"
-INCLUDE "data/abilities/ability_mons/super_luck_mons.asm"
+INCLUDE "data/abilities/slash_crits_mons.asm"
+INCLUDE "data/abilities/super_luck_mons.asm"
 
 GetNextTypeMatchupsByte:
    ld a, BANK(TypeMatchups)
@@ -1701,10 +1701,10 @@ BattleCommand_CheckHit:
 	ld [hl], a
 	ret
 
-INCLUDE "data/abilities/ability_mons/true_horn_mons.asm"
+INCLUDE "data/abilities/true_horn_mons.asm"
 INCLUDE "data/battle/accuracy_multipliers.asm"
-INCLUDE "data/abilities/ability_mons/sand_veil_mons.asm"
-INCLUDE "data/abilities/ability_mons/compound_eyes_mons.asm"
+INCLUDE "data/abilities/sand_veil_mons.asm"
+INCLUDE "data/abilities/compound_eyes_mons.asm"
 
 BattleCommand_EffectChance:
 	xor a
@@ -1756,7 +1756,7 @@ BattleCommand_EffectChance:
 	and a
 	ret
 
-INCLUDE "data/abilities/ability_mons/serene_grace_mons.asm"
+INCLUDE "data/abilities/serene_grace_mons.asm"
 
 BattleCommand_LowerSub:
 	ld a, BATTLE_VARS_SUBSTATUS4
@@ -2102,7 +2102,7 @@ BattleCommand_ApplyDamage:
 	ld [de], a
 	ret
 
-INCLUDE "data/abilities/ability_mons/sturdy_mons.asm"
+INCLUDE "data/abilities/sturdy_mons.asm"
 
 GetFailureResultText:
 	ld hl, DoesntAffectText
@@ -3276,7 +3276,7 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 
 	ret
 
-INCLUDE "data/abilities/ability_mons/sniper_mons.asm"
+INCLUDE "data/abilities/sniper_mons.asm"
 INCLUDE "data/types/type_boost_items.asm"
 
 BattleCommand_ConstantDamage:
@@ -4190,8 +4190,8 @@ BattleCommand_ParalyzeTarget:
 	ld hl, UseHeldStatusHealingItem
 	jmp CallBattleCore
 
-INCLUDE "data/abilities/ability_mons/sure_shock_mons.asm"
-INCLUDE "data/abilities/ability_mons/serenity_mons.asm"
+INCLUDE "data/abilities/sure_shock_mons.asm"
+INCLUDE "data/abilities/serenity_mons.asm"
 
 BattleCommand_AttackUp:
 	ld b, ATTACK
@@ -4555,7 +4555,7 @@ BattleCommand_StatDown:
 	ld [wAttackMissed], a
 	ret
 
-INCLUDE "data/abilities/ability_mons/clear_body_mons.asm"
+INCLUDE "data/abilities/clear_body_mons.asm"
 
 CheckMist:
 	ld a, BATTLE_VARS_MOVE_EFFECT
@@ -5085,7 +5085,7 @@ BattleCommand_Rampage:
 	ld [wSomeoneIsRampaging], a
 	ret
 
-INCLUDE "data/abilities/ability_mons/feral_focus_mons.asm"
+INCLUDE "data/abilities/feral_focus_mons.asm"
 INCLUDE "engine/battle/move_effects/teleport.asm"
 
 SetBattleDraw:
@@ -5465,7 +5465,7 @@ BattleCommand_FlinchTarget:
 	ld hl, InnerFocusText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/ability_mons/inner_focus_mons.asm"
+INCLUDE "data/abilities/inner_focus_mons.asm"
 
 FlinchTarget:
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
@@ -5793,7 +5793,7 @@ BattleCommand_Recoil:
 	ld hl, RecoilText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/ability_mons/rock_head_mons.asm"
+INCLUDE "data/abilities/rock_head_mons.asm"
 
 BattleCommand_ConfuseTarget:
 ; ===========================================
@@ -5965,7 +5965,7 @@ BattleCommand_RechargeNextTurn:
 	set SUBSTATUS_RECHARGE, [hl]
 	ret
 
-INCLUDE "data/abilities/ability_mons/overdrive_mons.asm"
+INCLUDE "data/abilities/overdrive_mons.asm"
 
 EndRechargeOpp:
 	push hl
