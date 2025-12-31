@@ -155,6 +155,25 @@ RunBattleAnimScript:
 	jr nz, .find
 
 .not_rollout
+; Slow down Dark Pulse's animation.
+	ld a, [wFXAnimID + 1]
+	if HIGH(DARK_PULSE)
+		cp HIGH(DARK_PULSE)
+	else
+		or a
+	endc
+	jr nz, .not_dark_pulse
+
+	ld a, [wFXAnimID]
+	cp LOW(DARK_PULSE)
+	jr nz, .not_dark_pulse
+	ld a, [wBattleAnimParam]
+	and 1
+	xor 1
+	ld [wBattleAnimParam], a
+	call nz, DelayFrame
+
+.not_dark_pulse
 	call DelayFrame
 
 .done
