@@ -33,5 +33,7 @@ SpikesImmunePokemon:
 	db CELEBI
 	db MEW
 
-; magic guard pokemon
-    db -1 ; end
+; 2 magic guard pokemon
+	db CLEFAIRY
+	db CLEFABLE
+	db -1 ; end

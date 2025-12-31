@@ -1078,6 +1078,12 @@ CheckIfHPIsZero:
 	ret
 
 ResidualDamage:
+; magic guard pokemon take no residual damage
+    call GetCurrentMon
+	ld hl, MagicGuardPokemon
+	call IsInByteArray
+	jmp c, .check_fainted
+
 ; Return z if the user fainted before
 ; or as a result of residual damage.
 ; For Sandstorm damage, see HandleWeather.
@@ -1210,6 +1216,12 @@ ResidualDamage:
 	call GetBattleVarAddr
 	bit SUBSTATUS_CURSE, [hl]
 	jr z, .not_cursed
+
+; magic guard pokemon take no residual curse damage
+    call GetCurrentMon
+	ld hl, MagicGuardPokemon
+	call IsInByteArray
+	jr c, .not_cursed
 
 	xor a
 	ld [wNumHits], a
@@ -1422,6 +1434,12 @@ HandleWeather:
 	call SetPlayerTurn
 
 .SandstormDamage:
+; magic guard pokemon take no residual damage
+	call GetCurrentMon
+	ld hl, MagicGuardPokemon
+	call IsInByteArray
+	ret c
+
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVar
 	bit SUBSTATUS_UNDERGROUND, a
@@ -3754,13 +3772,28 @@ SpikesDamage:
 	bit SCREENS_STEALTH_ROCK, [hl]
 	ret z
 
+	push hl
+	push de
+	push bc
+	call GetCurrentMon
+	ld hl, MagicGuardPokemon
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	ret c
+
 	push bc
 	push hl
 	push de
 
+	call CheckIfFastBattlesIsOn
+	jr nz, .skip_stealth_rock_text
+
 	ld hl, BattleText_UserHurtByStealthRock
 	call StdBattleTextbox
 
+.skip_stealth_rock_text
     pop de
     ld h, d
 	ld l, e
@@ -3885,6 +3918,7 @@ SpikesDamage:
 	ret
 
 INCLUDE "data/residual_damage/spike_immune_mons.asm"
+INCLUDE "data/abilities/ability_mons/magic_guard_mons.asm"
 
 PursuitSwitch:
 	ld a, BATTLE_VARS_MOVE
