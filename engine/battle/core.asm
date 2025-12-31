@@ -3857,7 +3857,7 @@ SpikesDamage:
 
 ; Toxic Spikes can't poison a Safeguarded target
 	farcall SafeCheckSafeguard
-	jr nz, .pop
+	jmp nz, .pop
 
 ; ====================================
 ; === Ability: Serenity - Pokemon List
@@ -3915,6 +3915,18 @@ SpikesDamage:
 ; End if there isn't a Sticky Web down.
 	bit SCREENS_STICKY_WEB, [hl]
 	ret z
+
+; sticky web does not affect levitating pokemon
+	push hl
+	push de
+	push bc
+	call GetCurrentMon
+	ld hl, LevitatePokemon
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	ret c
 
 ; Flying-types aren't affected by Sticky Web.
 	ld a, [de]
