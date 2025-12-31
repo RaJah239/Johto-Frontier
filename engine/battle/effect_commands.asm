@@ -865,6 +865,14 @@ BattleCommand_Critical:
 	xor a
 	ld [wCriticalHit], a
 
+; =============================
+; === Ability: Battle Armor === 
+; =============================
+	call GetOpposingMon
+	ld hl, BattleArmorPokemon
+	call IsInByteArray
+	ret c
+
 	ld a, BATTLE_VARS_MOVE_POWER
 	call GetBattleVar
 	and a
@@ -995,7 +1003,7 @@ BattleCommand_Critical:
 	ret
 
 INCLUDE "data/moves/critical_hit_moves.asm"
-
+INCLUDE "data/abilities/battle_armor_mons.asm"
 INCLUDE "data/battle/critical_hit_chances.asm"
 INCLUDE "data/abilities/slash_crits_mons.asm"
 INCLUDE "data/abilities/super_luck_mons.asm"
