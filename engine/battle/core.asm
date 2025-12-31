@@ -3822,6 +3822,17 @@ SpikesDamage:
 	bit SCREENS_TOXIC_SPIKES, [hl]
 	ret z
 
+	push hl
+	push de
+	push bc
+	call GetCurrentMon
+	ld hl, LevitatePokemon
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	ret c
+
 ; Toxic Spikes can't poison a Flying-, Steel-, or Poison-type
 	ld a, [de]
 	cp FLYING
@@ -3848,6 +3859,17 @@ SpikesDamage:
 	farcall SafeCheckSafeguard
 	jr nz, .pop
 
+; ====================================
+; === Ability: Serenity - Pokemon List
+; ====================================
+	call GetCurrentMon
+	cp MEGANIUM
+	jr z, .pop
+	cp SYLVEON
+	jr z, .pop
+	cp MEW
+	jr z, .pop
+
 ; Toxic Spikes can't poison a Pokemon that already has a status condition
 	ld a, BATTLE_VARS_STATUS
 	call GetBattleVarAddr
@@ -3860,10 +3882,15 @@ SpikesDamage:
 	call Call_PlayBattleAnim
 	call RefreshBattleHuds
 
+	call CheckIfFastBattlesIsOn
+	jr nz, .skip_toxic_spikes_text
+
 	ld hl, WasPoisonedText
 	call SwitchTurnCore
 	call StdBattleTextbox
 	call SwitchTurnCore
+
+.skip_toxic_spikes_text
 	jr .pop
 
 .AbsorbToxicSpikes:
