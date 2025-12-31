@@ -7,6 +7,7 @@ CheckBoostingAbilities:
 	call HandleMultiscale
 	call HandleThickFat
 	call HandleSolarPowerBoost
+	call HandleSteelWorker
 	ret
 
 HandleGuts:
@@ -138,6 +139,21 @@ HandleSolarPowerBoost:
 	jr FiftyPercentBoost
 
 INCLUDE "data/abilities/solar_power_mons.asm"
+
+HandleSteelWorker:
+	call GetCurrentMon
+	ld hl, SteelWorkerPokemon
+	call IsInByteArray
+	ret nc
+
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	and TYPE_MASK
+	cp STEEL
+	ret nz
+	jr FiftyPercentBoost
+
+INCLUDE "data/abilities/steel_worker_mons.asm"
 
 FiftyPercentNerf:
 	ld a, 50
