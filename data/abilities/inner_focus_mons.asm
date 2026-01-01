@@ -2,7 +2,7 @@
 
 InnerFocusPokemon:
     db ZUBAT
-    db GOLD_BERRY
+    db GOLBAT
     db CROBAT
     db SNEASEL
     db WEAVILE
