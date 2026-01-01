@@ -585,7 +585,7 @@ DetermineMoveOrder:
 .SimulateEnemyQuickDrawDoubleSpeed
 	call Random
 	cp 33 percent + 1
-	ret nc ; 1/3 chance
+	jr c, .continue ; 1/3 chance
 
 	call ItemRecoveryAnim
 	ld hl, BattleText_QuickDrawFoe
@@ -611,7 +611,7 @@ DetermineMoveOrder:
 .SimulatePlayerQuickDrawDoubleSpeed
 	call Random
 	cp 33 percent + 1
-	ret nc ; 1/3 chance
+	jr c, .continue ; 1/3 chance
 
 	call SwitchCoreItemRecoveryAnim
 	ld hl, BattleText_QuickDrawPlayer
