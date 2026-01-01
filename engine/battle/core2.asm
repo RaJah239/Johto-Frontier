@@ -348,7 +348,7 @@ ShouldIgniteFlameOrb:
 	and a
 	jr nz, .no
 
-    ldh a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, .playerTurn
 	ld a, [wEnemyMonType1]
@@ -364,22 +364,24 @@ ShouldIgniteFlameOrb:
 	ld c, a
 	ld a, [wBattleMonSpecies]
 .checkDetails
-;	cp SYLVEON
-;	jr z, .no
-;   cp MEW
-;   jr z, .no
-    ld a, b
-    cp FIRE
-    jr z, .no
-    ld a, c
-    cp FIRE
-    jr z, .no
+	cp MEGANIUM
+	jr z, .no
+	cp SYLVEON
+	jr z, .no
+	cp MEW
+	jr z, .no
+	ld a, b
+	cp FIRE
+	jr z, .no
+	ld a, c
+	cp FIRE
+	jr z, .no
 .yes
-    scf
-    ret
+	scf
+	ret
 .no
-    xor a
-    ret
+	xor a
+	ret
 
 XAccuracy:
 	ld a, BATTLE_VARS_SUBSTATUS4
