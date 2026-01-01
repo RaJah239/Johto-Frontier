@@ -1,7 +1,7 @@
 ; List of all Pokemon that are immune to all status problems:
 ; paralysis, burn (including flame orb), frostbite,
 ; poison (including toxic spikes & toxic orb if added),
-; sleep and confusion
+; sleep (including rest) and confusion
 
 ; Note: This list must match engine/battle/core.asm
 
