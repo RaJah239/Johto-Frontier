@@ -2351,9 +2351,6 @@ BattleCommand_CheckFaint:
 	jr EndMoveEffect
 
 BattleCommand_BuildOpponentRage:
-	jr .start
-
-.start
 	ld a, [wAttackMissed]
 	and a
 	ret nz
