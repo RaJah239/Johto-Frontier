@@ -3857,7 +3857,7 @@ SpikesDamage:
 
 ; Toxic Spikes can't poison a Safeguarded target
 	farcall SafeCheckSafeguard
-	jmp nz, .pop
+	jr nz, .pop
 
 ; ====================================
 ; === Ability: Serenity - Pokemon List
@@ -3942,12 +3942,12 @@ SpikesDamage:
 	push hl
 	push de
 
-	ld de, ANIM_ENEMY_STAT_DOWN
-	call SwitchTurnCore
+	ld de, ANIM_STAT_DOWN
 	call Call_PlayBattleAnim
-	farcall BattleCommand_SpeedDown
-	farcall BattleCommand_StatDownMessage
 	call SwitchTurnCore
+	farcall BattleCommand_SpeedDown
+	ld hl, TargetsSpeedFellText
+	call StdBattleTextbox
 	; fallthrough
 
 .pop

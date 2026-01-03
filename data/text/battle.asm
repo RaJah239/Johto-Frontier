@@ -10,6 +10,11 @@ BattleText_TargetRegenerates:
 	line "regenerates."
 	prompt
 
+TargetsSpeedFellText:
+	text "<TARGET>'s"
+	line "Speed fell!"
+	prompt
+
 SolarPowerText:
 	text "<USER> is"
 	line "hurt by its"

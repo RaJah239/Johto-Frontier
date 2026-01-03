@@ -359,9 +359,7 @@ HandleIntimidate:
 	ld de, LEER
 	farcall Call_PlayBattleAnim
 
-	; play stat down animation
-	ld de, ANIM_ENEMY_STAT_DOWN
-	farcall Call_PlayBattleAnim
+	farcall BattleCommand_StatDownMessage
 
 	farcall BattleCommand_AttackDown
 	ld hl, IntimidateText
