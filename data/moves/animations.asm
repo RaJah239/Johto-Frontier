@@ -5179,13 +5179,3 @@ BattleAnimSub_SpeedLines:
 ;	anim_incbgeffect BATTLE_BG_EFFECT_WITHDRAW
 ;	anim_call BattleAnim_ShowMon_0
 ;	anim_ret
-
-;BattleAnim_Bonemerang:
-;	anim_2gfx BATTLE_ANIM_GFX_MISC, BATTLE_ANIM_GFX_HIT
-;	anim_sound 6, 2, SFX_HYDRO_PUMP
-;	anim_obj BATTLE_ANIM_OBJ_BONEMERANG, 88, 56, $1c
-;	anim_wait 24
-;	anim_sound 0, 1, SFX_MOVE_PUZZLE_PIECE
-;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
-;	anim_wait 24
-;	anim_ret

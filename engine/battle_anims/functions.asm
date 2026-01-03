@@ -62,7 +62,6 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_Needle
 	dw BattleAnimFunc_ThiefPayday
 	dw BattleAnimFunc_AbsorbCircle
-	dw BattleAnimFunc_Bonemerang
 	dw BattleAnimFunc_Shiny
 	dw BattleAnimFunc_SkyAttack
 	dw BattleAnimFunc_GrowthSwordsDance
@@ -3231,48 +3230,6 @@ BattleAnimFunc_Conversion:
 	and a
 	ret nz
 	call DeinitBattleAnimation
-	ret
-
-BattleAnimFunc_Bonemerang:
-; Boomerang-like movement from user to target
-; Obj Param: Defines position to start at in the circle
-	call BattleAnim_AnonJumptable
-.anon_dw
-	dw .zero
-	dw .one
-
-.zero:
-	call BattleAnim_IncAnonJumptableIndex
-	ld hl, BATTLEANIMSTRUCT_YCOORD
-	add hl, bc
-	ld a, [hl]
-	ld hl, BATTLEANIMSTRUCT_VAR2
-	add hl, bc
-	ld [hl], a
-.one:
-	ld hl, BATTLEANIMSTRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	ld d, $30
-	call BattleAnim_Sine
-	ld hl, BATTLEANIMSTRUCT_VAR2
-	add hl, bc
-	add [hl]
-	ld hl, BATTLEANIMSTRUCT_YCOORD
-	add hl, bc
-	ld [hl], a
-	ld hl, BATTLEANIMSTRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	add $8
-	ld d, $30
-	call BattleAnim_Cosine
-	ld hl, BATTLEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
-	ld hl, BATTLEANIMSTRUCT_PARAM
-	add hl, bc
-	inc [hl]
 	ret
 
 BattleAnimFunc_Shiny:
