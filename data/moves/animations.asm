@@ -5248,29 +5248,6 @@ BattleAnimSub_SpeedLines:
 ;	anim_wait 16
 ;	anim_ret
 
-;BattleAnim_Reversal:
-;	anim_2gfx BATTLE_ANIM_GFX_SHINE, BATTLE_ANIM_GFX_HIT
-;	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $0, $0
-;	anim_sound 0, 1, SFX_MEGA_PUNCH
-;	anim_obj BATTLE_ANIM_OBJ_HIT, 112, 64, $0
-;	anim_wait 2
-;	anim_sound 0, 1, SFX_SHINE
-;	anim_obj BATTLE_ANIM_OBJ_FORESIGHT, 120, 56, $0
-;	anim_wait 2
-;	anim_sound 0, 1, SFX_MEGA_PUNCH
-;	anim_obj BATTLE_ANIM_OBJ_HIT, 128, 56, $0
-;	anim_wait 2
-;	anim_sound 0, 1, SFX_SHINE
-;	anim_obj BATTLE_ANIM_OBJ_FORESIGHT, 136, 48, $0
-;	anim_wait 2
-;	anim_sound 0, 1, SFX_MEGA_PUNCH
-;	anim_obj BATTLE_ANIM_OBJ_HIT, 144, 48, $0
-;	anim_wait 2
-;	anim_sound 0, 1, SFX_SHINE
-;	anim_obj BATTLE_ANIM_OBJ_FORESIGHT, 152, 40, $0
-;	anim_wait 24
-;	anim_ret
-
 ;BattleAnim_Constrict:
 ;	anim_1gfx BATTLE_ANIM_GFX_ROPE
 ;	anim_sound 0, 1, SFX_BIND
