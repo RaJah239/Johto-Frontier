@@ -276,8 +276,6 @@ BattleAnimations::
 	dw BattleAnim_InWhirlpool
 	dw BattleAnim_Miss
 	dw BattleAnim_EnemyDamage
-	dw BattleAnim_EnemyStatDown
-	dw BattleAnim_PlayerStatDown
 	dw BattleAnim_PlayerDamage
 	dw BattleAnim_Wobble
 	dw BattleAnim_Shake
@@ -652,18 +650,6 @@ BattleAnim_EnemyDamage:
 	anim_wait 5
 	anim_loop 3, .loop
 	anim_ret
-
-BattleAnim_EnemyStatDown:
-	anim_call BattleAnim_UserObj_1Row
-	anim_bgeffect BATTLE_BG_EFFECT_VIBRATE_MON, $0, BG_EFFECT_TARGET, $0
-	anim_wait 40
-	anim_jump BattleAnim_ShowMon_1
-
-BattleAnim_PlayerStatDown:
-	anim_call BattleAnim_UserObj_1Row
-	anim_bgeffect BATTLE_BG_EFFECT_WOBBLE_PLAYER, $0, $0, $0
-	anim_wait 40
-	anim_jump BattleAnim_ShowMon_1
 
 BattleAnim_PlayerDamage:
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_Y, $20, $2, $20

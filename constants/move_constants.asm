@@ -281,8 +281,6 @@ DEF NUM_ATTACKS EQU const_value - 1
 ; battle anims
 	const ANIM_MISS              ; 10e
 	const ANIM_ENEMY_DAMAGE      ; 10f
-	const ANIM_ENEMY_STAT_DOWN   ; 110
-	const ANIM_PLAYER_STAT_DOWN  ; 111
 	const ANIM_PLAYER_DAMAGE     ; 112
 	const ANIM_WOBBLE            ; 113
 	const ANIM_SHAKE             ; 114
@@ -296,8 +294,6 @@ DEF NUM_BATTLE_ANIMS EQU const_value - 1
 	const_def
 	const BATTLEANIM_NONE
 	const BATTLEANIM_ENEMY_DAMAGE
-	const BATTLEANIM_ENEMY_STAT_DOWN
-	const BATTLEANIM_PLAYER_STAT_DOWN
 	const BATTLEANIM_PLAYER_DAMAGE
 	const BATTLEANIM_WOBBLE ; unused
 	const BATTLEANIM_SHAKE
