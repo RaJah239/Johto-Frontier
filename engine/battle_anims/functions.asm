@@ -97,6 +97,7 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_IceSplash
 	dw BattleAnimFunc_RockTomb
 	dw BattleAnimFunction_55
+	dw BattleAnimFunc_StraightDescent
 	assert_table_length NUM_BATTLE_ANIM_FUNCS
 
 BattleAnimFunc_Null:
@@ -4370,3 +4371,20 @@ BattleAnimFunction_55:
 	add hl, bc
 	ld a, [hl]
 	jmp BattleAnim_StepCircle
+
+BattleAnimFunc_StraightDescent:
+; Reverse 1E
+	ld hl, BATTLEANIMSTRUCT_YOFFSET
+	add hl, bc
+	ld a, [hl]
+	cp $28
+	jp nc, DeinitBattleAnimation
+	ld hl, BATTLEANIMSTRUCT_PARAM
+	add hl, bc
+	ld d, [hl]
+	ld hl, BATTLEANIMSTRUCT_YOFFSET
+	add hl, bc
+	ld a, [hl]
+	add d
+	ld [hl], a
+	ret

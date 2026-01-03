@@ -209,4 +209,6 @@
 	const SFX_4_NOTE_DITTY                ; cd
 	const SFX_TWINKLE                     ; ce
 	const SFX_THUNDERBOLT                 ; cf
+	const SFX_STAT_UP                     ; d0
+	const SFX_STAT_DOWN                   ; d1
 DEF NUM_SFX EQU const_value
