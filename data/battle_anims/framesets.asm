@@ -142,10 +142,6 @@ BattleAnimFrameData:
 	dw .Frameset_AngerVein           ; BATTLE_ANIM_FRAMESET_ANGER_VEIN
 	dw .Frameset_HealBell            ; BATTLE_ANIM_FRAMESET_HEAL_BELL
 	dw .Frameset_BatonPass           ; BATTLE_ANIM_FRAMESET_BATON_PASS
-	dw .Frameset_LockOn1             ; BATTLE_ANIM_FRAMESET_LOCK_ON_1
-	dw .Frameset_LockOn2             ; BATTLE_ANIM_FRAMESET_LOCK_ON_2
-	dw .Frameset_LockOn3             ; BATTLE_ANIM_FRAMESET_LOCK_ON_3
-	dw .Frameset_LockOn4             ; BATTLE_ANIM_FRAMESET_LOCK_ON_4
 	dw .Frameset_MindReader1         ; BATTLE_ANIM_FRAMESET_MIND_READER_1
 	dw .Frameset_MindReader2         ; BATTLE_ANIM_FRAMESET_MIND_READER_2
 	dw .Frameset_MindReader3         ; BATTLE_ANIM_FRAMESET_MIND_READER_3
@@ -1048,22 +1044,6 @@ BattleAnimFrameData:
 
 .Frameset_BatonPass:
 	oamframe BATTLE_ANIM_OAMSET_B2,  8
-	oamend
-
-.Frameset_LockOn1:
-	oamframe BATTLE_ANIM_OAMSET_B3,  8
-	oamend
-
-.Frameset_LockOn2:
-	oamframe BATTLE_ANIM_OAMSET_B3,  8, OAM_X_FLIP
-	oamend
-
-.Frameset_LockOn3:
-	oamframe BATTLE_ANIM_OAMSET_B3,  8, OAM_Y_FLIP
-	oamend
-
-.Frameset_LockOn4:
-	oamframe BATTLE_ANIM_OAMSET_B3,  8, OAM_X_FLIP, OAM_Y_FLIP
 	oamend
 
 .Frameset_MindReader1:

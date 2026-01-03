@@ -161,7 +161,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_HEAL_BELL           ; 84
 	const BATTLE_ANIM_OBJ_HEAL_BELL_NOTE      ; 85
 	const BATTLE_ANIM_OBJ_BATON_PASS          ; 86
-	const BATTLE_ANIM_OBJ_LOCK_ON             ; 87
 	const BATTLE_ANIM_OBJ_MIND_READER         ; 88
 	const BATTLE_ANIM_OBJ_SAFEGUARD           ; 89
 	const BATTLE_ANIM_OBJ_PROTECT             ; 8a
@@ -475,10 +474,6 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_ANGER_VEIN            ; 8c
 	const BATTLE_ANIM_FRAMESET_HEAL_BELL             ; 8d
 	const BATTLE_ANIM_FRAMESET_BATON_PASS            ; 8e
-	const BATTLE_ANIM_FRAMESET_LOCK_ON_1             ; 8f
-	const BATTLE_ANIM_FRAMESET_LOCK_ON_2             ; 90
-	const BATTLE_ANIM_FRAMESET_LOCK_ON_3             ; 91
-	const BATTLE_ANIM_FRAMESET_LOCK_ON_4             ; 92
 	const BATTLE_ANIM_FRAMESET_MIND_READER_1         ; 93
 	const BATTLE_ANIM_FRAMESET_MIND_READER_2         ; 94
 	const BATTLE_ANIM_FRAMESET_MIND_READER_3         ; 95

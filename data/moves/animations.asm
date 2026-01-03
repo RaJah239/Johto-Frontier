@@ -5190,19 +5190,6 @@ BattleAnimSub_SpeedLines:
 ;	anim_wait 24
 ;	anim_ret
 
-;BattleAnim_LockOn:
-;	anim_1gfx BATTLE_ANIM_GFX_MISC
-;	anim_sound 0, 1, SFX_MIND_READER
-;.loop
-;	anim_obj BATTLE_ANIM_OBJ_LOCK_ON, 132, 48, $3
-;	anim_obj BATTLE_ANIM_OBJ_LOCK_ON, 132, 48, $12
-;	anim_obj BATTLE_ANIM_OBJ_LOCK_ON, 132, 48, $20
-;	anim_obj BATTLE_ANIM_OBJ_LOCK_ON, 132, 48, $31
-;	anim_wait 16
-;	anim_loop 2, .loop
-;	anim_wait 32
-;	anim_ret
-
 ;BattleAnim_VitalThrow:
 ;	anim_1gfx BATTLE_ANIM_GFX_HIT
 ;	anim_call BattleAnim_TargetObj_1Row
