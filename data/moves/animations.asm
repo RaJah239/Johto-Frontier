@@ -5234,20 +5234,6 @@ BattleAnimSub_SpeedLines:
 ;	anim_wait 16
 ;	anim_ret
 
-;BattleAnim_PetalDance:
-;	anim_sound 0, 0, SFX_MENU
-;	anim_2gfx BATTLE_ANIM_GFX_FLOWER, BATTLE_ANIM_GFX_HIT
-;.loop
-;	anim_obj BATTLE_ANIM_OBJ_PETAL_DANCE, 48, 56, $0
-;	anim_wait 11
-;	anim_loop 8, .loop
-;	anim_wait 128
-;	anim_wait 64
-;	anim_sound 0, 1, SFX_COMET_PUNCH
-;	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 56, $0
-;	anim_wait 16
-;	anim_ret
-
 ;BattleAnim_Constrict:
 ;	anim_1gfx BATTLE_ANIM_GFX_ROPE
 ;	anim_sound 0, 1, SFX_BIND
