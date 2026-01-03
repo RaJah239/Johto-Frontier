@@ -175,7 +175,6 @@ BattleAnimOAMData:
 	battleanimoam $24,  9, .OAMData_a4 ; BATTLE_ANIM_OAMSET_AA
 	battleanimoam $2a,  9, .OAMData_a4 ; BATTLE_ANIM_OAMSET_AB
 	battleanimoam $03,  4, .OAMData_ac ; BATTLE_ANIM_OAMSET_AC
-	battleanimoam $12,  4, .OAMData_03 ; BATTLE_ANIM_OAMSET_AD
 	battleanimoam $10,  4, .OAMData_04 ; BATTLE_ANIM_OAMSET_AE
 	battleanimoam $16,  1, .OAMData_0f ; BATTLE_ANIM_OAMSET_AF
 	battleanimoam $17,  4, .OAMData_02 ; BATTLE_ANIM_OAMSET_B0
