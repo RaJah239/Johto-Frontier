@@ -781,7 +781,6 @@ assert NUM_BATTLE_ANIM_OAMSETS <= FIRST_OAM_CMD, \
 	const BATTLE_BG_EFFECT_BATTLEROBJ_1ROW                  ; 11
 	const BATTLE_BG_EFFECT_BATTLEROBJ_2ROW                  ; 12
 	const BATTLE_BG_EFFECT_DOUBLE_TEAM                      ; 13
-	const BATTLE_BG_EFFECT_ACID_ARMOR                       ; 14
 	const BATTLE_BG_EFFECT_RAPID_FLASH                      ; 15
 	const BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT                ; 16
 	const BATTLE_BG_EFFECT_FADE_MON_TO_BLACK                ; 17

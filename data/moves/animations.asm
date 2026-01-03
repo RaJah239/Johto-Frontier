@@ -5306,12 +5306,3 @@ BattleAnimSub_SpeedLines:
 ;	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
 ;	anim_call BattleAnim_ShowMon_0
 ;	anim_ret
-
-;BattleAnim_AcidArmor:
-;	anim_1gfx BATTLE_ANIM_GFX_HIT
-;	anim_call BattleAnim_TargetObj_2Row
-;	anim_bgeffect BATTLE_BG_EFFECT_ACID_ARMOR, $0, BG_EFFECT_USER, $8
-;	anim_sound 0, 0, SFX_MEGA_PUNCH
-;	anim_wait 64
-;	anim_incbgeffect BATTLE_BG_EFFECT_ACID_ARMOR
-;	anim_jump BattleAnim_ShowMon_0

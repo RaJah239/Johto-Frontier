@@ -99,7 +99,6 @@ BattleBGEffects:
 	dw BattleBGEffect_BattlerObj_1Row
 	dw BattleBGEffect_BattlerObj_2Row
 	dw BattleBGEffect_DoubleTeam
-	dw BattleBGEffect_AcidArmor
 	dw BattleBGEffect_RapidFlash
 	dw BattleBGEffect_FadeMonToLight
 	dw BattleBGEffect_FadeMonToBlack
@@ -1202,69 +1201,6 @@ BattleBGEffect_DoubleTeam:
 	ret
 
 .five
-	jmp BattleAnim_ResetLCDStatCustom
-
-BattleBGEffect_AcidArmor:
-	call BattleBGEffects_AnonJumptable
-.anon_dw
-	dw .zero
-	dw .one
-	dw .two
-
-.zero
-	call BattleBGEffects_IncAnonJumptableIndex
-	call BattleBGEffects_ClearLYOverrides
-	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
-	ld a, LOW(rSCY)
-	call BattleBGEffect_SetLCDStatCustoms1
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld e, [hl]
-	ld d, 2
-	call DeformScreen
-	ld h, HIGH(wLYOverridesBackup)
-	ldh a, [hLYOverrideEnd]
-	ld l, a
-	ld [hl], $0
-	dec l
-	ld [hl], $0
-	ret
-
-.one
-	ldh a, [hLYOverrideEnd]
-	ld l, a
-	ld h, HIGH(wLYOverridesBackup)
-	ld e, l
-	ld d, h
-	dec de
-.loop
-	ld a, [de]
-	dec de
-	ld [hld], a
-	ldh a, [hLYOverrideStart]
-	cp l
-	jr nz, .loop
-	ld [hl], $90
-	ldh a, [hLYOverrideEnd]
-	ld l, a
-	ld a, [hl]
-	cp $1
-	jr c, .okay
-	cp $90
-	jr z, .okay
-	ld [hl], $0
-.okay
-	dec l
-	ld a, [hl]
-	cp $2
-	ret c
-	cp $90
-	ret z
-	ld [hl], $0
-	ret
-
-.two
 	jmp BattleAnim_ResetLCDStatCustom
 
 BattleBGEffect_Withdraw:
