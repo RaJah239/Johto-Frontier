@@ -104,7 +104,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_EGG                 ; 46
 	const BATTLE_ANIM_OBJ_FOCUS               ; 47
 	const BATTLE_ANIM_OBJ_BIND1               ; 48
-	const BATTLE_ANIM_OBJ_BIND2               ; 49
 	const BATTLE_ANIM_OBJ_LEECH_SEED          ; 4a
 	const BATTLE_ANIM_OBJ_SOUND               ; 4b
 	const BATTLE_ANIM_OBJ_WAVE                ; 4c
@@ -417,8 +416,6 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_FOCUS                 ; 51
 	const BATTLE_ANIM_FRAMESET_BIND_1                ; 52
 	const BATTLE_ANIM_FRAMESET_BIND_2                ; 53
-	const BATTLE_ANIM_FRAMESET_BIND_3                ; 54
-	const BATTLE_ANIM_FRAMESET_BIND_4                ; 55
 	const BATTLE_ANIM_FRAMESET_LEECH_SEED_1          ; 56
 	const BATTLE_ANIM_FRAMESET_LEECH_SEED_2          ; 57
 	const BATTLE_ANIM_FRAMESET_LEECH_SEED_3          ; 58

@@ -5211,16 +5211,3 @@ BattleAnimSub_SpeedLines:
 ;	anim_obj BATTLE_ANIM_OBJ_HIT_BIG, 132, 56, $0
 ;	anim_wait 16
 ;	anim_ret
-
-;BattleAnim_Constrict:
-;	anim_1gfx BATTLE_ANIM_GFX_ROPE
-;	anim_sound 0, 1, SFX_BIND
-;	anim_obj BATTLE_ANIM_OBJ_BIND2, 132, 64, $0
-;	anim_wait 8
-;	anim_obj BATTLE_ANIM_OBJ_BIND1, 132, 48, $0
-;	anim_wait 8
-;	anim_obj BATTLE_ANIM_OBJ_BIND2, 132, 40, $0
-;	anim_wait 8
-;	anim_obj BATTLE_ANIM_OBJ_BIND1, 132, 56, $0
-;	anim_wait 64
-;	anim_ret

@@ -85,8 +85,6 @@ BattleAnimFrameData:
 	dw .Frameset_Focus               ; BATTLE_ANIM_FRAMESET_FOCUS
 	dw .Frameset_Bind1               ; BATTLE_ANIM_FRAMESET_BIND_1
 	dw .Frameset_Bind2               ; BATTLE_ANIM_FRAMESET_BIND_2
-	dw .Frameset_Bind3               ; BATTLE_ANIM_FRAMESET_BIND_3
-	dw .Frameset_Bind4               ; BATTLE_ANIM_FRAMESET_BIND_4
 	dw .Frameset_LeechSeed1          ; BATTLE_ANIM_FRAMESET_LEECH_SEED_1
 	dw .Frameset_LeechSeed2          ; BATTLE_ANIM_FRAMESET_LEECH_SEED_2
 	dw .Frameset_LeechSeed3          ; BATTLE_ANIM_FRAMESET_LEECH_SEED_3
@@ -758,17 +756,6 @@ BattleAnimFrameData:
 .Frameset_Bind2:
 	oamframe BATTLE_ANIM_OAMSET_63,  7
 	oamframe BATTLE_ANIM_OAMSET_64,  7
-	oamrestart
-
-.Frameset_Bind3:
-	oamframe BATTLE_ANIM_OAMSET_65,  1
-	oamframe BATTLE_ANIM_OAMSET_66,  1
-	oamframe BATTLE_ANIM_OAMSET_67,  1
-	oamend
-
-.Frameset_Bind4:
-	oamframe BATTLE_ANIM_OAMSET_67,  7
-	oamframe BATTLE_ANIM_OAMSET_68,  7
 	oamrestart
 
 .Frameset_Sound1:

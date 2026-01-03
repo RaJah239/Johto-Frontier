@@ -1863,7 +1863,6 @@ BattleAnimFunc_Wrap:
 	add hl, bc
 	ld a, [hl]
 	inc a ; BATTLE_ANIM_FRAMESET_BIND_2
-	      ; BATTLE_ANIM_FRAMESET_BIND_4
 	call ReinitBattleAnimFrameset
 	call BattleAnim_IncAnonJumptableIndex
 	ld hl, BATTLEANIMSTRUCT_VAR1 ; Unused?
