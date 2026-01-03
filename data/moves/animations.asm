@@ -5315,13 +5315,3 @@ BattleAnimSub_SpeedLines:
 ;	anim_wait 64
 ;	anim_incbgeffect BATTLE_BG_EFFECT_ACID_ARMOR
 ;	anim_jump BattleAnim_ShowMon_0
-
-;BattleAnim_PoisonGas:
-;	anim_1gfx BATTLE_ANIM_GFX_HAZE
-;	anim_sound 16, 2, SFX_BUBBLEBEAM
-;.loop
-;	anim_obj BATTLE_ANIM_OBJ_POISON_GAS, 44, 80, $2
-;	anim_wait 8
-;	anim_loop 10, .loop
-;	anim_wait 128
-;	anim_ret
