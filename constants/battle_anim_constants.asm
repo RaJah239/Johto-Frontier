@@ -443,7 +443,6 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_MIST                  ; 70
 	const BATTLE_ANIM_FRAMESET_HORN                  ; 71
 	const BATTLE_ANIM_FRAMESET_NEEDLE                ; 72
-	const BATTLE_ANIM_FRAMESET_FLOWER                ; 73
 	const BATTLE_ANIM_FRAMESET_BARRAGE_BALL          ; 74
 	const BATTLE_ANIM_FRAMESET_PAY_DAY               ; 75
 	const BATTLE_ANIM_FRAMESET_HEART                 ; 76
