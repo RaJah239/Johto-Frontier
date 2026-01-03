@@ -793,7 +793,6 @@ assert NUM_BATTLE_ANIM_OAMSETS <= FIRST_OAM_CMD, \
 	const BATTLE_BG_EFFECT_FLAIL                            ; 2c
 	const BATTLE_BG_EFFECT_BETA_PURSUIT                     ; 2d
 	const BATTLE_BG_EFFECT_ROLLOUT                          ; 2e
-	const BATTLE_BG_EFFECT_VITAL_THROW                      ; 2f
 	const BATTLE_BG_EFFECT_START_WATER                      ; 30
 	const BATTLE_BG_EFFECT_WATER                            ; 31
 	const BATTLE_BG_EFFECT_END_WATER                        ; 32

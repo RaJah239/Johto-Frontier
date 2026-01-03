@@ -125,7 +125,6 @@ BattleBGEffects:
 	dw BattleBGEffect_Flail
 	dw BattleBGEffect_BetaPursuit
 	dw BattleBGEffect_Rollout
-	dw BattleBGEffect_VitalThrow
 	dw BattleBGEffect_StartWater
 	dw BattleBGEffect_Water
 	dw BattleBGEffect_EndWater
@@ -1529,20 +1528,6 @@ VitalThrow_MoveBackwards:
 	ld a, 2
 .okay
 	ld [hl], a
-	ret
-
-BattleBGEffect_VitalThrow:
-	call BattleBGEffects_AnonJumptable
-.anon_dw
-	dw VitalThrow_MoveBackwards
-	dw Tackle_MoveForward
-	dw .two
-	dw Tackle_ReturnMove
-	dw .four
-
-.four
-	call BattleAnim_ResetLCDStatCustom
-.two
 	ret
 
 BattleBGEffect_WobbleMon:
