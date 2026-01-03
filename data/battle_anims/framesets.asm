@@ -137,7 +137,6 @@ BattleAnimFrameData:
 	dw .Frameset_DefenseCurl         ; BATTLE_ANIM_FRAMESET_DEFENSE_CURL
 	dw .Frameset_MetronomeHand       ; BATTLE_ANIM_FRAMESET_METRONOME_HAND
 	dw .Frameset_Agility             ; BATTLE_ANIM_FRAMESET_AGILITY
-	dw .Frameset_Cotton              ; BATTLE_ANIM_FRAMESET_COTTON
 	dw .Frameset_MilkBottle          ; BATTLE_ANIM_FRAMESET_MILK_BOTTLE
 	dw .Frameset_Spike               ; BATTLE_ANIM_FRAMESET_SPIKE
 	dw .Frameset_AngerVein           ; BATTLE_ANIM_FRAMESET_ANGER_VEIN
@@ -1028,10 +1027,6 @@ BattleAnimFrameData:
 
 .Frameset_Agility:
 	oamframe BATTLE_ANIM_OAMSET_AC,  8
-	oamend
-
-.Frameset_Cotton:
-	oamframe BATTLE_ANIM_OAMSET_AD,  8
 	oamend
 
 .Frameset_MilkBottle:

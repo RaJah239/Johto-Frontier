@@ -5271,16 +5271,6 @@ BattleAnimSub_SpeedLines:
 ;	anim_wait 24
 ;	anim_ret
 
-;	anim_obp0 $54
-;	anim_1gfx BATTLE_ANIM_GFX_MISC
-;	anim_sound 0, 1, SFX_POWDER
-;.loop
-;	anim_obj BATTLE_ANIM_OBJ_COTTON_SPORE, 132, 32, $0
-;	anim_wait 8
-;	anim_loop 5, .loop
-;	anim_wait 96
-;	anim_ret
-
 ;BattleAnim_Constrict:
 ;	anim_1gfx BATTLE_ANIM_GFX_ROPE
 ;	anim_sound 0, 1, SFX_BIND

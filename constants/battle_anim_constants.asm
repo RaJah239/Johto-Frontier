@@ -157,7 +157,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_HEART               ; 7e
 	const BATTLE_ANIM_OBJ_FLAME_WHEEL         ; 7f
 	const BATTLE_ANIM_OBJ_SACRED_FIRE         ; 80
-	const BATTLE_ANIM_OBJ_COTTON_SPORE        ; 81
 	const BATTLE_ANIM_OBJ_MILK_DRINK          ; 82
 	const BATTLE_ANIM_OBJ_ANGER               ; 83
 	const BATTLE_ANIM_OBJ_HEAL_BELL           ; 84
@@ -210,7 +209,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_AEROBLAST           ; b3
 	const BATTLE_ANIM_OBJ_SHADOW_BALL         ; b4
 	const BATTLE_ANIM_OBJ_ROCK_SMASH          ; b5
-	const BATTLE_ANIM_OBJ_COTTON              ; b7
 	const BATTLE_ANIM_OBJ_ENEMYFEET_1ROW      ; b8
 	const BATTLE_ANIM_OBJ_PLAYERHEAD_1ROW     ; b9
 	const BATTLE_ANIM_OBJ_ENEMYFEET_2ROW      ; ba
@@ -473,7 +471,6 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_DEFENSE_CURL          ; 86
 	const BATTLE_ANIM_FRAMESET_METRONOME_HAND        ; 87
 	const BATTLE_ANIM_FRAMESET_AGILITY               ; 88
-	const BATTLE_ANIM_FRAMESET_COTTON                ; 89
 	const BATTLE_ANIM_FRAMESET_MILK_BOTTLE           ; 8a
 	const BATTLE_ANIM_FRAMESET_SPIKE                 ; 8b
 	const BATTLE_ANIM_FRAMESET_ANGER_VEIN            ; 8c
