@@ -5225,15 +5225,6 @@ BattleAnimSub_SpeedLines:
 ;	anim_wait 16
 ;	anim_ret
 
-;BattleAnim_BoneClub:
-;	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_MISC
-;	anim_obj BATTLE_ANIM_OBJ_BONE_CLUB, 64, 88, $2
-;	anim_wait 32
-;	anim_sound 0, 1, SFX_BONE_CLUB
-;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
-;	anim_wait 16
-;	anim_ret
-
 ;BattleAnim_Constrict:
 ;	anim_1gfx BATTLE_ANIM_GFX_ROPE
 ;	anim_sound 0, 1, SFX_BIND
