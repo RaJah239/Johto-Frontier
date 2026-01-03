@@ -180,7 +180,6 @@ BattleAnimOAMData:
 	battleanimoam $17,  4, .OAMData_02 ; BATTLE_ANIM_OAMSET_B0
 	battleanimoam $18,  4, .OAMData_03 ; BATTLE_ANIM_OAMSET_B1
 	battleanimoam $1c,  4, .OAMData_03 ; BATTLE_ANIM_OAMSET_B2
-	battleanimoam $20,  3, .OAMData_03 ; BATTLE_ANIM_OAMSET_B3
 	battleanimoam $23,  4, .OAMData_04 ; BATTLE_ANIM_OAMSET_B4
 	battleanimoam $25,  3, .OAMData_03 ; BATTLE_ANIM_OAMSET_B5
 	battleanimoam $17,  4, .OAMData_03 ; BATTLE_ANIM_OAMSET_B6
