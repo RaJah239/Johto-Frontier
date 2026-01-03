@@ -170,10 +170,6 @@ BattleAnimOAMData:
 	battleanimoam $08,  5, .OAMData_a0 ; BATTLE_ANIM_OAMSET_A1
 	battleanimoam $08,  3, .OAMData_a0 ; BATTLE_ANIM_OAMSET_A2
 	battleanimoam $00, 16, .OAMData_1c ; BATTLE_ANIM_OAMSET_A3
-	battleanimoam $00,  9, .OAMData_a4 ; BATTLE_ANIM_OAMSET_A4
-	battleanimoam $06,  9, .OAMData_a4 ; BATTLE_ANIM_OAMSET_A5
-	battleanimoam $0c,  9, .OAMData_a4 ; BATTLE_ANIM_OAMSET_A6
-	battleanimoam $12,  9, .OAMData_a4 ; BATTLE_ANIM_OAMSET_A7
 	battleanimoam $18,  9, .OAMData_a4 ; BATTLE_ANIM_OAMSET_A8
 	battleanimoam $1e,  9, .OAMData_a4 ; BATTLE_ANIM_OAMSET_A9
 	battleanimoam $24,  9, .OAMData_a4 ; BATTLE_ANIM_OAMSET_AA
