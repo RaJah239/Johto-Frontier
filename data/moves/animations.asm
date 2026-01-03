@@ -5293,16 +5293,3 @@ BattleAnimSub_SpeedLines:
 ;	anim_obj BATTLE_ANIM_OBJ_BIND1, 132, 56, $0
 ;	anim_wait 64
 ;	anim_ret
-
-;BattleAnim_Sharpen:
-;	anim_1gfx BATTLE_ANIM_GFX_SHAPES
-;	anim_obp0 $e4
-;	anim_call BattleAnim_TargetObj_1Row
-;	anim_sound 0, 0, SFX_SHARPEN
-;	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING, $0, BG_EFFECT_USER, $40
-;	anim_obj BATTLE_ANIM_OBJ_SHARPEN, 48, 88, $0
-;	anim_wait 96
-;	anim_incobj 2
-;	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
-;	anim_call BattleAnim_ShowMon_0
-;	anim_ret
