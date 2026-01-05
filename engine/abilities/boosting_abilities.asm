@@ -226,4 +226,5 @@ PunchingMoves:
 	db BULLET_PUNCH
 	db MACH_PUNCH
 	db SHADOW_PUNCH
+	db METEOR_MASH
 	db -1 ; end
