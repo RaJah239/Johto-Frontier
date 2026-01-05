@@ -6607,7 +6607,7 @@ ApplyBrnEffectOnAttack:
 	call GetCurrentMon
 	ld hl, GutsPokemon
 	call IsInByteArray
-	ret nc
+	ret c
 
 	ld a, [wBattleMonStatus]
 	and 1 << BRN
@@ -6632,7 +6632,7 @@ ApplyBrnEffectOnAttack:
 	call GetCurrentMon
 	ld hl, GutsPokemon
 	call IsInByteArray
-	ret nc
+	ret c
 
 	ld a, [wEnemyMonStatus]
 	and 1 << BRN
