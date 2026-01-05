@@ -166,7 +166,6 @@ BattleTurn:
 ; ======================
 	farcall TrapAbilities
 
-	farcall HandleBerserkGene
 	call UpdateBattleMonInParty
 	farcall AIChooseMove
 
