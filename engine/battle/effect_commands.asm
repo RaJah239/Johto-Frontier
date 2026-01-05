@@ -3063,7 +3063,15 @@ ConfusionDamageCalc:
 	call Divide
 
 .DoneItem:
+; ===== half damage - used for Sucker Punch =====
+	ld a, [wHalfDamage]
+	and a
+	jr z, .life_orb
+	call HalfDamage
+	xor a
+	ld [wHalfDamage], a
 
+.life_orb
 ; =====================
 ; ==== Life Orb =======
 ; =====================

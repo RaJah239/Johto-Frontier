@@ -603,8 +603,9 @@ wLastEnemyMove:: db
 
 wExpShare:: db
 wExpShareText:: db
+wHalfDamage:: db
 
-	ds 10
+	ds 9
 
 wPlayerRageCounter:: db
 wEnemyRageCounter:: db

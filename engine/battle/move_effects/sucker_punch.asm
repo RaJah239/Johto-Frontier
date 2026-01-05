@@ -17,6 +17,6 @@ BattleCommand_SuckerPunch:
 	cp STATUS
 	ret nz
 .failed
-	farcall AnimateFailedMove
-	farcall TryPrintButItFailed
-	farjp EndMoveEffect
+    ld a, 1
+    ld [wHalfDamage], a
+    ret

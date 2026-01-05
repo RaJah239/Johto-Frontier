@@ -360,8 +360,8 @@ OutrageDescription:
 	line "and confuses user.@"
 
 SuckerPunchDescription:
-	db   "Attacks first if"
-	line "the foe attacks.@"
+	db   "Goes first. Idle"
+	line "foes cuts damage.@"
 
 LeerDescription:
 	db   "Reduces the foe's"
