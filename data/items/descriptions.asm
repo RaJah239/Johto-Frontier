@@ -152,7 +152,7 @@ ItemDescriptions:
 	dw HelixFossilDesc
 	dw MysteryBerryDesc
 	dw DragonScaleDesc
-	dw BerserkGeneDesc
+	dw ToxicOrbDesc
 	dw MuscleBandDesc
 	dw WiseGlassesDesc
 	dw TeruSama20Desc
@@ -847,9 +847,9 @@ DragonScaleDesc:
 	db   "A rare dragon-type"
 	next "item.@"
 
-BerserkGeneDesc:
-	db   "Boosts ATTACK but"
-	next "causes confusion.@"
+ToxicOrbDesc:
+	db   "Poisons the user."
+	next "(Hold)@"
 
 MuscleBandDesc:
 	db   "Slightly boosts"

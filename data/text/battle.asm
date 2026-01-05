@@ -117,6 +117,12 @@ FlameOrbText:
     cont "and burned itself!"
     prompt
 
+ToxicOrbText:
+ 	text "<USER>'s"
+    line "Toxic Orb poisoned"
+    cont "itself!"
+    prompt
+
 HookedPokemonAttackedText:
 	text "The hooked"
 	line "@"

@@ -157,7 +157,7 @@
 	const HELIX_FOSSIL ; 89
 	const MYSTERYBERRY ; 96
 	const DRAGON_SCALE ; 97
-	const BERSERK_GENE ; 98
+	const TOXIC_ORB    ; 98
 	const MUSCLE_BAND  ; 99
 	const WISE_GLASSES ; 9a
 	const ITEM_9B      ; 9b

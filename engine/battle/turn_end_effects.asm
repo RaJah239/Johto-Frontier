@@ -5,6 +5,7 @@ FarTurnEndEffects:
 	call HandleSafeguard
 	call HandleScreens
 	call HandleFlameOrb
+	call HandleToxicOrb
 	call HandleTrickRoom
 	; fallthrough
 
@@ -459,3 +460,94 @@ HandleFlameOrb:
 	call SetPlayerTurn
 .do_it
 	farjp BattleCommand_FlameOrb
+
+HandleToxicOrb:
+	; ClearFailures
+	xor a
+	ld [wFailedMessage], a
+	ld [wEffectFailed], a
+	ld [wAttackMissed], a
+
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .DoEnemyFirst
+	call SetPlayerTurn
+	call .do_it
+	call SetEnemyTurn
+	jr .do_it
+
+.DoEnemyFirst:
+	call SetEnemyTurn
+	call .do_it
+	call SetPlayerTurn
+.do_it
+	; fallthrough
+
+;ToxicOrb:
+	callfar GetUserItem
+	ld a, b
+	cp HELD_TOXIC_ORB
+	ret nz
+	call ShouldTriggerToxicOrb
+	ret nc
+	call ClearSprites
+
+	call CheckIfFastBattlesIsOn
+	jr nz, .skip
+
+	ld hl, ToxicOrbText
+	call StdBattleTextbox
+.skip
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	set PSN, [hl]
+	call UpdateUserInParty
+	farcall BattleCommand_SwitchTurn
+	ld de, ANIM_PSN
+	farcall PlayOpponentBattleAnim
+	farjp BattleCommand_SwitchTurn
+
+ShouldTriggerToxicOrb:
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	and a
+	jr nz, .no
+
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .playerTurn
+	ld a, [wEnemyMonType1]
+	ld b, a
+	ld a, [wEnemyMonType2]
+	ld c, a
+	ld a, [wEnemyMonSpecies]
+	jr .checkDetails
+.playerTurn
+	ld a, [wBattleMonType1]
+	ld b, a
+	ld a, [wBattleMonType2]
+	ld c, a
+	ld a, [wBattleMonSpecies]
+.checkDetails
+	cp MEGANIUM
+	jr z, .no
+	cp SYLVEON
+	jr z, .no
+	cp MEW
+	jr z, .no
+	ld a, b
+	cp POISON
+	jr z, .no
+	cp STEEL
+	jr z, .no
+	ld a, c
+	cp POISON
+	jr z, .no
+	cp STEEL
+	jr z, .no
+.yes
+	scf
+	ret
+.no
+	xor a
+	ret

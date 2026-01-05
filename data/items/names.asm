@@ -151,7 +151,7 @@ ItemNames::
 	li "Helix Fossil"
 	li "MysteryBerry"
 	li "Dragon Scale"
-	li "Berserk Gene"
+	li "Toxic Orb"
 	li "Muscle Band"
 	li "Wise Glasses"
 	li "?"

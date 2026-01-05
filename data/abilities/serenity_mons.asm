@@ -24,6 +24,14 @@
 ;   jr z, .no
 ;   cp MEW
 
+; and engine\battle\turn_end_effects.asm `ShouldTriggerToxicOrb`
+;.checkDetails
+;   cp MEGANIUM
+;   jr z, .no
+;   cp SYLVEON
+;   jr z, .no
+;   cp MEW
+
 ; it couldn't be worked around afaik
 
 SerenityPokemon:

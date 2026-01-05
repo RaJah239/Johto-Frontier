@@ -83,7 +83,7 @@ DEF MAIL_STRUCT_LENGTH_JP EQU $2a ; mailmsg_jp struct
 	const HELD_BERRY_3RD
 	const HELD_FLAME_ORB
 	const HELD_RESTORE_PP
-	const_skip
+	const HELD_TOXIC_ORB
 	const HELD_CLEANSE_TAG
 
 	const_next 10

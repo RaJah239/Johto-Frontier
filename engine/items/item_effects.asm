@@ -165,7 +165,7 @@ ItemEffects:
 	dw NoEffect            ; HELIX_FOSSIL
 	dw RestorePPEffect     ; MYSTERYBERRY
 	dw NoEffect            ; DRAGON_SCALE
-	dw NoEffect            ; BERSERK_GENE
+	dw NoEffect            ; TOXIC_ORB
 	dw NoEffect            ; MUSCLE_BAND
 	dw NoEffect            ; WISE_GLASSES
 	dw NoEffect            ; ITEM_9B
