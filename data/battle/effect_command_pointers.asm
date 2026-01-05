@@ -147,7 +147,6 @@ BattleCommandPointers:
 	dw BattleCommand_StealthRock
 	dw BattleCommand_StickyWeb
 	dw BattleCommand_Defog
-	dw BattleCommand_FlameOrb
 	dw BattleCommand_BulkUp
 	dw BattleCommand_CalmMind
 	dw BattleCommand_DragonDance

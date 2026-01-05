@@ -827,7 +827,7 @@ DragonFangDesc:
 
 FlameOrbDesc:
 	db   "Inflicts BRN on"
-	next "the holder.@"
+	next "the holder. (Hold)@"
 
 LeftoversDesc:
 	db   "Restores HP during"

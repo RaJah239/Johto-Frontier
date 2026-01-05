@@ -1,6 +1,6 @@
 ; List of all Pokemon that are immune to all status problems:
 ; paralysis, burn (including flame orb), frostbite,
-; poison (including toxic spikes & toxic orb if added),
+; poison (including toxic spikes & toxic orb),
 ; sleep (including rest) and confusion
 
 ; Note: This list must match engine/battle/core.asm
@@ -16,7 +16,7 @@
 ;   cp MEW
 ;   jr z, .pop
 
-; and engine/battle/core2.asm `ShouldIgniteFlameOrb:`
+; and engine/battle/turn_end_effects.asm `ShouldIgniteFlameOrb:`
 ;.checkDetails
 ;   cp MEGANIUM
 ;   jr z, .no
@@ -24,7 +24,7 @@
 ;   jr z, .no
 ;   cp MEW
 
-; and engine\battle\turn_end_effects.asm `ShouldTriggerToxicOrb`
+; and engine/battle/turn_end_effects.asm `ShouldTriggerToxicOrb`
 ;.checkDetails
 ;   cp MEGANIUM
 ;   jr z, .no

@@ -459,7 +459,75 @@ HandleFlameOrb:
 	call .do_it
 	call SetPlayerTurn
 .do_it
-	farjp BattleCommand_FlameOrb
+	; fallthrough
+
+;FlameOrb:
+	callfar GetUserItem
+	ld a, b
+	cp HELD_FLAME_ORB
+	ret nz
+	call ShouldIgniteFlameOrb
+	ret nc
+	call ClearSprites
+
+	call CheckIfFastBattlesIsOn
+	jr nz, .skip
+
+	ld hl, FlameOrbText
+	call StdBattleTextbox
+.skip
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	set BRN, [hl]
+	call UpdateUserInParty
+	farcall BattleCommand_SwitchTurn
+	ld hl, ApplyBrnEffectOnAttack
+	ld a, BANK("Battle Core")
+	rst FarCall
+	ld de, ANIM_BRN
+	farcall PlayOpponentBattleAnim
+	farjp BattleCommand_SwitchTurn
+
+ShouldIgniteFlameOrb:
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	and a
+	jr nz, .no
+
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .playerTurn
+	ld a, [wEnemyMonType1]
+	ld b, a
+	ld a, [wEnemyMonType2]
+	ld c, a
+	ld a, [wEnemyMonSpecies]
+	jr .checkDetails
+.playerTurn
+	ld a, [wBattleMonType1]
+	ld b, a
+	ld a, [wBattleMonType2]
+	ld c, a
+	ld a, [wBattleMonSpecies]
+.checkDetails
+	cp MEGANIUM
+	jr z, .no
+	cp SYLVEON
+	jr z, .no
+	cp MEW
+	jr z, .no
+	ld a, b
+	cp FIRE
+	jr z, .no
+	ld a, c
+	cp FIRE
+	jr z, .no
+.yes
+	scf
+	ret
+.no
+	xor a
+	ret
 
 HandleToxicOrb:
 	; ClearFailures

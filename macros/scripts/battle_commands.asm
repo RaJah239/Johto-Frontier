@@ -147,7 +147,6 @@ ENDM
 	command stealthrock
 	command stickyweb
 	command defog
-	command flameorb
 	command bulkup                  ; 57
 	command calmmind                ; b8
 	command dragondance             ; b9

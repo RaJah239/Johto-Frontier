@@ -6903,32 +6903,6 @@ HailDefenseBoost:
 	ret nz
 	jr SpDefBoost
 
-BattleCommand_FlameOrb:
-	call GetUserItem
-	ld a, b
-	cp HELD_FLAME_ORB
-	ret nz
-	farcall ShouldIgniteFlameOrb
-	ret nc
-	call ClearSprites
-
-	call CheckIfFastBattlesIsOn
-	jr nz, .skip
-
-	ld hl, FlameOrbText
-	call StdBattleTextbox
-.skip
-	ld a, BATTLE_VARS_STATUS
-	call GetBattleVarAddr
-	set BRN, [hl]
-	call UpdateUserInParty
-	call BattleCommand_SwitchTurn
-	ld hl, ApplyBrnEffectOnAttack
-	call CallBattleCore
-	ld de, ANIM_BRN
-	call PlayOpponentBattleAnim
-	jmp BattleCommand_SwitchTurn
-
 Fifty_PercentBoost:
 	ld a, 3
 	ldh [hMultiplier], a
