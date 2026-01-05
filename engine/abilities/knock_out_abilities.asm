@@ -94,11 +94,11 @@ INCLUDE "data/abilities/ignis_mons.asm"
 INCLUDE "data/abilities/flash_step_mons.asm"
 
 PlayBoostAnimation:
-	; fast battles skip this animation
-	call CheckIfFastBattlesIsOn
-	ret nz
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skipAnim
 
-	ld de, FOCUS_ENERGY
+	ld de, ANIM_STAT_UP
 	call ShouldPlayAnimQuestionMark
 	jr c, .skipAnim
 
