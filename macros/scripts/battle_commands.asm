@@ -160,6 +160,7 @@ ENDM
 	command venoshock
 	command furydrive
 	command acrobatics
+	command checkcontact
 DEF NUM_EFFECT_COMMANDS EQU const_value - 1
 
 	const_def -1, -1

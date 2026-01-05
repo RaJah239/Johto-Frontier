@@ -2343,6 +2343,9 @@ BattleCommand_CheckFaint:
 .finish
 	jr EndMoveEffect
 
+BattleCommand_CheckContact:
+	ret
+
 BattleCommand_BuildOpponentRage:
 	ld a, [wAttackMissed]
 	and a

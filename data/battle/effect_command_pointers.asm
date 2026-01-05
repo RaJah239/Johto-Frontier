@@ -160,4 +160,5 @@ BattleCommandPointers:
 	dw BattleCommand_Venoshock
 	dw BattleCommand_FuryDrive
 	dw BattleCommand_Acrobatics
+	dw BattleCommand_CheckContact
 	assert_table_length NUM_EFFECT_COMMANDS

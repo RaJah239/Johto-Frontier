@@ -18,6 +18,7 @@ NormalHit:
 	supereffectivetext
 	checkfaint
 	buildopponentrage
+	checkcontact
 	kingsrock
 	endmove
 
