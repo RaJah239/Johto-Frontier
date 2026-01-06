@@ -1,6 +1,7 @@
 EffectiveDefensiveAbilities:
 	call HandleTintedLens
 	call HandleSolidRock
+	call HandleFurCoat
 	ret
 
 HandleTintedLens:
@@ -34,6 +35,20 @@ HandleSolidRock:
 
 INCLUDE "data/abilities/solid_rock_mons.asm"
 
+HandleFurCoat:
+	call GetOpposingMon
+	ld hl, FurCoatPokemon
+	call IsInByteArray
+	ret nc
+
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp SPECIAL
+	ret nc
+	jr Fifty_PercentNerf
+
+INCLUDE "data/abilities/fur_coat_mons.asm"
+
 Hundred_PercentBoost:
 	ld a, 100
 	; fallthrough
@@ -50,6 +65,16 @@ Finish_Boost:
 
 TwentyFive_PercentNerf:
 	ld a, 75
+	ldh [hMultiplier], a
+	call Multiply
+
+	ld a, 100
+	ldh [hDivisor], a
+	ld b, 4
+	jmp Divide
+
+Fifty_PercentNerf:
+	ld a, 50
 	ldh [hMultiplier], a
 	call Multiply
 
