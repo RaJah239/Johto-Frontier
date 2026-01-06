@@ -1678,6 +1678,19 @@ BattleCommand_CheckHit:
 	dec d
 	jr nz, .accuracy_loop
 
+; ==============================
+; === Ability: Compound Eyes ===
+; ==============================
+	call GetCurrentMon
+	ld hl, CompoundEyesMons
+	call IsInByteArray
+	jr nc, .skip_compound_eyes
+
+	ld a, 30
+	add 100
+	call AccuracyCalc
+
+.skip_compound_eyes
 	; if the result is more than 2 bytes, max out at 100%
 	ldh a, [hQuotient + 2]
 	and a
@@ -1689,6 +1702,15 @@ BattleCommand_CheckHit:
 	pop hl
 	ld [hl], a
 	ret
+
+AccuracyCalc:
+	ldh [hMultiplier], a
+	call Multiply
+
+	ld a, 100
+	ldh [hDivisor], a
+	ld b, 4
+	jmp Divide
 
 INCLUDE "data/abilities/true_horn_mons.asm"
 INCLUDE "data/battle/accuracy_multipliers.asm"

@@ -1,5 +1,4 @@
-; List of all Pokemon that automatically
-; increases accuracy by 1 stage
+; List of all Pokemon that automatically get a 1.3 accuracy boost on all moves
 
 CompoundEyesMons:
 	db STARYU
