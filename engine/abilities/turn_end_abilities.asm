@@ -5,6 +5,7 @@ TurnEndAbilities:
 	call HandleIceBody
 	call HandleRainDish
 	call HandleSolarPowerHPLoss
+	call HandleSandBody
 	; fallthrough
 
 HandleMolting:
@@ -290,3 +291,48 @@ HandleSolarPowerHPLoss:
 	farcall SubtractHPFromUser
 	ld hl, SolarPowerText
 	jmp StdBattleTextbox
+
+HandleSandBody:
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	call .do_it
+	call SetPlayerTurn
+	ld a, [wBattleMonSpecies]
+.do_it
+
+	ld hl, SandBodyPokemon
+	call IsInByteArray
+	ret nc
+
+	; if in a sandstorm, if so, activate
+	ld a, [wBattleWeather]
+	cp WEATHER_SANDSTORM
+	ret nz
+
+	ld hl, wBattleMonHP
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_hp
+	ld hl, wEnemyMonHP
+
+.got_hp
+; Don't restore if we're already at max HP
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	cp b
+	jr nz, .restore
+	ld a, [hl]
+	cp c
+	ret z
+
+.restore
+	farcall GetSixteenthMaxHP
+	farcall SwitchTurnCore
+	farcall RestoreHP
+	ld hl, SandBodyText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/sand_body_mons.asm"

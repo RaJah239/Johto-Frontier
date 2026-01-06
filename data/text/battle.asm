@@ -225,6 +225,12 @@ RainDishText:
 	cont "to its Rain Dish!"
 	prompt
 
+SandBodyText:
+	text "<TARGET>"
+	line "recovered HP due"
+	cont "to its Sand Body!"
+	prompt
+
 PerishCountText:
 	text "<USER>'s"
 	line "PERISH count is @"
