@@ -1692,7 +1692,6 @@ BattleCommand_CheckHit:
 
 INCLUDE "data/abilities/true_horn_mons.asm"
 INCLUDE "data/battle/accuracy_multipliers.asm"
-INCLUDE "data/abilities/sand_veil_mons.asm"
 INCLUDE "data/abilities/compound_eyes_mons.asm"
 
 BattleCommand_EffectChance:
