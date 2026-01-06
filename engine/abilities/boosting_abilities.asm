@@ -9,6 +9,7 @@ CheckBoostingAbilities:
 	call HandleSolarPowerBoost
 	call HandleSteelWorker
 	call HandleIronFist
+	call HandleMentalFocus
 	ret
 
 HandleGuts:
@@ -99,7 +100,7 @@ HandleMultiscale:
 
 	farcall CheckOpponentFullHP
 	ret nz
-	jr FiftyPercentNerf
+	jmp FiftyPercentNerf
 
 INCLUDE "data/abilities/multiscale_mons.asm"
 
@@ -113,7 +114,7 @@ HandleThickFat:
 	call GetBattleVar
 	and TYPE_MASK
 	cp FIRE
-	jr z, FiftyPercentNerf
+	jmp z, FiftyPercentNerf
 	cp ICE
 	ret nz
 	jr FiftyPercentNerf
@@ -171,6 +172,21 @@ HandleIronFist:
 	jr ThirtyPercentBoost
 
 INCLUDE "data/abilities/iron_fist_mons.asm"
+
+HandleMentalFocus:
+	call GetCurrentMon
+	ld hl, MentalFocusPokemon
+	call IsInByteArray
+	ret nc
+
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	and TYPE_MASK
+	cp PSYCHIC_TYPE
+	ret nz
+	jr FiftyPercentBoost
+
+INCLUDE "data/abilities/mental_focus_mons.asm"
 
 FiftyPercentNerf:
 	ld a, 50
