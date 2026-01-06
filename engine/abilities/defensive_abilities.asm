@@ -2,6 +2,7 @@ DefensiveAbilities:
 	call HandleWaterAbsorb
 	call HandleFireAbsorb
 	call HandleVoltAbsorb
+	call HandleImmunity
 	; fallthrough
 
 HandleLevitate:
@@ -138,3 +139,36 @@ AttackedMissed:
 	ld a, 1
 	ld [wAttackMissed], a
 	ret
+
+HandleImmunity:
+    ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	jr nz, .checkType
+	ld a, [wPlayerMoveStruct + MOVE_TYPE]
+.checkType
+	and TYPE_MASK
+	cp POISON
+    ret nz
+
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMonSpecies]
+	jr z, .check_immunity
+	ld a, [wBattleMonSpecies]
+
+.check_immunity
+	ld hl, ImmunityPokemon
+	call IsInByteArray
+    ret nc
+
+    ; add some delay so the text 
+    ; isn't instantly skipped
+	ld c, 30
+	call DelayFrames
+
+	ld hl, ImmunityText
+	call StdBattleTextbox
+	jr AttackedMissed
+
+INCLUDE "data/abilities/immunity_mons.asm"

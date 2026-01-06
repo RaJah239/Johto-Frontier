@@ -80,6 +80,12 @@ VoltAbsorbText:
 	cont "electric attacks!"
 	prompt
 
+ImmunityText:
+	text "<TARGET> is"
+	line "unaffected by"
+	cont "poison attacks!"
+	prompt
+
 MoltingText:
 	text "<USER>'s"
 	line "Molting made"
