@@ -816,6 +816,11 @@ SECTION "Defensive Abilities", ROMX
 INCLUDE "engine/abilities/defensive_abilities.asm"
 
 
+SECTION "Effective Defensive Abilities", ROMX
+
+INCLUDE "engine/abilities/effective_defensive_abilities.asm"
+
+
 SECTION "Knock Out Abilities", ROMX
 
 INCLUDE "engine/abilities/knock_out_abilities.asm"

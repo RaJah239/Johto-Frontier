@@ -1422,6 +1422,8 @@ BattleCommand_DamageVariation:
 	ld a, [hl]
 	ldh [hMultiplicand + 2], a
 
+	farcall EffectiveDefensiveAbilities
+
 ; Multiply by 85-100%...
 .loop
 	call BattleRandom
