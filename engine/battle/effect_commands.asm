@@ -1600,6 +1600,9 @@ BattleCommand_CheckHit:
 	ret
 
 .StatModifiers:
+	ldh a, [hBattleTurn]
+	and a
+
 	; load the user's accuracy into b and the opponent's evasion into c.
 	ld hl, wPlayerMoveStruct + MOVE_ACC
 	ld a, [wPlayerAccLevel]
@@ -1607,18 +1610,6 @@ BattleCommand_CheckHit:
 	ld a, [wEnemyEvaLevel]
 	ld c, a
 
-	ld a, [wBattleWeather]
-	cp WEATHER_SANDSTORM
-	jr nz, .finish_foe_sand_veil
-	ld a, [wEnemyMonSpecies]
-	call Sandveil
-
-.finish_foe_sand_veil
-	ld a, [wBattleMonSpecies]
-	call CompoundEyes
-
-	ldh a, [hBattleTurn]
-	and a
 	jr z, .got_acc_eva
 
 	ld hl, wEnemyMoveStruct + MOVE_ACC
@@ -1626,16 +1617,6 @@ BattleCommand_CheckHit:
 	ld b, a
 	ld a, [wPlayerEvaLevel]
 	ld c, a
-
-	ld a, [wBattleWeather]
-	cp WEATHER_SANDSTORM
-	jr nz, .finish_player_sand_veil
-	ld a, [wBattleMonSpecies]
-	call Sandveil
-
-.finish_player_sand_veil
-	ld a, [wEnemyMonSpecies]
-	call CompoundEyes
 
 .got_acc_eva
 	cp b
