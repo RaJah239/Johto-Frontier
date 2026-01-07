@@ -1005,9 +1005,15 @@ TrueSightText:
 	cont "activated!"
 	prompt
 
-FogOfWartText:
+FogOfWarText:
 	text "<USER>'s"
 	line "Fog of War"
+	cont "activated!"
+	prompt
+
+CleanSweepText:
+	text "<USER>'s"
+	line "Clean Sweep"
 	cont "activated!"
 	prompt
 

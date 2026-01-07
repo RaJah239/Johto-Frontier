@@ -37,6 +37,7 @@ EntryAbilities2:
 	call HandleBattleStance
 	call HandleBattleDrive
 	call HandleTrueSight
+	call HandleCleanSweep
 	call HandleFogOfWar
 	call HandleFadeIn
 	ret
@@ -58,6 +59,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_FADE_IN_PLAYER
 	ResetEventFlag EVENT_TRUE_SIGHT_PLAYER
 	ResetEventFlag EVENT_FOG_OF_WAR_PLAYER
+	ResetEventFlag EVENT_DEFOG_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -77,6 +79,7 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_FADE_IN_FOE
 	ResetEventFlag EVENT_TRUE_SIGHT_FOE
 	ResetEventFlag EVENT_FOG_OF_WAR_FOE
+	ResetEventFlag EVENT_DEFOG_FOE
 	ret
 
 ; ========================
@@ -601,12 +604,61 @@ HandleFogOfWar:
 	ld de, HAZE
 	farcall Call_PlayBattleAnim
 
-	ld hl, FogOfWartText
+	ld hl, FogOfWarText
 	call StdBattleTextbox
 
 	farjp BattleCommand_ResetStats
 
 INCLUDE "data/abilities/fog_of_war_mons.asm"
+
+HandleCleanSweep:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_DEFOG_PLAYER
+	ret nz
+	SetEventFlag EVENT_DEFOG_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_DEFOG_FOE
+	ret nz
+	SetEventFlag EVENT_DEFOG_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has clean sweep
+	call GetCurrentMon
+	ld hl, CleanSweepPokemon
+	call IsInByteArray
+	ret nc
+
+    call AnyFieldEffectPresent
+    ret nc
+
+	; play defog animation
+	ld de, DEFOG
+	farcall Call_PlayBattleAnim
+
+	ld hl, CleanSweepText
+	call StdBattleTextbox
+
+	farjp BattleCommand_Defog
+
+INCLUDE "data/abilities/clean_sweep_mons.asm"
 
 HandleRockSnare:
 	ldh a, [hSerialConnectionStatus]
@@ -1080,3 +1132,45 @@ AnyHazardsUp:
 .yes
     scf
     ret
+
+AnyFieldEffectPresent:
+	ld a, [wFieldWeather]
+	cp WEATHER_NONE
+	jr nz, .yes
+	ld a, [wBattleWeather]
+	cp WEATHER_NONE
+	jr nz, .yes
+	ld a, [wPlayerScreens]
+	call AnyScreensUp
+	jr c, .yes
+	ld a, [wEnemyScreens]
+	call AnyScreensUp
+	jr c, .yes
+	xor a
+	ret
+
+.yes
+	scf
+	ret
+
+AnyScreensUp:
+	bit SCREENS_SAFEGUARD, a
+	jr nz, .yes
+	bit SCREENS_LIGHT_SCREEN, a
+	jr nz, .yes
+	bit SCREENS_REFLECT, a
+	jr nz, .yes
+	bit SCREENS_SPIKES, a
+	jr nz, .yes
+	bit SCREENS_STEALTH_ROCK, a
+	jr nz, .yes
+	bit SCREENS_TOXIC_SPIKES, a
+	jr nz, .yes
+	bit SCREENS_STICKY_WEB, a
+	jr nz, .yes
+	xor a
+	ret
+
+.yes
+	scf
+	ret
