@@ -5004,6 +5004,11 @@ TryPlayerSwitch:
 	jmp BattleMenuPKMN_Loop
 
 .check_trapped
+	call GetOpposingMon
+	ld hl, RunAwayPokemon
+	call IsInByteArray
+	jr c, .try_switch
+
 	ld a, [wPlayerWrapCount]
 	and a
 	jr nz, .trapped
@@ -5083,6 +5088,8 @@ PlayerSwitch:
 	call BattleMonEntrance
 	and a
 	ret
+
+INCLUDE "data/abilities/run_away_mons.asm"
 
 EnemyMonEntrance:
 	callfar AI_Switch
