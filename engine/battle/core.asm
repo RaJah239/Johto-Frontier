@@ -3856,13 +3856,17 @@ SpikesDamage:
 
 ; Toxic Spikes can't poison a Safeguarded target
 	farcall SafeCheckSafeguard
-	jr nz, .pop
+	jmp nz, .pop
 
 ; ====================================
 ; === Ability: Serenity - Pokemon List
 ; ====================================
 	call GetCurrentMon
-	cp MEGANIUM
+	cp CHIKORITA ; to prevent poisoning from Toxic Spikes
+	jr z, .pop
+	cp BAYLEEF
+	jr z, .pop
+	cp MEGANIUM ; to prevent poisoning from Toxic Spikes
 	jr z, .pop
 	cp SYLVEON
 	jr z, .pop

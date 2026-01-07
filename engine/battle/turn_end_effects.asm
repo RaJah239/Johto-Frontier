@@ -597,6 +597,10 @@ ShouldTriggerToxicOrb:
 	ld c, a
 	ld a, [wBattleMonSpecies]
 .checkDetails
+	cp CHIKORITA ; to prevent poisoning
+	jr z, .no
+	cp BAYLEEF ; to prevent poisoning
+	jr z, .no
 	cp MEGANIUM
 	jr z, .no
 	cp SYLVEON

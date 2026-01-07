@@ -23,14 +23,20 @@
 ;   cp SYLVEON
 ;   jr z, .no
 ;   cp MEW
+;   jr z, .no
 
 ; and engine/battle/turn_end_effects.asm `ShouldTriggerToxicOrb`
 ;.checkDetails
+;   cp CHIKORITA ; to prevent poisoning
+;   jr z, .no
+;   cp BAYLEEF ; to prevent poisoning
+;   jr z, .no
 ;   cp MEGANIUM
 ;   jr z, .no
 ;   cp SYLVEON
 ;   jr z, .no
 ;   cp MEW
+;   jr z, .no
 
 ; it couldn't be worked around afaik
 
