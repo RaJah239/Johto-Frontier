@@ -897,7 +897,7 @@ BattleCommand_Critical:
 
 ; +2 critical level
 	ld c, 2
-	jr .Tally
+	jmp .Tally
 
 .Farfetchd:
 	cp TROPIUS
@@ -908,7 +908,7 @@ BattleCommand_Critical:
 
 ; +2 critical level
 	ld c, 2
-	jr .Tally
+	jmp .Tally
 
 .FocusEnergy:
 	ld a, BATTLE_VARS_SUBSTATUS4
@@ -946,6 +946,31 @@ BattleCommand_Critical:
 	ret
 
 .continue1
+; =================================
+; === Ability: Leaf Blade Crits === 
+; =================================
+	call GetCurrentMon
+	push hl
+	push de
+	push bc
+	ld hl, LeafBladeCritsPokemon
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jr c, .check_leaf_blade
+	jr .continue2
+
+.check_leaf_blade
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp LEAF_BLADE
+	jr nz, .continue2
+	ld a, 1
+	ld [wCriticalHit], a
+	ret
+
+.continue2
 ; ===========================
 ; === Ability: Super Luck ===
 ; ===========================
@@ -959,14 +984,14 @@ BattleCommand_Critical:
 	pop de
 	pop hl
 	jr c, .increase_critical
-	jr .continue2
+	jr .continue3
 
 ; super luck mons have an innate +2 critical hit level
 .increase_critical
 	inc c
 	inc c
 
-.continue2
+.continue3
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	ld de, 1
@@ -1006,6 +1031,7 @@ INCLUDE "data/moves/critical_hit_moves.asm"
 INCLUDE "data/abilities/battle_armor_mons.asm"
 INCLUDE "data/battle/critical_hit_chances.asm"
 INCLUDE "data/abilities/slash_crits_mons.asm"
+INCLUDE "data/abilities/leaf_blade_crits_mons.asm"
 INCLUDE "data/abilities/super_luck_mons.asm"
 
 GetNextTypeMatchupsByte:
