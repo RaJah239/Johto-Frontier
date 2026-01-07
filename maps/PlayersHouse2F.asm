@@ -53,6 +53,8 @@ if DEF(_DEBUG)
 	; key items
 	giveitem TYPE_CODEX
 	giveitem BICYCLE
+	setflag ENGINE_BIKE_SHOP_CALL_ENABLED
+	setevent EVENT_GOT_BICYCLE	
 	giveitem COIN_CASE
 	givecoins MAX_COINS
 
@@ -72,10 +74,9 @@ if DEF(_DEBUG)
 	giveitem MILOTIC_CALL
 
 	; good party
-	givepoke MAGIKARP, 50, LEFTOVERS
-	givepoke NOWN, 50, FOCUS_SASH
-	givepoke MEW, 50, MIRACLEBERRY
-
+	givepoke MAGIKARP, 50
+	givepoke GYARADOS, 50
+	givepoke MEW, 50
 
 	; 4th, 5th & 6th mons
 	; unneeded presently
