@@ -994,6 +994,12 @@ BattleStanceText:
 	cont "activated!"
 	prompt
 
+BattleDriveText:
+	text "<USER>'s"
+	line "Battle Drive"
+	cont "activated!"
+	prompt
+
 InfernalHowlText:
 	text "<USER>'s"
 	line "Infernal Howl"
