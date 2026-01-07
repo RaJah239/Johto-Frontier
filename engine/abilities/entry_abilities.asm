@@ -42,6 +42,7 @@ EntryAbilities2:
 	call HandleFadeIn
 	call HandleChaoticBoost
 	call HandleSanctuary
+	call HandleSiegebreaker
 	ret
 
 ResetVolatileAbilityPlayer:
@@ -64,6 +65,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_DEFOG_PLAYER
 	ResetEventFlag EVENT_CHAOTIC_BOOST_PLAYER
 	ResetEventFlag EVENT_SANCTUARY_PLAYER
+	ResetEventFlag EVENT_SIEGEBREAKER_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -86,6 +88,7 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_DEFOG_FOE
 	ResetEventFlag EVENT_CHAOTIC_BOOST_FOE
 	ResetEventFlag EVENT_SANCTUARY_FOE
+	ResetEventFlag EVENT_SIEGEBREAKER_FOE
 	ret
 
 ; ========================
@@ -1245,6 +1248,55 @@ HandleSanctuary:
 
 INCLUDE "data/abilities/sanctuary_mons.asm"
 
+HandleSiegebreaker:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_SIEGEBREAKER_PLAYER
+	ret nz
+	SetEventFlag EVENT_SIEGEBREAKER_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_SIEGEBREAKER_FOE
+	ret nz
+	SetEventFlag EVENT_SIEGEBREAKER_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has siegebreaker
+	call GetCurrentMon
+	ld hl, SiegebreakerPokemon
+	call IsInByteArray
+	ret nc
+
+	call ReflectOrLightScreenUp
+	ret nc
+
+	; play brick break animation
+	ld de, BRICK_BREAK
+    farcall Call_PlayBattleAnim
+
+	ld hl, SiegebreakerText
+	call StdBattleTextbox
+
+	farjp BattleCommand_BreakScreens
+
+INCLUDE "data/abilities/siegebreaker_mons.asm"
+
 AnyHazardsPresent:
 	ld a, [wPlayerScreens]
 	call AnyHazardsUp
@@ -1306,6 +1358,32 @@ AnyScreensUp:
 	bit SCREENS_TOXIC_SPIKES, a
 	jr nz, .yes
 	bit SCREENS_STICKY_WEB, a
+	jr nz, .yes
+	xor a
+	ret
+
+.yes
+	scf
+	ret
+
+ReflectOrLightScreenUp:
+	ld a, [wPlayerScreens]
+	call EitherRelfectOrLightScreensUp
+	jr c, .yes
+	ld a, [wEnemyScreens]
+	call EitherRelfectOrLightScreensUp
+	jr c, .yes
+	xor a
+	ret
+
+.yes
+	scf
+	ret
+
+EitherRelfectOrLightScreensUp:
+	bit SCREENS_LIGHT_SCREEN, a
+	jr nz, .yes
+	bit SCREENS_REFLECT, a
 	jr nz, .yes
 	xor a
 	ret

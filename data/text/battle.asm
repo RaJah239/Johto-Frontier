@@ -1023,6 +1023,12 @@ ChaoticBoostText:
 	cont "activated!"
 	prompt
 
+SiegebreakerText:
+	text "<USER>'s"
+	line "Siegebreaker"
+	cont "activated!"
+	prompt
+
 BattleDriveText:
 	text "<USER>'s"
 	line "Battle Drive"
