@@ -6629,10 +6629,8 @@ ApplyBrnEffectOnAttack:
 	and a
 	jr z, .enemy
 
-	; prevent attack reduction on guts mons
-	call GetCurrentMon
-	ld hl, GutsPokemon
-	call IsInByteArray
+	ld a, [wBattleMonSpecies]
+	call DoesMonHaveGuts
 	ret c
 
 	ld a, [wBattleMonStatus]
@@ -6654,10 +6652,8 @@ ApplyBrnEffectOnAttack:
 	ret
 
 .enemy
-	; prevent attack reduction on guts mons
-	call GetCurrentMon
-	ld hl, GutsPokemon
-	call IsInByteArray
+	ld a, [wEnemyMonSpecies]
+	call DoesMonHaveGuts
 	ret c
 
 	ld a, [wEnemyMonStatus]
@@ -6677,6 +6673,32 @@ ApplyBrnEffectOnAttack:
 .enemy_ok
 	ld [hl], b
 	ret
+
+DoesMonHaveGuts:
+	push hl
+	push de
+	push bc
+	ld hl, Core_GutsPokemon
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jr c, .yes
+	xor a
+	ret
+
+.yes
+	scf
+	ret
+
+Core_GutsPokemon:
+    db TEDDIURSA
+    db URSARING
+    db URSALUNA
+    db HERACROSS
+    db MAKUHITA
+    db HARIYAMA
+    db -1 ; end
 
 ApplyStatLevelMultiplierOnAllStats:
 ; Apply StatLevelMultipliers on all 5 Stats
