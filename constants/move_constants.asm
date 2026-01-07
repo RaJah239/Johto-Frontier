@@ -288,6 +288,7 @@ DEF NUM_ATTACKS EQU const_value - 1
 	const ANIM_IN_HAIL           ; 116
 	const ANIM_STAT_UP           ; 117
 	const ANIM_STAT_DOWN         ; 118
+	const ANIM_SPIN_GUARD      ; 119
 DEF NUM_BATTLE_ANIMS EQU const_value - 1
 
 ; wNumHits uses offsets from ANIM_MISS

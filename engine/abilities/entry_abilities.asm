@@ -10,6 +10,7 @@ EntryAbilities1:
 	call HandleSandStream
 	call HandleSnowWarning
 	call HandleNaturalCure
+	call HandleSpinGuard
 	ret
 
 ; ==============
@@ -722,3 +723,50 @@ HandleImposter:
 	farjp BattleCommand_Transform
 
 INCLUDE "data/abilities/imposter_mons.asm"
+
+HandleSpinGuard:
+	; check if current pokemon has spin guard
+	call GetCurrentMon
+	ld hl, SpinGuardPokemon
+	call IsInByteArray
+	ret nc
+
+    call AnyHazardsPresent
+    ret nc
+    callfar BattleCommand_ClearHazards
+
+	; play spin guard animation
+	ld de, ANIM_SPIN_GUARD
+	farcall Call_PlayBattleAnim
+
+	ld hl, BlewSpikesText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/spin_guard_mons.asm"
+
+AnyHazardsPresent:
+	ld a, [wPlayerScreens]
+	call AnyHazardsUp
+	jr c, .yes
+	ld a, [wEnemyScreens]
+	call AnyHazardsUp
+	jr c, .yes
+	xor a
+	ret
+.yes
+	scf
+	ret
+
+AnyHazardsUp:
+	bit SCREENS_SPIKES, a
+	jr nz, .yes
+	bit SCREENS_STEALTH_ROCK, a
+	jr nz, .yes
+	bit SCREENS_TOXIC_SPIKES, a
+	jr nz, .yes
+	bit SCREENS_STICKY_WEB, a
+	xor a
+	ret
+.yes
+    scf
+    ret

@@ -283,6 +283,7 @@ BattleAnimations::
 	dw BattleAnim_InHail
 	dw BattleAnim_StatUp
 	dw BattleAnim_StatDown
+	dw BattleAnim_SpinGuard
 	assert_table_length NUM_BATTLE_ANIMS + 1
 
 BattleAnim_Mimic:
@@ -4512,8 +4513,8 @@ BattleAnim_Pursuit:
 	anim_wait 16
 	anim_jump BattleAnim_ShowMon_1
 
-BattleAnim_RapidSpin:
-	anim_2gfx BATTLE_ANIM_GFX_WIND, BATTLE_ANIM_GFX_HIT
+BattleAnim_SpinGuard:
+	anim_1gfx BATTLE_ANIM_GFX_WIND
 	anim_obp0 $e4
 .loop
 	anim_sound 0, 0, SFX_MENU
@@ -4521,6 +4522,11 @@ BattleAnim_RapidSpin:
 	anim_wait 2
 	anim_loop 5, .loop
 	anim_wait 24
+	anim_ret
+
+BattleAnim_RapidSpin:
+	anim_2gfx BATTLE_ANIM_GFX_WIND, BATTLE_ANIM_GFX_HIT
+	anim_call BattleAnim_SpinGuard
 	anim_call BattleAnim_TargetObj_2Row
 	anim_bgeffect BATTLE_BG_EFFECT_BODY_SLAM, $0, BG_EFFECT_USER, $0
 	anim_wait 4
