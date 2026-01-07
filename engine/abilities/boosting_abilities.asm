@@ -10,6 +10,7 @@ CheckBoostingAbilities:
 	call HandleSteelWorker
 	call HandleIronFist
 	call HandleMentalFocus
+	call HandleRainSurge
 	ret
 
 HandleGuts:
@@ -117,7 +118,7 @@ HandleThickFat:
 	jmp z, FiftyPercentNerf
 	cp ICE
 	ret nz
-	jr FiftyPercentNerf
+	jmp FiftyPercentNerf
 
 INCLUDE "data/abilities/thick_fat_mons.asm"
 
@@ -133,12 +134,12 @@ HandleSolarPowerBoost:
 	cp WEATHER_SUN
 	ret nz
 
-	; boost physical type attacks by 50 percent
+	; boost special type attacks by 50 percent
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar
 	cp SPECIAL
 	ret c
-	jr FiftyPercentBoost
+	jmp FiftyPercentBoost
 
 INCLUDE "data/abilities/solar_power_mons.asm"
 
@@ -187,6 +188,26 @@ HandleMentalFocus:
 	jr FiftyPercentBoost
 
 INCLUDE "data/abilities/mental_focus_mons.asm"
+
+HandleRainSurge:
+	call GetCurrentMon
+	ld hl, RainSurgePokemon
+	call IsInByteArray
+	ret nc
+
+	; check if it is raining
+	ld a, [wBattleWeather]
+	cp WEATHER_RAIN
+	ret nz
+
+	; boost special type attacks by 50 percent
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp SPECIAL
+	ret c
+	jr FiftyPercentBoost
+
+INCLUDE "data/abilities/rain_surge_mons.asm"
 
 FiftyPercentNerf:
 	ld a, 50
