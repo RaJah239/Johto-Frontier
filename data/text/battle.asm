@@ -999,6 +999,12 @@ FadeInText:
 	line "Fade In activated!"
 	prompt
 
+TrueSightText:
+	text "<USER>'s"
+	line "True Sight"
+	cont "activated!"
+	prompt
+
 BattleDriveText:
 	text "<USER>'s"
 	line "Battle Drive"

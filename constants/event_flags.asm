@@ -381,10 +381,12 @@
 	const EVENT_BATTLE_DRIVE_FOE
 	const EVENT_FADE_IN_PLAYER
 	const EVENT_FADE_IN_FOE
+	const EVENT_TRUE_SIGHT_PLAYER
+	const EVENT_TRUE_SIGHT_FOE
 
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 228 events
+; Unused: next 226 events
 
 	const_next 600
 ; Kurt Apricorn events

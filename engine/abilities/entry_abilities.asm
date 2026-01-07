@@ -37,6 +37,7 @@ EntryAbilities2:
 	call HandleBattleStance
 	call HandleBattleDrive
 	call HandleFadeIn
+	call HandleTrueSight
 	ret
 
 ResetVolatileAbilityPlayer:
@@ -54,6 +55,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_BATTLE_STANCE_PLAYER
 	ResetEventFlag EVENT_BATTLE_DRIVE_PLAYER
 	ResetEventFlag EVENT_FADE_IN_PLAYER
+	ResetEventFlag EVENT_TRUE_SIGHT_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -71,6 +73,7 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_BATTLE_STANCE_FOE
 	ResetEventFlag EVENT_BATTLE_DRIVE_FOE
 	ResetEventFlag EVENT_FADE_IN_FOE
+	ResetEventFlag EVENT_TRUE_SIGHT_FOE
 	ret
 
 ; ========================
@@ -509,6 +512,52 @@ HandleFadeIn:
 	farjp BattleCommand_StatUpMessage
 
 INCLUDE "data/abilities/fade_in_mons.asm"
+
+HandleTrueSight:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_TRUE_SIGHT_PLAYER
+	ret nz
+	SetEventFlag EVENT_TRUE_SIGHT_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_TRUE_SIGHT_FOE
+	ret nz
+	SetEventFlag EVENT_TRUE_SIGHT_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has true sight
+	call GetCurrentMon
+	ld hl, TrueSightPokemon
+	call IsInByteArray
+	ret nc
+
+	; play foresight animation
+	ld de, FORESIGHT
+	farcall Call_PlayBattleAnim
+
+	ld hl, TrueSightText
+	call StdBattleTextbox
+
+	farjp BattleCommand_Foresight
+
+INCLUDE "data/abilities/true_sight_mons.asm"
 
 HandleRockSnare:
 	ldh a, [hSerialConnectionStatus]
