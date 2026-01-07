@@ -33,6 +33,7 @@ EntryAbilities2:
 	call HandleFortify
 	call HandleImposter
 	call HandleReflectBarrier
+	call HandleInfernalHowl
 	ret
 
 ResetVolatileAbilityPlayer:
@@ -46,6 +47,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_CHRONO_SHIFT_PLAYER
 	ResetEventFlag EVENT_FORTIFY_PLAYER
 	ResetEventFlag EVENT_IMPOSTER_PLAYER
+	ResetEventFlag EVENT_INFERNAL_HOWL_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -59,6 +61,7 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_CHRONO_SHIFT_FOE
 	ResetEventFlag EVENT_FORTIFY_FOE
 	ResetEventFlag EVENT_IMPOSTER_FOE
+	ResetEventFlag EVENT_INFERNAL_HOWL_FOE
 	ret
 
 ; ========================
@@ -765,6 +768,55 @@ HandleSeedfall:
     farjp BattleCommand_LeechSeed
 
 INCLUDE "data/abilities/seedfall_mons.asm"
+
+HandleInfernalHowl:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_INFERNAL_HOWL_PLAYER
+	ret nz
+	SetEventFlag EVENT_INFERNAL_HOWL_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_INFERNAL_HOWL_FOE
+	ret nz
+	SetEventFlag EVENT_INFERNAL_HOWL_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has infernal howl
+	call GetCurrentMon
+	ld hl, InfernalHowlPokemon
+	call IsInByteArray
+	ret nc
+
+	; play roar animation
+	ld de, ROAR
+	farcall Call_PlayBattleAnim
+
+	ld hl, InfernalHowlText
+	call StdBattleTextbox
+
+	farcall BattleCommand_AttackDown
+	farcall BattleCommand_StatDownMessage
+	farcall BattleCommand_SpecialAttackDown
+	farjp BattleCommand_StatDownMessage
+
+INCLUDE "data/abilities/infernal_howl_mons.asm"
 
 AnyHazardsPresent:
 	ld a, [wPlayerScreens]

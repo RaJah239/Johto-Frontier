@@ -373,10 +373,12 @@
 	const EVENT_FORTIFY_FOE
 	const EVENT_IMPOSTER_PLAYER
 	const EVENT_IMPOSTER_FOE
+	const EVENT_INFERNAL_HOWL_PLAYER
+	const EVENT_INFERNAL_HOWL_FOE
 
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 236 events
+; Unused: next 234 events
 
 	const_next 600
 ; Kurt Apricorn events

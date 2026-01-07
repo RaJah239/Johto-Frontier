@@ -990,6 +990,12 @@ IntimidateText:
 	line "attack!"
 	prompt
 
+InfernalHowlText:
+	text "<USER>'s"
+	line "Infernal Howl"
+	cont "activated!"
+	prompt
+
 RockSnareText:
 	text "<USER>'s"
 	line "Rock Snare"
