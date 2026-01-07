@@ -3277,8 +3277,14 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 	call Fifty_PercentBoost
 
 .fifty_percent_boost
-	; critcal hits do 50% more damage
-	call Fifty_PercentBoost
+; critcal hits do 100% more damage
+	ldh a, [hQuotient + 3]
+	add a
+	ldh [hQuotient + 3], a
+
+	ldh a, [hQuotient + 2]
+	rl a
+	ldh [hQuotient + 2], a
 
 ; Cap at $ffff.
 	ret nc
