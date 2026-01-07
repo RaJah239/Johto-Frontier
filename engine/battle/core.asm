@@ -3427,11 +3427,18 @@ TryToRunAwayFromBattle:
 	jr .print_inescapable_text
 
 .trainer_battle_info
-    farcall BattleInfoOrForfeit
+	ld a, [wLinkMode]
+	and a
+	jr z, .no_link
+	
+	; only have this during link battles
+	farjp TrainerBattleInfo
+
+.no_link
+	; only have this option in non-link battles
+	farcall BattleInfoOrForfeit
 	jmp c, SetEnemyTurn
 	ret
-
-	farjp TrainerBattleInfo
 
 .print_inescapable_text
 	call StdBattleTextbox
