@@ -1005,6 +1005,12 @@ TrueSightText:
 	cont "activated!"
 	prompt
 
+FogOfWartText:
+	text "<USER>'s"
+	line "Fog of War"
+	cont "activated!"
+	prompt
+
 BattleDriveText:
 	text "<USER>'s"
 	line "Battle Drive"

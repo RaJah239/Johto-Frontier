@@ -36,8 +36,9 @@ EntryAbilities2:
 	call HandleInfernalHowl
 	call HandleBattleStance
 	call HandleBattleDrive
-	call HandleFadeIn
 	call HandleTrueSight
+	call HandleFogOfWar
+	call HandleFadeIn
 	ret
 
 ResetVolatileAbilityPlayer:
@@ -56,6 +57,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_BATTLE_DRIVE_PLAYER
 	ResetEventFlag EVENT_FADE_IN_PLAYER
 	ResetEventFlag EVENT_TRUE_SIGHT_PLAYER
+	ResetEventFlag EVENT_FOG_OF_WAR_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -74,6 +76,7 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_BATTLE_DRIVE_FOE
 	ResetEventFlag EVENT_FADE_IN_FOE
 	ResetEventFlag EVENT_TRUE_SIGHT_FOE
+	ResetEventFlag EVENT_FOG_OF_WAR_FOE
 	ret
 
 ; ========================
@@ -558,6 +561,52 @@ HandleTrueSight:
 	farjp BattleCommand_Foresight
 
 INCLUDE "data/abilities/true_sight_mons.asm"
+
+HandleFogOfWar:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_FOG_OF_WAR_PLAYER
+	ret nz
+	SetEventFlag EVENT_FOG_OF_WAR_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_FOG_OF_WAR_FOE
+	ret nz
+	SetEventFlag EVENT_FOG_OF_WAR_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has fog of war
+	call GetCurrentMon
+	ld hl, FogOfWarPokemon
+	call IsInByteArray
+	ret nc
+
+	; play haze animation
+	ld de, HAZE
+	farcall Call_PlayBattleAnim
+
+	ld hl, FogOfWartText
+	call StdBattleTextbox
+
+	farjp BattleCommand_ResetStats
+
+INCLUDE "data/abilities/fog_of_war_mons.asm"
 
 HandleRockSnare:
 	ldh a, [hSerialConnectionStatus]
