@@ -11,6 +11,7 @@ EntryAbilities1:
 	call HandleSnowWarning
 	call HandleNaturalCure
 	call HandleSpinGuard
+	call HandleSeedfall
 	ret
 
 ; ==============
@@ -743,6 +744,27 @@ HandleSpinGuard:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/spin_guard_mons.asm"
+
+HandleSeedfall:
+	; check if current pokemon has seedfall
+	call GetCurrentMon
+	ld hl, SeedfallPokemon
+	call IsInByteArray
+	ret nc
+
+	; skip if foe is already seeded
+	ld a, BATTLE_VARS_SUBSTATUS4_OPP
+	call GetBattleVarAddr
+	bit SUBSTATUS_LEECH_SEED, [hl]
+	ret nz
+
+	; play leech seed animation
+	ld de, LEECH_SEED
+	farcall Call_PlayBattleAnim
+
+    farjp BattleCommand_LeechSeed
+
+INCLUDE "data/abilities/seedfall_mons.asm"
 
 AnyHazardsPresent:
 	ld a, [wPlayerScreens]
