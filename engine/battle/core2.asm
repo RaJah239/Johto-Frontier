@@ -2827,9 +2827,24 @@ FieldInfoBox2:
 .enemy_taunt
     ld a, [wEnemyTauntCount]
     and a
-    ret z
+	jr z, .leech_seed
     lb bc, 11, 12
-    jp FieldInfoBoxStatus
+    call FieldInfoBoxStatus
+
+; leech seed
+.leech_seed
+	ld de, FieldTexts.leech_seed
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_LEECH_SEED, a
+	jr z, .enemy_leech_seed
+	lb bc, 1, 13
+	call FieldInfoBoxStatus
+.enemy_leech_seed
+	ld a, [wEnemySubStatus4]
+	bit SUBSTATUS_LEECH_SEED, a
+	ret z
+	lb bc, 11, 13
+	jmp FieldInfoBoxStatus
 
 FieldInfoBox1Reflect: ; input: bc -> coords
 	ld hl, wPlayerScreens
@@ -3152,6 +3167,9 @@ FieldTexts:
 
 .taunt:
 	db "Taunt@"
+
+.leech_seed:
+	db "Seeded@"
 
 .turnsleft:
 	db " turns left@"
