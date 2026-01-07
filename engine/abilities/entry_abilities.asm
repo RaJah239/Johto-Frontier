@@ -41,6 +41,7 @@ EntryAbilities2:
 	call HandleFogOfWar
 	call HandleFadeIn
 	call HandleChaoticBoost
+	call HandleSanctuary
 	ret
 
 ResetVolatileAbilityPlayer:
@@ -62,6 +63,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_FOG_OF_WAR_PLAYER
 	ResetEventFlag EVENT_DEFOG_PLAYER
 	ResetEventFlag EVENT_CHAOTIC_BOOST_PLAYER
+	ResetEventFlag EVENT_SANCTUARY_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -83,6 +85,7 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_FOG_OF_WAR_FOE
 	ResetEventFlag EVENT_DEFOG_FOE
 	ResetEventFlag EVENT_CHAOTIC_BOOST_FOE
+	ResetEventFlag EVENT_SANCTUARY_FOE
 	ret
 
 ; ========================
@@ -1187,6 +1190,60 @@ HandleInfernalHowl:
 	farjp BattleCommand_StatDownMessage
 
 INCLUDE "data/abilities/infernal_howl_mons.asm"
+
+HandleSanctuary:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_SANCTUARY_PLAYER
+	ret nz
+	SetEventFlag EVENT_SANCTUARY_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_SANCTUARY_FOE
+	ret nz
+	SetEventFlag EVENT_SANCTUARY_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has sanctuary
+	call GetCurrentMon
+	ld hl, SanctuaryPokemon
+	call IsInByteArray
+	ret nc
+
+	ld hl, wPlayerScreens
+	ld de, wPlayerSafeguardCount
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .ok
+	ld hl, wEnemyScreens
+	ld de, wEnemySafeguardCount
+.ok
+	bit SCREENS_SAFEGUARD, [hl]
+	ret nz
+
+	; play safeguard animation
+	ld de, SAFEGUARD
+    farcall Call_PlayBattleAnim
+
+	farjp BattleCommand_Safeguard
+
+INCLUDE "data/abilities/sanctuary_mons.asm"
 
 AnyHazardsPresent:
 	ld a, [wPlayerScreens]
