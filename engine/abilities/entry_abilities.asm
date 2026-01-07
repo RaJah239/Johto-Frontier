@@ -34,6 +34,7 @@ EntryAbilities2:
 	call HandleImposter
 	call HandleReflectBarrier
 	call HandleInfernalHowl
+	call HandleBattleStance
 	ret
 
 ResetVolatileAbilityPlayer:
@@ -48,6 +49,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_FORTIFY_PLAYER
 	ResetEventFlag EVENT_IMPOSTER_PLAYER
 	ResetEventFlag EVENT_INFERNAL_HOWL_PLAYER
+	ResetEventFlag EVENT_BATTLE_STANCE_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -62,6 +64,7 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_FORTIFY_FOE
 	ResetEventFlag EVENT_IMPOSTER_FOE
 	ResetEventFlag EVENT_INFERNAL_HOWL_FOE
+	ResetEventFlag EVENT_BATTLE_STANCE_FOE
 	ret
 
 ; ========================
@@ -371,6 +374,49 @@ HandleIntimidate:
 	farjp BattleCommand_StatDownMessage
 
 INCLUDE "data/abilities/intimidate_mons.asm"
+
+HandleBattleStance:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_BATTLE_STANCE_PLAYER
+	ret nz
+	SetEventFlag EVENT_BATTLE_STANCE_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_BATTLE_STANCE_FOE
+	ret nz
+	SetEventFlag EVENT_BATTLE_STANCE_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if switched in pokemon has battle stance
+	call GetCurrentMon
+	ld hl, BattleStancePokemon
+	call IsInByteArray
+	ret nc
+
+	ld hl, BattleStanceText
+	call StdBattleTextbox
+
+	farcall BattleCommand_DefenseUp
+	farjp BattleCommand_StatUpMessage
+
+INCLUDE "data/abilities/battle_stance_mons.asm"
 
 HandleRockSnare:
 	ldh a, [hSerialConnectionStatus]

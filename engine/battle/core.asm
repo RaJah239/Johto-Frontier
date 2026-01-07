@@ -159,6 +159,7 @@ BattleTurn:
 ; ============================
 ; === Entrance Abilities 2 ===
 ; ============================
+	call ClearSprites
 	farcall EntryAbilities2
 
 ; ======================

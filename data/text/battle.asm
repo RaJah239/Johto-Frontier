@@ -988,6 +988,12 @@ IntimidateText:
 	cont "activated!"
 	prompt
 
+BattleStanceText:
+	text "<USER>'s"
+	line "Battle Stance"
+	cont "activated!"
+	prompt
+
 InfernalHowlText:
 	text "<USER>'s"
 	line "Infernal Howl"
