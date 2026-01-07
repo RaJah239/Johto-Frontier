@@ -3701,6 +3701,11 @@ SpikesDamage:
 	and a
 	ret nz
 
+	call GetCurrentMon
+	ld hl, HazardGuardMons
+	call IsInByteArray
+	ret c
+
 	callfar GetUserItem
 	ld a, b
 	cp HELD_HEAVY_BOOTS
@@ -3959,6 +3964,7 @@ SpikesDamage:
 	pop bc
 	ret
 
+INCLUDE "data/abilities/hazard_guard_mons.asm"
 INCLUDE "data/residual_damage/spike_immune_mons.asm"
 INCLUDE "data/abilities/magic_guard_mons.asm"
 
