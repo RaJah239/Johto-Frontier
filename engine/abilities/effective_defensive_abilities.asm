@@ -30,8 +30,10 @@ HandleSolidRock:
 	jr z, .nerf_damage
 	cp SUPER_EFFECTIVE
 	ret nz
+	jr Half_Damage
 .nerf_damage
-	jr TwentyFive_PercentNerf
+	call Half_Damage
+	jr Half_Damage
 
 INCLUDE "data/abilities/solid_rock_mons.asm"
 
@@ -79,6 +81,12 @@ Fifty_PercentNerf:
 	call Multiply
 
 	ld a, 100
+	ldh [hDivisor], a
+	ld b, 4
+	jmp Divide
+
+Half_Damage:
+	ld a, 2
 	ldh [hDivisor], a
 	ld b, 4
 	jmp Divide

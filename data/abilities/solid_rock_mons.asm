@@ -1,6 +1,10 @@
-; List of all Pokemon that only take 3/4 damage from both "Super Effective" and "Extremely Effective" hits
+; List of all Pokemon that only take regular damage from
+; "Super Effective" and "Extremely Effective" hits
 
 SolidRockPokemon:
+	db ONIX
 	db RHYHORN
-	db RHYDON
+	db TORTERRA
+	db OMANYTE
+	db OMASTAR
 	db -1 ; end
