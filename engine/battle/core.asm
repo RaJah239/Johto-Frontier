@@ -3406,6 +3406,10 @@ TryToRunAwayFromBattle:
 	jr .print_inescapable_text
 
 .trainer_battle_info
+    farcall BattleInfoOrForfeit
+	jmp c, SetEnemyTurn
+	ret
+
 	farjp TrainerBattleInfo
 
 .print_inescapable_text

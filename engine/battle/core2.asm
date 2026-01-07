@@ -2389,7 +2389,52 @@ WaterTypeChart:
 .DefenderStringDoubleDamage:
 	db "2× Grass/Electric@"
 
-TrainerBattleInfo::
+SeeBattleInfoText:
+	text "See Battle Info?"
+	done
+
+ForfeitMatchText:
+	text "Forfeit Battle?"
+	done
+
+BattleInfoOrForfeit:
+	ld hl, SeeBattleInfoText
+	call PrintText
+	call YesNoBox
+	jr nc, .see_info
+
+	ld hl, ForfeitMatchText
+	call PrintText
+	call NoYesBox
+	jr c, .return_to_battle
+
+	xor a
+	ld [wBattleMonHP], a
+	ld [wBattleMonHP + 1], a
+	ld [wPartyMon1HP], a
+	ld [wPartyMon1HP + 1], a
+	ld [wPartyMon2HP], a
+	ld [wPartyMon2HP + 1], a
+	ld [wPartyMon3HP], a
+	ld [wPartyMon3HP + 1], a
+	ld [wPartyMon4HP], a
+	ld [wPartyMon4HP + 1], a
+	ld [wPartyMon5HP], a
+	ld [wPartyMon5HP + 1], a
+	ld [wPartyMon6HP], a
+	ld [wPartyMon6HP + 1], a
+	farcall HandlePlayerMonFaint
+	scf
+	ret
+
+.return_to_battle
+	xor a
+	ret
+
+.see_info
+	; fallthrough
+
+TrainerBattleInfo:
 	push hl
 	push de
 	push bc
