@@ -3269,14 +3269,34 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 	pop bc
 	pop de
 	pop hl
-	jr c, .extra_damage
-	jr .fifty_percent_boost
+	jr c, .sniper_mons_damage
+	jr .regular_crit_damage
 
-; sniper pokemon crits deal 1.5 x 1.5 = 2.25 x base damage
-.extra_damage
-	call Fifty_PercentBoost
+; sniper pokemon crits deal 3x base damage
+.sniper_mons_damage
+; x3
+	xor a
+	ldh [hMultiplicand + 0], a
+	ldh a, [hQuotient + 2]
+	ldh [hMultiplicand + 1], a
+	ldh a, [hQuotient + 3]
+	ldh [hMultiplicand + 2], a
+	ld a, 30
+	ldh [hMultiplier], a
+	call Multiply
+	ld a, 10
+	ldh [hDivisor], a
+	ld b, 4
+	call Divide
 
-.fifty_percent_boost
+	ldh a, [hQuotient + 3]
+	ldh [hProduct + 3], a
+
+	ldh a, [hQuotient + 2]
+	ldh [hProduct + 2], a
+	jr .CritCap
+
+.regular_crit_damage
 ; critcal hits do 100% more damage
 	ldh a, [hQuotient + 3]
 	add a
@@ -3287,6 +3307,7 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 	ldh [hQuotient + 2], a
 
 ; Cap at $ffff.
+.CritCap
 	ret nc
 
 	ld a, $ff

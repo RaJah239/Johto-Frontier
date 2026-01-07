@@ -1,4 +1,4 @@
-; List of all Pokemon whose critical hits do 2.25 x base damage
+; List of all Pokemon whose critical hits do 3 x base damage
 
 SniperPokemon:
     db HORSEA
