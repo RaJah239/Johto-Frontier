@@ -994,6 +994,11 @@ BattleStanceText:
 	cont "activated!"
 	prompt
 
+FadeInText:
+	text "<USER>'s"
+	line "Fade In activated!"
+	prompt
+
 BattleDriveText:
 	text "<USER>'s"
 	line "Battle Drive"
