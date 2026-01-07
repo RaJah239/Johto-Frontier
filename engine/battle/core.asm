@@ -878,6 +878,8 @@ GetMovePriority:
 	; check move
 	cp IRON_HEAD
 	jr z, .mon_check
+	cp CURSE
+	jr z, .mon_check2
 
 	; check if a Weather move was used
 	cp SUNNY_DAY
@@ -916,6 +918,20 @@ GetMovePriority:
 	jr z, .priority_2
 
 	; Neither is Blastoise
+	jr .regular_priority
+
+.mon_check2
+	; check if player is using snorlax
+	ld a, [wBattleMonSpecies]
+	cp SNORLAX
+	jr z, .priority_2
+
+	; check if foe is using Snorlax
+	ld a, [wEnemyMonSpecies]
+	cp SNORLAX
+	jr z, .priority_2
+
+	; Neither is Snorlax
 	jr .regular_priority
 
 .check_rock
