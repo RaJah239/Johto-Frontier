@@ -387,10 +387,12 @@
 	const EVENT_FOG_OF_WAR_FOE
 	const EVENT_DEFOG_PLAYER
 	const EVENT_DEFOG_FOE
+	const EVENT_CHAOTIC_BOOST_PLAYER
+	const EVENT_CHAOTIC_BOOST_FOE
 
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 222 events
+; Unused: next 220 events
 
 	const_next 600
 ; Kurt Apricorn events

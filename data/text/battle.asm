@@ -1017,6 +1017,12 @@ CleanSweepText:
 	cont "activated!"
 	prompt
 
+ChaoticBoostText:
+	text "<USER>'s"
+	line "Chaotic Boost"
+	cont "activated!"
+	prompt
+
 BattleDriveText:
 	text "<USER>'s"
 	line "Battle Drive"

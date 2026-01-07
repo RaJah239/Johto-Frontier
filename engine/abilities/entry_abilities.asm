@@ -40,6 +40,7 @@ EntryAbilities2:
 	call HandleCleanSweep
 	call HandleFogOfWar
 	call HandleFadeIn
+	call HandleChaoticBoost
 	ret
 
 ResetVolatileAbilityPlayer:
@@ -60,6 +61,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_TRUE_SIGHT_PLAYER
 	ResetEventFlag EVENT_FOG_OF_WAR_PLAYER
 	ResetEventFlag EVENT_DEFOG_PLAYER
+	ResetEventFlag EVENT_CHAOTIC_BOOST_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -80,6 +82,7 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_TRUE_SIGHT_FOE
 	ResetEventFlag EVENT_FOG_OF_WAR_FOE
 	ResetEventFlag EVENT_DEFOG_FOE
+	ResetEventFlag EVENT_CHAOTIC_BOOST_FOE
 	ret
 
 ; ========================
@@ -518,6 +521,85 @@ HandleFadeIn:
 	farjp BattleCommand_StatUpMessage
 
 INCLUDE "data/abilities/fade_in_mons.asm"
+
+HandleChaoticBoost:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_CHAOTIC_BOOST_PLAYER
+	ret nz
+	SetEventFlag EVENT_CHAOTIC_BOOST_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_CHAOTIC_BOOST_FOE
+	ret nz
+	SetEventFlag EVENT_CHAOTIC_BOOST_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if switched in pokemon has battle drive
+	call GetCurrentMon
+	ld hl, ChaoticBoostPokemon
+	call IsInByteArray
+	ret nc
+
+	ld hl, ChaoticBoostText
+	call StdBattleTextbox
+
+	call BattleRandom
+	cp 43
+	jr c, .AtkUp
+	cp 86
+	jr c, .DefUp
+	cp 129
+	jr c, .SpAtkUp
+	cp 172
+	jr c, .SpDefUp
+	cp 215
+	jr c, .SpdUp
+	cp 255
+	jr c, .EvasionUp
+	ret
+
+.AtkUp
+	farcall BattleCommand_AttackUp
+	farjp BattleCommand_StatUpMessage
+
+.DefUp
+	farcall BattleCommand_DefenseUp
+	farjp BattleCommand_StatUpMessage
+
+.SpAtkUp
+	farcall BattleCommand_SpecialAttackUp
+	farjp BattleCommand_StatUpMessage
+
+.SpDefUp
+	farcall BattleCommand_SpecialDefenseUp
+	farjp BattleCommand_StatUpMessage
+
+.SpdUp
+	farcall BattleCommand_SpeedUp
+	farjp BattleCommand_StatUpMessage
+
+.EvasionUp
+	farcall BattleCommand_EvasionUp
+	farjp BattleCommand_StatUpMessage
+
+INCLUDE "data/abilities/chaotic_boost_mons.asm"
 
 HandleTrueSight:
 	ldh a, [hSerialConnectionStatus]
