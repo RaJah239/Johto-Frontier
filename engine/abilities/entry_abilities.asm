@@ -364,11 +364,11 @@ HandleIntimidate:
 	ld de, LEER
 	farcall Call_PlayBattleAnim
 
-	farcall BattleCommand_StatDownMessage
+	ld hl, IntimidateText
+	call StdBattleTextbox
 
 	farcall BattleCommand_AttackDown
-	ld hl, IntimidateText
-	jmp StdBattleTextbox
+	farjp BattleCommand_StatDownMessage
 
 INCLUDE "data/abilities/intimidate_mons.asm"
 

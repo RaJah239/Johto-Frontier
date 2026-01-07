@@ -984,10 +984,8 @@ ReflectBarrierText:
 
 IntimidateText:
 	text "<USER>'s"
-	line "Intimidate cuts"
-
-	para "<TARGET>'s"
-	line "attack!"
+	line "Intimidate"
+	cont "activated!"
 	prompt
 
 InfernalHowlText:
