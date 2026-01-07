@@ -11,6 +11,7 @@ CheckBoostingAbilities:
 	call HandleIronFist
 	call HandleMentalFocus
 	call HandleRainSurge
+	call HandleShieldDust
 	ret
 
 HandleGuts:
@@ -154,7 +155,7 @@ HandleSteelWorker:
 	and TYPE_MASK
 	cp STEEL
 	ret nz
-	jr FiftyPercentBoost
+	jmp FiftyPercentBoost
 
 INCLUDE "data/abilities/steel_worker_mons.asm"
 
@@ -208,6 +209,20 @@ HandleRainSurge:
 	jr FiftyPercentBoost
 
 INCLUDE "data/abilities/rain_surge_mons.asm"
+
+HandleShieldDust:
+	call GetOpposingMon
+	ld hl, ShieldDustPokemon
+	call IsInByteArray
+	ret c
+
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp SPECIAL
+	ret nc
+	jr FiftyPercentBoost
+
+INCLUDE "data/abilities/shield_dust_mons.asm"
 
 FiftyPercentNerf:
 	ld a, 50
