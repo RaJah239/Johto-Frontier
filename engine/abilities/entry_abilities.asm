@@ -43,6 +43,7 @@ EntryAbilities2:
 	call HandleChaoticBoost
 	call HandleSanctuary
 	call HandleSiegebreaker
+	call HandleProvocateur
 	ret
 
 ResetVolatileAbilityPlayer:
@@ -66,6 +67,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_CHAOTIC_BOOST_PLAYER
 	ResetEventFlag EVENT_SANCTUARY_PLAYER
 	ResetEventFlag EVENT_SIEGEBREAKER_PLAYER
+	ResetEventFlag EVENT_PROVOCATEUR_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -89,6 +91,7 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_CHAOTIC_BOOST_FOE
 	ResetEventFlag EVENT_SANCTUARY_FOE
 	ResetEventFlag EVENT_SIEGEBREAKER_FOE
+	ResetEventFlag EVENT_PROVOCATEUR_FOE
 	ret
 
 ; ========================
@@ -1296,6 +1299,68 @@ HandleSiegebreaker:
 	farjp BattleCommand_BreakScreens
 
 INCLUDE "data/abilities/siegebreaker_mons.asm"
+
+HandleProvocateur:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_PROVOCATEUR_PLAYER
+	ret nz
+	SetEventFlag EVENT_PROVOCATEUR_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_PROVOCATEUR_FOE
+	ret nz
+	SetEventFlag EVENT_PROVOCATEUR_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has provocateur
+	call GetCurrentMon
+	ld hl, ProvocateurPokemon
+	call IsInByteArray
+	ret nc
+
+; are we dealing with foe or player
+; end if the respecitve is already under taunt
+    ldh a, [hBattleTurn]
+	and a
+	jr z, .foe
+
+	ld a, [wPlayerTauntCount]
+	and a
+	ret nz
+	jr .taunt
+.foe
+	ld a, [wEnemyTauntCount]
+	and a
+	ret nz
+
+.taunt
+	; play taunt animation
+	ld de, TAUNT
+    farcall Call_PlayBattleAnim
+
+	ld hl, ProvocateurText
+	call StdBattleTextbox
+
+	farjp BattleCommand_Taunt
+
+INCLUDE "data/abilities/provocateur_mons.asm"
 
 AnyHazardsPresent:
 	ld a, [wPlayerScreens]

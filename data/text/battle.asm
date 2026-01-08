@@ -1029,6 +1029,12 @@ SiegebreakerText:
 	cont "activated!"
 	prompt
 
+ProvocateurText:
+	text "<USER>'s"
+	line "Provocateur"
+	cont "activated!"
+	prompt
+
 BattleDriveText:
 	text "<USER>'s"
 	line "Battle Drive"
