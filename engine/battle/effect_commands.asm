@@ -1609,6 +1609,23 @@ BattleCommand_CheckHit:
 
 .not_blizzard_or_true_blizzard_mon
 
+; ============================
+; === Ability: Sure Stream ===
+; ============================
+	; check if blizzard was used
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp HYDRO_PUMP
+	jr nz, .not_hydro_pump_or_sure_stream_mon
+
+	; check it is was a sure stream pokemon
+	call GetCurrentMon
+	ld hl, SureStreamPokemon
+	call IsInByteArray
+	ret c
+
+.not_hydro_pump_or_sure_stream_mon
+
 	call .StatModifiers
 
 	ld a, [wPlayerMoveStruct + MOVE_ACC]
@@ -1795,6 +1812,7 @@ INCLUDE "data/abilities/true_horn_mons.asm"
 INCLUDE "data/abilities/stormbound_mons.asm"
 INCLUDE "data/abilities/true_flame_mons.asm"
 INCLUDE "data/abilities/true_blizzard_mons.asm"
+INCLUDE "data/abilities/sure_stream_mons.asm"
 INCLUDE "data/battle/accuracy_multipliers.asm"
 INCLUDE "data/abilities/compound_eyes_mons.asm"
 
