@@ -1643,6 +1643,23 @@ BattleCommand_CheckHit:
 
 .not_rock_slide_or_stonefall_mon
 
+; ============================
+; === Ability: Stonebound =====
+; ============================
+	; check if stone edge was used
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp STONE_EDGE
+	jr nz, .not_stone_edge_or_stonebound_mon
+
+	; check it is was a stonebound pokemon
+	call GetCurrentMon
+	ld hl, StoneboundPokemon
+	call IsInByteArray
+	ret c
+
+.not_stone_edge_or_stonebound_mon
+
 	call .StatModifiers
 
 	ld a, [wPlayerMoveStruct + MOVE_ACC]
@@ -1831,6 +1848,7 @@ INCLUDE "data/abilities/true_flame_mons.asm"
 INCLUDE "data/abilities/true_blizzard_mons.asm"
 INCLUDE "data/abilities/sure_stream_mons.asm"
 INCLUDE "data/abilities/stonefall_mons.asm"
+INCLUDE "data/abilities/stonebound_mons.asm"
 INCLUDE "data/battle/accuracy_multipliers.asm"
 INCLUDE "data/abilities/compound_eyes_mons.asm"
 
