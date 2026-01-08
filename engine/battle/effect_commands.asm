@@ -710,7 +710,7 @@ BattleCommand_DoTurn:
 	ret z
 
 	ld a, [de]
-	and 1 << SUBSTATUS_IN_LOOP | 1 << SUBSTATUS_RAMPAGE | 1 << SUBSTATUS_BIDE
+	and 1 << SUBSTATUS_IN_LOOP | 1 << SUBSTATUS_RAMPAGE
 	ret nz
 
 	call .consume_pp

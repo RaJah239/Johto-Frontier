@@ -217,9 +217,6 @@ AI_TryItem:
 	inc a
 	ld [wEnemyGoesFirst], a
 
-	ld hl, wEnemySubStatus3
-	res SUBSTATUS_BIDE, [hl]
-
 	xor a
 	ld [wEnemyProtectCount], a
 
