@@ -332,6 +332,24 @@ DreamEaterMiss:
 	and SLP_MASK
 	ret
 
+DrainSub:
+; Return z if using an HP drain move on a substitute.
+	farcall CheckSubstituteOpp
+	jr z, .not_draining_sub
+
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+
+	cp EFFECT_LEECH_HIT
+	ret z
+	cp EFFECT_DREAM_EATER
+	ret z
+
+.not_draining_sub
+	ld a, 1
+	and a
+	ret
+
 ProtectMiss:
 ; Return nz if the opponent is protected.
 	ld a, BATTLE_VARS_SUBSTATUS1_OPP
