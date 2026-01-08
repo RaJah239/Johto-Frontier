@@ -222,10 +222,6 @@ AI_TryItem:
 
 	xor a
 	ld [wEnemyProtectCount], a
-	ld [wEnemyRageCounter], a
-
-	ld hl, wEnemySubStatus4
-	res SUBSTATUS_RAGE, [hl]
 
 	xor a
 	ld [wLastEnemyCounterMove], a
@@ -615,8 +611,6 @@ AI_Switch:
 	ld a, $1
 	ld [wEnemyIsSwitching], a
 	ld [wEnemyGoesFirst], a
-	ld hl, wEnemySubStatus4
-	res SUBSTATUS_RAGE, [hl]
 	xor a
 	ldh [hBattleTurn], a
 	callfar PursuitSwitch

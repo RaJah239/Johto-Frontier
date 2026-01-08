@@ -2447,32 +2447,6 @@ BattleCommand_CheckFaint:
 BattleCommand_CheckContact:
 	ret
 
-BattleCommand_RageDamage:
-	ld a, [wCurDamage]
-	ld h, a
-	ld b, a
-	ld a, [wCurDamage + 1]
-	ld l, a
-	ld c, a
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wPlayerRageCounter]
-	jr z, .rage_loop
-	ld a, [wEnemyRageCounter]
-.rage_loop
-	and a
-	jr z, .done
-	dec a
-	add hl, bc
-	jr nc, .rage_loop
-	ld hl, $ffff
-.done
-	ld a, h
-	ld [wCurDamage], a
-	ld a, l
-	ld [wCurDamage + 1], a
-	ret
-
 EndMoveEffect:
 	ld a, [wBattleScriptBufferAddress]
 	ld l, a
@@ -6101,8 +6075,6 @@ EndRechargeOpp:
 	res SUBSTATUS_RECHARGE, [hl]
 	pop hl
 	ret
-
-INCLUDE "engine/battle/move_effects/rage.asm"
 
 BattleCommand_DoubleFlyingDamage:
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP

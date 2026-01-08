@@ -737,7 +737,7 @@ ParsePlayerAction:
 .not_encored
 	ld a, [wBattlePlayerAction]
 	cp BATTLEPLAYERACTION_SWITCH
-	jr z, .reset_rage
+	jr z, .reset_protect
 	and a
 	jr nz, .reset_bide
 	ld a, [wPlayerSubStatus3]
@@ -768,15 +768,6 @@ ParsePlayerAction:
 	xor a
 	ld [wPlayerCharging], a
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
-	cp EFFECT_RAGE
-	jr z, .continue_rage
-	ld hl, wPlayerSubStatus4
-	res SUBSTATUS_RAGE, [hl]
-	xor a
-	ld [wPlayerRageCounter], a
-
-.continue_rage
-	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
 	cp EFFECT_PROTECT
 	jr z, .continue_protect
 	cp EFFECT_ENDURE
@@ -792,21 +783,15 @@ ParsePlayerAction:
 .locked_in
 	xor a
 	ld [wPlayerProtectCount], a
-	ld [wPlayerRageCounter], a
-	ld hl, wPlayerSubStatus4
-	res SUBSTATUS_RAGE, [hl]
 
 .continue_protect
 	call ParseEnemyAction
 	xor a
 	ret
 
-.reset_rage
+.reset_protect
 	xor a
 	ld [wPlayerProtectCount], a
-	ld [wPlayerRageCounter], a
-	ld hl, wPlayerSubStatus4
-	res SUBSTATUS_RAGE, [hl]
 	xor a
 	ret
 
@@ -3321,7 +3306,6 @@ endr
 	ld [hl], a
 	ld [wEnemyDisableCount], a
 	ld [wEnemyProtectCount], a
-	ld [wEnemyRageCounter], a
 	ld [wEnemyDisabledMove], a
 	ld [wEnemyMinimized], a
 	ld [wPlayerWrapCount], a
@@ -3721,7 +3705,6 @@ endr
 	ld [hl], a
 	ld [wPlayerDisableCount], a
 	ld [wPlayerProtectCount], a
-	ld [wPlayerRageCounter], a
 	ld [wDisabledMove], a
 	ld [wPlayerMinimized], a
 	ld [wEnemyWrapCount], a
@@ -5127,9 +5110,6 @@ EnemyMonEntrance:
 BattleMonEntrance:
 	call WithdrawMonText
 
-	ld hl, wPlayerSubStatus4
-	res SUBSTATUS_RAGE, [hl]
-
 	call SetEnemyTurn
 	call PursuitSwitch
 	jr c, .ok
@@ -5784,7 +5764,7 @@ ParseEnemyAction:
 
 .skip_encore
 	call CheckEnemyLockedIn
-	jmp nz, ResetVarsForSubstatusRage
+	jr nz, ResetVarsForSubstatusRage
 	jr .continue
 
 .skip_turn
@@ -5850,21 +5830,8 @@ ParseEnemyAction:
 .skip_load
 	call SetEnemyTurn
 	callfar UpdateMoveData
-	call CheckEnemyLockedIn
-	jr nz, .raging
 	xor a
 	ld [wEnemyCharging], a
-
-.raging
-	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
-	cp EFFECT_RAGE
-	jr z, .no_rage
-	ld hl, wEnemySubStatus4
-	res SUBSTATUS_RAGE, [hl]
-	xor a
-	ld [wEnemyRageCounter], a
-
-.no_rage
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
 	cp EFFECT_PROTECT
 	ret z
@@ -5881,9 +5848,6 @@ ParseEnemyAction:
 ResetVarsForSubstatusRage:
 	xor a
 	ld [wEnemyProtectCount], a
-	ld [wEnemyRageCounter], a
-	ld hl, wEnemySubStatus4
-	res SUBSTATUS_RAGE, [hl]
 	ret
 
 CheckEnemyLockedIn:

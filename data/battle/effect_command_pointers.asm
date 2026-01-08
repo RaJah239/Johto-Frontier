@@ -124,14 +124,12 @@ BattleCommandPointers:
 	dw BattleCommand_StatUpAnim
 	dw BattleCommand_SwitchTurn
 	dw BattleCommand_BellyDrum
-	dw BattleCommand_Rage
 	dw BattleCommand_DoubleFlyingDamage
 	dw BattleCommand_DoubleUndergroundDamage
 	dw BattleCommand_MirrorCoat
 	dw BattleCommand_DoubleMinimizeDamage
 	dw BattleCommand_SkipSunCharge
 	dw BattleCommand_Teleport
-	dw BattleCommand_RageDamage
 	dw BattleCommand_ResetTypeMatchup
 	dw BattleCommand_AllStatsUp
 	dw BattleCommand_RaiseSubNoAnim

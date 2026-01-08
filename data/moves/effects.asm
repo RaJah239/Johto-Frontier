@@ -942,26 +942,6 @@ HyperBeam:
 	rechargenextturn
 	endmove
 
-Rage:
-	usedmovetext
-	doturn
-	critical
-	damagestats
-	damagecalc
-	stab
-	checkhit
-	ragedamage
-	damagevariation
-	moveanim
-	failuretext
-	rage
-	applydamage
-	criticaltext
-	supereffectivetext
-	checkfaint
-	kingsrock
-	endmove
-
 Mimic:
 	usedmovetext
 	doturn

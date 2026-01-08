@@ -124,14 +124,12 @@ ENDM
 	command statupanim              ; 92
 	command switchturn              ; 93
 	command bellydrum               ; 95
-	command rage                    ; 97
 	command doubleflyingdamage      ; 98
 	command doubleundergrounddamage ; 99
 	command mirrorcoat              ; 9a
 	command doubleminimizedamage    ; 9d
 	command skipsuncharge           ; 9e
 	command teleport                ; a0
-	command ragedamage              ; a2
 	command resettypematchup        ; a3
 	command allstatsup              ; a4
 	command raisesubnoanim          ; a6

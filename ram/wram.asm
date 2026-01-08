@@ -605,10 +605,7 @@ wExpShare:: db
 wExpShareText:: db
 wHalfDamage:: db
 
-	ds 9
-
-wPlayerRageCounter:: db
-wEnemyRageCounter:: db
+	ds 11
 
 wTrickRoomCount:: db
 
