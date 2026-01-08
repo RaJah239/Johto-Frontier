@@ -407,6 +407,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_BRICK_BREAK,      AI_Smart_BrickBreak
 	dbw EFFECT_PARALYZE_HIT,     AI_Smart_ParalyzeTarget
 	dbw EFFECT_ACROBATICS,       AI_Smart_Acrobatics
+	dbw TRICK,                   AI_Smart_Trick
 	db -1 ; end
 
 AI_Smart_Acrobatics:
@@ -2066,6 +2067,7 @@ AI_Smart_Rollout:
 	inc [hl]
 	ret
 
+AI_Smart_Trick:
 AI_Smart_Swagger:
 AI_Smart_Attract:
 ; 80% chance to encourage this move during the first turn of player's Pokemon.

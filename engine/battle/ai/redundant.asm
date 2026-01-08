@@ -42,12 +42,22 @@ AI_Redundant:
 	dbw EFFECT_SWAGGER,      .Swagger
 	dbw EFFECT_HAIL,         .Hail
 	dbw EFFECT_FAKE_OUT,     .FakeOut
+	dbw EFFECT_TRICK,        .Trick
 	db -1
 
 .FakeOut:
 	ld a, [wEnemyTurnsTaken]
 	and a
 	ret
+
+.Trick:
+	ld a, [wEnemyMonItem]
+	and a
+	jp nz, .NotRedundant
+	ld a, [wBattleMonItem]
+	and a
+	jmp z, .Redundant
+	jmp .NotRedundant
 
 .Hail:
 	ld a, [wBattleWeather]
