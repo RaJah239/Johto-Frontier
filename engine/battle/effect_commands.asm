@@ -4642,6 +4642,10 @@ BattleCommand_StatDownMessage:
 	ld a, [wFailedMessage]
 	and a
 	ret nz
+
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_stat_down_anim
 	
 	; play animation after every stat down
 	call BattleCommand_SwitchTurn
@@ -4651,6 +4655,7 @@ BattleCommand_StatDownMessage:
 	farcall Call_PlayBattleAnim
 	call BattleCommand_SwitchTurn
 
+.skip_stat_down_anim
 	ld a, [wLoweredStat]
 	and $f
 	ld b, a
@@ -4809,10 +4814,15 @@ BattleCommand_StatUpMessage:
 	and a
 	ret nz
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_stat_up_anim
+
 	; play animation after every stat up
 	ld de, ANIM_STAT_UP
 	farcall Call_PlayBattleAnim	
 
+.skip_stat_up_anim
 	ld a, [wLoweredStat]
 	and $f
 	ld b, a
