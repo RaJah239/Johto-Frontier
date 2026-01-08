@@ -98,6 +98,10 @@ BattleCommand_Trick:
 	call GetItemName
 	ld hl, TrickUserObtainedText
 	call StdBattleTextbox
+	ld hl, wEnemySubStatus5
+	res SUBSTATUS_ENCORED, [hl]
+	ld hl, wPlayerSubStatus5
+	res SUBSTATUS_ENCORED, [hl]
 
 .get_target_item
 	ld hl, wEnemyMonItem
@@ -112,4 +116,9 @@ BattleCommand_Trick:
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	ld hl, TrickTargetObtainedText
-	jmp StdBattleTextbox
+	call StdBattleTextbox
+	ld hl, wEnemySubStatus5
+	res SUBSTATUS_ENCORED, [hl]
+	ld hl, wPlayerSubStatus5
+	res SUBSTATUS_ENCORED, [hl]
+	ret
