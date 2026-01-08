@@ -3833,7 +3833,7 @@ BattleCommand_PoisonTarget:
 	call GetOpposingMon
 	ld hl, SerenityPokemon
 	call IsInByteArray
-	ret nc
+	ret c
 	; fallthrough
 
 	ld a, [wEffectFailed]
@@ -4084,7 +4084,7 @@ BattleCommand_BurnTarget:
 	call GetOpposingMon
 	ld hl, SerenityPokemon
 	call IsInByteArray
-	ret nc
+	ret c
 	; fallthrough
 
 	ld a, [wEffectFailed]
@@ -4157,7 +4157,7 @@ BattleCommand_FreezeTarget:
 	call GetOpposingMon
 	ld hl, SerenityPokemon
 	call IsInByteArray
-	ret nc
+	ret c
 	; fallthrough
 
 	ld a, [wEffectFailed]
@@ -4200,7 +4200,7 @@ BattleCommand_ParalyzeTarget:
 	call GetOpposingMon
 	ld hl, SerenityPokemon
 	call IsInByteArray
-	ret nc
+	ret c
 	; fallthrough
 
 ; ===========================
@@ -5879,7 +5879,7 @@ BattleCommand_ConfuseTarget:
 	call GetOpposingMon
 	ld hl, SerenityPokemon
 	call IsInByteArray
-	ret nc
+	ret c
 
 	ld a, [wEffectFailed]
 	and a
