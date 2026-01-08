@@ -30,7 +30,7 @@ AboutSpeech:
 
 	; Display text
 	ld hl, AboutText1
-	jp PrintText
+	jmp PrintText
 
 AboutText1:
 	text_far _AboutText
@@ -472,7 +472,7 @@ CheckVBA:
 	cp %01111100
 	ret z
 	ld hl, .WarnVBAText
-	jp PrintText
+	jmp PrintText
 
 .WarnVBAText:
 	text_jump _WarnVBAText
@@ -1361,7 +1361,7 @@ GameInit::
 
 	ld a, [wSaveFileExists]
 	and a
-	jp z, IntroSequence
+	jmp z, IntroSequence
 
 	ld a, [wOptions2]
 	bit FAST_BOOT, a
@@ -1369,7 +1369,7 @@ GameInit::
 
 	; Fast boot.
 	farcall TryLoadSaveFile
-	jp c, IntroSequence ; If loading failed.
+	jmp c, IntroSequence ; If loading failed.
 
 	farcall _LoadData
 	jmp Continue.Go

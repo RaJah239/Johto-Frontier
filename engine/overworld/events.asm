@@ -848,15 +848,15 @@ CountStep:
 	; Don't count steps in link communication rooms.
 	ld a, [wLinkMode]
 	and a
-	jp nz, .done
+	jmp nz, .done
 
 	; If there is a special phone call, don't count the step.
 	farcall CheckSpecialPhoneCall
-	jp c, .doscript
+	jmp c, .doscript
 
 	; If Repel wore off, don't count the step.
 	call DoRepelStep
-	jp c, .doscript
+	jmp c, .doscript
 
 	; Count the step for poison and total steps
 	ld hl, wPoisonStepCount
@@ -873,10 +873,10 @@ CountStep:
 	; Check for 1,000 steps (0x01F4)
 	ld a, [wStepCount]
 	cp $e8
-	jp nz, .skip_resetting_steps_event
+	jmp nz, .skip_resetting_steps_event
 	ld a, [wStepCountHi]
 	cp $03
-	jp nz, .skip_resetting_steps_event
+	jmp nz, .skip_resetting_steps_event
 
 	; Reset step counter to 0
 	xor a

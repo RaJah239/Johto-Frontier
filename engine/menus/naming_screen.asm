@@ -691,7 +691,7 @@ MailComposition_TryAddCharacter:
 
 	ld c, 0
 	cp c
-	jp nz,.skipLowercase
+	jr nz,.skipLowercase
 
 	push de
 	ld de, NameInputLower
@@ -743,7 +743,7 @@ NamingScreen_DeleteCharacter:
 	inc hl
 	ld a, [hl]
 	cp NAMINGSCREEN_UNDERLINE
-	jp nz,.middleline
+	jr nz,.middleline
 	ld [hl], NAMINGSCREEN_MIDDLELINE
 .middleline
 	ld hl, wNamingScreenCurNameLength

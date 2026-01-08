@@ -500,7 +500,7 @@ Menu_BattleTowerSettings:
 	ld hl, MenuHeader_NormalInverseNeutral
 	call LoadMenuHeader
 	call Function17d246
-	jp CloseWindow
+	jmp CloseWindow
 
 MenuHeader_NormalInverseNeutral:
 	db MENU_BACKUP_TILES ; flags

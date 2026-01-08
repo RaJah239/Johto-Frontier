@@ -370,7 +370,7 @@ HandleSafeguard:
 .print
 	ldh [hBattleTurn], a
 	ld hl, BattleText_SafeguardFaded
-	jp StdBattleTextbox
+	jmp StdBattleTextbox
 
 HandleScreens:
 	ldh a, [hSerialConnectionStatus]
@@ -406,7 +406,7 @@ HandleScreens:
 
 .Copy:
 	ld hl, wStringBuffer1
-	jp CopyName2
+	jmp CopyName2
 
 .Your:
 	db "Your@"

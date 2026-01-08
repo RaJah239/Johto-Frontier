@@ -2596,7 +2596,7 @@ StatsInfoBox:
 	ld b, 11
 	ld c, 2
 	ld hl, wEnemyMonMaxHP
-	jp StatsInfoBoxLoop
+	jr StatsInfoBoxLoop
 
 FoeAbilityPageInfoBox:
 	hlcoord 0, 0
@@ -2619,7 +2619,7 @@ FoeAbilityPageInfoBox:
 
 	ld de, .AbilitiesString
 	hlcoord 1, 5
-	jp PlaceString
+	jmp PlaceString
 
 .FoeString:
 	db "Foe:@"
@@ -2777,7 +2777,7 @@ FieldInfoBox1:
 	call FieldInfoBox1Reflect
 ; light screen
 	lb bc, 1, 13
-	jp FieldInfoBox1LScreen
+	jmp FieldInfoBox1LScreen
 
 FieldInfoBox2:
 	call FieldStatusPagesLayout
@@ -2882,7 +2882,7 @@ FieldInfoBox1Reflect: ; input: bc -> coords
 	add 10
 	ld b, a
 	ld hl, FieldTexts.reflect
-	jp FieldInfoBoxPlaceElement
+	jmp FieldInfoBoxPlaceElement
 	
 FieldInfoBox1LScreen: ; input: bc -> coords
 	ld hl, wPlayerScreens
@@ -2902,7 +2902,7 @@ FieldInfoBox1LScreen: ; input: bc -> coords
 	add 10
 	ld b, a
 	ld hl, FieldTexts.lightscreen
-	jp FieldInfoBoxPlaceElement
+	jmp FieldInfoBoxPlaceElement
 
 FieldInfoBox1Spikes: ; input: bc -> coords
 	ld hl, wPlayerScreens
@@ -2922,7 +2922,7 @@ FieldInfoBox1Spikes: ; input: bc -> coords
 	add 10
 	ld b, a
 	call CoordsBCtoHL
-	jp PlaceString
+	jmp PlaceString
 
 FieldInfoBox1ToxicSpikes: ; input: bc -> coords
 	ld hl, wPlayerScreens
@@ -2942,7 +2942,7 @@ FieldInfoBox1ToxicSpikes: ; input: bc -> coords
 	add 10
 	ld b, a
 	call CoordsBCtoHL
-	jp PlaceString
+	jmp PlaceString
 
 FieldInfoBox1StickyWeb: ; input: bc -> coords
 	ld hl, wPlayerScreens
@@ -2962,7 +2962,7 @@ FieldInfoBox1StickyWeb: ; input: bc -> coords
 	add 10
 	ld b, a
 	call CoordsBCtoHL
-	jp PlaceString
+	jmp PlaceString
 
 FieldInfoBox1StealthRock: ; input: bc -> coords
 	ld hl, wPlayerScreens
@@ -2982,7 +2982,7 @@ FieldInfoBox1StealthRock: ; input: bc -> coords
 	add 10
 	ld b, a
 	call CoordsBCtoHL
-	jp PlaceString
+	jmp PlaceString
 
 FieldInfoBox2TrickRoom: ; input: bc -> coords
 	ld de, wTrickRoomCount
@@ -2999,7 +2999,7 @@ FieldInfoBox2TrickRoom: ; input: bc -> coords
 	ld b, a
 	ld de, wTrickRoomCount
 	ld hl, FieldTexts.trickroom
-	jp FieldInfoBoxPlaceElement
+	jr FieldInfoBoxPlaceElement
 
 FieldInfoBox2Safeguard:
 	ld hl, wPlayerScreens
@@ -3019,7 +3019,7 @@ FieldInfoBox2Safeguard:
 	add 10
 	ld b, a
 	ld hl, FieldTexts.safeguard
-	jp FieldInfoBoxPlaceElement
+	jr FieldInfoBoxPlaceElement
 
 FieldInfoBoxStatus: ; input: bc -> coords, de -> text
 	push de
@@ -3069,7 +3069,7 @@ FieldInfoBoxPlaceElement: ; input: bc -> coords, hl -> Field text, de -> Count
 .not_1_turn
 	inc b
 	call CoordsBCtoHL
-	jp PlaceString
+	jmp PlaceString
 
 MainText:
 .page1:
@@ -3253,27 +3253,27 @@ InfoBoxLeftPress:
 .jump_to_page_4
 	call DecreasePage
 	call UpdatePageText
-	jp FieldInfoBox2
+	jmp FieldInfoBox2
 
 .jump_to_page_1
 	call DecreasePage
 	call UpdatePageText
-	jp StatsInfoBox
+	jmp StatsInfoBox
 
 .jump_to_page_2
 	call DecreasePage
 	call UpdatePageText
-	jp StatChangesInfoBox
+	jmp StatChangesInfoBox
 
 .jump_to_page_3
 	call DecreasePage
 	call UpdatePageText
-	jp FieldInfoBox1
+	jmp FieldInfoBox1
 
 .jump_to_page_5
 	call DecreasePage
 	call UpdatePageText
-	jp FoeAbilityPageInfoBox
+	jmp FoeAbilityPageInfoBox
 
 ; ========================
 ; Right button navigation
@@ -3294,32 +3294,32 @@ InfoBoxRightPress:
 	jr z, .jump_to_page_5
 	call IncreasePage
 	call UpdatePageText
-	jp StatsInfoBox
+	jmp StatsInfoBox
 
 .jump_to_page_5
 	call IncreasePage
 	call UpdatePageText
-	jp FoeAbilityPageInfoBox
+	jmp FoeAbilityPageInfoBox
 
 .jump_to_page_1
 	call IncreasePage
 	call UpdatePageText
-	jp StatsInfoBox
+	jmp StatsInfoBox
 
 .jump_to_page_2
 	call IncreasePage
 	call UpdatePageText
-	jp StatChangesInfoBox
+	jmp StatChangesInfoBox
 
 .jump_to_page_3
 	call IncreasePage
 	call UpdatePageText
-	jp FieldInfoBox1
+	jmp FieldInfoBox1
 
 .jump_to_page_4
 	call IncreasePage
 	call UpdatePageText
-	jp FieldInfoBox2
+	jmp FieldInfoBox2
 
 ; ========================
 ; Page counter functions
@@ -3390,7 +3390,7 @@ UpdatePageText:
 	ld de, MainText.page5_content
 .done
 	hlcoord 4, 16
-	jp PlaceString
+	jmp PlaceString
 
 CoordsBCtoHL:
 	ld hl, wTilemap

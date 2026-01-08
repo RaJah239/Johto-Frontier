@@ -55,9 +55,9 @@ PlayBattleMusic:
 	ld de, MUSIC_JOHTO_WILD_BATTLE
 	ld a, [wTimeOfDay]
 	cp NITE_F
-	jp c, .done ; not NITE_F or EVE_F
+	jr c, .done ; not NITE_F or EVE_F
 	ld de, MUSIC_KANTO_WILD_BATTLE
-	jp .done
+	jr .done
 
 .trainermusic
 	ld a, [wOtherTrainerClass]

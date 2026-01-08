@@ -342,7 +342,7 @@ SetBlackObjectPals::
 	ldh [rSVBK], a
 	ld a, 1
 	ldh [hCGBPalUpdate], a
-	jp DelayFrame
+	jmp DelayFrame
 
 DarkenColorByAQuarter::
 	; Extract Red color and darken it

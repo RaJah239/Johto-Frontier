@@ -381,7 +381,7 @@ endr
 	; hard mode's text box
 	hlcoord 0, 0
 	lb bc, 1, 9
-	jp Textbox
+	jmp Textbox
 
 .PrintDayTime:
 	call .DrawDayTimeBox

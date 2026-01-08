@@ -530,7 +530,7 @@ BattleTowerMartTutorScientistScript:
     ld [wNamedObjectIndex], a
     call GetMoveName
     pop hl
-    jp PlaceString
+    jmp PlaceString
 
 .SetupMovesMenu:
 ; copy the whole move list

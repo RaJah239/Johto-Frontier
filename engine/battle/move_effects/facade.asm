@@ -7,13 +7,13 @@ BattleCommand_Facade:
 	ld hl, wEnemyMonStatus
 .got_status
 	bit PAR, [hl]
-	jp nz, DoubleDamage
+	jmp nz, DoubleDamage
 
 	bit BRN, [hl]
-	jp nz, QuadrupleDamage
+	jr nz, QuadrupleDamage
 
 	bit PSN, [hl]
-	jp nz, DoubleDamage
+	jmp nz, DoubleDamage
 	ret
 
 QuadrupleDamage:

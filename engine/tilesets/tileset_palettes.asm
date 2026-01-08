@@ -70,7 +70,7 @@ LoadDarknessPalette:
 	ld de, wBGPals1
 	ld hl, DarknessPalette
 	ld bc, 8 palettes
-	jp FarCopyWRAM
+	jmp FarCopyWRAM
 
 DarknessPalette:
 INCLUDE "gfx/tilesets/darkness.pal"

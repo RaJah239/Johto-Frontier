@@ -483,7 +483,7 @@ ReadPlayerPartyAsTrainerParty:
 	call ReadPlayerPartyAsTrainerPartyPieces
 
 .done
-	jp ComputeTrainerReward
+	jmp ComputeTrainerReward
 
 ReadPlayerPartyAsTrainerPartyPieces:
 ; copy de back to hl, why?
@@ -525,17 +525,17 @@ ReadPlayerPartyAsTrainerPartyPieces:
     ld a, b
     cp 1
     push bc
-    jp z, .firstMon
+    jr z, .firstMon
     cp 2
-    jp z, .secondMon
+    jr z, .secondMon
     cp 3
-    jp z, .thirdMon
+    jmp z, .thirdMon
     cp 4
-    jp z, .forthMon
+    jmp z, .forthMon
     cp 5
-    jp z, .fifthMon
+    jmp z, .fifthMon
     cp 6
-    jp z, .sixthMon
+    jmp z, .sixthMon
 
 .firstMon
 ; First Mon DVs
@@ -568,7 +568,7 @@ ReadPlayerPartyAsTrainerPartyPieces:
     ld [wOTPartyMon1SpclDefEV], a
     ld a, [wPartyMon1SpclDefEV + 1]
     ld [wOTPartyMon1SpclDefEV + 1], a
-    jp .recalc
+    jmp .recalc
 
 .secondMon
 ; Second Mon DVs
@@ -601,7 +601,7 @@ ReadPlayerPartyAsTrainerPartyPieces:
     ld [wOTPartyMon2SpclDefEV], a
     ld a, [wPartyMon2SpclDefEV + 1]
     ld [wOTPartyMon2SpclDefEV + 1], a
-    jp .recalc
+    jmp .recalc
 
 .thirdMon
 ; Third Mon DVs
@@ -634,7 +634,7 @@ ReadPlayerPartyAsTrainerPartyPieces:
     ld [wOTPartyMon3SpclDefEV], a
     ld a, [wPartyMon3SpclDefEV + 1]
     ld [wOTPartyMon3SpclDefEV + 1], a
-    jp .recalc
+    jmp .recalc
 
 .forthMon
 ; Fourth Mon DVs
@@ -667,7 +667,7 @@ ReadPlayerPartyAsTrainerPartyPieces:
     ld [wOTPartyMon4SpclDefEV], a
     ld a, [wPartyMon4SpclDefEV + 1]
     ld [wOTPartyMon4SpclDefEV + 1], a
-    jp .recalc
+    jmp .recalc
 
 .fifthMon
 ; Fifth Mon DVs
@@ -700,7 +700,7 @@ ReadPlayerPartyAsTrainerPartyPieces:
     ld [wOTPartyMon5SpclDefEV], a
     ld a, [wPartyMon5SpclDefEV + 1]
     ld [wOTPartyMon5SpclDefEV + 1], a
-    jp .recalc
+    jr .recalc
 
 .sixthMon
 ; Sixth Mon DVs
@@ -771,7 +771,7 @@ ReadPlayerPartyAsTrainerPartyPieces:
     pop bc
     inc b
 	dec c
-    jp nz, .loop
+    jmp nz, .loop
 
     ; items
     ld a, [wPartyMon1Item]

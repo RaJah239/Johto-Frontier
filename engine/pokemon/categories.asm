@@ -56,6 +56,6 @@ BattleGetMoveCategoryName:
 	ld l, a
 	ld de, wStringBuffer1
 	ld bc, MOVE_NAME_LENGTH
-	jp CopyBytes
+	jmp CopyBytes
 
 INCLUDE "data/types/category_names.asm"

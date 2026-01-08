@@ -66,7 +66,7 @@ PrintEnemyMonTypes:
 
 .Print:
 	ld b, a
-	jp PrintType
+	jmp PrintType
 
 GetHiddenPowerType:
 	ld hl, wPartyMon1DVs

@@ -2450,4 +2450,4 @@ Script_writetextcheckdialogue:
 	ret
 .minimal_mode
 	call SkipTwoScriptBytes
-	jp Script_writetext ;Otherwise skip the first 2 bytes and write the 3rd and 4th which hold the minimal text pointer
+	jmp Script_writetext ;Otherwise skip the first 2 bytes and write the 3rd and 4th which hold the minimal text pointer

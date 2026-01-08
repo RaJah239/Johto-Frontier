@@ -32,11 +32,11 @@ BattleCommand_CalmMind:
 	call BattleCommand_StatUpMessage
 	call ResetMiss
 	call BattleCommand_SpecialDefenseUp
-	jp BattleCommand_StatUpMessage
+	jmp BattleCommand_StatUpMessage
 .cantraise
 ; Can't raise either stat.
 	ld b, ABILITY + 1
 	call GetStatName
 	call AnimateFailedMove
 	ld hl, WontRiseAnymoreText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox

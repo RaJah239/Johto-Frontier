@@ -389,7 +389,7 @@ DisplayFoeNameAndAbility:
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	hlcoord 2, 2
-	jp PlaceFarString
+	jmp PlaceFarString
 
 GetDexEntryPointer:
 ; return dex entry pointer b:de

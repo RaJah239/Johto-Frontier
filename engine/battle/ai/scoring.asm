@@ -3001,8 +3001,7 @@ AI_Status:
 
 .immune
 	call AIDiscourageMove
-	jp .checkmove
-
+	jmp .checkmove
 
 AI_Risky:
 ; Use any move that will KO the target.

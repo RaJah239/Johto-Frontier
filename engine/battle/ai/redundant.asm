@@ -53,8 +53,8 @@ AI_Redundant:
 .Hail:
 	ld a, [wBattleWeather]
 	cp WEATHER_HAIL
-	jp z, .Redundant
-	jp .NotRedundant
+	jmp z, .Redundant
+	jmp .NotRedundant
 
 .LightScreen:
 	ld a, [wEnemyScreens]

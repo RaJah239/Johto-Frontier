@@ -3142,7 +3142,7 @@ Restore3RDHPEffect:
 	call ItemActionTextWaitButton
 	call UseDisposableItem
 	ld a, 0
-	jp StatusHealer_Jumptable
+	jmp StatusHealer_Jumptable
 
 ItemEffects_GetThirdMaxHP:
 	xor a
