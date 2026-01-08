@@ -2447,32 +2447,6 @@ BattleCommand_CheckFaint:
 BattleCommand_CheckContact:
 	ret
 
-BattleCommand_BuildOpponentRage:
-	ld a, [wAttackMissed]
-	and a
-	ret nz
-
-	ld a, BATTLE_VARS_SUBSTATUS4_OPP
-	call GetBattleVar
-	bit SUBSTATUS_RAGE, a
-	ret z
-
-	ld de, wEnemyRageCounter
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .player
-	ld de, wPlayerRageCounter
-.player
-	ld a, [de]
-	inc a
-	ret z
-	ld [de], a
-
-	call BattleCommand_SwitchTurn
-	ld hl, RageBuildingText
-	call StdBattleTextbox
-	jmp BattleCommand_SwitchTurn
-
 BattleCommand_RageDamage:
 	ld a, [wCurDamage]
 	ld h, a
