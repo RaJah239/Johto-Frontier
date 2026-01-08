@@ -1168,7 +1168,7 @@ MeanLook:
 Nightmare:
 	usedmovetext
 	doturn
-	farcommand
+	nightmare
 	endmove
 
 Curse:
