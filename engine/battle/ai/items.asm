@@ -37,14 +37,17 @@ AI_SwitchOrTryItem:
 	bit SWITCH_RARELY_F, [hl]
 	jr nz, SwitchRarely
 	bit SWITCH_SOMETIMES_F, [hl]
-	jr nz, SwitchSometimes
+	jmp nz, SwitchSometimes
 	; fallthrough
 
 DontSwitch:
-	call AI_TryItem
-	ret
+	jmp AI_TryItem
 
+; this switches with probabilities:
+; 50%, 80%, 96% depending on switch score
 SwitchOften:
+	call CheckSetUp
+	jr c, DontSwitch
 	callfar CheckAbleToSwitch
 	ld a, [wEnemySwitchMonParam]
 	and $f0
@@ -79,7 +82,11 @@ SwitchOften:
 	ld [wEnemySwitchMonIndex], a
 	jmp AI_TrySwitch
 
+; this switches with probabilities:
+; 8%, 12%, 80% depending on switch score
 SwitchRarely:
+	call CheckSetUp
+	jr c, DontSwitch
 	callfar CheckAbleToSwitch
 	ld a, [wEnemySwitchMonParam]
 	and $f0
@@ -88,7 +95,7 @@ SwitchRarely:
 	cp $10
 	jr nz, .not_10
 	call Random
-	cp 8 percent
+	cp 20 percent - 1
 	jr c, .switch
 	jr DontSwitch
 .not_10
@@ -96,14 +103,14 @@ SwitchRarely:
 	cp $20
 	jr nz, .not_20
 	call Random
-	cp 12 percent
+	cp 50 percent + 1
 	jr c, .switch
 	jr DontSwitch
 .not_20
 
 	; $30
 	call Random
-	cp 79 percent - 1
+	cp 20 percent - 1
 	jr c, DontSwitch
 
 .switch
@@ -111,9 +118,12 @@ SwitchRarely:
 	and $f
 	inc a
 	ld [wEnemySwitchMonIndex], a
-	jmp AI_TrySwitch
-
+	jr AI_TrySwitch
+; this switches with probabilities:
+; 20%, 50%, 80% depending on switch score
 SwitchSometimes:
+	call CheckSetUp
+	jmp c, DontSwitch
 	callfar CheckAbleToSwitch
 	ld a, [wEnemySwitchMonParam]
 	and $f0
@@ -145,9 +155,177 @@ SwitchSometimes:
 	and $f
 	inc a
 	ld [wEnemySwitchMonIndex], a
-	jmp AI_TrySwitch
+	jr AI_TrySwitch
+
+CheckSetUp:
+; return carry if enemy mon has set up
+; don't switch if enemy mon is already set up
+; also dont switch if enemy mon low on health
+	farcall AICheckEnemyQuarterHP
+	jr nc, .dont_switch
+	ld a, [wEnemyAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .switch
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .switch
+.dont_switch
+; not set up
+	xor a
+	ret
+
+.switch
+	scf
+	ret
 
 
+AI_TrySwitch:
+; Determine whether the AI can switch based on how many Pokemon are still alive.
+
+; place code for pokemon that can't be switch
+; due to magnet pull, arena trap and shadow tag
+
+;	ld a, [wBattleMonSpecies]
+;	cp WOBBUFFET
+;	ret z
+;	cp CHANDELURE
+;	ret z
+;	cp SPIRITOMB
+;	ret z
+;	cp GIRATINA
+;	ret z
+
+;	ld a, [wPlayerSubStatus5]
+;	bit SUBSTATUS_CANT_RUN, a
+;	ret nz
+
+; DevNote - switch, don't switch if already set up
+; there is a bit of an issue here
+; this prevents the AI from switching out a set up mon because there is another with a better type match - which is good
+; but this also prevents the ai from switching out a set up mon which has ran out of pp on a common mono-attacking move
+	ld a, [wEnemyAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	ret nc
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	ret nc
+	ld a, [wEnemyDefLevel]
+	cp BASE_STAT_LEVEL + 2
+	ret nc
+	ld a, [wEnemySDefLevel]
+	cp BASE_STAT_LEVEL + 2
+	ret nc
+
+; If it can switch, it will.
+	ld a, [wOTPartyCount]
+	ld c, a
+	ld hl, wOTPartyMon1HP
+	ld d, 0
+.SwitchLoop:
+	ld a, [hli]
+	ld b, a
+	ld a, [hld]
+	or b
+	jr z, .fainted
+	inc d
+.fainted
+	push bc
+	ld bc, PARTYMON_STRUCT_LENGTH
+	add hl, bc
+	pop bc
+	dec c
+	jr nz, .SwitchLoop
+
+	ld a, d
+	cp 2
+	jr nc, AI_Switch
+	and a
+	ret
+
+AI_Switch:
+	ld a, $1
+	ld [wEnemyIsSwitching], a
+	ld [wEnemyGoesFirst], a
+	xor a
+	ldh [hBattleTurn], a
+	callfar PursuitSwitch
+
+	push af
+	ld a, [wCurOTMon]
+	ld hl, wOTPartyMon1Status
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call AddNTimes
+	ld d, h
+	ld e, l
+	ld hl, wEnemyMonStatus
+	ld bc, MON_MAXHP - MON_STATUS
+	call CopyBytes
+	pop af
+
+	jr c, .skiptext
+	ld hl, EnemyWithdrewText
+	call PrintText
+
+.skiptext
+; this assumed the ai will not switch during battle
+;	ld a, 1
+;	ld [wBattleHasJustStarted], a
+	callfar NewEnemyMonStatus
+	callfar ResetEnemyStatLevels
+	ld hl, wPlayerSubStatus1
+	res SUBSTATUS_IN_LOVE, [hl]
+	farcall EnemySwitch
+	farcall ResetBattleParticipants
+	xor a
+	ld [wBattleHasJustStarted], a
+	ld a, [wLinkMode]
+	and a
+	ret nz
+	scf
+	ret
+
+EnemyWithdrewText:
+	text_far _EnemyWithdrewText
+	text_end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+; ============
+; === Note ===
+; ============
+; Need to remove this and everything under eventually
 AI_TryItem:
 	; items are not allowed in the Battle Tower
 	ld a, [wInBattleTowerBattle]
@@ -575,79 +753,6 @@ EnemyPotionFinish:
 	call AIUsedItemSound
 	predef AnimateHPBar
 	jmp AIUpdateHUD
-
-AI_TrySwitch:
-; Determine whether the AI can switch based on how many Pokemon are still alive.
-; If it can switch, it will.
-	ld a, [wOTPartyCount]
-	ld c, a
-	ld hl, wOTPartyMon1HP
-	ld d, 0
-.SwitchLoop:
-	ld a, [hli]
-	ld b, a
-	ld a, [hld]
-	or b
-	jr z, .fainted
-	inc d
-.fainted
-	push bc
-	ld bc, PARTYMON_STRUCT_LENGTH
-	add hl, bc
-	pop bc
-	dec c
-	jr nz, .SwitchLoop
-
-	ld a, d
-	cp 2
-	jr nc, AI_Switch
-	and a
-	ret
-
-AI_Switch:
-	ld a, $1
-	ld [wEnemyIsSwitching], a
-	ld [wEnemyGoesFirst], a
-	xor a
-	ldh [hBattleTurn], a
-	callfar PursuitSwitch
-
-	push af
-	ld a, [wCurOTMon]
-	ld hl, wOTPartyMon1Status
-	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
-	ld d, h
-	ld e, l
-	ld hl, wEnemyMonStatus
-	ld bc, MON_MAXHP - MON_STATUS
-	call CopyBytes
-	pop af
-
-	jr c, .skiptext
-	ld hl, EnemyWithdrewText
-	call PrintText
-
-.skiptext
-	ld a, 1
-	ld [wBattleHasJustStarted], a
-	callfar NewEnemyMonStatus
-	callfar ResetEnemyStatLevels
-	ld hl, wPlayerSubStatus1
-	res SUBSTATUS_IN_LOVE, [hl]
-	farcall EnemySwitch
-	farcall ResetBattleParticipants
-	xor a
-	ld [wBattleHasJustStarted], a
-	ld a, [wLinkMode]
-	and a
-	ret nz
-	scf
-	ret
-
-EnemyWithdrewText:
-	text_far _EnemyWithdrewText
-	text_end
 
 AI_HealStatus:
 	ld a, [wCurOTMon]
