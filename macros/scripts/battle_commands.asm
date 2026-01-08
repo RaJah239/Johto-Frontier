@@ -68,7 +68,6 @@ ENDM
 	command healbell                ; 4c
 	command kingsrock               ; 4d
 	command arenatrap               ; 51
-	command trick                   ; 52
 	command defrost                 ; 53
 	command curse                   ; 54
 	command protect                 ; 55

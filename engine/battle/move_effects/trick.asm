@@ -20,8 +20,7 @@ BattleCommand_Trick:
 	jr nz, .check_mail
 
 .failed
-	farcall FailMove
-	ret
+	farjp FailMove
 
 .check_mail
 ; Fails if the player is holding mail.
@@ -113,4 +112,4 @@ BattleCommand_Trick:
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	ld hl, TrickTargetObtainedText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox

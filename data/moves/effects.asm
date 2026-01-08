@@ -1169,7 +1169,7 @@ Trick:
 	usedmovetext
 	doturn
 	checkhit
-	trick
+	farcommand
 	endmove
 
 Curse:

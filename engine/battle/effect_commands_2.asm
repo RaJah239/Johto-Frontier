@@ -25,6 +25,7 @@ INCLUDE "engine/battle/move_effects/brick_break.asm"
 INCLUDE "engine/battle/move_effects/ohko.asm"
 INCLUDE "engine/battle/move_effects/splash.asm"
 INCLUDE "engine/battle/move_effects/leech_seed.asm"
+INCLUDE "engine/battle/move_effects/trick.asm"
 
 ; Weather duration when Weather Rock is equipped
 ; Rock: 16, No Rock: 5
