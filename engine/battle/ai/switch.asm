@@ -1,6 +1,6 @@
 CheckPlayerMoveTypeMatchups:
 ; Check how well the moves you've already used
-; fare against the enemy's Pokemon.  Used to
+; fare against the enemy's Pokemon. Used to
 ; score a potential switch.
 	push hl
 	push de
@@ -92,6 +92,8 @@ CheckPlayerMoveTypeMatchups:
 	call .CheckEnemyMoveMatchups
 	jmp PopBCDEHL
 
+; this checks if the AI pokemon has super effective moves against the player pokemon
+; if so it discourages a switch, if not it further encourages it
 .CheckEnemyMoveMatchups:
 	ld de, wEnemyMonMoves
 	ld b, NUM_MOVES + 1
@@ -169,15 +171,24 @@ CheckPlayerMoveTypeMatchups:
 	ld [wEnemyAISwitchScore], a
 	ret
 
+; core logic for AI switching
 CheckAbleToSwitch:
+; don't switch if enemy mon is already set up
+	ld a, [wEnemyAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	ret nc
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	ret nc
+
 	xor a
 	ld [wEnemySwitchMonParam], a
-	call FindAliveEnemyMons
+	call FindAliveEnemyMons ; are there other mons to switch to
 	ret c
 
 	ld a, [wEnemySubStatus1]
 	bit SUBSTATUS_PERISH, a
-	jr z, .no_perish
+	jr z, .no_perish ; does the AI have perish song
 
 	ld a, [wEnemyPerishCount]
 	cp 1
@@ -195,7 +206,7 @@ CheckAbleToSwitch:
 	jr nz, .not_2
 
 	ld a, [wEnemyAISwitchScore]
-	add $30 ; maximum chance
+	add $30 ; maximum chance, we really want to switch as out perish count is 1
 	ld [wEnemySwitchMonParam], a
 	ret
 
@@ -215,16 +226,17 @@ CheckAbleToSwitch:
 	ld [wEnemySwitchMonParam], a
 	ret
 
-.no_perish
+.no_perish ; we dont have perish song
 	call CheckPlayerMoveTypeMatchups
 	ld a, [wEnemyAISwitchScore]
 	cp 11
-	ret nc
+	ret nc ; not high enough
 
 	ld a, [wLastPlayerCounterMove]
 	and a
 	jr z, .no_last_counter_move
 
+	; do we have a mon immune to the last move the player used
 	call FindEnemyMonsImmuneToLastCounterMove
 	ld a, [wEnemyAISwitchScore]
 	and a
