@@ -407,8 +407,18 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_BRICK_BREAK,      AI_Smart_BrickBreak
 	dbw EFFECT_PARALYZE_HIT,     AI_Smart_ParalyzeTarget
 	dbw EFFECT_ACROBATICS,       AI_Smart_Acrobatics
-	dbw TRICK,                   AI_Smart_Trick
+	dbw EFFECT_TRICK,            AI_Smart_Trick
+	dbw EFFECT_VENOSHOCK,        AI_Smart_Venoshock
 	db -1 ; end
+
+AI_Smart_Venoshock:
+; Greatly encourage this move if the player is poisoned.
+	ld a, [wBattleMonStatus]
+	bit PSN, a
+	ret z
+	dec [hl]
+	dec [hl]
+	ret
 
 AI_Smart_Acrobatics:
 ; Greatly encourage this move if the user does not have an item.
