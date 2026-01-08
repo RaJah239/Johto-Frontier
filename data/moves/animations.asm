@@ -3744,9 +3744,6 @@ BattleAnim_Curse:
 	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_BLACK_REPEATING
 	anim_wait 1
 	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT, $0, BG_EFFECT_USER, $40
-.loop
-	anim_call BattleAnim_SubFocusingAnim
-	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT
 	anim_ret
 
 BattleAnim_Flail:
