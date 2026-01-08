@@ -1592,6 +1592,23 @@ BattleCommand_CheckHit:
 
 .not_fire_blast_or_true_flame_mon
 
+; ==============================
+; === Ability: True Blizzard ===
+; ==============================
+	; check if blizzard was used
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp BLIZZARD
+	jr nz, .not_blizzard_or_true_blizzard_mon
+
+	; check it is was a true blizzard pokemon
+	call GetCurrentMon
+	ld hl, TrueBlizzardPokemon
+	call IsInByteArray
+	ret c
+
+.not_blizzard_or_true_blizzard_mon
+
 	call .StatModifiers
 
 	ld a, [wPlayerMoveStruct + MOVE_ACC]
@@ -1777,6 +1794,7 @@ AccuracyCalc:
 INCLUDE "data/abilities/true_horn_mons.asm"
 INCLUDE "data/abilities/stormbound_mons.asm"
 INCLUDE "data/abilities/true_flame_mons.asm"
+INCLUDE "data/abilities/true_blizzard_mons.asm"
 INCLUDE "data/battle/accuracy_multipliers.asm"
 INCLUDE "data/abilities/compound_eyes_mons.asm"
 
