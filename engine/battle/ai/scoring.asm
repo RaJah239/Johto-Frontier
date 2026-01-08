@@ -530,7 +530,7 @@ AI_Smart_FreezeDry:
 	ret
 
 AI_Smart_Facade:
-; Greatly encourage this move if the player has a status condition.
+; Greatly encourage this move if the enemy has a status condition.
 
 	ld a, [wEnemyMonStatus]
 	and a
