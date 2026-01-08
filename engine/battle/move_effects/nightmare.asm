@@ -1,35 +1,32 @@
 BattleCommand_Nightmare:
-; Can't hit an absent opponent.
+; nightmare
 
-	call CheckHiddenOpponent
+; Can't hit an absent opponent.
+	farcall CheckHiddenOpponent
 	jr nz, .failed
 
 ; Can't hit a substitute.
-
-	call CheckSubstituteOpp
+	farcall CheckSubstituteOpp
 	jr nz, .failed
 
 ; Only works on a sleeping opponent.
-
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVarAddr
 	and SLP_MASK
 	jr z, .failed
 
-; Bail if the opponent is already having a nightmare.
-
+; exit if the opponent is already having a nightmare.
 	ld a, BATTLE_VARS_SUBSTATUS1_OPP
 	call GetBattleVarAddr
 	bit SUBSTATUS_NIGHTMARE, [hl]
 	jr nz, .failed
 
-; Otherwise give the opponent a nightmare.
-
+; otherwise give the opponent a nightmare.
 	set SUBSTATUS_NIGHTMARE, [hl]
-	call AnimateCurrentMove
+	farcall AnimateCurrentMove
 	ld hl, StartedNightmareText
 	jmp StdBattleTextbox
 
 .failed
-	call AnimateFailedMove
-	jmp PrintButItFailed
+	farcall AnimateFailedMove
+	farjp PrintButItFailed
