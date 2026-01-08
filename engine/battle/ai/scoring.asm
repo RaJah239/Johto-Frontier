@@ -958,7 +958,28 @@ AI_Smart_ForceSwitch:
 	ld a, [wEnemyAISwitchScore]
 	cp 10 ; neutral // forely BASE_AI_SWITCH_SCORE
 	pop hl
-	ret c
+	jr nc, .discourage
+
+; Otherwise, encourage this move if the player's HP is above 50%
+; and there's an entry hazard on the player's side.
+	call AICheckPlayerHalfHP
+	ret nc
+
+	ld a, [wPlayerScreens]
+	bit SCREENS_SPIKES, a
+	jr nz, .encourage
+	bit SCREENS_TOXIC_SPIKES, a
+	jr nz, .encourage
+	bit SCREENS_STEALTH_ROCK, a
+	jr nz, .encourage
+	bit SCREENS_STICKY_WEB, a
+	ret z
+
+.encourage
+	dec [hl]
+	ret
+
+.discourage
 	inc [hl]
 	ret
 
