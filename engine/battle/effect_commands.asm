@@ -1012,10 +1012,11 @@ BattleCommand_Critical:
 
 INCLUDE "data/moves/critical_hit_moves.asm"
 INCLUDE "data/abilities/battle_armor_mons.asm"
-INCLUDE "data/battle/critical_hit_chances.asm"
 INCLUDE "data/abilities/slash_crits_mons.asm"
 INCLUDE "data/abilities/leaf_blade_crits_mons.asm"
 INCLUDE "data/abilities/super_luck_mons.asm"
+
+INCLUDE "data/battle/critical_hit_chances.asm"
 
 GetNextTypeMatchupsByte:
    ld a, BANK(TypeMatchups)
@@ -1814,8 +1815,9 @@ INCLUDE "data/abilities/true_blizzard_mons.asm"
 INCLUDE "data/abilities/sure_stream_mons.asm"
 INCLUDE "data/abilities/stonefall_mons.asm"
 INCLUDE "data/abilities/stonebound_mons.asm"
-INCLUDE "data/battle/accuracy_multipliers.asm"
 INCLUDE "data/abilities/compound_eyes_mons.asm"
+
+INCLUDE "data/battle/accuracy_multipliers.asm"
 
 BattleCommand_EffectChance:
 	xor a
@@ -3499,30 +3501,6 @@ BattleCommand_ConstantDamage:
 	ld [hl], 1
 	ret
 
-INCLUDE "data/moves/flail_reversal_power.asm"
-
-INCLUDE "engine/battle/move_effects/sticky_web.asm"
-
-INCLUDE "engine/battle/move_effects/hurricane.asm"
-
-INCLUDE "engine/battle/move_effects/facade.asm"
-
-INCLUDE "engine/battle/move_effects/counter.asm"
-
-INCLUDE "engine/battle/move_effects/encore.asm"
-
-INCLUDE "engine/battle/move_effects/snore.asm"
-
-INCLUDE "engine/battle/move_effects/sketch.asm"
-
-INCLUDE "engine/battle/move_effects/sleep_talk.asm"
-
-INCLUDE "engine/battle/move_effects/destiny_bond.asm"
-
-INCLUDE "engine/battle/move_effects/spite.asm"
-
-INCLUDE "engine/battle/move_effects/heal_bell.asm"
-
 FarPlayBattleAnimation:
 ; play animation de
 
@@ -5192,7 +5170,6 @@ BattleCommand_Rampage:
 	ret
 
 INCLUDE "data/abilities/feral_focus_mons.asm"
-INCLUDE "engine/battle/move_effects/teleport.asm"
 
 SetBattleDraw:
 	ld a, [wBattleResult]
@@ -5784,10 +5761,6 @@ BattleCommand_TrapTarget:
 	dbw WHIRLPOOL, WhirlpoolTrapText ; 'was trapped!'
 	dbw SAND_TOMB, SandTombTrapText  ; 'was trapped!'
 
-INCLUDE "engine/battle/move_effects/mist.asm"
-
-INCLUDE "engine/battle/move_effects/focus_energy.asm"
-
 BattleCommand_Recoil:
 ; recoil
 	ld hl, wBattleMonMaxHP
@@ -6048,8 +6021,6 @@ BattleCommand_Paralyze:
 	call AnimateFailedMove
 	jmp PrintDoesntAffect
 
-INCLUDE "engine/battle/move_effects/substitute.asm"
-
 BattleCommand_RechargeNextTurn:
 ; rechargenextturn
 
@@ -6101,8 +6072,6 @@ DoubleDamage:
 	ld [hli], a
 	ld [hl], a
 	ret
-
-INCLUDE "engine/battle/move_effects/mimic.asm"
 
 BattleCommand_ResetStats:
 	ld a, BASE_STAT_LEVEL
@@ -6232,8 +6201,6 @@ BattleCommand_Heal:
 	call AnimateFailedMove
 	ld hl, SerenityPokemonCantRestText
 	jmp StdBattleTextbox
-
-INCLUDE "engine/battle/move_effects/transform.asm"
 
 BattleEffect_ButItFailed:
 	call AnimateFailedMove
@@ -6434,8 +6401,6 @@ BattleCommand_ArenaTrap:
 	call AnimateFailedMove
 	jmp PrintButItFailed
 
-INCLUDE "engine/battle/move_effects/nightmare.asm"
-
 BattleCommand_Defrost:
 ; Thaw the user.
 
@@ -6464,46 +6429,6 @@ BattleCommand_Defrost:
 	call RefreshBattleHuds
 	ld hl, WasDefrostedText
 	jmp StdBattleTextbox
-
-INCLUDE "engine/battle/move_effects/curse.asm"
-
-INCLUDE "engine/battle/move_effects/protect.asm"
-
-INCLUDE "engine/battle/move_effects/bulk_up.asm"
-
-INCLUDE "engine/battle/move_effects/calmmind.asm"
-
-INCLUDE "engine/battle/move_effects/dragondance.asm"
-
-INCLUDE "engine/battle/move_effects/close_combat.asm"
-
-INCLUDE "engine/battle/move_effects/hex.asm"
-
-INCLUDE "engine/battle/move_effects/venoshock.asm"
-
-INCLUDE "engine/battle/move_effects/fury_drive.asm"
-
-INCLUDE "engine/battle/move_effects/quiver_dance.asm"
-
-INCLUDE "engine/battle/move_effects/stealth_rock.asm"
-
-INCLUDE "engine/battle/move_effects/defog.asm"
-
-INCLUDE "engine/battle/move_effects/endure.asm"
-
-INCLUDE "engine/battle/move_effects/spikes.asm"
-
-INCLUDE "engine/battle/move_effects/perish_song.asm"
-
-INCLUDE "engine/battle/move_effects/rollout.asm"
-
-INCLUDE "engine/battle/move_effects/attract.asm"
-
-INCLUDE "engine/battle/move_effects/return.asm"
-
-INCLUDE "engine/battle/move_effects/safeguard.asm"
-
-INCLUDE "engine/battle/move_effects/acrobatics.asm"
 
 BattleCommand_FarCommand:
 	farjp Find_Command
@@ -6536,12 +6461,6 @@ BattleCommand_CheckSafeguard:
 	ld hl, SafeguardProtectText
 	call StdBattleTextbox
 	jmp EndMoveEffect
-
-INCLUDE "engine/battle/move_effects/baton_pass.asm"
-
-INCLUDE "engine/battle/move_effects/pursuit.asm"
-
-INCLUDE "engine/battle/move_effects/rapid_spin.asm"
 
 BattleCommand_WeatherBasedHeal:
 ; Weather-sensitive heal.
@@ -6628,12 +6547,6 @@ BattleCommand_WeatherBasedHeal:
 	dw GetHalfMaxHP
 	dw GetTwoThirdsMaxHP
 	dw GetMaxHP
-
-INCLUDE "engine/battle/move_effects/hidden_power.asm"
-
-INCLUDE "engine/battle/move_effects/belly_drum.asm"
-
-INCLUDE "engine/battle/move_effects/mirror_coat.asm"
 
 BattleCommand_DoubleMinimizeDamage:
 	ld hl, wEnemyMinimized
@@ -6970,3 +6883,49 @@ TenPercentBoost:
 	ldh [hDivisor], a
 	ld b, 4
 	jmp Divide
+
+INCLUDE "engine/battle/move_effects/nightmare.asm"
+INCLUDE "engine/battle/move_effects/curse.asm"
+INCLUDE "engine/battle/move_effects/protect.asm"
+INCLUDE "engine/battle/move_effects/bulk_up.asm"
+INCLUDE "engine/battle/move_effects/calmmind.asm"
+INCLUDE "engine/battle/move_effects/dragondance.asm"
+INCLUDE "engine/battle/move_effects/close_combat.asm"
+INCLUDE "engine/battle/move_effects/hex.asm"
+INCLUDE "engine/battle/move_effects/venoshock.asm"
+INCLUDE "engine/battle/move_effects/fury_drive.asm"
+INCLUDE "engine/battle/move_effects/quiver_dance.asm"
+INCLUDE "engine/battle/move_effects/stealth_rock.asm"
+INCLUDE "engine/battle/move_effects/defog.asm"
+INCLUDE "engine/battle/move_effects/endure.asm"
+INCLUDE "engine/battle/move_effects/spikes.asm"
+INCLUDE "engine/battle/move_effects/perish_song.asm"
+INCLUDE "engine/battle/move_effects/rollout.asm"
+INCLUDE "engine/battle/move_effects/attract.asm"
+INCLUDE "engine/battle/move_effects/return.asm"
+INCLUDE "engine/battle/move_effects/safeguard.asm"
+INCLUDE "engine/battle/move_effects/acrobatics.asm"
+INCLUDE "engine/battle/move_effects/baton_pass.asm"
+INCLUDE "engine/battle/move_effects/pursuit.asm"
+INCLUDE "engine/battle/move_effects/rapid_spin.asm"
+INCLUDE "engine/battle/move_effects/hidden_power.asm"
+INCLUDE "engine/battle/move_effects/belly_drum.asm"
+INCLUDE "engine/battle/move_effects/mirror_coat.asm"
+INCLUDE "data/moves/flail_reversal_power.asm"
+INCLUDE "engine/battle/move_effects/sticky_web.asm"
+INCLUDE "engine/battle/move_effects/hurricane.asm"
+INCLUDE "engine/battle/move_effects/facade.asm"
+INCLUDE "engine/battle/move_effects/counter.asm"
+INCLUDE "engine/battle/move_effects/encore.asm"
+INCLUDE "engine/battle/move_effects/snore.asm"
+INCLUDE "engine/battle/move_effects/sketch.asm"
+INCLUDE "engine/battle/move_effects/sleep_talk.asm"
+INCLUDE "engine/battle/move_effects/destiny_bond.asm"
+INCLUDE "engine/battle/move_effects/spite.asm"
+INCLUDE "engine/battle/move_effects/heal_bell.asm"
+INCLUDE "engine/battle/move_effects/transform.asm"
+INCLUDE "engine/battle/move_effects/mimic.asm"
+INCLUDE "engine/battle/move_effects/substitute.asm"
+INCLUDE "engine/battle/move_effects/mist.asm"
+INCLUDE "engine/battle/move_effects/focus_energy.asm"
+INCLUDE "engine/battle/move_effects/teleport.asm"
