@@ -171,7 +171,7 @@ MoveDescriptions::
 	dw ThiefDescription
 	dw SpiderWebDescription
 	dw DragonDanceDescription
-	dw NightmareDescription
+	dw TrickDescription
 	dw FlameChargeDescription
 	dw SnoreDescription
 	dw CurseDescription
@@ -706,9 +706,9 @@ DragonDanceDescription:
 	db   "Increases Attack"
 	line "and Speed.@"
 
-NightmareDescription:
-	db   "A sleeper loses"
-	line "1/4 HP every turn.@"
+TrickDescription:
+	db   "Swaps held items"
+	line "with the foe.@"
 
 FlameChargeDescription:
 	db   "An attack that ups"

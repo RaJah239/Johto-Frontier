@@ -75,7 +75,7 @@ BattleTowerMartTMCoinTraderScript:
     ifequal 47, .TMStealWing
     ifequal 48, .TMFirePunch
     ifequal 49, .TMFuryCutter
-    ifequal 50, .TMNightmare
+    ifequal 50, .TMTrick
     sjump CancelBuyingTMsScript
     end
 
@@ -329,8 +329,8 @@ BattleTowerMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMNightmare:
-    verbosegiveitem TM_NIGHTMARE
+.TMTrick:
+    verbosegiveitem TM_TRICK
     iffalse .NoRoom
     sjump .ConcludeTransaction
 

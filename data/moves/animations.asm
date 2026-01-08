@@ -172,7 +172,7 @@ BattleAnimations::
 	dw BattleAnim_Thief
 	dw BattleAnim_SpiderWeb
 	dw BattleAnim_DragonDance
-	dw BattleAnim_Nightmare
+	dw BattleAnim_Trick
 	dw BattleAnim_FlameCharge
 	dw BattleAnim_Snore
 	dw BattleAnim_Curse
@@ -3666,14 +3666,24 @@ BattleAnim_QuiverDance:
 	anim_wait 24
 	anim_jump BattleAnim_SubFocusingAnim
 
-BattleAnim_Nightmare:
-	anim_1gfx BATTLE_ANIM_GFX_ANGELS
-	anim_bgp $1b
-	anim_obp0 $f
-	anim_obj BATTLE_ANIM_OBJ_NIGHTMARE, 132, 40, $0
-	anim_obj BATTLE_ANIM_OBJ_NIGHTMARE, 132, 40, $a0
-	anim_sound 0, 1, SFX_NIGHTMARE
-	anim_wait 96
+BattleAnim_Trick:
+	anim_1gfx BATTLE_ANIM_GFX_STATUS
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $0, $0
+	anim_sound 0, 1, SFX_GET_COIN_FROM_SLOTS
+	anim_obj ANIM_OBJ_TRICK, 90, 68, $18
+	anim_obj ANIM_OBJ_TRICK, 90, 68, $38
+	anim_wait 16
+.loop
+	anim_sound 0, 1, SFX_STOP_SLOT
+	anim_wait 32
+	anim_loop 4, .loop
+	anim_wait 7
+	anim_sound 0, 1, SFX_SLOT_MACHINE_START
+	anim_incobj 1
+	anim_incobj 2
+	anim_wait 6
+	anim_clearobjs
+	anim_wait 6
 	anim_ret
 
 BattleAnim_FlameCharge:

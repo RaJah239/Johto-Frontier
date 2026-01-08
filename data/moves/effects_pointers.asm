@@ -93,7 +93,7 @@ MoveEffectsPointers:
 	dw NormalHit
 	dw Thief
 	dw MeanLook
-	dw Nightmare
+	dw Trick
 	dw Curse
 	dw Protect
 	dw Spikes

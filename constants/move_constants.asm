@@ -176,7 +176,7 @@
 	const THIEF        ; a8
 	const SPIDER_WEB   ; a9
 	const DRAGON_DANCE ; aa
-	const NIGHTMARE    ; ab
+	const TRICK        ; ab
 	const FLAME_CHARGE ; ac
 	const SNORE        ; ad
 	const CURSE        ; ae

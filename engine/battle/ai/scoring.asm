@@ -371,7 +371,6 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_PRIORITY_HIT,     AI_Smart_PriorityHit
 	dbw EFFECT_THIEF,            AI_Smart_Thief
 	dbw EFFECT_MEAN_LOOK,        AI_Smart_MeanLook
-	dbw EFFECT_NIGHTMARE,        AI_Smart_Nightmare
 	dbw EFFECT_CURSE,            AI_Smart_Curse
 	dbw EFFECT_PROTECT,          AI_Smart_Protect
 	dbw EFFECT_FORESIGHT,        AI_Smart_Foresight
@@ -547,10 +546,6 @@ AI_Smart_Sleep:
 ; 50% chance to greatly encourage sleep inducing moves otherwise.
 
 	ld b, EFFECT_DREAM_EATER
-	call AIHasMoveEffect
-	jr c, .encourage
-
-	ld b, EFFECT_NIGHTMARE
 	call AIHasMoveEffect
 	jr c, .encourage
 
@@ -1679,17 +1674,6 @@ AICheckLastPlayerMon:
 	inc c
 	dec b
 	jr nz, .loop
-
-	ret
-
-AI_Smart_Nightmare:
-; 50% chance to encourage this move.
-; The AI_Basic layer will make sure that
-; Dream Eater is only used against sleeping targets.
-
-	call AI_50_50
-	ret c
-	dec [hl]
 	ret
 
 AI_Smart_Curse:

@@ -68,7 +68,7 @@ BattleCommandPointers:
 	dw BattleCommand_HealBell
 	dw BattleCommand_HeldFlinch
 	dw BattleCommand_ArenaTrap
-	dw BattleCommand_Nightmare
+	dw BattleCommand_Trick
 	dw BattleCommand_Defrost
 	dw BattleCommand_Curse
 	dw BattleCommand_Protect

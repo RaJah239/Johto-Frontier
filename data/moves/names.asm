@@ -170,7 +170,7 @@ MoveNames::
 	li "Thief"
 	li "Spider Web"
 	li "Dragon Dance"
-	li "Nightmare"
+	li "Trick"
 	li "Flame Charge"
 	li "Snore"
 	li "Curse"

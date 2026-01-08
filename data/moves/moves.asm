@@ -184,7 +184,7 @@ Moves:
 	move THIEF,        EFFECT_THIEF,              40, DARK,          PHYSICAL, 100, 40, 100
 	move SPIDER_WEB,   EFFECT_MEAN_LOOK,           0, BUG,           STATUS,   100, 16,   0
 	move DRAGON_DANCE, EFFECT_DRAGON_DANCE,        0, DRAGON,        STATUS,   100, 32,   0
-	move NIGHTMARE,    EFFECT_NIGHTMARE,           0, GHOST,         STATUS,   100, 24,   0
+	move TRICK,        EFFECT_TRICK,               0, PSYCHIC_TYPE,  STATUS,   100, 16,   0
 	move FLAME_CHARGE, EFFECT_SPEED_UP_HIT,       60, FIRE,          PHYSICAL, 100, 32, 100
 	move SNORE,        EFFECT_SNORE,              40, NORMAL,        SPECIAL,  100, 40,  30
 	move CURSE,        EFFECT_CURSE,               0, CURSE_TYPE,    STATUS,   100, 32,   0

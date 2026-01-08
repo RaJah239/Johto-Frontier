@@ -6896,7 +6896,7 @@ TenPercentBoost:
 	ld b, 4
 	jmp Divide
 
-INCLUDE "engine/battle/move_effects/nightmare.asm"
+INCLUDE "engine/battle/move_effects/trick.asm"
 INCLUDE "engine/battle/move_effects/curse.asm"
 INCLUDE "engine/battle/move_effects/protect.asm"
 INCLUDE "engine/battle/move_effects/bulk_up.asm"

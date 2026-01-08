@@ -1165,10 +1165,11 @@ MeanLook:
 	arenatrap
 	endmove
 
-Nightmare:
+Trick:
 	usedmovetext
 	doturn
-	nightmare
+	checkhit
+	trick
 	endmove
 
 Curse:

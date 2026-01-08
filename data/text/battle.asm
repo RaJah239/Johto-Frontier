@@ -15,6 +15,28 @@ TargetsSpeedFellText:
 	line "Speed fell!"
 	prompt
 
+TrickText:
+	text "<USER>"
+	line "switched items"
+	cont "with its target!"
+	prompt
+
+TrickUserObtainedText:
+	text "<USER>"
+	line "obtained one"
+	cont "@"
+	text_ram wStringBuffer1
+	text "."
+	prompt
+
+TrickTargetObtainedText:
+	text "<TARGET>"
+	line "obtained one"
+	cont "@"
+	text_ram wStringBuffer1
+	text "."
+	prompt
+
 SolarPowerText:
 	text "<USER> is"
 	line "hurt by its"
@@ -1179,12 +1201,6 @@ StoleText:
 CantEscapeNowText:
 	text "<TARGET>"
 	line "can't escape now!"
-	prompt
-
-StartedNightmareText:
-	text "<TARGET>"
-	line "started to have a"
-	cont "NIGHTMARE!"
 	prompt
 
 WasDefrostedText:
