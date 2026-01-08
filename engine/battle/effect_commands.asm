@@ -1575,6 +1575,23 @@ BattleCommand_CheckHit:
 
 .not_thunder_or_stormbound_mon
 
+; ===========================
+; === Ability: True Flame ===
+; ===========================
+	; check if fire blast was used
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp FIRE_BLAST
+	jr nz, .not_fire_blast_or_true_flame_mon
+
+	; check it is was a true flame pokemon
+	call GetCurrentMon
+	ld hl, TrueFlamePokemon
+	call IsInByteArray
+	ret c
+
+.not_fire_blast_or_true_flame_mon
+
 	call .StatModifiers
 
 	ld a, [wPlayerMoveStruct + MOVE_ACC]
@@ -1759,6 +1776,7 @@ AccuracyCalc:
 
 INCLUDE "data/abilities/true_horn_mons.asm"
 INCLUDE "data/abilities/stormbound_mons.asm"
+INCLUDE "data/abilities/true_flame_mons.asm"
 INCLUDE "data/battle/accuracy_multipliers.asm"
 INCLUDE "data/abilities/compound_eyes_mons.asm"
 
