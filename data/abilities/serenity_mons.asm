@@ -38,10 +38,17 @@
 ;   cp MEW
 ;   jr z, .no
 
+; and engine/battle/ai/scoring.asm `AI_Basic:`
+;SerenityPokemon_AI:
+;   db MEGANIUM
+;   db SYLVEON
+;   db MEW
+;   db -1
+
 ; it couldn't be worked around afaik
 
 SerenityPokemon:
     db MEGANIUM
     db SYLVEON
     db MEW
-    db -1
+    db -1 ; end
