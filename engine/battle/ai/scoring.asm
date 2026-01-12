@@ -1,134 +1,33 @@
 AIScoring: ; used only for BANK(AIScoring)
 
 INCLUDE "engine/battle/ai/layers/ai_basic.asm"
-INCLUDE "engine/battle/ai/ability_lists.asm"
 INCLUDE "engine/battle/ai/layers/ai_types.asm"
 INCLUDE "engine/battle/ai/layers/ai_none.asm"
 INCLUDE "engine/battle/ai/layers/ai_smart.asm"
 INCLUDE "engine/battle/ai/layers/ai_final_attack.asm"
+INCLUDE "engine/battle/ai/layers/ai_cautious.asm"
+INCLUDE "engine/battle/ai/layers/ai_status.asm"
+INCLUDE "engine/battle/ai/layers/ai_aggressive.asm"
+INCLUDE "engine/battle/ai/layers/ai_risky.asm"
+INCLUDE "engine/battle/ai/layers/ai_setup.asm"
+INCLUDE "engine/battle/ai/layers/ai_offensive.asm"
+
+INCLUDE "engine/battle/ai/ability_lists.asm"
 
 INCLUDE "data/battle/ai/status_only_effects.asm"
 
-AI_Setup:
-; Use stat-modifying moves on turn 1.
-
-; 50% chance to greatly encourage stat-up moves during the first turn of enemy's Pokemon.
-; 50% chance to greatly encourage stat-down moves during the first turn of player's Pokemon.
-; 100% chance to greatly encourage stat-up moves if the player is flying or underground, and the enemy is faster.
-; 100% chance to greatly discourage stat-down moves if the player has Mist or a Substitute up.
-; Almost 90% chance to greatly discourage stat-modifying moves otherwise.
-
-	ld hl, wEnemyAIMoveScores - 1
-	ld de, wEnemyMonMoves
-	ld b, NUM_MOVES + 1
-.checkmove
-	dec b
-	ret z
-
-	inc hl
-	ld a, [de]
-	and a
-	ret z
-
-	inc de
-	call AIGetEnemyMove
-
-	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
-
-	cp EFFECT_ATTACK_UP
-	jr c, .checkmove
-	cp EFFECT_EVASION_UP + 1
-	jr c, .statup
-
-;	cp EFFECT_ATTACK_DOWN - 1
-	jr z, .checkmove
-	cp EFFECT_EVASION_DOWN + 1
-	jr c, .statdown
-
-	cp EFFECT_ATTACK_UP_2
-	jr c, .checkmove
-	cp EFFECT_EVASION_UP_2 + 1
-	jr c, .statup
-
-;	cp EFFECT_ATTACK_DOWN_2 - 1
-	jr z, .checkmove
-	cp EFFECT_EVASION_DOWN_2 + 1
-	jr c, .statdown
-
-	jr .checkmove
-
-.statup
-	ld a, [wPlayerSubStatus3]
-	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
-	jr z, .statup_continue
-
-	call AICompareSpeed
-	jr c, .do_encourage
-
-.statup_continue
-	ld a, [wEnemyTurnsTaken]
-	and a
-	jr nz, .discourage
-
-	jr .encourage
-
-.statdown
-	ld a, [wPlayerSubStatus4]
-	bit SUBSTATUS_MIST, a
-	jr nz, .do_discourage
-
-	ld a, [wPlayerSubStatus4]
-	bit SUBSTATUS_SUBSTITUTE, a
-	jr nz, .do_discourage
-
-	ld a, [wPlayerTurnsTaken]
-	and a
-	jr nz, .discourage
-
-.encourage
-	call AI_50_50
-	jr c, .checkmove
-
-.do_encourage
-	dec [hl]
-	dec [hl]
-	jr .checkmove
-
-.discourage
-	call Random
-	cp 12 percent
-	jr c, .checkmove
-
-.do_discourage
-	inc [hl]
-	inc [hl]
-	jr .checkmove
-
-AI_Offensive:
-; Greatly discourage non-damaging moves.
-
-	ld hl, wEnemyAIMoveScores - 1
-	ld de, wEnemyMonMoves
-	ld b, NUM_MOVES + 1
-.checkmove
-	dec b
-	ret z
-
-	inc hl
-	ld a, [de]
-	and a
-	ret z
-
-	inc de
-	call AIGetEnemyMove
-
-	ld a, [wEnemyMoveStruct + MOVE_POWER]
-	and a
-	jr nz, .checkmove
-
-	inc [hl]
-	inc [hl]
-	jr .checkmove
+BoostingMoveEffects:
+	db EFFECT_ATTACK_UP_2
+	db EFFECT_SP_ATK_UP
+	db EFFECT_SP_ATK_UP_2
+	db EFFECT_SUBSTITUTE
+	db EFFECT_CURSE
+	db EFFECT_CALM_MIND
+	db EFFECT_BULK_UP
+	db EFFECT_DRAGON_DANCE
+	db EFFECT_QUIVER_DANCE
+	db EFFECT_FURY_DRIVE
+	db -1 ; end
 
 AIDiscourageMove:
 	ld a, [hl]
@@ -181,6 +80,25 @@ AI_50_50:
 	call Random
 	cp 50 percent + 1
 	ret
+
+AIDamageCalc:
+	ld a, 1
+	ldh [hBattleTurn], a
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	ld de, 1
+	ld hl, ConstantDamageEffects
+	call IsInArray
+	jr nc, .notconstant
+	callfar BattleCommand_ConstantDamage
+	ret
+
+.notconstant
+	callfar EnemyAttackDamage
+	callfar BattleCommand_DamageCalc
+	callfar BattleCommand_Stab
+	ret
+
+INCLUDE "data/battle/ai/constant_damage_effects.asm"
 
 AICompareSpeed:
 ; Return carry if enemy is faster than player.
@@ -1568,16 +1486,3 @@ DoesPokemonHaveClearBody:
 .yes
 	scf
 	ret
-
-BoostingMoveEffects:
-	db EFFECT_ATTACK_UP_2
-	db EFFECT_SP_ATK_UP
-	db EFFECT_SP_ATK_UP_2
-	db EFFECT_SUBSTITUTE
-	db EFFECT_CURSE
-	db EFFECT_CALM_MIND
-	db EFFECT_BULK_UP
-	db EFFECT_DRAGON_DANCE
-	db EFFECT_QUIVER_DANCE
-	db EFFECT_FURY_DRIVE
-	db -1 ; end
