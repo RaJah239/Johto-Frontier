@@ -1,6 +1,12 @@
 ; List of all Pokemon that usually goes first
 ; during during hail
 
+; Note: This list must match engine/battle/ai/scoring.asm `SlushRushPokemon_AI:`
+
+;SlushRushPokemon_AI:
+;   db DELIBIRD
+;   db -1 ; end
+
 SlushRushPokemon:
     db DELIBIRD
-    db -1
+    db -1 ; end

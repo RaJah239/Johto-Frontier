@@ -1,5 +1,35 @@
 AIScoring: ; used only for BANK(AIScoring)
 
+SwiftSwimPokemon_AI:
+    db FEEBAS
+    db KINGDRA
+    db MAGIKARP
+    db MANTINE
+    db OMANYTE
+    db OMASTAR
+    db -1 ; end
+
+ChlorophyllPokemon_AI:
+    db BELLSPROUT
+    db WEEPINBELL
+    db VICTREEBEL
+    db TANGELA
+    db TANGROWTH
+    db SUNKERN
+    db SUNFLORA
+    db TROPIUS
+    db -1 ; end
+
+SandRushPokemon_AI:
+    db DRILBUR
+    db EXCADRILL
+    db KLEAVOR
+    db -1 ; end
+
+SlushRushPokemon_AI:
+    db DELIBIRD
+    db -1 ; end
+
 ImmunityPokemon_AI:
 	db CHIKORITA
 	db BAYLEEF
@@ -3376,38 +3406,60 @@ DoesAIOutSpeedPlayer:
 	cp WEATHER_RAIN
 	jr nz, .check_sun
 	ld a, [wEnemyMonSpecies]
-	cp SUNKERN
-	jmp z, .yes
-	cp KINGDRA
-	jmp z, .yes
+	push hl
+	push de
+	push bc
+	ld hl, SwiftSwimPokemon_AI
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jmp c, .yes
 
 .check_sun
 	ld a, [wBattleWeather]
 	cp WEATHER_SUN
 	jr nz, .check_sand
 	ld a, [wEnemyMonSpecies]
-	cp BELLSPROUT
-	jmp z, .yes
-	cp SUNKERN
-	jmp z, .yes
+	push hl
+	push de
+	push bc
+	ld hl, ChlorophyllPokemon_AI
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jmp c, .yes
 
 .check_sand
 	ld a, [wBattleWeather]
 	cp WEATHER_SANDSTORM
 	jr nz, .check_hail
 	ld a, [wEnemyMonSpecies]
-	cp EXCADRILL
-	jr z, .yes
-	cp RHYDON
-	jr z, .yes
+	push hl
+	push de
+	push bc
+	ld hl, SandRushPokemon_AI
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jmp c, .yes
 
 .check_hail
 	ld a, [wBattleWeather]
 	cp WEATHER_HAIL
 	jr nz, .check_player
 	ld a, [wEnemyMonSpecies]
-	cp DELIBIRD
-	jr z, .yes
+	push hl
+	push de
+	push bc
+	ld hl, SlushRushPokemon_AI
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jmp c, .yes
 
 .check_player
 	ld a, [wBattleMonStatus]
@@ -3422,38 +3474,60 @@ DoesAIOutSpeedPlayer:
 	cp WEATHER_RAIN
 	jr nz, .check_sun_player
 	ld a, [wBattleMonSpecies]
-	cp SUNKERN
-	jr z, .no
-	cp KINGDRA
-	jr z, .no
+	push hl
+	push de
+	push bc
+	ld hl, SwiftSwimPokemon_AI
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jr c, .no
 
 .check_sun_player
 	ld a, [wBattleWeather]
 	cp WEATHER_SUN
 	jr nz, .check_sand_player
 	ld a, [wBattleMonSpecies]
-	cp SUNKERN
-	jr z, .no
-	cp SUNFLORA
-	jr z, .no
+	push hl
+	push de
+	push bc
+	ld hl, ChlorophyllPokemon_AI
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jr c, .no
 
 .check_sand_player
 	ld a, [wBattleWeather]
 	cp WEATHER_SANDSTORM
 	jr nz, .check_hail_player
 	ld a, [wBattleMonSpecies]
-	cp EXCADRILL
-	jr z, .no
-	cp RHYDON
-	jr z, .no
+	push hl
+	push de
+	push bc
+	ld hl, SandRushPokemon_AI
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jr c, .no
 
 .check_hail_player
 	ld a, [wBattleWeather]
 	cp WEATHER_HAIL
 	jr nz, .speed_check
 	ld a, [wBattleMonSpecies]
-	cp DELIBIRD
-	jr z, .no
+	push hl
+	push de
+	push bc
+	ld hl, SlushRushPokemon_AI
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jr c, .no
 
 .speed_check
 ; Return carry if enemy is faster than player.

@@ -6,4 +6,4 @@ RainDishPokemon:
     db BLASTOISE
     db TENTACOOL
     db TENTACRUEL
-    db -1
+    db -1 ; end
