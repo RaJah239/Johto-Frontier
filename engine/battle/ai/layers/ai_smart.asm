@@ -2797,9 +2797,6 @@ endr
 	pop de
 	jr .checkmove
 
-AI_None:
-	ret
-
 AIDiscourageMove:
 	ld a, [hl]
 	add 20
