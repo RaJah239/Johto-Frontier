@@ -51,3 +51,67 @@ RockHeadPokemon_AI:
     db BAGON
     db SHELGON
     db -1 ; end
+
+ClearBodyPokemon_AI:
+    db TENTACOOL
+    db TENTACRUEL
+    db REGIROCK
+    db REGICE
+    db REGISTEEL
+    db -1 ; end
+
+SturdyPokemon_AI:
+    db MAGNEMITE
+    db MAGNETON
+    db MAGNEZONE
+    db ONIX
+    db STEELIX
+    db SUDOWOODO
+    db SHUCKLE
+    db SKARMORY
+    db DONPHAN
+    db REGIROCK
+    db -1 ; end
+
+MagicGuardPokemon_AI:
+; 26 levitating pokemon
+    db CHARIZARD
+    db BEAUTIFLY
+    db DUSTOX
+    db MAGNEMITE
+    db MAGNETON
+    db MAGNEZONE
+    db ALTARIA
+    db GASTLY
+    db HAUNTER
+    db GENGAR
+    db LARVESTA
+    db VOLCARONA
+    db KOFFING
+    db WEEZING
+    db SOLROCK
+    db LUNATONE
+    db CLAYDOL
+    db BRONZOR
+    db BRONZONG
+    db MISDREAVUS
+    db MISMAGIUS
+    db UNOWN
+    db NOWN
+    db VICTINI
+    db CELEBI
+    db MEW
+
+; 2 magic guard pokemon
+    db CLEFAIRY
+    db CLEFABLE
+    db -1 ; end
+
+OverdrivePokemon_AI:
+    db URSALUNA
+    db PORYGONZ
+    db -1 ; end
+
+; unused at the moment
+UberImmunePokemon_AI:
+    db -1 ; end
