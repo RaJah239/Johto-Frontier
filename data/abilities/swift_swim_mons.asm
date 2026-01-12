@@ -1,7 +1,7 @@
 ; List of all Pokemon that usually goes first
 ; during during rain
 
-; Note: This list must match engine/battle/ai/scoring.asm `SwiftSwimPokemon_AI:`
+; Note: This list must match engine/battle/ai/ability_lists.asm `SwiftSwimPokemon_AI:`
 
 ;SwiftSwimPokemon_AI:
 ;   db FEEBAS

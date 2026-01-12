@@ -1,7 +1,7 @@
 ; List of all Pokemon that usually goes first
 ; during during sun
 
-; Note: This list must match engine/battle/ai/scoring.asm `ChlorophyllPokemon_AI:`
+; Note: This list must match engine/battle/ai/ability_lists.asm `ChlorophyllPokemon_AI:`
 
 ;ChlorophyllPokemon_AI:
 ;   db BELLSPROUT

@@ -38,7 +38,7 @@
 ;   cp MEW
 ;   jr z, .no
 
-; and engine/battle/ai/scoring.asm `AI_Basic:`
+; and engine/battle/ai/ability_lists.asm `SerenityPokemon_AI:`
 ;SerenityPokemon_AI:
 ;   db MEGANIUM
 ;   db SYLVEON
