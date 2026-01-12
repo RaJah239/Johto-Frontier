@@ -2796,35 +2796,3 @@ endr
 	pop bc
 	pop de
 	jr .checkmove
-
-AIDiscourageMove:
-	ld a, [hl]
-	add 20
-	ld [hl], a
-	ret
-
-AIGetEnemyMove:
-; Load attributes of move a into ram
-
-	push hl
-	push de
-	push bc
-	dec a
-	ld hl, Moves
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-
-	ld de, wEnemyMoveStruct
-	ld a, BANK(Moves)
-	call FarCopyBytes
-	jmp PopBCDEHL
-
-AI_80_20:
-	call Random
-	cp 20 percent - 1
-	ret
-
-AI_50_50:
-	call Random
-	cp 50 percent + 1
-	ret
