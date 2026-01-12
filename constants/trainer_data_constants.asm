@@ -15,7 +15,7 @@ DEF NUM_TRAINER_ATTRIBUTES EQU _RS
 	shift_const AI_TYPES
 	shift_const AI_OFFENSIVE
 	shift_const AI_SMART
-	shift_const AI_OPPORTUNIST
+	shift_const AI_FINAL_ATTACK
 	shift_const AI_AGGRESSIVE
 	shift_const AI_CAUTIOUS
 	shift_const AI_STATUS

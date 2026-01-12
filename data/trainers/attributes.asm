@@ -137,13 +137,13 @@ TrainerClassAttributes:
 ; Schoolboy
 	db NO_ITEM, NO_ITEM ; items
 	db 8 ; base reward
-	dw AI_BASIC | AI_SETUP | AI_TYPES | AI_OPPORTUNIST | AI_CAUTIOUS | AI_STATUS
+	dw AI_BASIC | AI_SETUP | AI_TYPES | AI_FINAL_ATTACK | AI_CAUTIOUS | AI_STATUS
 	dw CONTEXT_USE | SWITCH_OFTEN
 
 ; Bird Keeper
 	db NO_ITEM, NO_ITEM ; items
 	db 6 ; base reward
-	dw AI_BASIC | AI_TYPES | AI_OFFENSIVE | AI_OPPORTUNIST | AI_STATUS
+	dw AI_BASIC | AI_TYPES | AI_OFFENSIVE | AI_FINAL_ATTACK | AI_STATUS
 	dw CONTEXT_USE | SWITCH_SOMETIMES
 
 ; Lass
@@ -173,7 +173,7 @@ TrainerClassAttributes:
 ; Beauty
 	db NO_ITEM, NO_ITEM ; items
 	db 22 ; base reward
-	dw AI_BASIC | AI_TYPES | AI_OPPORTUNIST | AI_CAUTIOUS | AI_STATUS
+	dw AI_BASIC | AI_TYPES | AI_FINAL_ATTACK | AI_CAUTIOUS | AI_STATUS
 	dw CONTEXT_USE | SWITCH_SOMETIMES
 
 ; Pokemaniac
@@ -185,7 +185,7 @@ TrainerClassAttributes:
 ; Gruntm
 	db NO_ITEM, NO_ITEM ; items
 	db 0 ; base reward
-	dw AI_BASIC | AI_SETUP | AI_TYPES | AI_OPPORTUNIST | AI_CAUTIOUS | AI_STATUS | AI_RISKY
+	dw AI_BASIC | AI_SETUP | AI_TYPES | AI_FINAL_ATTACK | AI_CAUTIOUS | AI_STATUS | AI_RISKY
 	dw CONTEXT_USE | SWITCH_SOMETIMES
 
 ; Gentleman
@@ -203,7 +203,7 @@ TrainerClassAttributes:
 ; Teacher
 	db NO_ITEM, NO_ITEM ; items
 	db 18 ; base reward
-	dw AI_BASIC | AI_OPPORTUNIST | AI_AGGRESSIVE | AI_STATUS
+	dw AI_BASIC | AI_FINAL_ATTACK | AI_AGGRESSIVE | AI_STATUS
 	dw CONTEXT_USE | SWITCH_SOMETIMES
 
 ; Sabrina
@@ -221,7 +221,7 @@ TrainerClassAttributes:
 ; Fisher
 	db NO_ITEM, NO_ITEM ; items
 	db 10 ; base reward
-	dw AI_BASIC | AI_TYPES | AI_OPPORTUNIST | AI_CAUTIOUS | AI_STATUS
+	dw AI_BASIC | AI_TYPES | AI_FINAL_ATTACK | AI_CAUTIOUS | AI_STATUS
 	dw CONTEXT_USE | SWITCH_OFTEN
 
 ; Swimmerm
@@ -239,7 +239,7 @@ TrainerClassAttributes:
 ; Sailor
 	db NO_ITEM, NO_ITEM ; items
 	db 10 ; base reward
-	dw AI_BASIC | AI_OFFENSIVE | AI_OPPORTUNIST | AI_STATUS
+	dw AI_BASIC | AI_OFFENSIVE | AI_FINAL_ATTACK | AI_STATUS
 	dw CONTEXT_USE | SWITCH_SOMETIMES
 
 ; Super Nerd
@@ -287,7 +287,7 @@ TrainerClassAttributes:
 ; Firebreather
 	db NO_ITEM, NO_ITEM ; items
 	db 12 ; base reward
-	dw AI_BASIC | AI_SETUP | AI_OFFENSIVE | AI_OPPORTUNIST | AI_STATUS
+	dw AI_BASIC | AI_SETUP | AI_OFFENSIVE | AI_FINAL_ATTACK | AI_STATUS
 	dw CONTEXT_USE | SWITCH_SOMETIMES
 
 ; Juggler
@@ -305,13 +305,13 @@ TrainerClassAttributes:
 ; Executivem
 	db NO_ITEM, NO_ITEM ; items
 	db 0 ; base reward
-	dw AI_BASIC | AI_SETUP | AI_TYPES | AI_SMART | AI_OPPORTUNIST | AI_CAUTIOUS | AI_STATUS | AI_RISKY
+	dw AI_BASIC | AI_SETUP | AI_TYPES | AI_SMART | AI_FINAL_ATTACK | AI_CAUTIOUS | AI_STATUS | AI_RISKY
 	dw CONTEXT_USE | SWITCH_SOMETIMES
 
 ; Psychic T
 	db NO_ITEM, NO_ITEM ; items
 	db 8 ; base reward
-	dw AI_BASIC | AI_TYPES | AI_OPPORTUNIST | AI_CAUTIOUS | AI_STATUS
+	dw AI_BASIC | AI_TYPES | AI_FINAL_ATTACK | AI_CAUTIOUS | AI_STATUS
 	dw CONTEXT_USE | SWITCH_SOMETIMES
 
 ; Picnicker
@@ -329,7 +329,7 @@ TrainerClassAttributes:
 ; Executivef
 	db NO_ITEM, NO_ITEM ; items
 	db 0 ; base reward
-	dw AI_BASIC | AI_SETUP | AI_TYPES | AI_SMART | AI_OPPORTUNIST | AI_CAUTIOUS | AI_STATUS | AI_RISKY
+	dw AI_BASIC | AI_SETUP | AI_TYPES | AI_SMART | AI_FINAL_ATTACK | AI_CAUTIOUS | AI_STATUS | AI_RISKY
 	dw CONTEXT_USE | SWITCH_SOMETIMES
 
 ; Sage
@@ -347,7 +347,7 @@ TrainerClassAttributes:
 ; Boarder
 	db NO_ITEM, NO_ITEM ; items
 	db 18 ; base reward
-	dw AI_BASIC | AI_TYPES | AI_OPPORTUNIST | AI_STATUS
+	dw AI_BASIC | AI_TYPES | AI_FINAL_ATTACK | AI_STATUS
 	dw CONTEXT_USE | SWITCH_SOMETIMES
 
 ; Pokefanm
@@ -359,7 +359,7 @@ TrainerClassAttributes:
 ; Kimono Girl
 	db NO_ITEM, NO_ITEM ; items
 	db 18 ; base reward
-	dw AI_BASIC | AI_TYPES | AI_OPPORTUNIST | AI_CAUTIOUS | AI_STATUS
+	dw AI_BASIC | AI_TYPES | AI_FINAL_ATTACK | AI_CAUTIOUS | AI_STATUS
 	dw CONTEXT_USE | SWITCH_SOMETIMES
 
 ; Twins
@@ -389,13 +389,13 @@ TrainerClassAttributes:
 ; Officer
 	db NO_ITEM, NO_ITEM ; items
 	db 10 ; base reward
-	dw AI_BASIC | AI_TYPES | AI_OPPORTUNIST | AI_STATUS
+	dw AI_BASIC | AI_TYPES | AI_FINAL_ATTACK | AI_STATUS
 	dw CONTEXT_USE | SWITCH_SOMETIMES
 
 ; Gruntf
 	db NO_ITEM, NO_ITEM ; items
 	db 0 ; base reward
-	dw AI_BASIC | AI_TYPES | AI_OPPORTUNIST | AI_CAUTIOUS | AI_STATUS | AI_RISKY
+	dw AI_BASIC | AI_TYPES | AI_FINAL_ATTACK | AI_CAUTIOUS | AI_STATUS | AI_RISKY
 	dw CONTEXT_USE | SWITCH_SOMETIMES
 
 ; Mysticalman

@@ -5,6 +5,7 @@ INCLUDE "engine/battle/ai/ability_lists.asm"
 INCLUDE "engine/battle/ai/layers/ai_types.asm"
 INCLUDE "engine/battle/ai/layers/ai_none.asm"
 INCLUDE "engine/battle/ai/layers/ai_smart.asm"
+INCLUDE "engine/battle/ai/layers/ai_final_attack.asm"
 
 INCLUDE "data/battle/ai/status_only_effects.asm"
 
