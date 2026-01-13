@@ -39,7 +39,12 @@ SerenityPokemon_AI:
     db MEGANIUM
     db SYLVEON
     db MEW
-    db -1
+    db -1 ; end
+
+BadDreamsPokemon_AI:
+    db JYNX
+    db DARKRAI
+    db -1 ; end
 
 RockHeadPokemon_AI:
     db ONIX

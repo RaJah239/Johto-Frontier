@@ -266,19 +266,64 @@ AI_Smart_Hex:
 	ret
 
 AI_Smart_Sleep:
-; Greatly encourage sleep inducing moves if the enemy has either Dream Eater or Nightmare.
-; 50% chance to greatly encourage sleep inducing moves otherwise.
+; don't use if there already is a status
+; never use if player has substitute
+; never use if player has safeguard
+; don't use against serenity pokemon as they are immune to status
+; greatly encourage sleep inducing moves if the enemy has either dream eater
+; pokemon with bad dreams ability should prioritise sleep more
+; 50% chance to greatly encourage sleep inducing moves otherwise
 
+; don't use if there already is a status
+	ld a, [wBattleMonStatus]
+	and a
+	jr nz, .discourage
+
+; never use if player has substitute
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
+	jr nz, .discourage
+
+; never use if player has safeguard
+	ld a, [wPlayerScreens]
+	bit SCREENS_SAFEGUARD, a
+	jr nz, .discourage
+
+; don't use against serenity pokemon as they are immune to status
+	ld a, [wBattleMonSpecies]
+	push hl
+	ld hl, SerenityPokemon_AI
+	call IsInByteArray
+	pop hl
+	jr c, .discourage
+
+; greatly encourage sleep inducing moves
+; if the enemy has either dream eater
 	ld b, EFFECT_DREAM_EATER
 	call AIHasMoveEffect
-	jr c, .encourage
+	jr c, .encourage50
 
+; pokemon with bad dreams ability should prioritise sleep more
+	ld a, [wEnemyMonSpecies]
+	push hl
+	ld hl, BadDreamsPokemon_AI
+	call IsInByteArray
+	pop hl
+	jr c, .encourage50
+
+.discourage
+    inc [hl]
+    inc [hl]
+    ret
+
+.encourage50
 	call AI_50_50
 	ret c
-.encourage
-	dec [hl]
-	dec [hl]
-	ret
+
+rept 12
+    dec [hl]
+endr
+    ret
 
 AI_Smart_LeechHit:
 	push hl
