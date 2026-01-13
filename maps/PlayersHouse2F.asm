@@ -74,8 +74,8 @@ if DEF(_DEBUG)
 	giveitem MILOTIC_CALL
 
 	; good party
-	givepoke MAGIKARP, 50
-	givepoke GYARADOS, 50
+	givepoke TYRANITAR, 50
+	givepoke ONIX, 50
 	givepoke MEW, 50
 
 	; 4th, 5th & 6th mons
@@ -92,8 +92,8 @@ if DEF(_DEBUG)
 
 	; 1st mon moves
 	loadmem wPartyMon1Moves+0, SPLASH
-	loadmem wPartyMon1Moves+1, AEROBLAST
-	loadmem wPartyMon1Moves+2, SACRED_FIRE
+	loadmem wPartyMon1Moves+1, CHARM
+	loadmem wPartyMon1Moves+2, CRUNCH
 	loadmem wPartyMon1Moves+3, DIVE_BOMB
 
 	; 2nd mon moves

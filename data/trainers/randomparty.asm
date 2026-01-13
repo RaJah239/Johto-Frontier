@@ -19,7 +19,7 @@ RedGroup:
 	db -1 ; end
 
 	; RED (1)
-	db "RED2@", TRAINERTYPE_RANDOM | TRAINERTYPE_NICKNAME | TRAINERTYPE_DVS | TRAINERTYPE_ITEM | TRAINERTYPE_MOVES, 1, RANDOMLIST_1
+	db "RED2@", TRAINERTYPE_RANDOM | TRAINERTYPE_NICKNAME | TRAINERTYPE_DVS | TRAINERTYPE_ITEM | TRAINERTYPE_MOVES, 2, RANDOMLIST_1
 	db -1 ; end
 
 RandomPartyLists::
@@ -43,19 +43,19 @@ RandomPartyLists::
 	db -1 ; end
 
 	; RANDOMLIST_1
-	db 1
-	db LEVEL_FROM_PARTY, MAGIKARP
+	db 2
+	db LEVEL_FROM_PARTY, RHYDON
 			db "Magikarp@"		; Nickname
 			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
-			db NO_ITEM	; ITEM/ NO_ITEM is a thing
+			db CHOICE_SPECS	; ITEM/ NO_ITEM is a thing
 			db SPLASH, NO_MOVE, NO_MOVE, NO_MOVE ; Moveset - NO_MOVE is a thing
 			db $fe ; End of Pokemon
-;	db LEVEL_FROM_PARTY, MEWTWO
-;			db "TWO@"		; Nickname
-;			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
-;			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-;			db RECOVER, PSYSHOCK, FIRE_BLAST, CLOSE_COMBAT ; Moveset - NO_MOVE is a thing
-;			db $fe ; End of Pokemon
+	db 60, MEWTWO
+			db "TWO@"		; Nickname
+			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
+			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+			db RECOVER, PSYSHOCK, CALM_MIND, FIRE_PUNCH ; Moveset - NO_MOVE is a thing
+			db $fe ; End of Pokemon
 ;	db LEVEL_FROM_PARTY, SNORLAX
 ;			db "LAX@"		; Nickname
 ;			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
