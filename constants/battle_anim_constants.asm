@@ -477,6 +477,7 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_SPIDER_WEB            ; 9a
 	const BATTLE_ANIM_FRAMESET_UNUSED_CAKE           ; 9b
 	const BATTLE_ANIM_FRAMESET_IMP                   ; 9c
+	const BATTLE_ANIM_FRAMESET_IMP_FLIPPED           ; 9d
 	const BATTLE_ANIM_FRAMESET_CHERUB                ; 9e
 	const BATTLE_ANIM_FRAMESET_PENCIL                ; 9f
 	const BATTLE_ANIM_FRAMESET_ENCORE_HAND           ; a0

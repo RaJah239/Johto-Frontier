@@ -147,6 +147,7 @@ BattleAnimFrameData:
 	dw .Frameset_SpiderWeb           ; BATTLE_ANIM_FRAMESET_SPIDER_WEB
 	dw .Frameset_UnusedCake          ; BATTLE_ANIM_FRAMESET_UNUSED_CAKE
 	dw .Frameset_Imp                 ; BATTLE_ANIM_FRAMESET_IMP
+	dw .Frameset_ImpFlipped          ; BATTLE_ANIM_FRAMESET_IMP_FLIPPED
 	dw .Frameset_Cherub              ; BATTLE_ANIM_FRAMESET_CHERUB
 	dw .Frameset_Pencil              ; BATTLE_ANIM_FRAMESET_PENCIL
 	dw .Frameset_EncoreHand          ; BATTLE_ANIM_FRAMESET_ENCORE_HAND
@@ -1049,6 +1050,10 @@ BattleAnimFrameData:
 
 .Frameset_Imp:
 	oamframe BATTLE_ANIM_OAMSET_B8, 32
+	oamend
+
+.Frameset_ImpFlipped:
+	oamframe BATTLE_ANIM_OAMSET_B8, 32, OAM_X_FLIP
 	oamend
 
 .Frameset_Cherub:
