@@ -6896,6 +6896,11 @@ TenPercentBoost:
 	ld b, 4
 	jmp Divide
 
+EffectCommands_50_50:
+	call BattleRandom
+	cp 50 percent + 1
+	ret
+
 INCLUDE "engine/battle/move_effects/curse.asm"
 INCLUDE "engine/battle/move_effects/protect.asm"
 INCLUDE "engine/battle/move_effects/bulk_up.asm"

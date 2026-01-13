@@ -6,7 +6,7 @@ TrainerClassAttributes:
 	db NO_ITEM, NO_ITEM ; items
 	db 25 ; base reward
 	dw AI_BASIC | AI_SMART | AI_AGGRESSIVE | AI_FINAL_ATTACK
-	dw CONTEXT_USE | SWITCH_SOMETIMES
+	dw SWITCH_SOMETIMES | SWITCH_STATUS | CONTEXT_USE
 
 ; Whitney
 	db NO_ITEM, NO_ITEM ; items
@@ -378,7 +378,7 @@ TrainerClassAttributes:
 	db NO_ITEM, NO_ITEM ; items
 	db 25 ; base reward
 	dw AI_BASIC | AI_SMART | AI_AGGRESSIVE | AI_FINAL_ATTACK
-	dw CONTEXT_USE | SWITCH_SOMETIMES
+	dw SWITCH_SOMETIMES | SWITCH_STATUS | CONTEXT_USE
 
 ; Blue
 	db NO_ITEM, NO_ITEM ; items

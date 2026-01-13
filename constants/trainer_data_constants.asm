@@ -27,7 +27,7 @@ DEF NO_AI EQU 0
 	const SWITCH_OFTEN_F     ; 0
 	const SWITCH_RARELY_F    ; 1
 	const SWITCH_SOMETIMES_F ; 2
-	const_skip               ; 3
+	const SWITCH_STATUS_F    ; 3
 	const ALWAYS_USE_F       ; 4
 	const UNKNOWN_USE_F      ; 5
 	const CONTEXT_USE_F      ; 6
@@ -36,7 +36,7 @@ DEF SWITCH_OFTEN       EQU 1 << SWITCH_OFTEN_F
 DEF SWITCH_RARELY      EQU 1 << SWITCH_RARELY_F
 DEF SWITCH_SOMETIMES   EQU 1 << SWITCH_SOMETIMES_F
 DEF ALWAYS_USE         EQU 1 << ALWAYS_USE_F
-DEF UNKNOWN_USE        EQU 1 << UNKNOWN_USE_F
+DEF SWITCH_STATUS      EQU 1 << SWITCH_STATUS_F
 DEF CONTEXT_USE        EQU 1 << CONTEXT_USE_F
 
 ; TrainerTypes bits (see engine/battle/read_trainer_party.asm)

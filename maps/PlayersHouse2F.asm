@@ -93,8 +93,8 @@ if DEF(_DEBUG)
 	; 1st mon moves
 	loadmem wPartyMon1Moves+0, SPLASH
 	loadmem wPartyMon1Moves+1, CHARM
-	loadmem wPartyMon1Moves+2, CRUNCH
-	loadmem wPartyMon1Moves+3, DIVE_BOMB
+	loadmem wPartyMon1Moves+2, CONFUSE_RAY
+	loadmem wPartyMon1Moves+3, ATTRACT
 
 	; 2nd mon moves
 ;	loadmem wPartyMon2Moves+0, SPORE
