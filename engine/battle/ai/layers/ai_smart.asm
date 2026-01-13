@@ -146,7 +146,7 @@ AI_Smart_ParalyzeTarget:
 	; check specie
 	ld a, [wEnemyMonSpecies]
 	push hl
-	ld hl, SureShockPokemon
+	ld hl, SureShockPokemon_AI
 	call IsInByteArray
 	pop hl
 	ret nz
