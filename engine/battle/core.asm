@@ -979,6 +979,8 @@ Battle_EnemyFirst:
 
 .switch_item
 	call SetEnemyTurn
+	call EnemySwitchSpikes
+	jmp z, HandleEnemyMonFaint
 	call ResidualDamage
 	jmp z, HandleEnemyMonFaint
 	call RefreshBattleHuds
@@ -1004,6 +1006,8 @@ Battle_PlayerFirst:
 	call SetEnemyTurn
 	callfar AI_SwitchOrTryItem
 	push af
+	call EnemySwitchSpikes
+	jr z, .spikes_faint
 	call PlayerTurn_EndOpponentProtectEndureDestinyBond
 	pop bc
 	ld a, [wForcedSwitch]
@@ -1041,6 +1045,23 @@ Battle_PlayerFirst:
 	call RefreshBattleHuds
 	xor a ; BATTLEPLAYERACTION_USEMOVE
 	ld [wBattlePlayerAction], a
+	ret
+
+.spikes_faint
+	pop af ; realign stack, don't care about values
+	jmp HandleEnemyMonFaint
+
+EnemySwitchSpikes:
+	ld a, [wEnemyIsSwitching]
+	and a
+	jr z, .no
+	call SpikesDamage
+	jr HasEnemyFainted
+
+.no
+; return nz
+	ld a, $1
+	and a
 	ret
 
 PlayerTurn_EndOpponentProtectEndureDestinyBond:
