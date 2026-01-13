@@ -6,12 +6,12 @@ INCLUDE "engine/battle/ai/layers/ai_none.asm"
 INCLUDE "engine/battle/ai/layers/ai_smart.asm"
 INCLUDE "engine/battle/ai/layers/ai_final_attack.asm"
 INCLUDE "engine/battle/ai/layers/ai_aggressive.asm"
+INCLUDE "engine/battle/ai/layers/ai_smart_switch.asm"
 
 
 INCLUDE "engine/battle/ai/layers/ai_cautious.asm"
 INCLUDE "engine/battle/ai/layers/ai_status.asm"
 INCLUDE "engine/battle/ai/layers/ai_risky.asm"
-INCLUDE "engine/battle/ai/layers/ai_setup.asm"
 INCLUDE "engine/battle/ai/layers/ai_offensive.asm"
 
 INCLUDE "engine/battle/ai/ability_lists.asm"
@@ -1482,6 +1482,21 @@ DoesPokemonHaveClearBody:
 	pop de
 	pop hl
 	jr c, .yes
+	xor a
+	ret
+
+.yes
+	scf
+	ret
+
+IsAISetup:
+; don't switch if enemy mon is already set up
+	ld a, [wEnemyAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .yes
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .yes
 	xor a
 	ret
 
