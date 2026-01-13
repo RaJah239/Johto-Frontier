@@ -135,6 +135,13 @@ CheckAbleToSwitch:
 	cp 1
 	jr nz, .no_perish
 
+.check_setup_and_switch_if_we_cant_KO
+	farcall CanAIKO
+	ret c
+	farcall IsAISetup
+	ret c
+	; fallthrough
+
 .switch
 ; can't switch if trapped
 	ld a, [wBattleMonSpecies]
@@ -189,6 +196,11 @@ CheckAbleToSwitch:
 	bit SWITCH_STATUS_F, a
 	jr z, .no_status
 
+; switch if enemy accuracy at -2 or lower
+	ld a, [wEnemyAccLevel]
+	cp BASE_STAT_LEVEL - 1
+	jr c, .switch
+
 ; switch if locked into a move with 0 pp
 	ld hl, wEnemyMonPP
 	ld a, [wCurEnemyMoveNum]
@@ -198,6 +210,27 @@ CheckAbleToSwitch:
 	ld a, [hl]
 	and PP_MASK
 	jr z, .switch
+
+; switch if enemy attack or special attack at -2 or lower,
+; unless the other offense is boosted
+	ld a, [wEnemyAtkLevel]
+	cp BASE_STAT_LEVEL + 1
+	jr nc, .magic_guard
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL + 1
+	jr nc, .magic_guard
+	ld a, [wEnemyAtkLevel]
+	cp BASE_STAT_LEVEL - 1
+	jr c, .check_setup_and_switch_if_we_cant_KO
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL - 1
+	jmp c, .check_setup_and_switch_if_we_cant_KO
+
+.magic_guard
+; Pokemon who are immune to residual damage (magic guard) should not be considered
+	ld a, [wEnemyMonSpecies]
+	farcall DoesPokemonHaveMagicGuard
+	ret c
 
 	; 80+% chance to switch if Nightmared, Cursed, or infatuated
 	ld a, [wEnemySubStatus1]
