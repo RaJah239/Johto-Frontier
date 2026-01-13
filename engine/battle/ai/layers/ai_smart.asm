@@ -331,20 +331,19 @@ AI_Smart_LeechHit:
 	callfar BattleCheckTypeMatchup
 	pop hl
 
-; 60% chance to discourage this move if not very effective.
+; do nothing if this move is not very effective
 	ld a, [wTypeMatchup]
 	cp EFFECTIVE
-	jr c, .discourage
-
-; Do nothing if effectiveness is neutral.
-	ret z
-
-; Do nothing if enemy's HP is full.
-	call AICheckEnemyMaxHP
 	ret c
 
-; 80% chance to encourage this move otherwise.
-	call AI_80_20
+; encourage this move if it's at least neutrally effective.
+; this would partially counter any previous discouragement.
+	dec [hl]
+
+; encourage more if this move is super effective
+; this would fully counter any previous discouragement
+	ld a, [wTypeMatchup]
+	cp EFFECTIVE + 1
 	ret c
 
 	dec [hl]
