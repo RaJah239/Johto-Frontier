@@ -164,8 +164,7 @@ AI_Smart_ParalyzeTarget:
 
 	; then use Thunderbolt first
 	; since it always paralyzes
-	call Random
-	cp 10 percent
+	call AI_90_10
 	ret c
 	dec [hl]
 	dec [hl]
@@ -402,8 +401,7 @@ AI_Smart_DreamEater:
 ; 90% chance to greatly encourage this move.
 ; The AI_Basic layer will make sure that
 ; Dream Eater is only used against sleeping targets.
-	call Random
-	cp 10 percent
+	call AI_90_10
 	ret c
 	dec [hl]
 	dec [hl]
@@ -752,8 +750,7 @@ AI_Smart_Heal:
 	ret
 
 .encourage
-	call Random
-	cp 10 percent
+	call AI_90_10
 	ret c
 	dec [hl]
 	dec [hl]
@@ -837,8 +834,7 @@ AI_Smart_Confuse:
 ; 90% chance to discourage this move if player's HP is between 25% and 50%.
 	call AICheckPlayerHalfHP
 	ret c
-	call Random
-	cp 10 percent
+	call AI_90_10
 	jr c, .skipdiscourage
 	inc [hl]
 
@@ -2238,8 +2234,7 @@ AI_Smart_Solarbeam:
 	cp WEATHER_RAIN
 	ret nz
 
-	call Random
-	cp 10 percent
+	call AI_90_10
 	ret c
 
 	inc [hl]
@@ -2262,8 +2257,7 @@ AI_Smart_Hurricane:
 	cp WEATHER_SUN
 	ret nz
 
-	call Random
-	cp 10 percent
+	call AI_90_10
 	ret c
 
 	inc [hl]

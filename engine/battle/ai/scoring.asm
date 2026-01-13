@@ -1504,3 +1504,8 @@ IsAISetup:
 .yes
 	scf
 	ret
+
+AI_90_10:
+	call Random
+	cp 10 percent
+	ret
