@@ -143,18 +143,17 @@ AI_Smart_Acrobatics:
 	ret
 
 AI_Smart_ParalyzeTarget:
-	; check move
-	ld a, [wEnemyMoveStruct + MOVE_ANIM]
-	cp THUNDERBOLT
-	ret nz
-
 	; check specie
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, SureShockPokemon
 	call IsInByteArray
 	pop hl
+	ret nz
 
+	; check move
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	cp THUNDERBOLT
 	jr nc, .go
 	ret nz
 
