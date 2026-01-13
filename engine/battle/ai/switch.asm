@@ -182,6 +182,16 @@ CheckAbleToSwitch:
 	bit SWITCH_STATUS_F, a
 	jr z, .no_status
 
+; switch if locked into a move with 0 pp
+	ld hl, wEnemyMonPP
+	ld a, [wCurEnemyMoveNum]
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld a, [hl]
+	and PP_MASK
+	jr z, .switch
+
 	; 80+% chance to switch if Nightmared, Cursed, or infatuated
 	ld a, [wEnemySubStatus1]
 	and 1 << SUBSTATUS_NIGHTMARE | 1 << SUBSTATUS_CURSE | 1 << SUBSTATUS_IN_LOVE
