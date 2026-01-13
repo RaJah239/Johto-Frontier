@@ -37,7 +37,7 @@ AI_SwitchOrTryItem:
 	bit SWITCH_RARELY_F, [hl]
 	jr nz, SwitchRarely
 	bit SWITCH_SOMETIMES_F, [hl]
-	jmp nz, SwitchSometimes
+	jr nz, SwitchSometimes
 	; fallthrough
 
 DontSwitch:
@@ -55,24 +55,24 @@ SwitchOften:
 
 	cp $10
 	jr nz, .not_10
-	call Random
-	cp 50 percent + 1
+	call AI_50_50
 	jr c, .switch
 	jr DontSwitch
-.not_10
 
+.not_10
 	cp $20
 	jr nz, .not_20
 	call Random
 	cp 79 percent - 1
 	jr c, .switch
 	jr DontSwitch
-.not_20
 
+.not_20
 	; $30
 	call Random
 	cp 4 percent
 	jr c, DontSwitch
+	; fallthrough
 
 .switch
 	ld a, [wEnemySwitchMonParam]
@@ -80,7 +80,7 @@ SwitchOften:
 	inc a
 	; In register 'a' is the number (1-6) of the mon to switch to
 	ld [wEnemySwitchMonIndex], a
-	jmp AI_TrySwitch
+	jr AI_TrySwitch
 
 ; this switches with probabilities:
 ; 8%, 12%, 80% depending on switch score
@@ -98,20 +98,21 @@ SwitchRarely:
 	cp 20 percent - 1
 	jr c, .switch
 	jr DontSwitch
-.not_10
 
+.not_10
 	cp $20
 	jr nz, .not_20
 	call Random
 	cp 50 percent + 1
 	jr c, .switch
 	jr DontSwitch
-.not_20
 
+.not_20
 	; $30
 	call Random
 	cp 20 percent - 1
 	jr c, DontSwitch
+	; fallthrough
 
 .switch
 	ld a, [wEnemySwitchMonParam]
@@ -119,6 +120,7 @@ SwitchRarely:
 	inc a
 	ld [wEnemySwitchMonIndex], a
 	jr AI_TrySwitch
+
 ; this switches with probabilities:
 ; 20%, 50%, 80% depending on switch score
 SwitchSometimes:
@@ -131,53 +133,30 @@ SwitchSometimes:
 
 	cp $10
 	jr nz, .not_10
-	call Random
-	cp 20 percent - 1
+	call AI_80_20
 	jr c, .switch
 	jmp DontSwitch
-.not_10
 
+.not_10
 	cp $20
 	jr nz, .not_20
-	call Random
-	cp 50 percent + 1
+	call AI_50_50
 	jr c, .switch
 	jmp DontSwitch
-.not_20
 
+.not_20
 	; $30
-	call Random
-	cp 20 percent - 1
+	call AI_80_20
 	jmp c, DontSwitch
+	; fallthrough
 
 .switch
 	ld a, [wEnemySwitchMonParam]
 	and $f
 	inc a
+	; In register 'a' is the number (1-6) of the mon to switch to
 	ld [wEnemySwitchMonIndex], a
-	jr AI_TrySwitch
-
-CheckSetUp:
-; return carry if enemy mon has set up
-; don't switch if enemy mon is already set up
-; also dont switch if enemy mon low on health
-	farcall AICheckEnemyQuarterHP
-	jr nc, .dont_switch
-	ld a, [wEnemyAtkLevel]
-	cp BASE_STAT_LEVEL + 2
-	jr nc, .switch
-	ld a, [wEnemySAtkLevel]
-	cp BASE_STAT_LEVEL + 2
-	jr nc, .switch
-.dont_switch
-; not set up
-	xor a
-	ret
-
-.switch
-	scf
-	ret
-
+	; fallthrough
 
 AI_TrySwitch:
 ; Determine whether the AI can switch based on how many Pokemon are still alive.
@@ -239,10 +218,64 @@ AI_TrySwitch:
 	ld a, d
 	cp 2
 	jr nc, AI_Switch
+	; fallthrough
+
+AI_Switch:
+; if enemy's Perish Count is 1 or
+; if trapped by warp, mean look, etc.,
+; we never reach here
+
+	ld a, [wEnemySubStatus1]
+	bit SUBSTATUS_PERISH, a
+	jr z, .continue
+
+	ld a, [wEnemyPerishCount]
+	cp 1
+	jr nz, .continue
+
+; if enemy has x accuracy status, skip checking accuracy and evasion
+	ld a, [wEnemySubStatus4]
+	bit SUBSTATUS_X_ACCURACY, a
+	jr nz, .no_miss
+
+; if player is identified by foresight, skip checking accuracy and evasion
+	ld a, [wPlayerSubStatus1]
+	bit SUBSTATUS_IDENTIFIED, a
+	jr nz, .no_miss
+
+; if enemy's accuracy is lowered or player's evasion is raised, switch
+	ld a, [wEnemyAccLevel]
+	cp BASE_STAT_LEVEL
+	jr c, .continue
+	ld a, [wPlayerEvaLevel]
+	cp BASE_STAT_LEVEL + 1
+	jr nc, .continue
+
+.no_miss
+; switch if enemy is infatuated, confused,
+; destiny bonded, paralyzed, or asleep
+
+	ld a, [wEnemySubStatus1]
+	bit SUBSTATUS_IN_LOVE, a
+	jr nz, .continue
+
+	ld a, [wEnemySubStatus3]
+	bit SUBSTATUS_CONFUSED, a
+	jr nz, .continue
+
+	ld a, [wEnemySubStatus5]
+	and 1 << SUBSTATUS_DESTINY_BOND
+	jr nz, .continue
+
+	ld a, [wEnemyMonStatus]
+	and 1 << PAR | SLP_MASK
+	jr nz, .continue
+
+; clear carry flag
 	and a
 	ret
 
-AI_Switch:
+.continue
 	ld a, $1
 	ld [wEnemyIsSwitching], a
 	ld [wEnemyGoesFirst], a
@@ -267,9 +300,8 @@ AI_Switch:
 	call PrintText
 
 .skiptext
-; this assumed the ai will not switch during battle
-;	ld a, 1
-;	ld [wBattleHasJustStarted], a
+	ld a, 1
+	ld [wBattleHasJustStarted], a
 	callfar NewEnemyMonStatus
 	callfar ResetEnemyStatLevels
 	ld hl, wPlayerSubStatus1
@@ -281,6 +313,27 @@ AI_Switch:
 	ld a, [wLinkMode]
 	and a
 	ret nz
+	scf
+	ret
+
+CheckSetUp:
+; return carry if enemy mon has set up
+; don't switch if enemy mon is already set up
+; also dont switch if enemy mon low on health
+	farcall AICheckEnemyQuarterHP
+	jr nc, .dont_switch
+	ld a, [wEnemyAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .switch
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .switch
+.dont_switch
+; not set up
+	xor a
+	ret
+
+.switch
 	scf
 	ret
 
