@@ -74,35 +74,6 @@ SturdyPokemon_AI:
     db -1 ; end
 
 MagicGuardPokemon_AI:
-; 26 levitating pokemon
-    db CHARIZARD
-    db BEAUTIFLY
-    db DUSTOX
-    db MAGNEMITE
-    db MAGNETON
-    db MAGNEZONE
-    db ALTARIA
-    db GASTLY
-    db HAUNTER
-    db GENGAR
-    db LARVESTA
-    db VOLCARONA
-    db KOFFING
-    db WEEZING
-    db SOLROCK
-    db LUNATONE
-    db CLAYDOL
-    db BRONZOR
-    db BRONZONG
-    db MISDREAVUS
-    db MISMAGIUS
-    db UNOWN
-    db NOWN
-    db VICTINI
-    db CELEBI
-    db MEW
-
-; 2 magic guard pokemon
     db CLEFAIRY
     db CLEFABLE
     db -1 ; end
