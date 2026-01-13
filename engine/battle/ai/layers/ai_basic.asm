@@ -150,7 +150,7 @@ AI_Basic:
 	ld a, [wEnemyMoveStruct + MOVE_TYPE]
 	and TYPE_MASK
 	cp GROUND
-	jr nz, .check_water_absorb
+	jr nz, .check_poison_immune
 	ld a, [wBattleMonSpecies]
 	push hl
 	push de
@@ -162,7 +162,7 @@ AI_Basic:
 	pop hl
 	jmp c, .discourage ; discourage if levitating pokemon - loop back to check move
 
-.check_water_absorb
+.check_poison_immune
 ; Dismiss poison move if the player has immunity
 ; =========================
 ; === Ability: Immunity ===

@@ -5,9 +5,11 @@ INCLUDE "engine/battle/ai/layers/ai_types.asm"
 INCLUDE "engine/battle/ai/layers/ai_none.asm"
 INCLUDE "engine/battle/ai/layers/ai_smart.asm"
 INCLUDE "engine/battle/ai/layers/ai_final_attack.asm"
+INCLUDE "engine/battle/ai/layers/ai_aggressive.asm"
+
+
 INCLUDE "engine/battle/ai/layers/ai_cautious.asm"
 INCLUDE "engine/battle/ai/layers/ai_status.asm"
-INCLUDE "engine/battle/ai/layers/ai_aggressive.asm"
 INCLUDE "engine/battle/ai/layers/ai_risky.asm"
 INCLUDE "engine/battle/ai/layers/ai_setup.asm"
 INCLUDE "engine/battle/ai/layers/ai_offensive.asm"

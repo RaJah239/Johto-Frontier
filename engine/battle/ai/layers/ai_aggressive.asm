@@ -31,6 +31,49 @@ AI_Aggressive:
 	pop de
 	pop hl
 
+; don't encourage explosion
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	cp EFFECT_SELFDESTRUCT
+	jr z, .checkmove
+
+; Dismiss ground move if the player has levitate
+; =========================
+; === Ability: Levitate ===
+; =========================
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	and TYPE_MASK
+	cp GROUND
+	jr nz, .check_poison_immune
+	ld a, [wBattleMonSpecies]
+	push hl
+	push de
+	push bc
+	ld hl, LevitatePokemon
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jr c, .checkmove
+
+.check_poison_immune
+; Dismiss poison move if the player has immunity
+; =========================
+; === Ability: Immunity ===
+; =========================
+	cp POISON
+	jr nz, .continue
+	ld a, [wBattleMonSpecies]
+	push hl
+	push de
+	push bc
+	ld hl, ImmunityPokemon_AI
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jr c, .checkmove
+
+.continue
 ; Update current move if damage is highest so far
 	ld a, [wCurDamage + 1]
 	cp e
@@ -78,31 +121,12 @@ AI_Aggressive:
 
 ; Ignore this move if its power is 0 or 1.
 ; Moves such as Seismic Toss, Hidden Power,
-; Counter and Fissure have a base power of 1.
+; Counter have a base power of 1.
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	cp 2
-	jr c, .checkmove2
-
-; 50% chance to ignore this move if it is reckless.
-	push hl
-	push de
-	push bc
-	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
-	ld hl, RecklessMoves
-	call IsInByteArray
-	pop bc
-	pop de
-	pop hl
 	jr c, .checkmove2
 
 ; If we made it this far, discourage this move.
 .discourage
 	inc [hl]
-	jr c, .maybe_discourage
-
-.maybe_discourage
-	call AI_50_50
-	jr c, .discourage
 	jr .checkmove2
-
-INCLUDE "data/battle/ai/reckless_moves.asm"
