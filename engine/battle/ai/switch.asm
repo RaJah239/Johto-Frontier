@@ -136,6 +136,13 @@ CheckAbleToSwitch:
 	jr nz, .no_perish
 
 .switch
+; can't switch if trapped
+	ld a, [wBattleMonSpecies]
+	cp GENGAR
+	ret z
+	cp CHANDELURE
+	ret z
+
 	call FindAliveEnemyMonsToSwitchTo
 	ld a, e
 	cp 2
