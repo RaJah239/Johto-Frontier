@@ -131,6 +131,10 @@ AI_Smart_EffectHandlers:
 	db -1 ; end
 
 AI_Smart_BulkUp:
+; discourage if player can ko at current HP
+	call CanPlayerKO
+	jmp c, StandardDiscourage
+
 	call IsAttackMaxed
 	jr nc, .continue
 	call IsDefenseMaxed
@@ -169,6 +173,10 @@ AI_Smart_BulkUp:
 	jmp StandardEncourage
 
 AI_Smart_NastyPlot:
+; discourage if player can ko at current HP
+	call CanPlayerKO
+	jmp c, StandardDiscourage
+
 	call IsSpecialAttackMaxed
 	jmp c, StandardDiscourage
 
@@ -209,6 +217,10 @@ AI_Smart_NastyPlot:
 	jmp StandardEncourage
 
 AI_Smart_SwordsDance:
+; discourage if player can ko at current HP
+	call CanPlayerKO
+	jmp c, StandardDiscourage
+
 	call IsAttackMaxed
 	jmp c, StandardDiscourage
 
@@ -229,6 +241,10 @@ AI_Smart_SwordsDance:
 	jmp StandardEncourage
 
 AI_Smart_QuiverDance:
+; discourage if player can ko at current HP
+	call CanPlayerKO
+	jmp c, StandardDiscourage
+
 	call IsSpecialAttackMaxed
 	jr nc, .should_boost
 	call IsSpecialDefenseMaxed
@@ -264,6 +280,10 @@ AI_Smart_QuiverDance:
 	ret
 
 AI_Smart_CalmMind:
+; discourage if player can ko at current HP
+	call CanPlayerKO
+	jmp c, StandardDiscourage
+
 	call IsSpecialAttackMaxed
 	jr nc, .continue
 	call IsSpecialDefenseMaxed
@@ -295,6 +315,10 @@ AI_Smart_CalmMind:
 	jmp StandardEncourage
 
 AI_Smart_DragonDance:
+; discourage if player can ko at current HP
+	call CanPlayerKO
+	jmp c, StandardDiscourage
+
 	call IsAttackMaxed
 	jmp c, StandardDiscourage
 
