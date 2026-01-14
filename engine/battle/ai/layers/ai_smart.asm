@@ -126,7 +126,48 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_CALM_MIND,        AI_Smart_CalmMind ; updated
 	dbw EFFECT_QUIVER_DANCE,     AI_Smart_QuiverDance ; updated
 	dbw EFFECT_ATTACK_UP_2,      AI_Smart_SwordsDance ; updated
+	dbw EFFECT_SP_ATK_UP_2,      AI_Smart_NastyPlot ; updated
 	db -1 ; end
+
+AI_Smart_NastyPlot:
+	call IsSpecialAttackMaxed
+	jmp c, StandardDiscourage
+
+; Deoxys should not use Nasty Plot against dark types
+;	ld a, [wEnemyMonSpecies]
+;	cp DEOXYS
+;	jr nz, .notDeoxys
+;	ld a, [wBattleMonType1]
+;	cp DARK
+;	jmp z, StandardDiscourage
+;	ld a, [wBattleMonType2]
+;	cp DARK
+;	jmp z, StandardDiscourage
+
+;.notDeoxys
+; if we are boosted >=+2 and can 2hko, just attack
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr c, .not_boosted
+	call CanAI2HKO
+	jmp c, StandardDiscourage
+
+.not_boosted
+; don't use if we are at risk of being KO'd, just attack them
+	call ShouldAIBoost
+	jmp nc, StandardDiscourage
+
+; encourage to +2
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp c, StandardEncourage
+
+; discourage after boost if afflicted with toxic
+	call IsAIToxified
+	jmp c, StandardDiscourage
+
+; encourage if we have no reason not to
+	jmp StandardEncourage
 
 AI_Smart_SwordsDance:
 	call IsAttackMaxed
