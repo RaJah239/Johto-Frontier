@@ -43,12 +43,12 @@ RandomPartyLists::
 	db -1 ; end
 
 	; RANDOMLIST_1
-	db 7
+	db 9
 	db LEVEL_FROM_PARTY, RHYDON
 			db "Don@"		; Nickname
 			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
 			db FOCUS_SASH	; ITEM/ NO_ITEM is a thing
-			db EARTHQUAKE, DRAGON_DANCE, STONE_EDGE, DRAGON_CLAW ; Moveset - NO_MOVE is a thing
+			db EARTHQUAKE, DRAGON_DANCE, STONE_EDGE, DRAIN_PUNCH ; Moveset - NO_MOVE is a thing
 			db $fe ; End of Pokemon
 	db LEVEL_FROM_PARTY, MEWTWO
 			db "Mewtwo@"		; Nickname
@@ -63,7 +63,7 @@ RandomPartyLists::
 			db DRAGON_DANCE, OUTRAGE, EARTHQUAKE, ROCK_SLIDE ; Moveset - NO_MOVE is a thing
 			db $fe ; End of Pokemon
 	db LEVEL_FROM_PARTY, HO_OH
-			db "Silver@"		; Nickname
+			db "Rainbow@"		; Nickname
 			db $DD, $DD		; DVs - atk|def dv, spd|spc dv
 			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
 			db BULK_UP, RECOVER, SACRED_FIRE, DIVE_BOMB ; Moveset - NO_MOVE is a thing
@@ -85,5 +85,17 @@ RandomPartyLists::
 			db $DD, $DD		; DVs - atk|def dv, spd|spc dv
 			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
 			db STONE_EDGE, DRAIN_PUNCH, EARTHQUAKE, SEED_BOMB ; Moveset - NO_MOVE is a thing
+			db $fe ; End of Pokemon
+	db LEVEL_FROM_PARTY, LUGIA
+			db "Silver@"	; Nickname
+			db $DD, $DD		; DVs - atk|def dv, spd|spc dv
+			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+			db CALM_MIND, RECOVER, AEROBLAST, SCALD ; Moveset - NO_MOVE is a thing
+			db $fe ; End of Pokemon
+	db LEVEL_FROM_PARTY, GARCHOMP
+			db "Chomp@"		; Nickname
+			db $DD, $DD		; DVs - atk|def dv, spd|spc dv
+			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+			db IRON_HEAD, OUTRAGE, EARTHQUAKE, SWORDS_DANCE ; Moveset - NO_MOVE is a thing
 			db $fe ; End of Pokemon
 	db -1 ; end

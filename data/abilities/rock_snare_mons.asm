@@ -2,4 +2,5 @@
 
 RockSnarePokemon:
     db ONIX
+    db AERODACTYL
     db -1

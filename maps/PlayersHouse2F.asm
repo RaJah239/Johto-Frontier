@@ -74,7 +74,7 @@ if DEF(_DEBUG)
 	giveitem MILOTIC_CALL
 
 	; good party
-	givepoke FERALIGATR, 50, FOCUS_SASH
+	givepoke AERODACTYL, 50, CHOICE_BAND
 	givepoke SUICUNE, 50, LEFTOVERS
 	givepoke GHOLDENGO, 50, LEFTOVERS
 
@@ -91,9 +91,9 @@ if DEF(_DEBUG)
 	loadmem wPartyMon3DVs+1, $ff
 
 	; 1st mon moves
-	loadmem wPartyMon1Moves+0, WATERFALL
-	loadmem wPartyMon1Moves+1, CRUNCH
-	loadmem wPartyMon1Moves+2, FURY_DRIVE
+	loadmem wPartyMon1Moves+0, STONE_EDGE
+	loadmem wPartyMon1Moves+1, SKY_ATTACK
+	loadmem wPartyMon1Moves+2, OUTRAGE
 	loadmem wPartyMon1Moves+3, EARTHQUAKE
 
 	; 2nd mon moves
@@ -123,8 +123,8 @@ if DEF(_DEBUG)
 	; 6th mon moves
 	loadmem wPartyMon6Moves+0, HYPER_BEAM
 	loadmem wPartyMon6Moves+1, EARTH_POWER
-	loadmem wPartyMon6Moves+2, REST
-	loadmem wPartyMon6Moves+3, SLEEP_TALK
+	loadmem wPartyMon6Moves+2, PLAY_ROUGH
+	loadmem wPartyMon6Moves+3, ICE_PUNCH
 
 	closetext
 

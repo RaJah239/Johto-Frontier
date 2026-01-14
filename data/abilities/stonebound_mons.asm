@@ -3,4 +3,5 @@
 StoneboundPokemon:
     db TYRANITAR
     db SUDOWOODO
+    db AERODACTYL
     db -1 ; end
