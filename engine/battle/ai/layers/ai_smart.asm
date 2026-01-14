@@ -127,7 +127,46 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_QUIVER_DANCE,     AI_Smart_QuiverDance ; updated
 	dbw EFFECT_ATTACK_UP_2,      AI_Smart_SwordsDance ; updated
 	dbw EFFECT_SP_ATK_UP_2,      AI_Smart_NastyPlot ; updated
+	dbw EFFECT_BULK_UP,          AI_Smart_BulkUp ; updated
 	db -1 ; end
+
+AI_Smart_BulkUp:
+	call IsAttackMaxed
+	jr nc, .continue
+	call IsDefenseMaxed
+	jmp c, StandardDiscourage
+
+.continue
+; if player is asleep and is physical we should boost
+	ld a, [wBattleMonStatus]
+	and SLP_MASK
+	jr z, .not_asleep
+	call IsPlayerPhysicalOrSpecial
+	jmp c, StandardEncourage
+
+.not_asleep
+; don't use if we are at risk of being KO'd, just attack them
+	call ShouldAIBoost
+	jmp nc, StandardDiscourage
+
+; encourage to +2 - strong encourage if player is physical
+	ld a, [wEnemyAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, .at_plus_2
+	call IsPlayerPhysicalOrSpecial
+	jr nc, .special
+	jmp StrongEncourage
+
+.special
+	jmp StandardEncourage
+
+.at_plus_2
+; discourage after boost if afflicted with toxic
+	call IsAIToxified
+	jmp c, StandardDiscourage
+
+; encourage if we have no reason not to
+	jmp StandardEncourage
 
 AI_Smart_NastyPlot:
 	call IsSpecialAttackMaxed
