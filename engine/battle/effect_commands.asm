@@ -5915,15 +5915,6 @@ BattleCommand_Confuse:
 	and a
 	jr nz, BattleCommand_Confuse_CheckSnore_Swagger_ConfuseHit
 BattleCommand_FinishConfusingTarget:
-
-; =======================================================
-; === Ability: Serenity - Prevents added on Confusion ===
-; =======================================================
-	call GetOpposingMon
-	ld hl, SerenityPokemon
-	call IsInByteArray
-	jmp c, Serenity
-
 	ld bc, wEnemyConfuseCount
 	ldh a, [hBattleTurn]
 	and a
