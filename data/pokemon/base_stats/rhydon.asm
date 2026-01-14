@@ -1,8 +1,8 @@
 	db RHYDON ; Species ID
 
-	db  82, 121, 119,  71,  69,  59
-	evs  0,   2,   0,   0,   0,   0
-	;   hp  atk  def  spd  sat  sdf
+	db  100, 130, 100,  71,  45,  59
+	evs   0,   2,   0,   0,   0,   0
+	;    hp  atk  def  spd  sat  sdf
 
 	db ROCK, DRAGON ; type
 	db 45 ; catch rate
