@@ -48,7 +48,6 @@ AI_Smart:
 
 AI_Smart_EffectHandlers:
 	dbw EFFECT_SLEEP,            AI_Smart_Sleep ; updated
-	dbw EFFECT_LEECH_HIT,        AI_Smart_LeechHit ; updated
 	dbw EFFECT_SELFDESTRUCT,     AI_Smart_Selfdestruct
 	dbw EFFECT_DREAM_EATER,      AI_Smart_DreamEater
 	dbw EFFECT_EVASION_UP,       AI_Smart_EvasionUp
@@ -572,39 +571,6 @@ rept 12
     dec [hl]
 endr
     ret
-
-AI_Smart_LeechHit:
-	push hl
-	ld a, 1
-	ldh [hBattleTurn], a
-	callfar BattleCheckTypeMatchup
-	pop hl
-
-; do nothing if this move is not very effective
-	ld a, [wTypeMatchup]
-	cp EFFECTIVE
-	ret c
-
-; encourage this move if it's at least neutrally effective.
-; this would partially counter any previous discouragement.
-	dec [hl]
-
-; encourage more if this move is super effective
-; this would fully counter any previous discouragement
-	ld a, [wTypeMatchup]
-	cp EFFECTIVE + 1
-	ret c
-
-	dec [hl]
-	ret
-
-.discourage
-	call Random
-	cp 39 percent + 1
-	ret c
-
-	inc [hl]
-	ret
 
 AI_Smart_Selfdestruct:
 ; Selfdestruct, Explosion
