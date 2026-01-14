@@ -5144,18 +5144,6 @@ BattleCommand_Rampage:
 	and SLP_MASK
 	ret nz
 
-	ld de, wPlayerRolloutCount
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .playerTurn
-	ld de, wEnemyRolloutCount
-	ld a, [wEnemyMonSpecies]
-	jr z, .ok
-.playerTurn
-	ld de, wPlayerRolloutCount
-	ld a, [wBattleMonSpecies]	
-.ok
-
 ; ============================
 ; === Ability: Feral Focus ===
 ; ============================
@@ -5165,6 +5153,12 @@ BattleCommand_Rampage:
 	call IsInByteArray
 	ret c
 
+	ld de, wPlayerRolloutCount
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .ok
+	ld de, wEnemyRolloutCount
+.ok
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVarAddr
 	set SUBSTATUS_RAMPAGE, [hl]
