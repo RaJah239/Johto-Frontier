@@ -6128,14 +6128,6 @@ BattleCommand_Heal:
 	cp REST
 	jr nz, .not_rest
 
-; ================================================
-; === Ability: Serenity Pokemon Can't use Rest ===
-; ================================================
-	call GetCurrentMon
-	ld hl, SerenityPokemon
-	call IsInByteArray
-	jr c, .cant_use_rest
-
 	push hl
 	push de
 	push af
@@ -6189,16 +6181,6 @@ BattleCommand_Heal:
 .hp_full
 	call AnimateFailedMove
 	ld hl, HPIsFullText
-	jmp StdBattleTextbox
-
-.cant_use_rest
-	; add some delay so the text 
-	; isn't instantly skipped
-	ld c, 30
-	call DelayFrames
-
-	call AnimateFailedMove
-	ld hl, SerenityPokemonCantRestText
 	jmp StdBattleTextbox
 
 BattleEffect_ButItFailed:

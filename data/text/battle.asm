@@ -63,11 +63,6 @@ SerenityText:
 	cont "status problems!"
 	prompt
 
-SerenityPokemonCantRestText:
-	text "Serenity prevents"
-	line "sleeping!"
-	prompt
-
 ClearBodyText:
 	text "<TARGET>'s"
 	line "Clear Body negates"
