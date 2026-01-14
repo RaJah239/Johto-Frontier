@@ -4,7 +4,7 @@
 	evs  0,   0,   0,   0,   0,   3
 	;   hp  atk  def  spd  sat  sdf
 
-	db PSYCHIC_TYPE, FLYING ; type
+	db WATER, FLYING ; type
 	db 3 ; catch rate
 	db 220 ; base exp
 	db NO_ITEM, NO_ITEM ; items
