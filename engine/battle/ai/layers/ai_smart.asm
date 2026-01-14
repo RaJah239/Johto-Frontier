@@ -123,7 +123,39 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_TRICK,            AI_Smart_Trick
 	dbw EFFECT_VENOSHOCK,        AI_Smart_Venoshock
 	dbw EFFECT_DRAGON_DANCE,     AI_Smart_DragonDance ; updated
+	dbw EFFECT_CALM_MIND,        AI_Smart_CalmMind ; updated
 	db -1 ; end
+
+AI_Smart_CalmMind:
+	call IsSpecialAttackMaxed
+	jr nc, .continue
+	call IsSpecialDefenseMaxed
+	jmp c, StandardDiscourage
+
+.continue
+; if player is asleep and is special, we should boost
+	ld a, [wBattleMonStatus]
+	and SLP_MASK
+	jr z, .not_asleep
+	call IsPlayerPhysicalOrSpecial
+	jmp nc, StandardEncourage
+
+.not_asleep
+; don't use if we are at risk of being KOd, just attack them
+	call ShouldAIBoost
+	jmp nc, StandardDiscourage
+
+; encourage to +2
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp c, StandardEncourage
+
+; discourage after boost if afflicted with toxic
+	call IsAIToxified
+	jmp c, StandardDiscourage
+
+; encourage if we have no reason not to
+	jmp StandardEncourage
 
 AI_Smart_DragonDance:
 	call IsAttackMaxed
