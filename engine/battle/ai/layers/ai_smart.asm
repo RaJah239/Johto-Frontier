@@ -124,7 +124,43 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_VENOSHOCK,        AI_Smart_Venoshock
 	dbw EFFECT_DRAGON_DANCE,     AI_Smart_DragonDance ; updated
 	dbw EFFECT_CALM_MIND,        AI_Smart_CalmMind ; updated
+	dbw EFFECT_QUIVER_DANCE,     AI_Smart_QuiverDance ; updated
 	db -1 ; end
+
+AI_Smart_QuiverDance:
+	call IsSpecialAttackMaxed
+	jr nc, .should_boost
+	call IsSpecialDefenseMaxed
+	jmp c, StandardDiscourage
+
+.should_boost
+	call ShouldAIBoost
+	jmp nc, StandardDiscourage
+
+; discourage if enemy is paralyzed
+	ld a, [wEnemyMonStatus]
+	and 1 << PAR
+	jmp nz, StandardDiscourage
+
+; discourage if player speed is +2 or higher
+	ld a, [wPlayerSpdLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardDiscourage
+
+; never use while in trick room
+	ld a, [wTrickRoomCount]
+	and a
+	jmp nz, StandardDiscourage
+
+; encourage to +2
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp c, StandardEncourage
+
+; discourage after boost if afflicted with toxic
+	call IsAIToxified
+	jmp c, StandardDiscourage
+	ret
 
 AI_Smart_CalmMind:
 	call IsSpecialAttackMaxed
