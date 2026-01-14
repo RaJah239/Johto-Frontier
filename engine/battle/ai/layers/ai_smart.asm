@@ -125,7 +125,28 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_DRAGON_DANCE,     AI_Smart_DragonDance ; updated
 	dbw EFFECT_CALM_MIND,        AI_Smart_CalmMind ; updated
 	dbw EFFECT_QUIVER_DANCE,     AI_Smart_QuiverDance ; updated
+	dbw EFFECT_ATTACK_UP_2,      AI_Smart_SwordsDance ; updated
 	db -1 ; end
+
+AI_Smart_SwordsDance:
+	call IsAttackMaxed
+	jmp c, StandardDiscourage
+
+; don't use if we are at risk of being KO'd, just attack them
+	call ShouldAIBoost
+	jmp nc, StandardDiscourage
+
+; encourage to +2
+	ld a, [wEnemyAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp c, StandardEncourage
+
+; discourage after boost if afflicted with toxic
+	call IsAIToxified
+	jmp c, StandardDiscourage
+
+; encourage if we have no reason not to
+	jmp StandardEncourage
 
 AI_Smart_QuiverDance:
 	call IsSpecialAttackMaxed
