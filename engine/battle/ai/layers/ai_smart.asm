@@ -56,7 +56,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_ACCURACY_DOWN,    AI_Smart_AccuracyDown
 	dbw EFFECT_RESET_STATS,      AI_Smart_ResetStats
 	dbw EFFECT_FORCE_SWITCH,     AI_Smart_ForceSwitch
-	dbw EFFECT_HEAL,             AI_Smart_Heal
+	dbw EFFECT_HEAL,             AI_Smart_Heal ; updated
 	dbw EFFECT_TOXIC,            AI_Smart_Toxic
 	dbw EFFECT_LIGHT_SCREEN,     AI_Smart_LightScreen
 	dbw EFFECT_OHKO,             AI_Smart_Ohko
@@ -97,7 +97,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_BATON_PASS,       AI_Smart_BatonPass
 	dbw EFFECT_PURSUIT,          AI_Smart_Pursuit
 	dbw EFFECT_RAPID_SPIN,       AI_Smart_RapidSpin
-	dbw EFFECT_WEATHER_HEAL,     AI_Smart_Heal
+	dbw EFFECT_WEATHER_HEAL,     AI_Smart_Heal ; updated
 	dbw EFFECT_HIDDEN_POWER,     AI_Smart_HiddenPower
 	dbw EFFECT_RAIN_DANCE,       AI_Smart_RainDance
 	dbw EFFECT_SUNNY_DAY,        AI_Smart_SunnyDay
@@ -152,7 +152,7 @@ AI_Smart_BulkUp:
 ; encourage to +2 - strong encourage if player is physical
 	ld a, [wEnemyAtkLevel]
 	cp BASE_STAT_LEVEL + 2
-	jmp nc, .at_plus_2
+	jr nc, .at_plus_2
 	call IsPlayerPhysicalOrSpecial
 	jr nc, .special
 	jmp StrongEncourage
@@ -964,22 +964,124 @@ AI_Smart_ForceSwitch:
 	ret
 
 AI_Smart_Heal:
-; 90% chance to greatly encourage this move if enemy's HP is below 25%.
-; Discourage this move if enemy's HP is higher than 50%.
-; Do nothing otherwise.
+; don't use if choice locked
+	call DoesEnemyHaveChoiceItem
+	jmp c, .discourage
 
+; if we have boosted evasion just heal below half
+	ld a, [wEnemyEvaLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .heal_below_half_max_HP
+
+; if the player is using smeargle just attack, kill it!
+	ld a, [wBattleMonSpecies]
+	cp SMEARGLE
+	jmp z, .discourage
+
+; check if the move is rest, it must be handled differently
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	cp REST
+	jr nz, .not_rest_heal
+
+; if it is rest, check if the enemy is afflicted with toxic
+; if so, cancel any switching and heal below 1/2 hp
+	ld a, [wEnemySubStatus5]
+	bit SUBSTATUS_TOXIC, a
+	jr z, .rest_heal
+	ld a, $0
+	ld [wEnemyIsSwitching], a
+	jr .not_rest_heal
+
+.rest_heal
+; for rest don't heal if player can 3hko from max hp,
+; unless ai also knows sleep talk
+; then don't use if player can 2hko from max hp
+	ld b, EFFECT_SLEEP_TALK
+	call AIHasMoveEffect
+	jr c, .not_rest_heal
+	call CanPlayer3HKOMaxHP
+	jr c, .discourage
+
+.not_rest_heal
+; don't heal if afflicted with toxic
+	call IsAIToxified
+	jr c, .discourage
+
+; don't heal if player can 2 shot from max hp, no point
+	call CanPlayer2HKOMaxHP
+	jr c, .discourage
+
+; if we are faster and player is flying or underground,
+; encourage heal if we can be 1hko
+	call DoesAIOutSpeedPlayer
+	jr nc, .check_quarter_max_hp
+	call CanPlayerKO
+	jr nc, .check_quarter_max_hp
+	ld a, [wPlayerSubStatus3]
+	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
+	jr nz, .big_encourage
+
+.check_quarter_max_hp
+; always heal when below 1/4 hp
 	call AICheckEnemyQuarterHP
 	jr nc, .encourage
+
+; if faster than the player, heal if the player can 1hko
+	call DoesAIOutSpeedPlayer
+	jr nc, .player_moves_first
+	call CanPlayerKO
+	jr c, .encourage
+	jr .check_mewtwo
+
+; if slower than the player, heal if player can 2hko
+.player_moves_first
+    call CanPlayer2HKO
+    jr c, .encourage
+
+.check_mewtwo
+; lugia, ho-oh & mewtwo always heal when below half
+; also heal below half if we have increased evasion
+	ld a, [wEnemyMonSpecies]
+	cp LUGIA
+	jr z, .heal_below_half_max_HP
+	cp HO_OH
+	jr z, .heal_below_half_max_HP
+	cp MEWTWO
+	jr z, .heal_below_half_max_HP
+	jr .discourage
+
+.heal_below_half_max_HP
 	call AICheckEnemyHalfHP
-	ret nc
-	inc [hl]
-	ret
+	jr c, .discourage
+	; fallthrough
 
 .encourage
-	call AI_90_10
-	ret c
+; lugia, ho-oh & mewtwo should play defensively and 
+; prioritize healing above scoring KOs
+	ld a, [wEnemyMonSpecies]
+	cp LUGIA
+	jr nz, .normal_encourage
+	cp HO_OH
+	jr nz, .normal_encourage
+	cp MEWTWO
+	jr nz, .normal_encourage
+
+.big_encourage
+rept 8
+	dec [hl]
+endr
+.normal_encourage
 	dec [hl]
 	dec [hl]
+	dec [hl]
+	dec [hl]
+	ret
+
+.discourage
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	inc [hl]
 	ret
 
 AI_Smart_Toxic:
