@@ -328,6 +328,26 @@ AIHasMoveInArray:
 
 INCLUDE "data/battle/ai/useful_moves.asm"
 
+DoIt:
+rept 7
+	dec [hl]
+endr
+StrongEncourage:
+	dec [hl]
+StandardEncourage:
+	dec [hl]
+	dec [hl]
+	ret
+
+StandardDiscourage:
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	ret
+
 ; ================================
 ; === Speed Checks - Simulated ===
 ; ================================

@@ -47,8 +47,8 @@ AI_Smart:
 	jr .checkmove
 
 AI_Smart_EffectHandlers:
-	dbw EFFECT_SLEEP,            AI_Smart_Sleep
-	dbw EFFECT_LEECH_HIT,        AI_Smart_LeechHit
+	dbw EFFECT_SLEEP,            AI_Smart_Sleep ; updated
+	dbw EFFECT_LEECH_HIT,        AI_Smart_LeechHit ; updated
 	dbw EFFECT_SELFDESTRUCT,     AI_Smart_Selfdestruct
 	dbw EFFECT_DREAM_EATER,      AI_Smart_DreamEater
 	dbw EFFECT_EVASION_UP,       AI_Smart_EvasionUp
@@ -118,11 +118,68 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_BODY_PRESS,       AI_Smart_BodyPress
 	dbw EFFECT_AVALANCHE,        AI_Smart_Avalanche
 	dbw EFFECT_BRICK_BREAK,      AI_Smart_BrickBreak
-	dbw EFFECT_PARALYZE_HIT,     AI_Smart_ParalyzeTarget
+	dbw EFFECT_PARALYZE_HIT,     AI_Smart_ParalyzeTarget ; updated
 	dbw EFFECT_ACROBATICS,       AI_Smart_Acrobatics
 	dbw EFFECT_TRICK,            AI_Smart_Trick
 	dbw EFFECT_VENOSHOCK,        AI_Smart_Venoshock
+	dbw EFFECT_DRAGON_DANCE,     AI_Smart_DragonDance ; updated
 	db -1 ; end
+
+AI_Smart_DragonDance:
+	call IsAttackMaxed
+	jmp c, StandardDiscourage
+
+; should boost
+	call ShouldAIBoost
+	jmp nc, StandardDiscourage
+
+; discourage if enemy is paralyzed
+	ld a, [wEnemyMonStatus]
+	and 1 << PAR
+	jmp nz, StandardDiscourage
+
+; discourage if player speed is +2 or higher
+	ld a, [wPlayerSpdLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardDiscourage
+
+; never use while in trick room
+	ld a, [wTrickRoomCount]
+	and a
+	jmp nz, StandardDiscourage
+
+; discourage if players level is >10 higher than AI
+	ld a, [wBattleMonLevel]
+	ld b, a
+	ld a, [wEnemyMonLevel]
+	add 10
+	cp b
+	jmp c, StandardDiscourage
+
+; some pokemon have double boost sets with dragondance and bulkup/swordsdance
+; in such cases we want to use dragondance first to get to +1 speed,
+; then only use the other boost
+	ld b, EFFECT_BULK_UP
+	call AIHasMoveEffect
+	jr c, .use_first_and_not_again
+	ld b, EFFECT_ATTACK_UP_2
+	call AIHasMoveEffect
+	jr c, .use_first_and_not_again
+	jr .normalEncourage
+
+.use_first_and_not_again
+	ld a, [wEnemySpdLevel]
+	cp BASE_STAT_LEVEL + 1
+	jmp c, StrongEncourage
+	jmp StandardDiscourage
+
+.normalEncourage
+; discourage after boost if afflicted with toxic
+	call IsAIToxified
+	jmp c, StandardDiscourage
+
+; encourage if we have no reason not to
+	jmp StandardEncourage
 
 AI_Smart_Venoshock:
 ; Greatly encourage this move if the player is poisoned.
