@@ -32,16 +32,46 @@ KOBoost:
 	ret nc
 
 ;.flash_step
+	; don't boost if at level 2 or higher
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wPlayerSpdLevel]
+	jr z, .got_flash_step_level
+	ld a, [wEnemySpdLevel]
+.got_flash_step_level
+	cp BASE_STAT_LEVEL + 2
+	ret nc
+
 	call ClearFailures
 	ld [wNumHits], a
 	jr FlashStepBoost	
 
 .moxie
+	; don't boost if at level 2 or higher
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wPlayerAtkLevel]
+	jr z, .got_moxie_level
+	ld a, [wEnemyAtkLevel]
+.got_moxie_level
+	cp BASE_STAT_LEVEL + 2
+	ret nc
+
 	call ClearFailures
 	ld [wNumHits], a
 	jr MoxieBoost
 
 .ignis
+	; don't boost if at level 2 or higher
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wPlayerSAtkLevel]
+	jr z, .got_ignis_level
+	ld a, [wEnemySAtkLevel]
+.got_ignis_level
+	cp BASE_STAT_LEVEL + 2
+	ret nc
+
 	call ClearFailures
 	ld [wNumHits], a
 	jr IgnisBoost
