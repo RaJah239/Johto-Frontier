@@ -97,7 +97,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_ATTRACT,          AI_Smart_Attract ; good as is
 	dbw EFFECT_SAFEGUARD,        AI_Smart_Safeguard ; good as is
 	dbw EFFECT_BATON_PASS,       AI_Smart_BatonPass ; updated
-	dbw EFFECT_PURSUIT,          AI_Smart_Pursuit
+	dbw EFFECT_PURSUIT,          AI_Smart_Pursuit ; updated
 	dbw EFFECT_RAPID_SPIN,       AI_Smart_RapidSpin
 	dbw EFFECT_WEATHER_HEAL,     AI_Smart_Heal ; updated
 	dbw EFFECT_HIDDEN_POWER,     AI_Smart_HiddenPower
@@ -2613,18 +2613,28 @@ AI_Smart_BatonPass:
 	ret
 
 AI_Smart_Pursuit:
-; 50% chance to greatly encourage this move if player's HP is below 25%.
-; 80% chance to discourage this move otherwise.
+; 80% chance to discourage this move if the player has only one pokemon remaining
+	call AICheckLastPlayerMon
+	jr z, .discourage
+
+; 80% chance to greatly encourage this move if player's hp is below 25%
+; 50% chance to discourage this move otherwise
 
 	call AICheckPlayerQuarterHP
 	jr nc, .encourage
+	call AI_50_50
+	ret c
+	inc [hl]
+	ret
+
+.discourage
 	call AI_80_20
 	ret c
 	inc [hl]
 	ret
 
 .encourage
-	call AI_50_50
+	call AI_80_20
 	ret c
 	dec [hl]
 	dec [hl]
