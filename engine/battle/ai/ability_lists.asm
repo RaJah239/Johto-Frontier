@@ -24,6 +24,12 @@ SandRushPokemon_AI:
     db KLEAVOR
     db -1 ; end
 
+SandBodyPokemon_AI:
+    db GIBLE
+    db GABITE
+    db GARCHOMP
+    db -1 ; end
+
 SlushRushPokemon_AI:
     db DELIBIRD
     db -1 ; end
