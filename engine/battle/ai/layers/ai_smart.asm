@@ -132,7 +132,30 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_BULK_UP,          AI_Smart_BulkUp ; updated
 	dbw EFFECT_BARRIER,          AI_Smart_Barrier ; added
 	dbw EFFECT_SPEED_UP_2,       AI_Smart_Agility ; added
+	dbw EFFECT_SPIKES,           AI_Smart_Spikes ; added
 	db -1 ; end
+
+AI_Smart_Spikes:
+; don't use if already up
+	ld a, [wPlayerScreens]
+	bit SCREENS_SPIKES, a
+	jmp nz, StandardDiscourage
+
+; Don't use if enemy has rapid spin or defog
+	ld a, [wLastPlayerMove]
+	cp RAPID_SPIN
+	jmp z, StandardDiscourage
+	cp DEFOG
+	jmp z, StandardDiscourage
+
+; don't use if player has only one pokemon left
+	push hl
+	call AICheckLastPlayerMon
+	pop hl
+	jmp z, StandardDiscourage
+
+; use otherwise
+	jmp StrongEncourage
 
 AI_Smart_Agility:
 ; discourage if we are faster
