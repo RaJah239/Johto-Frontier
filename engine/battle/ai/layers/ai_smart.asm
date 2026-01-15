@@ -141,7 +141,29 @@ AI_Smart_EffectHandlers:
     dbw EFFECT_FOCUS_ENERGY,     AI_Smart_LesserStatChange ; added
     dbw EFFECT_SAFEGUARD,        AI_Smart_LesserStatChange ; added
     dbw EFFECT_DEFENSE_CURL,     AI_Smart_LesserStatChange ; added
+    dbw EFFECT_DEFOG,            AI_Smart_Defog ; added
 	db -1 ; end
+
+AI_Smart_Defog:
+; don't use if player has only one pokemon left
+	push hl
+	call AICheckLastPlayerMon
+	pop hl
+	jmp z, StandardDiscourage
+
+; use if player has any screens up
+	ld a, [wPlayerScreens]
+	bit SCREENS_STEALTH_ROCK, a
+	jmp nz, StandardEncourage
+	bit SCREENS_SPIKES, a
+	jmp nz, StandardEncourage
+	bit SCREENS_TOXIC_SPIKES, a
+	jmp nz, StandardEncourage
+	bit SCREENS_STICKY_WEB, a
+	jmp nz, StandardEncourage
+
+; otherwise discourage
+	jmp StandardDiscourage
 
 AI_Smart_LesserStatChange:
 	call AICheckEnemyMaxHP
