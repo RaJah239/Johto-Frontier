@@ -606,48 +606,6 @@ AI_Smart_AttackDown:
 	inc [hl]
 	ret
 
-AI_Smart_BulkUp:
-; discourage if player can ko at current HP
-	call CanPlayerKO
-	jmp c, StandardDiscourage
-
-	call IsAttackMaxed
-	jr nc, .continue
-	call IsDefenseMaxed
-	jmp c, StandardDiscourage
-
-.continue
-; if player is asleep and is physical we should boost
-	ld a, [wBattleMonStatus]
-	and SLP_MASK
-	jr z, .not_asleep
-	call IsPlayerPhysicalOrSpecial
-	jmp c, StandardEncourage
-
-.not_asleep
-; don't use if we are at risk of being KO'd, just attack them
-	call ShouldAIBoost
-	jmp nc, StandardDiscourage
-
-; encourage to +2 - strong encourage if player is physical
-	ld a, [wEnemyAtkLevel]
-	cp BASE_STAT_LEVEL + 2
-	jr nc, .at_plus_2
-	call IsPlayerPhysicalOrSpecial
-	jr nc, .special
-	jmp StrongEncourage
-
-.special
-	jmp StandardEncourage
-
-.at_plus_2
-; discourage after boost if afflicted with toxic
-	call IsAIToxified
-	jmp c, StandardDiscourage
-
-; encourage if we have no reason not to
-	jmp StandardEncourage
-
 AI_Smart_NastyPlot:
 ; discourage if player can ko at current HP
 	call CanPlayerKO
@@ -2562,6 +2520,48 @@ AICheckLastPlayerMon:
 	jr nz, .loop
 	ret
 
+AI_Smart_BulkUp:
+; discourage if player can ko at current HP
+	call CanPlayerKO
+	jmp c, StandardDiscourage
+
+	call IsAttackMaxed
+	jr nc, .continue
+	call IsDefenseMaxed
+	jmp c, StandardDiscourage
+
+.continue
+; if player is asleep and is physical we should boost
+	ld a, [wBattleMonStatus]
+	and SLP_MASK
+	jr z, .not_asleep
+	call IsPlayerPhysicalOrSpecial
+	jmp c, StandardEncourage
+
+.not_asleep
+; don't use if we are at risk of being KO'd, just attack them
+	call ShouldAIBoost
+	jmp nc, StandardDiscourage
+
+; encourage to +2 - strong encourage if player is physical
+	ld a, [wEnemyAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .at_plus_2
+	call IsPlayerPhysicalOrSpecial
+	jr nc, .special
+	jmp StrongEncourage
+
+.special
+	jmp StandardEncourage
+
+.at_plus_2
+; discourage after boost if afflicted with toxic
+	call IsAIToxified
+	jmp c, StandardDiscourage
+
+; encourage if we have no reason not to
+	jmp StandardEncourage
+
 AI_Smart_Curse:
 	ld a, [wEnemyMonType1]
 	cp GHOST
@@ -2575,6 +2575,19 @@ AI_Smart_Curse:
 	call IsDefenseMaxed
 	jr c, .discourage
 
+; =======================================
+; === Ability: Snorlax Priority Curse ===
+; =======================================
+	ld a, [wEnemyMonSpecies]
+	cp SNORLAX
+	jr z, .not_snorlax_or_slower
+
+	; if slower
+	call AICompareSpeed
+	jr c, .not_snorlax_or_slower
+	jr AI_Smart_BulkUp
+
+.not_snorlax_or_slower
 .continue
 ; if player is asleep and is physical we should boost
 	ld a, [wBattleMonStatus]
