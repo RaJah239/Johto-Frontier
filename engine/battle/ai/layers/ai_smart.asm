@@ -48,7 +48,7 @@ AI_Smart:
 
 AI_Smart_EffectHandlers:
 	dbw EFFECT_SLEEP,            AI_Smart_Sleep ; updated
-	dbw EFFECT_SELFDESTRUCT,     AI_Smart_Selfdestruct
+	dbw EFFECT_SELFDESTRUCT,     AI_Smart_Selfdestruct ; updated
 	dbw EFFECT_DREAM_EATER,      AI_Smart_DreamEater
 	dbw EFFECT_EVASION_UP,       AI_Smart_EvasionUp
 	dbw EFFECT_ALWAYS_HIT,       AI_Smart_AlwaysHit
@@ -573,36 +573,72 @@ endr
     ret
 
 AI_Smart_Selfdestruct:
-; Selfdestruct, Explosion
+; explosion
 
-; Unless this is the enemy's last Pokemon...
+; never use against ghost types
+	ld a, [wBattleMonType1]
+	cp GHOST
+	jr z, .discourage
+	ld a, [wBattleMonType2]
+	cp GHOST
+	jr z, .discourage
+
+; unless this is the enemy's last Pokemon...
 	push hl
 	farcall FindAliveEnemyMons
 	pop hl
 	jr nc, .notlastmon
 
-; ...greatly discourage this move unless this is the player's last Pokemon too.
+; ...greatly discourage this move unless this is the player's last pokemon too.
 	push hl
 	call AICheckLastPlayerMon
 	pop hl
 	jr nz, .discourage
 
 .notlastmon
-; Greatly discourage this move if enemy's HP is above 50%.
+; don't use if player is behind a sub
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a	;check for substitute bit
+	jr nz, .discourage
+
+; don't use if player has protect
+	ld b, EFFECT_PROTECT
+	call PlayerHasMoveEffect
+	jr c, .discourage
+
+; don't use if player is faster and has - substitute, fly, dig
+	call DoesAIOutSpeedPlayer
+	jr c, .faster
+	ld b, EFFECT_SUBSTITUTE
+	call PlayerHasMoveEffect
+	jr c, .discourage
+	ld b, EFFECT_FLY
+	call PlayerHasMoveEffect
+	jr c, .discourage
+
+.faster
+; if enemy's HP is below 25% just boom
+	call AICheckEnemyQuarterHP
+	jr nc, .encourage
+
+; use if we are about to be KOd
+	call ShouldAIBoost
+	jr nc, .encourage
+
+.continue
+; greatly discourage this move if enemy's HP is above 50%.
 	call AICheckEnemyHalfHP
 	jr c, .discourage
 
-; Do nothing if enemy's HP is below 25%.
-	call AICheckEnemyQuarterHP
-	ret nc
+; if we are here we are below 1/2 hp and player is non boosted
+; if we have no other move that can ko the player just boom
 
-; If enemy's HP is between 25% and 50%,
-; over 90% chance to greatly discourage this move.
-	call Random
-	cp 8 percent
-	ret c
+.encourage
+	dec [hl]
+	ret
 
 .discourage
+	inc [hl]
 	inc [hl]
 	inc [hl]
 	inc [hl]
