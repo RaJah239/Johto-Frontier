@@ -71,7 +71,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_REFLECT,          AI_Smart_Reflect ; updated
 	dbw EFFECT_PARALYZE,         AI_Smart_Paralyze ; updated
 	dbw EFFECT_SPEED_DOWN_HIT,   AI_Smart_SpeedDownHit ; updated
-	dbw EFFECT_SUBSTITUTE,       AI_Smart_Substitute
+	dbw EFFECT_SUBSTITUTE,       AI_Smart_Substitute ; updated
 	dbw EFFECT_HYPER_BEAM,       AI_Smart_HyperBeam
 	dbw EFFECT_MIMIC,            AI_Smart_Mimic
 	dbw EFFECT_LEECH_SEED,       AI_Smart_LeechSeed
@@ -1507,11 +1507,76 @@ AI_Smart_SpeedDownHit:
 	jmp StandardEncourage
 
 AI_Smart_Substitute:
-; Dismiss this move if enemy's HP is below 50%.
+; don't sub if choice locked
+	call DoesEnemyHaveChoiceItem
+	jr c, .discourage
 
+; discourage if player will move first
+	call DoesAIOutSpeedPlayer
+	jr nc, .discourage
+
+; if player has status moves then don't consider player damage
+	ld b, EFFECT_PARALYZE
+	call PlayerHasMoveEffect
+	jr c, .hasStatus
+	ld b, EFFECT_SLEEP
+	call PlayerHasMoveEffect
+	jr c, .hasStatus
+	ld b, EFFECT_TOXIC
+	call PlayerHasMoveEffect
+	jr c, .hasStatus
+
+; if player can 3HKO from max hp the discourage sub
+	call CanPlayer3HKOMaxHP
+	jr c, .discourage
+	jr .pastStatus
+
+.hasStatus
+; extra encourage at full hp
+	call AICheckEnemyMaxHP
+	jr nc, .pastStatus
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	dec [hl]
+
+.pastStatus
+; encourage at full hp
+	call AICheckEnemyMaxHP
+	jr c, .encourage
+
+; if above 1/4 hp encourage if player is asleep or user has boosted evasion
+	call AICheckEnemyQuarterHP
+	jr nc, .discourage
+	ld a, [wBattleMonStatus]
+	and SLP_MASK
+	jr nz, .encourage
+	ld a, [wEnemyEvaLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .encourage
+
+; otherwise 50% to encourage if above half hp, discourage otherwise
 	call AICheckEnemyHalfHP
-	ret c
-	jmp AIDiscourageMove
+	jr nc, .discourage
+	call AI_50_50
+	jr c, .discourage
+
+.encourage
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	ret
+
+.discourage
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	ret
 
 AI_Smart_HyperBeam:
 	call AICheckEnemyHalfHP
