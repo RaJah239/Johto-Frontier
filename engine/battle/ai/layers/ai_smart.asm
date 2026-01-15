@@ -142,6 +142,7 @@ AI_Smart_EffectHandlers:
     dbw EFFECT_SAFEGUARD,        AI_Smart_LesserStatChange ; added
     dbw EFFECT_DEFENSE_CURL,     AI_Smart_LesserStatChange ; added
     dbw EFFECT_DEFOG,            AI_Smart_Defog ; added
+    dbw EFFECT_TRICK_ROOM,       AI_Smart_TrickRoom ; added
 	db -1 ; end
 
 AI_Smart_Defog:
@@ -245,6 +246,12 @@ AI_Smart_Hazards:
 
 ; use otherwise
 	jmp DoIt
+
+AI_Smart_TrickRoom:
+	ld a, [wTrickRoomCount]
+	and a
+	jmp nz, StandardDiscourage
+	; fallthrough
 
 AI_Smart_Agility:
 ; discourage if we are faster
