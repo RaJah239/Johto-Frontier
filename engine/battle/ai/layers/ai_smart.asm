@@ -100,8 +100,8 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_PURSUIT,          AI_Smart_Pursuit ; updated
 	dbw EFFECT_RAPID_SPIN,       AI_Smart_RapidSpin ; updated
 	dbw EFFECT_WEATHER_HEAL,     AI_Smart_Heal ; updated
-	dbw EFFECT_HIDDEN_POWER,     AI_Smart_HiddenPower
-	dbw EFFECT_RAIN_DANCE,       AI_Smart_RainDance
+	dbw EFFECT_HIDDEN_POWER,     AI_Smart_HiddenPower ; good as is
+	dbw EFFECT_RAIN_DANCE,       AI_Smart_RainDance ; updated
 	dbw EFFECT_SUNNY_DAY,        AI_Smart_SunnyDay
 	dbw EFFECT_BELLY_DRUM,       AI_Smart_BellyDrum
 	dbw EFFECT_MIRROR_COAT,      AI_Smart_MirrorCoat
@@ -2691,14 +2691,55 @@ AI_Smart_HiddenPower:
 	ret
 
 AI_Smart_RainDance:
-; Encourage using the move when the Weather Rock is held.
+; don't use if already raining
+	ld a, [wBattleWeather]
+	cp WEATHER_RAIN
+	jr z, .discourage
+
+; don't use if choice locked
+	call DoesEnemyHaveChoiceItem
+	jr c, .discourage
+
+; even if we benefit from weather, don't use if we will be koed
+	call DoesEnemyHaveIntactFocusSashOrSturdy
+	jr c, .skipKOCheck
+	call CanPlayerKO
+	jr c, .discourage
+
+; discourage if we will be koed
+	call ShouldAIBoost
+	jr nc, .discourage
+
+.skipKOCheck
+; encourage if enemy has swift swim ability pokemon
+	ld a, [wEnemyMonSpecies]
+	push hl
+	ld hl, SwiftSwimPokemon_AI
+	call IsInByteArray
+	pop hl
+	jr c, .encourage
+
+; encourage if enemy has rain dish ability pokemon
+	ld a, [wEnemyMonSpecies]
+	push hl
+	ld hl, RainDishPokemon_AI
+	call IsInByteArray
+	pop hl
+	jr c, .encourage
+
+; encourage if enemy has hydration ability pokemon
+	ld a, [wEnemyMonSpecies]
+	push hl
+	ld hl, HydrationPokemon_AI
+	call IsInByteArray
+	pop hl
+	jr c, .encourage
+
+; encourage using the move when the weather rock is held
 	ld a, [wEnemyMonItem]
 	cp WEATHER_ROCK
-	jr nz, .continue
+	jr z, .encourage
 
-	dec [hl]
-
-.continue
 ; Greatly discourage this move if it would favour the player type-wise.
 ; Particularly, if the player is a Water-type.
 	ld a, [wBattleMonType1]
@@ -2716,6 +2757,18 @@ AI_Smart_RainDance:
 	push hl
 	ld hl, RainDanceMoves
 	jr AI_Smart_WeatherMove
+
+.encourage
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	ret
+
+.discourage
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	ret
 
 INCLUDE "data/battle/ai/rain_dance_moves.asm"
 

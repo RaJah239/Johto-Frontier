@@ -7,6 +7,20 @@ SwiftSwimPokemon_AI:
     db OMASTAR
     db -1 ; end
 
+HydrationPokemon_AI:
+    db SEEL
+    db DEWGONG
+    db LAPRAS
+    db -1 ; end
+
+RainDishPokemon_AI:
+    db SQUIRTLE
+    db WARTORTLE
+    db BLASTOISE
+    db TENTACOOL
+    db TENTACRUEL
+    db -1 ; end
+
 ChlorophyllPokemon_AI:
     db BELLSPROUT
     db WEEPINBELL
