@@ -98,7 +98,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_SAFEGUARD,        AI_Smart_Safeguard ; good as is
 	dbw EFFECT_BATON_PASS,       AI_Smart_BatonPass ; updated
 	dbw EFFECT_PURSUIT,          AI_Smart_Pursuit ; updated
-	dbw EFFECT_RAPID_SPIN,       AI_Smart_RapidSpin
+	dbw EFFECT_RAPID_SPIN,       AI_Smart_RapidSpin ; updated
 	dbw EFFECT_WEATHER_HEAL,     AI_Smart_Heal ; updated
 	dbw EFFECT_HIDDEN_POWER,     AI_Smart_HiddenPower
 	dbw EFFECT_RAIN_DANCE,       AI_Smart_RainDance
@@ -2642,7 +2642,7 @@ AI_Smart_Pursuit:
 
 AI_Smart_RapidSpin:
 ; 80% chance to greatly encourage this move if the enemy is
-; trapped (Bind effect), seeded, or scattered with spikes.
+; trapped (Bind effect), seeded, or surrounded by field hazards
 
 	ld a, [wEnemyWrapCount]
 	and a
@@ -2654,12 +2654,14 @@ AI_Smart_RapidSpin:
 
 	ld a, [wEnemyScreens]
 	bit SCREENS_SPIKES, a
+	jr nz, .encourage
+	bit SCREENS_STEALTH_ROCK, a
+	jr nz, .encourage
+	bit SCREENS_TOXIC_SPIKES, a
+	jr nz, .encourage
+	bit SCREENS_STICKY_WEB, a
 	ret z
-
 .encourage
-	call AI_80_20
-	ret c
-
 	dec [hl]
 	dec [hl]
 	ret
