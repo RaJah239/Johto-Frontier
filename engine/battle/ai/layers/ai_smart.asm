@@ -105,16 +105,16 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_SUNNY_DAY,        AI_Smart_SunnyDay ; updated
 	dbw EFFECT_BELLY_DRUM,       AI_Smart_BellyDrum ; updated
 	dbw EFFECT_MIRROR_COAT,      AI_Smart_MirrorCoat ; updated
-	dbw EFFECT_EARTHQUAKE,       AI_Smart_Earthquake
-	dbw EFFECT_GUST,             AI_Smart_Gust
-	dbw EFFECT_STOMP,            AI_Smart_Stomp
-	dbw EFFECT_SOLARBEAM,        AI_Smart_Solarbeam
-	dbw EFFECT_THUNDER,          AI_Smart_Thunder
+	dbw EFFECT_EARTHQUAKE,       AI_Smart_Earthquake ; good as is
+	dbw EFFECT_GUST,             AI_Smart_Gust ; good as is
+	dbw EFFECT_STOMP,            AI_Smart_Stomp ; good as is
+	dbw EFFECT_SOLARBEAM,        AI_Smart_Solarbeam ; good as is
+	dbw EFFECT_THUNDER,          AI_Smart_Thunder ; updated
 	dbw EFFECT_FLY,              AI_Smart_Fly
 	dbw EFFECT_HAIL,             AI_Smart_Hail
 	dbw EFFECT_FACADE,           AI_Smart_Facade
 	dbw EFFECT_HEX,              AI_Smart_Hex
-	dbw EFFECT_HURRICANE,        AI_Smart_Hurricane
+	dbw EFFECT_HURRICANE,        AI_Smart_Hurricane ; updated
 	dbw EFFECT_FAKE_OUT,         AI_Smart_Fake_Out
 	dbw EFFECT_FREEZE_DRY,       AI_Smart_FreezeDry
 	dbw EFFECT_BODY_PRESS,       AI_Smart_BodyPress
@@ -3012,9 +3012,13 @@ AI_Smart_Solarbeam:
 
 AI_Smart_Thunder:
 AI_Smart_Hurricane:
-; 90% chance to discourage this move when it's sunny.
+; 80% chance to encourage this move when it's raining
+; 90% chance to discourage this move when it's sunny
 
 	ld a, [wBattleWeather]
+	cp WEATHER_RAIN
+	jr z, .encourage
+
 	cp WEATHER_SUN
 	ret nz
 
@@ -3022,4 +3026,13 @@ AI_Smart_Hurricane:
 	ret c
 
 	inc [hl]
+	inc [hl]
+	ret
+
+.encourage
+	call AI_80_20
+	ret c
+
+	dec [hl]
+	dec [hl]
 	ret
