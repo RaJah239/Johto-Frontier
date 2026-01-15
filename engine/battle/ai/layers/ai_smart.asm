@@ -84,7 +84,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_REVERSAL,         AI_Smart_Reversal ; good as is
 	dbw EFFECT_SPITE,            AI_Smart_Spite ; good as is
 	dbw EFFECT_HEAL_BELL,        AI_Smart_HealBell ; updated
-	dbw EFFECT_PRIORITY_HIT,     AI_Smart_PriorityHit
+	dbw EFFECT_PRIORITY_HIT,     AI_Smart_PriorityHit ; updated
 	dbw EFFECT_THIEF,            AI_Smart_Thief
 	dbw EFFECT_MEAN_LOOK,        AI_Smart_MeanLook
 	dbw EFFECT_CURSE,            AI_Smart_Curse
@@ -1906,15 +1906,32 @@ AI_Smart_HealBell:
 	ret
 
 AI_Smart_PriorityHit:
-	call AICompareSpeed
-	ret c
 
-; Dismiss this move if the player is flying or underground.
+; commented out if needed later,
+; say if foresight + mach puch/ extremespeed smart pokemon don't use it right
+
+; never use extremespeed and mach punch against a ghost type
+;	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+;	cp EXTREMESPEED
+;	jr z, .ghostImmune
+;	cp MACH_PUNCH
+;	jr nz, .notGhostImmune
+;.ghostImmune
+;	ld a, [wBattleMonType1]
+;	cp GHOST
+;	jmp z, AIDiscourageMove
+;	ld a, [wBattleMonType2]
+;	cp GHOST
+;	jmp z, AIDiscourageMove
+;
+;.notGhostImmune
+
+; dismiss this move if the player is flying or underground
 	ld a, [wPlayerSubStatus3]
 	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
 	jmp nz, AIDiscourageMove
 
-; Greatly encourage this move if it will KO the player.
+; greatly encourage this move if it will ko the player
 	ld a, 1
 	ldh [hBattleTurn], a
 	push hl
@@ -1930,10 +1947,48 @@ AI_Smart_PriorityHit:
 	cp c
 	ld a, [wBattleMonHP]
 	sbc b
+	jr nc, .noKO
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	ret
+
+.noKO
+; does player have priority move and are we low on hp
+; if so skip speed check so we might use priority even if we are faster
+	ld b, EFFECT_PRIORITY_HIT
+	call PlayerHasMoveEffect
+	jr nc, .speedCheck
+
+	call AICheckEnemyQuarterHP
+	jr nc, .skipSpeedCheck
+
+.speedCheck
+; if faster than the player then do nothing
+	call DoesAIOutSpeedPlayer
+	ret c
+
+.skipSpeedCheck
+; massive encourage if player can KO and player is attacking, unless we have sash
+; this needs to overcome encouragement from other moves which do more damage and can KO
+	call CanPlayerKO
 	ret nc
+
+	call DoesEnemyHaveIntactFocusSashOrSturdy
+	ret c
+
+; has player picked a damaging move, if not then don't encourage.
+	ld a, [wCurPlayerMove]
+	call AIGetPlayerMove
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	ret z
+
+rept 12
 	dec [hl]
-	dec [hl]
-	dec [hl]
+endr
 	ret
 
 AI_Smart_Thief:
