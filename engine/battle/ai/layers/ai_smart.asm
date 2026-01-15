@@ -103,7 +103,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_HIDDEN_POWER,     AI_Smart_HiddenPower ; good as is
 	dbw EFFECT_RAIN_DANCE,       AI_Smart_RainDance ; updated
 	dbw EFFECT_SUNNY_DAY,        AI_Smart_SunnyDay ; updated
-	dbw EFFECT_BELLY_DRUM,       AI_Smart_BellyDrum
+	dbw EFFECT_BELLY_DRUM,       AI_Smart_BellyDrum ; updated
 	dbw EFFECT_MIRROR_COAT,      AI_Smart_MirrorCoat
 	dbw EFFECT_EARTHQUAKE,       AI_Smart_Earthquake
 	dbw EFFECT_GUST,             AI_Smart_Gust
@@ -2896,26 +2896,36 @@ AIGoodWeatherType:
 INCLUDE "data/battle/ai/sunny_day_moves.asm"
 
 AI_Smart_BellyDrum:
-; Dismiss this move if enemy's attack is higher than +2 or if enemy's HP is below 50%.
-; Else, discourage this move if enemy's HP is not full.
-
+; don't use if already at +2
 	ld a, [wEnemyAtkLevel]
-	cp BASE_STAT_LEVEL + 3
+	cp BASE_STAT_LEVEL + 2
 	jr nc, .discourage
 
+; don't use if enemy behind a sub
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a	;check for substitute bit
+	jr nz, .discourage
+
+; are we faster
+	call DoesAIOutSpeedPlayer
+	jr nc, .slower
+
+; we are faster
+; if we are full HP and player can't 2HKO then encourage
 	call AICheckEnemyMaxHP
-	ret c
+	jr nc, .slower
+	call CanPlayer2HKO
+	jmp nc, StandardEncourage
 
-	inc [hl]
-
+.slower
+; if we are above half HP and player can't 3HKO then encourage
 	call AICheckEnemyHalfHP
-	ret c
+	jr nc, .discourage
+	call CanPlayer3HKOMaxHP
+	jmp nc, StandardEncourage
 
 .discourage
-	ld a, [hl]
-	add 5
-	ld [hl], a
-	ret
+	jmp StandardDiscourage
 
 AI_Smart_MirrorCoat:
 	push hl
