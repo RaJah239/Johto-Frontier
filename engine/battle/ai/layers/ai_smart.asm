@@ -146,7 +146,86 @@ AI_Smart_EffectHandlers:
     dbw EFFECT_BURN,             AI_Smart_Burn ; added
     dbw EFFECT_TAUNT,            AI_Smart_Taunt ; added
 	dbw EFFECT_SUCKER_PUNCH,     AI_Smart_SuckerPunch ; added
+	dbw EFFECT_FURY_DRIVE,       AI_Smart_FuryDrive; added
 	db -1 ; end
+
+AI_Smart_FuryDrive:
+; just use once before attacking
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardDiscourage
+
+; discourage if enemy is paralyzed
+	ld a, [wEnemyMonStatus]
+	and 1 << PAR
+	jmp nz, StandardDiscourage
+
+; never use while in trick room
+	ld a, [wTrickRoomCount]
+	and a
+	jmp nz, StandardDiscourage
+
+; if players last move was sucker punch - 50% chance to boost
+	ld a, [wCurPlayerMove]
+	call AIGetPlayerMove
+	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
+	cp EFFECT_SUCKER_PUNCH
+	jr nz, .notUsingSuckerPunch
+	call AI_50_50
+	jr c, .skipKOCheck
+
+.notUsingSuckerPunch
+; don't use if we will be koed
+; skip if player is SLP or FRZ
+	ld a, [wBattleMonStatus]
+	and SLP_MASK
+	jr nz, .skipKOCheck
+
+; discourage if player can 2HKO and either has priority move or is >= +2 speed
+	call CanPlayer2HKO
+	jr nc, .checkSash
+	ld b, EFFECT_PRIORITY_HIT
+	call PlayerHasMoveEffect
+	jmp c, StandardDiscourage
+	ld a, [wPlayerSpdLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardDiscourage
+
+.checkSash
+; is the weather sandstorm or hail,
+; if so don't skip ko check due to focus sash or sturdy
+; (no mon with fury drive is immune to sandstorm or hail afaik atm of coding this)
+	ld a, [wBattleWeather]
+	cp WEATHER_SANDSTORM
+	jr z, .checkKO
+	cp WEATHER_HAIL
+	jr z, .checkKO
+
+; skip if we have sash/sturdy
+	call DoesEnemyHaveIntactFocusSashOrSturdy
+	jr c, .skipKOCheck
+
+.checkKO
+; consider OHKO, assuming we will outspeed after use
+	call CanPlayerKO
+	jmp c, StandardDiscourage
+
+.skipKOCheck
+; is the player behind a sub, then don't use, unless we have baton pass
+	ld b, EFFECT_BATON_PASS
+	call AIHasMoveEffect
+	jr c, .skipSubCheck
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a	;check for substitute bit
+	jmp nz, StandardDiscourage
+
+.skipSubCheck
+; encouragement
+; this needs to be enough to overcome encouragement from having a move that can KO
+rept 12
+	dec [hl]
+endr
+	ret
 
 AI_Smart_SuckerPunch:
 ; if the players last move had no power - 50% chance to discourage.
