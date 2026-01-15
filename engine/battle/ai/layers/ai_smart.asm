@@ -51,7 +51,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_SELFDESTRUCT,     AI_Smart_Selfdestruct ; updated
 	dbw EFFECT_DREAM_EATER,      AI_Smart_DreamEater
 	dbw EFFECT_EVASION_UP,       AI_Smart_EvasionUp
-	dbw EFFECT_ALWAYS_HIT,       AI_Smart_AlwaysHit
+	dbw EFFECT_ALWAYS_HIT,       AI_Smart_AlwaysHit ; updated
 	dbw EFFECT_ACCURACY_DOWN,    AI_Smart_AccuracyDown
 	dbw EFFECT_RESET_STATS,      AI_Smart_ResetStats
 	dbw EFFECT_FORCE_SWITCH,     AI_Smart_ForceSwitch
@@ -775,9 +775,9 @@ AI_Smart_AlwaysHit:
 	cp BASE_STAT_LEVEL - 2
 	jr c, .encourage
 
-; ...or player's evasion level has been raised three or more stages.
+; ...or player's evasion level has been raised two or more stages.
 	ld a, [wPlayerEvaLevel]
-	cp BASE_STAT_LEVEL + 3
+	cp BASE_STAT_LEVEL + 2
 	ret c
 
 .encourage
