@@ -113,6 +113,14 @@ SturdyPokemon_AI:
     db REGIROCK
     db -1 ; end
 
+SereneGracePokemon_AI:
+    db CHANSEY
+    db BLISSEY
+    db TOGEPI
+    db TOGETIC
+    db TOGEKISS
+    db -1 ; end
+
 MagicGuardPokemon_AI:
     db CLEFAIRY
     db CLEFABLE

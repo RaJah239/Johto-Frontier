@@ -136,7 +136,31 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_STEALTH_ROCK,     AI_Smart_StealthRock ; added
     dbw EFFECT_TOXIC_SPIKES,     AI_Smart_ToxicSpikes ; added
     dbw EFFECT_STICKY_WEB,       AI_Smart_StickyWeb ; added
+    dbw EFFECT_FLINCH_HIT,       AI_Smart_Flinch ; added
 	db -1 ; end
+
+AI_Smart_Flinch:
+; do nothing if slower than player
+	call DoesAIOutSpeedPlayer
+	ret nc
+
+; encourage if enemy is paralyzed
+	ld a, [wBattleMonStatus]
+	and 1 << PAR
+	jr nz, .small_encourage
+
+; encourage if enemy has serene grace ability pokemon
+	ld a, [wEnemyMonSpecies]
+	push hl
+	ld hl, SereneGracePokemon_AI
+	call IsInByteArray
+	pop hl
+	ret c
+.encourage
+    dec [hl]
+.small_encourage
+    dec [hl]
+    ret
 
 AI_Smart_StealthRock:
 ; don't use if already up
