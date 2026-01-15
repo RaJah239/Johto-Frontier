@@ -143,7 +143,54 @@ AI_Smart_EffectHandlers:
     dbw EFFECT_DEFENSE_CURL,     AI_Smart_LesserStatChange ; added
     dbw EFFECT_DEFOG,            AI_Smart_Defog ; added
     dbw EFFECT_TRICK_ROOM,       AI_Smart_TrickRoom ; added
+    dbw EFFECT_BURN,             AI_Smart_Burn ; added
 	db -1 ; end
+
+AI_Smart_Burn:
+; if enemy is already statused - discourage
+	ld a, [wBattleMonStatus]
+	and a
+	jr nz, .discourage
+
+; never use if player has substitute
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
+	jr nz, .discourage
+
+; never use if player has safeguard
+	ld a, [wPlayerScreens]
+	bit SCREENS_SAFEGUARD, a
+	jr nz, .discourage
+
+; if enemy is fire type - discourage
+	ld a, [wBattleMonType1]
+	cp FIRE
+	jr z, .discourage
+	ld a, [wBattleMonType2]
+	cp FIRE
+	jr z, .discourage
+
+; don't use against serenity pokemon as they are immune to status
+	ld a, [wBattleMonSpecies]
+	push hl
+	ld hl, SerenityPokemon_AI
+	call IsInByteArray
+	pop hl
+	jr c, .discourage
+
+; strongly encourage if enemy is physical
+	call IsPlayerPhysicalOrSpecial
+	ret nc
+
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	ret
+
+.discourage
+	inc [hl]
+	inc [hl]
+	ret
 
 AI_Smart_Defog:
 ; don't use if player has only one pokemon left
