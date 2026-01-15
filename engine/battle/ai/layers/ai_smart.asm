@@ -77,9 +77,9 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_DISABLE,          AI_Smart_Disable ; updated
 	dbw EFFECT_COUNTER,          AI_Smart_Counter ; updated
 	dbw EFFECT_ENCORE,           AI_Smart_Encore ; updated
-	dbw EFFECT_PAIN_SPLIT,       AI_Smart_PainSplit
-	dbw EFFECT_SNORE,            AI_Smart_Snore
-	dbw EFFECT_SLEEP_TALK,       AI_Smart_SleepTalk
+	dbw EFFECT_PAIN_SPLIT,       AI_Smart_PainSplit ; good as is
+	dbw EFFECT_SNORE,            AI_Smart_Snore ; updated
+	dbw EFFECT_SLEEP_TALK,       AI_Smart_SleepTalk ; updated
 	dbw EFFECT_DESTINY_BOND,     AI_Smart_DestinyBond
 	dbw EFFECT_REVERSAL,         AI_Smart_Reversal
 	dbw EFFECT_SPITE,            AI_Smart_Spite
@@ -1756,9 +1756,9 @@ AI_Smart_SleepTalk:
 	cp 1
 	jr z, .discourage
 
+rept 12
 	dec [hl]
-	dec [hl]
-	dec [hl]
+endr
 	ret
 
 .discourage
