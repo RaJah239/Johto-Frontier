@@ -80,7 +80,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_PAIN_SPLIT,       AI_Smart_PainSplit ; good as is
 	dbw EFFECT_SNORE,            AI_Smart_Snore ; updated
 	dbw EFFECT_SLEEP_TALK,       AI_Smart_SleepTalk ; updated
-	dbw EFFECT_DESTINY_BOND,     AI_Smart_DestinyBond
+	dbw EFFECT_DESTINY_BOND,     AI_Smart_DestinyBond ; updated
 	dbw EFFECT_REVERSAL,         AI_Smart_Reversal
 	dbw EFFECT_SPITE,            AI_Smart_Spite
 	dbw EFFECT_HEAL_BELL,        AI_Smart_HealBell
@@ -1823,7 +1823,36 @@ AI_Smart_Spite:
 	dec [hl]
 	ret
 
+; if the player can ko and is using damaging moves then encourage
+; 50% chance to encourage if player can ko but isn't using damaging moves
 AI_Smart_DestinyBond:
+	call CanPlayerKO
+	jr nc, .discourage
+
+	call DoesEnemyHaveIntactFocusSashOrSturdy
+	jr c, .discourage
+
+	call DoesAIOutSpeedPlayer
+	jr nc, .discourage
+
+	ld a, [wCurPlayerMove]
+	call AIGetPlayerMove
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	jr nz, .encourage
+	call AI_50_50
+	jr c, .encourage
+
+.discourage
+	inc [hl]
+	inc [hl]
+	ret
+
+.encourage
+	dec [hl]
+	dec [hl]
+	ret
+
 AI_Smart_Reversal:
 ; Discourage this move if enemy's HP is above 25%.
 
