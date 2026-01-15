@@ -92,7 +92,6 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_FORESIGHT,        AI_Smart_Foresight ; good as is
 	dbw EFFECT_PERISH_SONG,      AI_Smart_PerishSong ; updated
 	dbw EFFECT_SANDSTORM,        AI_Smart_Sandstorm ; updated
-	dbw EFFECT_ENDURE,           AI_Smart_Endure
 	dbw EFFECT_ROLLOUT,          AI_Smart_Rollout
 	dbw EFFECT_SWAGGER,          AI_Smart_Swagger ; updated
 	dbw EFFECT_ATTRACT,          AI_Smart_Attract
@@ -2455,49 +2454,6 @@ AI_Smart_Hail:
 .GoodHailMoves
 	db BLIZZARD
 	db -1 ; end
-
-AI_Smart_Endure:
-; Greatly discourage this move if the enemy already used Protect.
-	ld a, [wEnemyProtectCount]
-	and a
-	jr nz, .greatly_discourage
-
-; Greatly discourage this move if the enemy's HP is full.
-	call AICheckEnemyMaxHP
-	jr c, .greatly_discourage
-
-; Discourage this move if the enemy's HP is at least 25%.
-	call AICheckEnemyQuarterHP
-	jr c, .discourage
-
-; If the enemy has Reversal...
-	ld b, EFFECT_REVERSAL
-	call AIHasMoveEffect
-	jr nc, .no_reversal
-
-; ...80% chance to greatly encourage this move.
-	call AI_80_20
-	ret c
-
-	dec [hl]
-	dec [hl]
-	dec [hl]
-	ret
-
-.no_reversal
-; 50% chance to greatly encourage this move.
-	call AI_50_50
-	ret c
-
-	dec [hl]
-	dec [hl]
-	ret
-
-.greatly_discourage
-	inc [hl]
-.discourage
-	inc [hl]
-	ret
 
 AI_Smart_Rollout:
 ; Rollout, Fury Cutter
