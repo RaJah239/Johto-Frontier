@@ -48,7 +48,7 @@ AI_Smart:
 
 AI_Smart_EffectHandlers:
 	dbw EFFECT_SLEEP,            AI_Smart_Sleep ; updated
-	dbw EFFECT_SELFDESTRUCT,     AI_Smart_Selfdestruct ; updated
+	dbw EFFECT_EXPLOSION,        AI_Smart_Explosion ; updated
 	dbw EFFECT_DREAM_EATER,      AI_Smart_DreamEater ; good as is
 	dbw EFFECT_EVASION_UP,       AI_Smart_EvasionUp ; good as is
 	dbw EFFECT_ALWAYS_HIT,       AI_Smart_AlwaysHit ; updated
@@ -1062,7 +1062,7 @@ rept 12
 endr
     ret
 
-AI_Smart_Selfdestruct:
+AI_Smart_Explosion:
 ; explosion
 
 ; never use against ghost types

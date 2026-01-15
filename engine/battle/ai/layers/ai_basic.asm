@@ -222,7 +222,7 @@ AI_Basic:
 
 ; don't encourage explosion as much
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
-	cp EFFECT_SELFDESTRUCT
+	cp EFFECT_EXPLOSION
 	jr z, .explode_or_heal
 
 ; don't encourage recoil moves as much
@@ -252,7 +252,7 @@ AI_Basic:
 
 ; don't encourage explosion as much
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
-	cp EFFECT_SELFDESTRUCT
+	cp EFFECT_EXPLOSION
 	jr z, .explode_or_heal
 
 .check_accuracy

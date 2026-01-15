@@ -26,7 +26,7 @@ AI_Risky:
 
 ; Don't use selfdestructing moves at max hp.
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
-	cp EFFECT_SELFDESTRUCT
+	cp EFFECT_EXPLOSION
 	jr nz, .checkko
 
 	call AICheckEnemyMaxHP

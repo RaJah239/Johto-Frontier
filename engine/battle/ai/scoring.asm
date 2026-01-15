@@ -860,7 +860,7 @@ CanPlayerKO:
 
 ; skip moves that can't be used on consecutive turns, except hyper beam
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
-	cp EFFECT_SELFDESTRUCT
+	cp EFFECT_EXPLOSION
 	jr z, .loop_player_KO_moves
 	cp EFFECT_SOLARBEAM
 	jr z, .loop_player_KO_moves
@@ -928,7 +928,7 @@ CanPlayer2HKO:
 	jr c, .set_flag
 
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
-	cp EFFECT_SELFDESTRUCT
+	cp EFFECT_EXPLOSION
 	jr z, .loop_player_2HKO_moves
 	cp EFFECT_HYPER_BEAM
 	jr z, .loop_player_2HKO_moves
@@ -998,7 +998,7 @@ CanPlayer2HKOMaxHP:
 	jr c, .set_flag
 
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
-	cp EFFECT_SELFDESTRUCT
+	cp EFFECT_EXPLOSION
 	jr z, .loop_player_2HKO_max_HP_moves
 	cp EFFECT_HYPER_BEAM
 	jr z, .loop_player_2HKO_max_HP_moves
@@ -1071,7 +1071,7 @@ CanPlayer3HKOMaxHP:
 	jr c, .set_flag
 
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
-	cp EFFECT_SELFDESTRUCT
+	cp EFFECT_EXPLOSION
 	jr z, .loop_player_3HKO_max_HP_moves
 	cp EFFECT_HYPER_BEAM
 	jr z, .loop_player_3HKO_max_HP_moves
@@ -1125,7 +1125,7 @@ CanAIKO:
 
 ; skip moves that can't be used on consecutive turns, except hyper beam
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
-	cp EFFECT_SELFDESTRUCT
+	cp EFFECT_EXPLOSION
 	jr z, .loop_AI_KO_moves
 	cp EFFECT_SOLARBEAM
 	jr z, .loop_AI_KO_moves
@@ -1191,7 +1191,7 @@ CanAI2HKO:
 	jr c, .set_flag
 
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
-	cp EFFECT_SELFDESTRUCT
+	cp EFFECT_EXPLOSION
 	jr z, .loop_moves
 	cp EFFECT_HYPER_BEAM
 	jr z, .loop_moves
@@ -1261,7 +1261,7 @@ CanAI2HKOMaxHP:
 	jr c, .set_flag
 
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
-	cp EFFECT_SELFDESTRUCT
+	cp EFFECT_EXPLOSION
 	jr z, .loop_moves
 	cp EFFECT_HYPER_BEAM
 	jr z, .loop_moves
@@ -1335,7 +1335,7 @@ CanAI3HKO:
 	jr c, .set_flag
 
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
-	cp EFFECT_SELFDESTRUCT
+	cp EFFECT_EXPLOSION
 	jr z, .loop_AI_3HKO_moves
 	cp EFFECT_HYPER_BEAM
 	jr z, .loop_AI_3HKO_moves

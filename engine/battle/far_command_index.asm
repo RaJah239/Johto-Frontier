@@ -19,7 +19,7 @@ FarCommand_BattleCommands:
 	dbw EFFECT_FALSE_SWIPE, 	BattleCommand_FalseSwipe
 	dbw EFFECT_PAIN_SPLIT,      BattleCommand_PainSplit
 	dbw EFFECT_DISABLE, 		BattleCommand_Disable
-	dbw EFFECT_SELFDESTRUCT, 	BattleCommand_Selfdestruct
+	dbw EFFECT_EXPLOSION,       BattleCommand_Selfdestruct
 	dbw EFFECT_THIEF, 			BattleCommand_Thief
 	dbw EFFECT_TOXIC_SPIKES,	BattleCommand_ToxicSpikes
 	dbw EFFECT_THUNDER,			BattleCommand_ThunderAccuracy

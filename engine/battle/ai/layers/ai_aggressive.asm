@@ -33,7 +33,7 @@ AI_Aggressive:
 
 ; don't encourage explosion
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
-	cp EFFECT_SELFDESTRUCT
+	cp EFFECT_EXPLOSION
 	jr z, .checkmove
 
 ; Dismiss ground move if the player has levitate
