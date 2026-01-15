@@ -8,5 +8,5 @@
 ;   db -1 ; end
 
 SlushRushPokemon:
-    db DELIBIRD
+;    db DELIBIRD
     db -1 ; end

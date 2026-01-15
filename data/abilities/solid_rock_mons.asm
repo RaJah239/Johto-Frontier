@@ -2,9 +2,9 @@
 ; "Super Effective" and "Extremely Effective" hits
 
 SolidRockPokemon:
-	db ONIX
-	db RHYHORN
-	db TORTERRA
-	db OMANYTE
-	db OMASTAR
+;	db ONIX
+;	db RHYHORN
+;	db TORTERRA
+;	db OMANYTE
+;	db OMASTAR
 	db -1 ; end

@@ -14,10 +14,10 @@
 ;   db -1 ; end
 
 SolarPowerPokemon:
-    db SUNKERN
-    db SUNFLORA
-    db TROPIUS
-    db CHARMANDER
-    db CHARMELEON
-    db CHARIZARD
+;    db SUNKERN
+;    db SUNFLORA
+;    db TROPIUS
+;    db CHARMANDER
+;    db CHARMELEON
+;    db CHARIZARD
     db -1 ; end

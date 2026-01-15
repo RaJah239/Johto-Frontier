@@ -9,7 +9,7 @@
 ;   db -1 ; end
 
 IceBodyPokemon:
-    db SNORUNT
-    db GLALIE
-    db REGICE
+;    db SNORUNT
+;    db GLALIE
+;    db REGICE
     db -1 ; end

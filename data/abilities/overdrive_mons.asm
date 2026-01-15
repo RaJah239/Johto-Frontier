@@ -9,6 +9,6 @@
 ;   db -1 ; end
 
 OverdrivePokemon:
-    db URSALUNA
-    db PORYGONZ
+;    db URSALUNA
+;    db PORYGONZ
     db -1 ; end

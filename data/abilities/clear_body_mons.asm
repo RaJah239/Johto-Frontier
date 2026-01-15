@@ -11,9 +11,9 @@
 ;   db -1 ; end
 
 ClearBodyPokemon:
-    db TENTACOOL
-    db TENTACRUEL
-    db REGIROCK
-    db REGICE
-    db REGISTEEL
+;    db TENTACOOL
+;   db TENTACRUEL
+;    db REGIROCK
+;    db REGICE
+;    db REGISTEEL
     db -1 ; end

@@ -10,6 +10,6 @@
 ;   ret z
 
 ShadowTagPokemon:
-    db CHANDELURE
-    db GENGAR
+;    db CHANDELURE
+;    db GENGAR
     db -1 ; end

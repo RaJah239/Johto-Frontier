@@ -2,10 +2,10 @@
 ; or less, boost it by 50%
 
 TechnicianPokemon:
-    db MEOWTH
-    db PERSIAN
-    db SCYTHER
-    db SCIZOR
-    db BRELOOM
-    db SMEARGLE
+;    db MEOWTH
+;    db PERSIAN
+;    db SCYTHER
+;    db SCIZOR
+;    db BRELOOM
+;    db SMEARGLE
     db -1 ; end

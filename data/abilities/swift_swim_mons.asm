@@ -13,10 +13,10 @@
 ;   db -1 ; end
 
 SwiftSwimPokemon:
-    db FEEBAS
-    db KINGDRA
-    db MAGIKARP
-    db MANTINE
-    db OMANYTE
-    db OMASTAR
+;    db FEEBAS
+;    db KINGDRA
+;    db MAGIKARP
+;    db MANTINE
+;    db OMANYTE
+;    db OMASTAR
     db -1 ; end

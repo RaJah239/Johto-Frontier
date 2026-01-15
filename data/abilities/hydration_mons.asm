@@ -10,7 +10,7 @@
 ;   db -1 ; end
 
 HydrationPokemon:
-    db SEEL
-    db DEWGONG
-    db LAPRAS
+;    db SEEL
+;    db DEWGONG
+;    db LAPRAS
     db -1 ; end

@@ -12,9 +12,9 @@
 ;   db -1 ; end
 
 SereneGracePokemon:
-    db CHANSEY
-    db BLISSEY
-    db TOGEPI
-    db TOGETIC
-    db TOGEKISS
+;    db CHANSEY
+;    db BLISSEY
+;    db TOGEPI
+;    db TOGETIC
+;    db TOGEKISS
     db -1 ; end

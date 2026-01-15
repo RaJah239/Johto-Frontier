@@ -17,14 +17,14 @@
 ;   db -1 ; end
 
 SturdyPokemon:
-    db MAGNEMITE
-    db MAGNETON
-    db MAGNEZONE
-    db ONIX
-    db STEELIX
-    db SUDOWOODO
-    db SHUCKLE
-    db SKARMORY
-    db DONPHAN
-    db REGIROCK
+;    db MAGNEMITE
+;    db MAGNETON
+;    db MAGNEZONE
+;    db ONIX
+;    db STEELIX
+;    db SUDOWOODO
+;    db SHUCKLE
+;    db SKARMORY
+;    db DONPHAN
+;    db REGIROCK
     db -1 ; end

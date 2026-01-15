@@ -2,7 +2,7 @@
 ; to recover from any non-volatile status at the end of each turn
 
 MoltingPokemon:
-    db AXEW
-    db FRAXURE
-    db HAXORUS
+;    db AXEW
+;    db FRAXURE
+;    db HAXORUS
     db -1

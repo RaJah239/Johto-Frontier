@@ -10,8 +10,8 @@
 ;	db -1 ; end
 
 SureShockPokemon:
-	db PIKACHU
-	db MAGNEMITE
-	db MAGNETON
-	db MAGNEZONE
+;	db PIKACHU
+;	db MAGNEMITE
+;	db MAGNETON
+;	db MAGNEZONE
 	db -1 ; end

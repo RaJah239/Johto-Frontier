@@ -48,7 +48,7 @@
 ; it couldn't be worked around afaik
 
 SerenityPokemon:
-    db MEGANIUM
-    db SYLVEON
-    db MEW
+;    db MEGANIUM
+;    db SYLVEON
+;    db MEW
     db -1 ; end

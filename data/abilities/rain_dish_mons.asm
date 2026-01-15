@@ -11,9 +11,9 @@
 ;   db -1 ; end
 
 RainDishPokemon:
-    db SQUIRTLE
-    db WARTORTLE
-    db BLASTOISE
-    db TENTACOOL
-    db TENTACRUEL
+;    db SQUIRTLE
+;    db WARTORTLE
+;    db BLASTOISE
+;    db TENTACOOL
+;    db TENTACRUEL
     db -1 ; end

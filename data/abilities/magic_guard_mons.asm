@@ -11,6 +11,6 @@
 ;	db -1 ; end
 
 MagicGuardPokemon:
-	db CLEFAIRY
-	db CLEFABLE
+;	db CLEFAIRY
+;	db CLEFABLE
     db -1 ; end

@@ -2,6 +2,6 @@
 ; get boosted by 50 percent when attacking
 
 SteelWorkerPokemon:
-    db MEOWTH
-    db PERSIAN
+;    db MEOWTH
+;    db PERSIAN
     db -1

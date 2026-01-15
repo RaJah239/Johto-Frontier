@@ -2,10 +2,10 @@
 ; by water attacks
 
 WaterAbsorbPokemon:
-	db LAPRAS
-	db WOOPER
-	db QUAGSIRE
-	db MANTINE
-	db CHINCHOU
-	db LANTURN
+;	db LAPRAS
+;	db WOOPER
+;	db QUAGSIRE
+;	db MANTINE
+;	db CHINCHOU
+;	db LANTURN
 	db -1 ; end

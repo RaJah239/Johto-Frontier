@@ -10,7 +10,7 @@
 ;   db -1 ; end
 
 SandRushPokemon:
-    db DRILBUR
-    db EXCADRILL
-    db KLEAVOR
+;    db DRILBUR
+;    db EXCADRILL
+;    db KLEAVOR
     db -1 ; end
