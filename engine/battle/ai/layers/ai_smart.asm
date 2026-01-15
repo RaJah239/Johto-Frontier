@@ -58,8 +58,8 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_DEFENSE_DOWN,     AI_Smart_DefenseDown ; newly added
 	dbw EFFECT_DEFENSE_DOWN_2,   AI_Smart_DefenseDown ; newly added
 	dbw EFFECT_SPEED_DOWN_2,     AI_Smart_SpeedDown ; newly added
-	dbw EFFECT_RESET_STATS,      AI_Smart_ResetStats
-	dbw EFFECT_FORCE_SWITCH,     AI_Smart_ForceSwitch
+	dbw EFFECT_RESET_STATS,      AI_Smart_ResetStats ; good as is
+	dbw EFFECT_FORCE_SWITCH,     AI_Smart_ForceSwitch ; updated
 	dbw EFFECT_HEAL,             AI_Smart_Heal ; updated
 	dbw EFFECT_TOXIC,            AI_Smart_Toxic
 	dbw EFFECT_LIGHT_SCREEN,     AI_Smart_LightScreen
@@ -1020,43 +1020,23 @@ AI_Smart_ResetStats:
 AI_Smart_ForceSwitch:
 ; Whirlwind, Roar.
 
-; Strongly encourage this move if the player has
-; a stat buff of at least 2 in any stat
+; don't use if player has only one pokemon left
 	push hl
-	ld hl, wPlayerAtkLevel
-	ld c, $8
-.check_next_stat
-	dec c
-	jr z, .no_stat_buff
-	ld a, [hli]
-	cp $9
-	jr c, .check_next_stat
+	call AICheckLastPlayerMon
 	pop hl
-; player has a stat buffed by at least 2
-	dec [hl]
-	cp $a
-	ret c
-; encourage more if buffed by >2
-	dec [hl]
-	ret
+	jr z, .discourage
 
-; Discourage this move if the player has not shown
-; a super-effective move against the enemy.
-; Consider player's type(s) if its moves are unknown.
+; encourage this move if the player's attack levels are boosted.
+	ld a, [wPlayerAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .encourage
+	ld a, [wPlayerSAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .encourage
 
-.no_stat_buff
-	pop hl
-	push hl
-	callfar CheckPlayerMoveTypeMatchups
-	ld a, [wEnemyAISwitchScore]
-	cp 10 ; neutral // forely BASE_AI_SWITCH_SCORE
-	pop hl
-	jr nc, .discourage
-
-; Otherwise, encourage this move if the player's HP is above 50%
-; and there's an entry hazard on the player's side.
-	call AICheckPlayerHalfHP
-	ret nc
+; discourage if non-boosted player can 2HKO from current HP
+	call CanPlayer2HKO
+	jr c, .discourage
 
 	ld a, [wPlayerScreens]
 	bit SCREENS_SPIKES, a
@@ -1073,6 +1053,8 @@ AI_Smart_ForceSwitch:
 	ret
 
 .discourage
+	inc [hl]
+	inc [hl]
 	inc [hl]
 	ret
 
