@@ -49,8 +49,8 @@ AI_Smart:
 AI_Smart_EffectHandlers:
 	dbw EFFECT_SLEEP,            AI_Smart_Sleep ; updated
 	dbw EFFECT_SELFDESTRUCT,     AI_Smart_Selfdestruct ; updated
-	dbw EFFECT_DREAM_EATER,      AI_Smart_DreamEater
-	dbw EFFECT_EVASION_UP,       AI_Smart_EvasionUp
+	dbw EFFECT_DREAM_EATER,      AI_Smart_DreamEater ; good as is
+	dbw EFFECT_EVASION_UP,       AI_Smart_EvasionUp ; good as is
 	dbw EFFECT_ALWAYS_HIT,       AI_Smart_AlwaysHit ; updated
 	dbw EFFECT_ACCURACY_DOWN,    AI_Smart_AccuracyDown ; updated
 	dbw EFFECT_ATTACK_DOWN,      AI_Smart_AttackDown ; updated
@@ -63,10 +63,10 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_HEAL,             AI_Smart_Heal ; updated
 	dbw EFFECT_TOXIC,            AI_Smart_Toxic ; updated
 	dbw EFFECT_LIGHT_SCREEN,     AI_Smart_LightScreen ; updated
-	dbw EFFECT_OHKO,             AI_Smart_Ohko
-	dbw EFFECT_SUPER_FANG,       AI_Smart_SuperFang
-	dbw EFFECT_TRAP_TARGET,      AI_Smart_TrapTarget
-	dbw EFFECT_CONFUSE,          AI_Smart_Confuse
+	dbw EFFECT_OHKO,             AI_Smart_Ohko ; good as is
+	dbw EFFECT_SUPER_FANG,       AI_Smart_SuperFang ; good as is
+	dbw EFFECT_TRAP_TARGET,      AI_Smart_TrapTarget ; good as is
+	dbw EFFECT_CONFUSE,          AI_Smart_Confuse ; updated
 	dbw EFFECT_SP_DEF_UP_2,      AI_Smart_SpDefenseUp2
 	dbw EFFECT_REFLECT,          AI_Smart_Reflect ; updated
 	dbw EFFECT_PARALYZE,         AI_Smart_Paralyze
@@ -1266,7 +1266,7 @@ AI_Smart_Ohko:
 	ret
 
 AI_Smart_TrapTarget:
-; Wrap, Fire Spin
+; wrap, fire spin, sand tomb, whirlpool
 
 ; 50% chance to discourage this move if the player is already trapped.
 	ld a, [wPlayerWrapCount]
@@ -1305,6 +1305,26 @@ AI_Smart_TrapTarget:
 	ret
 
 AI_Smart_Confuse:
+; never use if player has substitute
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
+	jr nz, .discourage
+
+; never use if player has safeguard
+	ld a, [wPlayerScreens]
+	bit SCREENS_SAFEGUARD, a
+	jr nz, .discourage
+
+; discourage if already confused
+	ld a, [wPlayerSubStatus3]
+	bit SUBSTATUS_CONFUSED, a
+	jr nz, .discourage
+
+; encourage if enemy is paralyzed
+	ld a, [wBattleMonStatus]
+	and 1 << PAR
+	jr z, .encourage
+
 ; 90% chance to discourage this move if player's HP is between 25% and 50%.
 	call AICheckPlayerHalfHP
 	ret c
@@ -1316,6 +1336,16 @@ AI_Smart_Confuse:
 ; Discourage again if player's HP is below 25%.
 	call AICheckPlayerQuarterHP
 	ret c
+	inc [hl]
+	ret
+
+.encourage
+	dec [hl]
+	dec [hl]
+	ret
+
+.discourage
+	inc [hl]
 	inc [hl]
 	ret
 
