@@ -52,7 +52,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_DREAM_EATER,      AI_Smart_DreamEater
 	dbw EFFECT_EVASION_UP,       AI_Smart_EvasionUp
 	dbw EFFECT_ALWAYS_HIT,       AI_Smart_AlwaysHit ; updated
-	dbw EFFECT_ACCURACY_DOWN,    AI_Smart_AccuracyDown
+	dbw EFFECT_ACCURACY_DOWN,    AI_Smart_AccuracyDown ; updated
 	dbw EFFECT_RESET_STATS,      AI_Smart_ResetStats
 	dbw EFFECT_FORCE_SWITCH,     AI_Smart_ForceSwitch
 	dbw EFFECT_HEAL,             AI_Smart_Heal ; updated
@@ -789,6 +789,16 @@ AI_Smart_AlwaysHit:
 	ret
 
 AI_Smart_AccuracyDown:
+; discourage if enemy is immune to stat drops
+	ld a, [wBattleMonSpecies]
+	call DoesPokemonHaveClearBody
+	jr c, .discourage
+
+; discourage after player is at -3
+	ld a, [wPlayerAccLevel]
+	cp BASE_STAT_LEVEL - 2
+	jr c, .discourage
+
 ; If player's HP is full...
 	call AICheckPlayerMaxHP
 	jr nc, .hp_mismatch_1
@@ -865,6 +875,9 @@ AI_Smart_AccuracyDown:
 	jr nz, .greatly_encourage
 
 .discourage
+	inc [hl]
+	inc [hl]
+	inc [hl]
 	inc [hl]
 	ret
 
