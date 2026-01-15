@@ -86,7 +86,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_HEAL_BELL,        AI_Smart_HealBell ; updated
 	dbw EFFECT_PRIORITY_HIT,     AI_Smart_PriorityHit ; updated
 	dbw EFFECT_THIEF,            AI_Smart_Thief ; updated
-	dbw EFFECT_MEAN_LOOK,        AI_Smart_MeanLook
+	dbw EFFECT_MEAN_LOOK,        AI_Smart_MeanLook ; updated
 	dbw EFFECT_CURSE,            AI_Smart_Curse
 	dbw EFFECT_PROTECT,          AI_Smart_Protect
 	dbw EFFECT_FORESIGHT,        AI_Smart_Foresight
@@ -2025,15 +2025,27 @@ AI_Smart_Disable:
 	ret
 
 AI_Smart_MeanLook:
-	call AICheckEnemyHalfHP
-	jr nc, .discourage
+; discourage if player is already trapped
+	ld a, [wEnemySubStatus5]
+	bit SUBSTATUS_CANT_RUN, a
+	jr nz, .discourage
 
+; discourage if this is the players last mon
 	push hl
 	call AICheckLastPlayerMon
 	pop hl
 	jmp z, AIDiscourageMove
 
-; 80% chance to greatly encourage this move if the enemy is badly poisoned.
+; discourage if we will be koed
+	call ShouldAIBoost
+	jmp nz, AIDiscourageMove
+
+; discourage if below half health
+	call AICheckEnemyHalfHP
+	jr nc, .discourage
+
+; 80% chance to greatly encourage this move if the enemy is badly poisoned
+; should check wplayersubstatus5 instead
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_TOXIC, a
 	jr nz, .encourage
