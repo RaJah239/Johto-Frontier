@@ -89,8 +89,8 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_MEAN_LOOK,        AI_Smart_MeanLook ; updated
 	dbw EFFECT_CURSE,            AI_Smart_Curse ; updated
 	dbw EFFECT_PROTECT,          AI_Smart_Protect ; updated
-	dbw EFFECT_FORESIGHT,        AI_Smart_Foresight
-	dbw EFFECT_PERISH_SONG,      AI_Smart_PerishSong
+	dbw EFFECT_FORESIGHT,        AI_Smart_Foresight ; good as is
+	dbw EFFECT_PERISH_SONG,      AI_Smart_PerishSong ; updated
 	dbw EFFECT_SANDSTORM,        AI_Smart_Sandstorm
 	dbw EFFECT_ENDURE,           AI_Smart_Endure
 	dbw EFFECT_ROLLOUT,          AI_Smart_Rollout
@@ -2273,9 +2273,8 @@ AI_Smart_Foresight:
 	cp GHOST
 	jr z, .encourage
 
-; 92% chance to discourage this move otherwise.
-	call Random
-	cp 8 percent
+; 90% chance to discourage this move otherwise.
+	call AI_90_10
 	ret c
 
 	inc [hl]
@@ -2294,36 +2293,34 @@ AI_Smart_PerishSong:
 	push hl
 	callfar FindAliveEnemyMons
 	pop hl
-	jr c, .no
+	jr c, .discourage ; if this is the last enemy mon don't use
 
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
-	jr nz, .yes
+	jr nz, .encourage ; if player is trapped then encourage
 
+; encourage if player has only one pokemon left
 	push hl
-	callfar CheckPlayerMoveTypeMatchups
-	ld a, [wEnemyAISwitchScore]
-	cp BASE_AI_SWITCH_SCORE
+	call AICheckLastPlayerMon
 	pop hl
-	ret c
+	jr z, .encourage
 
-	call AI_50_50
-	ret c
+; encourage this move if the player's attack levels are boosted.
+	ld a, [wPlayerAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .encourage
+	ld a, [wPlayerSAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .encourage
 
+.discourage
+	inc [hl]
+	inc [hl]
 	inc [hl]
 	ret
 
-.yes
-	call AI_50_50
-	ret c
-
+.encourage
 	dec [hl]
-	ret
-
-.no
-	ld a, [hl]
-	add 5
-	ld [hl], a
 	ret
 
 AI_Smart_Sandstorm:
