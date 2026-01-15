@@ -32,6 +32,15 @@ ChlorophyllPokemon_AI:
     db TROPIUS
     db -1 ; end
 
+SolarPowerPokemon_AI:
+    db SUNKERN
+    db SUNFLORA
+    db TROPIUS
+    db CHARMANDER
+    db CHARMELEON
+    db CHARIZARD
+    db -1 ; end
+
 SandRushPokemon_AI:
     db DRILBUR
     db EXCADRILL

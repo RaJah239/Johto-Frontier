@@ -102,7 +102,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_WEATHER_HEAL,     AI_Smart_Heal ; updated
 	dbw EFFECT_HIDDEN_POWER,     AI_Smart_HiddenPower ; good as is
 	dbw EFFECT_RAIN_DANCE,       AI_Smart_RainDance ; updated
-	dbw EFFECT_SUNNY_DAY,        AI_Smart_SunnyDay
+	dbw EFFECT_SUNNY_DAY,        AI_Smart_SunnyDay ; updated
 	dbw EFFECT_BELLY_DRUM,       AI_Smart_BellyDrum
 	dbw EFFECT_MIRROR_COAT,      AI_Smart_MirrorCoat
 	dbw EFFECT_EARTHQUAKE,       AI_Smart_Earthquake
@@ -2744,15 +2744,15 @@ AI_Smart_RainDance:
 ; Particularly, if the player is a Water-type.
 	ld a, [wBattleMonType1]
 	cp WATER
-	jr z, AIBadWeatherType
+	jmp z, AIBadWeatherType
 	cp FIRE
-	jr z, AIGoodWeatherType
+	jmp z, AIGoodWeatherType
 
 	ld a, [wBattleMonType2]
 	cp WATER
-	jr z, AIBadWeatherType
+	jmp z, AIBadWeatherType
 	cp FIRE
-	jr z, AIGoodWeatherType
+	jmp z, AIGoodWeatherType
 
 	push hl
 	ld hl, RainDanceMoves
@@ -2773,14 +2773,47 @@ AI_Smart_RainDance:
 INCLUDE "data/battle/ai/rain_dance_moves.asm"
 
 AI_Smart_SunnyDay:
-; Encourage using the move when the Weather Rock is held.
+; don't use if already sunny
+	ld a, [wBattleWeather]
+	cp WEATHER_SUN
+	jr z, .discourage
+
+; don't use if choice locked
+	call DoesEnemyHaveChoiceItem
+	jr c, .discourage
+
+; even if we benefit from weather, don't use if we will be koed
+	call DoesEnemyHaveIntactFocusSashOrSturdy
+	jr c, .skipKOCheck
+	call CanPlayerKO
+	jr c, .discourage
+
+; discourage if we will be koed
+	call ShouldAIBoost
+	jr nc, .discourage
+
+.skipKOCheck
+; encourage if enemy has chlorophyll ability pokemon
+	ld a, [wEnemyMonSpecies]
+	push hl
+	ld hl, ChlorophyllPokemon_AI
+	call IsInByteArray
+	pop hl
+	jr c, .encourage
+
+; encourage if enemy has solar power ability pokemon
+	ld a, [wEnemyMonSpecies]
+	push hl
+	ld hl, SolarPowerPokemon_AI
+	call IsInByteArray
+	pop hl
+	jr c, .encourage
+
+; encourage using the move when the weather rock is held
 	ld a, [wEnemyMonItem]
 	cp WEATHER_ROCK
-	jr nz, .continue
+	jr z, .encourage
 
-	dec [hl]
-
-.continue
 ; Greatly discourage this move if it would favour the player type-wise.
 ; Particularly, if the player is a Fire-type.
 	ld a, [wBattleMonType1]
@@ -2797,8 +2830,19 @@ AI_Smart_SunnyDay:
 
 	push hl
 	ld hl, SunnyDayMoves
+	jr AI_Smart_WeatherMove
 
-	; fallthrough
+.encourage
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	ret
+
+.discourage
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	ret
 
 AI_Smart_WeatherMove:
 ; Rain Dance, Sunny Day
