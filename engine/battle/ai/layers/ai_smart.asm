@@ -2976,22 +2976,17 @@ AI_Smart_Swagger:
 
 AI_Smart_Trick:
 AI_Smart_Attract:
-; 80% chance to encourage this move during the first turn of player's Pokemon.
-; 80% chance to discourage this move otherwise.
+; 90% chance to encourage this move during the first turn of player's Pokemon.
+; otherwise discourage
 
 	ld a, [wPlayerTurnsTaken]
 	and a
 	jr z, .first_turn
-
-	call AI_80_20
-	ret c
-	inc [hl]
-	ret
+	jmp StandardDiscourage
 
 .first_turn
-	call Random
-	cp 79 percent - 1
-	ret nc
+	call AI_90_10
+	ret c
 	dec [hl]
 	ret
 
