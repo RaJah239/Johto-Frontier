@@ -2420,14 +2420,47 @@ AI_Smart_Sandstorm:
 	db -1 ; end
 
 AI_Smart_Hail:
-; Encourage using the move when the Weather Rock is held.
+; don't use if already hailing
+	ld a, [wBattleWeather]
+	cp WEATHER_HAIL
+	jr z, .discourage
+
+; don't use if choice locked
+	call DoesEnemyHaveChoiceItem
+	jr c, .discourage
+
+; even if we benefit from weather, don't use if we will be koed
+	call DoesEnemyHaveIntactFocusSashOrSturdy
+	jr c, .skipKOCheck
+	call CanPlayerKO
+	jr c, .discourage
+
+; discourage if we will be koed
+	call ShouldAIBoost
+	jr nc, .discourage
+
+.skipKOCheck
+; encourage if enemy has slush rush ability pokemon
+	ld a, [wEnemyMonSpecies]
+	push hl
+	ld hl, SlushRushPokemon_AI
+	call IsInByteArray
+	pop hl
+	jr c, .encourage
+
+; encourage if enemy has ice body ability pokemon
+	ld a, [wEnemyMonSpecies]
+	push hl
+	ld hl, IceBodyPokemon_AI
+	call IsInByteArray
+	pop hl
+	jr c, .encourage
+
+; encourage using the move when the weather rock is held
 	ld a, [wEnemyMonItem]
 	cp WEATHER_ROCK
-	jr nz, .continue
+	jr z, .encourage
 
-	dec [hl]
-
-.continue
 ; Greatly discourage this move if the player is immune to Hail damage.
 	ld a, [wBattleMonType1]
 	cp ICE
@@ -2453,6 +2486,8 @@ AI_Smart_Hail:
 	ret c
 
 .encourage
+	dec [hl]
+	dec [hl]
 	dec [hl]
 	ret
 

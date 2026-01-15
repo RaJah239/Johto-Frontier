@@ -57,6 +57,12 @@ SlushRushPokemon_AI:
     db DELIBIRD
     db -1 ; end
 
+IceBodyPokemon_AI:
+    db SNORUNT
+    db GLALIE
+    db REGICE
+    db -1 ; end
+
 ImmunityPokemon_AI:
 	db CHIKORITA
 	db BAYLEEF
