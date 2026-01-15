@@ -144,7 +144,103 @@ AI_Smart_EffectHandlers:
     dbw EFFECT_DEFOG,            AI_Smart_Defog ; added
     dbw EFFECT_TRICK_ROOM,       AI_Smart_TrickRoom ; added
     dbw EFFECT_BURN,             AI_Smart_Burn ; added
+    dbw EFFECT_TAUNT,            AI_Smart_Taunt ; added
 	db -1 ; end
+
+AI_Smart_Taunt:
+; if player is already taunted - discourage
+	ld a, [wPlayerTauntCount]
+	and a
+	jmp nz, .discourage
+
+; never use if player has safeguard
+	ld a, [wPlayerScreens]
+	bit SCREENS_SAFEGUARD, a
+	jmp nz, .discourage
+
+; if player can KO - discourage
+	call ShouldAIBoost
+	jmp nc, .discourage
+
+; if player is already set up - discourage
+	ld a, [wPlayerAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, .discourage
+	ld a, [wPlayerSAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .discourage
+
+; if we can KO - discourage
+	call CanAIKO
+	jr c, .discourage
+
+; if player has a setup move, status move, or healing move - encourage
+    ld b, EFFECT_TAUNT
+	call PlayerHasMoveEffect
+	jr c, .encourage
+    ld b, EFFECT_BULK_UP
+	call PlayerHasMoveEffect
+	jr c, .encourage
+    ld b, EFFECT_CALM_MIND
+	call PlayerHasMoveEffect
+	jr c, .encourage
+    ld b, EFFECT_CURSE
+	call PlayerHasMoveEffect
+	jr c, .encourage
+    ld b, EFFECT_ATTACK_UP_2
+	call PlayerHasMoveEffect
+	jr c, .encourage
+    ld b, EFFECT_SP_ATK_UP_2
+	call PlayerHasMoveEffect
+	jr c, .encourage
+    ld b, EFFECT_DRAGON_DANCE
+	call PlayerHasMoveEffect
+	jr c, .encourage
+    ld b, EFFECT_FURY_DRIVE
+	call PlayerHasMoveEffect
+	jr c, .encourage
+    ld b, EFFECT_QUIVER_DANCE
+	call PlayerHasMoveEffect
+	jr c, .encourage
+    ld b, EFFECT_PARALYZE
+	call PlayerHasMoveEffect
+	jr c, .encourage
+    ld b, EFFECT_BURN
+	call PlayerHasMoveEffect
+	jr c, .encourage
+    ld b, EFFECT_TOXIC
+	call PlayerHasMoveEffect
+	jr c, .encourage
+    ld b, EFFECT_HEAL
+	call PlayerHasMoveEffect
+	jr c, .encourage
+    ld b, EFFECT_LEECH_SEED
+	call PlayerHasMoveEffect
+	jr c, .encourage
+    ld b, EFFECT_STEALTH_ROCK
+	call PlayerHasMoveEffect
+	jr c, .encourage
+
+; if players last move had 0 power - 50% chance to encourage
+	ld a, [wLastPlayerMove]
+	call AIGetPlayerMove
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	jr nz, .discourage
+	call AI_50_50
+	jr c, .encourage
+
+; otherwise discourage
+.discourage
+	inc [hl]
+	inc [hl]
+	ret
+
+.encourage
+rept 12
+	dec [hl]
+endr
+	ret
 
 AI_Smart_Burn:
 ; if enemy is already statused - discourage
