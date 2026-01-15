@@ -110,7 +110,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_STOMP,            AI_Smart_Stomp ; good as is
 	dbw EFFECT_SOLARBEAM,        AI_Smart_Solarbeam ; good as is
 	dbw EFFECT_THUNDER,          AI_Smart_Thunder ; updated
-	dbw EFFECT_FLY,              AI_Smart_Fly
+	dbw EFFECT_FLY,              AI_Smart_Fly ; updated
 	dbw EFFECT_HAIL,             AI_Smart_Hail
 	dbw EFFECT_FACADE,           AI_Smart_Facade
 	dbw EFFECT_HEX,              AI_Smart_Hex
@@ -1429,6 +1429,11 @@ endr
 AI_Smart_Fly:
 ; Fly, Dig
 
+; discourage if player knows protect
+	ld b, EFFECT_PROTECT
+	call PlayerHasMoveEffect
+	jr c, .discourage
+
 ; Greatly encourage this move if the player is
 ; flying or underground, and slower than the enemy.
 
@@ -1436,12 +1441,18 @@ AI_Smart_Fly:
 	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
 	ret z
 
-	call AICompareSpeed
-	ret nc
+	call DoesAIOutSpeedPlayer
+	jr nc, .discourage
 
 	dec [hl]
 	dec [hl]
 	dec [hl]
+	ret
+
+.discourage
+	inc [hl]
+	inc [hl]
+	inc [hl]
 	ret
 
 AI_Smart_SuperFang:
