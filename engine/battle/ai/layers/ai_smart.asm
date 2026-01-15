@@ -92,10 +92,10 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_FORESIGHT,        AI_Smart_Foresight ; good as is
 	dbw EFFECT_PERISH_SONG,      AI_Smart_PerishSong ; updated
 	dbw EFFECT_SANDSTORM,        AI_Smart_Sandstorm ; updated
-	dbw EFFECT_ROLLOUT,          AI_Smart_Rollout
+	dbw EFFECT_ROLLOUT,          AI_Smart_Rollout ; good as is
 	dbw EFFECT_SWAGGER,          AI_Smart_Swagger ; updated
-	dbw EFFECT_ATTRACT,          AI_Smart_Attract
-	dbw EFFECT_SAFEGUARD,        AI_Smart_Safeguard
+	dbw EFFECT_ATTRACT,          AI_Smart_Attract ; good as is
+	dbw EFFECT_SAFEGUARD,        AI_Smart_Safeguard ; good as is
 	dbw EFFECT_BATON_PASS,       AI_Smart_BatonPass
 	dbw EFFECT_PURSUIT,          AI_Smart_Pursuit
 	dbw EFFECT_RAPID_SPIN,       AI_Smart_RapidSpin
@@ -2456,7 +2456,7 @@ AI_Smart_Hail:
 	db -1 ; end
 
 AI_Smart_Rollout:
-; Rollout, Fury Cutter
+; Rollout
 
 ; 80% chance to discourage this move if the enemy is in love, confused, or paralyzed.
 	ld a, [wEnemySubStatus1]
