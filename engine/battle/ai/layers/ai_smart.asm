@@ -137,7 +137,24 @@ AI_Smart_EffectHandlers:
     dbw EFFECT_TOXIC_SPIKES,     AI_Smart_ToxicSpikes ; added
     dbw EFFECT_STICKY_WEB,       AI_Smart_StickyWeb ; added
     dbw EFFECT_FLINCH_HIT,       AI_Smart_Flinch ; added
+    dbw EFFECT_DEFENSE_UP,       AI_Smart_LesserStatChange ; added
+    dbw EFFECT_FOCUS_ENERGY,     AI_Smart_LesserStatChange ; added
+    dbw EFFECT_SAFEGUARD,        AI_Smart_LesserStatChange ; added
+    dbw EFFECT_DEFENSE_CURL,     AI_Smart_LesserStatChange ; added
 	db -1 ; end
+
+AI_Smart_LesserStatChange:
+	call AICheckEnemyMaxHP
+	jr nc, .discourage
+	call ShouldAIBoost
+	jr nc, .discourage
+	ret
+
+.discourage
+	inc [hl]
+	inc [hl]
+	inc [hl]
+    ret
 
 AI_Smart_Flinch:
 ; do nothing if slower than player
