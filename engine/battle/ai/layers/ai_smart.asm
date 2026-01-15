@@ -55,6 +55,8 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_ACCURACY_DOWN,    AI_Smart_AccuracyDown ; updated
 	dbw EFFECT_ATTACK_DOWN,      AI_Smart_AttackDown ; updated
 	dbw EFFECT_ATTACK_DOWN_2,    AI_Smart_AttackDown ; updated
+	dbw EFFECT_DEFENSE_DOWN,     AI_Smart_DefenseDown ; newly added
+	dbw EFFECT_DEFENSE_DOWN_2,   AI_Smart_DefenseDown ; newly added
 	dbw EFFECT_RESET_STATS,      AI_Smart_ResetStats
 	dbw EFFECT_FORCE_SWITCH,     AI_Smart_ForceSwitch
 	dbw EFFECT_HEAL,             AI_Smart_Heal ; updated
@@ -130,6 +132,25 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_SP_ATK_UP_2,      AI_Smart_NastyPlot ; updated
 	dbw EFFECT_BULK_UP,          AI_Smart_BulkUp ; updated
 	db -1 ; end
+
+AI_Smart_DefenseDown:
+; discourage if enemy is immune to stat drops
+	ld a, [wBattleMonSpecies]
+	call DoesPokemonHaveClearBody
+	jr c, .discourage
+
+	call ShouldAIBoost
+	jr nc, .discourage
+
+	dec [hl]
+	ret
+
+.discourage
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	ret
 
 AI_Smart_AttackDown:
 ; discourage if enemy is immune to stat drops
