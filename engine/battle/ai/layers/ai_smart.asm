@@ -88,7 +88,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_THIEF,            AI_Smart_Thief ; updated
 	dbw EFFECT_MEAN_LOOK,        AI_Smart_MeanLook ; updated
 	dbw EFFECT_CURSE,            AI_Smart_Curse ; updated
-	dbw EFFECT_PROTECT,          AI_Smart_Protect
+	dbw EFFECT_PROTECT,          AI_Smart_Protect ; updated
 	dbw EFFECT_FORESIGHT,        AI_Smart_Foresight
 	dbw EFFECT_PERISH_SONG,      AI_Smart_PerishSong
 	dbw EFFECT_SANDSTORM,        AI_Smart_Sandstorm
@@ -2202,17 +2202,17 @@ AI_Smart_Curse:
 	ret
 
 AI_Smart_Protect:
-; Greatly discourage this move if the enemy already used Protect.
-	ld a, [wEnemyProtectCount]
-	and a
-	jr nz, .greatly_discourage
+; greatly discourage this move if the enemy already used protect
+	ld a, [wCurEnemyMove]
+	cp PROTECT
+	jr z, .greatly_discourage
 
-; Encourage this move if the player has charged a two-turn move.
+; encourage this move if the player has charged a two-turn move
 	ld a, [wPlayerSubStatus3]
 	bit SUBSTATUS_CHARGED, a
 	jr nz, .encourage
 
-; Encourage this move if the player is affected by Toxic, Leech Seed, or Curse.
+; encourage this move if the player is affected by toxic, leech seed, or curse
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_TOXIC, a
 	jr nz, .encourage
@@ -2223,24 +2223,28 @@ AI_Smart_Protect:
 	bit SUBSTATUS_CURSE, a
 	jr nz, .encourage
 
-; Discourage this move if the player's Rollout count is not boosted enough.
-	bit SUBSTATUS_ROLLOUT, a
-	jr z, .discourage
-	ld a, [wPlayerRolloutCount]
-	cp 3
+; discourage if at full HP
+	call AICheckEnemyMaxHP
 	jr c, .discourage
+
+; use for sure if below half HP
+	call AICheckEnemyHalfHP
+	jr nc, .use
 
 ; 80% chance to encourage this move otherwise.
 .encourage
 	call AI_80_20
 	ret c
-
+.use
+	dec [hl]
+	dec [hl]
 	dec [hl]
 	ret
 
 .greatly_discourage
 	inc [hl]
-
+	inc [hl]
+	inc [hl]
 .discourage
 	call Random
 	cp 8 percent
