@@ -130,7 +130,39 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_ATTACK_UP_2,      AI_Smart_SwordsDance ; updated
 	dbw EFFECT_SP_ATK_UP_2,      AI_Smart_NastyPlot ; updated
 	dbw EFFECT_BULK_UP,          AI_Smart_BulkUp ; updated
+	dbw EFFECT_BARRIER,          AI_Smart_Barrier ; added
 	db -1 ; end
+
+AI_Smart_Barrier:
+	call IsDefenseMaxed
+	jr nc, .continue
+	call IsSpecialDefenseMaxed
+	jr c, .discourage
+
+; don't boost if choice locked
+    call DoesEnemyHaveChoiceItem
+    jr c, .discourage
+
+.continue
+; if player outspeeds us and can ohko then don't use
+	call DoesAIOutSpeedPlayer
+	jr c, .encourage
+    call CanPlayerKO
+    jr c, .discourage
+
+; encourage enough to overcome encouragement to score a ko
+.encourage
+rept 12
+    dec [hl]
+endr
+	ret
+
+.discourage
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	ret
 
 AI_Smart_SpeedDown:
 ; discourage if enemy is immune to stat drops
