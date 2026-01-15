@@ -147,7 +147,18 @@ AI_Smart_EffectHandlers:
     dbw EFFECT_TAUNT,            AI_Smart_Taunt ; added
 	dbw EFFECT_SUCKER_PUNCH,     AI_Smart_SuckerPunch ; added
 	dbw EFFECT_FURY_DRIVE,       AI_Smart_FuryDrive; added
+	dbw EFFECT_RECOIL_HIT,       AI_Smart_RecoilHit
+	dbw EFFECT_RECOIL_DEF_DN_HIT,AI_Smart_RecoilHit
+	dbw EFFECT_FLARE_BLITZ,      AI_Smart_RecoilHit
+	dbw EFFECT_RECOIL_PARA_HIT,  AI_Smart_RecoilHit
 	db -1 ; end
+
+AI_Smart_RecoilHit:
+; discourage this move if enemy's hp is lower than 50%
+	call AICheckEnemyHalfHP
+	ret c
+	inc [hl]
+	ret
 
 AI_Smart_FuryDrive:
 ; just use once before attacking
