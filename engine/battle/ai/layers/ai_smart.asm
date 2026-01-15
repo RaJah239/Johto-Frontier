@@ -131,7 +131,25 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_SP_ATK_UP_2,      AI_Smart_NastyPlot ; updated
 	dbw EFFECT_BULK_UP,          AI_Smart_BulkUp ; updated
 	dbw EFFECT_BARRIER,          AI_Smart_Barrier ; added
+	dbw EFFECT_SPEED_UP_2,       AI_Smart_Agility ; added
 	db -1 ; end
+
+AI_Smart_Agility:
+; discourage if we are faster
+	call DoesAIOutSpeedPlayer
+	jmp c, StandardDiscourage
+
+; discourage if enemy is paralyzed
+	ld a, [wEnemyMonStatus]
+	and 1 << PAR
+	jmp nz, StandardDiscourage
+
+; discourage if we will be KOd
+	call CanPlayerKO
+	jmp c, StandardDiscourage
+
+; otherwise use
+	jmp StrongEncourage
 
 AI_Smart_Barrier:
 	call IsDefenseMaxed
