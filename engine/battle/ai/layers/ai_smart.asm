@@ -67,7 +67,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_SUPER_FANG,       AI_Smart_SuperFang ; good as is
 	dbw EFFECT_TRAP_TARGET,      AI_Smart_TrapTarget ; good as is
 	dbw EFFECT_CONFUSE,          AI_Smart_Confuse ; updated
-	dbw EFFECT_SP_DEF_UP_2,      AI_Smart_SpDefenseUp2
+	dbw EFFECT_SP_DEF_UP_2,      AI_Smart_SpDefenseUp2 ; updated
 	dbw EFFECT_REFLECT,          AI_Smart_Reflect ; updated
 	dbw EFFECT_PARALYZE,         AI_Smart_Paralyze
 	dbw EFFECT_SPEED_DOWN_HIT,   AI_Smart_SpeedDownHit
@@ -1350,8 +1350,9 @@ AI_Smart_Confuse:
 	ret
 
 AI_Smart_SpDefenseUp2:
-; Discourage this move if enemy's HP is lower than 50%.
-	call AICheckEnemyHalfHP
+; amnesia
+
+	call ShouldAIBoost
 	jr nc, .discourage
 
 ; Discourage this move if enemy's special defense level is higher than +3.
@@ -1359,43 +1360,24 @@ AI_Smart_SpDefenseUp2:
 	cp BASE_STAT_LEVEL + 4
 	jr nc, .discourage
 
-; 80% chance to greatly encourage this move if
-; enemy's Special Defense level is lower than +2,
+; greatly encourage this move if
+; enemy's Special Defense level is lower than +3,
 ; and the player's Pokémon is Special-oriented.
-	cp BASE_STAT_LEVEL + 2
+	cp BASE_STAT_LEVEL + 3
 	ret nc
 
-	push hl
-; Get the pointer for the player's Pokémon's base Attack
-	ld a, [wBattleMonSpecies]
-	ld hl, BaseData + BASE_ATK
-	ld bc, BASE_DATA_SIZE
-	call AddNTimes
-; Get the Pokémon's base Attack
-	ld a, BANK(BaseData)
-	call GetFarByte
-	ld d, a
-; Get the pointer for the player's Pokémon's base Special Attack
-	ld bc, BASE_SAT - BASE_ATK
-	add hl, bc
-; Get the Pokémon's base Special Attack
-	ld a, BANK(BaseData)
-	call GetFarByte
-	pop hl
-; If its base Attack is greater than its base Special Attack,
-; don't encourage this move.
-	cp d
-	ret c
-
-.encourage
-	call AI_80_20
-	ret c
-	dec [hl]
-	dec [hl]
+	call IsPlayerPhysicalOrSpecial
+	jr nc, .encourage
 	ret
 
 .discourage
 	inc [hl]
+	ret
+
+.encourage
+rept 8
+	dec [hl]
+endr
 	ret
 
 AI_Smart_Fly:
