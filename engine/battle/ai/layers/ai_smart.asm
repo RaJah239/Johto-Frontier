@@ -111,19 +111,19 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_SOLARBEAM,        AI_Smart_Solarbeam ; good as is
 	dbw EFFECT_THUNDER,          AI_Smart_Thunder ; updated
 	dbw EFFECT_FLY,              AI_Smart_Fly ; updated
-	dbw EFFECT_HAIL,             AI_Smart_Hail
-	dbw EFFECT_FACADE,           AI_Smart_Facade
-	dbw EFFECT_HEX,              AI_Smart_Hex
+	dbw EFFECT_HAIL,             AI_Smart_Hail ; updated
+	dbw EFFECT_FACADE,           AI_Smart_Facade ; good as is
+	dbw EFFECT_HEX,              AI_Smart_Hex ; good as is
 	dbw EFFECT_HURRICANE,        AI_Smart_Hurricane ; updated
-	dbw EFFECT_FAKE_OUT,         AI_Smart_Fake_Out
-	dbw EFFECT_FREEZE_DRY,       AI_Smart_FreezeDry
-	dbw EFFECT_BODY_PRESS,       AI_Smart_BodyPress
-	dbw EFFECT_AVALANCHE,        AI_Smart_Avalanche
-	dbw EFFECT_BRICK_BREAK,      AI_Smart_BrickBreak
+	dbw EFFECT_FAKE_OUT,         AI_Smart_Fake_Out ; good as is
+	dbw EFFECT_FREEZE_DRY,       AI_Smart_FreezeDry ; good as is
+	dbw EFFECT_BODY_PRESS,       AI_Smart_BodyPress ; good as is
+	dbw EFFECT_AVALANCHE,        AI_Smart_Avalanche ; good as is
+	dbw EFFECT_BRICK_BREAK,      AI_Smart_BrickBreak ; updated
 	dbw EFFECT_PARALYZE_HIT,     AI_Smart_ParalyzeTarget ; updated
-	dbw EFFECT_ACROBATICS,       AI_Smart_Acrobatics
-	dbw EFFECT_TRICK,            AI_Smart_Trick
-	dbw EFFECT_VENOSHOCK,        AI_Smart_Venoshock
+	dbw EFFECT_ACROBATICS,       AI_Smart_Acrobatics ; good as is
+	dbw EFFECT_TRICK,            AI_Smart_Trick ; good as is
+	dbw EFFECT_VENOSHOCK,        AI_Smart_Venoshock ; good as is
 	dbw EFFECT_DRAGON_DANCE,     AI_Smart_DragonDance ; updated
 	dbw EFFECT_CALM_MIND,        AI_Smart_CalmMind ; updated
 	dbw EFFECT_QUIVER_DANCE,     AI_Smart_QuiverDance ; updated
@@ -459,7 +459,7 @@ AI_Smart_Acrobatics:
 ; Greatly encourage this move if the user does not have an item.
 	ld a, [wEnemyMonItem]
 	and a
-	ret nz  ; Return if the enemy has a status condition
+	ret nz
 	dec [hl]
 	dec [hl]
 	ret
@@ -493,20 +493,19 @@ AI_Smart_ParalyzeTarget:
 	ret
 
 AI_Smart_BrickBreak:
-    ; 90% chance to greatly encourage this move if the player used LIGHT_SCREEN or REFLECT.
+; brick break
+; 90% chance to greatly encourage this move if the player used LIGHT_SCREEN or REFLECT.
 
-    ; Load the player's field conditions
+	; Load the player's field conditions
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
 	cp LIGHT_SCREEN
-	call z, EncourageBrickBreak
+	call z, .encourage
 	cp REFLECT
-	call z, EncourageBrickBreak
+	call z, .encourage
 	ret ; If neither LIGHT_SCREEN nor REFLECT is active, skip the encouragement
 
-EncourageBrickBreak:
-	; 90% chance to encourage this move
-	call Random
-	cp 12 percent ; 90% chance (256 * 0.9 = 230, so cp 256 - 230 = 26)
+.encourage
+	call AI_90_10
 	ret c
 	dec [hl]
 	dec [hl]
@@ -549,6 +548,7 @@ AI_Smart_Avalanche:
 	ret
 
 AI_Smart_FreezeDry:
+; 80% chance to encourage this move if the player is a water type
 	ld a, [wBattleMonType1]
 	cp WATER
 	jr z, .encourage
