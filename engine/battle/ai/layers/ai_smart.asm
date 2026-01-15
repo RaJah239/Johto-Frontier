@@ -61,7 +61,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_RESET_STATS,      AI_Smart_ResetStats ; good as is
 	dbw EFFECT_FORCE_SWITCH,     AI_Smart_ForceSwitch ; updated
 	dbw EFFECT_HEAL,             AI_Smart_Heal ; updated
-	dbw EFFECT_TOXIC,            AI_Smart_Toxic
+	dbw EFFECT_TOXIC,            AI_Smart_Toxic ; updated
 	dbw EFFECT_LIGHT_SCREEN,     AI_Smart_LightScreen
 	dbw EFFECT_OHKO,             AI_Smart_Ohko
 	dbw EFFECT_SUPER_FANG,       AI_Smart_SuperFang
@@ -1180,6 +1180,59 @@ endr
 	ret
 
 AI_Smart_Toxic:
+; never use if player has substitute
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
+	jr nz, .discourage
+
+; never use if player has safeguard
+	ld a, [wPlayerScreens]
+	bit SCREENS_SAFEGUARD, a
+	jr nz, .discourage
+
+; never use against steel types
+	ld a, [wBattleMonType1]
+	cp STEEL
+	jr z, .discourage
+	ld a, [wBattleMonType2]
+	cp STEEL
+	jr z, .discourage
+
+; never use against poison types
+	ld a, [wBattleMonType1]
+	cp POISON
+	jr z, .discourage
+	ld a, [wBattleMonType2]
+	cp POISON
+	jr z, .discourage
+
+; never use against Pokemon immune to status
+	ld a, [wBattleMonSpecies]
+	push hl
+	ld hl, SerenityPokemon_AI
+	call IsInByteArray
+	pop hl
+	jr c, .discourage
+
+; never use against Pokemon with magic guard
+	ld a, [wBattleMonSpecies]
+	call DoesPokemonHaveMagicGuard
+	jr c, .discourage
+
+; don't use if player below 50% HP
+	call AICheckPlayerHalfHP
+	jr nc, .discourage
+
+; encourage slightly if we get here
+	dec [hl]
+	ret
+
+.discourage
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	ret
+
 AI_Smart_LeechSeed:
 ; Discourage this move if player's HP is below 50%.
 
