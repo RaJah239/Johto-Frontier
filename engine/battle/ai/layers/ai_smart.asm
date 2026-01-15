@@ -143,73 +143,30 @@ AI_Smart_StealthRock:
 	ld a, [wPlayerScreens]
 	bit SCREENS_STEALTH_ROCK, a
 	jmp nz, StandardDiscourage
-
-; Don't use if enemy has rapid spin or defog
-	ld a, [wLastPlayerMove]
-	cp RAPID_SPIN
-	jmp z, StandardDiscourage
-	cp DEFOG
-	jmp z, StandardDiscourage
-
-; don't use if player has only one pokemon left
-	push hl
-	call AICheckLastPlayerMon
-	pop hl
-	jmp z, StandardDiscourage
-
-; use otherwise
-    jmp DoIt
+	jr AI_Smart_Hazards
 
 AI_Smart_ToxicSpikes:
 ; don't use if already up
 	ld a, [wPlayerScreens]
 	bit SCREENS_TOXIC_SPIKES, a
 	jmp nz, StandardDiscourage
-
-; Don't use if enemy has rapid spin or defog
-	ld a, [wLastPlayerMove]
-	cp RAPID_SPIN
-	jmp z, StandardDiscourage
-	cp DEFOG
-	jmp z, StandardDiscourage
-
-; don't use if player has only one pokemon left
-	push hl
-	call AICheckLastPlayerMon
-	pop hl
-	jmp z, StandardDiscourage
-
-; use otherwise
-	jmp StrongEncourage
+	jr AI_Smart_Hazards
 
 AI_Smart_StickyWeb:
 ; don't use if already up
 	ld a, [wPlayerScreens]
 	bit SCREENS_STICKY_WEB, a
 	jmp nz, StandardDiscourage
-
-; Don't use if enemy has rapid spin or defog
-	ld a, [wLastPlayerMove]
-	cp RAPID_SPIN
-	jmp z, StandardDiscourage
-	cp DEFOG
-	jmp z, StandardDiscourage
-
-; don't use if player has only one pokemon left
-	push hl
-	call AICheckLastPlayerMon
-	pop hl
-	jmp z, StandardDiscourage
-
-; use otherwise
-	jmp DoIt
+	jr AI_Smart_Hazards
 
 AI_Smart_Spikes:
 ; don't use if already up
 	ld a, [wPlayerScreens]
 	bit SCREENS_SPIKES, a
 	jmp nz, StandardDiscourage
+	; fallthrough
 
+AI_Smart_Hazards:
 ; Don't use if enemy has rapid spin or defog
 	ld a, [wLastPlayerMove]
 	cp RAPID_SPIN
