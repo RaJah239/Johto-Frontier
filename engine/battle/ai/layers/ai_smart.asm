@@ -150,7 +150,18 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_RECOIL_DEF_DN_HIT,AI_Smart_RecoilHit
 	dbw EFFECT_FLARE_BLITZ,      AI_Smart_RecoilHit
 	dbw EFFECT_RECOIL_PARA_HIT,  AI_Smart_RecoilHit
+	dbw EFFECT_CLOSE_COMBAT,     AI_Smart_CloseCombat
 	db -1 ; end
+
+AI_Smart_CloseCombat:
+; 60% chance to discourage this move if enemy's HP is at least 50%.
+	call AICheckEnemyHalfHP
+	ret nc
+	call Random
+	cp 39 percent + 1
+	ret c
+	inc [hl]
+	ret
 
 AI_Smart_RecoilHit:
 ; discourage this move if enemy's hp is lower than 50%
