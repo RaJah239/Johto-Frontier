@@ -4301,38 +4301,7 @@ BattleCommand_EvasionUp2:
 	; fallthrough
 
 BattleCommand_StatUp:
-	call RaiseStat
-	ld a, [wFailedMessage]
-	and a
-	ret nz
 	; fallthrough
-
-MinimizeDropSub:
-; Lower the substitute if we're minimizing
-
-	ld bc, wPlayerMinimized
-	ld hl, DropPlayerSub
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .do_player
-	ld bc, wEnemyMinimized
-	ld hl, DropEnemySub
-.do_player
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	cp MINIMIZE
-	ret nz
-
-	ld a, $1
-	ld [bc], a
-	call _CheckBattleScene
-	ret nc
-
-	xor a
-	ldh [hBGMapMode], a
-	call CallBattleCore
-	call WaitBGMap
-	jmp BattleCommand_MoveDelay
 
 RaiseStat:
 	ld a, b

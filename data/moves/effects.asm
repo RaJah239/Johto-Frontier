@@ -1441,26 +1441,6 @@ Gust:
 	checkfaint
 	endmove
 
-Stomp:
-	usedmovetext
-	doturn
-	critical
-	damagestats
-	damagecalc
-	stab
-	damagevariation
-	doubleminimizedamage
-	checkhit
-	effectchance
-	moveanim
-	failuretext
-	applydamage
-	criticaltext
-	supereffectivetext
-	checkfaint
-	flinchtarget
-	endmove
-
 Solarbeam:
 	checkcharge
 	doturn

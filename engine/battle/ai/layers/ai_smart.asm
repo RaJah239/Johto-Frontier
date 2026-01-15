@@ -107,7 +107,6 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_MIRROR_COAT,      AI_Smart_MirrorCoat ; updated
 	dbw EFFECT_EARTHQUAKE,       AI_Smart_Earthquake ; good as is
 	dbw EFFECT_GUST,             AI_Smart_Gust ; good as is
-	dbw EFFECT_STOMP,            AI_Smart_Stomp ; good as is
 	dbw EFFECT_SOLARBEAM,        AI_Smart_Solarbeam ; good as is
 	dbw EFFECT_THUNDER,          AI_Smart_Thunder ; updated
 	dbw EFFECT_FLY,              AI_Smart_Fly ; updated
@@ -3432,19 +3431,6 @@ AI_Smart_Gust:
 	ret c
 	call AI_50_50
 	ret c
-	dec [hl]
-	ret
-
-AI_Smart_Stomp:
-; 80% chance to encourage this move if the player has used Minimize.
-
-	ld a, [wPlayerMinimized]
-	and a
-	ret z
-
-	call AI_80_20
-	ret c
-
 	dec [hl]
 	ret
 

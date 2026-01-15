@@ -530,13 +530,13 @@ wWhichMonFaintedFirst:: db
 wLastPlayerCounterMove:: db
 wLastEnemyCounterMove:: db
 
-wEnemyMinimized:: db
+wEnemyMinimized:: db ; unused - can be removed
 
 wAlreadyFailed:: db
 
 wBattleParticipantsIncludingFainted:: db
 wBattleLowHealthAlarm:: db
-wPlayerMinimized:: db
+wPlayerMinimized:: db ; unused - can be removed
 wPlayerScreens::
 ; bit
 ; 0 spikes

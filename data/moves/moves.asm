@@ -36,7 +36,7 @@ Moves:
 	move ICICLE_CRASH, EFFECT_FLINCH_HIT,         85, ICE,           PHYSICAL,  95, 24,  30
 	move POWER_GEM,    EFFECT_SP_DEF_DOWN_HIT,    80, ROCK,          SPECIAL,  100, 24,  20
 	move VINE_WHIP,    EFFECT_DEFENSE_DOWN_HIT,   40, GRASS,         PHYSICAL, 100, 40,  10
-	move STOMP,        EFFECT_STOMP,              65, NORMAL,        PHYSICAL, 100, 32,  30
+	move STOMP,        EFFECT_FLINCH_HIT,         65, NORMAL,        PHYSICAL, 100, 32,  30
 	move ROOST,        EFFECT_HEAL,                0, FLYING,        STATUS,   100, 24,   0
 	move FOCUS_BLAST,  EFFECT_SP_DEF_DOWN_HIT,   120, FIGHTING,      SPECIAL,  70,   8,  30
 	move STICKY_WEB,   EFFECT_STICKY_WEB,          0, BUG,           STATUS,   100, 32,   0
@@ -120,7 +120,7 @@ Moves:
 	move GUNK_SHOT,    EFFECT_POISON_HIT,        120, POISON,        PHYSICAL,  85, 16,  20
 	move RECOVER,      EFFECT_HEAL,                0, NORMAL,        STATUS,   100, 24,   0
 	move HARDEN,       EFFECT_DEFENSE_UP,          0, NORMAL,        STATUS,   100, 40,   0
-	move MINIMIZE,     EFFECT_EVASION_UP,          0, NORMAL,        STATUS,   100, 32,   0 ; too much trouble to replace
+	move MINIMIZE,     EFFECT_EVASION_UP,          0, NORMAL,        STATUS,   100, 32,   0 ; to replace
 	move SMOKESCREEN,  EFFECT_ACCURACY_DOWN,       0, NORMAL,        STATUS,   100, 32,   0
 	move CONFUSE_RAY,  EFFECT_CONFUSE,             0, GHOST,         STATUS,   100, 16,   0
 	move WILD_CHARGE,  EFFECT_RECOIL_PARA_HIT,   120, ELECTRIC,      PHYSICAL, 100, 24,  10

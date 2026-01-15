@@ -121,7 +121,6 @@ MoveEffectsPointers:
 	dw MirrorCoat
 	dw Earthquake
 	dw Gust
-	dw Stomp
 	dw Solarbeam
 	dw Thunder
 	dw Teleport
