@@ -1530,6 +1530,12 @@ AI_90_10:
 	cp 10 percent
 	ret
 
+AIDismissMove:
+	ld a, [hl]
+	add 10
+	ld [hl], a
+	ret
+
 AIGetMoveAttributes:
 ; Load attributes of move a into enemy move struct.
 

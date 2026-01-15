@@ -81,9 +81,9 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_SNORE,            AI_Smart_Snore ; updated
 	dbw EFFECT_SLEEP_TALK,       AI_Smart_SleepTalk ; updated
 	dbw EFFECT_DESTINY_BOND,     AI_Smart_DestinyBond ; updated
-	dbw EFFECT_REVERSAL,         AI_Smart_Reversal
-	dbw EFFECT_SPITE,            AI_Smart_Spite
-	dbw EFFECT_HEAL_BELL,        AI_Smart_HealBell
+	dbw EFFECT_REVERSAL,         AI_Smart_Reversal ; good as is
+	dbw EFFECT_SPITE,            AI_Smart_Spite ; good as is
+	dbw EFFECT_HEAL_BELL,        AI_Smart_HealBell ; updated
 	dbw EFFECT_PRIORITY_HIT,     AI_Smart_PriorityHit
 	dbw EFFECT_THIEF,            AI_Smart_Thief
 	dbw EFFECT_MEAN_LOOK,        AI_Smart_MeanLook
@@ -1862,9 +1862,8 @@ AI_Smart_Reversal:
 	ret
 
 AI_Smart_HealBell:
-; Dismiss this move if none of the opponent's Pokemon is statused.
-; Encourage this move if the enemy is statused.
-; 50% chance to greatly encourage this move if the enemy is fast asleep.
+; dismiss this move if none of the enemy's pokemon are statused
+; encourage this move if any of the enemy's pokemon are statused
 
 	push hl
 	ld a, [wOTPartyCount]
@@ -1896,27 +1895,15 @@ AI_Smart_HealBell:
 	pop hl
 	ld a, c
 	and a
-	jr z, .no_status
+	jr nz, .encourage
 
 	ld a, [wEnemyMonStatus]
 	and a
-	jr z, .ok
-	dec [hl]
-.ok
-	and SLP_MASK
-	ret z
-	call AI_50_50
-	ret c
-	dec [hl]
+	jmp z, AIDismissMove
+
+.encourage
 	dec [hl]
 	ret
-
-.no_status
-	ld a, [wEnemyMonStatus]
-	and a
-	ret nz
-	jmp AIDiscourageMove
-
 
 AI_Smart_PriorityHit:
 	call AICompareSpeed
