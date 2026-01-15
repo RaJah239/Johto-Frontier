@@ -133,7 +133,76 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_BARRIER,          AI_Smart_Barrier ; added
 	dbw EFFECT_SPEED_UP_2,       AI_Smart_Agility ; added
 	dbw EFFECT_SPIKES,           AI_Smart_Spikes ; added
+	dbw EFFECT_STEALTH_ROCK,     AI_Smart_StealthRock ; added
+    dbw EFFECT_TOXIC_SPIKES,     AI_Smart_ToxicSpikes ; added
+    dbw EFFECT_STICKY_WEB,       AI_Smart_StickyWeb ; added
 	db -1 ; end
+
+AI_Smart_StealthRock:
+; don't use if already up
+	ld a, [wPlayerScreens]
+	bit SCREENS_STEALTH_ROCK, a
+	jmp nz, StandardDiscourage
+
+; Don't use if enemy has rapid spin or defog
+	ld a, [wLastPlayerMove]
+	cp RAPID_SPIN
+	jmp z, StandardDiscourage
+	cp DEFOG
+	jmp z, StandardDiscourage
+
+; don't use if player has only one pokemon left
+	push hl
+	call AICheckLastPlayerMon
+	pop hl
+	jmp z, StandardDiscourage
+
+; use otherwise
+    jmp DoIt
+
+AI_Smart_ToxicSpikes:
+; don't use if already up
+	ld a, [wPlayerScreens]
+	bit SCREENS_TOXIC_SPIKES, a
+	jmp nz, StandardDiscourage
+
+; Don't use if enemy has rapid spin or defog
+	ld a, [wLastPlayerMove]
+	cp RAPID_SPIN
+	jmp z, StandardDiscourage
+	cp DEFOG
+	jmp z, StandardDiscourage
+
+; don't use if player has only one pokemon left
+	push hl
+	call AICheckLastPlayerMon
+	pop hl
+	jmp z, StandardDiscourage
+
+; use otherwise
+	jmp StrongEncourage
+
+AI_Smart_StickyWeb:
+; don't use if already up
+	ld a, [wPlayerScreens]
+	bit SCREENS_STICKY_WEB, a
+	jmp nz, StandardDiscourage
+
+; Don't use if enemy has rapid spin or defog
+	ld a, [wLastPlayerMove]
+	cp RAPID_SPIN
+	jmp z, StandardDiscourage
+	cp DEFOG
+	jmp z, StandardDiscourage
+
+; don't use if player has only one pokemon left
+	push hl
+	call AICheckLastPlayerMon
+	pop hl
+	jmp z, StandardDiscourage
+
+; use otherwise
+	jmp DoIt
 
 AI_Smart_Spikes:
 ; don't use if already up
@@ -155,7 +224,7 @@ AI_Smart_Spikes:
 	jmp z, StandardDiscourage
 
 ; use otherwise
-	jmp StrongEncourage
+	jmp DoIt
 
 AI_Smart_Agility:
 ; discourage if we are faster
