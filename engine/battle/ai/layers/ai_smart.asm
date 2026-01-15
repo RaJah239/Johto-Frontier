@@ -95,7 +95,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_SANDSTORM,        AI_Smart_Sandstorm
 	dbw EFFECT_ENDURE,           AI_Smart_Endure
 	dbw EFFECT_ROLLOUT,          AI_Smart_Rollout
-	dbw EFFECT_SWAGGER,          AI_Smart_Swagger
+	dbw EFFECT_SWAGGER,          AI_Smart_Swagger ; updated
 	dbw EFFECT_ATTRACT,          AI_Smart_Attract
 	dbw EFFECT_SAFEGUARD,        AI_Smart_Safeguard
 	dbw EFFECT_BATON_PASS,       AI_Smart_BatonPass
@@ -2354,8 +2354,11 @@ AI_Smart_Rollout:
 	inc [hl]
 	ret
 
-AI_Smart_Trick:
 AI_Smart_Swagger:
+	call AI_Smart_Confuse
+	; fallthrough
+
+AI_Smart_Trick:
 AI_Smart_Attract:
 ; 80% chance to encourage this move during the first turn of player's Pokemon.
 ; 80% chance to discourage this move otherwise.
