@@ -145,7 +145,23 @@ AI_Smart_EffectHandlers:
     dbw EFFECT_TRICK_ROOM,       AI_Smart_TrickRoom ; added
     dbw EFFECT_BURN,             AI_Smart_Burn ; added
     dbw EFFECT_TAUNT,            AI_Smart_Taunt ; added
+	dbw EFFECT_SUCKER_PUNCH,     AI_Smart_SuckerPunch ; added
 	db -1 ; end
+
+AI_Smart_SuckerPunch:
+; if the players last move had no power - 50% chance to discourage.
+	ld a, [wCurPlayerMove]
+	call AIGetPlayerMove
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	jmp nz, AI_Smart_PriorityHit
+	call AI_50_50
+	jmp c, AI_Smart_PriorityHit
+
+rept 12
+	inc [hl]
+endr
+	ret
 
 AI_Smart_Taunt:
 ; if player is already taunted - discourage
