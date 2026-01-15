@@ -85,7 +85,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_SPITE,            AI_Smart_Spite ; good as is
 	dbw EFFECT_HEAL_BELL,        AI_Smart_HealBell ; updated
 	dbw EFFECT_PRIORITY_HIT,     AI_Smart_PriorityHit ; updated
-	dbw EFFECT_THIEF,            AI_Smart_Thief
+	dbw EFFECT_THIEF,            AI_Smart_Thief ; updated
 	dbw EFFECT_MEAN_LOOK,        AI_Smart_MeanLook
 	dbw EFFECT_CURSE,            AI_Smart_Curse
 	dbw EFFECT_PROTECT,          AI_Smart_Protect
@@ -455,6 +455,7 @@ AI_Smart_Venoshock:
 	dec [hl]
 	ret
 
+AI_Smart_Thief:
 AI_Smart_Acrobatics:
 ; Greatly encourage this move if the user does not have an item.
 	ld a, [wEnemyMonItem]
@@ -1989,14 +1990,6 @@ AI_Smart_PriorityHit:
 rept 12
 	dec [hl]
 endr
-	ret
-
-AI_Smart_Thief:
-; Don't use Thief unless it's the only move available.
-
-	ld a, [hl]
-	add $1e
-	ld [hl], a
 	ret
 
 AI_Smart_Disable:
