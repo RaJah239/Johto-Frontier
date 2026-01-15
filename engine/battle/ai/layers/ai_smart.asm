@@ -104,7 +104,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_RAIN_DANCE,       AI_Smart_RainDance ; updated
 	dbw EFFECT_SUNNY_DAY,        AI_Smart_SunnyDay ; updated
 	dbw EFFECT_BELLY_DRUM,       AI_Smart_BellyDrum ; updated
-	dbw EFFECT_MIRROR_COAT,      AI_Smart_MirrorCoat
+	dbw EFFECT_MIRROR_COAT,      AI_Smart_MirrorCoat ; updated
 	dbw EFFECT_EARTHQUAKE,       AI_Smart_Earthquake
 	dbw EFFECT_GUST,             AI_Smart_Gust
 	dbw EFFECT_STOMP,            AI_Smart_Stomp
@@ -2928,65 +2928,19 @@ AI_Smart_BellyDrum:
 	jmp StandardDiscourage
 
 AI_Smart_MirrorCoat:
-	push hl
-	ld hl, wPlayerUsedMoves
-	ld c, NUM_MOVES
-	ld b, 0
-
-.playermoveloop
-	ld a, [hli]
-	and a
-	jr z, .skipmove
-
-	call AIGetEnemyMove
-
-	ld a, [wEnemyMoveStruct + MOVE_POWER]
-	and a
-	jr z, .skipmove
-
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	cp SPECIAL
-	jr c, .skipmove
-
-	inc b
-
-.skipmove
-	dec c
-	jr nz, .playermoveloop
-
-	pop hl
-	ld a, b
-	and a
-	jr z, .discourage
-
-	cp 3
-	jr nc, .encourage
+	call BattleRandom
+	cp 10 percent + 1
+	ret c
 
 	ld a, [wLastPlayerCounterMove]
-	and a
-	jr z, .done
-
 	call AIGetEnemyMove
-
-	ld a, [wEnemyMoveStruct + MOVE_POWER]
-	and a
-	jr z, .done
-
 	ld a, [wEnemyMoveStruct + MOVE_TYPE]
 	cp SPECIAL
-	jr c, .done
+	ret c
 
-.encourage
-	call Random
-	cp 39 percent + 1
-	jr c, .done
+rept 10
 	dec [hl]
-
-.done
-	ret
-
-.discourage
-	inc [hl]
+endr
 	ret
 
 AI_Smart_Gust:
