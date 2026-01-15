@@ -74,7 +74,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_SUBSTITUTE,       AI_Smart_Substitute ; updated
 	dbw EFFECT_HYPER_BEAM,       AI_Smart_HyperBeam ; updated
 	dbw EFFECT_LEECH_SEED,       AI_Smart_LeechSeed ; updated
-	dbw EFFECT_DISABLE,          AI_Smart_Disable
+	dbw EFFECT_DISABLE,          AI_Smart_Disable ; updated
 	dbw EFFECT_COUNTER,          AI_Smart_Counter
 	dbw EFFECT_ENCORE,           AI_Smart_Encore
 	dbw EFFECT_PAIN_SPLIT,       AI_Smart_PainSplit
@@ -1966,31 +1966,33 @@ AI_Smart_Thief:
 	ret
 
 AI_Smart_Disable:
+; 90% chance to discourage this move if player is faster than enemy
+; (no chance to encourage.)
 	call AICompareSpeed
 	jr nc, .discourage
 
+; encourage this move if the player's last used move is in the list of useful moves
 	push hl
 	ld a, [wLastPlayerCounterMove]
 	ld hl, UsefulMoves
 	call IsInByteArray
-
 	pop hl
 	jr nc, .notencourage
-
-	call Random
-	cp 39 percent + 1
-	ret c
 	dec [hl]
 	ret
 
+; if the player's last used move was not in the useful list,
+; do nothing if it was a damaging move.
 .notencourage
+	ld a, [wLastPlayerCounterMove]
+	call AIGetMoveAttributes
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
 	ret nz
 
+; else, 90% chance to discourage this move
 .discourage
-	call Random
-	cp 8 percent
+	call AI_90_10
 	ret c
 	inc [hl]
 	ret

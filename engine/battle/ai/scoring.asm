@@ -1529,3 +1529,23 @@ AI_90_10:
 	call Random
 	cp 10 percent
 	ret
+
+AIGetMoveAttributes:
+; Load attributes of move a into enemy move struct.
+
+	push hl
+	push de
+	push bc
+	dec a
+	ld hl, Moves
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+
+	ld de, wEnemyMoveStruct
+	ld a, BANK(Moves)
+	call FarCopyBytes
+
+	pop bc
+	pop de
+	pop hl
+	ret
