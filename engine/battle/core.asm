@@ -6607,6 +6607,11 @@ ApplyPrzEffectOnSpeed:
 	ldh a, [hBattleTurn]
 	and a
 	jr z, .enemy
+
+	ld a, [wBattleMonSpecies]
+	call DoesMonHaveClearBody
+	ret c
+
 	ld a, [wBattleMonStatus]
 	and 1 << PAR
 	ret z
@@ -6628,6 +6633,10 @@ ApplyPrzEffectOnSpeed:
 	ret
 
 .enemy
+	ld a, [wEnemyMonSpecies]
+	call DoesMonHaveClearBody
+	ret c
+
 	ld a, [wEnemyMonStatus]
 	and 1 << PAR
 	ret z
@@ -6654,6 +6663,10 @@ ApplyBrnEffectOnAttack:
 	jr z, .enemy
 
 	ld a, [wBattleMonSpecies]
+	call DoesMonHaveClearBody
+	ret c
+
+	ld a, [wBattleMonSpecies]
 	call DoesMonHaveGuts
 	ret c
 
@@ -6677,6 +6690,10 @@ ApplyBrnEffectOnAttack:
 
 .enemy
 	ld a, [wEnemyMonSpecies]
+	call DoesMonHaveClearBody
+	ret c
+
+	ld a, [wEnemyMonSpecies]
 	call DoesMonHaveGuts
 	ret c
 
@@ -6697,6 +6714,31 @@ ApplyBrnEffectOnAttack:
 .enemy_ok
 	ld [hl], b
 	ret
+
+DoesMonHaveClearBody:
+	push hl
+	push de
+	push bc
+	ld hl, Core_ClearBodyPokemon
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jr c, .yes
+	xor a
+	ret
+
+.yes
+	scf
+	ret
+
+Core_ClearBodyPokemon:
+	db TENTACOOL
+	db TENTACRUEL
+	db REGIROCK
+	db REGICE
+	db REGISTEEL
+    db -1 ; end
 
 DoesMonHaveGuts:
 	push hl
