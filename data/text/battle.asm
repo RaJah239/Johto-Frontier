@@ -65,8 +65,8 @@ SerenityText:
 
 ClearBodyText:
 	text "<TARGET>'s"
-	line "Clear Body negates"
-	cont "stat drops!"
+	line "Clear Body"
+	cont "activated!"
 	prompt
 
 BecameHealthyText:
@@ -885,9 +885,10 @@ RockHeadText:
 	cont "recoil!"
 	prompt
 
-ProtectedByMistText:
+StatsCantDropText:
 	text "<TARGET>'s"
-	line "protected by MIST."
+	line "stats can't be"
+	cont "reduced!"
 	prompt
 
 GettingPumpedText:

@@ -4731,7 +4731,7 @@ BattleCommand_StatDownFailText:
 	dec a
 	jmp z, TryPrintButItFailed
 	dec a
-	ld hl, ProtectedByMistText
+	ld hl, StatsCantDropText
 	jmp z, StdBattleTextbox
 	ld a, [wLoweredStat]
 	and $f
