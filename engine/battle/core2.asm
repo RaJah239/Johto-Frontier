@@ -2860,9 +2860,23 @@ FieldInfoBox2:
 .enemy_leech_seed
 	ld a, [wEnemySubStatus4]
 	bit SUBSTATUS_LEECH_SEED, a
-	ret z
+	jr z, .player_mist
 	lb bc, 11, 13
-	jmp FieldInfoBoxStatus
+	call FieldInfoBoxStatus
+
+.player_mist
+    ld de, FieldTexts.mist
+    ld a, [wPlayerMistCount]
+    and a
+    jr z, .enemy_mist
+    lb bc, 1, 14
+    call FieldInfoBoxStatus
+.enemy_mist
+    ld a, [wEnemyMistCount]
+    and a
+	ret z
+    lb bc, 11, 14
+    jmp FieldInfoBoxStatus
 
 FieldInfoBox1Reflect: ; input: bc -> coords
 	ld hl, wPlayerScreens
@@ -3173,6 +3187,9 @@ FieldTexts:
 
 .safeguard:
 	db "S.Guard@"
+
+.mist:
+	db "Mist@"
 
 .confused:
 	db "Confused@"
