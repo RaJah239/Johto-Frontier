@@ -4097,6 +4097,30 @@ BattleCommand_BurnTarget:
 	ret c
 	; fallthrough
 
+; =======================
+; === Ability: Kindle ===
+; =======================
+; certain Pokemon always burn with flamethrower
+	; check move
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp FLAMETHROWER
+	jr nz, .done
+	
+	; check user species
+	call GetCurrentMon
+	ld hl, KindlePokemon
+	call IsInByteArray
+	jr c, .burn
+	jr .done
+
+	; 100% burn foe
+.burn
+	xor a
+	ld [wEffectFailed], a
+	; fallthrough
+
+.done
 	ld a, [wEffectFailed]
 	and a
 	ret nz
@@ -4116,6 +4140,8 @@ BattleCommand_BurnTarget:
 	call StdBattleTextbox
 
 	farjp UseHeldStatusHealingItem
+
+INCLUDE "data/abilities/kindle_mons.asm"
 
 Defrost:
 	ld a, [hl]

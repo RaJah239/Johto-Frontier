@@ -143,6 +143,7 @@ AI_Smart_EffectHandlers:
     dbw EFFECT_DEFOG,            AI_Smart_Defog ; added
     dbw EFFECT_TRICK_ROOM,       AI_Smart_TrickRoom ; added
     dbw EFFECT_BURN,             AI_Smart_Burn ; added
+    dbw EFFECT_BURN_HIT,         AI_Smart_Burn
     dbw EFFECT_TAUNT,            AI_Smart_Taunt ; added
 	dbw EFFECT_SUCKER_PUNCH,     AI_Smart_SuckerPunch ; added
 	dbw EFFECT_FURY_DRIVE,       AI_Smart_FuryDrive; added
