@@ -12,6 +12,7 @@ CheckBoostingAbilities:
 	call HandleMentalFocus
 	call HandleRainSurge
 	call HandleShieldDust
+	call HandleSharpness
 	ret
 
 HandleGuts:
@@ -171,7 +172,7 @@ HandleIronFist:
 	call IsInByteArray
 	ret nc
 
-	jr ThirtyPercentBoost
+	jmp ThirtyPercentBoost
 
 INCLUDE "data/abilities/iron_fist_mons.asm"
 
@@ -223,6 +224,22 @@ HandleShieldDust:
 	jr FiftyPercentBoost
 
 INCLUDE "data/abilities/shield_dust_mons.asm"
+
+HandleSharpness:
+	call GetCurrentMon
+	ld hl, SharpnessPokemon
+	call IsInByteArray
+	ret nc
+
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	ld hl, SharpMoves
+	call IsInByteArray
+	ret nc
+
+	jr FiftyPercentBoost
+
+INCLUDE "data/abilities/sharpness_mons.asm"
 
 FiftyPercentNerf:
 	ld a, 50
@@ -279,4 +296,15 @@ PunchingMoves:
 	db MACH_PUNCH
 	db SHADOW_PUNCH
 	db METEOR_MASH
+	db -1 ; end
+
+SharpMoves:
+	db CUT
+	db NIGHT_SLASH
+	db SLASH
+	db CROSS_CHOP
+	db LEAF_BLADE
+	db PSYCHO_CUT
+	db X_SCISSOR
+	db THROAT_CHOP
 	db -1 ; end
