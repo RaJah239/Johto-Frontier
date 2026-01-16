@@ -834,7 +834,7 @@ EnemyUsedXAccuracy:
 EnemyUsedGuardSpec:
 	call AIUsedItemSound
 	ld hl, wEnemySubStatus4
-	set SUBSTATUS_MIST, [hl]
+	set SCREENS_MIST, [hl]
 	ld a, GUARD_SPEC
 	jr PrintText_UsedItemOn_AND_AIUpdateHUD
 

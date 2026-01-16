@@ -186,6 +186,11 @@ AI_Basic:
 	bit SCREENS_SAFEGUARD, a
 	jmp z, .checkmove
 
+; Dismiss Mist if it's already active.
+	ld a, [wPlayerScreens]
+	bit SCREENS_MIST, a
+	jmp z, .checkmove
+
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
 	jmp z, .checkmove

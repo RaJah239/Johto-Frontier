@@ -95,7 +95,6 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_ROLLOUT,          AI_Smart_Rollout ; good as is
 	dbw EFFECT_SWAGGER,          AI_Smart_Swagger ; updated
 	dbw EFFECT_ATTRACT,          AI_Smart_Attract ; good as is
-	dbw EFFECT_SAFEGUARD,        AI_Smart_Safeguard ; good as is
 	dbw EFFECT_BATON_PASS,       AI_Smart_BatonPass ; updated
 	dbw EFFECT_PURSUIT,          AI_Smart_Pursuit ; updated
 	dbw EFFECT_RAPID_SPIN,       AI_Smart_RapidSpin ; updated
@@ -139,6 +138,7 @@ AI_Smart_EffectHandlers:
     dbw EFFECT_DEFENSE_UP,       AI_Smart_LesserStatChange ; added
     dbw EFFECT_FOCUS_ENERGY,     AI_Smart_LesserStatChange ; added
     dbw EFFECT_SAFEGUARD,        AI_Smart_LesserStatChange ; added
+    dbw EFFECT_MIST,             AI_Smart_LesserStatChange
     dbw EFFECT_DEFENSE_CURL,     AI_Smart_LesserStatChange ; added
     dbw EFFECT_DEFOG,            AI_Smart_Defog ; added
     dbw EFFECT_TRICK_ROOM,       AI_Smart_TrickRoom ; added
@@ -543,6 +543,11 @@ AI_Smart_SpeedDown:
 	call DoesPokemonHaveClearBody
 	jr c, .discourage
 
+; never use if player has mist
+	ld a, [wPlayerScreens]
+	bit SCREENS_MIST, a
+	jr nz, .discourage
+
 	call ShouldAIBoost
 	jr nc, .discourage
 
@@ -566,6 +571,11 @@ AI_Smart_DefenseDown:
 	call DoesPokemonHaveClearBody
 	jr c, .discourage
 
+; never use if player has mist
+	ld a, [wPlayerScreens]
+	bit SCREENS_MIST, a
+	jr nz, .discourage
+
 	call ShouldAIBoost
 	jr nc, .discourage
 
@@ -584,6 +594,11 @@ AI_Smart_AttackDown:
 	ld a, [wBattleMonSpecies]
 	call DoesPokemonHaveClearBody
 	jr c, .discourage
+
+; never use if player has mist
+	ld a, [wPlayerScreens]
+	bit SCREENS_MIST, a
+	jr nz, .discourage
 
 	call ShouldAIBoost
 	jr nc, .discourage
@@ -1229,6 +1244,11 @@ AI_Smart_AccuracyDown:
 	ld a, [wBattleMonSpecies]
 	call DoesPokemonHaveClearBody
 	jr c, .discourage
+
+; never use if player has mist
+	ld a, [wPlayerScreens]
+	bit SCREENS_MIST, a
+	jr nz, .discourage
 
 ; discourage after player is at -3
 	ld a, [wPlayerAccLevel]
@@ -3036,16 +3056,6 @@ AI_Smart_Attract:
 	call AI_90_10
 	ret c
 	dec [hl]
-	ret
-
-AI_Smart_Safeguard:
-; 80% chance to discourage this move if player's HP is below 50%.
-
-	call AICheckPlayerHalfHP
-	ret c
-	call AI_80_20
-	ret c
-	inc [hl]
 	ret
 
 AI_Smart_Earthquake:

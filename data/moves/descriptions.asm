@@ -396,8 +396,8 @@ FlamethrowerDescription:
 	line "inflict a burn.@"
 
 MistDescription:
-	db   "Prevents stat"
-	line "reduction.@"
+	db   "5 Turns: Prevent"
+	line "stat reduction.@"
 
 SurfDescription:
 	db   "A strong water-"
@@ -854,7 +854,7 @@ DefogDescription:
 	line "of all effects.@"
 
 SafeguardDescription:
-	db   "Prevents all"
+	db   "5 Turns: Prevent"
 	line "status problems.@"
 
 PainSplitDescription:

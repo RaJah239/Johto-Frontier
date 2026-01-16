@@ -282,6 +282,11 @@ BattleText_SafeguardFaded:
 	line "Safeguard faded!"
 	prompt
 
+BattleText_MistFaded:
+	text "<USER>'s"
+	line "Mist faded!"
+	prompt
+
 BattleText_MonsLightScreenFell:
 	text "The Light Screen"
 	line "faded away."

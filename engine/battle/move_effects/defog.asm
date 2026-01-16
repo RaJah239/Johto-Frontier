@@ -24,6 +24,16 @@ BattleCommand_Defog:
     ld [hli], a
     ld [hl], a
 
+    ld a, 1
+    ld hl, wPlayerMistCount
+    ld [hli], a
+    ld [hli], a
+    ld [hl], a
+    ld hl, wEnemyMistCount
+    ld [hli], a
+    ld [hli], a
+    ld [hl], a
+
 ; clear all hazards
     ld hl, wPlayerScreens
     res SCREENS_SPIKES, [hl]
