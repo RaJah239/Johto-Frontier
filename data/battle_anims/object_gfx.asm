@@ -56,4 +56,6 @@ AnimObjGFX:
  	anim_obj_gfx 12, AnimObjWaterBallGFX
  	anim_obj_gfx 10, AnimObjBeamLightGFX
 	anim_obj_gfx  2, AnimObjUnownGFX
+	anim_obj_gfx 13, AnimObjTaunt1GFX
+	anim_obj_gfx 13, AnimObjTaunt2GFX
 	assert_table_length NUM_BATTLE_ANIM_GFX + 1

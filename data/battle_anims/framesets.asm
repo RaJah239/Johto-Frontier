@@ -185,6 +185,7 @@ BattleAnimFrameData:
 	dw .Frameset_GrowingHeart        ; BATTLE_ANIM_FRAMESET_GROWING_HEART
 	dw .Frameset_StoneEdge           ; BATTLE_ANIM_FRAMESET_STONE_EDGE
 	dw .Frameset_c2                  ; BATTLE_ANIM_FRAMESET_C2
+	dw .Frameset_b9                  ; BATTLEANIMFRAMESET_B9
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
 .Frameset_HitBig:
@@ -1261,3 +1262,8 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_55,  8
 	oamframe BATTLE_ANIM_OAMSET_54,  20
 	oamdelete
+
+.Frameset_b9:
+	oamframe BATTLE_ANIM_OAMSET_1B,  20
+	oamframe BATTLE_ANIM_OAMSET_B5,  10
+	oamrestart
