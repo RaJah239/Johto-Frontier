@@ -1,4 +1,11 @@
 BattleCommand_KnockOff:
+
+; ============
+; === Note ===
+; ============
+; boosted damage is located in
+; engine/abilities/boosting_abilities.asm `KnockOffBoost`
+
 	ldh a, [hBattleTurn]
 	and a
 	jr nz, .enemy
