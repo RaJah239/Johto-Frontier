@@ -2705,15 +2705,10 @@ FieldStatusPagesLayout:
 	cp 10
 	ld de, FieldTexts.infinite
 	jr nc, .not_1_turn
-	ld a, [wWeatherCount]
-	add "0"
-	ld [de], a
-	ld a, TX_END
-	inc de
-	ld [de], a
-	ld de, wStringBuffer5
-	hlcoord 1, 2
-	call PlaceString
+	ld de, wWeatherCount
+	ld hl, FieldTexts.infinite
+	lb bc, 1, 1
+	call FieldInfoBoxPlaceElement
 	ld a, [wWeatherCount]
 	cp 1
 	ld de, FieldTexts.turnsleft
