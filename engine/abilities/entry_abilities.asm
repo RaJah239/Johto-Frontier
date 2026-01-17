@@ -5,12 +5,12 @@
 ; these abilties work correctly
 ; switch in battle and immediately use its effect
 EntryAbilities1:
+	call HandleSpinGuard
 	call HandleDrizzle
 	call HandleDrought
 	call HandleSandStream
 	call HandleSnowWarning
 	call HandleNaturalCure
-	call HandleSpinGuard
 	call HandleSeedfall
 	ret
 
@@ -23,6 +23,7 @@ EntryAbilities1:
 ; the foe will get their move off and even ko'd
 ; before this ability triggers
 EntryAbilities2:
+	call HandleCleanSweep
 	call HandleLightBarrier
 	call HandleIntimidate
 	call HandleRockSnare
@@ -37,7 +38,6 @@ EntryAbilities2:
 	call HandleBattleStance
 	call HandleBattleDrive
 	call HandleTrueSight
-	call HandleCleanSweep
 	call HandleFogOfWar
 	call HandleChaoticBoost
 	call HandleSanctuary
