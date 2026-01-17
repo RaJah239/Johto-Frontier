@@ -1912,3 +1912,23 @@ WoodBash:
 	statdownmessage
 	kingsrock
 	endmove
+
+KnockOff:
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	effectchance
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	knockoff
+	checkfaint
+	kingsrock
+	endmove

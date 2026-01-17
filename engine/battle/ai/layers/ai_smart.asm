@@ -152,7 +152,23 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_FLARE_BLITZ,      AI_Smart_RecoilHit
 	dbw EFFECT_RECOIL_PARA_HIT,  AI_Smart_RecoilHit
 	dbw EFFECT_CLOSE_COMBAT,     AI_Smart_CloseCombat
+	dbw EFFECT_KNOCK_OFF,        AI_Smart_KnockOff
 	db -1 ; end
+
+AI_Smart_KnockOff:
+; 80% chance to encourage this move if the player is holding a battle item
+; Otherwise, dismiss this move.
+	ld a, [wBattleMonItem]
+	ld [wCurItem], a
+	farcall CheckItemPocket
+	ld a, [wItemAttributeValue]
+	cp BATTLE
+	jmp nz, AIDiscourageMove
+
+	call AI_80_20
+	ret c
+	dec [hl]
+	ret
 
 AI_Smart_CloseCombat:
 ; 60% chance to discourage this move if enemy's HP is at least 50%.

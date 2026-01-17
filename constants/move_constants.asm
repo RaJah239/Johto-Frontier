@@ -173,7 +173,7 @@
 	const STRUGGLE     ; a5
 	const SKETCH       ; a6
 	const AERIAL_ACE   ; a7
-	const THIEF        ; a8
+	const KNOCK_OFF    ; a8
 	const SPIDER_WEB   ; a9
 	const DRAGON_DANCE ; aa
 	const TRICK        ; ab

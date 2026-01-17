@@ -1199,6 +1199,12 @@ StoleText:
 	line "stolen!"
 	prompt
 
+KnockOffText:
+	text_ram wStringBuffer1
+	text " was"
+	line "knocked off!"
+	prompt
+
 CantEscapeNowText:
 	text "<TARGET>"
 	line "can't escape now!"

@@ -168,7 +168,7 @@ MoveDescriptions::
 	dw StruggleDescription
 	dw SketchDescription
 	dw AerialAceDescriptionDescription
-	dw ThiefDescription
+	dw KnockOffDescription
 	dw SpiderWebDescription
 	dw DragonDanceDescription
 	dw TrickDescription
@@ -698,9 +698,12 @@ SketchDescription:
 
 PeckDescription:
 BugBiteDescription:
-ThiefDescription:
 	db   "Steals foe's item"
 	line "if none is held.@"
+
+KnockOffDescription:
+	db "1.5× power if item"
+	line "was knocked off.@"
 
 DragonDanceDescription:
 	db   "Increases Attack"

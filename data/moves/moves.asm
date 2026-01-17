@@ -181,7 +181,7 @@ Moves:
 	move STRUGGLE,     EFFECT_RECOIL_HIT,         50, NORMAL,        PHYSICAL, 100,  1,   0
 	move SKETCH,       EFFECT_SKETCH,              0, NORMAL,        STATUS,   100,  1,   0
 	move AERIAL_ACE,   EFFECT_PRIORITY_HIT,       40, FLYING,        PHYSICAL, 100, 40,   0
-	move THIEF,        EFFECT_THIEF,              40, DARK,          PHYSICAL, 100, 40, 100
+	move KNOCK_OFF,    EFFECT_KNOCK_OFF,          65, DARK,          PHYSICAL, 100, 32, 100
 	move SPIDER_WEB,   EFFECT_MEAN_LOOK,           0, BUG,           STATUS,   100, 16,   0
 	move DRAGON_DANCE, EFFECT_DRAGON_DANCE,        0, DRAGON,        STATUS,   100, 32,   0
 	move TRICK,        EFFECT_TRICK,               0, PSYCHIC_TYPE,  STATUS,   100, 16,   0

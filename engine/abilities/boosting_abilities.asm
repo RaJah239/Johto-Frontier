@@ -308,3 +308,47 @@ SharpMoves:
 	db X_SCISSOR
 	db THROAT_CHOP
 	db -1 ; end
+
+; saving a few bytes by putting it here
+KnockOffBoost:
+	; only apply to knock off
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp KNOCK_OFF
+	ret nz
+
+	; check turn
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .enemy_turn
+
+; =====================
+; === PLAYER'S TURN ===
+; =====================
+	ld a, [wEnemyMonItem]
+	and a
+	ret z                 ; no item → no boost
+
+	; mail don't get knocked off so no boost
+	ld [wNamedObjectIndex], a
+	ld d, a
+	farcall ItemIsMail
+	ret c                 ; mail → no boost
+
+	jr FiftyPercentBoost
+
+; ====================
+; === ENEMY'S TURN ===
+; ====================
+.enemy_turn
+	ld a, [wBattleMonItem]
+	and a
+	ret z                 ; no item → no boost
+
+	; mail don't get knocked off so no boost
+	ld [wNamedObjectIndex], a
+	ld d, a
+	farcall ItemIsMail
+	ret c                 ; mail → no boost
+
+	jr FiftyPercentBoost

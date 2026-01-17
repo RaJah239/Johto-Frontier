@@ -3088,6 +3088,9 @@ ConfusionDamageCalc:
 
  	farcall CheckBoostingAbilities
 
+ 	; 50 % boost in damage if opponent has an item, not mail
+ 	farcall KnockOffBoost
+
 	call GetUserItem
 
 	ld a, b
@@ -6879,6 +6882,8 @@ EffectCommands_50_50:
 	call BattleRandom
 	cp 50 percent + 1
 	ret
+
+INCLUDE "engine/battle/move_effects/knock_off.asm"
 
 INCLUDE "engine/battle/move_effects/curse.asm"
 INCLUDE "engine/battle/move_effects/protect.asm"

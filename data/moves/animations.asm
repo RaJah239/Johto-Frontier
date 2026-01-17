@@ -169,7 +169,7 @@ BattleAnimations::
 	dw BattleAnim_Struggle
 	dw BattleAnim_Sketch
 	dw BattleAnim_AerialAce
-	dw BattleAnim_Thief
+	dw BattleAnim_KnockOff
 	dw BattleAnim_SpiderWeb
 	dw BattleAnim_DragonDance
 	dw BattleAnim_Trick
@@ -3606,20 +3606,30 @@ BattleAnim_AerialAce:
 	anim_wait 24
 	anim_ret
 
-BattleAnim_Thief:
+BattleAnim_KnockOff:
 	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_call BattleAnim_TargetObj_1Row
-	anim_bgeffect BATTLE_BG_EFFECT_TACKLE, $0, BG_EFFECT_USER, $0
-	anim_wait 16
-	anim_sound 0, 1, SFX_THIEF
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 128, 48, $0
-	anim_wait 16
-	anim_call BattleAnim_ShowMon_0
+	anim_sound 3, 0, SFX_RAZOR_WIND
+	anim_obj BATTLE_ANIM_OBJ_PALM, 136, 08, $0
 	anim_wait 1
-	anim_1gfx BATTLE_ANIM_GFX_STATUS
-	anim_sound 0, 1, SFX_THIEF_2
-	anim_obj BATTLE_ANIM_OBJ_THIEF, 120, 76, $1
-	anim_wait 64
+	anim_obj BATTLE_ANIM_OBJ_PALM, 136, 16, $0
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_PALM, 136, 24, $0
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_PALM, 136, 32, $0
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_PALM, 136, 40, $0
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_PALM, 136, 48, $0
+	anim_wait 1
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_Y  , $10, $1, $20
+	anim_sound 0, 1, SFX_TACKLE
+	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 48, $0
+	anim_obj BATTLE_ANIM_OBJ_PALM, 136, 56, $0
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_PALM, 136, 64, $0
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_PALM, 136, 72, $0
+	anim_wait 8
 	anim_ret
 
 BattleAnim_StickyWeb:
@@ -5216,3 +5226,6 @@ BattleAnimSub_SpeedLines:
 ;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 144, 64, $0
 ;	anim_wait 16
 ;	anim_ret
+
+; to remove this
+;	anim_obj BATTLE_ANIM_OBJ_THIEF, 120, 76, $1

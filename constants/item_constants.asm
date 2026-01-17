@@ -281,7 +281,7 @@ DEF TM01 EQU const_value
 	add_tm DISARM_VOICE ; eb
 	add_tm REST         ; ec
 	add_tm ATTRACT      ; ed
-	add_tm THIEF        ; ee
+	add_tm KNOCK_OFF    ; ee
 	add_tm STEEL_WING   ; ef
 	add_tm FIRE_PUNCH   ; f0
 	add_tm SHADOW_PUNCH ; f1

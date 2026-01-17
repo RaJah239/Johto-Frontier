@@ -71,7 +71,7 @@ BattleTowerMartTMCoinTraderScript:
     ifequal 43, .TMDetect
     ifequal 44, .TMRest
     ifequal 45, .TMAttract
-    ifequal 46, .TMTheif
+    ifequal 46, .TMKnockOff
     ifequal 47, .TMStealWing
     ifequal 48, .TMFirePunch
     ifequal 49, .TMFuryCutter
@@ -309,8 +309,8 @@ BattleTowerMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMTheif:
-    verbosegiveitem TM_THIEF
+.TMKnockOff:
+    verbosegiveitem TM_KNOCK_OFF
     iffalse .NoRoom
     sjump .ConcludeTransaction
 

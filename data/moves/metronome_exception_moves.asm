@@ -12,5 +12,4 @@ MetronomeExcepts:
 	db ENDURE
 	db DESTINY_BOND
 	db SLEEP_TALK
-	db THIEF
 	db -1
