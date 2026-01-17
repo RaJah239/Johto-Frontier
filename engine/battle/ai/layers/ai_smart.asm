@@ -905,31 +905,54 @@ AI_Smart_BurnTarget:
 	ret
 
 AI_Smart_ParalyzeTarget:
+; if enemy is already statused - discourage
+	ld a, [wBattleMonStatus]
+	and a
+	jr nz, .discourage
+
+; never use if player has substitute
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
+	jr nz, .discourage
+
+; never use if player has safeguard
+	ld a, [wPlayerScreens]
+	bit SCREENS_SAFEGUARD, a
+	jr nz, .discourage
+
+; don't use against serenity pokemon as they are immune to status
+	ld a, [wBattleMonSpecies]
+	push hl
+	ld hl, SerenityPokemon_AI
+	call IsInByteArray
+	pop hl
+	jr c, .discourage
+
 	; check specie
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, SureShockPokemon_AI
 	call IsInByteArray
 	pop hl
-	ret nz
+	ret nc
 
 	; check move
 	ld a, [wEnemyMoveStruct + MOVE_ANIM]
 	cp THUNDERBOLT
-	jr nc, .go
 	ret nz
 
-.go
 	; if slower
-	call AICompareSpeed
-	ret c
+;	call AICompareSpeed
+;	ret c
 
 	; then use Thunderbolt first
 	; since it always paralyzes
-	call AI_90_10
-	ret c
-	dec [hl]
-	dec [hl]
+;	call AI_90_10
+;	ret c
+	jmp DoIt
+
+.discourage
+	inc [hl]
 	ret
 
 AI_Smart_BrickBreak:
