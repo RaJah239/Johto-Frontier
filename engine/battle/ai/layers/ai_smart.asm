@@ -163,11 +163,15 @@ AI_Smart_KnockOff:
 	farcall CheckItemPocket
 	ld a, [wItemAttributeValue]
 	cp BATTLE
-	jmp nz, AIDiscourageMove
+	jr nz, .discourage
 
 	call AI_80_20
 	ret c
 	dec [hl]
+	ret
+
+.discourage
+	inc [hl]
 	ret
 
 AI_Smart_CloseCombat:
