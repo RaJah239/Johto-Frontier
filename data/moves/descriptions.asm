@@ -640,8 +640,8 @@ HiJumpKickDescription:
 	line "the user.@"
 
 DreamEaterDescription:
-	db   "Steals HP from a"
-	line "sleeping victim.@"
+	db   "Priority: Steals"
+	line "sleeping foe's HP.@"
 
 TransformDescription:
 	db   "The user assumes"
