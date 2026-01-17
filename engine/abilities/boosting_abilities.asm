@@ -13,7 +13,50 @@ CheckBoostingAbilities:
 	call HandleRainSurge
 	call HandleShieldDust
 	call HandleSharpness
-	ret
+
+; added last to recalculate after boosting abilities are factored in
+; hard mode
+	;CheckIfHardModeAndBoost 
+	;ret
+	; fallthrough
+
+; =================
+; === Hard Mode ===
+; =================
+; hard mode gives 20% boosted Attack and Defense stats to all enemy trainers
+CheckIfHardModeAndBoost:
+	; exit if in link battles
+	; prevents desyncs and any other shenanigans
+	ld a, [wLinkMode]
+	and a
+	ret nz
+
+	; exit if in wild battle
+	; don't want to make every foe 20% stronger...
+	ld a, [wBattleMode]
+	dec a
+	ret z
+
+	; is hard mode enabled?
+	ld a, [wOptions2]
+	bit HARD_MODE, a
+	ret z
+
+	; hard mode is enabled
+	; so boost offense and defense by 20%
+	; decide offense vs defense by turn
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .boost_attack              ; player turn -> return
+
+	; this only applies when it's the player's turn
+	; reduce the player's attack by 20%
+	jmp TwentyPercentNerf
+
+.boost_attack
+	; this only applies when it's the enemy's turn
+	; boost the enemy's attack by 20%
+	jmp TwentyPercentBoost
 
 HandleGuts:
 	call GetCurrentMon
@@ -241,6 +284,16 @@ HandleSharpness:
 
 INCLUDE "data/abilities/sharpness_mons.asm"
 
+TwentyPercentNerf:
+	ld a, 80
+	ldh [hMultiplier], a
+	call Multiply
+
+	ld a, 100
+	ldh [hDivisor], a
+	ld b, 4
+	jmp Divide
+
 FiftyPercentNerf:
 	ld a, 50
 	ldh [hMultiplier], a
@@ -275,6 +328,10 @@ ThirtyPercentBoost:
 
 TwentyFivePercentBoost:
 	ld a, 25
+	jr FinishBoost
+
+TwentyPercentBoost:
+	ld a, 20
 	; fallthrough
 
 FinishBoost:
