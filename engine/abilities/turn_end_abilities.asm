@@ -4,9 +4,18 @@ TurnEndAbilities:
 	call HandleHydration
 	call HandleIceBody
 	call HandleRainDish
-	call HandleSolarPowerHPLoss
 	call HandleSandBody
-	; fallthrough
+	call HandleMolting
+	ret
+
+SolarPowerHPLossPokemon:
+	db SUNKERN
+	db SUNFLORA
+	db TROPIUS
+	db CHARMANDER
+	db CHARMELEON
+	db CHARIZARD
+	db -1 ; end
 
 HandleMolting:
 	ldh a, [hSerialConnectionStatus]
@@ -292,15 +301,27 @@ INCLUDE "data/abilities/rain_dish_mons.asm"
 
 ; handle boosted attack in engine/abilities/boosting_abilities.asm
 HandleSolarPowerHPLoss:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .DoEnemyFirst
+	call SetPlayerTurn
+    ld a, [wBattleMonSpecies]
+	call .do_it
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	jr .do_it
+
+.DoEnemyFirst:
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	call .do_it
+	call SetPlayerTurn
+	ld a, [wBattleMonSpecies]
+
+.do_it
 	call GetCurrentMon
-	push hl
-	push de
-	push bc
-	ld hl, SolarPowerPokemon
+	ld hl, SolarPowerHPLossPokemon
 	call IsInByteArray
-	pop bc
-	pop de
-	pop hl
 	ret nc
 
 	; check if it is sunny

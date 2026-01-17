@@ -13,6 +13,17 @@
 ;   db CHARIZARD
 ;   db -1 ; end
 
+; and engine/abilities/turn_end_abilities.asm `SolarPowerHPLossPokemon:`
+
+;SolarPowerHPLossPokemon:
+;    db SUNKERN
+;    db SUNFLORA
+;    db TROPIUS
+;    db CHARMANDER
+;    db CHARMELEON
+;    db CHARIZARD
+;    db -1 ; end
+
 SolarPowerPokemon:
 ;    db SUNKERN
 ;    db SUNFLORA

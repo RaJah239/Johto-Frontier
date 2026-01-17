@@ -213,6 +213,8 @@ BattleTurn:
 	jr .loop
 
 HandleBetweenTurnEffects:
+	farcall HandleSolarPowerHPLoss
+	
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
 	jr z, .CheckEnemyFirst
