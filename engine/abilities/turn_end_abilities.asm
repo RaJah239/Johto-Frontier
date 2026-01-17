@@ -34,7 +34,9 @@ HandleMolting:
 	call .do_it
 	call SetPlayerTurn
 	ld a, [wBattleMonSpecies]
+
 .do_it
+	call GetCurrentMon
 	ld hl, MoltingPokemon
 	call IsInByteArray
 	ret nc
@@ -78,7 +80,9 @@ HandleRegenerator:
 	call .do_it
 	call SetPlayerTurn
 	ld a, [wBattleMonSpecies]
+
 .do_it
+	call GetCurrentMon
 	ld hl, RegeneratorPokemon
 	call IsInByteArray
 	ret nc
@@ -131,7 +135,9 @@ HandleSpeedBoost:
 	call .do_it
 	call SetPlayerTurn
 	ld a, [wBattleMonSpecies]
+
 .do_it
+	call GetCurrentMon
 	ld hl, SpeedBoostPokemon
 	call IsInByteArray
 	ret nc
@@ -158,8 +164,9 @@ HandleHydration:
 	call .do_it
 	call SetPlayerTurn
 	ld a, [wBattleMonSpecies]
-.do_it
 
+.do_it
+	call GetCurrentMon
 	ld hl, HydrationPokemon
 	call IsInByteArray
 	ret nc
@@ -206,6 +213,7 @@ HandleIceBody:
 	ld a, [wBattleMonSpecies]
 
 .do_it
+	call GetCurrentMon
 	ld hl, IceBodyPokemon
 	call IsInByteArray
 	ret nc
@@ -262,6 +270,7 @@ HandleRainDish:
 	ld a, [wBattleMonSpecies]
 
 .do_it
+	call GetCurrentMon
 	ld hl, RainDishPokemon
 	call IsInByteArray
 	ret nc
@@ -336,13 +345,25 @@ HandleSolarPowerHPLoss:
 	jmp StdBattleTextbox
 
 HandleSandBody:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .DoEnemyFirst
+	call SetPlayerTurn
+    ld a, [wBattleMonSpecies]
+	call .do_it
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	jr .do_it
+
+.DoEnemyFirst:
 	call SetEnemyTurn
 	ld a, [wEnemyMonSpecies]
 	call .do_it
 	call SetPlayerTurn
 	ld a, [wBattleMonSpecies]
-.do_it
 
+.do_it
+	call GetCurrentMon
 	ld hl, SandBodyPokemon
 	call IsInByteArray
 	ret nc
