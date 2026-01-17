@@ -129,27 +129,7 @@ ReadTrainerPartyPieces:
 	cp -1
 	ret z
 
-	; save a
-	push af
-
-	ld a, [wOptions2]
-	bit HARD_MODE, a
-	jr z, .skip_level_scaling
-
-	; restore a (which held the original value)
-	pop af
-
-	; apply level scaling
-	ld b, a
-	ld a, [wBaseLevel]
-	add a, b
-	jr .level_scaling_done
-
 ; level
-.skip_level_scaling
-	pop af ; discard original 'a' if we didn't use it
-
-.level_scaling_done
 	call SetDynamicLevel
 	ld [wCurPartyLevel], a
 

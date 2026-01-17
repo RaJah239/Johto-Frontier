@@ -3225,7 +3225,7 @@ wDayCareSceneID::                                 db
 wRoute30SceneID::                                 db
 wRoute26MagnetTrainStationSceneID::               db
 
-	ds 172
+	ds 173
 
 wBattlePoints:: db
 
@@ -3233,8 +3233,6 @@ wAbilityPageMode:: db
 
 wTempMonLevelUpStatGain:: ds NUM_BATTLE_STATS
 wTempMonStatGainDisplay:: db
-
-wBaseLevel:: db 
 
 wEventFlags:: flag_array NUM_EVENTS
 
