@@ -473,6 +473,9 @@ AcrobaticsDescription:
 	line "user has no item.@"
 
 LovelyKissDescription:
+	db   "A move that"
+	line "induces sleep.@"
+
 HypnosisDescription:
 SingDescription:
 SleepPowderDescription:
