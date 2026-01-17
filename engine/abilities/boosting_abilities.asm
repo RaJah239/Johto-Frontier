@@ -364,6 +364,7 @@ SharpMoves:
 	db PSYCHO_CUT
 	db X_SCISSOR
 	db THROAT_CHOP
+	db DRAGON_CLAW
 	db -1 ; end
 
 ; saving a few bytes by putting it here
