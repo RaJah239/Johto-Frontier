@@ -179,13 +179,24 @@ DoHydration:
 INCLUDE "data/abilities/hydration_mons.asm"
 
 HandleIceBody:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .DoEnemyFirst
+	call SetPlayerTurn
+    ld a, [wBattleMonSpecies]
+	call .do_it
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	jr .do_it
+
+.DoEnemyFirst:
 	call SetEnemyTurn
 	ld a, [wEnemyMonSpecies]
 	call .do_it
 	call SetPlayerTurn
 	ld a, [wBattleMonSpecies]
-.do_it
 
+.do_it
 	ld hl, IceBodyPokemon
 	call IsInByteArray
 	ret nc
@@ -224,13 +235,24 @@ HandleIceBody:
 INCLUDE "data/abilities/ice_body_mons.asm"
 
 HandleRainDish:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .DoEnemyFirst
+	call SetPlayerTurn
+    ld a, [wBattleMonSpecies]
+	call .do_it
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	jr .do_it
+
+.DoEnemyFirst:
 	call SetEnemyTurn
 	ld a, [wEnemyMonSpecies]
 	call .do_it
 	call SetPlayerTurn
 	ld a, [wBattleMonSpecies]
-.do_it
 
+.do_it
 	ld hl, RainDishPokemon
 	call IsInByteArray
 	ret nc
