@@ -345,26 +345,26 @@ FinishBoost:
 	jmp Divide
 
 PunchingMoves:
+	db BULLET_PUNCH
+	db DRAIN_PUNCH
 	db FIRE_PUNCH
 	db ICE_PUNCH
-	db THUNDERPUNCH
-	db DRAIN_PUNCH
-	db BULLET_PUNCH
 	db MACH_PUNCH
-	db SHADOW_PUNCH
 	db METEOR_MASH
+	db SHADOW_PUNCH
+	db THUNDERPUNCH
 	db -1 ; end
 
 SharpMoves:
-	db CUT
-	db NIGHT_SLASH
-	db SLASH
 	db CROSS_CHOP
-	db LEAF_BLADE
-	db PSYCHO_CUT
-	db X_SCISSOR
-	db THROAT_CHOP
+	db CUT
 	db DRAGON_CLAW
+	db LEAF_BLADE
+	db NIGHT_SLASH
+	db PSYCHO_CUT
+	db SLASH
+	db THROAT_CHOP
+	db X_SCISSOR
 	db -1 ; end
 
 ; saving a few bytes by putting it here

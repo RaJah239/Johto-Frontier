@@ -4,7 +4,9 @@
 	const EARLSPOKEMONACADEMY_GAMEBOY_KID1
 	const EARLSPOKEMONACADEMY_GAMEBOY_KID2
 	const EARLSPOKEMONACADEMY_YOUNGSTER2
-	const EARLSPOKEMONACADEMY_POKEDEX
+	const EARLSPOKEMONACADEMY_POKEDEX1
+	const EARLSPOKEMONACADEMY_POKEDEX2
+	const EARLSPOKEMONACADEMY_POKEDEX3
 
 EarlsPokemonAcademy_MapScripts:
 	def_scene_scripts
@@ -400,6 +402,69 @@ AcademyStickerMachineText:
 	para "stickers!"
 	done
 
+SharpnessMovesNotebook:
+	opentext
+	writetext WantToLearnAboutSharpnessMovesText
+	yesorno
+	iffalse .Done
+	writetext SharpnessMovesNotebookText
+	waitbutton
+.Done:
+	closetext
+	end
+
+WantToLearnAboutSharpnessMovesText:
+	text "It's a list of all"
+	line "Sharpness Moves!"
+
+	para "Want to read it?"
+	done
+
+SharpnessMovesNotebookText:
+	text "In alphabetical"
+	line "order, it goes:"
+
+	para "Cross Chop, Cut,"
+	line "Dragon Claw,"
+	cont "Leaf Blade,"
+	cont "Night Slash,"
+	cont "Psycho Cut, Slash,"
+	cont "Throat Chop and"
+	cont "X-Scissor."
+	done
+
+PunchingMovesNotebook:
+	opentext
+	writetext WantToLearnAboutPunchingMovesText
+	yesorno
+	iffalse .Done
+	writetext PunchingMovesNotebookText
+	waitbutton
+.Done:
+	closetext
+	end
+
+WantToLearnAboutPunchingMovesText:
+	text "It's a list of all"
+	line "Punching Moves!"
+
+	para "Want to read it?"
+	done
+
+PunchingMovesNotebookText:
+	text "In alphabetical"
+	line "order, it goes:"
+
+	para "Bullet Punch,"
+	line "Drain Punch,"
+	cont "Fire Punch,"
+	cont "Ice Punch,"
+	cont "Mach Punch,"
+	cont "Meteor Mash,"
+	cont "Shadow Punch and"
+	cont "Thunder Punch."
+	done
+
 EarlsPokemonAcademy_MapEvents:
 	def_warp_events
 	warp_event  3, 15, VIOLET_CITY, 4
@@ -420,3 +485,5 @@ EarlsPokemonAcademy_MapEvents:
 	object_event  4, 11, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyGameboyKid2Script, -1
 	object_event  4,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyYoungster2Script, -1
 	object_event  2,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, AcademyNotebook, -1
+	object_event  4,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SharpnessMovesNotebook, -1
+	object_event  5,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PunchingMovesNotebook, -1
