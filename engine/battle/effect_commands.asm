@@ -6883,8 +6883,6 @@ EffectCommands_50_50:
 	cp 50 percent + 1
 	ret
 
-INCLUDE "engine/battle/move_effects/knock_off.asm"
-
 INCLUDE "engine/battle/move_effects/curse.asm"
 INCLUDE "engine/battle/move_effects/protect.asm"
 INCLUDE "engine/battle/move_effects/bulk_up.asm"

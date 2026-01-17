@@ -1928,7 +1928,7 @@ KnockOff:
 	applydamage
 	criticaltext
 	supereffectivetext
-	knockoff
+	farcommand
 	checkfaint
 	kingsrock
 	endmove

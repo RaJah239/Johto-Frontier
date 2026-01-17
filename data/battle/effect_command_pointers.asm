@@ -157,5 +157,4 @@ BattleCommandPointers:
 	dw BattleCommand_FuryDrive
 	dw BattleCommand_Acrobatics
 	dw BattleCommand_CheckContact
-	dw BattleCommand_KnockOff
 	assert_table_length NUM_EFFECT_COMMANDS

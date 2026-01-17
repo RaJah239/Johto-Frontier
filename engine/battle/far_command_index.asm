@@ -40,4 +40,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_SPLASH,          BattleCommand_Splash
 	dbw EFFECT_LEECH_SEED,      BattleCommand_LeechSeed
 	dbw EFFECT_TRICK,           BattleCommand_Trick
+	dbw EFFECT_KNOCK_OFF,       BattleCommand_KnockOff
 	db -1 ; end
