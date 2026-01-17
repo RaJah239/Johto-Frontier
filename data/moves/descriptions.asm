@@ -702,8 +702,8 @@ BugBiteDescription:
 	line "if none is held.@"
 
 KnockOffDescription:
-	db "1.5× power if item"
-	line "was knocked off.@"
+	db "1.5× power if an"
+	line "item was removed.@"
 
 DragonDanceDescription:
 	db   "Increases Attack"
