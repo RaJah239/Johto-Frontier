@@ -143,7 +143,7 @@ AI_Smart_EffectHandlers:
     dbw EFFECT_DEFOG,            AI_Smart_Defog ; added
     dbw EFFECT_TRICK_ROOM,       AI_Smart_TrickRoom ; added
     dbw EFFECT_BURN,             AI_Smart_Burn ; added
-    dbw EFFECT_BURN_HIT,         AI_Smart_Burn
+    dbw EFFECT_BURN_HIT,         AI_Smart_BurnTarget
     dbw EFFECT_TAUNT,            AI_Smart_Taunt ; added
 	dbw EFFECT_SUCKER_PUNCH,     AI_Smart_SuckerPunch ; added
 	dbw EFFECT_FURY_DRIVE,       AI_Smart_FuryDrive; added
@@ -841,6 +841,67 @@ AI_Smart_Acrobatics:
 	ret nz
 	dec [hl]
 	dec [hl]
+	ret
+
+AI_Smart_BurnTarget:
+; if enemy is already statused - discourage
+	ld a, [wBattleMonStatus]
+	and a
+	jr nz, .discourage
+
+; never use if player has substitute
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
+	jr nz, .discourage
+
+; never use if player has safeguard
+	ld a, [wPlayerScreens]
+	bit SCREENS_SAFEGUARD, a
+	jr nz, .discourage
+
+; if enemy is fire type - discourage
+	ld a, [wBattleMonType1]
+	cp FIRE
+	jr z, .discourage
+	ld a, [wBattleMonType2]
+	cp FIRE
+	jr z, .discourage
+
+; don't use against serenity pokemon as they are immune to status
+	ld a, [wBattleMonSpecies]
+	push hl
+	ld hl, SerenityPokemon_AI
+	call IsInByteArray
+	pop hl
+	jr c, .discourage
+
+	; encourage Flamethrower burns
+	; with Kindle Pokémon if target is physical
+
+	; check species
+	ld a, [wEnemyMonSpecies]
+	push hl
+	ld hl, KindlePokemon_AI
+	call IsInByteArray
+	pop hl
+	ret nc
+
+	; check move
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	cp FLAMETHROWER
+	ret nz
+
+	; strongly encourage if enemy is physical
+	call IsPlayerPhysicalOrSpecial
+	ret nc
+
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	ret
+
+.discourage
+	inc [hl]
 	ret
 
 AI_Smart_ParalyzeTarget:
