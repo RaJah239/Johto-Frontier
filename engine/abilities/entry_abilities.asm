@@ -1410,6 +1410,8 @@ AnyFieldEffectPresent:
 	ret
 
 AnyScreensUp:
+	bit SCREENS_MIST, a
+	jr nz, .yes
 	bit SCREENS_SAFEGUARD, a
 	jr nz, .yes
 	bit SCREENS_LIGHT_SCREEN, a
