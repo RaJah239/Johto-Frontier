@@ -39,7 +39,6 @@ EntryAbilities2:
 	call HandleTrueSight
 	call HandleCleanSweep
 	call HandleFogOfWar
-	call HandleFadeIn
 	call HandleChaoticBoost
 	call HandleSanctuary
 	call HandleSiegebreaker
@@ -60,7 +59,6 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_INFERNAL_HOWL_PLAYER
 	ResetEventFlag EVENT_BATTLE_STANCE_PLAYER
 	ResetEventFlag EVENT_BATTLE_DRIVE_PLAYER
-	ResetEventFlag EVENT_FADE_IN_PLAYER
 	ResetEventFlag EVENT_TRUE_SIGHT_PLAYER
 	ResetEventFlag EVENT_FOG_OF_WAR_PLAYER
 	ResetEventFlag EVENT_DEFOG_PLAYER
@@ -84,7 +82,6 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_INFERNAL_HOWL_FOE
 	ResetEventFlag EVENT_BATTLE_STANCE_FOE
 	ResetEventFlag EVENT_BATTLE_DRIVE_FOE
-	ResetEventFlag EVENT_FADE_IN_FOE
 	ResetEventFlag EVENT_TRUE_SIGHT_FOE
 	ResetEventFlag EVENT_FOG_OF_WAR_FOE
 	ResetEventFlag EVENT_DEFOG_FOE
@@ -487,49 +484,6 @@ HandleBattleDrive:
 	farjp BattleCommand_StatUpMessage
 
 INCLUDE "data/abilities/battle_drive_mons.asm"
-
-HandleFadeIn:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_FADE_IN_PLAYER
-	ret nz
-	SetEventFlag EVENT_FADE_IN_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_FADE_IN_FOE
-	ret nz
-	SetEventFlag EVENT_FADE_IN_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if switched in pokemon has battle drive
-	call GetCurrentMon
-	ld hl, FadeInPokemon
-	call IsInByteArray
-	ret nc
-
-	ld hl, FadeInText
-	call StdBattleTextbox
-
-	farcall BattleCommand_EvasionUp
-	farjp BattleCommand_StatUpMessage
-
-INCLUDE "data/abilities/fade_in_mons.asm"
 
 HandleChaoticBoost:
 	ldh a, [hSerialConnectionStatus]

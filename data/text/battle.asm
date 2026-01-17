@@ -1012,11 +1012,6 @@ BattleStanceText:
 	cont "activated!"
 	prompt
 
-FadeInText:
-	text "<USER>'s"
-	line "Fade In activated!"
-	prompt
-
 TrueSightText:
 	text "<USER>'s"
 	line "True Sight"

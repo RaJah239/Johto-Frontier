@@ -9,7 +9,3 @@ Sandveil:
 ;	cp GLISCOR
 ;	call z, IncrementC
 	ret
-
-IncrementC:
-	inc c
-	ret

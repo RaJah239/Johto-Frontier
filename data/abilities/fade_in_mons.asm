@@ -1,5 +1,8 @@
-; List of all Pokemon that increases evasion by 1 stage on turn 1
+; List of all Pokemon that always have their evasion increased by 1 stage
 
-FadeInPokemon:
-;    db CROBAT
-    db -1 ; end
+FadeIn:
+;   cp CROBAT
+;   call z, IncrementC
+;   cp SNEASEL
+;   call z, IncrementC
+    ret

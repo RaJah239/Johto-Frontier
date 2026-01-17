@@ -1706,6 +1706,9 @@ BattleCommand_CheckHit:
 	call Sandveil
 
 .finish_foe_sand_veil
+	ld a, [wBattleMonSpecies]
+	call FadeIn
+
 	ldh a, [hBattleTurn]
 	and a
 	jr z, .got_acc_eva
@@ -1723,6 +1726,9 @@ BattleCommand_CheckHit:
 	call Sandveil
 
 .finish_player_sand_veil
+	ld a, [wEnemyMonSpecies]
+	call FadeIn
+
 .got_acc_eva
 	cp b
 	jr c, .skip_foresight_check
@@ -1824,6 +1830,7 @@ INCLUDE "data/abilities/true_blizzard_mons.asm"
 INCLUDE "data/abilities/sure_stream_mons.asm"
 INCLUDE "data/abilities/stonefall_mons.asm"
 INCLUDE "data/abilities/stonebound_mons.asm"
+INCLUDE "data/abilities/fade_in_mons.asm"
 INCLUDE "data/abilities/sand_veil_mons.asm"
 INCLUDE "data/abilities/compound_eyes_mons.asm"
 
@@ -6877,6 +6884,10 @@ TenPercentBoost:
 	ldh [hDivisor], a
 	ld b, 4
 	jmp Divide
+
+IncrementC:
+	inc c
+	ret
 
 EffectCommands_50_50:
 	call BattleRandom
