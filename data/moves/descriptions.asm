@@ -192,7 +192,7 @@ MoveDescriptions::
 	dw MudSlapDescription
 	dw PsyshockDescription
 	dw SpikesDescription
-	dw ShriekDescription
+	dw IceFangDescription
 	dw ForesightDescription
 	dw DestinyBondDescription
 	dw PerishSongDescription
@@ -544,9 +544,9 @@ MimicDescription:
 	db   "Copies a move used"
 	line "by the foe.@"
 
-ShriekDescription:
-	db   "Sharply reduces"
-	line "the foe's Sp.Def.@"
+IceFangDescription:
+	db   "May frostbite or"
+	line "cause flinching.@"
 
 ScreechDescription:
 	db   "Sharply reduces"

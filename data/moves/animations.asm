@@ -193,7 +193,7 @@ BattleAnimations::
 	dw BattleAnim_MudSlap
 	dw BattleAnim_Psyshock
 	dw BattleAnim_Spikes
-	dw BattleAnim_Shriek
+	dw BattleAnim_IceFang
 	dw BattleAnim_Foresight
 	dw BattleAnim_DestinyBond
 	dw BattleAnim_PerishSong
@@ -2207,7 +2207,12 @@ BattleAnim_Supersonic:
 	anim_wait 64
 	anim_ret
 
-BattleAnim_Shriek:
+BattleAnim_IceFang:
+	anim_call BattleAnim_Bite
+	anim_clearobjs
+	anim_1gfx BATTLE_ANIM_GFX_ICE
+	anim_jump BattleAnimSub_Ice
+
 BattleAnim_Screech:
 	anim_1gfx BATTLE_ANIM_GFX_PSYCHIC
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $8, $1, $20

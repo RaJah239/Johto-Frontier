@@ -191,7 +191,7 @@ MoveNames::
 	li "Mud-Slap"
 	li "Psyshock"
 	li "Spikes"
-	li "Shriek"
+	li "Ice Fang"
 	li "Foresight"
 	li "Destiny Bond"
 	li "Perish Song"
