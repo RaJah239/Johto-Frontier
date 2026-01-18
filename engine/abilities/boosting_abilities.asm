@@ -10,7 +10,7 @@ CheckBoostingAbilities:
 	call HandleIronFist
 	call HandleMentalFocus
 	call HandleRainSurge
-	call HandleShieldDust
+	call HandlePillowFort
 	call HandleSharpness
 
 ; added last to recalculate after boosting abilities are factored in
@@ -243,19 +243,19 @@ HandleRainSurge:
 
 INCLUDE "data/abilities/rain_surge_mons.asm"
 
-HandleShieldDust:
+HandlePillowFort:
 	call GetOpposingMon
-	ld hl, ShieldDustPokemon
+	ld hl, PillowFortPokemon
 	call IsInByteArray
-	ret c
+	ret nc
 
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar
 	cp SPECIAL
 	ret nc
-	jr FiftyPercentBoost
+	jr TwentyFivePercentNerf
 
-INCLUDE "data/abilities/shield_dust_mons.asm"
+INCLUDE "data/abilities/pillow_fort_mons.asm"
 
 HandleSharpness:
 	call GetCurrentMon
