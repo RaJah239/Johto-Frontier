@@ -3,7 +3,6 @@ CheckBoostingAbilities:
 	call HandleRivalry
 	call HandleSandForce
 	call HandleTechnician
-	call HandleHugePower
 	call HandleMultiscale
 	call HandleThickFat
 	call HandleSolarPowerBoost
@@ -127,16 +126,6 @@ HandleTechnician:
 	jmp FiftyPercentBoost
 
 INCLUDE "data/abilities/technician_mons.asm"
-
-HandleHugePower:
-	call GetCurrentMon
-	ld hl, HugePowerPokemon
-	call IsInByteArray
-	ret nc
-
-	jmp HundredPercentBoost
-
-INCLUDE "data/abilities/huge_power_mons.asm"
 
 HandleMultiscale:
 	call GetOpposingMon
