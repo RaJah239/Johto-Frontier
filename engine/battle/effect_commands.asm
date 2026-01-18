@@ -1643,7 +1643,7 @@ BattleCommand_CheckHit:
 ; ==============================
 ; === Ability: Hypnotic Aura ===
 ; ==============================
-	; check if stone edge was used
+	; check if hypnosis was used
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	cp HYPNOSIS
@@ -1656,6 +1656,23 @@ BattleCommand_CheckHit:
 	ret c
 
 .not_hypnosis_or_hypnotic_aura_mon
+
+; ================================
+; === Ability: Lullaby Mastery ===
+; ================================
+	; check if sing was used
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp SING
+	jr nz, .not_sing_or_lullaby_mastery_mon
+
+	; check it is was a lullaby mastery pokemon
+	call GetCurrentMon
+	ld hl, LullabyMasteryPokemon
+	call IsInByteArray
+	ret c
+
+.not_sing_or_lullaby_mastery_mon
 
 	call .StatModifiers
 
@@ -1848,6 +1865,7 @@ INCLUDE "data/abilities/sure_stream_mons.asm"
 INCLUDE "data/abilities/stonefall_mons.asm"
 INCLUDE "data/abilities/stonebound_mons.asm"
 INCLUDE "data/abilities/hypnotic_aura_mons.asm"
+INCLUDE "data/abilities/lullaby_mastery_mons.asm"
 INCLUDE "data/abilities/fade_in_mons.asm"
 INCLUDE "data/abilities/sand_veil_mons.asm"
 INCLUDE "data/abilities/compound_eyes_mons.asm"
