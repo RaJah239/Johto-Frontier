@@ -3148,6 +3148,12 @@ AI_Smart_Swagger:
 
 AI_Smart_Trick:
 AI_Smart_Attract:
+
+; never use if player has substitute
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
+	jmp nz, StandardDiscourage
+
 ; 90% chance to encourage this move during the first turn of player's Pokemon.
 ; otherwise discourage
 
