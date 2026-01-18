@@ -1640,6 +1640,23 @@ BattleCommand_CheckHit:
 
 .not_stone_edge_or_stonebound_mon
 
+; ==============================
+; === Ability: Hypnotic Aura ===
+; ==============================
+	; check if stone edge was used
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp HYPNOSIS
+	jr nz, .not_hypnosis_or_hypnotic_aura_mon
+
+	; check it is was a hypnotic aura pokemon
+	call GetCurrentMon
+	ld hl, HypnoticAuraPokemon
+	call IsInByteArray
+	ret c
+
+.not_hypnosis_or_hypnotic_aura_mon
+
 	call .StatModifiers
 
 	ld a, [wPlayerMoveStruct + MOVE_ACC]
@@ -1830,6 +1847,7 @@ INCLUDE "data/abilities/true_blizzard_mons.asm"
 INCLUDE "data/abilities/sure_stream_mons.asm"
 INCLUDE "data/abilities/stonefall_mons.asm"
 INCLUDE "data/abilities/stonebound_mons.asm"
+INCLUDE "data/abilities/hypnotic_aura_mons.asm"
 INCLUDE "data/abilities/fade_in_mons.asm"
 INCLUDE "data/abilities/sand_veil_mons.asm"
 INCLUDE "data/abilities/compound_eyes_mons.asm"
