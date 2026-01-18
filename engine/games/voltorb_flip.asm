@@ -96,6 +96,7 @@ VFInitLevel:
 	add a, 7 ;calculate the "base"
 	ld c, a
 	jr .retry23
+
 .highlevel ;base is calculated differently starting at level 6
 	add a, 12
 	ld c, a
@@ -121,6 +122,7 @@ VFInitLevel:
 	jr c, .done
 	jr z, .done
 	jr .continue23
+
 .generate2
 	ld a, [hl]
 	cp 1
@@ -132,12 +134,13 @@ VFInitLevel:
 	ld c, a
 	jr c, .done
 	jr z, .done
-	jr .continue23
+
 .continue23
 	inc hl
 	dec b
 	jr nz, .loop23
 	jr .retry23
+
 .done
 	ld a, [$c41a]
 	add a, 5 ;number of voltorb
@@ -163,12 +166,13 @@ VFInitLevel:
 	ld [hl], a
 	dec c
 	jr z, .donev
-	jr .continuev
+
 .continuev
 	inc hl
 	dec b
 	jr nz, .loopv
 	jr .retryv
+
 .donev
 	ld de, $c400
 	ld b, $5
@@ -311,7 +315,7 @@ VFInput:
 	ld a, [$c41c]
 	ld [$c41e], a
 	push de
-	ld de, 7
+	ld de, SFX_READ_TEXT
 	call PlaySFX
 	pop de
 	pop af
@@ -323,7 +327,6 @@ VFInput:
 	jmp nz, .upbutton
 	bit 7, a
 	jmp nz, .downbutton
-	
 	ret
 
 .abutton
@@ -343,7 +346,7 @@ VFInput:
 	and 3
 	jr nz, .skipintense
 	push de
-	ld de, 154
+	ld de, SFX_CHOOSE_A_CARD
 	call WaitPlaySFX
 	pop de
 	push bc
@@ -390,7 +393,7 @@ VFInput:
 	di
 	call VFRefreshScreen
 	ei
-	ld de, 148 ;level clear
+	ld de, SFX_3RD_PLACE ;level clear
 	call WaitPlaySFX
 	ld c, 60 ;1 seconds
 	call DelayFrames
@@ -399,7 +402,7 @@ VFInput:
 	cp 9
 	call z, .caplevel
 	ld [$c41a], a
-	ld de, 34
+	ld de, SFX_TRANSACTION
 	call WaitPlaySFX
 	ld hl, $c498
 	ld a, [hli]
@@ -424,9 +427,11 @@ VFInput:
 	ld a, e
 	ld [wCoins + 1], a
 	jmp VFInitLevel
+
 .caplevel
 	dec a
 	ret
+
 .maybecap
 	cp $27
 	jr nz, .capcoins
@@ -434,6 +439,7 @@ VFInput:
 	cp $f
 	jr nc, .capcoins
 	jr .totalcoins
+
 .capcoins
 	ld de, $270f
 	jr .totalcoins
@@ -459,24 +465,28 @@ VFInput:
 	bit 6, c
 	jr nz, .toggle1
 	ret
+
 .bleft
 	bit 7, c
 	jr nz, .toggle2
 	bit 6, c
 	jr nz, .toggle0
 	ret
+
 .bup
 	bit 5, c
 	jr nz, .toggle0
 	bit 4, c
 	jr nz, .toggle1
 	ret
+
 .bdown
 	bit 5, c
 	jr nz, .toggle2
 	bit 4, c
 	jr nz, .toggle3
 	ret
+
 .toggle0
 	xor $80
 	ld [de], a
@@ -503,6 +513,7 @@ VFInput:
 .norowwrap
 	ld [$c41b], a
 	ret
+
 .leftbutton
 	ld a, b
 	dec a
@@ -520,6 +531,7 @@ VFInput:
 .nocolwrap
 	ld [$c41c], a
 	ret
+
 .downbutton
 	ld a, c
 	inc a
@@ -651,8 +663,8 @@ VFInitMap:
 	ld a, b
 	cp a, 7
 	jr nz, .loopa
-	ei
-	ret
+	reti
+
 .coinstring
 	db "COINS@"
 .blank
@@ -805,6 +817,7 @@ VFRefreshMap:
 	jr z, .highlighted
 	res 3, a
 	jr .checkflip
+
 .highlighted
 	set 3, a
 .checkflip
@@ -901,6 +914,7 @@ VFRefreshMap:
 	add hl, de
 	pop de
 	jmp .g1x1
+
 .highlight
 	push bc
 	push de
@@ -924,6 +938,7 @@ VFRefreshMap:
 	pop de
 	pop bc
 	jr .finishcard
+
 .rowdone
 	dec b
 	jr z, .done
@@ -933,6 +948,7 @@ VFRefreshMap:
 	add hl, de
 	pop de
 	jmp .g1x1
+
 .done
 	hlcoord 15, 16
 	ld de, .blank
@@ -948,6 +964,7 @@ VFRefreshMap:
 	ld de, wCoins
 	ld bc, $0204
 	jmp PrintNum
+
 .coinstring
 	db "COINS@"
 .blank
@@ -1008,6 +1025,7 @@ VFRefreshMap:
 	inc a
 	ld [hl], a
 	jmp .carddone
+
 .marked0
 	ld a, 6 ;upper left corner marked
 	ldi [hl], a
@@ -1024,6 +1042,7 @@ VFRefreshMap:
 	ld a, 24 ;lower right corner marked
 	ld [hl], a
 	jmp .carddone
+
 .voltorb
 	ld a, 3
 	ldi [hl], a
@@ -1281,7 +1300,7 @@ VFRefreshScreen1: ;bc is the coordinates to refresh (3x3 tiles)
 
 VFFlipAnimation:
 	push de
-	ld de, 195 ;flip sound
+	ld de, SFX_INTRO_SUICUNE_1 ;flip sound
 	call WaitPlaySFX
 	ld de, 3 ;first frame of the flip
 .flipframe
@@ -1370,9 +1389,11 @@ VFFlipAnimation:
 	jr nz, .flipframe
 	pop de
 	ret
+
 .switchdir
 	ld de, $06fd
 	jr .flipframe
+
 .finish
 	ld hl, $c41b
 	ld a, [hli]
@@ -1396,9 +1417,9 @@ VFBoom:
 	di
 	call VFRefreshScreen
 	ei
-	ld de, 91
+	ld de, SFX_EGG_BOMB
 	call WaitPlaySFX
-	ld de, 157
+	ld de, SFX_QUIT_SLOTS
 	call WaitPlaySFX
 	ld c, 240 ;4 seconds
 	call DelayFrames
@@ -1408,6 +1429,7 @@ VFBoom:
 .reset
 	ld [$c41a], a
 	jmp VFInitLevel
+
 .level0
 	ld a, 1
 	jr .reset
@@ -1462,17 +1484,20 @@ VFMultiplyCoins:
 	pop de
 	pop bc
 	ret
+
 .initcoins
 	pop af
 	ld h, 0
 	ld l, a
 	jr .updatecoins
+
 .coinsound
 	push de
-	ld de, 34
+	ld de, SFX_TRANSACTION
 	call WaitPlaySFX
 	pop de
 	jr .resume
+
 .maybecap
 	cp $27
 	jr nz, .capcoins
@@ -1481,13 +1506,14 @@ VFMultiplyCoins:
 	jr nc, .capcoins
 	pop af
 	jr .updatecoins
+
 .capcoins
 	pop af
 	ld hl, $270f
 	jr .updatecoins
 
 VFKeepCoins:
-	ld de, 159 ;level clear
+	ld de, SFX_DEX_FANFARE_LESS_THAN_20 ;level clear
 	call WaitPlaySFX
 	ld c, 120 ;2 seconds
 	call DelayFrames
@@ -1496,7 +1522,7 @@ VFKeepCoins:
 	jr z, .fixlevel
 .setlevel
 	ld [$c41a], a
-	ld de, 34
+	ld de, SFX_TRANSACTION
 	call WaitPlaySFX
 	ld hl, $c498
 	ld a, [hli]
@@ -1528,12 +1554,15 @@ VFKeepCoins:
 	cp $f
 	jr nc, .capcoins
 	jr .totalcoins
+
 .capcoins
 	ld de, $270f
 	jr .totalcoins
+
 .fixlevel
 	inc a
 	jr .setlevel
+
 VFExit:
 	call VFKeepCoins
 	ld a, 1
