@@ -1751,12 +1751,12 @@ BattleCommand_CheckHit:
 	ld c, a
 
 	ld a, [wBattleWeather]
-	cp WEATHER_SANDSTORM
-	jr nz, .finish_foe_sand_veil
+	cp WEATHER_HAIL
+	jr nz, .finish_foe_snow_cloak
 	ld a, [wEnemyMonSpecies]
-	call Sandveil
+	call SnowCloak
 
-.finish_foe_sand_veil
+.finish_foe_snow_cloak
 	ld a, [wBattleMonSpecies]
 	call FadeIn
 
@@ -1771,12 +1771,12 @@ BattleCommand_CheckHit:
 	ld c, a
 
 	ld a, [wBattleWeather]
-	cp WEATHER_SANDSTORM
-	jr nz, .finish_player_sand_veil
+	cp WEATHER_HAIL
+	jr nz, .finish_player_snow_cloak
 	ld a, [wBattleMonSpecies]
-	call Sandveil
+	call SnowCloak
 
-.finish_player_sand_veil
+.finish_player_snow_cloak
 	ld a, [wEnemyMonSpecies]
 	call FadeIn
 
@@ -1885,7 +1885,7 @@ INCLUDE "data/abilities/hypnotic_aura_mons.asm"
 INCLUDE "data/abilities/lullaby_mastery_mons.asm"
 INCLUDE "data/abilities/meteor_lock_mons.asm"
 INCLUDE "data/abilities/fade_in_mons.asm"
-INCLUDE "data/abilities/sand_veil_mons.asm"
+INCLUDE "data/abilities/snow_cloak_mons.asm"
 INCLUDE "data/abilities/compound_eyes_mons.asm"
 
 INCLUDE "data/battle/accuracy_multipliers.asm"
