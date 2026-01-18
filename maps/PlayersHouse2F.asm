@@ -93,7 +93,7 @@ if DEF(_DEBUG)
 
 	; 1st mon moves
 	loadmem wPartyMon1Moves+0, SPLASH
-	loadmem wPartyMon1Moves+1, X_SCISSOR
+	loadmem wPartyMon1Moves+1, TAUNT
 	loadmem wPartyMon1Moves+2, NO_MOVE
 	loadmem wPartyMon1Moves+3, NO_MOVE
 
