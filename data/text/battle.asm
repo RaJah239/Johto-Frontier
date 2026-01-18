@@ -243,20 +243,26 @@ PeltedByHailText:
 
 IceBodyText:
 	text "<TARGET>"
-	line "recovered HP due"
-	cont "to its Ice Body!"
+	line "heals HP via its"
+	cont "Ice Body!"
 	prompt
 
-RainDishText:
+PhotosynthesisText:
 	text "<TARGET>"
-	line "recovered HP due"
-	cont "to its Rain Dish!"
+	line "heals HP via its"
+	cont "Photosynthesis!"
 	prompt
 
 SandBodyText:
 	text "<TARGET>"
-	line "recovered HP due"
-	cont "to its Sand Body!"
+	line "heals HP via its"
+	cont "Sand Body!"
+	prompt
+
+RainDishText:
+	text "<TARGET>"
+	line "heals HP via its"
+	cont "Rain Dish!"
 	prompt
 
 PerishCountText:

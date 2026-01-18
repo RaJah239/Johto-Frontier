@@ -63,6 +63,10 @@ IceBodyPokemon_AI:
     db REGICE
     db -1 ; end
 
+PhotosynthesisPokemon_AI:
+    db TROPIUS
+    db -1 ; end
+
 FireAbsorbPokemon_AI:
     db CYNDAQUIL
     db QUILAVA

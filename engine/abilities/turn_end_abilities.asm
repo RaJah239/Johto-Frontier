@@ -6,6 +6,7 @@ TurnEndAbilities:
 	call HandleRainDish
 	call HandleSandBody
 	call HandleTenacity
+	call HandlePhotosynthesis
 	ret
 
 SolarPowerHPLossPokemon:
@@ -171,6 +172,63 @@ HandleHydration:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/hydration_mons.asm"
+
+HandlePhotosynthesis:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .DoEnemyFirst
+	call SetPlayerTurn
+    ld a, [wBattleMonSpecies]
+	call .do_it
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	jr .do_it
+
+.DoEnemyFirst:
+	call SetEnemyTurn
+	ld a, [wEnemyMonSpecies]
+	call .do_it
+	call SetPlayerTurn
+	ld a, [wBattleMonSpecies]
+
+.do_it
+	call GetCurrentMon
+	ld hl, PhotosynthesisPokemon
+	call IsInByteArray
+	ret nc
+
+	; if it is sunny, if so, activate
+	ld a, [wBattleWeather]
+	cp WEATHER_SUN
+	ret nz
+
+	ld hl, wBattleMonHP
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_hp
+	ld hl, wEnemyMonHP
+
+.got_hp
+; Don't restore if we're already at max HP
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	cp b
+	jr nz, .restore
+	ld a, [hl]
+	cp c
+	ret z
+
+.restore
+	farcall GetSixteenthMaxHP
+	farcall SwitchTurnCore
+	farcall RestoreHP
+	ld hl, PhotosynthesisText
+	jmp StdBattleTextbox
+
+INCLUDE "data/abilities/photosynthesis_mons.asm"
 
 HandleIceBody:
 	ldh a, [hSerialConnectionStatus]

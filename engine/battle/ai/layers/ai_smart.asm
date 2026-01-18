@@ -3382,7 +3382,7 @@ AI_Smart_RainDance:
 
 	push hl
 	ld hl, RainDanceMoves
-	jr AI_Smart_WeatherMove
+	jmp AI_Smart_WeatherMove
 
 .encourage
 	dec [hl]
@@ -3431,6 +3431,14 @@ AI_Smart_SunnyDay:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, SolarPowerPokemon_AI
+	call IsInByteArray
+	pop hl
+	jr c, .encourage
+
+; encourage if enemy has the photosynthesis ability pokemon
+	ld a, [wEnemyMonSpecies]
+	push hl
+	ld hl, PhotosynthesisPokemon_AI
 	call IsInByteArray
 	pop hl
 	jr c, .encourage
