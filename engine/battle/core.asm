@@ -1996,10 +1996,6 @@ StopDangerSound:
 	ret
 
 FaintYourPokemon:
-	; placed before KOBoost should the winner
-	; be knocked it by Aftermath first
-	call Aftermath
-
 	farcall KOBoost
 
 	call StopDangerSound
@@ -2031,10 +2027,6 @@ FaintYourPokemon:
 	jmp StdBattleTextbox
 
 FaintEnemyPokemon:
-	; placed before KOBoost should the winner
-	; be knocked it by Aftermath first
-	call Aftermath
-
 	farcall KOBoost
 
 	call WaitSFX
@@ -8976,20 +8968,3 @@ GetMovePower:
 	call GetFarByte
 	ld b, a
 	ret
-
-; ==========================
-; === Ability: Aftermath ===
-; ==========================
-Aftermath:
-	call GetOpposingMon
-	ld hl, AftermathPokemon
-	call IsInByteArray
-	ret nc
-
-	; deal 1/4 max HP of damage to opponent
-	ld hl, BattleText_Aftermath
-	call StdBattleTextbox
-	call GetQuarterMaxHP
-	jmp SubtractHPFromUser
-
-INCLUDE "data/abilities/aftermath_mons.asm"
