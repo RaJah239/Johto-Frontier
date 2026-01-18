@@ -1137,15 +1137,13 @@ HandleInfernalHowl:
 	call IsInByteArray
 	ret nc
 
-	; play roar animation
-	ld de, ROAR
+	; play snarl animation
+	ld de, SNARL
 	farcall Call_PlayBattleAnim
 
 	ld hl, InfernalHowlText
 	call StdBattleTextbox
 
-	farcall BattleCommand_AttackDown
-	farcall BattleCommand_StatDownMessage
 	farcall BattleCommand_SpecialAttackDown
 	farjp BattleCommand_StatDownMessage
 

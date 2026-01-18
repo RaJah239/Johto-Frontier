@@ -1,4 +1,4 @@
-; List of all Pokemon that when switched in, reduces target's attack and special attack
+; List of all Pokemon that when switched in, reduces target's special attack
 
 InfernalHowlPokemon:
 ;    db HOUNDOUR
