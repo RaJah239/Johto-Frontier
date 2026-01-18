@@ -12,6 +12,7 @@ CheckBoostingAbilities:
 	call HandleRainSurge
 	call HandlePillowFort
 	call HandleSharpness
+	call HandleBallistics
 
 ; added last to recalculate after boosting abilities are factored in
 ; hard mode
@@ -219,7 +220,7 @@ HandleMentalFocus:
 	and TYPE_MASK
 	cp PSYCHIC_TYPE
 	ret nz
-	jr FiftyPercentBoost
+	jmp FiftyPercentBoost
 
 INCLUDE "data/abilities/mental_focus_mons.asm"
 
@@ -272,6 +273,22 @@ HandleSharpness:
 	jr FiftyPercentBoost
 
 INCLUDE "data/abilities/sharpness_mons.asm"
+
+HandleBallistics:
+	call GetCurrentMon
+	ld hl, BallisticsPokemon
+	call IsInByteArray
+	ret nc
+
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	ld hl, BallisticsMoves
+	call IsInByteArray
+	ret nc
+
+	jr FiftyPercentBoost
+
+INCLUDE "data/abilities/ballistics_mons.asm"
 
 TwentyPercentNerf:
 	ld a, 80
@@ -354,6 +371,21 @@ SharpMoves:
 	db SLASH
 	db THROAT_CHOP
 	db X_SCISSOR
+	db -1 ; end
+
+BallisticsMoves:
+	db AURORA_BEAM
+	db BUBBLEBEAM
+	db FIRE_BLAST
+	db FLASH_CANNON
+	db GUNK_SHOT
+	db HYPER_BEAM
+	db ICE_BEAM
+	db PSYBEAM
+	db ROCK_BLAST
+	db SIGNAL_BEAM
+	db SLUDGE_BOMB
+	db WATER_GUN
 	db -1 ; end
 
 ; saving a few bytes by putting it here
