@@ -6,7 +6,6 @@
 	const EARLSPOKEMONACADEMY_YOUNGSTER2
 	const EARLSPOKEMONACADEMY_POKEDEX1
 	const EARLSPOKEMONACADEMY_POKEDEX2
-	const EARLSPOKEMONACADEMY_POKEDEX3
 	const EARLSPOKEMONACADEMY_YOUNGSTER3
 
 EarlsPokemonAcademy_MapScripts:
@@ -396,76 +395,6 @@ AcademyNotebookText3:
 	line "anymore…"
 	done
 
-AcademyStickerMachineText:
-	text "This super machine"
-	line "prints data out as"
-
-	para "stickers!"
-	done
-
-SharpnessMovesNotebook:
-	opentext
-	writetext WantToLearnAboutSharpnessMovesText
-	yesorno
-	iffalse .Done
-	writetext SharpnessMovesNotebookText
-	waitbutton
-.Done:
-	closetext
-	end
-
-WantToLearnAboutSharpnessMovesText:
-	text "It's a list of all"
-	line "Sharpness Moves!"
-
-	para "Want to read it?"
-	done
-
-SharpnessMovesNotebookText:
-	text "In alphabetical"
-	line "order, it goes:"
-
-	para "Cross Chop, Cut,"
-	line "Dragon Claw,"
-	cont "Leaf Blade,"
-	cont "Night Slash,"
-	cont "Psycho Cut, Slash,"
-	cont "Throat Chop and"
-	cont "X-Scissor."
-	done
-
-PunchingMovesNotebook:
-	opentext
-	writetext WantToLearnAboutPunchingMovesText
-	yesorno
-	iffalse .Done
-	writetext PunchingMovesNotebookText
-	waitbutton
-.Done:
-	closetext
-	end
-
-WantToLearnAboutPunchingMovesText:
-	text "It's a list of all"
-	line "Punching Moves!"
-
-	para "Want to read it?"
-	done
-
-PunchingMovesNotebookText:
-	text "In alphabetical"
-	line "order, it goes:"
-
-	para "Bullet Punch,"
-	line "Drain Punch,"
-	cont "Fire Punch,"
-	cont "Ice Punch,"
-	cont "Mach Punch,"
-	cont "Meteor Mash,"
-	cont "Shadow Punch and"
-	cont "Thunder Punch."
-	done
-
 EarlsPokemonAcademyYoungsterHardModeScript:
 	jumptextfaceplayer EarlsPokemonAcademyYoungsterHardModeText
 
@@ -484,6 +413,117 @@ EarlsPokemonAcademyYoungsterHardModeText:
 	
 	para "An unforgiving but"
 	line "worthy challenge!"
+	done
+
+MoveEnchancingAbilitiesNotebook:
+	opentext
+	writetext MoveEnchancingAbilitiesText
+	yesorno
+	iffalse .Done
+.list:
+	loadmenu .MoveEnchancingAbilitiesHeader
+	verticalmenu
+	closewindow
+	ifequal 1, .PunchingMoves
+	ifequal 2, .SharpnessMoves
+	ifequal 3, .BallisticsMoves
+.Done:
+	closetext
+	end
+
+.MoveEnchancingAbilitiesHeader:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 0, 2, 19, TEXTBOX_Y - 1
+	dw .MenuData
+	db 1 ; default option
+
+.MenuData:
+	db STATICMENU_CURSOR ; flags
+	db 4 ; items
+	db "Punching Moves@"
+	db "Sharpness Moves@"
+	db "Ballistics Moves@"
+	db "Cancel@"
+
+.PunchingMoves
+	writetext PunchingMovesText
+	sjump .list
+
+.SharpnessMoves
+	writetext SharpnessMovesText
+	sjump .list
+
+.BallisticsMoves
+	writetext BallisticsMovesText
+	sjump .list
+
+MoveEnchancingAbilitiesText:
+	text "It's about move"
+	line "buffing abilities."
+
+	para "These moves aren't"
+	line "boosted if they're"
+	cont "already the same"
+	cont "type as the user."
+
+	para "Want to read more?"
+	done
+
+PunchingMovesText:
+	text "It's a list of all"
+	line "Punching Moves!"
+
+	para "In alphabetical"
+	line "order, it goes:"
+
+	para "Bullet Punch,"
+	line "Drain Punch,"
+	cont "Fire Punch,"
+	cont "Ice Punch,"
+	cont "Mach Punch,"
+	cont "Meteor Mash,"
+	cont "Shadow Punch and"
+	cont "Thunder Punch."
+	done
+
+SharpnessMovesText:
+	text "It's a list of all"
+	line "Sharpness Moves!"
+
+	para "In alphabetical"
+	line "order, it goes:"
+
+	para "Cross Chop, Cut,"
+	line "Dragon Claw,"
+	cont "Leaf Blade,"
+	cont "Night Slash,"
+	cont "Psycho Cut, Slash,"
+	cont "Throat Chop and"
+	cont "X-Scissor."
+	done
+
+BallisticsMovesText:
+	text "It's a list of all"
+	line "Ballistics Moves!"
+
+	para "They are all guns,"
+	line "blast and beams."
+
+	para "In alphabetical"
+	line "order, it goes:"
+
+	para "Aurora Beam,"
+	line "Bubblebeam,"
+	cont "Fire Blast,"
+	cont "Flash Cannon,"
+	cont "Gunk Shot,"
+	cont "Hyper Beam"
+	cont "Ice Beam,"
+	cont "Psybeam,"
+	cont "Rock Blast,"
+	cont "Signal Beam,"
+	cont "Sludge Bomb and"
+	cont "Water Gun."
 	done
 
 EarlsPokemonAcademy_MapEvents:
@@ -506,6 +546,5 @@ EarlsPokemonAcademy_MapEvents:
 	object_event  4, 11, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyGameboyKid2Script, -1
 	object_event  4,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyYoungster2Script, -1
 	object_event  2,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, AcademyNotebook, -1
-	object_event  4,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SharpnessMovesNotebook, -1
-	object_event  5,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PunchingMovesNotebook, -1
+	object_event  4,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MoveEnchancingAbilitiesNotebook, -1
 	object_event  7,  3, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyYoungsterHardModeScript, -1
