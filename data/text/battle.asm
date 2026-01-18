@@ -51,6 +51,11 @@ SturdyText:
 	line "knocked out!"
 	prompt
 
+AllureText:
+	text "<USER>'s"
+	line "Allure activated!"
+	prompt
+
 InnerFocusText:
 	text "<TARGET>'s"
 	line "Inner Focus barred"

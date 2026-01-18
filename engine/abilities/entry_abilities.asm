@@ -44,6 +44,7 @@ EntryAbilities2:
 	call HandleSiegebreaker
 	call HandleProvocateur
 	call HandleDisarm
+	call HandleAllure
 	ret
 
 ResetVolatileAbilityPlayer:
@@ -68,6 +69,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_SIEGEBREAKER_PLAYER
 	ResetEventFlag EVENT_PROVOCATEUR_PLAYER
 	ResetEventFlag EVENT_DISARM_PLAYER
+	ResetEventFlag EVENT_ALLURE_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -92,6 +94,7 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_SIEGEBREAKER_FOE
 	ResetEventFlag EVENT_PROVOCATEUR_FOE
 	ResetEventFlag EVENT_DISARM_FOE
+	ResetEventFlag EVENT_ALLURE_FOE
 	ret
 
 ; ========================
@@ -1409,6 +1412,56 @@ CheckIfEnemyHasAnItem:
 	ret
 
 INCLUDE "data/abilities/disarm_mons.asm"
+
+HandleAllure:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_ALLURE_PLAYER
+	ret nz
+	SetEventFlag EVENT_ALLURE_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_ALLURE_FOE
+	ret nz
+	SetEventFlag EVENT_ALLURE_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has allure
+	call GetCurrentMon
+	ld hl, AllurePokemon
+	call IsInByteArray
+	ret nc
+
+	; exit if same gender
+	farcall CheckOppositeGender
+	ret c
+
+	; play attract animation
+	ld de, ATTRACT
+	farcall Call_PlayBattleAnim
+
+	ld hl, AllureText
+	call StdBattleTextbox
+
+	farjp BattleCommand_Attract
+
+INCLUDE "data/abilities/allure_mons.asm"
 
 AnyHazardsPresent:
 	ld a, [wPlayerScreens]
