@@ -1674,6 +1674,23 @@ BattleCommand_CheckHit:
 
 .not_sing_or_lullaby_mastery_mon
 
+; ============================
+; === Ability: Meteor Lock ===
+; ============================
+	; check if meteor mash was used
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp METEOR_MASH
+	jr nz, .not_meteor_mash_or_meteor_lock_mon
+
+	; check it is was a meteor lock pokemon
+	call GetCurrentMon
+	ld hl, MeteorLockPokemon
+	call IsInByteArray
+	ret c
+
+.not_meteor_mash_or_meteor_lock_mon
+
 	call .StatModifiers
 
 	ld a, [wPlayerMoveStruct + MOVE_ACC]
@@ -1866,6 +1883,7 @@ INCLUDE "data/abilities/stonefall_mons.asm"
 INCLUDE "data/abilities/stonebound_mons.asm"
 INCLUDE "data/abilities/hypnotic_aura_mons.asm"
 INCLUDE "data/abilities/lullaby_mastery_mons.asm"
+INCLUDE "data/abilities/meteor_lock_mons.asm"
 INCLUDE "data/abilities/fade_in_mons.asm"
 INCLUDE "data/abilities/sand_veil_mons.asm"
 INCLUDE "data/abilities/compound_eyes_mons.asm"
