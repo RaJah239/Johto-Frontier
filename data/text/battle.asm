@@ -1372,6 +1372,24 @@ BattleText_SandStreamText:
 	line "brewed!"
 	prompt
 
+TenacityHealingText:
+	text "<USER>'s"
+	line "Tenacity"
+	cont "activated!"
+
+	para "<USER>"
+	line "healed its status!"
+	prompt
+
+HydrationHealingText:
+	text "<USER>'s"
+	line "Hydration"
+	cont "activated!"
+
+	para "<USER>"
+	line "healed its status!"
+	prompt
+
 BattleText_SnowWarningText:
 	text "<USER>'s"
 	line "Snow Warning"

@@ -5,7 +5,7 @@ TurnEndAbilities:
 	call HandleIceBody
 	call HandleRainDish
 	call HandleSandBody
-	call HandleMolting
+	call HandleTenacity
 	ret
 
 SolarPowerHPLossPokemon:
@@ -17,7 +17,7 @@ SolarPowerHPLossPokemon:
 	db CHARIZARD
 	db -1 ; end
 
-HandleMolting:
+HandleTenacity:
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
 	jr z, .DoEnemyFirst
@@ -37,7 +37,7 @@ HandleMolting:
 
 .do_it
 	call GetCurrentMon
-	ld hl, MoltingPokemon
+	ld hl, TenacityPokemon
 	call IsInByteArray
 	ret nc
 
@@ -45,23 +45,12 @@ HandleMolting:
 	cp 33 percent + 1
 	ret nc ; 1/3 chance
 
-	call DoMolting
-	farjp CalcPokemonStats
+	call DoStatusRecovery
 
-DoMolting:
-	ld a, BATTLE_VARS_STATUS
-	call GetBattleVarAddr
-	and a
-	ret z
-	xor a
-	ld [hl], a
-	farcall SwitchTurnCore
-	farcall ItemRecoveryAnim
-	farcall SwitchTurnCore
-	ld hl, MoltingText
+	ld hl, TenacityHealingText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/molting_mons.asm"
+INCLUDE "data/abilities/tenacity_mons.asm"
 
 HandleRegenerator:
 	ldh a, [hSerialConnectionStatus]
@@ -176,20 +165,9 @@ HandleHydration:
 	cp WEATHER_RAIN
 	ret nz
 
-	call DoHydration
-	farjp CalcPokemonStats
+	call DoStatusRecovery
 
-DoHydration:
-	ld a, BATTLE_VARS_STATUS
-	call GetBattleVarAddr
-	and a
-	ret z
-	xor a
-	ld [hl], a
-	farcall SwitchTurnCore
-	farcall ItemRecoveryAnim
-	farcall SwitchTurnCore
-	ld hl, HydrationText
+	ld hl, HydrationHealingText
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/hydration_mons.asm"
@@ -400,3 +378,15 @@ HandleSandBody:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/sand_body_mons.asm"
+
+DoStatusRecovery:
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	and a
+	ret z
+	xor a
+	ld [hl], a
+	farcall SwitchTurnCore
+	farcall ItemRecoveryAnim
+	farcall SwitchTurnCore
+	farjp CalcPokemonStats
