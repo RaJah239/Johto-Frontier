@@ -2155,11 +2155,6 @@ BattleCommand_FailureText:
 	jmp EndMoveEffect
 
 BattleCommand_ApplyDamage:
-	ld a, BATTLE_VARS_SUBSTATUS1_OPP
-	call GetBattleVar
-	bit SUBSTATUS_ENDURE, a
-	jr z, .sturdy
-
 	farcall BattleCommand_FalseSwipe
 	ld b, 0
 	jr nc, .damage
@@ -6960,7 +6955,6 @@ INCLUDE "engine/battle/move_effects/fury_drive.asm"
 INCLUDE "engine/battle/move_effects/quiver_dance.asm"
 INCLUDE "engine/battle/move_effects/stealth_rock.asm"
 INCLUDE "engine/battle/move_effects/defog.asm"
-INCLUDE "engine/battle/move_effects/endure.asm"
 INCLUDE "engine/battle/move_effects/spikes.asm"
 INCLUDE "engine/battle/move_effects/perish_song.asm"
 INCLUDE "engine/battle/move_effects/rollout.asm"

@@ -1315,11 +1315,6 @@ SandstormBrewedText:
 	line "brewed!"
 	prompt
 
-BracedItselfText:
-	text "<USER>"
-	line "braced itself!"
-	prompt
-
 FellInLoveText:
 	text "<TARGET>"
 	line "fell in love!"

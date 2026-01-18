@@ -1209,12 +1209,6 @@ Sandstorm:
 	farcommand
 	endmove
 
-Endure:
-	usedmovetext
-	doturn
-	endure
-	endmove
-
 Rollout:
 	checkcurl
 	doturn

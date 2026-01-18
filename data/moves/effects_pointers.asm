@@ -100,7 +100,6 @@ MoveEffectsPointers:
 	dw Foresight
 	dw PerishSong
 	dw Sandstorm
-	dw Endure
 	dw Rollout
 	dw Swagger
 	dw Attract

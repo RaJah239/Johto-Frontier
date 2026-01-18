@@ -73,7 +73,6 @@ BattleCommandPointers:
 	dw BattleCommand_Protect
 	dw BattleCommand_Spikes
 	dw BattleCommand_PerishSong
-	dw BattleCommand_Endure
 	dw BattleCommand_CheckCurl
 	dw BattleCommand_RolloutPower
 	dw BattleCommand_Attract

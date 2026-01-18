@@ -73,7 +73,6 @@ ENDM
 	command protect                 ; 55
 	command spikes                  ; 56
 	command perishsong              ; 58
-	command endure                  ; 5a
 	command checkcurl               ; 5b
 	command rolloutpower            ; 5c
 	command attract                 ; 5f
