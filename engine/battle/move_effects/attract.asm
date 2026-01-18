@@ -11,6 +11,10 @@ BattleCommand_Attract:
 	bit SUBSTATUS_IN_LOVE, [hl]
 	jr nz, .failed
 
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
+	jr z, .failed
+
 	set SUBSTATUS_IN_LOVE, [hl]
 	call AnimateCurrentMove
 
