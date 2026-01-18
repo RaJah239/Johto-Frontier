@@ -120,7 +120,7 @@ Moves:
 	move GUNK_SHOT,    EFFECT_POISON_HIT,        120, POISON,        PHYSICAL,  85, 16,  20
 	move RECOVER,      EFFECT_HEAL,                0, NORMAL,        STATUS,   100, 24,   0
 	move HARDEN,       EFFECT_DEFENSE_UP,          0, NORMAL,        STATUS,   100, 40,   0
-	move MINIMIZE,     EFFECT_EVASION_UP,          0, NORMAL,        STATUS,   100, 32,   0 ; to replace
+	move THUNDER_FANG, EFFECT_THUNDER_FANG,       60, FIRE,          PHYSICAL, 100, 24,  10
 	move SMOKESCREEN,  EFFECT_ACCURACY_DOWN,       0, NORMAL,        STATUS,   100, 32,   0
 	move CONFUSE_RAY,  EFFECT_CONFUSE,             0, GHOST,         STATUS,   100, 16,   0
 	move WILD_CHARGE,  EFFECT_RECOIL_PARA_HIT,   120, ELECTRIC,      PHYSICAL, 100, 24,  10

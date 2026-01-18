@@ -112,7 +112,7 @@
 	const GUNK_SHOT    ; 68
 	const RECOVER      ; 69
 	const HARDEN       ; 6a
-	const MINIMIZE     ; 6b
+	const THUNDER_FANG ; 6b
 	const SMOKESCREEN  ; 6c
 	const CONFUSE_RAY  ; 6d
 	const WILD_CHARGE  ; 6e

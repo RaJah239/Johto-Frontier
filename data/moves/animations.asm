@@ -108,7 +108,7 @@ BattleAnimations::
 	dw BattleAnim_GunkShot
 	dw BattleAnim_Recover
 	dw BattleAnim_Harden
-	dw BattleAnim_Minimize
+	dw BattleAnim_ThunderFang
 	dw BattleAnim_Smokescreen
 	dw BattleAnim_ConfuseRay
 	dw BattleAnim_WildCharge
@@ -1389,6 +1389,7 @@ BattleAnim_Solarbeam:
 BattleAnim_Thunderpunch:
 	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_LIGHTNING
 	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 56, $43
+BattleAnim_Thunderpunch_Stub:
 	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $2
 	anim_sound 0, 1, SFX_THUNDER
 	anim_obj BATTLE_ANIM_OBJ_THUNDER_RIGHT, 152, 68, $0
@@ -3002,17 +3003,11 @@ BattleAnim_Substitute:
 	anim_wait 32
 	anim_ret
 
-BattleAnim_Minimize:
-	anim_sound 0, 0, SFX_SURF
-	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_call BattleAnim_TargetObj_2Row
-	anim_minimize
-	anim_bgeffect BATTLE_BG_EFFECT_WAVE_DEFORM_MON, $0, BG_EFFECT_USER, $0
-	anim_wait 48
-	anim_updateactorpic
-	anim_incbgeffect BATTLE_BG_EFFECT_WAVE_DEFORM_MON
-	anim_wait 48
-	anim_jump BattleAnim_ShowMon_0
+BattleAnim_ThunderFang:
+	anim_call BattleAnim_Bite
+	anim_clearobjs
+	anim_1gfx BATTLE_ANIM_GFX_LIGHTNING
+	anim_jump BattleAnim_Thunderpunch_Stub
 
 BattleAnim_SkyAttack:
 	anim_1gfx BATTLE_ANIM_GFX_SKY_ATTACK

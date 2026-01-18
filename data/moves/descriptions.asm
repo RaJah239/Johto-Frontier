@@ -107,7 +107,7 @@ MoveDescriptions::
 	dw GunkShotDescription
 	dw RecoverDescription
 	dw HardenDescription
-	dw MinimizeDescription
+	dw ThunderFangDescription
 	dw SmokescreenDescription
 	dw ConfuseRayDescription
 	dw WildChargeDescription
@@ -563,9 +563,9 @@ HardenDescription:
 	db   "Raises the user's"
 	line "DEFENSE.@"
 
-MinimizeDescription:
-	db   "Heightens evasive-"
-	line "ness.@"
+ThunderFangDescription:
+	db   "May paralyze or"
+	line "cause flinching.@"
 
 SmokescreenDescription:
 	db   "Lowers the foe's"

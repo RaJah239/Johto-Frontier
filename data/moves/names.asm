@@ -106,7 +106,7 @@ MoveNames::
 	li "Gunk Shot"
 	li "Recover"
 	li "Harden"
-	li "Minimize"
+	li "Thunder Fang"
 	li "Smokescreen"
 	li "Confuse Ray"
 	li "Wild Charge"
