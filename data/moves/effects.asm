@@ -1948,3 +1948,24 @@ IceFang:
 	effectchance ; independent chance
 	flinchtarget
 	endmove
+
+ThunderFang:
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	effectchance
+	paralyzetarget
+	effectchance ; independent chance
+	flinchtarget
+	endmove
