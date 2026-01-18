@@ -7,12 +7,10 @@ CheckBoostingAbilities:
 	call HandleThickFat
 	call HandleSolarPowerBoost
 	call HandleSteelWorker
-	call HandleIronFist
 	call HandleMentalFocus
 	call HandleRainSurge
 	call HandlePillowFort
-	call HandleSharpness
-	call HandleBallistics
+	call HandleMoveEnchancingAbilities
 
 ; added last to recalculate after boosting abilities are factored in
 ; hard mode
@@ -193,22 +191,6 @@ HandleSteelWorker:
 
 INCLUDE "data/abilities/steel_worker_mons.asm"
 
-HandleIronFist:
-	call GetCurrentMon
-	ld hl, IronFistPokemon
-	call IsInByteArray
-	ret nc
-
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	ld hl, PunchingMoves
-	call IsInByteArray
-	ret nc
-
-	jmp ThirtyPercentBoost
-
-INCLUDE "data/abilities/iron_fist_mons.asm"
-
 HandleMentalFocus:
 	call GetCurrentMon
 	ld hl, MentalFocusPokemon
@@ -240,7 +222,7 @@ HandleRainSurge:
 	call GetBattleVar
 	cp SPECIAL
 	ret c
-	jr FiftyPercentBoost
+	jmp FiftyPercentBoost
 
 INCLUDE "data/abilities/rain_surge_mons.asm"
 
@@ -254,9 +236,38 @@ HandlePillowFort:
 	call GetBattleVar
 	cp SPECIAL
 	ret nc
-	jr TwentyFivePercentNerf
+	jmp TwentyFivePercentNerf
 
 INCLUDE "data/abilities/pillow_fort_mons.asm"
+
+HandleMoveEnchancingAbilities:
+	; get move type
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	and TYPE_MASK
+	ld d, a
+
+	; select attacker types
+	ld hl, wBattleMonType1
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .check
+	ld hl, wEnemyMonType1
+
+.check
+	ld a, [hl]
+	cp d
+	ret z         ; STAB → exit
+	inc hl
+	ld a, [hl]
+	cp d
+	ret z         ; STAB → exit
+	; no STAB → continue
+
+	call HandleSharpness
+	call HandleBallistics
+	call HandleIronFist
+	ret
 
 HandleSharpness:
 	call GetCurrentMon
@@ -289,6 +300,24 @@ HandleBallistics:
 	jr FiftyPercentBoost
 
 INCLUDE "data/abilities/ballistics_mons.asm"
+
+HandleIronFist:
+	call GetCurrentMon
+	ld hl, IronFistPokemon
+	call IsInByteArray
+	ret nc
+
+	; since the move is not stab,
+	; boost damage if using a punching move
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	ld hl, PunchingMoves
+	call IsInByteArray
+	ret nc
+
+	jr ThirtyPercentBoost
+
+INCLUDE "data/abilities/iron_fist_mons.asm"
 
 TwentyPercentNerf:
 	ld a, 80
