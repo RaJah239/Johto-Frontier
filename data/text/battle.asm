@@ -63,9 +63,9 @@ SerenityText:
 	cont "status problems!"
 	prompt
 
-ClearBodyText:
+ResilienceText:
 	text "<TARGET>'s"
-	line "Clear Body"
+	line "Resilience"
 	cont "activated!"
 	prompt
 

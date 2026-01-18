@@ -4515,23 +4515,23 @@ BattleCommand_StatDown:
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [wEnemyMonSpecies]
-	jr z, .check_clear_body
+	jr z, .check_resilience
 	ld hl, wPlayerStatLevels
 	ld a, [wBattleMonSpecies]
 
-.check_clear_body
+.check_resilience
 ; ===========================
-; === Ability: Clear Body ===
+; === Ability: Resilience ===
 ; ===========================
 	push hl
 	push de
 	push bc
-	ld hl, ClearBodyPokemon
+	ld hl, ResiliencePokemon
 	call IsInByteArray
 	pop bc
 	pop de
 	pop hl
-	jr c, .clear_body
+	jr c, .resilience
 
 ; Attempt to lower the stat.
 	ld a, [wLoweredStat]
@@ -4612,13 +4612,13 @@ BattleCommand_StatDown:
 	ld [wAttackMissed], a
 	ret
 
-.clear_body:
+.resilience:
 	; add some delay so the text 
 	; isn't instantly skipped
 	ld c, 30
 	call DelayFrames
 
-	ld hl, ClearBodyText
+	ld hl, ResilienceText
 	call StdBattleTextbox
 	ld a, 2
 	ld [wFailedMessage], a
@@ -4626,7 +4626,7 @@ BattleCommand_StatDown:
 	ld [wAttackMissed], a
 	ret
 
-INCLUDE "data/abilities/clear_body_mons.asm"
+INCLUDE "data/abilities/resilience_mons.asm"
 
 CheckMist:
 	ld a, BATTLE_VARS_MOVE_EFFECT

@@ -1,8 +1,8 @@
 ; List of all Pokemon whose stats can't be dropped by the opponent
 
-; Note: This list must match engine/battle/core.asm `Core_ClearBodyPokemon:`
+; Note: This list must match engine/battle/core.asm `Core_ResiliencePokemon:`
 
-;Core_ClearBodyPokemon:
+;Core_ResiliencePokemon:
 ;   db TENTACOOL
 ;   db TENTACRUEL
 ;   db REGIROCK
@@ -10,9 +10,9 @@
 ;   db REGISTEEL
 ;   db -1 ; end
 
-; and engine/battle/ai/ability_lists.asm `ClearBodyPokemon_AI:`
+; and engine/battle/ai/ability_lists.asm `ResiliencePokemon_AI:`
 
-;ClearBodyPokemon_AI:
+;ResiliencePokemon_AI:
 ;   db TENTACOOL
 ;   db TENTACRUEL
 ;   db REGIROCK
@@ -20,7 +20,7 @@
 ;   db REGISTEEL
 ;   db -1 ; end
 
-ClearBodyPokemon:
+ResiliencePokemon:
 ;    db TENTACOOL
 ;   db TENTACRUEL
 ;    db REGIROCK

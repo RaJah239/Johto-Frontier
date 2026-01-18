@@ -120,7 +120,7 @@ RockHeadPokemon_AI:
     db SHELGON
     db -1 ; end
 
-ClearBodyPokemon_AI:
+ResiliencePokemon_AI:
     db TENTACOOL
     db TENTACRUEL
     db REGIROCK

@@ -6603,7 +6603,7 @@ ApplyPrzEffectOnSpeed:
 	jr z, .enemy
 
 	ld a, [wBattleMonSpecies]
-	call DoesMonHaveClearBody
+	call DoesMonHaveResilience
 	ret c
 
 	ld a, [wBattleMonStatus]
@@ -6628,7 +6628,7 @@ ApplyPrzEffectOnSpeed:
 
 .enemy
 	ld a, [wEnemyMonSpecies]
-	call DoesMonHaveClearBody
+	call DoesMonHaveResilience
 	ret c
 
 	ld a, [wEnemyMonStatus]
@@ -6657,7 +6657,7 @@ ApplyBrnEffectOnAttack:
 	jr z, .enemy
 
 	ld a, [wBattleMonSpecies]
-	call DoesMonHaveClearBody
+	call DoesMonHaveResilience
 	ret c
 
 	ld a, [wBattleMonSpecies]
@@ -6684,7 +6684,7 @@ ApplyBrnEffectOnAttack:
 
 .enemy
 	ld a, [wEnemyMonSpecies]
-	call DoesMonHaveClearBody
+	call DoesMonHaveResilience
 	ret c
 
 	ld a, [wEnemyMonSpecies]
@@ -6709,11 +6709,11 @@ ApplyBrnEffectOnAttack:
 	ld [hl], b
 	ret
 
-DoesMonHaveClearBody:
+DoesMonHaveResilience:
 	push hl
 	push de
 	push bc
-	ld hl, Core_ClearBodyPokemon
+	ld hl, Core_ResiliencePokemon
 	call IsInByteArray
 	pop bc
 	pop de
@@ -6726,7 +6726,7 @@ DoesMonHaveClearBody:
 	scf
 	ret
 
-Core_ClearBodyPokemon:
+Core_ResiliencePokemon:
 	db TENTACOOL
 	db TENTACRUEL
 	db REGIROCK

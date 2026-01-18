@@ -561,7 +561,7 @@ endr
 AI_Smart_SpeedDown:
 ; discourage if enemy is immune to stat drops
 	ld a, [wBattleMonSpecies]
-	call DoesPokemonHaveClearBody
+	call DoesPokemonHaveResilience
 	jr c, .discourage
 
 ; never use if player has mist
@@ -589,7 +589,7 @@ AI_Smart_SpeedDown:
 AI_Smart_DefenseDown:
 ; discourage if enemy is immune to stat drops
 	ld a, [wBattleMonSpecies]
-	call DoesPokemonHaveClearBody
+	call DoesPokemonHaveResilience
 	jr c, .discourage
 
 ; never use if player has mist
@@ -613,7 +613,7 @@ AI_Smart_DefenseDown:
 AI_Smart_AttackDown:
 ; discourage if enemy is immune to stat drops
 	ld a, [wBattleMonSpecies]
-	call DoesPokemonHaveClearBody
+	call DoesPokemonHaveResilience
 	jr c, .discourage
 
 ; never use if player has mist
@@ -1343,7 +1343,7 @@ AI_Smart_AlwaysHit:
 AI_Smart_AccuracyDown:
 ; discourage if enemy is immune to stat drops
 	ld a, [wBattleMonSpecies]
-	call DoesPokemonHaveClearBody
+	call DoesPokemonHaveResilience
 	jr c, .discourage
 
 ; never use if player has mist
@@ -2034,7 +2034,7 @@ AI_Smart_SpeedDownHit:
 	ret c
 
     ld a, [wBattleMonSpecies]
-    call DoesPokemonHaveClearBody
+    call DoesPokemonHaveResilience
 	jmp c, StandardDiscourage
 
 	jmp StandardEncourage

@@ -1493,11 +1493,11 @@ DoesPokemonHaveMagicGuard:
 	scf
 	ret
 
-DoesPokemonHaveClearBody:
+DoesPokemonHaveResilience:
 	push hl
 	push de
 	push bc
-	ld hl, ClearBodyPokemon_AI
+	ld hl, ResiliencePokemon_AI
 	call IsInByteArray
 	pop bc
 	pop de
