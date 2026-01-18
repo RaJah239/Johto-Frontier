@@ -126,6 +126,29 @@ AI_Basic:
 	pop hl
 	jmp c, .discourage ; discourage if serenity pokemon - loop back to check move
 
+; don't use if enemy is hydration mon and it is raining
+; since they heal status at the end of each turn
+; ==========================
+; === Ability: Hydration ===
+; ==========================
+; check if already raining
+	ld a, [wBattleWeather]
+	cp WEATHER_RAIN
+	jr nz, .check_sub ; if not skip following
+
+; it is raining
+; don't use if enemy is hydration mon
+	ld a, [wBattleMonSpecies]
+	push hl
+	push de
+	push bc
+	ld hl, HydrationPokemon_AI
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jmp c, .discourage ; discourage if hydration pokemon - loop back to check move
+
 .check_sub
 ; Dismiss status moves if the player has a Substitute.
 	ld a, [wPlayerSubStatus4]
