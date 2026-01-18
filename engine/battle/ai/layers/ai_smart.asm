@@ -1205,10 +1205,6 @@ AI_Smart_Fake_Out:
 ; The AI_Basic layer will make sure that
 ; Fake Out is only used
 ; on the enemy's first turn out.
-AI_Smart_DreamEater:
-; 90% chance to greatly encourage this move.
-; The AI_Basic layer will make sure that
-; Dream Eater is only used against sleeping targets.
 	call AI_90_10
 	ret c
 	dec [hl]
@@ -2451,6 +2447,9 @@ AI_Smart_Flinch:
     dec [hl]
     ret
 
+AI_Smart_DreamEater:
+; The AI_Basic layer will make sure that
+; Dream Eater is only used against sleeping targets.
 AI_Smart_PriorityHit:
 
 ; commented out if needed later,
