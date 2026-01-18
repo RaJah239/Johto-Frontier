@@ -1847,6 +1847,7 @@ AtkDefUpHit:
 	supereffectivetext
 	attackup
 	statupmessage
+	effectchance ; independent chance
 	defenseup
 	statupmessage
 	checkfaint
