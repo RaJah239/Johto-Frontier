@@ -63,6 +63,34 @@ IceBodyPokemon_AI:
     db REGICE
     db -1 ; end
 
+FireAbsorbPokemon_AI:
+    db CYNDAQUIL
+    db QUILAVA
+    db TYPHLOSION
+    db GROWLITHE
+    db ARCANINE
+    db HOUNDOUR
+    db HOUNDOOM
+    db LITWICK
+    db LAMPENT
+    db CHANDELURE
+    db -1 ; end
+
+WaterAbsorbPokemon_AI:
+    db LAPRAS
+    db WOOPER
+    db QUAGSIRE
+    db MANTINE
+    db CHINCHOU
+    db LANTURN
+    db -1 ; end
+
+VoltAbsorbPokemon_AI:
+    db CHINCHOU
+    db LANTURN
+    db RAIKOU
+    db -1 ; end
+
 ImmunityPokemon_AI:
 	db CHIKORITA
 	db BAYLEEF

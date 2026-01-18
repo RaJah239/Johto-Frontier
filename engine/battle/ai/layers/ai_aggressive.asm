@@ -13,11 +13,11 @@ AI_Aggressive:
 	inc b
 	ld a, b
 	cp NUM_MOVES + 1
-	jr z, .gotstrongestmove
+	jmp z, .gotstrongestmove
 
 	ld a, [hli]
 	and a
-	jr z, .gotstrongestmove
+	jmp z, .gotstrongestmove
 
 	push hl
 	push de
@@ -25,7 +25,7 @@ AI_Aggressive:
 	call AIGetEnemyMove
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
-	jr z, .nodamage
+	jmp z, .nodamage
 	call AIDamageCalc
 	pop bc
 	pop de
@@ -36,7 +36,7 @@ AI_Aggressive:
 	cp EFFECT_EXPLOSION
 	jr z, .checkmove
 
-; Dismiss ground move if the player has levitate
+; Dismiss ground moves if the player has levitate
 ; =========================
 ; === Ability: Levitate ===
 ; =========================
@@ -56,12 +56,12 @@ AI_Aggressive:
 	jr c, .checkmove
 
 .check_poison_immune
-; Dismiss poison move if the player has immunity
+; Dismiss poison moves if the player has immunity
 ; =========================
 ; === Ability: Immunity ===
 ; =========================
 	cp POISON
-	jr nz, .continue
+	jr nz, .check_fire_absorb
 	ld a, [wBattleMonSpecies]
 	push hl
 	push de
@@ -73,26 +73,80 @@ AI_Aggressive:
 	pop hl
 	jr c, .checkmove
 
+.check_fire_absorb
+; Dismiss fire moves if the player has fire absorb
+; ============================
+; === Ability: Fire Absorb ===
+; ============================
+	cp FIRE
+	jr nz, .check_water_absorb
+	ld a, [wBattleMonSpecies]
+	push hl
+	push de
+	push bc
+	ld hl, FireAbsorbPokemon_AI
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jr c, .checkmove
+
+.check_water_absorb
+; Dismiss water moves if the player has water absorb
+; ============================
+; === Ability: Water Absorb ==
+; ============================
+	cp WATER
+	jr nz, .check_volt_absorb
+	ld a, [wBattleMonSpecies]
+	push hl
+	push de
+	push bc
+	ld hl, WaterAbsorbPokemon_AI
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jr c, .checkmove
+
+.check_volt_absorb
+; Dismiss electric moves if the player has volt absorb
+; ============================
+; === Ability: Volt Absorb ===
+; ============================
+	cp ELECTRIC
+	jr nz, .continue
+	ld a, [wBattleMonSpecies]
+	push hl
+	push de
+	push bc
+	ld hl, VoltAbsorbPokemon_AI
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jmp c, .checkmove
+
 .continue
 ; Update current move if damage is highest so far
 	ld a, [wCurDamage + 1]
 	cp e
 	ld a, [wCurDamage]
 	sbc d
-	jr c, .checkmove
+	jmp c, .checkmove
 
 	ld a, [wCurDamage + 1]
 	ld e, a
 	ld a, [wCurDamage]
 	ld d, a
 	ld c, b
-	jr .checkmove
+	jmp .checkmove
 
 .nodamage
 	pop bc
 	pop de
 	pop hl
-	jr .checkmove
+	jmp .checkmove
 
 .gotstrongestmove
 ; Nothing we can do if no attacks did damage.
