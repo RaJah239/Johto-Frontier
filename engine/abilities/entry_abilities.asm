@@ -43,6 +43,7 @@ EntryAbilities2:
 	call HandleSanctuary
 	call HandleSiegebreaker
 	call HandleProvocateur
+	call HandleDisarm
 	ret
 
 ResetVolatileAbilityPlayer:
@@ -66,6 +67,7 @@ ResetVolatileAbilityPlayer:
 	ResetEventFlag EVENT_SANCTUARY_PLAYER
 	ResetEventFlag EVENT_SIEGEBREAKER_PLAYER
 	ResetEventFlag EVENT_PROVOCATEUR_PLAYER
+	ResetEventFlag EVENT_DISARM_PLAYER
 	ret
 
 ResetVolatileAbilityFoe:
@@ -89,6 +91,7 @@ ResetVolatileAbilityFoe:
 	ResetEventFlag EVENT_SANCTUARY_FOE
 	ResetEventFlag EVENT_SIEGEBREAKER_FOE
 	ResetEventFlag EVENT_PROVOCATEUR_FOE
+	ResetEventFlag EVENT_DISARM_FOE
 	ret
 
 ; ========================
@@ -1313,6 +1316,99 @@ HandleProvocateur:
 	farjp BattleCommand_Taunt
 
 INCLUDE "data/abilities/provocateur_mons.asm"
+
+HandleDisarm:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .reverse
+
+	call .player
+	jr .enemy
+
+.reverse
+	call .enemy
+	; fallthrough
+
+.player
+	CheckEventFlag EVENT_DISARM_PLAYER
+	ret nz
+	SetEventFlag EVENT_DISARM_PLAYER
+
+	call SetPlayerTurn
+	jr .do_check
+
+.enemy
+	CheckEventFlag EVENT_DISARM_FOE
+	ret nz
+	SetEventFlag EVENT_DISARM_FOE
+
+	call SetEnemyTurn
+	; fallthrough
+
+.do_check
+	; check if current pokemon has disarm
+	call GetCurrentMon
+	ld hl, DisarmPokemon
+	call IsInByteArray
+	ret nc
+
+; ==================
+; === Check Turn ===
+; ==================
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .enemy_turn
+
+; =====================
+; === Player's Turn ===
+; =====================
+; enemy must have an item
+	call CheckIfEnemyHasAnItem
+	ld a, [hl]
+	and a
+	ret z
+	jr .continue
+
+.enemy_turn
+; ====================
+; === Enemy's Turn ===
+; ====================
+; player must have an item
+	call CheckIfPlayerHasAnItem
+	ld a, [hl]
+	and a
+	ret z
+
+.continue
+	; play knock off animation
+	ld de, KNOCK_OFF
+	farcall Call_PlayBattleAnim
+
+	ld hl, DisarmText
+	call StdBattleTextbox
+
+	farjp BattleCommand_KnockOff
+
+; ===============
+; === HELPERS ===
+; ===============
+CheckIfPlayerHasAnItem:
+	ld a, MON_ITEM
+	call BattlePartyAttr
+	ld d, h
+	ld e, l
+	ld hl, wBattleMonItem
+	ret
+
+CheckIfEnemyHasAnItem:
+	ld a, MON_ITEM
+	call OTPartyAttr
+	ld d, h
+	ld e, l
+	ld hl, wEnemyMonItem
+	ret
+
+INCLUDE "data/abilities/disarm_mons.asm"
 
 AnyHazardsPresent:
 	ld a, [wPlayerScreens]

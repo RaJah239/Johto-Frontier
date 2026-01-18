@@ -393,10 +393,12 @@
 	const EVENT_SIEGEBREAKER_FOE
 	const EVENT_PROVOCATEUR_PLAYER
 	const EVENT_PROVOCATEUR_FOE
+	const EVENT_DISARM_PLAYER
+	const EVENT_DISARM_FOE
 
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 212 events
+; Unused: next 210 events
 
 	const_next 600
 ; Kurt Apricorn events

@@ -1006,6 +1006,12 @@ IntimidateText:
 	cont "activated!"
 	prompt
 
+DisarmText:
+	text "<USER>'s"
+	line "Disarm"
+	cont "activated!"
+	prompt
+
 BattleStanceText:
 	text "<USER>'s"
 	line "Battle Stance"

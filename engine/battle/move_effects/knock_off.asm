@@ -11,10 +11,9 @@ BattleCommand_KnockOff:
 	jr nz, .enemy
 
 ; =====================
-; === PLAYER'S TURN ===
+; === Player's Turn ===
 ; =====================
-
-; Enemy must have an item
+; enemy must have an item
 	call .enemyitem
 	ld a, [hl]
 	and a
@@ -39,10 +38,9 @@ BattleCommand_KnockOff:
 
 .enemy
 ; ====================
-; === ENEMY'S TURN ===
+; === Enemy's Turn ===
 ; ====================
-
-; Player must have an item
+; player must have an item
 	call .playeritem
 	ld a, [hl]
 	and a
@@ -91,7 +89,7 @@ BattleCommand_KnockOff:
 	jmp StdBattleTextbox
 
 ; ===============
-; === HELPERS ===
+; === Helpers ===
 ; ===============
 
 .playeritem
