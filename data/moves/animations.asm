@@ -551,10 +551,9 @@ BattleAnim_Confused:
 	anim_ret
 
 BattleAnim_PoisonJab:
+	anim_call BattleAnim_HornAttack
+	anim_clearobjs
 	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_POISON
-	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 56, $43
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $2
-	anim_wait 16
 	anim_jump BattleAnimSub_Sludge
 
 BattleAnim_Slp:
