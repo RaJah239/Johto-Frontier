@@ -105,8 +105,7 @@ DisableMobile:
 	ldh [rIF], a
 	ld a, [wBGMapBuffer]
 	ldh [rIE], a
-	ei
-	ret
+	reti
 
 Function1000ba:
 .loop

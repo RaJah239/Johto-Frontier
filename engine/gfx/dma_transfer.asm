@@ -173,8 +173,7 @@ _HDMATransferTilemapAndAttrmap_Menu::
 	call HDMATransfer_WaitForScanline124_toBGMap
 	pop af
 	ldh [rVBK], a
-	ei
-	ret
+	reti
 
 Mobile_HDMATransferTilemapAndAttrmap_Menu:
 	ld hl, .Function
