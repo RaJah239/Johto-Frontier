@@ -1927,3 +1927,24 @@ KnockOff:
 	checkfaint
 	kingsrock
 	endmove
+
+IceFang:
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	effectchance
+	freezetarget
+	effectchance ; independent chance
+	flinchtarget
+	endmove

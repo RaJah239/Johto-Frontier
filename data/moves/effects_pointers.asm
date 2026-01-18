@@ -159,4 +159,5 @@ MoveEffectsPointers:
 	dw Acrobatics
 	dw WoodBash
 	dw KnockOff
+	dw IceFang
 	assert_table_length NUM_MOVE_EFFECTS

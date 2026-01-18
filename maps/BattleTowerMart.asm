@@ -32,7 +32,7 @@ BattleTowerMartTMCoinTraderScript:
     ifequal 4,  .TMRollout
     ifequal 5,  .TMRoar
     ifequal 6,  .TMToxic
-    ifequal 7,  .TMShriek
+    ifequal 7,  .TMCalmMind
     ifequal 8,  .TMBrickBreak
     ifequal 9,  .TMPsychUp
     ifequal 10, .TMHiddenPower
@@ -114,8 +114,8 @@ BattleTowerMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMShriek:
-    verbosegiveitem TM_SHRIEK
+.TMCalmMind:
+    verbosegiveitem TM_CALM_MIND
     iffalse .NoRoom
     sjump .ConcludeTransaction
 

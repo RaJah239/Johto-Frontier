@@ -242,7 +242,7 @@ DEF TM01 EQU const_value
 	add_tm ROLLOUT      ; c2
 	add_tm ROAR         ; c4
 	add_tm TOXIC        ; c5
-	add_tm SHRIEK       ; c6
+	add_tm CALM_MIND    ; c6
 	add_tm BRICK_BREAK  ; c7
 	add_tm TACKLE       ; c8
 	add_tm HIDDEN_POWER ; c9

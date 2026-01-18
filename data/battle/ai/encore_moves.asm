@@ -40,7 +40,6 @@ EncoreMoves:
 	db CURSE
 	db SCARY_FACE
 	db SPIKES
-	db SHRIEK
 	db FORESIGHT
 	db DESTINY_BOND
 	db PERISH_SONG
