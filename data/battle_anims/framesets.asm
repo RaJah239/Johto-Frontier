@@ -151,7 +151,6 @@ BattleAnimFrameData:
 	dw .Frameset_Moonlight           ; BATTLE_ANIM_FRAMESET_MOONLIGHT
 	dw .Frameset_CrossChop1          ; BATTLE_ANIM_FRAMESET_CROSS_CHOP_1
 	dw .Frameset_CrossChop2          ; BATTLE_ANIM_FRAMESET_CROSS_CHOP_2
-	dw .Frameset_ZapCannon           ; BATTLE_ANIM_FRAMESET_ZAP_CANNON
 	dw .Frameset_CurseNail           ; BATTLE_ANIM_FRAMESET_CURSE_NAIL
 	dw .Frameset_ForesightShine      ; BATTLE_ANIM_FRAMESET_FORESIGHT_SHINE
 	dw .Frameset_RapidSpin           ; BATTLE_ANIM_FRAMESET_RAPID_SPIN
@@ -1084,11 +1083,6 @@ BattleAnimFrameData:
 	oamwait 2
 	oamframe BATTLE_ANIM_OAMSET_52,  2, OAM_X_FLIP, OAM_Y_FLIP
 	oamdelete
-
-.Frameset_ZapCannon:
-	oamframe BATTLE_ANIM_OAMSET_C3,  1
-	oamframe BATTLE_ANIM_OAMSET_C3,  1, OAM_X_FLIP, OAM_Y_FLIP
-	oamrestart
 
 .Frameset_CurseNail:
 	oamframe BATTLE_ANIM_OAMSET_C4, 32

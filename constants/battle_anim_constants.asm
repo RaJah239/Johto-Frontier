@@ -170,7 +170,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_CROSS_CHOP1         ; a0
 	const BATTLE_ANIM_OBJ_CROSS_CHOP2         ; a1
 	const BATTLE_ANIM_OBJ_SANDSTORM           ; a2
-	const BATTLE_ANIM_OBJ_ZAP_CANNON          ; a3
 	const BATTLE_ANIM_OBJ_SPITE               ; a4
 	const BATTLE_ANIM_OBJ_CURSE               ; a5
 	const BATTLE_ANIM_OBJ_PERISH_SONG         ; a6
@@ -466,7 +465,6 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_MOONLIGHT             ; a5
 	const BATTLE_ANIM_FRAMESET_CROSS_CHOP_1          ; a6
 	const BATTLE_ANIM_FRAMESET_CROSS_CHOP_2          ; a7
-	const BATTLE_ANIM_FRAMESET_ZAP_CANNON            ; a8
 	const BATTLE_ANIM_FRAMESET_CURSE_NAIL            ; a9
 	const BATTLE_ANIM_FRAMESET_FORESIGHT_SHINE       ; aa
 	const BATTLE_ANIM_FRAMESET_RAPID_SPIN            ; ab
