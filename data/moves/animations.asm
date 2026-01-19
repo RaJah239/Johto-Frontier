@@ -5066,22 +5066,3 @@ BattleAnimSub_SpeedLines:
 	anim_obj BATTLE_ANIM_OBJ_SPEED_LINE, 64, 88, $82
 	anim_wait 12
 	anim_ret
-
-; Objects to remove is necessary
-; from now unused animations
-; ==================================
-; ======== OBJECTS TO REMOVE =======
-; ==================================
-
-;BattleAnim_BoneRush:
-;	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_MISC
-;	anim_sound 0, 1, SFX_BONE_CLUB
-;	anim_obj BATTLE_ANIM_OBJ_BONE_RUSH, 132, 56, $2
-;	anim_wait 16
-;	anim_sound 0, 1, SFX_COMET_PUNCH
-;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 120, 48, $0
-;	anim_wait 16
-;	anim_sound 0, 1, SFX_COMET_PUNCH
-;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 144, 64, $0
-;	anim_wait 16
-;	anim_ret

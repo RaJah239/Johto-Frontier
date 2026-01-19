@@ -114,7 +114,6 @@ BattleAnimFrameData:
 	dw .Frameset_Needle              ; BATTLE_ANIM_FRAMESET_NEEDLE
 	dw .Frameset_BarrageBall         ; BATTLE_ANIM_FRAMESET_BARRAGE_BALL
 	dw .Frameset_Heart               ; BATTLE_ANIM_FRAMESET_HEART
-	dw .Frameset_SpinningBone        ; BATTLE_ANIM_FRAMESET_SPINNING_BONE
 	dw .Frameset_Star                ; BATTLE_ANIM_FRAMESET_STAR
 	dw .Frameset_Sparkle             ; BATTLE_ANIM_FRAMESET_SPARKLE
 	dw .Frameset_SkyAttack           ; BATTLE_ANIM_FRAMESET_SKY_ATTACK
@@ -913,11 +912,6 @@ BattleAnimFrameData:
 .Frameset_Heart:
 	oamframe BATTLE_ANIM_OAMSET_95,  8
 	oamend
-
-.Frameset_SpinningBone:
-	oamframe BATTLE_ANIM_OAMSET_97,  1
-	oamframe BATTLE_ANIM_OAMSET_97,  1, OAM_X_FLIP
-	oamrestart
 
 .Frameset_Star:
 	oamframe BATTLE_ANIM_OAMSET_98,  8

@@ -156,7 +156,6 @@ BattleAnimOAMData:
 	battleanimoam $00,  6, .OAMData_93 ; BATTLE_ANIM_OAMSET_93
 	battleanimoam $04,  4, .OAMData_03 ; BATTLE_ANIM_OAMSET_94
 	battleanimoam $0a,  4, .OAMData_04 ; BATTLE_ANIM_OAMSET_95
-	battleanimoam $04,  4, .OAMData_30 ; BATTLE_ANIM_OAMSET_97
 	battleanimoam $0c,  4, .OAMData_04 ; BATTLE_ANIM_OAMSET_98
 	battleanimoam $00, 36, .OAMData_9b ; BATTLE_ANIM_OAMSET_9B
 	battleanimoam $0d,  2, .OAMData_9c ; BATTLE_ANIM_OAMSET_9C
