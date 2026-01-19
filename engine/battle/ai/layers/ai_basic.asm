@@ -21,6 +21,7 @@ SubstituteImmuneEffects:
 	db EFFECT_TRANSFORM
 	db EFFECT_TOXIC
 	db EFFECT_BURN
+	db EFFECT_SWAGGER
 	db -1 ; end
 
 AI_Basic:
