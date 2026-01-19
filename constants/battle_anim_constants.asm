@@ -160,7 +160,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_OCTAZOOKA           ; 8c
 	const BATTLE_ANIM_OBJ_SPIKES              ; 8e
 	const BATTLE_ANIM_OBJ_POWDER_SNOW         ; 8f
-	const BATTLE_ANIM_OBJ_DRAGONBREATH        ; 90
 	const BATTLE_ANIM_OBJ_SPIDER_WEB          ; 92
 	const BATTLE_ANIM_OBJ_CAKE_UNUSED         ; 93
 	const BATTLE_ANIM_OBJ_IN_NIGHTMARE        ; 95

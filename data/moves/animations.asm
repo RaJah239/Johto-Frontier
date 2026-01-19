@@ -5073,16 +5073,6 @@ BattleAnimSub_SpeedLines:
 ; ======== OBJECTS TO REMOVE =======
 ; ==================================
 
-;BattleAnim_Dragonbreath:
-;	anim_1gfx BATTLE_ANIM_GFX_FIRE
-;	anim_sound 6, 2, SFX_EMBER
-;.loop
-;	anim_obj BATTLE_ANIM_OBJ_DRAGONBREATH, 64, 92, $4
-;	anim_wait 4
-;	anim_loop 10, .loop
-;	anim_wait 64
-;	anim_ret
-
 ;BattleAnim_BoneRush:
 ;	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_MISC
 ;	anim_sound 0, 1, SFX_BONE_CLUB
