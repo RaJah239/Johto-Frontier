@@ -156,7 +156,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_SPIKES              ; 8e
 	const BATTLE_ANIM_OBJ_POWDER_SNOW         ; 8f
 	const BATTLE_ANIM_OBJ_SPIDER_WEB          ; 92
-	const BATTLE_ANIM_OBJ_CAKE_UNUSED         ; 93
 	const BATTLE_ANIM_OBJ_IN_NIGHTMARE        ; 95
 	const BATTLE_ANIM_OBJ_LOVELY_KISS         ; 96
 	const BATTLE_ANIM_OBJ_SWEET_KISS          ; 97
@@ -457,7 +456,6 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_MEGAPHONE_UNUSED      ; 98
 	const BATTLE_ANIM_FRAMESET_ITEM_BAG              ; 99
 	const BATTLE_ANIM_FRAMESET_SPIDER_WEB            ; 9a
-	const BATTLE_ANIM_FRAMESET_UNUSED_CAKE           ; 9b
 	const BATTLE_ANIM_FRAMESET_IMP                   ; 9c
 	const BATTLE_ANIM_FRAMESET_IMP_FLIPPED           ; 9d
 	const BATTLE_ANIM_FRAMESET_CHERUB                ; 9e
