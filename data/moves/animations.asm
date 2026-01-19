@@ -5148,16 +5148,6 @@ BattleAnimSub_SpeedLines:
 ;	anim_wait 32
 ;	anim_ret
 
-;BattleAnim_PayDay:
-;	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_STATUS
-;	anim_sound 0, 1, SFX_POUND
-;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 128, 56, $0
-;	anim_wait 16
-;	anim_sound 0, 1, SFX_PAY_DAY
-;	anim_obj BATTLE_ANIM_OBJ_PAY_DAY, 120, 76, $1
-;	anim_wait 64
-;	anim_ret
-
 ;BattleAnim_DoubleTeam:
 ;	anim_call BattleAnim_TargetObj_2Row
 ;	anim_sound 0, 0, SFX_PSYBEAM
@@ -5229,6 +5219,3 @@ BattleAnimSub_SpeedLines:
 ;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 144, 64, $0
 ;	anim_wait 16
 ;	anim_ret
-
-; to remove this
-;	anim_obj BATTLE_ANIM_OBJ_THIEF, 120, 76, $1

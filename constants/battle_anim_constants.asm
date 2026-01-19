@@ -127,7 +127,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_HORN                ; 5f
 	const BATTLE_ANIM_OBJ_NEEDLE              ; 60
 	const BATTLE_ANIM_OBJ_SLUDGE_BOMB         ; 62
-	const BATTLE_ANIM_OBJ_PAY_DAY             ; 63
 	const BATTLE_ANIM_OBJ_SONICBOOM_JP_UNUSED ; 64
 	const BATTLE_ANIM_OBJ_MIMIC               ; 65
 	const BATTLE_ANIM_OBJ_ATTRACT             ; 66
@@ -160,7 +159,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_MIND_READER         ; 88
 	const BATTLE_ANIM_OBJ_SAFEGUARD           ; 89
 	const BATTLE_ANIM_OBJ_PROTECT             ; 8a
-	const BATTLE_ANIM_OBJ_THIEF               ; 8b
 	const BATTLE_ANIM_OBJ_OCTAZOOKA           ; 8c
 	const BATTLE_ANIM_OBJ_PRESENT             ; 8d
 	const BATTLE_ANIM_OBJ_SPIKES              ; 8e
@@ -291,7 +289,6 @@ DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 	const BATTLE_ANIM_FUNC_POISON_GAS                ; 2a
 	const BATTLE_ANIM_FUNC_HORN                      ; 2b
 	const BATTLE_ANIM_FUNC_NEEDLE                    ; 2c
-	const BATTLE_ANIM_FUNC_THIEF_PAYDAY              ; 2e
 	const BATTLE_ANIM_FUNC_ABSORB_CIRCLE             ; 2f
 	const BATTLE_ANIM_FUNC_SHINY                     ; 31
 	const BATTLE_ANIM_FUNC_SKY_ATTACK                ; 32
@@ -447,7 +444,6 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_HORN                  ; 71
 	const BATTLE_ANIM_FRAMESET_NEEDLE                ; 72
 	const BATTLE_ANIM_FRAMESET_BARRAGE_BALL          ; 74
-	const BATTLE_ANIM_FRAMESET_PAY_DAY               ; 75
 	const BATTLE_ANIM_FRAMESET_HEART                 ; 76
 	const BATTLE_ANIM_FRAMESET_SPINNING_BONE         ; 77
 	const BATTLE_ANIM_FRAMESET_STAR                  ; 78
@@ -671,7 +667,6 @@ DEF NUM_BATTLE_ANIM_FRAMESETS EQU const_value
 	const BATTLE_ANIM_OAMSET_93
 	const BATTLE_ANIM_OAMSET_94
 	const BATTLE_ANIM_OAMSET_95
-	const BATTLE_ANIM_OAMSET_96
 	const BATTLE_ANIM_OAMSET_97
 	const BATTLE_ANIM_OAMSET_98
 	const BATTLE_ANIM_OAMSET_9B

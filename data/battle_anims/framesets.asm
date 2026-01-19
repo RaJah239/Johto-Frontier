@@ -115,7 +115,6 @@ BattleAnimFrameData:
 	dw .Frameset_Horn                ; BATTLE_ANIM_FRAMESET_HORN
 	dw .Frameset_Needle              ; BATTLE_ANIM_FRAMESET_NEEDLE
 	dw .Frameset_BarrageBall         ; BATTLE_ANIM_FRAMESET_BARRAGE_BALL
-	dw .Frameset_PayDay              ; BATTLE_ANIM_FRAMESET_PAY_DAY
 	dw .Frameset_Heart               ; BATTLE_ANIM_FRAMESET_HEART
 	dw .Frameset_SpinningBone        ; BATTLE_ANIM_FRAMESET_SPINNING_BONE
 	dw .Frameset_Star                ; BATTLE_ANIM_FRAMESET_STAR
@@ -920,10 +919,6 @@ BattleAnimFrameData:
 
 .Frameset_BarrageBall:
 	oamframe BATTLE_ANIM_OAMSET_95,  8
-	oamend
-
-.Frameset_PayDay:
-	oamframe BATTLE_ANIM_OAMSET_96,  8
 	oamend
 
 .Frameset_Heart:

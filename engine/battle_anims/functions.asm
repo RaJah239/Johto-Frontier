@@ -60,7 +60,6 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_PoisonGas
 	dw BattleAnimFunc_Horn
 	dw BattleAnimFunc_Needle
-	dw BattleAnimFunc_ThiefPayday
 	dw BattleAnimFunc_AbsorbCircle
 	dw BattleAnimFunc_Shiny
 	dw BattleAnimFunc_SkyAttack
@@ -3076,59 +3075,6 @@ BattleAnimFunc_Needle:
 	add hl, bc
 	ld a, [hl]
 	call BattleAnim_StepToTarget
-	ret
-
-BattleAnimFunc_ThiefPayday:
-; Object drops off target and bounces once on the floor
-; Obj Param: Defines every how many frames the object moves horizontally
-	call BattleAnim_AnonJumptable
-.anon_dw
-	dw .zero
-	dw .one
-
-.zero
-	call BattleAnim_IncAnonJumptableIndex
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], $28
-	ld hl, BATTLEANIMSTRUCT_YCOORD
-	add hl, bc
-	ld a, [hl]
-	sub $28
-	ld hl, BATTLEANIMSTRUCT_VAR2
-	add hl, bc
-	ld [hl], a
-.one
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hli]
-	ld d, [hl]
-	call BattleAnim_Sine
-	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], a
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hl]
-	ld hl, BATTLEANIMSTRUCT_PARAM
-	add hl, bc
-	and [hl]
-	jr nz, .var_doesnt_equal_param
-	ld hl, BATTLEANIMSTRUCT_XCOORD
-	add hl, bc
-	dec [hl]
-.var_doesnt_equal_param
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	inc [hl]
-	ld a, [hl]
-	and $3f
-	ret nz
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], $20
-	inc hl
-	srl [hl]
 	ret
 
 BattleAnimFunc_AbsorbCircle:
