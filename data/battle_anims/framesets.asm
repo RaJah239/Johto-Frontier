@@ -179,6 +179,8 @@ BattleAnimFrameData:
 	dw .Frameset_c2                  ; BATTLE_ANIM_FRAMESET_C2
 	dw .Frameset_b9                  ; BATTLEANIMFRAMESET_B9
 	dw .Frameset_be                  ; BATTLEANIMFRAMESET_BE
+	dw .Frameset_Hurricane           ; BATTLE_ANIM_FRAMESET_HURRICANE
+	dw .Frameset_BulkUp              ; BATTLE_ANIM_FRAMESET_BULK_UP
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
 .Frameset_HitBig:
@@ -1194,3 +1196,14 @@ BattleAnimFrameData:
 	frame BATTLE_ANIM_OAMSET_03,  4
 	frame BATTLE_ANIM_OAMSET_01,  1
 	oamrestart
+
+.Frameset_Hurricane:
+	oamframe BATTLE_ANIM_OAMSET_HURRICANE, 2
+	oamframe BATTLE_ANIM_OAMSET_HURRICANE, 2, OAM_X_FLIP
+	oamrestart
+
+.Frameset_BulkUp
+	oamframe BATTLE_ANIM_OAMSET_BULK_UP1,  32
+	oamframe BATTLE_ANIM_OAMSET_BULK_UP2,  24
+	oamframe BATTLE_ANIM_OAMSET_BULK_UP2,  24
+	oamend

@@ -2058,14 +2058,21 @@ BattleAnimSub_SoftboiledHeal:
 	anim_ret
 
 BattleAnim_BulkUp:
-	anim_2gfx BATTLE_ANIM_GFX_MISC, BATTLE_ANIM_GFX_WIND
-.loop
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, 8, $2, $0
-	anim_sound 0, 0, SFX_NOT_VERY_EFFECTIVE
-	anim_obj BATTLE_ANIM_OBJ_SWAGGER,  9, 4, 11, 0, $44
+	anim_2gfx BATTLE_ANIM_GFX_BULK_UP, BATTLE_ANIM_GFX_WIND
+	anim_sound 0, 0, SFX_SQUEAK
+	anim_obj BATTLE_ANIM_OBJ_BULK_UP, 48, 88, $0
 	anim_wait 32
-	anim_loop 2, .loop
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $08, $2, $0
+	anim_sound 0, 0, SFX_HORN_ATTACK
 	anim_wait 16
+	anim_wait 8
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $08, $2, $0
+	anim_sound 0, 0, SFX_HORN_ATTACK
+	anim_wait 24
+	anim_clearobjs
+	anim_sound 0, 0, SFX_MENU
+	anim_obj BATTLE_ANIM_OBJ_SWAGGER, 72, 88, $44
+	anim_wait 32
 	anim_ret
 
 BattleAnim_FuryDrive:
@@ -3224,21 +3231,22 @@ BattleAnim_Growth:
 	anim_ret
 
 BattleAnim_Hurricane:
-	anim_2gfx BATTLE_ANIM_GFX_WIND, BATTLE_ANIM_GFX_HIT
+	anim_2gfx BATTLE_ANIM_GFX_HURRICANE, BATTLE_ANIM_GFX_WIND
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $90, $4, $10
-	anim_obp0 $30
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $6, $20
+	anim_bgeffect BATTLE_BG_EFFECT_ALTERNATE_HUES, $0, $4, $0
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $4, $0
+	anim_obj BATTLE_ANIM_OBJ_HURRICANE, 132, 56, $38
+	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 24, $10
+	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 48, $2
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 56, $c
+	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 80, $4
+	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 104, $e
 .loop
-	anim_sound 0, 1, SFX_RAZOR_WIND
-	anim_obj BATTLE_ANIM_OBJ_GUST, 136, 72, $0
+	anim_sound 0, 1, SFX_THUNDER
 	anim_wait 4
-	anim_sound 0, 1, SFX_RAZOR_WIND
-	anim_wait 4
-	anim_loop 12, .loop
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 144, 64, $18
-	anim_wait 8
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 128, 32, $18
-	anim_wait 16
+	anim_loop 18, .loop
+	anim_wait 24
 	anim_ret
 
 BattleAnim_Smokescreen:

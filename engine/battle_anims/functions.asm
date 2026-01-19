@@ -97,6 +97,7 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_StraightDescent
 	dw BattleAnimFunc_RadialMoveOut
 	dw BattleAnimFunc_FallAndStop
+	dw BattleAnimFunc_Hurricane
 	assert_table_length NUM_BATTLE_ANIM_FUNCS
 
 BattleAnimFunc_Null:
@@ -293,7 +294,7 @@ BattleAnimFunction_PokeBall_BG:
 	dw DeinitBattleAnimation
 .zero
 	call GetBallAnimBGPal
-	jp BattleAnim_IncAnonJumptableIndex
+	jmp BattleAnim_IncAnonJumptableIndex
 
 BattleAnimFunc_PokeBall:
 	call BattleAnim_AnonJumptable
@@ -4160,7 +4161,7 @@ PowerGemFunction3:
 	cp $c0
 	ret nc
 	ld a, $8
-	jp BattleAnim_StepToTarget
+	jmp BattleAnim_StepToTarget
 
 BattleAnimFunc_RockTomb:
 	call BattleAnim_AnonJumptable
@@ -4191,7 +4192,7 @@ BattleAnimFunc_RockTomb:
 	ld a, [hl]
 	and $3f
 	ret nz
-	jp BattleAnim_IncAnonJumptableIndex
+	jmp BattleAnim_IncAnonJumptableIndex
 .two
 	ret
 
@@ -4208,7 +4209,7 @@ BattleAnimFunction_55:
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
-	jp BattleAnim_StepCircle
+	jmp BattleAnim_StepCircle
 
 .one
 	call BattleAnim_IncAnonJumptableIndex
@@ -4220,7 +4221,7 @@ BattleAnimFunction_55:
 	add hl, bc
 	ld a, [hl]
 	cp 160
-	jp nc, DeinitBattleAnimation
+	jmp nc, DeinitBattleAnimation
 	ld d, a
 	add 3
 	ld [hl], a
@@ -4235,7 +4236,7 @@ BattleAnimFunc_StraightDescent:
 	add hl, bc
 	ld a, [hl]
 	cp $28
-	jp nc, DeinitBattleAnimation
+	jmp nc, DeinitBattleAnimation
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
 	ld d, [hl]
@@ -4275,7 +4276,7 @@ BattleAnimFunc_FallAndStop:
  	ld a, [hl]
  	and $3f
  	ret nz
- 	jp BattleAnim_IncAnonJumptableIndex
+ 	jmp BattleAnim_IncAnonJumptableIndex
 
 BattleAnimFunc_RadialMoveOut:
 	call BattleAnim_AnonJumptable
@@ -4298,7 +4299,7 @@ Step:
 	ld hl, 6.0 ; speed
 	call Set_Rad_Pos
 	cp 80 ; final position
-	jp nc, DeinitBattleAnimation
+	jmp nc, DeinitBattleAnimation
 	jr Rad_Move
 
 Step_VerySlow:
@@ -4306,7 +4307,7 @@ Step_VerySlow:
 	ld hl, 0.5 ; speed
 	call Set_Rad_Pos
 	cp 40 ; final position
-	jp nc, DeinitBattleAnimation
+	jmp nc, DeinitBattleAnimation
 	jr Rad_Move
 
 Step_Short:
@@ -4314,7 +4315,7 @@ Step_Short:
 	ld hl, 6.0 ; speed
 	call Set_Rad_Pos
 	cp 60 ; final position
-	jp nc, DeinitBattleAnimation
+	jmp nc, DeinitBattleAnimation
 	jr Rad_Move
 
 Get_Rad_Pos:
@@ -4352,3 +4353,40 @@ Rad_Move:
 	add hl, bc
 	ld [hl], a
 	ret
+
+BattleAnimFunc_Hurricane:
+; Moves object in a ring around position slightly faster. Uses anim_incobj to move to second phase,  where it expands the radius 8 pixels at a time for 13 frames and then disappears
+; Obj Param: Defines starting position in circle
+	call BattleAnim_AnonJumptable
+.anon_dw
+	dw .zero
+	dw .one
+	dw .two
+
+.zero
+	ld d, $18
+	ld hl, BATTLEANIMSTRUCT_PARAM
+	add hl, bc
+	ld a, [hl]
+	inc [hl] ; increased rotation speed
+	inc [hl]
+	jmp BattleAnim_StepCircle
+
+.one
+	call BattleAnim_IncAnonJumptableIndex
+	ld hl, BATTLEANIMSTRUCT_VAR1
+	add hl, bc
+	ld [hl], $18
+.two
+	ld hl, BATTLEANIMSTRUCT_VAR1
+	add hl, bc
+	ld a, [hl]
+	cp $80
+	jmp nc, DeinitBattleAnimation
+	ld d, a
+	add $8
+	ld [hl], a
+	ld hl, BATTLEANIMSTRUCT_PARAM
+	add hl, bc
+	ld a, [hl]
+	jmp BattleAnim_StepCircle

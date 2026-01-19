@@ -59,4 +59,6 @@ AnimObjGFX:
 	anim_obj_gfx 13, AnimObjTaunt1GFX
 	anim_obj_gfx 13, AnimObjTaunt2GFX
 	anim_obj_gfx  8, AnimObjChopGFX
+	anim_obj_gfx 18, AnimObjHurricaneGFX
+	anim_obj_gfx 18, AnimObjBulkUpGFX
 	assert_table_length NUM_BATTLE_ANIM_GFX + 1
