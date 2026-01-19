@@ -667,22 +667,18 @@ BattleAnim_Shake:
 	anim_ret
 
 BattleAnim_KarateChop:
-	anim_1gfx BATTLE_ANIM_GFX_HIT
+	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_CHOP
+ 	anim_obj BATTLE_ANIM_OBJ_KARATE_CHOP, 136, 71, $0
+ 	anim_wait 8
 	anim_sound 0, 1, SFX_KARATE_CHOP
-	anim_obj BATTLE_ANIM_OBJ_PALM, 136, 40, $0
-	anim_wait 6
 	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 40, $0
-	anim_wait 6
+	anim_wait 3
 	anim_sound 0, 1, SFX_KARATE_CHOP
-	anim_obj BATTLE_ANIM_OBJ_PALM, 136, 44, $0
-	anim_wait 6
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 44, $0
-	anim_wait 6
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 52, $0
+ 	anim_wait 3
 	anim_sound 0, 1, SFX_KARATE_CHOP
-	anim_obj BATTLE_ANIM_OBJ_PALM, 136, 48, $0
-	anim_wait 6
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 48, $0
-	anim_wait 16
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 64, $0
+ 	anim_wait 20
 	anim_ret
 
 BattleAnim_BugBite:
@@ -1572,16 +1568,29 @@ BattleAnim_ThroatChop:
 	; fallthrough
 
 BattleAnim_CrossChop:
-	anim_1gfx BATTLE_ANIM_GFX_CUT
-	anim_sound 0, 1, SFX_CUT
-	anim_obj BATTLE_ANIM_OBJ_CROSS_CHOP1, 152, 40, $0
-	anim_obj BATTLE_ANIM_OBJ_CROSS_CHOP2, 120, 72, $0
-	anim_wait 8
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_GRAY
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_FIRE
+	anim_3gfx BATTLE_ANIM_GFX_CUT, BATTLE_ANIM_GFX_CHOP, BATTLE_ANIM_GFX_HIT
+ 	anim_sound 0, 1, SFX_MEGA_PUNCH
+ 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $58, $1, $0
+ 	anim_obj BATTLE_ANIM_OBJ_CROSS_CHOP1, 128, 48, $28
+ 	anim_obj BATTLE_ANIM_OBJ_CROSS_CHOP2, 142, 48, $38
+ 	anim_setobj $1, $2
+ 	anim_setobj $2, $2
+ 	anim_wait 48
+ 	anim_clearobjs
+ 	anim_obj BATTLE_ANIM_OBJ_CROSS_CHOP1, 116, 36, $8
+ 	anim_obj BATTLE_ANIM_OBJ_CROSS_CHOP2, 154, 36, $18
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $58, $2, $0
-	anim_wait 92
+	anim_setobj $3, $3
+ 	anim_setobj $4, $3
 	anim_sound 0, 1, SFX_VICEGRIP
 	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $10
-	anim_wait 16
+	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 150, 38, $0
+ 	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_RIGHT, 120, 38, $0
+ 	anim_wait 32
+ 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+ 	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
 	anim_ret
 
 BattleAnim_Explosion:
