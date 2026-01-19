@@ -10,6 +10,12 @@ BattleText_TargetRegenerates:
 	line "regenerates."
 	prompt
 
+BattleText_BattleFeastText:
+	text "<TARGET>"
+	line "recovered HP from"
+	cont "the skirmish!"
+	prompt
+
 TargetsSpeedFellText:
 	text "<TARGET>'s"
 	line "Speed fell!"

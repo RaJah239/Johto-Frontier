@@ -29,9 +29,15 @@ KOBoost:
 	call GetCurrentMon
 	ld hl, FlashStepPokemon
 	call IsInByteArray
-	ret nc
+	jr c, .flash_step
 
-;.flash_step
+	call GetCurrentMon
+	ld hl, BattleFeastPokemon
+	call IsInByteArray
+	jr c, .battle_feast
+	ret
+
+.flash_step
 	; don't boost if at level 2 or higher
 	ldh a, [hBattleTurn]
 	and a
@@ -44,7 +50,7 @@ KOBoost:
 
 	call ClearFailures
 	ld [wNumHits], a
-	jr FlashStepBoost	
+	jmp FlashStepBoost	
 
 .moxie
 	; don't boost if at level 2 or higher
@@ -75,6 +81,51 @@ KOBoost:
 	call ClearFailures
 	ld [wNumHits], a
 	jr IgnisBoost
+
+.battle_feast
+	call ClearFailures
+	ld [wNumHits], a
+
+; ==================
+; === Check Turn ===
+; ==================
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .enemy_turn
+
+; =====================
+; === Player's Turn ===
+; =====================
+
+.enemy_turn
+	ld hl, wBattleMonHP
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_hp
+	ld hl, wEnemyMonHP
+
+.got_hp
+; Don't restore if we're already at max HP
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	cp b
+	jr nz, .restore
+	ld a, [hl]
+	cp c
+	ret z
+
+.restore
+	farcall GetEighthMaxHP
+	farcall SwitchTurnCore
+	farcall RestoreHP
+
+	call CheckIfFastBattlesIsOn
+	ret nz
+	ld hl, BattleText_BattleFeastText
+	jmp StdBattleTextbox
 
 MoxieBoost:
 	call PlayBoostAnimation
@@ -122,6 +173,7 @@ FlashStepText:
 INCLUDE "data/abilities/moxie_mons.asm"
 INCLUDE "data/abilities/ignis_mons.asm"
 INCLUDE "data/abilities/flash_step_mons.asm"
+INCLUDE "data/abilities/battle_feast_mons.asm"
 
 PlayBoostAnimation:
 	ld a, [wOptions]
