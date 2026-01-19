@@ -838,7 +838,6 @@ BattleAnim_SuperFang:
 	anim_ret
 
 BattleAnim_WillOWisp:
-	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
 	anim_2gfx BATTLE_ANIM_GFX_ANGELS, BATTLE_ANIM_GFX_FIRE
 	anim_obj BATTLE_ANIM_OBJ_SPITE, 132, 16, $0
 	anim_sound 0, 1, SFX_SPITE
@@ -846,6 +845,7 @@ BattleAnim_WillOWisp:
 	; fallthrough
 
 BattleAnimSub_Fire:
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
 	anim_sound 0, 1, SFX_EMBER
 .loop
 	anim_obj BATTLE_ANIM_OBJ_BURNED, 136, 56, $10
@@ -853,6 +853,7 @@ BattleAnimSub_Fire:
 	anim_wait 4
 	anim_loop 4, .loop
 	anim_wait 48
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_Ember:
@@ -875,10 +876,10 @@ BattleAnim_Ember:
 	anim_obj BATTLE_ANIM_OBJ_EMBER, 132, 68, $30
 	anim_obj BATTLE_ANIM_OBJ_EMBER, 144, 68, $30
 	anim_wait 32
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_FirePunch:
-	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
 	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_FIRE
 	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 56, $43
 	anim_jump BattleAnimSub_Fire
@@ -901,6 +902,7 @@ BattleAnim_FireSpin:
 	anim_wait 2
 	anim_loop 2, .loop
 	anim_wait 96
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_DragonRage:
@@ -938,6 +940,7 @@ BattleAnim_Flamethrower:
 	anim_wait 16
 	anim_loop 6, .loop
 	anim_wait 16
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_FireBlast:
@@ -973,6 +976,7 @@ BattleAnim_FireBlast:
 	anim_wait 16
 	anim_loop 2, .loop3
 	anim_wait 32
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_IcePunch:
@@ -3683,6 +3687,7 @@ BattleAnim_DragonDance:
 	anim_wait 6
 	anim_loop 4, .loop
 	anim_wait 96
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_QuiverDance:
@@ -3740,6 +3745,7 @@ BattleAnim_FlameCharge:
 	anim_wait 4
 	anim_incobj 9
 	anim_wait 8
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_Snore:
@@ -4775,7 +4781,6 @@ BattleAnim_RainDance:
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_WATER
 	anim_1gfx BATTLE_ANIM_GFX_WATER
 	anim_bgp $f8
-;	anim_obp0 $7c
 	anim_sound 0, 1, SFX_RAIN_DANCE
 	anim_obj BATTLE_ANIM_OBJ_RAIN, 88, 0, $0
 	anim_wait 8
