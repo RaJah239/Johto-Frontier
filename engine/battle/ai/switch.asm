@@ -143,13 +143,6 @@ CheckAbleToSwitch:
 	; fallthrough
 
 .switch
-; can't switch if trapped
-	ld a, [wBattleMonSpecies]
-	cp GENGAR
-	ret z
-	cp CHANDELURE
-	ret z
-
 	call FindAliveEnemyMonsToSwitchTo
 	ld a, e
 	cp 2
@@ -224,7 +217,7 @@ CheckAbleToSwitch:
 	jr c, .check_setup_and_switch_if_we_cant_KO
 	ld a, [wEnemySAtkLevel]
 	cp BASE_STAT_LEVEL - 1
-	jmp c, .check_setup_and_switch_if_we_cant_KO
+	jr c, .check_setup_and_switch_if_we_cant_KO
 
 .magic_guard
 ; Pokemon who are immune to residual damage (magic guard) should not be considered

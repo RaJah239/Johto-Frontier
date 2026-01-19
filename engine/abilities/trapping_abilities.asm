@@ -8,11 +8,19 @@ ShadowTag:
 	ld hl, ShadowTagPokemon
 	call IsInByteArray
 	ret nc
-	jr TrapOpponent
+	jr TrappedByOpponent
 
 INCLUDE "data/abilities/shadow_tag_mons.asm"
 
 ArenaTrap:
+	; check if player has a levitating pokemon
+	; can't trap levitating pokemon
+	ld a, [wBattleMonSpecies]
+	ld hl, LevitatePokemon
+	call IsInByteArray
+	ret c
+
+	; check if enemy has an arena trap pokemon
 	ld a, [wEnemyMonSpecies]
 	ld hl, ArenaTrapPokemon
 	call IsInByteArray
@@ -29,7 +37,7 @@ ArenaTrap:
 	ld a, [de]
 	cp FLYING
 	ret z
-	jr TrapOpponent
+	jr TrappedByOpponent
 
 INCLUDE "data/abilities/arena_trap_mons.asm"
 
@@ -45,14 +53,14 @@ MagnetPull:
 	; check if steel type
 	ld a, [de]
 	cp STEEL
-	jr z, TrapOpponent
+	jr z, TrappedByOpponent
 	inc de
 	ld a, [de]
 	cp STEEL
 	ret nz
 	; fallthrough
 
-TrapOpponent:
+TrappedByOpponent:
 	ld hl, wEnemySubStatus5
 	bit SUBSTATUS_CANT_RUN, [hl]
 	ret nz

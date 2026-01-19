@@ -1,13 +1,11 @@
 ; List of all Pokemon that prevents switching or escaping wild battles
 
-; Note: This list must match engine/battle/ai/switch.asm
+; Note: This list must match engine/battle/ai/items.asm `ShadowTagPokemon_AI:`
 
-; can't switch if trapped
-;   ld a, [wBattleMonSpecies]
-;   cp GENGAR
-;   ret z
-;   cp CHANDELURE
-;   ret z
+;ShadowTagPokemon_AI:
+;   db CHANDELURE
+;   db GENGAR
+;   db -1 ; end
 
 ShadowTagPokemon:
 ;    db CHANDELURE

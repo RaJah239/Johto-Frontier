@@ -1,3 +1,19 @@
+ShadowTagPokemon_AI:
+	db CHANDELURE
+	db GENGAR
+	db -1 ; end
+
+ArenaTrapPokemon_AI:
+	db DRILBUR
+	db EXCADRILL
+    db -1 ; end
+
+MagnetPullPokemon_AI:
+	db MAGNEMITE
+	db MAGNETON
+	db MAGNEZONE
+	db -1 ; end
+
 AI_SwitchOrTryItem:
 	and a
 
@@ -161,24 +177,81 @@ SwitchSometimes:
 AI_TrySwitch:
 ; Determine whether the AI can switch based on how many Pokemon are still alive.
 
-; place code for pokemon that can't be switch
-; due to magnet pull, arena trap and shadow tag
+; ===========================
+; === Ability: Shadow Tag ===
+; ===========================
+	; enemy can't switch when the player has a shadow tag pokemon
+	ld a, [wBattleMonSpecies]
+	ld hl, ShadowTagPokemon_AI
+	call IsInByteArray
+	jr nc, .check_arena_trap
+	jmp TrappedByPlayerPlayer
 
-;	ld a, [wBattleMonSpecies]
-;	cp WOBBUFFET
-;	ret z
-;	cp CHANDELURE
-;	ret z
-;	cp SPIRITOMB
-;	ret z
-;	cp GIRATINA
-;	ret z
+.check_arena_trap
+; ===========================
+; === Ability: Arena Trap ===
+; ===========================
+; enemy can't switch when the player has an arena trap pokemon
+; if enemy has a non-flier or levitator
 
-;	ld a, [wPlayerSubStatus5]
-;	bit SUBSTATUS_CANT_RUN, a
-;	ret nz
+	; check if enemy has a levitating pokemon
+	; can't trap levitating pokemon
+	ld a, [wEnemyMonSpecies]
+	ld hl, LevitatePokemon
+	call IsInByteArray
+	jr c, .check_magnet_pull
+	
+	; check if player has an arena trap pokemon
+	ld a, [wBattleMonSpecies]
+	ld hl, ArenaTrapPokemon_AI
+	call IsInByteArray
+	jr nc, .check_magnet_pull
 
-; DevNote - switch, don't switch if already set up
+	; check type
+	ld de, wEnemyMonType1
+
+	; check if flying type
+	ld a, [de]
+	cp FLYING
+	jr z, .check_magnet_pull
+	inc de
+	ld a, [de]
+	cp FLYING
+	jr z, .check_magnet_pull
+	jmp TrappedByPlayerPlayer
+
+.check_magnet_pull
+; ============================
+; === Ability: Magnet Pull ===
+; ============================
+; enemy can't switch when the player has a magnet pull pokemon
+; if enemy has a steel type pokemon
+
+	; check if player has a magnet pull pokemon
+	ld a, [wBattleMonSpecies]
+	ld hl, MagnetPullPokemon_AI
+	call IsInByteArray
+	jr nc, .check_stat_boosted_levels
+
+	; check type
+	ld de, wEnemyMonType1
+
+	; check if steel type and trap if so
+	ld a, [de]
+	cp STEEL
+	jr z, .trapped_by_magnet_pull
+	inc de
+	ld a, [de]
+	cp STEEL
+	jr z, .trapped_by_magnet_pull
+	jr .check_stat_boosted_levels
+
+.trapped_by_magnet_pull
+	jmp TrappedByPlayerPlayer
+
+.check_stat_boosted_levels
+; switching routine
+; don't switch if already set up
 ; there is a bit of an issue here
 ; this prevents the AI from switching out a set up mon because there is another with a better type match - which is good
 ; but this also prevents the ai from switching out a set up mon which has ran out of pp on a common mono-attacking move
@@ -222,7 +295,7 @@ AI_TrySwitch:
 
 AI_Switch:
 ; if enemy's Perish Count is 1 or
-; if trapped by warp, mean look, etc.,
+; if TrappedByPlayerped by warp, mean look, etc.,
 ; we never reach here
 
 	ld a, [wEnemySubStatus1]
@@ -341,12 +414,12 @@ EnemyWithdrewText:
 	text_far _EnemyWithdrewText
 	text_end
 
-
-
-
-
-
-
+TrappedByPlayerPlayer:
+	ld hl, wPlayerSubStatus5
+	bit SUBSTATUS_CANT_RUN, [hl]
+	ret nz
+	set SUBSTATUS_CANT_RUN, [hl]
+	ret
 
 
 
