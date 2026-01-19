@@ -4653,11 +4653,26 @@ BattleCommand_StatDown:
 	ret
 
 .resilience:
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_resilience_anim
+
+	; play focus energy animation
+	call BattleCommand_SwitchTurn
+	xor a
+	ld [wNumHits], a
+	ld de, FOCUS_ENERGY
+	farcall Call_PlayBattleAnim
+	call BattleCommand_SwitchTurn
+	jr .after_resilience_anim
+
+.skip_resilience_anim
 	; add some delay so the text 
 	; isn't instantly skipped
 	ld c, 30
 	call DelayFrames
 
+.after_resilience_anim
 	ld hl, ResilienceText
 	call StdBattleTextbox
 	ld a, 2
