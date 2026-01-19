@@ -62,7 +62,6 @@ BattleAnimFrameData:
 	dw .Frameset_Bite1               ; BATTLE_ANIM_FRAMESET_BITE_1
 	dw .Frameset_Bite2               ; BATTLE_ANIM_FRAMESET_BITE_2
 	dw .Frameset_CutDownLeft         ; BATTLE_ANIM_FRAMESET_CUT_DOWN_LEFT
-	dw .Frameset_CutDownRight        ; BATTLE_ANIM_FRAMESET_CUT_DOWN_RIGHT
 	dw .Frameset_CutUpRight          ; BATTLE_ANIM_FRAMESET_CUT_UP_RIGHT
 	dw .Frameset_CutLongDownLeft     ; BATTLE_ANIM_FRAMESET_CUT_LONG_DOWN_LEFT
 	dw .Frameset_CutLongDownRight    ; BATTLE_ANIM_FRAMESET_CUT_LONG_DOWN_RIGHT
@@ -233,19 +232,6 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_4E,  2
 	oamwait 2
 	oamframe BATTLE_ANIM_OAMSET_4E,  2
-	oamdelete
-
-.Frameset_CutDownRight:
-	oamframe BATTLE_ANIM_OAMSET_4B,  2, OAM_X_FLIP
-	oamframe BATTLE_ANIM_OAMSET_4C,  2, OAM_X_FLIP
-	oamframe BATTLE_ANIM_OAMSET_4D,  4, OAM_X_FLIP
-	oamframe BATTLE_ANIM_OAMSET_4E,  2, OAM_X_FLIP
-	oamwait 2
-	oamframe BATTLE_ANIM_OAMSET_4E,  2, OAM_X_FLIP
-	oamwait 2
-	oamframe BATTLE_ANIM_OAMSET_4E,  2, OAM_X_FLIP
-	oamwait 2
-	oamframe BATTLE_ANIM_OAMSET_4E,  2, OAM_X_FLIP
 	oamdelete
 
 .Frameset_CutUpRight:
