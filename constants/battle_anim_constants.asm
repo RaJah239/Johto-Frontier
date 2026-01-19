@@ -137,7 +137,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_LICK                ; 6f
 	const BATTLE_ANIM_OBJ_DRAIN               ; 71
 	const BATTLE_ANIM_OBJ_GROWTH              ; 72
-	const BATTLE_ANIM_OBJ_CONVERSION2         ; 73
 	const BATTLE_ANIM_OBJ_SMOKE               ; 74
 	const BATTLE_ANIM_OBJ_SMOKESCREEN         ; 75
 	const BATTLE_ANIM_OBJ_SWORDS_DANCE        ; 76
@@ -162,7 +161,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_SPIKES              ; 8e
 	const BATTLE_ANIM_OBJ_POWDER_SNOW         ; 8f
 	const BATTLE_ANIM_OBJ_DRAGONBREATH        ; 90
-	const BATTLE_ANIM_OBJ_CONVERSION          ; 91
 	const BATTLE_ANIM_OBJ_SPIDER_WEB          ; 92
 	const BATTLE_ANIM_OBJ_CAKE_UNUSED         ; 93
 	const BATTLE_ANIM_OBJ_IN_NIGHTMARE        ; 95
@@ -305,7 +303,6 @@ DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 	const BATTLE_ANIM_FUNC_SPIKES                    ; 3f
 	const BATTLE_ANIM_FUNC_HEAL_BELL_NOTES           ; 40
 	const BATTLE_ANIM_FUNC_BATON_PASS                ; 41
-	const BATTLE_ANIM_FUNC_CONVERSION                ; 42
 	const BATTLE_ANIM_FUNC_ENCORE_BELLY_DRUM         ; 43
 	const BATTLE_ANIM_FUNC_SWAGGER_MORNING_SUN       ; 44
 	const BATTLE_ANIM_FUNC_HIDDEN_POWER              ; 45
@@ -447,7 +444,6 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_SKY_ATTACK            ; 7b
 	const BATTLE_ANIM_FRAMESET_LICK                  ; 7c
 	const BATTLE_ANIM_FRAMESET_SHRINKING_CHARGE_ORB  ; 7e
-	const BATTLE_ANIM_FRAMESET_CONVERSION            ; 7f
 	const BATTLE_ANIM_FRAMESET_SWORD                 ; 80
 	const BATTLE_ANIM_FRAMESET_SPEED_LINE_1          ; 81
 	const BATTLE_ANIM_FRAMESET_SPEED_LINE_2          ; 82

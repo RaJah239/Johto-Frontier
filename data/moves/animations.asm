@@ -5073,44 +5073,6 @@ BattleAnimSub_SpeedLines:
 ; ======== OBJECTS TO REMOVE =======
 ; ==================================
 
-;BattleAnim_Frustration:
-;	anim_1gfx BATTLE_ANIM_GFX_MISC
-;	anim_sound 0, 0, SFX_KINESIS_2
-;	anim_obj BATTLE_ANIM_OBJ_ANGER, 72, 80, $0
-;	anim_wait 40
-;	anim_1gfx BATTLE_ANIM_GFX_HIT
-;	anim_call BattleAnim_TargetObj_1Row
-;	anim_bgeffect BATTLE_BG_EFFECT_WOBBLE_MON, $0, BG_EFFECT_USER, $0
-;	anim_wait 8
-;	anim_sound 0, 1, SFX_COMET_PUNCH
-;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 120, 48, $0
-;	anim_wait 8
-;	anim_sound 0, 1, SFX_COMET_PUNCH
-;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 152, 48, $0
-;	anim_wait 8
-;	anim_sound 0, 1, SFX_COMET_PUNCH
-;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 48, $0
-;	anim_wait 8
-;	anim_incbgeffect BATTLE_BG_EFFECT_WOBBLE_MON
-;	anim_wait 1
-;	anim_call BattleAnim_ShowMon_0
-;	anim_ret
-
-;BattleAnim_Conversion2:
-;	anim_1gfx BATTLE_ANIM_GFX_EXPLOSION
-;	anim_sound 63, 3, SFX_SHARPEN
-;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $0
-;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $8
-;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $10
-;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $18
-;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $20
-;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $28
-;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $30
-;	anim_obj BATTLE_ANIM_OBJ_CONVERSION2, 132, 44, $38
-;	anim_wait 128
-;	anim_wait 48
-;	anim_ret
-
 ;BattleAnim_Dragonbreath:
 ;	anim_1gfx BATTLE_ANIM_GFX_FIRE
 ;	anim_sound 6, 2, SFX_EMBER

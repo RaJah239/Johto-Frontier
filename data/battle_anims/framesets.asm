@@ -120,7 +120,6 @@ BattleAnimFrameData:
 	dw .Frameset_SkyAttack           ; BATTLE_ANIM_FRAMESET_SKY_ATTACK
 	dw .Frameset_Lick                ; BATTLE_ANIM_FRAMESET_LICK
 	dw .Frameset_ShrinkingChargeOrb  ; BATTLE_ANIM_FRAMESET_SHRINKING_CHARGE_ORB
-	dw .Frameset_Conversion          ; BATTLE_ANIM_FRAMESET_CONVERSION
 	dw .Frameset_Sword               ; BATTLE_ANIM_FRAMESET_SWORD
 	dw .Frameset_SpeedLine1          ; BATTLE_ANIM_FRAMESET_SPEED_LINE_1
 	dw .Frameset_SpeedLine2          ; BATTLE_ANIM_FRAMESET_SPEED_LINE_2
@@ -939,10 +938,6 @@ BattleAnimFrameData:
 	oamwait 2
 	oamframe BATTLE_ANIM_OAMSET_9E,  2
 	oamdelete
-
-.Frameset_Conversion:
-	oamframe BATTLE_ANIM_OAMSET_0F,  8
-	oamend
 
 .Frameset_Sword:
 	oamframe BATTLE_ANIM_OAMSET_6B, 24
