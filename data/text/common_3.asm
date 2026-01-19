@@ -1265,13 +1265,9 @@ _ItemWontHaveEffectText::
 	line "effect."
 	prompt
 
-_BallBlockedText::
-	text "The trainer"
-	line "blocked the BALL!"
-	prompt
-
-_BallDontBeAThiefText::
-	text "Don't be a thief!"
+_UseShinyBallInUnownBattleText::
+	text "Shiny Ball fails"
+	line "against Unown!"
 	prompt
 
 _CurBoxFullText::

@@ -224,10 +224,6 @@ ItemEffects:
 ; NoEffect would be appropriate, with the table then being NUM_ITEMS long.
 
 PokeBallEffect:
-	ld a, [wBattleMode]
-	dec a
-	jmp nz, UseBallInTrainerBattle
-
 	ld a, [wBattleType]
  	cp BATTLETYPE_TUTORIAL
  	jr z, .room_in_party
@@ -261,6 +257,20 @@ PokeBallEffect:
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
 	jmp z, .catch_without_fail
+
+	; check if unown
+	ld a, [wEnemyMonSpecies]
+	cp UNOWN
+	jr nz, .not_unown
+
+	; if shiny ball was used, bounce away and don't consume
+	; since shiny ball changes a pokemon's dvs
+	; which will change an unown's letter
+	ld a, [wCurItem]
+	cp SHINY_BALL
+	jmp z, UseShinyBallInUnownBattle
+
+.not_unown
 	ld a, [wCurItem]
 	cp MASTER_BALL
 	jmp z, .catch_without_fail
@@ -2654,7 +2664,7 @@ UseDisposableItem:
 	ld [wItemQuantityChange], a
 	jmp TossItem
 
-UseBallInTrainerBattle:
+UseShinyBallInUnownBattle:
 	call ReturnToBattle_UseBall
 	ld de, ANIM_THROW_POKE_BALL
 	ld a, e
@@ -2666,11 +2676,8 @@ UseBallInTrainerBattle:
 	ldh [hBattleTurn], a
 	ld [wNumHits], a
 	predef PlayBattleAnim
-	ld hl, BallBlockedText
-	call PrintText
-	ld hl, BallDontBeAThiefText
-	call PrintText
-	jr UseDisposableItem
+	ld hl, UseShinyBallInUnownBattleText
+	jmp PrintText
 
 WontHaveAnyEffect_NotUsedMessage:
 	ld hl, ItemWontHaveEffectText
@@ -2731,12 +2738,8 @@ ItemWontHaveEffectText:
 	text_far _ItemWontHaveEffectText
 	text_end
 
-BallBlockedText:
-	text_far _BallBlockedText
-	text_end
-
-BallDontBeAThiefText:
-	text_far _BallDontBeAThiefText
+UseShinyBallInUnownBattleText:
+	text_far _UseShinyBallInUnownBattleText
 	text_end
 
 StorageFullText:
