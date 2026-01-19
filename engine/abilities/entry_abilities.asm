@@ -651,6 +651,30 @@ HandleFogOfWar:
 	call IsInByteArray
 	ret nc
 
+	; only use if foe's stats is buffed by at least 1 stage
+	ld a, [wEnemyAtkLevel]
+	cp BASE_STAT_LEVEL + 1
+	jr nc, .stat_buffed_so_activate_fog_of_war
+	ld a, [wEnemyDefLevel]
+	cp BASE_STAT_LEVEL + 1
+	jr nc, .stat_buffed_so_activate_fog_of_war
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL + 1
+	jr nc, .stat_buffed_so_activate_fog_of_war
+	ld a, [wEnemySDefLevel]
+	cp BASE_STAT_LEVEL + 1
+	jr nc, .stat_buffed_so_activate_fog_of_war
+	ld a, [wEnemySpdLevel]
+	cp BASE_STAT_LEVEL + 1
+	jr nc, .stat_buffed_so_activate_fog_of_war
+	ld a, [wEnemyAccLevel]
+	cp BASE_STAT_LEVEL + 1
+	jr nc, .stat_buffed_so_activate_fog_of_war
+	ld a, [wEnemyEvaLevel]
+	cp BASE_STAT_LEVEL + 1
+	ret c
+
+.stat_buffed_so_activate_fog_of_war
 	; play haze animation
 	ld de, HAZE
 	farcall Call_PlayBattleAnim
