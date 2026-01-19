@@ -264,9 +264,11 @@ HandleMoveEnchancingAbilities:
 	ret z         ; STAB → exit
 	; no STAB → continue
 
+	; boost damage of non stab moves that fit
 	call HandleSharpness
 	call HandleBallistics
 	call HandleIronFist
+	call HandleStrongJaw
 	ret
 
 HandleSharpness:
@@ -281,7 +283,7 @@ HandleSharpness:
 	call IsInByteArray
 	ret nc
 
-	jr FiftyPercentBoost
+	jmp FiftyPercentBoost
 
 INCLUDE "data/abilities/sharpness_mons.asm"
 
@@ -307,8 +309,6 @@ HandleIronFist:
 	call IsInByteArray
 	ret nc
 
-	; since the move is not stab,
-	; boost damage if using a punching move
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	ld hl, PunchingMoves
@@ -318,6 +318,22 @@ HandleIronFist:
 	jr ThirtyPercentBoost
 
 INCLUDE "data/abilities/iron_fist_mons.asm"
+
+HandleStrongJaw:
+	call GetCurrentMon
+	ld hl, StrongJawPokemon
+	call IsInByteArray
+	ret nc
+
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	ld hl, StrongJawMoves
+	call IsInByteArray
+	ret nc
+
+	jr FiftyPercentBoost
+
+INCLUDE "data/abilities/strong_jaw_mons.asm"
 
 TwentyPercentNerf:
 	ld a, 80
@@ -415,6 +431,14 @@ BallisticsMoves:
 	db SIGNAL_BEAM
 	db SLUDGE_BOMB
 	db WATER_GUN
+	db -1 ; end
+
+StrongJawMoves:
+	db BITE
+	db CRUNCH
+	db FIRE_FANG
+	db ICE_FANG
+	db THUNDER_FANG
 	db -1 ; end
 
 ; saving a few bytes by putting it here
