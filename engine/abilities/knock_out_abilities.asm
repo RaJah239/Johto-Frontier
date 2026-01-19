@@ -34,12 +34,17 @@ KOBoost:
 	call GetCurrentMon
 	ld hl, BattleFeastPokemon
 	call IsInByteArray
-	jr c, .battle_feast
+	jmp c, .battle_feast
 
 	call GetCurrentMon
 	ld hl, RenewalPokemon
 	call IsInByteArray
 	jmp c, .renewal
+
+	call GetCurrentMon
+	ld hl, BloodlustPokemon
+	call IsInByteArray
+	jr c, .bloodlust
 	ret
 
 .flash_step
@@ -85,7 +90,38 @@ KOBoost:
 
 	call ClearFailures
 	ld [wNumHits], a
-	jr IgnisBoost
+	jmp IgnisBoost
+
+.bloodlust
+	; don't boost if attack is at level 2 or higher
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wPlayerAtkLevel]
+	jr z, .got_atk_level
+	ld a, [wEnemyAtkLevel]
+.got_atk_level
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .sp_atk_boost
+
+	call ClearFailures
+	ld [wNumHits], a
+	call BloodlustAtkBoost
+	; fallthrough
+
+.sp_atk_boost
+	; don't boost if special attack is at level 2 or higher
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wPlayerSAtkLevel]
+	jr z, .got_sp_atk_level
+	ld a, [wEnemySAtkLevel]
+.got_sp_atk_level
+	cp BASE_STAT_LEVEL + 2
+	ret nc
+
+	call ClearFailures
+	ld [wNumHits], a
+	jmp BloodlustSpAtkBoost
 
 .battle_feast
 	call ClearFailures
@@ -179,6 +215,18 @@ FlashStepBoost:
     ld hl, FlashStepText
     jmp BattleTextbox
 
+BloodlustAtkBoost:
+	call PlayBoostAnimation
+	farcall BattleCommand_AttackUp
+    ld hl, BloodlustAtkBoostText
+    jmp BattleTextbox
+
+BloodlustSpAtkBoost:
+	call PlayBoostAnimation
+	farcall BattleCommand_SpecialAttackUp
+    ld hl, BloodlustSpAtkBoostText
+    jmp BattleTextbox
+
 MoxieText:
 	text "<USER>'s"
 	line "Moxie activated!"
@@ -204,6 +252,24 @@ FlashStepText:
 	line "Speed went up!"
 	prompt
 
+BloodlustAtkBoostText:
+	text "<USER>'s"
+	line "Bloodlust"
+	cont "activated!"
+
+	para "<USER>'s"
+	line "Attack went up!"
+	prompt
+
+BloodlustSpAtkBoostText:
+	text "<USER>'s"
+	line "Bloodlust"
+	cont "activated!"
+
+	para "<USER>'s"
+	line "Sp.Attack went up!"
+	prompt
+
 RenewalText:
 	text "<USER>'s"
 	line "Renewal activated!"
@@ -215,6 +281,7 @@ RenewalText:
 INCLUDE "data/abilities/moxie_mons.asm"
 INCLUDE "data/abilities/ignis_mons.asm"
 INCLUDE "data/abilities/flash_step_mons.asm"
+INCLUDE "data/abilities/bloodlust_mons.asm"
 INCLUDE "data/abilities/battle_feast_mons.asm"
 INCLUDE "data/abilities/renewal_mons.asm"
 
