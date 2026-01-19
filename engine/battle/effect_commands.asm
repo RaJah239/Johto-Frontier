@@ -4896,6 +4896,8 @@ BattleCommand_StatUpMessage:
 	jr nz, .skip_stat_up_anim
 
 	; play animation after every stat up
+	xor a
+	ld [wNumHits], a
 	ld de, ANIM_STAT_UP
 	farcall Call_PlayBattleAnim	
 
