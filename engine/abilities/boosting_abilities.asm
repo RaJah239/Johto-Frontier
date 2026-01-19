@@ -315,7 +315,7 @@ HandleIronFist:
 	call IsInByteArray
 	ret nc
 
-	jr ThirtyPercentBoost
+	jr TwentyPercentBoost
 
 INCLUDE "data/abilities/iron_fist_mons.asm"
 

@@ -1,4 +1,4 @@
-; List of all Pokemon that gains 30% boost in their punching attacks
+; List of all Pokemon that gains 20% boost in their punching attacks
 
 IronFistPokemon:
 ;    db MANKEY
