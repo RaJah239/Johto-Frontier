@@ -3203,16 +3203,23 @@ BattleAnim_IceShard:
 	anim_ret
 
 BattleAnim_CalmMind:
-	anim_1gfx BATTLE_ANIM_GFX_MISC
-	anim_sound 0, 1, SFX_MIND_READER
-.loop
-	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 48, 88, $3
-	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 48, 88, $12
-	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 48, 88, $20
-	anim_obj BATTLE_ANIM_OBJ_MIND_READER, 48, 88, $31
-	anim_wait 16
-	anim_loop 2, .loop
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PINK
+	anim_3gfx BATTLE_ANIM_GFX_BIG_RINGS, BATTLE_ANIM_GFX_RINGS, BATTLE_ANIM_GFX_GLOW
+	anim_bgp $1b
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_sound 0, 0, SFX_ATTRACT
+	anim_obj BATTLE_ANIM_OBJ_SMALL_GLOW, 48, 96, $0
 	anim_wait 32
+	anim_clearobjs
+	anim_sound 0, 1, SFX_GAME_FREAK_LOGO_GS
+.loop
+	anim_obj BATTLE_ANIM_OBJ_SHRINKING_RING_BIG, 48, 96, $0
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHRINKING_RING_SMALL, 48, 96, $0
+	anim_wait 16
+	anim_loop 4, .loop
+	anim_wait 16
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_Growth:
