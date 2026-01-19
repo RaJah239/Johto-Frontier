@@ -2038,7 +2038,29 @@ BattleAnim_FocusEnergy:
 	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT, $0, BG_EFFECT_USER, $40
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
 .loop
-	anim_jump BattleAnim_SubFocusingAnim
+	; fallthrough
+
+BattleAnim_SubFocusingAnim:
+.loop
+	anim_sound 0, 0, SFX_SWORDS_DANCE
+	anim_obj BATTLE_ANIM_OBJ_FOCUS, 44, 108, $6
+	anim_wait 2
+	anim_obj BATTLE_ANIM_OBJ_FOCUS, 36, 108, $6
+	anim_wait 2
+	anim_obj BATTLE_ANIM_OBJ_FOCUS, 52, 108, $8
+	anim_wait 2
+	anim_obj BATTLE_ANIM_OBJ_FOCUS, 28, 108, $8
+	anim_wait 2
+	anim_obj BATTLE_ANIM_OBJ_FOCUS, 60, 108, $6
+	anim_wait 2
+	anim_obj BATTLE_ANIM_OBJ_FOCUS, 20, 108, $8
+	anim_wait 2
+	anim_obj BATTLE_ANIM_OBJ_FOCUS, 68, 108, $8
+	anim_wait 2
+	anim_loop 2, .loop
+	anim_wait 8
+	anim_incbgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING
+	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_DarkPulse:
 	anim_1gfx BATTLE_ANIM_GFX_CHARGE
@@ -3650,12 +3672,8 @@ BattleAnim_SpiderWeb:
 	anim_ret
 
 BattleAnim_DragonDance:
-	anim_2gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_SPEED
-	anim_call BattleAnim_UserFlames
-	anim_jump BattleAnim_SubFocusingAnim
-
-BattleAnim_UserFlames:
 	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
+	anim_2gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_SPEED
 .loop
 	anim_sound 0, 0, SFX_EMBER
 	anim_obj BATTLE_ANIM_OBJ_FLAME_WHEEL,   6, 0,  12, 0, $0
@@ -3677,7 +3695,7 @@ BattleAnim_QuiverDance:
 	anim_wait 4
 	anim_loop 4, .loop
 	anim_wait 24
-	anim_jump BattleAnim_SubFocusingAnim
+	anim_ret
 
 BattleAnim_Trick:
 	anim_1gfx BATTLE_ANIM_GFX_STATUS
@@ -4193,28 +4211,6 @@ BattleAnim_FireFang:
 	anim_clearobjs
 	anim_1gfx BATTLE_ANIM_GFX_FIRE
 	anim_jump BattleAnimSub_Fire
-
-BattleAnim_SubFocusingAnim:
-.loop
-	anim_sound 0, 0, SFX_SWORDS_DANCE
-	anim_obj BATTLE_ANIM_OBJ_FOCUS, 44, 108, $6
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_FOCUS, 36, 108, $6
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_FOCUS, 52, 108, $8
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_FOCUS, 28, 108, $8
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_FOCUS, 60, 108, $6
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_FOCUS, 20, 108, $8
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_FOCUS, 68, 108, $8
-	anim_wait 2
-	anim_loop 2, .loop
-	anim_wait 8
-	anim_incbgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING
-	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_Charm:
 	anim_1gfx BATTLE_ANIM_GFX_OBJECTS
