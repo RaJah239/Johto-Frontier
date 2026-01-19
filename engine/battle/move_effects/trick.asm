@@ -7,6 +7,9 @@ BattleCommand_Trick:
 	farcall CheckHiddenOpponent
 	jr nz, .failed
 
+	farcall CheckSubstituteOpp
+	jr nz, .failed
+
 	ld hl, wBattleMonItem
 	ld de, wEnemyMonItem
 
