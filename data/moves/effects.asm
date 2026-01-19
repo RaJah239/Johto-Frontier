@@ -1969,3 +1969,24 @@ ThunderFang:
 	effectchance ; independent chance
 	flinchtarget
 	endmove
+
+FireFang:
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	effectchance
+	burntarget
+	effectchance ; independent chance
+	flinchtarget
+	endmove
