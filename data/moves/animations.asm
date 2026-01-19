@@ -3718,6 +3718,8 @@ BattleAnim_SpiderWeb:
 BattleAnim_DragonDance:
 	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
 	anim_2gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_SPEED
+	anim_call BattleAnim_TargetObj_2Row
+	anim_bgeffect BATTLE_BG_EFFECT_WOBBLE_MON, $0, BG_EFFECT_USER, $0
 .loop
 	anim_sound 0, 0, SFX_EMBER
 	anim_obj BATTLE_ANIM_OBJ_FLAME_WHEEL,   6, 0,  12, 0, $0
@@ -3727,6 +3729,8 @@ BattleAnim_DragonDance:
 	anim_wait 6
 	anim_loop 4, .loop
 	anim_wait 96
+	anim_incbgeffect BATTLE_BG_EFFECT_WOBBLE_MON
+	anim_call BattleAnim_ShowMon_0
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
