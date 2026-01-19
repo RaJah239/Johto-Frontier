@@ -98,7 +98,6 @@ BattleBGEffects:
 	dw BattleBGEffect_NightShade
 	dw BattleBGEffect_BattlerObj_1Row
 	dw BattleBGEffect_BattlerObj_2Row
-	dw BattleBGEffect_DoubleTeam
 	dw BattleBGEffect_RapidFlash
 	dw BattleBGEffect_FadeMonToLight
 	dw BattleBGEffect_FadeMonToBlack
@@ -133,7 +132,7 @@ BattleBGEffects:
 	dw BattleBGEffect_WobbleScreen
 
 BattleBGEffect_End:
-	jmp EndBattleBGEffect
+	jr EndBattleBGEffect
 
 BatttleBGEffects_GetNamedJumptablePointer:
 	ld hl, BG_EFFECT_STRUCT_JT_INDEX
@@ -1106,100 +1105,6 @@ BattleBGEffect_NightShade:
 	jmp BattleBGEffect_WavyScreenFX
 
 .two
-	jmp BattleAnim_ResetLCDStatCustom
-
-BattleBGEffect_DoubleTeam:
-	call BattleBGEffects_AnonJumptable
-.anon_dw
-	dw .zero
-	dw .one
-	dw .two
-	dw .three
-	dw .four
-	dw .five
-
-.zero
-	call BattleBGEffects_IncAnonJumptableIndex
-	call BattleBGEffects_ClearLYOverrides
-	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
-	ld a, LOW(rSCX)
-	call BattleBGEffect_SetLCDStatCustoms1
-	ldh a, [hLYOverrideEnd]
-	inc a
-	ldh [hLYOverrideEnd], a
-	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
-	add hl, bc
-	ld [hl], $0
-	ret
-
-.one
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	cp $10
-	jr nc, .next
-	inc [hl]
-	call .UpdateLYOverrides
-	ret
-
-.three
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	cp $ff
-	jr z, .next
-	dec [hl]
-	call .UpdateLYOverrides
-	ret
-
-.next
-	jmp BattleBGEffects_IncAnonJumptableIndex
-
-.two
-	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
-	add hl, bc
-	ld a, [hl]
-	ld d, $2
-	call BattleBGEffects_Sine
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	add [hl]
-	call .UpdateLYOverrides
-	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
-	add hl, bc
-	ld a, [hl]
-	add $4
-	ld [hl], a
-
-.four
-	ret
-
-.UpdateLYOverrides:
-	ld e, a
-	cpl
-	inc a
-	ld d, a
-	ld h, HIGH(wLYOverridesBackup)
-	ldh a, [hLYOverrideStart]
-	ld l, a
-	ldh a, [hLYOverrideEnd]
-	sub l
-	srl a
-	push af
-.loop
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	inc hl
-	dec a
-	jr nz, .loop
-	pop af
-	ret nc
-	ld [hl], e
-	ret
-
-.five
 	jmp BattleAnim_ResetLCDStatCustom
 
 BattleBGEffect_Withdraw:

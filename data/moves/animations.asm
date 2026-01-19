@@ -5073,51 +5073,6 @@ BattleAnimSub_SpeedLines:
 ; ======== OBJECTS TO REMOVE =======
 ; ==================================
 
-;BattleAnim_Meditate:
-;	anim_1gfx BATTLE_ANIM_GFX_HIT
-;	anim_call BattleAnim_TargetObj_1Row
-;	anim_sound 0, 0, SFX_PSYBEAM
-;	anim_bgeffect BATTLE_BG_EFFECT_WAVE_DEFORM_MON, $0, BG_EFFECT_USER, $0
-;	anim_wait 48
-;	anim_incbgeffect BATTLE_BG_EFFECT_WAVE_DEFORM_MON
-;	anim_wait 48
-;	anim_call BattleAnim_ShowMon_0
-;	anim_ret
-
-;BattleAnim_Guillotine:
-;	anim_1gfx BATTLE_ANIM_GFX_CUT
-;	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $10
-;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $40, $2, $0
-;	anim_sound 0, 1, SFX_VICEGRIP
-;	anim_obj BATTLE_ANIM_OBJ_CUT_DOWN_LEFT, 156, 44, $0
-;	anim_obj BATTLE_ANIM_OBJ_CUT_DOWN_LEFT, 152, 40, $0
-;	anim_obj BATTLE_ANIM_OBJ_CUT_DOWN_LEFT, 148, 36, $0
-;	anim_obj BATTLE_ANIM_OBJ_CUT_UP_RIGHT, 124, 76, $0
-;	anim_obj BATTLE_ANIM_OBJ_CUT_UP_RIGHT, 120, 72, $0
-;	anim_obj BATTLE_ANIM_OBJ_CUT_UP_RIGHT, 116, 68, $0
-;	anim_obj BATTLE_ANIM_OBJ_CUT_UP_RIGHT, 120, 72, $0
-;	anim_wait 32
-;	anim_ret
-
-;BattleAnim_Vicegrip:
-;	anim_1gfx BATTLE_ANIM_GFX_CUT
-;	anim_sound 0, 1, SFX_VICEGRIP
-;	anim_obj BATTLE_ANIM_OBJ_CUT_DOWN_LEFT, 152, 40, $0
-;	anim_obj BATTLE_ANIM_OBJ_CUT_UP_RIGHT, 120, 72, $0
-;	anim_wait 32
-;	anim_ret
-
-;BattleAnim_DoubleTeam:
-;	anim_call BattleAnim_TargetObj_2Row
-;	anim_sound 0, 0, SFX_PSYBEAM
-;	anim_bgeffect BATTLE_BG_EFFECT_DOUBLE_TEAM, $0, BG_EFFECT_USER, $0
-;	anim_wait 96
-;	anim_incbgeffect BATTLE_BG_EFFECT_DOUBLE_TEAM
-;	anim_wait 24
-;	anim_incbgeffect BATTLE_BG_EFFECT_DOUBLE_TEAM
-;	anim_call BattleAnim_ShowMon_0
-;	anim_ret
-
 ;BattleAnim_Frustration:
 ;	anim_1gfx BATTLE_ANIM_GFX_MISC
 ;	anim_sound 0, 0, SFX_KINESIS_2
