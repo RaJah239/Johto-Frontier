@@ -4509,6 +4509,7 @@ BattleAnim_PainSplit:
 	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_FlareBlitz:
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
 	anim_call BattleAnim_FlareBlitz_Stub
 	anim_bgp $90
 	anim_bgeffect BATTLE_BG_EFFECT_BATTLEROBJ_1ROW, $0, $0, $0
@@ -4516,7 +4517,6 @@ BattleAnim_FlareBlitz:
 	anim_jump BattleAnim_FlameCharge.hit
 
 BattleAnim_FlareBlitz_Stub:
-	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
 	anim_2gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_HIT
 	anim_battlergfx_2row
 .loop
@@ -4850,7 +4850,10 @@ BattleAnim_HiddenSpinningSub:
 	anim_ret
 
 BattleAnim_DragonClaw:
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_DRAGONBREATH
 	anim_call BattleAnim_FlareBlitz_Stub
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_DRAGONBREATH
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_DRAGONBREATH
 	anim_1gfx BATTLE_ANIM_GFX_CUT
 	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
 	anim_wait 1
@@ -4862,6 +4865,7 @@ BattleAnim_DragonClaw:
 	anim_obj BATTLE_ANIM_OBJ_CUT_DOWN_LEFT, 136, 40, $0
 	anim_wait 32
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_YELLOW
 	anim_ret
 
 BattleAnim_RainDance:
