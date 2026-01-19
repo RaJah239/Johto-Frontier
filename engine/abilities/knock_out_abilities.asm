@@ -35,6 +35,11 @@ KOBoost:
 	ld hl, BattleFeastPokemon
 	call IsInByteArray
 	jr c, .battle_feast
+
+	call GetCurrentMon
+	ld hl, RenewalPokemon
+	call IsInByteArray
+	jmp c, .renewal
 	ret
 
 .flash_step
@@ -65,7 +70,7 @@ KOBoost:
 
 	call ClearFailures
 	ld [wNumHits], a
-	jr MoxieBoost
+	jmp MoxieBoost
 
 .ignis
 	; don't boost if at level 2 or higher
@@ -91,13 +96,13 @@ KOBoost:
 ; ==================
 	ldh a, [hBattleTurn]
 	and a
-	jr nz, .enemy_turn
+	jr nz, .enemy_turn_battle_feast
 
 ; =====================
 ; === Player's Turn ===
 ; =====================
 
-.enemy_turn
+.enemy_turn_battle_feast
 	ld hl, wBattleMonHP
 	ldh a, [hBattleTurn]
 	and a
@@ -126,6 +131,35 @@ KOBoost:
 	ret nz
 	ld hl, BattleText_BattleFeastText
 	jmp StdBattleTextbox
+
+.renewal
+	call ClearFailures
+	ld [wNumHits], a
+
+; ==================
+; === Check Turn ===
+; ==================
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .enemy_turn_renewal
+
+; =====================
+; === Player's Turn ===
+; =====================
+
+.enemy_turn_renewal
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	and a
+	ret z
+	xor a
+	ld [hl], a
+	farcall SwitchTurnCore
+	farcall ItemRecoveryAnim
+	farcall SwitchTurnCore
+	ld hl, RenewalText
+	call BattleTextbox
+	farjp CalcPokemonStats
 
 MoxieBoost:
 	call PlayBoostAnimation
@@ -170,10 +204,19 @@ FlashStepText:
 	line "Speed went up!"
 	prompt
 
+RenewalText:
+	text "<USER>'s"
+	line "Renewal activated!"
+
+	para "<USER>"
+	line "became healthy!"
+	prompt
+
 INCLUDE "data/abilities/moxie_mons.asm"
 INCLUDE "data/abilities/ignis_mons.asm"
 INCLUDE "data/abilities/flash_step_mons.asm"
 INCLUDE "data/abilities/battle_feast_mons.asm"
+INCLUDE "data/abilities/renewal_mons.asm"
 
 PlayBoostAnimation:
 	ld a, [wOptions]
