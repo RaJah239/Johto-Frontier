@@ -2155,13 +2155,6 @@ BattleCommand_FailureText:
 	jmp EndMoveEffect
 
 BattleCommand_ApplyDamage:
-	farcall BattleCommand_FalseSwipe
-	ld b, 0
-	jr nc, .damage
-	ld b, 1
-	jr .damage
-
-.sturdy
 ; =================================
 ; ========== Sturdy ===============
 ; =================================
