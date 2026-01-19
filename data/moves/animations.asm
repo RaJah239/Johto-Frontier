@@ -4494,6 +4494,13 @@ BattleAnim_PainSplit:
 	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_FlareBlitz:
+	anim_call BattleAnim_FlareBlitz_Stub
+	anim_bgp $90
+	anim_bgeffect BATTLE_BG_EFFECT_BATTLEROBJ_1ROW, $0, $0, $0
+	anim_bgeffect BATTLE_BG_EFFECT_TACKLE, $0, $1, $0
+	anim_jump BattleAnim_FlameCharge.hit
+
+BattleAnim_FlareBlitz_Stub:
 	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
 	anim_2gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_HIT
 	anim_battlergfx_2row
@@ -4517,10 +4524,7 @@ BattleAnim_FlareBlitz:
 	anim_wait 2
 	anim_loop 3, .loop
 	anim_wait 16
-	anim_bgp $90
-	anim_bgeffect BATTLE_BG_EFFECT_BATTLEROBJ_1ROW, $0, $0, $0
-	anim_bgeffect BATTLE_BG_EFFECT_TACKLE, $0, $1, $0
-	anim_jump BattleAnim_FlameCharge.hit
+	anim_ret
 
 BattleAnim_SacredFire:
 	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
@@ -4831,22 +4835,18 @@ BattleAnim_HiddenSpinningSub:
 	anim_ret
 
 BattleAnim_DragonClaw:
-	anim_2gfx BATTLE_ANIM_GFX_CUT, BATTLE_ANIM_GFX_FIRE
-	anim_obp0 0, 1, 2, 3
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $40, $2, $0
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $3
+	anim_call BattleAnim_FlareBlitz_Stub
+	anim_1gfx BATTLE_ANIM_GFX_CUT
+	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
+	anim_wait 1
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $14, $2, $0
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $2
 	anim_sound 0, 1, SFX_CUT
-	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 19, 0,  5, 0, $0
-	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 18, 4,  4, 4, $0
-	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 18, 0,  4, 0, $0
-	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 17, 4,  3, 4, $0
-	anim_wait 8
-	anim_obj BATTLE_ANIM_OBJ_BURNED,  15, 0, 8, 4, 6
-	anim_obj BATTLE_ANIM_OBJ_BURNED,  14, 0, 7, 4, 7
-	anim_obj BATTLE_ANIM_OBJ_BURNED,  13, 0, 6, 4, 8
-	anim_wait 16
-	anim_sound 0, 0, SFX_BURN
-	anim_wait 16
+	anim_obj BATTLE_ANIM_OBJ_CUT_DOWN_LEFT, 144, 48, $0
+	anim_obj BATTLE_ANIM_OBJ_CUT_DOWN_LEFT, 140, 44, $0
+	anim_obj BATTLE_ANIM_OBJ_CUT_DOWN_LEFT, 136, 40, $0
+	anim_wait 32
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_RainDance:
