@@ -424,26 +424,32 @@ MoveEnchancingAbilitiesNotebook:
 	loadmenu .MoveEnchancingAbilitiesHeader
 	verticalmenu
 	closewindow
-	ifequal 1, .PunchingMoves
-	ifequal 2, .SharpnessMoves
-	ifequal 3, .BallisticsMoves
+	ifequal 1, .BallisticsMoves
+	ifequal 2, .PunchingMoves
+	ifequal 3, .SharpnessMoves
+	ifequal 4, .StrongJawMoves
 .Done:
 	closetext
 	end
 
 .MoveEnchancingAbilitiesHeader:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 2, 19, TEXTBOX_Y - 1
+	menu_coords 0, 0, 19, TEXTBOX_Y - 1
 	dw .MenuData
 	db 1 ; default option
 
 .MenuData:
 	db STATICMENU_CURSOR ; flags
-	db 4 ; items
+	db 5 ; items
+	db "Ballistics Moves@"
 	db "Punching Moves@"
 	db "Sharpness Moves@"
-	db "Ballistics Moves@"
+	db "Strong Jaw Moves@"
 	db "Cancel@"
+
+.BallisticsMoves
+	writetext BallisticsMovesText
+	sjump .list
 
 .PunchingMoves
 	writetext PunchingMovesText
@@ -453,8 +459,8 @@ MoveEnchancingAbilitiesNotebook:
 	writetext SharpnessMovesText
 	sjump .list
 
-.BallisticsMoves
-	writetext BallisticsMovesText
+.StrongJawMoves
+	writetext StrongJawMovesText
 	sjump .list
 
 MoveEnchancingAbilitiesText:
@@ -524,6 +530,20 @@ BallisticsMovesText:
 	cont "Signal Beam,"
 	cont "Sludge Bomb and"
 	cont "Water Gun."
+	done
+
+StrongJawMovesText:
+	text "It's a list of all"
+	line "Strong Jaw Moves!"
+
+	para "In alphabetical"
+	line "order, it goes:"
+
+	para "Bite,"
+	line "Crunch,"
+	cont "Fire Fang,"
+	cont "Ice Fang and"
+	cont "Thunder Fang."
 	done
 
 EarlsPokemonAcademy_MapEvents:
