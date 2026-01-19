@@ -74,7 +74,7 @@ if DEF(_DEBUG)
 	giveitem MILOTIC_CALL
 
 	; good party
-	givepoke KLEAVOR, 50
+	givepoke MAGIKARP, 50
 
 ;	givepoke SUICUNE, 50, LEFTOVERS
 ;	givepoke GHOLDENGO, 50, LEFTOVERS
@@ -93,7 +93,7 @@ if DEF(_DEBUG)
 
 	; 1st mon moves
 	loadmem wPartyMon1Moves+0, SPLASH
-	loadmem wPartyMon1Moves+1, X_SCISSOR
+	loadmem wPartyMon1Moves+1, NO_MOVE
 	loadmem wPartyMon1Moves+2, NO_MOVE
 	loadmem wPartyMon1Moves+3, NO_MOVE
 

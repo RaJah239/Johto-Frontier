@@ -44,7 +44,7 @@ RandomPartyLists::
 
 	; RANDOMLIST_1
 	db 1
-	db 35, SNORLAX
+	db 35, MAGIKARP
 			db "Lax@"		; Nickname
 			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
 			db NO_ITEM	; ITEM/ NO_ITEM is a thing
