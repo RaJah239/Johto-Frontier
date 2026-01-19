@@ -5072,20 +5072,6 @@ BattleAnimSub_SpeedLines:
 ; ==================================
 ; ======== OBJECTS TO REMOVE =======
 ; ==================================
-
-;BattleAnim_Clamp:
-;	anim_2gfx BATTLE_ANIM_GFX_CUT, BATTLE_ANIM_GFX_HIT
-;	anim_obj BATTLE_ANIM_OBJ_CLAMP, 136, 56, $a0
-;	anim_obj BATTLE_ANIM_OBJ_CLAMP, 136, 56, $20
-;	anim_wait 16
-;	anim_sound 0, 1, SFX_BITE
-;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 144, 48, $18
-;	anim_wait 32
-;	anim_sound 0, 1, SFX_BITE
-;	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 128, 64, $18
-;	anim_wait 16
-;	anim_ret
-
 ;BattleAnim_Present:
 ;	anim_2gfx BATTLE_ANIM_GFX_STATUS, BATTLE_ANIM_GFX_BUBBLE
 ;	anim_sound 0, 1, SFX_PRESENT

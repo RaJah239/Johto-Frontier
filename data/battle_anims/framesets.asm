@@ -59,8 +59,6 @@ BattleAnimFrameData:
 	dw .Frameset_ThunderBoltCore     ; BATTLE_ANIM_FRAMESET_THUNDERBOLT_CORE
 	dw .Frameset_ThunderShockSparks  ; BATTLE_ANIM_FRAMESET_THUNDERSHOCK_SPARKS
 	dw .Frameset_ThunderShockCore    ; BATTLE_ANIM_FRAMESET_THUNDERSHOCK_CORE
-;	dw .Frameset_Clamp               ; BATTLE_ANIM_FRAMESET_CLAMP
-;	dw .Frameset_ClampFlipped        ; BATTLE_ANIM_FRAMESET_CLAMP_FLIPPED
 	dw .Frameset_Bite1               ; BATTLE_ANIM_FRAMESET_BITE_1
 	dw .Frameset_Bite2               ; BATTLE_ANIM_FRAMESET_BITE_2
 	dw .Frameset_CutDownLeft         ; BATTLE_ANIM_FRAMESET_CUT_DOWN_LEFT
@@ -610,14 +608,6 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_18,  2
 	oamwait 2
 	oamrestart
-
-;.Frameset_Clamp:
-;	oamframe BATTLE_ANIM_OAMSET_48,  8
-;	oamend
-;
-;.Frameset_ClampFlipped:
-;	oamframe BATTLE_ANIM_OAMSET_48,  8, OAM_X_FLIP
-;	oamend
 
 .Frameset_Bite1:
 	oamframe BATTLE_ANIM_OAMSET_49,  8
