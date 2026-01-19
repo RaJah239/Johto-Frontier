@@ -740,6 +740,8 @@ ParsePlayerAction:
 	ld a, [wBattlePlayerAction]
 	cp BATTLEPLAYERACTION_SWITCH
 	jr z, .reset_protect
+	and a
+	jr nz, .locked_in
 	xor a
 	ld [wMoveSelectionMenuType], a
 	inc a ; POUND
