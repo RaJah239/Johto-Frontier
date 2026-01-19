@@ -2151,11 +2151,11 @@ BattleAnim_IcicleCrash:
 BattleAnim_Wrap:
 	anim_1gfx BATTLE_ANIM_GFX_ROPE
 	anim_sound 0, 1, SFX_BIND
-	anim_obj BATTLE_ANIM_OBJ_BIND1, 132, 64, $0
+	anim_obj BATTLE_ANIM_OBJ_BIND, 132, 64, $0
 	anim_wait 8
-	anim_obj BATTLE_ANIM_OBJ_BIND1, 132, 56, $0
+	anim_obj BATTLE_ANIM_OBJ_BIND, 132, 56, $0
 	anim_wait 8
-	anim_obj BATTLE_ANIM_OBJ_BIND1, 132, 48, $0
+	anim_obj BATTLE_ANIM_OBJ_BIND, 132, 48, $0
 	anim_wait 64
 	anim_sound 0, 1, SFX_BIND
 	anim_incobj 1
