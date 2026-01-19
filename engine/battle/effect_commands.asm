@@ -6919,6 +6919,20 @@ HailDefenseBoost:
 	ret nz
 	jr SpDefBoost
 
+BattleCommand_CheckSubstitute:
+	call CheckSubstituteOpp
+	ret z
+
+	; add some delay so the text 
+	; isn't instantly skipped
+	ld c, 30
+	call DelayFrames
+
+	ld hl, SubstitueBlocksSwaggerText
+	call StdBattleTextbox
+
+	jmp EndMoveEffect
+
 Fifty_PercentBoost:
 	ld a, 3
 	ldh [hMultiplier], a

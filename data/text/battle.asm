@@ -524,6 +524,11 @@ MustRechargeText:
 	line "must recharge!"
 	prompt
 
+SubstitueBlocksSwaggerText:
+	text "Swagger is blocked"
+	line "by substitutes!"
+	prompt
+
 DisabledNoMoreText:
 	text "<USER>'s"
 	line "disabled no more!"

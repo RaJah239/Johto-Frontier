@@ -1232,6 +1232,7 @@ Rollout:
 Swagger:
 	usedmovetext
 	doturn
+	checksubstitute
 	checkhit
 	switchturn
 	attackup2
