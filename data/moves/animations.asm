@@ -5072,33 +5072,6 @@ BattleAnimSub_SpeedLines:
 ; ==================================
 ; ======== OBJECTS TO REMOVE =======
 ; ==================================
-;BattleAnim_Present:
-;	anim_2gfx BATTLE_ANIM_GFX_STATUS, BATTLE_ANIM_GFX_BUBBLE
-;	anim_sound 0, 1, SFX_PRESENT
-;	anim_obj BATTLE_ANIM_OBJ_PRESENT, 64, 88, $6c
-;	anim_wait 56
-;	anim_obj BATTLE_ANIM_OBJ_AMNESIA, 104, 48, $0
-;	anim_wait 48
-;	anim_incobj 2
-;	anim_if_param_equal $3, .heal
-;	anim_incobj 1
-;	anim_wait 1
-;	anim_1gfx BATTLE_ANIM_GFX_EXPLOSION
-;	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $12
-;.loop
-;	anim_call BattleAnimSub_Explosion2
-;	anim_wait 16
-;	anim_jumpuntil .loop
-;	anim_ret
-;
-;.heal
-;	anim_sound 0, 1, SFX_METRONOME
-;.loop2
-;	anim_obj BATTLE_ANIM_OBJ_RECOVER, 132, 48, $24
-;	anim_wait 8
-;	anim_loop 8, .loop2
-;	anim_wait 128
-;	anim_ret
 
 ;BattleAnim_Meditate:
 ;	anim_1gfx BATTLE_ANIM_GFX_HIT
