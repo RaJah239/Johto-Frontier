@@ -1,8 +1,8 @@
 	db SALAMENCE ; Species ID
 
-	db  95, 135,  80, 100, 110,  80
-	evs  0,   3,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
+	db  100, 120,  80, 100, 120,  80 ; BST 600
+	evs   2,   3,   1,   2,   3,   1
 
 	db DRAGON, FLYING ; type
 	db 45 ; catch rate
