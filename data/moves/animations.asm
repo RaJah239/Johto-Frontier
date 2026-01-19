@@ -204,7 +204,7 @@ BattleAnimations::
 	dw BattleAnim_Outrage
 	dw BattleAnim_Sandstorm
 	dw BattleAnim_GigaDrain
-	dw BattleAnim_Endure
+	dw BattleAnim_FireFang
 	dw BattleAnim_Charm
 	dw BattleAnim_Rollout
 	dw BattleAnim_FalseSwipe
@@ -4188,12 +4188,11 @@ BattleAnim_GigaDrain:
 	anim_wait 32
 	anim_ret
 
-BattleAnim_Endure:
-	anim_1gfx BATTLE_ANIM_GFX_SPEED
-	anim_call BattleAnim_TargetObj_1Row
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, BG_EFFECT_USER, $20
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
-	; fallthrough
+BattleAnim_FireFang:
+	anim_call BattleAnim_Bite
+	anim_clearobjs
+	anim_1gfx BATTLE_ANIM_GFX_FIRE
+	anim_jump BattleAnimSub_Fire
 
 BattleAnim_SubFocusingAnim:
 .loop

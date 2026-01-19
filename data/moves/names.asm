@@ -202,7 +202,7 @@ MoveNames::
 	li "Outrage"
 	li "Sandstorm"
 	li "Giga Drain"
-	li "Endure"
+	li "Fire Fang"
 	li "Charm"
 	li "Rollout"
 	li "False Swipe"

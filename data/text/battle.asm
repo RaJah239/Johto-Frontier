@@ -623,11 +623,6 @@ HungOnText:
 	text "!"
 	prompt
 
-EnduredText:
-	text "<TARGET>"
-	line "ENDURED the hit!"
-	prompt
-
 InLoveWithText:
 	text "<USER>"
 	line "is in love with"

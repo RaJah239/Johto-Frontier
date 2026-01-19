@@ -203,7 +203,7 @@ MoveDescriptions::
 	dw OutrageDescription
 	dw SandstormDescription
 	dw GigaDrainDescription
-	dw BodyPressDescription
+	dw FireFangDescription
 	dw CharmDescription
 	dw RolloutDescription
 	dw FalseSwipeDescription
@@ -810,9 +810,9 @@ AeroblastDescription:
 	db   "Absorbs 1/2 hit."
 	line "Crit hit chance.@"
 
-EndureDescription:
-	db   "Always leaves at"
-	line "least 1HP.@"
+FireFangDescription:
+	db   "May burn or cause"
+	line "flinching.@"
 
 CharmDescription:
 	db   "Sharply lowers the"

@@ -2220,13 +2220,11 @@ BattleCommand_ApplyDamage:
 	ret z
 
 	dec a
-	jr nz, .focus_band_text
-	ld hl, EnduredText
-	jmp StdBattleTextbox
+	ret z
 
 .focus_band_text
 	call GetOpponentItem
-    ld a, b
+	ld a, b
 	cp HELD_FOCUS_BAND
 	jr z, .hungontext
 	cp HELD_FOCUS_SASH

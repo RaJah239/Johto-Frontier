@@ -45,7 +45,7 @@ BattleTowerMartTMCoinTraderScript:
     ifequal 17, .TMProtect
     ifequal 18, .TMRainDance
     ifequal 19, .TMGigaDrain
-    ifequal 20, .TMEndure
+    ifequal 20, .TMPowerGem
     ifequal 21, .TMFrustration
     ifequal 22, .TMSolarbeam
     ifequal 23, .TMIronTail
@@ -179,8 +179,8 @@ BattleTowerMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMEndure:
-    verbosegiveitem TM_ENDURE
+.TMPowerGem:
+    verbosegiveitem TM_POWER_GEM
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
