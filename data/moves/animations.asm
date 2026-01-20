@@ -1322,27 +1322,22 @@ BattleAnim_MeteorMash:
 	anim_ret
 
 BattleAnim_DrainPunch:
-	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_HIT
+	anim_setobjpal PAL_BATTLE_OB_GREEN, PAL_BTLCUSTOM_BROWN
+	anim_1gfx BATTLE_ANIM_GFX_HIT
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $20, $1, $0
-	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 56, $43
+	anim_sound 0, 1, SFX_MEGA_PUNCH
+	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 17, 0,  7, 0, $0
+	anim_wait 6
+	anim_sound 0, 1, SFX_PLACE_PUZZLE_PIECE_DOWN
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 17, 0,  7, 0, $0
+	anim_wait 20
 	; fallthrough
 
 BattleAnim_Absorb:
-	anim_1gfx BATTLE_ANIM_GFX_CHARGE
-	anim_obj BATTLE_ANIM_OBJ_ABSORB_CENTER, 44, 88, $0
-.loop
-	anim_sound 6, 3, SFX_WATER_GUN
-	anim_obj BATTLE_ANIM_OBJ_ABSORB, 128, 48, $2
-	anim_wait 3
-	anim_sound 6, 3, SFX_WATER_GUN
-	anim_obj BATTLE_ANIM_OBJ_ABSORB, 136, 64, $3
-	anim_wait 3
-	anim_sound 6, 3, SFX_WATER_GUN
-	anim_obj BATTLE_ANIM_OBJ_ABSORB, 136, 32, $4
-	anim_wait 3
-	anim_loop 5, .loop
-	anim_wait 24
-	anim_ret
+	anim_2gfx BATTLE_ANIM_GFX_CHARGE, BATTLE_ANIM_GFX_SHINE
+	anim_call SappingStub
+	anim_wait 36
+	anim_jump BattleAnimSub_Glimmer
 
 BattleAnim_ShadowPunch:
 	anim_1gfx BATTLE_ANIM_GFX_HIT
@@ -1407,9 +1402,8 @@ BattleAnim_Solarbeam:
 	anim_obj BATTLE_ANIM_OBJ_SOLAR_BEAM_CHARGE, 48, 84, $28
 	anim_obj BATTLE_ANIM_OBJ_SOLAR_BEAM_CHARGE, 48, 84, $30
 	anim_obj BATTLE_ANIM_OBJ_SOLAR_BEAM_CHARGE, 48, 84, $38
-	anim_wait 104
 	anim_bgeffect BATTLE_BG_EFFECT_FLASH_WHITE, $0, $4, $2
-	anim_wait 64
+	anim_wait 168
 	anim_ret
 
 .FireSolarBeam
@@ -1971,13 +1965,6 @@ BattleAnim_Recover:
 	anim_2gfx BATTLE_ANIM_GFX_BUBBLE, BATTLE_ANIM_GFX_SHINE
 	anim_sound 0, 0, SFX_SHARPEN
 	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING, $0, BG_EFFECT_USER, $40
-	anim_call BattleAnim_Recover_branch
-	anim_wait 32
-	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $0, $0
-	anim_jump BattleAnimSub_Glimmer
-
-BattleAnim_Recover_branch:
 	anim_obj BATTLE_ANIM_OBJ_RECOVER, 44, 88, $30
 	anim_obj BATTLE_ANIM_OBJ_RECOVER, 44, 88, $31
 	anim_obj BATTLE_ANIM_OBJ_RECOVER, 44, 88, $32
@@ -1986,37 +1973,42 @@ BattleAnim_Recover_branch:
 	anim_obj BATTLE_ANIM_OBJ_RECOVER, 44, 88, $35
 	anim_obj BATTLE_ANIM_OBJ_RECOVER, 44, 88, $36
 	anim_obj BATTLE_ANIM_OBJ_RECOVER, 44, 88, $37
-	anim_wait 64
+	anim_wait 96
+	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $0, $0
+	anim_sound 0, 0, SFX_METRONOME
+	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 44, 64, $0
+	anim_wait 5
+	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 24, 96, $0
+	anim_wait 5
+	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 56, 104, $0
+	anim_wait 24
 	anim_ret
 
 BattleAnim_MegaDrain:
-	anim_1gfx BATTLE_ANIM_GFX_CHARGE
+	anim_2gfx BATTLE_ANIM_GFX_CHARGE, BATTLE_ANIM_GFX_SHINE
 	anim_call BattleAnim_TargetObj_1Row
 	anim_bgeffect BATTLE_BG_EFFECT_FADE_MONS_TO_BLACK_REPEATING, $0, BG_EFFECT_TARGET, $10
-	anim_setvar $0
+	anim_obj BATTLE_ANIM_OBJ_ABSORB_CENTER, 44, 88, $0
+	anim_call SappingStub
+	anim_wait 120
+	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MONS_TO_BLACK_REPEATING
+	anim_call BattleAnim_ShowMon_0
+	anim_jump BattleAnimSub_Glimmer
+
+SappingStub:
 .loop
 	anim_sound 6, 3, SFX_WATER_GUN
 	anim_obj BATTLE_ANIM_OBJ_ABSORB, 128, 48, $2
-	anim_wait 6
+	anim_wait 2
 	anim_sound 6, 3, SFX_WATER_GUN
 	anim_obj BATTLE_ANIM_OBJ_ABSORB, 136, 64, $3
-	anim_wait 6
+	anim_wait 3
 	anim_sound 6, 3, SFX_WATER_GUN
 	anim_obj BATTLE_ANIM_OBJ_ABSORB, 136, 32, $4
-	anim_wait 6
-	anim_incvar
-	anim_if_var_equal $7, .done
-	anim_if_var_equal $2, .spawn
-	anim_jump .loop
-
-.spawn
-	anim_obj BATTLE_ANIM_OBJ_ABSORB_CENTER, 44, 88, $0
-	anim_jump .loop
-
-.done
-	anim_wait 32
-	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MONS_TO_BLACK_REPEATING
-	anim_jump BattleAnim_ShowMon_0
+	anim_wait 1
+	anim_loop 4, .loop
+	anim_ret
 
 BattleAnim_EggBomb:
 	anim_2gfx BATTLE_ANIM_GFX_EGG, BATTLE_ANIM_GFX_EXPLOSION
@@ -3745,9 +3737,8 @@ BattleAnim_DragonDance:
 	anim_loop 4, .loop
 	anim_wait 96
 	anim_incbgeffect BATTLE_BG_EFFECT_WOBBLE_MON
-	anim_call BattleAnim_ShowMon_0
 	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_RED
-	anim_ret
+	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_QuiverDance:
 	anim_2gfx BATTLE_ANIM_GFX_CHARGE, BATTLE_ANIM_GFX_SPEED
@@ -4255,21 +4246,7 @@ BattleAnim_GigaDrain:
 	anim_wait 1
 	anim_1gfx BATTLE_ANIM_GFX_SHINE
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $0, $0
-.loop
-	anim_sound 0, 0, SFX_METRONOME
-	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 24, 64, $0
-	anim_wait 5
-	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 56, 104, $0
-	anim_wait 5
-	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 24, 104, $0
-	anim_wait 5
-	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 56, 64, $0
-	anim_wait 5
-	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 40, 84, $0
-	anim_wait 5
-	anim_loop 2, .loop
-	anim_wait 32
-	anim_ret
+	anim_jump BattleAnimSub_Glimmer
 
 BattleAnim_FireFang:
 	anim_call BattleAnim_Bite
@@ -4714,12 +4691,16 @@ BattleAnim_Moonlight:
 
 BattleAnimSub_Glimmer:
 	anim_sound 0, 0, SFX_METRONOME
-	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 44, 64, $0
-	anim_wait 5
-	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 24, 96, $0
+	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 24, 64, $0
 	anim_wait 5
 	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 56, 104, $0
-	anim_wait 24
+	anim_wait 5
+	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 24, 104, $0
+	anim_wait 5
+	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 56, 64, $0
+	anim_wait 5
+	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 40, 84, $0
+	anim_wait 37
 	anim_ret
 
 BattleAnim_InSandstorm:
