@@ -119,8 +119,6 @@ BattleBGEffects:
 	dw BattleBGEffect_RemoveMon
 	dw BattleBGEffect_WaveDeformMon
 	dw BattleBGEffect_Psychic
-	dw BattleBGEffect_BetaSendOutMon1
-	dw BattleBGEffect_BetaSendOutMon2
 	dw BattleBGEffect_Flail
 	dw BattleBGEffect_BetaPursuit
 	dw BattleBGEffect_Rollout
@@ -523,8 +521,7 @@ BattleBGEffect_BattlerObj_2Row:
 	jmp EndBattleBGEffect
 
 _QueueBattleAnimation:
-	callfar QueueBattleAnimation
-	ret
+	farjp QueueBattleAnimation
 
 BattleBGEffect_RemoveMon:
 ; Slides mon out of screen
@@ -1619,149 +1616,6 @@ BattleBGEffect_BounceDown:
 	ret
 
 .two
-	jmp BattleAnim_ResetLCDStatCustom
-
-BattleBGEffect_BetaSendOutMon1: ; unused
-	call BattleBGEffects_AnonJumptable
-.anon_dw
-	dw .zero
-	dw .one
-	dw .two
-	dw .three
-	dw .four
-	dw .five
-
-.zero
-	call BattleBGEffects_IncAnonJumptableIndex
-	ld a, $e4
-	call BattleBGEffects_SetLYOverrides
-	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
-	ld a, $47
-	call BattleBGEffect_SetLCDStatCustoms1
-	ldh a, [hLYOverrideEnd]
-	inc a
-	ldh [hLYOverrideEnd], a
-	ldh a, [hLYOverrideStart]
-	ld l, a
-	ld h, HIGH(wLYOverridesBackup)
-.loop
-	ldh a, [hLYOverrideEnd]
-	cp l
-	jr z, .done
-	xor a
-	ld [hli], a
-	jr .loop
-
-.done
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld [hl], $0
-.one
-.four
-	ret
-
-.two
-	call .GetLYOverride
-	jr nc, .next
-	call .SetLYOverridesBackup
-	ret
-
-.next
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld [hl], $0
-	ldh a, [hLYOverrideStart]
-	inc a
-	ldh [hLYOverrideStart], a
-	jmp BattleBGEffects_IncAnonJumptableIndex
-
-.three
-	call .GetLYOverride
-	jr nc, .finish
-	call .SetLYOverridesBackup
-	ldh a, [hLYOverrideEnd]
-	dec a
-	ld l, a
-	ld [hl], e
-	ret
-
-.finish
-	jmp BattleBGEffects_IncAnonJumptableIndex
-
-.SetLYOverridesBackup:
-	ld e, a
-	ldh a, [hLYOverrideStart]
-	ld l, a
-	ldh a, [hLYOverrideEnd]
-	sub l
-	srl a
-	ld h, HIGH(wLYOverridesBackup)
-.loop2
-	ld [hl], e
-	inc hl
-	inc hl
-	dec a
-	jr nz, .loop2
-	ret
-
-.five
-	jmp BattleBGEffects_ResetVideoHRAM
-
-.GetLYOverride:
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	inc [hl]
-	srl a
-	srl a
-	srl a
-	ld e, a
-	ld d, 0
-	ld hl, .data
-	add hl, de
-	ld a, [hl]
-	cp $ff
-	ret
-
-.data
-	db $00, $40, $90, $e4
-	db -1
-
-BattleBGEffect_BetaSendOutMon2: ; unused
-	call BattleBGEffects_AnonJumptable
-.anon_dw
-	dw .zero
-	dw .one
-
-.zero
-	call BattleBGEffects_IncAnonJumptableIndex
-	call BattleBGEffects_ClearLYOverrides
-	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
-	ld a, LOW(rSCX)
-	call BattleBGEffect_SetLCDStatCustoms1
-	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
-	add hl, bc
-	ld [hl], $40
-	ret
-
-.one
-	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr z, .done
-	dec [hl]
-	srl a
-	srl a
-	srl a
-	and $f
-	ld d, a
-	ld e, a
-	jmp DeformScreen
-
-.done
 	jmp BattleAnim_ResetLCDStatCustom
 
 BattleBGEffect_FadeMonsToBlackRepeating:

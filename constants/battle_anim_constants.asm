@@ -770,8 +770,6 @@ assert NUM_BATTLE_ANIM_OAMSETS <= FIRST_OAM_CMD, \
 	const BATTLE_BG_EFFECT_REMOVE_MON                       ; 27
 	const BATTLE_BG_EFFECT_WAVE_DEFORM_MON                  ; 28
 	const BATTLE_BG_EFFECT_PSYCHIC                          ; 29
-	const BATTLE_BG_EFFECT_BETA_SEND_OUT_MON1               ; 2a
-	const BATTLE_BG_EFFECT_BETA_SEND_OUT_MON2               ; 2b
 	const BATTLE_BG_EFFECT_FLAIL                            ; 2c
 	const BATTLE_BG_EFFECT_BETA_PURSUIT                     ; 2d
 	const BATTLE_BG_EFFECT_ROLLOUT                          ; 2e
