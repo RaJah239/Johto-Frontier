@@ -156,11 +156,6 @@ MACRO anim_beatup
 	db anim_beatup_command
 ENDM
 
-	const anim_0xe7_command ; $e7
-MACRO anim_0xe7
-	db anim_0xe7_command
-ENDM
-
 	const anim_updateactorpic_command ; $e8
 MACRO anim_updateactorpic
 	db anim_updateactorpic_command
@@ -183,16 +178,6 @@ MACRO anim_setobjpal
 	db anim_setobjpal_command
 	db \1 ; pal index to set (0-7)
 	db \2 ; battle pal
-ENDM
-
-	const anim_0xec_command ; $ec
-MACRO anim_0xec
-	db anim_0xec_command
-ENDM
-
-	const anim_0xed_command ; $ed
-MACRO anim_0xed
-	db anim_0xed_command
 ENDM
 
 	const anim_if_param_and_command ; $ee
@@ -243,16 +228,6 @@ ENDM
 	const anim_keepspritesandoam_command ; $f5
 MACRO anim_keepspritesandoam
 	db anim_keepspritesandoam_command
-ENDM
-
-	const anim_0xf6_command ; $f6
-MACRO anim_0xf6
-	db anim_0xf6_command
-ENDM
-
-	const anim_0xf7_command ; $f7
-MACRO anim_0xf7
-	db anim_0xf7_command
 ENDM
 
 	const anim_if_param_equal_command ; $f8

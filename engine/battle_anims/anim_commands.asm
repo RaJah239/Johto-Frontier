@@ -346,13 +346,10 @@ BattleAnimCommands::
 	dw BattleAnimCmd_OAMOff
 	dw BattleAnimCmd_ClearObjs
 	dw BattleAnimCmd_BeatUp
-	dw BattleAnimCmd_E7
 	dw BattleAnimCmd_UpdateActorPic
 	dw BattleAnimCmd_Minimize
 	dw BattleAnimCmd_SetBgPal
 	dw BattleAnimCmd_SetObjPal
-	dw BattleAnimCmd_EC ; dummy
-	dw BattleAnimCmd_ED ; dummy
 	dw BattleAnimCmd_IfParamAnd
 	dw BattleAnimCmd_JumpUntil
 	dw BattleAnimCmd_BGEffect
@@ -361,8 +358,6 @@ BattleAnimCommands::
 	dw BattleAnimCmd_OBP1
 	dw BattleAnimCmd_KeepSprites
 	dw BattleAnimCmd_KeepSpritesAndOAM
-	dw BattleAnimCmd_F6
-	dw BattleAnimCmd_F7
 	dw BattleAnimCmd_IfParamEqual
 	dw BattleAnimCmd_SetVar
 	dw BattleAnimCmd_IncVar
@@ -371,11 +366,7 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Loop
 	dw BattleAnimCmd_Call
 	dw BattleAnimCmd_Ret
-	assert_table_length $100 - FIRST_BATTLE_ANIM_CMD
-
-BattleAnimCmd_EC:
-BattleAnimCmd_ED:
-	ret
+	assert_table_length 251 - FIRST_BATTLE_ANIM_CMD
 
 BattleAnimCmd_Ret:
 	ld hl, wBattleAnimFlags
@@ -877,9 +868,6 @@ BattleAnimCmd_CheckPokeball:
 	ld [wBattleAnimVar], a
 	ret
 
-BattleAnimCmd_E7:
-	ret
-
 BattleAnimCmd_Transform:
 	ldh a, [rSVBK]
 	push af
@@ -1261,12 +1249,6 @@ BattleAnimCmd_KeepSpritesAndOAM:
 	ld hl, wBattleAnimFlags
 	set BATTLEANIM_KEEPSPRITES_F, [hl]
 	set BATTLEANIM_KEEPOAM_F, [hl]
-	ret
-
-BattleAnimCmd_F6:
-	ret
-
-BattleAnimCmd_F7:
 	ret
 
 BattleAnimCmd_Sound:
