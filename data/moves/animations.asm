@@ -3802,16 +3802,41 @@ BattleAnim_DragonDance:
 	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_QuiverDance:
-	anim_2gfx BATTLE_ANIM_GFX_CHARGE, BATTLE_ANIM_GFX_SPEED
-	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
-	anim_sound 0, 0, SFX_OUTRAGE
+	anim_2gfx BATTLE_ANIM_GFX_CHARGE, BATTLE_ANIM_GFX_SHINE
+	anim_call BattleAnim_TargetObj_1Row
+	anim_bgeffect BATTLE_BG_EFFECT_WOBBLE_MON, $0, $1, $0
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
 .loop
-	anim_obj BATTLE_ANIM_OBJ_GROWTH, 48, 108, $0
-	anim_obj BATTLE_ANIM_OBJ_GROWTH, 48, 108, $20
-	anim_wait 4
-	anim_loop 4, .loop
-	anim_wait 24
-	anim_ret
+	anim_sound 0, 0, SFX_FORESIGHT
+	anim_obj ANIM_OBJ_QUIVER_DANCE, 48, 104, $0
+	anim_wait 12
+	anim_loop 8, .loop
+	anim_wait 16
+	anim_incbgeffect BATTLE_BG_EFFECT_WOBBLE_MON
+	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING, $0, $1, $40
+	anim_sound 0, 1, SFX_FLASH
+	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 44, 64, $0
+	anim_wait 5
+	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 24, 96, $0
+	anim_wait 5
+	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 56, 104, $0
+	anim_wait 32
+	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
+	anim_jump BattleAnim_ShowMon_0
+
+; previous quiver dance animation
+; i think it was actually originally for dragon rage
+;BattleAnim_QuiverDance:
+;	anim_2gfx BATTLE_ANIM_GFX_CHARGE, BATTLE_ANIM_GFX_SPEED
+;	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
+;	anim_sound 0, 0, SFX_OUTRAGE
+;.loop
+;	anim_obj BATTLE_ANIM_OBJ_GROWTH, 48, 108, $0
+;	anim_obj BATTLE_ANIM_OBJ_GROWTH, 48, 108, $20
+;	anim_wait 4
+;	anim_loop 4, .loop
+;	anim_wait 24
+;	anim_ret
 
 BattleAnim_Trick:
 	anim_1gfx BATTLE_ANIM_GFX_STATUS
