@@ -105,7 +105,6 @@ BattleBGEffects:
 	dw BattleBGEffect_CycleMonLightDarkRepeating
 	dw BattleBGEffect_FadeMonsToBlackRepeating
 	dw BattleBGEffect_FadeMonToWhiteWaitFadeBack
-	dw BattleBGEffect_FadeMonFromWhite
 	dw BattleBGEffect_ShakeScreenX
 	dw BattleBGEffect_ShakeScreenY
 	dw BattleBGEffect_Withdraw
@@ -1820,14 +1819,6 @@ BattleBGEffect_FadeMonToWhiteWaitFadeBack:
 
 .Pals:
 	db $e4, $90, $40, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $40, $90, $e4, $ff
-
-BattleBGEffect_FadeMonFromWhite: ; unused
-; BG_EFFECT_STRUCT_BATTLE_TURN = BG_EFFECT_TARGET or BG_EFFECT_USER
-	ld de, .Pals
-	jmp BGEffect_RapidCyclePals
-
-.Pals:
-	db $00, $40, $90, $e4, $ff
 
 BattleBGEffect_VibrateMon:
 ; Moves mon back and forth sideways for $20 frames
