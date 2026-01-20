@@ -1953,12 +1953,38 @@ BattleAnim_Fly:
 	anim_ret
 
 BattleAnim_GunkShot:
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PURPLE
 	anim_1gfx BATTLE_ANIM_GFX_POISON
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $24
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $4, $10
-	anim_call BattleAnimSub_Acid
-	anim_wait 4
-	; fallthrough
+	anim_bgp $f8
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $85, $2, $0
+	anim_sound 6, 2, SFX_BUBBLEBEAM
+	anim_obj ANIM_OBJ_GUNKSHOT, 64, 92, $4
+	anim_wait 3
+	anim_obj ANIM_OBJ_GUNKSHOT, 64, 92, $4
+	anim_wait 3
+.loop
+	anim_obj BATTLE_ANIM_OBJ_SLUDGE, 132, 72, $0
+	anim_sound 6, 2, SFX_BUBBLEBEAM
+	anim_obj ANIM_OBJ_GUNKSHOT, 64, 92, $4
+	anim_wait 3
+	anim_obj ANIM_OBJ_GUNKSHOT, 64, 92, $4
+	anim_wait 3
+	anim_obj BATTLE_ANIM_OBJ_SLUDGE, 116, 72, $0
+	anim_sound 6, 2, SFX_BUBBLEBEAM
+	anim_obj ANIM_OBJ_GUNKSHOT, 64, 92, $4
+	anim_wait 3
+	anim_obj ANIM_OBJ_GUNKSHOT, 64, 92, $4
+	anim_wait 3
+	anim_obj BATTLE_ANIM_OBJ_SLUDGE, 148, 72, $0
+	anim_sound 6, 2, SFX_BUBBLEBEAM
+	anim_obj ANIM_OBJ_GUNKSHOT, 64, 92, $4
+	anim_wait 3
+	anim_obj ANIM_OBJ_GUNKSHOT, 64, 92, $4
+	anim_wait 3
+	anim_loop 4, .loop
+	anim_wait 32
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_ret
 
 BattleAnimSub_Sludge:
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PURPLE
