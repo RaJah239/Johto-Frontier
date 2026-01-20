@@ -104,7 +104,6 @@ BattleBGEffects:
 	dw BattleBGEffect_FadeMonToLightRepeating
 	dw BattleBGEffect_FadeMonToBlackRepeating
 	dw BattleBGEffect_CycleMonLightDarkRepeating
-	dw BattleBGEffect_FlashMonRepeating
 	dw BattleBGEffect_FadeMonsToBlackRepeating
 	dw BattleBGEffect_FadeMonToWhiteWaitFadeBack
 	dw BattleBGEffect_FadeMonFromWhite
@@ -1821,14 +1820,6 @@ BattleBGEffect_CycleMonLightDarkRepeating:
 
 .Pals:
 	db $e4, $f8, $fc, $f8, $e4, $90, $40, $90, $fe
-
-BattleBGEffect_FlashMonRepeating: ; unused
-; BG_EFFECT_STRUCT_BATTLE_TURN = BG_EFFECT_TARGET or BG_EFFECT_USER
-	ld de, .Pals
-	jmp BGEffect_RapidCyclePals
-
-.Pals:
-	db $e4, $fc, $e4, $00, $fe
 
 BattleBGEffect_FadeMonToWhiteWaitFadeBack:
 ; BG_EFFECT_STRUCT_BATTLE_TURN = BG_EFFECT_TARGET or BG_EFFECT_USER
