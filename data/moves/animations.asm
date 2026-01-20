@@ -4223,21 +4223,22 @@ BattleAnim_SilverWind:
 	anim_ret
 
 BattleAnim_FreezeDry:
-	anim_1gfx BATTLE_ANIM_GFX_ICE
+	anim_obp0 $54
+	anim_2gfx BATTLE_ANIM_GFX_HAZE, BATTLE_ANIM_GFX_ICE
+	anim_sound 0, 0, SFX_SURF
 .loop
-	anim_sound 6, 2, SFX_SHINE
-	anim_obj BATTLE_ANIM_OBJ_BLIZZARD, 64, 88, $23
-	anim_wait 2
-	anim_sound 6, 2, SFX_SHINE
-	anim_obj BATTLE_ANIM_OBJ_BLIZZARD, 64, 80, $24
-	anim_wait 2
-	anim_sound 6, 2, SFX_SHINE
-	anim_obj BATTLE_ANIM_OBJ_BLIZZARD, 64, 96, $23
-	anim_wait 2
-	anim_loop 2, .loop
+	anim_obj BATTLE_ANIM_OBJ_MIST, 132, 16, $0
+	anim_wait 8
+	anim_loop 4, .loop
 	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
-	anim_wait 40
-	anim_jump BattleAnimSub_Ice
+	anim_wait 32
+	anim_obj BATTLE_ANIM_OBJ_ICE_BUILDUP, 136, 74, $10
+	anim_wait 128
+	anim_sound 0, 1, SFX_SHINE
+	anim_wait 8
+	anim_sound 0, 1, SFX_SHINE
+	anim_wait 24
+	anim_ret
 
 BattleAnim_IcyWind:
 	anim_1gfx BATTLE_ANIM_GFX_ICE
