@@ -2579,16 +2579,35 @@ BattleAnim_BodySlam:
 	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_Psyshock:
-	anim_3gfx BATTLE_ANIM_GFX_PSYCHIC, BATTLE_ANIM_GFX_EGG, BATTLE_ANIM_GFX_SMOKE
-	anim_sound 6, 2, SFX_SLUDGE_BOMB
-	anim_obj BATTLE_ANIM_OBJ_OCTAZOOKA, 64, 92, $4
-	anim_wait 16
-	anim_obj BATTLE_ANIM_OBJ_BALL_POOF, 132, 56, $10
+	anim_2gfx BATTLE_ANIM_GFX_SHINE, BATTLE_ANIM_GFX_CHARGE
+	anim_call BattleAnim_UserObj_1Row
+	anim_sound 0, 0, SFX_RAGE
+	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 44, 96, $0
+	anim_wait 32
+	anim_bgeffect BATTLE_BG_EFFECT_ALTERNATE_HUES, $0, $2, $0
 	anim_sound 0, 1, SFX_PSYCHIC
-	anim_bgeffect BATTLE_BG_EFFECT_NIGHT_SHADE, $0, BG_EFFECT_TARGET, $8
-	anim_wait 96
-	anim_incbgeffect BATTLE_BG_EFFECT_NIGHT_SHADE
-	anim_ret
+	anim_bgeffect BATTLE_BG_EFFECT_TELEPORT, $0, $0, $0
+.loop
+	anim_obj ANIM_OBJ_PSYSHOCK, 136, 56, $38
+	anim_wait 4
+	anim_obj ANIM_OBJ_PSYSHOCK, 136, 56, $20
+	anim_wait 4
+	anim_obj ANIM_OBJ_PSYSHOCK, 136, 56, $8
+	anim_wait 4
+	anim_obj ANIM_OBJ_PSYSHOCK, 136, 56, $10
+	anim_wait 4
+	anim_obj ANIM_OBJ_PSYSHOCK, 136, 56, $28
+	anim_wait 4
+	anim_obj ANIM_OBJ_PSYSHOCK, 136, 56, $0
+	anim_wait 4
+	anim_obj ANIM_OBJ_PSYSHOCK, 136, 56, $18
+	anim_wait 4
+	anim_obj ANIM_OBJ_PSYSHOCK, 136, 56, $30
+	anim_wait 4
+	anim_loop 2, .loop
+	anim_wait 32
+	anim_incbgeffect BATTLE_BG_EFFECT_TELEPORT
+	anim_jump BattleAnim_ShowMon_1
 
 BattleAnim_FocusBlast:
 	anim_1gfx BATTLE_ANIM_GFX_PSYCHIC
