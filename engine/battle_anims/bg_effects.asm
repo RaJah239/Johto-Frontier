@@ -98,7 +98,6 @@ BattleBGEffects:
 	dw BattleBGEffect_NightShade
 	dw BattleBGEffect_BattlerObj_1Row
 	dw BattleBGEffect_BattlerObj_2Row
-	dw BattleBGEffect_RapidFlash
 	dw BattleBGEffect_FadeMonToLight
 	dw BattleBGEffect_FadeMonToBlack
 	dw BattleBGEffect_FadeMonToLightRepeating
@@ -1394,7 +1393,7 @@ Rollout_FillLYOverridesBackup:
 	jr nz, .loop
 	ret
 
-BattleBGEffect_BetaPursuit: ; unused
+BattleBGEffect_BetaPursuit:
 	call BattleBGEffects_AnonJumptable
 .anon_dw
 	dw VitalThrow_MoveBackwards
@@ -1773,13 +1772,6 @@ BattleBGEffect_FadeMonsToBlackRepeating:
 	db $90, $f8
 	db $40, $fc
 	db $90, $f8
-
-BattleBGEffect_RapidFlash: ; unused
-	ld de, .FlashPals
-	jmp BGEffect_RapidCyclePals
-
-.FlashPals:
-	db $e4, $6c, $fe
 
 BattleBGEffect_FadeMonToLight:
 ; BG_EFFECT_STRUCT_BATTLE_TURN = BG_EFFECT_TARGET or BG_EFFECT_USER
