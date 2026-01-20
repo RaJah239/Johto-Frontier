@@ -43,8 +43,7 @@ _PlayBattleAnim:
 
 	ld c, 3
 	call DelayFrames
-	call WaitSFX
-	ret
+	jmp WaitSFX
 
 BattleAnimRunScript:
 	ld a, [wFXAnimID + 1]
@@ -73,7 +72,7 @@ BattleAnimRunScript:
 .disabled
 	ld a, [wNumHits]
 	and a
-	jp z, BattleAnim_RevertPals
+	jmp z, BattleAnim_RevertPals
 
 	ld l, a
 	ld h, 0
@@ -91,7 +90,7 @@ BattleAnimRunScript:
 
 	ld a, [wBattleAnimFlags]
 	bit BATTLEANIM_KEEPSPRITES_F, a
-	jp z, BattleAnim_RevertPals
+	jmp z, BattleAnim_RevertPals
 	; fallthrough
 
 BattleAnimDarkenObjPals:
@@ -181,8 +180,7 @@ RunBattleAnimScript:
 	bit BATTLEANIM_STOP_F, a
 	jr z, .playframe
 
-	call BattleAnim_ClearOAM
-	ret
+	jmp BattleAnim_ClearOAM
 
 BattleAnimClearHud:
 	call DelayFrame
@@ -191,8 +189,7 @@ BattleAnimClearHud:
 	ld a, $1
 	ldh [hBGMapMode], a
 	call Delay3
-	call WaitTop
-	ret
+	jmp WaitTop
 
 BattleAnimRestoreHuds:
 	call DelayFrame
@@ -211,8 +208,7 @@ BattleAnimRestoreHuds:
 	ld a, $1
 	ldh [hBGMapMode], a
 	call Delay3
-	call WaitTop
-	ret
+	jmp WaitTop
 
 BattleAnimRequestPals:
 	ldh a, [hCGB]
@@ -229,7 +225,7 @@ BattleAnimRequestPals:
 	ld b, a
 	ld a, [wOBP0]
 	cp b
-	jp nz, BattleAnim_SetOBPals
+	jmp nz, BattleAnim_SetOBPals
 	ret
 
 ClearActorHud:
@@ -239,14 +235,12 @@ ClearActorHud:
 
 	hlcoord 1, 0
 	lb bc, 4, 10
-	call ClearBox
-	ret
+	jmp ClearBox
 
 .player
 	hlcoord 9, 7
 	lb bc, 5, 11
-	call ClearBox
-	ret
+	jmp ClearBox
 
 BattleAnim_ClearOAM:
 	ld a, [wBattleAnimFlags]
@@ -267,8 +261,7 @@ BattleAnim_ClearOAM:
 RunBattleAnimCommand:
 	call .CheckTimer
 	ret nc
-	call .RunScript
-	ret
+	jmp .RunScript
 
 .CheckTimer:
 	ld a, [wBattleAnimDelay]
@@ -1118,7 +1111,7 @@ SetBattleAnimPal:
 	ld b, a
 .finish
 	call .SetPaletteData
-	jp SetDefaultBGPAndOBP
+	jmp SetDefaultBGPAndOBP
 
 .UserPal:
 	ldh a, [hBattleTurn]
