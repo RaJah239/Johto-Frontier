@@ -180,7 +180,24 @@ RunBattleAnimScript:
 	bit BATTLEANIM_STOP_F, a
 	jr z, .playframe
 
-	jmp BattleAnim_ClearOAM
+	; jr BattleAnim_ClearOAM
+	; fallthrough
+
+BattleAnim_ClearOAM:
+	ld a, [wBattleAnimFlags]
+	bit BATTLEANIM_KEEPOAM_F, a
+	ret nz
+	bit BATTLEANIM_KEEPSPRITES_F, a
+	ret nz
+
+	ld hl, wShadowOAM
+	ld c, wShadowOAMEnd - wShadowOAM
+	xor a
+.loop2
+	ld [hli], a
+	dec c
+	jr nz, .loop2
+	ret
 
 BattleAnimClearHud:
 	call DelayFrame
@@ -242,26 +259,10 @@ ClearActorHud:
 	lb bc, 5, 11
 	jmp ClearBox
 
-BattleAnim_ClearOAM:
-	ld a, [wBattleAnimFlags]
-	bit BATTLEANIM_KEEPOAM_F, a
-	ret nz
-	bit BATTLEANIM_KEEPSPRITES_F, a
-	ret nz
-
-	ld hl, wShadowOAM
-	ld c, wShadowOAMEnd - wShadowOAM
-	xor a
-.loop2
-	ld [hli], a
-	dec c
-	jr nz, .loop2
-	ret
-
 RunBattleAnimCommand:
 	call .CheckTimer
 	ret nc
-	jmp .RunScript
+	jr .RunScript
 
 .CheckTimer:
 	ld a, [wBattleAnimDelay]
@@ -372,8 +373,6 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Ret
 	assert_table_length $100 - FIRST_BATTLE_ANIM_CMD
 
-BattleAnimCmd_EA:
-BattleAnimCmd_EB:
 BattleAnimCmd_EC:
 BattleAnimCmd_ED:
 	ret
@@ -600,8 +599,7 @@ BattleAnimCmd_Obj:
 	ld [wBattleObjectTempYCoord], a
 	call GetBattleAnimByte
 	ld [wBattleObjectTempParam], a
-	call QueueBattleAnimation
-	ret
+	jmp QueueBattleAnimation
 
 BattleAnimCmd_BGEffect:
 	call GetBattleAnimByte
@@ -795,8 +793,8 @@ BattleAnimCmd_BattlerGFX_1Row:
 	ld a, 6 tiles ; Player pic height
 	ld [wBattleAnimGFXTempPicHeight], a
 	ld a, 6 ; Copy 6x1 tiles
-	call .LoadFeet
-	ret
+	; jr .LoadFeet
+	; fallthrough
 
 .LoadFeet:
 	push af
@@ -849,8 +847,8 @@ BattleAnimCmd_BattlerGFX_2Row:
 	ld a, 6 tiles ; Player pic height
 	ld [wBattleAnimGFXTempPicHeight], a
 	ld a, 6 ; Copy 6x2 tiles
-	call .LoadHead
-	ret
+	; jr .LoadHead
+	; fallthrough
 
 .LoadHead:
 	push af
