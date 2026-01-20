@@ -551,9 +551,23 @@ BattleAnim_Confused:
 	anim_ret
 
 BattleAnim_PoisonJab:
-	anim_call BattleAnim_HornAttack
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PURPLE
+	anim_3gfx BATTLE_ANIM_GFX_HORN, BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_POISON
+	anim_obp0 $ef
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $55, $1, $0
+.loop
+	anim_sound 0, 1, SFX_HORN_ATTACK
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 132, 40, $0
+	anim_wait 8
+	anim_sound 0, 1, SFX_HORN_ATTACK
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
+	anim_wait 8
+	anim_sound 0, 1, SFX_HORN_ATTACK
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 126, 50, $0
+	anim_wait 8
+	anim_loop 3, .loop
 	anim_clearobjs
-	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_POISON
+	anim_obp0 $e4
 	anim_jump BattleAnimSub_Sludge
 
 BattleAnim_Slp:
@@ -1947,6 +1961,7 @@ BattleAnim_GunkShot:
 	; fallthrough
 
 BattleAnimSub_Sludge:
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PURPLE
 .loop
 	anim_sound 0, 1, SFX_TOXIC
 	anim_obj BATTLE_ANIM_OBJ_SLUDGE, 132, 72, $0
@@ -1959,6 +1974,7 @@ BattleAnimSub_Sludge:
 	anim_wait 8
 	anim_loop 3, .loop
 	anim_wait 36
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_Recover:
