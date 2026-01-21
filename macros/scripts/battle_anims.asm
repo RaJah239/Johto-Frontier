@@ -153,12 +153,6 @@ MACRO anim_setobjpal
 	db \2 ; battle pal
 ENDM
 
-	const anim_jumpuntil_command ; $ef
-MACRO anim_jumpuntil
-	db anim_jumpuntil_command
-	dw \1 ; address
-ENDM
-
 	const anim_bgeffect_command ; $f0
 MACRO anim_bgeffect
 	db anim_bgeffect_command
