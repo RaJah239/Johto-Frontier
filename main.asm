@@ -427,6 +427,7 @@ INCLUDE "engine/battle_anims/bg_effects.asm"
 
 SECTION "bank32", ROMX
 
+INCLUDE "data/moves/animation_pointers.asm"
 INCLUDE "data/moves/animations.asm"
 
 
