@@ -74,7 +74,6 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_Agility
 	dw BattleAnimFunc_SacredFire
 	dw BattleAnimFunc_SafeguardProtect
-	dw BattleAnimFunc_LockOnMindReader
 	dw BattleAnimFunc_Spikes
 	dw BattleAnimFunc_HealBellNotes
 	dw BattleAnimFunc_BatonPass
@@ -3437,73 +3436,6 @@ BattleAnimFunc_SafeguardProtect:
 	ld a, [hl]
 	inc [hl]
 	ret
-
-BattleAnimFunc_LockOnMindReader:
-; Moves objects towards a center position
-; Obj Param: Used to define object angle from 0 to 3. Lower nybble defines how much to increase from base frameset while upper nybble defines angle of movement. The object moves for $28 frames, then waits for $10 frames and disappears
-	call BattleAnim_AnonJumptable
-.anon_dw
-	dw .zero
-	dw .one
-	dw .two
-
-.zero
-	call BattleAnim_IncAnonJumptableIndex
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], $28
-	ld hl, BATTLEANIMSTRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	and $f
-	ld hl, BATTLEANIMSTRUCT_FRAMESET_ID
-	add hl, bc
-	add [hl] ; BATTLE_ANIM_FRAMESET_8F BATTLE_ANIM_FRAMESET_90 BATTLE_ANIM_FRAMESET_91
-	         ; BATTLE_ANIM_FRAMESET_93 BATTLE_ANIM_FRAMESET_94 BATTLE_ANIM_FRAMESET_95
-	call ReinitBattleAnimFrameset
-	ld hl, BATTLEANIMSTRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	and $f0
-	or $8
-	ld [hl], a
-.one
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr z, .done
-	dec [hl]
-	add $8
-	ld d, a
-	ld hl, BATTLEANIMSTRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	push af
-	push de
-	call BattleAnim_Sine
-	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], a
-	pop de
-	pop af
-	call BattleAnim_Cosine
-	ld hl, BATTLEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
-	ret
-
-.done
-	ld [hl], $10
-	call BattleAnim_IncAnonJumptableIndex
-.two
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hl]
-	dec [hl]
-	and a
-	ret nz
-	jmp DeinitBattleAnimation
 
 BattleAnimFunc_HealBellNotes:
 ; Object moves horizontally in a sine wave, while also moving left every other frame and downwards for $38 frames after which it disappears

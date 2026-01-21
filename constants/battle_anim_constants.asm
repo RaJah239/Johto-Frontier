@@ -149,7 +149,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_HEAL_BELL           ; 84
 	const BATTLE_ANIM_OBJ_HEAL_BELL_NOTE      ; 85
 	const BATTLE_ANIM_OBJ_BATON_PASS          ; 86
-	const BATTLE_ANIM_OBJ_MIND_READER         ; 88
 	const BATTLE_ANIM_OBJ_SAFEGUARD           ; 89
 	const BATTLE_ANIM_OBJ_PROTECT             ; 8a
 	const BATTLE_ANIM_OBJ_OCTAZOOKA           ; 8c
@@ -296,7 +295,6 @@ DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 	const BATTLE_ANIM_FUNC_AGILITY                   ; 3b
 	const BATTLE_ANIM_FUNC_SACRED_FIRE               ; 3c
 	const BATTLE_ANIM_FUNC_SAFEGUARD_PROTECT         ; 3d
-	const BATTLE_ANIM_FUNC_LOCK_ON_MIND_READER       ; 3e
 	const BATTLE_ANIM_FUNC_SPIKES                    ; 3f
 	const BATTLE_ANIM_FUNC_HEAL_BELL_NOTES           ; 40
 	const BATTLE_ANIM_FUNC_BATON_PASS                ; 41
@@ -452,10 +450,6 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_ANGER_VEIN            ; 8c
 	const BATTLE_ANIM_FRAMESET_HEAL_BELL             ; 8d
 	const BATTLE_ANIM_FRAMESET_BATON_PASS            ; 8e
-	const BATTLE_ANIM_FRAMESET_MIND_READER_1         ; 93
-	const BATTLE_ANIM_FRAMESET_MIND_READER_2         ; 94
-	const BATTLE_ANIM_FRAMESET_MIND_READER_3         ; 95
-	const BATTLE_ANIM_FRAMESET_MIND_READER_4         ; 96
 	const BATTLE_ANIM_FRAMESET_SAFEGUARD             ; 97
 	const BATTLE_ANIM_FRAMESET_MEGAPHONE_UNUSED      ; 98
 	const BATTLE_ANIM_FRAMESET_ITEM_BAG              ; 99

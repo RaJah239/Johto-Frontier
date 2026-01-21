@@ -130,10 +130,6 @@ BattleAnimFrameData:
 	dw .Frameset_AngerVein           ; BATTLE_ANIM_FRAMESET_ANGER_VEIN
 	dw .Frameset_HealBell            ; BATTLE_ANIM_FRAMESET_HEAL_BELL
 	dw .Frameset_BatonPass           ; BATTLE_ANIM_FRAMESET_BATON_PASS
-	dw .Frameset_MindReader1         ; BATTLE_ANIM_FRAMESET_MIND_READER_1
-	dw .Frameset_MindReader2         ; BATTLE_ANIM_FRAMESET_MIND_READER_2
-	dw .Frameset_MindReader3         ; BATTLE_ANIM_FRAMESET_MIND_READER_3
-	dw .Frameset_MindReader4         ; BATTLE_ANIM_FRAMESET_MIND_READER_4
 	dw .Frameset_Safeguard           ; BATTLE_ANIM_FRAMESET_SAFEGUARD
 	dw .Frameset_MegaphoneUnused     ; BATTLE_ANIM_FRAMESET_MEGAPHONE_UNUSED
 	dw .Frameset_ItemBag             ; BATTLE_ANIM_FRAMESET_ITEM_BAG
@@ -949,22 +945,6 @@ BattleAnimFrameData:
 
 .Frameset_BatonPass:
 	oamframe BATTLE_ANIM_OAMSET_B2,  8
-	oamend
-
-.Frameset_MindReader1:
-	oamframe BATTLE_ANIM_OAMSET_B5,  8
-	oamend
-
-.Frameset_MindReader2:
-	oamframe BATTLE_ANIM_OAMSET_B5,  8, OAM_X_FLIP
-	oamend
-
-.Frameset_MindReader3:
-	oamframe BATTLE_ANIM_OAMSET_B5,  8, OAM_Y_FLIP
-	oamend
-
-.Frameset_MindReader4:
-	oamframe BATTLE_ANIM_OAMSET_B5,  8, OAM_X_FLIP, OAM_Y_FLIP
 	oamend
 
 .Frameset_Safeguard:
