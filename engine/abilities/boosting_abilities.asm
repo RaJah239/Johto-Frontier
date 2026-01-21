@@ -10,6 +10,7 @@ CheckBoostingAbilities:
 	call HandleMentalFocus
 	call HandleRainSurge
 	call HandlePillowFort
+	call HandleChrysalisHide
 	call HandleMoveEnchancingAbilities
 
 ; added last to recalculate after boosting abilities are factored in
@@ -239,6 +240,20 @@ HandlePillowFort:
 	jmp TwentyFivePercentNerf
 
 INCLUDE "data/abilities/pillow_fort_mons.asm"
+
+HandleChrysalisHide:
+	call GetOpposingMon
+	ld hl, ChrysalisHidePokemon
+	call IsInByteArray
+	ret nc
+
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp SPECIAL
+	ret c
+	jmp FiftyPercentNerf
+
+INCLUDE "data/abilities/chrysalis_hide_mons.asm"
 
 HandleMoveEnchancingAbilities:
 	; get move type
