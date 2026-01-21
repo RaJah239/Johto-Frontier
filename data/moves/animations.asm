@@ -598,7 +598,7 @@ BattleAnim_Ember:
 	anim_obj BATTLE_ANIM_OBJ_EMBER, 132, 68, $30
 	anim_obj BATTLE_ANIM_OBJ_EMBER, 144, 68, $30
 	anim_wait 32
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_RED
 	anim_ret
 
 BattleAnim_FirePunch:
@@ -662,7 +662,7 @@ BattleAnim_Flamethrower:
 	anim_wait 16
 	anim_loop 6, .loop
 	anim_wait 16
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_RED
 	anim_ret
 
 BattleAnim_FireBlast:
@@ -698,7 +698,7 @@ BattleAnim_FireBlast:
 	anim_wait 16
 	anim_loop 2, .loop3
 	anim_wait 32
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_RED
 	anim_ret
 
 BattleAnim_IcePunch:
