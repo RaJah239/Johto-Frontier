@@ -516,7 +516,9 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_32, 32
 	oamframe BATTLE_ANIM_OAMSET_33, 32
 	oamframe BATTLE_ANIM_OAMSET_34, 32
-	oamframe BATTLE_ANIM_OAMSET_35, 32 ; fallthrough
+	oamframe BATTLE_ANIM_OAMSET_35, 32
+	; fallthrough
+
 .Frameset_Frozen:
 	oamwait 2
 	oamframe BATTLE_ANIM_OAMSET_35,  4
@@ -610,6 +612,8 @@ BattleAnimFrameData:
 .Frameset_ChargeOrb2:
 	oamframe BATTLE_ANIM_OAMSET_20,  8
 	oamframe BATTLE_ANIM_OAMSET_1F,  8
+	; fallthrough
+.Frameset_Needle:
 	oamframe BATTLE_ANIM_OAMSET_1E,  8
 	oamend
 
@@ -879,14 +883,7 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_93,  8
 	oamend
 
-.Frameset_Needle:
-	oamframe BATTLE_ANIM_OAMSET_1E,  8
-	oamend
-
 .Frameset_BarrageBall:
-	oamframe BATTLE_ANIM_OAMSET_95,  8
-	oamend
-
 .Frameset_Heart:
 	oamframe BATTLE_ANIM_OAMSET_95,  8
 	oamend
