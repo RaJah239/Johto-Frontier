@@ -342,8 +342,6 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Sound
 	dw BattleAnimCmd_Cry
 	dw BattleAnimCmd_MinimizeOpp
-	dw BattleAnimCmd_OAMOn
-	dw BattleAnimCmd_OAMOff
 	dw BattleAnimCmd_ClearObjs
 	dw BattleAnimCmd_BeatUp
 	dw BattleAnimCmd_UpdateActorPic
@@ -366,7 +364,7 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Loop
 	dw BattleAnimCmd_Call
 	dw BattleAnimCmd_Ret
-	assert_table_length 251 - FIRST_BATTLE_ANIM_CMD
+	assert_table_length 249 - FIRST_BATTLE_ANIM_CMD
 
 BattleAnimCmd_Ret:
 	ld hl, wBattleAnimFlags
@@ -1228,16 +1226,6 @@ BattleAnimCmd_BeatUp:
 
 	pop af
 	ldh [rSVBK], a
-	ret
-
-BattleAnimCmd_OAMOn:
-	xor a
-	ldh [hOAMUpdate], a
-	ret
-
-BattleAnimCmd_OAMOff:
-	ld a, $1
-	ldh [hOAMUpdate], a
 	ret
 
 BattleAnimCmd_KeepSprites:

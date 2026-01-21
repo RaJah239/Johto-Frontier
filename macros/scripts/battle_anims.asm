@@ -136,16 +136,6 @@ MACRO anim_minimizeopp
 	db anim_minimizeopp_command
 ENDM
 
-	const anim_oamon_command ; $e3
-MACRO anim_oamon
-	db anim_oamon_command
-ENDM
-
-	const anim_oamoff_command ; $e4
-MACRO anim_oamoff
-	db anim_oamoff_command
-ENDM
-
 	const anim_clearobjs_command ; $e5
 MACRO anim_clearobjs
 	db anim_clearobjs_command
