@@ -155,7 +155,6 @@ BattleAnimFrameData:
 	dw .Frameset_RapidSpin           ; BATTLE_ANIM_FRAMESET_RAPID_SPIN
 	dw .Frameset_Swagger             ; BATTLE_ANIM_FRAMESET_SWAGGER
 	dw .Frameset_MeanLook            ; BATTLE_ANIM_FRAMESET_MEAN_LOOK
-	dw .Frameset_UpsideDownPunch     ; BATTLE_ANIM_FRAMESET_UPSIDE_DOWN_PUNCH
 	dw .Frameset_GrowingSparkle      ; BATTLE_ANIM_FRAMESET_GROWING_SPARKLE
 	dw .Frameset_Rain                ; BATTLE_ANIM_FRAMESET_RAIN
 	dw .Frameset_PsychUp             ; BATTLE_ANIM_FRAMESET_PSYCH_UP
@@ -1063,10 +1062,6 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_CA,  3
 	oamframe BATTLE_ANIM_OAMSET_CB,  3
 	oamrestart
-
-.Frameset_UpsideDownPunch:
-	oamframe BATTLE_ANIM_OAMSET_03, 32, OAM_Y_FLIP
-	oamend
 
 .Frameset_Rain:
 	oamframe BATTLE_ANIM_OAMSET_CC, 32

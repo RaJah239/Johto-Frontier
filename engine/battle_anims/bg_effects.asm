@@ -117,7 +117,6 @@ BattleBGEffects:
 	dw BattleBGEffect_WaveDeformMon
 	dw BattleBGEffect_Psychic
 	dw BattleBGEffect_Flail
-	dw BattleBGEffect_BetaPursuit
 	dw BattleBGEffect_Rollout
 	dw BattleBGEffect_StartWater
 	dw BattleBGEffect_Water
@@ -1391,17 +1390,6 @@ Rollout_FillLYOverridesBackup:
 	dec d
 	jr nz, .loop
 	ret
-
-BattleBGEffect_BetaPursuit:
-	call BattleBGEffects_AnonJumptable
-.anon_dw
-	dw VitalThrow_MoveBackwards
-	dw Tackle_MoveForward
-	dw Tackle_ReturnMove
-	dw .three
-
-.three
-	jmp BattleAnim_ResetLCDStatCustom
 
 VitalThrow_MoveBackwards:
 ; Prepares mon to move back back (player moves left, enemy moves right)

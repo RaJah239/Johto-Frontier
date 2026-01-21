@@ -179,7 +179,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_BELLY_DRUM_HAND     ; aa
 	const BATTLE_ANIM_OBJ_BELLY_DRUM_NOTE     ; ab
 	const BATTLE_ANIM_OBJ_MEAN_LOOK           ; ac
-	const BATTLE_ANIM_OBJ_BETA_PURSUIT        ; ad
 	const BATTLE_ANIM_OBJ_SHOOTING_SPARKLE    ; ae
 	const BATTLE_ANIM_OBJ_RAIN                ; af
 	const BATTLE_ANIM_OBJ_PSYCH_UP            ; b1
@@ -307,7 +306,6 @@ DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 	const BATTLE_ANIM_FUNC_CURSE                     ; 46
 	const BATTLE_ANIM_FUNC_PERISH_SONG               ; 47
 	const BATTLE_ANIM_FUNC_RAPID_SPIN                ; 48
-	const BATTLE_ANIM_FUNC_BETA_PURSUIT              ; 49
 	const BATTLE_ANIM_FUNC_RAIN_SANDSTORM            ; 4a
 	const BATTLE_ANIM_FUNC_PSYCH_UP                  ; 4c
 	const BATTLE_ANIM_FUNC_ANCIENT_POWER             ; 4d
@@ -479,7 +477,6 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_RAPID_SPIN            ; ab
 	const BATTLE_ANIM_FRAMESET_SWAGGER               ; ac
 	const BATTLE_ANIM_FRAMESET_MEAN_LOOK             ; ad
-	const BATTLE_ANIM_FRAMESET_UPSIDE_DOWN_PUNCH     ; ae
 	const BATTLE_ANIM_FRAMESET_GROWING_SPARKLE       ; af
 	const BATTLE_ANIM_FRAMESET_RAIN                  ; b0
 	const BATTLE_ANIM_FRAMESET_PSYCH_UP              ; b1
@@ -766,7 +763,6 @@ assert NUM_BATTLE_ANIM_OAMSETS <= FIRST_OAM_CMD, \
 	const BATTLE_BG_EFFECT_WAVE_DEFORM_MON                  ; 28
 	const BATTLE_BG_EFFECT_PSYCHIC                          ; 29
 	const BATTLE_BG_EFFECT_FLAIL                            ; 2c
-	const BATTLE_BG_EFFECT_BETA_PURSUIT                     ; 2d
 	const BATTLE_BG_EFFECT_ROLLOUT                          ; 2e
 	const BATTLE_BG_EFFECT_START_WATER                      ; 30
 	const BATTLE_BG_EFFECT_WATER                            ; 31
