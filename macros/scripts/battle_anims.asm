@@ -153,13 +153,6 @@ MACRO anim_setobjpal
 	db \2 ; battle pal
 ENDM
 
-	const anim_if_param_and_command ; $ee
-MACRO anim_if_param_and
-	db anim_if_param_and_command
-	db \1 ; value
-	dw \2 ; address
-ENDM
-
 	const anim_jumpuntil_command ; $ef
 MACRO anim_jumpuntil
 	db anim_jumpuntil_command

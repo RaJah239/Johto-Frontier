@@ -345,7 +345,6 @@ BattleAnimCommands::
 	dw BattleAnimCmd_ClearObjs
 	dw BattleAnimCmd_UpdateActorPic
 	dw BattleAnimCmd_SetObjPal
-	dw BattleAnimCmd_IfParamAnd
 	dw BattleAnimCmd_JumpUntil
 	dw BattleAnimCmd_BGEffect
 	dw BattleAnimCmd_BGP
@@ -361,7 +360,7 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Loop
 	dw BattleAnimCmd_Call
 	dw BattleAnimCmd_Ret
-	assert_table_length 246 - FIRST_BATTLE_ANIM_CMD
+	assert_table_length 245 - FIRST_BATTLE_ANIM_CMD
 
 BattleAnimCmd_Ret:
 	ld hl, wBattleAnimFlags
@@ -523,35 +522,6 @@ BattleAnimCmd_IfParamEqual:
 	ld hl, wBattleAnimParam
 	cp [hl]
 	jr z, .jump
-
-	ld hl, wBattleAnimAddress
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc de
-	inc de
-	ld [hl], d
-	dec hl
-	ld [hl], e
-	ret
-
-.jump
-	call GetBattleAnimByte
-	ld e, a
-	call GetBattleAnimByte
-	ld d, a
-	ld hl, wBattleAnimAddress
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ret
-
-BattleAnimCmd_IfParamAnd:
-	call GetBattleAnimByte
-	ld e, a
-	ld a, [wBattleAnimParam]
-	and e
-	jr nz, .jump
 
 	ld hl, wBattleAnimAddress
 	ld e, [hl]
