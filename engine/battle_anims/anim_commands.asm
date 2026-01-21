@@ -349,7 +349,6 @@ BattleAnimCommands::
 	dw BattleAnimCmd_BGP
 	dw BattleAnimCmd_OBP0
 	dw BattleAnimCmd_OBP1
-	dw BattleAnimCmd_KeepSprites
 	dw BattleAnimCmd_KeepSpritesAndOAM
 	dw BattleAnimCmd_IfParamEqual
 	dw BattleAnimCmd_SetVar
@@ -359,7 +358,7 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Loop
 	dw BattleAnimCmd_Call
 	dw BattleAnimCmd_Ret
-	assert_table_length 244 - FIRST_BATTLE_ANIM_CMD
+	assert_table_length 243 - FIRST_BATTLE_ANIM_CMD
 
 BattleAnimCmd_Ret:
 	ld hl, wBattleAnimFlags
@@ -1105,11 +1104,6 @@ BattleAnimCmd_DropSub:
 
 	pop af
 	ldh [rSVBK], a
-	ret
-
-BattleAnimCmd_KeepSprites:
-	ld hl, wBattleAnimFlags
-	set BATTLEANIM_KEEPSPRITES_F, [hl]
 	ret
 
 BattleAnimCmd_KeepSpritesAndOAM:

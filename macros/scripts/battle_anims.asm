@@ -180,11 +180,6 @@ MACRO anim_obp1
 	db \1 ; colors
 ENDM
 
-	const anim_keepsprites_command ; $f4
-MACRO anim_keepsprites
-	db anim_keepsprites_command
-ENDM
-
 	const anim_keepspritesandoam_command ; $f5
 MACRO anim_keepspritesandoam
 	db anim_keepspritesandoam_command
