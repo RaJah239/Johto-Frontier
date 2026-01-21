@@ -1449,18 +1449,24 @@ BattleAnim_Sing:
 	anim_1gfx BATTLE_ANIM_GFX_NOISE
 	anim_sound 16, 2, SFX_SING
 .loop
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_AURORA
 	anim_obj BATTLE_ANIM_OBJ_SING, 64, 92, $0
 	anim_wait 8
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PURPLE
 	anim_obj BATTLE_ANIM_OBJ_SING, 64, 92, $1
 	anim_wait 8
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_BULK_UP
 	anim_obj BATTLE_ANIM_OBJ_SING, 64, 92, $2
 	anim_wait 8
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_FIRE
 	anim_obj BATTLE_ANIM_OBJ_SING, 64, 92, $0
 	anim_wait 8
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PINK
 	anim_obj BATTLE_ANIM_OBJ_SING, 64, 92, $2
 	anim_wait 8
 	anim_loop 4, .loop
 	anim_wait 64
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_Acrobatics:
@@ -2041,6 +2047,7 @@ BattleAnim_Roar:
 	anim_ret
 
 BattleAnim_Supersonic:
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_YELLOW
 	anim_1gfx BATTLE_ANIM_GFX_PSYCHIC
 .loop
 	anim_sound 6, 2, SFX_SUPERSONIC
@@ -2048,6 +2055,7 @@ BattleAnim_Supersonic:
 	anim_wait 4
 	anim_loop 10, .loop
 	anim_wait 64
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_IceFang:
