@@ -2273,7 +2273,16 @@ GetFailureResultText:
 	ld a, [wTypeModifier]
 	and EFFECTIVENESS_MASK
 	jr z, .got_text
-	farcall BattleMissAnim
+
+	; skip dodge animation if foe is underground or in the air
+	ld a, BATTLE_VARS_SUBSTATUS3
+	call GetBattleVar
+	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
+	jr z, .skip_dodge_animation
+
+	farcall BattleDodgeAnimation
+
+.skip_dodge_animation
 	ld hl, AttackMissedText
 	ld de, AttackMissed2Text
 	ld a, [wCriticalHit]

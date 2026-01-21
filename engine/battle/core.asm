@@ -4284,7 +4284,7 @@ ItemRecoveryAnim:
 	jmp PopBCDEHL
 
 ; must stay in this file
-BattleMissAnim:
+BattleDodgeAnimation:
 	push hl
 	push de
 	push bc
