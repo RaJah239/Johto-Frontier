@@ -3852,9 +3852,6 @@ BattleAnim_HyperVoice:
 BattleAnim_SuckerPunch:
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PURPLE
 	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_HIT
-	anim_sound 0, 0, SFX_LICK
-	anim_bgeffect BATTLE_BG_EFFECT_REMOVE_MON, $0, $1, $0
-	anim_wait 48
 	anim_sound 0, 1, SFX_COMET_PUNCH
 	anim_obj BATTLE_ANIM_OBJ_HIT, 104, 34, $0
 	anim_wait 2
@@ -3870,14 +3867,9 @@ BattleAnim_SuckerPunch:
 	anim_sound 0, 1, SFX_COMET_PUNCH
 	anim_obj BATTLE_ANIM_OBJ_HIT, 138, 52, $0
 	anim_wait 2
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $2
 	anim_sound 0, 1, SFX_KARATE_CHOP
 	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 122, 52, $0
 	anim_wait 12
-	anim_call BattleAnimSub_SpeedLines
-	anim_wait 8
-	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
-	anim_wait 4
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
