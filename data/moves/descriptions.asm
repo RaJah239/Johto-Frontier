@@ -891,8 +891,8 @@ EncoreDescription:
 	line "peat 2-6 times.@"
 
 PursuitDescription:
-	db   "Heavily strikes"
-	line "switching #MON.@"
+	db   "Double damage to"
+	line "switching #Mon.@"
 
 RapidSpinDescription:
 	db   "Removes Spikes and"
