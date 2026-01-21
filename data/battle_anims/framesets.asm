@@ -305,6 +305,7 @@ BattleAnimFrameData:
 	oamend
 
 .Frameset_PokeBall4:
+.Frameset_DragonRage:
 	oamframe BATTLE_ANIM_OAMSET_0A,  8
 	oamend
 
@@ -314,10 +315,6 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_0A,  7
 	oamframe BATTLE_ANIM_OAMSET_0B,  7, OAM_X_FLIP
 	oamframe BATTLE_ANIM_OAMSET_0A,  7
-	oamend
-
-.Frameset_DragonRage:
-	oamframe BATTLE_ANIM_OAMSET_0A,  8
 	oamend
 
 .Frameset_Flamethrower:
@@ -374,6 +371,7 @@ BattleAnimFrameData:
 	oamrestart
 
 .Frameset_RazorLeaf1:
+.Frameset_ConfuseRay2:
 	oamframe BATTLE_ANIM_OAMSET_14,  8
 	oamend
 
@@ -414,6 +412,8 @@ BattleAnimFrameData:
 	oamdelete
 
 .Frameset_BigRock:
+.Frameset_MusicNote1:
+.Frameset_MetronomeHand:
 	oamframe BATTLE_ANIM_OAMSET_1B,  8
 	oamend
 
@@ -463,10 +463,6 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_22,  8
 	oamend
 
-.Frameset_MusicNote1:
-	oamframe BATTLE_ANIM_OAMSET_1B,  8
-	oamend
-
 .Frameset_MusicNote2:
 	oamframe BATTLE_ANIM_OAMSET_23,  8
 	oamend
@@ -476,6 +472,7 @@ BattleAnimFrameData:
 	oamend
 
 .Frameset_WaterGun1:
+.Frameset_Amnesia2:
 	oamframe BATTLE_ANIM_OAMSET_25,  8
 	oamend
 
@@ -757,10 +754,6 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_75,  4
 	oamrestart
 
-.Frameset_ConfuseRay2:
-	oamframe BATTLE_ANIM_OAMSET_14,  8
-	oamend
-
 .Frameset_Sparkle:
 	oamframe BATTLE_ANIM_OAMSET_74,  3
 	oamframe BATTLE_ANIM_OAMSET_14,  3
@@ -809,10 +802,6 @@ BattleAnimFrameData:
 
 .Frameset_Amnesia1:
 	oamframe BATTLE_ANIM_OAMSET_7F,  8
-	oamend
-
-.Frameset_Amnesia2:
-	oamframe BATTLE_ANIM_OAMSET_25,  8
 	oamend
 
 .Frameset_Amnesia3:
@@ -946,10 +935,6 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_AA,  4, OAM_X_FLIP
 	oamframe BATTLE_ANIM_OAMSET_A9,  4, OAM_X_FLIP
 	oamrestart
-
-.Frameset_MetronomeHand:
-	oamframe BATTLE_ANIM_OAMSET_1B,  8
-	oamend
 
 .Frameset_Agility:
 	oamframe BATTLE_ANIM_OAMSET_AC,  8
