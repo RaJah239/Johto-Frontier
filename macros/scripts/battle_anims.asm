@@ -146,13 +146,6 @@ MACRO anim_updateactorpic
 	db anim_updateactorpic_command
 ENDM
 
-	const anim_setbgpal_command ; ea
-MACRO anim_setbgpal
-	db anim_setbgpal_command
-	db \1 ; pal index to set (0-7)
-	db \2 ; battle pal
-ENDM
-
 	const anim_setobjpal_command ; eb
 MACRO anim_setobjpal
 	db anim_setobjpal_command

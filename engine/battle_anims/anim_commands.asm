@@ -344,7 +344,6 @@ BattleAnimCommands::
 	dw BattleAnimCmd_MinimizeOpp
 	dw BattleAnimCmd_ClearObjs
 	dw BattleAnimCmd_UpdateActorPic
-	dw BattleAnimCmd_SetBgPal
 	dw BattleAnimCmd_SetObjPal
 	dw BattleAnimCmd_IfParamAnd
 	dw BattleAnimCmd_JumpUntil
@@ -362,7 +361,7 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Loop
 	dw BattleAnimCmd_Call
 	dw BattleAnimCmd_Ret
-	assert_table_length 247 - FIRST_BATTLE_ANIM_CMD
+	assert_table_length 246 - FIRST_BATTLE_ANIM_CMD
 
 BattleAnimCmd_Ret:
 	ld hl, wBattleAnimFlags
@@ -1051,9 +1050,6 @@ CopyMinimizePic:
 MinimizePic:
 INCBIN "gfx/battle/minimize.2bpp"
 
-BattleAnimCmd_SetBgPal:
-	xor a
-	jr SetBattleAnimPal
 BattleAnimCmd_SetObjPal:
 	ld a, 1
 SetBattleAnimPal:
