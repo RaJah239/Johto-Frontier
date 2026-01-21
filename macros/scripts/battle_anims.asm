@@ -141,11 +141,6 @@ MACRO anim_clearobjs
 	db anim_clearobjs_command
 ENDM
 
-	const anim_beatup_command ; $e6
-MACRO anim_beatup
-	db anim_beatup_command
-ENDM
-
 	const anim_updateactorpic_command ; $e8
 MACRO anim_updateactorpic
 	db anim_updateactorpic_command
