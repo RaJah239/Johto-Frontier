@@ -262,23 +262,10 @@ ClearActorHud:
 RunBattleAnimCommand:
 	call .CheckTimer
 	ret nc
-	jr .RunScript
+	; jr .RunScript
+	; fallthrough
 
-.CheckTimer:
-	ld a, [wBattleAnimDelay]
-	and a
-	jr z, .done
-
-	dec a
-	ld [wBattleAnimDelay], a
-	and a
-	ret
-
-.done
-	scf
-	ret
-
-.RunScript:
+;.RunScript:
 .loop
 	call GetBattleAnimByte
 
@@ -304,6 +291,20 @@ RunBattleAnimCommand:
 	call .DoCommand
 
 	jr .loop
+
+.CheckTimer:
+	ld a, [wBattleAnimDelay]
+	and a
+	jr z, .done
+
+	dec a
+	ld [wBattleAnimDelay], a
+	and a
+	ret
+
+.done
+	scf
+	ret
 
 .DoCommand:
 ; Execute battle animation command in [wBattleAnimByte].
