@@ -160,7 +160,6 @@ BattleAnimFrameData:
 	dw .Frameset_GrowingSparkle      ; BATTLE_ANIM_FRAMESET_GROWING_SPARKLE
 	dw .Frameset_Rain                ; BATTLE_ANIM_FRAMESET_RAIN
 	dw .Frameset_PsychUp             ; BATTLE_ANIM_FRAMESET_PSYCH_UP
-	dw .Frameset_SpiralUnused        ; BATTLE_ANIM_FRAMESET_SPIRAL_UNUSED
 	dw .Frameset_Aeroblast           ; BATTLE_ANIM_FRAMESET_AEROBLAST
 	dw .Frameset_Sandstorm           ; BATTLE_ANIM_FRAMESET_SANDSTORM
 	dw .Frameset_EnemyFeet1Row       ; BATTLE_ANIM_FRAMESET_ENEMYFEET_1ROW
@@ -1083,13 +1082,6 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_25,  2
 	oamframe BATTLE_ANIM_OAMSET_80,  2
 	oamframe BATTLE_ANIM_OAMSET_25,  2
-	oamrestart
-
-.Frameset_SpiralUnused:
-	oamframe BATTLE_ANIM_OAMSET_CD,  4
-	oamframe BATTLE_ANIM_OAMSET_CE,  4
-	oamframe BATTLE_ANIM_OAMSET_CD,  4, OAM_X_FLIP, OAM_Y_FLIP
-	oamframe BATTLE_ANIM_OAMSET_CE,  4, OAM_X_FLIP, OAM_Y_FLIP
 	oamrestart
 
 .Frameset_Aeroblast:
