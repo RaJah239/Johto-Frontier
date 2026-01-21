@@ -146,11 +146,6 @@ MACRO anim_updateactorpic
 	db anim_updateactorpic_command
 ENDM
 
-	const anim_minimize_command ; $e9
-MACRO anim_minimize
-	db anim_minimize_command
-ENDM
-
 	const anim_setbgpal_command ; ea
 MACRO anim_setbgpal
 	db anim_setbgpal_command

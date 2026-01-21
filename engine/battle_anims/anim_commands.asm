@@ -344,7 +344,6 @@ BattleAnimCommands::
 	dw BattleAnimCmd_MinimizeOpp
 	dw BattleAnimCmd_ClearObjs
 	dw BattleAnimCmd_UpdateActorPic
-	dw BattleAnimCmd_Minimize
 	dw BattleAnimCmd_SetBgPal
 	dw BattleAnimCmd_SetObjPal
 	dw BattleAnimCmd_IfParamAnd
@@ -363,7 +362,7 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Loop
 	dw BattleAnimCmd_Call
 	dw BattleAnimCmd_Ret
-	assert_table_length 248 - FIRST_BATTLE_ANIM_CMD
+	assert_table_length 247 - FIRST_BATTLE_ANIM_CMD
 
 BattleAnimCmd_Ret:
 	ld hl, wBattleAnimFlags
@@ -1051,23 +1050,6 @@ CopyMinimizePic:
 
 MinimizePic:
 INCBIN "gfx/battle/minimize.2bpp"
-
-BattleAnimCmd_Minimize:
-	ldh a, [rSVBK]
-	push af
-	ld a, 1 ; unnecessary bankswitch?
-	ldh [rSVBK], a
-
-	xor a ; BANK(sScratch)
-	call OpenSRAM
-	call GetMinimizePic
-	ld hl, vTiles0 tile $00
-	call Request2bpp
-	call CloseSRAM
-
-	pop af
-	ldh [rSVBK], a
-	ret
 
 BattleAnimCmd_SetBgPal:
 	xor a
