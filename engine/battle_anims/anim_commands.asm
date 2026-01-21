@@ -842,15 +842,13 @@ BattleAnimCmd_UpdateActorPic:
 	ld hl, vTiles2 tile $00
 	ld b, 0
 	ld c, 7 * 7
-	call Request2bpp
-	ret
+	jmp Request2bpp
 
 .player
 	ld hl, vTiles2 tile $31
 	ld b, 0
 	ld c, 6 * 6
-	call Request2bpp
-	ret
+	jmp Request2bpp
 
 BattleAnimCmd_RaiseSub:
 	ldh a, [rSVBK]
@@ -924,8 +922,7 @@ GetSubstitutePic: ; used only for BANK(GetSubstitutePic)
 .CopyTile:
 	ld bc, 1 tiles
 	ld a, BANK(MonsterSpriteGFX)
-	call FarCopyBytes
-	ret
+	jmp FarCopyBytes
 
 BattleAnimCmd_MinimizeOpp:
 	ldh a, [rSVBK]
@@ -977,8 +974,7 @@ CopyMinimizePic:
 	ld hl, MinimizePic
 	ld bc, $10
 	ld a, BANK(MinimizePic)
-	call FarCopyBytes
-	ret
+	jmp FarCopyBytes
 
 MinimizePic:
 INCBIN "gfx/battle/minimize.2bpp"
@@ -1126,9 +1122,7 @@ BattleAnimCmd_Sound:
 	call GetBattleAnimByte
 	ld e, a
 	ld d, 0
-	callfar PlayStereoSFX
-
-	ret
+	farjp PlayStereoSFX
 
 .GetPanning:
 	db $f0, $0f, $f0, $0f
@@ -1250,8 +1244,7 @@ PlayHitSound:
 	ld de, SFX_NOT_VERY_EFFECTIVE
 
 .play
-	call PlaySFX
-	ret
+	jmp PlaySFX
 
 BattleAnimAssignPals:
 	ldh a, [hCGB]
@@ -1277,8 +1270,7 @@ BattleAnimAssignPals:
 	ld [wOBP1], a
 	call DmgToCgbBGPals
 	lb de, %11100100, %11100100
-	call DmgToCgbObjPals
-	ret
+	jmp DmgToCgbObjPals
 
 ClearBattleAnims::
 ; Clear animation block
@@ -1384,7 +1376,7 @@ BattleAnim_UpdateOAM_All:
 	call BattleAnimOAMUpdate
 	pop de
 	pop hl
-	jr c, .done
+	ret c
 
 .next
 	ld bc, BATTLEANIMSTRUCT_LENGTH
@@ -1397,10 +1389,7 @@ BattleAnim_UpdateOAM_All:
 .loop2
 	ld a, l
 	cp LOW(wShadowOAMEnd)
-	jr nc, .done
+	ret nc
 	xor a
 	ld [hli], a
 	jr .loop2
-
-.done
-	ret
