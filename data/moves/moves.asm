@@ -33,14 +33,14 @@ Moves:
 	move WING_ATTACK,  EFFECT_DEFENSE_DOWN_HIT,   65, FLYING,        PHYSICAL, 100, 32,  30
 	move WHIRLWIND,    EFFECT_FORCE_SWITCH,        0, NORMAL,        STATUS,   100, 32,   0
 	move FLY,          EFFECT_FLY,                80, FLYING,        PHYSICAL, 100, 24,   0
-	move ICICLE_CRASH, EFFECT_FLINCH_HIT,         85, ICE,           PHYSICAL,  95, 24,  30
+	move ICICLE_CRASH, EFFECT_FLINCH_HIT,         80, ICE,           PHYSICAL, 100, 24,  30
 	move POWER_GEM,    EFFECT_SP_DEF_DOWN_HIT,    80, ROCK,          SPECIAL,  100, 24,  20
 	move VINE_WHIP,    EFFECT_DEFENSE_DOWN_HIT,   40, GRASS,         PHYSICAL, 100, 40,  10
 	move STOMP,        EFFECT_FLINCH_HIT,         65, NORMAL,        PHYSICAL, 100, 32,  30
 	move ROOST,        EFFECT_HEAL,                0, FLYING,        STATUS,   100, 24,   0
 	move FOCUS_BLAST,  EFFECT_SP_DEF_DOWN_HIT,   120, FIGHTING,      SPECIAL,  70,   8,  30
 	move STICKY_WEB,   EFFECT_STICKY_WEB,          0, BUG,           STATUS,   100, 32,   0
-	move SEED_BOMB,    EFFECT_BURN_HIT,          100, GRASS,         PHYSICAL, 100, 24,  10
+	move SEED_BOMB,    EFFECT_BURN_HIT,           95, GRASS,         PHYSICAL, 100, 24,  10
 	move DRAIN_KISS,   EFFECT_LEECH_HIT,          50, FAIRY,         SPECIAL,  100, 16,   0
 	move HEADBUTT,     EFFECT_FLINCH_HIT,         70, NORMAL,        PHYSICAL, 100, 24,  30
 	move HORN_ATTACK,  EFFECT_DEFENSE_DOWN_HIT,   65, NORMAL,        PHYSICAL, 100, 32,  20
@@ -82,7 +82,7 @@ Moves:
 	move CLOSE_COMBAT, EFFECT_CLOSE_COMBAT,      120, FIGHTING,      PHYSICAL, 100,  8,   0
 	move LOW_KICK,     EFFECT_FLINCH_HIT,         50, FIGHTING,      PHYSICAL, 100, 32,  10
 	move COUNTER,      EFFECT_COUNTER,             1, FIGHTING,      PHYSICAL, 100, 32,   0
-	move SEISMIC_TOSS, EFFECT_LEVEL_DAMAGE,        1, FIGHTING,      PHYSICAL, 100, 20,   0
+	move SEISMIC_TOSS, EFFECT_LEVEL_DAMAGE,        1, FIGHTING,      PHYSICAL, 100, 32,   0
 	move ROCK_THROW,   EFFECT_NORMAL_HIT,         50, ROCK,          PHYSICAL, 100, 32,   0
 	move ABSORB,       EFFECT_LEECH_HIT,          40, GRASS,         SPECIAL,  100, 40,   0
 	move MEGA_DRAIN,   EFFECT_LEECH_HIT,          60, GRASS,         SPECIAL,  100, 32,   0
