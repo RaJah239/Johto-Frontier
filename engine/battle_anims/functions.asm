@@ -113,8 +113,7 @@ BattleAnimFunc_Null:
 BattleAnimFunc_ThrowFromUserToTargetAndDisappear:
 	call BattleAnimFunc_ThrowFromUserToTarget
 	ret c
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 BattleAnimFunc_ThrowFromUserToTarget:
 	; If x coord at $88 or beyond, abort.
@@ -155,8 +154,7 @@ BattleAnimFunc_MoveWaveToTarget:
 	ld a, [hl]
 	cp $88
 	jr c, .move
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .move
 	add $2
@@ -399,8 +397,7 @@ BattleAnimFunc_PokeBall:
 	jr z, .eleven
 	and $f
 	ret nz
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jmp BattleAnim_IncAnonJumptableIndex
 
 .eleven
 	jmp DeinitBattleAnimation
@@ -2101,8 +2098,7 @@ BattleAnimFunc_Egg:
 	ld hl, BATTLEANIMSTRUCT_VAR2
 	add hl, bc
 	ld [hl], $10
-	call BattleAnim_IncAnonJumptableIndex ; jumps to three
-	ret
+	jmp BattleAnim_IncAnonJumptableIndex ; jumps to three
 
 .egg_bomb_done
 	; Increases jumptable index twice to four
