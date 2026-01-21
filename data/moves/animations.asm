@@ -1279,6 +1279,7 @@ BattleAnim_RazorWind:
 	anim_ret
 
 BattleAnim_Gust:
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_BROWN
 	anim_2gfx BATTLE_ANIM_GFX_WIND, BATTLE_ANIM_GFX_HIT
 .loop
 	anim_sound 0, 1, SFX_RAZOR_WIND
@@ -1289,6 +1290,7 @@ BattleAnim_Gust:
 	anim_wait 8
 	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 128, 32, $18
 	anim_wait 16
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_ThroatChop:
@@ -3406,6 +3408,7 @@ BattleAnim_LowKick:
 	anim_ret
 
 BattleAnim_WingAttack:
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_METALLIC
 	anim_1gfx BATTLE_ANIM_GFX_HIT
 .hit
 	anim_sound 0, 1, SFX_WING_ATTACK
@@ -3420,6 +3423,7 @@ BattleAnim_WingAttack:
 	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 140, 56, $0
 	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 124, 56, $0
 	anim_wait 16
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_Disable:
