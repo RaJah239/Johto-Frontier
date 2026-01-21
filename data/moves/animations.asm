@@ -4924,11 +4924,15 @@ BattleAnimSub_Sound:
 	anim_ret
 
 BattleAnimSub_Acid:
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_ACID
 .loop
 	anim_sound 6, 2, SFX_BUBBLEBEAM
 	anim_obj BATTLE_ANIM_OBJ_ACID, 64, 92, $10
 	anim_wait 5
 	anim_loop 8, .loop
+	anim_wait 40
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_wait 32
 	anim_ret
 
 BattleAnimSub_Metallic:
