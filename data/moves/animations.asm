@@ -2591,26 +2591,6 @@ BattleAnim_RockTomb:
 	anim_wait 36
 	anim_ret
 
-;BattleAnim_RockThrow:
-;	anim_1gfx BATTLE_ANIM_GFX_ROCKS
-;	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $1, $0
-;	anim_sound 0, 1, SFX_STRENGTH
-;	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 128, 64, $40
-;	anim_wait 2
-;	anim_sound 0, 1, SFX_STRENGTH
-;	anim_obj BATTLE_ANIM_OBJ_BIG_ROCK, 120, 68, $30
-;	anim_wait 2
-;	anim_sound 0, 1, SFX_STRENGTH
-;	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 152, 68, $30
-;	anim_wait 2
-;	anim_sound 0, 1, SFX_STRENGTH
-;	anim_obj BATTLE_ANIM_OBJ_BIG_ROCK, 144, 64, $40
-;	anim_wait 2
-;	anim_sound 0, 1, SFX_STRENGTH
-;	anim_obj BATTLE_ANIM_OBJ_SMALL_ROCK, 136, 68, $30
-;	anim_wait 96
-;	anim_ret
-
 BattleAnim_PoisonSting:
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PURPLE
 	anim_2gfx BATTLE_ANIM_GFX_HORN, BATTLE_ANIM_GFX_HIT
@@ -3132,8 +3112,11 @@ BattleAnim_RockThrow:
 	anim_incobj 1
 	anim_wait 20
 	anim_sound 0, 1, SFX_MEGA_PUNCH
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_BROWN 
 	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 132, 40, $0
 	anim_wait 16
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BATTLE_OB_GRAY
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
 	anim_ret
 
 BattleAnim_SwordsDance:
@@ -3240,6 +3223,7 @@ BattleAnim_DefenseCurl:
 	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_SeismicToss:
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_GLOBE
 	anim_2gfx BATTLE_ANIM_GFX_GLOBE, BATTLE_ANIM_GFX_HIT
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_Y, $10, $1, $20
 	anim_sound 0, 0, SFX_STRENGTH
