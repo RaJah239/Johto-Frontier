@@ -89,7 +89,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_CUT_UP_RIGHT        ; 39
 	const BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT  ; 3a
 	const BATTLE_ANIM_OBJ_CUT_LONG_DOWN_RIGHT ; 3b
-	const BATTLE_ANIM_OBJ_SOLAR_BEAM_CHARGE   ; 3c
 	const BATTLE_ANIM_OBJ_ABSORB_CENTER       ; 3d
 	const BATTLE_ANIM_OBJ_GUST                ; 3e
 	const BATTLE_ANIM_OBJ_VINE_WHIP1          ; 3f
@@ -261,7 +260,6 @@ DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 	const BATTLE_ANIM_FUNC_THUNDER_WAVE              ; 15
 	const BATTLE_ANIM_FUNC_CLAMP_ENCORE              ; 16
 	const BATTLE_ANIM_FUNC_BITE                      ; 17
-	const BATTLE_ANIM_FUNC_SOLAR_BEAM                ; 18
 	const BATTLE_ANIM_FUNC_GUST                      ; 19
 	const BATTLE_ANIM_FUNC_RAZOR_WIND                ; 1a
 	const BATTLE_ANIM_FUNC_KICK                      ; 1b
