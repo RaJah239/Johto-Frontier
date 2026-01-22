@@ -103,7 +103,7 @@ Moves:
 	move THUNDER,      EFFECT_THUNDER,           120, ELECTRIC,      SPECIAL,   70, 16,  30
 	move ROCK_BLAST,   EFFECT_MULTI_HIT,          30, ROCK,          PHYSICAL,  95, 16,   0
 	move EARTHQUAKE,   EFFECT_EARTHQUAKE,        100, GROUND,        PHYSICAL, 100, 24,   0
-	move PSYCHO_CUT,   EFFECT_NORMAL_HIT,         85, PSYCHIC_TYPE,  PHYSICAL, 100, 24,   0
+	move PSYCHO_CUT,   EFFECT_NORMAL_HIT,         80, PSYCHIC_TYPE,  PHYSICAL, 100, 24,   0
 	move DIG,          EFFECT_FLY,                80, GROUND,        PHYSICAL, 100, 24,   0
 	move TOXIC,        EFFECT_TOXIC,               0, POISON,        STATUS,    90, 16,   0
 	move CONFUSION,    EFFECT_CONFUSE_HIT,        50, PSYCHIC_TYPE,  SPECIAL,  100, 32,  10
@@ -252,7 +252,7 @@ Moves:
 	move X_SCISSOR,    EFFECT_NORMAL_HIT,         80, BUG,           PHYSICAL, 100, 24,   0
 	move HIDDEN_POWER, EFFECT_HIDDEN_POWER,       70, CURSE_TYPE,    SPECIAL,  100, 24,   0
 	move CROSS_CHOP,   EFFECT_NORMAL_HIT,         80, FIGHTING,      PHYSICAL, 100, 24,   0
-	move DRAGON_CLAW,  EFFECT_NORMAL_HIT,         85, DRAGON,        PHYSICAL, 100, 24,   0
+	move DRAGON_CLAW,  EFFECT_NORMAL_HIT,         80, DRAGON,        PHYSICAL, 100, 24,   0
 	move RAIN_DANCE,   EFFECT_RAIN_DANCE,          0, WATER,         STATUS,   100,  8,   0
 	move SUNNY_DAY,    EFFECT_SUNNY_DAY,           0, FIRE,          STATUS,   100,  8,   0
 	move CRUNCH,       EFFECT_DEFENSE_DOWN_HIT,   80, DARK,          PHYSICAL, 100, 24,  20
