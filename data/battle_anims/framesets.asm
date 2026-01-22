@@ -176,7 +176,27 @@ BattleAnimFrameData:
 	dw .Frameset_BulkUp              ; BATTLE_ANIM_FRAMESET_BULK_UP
 	dw .Frameset_ShrinkingRingSmall  ; BATTLE_ANIM_FRAMESET_SHRINKING_RING_SMALL
 	dw .Frameset_ShrinkingRingBig    ; BATTLE_ANIM_FRAMESET_SHRINKING_RING_BIG
+	dw .Frameset_SwirlShort          ; BATTLE_ANIM_FRAMESET_SWIRL_SHORT
+	dw .Frameset_Vortex              ; BATTLE_ANIM_FRAMESET_VORTEX
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
+
+.Frameset_SwirlShort:
+	oamframe BATTLE_ANIM_OAMSET_CD,  1
+	oamframe BATTLE_ANIM_OAMSET_D9,  1
+	oamframe BATTLE_ANIM_OAMSET_CE,  1
+	oamframe BATTLE_ANIM_OAMSET_DA,  1
+	oamframe BATTLE_ANIM_OAMSET_CD,  1, OAM_X_FLIP, OAM_Y_FLIP
+	oamframe BATTLE_ANIM_OAMSET_D9,  1, OAM_X_FLIP, OAM_Y_FLIP
+	oamframe BATTLE_ANIM_OAMSET_CE,  1, OAM_X_FLIP, OAM_Y_FLIP
+	oamframe BATTLE_ANIM_OAMSET_DA,  1, OAM_X_FLIP, OAM_Y_FLIP
+	oamdelete
+
+.Frameset_Vortex:
+	oamframe BATTLE_ANIM_OAMSET_DB,  1
+	oamframe BATTLE_ANIM_OAMSET_DC,  1
+	oamframe BATTLE_ANIM_OAMSET_DD,  1
+	oamframe BATTLE_ANIM_OAMSET_DE,  1
+	oamrestart
 
 .Frameset_HitBig:
 	oamframe BATTLE_ANIM_OAMSET_00,  6

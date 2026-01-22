@@ -96,6 +96,7 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_RadialMoveOut
 	dw BattleAnimFunc_FallAndStop
 	dw BattleAnimFunc_Hurricane
+	dw BattleAnimFunc_RadialMoveOut_Slow
 	assert_table_length NUM_BATTLE_ANIM_FUNCS
 
 BattleAnimFunc_Null:
@@ -4079,6 +4080,12 @@ BattleAnimFunc_RadialMoveOut:
 	dw Step_VerySlow ; for Cross Chop
 	dw Step_Short ; for Cross Chop
 
+BattleAnimFunc_RadialMoveOut_Slow:
+	call BattleAnim_AnonJumptable
+
+	dw InitRadial
+	dw Step_Slow ; for Outrage
+
 InitRadial:
 	ld hl, BATTLEANIMSTRUCT_VAR2
 	add hl, bc
@@ -4093,6 +4100,14 @@ Step:
 	call Set_Rad_Pos
 	cp 80 ; final position
 	jmp nc, DeinitBattleAnimation
+	jr Rad_Move
+
+Step_Slow:
+	call Get_Rad_Pos
+	ld hl, 1.5 ; speed
+	call Set_Rad_Pos
+	cp 40 ; final position
+	jp nc, DeinitBattleAnimation
 	jr Rad_Move
 
 Step_VerySlow:

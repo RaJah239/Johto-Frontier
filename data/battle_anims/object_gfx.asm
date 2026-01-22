@@ -63,4 +63,6 @@ AnimObjGFX:
 	anim_obj_gfx 18, AnimObjBulkUpGFX
 	anim_obj_gfx  6, AnimObjRingsGFX
 	anim_obj_gfx 13, AnimObjBigRingsGFX
+	anim_obj_gfx 24, AnimObjSwirlGFX
+	anim_obj_gfx 32, AnimObjVortexGFX
 	assert_table_length NUM_BATTLE_ANIM_GFX + 1
