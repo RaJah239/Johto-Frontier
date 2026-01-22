@@ -1142,25 +1142,26 @@ BattleAnim_LeafBlade:
 BattleAnim_Solarbeam:
 	anim_if_param_equal $0, .FireSolarBeam
 	; charge turn
-	anim_1gfx BATTLE_ANIM_GFX_CHARGE
-	anim_sound 0, 0, SFX_CHARGE
-	anim_obj BATTLE_ANIM_OBJ_ABSORB_CENTER, 48, 84, $0
-	anim_obj BATTLE_ANIM_OBJ_SOLAR_BEAM_CHARGE, 48, 84, $0
-	anim_obj BATTLE_ANIM_OBJ_SOLAR_BEAM_CHARGE, 48, 84, $8
-	anim_obj BATTLE_ANIM_OBJ_SOLAR_BEAM_CHARGE, 48, 84, $10
-	anim_obj BATTLE_ANIM_OBJ_SOLAR_BEAM_CHARGE, 48, 84, $18
-	anim_obj BATTLE_ANIM_OBJ_SOLAR_BEAM_CHARGE, 48, 84, $20
-	anim_obj BATTLE_ANIM_OBJ_SOLAR_BEAM_CHARGE, 48, 84, $28
-	anim_obj BATTLE_ANIM_OBJ_SOLAR_BEAM_CHARGE, 48, 84, $30
-	anim_obj BATTLE_ANIM_OBJ_SOLAR_BEAM_CHARGE, 48, 84, $38
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_WHITE, $0, $4, $2
-	anim_wait 168
-	anim_ret
+	anim_2gfx BATTLE_ANIM_GFX_SHINE, BATTLE_ANIM_GFX_SPEED
+	anim_sound 0, 0, SFX_MORNING_SUN
+.loop
+	anim_obj BATTLE_ANIM_OBJ_MORNING_SUN, 16, 48, $88
+	anim_wait 6
+	anim_loop 5, .loop
+	anim_wait 24
+	anim_sound 0, 0, SFX_SWORDS_DANCE
+	anim_jump BattleAnim_SubFocusingAnim
 
 .FireSolarBeam
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PEACH
+	anim_1gfx BATTLE_ANIM_GFX_SHINE
+	anim_call BattleAnimSub_Glimmer2
+	anim_wait 24
 	anim_1gfx BATTLE_ANIM_GFX_BEAM
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
-	anim_jump BattleAnimSub_Beam
+	anim_call BattleAnimSub_Beam
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PEACH
+	anim_ret
 
 BattleAnim_Thunderpunch:
 	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_LIGHTNING
@@ -1764,6 +1765,9 @@ BattleAnim_Recover:
 	anim_wait 96
 	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $0, $0
+	; fallthrough
+
+BattleAnimSub_Glimmer2:
 	anim_sound 0, 0, SFX_METRONOME
 	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 44, 64, $0
 	anim_wait 5
