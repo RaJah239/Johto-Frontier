@@ -2172,11 +2172,30 @@ BattleAnim_Reflect:
 	anim_ret
 
 BattleAnim_LightScreen:
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_LIGHTSCREEN
 	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_REFLECT
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
 	anim_sound 0, 0, SFX_FLASH
-	anim_call BattleAnim_LightScreen_Branch
+	anim_obj BATTLE_ANIM_OBJ_SCREEN, 72, 80, $0
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $0
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $8
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $10
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $18
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SCREEN, 72, 80, $0
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $20
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $28
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $30
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_SHINY, 72, 80, $38
 	anim_wait 64
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_YELLOW
 	anim_ret
 
 BattleAnim_LightScreen_Branch:
