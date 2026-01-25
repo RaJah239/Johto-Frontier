@@ -115,7 +115,7 @@ RandomPartyLists::
 	db 50, GARCHOMP
 			db "Chomp@"		; Nickname
 			db $DD, $DD		; DVs - atk|def dv, spd|spc dv
-			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-			db IRON_HEAD, OUTRAGE, EARTHQUAKE, SWORDS_DANCE ; Moveset - NO_MOVE is a thing
+			db LIFE_ORB	; ITEM/ NO_ITEM is a thing
+			db IRON_HEAD, OUTRAGE, EARTHQUAKE, FIRE_FANG ; Moveset - NO_MOVE is a thing
 			db $fe ; End of Pokemon
 	db -1 ; end

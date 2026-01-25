@@ -9,6 +9,7 @@ if DEF(_DEBUG)
 	const PLAYERSHOUSE2F_TEST_MON_SHINY
 	const PLAYERSHOUSE2F_DEBUGCOLOURPICKER
 	const PLAYERSHOUSE2F_KANTO_WARP
+	const PLAYERSHOUSE2F_MAXIMA
 endc
 
 PlayersHouse2F_MapScripts:
@@ -331,6 +332,18 @@ PlayersRadioText4:
 	done
 
 if DEF(_DEBUG)
+RandomPartyTrainerScript:
+	faceplayer
+	special BackupPartyHeldItems
+	special HealParty
+	winlosstext TestText, TestText
+	loadtrainer MAXIMA, MAXIMA1
+	startbattle
+	reloadmap
+	special RestorePartyHeldItems
+	special HealParty
+	end
+
 TestTrainerScript:
 	faceplayer
 	special BackupPartyHeldItems
@@ -401,4 +414,5 @@ if DEF(_DEBUG)
 	object_event  2,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ShinyMonScript, -1
 	object_event  7,  5, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, DebugColourPickerScript, -1
 	object_event  6,  2, SPRITE_BLUE, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TestWarpScript, -1
+	object_event  2,  3, SPRITE_MAXIMA, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RandomPartyTrainerScript, -1
 endc
