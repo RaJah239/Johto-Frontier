@@ -553,10 +553,10 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass MAXIMA
 	const MAXIMA1
-	const MAXIMA2
 
  	const_def
  	const RANDOMLIST_0
  	const RANDOMLIST_1
+ 	const RANDOMLIST_2
 
 DEF NUM_TRAINER_CLASSES EQU __trainer_class__ - 1
