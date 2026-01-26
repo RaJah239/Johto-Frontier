@@ -178,7 +178,13 @@ BattleAnimFrameData:
 	dw .Frameset_ShrinkingRingBig    ; BATTLE_ANIM_FRAMESET_SHRINKING_RING_BIG
 	dw .Frameset_SwirlShort          ; BATTLE_ANIM_FRAMESET_SWIRL_SHORT
 	dw .Frameset_Vortex              ; BATTLE_ANIM_FRAMESET_VORTEX
+	dw .Frameset_TinyGlow            ; BATTLE_ANIM_FRAMESET_TINY_GLOW
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
+
+.Frameset_TinyGlow:
+	oamframe BATTLE_ANIM_OAMSET_54,  1
+	oamframe BATTLE_ANIM_OAMSET_55,  1
+	oamrestart
 
 .Frameset_SwirlShort:
 	oamframe BATTLE_ANIM_OAMSET_CD,  1

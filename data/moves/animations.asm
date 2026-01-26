@@ -525,24 +525,23 @@ BattleAnim_HiJumpKick:
 	anim_ret
 
 BattleAnim_SignalBeam:
-	anim_1gfx BATTLE_ANIM_GFX_BEAM
+	anim_1gfx BATTLE_ANIM_GFX_GLOW
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
 	anim_bgeffect BATTLE_BG_EFFECT_ALTERNATE_HUES, $0, $2, $0
-	anim_wait 64
-	anim_sound 0, 0, SFX_PERISH_SONG
-	anim_obj BATTLE_ANIM_OBJ_BEAM, 64, 92, $0
+.loop
+	anim_sound 0, 0, SFX_SPITE
+	anim_obj BATTLE_ANIM_OBJ_SIGNAL_BEAM_R, 64, 92, $0
 	anim_wait 4
-	anim_sound 0, 0, SFX_PERISH_SONG
-	anim_obj BATTLE_ANIM_OBJ_BEAM, 80, 84, $0
+	anim_sound 0, 0, SFX_SPITE
+	anim_obj BATTLE_ANIM_OBJ_SIGNAL_BEAM_B, 64, 92, $0
 	anim_wait 4
-	anim_sound 0, 1, SFX_PERISH_SONG
-	anim_obj BATTLE_ANIM_OBJ_BEAM, 96, 76, $0
+	anim_sound 0, 0, SFX_SPITE
+	anim_obj BATTLE_ANIM_OBJ_SIGNAL_BEAM_R, 64, 92, $0
 	anim_wait 4
-	anim_sound 0, 1, SFX_PERISH_SONG
-	anim_obj BATTLE_ANIM_OBJ_BEAM, 112, 68, $0
-	anim_obj BATTLE_ANIM_OBJ_BEAM_TIP, 126, 62, $0
-	anim_wait 48
-	anim_incobj  5
+	anim_sound 0, 0, SFX_SPITE
+	anim_obj BATTLE_ANIM_OBJ_SIGNAL_BEAM_B, 64, 92, $0
+	anim_wait 4
+	anim_loop 4, .loop
 	anim_wait 64
 	anim_ret
 
