@@ -179,12 +179,24 @@ BattleAnimFrameData:
 	dw .Frameset_SwirlShort          ; BATTLE_ANIM_FRAMESET_SWIRL_SHORT
 	dw .Frameset_Vortex              ; BATTLE_ANIM_FRAMESET_VORTEX
 	dw .Frameset_TinyGlow            ; BATTLE_ANIM_FRAMESET_TINY_GLOW
+	dw .Frameset_Cotton              ; BATTLE_ANIM_FRAMESET_COTTON
+	dw .Frameset_OctazookaSmoke          ; BATTLEANIMFRAMESET_OCTAZOOKA_SMOKE
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
+
+.Frameset_OctazookaSmoke:
+	oamframe BATTLE_ANIM_OAMSET_20,  2
+	oamframe BATTLE_ANIM_OAMSET_21,  2
+	oamframe BATTLE_ANIM_OAMSET_1B,  2
+	oamdelete
 
 .Frameset_TinyGlow:
 	oamframe BATTLE_ANIM_OAMSET_54,  1
 	oamframe BATTLE_ANIM_OAMSET_55,  1
 	oamrestart
+
+.Frameset_Cotton:
+	oamframe BATTLE_ANIM_OAMSET_AD,  8
+	oamend
 
 .Frameset_SwirlShort:
 	oamframe BATTLE_ANIM_OAMSET_CD,  1
