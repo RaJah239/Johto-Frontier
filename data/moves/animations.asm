@@ -1485,6 +1485,7 @@ BattleAnim_Acrobatics:
 	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $0, $0
 	anim_wait 12
 	anim_clearobjs
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_YELLOW
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $0, $0
 	anim_sound 0, 1, SFX_KARATE_CHOP
 	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 140, 44, $0
@@ -1505,6 +1506,7 @@ BattleAnim_Acrobatics:
 	anim_wait 8
 	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
 	anim_wait 16
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_Poisonpowder:
@@ -2703,6 +2705,8 @@ BattleAnim_Tremor:
 	anim_ret
 
 BattleAnim_LovelyKiss:
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PINK
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_PINK
 	anim_2gfx BATTLE_ANIM_GFX_OBJECTS, BATTLE_ANIM_GFX_ANGELS
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
 	anim_obj BATTLE_ANIM_OBJ_LOVELY_KISS, 152, 40, $0
@@ -2710,6 +2714,8 @@ BattleAnim_LovelyKiss:
 	anim_sound 0, 1, SFX_LICK
 	anim_obj BATTLE_ANIM_OBJ_HEART, 128, 40, $0
 	anim_wait 40
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_RED
 	anim_ret
 
 BattleAnim_Swift:
@@ -3063,13 +3069,24 @@ BattleAnim_DreamEater:
 	anim_bgp $1b
 	anim_obp0 $27
 	anim_sound 6, 3, SFX_WATER_GUN
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_GREEN
 	anim_call BattleAnimSub_Drain
-	anim_jump BattleAnimSub_Glimmer
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_WATER
+	anim_call BattleAnimSub_Glimmer
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_ret
 
 BattleAnim_LeechLife:
-	anim_1gfx BATTLE_ANIM_GFX_BUBBLE
+	anim_2gfx BATTLE_ANIM_GFX_BUBBLE, BATTLE_ANIM_GFX_SHINE
 	anim_sound 6, 3, SFX_WATER_GUN
-	; fallthrough
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_LIME
+	anim_call BattleAnimSub_Drain
+	anim_1gfx BATTLE_ANIM_GFX_SHINE
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_LIME
+	anim_call BattleAnimSub_Glimmer
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_ret
 
 BattleAnimSub_Drain:
 	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $0
@@ -3940,6 +3957,7 @@ BattleAnim_ScaryFace:
 	anim_ret
 
 BattleAnim_HyperVoice:
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_FIRE
 	anim_2gfx BATTLE_ANIM_GFX_NOISE, BATTLE_ANIM_GFX_PSYCHIC
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $14, $2, $0
 	anim_sound 0, 0, SFX_SNORE
@@ -3950,6 +3968,7 @@ BattleAnim_HyperVoice:
 	anim_obj BATTLE_ANIM_OBJ_WAVE,  9, 0, 13, 0, $2
 	anim_cry $0
 	anim_wait 48
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_SuckerPunch:
