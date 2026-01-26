@@ -175,7 +175,7 @@ Moves:
 	move FACADE,       EFFECT_FACADE,             70, NORMAL,        PHYSICAL, 100, 24,   0
 	move HEX,          EFFECT_HEX,                65, GHOST,         SPECIAL,  100, 16,   0
 	move PHOTON_BLAST, EFFECT_TRI_ATTACK,         80, NORMAL,        SPECIAL,  100, 24,  30
-	move SUPER_FANG,   EFFECT_SUPER_FANG,          1, NORMAL,        PHYSICAL,  90, 16,   0
+	move SUPER_FANG,   EFFECT_SUPER_FANG,          1, NORMAL,        PHYSICAL, 100, 16,   0
 	move SLASH,        EFFECT_NORMAL_HIT,         70, NORMAL,        PHYSICAL, 100, 32,   0
 	move SUBSTITUTE,   EFFECT_SUBSTITUTE,          0, NORMAL,        STATUS,   100, 16,   0
 	move STRUGGLE,     EFFECT_RECOIL_HIT,         50, NORMAL,        PHYSICAL, 100,  1,   0
