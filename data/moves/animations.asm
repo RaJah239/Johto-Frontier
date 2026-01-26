@@ -4473,6 +4473,7 @@ BattleAnim_AuraSphere:
 	anim_ret
 
 BattleAnim_Safeguard:
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_BLUE
 	anim_1gfx BATTLE_ANIM_GFX_MISC
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
 	anim_obj BATTLE_ANIM_OBJ_SAFEGUARD, 80, 80, $0
@@ -4482,6 +4483,7 @@ BattleAnim_Safeguard:
 	anim_obj BATTLE_ANIM_OBJ_SAFEGUARD, 80, 80, $34
 	anim_sound 0, 0, SFX_PROTECT
 	anim_wait 96
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_PainSplit:
