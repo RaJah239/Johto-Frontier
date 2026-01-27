@@ -1,11 +1,11 @@
 	db DONPHAN ; 232
 
-	db  90, 120, 120,  50,  60,  60
-	evs  0,   1,   1,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
+	db 100, 120, 120,  45,  60,  60 ; 505 BST
+	evs  2,   3,   3,   0,   1,   1
 
-	db GROUND, GROUND ; type
-	db 60 ; catch rate
+	db GROUND, FIGHTING ; type
+	db 45 ; catch rate
 	db 189 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
