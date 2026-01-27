@@ -1184,13 +1184,33 @@ _OakRating19::
 	line "Congratulations!"
 	done
 
-_MemoryGameYeahText::
-	text " , yeah!"
+_MemoryGamePayoutText::
+	text " ! @"
+	text_decimal wStringBuffer2, 1, 2
+	text " Coin(s)!"
 	done
 
 _MemoryGameDarnText::
 	text "Darn…"
 	done
+
+_MemoryGameGameOverText::
+	text "Game over!"
+	done
+
+_MemoryGameExtraTryText::
+	text " ! An extra"
+	line "try!"
+	done
+
+_MemoryGameNoPrizeText::
+	text " ! No prize…"
+	done
+
+_MemoryGameGameOverCardText::
+	text " ! Game"
+	line "over…"
+	prompt
 
 _StartMenuContestEndText::
 	text "Would you like to"
