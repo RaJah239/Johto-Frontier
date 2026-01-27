@@ -89,6 +89,30 @@ HandleRivalry:
 INCLUDE "data/abilities/rivalry_mons.asm"
 
 HandleSandForce:
+	; get move type
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	and TYPE_MASK
+	ld d, a
+
+	; select attacker types
+	ld hl, wBattleMonType1
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .check
+	ld hl, wEnemyMonType1
+
+.check
+	ld a, [hl]
+	cp d
+	ret z         ; STAB → exit
+	inc hl
+	ld a, [hl]
+	cp d
+	ret z         ; STAB → exit
+	; no STAB → continue
+
+	; boost damage of non stab moves that fit
 	call GetCurrentMon
 	ld hl, SandForcePokemon
 	call IsInByteArray
