@@ -180,8 +180,13 @@ BattleAnimFrameData:
 	dw .Frameset_Vortex              ; BATTLE_ANIM_FRAMESET_VORTEX
 	dw .Frameset_TinyGlow            ; BATTLE_ANIM_FRAMESET_TINY_GLOW
 	dw .Frameset_Cotton              ; BATTLE_ANIM_FRAMESET_COTTON
-	dw .Frameset_OctazookaSmoke          ; BATTLEANIMFRAMESET_OCTAZOOKA_SMOKE
+	dw .Frameset_OctazookaSmoke      ; BATTLEANIMFRAMESET_OCTAZOOKA_SMOKE
+	dw .Frameset_SeedBomb            ; BATTLEANIMFRAMESET_SEED_BOMB
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
+
+.Frameset_SeedBomb:
+	oamframe BATTLE_ANIM_OAMSET_69,  40
+	oamdelete
 
 .Frameset_OctazookaSmoke:
 	oamframe BATTLE_ANIM_OAMSET_20,  2
