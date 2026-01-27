@@ -14,6 +14,11 @@ MagnetPullPokemon_AI:
 	db MAGNEZONE
 	db -1 ; end
 
+RunAwayPokemon_AI:
+	db DODUO
+	db DODRIO
+    db -1 ; end
+
 AI_SwitchOrTryItem:
 	and a
 
@@ -177,6 +182,15 @@ SwitchSometimes:
 AI_TrySwitch:
 ; Determine whether the AI can switch based on how many Pokemon are still alive.
 
+; =========================
+; === Ability: Run Away ===
+; =========================
+	; enemy can switch when the player has a shadow tag pokemon
+	ld a, [wEnemyMonSpecies]
+	ld hl, RunAwayPokemon_AI
+	call IsInByteArray
+	jr c, .skip_trapping_mons
+
 ; ===========================
 ; === Ability: Shadow Tag ===
 ; ===========================
@@ -249,6 +263,7 @@ AI_TrySwitch:
 .trapped_by_magnet_pull
 	jmp TrappedByPlayerPlayer
 
+.skip_trapping_mons
 .check_stat_boosted_levels
 ; switching routine
 ; don't switch if already set up
