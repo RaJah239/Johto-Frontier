@@ -4011,15 +4011,20 @@ BattleAnim_ScaryFace:
 BattleAnim_HyperVoice:
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_FIRE
 	anim_2gfx BATTLE_ANIM_GFX_NOISE, BATTLE_ANIM_GFX_PSYCHIC
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $14, $2, $0
-	anim_sound 0, 0, SFX_SNORE
+.loop
+	anim_cry $0
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $2
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $30, $2, $0
 	anim_call BattleAnimSub_Sound
 	anim_obj BATTLE_ANIM_OBJ_WAVE,  7, 0, 11, 0, $2
 	anim_obj BATTLE_ANIM_OBJ_WAVE,  7, 0, 13, 0, $2
 	anim_obj BATTLE_ANIM_OBJ_WAVE,  9, 0, 11, 0, $2
 	anim_obj BATTLE_ANIM_OBJ_WAVE,  9, 0, 13, 0, $2
-	anim_cry $0
-	anim_wait 48
+	anim_wait 28
+	anim_call BattleAnimSub_Sound
+	anim_wait 28
+	anim_loop 2, .loop
+	anim_wait 8
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
