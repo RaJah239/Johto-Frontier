@@ -14,6 +14,12 @@ EntryAbilities1:
 	call HandleSeedfall
 	ret
 
+; ============================================
+; === Entrance Abilities 2 - Non-Link Mode ===
+; ============================================
+EntryAbilities2NonLink:
+	ret
+
 ; ==============
 ; === Note 2 ===
 ; ==============

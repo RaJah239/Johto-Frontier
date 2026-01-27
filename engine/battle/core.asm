@@ -156,12 +156,19 @@ BattleTurn:
 	ld [wCurDamage], a
 	ld [wCurDamage + 1], a
 
-; ============================
-; === Entrance Abilities 2 ===
-; ============================
+	; check if in a link battle
+    ld a, [wLinkMode]
+    and a
+    jr z, .unlinked_battle
+
+; ========================================
+; === Entrance Abilities 2 - Link Mode ===
+; ========================================
+	; activate these abilities in non-link battles only
 	call ClearSprites
 	farcall EntryAbilities2
 
+.unlinked_battle
 ; ======================
 ; === Trap Abilities ===
 ; ======================
@@ -3733,6 +3740,19 @@ SpikesDamage:
 ; ============================
 	farcall EntryAbilities1
 
+	; check if in a link battle
+    ld a, [wLinkMode]
+    and a
+    jr nz, .linked_battle
+
+; ==============================================
+; === Entrance Abilities 2 - Non-Linked Mode ===
+; ==============================================
+	; activate these abilities in link battles only
+	call ClearSprites
+	farcall EntryAbilities2NonLink
+
+.linked_battle
 	ld a, [wBattleHasJustStarted]
 	and a
 	ret nz
