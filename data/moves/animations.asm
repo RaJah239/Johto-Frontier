@@ -4845,21 +4845,36 @@ BattleAnim_RapidSpin:
 	anim_ret
 
 BattleAnim_IronHead:
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_BLUE
-	anim_2gfx BATTLE_ANIM_GFX_REFLECT, BATTLE_ANIM_GFX_HIT
+	anim_setobjpal PAL_BATTLE_OB_BROWN, PAL_BTLCUSTOM_BRIGHT
+	anim_3gfx BATTLE_ANIM_GFX_ROCKS, BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_REFLECT
 	anim_obp0 $0
 	anim_sound 0, 0, SFX_RAGE
 	anim_call BattleAnim_TargetObj_1Row
 	anim_call BattleAnimSub_Metallic
-	anim_call BattleAnim_ShowMon_0
-	anim_resetobp0
-	anim_call BattleAnim_TargetObj_1Row
 	anim_bgeffect BATTLE_BG_EFFECT_TACKLE, $0, BG_EFFECT_USER, $0
-	anim_wait 4
+	anim_wait 6
 	anim_sound 0, 1, SFX_HEADBUTT
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 56, $0
-	anim_wait 8
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_wait 6
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $0, $0
+	anim_wait 2
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
+	anim_clearobjs
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $2
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $14, $2, $0
+	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 128, 56, $0
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $28
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $5c
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $10
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $e8
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $9c
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $d0
+	anim_wait 6
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $1c
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $50
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $dc
+	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $90
+	anim_wait 32
 	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_MetalClaw:
