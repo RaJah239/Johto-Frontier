@@ -42,9 +42,9 @@ _Option:
 	jr .joypad_loop
 
 .ExitOptions:
-	ld de, SFX_SAVE
+	ld de, SFX_TRANSACTION
 	call PlaySFX
-	call WaitSFX
+	call DelayFrame
 	pop af
 	ldh [hInMenu], a
 	ret
