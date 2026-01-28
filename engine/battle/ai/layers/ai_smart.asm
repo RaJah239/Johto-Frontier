@@ -3495,6 +3495,7 @@ AI_Smart_WeatherMove:
 	ret c
 
 	dec [hl]
+	dec [hl]
 	ret
 
 AIBadWeatherType:
