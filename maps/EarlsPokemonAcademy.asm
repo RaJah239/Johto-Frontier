@@ -7,6 +7,7 @@
 	const EARLSPOKEMONACADEMY_POKEDEX1
 	const EARLSPOKEMONACADEMY_POKEDEX2
 	const EARLSPOKEMONACADEMY_YOUNGSTER3
+	const EARLSPOKEMONACADEMY_GIRL1
 
 EarlsPokemonAcademy_MapScripts:
 	def_scene_scripts
@@ -546,6 +547,15 @@ StrongJawMovesText:
 	cont "Thunder Fang."
 	done
 
+EarlsPokemonAcademyTwin1Script:
+	jumptextfaceplayer NVEText
+
+NVEText:
+	text "Did you know NVE"
+	line "is short for Not"
+	cont "Very Effective?"
+	done
+
 EarlsPokemonAcademy_MapEvents:
 	def_warp_events
 	warp_event  3, 15, VIOLET_CITY, 4
@@ -568,3 +578,4 @@ EarlsPokemonAcademy_MapEvents:
 	object_event  2,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, AcademyNotebook, -1
 	object_event  4,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MoveEnchancingAbilitiesNotebook, -1
 	object_event  7,  3, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyYoungsterHardModeScript, -1
+	object_event  2,  9, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyTwin1Script, -1
