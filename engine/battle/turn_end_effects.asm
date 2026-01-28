@@ -2,6 +2,7 @@ FarTurnEndEffects:
 	call HandleLeftovers
 	call HandleMysteryberry
 	call HandleStatBoostingHeldItems
+	call HandleWeatherItem
 	call HandleSafeguard
 	call HandleMist
 	call HandleScreens
@@ -148,6 +149,123 @@ HandleStatBoostingHeldItems:
 	ret
 
 INCLUDE "data/battle/held_stat_up.asm"
+
+HandleWeatherItem:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .player_1
+	call .DoPlayer
+	jr .DoEnemy
+
+.player_1
+	call .DoEnemy
+	jr .DoPlayer
+
+.DoPlayer:
+	farcall GetPartymonItem
+	ld a, $0
+	jr .HandleItem
+
+.DoEnemy:
+	farcall GetOTPartymonItem
+	ld a, $1
+.HandleItem:
+	ldh [hBattleTurn], a
+	ld d, h
+	ld e, l
+	push de
+	push bc
+	ld a, [bc]
+	ld b, a
+	callfar GetItemHeldEffect
+	ld hl, HeldWeatherItems
+.loop
+	ld a, [hli]
+	cp -1
+	jr z, .finish
+	inc hl
+	inc hl
+	cp b
+	jr nz, .loop
+	pop bc
+	ld a, [bc]
+	ld [wNamedObjectIndex], a
+	push bc
+	dec hl
+	dec hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	xor a
+	ld [hl], a
+	ld [wAttackMissed], a
+	ld a, BANK(BattleCommand_AttackUp)
+	rst FarCall
+	pop bc
+	pop de
+	xor a
+	ld [bc], a
+	ld [de], a
+	call GetItemName
+	farcall SwitchTurnCore
+	farcall ItemRecoveryAnim
+	farcall SwitchTurnCore
+	ld hl, BattleText_UsersStringBuffer1Activated
+	call StdBattleTextbox
+
+	push hl
+	push de
+	push bc
+
+	ld a, [wBattleWeather]
+	cp WEATHER_SUN
+	jr z, .SunAnim
+	cp WEATHER_SANDSTORM
+	jr z, .SandstormAnim
+	cp WEATHER_HAIL
+	jr z, .HailAnim
+
+;.RainAnim
+	ld a, RAIN_DANCE
+	call BattleItemAnimCommon
+	ld hl, DownpourText
+	call StdBattleTextbox
+	jr .FinishAnim
+
+.SunAnim
+	ld a, SUNNY_DAY
+	call BattleItemAnimCommon
+	ld hl, SunsRaysIntensifiedText
+	call StdBattleTextbox
+	jr .FinishAnim
+
+.HailAnim
+	ld a, HAIL
+	call BattleItemAnimCommon
+	ld hl, ItStartedToHailText
+	call StdBattleTextbox
+	jr .FinishAnim
+
+.SandstormAnim
+	ld a, SANDSTORM
+	call BattleItemAnimCommon
+	ld hl, SandstormBrewedText
+	call StdBattleTextbox
+	; fallthrough
+
+.FinishAnim
+	pop hl
+.finish
+	pop bc
+	pop de
+	ret
+
+BattleItemAnimCommon:
+	ld [wFXAnimID], a
+	xor a
+	ld [wNumHits], a
+	ld [wFXAnimID + 1], a
+	predef_jump PlayBattleAnim
 
 HandleLeftovers:
 	ldh a, [hSerialConnectionStatus]

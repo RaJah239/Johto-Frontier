@@ -97,21 +97,21 @@ DEF MAIL_STRUCT_LENGTH_JP EQU $2a ; mailmsg_jp struct
 
 	const_next 20
 	const HELD_BLACK_SLUDGE
-	const_skip
-	const_skip
-	const_skip
-	const_skip
-	const_skip
+	const HELD_SPEED_UP
+	const HELD_SET_RAIN
+	const HELD_SET_SUN
+	const HELD_SET_SAND
+	const HELD_SET_HAIL
 
 	const_next 30
 	const HELD_MUSCLE_BAND
-	const HELD_ATTACK_UP
-	const HELD_DEFENSE_UP
-	const HELD_SPEED_UP
-	const HELD_SP_ATTACK_UP
-	const HELD_SP_DEFENSE_UP
-	const HELD_ACCURACY_UP
-	const HELD_EVASION_UP
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
 	const HELD_WISE_GLASSES
 
 	const_next 40

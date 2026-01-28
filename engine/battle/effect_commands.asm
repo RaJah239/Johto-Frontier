@@ -7040,6 +7040,28 @@ EffectCommands_50_50:
 	cp 50 percent + 1
 	ret
 
+BattleCommand_ItemSun:
+	ld a, WEATHER_SUN
+	jr StartWeatherItem
+
+BattleCommand_ItemRain:
+	ld a, WEATHER_RAIN
+	jr StartWeatherItem
+
+BattleCommand_ItemSandstorm:
+	ld a, WEATHER_SANDSTORM
+	jr StartWeatherItem
+
+BattleCommand_ItemHail:
+	ld a, WEATHER_HAIL
+	; fallthrough
+
+StartWeatherItem:
+	ld [wBattleWeather], a
+	ld a, 8
+	ld [wWeatherCount], a
+	ret
+
 INCLUDE "engine/battle/move_effects/curse.asm"
 INCLUDE "engine/battle/move_effects/protect.asm"
 INCLUDE "engine/battle/move_effects/bulk_up.asm"
