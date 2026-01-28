@@ -8,7 +8,23 @@ Route36RuinsOfAlphGate_MapScripts:
 	def_callbacks
 
 Route36RuinsOfAlphGateOfficerScript:
+	checkevent EVENT_GOT_WIDE_LENS
+	iffalse .GiveWideLens
 	jumptextfaceplayer Route36RuinsOfAlphGateOfficerText
+
+.GiveWideLens
+	faceplayer
+	opentext
+	writetext Route36RuinsOfAlphGateOfficerWideLensText
+	promptbutton
+	verbosegiveitem WIDE_LENS
+	iffalse .NoRoom
+	setevent EVENT_GOT_WIDE_LENS
+	closetext
+	end
+
+.NoRoom
+	writetextend YourBagIsFullText
 
 Route36RuinsOfAlphGateGrampsScript:
 	jumptextfaceplayer Route36RuinsOfAlphGateGrampsText
@@ -18,6 +34,19 @@ Route36RuinsOfAlphGateOfficerText:
 	line "who'd make some-"
 	cont "thing like this?"
 	cont "And why?"
+	done
+
+Route36RuinsOfAlphGateOfficerWideLensText:
+	text "If you're going to"
+	line "inspect the Ruins,"
+
+	para "this'll surely"
+	line "come in handy."
+	done
+
+YourBagIsFullText:
+	text "Seems your bag is"
+	line "if full."
 	done
 
 Route36RuinsOfAlphGateGrampsText:

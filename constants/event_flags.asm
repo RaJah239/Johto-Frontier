@@ -56,7 +56,7 @@
 	const EVENT_MET_NURSE_JOY
 	const EVENT_SHINY_CHARM_OBTAINED
 	const EVENT_OAKSLAB_NAYRU62
-	const_skip
+	const EVENT_GOT_WIDE_LENS
 	const_skip
 	const_skip
 	const EVENT_KURT_GAVE_YOU_LURE_BALL
