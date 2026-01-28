@@ -108,7 +108,7 @@
 	const MILOTIC_CALL ; 64
 	const PNK_APRICORN ; 65
 	const BLACKGLASSES ; 66
-	const SLOWPOKETAIL ; 67
+	const WIDE_LENS    ; 67
 	const PINK_BOW     ; 68
 	const STICK        ; 69
 	const SMOKE_BALL   ; 6a

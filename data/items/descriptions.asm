@@ -103,7 +103,7 @@ ItemDescriptions:
 	dw MiloticCallDesc
 	dw PnkApricornDesc
 	dw BlackGlassesDesc
-	dw SlowpokeTailDesc
+	dw WideLensDesc
 	dw PinkBowDesc
 	dw StickDesc
 	dw SmokeBallDesc
@@ -659,9 +659,9 @@ BlackGlassesDesc:
 	db   "Powers up dark-"
 	next "type moves. (HOLD)@"
 
-SlowpokeTailDesc:
-	db   "Very tasty. Sell"
-	next "high.@"
+WideLensDesc:
+	db   "Boosts accuracy by"
+	next "10<%>. (Hold)@"
 
 PinkBowDesc:
 	db   "Powers up normal-"

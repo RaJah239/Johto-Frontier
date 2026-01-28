@@ -1697,11 +1697,14 @@ BattleCommand_CheckHit:
 	ld b, a
 	ldh a, [hBattleTurn]
 	and a
-	jr z, .BrightPowder
+	jr z, .WideLens
 	ld a, [wEnemyMoveStruct + MOVE_ACC]
 	ld b, a
 
-.BrightPowder:
+.WideLens:
+	call .WideLensBoost
+
+;.BrightPowder:
 	push bc
 	call GetOpponentItem
 	ld a, b
@@ -1740,6 +1743,17 @@ BattleCommand_CheckHit:
 .Missed:
 	ld a, 1
 	ld [wAttackMissed], a
+	ret
+
+.WideLensBoost:
+	push bc
+	call GetUserItem
+	pop bc
+	ld a, [hl]
+	cp WIDE_LENS
+	ret nz
+
+	call Add10PercentToB
 	ret
 
 .StatModifiers:
@@ -1889,6 +1903,29 @@ INCLUDE "data/abilities/snow_cloak_mons.asm"
 INCLUDE "data/abilities/compound_eyes_mons.asm"
 
 INCLUDE "data/battle/accuracy_multipliers.asm"
+
+; Input: percentage in B.
+; Output: B *= 1.1. A clobbered.
+Add10PercentToB:
+	ld a, b
+	push bc
+	ld c, 10
+	call SimpleDivide ; Divide a by c. Return quotient b and remainder a.
+	cp 5 ; We use the remainder to round the quotient.
+	ld a, b ; Saves the quotient in A.
+	pop bc
+	jr c, .floor
+
+	; ceil
+	inc a
+
+.floor
+	add b
+	ld b, a
+	ret nc
+
+	ld b, $ff ; Prevent overflow.
+	ret
 
 BattleCommand_EffectChance:
 	xor a

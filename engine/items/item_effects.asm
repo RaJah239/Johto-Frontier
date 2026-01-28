@@ -116,7 +116,7 @@ ItemEffects:
 	dw MiloticCallEffect   ; MILOTIC_CALL
 	dw NoEffect            ; PNK_APRICORN
 	dw NoEffect            ; BLACKGLASSES
-	dw NoEffect            ; SLOWPOKETAIL
+	dw NoEffect            ; WIDE_LENS
 	dw NoEffect            ; PINK_BOW
 	dw NoEffect            ; STICK
 	dw NoEffect            ; SMOKE_BALL

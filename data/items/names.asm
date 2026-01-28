@@ -102,7 +102,7 @@ ItemNames::
 	li "Seaking Call"
 	li "Pnk Apricorn"
 	li "BlackGlasses"
-	li "SlowpokeTail"
+	li "Wide Lens"
 	li "Pink Bow"
 	li "Stick"
 	li "Smoke Ball"

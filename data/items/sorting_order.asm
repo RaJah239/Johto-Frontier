@@ -148,7 +148,7 @@ ItemNameOrder:
 
 
 ; NEXT POCKET
-; Battle Pocket - 53 total
+; Battle Pocket - 54 total
 
 ; Stat altering Battle Items
 	db GUARD_SPEC
@@ -206,12 +206,13 @@ ItemNameOrder:
 	db TWISTEDSPOON
 	db UP_GRADE
 	db WEATHER_ROCK
+	db WIDE_LENS
 	db WISE_GLASSES
 
 
 
 ; NEXT POCKET
-; Loot Items Pocket - 14 total
+; Loot Items Pocket - 13 total
 ; Crystal
 	db CRYSTAL
 
@@ -228,7 +229,6 @@ ItemNameOrder:
 	db STAR_PIECE
 	db NUGGET
 	db BRICK_PIECE
-	db SLOWPOKETAIL
 
 ; Fossils
 	db DOME_FOSSIL
