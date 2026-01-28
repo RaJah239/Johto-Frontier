@@ -21,6 +21,18 @@ IndigoPlateauSignText:
 	para "#MON LEAGUE HQ"
 	done
 
+NurseJoyTrainingSign:
+	jumptext NurseJoyTrainingSignText
+
+NurseJoyTrainingSignText:
+	text "Nurse Joy's"
+	line "training academy."
+
+	para "Get your #mon"
+	line "ready for the"
+	cont "#mon League!"
+	done
+
 Route23_MapEvents:
 	def_warp_events
 	warp_event  9,  5, INDIGO_PLATEAU_POKECENTER_1F, 1
@@ -32,5 +44,6 @@ Route23_MapEvents:
 
 	def_bg_events
 	bg_event 11,  7, BGEVENT_READ, IndigoPlateauSign
+	bg_event 14, 10, BGEVENT_READ, NurseJoyTrainingSign
 
 	def_object_events
