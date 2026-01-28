@@ -500,7 +500,7 @@ GoldenrodCity_MapEvents:
 	warp_event 33,  9, GOLDENROD_PP_SPEECH_HOUSE, 1
 	warp_event 15,  7, GOLDENROD_NAME_RATER, 1
 	warp_event 24, 27, GOLDENROD_DEPT_STORE_1F, 1
-	warp_event 14, 21, GOLDENROD_GAME_CORNER, 1
+	warp_event 14, 21, GOLDENROD_GAME_CORNER, 2
 	warp_event  5, 15, RADIO_TOWER_1F, 1
 	warp_event 19,  1, ROUTE_35_GOLDENROD_GATE, 3
 	warp_event  9,  5, GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES, 8
