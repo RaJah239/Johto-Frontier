@@ -3152,6 +3152,20 @@ AI_Smart_Trick:
 	bit SUBSTATUS_SUBSTITUTE, a
 	jmp nz, StandardDiscourage
 
+; encourage using the move when the enemy has any of these items held
+	ld a, [wEnemyMonItem]
+	cp CHOICE_BAND
+	jmp z, DoIt
+	cp CHOICE_SPECS
+	jmp z, DoIt
+	cp FLAME_ORB
+	jmp z, DoIt
+	cp TOXIC_ORB
+	jmp z, DoIt
+	cp BLACK_SLUDGE
+	jmp z, DoIt
+	jmp StandardDiscourage
+
 AI_Smart_Attract:
 ; 90% chance to encourage this move during the first turn of player's Pokemon.
 ; otherwise discourage
