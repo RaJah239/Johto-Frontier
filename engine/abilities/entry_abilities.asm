@@ -18,6 +18,7 @@ EntryAbilities1:
 ; === Entrance Abilities 2 - Non-Link Mode ===
 ; ============================================
 EntryAbilities2NonLink:
+	call HandleNonLinkIntimidate
 	ret
 
 ; ==============
@@ -393,6 +394,7 @@ HandleIntimidate:
 	; fallthrough
 
 .do_check
+HandleNonLinkIntimidate:
 	; check if current pokemon has intimidate
 	call GetCurrentMon
 	ld hl, IntimidatePokemon
