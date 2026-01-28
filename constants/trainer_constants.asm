@@ -554,6 +554,9 @@ DEF KRIS EQU __trainer_class__
 	trainerclass MAXIMA
 	const MAXIMA1
 
+	trainerclass NURSE
+	const NURSE1
+
  	const_def
  	const RANDOMLIST_0
  	const RANDOMLIST_1

@@ -80,4 +80,5 @@ BTTrainerClassGenders:
 	db FEMALE ; ARIANA
 	db MALE   ; ARCHER
 	db MALE   ; MAXIMA
+	db FEMALE ; NURSE
 	assert_table_length NUM_TRAINER_CLASSES

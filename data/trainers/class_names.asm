@@ -78,4 +78,5 @@ TrainerClassNames::
 	li "Team Rocket"
 	li "Team Rocket"
 	li "<PKMN> Trainer"
+	li "Nurse"
 	assert_list_length NUM_TRAINER_CLASSES

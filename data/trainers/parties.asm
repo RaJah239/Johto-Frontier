@@ -233,3 +233,9 @@ PKMNTrainerGroup:
 	db "Self@", TRAINERTYPE_NORMAL
 	db 5, HO_OH
 	db -1 ; end
+
+NurseGroup:
+	; Joy (1)
+	db "Joy@", TRAINERTYPE_NORMAL
+	db 10, BLISSEY
+	db -1 ; end

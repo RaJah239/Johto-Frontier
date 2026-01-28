@@ -49,4 +49,5 @@ FemaleTrainers:
 	db AGATHA
 	db SCARLET
 	db ARIANA
+	db NURSE
 .End

@@ -79,4 +79,5 @@ TrainerClassDVs:
 	dn 15, 15, 15, 15 ; ARIANA
 	dn 15, 15, 15, 15 ; ARCHER
 	dn 15, 15, 15, 15 ; MAXIMA
+	dn 15, 15, 15, 15 ; NURSE
 	assert_table_length NUM_TRAINER_CLASSES
