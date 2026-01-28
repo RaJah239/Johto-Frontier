@@ -242,7 +242,7 @@ GetPartyCountWithoutEggs::
 	pop hl
 	ret
 
-UnusedMemoryGame:
+MemoryGame:
 	call CheckCoinsAndCoinCase
 	ret c
 	ld a, BANK(_MemoryGame)

@@ -328,7 +328,7 @@ GoldenrodGameCornerCardFlipMachineScript:
 
 GoldenrodGameCornerMemoryGameScript:
 	reanchormap
-	special UnusedMemoryGame
+	special MemoryGame
 	closetext
 	end
 

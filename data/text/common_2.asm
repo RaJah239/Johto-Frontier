@@ -1203,15 +1203,6 @@ _MemoryGameExtraTryText::
 	line "try!"
 	done
 
-_MemoryGameNoPrizeText::
-	text " ! No prize…"
-	done
-
-_MemoryGameGameOverCardText::
-	text " ! Game"
-	line "over…"
-	prompt
-
 _StartMenuContestEndText::
 	text "Would you like to"
 	line "end the Contest?"
