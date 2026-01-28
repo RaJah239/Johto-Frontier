@@ -4,11 +4,19 @@
 	const OAKSLAB_SCIENTIST2
 	const OAKSLAB_PORYGON_PC
 	const OAKSLAB_CHANSEY
+	const OAKSLAB_NAYRU62
 
 OaksLab_MapScripts:
 	def_scene_scripts
+	scene_script OaksLabNoop1Scene, SCENE_OAKS_LAB_NAYRU62
+	scene_script OaksLabFNoop2Scene, SCENE_OAKS_LAB_NOOP
 
 	def_callbacks
+
+OaksLabNoop1Scene:
+	; fallthrough
+OaksLabFNoop2Scene:
+	end
 
 Oak:
 	faceplayer
@@ -246,12 +254,223 @@ OaksLabPorygonPCScript:
 OaksLabChanseyScript:
 	jumpstd ChanseyHealsOWScript
 
+Nayru62CoordScript1:
+	turnobject PLAYER, LEFT
+	turnobject OAKSLAB_NAYRU62, RIGHT
+	showemote EMOTE_SHOCK, OAKSLAB_NAYRU62, 15
+	waitsfx
+	applymovement OAKSLAB_NAYRU62, OaksLabNayru62ApproachesMovement1
+	turnobject OAKSLAB_NAYRU62, DOWN
+	turnobject PLAYER, UP
+	opentext
+	writetext Nayru62IntroText
+	waitbutton
+	scall Nayru62Script
+	applymovement OAKSLAB_NAYRU62, OaksLabNayru62LeavesMovement1
+	setscene SCENE_OAKS_LAB_NOOP
+	end
+
+Nayru62CoordScript2:
+	turnobject PLAYER, LEFT
+	turnobject OAKSLAB_NAYRU62, RIGHT
+	showemote EMOTE_SHOCK, OAKSLAB_NAYRU62, 15
+	waitsfx
+	applymovement OAKSLAB_NAYRU62, OaksLabNayru62ApproachesMovement2
+	turnobject OAKSLAB_NAYRU62, DOWN
+	turnobject PLAYER, UP
+	opentext
+	writetext Nayru62IntroText
+	waitbutton
+	scall Nayru62Script
+	applymovement OAKSLAB_NAYRU62, OaksLabNayru62LeavesMovement2
+	setscene SCENE_OAKS_LAB_NOOP
+	end
+
+Nayru62Script:
+	faceplayer
+	opentext
+	checkevent EVENT_SHINY_CHARM_OBTAINED
+	iftrue .AreYouMakingingUseOfTheShinyCharm
+	writetext NayruHowsYourDexText
+	promptbutton
+	readvar VAR_DEXCAUGHT
+	ifequal 252, .PokedexCompleted
+	writetext NayruStillHaveABitMoreToCollectText
+	waitbutton
+	closetext
+	end
+
+.PokedexCompleted
+	closetext
+	playsound SFX_1ST_PLACE
+	pause 100
+	showemote EMOTE_SHOCK, OAKSLAB_NAYRU62, 15
+	turnobject OAKSLAB_NAYRU62, LEFT
+	turnobject OAKSLAB_NAYRU62, UP
+	turnobject OAKSLAB_NAYRU62, DOWN
+	turnobject OAKSLAB_NAYRU62, RIGHT
+	turnobject OAKSLAB_NAYRU62, LEFT
+	turnobject OAKSLAB_NAYRU62, UP
+	turnobject OAKSLAB_NAYRU62, DOWN
+	turnobject OAKSLAB_NAYRU62, RIGHT
+	turnobject OAKSLAB_NAYRU62, LEFT
+	turnobject OAKSLAB_NAYRU62, UP
+	turnobject OAKSLAB_NAYRU62, DOWN
+	turnobject OAKSLAB_NAYRU62, RIGHT
+	faceplayer
+	opentext
+	writetext Nayru62IncredibleJobText
+	promptbutton
+	verbosegiveitem SHINY_CHARM
+	writetext ShinyCharmExplanationText
+	setevent EVENT_SHINY_CHARM_OBTAINED
+	waitbutton
+	closetext
+	end
+
+.AreYouMakingingUseOfTheShinyCharm
+	writetext AreYouFindingUseOfTheShinyCharmText
+	waitbutton
+	closetext
+	end
+
+OaksLabNayru62ApproachesMovement1:
+	step RIGHT
+	step_end
+
+OaksLabNayru62LeavesMovement1:
+	step LEFT
+	step_end
+
+OaksLabNayru62ApproachesMovement2:
+	step RIGHT
+	step RIGHT
+	step_end
+
+OaksLabNayru62LeavesMovement2:
+	step LEFT
+	step LEFT
+	step_end
+
+Nayru62IntroText:
+	text "<PLAY_G>! Prof.Oak"
+	line "has told me loads"
+	cont "about you!"
+
+	para "He's mighty proud"
+	line "of you!"
+
+	para "I've not introduced"
+	line "myself yet!"
+
+	para "I'm Nayru62!"
+
+	para "I'm the one who"
+	line "upgraded the Prof's"
+	cont "#dex that you"
+	cont "have been using."
+	
+	para "His previous need-"
+	line "ed some augments."
+	
+	para "What? You've really"
+	line "enjoyed it!?"
+	
+	para "Well, I'm thrilled!"
+	
+	para "Say, if you record"
+	line "the data of all"
+	
+	para "252 #mon on it,"
+	line "come see me. Wait,"
+	cont "let's check now?"
+	done
+
+NayruHowsYourDexText:
+	text "Nayru62: Have you"
+	line "registered all 252"
+	cont "#mon yet?"
+	done
+
+NayruStillHaveABitMoreToCollectText:
+	text "Seems like you've"
+	line "a bit more to go."
+	
+	para "Come visit me when"
+	line "it's completed."
+	
+	para "I'll have a gift"
+	line "for you then."
+	
+	para "In the meantime,"
+	line "work hard on it!"
+	
+	para "I'm cheering for"
+	line "you!"
+	done
+
+Nayru62IncredibleJobText:
+	text "OH MY!!!"
+	
+	para "This is incredibly"
+	line "rare and amazing!"
+	
+	para "Fantastic job on"
+	line "your endeavor!"
+	
+	para "I know it must've"
+	line "taken you a long"
+	
+	para "time to accomplish"
+	line "this feat!"
+	
+	para "I have this item"
+	line "for you! Take it!"
+	done
+	
+ShinyCharmExplanationText:
+	text "That's the one and"
+	line "only Shiny Charm!"
+	
+	para "With this item in"
+	line "your bag, the odds"
+	
+	para "of finding a shiny"
+	line "#mon jumps to"
+	
+	para "3.125<%> per"
+	line "encounter!"
+	
+	para "Isn't that just"
+	line "awesome! Have fun"
+	cont "shiny hunting!"
+	done
+
+AreYouFindingUseOfTheShinyCharmText:
+	text "Nayru62: Why hello"
+	line "there <PLAY_G>."
+	
+	para "Making use of the"
+	line "Shiny Charm?"
+	
+	para "Recall, with it in"
+	line "your bag, there's"
+	
+	para "a 3.125<%> chance"
+	line "to find a"
+	
+	para "Shiny #mon"
+	line "per encounter!"
+	done
+
 OaksLab_MapEvents:
 	def_warp_events
 	warp_event  4, 11, PALLET_TOWN, 1
 	warp_event  5, 11, PALLET_TOWN, 1
 
 	def_coord_events
+	coord_event  4,  6, SCENE_OAKS_LAB_NAYRU62, Nayru62CoordScript1
+	coord_event  5,  6, SCENE_OAKS_LAB_NAYRU62, Nayru62CoordScript2
 
 	def_bg_events
 	bg_event  6,  1, BGEVENT_READ, OaksLabBookshelf
@@ -277,3 +496,4 @@ OaksLab_MapEvents:
 	object_event  7,  8, SPRITE_SCIENTIST, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, OaksAssistant2Script, -1
 	object_event  0,  4, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, OaksLabPorygonPCScript, -1
 	object_event  8,  4, SPRITE_CHANSEY_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, OaksLabChanseyScript, -1
+	object_event  3,  5, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Nayru62Script, EVENT_OAKSLAB_NAYRU62

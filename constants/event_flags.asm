@@ -54,8 +54,8 @@
 	const EVENT_GOT_TOGEPI_EGG_FROM_ELMS_AIDE
 	const EVENT_MADE_UNOWN_APPEAR_IN_RUINS
 	const EVENT_MET_NURSE_JOY
-	const_skip
-	const_skip
+	const EVENT_SHINY_CHARM_OBTAINED
+	const EVENT_OAKSLAB_NAYRU62
 	const_skip
 	const_skip
 	const_skip
