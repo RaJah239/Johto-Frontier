@@ -1,12 +1,12 @@
-	db MEGANIUM ; 154
+	db MEGANIUM ; 9
 
-	db  80,  82, 100,  80,  83, 100
-	evs  0,   0,   1,   0,   0,   2
 	;   hp  atk  def  spd  sat  sdf
+	db 100, 100, 100,  73,  62, 100 ; 535 BST
+	evs  2,   2,   2,   1,   1,   2
 
-	db GRASS, GRASS ; type
+	db GRASS, FAIRY ; type
 	db 45 ; catch rate
-	db 208 ; base exp
+	db 100 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch

@@ -1,12 +1,12 @@
-	db CHIKORITA ; 152
+	db CHIKORITA ; 7
 
-	db  45,  49,  65,  45,  49,  65
-	evs  0,   0,   0,   0,   0,   1
 	;   hp  atk  def  spd  sat  sdf
+	db  50,  49,  65,  40,  40,  65 ; 309 BST
+	evs  0,   0,   1,   0,   0,   1
 
-	db GRASS, GRASS ; type
+	db GRASS, FAIRY ; type
 	db 45 ; catch rate
-	db 64 ; base exp
+	db 57 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch

@@ -1,12 +1,12 @@
-	db BAYLEEF ; 153
+	db BAYLEEF ; 8
 
-	db  60,  62,  80,  60,  63,  80
-	evs  0,   0,   1,   0,   0,   1
 	;   hp  atk  def  spd  sat  sdf
+	db  70,  75,  80,  50,  50,  80
+	evs  1,   0,   1,   0,   0,   1 ; 405 BST
 
-	db GRASS, GRASS ; type
+	db GRASS, FAIRY ; type
 	db 45 ; catch rate
-	db 141 ; base exp
+	db 75 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
