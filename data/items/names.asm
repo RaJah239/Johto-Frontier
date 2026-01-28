@@ -40,7 +40,7 @@ ItemNames::
 	li "Full Heal"
 	li "Revive"
 	li "Max Revive"
-	li "Guard Spec."
+	li "Zoom Lens"
 	li "Super Repel"
 	li "Max Repel"
 	li "Dire Hit"

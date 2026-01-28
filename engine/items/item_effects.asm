@@ -54,7 +54,7 @@ ItemEffects:
 	dw StatusHealingEffect ; FULL_HEAL
 	dw ReviveEffect        ; REVIVE
 	dw ReviveEffect        ; MAX_REVIVE
-	dw GuardSpecEffect     ; GUARD_SPEC
+	dw NoEffect            ; ZOOM_LENS
 	dw SuperRepelEffect    ; SUPER_REPEL
 	dw MaxRepelEffect      ; MAX_REPEL
 	dw DireHitEffect       ; DIRE_HIT
@@ -2260,13 +2260,6 @@ PokeDollEffect:
 	xor a
 	ld [wItemEffectSucceeded], a
 	ret
-
-GuardSpecEffect:
-	ld hl, wPlayerSubStatus4
-	bit SCREENS_MIST, [hl]
-	jmp nz, WontHaveAnyEffect_NotUsedMessage
-	set SCREENS_MIST, [hl]
-	jmp UseItemText
 
 DireHitEffect:
 	ld hl, wPlayerSubStatus4

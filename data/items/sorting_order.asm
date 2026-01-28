@@ -151,7 +151,6 @@ ItemNameOrder:
 ; Battle Pocket - 54 total
 
 ; Stat altering Battle Items
-	db GUARD_SPEC
 	db DIRE_HIT
 	db X_ACCURACY
 	db X_ATTACK
@@ -208,6 +207,7 @@ ItemNameOrder:
 	db WEATHER_ROCK
 	db WIDE_LENS
 	db WISE_GLASSES
+	db ZOOM_LENS
 
 
 

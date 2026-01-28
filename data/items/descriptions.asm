@@ -41,7 +41,7 @@ ItemDescriptions:
 	dw FullHealDesc
 	dw ReviveDesc
 	dw MaxReviveDesc
-	dw GuardSpecDesc
+	dw ZoomLensDesc
 	dw SuperRepelDesc
 	dw MaxRepelDesc
 	dw DireHitDesc
@@ -420,9 +420,9 @@ MaxReviveDesc:
 	db   "Fully restores a"
 	next "fainted #MON.@"
 
-GuardSpecDesc:
-	db   "Prevents stats"
-	next "reduction. (1 BTL)@"
+ZoomLensDesc:
+	db   "Boosts accuracy by"
+	next "20<%> if going 2nd.@"
 
 SuperRepelDesc:
 	db   "Repels weak #-"
@@ -661,7 +661,7 @@ BlackGlassesDesc:
 
 WideLensDesc:
 	db   "Boosts accuracy by"
-	next "10<%>. (Hold)@"
+	next "10<%>.@"
 
 PinkBowDesc:
 	db   "Powers up normal-"

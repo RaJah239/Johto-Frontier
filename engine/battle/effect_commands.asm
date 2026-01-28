@@ -1750,11 +1750,17 @@ BattleCommand_CheckHit:
 	call GetUserItem
 	pop bc
 	ld a, [hl]
+	cp ZOOM_LENS
+	jr z, .zoom_lens
 	cp WIDE_LENS
 	ret nz
+	jmp Add10PercentToB
 
-	call Add10PercentToB
-	ret
+.zoom_lens
+; Only works if user goes second
+	farcall CheckOpponentWentFirst
+	ret z
+	jmp Add20PercentToB
 
 .StatModifiers:
 	; load the user's accuracy into b and the opponent's evasion into c.
@@ -1913,6 +1919,29 @@ Add10PercentToB:
 	call SimpleDivide ; Divide a by c. Return quotient b and remainder a.
 	cp 5 ; We use the remainder to round the quotient.
 	ld a, b ; Saves the quotient in A.
+	pop bc
+	jr c, .floor
+
+	; ceil
+	inc a
+
+.floor
+	add b
+	ld b, a
+	ret nc
+
+	ld b, $ff ; Prevent overflow.
+	ret
+
+; Input: percentage in B.
+; Output: B *= 1.2. A clobbered.
+Add20PercentToB:
+	ld a, b
+	push bc
+	ld c, 5
+	call SimpleDivide ; Divide a by c. Return quotient b and remainder a.
+	cp 3 ; round if remainder >= 3 (half of 5)
+	ld a, b ; quotient
 	pop bc
 	jr c, .floor
 

@@ -580,7 +580,6 @@ AI_Items:
 	dbw POTION,       .Potion
 	dbw X_ACCURACY,   .XAccuracy
 	dbw FULL_HEAL,    .FullHeal
-	dbw GUARD_SPEC,   .GuardSpec
 	dbw DIRE_HIT,     .DireHit
 	dbw X_ATTACK,     .XAttack
 	dbw X_DEFEND,     .XDefend
@@ -690,10 +689,10 @@ AI_Items:
 
 .SuperPotion:
 	call .HealItem
-	jmp c, .DontUse
+	jr c, .DontUse
 	ld b, 50
 	call EnemyUsedSuperPotion
-	jmp .Use
+	jr .Use
 
 .Potion:
 	call .HealItem
@@ -706,12 +705,6 @@ AI_Items:
 	call .XItem
 	jr c, .DontUse
 	call EnemyUsedXAccuracy
-	jr .Use
-
-.GuardSpec:
-	call .XItem
-	jr c, .DontUse
-	call EnemyUsedGuardSpec
 	jr .Use
 
 .DireHit:
@@ -917,13 +910,6 @@ EnemyUsedXAccuracy:
 	ld hl, wEnemySubStatus4
 	set SUBSTATUS_X_ACCURACY, [hl]
 	ld a, X_ACCURACY
-	jr PrintText_UsedItemOn_AND_AIUpdateHUD
-
-EnemyUsedGuardSpec:
-	call AIUsedItemSound
-	ld hl, wEnemySubStatus4
-	set SCREENS_MIST, [hl]
-	ld a, GUARD_SPEC
 	jr PrintText_UsedItemOn_AND_AIUpdateHUD
 
 EnemyUsedDireHit:
