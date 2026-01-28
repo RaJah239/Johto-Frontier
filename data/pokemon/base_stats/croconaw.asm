@@ -1,12 +1,12 @@
-	db CROCONAW ; 159
+	db CROCONAW ; 5
 
-	db  65,  80,  80,  58,  59,  63
-	evs  0,   1,   1,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
+	db  65,  80,  80,  58,  59,  63 ; 405 BST
+	evs  1,   1,   1,   0,   0,   1
 
-	db WATER, WATER ; type
+	db WATER, DARK ; type
 	db 45 ; catch rate
-	db 143 ; base exp
+	db 75 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch

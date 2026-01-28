@@ -1,12 +1,12 @@
-	db FERALIGATR ; 160
+	db FERALIGATR ; 6
 
-	db  85, 105, 100,  78,  79,  83
-	evs  0,   2,   1,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
+	db  85, 110, 100,  78,  79,  83 ; 535 BST
+	evs  1,   2,   2,   1,   1,   1
 
-	db WATER, WATER ; type
+	db WATER, DARK ; type
 	db 45 ; catch rate
-	db 210 ; base exp
+	db 100 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
