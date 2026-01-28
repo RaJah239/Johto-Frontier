@@ -266,7 +266,7 @@ ENDM
 	map_const TIN_TOWER_ROOF,                              10,  9 ; 12
 	endgroup
 
-	newgroup INDIGO                                               ; 16
+	newgroup INDIGO                                               ;  9
 	map_const ROUTE_23,                                    10,  9 ;  1
 	map_const INDIGO_PLATEAU_POKECENTER_1F,                 9,  7 ;  2
 	map_const WILLS_ROOM,                                   5,  9 ;  3
@@ -275,6 +275,7 @@ ENDM
 	map_const KARENS_ROOM,                                  5,  9 ;  6
 	map_const LANCES_ROOM,                                  5, 12 ;  7
 	map_const HALL_OF_FAME,                                 5,  7 ;  8
+	map_const NURSE_JOYS_TRAINING_ACADEMY,                  6,  5 ;  9
 	endgroup
 
 	newgroup FUCHSIA                                              ; 17

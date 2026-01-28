@@ -343,7 +343,7 @@ INCLUDE "maps/PalletTown.asm"
 INCLUDE "maps/Route23.asm"
 INCLUDE "maps/SilverCavePokecenter1F.asm"
 INCLUDE "maps/Route39_SilverCaveGate.asm"
-
+INCLUDE "maps/NurseJoyTrainingAcademy.asm"
 
 SECTION "Map Scripts 25", ROMX
 

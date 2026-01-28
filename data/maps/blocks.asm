@@ -57,6 +57,9 @@ Route46_Blocks:
 Route38_Blocks:
 	INCBIN "maps/Route38.blk"
 
+NurseJoyTrainingAcademy_Blocks:
+	INCBIN "maps/NurseJoyTrainingAcademy.blk"
+
 OlivineTimsHouse_Blocks:
 OlivinePunishmentSpeechHouse_Blocks:
 OlivineGoodRodHouse_Blocks:

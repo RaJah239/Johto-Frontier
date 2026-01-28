@@ -39,6 +39,7 @@ Route23_MapEvents:
 	warp_event 10,  5, INDIGO_PLATEAU_POKECENTER_1F, 2
 	warp_event  9, 13, VICTORY_ROAD, 10
 	warp_event 10, 13, VICTORY_ROAD, 10
+	warp_event 13,  9, NURSE_JOYS_TRAINING_ACADEMY, 1
 
 	def_coord_events
 

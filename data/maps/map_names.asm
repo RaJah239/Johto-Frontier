@@ -312,8 +312,9 @@ Indigo_Map_Names: ;newgroup INDIGO
 	dw Indigo_Map_Name4 ; map_const KOGAS_ROOM ;  4
 	dw Indigo_Map_Name5 ; map_const BRUNOS_ROOM ;  5
 	dw Indigo_Map_Name6 ; map_const KARENS_ROOM ;  6
-	dw Indigo_Map_Name7 ; map_const LANCES_ROOM,                                  5, 12 ;  7
+	dw Indigo_Map_Name7 ; map_const LANCES_ROOM ; 7
 	dw Indigo_Map_Name8 ; map_const HALL_OF_FAME ;  8
+	dw Indigo_Map_Name9 ; map_const NURSE_JOYS_TRAINING_ACADEMY ; 9
 	assert_table_length NUM_INDIGO_MAPS
 
 Fuchsia_Map_Names: ;newgroup FUCHSIA
@@ -819,8 +820,9 @@ Indigo_Map_Name6: ; map_const KARENS_ROOM ;  6
 Indigo_Map_Name7: ; map_const LANCES_ROOM,;  7
 	db "Champion's Room@"
 Indigo_Map_Name8: ; map_const HALL_OF_FAME ;  8
-	db "E4 Hall Of Fame@"                                           ; 17
-
+	db "E4 Hall Of Fame@"
+Indigo_Map_Name9: ; map_const NURSE_JOYS_TRAINING_ACADEMY ; 9
+	db "Joy's Academy@"
 
 Silver_Map_Name1: ; map_const SILVER_CAVE_OUTSIDE;  1
 	db "Mt. Silver@"
