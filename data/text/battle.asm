@@ -1,5 +1,13 @@
 BattleText:: ; used only for BANK(BattleText)
 
+BattleText_TargetHurtByItem:
+	text "<USER>"
+	line "was hurt by"
+	cont "@"
+	text_ram wStringBuffer1
+	text "."
+	prompt
+
 BattleText_QuickClaw:
 	text "<USER>'s"
 	line "Quick Claw procs!"

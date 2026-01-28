@@ -135,7 +135,7 @@ ItemDescriptions:
 	dw StarPieceDesc
 	dw BasementKeyDesc
 	dw ShinyBallDesc
-	dw TeruSama9Desc
+	dw BlackSludgeDesc
 	dw ShinyCharmDesc
 	dw ZincDesc
 	dw CharcoalDesc
@@ -786,8 +786,9 @@ ShinyBallDesc:
 	db   "The caught #mon"
 	next "becomes shiny.@"
 
-TeruSama9Desc:
-	db   "?@"
+BlackSludgeDesc:
+	db   "Heal poison-types."
+	next "Hurt others.@"
 
 ShinyCharmDesc:
 	db "Raises chance of"

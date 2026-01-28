@@ -96,7 +96,7 @@ DEF MAIL_STRUCT_LENGTH_JP EQU $2a ; mailmsg_jp struct
 	const HELD_HEAL_CONFUSION
 
 	const_next 20
-	const_skip
+	const HELD_BLACK_SLUDGE
 	const_skip
 	const_skip
 	const_skip

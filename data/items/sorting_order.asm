@@ -148,7 +148,7 @@ ItemNameOrder:
 
 
 ; NEXT POCKET
-; Battle Pocket - 54 total
+; Battle Pocket - 55 total
 
 ; Stat altering Battle Items
 	db DIRE_HIT
@@ -162,6 +162,7 @@ ItemNameOrder:
 	db AMULET_COIN
 	db ASSAULT_VEST
 	db BERRY_JUICE
+	db BLACK_SLUDGE
 	db BLACKBELT_I
 	db BLACKGLASSES
 	db BRIGHTPOWDER
@@ -277,9 +278,8 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 17 total
+; Unused Items - 16 total
 	db EGG_TICKET
-	db ITEM_87
 	db ITEM_9B
 	db ITEM_AB
 	db ITEM_C3
