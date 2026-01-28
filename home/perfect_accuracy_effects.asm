@@ -48,4 +48,6 @@ PerfectAccuracyEffects::
   db EFFECT_DRAGON_DANCE
   db EFFECT_QUIVER_DANCE
   db EFFECT_BARRIER
+  db EFFECT_TRICK_ROOM
+  db EFFECT_FURY_DRIVE
   db -1 ; end
