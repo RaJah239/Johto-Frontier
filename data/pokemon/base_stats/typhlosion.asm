@@ -1,12 +1,12 @@
-	db TYPHLOSION ; 157
+	db TYPHLOSION ; 3
 
-	db  78,  84,  78, 100, 109,  85
-	evs  0,   0,   0,   0,   3,   0
 	;   hp  atk  def  spd  sat  sdf
+	db  76, 104,  71, 109, 104,  71 ; 535 BST
+	evs  1,   2,   1,   2,   2,   1
 
-	db FIRE, FIRE ; type
+	db FIRE, GROUND ; type
 	db 45 ; catch rate
-	db 209 ; base exp
+	db 100 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch

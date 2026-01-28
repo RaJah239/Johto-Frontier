@@ -1,12 +1,12 @@
-	db CYNDAQUIL ; 155
+	db CYNDAQUIL ; 1
 
-	db  39,  52,  43,  65,  60,  50
-	evs  0,   0,   0,   1,   0,   0
 	;   hp  atk  def  spd  sat  sdf
+	db  44,  58,  44,  61,  58,  44 ; 309 BST
+	evs  0,   0,   0,   1,   0,   0
 
-	db FIRE, FIRE ; type
+	db FIRE, GROUND ; type
 	db 45 ; catch rate
-	db 65 ; base exp
+	db 57 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
