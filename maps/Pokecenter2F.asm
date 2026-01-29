@@ -943,6 +943,26 @@ Text_BrokeStadiumRules:
 	line "when you're ready."
 	done
 
+Pokecenter2FLinkExtraSign:
+	jumptext EntryAbilitiesExtraText
+
+EntryAbilitiesExtraText:
+	text "Note: All"
+	line "entry abilities"
+	cont "aside from the"
+	cont "following:"
+	cont "Spin Guard,"
+	cont "Drizzle,"
+	cont "Drought,"
+	cont "Sandstream,"
+	cont "Snow Warning,"
+	cont "Natural Cure"
+	cont "and Seed Fall"
+	cont "work at the end"
+	cont "of Turn 1 in"
+	cont "Linked Battles."
+	done
+
 Pokecenter2F_MapEvents:
 	def_warp_events
 	warp_event  0,  7, POKECENTER_2F, -1
@@ -956,6 +976,7 @@ Pokecenter2F_MapEvents:
 
 	def_bg_events
 	bg_event  7,  3, BGEVENT_READ, Pokecenter2FLinkRecordSign
+	bg_event 11,  3, BGEVENT_READ, Pokecenter2FLinkExtraSign
 
 	def_object_events
 	object_event  5,  2, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, LinkReceptionistScript_Trade, -1
