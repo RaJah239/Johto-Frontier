@@ -150,9 +150,6 @@ ItemNameOrder:
 ; NEXT POCKET
 ; Battle Pocket - 55 total
 
-; Stat altering Battle Items
-	db X_ACCURACY
-
 ; Battle related Held Items
 	db AMULET_COIN
 	db ASSAULT_VEST
@@ -208,6 +205,7 @@ ItemNameOrder:
 	db WEATHER_ROCK
 	db WIDE_LENS
 	db WISE_GLASSES
+	db X_ACCURACY
 	db ZOOM_LENS
 
 

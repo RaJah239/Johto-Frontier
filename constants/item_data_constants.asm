@@ -105,7 +105,7 @@ DEF MAIL_STRUCT_LENGTH_JP EQU $2a ; mailmsg_jp struct
 
 	const_next 30
 	const HELD_MUSCLE_BAND
-	const_skip
+	const HELD_ACCURACY_UP
 	const_skip
 	const_skip
 	const_skip

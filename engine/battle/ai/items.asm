@@ -578,7 +578,6 @@ AI_Items:
 	dbw HYPER_POTION, .HyperPotion
 	dbw SUPER_POTION, .SuperPotion
 	dbw POTION,       .Potion
-	dbw X_ACCURACY,   .XAccuracy
 	dbw FULL_HEAL,    .FullHeal
 	db -1 ; end
 
@@ -631,20 +630,20 @@ AI_Items:
 
 .UseFullRestore:
 	call EnemyUsedFullRestore
-	jmp .Use
+	jr .Use
 
 .MaxPotion:
 	call .HealItem
-	jmp c, .DontUse
+	jr c, .DontUse
 	call EnemyUsedMaxPotion
-	jmp .Use
+	jr .Use
 
 .HealItem:
 	ld a, [bc]
 	bit CONTEXT_USE_F, a
 	jr nz, .CheckHalfOrQuarterHP
 	callfar AICheckEnemyHalfHP
-	jmp c, .DontUse
+	jr c, .DontUse
 	ld a, [bc]
 	bit UNKNOWN_USE_F, a
 	jr nz, .CheckQuarterHP
@@ -653,7 +652,7 @@ AI_Items:
 	call Random
 	cp 50 percent + 1
 	jr c, .UseHealItem
-	jmp .DontUse
+	jr .DontUse
 
 .CheckQuarterHP:
 	callfar AICheckEnemyQuarterHP
@@ -696,38 +695,6 @@ AI_Items:
 	call EnemyUsedPotion
 	jr .Use
 
-.XAccuracy:
-	call .XItem
-	jr c, .DontUse
-	call EnemyUsedXAccuracy
-	jr .Use
-
-.XItem:
-	ld a, [wEnemyTurnsTaken]
-	and a
-	jr nz, .notfirstturnout
-	ld a, [bc]
-	bit ALWAYS_USE_F, a
-	jr nz, .Use
-	call Random
-	cp 50 percent + 1
-	jr c, .DontUse
-	ld a, [bc]
-	bit CONTEXT_USE_F, a
-	jr nz, .Use
-	call Random
-	cp 50 percent + 1
-	jr c, .DontUse
-	jr .Use
-.notfirstturnout
-	ld a, [bc]
-	bit ALWAYS_USE_F, a
-	jr z, .DontUse
-	call Random
-	cp 20 percent - 1
-	jr nc, .DontUse
-	jr .Use
-
 .DontUse:
 	scf
 	ret
@@ -735,7 +702,6 @@ AI_Items:
 .Use:
 	and a
 	ret
-
 AIUpdateHUD:
 	call UpdateEnemyMonInParty
 	farcall UpdateEnemyHUD
@@ -869,13 +835,6 @@ AI_HealStatus:
 	ld hl, wEnemySubStatus5
 	res SUBSTATUS_TOXIC, [hl]
 	ret
-
-EnemyUsedXAccuracy:
-	call AIUsedItemSound
-	ld hl, wEnemySubStatus4
-	set SUBSTATUS_X_ACCURACY, [hl]
-	ld a, X_ACCURACY
-	jr PrintText_UsedItemOn_AND_AIUpdateHUD
 
 ; Parameter
 ; a = ITEM_CONSTANT

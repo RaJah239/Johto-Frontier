@@ -17,4 +17,5 @@ ConsumableEffects:
 	db HELD_SET_SUN
 	db HELD_SET_SAND
 	db HELD_SET_HAIL
+	db HELD_ACCURACY_UP
 	db -1 ; end

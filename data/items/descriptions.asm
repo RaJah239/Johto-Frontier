@@ -388,10 +388,6 @@ RareCandyDesc:
 	db   "Raises level of a"
 	next "#MON by one.@"
 
-XAccuracyDesc:
-	db   "Raises accuracy."
-	next "(1 BTL)@"
-
 LeafStoneDesc:
 	db   "Evolves certain"
 	next "kinds of #MON.@"
@@ -466,6 +462,10 @@ DonphanCallDesc:
 
 HasteHerbDesc:
 	db   "Raises Speed at"
+	next "end of turn 1.@"
+
+XAccuracyDesc:
+	db   "Raises accuracy at"
 	next "end of turn 1.@"
 
 CoinCaseDesc:
