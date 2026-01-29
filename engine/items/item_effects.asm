@@ -66,7 +66,7 @@ ItemEffects:
 	dw DonphanCallEffect   ; DONPHAN_CALL
 	dw NoEffect            ; SUN_SHARD
 	dw NoEffect            ; HASTE_HERB
-	dw XItemEffect         ; X_SPECIAL
+	dw NoEffect            ; SAND_SHARD
 	dw CoinCaseEffect      ; COIN_CASE
 	dw ItemfinderEffect    ; ITEMFINDER
 	dw NoEffect            ; LIGHT_CLAY
@@ -2267,40 +2267,6 @@ DireHitEffect:
 	jmp nz, WontHaveAnyEffect_NotUsedMessage
 	set SUBSTATUS_FOCUS_ENERGY, [hl]
 	jmp UseItemText
-
-XItemEffect:
-	call UseItemText
-
-	ld a, [wCurItem]
-	ld hl, XItemStats
-
-.loop
-	cp [hl]
-	jr z, .got_it
-	inc hl
-	inc hl
-	jr .loop
-
-.got_it
-	inc hl
-	ld b, [hl]
-	xor a
-	ldh [hBattleTurn], a
-	ld [wAttackMissed], a
-	ld [wEffectFailed], a
-	farcall RaiseStat
-	call WaitSFX
-
-	farcall BattleCommand_StatUpMessage
-	farcall BattleCommand_StatUpFailText
-
-	ld a, [wCurBattleMon]
-	ld [wCurPartyMon], a
-	ld c, HAPPINESS_USEDXITEM
-	farcall ChangeHappiness
-	ret
-
-INCLUDE "data/items/x_stats.asm"
 
 BlueCardEffect:
 	ld hl, .BlueCardBalanceText

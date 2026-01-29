@@ -58,7 +58,7 @@
 	const DONPHAN_CALL ; 32
 	const SUN_SHARD    ; 33
 	const HASTE_HERB   ; 34
-	const X_SPECIAL    ; 35
+	const SAND_SHARD   ; 35
 	const COIN_CASE    ; 36
 	const ITEMFINDER   ; 37
 	const LIGHT_CLAY   ; 38

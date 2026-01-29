@@ -581,7 +581,6 @@ AI_Items:
 	dbw X_ACCURACY,   .XAccuracy
 	dbw FULL_HEAL,    .FullHeal
 	dbw DIRE_HIT,     .DireHit
-	dbw X_SPECIAL,    .XSpecial
 	db -1 ; end
 
 .FullHeal:
@@ -667,7 +666,7 @@ AI_Items:
 
 .CheckHalfOrQuarterHP:
 	callfar AICheckEnemyHalfHP
-	jmp c, .DontUse
+	jr c, .DontUse
 	callfar AICheckEnemyQuarterHP
 	jr nc, .UseHealItem
 	call Random
@@ -708,12 +707,6 @@ AI_Items:
 	call .XItem
 	jr c, .DontUse
 	call EnemyUsedDireHit
-	jr .Use
-
-.XSpecial:
-	call .XItem
-	jr c, .DontUse
-	call EnemyUsedXSpecial
 	jr .Use
 
 .XItem:
@@ -897,21 +890,6 @@ EnemyUsedDireHit:
 	set SUBSTATUS_FOCUS_ENERGY, [hl]
 	ld a, DIRE_HIT
 	jr PrintText_UsedItemOn_AND_AIUpdateHUD
-
-EnemyUsedXSpecial:
-	ld b, SP_ATTACK
-	ld a, X_SPECIAL
-
-; Parameter
-; a = ITEM_CONSTANT
-; b = BATTLE_CONSTANT (ATTACK, DEFENSE, SPEED, SP_ATTACK, SP_DEFENSE, ACCURACY, EVASION)
-EnemyUsedXItem:
-	ld [wCurEnemyItem], a
-	push bc
-	call PrintText_UsedItemOn
-	pop bc
-	farcall RaiseStat
-	jmp AIUpdateHUD
 
 ; Parameter
 ; a = ITEM_CONSTANT

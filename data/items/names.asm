@@ -52,7 +52,7 @@ ItemNames::
 	li "Donphan Call"
 	li "Sun Shard"
 	li "Haste Herb"
-	li "X Special"
+	li "Sand Shard"
 	li "Coin Case"
 	li "ItemFinder"
 	li "Light Clay"

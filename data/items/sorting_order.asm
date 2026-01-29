@@ -153,7 +153,6 @@ ItemNameOrder:
 ; Stat altering Battle Items
 	db DIRE_HIT
 	db X_ACCURACY
-	db X_SPECIAL
 
 ; Battle related Held Items
 	db AMULET_COIN
@@ -200,6 +199,7 @@ ItemNameOrder:
 	db SOFT_SAND
 	db SPELL_TAG
 	db STICK
+	db SAND_SHARD
 	db SUN_SHARD
 	db THICK_CLUB
 	db TOXIC_ORB

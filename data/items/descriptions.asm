@@ -53,7 +53,7 @@ ItemDescriptions:
 	dw DonphanCallDesc
 	dw SunShardDesc
 	dw HasteHerbDesc
-	dw XSpecialDesc
+	dw SandShardDesc
 	dw CoinCaseDesc
 	dw ItemfinderDesc
 	dw LightClayDesc
@@ -456,6 +456,10 @@ SunShardDesc:
 	db   "Sets 8 turn sun"
 	next "at end of turn 1.@"
 
+SandShardDesc:
+	db   "EOT: Sets 8 turn"
+	next "Sandstorm.@"
+
 DonphanCallDesc:
 	db   "Calls a DONPHAN to"
 	next "move boulders.@"
@@ -463,10 +467,6 @@ DonphanCallDesc:
 HasteHerbDesc:
 	db   "Raises Speed at"
 	next "end of turn 1.@"
-
-XSpecialDesc:
-	db   "Raises SPECIAL"
-	next "ATTACK. (1 BTL)@"
 
 CoinCaseDesc:
 	db   "Holds up to 9,999"

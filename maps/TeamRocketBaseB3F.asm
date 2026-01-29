@@ -206,7 +206,7 @@ TeamRocketBaseB3FProtein:
 	itemball PROTEIN
 
 TeamRocketBaseB3FXSpecial:
-	itemball X_SPECIAL
+	itemball SAND_SHARD
 
 TeamRocketBaseB3FFullHeal:
 	itemball FULL_HEAL

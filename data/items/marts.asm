@@ -105,8 +105,7 @@ MartGoldenrod2F2:
 	db -1 ; end
 
 MartGoldenrod3F:
-	db 3 ; # items
-	db X_SPECIAL
+	db 2 ; # items
 	db DIRE_HIT
 	db X_ACCURACY
 	db -1 ; end
@@ -252,10 +251,9 @@ MartCeladon4F:
 	db -1 ; end
 
 MartCeladon5F2:
-	db 3 ; # items
+	db 2 ; # items
 	db X_ACCURACY
 	db DIRE_HIT
-	db X_SPECIAL
 	db -1 ; end
 
 MartMtMoon:

@@ -7,7 +7,6 @@ MysteryGiftItems:
 	db PSNCUREBERRY
 	db BITTER_BERRY
 	db DIRE_HIT
-	db X_SPECIAL
 	db X_ACCURACY
 	db EON_MAIL
 	db MORPH_MAIL
