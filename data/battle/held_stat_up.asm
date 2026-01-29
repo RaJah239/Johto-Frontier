@@ -1,6 +1,7 @@
 HeldStatUpItems:
-	dbw HELD_SPEED_UP,        BattleCommand_SpeedUp
+	dbw HELD_SPEED_UP,      BattleCommand_SpeedUp
 	dbw HELD_ACCURACY_UP,   BattleCommand_AccuracyUp
+	dbw HELD_EVASION_UP,    BattleCommand_EvasionUp
 	db -1 ; end
 
 HeldWeatherItems:

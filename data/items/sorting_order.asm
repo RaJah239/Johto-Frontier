@@ -148,7 +148,7 @@ ItemNameOrder:
 
 
 ; NEXT POCKET
-; Battle Pocket - 55 total
+; Battle Pocket - 56 total
 
 ; Battle related Held Items
 	db AMULET_COIN
@@ -206,6 +206,7 @@ ItemNameOrder:
 	db WIDE_LENS
 	db WISE_GLASSES
 	db X_ACCURACY
+	db X_EVADE
 	db ZOOM_LENS
 
 
@@ -276,10 +277,9 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 16 total
+; Unused Items - 15 total
 	db EGG_TICKET
 	db ITEM_9B
-	db ITEM_AB
 	db ITEM_C3
  	db ITEM_DC
  	db ITEM_DE

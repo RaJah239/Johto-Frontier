@@ -171,7 +171,7 @@ ItemDescriptions:
 	dw GorgeousBoxDesc
 	dw SunStoneDesc
 	dw PolkadotBowDesc
-	dw TeruSama22Desc
+	dw XEvadeDesc
 	dw UpGradeDesc
 	dw BerryDesc
 	dw GoldBerryDesc
@@ -462,6 +462,10 @@ DonphanCallDesc:
 
 HasteHerbDesc:
 	db   "Raises Speed at"
+	next "end of turn 1.@"
+
+XEvadeDesc:
+	db   "Raises Evasion at"
 	next "end of turn 1.@"
 
 XAccuracyDesc:
@@ -922,9 +926,6 @@ SunStoneDesc:
 PolkadotBowDesc:
 	db   "Powers up fairy-"
 	next "type moves. (HOLD)@"
-
-TeruSama22Desc:
-	db   "?@"
 
 UpGradeDesc:
 	db   "A mysterious box"
