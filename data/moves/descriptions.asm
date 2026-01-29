@@ -396,7 +396,7 @@ FlamethrowerDescription:
 	line "inflict a burn.@"
 
 MistDescription:
-	db   "5 Turns: Prevent"
+	db   "Priority: Prevent"
 	line "stat reduction.@"
 
 SurfDescription:
@@ -588,8 +588,8 @@ LightScreenDescription:
 	line "a wall of light.@"
 
 HazeDescription:
-	db   "Eliminates all"
-	line "stat changes.@"
+	db   "Priority: Resets"
+	line "all stat changes.@"
 
 ReflectDescription:
 	db   "Raises DEFENSE"
@@ -860,7 +860,7 @@ DefogDescription:
 	line "of all effects.@"
 
 SafeguardDescription:
-	db   "5 Turns: Prevent"
+	db   "Priority: Prevent"
 	line "status problems.@"
 
 PainSplitDescription:
