@@ -54,7 +54,7 @@
 	const FRESH_WATER  ; 2e
 	const SODA_POP     ; 2f
 	const LEMONADE     ; 30
-	const X_ATTACK     ; 31
+	const RAIN_SHARD   ; 31
 	const DONPHAN_CALL ; 32
 	const X_DEFEND     ; 33
 	const X_SPEED      ; 34

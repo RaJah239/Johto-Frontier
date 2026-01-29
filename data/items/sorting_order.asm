@@ -153,7 +153,6 @@ ItemNameOrder:
 ; Stat altering Battle Items
 	db DIRE_HIT
 	db X_ACCURACY
-	db X_ATTACK
 	db X_DEFEND
 	db X_SPECIAL
 	db X_SPEED
@@ -194,6 +193,7 @@ ItemNameOrder:
 	db POLKADOT_BOW
 	db POISON_BARB
 	db QUICK_CLAW
+	db RAIN_SHARD
 	db SCOPE_LENS
 	db SHARP_BEAK
 	db SILVERPOWDER

@@ -404,7 +404,7 @@ IlexForestRevive:
 	itemball REVIVE
 
 IlexForestXAttack:
-	itemball X_ATTACK
+	itemball POTION
 
 IlexForestAntidote:
 	itemball ANTIDOTE

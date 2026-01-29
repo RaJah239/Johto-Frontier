@@ -48,7 +48,7 @@ ItemNames::
 	li "Fresh Water"
 	li "Soda Pop"
 	li "Lemonade"
-	li "X Attack"
+	li "Rain Shard"
 	li "Donphan Call"
 	li "X Defend"
 	li "X Speed"

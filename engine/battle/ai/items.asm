@@ -581,7 +581,6 @@ AI_Items:
 	dbw X_ACCURACY,   .XAccuracy
 	dbw FULL_HEAL,    .FullHeal
 	dbw DIRE_HIT,     .DireHit
-	dbw X_ATTACK,     .XAttack
 	dbw X_DEFEND,     .XDefend
 	dbw X_SPEED,      .XSpeed
 	dbw X_SPECIAL,    .XSpecial
@@ -682,10 +681,10 @@ AI_Items:
 
 .HyperPotion:
 	call .HealItem
-	jmp c, .DontUse
+	jr c, .DontUse
 	ld b, 200
 	call EnemyUsedHyperPotion
-	jmp .Use
+	jr .Use
 
 .SuperPotion:
 	call .HealItem
@@ -711,12 +710,6 @@ AI_Items:
 	call .XItem
 	jr c, .DontUse
 	call EnemyUsedDireHit
-	jr .Use
-
-.XAttack:
-	call .XItem
-	jr c, .DontUse
-	call EnemyUsedXAttack
 	jr .Use
 
 .XDefend:
@@ -918,11 +911,6 @@ EnemyUsedDireHit:
 	set SUBSTATUS_FOCUS_ENERGY, [hl]
 	ld a, DIRE_HIT
 	jr PrintText_UsedItemOn_AND_AIUpdateHUD
-
-EnemyUsedXAttack:
-	ld b, ATTACK
-	ld a, X_ATTACK
-	jr EnemyUsedXItem
 
 EnemyUsedXDefend:
 	ld b, DEFENSE

@@ -62,7 +62,7 @@ ItemEffects:
 	dw RestoreHPEffect     ; FRESH_WATER
 	dw RestoreHPEffect     ; SODA_POP
 	dw RestoreHPEffect     ; LEMONADE
-	dw XItemEffect         ; X_ATTACK
+	dw NoEffect            ; RAIN_SHARD
 	dw DonphanCallEffect   ; DONPHAN_CALL
 	dw XItemEffect         ; X_DEFEND
 	dw XItemEffect         ; X_SPEED

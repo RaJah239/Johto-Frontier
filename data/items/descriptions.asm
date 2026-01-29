@@ -49,7 +49,7 @@ ItemDescriptions:
 	dw FreshWaterDesc
 	dw SodaPopDesc
 	dw LemonadeDesc
-	dw XAttackDesc
+	dw RainShardDesc
 	dw DonphanCallDesc
 	dw XDefendDesc
 	dw XSpeedDesc
@@ -448,9 +448,9 @@ LemonadeDesc:
 	db   "Restores #MON"
 	next "HP by 80.@"
 
-XAttackDesc:
-	db   "Raises ATTACK."
-	next "(1 BTL)@"
+RainShardDesc:
+	db   "Sets 8 turn rain"
+	next "at end of turn 1.@"
 
 DonphanCallDesc:
 	db   "Calls a DONPHAN to"
