@@ -1,12 +1,12 @@
-	db DODRIO ; 085
+	db DODRIO ; 110
 
-	db  60, 110,  70, 100,  60,  60
-	evs  0,   2,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
+	db  80, 110,  77, 118,  60,  60 ; 505 BST
+	evs  1,   2,   1,   2,   1,   1
 
-	db NORMAL, FLYING ; type
+	db FLYING, FIGHTING ; type
 	db 45 ; catch rate
-	db 158 ; base exp
+	db 95 ; base exp
 	db NO_ITEM, SHARP_BEAK ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
