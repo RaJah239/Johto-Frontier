@@ -154,7 +154,7 @@ ItemNames::
 	li "Toxic Orb"
 	li "Muscle Band"
 	li "Wise Glasses"
-	li "?"
+	li "Trick Stick"
 	li "Sacred Ash"
 	li "Heavy Ball"
 	li "Flower Mail"

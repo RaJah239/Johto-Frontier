@@ -155,7 +155,7 @@ ItemDescriptions:
 	dw ToxicOrbDesc
 	dw MuscleBandDesc
 	dw WiseGlassesDesc
-	dw TeruSama20Desc
+	dw TrickStickDesc
 	dw SacredAshDesc
 	dw HeavyBallDesc
 	dw FlowerMailDesc
@@ -864,8 +864,9 @@ WiseGlassesDesc:
 	db   "Slightly boosts"
 	next "special moves.@"
 
-TeruSama20Desc:
-	db   "?@"
+TrickStickDesc:
+	db   "Gives priority to"
+	next "Trick Room. (Hold)@"
 
 SacredAshDesc:
 	db   "Fully heals all"

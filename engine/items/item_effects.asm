@@ -168,7 +168,7 @@ ItemEffects:
 	dw NoEffect            ; TOXIC_ORB
 	dw NoEffect            ; MUSCLE_BAND
 	dw NoEffect            ; WISE_GLASSES
-	dw NoEffect            ; ITEM_9B
+	dw NoEffect            ; TRICK_STICK
 	dw SacredAshEffect     ; SACRED_ASH
 	dw PokeBallEffect      ; HEAVY_BALL
 	dw NoEffect            ; FLOWER_MAIL

@@ -879,6 +879,10 @@ GetMovePriority:
 	cp HAIL
 	jr z, .check_rock
 
+	; check if Trick Room was used
+	cp TRICK_ROOM
+	jr z, .check_trick_stick
+
 	; standard priority
 .regular_priority
 	call GetMoveEffect
@@ -939,6 +943,13 @@ GetMovePriority:
 
 	; Neither is Snorlax
 	jr .regular_priority
+
+.check_trick_stick
+	; check if Trick Stick is equipped
+	ld a, c
+	cp TRICK_STICK
+	jr nz, .regular_priority
+	jr .priority_2
 
 .check_rock
 	; check if Weather Rock is equipped

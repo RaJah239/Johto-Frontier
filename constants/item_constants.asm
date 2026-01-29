@@ -160,7 +160,7 @@
 	const TOXIC_ORB    ; 98
 	const MUSCLE_BAND  ; 99
 	const WISE_GLASSES ; 9a
-	const ITEM_9B      ; 9b
+	const TRICK_STICK  ; 9b
 	const SACRED_ASH   ; 9c
 	const HEAVY_BALL   ; 9d
 	const FLOWER_MAIL  ; 9e

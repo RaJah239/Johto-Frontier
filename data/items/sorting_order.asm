@@ -148,7 +148,7 @@ ItemNameOrder:
 
 
 ; NEXT POCKET
-; Battle Pocket - 56 total
+; Battle Pocket - 57 total
 
 ; Battle related Held Items
 	db AMULET_COIN
@@ -200,6 +200,7 @@ ItemNameOrder:
 	db SUN_SHARD
 	db THICK_CLUB
 	db TOXIC_ORB
+	db TRICK_STICK
 	db TWISTEDSPOON
 	db UP_GRADE
 	db WEATHER_ROCK
@@ -277,9 +278,8 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 15 total
+; Unused Items - 14 total
 	db EGG_TICKET
-	db ITEM_9B
 	db ITEM_C3
  	db ITEM_DC
  	db ITEM_DE
