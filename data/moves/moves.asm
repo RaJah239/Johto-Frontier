@@ -231,7 +231,7 @@ Moves:
 	move HEAL_BELL,    EFFECT_HEAL_BELL,           0, NORMAL,        STATUS,   100,  8,   0
 	move RETURN,       EFFECT_RETURN,              1, NORMAL,        PHYSICAL, 100, 32,   0
 	move DEFOG,        EFFECT_DEFOG,               0, FLYING,        STATUS,   100, 24,   0
-	move AURA_SPHERE,  EFFECT_ALWAYS_HIT,         85, FIGHTING,      SPECIAL,  100, 16,   0
+	move AURA_SPHERE,  EFFECT_ALWAYS_HIT,         90, FIGHTING,      SPECIAL,  100, 16,   0
 	move SAFEGUARD,    EFFECT_SAFEGUARD,           0, NORMAL,        STATUS,   100, 32,   0
 	move PAIN_SPLIT,   EFFECT_PAIN_SPLIT,          0, NORMAL,        STATUS,   100, 32,   0
 	move SACRED_FIRE,  EFFECT_SACRED_FIRE,        95, FIRE,          PHYSICAL,  95, 24,  10
