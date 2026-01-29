@@ -61,7 +61,7 @@ UnionCaveB1FTMSwift:
 	itemball TM_SWIFT
 
 UnionCaveB1FXDefend:
-	itemball X_DEFEND
+	itemball SUN_SHARD
 
 UnionCaveB1FBoulder:
 	jumpstd StrengthBoulderScript

@@ -50,7 +50,7 @@ ItemNames::
 	li "Lemonade"
 	li "Rain Shard"
 	li "Donphan Call"
-	li "X Defend"
+	li "Sun Shard"
 	li "Haste Herb"
 	li "X Special"
 	li "Coin Case"

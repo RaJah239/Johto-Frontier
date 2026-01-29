@@ -581,7 +581,6 @@ AI_Items:
 	dbw X_ACCURACY,   .XAccuracy
 	dbw FULL_HEAL,    .FullHeal
 	dbw DIRE_HIT,     .DireHit
-	dbw X_DEFEND,     .XDefend
 	dbw X_SPECIAL,    .XSpecial
 	db -1 ; end
 
@@ -709,12 +708,6 @@ AI_Items:
 	call .XItem
 	jr c, .DontUse
 	call EnemyUsedDireHit
-	jr .Use
-
-.XDefend:
-	call .XItem
-	jr c, .DontUse
-	call EnemyUsedXDefend
 	jr .Use
 
 .XSpecial:
@@ -904,11 +897,6 @@ EnemyUsedDireHit:
 	set SUBSTATUS_FOCUS_ENERGY, [hl]
 	ld a, DIRE_HIT
 	jr PrintText_UsedItemOn_AND_AIUpdateHUD
-
-EnemyUsedXDefend:
-	ld b, DEFENSE
-	ld a, X_DEFEND
-	jr EnemyUsedXItem
 
 EnemyUsedXSpecial:
 	ld b, SP_ATTACK

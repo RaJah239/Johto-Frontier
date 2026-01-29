@@ -56,7 +56,7 @@
 	const LEMONADE     ; 30
 	const RAIN_SHARD   ; 31
 	const DONPHAN_CALL ; 32
-	const X_DEFEND     ; 33
+	const SUN_SHARD    ; 33
 	const HASTE_HERB   ; 34
 	const X_SPECIAL    ; 35
 	const COIN_CASE    ; 36

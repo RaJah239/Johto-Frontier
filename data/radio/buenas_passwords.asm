@@ -23,5 +23,5 @@ BuenasPasswordTable:
 .JohtoTowns:    db BUENA_STRING, 16, "NEW BARK TOWN@", "CHERRYGROVE CITY@", "AZALEA TOWN@"
 .Types:         db BUENA_STRING,  6, "FLYING@", "BUG@", "GRASS@"
 .Moves:         db BUENA_MOVE,   12, TACKLE, GROWL, MUD_SLAP
-.Shards:        db BUENA_ITEM,   12, ICE_SHARD, X_DEFEND, POTION
+.Shards:        db BUENA_ITEM,   12, ICE_SHARD, SUN_SHARD, POTION
 .RadioStations: db BUENA_STRING, 13, "#MON Talk@", "#MON Music@", "Lucky Channel@"

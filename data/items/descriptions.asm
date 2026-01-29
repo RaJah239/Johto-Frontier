@@ -51,7 +51,7 @@ ItemDescriptions:
 	dw LemonadeDesc
 	dw RainShardDesc
 	dw DonphanCallDesc
-	dw XDefendDesc
+	dw SunShardDesc
 	dw HasteHerbDesc
 	dw XSpecialDesc
 	dw CoinCaseDesc
@@ -452,13 +452,13 @@ RainShardDesc:
 	db   "Sets 8 turn rain"
 	next "at end of turn 1.@"
 
+SunShardDesc:
+	db   "Sets 8 turn sun"
+	next "at end of turn 1.@"
+
 DonphanCallDesc:
 	db   "Calls a DONPHAN to"
 	next "move boulders.@"
-
-XDefendDesc:
-	db   "Raises DEFENSE."
-	next "(1 BTL)@"
 
 HasteHerbDesc:
 	db   "Raises Speed at"
