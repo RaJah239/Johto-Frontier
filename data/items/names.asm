@@ -43,7 +43,7 @@ ItemNames::
 	li "Zoom Lens"
 	li "Super Repel"
 	li "Max Repel"
-	li "Dire Hit"
+	li "Frost Shard"
 	li "Silver Berry"
 	li "Fresh Water"
 	li "Soda Pop"

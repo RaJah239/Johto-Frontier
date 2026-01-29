@@ -105,8 +105,8 @@ MartGoldenrod2F2:
 	db -1 ; end
 
 MartGoldenrod3F:
-	db 2 ; # items
-	db DIRE_HIT
+MartCeladon5F2:
+	db 1 ; # items
 	db X_ACCURACY
 	db -1 ; end
 
@@ -248,12 +248,6 @@ MartCeladon4F:
 	db POKE_DOLL
 	db LOVELY_MAIL
 	db SURF_MAIL
-	db -1 ; end
-
-MartCeladon5F2:
-	db 2 ; # items
-	db X_ACCURACY
-	db DIRE_HIT
 	db -1 ; end
 
 MartMtMoon:

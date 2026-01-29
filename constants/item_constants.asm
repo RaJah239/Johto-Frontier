@@ -49,7 +49,7 @@
 	const ZOOM_LENS    ; 29
 	const SUPER_REPEL  ; 2a
 	const MAX_REPEL    ; 2b
-	const DIRE_HIT     ; 2c
+	const FROST_SHARD  ; 2c
 	const SILVER_BERRY ; 2d
 	const FRESH_WATER  ; 2e
 	const SODA_POP     ; 2f

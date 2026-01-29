@@ -580,7 +580,6 @@ AI_Items:
 	dbw POTION,       .Potion
 	dbw X_ACCURACY,   .XAccuracy
 	dbw FULL_HEAL,    .FullHeal
-	dbw DIRE_HIT,     .DireHit
 	db -1 ; end
 
 .FullHeal:
@@ -658,10 +657,10 @@ AI_Items:
 
 .CheckQuarterHP:
 	callfar AICheckEnemyQuarterHP
-	jmp c, .DontUse
+	jr c, .DontUse
 	call Random
 	cp 20 percent - 1
-	jmp c, .DontUse
+	jr c, .DontUse
 	jr .UseHealItem
 
 .CheckHalfOrQuarterHP:
@@ -701,12 +700,6 @@ AI_Items:
 	call .XItem
 	jr c, .DontUse
 	call EnemyUsedXAccuracy
-	jr .Use
-
-.DireHit:
-	call .XItem
-	jr c, .DontUse
-	call EnemyUsedDireHit
 	jr .Use
 
 .XItem:
@@ -882,13 +875,6 @@ EnemyUsedXAccuracy:
 	ld hl, wEnemySubStatus4
 	set SUBSTATUS_X_ACCURACY, [hl]
 	ld a, X_ACCURACY
-	jr PrintText_UsedItemOn_AND_AIUpdateHUD
-
-EnemyUsedDireHit:
-	call AIUsedItemSound
-	ld hl, wEnemySubStatus4
-	set SUBSTATUS_FOCUS_ENERGY, [hl]
-	ld a, DIRE_HIT
 	jr PrintText_UsedItemOn_AND_AIUpdateHUD
 
 ; Parameter

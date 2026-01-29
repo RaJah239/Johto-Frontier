@@ -44,7 +44,7 @@ ItemDescriptions:
 	dw ZoomLensDesc
 	dw SuperRepelDesc
 	dw MaxRepelDesc
-	dw DireHitDesc
+	dw FrostShardDesc
 	dw SilverBerryDesc
 	dw FreshWaterDesc
 	dw SodaPopDesc
@@ -432,10 +432,6 @@ MaxRepelDesc:
 	db   "Repels weak #-"
 	next "MON for 250 steps.@"
 
-DireHitDesc:
-	db   "Ups critical hit"
-	next "ratio. (1 BTL)@"
-
 FreshWaterDesc:
 	db   "Restores #MON"
 	next "HP by 50.@"
@@ -449,16 +445,20 @@ LemonadeDesc:
 	next "HP by 80.@"
 
 RainShardDesc:
-	db   "Sets 8 turn rain"
-	next "at end of turn 1.@"
+	db   "EOT: Sets 8 turn"
+	next "Rain.@"
 
 SunShardDesc:
-	db   "Sets 8 turn sun"
-	next "at end of turn 1.@"
+	db   "EOT: Sets 8 turn"
+	next "Sun.@"
 
 SandShardDesc:
 	db   "EOT: Sets 8 turn"
 	next "Sandstorm.@"
+
+FrostShardDesc:
+	db   "EOT: Sets 8 turn"
+	next "Hail.@"
 
 DonphanCallDesc:
 	db   "Calls a DONPHAN to"

@@ -151,7 +151,6 @@ ItemNameOrder:
 ; Battle Pocket - 55 total
 
 ; Stat altering Battle Items
-	db DIRE_HIT
 	db X_ACCURACY
 
 ; Battle related Held Items
@@ -171,6 +170,7 @@ ItemNameOrder:
 	db FLAME_ORB
 	db FOCUS_BAND
 	db FOCUS_SASH
+	db FROST_SHARD
 	db HEAVY_BOOTS
 	db HARD_STONE
 	db HASTE_HERB
