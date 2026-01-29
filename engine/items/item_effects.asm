@@ -65,7 +65,7 @@ ItemEffects:
 	dw NoEffect            ; RAIN_SHARD
 	dw DonphanCallEffect   ; DONPHAN_CALL
 	dw XItemEffect         ; X_DEFEND
-	dw XItemEffect         ; X_SPEED
+	dw NoEffect            ; HASTE_HERB
 	dw XItemEffect         ; X_SPECIAL
 	dw CoinCaseEffect      ; COIN_CASE
 	dw ItemfinderEffect    ; ITEMFINDER

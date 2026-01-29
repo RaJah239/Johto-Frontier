@@ -52,7 +52,7 @@ ItemDescriptions:
 	dw RainShardDesc
 	dw DonphanCallDesc
 	dw XDefendDesc
-	dw XSpeedDesc
+	dw HasteHerbDesc
 	dw XSpecialDesc
 	dw CoinCaseDesc
 	dw ItemfinderDesc
@@ -460,9 +460,9 @@ XDefendDesc:
 	db   "Raises DEFENSE."
 	next "(1 BTL)@"
 
-XSpeedDesc:
-	db   "Raises SPEED."
-	next "(1 BTL)@"
+HasteHerbDesc:
+	db   "Raises Speed at"
+	next "end of turn 1.@"
 
 XSpecialDesc:
 	db   "Raises SPECIAL"

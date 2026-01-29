@@ -143,7 +143,7 @@ Route46Sign:
 	jumptext Route46SignText
 
 Route46XSpeed:
-	itemball X_SPEED
+	itemball HASTE_HERB
 
 HikerBaileySeenText:
 	text "Awright! I'll show"

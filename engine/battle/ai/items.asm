@@ -582,7 +582,6 @@ AI_Items:
 	dbw FULL_HEAL,    .FullHeal
 	dbw DIRE_HIT,     .DireHit
 	dbw X_DEFEND,     .XDefend
-	dbw X_SPEED,      .XSpeed
 	dbw X_SPECIAL,    .XSpecial
 	db -1 ; end
 
@@ -674,10 +673,10 @@ AI_Items:
 	jr nc, .UseHealItem
 	call Random
 	cp 20 percent - 1
-	jmp nc, .DontUse
+	jr nc, .DontUse
 
 .UseHealItem:
-	jmp .Use
+	jr .Use
 
 .HyperPotion:
 	call .HealItem
@@ -716,12 +715,6 @@ AI_Items:
 	call .XItem
 	jr c, .DontUse
 	call EnemyUsedXDefend
-	jr .Use
-
-.XSpeed:
-	call .XItem
-	jr c, .DontUse
-	call EnemyUsedXSpeed
 	jr .Use
 
 .XSpecial:
@@ -915,11 +908,6 @@ EnemyUsedDireHit:
 EnemyUsedXDefend:
 	ld b, DEFENSE
 	ld a, X_DEFEND
-	jr EnemyUsedXItem
-
-EnemyUsedXSpeed:
-	ld b, SPEED
-	ld a, X_SPEED
 	jr EnemyUsedXItem
 
 EnemyUsedXSpecial:

@@ -51,7 +51,7 @@ ItemNames::
 	li "Rain Shard"
 	li "Donphan Call"
 	li "X Defend"
-	li "X Speed"
+	li "Haste Herb"
 	li "X Special"
 	li "Coin Case"
 	li "ItemFinder"

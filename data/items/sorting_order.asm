@@ -155,7 +155,6 @@ ItemNameOrder:
 	db X_ACCURACY
 	db X_DEFEND
 	db X_SPECIAL
-	db X_SPEED
 
 ; Battle related Held Items
 	db AMULET_COIN
@@ -176,6 +175,7 @@ ItemNameOrder:
 	db FOCUS_SASH
 	db HEAVY_BOOTS
 	db HARD_STONE
+	db HASTE_HERB
 	db KINGS_ROCK
 	db LEFTOVERS
 	db LIFE_ORB
