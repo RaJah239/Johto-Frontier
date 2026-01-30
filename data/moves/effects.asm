@@ -1991,3 +1991,9 @@ FireFang:
 	effectchance ; independent chance
 	flinchtarget
 	endmove
+
+Growth:
+	usedmovetext
+	doturn
+	farcommand
+	endmove

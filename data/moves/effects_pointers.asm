@@ -162,4 +162,5 @@ MoveEffectsPointers:
 	dw IceFang
 	dw ThunderFang
 	dw FireFang
+	dw Growth
 	assert_table_length NUM_MOVE_EFFECTS

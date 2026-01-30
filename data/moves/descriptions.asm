@@ -376,6 +376,9 @@ RoarDescription:
 	line "to end battle.@"
 
 GrowthDescription:
+	db   "Raises the user's"
+	line "Atk and Sp.Atk.@"
+
 NastyPlotDescription:
 	db   "Sharply increases"
 	line "user's Spcl.Atk.@"
