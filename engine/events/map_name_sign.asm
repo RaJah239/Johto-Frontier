@@ -144,19 +144,19 @@ PlaceMapNameSign::
 	jr nc, .stage_3_sliding_in
 	cp MAPSIGNSTAGE_5_SLIDEOUT
 	jr c, .stage_5_sliding_out
-	ld a, SCREEN_HEIGHT_PX - 3 * TILE_WIDTH
+	ld a, SCREEN_HEIGHT_PX - 4 * TILE_WIDTH
 	jr .got_value
 
 .stage_3_sliding_in
 	sub MAPSIGNSTAGE_4_VISIBLE
 	add a
-	add SCREEN_HEIGHT_PX - 3 * TILE_WIDTH
+	add SCREEN_HEIGHT_PX - 4 * TILE_WIDTH
 	jr .got_value
 
 .stage_5_sliding_out
 	add a
 	cpl
-	add SCREEN_HEIGHT_PX + TILE_WIDTH + 1 ; a = SCREEN_HEIGHT_PX + TILE_WIDTH - a
+	add SCREEN_HEIGHT_PX + 2 * TILE_WIDTH + 1 ; a = SCREEN_HEIGHT_PX + TILE_WIDTH - a
 .got_value
 	ldh [rWY], a
 	ldh [hWY], a
@@ -172,7 +172,7 @@ PlaceMapNameSign::
 
 InitMapNameFrame:
 	hlcoord 0, 0, wAttrmap
-	lb bc, 3, SCREEN_WIDTH
+	lb bc, 5, SCREEN_WIDTH
 	call InitMapSignAttrmap
 	call PlaceMapNameFrame
 	ret
@@ -191,7 +191,37 @@ PlaceMapNameCenterAlign:
 	add hl, bc
 	ld de, wStringBuffer1
 	call PlaceString
-	ret
+
+	; check weather and print
+	hlcoord 1, 2
+	ld a, [wFieldWeather]
+	cp WEATHER_RAIN
+	jr z, .Raining
+	cp WEATHER_SUN
+	jr z, .Sunny
+	cp WEATHER_SANDSTORM
+	jr z, .Sandstorm
+	cp WEATHER_HAIL
+	ret nz
+
+;.Hailing:
+	ld de, .HailingStr
+	jr .print_weather
+
+.Raining:
+	ld de, .RainingStr
+	jr .print_weather
+
+.Sunny:
+	ld de, .SunnyStr
+	jr .print_weather
+
+.Sandstorm:
+	ld de, .SandstormStr
+	; fallthrough
+
+.print_weather:
+	jmp PlaceString
 
 .GetNameLength:
 	ld c, 0
@@ -208,6 +238,15 @@ PlaceMapNameCenterAlign:
 .stop
 	pop hl
 	ret
+
+.RainingStr:
+	db "Raining@"
+.SunnyStr:
+	db "Sunny@"
+.HailingStr:
+	db "Hailing@"
+.SandstormStr:
+	db "Sandstorm@"
 
 InitMapSignAttrmap:
 	ld a, PAL_BG_TEXT | PRIORITY
@@ -241,6 +280,14 @@ PlaceMapNameFrame:
 	; right, first line
 	ld a, MAP_NAME_SIGN_START + 12
 	ld [hli], a
+
+	; left, second line
+	ld a, MAP_NAME_SIGN_START + 5
+	ld [hli], a
+	call .FillMiddle
+	ld a, MAP_NAME_SIGN_START + 12
+	ld [hli], a
+
 	; bottom left
 	ld a, MAP_NAME_SIGN_START + 7
 	ld [hli], a
