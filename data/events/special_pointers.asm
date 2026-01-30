@@ -196,3 +196,7 @@ SpecialsPointers::
 	add_special NuggetCountInBag
 	add_special Menu_BattleTowerSettings
 	add_special GetPartyCountWithoutEggs
+
+if DEF(_DEBUG)
+	add_special FillPokedex ; used for testing
+endc

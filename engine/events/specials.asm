@@ -504,3 +504,21 @@ PlayerGivesAwayAnEggForAdoption:
 
 .done:
 	ret
+
+if DEF(_DEBUG)
+FillPokedex:
+	ld a, UNOWN_A
+	ld [wFirstUnownSeen], a
+	ld a, CYNDAQUIL
+	ld [wScriptVar], a
+.loop
+	ld a, [wScriptVar]
+	dec a
+	call SetSeenAndCaughtMon
+	ld a, [wScriptVar]
+	inc a
+	cp EGG
+	ret z
+	ld [wScriptVar], a
+	jr .loop
+endc
