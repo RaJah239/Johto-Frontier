@@ -9,14 +9,26 @@ SilverCaveOutside_MapScripts:
 	callback MAPCALLBACK_OBJECTS, .Weather
 
 .Weather:
-	random 2
-	ifequal 0, .Hail
-	setval WEATHER_SANDSTORM
+	random 4
+	ifequal 0, .Sun
+	ifequal 1, .Rain
+	ifequal 2, .Sandstorm
+	setval WEATHER_NONE
 	writemem wFieldWeather
 	endcallback
 
-.Hail:
-	setval WEATHER_HAIL
+.Sun
+	setval WEATHER_SUN
+	writemem wFieldWeather
+	endcallback
+
+.Rain
+	setval WEATHER_RAIN
+	writemem wFieldWeather
+	endcallback
+
+.Sandstorm
+	setval WEATHER_SANDSTORM
 	writemem wFieldWeather
 	endcallback
 
