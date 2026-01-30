@@ -23,12 +23,12 @@ NationalPark_MapScripts:
 	callback MAPCALLBACK_OBJECTS, .Weather
 
 .Weather:
-    checktime EVE | NITE
-    iftrue .skipWeather
+	checktime EVE | NITE
+	iftrue .skipWeather
 	setval WEATHER_SUN
 	writemem wFieldWeather
 .skipWeather
-		endcallback
+	endcallback
 
 .Flypoint:
 	setflag ENGINE_FLYPOINT_NATIONAL_PARK
