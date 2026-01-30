@@ -326,9 +326,9 @@ VioletScript:
 .MenuData:
 	db STATICMENU_CURSOR ; flags
 	db 4 ; items
-	db "Sacred Ash x5@"
-	db "Eon Mail   x1@"
-	db "Crystal   x11@"
+	db "Sacred Ash ×5@"
+	db "Eon Mail   ×1@"
+	db "Crystal   ×11@"
 	db "Cancel@"
 
 VioletIntroText:
