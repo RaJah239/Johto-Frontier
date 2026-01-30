@@ -391,9 +391,38 @@ ShinyMonScript:
 	special HealParty
 	end
 
-DebugColourPickerScript:
+DebugOptions:
+	faceplayer
+	opentext
+	loadmenu .MoveMenuHeader
+	verticalmenu
+	closewindow
+	ifequal 1, .FillPokedex
+	ifequal 2, .DebugColourPicker
+	sjump .finish
+
+.FillPokedex
+	special FillPokedex
+	sjump .finish
+
+.DebugColourPicker
 	special DebugColourPicker
+.finish
+	closetext
 	end
+
+.MoveMenuHeader:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 0, 3, 19, TEXTBOX_Y - 1
+	dw .MenuData
+	db 1 ; default option
+
+.MenuData:
+	db STATICMENU_CURSOR ; flags
+	db 3 ; items
+	db "#dex Complete!@"
+	db "Debug Color@"
+	db "Cancel@"
 
 TestWarpScript:
 	faceplayer
@@ -423,7 +452,7 @@ if DEF(_DEBUG)
 	object_event  4,  2, SPRITE_RED, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TestTrainerScript, -1
 	object_event  3,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RegularMonScript, -1
 	object_event  2,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ShinyMonScript, -1
-	object_event  7,  5, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, DebugColourPickerScript, -1
+	object_event  7,  5, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, DebugOptions, -1
 	object_event  6,  2, SPRITE_BLUE, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TestWarpScript, -1
 	object_event  2,  3, SPRITE_MAXIMA, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RandomPartyTrainerScript, -1
 endc
