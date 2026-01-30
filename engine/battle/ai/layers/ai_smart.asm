@@ -2403,25 +2403,25 @@ AI_Smart_HealBell:
 AI_Smart_Flinch:
 	ld a, [wEnemyMonSpecies]
 	cp BLASTOISE
-	jr z, .not_blastoise_or_iron_head
+	jr nz, .not_blastoise_or_iron_head
 
 	; check if blastoise has iron head
 	ld a, [wEnemyMoveStruct + MOVE_ANIM]
 	cp IRON_HEAD
-	jr nc, .not_blastoise_or_iron_head
+	jr nz, .not_blastoise_or_iron_head
 	jr AI_Smart_PriorityHit
 
 .not_blastoise_or_iron_head
 	ld a, [wEnemyMonSpecies]
 	cp DROWZEE
-	jr z, .not_drowzee_or_hypno_or_zen_headbutt
+	jr nz, .not_drowzee_or_hypno_or_zen_headbutt
 	cp HYPNO
-	jr z, .not_drowzee_or_hypno_or_zen_headbutt
+	jr nz, .not_drowzee_or_hypno_or_zen_headbutt
 
 	; check if drowzee or hypno has zen headbutt
 	ld a, [wEnemyMoveStruct + MOVE_ANIM]
 	cp ZEN_HEADBUTT
-	jr nc, .not_drowzee_or_hypno_or_zen_headbutt
+	jr nz, .not_drowzee_or_hypno_or_zen_headbutt
 	jr AI_Smart_PriorityHit
 
 .not_drowzee_or_hypno_or_zen_headbutt
