@@ -153,7 +153,44 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_RECOIL_PARA_HIT,  AI_Smart_RecoilHit
 	dbw EFFECT_CLOSE_COMBAT,     AI_Smart_CloseCombat
 	dbw EFFECT_KNOCK_OFF,        AI_Smart_KnockOff
+	dbw EFFECT_GROWTH,           AI_Smart_Growth
 	db -1 ; end
+
+AI_Smart_Growth:
+; discourage if player can ko at current HP
+	call CanPlayerKO
+	jmp c, StandardDiscourage
+
+	call IsAttackMaxed
+	jr nc, .continue
+	call IsSpecialAttackMaxed
+	jmp c, StandardDiscourage
+
+.continue
+; if player is asleep and is physical we should boost
+	ld a, [wBattleMonStatus]
+	and SLP_MASK
+	jr z, .not_asleep
+	jmp StandardEncourage
+
+.not_asleep
+; don't use if we are at risk of being KO'd, just attack them
+	call ShouldAIBoost
+	jmp nc, StandardDiscourage
+
+; encourage to +2 - strong encourage if player is physical
+	ld a, [wEnemyAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .at_plus_2
+	jmp StrongEncourage
+
+.at_plus_2
+; discourage after boost if afflicted with toxic
+	call IsAIToxified
+	jmp c, StandardDiscourage
+
+; encourage if we have no reason not to
+	jmp StandardEncourage
 
 AI_Smart_KnockOff:
 ; 80% chance to encourage this move if the player is holding a battle item
@@ -305,11 +342,11 @@ AI_Smart_Taunt:
 	jmp nc, .discourage
 	ld a, [wPlayerSAtkLevel]
 	cp BASE_STAT_LEVEL + 2
-	jr nc, .discourage
+	jmp nc, .discourage
 
 ; if we can KO - discourage
 	call CanAIKO
-	jr c, .discourage
+	jmp c, .discourage
 
 ; if player has a setup move, status move, or healing move - encourage
     ld b, EFFECT_TAUNT
@@ -337,6 +374,9 @@ AI_Smart_Taunt:
 	call PlayerHasMoveEffect
 	jr c, .encourage
     ld b, EFFECT_QUIVER_DANCE
+	call PlayerHasMoveEffect
+	jr c, .encourage
+    ld b, EFFECT_GROWTH
 	call PlayerHasMoveEffect
 	jr c, .encourage
     ld b, EFFECT_PARALYZE
@@ -822,6 +862,9 @@ AI_Smart_DragonDance:
 ; some pokemon have double boost sets with dragondance and bulkup/swordsdance
 ; in such cases we want to use dragondance first to get to +1 speed,
 ; then only use the other boost
+	ld b, EFFECT_GROWTH
+	call AIHasMoveEffect
+	jr c, .use_first_and_not_again
 	ld b, EFFECT_BULK_UP
 	call AIHasMoveEffect
 	jr c, .use_first_and_not_again

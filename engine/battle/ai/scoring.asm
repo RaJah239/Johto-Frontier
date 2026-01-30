@@ -31,6 +31,7 @@ BoostingMoveEffects:
 	db EFFECT_DRAGON_DANCE
 	db EFFECT_QUIVER_DANCE
 	db EFFECT_FURY_DRIVE
+	db EFFECT_GROWTH
 	db -1 ; end
 
 AIDiscourageMove:
