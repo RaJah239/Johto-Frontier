@@ -10,7 +10,6 @@
 	const MAINMENUITEM_OPTION			; 2
 	const MAINMENUITEM_SET_TIME			; 3
 	const MAINMENUITEM_ABOUT			; 4
-	const MAINMENUITEM_DEBUG_ROOM		; 5
 
 MainMenu:
 	farcall DeleteSavedMusic
@@ -58,9 +57,6 @@ MainMenu:
 	db "Options@"
 	db "Set Time@"
 	db "About@"
-if DEF(_DEBUG)
-	db "Debug Room@"
-endc
 
 .Jumptable:
 ; entries correspond to MAINMENUITEM_* constants
@@ -69,9 +65,6 @@ endc
 	dw MainMenu_Option
 	dw MainMenu_SetTime
 	dw MainMenu_About
-if DEF(_DEBUG)
-	dw MainMenu_DebugRoom
-endc
 
 MainMenuItems:
 ; entries correspond to MAINMENU_* constants
@@ -84,15 +77,12 @@ MainMenuItems:
 	db -1
 
 	; MAINMENU_CONTINUE
-	db 5 + DEF(_DEBUG)
+	db 5
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_OPTION
 	db MAINMENUITEM_SET_TIME
 	db MAINMENUITEM_ABOUT
-if DEF(_DEBUG)
-	db MAINMENUITEM_DEBUG_ROOM
-endc
 	db -1
 
 MainMenu_GetWhichMenu:

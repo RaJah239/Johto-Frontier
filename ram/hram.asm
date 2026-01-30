@@ -171,10 +171,6 @@ hDMATransfer:: db
 hMobile:: db
 hSystemBooted:: db
 
-if DEF(_DEBUG)
-hDebugRoomMenuPage::
-endc
-
 hFarCallSavedA:: db
 hFarCallSavedHL::
 hFarCallSavedL:: db
