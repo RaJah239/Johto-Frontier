@@ -17,6 +17,31 @@ Route44_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
+	callback MAPCALLBACK_OBJECTS, .Weather
+
+.Weather:
+	random 4
+	ifequal 0, .Sun
+	ifequal 1, .Rain
+	ifequal 2, .Hail
+	setval WEATHER_NONE
+	writemem wFieldWeather
+	endcallback
+
+.Sun
+	setval WEATHER_SUN
+	writemem wFieldWeather
+	endcallback
+
+.Rain
+	setval WEATHER_RAIN
+	writemem wFieldWeather
+	endcallback
+
+.Hail
+	setval WEATHER_HAIL
+	writemem wFieldWeather
+	endcallback
 
 TrainerBirdKeeperVance1:
 	trainer BIRD_KEEPER, VANCE1, EVENT_BEAT_BIRD_KEEPER_VANCE, BirdKeeperVance1SeenText, BirdKeeperVance1BeatenText, 0, .Script
