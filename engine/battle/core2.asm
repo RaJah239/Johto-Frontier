@@ -1980,7 +1980,7 @@ IceTypeChart:
 .DefenderStringHalfDamage1:
 	db "<half>× Ice/Water/@"
 .DefenderStringHalfDamage2:
-	db "   Electric@"
+	db "   Grass/Electric@"
 .DefenderStringDoubleDamage1:
 	db "2× Fire/Fight/@"
 .DefenderStringDoubleDamage2:
