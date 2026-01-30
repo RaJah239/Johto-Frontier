@@ -288,10 +288,15 @@ HandleReflectBarrier:
 	ld [wNumHits], a
 	call Call_PlayBattleAnim_OnlyIfVisible
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play reflect animation
 	ld de, REFLECT
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, ReflectBarrierText
 	jmp StdBattleTextbox
 
@@ -356,10 +361,15 @@ HandleLightBarrier:
 	ld [wNumHits], a
 	call Call_PlayBattleAnim_OnlyIfVisible
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play light screen animation
 	ld de, LIGHT_SCREEN
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, LightBarrierText
 	jmp StdBattleTextbox
 
@@ -401,10 +411,15 @@ HandleNonLinkIntimidate:
 	call IsInByteArray
 	ret nc
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play leer animation
 	ld de, LEER
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, IntimidateText
 	call StdBattleTextbox
 
@@ -613,10 +628,15 @@ HandleTrueSight:
 	call IsInByteArray
 	ret nc
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play foresight animation
 	ld de, FORESIGHT
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, TrueSightText
 	call StdBattleTextbox
 
@@ -683,10 +703,15 @@ HandleFogOfWar:
 	ret c
 
 .stat_buffed_so_activate_fog_of_war
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play haze animation
 	ld de, HAZE
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, FogOfWarText
 	call StdBattleTextbox
 
@@ -732,10 +757,15 @@ HandleCleanSweep:
     call AnyFieldEffectPresent
     ret nc
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play defog animation
 	ld de, DEFOG
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, CleanSweepText
 	call StdBattleTextbox
 
@@ -788,10 +818,15 @@ HandleRockSnare:
     ret nz
 	set SCREENS_STEALTH_ROCK, [hl]
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play stealth rock animation
 	ld de, STEALTH_ROCK
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, RockSnareText
 	jmp StdBattleTextbox
 
@@ -842,10 +877,15 @@ HandleCaltropper:
     ret nz
 	set SCREENS_SPIKES, [hl]
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play spikes animation
 	ld de, SPIKES
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, CaltropperText
 	jmp StdBattleTextbox
 
@@ -896,10 +936,15 @@ HandleVenomField:
     ret nz
 	set SCREENS_TOXIC_SPIKES, [hl]
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play toxic spikes animation
 	ld de, TOXIC_SPIKES
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, VenomFieldText
 	jmp StdBattleTextbox
 
@@ -950,10 +995,15 @@ HandleSilkSnare:
     ret nz
 	set SCREENS_STICKY_WEB, [hl]
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play sticky web animation
 	ld de, STICKY_WEB
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, SilkSnareText
 	jmp StdBattleTextbox
 
@@ -1000,10 +1050,15 @@ HandleChronoShift:
 	ld a, 5
 	ld [wTrickRoomCount], a
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play sticky web animation
 	ld de, TRICK_ROOM
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, ChronoShiftText
 	jmp StdBattleTextbox
 
@@ -1044,10 +1099,20 @@ HandleFortify:
 	call IsInByteArray
 	ret nc
 
+	; don't play damage effect when animation goes off
+	xor a
+	ld [wNumHits], a
+	call Call_PlayBattleAnim_OnlyIfVisible
+
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play barrier animation
 	ld de, BARRIER
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, FortifyText
 	call StdBattleTextbox
 	farjp BattleCommand_Barrier
@@ -1089,10 +1154,15 @@ HandleImposter:
 	call IsInByteArray
 	ret nc
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play transform animation
 	ld de, TRANSFORM
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, ImposterText
 	call StdBattleTextbox
 	farjp BattleCommand_Transform
@@ -1110,10 +1180,15 @@ HandleSpinGuard:
     ret nc
     callfar BattleCommand_ClearHazards
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play spin guard animation
 	ld de, ANIM_SPIN_GUARD
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, BlewSpikesText
 	jmp StdBattleTextbox
 
@@ -1132,10 +1207,15 @@ HandleSeedfall:
 	bit SUBSTATUS_LEECH_SEED, [hl]
 	ret nz
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play leech seed animation
 	ld de, LEECH_SEED
 	farcall Call_PlayBattleAnim
 
+.skip_anim
     farjp BattleCommand_LeechSeed
 
 INCLUDE "data/abilities/seedfall_mons.asm"
@@ -1175,10 +1255,15 @@ HandleInfernalHowl:
 	call IsInByteArray
 	ret nc
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play snarl animation
 	ld de, SNARL
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, InfernalHowlText
 	call StdBattleTextbox
 
@@ -1233,10 +1318,15 @@ HandleSanctuary:
 	bit SCREENS_SAFEGUARD, [hl]
 	ret nz
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play safeguard animation
 	ld de, SAFEGUARD
     farcall Call_PlayBattleAnim
 
+.skip_anim
 	farjp BattleCommand_Safeguard
 
 INCLUDE "data/abilities/sanctuary_mons.asm"
@@ -1279,10 +1369,15 @@ HandleSiegebreaker:
 	call ReflectOrLightScreenUp
 	ret nc
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play brick break animation
 	ld de, BRICK_BREAK
     farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, SiegebreakerText
 	call StdBattleTextbox
 
@@ -1341,10 +1436,15 @@ HandleProvocateur:
 	ret nz
 
 .taunt
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play taunt animation
 	ld de, TAUNT
     farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, ProvocateurText
 	call StdBattleTextbox
 
@@ -1415,10 +1515,15 @@ HandleDisarm:
 	ret z
 
 .continue
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play knock off animation
 	ld de, KNOCK_OFF
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, DisarmText
 	call StdBattleTextbox
 
@@ -1484,10 +1589,15 @@ HandleAllure:
 	farcall CheckOppositeGender
 	ret c
 
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	jr nz, .skip_anim
+
 	; play attract animation
 	ld de, ATTRACT
 	farcall Call_PlayBattleAnim
 
+.skip_anim
 	ld hl, AllureText
 	call StdBattleTextbox
 
