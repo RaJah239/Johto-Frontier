@@ -1162,10 +1162,15 @@ ResidualDamage:
 	ld de, ANIM_FRZ
 .got_anim
 
+	; skip status text
+	call CheckIfFastBattlesIsOn
+	jr nz, .skip_status_text
+
 	push de
 	call StdBattleTextbox
 	pop de
 
+.skip_status_text
 	xor a
 	ld [wNumHits], a
 	call Call_PlayBattleAnim_OnlyIfVisible
@@ -1456,8 +1461,13 @@ HandleWeather:
 	jr nz, .continues
 
 ; ended
+	call CheckIfFastBattlesIsOn
+	jr nz, .skip_weather_text
+
 	ld hl, .WeatherEndedMessages
 	call .PrintWeatherMessage
+
+.skip_weather_text
 	xor a
 	ld [wBattleWeather], a
 	ret

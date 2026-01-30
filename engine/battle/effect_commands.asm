@@ -170,9 +170,13 @@ BattleCommand_CheckTurn:
 	jr .not_asleep
 
 .fast_asleep
+	call CheckIfFastBattlesIsOn
+	jr nz, .skip_fast_asleep_text
+
 	ld hl, FastAsleepText
 	call StdBattleTextbox
 
+.skip_fast_asleep_text
 	; Snore and Sleep Talk bypass sleep.
 	ld a, [wCurPlayerMove]
 	cp SNORE
@@ -394,8 +398,14 @@ CheckEnemyTurn:
 	and a
 	jr z, .woke_up
 
+	; skip fast asleep text
+	call CheckIfFastBattlesIsOn
+	jr nz, .skip_fast_asleep_text
+
 	ld hl, FastAsleepText
 	call StdBattleTextbox
+
+.skip_fast_asleep_text
 	xor a
 	ld [wNumHits], a
 	ld de, ANIM_SLP
@@ -5429,9 +5439,14 @@ BattleCommand_ForceSwitch:
 	ld [wEnemySwitchMonIndex], a
 	callfar ForceEnemySwitch
 
+	; skip dragged out text
+	call CheckIfFastBattlesIsOn
+	jr nz, .skip_dragged_out_text
+
 	ld hl, DraggedOutText
 	call StdBattleTextbox
 
+.skip_dragged_out_text
 	ld hl, SpikesDamage
 	jmp CallBattleCore
 
@@ -5526,9 +5541,14 @@ BattleCommand_ForceSwitch:
 	ld hl, SwitchPlayerMon
 	call CallBattleCore
 
+	; skip dragged out text
+	call CheckIfFastBattlesIsOn
+	jr nz, .skip_dragged_out_text2
+
 	ld hl, DraggedOutText
 	call StdBattleTextbox
 
+.skip_dragged_out_text2
 	ld hl, SpikesDamage
 	jmp CallBattleCore
 
@@ -6011,7 +6031,7 @@ BattleCommand_Recoil:
 	predef AnimateHPBar
 	call RefreshBattleHuds
 
-	; skip recoil text if quick battles are on
+	; skip recoil text
 	call CheckIfFastBattlesIsOn
 	ret nz
 
@@ -6327,11 +6347,21 @@ BattleCommand_Heal:
 	call BattleCommand_SwitchTurn
 	call UpdateUserInParty
 	call RefreshBattleHuds
+
+	; skip regained health text
+	call CheckIfFastBattlesIsOn
+	ret nz
+
 	ld hl, RegainedHealthText
 	jmp StdBattleTextbox
 
 .hp_full
 	call AnimateFailedMove
+
+	; skip health is full text
+	call CheckIfFastBattlesIsOn
+	ret nz
+
 	ld hl, HPIsFullText
 	jmp StdBattleTextbox
 
@@ -6664,12 +6694,20 @@ BattleCommand_WeatherBasedHeal:
 	call BattleCommand_SwitchTurn
 	call UpdateUserInParty
 
+	; skip regained health text
+	call CheckIfFastBattlesIsOn
+	ret nz
+
 ; 'regained health!'
 	ld hl, RegainedHealthText
 	jmp StdBattleTextbox
 
 .Full:
 	call AnimateFailedMove
+
+	; skip health is full text
+	call CheckIfFastBattlesIsOn
+	ret nz
 
 ; 'hp is full!'
 	ld hl, HPIsFullText
