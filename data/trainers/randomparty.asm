@@ -63,7 +63,7 @@ RandomPartyLists::
 ; commented out team for future tests
 
 	; RANDOMLIST_2
-	db 9
+	db 10
 	db 50, RHYDON
 			db "Don@"		; Nickname
 			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
@@ -117,5 +117,11 @@ RandomPartyLists::
 			db $DD, $DD		; DVs - atk|def dv, spd|spc dv
 			db LIFE_ORB	; ITEM/ NO_ITEM is a thing
 			db IRON_HEAD, OUTRAGE, EARTHQUAKE, FIRE_FANG ; Moveset - NO_MOVE is a thing
+			db $fe ; End of Pokemon
+	db 50, GARDEVOIR
+			db "Tulpa@"		; Nickname
+			db $FF, $FF		; DVs - atk|def dv, spd|spc dv
+			db ZOOM_LENS	; ITEM/ NO_ITEM is a thing
+			db HYPNOSIS, DREAM_EATER, MOONBLAST, AURA_SPHERE ; Moveset - NO_MOVE is a thing
 			db $fe ; End of Pokemon
 	db -1 ; end
