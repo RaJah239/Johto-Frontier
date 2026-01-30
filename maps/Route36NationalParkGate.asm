@@ -233,7 +233,7 @@ Route36OfficerScriptContest:
 Route36Officer_ContestHasConcluded:
 	checkevent EVENT_CONTEST_OFFICER_HAS_SUN_STONE
 	iftrue .Sunstone
-	checkevent EVENT_CONTEST_OFFICER_HAS_EVERSTONE
+	checkevent EVENT_CONTEST_OFFICER_HAS_MOON_STONE
 	iftrue .Everstone
 	checkevent EVENT_CONTEST_OFFICER_HAS_GOLD_BERRY
 	iftrue .GoldBerry
@@ -256,9 +256,9 @@ Route36Officer_ContestHasConcluded:
 .Everstone:
 	writetext Route36NationalParkGateOfficer1HeresThePrizeText
 	promptbutton
-	verbosegiveitem EVERSTONE
+	verbosegiveitem MOON_STONE
 	iffalse .BagFull
-	clearevent EVENT_CONTEST_OFFICER_HAS_EVERSTONE
+	clearevent EVENT_CONTEST_OFFICER_HAS_MOON_STONE
 	closetext
 	end
 
