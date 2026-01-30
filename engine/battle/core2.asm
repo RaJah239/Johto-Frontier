@@ -2596,7 +2596,7 @@ StatsInfoBox:
 	ld b, 11
 	ld c, 2
 	ld hl, wEnemyMonMaxHP
-	jr StatsInfoBoxLoop
+	jmp StatsInfoBoxLoop
 
 FoeAbilityPageInfoBox:
 	hlcoord 0, 0
@@ -2619,12 +2619,95 @@ FoeAbilityPageInfoBox:
 
 	ld de, .AbilitiesString
 	hlcoord 1, 5
+	call PlaceString
+
+	ld de, .RemainingString
+	hlcoord 1, 2
+	call PlaceString
+
+; new code here
+	call CountFoeMonsRemaining
+	hlcoord 12, 2
+	cp 1
+	jr z, .one_left
+	cp 2
+	jr z, .two_left
+	cp 3
+	jr z, .three_left
+	cp 4
+	jr z, .four_left
+	cp 5
+	jr z, .five_left
+	; fallthrough
+
+;.six_left
+	ld de, .6ReamainsString
+	jmp PlaceString
+
+.one_left
+	ld de, .1ReamainsString
+	jmp PlaceString
+
+.two_left
+	ld de, .2ReamainsString
+	jmp PlaceString
+
+.three_left
+	ld de, .3ReamainsString
+	jmp PlaceString
+
+.four_left
+	ld de, .4ReamainsString
+	jmp PlaceString
+
+.five_left
+	ld de, .5ReamainsString
 	jmp PlaceString
 
 .FoeString:
 	db "Foe:@"
+.RemainingString:
+	db "Foe Count:@"
 .AbilitiesString:
 	db "Ability Info:@"
+
+.1ReamainsString:
+	db "1@"
+.2ReamainsString:
+	db "2@"
+.3ReamainsString:
+	db "3@"
+.4ReamainsString:
+	db "4@"
+.5ReamainsString:
+	db "5@"
+.6ReamainsString:
+	db "6@"
+
+CountFoeMonsRemaining:
+	xor a
+	ld b, a
+	ld a, [wOTPartyCount]
+	ld c, a
+	ld hl, wOTPartyMon1HP
+
+.loop
+	ld a, [hli]        ; HP low
+	or [hl]            ; OR with HP high
+	jr z, .fainted
+
+	inc b
+
+.fainted
+	inc hl
+	ld de, PARTYMON_STRUCT_LENGTH - 2
+	add hl, de
+
+	dec c
+	jr nz, .loop
+
+	ld a, b            ; A = remaining mons
+	ret
 
 StatsInfoBoxLoop:
 	push hl

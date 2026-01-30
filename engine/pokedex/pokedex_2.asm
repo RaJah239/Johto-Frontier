@@ -388,7 +388,7 @@ DisplayFoeNameAndAbility:
 	ld a, [wCurSpecies]
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
-	hlcoord 2, 2
+	hlcoord 6, 1
 	jmp PlaceFarString
 
 GetDexEntryPointer:
