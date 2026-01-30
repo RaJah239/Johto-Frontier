@@ -4897,15 +4897,16 @@ BattleMenu_Pack:
 	jmp BattleMenu
 
 .PokemonTypeChart:
-IF DEF(_DEBUG)
-	call ClearSprites
-	call FaintEnemyPokemon
-	call WinTrainerBattle
-	call WaitSFX
-	call LoadTilemapToTempTilemap
-	scf
-	ret
-ENDC
+; instant win
+;IF DEF(_DEBUG)
+;	call ClearSprites
+;	call FaintEnemyPokemon
+;	call WinTrainerBattle
+;	call WaitSFX
+;	call LoadTilemapToTempTilemap
+;	scf
+;	ret
+;ENDC
 	call ClearSprites
 	farcall TypeChart
 	jmp BattleMenu
