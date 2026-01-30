@@ -10,7 +10,38 @@ AzaleaMart_MapScripts:
 
 AzaleaMartClerkScript:
 	opentext
-	pokemart MARTTYPE_STANDARD, MART_AZALEA
+	readvar VAR_BADGES
+	ifgreater 7, .EightBadgesMart
+	ifgreater 6, .SevenBadgesMart
+	ifgreater 4, .FiveBadgesMart
+	ifgreater 2, .ThreeBadgesMart
+	ifgreater 0, .OneBadgeMart
+	pokemart MARTTYPE_STANDARD, MART_NO_BADGES
+	closetext
+	end
+
+.OneBadgeMart:
+	pokemart MARTTYPE_STANDARD, MART_ONE_BADGE
+	closetext
+	end
+
+.ThreeBadgesMart:
+	pokemart MARTTYPE_STANDARD, MART_THREE_BADGES
+	closetext
+	end
+
+.FiveBadgesMart:
+	pokemart MARTTYPE_STANDARD, MART_FIVE_BADGES
+	closetext
+	end
+
+.SevenBadgesMart:
+	pokemart MARTTYPE_STANDARD, MART_SEVEN_BADGES
+	closetext
+	end
+
+.EightBadgesMart:
+	pokemart MARTTYPE_STANDARD, MART_EIGHT_BADGES
 	closetext
 	end
 
