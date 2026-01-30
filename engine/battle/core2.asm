@@ -2625,44 +2625,30 @@ FoeAbilityPageInfoBox:
 	hlcoord 1, 2
 	call PlaceString
 
-; new code here
-	call CountFoeMonsRemaining
-	hlcoord 12, 2
-	cp 1
-	jr z, .one_left
-	cp 2
-	jr z, .two_left
-	cp 3
-	jr z, .three_left
-	cp 4
-	jr z, .four_left
-	cp 5
-	jr z, .five_left
-	; fallthrough
+	call CountFoeMonsRemaining   ; A = 1–6
 
-;.six_left
-	ld de, .6ReamainsString
+	dec a                        ; 0–5
+	add a                        ; *2
+	ld e, a
+	ld d, 0
+	ld hl, .RemainingStringTable
+	add hl, de
+
+	ld a, [hli]
+	ld e, a
+	ld a, [hl]
+	ld d, a
+
+	hlcoord 12, 2                ; SAFE here
 	jmp PlaceString
 
-.one_left
-	ld de, .1ReamainsString
-	jmp PlaceString
-
-.two_left
-	ld de, .2ReamainsString
-	jmp PlaceString
-
-.three_left
-	ld de, .3ReamainsString
-	jmp PlaceString
-
-.four_left
-	ld de, .4ReamainsString
-	jmp PlaceString
-
-.five_left
-	ld de, .5ReamainsString
-	jmp PlaceString
+.RemainingStringTable:
+	dw .1RemainsString
+	dw .2RemainsString
+	dw .3RemainsString
+	dw .4RemainsString
+	dw .5RemainsString
+	dw .6RemainsString
 
 .FoeString:
 	db "Foe:@"
@@ -2671,18 +2657,12 @@ FoeAbilityPageInfoBox:
 .AbilitiesString:
 	db "Ability Info:@"
 
-.1ReamainsString:
-	db "1@"
-.2ReamainsString:
-	db "2@"
-.3ReamainsString:
-	db "3@"
-.4ReamainsString:
-	db "4@"
-.5ReamainsString:
-	db "5@"
-.6ReamainsString:
-	db "6@"
+.1RemainsString: db "1@"
+.2RemainsString: db "2@"
+.3RemainsString: db "3@"
+.4RemainsString: db "4@"
+.5RemainsString: db "5@"
+.6RemainsString: db "6@"
 
 CountFoeMonsRemaining:
 	xor a
