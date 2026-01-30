@@ -2704,27 +2704,27 @@ PlayerAttackDamage:
 
 	ld hl, wBattleMonAttack
 	call CheckDamageStatsCritical
-	jr c, .thickcluborlightball
+	jr c, .meteormittsorlightball
 
 	ld hl, wEnemyDefense
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
 	ld hl, wPlayerAttack
-	jr .thickcluborlightball
+	jr .meteormittsorlightball
 
 .body_press
 ; Use player's defense instead of attack for Body Press
 	ld hl, wBattleMonDefense
 	call CheckDamageStatsCritical
-	jr c, .thickcluborlightball ; Use boosted stats
+	jr c, .meteormittsorlightball ; Use boosted stats
 
 	ld hl, wEnemyDefense
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
 	ld hl, wPlayerDefense
-	jr .thickcluborlightball
+	jr .meteormittsorlightball
 
 .special
 ; Psyshock is a special move, but targets the foe's defense stat.
@@ -2767,9 +2767,9 @@ PlayerAttackDamage:
 	call LightBallBoost
 	jr .done
 
-.thickcluborlightball
+.meteormittsorlightball
 ; Note: Returns player attack at hl in hl.
-	call ThickClubOrLightBallBoost
+	call MeteorMittsOrLightBallBoost
 
 .done
 	push hl
@@ -2873,11 +2873,11 @@ CheckDamageStatsCritical:
 	pop hl
 	ret
 
-ThickClubOrLightBallBoost:
+MeteorMittsOrLightBallBoost:
 ; Return in hl the stat value at hl.
 
-; If the attacking monster is Cubone or Marowak and
-; it's holding a Thick Club, or if it's Pikachu and
+; If the attacking monster is Clefairy or Clefable and
+; it's holding a Meteor Mitts, or if it's Pikachu and
 ; it's holding a Light Ball, double it.
 	push bc
 	push de
@@ -2894,9 +2894,9 @@ ThickClubOrLightBallBoost:
 	pop hl
 	cp PIKACHU
 	jr z, .lightball
-	ld b, DITTO
-	ld c, DITTO
-	ld d, THICK_CLUB
+	ld b, CLEFAIRY
+	ld c, CLEFABLE
+	ld d, METEOR_MITTS
 	call SpeciesItemBoost
 	jr .done
 
@@ -3015,27 +3015,27 @@ EnemyAttackDamage:
 
 	ld hl, wEnemyMonAttack
 	call CheckDamageStatsCritical
-	jr c, .thickcluborlightball
+	jr c, .meteormittsorlightball
 
 	ld hl, wPlayerDefense
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
 	ld hl, wEnemyAttack
-	jr c, .thickcluborlightball
+	jr c, .meteormittsorlightball
 
 .body_press
 ; Use enemy's defense instead of attack for Body Press
 	ld hl, wEnemyMonDefense
 	call CheckDamageStatsCritical
-	jr c, .thickcluborlightball ; Use boosted stats
+	jr c, .meteormittsorlightball ; Use boosted stats
 
 	ld hl, wPlayerDefense
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
 	ld hl, wEnemyDefense
-	jr .thickcluborlightball
+	jr .meteormittsorlightball
 
 .special
 ; Psyshock is a special move, but targets the player's defense stat.
@@ -3076,8 +3076,8 @@ EnemyAttackDamage:
 	call LightBallBoost
 	jr .done
 
-.thickcluborlightball
-	call ThickClubOrLightBallBoost
+.meteormittsorlightball
+	call MeteorMittsOrLightBallBoost
 
 .done
 	push hl

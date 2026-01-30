@@ -118,7 +118,7 @@ ItemDescriptions:
 	dw GSBallDesc
 	dw BlueCardDesc
 	dw MiracleSeedDesc
-	dw ThickClubDesc
+	dw MeteorMittsDesc
 	dw FocusBandDesc
 	dw CrystalDesc
 	dw EnergyPowderDesc
@@ -723,9 +723,9 @@ MiracleSeedDesc:
 	db   "Powers up grass-"
 	next "type moves. (HOLD)@"
 
-ThickClubDesc:
-	db   "Boost Cubone's and"
-	next "Marowak's Attack.@"
+MeteorMittsDesc:
+	db   "Doubles Clefairy"
+	next "line's Attack.@"
 
 FocusBandDesc:
 	db   "May prevent faint-"

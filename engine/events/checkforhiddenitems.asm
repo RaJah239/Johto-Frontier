@@ -145,7 +145,6 @@ RockItemEncounter:
 	
 .RockItems:
 	db 1, MAX_REVIVE
-	db 2, THICK_CLUB
 	db 4, NUGGET
 	db 6, STAR_PIECE
 	db 10, DOME_FOSSIL

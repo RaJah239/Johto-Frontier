@@ -117,7 +117,7 @@ ItemNames::
 	li "GS Ball"
 	li "Blue Card"
 	li "Miracle Seed"
-	li "Thick Club"
+	li "Meteor Mitts"
 	li "Focus Band"
 	li "Crystal"
 	li "EnergyPowder"

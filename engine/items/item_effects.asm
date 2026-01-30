@@ -131,7 +131,7 @@ ItemEffects:
 	dw NoEffect            ; GS_BALL
 	dw BlueCardEffect      ; BLUE_CARD
 	dw NoEffect            ; MIRACLE_SEED
-	dw NoEffect            ; THICK_CLUB
+	dw NoEffect            ; METEOR_MITTS
 	dw NoEffect            ; FOCUS_BAND
 	dw NoEffect            ; CRYSTAL
 	dw EnergypowderEffect  ; ENERGYPOWDER
