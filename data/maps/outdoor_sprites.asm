@@ -9,7 +9,6 @@ OutdoorSprites:
 	dw DungeonsGroupSprites
 	dw EcruteakGroupSprites
 	dw BlackthornGroupSprites
-	dw CinnabarGroupSprites
 	dw CeruleanGroupSprites
 	dw AzaleaGroupSprites
 	dw LakeOfRageGroupSprites
@@ -41,8 +40,6 @@ ViridianGroupSprites:
 ; Route2, Route22, ViridianCity
 PewterGroupSprites:
 ; Route3, PewterCity
-CinnabarGroupSprites:
-; Route19, Route20, Route21, CinnabarIsland
 	db SPRITE_TEACHER
 	db SPRITE_FISHER
 	db SPRITE_YOUNGSTER

@@ -5,7 +5,6 @@ MapGroupNum_Names::
 	dw Dungeons_Map_Names
 	dw Ecruteak_Map_Names
 	dw Blackthorn_Map_Names
-	dw Cinnabar_Map_Names
 	dw Cerulean_Map_Names
 	dw Azalea_Map_Names
 	dw Lake_of_Rage_Map_Names
@@ -201,10 +200,6 @@ Blackthorn_Map_Names: ;newgroup BLACKTHORN
 	dw Blackthorn_Map_Name9 ; map_const ROUTE_46,                                    10, 18 ;  9
 	dw Blackthorn_Map_Name10 ; map_const BLACKTHORN_CITY,                             20, 18 ; 10
 	assert_table_length NUM_BLACKTHORN_MAPS
-
-Cinnabar_Map_Names: ;newgroup CINNABAR
-	table_width 2, Cinnabar_Map_Names                                        ;  6
-	assert_table_length NUM_CINNABAR_MAPS
 
 Cerulean_Map_Names: ;newgroup CERULEAN
 	table_width 2, Cerulean_Map_Names                                             ;  7
