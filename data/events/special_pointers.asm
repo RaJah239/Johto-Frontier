@@ -198,5 +198,5 @@ SpecialsPointers::
 	add_special GetPartyCountWithoutEggs
 
 if DEF(_DEBUG)
-	add_special FillPokedex ; used for testing
+	add_special FillPokedex
 endc
