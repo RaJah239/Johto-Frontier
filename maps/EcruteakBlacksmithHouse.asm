@@ -1,0 +1,17 @@
+	object_const_def
+
+EcruteakBlacksmithHouse_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
+
+EcruteakBlacksmithHouse_MapEvents:
+	def_warp_events
+	warp_event  3,  7, ECRUTEAK_CITY, 16
+	warp_event  4,  7, ECRUTEAK_CITY, 16
+
+	def_coord_events
+
+	def_bg_events
+
+	def_object_events

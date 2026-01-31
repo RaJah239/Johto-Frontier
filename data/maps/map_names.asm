@@ -179,6 +179,7 @@ Ecruteak_Map_Names: ;newgroup ECRUTEAK
 	dw Ecruteak_Map_Name7 ; map_const ECRUTEAK_GYM ;  7
 	dw Ecruteak_Map_Name8 ; map_const ECRUTEAK_ITEMFINDER_HOUSE ;  8
 	dw Ecruteak_Map_Name9 ; map_const ECRUTEAK_CITY,                               20, 18 ;  9
+	dw Ecruteak_Map_Name10 ; map_const ECRUTEAK_BLACKSMITH_HOUSE ; 10
 	assert_table_length NUM_ECRUTEAK_MAPS
 
 Blackthorn_Map_Names: ;newgroup BLACKTHORN
@@ -615,6 +616,8 @@ Ecruteak_Map_Name8: ; map_const ECRUTEAK_ITEMFINDER_HOUSE ;  8
 	db "Itemfinder House@"
 Ecruteak_Map_Name9: ; map_const ECRUTEAK_CITY,;  5
 	db "Ecruteak City@"
+Ecruteak_Map_Name10: ; map_const ECRUTEAK_BLACKSMITH_HOUSE
+	db "Blacksmith's House@"
 
 Blackthorn_Map_Name1: ; map_const BLACKTHORN_GYM_1F ;  1
 	db "Blackthorn Gym@"
