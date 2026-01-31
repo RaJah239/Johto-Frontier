@@ -8,7 +8,6 @@ if DEF(_DEBUG)
 	const PLAYERSHOUSE2F_TEST_MON_REGULAR
 	const PLAYERSHOUSE2F_TEST_MON_SHINY
 	const PLAYERSHOUSE2F_DEBUGCOLOURPICKER
-	const PLAYERSHOUSE2F_KANTO_WARP
 	const PLAYERSHOUSE2F_MAXIMA
 endc
 
@@ -156,16 +155,6 @@ if DEF(_DEBUG)
 
 	; pokedex
 	setflag ENGINE_POKEDEX
-
-	; all badges
-	setflag ENGINE_ZEPHYRBADGE
-	setflag ENGINE_HIVEBADGE
-	setflag ENGINE_PLAINBADGE
-	setflag ENGINE_FOGBADGE
-	setflag ENGINE_STORMBADGE
-	setflag ENGINE_MINERALBADGE
-	setflag ENGINE_GLACIERBADGE
-	setflag ENGINE_RISINGBADGE
 
 	; fly points
 	setflag ENGINE_FLYPOINT_NEW_BARK
@@ -396,16 +385,48 @@ ShinyMonScript:
 DebugOptions:
 	faceplayer
 	opentext
+	writetext WelcomeToDebugOptionsText
 	loadmenu .MoveMenuHeader
 	verticalmenu
 	closewindow
-	ifequal 1, .FillPokedex
-	ifequal 2, .DebugColourPicker
+	ifequal 1, .AllBadges
+	ifequal 2, .FillPokedex
+	ifequal 3, .DebugColourPicker
+	ifequal 4, .WarpKanto
+	sjump .finish
+
+.AllBadges
+	writetext AllBadgesAcquiredText
+	waitbutton
+	playsound SFX_1ST_PLACE
+	waitsfx
+	; all badges
+	setflag ENGINE_ZEPHYRBADGE
+	setflag ENGINE_HIVEBADGE
+	setflag ENGINE_PLAINBADGE
+	setflag ENGINE_FOGBADGE
+	setflag ENGINE_STORMBADGE
+	setflag ENGINE_MINERALBADGE
+	setflag ENGINE_GLACIERBADGE
+	setflag ENGINE_RISINGBADGE
 	sjump .finish
 
 .FillPokedex
 	special FillPokedex
+	writetext FilledOutPokedexText
+	waitbutton
+	playsound SFX_1ST_PLACE
+	waitsfx
 	sjump .finish
+
+.WarpKanto
+	writetext WarpingToKantoText
+	waitbutton
+	special FadeOutToWhite
+	playsound SFX_WARP_TO
+	waitsfx
+	warp PALLET_TOWN, 4,  6 ; Map, coordinates via Polished Map
+	end
 
 .DebugColourPicker
 	special DebugColourPicker
@@ -415,22 +436,37 @@ DebugOptions:
 
 .MoveMenuHeader:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 3, 19, TEXTBOX_Y - 1
+	menu_coords 0, 0, 19, TEXTBOX_Y - 1
 	dw .MenuData
 	db 1 ; default option
 
 .MenuData:
 	db STATICMENU_CURSOR ; flags
-	db 3 ; items
-	db "#dex Complete!@"
+	db 5 ; items
+	db "All Badges@"
+	db "#dex Completed@"
 	db "Debug Color@"
+	db "Warp to Kanto@"
 	db "Cancel@"
 
-TestWarpScript:
-	faceplayer
-	special FadeOutToWhite
-	warp PALLET_TOWN, 4,  6 ; Map, coordinates via Polished Map
-	end
+WelcomeToDebugOptionsText:
+	text "Welcome to the"
+	line "Debug Options."
+	done
+
+AllBadgesAcquiredText:
+	text "All badges"
+	line "acquired!"
+	done
+
+FilledOutPokedexText:
+	text "#dex Completed!"
+	line "#mon Master!"
+	done
+
+WarpingToKantoText:
+	text "Warp…"
+	done
 endc
 
 PlayersHouse2F_MapEvents:
@@ -454,7 +490,6 @@ if DEF(_DEBUG)
 	object_event  4,  2, SPRITE_RED, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TestTrainerScript, -1
 	object_event  3,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RegularMonScript, -1
 	object_event  2,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ShinyMonScript, -1
-	object_event  7,  5, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, DebugOptions, -1
-	object_event  6,  2, SPRITE_BLUE, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TestWarpScript, -1
+	object_event  7,  5, SPRITE_PAPER, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, DebugOptions, -1
 	object_event  2,  3, SPRITE_MAXIMA, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RandomPartyTrainerScript, -1
 endc
