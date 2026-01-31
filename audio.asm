@@ -159,6 +159,7 @@ INCLUDE "audio/music/caveoforigin.asm"
 INCLUDE "audio/music/mayencounter.asm"
 INCLUDE "audio/music/surfingpikachu.asm"
 INCLUDE "audio/music/hoennchampionbattle.asm"
+INCLUDE "audio/music/zinnia_battle_final.asm"
 
 SECTION "Sound Effects", ROMX
 

@@ -113,4 +113,5 @@ Music:
 	dba Music_MayEncounter
 	dba Music_SurfingPikachu
 	dba Music_HoennChampionBattle
+	dba Music_ZinniaBattle
 	assert_table_length NUM_MUSIC_SONGS
