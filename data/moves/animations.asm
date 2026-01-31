@@ -344,10 +344,10 @@ BattleAnim_Frz:
 BattleAnim_Par:
 	anim_1gfx BATTLE_ANIM_GFX_STATUS
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
-	anim_sound 0, 0, SFX_THUNDERSHOCK
+	anim_sound 0, 0, SFX_ZAP_CANNON
 	anim_obj BATTLE_ANIM_OBJ_PARALYZED, 20, 88, $42
 	anim_obj BATTLE_ANIM_OBJ_PARALYZED, 76, 88, $c2
-	anim_wait 96
+	anim_wait 32
 	anim_ret
 
 BattleAnim_InLove:
