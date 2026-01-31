@@ -195,7 +195,7 @@ ItemEffects:
 	dw NoEffect            ; ASSAULT_VEST
 	dw NoEffect            ; BRICK_PIECE
 	dw TypeCodexEffect     ; TYPE_CODEX
-	dw NoEffect            ; ITEM_C3
+	dw NoEffect            ; GRIP_CLAW
 	dw NoEffect            ; ITEM_DC
 	dw NoEffect            ; ITEM_DE
 	dw NoEffect            ; ITEM_DF

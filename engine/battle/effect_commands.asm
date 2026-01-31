@@ -5891,12 +5891,31 @@ BattleCommand_TrapTarget:
 	call GetBattleVar
 	bit SUBSTATUS_SUBSTITUTE, a
 	ret nz
+
+	; here we check for Grip Claw 
+	; and have trapping moves last 7 turns
+	push bc
+	push de
+	push hl
+	call GetUserItem
+	ld a, b
+	cp HELD_GRIP_CLAW
+	pop hl
+	pop de
+	pop bc
+	jr z, .seven_turn_trapping
+
 	call BattleRandom
 	; trapped for 2-5 turns
 	and %11
 	inc a
 	inc a
 	inc a
+	jr .got_trap_count
+
+.seven_turn_trapping
+	ld a, 7
+.got_trap_count
 	ld [hl], a
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar

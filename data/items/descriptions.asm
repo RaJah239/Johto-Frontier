@@ -182,7 +182,7 @@ ItemDescriptions:
 	dw AssaultVestDesc
 	dw BrickPieceDesc
 	dw TypeCodexDesc
-	dw TeruSama27Desc
+	dw GripClawDesc
  	dw TeruSama28Desc
 	dw TeruSama26Desc
 	dw TeruSama26Desc
@@ -1008,26 +1008,16 @@ TypeCodexDesc:
 	db   "Summarizes all"
 	next "type advantages.@"
 
+GripClawDesc:
+	db   "Trapping moves"
+	next "last 7 turns.@"
+
 TeruSama26Desc:
-	db   "?@"
-
 TeruSama27Desc:
-	db   "?@"
-
 TeruSama28Desc:
-	db   "?@"
-
 TeruSama29Desc:
-	db   "?@"
-
 TeruSama30Desc:
-	db   "?@"
-
 TeruSama31Desc:
-	db   "?@"
-
 TeruSama32Desc:
-	db   "?@"
-
 TeruSama33Desc:
 	db   "?@"

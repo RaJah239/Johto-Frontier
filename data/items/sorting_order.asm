@@ -148,7 +148,7 @@ ItemNameOrder:
 
 
 ; NEXT POCKET
-; Battle Pocket - 57 total
+; Battle Pocket - 58 total
 
 ; Battle related Held Items
 	db AMULET_COIN
@@ -168,6 +168,7 @@ ItemNameOrder:
 	db FOCUS_BAND
 	db FOCUS_SASH
 	db FROST_SHARD
+	db GRIP_CLAW
 	db HEAVY_BOOTS
 	db HARD_STONE
 	db HASTE_HERB
@@ -278,9 +279,8 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 14 total
+; Unused Items - 13 total
 	db EGG_TICKET
-	db ITEM_C3
  	db ITEM_DC
  	db ITEM_DE
  	db ITEM_DF

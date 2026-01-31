@@ -181,7 +181,7 @@ ItemNames::
 	li "Assault Vest"
 	li "Brick Piece"
 	li "Type Codex"
-	li "?"
+	li "Grip Claw"
 	li "?"
 	li "?"
 	li "?"
