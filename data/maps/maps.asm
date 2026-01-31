@@ -22,7 +22,6 @@ MapGroupPointers::
 	dw MapGroup_Dungeons    ;  3
 	dw MapGroup_Ecruteak    ;  4
 	dw MapGroup_Blackthorn  ;  5
-	dw MapGroup_Cerulean    ;  7
 	dw MapGroup_Azalea      ;  8
 	dw MapGroup_LakeOfRage  ;  9
 	dw MapGroup_Violet      ; 10
@@ -187,10 +186,6 @@ MapGroup_Blackthorn:
 	map Route46, TILESET_JOHTO, ROUTE, LANDMARK_ROUTE_46, MUSIC_ROUTE_36, FALSE, PALETTE_AUTO, FISHGROUP_NONE
 	map BlackthornCity, TILESET_JOHTO, TOWN, LANDMARK_BLACKTHORN_CITY, MUSIC_AZALEA_TOWN, FALSE, PALETTE_AUTO, FISHGROUP_POND
 	assert_table_length NUM_BLACKTHORN_MAPS
-
-MapGroup_Cerulean:
-	table_width MAP_LENGTH, MapGroup_Cerulean
-	assert_table_length NUM_CERULEAN_MAPS
 
 MapGroup_Azalea:
 	table_width MAP_LENGTH, MapGroup_Azalea

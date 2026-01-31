@@ -9,7 +9,6 @@ OutdoorSprites:
 	dw DungeonsGroupSprites
 	dw EcruteakGroupSprites
 	dw BlackthornGroupSprites
-	dw CeruleanGroupSprites
 	dw AzaleaGroupSprites
 	dw LakeOfRageGroupSprites
 	dw VioletGroupSprites
@@ -53,9 +52,6 @@ PewterGroupSprites:
 	db SPRITE_POKE_BALL
 	db 0 ; end
 
-; CeruleanCity and Route5 are connected
-CeruleanGroupSprites:
-; Route4, Route9, Route10North, Route24, Route25, CeruleanCity
 SaffronGroupSprites:
 ; Route5, SaffronCity
 	db SPRITE_COOLTRAINER_M
