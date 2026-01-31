@@ -112,4 +112,5 @@ Music:
 	dba Music_CaveOfOrigin
 	dba Music_MayEncounter
 	dba Music_SurfingPikachu
+	dba Music_HoennChampionBattle
 	assert_table_length NUM_MUSIC_SONGS

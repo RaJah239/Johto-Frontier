@@ -109,6 +109,7 @@
 	const MUSIC_CAVE_OF_ORIGIN
 	const MUSIC_SCARLET
 	const MUSIC_SURFING_PIKACHU
+	const MUSIC_SCARLET_FINAL_THEME
 DEF NUM_MUSIC_SONGS EQU const_value
 
 ; GetMapMusic picks music for these values (see home/map.asm)
