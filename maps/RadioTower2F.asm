@@ -101,6 +101,12 @@ Buena:
 	iftrue .MidRocketTakeover
 	checkevent EVENT_MET_BUENA
 	iffalse .Introduction
+	
+	; always get the option to collect the 30x Sacred Ash
+	; if the player has 30 points
+	readvar VAR_BLUECARDBALANCE
+	ifequal BLUE_CARD_POINT_CAP, .BlueCardCapped1
+	
 	checkflag ENGINE_BUENAS_PASSWORD_2
 	iftrue .PlayedAlready
 	readvar VAR_HOUR
@@ -153,7 +159,7 @@ Buena:
 	pause 10
 	special RestartMapMusic
 	readvar VAR_BLUECARDBALANCE
-	ifequal BLUE_CARD_POINT_CAP, .BlueCardCapped0 ; supposed to be ".BlueCardCapped1" when figure out how to take 30 Points at once.
+	ifequal BLUE_CARD_POINT_CAP, .BlueCardCapped1
 	end
 
 .Introduction:
@@ -232,72 +238,73 @@ Buena:
 	turnobject RADIOTOWER2F_BUENA, RIGHT
 	end
 
-;.BlueCardCapped1:
-;	pause 10
-;	turnobject RADIOTOWER2F_BUENA, DOWN
-;	pause 10
-;	turnobject PLAYER, UP
-;	pause 10
-;	showemote EMOTE_SHOCK, RADIOTOWER2F_BUENA, 10
-;	opentext
-;	writetext RadioTower2FBuenaBlueCardFullDealText
-;	yesorno
-;	iftrue .Give3SacredAsh
-;	writetext SureNoProblemText
-;	closetext
-;	turnobject RADIOTOWER2F_BUENA, RIGHT
-;	end
-;
-;.Give3SacredAsh:
-;	giveitem SACRED_ASH, 4
-;	iffalse Script_YourPackIsStuffedFullTrainer
-;	writetext PlayerGotFourSacredAsh
-;	promptbutton
-;	writetext BuenaHoOhFlyingOverText
-;	closetext
-;	turnobject RADIOTOWER2F_BUENA, RIGHT
-;	end
-;
-;Script_YourPackIsStuffedFullTrainer:
-;	writetext PackIsFullMakeRoomText
-;	waitbutton
-;	closetext
-;	turnobject RADIOTOWER2F_BUENA, RIGHT
-;	end
-;
-;PlayerGotFourSacredAsh:
-;	text "<PLAYER> got four"
-;	line "SACRED ASH!@"
-;	sound_item
-;	text_promptbutton
-;	text_end
-;
-;PackIsFullMakeRoomText:
-;	text "Oops, your Items"
-;	line "POCKET is full."
-;
-;	para "Please make room"
-;	line "and come back."
-;	done
-;
-;SureNoProblemText:
-;	text "Sure, no problem!"
-;	line "Maybe next time?"
-;	done
-;
-;BuenaHoOhFlyingOverText:
-;	text "A rainbow colored"
-;	line "#MON sometimes"
-;	
-;	para "fly over this city"
-;	line "and drop these."
-;	
-;	para "I still have more,"
-;	line "so you can trade"
-;	
-;	para "your points again"
-;	line "in the future."
-;	done
+.BlueCardCapped1:
+	pause 10
+	turnobject RADIOTOWER2F_BUENA, DOWN
+	pause 10
+	turnobject PLAYER, UP
+	pause 10
+	showemote EMOTE_SHOCK, RADIOTOWER2F_BUENA, 10
+	opentext
+	writetext RadioTower2FBuenaBlueCardFullDealText
+	yesorno
+	iftrue .Give30SacredAsh
+	writetext SureNoProblemText
+	waitbutton
+	closetext
+	turnobject RADIOTOWER2F_BUENA, RIGHT
+	end
+
+.Give30SacredAsh:
+	giveitem SACRED_ASH, 30
+	iffalse Script_YourPackIsStuffedFullTrainer
+	readvar VAR_BLUECARDBALANCE
+	addval -30
+	writetext PlayerGotThirtySacredAsh
+	writetext BuenaHoOhFlyingOverText
+	waitbutton
+	closetext
+	turnobject RADIOTOWER2F_BUENA, RIGHT
+	end
+
+Script_YourPackIsStuffedFullTrainer:
+	writetext PackIsFullMakeRoomText
+	waitbutton
+	closetext
+	turnobject RADIOTOWER2F_BUENA, RIGHT
+	end
+
+PlayerGotThirtySacredAsh:
+	text "<PLAYER> got"
+	line "30× Sacred Ash!@"
+	sound_item
+	text_promptbutton
+	text_end
+
+PackIsFullMakeRoomText:
+	text "Oops, your pocket"
+	line "is full."
+	done
+
+SureNoProblemText:
+	text "Sure, no problem!"
+	line "Maybe next time?"
+	done
+
+BuenaHoOhFlyingOverText:
+	text "A rainbow colored"
+	line "#mon sometimes"
+	cont "fly over this city"
+	cont "and drop these."
+
+	para "I still have a lot"
+	line "so you can trade"
+	cont "30 points in the"
+	cont "future again if"
+	cont "you want more."
+	
+	para "See you around!"
+	done
 
 RadioTowerBuenaPrizeReceptionist:
 	faceplayer
@@ -613,20 +620,20 @@ RadioTower2FBuenaNoBlueCardText:
 	cont "don't have it."
 	done
 
-;RadioTower2FBuenaBlueCardFullDealText:
-;	text "BUENA: Oh! Your"
-;	line "BLUE CARD reached"
-;
-;	para "{d:BLUE_CARD_POINT_CAP} points today!"
-;	line "That's so wild!"
-;
-;	para "Hmm… I'll give you"
-;	line "special prize!"
-;
-;	para "How about trading"
-;	line "all your points"
-;	cont "for 4x SACRED ASH?"
-;	done
+RadioTower2FBuenaBlueCardFullDealText:
+	text "Buena: Oh! Your"
+	line "Blue Card reached"
+
+	para "{d:BLUE_CARD_POINT_CAP} points today!"
+	line "That's so wild!"
+
+	para "Hmm… I'll give you"
+	line "special prize!"
+
+	para "How about trading"
+	line "them all for"
+	cont "30× Sacred Ash?"
+	done
 
 RadioTower2FBuenaReceptionistPointsForPrizesText:
 	text "You can cash in"
