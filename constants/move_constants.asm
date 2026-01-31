@@ -263,7 +263,7 @@ DEF NUM_ATTACKS EQU const_value - 1
 
 ; Battle animations use the same constants as the moves up to this point
 	const_next $ff
-	const ANIM_BATTLE_MISS       ; ff ; unused
+	const ANIM_BATTLE_MISS       ; ff
 	const ANIM_THROW_POKE_BALL   ; 100
 	const ANIM_SEND_OUT_MON      ; 101
 	const ANIM_RETURN_MON        ; 102
