@@ -188,7 +188,7 @@
 	const BRICK_PIECE  ; b4
 	const TYPE_CODEX   ; be
 	const GRIP_CLAW    ; c3
- 	const ITEM_DC      ; dc
+ 	const CATCH_CHARM  ; dc
  	const ITEM_DE
  	const ITEM_DF
  	const ITEM_E0

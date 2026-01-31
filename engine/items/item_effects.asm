@@ -196,7 +196,7 @@ ItemEffects:
 	dw NoEffect            ; BRICK_PIECE
 	dw TypeCodexEffect     ; TYPE_CODEX
 	dw NoEffect            ; GRIP_CLAW
-	dw NoEffect            ; ITEM_DC
+	dw NoEffect            ; CATCH_CHARM
 	dw NoEffect            ; ITEM_DE
 	dw NoEffect            ; ITEM_DF
 	dw NoEffect            ; ITEM_E0

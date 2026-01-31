@@ -182,7 +182,7 @@ ItemNames::
 	li "Brick Piece"
 	li "Type Codex"
 	li "Grip Claw"
-	li "?"
+	li "Catch Charm"
 	li "?"
 	li "?"
 	li "?"

@@ -183,7 +183,7 @@ ItemDescriptions:
 	dw BrickPieceDesc
 	dw TypeCodexDesc
 	dw GripClawDesc
- 	dw TeruSama28Desc
+ 	dw CatchCharmDesc
 	dw TeruSama26Desc
 	dw TeruSama26Desc
 	dw TeruSama26Desc
@@ -1011,6 +1011,10 @@ TypeCodexDesc:
 GripClawDesc:
 	db   "Trapping moves"
 	next "last 7 turns.@"
+
+CatchCharmDesc:
+	db   "Doubles catch rate"
+	next "of statused foes.@"
 
 TeruSama26Desc:
 TeruSama27Desc:

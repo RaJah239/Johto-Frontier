@@ -148,7 +148,7 @@ ItemNameOrder:
 
 
 ; NEXT POCKET
-; Battle Pocket - 58 total
+; Battle Pocket - 59 total
 
 ; Battle related Held Items
 	db AMULET_COIN
@@ -158,6 +158,7 @@ ItemNameOrder:
 	db BLACKBELT_I
 	db BLACKGLASSES
 	db BRIGHTPOWDER
+	db CATCH_CHARM
 	db CHARCOAL
 	db CHOICE_BAND
 	db CHOICE_SPECS
@@ -279,9 +280,8 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 13 total
+; Unused Items - 12 total
 	db EGG_TICKET
- 	db ITEM_DC
  	db ITEM_DE
  	db ITEM_DF
  	db ITEM_E0
