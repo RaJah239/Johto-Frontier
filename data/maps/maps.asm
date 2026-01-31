@@ -27,18 +27,14 @@ MapGroupPointers::
 	dw MapGroup_Violet      ; 10
 	dw MapGroup_Goldenrod   ; 11
 	dw MapGroup_Pallet      ; 13
-	dw MapGroup_Pewter      ; 14
 	dw MapGroup_FastShip    ; 15
 	dw MapGroup_Indigo      ; 16
-	dw MapGroup_Fuchsia     ; 17
-	dw MapGroup_Lavender    ; 18
 	dw MapGroup_Silver      ; 19
 	dw MapGroup_CableClub   ; 20
 	dw MapGroup_Celadon     ; 21
 	dw MapGroup_Cianwood    ; 22
 	dw MapGroup_Viridian    ; 23
 	dw MapGroup_NewBark     ; 24
-	dw MapGroup_Saffron     ; 25
 	dw MapGroup_Cherrygrove ; 26
 	assert_table_length NUM_MAP_GROUPS
 
@@ -263,10 +259,6 @@ MapGroup_Pallet:
  	map OaksLab, TILESET_LAB, INDOOR, LANDMARK_PALLET_TOWN, MUSIC_POKEMON_TALK, FALSE, PALETTE_DAY, FISHGROUP_NONE
 	assert_table_length NUM_PALLET_MAPS
 
-MapGroup_Pewter:
-	table_width MAP_LENGTH, MapGroup_Pewter
-	assert_table_length NUM_PEWTER_MAPS
-
 MapGroup_FastShip:
 	table_width MAP_LENGTH, MapGroup_FastShip
 	map OlivinePort, TILESET_PORT, ROUTE, LANDMARK_OLIVINE_CITY, MUSIC_VERMILION_CITY, FALSE, PALETTE_AUTO, FISHGROUP_OCEAN
@@ -288,14 +280,6 @@ MapGroup_Indigo:
  	map HallOfFame, TILESET_ICE_PATH, INDOOR, LANDMARK_INDIGO_PLATEAU, MUSIC_NEW_BARK_TOWN, TRUE, PALETTE_DAY, FISHGROUP_NONE
 	map NurseJoyTrainingAcademy, TILESET_FACILITY, INDOOR, LANDMARK_ROUTE_23, MUSIC_POKEMON_CENTER, FALSE, PALETTE_DAY, FISHGROUP_NONE
 	assert_table_length NUM_INDIGO_MAPS
-
-MapGroup_Fuchsia:
-	table_width MAP_LENGTH, MapGroup_Fuchsia
-	assert_table_length NUM_FUCHSIA_MAPS
-
-MapGroup_Lavender:
-	table_width MAP_LENGTH, MapGroup_Lavender
-	assert_table_length NUM_LAVENDER_MAPS
 
 MapGroup_Silver:
 	table_width MAP_LENGTH, MapGroup_Silver
@@ -370,10 +354,6 @@ MapGroup_NewBark:
  	map Route27SandstormHouse, TILESET_HOUSE, INDOOR, LANDMARK_ROUTE_27, MUSIC_AZALEA_TOWN, FALSE, PALETTE_DAY, FISHGROUP_NONE
  	map Route29Route46Gate, TILESET_GATE, GATE, LANDMARK_ROUTE_29, MUSIC_ROUTE_29, FALSE, PALETTE_DAY, FISHGROUP_NONE
 	assert_table_length NUM_NEW_BARK_MAPS
-
-MapGroup_Saffron:
-	table_width MAP_LENGTH, MapGroup_Saffron
-	assert_table_length NUM_SAFFRON_MAPS
 
 MapGroup_Cherrygrove:
 	table_width MAP_LENGTH, MapGroup_Cherrygrove

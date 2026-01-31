@@ -246,9 +246,6 @@ ENDM
 	map_const OAKS_LAB,                                     5,  6 ;  6
 	endgroup
 
-	newgroup PEWTER                                               ; 14
-	endgroup
-
 	newgroup FAST_SHIP                                            ; 15
 	map_const OLIVINE_PORT,                                10, 18 ;  1
 	map_const OLIVINE_PORT_PASSAGE,                        10,  9 ;  8
@@ -269,12 +266,6 @@ ENDM
 	map_const NURSE_JOYS_TRAINING_ACADEMY,                  6,  5 ;  9
 	endgroup
 
-	newgroup FUCHSIA                                              ; 17
-	endgroup
-
-	newgroup LAVENDER                                             ; 18
-	endgroup
-
 	newgroup SILVER                                               ; 19
 	map_const SILVER_CAVE_OUTSIDE,                         20, 18 ;  2
 	map_const SILVER_CAVE_POKECENTER_1F,                    5,  4 ;  3
@@ -291,7 +282,6 @@ ENDM
 	endgroup
 
 	newgroup CELADON                                              ; 21
-
 	map_const CELADON_MANSION_1F,                           4,  5 ; 12
 	map_const CELADON_MANSION_2F,                           4,  5 ; 13
 	map_const CELADON_MANSION_3F,                           4,  5 ; 14
@@ -344,9 +334,6 @@ ENDM
 	map_const ROUTE_29_ROUTE_46_GATE,                       5,  4 ; 13
 	endgroup
 
-	newgroup SAFFRON                                              ; 25
-	endgroup
-
 	newgroup CHERRYGROVE                                          ; 26
 	map_const ROUTE_30,                                    10, 27 ;  1
 	map_const ROUTE_31,                                    20,  9 ;  2
@@ -361,4 +348,4 @@ ENDM
 	map_const ROUTE_31_VIOLET_GATE,                         5,  4 ; 11
 	endgroup
 
-DEF NUM_MAP_GROUPS EQU const_value ; 23
+DEF NUM_MAP_GROUPS EQU const_value ; 19

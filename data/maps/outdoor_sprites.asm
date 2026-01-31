@@ -14,30 +14,23 @@ OutdoorSprites:
 	dw VioletGroupSprites
 	dw GoldenrodGroupSprites
 	dw PalletGroupSprites
-	dw PewterGroupSprites
 	dw FastShipGroupSprites
 	dw IndigoGroupSprites
-	dw FuchsiaGroupSprites
-	dw LavenderGroupSprites
 	dw SilverGroupSprites
 	dw CableClubGroupSprites
 	dw CeladonGroupSprites
 	dw CianwoodGroupSprites
 	dw ViridianGroupSprites
 	dw NewBarkGroupSprites
-	dw SaffronGroupSprites
 	dw CherrygroveGroupSprites
 	assert_table_length NUM_MAP_GROUPS
 
 ; Route1 and ViridianCity are connected
-; Route2 and PewterCity are connected
 ; PalletTown and Route21 are connected
 PalletGroupSprites:
 ; Route1, PalletTown
 ViridianGroupSprites:
 ; Route2, Route22, ViridianCity
-PewterGroupSprites:
-; Route3, PewterCity
 	db SPRITE_TEACHER
 	db SPRITE_FISHER
 	db SPRITE_YOUNGSTER
@@ -51,22 +44,6 @@ PewterGroupSprites:
 	db SPRITE_POKE_BALL
 	db 0 ; end
 
-SaffronGroupSprites:
-; Route5, SaffronCity
-	db SPRITE_COOLTRAINER_M
-	db SPRITE_SUPER_NERD
-	db SPRITE_COOLTRAINER_F
-	db SPRITE_FISHER
-	db SPRITE_YOUNGSTER
-	db SPRITE_LASS
-	db SPRITE_POKEFAN_M
-	db SPRITE_ROCKET
-	db SPRITE_MISTY
-	; max 9 of 9 walking sprites
-	db SPRITE_POKE_BALL
-	db SPRITE_SLOWPOKE
-	db 0 ; end
-
 CeladonGroupSprites:
 ; Route7, Route16, Route17, CeladonCity
 	db SPRITE_FISHER
@@ -77,23 +54,6 @@ CeladonGroupSprites:
 	db SPRITE_BIKER
 	; 6 of max 9 walking sprites
 	db SPRITE_POLIWAG
-	db SPRITE_POKE_BALL
-	db 0 ; end
-
-LavenderGroupSprites:
-; Route8, Route12, Route10South, LavenderTown
-FuchsiaGroupSprites:
-; Route13, Route14, Route15, Route18, FuchsiaCity
-	db SPRITE_POKEFAN_M
-	db SPRITE_GRAMPS
-	db SPRITE_YOUNGSTER
-	db SPRITE_FISHER
-	db SPRITE_TEACHER
-	db SPRITE_SUPER_NERD
-	db SPRITE_BIKER
-	; 7 of max 9 walking sprites
-	db SPRITE_BIG_SNORLAX
-	db SPRITE_MACHOP
 	db SPRITE_POKE_BALL
 	db 0 ; end
 

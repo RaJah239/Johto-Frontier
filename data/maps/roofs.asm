@@ -21,19 +21,15 @@ MapGroupRoofs:
 	db ROOF_AZALEA    ;  9 (Lake of Rage)
 	db ROOF_VIOLET    ; 10 (Violet)
 	db ROOF_GOLDENROD ; 11 (Goldenrod)
-	db -1             ; 13
-	db -1             ; 14
+	db -1             ; 13 (Pallet)
 	db -1             ; 15
 	db -1             ; 16
-	db -1             ; 17
-	db -1             ; 18
 	db ROOF_NEW_BARK  ; 19 (Silver Cave)
 	db -1             ; 20
 	db -1             ; 21
 	db ROOF_OLIVINE   ; 22 (Cianwood)
 	db -1             ; 23
 	db ROOF_NEW_BARK  ; 24 (New Bark)
-	db -1             ; 25
 	db ROOF_NEW_BARK  ; 26 (Cherrygrove)
 	assert_table_length NUM_MAP_GROUPS + 1
 

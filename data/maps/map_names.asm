@@ -10,18 +10,14 @@ MapGroupNum_Names::
 	dw Violet_Map_Names
 	dw Goldenrod_Map_Names
 	dw Pallet_Map_Names
-	dw Pewter_Map_Names
 	dw Fast_Ship_Map_Names
 	dw Indigo_Map_Names
-	dw Fuchsia_Map_Names
-	dw Lavender_Map_Names
 	dw Silver_Map_Names
 	dw Cable_Club_Map_Names
 	dw Celadon_Map_Names
 	dw Cianwood_Map_Names
 	dw Viridian_Map_Names
 	dw New_Bark_Map_Names
-	dw Saffron_Map_Names
 	dw Cherrygrove_Map_Names
 	assert_table_length NUM_MAP_GROUPS
 
@@ -276,10 +272,6 @@ Pallet_Map_Names: ;newgroup PALLET
 	dw Pallet_Map_Name6 ; map_const OAKS_LAB ;  6
 	assert_table_length NUM_PALLET_MAPS
 
-Pewter_Map_Names: ;newgroup PEWTER
-	table_width 2, Pewter_Map_Names                                               ; 14
-	assert_table_length NUM_PEWTER_MAPS
-
 Fast_Ship_Map_Names: ;newgroup FAST_SHIP
 	table_width 2, Fast_Ship_Map_Names                                            ; 15
 	dw Fast_Ship_Map_Name1 ; map_const OLIVINE_PORT,                                10, 18 ;  1
@@ -301,14 +293,6 @@ Indigo_Map_Names: ;newgroup INDIGO
 	dw Indigo_Map_Name8 ; map_const HALL_OF_FAME ;  8
 	dw Indigo_Map_Name9 ; map_const NURSE_JOYS_TRAINING_ACADEMY ; 9
 	assert_table_length NUM_INDIGO_MAPS
-
-Fuchsia_Map_Names: ;newgroup FUCHSIA
-	table_width 2, Fuchsia_Map_Names                                              ; 17
-	assert_table_length NUM_FUCHSIA_MAPS
-
-Lavender_Map_Names: ;newgroup LAVENDER
-	table_width 2, Lavender_Map_Names                                            ; 18
-	assert_table_length NUM_LAVENDER_MAPS
 
 Silver_Map_Names: ;newgroup SILVER
 	table_width 2, Silver_Map_Names                                              ; 19
@@ -385,12 +369,6 @@ New_Bark_Map_Names: ; newgroup NEW_BARK ; 24
 	dw New_Bark_Map_Name13 ; map_const ROUTE_29_ROUTE_46_GATE ; 13
 	dw New_Bark_Map_Name14 ; map_const ROUTE_26__MAGNET_TRAIN_STATION ; 14
 	assert_table_length NUM_NEW_BARK_MAPS
-
-
-	; newgroup SAFFRON
-Saffron_Map_Names: ; 25
-	table_width 2, Saffron_Map_Names
-	assert_table_length NUM_SAFFRON_MAPS
 
 	; CHERRYGROVE, 26
 Cherrygrove_Map_Names:
