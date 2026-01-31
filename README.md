@@ -13,8 +13,8 @@ Ongoing Open World Johto region only game where you can do whatever you want, wh
 # Pokédex
 <img width="1198" height="684" alt="Johto Frontier&#39;s Dex" src="https://github.com/user-attachments/assets/42f214b1-bc65-4fa0-87c0-baee5cf7514a" />
 
+# [Move Animations](https://drive.google.com/drive/folders/1zEIR8OtEq_fpNl1VmUGGD8zOiNRnbk5U?usp=drive_link)
 
 
 # [Credits](https://github.com/RaJah239/Johto-Frontier/blob/000-Johto-Frontier/CREDITS.md)
-
 
