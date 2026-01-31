@@ -128,30 +128,6 @@ CheckAmuletCoin:
 	ld [wAmuletCoin], a
 	ret
 
-GetTeamHighestLevel:
-	ld a, [wPartyCount]
-	ld b, a
-	ld hl, wPartyMon1Level
-	ld a, [hl]
-	dec b
-	jr z, .SetLevel
-	ld de, PARTYMON_STRUCT_LENGTH
-	ld c, a
-
-.LoopPartyLevel
-	add hl, de
-	ld a, [hl]
-	cp c
-	jr c, .continue
-	ld c, a
-.continue
-	dec b
-	jr nz, .LoopPartyLevel
-	ld a, c
-.SetLevel
-	ld [wTeamHighestLevel], a
-	ret
-
 WriteDownOldStatsForGainCalculation::
 	inc hl ; Max HP.
 	inc hl ; Max HP + 1.

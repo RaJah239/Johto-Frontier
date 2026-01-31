@@ -7012,8 +7012,6 @@ GiveExperiencePoints:
 	bit 0, a
 	ret nz
 
-	farcall GetTeamHighestLevel
-
 	xor a
 	ld [wCurPartyMon], a
 	ld bc, wPartyMon1Species
@@ -7094,72 +7092,18 @@ GiveExperiencePoints:
 	jmp nc, .next_mon
 	push bc
 
-; Experience
-	ld a, [wEnemyMonLevel]
-	ld d, a
-
-; Calc the Exp Points
 	xor a
 	ldh [hMultiplicand + 0], a
 	ldh [hMultiplicand + 1], a
 	ld a, [wEnemyMonBaseExp]
 	ldh [hMultiplicand + 2], a
-	ld a, d
+	ld a, [wEnemyMonLevel]
 	ldh [hMultiplier], a
 	call Multiply
 	ld a, 7
 	ldh [hDivisor], a
 	ld b, 4
 	call Divide
-
-; Level Scaling for participants
-	pop bc
-	ld hl, MON_LEVEL
-	add hl, bc
-	ld a, [hl]	; Level of the Pokémon.
-	push bc
-	ld b, a
-	ld a, [wEnemyMonLevel]
-	sub b
-	jr c, .end_scaling	; Only if our Pokémon has a lower level
-	sub b
-	jr c, .scale_level
-	ln a, 2, 1 ; x2
-	call MultiplyAndDivide
-	jr .end_scaling
-.scale_level
-	ld a, [wEnemyMonLevel]	; Level of the foe
-	ldh [hMultiplier], a
-	call Multiply
-	ld a, b 	; Level of our Pokémon
-	ldh [hDivisor], a
-	ld b, 4
-	call Divide
-.end_scaling
-; Level Scaling compared with the highest-level
-	pop bc
-	ld hl, MON_LEVEL
-	add hl, bc
-	ld a, [hl]	; Pokémon’s level
-	push bc
-	ld b, a
-	ld a, [wTeamHighestLevel]
-	sub b
-	jr c, .end_party_level_scaling
-	sub b
-	jr c, .scale_level_2
-	ln a, 2, 1 ; x2 Experience gained on lower level Pokemon
-	call MultiplyAndDivide
-	jr .end_party_level_scaling
-.scale_level_2
-	ld a, [wTeamHighestLevel]	; Highest level in the team
-	ldh [hMultiplier], a
-	call Multiply
-	ld a, b 	; Level of our Pokémon.
-	ldh [hDivisor], a
-	ld b, 4
-	call Divide
-.end_party_level_scaling
 
 ; Boost Experience for traded Pokemon
 	pop bc
