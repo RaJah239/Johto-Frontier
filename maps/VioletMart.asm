@@ -52,17 +52,10 @@ VioletMartCooltrainerMScript:
 	jumptextfaceplayer VioletMartCooltrainerMText
 
 VioletMartGrannyText:
-	text "When you first"
-	line "catch a #MON,"
-	cont "it may be weak."
-
-	para "But it will even-"
-	line "tually grow to be"
-	cont "strong."
-
-	para "It's important to"
-	line "treat #MON with"
-	cont "love."
+	text "Just like Battle"
+	line "items, Mail must"
+	cont "also be held  by"
+	cont "#mon."
 	done
 
 VioletMartCooltrainerMText:
