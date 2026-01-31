@@ -21,6 +21,7 @@ BattleMusic_Trainers:
 	db POKEMON_PROF,     MUSIC_FINAL_BATTLE
 	db BLUE,             MUSIC_FINAL_BATTLE
 	db MAXIMA,           MUSIC_UNOVA_ELITE_FOUR_BATTLE
+	db SCARLET,          MUSIC_HOENN_RIVAL_BATTLE
 	db -1
 
 BattleMusic_Legendaries:

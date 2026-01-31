@@ -75,7 +75,7 @@ TrainerClassDVs:
 	dn  0,  0,  0,  0 ; PETREL
 	dn  0,  0,  0,  0 ; LORELEI
 	dn  0,  0,  0,  0 ; AGATHA
-	dn 15, 15, 15, 15 ; SCARLET
+	dn  8,  8,  8,  8 ; SCARLET
 	dn 15, 15, 15, 15 ; ARIANA
 	dn 15, 15, 15, 15 ; ARCHER
 	dn 15, 15, 15, 15 ; MAXIMA

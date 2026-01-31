@@ -350,8 +350,8 @@ TestTrainerScript:
 	faceplayer
 	special BackupPartyHeldItems
 	special HealParty
-	winlosstext TestText, TestText
-	loadtrainer RED, RED2
+	winlosstext TestText, 0
+	loadtrainer SCARLET, SCARLET1
 	startbattle
 	reloadmap
 	special RestorePartyHeldItems
@@ -487,7 +487,7 @@ PlayersHouse2F_MapEvents:
 	object_event  5,  4, SPRITE_DOLL_2, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseDoll2Script, EVENT_PLAYERS_HOUSE_2F_DOLL_2
 	object_event  0,  1, SPRITE_BIG_DOLL, SPRITEMOVEDATA_BIGDOLL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseBigDollScript, EVENT_PLAYERS_HOUSE_2F_BIG_DOLL
 if DEF(_DEBUG)
-	object_event  4,  2, SPRITE_RED, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TestTrainerScript, -1
+	object_event  4,  2, SPRITE_SCARLET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TestTrainerScript, -1
 	object_event  3,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RegularMonScript, -1
 	object_event  2,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ShinyMonScript, -1
 	object_event  7,  5, SPRITE_PAPER, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, DebugOptions, -1

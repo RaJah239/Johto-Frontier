@@ -177,6 +177,8 @@ INCLUDE "engine/battle/read_trainer_party.asm"
 ;SECTION "Enemy Trainer Parties 1", ROMX
 INCLUDE "data/trainers/parties.asm"
 
+SECTION "Scarlet Parties", ROMX
+INCLUDE "data/trainers/scarlet.asm"
 
 ;SECTION "Random Party Lists", ROMX
 INCLUDE "data/trainers/randomparty.asm"

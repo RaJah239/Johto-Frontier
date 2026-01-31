@@ -101,7 +101,6 @@ ArianaGroup:
 ArcherGroup:
 LoreleiGroup:
 AgathaGroup:
-ScarletGroup:
 	db "L@", TRAINERTYPE_NORMAL
 	db 2, ZUBAT
 	db -1 ; end
