@@ -9,7 +9,6 @@ MapGroupNum_Names::
 	dw Lake_of_Rage_Map_Names
 	dw Violet_Map_Names
 	dw Goldenrod_Map_Names
-	dw Vermilion_Map_Names
 	dw Pallet_Map_Names
 	dw Pewter_Map_Names
 	dw Fast_Ship_Map_Names
@@ -270,10 +269,6 @@ Goldenrod_Map_Names: ;newgroup GOLDENROD
 	dw Goldenrod_Map_Name24 ; map_const DAY_CARE ; 24
 	dw Goldenrod_Map_Name96 ; map_const DAY_CARE ; 25
 	assert_table_length NUM_GOLDENROD_MAPS
-
-Vermilion_Map_Names: ;newgroup VERMILION
-	table_width 2, Vermilion_Map_Names                                            ; 12
-	assert_table_length NUM_VERMILION_MAPS
 
 Pallet_Map_Names: ;newgroup PALLET
 	table_width 2, Pallet_Map_Names                                               ; 13

@@ -48,11 +48,6 @@
 	RGB 12,12,00, 10,09,05 ; nite
 	RGB 21,19,00, 17,13,06 ; eve
 
-; group 12 (Vermilion)
-	RGB 27,23,01, 23,11,00 ; morn/day
-	RGB 15,11,01, 11,10,01 ; nite
-	RGB 22,18,01, 20,08,00 ; eve
-
 ; group 13 (Pallet)
 	RGB 27,28,31, 17,19,22 ; morn/day
 	RGB 14,14,18, 10,09,13 ; nite

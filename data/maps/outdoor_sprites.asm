@@ -13,7 +13,6 @@ OutdoorSprites:
 	dw LakeOfRageGroupSprites
 	dw VioletGroupSprites
 	dw GoldenrodGroupSprites
-	dw VermilionGroupSprites
 	dw PalletGroupSprites
 	dw PewterGroupSprites
 	dw FastShipGroupSprites
@@ -81,9 +80,6 @@ CeladonGroupSprites:
 	db SPRITE_POKE_BALL
 	db 0 ; end
 
-; Route11, Route12 and Route13 are connected
-VermilionGroupSprites:
-; Route6, Route11, VermilionCity
 LavenderGroupSprites:
 ; Route8, Route12, Route10South, LavenderTown
 FuchsiaGroupSprites:

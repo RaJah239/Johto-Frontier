@@ -241,9 +241,6 @@ ENDM
 	map_const HATCH_ROOM,                                   3, 68 ; 25
 	endgroup
 
-	newgroup VERMILION                                            ; 12
-	endgroup
-
 	newgroup PALLET                                               ; 13
 	map_const PALLET_TOWN,                                  5,  4 ;  2
 	map_const OAKS_LAB,                                     5,  6 ;  6
@@ -364,4 +361,4 @@ ENDM
 	map_const ROUTE_31_VIOLET_GATE,                         5,  4 ; 11
 	endgroup
 
-DEF NUM_MAP_GROUPS EQU const_value ; 24
+DEF NUM_MAP_GROUPS EQU const_value ; 23

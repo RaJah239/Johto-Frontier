@@ -26,7 +26,6 @@ MapGroupPointers::
 	dw MapGroup_LakeOfRage  ;  9
 	dw MapGroup_Violet      ; 10
 	dw MapGroup_Goldenrod   ; 11
-	dw MapGroup_Vermilion   ; 12
 	dw MapGroup_Pallet      ; 13
 	dw MapGroup_Pewter      ; 14
 	dw MapGroup_FastShip    ; 15
@@ -257,10 +256,6 @@ MapGroup_Goldenrod:
  	map DayCare, TILESET_HOUSE, INDOOR, LANDMARK_ROUTE_34, MUSIC_AZALEA_TOWN, FALSE, PALETTE_DAY, FISHGROUP_NONE
 	map HatchRoom, TILESET_UNDERGROUND, INDOOR, LANDMARK_ROUTE_34, MUSIC_BICYCLE, FALSE, PALETTE_DAY, FISHGROUP_SHORE
 	assert_table_length NUM_GOLDENROD_MAPS
-
-MapGroup_Vermilion:
-	table_width MAP_LENGTH, MapGroup_Vermilion
-	assert_table_length NUM_VERMILION_MAPS
 
 MapGroup_Pallet:
 	table_width MAP_LENGTH, MapGroup_Pallet
