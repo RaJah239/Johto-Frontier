@@ -423,17 +423,13 @@ BugCatchingContestExplanationText:
 	para "Tuesday, Thursday"
 	line "and Saturday."
 
-	para "Not only do you"
-	line "earn a prize just"
+	para "Prizes are earned"
+	line "via placement."
 
-	para "for participating,"
-	line "you also get to"
-
-	para "keep the bug"
-	line "#MON you may"
-
-	para "have at the end of"
-	line "the contest."
+	para "1st: Sun Stone"
+	line "2nd: Moon Stone"
+	cont "3rd: Gold Berry"
+	cont "None: Berry"
 	done
 
 Route35NationalParkGateChanseyScript:
