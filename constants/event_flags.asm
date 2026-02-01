@@ -94,7 +94,7 @@
 	const EVENT_SHOWED_TOGEPI_TO_ELM
 	const EVENT_GOT_EVERSTONE_FROM_ELM
 	const EVENT_GOT_QUICK_CLAW
-	const EVENT_GOT_TM10_HIDDEN_POWER
+	const EVENT_MET_HIDDEN_POWER_GUY
 	const EVENT_GOT_TM36_SLUDGE_BOMB
 	const EVENT_GOT_ITEMFINDER
 	const EVENT_GOT_BICYCLE
@@ -206,8 +206,8 @@
 
 	const_next 200
 ; Kanto story events
-	const_skip
-	const_skip
+	const EVENT_TM_HIDDEN_POWER
+	const EVENT_TM_HIDDEN_FORCE
 	const_skip
 	const_skip
 	const_skip

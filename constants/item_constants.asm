@@ -268,7 +268,7 @@ DEF TM01 EQU const_value
 	add_tm SHADOW_BALL  ; de
 	add_tm MUD_SLAP     ; df
 	add_tm GUNK_SHOT    ; e0
-	add_tm ICE_PUNCH    ; e1
+	add_tm HIDDEN_FORCE ; e1
 	add_tm SWAGGER      ; e2
 	add_tm SLEEP_TALK   ; e3
 	add_tm SLUDGE_BOMB  ; e4

@@ -1,5 +1,7 @@
 	object_const_def
 	const LAKEOFRAGEHIDDENPOWERHOUSE_FISHER
+	const LAKEOFRAGEHIDDENPOWERHOUSE_TM_HIDDEN_POWER
+	const LAKEOFRAGEHIDDENPOWERHOUSE_TM_HIDDEN_FORCE
 
 LakeOfRageHiddenPowerHouse_MapScripts:
 	def_scene_scripts
@@ -9,26 +11,13 @@ LakeOfRageHiddenPowerHouse_MapScripts:
 HiddenPowerGuy:
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_TM10_HIDDEN_POWER
-	iftrue .AlreadyGotItem
-	writetext HiddenPowerGuyText1
-	promptbutton
-	verbosegiveitem TM_HIDDEN_POWER
-	iffalse .Done
-	setevent EVENT_GOT_TM10_HIDDEN_POWER
-	writetext HiddenPowerGuyText2
-	waitbutton
-	closetext
-	end
-.AlreadyGotItem:
-	writetext HiddenPowerGuyText3
-	waitbutton
-.Done:
-	closetext
-	end
+	checkevent EVENT_MET_HIDDEN_POWER_GUY
+	iftrue .AlreadyMet
+	setevent EVENT_MET_HIDDEN_POWER_GUY
+	writetextend HiddenPowerGuyText1
 
-HiddenPowerHouseBookshelf:
-	jumpstd DifficultBookshelfScript
+.AlreadyMet:
+	writetextend HiddenPowerGuyText2
 
 HiddenPowerGuyText1:
 	text "…You have strayed"
@@ -43,27 +32,43 @@ HiddenPowerGuyText1:
 	para "Let me share my"
 	line "power with your"
 
-	para "#MON."
-	line "Take this, child."
-	done
+	para "#mon. Take"
+	line "them both from the"
+	cont "table."
 
-HiddenPowerGuyText2:
-	text "Do you see it? It"
-	line "is HIDDEN POWER!"
+	para "Do you see them?"
+	line "Hidden Power and"
+	cont "Hidden Force!"
 
-	para "It draws out the"
-	line "power of #MON"
-	cont "for attacking."
+	para "They draw out the"
+	line "core trait of"
+	cont "#mon to attack."
 
 	para "Remember this: its"
 	line "type and power de-"
 	cont "pend on the #-"
-	cont "MON using it."
+	cont "mon using it"
+	cont "and can't be either"
+	cont "Fairy or Normal."
 	done
 
-HiddenPowerGuyText3:
-	text "I am meditating…"
+HiddenPowerGuyText2:
+	text "Remember this: its"
+	line "type and power de-"
+	cont "pend on the #-"
+	cont "mon using it"
+	cont "and can't be either"
+	cont "Fairy or Normal."
 	done
+
+LakeOfRageHiddenPowerHouseTMHiddenPower:
+	itemball TM_HIDDEN_POWER
+
+LakeOfRageHiddenPowerHouseTMHiddenForce:
+	itemball TM_HIDDEN_FORCE
+
+HiddenPowerHouseBookshelf:
+	jumpstd DifficultBookshelfScript
 
 LakeOfRageHiddenPowerHouse_MapEvents:
 	def_warp_events
@@ -77,4 +82,6 @@ LakeOfRageHiddenPowerHouse_MapEvents:
 	bg_event  1,  1, BGEVENT_READ, HiddenPowerHouseBookshelf
 
 	def_object_events
-	object_event  2,  3, SPRITE_FISHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, HiddenPowerGuy, -1
+	object_event  2,  4, SPRITE_FISHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, HiddenPowerGuy, -1
+	object_event  3,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, LakeOfRageHiddenPowerHouseTMHiddenPower, EVENT_TM_HIDDEN_POWER
+	object_event  4,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, LakeOfRageHiddenPowerHouseTMHiddenForce, EVENT_TM_HIDDEN_FORCE

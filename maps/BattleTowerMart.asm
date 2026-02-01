@@ -58,7 +58,7 @@ BattleTowerMartTMCoinTraderScript:
     ifequal 30, .TMShadowBall
     ifequal 31, .TMMudSlap
     ifequal 32, .TMGunkShot
-    ifequal 33, .TMIcePunch
+    ifequal 33, .TMHiddenForce
     ifequal 34, .TMSwagger
     ifequal 35, .TMSleepTalk
     ifequal 36, .TMSludgeBomb
@@ -244,8 +244,8 @@ BattleTowerMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMIcePunch:
-    verbosegiveitem TM_ICE_PUNCH
+.TMHiddenForce:
+    verbosegiveitem TM_HIDDEN_FORCE
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
