@@ -510,7 +510,7 @@ INCLUDE "engine/tilesets/tileset_anims.asm"
 INCLUDE "engine/events/npc_trade.asm"
 INCLUDE "engine/events/mom_phone.asm"
 INCLUDE "engine/events/tradeback_npc.asm"
-INCLUDE "engine/events/coinstmtrader.asm"
+INCLUDE "engine/events/crystals_tm_trader.asm"
 
 SECTION "mobile40", ROMX
 

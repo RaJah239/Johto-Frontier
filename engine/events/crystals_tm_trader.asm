@@ -1,6 +1,6 @@
 DEF NUMBER_OF_TMS EQU 50
 
-CoinsTMTrader:
+CrystalsTMTrader:
 	
 	call LoadStandardMenuHeader
 	ld c, $1

@@ -25,7 +25,7 @@ BattleTowerMartTMCoinTraderScript:
     checkitem CRYSTAL, 10
     ifequal HAVE_LESS, .NotEnoughCrystals
 .WantToBuyADifferentTM:
-    special CoinsTMTrader
+    special CrystalsTMTrader
     ifequal 1,  .TMMeteorMash
     ifequal 2,  .TMHeadbutt
     ifequal 3,  .TMCurse
