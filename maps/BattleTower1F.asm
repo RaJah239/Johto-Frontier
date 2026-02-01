@@ -649,8 +649,8 @@ Text_BattleTowerBugCatcher:
 
 BattleTower1F_MapEvents:
 	def_warp_events
-	warp_event  7,  9, BATTLE_TOWER_OUTSIDE, 1
-	warp_event  8,  9, BATTLE_TOWER_OUTSIDE, 4
+	warp_event  7,  9, BATTLE_PLAZA, 2
+	warp_event  8,  9, BATTLE_PLAZA, 3
 	warp_event  7,  0, BATTLE_TOWER_ELEVATOR, 1
 	warp_event  3,  0, BATTLE_TOWER_MART, 1
 	warp_event 12,  0, BATTLE_TOWER_MART, 4
