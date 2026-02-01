@@ -334,7 +334,7 @@ BattleAnim_Sap:
 
 BattleAnim_Frz:
 	anim_1gfx BATTLE_ANIM_GFX_ICE
-	anim_obj BATTLE_ANIM_OBJ_FROZEN, 44, 110, $0
+	anim_obj BATTLE_ANIM_OBJ_FROZEN, 44, 112, $0
 	anim_sound 0, 0, SFX_SHINE
 	anim_wait 16
 	anim_sound 0, 0, SFX_SHINE
