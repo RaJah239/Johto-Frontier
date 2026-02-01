@@ -6,6 +6,7 @@
 	const VICTORYROAD_POKE_BALL4
 	const VICTORYROAD_POKE_BALL5
 	const VICTORYROAD_CHANSEY
+	const VICTORYROAD_GS_BALL
 
 VictoryRoad_MapScripts:
 	def_scene_scripts
@@ -241,6 +242,9 @@ VictoryRoadRivalVictoryText:
 VictoryRoadChanseyScript:
 	jumpstd ChanseyHealsOWScript
 
+VictoryRoadGSBall:
+	itemball GS_BALL
+
 VictoryRoad_MapEvents:
 	def_warp_events
 	warp_event  9, 67, VICTORY_ROAD_GATE, 3
@@ -270,3 +274,4 @@ VictoryRoad_MapEvents:
 	object_event 15, 48, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, VictoryRoadFullHeal, EVENT_VICTORY_ROAD_FULL_HEAL
 	object_event  7, 38, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, VictoryRoadSacredAsh, EVENT_VICTORY_ROAD_SACRED_ASH
 	object_event 16, 12, SPRITE_CHANSEY_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, VictoryRoadChanseyScript, -1
+	object_event 11,  6, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_ITEMBALL, 0, VictoryRoadGSBall, EVENT_CAN_GIVE_GS_BALL_TO_KURT

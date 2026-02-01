@@ -1,5 +1,4 @@
 	object_const_def
-	const MTSILVER_GS_BALL
 
 SilverCaveOutside_MapScripts:
 	def_scene_scripts
@@ -42,9 +41,6 @@ MtSilverPokecenterSign:
 MtSilverSign:
 	jumptext MtSilverSignText
 
-SilverCaveOutsideGSBall:
-	itemball GS_BALL
-
 MtSilverSignText:
 	text "SILVER CAVE"
 	done
@@ -63,4 +59,3 @@ SilverCaveOutside_MapEvents:
 	bg_event 17, 13, BGEVENT_READ, MtSilverSign
 
 	def_object_events
-	object_event  9, 25, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_ITEMBALL, 0, SilverCaveOutsideGSBall, EVENT_CAN_GIVE_GS_BALL_TO_KURT
