@@ -343,6 +343,7 @@ Cianwood_Map_Names: ;newgroup CIANWOOD
 	dw Cianwood_Map_Name18 ; map_const CIANWOOD_PORT_PASSAGE ; 18
 	dw Cianwood_Map_Name19 ; map_const BATTLE_TOWER_MART ; 19
 	dw Cianwood_Map_Name20 ; map_const BATTLE_PLAZA ; 20
+	dw Cianwood_Map_Name21 ; map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION ; 21
 	assert_table_length NUM_CIANWOOD_MAPS
 
 
@@ -369,7 +370,6 @@ New_Bark_Map_Names: ; newgroup NEW_BARK ; 24
 	dw New_Bark_Map_Name11 ; map_const DAY_OF_WEEK_SIBLINGS_HOUSE ; 11
 	dw New_Bark_Map_Name12 ; map_const ROUTE_27_SANDSTORM_HOUSE ; 12
 	dw New_Bark_Map_Name13 ; map_const ROUTE_29_ROUTE_46_GATE ; 13
-	dw New_Bark_Map_Name14 ; map_const ROUTE_26__MAGNET_TRAIN_STATION ; 14
 	assert_table_length NUM_NEW_BARK_MAPS
 
 	; CHERRYGROVE, 26
@@ -864,6 +864,8 @@ Cianwood_Map_Name19: ; map_const BATTLE_TOWER_MART ; Crystal Trove
 	db "Battle Tower Mart@"
 Cianwood_Map_Name20: ; map_const BATTLE_PLAZA
 	db "Battle Plaza@"
+Cianwood_Map_Name21: ; map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION
+	db "Plaza Station@"
 
 Viridian_Map_Name6: ; map_const TRAINER_HOUSE_1F ;  6
 	db "Viridian House 1F@"
@@ -898,8 +900,6 @@ New_Bark_Map_Name12: ; map_const ROUTE_27_SANDSTORM_HOUSE ; 12
 	db "Route 27 House@"
 New_Bark_Map_Name13: ; map_const ROUTE_29_ROUTE_46_GATE ; 13
 	db "Route 29 Gate@"
-New_Bark_Map_Name14: ; map_const ROUTE_26__MAGNET_TRAIN_STATION ; 14
-	db "Route 29 Station@"
 
 Cherrygrove_Map_Name1: ; map_const ROUTE_30         ;  1
 	db "Route 30@"

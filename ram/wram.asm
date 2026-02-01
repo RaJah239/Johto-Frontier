@@ -3187,7 +3187,7 @@ wMobileTradeRoomSceneID::                         db
 wMobileBattleRoomSceneID::                        db
 wDayCareSceneID::                                 db
 wRoute30SceneID::                                 db
-wRoute26MagnetTrainStationSceneID::               db
+wBattlePlazaMagnetTrainStationSceneID::               db
 wOaksLab::                                        db ; Nayru62's scene in Oak's lab
 
 	ds 172

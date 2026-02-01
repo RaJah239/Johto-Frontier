@@ -447,7 +447,7 @@ ENDM
 	map_attributes PalletTown, PALLET_TOWN, $0f, 0
 	map_attributes CianwoodPort, CIANWOOD_PORT, $0a, 0
 	map_attributes CianwoodPortPassage, CIANWOOD_PORT_PASSAGE, $00, 0
-	map_attributes Route26MagnetTrainStation, ROUTE_26_MAGNET_TRAIN_STATION, $00, 0
+	map_attributes BattlePlazaMagnetTrainStation, BATTLE_PLAZA_MAGNET_TRAIN_STATION, $00, 0
 	map_attributes NurseJoyTrainingAcademy, NURSE_JOYS_TRAINING_ACADEMY, $00, 0
 	map_attributes EcruteakBlacksmithHouse, ECRUTEAK_BLACKSMITH_HOUSE, $00, 0
 	map_attributes BattlePlaza, BATTLE_PLAZA, $05, 0

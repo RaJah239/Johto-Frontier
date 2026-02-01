@@ -42,8 +42,8 @@ Route30_Blocks:
 Route26_Blocks:
 	INCBIN "maps/Route26.blk"
 
-Route26MagnetTrainStation_Blocks:
-	INCBIN "maps/Route26MagnetTrainStation.blk"
+BattlePlazaMagnetTrainStation_Blocks:
+	INCBIN "maps/BattlePlazaMagnetTrainStation.blk"
 
 Route42_Blocks:
 	INCBIN "maps/Route42.blk"
