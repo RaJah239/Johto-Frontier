@@ -3491,7 +3491,6 @@ TryToRunAwayFromBattle:
 	ld de, SFX_RUN
 	call WaitPlaySFX
 	pop de
-	call WaitSFX
 
 	; Skip GotAwaySafely text if fast battles is on
 	call CheckIfFastBattlesIsOn
