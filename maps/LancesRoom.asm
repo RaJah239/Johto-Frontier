@@ -134,6 +134,13 @@ LancesRoomLanceScript:
 	special FadeOutPalettes
 	pause 15
 	warpfacing UP, HALL_OF_FAME, 4, 13
+	checkevent EVENT_I_WANT_TO_DO_SOMETHING
+	iftrue .EcruteakBlackSmithFindsHisPassion
+	end
+
+.EcruteakBlackSmithFindsHisPassion
+	clearevent EVENT_SHINY_MON_CODEX
+	setevent EVENT_ECRUTEAK_BLACKSMITH_FINDS_HIS_PASSION
 	end
 
 LancesRoom_EnterMovement:
