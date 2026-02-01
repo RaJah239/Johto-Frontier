@@ -11,7 +11,7 @@ BattleTowerMart_MapScripts:
 BattleTowerMartTMCoinTraderScript:
     faceplayer
     opentext
-    special DisplayCoinCaseBalance
+    special CrystalCountInBag
     checkevent EVENT_BATTLE_TOWER_TM_MART_INTRO
     iftrue .WantToBuyATM
     writetext BattleTowerTMMartIntroText
@@ -22,8 +22,8 @@ BattleTowerMartTMCoinTraderScript:
 .WantToBuyATMAfterIntro:
     yesorno
     iffalse .Refused
-    checkcoins 9000
-    ifequal HAVE_LESS, .NotEnoughCoins
+    checkitem CRYSTAL, 10
+    ifequal HAVE_LESS, .NotEnoughCrystals
 .WantToBuyADifferentTM:
     special CoinsTMTrader
     ifequal 1,  .TMMeteorMash
@@ -76,8 +76,7 @@ BattleTowerMartTMCoinTraderScript:
     ifequal 48, .TMFirePunch
     ifequal 49, .TMFuryCutter
     ifequal 50, .TMTrick
-    sjump CancelBuyingTMsScript
-    end
+    sjump .CancelBuyingTMsScript
 
 .NoRoom:
     writetext YoureACollectorText
@@ -335,34 +334,22 @@ BattleTowerMartTMCoinTraderScript:
     sjump .ConcludeTransaction
 
 .Refused:
-    writetext WeAreOpenAlways
-    waitbutton
-    closetext
-    end
+    writetextend WeAreOpenAlways
 
-.NotEnoughCoins:
-    writetext NotEnoughCoinsText
-    waitbutton
-    closetext
-    end
+.NotEnoughCrystals:
+    writetextend NotEnoughCrystalsText
 
 .ConcludeTransaction:
-    special DisplayCoinCaseBalance
-    takecoins 9000
+    special CrystalCountInBag
+    takeitem CRYSTAL, 10
     waitsfx
     playsound SFX_TRANSACTION
-    special DisplayCoinCaseBalance
-    writetext ReturnAnytimeText
+    special CrystalCountInBag
     waitbutton
-    closetext
-    end 
+    sjump .WantToBuyADifferentTM
 
-CancelBuyingTMsScript:
-    opentext
-    writetext ComeAgainAgainText
-    waitbutton
-    closetext
-    end
+.CancelBuyingTMsScript:
+    writetextend ComeAgainAgainText
 
 ComeAgainAgainText:
     text "Please come again!"
@@ -374,7 +361,7 @@ BattleTowerTMMartIntroText:
 
     para "You can purchase"
     line "any TM here for"
-    cont "9,000 coins."
+    cont "10 Crystals."
 
     para "Are you in need of"
     line "anything?"
@@ -382,21 +369,16 @@ BattleTowerTMMartIntroText:
 
 BattleTowerTMMartBuyTMText:
     text "Welcome! Buy a TM"
-    line "for 9,000 coins?"
+    line "for 10 Crystals?"
     done
 
 WeAreOpenAlways:
     text "We are open 24/7."
     done
 
-NotEnoughCoinsText:
+NotEnoughCrystalsText:
     text "You don't have"
-    line "9,000 coins…"
-    done
-
-ReturnAnytimeText:
-    text "Do pay us a visit"
-    line "anytime!"
+    line "10 Crystals…"
     done
 
 YoureACollectorText:
