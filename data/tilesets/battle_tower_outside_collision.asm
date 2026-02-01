@@ -50,11 +50,11 @@
 	tilecoll WALL, FLOOR, WALL, FLOOR ; 31
 	tilecoll WALL, HEADBUTT_TREE, WALL, HEADBUTT_TREE ; 32
 	tilecoll WALL, WALL, WALL, WALL ; 33
-	tilecoll WHIRLPOOL, FLOOR, WHIRLPOOL, FLOOR ; 34
-	tilecoll WHIRLPOOL, FLOOR, FLOOR, FLOOR ; 35
-	tilecoll 5B, FLOOR, FLOOR, FLOOR ; 36
-	tilecoll 5B, 01, FLOOR, FLOOR ; 37
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 38
+	tilecoll WALL, WALL, WALL, WALL ; 34
+	tilecoll WALL, WALL, WALL, WALL ; 35
+	tilecoll WALL, WALL, WALL, WALL ; 36
+	tilecoll WALL, WALL, WALL, FLOOR ; 37
+	tilecoll WALL, WALL, FLOOR, WALL ; 38
 	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 39
 	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 3a
 	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 3b
