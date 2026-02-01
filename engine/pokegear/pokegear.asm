@@ -132,6 +132,8 @@ Pokegear_LoadGFX:
 	call GetWorldMapLocation
 	cp LANDMARK_FAST_SHIP
 	jr z, .ssaqua
+	cp LANDMARK_BATTLE_TOWER
+	jr z, .ssaqua
 	farcall GetPlayerIcon
 	push de
 	ld h, d
