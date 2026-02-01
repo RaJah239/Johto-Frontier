@@ -342,6 +342,7 @@ Cianwood_Map_Names: ;newgroup CIANWOOD
 	dw Cianwood_Map_Name17 ; map_const CIANWOOD_PORT ; 17
 	dw Cianwood_Map_Name18 ; map_const CIANWOOD_PORT_PASSAGE ; 18
 	dw Cianwood_Map_Name19 ; map_const BATTLE_TOWER_MART ; 19
+	dw Cianwood_Map_Name20 ; map_const BATTLE_PLAZA ; 20
 	assert_table_length NUM_CIANWOOD_MAPS
 
 
@@ -861,6 +862,8 @@ Cianwood_Map_Name18: ; map_const CIANWOOD_PORT_PASSAGE, ; 18
 	db "Cianwood Passage@"
 Cianwood_Map_Name19: ; map_const BATTLE_TOWER_MART ; Crystal Trove
 	db "Battle Tower Mart@"
+Cianwood_Map_Name20: ; map_const BATTLE_PLAZA
+	db "Battle Plaza@"
 
 Viridian_Map_Name6: ; map_const TRAINER_HOUSE_1F ;  6
 	db "Viridian House 1F@"

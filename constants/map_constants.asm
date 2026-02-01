@@ -310,6 +310,7 @@ ENDM
 	map_const CIANWOOD_PORT,                               10, 18 ; 17
 	map_const CIANWOOD_PORT_PASSAGE,                       10,  9 ; 18
 	map_const BATTLE_TOWER_MART,                            8,  5 ; 19	
+	map_const BATTLE_PLAZA,                                20, 14 ; 20
 	endgroup
 
 	newgroup VIRIDIAN                                             ; 23

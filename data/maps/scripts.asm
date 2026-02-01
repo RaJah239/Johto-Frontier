@@ -350,4 +350,7 @@ SECTION "Map Scripts 25", ROMX
 
 INCLUDE "maps/SilverCaveOutside.asm"
 
+SECTION "Battle Plaza Map Scripts", ROMX
+INCLUDE "maps/BattlePlaza.asm"
+
 ENDSECTION
