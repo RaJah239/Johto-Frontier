@@ -616,7 +616,6 @@ Route26_MapEvents:
 	warp_event 15, 57, ROUTE_26_HEAL_HOUSE, 1
 	warp_event 13,  5, VICTORY_ROAD_GATE, 1
 	warp_event  5, 71, DAY_OF_WEEK_SIBLINGS_HOUSE, 1
-	warp_event  7,  7, ROUTE_26_MAGNET_TRAIN_STATION, 1
 
 	def_coord_events
 
