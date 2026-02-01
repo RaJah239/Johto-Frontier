@@ -1208,7 +1208,7 @@ Script_UsedStrength:
 	end
 
 .skip:
-	refreshmap
+	reanchormap
 	closetext
 	end
 
