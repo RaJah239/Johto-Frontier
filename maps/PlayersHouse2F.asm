@@ -92,8 +92,8 @@ if DEF(_DEBUG)
 	;loadmem wPartyMon3DVs+1, $ff
 
 	; 1st mon moves
-	loadmem wPartyMon1Moves+0, SPLASH
-	loadmem wPartyMon1Moves+1, NO_MOVE
+	loadmem wPartyMon1Moves+0, SEED_BOMB
+	loadmem wPartyMon1Moves+1, SPLASH
 	loadmem wPartyMon1Moves+2, NO_MOVE
 	loadmem wPartyMon1Moves+3, NO_MOVE
 
