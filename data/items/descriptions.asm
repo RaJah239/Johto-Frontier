@@ -629,8 +629,8 @@ GrnApricornDesc:
 	db   "A green APRICORN.@"
 
 CleanseTagDesc:
-	db   "Helps repel wild"
-	next "#MON.@"
+	db   "Halves encounters"
+	next "of wild #MON.@"
 
 MysticWaterDesc:
 	db   "Powers up water-"
