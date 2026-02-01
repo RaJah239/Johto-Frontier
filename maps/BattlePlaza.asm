@@ -7,7 +7,7 @@ BattlePlaza_MapScripts:
 
 BattlePlaza_MapEvents:
 	def_warp_events
-	warp_event  3,  3, BATTLE_PLAZA_MAGNET_TRAIN_STATION, 1
+	warp_event  5,  3, BATTLE_PLAZA_MAGNET_TRAIN_STATION, 1
 
 	def_coord_events
 
