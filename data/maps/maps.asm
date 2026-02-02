@@ -31,7 +31,6 @@ MapGroupPointers::
 	dw MapGroup_Silver      ; 19
 	dw MapGroup_CableClub   ; 20
 	dw MapGroup_Cianwood    ; 22
-	dw MapGroup_Viridian    ; 23
 	dw MapGroup_NewBark     ; 24
 	dw MapGroup_Cherrygrove ; 26
 	assert_table_length NUM_MAP_GROUPS
@@ -322,10 +321,6 @@ MapGroup_Cianwood:
 	map BattlePlazaMagnetTrainStation, TILESET_TRAIN_STATION, INDOOR, LANDMARK_BATTLE_PLAZA, MUSIC_BATTLE_TOWER_THEME, FALSE, PALETTE_DAY, FISHGROUP_NONE
  	map OaksLab, TILESET_LAB, INDOOR, LANDMARK_BATTLE_PLAZA, MUSIC_POKEMON_TALK, FALSE, PALETTE_DAY, FISHGROUP_NONE
 	assert_table_length NUM_CIANWOOD_MAPS
-
-MapGroup_Viridian:
-	table_width MAP_LENGTH, MapGroup_Viridian
-	assert_table_length NUM_VIRIDIAN_MAPS
 
 MapGroup_NewBark:
 	table_width MAP_LENGTH, MapGroup_NewBark

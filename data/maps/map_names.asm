@@ -14,7 +14,6 @@ MapGroupNum_Names::
 	dw Silver_Map_Names
 	dw Cable_Club_Map_Names
 	dw Cianwood_Map_Names
-	dw Viridian_Map_Names
 	dw New_Bark_Map_Names
 	dw Cherrygrove_Map_Names
 	assert_table_length NUM_MAP_GROUPS
@@ -335,12 +334,6 @@ Cianwood_Map_Names: ;newgroup CIANWOOD
 	dw Cianwood_Map_Name21 ; map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION ; 21
 	dw Battle_Plaza_Map_Name22 ; map_const OAKS_LAB ;  22
 	assert_table_length NUM_CIANWOOD_MAPS
-
-
-Viridian_Map_Names: ;newgroup VIRIDIAN ; 23
-	table_width 2, Viridian_Map_Names
-	assert_table_length NUM_VIRIDIAN_MAPS
-
 	
 New_Bark_Map_Names: ; newgroup NEW_BARK ; 24
 	table_width 2, New_Bark_Map_Names

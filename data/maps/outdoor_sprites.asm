@@ -18,14 +18,9 @@ OutdoorSprites:
 	dw SilverGroupSprites
 	dw CableClubGroupSprites
 	dw CianwoodGroupSprites
-	dw ViridianGroupSprites
 	dw NewBarkGroupSprites
 	dw CherrygroveGroupSprites
 	assert_table_length NUM_MAP_GROUPS
-
-ViridianGroupSprites:
-	; max 9 of 9 walking sprites
-	db 0 ; end
 
 IndigoGroupSprites:
 ; Route23

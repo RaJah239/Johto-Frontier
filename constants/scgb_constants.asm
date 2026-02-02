@@ -52,7 +52,6 @@ DEF SCGB_DEFAULT EQU $ff
 ; GetPredefPal arguments (see engine/gfx/color.asm)
 	const_def
 	const PREDEFPAL_ROUTES
-	const PREDEFPAL_VIRIDIAN
 	const PREDEFPAL_INDIGO
 	const PREDEFPAL_NEW_BARK
 	const PREDEFPAL_CHERRYGROVE

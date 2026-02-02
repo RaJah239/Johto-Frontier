@@ -308,9 +308,6 @@ ENDM
 	map_const OAKS_LAB,                                     5,  6 ; 22
 	endgroup
 
-	newgroup VIRIDIAN                                             ; 23
-	endgroup
-
 	newgroup NEW_BARK                                             ; 24
 	map_const ROUTE_26,                                    10, 54 ;  1
 	map_const ROUTE_27,                                    40,  9 ;  2
@@ -341,4 +338,4 @@ ENDM
 	map_const ROUTE_31_VIOLET_GATE,                         5,  4 ; 11
 	endgroup
 
-DEF NUM_MAP_GROUPS EQU const_value ; 17
+DEF NUM_MAP_GROUPS EQU const_value ; 16
