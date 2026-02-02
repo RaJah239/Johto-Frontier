@@ -13,7 +13,7 @@
 	const ROUTE45_YOUNGSTER
 	const ROUTE45_BERRY_TREE1
 	const ROUTE45_BERRY_TREE2
-	const ROUTE45_BERRY_TREE3
+	const ROUTE45_RAIKOU
 
 Route45_MapScripts:
 	def_scene_scripts
@@ -434,12 +434,12 @@ Route45SignText:
 
 Route45BerryTree1:
 	opentext
-	getitemname STRING_BUFFER_3, MYSTERYBERRY
+	getitemname STRING_BUFFER_3, MIRACLEBERRY
 	writetext Route45TreeText
 	promptbutton
 	writetext Route45HeyItsBerryApricornText
 	promptbutton
-	giveitem MYSTERYBERRY
+	giveitem MIRACLEBERRY
 	iffalse Route45NoRoomInBag
 	disappear ROUTE45_BERRY_TREE1
 	writetext Route45FoundItemText
@@ -451,23 +451,6 @@ Route45BerryTree1:
 
 Route45BerryTree2:
 	opentext
-	getitemname STRING_BUFFER_3, MIRACLEBERRY
-	writetext Route45TreeText
-	promptbutton
-	writetext Route45HeyItsBerryApricornText
-	promptbutton
-	giveitem MIRACLEBERRY
-	iffalse Route45NoRoomInBag
-	disappear ROUTE45_BERRY_TREE2
-	writetext Route45FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
-Route45BerryTree3:
-	opentext
 	getitemname STRING_BUFFER_3, GOLD_BERRY
 	writetext Route45TreeText
 	promptbutton
@@ -475,7 +458,7 @@ Route45BerryTree3:
 	promptbutton
 	giveitem GOLD_BERRY
 	iffalse Route45NoRoomInBag
-	disappear ROUTE45_BERRY_TREE3
+	disappear ROUTE45_BERRY_TREE2
 	writetext Route45FoundItemText
 	playsound SFX_ITEM
 	waitsfx
@@ -518,6 +501,24 @@ Route45NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
+Route45StationaryRaikouScript:
+    faceplayer
+	opentext
+	writetext RaikouText
+	cry RAIKOU
+	pause 15
+	closetext
+	loadvar VAR_BATTLETYPE, BATTLETYPE_SUICUNE
+	loadwildmon RAIKOU, 40
+	startbattle
+	disappear ROUTE45_RAIKOU
+	reloadmapafterbattle
+	end
+	
+RaikouText:
+	text "Rrrr!"
+	done
+
 Route45_MapEvents:
 	def_warp_events
 	warp_event  2,  5, DARK_CAVE_BLACKTHORN_ENTRANCE, 1
@@ -528,7 +529,6 @@ Route45_MapEvents:
 	bg_event 10,  4, BGEVENT_READ, Route45Sign
 	bg_event 13, 80, BGEVENT_ITEM, Route45HiddenPpUp
 	bg_event 16, 82, BGEVENT_READ, Route45NoBerryOrApricorn
-	bg_event 15, 82, BGEVENT_READ, Route45NoBerryOrApricorn
 	bg_event 14, 82, BGEVENT_READ, Route45NoBerryOrApricorn
 
 	def_object_events
@@ -545,5 +545,5 @@ Route45_MapEvents:
 	object_event  7, 33, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route45MaxPotion, EVENT_ROUTE_45_MAX_POTION
 	object_event  4, 70, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, TrainerCamperQuentin, -1
 	object_event 16, 82, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_ORANGE, OBJECTTYPE_SCRIPT, 0, Route45BerryTree1, EVENT_ROUTE_45_BERRY_1
-	object_event 15, 82, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route45BerryTree2, EVENT_ROUTE_45_BERRY_2
-	object_event 14, 82, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, Route45BerryTree3, EVENT_ROUTE_45_BERRY_3
+	object_event 14, 82, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route45BerryTree2, EVENT_ROUTE_45_BERRY_2
+	object_event 13, 77, SPRITE_RAIKOU_OW, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route45StationaryRaikouScript, EVENT_ROUTE_45_RAIKOU
