@@ -249,7 +249,6 @@ ENDM
 
 	newgroup PALLET                                               ; 13
 	map_const PALLET_TOWN,                                  5,  4 ;  2
-	map_const OAKS_LAB,                                     5,  6 ;  6
 	endgroup
 
 	newgroup FAST_SHIP                                            ; 15
@@ -309,6 +308,7 @@ ENDM
 	map_const BATTLE_TOWER_MART,                            8,  5 ; 19	
 	map_const BATTLE_PLAZA,                                20, 14 ; 20
 	map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION,           10,  9 ; 21
+	map_const OAKS_LAB,                                     5,  6 ; 22
 	endgroup
 
 	newgroup VIRIDIAN                                             ; 23

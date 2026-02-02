@@ -274,7 +274,6 @@ Goldenrod_Map_Names: ;newgroup GOLDENROD
 Pallet_Map_Names: ;newgroup PALLET
 	table_width 2, Pallet_Map_Names                                               ; 13
 	dw Pallet_Map_Name2 ; map_const PALLET_TOWN,                                 10,  9 ;  2
-	dw Pallet_Map_Name6 ; map_const OAKS_LAB ;  6
 	assert_table_length NUM_PALLET_MAPS
 
 Fast_Ship_Map_Names: ;newgroup FAST_SHIP
@@ -339,6 +338,7 @@ Cianwood_Map_Names: ;newgroup CIANWOOD
 	dw Cianwood_Map_Name19 ; map_const BATTLE_TOWER_MART ; 19
 	dw Cianwood_Map_Name20 ; map_const BATTLE_PLAZA ; 20
 	dw Cianwood_Map_Name21 ; map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION ; 21
+	dw Battle_Plaza_Map_Name22 ; map_const OAKS_LAB ;  22
 	assert_table_length NUM_CIANWOOD_MAPS
 
 
@@ -763,8 +763,6 @@ Goldenrod_Map_Name29: ; map_const GOLDENROD_MANSION_ROOF_HOUSE ; 16
 
 Pallet_Map_Name2: ; map_const PALLET_TOWN,;  2
 	db "Pallet Town@"
-Pallet_Map_Name6: ; map_const OAKS_LAB ;  6  ; 14
-	db "Oak's Lab@"
 
 Fast_Ship_Map_Name1: ; map_const OLIVINE_PORT,;  1
 	db "Olivine Marina@"
@@ -858,6 +856,8 @@ Cianwood_Map_Name20: ; map_const BATTLE_PLAZA
 	db "Battle Plaza@"
 Cianwood_Map_Name21: ; map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION
 	db "Plaza Station@"
+Battle_Plaza_Map_Name22: ; map_const OAKS_LAB ;  6  ; 14
+	db "Oak's Lab@"
 
 Viridian_Map_Name6: ; map_const TRAINER_HOUSE_1F ;  6
 	db "Viridian House 1F@"

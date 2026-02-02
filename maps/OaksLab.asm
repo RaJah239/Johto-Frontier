@@ -465,8 +465,8 @@ AreYouFindingUseOfTheShinyCharmText:
 
 OaksLab_MapEvents:
 	def_warp_events
-	warp_event  4, 11, PALLET_TOWN, 1
-	warp_event  5, 11, PALLET_TOWN, 1
+	warp_event  4, 11, BATTLE_PLAZA, 4
+	warp_event  5, 11, BATTLE_PLAZA, 4
 
 	def_coord_events
 	coord_event  4,  6, SCENE_OAKS_LAB_NAYRU62, Nayru62CoordScript1
