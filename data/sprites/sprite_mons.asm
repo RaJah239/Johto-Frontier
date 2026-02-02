@@ -6,7 +6,7 @@ SpriteMons:
 	db GROWLITHE
 	db TURTWIG ; was WEEDLE
 	db RAIKOU
-	db RAIKOU
+	db ENTEI
 	db GENGAR
 	db ZUBAT
 	db MAGIKARP

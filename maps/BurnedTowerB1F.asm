@@ -8,6 +8,7 @@
 	const BURNEDTOWERB1F_SUICUNE2
 	const BURNEDTOWERB1F_POKE_BALL
 	const BURNEDTOWERB1F_EUSINE
+	const BURNEDTOWERB1F_ENTEI3
 
 BurnedTowerB1F_MapScripts:
 	def_scene_scripts
@@ -92,6 +93,7 @@ ReleaseTheBeasts:
 	clearevent EVENT_SAW_SUICUNE_AT_CIANWOOD_CITY
 	setevent EVENT_ECRUTEAK_GYM_GRAMPS
 	clearevent EVENT_ECRUTEAK_CITY_GRAMPS
+	clearevent EVENT_BURNED_TOWER_ENTEI
 	clearevent EVENT_ROUTE_45_RAIKOU
 	setevent EVENT_BURNED_TOWER_MORTY
 	setevent EVENT_BURNED_TOWER_1F_EUSINE
@@ -233,6 +235,24 @@ BurnedTowerB1FEusineText:
 	para "Farewell!"
 	done
 
+BurnedTowerStationaryEnteiScript:
+    faceplayer
+	opentext
+	writetext EnteiText
+	cry ENTEI
+	pause 15
+	closetext
+	loadvar VAR_BATTLETYPE, BATTLETYPE_SUICUNE
+	loadwildmon ENTEI, 40
+	startbattle
+	disappear BURNEDTOWERB1F_ENTEI3
+	reloadmapafterbattle
+	end
+	
+EnteiText:
+	text "Rrrr!"
+	done
+
 BurnedTowerB1F_MapEvents:
 	def_warp_events
 	warp_event 10,  9, BURNED_TOWER_1F, 3
@@ -257,3 +277,4 @@ BurnedTowerB1F_MapEvents:
 	object_event 10,  4, SPRITE_SUICUNE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_SILVER, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_BURNED_TOWER_B1F_BEASTS_2
 	object_event 16,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, BurnedTowerB1FTMEndure, EVENT_BURNED_TOWER_B1F_TM_ENDURE
 	object_event 10, 12, SPRITE_EUSINE, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, BurnedTowerB1FEusine, EVENT_EUSINE_IN_BURNED_TOWER
+	object_event  9,  4, SPRITE_ENTEI_OW, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BurnedTowerStationaryEnteiScript, EVENT_BURNED_TOWER_ENTEI

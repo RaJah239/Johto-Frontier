@@ -209,7 +209,7 @@
 	const EVENT_TM_HIDDEN_POWER
 	const EVENT_TM_HIDDEN_FORCE
 	const EVENT_ROUTE_45_RAIKOU
-	const_skip
+	const EVENT_BURNED_TOWER_ENTEI
 	const_skip
 	const EVENT_RESTORED_POWER_TO_KANTO
 	const_skip
