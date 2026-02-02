@@ -14,7 +14,6 @@ MapGroupNum_Names::
 	dw Indigo_Map_Names
 	dw Silver_Map_Names
 	dw Cable_Club_Map_Names
-	dw Celadon_Map_Names
 	dw Cianwood_Map_Names
 	dw Viridian_Map_Names
 	dw New_Bark_Map_Names
@@ -316,10 +315,6 @@ Cable_Club_Map_Names: ;newgroup CABLE_CLUB
 	dw Cable_Club_Map_Name5 ; map_const MOBILE_TRADE_ROOM ;  5
 	dw Cable_Club_Map_Name6 ; map_const MOBILE_BATTLE_ROOM ;  6
 	assert_table_length NUM_CABLE_CLUB_MAPS
-
-Celadon_Map_Names: ;newgroup CELADON
-	table_width 2, Celadon_Map_Names                                              ; 21
-	assert_table_length NUM_CELADON_MAPS
 
 Cianwood_Map_Names: ;newgroup CIANWOOD
 	table_width 2, Cianwood_Map_Names                                             ; 22

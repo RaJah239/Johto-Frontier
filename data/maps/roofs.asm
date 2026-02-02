@@ -23,7 +23,6 @@ MapGroupRoofs:
 	db ROOF_GOLDENROD ; 11 (Goldenrod)
 	db -1             ; 13 (Pallet)
 	db -1             ; 15
-	db -1             ; 16
 	db ROOF_NEW_BARK  ; 19 (Silver Cave)
 	db -1             ; 20
 	db -1             ; 21

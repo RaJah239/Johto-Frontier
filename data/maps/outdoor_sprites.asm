@@ -18,7 +18,6 @@ OutdoorSprites:
 	dw IndigoGroupSprites
 	dw SilverGroupSprites
 	dw CableClubGroupSprites
-	dw CeladonGroupSprites
 	dw CianwoodGroupSprites
 	dw ViridianGroupSprites
 	dw NewBarkGroupSprites
@@ -41,19 +40,6 @@ ViridianGroupSprites:
 	db SPRITE_SWIMMER_GIRL
 	db SPRITE_SWIMMER_GUY
 	; max 9 of 9 walking sprites
-	db SPRITE_POKE_BALL
-	db 0 ; end
-
-CeladonGroupSprites:
-; Route7, Route16, Route17, CeladonCity
-	db SPRITE_FISHER
-	db SPRITE_TEACHER
-	db SPRITE_GRAMPS
-	db SPRITE_YOUNGSTER
-	db SPRITE_LASS
-	db SPRITE_BIKER
-	; 6 of max 9 walking sprites
-	db SPRITE_POLIWAG
 	db SPRITE_POKE_BALL
 	db 0 ; end
 

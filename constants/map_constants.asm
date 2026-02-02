@@ -287,9 +287,6 @@ ENDM
 	map_const MOBILE_BATTLE_ROOM,                           5,  4 ;  6
 	endgroup
 
-	newgroup CELADON                                              ; 21
-	endgroup
-
 	newgroup CIANWOOD                                             ; 22
 	map_const ROUTE_40,                                    10, 18 ;  1
 	map_const ROUTE_41,                                    25, 27 ;  2
@@ -350,4 +347,4 @@ ENDM
 	map_const ROUTE_31_VIOLET_GATE,                         5,  4 ; 11
 	endgroup
 
-DEF NUM_MAP_GROUPS EQU const_value ; 19
+DEF NUM_MAP_GROUPS EQU const_value ; 18

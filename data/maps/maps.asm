@@ -31,7 +31,6 @@ MapGroupPointers::
 	dw MapGroup_Indigo      ; 16
 	dw MapGroup_Silver      ; 19
 	dw MapGroup_CableClub   ; 20
-	dw MapGroup_Celadon     ; 21
 	dw MapGroup_Cianwood    ; 22
 	dw MapGroup_Viridian    ; 23
 	dw MapGroup_NewBark     ; 24
@@ -303,10 +302,6 @@ MapGroup_CableClub:
  	map MobileTradeRoom, TILESET_MANSION, INDOOR, LANDMARK_SPECIAL, MUSIC_CHERRYGROVE_CITY, TRUE, PALETTE_DAY, FISHGROUP_NONE
  	map MobileBattleRoom, TILESET_MANSION, INDOOR, LANDMARK_SPECIAL, MUSIC_CHERRYGROVE_CITY, TRUE, PALETTE_DAY, FISHGROUP_NONE
 	assert_table_length NUM_CABLE_CLUB_MAPS
-
-MapGroup_Celadon:
-	table_width MAP_LENGTH, MapGroup_Celadon
- 	assert_table_length NUM_CELADON_MAPS
 
 MapGroup_Cianwood:
 	table_width MAP_LENGTH, MapGroup_Cianwood
