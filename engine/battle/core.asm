@@ -6030,46 +6030,7 @@ LoadEnemyMon:
 ; Wild DVs
 ; Here's where the fun starts
 
-; Roaming monsters (Entei, Raikou) work differently
-; They have their own structs, which are shorter than normal
 	ld a, [wBattleType]
-	cp BATTLETYPE_ROAMING
-	jr nz, .NotRoaming
-
-; Grab HP
-	call GetRoamMonHP
-	ld a, [hl]
-; Check if the HP has been initialized
-	and a
-; We'll do something with the result in a minute
-	push af
-
-; Grab DVs
-	call GetRoamMonDVs
-	inc hl
-	ld a, [hld]
-	ld c, a
-	ld b, [hl]
-
-; Get back the result of our check
-	pop af
-; If the RoamMon struct has already been initialized, we're done
-	jr nz, .UpdateDVs
-
-; If it hasn't, we need to initialize the DVs
-; (HP is initialized at the end of the battle)
-	call GetRoamMonDVs
-	inc hl
-	call BattleRandom
-	ld [hld], a
-	ld c, a
-	call BattleRandom
-	ld [hl], a
-	ld b, a
-; We're done with DVs
-	jr .UpdateDVs
-
-.NotRoaming:
 ; Register a contains wBattleType
 
 ; Forced shiny battle type
@@ -6289,20 +6250,7 @@ LoadEnemyMon:
 	ld a, [wEnemyMonMaxHP + 1]
 	ld [hl], a
 
-; ..unless it's a RoamMon
 	ld a, [wBattleType]
-	cp BATTLETYPE_ROAMING
-	jr nz, .Moves
-
-; Grab HP
-	call GetRoamMonHP
-	ld a, [hl]
-; Check if it's been initialized again
-	and a
-	jr z, .InitRoamHP
-; Update from the struct if it has
-	ld a, [hl]
-	ld [wEnemyMonHP + 1], a
 	jr .Moves
 
 .InitRoamHP:
@@ -8305,7 +8253,6 @@ InitEnemyWildmon:
 	predef_jump PlaceGraphic
 
 CleanUpBattleRAM:
-	call BattleEnd_HandleRoamMons
 	xor a
 	ld [wLowHealthAlarm], a
 	ld [wBattleMode], a
@@ -8533,106 +8480,6 @@ ReadAndPrintLinkBattleRecord:
 	db "Result Win Lose Draw@"
 .Total:
 	db "Total  Win Lose Draw@"
-
-BattleEnd_HandleRoamMons:
-	ld a, [wBattleType]
-	cp BATTLETYPE_ROAMING
-	jr nz, .not_roaming
-	ld a, [wBattleResult]
-	and $f
-	jr z, .caught_or_defeated_roam_mon ; WIN
-	call GetRoamMonHP
-	ld a, [wEnemyMonHP + 1]
-	ld [hl], a
-	jr .update_roam_mons
-
-.caught_or_defeated_roam_mon
-	call GetRoamMonHP
-	ld [hl], 0
-	call GetRoamMonMapGroup
-	ld [hl], GROUP_N_A
-	call GetRoamMonMapNumber
-	ld [hl], MAP_N_A
-	call GetRoamMonSpecies
-	ld [hl], 0
-	ret
-
-.not_roaming
-	call BattleRandom
-	and $f
-	ret nz
-
-.update_roam_mons
-	farjp UpdateRoamMons
-
-GetRoamMonMapGroup:
-	ld a, [wTempEnemyMonSpecies]
-	ld b, a
-	ld a, [wRoamMon1Species]
-	cp b
-	ld hl, wRoamMon1MapGroup
-	ret z
-	ld a, [wRoamMon2Species]
-	cp b
-	ld hl, wRoamMon2MapGroup
-	ret z
-	ld hl, wRoamMon3MapGroup
-	ret
-
-GetRoamMonMapNumber:
-	ld a, [wTempEnemyMonSpecies]
-	ld b, a
-	ld a, [wRoamMon1Species]
-	cp b
-	ld hl, wRoamMon1MapNumber
-	ret z
-	ld a, [wRoamMon2Species]
-	cp b
-	ld hl, wRoamMon2MapNumber
-	ret z
-	ld hl, wRoamMon3MapNumber
-	ret
-
-GetRoamMonHP:
-; output: hl = wRoamMonHP
-	ld a, [wTempEnemyMonSpecies]
-	ld b, a
-	ld a, [wRoamMon1Species]
-	cp b
-	ld hl, wRoamMon1HP
-	ret z
-	ld a, [wRoamMon2Species]
-	cp b
-	ld hl, wRoamMon2HP
-	ret z
-	ld hl, wRoamMon3HP
-	ret
-
-GetRoamMonDVs:
-; output: hl = wRoamMonDVs
-	ld a, [wTempEnemyMonSpecies]
-	ld b, a
-	ld a, [wRoamMon1Species]
-	cp b
-	ld hl, wRoamMon1DVs
-	ret z
-	ld a, [wRoamMon2Species]
-	cp b
-	ld hl, wRoamMon2DVs
-	ret z
-	ld hl, wRoamMon3DVs
-	ret
-
-GetRoamMonSpecies:
-	ld a, [wTempEnemyMonSpecies]
-	ld hl, wRoamMon1Species
-	cp [hl]
-	ret z
-	ld hl, wRoamMon2Species
-	cp [hl]
-	ret z
-	ld hl, wRoamMon3Species
-	ret
 
 AddLastLinkBattleToLinkRecord:
 	ld hl, wOTPlayerID
