@@ -812,15 +812,17 @@ TryEnemyFlee:
 	and SLP_MASK
 	jr nz, .Stay
 
-	ld de, EVENT_THREE_BEASTS_CAUGHT
-	ld b, CHECK_FLAG
-	call EventFlagAction
-	jr nz, .Stay
+	; 30% chance to flee
+	call BattleRandom
+	ld b, a
+	cp 30 percent + 1
+	jr nc, .Stay
 
+	push bc
 	ld a, [wTempEnemyMonSpecies]
-	ld de, 1
-	ld hl, AlwaysFleeMons
-	call IsInArray
+	ld hl, SometimesFleeMons
+	call IsInByteArray
+	pop bc
 	jr c, .Flee
 
 .Stay:
