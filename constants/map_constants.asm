@@ -265,6 +265,7 @@ ENDM
 	map_const LANCES_ROOM,                                  5, 12 ;  7
 	map_const HALL_OF_FAME,                                 5,  7 ;  8
 	map_const NURSE_JOYS_TRAINING_ACADEMY,                  6,  5 ;  9
+	map_const VICTORY_ROAD_GATE,                            6,  9 ; 13
 	endgroup
 
 	newgroup SILVER                                               ; 19
@@ -308,7 +309,6 @@ ENDM
 	endgroup
 
 	newgroup VIRIDIAN                                             ; 23
-	map_const VICTORY_ROAD_GATE,                            6,  9 ; 13
 	endgroup
 
 	newgroup NEW_BARK                                             ; 24

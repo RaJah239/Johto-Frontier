@@ -290,6 +290,7 @@ Indigo_Map_Names: ;newgroup INDIGO
 	dw Indigo_Map_Name7 ; map_const LANCES_ROOM ; 7
 	dw Indigo_Map_Name8 ; map_const HALL_OF_FAME ;  8
 	dw Indigo_Map_Name9 ; map_const NURSE_JOYS_TRAINING_ACADEMY ; 9
+	dw Viridian_Map_Name13 ; map_const VICTORY_ROAD_GATE,                           10,  9 ; 13
 	assert_table_length NUM_INDIGO_MAPS
 
 Silver_Map_Names: ;newgroup SILVER
@@ -338,7 +339,6 @@ Cianwood_Map_Names: ;newgroup CIANWOOD
 
 Viridian_Map_Names: ;newgroup VIRIDIAN ; 23
 	table_width 2, Viridian_Map_Names
-	dw Viridian_Map_Name13 ; map_const VICTORY_ROAD_GATE,                           10,  9 ; 13
 	assert_table_length NUM_VIRIDIAN_MAPS
 
 	
@@ -782,6 +782,8 @@ Indigo_Map_Name8: ; map_const HALL_OF_FAME ;  8
 	db "E4 Hall Of Fame@"
 Indigo_Map_Name9: ; map_const NURSE_JOYS_TRAINING_ACADEMY ; 9
 	db "Joy's Academy@"
+Viridian_Map_Name13: ; map_const VICTORY_ROAD_GATE, 13
+	db "Victory Road Gate@"
 
 Silver_Map_Name1: ; map_const SILVER_CAVE_OUTSIDE;  1
 	db "Mt. Silver@"
@@ -847,9 +849,6 @@ Cianwood_Map_Name21: ; map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION
 	db "Plaza Station@"
 Battle_Plaza_Map_Name22: ; map_const OAKS_LAB ;  6  ; 14
 	db "Oak's Lab@"
-
-Viridian_Map_Name13: ; map_const VICTORY_ROAD_GATE, 13
-	db "Victory Road Gate@"
 
 New_Bark_Map_Name1: ; map_const ROUTE_26,  1
 	db "Route 26@"
