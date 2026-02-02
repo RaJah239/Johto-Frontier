@@ -630,8 +630,8 @@ BattleTowerHallway_Blocks:
 BattleTowerElevator_Blocks:
 	INCBIN "maps/BattleTowerElevator.blk"
 
-BattleTowerOutside_Blocks:
-	INCBIN "maps/BattleTowerOutside.blk"
+PowerPlantOutside_Blocks:
+	INCBIN "maps/PowerPlantOutside.blk"
 
 GoldenrodDeptStoreRoof_Blocks:
 	INCBIN "maps/GoldenrodDeptStoreRoof.blk"

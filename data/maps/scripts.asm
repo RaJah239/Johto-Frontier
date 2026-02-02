@@ -216,7 +216,7 @@ INCLUDE "maps/BattleTowerBattleRoom.asm"
 INCLUDE "maps/BattleTowerElevator.asm"
 INCLUDE "maps/BattleTowerHallway.asm"
 INCLUDE "maps/Route40BattleTowerGate.asm"
-INCLUDE "maps/BattleTowerOutside.asm"
+INCLUDE "maps/PowerPlantOutside.asm"
 INCLUDE "maps/BattleTowerMart.asm"
 
 
