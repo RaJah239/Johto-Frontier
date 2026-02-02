@@ -348,8 +348,8 @@ PowerPlantManagerMyBelovedGeneratorText:
 
 PowerPlant_MapEvents:
 	def_warp_events
-	warp_event  2, 17, BATTLE_TOWER_OUTSIDE, 1
-	warp_event  3, 17, BATTLE_TOWER_OUTSIDE, 1
+	warp_event  2, 17, POWER_PLANT_OUTSIDE, 1
+	warp_event  3, 17, POWER_PLANT_OUTSIDE, 1
 
 	def_coord_events
 

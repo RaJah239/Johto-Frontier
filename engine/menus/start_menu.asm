@@ -640,7 +640,7 @@ Fast_Travel_Warp_Locations:
 	map_id ECRUTEAK_CITY
 	map_id SILVER_CAVE_OUTSIDE
 	map_id OLIVINE_CITY
-	map_id BATTLE_TOWER_OUTSIDE
+	map_id POWER_PLANT_OUTSIDE
 	map_id CIANWOOD_CITY
 	map_id MT_MORTAR_SQUARE
 	map_id MAHOGANY_TOWN
