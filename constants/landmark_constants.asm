@@ -33,6 +33,7 @@
 	const LANDMARK_OLIVINE_CITY      ; 1b
 	const LANDMARK_LIGHTHOUSE        ; 1c
 	const LANDMARK_ROUTE_40          ; 1e
+	const LANDMARK_POWER_PLANT
 	const LANDMARK_WHIRL_ISLANDS     ; 1f
 	const LANDMARK_ROUTE_41          ; 20
 	const LANDMARK_CIANWOOD_CITY     ; 21
@@ -53,7 +54,6 @@
 	const LANDMARK_VICTORY_ROAD      ; 58
 	const LANDMARK_ROUTE_23          ; 59
 	const LANDMARK_INDIGO_PLATEAU    ; 5a
-	const LANDMARK_POWER_PLANT
 	const LANDMARK_BATTLE_PLAZA      ; 1d
 DEF KANTO_LANDMARK EQU const_value
 	const LANDMARK_PALLET_TOWN       ; 2f

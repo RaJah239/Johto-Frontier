@@ -39,6 +39,7 @@ Landmarks:
 	landmark  28,  60, OlivineCityName
 	landmark  30,  62, LighthouseName
 	landmark  20,  60, Route40Name
+	landmark  20,  52, PowerPlantName
 	landmark  20,  92, WhirlIslandsName
 	landmark  20, 100, Route41Name
 	landmark  12, 100, CianwoodCityName
@@ -59,7 +60,6 @@ Landmarks:
 	landmark 148,  52, VictoryRoadName
 	landmark 148,  44, Route23Name
 	landmark 148,  36, IndigoPlateauName	
-	landmark  20,  52, PowerPlantName
 	landmark 160, 160, BattlePlazaName
 	assert_table_length KANTO_LANDMARK
 	landmark  52, 108, PalletTownName
