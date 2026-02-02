@@ -33,9 +33,6 @@ Route29_Blocks:
 Route37_Blocks:
 	INCBIN "maps/Route37.blk"
 
-PalletTown_Blocks:
-	INCBIN "maps/PalletTown.blk"
-
 Route30_Blocks:
 	INCBIN "maps/Route30.blk"
 

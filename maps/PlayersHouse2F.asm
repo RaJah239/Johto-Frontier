@@ -170,7 +170,6 @@ if DEF(_DEBUG)
 	setflag ENGINE_FLYPOINT_BLACKTHORN
 	setflag ENGINE_FLYPOINT_SILVER_CAVE
 	setflag ENGINE_FLYPOINT_INDIGO_PLATEAU
-	setflag ENGINE_FLYPOINT_PALLET
 	
 	; new flypoints
 	setflag ENGINE_FLYPOINT_RUINS_OF_ALPH
@@ -386,7 +385,7 @@ DebugOptions:
 	ifequal 1, .AllBadges
 	ifequal 2, .FillPokedex
 	ifequal 3, .DebugColourPicker
-	ifequal 4, .WarpKanto
+	ifequal 4, .Unused
 	sjump .finish
 
 .AllBadges
@@ -413,14 +412,8 @@ DebugOptions:
 	waitsfx
 	sjump .finish
 
-.WarpKanto
-	writetext WarpingToKantoText
-	waitbutton
-	special FadeOutToWhite
-	playsound SFX_WARP_TO
-	waitsfx
-	warp PALLET_TOWN, 4,  6 ; Map, coordinates via Polished Map
-	end
+.Unused
+	sjump .finish
 
 .DebugColourPicker
 	special DebugColourPicker
@@ -440,7 +433,7 @@ DebugOptions:
 	db "All Badges@"
 	db "#dex Completed@"
 	db "Debug Color@"
-	db "Warp to Kanto@"
+	db "Unused@"
 	db "Cancel@"
 
 WelcomeToDebugOptionsText:
@@ -456,10 +449,6 @@ AllBadgesAcquiredText:
 FilledOutPokedexText:
 	text "#dex Completed!"
 	line "#mon Master!"
-	done
-
-WarpingToKantoText:
-	text "Warp…"
 	done
 endc
 

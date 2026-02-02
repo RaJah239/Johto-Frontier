@@ -248,7 +248,6 @@ ENDM
 	endgroup
 
 	newgroup PALLET                                               ; 13
-	map_const PALLET_TOWN,                                  5,  4 ;  2
 	endgroup
 
 	newgroup FAST_SHIP                                            ; 15

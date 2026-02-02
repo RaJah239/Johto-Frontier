@@ -273,7 +273,6 @@ Goldenrod_Map_Names: ;newgroup GOLDENROD
 
 Pallet_Map_Names: ;newgroup PALLET
 	table_width 2, Pallet_Map_Names                                               ; 13
-	dw Pallet_Map_Name2 ; map_const PALLET_TOWN,                                 10,  9 ;  2
 	assert_table_length NUM_PALLET_MAPS
 
 Fast_Ship_Map_Names: ;newgroup FAST_SHIP
@@ -760,9 +759,6 @@ Goldenrod_Map_Name28: ; map_const GOLDENROD_MANSION_ROOF ; 15
 	db "Gold. Mansion Roof@"
 Goldenrod_Map_Name29: ; map_const GOLDENROD_MANSION_ROOF_HOUSE ; 16
 	db "Gold. Mansion 4F@"
-
-Pallet_Map_Name2: ; map_const PALLET_TOWN,;  2
-	db "Pallet Town@"
 
 Fast_Ship_Map_Name1: ; map_const OLIVINE_PORT,;  1
 	db "Olivine Marina@"

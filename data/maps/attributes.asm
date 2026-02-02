@@ -444,7 +444,6 @@ ENDM
 	map_attributes MrPokemonsHouse, MR_POKEMONS_HOUSE, $00, 0
 	map_attributes Route31VioletGate, ROUTE_31_VIOLET_GATE, $00, 0
 	map_attributes SilverCaveOutside, SILVER_CAVE_OUTSIDE, $00, 0
-	map_attributes PalletTown, PALLET_TOWN, $0f, 0
 	map_attributes CianwoodPort, CIANWOOD_PORT, $0a, 0
 	map_attributes CianwoodPortPassage, CIANWOOD_PORT_PASSAGE, $00, 0
 	map_attributes BattlePlazaMagnetTrainStation, BATTLE_PLAZA_MAGNET_TRAIN_STATION, $00, 0

@@ -260,7 +260,6 @@ MapGroup_Goldenrod:
 
 MapGroup_Pallet:
 	table_width MAP_LENGTH, MapGroup_Pallet
-	map PalletTown, TILESET_KANTO, TOWN, LANDMARK_PALLET_TOWN, MUSIC_PALLET_TOWN, FALSE, PALETTE_AUTO, FISHGROUP_OCEAN
 	assert_table_length NUM_PALLET_MAPS
 
 MapGroup_FastShip:

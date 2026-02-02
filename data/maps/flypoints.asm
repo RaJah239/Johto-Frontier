@@ -21,5 +21,4 @@ Flypoints:
 	db LANDMARK_INDIGO_PLATEAU,   SPAWN_INDIGO
 
 ; Kanto
-	db LANDMARK_PALLET_TOWN,      SPAWN_PALLET
 	db -1 ; end
