@@ -1,21 +1,21 @@
 	object_const_def
-	const MOUNTMOONSQUARE_FAIRY1
-	const MOUNTMOONSQUARE_FAIRY2
-	const MOUNTMOONSQUARE_ROCK
+	const MOUNTMORTARSQUARE_FAIRY1
+	const MOUNTMORTARSQUARE_FAIRY2
+	const MOUNTMORTARSQUARE_ROCK
 
-MountMoonSquare_MapScripts:
+MountMortarSquare_MapScripts:
 	def_scene_scripts
-	scene_script MountMoonSquareNoopScene, SCENE_MOUNTMOONSQUARE_CLEFAIRY_DANCE
+	scene_script MountMortarSquareNoopScene, SCENE_MOUNTMORTARSQUARE_CLEFAIRY_DANCE
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, MountMoonSquareDisappearRockCallback
+	callback MAPCALLBACK_OBJECTS, MountMortarSquareDisappearRockCallback
 
-MountMoonSquareNoopScene:
+MountMortarSquareNoopScene:
 	end
 
 
-MountMoonSquareDisappearRockCallback:
-	disappear MOUNTMOONSQUARE_ROCK
+MountMortarSquareDisappearRockCallback:
+	disappear MOUNTMORTARSQUARE_ROCK
 	endcallback
 
 ClefairyDance:
@@ -25,51 +25,51 @@ ClefairyDance:
 	ifnotequal MONDAY, .NoDancing
 	checktime NITE
 	iffalse .NoDancing
-	appear MOUNTMOONSQUARE_FAIRY1
-	appear MOUNTMOONSQUARE_FAIRY2
+	appear MOUNTMORTARSQUARE_FAIRY1
+	appear MOUNTMORTARSQUARE_FAIRY2
 	applymovement PLAYER, PlayerWalksUpToDancingClefairies
 	pause 15
-	appear MOUNTMOONSQUARE_ROCK
-	turnobject MOUNTMOONSQUARE_FAIRY1, RIGHT
+	appear MOUNTMORTARSQUARE_ROCK
+	turnobject MOUNTMORTARSQUARE_FAIRY1, RIGHT
 	cry CLEFAIRY
 	waitsfx
 	pause 30
-	follow MOUNTMOONSQUARE_FAIRY1, MOUNTMOONSQUARE_FAIRY2
+	follow MOUNTMORTARSQUARE_FAIRY1, MOUNTMORTARSQUARE_FAIRY2
 	cry CLEFAIRY
-	applymovement MOUNTMOONSQUARE_FAIRY1, ClefairyDanceStep1
+	applymovement MOUNTMORTARSQUARE_FAIRY1, ClefairyDanceStep1
 	cry CLEFAIRY
-	applymovement MOUNTMOONSQUARE_FAIRY1, ClefairyDanceStep2
+	applymovement MOUNTMORTARSQUARE_FAIRY1, ClefairyDanceStep2
 	cry CLEFAIRY
-	applymovement MOUNTMOONSQUARE_FAIRY1, ClefairyDanceStep3
+	applymovement MOUNTMORTARSQUARE_FAIRY1, ClefairyDanceStep3
 	cry CLEFAIRY
-	applymovement MOUNTMOONSQUARE_FAIRY1, ClefairyDanceStep4
+	applymovement MOUNTMORTARSQUARE_FAIRY1, ClefairyDanceStep4
 	cry CLEFAIRY
-	applymovement MOUNTMOONSQUARE_FAIRY1, ClefairyDanceStep5
+	applymovement MOUNTMORTARSQUARE_FAIRY1, ClefairyDanceStep5
 	stopfollow
-	applymovement MOUNTMOONSQUARE_FAIRY2, ClefairyDanceStep6
-	follow MOUNTMOONSQUARE_FAIRY1, MOUNTMOONSQUARE_FAIRY2
-	applymovement MOUNTMOONSQUARE_FAIRY1, ClefairyDanceStep7
+	applymovement MOUNTMORTARSQUARE_FAIRY2, ClefairyDanceStep6
+	follow MOUNTMORTARSQUARE_FAIRY1, MOUNTMORTARSQUARE_FAIRY2
+	applymovement MOUNTMORTARSQUARE_FAIRY1, ClefairyDanceStep7
 	stopfollow
-	turnobject MOUNTMOONSQUARE_FAIRY1, DOWN
+	turnobject MOUNTMORTARSQUARE_FAIRY1, DOWN
 	pause 10
-	showemote EMOTE_SHOCK, MOUNTMOONSQUARE_FAIRY1, 15
-	turnobject MOUNTMOONSQUARE_FAIRY1, DOWN
+	showemote EMOTE_SHOCK, MOUNTMORTARSQUARE_FAIRY1, 15
+	turnobject MOUNTMORTARSQUARE_FAIRY1, DOWN
 	cry CLEFAIRY
 	pause 15
-	follow MOUNTMOONSQUARE_FAIRY1, MOUNTMOONSQUARE_FAIRY2
-	applymovement MOUNTMOONSQUARE_FAIRY1, ClefairyFleeMovement
-	disappear MOUNTMOONSQUARE_FAIRY1
-	disappear MOUNTMOONSQUARE_FAIRY2
+	follow MOUNTMORTARSQUARE_FAIRY1, MOUNTMORTARSQUARE_FAIRY2
+	applymovement MOUNTMORTARSQUARE_FAIRY1, ClefairyFleeMovement
+	disappear MOUNTMORTARSQUARE_FAIRY1
+	disappear MOUNTMORTARSQUARE_FAIRY2
 	stopfollow
-	clearevent EVENT_MOUNT_MOON_SQUARE_HIDDEN_MOON_STONE
+	clearevent EVENT_MT_MORTAR_SQUARE_HIDDEN_MOON_STONE
 	setflag ENGINE_MT_MOON_SQUARE_CLEFAIRY
 	end
 
 .NoDancing:
 	end
 
-MountMoonSquareHiddenMoonStone:
-	hiddenitem MOON_STONE, EVENT_MOUNT_MOON_SQUARE_HIDDEN_MOON_STONE
+MountMortarSquareHiddenMoonStone:
+	hiddenitem MOON_STONE, EVENT_MT_MORTAR_SQUARE_HIDDEN_MOON_STONE
 
 DontLitterSign:
 	jumptext DontLitterSignText
@@ -126,16 +126,16 @@ DontLitterSignText:
 	line "DON'T LITTER"
 	done
 
-MountMoonSquare_MapEvents:
+MountMortarSquare_MapEvents:
 	def_warp_events
-	warp_event 13,  7, MOUNT_MOON_GIFT_SHOP, 1
+	warp_event 13,  7, MT_MORTAR_GIFT_SHOP, 1
 	warp_event 20,  5, MOUNT_MORTAR_2F_INSIDE, 3
 
 	def_coord_events
-	coord_event  7, 11, SCENE_MOUNTMOONSQUARE_CLEFAIRY_DANCE, ClefairyDance
+	coord_event  7, 11, SCENE_MOUNTMORTARSQUARE_CLEFAIRY_DANCE, ClefairyDance
 
 	def_bg_events
-	bg_event  7,  7, BGEVENT_ITEM, MountMoonSquareHiddenMoonStone
+	bg_event  7,  7, BGEVENT_ITEM, MountMortarSquareHiddenMoonStone
 	bg_event 17,  7, BGEVENT_READ, DontLitterSign
 
 	def_object_events

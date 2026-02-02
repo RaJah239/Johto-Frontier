@@ -3181,7 +3181,7 @@ wSilverCaveRoom3SceneID::                         db
 wVictoryRoadSceneID::                             db
 wDragonsDenB1FSceneID::                           db
 wDragonShrineSceneID::                            db
-wMountMoonSquareSceneID::                         db
+wMountMortarSquareSceneID::                       db
 wMobileTradeRoomSceneID::                         db
 wMobileBattleRoomSceneID::                        db
 wDayCareSceneID::                                 db

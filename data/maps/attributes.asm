@@ -386,8 +386,8 @@ ENDM
 	map_attributes OaksLab, OAKS_LAB, $00, 0
 	map_attributes OlivinePort, OLIVINE_PORT, $0a, 0
 	map_attributes OlivinePortPassage, OLIVINE_PORT_PASSAGE, $00, 0
-	map_attributes MountMoonSquare, MOUNT_MOON_SQUARE, $2d, 0
-	map_attributes MountMoonGiftShop, MOUNT_MOON_GIFT_SHOP, $00, 0
+	map_attributes MountMortarSquare, MT_MORTAR_SQUARE, $2d, 0
+	map_attributes MountMortarGiftShop, MT_MORTAR_GIFT_SHOP, $00, 0
 	map_attributes TinTowerRoof, TIN_TOWER_ROOF, $00, 0
 	map_attributes IndigoPlateauPokecenter1F, INDIGO_PLATEAU_POKECENTER_1F, $00, 0
 	map_attributes WillsRoom, WILLS_ROOM, $00, 0

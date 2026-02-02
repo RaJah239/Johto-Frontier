@@ -68,11 +68,11 @@ MapScenes::
 	scene_var VICTORY_ROAD,                                wVictoryRoadSceneID
 	scene_var DRAGONS_DEN_B1F,                             wDragonsDenB1FSceneID
 	scene_var DRAGON_SHRINE,                               wDragonShrineSceneID
-	scene_var MOUNT_MOON_SQUARE,                           wMountMoonSquareSceneID
+	scene_var MT_MORTAR_SQUARE,                            wMountMortarSquareSceneID
 	scene_var MOBILE_TRADE_ROOM,                           wMobileTradeRoomSceneID
 	scene_var MOBILE_BATTLE_ROOM,                          wMobileBattleRoomSceneID
 	scene_var DAY_CARE,                                    wDayCareSceneID
 	scene_var ROUTE_30,                                    wRoute30SceneID
-	scene_var BATTLE_PLAZA_MAGNET_TRAIN_STATION,               wBattlePlazaMagnetTrainStationSceneID
+	scene_var BATTLE_PLAZA_MAGNET_TRAIN_STATION,           wBattlePlazaMagnetTrainStationSceneID
 	scene_var OAKS_LAB,                                    wOaksLab
 	db -1 ; end

@@ -250,8 +250,8 @@ ENDM
 	newgroup FAST_SHIP                                            ; 15
 	map_const OLIVINE_PORT,                                10, 18 ;  1
 	map_const OLIVINE_PORT_PASSAGE,                        10,  9 ;  8
-	map_const MOUNT_MOON_SQUARE,                           16,  9 ; 10
-	map_const MOUNT_MOON_GIFT_SHOP,                         4,  4 ; 11
+	map_const MT_MORTAR_SQUARE,                            16,  9 ; 10
+	map_const MT_MORTAR_GIFT_SHOP,                          4,  4 ; 11
 	map_const TIN_TOWER_ROOF,                              10,  9 ; 12
 	endgroup
 

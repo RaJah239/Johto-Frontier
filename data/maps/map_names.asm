@@ -273,8 +273,8 @@ Fast_Ship_Map_Names: ;newgroup FAST_SHIP
 	table_width 2, Fast_Ship_Map_Names                                            ; 15
 	dw Fast_Ship_Map_Name1 ; map_const OLIVINE_PORT,                                10, 18 ;  1
 	dw Fast_Ship_Map_Name8 ; map_const OLIVINE_PORT_PASSAGE,                        10,  9 ;  8
-	dw Fast_Ship_Map_Name10 ; map_const MOUNT_MOON_SQUARE,                           15,  9 ; 10
-	dw Fast_Ship_Map_Name11 ; map_const MOUNT_MOON_GIFT_SHOP ; 11
+	dw Fast_Ship_Map_Name10 ; map_const MT_MORTAR_SQUARE,                           15,  9 ; 10
+	dw Fast_Ship_Map_Name11 ; map_const MT_MORTAR_GIFT_SHOP ; 11
 	dw Fast_Ship_Map_Name12 ; map_const TIN_TOWER_ROOF,                              10,  9 ; 12
 	assert_table_length NUM_FAST_SHIP_MAPS
 
@@ -750,10 +750,10 @@ Fast_Ship_Map_Name1: ; map_const OLIVINE_PORT,;  1
 	db "Olivine Marina@"
 Fast_Ship_Map_Name8: ; map_const OLIVINE_PORT_PASSAGE,;  8
 	db "Olivine Passage@"
-Fast_Ship_Map_Name10: ; map_const MOUNT_MOON_SQUARE,; 10
-	db "Mt. Moon SQuare@"
-Fast_Ship_Map_Name11: ; map_const MOUNT_MOON_GIFT_SHOP ; 11
-	db "Mt. Moon Shop@"
+Fast_Ship_Map_Name10: ; map_const MT_MORTAR_SQUARE,; 10
+	db "Mt. Mortar Square@"
+Fast_Ship_Map_Name11: ; map_const MT_MORTAR_GIFT_SHOP ; 11
+	db "Mt. Mortar Shop@"
 Fast_Ship_Map_Name12: ; map_const TIN_TOWER_ROOF, 12
 	db "Tin Tower Roof@"                                             ; 16
 

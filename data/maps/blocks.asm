@@ -404,7 +404,7 @@ SilverCaveRoom3_Blocks:
 	INCBIN "maps/SilverCaveRoom3.blk"
 
 MahoganyMart1F_Blocks:
-MountMoonGiftShop_Blocks:
+MountMortarGiftShop_Blocks:
 	INCBIN "maps/GiftShop.blk"
 
 TeamRocketBaseB1F_Blocks:
@@ -567,8 +567,8 @@ HallOfFame_Blocks:
 GoldenrodFlowerShop_Blocks:
 	INCBIN "maps/GoldenrodFlowerShop.blk"
 
-MountMoonSquare_Blocks:
-	INCBIN "maps/MountMoonSquare.blk"
+MountMortarSquare_Blocks:
+	INCBIN "maps/MountMortarSquare.blk"
 
 WiseTriosRoom_Blocks:
 	INCBIN "maps/WiseTriosRoom.blk"

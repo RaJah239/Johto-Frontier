@@ -109,8 +109,8 @@ SECTION "Map Scripts 8", ROMX
 INCLUDE "maps/VictoryRoad.asm"
 INCLUDE "maps/OlivinePort.asm"
 INCLUDE "maps/OlivinePortPassage.asm"
-INCLUDE "maps/MountMoonSquare.asm"
-INCLUDE "maps/MountMoonGiftShop.asm"
+INCLUDE "maps/MountMortarSquare.asm"
+INCLUDE "maps/MountMortarGiftShop.asm"
 INCLUDE "maps/TinTowerRoof.asm"
 
 

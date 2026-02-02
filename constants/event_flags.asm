@@ -243,7 +243,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_MOUNT_MOON_SQUARE_HIDDEN_MOON_STONE
+	const EVENT_MT_MORTAR_SQUARE_HIDDEN_MOON_STONE
 	const_skip
 	const_skip
 	const_skip
