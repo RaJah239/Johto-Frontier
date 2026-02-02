@@ -308,8 +308,6 @@ ENDM
 	endgroup
 
 	newgroup VIRIDIAN                                             ; 23
-	map_const TRAINER_HOUSE_1F,                             5,  7 ;  6
-	map_const TRAINER_HOUSE_B1F,                            5,  8 ;  7
 	map_const VICTORY_ROAD_GATE,                            6,  9 ; 13
 	endgroup
 

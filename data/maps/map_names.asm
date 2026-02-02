@@ -338,8 +338,6 @@ Cianwood_Map_Names: ;newgroup CIANWOOD
 
 Viridian_Map_Names: ;newgroup VIRIDIAN ; 23
 	table_width 2, Viridian_Map_Names
-	dw Viridian_Map_Name6 ; map_const TRAINER_HOUSE_1F ;  6
-	dw Viridian_Map_Name7 ; map_const TRAINER_HOUSE_B1F ;  7
 	dw Viridian_Map_Name13 ; map_const VICTORY_ROAD_GATE,                           10,  9 ; 13
 	assert_table_length NUM_VIRIDIAN_MAPS
 
@@ -850,10 +848,6 @@ Cianwood_Map_Name21: ; map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION
 Battle_Plaza_Map_Name22: ; map_const OAKS_LAB ;  6  ; 14
 	db "Oak's Lab@"
 
-Viridian_Map_Name6: ; map_const TRAINER_HOUSE_1F ;  6
-	db "Viridian House 1F@"
-Viridian_Map_Name7: ; map_const TRAINER_HOUSE_B1F ;  7
-	db "Viridian House B1F@"
 Viridian_Map_Name13: ; map_const VICTORY_ROAD_GATE, 13
 	db "Victory Road Gate@"
 

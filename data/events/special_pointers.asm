@@ -110,7 +110,7 @@ SpecialsPointers::
 	add_special DaisysGrooming
 	add_special PlayCurMonCry
 	add_special ProfOaksPCBoot
-	add_special TrainerHouse
+	add_special TrainerHouse ; unused
 	add_special FadeOutMusic
 	add_special Diploma
 	add_special PrintDiploma

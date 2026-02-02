@@ -3122,7 +3122,6 @@ wPokecenter2FSceneID::                            db
 wTradeCenterSceneID::                             db
 wColosseumSceneID::                               db
 wTimeCapsuleSceneID::                             db
-wTrainerHouseB1FSceneID::                         db
 wVictoryRoadGateSceneID::                         db
 wIndigoPlateauPokecenter1FSceneID::               db
 wWillsRoomSceneID::                               db
@@ -3190,7 +3189,7 @@ wRoute30SceneID::                                 db
 wBattlePlazaMagnetTrainStationSceneID::               db
 wOaksLab::                                        db ; Nayru62's scene in Oak's lab
 
-	ds 172
+	ds 173
 
 wBattlePoints:: db
 

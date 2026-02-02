@@ -156,8 +156,6 @@ INCLUDE "maps/EcruteakMart.asm"
 INCLUDE "maps/EcruteakGym.asm"
 INCLUDE "maps/EcruteakItemfinderHouse.asm"
 INCLUDE "maps/EcruteakBlacksmithHouse.asm"
-INCLUDE "maps/TrainerHouse1F.asm"
-INCLUDE "maps/TrainerHouseB1F.asm"
 INCLUDE "maps/VictoryRoadGate.asm"
 
 
