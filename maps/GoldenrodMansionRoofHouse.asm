@@ -1,44 +1,44 @@
 	object_const_def
-	const CELADONMANSIONROOFHOUSE_PHARMACIST
+	const GoldenrodMansionRoofHOUSE_PHARMACIST
 
-CeladonMansionRoofHouse_MapScripts:
+GoldenrodMansionRoofHouse_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
 
-CeladonMansionRoofHousePharmacistScript:
+GoldenrodMansionRoofHousePharmacistScript:
 	faceplayer
 	opentext
 	checkevent EVENT_GOT_TM03_CURSE
 	iftrue .GotCurse
-	writetext CeladonMansionRoofHousePharmacistIntroText
+	writetext GoldenrodMansionRoofHousePharmacistIntroText
 	promptbutton
 	checktime NITE
 	iftrue .Night
-	writetext CeladonMansionRoofHousePharmacistNotNightText
+	writetext GoldenrodMansionRoofHousePharmacistNotNightText
 	waitbutton
 	closetext
 	end
 
 .Night:
-	writetext CeladonMansionRoofHousePharmacistStoryText
+	writetext GoldenrodMansionRoofHousePharmacistStoryText
 	promptbutton
 	verbosegiveitem TM_CURSE
 	iffalse .NoRoom
 	setevent EVENT_GOT_TM03_CURSE
 .GotCurse:
-	writetext CeladonMansionRoofHousePharmacistCurseText
+	writetext GoldenrodMansionRoofHousePharmacistCurseText
 	waitbutton
 .NoRoom:
 	closetext
 	end
 
-CeladonMansionRoofHousePharmacistIntroText:
+GoldenrodMansionRoofHousePharmacistIntroText:
 	text "Let me recount a"
 	line "terrifying tale…"
 	done
 
-CeladonMansionRoofHousePharmacistNotNightText:
+GoldenrodMansionRoofHousePharmacistNotNightText:
 	text "Then again, it's"
 	line "not as scary while"
 
@@ -49,7 +49,7 @@ CeladonMansionRoofHousePharmacistNotNightText:
 	line "sunset, OK?"
 	done
 
-CeladonMansionRoofHousePharmacistStoryText:
+GoldenrodMansionRoofHousePharmacistStoryText:
 	text "Once upon a time,"
 	line "there was a little"
 
@@ -104,7 +104,7 @@ CeladonMansionRoofHousePharmacistStoryText:
 	cont "take this--TM03!"
 	done
 
-CeladonMansionRoofHousePharmacistCurseText:
+GoldenrodMansionRoofHousePharmacistCurseText:
 	text "TM03 is CURSE."
 
 	para "It's a terrifying"
@@ -114,14 +114,14 @@ CeladonMansionRoofHousePharmacistCurseText:
 	line "victim's HP."
 	done
 
-CeladonMansionRoofHouse_MapEvents:
+GoldenrodMansionRoofHouse_MapEvents:
 	def_warp_events
-	warp_event  2,  7, CELADON_MANSION_ROOF, 3
-	warp_event  3,  7, CELADON_MANSION_ROOF, 3
+	warp_event  2,  7, GOLDENROD_MANSION_ROOF, 3
+	warp_event  3,  7, GOLDENROD_MANSION_ROOF, 3
 
 	def_coord_events
 
 	def_bg_events
 
 	def_object_events
-	object_event  3,  2, SPRITE_PHARMACIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 2, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, CeladonMansionRoofHousePharmacistScript, -1
+	object_event  3,  2, SPRITE_PHARMACIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 2, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, GoldenrodMansionRoofHousePharmacistScript, -1

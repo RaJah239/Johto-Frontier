@@ -1,10 +1,10 @@
 	object_const_def
-	const CELADONMANSION3F_COOLTRAINER_M
-	const CELADONMANSION3F_GYM_GUIDE
-	const CELADONMANSION3F_SUPER_NERD
-	const CELADONMANSION3F_FISHER
+	const GoldenrodMansion3F_COOLTRAINER_M
+	const GoldenrodMansion3F_GYM_GUIDE
+	const GoldenrodMansion3F_SUPER_NERD
+	const GoldenrodMansion3F_FISHER
 
-CeladonMansion3F_MapScripts:
+GoldenrodMansion3F_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
@@ -63,17 +63,17 @@ GameFreakProgrammerScript:
 GameFreakCharacterDesignerScript:
 	jumptextfaceplayer GameFreakCharacterDesignerText
 
-CeladonMansion3FDevRoomSign:
-	jumptext CeladonMansion3FDevRoomSignText
+GoldenrodMansion3FDevRoomSign:
+	jumptext GoldenrodMansion3FDevRoomSignText
 
-CeladonMansion3FDrawing:
-	jumptext CeladonMansion3FDrawingText
+GoldenrodMansion3FDrawing:
+	jumptext GoldenrodMansion3FDrawingText
 
-CeladonMansion3FGameProgram:
-	jumptext CeladonMansion3FGameProgramText
+GoldenrodMansion3FGameProgram:
+	jumptext GoldenrodMansion3FGameProgramText
 
-CeladonMansion3FReferenceMaterial:
-	jumptext CeladonMansion3FReferenceMaterialText
+GoldenrodMansion3FReferenceMaterial:
+	jumptext GoldenrodMansion3FReferenceMaterialText
 
 GameFreakGameDesignerText:
 	text "Is that right?"
@@ -155,18 +155,18 @@ GameFreakCharacterDesignerText:
 	para "Oh, I love them!"
 	done
 
-CeladonMansion3FDevRoomSignText:
+GoldenrodMansion3FDevRoomSignText:
 	text "GAME FREAK"
 	line "DEVELOPMENT ROOM"
 	done
 
-CeladonMansion3FDrawingText:
+GoldenrodMansion3FDrawingText:
 	text "It's a detailed"
 	line "drawing of a"
 	cont "pretty girl."
 	done
 
-CeladonMansion3FGameProgramText:
+GoldenrodMansion3FGameProgramText:
 	text "It's the game"
 	line "program. Messing"
 
@@ -174,27 +174,27 @@ CeladonMansion3FGameProgramText:
 	line "a bug in the game!"
 	done
 
-CeladonMansion3FReferenceMaterialText:
+GoldenrodMansion3FReferenceMaterialText:
 	text "It's crammed with"
 	line "reference materi-"
 	cont "als. There's even"
 	cont "a # DOLL."
 	done
 
-CeladonMansion3F_MapEvents:
+GoldenrodMansion3F_MapEvents:
 	def_warp_events
-	warp_event  0,  0, CELADON_MANSION_ROOF, 1
-	warp_event  1,  0, CELADON_MANSION_2F, 2
-	warp_event  6,  0, CELADON_MANSION_2F, 3
-	warp_event  7,  0, CELADON_MANSION_ROOF, 2
+	warp_event  0,  0, GOLDENROD_MANSION_ROOF, 1
+	warp_event  1,  0, GOLDENROD_MANSION_2F, 2
+	warp_event  6,  0, GOLDENROD_MANSION_2F, 3
+	warp_event  7,  0, GOLDENROD_MANSION_ROOF, 2
 
 	def_coord_events
 
 	def_bg_events
-	bg_event  5,  8, BGEVENT_UP, CeladonMansion3FDevRoomSign
-	bg_event  4,  3, BGEVENT_UP, CeladonMansion3FDrawing
-	bg_event  1,  6, BGEVENT_UP, CeladonMansion3FGameProgram
-	bg_event  1,  3, BGEVENT_UP, CeladonMansion3FReferenceMaterial
+	bg_event  5,  8, BGEVENT_UP, GoldenrodMansion3FDevRoomSign
+	bg_event  4,  3, BGEVENT_UP, GoldenrodMansion3FDrawing
+	bg_event  1,  6, BGEVENT_UP, GoldenrodMansion3FGameProgram
+	bg_event  1,  3, BGEVENT_UP, GoldenrodMansion3FReferenceMaterial
 
 	def_object_events
 	object_event  3,  6, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GameFreakGameDesignerScript, -1

@@ -79,7 +79,7 @@ GoldenrodHappinessRater_Blocks:
 BillsFamilysHouse_Blocks:
 GoldenrodPPSpeechHouse_Blocks:
 GoldenrodNameRater_Blocks:
-CeladonMansionRoofHouse_Blocks:
+GoldenrodMansionRoofHouse_Blocks:
 ManiasHouse_Blocks:
 CianwoodPharmacy_Blocks:
 CianwoodPhotoStudio_Blocks:
@@ -181,17 +181,17 @@ GoldenrodDeptStore6F_Blocks:
 GoldenrodDeptStoreElevator_Blocks:
 	INCBIN "maps/DeptStoreElevator.blk"
 
-CeladonMansion1F_Blocks:
-	INCBIN "maps/CeladonMansion1F.blk"
+GoldenrodMansion1F_Blocks:
+	INCBIN "maps/GoldenrodMansion1F.blk"
 
-CeladonMansion2F_Blocks:
-	INCBIN "maps/CeladonMansion2F.blk"
+GoldenrodMansion2F_Blocks:
+	INCBIN "maps/GoldenrodMansion2F.blk"
 
-CeladonMansion3F_Blocks:
-	INCBIN "maps/CeladonMansion3F.blk"
+GoldenrodMansion3F_Blocks:
+	INCBIN "maps/GoldenrodMansion3F.blk"
 
-CeladonMansionRoof_Blocks:
-	INCBIN "maps/CeladonMansionRoof.blk"
+GoldenrodMansionRoof_Blocks:
+	INCBIN "maps/GoldenrodMansionRoof.blk"
 
 Colosseum_Blocks:
 	INCBIN "maps/Colosseum.blk"

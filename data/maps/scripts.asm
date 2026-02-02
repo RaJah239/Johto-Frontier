@@ -97,11 +97,11 @@ INCLUDE "maps/IlexForest.asm"
 SECTION "Map Scripts 7", ROMX
 
 INCLUDE "maps/LakeOfRage.asm"
-INCLUDE "maps/CeladonMansion1F.asm"
-INCLUDE "maps/CeladonMansion2F.asm"
-INCLUDE "maps/CeladonMansion3F.asm"
-INCLUDE "maps/CeladonMansionRoof.asm"
-INCLUDE "maps/CeladonMansionRoofHouse.asm"
+INCLUDE "maps/GoldenrodMansion1F.asm"
+INCLUDE "maps/GoldenrodMansion2F.asm"
+INCLUDE "maps/GoldenrodMansion3F.asm"
+INCLUDE "maps/GoldenrodMansionRoof.asm"
+INCLUDE "maps/GoldenrodMansionRoofHouse.asm"
 
 
 SECTION "Map Scripts 8", ROMX

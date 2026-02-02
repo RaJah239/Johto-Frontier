@@ -260,11 +260,16 @@ Goldenrod_Map_Names: ;newgroup GOLDENROD
 	dw Goldenrod_Map_Name18 ; map_const GOLDENROD_DEPT_STORE_ROOF ; 18
 	dw Goldenrod_Map_Name19 ; map_const GOLDENROD_GAME_CORNER,                       10,  7 ; 19
 	dw Goldenrod_Map_Name20 ; map_const GOLDENROD_POKECENTER_1F ; 20
-	dw Goldenrod_Map_Name21; map_const POKECOM_CENTER_ADMIN_OFFICE_MOBILE,          16, 16 ; 21
+	dw Goldenrod_Map_Name21 ; map_const POKECOM_CENTER_ADMIN_OFFICE_MOBILE,          16, 16 ; 21
 	dw Goldenrod_Map_Name22 ; map_const ILEX_FOREST_AZALEA_GATE ; 22
 	dw Goldenrod_Map_Name23 ; map_const ROUTE_34_ILEX_FOREST_GATE ; 23
 	dw Goldenrod_Map_Name24 ; map_const DAY_CARE ; 24
 	dw Goldenrod_Map_Name96 ; map_const DAY_CARE ; 25
+	dw Goldenrod_Map_Name25 ; map_const GOLDENROD_MANSION_1F ; 26
+	dw Goldenrod_Map_Name26 ; map_const GOLDENROD_MANSION_2F ; 27
+	dw Goldenrod_Map_Name27 ; map_const GOLDENROD_MANSION_3F ; 28
+	dw Goldenrod_Map_Name28 ; map_const GOLDENROD_MANSION_ROOF ; 29
+	dw Goldenrod_Map_Name29 ; map_const GOLDENROD_MANSION_ROOF_HOUSE ; 30
 	assert_table_length NUM_GOLDENROD_MAPS
 
 Pallet_Map_Names: ;newgroup PALLET
@@ -314,11 +319,6 @@ Cable_Club_Map_Names: ;newgroup CABLE_CLUB
 
 Celadon_Map_Names: ;newgroup CELADON
 	table_width 2, Celadon_Map_Names                                              ; 21
-	dw Celadon_Map_Name12 ; map_const CELADON_MANSION_1F ; 12
-	dw Celadon_Map_Name13 ; map_const CELADON_MANSION_2F ; 13
-	dw Celadon_Map_Name14 ; map_const CELADON_MANSION_3F ; 14
-	dw Celadon_Map_Name15 ; map_const CELADON_MANSION_ROOF ; 15
-	dw Celadon_Map_Name16 ; map_const CELADON_MANSION_ROOF_HOUSE ; 16
 	assert_table_length NUM_CELADON_MAPS
 
 Cianwood_Map_Names: ;newgroup CIANWOOD
@@ -755,6 +755,16 @@ Goldenrod_Map_Name24: ; map_const DAY_CARE ; 24 ; 12
 	db "Route 34 Day Care@"
 Goldenrod_Map_Name96: ; map_const HATCH_ROOM ; 24 ; 12
 	db "Hatch Room@"
+Goldenrod_Map_Name25: ; map_const GOLDENROD_MANSION_1F ; 12
+	db "Gold. Mansion 1F@"
+Goldenrod_Map_Name26: ; map_const GOLDENROD_MANSION_2F ; 13
+	db "Gold. Mansion 2F@"
+Goldenrod_Map_Name27: ; map_const GOLDENROD_MANSION_3F ; 14
+	db "Gold. Mansion 3F@"
+Goldenrod_Map_Name28: ; map_const GOLDENROD_MANSION_ROOF ; 15
+	db "Gold. Mansion Roof@"
+Goldenrod_Map_Name29: ; map_const GOLDENROD_MANSION_ROOF_HOUSE ; 16
+	db "Gold. Mansion 4F@"
 
 Pallet_Map_Name2: ; map_const PALLET_TOWN,;  2
 	db "Pallet Town@"
@@ -810,19 +820,6 @@ Cable_Club_Map_Name5: ; map_const MOBILE_TRADE_ROOM ;  5
 	db "Mobile Trade@"
 Cable_Club_Map_Name6: ; map_const MOBILE_BATTLE_ROOM ;  6
 	db "Mobile Battle@"                                          ; 21
-
-
-Celadon_Map_Name12: ; map_const CELADON_MANSION_1F ; 12
-	db "Celadon Mansion 1F@"
-Celadon_Map_Name13: ; map_const CELADON_MANSION_2F ; 13
-	db "Celadon Mansion 2F@"
-Celadon_Map_Name14: ; map_const CELADON_MANSION_3F ; 14
-	db "Celadon Mansion 3F@"
-Celadon_Map_Name15: ; map_const CELADON_MANSION_ROOF ; 15
-	db "Cel. Mansion Roof@"
-Celadon_Map_Name16: ; map_const CELADON_MANSION_ROOF_HOUSE ; 16
-	db "Celadon Mansion 4F@"
-                                      ; 22
 
 Cianwood_Map_Name1: ; map_const ROUTE_40,  1
 	db "Route 40@"

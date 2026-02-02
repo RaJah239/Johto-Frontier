@@ -404,11 +404,11 @@ ENDM
 	map_attributes TimeCapsule, TIME_CAPSULE, $00, 0
 	map_attributes MobileTradeRoom, MOBILE_TRADE_ROOM, $00, 0
 	map_attributes MobileBattleRoom, MOBILE_BATTLE_ROOM, $00, 0
-	map_attributes CeladonMansion1F, CELADON_MANSION_1F, $00, 0
-	map_attributes CeladonMansion2F, CELADON_MANSION_2F, $00, 0
-	map_attributes CeladonMansion3F, CELADON_MANSION_3F, $00, 0
-	map_attributes CeladonMansionRoof, CELADON_MANSION_ROOF, $01, 0
-	map_attributes CeladonMansionRoofHouse, CELADON_MANSION_ROOF_HOUSE, $00, 0
+	map_attributes GoldenrodMansion1F, GOLDENROD_MANSION_1F, $00, 0
+	map_attributes GoldenrodMansion2F, GOLDENROD_MANSION_2F, $00, 0
+	map_attributes GoldenrodMansion3F, GOLDENROD_MANSION_3F, $00, 0
+	map_attributes GoldenrodMansionRoof, GOLDENROD_MANSION_ROOF, $01, 0
+	map_attributes GoldenrodMansionRoofHouse, GOLDENROD_MANSION_ROOF_HOUSE, $00, 0
 	map_attributes ManiasHouse, MANIAS_HOUSE, $00, 0
 	map_attributes CianwoodGym, CIANWOOD_GYM, $00, 0
 	map_attributes CianwoodPokecenter1F, CIANWOOD_POKECENTER_1F, $00, 0
