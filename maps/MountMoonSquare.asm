@@ -129,6 +129,7 @@ DontLitterSignText:
 MountMoonSquare_MapEvents:
 	def_warp_events
 	warp_event 13,  7, MOUNT_MOON_GIFT_SHOP, 1
+	warp_event 20,  5, MOUNT_MORTAR_2F_INSIDE, 3
 
 	def_coord_events
 	coord_event  7, 11, SCENE_MOUNTMOONSQUARE_CLEFAIRY_DANCE, ClefairyDance

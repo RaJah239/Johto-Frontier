@@ -121,7 +121,7 @@ ENDM
 	map_const GOLDENROD_UNDERGROUND_WAREHOUSE,             10,  9 ; 56
 	map_const MOUNT_MORTAR_1F_OUTSIDE,                     20, 18 ; 57
 	map_const MOUNT_MORTAR_1F_INSIDE,                      20, 27 ; 58
-	map_const MOUNT_MORTAR_2F_INSIDE,                      20, 18 ; 59
+	map_const MOUNT_MORTAR_2F_INSIDE,                      24, 18 ; 59
 	map_const MOUNT_MORTAR_B1F,                            20, 18 ; 60
 	map_const ICE_PATH_1F,                                 20, 18 ; 61
 	map_const ICE_PATH_B1F,                                10, 18 ; 62
@@ -250,7 +250,7 @@ ENDM
 	newgroup FAST_SHIP                                            ; 15
 	map_const OLIVINE_PORT,                                10, 18 ;  1
 	map_const OLIVINE_PORT_PASSAGE,                        10,  9 ;  8
-	map_const MOUNT_MOON_SQUARE,                           15,  9 ; 10
+	map_const MOUNT_MOON_SQUARE,                           16,  9 ; 10
 	map_const MOUNT_MOON_GIFT_SHOP,                         4,  4 ; 11
 	map_const TIN_TOWER_ROOF,                              10,  9 ; 12
 	endgroup
