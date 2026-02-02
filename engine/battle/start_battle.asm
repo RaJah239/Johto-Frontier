@@ -88,7 +88,7 @@ PlayBattleMusic:
 	ld a, [wMapNumber]
 	ld c, a
 	call GetWorldMapLocation
-	cp LANDMARK_BATTLE_TOWER
+	cp LANDMARK_BATTLE_PLAZA
 	ld de, MUSIC_UNOVA_ELITE_FOUR_BATTLE
 	jr z, .done
 
