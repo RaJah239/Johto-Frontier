@@ -21,7 +21,6 @@ MapGroupRoofs:
 	db ROOF_AZALEA    ;  9 (Lake of Rage)
 	db ROOF_VIOLET    ; 10 (Violet)
 	db ROOF_GOLDENROD ; 11 (Goldenrod)
-	db -1             ; 13 (Pallet)
 	db -1             ; 15
 	db ROOF_NEW_BARK  ; 19 (Silver Cave)
 	db -1             ; 20

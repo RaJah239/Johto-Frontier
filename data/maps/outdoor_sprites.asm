@@ -13,7 +13,6 @@ OutdoorSprites:
 	dw LakeOfRageGroupSprites
 	dw VioletGroupSprites
 	dw GoldenrodGroupSprites
-	dw PalletGroupSprites
 	dw FastShipGroupSprites
 	dw IndigoGroupSprites
 	dw SilverGroupSprites
@@ -24,23 +23,8 @@ OutdoorSprites:
 	dw CherrygroveGroupSprites
 	assert_table_length NUM_MAP_GROUPS
 
-; Route1 and ViridianCity are connected
-; PalletTown and Route21 are connected
-PalletGroupSprites:
-; Route1, PalletTown
 ViridianGroupSprites:
-; Route2, Route22, ViridianCity
-	db SPRITE_TEACHER
-	db SPRITE_FISHER
-	db SPRITE_YOUNGSTER
-	db SPRITE_BLUE
-	db SPRITE_GRAMPS
-	db SPRITE_BUG_CATCHER
-	db SPRITE_COOLTRAINER_F
-	db SPRITE_SWIMMER_GIRL
-	db SPRITE_SWIMMER_GUY
 	; max 9 of 9 walking sprites
-	db SPRITE_POKE_BALL
 	db 0 ; end
 
 IndigoGroupSprites:

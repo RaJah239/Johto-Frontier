@@ -26,7 +26,6 @@ MapGroupPointers::
 	dw MapGroup_LakeOfRage  ;  9
 	dw MapGroup_Violet      ; 10
 	dw MapGroup_Goldenrod   ; 11
-	dw MapGroup_Pallet      ; 13
 	dw MapGroup_FastShip    ; 15
 	dw MapGroup_Indigo      ; 16
 	dw MapGroup_Silver      ; 19
@@ -257,10 +256,6 @@ MapGroup_Goldenrod:
  	map GoldenrodMansionRoof, TILESET_MANSION, INDOOR, LANDMARK_GOLDENROD_CITY, MUSIC_CELADON_CITY, FALSE, PALETTE_DAY, FISHGROUP_NONE
  	map GoldenrodMansionRoofHouse, TILESET_HOUSE, INDOOR, LANDMARK_GOLDENROD_CITY, MUSIC_CELADON_CITY, FALSE, PALETTE_DAY, FISHGROUP_NONE
 	assert_table_length NUM_GOLDENROD_MAPS
-
-MapGroup_Pallet:
-	table_width MAP_LENGTH, MapGroup_Pallet
-	assert_table_length NUM_PALLET_MAPS
 
 MapGroup_FastShip:
 	table_width MAP_LENGTH, MapGroup_FastShip

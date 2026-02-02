@@ -247,9 +247,6 @@ ENDM
 	map_const GOLDENROD_MANSION_ROOF_HOUSE,                   4,  4 ; 16
 	endgroup
 
-	newgroup PALLET                                               ; 13
-	endgroup
-
 	newgroup FAST_SHIP                                            ; 15
 	map_const OLIVINE_PORT,                                10, 18 ;  1
 	map_const OLIVINE_PORT_PASSAGE,                        10,  9 ;  8
@@ -346,4 +343,4 @@ ENDM
 	map_const ROUTE_31_VIOLET_GATE,                         5,  4 ; 11
 	endgroup
 
-DEF NUM_MAP_GROUPS EQU const_value ; 18
+DEF NUM_MAP_GROUPS EQU const_value ; 17

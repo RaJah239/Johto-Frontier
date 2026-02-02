@@ -9,7 +9,6 @@ MapGroupNum_Names::
 	dw Lake_of_Rage_Map_Names
 	dw Violet_Map_Names
 	dw Goldenrod_Map_Names
-	dw Pallet_Map_Names
 	dw Fast_Ship_Map_Names
 	dw Indigo_Map_Names
 	dw Silver_Map_Names
@@ -270,10 +269,6 @@ Goldenrod_Map_Names: ;newgroup GOLDENROD
 	dw Goldenrod_Map_Name28 ; map_const GOLDENROD_MANSION_ROOF ; 29
 	dw Goldenrod_Map_Name29 ; map_const GOLDENROD_MANSION_ROOF_HOUSE ; 30
 	assert_table_length NUM_GOLDENROD_MAPS
-
-Pallet_Map_Names: ;newgroup PALLET
-	table_width 2, Pallet_Map_Names                                               ; 13
-	assert_table_length NUM_PALLET_MAPS
 
 Fast_Ship_Map_Names: ;newgroup FAST_SHIP
 	table_width 2, Fast_Ship_Map_Names                                            ; 15
