@@ -53,6 +53,12 @@ StdScripts::
 	add_stdscript ChanseyHealsOWScript
 	add_stdscript PorygonPCScript
 	add_stdscript ChanseyPokeCenterScript
+	add_stdscript MysteryGiftCarrieScript
+
+MysteryGiftCarrieScript:
+	callasm MysteryGiftNPC
+	verbosegiveitem ITEM_FROM_MEM
+	end
 
 ChanseyPokeCenterScript:
 	faceplayer

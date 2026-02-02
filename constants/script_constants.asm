@@ -73,6 +73,8 @@ DEF STRING_BUFFER_LENGTH EQU 19
 	const VAR_BUENASPASSWORD   ; 19
 	const VAR_BATTLEPOINTS     ; 1b
 	const VAR_KENJI_BREAK      ; 1a
+	const VAR_ITEM_POCKET      ; 1b
+	const VAR_BALL_POCKET      ; 1c
 DEF NUM_VARS EQU const_value
 
 ; variable action types

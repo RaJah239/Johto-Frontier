@@ -738,6 +738,10 @@ Pokedex_RightArrow_Tile:
 INCBIN "gfx/pokedex/inversed_rightarrow.1bpp"
 
 
+SECTION "Mystery Gift Section", ROMX
+INCLUDE "engine/events/mystery_gift_npc.asm"
+
+
 SECTION "Nayru Pokedex2", ROMX
 INCLUDE "engine/pokedex/pokedex_2.asm"
 

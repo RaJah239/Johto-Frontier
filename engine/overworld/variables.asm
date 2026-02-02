@@ -66,6 +66,8 @@ _GetVarAction::
 	dwb wBuenasPassword,                RETVAR_ADDR_DE
 	dwb wBattlePoints,                  RETVAR_ADDR_DE
 	dwb NULL,                           RETVAR_STRBUF2
+	dwb wNumItems,                      RETVAR_ADDR_DE
+	dwb wNumBalls,                      RETVAR_ADDR_DE
 
 .CountCaughtMons:
 ; Caught mons.
@@ -89,7 +91,7 @@ _GetVarAction::
 	ld b, 2
 	call CountSetBits
 	ld a, [wNumSetBits]
-	jr .loadstringbuffer2
+	jmp .loadstringbuffer2
 
 .PlayerFacing:
 ; The direction the player is facing.

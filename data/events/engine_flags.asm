@@ -109,8 +109,9 @@ EngineFlags:
 	engine_flag wDailyFlags1, DAILYFLAGS1_GOLDENROD_UNDERGROUND_BARGAIN_F
 	engine_flag wDailyFlags1, DAILYFLAGS1_TRAINER_HOUSE_F
 
-; Overworld states that get reset daily
+; wDailyFlags1 9-16
 	engine_flag wDailyFlags1, DAILYFLAGS1_CIANWOOD_PHOTOGRAPH
+	engine_flag wDailyFlags1, DAILYFLAGS1_ENGINE_DAILY_MYSTERY_GIFT
 
 	engine_flag wDailyFlags2, DAILYFLAGS2_MT_MOON_SQUARE_CLEFAIRY_F
 	engine_flag wDailyFlags2, DAILYFLAGS2_UNION_CAVE_LAPRAS_F

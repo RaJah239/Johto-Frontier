@@ -4,6 +4,7 @@
 	const GOLDENRODDEPTSTORE5F_MIKE
 	const GOLDENRODDEPTSTORE5F_POKEFAN_M
 	const GOLDENRODDEPTSTORE5F_RECEPTIONIST
+	const GOLDENRODDEPTSTORE5F_CARRIE
 
 GoldenrodDeptStore5F_MapScripts:
 	def_scene_scripts
@@ -183,6 +184,154 @@ GoldenrodDeptStore5FDirectoryText:
 	para "5F TM CORNER"
 	done
 
+GoldenrodDeptStore5FMysteryGiftCarrieScript:
+	faceplayer
+	opentext
+	checkflag ENGINE_DAILY_MYSTERY_GIFT
+	iftrue .NoGift
+	writetext MysterGiftText
+	yesorno
+	iffalse .Decline
+	readvar VAR_ITEM_POCKET
+	
+	; compare to DEF MAX_ITEMS
+	; compare to DEF MAX_BALLS
+	; read if pockets has space for 3 items
+	ifgreater 16, .ItemsNearlyFull
+	readvar VAR_BALL_POCKET
+	ifgreater 8, .BallsNearlyFull
+
+.AskSave
+	setflag ENGINE_DAILY_MYSTERY_GIFT
+	writetext MysteryGift_SaveGame
+	yesorno
+	iffalse .Decline
+	special TryQuickSave
+	iffalse .Decline
+	writetext MysteryGiftLinkUp
+	playsound SFX_MOVE_DELETED
+	waitsfx
+	scall FindMysteryGiftItem
+	iffalse .NoRoom
+	scall FindMysteryGiftItem
+	iffalse .NoRoom
+	scall FindMysteryGiftItem
+	iffalse .NoRoom
+	writetext MysteryGiftReceivedText
+	waitbutton
+	closetext
+	turnobject LAST_TALKED, DOWN
+	end
+
+.NoRoom
+	writetext MysterGiftNoRoom
+	waitbutton
+	closetext
+	turnobject LAST_TALKED, DOWN
+	end
+
+.NoGift
+	writetext NoMysteryGiftText
+	waitbutton
+	closetext
+	turnobject LAST_TALKED, DOWN
+	end
+
+.Decline
+	clearflag ENGINE_DAILY_MYSTERY_GIFT
+	writetext DeclineMysteryGiftText
+	waitbutton
+	closetext
+	turnobject LAST_TALKED, DOWN
+	end
+
+.ItemsNearlyFull
+	writetext MysteryGiftItemPocketWarningText
+	waitbutton
+	jump .AskContinueAnyway
+
+.BallsNearlyFull
+	writetext MysteryGiftBallPocketWarningText
+	waitbutton
+.AskContinueAnyway
+	writetext MysteryGiftAnywayText
+	yesorno
+	iffalse .Decline
+	jump .AskSave
+
+FindMysteryGiftItem:
+	jumpstd MysteryGiftCarrieScript
+
+MysterGiftText:
+	text "Mystery Gift!"
+	line "Mystery Gift!"
+
+	para "Do you want to"
+	line "share a Mystery"
+	cont "Gift?"
+	done
+
+MysteryGift_SaveGame:
+	text "You need to save"
+	line "your game before"
+	cont "we share, okay?"
+	done
+
+MysteryGiftLinkUp:
+	text "Okay! Let's link"
+	line "up for a sec!"
+	done
+
+MysterGiftNoRoom:
+	text "I guess too many"
+	line "people shared with"
+	cont "you! Hehe!"
+	done
+
+MysteryGiftItemPocketWarningText:
+	text "…You don't have"
+	line "much space in your"
+	cont "Item Pocket."
+	done
+
+MysteryGiftBallPocketWarningText:
+	text "…You don't have"
+	line "much space in your"
+	cont "Ball Pocket."
+	done
+
+MysteryGiftAnywayText:
+	text "Do you want to"
+	line "use Mystery Gift"
+	cont "anyway?"
+	done
+
+MysteryGiftReceivedText:
+	text "Wow, I got really"
+	line "cool items today!"
+	cont "I hope you got"
+	cont "something good!"
+
+	para "Let's do this"
+	line "again tomorrow!"
+	done
+
+NoMysteryGiftText:
+	text "We've already"
+	line "shared today."
+
+	para "But I'd be happy"
+	line "to share again"
+	cont "tomorrow."
+	done
+
+DeclineMysteryGiftText:
+	text "Oh…"
+
+	para "Some other time,"
+	line "okay?"
+ 	done
+
 GoldenrodDeptStore5F_MapEvents:
 	def_warp_events
 	warp_event 12,  0, GOLDENROD_DEPT_STORE_4F, 1
@@ -201,3 +350,4 @@ GoldenrodDeptStore5F_MapEvents:
 	object_event  6,  3, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Mike, -1
 	object_event 13,  5, SPRITE_POKEFAN_M, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FPokefanMScript, -1
 	object_event  7,  5, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FReceptionistScript, EVENT_GOLDENROD_DEPT_STORE_5F_HAPPINESS_EVENT_LADY
+	object_event  9,  1, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FMysteryGiftCarrieScript, -1

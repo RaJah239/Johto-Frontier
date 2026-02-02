@@ -99,8 +99,9 @@
 	const ENGINE_GOLDENROD_UNDERGROUND_MERCHANT_CLOSED
 	const ENGINE_FOUGHT_IN_TRAINER_HALL_TODAY
 
-; Overworld states that get reset daily - can have 8 right now
+; wDailyFlags1 9-16
 	const ENGINE_CIANWOOD_PHOTOGRAPH
+	const ENGINE_DAILY_MYSTERY_GIFT
 
 ; wDailyFlags2
 	const ENGINE_MT_MOON_SQUARE_CLEFAIRY
