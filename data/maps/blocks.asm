@@ -57,6 +57,9 @@ Route38_Blocks:
 NurseJoyTrainingAcademy_Blocks:
 	INCBIN "maps/NurseJoyTrainingAcademy.blk"
 
+PowerPlant_Blocks:
+	INCBIN "maps/PowerPlant.blk"
+
 BattlePlaza_Blocks:
 	INCBIN "maps/BattlePlaza.blk"
 

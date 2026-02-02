@@ -306,6 +306,7 @@ ENDM
 	map_const BATTLE_PLAZA,                                20, 14 ; 20
 	map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION,           10,  9 ; 21
 	map_const OAKS_LAB,                                     5,  6 ; 22
+	map_const POWER_PLANT,                                 10,  9 ; 23
 	endgroup
 
 	newgroup NEW_BARK                                             ; 24

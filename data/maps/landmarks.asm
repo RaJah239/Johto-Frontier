@@ -58,7 +58,8 @@ Landmarks:
 	landmark 148,  84, Route26Name
 	landmark 148,  52, VictoryRoadName
 	landmark 148,  44, Route23Name
-	landmark 148,  36, IndigoPlateauName		
+	landmark 148,  36, IndigoPlateauName	
+	landmark  20,  52, PowerPlantName
 	landmark 160, 160, BattlePlazaName
 	assert_table_length KANTO_LANDMARK
 	landmark  52, 108, PalletTownName
@@ -120,5 +121,6 @@ BurnedTowerName:     db "Burned<BSP>Tower@"
 FastShipName:        db "Fast Ship@"
 TohjoFallsName:      db "Tohjo Falls@"
 UndergroundName:     db "Underground@"
+PowerPlantName:      db "Power Plant@"
 BattlePlazaName:     db "Battle<BSP>Plaza@"
 SpecialMapName:      db "Special@"
