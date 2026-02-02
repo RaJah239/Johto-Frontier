@@ -642,6 +642,7 @@ Fast_Travel_Warp_Locations:
 	map_id OLIVINE_CITY
 	map_id BATTLE_TOWER_OUTSIDE
 	map_id CIANWOOD_CITY
+	map_id MT_MORTAR_SQUARE
 	map_id MAHOGANY_TOWN
 	map_id LAKE_OF_RAGE
 	map_id BLACKTHORN_CITY
@@ -666,6 +667,7 @@ Fast_Travel_Warp_Strings:
 	dba Olivine_Map_Name14
 	dba Cianwood_Map_Name16
 	dba Cianwood_Map_Name3
+	dba Fast_Ship_Map_Name10
 	dba Mahogany_Map_Name7
 	dba Lake_of_Rage_Map_Name6
 	dba Blackthorn_Map_Name10
