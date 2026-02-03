@@ -243,7 +243,12 @@ VictoryRoadChanseyScript:
 	jumpstd ChanseyHealsOWScript
 
 VictoryRoadGSBall:
-	itemball GS_BALL
+	disappear VICTORYROAD_GS_BALL
+	opentext
+	verbosegiveitem GS_BALL
+	closetext
+	setmapscene ROUTE_23, SCENE_ROUTE_23_NOOP
+	end
 
 VictoryRoad_MapEvents:
 	def_warp_events
@@ -274,4 +279,4 @@ VictoryRoad_MapEvents:
 	object_event 15, 48, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, VictoryRoadFullHeal, EVENT_VICTORY_ROAD_FULL_HEAL
 	object_event  7, 38, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, VictoryRoadSacredAsh, EVENT_VICTORY_ROAD_SACRED_ASH
 	object_event 16, 12, SPRITE_CHANSEY_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, VictoryRoadChanseyScript, -1
-	object_event 11,  6, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_ITEMBALL, 0, VictoryRoadGSBall, EVENT_CAN_GIVE_GS_BALL_TO_KURT
+	object_event 13,  6, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, VictoryRoadGSBall, EVENT_CAN_GIVE_GS_BALL_TO_KURT

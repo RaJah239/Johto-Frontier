@@ -3187,8 +3187,8 @@ wDayCareSceneID::                                 db
 wRoute30SceneID::                                 db
 wBattlePlazaMagnetTrainStationSceneID::           db
 wOaksLab::                                        db ; Nayru62's scene in Oak's lab
-
-	ds 173
+wRoute23::                                        db
+	ds 172
 
 wChartScrollDelay:: db
 
