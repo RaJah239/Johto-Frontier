@@ -3185,10 +3185,12 @@ wMobileTradeRoomSceneID::                         db
 wMobileBattleRoomSceneID::                        db
 wDayCareSceneID::                                 db
 wRoute30SceneID::                                 db
-wBattlePlazaMagnetTrainStationSceneID::               db
+wBattlePlazaMagnetTrainStationSceneID::           db
 wOaksLab::                                        db ; Nayru62's scene in Oak's lab
 
-	ds 174
+	ds 173
+
+wChartScrollDelay:: db
 
 wBattlePoints:: db
 
