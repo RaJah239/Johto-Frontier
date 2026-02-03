@@ -41,7 +41,6 @@ TorterraEvosAttacks:
 PikachuEvosAttacks:
 RaichuEvosAttacks:
 EeveeEvosAttacks:
-UmbreonEvosAttacks:
 SylveonEvosAttacks:
 TorchicEvosAttacks:
 CombuskenEvosAttacks:
@@ -287,4 +286,9 @@ NownEvosAttacks:
 	db 1, HIDDEN_POWER
 	db 1, HIDDEN_FORCE
 	db 1, RUNIC_POWER
+	db 0 ; no more level-up moves
+
+UmbreonEvosAttacks:
+	db 0 ; no more evolutions
+	db 1, PAIN_SPLIT
 	db 0 ; no more level-up moves
