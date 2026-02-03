@@ -3158,7 +3158,6 @@ wBattleTower1FSceneID::                           db
 wBattleTowerBattleRoomSceneID::                   db
 wBattleTowerElevatorSceneID::                     db
 wBattleTowerHallwaySceneID::                      db
-wPowerPlantOutsideSceneID::                       db
 wRoute43GateSceneID::                             db
 wSproutTower3FSceneID::                           db
 wTinTower1FSceneID::                              db
@@ -3189,7 +3188,7 @@ wRoute30SceneID::                                 db
 wBattlePlazaMagnetTrainStationSceneID::               db
 wOaksLab::                                        db ; Nayru62's scene in Oak's lab
 
-	ds 173
+	ds 174
 
 wBattlePoints:: db
 
