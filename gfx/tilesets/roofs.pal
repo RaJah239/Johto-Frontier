@@ -28,57 +28,62 @@
 	RGB 03,04,08, 00,00,00 ; nite
 	RGB 09,08,12, 04,04,05 ; eve
 
-; group 8 (Azalea)
+; group 6 (Azalea)
 	RGB 22,20,10, 17,14,03 ; morn/day
 	RGB 11,11,05, 10,09,07 ; nite
 	RGB 19,15,08, 14,10,01 ; eve
 
-; group 9 (Lake of Rage)
+; group 7 (Lake of Rage)
 	RGB 31,08,04, 09,09,08 ; morn/day
 	RGB 18,05,09, 09,09,08 ; nite
 	RGB 25,06,02, 08,07,06 ; eve
 
-; group 10 (Violet)
+; group 8 (Violet)
 	RGB 24,14,31, 13,07,21 ; morn/day
 	RGB 12,03,18, 09,03,15 ; nite
 	RGB 21,10,23, 11,05,16 ; eve
 
-; group 11 (Goldenrod)
+; group 9 (Goldenrod)
 	RGB 25,25,00, 20,17,08 ; morn/day
 	RGB 12,12,00, 10,09,05 ; nite
 	RGB 21,19,00, 17,13,06 ; eve
 
-; group 15 (Mount Moon Square)
+; group 10 (Mount Moon Square)
 	RGB 14,17,31, 07,11,15 ; morn/day
 	RGB 09,13,19, 07,07,16 ; nite
 	RGB 12,13,23, 06,08,11 ; eve
 
-; group 16 (Indigo)
+; group 11 (Indigo)
 	RGB 21,21,21, 13,13,13 ; morn/day
 	RGB 11,11,19, 07,07,12 ; nite
 	RGB 20,19,19, 11,10,10 ; eve
 
-; group 19 (Silver Cave)
+; group 12 (Silver Cave)
 	RGB 21,21,25, 16,16,16 ; morn/day
 	RGB 13,13,13, 07,07,07 ; nite
 	RGB 08,18,22, 08,10,19 ; eve
 
-; group 20 (Cable Club)
+; group 13 (Cable Club)
 	RGB 21,21,21, 11,11,11 ; morn/day
 	RGB 21,21,21, 11,11,11 ; nite
 	RGB 20,19,19, 10,09,09 ; eve
 
-; group 22 (Cianwood)
+; group 14 (Cianwood)
 	RGB 15,10,31, 07,05,15 ; morn/day
 	RGB 06,05,17, 02,02,08 ; nite
 	RGB 13,08,23, 06,03,11 ; eve
 
-; group 24 (New Bark)
+; group 15 (New Bark)
 	RGB 20,31,14, 11,23,05 ; morn/day
 	RGB 09,13,08, 06,09,04 ; nite
 	RGB 17,24,10, 09,18,03 ; eve
 
-; group 26 (Cherrygrove)
+; group 16 (Cherrygrove)
 	RGB 31,14,28, 31,05,21 ; morn/day
 	RGB 14,07,17, 13,00,08 ; nite
 	RGB 25,10,20, 25,03,16 ; eve
+
+; group 17 (Battle Plaza)
+	RGB 14,17,31, 07,11,15 ; morn/day
+	RGB 09,09,17, 05,07,13 ; nite
+	RGB 12,13,23, 06,08,11 ; eve

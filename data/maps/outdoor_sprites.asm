@@ -20,6 +20,7 @@ OutdoorSprites:
 	dw CianwoodGroupSprites
 	dw NewBarkGroupSprites
 	dw CherrygroveGroupSprites
+	dw BattlePlazaGroupSprites
 	assert_table_length NUM_MAP_GROUPS
 
 IndigoGroupSprites:
@@ -213,6 +214,12 @@ FastShipGroupSprites:
 	; 6 of max 9 walking sprites
 	db SPRITE_HO_OH
 	db SPRITE_ROCK
+	db 0 ; end
+
+BattlePlazaGroupSprites:
+; Battle Plaza
+	db SPRITE_SUPER_NERD
+	; 1 of max 9 walking sprites
 	db 0 ; end
 
 CableClubGroupSprites:

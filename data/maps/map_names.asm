@@ -16,6 +16,7 @@ MapGroupNum_Names::
 	dw Cianwood_Map_Names
 	dw New_Bark_Map_Names
 	dw Cherrygrove_Map_Names
+	dw Battle_Plaza_Names
 	assert_table_length NUM_MAP_GROUPS
 
 GetMapGroupNum_Name::
@@ -321,18 +322,10 @@ Cianwood_Map_Names: ;newgroup CIANWOOD
 	dw Cianwood_Map_Name8 ; map_const CIANWOOD_PHOTO_STUDIO ;  8
 	dw Cianwood_Map_Name9 ; map_const CIANWOOD_LUGIA_SPEECH_HOUSE ;  9
 	dw Cianwood_Map_Name10 ; map_const POKE_SEERS_HOUSE ; 10
-	dw Cianwood_Map_Name11 ; map_const BATTLE_TOWER_1F ; 11
-	dw Cianwood_Map_Name12 ; map_const BATTLE_TOWER_BATTLE_ROOM ; 12
-	dw Cianwood_Map_Name13 ; map_const BATTLE_TOWER_ELEVATOR ; 13
-	dw Cianwood_Map_Name14 ; map_const BATTLE_TOWER_HALLWAY ; 14
 	dw Cianwood_Map_Name15 ; map_const ROUTE_40_BATTLE_TOWER_GATE ; 15
 	dw Cianwood_Map_Name16 ; map_const POWER_PLANT_OUTSIDE ; 16
 	dw Cianwood_Map_Name17 ; map_const CIANWOOD_PORT ; 17
 	dw Cianwood_Map_Name18 ; map_const CIANWOOD_PORT_PASSAGE ; 18
-	dw Cianwood_Map_Name19 ; map_const BATTLE_TOWER_MART ; 19
-	dw Cianwood_Map_Name20 ; map_const BATTLE_PLAZA ; 20
-	dw Cianwood_Map_Name21 ; map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION ; 21
-	dw Battle_Plaza_Map_Name22 ; map_const OAKS_LAB ;  22
 	dw Cianwood_Map_Name23 ; map_const POWER_PLANT ;  23
 	assert_table_length NUM_CIANWOOD_MAPS
 	
@@ -368,6 +361,19 @@ Cherrygrove_Map_Names:
 	dw Cherrygrove_Map_Name10 ; map_const MR_POKEMONS_HOUSE ; 10
 	dw Cherrygrove_Map_Name11 ; map_const ROUTE_31_VIOLET_GATE ; 11
 	assert_table_length NUM_CHERRYGROVE_MAPS
+
+	; BATTLE_PLAZA, 8
+Battle_Plaza_Names:
+	table_width 2, Battle_Plaza_Names
+	dw Battle_Plaza_Name1 ; map_const BATTLE_PLAZA ; 1
+	dw Battle_Plaza_Name2 ; map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION ; 2
+	dw Battle_Plaza_Name3 ; map_const OAKS_LAB ;  3
+	dw Battle_Plaza_Name4 ; map_const BATTLE_TOWER_1F ; 4
+	dw Battle_Plaza_Name5 ; map_const BATTLE_TOWER_MART ; 5
+	dw Battle_Plaza_Name6 ; map_const BATTLE_TOWER_ELEVATOR ; 6
+	dw Battle_Plaza_Name7 ; map_const BATTLE_TOWER_HALLWAY ; 7
+	dw Battle_Plaza_Name8 ; map_const BATTLE_TOWER_BATTLE_ROOM ; 8
+	assert_table_length NUM_BATTLE_PLAZA_MAPS
 
 ; MAX LENGTH: 17
 Olivine_Map_Name1: ; map_const OLIVINE_POKECENTER_1F ;  1
@@ -819,14 +825,6 @@ Cianwood_Map_Name9: ; map_const CIANWOOD_LUGIA_SPEECH_HOUSE ;  9
 	db "Cianwood House@"
 Cianwood_Map_Name10: ; map_const POKE_SEERS_HOUSE ; 10
 	db "#seer House@"
-Cianwood_Map_Name11: ; map_const BATTLE_TOWER_1F ; 11
-	db "Battle Tower 1F@"
-Cianwood_Map_Name12: ; map_const BATTLE_TOWER_BATTLE_ROOM ; 12
-	db "Battle Tower Room@"
-Cianwood_Map_Name13: ; map_const BATTLE_TOWER_ELEVATOR ; 13
-	db "Battle Tower Lift@"
-Cianwood_Map_Name14: ; map_const BATTLE_TOWER_HALLWAY, ; 14
-	db "Battle Tower Hall@"
 Cianwood_Map_Name15: ; map_const ROUTE_40_BATTLE_TOWER_GATE ; 15
 	db "Route 40 Gate@"
 Cianwood_Map_Name16: ; map_const POWER_PLANT_OUTSIDE ; 16
@@ -835,14 +833,6 @@ Cianwood_Map_Name17: ; map_const CIANWOOD_PORT, ; 17
 	db "Cianwood Marina@"
 Cianwood_Map_Name18: ; map_const CIANWOOD_PORT_PASSAGE, ; 18
 	db "Cianwood Passage@"
-Cianwood_Map_Name19: ; map_const BATTLE_TOWER_MART ; Crystal Trove
-	db "Battle Tower Mart@"
-Cianwood_Map_Name20: ; map_const BATTLE_PLAZA
-	db "Battle Plaza@"
-Cianwood_Map_Name21: ; map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION
-	db "Plaza Station@"
-Battle_Plaza_Map_Name22: ; map_const OAKS_LAB ;  6  ; 14
-	db "Oak's Lab@"
 Cianwood_Map_Name23: ; map_const POWER_PLANT
 	db "Power Plant"
 
@@ -895,3 +885,20 @@ Cherrygrove_Map_Name10: ; map_const MR_POKEMONS_HOUSE ; 10
 	db "Mr. #mon House@"
 Cherrygrove_Map_Name11: ; map_const ROUTE_31_VIOLET_GATE ; 11
 	db "Route 31 Gate@"
+
+Battle_Plaza_Name1: ; map_const BATTLE_PLAZA
+	db "Battle Plaza@"
+Battle_Plaza_Name2: ; map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION
+	db "Plaza Station@"
+Battle_Plaza_Name3: ; map_const OAKS_LAB ;  6  ; 14
+	db "Oak's Lab@"
+Battle_Plaza_Name4: ; map_const BATTLE_TOWER_1F ; 11
+	db "Battle Tower 1F@"
+Battle_Plaza_Name5: ; map_const BATTLE_TOWER_MART ; Crystal Trove
+	db "Battle Tower Mart@"
+Battle_Plaza_Name6: ; map_const BATTLE_TOWER_ELEVATOR ; 13
+	db "Battle Tower Lift@"
+Battle_Plaza_Name7: ; map_const BATTLE_TOWER_HALLWAY, ; 14
+	db "Battle Tower Hall@"
+Battle_Plaza_Name8: ; map_const BATTLE_TOWER_BATTLE_ROOM ; 12
+	db "Battle Tower Room@"

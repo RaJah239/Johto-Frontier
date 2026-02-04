@@ -294,18 +294,10 @@ ENDM
 	map_const CIANWOOD_PHOTO_STUDIO,                        4,  4 ;  8
 	map_const CIANWOOD_LUGIA_SPEECH_HOUSE,                  4,  4 ;  9
 	map_const POKE_SEERS_HOUSE,                             4,  4 ; 10
-	map_const BATTLE_TOWER_1F,                              8,  5 ; 11
-	map_const BATTLE_TOWER_BATTLE_ROOM,                     4,  4 ; 12
-	map_const BATTLE_TOWER_ELEVATOR,                        2,  2 ; 13
-	map_const BATTLE_TOWER_HALLWAY,                        11,  2 ; 14
 	map_const ROUTE_40_BATTLE_TOWER_GATE,                   5,  4 ; 15
 	map_const POWER_PLANT_OUTSIDE,                         10, 11 ; 16
 	map_const CIANWOOD_PORT,                               10, 18 ; 17
 	map_const CIANWOOD_PORT_PASSAGE,                       10,  9 ; 18
-	map_const BATTLE_TOWER_MART,                            8,  5 ; 19	
-	map_const BATTLE_PLAZA,                                20, 14 ; 20
-	map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION,           10,  9 ; 21
-	map_const OAKS_LAB,                                     5,  6 ; 22
 	map_const POWER_PLANT,                                 10,  9 ; 23
 	endgroup
 
@@ -339,4 +331,15 @@ ENDM
 	map_const ROUTE_31_VIOLET_GATE,                         5,  4 ; 11
 	endgroup
 
-DEF NUM_MAP_GROUPS EQU const_value ; 16
+	newgroup BATTLE_PLAZA                                         ; 8
+	map_const BATTLE_PLAZA,                                20, 14 ; 1
+	map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION,           10,  9 ; 2
+	map_const OAKS_LAB,                                     5,  6 ; 3
+	map_const BATTLE_TOWER_1F,                              8,  5 ; 4
+	map_const BATTLE_TOWER_MART,                            8,  5 ; 5	
+	map_const BATTLE_TOWER_ELEVATOR,                        2,  2 ; 6
+	map_const BATTLE_TOWER_HALLWAY,                        11,  2 ; 7
+	map_const BATTLE_TOWER_BATTLE_ROOM,                     4,  4 ; 8
+	endgroup
+
+DEF NUM_MAP_GROUPS EQU const_value ; 17
