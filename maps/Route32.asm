@@ -13,6 +13,7 @@
 	const ROUTE32_FISHER5
 	const ROUTE32_FRIEDA
 	const ROUTE32_POKE_BALL2
+	const ROUTE32_OTIS
 
 Route32_MapScripts:
 	def_scene_scripts
@@ -21,7 +22,7 @@ Route32_MapScripts:
 	scene_script Route32Noop3Scene, SCENE_ROUTE32_NOOP
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, Route32FriedaCallback
+	callback MAPCALLBACK_OBJECTS, Route32FriedaAndOtisCallback
 	callback MAPCALLBACK_NEWMAP, .Flypoint
 
 .Flypoint:
@@ -37,14 +38,27 @@ Route32Noop2Scene:
 Route32Noop3Scene:
 	end
 
-Route32FriedaCallback:
+Route32FriedaAndOtisCallback:
 	readvar VAR_WEEKDAY
 	ifequal FRIDAY, .FriedaAppears
 	disappear ROUTE32_FRIEDA
+
+.OtisCheck
+	; 10% chance of otis appearing
+	checkflag ENGINE_MET_OTIS_TODAY
+	iftrue .done
+	random 10
+	ifequal 0, .AppearOtis
+.done
+	disappear ROUTE32_OTIS
 	endcallback
 
 .FriedaAppears:
 	appear ROUTE32_FRIEDA
+	sjump .OtisCheck
+
+.AppearOtis:
+	appear ROUTE32_OTIS
 	endcallback
 
 Route32CooltrainerMScript:
@@ -857,6 +871,18 @@ PicnickerLiz_AgainGiveMaxReviveAfterBattleText:
 	line "All yours!"
 	done
 
+Route32OtisScript:
+	callstd WanderingOddEggNPCScript
+	playsound SFX_WARP_TO
+	applymovement ROUTE32_OTIS, Route32OtisTeleportAwayMovement
+	disappear ROUTE32_OTIS
+	setflag ENGINE_MET_OTIS_TODAY
+	end
+
+Route32OtisTeleportAwayMovement:
+	teleport_from
+	step_end
+
 Route32_MapEvents:
 	def_warp_events
 	warp_event 11, 73, ROUTE_32_POKECENTER_1F, 1
@@ -891,3 +917,4 @@ Route32_MapEvents:
 	object_event 15, 13, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route32RoarTMGuyScript, -1
 	object_event 12, 67, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, FriedaScript, EVENT_ROUTE_32_FRIEDA_OF_FRIDAY
 	object_event  3, 30, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route32Repel, EVENT_ROUTE_32_REPEL
+	object_event  8, 10, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route32OtisScript, EVENT_ROUTE_32_OTIS
