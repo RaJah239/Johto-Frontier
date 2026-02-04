@@ -210,7 +210,7 @@
 	const EVENT_TM_HIDDEN_FORCE
 	const EVENT_ROUTE_45_RAIKOU
 	const EVENT_BURNED_TOWER_ENTEI
-	const_skip
+	const EVENT_MET_OTIS
 	const EVENT_RESTORED_POWER_TO_KANTO
 	const_skip
 	const_skip

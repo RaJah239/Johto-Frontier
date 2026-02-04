@@ -401,3 +401,91 @@ RegisteredNumber2Text:
 ChanseyCryText:
 	text "CHANSEY: Seyyyy!"
 	done
+
+OtisIntroText:
+	text "Oh my! I've been"
+	line "discovered!!"
+
+	para "……"
+	line "……"
+
+	para "Huh? You weren't"
+	line "after me? So you"
+	cont "don't know of my…"
+	cont "erm…"
+
+	para "I'm a wanderer,"
+	line "see. Name's Otis."
+
+	para "<PLAYER> is it?"
+	line "Well met!"
+
+	para "I…had a bit of bad"
+	line "luck at Goldenrod's"
+	cont "Game Corner… see."
+
+	para "In need of coins I"
+	line "am, begger I'm not!"
+
+	para "Skilled #mon"
+	line "breeder I am!"
+
+	para "Trade 7,777 coins"
+	line "fair, for a rare"
+	cont "egg, I will."
+
+	para "What say you?"
+
+	para "Trade 7,777 coins"
+	line "for a rare egg?"
+	done
+
+OtisWeMetAgainText:
+	text "Otis: <PLAYER>, we"
+	line "meet again!"
+
+	para "Lady Luck shines"
+	line "on me today!"
+
+	para "Still in need of"
+	line "coins I am…"
+
+	para "Trade 7,777 coins"
+	line "for a rare egg?"
+	done
+
+RefusedOtisText:
+	text "Have both you and"
+	line "Lady Luck forsaken"
+	cont "me now? I go…"
+	done
+
+OtisNotEnoughCoinsText:
+	text "Coin shortage you"
+	line "have, just like me"
+	cont "you may become."
+
+	para "Distance, I get!"
+	done
+
+OtisPartyFullText:
+	text "<PLAYER>'s Party's"
+	line "full unlike Otis'"
+	cont "Coin Case."
+	
+	para "On my way I go…"
+	done
+
+OtisGaveARareEggText:
+	text "<PLAYER> received"
+	line "an Egg!"
+	done
+
+OtisThanksText:
+	text "Obliged!"
+
+	para "Dent in my debt"
+	line "this'll make."
+
+	para "Meet again I hope!"
+	done

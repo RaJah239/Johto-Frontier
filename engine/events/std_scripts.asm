@@ -54,6 +54,63 @@ StdScripts::
 	add_stdscript PorygonPCScript
 	add_stdscript ChanseyPokeCenterScript
 	add_stdscript MysteryGiftCarrieScript
+	add_stdscript WanderingOddEggNPCScript
+
+WanderingOddEggNPCScript:
+	faceplayer
+	opentext
+	checkevent EVENT_MET_OTIS
+	iftrue .WeMetAgain
+	farwritetext OtisIntroText
+	setevent EVENT_MET_OTIS
+	sjump .WouldYouLikeAnEgg
+
+.WeMetAgain:
+	farwritetext OtisWeMetAgainText
+.WouldYouLikeAnEgg:
+	special DisplayCoinCaseBalance
+	yesorno
+	iffalse .Refused
+	checkcoins 7777
+	ifequal HAVE_LESS, .NotEnoughCoins
+
+	readvar VAR_PARTYCOUNT
+	ifequal PARTY_LENGTH, .PartyFull
+
+	special DisplayCoinCaseBalance
+	special GiveOddEgg
+	farwritetext OtisGaveARareEggText
+	playsound SFX_CAUGHT_MON
+	waitsfx
+	promptbutton
+
+	takecoins 7777
+	waitsfx
+	playsound SFX_TRANSACTION
+	special DisplayCoinCaseBalance
+
+	farwritetext OtisThanksText
+	waitbutton
+	closetext
+	end
+
+.Refused:
+	farwritetext RefusedOtisText
+	waitbutton
+	closetext
+	end
+
+.NotEnoughCoins:
+    farwritetext OtisNotEnoughCoinsText
+	waitbutton
+	closetext
+	end
+
+.PartyFull:
+	farwritetext OtisPartyFullText
+	waitbutton
+	closetext
+	end
 
 MysteryGiftCarrieScript:
 	callasm MysteryGiftNPC
