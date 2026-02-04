@@ -68,6 +68,7 @@ EcruteakGroupSprites:
 	db SPRITE_BERRY
 	db SPRITE_APRICORN
 	db SPRITE_SUICUNE
+	db SPRITE_OTIS
 	db 0 ; end
 
 AzaleaGroupSprites:

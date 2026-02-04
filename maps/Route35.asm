@@ -10,7 +10,7 @@
 	const ROUTE35_OFFICER
 	const ROUTE35_POKE_BALL
 	const ROUTE35_BERRY_TREE1
-	const ROUTE35_BERRY_TREE2
+	const ROUTE35_OTIS
 	const ROUTE35_APRICORN_TREE1
 	const ROUTE35_APRICORN_TREE2
 	const ROUTE35_APRICORN_TREE3
@@ -19,6 +19,21 @@ Route35_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
+	callback MAPCALLBACK_OBJECTS, Route35OtisCallback
+
+Route35OtisCallback:
+	; 10% chance of otis appearing
+	checkflag ENGINE_MET_OTIS_TODAY
+	iftrue .done
+	random 10
+	ifequal 0, .AppearOtis
+.done
+	disappear ROUTE35_OTIS
+	endcallback
+
+.AppearOtis:
+	appear ROUTE35_OTIS
+	endcallback
 
 TrainerBirdKeeperBryan:
 	trainer BIRD_KEEPER, BRYAN, EVENT_BEAT_BIRD_KEEPER_BRYAN, BirdKeeperBryanSeenText, BirdKeeperBryanBeatenText, 0, .Script
@@ -442,23 +457,6 @@ Route35BerryTree1:
 	closetext
 	end
 
-Route35BerryTree2:
-	opentext
-	getitemname STRING_BUFFER_3, PRZCUREBERRY
-	writetext Route35TreeText
-	promptbutton
-	writetext Route35HeyItsBerryApricornText
-	promptbutton
-	giveitem PRZCUREBERRY
-	iffalse Route35NoRoomInBag
-	disappear ROUTE35_BERRY_TREE2
-	writetext Route35FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
 Route35ApricornTree1:
 	opentext
 	getitemname STRING_BUFFER_3, BLU_APRICORN
@@ -555,6 +553,18 @@ Route35NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
+Route35OtisScript:
+	callstd WanderingOddEggNPCScript
+	playsound SFX_WARP_TO
+	applymovement ROUTE35_OTIS, Route35OtisTeleportAwayMovement
+	disappear ROUTE35_OTIS
+	setflag ENGINE_MET_OTIS_TODAY
+	end
+
+Route35OtisTeleportAwayMovement:
+	teleport_from
+	step_end
+
 Route35_MapEvents:
 	def_warp_events
 	warp_event  9, 33, ROUTE_35_GOLDENROD_GATE, 1
@@ -567,7 +577,6 @@ Route35_MapEvents:
 	bg_event  1,  7, BGEVENT_READ, Route35Sign
 	bg_event 11, 31, BGEVENT_READ, Route35Sign
 	bg_event  2, 25, BGEVENT_READ, Route35NoBerryOrApricorn
-	bg_event  3, 27, BGEVENT_READ, Route35NoBerryOrApricorn
 	bg_event  2, 27, BGEVENT_READ, Route35NoBerryOrApricorn
 	bg_event 14, 29, BGEVENT_READ, Route35NoBerryOrApricorn
 	bg_event 15, 28, BGEVENT_READ, Route35NoBerryOrApricorn
@@ -578,13 +587,13 @@ Route35_MapEvents:
 	object_event  7, 20, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerPicnickerBrooke, -1
 	object_event 10, 26, SPRITE_LASS, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerPicnickerKim, -1
 	object_event 13, 28, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 0, TrainerBirdKeeperBryan, -1
-	object_event  2, 10, SPRITE_FISHER, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 2, TrainerFirebreatherWalt, -1
+	object_event  2, 10, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 2, TrainerFirebreatherWalt, -1
 	object_event 16,  7, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_DOWN, 2, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerBugCatcherArnie, -1
 	object_event  5, 10, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, TrainerJugglerIrwin, -1
 	object_event  5,  6, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TrainerOfficerDirk, -1
 	object_event  7, 11, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route35TMRollout, EVENT_ROUTE_35_TM_ROLLOUT
 	object_event  2, 25, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_ORANGE, OBJECTTYPE_SCRIPT, 0, Route35BerryTree1, EVENT_ROUTE_35_BERRY_1
-	object_event  3, 27, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route35BerryTree2, EVENT_ROUTE_35_BERRY_2
+	object_event  0, 27, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route35OtisScript, EVENT_ROUTE_35_OTIS
 	object_event  2, 27, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route35ApricornTree1, EVENT_ROUTE_35_APRICORN_1
 	object_event 14, 29, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route35ApricornTree2, EVENT_ROUTE_35_APRICORN_2
 	object_event 15, 28, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route35ApricornTree3, EVENT_ROUTE_35_APRICORN_1
