@@ -214,7 +214,7 @@
 	const EVENT_BURNED_TOWER_ENTEI
 	const EVENT_MET_OTIS
 	const EVENT_RESTORED_POWER_TO_KANTO
-	const_skip
+	const EVENT_GOT_START_MENU_WARP
 	const_skip
 	const_skip
 	const_skip

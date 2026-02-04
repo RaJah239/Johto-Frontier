@@ -449,3 +449,4 @@ ENDM
 	map_attributes EcruteakBlacksmithHouse, ECRUTEAK_BLACKSMITH_HOUSE, $00, 0
 	map_attributes BattlePlaza, BATTLE_PLAZA, $05, 0
 	map_attributes PowerPlant, POWER_PLANT, $00, 0
+	map_attributes BattlePlazaRaJaHouse, BATTLE_PLAZA_RAJA_HOUSE, $00, 0

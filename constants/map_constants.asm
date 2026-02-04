@@ -332,14 +332,15 @@ ENDM
 	endgroup
 
 	newgroup BATTLE_PLAZA                                         ; 8
-	map_const BATTLE_PLAZA,                                20, 14 ; 1
-	map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION,           10,  9 ; 2
-	map_const OAKS_LAB,                                     5,  6 ; 3
-	map_const BATTLE_TOWER_1F,                              8,  5 ; 4
-	map_const BATTLE_TOWER_MART,                            8,  5 ; 5	
-	map_const BATTLE_TOWER_ELEVATOR,                        2,  2 ; 6
-	map_const BATTLE_TOWER_HALLWAY,                        11,  2 ; 7
-	map_const BATTLE_TOWER_BATTLE_ROOM,                     4,  4 ; 8
+	map_const BATTLE_PLAZA,                                20, 14 ;  1
+	map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION,           10,  9 ;  2
+	map_const OAKS_LAB,                                     5,  6 ;  3
+	map_const BATTLE_TOWER_1F,                              8,  5 ;  4
+	map_const BATTLE_TOWER_MART,                            8,  5 ;  5	
+	map_const BATTLE_TOWER_ELEVATOR,                        2,  2 ;  6
+	map_const BATTLE_TOWER_HALLWAY,                        11,  2 ;  7
+	map_const BATTLE_TOWER_BATTLE_ROOM,                     4,  4 ;  8
+	map_const BATTLE_PLAZA_RAJA_HOUSE,                      4,  4 ;  9
 	endgroup
 
 DEF NUM_MAP_GROUPS EQU const_value ; 17

@@ -63,6 +63,7 @@ PowerPlant_Blocks:
 BattlePlaza_Blocks:
 	INCBIN "maps/BattlePlaza.blk"
 
+BattlePlazaRaJaHouse_Blocks:
 OlivineTimsHouse_Blocks:
 OlivinePunishmentSpeechHouse_Blocks:
 OlivineGoodRodHouse_Blocks:

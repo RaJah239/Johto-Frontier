@@ -362,7 +362,7 @@ Cherrygrove_Map_Names:
 	dw Cherrygrove_Map_Name11 ; map_const ROUTE_31_VIOLET_GATE ; 11
 	assert_table_length NUM_CHERRYGROVE_MAPS
 
-	; BATTLE_PLAZA, 8
+	; BATTLE_PLAZA, 9
 Battle_Plaza_Names:
 	table_width 2, Battle_Plaza_Names
 	dw Battle_Plaza_Name1 ; map_const BATTLE_PLAZA ; 1
@@ -373,6 +373,7 @@ Battle_Plaza_Names:
 	dw Battle_Plaza_Name6 ; map_const BATTLE_TOWER_ELEVATOR ; 6
 	dw Battle_Plaza_Name7 ; map_const BATTLE_TOWER_HALLWAY ; 7
 	dw Battle_Plaza_Name8 ; map_const BATTLE_TOWER_BATTLE_ROOM ; 8
+	dw Battle_Plaza_Name9 ; map_const BATTLE_PLAZA_RAJA_HOUSE ; 9
 	assert_table_length NUM_BATTLE_PLAZA_MAPS
 
 ; MAX LENGTH: 17
@@ -886,7 +887,7 @@ Cherrygrove_Map_Name10: ; map_const MR_POKEMONS_HOUSE ; 10
 Cherrygrove_Map_Name11: ; map_const ROUTE_31_VIOLET_GATE ; 11
 	db "Route 31 Gate@"
 
-Battle_Plaza_Name1: ; map_const BATTLE_PLAZA
+Battle_Plaza_Name1: ; map_const BATTLE_PLAZA 
 	db "Battle Plaza@"
 Battle_Plaza_Name2: ; map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION
 	db "Plaza Station@"
@@ -902,3 +903,5 @@ Battle_Plaza_Name7: ; map_const BATTLE_TOWER_HALLWAY, ; 14
 	db "Battle Tower Hall@"
 Battle_Plaza_Name8: ; map_const BATTLE_TOWER_BATTLE_ROOM ; 12
 	db "Battle Tower Room@"
+Battle_Plaza_Name9: ; map_const BATTLE_PLAZA_RAJA_HOUSE
+	db "RaJa239's House@"
