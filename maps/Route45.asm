@@ -29,7 +29,7 @@ Route45_MapScripts:
 	setval WEATHER_NONE
 	writemem wFieldWeather
 
-.OtisCheck
+.CheckOtis
 	; 10% chance of otis appearing
 	checkflag ENGINE_MET_OTIS_TODAY
 	iftrue .done
