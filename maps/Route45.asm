@@ -22,10 +22,14 @@ Route45_MapScripts:
 	callback MAPCALLBACK_OBJECTS, .WeatherAndOtis
 
 .WeatherAndOtis:
-	; set weather to always be sandstorm
-	setval WEATHER_SANDSTORM
+	random 4
+	ifequal 0, .Sun
+	ifequal 1, .Rain
+	ifequal 2, .Sandstorm
+	setval WEATHER_NONE
 	writemem wFieldWeather
 
+.OtisCheck
 	; 10% chance of otis appearing
 	checkflag ENGINE_MET_OTIS_TODAY
 	iftrue .done
@@ -34,6 +38,21 @@ Route45_MapScripts:
 .done
 	disappear ROUTE45_OTIS
 	endcallback
+
+.Sun:
+	setval WEATHER_SUN
+	writemem wFieldWeather
+	sjump .CheckOtis
+
+.Rain:
+	setval WEATHER_RAIN
+	writemem wFieldWeather
+	sjump .CheckOtis
+
+.Sandstorm:
+	setval WEATHER_SANDSTORM
+	writemem wFieldWeather
+	sjump .CheckOtis
 
 .AppearOtis:
 	appear ROUTE45_OTIS
