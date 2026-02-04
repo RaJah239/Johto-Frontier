@@ -114,6 +114,7 @@
 	const SPRITE_BERRY
 	const SPRITE_APRICORN
 	const SPRITE_CHEATER
+	const SPRITE_OTIS
 DEF NUM_OVERWORLD_SPRITES EQU const_value - 1
 
 ; SpriteMons indexes (see data/sprites/sprite_mons.asm)
