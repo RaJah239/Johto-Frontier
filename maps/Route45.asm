@@ -6,10 +6,10 @@
 	const ROUTE45_BLACK_BELT
 	const ROUTE45_COOLTRAINER_M
 	const ROUTE45_COOLTRAINER_F
+	const ROUTE45_OTIS
 	const ROUTE45_POKE_BALL1
 	const ROUTE45_POKE_BALL2
 	const ROUTE45_POKE_BALL3
-	const ROUTE45_POKE_BALL4
 	const ROUTE45_YOUNGSTER
 	const ROUTE45_BERRY_TREE1
 	const ROUTE45_BERRY_TREE2
@@ -19,11 +19,24 @@ Route45_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, .Weather
+	callback MAPCALLBACK_OBJECTS, .WeatherAndOtis
 
-.Weather:
+.WeatherAndOtis:
+	; set weather to always be sandstorm
 	setval WEATHER_SANDSTORM
 	writemem wFieldWeather
+
+	; 10% chance of otis appearing
+	checkflag ENGINE_MET_OTIS_TODAY
+	iftrue .done
+	random 10
+	ifequal 0, .AppearOtis
+.done
+	disappear ROUTE45_OTIS
+	endcallback
+
+.AppearOtis:
+	appear ROUTE45_OTIS
 	endcallback
 
 TrainerBlackbeltKenji:
@@ -211,9 +224,6 @@ TrainerCamperQuentin:
 
 Route45Sign:
 	jumptext Route45SignText
-
-Route45Nugget:
-	itemball NUGGET
 
 Route45Revive:
 	itemball REVIVE
@@ -519,6 +529,18 @@ RaikouText:
 	text "Rrrr!"
 	done
 
+Route45OtisScript:
+	callstd WanderingOddEggNPCScript
+	playsound SFX_WARP_TO
+	applymovement ROUTE45_OTIS, Route45TeleportAwayMovement
+	disappear ROUTE45_OTIS
+	setflag ENGINE_MET_OTIS_TODAY
+	end
+
+Route45TeleportAwayMovement:
+	teleport_from
+	step_end
+
 Route45_MapEvents:
 	def_warp_events
 	warp_event  2,  5, DARK_CAVE_BLACKTHORN_ENTRANCE, 1
@@ -539,7 +561,7 @@ Route45_MapEvents:
 	object_event 11, 50, SPRITE_BLACK_BELT, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 2, TrainerBlackbeltKenji, -1
 	object_event 17, 18, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerCooltrainermRyan, -1
 	object_event  5, 36, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainerfKelly, -1
-	object_event  6, 51, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route45Nugget, EVENT_ROUTE_45_NUGGET
+	object_event  6, 51, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route45OtisScript, EVENT_ROUTE_45_OTIS
 	object_event  5, 66, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route45Revive, EVENT_ROUTE_45_REVIVE
 	object_event  6, 20, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route45Elixer, EVENT_ROUTE_45_ELIXER
 	object_event  7, 33, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route45MaxPotion, EVENT_ROUTE_45_MAX_POTION
