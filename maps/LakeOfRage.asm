@@ -11,6 +11,7 @@
 	const LAKEOFRAGE_WESLEY
 	const LAKEOFRAGE_POKE_BALL1
 	const LAKEOFRAGE_POKE_BALL2
+	const LAKEOFRAGE_OTIS
 
 LakeOfRage_MapScripts:
 	def_scene_scripts
@@ -19,7 +20,7 @@ LakeOfRage_MapScripts:
 
 	def_callbacks
 	callback MAPCALLBACK_NEWMAP, LakeOfRageFlypointCallback
-	callback MAPCALLBACK_OBJECTS, LakeOfRageWesleyCallback
+	callback MAPCALLBACK_OBJECTS, LakeOfRageWesleyAndOtisCallback
 
 LakeOfRageNoop1Scene:
 	end
@@ -31,17 +32,30 @@ LakeOfRageFlypointCallback:
 	setflag ENGINE_FLYPOINT_LAKE_OF_RAGE
 	endcallback
 
-LakeOfRageWesleyCallback:
+LakeOfRageWesleyAndOtisCallback:
 	setval WEATHER_RAIN
 	writemem wFieldWeather
 
 	readvar VAR_WEEKDAY
 	ifequal WEDNESDAY, .WesleyAppears
 	disappear LAKEOFRAGE_WESLEY
+
+.OtisCheck
+	; 10% chance of otis appearing
+	checkflag ENGINE_MET_OTIS_TODAY
+	iftrue .done
+	random 10
+	ifequal 0, .AppearOtis
+.done
+	disappear LAKEOFRAGE_OTIS
 	endcallback
 
 .WesleyAppears:
 	appear LAKEOFRAGE_WESLEY
+	sjump .OtisCheck
+
+.AppearOtis:
+	appear LAKEOFRAGE_OTIS
 	endcallback
 
 LakeOfRageLanceScript:
@@ -494,6 +508,18 @@ FishingGurusHouseSignText:
 	line "HOUSE"
 	done
 
+LakeOfRageOtisScript:
+	callstd WanderingOddEggNPCScript
+	playsound SFX_WARP_TO
+	applymovement LAKEOFRAGE_OTIS, LakeOfRageOtisTeleportAwayMovement
+	disappear LAKEOFRAGE_OTIS
+	setflag ENGINE_MET_OTIS_TODAY
+	end
+
+LakeOfRageOtisTeleportAwayMovement:
+	teleport_from
+	step_end
+
 LakeOfRage_MapEvents:
 	def_warp_events
 	warp_event 27, 31, LAKE_OF_RAGE_MAGIKARP_HOUSE, 1
@@ -521,3 +547,4 @@ LakeOfRage_MapEvents:
 	object_event  4,  4, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, WesleyScript, EVENT_LAKE_OF_RAGE_WESLEY_OF_WEDNESDAY
 	object_event  7, 10, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, LakeOfRageElixer, EVENT_LAKE_OF_RAGE_ELIXER
 	object_event 35,  2, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, LakeOfRageTMDetect, EVENT_LAKE_OF_RAGE_TM_DETECT
+	object_event  2, 28, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, LakeOfRageOtisScript, EVENT_LAKE_OF_RAGE_OTIS

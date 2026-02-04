@@ -156,6 +156,7 @@ LakeOfRageGroupSprites:
 	db SPRITE_BERRY
 	db SPRITE_APRICORN
 	db SPRITE_POKE_BALL
+	db SPRITE_OTIS
 	db 0 ; end
 
 BlackthornGroupSprites:

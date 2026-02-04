@@ -551,12 +551,12 @@ RaikouText:
 Route45OtisScript:
 	callstd WanderingOddEggNPCScript
 	playsound SFX_WARP_TO
-	applymovement ROUTE45_OTIS, Route45TeleportAwayMovement
+	applymovement ROUTE45_OTIS, Route45OtisTeleportAwayMovement
 	disappear ROUTE45_OTIS
 	setflag ENGINE_MET_OTIS_TODAY
 	end
 
-Route45TeleportAwayMovement:
+Route45OtisTeleportAwayMovement:
 	teleport_from
 	step_end
 
