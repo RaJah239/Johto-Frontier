@@ -123,6 +123,7 @@ CianwoodGroupSprites:
 	db SPRITE_ROCK
 	db SPRITE_YOUNGSTER
 	db SPRITE_SUICUNE
+	db SPRITE_OTIS
 	db 0 ; end
 
 MahoganyGroupSprites:

@@ -9,11 +9,27 @@
 	const ROUTE41_SWIMMER_GIRL3
 	const ROUTE41_SWIMMER_GIRL4
 	const ROUTE41_SWIMMER_GIRL5
+	const ROUTE41_OTIS
 
 Route41_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
+	callback MAPCALLBACK_OBJECTS, Route41OtisCallback
+
+Route41OtisCallback:
+	; 10% chance of otis appearing
+	checkflag ENGINE_MET_OTIS_TODAY
+	iftrue .done
+	random 10
+	ifequal 0, .AppearOtis
+.done
+	disappear ROUTE41_OTIS
+	endcallback
+
+.AppearOtis:
+	appear ROUTE41_OTIS
+	endcallback
 
 TrainerSwimmerfKaylee:
 	trainer SWIMMERF, KAYLEE, EVENT_BEAT_SWIMMERF_KAYLEE, SwimmerfKayleeSeenText, SwimmerfKayleeBeatenText, 0, .Script
@@ -335,6 +351,18 @@ SwimmerfWendyAfterBattleText:
 	line "it's scary."
 	done
 
+Route41OtisScript:
+	callstd WanderingOddEggNPCScript
+	playsound SFX_WARP_TO
+	applymovement ROUTE41_OTIS, Route41OtisTeleportAwayMovement
+	disappear ROUTE41_OTIS
+	setflag ENGINE_MET_OTIS_TODAY
+	end
+
+Route41OtisTeleportAwayMovement:
+	teleport_from
+	step_end
+
 Route41_MapEvents:
 	def_warp_events
 	warp_event 12, 17, WHIRL_ISLAND_NW, 1
@@ -358,3 +386,4 @@ Route41_MapEvents:
 	object_event 27, 34, SPRITE_SWIMMER_GIRL, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerSwimmerfDenise, -1
 	object_event 44, 28, SPRITE_SWIMMER_GIRL, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 4, TrainerSwimmerfKara, -1
 	object_event  9, 50, SPRITE_SWIMMER_GIRL, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 2, TrainerSwimmerfWendy, -1
+	object_event 28, 43, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route41OtisScript, EVENT_ROUTE_41_OTIS
