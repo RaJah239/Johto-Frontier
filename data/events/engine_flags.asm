@@ -107,7 +107,7 @@ EngineFlags:
 	engine_flag wDailyFlags1, DAILYFLAGS1_ALL_FRUIT_TREES_F
 	engine_flag wDailyFlags1, DAILYFLAGS1_GOT_SHUCKIE_TODAY_F
 	engine_flag wDailyFlags1, DAILYFLAGS1_GOLDENROD_UNDERGROUND_BARGAIN_F
-	engine_flag wDailyFlags1, DAILYFLAGS1_TRAINER_HOUSE_F
+	engine_flag wDailyFlags1, DAILYFLAGS1_ENGINE_MET_OTIS_TODAY_F
 
 ; wDailyFlags1 9-16
 	engine_flag wDailyFlags1, DAILYFLAGS1_CIANWOOD_PHOTOGRAPH
