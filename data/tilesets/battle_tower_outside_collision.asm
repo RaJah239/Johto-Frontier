@@ -64,8 +64,8 @@
 	tilecoll WALL, WALL, WALL, WALL ; 3f
 	tilecoll WALL, WALL, WALL, WALL ; 40
 	tilecoll WALL, WALL, WALL, WALL ; 41
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 42
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 43
+	tilecoll WALL, WALL, WALL, DOOR ; 42
+	tilecoll WALL, WALL, WALL, WALL ; 43
 	tilecoll FLOOR, FLOOR, BRAKE_45, FLOOR ; 44
 	tilecoll FLOOR, FLOOR, BRAKE_45, FLOOR ; 45
 	tilecoll FLOOR, FLOOR, BRAKE_45, FLOOR ; 46

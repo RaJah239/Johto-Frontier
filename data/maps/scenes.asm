@@ -75,4 +75,5 @@ MapScenes::
 	scene_var BATTLE_PLAZA_MAGNET_TRAIN_STATION,           wBattlePlazaMagnetTrainStationSceneID
 	scene_var OAKS_LAB,                                    wOaksLab
 	scene_var ROUTE_23,                                    wRoute23
+	scene_var BATTLE_PLAZA,                                wBattlePlaza
 	db -1 ; end
