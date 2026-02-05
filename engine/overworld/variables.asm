@@ -68,6 +68,12 @@ _GetVarAction::
 	dwb NULL,                           RETVAR_STRBUF2
 	dwb wNumItems,                      RETVAR_ADDR_DE
 	dwb wNumBalls,                      RETVAR_ADDR_DE
+	dwb wBattleHallNormalPoints,           RETVAR_ADDR_DE
+	dwb wBattleHallInversePoints,          RETVAR_ADDR_DE
+	dwb wBattleHallTypelessPoints,         RETVAR_ADDR_DE
+	dwb wBattleHallHardModeNormalPoints,   RETVAR_ADDR_DE
+	dwb wBattleHallHardModeInversePoints,  RETVAR_ADDR_DE
+	dwb wBattleHallHardModeTypelessPoints, RETVAR_ADDR_DE
 
 .CountCaughtMons:
 ; Caught mons.
@@ -83,7 +89,7 @@ _GetVarAction::
 	ld b, wEndPokedexSeen - wPokedexSeen
 	call CountSetBits
 	ld a, [wNumSetBits]
-	jr .loadstringbuffer2
+	jmp .loadstringbuffer2
 
 .CountBadges:
 ; Number of owned badges.

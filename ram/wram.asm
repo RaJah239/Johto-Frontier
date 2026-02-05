@@ -3190,7 +3190,15 @@ wOaksLab::                                        db ; Nayru62's scene in Oak's 
 wRoute23::                                        db
 wBattlePlaza::                                    db
 
-	ds 171
+	ds 165
+
+wBattleHallNormalPoints:: db
+wBattleHallInversePoints:: db
+wBattleHallTypelessPoints:: db
+
+wBattleHallHardModeNormalPoints:: db
+wBattleHallHardModeInversePoints:: db
+wBattleHallHardModeTypelessPoints:: db
 
 wChartScrollDelay:: db
 
