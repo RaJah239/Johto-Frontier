@@ -351,5 +351,6 @@ INCLUDE "maps/SilverCaveOutside.asm"
 SECTION "Battle Plaza Map Scripts", ROMX
 INCLUDE "maps/BattlePlaza.asm"
 INCLUDE "maps/BattlePlazaRaJaHouse.asm"
+INCLUDE "maps/BattlePlazaBattleHall.asm"
 
 ENDSECTION
