@@ -2201,6 +2201,17 @@ WinTrainerBattle:
 	ld a, [wEnemyTrainerBaseReward]
 	and a
 	ret z
+
+	; check if in battle plaza and
+	; do not award money in battle plaza
+    ld a, [wMapGroup]
+	ld b, a
+	ld a, [wMapNumber]
+	ld c, a
+	call GetWorldMapLocation
+	cp LANDMARK_BATTLE_PLAZA
+    ret z
+
 	jr .give_money
 
 .battle_tower
