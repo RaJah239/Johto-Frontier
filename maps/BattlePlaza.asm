@@ -110,6 +110,34 @@ BattlePlazaRaJaHouseSignText:
 	text "RaJa239's House"
 	done
 
+BattlePlazaBattleHallHouseSign:
+	jumptext BattlePlazaBattleHallHouseSignText
+
+BattlePlazaBattleHallHouseSignText:
+	text "Battle Hall"
+	done
+
+BattlePlazaDraftArenaSign:
+	jumptext BattlePlazaDraftArenaSignText
+
+BattlePlazaDraftArenaSignText:
+	text "Draft Arena"
+	done
+
+BattlePlazaBattleTowerSign:
+	jumptext BattlePlazaBattleTowerSignText
+
+BattlePlazaBattleTowerSignText:
+	text "Battle Tower"
+	done
+
+BattlePlazaProOaksLabSign:
+	jumptext BattlePlazaProOaksLabSignText
+
+BattlePlazaProOaksLabSignText:
+	text "Prof. Oak's Lab"
+	done
+
 BattlePlaza_MapEvents:
 	def_warp_events
 	warp_event  5, 13, BATTLE_PLAZA_MAGNET_TRAIN_STATION, 1
@@ -127,6 +155,10 @@ BattlePlaza_MapEvents:
 	def_bg_events
 	bg_event  4, 14, BGEVENT_READ, BattlePlazaTrainStationSign
 	bg_event 12,  6, BGEVENT_READ, BattlePlazaRaJaHouseSign
+	bg_event 11, 12, BGEVENT_READ, BattlePlazaBattleHallHouseSign
+	bg_event 30, 12, BGEVENT_READ, BattlePlazaDraftArenaSign
+	bg_event 22, 10, BGEVENT_READ, BattlePlazaBattleTowerSign
+	bg_event  4, 20, BGEVENT_READ, BattlePlazaProOaksLabSign
 
 	def_object_events
 	object_event 11, 14, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MET_RAJA
