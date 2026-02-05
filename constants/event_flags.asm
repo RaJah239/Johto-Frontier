@@ -204,7 +204,10 @@
 	const EVENT_ANSWERED_DRAGON_MASTER_QUIZ_WRONG
 	const EVENT_ROUTE_32_OTIS
 	const EVENT_MET_RAJA
-; Unused: next 4 events
+	const EVENT_DID_NOT_GET_BATTLE_HALL_PRIZE
+	const EVENT_BATTLE_HALL_INVERSE_BATTLE
+	const EVENT_BATTLE_HALL_TYPELESS_BATTLE
+; Unused: next 1 events
 
 	const_next 200
 ; Kanto story events
