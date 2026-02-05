@@ -331,7 +331,7 @@ ENDM
 	map_const ROUTE_31_VIOLET_GATE,                         5,  4 ; 11
 	endgroup
 
-	newgroup BATTLE_PLAZA                                         ; 10
+	newgroup BATTLE_PLAZA                                         ; 11
 	map_const BATTLE_PLAZA,                                16, 12 ; 01
 	map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION,           10,  9 ; 02
 	map_const OAKS_LAB,                                     5,  6 ; 03
@@ -342,6 +342,7 @@ ENDM
 	map_const BATTLE_TOWER_BATTLE_ROOM,                     4,  4 ; 08
 	map_const BATTLE_PLAZA_RAJA_HOUSE,                      4,  4 ; 09
 	map_const BATTLE_PLAZA_BATTLE_HALL,                     4,  7 ; 10
+	map_const BATTLE_PLAZA_DRAFT_ARENA,                     4,  7 ; 11
 	endgroup
 
 DEF NUM_MAP_GROUPS EQU const_value ; 17

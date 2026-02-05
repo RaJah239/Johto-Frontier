@@ -63,6 +63,7 @@ PowerPlant_Blocks:
 BattlePlaza_Blocks:
 	INCBIN "maps/BattlePlaza.blk"
 
+BattlePlazaDraftArena_Blocks:
 BattlePlazaBattleHall_Blocks:
 	INCBIN "maps/BattlePlazaBattleHall.blk"
 

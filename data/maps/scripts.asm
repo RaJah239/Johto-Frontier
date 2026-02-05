@@ -352,5 +352,6 @@ SECTION "Battle Plaza Map Scripts", ROMX
 INCLUDE "maps/BattlePlaza.asm"
 INCLUDE "maps/BattlePlazaRaJaHouse.asm"
 INCLUDE "maps/BattlePlazaBattleHall.asm"
+INCLUDE "maps/BattlePlazaDraftArena.asm"
 
 ENDSECTION

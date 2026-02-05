@@ -119,6 +119,8 @@ BattlePlaza_MapEvents:
 	warp_event 11,  5, BATTLE_PLAZA_RAJA_HOUSE, 1
 	warp_event 14, 13, BATTLE_PLAZA_BATTLE_HALL, 2
 	warp_event 15, 13, BATTLE_PLAZA_BATTLE_HALL, 1
+	warp_event 26, 13, BATTLE_PLAZA_DRAFT_ARENA, 2
+	warp_event 27, 13, BATTLE_PLAZA_DRAFT_ARENA, 1
 
 	def_coord_events
 

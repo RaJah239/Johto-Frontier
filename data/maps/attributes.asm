@@ -451,3 +451,4 @@ ENDM
 	map_attributes PowerPlant, POWER_PLANT, $00, 0
 	map_attributes BattlePlazaRaJaHouse, BATTLE_PLAZA_RAJA_HOUSE, $00, 0
 	map_attributes BattlePlazaBattleHall, BATTLE_PLAZA_BATTLE_HALL, $00, 0
+	map_attributes BattlePlazaDraftArena, BATTLE_PLAZA_DRAFT_ARENA, $00, 0

@@ -362,7 +362,7 @@ Cherrygrove_Map_Names:
 	dw Cherrygrove_Map_Name11 ; map_const ROUTE_31_VIOLET_GATE ; 11
 	assert_table_length NUM_CHERRYGROVE_MAPS
 
-	; BATTLE_PLAZA, 9
+	; BATTLE_PLAZA, 11
 Battle_Plaza_Names:
 	table_width 2, Battle_Plaza_Names
 	dw Battle_Plaza_Name1 ; map_const BATTLE_PLAZA ; 1
@@ -375,6 +375,7 @@ Battle_Plaza_Names:
 	dw Battle_Plaza_Name8 ; map_const BATTLE_TOWER_BATTLE_ROOM ; 8
 	dw Battle_Plaza_Name9 ; map_const BATTLE_PLAZA_RAJA_HOUSE ; 9
 	dw Battle_Plaza_Name10 ; map_const BATTLE_PLAZA_BATTLE_HALL ; 10
+	dw Battle_Plaza_Name11 ; map_const BATTLE_PLAZA_DRAFT_ARENA ; 11
 	assert_table_length NUM_BATTLE_PLAZA_MAPS
 
 ; MAX LENGTH: 17
@@ -908,3 +909,5 @@ Battle_Plaza_Name9: ; map_const BATTLE_PLAZA_RAJA_HOUSE
 	db "RaJa239's House@"
 Battle_Plaza_Name10: ; map_const BATTLE_PLAZA_BATTLE_HALL
 	db "Battle Hall@"
+Battle_Plaza_Name11: ; map_const BATTLE_PLAZA_DRAFT_ARENA
+	db "Draft Arena@"
