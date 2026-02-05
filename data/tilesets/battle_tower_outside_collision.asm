@@ -42,7 +42,7 @@
 	tilecoll WALL, WALL, WALL, WALL ; 29
 	tilecoll WALL, WALL, WALL, WALL ; 2a
 	tilecoll WALL, WALL, WALL, WALL ; 2b
-	tilecoll WALL, WALL, WALL, WALL ; 2c
+	tilecoll WALL, FLOOR, WALL, WALL ; 2c
 	tilecoll WALL, FLOOR, WALL, WALL ; 2d
 	tilecoll WALL, WALL, WALL, WALL ; 2e
 	tilecoll WALL, FLOOR, WALL, WALL ; 2f
@@ -65,9 +65,9 @@
 	tilecoll WALL, WALL, WALL, WALL ; 40
 	tilecoll WALL, WALL, WALL, WALL ; 41
 	tilecoll WALL, FLOOR, FLOOR, FLOOR ; 42
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 43
-	tilecoll FLOOR, FLOOR, BRAKE_45, FLOOR ; 44
-	tilecoll FLOOR, FLOOR, BRAKE_45, FLOOR ; 45
+	tilecoll FLOOR, WALL, FLOOR, FLOOR ; 43
+	tilecoll FLOOR, WALL, WALL, WALL ; 44
+	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 45
 	tilecoll FLOOR, FLOOR, BRAKE_45, FLOOR ; 46
 	tilecoll FLOOR, FLOOR, BRAKE_45, FLOOR ; 47
 	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 48

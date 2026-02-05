@@ -19,17 +19,13 @@ MeetRaJaFirstTime:
 	applymovement PLAYER, BattlePlazaPlayerStepDownMovement
 	showemote EMOTE_SHOCK, PLAYER, 15
 	turnobject PLAYER, RIGHT
-	playsound SFX_EXIT_BUILDING
 	appear BATTLEPLAZA_RAJA
-	waitsfx
 	applymovement BATTLEPLAZA_RAJA, BattlePlazaRaJaMovement1
 	opentext
 	writetext BattlePlazaRaJaIntroText
 	waitbutton
 	closetext
 	applymovement BATTLEPLAZA_RAJA, BattlePlazaRaJaMovement2
-	playsound SFX_EXIT_BUILDING
-	waitsfx
 	disappear BATTLEPLAZA_RAJA
 	setscene SCENE_BATTLE_PLAZA_NOOP
 	end
@@ -51,7 +47,11 @@ BattlePlazaRaJaMovement2:
 	step RIGHT
 	step RIGHT
 	step RIGHT
-	step RIGHT
+	step UP
+	step UP
+	step UP
+	step UP
+	step UP
 	step_end
 
 BattlePlazaRaJaIntroText:
@@ -112,17 +112,17 @@ BattlePlazaRaJaHouseSignText:
 
 BattlePlaza_MapEvents:
 	def_warp_events
-	warp_event  5,  5, BATTLE_PLAZA_MAGNET_TRAIN_STATION, 1
+	warp_event  5, 13, BATTLE_PLAZA_MAGNET_TRAIN_STATION, 1
 	warp_event 20,  9, BATTLE_TOWER_1F, 1
 	warp_event 21,  9, BATTLE_TOWER_1F, 2
-	warp_event  5, 21, OAKS_LAB, 1
+	warp_event  5, 19, OAKS_LAB, 1
 	warp_event 11,  5, BATTLE_PLAZA_RAJA_HOUSE, 1
 
 	def_coord_events
 
 	def_bg_events
-	bg_event  4,  6, BGEVENT_READ, BattlePlazaTrainStationSign
+	bg_event  4, 14, BGEVENT_READ, BattlePlazaTrainStationSign
 	bg_event 12,  6, BGEVENT_READ, BattlePlazaRaJaHouseSign
 
 	def_object_events
-	object_event 11,  6, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MET_RAJA
+	object_event 11, 14, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MET_RAJA

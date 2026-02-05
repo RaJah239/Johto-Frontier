@@ -332,7 +332,7 @@ ENDM
 	endgroup
 
 	newgroup BATTLE_PLAZA                                         ; 8
-	map_const BATTLE_PLAZA,                                20, 14 ;  1
+	map_const BATTLE_PLAZA,                                16, 12 ;  1
 	map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION,           10,  9 ;  2
 	map_const OAKS_LAB,                                     5,  6 ;  3
 	map_const BATTLE_TOWER_1F,                              8,  5 ;  4
