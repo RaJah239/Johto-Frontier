@@ -258,6 +258,7 @@ if DEF(_DEBUG)
 	; intro events
 	addcellnum PHONE_MOM
 	setmapscene PLAYERS_HOUSE_1F, $1
+	setmapscene BATTLE_PLAZA, SCENE_BATTLE_PLAZA_NOOP
 	setevent EVENT_PLAYERS_HOUSE_MOM_1
 	clearevent EVENT_PLAYERS_HOUSE_MOM_2
 	special HealParty
