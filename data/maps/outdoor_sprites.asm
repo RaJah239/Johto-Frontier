@@ -46,7 +46,7 @@ CherrygroveGroupSprites:
 	db SPRITE_POKE_BALL
 	db SPRITE_APRICORN
 	db SPRITE_BERRY
-	db SPRITE_CHEATER
+	db SPRITE_UNKNOWN
 	db 0 ; end
 
 ; Route37 and EcruteakCity are connected
