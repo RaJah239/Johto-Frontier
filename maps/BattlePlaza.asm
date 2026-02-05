@@ -95,17 +95,34 @@ BattlePlazaRaJaIntroText:
 	para "Bye."
 	done
 
+BattlePlazaTrainStationSign:
+	jumptext BattlePlazaTrainStationSignText
+
+BattlePlazaRaJaHouseSign:
+	jumptext BattlePlazaRaJaHouseSignText
+
+BattlePlazaTrainStationSignText:
+	text "Battle Plaza's"
+	line "Train Station"
+	done
+
+BattlePlazaRaJaHouseSignText:
+	text "RaJa239's House"
+	done
+
 BattlePlaza_MapEvents:
 	def_warp_events
-	warp_event  5,  3, BATTLE_PLAZA_MAGNET_TRAIN_STATION, 1
-	warp_event 18,  9, BATTLE_TOWER_1F, 1
-	warp_event 19,  9, BATTLE_TOWER_1F, 2
-	warp_event 25, 17, OAKS_LAB, 1
-	warp_event 11,  3, BATTLE_PLAZA_RAJA_HOUSE, 1
+	warp_event  5,  5, BATTLE_PLAZA_MAGNET_TRAIN_STATION, 1
+	warp_event 20,  9, BATTLE_TOWER_1F, 1
+	warp_event 21,  9, BATTLE_TOWER_1F, 2
+	warp_event  5, 21, OAKS_LAB, 1
+	warp_event 11,  5, BATTLE_PLAZA_RAJA_HOUSE, 1
 
 	def_coord_events
 
 	def_bg_events
+	bg_event  4,  6, BGEVENT_READ, BattlePlazaTrainStationSign
+	bg_event 12,  6, BGEVENT_READ, BattlePlazaRaJaHouseSign
 
 	def_object_events
-	object_event 11,  4, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MET_RAJA
+	object_event 11,  6, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MET_RAJA
