@@ -106,7 +106,66 @@ BattleHallReceptionistScript:
 	turnobject PLAYER, UP
 	special LoadPokemonData
 	special HealParty
-	jumptext BattleHallBattleLoseText
+	opentext
+	writetext BattleHallBattleLoseText
+	waitbutton
+
+	; check if hard mode was on
+    callasm CheckHardModeASM
+	iftrue .SetHardModePointsToZero
+
+	checkevent EVENT_BATTLE_HALL_INVERSE_BATTLE
+	iftrue .InverseModePointsSetToZero
+	checkevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
+	iftrue .TypelessModePointsSetToZero
+
+	; normal mode points set to zero
+	setval 0
+	writevar VAR_BATTLE_HALL_NORMAL_PONITS
+	special TryQuickSave
+	closetext
+	end
+
+.InverseModePointsSetToZero:
+	setval 0
+	writevar VAR_BATTLE_HALL_INVERSE_PONITS
+	special TryQuickSave
+	closetext
+	end
+
+.TypelessModePointsSetToZero:
+	setval 0
+	writevar VAR_BATTLE_HALL_TYPELESS_PONITS
+	special TryQuickSave
+	closetext
+	end
+
+.SetHardModePointsToZero:
+	checkevent EVENT_BATTLE_HALL_INVERSE_BATTLE
+	iftrue .InverseModeHardModePointsSetToZero
+	checkevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
+	iftrue .TypelessModeHardModePointsSetToZero
+
+	; normal mode hard mode points set to zero
+	setval 0
+	writevar VAR_BATTLE_HALL_HARD_MODE_NORMAL_PONITS
+	special TryQuickSave
+	closetext
+	end
+
+.InverseModeHardModePointsSetToZero:
+	setval 0
+	writevar VAR_BATTLE_HALL_HARD_MODE_INVERSE_PONITS
+	special TryQuickSave
+	closetext
+	end
+
+.TypelessModeHardModePointsSetToZero:
+	setval 0
+	writevar VAR_BATTLE_HALL_HARD_MODE_TYPELESS_PONITS
+	special TryQuickSave
+	closetext
+	end
 
 .win
 	dontrestartmapmusic
@@ -120,6 +179,76 @@ BattleHallReceptionistScript:
 	promptbutton
 	special LoadPokemonData
 	special HealParty
+
+	; check if hard mode was on
+    callasm CheckHardModeASM
+	iftrue .AwardHardModePoints
+
+	checkevent EVENT_BATTLE_HALL_INVERSE_BATTLE
+	iftrue .InverseModePointsAwarded
+	checkevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
+	iftrue .TypelessModePointsAwarded
+
+	; normal mode points awarded
+	readvar VAR_BATTLE_HALL_NORMAL_PONITS
+	ifequal 100, .GivePrize
+
+	readvar VAR_BATTLE_HALL_NORMAL_PONITS
+	addval 1
+	writevar VAR_BATTLE_HALL_NORMAL_PONITS
+	sjump .GivePrize
+
+
+.InverseModePointsAwarded:
+	readvar VAR_BATTLE_HALL_INVERSE_PONITS
+	ifequal 100, .GivePrize
+
+	readvar VAR_BATTLE_HALL_INVERSE_PONITS
+	addval 1
+	writevar VAR_BATTLE_HALL_INVERSE_PONITS
+	sjump .GivePrize
+
+.TypelessModePointsAwarded:
+	readvar VAR_BATTLE_HALL_TYPELESS_PONITS
+	ifequal 100, .GivePrize
+
+	readvar VAR_BATTLE_HALL_TYPELESS_PONITS
+	addval 1
+	writevar VAR_BATTLE_HALL_TYPELESS_PONITS
+	sjump .GivePrize
+
+.AwardHardModePoints:
+	checkevent EVENT_BATTLE_HALL_INVERSE_BATTLE
+	iftrue .InverseModeHardModePointsAwarded
+	checkevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
+	iftrue .TypelessModeHardModePointsAwarded
+
+	; normal points awarded
+	readvar VAR_BATTLE_HALL_HARD_MODE_NORMAL_PONITS
+	ifequal 100, .GivePrize
+
+	readvar VAR_BATTLE_HALL_HARD_MODE_NORMAL_PONITS
+	addval 1
+	writevar VAR_BATTLE_HALL_HARD_MODE_NORMAL_PONITS
+	sjump .GivePrize
+
+
+.InverseModeHardModePointsAwarded:
+	readvar VAR_BATTLE_HALL_HARD_MODE_INVERSE_PONITS
+	ifequal 100, .GivePrize
+
+	readvar VAR_BATTLE_HALL_HARD_MODE_INVERSE_PONITS
+	addval 1
+	writevar VAR_BATTLE_HALL_HARD_MODE_INVERSE_PONITS
+	sjump .GivePrize
+
+.TypelessModeHardModePointsAwarded:
+	readvar VAR_BATTLE_HALL_HARD_MODE_TYPELESS_PONITS
+	ifequal 100, .GivePrize
+
+	readvar VAR_BATTLE_HALL_HARD_MODE_TYPELESS_PONITS
+	addval 1
+	writevar VAR_BATTLE_HALL_HARD_MODE_TYPELESS_PONITS
 	sjump .GivePrize
 
 .Declined:
@@ -158,6 +287,21 @@ BattleHallPlayer_EnterBattleRoom:
 	step UP
 	turn_head RIGHT
 	step_end
+
+CheckHardModeASM:
+    ld a, [wOptions2]
+    bit HARD_MODE, a
+    jr z, .off
+
+.on
+    ld a, 1
+    ld [wScriptVar], a
+    ret
+
+.off
+    xor a
+    ld [wScriptVar], a
+    ret
 
 BattleHallIntroText:
 	text "Welcome to the"
