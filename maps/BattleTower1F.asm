@@ -41,17 +41,6 @@ BattleTower1FCheckStateScene:
 BattleTower1FNoopScene:
 	end
 
-BattleTower1FRulesSign:
-	opentext
-	writetext Text_ReadBattleTowerRules
-	yesorno
-	iffalse .SkipRules
-	writetext Text_BattleTowerRules
-	waitbutton
-.SkipRules:
-	closetext
-	end
-
 BattleTower1FReceptionistScript:
 	setval BATTLETOWERACTION_GET_CHALLENGE_STATE ; readmem sBattleTowerChallengeState
 	special BattleTowerAction
@@ -243,16 +232,6 @@ Script_BattleTowerSettings:
 	promptbutton
 	sjump Script_Menu_ChallengeExplanationCancel
 
-Script_AMonLevelExceeds:
-	writetext Text_AMonLevelExceeds
-	waitbutton
-	sjump Script_Menu_ChallengeExplanationCancel
-
-Script_MayNotEnterABattleRoomUnderL70:
-	writetext Text_MayNotEnterABattleRoomUnderL70
-	waitbutton
-	sjump Script_Menu_ChallengeExplanationCancel
-
 Script_MobileError:
 	special BattleTowerMobileError
 	closetext
@@ -367,39 +346,39 @@ MovementData_BattleTowerBattleRoomPlayerTurnsToFaceNextOpponent:
 	step_end
 
 Text_BattleTowerWelcomesYou:
-	text "BATTLE TOWER"
+	text "Battle Tower"
 	line "welcomes you!"
 	done
 
 Text_WantToGoIntoABattleRoom:
 	text "Want to go into a"
-	line "BATTLE ROOM?"
+	line "Battle Room?"
 	done
 
 Text_RightThisWayToYourBattleRoom:
 	text "Right this way to"
-	line "your BATTLE ROOM."
+	line "your Battle Room."
 	done
 
 Text_BattleTowerIntroduction_2:
-	text "BATTLE TOWER is a"
+	text "Battle Tower is a"
 	line "facility made for"
-	cont "#MON battles."
+	cont "#mon battles."
 
-	para "Countless #MON"
+	para "Countless #mon"
 	line "trainers gather"
 
 	para "from all over to"
 	line "hold battles in"
 
 	para "specially designed"
-	line "BATTLE ROOMS."
+	line "Battle Rooms."
 
 	para "There are many"
-	line "BATTLE ROOMS in"
-	cont "the BATTLE TOWER."
+	line "Battle Rooms in"
+	cont "the Battle Tower."
 
-	para "Each ROOM holds"
+	para "Each room holds"
 	line "three trainers."
 
 	para "Beat them all, and"
@@ -408,26 +387,13 @@ Text_BattleTowerIntroduction_2:
 	para "To interrupt a"
 	line "session, you must"
 
-	para "SAVE. If not, you"
+	para "Save. If not, you"
 	line "won't be able to"
 
-	para "resume your ROOM"
+	para "resume your"
 	line "challenge."
 
 	para ""
-	done
-
-Text_ReceivedAListOfLeadersOnTheHonorRoll:
-	text "Received a list of"
-	line "LEADERS on the"
-	cont "HONOR ROLL."
-
-	para ""
-	done
-
-Text_PleaseConfirmOnThisMonitor:
-	text "Please confirm on"
-	line "this monitor."
 	done
 
 Text_ThanksForVisiting:
@@ -448,15 +414,15 @@ Text_CongratulationsYouveBeatenAllTheTrainers:
 	done
 
 Text_PlayerGotThree:
-	text "<PLAYER> got three"
-	line "CRYSTAL!@"
+	text "<PLAYER> got"
+	line "3× Crystals!@"
 	sound_item
 	text_promptbutton
 	text_end
 
 Text_YourPackIsStuffedFull:
 	text "Oops, your Items"
-	line "POCKET is full."
+	line "pocket is full."
 
 	para "Please make room"
 	line "and come back."
@@ -498,69 +464,26 @@ Text_BattleTower_SetToTypelessMode:
 	line "to neutral mode."
 	done
 
-Text_CantBeRegistered:
-	text "Your record from"
-	line "the previous"
-
-	para "BATTLE ROOM can't"
-	line "be registered. OK?"
-	done
-
-Text_CantBeRegistered_PreviousRecordDeleted:
-	text "Your record from"
-	line "the previous"
-
-	para "BATTLE ROOM can't"
-	line "be registered."
-
-	para "Also, the existing"
-	line "record will be"
-	cont "deleted. OK?"
-	done
-
-Text_ReadBattleTowerRules:
-	text "BATTLE TOWER rules"
-	line "are written here."
-
-	para "Read the rules?"
-	done
-
-Text_BattleTowerRules:
-	text "Three #MON may"
-	line "enter battles."
-
-	para "All three must be"
-	line "different."
-
-	para "The items they"
-	line "hold must also be"
-	cont "different."
-
-	para "Certain #MON"
-	line "may also have"
-
-	para "level restrictions"
-	line "placed on them."
-	done
-
 Text_BattleTower_LeftWithoutSaving:
 	text "Excuse me!"
-	line "You didn't SAVE"
-
-	para "before exiting"
-	line "the BATTLE ROOM."
+	
+	para "You didn't Save"
+	line "before exiting"
+	cont "the Battle Room."
 
 	para "I'm awfully sorry,"
 	line "but your challenge"
+	cont "will be declared"
+	cont "invalid and your"
+	cont "Streak has been"
+	cont "set to zero."
 
-	para "will be declared"
-	line "invalid."
+	para "Have a nice day."
 	done
 
 Text_YourMonWillBeHealedToFullHealth:
-	text "Your #MON will"
-	line "be healed to full"
-	cont "health."
+	text "Your #mon will"
+	line "be healed."
 	done
 
 Text_NextUpOpponentNo:
@@ -571,115 +494,63 @@ Text_NextUpOpponentNo:
 	done
 
 Text_SaveAndEndTheSession:
-	text "SAVE and end the"
+	text "Save and end the"
 	line "session?"
 	done
 
 Text_SaveBeforeReentry:
 	text "Your record will"
-	line "be SAVED before"
-
-	para "you go back into"
-	line "the previous ROOM."
+	line "be Saved before"
+	cont "you go back into"
+	cont "the previous Room."
 	done
 
 Text_CancelYourBattleRoomChallenge:
-	text "Cancel your BATTLE"
-	line "ROOM challenge?"
+	text "Cancel your Battle"
+	line "Room challenge?"
 	done
 
 Text_WeveBeenWaitingForYou:
 	text "We've been waiting"
 	line "for you. This way"
-
-	para "to a BATTLE ROOM,"
-	line "please."
-	done
-
-Text_FiveDayBattleLimit_Mobile:
-	text "You may enter only"
-	line "five BATTLE ROOMS"
-	cont "each day."
-
-	para "Please come back"
-	line "tomorrow."
-	done
-
-Text_TooMuchTimeElapsedNoRegister:
-	text "Sorry, but it's"
-	line "not possible to"
-
-	para "register your"
-	line "current record at"
-
-	para "the CENTER because"
-	line "too much time has"
-
-	para "elapsed since the"
-	line "start of your"
-	cont "challenge."
-	done
-
-Text_AMonLevelExceeds:
-	text "One or more of"
-	line "your #MON's"
-	cont "levels exceeds @"
-	text_decimal wScriptVar, 1, 3
-	text "."
-	done
-
-Text_MayNotEnterABattleRoomUnderL70:
-	text_ram wcd49
-	text " may not"
-	line "enter a BATTLE"
-	cont "ROOM under L70."
-
-	para "This BATTLE ROOM"
-	line "is for L@"
-	text_decimal wScriptVar, 1, 3
-	text "."
+	cont "to a Battle Room,"
+	cont "please."
 	done
 
 Text_BattleTowerYoungster:
 	text "Destroyed by the"
 	line "first opponent in"
-
-	para "no time at all…"
-	line "I'm no good…"
+	cont "no time at all…"
+	
+	para "I'm no good…"
 	done
 
 Text_BattleTowerCooltrainerF:
 	text "There are lots of"
-	line "BATTLE ROOMS, but"
-
-	para "I'm going to win"
-	line "them all!"
+	line "Battle Rooms, but"
+	cont "I'm going to win"
+	cont "them all!"
 	done
 
 Text_BattleTowerGranny:
-	text "It's a grueling"
-	line "task, not being"
-
-	para "able to use items"
-	line "in battle."
-
-	para "Making your"
-	line "#MON hold items"
-
-	para "is the key to"
-	line "winning battles."
+	text "Making your"
+	line "#mon hold items"
+	cont "is the key to"
+	cont "winning battles."
 	done
 
 Text_BattleTowerBugCatcher:
 	text "I'm trying to see"
 	line "how far I can go"
-
-	para "using just bug"
-	line "#MON."
+	cont "using just bug"
+	cont "#mon."
 
 	para "Don't let there be"
-	line "any fire #MON…"
+	line "any fire #mon…"
 	done
+
+BattleTower1FStreakSign:
+	end
 
 BattleTower1F_MapEvents:
 	def_warp_events
@@ -692,7 +563,7 @@ BattleTower1F_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  6,  6, BGEVENT_READ, BattleTower1FRulesSign
+	bg_event  6,  6, BGEVENT_READ, BattleTower1FStreakSign
 
 	def_object_events
 	object_event  7,  6, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BattleTower1FReceptionistScript, -1
