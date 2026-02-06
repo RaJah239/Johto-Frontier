@@ -1046,12 +1046,6 @@ _BuenaComeAgainText::
 	line "back again!"
 	done
 
-_BTExcuseMeText::
-	text "Excuse me!"
-
-	para ""
-	done
-
 _ExcuseMeYoureNotReadyText::
 	text "Excuse me."
 	line "You're not ready."
@@ -1062,20 +1056,6 @@ _ExcuseMeYoureNotReadyText::
 _BattleTowerReturnWhenReadyText::
 	text "Please return when"
 	line "you're ready."
-	done
-
-_NeedAtLeastThreeMonText::
-	text "You need at least"
-	line "three #MON."
-
-	para ""
-	done
-
-_EggDoesNotQualifyText::
-	text "Sorry, an EGG"
-	line "doesn't qualify."
-
-	para ""
 	done
 
 _OnlyThreeMonMayBeEnteredText::

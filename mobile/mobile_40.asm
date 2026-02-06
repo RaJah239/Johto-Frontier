@@ -6669,15 +6669,8 @@ Mobile_SelectThreeMons:
 	call PrintText
 	call YesNoBox
 	jr c, .asm_103696
-	farcall CheckForMobileBattleRules
-	jr nc, .asm_103690
 	call JoyWaitAorB
-	jr .asm_103696
-
-.asm_103690
-	ld a, $01
-	ld [wScriptVar], a
-	ret
+	; fallthrough
 
 .asm_103696
 	xor a
@@ -6714,13 +6707,11 @@ Mobile_SelectThreeMons:
 	jr .asm_1036b5
 
 .asm_1036d9
-	farcall CheckForMobileBattleRules
-	jr nc, .asm_1036e6
 	call JoyWaitAorB
-	jr .asm_1036f4
+	; fallthrough
 
-.asm_1036e6
-	ld a, $01
+.asm_1036f4
+	xor a
 	ld [wScriptVar], a
 	ret
 
@@ -6728,11 +6719,6 @@ Mobile_SelectThreeMons:
 	call Function1036f9
 	call JoyWaitAorB
 	jr .asm_1036b5
-
-.asm_1036f4
-	xor a
-	ld [wScriptVar], a
-	ret
 
 Function1036f9:
 	ld hl, MobileBattleRulesText
