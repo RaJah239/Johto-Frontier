@@ -1,10 +1,14 @@
 BattleTowerMons:
-; 10 groups (one per floor level) of 21 mons (BATTLETOWER_NUM_UNIQUE_MON).
 	table_width NICKNAMED_MON_STRUCT_LENGTH, BattleTowerMons
 
-; BattleTowerMons group 1
+; ============
+; === Note ===
+; ============
+; 136 pokemon in total
+; last Trainer picks from top 40 Pokemon
+; first 16 Pokemon are ubers
 
-	db CHARMANDER
+	db MEWTWO
 	db MIRACLEBERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -15,7 +19,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -26,7 +30,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "SANDA-SU@@@"
 
-	db CHARMELEON
+	db MEW
 	db LEFTOVERS
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -37,7 +41,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -48,29 +52,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "E-HUi@@@@@@"
 
-	db CHARIZARD
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "BURAtuKI-@@"
-
-	db SQUIRTLE
+	db CELEBI
 	db FOCUS_BAND
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -81,7 +63,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -92,7 +74,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "SO-NANSU@@@"
 
-	db WARTORTLE
+	db VICTINI
 	db MIRACLEBERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -103,7 +85,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -114,7 +96,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "GARU-RA@@@@"
 
-	db CORSOLA
+	db NOWN
 	db SCOPE_LENS
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -125,7 +107,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -136,7 +118,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "SANI-GO@@@@"
 
-	db MILTANK
+	db HO_OH
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -147,7 +129,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -158,7 +140,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "MIRUTANKU@@"
 
-	db AERODACTYL
+	db LUGIA
 	db LEFTOVERS
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -169,7 +151,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -180,7 +162,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "PUTERA@@@@@"
 
-	db LAPRAS
+	db REGIGIGAS
 	db MIRACLEBERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -191,7 +173,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -202,7 +184,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "RAPURASU@@@"
 
-	db SNEASEL
+	db DARKRAI
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -213,7 +195,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -224,7 +206,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "NIyu-RA@@@@"
 
-	db PORYGON2
+	db GHOLDENGO
 	db BRIGHTPOWDER
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -235,7 +217,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -246,7 +228,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "PORIGON2@@@"
 
-	db MISDREAVUS
+	db DURALUDON
 	db FOCUS_BAND
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -257,7 +239,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -268,7 +250,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "MUUMA@@@@@@"
 
-	db HOUNDOUR
+	db SMEARGLE
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -279,7 +261,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -288,119 +270,9 @@ BattleTowerMons:
 	bigdw 8 ; Spd
 	bigdw 8 ; SAtk
 	bigdw 8 ; SDef
-	db "DERUBIRU@@@"
+	db "BURAtuKI-@@"
 
-	db BLASTOISE
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KIRINRIKI@@"
-
-	db BLISSEY
-	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "HAPINASU@@@"
-
-	db SNORLAX
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KABIGON@@@@"
-
-	db PIDGEY
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "NAtuSI-@@@@"
-
-	db HERACROSS
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "HERAKUROSU@"
-
-	db UNOWN
+	db FERROTHORN
 	db BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -422,450 +294,7 @@ BattleTowerMons:
 	bigdw 21 ; SDef
 	db "ANNO-N@@@@@"
 
-	db TAUROS
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KENTAROSU@@"
-
-	db FEEBAS
-	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "BARIYA-DO@@"
-
-
-; BattleTowerMons group 2
-
-	db CHARMANDER
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SANDA-SU@@@"
-
-	db CHARMELEON
-	db LEFTOVERS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "E-HUi@@@@@@"
-
-	db CHARIZARD
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "BURAtuKI-@@"
-
-	db SQUIRTLE
-	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SO-NANSU@@@"
-
-	db WARTORTLE
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "GARU-RA@@@@"
-
-	db CORSOLA
-	db SCOPE_LENS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SANI-GO@@@@"
-
-	db MILTANK
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "MIRUTANKU@@"
-
-	db AERODACTYL
-	db LEFTOVERS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "PUTERA@@@@@"
-
-	db LAPRAS
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "RAPURASU@@@"
-
-	db SNEASEL
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "NIyu-RA@@@@"
-
-	db PORYGON2
-	db BRIGHTPOWDER
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "PORIGON2@@@"
-
-	db MISDREAVUS
-	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "MUUMA@@@@@@"
-
-	db HOUNDOUR
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "DERUBIRU@@@"
-
-	db BLASTOISE
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KIRINRIKI@@"
-
-	db BLISSEY
-	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "HAPINASU@@@"
-
-	db SNORLAX
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KABIGON@@@@"
-
-	db PIDGEY
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "NAtuSI-@@@@"
-
-	db HERACROSS
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "HERAKUROSU@"
-
-	db UNOWN
+	db VOLCARONA
 	db BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -887,427 +316,7 @@ BattleTowerMons:
 	bigdw 21 ; SDef
 	db "ANNO-N@@@@@"
 
-	db TAUROS
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KENTAROSU@@"
-
-	db FEEBAS
-	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "BARIYA-DO@@"
-
-; BattleTowerMons group 3
-
-	db CHARMANDER
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SANDA-SU@@@"
-
-	db CHARMELEON
-	db LEFTOVERS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "E-HUi@@@@@@"
-
-	db CHARIZARD
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "BURAtuKI-@@"
-
-	db SQUIRTLE
-	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SO-NANSU@@@"
-
-	db WARTORTLE
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "GARU-RA@@@@"
-
-	db CORSOLA
-	db SCOPE_LENS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SANI-GO@@@@"
-
-	db MILTANK
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "MIRUTANKU@@"
-
-	db AERODACTYL
-	db LEFTOVERS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "PUTERA@@@@@"
-
-	db LAPRAS
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "RAPURASU@@@"
-
-	db SNEASEL
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "NIyu-RA@@@@"
-
-	db PORYGON2
-	db BRIGHTPOWDER
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "PORIGON2@@@"
-
-	db MISDREAVUS
-	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "MUUMA@@@@@@"
-
-	db HOUNDOUR
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "DERUBIRU@@@"
-
-	db BLASTOISE
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KIRINRIKI@@"
-
-	db BLISSEY
-	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "HAPINASU@@@"
-
-	db SNORLAX
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KABIGON@@@@"
-
-	db PIDGEY
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "NAtuSI-@@@@"
-
-	db HERACROSS
+	db GARCHOMP
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1329,295 +338,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "HERAKUROSU@"
 
-	db UNOWN
-	db BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 174, 174, 174, 174, 174, 174 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 15, 15, 15, 15 ; DVs
-	db 15, 0, 0, 0 ; PP
-	db 0 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 10 ; Level
-	db 0, 0 ; Status
-	bigdw 36 ; HP
-	bigdw 36 ; Max HP
-	bigdw 26 ; Atk
-	bigdw 21 ; Def
-	bigdw 21 ; Spd
-	bigdw 26 ; SAtk
-	bigdw 21 ; SDef
-	db "ANNO-N@@@@@"
-
-	db TAUROS
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KENTAROSU@@"
-
-	db FEEBAS
-	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "BARIYA-DO@@"
-
-; BattleTowerMons group 4
-
-	db CHARMANDER
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SANDA-SU@@@"
-
-	db CHARMELEON
-	db LEFTOVERS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "E-HUi@@@@@@"
-
-	db CHARIZARD
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "BURAtuKI-@@"
-
-	db SQUIRTLE
-	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SO-NANSU@@@"
-
-	db WARTORTLE
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "GARU-RA@@@@"
-
-	db CORSOLA
-	db SCOPE_LENS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SANI-GO@@@@"
-
-	db MILTANK
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "MIRUTANKU@@"
-
-	db AERODACTYL
-	db LEFTOVERS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "PUTERA@@@@@"
-
-	db LAPRAS
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "RAPURASU@@@"
-
-	db SNEASEL
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "NIyu-RA@@@@"
-
-	db PORYGON2
+	db TYRANITAR
 	db BRIGHTPOWDER
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1639,29 +360,12 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "PORIGON2@@@"
 
-	db MISDREAVUS
-	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "MUUMA@@@@@@"
+; ============
+; === Note ===
+; ============
+; above 16 are ubers
 
-	db HOUNDOUR
+	db DITTO
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1672,7 +376,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1683,7 +387,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "DERUBIRU@@@"
 
-	db BLASTOISE
+	db UNOWN
 	db KINGS_ROCK
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1694,7 +398,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1705,7 +409,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "KIRINRIKI@@"
 
-	db BLISSEY
+	db RAIKOU
 	db QUICK_CLAW
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1716,7 +420,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1727,7 +431,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "HAPINASU@@@"
 
-	db SNORLAX
+	db ENTEI
 	db MIRACLEBERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1738,7 +442,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1749,7 +453,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "KABIGON@@@@"
 
-	db PIDGEY
+	db SUICUNE
 	db KINGS_ROCK
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1760,7 +464,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1771,7 +475,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "NAtuSI-@@@@"
 
-	db HERACROSS
+	db ARTICUNO
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1782,7 +486,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1793,7 +497,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "HERAKUROSU@"
 
-	db UNOWN
+	db MOLTRES
 	db BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1815,7 +519,7 @@ BattleTowerMons:
 	bigdw 21 ; SDef
 	db "ANNO-N@@@@@"
 
-	db TAUROS
+	db ZAPDOS
 	db KINGS_ROCK
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1826,7 +530,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1837,7 +541,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "KENTAROSU@@"
 
-	db FEEBAS
+	db REGIROCK
 	db QUICK_CLAW
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1848,7 +552,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1859,10 +563,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "BARIYA-DO@@"
 
-
-; BattleTowerMons group 5
-
-	db CHARMANDER
+	db REGICE
 	db MIRACLEBERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1884,7 +585,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "SANDA-SU@@@"
 
-	db CHARMELEON
+	db REGISTEEL
 	db LEFTOVERS
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1906,7 +607,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "E-HUi@@@@@@"
 
-	db CHARIZARD
+	db ABSOL
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1928,7 +629,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "BURAtuKI-@@"
 
-	db SQUIRTLE
+	db ROTOM
 	db FOCUS_BAND
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1950,7 +651,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "SO-NANSU@@@"
 
-	db WARTORTLE
+	db AERODACTYL
 	db MIRACLEBERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1972,7 +673,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "GARU-RA@@@@"
 
-	db CORSOLA
+	db CRADILY
 	db SCOPE_LENS
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -1994,7 +695,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "SANI-GO@@@@"
 
-	db MILTANK
+	db OMASTAR
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2016,7 +717,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "MIRUTANKU@@"
 
-	db AERODACTYL
+	db PORYGONZ
 	db LEFTOVERS
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2038,7 +739,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "PUTERA@@@@@"
 
-	db LAPRAS
+	db HAXORUS
 	db MIRACLEBERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2060,7 +761,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "RAPURASU@@@"
 
-	db SNEASEL
+	db SALAMENCE
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2082,29 +783,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "NIyu-RA@@@@"
 
-	db PORYGON2
-	db BRIGHTPOWDER
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "PORIGON2@@@"
-
-	db MISDREAVUS
+	db SNORLAX
 	db FOCUS_BAND
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2126,29 +805,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "MUUMA@@@@@@"
 
-	db HOUNDOUR
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "DERUBIRU@@@"
-
-	db BLASTOISE
+	db BLISSEY
 	db KINGS_ROCK
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2170,7 +827,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "KIRINRIKI@@"
 
-	db BLISSEY
+	db MISMAGIUS
 	db QUICK_CLAW
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2192,7 +849,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "HAPINASU@@@"
 
-	db SNORLAX
+	db SKARMORY
 	db MIRACLEBERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2214,7 +871,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "KABIGON@@@@"
 
-	db PIDGEY
+	db BRONZONG
 	db KINGS_ROCK
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2236,7 +893,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "NAtuSI-@@@@"
 
-	db HERACROSS
+	db LUCARIO
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2258,7 +915,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "HERAKUROSU@"
 
-	db UNOWN
+	db CLAYDOL
 	db BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2280,7 +937,317 @@ BattleTowerMons:
 	bigdw 21 ; SDef
 	db "ANNO-N@@@@@"
 
-	db TAUROS
+; =========== Last Trainer picks from above 40 Pokemon =============
+
+	db CHANSEY
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "DERUBIRU@@@"
+
+	db ABOMASNOW
+	db MIRACLEBERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "SANDA-SU@@@"
+
+	db WEAVILE
+	db LEFTOVERS
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "E-HUi@@@@@@"
+
+	db SNEASLER
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "BURAtuKI-@@"
+
+	db MAMOSWINE
+	db FOCUS_BAND
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "SO-NANSU@@@"
+
+	db GLALIE
+	db MIRACLEBERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "GARU-RA@@@@"
+
+	db FROSLASS
+	db SCOPE_LENS
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "SANI-GO@@@@"
+
+	db JYNX
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "MIRUTANKU@@"
+
+	db DELIBIRD
+	db LEFTOVERS
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "PUTERA@@@@@"
+
+	db WYRDEER
+	db MIRACLEBERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "RAPURASU@@@"
+
+	db LUNATONE
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "NIyu-RA@@@@"
+
+	db SOLROCK
+	db BRIGHTPOWDER
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "PORIGON2@@@"
+
+	db CLEFABLE
+	db FOCUS_BAND
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "MUUMA@@@@@@"
+
+	db LAPRAS
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "DERUBIRU@@@"
+
+	db KINGDRA
 	db KINGS_ROCK
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2291,7 +1258,7 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2300,9 +1267,9 @@ BattleTowerMons:
 	bigdw 8 ; Spd
 	bigdw 8 ; SAtk
 	bigdw 8 ; SDef
-	db "KENTAROSU@@"
+	db "KIRINRIKI@@"
 
-	db FEEBAS
+	db DEWGONG
 	db QUICK_CLAW
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2313,7 +1280,139 @@ BattleTowerMons:
 	db 40, 30, 30, 30 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HAPINASU@@@"
+
+	db TENTACRUEL
+	db MIRACLEBERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "KABIGON@@@@"
+
+	db MANTINE
+	db KINGS_ROCK
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "NAtuSI-@@@@"
+
+	db LANTURN
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db OCTILLERY
+	db BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 174, 174, 174, 174, 174, 174 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 15, 15, 15, 15 ; DVs
+	db 15, 0, 0, 0 ; PP
+	db 0 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 10 ; Level
+	db 0, 0 ; Status
+	bigdw 36 ; HP
+	bigdw 36 ; Max HP
+	bigdw 26 ; Atk
+	bigdw 21 ; Def
+	bigdw 21 ; Spd
+	bigdw 26 ; SAtk
+	bigdw 21 ; SDef
+	db "ANNO-N@@@@@"
+
+	db STARMIE
+	db KINGS_ROCK
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "KENTAROSU@@"
+
+	db CORSOLA
+	db QUICK_CLAW
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2324,10 +1423,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "BARIYA-DO@@"
 
-
-; BattleTowerMons group 6
-
-	db CHARMANDER
+	db SHUCKLE
 	db MIRACLEBERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2349,7 +1445,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "SANDA-SU@@@"
 
-	db CHARMELEON
+	db MAGNEZONE
 	db LEFTOVERS
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2371,7 +1467,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "E-HUi@@@@@@"
 
-	db CHARIZARD
+	db ELECTABUZZ
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2393,7 +1489,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "BURAtuKI-@@"
 
-	db SQUIRTLE
+	db ELECTRODE
 	db FOCUS_BAND
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2415,7 +1511,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "SO-NANSU@@@"
 
-	db WARTORTLE
+	db TAUROS
 	db MIRACLEBERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2437,7 +1533,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "GARU-RA@@@@"
 
-	db CORSOLA
+	db MILTANK
 	db SCOPE_LENS
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2459,7 +1555,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "SANI-GO@@@@"
 
-	db MILTANK
+	db CHANDELURE
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2481,7 +1577,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "MIRUTANKU@@"
 
-	db AERODACTYL
+	db MUK
 	db LEFTOVERS
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2503,29 +1599,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "PUTERA@@@@@"
 
-	db LAPRAS
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "RAPURASU@@@"
-
-	db SNEASEL
+	db SUDOWOODO
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2547,7 +1621,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "NIyu-RA@@@@"
 
-	db PORYGON2
+	db HYPNO
 	db BRIGHTPOWDER
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2569,7 +1643,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "PORIGON2@@@"
 
-	db MISDREAVUS
+	db GRANBULL
 	db FOCUS_BAND
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2591,7 +1665,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "MUUMA@@@@@@"
 
-	db HOUNDOUR
+	db PERSIAN
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2613,29 +1687,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "DERUBIRU@@@"
 
-	db BLASTOISE
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KIRINRIKI@@"
-
-	db BLISSEY
+	db HERACROSS
 	db QUICK_CLAW
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2657,7 +1709,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "HAPINASU@@@"
 
-	db SNORLAX
+	db KLEAVOR
 	db MIRACLEBERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2679,7 +1731,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "KABIGON@@@@"
 
-	db PIDGEY
+	db SCIZOR
 	db KINGS_ROCK
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2701,7 +1753,53 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "NAtuSI-@@@@"
 
-	db HERACROSS
+; === 80 pokemon ===
+
+	db WEEZING
+	db MIRACLEBERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "RAPURASU@@@"
+
+	db TANGROWTH
+	db KINGS_ROCK
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "KIRINRIKI@@"
+
+	db SCYTHER
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -2723,30 +1821,8 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "HERAKUROSU@"
 
-	db UNOWN
-	db BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 174, 174, 174, 174, 174, 174 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 15, 15, 15, 15 ; DVs
-	db 15, 0, 0, 0 ; PP
-	db 0 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 10 ; Level
-	db 0, 0 ; Status
-	bigdw 36 ; HP
-	bigdw 36 ; Max HP
-	bigdw 26 ; Atk
-	bigdw 21 ; Def
-	bigdw 21 ; Spd
-	bigdw 26 ; SAtk
-	bigdw 21 ; SDef
-	db "ANNO-N@@@@@"
-
-	db TAUROS
-	db KINGS_ROCK
+	db ANNIHILAPE
+	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
 	dt 1000 ; Exp
@@ -2765,10 +1841,10 @@ BattleTowerMons:
 	bigdw 8 ; Spd
 	bigdw 8 ; SAtk
 	bigdw 8 ; SDef
-	db "KENTAROSU@@"
+	db "HERAKUROSU@"
 
-	db FEEBAS
-	db QUICK_CLAW
+	db PRIMEAPE
+	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
 	dt 1000 ; Exp
@@ -2787,13 +1863,10 @@ BattleTowerMons:
 	bigdw 8 ; Spd
 	bigdw 8 ; SAtk
 	bigdw 8 ; SDef
-	db "BARIYA-DO@@"
+	db "HERAKUROSU@"
 
-
-; BattleTowerMons group 7
-
-	db CHARMANDER
-	db MIRACLEBERRY
+	db TROPIUS
+	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
 	dt 1000 ; Exp
@@ -2812,10 +1885,10 @@ BattleTowerMons:
 	bigdw 8 ; Spd
 	bigdw 8 ; SAtk
 	bigdw 8 ; SDef
-	db "SANDA-SU@@@"
+	db "HERAKUROSU@"
 
-	db CHARMELEON
-	db LEFTOVERS
+	db DRAPION
+	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
 	dt 1000 ; Exp
@@ -2834,7 +1907,1023 @@ BattleTowerMons:
 	bigdw 8 ; Spd
 	bigdw 8 ; SAtk
 	bigdw 8 ; SDef
-	db "E-HUi@@@@@@"
+	db "HERAKUROSU@"
+
+	db GALVANTULA
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db SCOLIPEDE
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db ARIADOS
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db BRELOOM
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db SLOWBRO
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db RAPIDASH
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db DODRIO
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db HARIYAMA
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db GLISCOR
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db QUAGSIRE
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db HOUNDOOM
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db ARCANINE
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db XATU
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db ALTARIA
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db GENGAR
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+; === 100 pokemon ===
+
+	db GYARADOS
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db ONIX
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db STEELIX
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db RHYDON
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db AZUMARILL
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db GOLISOPOD
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db NIDOKING
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db NIDOQUEEN
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db AMPHAROS
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db VICTREEBEL
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db DONPHAN
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db URSALUNA
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db CROBAT
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db NOCTOWL
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db PIDGEOT
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db LOPUNNY
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db SUNFLORA
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db YANMEGA
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db DUSTOX
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db BEAUTIFLY
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+; === 120 pokemon ===
+
+	db GALLADE
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db GARDEVOIR
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db DECIDUEYE
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db MILOTIC
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db BLAZIKEN
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db SYLVEON
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db UMBREON
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db RAICHU
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db PIKACHU
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db TORTERRA
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db BLASTOISE
+	db GOLD_BERRY
+	db SPLASH, 0, 0, 0
+	dw 0 ; OT ID
+	dt 1000 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 13, 13, 11, 13 ; DVs
+	db 40, 30, 30, 30 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 1 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
 
 	db CHARIZARD
 	db GOLD_BERRY
@@ -2856,317 +2945,9 @@ BattleTowerMons:
 	bigdw 8 ; Spd
 	bigdw 8 ; SAtk
 	bigdw 8 ; SDef
-	db "BURAtuKI-@@"
+	db "HERAKUROSU@"
 
-	db SQUIRTLE
-	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SO-NANSU@@@"
-
-	db WARTORTLE
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "GARU-RA@@@@"
-
-	db CORSOLA
-	db SCOPE_LENS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SANI-GO@@@@"
-
-	db MILTANK
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "MIRUTANKU@@"
-
-	db AERODACTYL
-	db LEFTOVERS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "PUTERA@@@@@"
-
-	db LAPRAS
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "RAPURASU@@@"
-
-	db SNEASEL
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "NIyu-RA@@@@"
-
-	db PORYGON2
-	db BRIGHTPOWDER
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "PORIGON2@@@"
-
-	db MISDREAVUS
-	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "MUUMA@@@@@@"
-
-	db HOUNDOUR
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "DERUBIRU@@@"
-
-	db BLASTOISE
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KIRINRIKI@@"
-
-	db BLISSEY
-	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "HAPINASU@@@"
-
-	db SNORLAX
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KABIGON@@@@"
-
-	db PIDGEY
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "NAtuSI-@@@@"
-
-	db HERACROSS
+	db TOGEKISS
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -3188,450 +2969,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "HERAKUROSU@"
 
-	db UNOWN
-	db BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 174, 174, 174, 174, 174, 174 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 15, 15, 15, 15 ; DVs
-	db 15, 0, 0, 0 ; PP
-	db 0 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 10 ; Level
-	db 0, 0 ; Status
-	bigdw 36 ; HP
-	bigdw 36 ; Max HP
-	bigdw 26 ; Atk
-	bigdw 21 ; Def
-	bigdw 21 ; Spd
-	bigdw 26 ; SAtk
-	bigdw 21 ; SDef
-	db "ANNO-N@@@@@"
-
-	db TAUROS
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KENTAROSU@@"
-
-	db FEEBAS
-	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "BARIYA-DO@@"
-
-
-; BattleTowerMons group 8
-
-	db CHARMANDER
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SANDA-SU@@@"
-
-	db CHARMELEON
-	db LEFTOVERS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "E-HUi@@@@@@"
-
-	db CHARIZARD
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "BURAtuKI-@@"
-
-	db SQUIRTLE
-	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SO-NANSU@@@"
-
-	db WARTORTLE
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "GARU-RA@@@@"
-
-	db CORSOLA
-	db SCOPE_LENS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SANI-GO@@@@"
-
-	db MILTANK
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "MIRUTANKU@@"
-
-	db AERODACTYL
-	db LEFTOVERS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "PUTERA@@@@@"
-
-	db LAPRAS
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "RAPURASU@@@"
-
-	db SNEASEL
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "NIyu-RA@@@@"
-
-	db PORYGON2
-	db BRIGHTPOWDER
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "PORIGON2@@@"
-
-	db MISDREAVUS
-	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "MUUMA@@@@@@"
-
-	db HOUNDOUR
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "DERUBIRU@@@"
-
-	db BLASTOISE
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KIRINRIKI@@"
-
-	db BLISSEY
-	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "HAPINASU@@@"
-
-	db SNORLAX
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KABIGON@@@@"
-
-	db PIDGEY
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "NAtuSI-@@@@"
-
-	db HERACROSS
+	db MEGANIUM
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -3653,450 +2991,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "HERAKUROSU@"
 
-	db UNOWN
-	db BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 174, 174, 174, 174, 174, 174 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 15, 15, 15, 15 ; DVs
-	db 15, 0, 0, 0 ; PP
-	db 0 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 10 ; Level
-	db 0, 0 ; Status
-	bigdw 36 ; HP
-	bigdw 36 ; Max HP
-	bigdw 26 ; Atk
-	bigdw 21 ; Def
-	bigdw 21 ; Spd
-	bigdw 26 ; SAtk
-	bigdw 21 ; SDef
-	db "ANNO-N@@@@@"
-
-	db TAUROS
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KENTAROSU@@"
-
-	db FEEBAS
-	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "BARIYA-DO@@"
-
-
-; BattleTowerMons group 9
-
-	db CHARMANDER
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SANDA-SU@@@"
-
-	db CHARMELEON
-	db LEFTOVERS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "E-HUi@@@@@@"
-
-	db CHARIZARD
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "BURAtuKI-@@"
-
-	db SQUIRTLE
-	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SO-NANSU@@@"
-
-	db WARTORTLE
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "GARU-RA@@@@"
-
-	db CORSOLA
-	db SCOPE_LENS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SANI-GO@@@@"
-
-	db MILTANK
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "MIRUTANKU@@"
-
-	db AERODACTYL
-	db LEFTOVERS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "PUTERA@@@@@"
-
-	db LAPRAS
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "RAPURASU@@@"
-
-	db SNEASEL
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "NIyu-RA@@@@"
-
-	db PORYGON2
-	db BRIGHTPOWDER
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "PORIGON2@@@"
-
-	db MISDREAVUS
-	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "MUUMA@@@@@@"
-
-	db HOUNDOUR
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "DERUBIRU@@@"
-
-	db BLASTOISE
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KIRINRIKI@@"
-
-	db BLISSEY
-	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "HAPINASU@@@"
-
-	db SNORLAX
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KABIGON@@@@"
-
-	db PIDGEY
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "NAtuSI-@@@@"
-
-	db HERACROSS
+	db FERALIGATR
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -4118,450 +3013,7 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "HERAKUROSU@"
 
-	db UNOWN
-	db BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 174, 174, 174, 174, 174, 174 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 15, 15, 15, 15 ; DVs
-	db 15, 0, 0, 0 ; PP
-	db 0 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 10 ; Level
-	db 0, 0 ; Status
-	bigdw 36 ; HP
-	bigdw 36 ; Max HP
-	bigdw 26 ; Atk
-	bigdw 21 ; Def
-	bigdw 21 ; Spd
-	bigdw 26 ; SAtk
-	bigdw 21 ; SDef
-	db "ANNO-N@@@@@"
-
-	db TAUROS
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KENTAROSU@@"
-
-	db FEEBAS
-	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "BARIYA-DO@@"
-
-
-; BattleTowerMons group 10
-
-	db CHARMANDER
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SANDA-SU@@@"
-
-	db CHARMELEON
-	db LEFTOVERS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "E-HUi@@@@@@"
-
-	db CHARIZARD
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "BURAtuKI-@@"
-
-	db SQUIRTLE
-	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SO-NANSU@@@"
-
-	db WARTORTLE
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "GARU-RA@@@@"
-
-	db CORSOLA
-	db SCOPE_LENS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "SANI-GO@@@@"
-
-	db MILTANK
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "MIRUTANKU@@"
-
-	db AERODACTYL
-	db LEFTOVERS
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "PUTERA@@@@@"
-
-	db LAPRAS
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "RAPURASU@@@"
-
-	db SNEASEL
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "NIyu-RA@@@@"
-
-	db PORYGON2
-	db BRIGHTPOWDER
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "PORIGON2@@@"
-
-	db MISDREAVUS
-	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "MUUMA@@@@@@"
-
-	db HOUNDOUR
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "DERUBIRU@@@"
-
-	db BLASTOISE
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KIRINRIKI@@"
-
-	db BLISSEY
-	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "HAPINASU@@@"
-
-	db SNORLAX
-	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KABIGON@@@@"
-
-	db PIDGEY
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "NAtuSI-@@@@"
-
-	db HERACROSS
+	db TYPHLOSION
 	db GOLD_BERRY
 	db SPLASH, 0, 0, 0
 	dw 0 ; OT ID
@@ -4583,70 +3035,4 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "HERAKUROSU@"
 
-	db UNOWN
-	db BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 174, 174, 174, 174, 174, 174 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 15, 15, 15, 15 ; DVs
-	db 15, 0, 0, 0 ; PP
-	db 0 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 10 ; Level
-	db 0, 0 ; Status
-	bigdw 36 ; HP
-	bigdw 36 ; Max HP
-	bigdw 26 ; Atk
-	bigdw 21 ; Def
-	bigdw 21 ; Spd
-	bigdw 26 ; SAtk
-	bigdw 21 ; SDef
-	db "ANNO-N@@@@@"
-
-	db TAUROS
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KENTAROSU@@"
-
-	db FEEBAS
-	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "BARIYA-DO@@"
-
-	assert_table_length 10 * BATTLETOWER_NUM_UNIQUE_MON
+; === 136 pokemon ===

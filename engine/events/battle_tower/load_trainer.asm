@@ -101,7 +101,7 @@ LoadRandomBattleTowerMon:
 
 .FindARandomBattleTowerMon:
 	; From Which LevelGroup are the mon loaded
-	; a = 1..10
+	; a = 1
 	ld a, [wBTChoiceOfLvlGroup]
 	dec a
 	ld hl, BattleTowerMons
@@ -114,12 +114,44 @@ LoadRandomBattleTowerMon:
 	call Random
 	ldh a, [hRandomAdd]
 	add b
-	ld b, a
-	maskbits BATTLETOWER_NUM_UNIQUE_MON
-	cp BATTLETOWER_NUM_UNIQUE_MON
-	jr nc, .resample
-	; in register 'a' is the chosen mon of the LevelGroup
+	ld b, a ; b is the number of mon to go forward
 
+; ============
+; === Note ===
+; ============
+	; new logic here
+	ld a, [wNrOfBeatenBattleTowerTrainers]
+	cp BATTLETOWER_STREAK_LENGTH - 1
+	jr z, .last_trainer
+ 
+	; pool of 156 Pokemon rather than 40
+	ld a, b
+	cp 136
+	jr nc, .resample
+	; mon 0 is Mewtwo, since we are not the last trainer
+	; if we get it, we try again
+	and a
+	jr z, .resample ; only the last trainer can have mewtwo
+
+	; The first 16 mons are Uber
+	; if we have one 75% chance to try again,
+	; don't want too many Ubers
+	ld a, b
+	cp 15 ; first 16 mons
+	jr nc, .continue
+	call Random
+	cp 75 percent
+	jr c, .resample
+	ld a, b
+	jr .continue
+
+	; last trainer only uses 40 strongest mons and can pick Mewtwo
+.last_trainer
+    ld a, b
+    cp 40
+    jr nc, .resample
+
+.continue
 	; Check if mon was already loaded before
 	; Check current and the 2 previous teams
 	; includes check if item is double at the current team

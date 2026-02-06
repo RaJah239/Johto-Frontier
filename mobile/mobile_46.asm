@@ -1124,7 +1124,7 @@ BattleTowerRoomMenu_PickLevelMessage:
 	ld a, [wcd38]
 	and a
 	jr nz, .asm_11892d
-	ld hl, Text_WhatLevelDoYouWantToChallenge
+	ld hl, Text_WhatDoYouWantToDo
 	jr .asm_118930
 
 .asm_11892d
@@ -1152,18 +1152,8 @@ BattleTowerRoomMenu_PlacePickLevelMenu:
 	ld [wcd4f], a
 	ld a, $1
 	ldh [rSVBK], a
-	ld a, [wStatusFlags]
-	bit STATUSFLAGS_HALL_OF_FAME_F, a
-	jr nz, .asm_11896b
-	ld hl, Strings_Ll0ToL40 ; Address to list of strings with the choosable levels
-	ld a, 5                 ; 4 levels to choose from, including 'Cancel'-option
-	jr .asm_118970
-
-.asm_11896b
-	ld hl, Strings_L10ToL100 ; Address to list of strings with the choosable levels
-	ld a, 11                 ; 10 levels to choose from, including 'Cancel'-option
-
-.asm_118970
+	ld hl, Strings_L50 ; Address to list of strings with the choosable levels
+	ld a, 2                 ; 10 levels to choose from, including 'Cancel'-option
 	ld [wcd4a], a
 	ld a, l
 	ld [wcd4b], a
@@ -3869,24 +3859,8 @@ MenuData_119cff: ; unreferenced
 String_119d07:
 	db "   ▼@"
 
-Strings_L10ToL100:
-	db " L:10 @@"
-	db " L:20 @@"
-	db " L:30 @@"
-	db " L:40 @@"
-	db " L:50 @@"
-	db " L:60 @@"
-	db " L:70 @@"
-	db " L:80 @@"
-	db " L:90 @@"
-	db " L:100@@"
-	db "CANCEL@@"
-
-Strings_Ll0ToL40:
-	db " L:10 @@"
-	db " L:20 @@"
-	db " L:30 @@"
-	db " L:40 @@"
+Strings_L50:
+	db "Enter @@"
 	db "Cancel@@"
 
 BattleTowerCancelString: ; unreferenced
@@ -3898,10 +3872,13 @@ BattleTower_LevelCheck:
 	ld a, BANK(wPartyMons)
 	ldh [rSVBK], a
 	ld a, [wcd4f]
-	ld c, 10
-	call SimpleMultiply
+	ld b, 50
+	dec a
+	jr z, .got_level
+	ld b, 100
+.got_level:
 	ld hl, wcd50
-	ld [hl], a
+	ld [hl], b
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld de, wPartyMon1Level
 	ld a, [wPartyCount]
@@ -5491,9 +5468,9 @@ Text_LinkingWithCenter: ; unreferenced
 	line "CENTER…"
 	done
 
-Text_WhatLevelDoYouWantToChallenge:
-	text "What level do you"
-	line "want to challenge?"
+Text_WhatDoYouWantToDo:
+	text "What do you want"
+	line "to do?"
 	done
 
 Text_CheckBattleRoomListByMaxLevel:
