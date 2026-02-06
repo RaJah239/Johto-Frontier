@@ -85,9 +85,6 @@ Script_Menu_ChallengeExplanationCancel:
 Script_ChooseChallenge:
 	setval BATTLETOWERACTION_RESETDATA ; ResetBattleTowerTrainerSRAM
 	special BattleTowerAction
-	writetext Text_SaveBeforeEnteringBattleRoom
-	yesorno
-	iffalse Script_Menu_ChallengeExplanationCancel
 	setscene SCENE_BATTLETOWER1F_CHECKSTATE
 	special TryQuickSave
 	iffalse Script_Menu_ChallengeExplanationCancel
@@ -372,9 +369,6 @@ MovementData_BattleTowerBattleRoomPlayerTurnsToFaceNextOpponent:
 Text_BattleTowerWelcomesYou:
 	text "BATTLE TOWER"
 	line "welcomes you!"
-
-	para "I could show you"
-	line "to a BATTLE ROOM."
 	done
 
 Text_WantToGoIntoABattleRoom:
@@ -406,10 +400,10 @@ Text_BattleTowerIntroduction_2:
 	cont "the BATTLE TOWER."
 
 	para "Each ROOM holds"
-	line "seven trainers."
+	line "three trainers."
 
 	para "Beat them all, and"
-	line "win a prize."
+	line "win 3× Crystals."
 
 	para "To interrupt a"
 	line "session, you must"
@@ -574,14 +568,6 @@ Text_NextUpOpponentNo:
 	line "no.@"
 	text_ram wStringBuffer3
 	text ". Ready?"
-	done
-
-Text_SaveBeforeEnteringBattleRoom:
-	text "Before entering"
-	line "the BATTLE ROOM,"
-
-	para "your progress will"
-	line "be saved."
 	done
 
 Text_SaveAndEndTheSession:

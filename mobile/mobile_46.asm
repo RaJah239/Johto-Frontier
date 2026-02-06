@@ -1121,17 +1121,17 @@ Function11891c:
 	jmp BattleTowerRoomMenu_IncrementJumptable
 
 BattleTowerRoomMenu_PickLevelMessage:
-	ld a, [wcd38]
-	and a
-	jr nz, .asm_11892d
-	ld hl, Text_WhatDoYouWantToDo
-	jr .asm_118930
-
-.asm_11892d
-	ld hl, Text_CheckBattleRoomListByMaxLevel
-
-.asm_118930
-	call BattleTowerRoomMenu_SetMessage
+;	ld a, [wcd38]
+;	and a
+;	jr nz, .asm_11892d
+;	ld hl, Text_WhatDoYouWantToDo
+;	jr .asm_118930
+;
+;.asm_11892d
+;	ld hl, Text_CheckBattleRoomListByMaxLevel
+;
+;.asm_118930
+;	call BattleTowerRoomMenu_SetMessage
 	call BattleTowerRoomMenu_IncrementJumptable
 
 BattleTowerRoomMenu_PlacePickLevelMenu:
@@ -5468,15 +5468,15 @@ Text_LinkingWithCenter: ; unreferenced
 	line "CENTER…"
 	done
 
-Text_WhatDoYouWantToDo:
-	text "What do you want"
-	line "to do?"
-	done
-
-Text_CheckBattleRoomListByMaxLevel:
-	text "Check BATTLE ROOM"
-	line "list by max level?"
-	done
+;Text_WhatDoYouWantToDo:
+;	text "What do you want"
+;	line "to do?"
+;	done
+;
+;Text_CheckBattleRoomListByMaxLevel:
+;	text "Check BATTLE ROOM"
+;	line "list by max level?"
+;	done
 
 Text_EnterWhichBattleRoom: ; unreferenced
 	text "Enter which"
