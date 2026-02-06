@@ -92,7 +92,8 @@ endc
 	ret
 
 LoadRandomBattleTowerMon:
-	ld c, BATTLETOWER_PARTY_LENGTH
+	ld a, 6
+	ld c, a
 .loop
 	push bc
 	ld a, BANK(sBTMonOfTrainers)

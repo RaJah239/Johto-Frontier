@@ -207,7 +207,8 @@ Function170c8b:
 	ret
 
 CheckBTMonMovesForErrors:
-	ld c, BATTLETOWER_PARTY_LENGTH
+	ld a, 6
+	ld c, a
 	ld hl, wBT_OTTempMon1Moves
 .loop
 	push hl

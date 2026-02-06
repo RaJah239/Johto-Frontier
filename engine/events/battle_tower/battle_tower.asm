@@ -342,7 +342,7 @@ ReadBTTrainerParty:
 	; Copy mon into Memory from the address in hl
 	ld de, wOTPartyMon1Species
 	ld bc, wOTPartyCount
-	ld a, BATTLETOWER_PARTY_LENGTH
+	ld a, 6
 	ld [bc], a
 	inc bc
 .otpartymon_loop
