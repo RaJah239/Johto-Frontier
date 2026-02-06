@@ -1261,13 +1261,7 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 	call CloseWindow
 	pop af
 	ldh [rSVBK], a
-	ld a, [wcd38]
-	and a
-	jr nz, .asm_118a30
-	call BattleTower_LevelCheck
-	ret c
 
-.asm_118a30
 	ld a, [wcd4f]
 	ld [w3_d800], a
 	jmp BattleTowerRoomMenu_IncrementJumptable
@@ -3860,56 +3854,6 @@ String_119d07:
 Strings_L50:
 	db "Enter @@"
 	db "Cancel@@"
-
-BattleTowerCancelString: ; unreferenced
-	db "Cancel@"
-
-BattleTower_LevelCheck:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wPartyMons)
-	ldh [rSVBK], a
-	ld a, [wcd4f]
-	ld b, 50
-	dec a
-	jr z, .got_level
-	ld b, 100
-.got_level:
-	ld hl, wcd50
-	ld [hl], b
-	ld bc, PARTYMON_STRUCT_LENGTH
-	ld de, wPartyMon1Level
-	ld a, [wPartyCount]
-.party_loop
-	push af
-	ld a, [de]
-	push hl
-	push de
-	pop hl
-	add hl, bc
-	push hl
-	pop de
-	pop hl
-	cp [hl]
-	jr z, .equal
-	jr nc, .exceeds
-.equal
-	pop af
-	dec a
-	jr nz, .party_loop
-	pop af
-	ldh [rSVBK], a
-	and a
-	ret
-
-.exceeds
-	pop af
-	ld a, $4
-	ld [wBattleTowerRoomMenuJumptableIndex], a
-	pop af
-	ldh [rSVBK], a
-	scf
-	ret
 
 Function119e2b:
 	call MobileAPI
