@@ -773,7 +773,6 @@ BattleTowerAction:
 	dw BattleTowerAction_16
 	dw BattleTowerAction_17
 	dw BattleTowerAction_LevelCheck
-	dw BattleTowerAction_UbersCheck
 	dw ResetBattleTowerTrainersSRAM
 	dw BattleTower_GiveReward
 	dw BattleTowerAction_1C
@@ -1396,26 +1395,6 @@ BattleTowerAction_LevelCheck:
 	xor a
 	ld [wScriptVar], a
 	farcall BattleTower_LevelCheck
-	ret nc
-	ld a, BANK(s5_b2fb)
-	call OpenSRAM
-	ld a, [s5_b2fb]
-	call CloseSRAM
-	ld [wScriptVar], a
-	ret
-
-BattleTowerAction_UbersCheck:
-	ld a, BANK(s5_b2fb)
-	call OpenSRAM
-	ld a, [s5_b2fb]
-	call CloseSRAM
-	ld c, 10
-	call SimpleDivide
-	ld a, b
-	ld [wcd4f], a
-	xor a
-	ld [wScriptVar], a
-	farcall BattleTower_UbersCheck
 	ret nc
 	ld a, BANK(s5_b2fb)
 	call OpenSRAM

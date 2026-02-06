@@ -1266,8 +1266,6 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 	jr nz, .asm_118a30
 	call BattleTower_LevelCheck
 	ret c
-	call BattleTower_UbersCheck
-	ret c
 
 .asm_118a30
 	ld a, [wcd4f]
@@ -3907,61 +3905,6 @@ BattleTower_LevelCheck:
 .exceeds
 	pop af
 	ld a, $4
-	ld [wBattleTowerRoomMenuJumptableIndex], a
-	pop af
-	ldh [rSVBK], a
-	scf
-	ret
-
-BattleTower_UbersCheck:
-	ldh a, [rSVBK]
-	push af
-	ld a, [wcd4f]
-	cp 70 / 10
-	jr nc, .level_70_or_more
-	ld a, BANK(wPartyMons)
-	ldh [rSVBK], a
-	ld hl, wPartyMon1Level
-	ld bc, PARTYMON_STRUCT_LENGTH
-	ld de, wPartySpecies
-	ld a, [wPartyCount]
-.loop
-	push af
-	ld a, [de]
-	cp MEWTWO
-	jr z, .uber
-	cp MEW
-	jr z, .uber
-	cp LUGIA
-	jr c, .next
-	cp NUM_POKEMON + 1
-	jr nc, .next
-.uber
-	ld a, [hl]
-	cp 70
-	jr c, .uber_under_70
-.next
-	add hl, bc
-	inc de
-	pop af
-	dec a
-	jr nz, .loop
-.level_70_or_more
-	pop af
-	ldh [rSVBK], a
-	and a
-	ret
-
-.uber_under_70
-	pop af
-	ld a, [de]
-	ld [wNamedObjectIndex], a
-	call GetPokemonName
-	ld hl, wStringBuffer1
-	ld de, wcd49
-	ld bc, MON_NAME_LENGTH
-	call CopyBytes
-	ld a, $a
 	ld [wBattleTowerRoomMenuJumptableIndex], a
 	pop af
 	ldh [rSVBK], a
