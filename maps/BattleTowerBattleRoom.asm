@@ -105,7 +105,9 @@ Script_DontSaveAndEndTheSession:
 	sjump Script_BattleTowerHopeToServeYouAgain
 
 Script_FailedBattleTowerChallenge:
-	pause 60
+	setval 0
+	writemem wCopyEnemyParty
+	pause 30
 	special BattleTowerFade
 	warpfacing UP, BATTLE_TOWER_1F, 7, 7
 	setval BATTLETOWERACTION_CHALLENGECANCELED
@@ -117,10 +119,15 @@ Script_FailedBattleTowerChallenge:
 	end
 
 Script_BeatenAllTrainers:
-	pause 60
+	pause 30
 	special BattleTowerFade
 	warpfacing UP, BATTLE_TOWER_1F, 7, 7
 Script_BeatenAllTrainers2:
+	readmem wCopyEnemyParty
+	ifequal 0, .reward
+	setval 0
+	writemem wCopyEnemyParty
+.reward
 	opentext
 	writetext Text_CongratulationsYouveBeatenAllTheTrainers
 	sjump Script_GivePlayerHisPrize

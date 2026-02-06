@@ -8112,6 +8112,14 @@ BattleIntro:
 	farcall ClearBattleRAM
 	call InitEnemy
 	call BackUpBGMap2
+
+	; don't copy for wild mon
+	ld a, [wCopyEnemyParty]
+	and a
+	jr z, .dont_copy
+	farcall ReadCopyOfTrainerParty
+
+.dont_copy
 	ld b, SCGB_BATTLE_GRAYSCALE
 	call GetSGBLayout
 	ld hl, rLCDC

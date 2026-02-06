@@ -3102,6 +3102,7 @@ wMooMooBerries:: db
 wUndergroundSwitchPositions:: db
 wFarfetchdPosition:: db
 wExpShareToggle:: db
+wCopyEnemyParty:: db
 
 wFieldWeather::
 ; 00 normal
@@ -3115,7 +3116,7 @@ wFieldWeather::
 ; like gym trainers
 wNoRematch:: db
 
-	ds 10
+	ds 9
 
 ; map scene ids
 wPokecenter2FSceneID::                            db

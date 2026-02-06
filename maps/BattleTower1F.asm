@@ -91,6 +91,23 @@ Script_ChooseChallenge:
 	setscene SCENE_BATTLETOWER1F_CHECKSTATE
 	special TryQuickSave
 	iffalse Script_Menu_ChallengeExplanationCancel
+
+.ChooseAnOption:
+    loadmenu .MirrorMenuHeader
+	_2dmenu
+	closewindow
+	ifequal 1, .normal
+	ifequal 2, .mirror
+	ifequal 3, .info
+	ifequal 4, .cancel
+	sjump .ChooseAnOption
+
+.mirror
+	setval 1
+	writemem wCopyEnemyParty
+	; fallthrough
+
+.normal
 	setscene SCENE_BATTLETOWER1F_NOOP
 	setval BATTLETOWERACTION_SET_EXPLANATION_READ ; set 1, [sBattleTowerSaveFileFlags]
 	special BattleTowerAction
@@ -105,6 +122,42 @@ Script_ChooseChallenge:
 	setval BATTLETOWERACTION_CHOOSEREWARD
 	special BattleTowerAction
 	sjump Script_WalkToBattleTowerElevator
+
+.info
+	writetext MirrorBattlesText
+	sjump .ChooseAnOption
+
+.cancel
+	sjump Script_BattleTowerHopeToServeYouAgain
+
+.MirrorMenuHeader:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 0, 0, 15, 9
+	dw .MirrorMenuData
+	db 1 ; default option
+
+.MirrorMenuData:
+	db STATICMENU_CURSOR ; flags
+	dn 4, 1 ; rows, columns
+	db 5 ; spacing
+	dba .MirrorText
+	dbw BANK(@), NULL
+
+.MirrorText:
+	db "Normal Battle@"
+	db "Mirror Battle@"
+	db "Info@"
+	db "Cancel@"
+
+MirrorBattlesText:
+	text "Normal Battle: use"
+	line "your own team."
+
+	para "Mirror Battle: use"
+	line "your foe's team in"
+	cont "each round against"
+	cont "them."
+	done
 
 Script_ResumeBattleTowerChallenge:
 	closetext
@@ -157,6 +210,8 @@ Script_BattleTowerSkipExplanation:
 	sjump Script_Menu_ChallengeExplanationCancel
 
 Script_BattleTowerHopeToServeYouAgain:
+    setval 0
+    writemem wCopyEnemyParty
 	writetext Text_WeHopeToServeYouAgain
 	waitbutton
 	closetext

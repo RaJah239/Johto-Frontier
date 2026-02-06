@@ -904,6 +904,595 @@ IncrementMovesToCurrentMon:
 .incrementDone
     ret
 
+OverridePlayerParty:
+	call ReadTrainerParty
+	; fallthrough
+
+ReadCopyOfTrainerParty:
+	xor a
+	ld [wPartyCount], a
+
+	ld a, [wOTPartyCount]
+	ld b, a
+
+	; mon
+	push bc
+	ld a, [wOTPartyMon1Species]
+	ld [wCurPartySpecies], a
+	ld a, [wOTPartyMon1Level]
+	ld [wCurPartyLevel], a
+	ld a, PARTYMON
+	ld [wMonType], a
+	push hl
+	predef TryAddMonToParty
+	pop hl
+	pop bc
+	dec b
+	jmp z, .items
+
+	push bc
+	ld a, [wOTPartyMon2Species]
+	ld [wCurPartySpecies], a
+	ld a, [wOTPartyMon2Level]
+	ld [wCurPartyLevel], a
+	ld a, PARTYMON
+	ld [wMonType], a
+	push hl
+	predef TryAddMonToParty
+	pop hl
+	pop bc
+	dec b
+	jr z, .items
+
+	push bc
+	ld a, [wOTPartyMon3Species]
+	ld [wCurPartySpecies], a
+	ld a, [wOTPartyMon3Level]
+	ld [wCurPartyLevel], a
+	ld a, PARTYMON
+	ld [wMonType], a
+	push hl
+	predef TryAddMonToParty
+	pop hl
+	pop bc
+	dec b
+	jr z, .items
+
+	push bc
+	ld a, [wOTPartyMon4Species]
+	ld [wCurPartySpecies], a
+	ld a, [wOTPartyMon4Level]
+	ld [wCurPartyLevel], a
+	ld a, PARTYMON
+	ld [wMonType], a
+	push hl
+	predef TryAddMonToParty
+	pop hl
+	pop bc
+	dec b
+	jr z, .items
+
+	push bc
+	ld a, [wOTPartyMon5Species]
+	ld [wCurPartySpecies], a
+	ld a, [wOTPartyMon5Level]
+	ld [wCurPartyLevel], a
+	ld a, PARTYMON
+	ld [wMonType], a
+	push hl
+	predef TryAddMonToParty
+	pop hl
+	pop bc
+	dec b
+	jr z, .items
+
+	ld a, [wOTPartyMon6Species]
+	ld [wCurPartySpecies], a
+	ld a, [wOTPartyMon6Level]
+	ld [wCurPartyLevel], a
+	ld a, PARTYMON
+	ld [wMonType], a
+	push hl
+	predef TryAddMonToParty
+	pop hl
+
+.items
+	; items
+	ld a, [wOTPartyMon1Item]
+	ld [wPartyMon1Item], a
+	ld a, [wOTPartyMon2Item]
+	ld [wPartyMon2Item], a
+	ld a, [wOTPartyMon3Item]
+	ld [wPartyMon3Item], a
+	ld a, [wOTPartyMon4Item]
+	ld [wPartyMon4Item], a
+	ld a, [wOTPartyMon5Item]
+	ld [wPartyMon5Item], a
+	ld a, [wOTPartyMon6Item]
+	ld [wPartyMon6Item], a
+
+	; dvs
+	push bc
+	farcall GetTrainerDVs
+	ld a, b
+	ld [wPartyMon1DVs], a
+	ld [wPartyMon2DVs], a
+	ld [wPartyMon3DVs], a
+	ld [wPartyMon4DVs], a
+	ld [wPartyMon5DVs], a
+	ld [wPartyMon6DVs], a
+	ld a, c
+	ld [wPartyMon1DVs + 1], a
+	ld [wPartyMon2DVs + 1], a
+	ld [wPartyMon3DVs + 1], a
+	ld [wPartyMon4DVs + 1], a
+	ld [wPartyMon5DVs + 1], a
+	ld [wPartyMon6DVs + 1], a
+	pop bc
+
+	; effort values
+; First Mon EVs
+	ld a, [wPartyMon1HPEV]
+	ld [wOTPartyMon1HPEV], a
+	ld a, [wPartyMon1HPEV + 1]
+	ld [wOTPartyMon1HPEV + 1], a
+	ld a, [wPartyMon1AtkEV]
+	ld [wOTPartyMon1AtkEV], a
+	ld a, [wPartyMon1AtkEV + 1]
+	ld [wOTPartyMon1AtkEV + 1], a
+	ld a, [wPartyMon1DefEV]
+	ld [wOTPartyMon1DefEV], a
+	ld a, [wPartyMon1DefEV + 1]
+	ld [wOTPartyMon1DefEV + 1], a
+	ld a, [wPartyMon1SpdEV]
+	ld [wOTPartyMon1SpdEV], a
+	ld a, [wPartyMon1SpdEV + 1]
+	ld [wOTPartyMon1SpdEV + 1], a
+	ld a, [wPartyMon1SpclAtkEV]
+	ld [wOTPartyMon1SpclAtkEV], a
+	ld a, [wPartyMon1SpclAtkEV + 1]
+	ld [wOTPartyMon1SpclAtkEV + 1], a
+	ld a, [wPartyMon1SpclDefEV]
+	ld [wOTPartyMon1SpclDefEV], a
+	ld a, [wPartyMon1SpclDefEV + 1]
+	ld [wOTPartyMon1SpclDefEV + 1], a
+
+; Second Mon EVs
+	ld a, [wPartyMon2HPEV]
+	ld [wOTPartyMon2HPEV], a
+	ld a, [wPartyMon2HPEV + 1]
+	ld [wOTPartyMon2HPEV + 1], a
+	ld a, [wPartyMon2AtkEV]
+	ld [wOTPartyMon2AtkEV], a
+	ld a, [wPartyMon2AtkEV + 1]
+	ld [wOTPartyMon2AtkEV + 1], a
+	ld a, [wPartyMon2DefEV]
+	ld [wOTPartyMon2DefEV], a
+	ld a, [wPartyMon2DefEV + 1]
+	ld [wOTPartyMon2DefEV + 1], a
+	ld a, [wPartyMon2SpdEV]
+	ld [wOTPartyMon2SpdEV], a
+	ld a, [wPartyMon2SpdEV + 1]
+	ld [wOTPartyMon2SpdEV + 1], a
+	ld a, [wPartyMon2SpclAtkEV]
+	ld [wOTPartyMon2SpclAtkEV], a
+	ld a, [wPartyMon2SpclAtkEV + 1]
+	ld [wOTPartyMon2SpclAtkEV + 1], a
+	ld a, [wPartyMon2SpclDefEV]
+	ld [wOTPartyMon2SpclDefEV], a
+	ld a, [wPartyMon2SpclDefEV + 1]
+	ld [wOTPartyMon2SpclDefEV + 1], a
+
+; Third Mon EVs
+	ld a, [wPartyMon3HPEV]
+	ld [wOTPartyMon3HPEV], a
+	ld a, [wPartyMon3HPEV + 1]
+	ld [wOTPartyMon3HPEV + 1], a
+	ld a, [wPartyMon3AtkEV]
+	ld [wOTPartyMon3AtkEV], a
+	ld a, [wPartyMon3AtkEV + 1]
+	ld [wOTPartyMon3AtkEV + 1], a
+	ld a, [wPartyMon3DefEV]
+	ld [wOTPartyMon3DefEV], a
+	ld a, [wPartyMon3DefEV + 1]
+	ld [wOTPartyMon3DefEV + 1], a
+	ld a, [wPartyMon3SpdEV]
+	ld [wOTPartyMon3SpdEV], a
+	ld a, [wPartyMon3SpdEV + 1]
+	ld [wOTPartyMon3SpdEV + 1], a
+	ld a, [wPartyMon3SpclAtkEV]
+	ld [wOTPartyMon3SpclAtkEV], a
+	ld a, [wPartyMon3SpclAtkEV + 1]
+	ld [wOTPartyMon3SpclAtkEV + 1], a
+	ld a, [wPartyMon3SpclDefEV]
+	ld [wOTPartyMon3SpclDefEV], a
+	ld a, [wPartyMon3SpclDefEV + 1]
+	ld [wOTPartyMon3SpclDefEV + 1], a
+
+; Fourth Mon EVs
+	ld a, [wPartyMon4HPEV]
+	ld [wOTPartyMon4HPEV], a
+	ld a, [wPartyMon4HPEV + 1]
+	ld [wOTPartyMon4HPEV + 1], a
+	ld a, [wPartyMon4AtkEV]
+	ld [wOTPartyMon4AtkEV], a
+	ld a, [wPartyMon4AtkEV + 1]
+	ld [wOTPartyMon4AtkEV + 1], a
+	ld a, [wPartyMon4DefEV]
+	ld [wOTPartyMon4DefEV], a
+	ld a, [wPartyMon4DefEV + 1]
+	ld [wOTPartyMon4DefEV + 1], a
+	ld a, [wPartyMon4SpdEV]
+	ld [wOTPartyMon4SpdEV], a
+	ld a, [wPartyMon4SpdEV + 1]
+	ld [wOTPartyMon4SpdEV + 1], a
+	ld a, [wPartyMon4SpclAtkEV]
+	ld [wOTPartyMon4SpclAtkEV], a
+	ld a, [wPartyMon4SpclAtkEV + 1]
+	ld [wOTPartyMon4SpclAtkEV + 1], a
+	ld a, [wPartyMon4SpclDefEV]
+	ld [wOTPartyMon4SpclDefEV], a
+	ld a, [wPartyMon4SpclDefEV + 1]
+	ld [wOTPartyMon4SpclDefEV + 1], a
+
+; Fifth Mon EVs
+	ld a, [wPartyMon5HPEV]
+	ld [wOTPartyMon5HPEV], a
+	ld a, [wPartyMon5HPEV + 1]
+	ld [wOTPartyMon5HPEV + 1], a
+	ld a, [wPartyMon5AtkEV]
+	ld [wOTPartyMon5AtkEV], a
+	ld a, [wPartyMon5AtkEV + 1]
+	ld [wOTPartyMon5AtkEV + 1], a
+	ld a, [wPartyMon5DefEV]
+	ld [wOTPartyMon5DefEV], a
+	ld a, [wPartyMon5DefEV + 1]
+	ld [wOTPartyMon5DefEV + 1], a
+	ld a, [wPartyMon5SpdEV]
+	ld [wOTPartyMon5SpdEV], a
+	ld a, [wPartyMon5SpdEV + 1]
+	ld [wOTPartyMon5SpdEV + 1], a
+	ld a, [wPartyMon5SpclAtkEV]
+	ld [wOTPartyMon5SpclAtkEV], a
+	ld a, [wPartyMon5SpclAtkEV + 1]
+	ld [wOTPartyMon5SpclAtkEV + 1], a
+	ld a, [wPartyMon5SpclDefEV]
+	ld [wOTPartyMon5SpclDefEV], a
+	ld a, [wPartyMon5SpclDefEV + 1]
+	ld [wOTPartyMon5SpclDefEV + 1], a
+
+; Sixth Mon EVs
+	ld a, [wPartyMon6HPEV]
+	ld [wOTPartyMon6HPEV], a
+	ld a, [wPartyMon6HPEV + 1]
+	ld [wOTPartyMon6HPEV + 1], a
+	ld a, [wPartyMon6AtkEV]
+	ld [wOTPartyMon6AtkEV], a
+	ld a, [wPartyMon6AtkEV + 1]
+	ld [wOTPartyMon6AtkEV + 1], a
+	ld a, [wPartyMon6DefEV]
+	ld [wOTPartyMon6DefEV], a
+	ld a, [wPartyMon6DefEV + 1]
+	ld [wOTPartyMon6DefEV + 1], a
+	ld a, [wPartyMon6SpdEV]
+	ld [wOTPartyMon6SpdEV], a
+	ld a, [wPartyMon6SpdEV + 1]
+	ld [wOTPartyMon6SpdEV + 1], a
+	ld a, [wPartyMon6SpclAtkEV]
+	ld [wOTPartyMon6SpclAtkEV], a
+	ld a, [wPartyMon6SpclAtkEV + 1]
+	ld [wOTPartyMon6SpclAtkEV + 1], a
+	ld a, [wPartyMon6SpclDefEV]
+	ld [wOTPartyMon6SpclDefEV], a
+	ld a, [wPartyMon6SpclDefEV + 1]
+
+	; stats
+	ld a, [wOTPartyMon1MaxHP]
+	ld [wPartyMon1MaxHP], a
+	ld a, [wOTPartyMon1MaxHP + 1]
+	ld [wPartyMon1MaxHP + 1], a
+	ld a, [wOTPartyMon1HP]
+	ld [wPartyMon1HP], a
+	ld a, [wOTPartyMon1HP + 1]
+	ld [wPartyMon1HP + 1], a
+	ld a, [wOTPartyMon1Attack]
+	ld [wPartyMon1Attack], a
+	ld a, [wOTPartyMon1Attack + 1]
+	ld [wPartyMon1Attack + 1], a
+	ld a, [wOTPartyMon1Defense]
+	ld [wPartyMon1Defense], a
+	ld a, [wOTPartyMon1Defense + 1]
+	ld [wPartyMon1Defense + 1], a
+	ld a, [wOTPartyMon1Speed]
+	ld [wPartyMon1Speed], a
+	ld a, [wOTPartyMon1Speed + 1]
+	ld [wPartyMon1Speed + 1], a
+	ld a, [wOTPartyMon1SpclAtk]
+	ld [wPartyMon1SpclAtk], a
+	ld a, [wOTPartyMon1SpclAtk + 1]
+	ld [wPartyMon1SpclAtk + 1], a
+	ld a, [wOTPartyMon1SpclDef]
+	ld [wPartyMon1SpclDef], a
+	ld a, [wOTPartyMon1SpclDef + 1]
+	ld [wPartyMon1SpclDef + 1], a
+
+	ld a, [wOTPartyMon2MaxHP]
+	ld [wPartyMon2MaxHP], a
+	ld a, [wOTPartyMon2MaxHP + 1]
+	ld [wPartyMon2MaxHP + 1], a
+	ld a, [wOTPartyMon2HP]
+	ld [wPartyMon2HP], a
+	ld a, [wOTPartyMon2HP + 1]
+	ld [wPartyMon2HP + 1], a
+	ld a, [wOTPartyMon2Attack]
+	ld [wPartyMon2Attack], a
+	ld a, [wOTPartyMon2Attack + 1]
+	ld [wPartyMon2Attack + 1], a
+	ld a, [wOTPartyMon2Defense]
+	ld [wPartyMon2Defense], a
+	ld a, [wOTPartyMon2Defense + 1]
+	ld [wPartyMon2Defense + 1], a
+	ld a, [wOTPartyMon2Speed]
+	ld [wPartyMon2Speed], a
+	ld a, [wOTPartyMon2Speed + 1]
+	ld [wPartyMon2Speed + 1], a
+	ld a, [wOTPartyMon2SpclAtk]
+	ld [wPartyMon2SpclAtk], a
+	ld a, [wOTPartyMon2SpclAtk + 1]
+	ld [wPartyMon2SpclAtk + 1], a
+	ld a, [wOTPartyMon2SpclDef]
+	ld [wPartyMon2SpclDef], a
+	ld a, [wOTPartyMon2SpclDef + 1]
+	ld [wPartyMon2SpclDef + 1], a
+
+	ld a, [wOTPartyMon3MaxHP]
+	ld [wPartyMon3MaxHP], a
+	ld a, [wOTPartyMon3MaxHP + 1]
+	ld [wPartyMon3MaxHP + 1], a
+	ld a, [wOTPartyMon3HP]
+	ld [wPartyMon3HP], a
+	ld a, [wOTPartyMon3HP + 1]
+	ld [wPartyMon3HP + 1], a
+	ld a, [wOTPartyMon3Attack]
+	ld [wPartyMon3Attack], a
+	ld a, [wOTPartyMon3Attack + 1]
+	ld [wPartyMon3Attack + 1], a
+	ld a, [wOTPartyMon3Defense]
+	ld [wPartyMon3Defense], a
+	ld a, [wOTPartyMon3Defense + 1]
+	ld [wPartyMon3Defense + 1], a
+	ld a, [wOTPartyMon3Speed]
+	ld [wPartyMon3Speed], a
+	ld a, [wOTPartyMon3Speed + 1]
+	ld [wPartyMon3Speed + 1], a
+	ld a, [wOTPartyMon3SpclAtk]
+	ld [wPartyMon3SpclAtk], a
+	ld a, [wOTPartyMon3SpclAtk + 1]
+	ld [wPartyMon3SpclAtk + 1], a
+	ld a, [wOTPartyMon3SpclDef]
+	ld [wPartyMon3SpclDef], a
+	ld a, [wOTPartyMon3SpclDef + 1]
+	ld [wPartyMon3SpclDef + 1], a
+
+	ld a, [wOTPartyMon4MaxHP]
+	ld [wPartyMon4MaxHP], a
+	ld a, [wOTPartyMon4MaxHP + 1]
+	ld [wPartyMon4MaxHP + 1], a
+	ld a, [wOTPartyMon4HP]
+	ld [wPartyMon4HP], a
+	ld a, [wOTPartyMon4HP + 1]
+	ld [wPartyMon4HP + 1], a
+	ld a, [wOTPartyMon4Attack]
+	ld [wPartyMon4Attack], a
+	ld a, [wOTPartyMon4Attack + 1]
+	ld [wPartyMon4Attack + 1], a
+	ld a, [wOTPartyMon4Defense]
+	ld [wPartyMon4Defense], a
+	ld a, [wOTPartyMon4Defense + 1]
+	ld [wPartyMon4Defense + 1], a
+	ld a, [wOTPartyMon4Speed]
+	ld [wPartyMon4Speed], a
+	ld a, [wOTPartyMon4Speed + 1]
+	ld [wPartyMon4Speed + 1], a
+	ld a, [wOTPartyMon4SpclAtk]
+	ld [wPartyMon4SpclAtk], a
+	ld a, [wOTPartyMon4SpclAtk + 1]
+	ld [wPartyMon4SpclAtk + 1], a
+	ld a, [wOTPartyMon4SpclDef]
+	ld [wPartyMon4SpclDef], a
+	ld a, [wOTPartyMon4SpclDef + 1]
+	ld [wPartyMon4SpclDef + 1], a
+
+	ld a, [wOTPartyMon5MaxHP]
+	ld [wPartyMon5MaxHP], a
+	ld a, [wOTPartyMon5MaxHP + 1]
+	ld [wPartyMon5MaxHP + 1], a
+	ld a, [wOTPartyMon5HP]
+	ld [wPartyMon5HP], a
+	ld a, [wOTPartyMon5HP + 1]
+	ld [wPartyMon5HP + 1], a
+	ld a, [wOTPartyMon5Attack]
+	ld [wPartyMon5Attack], a
+	ld a, [wOTPartyMon5Attack + 1]
+	ld [wPartyMon5Attack + 1], a
+	ld a, [wOTPartyMon5Defense]
+	ld [wPartyMon5Defense], a
+	ld a, [wOTPartyMon5Defense + 1]
+	ld [wPartyMon5Defense + 1], a
+	ld a, [wOTPartyMon5Speed]
+	ld [wPartyMon5Speed], a
+	ld a, [wOTPartyMon5Speed + 1]
+	ld [wPartyMon5Speed + 1], a
+	ld a, [wOTPartyMon5SpclAtk]
+	ld [wPartyMon5SpclAtk], a
+	ld a, [wOTPartyMon5SpclAtk + 1]
+	ld [wPartyMon5SpclAtk + 1], a
+	ld a, [wOTPartyMon5SpclDef]
+	ld [wPartyMon5SpclDef], a
+	ld a, [wOTPartyMon5SpclDef + 1]
+	ld [wPartyMon5SpclDef + 1], a
+
+	ld a, [wOTPartyMon6MaxHP]
+	ld [wPartyMon6MaxHP], a
+	ld a, [wOTPartyMon6MaxHP + 1]
+	ld [wPartyMon6MaxHP + 1], a
+	ld a, [wOTPartyMon6HP]
+	ld [wPartyMon6HP], a
+	ld a, [wOTPartyMon6HP + 1]
+	ld [wPartyMon6HP + 1], a
+	ld a, [wOTPartyMon6Attack]
+	ld [wPartyMon6Attack], a
+	ld a, [wOTPartyMon6Attack + 1]
+	ld [wPartyMon6Attack + 1], a
+	ld a, [wOTPartyMon6Defense]
+	ld [wPartyMon6Defense], a
+	ld a, [wOTPartyMon6Defense + 1]
+	ld [wPartyMon6Defense + 1], a
+	ld a, [wOTPartyMon6Speed]
+	ld [wPartyMon6Speed], a
+	ld a, [wOTPartyMon6Speed + 1]
+	ld [wPartyMon6Speed + 1], a
+	ld a, [wOTPartyMon6SpclAtk]
+	ld [wPartyMon6SpclAtk], a
+	ld a, [wOTPartyMon6SpclAtk + 1]
+	ld [wPartyMon6SpclAtk + 1], a
+	ld a, [wOTPartyMon6SpclDef]
+	ld [wPartyMon6SpclDef], a
+	ld a, [wOTPartyMon6SpclDef + 1]
+	ld [wPartyMon6SpclDef + 1], a
+
+	; happiness
+	ld a, [wOTPartyMon1Happiness]
+	ld [wPartyMon1Happiness], a
+	ld a, [wOTPartyMon2Happiness]
+	ld [wPartyMon2Happiness], a
+	ld a, [wOTPartyMon3Happiness]
+	ld [wPartyMon3Happiness], a
+	ld a, [wOTPartyMon4Happiness]
+	ld [wPartyMon4Happiness], a
+	ld a, [wOTPartyMon5Happiness]
+	ld [wPartyMon5Happiness], a
+	ld a, [wOTPartyMon6Happiness]
+	ld [wPartyMon6Happiness], a
+
+	; moves
+	ld a, [wOTPartyMon1Moves]
+	ld [wPartyMon1Moves], a
+	ld a, [wOTPartyMon1Moves + 1]
+	ld [wPartyMon1Moves + 1], a
+	ld a, [wOTPartyMon1Moves + 2]
+	ld [wPartyMon1Moves + 2], a
+	ld a, [wOTPartyMon1Moves + 3]
+	ld [wPartyMon1Moves + 3], a
+	ld a, [wOTPartyMon1PP]
+	ld [wPartyMon1PP], a
+	ld a, [wOTPartyMon1PP + 1]
+	ld [wPartyMon1PP + 1], a
+	ld a, [wOTPartyMon1PP + 2]
+	ld [wPartyMon1PP + 2], a
+	ld a, [wOTPartyMon1PP + 3]
+	ld [wPartyMon1PP + 3], a
+
+	ld a, [wOTPartyMon2Moves]
+	ld [wPartyMon2Moves], a
+	ld a, [wOTPartyMon2Moves + 1]
+	ld [wPartyMon2Moves + 1], a
+	ld a, [wOTPartyMon2Moves + 2]
+	ld [wPartyMon2Moves + 2], a
+	ld a, [wOTPartyMon2Moves + 3]
+	ld [wPartyMon2Moves + 3], a
+	ld a, [wOTPartyMon2PP]
+	ld [wPartyMon2PP], a
+	ld a, [wOTPartyMon2PP + 1]
+	ld [wPartyMon2PP + 1], a
+	ld a, [wOTPartyMon2PP + 2]
+	ld [wPartyMon2PP + 2], a
+	ld a, [wOTPartyMon2PP + 3]
+	ld [wPartyMon2PP + 3], a
+
+	ld a, [wOTPartyMon3Moves]
+	ld [wPartyMon3Moves], a
+	ld a, [wOTPartyMon3Moves + 1]
+	ld [wPartyMon3Moves + 1], a
+	ld a, [wOTPartyMon3Moves + 2]
+	ld [wPartyMon3Moves + 2], a
+	ld a, [wOTPartyMon3Moves + 3]
+	ld [wPartyMon3Moves + 3], a
+	ld a, [wOTPartyMon3PP]
+	ld [wPartyMon3PP], a
+	ld a, [wOTPartyMon3PP + 1]
+	ld [wPartyMon3PP + 1], a
+	ld a, [wOTPartyMon3PP + 2]
+	ld [wPartyMon3PP + 2], a
+	ld a, [wOTPartyMon3PP + 3]
+	ld [wPartyMon3PP + 3], a
+
+	ld a, [wOTPartyMon4Moves]
+	ld [wPartyMon4Moves], a
+	ld a, [wOTPartyMon4Moves + 1]
+	ld [wPartyMon4Moves + 1], a
+	ld a, [wOTPartyMon4Moves + 2]
+	ld [wPartyMon4Moves + 2], a
+	ld a, [wOTPartyMon4Moves + 3]
+	ld [wPartyMon4Moves + 3], a
+	ld a, [wOTPartyMon4PP]
+	ld [wPartyMon4PP], a
+	ld a, [wOTPartyMon4PP + 1]
+	ld [wPartyMon4PP + 1], a
+	ld a, [wOTPartyMon4PP + 2]
+	ld [wPartyMon4PP + 2], a
+	ld a, [wOTPartyMon4PP + 3]
+	ld [wPartyMon4PP + 3], a
+
+	ld a, [wOTPartyMon5Moves]
+	ld [wPartyMon5Moves], a
+	ld a, [wOTPartyMon5Moves + 1]
+	ld [wPartyMon5Moves + 1], a
+	ld a, [wOTPartyMon5Moves + 2]
+	ld [wPartyMon5Moves + 2], a
+	ld a, [wOTPartyMon5Moves + 3]
+	ld [wPartyMon5Moves + 3], a
+	ld a, [wOTPartyMon5PP]
+	ld [wPartyMon5PP], a
+	ld a, [wOTPartyMon5PP + 1]
+	ld [wPartyMon5PP + 1], a
+	ld a, [wOTPartyMon5PP + 2]
+	ld [wPartyMon5PP + 2], a
+	ld a, [wOTPartyMon5PP + 3]
+	ld [wPartyMon5PP + 3], a
+
+	ld a, [wOTPartyMon6Moves]
+	ld [wPartyMon6Moves], a
+	ld a, [wOTPartyMon6Moves + 1]
+	ld [wPartyMon6Moves + 1], a
+	ld a, [wOTPartyMon6Moves + 2]
+	ld [wPartyMon6Moves + 2], a
+	ld a, [wOTPartyMon6Moves + 3]
+	ld [wPartyMon6Moves + 3], a
+	ld a, [wOTPartyMon6PP]
+	ld [wPartyMon6PP], a
+	ld a, [wOTPartyMon6PP + 1]
+	ld [wPartyMon6PP + 1], a
+	ld a, [wOTPartyMon6PP + 2]
+	ld [wPartyMon6PP + 2], a
+	ld a, [wOTPartyMon6PP + 3]
+	ld [wPartyMon6PP + 3], a
+
+	; status
+	ld a, [wOTPartyMon1Status]
+	ld [wPartyMon1Status], a
+	ld a, [wOTPartyMon2Status]
+	ld [wPartyMon2Status], a
+	ld a, [wOTPartyMon3Status]
+	ld [wPartyMon3Status], a
+	ld a, [wOTPartyMon4Status]
+	ld [wPartyMon4Status], a
+	ld a, [wOTPartyMon5Status]
+	ld [wPartyMon5Status], a
+	ld a, [wOTPartyMon6Status]
+	ld [wPartyMon6Status], a
+	ret
+
 ComputeTrainerReward:
 	ld hl, hProduct
 	xor a

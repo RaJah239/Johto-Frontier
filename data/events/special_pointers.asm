@@ -194,6 +194,7 @@ SpecialsPointers::
 	add_special Menu_BattleTowerSettings
 	add_special GetPartyCountWithoutEggs
 	add_special LoadPokemonData
+	add_special OverridePlayerParty
 
 if DEF(_DEBUG)
 	add_special FillPokedex
