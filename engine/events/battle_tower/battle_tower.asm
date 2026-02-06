@@ -1469,19 +1469,3 @@ LoadOpponentTrainerAndPokemonWithOTSprite:
 	ret
 
 INCLUDE "data/trainers/sprites.asm"
-
-UnusedBattleTowerDummySpecial2:
-	ret
-
-CheckForBattleTowerRules:
-	farcall _CheckForBattleTowerRules
-	jr c, .ready
-	xor a ; FALSE
-	jr .end
-
-.ready
-	ld a, TRUE
-
-.end
-	ld [wScriptVar], a
-	ret

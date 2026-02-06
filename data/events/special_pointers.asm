@@ -131,7 +131,6 @@ SpecialsPointers::
 	add_special UnusedBattleTowerDummySpecial1
 	add_special LoadOpponentTrainerAndPokemonWithOTSprite
 	add_special Function11ba38
-	add_special CheckForBattleTowerRules
 	add_special GiveOddEgg
 	add_special Reset ; bank 0
 	add_special Function1011f1
@@ -158,7 +157,6 @@ SpecialsPointers::
 	add_special GiveDratini
 	add_special BeastsCheck
 	add_special MonCheck
-	add_special UnusedBattleTowerDummySpecial2
 	add_special Mobile_SelectThreeMons
 	add_special Function1037eb
 	add_special Function10383c

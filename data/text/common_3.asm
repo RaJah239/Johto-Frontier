@@ -1046,52 +1046,6 @@ _BuenaComeAgainText::
 	line "back again!"
 	done
 
-_ExcuseMeYoureNotReadyText::
-	text "Excuse me."
-	line "You're not ready."
-
-	para ""
-	done
-
-_BattleTowerReturnWhenReadyText::
-	text "Please return when"
-	line "you're ready."
-	done
-
-_OnlyThreeMonMayBeEnteredText::
-	text "Only three #MON"
-	line "may be entered."
-
-	para ""
-	done
-
-_TheMonMustAllBeDifferentKindsText::
-	text "The @"
-	text_ram wStringBuffer2
-	text " #MON"
-	line "must all be"
-	cont "different kinds."
-
-	para ""
-	done
-
-_TheMonMustNotHoldTheSameItemsText::
-	text "The @"
-	text_ram wStringBuffer2
-	text " #MON"
-	line "must not hold the"
-	cont "same items."
-
-	para ""
-	done
-
-_YouCantTakeAnEggText::
-	text "You can't take an"
-	line "EGG!"
-
-	para ""
-	done
-
 _BallDodgedText::
 	text "It dodged the"
 	line "thrown BALL!"

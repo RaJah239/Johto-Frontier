@@ -85,8 +85,6 @@ Script_Menu_ChallengeExplanationCancel:
 Script_ChooseChallenge:
 	setval BATTLETOWERACTION_RESETDATA ; ResetBattleTowerTrainerSRAM
 	special BattleTowerAction
-	special CheckForBattleTowerRules
-	ifnotequal FALSE, Script_WaitButton
 	writetext Text_SaveBeforeEnteringBattleRoom
 	yesorno
 	iffalse Script_Menu_ChallengeExplanationCancel
@@ -160,11 +158,6 @@ Script_BattleTowerSkipExplanation:
 
 Script_BattleTowerHopeToServeYouAgain:
 	writetext Text_WeHopeToServeYouAgain
-	waitbutton
-	closetext
-	end
-
-Script_WaitButton:
 	waitbutton
 	closetext
 	end
