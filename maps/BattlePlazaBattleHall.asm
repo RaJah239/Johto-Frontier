@@ -27,7 +27,7 @@ BattleHallReceptionistScript:
 	ifequal 1, .PreviousMode
 	ifequal 2, .NormalMode
 	ifequal 3, .InverseMode
-	ifequal 4, .TypelessMode
+	ifequal 4, .NeutralMode
 	sjump .ChooseMode
 
 .BattleHallModeTypeSelectionHeader:
@@ -42,7 +42,7 @@ BattleHallReceptionistScript:
 	db "Previous Mode@"
 	db "Normal Mode@"
 	db "Inverse Mode@"
-	db "Typeless Mode@"
+	db "Neutral Mode@"
 
 .InverseMode:
 	setevent EVENT_BATTLE_HALL_INVERSE_BATTLE
@@ -50,7 +50,7 @@ BattleHallReceptionistScript:
 	loadvar VAR_BATTLETYPE, BATTLETYPE_INVERSE
 	sjump .StartBattle
 
-.TypelessMode:
+.NeutralMode:
 	setevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
 	clearevent EVENT_BATTLE_HALL_INVERSE_BATTLE
 	loadvar VAR_BATTLETYPE, BATTLETYPE_TYPELESS
@@ -60,7 +60,7 @@ BattleHallReceptionistScript:
 	checkevent EVENT_BATTLE_HALL_INVERSE_BATTLE
 	iftrue .InverseMode
 	checkevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
-	iftrue .TypelessMode
+	iftrue .NeutralMode
 	; fallthrough
 
 .NormalMode:
@@ -117,7 +117,7 @@ BattleHallReceptionistScript:
 	checkevent EVENT_BATTLE_HALL_INVERSE_BATTLE
 	iftrue .InverseModePointsSetToZero
 	checkevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
-	iftrue .TypelessModePointsSetToZero
+	iftrue .NeutralModePointsSetToZero
 
 	; normal mode points set to zero
 	setval 0
@@ -133,7 +133,7 @@ BattleHallReceptionistScript:
 	closetext
 	end
 
-.TypelessModePointsSetToZero:
+.NeutralModePointsSetToZero:
 	setval 0
 	writevar VAR_BATTLE_HALL_TYPELESS_PONITS
 	special TryQuickSave
@@ -144,7 +144,7 @@ BattleHallReceptionistScript:
 	checkevent EVENT_BATTLE_HALL_INVERSE_BATTLE
 	iftrue .InverseModeHardModePointsSetToZero
 	checkevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
-	iftrue .TypelessModeHardModePointsSetToZero
+	iftrue .NeutralModeHardModePointsSetToZero
 
 	; normal mode hard mode points set to zero
 	setval 0
@@ -160,7 +160,7 @@ BattleHallReceptionistScript:
 	closetext
 	end
 
-.TypelessModeHardModePointsSetToZero:
+.NeutralModeHardModePointsSetToZero:
 	setval 0
 	writevar VAR_BATTLE_HALL_HARD_MODE_TYPELESS_PONITS
 	special TryQuickSave
@@ -187,7 +187,7 @@ BattleHallReceptionistScript:
 	checkevent EVENT_BATTLE_HALL_INVERSE_BATTLE
 	iftrue .InverseModePointsAwarded
 	checkevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
-	iftrue .TypelessModePointsAwarded
+	iftrue .NeutralModePointsAwarded
 
 	; normal mode points awarded
 	readvar VAR_BATTLE_HALL_NORMAL_PONITS
@@ -208,7 +208,7 @@ BattleHallReceptionistScript:
 	writevar VAR_BATTLE_HALL_INVERSE_PONITS
 	sjump .GivePrize
 
-.TypelessModePointsAwarded:
+.NeutralModePointsAwarded:
 	readvar VAR_BATTLE_HALL_TYPELESS_PONITS
 	ifequal 100, .GivePrize
 
@@ -221,7 +221,7 @@ BattleHallReceptionistScript:
 	checkevent EVENT_BATTLE_HALL_INVERSE_BATTLE
 	iftrue .InverseModeHardModePointsAwarded
 	checkevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
-	iftrue .TypelessModeHardModePointsAwarded
+	iftrue .NeutralModeHardModePointsAwarded
 
 	; normal points awarded
 	readvar VAR_BATTLE_HALL_HARD_MODE_NORMAL_PONITS
@@ -242,7 +242,7 @@ BattleHallReceptionistScript:
 	writevar VAR_BATTLE_HALL_HARD_MODE_INVERSE_PONITS
 	sjump .GivePrize
 
-.TypelessModeHardModePointsAwarded:
+.NeutralModeHardModePointsAwarded:
 	readvar VAR_BATTLE_HALL_HARD_MODE_TYPELESS_PONITS
 	ifequal 100, .GivePrize
 
