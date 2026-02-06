@@ -8,15 +8,20 @@ BattleTowerMons:
 ; last Trainer picks from top 40 Pokemon
 ; first 16 Pokemon are ubers
 
+; nothing here should use hidden power
+; as the dv player copy mechanic doesn't work here
+; nor should shiny pokemon be put here
+; set all effort values to zero due to same as above and only stats matter
+
 	db MEWTWO
 	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -32,13 +37,13 @@ BattleTowerMons:
 
 	db MEW
 	db LEFTOVERS
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -54,13 +59,13 @@ BattleTowerMons:
 
 	db CELEBI
 	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -76,13 +81,13 @@ BattleTowerMons:
 
 	db VICTINI
 	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -98,13 +103,13 @@ BattleTowerMons:
 
 	db NOWN
 	db SCOPE_LENS
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -120,13 +125,13 @@ BattleTowerMons:
 
 	db HO_OH
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -142,13 +147,13 @@ BattleTowerMons:
 
 	db LUGIA
 	db LEFTOVERS
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -164,13 +169,13 @@ BattleTowerMons:
 
 	db REGIGIGAS
 	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -186,13 +191,13 @@ BattleTowerMons:
 
 	db DARKRAI
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -208,13 +213,13 @@ BattleTowerMons:
 
 	db GHOLDENGO
 	db BRIGHTPOWDER
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -230,13 +235,13 @@ BattleTowerMons:
 
 	db DURALUDON
 	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -252,13 +257,13 @@ BattleTowerMons:
 
 	db SMEARGLE
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -274,12 +279,12 @@ BattleTowerMons:
 
 	db FERROTHORN
 	db BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 15, 15, 15, 15 ; DVs
+	dn 0, 0, 0, 0 ; DVs
 	db 15, 0, 0, 0 ; PP
 	db 0 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
@@ -296,12 +301,12 @@ BattleTowerMons:
 
 	db VOLCARONA
 	db BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 15, 15, 15, 15 ; DVs
+	dn 0, 0, 0, 0 ; DVs
 	db 15, 0, 0, 0 ; PP
 	db 0 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
@@ -318,16 +323,16 @@ BattleTowerMons:
 
 	db GARCHOMP
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -340,16 +345,16 @@ BattleTowerMons:
 
 	db TYRANITAR
 	db BRIGHTPOWDER
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -367,13 +372,13 @@ BattleTowerMons:
 
 	db DITTO
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -387,37 +392,15 @@ BattleTowerMons:
 	bigdw 8 ; SDef
 	db "DERUBIRU@@@"
 
-	db UNOWN
-	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 50 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "KIRINRIKI@@"
-
 	db RAIKOU
 	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -433,13 +416,13 @@ BattleTowerMons:
 
 	db ENTEI
 	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -455,13 +438,13 @@ BattleTowerMons:
 
 	db SUICUNE
 	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -477,13 +460,13 @@ BattleTowerMons:
 
 	db ARTICUNO
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -499,12 +482,12 @@ BattleTowerMons:
 
 	db MOLTRES
 	db BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 15, 15, 15, 15 ; DVs
+	dn 0, 0, 0, 0 ; DVs
 	db 15, 0, 0, 0 ; PP
 	db 0 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
@@ -521,13 +504,13 @@ BattleTowerMons:
 
 	db ZAPDOS
 	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -543,13 +526,13 @@ BattleTowerMons:
 
 	db REGIROCK
 	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -565,16 +548,16 @@ BattleTowerMons:
 
 	db REGICE
 	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -587,16 +570,16 @@ BattleTowerMons:
 
 	db REGISTEEL
 	db LEFTOVERS
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -609,16 +592,16 @@ BattleTowerMons:
 
 	db ABSOL
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -631,16 +614,16 @@ BattleTowerMons:
 
 	db ROTOM
 	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -653,16 +636,16 @@ BattleTowerMons:
 
 	db AERODACTYL
 	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -675,16 +658,16 @@ BattleTowerMons:
 
 	db CRADILY
 	db SCOPE_LENS
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -697,16 +680,16 @@ BattleTowerMons:
 
 	db OMASTAR
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -719,16 +702,16 @@ BattleTowerMons:
 
 	db PORYGONZ
 	db LEFTOVERS
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -741,16 +724,16 @@ BattleTowerMons:
 
 	db HAXORUS
 	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -763,16 +746,16 @@ BattleTowerMons:
 
 	db SALAMENCE
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -785,16 +768,16 @@ BattleTowerMons:
 
 	db SNORLAX
 	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -807,16 +790,16 @@ BattleTowerMons:
 
 	db BLISSEY
 	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -829,16 +812,16 @@ BattleTowerMons:
 
 	db MISMAGIUS
 	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -851,16 +834,16 @@ BattleTowerMons:
 
 	db SKARMORY
 	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -873,16 +856,16 @@ BattleTowerMons:
 
 	db BRONZONG
 	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -895,16 +878,16 @@ BattleTowerMons:
 
 	db LUCARIO
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -917,12 +900,12 @@ BattleTowerMons:
 
 	db CLAYDOL
 	db BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 15, 15, 15, 15 ; DVs
+	dn 0, 0, 0, 0 ; DVs
 	db 15, 0, 0, 0 ; PP
 	db 0 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
@@ -941,16 +924,16 @@ BattleTowerMons:
 
 	db CHANSEY
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -963,13 +946,13 @@ BattleTowerMons:
 
 	db ABOMASNOW
 	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -985,13 +968,13 @@ BattleTowerMons:
 
 	db WEAVILE
 	db LEFTOVERS
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1007,13 +990,13 @@ BattleTowerMons:
 
 	db SNEASLER
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1029,13 +1012,13 @@ BattleTowerMons:
 
 	db MAMOSWINE
 	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1051,13 +1034,13 @@ BattleTowerMons:
 
 	db GLALIE
 	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1073,13 +1056,13 @@ BattleTowerMons:
 
 	db FROSLASS
 	db SCOPE_LENS
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1095,13 +1078,13 @@ BattleTowerMons:
 
 	db JYNX
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1117,13 +1100,13 @@ BattleTowerMons:
 
 	db DELIBIRD
 	db LEFTOVERS
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1139,13 +1122,13 @@ BattleTowerMons:
 
 	db WYRDEER
 	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1161,13 +1144,13 @@ BattleTowerMons:
 
 	db LUNATONE
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1183,13 +1166,13 @@ BattleTowerMons:
 
 	db SOLROCK
 	db BRIGHTPOWDER
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1205,13 +1188,13 @@ BattleTowerMons:
 
 	db CLEFABLE
 	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1227,13 +1210,13 @@ BattleTowerMons:
 
 	db LAPRAS
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1249,13 +1232,13 @@ BattleTowerMons:
 
 	db KINGDRA
 	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1271,13 +1254,13 @@ BattleTowerMons:
 
 	db DEWGONG
 	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1293,13 +1276,13 @@ BattleTowerMons:
 
 	db TENTACRUEL
 	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1315,13 +1298,13 @@ BattleTowerMons:
 
 	db MANTINE
 	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1337,13 +1320,13 @@ BattleTowerMons:
 
 	db LANTURN
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1359,12 +1342,12 @@ BattleTowerMons:
 
 	db OCTILLERY
 	db BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 174, 174, 174, 174, 174, 174 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 15, 15, 15, 15 ; DVs
+	dn 0, 0, 0, 0 ; DVs
 	db 15, 0, 0, 0 ; PP
 	db 0 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
@@ -1381,13 +1364,13 @@ BattleTowerMons:
 
 	db STARMIE
 	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1403,13 +1386,13 @@ BattleTowerMons:
 
 	db CORSOLA
 	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 50 ; Level
@@ -1425,16 +1408,16 @@ BattleTowerMons:
 
 	db SHUCKLE
 	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1447,16 +1430,16 @@ BattleTowerMons:
 
 	db MAGNEZONE
 	db LEFTOVERS
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1469,16 +1452,16 @@ BattleTowerMons:
 
 	db ELECTABUZZ
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1491,16 +1474,16 @@ BattleTowerMons:
 
 	db ELECTRODE
 	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1513,16 +1496,16 @@ BattleTowerMons:
 
 	db TAUROS
 	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1535,16 +1518,16 @@ BattleTowerMons:
 
 	db MILTANK
 	db SCOPE_LENS
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1557,16 +1540,16 @@ BattleTowerMons:
 
 	db CHANDELURE
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1579,16 +1562,16 @@ BattleTowerMons:
 
 	db MUK
 	db LEFTOVERS
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1601,16 +1584,16 @@ BattleTowerMons:
 
 	db SUDOWOODO
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1623,16 +1606,16 @@ BattleTowerMons:
 
 	db HYPNO
 	db BRIGHTPOWDER
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1645,16 +1628,16 @@ BattleTowerMons:
 
 	db GRANBULL
 	db FOCUS_BAND
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1667,16 +1650,16 @@ BattleTowerMons:
 
 	db PERSIAN
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1689,16 +1672,16 @@ BattleTowerMons:
 
 	db HERACROSS
 	db QUICK_CLAW
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1711,16 +1694,16 @@ BattleTowerMons:
 
 	db KLEAVOR
 	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1733,16 +1716,16 @@ BattleTowerMons:
 
 	db SCIZOR
 	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1757,16 +1740,16 @@ BattleTowerMons:
 
 	db WEEZING
 	db MIRACLEBERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1779,16 +1762,16 @@ BattleTowerMons:
 
 	db TANGROWTH
 	db KINGS_ROCK
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1801,16 +1784,16 @@ BattleTowerMons:
 
 	db SCYTHER
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1823,16 +1806,16 @@ BattleTowerMons:
 
 	db ANNIHILAPE
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1845,16 +1828,16 @@ BattleTowerMons:
 
 	db PRIMEAPE
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1867,16 +1850,16 @@ BattleTowerMons:
 
 	db TROPIUS
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1889,16 +1872,16 @@ BattleTowerMons:
 
 	db DRAPION
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1911,16 +1894,16 @@ BattleTowerMons:
 
 	db GALVANTULA
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1933,16 +1916,16 @@ BattleTowerMons:
 
 	db SCOLIPEDE
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1955,16 +1938,16 @@ BattleTowerMons:
 
 	db ARIADOS
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1977,16 +1960,16 @@ BattleTowerMons:
 
 	db BRELOOM
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -1999,16 +1982,16 @@ BattleTowerMons:
 
 	db SLOWBRO
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2021,16 +2004,16 @@ BattleTowerMons:
 
 	db RAPIDASH
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2043,16 +2026,16 @@ BattleTowerMons:
 
 	db DODRIO
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2065,16 +2048,16 @@ BattleTowerMons:
 
 	db HARIYAMA
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2087,16 +2070,16 @@ BattleTowerMons:
 
 	db GLISCOR
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2109,16 +2092,16 @@ BattleTowerMons:
 
 	db QUAGSIRE
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2131,16 +2114,16 @@ BattleTowerMons:
 
 	db HOUNDOOM
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2153,16 +2136,16 @@ BattleTowerMons:
 
 	db ARCANINE
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2175,16 +2158,16 @@ BattleTowerMons:
 
 	db XATU
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2197,16 +2180,16 @@ BattleTowerMons:
 
 	db ALTARIA
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2219,16 +2202,38 @@ BattleTowerMons:
 
 	db GENGAR
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
+	db 0, 0 ; Status
+	bigdw 8 ; HP
+	bigdw 8 ; Max HP
+	bigdw 8 ; Atk
+	bigdw 8 ; Def
+	bigdw 8 ; Spd
+	bigdw 8 ; SAtk
+	bigdw 8 ; SDef
+	db "HERAKUROSU@"
+
+	db GYARADOS
+	db GOLD_BERRY
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
+	dw 0 ; OT ID
+	dt 0 ; Exp
+	db 0, 0, 0, 0, 0, 0 ; EVs
+	db 0, 0, 0, 0 ; padding
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
+	db 100 ; Happiness
+	db 0, 0, 0 ; Pokerus, Caught data
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2241,40 +2246,18 @@ BattleTowerMons:
 
 ; === 100 pokemon ===
 
-	db GYARADOS
-	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
-	dw 0 ; OT ID
-	dt 1000 ; Exp
-	db 0, 0, 0, 0, 0, 0 ; EVs
-	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
-	db 100 ; Happiness
-	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
-	db 0, 0 ; Status
-	bigdw 8 ; HP
-	bigdw 8 ; Max HP
-	bigdw 8 ; Atk
-	bigdw 8 ; Def
-	bigdw 8 ; Spd
-	bigdw 8 ; SAtk
-	bigdw 8 ; SDef
-	db "HERAKUROSU@"
-
 	db ONIX
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2287,16 +2270,16 @@ BattleTowerMons:
 
 	db STEELIX
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2309,16 +2292,16 @@ BattleTowerMons:
 
 	db RHYDON
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2331,16 +2314,16 @@ BattleTowerMons:
 
 	db AZUMARILL
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2353,16 +2336,16 @@ BattleTowerMons:
 
 	db GOLISOPOD
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2375,16 +2358,16 @@ BattleTowerMons:
 
 	db NIDOKING
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2397,16 +2380,16 @@ BattleTowerMons:
 
 	db NIDOQUEEN
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2419,16 +2402,16 @@ BattleTowerMons:
 
 	db AMPHAROS
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2441,16 +2424,16 @@ BattleTowerMons:
 
 	db VICTREEBEL
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2463,16 +2446,16 @@ BattleTowerMons:
 
 	db DONPHAN
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2485,16 +2468,16 @@ BattleTowerMons:
 
 	db URSALUNA
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2507,16 +2490,16 @@ BattleTowerMons:
 
 	db CROBAT
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2529,16 +2512,16 @@ BattleTowerMons:
 
 	db NOCTOWL
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2551,16 +2534,16 @@ BattleTowerMons:
 
 	db PIDGEOT
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2573,16 +2556,16 @@ BattleTowerMons:
 
 	db LOPUNNY
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2595,16 +2578,16 @@ BattleTowerMons:
 
 	db SUNFLORA
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2617,16 +2600,16 @@ BattleTowerMons:
 
 	db YANMEGA
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2639,16 +2622,16 @@ BattleTowerMons:
 
 	db DUSTOX
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2661,16 +2644,16 @@ BattleTowerMons:
 
 	db BEAUTIFLY
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2685,16 +2668,16 @@ BattleTowerMons:
 
 	db GALLADE
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2707,16 +2690,16 @@ BattleTowerMons:
 
 	db GARDEVOIR
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2729,16 +2712,16 @@ BattleTowerMons:
 
 	db DECIDUEYE
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2751,16 +2734,16 @@ BattleTowerMons:
 
 	db MILOTIC
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2773,16 +2756,16 @@ BattleTowerMons:
 
 	db BLAZIKEN
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2795,16 +2778,16 @@ BattleTowerMons:
 
 	db SYLVEON
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2817,16 +2800,16 @@ BattleTowerMons:
 
 	db UMBREON
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2839,16 +2822,16 @@ BattleTowerMons:
 
 	db RAICHU
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2861,16 +2844,16 @@ BattleTowerMons:
 
 	db PIKACHU
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2883,16 +2866,16 @@ BattleTowerMons:
 
 	db TORTERRA
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2905,16 +2888,16 @@ BattleTowerMons:
 
 	db BLASTOISE
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2927,16 +2910,16 @@ BattleTowerMons:
 
 	db CHARIZARD
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2949,16 +2932,16 @@ BattleTowerMons:
 
 	db TOGEKISS
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2971,16 +2954,16 @@ BattleTowerMons:
 
 	db MEGANIUM
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -2993,16 +2976,16 @@ BattleTowerMons:
 
 	db FERALIGATR
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP
@@ -3015,16 +2998,16 @@ BattleTowerMons:
 
 	db TYPHLOSION
 	db GOLD_BERRY
-	db SPLASH, 0, 0, 0
+	db EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 	dw 0 ; OT ID
-	dt 1000 ; Exp
+	dt 0 ; Exp
 	db 0, 0, 0, 0, 0, 0 ; EVs
 	db 0, 0, 0, 0 ; padding
-	dn 13, 13, 11, 13 ; DVs
-	db 40, 30, 30, 30 ; PP
+	dn 0, 0, 0, 0 ; DVs
+	db 24, 24, 24, 24 ; PP
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
-	db 1 ; Level
+	db 50 ; Level
 	db 0, 0 ; Status
 	bigdw 8 ; HP
 	bigdw 8 ; Max HP

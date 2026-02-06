@@ -124,9 +124,9 @@ LoadRandomBattleTowerMon:
 	cp BATTLETOWER_STREAK_LENGTH - 1
 	jr z, .last_trainer
  
-	; pool of 156 Pokemon rather than 40
+	; pool of 136 Pokemon rather than 40
 	ld a, b
-	cp 136
+	cp 135
 	jr nc, .resample
 	; mon 0 is Mewtwo, since we are not the last trainer
 	; if we get it, we try again
