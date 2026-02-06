@@ -939,6 +939,12 @@ StatsScreen_PrintEVs:
 	ld de, .EVstring3
 	call PlaceString
 
+    ; are we presently copying someone's party?
+    ; if so, display effort values as max
+    ld a, [wCopyEnemyParty]
+    and a ; sets zero flag if a = 0
+    jmp nz, .CurrentlyCopyingAParty
+
 	; HP EVs
 	; Print 3 start is Def EVs are maxed
 	ld a, [wTempMonHPEV]
@@ -1120,6 +1126,38 @@ StatsScreen_PrintEVs:
 	ld de, wPokedexStatus
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2 ; bytes, digits
 	ret
+
+.CurrentlyCopyingAParty:
+	; display effort values as max
+	; HP EVs
+	ld de, .EVMaxThreeStars
+	hlcoord 6, 12
+	call PlaceString
+
+	; ATK EVs
+	ld de, .EVMaxThreeStars
+	hlcoord 6, 13
+	call PlaceString
+
+	; DEF EVs
+	ld de, .EVMaxThreeStars
+	hlcoord 6, 14
+	call PlaceString
+
+	; SPE EVs
+	ld de, .EVMaxThreeStars
+	hlcoord 14, 12
+	call PlaceString
+
+	; SpAtk EVs
+	ld de, .EVMaxThreeStars
+	hlcoord 14, 13
+	call PlaceString
+
+	; SpDef EVs
+	ld de, .EVMaxThreeStars
+	hlcoord 14, 14
+	jmp PlaceString
 
 .EffortValuesString:
 	db "Effort Values:@"
