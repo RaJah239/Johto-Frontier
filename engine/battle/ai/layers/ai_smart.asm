@@ -2457,7 +2457,7 @@ AI_Smart_Flinch:
 .not_blastoise_or_iron_head
 	ld a, [wEnemyMonSpecies]
 	cp DROWZEE
-	jr nz, .not_drowzee_or_hypno_or_zen_headbutt
+	jr z, .not_drowzee_or_hypno_or_zen_headbutt
 	cp HYPNO
 	jr nz, .not_drowzee_or_hypno_or_zen_headbutt
 
@@ -2475,7 +2475,7 @@ AI_Smart_Flinch:
 ; encourage if enemy is paralyzed
 	ld a, [wBattleMonStatus]
 	and 1 << PAR
-	jr nz, .small_encourage
+	jr nz, .encourage
 
 ; encourage if enemy has serene grace ability pokemon
 	ld a, [wEnemyMonSpecies]
@@ -2485,8 +2485,6 @@ AI_Smart_Flinch:
 	pop hl
 	ret c
 .encourage
-    dec [hl]
-.small_encourage
     dec [hl]
     ret
 
