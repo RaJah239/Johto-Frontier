@@ -647,6 +647,8 @@ ShouldAIBoost:
 	jr z, .enemy_moves_first
 	cp QUIVER_DANCE
 	jr z, .enemy_moves_first
+	cp FURY_DRIVE
+	jr z, .enemy_moves_first
 
 ; if player moves first consider if they can 2HKO
 	call CanPlayer2HKO
