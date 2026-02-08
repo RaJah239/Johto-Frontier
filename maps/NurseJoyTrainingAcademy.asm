@@ -144,7 +144,7 @@ NurseJoyTrainingNurseJoyScript:
 	db 1 ; default option
 
 .MenuData:
-	db STATICMENU_CURSOR ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
 	dn 3, 2 ; rows, columns
 	db 6 ; spacing
 	dba .Text

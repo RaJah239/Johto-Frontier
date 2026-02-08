@@ -123,7 +123,7 @@ Script_ChooseChallenge:
 	db 1 ; default option
 
 .MirrorMenuData:
-	db STATICMENU_CURSOR ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
 	dn 4, 1 ; rows, columns
 	db 5 ; spacing
 	dba .MirrorText

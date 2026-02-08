@@ -134,7 +134,7 @@ GoldenrodGameCornerTMVendorMenuHeader:
 	db 1 ; default option
 
 .MenuData:
-	db STATICMENU_CURSOR ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
 	db 4 ; items
 	db "TM25    5500@"
 	db "TM14    5500@"
@@ -220,7 +220,7 @@ GoldenrodGameCornerPrizeMonVendorScript:
 	db 1 ; default option
 
 .MenuData:
-	db STATICMENU_CURSOR ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
 	db 4 ; items
 	db "ABRA        100@"
 	db "DITTO       800@"

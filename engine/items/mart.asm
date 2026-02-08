@@ -923,7 +923,7 @@ MenuHeader_BuySell:
 	db 1 ; default option
 
 .MenuData
-	db STATICMENU_CURSOR ; strings
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; strings
 	db 3 ; items
 	db "BUY@"
 	db "SELL@"

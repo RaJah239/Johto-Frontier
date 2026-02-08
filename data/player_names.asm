@@ -6,7 +6,7 @@ ChrisNameMenuHeader:
 	db 0 ; ????
 
 .MaleNames:
-	db STATICMENU_CURSOR | STATICMENU_PLACE_TITLE | STATICMENU_DISABLE_B ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP | STATICMENU_PLACE_TITLE | STATICMENU_DISABLE_B ; flags
 	db 5 ; items
 	db "New Name@"
 MalePlayerNameArray:
@@ -25,7 +25,7 @@ KrisNameMenuHeader:
 	db 0 ; ????
 
 .FemaleNames:
-	db STATICMENU_CURSOR | STATICMENU_PLACE_TITLE | STATICMENU_DISABLE_B ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP | STATICMENU_PLACE_TITLE | STATICMENU_DISABLE_B ; flags
 	db 5 ; items
 	db "New Name@"
 FemalePlayerNameArray:

@@ -1536,7 +1536,7 @@ CoinVendor_IntroScript:
 	db 1 ; default option
 
 .MenuData:
-	db STATICMENU_CURSOR ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
 	db 2 ; items
 	db " 10 : ¥10000@"
 	db "Cancel@"

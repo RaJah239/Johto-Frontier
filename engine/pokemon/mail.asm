@@ -559,7 +559,7 @@ MailboxPC:
 	db 1 ; default option
 
 .SubMenuData:
-	db STATICMENU_CURSOR ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
 	db 4 ; items
 	db "Read Mail@"
 	db "Put In Bag@"

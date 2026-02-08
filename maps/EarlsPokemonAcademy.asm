@@ -111,7 +111,7 @@ AcademyBlackboard:
 	db 1 ; default option
 
 .MenuData:
-	db STATICMENU_CURSOR ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
 	dn 3, 2 ; rows, columns
 	db 5 ; spacing
 	dba .Text
@@ -441,7 +441,7 @@ MoveEnchancingAbilitiesNotebook:
 	db 1 ; default option
 
 .MenuData:
-	db STATICMENU_CURSOR ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
 	db 5 ; items
 	db "Ballistics Moves@"
 	db "Punching Moves@"

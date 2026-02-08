@@ -136,7 +136,7 @@ BlackthornTutor1Script:
 	db 1 ; default option
 
 .MenuData:
-	db STATICMENU_CURSOR ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
 	db 4 ; items
 	db "Rock Slide@"
 	db "Sky Attack@"

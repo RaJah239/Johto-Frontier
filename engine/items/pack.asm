@@ -337,7 +337,7 @@ MenuHeader_UsableItem:
 	db 1 ; default option
 
 .MenuData:
-	db STATICMENU_CURSOR | STATICMENU_NO_TOP_SPACING ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP | STATICMENU_NO_TOP_SPACING ; flags
 	db 4 ; items
 	db "Use@"
 	db "Give@"
@@ -357,7 +357,7 @@ MenuHeader_UnusableItem:
 	db 1 ; default option
 
 .MenuData:
-	db STATICMENU_CURSOR | STATICMENU_NO_TOP_SPACING ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP | STATICMENU_NO_TOP_SPACING ; flags
 	db 2 ; items
 	db "Use@"
 	db "Quit@"
@@ -373,7 +373,7 @@ MenuHeader_UnusableKeyItem:
 	db 1 ; default option
 
 .MenuData:
-	db STATICMENU_CURSOR | STATICMENU_NO_TOP_SPACING ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP | STATICMENU_NO_TOP_SPACING ; flags
 	db 3 ; items
 	db "Use@"
 	db "SEL@"
@@ -391,7 +391,7 @@ MenuHeader_HoldableKeyItem:
 	db 1 ; default option
 
 .MenuData:
-	db STATICMENU_CURSOR | STATICMENU_NO_TOP_SPACING ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP | STATICMENU_NO_TOP_SPACING ; flags
 	db 4 ; items
 	db "Give@"
 	db "Toss@"
@@ -411,7 +411,7 @@ MenuHeader_HoldableItem:
 	db 1 ; default option
 
 .MenuData:
-	db STATICMENU_CURSOR | STATICMENU_NO_TOP_SPACING ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP | STATICMENU_NO_TOP_SPACING ; flags
 	db 3 ; items
 	db "Give@"
 	db "Toss@"
@@ -840,7 +840,7 @@ TMHMSubmenu:
 	db 1 ; default option
 
 .UsableMenuData:
-	db STATICMENU_CURSOR | STATICMENU_NO_TOP_SPACING ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP | STATICMENU_NO_TOP_SPACING ; flags
 	db 2 ; items
 	db "Use@"
 	db "Quit@"
@@ -856,7 +856,7 @@ TMHMSubmenu:
 	db 1 ; default option
 
 .UnusableMenuData:
-	db STATICMENU_CURSOR | STATICMENU_NO_TOP_SPACING ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP | STATICMENU_NO_TOP_SPACING ; flags
 	db 1 ; items
 	db "Quit@"
 

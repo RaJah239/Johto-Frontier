@@ -77,7 +77,7 @@ GoldenrodVendingMachine:
 	db 1 ; default option
 
 .MenuData:
-	db STATICMENU_CURSOR ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
 	db 4 ; items
 	db "Fresh Water  ¥{d:GOLDENRODDEPTSTORE6F_FRESH_WATER_PRICE}@"
 	db "Soda Pop     ¥{d:GOLDENRODDEPTSTORE6F_SODA_POP_PRICE}@"

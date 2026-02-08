@@ -476,7 +476,7 @@ YesNoMenuHeader::
 	db 1 ; default option
 
 .MenuData:
-	db STATICMENU_CURSOR | STATICMENU_NO_TOP_SPACING ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP | STATICMENU_NO_TOP_SPACING ; flags
 	db 2
 	db "Yes@"
 	db "No@"

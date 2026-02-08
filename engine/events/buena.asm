@@ -36,7 +36,7 @@ BuenasPassword:
 	db 0
 
 .MenuData:
-	db STATICMENU_CURSOR | STATICMENU_DISABLE_B ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP | STATICMENU_DISABLE_B ; flags
 	db 0 ; items
 	dw .PasswordIndices
 	dw .PlacePasswordChoices

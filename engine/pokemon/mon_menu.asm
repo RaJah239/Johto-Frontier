@@ -522,7 +522,7 @@ GiveTakeItemMenuData:
 	db 1 ; default option
 
 .Items:
-	db STATICMENU_CURSOR ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
 	db 3 ; # items
 	db "Give@"
 	db "Take@"
@@ -656,7 +656,7 @@ MonMailAction:
 	db 1 ; default option
 
 .MenuData:
-	db STATICMENU_CURSOR ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
 	db 3 ; items
 	db "READ@"
 	db "TAKE@"

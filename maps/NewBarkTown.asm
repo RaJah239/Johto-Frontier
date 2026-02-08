@@ -299,7 +299,7 @@ CheatingScript:
 	db 1 ; default option
 
 .MenuData:
-	db STATICMENU_CURSOR ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
 	db 5 ; items
 	db "99× Rare Candy@"
 	db "99× Hyper EV Up@"
