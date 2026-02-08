@@ -8,18 +8,23 @@ HiddenPowerDamage:
 	ld hl, wEnemyMonDVs
 
 .got_dvs
-	; Def & 3
-	ld a, [hl]
-	and %0011
-	ld b, a
+    ; Use DV bits 1-2 instead of 0-1
+    ; type = ((AtkDV >> 1) & 3) << 2 | ((DefDV >> 1) & 3)
 
-	; + (Atk & 3) << 2
-	ld a, [hl]
-	and %0011 << 4
-	swap a
-	add a
-	add a
-	or b
+    ; ---- defense contribution ----
+    ld a, [hl]
+    srl a        ; >>1
+    and %0011
+    ld b, a
+
+    ; ---- attack contribution ----
+    ld a, [hl]
+    swap a       ; move atk nibble down
+    srl a        ; >>1
+    and %0011
+    add a
+    add a        ; <<2
+    or b
 
 ; Skip Normal
 	inc a
