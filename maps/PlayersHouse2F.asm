@@ -334,7 +334,7 @@ RandomPartyTrainerScript:
 	special BackupPartyHeldItems
 	special HealParty
 	winlosstext TestText, TestText
-	loadtrainer MAXIMA, MAXIMA1
+	loadtrainer INSAF, INSAF1
 	startbattle
 	reloadmap
 	special RestorePartyHeldItems
@@ -476,5 +476,5 @@ if DEF(_DEBUG)
 	object_event  3,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RegularMonScript, -1
 	object_event  2,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ShinyMonScript, -1
 	object_event  7,  5, SPRITE_PAPER, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, DebugOptions, -1
-	object_event  2,  3, SPRITE_MAXIMA, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RandomPartyTrainerScript, -1
+	object_event  2,  3, SPRITE_RED, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RandomPartyTrainerScript, -1
 endc

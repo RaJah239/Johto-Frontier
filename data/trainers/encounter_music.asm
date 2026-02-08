@@ -82,4 +82,5 @@ TrainerEncounterMusic::
 	db MUSIC_ROCKET_ENCOUNTER      ; archer
 	db MUSIC_HIKER_ENCOUNTER       ; maxima
 	db MUSIC_BEAUTY_ENCOUNTER      ; nurse
+	db MUSIC_HIKER_ENCOUNTER       ; insaf
 	assert_table_length NUM_TRAINER_CLASSES + 1

@@ -31,6 +31,7 @@ MaleTrainers:
 	db PETREL
 	db ARCHER
 	db MAXIMA
+	db INSAF
 .End
 
 FemaleTrainers:

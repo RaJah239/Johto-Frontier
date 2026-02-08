@@ -81,4 +81,5 @@ TrainerPicPointers::
 	dba ArcherPic
 	dba MaximaPic
 	dba NursePic
+	dba InsafPic
 	assert_table_length NUM_TRAINER_CLASSES

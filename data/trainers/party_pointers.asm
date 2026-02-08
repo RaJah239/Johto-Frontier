@@ -81,4 +81,5 @@ TrainerGroups:
 	dba ArcherGroup
 	dba MaximaGroup
 	dba NurseGroup
+	dba InsafGroup
 	assert_table_length NUM_TRAINER_CLASSES

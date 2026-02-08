@@ -79,4 +79,5 @@ BTTrainerClassSprites:
 	db SPRITE_ARCHER
 	db SPRITE_MAXIMA
 	db SPRITE_NURSE
+	db SPRITE_RED
 	assert_table_length NUM_TRAINER_CLASSES

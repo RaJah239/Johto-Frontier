@@ -561,6 +561,9 @@ DEF KRIS EQU __trainer_class__
 	const NURSE4
 	const NURSE5
 
+	trainerclass INSAF
+	const INSAF1
+
  	const_def
  	const RANDOMLIST_0
  	const RANDOMLIST_1

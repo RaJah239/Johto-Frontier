@@ -283,3 +283,38 @@ NurseGroup:
 	db 50, BLISSEY,	LEFTOVERS,	SHADOW_BALL, CALM_MIND, PSYCHIC_M, SOFTBOILED
 	db 50, BLISSEY,	FOCUS_SASH,	COUNTER, TOXIC, FLAMETHROWER, SOFTBOILED
 	db -1 ; end
+
+InsafGroup:
+	; Insaf (1)
+	db "Insaf@", TRAINERTYPE_NICKNAME | TRAINERTYPE_DVS | TRAINERTYPE_ITEM_MOVES
+	db 50, FERALIGATR
+		db "Feraligatr@"		; Nickname
+		db $FF, $FF ; dvs - atk|def dv, spd|spc dv
+		db FOCUS_SASH	; ITEM/ NO_ITEM is a thing
+		db FURY_DRIVE, WATERFALL, ROCK_SLIDE, EARTHQUAKE ; Moveset - NO_MOVE is a thing
+	db 50, TAUROS
+		db "Tauros@"		; Nickname
+		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
+		db GOLD_BERRY	; ITEM/ NO_ITEM is a thing
+		db THRASH, EARTHQUAKE, IRON_HEAD, EXTREMESPEED ; Moveset - NO_MOVE is a thing
+	db 50, ZAPDOS
+		db "Zapdos@"		; Nickname
+		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
+		db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+		db THUNDERBOLT, SKY_ATTACK, ROOST, TOXIC ; Moveset - NO_MOVE is a thing
+	db 50, ENTEI
+		db "Entei@"		; Nickname
+		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
+		db LIFE_ORB	; ITEM/ NO_ITEM is a thing
+		db EARTHQUAKE, ROCK_SLIDE, FLARE_BLITZ, EXTREMESPEED ; Moveset - NO_MOVE is a thing
+	db 50, CELEBI
+		db "Celebi@"		; Nickname
+		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
+		db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+		db RECOVER, LEECH_SEED, CALM_MIND, GIGA_DRAIN ; Moveset - NO_MOVE is a thing
+	db 50, MEW
+		db "Mew@"		; Nickname
+		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
+		db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+		db BULK_UP, ZEN_HEADBUTT, RECOVER, DRAIN_PUNCH ; Moveset - NO_MOVE is a thing
+	db -1 ; end

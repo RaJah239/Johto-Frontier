@@ -80,4 +80,5 @@ TrainerClassDVs:
 	dn 15, 15, 15, 15 ; ARCHER
 	dn 15, 15, 15, 15 ; MAXIMA
 	dn 15, 15, 15, 15 ; NURSE
+	dn 15, 15, 15, 15 ; INSAF
 	assert_table_length NUM_TRAINER_CLASSES
