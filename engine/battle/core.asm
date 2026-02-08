@@ -6057,56 +6057,36 @@ LoadEnemyMon:
 .GenerateDVs:
 ; Generate new random DVs
 
+; ===================
+; === Shiny Charm ===
+; ===================
+; shiny charm increases the chance a pokémon will be shiny
+; the charm adds 2 extra  rolls when a wild pokemon in encountered
+; therefore, the chance is increased from 1/256 to 3/256 or ~0.1%.
 
-; The Shiny Charm increases the chance a Pokémon will be shiny.
-; In regular games, it adds 2 additional rolls to shininess, raising
-; the chance of a shiny Pokémon appearing from 1/256 to 3/256 (~1%).
-; This implementation uses the already defined shiny DVs for Gyarados,
-; so it checks based on 65535 values instead of 8192 values.
-; To compensate for that, it adds 2 additional rolls for each DV byte,
-; which means the actual chance is increased from 1/256 to 3/256 or ~1%.
-	ld a, SHINY_CHARM
-	ld [wCurItem], a
-	ld hl, wNumItems
-	call CheckItem
-	jr nc, .NoShinyCharm
-	push de
-	push hl
-	ld a, 3
-	ld d, a
+	; check if player has shiny charm
+    ld a, SHINY_CHARM
+    ld [wCurItem], a
+    ld hl, wNumItems
+    call CheckItem
+    jr nc, .NoShinyCharm
 
-.loopAtkDef
-	ld a, d
-	dec a
-	ld d, a
-	jr z, .DoneAtkDef
-	call BattleRandom
-	ld e, a
-	cp ATKDEFDV_SHINY ; checks if ATK is 15 and DEF is 15
-	jr nz, .loopAtkDef
+	; shiny charm logic
+; 1. roll atk/def once (only affects hidden power type and genders)
+    call BattleRandom
+    ld b, a          ; store atk/def in b
 
-.DoneAtkDef
-	ld a, e
-	ld b, a
-	ld a, 3
-	ld d, a
-
-.loopSpdSpc
-	ld a, d
-	dec a
-	ld d, a
-	jr z, .DoneSpdSpc
-	call BattleRandom
-	ld e, a
-	cp SPDSPCDV_SHINY ; checks if SPD is 15 and SPC is 15
-	jr nz, .loopSpdSpc
-
-.DoneSpdSpc
-	ld a, e
-	ld c, a
-	pop hl
-	pop de
-	jr .UpdateDVs
+; 2. roll speed/special up to 3 times (determines shininess)
+    ld d, 3          ; 3 rolls/attempts
+.RollShiny
+    call BattleRandom
+    ld c, a          ; store current roll in c
+    cp $ff           ; is it 15 spd / 15 spc?
+    jr z, .UpdateDVs      ; if yes, were done
+    dec d
+    jr nz, .RollShiny
+    ; if we fail 3 times, c just keeps the last random value rolled.
+    jr .UpdateDVs
 
 .NoShinyCharm
 	call BattleRandom
