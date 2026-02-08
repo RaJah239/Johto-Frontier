@@ -30,7 +30,7 @@ CommonBattleMenu:
 
 BattleMenuHeaderWild:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 8, 12, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1
+	menu_coords 7, 12, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1
 	dw .MenuData
 	db 1 ; default option
 
@@ -43,8 +43,8 @@ BattleMenuHeaderWild:
 
 .Text:
 	db "Fight@"
-	db "<PKMN>@"
 	db "Pack@"
+	db "<PKMN>@"
 	db "Run@"
 
 BattleMenuHeaderTrainer:
@@ -62,8 +62,8 @@ BattleMenuHeaderTrainer:
 
 .Text:
 	db "Fight@"
-	db "<PKMN>@"
 	db "Codex@"
+	db "<PKMN>@"
 	db "Extra@"
 
 SafariBattleMenuHeader:
@@ -101,18 +101,18 @@ ContestBattleMenuHeader:
 .MenuData:
 	db STATICMENU_CURSOR | STATICMENU_WRAP | STATICMENU_DISABLE_B ; flags
 	dn 2, 2 ; rows, columns
-	db 9 ; spacing
+	db 6 ; spacing
 	dba .Text
 	dba .PrintParkBallsRemaining
 
 .Text:
 	db "Fight@"
+	db "Ball×@"
 	db "<PKMN>@"
-	db "Ball×  @"
 	db "Run@"
 
 .PrintParkBallsRemaining:
-	hlcoord 11, 16
+	hlcoord 17, 14
 	ld de, wParkBallsRemaining
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	call PrintNum

@@ -4825,9 +4825,9 @@ BattleMenu:
 	ld a, [wBattleMenuCursorPosition]
 	cp $1
 	jr z, BattleMenu_Fight
-	cp $3
-	jr z, BattleMenu_Pack
 	cp $2
+	jr z, BattleMenu_Pack
+	cp $3
 	jmp z, BattleMenu_PKMN
 	cp $4
 	jmp z, BattleMenu_Run
@@ -6152,7 +6152,7 @@ LoadEnemyMon:
 ; Try again if length >= 1616 mm (i.e. if LOW(length) >= 4 inches)
 	ld a, [wMagikarpLength + 1]
 	cp 4
-	jmp nc, .GenerateDVs
+	jr nc, .GenerateDVs
 
 ; 20% chance of skipping this check
 	call Random
