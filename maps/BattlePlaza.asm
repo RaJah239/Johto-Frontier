@@ -159,10 +159,10 @@ BattlePlaza_MapEvents:
 	warp_event 21,  9, BATTLE_TOWER_1F, 2
 	warp_event  5, 19, OAKS_LAB, 1
 	warp_event 11,  5, BATTLE_PLAZA_RAJA_HOUSE, 1
-	warp_event 14, 13, BATTLE_PLAZA_BATTLE_LOBBY, 2
-	warp_event 15, 13, BATTLE_PLAZA_BATTLE_LOBBY, 1
-	warp_event 26, 13, BATTLE_PLAZA_DRAFT_ARENA, 2
-	warp_event 27, 13, BATTLE_PLAZA_DRAFT_ARENA, 1
+	warp_event 26, 13, BATTLE_PLAZA_BATTLE_LOBBY, 2
+	warp_event 27, 13, BATTLE_PLAZA_BATTLE_LOBBY, 1
+	warp_event 14, 13, BATTLE_PLAZA_DRAFT_ARENA, 2
+	warp_event 15, 13, BATTLE_PLAZA_DRAFT_ARENA, 1
 	warp_event 13, 19, BATTLE_PLAZA_MART, 1
 	warp_event 17, 19, BATTLE_PLAZA_MART, 4
 
@@ -171,8 +171,8 @@ BattlePlaza_MapEvents:
 	def_bg_events
 	bg_event  4, 14, BGEVENT_READ, BattlePlazaTrainStationSign
 	bg_event 12,  6, BGEVENT_READ, BattlePlazaRaJaHouseSign
-	bg_event 11, 12, BGEVENT_READ, BattlePlazaBattleLobbyHouseSign
-	bg_event 30, 12, BGEVENT_READ, BattlePlazaDraftArenaSign
+	bg_event 30, 12, BGEVENT_READ, BattlePlazaBattleLobbyHouseSign
+	bg_event 11, 12, BGEVENT_READ, BattlePlazaDraftArenaSign
 	bg_event 22, 10, BGEVENT_READ, BattlePlazaBattleTowerSign
 	bg_event  4, 20, BGEVENT_READ, BattlePlazaProOaksLabSign
 
