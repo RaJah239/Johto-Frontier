@@ -7,21 +7,21 @@ BattlePlazaBattleLobby_MapScripts:
 
 	def_callbacks
 
-BattleHallReceptionistScript:
+BattleLobbyReceptionistScript:
 	opentext
-	checkevent EVENT_DID_NOT_GET_BATTLE_HALL_PRIZE
+	checkevent EVENT_DID_NOT_GET_BATTLE_LOBBY_PRIZE
 	iftrue .GivePrize
-	writetext BattleHallIntroText
+	writetext BattleLobbyIntroText
 	promptbutton
-	writetext BattleHallAskWantToBattleText
+	writetext BattleLobbyAskWantToBattleText
 	yesorno
 	iffalse .Declined
-	writetext BattleHallReceptionistSaveText
+	writetext BattleLobbyReceptionistSaveText
 	yesorno
 	iffalse .Declined
 	special TryQuickSave
 .ChooseMode
-	loadmenu .BattleHallModeTypeSelectionHeader
+	loadmenu .BattleLobbyModeTypeSelectionHeader
 	verticalmenu
 	closewindow
 	ifequal 1, .PreviousMode
@@ -30,7 +30,7 @@ BattleHallReceptionistScript:
 	ifequal 4, .NeutralMode
 	sjump .ChooseMode
 
-.BattleHallModeTypeSelectionHeader:
+.BattleLobbyModeTypeSelectionHeader:
 	db MENU_BACKUP_TILES ; flags
 	menu_coords 0, 0, 15, TEXTBOX_Y - 3
 	dw .MenuData
@@ -45,37 +45,37 @@ BattleHallReceptionistScript:
 	db "Neutral Mode@"
 
 .InverseMode:
-	setevent EVENT_BATTLE_HALL_INVERSE_BATTLE
-	clearevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
+	setevent EVENT_BATTLE_LOBBY_INVERSE_BATTLE
+	clearevent EVENT_BATTLE_LOBBY_TYPELESS_BATTLE
 	loadvar VAR_BATTLETYPE, BATTLETYPE_INVERSE
 	sjump .StartBattle
 
 .NeutralMode:
-	setevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
-	clearevent EVENT_BATTLE_HALL_INVERSE_BATTLE
+	setevent EVENT_BATTLE_LOBBY_TYPELESS_BATTLE
+	clearevent EVENT_BATTLE_LOBBY_INVERSE_BATTLE
 	loadvar VAR_BATTLETYPE, BATTLETYPE_TYPELESS
 	sjump .StartBattle
 
 .PreviousMode:
-	checkevent EVENT_BATTLE_HALL_INVERSE_BATTLE
+	checkevent EVENT_BATTLE_LOBBY_INVERSE_BATTLE
 	iftrue .InverseMode
-	checkevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
+	checkevent EVENT_BATTLE_LOBBY_TYPELESS_BATTLE
 	iftrue .NeutralMode
 	; fallthrough
 
 .NormalMode:
-	clearevent EVENT_BATTLE_HALL_INVERSE_BATTLE
-	clearevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
+	clearevent EVENT_BATTLE_LOBBY_INVERSE_BATTLE
+	clearevent EVENT_BATTLE_LOBBY_TYPELESS_BATTLE
 	loadvar VAR_BATTLETYPE, BATTLETYPE_NORMAL
 	; fallthrough
 
 .StartBattle:
-	writetext BattleHallReceptionistGoRightInText
+	writetext BattleLobbyReceptionistGoRightInText
 	waitbutton
 	closetext
-	applymovement BATTLEPLAZABATTLELOBBY_RECEPTIONIST, BattleHallReceptionist_MoveOutTheWay
-	applymovement PLAYER, BattleHallPlayer_EnterBattleRoom
-	winlosstext BattleHallPlayerVictoryText, 0
+	applymovement BATTLEPLAZABATTLELOBBY_RECEPTIONIST, BattleLobbyReceptionist_MoveOutTheWay
+	applymovement PLAYER, BattleLobbyPlayer_EnterBattleRoom
+	winlosstext BattleLobbyPlayerVictoryText, 0
 .sample
 	random 3
 	ifequal 0, .Red
@@ -107,62 +107,62 @@ BattleHallReceptionistScript:
 	special LoadPokemonData
 	special HealParty
 	opentext
-	writetext BattleHallBattleLoseText
+	writetext BattleLobbyBattleLoseText
 	waitbutton
 
 	; check if hard mode was on
     callasm CheckHardModeASM
 	iftrue .SetHardModePointsToZero
 
-	checkevent EVENT_BATTLE_HALL_INVERSE_BATTLE
+	checkevent EVENT_BATTLE_LOBBY_INVERSE_BATTLE
 	iftrue .InverseModePointsSetToZero
-	checkevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
+	checkevent EVENT_BATTLE_LOBBY_TYPELESS_BATTLE
 	iftrue .NeutralModePointsSetToZero
 
 	; normal mode points set to zero
 	setval 0
-	writevar VAR_BATTLE_HALL_NORMAL_PONITS
+	writevar VAR_BATTLE_LOBBY_NORMAL_PONITS
 	special TryQuickSave
 	closetext
 	end
 
 .InverseModePointsSetToZero:
 	setval 0
-	writevar VAR_BATTLE_HALL_INVERSE_PONITS
+	writevar VAR_BATTLE_LOBBY_INVERSE_PONITS
 	special TryQuickSave
 	closetext
 	end
 
 .NeutralModePointsSetToZero:
 	setval 0
-	writevar VAR_BATTLE_HALL_TYPELESS_PONITS
+	writevar VAR_BATTLE_LOBBY_TYPELESS_PONITS
 	special TryQuickSave
 	closetext
 	end
 
 .SetHardModePointsToZero:
-	checkevent EVENT_BATTLE_HALL_INVERSE_BATTLE
+	checkevent EVENT_BATTLE_LOBBY_INVERSE_BATTLE
 	iftrue .InverseModeHardModePointsSetToZero
-	checkevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
+	checkevent EVENT_BATTLE_LOBBY_TYPELESS_BATTLE
 	iftrue .NeutralModeHardModePointsSetToZero
 
 	; normal mode hard mode points set to zero
 	setval 0
-	writevar VAR_BATTLE_HALL_HARD_MODE_NORMAL_PONITS
+	writevar VAR_BATTLE_LOBBY_HARD_MODE_NORMAL_PONITS
 	special TryQuickSave
 	closetext
 	end
 
 .InverseModeHardModePointsSetToZero:
 	setval 0
-	writevar VAR_BATTLE_HALL_HARD_MODE_INVERSE_PONITS
+	writevar VAR_BATTLE_LOBBY_HARD_MODE_INVERSE_PONITS
 	special TryQuickSave
 	closetext
 	end
 
 .NeutralModeHardModePointsSetToZero:
 	setval 0
-	writevar VAR_BATTLE_HALL_HARD_MODE_TYPELESS_PONITS
+	writevar VAR_BATTLE_LOBBY_HARD_MODE_TYPELESS_PONITS
 	special TryQuickSave
 	closetext
 	end
@@ -175,7 +175,7 @@ BattleHallReceptionistScript:
 	warpfacing UP, BATTLE_PLAZA_BATTLE_LOBBY, 3, 11
 	turnobject PLAYER, UP
 	opentext
-	writetext BattleHallBattleWinText
+	writetext BattleLobbyBattleWinText
 	promptbutton
 	special LoadPokemonData
 	special HealParty
@@ -184,99 +184,99 @@ BattleHallReceptionistScript:
     callasm CheckHardModeASM
 	iftrue .AwardHardModePoints
 
-	checkevent EVENT_BATTLE_HALL_INVERSE_BATTLE
+	checkevent EVENT_BATTLE_LOBBY_INVERSE_BATTLE
 	iftrue .InverseModePointsAwarded
-	checkevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
+	checkevent EVENT_BATTLE_LOBBY_TYPELESS_BATTLE
 	iftrue .NeutralModePointsAwarded
 
 	; normal mode points awarded
-	readvar VAR_BATTLE_HALL_NORMAL_PONITS
+	readvar VAR_BATTLE_LOBBY_NORMAL_PONITS
 	ifequal 100, .GivePrize
 
-	readvar VAR_BATTLE_HALL_NORMAL_PONITS
+	readvar VAR_BATTLE_LOBBY_NORMAL_PONITS
 	addval 1
-	writevar VAR_BATTLE_HALL_NORMAL_PONITS
+	writevar VAR_BATTLE_LOBBY_NORMAL_PONITS
 	sjump .GivePrize
 
 
 .InverseModePointsAwarded:
-	readvar VAR_BATTLE_HALL_INVERSE_PONITS
+	readvar VAR_BATTLE_LOBBY_INVERSE_PONITS
 	ifequal 100, .GivePrize
 
-	readvar VAR_BATTLE_HALL_INVERSE_PONITS
+	readvar VAR_BATTLE_LOBBY_INVERSE_PONITS
 	addval 1
-	writevar VAR_BATTLE_HALL_INVERSE_PONITS
+	writevar VAR_BATTLE_LOBBY_INVERSE_PONITS
 	sjump .GivePrize
 
 .NeutralModePointsAwarded:
-	readvar VAR_BATTLE_HALL_TYPELESS_PONITS
+	readvar VAR_BATTLE_LOBBY_TYPELESS_PONITS
 	ifequal 100, .GivePrize
 
-	readvar VAR_BATTLE_HALL_TYPELESS_PONITS
+	readvar VAR_BATTLE_LOBBY_TYPELESS_PONITS
 	addval 1
-	writevar VAR_BATTLE_HALL_TYPELESS_PONITS
+	writevar VAR_BATTLE_LOBBY_TYPELESS_PONITS
 	sjump .GivePrize
 
 .AwardHardModePoints:
-	checkevent EVENT_BATTLE_HALL_INVERSE_BATTLE
+	checkevent EVENT_BATTLE_LOBBY_INVERSE_BATTLE
 	iftrue .InverseModeHardModePointsAwarded
-	checkevent EVENT_BATTLE_HALL_TYPELESS_BATTLE
+	checkevent EVENT_BATTLE_LOBBY_TYPELESS_BATTLE
 	iftrue .NeutralModeHardModePointsAwarded
 
 	; normal points awarded
-	readvar VAR_BATTLE_HALL_HARD_MODE_NORMAL_PONITS
+	readvar VAR_BATTLE_LOBBY_HARD_MODE_NORMAL_PONITS
 	ifequal 100, .GivePrize
 
-	readvar VAR_BATTLE_HALL_HARD_MODE_NORMAL_PONITS
+	readvar VAR_BATTLE_LOBBY_HARD_MODE_NORMAL_PONITS
 	addval 1
-	writevar VAR_BATTLE_HALL_HARD_MODE_NORMAL_PONITS
+	writevar VAR_BATTLE_LOBBY_HARD_MODE_NORMAL_PONITS
 	sjump .GivePrize
 
 
 .InverseModeHardModePointsAwarded:
-	readvar VAR_BATTLE_HALL_HARD_MODE_INVERSE_PONITS
+	readvar VAR_BATTLE_LOBBY_HARD_MODE_INVERSE_PONITS
 	ifequal 100, .GivePrize
 
-	readvar VAR_BATTLE_HALL_HARD_MODE_INVERSE_PONITS
+	readvar VAR_BATTLE_LOBBY_HARD_MODE_INVERSE_PONITS
 	addval 1
-	writevar VAR_BATTLE_HALL_HARD_MODE_INVERSE_PONITS
+	writevar VAR_BATTLE_LOBBY_HARD_MODE_INVERSE_PONITS
 	sjump .GivePrize
 
 .NeutralModeHardModePointsAwarded:
-	readvar VAR_BATTLE_HALL_HARD_MODE_TYPELESS_PONITS
+	readvar VAR_BATTLE_LOBBY_HARD_MODE_TYPELESS_PONITS
 	ifequal 100, .GivePrize
 
-	readvar VAR_BATTLE_HALL_HARD_MODE_TYPELESS_PONITS
+	readvar VAR_BATTLE_LOBBY_HARD_MODE_TYPELESS_PONITS
 	addval 1
-	writevar VAR_BATTLE_HALL_HARD_MODE_TYPELESS_PONITS
+	writevar VAR_BATTLE_LOBBY_HARD_MODE_TYPELESS_PONITS
 	sjump .GivePrize
 
 .Declined:
-	writetext BattleHallPleaseComeAgainText
+	writetext BattleLobbyPleaseComeAgainText
 	waitbutton
 	closetext
 	turnobject PLAYER, DOWN
 	end
 
 .GivePrize:
-	writetext BattleHallPrizeText
+	writetext BattleLobbyPrizeText
 	verbosegiveitem CRYSTAL
-	iffalse BattleHallPackFull
-	clearevent EVENT_DID_NOT_GET_BATTLE_HALL_PRIZE
+	iffalse BattleLobbyPackFull
+	clearevent EVENT_DID_NOT_GET_BATTLE_LOBBY_PRIZE
 	closetext
 	end
 
-BattleHallPackFull:
-	setevent EVENT_DID_NOT_GET_BATTLE_HALL_PRIZE
-	writetextend BattleHallFullPackText
+BattleLobbyPackFull:
+	setevent EVENT_DID_NOT_GET_BATTLE_LOBBY_PRIZE
+	writetextend BattleLobbyFullPackText
 
-BattleHallReceptionist_MoveOutTheWay:
+BattleLobbyReceptionist_MoveOutTheWay:
 	step UP
     step RIGHT
     turn_head LEFT
     step_end
 
-BattleHallPlayer_EnterBattleRoom:
+BattleLobbyPlayer_EnterBattleRoom:
 	step UP
 	step UP
 	step UP
@@ -303,9 +303,9 @@ CheckHardModeASM:
     ld [wScriptVar], a
     ret
 
-BattleHallIntroText:
+BattleLobbyIntroText:
 	text "Welcome to the"
-	line "Battle Hall."
+	line "Battle Lobby."
 
 	para "You may fight a"
 	line "random trainer"
@@ -315,44 +315,44 @@ BattleHallIntroText:
 	line "net you a Crystal."
 	done
 
-BattleHallAskWantToBattleText:
+BattleLobbyAskWantToBattleText:
 	text "Would you like to"
 	line "battle?"
 	done
 
-BattleHallPleaseComeAgainText:
+BattleLobbyPleaseComeAgainText:
 	text "Do come again."
 	done
 
-BattleHallReceptionistSaveText:
+BattleLobbyReceptionistSaveText:
 	text "You must save your"
 	line "game. Alright?"
 	done
 
-BattleHallReceptionistGoRightInText:
+BattleLobbyReceptionistGoRightInText:
 	text "Please go right"
 	line "through."
 	done
 
-BattleHallPlayerVictoryText:
+BattleLobbyPlayerVictoryText:
 	text "Player Victory!"
 	done
 
-BattleHallBattleLoseText:
+BattleLobbyBattleLoseText:
 	text "We hope to serve"
 	line "you again."
     done
 
-BattleHallBattleWinText:
+BattleLobbyBattleWinText:
     text "Excellent work!"
     done
 
-BattleHallPrizeText:
+BattleLobbyPrizeText:
     text "Please accept"
     line "this prize."
     done
 
-BattleHallFullPackText:
+BattleLobbyFullPackText:
 	text "Your pack's full."
 	
 	para "Return once you've"
@@ -369,5 +369,5 @@ BattlePlazaBattleLobby_MapEvents:
 	def_bg_events
 
 	def_object_events
-	object_event  3, 10, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, BattleHallReceptionistScript, -1
+	object_event  3, 10, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, BattleLobbyReceptionistScript, -1
 	object_event  4,  3, SPRITE_UNKNOWN, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
