@@ -39,9 +39,10 @@ BattleArenaReceptionistScript:
 	opentext
 	writetext BattleLobbyBattleLoseText
 	waitbutton
-	closetext
 	special LoadPokemonData
 	special HealParty
+	special TryQuickSave
+	closetext
 	end
 
 .win
@@ -56,6 +57,7 @@ BattleArenaReceptionistScript:
 	waitbutton
 	special LoadPokemonData
 	special HealParty
+	special TryQuickSave
 .GivePrize
 	verbosegiveitem CRYSTAL
 	iffalse BattleArenaPackFull
