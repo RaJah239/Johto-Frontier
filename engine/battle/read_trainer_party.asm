@@ -234,6 +234,19 @@ ReadTrainerPartyPieces:
 	jr .evs_done
 
 .auto_evs
+	; check if in battle plaza and
+	; give max evs to all trainer pokemon here
+	ld a, [wMapGroup]
+	ld b, a
+	ld a, [wMapNumber]
+	ld c, a
+	call GetWorldMapLocation
+	cp LANDMARK_BATTLE_PLAZA
+	jr nz, .NotInBattlePlaza
+	ld a, 252
+	jr .write_evs
+
+.NotInBattlePlaza
 	; auto-set all trainer EVs based on badges
     ld hl, wJohtoBadges
 
@@ -274,10 +287,19 @@ ReadTrainerPartyPieces:
     ; fallthrough
 
 .write_evs:
-rept NUM_STATS
-    ld [de], a ; 'a' contains EV value
-    inc de
+;rept NUM_STATS
+;	ld [de], a ; 'a' contains EV value
+;	inc de
+;endr
+
+rept 6
+;	ld a, $ff
+	ld [de], a
+	inc de
+	ld [de], a
+	inc de
 endr
+
     pop hl
 
 .evs_done
