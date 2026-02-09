@@ -23,6 +23,9 @@ MeetRaJaFirstTime:
 	applymovement BATTLEPLAZA_RAJA, BattlePlazaRaJaMovement1
 	opentext
 	writetext BattlePlazaRaJaIntroText
+	promptbutton
+	verbosegiveitem MEMBERS_CARD
+	writetext BattlePlazaRaJaFinishingText
 	waitbutton
 	closetext
 	applymovement BATTLEPLAZA_RAJA, BattlePlazaRaJaMovement2
@@ -84,8 +87,13 @@ BattlePlazaRaJaIntroText:
 	line "want, whenever you"
 	cont "want, if anything"
 	cont "at all!"
+	
+	para "Here's something"
+	line "that's useful here."
+	done
 
-	para "So, with that in"
+BattlePlazaRaJaFinishingText:
+	text "So, with that in"
 	line "mind, feel free to"
 	cont "explore and if you"
 	cont "want, you can drop"
