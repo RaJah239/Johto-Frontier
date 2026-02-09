@@ -13,12 +13,6 @@ BattleLobbyReceptionistScript:
 	iftrue .GivePrize
 	writetext BattleLobbyIntroText
 	promptbutton
-	writetext BattleLobbyAskWantToBattleText
-	yesorno
-	iffalse .Declined
-	writetext BattleLobbyReceptionistSaveText
-	yesorno
-	iffalse .Declined
 	special TryQuickSave
 .ChooseMode
 	loadmenu .BattleLobbyModeTypeSelectionHeader
@@ -28,21 +22,23 @@ BattleLobbyReceptionistScript:
 	ifequal 2, .NormalMode
 	ifequal 3, .InverseMode
 	ifequal 4, .NeutralMode
+	ifequal 5, .Cancel
 	sjump .ChooseMode
 
 .BattleLobbyModeTypeSelectionHeader:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 0, 15, TEXTBOX_Y - 3
+	menu_coords 0, 0, 15, TEXTBOX_Y - 1
 	dw .MenuData
 	db 1 ; default option
 
 .MenuData:
 	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
-	db 4 ; items
+	db 5 ; items
 	db "Previous Mode@"
 	db "Normal Mode@"
 	db "Inverse Mode@"
 	db "Neutral Mode@"
+	db "Cancel@"
 
 .InverseMode:
 	setevent EVENT_BATTLE_LOBBY_INVERSE_BATTLE
@@ -251,7 +247,7 @@ BattleLobbyReceptionistScript:
 	writevar VAR_BATTLE_LOBBY_HARD_MODE_TYPELESS_PONITS
 	sjump .GivePrize
 
-.Declined:
+.Cancel:
 	writetext BattleLobbyPleaseComeAgainText
 	waitbutton
 	closetext
@@ -304,29 +300,12 @@ CheckHardModeASM:
     ret
 
 BattleLobbyIntroText:
-	text "Welcome to the"
-	line "Battle Lobby."
-
-	para "You may fight a"
-	line "random trainer"
-	cont "here."
-
-	para "Each victory will"
-	line "net you a Crystal."
-	done
-
-BattleLobbyAskWantToBattleText:
-	text "Would you like to"
-	line "battle?"
+	text "Battle Lobby"
+	line "Welcomes you!"
 	done
 
 BattleLobbyPleaseComeAgainText:
 	text "Do come again."
-	done
-
-BattleLobbyReceptionistSaveText:
-	text "You must save your"
-	line "game. Alright?"
 	done
 
 BattleLobbyReceptionistGoRightInText:
@@ -359,6 +338,18 @@ BattleLobbyFullPackText:
 	line "made space for it."
 	done
 
+BattleLobbyRulesSign:
+	jumptext BattleLobbyRulesSignText
+
+BattleLobbyRulesSignText:
+	text "You may fight a"
+	line "random trainer"
+	cont "here."
+
+	para "Each victory will"
+	line "net you a Crystal."
+	done
+
 BattlePlazaBattleLobby_MapEvents:
 	def_warp_events
 	warp_event  4, 13, BATTLE_PLAZA, 7
@@ -367,6 +358,7 @@ BattlePlazaBattleLobby_MapEvents:
 	def_coord_events
 
 	def_bg_events
+	bg_event  2, 10, BGEVENT_READ, BattleLobbyRulesSign
 
 	def_object_events
 	object_event  3, 10, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, BattleLobbyReceptionistScript, -1
