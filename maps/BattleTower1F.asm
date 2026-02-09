@@ -55,20 +55,10 @@ BattleTower1FReceptionistScript:
 
 Script_Menu_ChallengeExplanationCancel:
 	writetext Text_WantToGoIntoABattleRoom
-	checkevent EVENT_BATTLE_TOWER_TYPE_MODES_UNLOCKED
-	iffalse .NoSettings
 	setval FALSE
 	special Menu_ChallengeExplanationCancel
 	ifequal 1, Script_ChooseChallenge
-	ifequal 2, Script_BattleTowerExplanation
-	ifequal 3, Script_BattleTowerSettings
-	sjump Script_BattleTowerHopeToServeYouAgain
-
-.NoSettings:
-	setval TRUE
-	special Menu_ChallengeExplanationCancel
-	ifequal 1, Script_ChooseChallenge
-	ifequal 2, Script_BattleTowerExplanation
+	ifequal 2, Script_BattleTowerSettings
 	sjump Script_BattleTowerHopeToServeYouAgain
 
 Script_ChooseChallenge:
@@ -689,12 +679,10 @@ Text_BattleTowerExplanation:
 
 	para "Countless #mon"
 	line "trainers gather"
-
-	para "from all over to"
-	line "hold battles in"
-
-	para "specially designed"
-	line "Battle Rooms."
+	cont "from all over to"
+	cont "hold battles in"
+	cont "specially designed"
+	cont "Battle Rooms."
 
 	para "There are many"
 	line "Battle Rooms in"
@@ -708,14 +696,10 @@ Text_BattleTowerExplanation:
 
 	para "To interrupt a"
 	line "session, you must"
-
-	para "Save. If not, you"
-	line "won't be able to"
-
-	para "resume your"
-	line "challenge."
-
-	para ""
+	cont "Save. If not, you"
+	cont "won't be able to"
+	cont "resume your"
+	cont "challenge."
 	done
 
 BattleTower1F_MapEvents:

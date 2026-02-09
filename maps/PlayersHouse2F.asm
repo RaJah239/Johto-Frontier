@@ -253,9 +253,6 @@ if DEF(_DEBUG)
 	giveitem SAND_SHARD, MAX_ITEM_STACK
 	giveitem FROST_SHARD, MAX_ITEM_STACK
 
-	; events
-	setevent EVENT_BATTLE_TOWER_TYPE_MODES_UNLOCKED
-
 	; intro events
 	addcellnum PHONE_MOM
 	setmapscene PLAYERS_HOUSE_1F, $1

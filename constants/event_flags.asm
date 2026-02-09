@@ -353,7 +353,6 @@
 	const EVENT_NATIONAL_PARK_GHOLDENGO
 	const EVENT_BATTLE_TOWER_INVERSE_MODE
  	const EVENT_BATTLE_TOWER_TYPELESS_MODE
-	const EVENT_BATTLE_TOWER_TYPE_MODES_UNLOCKED
 	const EVENT_BATTLE_POINTS_UNLOCKED
 
 ; volatile ability events
@@ -404,7 +403,7 @@
 
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 210 events
+; Unused: next 211 events
 
 	const_next 600
 ; Kurt Apricorn events
