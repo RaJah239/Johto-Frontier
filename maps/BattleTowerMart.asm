@@ -661,10 +661,10 @@ BattleTowerMartTutorMoveText:
 BattleTowerMart_MapEvents:
 
     def_warp_events
-    warp_event  4,  9, BATTLE_TOWER_1F, 4
-    warp_event 12,  9, BATTLE_TOWER_1F, 5
-    warp_event  3,  9, BATTLE_TOWER_1F, 4
-    warp_event 11,  9, BATTLE_TOWER_1F, 5
+    warp_event  4,  9, BATTLE_PLAZA, 10
+    warp_event 12,  9, BATTLE_PLAZA, 11
+    warp_event  3,  9, BATTLE_PLAZA, 10
+    warp_event 11,  9, BATTLE_PLAZA, 11
     def_coord_events
 
     def_bg_events

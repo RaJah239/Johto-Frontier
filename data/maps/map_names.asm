@@ -898,7 +898,7 @@ Battle_Plaza_Name3: ; map_const OAKS_LAB ;  6  ; 14
 Battle_Plaza_Name4: ; map_const BATTLE_TOWER_1F ; 11
 	db "Battle Tower 1F@"
 Battle_Plaza_Name5: ; map_const BATTLE_TOWER_MART ; Crystal Trove
-	db "Battle Tower Mart@"
+	db "Battle Plaza Mart@"
 Battle_Plaza_Name6: ; map_const BATTLE_TOWER_ELEVATOR ; 13
 	db "Battle Tower Lift@"
 Battle_Plaza_Name7: ; map_const BATTLE_TOWER_HALLWAY, ; 14
