@@ -651,11 +651,11 @@ Text_BattleTower_LeftWithoutSaving:
 	para "I'm awfully sorry,"
 	line "but your challenge"
 	cont "will be declared"
-	cont "invalid and your"
-	cont "Streak has been"
-	cont "set to zero."
-
-	para "Have a nice day."
+	cont "invalid."
+	
+	para "I hope you didn't"
+	line "reset to stave off"
+	cont "a loss…"
 	done
 
 Text_YourMonWillBeHealedToFullHealth:
