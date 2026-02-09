@@ -3191,15 +3191,7 @@ wOaksLab::                                        db ; Nayru62's scene in Oak's 
 wRoute23::                                        db
 wBattlePlaza::                                    db
 
-	ds 151
-
-; battle hall points
-wBattleLobbyNormalPoints:: db
-wBattleLobbyInversePoints:: db
-wBattleLobbyTypelessPoints:: db
-wBattleLobbyHardModeNormalPoints:: db
-wBattleLobbyHardModeInversePoints:: db
-wBattleLobbyHardModeTypelessPoints:: db
+	ds 157
 
 ; battle tower points
 wBattleTowerNormalPoints:: db
