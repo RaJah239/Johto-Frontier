@@ -129,6 +129,12 @@ BattlePlazaBattleTowerSign:
 
 BattlePlazaBattleTowerSignText:
 	text "Battle Tower"
+
+	para "Ultimate Trainer"
+	line "Challenge!"
+
+	para "Aim for a 100"
+	line "win streak!"
 	done
 
 BattlePlazaProOaksLabSign:
