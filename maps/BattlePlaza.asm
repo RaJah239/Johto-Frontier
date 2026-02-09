@@ -123,6 +123,10 @@ BattlePlazaBattleLobbyHouseSign:
 
 BattlePlazaBattleLobbyHouseSignText:
 	text "Battle Lobby"
+
+	para "Challenge random"
+	line "trainers at their"
+	cont "best!"
 	done
 
 BattlePlazaDraftArenaSign:
@@ -130,6 +134,10 @@ BattlePlazaDraftArenaSign:
 
 BattlePlazaDraftArenaSignText:
 	text "Draft Arena"
+	
+	para "Battle with your"
+	line "own or other's"
+	cont "#mon!"
 	done
 
 BattlePlazaBattleTowerSign:
@@ -150,6 +158,27 @@ BattlePlazaProOaksLabSign:
 
 BattlePlazaProOaksLabSignText:
 	text "Prof. Oak's Lab"
+	done
+
+BattlePlazaMartSign:
+	jumptext BattlePlazaMartSignText
+
+BattlePlazaMartSignText:
+	text "Battle Plaza Mart"
+
+	para "We fulfill all"
+	line "battling needs!"
+	done
+
+BattlePlazaSign:
+	jumptext BattlePlazaSignText
+
+BattlePlazaSignText:
+	text "Battle Plaza"
+
+	para "Hub for trainers"
+	line "seeking endless"
+	cont "battling fun!"
 	done
 
 BattlePlaza_MapEvents:
@@ -175,6 +204,8 @@ BattlePlaza_MapEvents:
 	bg_event 11, 12, BGEVENT_READ, BattlePlazaDraftArenaSign
 	bg_event 22, 10, BGEVENT_READ, BattlePlazaBattleTowerSign
 	bg_event  4, 20, BGEVENT_READ, BattlePlazaProOaksLabSign
+	bg_event 11, 20, BGEVENT_READ, BattlePlazaMartSign
+	bg_event 20, 14, BGEVENT_READ, BattlePlazaSign
 
 	def_object_events
 	object_event 11, 14, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MET_RAJA
