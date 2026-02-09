@@ -3193,10 +3193,10 @@ wBattlePlaza::                                    db
 
 	ds 151
 
+; battle hall points
 wBattleHallNormalPoints:: db
 wBattleHallInversePoints:: db
 wBattleHallTypelessPoints:: db
-
 wBattleHallHardModeNormalPoints:: db
 wBattleHallHardModeInversePoints:: db
 wBattleHallHardModeTypelessPoints:: db

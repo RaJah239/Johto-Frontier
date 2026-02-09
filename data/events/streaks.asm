@@ -44,7 +44,7 @@ UpdateMemberCardPageText:
 	ld de, MemberCardMainText.page4
 	call PlaceString
 	ld de, MemberCardMainText.page4_content
-	jr .done
+	; fallthrough
 
 .done
 	hlcoord 1, 16
@@ -64,7 +64,7 @@ MemberCardMainText:
 .page3:
 	db "◀ Page  3/4  ▶@"
 .page3_content:
-	db "  Dragon Type @"
+	db "   Battle Hall     @"
 
 .page4:
 	db "◀ Page  4/4  ▶@"
@@ -158,7 +158,7 @@ MemberCardLeftPress:
 .jump_to_page_4:
 	call DecreaseMemberCardPage
 	call UpdateMemberCardPageText
-	jmp BattleDraftStreakCard
+	jmp BattleHallStreakCard
 
 .jump_to_page_1:
 	call DecreaseMemberCardPage
@@ -173,7 +173,7 @@ MemberCardLeftPress:
 .jump_to_page_3:
 	call DecreaseMemberCardPage
 	call UpdateMemberCardPageText
-	jmp BattleDraftStreakCard
+	jmp BattleHallStreakCard
 
 ; ========================
 ; Right button navigation
@@ -205,7 +205,7 @@ MemberCardRightPress:
 .jump_to_page_3:
 	call IncreaseMemberCardPage
 	call UpdateMemberCardPageText
-	jmp BattleDraftStreakCard
+	jmp BattleHallStreakCard
 
 .jump_to_page_4:
 	call IncreaseMemberCardPage
@@ -305,8 +305,7 @@ BattleTowerStreakCard:
 	ld de, wBattleTowerHardModeTypelessPoints
 	hlcoord 14, 13
 	lb bc, 1, 3
-	call PrintNum
-	ret
+	jmp PrintNum
 
 .FacilityString:
 	db " <physical> Battle Tower <physical>@"
@@ -395,8 +394,7 @@ BattleTowerMirrorModeStreakCard:
 	ld de, wBattleTowerMirrorModeHardModeTypelessPoints
 	hlcoord 14, 13
 	lb bc, 1, 3
-	call PrintNum
-	ret
+	jmp PrintNum
 
 .FacilityString1:
 	db " <physical> Battle Tower <physical>@"
@@ -413,7 +411,7 @@ BattleTowerMirrorModeStreakCard:
 .NeutralModeString:
 	db "Neutral Mode@"
 
-BattleDraftStreakCard:
+BattleHallStreakCard:
 	hlcoord 0, 0
 	lb bc, 14, 18
 	call Textbox
@@ -422,63 +420,81 @@ BattleDraftStreakCard:
 	hlcoord 1, 1
 	call PlaceString
 
-	ld de, .AttackerString
+	ld de, .RegularModeString
 	hlcoord 1, 3
 	call PlaceString
 
-	ld de, .AttackerStringZeroDamage
-	hlcoord 1, 4
+	ld de, .NormalModeString
+	hlcoord 2, 5
 	call PlaceString
 
-	ld de, .AttackerStringHalfDamage
-	hlcoord 1, 5
+	ld de, wBattleHallNormalPoints
+	hlcoord 14, 5
+	lb bc, 1, 3
+	call PrintNum
+
+	ld de, .InverseModeString
+	hlcoord 2, 6
 	call PlaceString
 
-	ld de, .AttackerStringDoubleDamage
-	hlcoord 1, 6
+	ld de, wBattleHallInversePoints
+	hlcoord 14, 6
+	lb bc, 1, 3
+	call PrintNum
+
+	ld de, .NeutralModeString
+	hlcoord 2, 7
 	call PlaceString
 
-	ld de, .DefenderString
-	hlcoord 1, 8
-	call PlaceString
+	ld de, wBattleHallTypelessPoints
+	hlcoord 14, 7
+	lb bc, 1, 3
+	call PrintNum
 
-	ld de, .DefenderStringHalfDamage1
+	ld de, .HardModeString
 	hlcoord 1, 9
 	call PlaceString
 
-	ld de, .DefenderStringHalfDamage2
-	hlcoord 1, 10
+	ld de, .NormalModeString
+	hlcoord 2, 11
 	call PlaceString
 
-	ld de, .DefenderStringDoubleDamage1
-	hlcoord 1, 11
+	ld de, wBattleHallHardModeNormalPoints
+	hlcoord 14, 11
+	lb bc, 1, 3
+	call PrintNum
+
+	ld de, .InverseModeString
+	hlcoord 2, 12
 	call PlaceString
 
-	ld de, .DefenderStringDoubleDamage2
-	hlcoord 1, 12
-	jmp PlaceString
+	ld de, wBattleHallHardModeInversePoints
+	hlcoord 14, 12
+	lb bc, 1, 3
+	call PrintNum
+
+
+	ld de, .NeutralModeString
+	hlcoord 2, 13
+	call PlaceString
+
+	ld de, wBattleHallHardModeTypelessPoints
+	hlcoord 14, 13
+	lb bc, 1, 3
+	jmp PrintNum
 
 .FacilityString:
-	db "Dragon Type@"
-.AttackerString:
-	db "Attacker:@"
-.AttackerStringZeroDamage:
-	db "0× Fairy@"
-.AttackerStringHalfDamage:
-	db "<half>× Steel@"
-.AttackerStringDoubleDamage:
-	db "2× Dragon@"
-
-.DefenderString:
-	db "Defender:@"
-.DefenderStringHalfDamage1:
-	db "<half>× Fire/Electric/@"
-.DefenderStringHalfDamage2:
-	db "   Water/Grass@"
-.DefenderStringDoubleDamage1:
-	db "2× Ice/Fiary/@"
-.DefenderStringDoubleDamage2:
-	db "   Dragon@"
+	db " <physical> Battle Hall <physical>@"
+.RegularModeString:
+	db " - Regular Mode -@"
+.HardModeString:
+	db "  - Hard Mode -@"
+.NormalModeString:
+	db "Normal Mode@"
+.InverseModeString:
+	db "Inverse Mode@"
+.NeutralModeString:
+	db "Neutral Mode@"
 
 LastStreakCard:
 	hlcoord 0, 0
