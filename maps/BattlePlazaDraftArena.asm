@@ -634,7 +634,7 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .LanceEnemy:
-	writetext PlayAgainstOakText
+	writetext PlayAgainstLanceText
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer CHAMPION, LANCE
