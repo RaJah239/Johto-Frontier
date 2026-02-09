@@ -111,15 +111,32 @@ Script_FailedBattleTowerChallenge:
 	setval BATTLETOWERACTION_CHALLENGECANCELED
 	special BattleTowerAction
 
+	; determine mirror mode first
 	callasm CheckCopyEnemyPartyFlag
-	ifequal 1, .ResetBattleTowerMirrorModePointsScript
+	iftrue .mirror_mode
 
-	; check if hard mode was on
-    callasm CheckHardModeASM
-	iftrue .SetBattleTowerHardModePointsToZero
+.normal_mode
+	callasm CheckHardModeASM
+	iftrue .normal_hard
 
 	callasm ResetBattleTowerPoints
-.finish_setting_battle_points_to_zero
+	sjump .finish
+
+.normal_hard
+	callasm ResetHardModeBattleTowerPoints
+	sjump .finish
+
+.mirror_mode
+	callasm CheckHardModeASM
+	iftrue .mirror_hard
+
+	callasm ResetBattleTowerMirrorModePoints
+	sjump .finish
+
+.mirror_hard
+	callasm ResetBattleTowerMirrorModeHardModePoints
+
+.finish
 	; give back player their party
 	setval 0
 	writemem wCopyEnemyParty
@@ -127,22 +144,6 @@ Script_FailedBattleTowerChallenge:
 	opentext
 	special TryQuickSave
 	writetextend Text_ThanksForVisiting
-
-.SetBattleTowerHardModePointsToZero
-	callasm ResetHardModeBattleTowerPoints
-	sjump .finish_setting_battle_points_to_zero
-
-.ResetBattleTowerMirrorModePointsScript:
-	; check if hard mode was on
-    callasm CheckHardModeASM
-	iftrue .SetBattleTowerMirrorModeHardModePointsToZero
-
-	callasm ResetBattleTowerMirrorModePoints
-	sjump .finish_setting_battle_points_to_zero
-
-.SetBattleTowerMirrorModeHardModePointsToZero
-	callasm ResetBattleTowerMirrorModeHardModePoints
-	sjump .finish_setting_battle_points_to_zero
 
 ResetBattleTowerMirrorModePoints:
 	; determine mode and pick WRAM pointer
