@@ -367,17 +367,20 @@ ToxicPoison:
 
 ; used by trainer SELF to set DVS in bc
 SetUpSelfDVs:
-    ld a, [wOtherTrainerClass]
-    cp CAL
-    jr nz, .notSelf
-    ld a, [wCurPartyMon]
+	ld a, [wOtherTrainerClass]
+	cp CAL
+	jr z, .self
+	cp CAL_F
+	jr nz, .notSelf
+.self
+	ld a, [wCurPartyMon]
 	ld hl, wOTPartyMon1DVs
 	call GetPartyLocation
 	ld b, [hl]
 	inc hl
 	ld c, [hl]
 .notSelf
-    ret
+	ret
 
 GetWeatherImage:
 	ld a, [wBattleWeather]

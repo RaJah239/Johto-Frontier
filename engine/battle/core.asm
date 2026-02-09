@@ -8177,7 +8177,10 @@ InitEnemyTrainer:
 
 	ld a, [wOtherTrainerClass]
 	cp CAL
+	jr z, .self
+	cp CAL_F
 	jr nz, .notCal
+.self
 	callfar ReadPlayerPartyAsTrainerParty
 	jr .ok
 .notCal
