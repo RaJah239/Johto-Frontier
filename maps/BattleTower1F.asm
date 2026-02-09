@@ -51,7 +51,7 @@ BattleTower1FReceptionistScript:
 	setval BATTLETOWERACTION_CHECK_EXPLANATION_READ ; if new save file: bit 1, [sBattleTowerSaveFileFlags]
 	special BattleTowerAction
 	ifnotequal $0, Script_Menu_ChallengeExplanationCancel
-	sjump Script_BattleTowerIntroductionYesNo
+	sjump Script_BattleTowerExplanation
 
 Script_Menu_ChallengeExplanationCancel:
 	writetext Text_WantToGoIntoABattleRoom
@@ -361,13 +361,8 @@ Script_YourPackIsStuffedFull:
 	closetext
 	end
 
-Script_BattleTowerIntroductionYesNo:
-	writetext Text_WouldYouLikeToHearAboutTheBattleTower
-	yesorno
-	iffalse Script_BattleTowerSkipExplanation
 Script_BattleTowerExplanation:
-	writetext Text_BattleTowerIntroduction_2
-Script_BattleTowerSkipExplanation:
+	writetext Text_BattleTowerExplanation
 	setval BATTLETOWERACTION_SET_EXPLANATION_READ
 	special BattleTowerAction
 	sjump Script_Menu_ChallengeExplanationCancel
@@ -537,42 +532,6 @@ Text_RightThisWayToYourBattleRoom:
 	line "your Battle Room."
 	done
 
-Text_BattleTowerIntroduction_2:
-	text "Battle Tower is a"
-	line "facility made for"
-	cont "#mon battles."
-
-	para "Countless #mon"
-	line "trainers gather"
-
-	para "from all over to"
-	line "hold battles in"
-
-	para "specially designed"
-	line "Battle Rooms."
-
-	para "There are many"
-	line "Battle Rooms in"
-	cont "the Battle Tower."
-
-	para "Each room holds"
-	line "three trainers."
-
-	para "Beat them all, and"
-	line "win 3× Crystals."
-
-	para "To interrupt a"
-	line "session, you must"
-
-	para "Save. If not, you"
-	line "won't be able to"
-
-	para "resume your"
-	line "challenge."
-
-	para ""
-	done
-
 Text_ThanksForVisiting:
 	text "Thanks for"
 	line "visiting!"
@@ -613,12 +572,6 @@ Text_WeHopeToServeYouAgain:
 Text_PleaseStepThisWay:
 	text "Please step this"
 	line "way."
-	done
-
-Text_WouldYouLikeToHearAboutTheBattleTower:
-	text "Would you like to"
-	line "hear about the"
-	cont "Battle Tower?"
 	done
 
 Text_BattleTower_AskTypesMode:
@@ -726,8 +679,44 @@ Text_BattleTowerBugCatcher:
 	line "any fire #mon…"
 	done
 
-BattleTower1FStreakSign:
-	end
+BattleTower1FNoteSign:
+	jumptext Text_BattleTowerExplanation
+
+Text_BattleTowerExplanation:
+	text "Battle Tower is a"
+	line "facility made for"
+	cont "#mon battles."
+
+	para "Countless #mon"
+	line "trainers gather"
+
+	para "from all over to"
+	line "hold battles in"
+
+	para "specially designed"
+	line "Battle Rooms."
+
+	para "There are many"
+	line "Battle Rooms in"
+	cont "the Battle Tower."
+
+	para "Each room holds"
+	line "three trainers."
+
+	para "Beat them all, and"
+	line "win 3× Crystals."
+
+	para "To interrupt a"
+	line "session, you must"
+
+	para "Save. If not, you"
+	line "won't be able to"
+
+	para "resume your"
+	line "challenge."
+
+	para ""
+	done
 
 BattleTower1F_MapEvents:
 	def_warp_events
@@ -738,7 +727,7 @@ BattleTower1F_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  6,  6, BGEVENT_READ, BattleTower1FStreakSign
+	bg_event  6,  6, BGEVENT_READ, BattleTower1FNoteSign
 
 	def_object_events
 	object_event  7,  6, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BattleTower1FReceptionistScript, -1
