@@ -353,5 +353,6 @@ INCLUDE "maps/BattlePlaza.asm"
 INCLUDE "maps/BattlePlazaRaJaHouse.asm"
 INCLUDE "maps/BattlePlazaBattleLobby.asm"
 INCLUDE "maps/BattlePlazaDraftArena.asm"
+INCLUDE "maps/BattlePlazaEchoChamber.asm"
 
 ENDSECTION

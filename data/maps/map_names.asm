@@ -376,6 +376,7 @@ Battle_Plaza_Names:
 	dw Battle_Plaza_Name9 ; map_const BATTLE_PLAZA_RAJA_HOUSE ; 9
 	dw Battle_Plaza_Name10 ; map_const BATTLE_PLAZA_BATTLE_LOBBY ; 10
 	dw Battle_Plaza_Name11 ; map_const BATTLE_PLAZA_DRAFT_ARENA ; 11
+	dw Battle_Plaza_Name12 ; map_const BATTLE_PLAZA_ECHO_CHAMBER ; 12
 	assert_table_length NUM_BATTLE_PLAZA_MAPS
 
 ; MAX LENGTH: 17
@@ -911,3 +912,5 @@ Battle_Plaza_Name10: ; map_const BATTLE_PLAZA_BATTLE_LOBBY
 	db "Battle Lobby@"
 Battle_Plaza_Name11: ; map_const BATTLE_PLAZA_DRAFT_ARENA
 	db "Draft Arena@"
+Battle_Plaza_Name12: ; map_const BATTLE_PLAZA_ECHO_CHAMBER
+	db "Echo Chamber"

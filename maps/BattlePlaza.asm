@@ -181,6 +181,15 @@ BattlePlazaSignText:
 	cont "battling fun!"
 	done
 
+BattlePlazaEchoChamberSign:
+	jumptext BattlePlazaEchoChamberSignText
+
+BattlePlazaEchoChamberSignText:
+	text "Echo Chamber"
+
+	para "Face yourself!"
+	done
+
 BattlePlaza_MapEvents:
 	def_warp_events
 	warp_event  5, 13, BATTLE_PLAZA_MAGNET_TRAIN_STATION, 1
@@ -194,6 +203,8 @@ BattlePlaza_MapEvents:
 	warp_event 15, 13, BATTLE_PLAZA_DRAFT_ARENA, 1
 	warp_event 13, 19, BATTLE_PLAZA_MART, 1
 	warp_event 17, 19, BATTLE_PLAZA_MART, 4
+	warp_event 24, 19, BATTLE_PLAZA_ECHO_CHAMBER, 2
+	warp_event 25, 19, BATTLE_PLAZA_ECHO_CHAMBER, 1
 
 	def_coord_events
 
@@ -206,6 +217,7 @@ BattlePlaza_MapEvents:
 	bg_event  4, 20, BGEVENT_READ, BattlePlazaProOaksLabSign
 	bg_event 11, 20, BGEVENT_READ, BattlePlazaMartSign
 	bg_event 20, 14, BGEVENT_READ, BattlePlazaSign
+	bg_event 28, 18, BGEVENT_READ, BattlePlazaEchoChamberSign
 
 	def_object_events
 	object_event 11, 14, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MET_RAJA
