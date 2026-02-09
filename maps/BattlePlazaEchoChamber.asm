@@ -1,11 +1,24 @@
 	object_const_def
 	const BATTLEPLAZAECHOCHAMBER_RECEPTIONIST
-	const BATTLEPLAZAECHOCHAMBER_ENEMY
+	const BATTLEPLAZAECHOCHAMBER_CHRIS
+	const BATTLEPLAZAECHOCHAMBER_KRIS
 
 BattlePlazaEchoChamber_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
+	callback MAPCALLBACK_OBJECTS, ChrisAndKrissCallback
+
+ChrisAndKrissCallback:
+;.Chris
+	checkflag ENGINE_PLAYER_IS_FEMALE
+	iftrue .Kris
+	appear BATTLEPLAZAECHOCHAMBER_CHRIS
+    endcallback
+
+.Kris
+	appear BATTLEPLAZAECHOCHAMBER_KRIS
+    endcallback
 
 EchoChamberReceptionistScript:
 	opentext
@@ -21,11 +34,22 @@ EchoChamberReceptionistScript:
 
 	applymovement BATTLEPLAZAECHOCHAMBER_RECEPTIONIST, BattleLobbyReceptionist_MoveOutTheWay
 	applymovement PLAYER, BattleLobbyPlayer_EnterBattleRoom
+
 	winlosstext BattleLobbyPlayerVictoryText, 0
+
+	checkflag ENGINE_PLAYER_IS_FEMALE
+	iftrue .Female
 
 	loadtrainer CAL, CAL1
 	startbattle
 	ifequal WIN, .win
+	sjump .continue_battle
+
+.Female
+	loadtrainer CAL_F, CAL_F1
+	startbattle
+	ifequal WIN, .win
+.continue_battle
 	dontrestartmapmusic
 	reloadmap
 	pause 15
@@ -78,8 +102,19 @@ EchoChamberIntroText:
 	line "welcomes you!"
 
 	para "Would you like to"
-	line "battle a copy of"
-	cont "your own team?"
+	line "make an attempt?"
+	done
+
+EchoChamberInfoSign:
+	jumptext EchoChamberInfoSignText
+
+EchoChamberInfoSignText:
+	text "You may fight a"
+	line "copy of your own"
+	cont "team here."
+
+	para "Each victory nets"
+	line "an Amulet Coin."
 	done
 
 BattlePlazaEchoChamber_MapEvents:
@@ -90,7 +125,9 @@ BattlePlazaEchoChamber_MapEvents:
 	def_coord_events
 
 	def_bg_events
+	bg_event  2, 10, BGEVENT_READ, EchoChamberInfoSign
 
 	def_object_events
 	object_event  3, 10, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, EchoChamberReceptionistScript, -1
-	object_event  4,  3, SPRITE_UNKNOWN, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
+	object_event  4,  3, SPRITE_CHRIS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MIRROR_CHRIS
+	object_event  4,  3, SPRITE_KRIS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MIRROR_KRIS

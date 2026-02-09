@@ -220,8 +220,8 @@
 	const EVENT_RESTORED_POWER_TO_KANTO
 	const EVENT_GOT_START_MENU_WARP
 	const EVENT_DID_NOT_GET_ECHO_CHAMBER_PRIZE
-	const_skip
-	const_skip
+	const EVENT_MIRROR_CHRIS
+	const EVENT_MIRROR_KRIS
 	const_skip
 	const_skip
 	const_skip
