@@ -183,7 +183,7 @@ ItemNames::
 	li "Type Codex"
 	li "Grip Claw"
 	li "Catch Charm"
-	li "?"
+	li "Member's Card"
 	li "?"
 	li "?"
 	li "?"

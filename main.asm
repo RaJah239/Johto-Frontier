@@ -822,3 +822,6 @@ INCLUDE "engine/abilities/effective_defensive_abilities.asm"
 SECTION "Knock Out Abilities", ROMX
 
 INCLUDE "engine/abilities/knock_out_abilities.asm"
+
+SECTION "Winning Streaks", ROMX
+INCLUDE "data/events/streaks.asm"

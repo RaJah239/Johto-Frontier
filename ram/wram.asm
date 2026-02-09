@@ -3191,7 +3191,7 @@ wOaksLab::                                        db ; Nayru62's scene in Oak's 
 wRoute23::                                        db
 wBattlePlaza::                                    db
 
-	ds 165
+	ds 151
 
 wBattleHallNormalPoints:: db
 wBattleHallInversePoints:: db
@@ -3201,7 +3201,26 @@ wBattleHallHardModeNormalPoints:: db
 wBattleHallHardModeInversePoints:: db
 wBattleHallHardModeTypelessPoints:: db
 
+; battle tower points
+wBattleTowerNormalPoints:: db
+wBattleTowerInversePoints:: db
+wBattleTowerTypelessPoints:: db
+wBattleTowerHardModeNormalPoints:: db
+wBattleTowerHardModeInversePoints:: db
+wBattleTowerHardModeTypelessPoints:: db
+
+; battle tower mirror mode points
+wBattleTowerMirrorModeNormalPoints:: db
+wBattleTowerMirrorModeInversePoints:: db
+wBattleTowerMirrorModeTypelessPoints:: db
+wBattleTowerMirrorModeHardModeNormalPoints:: db
+wBattleTowerMirrorModeHardModeInversePoints:: db
+wBattleTowerMirrorModeHardModeTypelessPoints:: db
+
 wChartScrollDelay:: db
+
+wMemberCard:: db
+wMemberCardDelay:: db
 
 wBattlePoints:: db
 

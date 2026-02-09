@@ -189,7 +189,7 @@
 	const TYPE_CODEX   ; be
 	const GRIP_CLAW    ; c3
  	const CATCH_CHARM  ; dc
- 	const ITEM_DE
+ 	const MEMBERS_CARD
  	const ITEM_DF
  	const ITEM_E0
  	const ITEM_E1

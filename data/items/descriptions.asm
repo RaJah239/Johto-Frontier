@@ -184,7 +184,7 @@ ItemDescriptions:
 	dw TypeCodexDesc
 	dw GripClawDesc
  	dw CatchCharmDesc
-	dw TeruSama26Desc
+	dw MembersCardDesc
 	dw TeruSama26Desc
 	dw TeruSama26Desc
 	dw TeruSama26Desc
@@ -1006,6 +1006,10 @@ GripClawDesc:
 CatchCharmDesc:
 	db   "Doubles catch rate"
 	next "of statused foes.@"
+
+MembersCardDesc:
+	db   "Displays Battle"
+	next "Plaza's streaks.@"
 
 TeruSama26Desc:
 TeruSama27Desc:

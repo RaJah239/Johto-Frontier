@@ -19,7 +19,7 @@ BattleTowerBattleRoomNoopScene:
 
 Script_BattleRoom:
 	applymovement PLAYER, MovementData_BattleTowerBattleRoomPlayerWalksIn
-; beat all 7 opponents in a row
+; beat all 3 opponents in a row
 Script_BattleRoomLoop:
 	setval BATTLETOWERBATTLEROOM_YOUNGSTER
 	special LoadOpponentTrainerAndPokemonWithOTSprite
@@ -105,32 +105,149 @@ Script_DontSaveAndEndTheSession:
 	sjump Script_BattleTowerHopeToServeYouAgain
 
 Script_FailedBattleTowerChallenge:
-	setval 0
-	writemem wCopyEnemyParty
 	pause 30
 	special BattleTowerFade
 	warpfacing UP, BATTLE_TOWER_1F, 7, 7
 	setval BATTLETOWERACTION_CHALLENGECANCELED
 	special BattleTowerAction
+
+	callasm CheckCopyEnemyPartyFlag
+	ifequal 1, .ResetBattleTowerMirrorModePointsScript
+
+	; check if hard mode was on
+    callasm CheckHardModeASM
+	iftrue .SetBattleTowerHardModePointsToZero
+
+	callasm ResetBattleTowerPoints
+.finish_setting_battle_points_to_zero
+	; give back player their party
+	setval 0
+	writemem wCopyEnemyParty
+
 	opentext
-	writetext Text_ThanksForVisiting
-	waitbutton
-	closetext
-	end
+	special TryQuickSave
+	writetextend Text_ThanksForVisiting
+
+.SetBattleTowerHardModePointsToZero
+	callasm ResetHardModeBattleTowerPoints
+	sjump .finish_setting_battle_points_to_zero
+
+.ResetBattleTowerMirrorModePointsScript:
+	; check if hard mode was on
+    callasm CheckHardModeASM
+	iftrue .SetBattleTowerMirrorModeHardModePointsToZero
+
+	callasm ResetBattleTowerMirrorModePoints
+	sjump .finish_setting_battle_points_to_zero
+
+.SetBattleTowerMirrorModeHardModePointsToZero
+	callasm ResetBattleTowerMirrorModeHardModePoints
+	sjump .finish_setting_battle_points_to_zero
+
+ResetBattleTowerMirrorModePoints:
+	; determine mode and pick WRAM pointer
+	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
+	jr nz, .inverse
+
+	CheckEventFlag EVENT_BATTLE_TOWER_TYPELESS_MODE
+	jr nz, .typeless
+
+.normal
+	ld hl, wBattleTowerMirrorModeNormalPoints
+	jr .set_zero
+
+.inverse
+	ld hl, wBattleTowerMirrorModeInversePoints
+	jr .set_zero
+
+.typeless
+	ld hl, wBattleTowerMirrorModeTypelessPoints
+
+.set_zero
+	ld a, 0
+	ld [hl], a
+	ret
+
+ResetBattleTowerPoints:
+	; determine mode and pick WRAM pointer
+	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
+	jr nz, .inverse
+
+	CheckEventFlag EVENT_BATTLE_TOWER_TYPELESS_MODE
+	jr nz, .typeless
+
+.normal
+	ld hl, wBattleTowerNormalPoints
+	jr .set_zero
+
+.inverse
+	ld hl, wBattleTowerInversePoints
+	jr .set_zero
+
+.typeless
+	ld hl, wBattleTowerTypelessPoints
+
+.set_zero
+	ld a, 0
+	ld [hl], a
+	ret
+
+ResetBattleTowerMirrorModeHardModePoints:
+	; determine mode and pick WRAM pointer
+	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
+	jr nz, .inverse
+
+	CheckEventFlag EVENT_BATTLE_TOWER_TYPELESS_MODE
+	jr nz, .typeless
+
+.normal
+	ld hl, wBattleTowerMirrorModeHardModeNormalPoints
+	jr .set_zero
+
+.inverse
+	ld hl, wBattleTowerMirrorModeHardModeInversePoints
+	jr .set_zero
+
+.typeless
+	ld hl, wBattleTowerMirrorModeHardModeTypelessPoints
+
+.set_zero
+	ld a, 0
+	ld [hl], a
+	ret
+
+ResetHardModeBattleTowerPoints:
+	; determine mode and pick WRAM pointer
+	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
+	jr nz, .inverse
+
+	CheckEventFlag EVENT_BATTLE_TOWER_TYPELESS_MODE
+	jr nz, .typeless
+
+.normal
+	ld hl, wBattleTowerHardModeNormalPoints
+	jr .set_zero
+
+.inverse
+	ld hl, wBattleTowerHardModeInversePoints
+	jr .set_zero
+
+.typeless
+	ld hl, wBattleTowerHardModeTypelessPoints
+
+.set_zero
+	ld a, 0
+	ld [hl], a
+	ret
 
 Script_BeatenAllTrainers:
 	pause 30
 	special BattleTowerFade
 	warpfacing UP, BATTLE_TOWER_1F, 7, 7
 Script_BeatenAllTrainers2:
-	readmem wCopyEnemyParty
-	ifequal 0, .reward
-	setval 0
-	writemem wCopyEnemyParty
-.reward
 	opentext
 	writetext Text_CongratulationsYouveBeatenAllTheTrainers
-	sjump Script_GivePlayerHisPrize
+	sjump Script_GivePlayerPointsThenPrize
 
 BattleTowerBattleRoom_MapEvents:
 	def_warp_events

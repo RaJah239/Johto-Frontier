@@ -74,6 +74,20 @@ _GetVarAction::
 	dwb wBattleHallHardModeNormalPoints,   RETVAR_ADDR_DE
 	dwb wBattleHallHardModeInversePoints,  RETVAR_ADDR_DE
 	dwb wBattleHallHardModeTypelessPoints, RETVAR_ADDR_DE
+; battle tower points
+	dwb wBattleTowerNormalPoints,           RETVAR_ADDR_DE
+	dwb wBattleTowerInversePoints,          RETVAR_ADDR_DE
+	dwb wBattleTowerTypelessPoints,         RETVAR_ADDR_DE
+	dwb wBattleTowerHardModeNormalPoints,   RETVAR_ADDR_DE
+	dwb wBattleTowerHardModeInversePoints,  RETVAR_ADDR_DE
+	dwb wBattleTowerHardModeTypelessPoints, RETVAR_ADDR_DE
+; battle tower mirror mode points
+	dwb wBattleTowerMirrorModeNormalPoints,           RETVAR_ADDR_DE
+	dwb wBattleTowerMirrorModeInversePoints,          RETVAR_ADDR_DE
+	dwb wBattleTowerMirrorModeTypelessPoints,         RETVAR_ADDR_DE
+	dwb wBattleTowerMirrorModeHardModeNormalPoints,   RETVAR_ADDR_DE
+	dwb wBattleTowerMirrorModeHardModeInversePoints,  RETVAR_ADDR_DE
+	dwb wBattleTowerMirrorModeHardModeTypelessPoints, RETVAR_ADDR_DE
 
 .CountCaughtMons:
 ; Caught mons.
@@ -81,7 +95,7 @@ _GetVarAction::
 	ld b, wEndPokedexCaught - wPokedexCaught
 	call CountSetBits
 	ld a, [wNumSetBits]
-	jr .loadstringbuffer2
+	jmp .loadstringbuffer2
 
 .CountSeenMons:
 ; Seen mons.

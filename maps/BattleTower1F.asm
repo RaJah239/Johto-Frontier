@@ -165,7 +165,186 @@ Script_WalkToBattleTowerElevator:
 	warpcheck
 	end
 
-Script_GivePlayerHisPrize:
+CheckCopyEnemyPartyFlag:
+    ld a, [wCopyEnemyParty] ; Load the value into register a
+    and a                   ; Test if it is 0 or 1
+    jr z, .is_zero          ; If 0, jump to the zero handler
+    ld a, 1                 ; If not 0, we'll return 1
+    jr .done
+.is_zero
+    xor a                   ; Return 0
+.done
+    ld [wScriptVar], a      ; Store result in wScriptVar for the script
+    ret
+
+Script_GivePlayerPointsThenPrize:
+	callasm CheckCopyEnemyPartyFlag
+	ifequal 1, .GiveMirrorModePrizeAndPoints
+
+	; check if hard mode was on
+    callasm CheckHardModeASM
+	iftrue .AwardBattleTowerPointsScript
+
+	callasm AwardBattleTowerPoints
+.finish_giving_battle_points
+	sjump Script_GivePlayerPrize
+
+.AwardBattleTowerPointsScript
+	callasm AwardBattleTowerHardModePoints
+	sjump .finish_giving_battle_points
+
+.GiveMirrorModePrizeAndPoints:
+	; check if hard mode was on
+    callasm CheckHardModeASM
+	iftrue .AwardBattleTowerMirrorModeHardModePointsScript
+
+	callasm AwardBattleTowerMirrorModePoints
+	sjump .finish_giving_battle_points
+
+.AwardBattleTowerMirrorModeHardModePointsScript
+	callasm AwardBattleTowerMirrorModeHardModePoints
+	sjump .finish_giving_battle_points
+
+AwardBattleTowerMirrorModeHardModePoints:
+	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
+	jr nz, .inverse
+
+	CheckEventFlag EVENT_BATTLE_TOWER_TYPELESS_MODE
+	jr nz, .typeless
+
+.normal
+	ld hl, wBattleTowerMirrorModeHardModeNormalPoints
+	jr .got_ptr
+
+.inverse
+	ld hl, wBattleTowerMirrorModeHardModeInversePoints
+	jr .got_ptr
+
+.typeless
+	ld hl, wBattleTowerMirrorModeHardModeTypelessPoints
+
+.got_ptr
+	ld a, [hl]
+	cp 100
+	ret z ; already max
+
+	add 3
+	cp 101
+	jr c, .store
+
+	ld a, 100
+
+.store
+	ld [hl], a
+	ret
+
+AwardBattleTowerHardModePoints:
+	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
+	jr nz, .inverse
+
+	CheckEventFlag EVENT_BATTLE_TOWER_TYPELESS_MODE
+	jr nz, .typeless
+
+.normal
+	ld hl, wBattleTowerHardModeNormalPoints
+	jr .got_ptr
+
+.inverse
+	ld hl, wBattleTowerHardModeInversePoints
+	jr .got_ptr
+
+.typeless
+	ld hl, wBattleTowerHardModeTypelessPoints
+
+.got_ptr
+	ld a, [hl]
+	cp 100
+	ret z ; already max
+
+	add 3
+	cp 101
+	jr c, .store
+
+	ld a, 100
+
+.store
+	ld [hl], a
+	ret
+
+AwardBattleTowerMirrorModePoints:
+	; choose WRAM pointer based on mode
+	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
+	jr nz, .inverse
+
+	CheckEventFlag EVENT_BATTLE_TOWER_TYPELESS_MODE
+	jr nz, .typeless
+
+.normal
+	ld hl, wBattleTowerMirrorModeNormalPoints
+	jr .got_ptr
+
+.inverse
+	ld hl, wBattleTowerMirrorModeInversePoints
+	jr .got_ptr
+
+.typeless
+	ld hl, wBattleTowerMirrorModeTypelessPoints
+
+.got_ptr
+	ld a, [hl]
+	cp 100
+	ret z ; already max
+
+	add 3
+	cp 101
+	jr c, .store
+
+	ld a, 100
+
+.store
+	ld [hl], a
+	ret
+
+AwardBattleTowerPoints:
+	; choose WRAM pointer based on mode
+	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
+	jr nz, .inverse
+
+	CheckEventFlag EVENT_BATTLE_TOWER_TYPELESS_MODE
+	jr nz, .typeless
+
+.normal
+	ld hl, wBattleTowerNormalPoints
+	jr .got_ptr
+
+.inverse
+	ld hl, wBattleTowerInversePoints
+	jr .got_ptr
+
+.typeless
+	ld hl, wBattleTowerTypelessPoints
+
+.got_ptr
+	ld a, [hl]
+	cp 100
+	ret z ; already max
+
+	add 3
+	cp 101
+	jr c, .store
+
+	ld a, 100
+
+.store
+	ld [hl], a
+	ret
+
+Script_GivePlayerPrize:
+	; give back player their party
+	setval 0
+	writemem wCopyEnemyParty
+
+	special TryQuickSave
 	setval BATTLETOWERACTION_1C
 	special BattleTowerAction
 	setval BATTLETOWERACTION_GIVEREWARD

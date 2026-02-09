@@ -197,7 +197,7 @@ ItemEffects:
 	dw TypeCodexEffect     ; TYPE_CODEX
 	dw NoEffect            ; GRIP_CLAW
 	dw NoEffect            ; CATCH_CHARM
-	dw NoEffect            ; ITEM_DE
+	dw MembersCardEffect   ; MEMBERS_CARD
 	dw NoEffect            ; ITEM_DF
 	dw NoEffect            ; ITEM_E0
 	dw NoEffect            ; ITEM_E1
@@ -3132,6 +3132,20 @@ TypeCodexEffect:
 	farcall LoadOW_BGPal7
 	call FadePalettes
 	farcall TypeChart
+	call Call_ExitMenu
+	xor a
+	ldh [hBGMapMode], a
+	farcall Pack_InitGFX
+	farcall WaitBGMap_DrawPackGFX
+	farjp Pack_InitColors
+
+MembersCardEffect:
+	farcall LoadFontsBattleExtra
+	call FadeToMenu
+	farcall BlankScreen
+	farcall LoadOW_BGPal7
+	call FadePalettes
+	farcall MembersStreakCard
 	call Call_ExitMenu
 	xor a
 	ldh [hBGMapMode], a

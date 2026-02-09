@@ -51,6 +51,7 @@ if DEF(_DEBUG)
 	givemoney YOUR_MONEY, MAX_MONEY
 	
 	; key items
+	giveitem MEMBERS_CARD
 	giveitem TYPE_CODEX
 	giveitem BICYCLE
 	setflag ENGINE_BIKE_SHOP_CALL_ENABLED
