@@ -103,65 +103,7 @@ BattleLobbyReceptionistScript:
 	special LoadPokemonData
 	special HealParty
 	opentext
-	writetext BattleLobbyBattleLoseText
-	waitbutton
-
-	; check if hard mode was on
-    callasm CheckHardModeASM
-	iftrue .SetHardModePointsToZero
-
-	checkevent EVENT_BATTLE_LOBBY_INVERSE_BATTLE
-	iftrue .InverseModePointsSetToZero
-	checkevent EVENT_BATTLE_LOBBY_TYPELESS_BATTLE
-	iftrue .NeutralModePointsSetToZero
-
-	; normal mode points set to zero
-	setval 0
-	writevar VAR_BATTLE_LOBBY_NORMAL_PONITS
-	special TryQuickSave
-	closetext
-	end
-
-.InverseModePointsSetToZero:
-	setval 0
-	writevar VAR_BATTLE_LOBBY_INVERSE_PONITS
-	special TryQuickSave
-	closetext
-	end
-
-.NeutralModePointsSetToZero:
-	setval 0
-	writevar VAR_BATTLE_LOBBY_TYPELESS_PONITS
-	special TryQuickSave
-	closetext
-	end
-
-.SetHardModePointsToZero:
-	checkevent EVENT_BATTLE_LOBBY_INVERSE_BATTLE
-	iftrue .InverseModeHardModePointsSetToZero
-	checkevent EVENT_BATTLE_LOBBY_TYPELESS_BATTLE
-	iftrue .NeutralModeHardModePointsSetToZero
-
-	; normal mode hard mode points set to zero
-	setval 0
-	writevar VAR_BATTLE_LOBBY_HARD_MODE_NORMAL_PONITS
-	special TryQuickSave
-	closetext
-	end
-
-.InverseModeHardModePointsSetToZero:
-	setval 0
-	writevar VAR_BATTLE_LOBBY_HARD_MODE_INVERSE_PONITS
-	special TryQuickSave
-	closetext
-	end
-
-.NeutralModeHardModePointsSetToZero:
-	setval 0
-	writevar VAR_BATTLE_LOBBY_HARD_MODE_TYPELESS_PONITS
-	special TryQuickSave
-	closetext
-	end
+	writetextend BattleLobbyBattleLoseText
 
 .win
 	dontrestartmapmusic
@@ -175,91 +117,19 @@ BattleLobbyReceptionistScript:
 	promptbutton
 	special LoadPokemonData
 	special HealParty
-
-	; check if hard mode was on
-    callasm CheckHardModeASM
-	iftrue .AwardHardModePoints
-
-	checkevent EVENT_BATTLE_LOBBY_INVERSE_BATTLE
-	iftrue .InverseModePointsAwarded
-	checkevent EVENT_BATTLE_LOBBY_TYPELESS_BATTLE
-	iftrue .NeutralModePointsAwarded
-
-	; normal mode points awarded
-	readvar VAR_BATTLE_LOBBY_NORMAL_PONITS
-	ifequal 100, .GivePrize
-
-	readvar VAR_BATTLE_LOBBY_NORMAL_PONITS
-	addval 1
-	writevar VAR_BATTLE_LOBBY_NORMAL_PONITS
-	sjump .GivePrize
-
-
-.InverseModePointsAwarded:
-	readvar VAR_BATTLE_LOBBY_INVERSE_PONITS
-	ifequal 100, .GivePrize
-
-	readvar VAR_BATTLE_LOBBY_INVERSE_PONITS
-	addval 1
-	writevar VAR_BATTLE_LOBBY_INVERSE_PONITS
-	sjump .GivePrize
-
-.NeutralModePointsAwarded:
-	readvar VAR_BATTLE_LOBBY_TYPELESS_PONITS
-	ifequal 100, .GivePrize
-
-	readvar VAR_BATTLE_LOBBY_TYPELESS_PONITS
-	addval 1
-	writevar VAR_BATTLE_LOBBY_TYPELESS_PONITS
-	sjump .GivePrize
-
-.AwardHardModePoints:
-	checkevent EVENT_BATTLE_LOBBY_INVERSE_BATTLE
-	iftrue .InverseModeHardModePointsAwarded
-	checkevent EVENT_BATTLE_LOBBY_TYPELESS_BATTLE
-	iftrue .NeutralModeHardModePointsAwarded
-
-	; normal points awarded
-	readvar VAR_BATTLE_LOBBY_HARD_MODE_NORMAL_PONITS
-	ifequal 100, .GivePrize
-
-	readvar VAR_BATTLE_LOBBY_HARD_MODE_NORMAL_PONITS
-	addval 1
-	writevar VAR_BATTLE_LOBBY_HARD_MODE_NORMAL_PONITS
-	sjump .GivePrize
-
-
-.InverseModeHardModePointsAwarded:
-	readvar VAR_BATTLE_LOBBY_HARD_MODE_INVERSE_PONITS
-	ifequal 100, .GivePrize
-
-	readvar VAR_BATTLE_LOBBY_HARD_MODE_INVERSE_PONITS
-	addval 1
-	writevar VAR_BATTLE_LOBBY_HARD_MODE_INVERSE_PONITS
-	sjump .GivePrize
-
-.NeutralModeHardModePointsAwarded:
-	readvar VAR_BATTLE_LOBBY_HARD_MODE_TYPELESS_PONITS
-	ifequal 100, .GivePrize
-
-	readvar VAR_BATTLE_LOBBY_HARD_MODE_TYPELESS_PONITS
-	addval 1
-	writevar VAR_BATTLE_LOBBY_HARD_MODE_TYPELESS_PONITS
-	sjump .GivePrize
-
-.Cancel:
-	writetext BattleLobbyPleaseComeAgainText
-	waitbutton
-	closetext
-	turnobject PLAYER, DOWN
-	end
-
 .GivePrize:
 	writetext BattleLobbyPrizeText
 	verbosegiveitem CRYSTAL
 	iffalse BattleLobbyPackFull
 	clearevent EVENT_DID_NOT_GET_BATTLE_LOBBY_PRIZE
 	closetext
+	end
+
+.Cancel:
+	writetext BattleLobbyPleaseComeAgainText
+	waitbutton
+	closetext
+	turnobject PLAYER, DOWN
 	end
 
 BattleLobbyPackFull:
