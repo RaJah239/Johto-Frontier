@@ -178,32 +178,30 @@ CheckCopyEnemyPartyFlag:
     ret
 
 Script_GivePlayerPointsThenPrize:
-	callasm CheckCopyEnemyPartyFlag
-	ifequal 1, .GiveMirrorModePrizeAndPoints
+    callasm CheckCopyEnemyPartyFlag
+    ifequal 1, .MirrorMode
 
-	; check if hard mode was on
+    ; normal mode branch
     callasm CheckHardModeASM
-	iftrue .AwardBattleTowerPointsScript
+    iftrue .NormalHardMode
+    callasm AwardBattleTowerPoints
+    sjump .Finish
 
-	callasm AwardBattleTowerPoints
-.finish_giving_battle_points
-	sjump Script_GivePlayerPrize
+.NormalHardMode:
+    callasm AwardBattleTowerHardModePoints
+    sjump .Finish
 
-.AwardBattleTowerPointsScript
-	callasm AwardBattleTowerHardModePoints
-	sjump .finish_giving_battle_points
-
-.GiveMirrorModePrizeAndPoints:
-	; check if hard mode was on
+.MirrorMode:
     callasm CheckHardModeASM
-	iftrue .AwardBattleTowerMirrorModeHardModePointsScript
+    iftrue .MirrorHardMode
+    callasm AwardBattleTowerMirrorModePoints
+    sjump .Finish
 
-	callasm AwardBattleTowerMirrorModePoints
-	sjump .finish_giving_battle_points
+.MirrorHardMode:
+    callasm AwardBattleTowerMirrorModeHardModePoints
 
-.AwardBattleTowerMirrorModeHardModePointsScript
-	callasm AwardBattleTowerMirrorModeHardModePoints
-	sjump .finish_giving_battle_points
+.Finish:
+    sjump Script_GivePlayerPrize
 
 AwardBattleTowerMirrorModeHardModePoints:
 	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
