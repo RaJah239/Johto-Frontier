@@ -369,7 +369,7 @@ Battle_Plaza_Names:
 	dw Battle_Plaza_Name2 ; map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION ; 2
 	dw Battle_Plaza_Name3 ; map_const OAKS_LAB ;  3
 	dw Battle_Plaza_Name4 ; map_const BATTLE_TOWER_1F ; 4
-	dw Battle_Plaza_Name5 ; map_const BATTLE_TOWER_MART ; 5
+	dw Battle_Plaza_Name5 ; map_const BATTLE_PLAZA_MART ; 5
 	dw Battle_Plaza_Name6 ; map_const BATTLE_TOWER_ELEVATOR ; 6
 	dw Battle_Plaza_Name7 ; map_const BATTLE_TOWER_HALLWAY ; 7
 	dw Battle_Plaza_Name8 ; map_const BATTLE_TOWER_BATTLE_ROOM ; 8
@@ -897,7 +897,7 @@ Battle_Plaza_Name3: ; map_const OAKS_LAB ;  6  ; 14
 	db "Oak's Lab@"
 Battle_Plaza_Name4: ; map_const BATTLE_TOWER_1F ; 11
 	db "Battle Tower 1F@"
-Battle_Plaza_Name5: ; map_const BATTLE_TOWER_MART ; Crystal Trove
+Battle_Plaza_Name5: ; map_const BATTLE_PLAZA_MART ; Crystal Trove
 	db "Battle Plaza Mart@"
 Battle_Plaza_Name6: ; map_const BATTLE_TOWER_ELEVATOR ; 13
 	db "Battle Tower Lift@"

@@ -1,24 +1,24 @@
     object_const_def
-    const BATTLETOWERMART_CLERK_ALL_TMS
-    const BATTLETOWERMART_PORYGON_PC
-    const BATTLETOWERMART_TUTOR
+    const BATTLEPLAZAMART_CLERK_ALL_TMS
+    const BATTLEPLAZAMART_PORYGON_PC
+    const BATTLEPLAZAMART_TUTOR
 
-BattleTowerMart_MapScripts:
+BattlePlazaMart_MapScripts:
     def_scene_scripts
 
     def_callbacks
 
-BattleTowerMartTMCoinTraderScript:
+BattlePlazaMartTMCoinTraderScript:
     faceplayer
     opentext
     special CrystalCountInBag
-    checkevent EVENT_BATTLE_TOWER_TM_MART_INTRO
+    checkevent EVENT_BATTLE_PLAZA_TM_MART_INTRO
     iftrue .WantToBuyATM
-    writetext BattleTowerTMMartIntroText
-    setevent EVENT_BATTLE_TOWER_TM_MART_INTRO
+    writetext BattlePlazaTMMartIntroText
+    setevent EVENT_BATTLE_PLAZA_TM_MART_INTRO
     sjump .WantToBuyATMAfterIntro
 .WantToBuyATM:
-    writetext BattleTowerTMMartBuyTMText
+    writetext BattlePlazaTMMartBuyTMText
 .WantToBuyATMAfterIntro:
     yesorno
     iffalse .Refused
@@ -355,7 +355,7 @@ ComeAgainAgainText:
     text "Please come again!"
     done
 
-BattleTowerTMMartIntroText:
+BattlePlazaTMMartIntroText:
     text "Greetings, welcome"
     line "to the TM counter."
 
@@ -367,7 +367,7 @@ BattleTowerTMMartIntroText:
     line "anything?"
     done
 
-BattleTowerTMMartBuyTMText:
+BattlePlazaTMMartBuyTMText:
     text "Welcome! Buy a TM"
     line "for 10 Crystals?"
     done
@@ -386,27 +386,27 @@ YoureACollectorText:
     line "99! Pick another?"
     done
 
-BattleTowerMartPorygonPCScript:
+BattlePlazaMartPorygonPCScript:
     jumpstd PorygonPCScript
 
-BattleTowerMartTutorScientistScript:
+BattlePlazaMartTutorScript:
     faceplayer
     opentext
     special CrystalCountInBag
-    checkevent EVENT_MET_BATTLE_TOWER_MOVE_TUTOR
+    checkevent EVENT_MET_BATTLE_PLAZA_MOVE_TUTOR
     iftrue .WelcomeBackWantMeToTeach
-    writetext BattleTowerMartTutorWantMeToTeachText
-    setevent EVENT_MET_BATTLE_TOWER_MOVE_TUTOR
+    writetext BattlePlazaMartTutorWantMeToTeachText
+    setevent EVENT_MET_BATTLE_PLAZA_MOVE_TUTOR
     sjump .TeachAnotherMove
 .WelcomeBackWantMeToTeach:
-    writetext BattleTowerMartTutorWelcomeBackWantMeToTeachText
+    writetext BattlePlazaMartTutorWelcomeBackWantMeToTeachText
 .TeachAnotherMove:
     yesorno
     iffalse .Refused
-    writetext BattleTowerMartTutorShallITeachText
+    writetext BattlePlazaMartTutorShallITeachText
     callasm .SetupMovesMenu
     callasm .LoadMovesMenu
-    writetext BattleTowerMartTutorMoveText
+    writetext BattlePlazaMartTutorMoveText
     ifequal 2, .NotEnough
     iffalse .CloseTutor
     special MoveTutor2
@@ -437,7 +437,7 @@ BattleTowerMartTutorScientistScript:
     ld a, [hli]
     ld [wNamedObjectIndex], a
     ld a, [hl]
-    ld [wBattleTowerCrystalMoveTutor], a ; not used for menus anymore at this point
+    ld [wBattlePlazaCrystalMoveTutor], a ; not used for menus anymore at this point
     ld b, a
     call .GetAmountOfCrystals
     cp b
@@ -466,7 +466,7 @@ BattleTowerMartTutorScientistScript:
     db 3 ; height
     db 1 ; width ("1" triggers Function 2 to run)
     db SCROLLINGMENU_ITEMS_QUANTITY ; item format
-    dba wBattleTowerCrystalMoveTutor
+    dba wBattlePlazaCrystalMoveTutor
     dba .DisplayMoveName
     dba .DisplayAmountOkNotReally
     dba .UpdateNeededCrystalIndicator
@@ -517,7 +517,7 @@ BattleTowerMartTutorScientistScript:
 .SetupMovesMenu:
 ; copy the whole move list
     ld hl, .FullMoveList
-    ld de, wBattleTowerCrystalMoveTutor
+    ld de, wBattlePlazaCrystalMoveTutor
     ld bc, .FullMoveListEnd - .FullMoveList
     call CopyBytes
 
@@ -575,23 +575,23 @@ BattleTowerMartTutorScientistScript:
 .FullMoveListEnd:
 
 .NotEnough:
-    writetext BattleTowerMartTutorNotEnoughCrystalsText
-    sjump .EndingOffBattleTowerMartMoveTutor
+    writetext BattlePlazaMartTutorNotEnoughCrystalsText
+    sjump .EndingOffBattlePlazaMartMoveTutor
 
 .Refused:
-    writetext BattleTowerMartTutorDropByAnytimeText
-    sjump .EndingOffBattleTowerMartMoveTutor
+    writetext BattlePlazaMartTutorDropByAnytimeText
+    sjump .EndingOffBattlePlazaMartMoveTutor
 
 .TeachMove:
     callasm .PayTutorInCrystals
-    writetext BattleTowerMartTutorExcellentText
+    writetext BattlePlazaMartTutorExcellentText
     playsound SFX_TRANSACTION
     waitsfx
     special CrystalCountInBag
-.EndingOffBattleTowerMartMoveTutor:
+.EndingOffBattlePlazaMartMoveTutor:
     waitbutton
     closetext
-    turnobject BATTLETOWERMART_TUTOR, DOWN
+    turnobject BATTLEPLAZAMART_TUTOR, DOWN
     end
 
 .PayTutorInCrystals:
@@ -599,7 +599,7 @@ BattleTowerMartTutorScientistScript:
 ; is soooo...
     ld a, CRYSTAL
     ld [wCurItem], a
-    ld a, [wBattleTowerCrystalMoveTutor] ; should have been set back in .LoadMovesMenu
+    ld a, [wBattlePlazaCrystalMoveTutor] ; should have been set back in .LoadMovesMenu
     ld [wItemQuantityChange], a
     ld a, -1
     ld [wCurItemQuantity], a
@@ -607,9 +607,9 @@ BattleTowerMartTutorScientistScript:
     call TossItem
     ret
 
-BattleTowerMartTutorWantMeToTeachText:
+BattlePlazaMartTutorWantMeToTeachText:
     text "Welcome! I'm am"
-    line "the Battle Tower's"
+    line "the Battle Plaza's"
     cont "Move Tutor."
 
     para "I can teach your"
@@ -624,7 +624,7 @@ BattleTowerMartTutorWantMeToTeachText:
     cont "moves?"
     done
 
-BattleTowerMartTutorWelcomeBackWantMeToTeachText:
+BattlePlazaMartTutorWelcomeBackWantMeToTeachText:
     text "Welcome once more"
     line "esteemed trainer!"
     
@@ -635,30 +635,30 @@ BattleTowerMartTutorWelcomeBackWantMeToTeachText:
     line "sum of Crystals?"
     done
 
-BattleTowerMartTutorShallITeachText:
+BattlePlazaMartTutorShallITeachText:
     text "Which move shall"
     line "I teach?"
     done
 
-BattleTowerMartTutorNotEnoughCrystalsText:
+BattlePlazaMartTutorNotEnoughCrystalsText:
     text "You've not enough"
     line "Crystals…"
     done
 
-BattleTowerMartTutorDropByAnytimeText:
+BattlePlazaMartTutorDropByAnytimeText:
     text "Drop by anytime!"
     done
 
-BattleTowerMartTutorExcellentText:
+BattlePlazaMartTutorExcellentText:
     text "Do visit again!"
     line "We're always open!"
     done
 
-BattleTowerMartTutorMoveText:
+BattlePlazaMartTutorMoveText:
     text_start
     done
 
-BattleTowerMart_MapEvents:
+BattlePlazaMart_MapEvents:
 
     def_warp_events
     warp_event  4,  9, BATTLE_PLAZA, 10
@@ -670,6 +670,6 @@ BattleTowerMart_MapEvents:
     def_bg_events
 
     def_object_events
-    object_event 12,  1, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BattleTowerMartTMCoinTraderScript, -1
-    object_event 10,  1, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, BattleTowerMartPorygonPCScript, -1
-    object_event 13,  1, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, BattleTowerMartTutorScientistScript, -1
+    object_event 12,  1, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BattlePlazaMartTMCoinTraderScript, -1
+    object_event 10,  1, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, BattlePlazaMartPorygonPCScript, -1
+    object_event 13,  1, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, BattlePlazaMartTutorScript, -1

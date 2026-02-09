@@ -217,7 +217,7 @@ INCLUDE "maps/BattleTowerElevator.asm"
 INCLUDE "maps/BattleTowerHallway.asm"
 INCLUDE "maps/Route40BattleTowerGate.asm"
 INCLUDE "maps/PowerPlantOutside.asm"
-INCLUDE "maps/BattleTowerMart.asm"
+INCLUDE "maps/BattlePlazaMart.asm"
 
 
 SECTION "Map Scripts 16", ROMX

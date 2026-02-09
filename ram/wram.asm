@@ -301,7 +301,7 @@ wc3fc:: ds 1
 NEXTU
 ; needed since I don't want to have multiple copies
 ; of the same thing :skull:
-wBattleTowerCrystalMoveTutor:: ds \
+wBattlePlazaCrystalMoveTutor:: ds \
 	(20 * 2) + \ ; total items
 	1 + \ ; cancel button
 	1 ; number of items

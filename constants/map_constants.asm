@@ -336,7 +336,7 @@ ENDM
 	map_const BATTLE_PLAZA_MAGNET_TRAIN_STATION,           10,  9 ; 02
 	map_const OAKS_LAB,                                     5,  6 ; 03
 	map_const BATTLE_TOWER_1F,                              8,  5 ; 04
-	map_const BATTLE_TOWER_MART,                            8,  5 ; 05	
+	map_const BATTLE_PLAZA_MART,                            8,  5 ; 05	
 	map_const BATTLE_TOWER_ELEVATOR,                        2,  2 ; 06
 	map_const BATTLE_TOWER_HALLWAY,                        11,  2 ; 07
 	map_const BATTLE_TOWER_BATTLE_ROOM,                     4,  4 ; 08
