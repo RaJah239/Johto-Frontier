@@ -229,8 +229,12 @@ KrisGroup:
 
 PKMNTrainerGroup:
 	; CAL (1)
-	db "Self@", TRAINERTYPE_NORMAL
-	db 5, HO_OH
+	db "@", TRAINERTYPE_NORMAL
+	db -1 ; end
+
+PKMNFTrainerGroup:
+	; CAL_F (1)
+	db "@", TRAINERTYPE_NORMAL
 	db -1 ; end
 
 NurseGroup:

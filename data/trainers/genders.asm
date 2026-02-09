@@ -15,6 +15,7 @@ BTTrainerClassGenders:
 	db MALE   ; POKEMON_PROF
 	db FEMALE ; WILL
 	db MALE   ; CAL
+	db FEMALE ; CAL_F
 	db MALE   ; BRUNO
 	db FEMALE ; KAREN
 	db MALE   ; KOGA

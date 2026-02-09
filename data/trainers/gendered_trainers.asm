@@ -51,4 +51,5 @@ FemaleTrainers:
 	db SCARLET
 	db ARIANA
 	db NURSE
+	db CAL_F
 .End

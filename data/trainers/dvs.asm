@@ -14,6 +14,7 @@ TrainerClassDVs:
 	dn  0,  0,  0,  0 ; POKEMON_PROF
 	dn  0,  0,  0,  0 ; WILL
 	dn  0,  0,  0,  0 ; CAL
+	dn  0,  0,  0,  0 ; CAL_F
 	dn  0,  0,  0,  0 ; BRUNO
 	dn  0,  0,  0,  0 ; KAREN
 	dn  0,  0,  0,  0 ; KOGA

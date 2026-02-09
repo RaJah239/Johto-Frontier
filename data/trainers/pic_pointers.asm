@@ -15,6 +15,7 @@ TrainerPicPointers::
  	dba PokemonProfPic
  	dba WillPic
  	dba CalPic
+ 	dba CalPicF
  	dba BrunoPic
  	dba KarenPic
  	dba KogaPic

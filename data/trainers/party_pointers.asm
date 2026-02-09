@@ -15,6 +15,7 @@ TrainerGroups:
 	dba PokemonProfGroup
 	dba WillGroup
 	dba PKMNTrainerGroup
+	dba PKMNFTrainerGroup
 	dba BrunoGroup
 	dba KarenGroup
 	dba KogaGroup

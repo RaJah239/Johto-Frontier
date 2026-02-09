@@ -13,6 +13,7 @@ TrainerClassNames::
 	li "Professor"
 	li "Elite Four"
 	li "<PKMN> Trainer"
+	li "<PKMN> Trainer"
 	li "Elite Four"
 	li "Elite Four"
 	li "Elite Four"
