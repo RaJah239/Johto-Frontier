@@ -1,8 +1,8 @@
 	object_const_def
-	const BATTLEPLAZABATTLEHALL_RECEPTIONIST
-	const BATTLEPLAZABATTLEHALL_ENEMY
+	const BATTLEPLAZABATTLELOBBY_RECEPTIONIST
+	const BATTLEPLAZABATTLELOBBY_ENEMY
 
-BattlePlazaBattleHall_MapScripts:
+BattlePlazaBattleLobby_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
@@ -73,7 +73,7 @@ BattleHallReceptionistScript:
 	writetext BattleHallReceptionistGoRightInText
 	waitbutton
 	closetext
-	applymovement BATTLEPLAZABATTLEHALL_RECEPTIONIST, BattleHallReceptionist_MoveOutTheWay
+	applymovement BATTLEPLAZABATTLELOBBY_RECEPTIONIST, BattleHallReceptionist_MoveOutTheWay
 	applymovement PLAYER, BattleHallPlayer_EnterBattleRoom
 	winlosstext BattleHallPlayerVictoryText, 0
 .sample
@@ -102,7 +102,7 @@ BattleHallReceptionistScript:
 	reloadmap
 	pause 15
 	special BattleTowerFade
-	warpfacing UP, BATTLE_PLAZA_BATTLE_HALL, 3, 11
+	warpfacing UP, BATTLE_PLAZA_BATTLE_LOBBY, 3, 11
 	turnobject PLAYER, UP
 	special LoadPokemonData
 	special HealParty
@@ -172,7 +172,7 @@ BattleHallReceptionistScript:
 	reloadmapafterbattle
 	pause 15
 	special BattleTowerFade
-	warpfacing UP, BATTLE_PLAZA_BATTLE_HALL, 3, 11
+	warpfacing UP, BATTLE_PLAZA_BATTLE_LOBBY, 3, 11
 	turnobject PLAYER, UP
 	opentext
 	writetext BattleHallBattleWinText
@@ -359,7 +359,7 @@ BattleHallFullPackText:
 	line "made space for it."
 	done
 
-BattlePlazaBattleHall_MapEvents:
+BattlePlazaBattleLobby_MapEvents:
 	def_warp_events
 	warp_event  4, 13, BATTLE_PLAZA, 7
 	warp_event  3, 13, BATTLE_PLAZA, 6

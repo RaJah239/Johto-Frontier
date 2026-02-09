@@ -374,7 +374,7 @@ Battle_Plaza_Names:
 	dw Battle_Plaza_Name7 ; map_const BATTLE_TOWER_HALLWAY ; 7
 	dw Battle_Plaza_Name8 ; map_const BATTLE_TOWER_BATTLE_ROOM ; 8
 	dw Battle_Plaza_Name9 ; map_const BATTLE_PLAZA_RAJA_HOUSE ; 9
-	dw Battle_Plaza_Name10 ; map_const BATTLE_PLAZA_BATTLE_HALL ; 10
+	dw Battle_Plaza_Name10 ; map_const BATTLE_PLAZA_BATTLE_LOBBY ; 10
 	dw Battle_Plaza_Name11 ; map_const BATTLE_PLAZA_DRAFT_ARENA ; 11
 	assert_table_length NUM_BATTLE_PLAZA_MAPS
 
@@ -907,7 +907,7 @@ Battle_Plaza_Name8: ; map_const BATTLE_TOWER_BATTLE_ROOM ; 12
 	db "Battle Tower Room@"
 Battle_Plaza_Name9: ; map_const BATTLE_PLAZA_RAJA_HOUSE
 	db "RaJa239's House@"
-Battle_Plaza_Name10: ; map_const BATTLE_PLAZA_BATTLE_HALL
-	db "Battle Hall@"
+Battle_Plaza_Name10: ; map_const BATTLE_PLAZA_BATTLE_LOBBY
+	db "Battle Lobby@"
 Battle_Plaza_Name11: ; map_const BATTLE_PLAZA_DRAFT_ARENA
 	db "Draft Arena@"

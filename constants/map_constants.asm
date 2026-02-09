@@ -341,7 +341,7 @@ ENDM
 	map_const BATTLE_TOWER_HALLWAY,                        11,  2 ; 07
 	map_const BATTLE_TOWER_BATTLE_ROOM,                     4,  4 ; 08
 	map_const BATTLE_PLAZA_RAJA_HOUSE,                      4,  4 ; 09
-	map_const BATTLE_PLAZA_BATTLE_HALL,                     4,  7 ; 10
+	map_const BATTLE_PLAZA_BATTLE_LOBBY,                     4,  7 ; 10
 	map_const BATTLE_PLAZA_DRAFT_ARENA,                     4,  7 ; 11
 	endgroup
 
