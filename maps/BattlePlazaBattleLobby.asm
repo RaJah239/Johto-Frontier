@@ -206,10 +206,10 @@ BattleLobbyFullPackText:
 	line "made space for it."
 	done
 
-BattleLobbyRulesSign:
-	jumptext BattleLobbyRulesSignText
+BattleLobbyInfoSign:
+	jumptext BattleLobbyInfoSignText
 
-BattleLobbyRulesSignText:
+BattleLobbyInfoSignText:
 	text "You may fight a"
 	line "random trainer"
 	cont "here."
@@ -226,7 +226,7 @@ BattlePlazaBattleLobby_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  2, 10, BGEVENT_READ, BattleLobbyRulesSign
+	bg_event  2, 10, BGEVENT_READ, BattleLobbyInfoSign
 
 	def_object_events
 	object_event  3, 10, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, BattleLobbyReceptionistScript, -1

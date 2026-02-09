@@ -1061,6 +1061,19 @@ PlayAgainstRedText:
 	line "<PKMN> Trainer Red?"
 	done
 
+DraftArenaNoteSign:
+	jumptext DraftArenaNoteSignText
+
+DraftArenaNoteSignText:
+	text "You may battle us-"
+	line "ing your own or"
+	cont "other trainer's"
+	cont "#mon team."
+
+	para "Each victory will"
+	line "net you a Crystal."
+	done
+
 BattlePlazaDraftArena_MapEvents:
 	def_warp_events
 	warp_event  4, 13, BATTLE_PLAZA, 9
@@ -1069,6 +1082,7 @@ BattlePlazaDraftArena_MapEvents:
 	def_coord_events
 
 	def_bg_events
+	bg_event  2, 10, BGEVENT_READ, DraftArenaNoteSign
 
 	def_object_events
 	object_event  3, 10, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BattleArenaReceptionistScript, -1
