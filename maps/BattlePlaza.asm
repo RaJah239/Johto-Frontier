@@ -187,7 +187,8 @@ BattlePlazaEchoChamberSign:
 BattlePlazaEchoChamberSignText:
 	text "Echo Chamber"
 
-	para "Face yourself!"
+	para "Try your luck"
+	line "against yourself!"
 	done
 
 BattlePlaza_MapEvents:
