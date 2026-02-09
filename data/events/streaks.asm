@@ -64,7 +64,7 @@ MemberCardMainText:
 .page3:
 	db "◀ Page  3/4  ▶@"
 .page3_content:
-	db "   Battle Hall     @"
+	db "   Battle Lobby     @"
 
 .page4:
 	db "◀ Page  4/4  ▶@"
@@ -158,7 +158,7 @@ MemberCardLeftPress:
 .jump_to_page_4:
 	call DecreaseMemberCardPage
 	call UpdateMemberCardPageText
-	jmp BattleHallStreakCard
+	jmp BattleLobbyStreakCard
 
 .jump_to_page_1:
 	call DecreaseMemberCardPage
@@ -173,7 +173,7 @@ MemberCardLeftPress:
 .jump_to_page_3:
 	call DecreaseMemberCardPage
 	call UpdateMemberCardPageText
-	jmp BattleHallStreakCard
+	jmp BattleLobbyStreakCard
 
 ; ========================
 ; Right button navigation
@@ -205,7 +205,7 @@ MemberCardRightPress:
 .jump_to_page_3:
 	call IncreaseMemberCardPage
 	call UpdateMemberCardPageText
-	jmp BattleHallStreakCard
+	jmp BattleLobbyStreakCard
 
 .jump_to_page_4:
 	call IncreaseMemberCardPage
@@ -411,7 +411,7 @@ BattleTowerMirrorModeStreakCard:
 .NeutralModeString:
 	db "Neutral Mode@"
 
-BattleHallStreakCard:
+BattleLobbyStreakCard:
 	hlcoord 0, 0
 	lb bc, 14, 18
 	call Textbox
@@ -428,7 +428,7 @@ BattleHallStreakCard:
 	hlcoord 2, 5
 	call PlaceString
 
-	ld de, wBattleHallNormalPoints
+	ld de, wBattleLobbyNormalPoints
 	hlcoord 14, 5
 	lb bc, 1, 3
 	call PrintNum
@@ -437,7 +437,7 @@ BattleHallStreakCard:
 	hlcoord 2, 6
 	call PlaceString
 
-	ld de, wBattleHallInversePoints
+	ld de, wBattleLobbyInversePoints
 	hlcoord 14, 6
 	lb bc, 1, 3
 	call PrintNum
@@ -446,7 +446,7 @@ BattleHallStreakCard:
 	hlcoord 2, 7
 	call PlaceString
 
-	ld de, wBattleHallTypelessPoints
+	ld de, wBattleLobbyTypelessPoints
 	hlcoord 14, 7
 	lb bc, 1, 3
 	call PrintNum
@@ -459,7 +459,7 @@ BattleHallStreakCard:
 	hlcoord 2, 11
 	call PlaceString
 
-	ld de, wBattleHallHardModeNormalPoints
+	ld de, wBattleLobbyHardModeNormalPoints
 	hlcoord 14, 11
 	lb bc, 1, 3
 	call PrintNum
@@ -468,7 +468,7 @@ BattleHallStreakCard:
 	hlcoord 2, 12
 	call PlaceString
 
-	ld de, wBattleHallHardModeInversePoints
+	ld de, wBattleLobbyHardModeInversePoints
 	hlcoord 14, 12
 	lb bc, 1, 3
 	call PrintNum
@@ -478,13 +478,13 @@ BattleHallStreakCard:
 	hlcoord 2, 13
 	call PlaceString
 
-	ld de, wBattleHallHardModeTypelessPoints
+	ld de, wBattleLobbyHardModeTypelessPoints
 	hlcoord 14, 13
 	lb bc, 1, 3
 	jmp PrintNum
 
 .FacilityString:
-	db " <physical> Battle Hall <physical>@"
+	db " <physical> Battle Lobby <physical>@"
 .RegularModeString:
 	db " - Regular Mode -@"
 .HardModeString:

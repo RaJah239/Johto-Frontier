@@ -3194,12 +3194,12 @@ wBattlePlaza::                                    db
 	ds 151
 
 ; battle hall points
-wBattleHallNormalPoints:: db
-wBattleHallInversePoints:: db
-wBattleHallTypelessPoints:: db
-wBattleHallHardModeNormalPoints:: db
-wBattleHallHardModeInversePoints:: db
-wBattleHallHardModeTypelessPoints:: db
+wBattleLobbyNormalPoints:: db
+wBattleLobbyInversePoints:: db
+wBattleLobbyTypelessPoints:: db
+wBattleLobbyHardModeNormalPoints:: db
+wBattleLobbyHardModeInversePoints:: db
+wBattleLobbyHardModeTypelessPoints:: db
 
 ; battle tower points
 wBattleTowerNormalPoints:: db

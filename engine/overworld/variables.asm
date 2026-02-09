@@ -68,12 +68,13 @@ _GetVarAction::
 	dwb NULL,                           RETVAR_STRBUF2
 	dwb wNumItems,                      RETVAR_ADDR_DE
 	dwb wNumBalls,                      RETVAR_ADDR_DE
-	dwb wBattleHallNormalPoints,           RETVAR_ADDR_DE
-	dwb wBattleHallInversePoints,          RETVAR_ADDR_DE
-	dwb wBattleHallTypelessPoints,         RETVAR_ADDR_DE
-	dwb wBattleHallHardModeNormalPoints,   RETVAR_ADDR_DE
-	dwb wBattleHallHardModeInversePoints,  RETVAR_ADDR_DE
-	dwb wBattleHallHardModeTypelessPoints, RETVAR_ADDR_DE
+; battle lobby points
+	dwb wBattleLobbyNormalPoints,           RETVAR_ADDR_DE
+	dwb wBattleLobbyInversePoints,          RETVAR_ADDR_DE
+	dwb wBattleLobbyTypelessPoints,         RETVAR_ADDR_DE
+	dwb wBattleLobbyHardModeNormalPoints,   RETVAR_ADDR_DE
+	dwb wBattleLobbyHardModeInversePoints,  RETVAR_ADDR_DE
+	dwb wBattleLobbyHardModeTypelessPoints, RETVAR_ADDR_DE
 ; battle tower points
 	dwb wBattleTowerNormalPoints,           RETVAR_ADDR_DE
 	dwb wBattleTowerInversePoints,          RETVAR_ADDR_DE

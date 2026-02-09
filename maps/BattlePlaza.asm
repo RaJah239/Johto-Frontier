@@ -110,11 +110,11 @@ BattlePlazaRaJaHouseSignText:
 	text "RaJa239's House"
 	done
 
-BattlePlazaBattleHallHouseSign:
-	jumptext BattlePlazaBattleHallHouseSignText
+BattlePlazaBattleLobbyHouseSign:
+	jumptext BattlePlazaBattleLobbyHouseSignText
 
-BattlePlazaBattleHallHouseSignText:
-	text "Battle Hall"
+BattlePlazaBattleLobbyHouseSignText:
+	text "Battle Lobby"
 	done
 
 BattlePlazaDraftArenaSign:
@@ -155,7 +155,7 @@ BattlePlaza_MapEvents:
 	def_bg_events
 	bg_event  4, 14, BGEVENT_READ, BattlePlazaTrainStationSign
 	bg_event 12,  6, BGEVENT_READ, BattlePlazaRaJaHouseSign
-	bg_event 11, 12, BGEVENT_READ, BattlePlazaBattleHallHouseSign
+	bg_event 11, 12, BGEVENT_READ, BattlePlazaBattleLobbyHouseSign
 	bg_event 30, 12, BGEVENT_READ, BattlePlazaDraftArenaSign
 	bg_event 22, 10, BGEVENT_READ, BattlePlazaBattleTowerSign
 	bg_event  4, 20, BGEVENT_READ, BattlePlazaProOaksLabSign
