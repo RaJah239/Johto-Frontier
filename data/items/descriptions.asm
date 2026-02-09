@@ -1009,7 +1009,7 @@ CatchCharmDesc:
 
 MembersCardDesc:
 	db   "Displays Battle"
-	next "Plaza's streaks.@"
+	next "Tower's streaks.@"
 
 TeruSama26Desc:
 TeruSama27Desc:
