@@ -69,7 +69,7 @@ TrainerClassNames::
 	li "Rocket"
 	li "Mysticalman"
 	li "<PKMN> Trainer"
-	li "BOSS"
+	li "Boss"
 	li "Team Rocket"
 	li "Team Rocket"
 	li "<PKMN> Trainer"
@@ -79,5 +79,5 @@ TrainerClassNames::
 	li "Team Rocket"
 	li "<PKMN> Trainer"
 	li "Nurse"
-	li "Prodigy"
+	li "<PKMN> Trainer"
 	assert_list_length NUM_TRAINER_CLASSES

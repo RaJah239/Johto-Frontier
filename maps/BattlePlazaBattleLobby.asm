@@ -332,9 +332,7 @@ BattleLobbyPrizeText:
     done
 
 BattleLobbyFullPackText:
-	text "Your pack's full."
-	
-	para "Return once you've"
+	text "Return once you've"
 	line "made space for it."
 	done
 
