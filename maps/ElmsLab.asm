@@ -13,7 +13,6 @@ ElmsLab_MapScripts:
 	scene_script ElmsLabNoop1Scene,   SCENE_ELMSLAB_CANT_LEAVE
 	scene_script ElmsLabNoop2Scene,   SCENE_ELMSLAB_NOOP
 	scene_script ElmsLabNoop3Scene,   SCENE_ELMSLAB_MEET_OFFICER
-	scene_script ElmsLabNoop4Scene,   SCENE_ELMSLAB_AIDE_GIVES_POTION
 	scene_const SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
 
 	def_callbacks
@@ -21,18 +20,9 @@ ElmsLab_MapScripts:
 
 ElmsLabMeetElmScene:
 	sdefer ElmsLabWalkUpToElmScript
-	end
-
 ElmsLabNoop1Scene:
-	end
-
 ElmsLabNoop2Scene:
-	end
-
 ElmsLabNoop3Scene:
-	end
-
-ElmsLabNoop4Scene:
 	end
 
 ElmsLabMoveElmCallback:
@@ -84,16 +74,6 @@ ElmGiveMasterBallScript:
 	writetext ElmGiveMasterBallText2
 	waitbutton
 .notdone
-	closetext
-	end
-
-ElmCheckGotEggAgain:
-	checkevent EVENT_GOT_MYSTERY_EGG_FROM_MR_POKEMON
-	iftrue ElmAfterTheftScript
-	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue ElmDescribesMrPokemonScript
-	writetext ElmText_LetYourMonBattleIt
-	waitbutton
 	closetext
 	end
 
@@ -244,14 +224,8 @@ ElmDirectionsScript:
 	closetext
 	setevent EVENT_GOT_A_POKEMON_FROM_ELM
 	setevent EVENT_RIVAL_CHERRYGROVE_CITY
-	setscene SCENE_ELMSLAB_AIDE_GIVES_POTION
+	setscene SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
 	setmapscene NEW_BARK_TOWN, SCENE_NEWBARKTOWN_NOOP
-	end
-
-ElmDescribesMrPokemonScript:
-	writetext ElmDescribesMrPokemonText
-	waitbutton
-	closetext
 	end
 
 ElmsLabHealingMachine:
@@ -283,35 +257,7 @@ ElmsLabHealingMachine_HealParty:
 
 ElmAfterTheftScript:
 	setmapscene ROUTE_29, SCENE_ROUTE29_CATCH_TUTORIAL
-	writetext ElmAfterTheftText6
-	waitbutton
-	closetext
 	setscene SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
-	end
-
-AideScript_WalkPotion1:
-	applymovement ELMSLAB_ELMS_AIDE, AideWalksRight1
-	turnobject PLAYER, DOWN
-	scall AideScript_GivePotion
-	applymovement ELMSLAB_ELMS_AIDE, AideWalksLeft1
-	end
-
-AideScript_WalkPotion2:
-	applymovement ELMSLAB_ELMS_AIDE, AideWalksRight2
-	turnobject PLAYER, DOWN
-	scall AideScript_GivePotion
-	applymovement ELMSLAB_ELMS_AIDE, AideWalksLeft2
-	end
-
-AideScript_GivePotion:
-	opentext
-	writetext AideText_GiveYouPotion
-	promptbutton
-	verbosegiveitem POTION
-	writetext AideText_AlwaysBusy
-	waitbutton
-	closetext
-	setscene SCENE_ELMSLAB_NOOP
 	end
 
 AideScript_WalkBalls1:
@@ -349,31 +295,7 @@ AideScript_ReceiveTheBalls:
 ElmsAideScript:
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_TOGEPI_EGG_FROM_ELMS_AIDE
-	iftrue AideScript_AfterTheft
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iftrue AideScript_ExplainBalls
-	checkevent EVENT_GOT_MYSTERY_EGG_FROM_MR_POKEMON
-	iftrue AideScript_TheftTestimony
-	writetext AideText_AlwaysBusy
-	waitbutton
-	closetext
-	end
-
-AideScript_TheftTestimony:
-	writetext AideText_TheftTestimony
-	waitbutton
-	closetext
-	end
-
-AideScript_ExplainBalls:
 	writetext AideText_ExplainBalls
-	waitbutton
-	closetext
-	end
-
-AideScript_AfterTheft:
-	writetext AideText_AfterTheft
 	waitbutton
 	closetext
 	end
@@ -577,12 +499,6 @@ ElmText_ChooseAPokemon:
 	para "Go on. Take them!"
 	done
 
-ElmText_LetYourMonBattleIt:
-	text "If a wild #MON"
-	line "appears, let your"
-	cont "#MON battle it!"
-	done
-
 LabWhereGoingText:
 	text "Elm: Wait! Where"
 	line "are you going?"
@@ -664,16 +580,6 @@ GotElmsNumberText:
 	line "phone number."
 	done
 
-ElmDescribesMrPokemonText:
-	text "MR.#MON goes"
-	line "everywhere and"
-	cont "finds rarities."
-
-	para "Too bad they're"
-	line "just rare and"
-	cont "not very useful…"
-	done
-
 ElmsLabHealingMachineText1:
 	text "I wonder what this"
 	line "does?"
@@ -693,36 +599,10 @@ ElmAfterTheftText1:
 	cont "discovery?"
 	done
 
-ElmAfterTheftText6:
-	text "…<PLAY_G>. The"
-	line "road to the"
-
-	para "championship will"
-	line "be a long one."
-
-	para "Before you leave,"
-	line "make sure that you"
-	cont "talk to your mom."
-	done
-
 ElmText_CallYou:
 	text "ELM: <PLAY_G>, I'll"
 	line "call you if any-"
 	cont "thing comes up."
-	done
-
-AideText_AfterTheft:
-	text "…sigh… That"
-	line "stolen #MON."
-
-	para "I wonder how it's"
-	line "doing."
-
-	para "They say a #MON"
-	line "raised by a bad"
-
-	para "person turns bad"
-	line "itself."
 	done
 
 ElmGiveMasterBallText1:
@@ -756,43 +636,6 @@ ElmGiveMasterBallText2:
 
 	para "use of it than I"
 	line "can, <PLAY_G>!"
-	done
-
-AideText_GiveYouPotion:
-	text "<PLAY_G>, I want"
-	line "you to have this"
-	cont "for your errand."
-	done
-
-AideText_AlwaysBusy:
-	text "There are only two"
-	line "of us, so we're"
-	cont "always busy."
-	done
-
-AideText_TheftTestimony:
-	text "There was a loud"
-	line "noise outside…"
-
-	para "When we went to"
-	line "look, someone"
-	cont "stole a #MON."
-
-	para "It's unbelievable"
-	line "that anyone would"
-	cont "do that!"
-
-	para "…sigh… That"
-	line "stolen #MON."
-
-	para "I wonder how it's"
-	line "doing."
-
-	para "They say a #MON"
-	line "raised by a bad"
-
-	para "person turns bad"
-	line "itself."
 	done
 
 AideText_GiveYouBalls:
@@ -934,8 +777,6 @@ ElmsLab_MapEvents:
 	coord_event  5,  6, SCENE_ELMSLAB_CANT_LEAVE, LabTryToLeaveScript
 	coord_event  4,  5, SCENE_ELMSLAB_MEET_OFFICER, MeetCopScript
 	coord_event  5,  5, SCENE_ELMSLAB_MEET_OFFICER, MeetCopScript2
-	coord_event  4,  8, SCENE_ELMSLAB_AIDE_GIVES_POTION, AideScript_WalkPotion1
-	coord_event  5,  8, SCENE_ELMSLAB_AIDE_GIVES_POTION, AideScript_WalkPotion2
 	coord_event  4,  8, SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS, AideScript_WalkBalls1
 	coord_event  5,  8, SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS, AideScript_WalkBalls2
 
