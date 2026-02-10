@@ -34,8 +34,6 @@ Route29TuscanyCallback:
 CatchingTutorialDudeScript:
 	faceplayer
 	opentext
-	readvar VAR_BOXSPACE
-	ifequal 0, .BoxFull
 	writetext CatchingTutorialRepeatText
 	yesorno
 	iffalse .Declined
@@ -54,12 +52,6 @@ CatchingTutorialDudeScript:
 .day_morn:
 	loadwildmon BUNEARY, 5
 	sjump .loaded_mon
-
-.BoxFull:
-	writetext CatchingTutorialBoxFullText
-	waitbutton
-	closetext
-	end
 
 .Declined:
 	writetext CatchingTutorialDeclinedText
@@ -140,14 +132,6 @@ Route29Sign2:
 Route29Potion:
 	itemball POTION
 
-CatchingTutorialBoxFullText:
-	text "#MON hide in"
-	line "the grass. Who"
-
-	para "knows when they'll"
-	line "pop out…"
-	done
-
 CatchingTutorialDebriefText:
 	text "That's how you do"
 	line "it."
@@ -158,17 +142,11 @@ CatchingTutorialDebriefText:
 	done
 
 CatchingTutorialDeclinedText:
-	text "Oh. Fine, then."
+	text "#MON hide in"
+	line "the grass. Who"
 
-	para "Anyway, if you"
-	line "want to catch"
-
-	para "#MON, you have"
-	line "to walk a lot."
-
-	para "Your #DEX shows"
- 	line "where you can find"
- 	cont "them too!"
+	para "knows when they'll"
+	line "pop out…"
 	done
 
 CatchingTutorialRepeatText:
