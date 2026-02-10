@@ -383,7 +383,7 @@ AfterChikoritaMovement:
 	step_end
 
 ElmText_Intro:
-	text "ELM: <PLAY_G>!"
+	text "Elm: <PLAY_G>!"
 	line "There you are!"
 
 	para "I needed to ask"
@@ -440,21 +440,21 @@ LabWhereGoingText:
 	done
 
 TakeCyndaquilText:
-	text "ELM: You'll take"
-	line "CYNDAQUIL, the"
-	cont "fire #MON?"
+	text "Elm: You'll take"
+	line "Cyndaquil, the"
+	cont "fire #mon?"
 	done
 
 TakeTotodileText:
-	text "ELM: Do you want"
-	line "TOTODILE, the"
-	cont "water #MON?"
+	text "Elm: Do you want"
+	line "Totodile, the"
+	cont "water #mon?"
 	done
 
 TakeChikoritaText:
-	text "ELM: So, you like"
-	line "CHIKORITA, the"
-	cont "grass #MON?"
+	text "Elm: So, you like"
+	line "Chikorita, the"
+	cont "grass #mon?"
 	done
 
 ReceivedStarterText:
@@ -465,10 +465,10 @@ ReceivedStarterText:
 	done
 
 ElmDirectionsText1:
-	text "MR.#MON lives a"
+	text "Mr.#mon lives a"
 	line "little bit beyond"
 
-	para "CHERRYGROVE, the"
+	para "Cherrygrove, the"
 	line "next city over."
 
 	para "It's almost a"
@@ -485,7 +485,7 @@ ElmDirectionsText1:
 	done
 
 ElmDirectionsText2:
-	text "If your #MON is"
+	text "If your #mon is"
 	line "hurt, you should"
 
 	para "heal it with this"
@@ -501,7 +501,7 @@ ElmDirectionsText3:
 	done
 
 GotElmsNumberText:
-	text "<PLAYER> got ELM's"
+	text "<PLAYER> got Elm's"
 	line "phone number."
 	done
 
@@ -512,17 +512,17 @@ ElmsLabHealingMachineText1:
 
 ElmsLabHealingMachineText2:
 	text "Would you like to"
-	line "heal your #MON?"
+	line "heal your #mon?"
 	done
 
 ElmText_CallYou:
-	text "ELM: <PLAY_G>, I'll"
+	text "elm: <PLAY_G>, I'll"
 	line "call you if any-"
 	cont "thing comes up."
 	done
 
 ElmGiveMasterBallText1:
-	text "ELM: Hi, <PLAY_G>!"
+	text "Elm: Hi, <PLAY_G>!"
 	line "Thanks to you, my"
 
 	para "research is going"
@@ -534,17 +534,17 @@ ElmGiveMasterBallText1:
 	done
 
 ElmGiveMasterBallText2:
-	text "The MASTER BALL is"
+	text "The Master Ball is"
 	line "the best!"
 
 	para "It's the ultimate"
-	line "BALL! It'll catch"
+	line "ball! It'll catch"
 
-	para "any #MON with-"
+	para "any #mon with-"
 	line "out fail."
 
 	para "It's given only to"
-	line "recognized #MON"
+	line "recognized #mon"
 	cont "researchers."
 
 	para "I think you can"
@@ -558,27 +558,27 @@ AideText_GiveYouBalls:
 	text "<PLAY_G>!"
 
 	para "Use these on your"
-	line "#DEX quest!"
+	line "#dex quest!"
 	done
 
 AideText_ExplainBalls:
 	text "To add to your"
-	line "#DEX, you have"
-	cont "to catch #MON."
+	line "#dex, you have"
+	cont "to catch #mon."
 
-	para "Throw # BALLS"
-	line "at wild #MON"
+	para "Throw # balls"
+	line "at wild #mon"
 	cont "to get them."
 
-	para "More #MON means"
+	para "More #mon means"
 	line "more training but"
 	
-	para "you have EXP.SHARE"
-	line "in your OPTIONS."
+	para "you have Exp.Share"
+	line "in your Options."
 
 	para "Set it ON to share"
 	line "EXP. Points with"
-	cont "all your #MON."
+	cont "all your #mon."
 	done
 
 ElmsLabWindowText:
@@ -594,8 +594,8 @@ ElmsLabTravelTip1Text:
 
 	para "Travel Tip 1:"
 
-	para "Press START to"
-	line "open the MENU."
+	para "Press Start to"
+	line "open the Menu."
 	done
 
 ElmsLabTravelTip2Text:
@@ -605,7 +605,7 @@ ElmsLabTravelTip2Text:
 	para "Travel Tip 2:"
 
 	para "Record your trip"
-	line "with SAVE!"
+	line "with Save!"
 	done
 
 ElmsLabTravelTip3Text:
@@ -614,8 +614,8 @@ ElmsLabTravelTip3Text:
 
 	para "Travel Tip 3:"
 
-	para "Open your PACK and"
-	line "press SELECT to"
+	para "Open your Pack and"
+	line "press Select to"
 	cont "move items."
 	done
 
@@ -625,7 +625,7 @@ ElmsLabTravelTip4Text:
 
 	para "Travel Tip 4:"
 
-	para "Check your #MON"
+	para "Check your #mon"
 	line "moves. Press the"
 
 	para "A Button to switch"
@@ -634,7 +634,7 @@ ElmsLabTravelTip4Text:
 
 ElmsLabTrashcanText:
 	text "The wrapper from"
-	line "the snack PROF.ELM"
+	line "the snack Prof.Elm"
 	cont "ate is in there…"
 	done
 
