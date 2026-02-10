@@ -66,32 +66,28 @@ ProfElmScript:
 	faceplayer
 	opentext
 	checkevent EVENT_GOT_MASTER_BALL_FROM_ELM
-	iftrue ElmCheckEverstone
+	iftrue .ElmGenericDialogue
 	checkflag ENGINE_RISINGBADGE
 	iftrue ElmGiveMasterBallScript
-ElmCheckEverstone:
-	scall ElmScript_CallYou
-
-	checkevent EVENT_TOLD_ELM_ABOUT_TOGEPI_OVER_THE_PHONE
-	iffalse ElmCheckTogepiEgg
-
+.ElmGenericDialogue:
+	writetext ElmText_CallYou
 	waitbutton
 	closetext
 	end
 
-ElmEggHatchedScript:
-	sjump ElmCheckGotEggAgain
+ElmGiveMasterBallScript:
+	writetext ElmGiveMasterBallText1
+	promptbutton
+	verbosegiveitem MASTER_BALL
+	iffalse .notdone
+	setevent EVENT_GOT_MASTER_BALL_FROM_ELM
+	writetext ElmGiveMasterBallText2
+	waitbutton
+.notdone
+	closetext
+	end
 
-ElmCheckTogepiEgg:
-	checkevent EVENT_GOT_TOGEPI_EGG_FROM_ELMS_AIDE
-	iffalse ElmCheckGotEggAgain
-	checkevent EVENT_TOGEPI_HATCHED
-	iftrue ElmEggHatchedScript
 ElmCheckGotEggAgain:
-	checkevent EVENT_GOT_TOGEPI_EGG_FROM_ELMS_AIDE ; why are we checking it again?
-	iftrue ElmWaitingEggHatchScript
-	checkflag ENGINE_ZEPHYRBADGE
-	iftrue ElmAideHasEggScript
 	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
 	iftrue ElmStudyingEggScript
 	checkevent EVENT_GOT_MYSTERY_EGG_FROM_MR_POKEMON
@@ -322,36 +318,6 @@ ElmAfterTheftScript:
 ElmStudyingEggScript:
 	writetext ElmStudyingEggText
 	waitbutton
-	closetext
-	end
-
-ElmAideHasEggScript:
-	writetext ElmAideHasEggText
-	waitbutton
-	closetext
-	end
-
-ElmWaitingEggHatchScript:
-	writetext ElmWaitingEggHatchText
-	waitbutton
-	closetext
-	end
-
-ElmScript_CallYou:
-	writetext ElmText_CallYou
-	waitbutton
-	closetext
-	end
-
-ElmGiveMasterBallScript:
-	writetext ElmGiveMasterBallText1
-	promptbutton
-	verbosegiveitem MASTER_BALL
-	iffalse .notdone
-	setevent EVENT_GOT_MASTER_BALL_FROM_ELM
-	writetext ElmGiveMasterBallText2
-	waitbutton
-.notdone
 	closetext
 	end
 
@@ -895,27 +861,6 @@ ElmStudyingEggText:
 
 	para "I learn anything"
 	line "about that EGG!"
-	done
-
-ElmAideHasEggText:
-	text "ELM: <PLAY_G>?"
-	line "Didn't you meet my"
-	cont "assistant?"
-
-	para "He should have met"
-	line "you with the EGG"
-
-	para "at VIOLET CITY's"
-	line "#MON CENTER."
-
-	para "You must have just"
-	line "missed him. Try to"
-	cont "catch him there."
-	done
-
-ElmWaitingEggHatchText:
-	text "ELM: Hey, has that"
-	line "EGG changed any?"
 	done
 
 ElmText_CallYou:

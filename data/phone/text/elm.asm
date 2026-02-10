@@ -5,69 +5,8 @@ ElmPhoneHealYourMonText:
 	line "it."
 
 	para "Be sure to heal"
-	line "your #MON if"
+	line "your #mon if"
 	cont "they are hurt."
-	done
-
-ElmPhoneSawMrPokemonText:
-	text "Hello, <PLAY_G>?"
-
-	para "Did you meet MR."
-	line "#MON? Great!"
-	cont "Come back safely!"
-	done
-
-ElmPhonePokemonStolenText:
-	text "<PLAY_G>? I'm very"
-	line "upset now."
-
-	para "We had a #MON"
-	line "stolen from here."
-
-	para "How could anyone"
-	line "do that?"
-	done
-
-ElmPhoneCheckingTheEggText:
-	text "Hello, <PLAY_G>?"
-
-	para "We're checking the"
-	line "EGG now. It does"
-
-	para "appear to be a"
-	line "#MON EGG."
-	done
-
-ElmPhoneAssistantText:
-	text "Hello, <PLAY_G>?"
-
-	para "Did you see my"
-	line "assistant? He's at"
-
-	para "the #MON CENTER"
-	line "in VIOLET CITY."
-	done
-
-ElmPhoneHowIsTheEggText:
-	text "Hello, <PLAY_G>?"
-
-	para "How's the EGG? Has"
-	line "anything changed?"
-
-	para "If anything hap-"
-	line "pens, please call."
-	done
-
-ElmPhoneEggHatchedText:
-	text "Hello, <PLAY_G>?"
-	line "How is the EGG?"
-
-	para "What? It hatched?"
-	line "Wow! What kind of"
-	cont "#MON is it?"
-
-	para "Please come show"
-	line "me now!"
 	done
 
 ElmPhoneDiscoveredPokerusText:
