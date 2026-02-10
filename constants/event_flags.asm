@@ -90,7 +90,7 @@
 	const EVENT_GAVE_KENYA
 	const EVENT_GOT_HP_UP_FROM_RANDY
 	const EVENT_GOT_TM50_NIGHTMARE
-	const EVENT_TOGEPI_HATCHED
+	const_skip
 	const_skip
 	const_skip
 	const EVENT_GOT_QUICK_CLAW
