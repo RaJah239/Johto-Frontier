@@ -646,9 +646,9 @@ BattleArenaReceptionistScript:
 	writetext PlayUsingGreenText
 	yesorno
 	iffalse .ChoosePlayerCharacter
-	setval FALKNER
+	setval GREEN
 	writemem wOtherTrainerClass
-	setval FALKNER1
+	setval GREEN1
 	writemem wOtherTrainerID
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
@@ -656,7 +656,7 @@ BattleArenaReceptionistScript:
 	writetext PlayAgainstGreenText
 	yesorno
 	iffalse .ChooseEnemyCharacter
-	loadtrainer FALKNER, FALKNER1
+	loadtrainer GREEN, GREEN1
 	sjump .StartBattle
 
 .BluePlayer:
