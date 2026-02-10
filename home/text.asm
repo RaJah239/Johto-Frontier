@@ -351,19 +351,6 @@ PlaceEnemysName::
 	and a
 	jr nz, .linkbattle
 
-	ld a, [wTrainerClass]
-	cp RIVAL1
-	jr nz, .print_trainer_name
-
-	ld a, [wOtherTrainerID]
-	cp RIVAL1_1_CHIKORITA
-	jr z, .rival_first_battle
-	cp RIVAL1_1_CYNDAQUIL
-	jr z, .rival_first_battle
-	cp RIVAL1_1_TOTODILE
-	jr z, .rival_first_battle
-
-.print_trainer_name
 	ld de, wOTClassName
 	call PlaceString
 	ld h, b
@@ -374,10 +361,6 @@ PlaceEnemysName::
 	callfar Battle_GetTrainerName
 	pop hl
 	ld de, wStringBuffer1
-	jr PlaceCommandCharacter
-
-.rival_first_battle
-	ld de, wRivalName
 	jr PlaceCommandCharacter
 
 .linkbattle
