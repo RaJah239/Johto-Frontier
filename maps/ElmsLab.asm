@@ -283,8 +283,6 @@ ElmsLabHealingMachine_HealParty:
 
 ElmAfterTheftScript:
 	setmapscene ROUTE_29, SCENE_ROUTE29_CATCH_TUTORIAL
-	clearevent EVENT_ROUTE_30_YOUNGSTER_JOEY
-	setevent EVENT_ROUTE_30_BATTLE
 	writetext ElmAfterTheftText6
 	waitbutton
 	closetext
