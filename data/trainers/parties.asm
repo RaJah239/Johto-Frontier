@@ -30,6 +30,40 @@
 SECTION "Enemy Trainer Parties 1", ROMX
 
 FalknerGroup:
+	; Falkner (1)
+	db "Falkner@", TRAINERTYPE_NICKNAME | TRAINERTYPE_DVS | TRAINERTYPE_ITEM_MOVES
+	db 50, SKARMORY
+		db "Skarmory@"		; Nickname
+		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
+		db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+		db ROOST, STEALTH_ROCK, IRON_BASH, TOXIC ; Moveset - NO_MOVE is a thing
+	db 50, PIDGEOT
+		db "Pidgeot@"		; Nickname
+		db $FF, $FF ; dvs - atk|def dv, spd|spc dv
+		db FOCUS_SASH	; ITEM/ NO_ITEM is a thing
+		db ROOST, STEEL_WING, SKY_ATTACK, EXTREMESPEED ; Moveset - NO_MOVE is a thing
+	db 50, ZAPDOS
+		db "Zapdos@"		; Nickname
+		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
+		db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+		db THUNDERBOLT, SKY_ATTACK, ROOST, TOXIC ; Moveset - NO_MOVE is a thing
+	db 50, AERODACTYL
+		db "Aerodactyl@"		; Nickname
+		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
+		db LIFE_ORB	; ITEM/ NO_ITEM is a thing
+		db EARTHQUAKE, ROCK_SLIDE, SKY_ATTACK, IRON_HEAD ; Moveset - NO_MOVE is a thing
+	db 50, GLISCOR
+		db "Gliscor@"		; Nickname
+		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
+		db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+		db ROOST, EARTHQUAKE, ROCK_SLIDE, DIVE_BOMB ; Moveset - NO_MOVE is a thing
+	db 50, LUGIA
+		db "Lugia@"		; Nickname
+		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
+		db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+		db CALM_MIND, AEROBLAST, SCALD, RECOVER ; Moveset - NO_MOVE is a thing
+	db -1 ; end
+
 WhitneyGroup:
 BugsyGroup:
 MortyGroup:
