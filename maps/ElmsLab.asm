@@ -13,8 +13,7 @@ ElmsLab_MapScripts:
 	scene_script ElmsLabNoop1Scene,   SCENE_ELMSLAB_CANT_LEAVE
 	scene_script ElmsLabNoop2Scene,   SCENE_ELMSLAB_NOOP
 	scene_script ElmsLabNoop3Scene,   SCENE_ELMSLAB_MEET_OFFICER
-	scene_script ElmsLabNoop4Scene,   SCENE_ELMSLAB_UNUSED
-	scene_script ElmsLabNoop5Scene,   SCENE_ELMSLAB_AIDE_GIVES_POTION
+	scene_script ElmsLabNoop4Scene,   SCENE_ELMSLAB_AIDE_GIVES_POTION
 	scene_const SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
 
 	def_callbacks
@@ -36,9 +35,6 @@ ElmsLabNoop3Scene:
 ElmsLabNoop4Scene:
 	end
 
-ElmsLabNoop5Scene:
-	end
-
 ElmsLabMoveElmCallback:
 	checkscene
 	iftrue .Skip ; not SCENE_ELMSLAB_MEET_ELM
@@ -52,31 +48,9 @@ ElmsLabWalkUpToElmScript:
 	turnobject ELMSLAB_ELM, RIGHT
 	opentext
 	writetext ElmText_Intro
-.MustSayYes:
-	yesorno
-	iftrue .ElmGetsEmail
-	writetext ElmText_Refused
-	sjump .MustSayYes
+	waitbutton
+	closetext
 
-.ElmGetsEmail:
-	writetext ElmText_Accepted
-	promptbutton
-	writetext ElmText_ResearchAmbitions
-	waitbutton
-	closetext
-	playsound SFX_GLASS_TING
-	pause 30
-	showemote EMOTE_SHOCK, ELMSLAB_ELM, 10
-	turnobject ELMSLAB_ELM, DOWN
-	opentext
-	writetext ElmText_GotAnEmail
-	waitbutton
-	closetext
-	opentext
-	turnobject ELMSLAB_ELM, RIGHT
-	writetext ElmText_MissionFromMrPokemon
-	waitbutton
-	closetext
 	applymovement ELMSLAB_ELM, ElmsLab_ElmToDefaultPositionMovement1
 	turnobject PLAYER, UP
 	applymovement ELMSLAB_ELM, ElmsLab_ElmToDefaultPositionMovement2
@@ -158,8 +132,6 @@ LabTryToLeaveScript:
 	end
 
 CyndaquilPokeBallScript:
-	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue LookAtElmPokeBallScript
 	turnobject ELMSLAB_ELM, DOWN
 	reanchormap
 	pokepic CYNDAQUIL
@@ -169,7 +141,7 @@ CyndaquilPokeBallScript:
 	opentext
 	writetext TakeCyndaquilText
 	yesorno
-	iffalse DidntChooseStarterScript
+	iffalse .exit_this_scene1
 	disappear ELMSLAB_POKE_BALL1
 	setevent EVENT_GOT_CYNDAQUIL_FROM_ELM
 	writetext ChoseStarterText
@@ -182,14 +154,23 @@ CyndaquilPokeBallScript:
 	promptbutton
 	givepoke CYNDAQUIL, 5, BERRY
 	closetext
+	
+	checkevent EVENT_GOT_TOTODILE_FROM_ELM
+	iffalse .exit_this_scene2
+	checkevent EVENT_GOT_CHIKORITA_FROM_ELM
+	iffalse .exit_this_scene2
+
 	readvar VAR_FACING
 	ifequal RIGHT, ElmDirectionsScript
 	applymovement PLAYER, AfterCyndaquilMovement
 	sjump ElmDirectionsScript
 
+.exit_this_scene1
+	closetext
+.exit_this_scene2
+	end
+
 TotodilePokeBallScript:
-	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue LookAtElmPokeBallScript
 	turnobject ELMSLAB_ELM, DOWN
 	reanchormap
 	pokepic TOTODILE
@@ -199,7 +180,7 @@ TotodilePokeBallScript:
 	opentext
 	writetext TakeTotodileText
 	yesorno
-	iffalse DidntChooseStarterScript
+	iffalse .exit_this_scene1
 	disappear ELMSLAB_POKE_BALL2
 	setevent EVENT_GOT_TOTODILE_FROM_ELM
 	writetext ChoseStarterText
@@ -212,12 +193,21 @@ TotodilePokeBallScript:
 	promptbutton
 	givepoke TOTODILE, 5, BERRY
 	closetext
+
+	checkevent EVENT_GOT_CYNDAQUIL_FROM_ELM
+	iffalse .exit_this_scene2
+	checkevent EVENT_GOT_CHIKORITA_FROM_ELM
+	iffalse .exit_this_scene2
+
 	applymovement PLAYER, AfterTotodileMovement
 	sjump ElmDirectionsScript
 
+.exit_this_scene1
+	closetext
+.exit_this_scene2
+	end
+
 ChikoritaPokeBallScript:
-	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue LookAtElmPokeBallScript
 	turnobject ELMSLAB_ELM, DOWN
 	reanchormap
 	pokepic CHIKORITA
@@ -227,7 +217,7 @@ ChikoritaPokeBallScript:
 	opentext
 	writetext TakeChikoritaText
 	yesorno
-	iffalse DidntChooseStarterScript
+	iffalse .exit_this_scene1
 	disappear ELMSLAB_POKE_BALL3
 	setevent EVENT_GOT_CHIKORITA_FROM_ELM
 	writetext ChoseStarterText
@@ -240,13 +230,18 @@ ChikoritaPokeBallScript:
 	promptbutton
 	givepoke CHIKORITA, 5, BERRY
 	closetext
+
+	checkevent EVENT_GOT_CYNDAQUIL_FROM_ELM
+	iffalse .exit_this_scene2
+	checkevent EVENT_GOT_TOTODILE_FROM_ELM
+	iffalse .exit_this_scene2
+
 	applymovement PLAYER, AfterChikoritaMovement
 	sjump ElmDirectionsScript
 
-DidntChooseStarterScript:
-	writetext DidntChooseStarterText
-	waitbutton
+.exit_this_scene1
 	closetext
+.exit_this_scene2
 	end
 
 ElmDirectionsScript:
@@ -280,13 +275,6 @@ ElmDirectionsScript:
 
 ElmDescribesMrPokemonScript:
 	writetext ElmDescribesMrPokemonText
-	waitbutton
-	closetext
-	end
-
-LookAtElmPokeBallScript:
-	opentext
-	writetext ElmPokeBallText
 	waitbutton
 	closetext
 	end
@@ -759,87 +747,13 @@ ElmText_Intro:
 	line "caught."
 	done
 
-ElmText_Accepted:
-	text "Thanks, <PLAY_G>!"
-
-	para "You're a great"
-	line "help!"
-	done
-
-ElmText_Refused:
-	text "But… Please, I"
-	line "need your help!"
-	done
-
-ElmText_ResearchAmbitions:
-	text "When I announce my"
-	line "findings, I'm sure"
-
-	para "we'll delve a bit"
-	line "deeper into the"
-
-	para "many mysteries of"
-	line "#MON."
-
-	para "You can count on"
-	line "it!"
-	done
-
-ElmText_GotAnEmail:
-	text "Oh, hey! I got an"
-	line "e-mail!"
-
-	para "<……><……><……>"
-	line "Hm… Uh-huh…"
-
-	para "Okay…"
-	done
-
-ElmText_MissionFromMrPokemon:
-	text "Hey, listen."
-
-	para "I have an acquain-"
-	line "tance called MR."
-	cont "#MON."
-
-	para "He keeps finding"
-	line "weird things and"
-
-	para "raving about his"
-	line "discoveries."
-
-	para "Anyway, I just got"
-	line "an e-mail from him"
-
-	para "saying that this"
-	line "time it's real."
-
-	para "It is intriguing,"
-	line "but we're busy"
-
-	para "with our #MON"
-	line "research…"
-
-	para "Wait!"
-
-	para "I know!"
-
-	para "<PLAY_G>, can you"
-	line "go in our place?"
-	done
-
 ElmText_ChooseAPokemon:
 	text "I want you to"
-	line "raise one of the"
+	line "raise all the"
+	cont "#mon contained"
+	cont "in these balls."
 
-	para "#MON contained"
-	line "in these BALLS."
-
-	para "You'll be that"
-	line "#MON's first"
-	cont "partner, <PLAY_G>!"
-
-	para "Go on. Pick one!"
+	para "Go on. Take them!"
 	done
 
 ElmText_LetYourMonBattleIt:
@@ -849,8 +763,12 @@ ElmText_LetYourMonBattleIt:
 	done
 
 LabWhereGoingText:
-	text "ELM: Wait! Where"
+	text "Elm: Wait! Where"
 	line "are you going?"
+	
+	para "There's still more"
+	line "#mon for you"
+	cont "to take."
 	done
 
 TakeCyndaquilText:
@@ -869,14 +787,6 @@ TakeChikoritaText:
 	text "ELM: So, you like"
 	line "CHIKORITA, the"
 	cont "grass #MON?"
-	done
-
-DidntChooseStarterText:
-	text "ELM: Think it over"
-	line "carefully."
-
-	para "Your partner is"
-	line "important."
 	done
 
 ChoseStarterText:
@@ -941,12 +851,6 @@ ElmDescribesMrPokemonText:
 	para "Too bad they're"
 	line "just rare and"
 	cont "not very useful…"
-	done
-
-ElmPokeBallText:
-	text "It contains a"
-	line "#MON caught by"
-	cont "PROF.ELM."
 	done
 
 ElmsLabHealingMachineText1:
