@@ -1,8 +1,6 @@
 ElmPhoneCalleeScript:
 	readvar VAR_SPECIALPHONECALL
 	ifequal SPECIALCALL_POKERUS, .pokerus
-	checkevent EVENT_SHOWED_TOGEPI_TO_ELM
-	iftrue .discovery
 	checkevent EVENT_GOT_TOGEPI_EGG_FROM_ELMS_AIDE
 	iffalse .next
 	checkevent EVENT_TOGEPI_HATCHED
@@ -44,16 +42,6 @@ ElmPhoneCalleeScript:
 .egghatched
 	farwritetext ElmPhoneEggHatchedText
 	setevent EVENT_TOLD_ELM_ABOUT_TOGEPI_OVER_THE_PHONE
-	end
-
-.discovery
-	random 2
-	ifequal 0, .nextdiscovery
-	farwritetext ElmPhoneDiscoveredHatchTimeText
-	end
-
-.nextdiscovery
-	farwritetext ElmPhoneInvestigatingEggMovesText
 	end
 
 .pokerus

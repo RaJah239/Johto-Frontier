@@ -70,32 +70,6 @@ ElmPhoneEggHatchedText:
 	line "me now!"
 	done
 
-ElmPhoneDiscoveredHatchTimeText:
-	text "Hello, <PLAY_G>?"
-
-	para "I just made a new"
-	line "discovery."
-
-	para "The time it takes"
-	line "for an EGG to"
-
-	para "hatch depends on"
-	line "the #MON."
-	done
-
-ElmPhoneInvestigatingEggMovesText:
-	text "Hello, <PLAY_G>?"
-
-	para "It's still a"
-	line "mystery what kinds"
-
-	para "of moves hatched"
-	line "#MON have."
-
-	para "We're investigat-"
-	line "ing that now."
-	done
-
 ElmPhoneDiscoveredPokerusText:
 	text "Hello, <PLAY_G>?"
 
