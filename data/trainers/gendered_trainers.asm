@@ -52,4 +52,5 @@ FemaleTrainers:
 	db ARIANA
 	db NURSE
 	db CAL_F
+	db GREEN
 .End

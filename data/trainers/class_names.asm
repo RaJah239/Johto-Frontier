@@ -81,4 +81,5 @@ TrainerClassNames::
 	li "<PKMN> Trainer"
 	li "Nurse"
 	li "<PKMN> Trainer"
+	li "<PKMN> Trainer"
 	assert_list_length NUM_TRAINER_CLASSES

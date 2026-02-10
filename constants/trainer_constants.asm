@@ -567,6 +567,9 @@ DEF KRIS EQU __trainer_class__
 	trainerclass INSAF
 	const INSAF1
 
+	trainerclass GREEN
+	const GREEN1
+
  	const_def
  	const RANDOMLIST_0
  	const RANDOMLIST_1

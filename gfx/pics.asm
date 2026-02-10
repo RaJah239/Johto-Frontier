@@ -747,3 +747,4 @@ CalPicF:             INCBIN "gfx/trainers/kris.2bpp.lz"
 
 SECTION "Pics 27", ROMX
 BlainePic:           INCBIN "gfx/trainers/blaine.2bpp.lz"
+GreenPic:            INCBIN "gfx/trainers/green.2bpp.lz"

@@ -82,4 +82,5 @@ TrainerClassDVs:
 	dn  0,  0,  0,  0 ; MAXIMA
 	dn  0,  0,  0,  0 ; NURSE
 	dn  0,  0,  0,  0 ; INSAF
+	dn  0,  0,  0,  0 ; GREEN
 	assert_table_length NUM_TRAINER_CLASSES

@@ -89,4 +89,5 @@ INCBIN "gfx/trainers/archer.gbcpal", middle_colors
 INCBIN "gfx/trainers/maxima.gbcpal", middle_colors
 INCBIN "gfx/trainers/nurse.gbcpal", middle_colors
 INCBIN "gfx/trainers/insaf.gbcpal", middle_colors
+INCBIN "gfx/trainers/green.gbcpal", middle_colors
 	assert_table_length NUM_TRAINER_CLASSES + 1

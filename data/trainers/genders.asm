@@ -83,4 +83,5 @@ BTTrainerClassGenders:
 	db MALE   ; MAXIMA
 	db FEMALE ; NURSE
 	db MALE   ; INSAF
+	db FEMALE ; GREEN
 	assert_table_length NUM_TRAINER_CLASSES

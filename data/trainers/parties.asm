@@ -356,3 +356,38 @@ InsafGroup:
 		db LEFTOVERS	; ITEM/ NO_ITEM is a thing
 		db BULK_UP, ZEN_HEADBUTT, RECOVER, DRAIN_PUNCH ; Moveset - NO_MOVE is a thing
 	db -1 ; end
+
+GreenGroup:
+	; GREEN (1)
+	db "Green@", TRAINERTYPE_NICKNAME | TRAINERTYPE_DVS | TRAINERTYPE_ITEM_MOVES
+	db 50, TORTERRA
+		db "Torterra@"		; Nickname
+		db $FF, $FF ; dvs - atk|def dv, spd|spc dv
+		db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+		db EARTHQUAKE, ROCK_SLIDE, WOOD_BASH, HEALING_LIGHT ; Moveset - NO_MOVE is a thing
+	db 50, GYARADOS
+		db "Tauros@"		; Nickname
+		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
+		db FOCUS_SASH	; ITEM/ NO_ITEM is a thing
+		db DRAGON_DANCE, EARTHQUAKE, DIVE_BOMB, WATERFALL ; Moveset - NO_MOVE is a thing
+	db 50, ARCANINE
+		db "Arcanine@"		; Nickname
+		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
+		db GOLD_BERRY	; ITEM/ NO_ITEM is a thing
+		db FLARE_BLITZ, DOUBLE_EDGE, EXTREMESPEED, BULK_UP ; Moveset - NO_MOVE is a thing
+	db 50, ARTICUNO
+		db "Articuno@"		; Nickname
+		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
+		db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+		db ICE_BEAM, SKY_ATTACK, ROOST, TOXIC ; Moveset - NO_MOVE is a thing
+	db 50, BRONZONG
+		db "Celebi@"		; Nickname
+		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
+		db TRICK_STICK	; ITEM/ NO_ITEM is a thing
+		db TRICK_ROOM, ZEN_HEADBUTT, IRON_BASH, EARTHQUAKE ; Moveset - NO_MOVE is a thing
+	db 50, MEW
+		db "Mew@"		; Nickname
+		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
+		db LEFTOVERS	; ITEM/ NO_ITEM is a thing
+		db BULK_UP, ZEN_HEADBUTT, RECOVER, DRAIN_PUNCH ; Moveset - NO_MOVE is a thing
+	db -1 ; end

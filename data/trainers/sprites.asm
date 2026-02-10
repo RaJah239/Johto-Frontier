@@ -81,4 +81,5 @@ BTTrainerClassSprites:
 	db SPRITE_MAXIMA
 	db SPRITE_NURSE
 	db SPRITE_RED
+	db SPRITE_BEAUTY ; not use in battle tower
 	assert_table_length NUM_TRAINER_CLASSES
