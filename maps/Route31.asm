@@ -12,16 +12,6 @@ Route31_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_NEWMAP, Route31CheckMomCallCallback
-
-Route31CheckMomCallCallback:
-	checkevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
-	iffalse .DoMomCall
-	endcallback
-
-.DoMomCall:
-	specialphonecall SPECIALCALL_WORRIED
-	endcallback
 
 TrainerBugCatcherWade1:
 	trainer BUG_CATCHER, WADE1, EVENT_BEAT_BUG_CATCHER_WADE, BugCatcherWade1SeenText, BugCatcherWade1BeatenText, 0, .Script
