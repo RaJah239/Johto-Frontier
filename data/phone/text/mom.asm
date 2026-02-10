@@ -147,19 +147,3 @@ MomPhoneNoGymQuestText:
 	para "your errand come"
 	line "on home, dear."
 	done
-
-MomPhoneLectureText:
-	text "Hello?"
-
-	para "…… <PLAYER>?"
-	line "I heard from PROF."
-
-	para "ELM that you went"
-	line "on a long trip."
-
-	para "I wish you would"
-	line "have told me…"
-
-	para "What about money?"
-	line "Should I save it?"
-	done

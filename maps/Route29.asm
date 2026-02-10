@@ -13,17 +13,9 @@
 
 Route29_MapScripts:
 	def_scene_scripts
-	scene_script Route29Noop1Scene, SCENE_ROUTE29_NOOP
-	scene_script Route29Noop2Scene, SCENE_ROUTE29_CATCH_TUTORIAL
 
 	def_callbacks
 	callback MAPCALLBACK_OBJECTS, Route29TuscanyCallback
-
-Route29Noop1Scene:
-	end
-
-Route29Noop2Scene:
-	end
 
 Route29TuscanyCallback:
 	checkflag ENGINE_ZEPHYRBADGE
@@ -39,95 +31,11 @@ Route29TuscanyCallback:
 	appear ROUTE29_TUSCANY
 	endcallback
 
-Route29Tutorial1:
-	turnobject ROUTE29_COOLTRAINER_M1, UP
-	showemote EMOTE_SHOCK, ROUTE29_COOLTRAINER_M1, 15
-	applymovement ROUTE29_COOLTRAINER_M1, DudeMovementData1a
-	turnobject PLAYER, LEFT
-	setevent EVENT_DUDE_TALKED_TO_YOU
-	opentext
-	writetext CatchingTutorialIntroText
-	yesorno
-	iffalse Script_RefusedTutorial1
-	closetext
-	follow ROUTE29_COOLTRAINER_M1, PLAYER
-	applymovement ROUTE29_COOLTRAINER_M1, DudeMovementData1b
-	stopfollow
-	checktime MORN | DAY
-	iftrue .day_morn
-	loadwildmon HOOTHOOT, 5
-.loaded_mon:
-	catchtutorial BATTLETYPE_TUTORIAL
-	turnobject ROUTE29_COOLTRAINER_M1, UP
-	opentext
-	writetext CatchingTutorialDebriefText
-	waitbutton
-	closetext
-	setscene SCENE_ROUTE29_NOOP
-	setevent EVENT_LEARNED_TO_CATCH_POKEMON
-	end
-
-.day_morn:
-	loadwildmon BUNEARY, 5
-	sjump .loaded_mon
-
-Route29Tutorial2:
-	turnobject ROUTE29_COOLTRAINER_M1, UP
-	showemote EMOTE_SHOCK, ROUTE29_COOLTRAINER_M1, 15
-	applymovement ROUTE29_COOLTRAINER_M1, DudeMovementData2a
-	turnobject PLAYER, LEFT
-	setevent EVENT_DUDE_TALKED_TO_YOU
-	opentext
-	writetext CatchingTutorialIntroText
-	yesorno
-	iffalse Script_RefusedTutorial2
-	closetext
-	follow ROUTE29_COOLTRAINER_M1, PLAYER
-	applymovement ROUTE29_COOLTRAINER_M1, DudeMovementData2b
-	stopfollow
-	checktime MORN | DAY
-	iftrue .day_morn
-	loadwildmon HOOTHOOT, 5
-.loaded_mon:
-	catchtutorial BATTLETYPE_TUTORIAL
-	turnobject ROUTE29_COOLTRAINER_M1, UP
-	opentext
-	writetext CatchingTutorialDebriefText
-	waitbutton
-	closetext
-	setscene SCENE_ROUTE29_NOOP
-	setevent EVENT_LEARNED_TO_CATCH_POKEMON
-	end
-
-.day_morn:
-	loadwildmon BUNEARY, 5
-	sjump .loaded_mon
-
-Script_RefusedTutorial1:
-	writetext CatchingTutorialDeclinedText
-	waitbutton
-	closetext
-	applymovement ROUTE29_COOLTRAINER_M1, DudeMovementData1b
-	setscene SCENE_ROUTE29_NOOP
-	end
-
-Script_RefusedTutorial2:
-	writetext CatchingTutorialDeclinedText
-	waitbutton
-	closetext
-	applymovement ROUTE29_COOLTRAINER_M1, DudeMovementData2b
-	setscene SCENE_ROUTE29_NOOP
-	end
-
 CatchingTutorialDudeScript:
 	faceplayer
 	opentext
 	readvar VAR_BOXSPACE
 	ifequal 0, .BoxFull
-	checkevent EVENT_LEARNED_TO_CATCH_POKEMON
-	iftrue .BoxFull
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iffalse .BoxFull
 	writetext CatchingTutorialRepeatText
 	yesorno
 	iffalse .Declined
@@ -141,7 +49,6 @@ CatchingTutorialDudeScript:
 	writetext CatchingTutorialDebriefText
 	waitbutton
 	closetext
-	setevent EVENT_LEARNED_TO_CATCH_POKEMON
 	end
 
 .day_morn:
@@ -233,58 +140,12 @@ Route29Sign2:
 Route29Potion:
 	itemball POTION
 
-DudeMovementData1a:
-	step UP
-	step UP
-	step UP
-	step UP
-	step RIGHT
-	step RIGHT
-	step_end
-
-DudeMovementData2a:
-	step UP
-	step UP
-	step UP
-	step RIGHT
-	step RIGHT
-	step_end
-
-DudeMovementData1b:
-	step LEFT
-	step LEFT
-	step DOWN
-	step DOWN
-	step DOWN
-	step DOWN
-	step_end
-
-DudeMovementData2b:
-	step LEFT
-	step LEFT
-	step DOWN
-	step DOWN
-	step DOWN
-	step_end
-
 CatchingTutorialBoxFullText:
 	text "#MON hide in"
 	line "the grass. Who"
 
 	para "knows when they'll"
 	line "pop out…"
-	done
-
-CatchingTutorialIntroText:
-	text "I've seen you a"
-	line "couple times. How"
-
-	para "many #MON have"
-	line "you caught?"
-
-	para "Would you like me"
-	line "to show you how to"
-	cont "catch #MON?"
 	done
 
 CatchingTutorialDebriefText:
@@ -520,8 +381,6 @@ Route29_MapEvents:
 	warp_event 27,  1, ROUTE_29_ROUTE_46_GATE, 3
 
 	def_coord_events
-	coord_event 53,  8, SCENE_ROUTE29_CATCH_TUTORIAL, Route29Tutorial1
-	coord_event 53,  9, SCENE_ROUTE29_CATCH_TUTORIAL, Route29Tutorial2
 
 	def_bg_events
 	bg_event 51,  7, BGEVENT_READ, Route29Sign1

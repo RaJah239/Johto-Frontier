@@ -254,11 +254,6 @@ ElmsLabHealingMachine_HealParty:
 	closetext
 	end
 
-ElmAfterTheftScript:
-	setmapscene ROUTE_29, SCENE_ROUTE29_CATCH_TUTORIAL
-	setscene SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
-	end
-
 AideScript_WalkBalls1:
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksRight1
 	turnobject PLAYER, DOWN
