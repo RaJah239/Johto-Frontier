@@ -4,7 +4,6 @@
 	const ELMSLAB_POKE_BALL1
 	const ELMSLAB_POKE_BALL2
 	const ELMSLAB_POKE_BALL3
-	const ELMSLAB_OFFICER
 	const ELMSLAB_PORYGON_PC
 
 ElmsLab_MapScripts:
@@ -12,7 +11,6 @@ ElmsLab_MapScripts:
 	scene_script ElmsLabMeetElmScene, SCENE_ELMSLAB_MEET_ELM
 	scene_script ElmsLabNoop1Scene,   SCENE_ELMSLAB_CANT_LEAVE
 	scene_script ElmsLabNoop2Scene,   SCENE_ELMSLAB_NOOP
-	scene_script ElmsLabNoop3Scene,   SCENE_ELMSLAB_MEET_OFFICER
 	scene_const SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
 
 	def_callbacks
@@ -22,7 +20,6 @@ ElmsLabMeetElmScene:
 	sdefer ElmsLabWalkUpToElmScript
 ElmsLabNoop1Scene:
 ElmsLabNoop2Scene:
-ElmsLabNoop3Scene:
 	end
 
 ElmsLabMoveElmCallback:
@@ -99,8 +96,6 @@ CyndaquilPokeBallScript:
 	iffalse .exit_this_scene1
 	disappear ELMSLAB_POKE_BALL1
 	setevent EVENT_GOT_CYNDAQUIL_FROM_ELM
-	writetext ChoseStarterText
-	promptbutton
 	waitsfx
 	getmonname STRING_BUFFER_3, CYNDAQUIL
 	writetext ReceivedStarterText
@@ -138,8 +133,6 @@ TotodilePokeBallScript:
 	iffalse .exit_this_scene1
 	disappear ELMSLAB_POKE_BALL2
 	setevent EVENT_GOT_TOTODILE_FROM_ELM
-	writetext ChoseStarterText
-	promptbutton
 	waitsfx
 	getmonname STRING_BUFFER_3, TOTODILE
 	writetext ReceivedStarterText
@@ -175,8 +168,6 @@ ChikoritaPokeBallScript:
 	iffalse .exit_this_scene1
 	disappear ELMSLAB_POKE_BALL3
 	setevent EVENT_GOT_CHIKORITA_FROM_ELM
-	writetext ChoseStarterText
-	promptbutton
 	waitsfx
 	getmonname STRING_BUFFER_3, CHIKORITA
 	writetext ReceivedStarterText
@@ -294,44 +285,8 @@ ElmsAideScript:
 	closetext
 	end
 
-MeetCopScript2:
-	applymovement PLAYER, MeetCopScript2_StepLeft
-
-MeetCopScript:
-	applymovement PLAYER, MeetCopScript_WalkUp
-CopScript:
-	turnobject ELMSLAB_OFFICER, LEFT
-	opentext
-	writetext ElmsLabOfficerText1
-	promptbutton
-	special NameRival
-	writetext ElmsLabOfficerText2
-	waitbutton
-	closetext
-	applymovement ELMSLAB_OFFICER, OfficerLeavesMovement
-	disappear ELMSLAB_OFFICER
-	setscene SCENE_ELMSLAB_NOOP
-	end
-
 ElmsLabWindow:
-	opentext
-	checkflag ENGINE_FLYPOINT_VIOLET
-	iftrue .Normal
-	checkevent EVENT_ELM_CALLED_ABOUT_STOLEN_POKEMON
-	iftrue .BreakIn
-	sjump .Normal
-
-.BreakIn:
-	writetext ElmsLabWindowText2
-	waitbutton
-	closetext
-	end
-
-.Normal:
-	writetext ElmsLabWindowText1
-	waitbutton
-	closetext
-	end
+	jumptext ElmsLabWindowText
 
 ElmsLabTravelTip1:
 	jumptext ElmsLabTravelTip1Text
@@ -367,24 +322,6 @@ ElmsLab_WalkUpToElmMovement:
 
 ElmsLab_CantLeaveMovement:
 	step UP
-	step_end
-
-MeetCopScript2_StepLeft:
-	step LEFT
-	step_end
-
-MeetCopScript_WalkUp:
-	step UP
-	step UP
-	turn_head RIGHT
-	step_end
-
-OfficerLeavesMovement:
-	step DOWN
-	step DOWN
-	step DOWN
-	step DOWN
-	step DOWN
 	step_end
 
 AideWalksRight1:
@@ -520,12 +457,6 @@ TakeChikoritaText:
 	cont "grass #MON?"
 	done
 
-ChoseStarterText:
-	text "ELM: I think"
-	line "that's a great"
-	cont "#MON too!"
-	done
-
 ReceivedStarterText:
 	text "<PLAYER> received"
 	line "@"
@@ -582,15 +513,6 @@ ElmsLabHealingMachineText1:
 ElmsLabHealingMachineText2:
 	text "Would you like to"
 	line "heal your #MON?"
-	done
-
-ElmAfterTheftText1:
-	text "ELM: <PLAY_G>, this"
-	line "is terrible…"
-
-	para "Oh, yes, what was"
-	line "MR.#MON's big"
-	cont "discovery?"
 	done
 
 ElmText_CallYou:
@@ -659,45 +581,11 @@ AideText_ExplainBalls:
 	cont "all your #MON."
 	done
 
-ElmsLabOfficerText1:
-	text "I heard a #MON"
-	line "was stolen here…"
-
-	para "I was just getting"
-	line "some information"
-	cont "from PROF.ELM."
-
-	para "Apparently, it was"
-	line "a young male with"
-	cont "long, red hair…"
-
-	para "What?"
-
-	para "You battled a"
-	line "trainer like that?"
-
-	para "Did you happen to"
-	line "get his name?"
-	done
-
-ElmsLabOfficerText2:
-	text "OK! So <RIVAL>"
-	line "was his name."
-
-	para "Thanks for helping"
-	line "my investigation!"
-	done
-
-ElmsLabWindowText1:
+ElmsLabWindowText:
 	text "The window's open."
 
 	para "A pleasant breeze"
 	line "is blowing in."
-	done
-
-ElmsLabWindowText2:
-	text "He broke in"
-	line "through here!"
 	done
 
 ElmsLabTravelTip1Text:
@@ -769,8 +657,6 @@ ElmsLab_MapEvents:
 	def_coord_events
 	coord_event  4,  6, SCENE_ELMSLAB_CANT_LEAVE, LabTryToLeaveScript
 	coord_event  5,  6, SCENE_ELMSLAB_CANT_LEAVE, LabTryToLeaveScript
-	coord_event  4,  5, SCENE_ELMSLAB_MEET_OFFICER, MeetCopScript
-	coord_event  5,  5, SCENE_ELMSLAB_MEET_OFFICER, MeetCopScript2
 	coord_event  4,  8, SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS, AideScript_WalkBalls1
 	coord_event  5,  8, SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS, AideScript_WalkBalls2
 
@@ -798,5 +684,4 @@ ElmsLab_MapEvents:
 	object_event  6,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, CyndaquilPokeBallScript, EVENT_CYNDAQUIL_POKEBALL_IN_ELMS_LAB
 	object_event  7,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TotodilePokeBallScript, EVENT_TOTODILE_POKEBALL_IN_ELMS_LAB
 	object_event  8,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ChikoritaPokeBallScript, EVENT_CHIKORITA_POKEBALL_IN_ELMS_LAB
-	object_event  5,  3, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, CopScript, EVENT_COP_IN_ELMS_LAB
 	object_event  0,  4, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ElmsLabPorygonPCScript, -1
