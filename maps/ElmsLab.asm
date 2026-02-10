@@ -65,11 +65,6 @@ ElmsLabWalkUpToElmScript:
 ProfElmScript:
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_SS_TICKET_FROM_ELM
-	iftrue ElmCheckMasterBall
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue ElmGiveTicketScript
-ElmCheckMasterBall:
 	checkevent EVENT_GOT_MASTER_BALL_FROM_ELM
 	iftrue ElmCheckEverstone
 	checkflag ENGINE_RISINGBADGE
@@ -394,15 +389,6 @@ ElmGiveMasterBallScript:
 	writetext ElmGiveMasterBallText2
 	waitbutton
 .notdone
-	closetext
-	end
-
-ElmGiveTicketScript:
-	writetext ElmGiveTicketText1
-	promptbutton
-	setevent EVENT_GOT_SS_TICKET_FROM_ELM
-	writetext ElmGiveTicketText2
-	waitbutton
 	closetext
 	end
 
@@ -1082,36 +1068,6 @@ ElmGiveMasterBallText2:
 
 	para "use of it than I"
 	line "can, <PLAY_G>!"
-	done
-
-ElmGiveTicketText1:
-	text "ELM: <PLAY_G>!"
-	line "There you are!"
-
-	para "I called because I"
-	line "have something for"
-	cont "you."
-
-	para "See? It's an"
-	line "S.S.TICKET."
-
-	para "Now you can catch"
-	line "#MON in KANTO."
-	done
-
-ElmGiveTicketText2:
-	text "The ship departs"
-	line "from OLIVINE CITY."
-
-	para "But you knew that"
-	line "already, <PLAY_G>."
-
-	para "After all, you've"
-	line "traveled all over"
-	cont "with your #MON."
-
-	para "Give my regards to"
-	line "PROF.OAK in KANTO!"
 	done
 
 AideText_GiveYouPotion:

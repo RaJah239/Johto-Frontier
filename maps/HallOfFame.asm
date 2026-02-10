@@ -35,10 +35,6 @@ HallOfFameEnterScript:
 	clearevent EVENT_RED_IN_MT_SILVER
 	setmapscene SPROUT_TOWER_3F, SCENE_SPROUTTOWER3F_NOOP
 	special HealParty
-	checkevent EVENT_GOT_SS_TICKET_FROM_ELM
-	iftrue .SkipPhoneCall
-	specialphonecall SPECIALCALL_SSTICKET
-.SkipPhoneCall:
 	halloffame
 	end
 
