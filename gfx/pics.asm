@@ -494,7 +494,6 @@ CharmanderBackpic:   INCBIN "gfx/pokemon/charmander/back.2bpp.lz"
 MagnezoneBackpic:    INCBIN "gfx/pokemon/magnezone/back.2bpp.lz"
 UnownCFrontpic:      INCBIN "gfx/pokemon/unown_c/front.animated.2bpp.lz"
 MistyPic:            INCBIN "gfx/trainers/misty.2bpp.lz"
-BlainePic:           INCBIN "gfx/trainers/blaine.2bpp.lz"
 
 
 SECTION "Pics 17", ROMX
@@ -745,3 +744,6 @@ MaximaPic:           INCBIN "gfx/trainers/maxima.2bpp.lz"
 NursePic:            INCBIN "gfx/trainers/nurse.2bpp.lz"
 InsafPic:            INCBIN "gfx/trainers/insaf.2bpp.lz"
 CalPicF:             INCBIN "gfx/trainers/kris.2bpp.lz"
+
+SECTION "Pics 27", ROMX
+BlainePic:           INCBIN "gfx/trainers/blaine.2bpp.lz"
