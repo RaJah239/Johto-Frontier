@@ -498,6 +498,20 @@ ElmsLab_GetDexInfoText:
  	cont "renowned Professor"
  	cont "Oak!"
 
+ 	para "No, I didn't make"
+ 	line "this…"
+
+ 	para "A genius in his"
+ 	line "lab updated his"
+ 	cont "first #dex and"
+ 	cont "it was given to me"
+ 	cont "to pass onto a new"
+ 	cont "trainer."
+
+ 	para "I'll be sure to"
+ 	line "let him know of"
+ 	cont "you, <PLAYER>."
+
 	para "Go meet many kinds"
 	line "of #mon and"
 	cont "maybe even attempt"
