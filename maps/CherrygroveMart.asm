@@ -46,37 +46,16 @@ CherrygroveMartClerkScript:
 	end
 
 CherrygroveMartCooltrainerMScript:
-	faceplayer
-	opentext
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iftrue .PokeBallsInStock
-	writetext CherrygroveMartCooltrainerMText
-	waitbutton
-	closetext
-	end
+	jumptextfaceplayer CherrygroveMartCooltrainerMText_PokeBallsInStock
 
-.PokeBallsInStock:
-	writetext CherrygroveMartCooltrainerMText_PokeBallsInStock
-	waitbutton
-	closetext
-	end
+CherrygroveMartCooltrainerMText_PokeBallsInStock:
+	text "I'm here to buy"
+	line "more #balls to"
+	cont "catch #mon!"
+	done
 
 CherrygroveMartYoungsterScript:
 	jumptextfaceplayer CherrygroveMartYoungsterText
-
-CherrygroveMartCooltrainerMText:
-	text "They're fresh out"
-	line "of # BALLS!"
-
-	para "When will they get"
-	line "more of them?"
-	done
-
-CherrygroveMartCooltrainerMText_PokeBallsInStock:
-	text "# BALLS are in"
-	line "stock! Now I can"
-	cont "catch #MON!"
-	done
 
 CherrygroveMartYoungsterText:
 	text "When I was walking"

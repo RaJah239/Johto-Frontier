@@ -20,20 +20,7 @@ CherrygrovePokecenter1FGentlemanScript:
 	jumptextfaceplayer CherrygrovePokecenter1FGentlemanText
 
 CherrygrovePokecenter1FTeacherScript:
-	faceplayer
-	opentext
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iftrue .CommCenterOpen
-	writetext CherrygrovePokecenter1FTeacherText
-	waitbutton
-	closetext
-	end
-
-.CommCenterOpen:
-	writetext CherrygrovePokecenter1FTeacherText_CommCenterOpen
-	waitbutton
-	closetext
-	end
+	jumptextfaceplayer CherrygrovePokecenter1FTeacherText_CommCenterOpen
 
 CherrygrovePokecenter1FFisherText:
 	text "It's great. I can"
@@ -47,15 +34,6 @@ CherrygrovePokecenter1FGentlemanText:
 	text "That PC is free"
 	line "for any trainer"
 	cont "to use."
-	done
-
-CherrygrovePokecenter1FTeacherText:
-	text "The COMMUNICATION"
-	line "CENTER upstairs"
-	cont "was just built."
-
-	para "But they're still"
-	line "finishing it up."
 	done
 
 CherrygrovePokecenter1FTeacherText_CommCenterOpen:

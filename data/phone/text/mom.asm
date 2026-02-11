@@ -137,13 +137,3 @@ MomPhoneNoPokedexText:
 	para "mission for PROF."
 	line "ELM? Be good!"
 	done
-
-MomPhoneNoGymQuestText:
-	text "Hello?"
-
-	para "Hi, <PLAYER>! If"
-	line "you're done with"
-
-	para "your errand come"
-	line "on home, dear."
-	done

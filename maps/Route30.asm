@@ -161,20 +161,7 @@ TrainerBugCatcherDon:
 	end
 
 Route30YoungsterScript:
-	faceplayer
-	opentext
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iftrue .CompletedEggQuest
-	writetext Route30YoungsterText_DirectionsToMrPokemonsHouse
-	waitbutton
-	closetext
-	end
-
-.CompletedEggQuest:
-	writetext Route30YoungsterText_EveryoneIsBattling
-	waitbutton
-	closetext
-	end
+	jumptextfaceplayer Route30YoungsterText_EveryoneIsBattling
 
 Route30CooltrainerFScript:
 	jumptextfaceplayer Route30CooltrainerFText
@@ -271,12 +258,6 @@ BugCatcherDonAfterText:
 
 	para "I should've bought"
 	line "some more…"
-	done
-
-Route30YoungsterText_DirectionsToMrPokemonsHouse:
-	text "MR.#MON's"
-	line "house? It's a bit"
-	cont "farther ahead."
 	done
 
 Route30YoungsterText_EveryoneIsBattling:
