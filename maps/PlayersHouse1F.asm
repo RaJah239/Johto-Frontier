@@ -69,48 +69,27 @@ MeetMomScript:
 .ExplainPhone:
 	writetext DontKnowTheInstructionsText
 	promptbutton
-	sjump .FinishPhone
+	; fallthrough
 
 .FinishPhone:
 	writetext InstructionsNextText
 	waitbutton
 .skipthis
 	closetext
-	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
-	iftrue .FromRight
-	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	iffalse .FromLeft
-	sjump .Finish
-
-.FromRight:
-	applymovement PLAYERSHOUSE1F_MOM1, MomTurnsBackMovement
-	sjump .Finish
-
-.FromLeft:
-	applymovement PLAYERSHOUSE1F_MOM1, MomWalksBackMovement
-	sjump .Finish
-
-.Finish:
 	special RestartMapMusic
 	turnobject PLAYERSHOUSE1F_MOM1, LEFT
 	end
 
-MeetMomTalkedScript:
-	playmusic MUSIC_MOM
-	sjump MeetMomScript
-
 PokegearName:
-	db "#GEAR@"
+	db "#gear@"
 
 PlayersHouse1FReceiveItemStd:
 	jumpstd ReceiveItemScript
 	end
 
 MomScript:
+	playmusic MUSIC_MOM
 	faceplayer
-	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	checkscene
-	iffalse MeetMomTalkedScript ; SCENE_PLAYERSHOUSE1F_MEET_MOM
 	opentext
 	checkevent EVENT_FIRST_TIME_BANKING_WITH_MOM
 	iftrue .FirstTimeBanking
@@ -168,14 +147,6 @@ PlayerWalksTowardsMomMovement2:
 	step DOWN
 	step LEFT
 	turn_head LEFT
-	step_end
-
-MomTurnsBackMovement:
-	turn_head LEFT
-	step_end
-
-MomWalksBackMovement:
-	slow_step LEFT
 	step_end
 
 ElmsLookingForYouText:
