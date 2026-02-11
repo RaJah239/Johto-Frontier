@@ -35,6 +35,15 @@ NewBarkTown_TeacherStopsYouScene1:
 	applymovement NEWBARKTOWN_TEACHER, NewBarkTown_TeacherBringsYouBackMovement1
 	stopfollow
 	opentext
+	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
+	iffalse .GoMeetYourMom
+	writetext GoMetYourMomText
+	waitbutton
+	closetext
+	special RestartMapMusic
+	end
+
+.GoMeetYourMom:
 	writetext Text_ItsDangerousToGoAlone
 	waitbutton
 	closetext
@@ -59,6 +68,15 @@ NewBarkTown_TeacherStopsYouScene2:
 	applymovement NEWBARKTOWN_TEACHER, NewBarkTown_TeacherBringsYouBackMovement2
 	stopfollow
 	opentext
+	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
+	iffalse .GoMeetYourMom
+	writetext GoMetYourMomText
+	waitbutton
+	closetext
+	special RestartMapMusic
+	end
+
+.GoMeetYourMom:
 	writetext Text_ItsDangerousToGoAlone
 	waitbutton
 	closetext
@@ -66,12 +84,17 @@ NewBarkTown_TeacherStopsYouScene2:
 	end
 
 NewBarkTownTeacherScript:
-	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
+	checkevent EVENT_FIRST_TIME_BANKING_WITH_MOM
 	iftrue .CallMom
+	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
+	iftrue .MonIsAdorable
 	jumptextfaceplayer Text_GearIsImpressive
 
 .CallMom:
 	jumptextfaceplayer Text_CallMomOnGear
+
+.MonIsAdorable:
+	jumptextfaceplayer Text_YourMonIsAdorable
 
 NewBarkTownSign:
 	jumptext NewBarkTownSignText
@@ -118,6 +141,20 @@ NewBarkTown_TeacherBringsYouBackMovement2:
 	turn_head LEFT
 	step_end
 
+Text_CallMomOnGear:
+	text "Call your mom on"
+	line "your #gear to"
+
+	para "let her know how"
+	line "you're doing."
+	done
+
+Text_YourMonIsAdorable:
+	text "Oh! Your #MON"
+	line "is adorable!"
+	cont "I wish I had one!"
+	done
+
 Text_GearIsImpressive:
 	text "Wow, your #gear"
 	line "is impressive!"
@@ -147,12 +184,13 @@ Text_ItsDangerousToGoAlone:
 	line "to the next town."
 	done
 
-Text_CallMomOnGear:
-	text "Call your mom on"
-	line "your #gear to"
+GoMetYourMomText:
+	text "You're going on a"
+	line "big adventure?"
 
-	para "let her know how"
-	line "you're doing."
+	para "Then you can't just"
+	line "leave without let-"
+	cont "your mom know."
 	done
 
 NewBarkTownSignText:

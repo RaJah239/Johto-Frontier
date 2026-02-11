@@ -234,7 +234,6 @@ ElmDirectionsScript:
 	appear ELMSLAB_BOOK
 	setevent EVENT_GOT_A_POKEMON_FROM_ELM
 	setscene SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
-	setmapscene NEW_BARK_TOWN, SCENE_NEWBARKTOWN_NOOP
 	end
 
 ElmsLabHealingMachine:

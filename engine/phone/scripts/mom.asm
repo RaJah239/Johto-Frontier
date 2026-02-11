@@ -1,9 +1,11 @@
 MomPhoneCalleeScript:
+	checkevent EVENT_FIRST_TIME_BANKING_WITH_MOM
+	iftrue .started_adventure
 	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue .started_quest
+	iftrue MomPhonePokemonScript
 	sjump MomPhoneNoPokemonScript
 
-.started_quest
+.started_adventure
 	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_8
 	iftrue MomPhoneHangUpScript
 	farwritetext MomPhoneGreetingText
@@ -116,4 +118,8 @@ MomPhoneHangUpScript:
 
 MomPhoneNoPokemonScript:
 	farwritetext MomPhoneNoPokemonText
+	end
+
+MomPhonePokemonScript:
+	farwritetext MomPhonePokemonText
 	end

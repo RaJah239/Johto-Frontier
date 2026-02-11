@@ -127,3 +127,10 @@ MomPhoneNoPokemonText:
 	line "Wasn't PROF.ELM"
 	cont "waiting for you?"
 	done
+
+MomPhonePokemonText:
+	text "You got #mon"
+	line "from Pro.Elm?"
+
+	para "Come and show me."
+	done

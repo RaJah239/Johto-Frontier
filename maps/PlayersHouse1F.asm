@@ -79,6 +79,7 @@ MeetMomScript:
 	closetext
 	special RestartMapMusic
 	turnobject PLAYERSHOUSE1F_MOM1, LEFT
+	turnobject PLAYER, DOWN
 	end
 
 PokegearName:
@@ -92,23 +93,17 @@ MomScript:
 	playmusic MUSIC_MOM
 	faceplayer
 	opentext
-
-	checkevent EVENT_FIRST_TIME_BANKING_WITH_MOM
-	iftrue .BankOfMom
-
 	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue .FirstTimeBanking
-
+	iftrue .BankOfMom
 	writetext HurryUpElmIsWaitingText
 	waitbutton
 	closetext
 	special RestartMapMusic
 	end
 
-
-.FirstTimeBanking:
-	setevent EVENT_FIRST_TIME_BANKING_WITH_MOM
 .BankOfMom:
+	setevent EVENT_FIRST_TIME_BANKING_WITH_MOM
+	setmapscene NEW_BARK_TOWN, SCENE_NEWBARKTOWN_NOOP
 	special BankOfMom
 	waitbutton
 	closetext
