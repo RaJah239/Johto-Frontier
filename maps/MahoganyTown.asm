@@ -1,6 +1,5 @@
 	object_const_def
 	const MAHOGANYTOWN_GRAMPS
-	const MAHOGANYTOWN_FISHER
 	const MAHOGANYTOWN_LASS
 
 MahoganyTown_MapScripts:
@@ -28,9 +27,6 @@ MahoganyTownGrampsScript:
 	waitbutton
 	closetext
 	end
-
-MahoganyTownFisherScript:
-	jumptextfaceplayer MahoganyTownFisherText
 
 MahoganyTownLassScript:
 	jumptextfaceplayer MahoganyTownLassText
@@ -64,20 +60,6 @@ MahoganyTownGrampsText_ClearedRocketHideout:
 	para "That should be"
 	line "good news for the"
 	cont "anglers there."
-	done
-
-MahoganyTownFisherText:
-	text "Since you came"
-	line "this far, take the"
-
-	para "time to do some"
-	line "sightseeing."
-
-	para "You should head"
-	line "north and check"
-
-	para "out LAKE OF RAGE"
-	line "right now."
 	done
 
 MahoganyTownLassText:
@@ -135,5 +117,4 @@ MahoganyTown_MapEvents:
 
 	def_object_events
 	object_event  6,  9, SPRITE_GRAMPS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MahoganyTownGrampsScript, -1
-	object_event  6, 14, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, MahoganyTownFisherScript, EVENT_MAHOGANY_TOWN_POKEFAN_M_BLOCKS_GYM
 	object_event 12,  8, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MahoganyTownLassScript, EVENT_MAHOGANY_MART_OWNERS
