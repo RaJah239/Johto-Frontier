@@ -92,29 +92,23 @@ MomScript:
 	playmusic MUSIC_MOM
 	faceplayer
 	opentext
+
 	checkevent EVENT_FIRST_TIME_BANKING_WITH_MOM
-	iftrue .FirstTimeBanking
-	checkevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
 	iftrue .BankOfMom
+
 	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue .GotAPokemon
+	iftrue .FirstTimeBanking
+
 	writetext HurryUpElmIsWaitingText
 	waitbutton
 	closetext
 	special RestartMapMusic
 	end
 
-.GotAPokemon:
-	writetext SoWhatWasProfElmsErrandText
-	waitbutton
-	closetext
-	special RestartMapMusic
-	end
 
 .FirstTimeBanking:
 	setevent EVENT_FIRST_TIME_BANKING_WITH_MOM
 .BankOfMom:
-	setevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
 	special BankOfMom
 	waitbutton
 	closetext
@@ -228,27 +222,6 @@ HurryUpElmIsWaitingText:
 	line "ing for you."
 
 	para "Hurry up, baby!"
-	done
-
-SoWhatWasProfElmsErrandText:
-	text "So, what was PROF."
-	line "ELM's errand?"
-
-	para "…"
-
-	para "That does sound"
-	line "challenging."
-
-	para "But, you should be"
-	line "proud that people"
-	cont "rely on you."
-	done
-
-ImBehindYouText:
-	text "<PLAYER>, do it!"
-
-	para "I'm behind you all"
-	line "the way!"
 	done
 
 PlayersHouse1FStoveText:
