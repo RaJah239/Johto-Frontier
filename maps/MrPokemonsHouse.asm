@@ -114,7 +114,6 @@ MrPokemonsHouse_OakScript:
 	writetext MrPokemonText_ImDependingOnYou
 	waitbutton
 	closetext
-	setevent EVENT_PLAYERS_HOUSE_1F_NEIGHBOR
 	setscene SCENE_MRPOKEMONSHOUSE_NOOP
 	specialphonecall SPECIALCALL_ROBBED
 	checkevent EVENT_GOT_TOTODILE_FROM_ELM
