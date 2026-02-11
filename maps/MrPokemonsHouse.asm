@@ -89,13 +89,8 @@ MrPokemonsHouse_OakScript:
 	writetext MrPokemonsHouse_OakText1
 	promptbutton
 	waitsfx
-	writetext MrPokemonsHouse_GetDexText
-	playsound SFX_ITEM
-	waitsfx
-	setflag ENGINE_POKEDEX
-	writetext MrPokemonsHouse_OakText2
-	waitbutton
-	closetext
+
+
 	turnobject PLAYER, DOWN
 	applymovement MRPOKEMONSHOUSE_OAK, MrPokemonsHouse_OakExits
 	playsound SFX_EXIT_BUILDING
@@ -302,29 +297,6 @@ MrPokemonsHouse_OakText1:
  	line "habitats, how they"
  	cont "evolve, and their"
  	cont "moves."
-	done
-
-MrPokemonsHouse_GetDexText:
-	text "<PLAYER> received"
-	line "#DEX!"
-	done
-
-MrPokemonsHouse_OakText2:
-	text "Go meet many kinds"
-	line "of #MON and"
-
-	para "complete that"
-	line "#DEX!"
-
-	para "But I've stayed"
-	line "too long."
-
-	para "I have to get to"
-	line "GOLDENROD for my"
-	cont "usual radio show."
-
-	para "<PLAY_G>, I'm"
-	line "counting on you!"
 	done
 
 MrPokemonText_GimmeTheScale:

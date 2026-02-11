@@ -1,10 +1,12 @@
 	object_const_def
 	const ELMSLAB_ELM
-	const ELMSLAB_ELMS_AIDE
+	const ELMSLAB_ELMS_AIDE1
 	const ELMSLAB_POKE_BALL1
 	const ELMSLAB_POKE_BALL2
 	const ELMSLAB_POKE_BALL3
 	const ELMSLAB_PORYGON_PC
+	const ELMSLAB_BOOK
+	const ELMSLAB_ELMS_AIDE2
 
 ElmsLab_MapScripts:
 	def_scene_scripts
@@ -43,7 +45,7 @@ ElmsLabWalkUpToElmScript:
 	applymovement ELMSLAB_ELM, ElmsLab_ElmToDefaultPositionMovement2
 	turnobject PLAYER, RIGHT
 	opentext
-	writetext ElmText_ChooseAPokemon
+	writetext ElmText_ChoosePokemon
 	waitbutton
 	setscene SCENE_ELMSLAB_CANT_LEAVE
 	closetext
@@ -57,10 +59,15 @@ ProfElmScript:
 	checkflag ENGINE_RISINGBADGE
 	iftrue ElmGiveMasterBallScript
 .ElmGenericDialogue:
+	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
+	iffalse .GoOnNowPlayer
 	writetext ElmText_CallYou
 	waitbutton
 	closetext
 	end
+
+.GoOnNowPlayer
+	writetextend ElmText_TakePokemonText
 
 ElmGiveMasterBallScript:
 	writetext ElmGiveMasterBallText1
@@ -193,26 +200,38 @@ ChikoritaPokeBallScript:
 ElmDirectionsScript:
 	turnobject PLAYER, UP
 	opentext
-	writetext ElmDirectionsText1
-	waitbutton
-	closetext
+	writetext ElmAdventureText1
+	promptbutton
+
+	writetext ElmsLab_GetDexText
+	playsound SFX_ITEM
+	waitsfx
+	setflag ENGINE_POKEDEX
+
+
+	writetext ElmsLab_GetDexInfoText
+	promptbutton
+
+
 	addcellnum PHONE_ELM
-	opentext
 	writetext GotElmsNumberText
+	waitsfx
 	playsound SFX_REGISTER_PHONE_NUMBER
 	waitsfx
-	waitbutton
 	closetext
 	turnobject ELMSLAB_ELM, LEFT
 	opentext
-	writetext ElmDirectionsText2
+	writetext ElmAdventureText2
 	waitbutton
 	closetext
 	turnobject ELMSLAB_ELM, DOWN
 	opentext
-	writetext ElmDirectionsText3
+	writetext ElmAdventureText3
 	waitbutton
 	closetext
+	turnobject ELMSLAB_ELM, RIGHT
+	turnobject PLAYER, RIGHT
+	appear ELMSLAB_BOOK
 	setevent EVENT_GOT_A_POKEMON_FROM_ELM
 	setscene SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
 	setmapscene NEW_BARK_TOWN, SCENE_NEWBARKTOWN_NOOP
@@ -246,17 +265,17 @@ ElmsLabHealingMachine_HealParty:
 	end
 
 AideScript_WalkBalls1:
-	applymovement ELMSLAB_ELMS_AIDE, AideWalksRight1
+	applymovement ELMSLAB_ELMS_AIDE1, AideWalksRight1
 	turnobject PLAYER, DOWN
 	scall AideScript_GiveYouBalls
-	applymovement ELMSLAB_ELMS_AIDE, AideWalksLeft1
+	applymovement ELMSLAB_ELMS_AIDE1, AideWalksLeft1
 	end
 
 AideScript_WalkBalls2:
-	applymovement ELMSLAB_ELMS_AIDE, AideWalksRight2
+	applymovement ELMSLAB_ELMS_AIDE1, AideWalksRight2
 	turnobject PLAYER, DOWN
 	scall AideScript_GiveYouBalls
-	applymovement ELMSLAB_ELMS_AIDE, AideWalksLeft2
+	applymovement ELMSLAB_ELMS_AIDE1, AideWalksLeft2
 	end
 
 AideScript_GiveYouBalls:
@@ -269,15 +288,17 @@ AideScript_GiveYouBalls:
 	writetext AideText_ExplainBalls
 	promptbutton
 	itemnotify
-	closetext
 	setscene SCENE_ELMSLAB_NOOP
-	end
+	writetext TakeTypeChartText
+	promptbutton
+	verbosegiveitem TYPE_CODEX
+	writetextend AllTheBestToYouText
 
 AideScript_ReceiveTheBalls:
 	jumpstd ReceiveItemScript
 	end
 
-ElmsAideScript:
+ElmsAideScript1:
 	faceplayer
 	opentext
 	writetext AideText_ExplainBalls
@@ -287,18 +308,6 @@ ElmsAideScript:
 
 ElmsLabWindow:
 	jumptext ElmsLabWindowText
-
-ElmsLabTravelTip1:
-	jumptext ElmsLabTravelTip1Text
-
-ElmsLabTravelTip2:
-	jumptext ElmsLabTravelTip2Text
-
-ElmsLabTravelTip3:
-	jumptext ElmsLabTravelTip3Text
-
-ElmsLabTravelTip4:
-	jumptext ElmsLabTravelTip4Text
 
 ElmsLabTrashcan:
 	jumptext ElmsLabTrashcanText
@@ -386,48 +395,37 @@ ElmText_Intro:
 	text "Elm: <PLAY_G>!"
 	line "There you are!"
 
-	para "I needed to ask"
-	line "you a favor."
+	para "You're finally of"
+	line "age, meaning it's"
+	cont "time to start your"
+	cont "very own #mon"
+	cont "adventure!"
 
-	para "I'm conducting new"
-	line "#MON research"
-
-	para "right now. I was"
-	line "wondering if you"
-
-	para "could help me with"
-	line "it, <PLAY_G>."
-
-	para "You see…"
-
-	para "I'm writing a"
-	line "paper that I want"
-
-	para "to present at a"
-	line "conference."
-
-	para "But there are some"
-	line "things I don't"
-
-	para "quite understand"
-	line "yet."
+	para "Ah! Of course, you"
+	line "need #mon to"
+	cont "do just that!"
 
 	para "So!"
 
 	para "I'd like you to"
-	line "raise a #MON"
+	line "take a #mon"
+	cont "that I caught on"
+	cont "the table."
 
-	para "that I recently"
-	line "caught."
+	para "Wait a moment,"
+	line "even better!"
+
+	para "Take them all!"
 	done
 
-ElmText_ChooseAPokemon:
-	text "I want you to"
-	line "raise all the"
-	cont "#mon contained"
-	cont "in these balls."
+ElmText_ChoosePokemon:
+	text "Go on <PLAYER>."
+	done
 
-	para "Go on. Take them!"
+ElmText_TakePokemonText:
+	text "Go on <PLAYER> and"
+	line "take all #mon"
+	cont "on the table."
 	done
 
 LabWhereGoingText:
@@ -464,27 +462,65 @@ ReceivedStarterText:
 	text "!"
 	done
 
-ElmDirectionsText1:
-	text "Mr.#mon lives a"
-	line "little bit beyond"
+ElmAdventureText1:
+	text "You're going to"
+	line "need more to start"
+	cont "adventuring."
 
-	para "Cherrygrove, the"
-	line "next city over."
-
-	para "It's almost a"
-	line "direct route"
-
-	para "there, so you"
-	line "can't miss it."
-
-	para "But just in case,"
-	line "here's my phone"
-
-	para "number. Call me if"
-	line "anything comes up!"
+	para "Take this!"
 	done
 
-ElmDirectionsText2:
+ElmsLab_GetDexText:
+	text "<PLAYER> received"
+	line "#dex!"
+	done
+
+ElmsLab_GetDexInfoText:
+	text "See? This is the"
+	line "latest version of"
+	cont "the #dex."
+
+	para "It automatically"
+	line "records data on"
+	cont "#mon you've"
+	cont "seen or caught."
+
+	para "It's a hi-tech"
+	line "encyclopedia!"
+
+	para "It shows their"
+ 	line "habitats, how they"
+ 	cont "evolve, moves and"
+ 	cont "much more!"
+	
+ 	para "It's first version"
+ 	line "was created by the"
+ 	cont "renowned Professor"
+ 	cont "Oak!"
+
+	para "Go meet many kinds"
+	line "of #mon and"
+	cont "maybe even attempt"
+	cont "completing that"
+	cont "#dex!"
+
+	para "That'll make my old"
+	line "mentor proud."
+	
+	para "I hear his lab is"
+	line "in some sort of"
+	cont "battle area now…"
+	
+	para "Wow… that brought"
+	line "back memories."
+	
+	para "You should take my"
+	line "phone number."
+
+	para "It may be of use!"
+	done
+
+ElmAdventureText2:
 	text "If your #mon is"
 	line "hurt, you should"
 
@@ -495,9 +531,12 @@ ElmDirectionsText2:
 	line "it anytime."
 	done
 
-ElmDirectionsText3:
-	text "<PLAY_G>, I'm"
-	line "counting on you!"
+ElmAdventureText3:
+	text "The world is vast,"
+	line "so if you're not"
+	cont "sure what to do,"
+	cont "read that book on"
+	cont "the table."
 	done
 
 GotElmsNumberText:
@@ -516,49 +555,33 @@ ElmsLabHealingMachineText2:
 	done
 
 ElmText_CallYou:
-	text "elm: <PLAY_G>, I'll"
+	text "Elm: <PLAY_G>, I'll"
 	line "call you if any-"
 	cont "thing comes up."
 	done
 
 ElmGiveMasterBallText1:
 	text "Elm: Hi, <PLAY_G>!"
-	line "Thanks to you, my"
+	line "I've this for you."
 
-	para "research is going"
-	line "great!"
-
-	para "Take this as a"
-	line "token of my"
-	cont "appreciation."
+	para "It's Master Ball!"
 	done
 
 ElmGiveMasterBallText2:
-	text "The Master Ball is"
-	line "the best!"
-
-	para "It's the ultimate"
+	text "It's the ultimate"
 	line "ball! It'll catch"
+	cont "any #mon with-"
+	cont "out fail."
 
-	para "any #mon with-"
-	line "out fail."
-
-	para "It's given only to"
-	line "recognized #mon"
-	cont "researchers."
-
-	para "I think you can"
-	line "make much better"
-
-	para "use of it than I"
-	line "can, <PLAY_G>!"
+	para "You'll make better"
+	line "use of it than I."
 	done
 
 AideText_GiveYouBalls:
 	text "<PLAY_G>!"
 
 	para "Use these on your"
-	line "#dex quest!"
+	line "adventure!"
 	done
 
 AideText_ExplainBalls:
@@ -572,13 +595,31 @@ AideText_ExplainBalls:
 
 	para "More #mon means"
 	line "more training but"
-	
-	para "you have Exp.Share"
-	line "in your Options."
+	cont "you have Exp.Share"
+	cont "in your Options."
 
 	para "Set it ON to share"
 	line "EXP. Points with"
 	cont "all your #mon."
+	
+	para "You can learn a"
+	line "lot more if you go"
+	cont "to Earl's Academy"
+	cont "in Violet City."
+	done
+
+TakeTypeChartText:
+	text "Also, take this"
+	line "chart as well!"
+
+	para "It summarizes"
+	line "#mon type"
+	cont "effectiveness."
+	done
+
+AllTheBestToYouText:
+	text "All the best to"
+	line "you, <PLAYER>!"
 	done
 
 ElmsLabWindowText:
@@ -586,50 +627,6 @@ ElmsLabWindowText:
 
 	para "A pleasant breeze"
 	line "is blowing in."
-	done
-
-ElmsLabTravelTip1Text:
-	text "<PLAYER> opened a"
-	line "book."
-
-	para "Travel Tip 1:"
-
-	para "Press Start to"
-	line "open the Menu."
-	done
-
-ElmsLabTravelTip2Text:
-	text "<PLAYER> opened a"
-	line "book."
-
-	para "Travel Tip 2:"
-
-	para "Record your trip"
-	line "with Save!"
-	done
-
-ElmsLabTravelTip3Text:
-	text "<PLAYER> opened a"
-	line "book."
-
-	para "Travel Tip 3:"
-
-	para "Open your Pack and"
-	line "press Select to"
-	cont "move items."
-	done
-
-ElmsLabTravelTip4Text:
-	text "<PLAYER> opened a"
-	line "book."
-
-	para "Travel Tip 4:"
-
-	para "Check your #mon"
-	line "moves. Press the"
-
-	para "A Button to switch"
-	line "moves."
 	done
 
 ElmsLabTrashcanText:
@@ -644,6 +641,200 @@ ElmsLabPCText:
 
 	para "…It says on the"
 	line "screen…"
+	done
+
+WorldNotebook:
+	opentext
+	writetext AdventuringText
+	yesorno
+	iffalse .Done
+.list:
+	loadmenu .MoveEnchancingAbilitiesHeader
+	verticalmenu
+	closewindow
+	ifequal 1, .ClassicRoute
+	ifequal 2, .Placeholder
+	ifequal 3, .Placeholder
+	ifequal 4, .Placeholder
+	ifequal 5, .Done
+	sjump .list
+
+.ClassicRoute:
+	writetext WantToReadTheClassicRouteText
+	yesorno
+	iffalse .list
+	writetext ClassicRouteText
+	waitbutton
+	sjump .list
+
+.Placeholder:
+	sjump .list
+
+.Done:
+	closetext
+	end
+
+.MoveEnchancingAbilitiesHeader:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 0, 0, 19, TEXTBOX_Y - 1
+	dw .MenuData
+	db 1 ; default option
+
+.MenuData:
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
+	db 5 ; items
+	db "Classic Route@"
+	db "Placeholder@"
+	db "Placeholder@"
+	db "Placeholder@"
+	db "Cancel@"
+
+AdventuringText:
+	text "It's a book about"
+	line "adventuring!"
+
+	para "Read it?"
+	done
+
+WantToReadTheClassicRouteText:
+	text "You are free to"
+	line "traverse Johto as"
+	cont "you see fit but"
+
+	para "do you want to"
+	line "read how vanilla"
+	cont "#mon Crystal"
+	cont "had players go"
+	cont "through Johto?"
+	done
+
+ClassicRouteText:
+	text "The Classic Route"
+	line "through Johto"
+	cont "goes:"
+
+	para "New Bark Town,"
+	line "Cherrygrove City,"
+	cont "Route 30, 31,"
+	cont "Violet City,"
+	cont "Ruins of Alph,"
+	cont "Route 32,"
+	cont "Union Cave,"
+	cont "Route 33,"
+	cont "Azalea Town,"
+	cont "Ilex Forest,"
+	cont "Route 34,"
+	cont "Goldenrod City,"
+	cont "Route 35,"
+	cont "National Park,"
+	cont "Route 36, 37,"
+	cont "Ecruteak City,"
+	cont "Route 38, 39,"
+	cont "Olivine City,"
+	cont "Light House,"
+	cont "Route 40, 41,"
+	cont "Whirl Islands,"
+	cont "Cianwood City,"
+	cont "Mt.Mortar,"
+	cont "Route 42,"
+	cont "Mahogany Town,"
+	cont "Route 43,"
+	cont "Lake of Rage,"
+	cont "Route 44,"
+	cont "Ice Path,"
+	cont "Blackthorn City,"
+	cont "Dragon's Den,"
+	cont "Route 45, 46,"
+	cont "Tohjo Falls,"
+	cont "Route 27, 26,"
+	cont "Victory Road,"
+	cont "Route 23,"
+	cont "Indigo Plateau and"
+	cont "Mt.Silver."
+	done
+
+ElmsAideScript2:
+	turnobject ELMSLAB_ELMS_AIDE2, UP
+	jumptext AideHelpfulInfoOnBookShelvesText
+
+AideHelpfulInfoOnBookShelvesText:
+	text "Those two rows of"
+	line "bookshelves have"
+	cont "information that I"
+	cont "suspect trainers"
+	cont "may like."
+	done
+
+ElmsLabAdventureTip1:
+	jumptext ElmsLabAdventureTip1Text
+
+ElmsLabAdventureTip1Text:
+	text "Press Start to"
+	line "open the Menu."
+	done
+
+ElmsLabAdventureTip2:
+	jumptext ElmsLabAdventureTip2Text
+
+ElmsLabAdventureTip2Text:
+	text "Record your trip"
+	line "with Save!"
+	done
+
+ElmsLabAdventureTip3:
+	jumptext ElmsLabAdventureTip3Text
+
+ElmsLabAdventureTip3Text:
+	text "Open your Pack and"
+	line "press Select to"
+	cont "move items."
+	done
+
+ElmsLabAdventureTip4:
+	jumptext ElmsLabAdventureTip4Text
+
+ElmsLabAdventureTip4Text:
+	text "Check your #mon"
+	line "moves. Press the"
+
+	para "A Button to switch"
+	line "moves."
+	done
+
+ElmsLabAdventureTip5:
+	jumptext ElmsLabAdventureTip5Text
+
+ElmsLabAdventureTip5Text:
+	text "Press Start in all"
+	line "battles to view"
+	cont "the foe's types."
+	done
+
+ElmsLabAdventureTip6:
+	jumptext ElmsLabAdventureTip6Text
+
+ElmsLabAdventureTip6Text:
+	text "Weather usually"
+	line "changes when re-"
+	cont "entering areas."
+	done
+
+ElmsLabAdventureTip7:
+	jumptext ElmsLabAdventureTip7Text
+
+ElmsLabAdventureTip7Text:
+	text "Talk to trainers"
+	line "after battles to"
+	cont "rematch them."
+	done
+
+ElmsLabAdventureTip8:
+	jumptext ElmsLabAdventureTip8Text
+
+ElmsLabAdventureTip8Text:
+	text "Press B twice in"
+	line "wild encounters to"
+	cont "quickly escape."
 	done
 
 ElmsLabPorygonPCScript:
@@ -662,26 +853,24 @@ ElmsLab_MapEvents:
 
 	def_bg_events
 	bg_event  2,  1, BGEVENT_READ, ElmsLabHealingMachine
-	bg_event  6,  1, BGEVENT_READ, ElmsLabBookshelf
-	bg_event  7,  1, BGEVENT_READ, ElmsLabBookshelf
-	bg_event  8,  1, BGEVENT_READ, ElmsLabBookshelf
-	bg_event  9,  1, BGEVENT_READ, ElmsLabBookshelf
-	bg_event  0,  7, BGEVENT_READ, ElmsLabTravelTip1
-	bg_event  1,  7, BGEVENT_READ, ElmsLabTravelTip2
-	bg_event  2,  7, BGEVENT_READ, ElmsLabTravelTip3
-	bg_event  3,  7, BGEVENT_READ, ElmsLabTravelTip4
-	bg_event  6,  7, BGEVENT_READ, ElmsLabBookshelf
-	bg_event  7,  7, BGEVENT_READ, ElmsLabBookshelf
-	bg_event  8,  7, BGEVENT_READ, ElmsLabBookshelf
-	bg_event  9,  7, BGEVENT_READ, ElmsLabBookshelf
+	bg_event  0,  7, BGEVENT_READ, ElmsLabAdventureTip1
+	bg_event  1,  7, BGEVENT_READ, ElmsLabAdventureTip2
+	bg_event  2,  7, BGEVENT_READ, ElmsLabAdventureTip3
+	bg_event  3,  7, BGEVENT_READ, ElmsLabAdventureTip4
+	bg_event  6,  7, BGEVENT_READ, ElmsLabAdventureTip5
+	bg_event  7,  7, BGEVENT_READ, ElmsLabAdventureTip6
+	bg_event  8,  7, BGEVENT_READ, ElmsLabAdventureTip7
+	bg_event  9,  7, BGEVENT_READ, ElmsLabAdventureTip8
 	bg_event  9,  3, BGEVENT_READ, ElmsLabTrashcan
 	bg_event  5,  0, BGEVENT_READ, ElmsLabWindow
 	bg_event  3,  5, BGEVENT_DOWN, ElmsLabPC
 
 	def_object_events
 	object_event  5,  2, SPRITE_ELM, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ProfElmScript, -1
-	object_event  2,  9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ElmsAideScript, EVENT_ELMS_AIDE_IN_LAB
+	object_event  2,  9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ElmsAideScript1, EVENT_ELMS_AIDE_IN_LAB
 	object_event  6,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, CyndaquilPokeBallScript, EVENT_CYNDAQUIL_POKEBALL_IN_ELMS_LAB
 	object_event  7,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TotodilePokeBallScript, EVENT_TOTODILE_POKEBALL_IN_ELMS_LAB
 	object_event  8,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ChikoritaPokeBallScript, EVENT_CHIKORITA_POKEBALL_IN_ELMS_LAB
 	object_event  0,  4, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ElmsLabPorygonPCScript, -1
+	object_event  7,  3, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, WorldNotebook, EVENT_ELMS_TRAVEL_NOTEBOOK
+	object_event  7,  9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ElmsAideScript2, -1
