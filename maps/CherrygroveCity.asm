@@ -17,7 +17,7 @@ CherrygroveCityFlypointCallback:
 CherrygroveCityGuideGent:
 	faceplayer
 	opentext
-	writetext GuideGentIntroText
+	writetextcheckdialogue GuideGentIntroText, GuideGentIntroTextMin
 	yesorno
 	iffalse .No
 	sjump .Yes
@@ -29,41 +29,41 @@ CherrygroveCityGuideGent:
 	follow CHERRYGROVECITY_GRAMPS, PLAYER
 	applymovement CHERRYGROVECITY_GRAMPS, GuideGentMovement1
 	opentext
-	writetext GuideGentPokecenterText
+	writetextcheckdialogue GuideGentPokecenterText, GuideGentPokecenterTextMin
 	waitbutton
 	closetext
 	applymovement CHERRYGROVECITY_GRAMPS, GuideGentMovement2
 	turnobject PLAYER, UP
 	opentext
-	writetext GuideGentMartText
+	writetextcheckdialogue GuideGentMartText, GuideGentMartTextMin
 	waitbutton
 	closetext
 	applymovement CHERRYGROVECITY_GRAMPS, GuideGentMovement3
 	turnobject PLAYER, UP
 	opentext
-	writetext GuideGentRoute30Text
+	writetextcheckdialogue GuideGentRoute30Text, GuideGentRoute30TextMin
 	waitbutton
 	closetext
 	applymovement CHERRYGROVECITY_GRAMPS, GuideGentMovement4
 	turnobject PLAYER, LEFT
 	opentext
-	writetext GuideGentSeaText
+	writetextcheckdialogue GuideGentSeaText, GuideGentSeaTextMin
 	waitbutton
 	closetext
 	applymovement CHERRYGROVECITY_GRAMPS, GuideGentMovement5
 	turnobject PLAYER, UP
-	pause 60
+	pause 15
 	turnobject CHERRYGROVECITY_GRAMPS, LEFT
 	turnobject PLAYER, RIGHT
 	opentext
-	writetext GuideGentGiftText
+	writetextcheckdialogue GuideGentGiftText, GuideGentGiftTextMin
 	promptbutton
 	getstring STRING_BUFFER_4, .mapcardname
 	scall .JumpstdReceiveItem
 	setflag ENGINE_MAP_CARD
 	writetext GotMapCardText
 	promptbutton
-	writetext GuideGentPokegearText
+	writetextcheckdialogue GuideGentPokegearText, GuideGentPokegearTextMin
 	waitbutton
 	closetext
 	stopfollow
@@ -233,6 +233,11 @@ GuideGentIntroText:
 	cont "few things."
 	done
 
+GuideGentIntroTextMin:
+	text "Give the trainer"
+	line "basic tour?"
+	done
+
 GuideGentTourText1:
 	text "OK, then!"
 	line "Follow me!"
@@ -252,6 +257,11 @@ GuideGentPokecenterText:
 	line "about them."
 	done
 
+GuideGentPokecenterTextMin:
+	text "Heal in #mon"
+	line "Center."
+	done
+
 GuideGentMartText:
 	text "This is a #MON"
 	line "MART."
@@ -261,6 +271,11 @@ GuideGentMartText:
 
 	para "#MON and other"
 	line "useful items."
+	done
+
+GuideGentMartTextMin:
+	text "Buy items and more"
+	line "in Marts."
 	done
 
 GuideGentRoute30Text:
@@ -274,6 +289,10 @@ GuideGentRoute30Text:
 	line "there."
 	done
 
+GuideGentRoute30TextMin:
+	text "Exit this way."
+	done
+
 GuideGentSeaText:
 	text "This is the sea,"
 	line "as you can see."
@@ -281,6 +300,11 @@ GuideGentSeaText:
 	para "Some #MON are"
 	line "found only in"
 	cont "water."
+	done
+
+GuideGentSeaTextMin:
+	text "#mon can be"
+	line "found in the sea."
 	done
 
 GuideGentGiftText:
@@ -294,18 +318,26 @@ GuideGentGiftText:
 	line "small gift."
 	done
 
+GuideGentGiftTextMin:
+	text "A gift!"
+	done
+
 GotMapCardText:
 	text "<PLAYER>'s #GEAR"
 	line "now has a MAP!"
 	done
 
 GuideGentPokegearText:
-	text "#GEAR becomes"
-	line "more useful as you"
-	cont "add CARDS."
+	text "#Gear can fit"
+	line "a Radio Card too."
 
 	para "I wish you luck on"
 	line "your journey!"
+	done
+
+GuideGentPokegearTextMin:
+	text "#Gear can fit"
+	line "a Radio Card too."
 	done
 
 GuideGentNoText:
