@@ -263,10 +263,8 @@ if DEF(_DEBUG)
 	warp NONE, 0, 0
 	end
 else
-	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue .NormalRadio
 	checkevent EVENT_LISTENED_TO_INITIAL_RADIO
-	iftrue .AbbreviatedRadio
+	iftrue .NormalRadio
 	playmusic MUSIC_POKEMON_TALK
 	opentext
 	writetext PlayersRadioText1
@@ -284,13 +282,6 @@ else
 
 .NormalRadio:
 	jumpstd Radio1Script
-
-.AbbreviatedRadio:
-	opentext
-	writetext PlayersRadioText4
-	pause 45
-	closetext
-	end
 endc
 
 PlayersHouseBookshelfScript:
@@ -307,23 +298,23 @@ PlayersHousePCScript:
 	end
 
 PlayersRadioText1:
-	text "PROF.OAK'S #MON"
-	line "TALK! Please tune"
+	text "Prof.Oak's #mon"
+	line "Talk! Please tune"
 	cont "in next time!"
 	done
 
 PlayersRadioText2:
-	text "#MON CHANNEL!"
+	text "#mon Channel!"
 	done
 
 PlayersRadioText3:
-	text "This is DJ MARY,"
+	text "This is DJ Mary,"
 	line "your co-host!"
 	done
 
 PlayersRadioText4:
-	text "#MON!"
-	line "#MON CHANNEL…"
+	text "#mon!"
+	line "#Mon Channel…"
 	done
 
 if DEF(_DEBUG)
