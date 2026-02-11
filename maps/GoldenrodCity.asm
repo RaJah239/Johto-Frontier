@@ -495,6 +495,14 @@ GoldenrodCityMansionSignText:
 	text "Goldenrod Mansion"
 	done
 
+GoldenrodCityBillsFamilyHouseSign:
+	jumptext GoldenrodCityBillsFamilyHouseSignText
+
+GoldenrodCityBillsFamilyHouseSignText:
+	text "Bill's Family"
+	line "House"
+	done
+
 GoldenrodCity_MapEvents:
 	def_warp_events
 	warp_event 15, 27, GOLDENROD_POKECENTER_1F, 1
@@ -532,6 +540,7 @@ GoldenrodCity_MapEvents:
 	bg_event 16, 27, BGEVENT_UP, GoldenrodCityPokecenterSign
 	bg_event 30,  6, BGEVENT_READ, GoldenrodCityFlowerShopSign
 	bg_event 34, 22, BGEVENT_READ, GoldenrodCityMansionSign
+	bg_event  4, 26, BGEVENT_READ, GoldenrodCityBillsFamilyHouseSign
 
 	def_object_events
 	object_event  7, 18, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityPokefanMScript, EVENT_GOLDENROD_CITY_CIVILIANS
