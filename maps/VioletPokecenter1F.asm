@@ -13,8 +13,6 @@ VioletPokecenter1F_MapScripts:
 VioletPokecenterNurse:
 	jumpstd PokecenterNurseScript
 
-	setmapscene ROUTE_32, SCENE_ROUTE32_OFFER_SLOWPOKETAIL
-
 VioletPokecenter1FGameboyKidScript:
 	jumptextfaceplayer VioletPokecenter1FGameboyKidText
 

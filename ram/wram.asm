@@ -3135,7 +3135,6 @@ wRoute27SceneID::                                 db
 wNewBarkTownSceneID::                             db
 wElmsLabSceneID::                                 db
 wPlayersHouse1FSceneID::                          db
-wRoute32SceneID::                                 db
 wRoute35NationalParkGateSceneID::                 db
 wRoute36SceneID::                                 db
 wRoute36NationalParkGateSceneID::                 db
@@ -3188,7 +3187,7 @@ wOaksLab::                                        db ; Nayru62's scene in Oak's 
 wRoute23::                                        db
 wBattlePlaza::                                    db
 
-	ds 160
+	ds 161
 
 ; battle tower points
 wBattleTowerNormalPoints:: db

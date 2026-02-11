@@ -17,9 +17,6 @@
 
 Route32_MapScripts:
 	def_scene_scripts
-	scene_script Route32Noop1Scene, SCENE_ROUTE32_COOLTRAINER_M_BLOCKS
-	scene_script Route32Noop2Scene, SCENE_ROUTE32_OFFER_SLOWPOKETAIL
-	scene_script Route32Noop3Scene, SCENE_ROUTE32_NOOP
 
 	def_callbacks
 	callback MAPCALLBACK_OBJECTS, Route32FriedaAndOtisCallback
@@ -27,16 +24,7 @@ Route32_MapScripts:
 
 .Flypoint:
 	setflag ENGINE_FLYPOINT_UNION_CAVE
-	return
-
-Route32Noop1Scene:
-	end
-
-Route32Noop2Scene:
-	end
-
-Route32Noop3Scene:
-	end
+	endcallback
 
 Route32FriedaAndOtisCallback:
 	readvar VAR_WEEKDAY
@@ -63,26 +51,16 @@ Route32FriedaAndOtisCallback:
 
 Route32CooltrainerMScript:
 	faceplayer
-Route32CooltrainerMContinueScene:
 	opentext
 	checkevent EVENT_GOT_MIRACLE_SEED_IN_ROUTE_32
 	iftrue .GotMiracleSeed
 	checkflag ENGINE_ZEPHYRBADGE
 	iffalse .DontHaveZephyrBadge
-
 	writetext Route32CooltrainerMText_HaveThisSeed
 	promptbutton
 	verbosegiveitem MIRACLE_SEED
 	iffalse .BagFull
 	setevent EVENT_GOT_MIRACLE_SEED_IN_ROUTE_32
-	sjump .GotMiracleSeed
-
-.DontHaveZephyrBadge:
-	writetext Route32CooltrainerMText_VioletGym
-	waitbutton
-	closetext
-	end
-
 .GotMiracleSeed:
 	writetext Route32CooltrainerMText_ExperiencesShouldBeUseful
 	waitbutton
@@ -90,20 +68,10 @@ Route32CooltrainerMContinueScene:
 	closetext
 	end
 
-Route32CooltrainerMStopsYouScene:
-	turnobject ROUTE32_COOLTRAINER_M, LEFT
-	turnobject PLAYER, RIGHT
-	opentext
-	writetext Route32CooltrainerMText_WhatsTheHurry
+.DontHaveZephyrBadge:
+	writetext Route32CooltrainerMText_VioletGym
 	waitbutton
 	closetext
-	follow PLAYER, ROUTE32_COOLTRAINER_M
-	applymovement PLAYER, Movement_Route32CooltrainerMPushesYouBackToViolet
-	stopfollow
-	turnobject PLAYER, DOWN
-	scall Route32CooltrainerMContinueScene
-	applymovement ROUTE32_COOLTRAINER_M, Movement_Route32CooltrainerMReset1
-	applymovement ROUTE32_COOLTRAINER_M, Movement_Route32CooltrainerMReset2
 	end
 
 Route32RoarTMGuyScript:
@@ -123,15 +91,8 @@ Route32RoarTMGuyScript:
 	closetext
 	end
 
-Route32WannaBuyASlowpokeTailScript:
-	turnobject ROUTE32_FISHER4, DOWN
-	turnobject PLAYER, UP
-	sjump _OfferToSellSlowpokeTail
-
 SlowpokeTailSalesmanScript:
 	faceplayer
-_OfferToSellSlowpokeTail:
-	setscene SCENE_ROUTE32_NOOP
 	opentext
 	writetext Text_MillionDollarSlowpokeTail
 	yesorno
@@ -501,37 +462,6 @@ Route32HiddenGreatBall:
 Route32HiddenSuperPotion:
 	hiddenitem SUPER_POTION, EVENT_ROUTE_32_HIDDEN_SUPER_POTION
 
-Movement_Route32CooltrainerMPushesYouBackToViolet:
-	step UP
-	step UP
-	step_end
-
-Movement_Route32CooltrainerMReset1:
-	step DOWN
-	step_end
-
-Movement_Route32CooltrainerMReset2:
-	step RIGHT
-	step_end
-
-Route32CooltrainerMText_WhatsTheHurry:
-	text "Wait up!"
-	line "What's the hurry?"
-	done
-
-Route32CooltrainerMText_VioletGym:
-	text "Have you gone to"
-	line "the #MON GYM?"
-
-	para "You can test your"
-	line "#MON and your-"
-	cont "self there."
-
-	para "It's a rite of"
-	line "passage for all"
-	cont "trainers!"
-	done
-
 Route32CooltrainerMText_HaveThisSeed:
 	text "You have some good"
 	line "#MON there."
@@ -555,6 +485,11 @@ Route32CooltrainerMText_HaveThisSeed:
 	para "It increases the"
 	line "power of grass-"
 	cont "type moves."
+	done
+
+Route32CooltrainerMText_VioletGym:
+	text "You should try get"
+	line "Violet Gym's badge."
 	done
 
 Route32CooltrainerMText_ExperiencesShouldBeUseful:
@@ -870,8 +805,6 @@ Route32_MapEvents:
 	warp_event  6, 79, UNION_CAVE_1F, 4
 
 	def_coord_events
-	coord_event 18,  8, SCENE_ROUTE32_COOLTRAINER_M_BLOCKS, Route32CooltrainerMStopsYouScene
-	coord_event  7, 71, SCENE_ROUTE32_OFFER_SLOWPOKETAIL, Route32WannaBuyASlowpokeTailScript
 
 	def_bg_events
 	bg_event 13,  5, BGEVENT_READ, Route32Sign
