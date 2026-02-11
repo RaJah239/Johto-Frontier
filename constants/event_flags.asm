@@ -1311,7 +1311,7 @@
 	const EVENT_ROUTE_45_MAX_POTION
 	const EVENT_ROUTE_46_X_SPEED
 ; Johto people
-	const EVENT_RIVAL_NEW_BARK_TOWN
+	const_skip
 	const_skip
 	const EVENT_RIVAL_AZALEA_TOWN
 	const EVENT_RIVAL_TEAM_ROCKET_BASE
