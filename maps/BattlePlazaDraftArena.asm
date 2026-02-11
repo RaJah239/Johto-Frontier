@@ -102,6 +102,7 @@ BattleArenaReceptionistScript:
 	writetext AreYouSureText
 	yesorno
 	iffalse .ChoosePlayerCharacter
+	special LoadPokemonData
 	writetextend BattleLobbyBattleLoseText
 
 .ChooseEnemyCharacter
@@ -141,6 +142,7 @@ BattleArenaReceptionistScript:
 	writetext AreYouSureText
 	yesorno
 	iffalse .ChooseEnemyCharacter
+	special LoadPokemonData
 	writetextend BattleLobbyBattleLoseText
 
 .RandomPlayer:
