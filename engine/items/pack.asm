@@ -21,12 +21,10 @@ Pack:
 	set NO_TEXT_SCROLL, [hl]
 	call InitPackBuffers
 .loop
-	call JoyTextDelay
 	ld a, [wJumptableIndex]
 	bit 7, a
 	jr nz, .done
 	call .RunJumptable
-	call DelayFrame
 	jr .loop
 
 .done
@@ -552,7 +550,6 @@ GiveItem:
 	farcall PlacePartyMenuText
 	call WaitBGMap
 	call SetDefaultBGPAndOBP
-	call DelayFrame
 	farcall PartyMenuSelect
 	jr c, .finish
 	ld a, [wCurPartySpecies]
@@ -603,12 +600,10 @@ BattlePack:
 	set NO_TEXT_SCROLL, [hl]
 	call InitPackBuffers
 .loop
-	call JoyTextDelay
 	ld a, [wJumptableIndex]
 	bit 7, a
 	jr nz, .end
 	call .RunJumptable
-	call DelayFrame
 	jr .loop
 
 .end
@@ -1607,7 +1602,6 @@ Pack_InitColors:
 	ld b, SCGB_PACKPALS
 	call GetSGBLayout
 	call SetDefaultBGPAndOBP
-	call DelayFrame
 	ret
 
 ItemsPocketMenuHeader:
