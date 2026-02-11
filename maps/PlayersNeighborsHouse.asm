@@ -20,16 +20,10 @@ PlayersNeighborsHouseRadioScript:
 	jumpstd Radio1Script
 
 PlayersNeighborsDaughterText:
-	text "PIKACHU is an"
-	line "evolved #MON."
-
-	para "I was amazed by"
-	line "PROF.ELM's find-"
-	cont "ings."
-
-	para "He's so famous for"
-	line "his research on"
-	cont "#MON evolution."
+	text "Prof.Elm's research"
+	line "was integral in"
+	cont "the latest #-"
+	cont "dex model."
 
 	para "…sigh…"
 
@@ -41,12 +35,11 @@ PlayersNeighborsDaughterText:
 PlayersNeighborText:
 	text "My daughter is"
 	line "adamant about"
-
-	para "becoming PROF."
-	line "ELM's assistant."
+	cont "becoming Prof."
+	cont "Elm's assistant."
 
 	para "She really loves"
-	line "#MON!"
+	line "#mon!"
 
 	para "But then, so do I!"
 	done
@@ -65,4 +58,4 @@ PlayersNeighborsHouse_MapEvents:
 
 	def_object_events
 	object_event  2,  3, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, PlayersNeighborsDaughterScript, -1
-	object_event  5,  3, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, PlayersNeighborScript, EVENT_PLAYERS_NEIGHBORS_HOUSE_NEIGHBOR
+	object_event  5,  3, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, PlayersNeighborScript, -1
