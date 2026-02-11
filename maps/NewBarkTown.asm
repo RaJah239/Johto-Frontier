@@ -12,8 +12,6 @@ NewBarkTown_MapScripts:
 	callback MAPCALLBACK_NEWMAP, NewBarkTownFlypointCallback
 
 NewBarkTownNoop1Scene:
-	end
-
 NewBarkTownNoop2Scene:
 	end
 
@@ -70,36 +68,12 @@ NewBarkTown_TeacherStopsYouScene2:
 	end
 
 NewBarkTownTeacherScript:
-	faceplayer
-	opentext
-	checkevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
-	iftrue .CallMom
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iftrue .TellMomYoureLeaving
 	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue .MonIsAdorable
-	writetext Text_GearIsImpressive
-	waitbutton
-	closetext
-	end
-
-.MonIsAdorable:
-	writetext Text_YourMonIsAdorable
-	waitbutton
-	closetext
-	end
-
-.TellMomYoureLeaving:
-	writetext Text_TellMomIfLeaving
-	waitbutton
-	closetext
-	end
+	iftrue .CallMom
+	jumptextfaceplayer Text_GearIsImpressive
 
 .CallMom:
-	writetext Text_CallMomOnGear
-	waitbutton
-	closetext
-	end
+	jumptextfaceplayer Text_CallMomOnGear
 
 NewBarkTownRivalScript:
 	opentext
@@ -210,21 +184,6 @@ Text_ItsDangerousToGoAlone:
 
 	para "grass on the way"
 	line "to the next town."
-	done
-
-Text_YourMonIsAdorable:
-	text "Oh! Your #MON"
-	line "is adorable!"
-	cont "I wish I had one!"
-	done
-
-Text_TellMomIfLeaving:
-	text "Hi, <PLAY_G>!"
-	line "Leaving again?"
-
-	para "You should tell"
-	line "your mom if you"
-	cont "are leaving."
 	done
 
 Text_CallMomOnGear:
