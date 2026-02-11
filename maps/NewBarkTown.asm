@@ -144,15 +144,15 @@ NewBarkTown_TeacherBringsYouBackMovement2:
 Text_CallMomOnGear:
 	text "Call your mom on"
 	line "your #gear to"
-
-	para "let her know how"
-	line "you're doing."
+	cont "let her know how"
+	cont "you're doing."
 	done
 
 Text_YourMonIsAdorable:
 	text "Oh! Your #MON"
 	line "is adorable!"
-	cont "I wish I had one!"
+
+	para "I wish I had one!"
 	done
 
 Text_GearIsImpressive:
@@ -179,9 +179,8 @@ Text_ItsDangerousToGoAlone:
 
 	para "Wild #mon"
 	line "jump out of the"
-
-	para "grass on the way"
-	line "to the next town."
+	cont "grass on the way"
+	cont "to the next town."
 	done
 
 GoMetYourMomText:
