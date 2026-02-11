@@ -203,8 +203,8 @@ if DEF(_DEBUG)
 	; loot
 	giveitem CRYSTAL, MAX_ITEM_STACK
 	giveitem NUGGET, MAX_ITEM_STACK
-	giveitem SILVER_LEAF
-	giveitem GOLD_LEAF
+	giveitem SILVER_LEAF, MAX_ITEM_STACK
+	giveitem GOLD_LEAF, MAX_ITEM_STACK
 
 	; fossils
 	giveitem OLD_AMBER
