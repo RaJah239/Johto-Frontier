@@ -1,8 +1,6 @@
 MomPhoneCalleeScript:
-	checkevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
-	iftrue .started_quest
 	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue MomPhoneNoPokedexScript
+	iftrue .started_quest
 	sjump MomPhoneNoPokemonScript
 
 .started_quest
@@ -118,8 +116,4 @@ MomPhoneHangUpScript:
 
 MomPhoneNoPokemonScript:
 	farwritetext MomPhoneNoPokemonText
-	end
-
-MomPhoneNoPokedexScript:
-	farwritetext MomPhoneNoPokedexText
 	end

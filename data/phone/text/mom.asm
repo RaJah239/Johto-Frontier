@@ -127,13 +127,3 @@ MomPhoneNoPokemonText:
 	line "Wasn't PROF.ELM"
 	cont "waiting for you?"
 	done
-
-MomPhoneNoPokedexText:
-	text "Hello?"
-
-	para "Oh, hi, <PLAYER>!"
-	line "You're on a big"
-
-	para "mission for PROF."
-	line "ELM? Be good!"
-	done
