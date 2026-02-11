@@ -24,54 +24,24 @@ BillScript:
 	writetext ReceivedEeveeText
 	playsound SFX_CAUGHT_MON
 	waitsfx
-	givepoke EEVEE, 20
+	givepoke EEVEE, 5
 	setevent EVENT_GOT_EEVEE
-	writetext BillEeveeMayEvolveText
-	waitbutton
-	closetext
-	end
+	writetextend BillEeveeMayEvolveText
 
 .NoRoom:
-	writetext BillPartyFullText
-	waitbutton
-	closetext
-	end
+	writetextend BillPartyFullText
 
 .Refused:
-	writetext BillNoEeveeText
-	waitbutton
-	closetext
-	end
+	writetextend BillNoEeveeText
 
 .GotEevee:
-	writetext BillPopWontWorkText
-	waitbutton
-	closetext
-	end
+	writetextend BillPopWontWorkText
 
 BillsMomScript:
-	faceplayer
-	opentext
-	checkevent EVENT_MET_BILL
-	iffalse .HaventMetBill
-	writetext BillsMomText_BeforeEcruteak
-	waitbutton
-	closetext
-	end
-
-.HaventMetBill:
-	writetext BillsMomText_AfterEcruteak
-	waitbutton
-	closetext
-	end
+	jumptextfaceplayer BillsMomText_AfterEcruteak
 
 BillsSisterScript:
-	faceplayer
-	opentext
-	writetext BillsSisterStorageSystemText
-	waitbutton
-	closetext
-	end
+	jumptextfaceplayer BillsSisterStorageSystemText
 
 BillsHouseBookshelf1:
 	jumpstd PictureBookshelfScript
@@ -83,19 +53,24 @@ BillsHouseRadio:
 	jumpstd Radio2Script
 
 BillTakeThisEeveeText:
-	text "BILL: Hi, <PLAYER>!"
-	line "Do us a favor and"
-	cont "take this EEVEE."
+	text "Hi. I'm Bill."
+	line "<PLAYER> is it?"
 
-	para "It came over when"
-	line "I was adjusting"
-	cont "the TIME CAPSULE."
+	para "A trainer right?"
+
+	para "Right… Since you're"
+	line "a trainer, can you"
+	cont "do me a favor and"
+	cont "take this Eevee."
+
+	para "It tagged along"
+	line "with me when I was"
+	cont "coming home today."
 
 	para "Someone has to"
-	line "take care of it,"
-
-	para "but I don't like"
-	line "being outside."
+	line "take care of it"
+	cont "but I don't like"
+	cont "being outside."
 
 	para "Can I count on you"
 	line "to play with it,"
@@ -103,7 +78,7 @@ BillTakeThisEeveeText:
 	done
 
 BillImCountingOnYouText:
-	text "BILL: I knew you'd"
+	text "Bill: I knew you'd"
 	line "come through!"
 
 	para "Way to go! You're"
@@ -118,21 +93,20 @@ BillImCountingOnYouText:
 
 ReceivedEeveeText:
 	text "<PLAYER> received"
-	line "EEVEE!"
+	line "Eevee!"
 	done
 
 BillEeveeMayEvolveText:
-	text "BILL: PROF.ELM"
-	line "claims EEVEE may"
-
-	para "evolve in new and"
-	line "unknown ways."
+	text "Bill: Prof.Elm"
+	line "claims Eevee may"
+	cont "evolve in new and"
+	cont "unknown ways."
 	done
 
 BillPartyFullText:
 	text "Whoa, wait. You"
 	line "can't carry any"
-	cont "more #MON."
+	cont "more #mon."
 	done
 
 BillNoEeveeText:
@@ -141,51 +115,43 @@ BillNoEeveeText:
 	done
 
 BillPopWontWorkText:
-	text "BILL: My pop, he"
+	text "Bill: My pop, he"
 	line "won't work. All he"
-
-	para "does is goof off"
-	line "all day long."
+	cont "does is goof off"
+	cont "all day long."
 
 	para "He's getting to be"
 	line "a real headache…"
 	done
 
-BillsMomText_BeforeEcruteak:
-	text "Oh, you collect"
-	line "#MON? My son"
-	cont "BILL is an expert."
-
-	para "He just got called"
-	line "to the #MON"
-
-	para "CENTER in ECRUTEAK"
-	line "CITY."
-
-	para "My husband went"
-	line "off to the GAME"
-
-	para "CORNER without"
-	line "being called…"
-	done
-
 BillsMomText_AfterEcruteak:
 	text "My husband was"
 	line "once known as a"
+	cont "#maniac."
 
-	para "#MANIAC."
-	line "BILL must have"
+	para "Bill must have"
+	line "taken after his"
+	cont "father."
 
-	para "taken after his"
-	line "father."
+	para "These days though…"
+	
+	para "All he seems to"
+	line "ever do, is waste"
+	cont "time in the Game"
+	cont "Corner."
 	done
 
 BillsSisterStorageSystemText:
 	text "My big brother,"
-	line "BILL, made the PC"
+	line "Bill, made the PC"
+	cont "#mon storage"
+	cont "system."
 
-	para "#MON storage"
-	line "system."
+	para "He made it open"
+	line "source and a very"
+	cont "a skilled coder by"
+	cont "the online name,"
+	cont "FIQ overhauled it."
 	done
 
 BillsFamilysHouse_MapEvents:
@@ -201,6 +167,6 @@ BillsFamilysHouse_MapEvents:
 	bg_event  7,  1, BGEVENT_READ, BillsHouseRadio
 
 	def_object_events
-	object_event  2,  3, SPRITE_BILL, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BillScript, EVENT_MET_BILL
+	object_event  2,  3, SPRITE_BILL, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BillScript, -1
 	object_event  5,  3, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BillsMomScript, -1
 	object_event  5,  4, SPRITE_TWIN, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, BillsSisterScript, -1
