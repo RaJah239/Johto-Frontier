@@ -3147,7 +3147,6 @@ wRoute34IlexForestGateSceneID::                   db
 wEcruteakTinTowerEntranceSceneID::                db
 wWiseTriosRoomSceneID::                           db
 wEcruteakGymSceneID::                             db
-wMahoganyTownSceneID::                            db
 wRoute42SceneID::                                 db
 wCianwoodCitySceneID::                            db
 wBattleTower1FSceneID::                           db
@@ -3186,7 +3185,7 @@ wOaksLab::                                        db ; Nayru62's scene in Oak's 
 wRoute23::                                        db
 wBattlePlaza::                                    db
 
-	ds 162
+	ds 163
 
 ; battle tower points
 wBattleTowerNormalPoints:: db
