@@ -35,16 +35,19 @@ ElmsLabWalkUpToElmScript:
 	applymovement PLAYER, ElmsLab_WalkUpToElmMovement
 	showemote EMOTE_SHOCK, ELMSLAB_ELM, 15
 	turnobject ELMSLAB_ELM, RIGHT
+	isdialogueminimal
+	iftrue .skipthis1
 	opentext
 	writetext ElmText_Intro
 	waitbutton
 	closetext
+.skipthis1
 	applymovement ELMSLAB_ELM, ElmsLab_ElmToDefaultPositionMovement1
 	turnobject PLAYER, UP
 	applymovement ELMSLAB_ELM, ElmsLab_ElmToDefaultPositionMovement2
 	turnobject PLAYER, RIGHT
 	opentext
-	writetext ElmText_ChoosePokemon
+	writetextcheckdialogue ElmText_ChoosePokemon, ElmText_ChoosePokemonMin
 	waitbutton
 	setscene SCENE_ELMSLAB_CANT_LEAVE
 	closetext
@@ -90,23 +93,29 @@ LabTryToLeaveScript:
 
 CyndaquilPokeBallScript:
 	turnobject ELMSLAB_ELM, DOWN
+	isdialogueminimal
+	iftrue .skipthis2
 	reanchormap
 	pokepic CYNDAQUIL
 	cry CYNDAQUIL
 	waitbutton
 	closepokepic
+.skipthis2
 	opentext
-	writetext TakeCyndaquilText
+	writetextcheckdialogue TakeCyndaquilText, TakeCyndaquilTextMin
 	yesorno
 	iffalse .exit_this_scene1
 	disappear ELMSLAB_POKE_BALL1
 	setevent EVENT_GOT_CYNDAQUIL_FROM_ELM
+	isdialogueminimal
+	iftrue .skipthis3
 	waitsfx
 	getmonname STRING_BUFFER_3, CYNDAQUIL
 	writetext ReceivedStarterText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
+.skipthis3
 	givepoke CYNDAQUIL, 5, BERRY
 	closetext
 	checkevent EVENT_GOT_TOTODILE_FROM_ELM
@@ -125,23 +134,29 @@ CyndaquilPokeBallScript:
 
 TotodilePokeBallScript:
 	turnobject ELMSLAB_ELM, DOWN
+	isdialogueminimal
+	iftrue .skipthis4
 	reanchormap
 	pokepic TOTODILE
 	cry TOTODILE
 	waitbutton
 	closepokepic
+.skipthis4
 	opentext
-	writetext TakeTotodileText
+	writetextcheckdialogue TakeTotodileText, TakeTotodileTextMin
 	yesorno
 	iffalse .exit_this_scene1
 	disappear ELMSLAB_POKE_BALL2
 	setevent EVENT_GOT_TOTODILE_FROM_ELM
+	isdialogueminimal
+	iftrue .skipthis5
 	waitsfx
 	getmonname STRING_BUFFER_3, TOTODILE
 	writetext ReceivedStarterText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
+.skipthis5
 	givepoke TOTODILE, 5, BERRY
 	closetext
 	checkevent EVENT_GOT_CYNDAQUIL_FROM_ELM
@@ -158,23 +173,29 @@ TotodilePokeBallScript:
 
 ChikoritaPokeBallScript:
 	turnobject ELMSLAB_ELM, DOWN
+	isdialogueminimal
+	iftrue .skipthis6
 	reanchormap
 	pokepic CHIKORITA
 	cry CHIKORITA
 	waitbutton
 	closepokepic
+.skipthis6
 	opentext
-	writetext TakeChikoritaText
+	writetextcheckdialogue TakeChikoritaText, TakeChikoritaTextMin
 	yesorno
 	iffalse .exit_this_scene1
 	disappear ELMSLAB_POKE_BALL3
 	setevent EVENT_GOT_CHIKORITA_FROM_ELM
+	isdialogueminimal
+	iftrue .skipthis7
 	waitsfx
 	getmonname STRING_BUFFER_3, CHIKORITA
 	writetext ReceivedStarterText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
+.skipthis7
 	givepoke CHIKORITA, 5, BERRY
 	closetext
 	checkevent EVENT_GOT_CYNDAQUIL_FROM_ELM
@@ -192,13 +213,20 @@ ChikoritaPokeBallScript:
 ElmDirectionsScript:
 	turnobject PLAYER, UP
 	opentext
+	isdialogueminimal
+	iftrue .skipthis1
 	writetext ElmAdventureText1
 	promptbutton
+.skipthis1
 	writetext ElmsLab_GetDexText
 	playsound SFX_ITEM
 	waitsfx
 	setflag ENGINE_POKEDEX
+
+	isdialogueminimal
+	iftrue .skipthis2
 	writetext ElmsLab_GetDexInfoText
+.skipthis2
 	promptbutton
 	addcellnum PHONE_ELM
 	writetext GotElmsNumberText
@@ -208,17 +236,30 @@ ElmDirectionsScript:
 	closetext
 	turnobject ELMSLAB_ELM, LEFT
 	opentext
-	writetext ElmAdventureText2
+	writetextcheckdialogue ElmAdventureText2, ElmAdventureText2Min
 	waitbutton
 	closetext
 	turnobject ELMSLAB_ELM, DOWN
 	opentext
-	writetext ElmAdventureText3
+	writetextcheckdialogue ElmAdventureText3, ElmAdventureText3Min
 	waitbutton
 	closetext
+	showemote EMOTE_SHOCK, ELMSLAB_ELM, 15
 	turnobject ELMSLAB_ELM, RIGHT
+	pause 10
 	turnobject PLAYER, RIGHT
+	pause 10
 	appear ELMSLAB_BOOK
+
+	turnobject ELMSLAB_ELM, DOWN
+	pause 20
+	turnobject PLAYER, UP
+	pause 10
+	opentext
+	writetext HaveFunText
+	waitbutton
+	closetext
+	turnobject PLAYER, DOWN
 	setevent EVENT_GOT_A_POKEMON_FROM_ELM
 	setscene SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
 	end
@@ -266,19 +307,33 @@ AideScript_WalkBalls2:
 
 AideScript_GiveYouBalls:
 	opentext
+	isdialogueminimal
+	iftrue .skip1
 	writetext AideText_GiveYouBalls
 	promptbutton
+.skip1
 	getitemname STRING_BUFFER_4, POKE_BALL
 	scall AideScript_ReceiveTheBalls
 	giveitem POKE_BALL, 5
+	isdialogueminimal
+	iftrue .skip2
 	writetext AideText_ExplainBalls
 	promptbutton
+.skip2
 	itemnotify
 	setscene SCENE_ELMSLAB_NOOP
+	isdialogueminimal
+	iftrue .skip3
 	writetext TakeTypeChartText
 	promptbutton
+.skip3
 	verbosegiveitem TYPE_CODEX
+	isdialogueminimal
+	iftrue .skip4
 	writetextend AllTheBestToYouText
+.skip4
+	closetext
+	end
 
 AideScript_ReceiveTheBalls:
 	jumpstd ReceiveItemScript
@@ -408,6 +463,11 @@ ElmText_ChoosePokemon:
 	text "Go on <PLAYER>."
 	done
 
+ElmText_ChoosePokemonMin:
+	text "Take all #mon"
+	line "on the table."
+	done
+
 ElmText_TakePokemonText:
 	text "Go on <PLAYER> and"
 	line "take all #mon"
@@ -429,16 +489,28 @@ TakeCyndaquilText:
 	cont "fire #mon?"
 	done
 
+TakeCyndaquilTextMin:
+	text "Take Cyndaquil?"
+	done
+
 TakeTotodileText:
 	text "Elm: Do you want"
 	line "Totodile, the"
 	cont "water #mon?"
 	done
 
+TakeTotodileTextMin:
+	text "Take Totodile?"
+	done
+
 TakeChikoritaText:
 	text "Elm: So, you like"
 	line "Chikorita, the"
 	cont "grass #mon?"
+	done
+
+TakeChikoritaTextMin:
+	text "Take Chikorita?"
 	done
 
 ReceivedStarterText:
@@ -531,12 +603,27 @@ ElmAdventureText2:
 	line "it anytime."
 	done
 
+ElmAdventureText2Min:
+	text "Can heal #mon"
+	line "there."
+	done
+
 ElmAdventureText3:
 	text "The world is vast,"
 	line "so if you're not"
 	cont "sure what to do,"
 	cont "read that book on"
 	cont "the table."
+	done
+
+ElmAdventureText3Min:
+	text "Check that book if"
+	line "first timer."
+	done
+
+HaveFunText:
+	text "Have fun out there"
+	line "<PLAYER>"
 	done
 
 GotElmsNumberText:
