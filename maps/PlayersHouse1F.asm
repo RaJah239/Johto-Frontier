@@ -6,21 +6,22 @@
 
 PlayersHouse1F_MapScripts:
 	def_scene_scripts
-	scene_script PlayersHouse1FNoop1Scene, SCENE_PLAYERSHOUSE1F_MEET_MOM
+	scene_script MeetMomFirstTimeNoop1Scene, SCENE_PLAYERSHOUSE1F_MEET_MOM
 	scene_script PlayersHouse1FNoop2Scene, SCENE_PLAYERSHOUSE1F_NOOP
 
 	def_callbacks
 
-PlayersHouse1FNoop1Scene:
-	sdefer MeetMomRightScript
+MeetMomFirstTimeNoop1Scene:
+	sdefer MeetMomFirstTimeScript
 PlayersHouse1FNoop2Scene:
 	end
 
-MeetMomRightScript: ; intro scene
+MeetMomFirstTimeScript: ; intro scene
 	applymovement PLAYER, PlayerWalksTowardsMomMovement1
 	showemote EMOTE_SHOCK, PLAYERSHOUSE1F_MOM1, 15
-	showemote EMOTE_SHOCK, PLAYER, 15
 	turnobject PLAYERSHOUSE1F_MOM1, RIGHT
+	turnobject PLAYER, LEFT
+	showemote EMOTE_SHOCK, PLAYER, 15
 	playmusic MUSIC_MOM
 	applymovement PLAYER, PlayerWalksTowardsMomMovement2
 	; fallthrough
@@ -100,12 +101,14 @@ MomScript:
 	writetext HurryUpElmIsWaitingText
 	waitbutton
 	closetext
+	special RestartMapMusic
 	end
 
 .GotAPokemon:
 	writetext SoWhatWasProfElmsErrandText
 	waitbutton
 	closetext
+	special RestartMapMusic
 	end
 
 .FirstTimeBanking:
@@ -115,6 +118,7 @@ MomScript:
 	special BankOfMom
 	waitbutton
 	closetext
+	special RestartMapMusic
 	end
 
 PlayersHouse1FTVScript:
@@ -134,10 +138,10 @@ PlayerWalksTowardsMomMovement1:
 	step_end
 
 PlayerWalksTowardsMomMovement2:
-	step DOWN
-	step DOWN
-	step DOWN
 	step LEFT
+	step DOWN
+	step DOWN
+	step DOWN
 	turn_head LEFT
 	step_end
 
