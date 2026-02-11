@@ -149,7 +149,7 @@ ScriptCommandTable:
 	dw Script_wildoff                    ; 38
 	dw Script_xycompare                  ; 39
 	dw Script_warpmod                    ; 3a
-	dw Script_blackoutmod                ; 3b
+	dw Script_blackoutmod                ; 3b ; unused but can be useful
 	dw Script_warp                       ; 3c
 	dw Script_getmoney                   ; 3d
 	dw Script_getcoins                   ; 3e

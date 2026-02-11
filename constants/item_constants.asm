@@ -71,10 +71,10 @@
 	const ETHER        ; 3f
 	const MAX_ETHER    ; 40
 	const ELIXER       ; 41
-	const RED_SCALE    ; 42
+	const RED_SCALE    ; 42 ; unused, replace this
 	const SECRETPOTION ; 43
 	const MAREEP_CALL  ; 44
-	const MYSTERY_EGG  ; 45
+	const MYSTERY_EGG  ; 45 ; unused, replace this
 	const CLEAR_BELL   ; 46
 	const SILVER_WING  ; 47
 	const MOOMOO_MILK  ; 48
