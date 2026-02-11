@@ -64,21 +64,6 @@ ElmPhoneDiscoveredPokerusText:
 	line "I learn more. Bye!"
 	done
 
-ElmPhoneEggAssistantText:
-	text "Hello, <PLAY_G>? We"
-	line "discovered some-"
-
-	para "thing about the"
-	line "EGG!"
-
-	para "My assistant is at"
-	line "the #MON CENTER"
-
-	para "in VIOLET CITY. "
-	line "Could you talk to"
-	cont "him?"
-	done
-
 ElmPhoneRadioTowerRocketTakeoverText:
 	text "<PLAY_G>, how are"
 	line "things going?"
