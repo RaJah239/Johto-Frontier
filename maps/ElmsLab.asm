@@ -39,7 +39,6 @@ ElmsLabWalkUpToElmScript:
 	writetext ElmText_Intro
 	waitbutton
 	closetext
-
 	applymovement ELMSLAB_ELM, ElmsLab_ElmToDefaultPositionMovement1
 	turnobject PLAYER, UP
 	applymovement ELMSLAB_ELM, ElmsLab_ElmToDefaultPositionMovement2
@@ -65,7 +64,6 @@ ProfElmScript:
 	waitbutton
 	closetext
 	end
-
 .GoOnNowPlayer
 	writetextend ElmText_TakePokemonText
 
@@ -111,12 +109,10 @@ CyndaquilPokeBallScript:
 	promptbutton
 	givepoke CYNDAQUIL, 5, BERRY
 	closetext
-	
 	checkevent EVENT_GOT_TOTODILE_FROM_ELM
 	iffalse .exit_this_scene2
 	checkevent EVENT_GOT_CHIKORITA_FROM_ELM
 	iffalse .exit_this_scene2
-
 	readvar VAR_FACING
 	ifequal RIGHT, ElmDirectionsScript
 	applymovement PLAYER, AfterCyndaquilMovement
@@ -148,12 +144,10 @@ TotodilePokeBallScript:
 	promptbutton
 	givepoke TOTODILE, 5, BERRY
 	closetext
-
 	checkevent EVENT_GOT_CYNDAQUIL_FROM_ELM
 	iffalse .exit_this_scene2
 	checkevent EVENT_GOT_CHIKORITA_FROM_ELM
 	iffalse .exit_this_scene2
-
 	applymovement PLAYER, AfterTotodileMovement
 	sjump ElmDirectionsScript
 
@@ -183,12 +177,10 @@ ChikoritaPokeBallScript:
 	promptbutton
 	givepoke CHIKORITA, 5, BERRY
 	closetext
-
 	checkevent EVENT_GOT_CYNDAQUIL_FROM_ELM
 	iffalse .exit_this_scene2
 	checkevent EVENT_GOT_TOTODILE_FROM_ELM
 	iffalse .exit_this_scene2
-
 	applymovement PLAYER, AfterChikoritaMovement
 	sjump ElmDirectionsScript
 
@@ -202,17 +194,12 @@ ElmDirectionsScript:
 	opentext
 	writetext ElmAdventureText1
 	promptbutton
-
 	writetext ElmsLab_GetDexText
 	playsound SFX_ITEM
 	waitsfx
 	setflag ENGINE_POKEDEX
-
-
 	writetext ElmsLab_GetDexInfoText
 	promptbutton
-
-
 	addcellnum PHONE_ELM
 	writetext GotElmsNumberText
 	waitsfx
