@@ -12,23 +12,19 @@ PlayersHouse1F_MapScripts:
 	def_callbacks
 
 PlayersHouse1FNoop1Scene:
+	sdefer MeetMomRightScript
 PlayersHouse1FNoop2Scene:
 	end
 
-MeetMomLeftScript:
-	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
-
-MeetMomRightScript:
-	playmusic MUSIC_MOM
+MeetMomRightScript: ; intro scene
+	applymovement PLAYER, PlayerWalksTowardsMomMovement1
 	showemote EMOTE_SHOCK, PLAYERSHOUSE1F_MOM1, 15
-	turnobject PLAYER, LEFT
-	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
-	iffalse .OnRight
-	applymovement PLAYERSHOUSE1F_MOM1, MomTurnsTowardPlayerMovement
-	sjump MeetMomScript
+	showemote EMOTE_SHOCK, PLAYER, 15
+	turnobject PLAYERSHOUSE1F_MOM1, RIGHT
+	playmusic MUSIC_MOM
+	applymovement PLAYER, PlayerWalksTowardsMomMovement2
+	; fallthrough
 
-.OnRight:
-	applymovement PLAYERSHOUSE1F_MOM1, MomWalksToPlayerMovement
 MeetMomScript:
 	opentext
 	writetextcheckdialogue ElmsLookingForYouText, ElmsLookingForYouTextMin
@@ -162,12 +158,16 @@ PlayersHouse1FSinkScript:
 PlayersHouse1FFridgeScript:
 	jumptext PlayersHouse1FFridgeText
 
-MomTurnsTowardPlayerMovement:
-	turn_head RIGHT
+PlayerWalksTowardsMomMovement1:
+	step DOWN
 	step_end
 
-MomWalksToPlayerMovement:
-	slow_step RIGHT
+PlayerWalksTowardsMomMovement2:
+	step DOWN
+	step DOWN
+	step DOWN
+	step LEFT
+	turn_head LEFT
 	step_end
 
 MomTurnsBackMovement:
@@ -332,8 +332,6 @@ PlayersHouse1F_MapEvents:
 	warp_event  9,  0, PLAYERS_HOUSE_2F, 1
 
 	def_coord_events
-	coord_event  8,  4, SCENE_PLAYERSHOUSE1F_MEET_MOM, MeetMomLeftScript
-	coord_event  9,  4, SCENE_PLAYERSHOUSE1F_MEET_MOM, MeetMomRightScript
 
 	def_bg_events
 	bg_event  0,  1, BGEVENT_READ, PlayersHouse1FStoveScript
