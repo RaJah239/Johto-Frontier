@@ -52,14 +52,6 @@ MrPokemonsHouse_MrPokemonScript:
 	opentext
 	checkitem RED_SCALE
 	iftrue .RedScale
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iftrue .AlwaysNewDiscoveries
-	writetext MrPokemonText_ImDependingOnYou
-	waitbutton
-	closetext
-	end
-
-.AlwaysNewDiscoveries:
 	writetext MrPokemonText_AlwaysNewDiscoveries
 	waitbutton
 	closetext
@@ -72,8 +64,6 @@ MrPokemonsHouse_MrPokemonScript:
 	verbosegiveitem TM_HYPER_BEAM
 	iffalse .full
 	takeitem RED_SCALE
-	sjump .AlwaysNewDiscoveries
-
 .refused
 	writetext MrPokemonText_Disappointed
 	waitbutton

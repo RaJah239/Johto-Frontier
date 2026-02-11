@@ -95,8 +95,6 @@ MomScript:
 	iftrue .FirstTimeBanking
 	checkevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
 	iftrue .BankOfMom
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iftrue .GaveMysteryEgg
 	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
 	iftrue .GotAPokemon
 	writetext HurryUpElmIsWaitingText
@@ -111,12 +109,6 @@ MomScript:
 	end
 
 .FirstTimeBanking:
-	writetext ImBehindYouText
-	waitbutton
-	closetext
-	end
-
-.GaveMysteryEgg:
 	setevent EVENT_FIRST_TIME_BANKING_WITH_MOM
 .BankOfMom:
 	setevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
