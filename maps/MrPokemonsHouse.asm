@@ -6,17 +6,6 @@ MrPokemonsHouse_MapScripts:
 
 	def_callbacks
 
-	writetext MrPokemonsHouse_GotEggText
-	specialphonecall SPECIALCALL_ROBBED
-
-MrPokemonsHouse_MrPokemonScript:
-	faceplayer
-	opentext
-	writetext MrPokemonText_AlwaysNewDiscoveries
-	waitbutton
-	closetext
-	end
-
 MrPokemonsHouse_ForeignMagazines:
 	jumptext MrPokemonsHouse_ForeignMagazinesText
 
@@ -26,17 +15,103 @@ MrPokemonsHouse_BrokenComputer:
 MrPokemonsHouse_StrangeCoins:
 	jumptext MrPokemonsHouse_StrangeCoinsText
 
-MrPokemonsHouse_GotEggText:
-	text "<PLAYER> received"
-	line "MYSTERY EGG."
+MrPokemonsHouse_MrPokemonScript:
+	faceplayer
+	opentext
+	checkevent EVENT_MR_POKEMON_TOGEPI_EGG
+	iffalse .CollectThisEggFirst
+	writetextcheckdialogue MrPokemonTradesSilverLeafText, MrPokemonTradesSilverLeafTextMin
+	yesorno
+	iffalse .LifeIsDelightful
+	checkitem SILVER_LEAF, 10
+	iftrue .TradeForGoldLeaf
+	writetextend NotEnoughSilverLeafText
+
+.CollectThisEggFirst
+	writetext MrPokemonTogepiEggText
+	promptbutton
+	readvar VAR_PARTYCOUNT
+	ifequal PARTY_LENGTH, .PartyFull
+	giveegg TOGEPI, EGG_LEVEL
+	getstring STRING_BUFFER_4, .eggname
+	callstd ReceiveTogepiEggScript
+	setevent EVENT_MR_POKEMON_TOGEPI_EGG
+.LifeIsDelightful
+	writetextend MrPokemonText_GoodLifeText
+
+.TradeForGoldLeaf:
+	verbosegiveitem GOLD_LEAF
+	iffalse .NotEnoughSpace
+	takeitem SILVER_LEAF, 10
+	writetextend MrPokemonThanksForTheTradeText
+
+.NotEnoughSpace:
+	writetextend NotEnoughSpaceText
+
+.eggname:
+	db "Egg@"
+
+.PartyFull:
+	writetextend MrPokemonFullPartyText
+
+MrPokemonTogepiEggText:
+	text "The owners of a"
+	line "Day Care gave me"
+	cont "this Egg but it"
+	cont "needs to be in a"
+	cont "party to hatch."
+
+	para "You can have it,"
+	line "young trainer."
 	done
 
-MrPokemonText_AlwaysNewDiscoveries:
-	text "Life is delight-"
-	line "ful! Always, new"
+MrPokemonTradesSilverLeafText:
+	text "I collect the rare"
+	line "Silver Leaf."
 
-	para "discoveries to be"
-	line "made!"
+	para "I'm up for trading"
+	line "10× Silver Leaf"
+	cont "for 1× Gold Leaf."
+
+	para "How about it?"
+	done
+
+MrPokemonTradesSilverLeafTextMin:
+	text "Up for a trade?"
+
+	para "10× Silver Leaf"
+	line "for 1× Gold Leaf?"
+	done
+
+NotEnoughSpaceText:
+	text "Your bag needs"
+	line "more room to take"
+	cont "this."
+	done
+
+
+NotEnoughSilverLeafText:
+	text "You don't have the"
+	line "required amount…"
+	done
+
+MrPokemonThanksForTheTradeText:
+	text "Thanks! Swing by"
+	line "any time!"
+	done
+
+MrPokemonFullPartyText:
+	text "Oh, no. You can't"
+	line "carry any more"
+	cont "#mon with you."
+
+	para "You'll have to make"
+	line "room for this Egg."
+	done
+
+MrPokemonText_GoodLifeText:
+	text "It's a good life!"
+	line "Lots to enjoy!"
 	done
 
 MrPokemonsHouse_ForeignMagazinesText:

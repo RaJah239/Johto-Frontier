@@ -134,6 +134,7 @@ LancesRoomLanceScript:
 	special FadeOutPalettes
 	pause 15
 	warpfacing UP, HALL_OF_FAME, 4, 13
+	setevent EVENT_POKEMON_LEAGUE_CHAMPION
 	checkevent EVENT_I_WANT_TO_DO_SOMETHING
 	iftrue .EcruteakBlackSmithFindsHisPassion
 	end
