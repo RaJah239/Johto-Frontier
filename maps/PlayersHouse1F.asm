@@ -136,27 +136,34 @@ PlayerWalksTowardsMomMovement2:
 
 ElmsLookingForYouText:
 	text "Oh, <PLAYER>…! Our"
-	line "neighbor, PROF."
+	line "neighbor, Prof."
+	cont "Elm, was looking"
+	cont "for you."
 
-	para "ELM, was looking"
-	line "for you."
+	para "He, just as you"
+	line "and I know that it"
+	cont "is your big day."
 
-	para "He said he wanted"
-	line "you to do some-"
-	cont "thing for him."
+	para "It's time for you"
+	line "to go out in the"
+	cont "world like you've"
+	cont "always wanted and"
+	cont "become a #mon"
+	cont "trainer."
 
 	para "Oh! I almost for-"
-	line "got! Your #MON"
+	line "got!"
 
-	para "GEAR is back from"
-	line "the repair shop."
+	para "Your #mon Gear"
+	line "is back from the"
+	cont "repair shop."
 
 	para "Here you go!"
 	done
 
 MomGivesPokegearText:
-	text "#MON GEAR, or"
-	line "just #GEAR."
+	text "#mon Gear, or"
+	line "just #Gear."
 
 	para "It's essential if"
 	line "you want to be a"
@@ -175,15 +182,17 @@ IsItDSTText:
 	done
 
 ComeHomeForDSTText:
-	text "Come home to"
-	line "adjust your clock"
-
-	para "for Daylight"
-	line "Saving Time."
+	text "You can change the"
+	line "time on your #-"
+	cont "Gear but you'll"
+	cont "have come home to"
+	cont "adjust your clock"
+	cont "for Daylight"
+	cont "Saving Time."
 
 	para "By the way, do you"
 	line "know how to use"
-	cont "the PHONE?"
+	cont "the Phone?"
 	done
 
 KnowTheInstructionsText:
@@ -194,9 +203,9 @@ DontKnowTheInstructionsText:
 	text "I'll read the"
 	line "instructions."
 
-	para "Turn the #GEAR"
+	para "Turn the #Gear"
 	line "on and select the"
-	cont "PHONE icon."
+	cont "Phone icon."
 
 	para "Phone numbers are"
 	line "stored in memory."
@@ -213,17 +222,15 @@ InstructionsNextText:
 	done
 
 HurryUpElmIsWaitingText:
-	text "PROF.ELM is wait-"
+	text "Prof.Elm is wait-"
 	line "ing for you."
-
-	para "Hurry up, baby!"
 	done
 
 PlayersHouse1FStoveText:
 	text "Mom's specialty!"
 
-	para "CINNABAR VOLCANO"
-	line "BURGER!"
+	para "Cinnabar Volcano"
+	line "Burger!"
 	done
 
 PlayersHouse1FSinkText:
@@ -236,13 +243,13 @@ PlayersHouse1FFridgeText:
 	text "Let's see what's"
 	line "in the fridge…"
 
-	para "FRESH WATER and"
-	line "tasty LEMONADE!"
+	para "Fresh Water and"
+	line "tasty Lemonade!"
 	done
 
 ElmsLookingForYouTextMin:
 	text "Take along your"
-	line "#GEAR…"
+	line "#gear…"
 	done
 
 MomGivesPokegearTextMin:
@@ -252,9 +259,8 @@ MomGivesPokegearTextMin:
 PlayersHouse1FTVText:
 	text "There's a movie on"
 	line "TV: Stars dot the"
-
-	para "sky as two boys"
-	line "ride on a train…"
+	cont "sky as two boys"
+	cont "ride on a train…"
 
 	para "I'd better get"
 	line "rolling too!"
