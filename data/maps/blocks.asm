@@ -72,7 +72,7 @@ BattlePlazaRaJaHouse_Blocks:
 OlivineTimsHouse_Blocks:
 OlivinePunishmentSpeechHouse_Blocks:
 OlivineGoodRodHouse_Blocks:
-Route39Farmhouse_Blocks:
+Route11Farmhouse_Blocks:
 MahoganyRedGyaradosSpeechHouse_Blocks:
 MahoganyTradeBackKidHouse_Blocks:
 BlackthornDragonSpeechHouse_Blocks:
@@ -108,7 +108,7 @@ Route8RuinsOfAlphGate_Blocks:
 Route6IlexForestGate_Blocks:
 Route40BattleTowerGate_Blocks:
 Route29Route46Gate_Blocks:
-Route39_SilverCaveGate_Blocks:
+Route11_SilverCaveGate_Blocks:
 	INCBIN "maps/NorthSouthGate.blk"
 
 Route3_Blocks:
@@ -123,8 +123,8 @@ Route7_Blocks:
 Route43_Blocks:
 	INCBIN "maps/Route43.blk"
 
-Route39_Blocks:
-	INCBIN "maps/Route39.blk"
+Route11_Blocks:
+	INCBIN "maps/Route11.blk"
 
 PlayersHouse1F_Blocks:
 	INCBIN "maps/PlayersHouse1F.blk"
@@ -558,8 +558,8 @@ CianwoodPortPassage_Blocks:
 OlivinePortPassage_Blocks:
 	INCBIN "maps/PortPassage.blk"
 
-Route39Barn_Blocks:
-	INCBIN "maps/Route39Barn.blk"
+Route11Barn_Blocks:
+	INCBIN "maps/Route11Barn.blk"
 
 VictoryRoad_Blocks:
 	INCBIN "maps/VictoryRoad.blk"

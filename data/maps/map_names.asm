@@ -57,10 +57,10 @@ Olivine_Map_Names: ;newgroup OLIVINE ;  1
 	dw Olivine_Map_Name7 ; map_const OLIVINE_CAFE ;  7
 	dw Olivine_Map_Name8 ; map_const OLIVINE_MART ;  8
 	dw Olivine_Map_Name9 ; map_const ROUTE_10_ECRUTEAK_GATE ;  9
-	dw Olivine_Map_Name10 ; map_const ROUTE_39_BARN ; 10
-	dw Olivine_Map_Name11 ; map_const ROUTE_39_FARMHOUSE ; 11
+	dw Olivine_Map_Name10 ; map_const ROUTE_11_BARN ; 10
+	dw Olivine_Map_Name11 ; map_const ROUTE_11_FARMHOUSE ; 11
 	dw Olivine_Map_Name12 ; map_const ROUTE_10, ; 12
-	dw Olivine_Map_Name13 ; map_const ROUTE_39, ; 13
+	dw Olivine_Map_Name13 ; map_const ROUTE_11, ; 13
 	dw Olivine_Map_Name14 ; map_const OLIVINE_CITY ; 14
 	assert_table_length NUM_OLIVINE_MAPS
 
@@ -297,7 +297,7 @@ Silver_Map_Names: ;newgroup SILVER
 	table_width 2, Silver_Map_Names                                              ; 19
 	dw Silver_Map_Name1 ; map_const SILVER_CAVE_OUTSIDE                   
 	dw Silver_Map_Name2 ; map_const SILVER_CAVE_POKECENTER_1F
-	dw Silver_Map_Name3 ; map_const ROUTE_39_SILVER_CAVE_GATE
+	dw Silver_Map_Name3 ; map_const ROUTE_11_SILVER_CAVE_GATE
 	assert_table_length NUM_SILVER_MAPS
 
 Cable_Club_Map_Names: ;newgroup CABLE_CLUB
@@ -396,14 +396,14 @@ Olivine_Map_Name8: ; map_const OLIVINE_MART ;  8
 	db "Olivine #mart@"
 Olivine_Map_Name9: ; map_const ROUTE_10_ECRUTEAK_GATE ;  9
 	db "Route 10 Gate@"
-Olivine_Map_Name10: ; map_const ROUTE_39_BARN ; 10
-	db "Route 39 Barn@"
-Olivine_Map_Name11: ; map_const ROUTE_39_FARMHOUSE ; 11
-	db "Route 39 House@"
+Olivine_Map_Name10: ; map_const ROUTE_11_BARN ; 10
+	db "Route 11 Barn@"
+Olivine_Map_Name11: ; map_const ROUTE_11_FARMHOUSE ; 11
+	db "Route 11 House@"
 Olivine_Map_Name12: ; map_const ROUTE_10, ; 12
 	db "Route 10@"
-Olivine_Map_Name13: ; map_const ROUTE_39, ; 13
-	db "Route 39@"
+Olivine_Map_Name13: ; map_const ROUTE_11, ; 13
+	db "Route 11@"
 Olivine_Map_Name14: ; map_const OLIVINE_CITY ; 14
 	db "Olivine City@"
 
@@ -793,8 +793,8 @@ Silver_Map_Name1: ; map_const SILVER_CAVE_OUTSIDE;  1
 	db "Mt. Silver@"
 Silver_Map_Name2: ; map_const SILVER_CAVE_POKECENTER_1F ;  2
 	db "Silver Cave Center@"
-Silver_Map_Name3: ; map_const ROUTE_39_SILVER_CAVE_GATE ; 3
-	db "Route 39 Gate@"
+Silver_Map_Name3: ; map_const ROUTE_11_SILVER_CAVE_GATE ; 3
+	db "Route 11 Gate@"
 
 Cable_Club_Map_Name1: ; map_const POKECENTER_2F ;  1
 	db "<PKMN> CEnter 2F@"

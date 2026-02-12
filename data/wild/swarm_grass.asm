@@ -115,7 +115,7 @@ SwarmGrassWildMons:
 	db 5, CHIKORITA
 
 ; Cyndaquil swarm
-	map_id ROUTE_39
+	map_id ROUTE_11
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 5, CYNDAQUIL

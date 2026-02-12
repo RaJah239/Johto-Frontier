@@ -122,7 +122,7 @@ ENDM
 	connection south, Route6, ROUTE_6, 5
 
 	map_attributes OlivineCity, OLIVINE_CITY, $35, NORTH | WEST
-	connection north, Route39, ROUTE_39, 5
+	connection north, Route11, ROUTE_11, 5
 	connection west, Route40, ROUTE_40, 9
 
 	map_attributes EcruteakCity, ECRUTEAK_CITY, $05, SOUTH | WEST | EAST
@@ -188,10 +188,10 @@ ENDM
 	connection south, Route8, ROUTE_8, -10
 
 	map_attributes Route10, ROUTE_10, $05, WEST | EAST
-	connection west, Route39, ROUTE_39, -7
+	connection west, Route11, ROUTE_11, -7
 	connection east, EcruteakCity, ECRUTEAK_CITY, -5
 
-	map_attributes Route39, ROUTE_39, $05, SOUTH | EAST
+	map_attributes Route11, ROUTE_11, $05, SOUTH | EAST
 	connection south, OlivineCity, OLIVINE_CITY, -5
 	connection east, Route10, ROUTE_10, 7
 
@@ -316,8 +316,8 @@ ENDM
 	map_attributes OlivineCafe, OLIVINE_CAFE, $00, 0
 	map_attributes OlivineMart, OLIVINE_MART, $00, 0
 	map_attributes Route10EcruteakGate, ROUTE_10_ECRUTEAK_GATE, $00, 0
-	map_attributes Route39Barn, ROUTE_39_BARN, $00, 0
-	map_attributes Route39Farmhouse, ROUTE_39_FARMHOUSE, $00, 0
+	map_attributes Route11Barn, ROUTE_11_BARN, $00, 0
+	map_attributes Route11Farmhouse, ROUTE_11_FARMHOUSE, $00, 0
 	map_attributes MahoganyRedGyaradosSpeechHouse, MAHOGANY_RED_GYARADOS_SPEECH_HOUSE, $00, 0
 	map_attributes MahoganyTradeBackKidHouse, MAHOGANY_TRADE_BACK_KID_HOUSE, $00, 0
 	map_attributes MahoganyGym, MAHOGANY_GYM, $00, 0
@@ -397,7 +397,7 @@ ENDM
 	map_attributes LancesRoom, LANCES_ROOM, $00, 0
 	map_attributes HallOfFame, HALL_OF_FAME, $00, 0
 	map_attributes SilverCavePokecenter1F, SILVER_CAVE_POKECENTER_1F, $00, 0
-	map_attributes Route39_SilverCaveGate, ROUTE_39_SILVER_CAVE_GATE, $00, 0
+	map_attributes Route11_SilverCaveGate, ROUTE_11_SILVER_CAVE_GATE, $00, 0
 	map_attributes Pokecenter2F, POKECENTER_2F, $00, 0
 	map_attributes TradeCenter, TRADE_CENTER, $00, 0
 	map_attributes Colosseum, COLOSSEUM, $00, 0

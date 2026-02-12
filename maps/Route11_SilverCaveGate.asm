@@ -1,13 +1,13 @@
 	object_const_def
-	const ROUTE39MTSILVERGATE_OFFICER
+	const ROUTE11MTSILVERGATE_OFFICER
 
-Route39_SilverCaveGate_MapScripts:
+Route11_SilverCaveGate_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
- 	callback MAPCALLBACK_TILES, Route39MtSilverGateClearDoorCallback
+ 	callback MAPCALLBACK_TILES, Route11MtSilverGateClearDoorCallback
 
-Route39MtSilverGateClearDoorCallback:
+Route11MtSilverGateClearDoorCallback:
 	checkevent EVENT_OPENED_MT_SILVER
 	iftrue .Done
 	changeblock  4,  0, $40 ; closed doors
@@ -15,7 +15,7 @@ Route39MtSilverGateClearDoorCallback:
 .Done:
 	endcallback
 
-Route39MtSilverGateOfficerScript:
+Route11MtSilverGateOfficerScript:
 	faceplayer
 	opentext
 	checkevent EVENT_OPENED_MT_SILVER
@@ -49,10 +49,10 @@ MtSilverIsOpenedForYouText:
 	line "Go forth!" 
 	done	
 
-Route39_SilverCaveGate_MapEvents:
+Route11_SilverCaveGate_MapEvents:
 	def_warp_events
-	warp_event  4,  7, ROUTE_39, 4
-	warp_event  5,  7, ROUTE_39, 4
+	warp_event  4,  7, ROUTE_11, 4
+	warp_event  5,  7, ROUTE_11, 4
 	warp_event  4,  0, SILVER_CAVE_OUTSIDE, 3
 	warp_event  5,  0, SILVER_CAVE_OUTSIDE, 4
 
@@ -61,5 +61,4 @@ Route39_SilverCaveGate_MapEvents:
 	def_bg_events
 
 	def_object_events
-	object_event  0,  4, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, Route39MtSilverGateOfficerScript, -1
-
+	object_event  0,  4, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, Route11MtSilverGateOfficerScript, -1

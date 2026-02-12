@@ -1,10 +1,10 @@
-DEF ROUTE39FARMHOUSE_MILK_PRICE EQU 500
+DEF ROUTE11FARMHOUSE_MILK_PRICE EQU 500
 
 	object_const_def
-	const ROUTE39FARMHOUSE_POKEFAN_M
-	const ROUTE39FARMHOUSE_POKEFAN_F
+	const ROUTE11FARMHOUSE_POKEFAN_M
+	const ROUTE11FARMHOUSE_POKEFAN_F
 
-Route39Farmhouse_MapScripts:
+Route11Farmhouse_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
@@ -27,11 +27,11 @@ FarmerMScript_SellMilk:
 	special PlaceMoneyTopRight
 	yesorno
 	iffalse FarmerMScript_NoSale
-	checkmoney YOUR_MONEY, ROUTE39FARMHOUSE_MILK_PRICE
+	checkmoney YOUR_MONEY, ROUTE11FARMHOUSE_MILK_PRICE
 	ifequal HAVE_LESS, FarmerMScript_NoMoney
 	giveitem MOOMOO_MILK
 	iffalse FarmerMScript_NoRoom
-	takemoney YOUR_MONEY, ROUTE39FARMHOUSE_MILK_PRICE
+	takemoney YOUR_MONEY, ROUTE11FARMHOUSE_MILK_PRICE
 	special PlaceMoneyTopRight
 	waitsfx
 	playsound SFX_TRANSACTION
@@ -122,7 +122,7 @@ FarmerMText_BuyMilk:
 	line "to restore HP!"
 
 	para "I'll give it to ya"
-	line "fer just ¥{d:ROUTE39FARMHOUSE_MILK_PRICE}."
+	line "fer just ¥{d:ROUTE11FARMHOUSE_MILK_PRICE}."
 	done
 
 FarmerMText_GotMilk:
@@ -187,10 +187,10 @@ FarmerFText_SnoreSpeech:
 	cont "it, hon."
 	done
 
-Route39Farmhouse_MapEvents:
+Route11Farmhouse_MapEvents:
 	def_warp_events
-	warp_event  2,  7, ROUTE_39, 2
-	warp_event  3,  7, ROUTE_39, 2
+	warp_event  2,  7, ROUTE_11, 2
+	warp_event  3,  7, ROUTE_11, 2
 
 	def_coord_events
 

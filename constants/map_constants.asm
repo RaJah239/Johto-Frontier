@@ -44,10 +44,10 @@ ENDM
 	map_const OLIVINE_CAFE,                                 4,  4 ;  7
 	map_const OLIVINE_MART,                                 6,  4 ;  8
 	map_const ROUTE_10_ECRUTEAK_GATE,                       5,  4 ;  9
-	map_const ROUTE_39_BARN,                                4,  4 ; 10
-	map_const ROUTE_39_FARMHOUSE,                           4,  4 ; 11
+	map_const ROUTE_11_BARN,                                4,  4 ; 10
+	map_const ROUTE_11_FARMHOUSE,                           4,  4 ; 11
 	map_const ROUTE_10,                                    20,  9 ; 12
-	map_const ROUTE_39,                                    10, 25 ; 13
+	map_const ROUTE_11,                                    10, 25 ; 13
 	map_const OLIVINE_CITY,                                20, 18 ; 14
 	endgroup
 
@@ -271,7 +271,7 @@ ENDM
 	newgroup SILVER                                               ; 19
 	map_const SILVER_CAVE_OUTSIDE,                         20, 18 ;  2
 	map_const SILVER_CAVE_POKECENTER_1F,                    5,  4 ;  3
-	map_const ROUTE_39_SILVER_CAVE_GATE,                    5,  4 ;  4
+	map_const ROUTE_11_SILVER_CAVE_GATE,                    5,  4 ;  4
 	endgroup
 
 	newgroup CABLE_CLUB                                           ; 20

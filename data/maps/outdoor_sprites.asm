@@ -105,7 +105,7 @@ GoldenrodGroupSprites:
 
 ; OlivineCity and Route40 are connected
 OlivineGroupSprites:
-; Route10, Route39, OlivineCity
+; Route10, Route11, OlivineCity
 CianwoodGroupSprites:
 ; Route40, Route41, CianwoodCity, PowerPlantOutside
 	db SPRITE_RIVAL

@@ -1,24 +1,24 @@
 	object_const_def
-	const ROUTE39_SAILOR
-	const ROUTE39_POKEFAN_M
-	const ROUTE39_POKEFAN_F1
-	const ROUTE39_MILTANK1
-	const ROUTE39_MILTANK2
-	const ROUTE39_MILTANK3
-	const ROUTE39_MILTANK4
-	const ROUTE39_PSYCHIC_NORMAN
-	const ROUTE39_POKEFAN_F2
-	const ROUTE39_BERRY_TREE1
-	const ROUTE39_APRICORN_TREE1
+	const ROUTE11_SAILOR
+	const ROUTE11_POKEFAN_M
+	const ROUTE11_POKEFAN_F1
+	const ROUTE11_MILTANK1
+	const ROUTE11_MILTANK2
+	const ROUTE11_MILTANK3
+	const ROUTE11_MILTANK4
+	const ROUTE11_PSYCHIC_NORMAN
+	const ROUTE11_POKEFAN_F2
+	const ROUTE11_BERRY_TREE1
+	const ROUTE11_APRICORN_TREE1
 
-Route39_MapScripts:
+Route11_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
 
-Route39Miltank:
+Route11Miltank:
 	opentext
-	writetext Route39MiltankText
+	writetext Route11MiltankText
 	cry MILTANK
 	waitbutton
 	closetext
@@ -158,22 +158,22 @@ TrainerPokefanfJaime:
 	closetext
 	end
 
-Route39Sign:
-	jumptext Route39SignText
+Route11Sign:
+	jumptext Route11SignText
 
-Route39MtSilverSign:
-	jumptext Route39MtSilverSignText
+Route11MtSilverSign:
+	jumptext Route11MtSilverSignText
 
 MoomooFarmSign:
 	jumptext MoomooFarmSignText
 
-Route39TrainerTips:
-	jumptext Route39TrainerTipsText
+Route11TrainerTips:
+	jumptext Route11TrainerTipsText
 
-Route39HiddenNugget:
-	hiddenitem NUGGET, EVENT_ROUTE_39_HIDDEN_NUGGET
+Route11HiddenNugget:
+	hiddenitem NUGGET, EVENT_ROUTE_11_HIDDEN_NUGGET
 
-Route39MiltankText:
+Route11MiltankText:
 	text "MILTANK: Mooo!"
 	done
 
@@ -293,7 +293,7 @@ PokefanfJaimeBeatenText:
 PokefanfJaimeAfterBattleText:
 	text "I met my MEOWTH at"
 	line "night, right here"
-	cont "on ROUTE 39."
+	cont "on ROUTE 11."
 
 	para "I'm not sure why,"
 	line "but it seems to"
@@ -308,14 +308,14 @@ PokefanfJaimeAfterBattleText:
 	line "anywhere else."
 	done
 
-Route39SignText:
-	text "ROUTE 39"
+Route11SignText:
+	text "ROUTE 11"
 
 	para "OLIVINE CITY -"
 	line "ECRUTEAK CITY"
 	done
 
-Route39MtSilverSignText:
+Route11MtSilverSignText:
 	text "DANGER!"
 	line "MT.SILVER AHEAD!"
 	done
@@ -327,7 +327,7 @@ MoomooFarmSignText:
 	line "and Tasty Milk"
 	done
 
-Route39TrainerTipsText:
+Route11TrainerTipsText:
 	text "TRAINER TIPS"
 
 	para "Use HEADBUTT on"
@@ -342,102 +342,102 @@ Route39TrainerTipsText:
 	line "any tree you see!"
 	done
 
-Route39BerryTree1:
+Route11BerryTree1:
 	opentext
 	getitemname STRING_BUFFER_3, MINT_BERRY
-	writetext Route39TreeText
+	writetext Route11TreeText
 	promptbutton
-	writetext Route39HeyItsBerryApricornText
+	writetext Route11HeyItsBerryApricornText
 	promptbutton
 	giveitem MINT_BERRY
-	iffalse Route39NoRoomInBag
-	disappear ROUTE39_BERRY_TREE1
-	writetext Route39FoundItemText
+	iffalse Route11NoRoomInBag
+	disappear ROUTE11_BERRY_TREE1
+	writetext Route11FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route39ApricornTree1:
+Route11ApricornTree1:
 	opentext
 	getitemname STRING_BUFFER_3, GRN_APRICORN
-	writetext Route39TreeText
+	writetext Route11TreeText
 	promptbutton
-	writetext Route39HeyItsBerryApricornText
+	writetext Route11HeyItsBerryApricornText
 	promptbutton
 	giveitem GRN_APRICORN
-	iffalse Route39NoRoomInBag
-	disappear ROUTE39_APRICORN_TREE1
-	writetext Route39FoundItemText
+	iffalse Route11NoRoomInBag
+	disappear ROUTE11_APRICORN_TREE1
+	writetext Route11FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route39NoBerryOrApricorn:
+Route11NoBerryOrApricorn:
 	opentext
-	writetext Route39TreeText
+	writetext Route11TreeText
 	promptbutton
-	writetext Route39NothingHereText
+	writetext Route11NothingHereText
 	waitbutton
 	closetext
 	end
 
-Route39NoRoomInBag:
-	writetext Route39NoRoomInBagText
+Route11NoRoomInBag:
+	writetext Route11NoRoomInBagText
 	waitbutton
 	closetext
 	end
 
-Route39TreeText:
+Route11TreeText:
 	text_far _FruitBearingTreeText
 	text_end
 
-Route39NothingHereText:
+Route11NothingHereText:
 	text_far _NothingHereText
 	text_end
 
-Route39HeyItsBerryApricornText:
+Route11HeyItsBerryApricornText:
 	text_far _HeyItsFruitText
 	text_end
 
-Route39FoundItemText:
+Route11FoundItemText:
 	text_far _ObtainedFruitText
 	text_end
 
-Route39NoRoomInBagText:
+Route11NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
-Route39_MapEvents:
+Route11_MapEvents:
 	def_warp_events
-	warp_event  1, 17, ROUTE_39_BARN, 1
-	warp_event  5, 17, ROUTE_39_FARMHOUSE, 1
-	warp_event  1, 17, ROUTE_39_BARN, 1
-	warp_event  9,  5, ROUTE_39_SILVER_CAVE_GATE, 1
+	warp_event  1, 17, ROUTE_11_BARN, 1
+	warp_event  5, 17, ROUTE_11_FARMHOUSE, 1
+	warp_event  1, 17, ROUTE_11_BARN, 1
+	warp_event  9,  5, ROUTE_11_SILVER_CAVE_GATE, 1
 
 	def_coord_events
 
 	def_bg_events
-	bg_event  5, 45, BGEVENT_READ, Route39TrainerTips
+	bg_event  5, 45, BGEVENT_READ, Route11TrainerTips
 	bg_event  9, 19, BGEVENT_READ, MoomooFarmSign
-	bg_event 15, 21, BGEVENT_READ, Route39Sign
-	bg_event 11,  7, BGEVENT_READ, Route39MtSilverSign
-	bg_event  5, 27, BGEVENT_ITEM, Route39HiddenNugget
-	bg_event  9, 17, BGEVENT_READ, Route39NoBerryOrApricorn
-	bg_event  8, 17, BGEVENT_READ, Route39NoBerryOrApricorn
+	bg_event 15, 21, BGEVENT_READ, Route11Sign
+	bg_event 11,  7, BGEVENT_READ, Route11MtSilverSign
+	bg_event  5, 27, BGEVENT_ITEM, Route11HiddenNugget
+	bg_event  9, 17, BGEVENT_READ, Route11NoBerryOrApricorn
+	bg_event  8, 17, BGEVENT_READ, Route11NoBerryOrApricorn
 
 	def_object_events
 	object_event 13, 43, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 5, TrainerSailorEugene, -1
 	object_event 10, 36, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerPokefanmDerek, -1
 	object_event 11, 33, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerPokefanfRuth, -1
-	object_event  3, 26, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route39Miltank, -1
-	object_event  6, 25, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route39Miltank, -1
-	object_event  4, 29, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route39Miltank, -1
-	object_event  8, 27, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route39Miltank, -1
+	object_event  3, 26, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route11Miltank, -1
+	object_event  6, 25, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route11Miltank, -1
+	object_event  4, 29, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route11Miltank, -1
+	object_event  8, 27, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route11Miltank, -1
 	object_event 13, 21, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 1, TrainerPsychicNorman, -1
 	object_event  4, 36, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TrainerPokefanfJaime, -1
-	object_event  9, 17, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, Route39BerryTree1, EVENT_ROUTE_39_BERRY_1
-	object_event  8, 17, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route39ApricornTree1, EVENT_ROUTE_39_APRICORN_1
+	object_event  9, 17, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, Route11BerryTree1, EVENT_ROUTE_11_BERRY_1
+	object_event  8, 17, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route11ApricornTree1, EVENT_ROUTE_11_APRICORN_1

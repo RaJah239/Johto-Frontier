@@ -49,8 +49,8 @@ SilverCaveOutside_MapEvents:
 	def_warp_events
 	warp_event 25, 19, SILVER_CAVE_POKECENTER_1F, 1
 	warp_event 18, 11, SILVER_CAVE_ROOM_1, 1
-	warp_event 25, 31, ROUTE_39_SILVER_CAVE_GATE, 3
-	warp_event 26, 31, ROUTE_39_SILVER_CAVE_GATE, 4
+	warp_event 25, 31, ROUTE_11_SILVER_CAVE_GATE, 3
+	warp_event 26, 31, ROUTE_11_SILVER_CAVE_GATE, 4
 
 	def_coord_events
 

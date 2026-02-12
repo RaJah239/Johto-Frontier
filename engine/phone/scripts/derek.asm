@@ -6,12 +6,12 @@ DerekPhoneCalleeScript:
 	farsjump DerekHangUpScript
 
 .Nugget:
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_39
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_11
 	farsjump DerekComePickUpScript
 
 DerekPhoneCallerScript:
 	gettrainername STRING_BUFFER_3, POKEFANM, DEREK1
 	farscall PhoneScript_GreetPhone_Male
 	setflag ENGINE_DEREK_HAS_NUGGET
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_39
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_11
 	farsjump PhoneScript_FoundItem_Male

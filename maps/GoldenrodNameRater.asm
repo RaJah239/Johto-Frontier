@@ -62,7 +62,7 @@ SwarmGrampsScript:
 
 .cyndaquil
 	setflag ENGINE_SWARM
-	swarm ROUTE_39
+	swarm ROUTE_11
 	writetext SwarmCyndaquilText
 	sjump .WrappingUpSwarms
 
@@ -125,7 +125,7 @@ SwarmChikoritaText:
 SwarmCyndaquilText:
 	text "There's a swarm of"
 	line "CYNDAQUIL on"
-	cont "ROUTE 39!"
+	cont "ROUTE 11!"
 	done
 
 SwarmTotodileText:

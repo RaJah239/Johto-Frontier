@@ -29,7 +29,7 @@
 	const LANDMARK_BURNED_TOWER      ; 18
 	const LANDMARK_ROUTE_10          ; 19
 	const LANDMARK_SILVER_CAVE       ; 2e
-	const LANDMARK_ROUTE_39          ; 1a
+	const LANDMARK_ROUTE_11          ; 1a
 	const LANDMARK_OLIVINE_CITY      ; 1b
 	const LANDMARK_LIGHTHOUSE        ; 1c
 	const LANDMARK_ROUTE_40          ; 1e

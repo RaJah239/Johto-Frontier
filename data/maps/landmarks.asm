@@ -35,7 +35,7 @@ Landmarks:
 	landmark  58,  42, BurnedTowerName
 	landmark  44,  44, Route10Name
 	landmark  36,  28, SilverCaveName
-	landmark  28,  48, Route39Name
+	landmark  28,  48, Route11Name
 	landmark  28,  60, OlivineCityName
 	landmark  30,  62, LighthouseName
 	landmark  20,  60, Route40Name
@@ -107,7 +107,7 @@ Route7Name:          db "Route 7@"
 Route8Name:          db "Route 8@"
 Route9Name:          db "Route 9@"
 Route10Name:         db "Route 10@"
-Route39Name:         db "Route 39@"
+Route11Name:         db "Route 11@"
 Route40Name:         db "Route 40@"
 Route41Name:         db "Route 41@"
 Route42Name:         db "Route 42@"
