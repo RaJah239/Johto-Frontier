@@ -31,7 +31,7 @@ MapScenes::
 	scene_var ECRUTEAK_TIN_TOWER_ENTRANCE,                 wEcruteakTinTowerEntranceSceneID
 	scene_var WISE_TRIOS_ROOM,                             wWiseTriosRoomSceneID
 	scene_var ECRUTEAK_GYM,                                wEcruteakGymSceneID
-	scene_var ROUTE_42,                                    wRoute42SceneID
+	scene_var ROUTE_14,                                    wRoute14SceneID
 	scene_var CIANWOOD_CITY,                               wCianwoodCitySceneID
 	scene_var BATTLE_TOWER_1F,                             wBattleTower1FSceneID
 	scene_var BATTLE_TOWER_BATTLE_ROOM,                    wBattleTowerBattleRoomSceneID

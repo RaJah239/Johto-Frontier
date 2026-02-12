@@ -1,35 +1,35 @@
 	object_const_def
-	const ROUTE42_FISHER
-	const ROUTE42_POKEFAN_M
-	const ROUTE42_SUPER_NERD
-	const ROUTE42_POKE_BALL1
-	const ROUTE42_POKE_BALL2
-	const ROUTE42_SUICUNE
-	const ROUTE42_APRICORN_TREE1
-	const ROUTE42_APRICORN_TREE2
-	const ROUTE42_APRICORN_TREE3
+	const ROUTE14_FISHER
+	const ROUTE14_POKEFAN_M
+	const ROUTE14_SUPER_NERD
+	const ROUTE14_POKE_BALL1
+	const ROUTE14_POKE_BALL2
+	const ROUTE14_SUICUNE
+	const ROUTE14_APRICORN_TREE1
+	const ROUTE14_APRICORN_TREE2
+	const ROUTE14_APRICORN_TREE3
 
-Route42_MapScripts:
+Route14_MapScripts:
 	def_scene_scripts
-	scene_script Route42Noop1Scene, SCENE_ROUTE42_NOOP
-	scene_script Route42Noop2Scene, SCENE_ROUTE42_SUICUNE
+	scene_script Route14Noop1Scene, SCENE_ROUTE14_NOOP
+	scene_script Route14Noop2Scene, SCENE_ROUTE14_SUICUNE
 
 	def_callbacks
 
-Route42Noop1Scene:
+Route14Noop1Scene:
 	end
 
-Route42Noop2Scene:
+Route14Noop2Scene:
 	end
 
-Route42SuicuneScript:
+Route14SuicuneScript:
 	showemote EMOTE_SHOCK, PLAYER, 15
 	pause 15
 	playsound SFX_WARP_FROM
-	applymovement ROUTE42_SUICUNE, Route42SuicuneMovement
-	disappear ROUTE42_SUICUNE
+	applymovement ROUTE14_SUICUNE, Route14SuicuneMovement
+	disappear ROUTE14_SUICUNE
 	pause 10
-	setscene SCENE_ROUTE42_NOOP
+	setscene SCENE_ROUTE14_NOOP
 	clearevent EVENT_SAW_SUICUNE_ON_ROUTE_8
 	setmapscene ROUTE_8, SCENE_ROUTE8_SUICUNE
 	end
@@ -112,31 +112,24 @@ TrainerFisherTully:
 
 .AskNumber:
 	jumpstd AskNumber1MScript
-	end
 
 .RegisteredNumber:
 	jumpstd RegisteredNumberMScript
-	end
 
 .NumberAccepted:
 	jumpstd NumberAcceptedMScript
-	end
 
 .NumberDeclined:
 	jumpstd NumberDeclinedMScript
-	end
 
 .Rematch:
 	jumpstd RematchMScript
-	end
 
 .Gift:
 	jumpstd GiftMScript
-	end
 
 .PackFull:
 	jumpstd PackFullMScript
-	end
 
 TrainerPokemaniacShane:
 	trainer POKEMANIAC, SHANE, EVENT_BEAT_POKEMANIAC_SHANE, PokemaniacShaneSeenText, PokemaniacShaneBeatenText, 0, .Script
@@ -160,8 +153,8 @@ TrainerHikerBenjamin:
 	closetext
 	end
 
-Route42Sign1:
-	jumptext Route42Sign1Text
+Route14Sign1:
+	jumptext Route14Sign1Text
 
 MtMortarSign1:
 	jumptext MtMortarSign1Text
@@ -169,19 +162,19 @@ MtMortarSign1:
 MtMortarSign2:
 	jumptext MtMortarSign2Text
 
-Route42Sign2:
-	jumptext Route42Sign2Text
+Route14Sign2:
+	jumptext Route14Sign2Text
 
-Route42UltraBall:
+Route14UltraBall:
 	itemball ULTRA_BALL
 
-Route42SuperPotion:
+Route14SuperPotion:
 	itemball SUPER_POTION
 
-Route42HiddenMaxPotion:
-	hiddenitem MAX_POTION, EVENT_ROUTE_42_HIDDEN_MAX_POTION
+Route14HiddenMaxPotion:
+	hiddenitem MAX_POTION, EVENT_ROUTE_14_HIDDEN_MAX_POTION
 
-Route42SuicuneMovement:
+Route14SuicuneMovement:
 	set_sliding
 	fast_jump_step UP
 	fast_jump_step UP
@@ -257,8 +250,8 @@ PokemaniacShaneAfterBattleText:
 	line "it. Please?"
 	done
 
-Route42Sign1Text:
-	text "ROUTE 42"
+Route14Sign1Text:
+	text "ROUTE 14"
 
 	para "ECRUTEAK CITY -"
 	line "MAHOGANY TOWN"
@@ -278,128 +271,128 @@ MtMortarSign2Text:
 	line "INSIDE"
 	done
 
-Route42Sign2Text:
-	text "ROUTE 42"
+Route14Sign2Text:
+	text "ROUTE 14"
 
 	para "ECRUTEAK CITY -"
 	line "MAHOGANY TOWN"
 	done
 
-Route42ApricornTree1:
+Route14ApricornTree1:
 	opentext
 	getitemname STRING_BUFFER_3, PNK_APRICORN
-	writetext Route42TreeText
+	writetext Route14TreeText
 	promptbutton
-	writetext Route42HeyItsBerryApricornText
+	writetext Route14HeyItsBerryApricornText
 	promptbutton
 	giveitem PNK_APRICORN
-	iffalse Route42NoRoomInBag
-	disappear ROUTE42_APRICORN_TREE1
-	writetext Route42FoundItemText
+	iffalse Route14NoRoomInBag
+	disappear ROUTE14_APRICORN_TREE1
+	writetext Route14FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route42ApricornTree2:
+Route14ApricornTree2:
 	opentext
 	getitemname STRING_BUFFER_3, GRN_APRICORN
-	writetext Route42TreeText
+	writetext Route14TreeText
 	promptbutton
-	writetext Route42HeyItsBerryApricornText
+	writetext Route14HeyItsBerryApricornText
 	promptbutton
 	giveitem GRN_APRICORN
-	iffalse Route42NoRoomInBag
-	disappear ROUTE42_APRICORN_TREE2
-	writetext Route42FoundItemText
+	iffalse Route14NoRoomInBag
+	disappear ROUTE14_APRICORN_TREE2
+	writetext Route14FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route42ApricornTree3:
+Route14ApricornTree3:
 	opentext
 	getitemname STRING_BUFFER_3, YLW_APRICORN
-	writetext Route42TreeText
+	writetext Route14TreeText
 	promptbutton
-	writetext Route42HeyItsBerryApricornText
+	writetext Route14HeyItsBerryApricornText
 	promptbutton
 	giveitem YLW_APRICORN
-	iffalse Route42NoRoomInBag
-	disappear ROUTE42_APRICORN_TREE3
-	writetext Route42FoundItemText
+	iffalse Route14NoRoomInBag
+	disappear ROUTE14_APRICORN_TREE3
+	writetext Route14FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route42NoBerryOrApricorn:
+Route14NoBerryOrApricorn:
 	opentext
-	writetext Route42TreeText
+	writetext Route14TreeText
 	promptbutton
-	writetext Route42NothingHereText
+	writetext Route14NothingHereText
 	waitbutton
 	closetext
 	end
 
-Route42NoRoomInBag:
-	writetext Route42NoRoomInBagText
+Route14NoRoomInBag:
+	writetext Route14NoRoomInBagText
 	waitbutton
 	closetext
 	end
 
-Route42TreeText:
+Route14TreeText:
 	text_far _FruitBearingTreeText
 	text_end
 
-Route42NothingHereText:
+Route14NothingHereText:
 	text_far _NothingHereText
 	text_end
 
-Route42HeyItsBerryApricornText:
+Route14HeyItsBerryApricornText:
 	text_far _HeyItsFruitText
 	text_end
 
-Route42FoundItemText:
+Route14FoundItemText:
 	text_far _ObtainedFruitText
 	text_end
 
-Route42NoRoomInBagText:
+Route14NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
-Route42_MapEvents:
+Route14_MapEvents:
 	def_warp_events
-	warp_event  0,  8, ROUTE_42_ECRUTEAK_GATE, 3
-	warp_event  0,  9, ROUTE_42_ECRUTEAK_GATE, 4
+	warp_event  0,  8, ROUTE_14_ECRUTEAK_GATE, 3
+	warp_event  0,  9, ROUTE_14_ECRUTEAK_GATE, 4
 	warp_event 10,  5, MOUNT_MORTAR_1F_OUTSIDE, 1
 	warp_event 28,  9, MOUNT_MORTAR_1F_OUTSIDE, 2
 	warp_event 46,  7, MOUNT_MORTAR_1F_OUTSIDE, 3
 
 	def_coord_events
-	coord_event 24, 14, SCENE_ROUTE42_SUICUNE, Route42SuicuneScript
+	coord_event 24, 14, SCENE_ROUTE14_SUICUNE, Route14SuicuneScript
 
 	def_bg_events
-	bg_event  4, 10, BGEVENT_READ, Route42Sign1
+	bg_event  4, 10, BGEVENT_READ, Route14Sign1
 	bg_event  7,  5, BGEVENT_READ, MtMortarSign1
 	bg_event 45,  9, BGEVENT_READ, MtMortarSign2
-	bg_event 54,  8, BGEVENT_READ, Route42Sign2
-	bg_event 16, 11, BGEVENT_ITEM, Route42HiddenMaxPotion
-	bg_event 27, 16, BGEVENT_READ, Route42NoBerryOrApricorn
-	bg_event 28, 16, BGEVENT_READ, Route42NoBerryOrApricorn
-	bg_event 29, 16, BGEVENT_READ, Route42NoBerryOrApricorn
+	bg_event 54,  8, BGEVENT_READ, Route14Sign2
+	bg_event 16, 11, BGEVENT_ITEM, Route14HiddenMaxPotion
+	bg_event 27, 16, BGEVENT_READ, Route14NoBerryOrApricorn
+	bg_event 28, 16, BGEVENT_READ, Route14NoBerryOrApricorn
+	bg_event 29, 16, BGEVENT_READ, Route14NoBerryOrApricorn
 
 	def_object_events
 	object_event 40, 10, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerFisherTully, -1
 	object_event 51,  9, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerHikerBenjamin, -1
 	object_event 47,  8, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerPokemaniacShane, -1
-	object_event  6,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route42UltraBall, EVENT_ROUTE_42_ULTRA_BALL
-	object_event 33,  8, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route42SuperPotion, EVENT_ROUTE_42_SUPER_POTION
-	object_event 26, 16, SPRITE_SUICUNE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_SAW_SUICUNE_ON_ROUTE_42
+	object_event  6,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route14UltraBall, EVENT_ROUTE_14_ULTRA_BALL
+	object_event 33,  8, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route14SuperPotion, EVENT_ROUTE_14_SUPER_POTION
+	object_event 26, 16, SPRITE_SUICUNE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_SAW_SUICUNE_ON_ROUTE_14
 
-	object_event 27, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route42ApricornTree1, EVENT_ROUTE_42_APRICORN_1
-	object_event 28, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route42ApricornTree2, EVENT_ROUTE_42_APRICORN_2
-	object_event 29, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route42ApricornTree3, EVENT_ROUTE_42_APRICORN_3
+	object_event 27, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route14ApricornTree1, EVENT_ROUTE_14_APRICORN_1
+	object_event 28, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route14ApricornTree2, EVENT_ROUTE_14_APRICORN_2
+	object_event 29, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route14ApricornTree3, EVENT_ROUTE_14_APRICORN_3

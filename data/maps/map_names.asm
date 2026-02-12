@@ -69,8 +69,8 @@ Mahogany_Map_Names: ;newgroup MAHOGANY
 	dw Mahogany_Map_Name1 ; map_const MAHOGANY_RED_GYARADOS_SPEECH_HOUSE ;  1
 	dw Mahogany_Map_Name2 ; map_const MAHOGANY_GYM ;  2
 	dw Mahogany_Map_Name3 ; map_const MAHOGANY_POKECENTER_1F ;  3
-	dw Mahogany_Map_Name4 ; map_const ROUTE_42_ECRUTEAK_GATE ;  4
-	dw Mahogany_Map_Name5 ; map_const ROUTE_42,  ;  5
+	dw Mahogany_Map_Name4 ; map_const ROUTE_14_ECRUTEAK_GATE ;  4
+	dw Mahogany_Map_Name5 ; map_const ROUTE_14,  ;  5
 	dw Mahogany_Map_Name6 ; map_const ROUTE_44, ;  6
 	dw Mahogany_Map_Name7 ; map_const MAHOGANY_TOWN,  ;  7
 	dw Mahogany_Map_Name8 ; map_const MAHOGANY_TRADE_BACK_KID_HOUSE ; 8
@@ -413,10 +413,10 @@ Mahogany_Map_Name2: ; map_const MAHOGANY_GYM ;  2
 	db "Mahogany Gym@"
 Mahogany_Map_Name3: ; map_const MAHOGANY_POKECENTER_1F ;  3
 	db "Mahogany Center@"
-Mahogany_Map_Name4: ; map_const ROUTE_42_ECRUTEAK_GATE ;  4
-	db "Route 42 Gate@"
-Mahogany_Map_Name5: ; map_const ROUTE_42,  ;  5
-	db "Route 42@"
+Mahogany_Map_Name4: ; map_const ROUTE_14_ECRUTEAK_GATE ;  4
+	db "Route 14 Gate@"
+Mahogany_Map_Name5: ; map_const ROUTE_14,  ;  5
+	db "Route 14@"
 Mahogany_Map_Name6: ; map_const ROUTE_44, ;  6
 	db "Route 44@"
 Mahogany_Map_Name7: ; map_const MAHOGANY_TOWN,  ;  7

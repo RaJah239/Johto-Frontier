@@ -128,11 +128,11 @@ ENDM
 	map_attributes EcruteakCity, ECRUTEAK_CITY, $05, SOUTH | WEST | EAST
 	connection south, Route9, ROUTE_9, 5
 	connection west, Route10, ROUTE_10, 5
-	connection east, Route42, ROUTE_42, 9
+	connection east, Route14, ROUTE_14, 9
 
 	map_attributes MahoganyTown, MAHOGANY_TOWN, $71, NORTH | WEST | EAST
 	connection north, Route43, ROUTE_43, 0
-	connection west, Route42, ROUTE_42, 0
+	connection west, Route14, ROUTE_14, 0
 	connection east, Route44, ROUTE_44, 0
 
 	map_attributes LakeOfRage, LAKE_OF_RAGE, $05, SOUTH
@@ -203,7 +203,7 @@ ENDM
 	connection north, Route12, ROUTE_12, 15
 	connection west, CianwoodCity, CIANWOOD_CITY, 0
 
-	map_attributes Route42, ROUTE_42, $05, WEST | EAST
+	map_attributes Route14, ROUTE_14, $05, WEST | EAST
 	connection west, EcruteakCity, ECRUTEAK_CITY, -9
 	connection east, MahoganyTown, MAHOGANY_TOWN, 0
 
@@ -322,7 +322,7 @@ ENDM
 	map_attributes MahoganyTradeBackKidHouse, MAHOGANY_TRADE_BACK_KID_HOUSE, $00, 0
 	map_attributes MahoganyGym, MAHOGANY_GYM, $00, 0
 	map_attributes MahoganyPokecenter1F, MAHOGANY_POKECENTER_1F, $00, 0
-	map_attributes Route42EcruteakGate, ROUTE_42_ECRUTEAK_GATE, $00, 0
+	map_attributes Route14EcruteakGate, ROUTE_14_ECRUTEAK_GATE, $00, 0
 	map_attributes VictoryRoad, VICTORY_ROAD, $1d, 0
 	map_attributes EcruteakTinTowerEntrance, ECRUTEAK_TIN_TOWER_ENTRANCE, $00, 0
 	map_attributes WiseTriosRoom, WISE_TRIOS_ROOM, $00, 0

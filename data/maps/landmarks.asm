@@ -44,7 +44,7 @@ Landmarks:
 	landmark  20, 100, Route13Name
 	landmark  12, 100, CianwoodCityName
 	landmark  76,  44, MtMortarName
-	landmark  84,  44, Route42Name
+	landmark  84,  44, Route14Name
 	landmark 100,  44, MahoganyTownName
 	landmark 100,  36, Route43Name
 	landmark 100,  28, LakeOfRageName
@@ -110,7 +110,7 @@ Route10Name:         db "Route 10@"
 Route11Name:         db "Route 11@"
 Route12Name:         db "Route 12@"
 Route13Name:         db "Route 13@"
-Route42Name:         db "Route 42@"
+Route14Name:         db "Route 14@"
 Route43Name:         db "Route 43@"
 Route44Name:         db "Route 44@"
 Route45Name:         db "Route 45@"

@@ -3145,7 +3145,7 @@ wOlivineCitySceneID::                             db
 wEcruteakTinTowerEntranceSceneID::                db
 wWiseTriosRoomSceneID::                           db
 wEcruteakGymSceneID::                             db
-wRoute42SceneID::                                 db
+wRoute14SceneID::                                 db
 wCianwoodCitySceneID::                            db
 wBattleTower1FSceneID::                           db
 wBattleTowerBattleRoomSceneID::                   db

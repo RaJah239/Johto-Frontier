@@ -239,8 +239,8 @@ BurnedTowerSignText:
 EcruteakCity_MapEvents:
 	def_warp_events
 	warp_event 23, 27, ECRUTEAK_POKECENTER_1F, 1
-	warp_event 35, 26, ROUTE_42_ECRUTEAK_GATE, 1
-	warp_event 35, 27, ROUTE_42_ECRUTEAK_GATE, 2
+	warp_event 35, 26, ROUTE_14_ECRUTEAK_GATE, 1
+	warp_event 35, 27, ROUTE_14_ECRUTEAK_GATE, 2
 	warp_event 18, 11, ECRUTEAK_TIN_TOWER_ENTRANCE, 1
 	warp_event 20,  2, WISE_TRIOS_ROOM, 1
 	warp_event 20,  3, WISE_TRIOS_ROOM, 2

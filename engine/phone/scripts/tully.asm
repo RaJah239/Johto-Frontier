@@ -8,11 +8,11 @@ TullyPhoneCalleeScript:
 	farsjump TullyNoItemScript
 
 .WantsBattle:
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_42
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_14
 	farsjump TullyForwardScript
 
 .WaterStone:
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_42
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_14
 	farsjump TullyHurryScript
 
 TullyPhoneCallerScript:
@@ -24,11 +24,11 @@ TullyPhoneCallerScript:
 	ifequal 1, .TullyFoundWaterStone
 
 .TullyWantsBattle:
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_42
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_14
 	setflag ENGINE_TULLY_READY_FOR_REMATCH
 	farsjump PhoneScript_WantsToBattle_Male
 
 .TullyFoundWaterStone:
 	setflag ENGINE_TULLY_HAS_WATER_STONE
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_42
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_14
 	farsjump PhoneScript_FoundItem_Male

@@ -68,7 +68,7 @@ SwarmGrampsScript:
 
 .totodile
 	setflag ENGINE_SWARM
-	swarm ROUTE_42
+	swarm ROUTE_14
 	writetext SwarmTotodileText
 	sjump .WrappingUpSwarms
 
@@ -131,7 +131,7 @@ SwarmCyndaquilText:
 SwarmTotodileText:
 	text "There's a swarm of"
 	line "TOTODILE on"
-	cont "ROUTE 42!"
+	cont "ROUTE 14!"
 	done
 
 SwarmPichuText:

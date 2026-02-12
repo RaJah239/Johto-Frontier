@@ -143,7 +143,7 @@ SwarmGrassWildMons:
 	db 5, CYNDAQUIL
 
 ; Totodile swarm
-	map_id ROUTE_42
+	map_id ROUTE_14
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 5, TOTODILE

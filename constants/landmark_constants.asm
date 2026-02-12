@@ -38,7 +38,7 @@
 	const LANDMARK_ROUTE_13          ; 20
 	const LANDMARK_CIANWOOD_CITY     ; 21
 	const LANDMARK_MT_MORTAR         ; 23
-	const LANDMARK_ROUTE_42          ; 22
+	const LANDMARK_ROUTE_14          ; 22
 	const LANDMARK_MAHOGANY_TOWN     ; 24
 	const LANDMARK_ROUTE_43          ; 25
 	const LANDMARK_LAKE_OF_RAGE      ; 26

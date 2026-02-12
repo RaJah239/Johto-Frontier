@@ -42,8 +42,8 @@ Route26_Blocks:
 BattlePlazaMagnetTrainStation_Blocks:
 	INCBIN "maps/BattlePlazaMagnetTrainStation.blk"
 
-Route42_Blocks:
-	INCBIN "maps/Route42.blk"
+Route14_Blocks:
+	INCBIN "maps/Route14.blk"
 
 Route6_Blocks:
 	INCBIN "maps/Route6.blk"
@@ -130,7 +130,7 @@ PlayersHouse1F_Blocks:
 	INCBIN "maps/PlayersHouse1F.blk"
 
 Route10EcruteakGate_Blocks:
-Route42EcruteakGate_Blocks:
+Route14EcruteakGate_Blocks:
 Route4RuinsOfAlphGate_Blocks:
 IlexForestAzaleaGate_Blocks:
 Route3VioletGate_Blocks:
