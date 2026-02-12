@@ -48,8 +48,8 @@ Route14_Blocks:
 Route6_Blocks:
 	INCBIN "maps/Route6.blk"
 
-Route46_Blocks:
-	INCBIN "maps/Route46.blk"
+Route18_Blocks:
+	INCBIN "maps/Route18.blk"
 
 Route10_Blocks:
 	INCBIN "maps/Route10.blk"
@@ -107,7 +107,7 @@ Route7GoldenrodGate_Blocks:
 Route8RuinsOfAlphGate_Blocks:
 Route6IlexForestGate_Blocks:
 Route12PowerPlantGate_Blocks:
-Route29Route46Gate_Blocks:
+Route1Route18Gate_Blocks:
 Route11_SilverCaveGate_Blocks:
 	INCBIN "maps/NorthSouthGate.blk"
 

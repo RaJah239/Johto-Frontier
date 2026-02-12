@@ -356,7 +356,7 @@ Route1NoRoomInBagText:
 
 Route1_MapEvents:
 	def_warp_events
-	warp_event 27,  1, ROUTE_29_ROUTE_46_GATE, 3
+	warp_event 27,  1, ROUTE_1_ROUTE_18_GATE, 3
 
 	def_coord_events
 

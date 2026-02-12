@@ -190,7 +190,7 @@ Blackthorn_Map_Names: ;newgroup BLACKTHORN
 	dw Blackthorn_Map_Name6 ; map_const BLACKTHORN_POKECENTER_1F ;  6
 	dw Blackthorn_Map_Name7 ; map_const MOVE_DELETERS_HOUSE ;  7
 	dw Blackthorn_Map_Name8 ; map_const ROUTE_17,                                    10, 45 ;  8
-	dw Blackthorn_Map_Name9 ; map_const ROUTE_46,                                    10, 18 ;  9
+	dw Blackthorn_Map_Name9 ; map_const ROUTE_18,                                    10, 18 ;  9
 	dw Blackthorn_Map_Name10 ; map_const BLACKTHORN_CITY,                             20, 18 ; 10
 	assert_table_length NUM_BLACKTHORN_MAPS
 
@@ -343,7 +343,7 @@ New_Bark_Map_Names: ; newgroup NEW_BARK ; 24
 	dw New_Bark_Map_Name10 ; map_const ROUTE_26_HEAL_HOUSE ; 10
 	dw New_Bark_Map_Name11 ; map_const DAY_OF_WEEK_SIBLINGS_HOUSE ; 11
 	dw New_Bark_Map_Name12 ; map_const ROUTE_27_SANDSTORM_HOUSE ; 12
-	dw New_Bark_Map_Name13 ; map_const ROUTE_29_ROUTE_46_GATE ; 13
+	dw New_Bark_Map_Name13 ; map_const ROUTE_1_ROUTE_18_GATE ; 13
 	assert_table_length NUM_NEW_BARK_MAPS
 
 	; CHERRYGROVE, 26
@@ -627,8 +627,8 @@ Blackthorn_Map_Name7: ; map_const MOVE_DELETERS_HOUSE ;  7
 	db "Tutor House@"
 Blackthorn_Map_Name8: ; map_const ROUTE_17,;  8
 	db "Route 17@"
-Blackthorn_Map_Name9: ; map_const ROUTE_46,;  9
-	db "Route 46@"
+Blackthorn_Map_Name9: ; map_const ROUTE_18,;  9
+	db "Route 18@"
 Blackthorn_Map_Name10: ; map_const BLACKTHORN_CITY,;  6
 	db "Blackthorn City@"
 
@@ -864,8 +864,8 @@ New_Bark_Map_Name11: ; map_const DAY_OF_WEEK_SIBLINGS_HOUSE ; 11
 	db "Day Siblings House@"
 New_Bark_Map_Name12: ; map_const ROUTE_27_SANDSTORM_HOUSE ; 12
 	db "Route 27 House@"
-New_Bark_Map_Name13: ; map_const ROUTE_29_ROUTE_46_GATE ; 13
-	db "Route 29 Gate@"
+New_Bark_Map_Name13: ; map_const ROUTE_1_ROUTE_18_GATE ; 13
+	db "Route 1 Gate@"
 
 Cherrygrove_Map_Name1: ; map_const ROUTE_2         ;  1
 	db "Route 2@"

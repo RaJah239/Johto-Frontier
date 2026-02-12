@@ -227,7 +227,7 @@ SwarmGrassWildMons:
 	db 4, TURTWIG
 
 ; Igglybuff swarm
-	map_id ROUTE_46
+	map_id ROUTE_18
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 3, TURTWIG

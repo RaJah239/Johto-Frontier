@@ -125,7 +125,7 @@ INCLUDE "maps/ElmsHouse.asm"
 INCLUDE "maps/Route26HealHouse.asm"
 INCLUDE "maps/DayOfWeekSiblingsHouse.asm"
 INCLUDE "maps/Route27SandstormHouse.asm"
-INCLUDE "maps/Route29Route46Gate.asm"
+INCLUDE "maps/Route1Route18Gate.asm"
 
 
 SECTION "Map Scripts 10", ROMX
@@ -332,7 +332,7 @@ INCLUDE "maps/VioletCity.asm"
 INCLUDE "maps/OlivineCity.asm"
 INCLUDE "maps/Route9.asm"
 INCLUDE "maps/Route14.asm"
-INCLUDE "maps/Route46.asm"
+INCLUDE "maps/Route18.asm"
 
 
 SECTION "Map Scripts 24", ROMX

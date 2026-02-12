@@ -171,7 +171,7 @@ ENDM
 	map_const BLACKTHORN_POKECENTER_1F,                     5,  4 ;  6
 	map_const MOVE_DELETERS_HOUSE,                          4,  4 ;  7
 	map_const ROUTE_17,                                    10, 45 ;  8
-	map_const ROUTE_46,                                    10, 18 ;  9
+	map_const ROUTE_18,                                    10, 18 ;  9
 	map_const BLACKTHORN_CITY,                             20, 18 ; 10
 	endgroup
 
@@ -314,7 +314,7 @@ ENDM
 	map_const ROUTE_26_HEAL_HOUSE,                          4,  4 ; 10
 	map_const DAY_OF_WEEK_SIBLINGS_HOUSE,                   4,  4 ; 11
 	map_const ROUTE_27_SANDSTORM_HOUSE,                     4,  4 ; 12
-	map_const ROUTE_29_ROUTE_46_GATE,                       5,  4 ; 13
+	map_const ROUTE_1_ROUTE_18_GATE,                        5,  4 ; 13
 	endgroup
 
 	newgroup CHERRYGROVE                                          ; 26

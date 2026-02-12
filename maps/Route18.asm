@@ -1,14 +1,14 @@
 	object_const_def
-	const ROUTE46_POKEFAN_M
-	const ROUTE46_YOUNGSTER
-	const ROUTE46_LASS
-	const ROUTE46_POKE_BALL
-	const ROUTE46_BERRY_TREE1
-	const ROUTE46_BERRY_TREE2
-	const ROUTE46_BERRY_TREE3
-	const ROUTE46_BERRY_TREE4
+	const ROUTE18_POKEFAN_M
+	const ROUTE18_YOUNGSTER
+	const ROUTE18_LASS
+	const ROUTE18_POKE_BALL
+	const ROUTE18_BERRY_TREE1
+	const ROUTE18_BERRY_TREE2
+	const ROUTE18_BERRY_TREE3
+	const ROUTE18_BERRY_TREE4
 
-Route46_MapScripts:
+Route18_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
@@ -60,26 +60,26 @@ TrainerPicnickerErin1:
 	checkflag ENGINE_ERIN_READY_FOR_REMATCH
 	iftrue .WantsBattle
 	checkcellnum PHONE_PICNICKER_ERIN
-	iftrue Route46NumberAcceptedF
+	iftrue Route18NumberAcceptedF
 	checkevent EVENT_ERIN_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskedAlready
 	writetext PicnickerErinAfterBattleText
 	promptbutton
 	setevent EVENT_ERIN_ASKED_FOR_PHONE_NUMBER
-	scall Route46AskNumber
+	scall Route18AskNumber
 	sjump .AskForNumber
 
 .AskedAlready:
-	scall Route46AskNumber
+	scall Route18AskNumber
 .AskForNumber:
 	askforphonenumber PHONE_PICNICKER_ERIN
-	ifequal PHONE_CONTACT_REFUSED, Route46NumberDeclinedF
+	ifequal PHONE_CONTACT_REFUSED, Route18NumberDeclinedF
 	gettrainername STRING_BUFFER_3, PICNICKER, ERIN1
-	scall Route46RegisteredNumberF
-	sjump Route46NumberAcceptedF
+	scall Route18RegisteredNumberF
+	sjump Route18NumberAcceptedF
 
 .WantsBattle:
-	scall Route46RematchF
+	scall Route18RematchF
 	winlosstext PicnickerErin1BeatenText, 0
 	checkevent EVENT_RESTORED_POWER_TO_KANTO
 	iftrue .LoadFight2
@@ -103,7 +103,7 @@ TrainerPicnickerErin1:
 	startbattle
 	reloadmapafterbattle
 	clearflag ENGINE_ERIN_READY_FOR_REMATCH
-	scall Route46RematchGiftF
+	scall Route18RematchGiftF
 	verbosegiveitem CALCIUM
 	iffalse ErinNoRoomForCalcium
 	closetext
@@ -118,23 +118,23 @@ TrainerPicnickerErin1:
 	closetext
 	end
 
-Route46AskNumber:
+Route18AskNumber:
 	jumpstd AskNumber1FScript
 	end
 
-Route46RegisteredNumberF:
+Route18RegisteredNumberF:
 	jumpstd RegisteredNumberFScript
 	end
 
-Route46NumberAcceptedF:
+Route18NumberAcceptedF:
 	jumpstd NumberAcceptedFScript
 	end
 
-Route46NumberDeclinedF:
+Route18NumberDeclinedF:
 	jumpstd NumberDeclinedFScript
 	end
 
-Route46RematchF:
+Route18RematchF:
 	jumpstd RematchFScript
 	end
 
@@ -143,7 +143,7 @@ ErinNoRoomForCalcium:
 	jumpstd PackFullFScript
 	end
 
-Route46RematchGiftF:
+Route18RematchGiftF:
 	jumpstd RematchGiftFScript
 	end
 
@@ -158,10 +158,10 @@ TrainerHikerBailey:
 	closetext
 	end
 
-Route46Sign:
-	jumptext Route46SignText
+Route18Sign:
+	jumptext Route18SignText
 
-Route46XSpeed:
+Route18XSpeed:
 	itemball HASTE_HERB
 
 HikerBaileySeenText:
@@ -244,135 +244,135 @@ PicnickerErin_GiveCalciumAfterBattleAgain:
 	line "for my gift!"
 	done
 
-Route46SignText:
-	text "ROUTE 46"
+Route18SignText:
+	text "ROUTE 18"
 	line "MOUNTAIN RD. AHEAD"
 	done
 
-Route46BerryTree1:
+Route18BerryTree1:
 	opentext
 	getitemname STRING_BUFFER_3, PRZCUREBERRY
-	writetext Route46TreeText
+	writetext Route18TreeText
 	promptbutton
-	writetext Route46HeyItsBerryApricornText
+	writetext Route18HeyItsBerryApricornText
 	promptbutton
 	giveitem PRZCUREBERRY
-	iffalse Route46NoRoomInBag
-	disappear ROUTE46_BERRY_TREE1
-	writetext Route46FoundItemText
+	iffalse Route18NoRoomInBag
+	disappear ROUTE18_BERRY_TREE1
+	writetext Route18FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route46BerryTree2:
+Route18BerryTree2:
 	opentext
 	getitemname STRING_BUFFER_3, BITTER_BERRY
-	writetext Route46TreeText
+	writetext Route18TreeText
 	promptbutton
-	writetext Route46HeyItsBerryApricornText
+	writetext Route18HeyItsBerryApricornText
 	promptbutton
 	giveitem BITTER_BERRY
-	iffalse Route46NoRoomInBag
-	disappear ROUTE46_BERRY_TREE2
-	writetext Route46FoundItemText
+	iffalse Route18NoRoomInBag
+	disappear ROUTE18_BERRY_TREE2
+	writetext Route18FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route46BerryTree3:
+Route18BerryTree3:
 	opentext
 	getitemname STRING_BUFFER_3, BERRY
-	writetext Route46TreeText
+	writetext Route18TreeText
 	promptbutton
-	writetext Route46HeyItsBerryApricornText
+	writetext Route18HeyItsBerryApricornText
 	promptbutton
 	giveitem BERRY
-	iffalse Route46NoRoomInBag
-	disappear ROUTE46_BERRY_TREE3
-	writetext Route46FoundItemText
+	iffalse Route18NoRoomInBag
+	disappear ROUTE18_BERRY_TREE3
+	writetext Route18FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route46BerryTree4:
+Route18BerryTree4:
 	opentext
 	getitemname STRING_BUFFER_3, PSNCUREBERRY
-	writetext Route46TreeText
+	writetext Route18TreeText
 	promptbutton
-	writetext Route46HeyItsBerryApricornText
+	writetext Route18HeyItsBerryApricornText
 	promptbutton
 	giveitem PSNCUREBERRY
-	iffalse Route46NoRoomInBag
-	disappear ROUTE46_BERRY_TREE4
-	writetext Route46FoundItemText
+	iffalse Route18NoRoomInBag
+	disappear ROUTE18_BERRY_TREE4
+	writetext Route18FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route46NoBerryOrApricorn:
+Route18NoBerryOrApricorn:
 	opentext
-	writetext Route46TreeText
+	writetext Route18TreeText
 	promptbutton
-	writetext Route46NothingHereText
+	writetext Route18NothingHereText
 	waitbutton
 	closetext
 	end
 
-Route46NoRoomInBag:
-	writetext Route46NoRoomInBagText
+Route18NoRoomInBag:
+	writetext Route18NoRoomInBagText
 	waitbutton
 	closetext
 	end
 
-Route46TreeText:
+Route18TreeText:
 	text_far _FruitBearingTreeText
 	text_end
 
-Route46NothingHereText:
+Route18NothingHereText:
 	text_far _NothingHereText
 	text_end
 
-Route46HeyItsBerryApricornText:
+Route18HeyItsBerryApricornText:
 	text_far _HeyItsFruitText
 	text_end
 
-Route46FoundItemText:
+Route18FoundItemText:
 	text_far _ObtainedFruitText
 	text_end
 
-Route46NoRoomInBagText:
+Route18NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
-Route46_MapEvents:
+Route18_MapEvents:
 	def_warp_events
-	warp_event  7, 33, ROUTE_29_ROUTE_46_GATE, 1
-	warp_event  8, 33, ROUTE_29_ROUTE_46_GATE, 2
+	warp_event  7, 33, ROUTE_1_ROUTE_18_GATE, 1
+	warp_event  8, 33, ROUTE_1_ROUTE_18_GATE, 2
 	warp_event 14,  5, DARK_CAVE_VIOLET_ENTRANCE, 3
 
 	def_coord_events
 
 	def_bg_events
-	bg_event  9, 27, BGEVENT_READ, Route46Sign
-	bg_event  7,  5, BGEVENT_READ, Route46NoBerryOrApricorn
-	bg_event  8,  6, BGEVENT_READ, Route46NoBerryOrApricorn
-	bg_event  7,  6, BGEVENT_READ, Route46NoBerryOrApricorn
-	bg_event  8,  5, BGEVENT_READ, Route46NoBerryOrApricorn
+	bg_event  9, 27, BGEVENT_READ, Route18Sign
+	bg_event  7,  5, BGEVENT_READ, Route18NoBerryOrApricorn
+	bg_event  8,  6, BGEVENT_READ, Route18NoBerryOrApricorn
+	bg_event  7,  6, BGEVENT_READ, Route18NoBerryOrApricorn
+	bg_event  8,  5, BGEVENT_READ, Route18NoBerryOrApricorn
 
 	def_object_events
 	object_event 12, 19, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 2, TrainerHikerBailey, -1
 	object_event  4, 14, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 2, TrainerCamperTed, -1
 	object_event  2, 13, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 2, TrainerPicnickerErin1, -1
-	object_event  2, 18, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route46XSpeed, EVENT_ROUTE_46_X_SPEED
-	object_event  7,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route46BerryTree1, EVENT_ROUTE_46_BERRY_1
-	object_event  8,  6, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route46BerryTree2, EVENT_ROUTE_46_BERRY_2
-	object_event  7,  6, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route46BerryTree3, EVENT_ROUTE_46_BERRY_3
-	object_event  8,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route46BerryTree4, EVENT_ROUTE_46_BERRY_4
+	object_event  2, 18, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route18XSpeed, EVENT_ROUTE_18_X_SPEED
+	object_event  7,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route18BerryTree1, EVENT_ROUTE_18_BERRY_1
+	object_event  8,  6, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route18BerryTree2, EVENT_ROUTE_18_BERRY_2
+	object_event  7,  6, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route18BerryTree3, EVENT_ROUTE_18_BERRY_3
+	object_event  8,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route18BerryTree4, EVENT_ROUTE_18_BERRY_4

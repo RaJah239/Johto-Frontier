@@ -6,12 +6,12 @@ ErinPhoneCalleeScript:
 	farsjump ErinWorkingHardScript
 
 .WantsBattle:
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_46
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_18
 	farsjump ErinComeBattleScript
 
 ErinPhoneCallerScript:
 	gettrainername STRING_BUFFER_3, PICNICKER, ERIN1
 	farscall PhoneScript_GreetPhone_Female
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_46
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_18
 	setflag ENGINE_ERIN_READY_FOR_REMATCH
 	farsjump PhoneScript_WantsToBattle_Female

@@ -53,7 +53,7 @@ Landmarks:
 	landmark 124,  44, BlackthornCityName
 	landmark 124,  40, DragonsDenName
 	landmark 124,  64, Route17Name
-	landmark 116,  88, Route46Name
+	landmark 116,  88, Route18Name
 	landmark 140, 100, TohjoFallsName
 	landmark 148, 100, Route27Name
 	landmark 148,  84, Route26Name
@@ -114,7 +114,7 @@ Route14Name:         db "Route 14@"
 Route15Name:         db "Route 15@"
 Route16Name:         db "Route 16@"
 Route17Name:         db "Route 17@"
-Route46Name:         db "Route 46@"
+Route18Name:         db "Route 18@"
 DarkCaveName:        db "Dark Cave@"
 IlexForestName:      db "Ilex<BSP>Forest@"
 BurnedTowerName:     db "Burned<BSP>Tower@"

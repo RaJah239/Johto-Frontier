@@ -150,7 +150,7 @@ ENDM
 	connection east, Route26, ROUTE_26, -45
 
 	map_attributes Route1, ROUTE_1, $05, NORTH | WEST | EAST
-	connection north, Route46, ROUTE_46, 10
+	connection north, Route18, ROUTE_18, 10
 	connection west, CherrygroveCity, CHERRYGROVE_CITY, 0
 	connection east, NewBarkTown, NEW_BARK_TOWN, 0
 
@@ -217,9 +217,9 @@ ENDM
 
 	map_attributes Route17, ROUTE_17, $71, NORTH | WEST
 	connection north, BlackthornCity, BLACKTHORN_CITY, 0
-	connection west, Route46, ROUTE_46, 36
+	connection west, Route18, ROUTE_18, 36
 
-	map_attributes Route46, ROUTE_46, $05, SOUTH | EAST
+	map_attributes Route18, ROUTE_18, $05, SOUTH | EAST
 	connection south, Route1, ROUTE_1, -10
 	connection east, Route17, ROUTE_17, -36
 
@@ -432,7 +432,7 @@ ENDM
 	map_attributes Route26HealHouse, ROUTE_26_HEAL_HOUSE, $00, 0
 	map_attributes DayOfWeekSiblingsHouse, DAY_OF_WEEK_SIBLINGS_HOUSE, $00, 0
 	map_attributes Route27SandstormHouse, ROUTE_27_SANDSTORM_HOUSE, $00, 0
-	map_attributes Route29Route46Gate, ROUTE_29_ROUTE_46_GATE, $00, 0
+	map_attributes Route1Route18Gate, ROUTE_1_ROUTE_18_GATE, $00, 0
 	map_attributes CherrygroveMart, CHERRYGROVE_MART, $00, 0
 	map_attributes CherrygrovePokecenter1F, CHERRYGROVE_POKECENTER_1F, $00, 0
 	map_attributes CherrygroveGymSpeechHouse, CHERRYGROVE_GYM_SPEECH_HOUSE, $00, 0
