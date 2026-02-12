@@ -195,7 +195,7 @@ ENDM
 	endgroup
 
 	newgroup VIOLET                                               ; 10
-	map_const ROUTE_32,                                    10, 45 ;  1
+	map_const ROUTE_4,                                     10, 45 ;  1
 	map_const ROUTE_35,                                    10, 18 ;  2
 	map_const ROUTE_36,                                    30,  9 ;  3
 	map_const ROUTE_37,                                    10,  9 ;  4
@@ -206,8 +206,8 @@ ENDM
 	map_const VIOLET_NICKNAME_SPEECH_HOUSE,                 4,  4 ;  9
 	map_const VIOLET_POKECENTER_1F,                         5,  4 ; 10
 	map_const VIOLET_KYLES_HOUSE,                           4,  4 ; 11
-	map_const ROUTE_32_RUINS_OF_ALPH_GATE,                  5,  4 ; 12
-	map_const ROUTE_32_POKECENTER_1F,                       5,  4 ; 13
+	map_const ROUTE_4_RUINS_OF_ALPH_GATE,                   5,  4 ; 12
+	map_const ROUTE_4_POKECENTER_1F,                        5,  4 ; 13
 	map_const ROUTE_35_GOLDENROD_GATE,                      5,  4 ; 14
 	map_const ROUTE_35_NATIONAL_PARK_GATE,                  4,  4 ; 15
 	map_const ROUTE_36_RUINS_OF_ALPH_GATE,                  5,  4 ; 16

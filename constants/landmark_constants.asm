@@ -11,7 +11,7 @@
 	const LANDMARK_VIOLET_CITY       ; 06
 	const LANDMARK_SPROUT_TOWER      ; 07
 	const LANDMARK_RUINS_OF_ALPH     ; 09
-	const LANDMARK_ROUTE_32          ; 08
+	const LANDMARK_ROUTE_4           ; 08
 	const LANDMARK_UNION_CAVE        ; 0a
 	const LANDMARK_ROUTE_33          ; 0b
 	const LANDMARK_AZALEA_TOWN       ; 0c

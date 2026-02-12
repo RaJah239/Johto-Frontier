@@ -17,7 +17,7 @@ Landmarks:
 	landmark  76,  60, VioletCityName
 	landmark  76,  56, SproutTowerName
 	landmark  68,  76, RuinsOfAlphName
-	landmark  76,  92, Route32Name
+	landmark  76,  92, Route4Name
 	landmark  76, 124, UnionCaveName
 	landmark  72, 124, Route33Name
 	landmark  60, 124, AzaleaTownName
@@ -100,7 +100,7 @@ Route27Name:         db "Route 27@"
 Route1Name:          db "Route 1@"
 Route2Name:          db "Route 2@"
 Route3Name:          db "Route 3@"
-Route32Name:         db "Route 32@"
+Route4Name:          db "Route 4@"
 Route33Name:         db "Route 33@"
 Route34Name:         db "Route 34@"
 Route35Name:         db "Route 35@"

@@ -106,7 +106,7 @@ ENDM
 	connection east, Route1, ROUTE_1, 0
 
 	map_attributes VioletCity, VIOLET_CITY, $05, SOUTH | WEST | EAST
-	connection south, Route32, ROUTE_32, 0
+	connection south, Route4, ROUTE_4, 0
 	connection west, Route36, ROUTE_36, 0
 	connection east, Route3, ROUTE_3, 9
 
@@ -162,12 +162,12 @@ ENDM
 	connection south, Route2, ROUTE_2, 10
 	connection west, VioletCity, VIOLET_CITY, -9
 
-	map_attributes Route32, ROUTE_32, $05, NORTH | SOUTH
+	map_attributes Route4, ROUTE_4, $05, NORTH | SOUTH
 	connection north, VioletCity, VIOLET_CITY, 0
 	connection south, Route33, ROUTE_33, 0
 
 	map_attributes Route33, ROUTE_33, $05, NORTH | WEST
-	connection north, Route32, ROUTE_32, 0
+	connection north, Route4, ROUTE_4, 0
 	connection west, AzaleaTown, AZALEA_TOWN, 0
 
 	map_attributes Route34, ROUTE_34, $05, NORTH | EAST
@@ -354,8 +354,8 @@ ENDM
 	map_attributes VioletNicknameSpeechHouse, VIOLET_NICKNAME_SPEECH_HOUSE, $00, 0
 	map_attributes VioletPokecenter1F, VIOLET_POKECENTER_1F, $00, 0
 	map_attributes VioletKylesHouse, VIOLET_KYLES_HOUSE, $00, 0
-	map_attributes Route32RuinsOfAlphGate, ROUTE_32_RUINS_OF_ALPH_GATE, $00, 0
-	map_attributes Route32Pokecenter1F, ROUTE_32_POKECENTER_1F, $00, 0
+	map_attributes Route4RuinsOfAlphGate, ROUTE_4_RUINS_OF_ALPH_GATE, $00, 0
+	map_attributes Route4Pokecenter1F, ROUTE_4_POKECENTER_1F, $00, 0
 	map_attributes Route35GoldenrodGate, ROUTE_35_GOLDENROD_GATE, $00, 0
 	map_attributes Route35NationalParkGate, ROUTE_35_NATIONAL_PARK_GATE, $00, 0
 	map_attributes Route36RuinsOfAlphGate, ROUTE_36_RUINS_OF_ALPH_GATE, $00, 0

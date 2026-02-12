@@ -51,7 +51,7 @@ CherrygroveGroupSprites:
 
 ; Route37 and EcruteakCity are connected
 VioletGroupSprites:
-; Route32, Route35, Route36, Route37, VioletCity
+; Route4, Route35, Route36, Route37, VioletCity
 EcruteakGroupSprites:
 ; EcruteakCity
 	db SPRITE_FISHER

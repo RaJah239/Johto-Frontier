@@ -1318,7 +1318,7 @@ JohtoGrassWildMons:
 	db 5, TORCHIC
 	end_grass_wildmons
 
-	def_grass_wildmons ROUTE_32
+	def_grass_wildmons ROUTE_4
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 3, TORCHIC

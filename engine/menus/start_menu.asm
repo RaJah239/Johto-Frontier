@@ -633,7 +633,7 @@ Fast_Travel_Warp_Locations:
 	map_id CHERRYGROVE_CITY
 	map_id VIOLET_CITY
 	map_id RUINS_OF_ALPH_OUTSIDE
-	map_id ROUTE_32
+	map_id ROUTE_4
 	map_id AZALEA_TOWN
 	map_id GOLDENROD_CITY
 	map_id NATIONAL_PARK

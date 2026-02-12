@@ -59,7 +59,7 @@ DayOfWeekSiblingsHousePokedexText3:
 	line "ROUTE 36"
 
 	para "Friday, FRIEDA"
-	line "ROUTE 32"
+	line "ROUTE 4"
 
 	para "Saturday, SANTOS"
 	line "BLACKTHORN CITY"

@@ -1,7 +1,7 @@
 SECTION "Map Blocks 1", ROMX
 
-Route32_Blocks:
-	INCBIN "maps/Route32.blk"
+Route4_Blocks:
+	INCBIN "maps/Route4.blk"
 
 Route40_Blocks:
 	INCBIN "maps/Route40.blk"
@@ -131,7 +131,7 @@ PlayersHouse1F_Blocks:
 
 Route38EcruteakGate_Blocks:
 Route42EcruteakGate_Blocks:
-Route32RuinsOfAlphGate_Blocks:
+Route4RuinsOfAlphGate_Blocks:
 IlexForestAzaleaGate_Blocks:
 Route3VioletGate_Blocks:
 	INCBIN "maps/EastWestGate.blk"
@@ -156,7 +156,7 @@ EcruteakPokecenter1F_Blocks:
 BlackthornPokecenter1F_Blocks:
 AzaleaPokecenter1F_Blocks:
 VioletPokecenter1F_Blocks:
-Route32Pokecenter1F_Blocks:
+Route4Pokecenter1F_Blocks:
 GoldenrodPokecenter1F_Blocks:
 SilverCavePokecenter1F_Blocks:
 CianwoodPokecenter1F_Blocks:

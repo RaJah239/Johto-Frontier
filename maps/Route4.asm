@@ -1,35 +1,35 @@
 	object_const_def
-	const ROUTE32_FISHER1
-	const ROUTE32_FISHER2
-	const ROUTE32_FISHER3
-	const ROUTE32_YOUNGSTER1
-	const ROUTE32_YOUNGSTER2
-	const ROUTE32_YOUNGSTER3
-	const ROUTE32_LASS1
-	const ROUTE32_COOLTRAINER_M
-	const ROUTE32_YOUNGSTER4
-	const ROUTE32_FISHER4
-	const ROUTE32_POKE_BALL1
-	const ROUTE32_FISHER5
-	const ROUTE32_FRIEDA
-	const ROUTE32_POKE_BALL2
-	const ROUTE32_OTIS
+	const ROUTE4_FISHER1
+	const ROUTE4_FISHER2
+	const ROUTE4_FISHER3
+	const ROUTE4_YOUNGSTER1
+	const ROUTE4_YOUNGSTER2
+	const ROUTE4_YOUNGSTER3
+	const ROUTE4_LASS1
+	const ROUTE4_COOLTRAINER_M
+	const ROUTE4_YOUNGSTER4
+	const ROUTE4_FISHER4
+	const ROUTE4_POKE_BALL1
+	const ROUTE4_FISHER5
+	const ROUTE4_FRIEDA
+	const ROUTE4_POKE_BALL2
+	const ROUTE4_OTIS
 
-Route32_MapScripts:
+Route4_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, Route32FriedaAndOtisCallback
+	callback MAPCALLBACK_OBJECTS, Route4FriedaAndOtisCallback
 	callback MAPCALLBACK_NEWMAP, .Flypoint
 
 .Flypoint:
 	setflag ENGINE_FLYPOINT_UNION_CAVE
 	endcallback
 
-Route32FriedaAndOtisCallback:
+Route4FriedaAndOtisCallback:
 	readvar VAR_WEEKDAY
 	ifequal FRIDAY, .FriedaAppears
-	disappear ROUTE32_FRIEDA
+	disappear ROUTE4_FRIEDA
 
 .OtisCheck
 	; 10% chance of otis appearing
@@ -38,43 +38,43 @@ Route32FriedaAndOtisCallback:
 	random 10
 	ifequal 0, .AppearOtis
 .done
-	disappear ROUTE32_OTIS
+	disappear ROUTE4_OTIS
 	endcallback
 
 .FriedaAppears:
-	appear ROUTE32_FRIEDA
+	appear ROUTE4_FRIEDA
 	sjump .OtisCheck
 
 .AppearOtis:
-	appear ROUTE32_OTIS
+	appear ROUTE4_OTIS
 	endcallback
 
-Route32CooltrainerMScript:
+Route4CooltrainerMScript:
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_MIRACLE_SEED_IN_ROUTE_32
+	checkevent EVENT_GOT_MIRACLE_SEED_IN_ROUTE_4
 	iftrue .GotMiracleSeed
 	checkflag ENGINE_ZEPHYRBADGE
 	iffalse .DontHaveZephyrBadge
-	writetext Route32CooltrainerMText_HaveThisSeed
+	writetext Route4CooltrainerMText_HaveThisSeed
 	promptbutton
 	verbosegiveitem MIRACLE_SEED
 	iffalse .BagFull
-	setevent EVENT_GOT_MIRACLE_SEED_IN_ROUTE_32
+	setevent EVENT_GOT_MIRACLE_SEED_IN_ROUTE_4
 .GotMiracleSeed:
-	writetext Route32CooltrainerMText_ExperiencesShouldBeUseful
+	writetext Route4CooltrainerMText_ExperiencesShouldBeUseful
 	waitbutton
 .BagFull:
 	closetext
 	end
 
 .DontHaveZephyrBadge:
-	writetext Route32CooltrainerMText_VioletGym
+	writetext Route4CooltrainerMText_VioletGym
 	waitbutton
 	closetext
 	end
 
-Route32RoarTMGuyScript:
+Route4RoarTMGuyScript:
 	faceplayer
 	opentext
 	checkevent EVENT_GOT_TM05_ROAR
@@ -438,31 +438,31 @@ FriedaScript:
 	closetext
 	end
 
-Route32GreatBall:
+Route4GreatBall:
 	itemball GREAT_BALL
 
-Route32Repel:
+Route4Repel:
 	itemball REPEL
 
-Route32Sign:
-	jumptext Route32SignText
+Route4Sign:
+	jumptext Route4SignText
 
-Route32RuinsSign:
-	jumptext Route32RuinsSignText
+Route4RuinsSign:
+	jumptext Route4RuinsSignText
 
-Route32UnionCaveSign:
-	jumptext Route32UnionCaveSignText
+Route4UnionCaveSign:
+	jumptext Route4UnionCaveSignText
 
-Route32PokecenterSign:
+Route4PokecenterSign:
 	jumpstd PokecenterSignScript
 
-Route32HiddenGreatBall:
-	hiddenitem GREAT_BALL, EVENT_ROUTE_32_HIDDEN_GREAT_BALL
+Route4HiddenGreatBall:
+	hiddenitem GREAT_BALL, EVENT_ROUTE_4_HIDDEN_GREAT_BALL
 
-Route32HiddenSuperPotion:
-	hiddenitem SUPER_POTION, EVENT_ROUTE_32_HIDDEN_SUPER_POTION
+Route4HiddenSuperPotion:
+	hiddenitem SUPER_POTION, EVENT_ROUTE_4_HIDDEN_SUPER_POTION
 
-Route32CooltrainerMText_HaveThisSeed:
+Route4CooltrainerMText_HaveThisSeed:
 	text "You have some good"
 	line "#MON there."
 
@@ -487,12 +487,12 @@ Route32CooltrainerMText_HaveThisSeed:
 	cont "type moves."
 	done
 
-Route32CooltrainerMText_VioletGym:
+Route4CooltrainerMText_VioletGym:
 	text "You should try get"
 	line "Violet Gym's badge."
 	done
 
-Route32CooltrainerMText_ExperiencesShouldBeUseful:
+Route4CooltrainerMText_ExperiencesShouldBeUseful:
 	text "Your experiences"
 	line "in VIOLET CITY"
 
@@ -745,19 +745,19 @@ FriedaNotFridayText:
 	line "when it's not!"
 	done
 
-Route32SignText:
-	text "ROUTE 32"
+Route4SignText:
+	text "ROUTE 4"
 
 	para "VIOLET CITY -"
 	line "AZALEA TOWN"
 	done
 
-Route32RuinsSignText:
+Route4RuinsSignText:
 	text "RUINS OF ALPH"
 	line "EAST ENTRANCE"
 	done
 
-Route32UnionCaveSignText:
+Route4UnionCaveSignText:
 	text "UNION CAVE"
 	line "AHEAD"
 	done
@@ -785,34 +785,34 @@ PicnickerLiz_AgainGiveMaxReviveAfterBattleText:
 	line "All yours!"
 	done
 
-Route32OtisScript:
+Route4OtisScript:
 	callstd WanderingOddEggNPCScript
 	playsound SFX_WARP_TO
-	applymovement ROUTE32_OTIS, Route32OtisTeleportAwayMovement
-	disappear ROUTE32_OTIS
+	applymovement ROUTE4_OTIS, Route4OtisTeleportAwayMovement
+	disappear ROUTE4_OTIS
 	setflag ENGINE_MET_OTIS_TODAY
 	end
 
-Route32OtisTeleportAwayMovement:
+Route4OtisTeleportAwayMovement:
 	teleport_from
 	step_end
 
-Route32_MapEvents:
+Route4_MapEvents:
 	def_warp_events
-	warp_event 11, 73, ROUTE_32_POKECENTER_1F, 1
-	warp_event  4,  2, ROUTE_32_RUINS_OF_ALPH_GATE, 3
-	warp_event  4,  3, ROUTE_32_RUINS_OF_ALPH_GATE, 4
+	warp_event 11, 73, ROUTE_4_POKECENTER_1F, 1
+	warp_event  4,  2, ROUTE_4_RUINS_OF_ALPH_GATE, 3
+	warp_event  4,  3, ROUTE_4_RUINS_OF_ALPH_GATE, 4
 	warp_event  6, 79, UNION_CAVE_1F, 4
 
 	def_coord_events
 
 	def_bg_events
-	bg_event 13,  5, BGEVENT_READ, Route32Sign
-	bg_event  9,  1, BGEVENT_READ, Route32RuinsSign
-	bg_event 10, 84, BGEVENT_READ, Route32UnionCaveSign
-	bg_event 12, 73, BGEVENT_READ, Route32PokecenterSign
-	bg_event 12, 67, BGEVENT_ITEM, Route32HiddenGreatBall
-	bg_event 11, 40, BGEVENT_ITEM, Route32HiddenSuperPotion
+	bg_event 13,  5, BGEVENT_READ, Route4Sign
+	bg_event  9,  1, BGEVENT_READ, Route4RuinsSign
+	bg_event 10, 84, BGEVENT_READ, Route4UnionCaveSign
+	bg_event 12, 73, BGEVENT_READ, Route4PokecenterSign
+	bg_event 12, 67, BGEVENT_ITEM, Route4HiddenGreatBall
+	bg_event 11, 40, BGEVENT_ITEM, Route4HiddenSuperPotion
 
 	def_object_events
 	object_event  8, 49, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerFisherJustin, -1
@@ -822,11 +822,11 @@ Route32_MapEvents:
 	object_event  4, 63, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterGordon, -1
 	object_event  3, 45, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerCamperRoland, -1
 	object_event 10, 30, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerPicnickerLiz1, -1
-	object_event 19,  8, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route32CooltrainerMScript, -1
+	object_event 19,  8, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route4CooltrainerMScript, -1
 	object_event 11, 82, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerBirdKeeperPeter, -1
 	object_event  7, 70, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SlowpokeTailSalesmanScript, EVENT_SLOWPOKE_WELL_ROCKETS
-	object_event  6, 53, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route32GreatBall, EVENT_ROUTE_32_GREAT_BALL
-	object_event 15, 13, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route32RoarTMGuyScript, -1
-	object_event 12, 67, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, FriedaScript, EVENT_ROUTE_32_FRIEDA_OF_FRIDAY
-	object_event  3, 30, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route32Repel, EVENT_ROUTE_32_REPEL
-	object_event  8, 10, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route32OtisScript, EVENT_ROUTE_32_OTIS
+	object_event  6, 53, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route4GreatBall, EVENT_ROUTE_4_GREAT_BALL
+	object_event 15, 13, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route4RoarTMGuyScript, -1
+	object_event 12, 67, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, FriedaScript, EVENT_ROUTE_4_FRIEDA_OF_FRIDAY
+	object_event  3, 30, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route4Repel, EVENT_ROUTE_4_REPEL
+	object_event  8, 10, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route4OtisScript, EVENT_ROUTE_4_OTIS
