@@ -1,3 +1,9 @@
+; ============
+; === Note ===
+; ============
+; in random mode here, add as many trainers as I have in game
+; put a npc in the building that says there are more trainers
+; in random mode that aren't available on the list of 29
 	object_const_def
 	const BATTLEPLAZABATTLEARENA_RECPTIONIST
 	const BATTLEPLAZABATTLEARENA_ENEMY
@@ -949,69 +955,71 @@ PlayAgainstBlaineText:
 	done
 
 PlayUsingWillText:
-	text "Play using Leader"
-	line "Will's team?"
+	text "Play using Elite"
+	line "Four Will's team?"
 	done
 
 PlayAgainstWillText:
-	text "Play against"
-	line "Leader Will?"
+	text "Play against Elite"
+	line "Four Will?"
 	done
 
 PlayUsingKogaText:
-	text "Play using Leader"
-	line "Koga's team?"
+	text "Play using Elite"
+	line "Four Koga's team?"
 	done
 
 PlayAgainstKogaText:
-	text "Play against"
-	line "Koga Will?"
+	text "Play against Elite"
+	line "Four Koga?"
 	done
 
 PlayUsingBrunoText:
-	text "Play using Leader"
-	line "Bruno's team?"
+	text "Play using Elite"
+	line "Four Bruno's team?"
 	done
 
 PlayAgainstBrunoText:
-	text "Play against"
-	line "Leader Bruno?"
+	text "Play against Elite"
+	line "Four Bruno?"
 	done
 
 PlayUsingKarenText:
-	text "Play using Leader"
-	line "Karen's team?"
+	text "Play using Elite"
+	line "Four Karen's team?"
 	done
 
 PlayAgainstKarenText:
-	text "Play against"
-	line "Leader Karen?"
+	text "Play against Elite"
+	line "Four Karen?"
 	done
 
 PlayUsingLoreleiText:
-	text "Play using Leader"
-	line "Lorelei's team?"
+	text "Play using <PKMN>"
+	line "Trainer Lorelei's"
+	cont "team?"
 	done
 
 PlayAgainstLoreleiText:
-	text "Play against"
-	line "Leader Lorelei?"
+	text "Play against <PKMN>"
+	line "Trainer Lorelei?"
 	done
 
 PlayUsingAgathaText:
-	text "Play using Leader"
-	line "Agatha's team?"
+	text "Play using <PKMN>"
+	line "Trainer Agatha's"
+	cont "team?"
 	done
 
 PlayAgainstAgathaText:
-	text "Play against"
-	line "Leader Agatha?"
+	text "Play against <PKMN>"
+	line "Trainer Agatha?"
 	done
 
 PlayUsingInsafText:
-	text "Play using"
-	line "<PKMN> Trainer"
-	cont "Insaf's team?"
+	text "Play using <PKMN>"
+	line "Trainer Insaf's"
+	cont "team?"
 	done
 
 PlayAgainstInsafText:
@@ -1020,20 +1028,19 @@ PlayAgainstInsafText:
 	done
 
 PlayUsingSilverText:
-	text "Play using"
-	line "<PKMN> Trainer"
-	cont "Silver's team?"
+	text "Play using <PKMN>"
+	line "Trainer Silver's"
+	cont "team?"
 	done
 
 PlayAgainstSilverText:
-	text "Play against"
-	line "<PKMN> Trainer Silver?"
+	text "Play against <PKMN>"
+	line "Trainer Silver?"
 	done
 
 PlayUsingGiovanniText:
-	text "Play using"
-	line "Boss Giovanni's"
-	cont "team?"
+	text "Play using Boss"
+	line "Giovanni's team?"
 	done
 
 PlayAgainstGiovanniText:
@@ -1064,36 +1071,36 @@ PlayAgainstLanceText:
 	done
 
 PlayUsingGreenText:
-	text "Play using"
-	line "<PKMN> Trainer"
-	cont "Green's team?"
+	text "Play using <PKMN>"
+	line "Trainer Green's"
+	cont "team?"
 	done
 
 PlayAgainstGreenText:
-	text "Play against"
-	line "<PKMN> Trainer Green?"
+	text "Play against <PKMN>"
+	line "Trainer Green?"
 	done
 
 PlayUsingBlueText:
-	text "Play using"
-	line "<PKMN> Trainer"
-	cont "Blue's team?"
+	text "Play using <PKMN>"
+	line "Trainer Blue's"
+	cont "team?"
 	done
 
 PlayAgainstBlueText:
-	text "Play against"
-	line "<PKMN> Trainer Blue?"
+	text "Play against <PKMN>"
+	line "Trainer Blue?"
 	done
 
 PlayUsingRedText:
-	text "Play using"
-	line "<PKMN> Trainer"
-	cont "Red's team?"
+	text "Play using <PKMN>"
+	line "Trainer Red's"
+	cont "team?"
 	done
 
 PlayAgainstRedText:
-	text "Play against"
-	line "<PKMN> Trainer Red?"
+	text "Play against <PKMN>"
+	line "Trainer Red?"
 	done
 
 DraftArenaNoteSign:
