@@ -1,14 +1,14 @@
 	object_const_def
-	const ROUTE31_FISHER
-	const ROUTE31_YOUNGSTER
-	const ROUTE31_BUG_CATCHER
-	const ROUTE31_COOLTRAINER_M
-	const ROUTE31_POKE_BALL1
-	const ROUTE31_POKE_BALL2
-	const ROUTE31_BERRY_TREE
-	const ROUTE31_APRICORN_TREE
+	const ROUTE3_FISHER
+	const ROUTE3_YOUNGSTER
+	const ROUTE3_BUG_CATCHER
+	const ROUTE3_COOLTRAINER_M
+	const ROUTE3_POKE_BALL1
+	const ROUTE3_POKE_BALL2
+	const ROUTE3_BERRY_TREE
+	const ROUTE3_APRICORN_TREE
 
-Route31_MapScripts:
+Route3_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
@@ -130,20 +130,20 @@ TrainerBugCatcherWade1:
 	jumpstd PackFullMScript
 	end
 
-Route31MailRecipientScript:
+Route3MailRecipientScript:
 	faceplayer
 	opentext
 	checkevent EVENT_GOT_TM50_NIGHTMARE
 	iftrue .DescribeNightmare
 	checkevent EVENT_GOT_KENYA
 	iftrue .TryGiveKenya
-	writetext Text_Route31SleepyMan
+	writetext Text_Route3SleepyMan
 	waitbutton
 	closetext
 	end
 
 .TryGiveKenya:
-	writetext Text_Route31SleepyManGotMail
+	writetext Text_Route3SleepyManGotMail
 	promptbutton
 	checkpokemail ReceivedSpearowMailText
 	ifequal POKEMAIL_WRONG_MAIL, .WrongMail
@@ -151,41 +151,41 @@ Route31MailRecipientScript:
 	ifequal POKEMAIL_NO_MAIL, .NoMail
 	ifequal POKEMAIL_LAST_MON, .LastMon
 	; POKEMAIL_CORRECT
-	writetext Text_Route31HandOverMailMon
+	writetext Text_Route3HandOverMailMon
 	promptbutton
-	writetext Text_Route31ReadingMail
+	writetext Text_Route3ReadingMail
 	promptbutton
 	setevent EVENT_GAVE_KENYA
 	verbosegiveitem TM_TRICK
 	iffalse .NoRoomForItems
 	setevent EVENT_GOT_TM50_NIGHTMARE
 .DescribeNightmare:
-	writetext Text_Route31DescribeNightmare
+	writetext Text_Route3DescribeNightmare
 	waitbutton
 .NoRoomForItems:
 	closetext
 	end
 
 .WrongMail:
-	writetext Text_Route31WrongMail
+	writetext Text_Route3WrongMail
 	waitbutton
 	closetext
 	end
 
 .NoMail:
-	writetext Text_Route31MissingMail
+	writetext Text_Route3MissingMail
 	waitbutton
 	closetext
 	end
 
 .Refused:
-	writetext Text_Route31DeclinedToHandOverMail
+	writetext Text_Route3DeclinedToHandOverMail
 	waitbutton
 	closetext
 	end
 
 .LastMon:
-	writetext Text_Route31CantTakeLastMon
+	writetext Text_Route3CantTakeLastMon
 	waitbutton
 	closetext
 	end
@@ -194,25 +194,25 @@ ReceivedSpearowMailText:
 	db   "DARK CAVE leads"
 	next "to another road@"
 
-Route31YoungsterScript:
-	jumptextfaceplayer Route31YoungsterText
+Route3YoungsterScript:
+	jumptextfaceplayer Route3YoungsterText
 
-Route31Sign:
-	jumptext Route31SignText
+Route3Sign:
+	jumptext Route3SignText
 
 DarkCaveSign:
 	jumptext DarkCaveSignText
 
-Route31CooltrainerMScript:
-	jumptextfaceplayer Route31CooltrainerMText
+Route3CooltrainerMScript:
+	jumptextfaceplayer Route3CooltrainerMText
 
-Route31Potion:
+Route3Potion:
 	itemball POTION
 
-Route31PokeBall:
+Route3PokeBall:
 	itemball POKE_BALL
 
-Route31CooltrainerMText:
+Route3CooltrainerMText:
 	text "DARK CAVE…"
 
 	para "If #MON could"
@@ -242,7 +242,7 @@ BugCatcherWade1AfterText:
 	cont "BOX automatically."
 	done
 
-Text_Route31SleepyMan:
+Text_Route3SleepyMan:
 	text "… Hnuurg… Huh?"
 
 	para "I walked too far"
@@ -259,20 +259,20 @@ Text_Route31SleepyMan:
 	para "…Zzzz…"
 	done
 
-Text_Route31SleepyManGotMail:
+Text_Route3SleepyManGotMail:
 	text "…Zzzz… Huh?"
 
 	para "What's that? You"
 	line "have MAIL for me?"
 	done
 
-Text_Route31HandOverMailMon:
+Text_Route3HandOverMailMon:
 	text "<PLAYER> handed"
 	line "over the #MON"
 	cont "holding the MAIL."
 	done
 
-Text_Route31ReadingMail:
+Text_Route3ReadingMail:
 	text "Let's see…"
 
 	para "…DARK CAVE leads"
@@ -296,7 +296,7 @@ Text_Route31ReadingMail:
 	line "to have this!"
 	done
 
-Text_Route31DescribeNightmare:
+Text_Route3DescribeNightmare:
 	text "TM50 is NIGHTMARE."
 
 	para "It's a wicked move"
@@ -312,12 +312,12 @@ Text_Route31DescribeNightmare:
 	line "have bad dreams."
 	done
 
-Text_Route31WrongMail:
+Text_Route3WrongMail:
 	text "This MAIL isn't"
 	line "for me."
 	done
 
-Text_Route31MissingMail:
+Text_Route3MissingMail:
 	text "Why is this #-"
 	line "MON so special?"
 
@@ -325,12 +325,12 @@ Text_Route31MissingMail:
 	line "any MAIL."
 	done
 
-Text_Route31DeclinedToHandOverMail:
+Text_Route3DeclinedToHandOverMail:
 	text "What? You don't"
 	line "want anything?"
 	done
 
-Text_Route31CantTakeLastMon:
+Text_Route3CantTakeLastMon:
 	text "If I take that"
 	line "#MON from you,"
 
@@ -338,7 +338,7 @@ Text_Route31CantTakeLastMon:
 	line "to use in battle?"
 	done
 
-Route31YoungsterText:
+Route3YoungsterText:
 	text "I found a good"
 	line "#MON in DARK"
 	cont "CAVE."
@@ -351,8 +351,8 @@ Route31YoungsterText:
 	line "VIOLET CITY's GYM."
 	done
 
-Route31SignText:
-	text "ROUTE 31"
+Route3SignText:
+	text "ROUTE 3"
 
 	para "VIOLET CITY -"
 	line "CHERRYGROVE CITY"
@@ -362,97 +362,97 @@ DarkCaveSignText:
 	text "DARK CAVE"
 	done
 
-Route31BerryTree:
+Route3BerryTree:
 	opentext
 	getitemname STRING_BUFFER_3, BITTER_BERRY
-	writetext Route31TreeText
+	writetext Route3TreeText
 	promptbutton
-	writetext Route31HeyItsBerryApricornText
+	writetext Route3HeyItsBerryApricornText
 	promptbutton
 	giveitem BITTER_BERRY
-	iffalse Route31NoRoomInBag
-	disappear ROUTE31_BERRY_TREE
-	writetext Route31FoundItemText
+	iffalse Route3NoRoomInBag
+	disappear ROUTE3_BERRY_TREE
+	writetext Route3FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route31ApricornTree:
+Route3ApricornTree:
 	opentext
 	getitemname STRING_BUFFER_3, BLK_APRICORN
-	writetext Route31TreeText
+	writetext Route3TreeText
 	promptbutton
-	writetext Route31HeyItsBerryApricornText
+	writetext Route3HeyItsBerryApricornText
 	promptbutton
 	giveitem BLK_APRICORN
-	iffalse Route31NoRoomInBag
-	disappear ROUTE31_APRICORN_TREE
-	writetext Route31FoundItemText
+	iffalse Route3NoRoomInBag
+	disappear ROUTE3_APRICORN_TREE
+	writetext Route3FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route31NoBerryOrApricorn:
+Route3NoBerryOrApricorn:
 	opentext
-	writetext Route31TreeText
+	writetext Route3TreeText
 	promptbutton
-	writetext Route31NothingHereText
+	writetext Route3NothingHereText
 	waitbutton
 	closetext
 	end
 
-Route31NoRoomInBag:
-	writetext Route31NoRoomInBagText
+Route3NoRoomInBag:
+	writetext Route3NoRoomInBagText
 	waitbutton
 	closetext
 	end
 
-Route31TreeText:
+Route3TreeText:
 	text_far _FruitBearingTreeText
 	text_end
 
-Route31NothingHereText:
+Route3NothingHereText:
 	text_far _NothingHereText
 	text_end
 
-Route31HeyItsBerryApricornText:
+Route3HeyItsBerryApricornText:
 	text_far _HeyItsFruitText
 	text_end
 
-Route31FoundItemText:
+Route3FoundItemText:
 	text_far _ObtainedFruitText
 	text_end
 
-Route31NoRoomInBagText:
+Route3NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
-Route31_MapEvents:
+Route3_MapEvents:
 	def_warp_events
-	warp_event  4,  6, ROUTE_31_VIOLET_GATE, 3
-	warp_event  4,  7, ROUTE_31_VIOLET_GATE, 4
+	warp_event  4,  6, ROUTE_3_VIOLET_GATE, 3
+	warp_event  4,  7, ROUTE_3_VIOLET_GATE, 4
 	warp_event 34,  5, DARK_CAVE_VIOLET_ENTRANCE, 1
 
 	def_coord_events
 
 	def_bg_events
-	bg_event  7,  5, BGEVENT_READ, Route31Sign
+	bg_event  7,  5, BGEVENT_READ, Route3Sign
 	bg_event 31,  5, BGEVENT_READ, DarkCaveSign
-	bg_event 16,  7, BGEVENT_READ, Route31NoBerryOrApricorn
-	bg_event 29,  7, BGEVENT_READ, Route31NoBerryOrApricorn
+	bg_event 16,  7, BGEVENT_READ, Route3NoBerryOrApricorn
+	bg_event 29,  7, BGEVENT_READ, Route3NoBerryOrApricorn
 
 	def_object_events
-	object_event 17,  7, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route31MailRecipientScript, -1
-	object_event  9,  5, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route31YoungsterScript, -1
+	object_event 17,  7, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route3MailRecipientScript, -1
+	object_event  9,  5, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route3YoungsterScript, -1
 	object_event 21, 13, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 5, TrainerBugCatcherWade1, -1
-	object_event 27,  8, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_RIGHT, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route31CooltrainerMScript, -1
-	object_event 30,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route31Potion, EVENT_ROUTE_31_POTION
-	object_event 19, 15, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route31PokeBall, EVENT_ROUTE_31_POKE_BALL
+	object_event 27,  8, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_RIGHT, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route3CooltrainerMScript, -1
+	object_event 30,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route3Potion, EVENT_ROUTE_3_POTION
+	object_event 19, 15, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route3PokeBall, EVENT_ROUTE_3_POKE_BALL
 
 
-	object_event 16,  7, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route31BerryTree, EVENT_ROUTE_3_BERRY
-	object_event 29,  7, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLACK, OBJECTTYPE_SCRIPT, 0, Route31ApricornTree, EVENT_ROUTE_3_APRICORN
+	object_event 16,  7, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route3BerryTree, EVENT_ROUTE_3_BERRY
+	object_event 29,  7, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLACK, OBJECTTYPE_SCRIPT, 0, Route3ApricornTree, EVENT_ROUTE_3_APRICORN

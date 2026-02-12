@@ -276,7 +276,7 @@ INCLUDE "maps/GuideGentsHouse.asm"
 INCLUDE "maps/CherrygroveEvolutionSpeechHouse.asm"
 INCLUDE "maps/Route2BerryHouse.asm"
 INCLUDE "maps/MrPokemonsHouse.asm"
-INCLUDE "maps/Route31VioletGate.asm"
+INCLUDE "maps/Route3VioletGate.asm"
 
 
 SECTION "Map Scripts 19", ROMX
@@ -319,7 +319,7 @@ INCLUDE "maps/EcruteakCity.asm"
 INCLUDE "maps/BlackthornCity.asm"
 INCLUDE "maps/Route26.asm"
 INCLUDE "maps/BattlePlazaMagnetTrainStation.asm"
-INCLUDE "maps/Route31.asm"
+INCLUDE "maps/Route3.asm"
 INCLUDE "maps/Route39.asm"
 INCLUDE "maps/Route40.asm"
 INCLUDE "maps/Route41.asm"

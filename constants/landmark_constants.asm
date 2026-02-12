@@ -7,7 +7,7 @@
 	const LANDMARK_CHERRYGROVE_CITY  ; 03
 	const LANDMARK_ROUTE_2           ; 04
 	const LANDMARK_DARK_CAVE         ; 2c
-	const LANDMARK_ROUTE_31          ; 05
+	const LANDMARK_ROUTE_3           ; 05
 	const LANDMARK_VIOLET_CITY       ; 06
 	const LANDMARK_SPROUT_TOWER      ; 07
 	const LANDMARK_RUINS_OF_ALPH     ; 09

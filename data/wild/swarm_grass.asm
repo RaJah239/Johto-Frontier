@@ -171,7 +171,7 @@ SwarmGrassWildMons:
 	db 5, TOTODILE
 
 ; Pichu swarm
-	map_id ROUTE_31
+	map_id ROUTE_3
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 3, TURTWIG

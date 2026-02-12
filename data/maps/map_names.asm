@@ -350,7 +350,7 @@ New_Bark_Map_Names: ; newgroup NEW_BARK ; 24
 Cherrygrove_Map_Names:
 	table_width 2, Cherrygrove_Map_Names
 	dw Cherrygrove_Map_Name1 ; map_const ROUTE_2         ;  1
-	dw Cherrygrove_Map_Name2 ; map_const ROUTE_31         ;  2
+	dw Cherrygrove_Map_Name2 ; map_const ROUTE_3         ;  2
 	dw Cherrygrove_Map_Name3 ; map_const CHERRYGROVE_CITY ;  3
 	dw Cherrygrove_Map_Name4 ; map_const CHERRYGROVE_MART ;  4
 	dw Cherrygrove_Map_Name5 ; map_const CHERRYGROVE_POKECENTER_1F ;  5
@@ -359,7 +359,7 @@ Cherrygrove_Map_Names:
 	dw Cherrygrove_Map_Name8 ; map_const CHERRYGROVE_EVOLUTION_SPEECH_HOUSE ;  8
 	dw Cherrygrove_Map_Name9 ; map_const ROUTE_2_BERRY_HOUSE ;  9
 	dw Cherrygrove_Map_Name10 ; map_const MR_POKEMONS_HOUSE ; 10
-	dw Cherrygrove_Map_Name11 ; map_const ROUTE_31_VIOLET_GATE ; 11
+	dw Cherrygrove_Map_Name11 ; map_const ROUTE_3_VIOLET_GATE ; 11
 	assert_table_length NUM_CHERRYGROVE_MAPS
 
 	; BATTLE_PLAZA, 11
@@ -869,8 +869,8 @@ New_Bark_Map_Name13: ; map_const ROUTE_29_ROUTE_46_GATE ; 13
 
 Cherrygrove_Map_Name1: ; map_const ROUTE_2         ;  1
 	db "Route 2@"
-Cherrygrove_Map_Name2: ; map_const ROUTE_31         ;  2
-	db "Route 31@"
+Cherrygrove_Map_Name2: ; map_const ROUTE_3         ;  2
+	db "Route 3@"
 Cherrygrove_Map_Name3: ; map_const CHERRYGROVE_CITY ;  3
 	db "Cherrygrove City@"
 Cherrygrove_Map_Name4: ; map_const CHERRYGROVE_MART ;  4
@@ -887,8 +887,8 @@ Cherrygrove_Map_Name9: ; map_const ROUTE_2_BERRY_HOUSE ;  9
 	db "Route 2 House@"
 Cherrygrove_Map_Name10: ; map_const MR_POKEMONS_HOUSE ; 10
 	db "Mr. #mon House@"
-Cherrygrove_Map_Name11: ; map_const ROUTE_31_VIOLET_GATE ; 11
-	db "Route 31 Gate@"
+Cherrygrove_Map_Name11: ; map_const ROUTE_3_VIOLET_GATE ; 11
+	db "Route 3 Gate@"
 
 Battle_Plaza_Name1: ; map_const BATTLE_PLAZA 
 	db "Battle Plaza@"

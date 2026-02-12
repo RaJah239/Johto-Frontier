@@ -108,7 +108,7 @@ ENDM
 	map_attributes VioletCity, VIOLET_CITY, $05, SOUTH | WEST | EAST
 	connection south, Route32, ROUTE_32, 0
 	connection west, Route36, ROUTE_36, 0
-	connection east, Route31, ROUTE_31, 9
+	connection east, Route3, ROUTE_3, 9
 
 	map_attributes AzaleaTown, AZALEA_TOWN, $05, WEST | EAST
 	connection west, Route34, ROUTE_34, -18
@@ -155,10 +155,10 @@ ENDM
 	connection east, NewBarkTown, NEW_BARK_TOWN, 0
 
 	map_attributes Route2, ROUTE_2, $05, NORTH | SOUTH
-	connection north, Route31, ROUTE_31, -10
+	connection north, Route3, ROUTE_3, -10
 	connection south, CherrygroveCity, CHERRYGROVE_CITY, -5
 
-	map_attributes Route31, ROUTE_31, $05, SOUTH | WEST
+	map_attributes Route3, ROUTE_3, $05, SOUTH | WEST
 	connection south, Route2, ROUTE_2, 10
 	connection west, VioletCity, VIOLET_CITY, -9
 
@@ -440,7 +440,7 @@ ENDM
 	map_attributes CherrygroveEvolutionSpeechHouse, CHERRYGROVE_EVOLUTION_SPEECH_HOUSE, $00, 0
 	map_attributes Route2BerryHouse, ROUTE_2_BERRY_HOUSE, $00, 0
 	map_attributes MrPokemonsHouse, MR_POKEMONS_HOUSE, $00, 0
-	map_attributes Route31VioletGate, ROUTE_31_VIOLET_GATE, $00, 0
+	map_attributes Route3VioletGate, ROUTE_3_VIOLET_GATE, $00, 0
 	map_attributes SilverCaveOutside, SILVER_CAVE_OUTSIDE, $00, 0
 	map_attributes CianwoodPort, CIANWOOD_PORT, $0a, 0
 	map_attributes CianwoodPortPassage, CIANWOOD_PORT_PASSAGE, $00, 0

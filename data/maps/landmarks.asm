@@ -13,7 +13,7 @@ Landmarks:
 	landmark  92, 100, CherrygroveCityName
 	landmark  92,  84, Route2Name
 	landmark 100,  60, DarkCaveName
-	landmark  88,  60, Route31Name
+	landmark  88,  60, Route3Name
 	landmark  76,  60, VioletCityName
 	landmark  76,  56, SproutTowerName
 	landmark  68,  76, RuinsOfAlphName
@@ -99,7 +99,7 @@ Route26Name:         db "Route 26@"
 Route27Name:         db "Route 27@"
 Route1Name:          db "Route 1@"
 Route2Name:          db "Route 2@"
-Route31Name:         db "Route 31@"
+Route3Name:          db "Route 3@"
 Route32Name:         db "Route 32@"
 Route33Name:         db "Route 33@"
 Route34Name:         db "Route 34@"

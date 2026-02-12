@@ -111,8 +111,8 @@ Route29Route46Gate_Blocks:
 Route39_SilverCaveGate_Blocks:
 	INCBIN "maps/NorthSouthGate.blk"
 
-Route31_Blocks:
-	INCBIN "maps/Route31.blk"
+Route3_Blocks:
+	INCBIN "maps/Route3.blk"
 
 Route27_Blocks:
 	INCBIN "maps/Route27.blk"
@@ -133,7 +133,7 @@ Route38EcruteakGate_Blocks:
 Route42EcruteakGate_Blocks:
 Route32RuinsOfAlphGate_Blocks:
 IlexForestAzaleaGate_Blocks:
-Route31VioletGate_Blocks:
+Route3VioletGate_Blocks:
 	INCBIN "maps/EastWestGate.blk"
 
 ElmsLab_Blocks:

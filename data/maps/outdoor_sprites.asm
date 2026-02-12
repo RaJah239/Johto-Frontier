@@ -32,7 +32,7 @@ IndigoGroupSprites:
 NewBarkGroupSprites:
 ; Route26, Route27, Route1, NewBarkTown
 CherrygroveGroupSprites:
-; Route2, Route31, CherrygroveCity
+; Route2, Route3, CherrygroveCity
 	db SPRITE_RIVAL
 	db SPRITE_TEACHER
 	db SPRITE_FISHER

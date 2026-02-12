@@ -8,11 +8,11 @@ WadePhoneCalleeScript:
 	farsjump WadeHangUpScript
 
 .WantsBattle:
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_31
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_3
 	farsjump WadeQuickBattleScript
 
 .HasItem:
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_31
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_3
 	farsjump WadeComeQuickScript
 
 WadePhoneCallerScript:
@@ -24,11 +24,11 @@ WadePhoneCallerScript:
 	ifequal 1, WadeHasItem2
 
 .WadeWantsBattle2:
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_31
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_3
 	setflag ENGINE_WADE_READY_FOR_REMATCH
 	farsjump PhoneScript_WantsToBattle_Male
 
 WadeHasItem2:
 	setflag ENGINE_WADE_HAS_ITEM
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_31
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_3
 	farsjump PhoneScript_FoundItem_Male
