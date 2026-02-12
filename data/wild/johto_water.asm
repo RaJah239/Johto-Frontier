@@ -128,7 +128,7 @@ JohtoWaterWildMons:
 	db 20, TENTACRUEL
 	end_water_wildmons
 
-	def_water_wildmons ROUTE_30
+	def_water_wildmons ROUTE_2
 	db 4 percent ; encounter rate
 	db 15, WOOPER
 	db 20, QUAGSIRE

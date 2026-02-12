@@ -274,7 +274,7 @@ INCLUDE "maps/CherrygrovePokecenter1F.asm"
 INCLUDE "maps/CherrygroveGymSpeechHouse.asm"
 INCLUDE "maps/GuideGentsHouse.asm"
 INCLUDE "maps/CherrygroveEvolutionSpeechHouse.asm"
-INCLUDE "maps/Route30BerryHouse.asm"
+INCLUDE "maps/Route2BerryHouse.asm"
 INCLUDE "maps/MrPokemonsHouse.asm"
 INCLUDE "maps/Route31VioletGate.asm"
 
@@ -309,7 +309,7 @@ SECTION "Map Scripts 21", ROMX
 INCLUDE "maps/CianwoodCity.asm"
 INCLUDE "maps/Route27.asm"
 INCLUDE "maps/Route1.asm"
-INCLUDE "maps/Route30.asm"
+INCLUDE "maps/Route2.asm"
 INCLUDE "maps/Route38.asm"
 
 

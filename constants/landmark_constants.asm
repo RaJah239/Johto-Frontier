@@ -5,7 +5,7 @@
 	const LANDMARK_NEW_BARK_TOWN     ; 01
 	const LANDMARK_ROUTE_1           ; 02
 	const LANDMARK_CHERRYGROVE_CITY  ; 03
-	const LANDMARK_ROUTE_30          ; 04
+	const LANDMARK_ROUTE_2           ; 04
 	const LANDMARK_DARK_CAVE         ; 2c
 	const LANDMARK_ROUTE_31          ; 05
 	const LANDMARK_VIOLET_CITY       ; 06

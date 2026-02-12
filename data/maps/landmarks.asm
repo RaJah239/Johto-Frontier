@@ -11,7 +11,7 @@ Landmarks:
 	landmark 132, 100, NewBarkTownName
 	landmark 116, 100, Route1Name
 	landmark  92, 100, CherrygroveCityName
-	landmark  92,  84, Route30Name
+	landmark  92,  84, Route2Name
 	landmark 100,  60, DarkCaveName
 	landmark  88,  60, Route31Name
 	landmark  76,  60, VioletCityName
@@ -97,8 +97,8 @@ VictoryRoadName:     db "Victory<BSP>Road@"
 Route23Name:         db "Route 23@"
 Route26Name:         db "Route 26@"
 Route27Name:         db "Route 27@"
-Route1Name:         db "Route 1@"
-Route30Name:         db "Route 30@"
+Route1Name:          db "Route 1@"
+Route2Name:          db "Route 2@"
 Route31Name:         db "Route 31@"
 Route32Name:         db "Route 32@"
 Route33Name:         db "Route 33@"

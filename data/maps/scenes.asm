@@ -65,7 +65,7 @@ MapScenes::
 	scene_var MOBILE_TRADE_ROOM,                           wMobileTradeRoomSceneID
 	scene_var MOBILE_BATTLE_ROOM,                          wMobileBattleRoomSceneID
 	scene_var DAY_CARE,                                    wDayCareSceneID
-	scene_var ROUTE_30,                                    wRoute30SceneID
+	scene_var ROUTE_2,                                     wRoute30SceneID
 	scene_var BATTLE_PLAZA_MAGNET_TRAIN_STATION,           wBattlePlazaMagnetTrainStationSceneID
 	scene_var OAKS_LAB,                                    wOaksLab
 	scene_var ROUTE_23,                                    wRoute23

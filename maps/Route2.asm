@@ -1,27 +1,27 @@
 	object_const_def
-	const ROUTE30_YOUNGSTER1
-	const ROUTE30_YOUNGSTER2
-	const ROUTE30_BUG_CATCHER
-	const ROUTE30_YOUNGSTER4
-	const ROUTE30_COOLTRAINER_F
-	const ROUTE30_POKE_BALL
-	const ROUTE30_BERRY_TREE1
-	const ROUTE30_APRICORN_TREE1
-	const ROUTE30_BERRY_TREE2
-	const ROUTE30_APRICORN_TREE2
-	const ROUTE30_BERRY_TEACHER
+	const ROUTE2_YOUNGSTER1
+	const ROUTE2_YOUNGSTER2
+	const ROUTE2_BUG_CATCHER
+	const ROUTE2_YOUNGSTER4
+	const ROUTE2_COOLTRAINER_F
+	const ROUTE2_POKE_BALL
+	const ROUTE2_BERRY_TREE1
+	const ROUTE2_APRICORN_TREE1
+	const ROUTE2_BERRY_TREE2
+	const ROUTE2_APRICORN_TREE2
+	const ROUTE2_BERRY_TEACHER
 
-Route30_MapScripts:
+Route2_MapScripts:
 	def_scene_scripts
-	scene_script Route30Noop1Scene, SCENE_ROUTE_30_TEACHER_STOPS_YOU
-	scene_script Route30Noop2Scene, SCENE_ROUTE_30_NOOP
+	scene_script Route2Noop1Scene, SCENE_ROUTE_2_TEACHER_STOPS_YOU
+	scene_script Route2Noop2Scene, SCENE_ROUTE_2_NOOP
 
 	def_callbacks
 
-Route30Noop1Scene:
+Route2Noop1Scene:
 	end
 
-Route30Noop2Scene:
+Route2Noop2Scene:
 	end
 
 TrainerYoungsterJoey:
@@ -160,14 +160,14 @@ TrainerBugCatcherDon:
 	closetext
 	end
 
-Route30YoungsterScript:
-	jumptextfaceplayer Route30YoungsterText_EveryoneIsBattling
+Route2YoungsterScript:
+	jumptextfaceplayer Route2YoungsterText_EveryoneIsBattling
 
-Route30CooltrainerFScript:
-	jumptextfaceplayer Route30CooltrainerFText
+Route2CooltrainerFScript:
+	jumptextfaceplayer Route2CooltrainerFText
 
-Route30Sign:
-	jumptext Route30SignText
+Route2Sign:
+	jumptext Route2SignText
 
 MrPokemonsHouseDirectionsSign:
 	jumptext MrPokemonsHouseDirectionsSignText
@@ -175,20 +175,14 @@ MrPokemonsHouseDirectionsSign:
 MrPokemonsHouseSign:
 	jumptext MrPokemonsHouseSignText
 
-Route30TrainerTips:
-	jumptext Route30TrainerTipsText
+Route2TrainerTips:
+	jumptext Route2TrainerTipsText
 
-Route30Antidote:
+Route2Antidote:
 	itemball ANTIDOTE
 
-Route30FruitTree1:
-	fruittree FRUITTREE_ROUTE_30_1
-
-Route30FruitTree2:
-	fruittree FRUITTREE_ROUTE_30_2
-
-Route30HiddenPotion:
-	hiddenitem POTION, EVENT_ROUTE_30_HIDDEN_POTION
+Route2HiddenPotion:
+	hiddenitem POTION, EVENT_ROUTE_2_HIDDEN_POTION
 
 YoungsterJoey1SeenText:
 	text "I just lost, so"
@@ -260,13 +254,13 @@ BugCatcherDonAfterText:
 	line "some more…"
 	done
 
-Route30YoungsterText_EveryoneIsBattling:
+Route2YoungsterText_EveryoneIsBattling:
 	text "Everyone's having"
 	line "fun battling!"
 	cont "You should too!"
 	done
 
-Route30CooltrainerFText:
+Route2CooltrainerFText:
 	text "I'm not a trainer."
 
 	para "But if you look"
@@ -274,8 +268,8 @@ Route30CooltrainerFText:
 	cont "prepare to battle."
 	done
 
-Route30SignText:
-	text "ROUTE 30"
+Route2SignText:
+	text "ROUTE 2"
 
 	para "VIOLET CITY -"
 	line "CHERRYGROVE CITY"
@@ -290,7 +284,7 @@ MrPokemonsHouseSignText:
 	text "MR.#MON'S HOUSE"
 	done
 
-Route30TrainerTipsText:
+Route2TrainerTipsText:
 	text "TRAINER TIPS"
 
 	para "No stealing other"
@@ -320,136 +314,136 @@ YoungsterJoeyText_GiveHPUpAfterBattleAgain:
 	line "HP UP? Take it!"
 	done
 
-Route30BerryTree1:
+Route2BerryTree1:
 	opentext
 	getitemname STRING_BUFFER_3, BERRY
-	writetext Route30TreeText
+	writetext Route2TreeText
 	promptbutton
-	writetext Route30HeyItsBerryApricornText
+	writetext Route2HeyItsBerryApricornText
 	promptbutton
 	giveitem BERRY
-	iffalse Route30NoRoomInBag
-	disappear ROUTE30_BERRY_TREE1
-	writetext Route30FoundItemText
+	iffalse Route2NoRoomInBag
+	disappear ROUTE2_BERRY_TREE1
+	writetext Route2FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route30BerryTree2:
+Route2BerryTree2:
 	opentext
 	getitemname STRING_BUFFER_3, PSNCUREBERRY
-	writetext Route30TreeText
+	writetext Route2TreeText
 	promptbutton
-	writetext Route30HeyItsBerryApricornText
+	writetext Route2HeyItsBerryApricornText
 	promptbutton
 	giveitem PSNCUREBERRY
-	iffalse Route30NoRoomInBag
-	disappear ROUTE30_BERRY_TREE2
-	writetext Route30FoundItemText
+	iffalse Route2NoRoomInBag
+	disappear ROUTE2_BERRY_TREE2
+	writetext Route2FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route30ApricornTree1:
+Route2ApricornTree1:
 	opentext
 	getitemname STRING_BUFFER_3, YLW_APRICORN
-	writetext Route30TreeText
+	writetext Route2TreeText
 	promptbutton
-	writetext Route30HeyItsBerryApricornText
+	writetext Route2HeyItsBerryApricornText
 	promptbutton
 	giveitem YLW_APRICORN
-	iffalse Route30NoRoomInBag
-	disappear ROUTE30_APRICORN_TREE1
-	writetext Route30FoundItemText
+	iffalse Route2NoRoomInBag
+	disappear ROUTE2_APRICORN_TREE1
+	writetext Route2FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route30ApricornTree2:
+Route2ApricornTree2:
 	opentext
 	getitemname STRING_BUFFER_3, GRN_APRICORN
-	writetext Route30TreeText
+	writetext Route2TreeText
 	promptbutton
-	writetext Route30HeyItsBerryApricornText
+	writetext Route2HeyItsBerryApricornText
 	promptbutton
 	giveitem GRN_APRICORN
-	iffalse Route30NoRoomInBag
-	disappear ROUTE30_APRICORN_TREE2
-	writetext Route30FoundItemText
+	iffalse Route2NoRoomInBag
+	disappear ROUTE2_APRICORN_TREE2
+	writetext Route2FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route30NoBerryOrApricorn:
+Route2NoBerryOrApricorn:
 	opentext
-	writetext Route30TreeText
+	writetext Route2TreeText
 	promptbutton
-	writetext Route30NothingHereText
+	writetext Route2NothingHereText
 	waitbutton
 	closetext
 	end
 
-Route30NoRoomInBag:
-	writetext Route30NoRoomInBagText
+Route2NoRoomInBag:
+	writetext Route2NoRoomInBagText
 	waitbutton
 	closetext
 	end
 
-Route30TreeText:
+Route2TreeText:
 	text_far _FruitBearingTreeText
 	text_end
 
-Route30NothingHereText:
+Route2NothingHereText:
 	text_far _NothingHereText
 	text_end
 
-Route30HeyItsBerryApricornText:
+Route2HeyItsBerryApricornText:
 	text_far _HeyItsFruitText
 	text_end
 
-Route30FoundItemText:
+Route2FoundItemText:
 	text_far _ObtainedFruitText
 	text_end
 
-Route30NoRoomInBagText:
+Route2NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
-Route30BerryTeacher2Script:
-	moveobject ROUTE30_BERRY_TEACHER, 8, 40
-Route30BerryTeacher1Script:
+Route2BerryTeacher2Script:
+	moveobject ROUTE2_BERRY_TEACHER, 8, 40
+Route2BerryTeacher1Script:
 	playsound SFX_ENTER_DOOR
 	turnobject PLAYER, LEFT
 	showemote EMOTE_SHOCK, PLAYER, 15
-	appear ROUTE30_BERRY_TEACHER
-	applymovement ROUTE30_BERRY_TEACHER, Route30BerryTeacherMovement
+	appear ROUTE2_BERRY_TEACHER
+	applymovement ROUTE2_BERRY_TEACHER, Route2BerryTeacherMovement
 	turnobject PLAYER, LEFT
 	opentext
 	writetext DidYouJustPastThisObviousHouseText
 	waitbutton
 	closetext
-	applymovement ROUTE30_BERRY_TEACHER, Route30BerryTeacherMovementExits
+	applymovement ROUTE2_BERRY_TEACHER, Route2BerryTeacherMovementExits
 	playsound SFX_ENTER_DOOR
-	disappear ROUTE30_BERRY_TEACHER
-	setscene SCENE_ROUTE_30_NOOP
+	disappear ROUTE2_BERRY_TEACHER
+	setscene SCENE_ROUTE_2_NOOP
 	end
 
-Route30BerryTeacherMovement:
+Route2BerryTeacherMovement:
 	step RIGHT
 	step RIGHT
 	step RIGHT
 	step RIGHT
 	step_end
 
-Route30BerryTeacherMovementExits:
+Route2BerryTeacherMovementExits:
 	step LEFT
 	step LEFT
 	step LEFT
@@ -473,35 +467,35 @@ DidYouJustPastThisObviousHouseText:
 	line "inside won't you?"
 	done
 
-Route30_MapEvents:
+Route2_MapEvents:
 	def_warp_events
-	warp_event  7, 39, ROUTE_30_BERRY_HOUSE, 1
+	warp_event  7, 39, ROUTE_2_BERRY_HOUSE, 1
 	warp_event 17,  5, MR_POKEMONS_HOUSE, 1
 
 	def_coord_events
-	coord_event 12, 40, SCENE_ROUTE_30_TEACHER_STOPS_YOU, Route30BerryTeacher1Script
-	coord_event 13, 40, SCENE_ROUTE_30_TEACHER_STOPS_YOU, Route30BerryTeacher2Script
+	coord_event 12, 40, SCENE_ROUTE_2_TEACHER_STOPS_YOU, Route2BerryTeacher1Script
+	coord_event 13, 40, SCENE_ROUTE_2_TEACHER_STOPS_YOU, Route2BerryTeacher2Script
 
 	def_bg_events
-	bg_event  9, 43, BGEVENT_READ, Route30Sign
+	bg_event  9, 43, BGEVENT_READ, Route2Sign
 	bg_event 13, 29, BGEVENT_READ, MrPokemonsHouseDirectionsSign
 	bg_event 15,  5, BGEVENT_READ, MrPokemonsHouseSign
-	bg_event  3, 21, BGEVENT_READ, Route30TrainerTips
-	bg_event 14,  9, BGEVENT_ITEM, Route30HiddenPotion
-	bg_event  5, 39, BGEVENT_READ, Route30NoBerryOrApricorn
-	bg_event  4, 39, BGEVENT_READ, Route30NoBerryOrApricorn
-	bg_event 11,  5, BGEVENT_READ, Route30NoBerryOrApricorn
-	bg_event 12,  6, BGEVENT_READ, Route30NoBerryOrApricorn
+	bg_event  3, 21, BGEVENT_READ, Route2TrainerTips
+	bg_event 14,  9, BGEVENT_ITEM, Route2HiddenPotion
+	bg_event  5, 39, BGEVENT_READ, Route2NoBerryOrApricorn
+	bg_event  4, 39, BGEVENT_READ, Route2NoBerryOrApricorn
+	bg_event 11,  5, BGEVENT_READ, Route2NoBerryOrApricorn
+	bg_event 12,  6, BGEVENT_READ, Route2NoBerryOrApricorn
 
 	def_object_events
-	object_event  2, 28, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterJoey, EVENT_ROUTE_30_YOUNGSTER_JOEY
+	object_event  2, 28, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterJoey, EVENT_ROUTE_2_YOUNGSTER_JOEY
 	object_event  5, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 1, TrainerYoungsterMikey, -1
 	object_event  1,  7, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerBugCatcherDon, -1
-	object_event  7, 30, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route30YoungsterScript, -1
-	object_event  2, 13, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route30CooltrainerFScript, -1
-	object_event  8, 35, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route30Antidote, EVENT_ROUTE_30_ANTIDOTE
-	object_event  5, 39, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route30BerryTree1, EVENT_ROUTE_2_BERRY1
-	object_event  4, 39, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route30ApricornTree1, EVENT_ROUTE_2_APRICORN1
-	object_event 11,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route30BerryTree2, EVENT_ROUTE_2_BERRY2
-	object_event 12,  6, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route30ApricornTree2, EVENT_ROUTE_2_APRICORN2
-	object_event  7, 40, SPRITE_TEACHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROUTE_30_BERRY_TEACHER
+	object_event  7, 30, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route2YoungsterScript, -1
+	object_event  2, 13, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route2CooltrainerFScript, -1
+	object_event  8, 35, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route2Antidote, EVENT_ROUTE_2_ANTIDOTE
+	object_event  5, 39, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route2BerryTree1, EVENT_ROUTE_2_BERRY1
+	object_event  4, 39, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route2ApricornTree1, EVENT_ROUTE_2_APRICORN1
+	object_event 11,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route2BerryTree2, EVENT_ROUTE_2_BERRY2
+	object_event 12,  6, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route2ApricornTree2, EVENT_ROUTE_2_APRICORN2
+	object_event  7, 40, SPRITE_TEACHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROUTE_2_BERRY_TEACHER

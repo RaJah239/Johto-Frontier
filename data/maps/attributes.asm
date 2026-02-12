@@ -102,7 +102,7 @@ ENDM
 	connection east, Route27, ROUTE_27, 0
 
 	map_attributes CherrygroveCity, CHERRYGROVE_CITY, $35, NORTH | EAST
-	connection north, Route30, ROUTE_30, 5
+	connection north, Route2, ROUTE_2, 5
 	connection east, Route1, ROUTE_1, 0
 
 	map_attributes VioletCity, VIOLET_CITY, $05, SOUTH | WEST | EAST
@@ -154,12 +154,12 @@ ENDM
 	connection west, CherrygroveCity, CHERRYGROVE_CITY, 0
 	connection east, NewBarkTown, NEW_BARK_TOWN, 0
 
-	map_attributes Route30, ROUTE_30, $05, NORTH | SOUTH
+	map_attributes Route2, ROUTE_2, $05, NORTH | SOUTH
 	connection north, Route31, ROUTE_31, -10
 	connection south, CherrygroveCity, CHERRYGROVE_CITY, -5
 
 	map_attributes Route31, ROUTE_31, $05, SOUTH | WEST
-	connection south, Route30, ROUTE_30, 10
+	connection south, Route2, ROUTE_2, 10
 	connection west, VioletCity, VIOLET_CITY, -9
 
 	map_attributes Route32, ROUTE_32, $05, NORTH | SOUTH
@@ -438,7 +438,7 @@ ENDM
 	map_attributes CherrygroveGymSpeechHouse, CHERRYGROVE_GYM_SPEECH_HOUSE, $00, 0
 	map_attributes GuideGentsHouse, GUIDE_GENTS_HOUSE, $00, 0
 	map_attributes CherrygroveEvolutionSpeechHouse, CHERRYGROVE_EVOLUTION_SPEECH_HOUSE, $00, 0
-	map_attributes Route30BerryHouse, ROUTE_30_BERRY_HOUSE, $00, 0
+	map_attributes Route2BerryHouse, ROUTE_2_BERRY_HOUSE, $00, 0
 	map_attributes MrPokemonsHouse, MR_POKEMONS_HOUSE, $00, 0
 	map_attributes Route31VioletGate, ROUTE_31_VIOLET_GATE, $00, 0
 	map_attributes SilverCaveOutside, SILVER_CAVE_OUTSIDE, $00, 0

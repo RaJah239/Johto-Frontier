@@ -349,7 +349,7 @@ New_Bark_Map_Names: ; newgroup NEW_BARK ; 24
 	; CHERRYGROVE, 26
 Cherrygrove_Map_Names:
 	table_width 2, Cherrygrove_Map_Names
-	dw Cherrygrove_Map_Name1 ; map_const ROUTE_30         ;  1
+	dw Cherrygrove_Map_Name1 ; map_const ROUTE_2         ;  1
 	dw Cherrygrove_Map_Name2 ; map_const ROUTE_31         ;  2
 	dw Cherrygrove_Map_Name3 ; map_const CHERRYGROVE_CITY ;  3
 	dw Cherrygrove_Map_Name4 ; map_const CHERRYGROVE_MART ;  4
@@ -357,7 +357,7 @@ Cherrygrove_Map_Names:
 	dw Cherrygrove_Map_Name6 ; map_const CHERRYGROVE_GYM_SPEECH_HOUSE ;  6
 	dw Cherrygrove_Map_Name7 ; map_const GUIDE_GENTS_HOUSE ;  7
 	dw Cherrygrove_Map_Name8 ; map_const CHERRYGROVE_EVOLUTION_SPEECH_HOUSE ;  8
-	dw Cherrygrove_Map_Name9 ; map_const ROUTE_30_BERRY_HOUSE ;  9
+	dw Cherrygrove_Map_Name9 ; map_const ROUTE_2_BERRY_HOUSE ;  9
 	dw Cherrygrove_Map_Name10 ; map_const MR_POKEMONS_HOUSE ; 10
 	dw Cherrygrove_Map_Name11 ; map_const ROUTE_31_VIOLET_GATE ; 11
 	assert_table_length NUM_CHERRYGROVE_MAPS
@@ -867,8 +867,8 @@ New_Bark_Map_Name12: ; map_const ROUTE_27_SANDSTORM_HOUSE ; 12
 New_Bark_Map_Name13: ; map_const ROUTE_29_ROUTE_46_GATE ; 13
 	db "Route 29 Gate@"
 
-Cherrygrove_Map_Name1: ; map_const ROUTE_30         ;  1
-	db "Route 30@"
+Cherrygrove_Map_Name1: ; map_const ROUTE_2         ;  1
+	db "Route 2@"
 Cherrygrove_Map_Name2: ; map_const ROUTE_31         ;  2
 	db "Route 31@"
 Cherrygrove_Map_Name3: ; map_const CHERRYGROVE_CITY ;  3
@@ -883,8 +883,8 @@ Cherrygrove_Map_Name7: ; map_const GUIDE_GENTS_HOUSE ;  7
 	db "Guide Gent's House@"
 Cherrygrove_Map_Name8: ; map_const CHERRYGROVE_EVOLUTION_SPEECH_HOUSE ;  8
 	db "Cherrygrove House2@"
-Cherrygrove_Map_Name9: ; map_const ROUTE_30_BERRY_HOUSE ;  9
-	db "Route 30 House@"
+Cherrygrove_Map_Name9: ; map_const ROUTE_2_BERRY_HOUSE ;  9
+	db "Route 2 House@"
 Cherrygrove_Map_Name10: ; map_const MR_POKEMONS_HOUSE ; 10
 	db "Mr. #mon House@"
 Cherrygrove_Map_Name11: ; map_const ROUTE_31_VIOLET_GATE ; 11

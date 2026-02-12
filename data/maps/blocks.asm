@@ -33,8 +33,8 @@ Route1_Blocks:
 Route37_Blocks:
 	INCBIN "maps/Route37.blk"
 
-Route30_Blocks:
-	INCBIN "maps/Route30.blk"
+Route2_Blocks:
+	INCBIN "maps/Route2.blk"
 
 Route26_Blocks:
 	INCBIN "maps/Route26.blk"
@@ -98,7 +98,7 @@ Route27SandstormHouse_Blocks:
 CherrygroveGymSpeechHouse_Blocks:
 GuideGentsHouse_Blocks:
 CherrygroveEvolutionSpeechHouse_Blocks:
-Route30BerryHouse_Blocks:
+Route2BerryHouse_Blocks:
 	INCBIN "maps/House1.blk"
 
 Route43MahoganyGate_Blocks:
