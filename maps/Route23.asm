@@ -7,7 +7,7 @@ Route23_MapScripts:
 	callback MAPCALLBACK_NEWMAP, Route23FlypointCallback
 
 Route23FlypointCallback:
-	setflag ENGINE_FLYPOINT_ROUTE_26
+	setflag ENGINE_FLYPOINT_ROUTE_20
 	setflag ENGINE_FLYPOINT_INDIGO_PLATEAU
 	endcallback
 

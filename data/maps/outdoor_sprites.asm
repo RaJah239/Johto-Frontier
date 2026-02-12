@@ -30,7 +30,7 @@ IndigoGroupSprites:
 
 ; Route1 and CherrygroveCity are connected
 NewBarkGroupSprites:
-; Route26, Route19, Route1, NewBarkTown
+; Route20, Route19, Route1, NewBarkTown
 CherrygroveGroupSprites:
 ; Route2, Route3, CherrygroveCity
 	db SPRITE_RIVAL

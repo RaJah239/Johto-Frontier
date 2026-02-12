@@ -331,7 +331,7 @@ Cianwood_Map_Names: ;newgroup CIANWOOD
 	
 New_Bark_Map_Names: ; newgroup NEW_BARK ; 24
 	table_width 2, New_Bark_Map_Names
-	dw New_Bark_Map_Name1 ; map_const ROUTE_26,                                    10, 54 ;  1
+	dw New_Bark_Map_Name1 ; map_const ROUTE_20,                                    10, 54 ;  1
 	dw New_Bark_Map_Name2 ; map_const ROUTE_19,                                    40,  9 ;  2
 	dw New_Bark_Map_Name3 ; map_const ROUTE_1,                                    30,  9 ;  3
 	dw New_Bark_Map_Name4 ; map_const NEW_BARK_TOWN,                               10,  9 ;  4
@@ -340,7 +340,7 @@ New_Bark_Map_Names: ; newgroup NEW_BARK ; 24
 	dw New_Bark_Map_Name7 ; map_const PLAYERS_HOUSE_2F ;  7
 	dw New_Bark_Map_Name8 ; map_const PLAYERS_NEIGHBORS_HOUSE ;  8
 	dw New_Bark_Map_Name9 ; map_const ELMS_HOUSE ;  9
-	dw New_Bark_Map_Name10 ; map_const ROUTE_26_HEAL_HOUSE ; 10
+	dw New_Bark_Map_Name10 ; map_const ROUTE_20_HEAL_HOUSE ; 10
 	dw New_Bark_Map_Name11 ; map_const DAY_OF_WEEK_SIBLINGS_HOUSE ; 11
 	dw New_Bark_Map_Name12 ; map_const ROUTE_19_SANDSTORM_HOUSE ; 12
 	dw New_Bark_Map_Name13 ; map_const ROUTE_1_ROUTE_18_GATE ; 13
@@ -840,8 +840,8 @@ Cianwood_Map_Name18: ; map_const CIANWOOD_PORT_PASSAGE, ; 18
 Cianwood_Map_Name23: ; map_const POWER_PLANT
 	db "Power Plant"
 
-New_Bark_Map_Name1: ; map_const ROUTE_26,  1
-	db "Route 26@"
+New_Bark_Map_Name1: ; map_const ROUTE_20,  1
+	db "Route 20@"
 New_Bark_Map_Name2: ; map_const ROUTE_19,  2
 	db "Route 19@"
 New_Bark_Map_Name3: ; map_const ROUTE_1, ;  3
@@ -858,8 +858,8 @@ New_Bark_Map_Name8: ; map_const PLAYERS_NEIGHBORS_HOUSE ;  8
 	db "Neighbor's House@"
 New_Bark_Map_Name9: ; map_const ELMS_HOUSE ;  9
 	db "Elm's House@"
-New_Bark_Map_Name10: ; map_const ROUTE_26_HEAL_HOUSE ; 10
-	db "Route 26 House@"
+New_Bark_Map_Name10: ; map_const ROUTE_20_HEAL_HOUSE ; 10
+	db "Route 20 House@"
 New_Bark_Map_Name11: ; map_const DAY_OF_WEEK_SIBLINGS_HOUSE ; 11
 	db "Day Siblings House@"
 New_Bark_Map_Name12: ; map_const ROUTE_19_SANDSTORM_HOUSE ; 12

@@ -36,8 +36,8 @@ Route9_Blocks:
 Route2_Blocks:
 	INCBIN "maps/Route2.blk"
 
-Route26_Blocks:
-	INCBIN "maps/Route26.blk"
+Route20_Blocks:
+	INCBIN "maps/Route20.blk"
 
 BattlePlazaMagnetTrainStation_Blocks:
 	INCBIN "maps/BattlePlazaMagnetTrainStation.blk"
@@ -92,7 +92,7 @@ CianwoodPhotoStudio_Blocks:
 CianwoodLugiaSpeechHouse_Blocks:
 PokeSeersHouse_Blocks:
 PlayersNeighborsHouse_Blocks:
-Route26HealHouse_Blocks:
+Route20HealHouse_Blocks:
 DayOfWeekSiblingsHouse_Blocks:
 Route19SandstormHouse_Blocks:
 CherrygroveGymSpeechHouse_Blocks:

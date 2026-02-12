@@ -70,8 +70,8 @@ DayOfWeekSiblingsHousePokedexText3:
 
 DayOfWeekSiblingsHouse_MapEvents:
 	def_warp_events
-	warp_event  2,  7, ROUTE_26, 3
-	warp_event  3,  7, ROUTE_26, 3
+	warp_event  2,  7, ROUTE_20, 3
+	warp_event  3,  7, ROUTE_20, 3
 
 	def_coord_events
 

@@ -6,12 +6,12 @@ BethPhoneCalleeScript:
 	farsjump BethHangUpScript
 
 .WantsBattle:
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_26
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_20
 	farsjump BethBattleReminderScript
 
 BethPhoneCallerScript:
 	gettrainername STRING_BUFFER_3, COOLTRAINERF, BETH1
 	farscall PhoneScript_GreetPhone_Female
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_26
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_20
 	setflag ENGINE_BETH_READY_FOR_REMATCH
 	farsjump PhoneScript_WantsToBattle_Female

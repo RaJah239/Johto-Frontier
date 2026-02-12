@@ -50,7 +50,7 @@
 	const LANDMARK_ROUTE_18          ; 2d
 	const LANDMARK_TOHJO_FALLS       ; 5d
 	const LANDMARK_ROUTE_19          ; 5c
-	const LANDMARK_ROUTE_26          ; 5b
+	const LANDMARK_ROUTE_20          ; 5b
 	const LANDMARK_VICTORY_ROAD      ; 58
 	const LANDMARK_ROUTE_23          ; 59
 	const LANDMARK_INDIGO_PLATEAU    ; 5a

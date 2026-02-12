@@ -302,7 +302,7 @@ ENDM
 	endgroup
 
 	newgroup NEW_BARK                                             ; 24
-	map_const ROUTE_26,                                    10, 54 ;  1
+	map_const ROUTE_20,                                    10, 54 ;  1
 	map_const ROUTE_19,                                    40,  9 ;  2
 	map_const ROUTE_1,                                     30,  9 ;  3
 	map_const NEW_BARK_TOWN,                               10,  9 ;  4
@@ -311,7 +311,7 @@ ENDM
 	map_const PLAYERS_HOUSE_2F,                             4,  3 ;  7
 	map_const PLAYERS_NEIGHBORS_HOUSE,                      4,  4 ;  8
 	map_const ELMS_HOUSE,                                   4,  4 ;  9
-	map_const ROUTE_26_HEAL_HOUSE,                          4,  4 ; 10
+	map_const ROUTE_20_HEAL_HOUSE,                          4,  4 ; 10
 	map_const DAY_OF_WEEK_SIBLINGS_HOUSE,                   4,  4 ; 11
 	map_const ROUTE_19_SANDSTORM_HOUSE,                     4,  4 ; 12
 	map_const ROUTE_1_ROUTE_18_GATE,                        5,  4 ; 13

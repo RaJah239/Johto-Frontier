@@ -142,12 +142,12 @@ ENDM
 	connection south, Route17, ROUTE_17, 0
 	connection west, Route16, ROUTE_16, 9
 
-	map_attributes Route26, ROUTE_26, $05, WEST
+	map_attributes Route20, ROUTE_20, $05, WEST
 	connection west, Route19, ROUTE_19, 45
 
 	map_attributes Route19, ROUTE_19, $35, WEST | EAST
 	connection west, NewBarkTown, NEW_BARK_TOWN, 0
-	connection east, Route26, ROUTE_26, -45
+	connection east, Route20, ROUTE_20, -45
 
 	map_attributes Route1, ROUTE_1, $05, NORTH | WEST | EAST
 	connection north, Route18, ROUTE_18, 10
@@ -429,7 +429,7 @@ ENDM
 	map_attributes PlayersHouse2F, PLAYERS_HOUSE_2F, $00, 0
 	map_attributes PlayersNeighborsHouse, PLAYERS_NEIGHBORS_HOUSE, $00, 0
 	map_attributes ElmsHouse, ELMS_HOUSE, $00, 0
-	map_attributes Route26HealHouse, ROUTE_26_HEAL_HOUSE, $00, 0
+	map_attributes Route20HealHouse, ROUTE_20_HEAL_HOUSE, $00, 0
 	map_attributes DayOfWeekSiblingsHouse, DAY_OF_WEEK_SIBLINGS_HOUSE, $00, 0
 	map_attributes Route19SandstormHouse, ROUTE_19_SANDSTORM_HOUSE, $00, 0
 	map_attributes Route1Route18Gate, ROUTE_1_ROUTE_18_GATE, $00, 0
