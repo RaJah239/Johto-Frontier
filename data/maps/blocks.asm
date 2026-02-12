@@ -6,8 +6,8 @@ Route4_Blocks:
 Route40_Blocks:
 	INCBIN "maps/Route40.blk"
 
-Route36_Blocks:
-	INCBIN "maps/Route36.blk"
+Route8_Blocks:
+	INCBIN "maps/Route8.blk"
 
 Route44_Blocks:
 	INCBIN "maps/Route44.blk"
@@ -104,7 +104,7 @@ Route2BerryHouse_Blocks:
 Route43MahoganyGate_Blocks:
 Route43Gate_Blocks:
 Route7GoldenrodGate_Blocks:
-Route36RuinsOfAlphGate_Blocks:
+Route8RuinsOfAlphGate_Blocks:
 Route6IlexForestGate_Blocks:
 Route40BattleTowerGate_Blocks:
 Route29Route46Gate_Blocks:
@@ -521,8 +521,8 @@ GoldenrodGameCorner_Blocks:
 Route7NationalParkGate_Blocks:
 	INCBIN "maps/Route7NationalParkGate.blk"
 
-Route36NationalParkGate_Blocks:
-	INCBIN "maps/Route36NationalParkGate.blk"
+Route8NationalParkGate_Blocks:
+	INCBIN "maps/Route8NationalParkGate.blk"
 
 OlivinePort_Blocks:
 	INCBIN "maps/OlivinePort.blk"

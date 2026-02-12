@@ -22,8 +22,8 @@ MapScenes::
 	scene_var ELMS_LAB,                                    wElmsLabSceneID
 	scene_var PLAYERS_HOUSE_1F,                            wPlayersHouse1FSceneID
 	scene_var ROUTE_7_NATIONAL_PARK_GATE,                  wRoute7NationalParkGateSceneID
-	scene_var ROUTE_36,                                    wRoute36SceneID
-	scene_var ROUTE_36_NATIONAL_PARK_GATE,                 wRoute36NationalParkGateSceneID
+	scene_var ROUTE_8,                                     wRoute8SceneID
+	scene_var ROUTE_8_NATIONAL_PARK_GATE,                  wRoute8NationalParkGateSceneID
 	scene_var AZALEA_TOWN,                                 wAzaleaTownSceneID
 	scene_var GOLDENROD_GYM,                               wGoldenrodGymSceneID
 	scene_var GOLDENROD_MAGNET_TRAIN_STATION,              wGoldenrodMagnetTrainStationSceneID

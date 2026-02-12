@@ -114,7 +114,7 @@ InitMapNameSign::
 	ld a, [wMapNumber]
 	cp MAP_ROUTE_7_NATIONAL_PARK_GATE
 	ret z
-	cp MAP_ROUTE_36_NATIONAL_PARK_GATE
+	cp MAP_ROUTE_8_NATIONAL_PARK_GATE
 	ret
 
 PlaceMapNameSign::

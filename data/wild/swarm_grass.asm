@@ -3,7 +3,7 @@
 SwarmGrassWildMons:
 
 ; Bulbasaur swarm
-	map_id ROUTE_36
+	map_id ROUTE_8
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 3, TURTWIG

@@ -81,8 +81,8 @@ INCLUDE "maps/Route4RuinsOfAlphGate.asm"
 INCLUDE "maps/Route4Pokecenter1F.asm"
 INCLUDE "maps/Route7GoldenrodGate.asm"
 INCLUDE "maps/Route7NationalParkGate.asm"
-INCLUDE "maps/Route36RuinsOfAlphGate.asm"
-INCLUDE "maps/Route36NationalParkGate.asm"
+INCLUDE "maps/Route8RuinsOfAlphGate.asm"
+INCLUDE "maps/Route8NationalParkGate.asm"
 
 
 SECTION "Map Scripts 6", ROMX
@@ -261,7 +261,7 @@ INCLUDE "maps/MobileBattleRoom.asm"
 
 SECTION "Map Scripts 18", ROMX
 
-INCLUDE "maps/Route36.asm"
+INCLUDE "maps/Route8.asm"
 INCLUDE "maps/BlackthornGym1F.asm"
 INCLUDE "maps/BlackthornGym2F.asm"
 INCLUDE "maps/BlackthornDragonSpeechHouse.asm"

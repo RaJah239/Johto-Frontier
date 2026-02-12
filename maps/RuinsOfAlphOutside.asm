@@ -278,7 +278,7 @@ RuinsOfAlphOutside_MapEvents:
 	warp_event 10, 13, RUINS_OF_ALPH_INNER_CHAMBER, 1
 	warp_event  6, 19, UNION_CAVE_B1F, 1
 	warp_event  6, 27, UNION_CAVE_B1F, 2
-	warp_event  7,  5, ROUTE_36_RUINS_OF_ALPH_GATE, 3
+	warp_event  7,  5, ROUTE_8_RUINS_OF_ALPH_GATE, 3
 	warp_event 13, 20, ROUTE_4_RUINS_OF_ALPH_GATE, 1
 	warp_event 13, 21, ROUTE_4_RUINS_OF_ALPH_GATE, 2
 

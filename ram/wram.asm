@@ -3136,8 +3136,8 @@ wNewBarkTownSceneID::                             db
 wElmsLabSceneID::                                 db
 wPlayersHouse1FSceneID::                          db
 wRoute7NationalParkGateSceneID::                  db
-wRoute36SceneID::                                 db
-wRoute36NationalParkGateSceneID::                 db
+wRoute8SceneID::                                  db
+wRoute8NationalParkGateSceneID::                  db
 wAzaleaTownSceneID::                              db
 wGoldenrodGymSceneID::                            db
 wGoldenrodMagnetTrainStationSceneID::             db

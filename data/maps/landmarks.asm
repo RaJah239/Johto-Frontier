@@ -28,7 +28,7 @@ Landmarks:
 	landmark  42,  92, RadioTowerName
 	landmark  44,  76, Route7Name
 	landmark  44,  60, NationalParkName
-	landmark  60,  60, Route36Name
+	landmark  60,  60, Route8Name
 	landmark  60,  52, Route37Name
 	landmark  60,  44, EcruteakCityName
 	landmark  62,  42, TinTowerName
@@ -104,7 +104,7 @@ Route4Name:          db "Route 4@"
 Route5Name:          db "Route 5@"
 Route6Name:          db "Route 6@"
 Route7Name:          db "Route 7@"
-Route36Name:         db "Route 36@"
+Route8Name:          db "Route 8@"
 Route37Name:         db "Route 37@"
 Route38Name:         db "Route 38@"
 Route39Name:         db "Route 39@"

@@ -56,7 +56,7 @@ DayOfWeekSiblingsHousePokedexText3:
 	line "LAKE OF RAGE"
 
 	para "Thursday, ARTHUR"
-	line "ROUTE 36"
+	line "ROUTE 8"
 
 	para "Friday, FRIEDA"
 	line "ROUTE 4"

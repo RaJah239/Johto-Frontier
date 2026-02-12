@@ -107,7 +107,7 @@ ENDM
 
 	map_attributes VioletCity, VIOLET_CITY, $05, SOUTH | WEST | EAST
 	connection south, Route4, ROUTE_4, 0
-	connection west, Route36, ROUTE_36, 0
+	connection west, Route8, ROUTE_8, 0
 	connection east, Route3, ROUTE_3, 9
 
 	map_attributes AzaleaTown, AZALEA_TOWN, $05, WEST | EAST
@@ -175,17 +175,17 @@ ENDM
 	connection east, AzaleaTown, AZALEA_TOWN, 18
 
 	map_attributes Route7, ROUTE_7, $05, NORTH | SOUTH
-	connection north, Route36, ROUTE_36, 0
+	connection north, Route8, ROUTE_8, 0
 	connection south, GoldenrodCity, GOLDENROD_CITY, -5
 
-	map_attributes Route36, ROUTE_36, $05, NORTH | SOUTH | EAST
+	map_attributes Route8, ROUTE_8, $05, NORTH | SOUTH | EAST
 	connection north, Route37, ROUTE_37, 10
 	connection south, Route7, ROUTE_7, 0
 	connection east, VioletCity, VIOLET_CITY, 0
 
 	map_attributes Route37, ROUTE_37, $05, NORTH | SOUTH
 	connection north, EcruteakCity, ECRUTEAK_CITY, -5
-	connection south, Route36, ROUTE_36, -10
+	connection south, Route8, ROUTE_8, -10
 
 	map_attributes Route38, ROUTE_38, $05, WEST | EAST
 	connection west, Route39, ROUTE_39, -7
@@ -358,8 +358,8 @@ ENDM
 	map_attributes Route4Pokecenter1F, ROUTE_4_POKECENTER_1F, $00, 0
 	map_attributes Route7GoldenrodGate, ROUTE_7_GOLDENROD_GATE, $00, 0
 	map_attributes Route7NationalParkGate, ROUTE_7_NATIONAL_PARK_GATE, $00, 0
-	map_attributes Route36RuinsOfAlphGate, ROUTE_36_RUINS_OF_ALPH_GATE, $00, 0
-	map_attributes Route36NationalParkGate, ROUTE_36_NATIONAL_PARK_GATE, $00, 0
+	map_attributes Route8RuinsOfAlphGate, ROUTE_8_RUINS_OF_ALPH_GATE, $00, 0
+	map_attributes Route8NationalParkGate, ROUTE_8_NATIONAL_PARK_GATE, $00, 0
 	map_attributes GoldenrodGym, GOLDENROD_GYM, $00, 0
 	map_attributes GoldenrodBikeShop, GOLDENROD_BIKE_SHOP, $00, 0
 	map_attributes GoldenrodHappinessRater, GOLDENROD_HAPPINESS_RATER, $00, 0

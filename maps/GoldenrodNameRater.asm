@@ -38,7 +38,7 @@ SwarmGrampsScript:
 
 .bulbasaur
 	setflag ENGINE_SWARM
-	swarm ROUTE_36
+	swarm ROUTE_8
 	writetext SwarmBulbasaurText
 	sjump .WrappingUpSwarms
 
@@ -101,7 +101,7 @@ GeneralPreSwarmText:
 SwarmBulbasaurText:
 	text "There's a swarm of"
 	line "BULBASAUR at"
-	cont "ROUTE 36!"
+	cont "ROUTE 8!"
 	done
 	
 SwarmCharmanderText:

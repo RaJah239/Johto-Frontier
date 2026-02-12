@@ -219,7 +219,7 @@ Violet_Map_Names: ;newgroup VIOLET
 	table_width 2, Violet_Map_Names                                               ; 10
 	dw Violet_Map_Name1 ; map_const ROUTE_4,;  1
 	dw Violet_Map_Name2 ; map_const ROUTE_7,;  2
-	dw Violet_Map_Name3 ; map_const ROUTE_36,;  3
+	dw Violet_Map_Name3 ; map_const ROUTE_8,;  3
 	dw Violet_Map_Name4 ; map_const ROUTE_37,;  4
 	dw Violet_Map_Name5 ; map_const VIOLET_CITY ; 5
 	dw Violet_Map_Name6 ; map_const VIOLET_MART ;  6
@@ -232,8 +232,8 @@ Violet_Map_Names: ;newgroup VIOLET
 	dw Violet_Map_Name13 ; map_const ROUTE_4_POKECENTER_1F ; 13
 	dw Violet_Map_Name14 ; map_const ROUTE_7_GOLDENROD_GATE ; 14
 	dw Violet_Map_Name15 ; map_const ROUTE_7_NATIONAL_PARK_GATE ; 15
-	dw Violet_Map_Name16 ; map_const ROUTE_36_RUINS_OF_ALPH_GATE ; 16
-	dw Violet_Map_Name17 ; map_const ROUTE_36_NATIONAL_PARK_GATE ; 17
+	dw Violet_Map_Name16 ; map_const ROUTE_8_RUINS_OF_ALPH_GATE ; 16
+	dw Violet_Map_Name17 ; map_const ROUTE_8_NATIONAL_PARK_GATE ; 17
 	assert_table_length NUM_VIOLET_MAPS
 
 Goldenrod_Map_Names: ;newgroup GOLDENROD
@@ -665,8 +665,8 @@ Violet_Map_Name1: ; map_const ROUTE_4,;  1
 	db "Route 4@"
 Violet_Map_Name2: ; map_const ROUTE_7,;  2
 	db "Route 7@"
-Violet_Map_Name3: ; map_const ROUTE_36,;  3
-	db "Route 36@"
+Violet_Map_Name3: ; map_const ROUTE_8,;  3
+	db "Route 8@"
 Violet_Map_Name4: ; map_const ROUTE_37,;  4
 	db "Route 37@"
 Violet_Map_Name5: ; map_const VIOLET_CITY,;  5
@@ -691,10 +691,10 @@ Violet_Map_Name14: ; map_const ROUTE_7_GOLDENROD_GATE ; 14
 	db "Route 7-Gold Gate@"
 Violet_Map_Name15: ; map_const ROUTE_7_NATIONAL_PARK_GATE ; 15
 	db "Route 7-Park Gate@"
-Violet_Map_Name16: ; map_const ROUTE_36_RUINS_OF_ALPH_GATE ; 16
-	db "Route 36-Ruin Gate@"
-Violet_Map_Name17: ; map_const ROUTE_36_NATIONAL_PARK_GATE ; 17
-	db "Route 36-Park Gate@"
+Violet_Map_Name16: ; map_const ROUTE_8_RUINS_OF_ALPH_GATE ; 16
+	db "Route 8-Ruin Gate@"
+Violet_Map_Name17: ; map_const ROUTE_8_NATIONAL_PARK_GATE ; 17
+	db "Route 8-Park Gate@"
 
 Goldenrod_Map_Name1: ; map_const ROUTE_6,;  1
 	db "Route 6@"

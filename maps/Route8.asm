@@ -1,50 +1,50 @@
 	object_const_def
-	const ROUTE36_YOUNGSTER1
-	const ROUTE36_YOUNGSTER2
-	const ROUTE36_WEIRD_TREE
-	const ROUTE36_LASS1
-	const ROUTE36_FISHER
-	const ROUTE36_ARTHUR
-	const ROUTE36_FLORIA
-	const ROUTE36_SUICUNE
-	const ROUTE36_BERRY_TREE1
-	const ROUTE36_BERRY_TREE2
-	const ROUTE36_APRICORN_TREE1
+	const ROUTE8_YOUNGSTER1
+	const ROUTE8_YOUNGSTER2
+	const ROUTE8_WEIRD_TREE
+	const ROUTE8_LASS1
+	const ROUTE8_FISHER
+	const ROUTE8_ARTHUR
+	const ROUTE8_FLORIA
+	const ROUTE8_SUICUNE
+	const ROUTE8_BERRY_TREE1
+	const ROUTE8_BERRY_TREE2
+	const ROUTE8_APRICORN_TREE1
 
-Route36_MapScripts:
+Route8_MapScripts:
 	def_scene_scripts
-	scene_script Route36Noop1Scene, SCENE_ROUTE36_NOOP
-	scene_script Route36Noop2Scene, SCENE_ROUTE36_SUICUNE
+	scene_script Route8Noop1Scene, SCENE_ROUTE8_NOOP
+	scene_script Route8Noop2Scene, SCENE_ROUTE8_SUICUNE
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, Route36ArthurCallback
+	callback MAPCALLBACK_OBJECTS, Route8ArthurCallback
 
-Route36Noop1Scene:
+Route8Noop1Scene:
 	end
 
-Route36Noop2Scene:
+Route8Noop2Scene:
 	end
 
-Route36ArthurCallback:
+Route8ArthurCallback:
 	readvar VAR_WEEKDAY
 	ifequal THURSDAY, .ArthurAppears
-	disappear ROUTE36_ARTHUR
+	disappear ROUTE8_ARTHUR
 	endcallback
 
 .ArthurAppears:
-	appear ROUTE36_ARTHUR
+	appear ROUTE8_ARTHUR
 	endcallback
 
-Route36SuicuneScript:
+Route8SuicuneScript:
 	showemote EMOTE_SHOCK, PLAYER, 15
 	pause 15
 	playsound SFX_WARP_FROM
 	turnobject PLAYER, UP
-	applymovement ROUTE36_SUICUNE, Route36SuicuneMovement
-	disappear ROUTE36_SUICUNE
+	applymovement ROUTE8_SUICUNE, Route8SuicuneMovement
+	disappear ROUTE8_SUICUNE
 	turnobject PLAYER, DOWN
 	pause 10
-	setscene SCENE_ROUTE36_NOOP
+	setscene SCENE_ROUTE8_NOOP
 	clearevent EVENT_SAW_SUICUNE_AT_CIANWOOD_CITY
 	setmapscene CIANWOOD_CITY, SCENE_CIANWOODCITY_SUICUNE_AND_EUSINE
 	end
@@ -55,7 +55,7 @@ SudowoodoScript:
 
 	waitsfx
 	playsound SFX_SANDSTORM
-	applymovement ROUTE36_WEIRD_TREE, SudowoodoShakeMovement
+	applymovement ROUTE8_WEIRD_TREE, SudowoodoShakeMovement
 	end
 
 .Fight:
@@ -71,7 +71,7 @@ WateredWeirdTreeScript:: ; export (for when you use Squirtbottle from pack)
 	closetext
 	waitsfx
 	playsound SFX_SANDSTORM
-	applymovement ROUTE36_WEIRD_TREE, SudowoodoShakeMovement
+	applymovement ROUTE8_WEIRD_TREE, SudowoodoShakeMovement
 	opentext
 	writetext SudowoodoAttackedText
 	waitbutton
@@ -81,7 +81,7 @@ WateredWeirdTreeScript:: ; export (for when you use Squirtbottle from pack)
 	startbattle
 	setevent EVENT_FOUGHT_SUDOWOODO
 	ifequal DRAW, DidntCatchSudowoodo
-	disappear ROUTE36_WEIRD_TREE
+	disappear ROUTE8_WEIRD_TREE
 	reloadmapafterbattle
 	end
 
@@ -91,12 +91,12 @@ DidntUseSquirtbottleScript:
 
 DidntCatchSudowoodo:
 	reloadmapafterbattle
-	applymovement ROUTE36_WEIRD_TREE, WeirdTreeMovement_Flee
-	disappear ROUTE36_WEIRD_TREE
+	applymovement ROUTE8_WEIRD_TREE, WeirdTreeMovement_Flee
+	disappear ROUTE8_WEIRD_TREE
 	special RefreshSprites
 	end
 
-Route36FloriaScript:
+Route8FloriaScript:
 	faceplayer
 	opentext
 	checkevent EVENT_TALKED_TO_FLORIA_AT_FLOWER_SHOP
@@ -108,13 +108,13 @@ Route36FloriaScript:
 	clearevent EVENT_FLORIA_AT_FLOWER_SHOP
 	readvar VAR_FACING
 	ifequal UP, .Up
-	applymovement ROUTE36_FLORIA, FloriaMovement1
-	disappear ROUTE36_FLORIA
+	applymovement ROUTE8_FLORIA, FloriaMovement1
+	disappear ROUTE8_FLORIA
 	end
 
 .Up:
-	applymovement ROUTE36_FLORIA, FloriaMovement2
-	disappear ROUTE36_FLORIA
+	applymovement ROUTE8_FLORIA, FloriaMovement2
+	disappear ROUTE8_FLORIA
 	end
 
 .SecondTimeTalking:
@@ -123,7 +123,7 @@ Route36FloriaScript:
 	closetext
 	end
 
-Route36RockSmashGuyScript:
+Route8RockSmashGuyScript:
 	faceplayer
 	opentext
 	checkevent EVENT_GOT_TM08_ROCK_SMASH
@@ -148,18 +148,18 @@ Route36RockSmashGuyScript:
 	closetext
 	end
 
-Route36LassScript:
+Route8LassScript:
 	faceplayer
 	opentext
 	checkevent EVENT_FOUGHT_SUDOWOODO
 	iftrue .ClearedSudowoodo
-	writetext Route36LassText
+	writetext Route8LassText
 	waitbutton
 	closetext
 	end
 
 .ClearedSudowoodo:
-	writetext Route36LassText_ClearedSudowoodo
+	writetext Route8LassText_ClearedSudowoodo
 	waitbutton
 	closetext
 	end
@@ -324,17 +324,17 @@ ArthurNotThursdayScript:
 	closetext
 	end
 
-Route36Sign:
-	jumptext Route36SignText
+Route8Sign:
+	jumptext Route8SignText
 
 RuinsOfAlphNorthSign:
 	jumptext RuinsOfAlphNorthSignText
 
-Route36TrainerTips1:
-	jumptext Route36TrainerTips1Text
+Route8TrainerTips1:
+	jumptext Route8TrainerTips1Text
 
-Route36TrainerTips2:
-	jumptext Route36TrainerTips2Text
+Route8TrainerTips2:
+	jumptext Route8TrainerTips2Text
 
 SudowoodoShakeMovement:
 	tree_shake
@@ -369,7 +369,7 @@ FloriaMovement2:
 	step LEFT
 	step_end
 
-Route36SuicuneMovement:
+Route8SuicuneMovement:
 	set_sliding
 	fast_jump_step DOWN
 	fast_jump_step DOWN
@@ -483,7 +483,7 @@ RockSmashGuyText3:
 	cont "in battle too!"
 	done
 
-Route36LassText:
+Route8LassText:
 	text "An odd tree is"
 	line "blocking the way"
 	cont "to GOLDENROD CITY."
@@ -495,7 +495,7 @@ Route36LassText:
 	line "be done about it."
 	done
 
-Route36LassText_ClearedSudowoodo:
+Route8LassText_ClearedSudowoodo:
 	text "That odd tree dis-"
 	line "appeared without a"
 	cont "trace."
@@ -579,8 +579,8 @@ ArthurNotThursdayText:
 	cont "disappointing."
 	done
 
-Route36SignText:
-	text "ROUTE 36"
+Route8SignText:
+	text "ROUTE 8"
 	done
 
 RuinsOfAlphNorthSignText:
@@ -588,7 +588,7 @@ RuinsOfAlphNorthSignText:
 	line "NORTH ENTRANCE"
 	done
 
-Route36TrainerTips1Text:
+Route8TrainerTips1Text:
 	text "TRAINER TIPS"
 
 	para "#MON stats"
@@ -605,7 +605,7 @@ Route36TrainerTips1Text:
 	line "#MON grow."
 	done
 
-Route36TrainerTips2Text:
+Route8TrainerTips2Text:
 	text "TRAINER TIPS"
 
 	para "Use DIG to return"
@@ -619,121 +619,121 @@ Route36TrainerTips2Text:
 	line "landmarks."
 	done
 
-Route36BerryTree1:
+Route8BerryTree1:
 	opentext
 	getitemname STRING_BUFFER_3, ICE_BERRY
-	writetext Route36TreeText
+	writetext Route8TreeText
 	promptbutton
-	writetext Route36HeyItsBerryApricornText
+	writetext Route8HeyItsBerryApricornText
 	promptbutton
 	giveitem ICE_BERRY
-	iffalse Route36NoRoomInBag
-	disappear ROUTE36_BERRY_TREE1
-	writetext Route36FoundItemText
+	iffalse Route8NoRoomInBag
+	disappear ROUTE8_BERRY_TREE1
+	writetext Route8FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route36BerryTree2:
+Route8BerryTree2:
 	opentext
 	getitemname STRING_BUFFER_3, BERRY
-	writetext Route36TreeText
+	writetext Route8TreeText
 	promptbutton
-	writetext Route36HeyItsBerryApricornText
+	writetext Route8HeyItsBerryApricornText
 	promptbutton
 	giveitem BERRY
-	iffalse Route36NoRoomInBag
-	disappear ROUTE36_BERRY_TREE2
-	writetext Route36FoundItemText
+	iffalse Route8NoRoomInBag
+	disappear ROUTE8_BERRY_TREE2
+	writetext Route8FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route36ApricornTree1:
+Route8ApricornTree1:
 	opentext
 	getitemname STRING_BUFFER_3, PNK_APRICORN
-	writetext Route36TreeText
+	writetext Route8TreeText
 	promptbutton
-	writetext Route36HeyItsBerryApricornText
+	writetext Route8HeyItsBerryApricornText
 	promptbutton
 	giveitem PNK_APRICORN
-	iffalse Route36NoRoomInBag
-	disappear ROUTE36_APRICORN_TREE1
-	writetext Route36FoundItemText
+	iffalse Route8NoRoomInBag
+	disappear ROUTE8_APRICORN_TREE1
+	writetext Route8FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route36NoBerryOrApricorn:
+Route8NoBerryOrApricorn:
 	opentext
-	writetext Route36TreeText
+	writetext Route8TreeText
 	promptbutton
-	writetext Route36NothingHereText
+	writetext Route8NothingHereText
 	waitbutton
 	closetext
 	end
 
-Route36NoRoomInBag:
-	writetext Route36NoRoomInBagText
+Route8NoRoomInBag:
+	writetext Route8NoRoomInBagText
 	waitbutton
 	closetext
 	end
 
-Route36TreeText:
+Route8TreeText:
 	text_far _FruitBearingTreeText
 	text_end
 
-Route36NothingHereText:
+Route8NothingHereText:
 	text_far _NothingHereText
 	text_end
 
-Route36HeyItsBerryApricornText:
+Route8HeyItsBerryApricornText:
 	text_far _HeyItsFruitText
 	text_end
 
-Route36FoundItemText:
+Route8FoundItemText:
 	text_far _ObtainedFruitText
 	text_end
 
-Route36NoRoomInBagText:
+Route8NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
-Route36_MapEvents:
+Route8_MapEvents:
 	def_warp_events
-	warp_event 18,  8, ROUTE_36_NATIONAL_PARK_GATE, 3
-	warp_event 18,  9, ROUTE_36_NATIONAL_PARK_GATE, 4
-	warp_event 47, 13, ROUTE_36_RUINS_OF_ALPH_GATE, 1
-	warp_event 48, 13, ROUTE_36_RUINS_OF_ALPH_GATE, 2
+	warp_event 18,  8, ROUTE_8_NATIONAL_PARK_GATE, 3
+	warp_event 18,  9, ROUTE_8_NATIONAL_PARK_GATE, 4
+	warp_event 47, 13, ROUTE_8_RUINS_OF_ALPH_GATE, 1
+	warp_event 48, 13, ROUTE_8_RUINS_OF_ALPH_GATE, 2
 
 	def_coord_events
-	coord_event 20,  7, SCENE_ROUTE36_SUICUNE, Route36SuicuneScript
-	coord_event 22,  7, SCENE_ROUTE36_SUICUNE, Route36SuicuneScript
+	coord_event 20,  7, SCENE_ROUTE8_SUICUNE, Route8SuicuneScript
+	coord_event 22,  7, SCENE_ROUTE8_SUICUNE, Route8SuicuneScript
 
 	def_bg_events
-	bg_event 29,  1, BGEVENT_READ, Route36TrainerTips2
+	bg_event 29,  1, BGEVENT_READ, Route8TrainerTips2
 	bg_event 45, 11, BGEVENT_READ, RuinsOfAlphNorthSign
-	bg_event 55,  7, BGEVENT_READ, Route36Sign
-	bg_event 21,  7, BGEVENT_READ, Route36TrainerTips1
-	bg_event 21,  4, BGEVENT_READ, Route36NoBerryOrApricorn
-	bg_event 50,  4, BGEVENT_READ, Route36NoBerryOrApricorn
-	bg_event 51,  5, BGEVENT_READ, Route36NoBerryOrApricorn
+	bg_event 55,  7, BGEVENT_READ, Route8Sign
+	bg_event 21,  7, BGEVENT_READ, Route8TrainerTips1
+	bg_event 21,  4, BGEVENT_READ, Route8NoBerryOrApricorn
+	bg_event 50,  4, BGEVENT_READ, Route8NoBerryOrApricorn
+	bg_event 51,  5, BGEVENT_READ, Route8NoBerryOrApricorn
 
 	def_object_events
 	object_event 20, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerPsychicMark, -1
 	object_event 31, 14, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 5, TrainerSchoolboyAlan1, -1
-	object_event 37,  6, SPRITE_SUDOWOODO, SPRITEMOVEDATA_SUDOWOODO, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SudowoodoScript, EVENT_ROUTE_36_SUDOWOODO
-	object_event 51,  8, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route36LassScript, -1
-	object_event 44,  9, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route36RockSmashGuyScript, -1
-	object_event 46,  6, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ArthurScript, EVENT_ROUTE_36_ARTHUR_OF_THURSDAY
-	object_event 33, 12, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route36FloriaScript, EVENT_FLORIA_AT_SUDOWOODO
-	object_event 21,  6, SPRITE_SUICUNE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_SAW_SUICUNE_ON_ROUTE_36
-	object_event 21,  4, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_WHITE, OBJECTTYPE_SCRIPT, 0, Route36BerryTree1, EVENT_ROUTE_36_BERRY_1
-	object_event 51,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route36BerryTree2, EVENT_ROUTE_36_BERRY_2
-	object_event 50,  4, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route36ApricornTree1, EVENT_ROUTE_36_APRICORN_1
+	object_event 37,  6, SPRITE_SUDOWOODO, SPRITEMOVEDATA_SUDOWOODO, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SudowoodoScript, EVENT_ROUTE_8_SUDOWOODO
+	object_event 51,  8, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route8LassScript, -1
+	object_event 44,  9, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route8RockSmashGuyScript, -1
+	object_event 46,  6, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ArthurScript, EVENT_ROUTE_8_ARTHUR_OF_THURSDAY
+	object_event 33, 12, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route8FloriaScript, EVENT_FLORIA_AT_SUDOWOODO
+	object_event 21,  6, SPRITE_SUICUNE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_SAW_SUICUNE_ON_ROUTE_8
+	object_event 21,  4, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_WHITE, OBJECTTYPE_SCRIPT, 0, Route8BerryTree1, EVENT_ROUTE_8_BERRY_1
+	object_event 51,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route8BerryTree2, EVENT_ROUTE_8_BERRY_2
+	object_event 50,  4, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route8ApricornTree1, EVENT_ROUTE_8_APRICORN_1
