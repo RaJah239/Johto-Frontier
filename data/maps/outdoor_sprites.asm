@@ -24,7 +24,7 @@ OutdoorSprites:
 	assert_table_length NUM_MAP_GROUPS
 
 IndigoGroupSprites:
-; Route23
+; Route21
 	; 0 of max 9 walking sprites
 	db 0 ; end
 

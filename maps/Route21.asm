@@ -1,25 +1,25 @@
-Route23_MapScripts:
+Route21_MapScripts:
 	def_scene_scripts
-	scene_script Route23ForcedToLeaveScene, SCENE_ROUTE_23_FORCED_TO_LEAVE
-	scene_script Route23NoopScene,          SCENE_ROUTE_23_NOOP
+	scene_script Route21ForcedToLeaveScene, SCENE_ROUTE_21_FORCED_TO_LEAVE
+	scene_script Route21NoopScene,          SCENE_ROUTE_21_NOOP
 
 	def_callbacks
-	callback MAPCALLBACK_NEWMAP, Route23FlypointCallback
+	callback MAPCALLBACK_NEWMAP, Route21FlypointCallback
 
-Route23FlypointCallback:
+Route21FlypointCallback:
 	setflag ENGINE_FLYPOINT_ROUTE_20
 	setflag ENGINE_FLYPOINT_INDIGO_PLATEAU
 	endcallback
 
-Route23ForcedToLeaveScene:
+Route21ForcedToLeaveScene:
 	sdefer NoWarpingHereFirstTime
 	; fallthrough
 
-Route23NoopScene:
+Route21NoopScene:
 	end
 
 NoWarpingHereFirstTime:
-	applymovement PLAYER, Route23_StepDownMovement
+	applymovement PLAYER, Route21_StepDownMovement
 	opentext
 	writetext FirstTimeHereNoticeText
 	waitbutton
@@ -29,7 +29,7 @@ NoWarpingHereFirstTime:
 	warp NEW_BARK_TOWN, 13, 6
 	end
 
-Route23_StepDownMovement:
+Route21_StepDownMovement:
 	step DOWN
 	step_end
 
@@ -63,7 +63,7 @@ NurseJoyTrainingSignText:
 	cont "#mon League!"
 	done
 
-Route23_MapEvents:
+Route21_MapEvents:
 	def_warp_events
 	warp_event  9,  5, INDIGO_PLATEAU_POKECENTER_1F, 1
 	warp_event 10,  5, INDIGO_PLATEAU_POKECENTER_1F, 2

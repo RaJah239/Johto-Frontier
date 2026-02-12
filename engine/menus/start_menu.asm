@@ -647,7 +647,7 @@ Fast_Travel_Warp_Locations:
 	map_id LAKE_OF_RAGE
 	map_id BLACKTHORN_CITY
 	map_id ROUTE_20
-	map_id ROUTE_23
+	map_id ROUTE_21
 DEF NUM_FAST_TRAVEL_WARP_MAPS EQU (@ - {CURRENT_TABLE_START}) / CURRENT_TABLE_WIDTH
 
 ; map_names.asm

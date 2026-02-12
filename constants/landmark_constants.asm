@@ -52,7 +52,7 @@
 	const LANDMARK_ROUTE_19          ; 5c
 	const LANDMARK_ROUTE_20          ; 5b
 	const LANDMARK_VICTORY_ROAD      ; 58
-	const LANDMARK_ROUTE_23          ; 59
+	const LANDMARK_ROUTE_21          ; 59
 	const LANDMARK_INDIGO_PLATEAU    ; 5a
 	const LANDMARK_BATTLE_PLAZA      ; 1d
 DEF KANTO_LANDMARK EQU const_value

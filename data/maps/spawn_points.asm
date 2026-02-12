@@ -30,7 +30,7 @@ endc
 	spawn LAKE_OF_RAGE,               21, 29
 	spawn BLACKTHORN_CITY,            21, 30
 	spawn ROUTE_20,                   15, 58
-	spawn ROUTE_23,                    9,  6
+	spawn ROUTE_21,                    9,  6
 	spawn SILVER_CAVE_OUTSIDE,        25, 20
 	spawn N_A,                        -1, -1
 

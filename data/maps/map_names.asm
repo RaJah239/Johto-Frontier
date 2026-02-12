@@ -281,7 +281,7 @@ Fast_Ship_Map_Names: ;newgroup FAST_SHIP
 
 Indigo_Map_Names: ;newgroup INDIGO
 	table_width 2, Indigo_Map_Names                                               ; 16
-	dw Indigo_Map_Name1 ; map_const ROUTE_23,                                    10,  9 ;  1
+	dw Indigo_Map_Name1 ; map_const ROUTE_21,                                    10,  9 ;  1
 	dw Indigo_Map_Name2 ; map_const INDIGO_PLATEAU_POKECENTER_1F ;  2
 	dw Indigo_Map_Name3 ; map_const WILLS_ROOM ;  3
 	dw Indigo_Map_Name4 ; map_const KOGAS_ROOM ;  4
@@ -768,8 +768,8 @@ Fast_Ship_Map_Name11: ; map_const MT_MORTAR_GIFT_SHOP ; 11
 Fast_Ship_Map_Name12: ; map_const TIN_TOWER_ROOF, 12
 	db "Tin Tower Roof@"                                             ; 16
 
-Indigo_Map_Name1: ; map_const ROUTE_23,;  1
-	db "Route 23@"
+Indigo_Map_Name1: ; map_const ROUTE_21,;  1
+	db "Route 21@"
 Indigo_Map_Name2: ; map_const INDIGO_PLATEAU_POKECENTER_1F ;  2
 	db "Indigo Plateau@"
 Indigo_Map_Name3: ; map_const WILLS_ROOM ;  3

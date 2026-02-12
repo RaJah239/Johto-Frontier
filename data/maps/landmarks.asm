@@ -58,7 +58,7 @@ Landmarks:
 	landmark 148, 100, Route19Name
 	landmark 148,  84, Route20Name
 	landmark 148,  52, VictoryRoadName
-	landmark 148,  44, Route23Name
+	landmark 148,  44, Route21Name
 	landmark 148,  36, IndigoPlateauName	
 	landmark 160, 160, BattlePlazaName
 	assert_table_length KANTO_LANDMARK
@@ -94,7 +94,7 @@ IcePathName:         db "Ice Path@"
 PalletTownName:      db "Pallet Town@"
 IndigoPlateauName:   db "Indigo<BSP>Plateau@"
 VictoryRoadName:     db "Victory<BSP>Road@"
-Route23Name:         db "Route 23@"
+Route21Name:         db "Route 21@"
 Route20Name:         db "Route 20@"
 Route19Name:         db "Route 19@"
 Route1Name:          db "Route 1@"
