@@ -37,7 +37,7 @@ GoldenrodMagnetTrainStationOfficerScript:
 	warpcheck
 	newloadmap MAPSETUP_TRAIN
 	applymovement PLAYER, .MovementBoardTheTrain
-	wait 5
+	wait 2
 	end
 
 .MovementBoardTheTrain:
