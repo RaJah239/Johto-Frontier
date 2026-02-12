@@ -65,7 +65,7 @@ INCLUDE "maps/OlivineLighthouse6F.asm"
 INCLUDE "maps/GoldenrodPokecenter1F.asm"
 INCLUDE "maps/PokecomCenterAdminOfficeMobile.asm"
 INCLUDE "maps/IlexForestAzaleaGate.asm"
-INCLUDE "maps/Route34IlexForestGate.asm"
+INCLUDE "maps/Route6IlexForestGate.asm"
 INCLUDE "maps/DayCare.asm"
 INCLUDE "maps/HatchRoom.asm"
 
@@ -116,7 +116,7 @@ INCLUDE "maps/TinTowerRoof.asm"
 
 SECTION "Map Scripts 9", ROMX
 
-INCLUDE "maps/Route34.asm"
+INCLUDE "maps/Route6.asm"
 INCLUDE "maps/ElmsLab.asm"
 INCLUDE "maps/PlayersHouse1F.asm"
 INCLUDE "maps/PlayersHouse2F.asm"

@@ -45,8 +45,8 @@ BattlePlazaMagnetTrainStation_Blocks:
 Route42_Blocks:
 	INCBIN "maps/Route42.blk"
 
-Route34_Blocks:
-	INCBIN "maps/Route34.blk"
+Route6_Blocks:
+	INCBIN "maps/Route6.blk"
 
 Route46_Blocks:
 	INCBIN "maps/Route46.blk"
@@ -105,7 +105,7 @@ Route43MahoganyGate_Blocks:
 Route43Gate_Blocks:
 Route35GoldenrodGate_Blocks:
 Route36RuinsOfAlphGate_Blocks:
-Route34IlexForestGate_Blocks:
+Route6IlexForestGate_Blocks:
 Route40BattleTowerGate_Blocks:
 Route29Route46Gate_Blocks:
 Route39_SilverCaveGate_Blocks:

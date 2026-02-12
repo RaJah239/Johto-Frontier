@@ -111,7 +111,7 @@ ENDM
 	connection east, Route3, ROUTE_3, 9
 
 	map_attributes AzaleaTown, AZALEA_TOWN, $05, WEST | EAST
-	connection west, Route34, ROUTE_34, -18
+	connection west, Route6, ROUTE_6, -18
 	connection east, Route5, ROUTE_5, 0
 
 	map_attributes CianwoodCity, CIANWOOD_CITY, $35, EAST
@@ -119,7 +119,7 @@ ENDM
 
 	map_attributes GoldenrodCity, GOLDENROD_CITY, $35, NORTH | SOUTH
 	connection north, Route35, ROUTE_35, 5
-	connection south, Route34, ROUTE_34, 5
+	connection south, Route6, ROUTE_6, 5
 
 	map_attributes OlivineCity, OLIVINE_CITY, $35, NORTH | WEST
 	connection north, Route39, ROUTE_39, 5
@@ -170,7 +170,7 @@ ENDM
 	connection north, Route4, ROUTE_4, 0
 	connection west, AzaleaTown, AZALEA_TOWN, 0
 
-	map_attributes Route34, ROUTE_34, $05, NORTH | EAST
+	map_attributes Route6, ROUTE_6, $05, NORTH | EAST
 	connection north, GoldenrodCity, GOLDENROD_CITY, -5
 	connection east, AzaleaTown, AZALEA_TOWN, 18
 
@@ -380,7 +380,7 @@ ENDM
 	map_attributes GoldenrodPokecenter1F, GOLDENROD_POKECENTER_1F, $00, 0
 	map_attributes PokecomCenterAdminOfficeMobile, POKECOM_CENTER_ADMIN_OFFICE_MOBILE, $00, 0
 	map_attributes IlexForestAzaleaGate, ILEX_FOREST_AZALEA_GATE, $00, 0
-	map_attributes Route34IlexForestGate, ROUTE_34_ILEX_FOREST_GATE, $00, 0
+	map_attributes Route6IlexForestGate, ROUTE_6_ILEX_FOREST_GATE, $00, 0
 	map_attributes DayCare, DAY_CARE, $00, 0
 	map_attributes HatchRoom, HATCH_ROOM, $00, 0
 	map_attributes OaksLab, OAKS_LAB, $00, 0

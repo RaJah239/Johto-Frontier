@@ -1,24 +1,24 @@
 	object_const_def
-	const ROUTE34_YOUNGSTER1
-	const ROUTE34_YOUNGSTER2
-	const ROUTE34_YOUNGSTER3
-	const ROUTE34_LASS
-	const ROUTE34_OFFICER
-	const ROUTE34_POKEFAN_M
-	const ROUTE34_DAY_CARE_MON_1
-	const ROUTE34_DAY_CARE_MON_2
-	const ROUTE34_COOLTRAINER_F1
-	const ROUTE34_COOLTRAINER_F2
-	const ROUTE34_COOLTRAINER_F3
-	const ROUTE34_POKE_BALL
+	const ROUTE6_YOUNGSTER1
+	const ROUTE6_YOUNGSTER2
+	const ROUTE6_YOUNGSTER3
+	const ROUTE6_LASS
+	const ROUTE6_OFFICER
+	const ROUTE6_POKEFAN_M
+	const ROUTE6_DAY_CARE_MON_1
+	const ROUTE6_DAY_CARE_MON_2
+	const ROUTE6_COOLTRAINER_F1
+	const ROUTE6_COOLTRAINER_F2
+	const ROUTE6_COOLTRAINER_F3
+	const ROUTE6_POKE_BALL
 
-Route34_MapScripts:
+Route6_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, Route34EggCheckCallback
+	callback MAPCALLBACK_OBJECTS, Route6EggCheckCallback
 
-Route34EggCheckCallback:
+Route6EggCheckCallback:
 	sjump .CheckMon1
 
 .CheckMon1:
@@ -410,23 +410,23 @@ TrainerCooltrainerfKate:
 	closetext
 	end
 
-Route34Sign:
-	jumptext Route34SignText
+Route6Sign:
+	jumptext Route6SignText
 
-Route34TrainerTips:
-	jumptext Route34TrainerTipsText
+Route6TrainerTips:
+	jumptext Route6TrainerTipsText
 
 DayCareSign:
 	jumptext DayCareSignText
 
-Route34Nugget:
+Route6Nugget:
 	itemball NUGGET
 
-Route34HiddenRareCandy:
-	hiddenitem RARE_CANDY, EVENT_ROUTE_34_HIDDEN_RARE_CANDY
+Route6HiddenRareCandy:
+	hiddenitem RARE_CANDY, EVENT_ROUTE_6_HIDDEN_RARE_CANDY
 
-Route34HiddenSuperPotion:
-	hiddenitem SUPER_POTION, EVENT_ROUTE_34_HIDDEN_SUPER_POTION
+Route6HiddenSuperPotion:
+	hiddenitem SUPER_POTION, EVENT_ROUTE_6_HIDDEN_SUPER_POTION
 
 YoungsterSamuelSeenText:
 	text "This is where I do"
@@ -636,13 +636,13 @@ CooltrainerfKateAfterText:
 	line "startled us."
 	done
 
-Route34IlexForestSignText:
+Route6IlexForestSignText:
 	text "ILEX FOREST"
 	line "THROUGH THE GATE"
 	done
 
-Route34SignText:
-	text "ROUTE 34"
+Route6SignText:
+	text "ROUTE 6"
 
 	para "GOLDENROD CITY -"
 	line "AZALEA TOWN"
@@ -651,7 +651,7 @@ Route34SignText:
 	line "SOMEWHERE BETWEEN"
 	done
 
-Route34TrainerTipsText:
+Route6TrainerTipsText:
 	text "TRAINER TIPS"
 
 	para "BERRY trees grow"
@@ -679,10 +679,10 @@ CamperTodd_AgainGiveMaxElixirAfterBattleText:
 	text "Made space right?"
 	done
 
-Route34_MapEvents:
+Route6_MapEvents:
 	def_warp_events
-	warp_event 13, 37, ROUTE_34_ILEX_FOREST_GATE, 1
-	warp_event 14, 37, ROUTE_34_ILEX_FOREST_GATE, 2
+	warp_event 13, 37, ROUTE_6_ILEX_FOREST_GATE, 1
+	warp_event 14, 37, ROUTE_6_ILEX_FOREST_GATE, 2
 	warp_event 11, 14, DAY_CARE, 1
 	warp_event 11, 15, DAY_CARE, 2
 	warp_event 13, 15, DAY_CARE, 3
@@ -691,11 +691,11 @@ Route34_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event 12,  6, BGEVENT_READ, Route34Sign
-	bg_event 13, 33, BGEVENT_READ, Route34TrainerTips
+	bg_event 12,  6, BGEVENT_READ, Route6Sign
+	bg_event 13, 33, BGEVENT_READ, Route6TrainerTips
 	bg_event 10, 13, BGEVENT_READ, DayCareSign
-	bg_event  8, 32, BGEVENT_ITEM, Route34HiddenRareCandy
-	bg_event 17, 19, BGEVENT_ITEM, Route34HiddenSuperPotion
+	bg_event  8, 32, BGEVENT_ITEM, Route6HiddenRareCandy
+	bg_event 17, 19, BGEVENT_ITEM, Route6HiddenSuperPotion
 
 	def_object_events
 	object_event 13,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 5, TrainerCamperTodd1, -1
@@ -709,4 +709,4 @@ Route34_MapEvents:
 	object_event  8, 48, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 5, TrainerCooltrainerfIrene, -1
 	object_event  4, 48, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainerfJenn, -1
 	object_event  6, 51, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 2, TrainerCooltrainerfKate, -1
-	object_event  7, 30, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route34Nugget, EVENT_ROUTE_34_NUGGET
+	object_event  7, 30, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route6Nugget, EVENT_ROUTE_6_NUGGET

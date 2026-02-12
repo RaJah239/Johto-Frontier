@@ -18,12 +18,12 @@ HatchRoomEggCheckCallback:
 	checkflag ENGINE_DAY_CARE_MAN_HAS_EGG
 	iftrue .PutDayCareManOutside
 	clearevent EVENT_DAY_CARE_MAN_IN_DAY_CARE
-	setevent EVENT_DAY_CARE_MAN_ON_ROUTE_34
+	setevent EVENT_DAY_CARE_MAN_ON_ROUTE_6
 	endcallback
 
 .PutDayCareManOutside:
 	setevent EVENT_DAY_CARE_MAN_IN_DAY_CARE
-	clearevent EVENT_DAY_CARE_MAN_ON_ROUTE_34
+	clearevent EVENT_DAY_CARE_MAN_ON_ROUTE_6
 	endcallback
 
 DayCareManScript_Outside:
@@ -67,9 +67,9 @@ DayCareHatchRoomPorygonPCScript:
 
 HatchRoom_MapEvents:
    def_warp_events
-	warp_event  2, 135, ROUTE_34, 6
-	warp_event  3,  2, ROUTE_34, 7
-	warp_event  3, 135, ROUTE_34, 7
+	warp_event  2, 135, ROUTE_6, 6
+	warp_event  3,  2, ROUTE_6, 7
+	warp_event  3, 135, ROUTE_6, 7
 	warp_event  3, 132, HATCH_ROOM, 2 ; looping tile
 
     def_coord_events
@@ -78,5 +78,5 @@ HatchRoom_MapEvents:
 
     def_object_events
 
-	object_event  1, 132, SPRITE_GRAMPS, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareManScript_Outside, EVENT_DAY_CARE_MAN_ON_ROUTE_34
+	object_event  1, 132, SPRITE_GRAMPS, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareManScript_Outside, EVENT_DAY_CARE_MAN_ON_ROUTE_6
 	object_event  4, 133, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareHatchRoomPorygonPCScript, -1

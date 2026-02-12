@@ -215,7 +215,7 @@ ENDM
 	endgroup
 
 	newgroup GOLDENROD                                            ; 11
-	map_const ROUTE_34,                                    10, 27 ;  1
+	map_const ROUTE_6,                                     10, 27 ;  1
 	map_const GOLDENROD_CITY,                              21, 18 ;  2
 	map_const GOLDENROD_GYM,                               10,  9 ;  3
 	map_const GOLDENROD_BIKE_SHOP,                          4,  4 ;  4
@@ -237,7 +237,7 @@ ENDM
 	map_const GOLDENROD_POKECENTER_1F,                      5,  4 ; 20
 	map_const POKECOM_CENTER_ADMIN_OFFICE_MOBILE,          16, 16 ; 21
 	map_const ILEX_FOREST_AZALEA_GATE,                      5,  4 ; 22
-	map_const ROUTE_34_ILEX_FOREST_GATE,                    5,  4 ; 23
+	map_const ROUTE_6_ILEX_FOREST_GATE,                     5,  4 ; 23
 	map_const DAY_CARE,                                     5,  4 ; 24
 	map_const HATCH_ROOM,                                   3, 68 ; 25
 	map_const GOLDENROD_MANSION_1F,                           4,  5 ; 12

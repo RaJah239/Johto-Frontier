@@ -17,7 +17,7 @@
 	const LANDMARK_AZALEA_TOWN       ; 0c
 	const LANDMARK_SLOWPOKE_WELL     ; 0d
 	const LANDMARK_ILEX_FOREST       ; 0e
-	const LANDMARK_ROUTE_34          ; 0f
+	const LANDMARK_ROUTE_6           ; 0f
 	const LANDMARK_GOLDENROD_CITY    ; 10
 	const LANDMARK_RADIO_TOWER       ; 11
 	const LANDMARK_ROUTE_35          ; 12

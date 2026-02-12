@@ -238,7 +238,7 @@ Violet_Map_Names: ;newgroup VIOLET
 
 Goldenrod_Map_Names: ;newgroup GOLDENROD
 	table_width 2, Goldenrod_Map_Names                                            ; 11
-	dw Goldenrod_Map_Name1 ; map_const ROUTE_34,                                    10, 27 ;  1
+	dw Goldenrod_Map_Name1 ; map_const ROUTE_6,                                    10, 27 ;  1
 	dw Goldenrod_Map_Name2 ; map_const GOLDENROD_CITY,;  2
 	dw Goldenrod_Map_Name3 ; map_const GOLDENROD_GYM,                               10,  9 ;  3
 	dw Goldenrod_Map_Name4 ; map_const GOLDENROD_BIKE_SHOP ;  4
@@ -260,7 +260,7 @@ Goldenrod_Map_Names: ;newgroup GOLDENROD
 	dw Goldenrod_Map_Name20 ; map_const GOLDENROD_POKECENTER_1F ; 20
 	dw Goldenrod_Map_Name21 ; map_const POKECOM_CENTER_ADMIN_OFFICE_MOBILE,          16, 16 ; 21
 	dw Goldenrod_Map_Name22 ; map_const ILEX_FOREST_AZALEA_GATE ; 22
-	dw Goldenrod_Map_Name23 ; map_const ROUTE_34_ILEX_FOREST_GATE ; 23
+	dw Goldenrod_Map_Name23 ; map_const ROUTE_6_ILEX_FOREST_GATE ; 23
 	dw Goldenrod_Map_Name24 ; map_const DAY_CARE ; 24
 	dw Goldenrod_Map_Name96 ; map_const DAY_CARE ; 25
 	dw Goldenrod_Map_Name25 ; map_const GOLDENROD_MANSION_1F ; 26
@@ -696,8 +696,8 @@ Violet_Map_Name16: ; map_const ROUTE_36_RUINS_OF_ALPH_GATE ; 16
 Violet_Map_Name17: ; map_const ROUTE_36_NATIONAL_PARK_GATE ; 17
 	db "Route 36-Park Gate@"
 
-Goldenrod_Map_Name1: ; map_const ROUTE_34,;  1
-	db "Route 34@"
+Goldenrod_Map_Name1: ; map_const ROUTE_6,;  1
+	db "Route 6@"
 Goldenrod_Map_Name2: ; map_const GOLDENROD_CITY;  2
 	db "Goldenrod City@"
 Goldenrod_Map_Name3: ; map_const GOLDENROD_GYM,;  3
@@ -740,10 +740,10 @@ Goldenrod_Map_Name21: ; map_const POKECOM_CENTER_ADMIN_OFFICE_MOBILE,; 21
 	db "#com Cen Office@"
 Goldenrod_Map_Name22: ; map_const ILEX_FOREST_AZALEA_GATE ; 22
 	db "Azalea - Ilex gate@"
-Goldenrod_Map_Name23: ; map_const ROUTE_34_ILEX_FOREST_GATE ; 23
-	db "Ilex - Rt. 34 Gate@"
+Goldenrod_Map_Name23: ; map_const ROUTE_6_ILEX_FOREST_GATE ; 23
+	db "Ilex - Rt. 6 Gate@"
 Goldenrod_Map_Name24: ; map_const DAY_CARE ; 24 ; 12
-	db "Route 34 Day Care@"
+	db "Route 6 Day Care@"
 Goldenrod_Map_Name96: ; map_const HATCH_ROOM ; 24 ; 12
 	db "Hatch Room@"
 Goldenrod_Map_Name25: ; map_const GOLDENROD_MANSION_1F ; 12

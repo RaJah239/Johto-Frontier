@@ -255,7 +255,7 @@ SwarmGrassWildMons:
 	db 4, TURTWIG
 
 ; Togepi swarm
-	map_id ROUTE_34
+	map_id ROUTE_6
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 5, TOGEPI

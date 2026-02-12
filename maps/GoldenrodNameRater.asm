@@ -74,7 +74,7 @@ SwarmGrampsScript:
 
 .togepi
 	setflag ENGINE_SWARM
-	swarm ROUTE_34
+	swarm ROUTE_6
 	writetext SwarmTogepiText
 	sjump .WrappingUpSwarms
 

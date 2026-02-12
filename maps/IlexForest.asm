@@ -449,7 +449,7 @@ IlexForestShrineScript:
 	setevent EVENT_AZALEA_TOWN_KURT
 	setevent EVENT_CELEBI_FATEFUL_ENCOUNTER
 	disappear ILEXFOREST_LASS
-	clearevent EVENT_ROUTE_34_ILEX_FOREST_GATE_LASS
+	clearevent EVENT_ROUTE_6_ILEX_FOREST_GATE_LASS
 	writetext Text_InsertGSBall
 	waitbutton
 	closetext
@@ -1074,7 +1074,7 @@ IlexForestChanseyScript:
 
 IlexForest_MapEvents:
 	def_warp_events
-	warp_event  1,  5, ROUTE_34_ILEX_FOREST_GATE, 3
+	warp_event  1,  5, ROUTE_6_ILEX_FOREST_GATE, 3
 	warp_event  3, 42, ILEX_FOREST_AZALEA_GATE, 1
 	warp_event  3, 43, ILEX_FOREST_AZALEA_GATE, 2
 

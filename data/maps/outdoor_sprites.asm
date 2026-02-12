@@ -89,7 +89,7 @@ AzaleaGroupSprites:
 	db 0 ; end
 
 GoldenrodGroupSprites:
-; Route34, GoldenrodCity
+; Route6, GoldenrodCity
 	db SPRITE_GRAMPS
 	db SPRITE_YOUNGSTER
 	db SPRITE_OFFICER
