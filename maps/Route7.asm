@@ -1,38 +1,38 @@
 	object_const_def
-	const ROUTE35_YOUNGSTER1
-	const ROUTE35_YOUNGSTER2
-	const ROUTE35_LASS1
-	const ROUTE35_LASS2
-	const ROUTE35_YOUNGSTER3
-	const ROUTE35_FISHER
-	const ROUTE35_BUG_CATCHER
-	const ROUTE35_SUPER_NERD
-	const ROUTE35_OFFICER
-	const ROUTE35_POKE_BALL
-	const ROUTE35_BERRY_TREE1
-	const ROUTE35_OTIS
-	const ROUTE35_APRICORN_TREE1
-	const ROUTE35_APRICORN_TREE2
-	const ROUTE35_APRICORN_TREE3
+	const ROUTE7_YOUNGSTER1
+	const ROUTE7_YOUNGSTER2
+	const ROUTE7_LASS1
+	const ROUTE7_LASS2
+	const ROUTE7_YOUNGSTER3
+	const ROUTE7_FISHER
+	const ROUTE7_BUG_CATCHER
+	const ROUTE7_SUPER_NERD
+	const ROUTE7_OFFICER
+	const ROUTE7_POKE_BALL
+	const ROUTE7_BERRY_TREE1
+	const ROUTE7_OTIS
+	const ROUTE7_APRICORN_TREE1
+	const ROUTE7_APRICORN_TREE2
+	const ROUTE7_APRICORN_TREE3
 
-Route35_MapScripts:
+Route7_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, Route35OtisCallback
+	callback MAPCALLBACK_OBJECTS, Route7OtisCallback
 
-Route35OtisCallback:
+Route7OtisCallback:
 	; 10% chance of otis appearing
 	checkflag ENGINE_MET_OTIS_TODAY
 	iftrue .done
 	random 10
 	ifequal 0, .AppearOtis
 .done
-	disappear ROUTE35_OTIS
+	disappear ROUTE7_OTIS
 	endcallback
 
 .AppearOtis:
-	appear ROUTE35_OTIS
+	appear ROUTE7_OTIS
 	endcallback
 
 TrainerBirdKeeperBryan:
@@ -111,26 +111,26 @@ TrainerBugCatcherArnie:
 	checkflag ENGINE_ARNIE_READY_FOR_REMATCH
 	iftrue .WantsBattle
 	checkcellnum PHONE_BUG_CATCHER_ARNIE
-	iftrue Route35NumberAcceptedM
+	iftrue Route7NumberAcceptedM
 	checkevent EVENT_ARNIE_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskedAlready
 	writetext BugCatcherArnieAfterBattleText
 	promptbutton
 	setevent EVENT_ARNIE_ASKED_FOR_PHONE_NUMBER
-	scall Route35AskNumber
+	scall Route7AskNumber
 	sjump .AskForNumber
 
 .AskedAlready:
-	scall Route35AskNumber
+	scall Route7AskNumber
 .AskForNumber:
 	askforphonenumber PHONE_BUG_CATCHER_ARNIE
-	ifequal PHONE_CONTACT_REFUSED, Route35NumberDeclinedM
+	ifequal PHONE_CONTACT_REFUSED, Route7NumberDeclinedM
 	gettrainername STRING_BUFFER_3, BUG_CATCHER, ARNIE1
-	scall Route35RegisteredNumberM
-	sjump Route35NumberAcceptedM
+	scall Route7RegisteredNumberM
+	sjump Route7NumberAcceptedM
 
 .WantsBattle:
-	scall Route35RematchM
+	scall Route7RematchM
 	winlosstext BugCatcherArnieBeatenText, 0
 	checkevent EVENT_RESTORED_POWER_TO_KANTO
 	iftrue .LoadFight4
@@ -194,23 +194,23 @@ TrainerBugCatcherArnie:
 	jumpstd PackFullMScript
 	end
 
-Route35AskNumber:
+Route7AskNumber:
 	jumpstd AskNumber1MScript
 	end
 
-Route35RegisteredNumberM:
+Route7RegisteredNumberM:
 	jumpstd RegisteredNumberMScript
 	end
 
-Route35NumberAcceptedM:
+Route7NumberAcceptedM:
 	jumpstd NumberAcceptedMScript
 	end
 
-Route35NumberDeclinedM:
+Route7NumberDeclinedM:
 	jumpstd NumberDeclinedMScript
 	end
 
-Route35RematchM:
+Route7RematchM:
 	jumpstd RematchMScript
 	end
 
@@ -256,10 +256,10 @@ TrainerOfficerDirk:
 	closetext
 	end
 
-Route35Sign:
-	jumptext Route35SignText
+Route7Sign:
+	jumptext Route7SignText
 
-Route35TMRollout:
+Route7TMRollout:
 	itemball TM_ROLLOUT
 
 CamperIvanSeenText:
@@ -436,106 +436,106 @@ OfficerDirkPrettyToughText:
 	line "where safely."
 	done
 
-Route35SignText:
-	text "ROUTE 35"
+Route7SignText:
+	text "ROUTE 7"
 	done
 
-Route35BerryTree1:
+Route7BerryTree1:
 	opentext
 	getitemname STRING_BUFFER_3, MYSTERYBERRY
-	writetext Route35TreeText
+	writetext Route7TreeText
 	promptbutton
-	writetext Route35HeyItsBerryApricornText
+	writetext Route7HeyItsBerryApricornText
 	promptbutton
 	giveitem MYSTERYBERRY
-	iffalse Route35NoRoomInBag
-	disappear ROUTE35_BERRY_TREE1
-	writetext Route35FoundItemText
+	iffalse Route7NoRoomInBag
+	disappear ROUTE7_BERRY_TREE1
+	writetext Route7FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route35ApricornTree1:
+Route7ApricornTree1:
 	opentext
 	getitemname STRING_BUFFER_3, BLU_APRICORN
-	writetext Route35TreeText
+	writetext Route7TreeText
 	promptbutton
-	writetext Route35HeyItsBerryApricornText
+	writetext Route7HeyItsBerryApricornText
 	promptbutton
 	giveitem BLU_APRICORN
-	iffalse Route35NoRoomInBag
-	disappear ROUTE35_APRICORN_TREE1
-	writetext Route35FoundItemText
+	iffalse Route7NoRoomInBag
+	disappear ROUTE7_APRICORN_TREE1
+	writetext Route7FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route35ApricornTree2:
+Route7ApricornTree2:
 	opentext
 	getitemname STRING_BUFFER_3, YLW_APRICORN
-	writetext Route35TreeText
+	writetext Route7TreeText
 	promptbutton
-	writetext Route35HeyItsBerryApricornText
+	writetext Route7HeyItsBerryApricornText
 	promptbutton
 	giveitem YLW_APRICORN
-	iffalse Route35NoRoomInBag
-	disappear ROUTE35_APRICORN_TREE2
-	writetext Route35FoundItemText
+	iffalse Route7NoRoomInBag
+	disappear ROUTE7_APRICORN_TREE2
+	writetext Route7FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route35ApricornTree3:
+Route7ApricornTree3:
 	opentext
 	getitemname STRING_BUFFER_3, RED_APRICORN
-	writetext Route35TreeText
+	writetext Route7TreeText
 	promptbutton
-	writetext Route35HeyItsBerryApricornText
+	writetext Route7HeyItsBerryApricornText
 	promptbutton
 	giveitem RED_APRICORN
-	iffalse Route35NoRoomInBag
-	disappear ROUTE35_APRICORN_TREE3
-	writetext Route35FoundItemText
+	iffalse Route7NoRoomInBag
+	disappear ROUTE7_APRICORN_TREE3
+	writetext Route7FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route35NoBerryOrApricorn:
+Route7NoBerryOrApricorn:
 	opentext
-	writetext Route35TreeText
+	writetext Route7TreeText
 	promptbutton
-	writetext Route35NothingHereText
+	writetext Route7NothingHereText
 	waitbutton
 	closetext
 	end
 
-Route35NoRoomInBag:
-	writetext Route35NoRoomInBagText
+Route7NoRoomInBag:
+	writetext Route7NoRoomInBagText
 	waitbutton
 	closetext
 	end
 
-Route35TreeText:
+Route7TreeText:
 	text_far _FruitBearingTreeText
 	text_end
 
-Route35NothingHereText:
+Route7NothingHereText:
 	text_far _NothingHereText
 	text_end
 
-Route35HeyItsBerryApricornText:
+Route7HeyItsBerryApricornText:
 	text_far _HeyItsFruitText
 	text_end
 
-Route35FoundItemText:
+Route7FoundItemText:
 	text_far _ObtainedFruitText
 	text_end
 
@@ -549,37 +549,37 @@ BugCatcherArnie_AgainGiveSilverPowderAfterBattleText:
 	line "you? Take it."
 	done
 
-Route35NoRoomInBagText:
+Route7NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
-Route35OtisScript:
+Route7OtisScript:
 	callstd WanderingOddEggNPCScript
 	playsound SFX_WARP_TO
-	applymovement ROUTE35_OTIS, Route35OtisTeleportAwayMovement
-	disappear ROUTE35_OTIS
+	applymovement ROUTE7_OTIS, Route7OtisTeleportAwayMovement
+	disappear ROUTE7_OTIS
 	setflag ENGINE_MET_OTIS_TODAY
 	end
 
-Route35OtisTeleportAwayMovement:
+Route7OtisTeleportAwayMovement:
 	teleport_from
 	step_end
 
-Route35_MapEvents:
+Route7_MapEvents:
 	def_warp_events
-	warp_event  9, 33, ROUTE_35_GOLDENROD_GATE, 1
-	warp_event 10, 33, ROUTE_35_GOLDENROD_GATE, 2
-	warp_event  3,  5, ROUTE_35_NATIONAL_PARK_GATE, 3
+	warp_event  9, 33, ROUTE_7_GOLDENROD_GATE, 1
+	warp_event 10, 33, ROUTE_7_GOLDENROD_GATE, 2
+	warp_event  3,  5, ROUTE_7_NATIONAL_PARK_GATE, 3
 
 	def_coord_events
 
 	def_bg_events
-	bg_event  1,  7, BGEVENT_READ, Route35Sign
-	bg_event 11, 31, BGEVENT_READ, Route35Sign
-	bg_event  2, 25, BGEVENT_READ, Route35NoBerryOrApricorn
-	bg_event  2, 27, BGEVENT_READ, Route35NoBerryOrApricorn
-	bg_event 14, 29, BGEVENT_READ, Route35NoBerryOrApricorn
-	bg_event 15, 28, BGEVENT_READ, Route35NoBerryOrApricorn
+	bg_event  1,  7, BGEVENT_READ, Route7Sign
+	bg_event 11, 31, BGEVENT_READ, Route7Sign
+	bg_event  2, 25, BGEVENT_READ, Route7NoBerryOrApricorn
+	bg_event  2, 27, BGEVENT_READ, Route7NoBerryOrApricorn
+	bg_event 14, 29, BGEVENT_READ, Route7NoBerryOrApricorn
+	bg_event 15, 28, BGEVENT_READ, Route7NoBerryOrApricorn
 
 	def_object_events
 	object_event  4, 19, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 2, TrainerCamperIvan, -1
@@ -591,9 +591,9 @@ Route35_MapEvents:
 	object_event 16,  7, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_DOWN, 2, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerBugCatcherArnie, -1
 	object_event  5, 10, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, TrainerJugglerIrwin, -1
 	object_event  5,  6, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TrainerOfficerDirk, -1
-	object_event  7, 11, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route35TMRollout, EVENT_ROUTE_35_TM_ROLLOUT
-	object_event  2, 25, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_ORANGE, OBJECTTYPE_SCRIPT, 0, Route35BerryTree1, EVENT_ROUTE_35_BERRY_1
-	object_event  0, 27, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route35OtisScript, EVENT_ROUTE_35_OTIS
-	object_event  2, 27, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route35ApricornTree1, EVENT_ROUTE_35_APRICORN_1
-	object_event 14, 29, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route35ApricornTree2, EVENT_ROUTE_35_APRICORN_2
-	object_event 15, 28, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route35ApricornTree3, EVENT_ROUTE_35_APRICORN_1
+	object_event  7, 11, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route7TMRollout, EVENT_ROUTE_7_TM_ROLLOUT
+	object_event  2, 25, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_ORANGE, OBJECTTYPE_SCRIPT, 0, Route7BerryTree1, EVENT_ROUTE_7_BERRY_1
+	object_event  0, 27, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route7OtisScript, EVENT_ROUTE_7_OTIS
+	object_event  2, 27, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route7ApricornTree1, EVENT_ROUTE_7_APRICORN_1
+	object_event 14, 29, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route7ApricornTree2, EVENT_ROUTE_7_APRICORN_2
+	object_event 15, 28, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route7ApricornTree3, EVENT_ROUTE_7_APRICORN_1

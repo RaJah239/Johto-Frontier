@@ -80,7 +80,7 @@ SwarmGrampsScript:
 
 .ditto
 	setflag ENGINE_SWARM
-	swarm ROUTE_35
+	swarm ROUTE_7
 	writetext SwarmDittoText
 	sjump .WrappingUpSwarms
 
@@ -137,7 +137,7 @@ SwarmTotodileText:
 SwarmPichuText:
 	text "There's a swarm of"
 	line "PICHU on"
-	cont "ROUTE 31!"
+	cont "ROUTE 3!"
 	done
 
 SwarmCleffaText:
@@ -155,7 +155,7 @@ SwarmIgglybuffText:
 SwarmTogepiText:
 	text "There's a swarm of"
 	line "TOGEPI on"
-	cont "ROUTE 34!"
+	cont "ROUTE 6!"
 	done
 
 SwarmTyrogueText:
@@ -167,7 +167,7 @@ SwarmTyrogueText:
 SwarmDittoText:
 	text "There's a swarm of"
 	line "DITTO on"
-	cont "ROUTE 35!"
+	cont "ROUTE 7!"
 	done
 
 SkipSwarmText:

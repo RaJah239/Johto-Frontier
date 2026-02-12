@@ -20,7 +20,7 @@
 	const LANDMARK_ROUTE_6           ; 0f
 	const LANDMARK_GOLDENROD_CITY    ; 10
 	const LANDMARK_RADIO_TOWER       ; 11
-	const LANDMARK_ROUTE_35          ; 12
+	const LANDMARK_ROUTE_7           ; 12
 	const LANDMARK_NATIONAL_PARK     ; 13
 	const LANDMARK_ROUTE_36          ; 14
 	const LANDMARK_ROUTE_37          ; 15

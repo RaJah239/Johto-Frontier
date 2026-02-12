@@ -1,9 +1,9 @@
 	object_const_def
-	const ROUTE35GOLDENRODGATE_RANDY
-	const ROUTE35GOLDENRODGATE_POKEFAN_F
-	const ROUTE35GOLDENRODGATE_FISHER
+	const ROUTE7GOLDENRODGATE_RANDY
+	const ROUTE7GOLDENRODGATE_POKEFAN_F
+	const ROUTE7GOLDENRODGATE_FISHER
 
-Route35GoldenrodGate_MapScripts:
+Route7GoldenrodGate_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
@@ -17,46 +17,46 @@ RandyScript:
 	iftrue .questcomplete
 	checkevent EVENT_GOT_KENYA
 	iftrue .alreadyhavekenya
-	writetext Route35GoldenrodGateRandyAskTakeThisMonToMyFriendText
+	writetext Route7GoldenrodGateRandyAskTakeThisMonToMyFriendText
 	yesorno
 	iffalse .refused
-	writetext Route35GoldenrodGateRandyThanksText
+	writetext Route7GoldenrodGateRandyThanksText
 	promptbutton
 	waitsfx
 	readvar VAR_PARTYCOUNT
 	ifequal PARTY_LENGTH, .partyfull
-	writetext Route35GoldenrodGatePlayerReceivedAMonWithMailText
+	writetext Route7GoldenrodGatePlayerReceivedAMonWithMailText
 	playsound SFX_KEY_ITEM
 	waitsfx
 	givepoke PIKACHU, 10, NO_ITEM, GiftSpearowName, GiftSpearowOTName
 	givepokemail GiftSpearowMail
 	setevent EVENT_GOT_KENYA
 .alreadyhavekenya
-	writetext Route35GoldenrodGateRandyWeirdTreeBlockingRoadText
+	writetext Route7GoldenrodGateRandyWeirdTreeBlockingRoadText
 	waitbutton
 	closetext
 	end
 
 .partyfull
-	writetext Route35GoldenrodGateRandyCantCarryAnotherMonText
+	writetext Route7GoldenrodGateRandyCantCarryAnotherMonText
 	waitbutton
 	closetext
 	end
 
 .refused
-	writetext Route35GoldenrodGateRandyOhNeverMindThenText
+	writetext Route7GoldenrodGateRandyOhNeverMindThenText
 	waitbutton
 	closetext
 	end
 
 .questcomplete
-	writetext Route35GoldenrodGateRandySomethingForYourTroubleText
+	writetext Route7GoldenrodGateRandySomethingForYourTroubleText
 	promptbutton
 	verbosegiveitem HP_UP
 	iffalse .bagfull
 	setevent EVENT_GOT_HP_UP_FROM_RANDY
 .gothpup
-	writetext Route35GoldenrodGateRandyMyPalWasSnoozingRightText
+	writetext Route7GoldenrodGateRandyMyPalWasSnoozingRightText
 	waitbutton
 .bagfull
 	closetext
@@ -75,26 +75,26 @@ GiftSpearowOTName:
 
 	db 0 ; unused
 
-Route35GoldenrodGatePokefanFScript:
+Route7GoldenrodGatePokefanFScript:
 	faceplayer
 	opentext
 	checkevent EVENT_FOUGHT_SUDOWOODO
 	iftrue .FoughtSudowoodo
-	writetext Route35GoldenrodGatePokefanFText
+	writetext Route7GoldenrodGatePokefanFText
 	waitbutton
 	closetext
 	end
 
 .FoughtSudowoodo
-	writetext Route35GoldenrodGatePokefanFText_FoughtSudowoodo
+	writetext Route7GoldenrodGatePokefanFText_FoughtSudowoodo
 	waitbutton
 	closetext
 	end
 
-Route35GoldenrodGateFisherScript:
-	jumptextfaceplayer Route35GoldenrodGateFisherText
+Route7GoldenrodGateFisherScript:
+	jumptextfaceplayer Route7GoldenrodGateFisherText
 
-Route35GoldenrodGateRandyAskTakeThisMonToMyFriendText:
+Route7GoldenrodGateRandyAskTakeThisMonToMyFriendText:
 	text "Excuse me, kid!"
 	line "Can you do a guy"
 	cont "a favor?"
@@ -106,7 +106,7 @@ Route35GoldenrodGateRandyAskTakeThisMonToMyFriendText:
 	para "He's on ROUTE 31."
 	done
 
-Route35GoldenrodGateRandyThanksText:
+Route7GoldenrodGateRandyThanksText:
 	text "You will? Perfect!"
 	line "Thanks, kid!"
 
@@ -118,12 +118,12 @@ Route35GoldenrodGateRandyThanksText:
 	line "him right away!"
 	done
 
-Route35GoldenrodGatePlayerReceivedAMonWithMailText:
+Route7GoldenrodGatePlayerReceivedAMonWithMailText:
 	text "<PLAYER> received a"
 	line "#MON with MAIL."
 	done
 
-Route35GoldenrodGateRandyWeirdTreeBlockingRoadText:
+Route7GoldenrodGateRandyWeirdTreeBlockingRoadText:
 	text "You can read it,"
 	line "but don't lose it!"
 	cont "ROUTE 31!"
@@ -136,17 +136,17 @@ Route35GoldenrodGateRandyWeirdTreeBlockingRoadText:
 	line "been cleared?"
 	done
 
-Route35GoldenrodGateRandyCantCarryAnotherMonText:
+Route7GoldenrodGateRandyCantCarryAnotherMonText:
 	text "You can't carry"
 	line "another #MON…"
 	done
 
-Route35GoldenrodGateRandyOhNeverMindThenText:
+Route7GoldenrodGateRandyOhNeverMindThenText:
 	text "Oh… Never mind,"
 	line "then…"
 	done
 
-Route35GoldenrodGateRandySomethingForYourTroubleText:
+Route7GoldenrodGateRandySomethingForYourTroubleText:
 	text "Thanks, kid! You"
 	line "made the delivery"
 	cont "for me!"
@@ -155,13 +155,13 @@ Route35GoldenrodGateRandySomethingForYourTroubleText:
 	line "for your trouble!"
 	done
 
-Route35GoldenrodGateRandyMyPalWasSnoozingRightText:
+Route7GoldenrodGateRandyMyPalWasSnoozingRightText:
 	text "My pal was snooz-"
 	line "ing, right? Heh,"
 	cont "what'd I say?"
 	done
 
-Route35GoldenrodGatePokefanFText:
+Route7GoldenrodGatePokefanFText:
 	text "A strange tree is"
 	line "blocking the road."
 
@@ -175,13 +175,13 @@ Route35GoldenrodGatePokefanFText:
 	line "SQUIRTBOTTLE."
 	done
 
-Route35GoldenrodGatePokefanFText_FoughtSudowoodo:
+Route7GoldenrodGatePokefanFText_FoughtSudowoodo:
 	text "I like the #MON"
 	line "Lullaby they play"
 	cont "on the radio."
 	done
 
-Route35GoldenrodGateFisherText:
+Route7GoldenrodGateFisherText:
 	text "I wonder how many"
 	line "kinds of #MON"
 
@@ -195,10 +195,10 @@ Route35GoldenrodGateFisherText:
 	line "different kinds."
 	done
 
-Route35GoldenrodGate_MapEvents:
+Route7GoldenrodGate_MapEvents:
 	def_warp_events
-	warp_event  4,  0, ROUTE_35, 1
-	warp_event  5,  0, ROUTE_35, 2
+	warp_event  4,  0, ROUTE_7, 1
+	warp_event  5,  0, ROUTE_7, 2
 	warp_event  4,  7, GOLDENROD_CITY, 13
 	warp_event  5,  7, GOLDENROD_CITY, 13
 
@@ -208,5 +208,5 @@ Route35GoldenrodGate_MapEvents:
 
 	def_object_events
 	object_event  0,  4, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RandyScript, -1
-	object_event  6,  4, SPRITE_POKEFAN_F, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route35GoldenrodGatePokefanFScript, -1
-	object_event  3,  2, SPRITE_FISHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route35GoldenrodGateFisherScript, -1
+	object_event  6,  4, SPRITE_POKEFAN_F, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route7GoldenrodGatePokefanFScript, -1
+	object_event  3,  2, SPRITE_FISHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route7GoldenrodGateFisherScript, -1

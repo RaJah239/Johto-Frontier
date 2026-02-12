@@ -3135,7 +3135,7 @@ wRoute27SceneID::                                 db
 wNewBarkTownSceneID::                             db
 wElmsLabSceneID::                                 db
 wPlayersHouse1FSceneID::                          db
-wRoute35NationalParkGateSceneID::                 db
+wRoute7NationalParkGateSceneID::                  db
 wRoute36SceneID::                                 db
 wRoute36NationalParkGateSceneID::                 db
 wAzaleaTownSceneID::                              db

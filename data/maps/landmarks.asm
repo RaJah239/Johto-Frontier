@@ -26,7 +26,7 @@ Landmarks:
 	landmark  44, 108, Route6Name
 	landmark  44,  92, GoldenrodCityName
 	landmark  42,  92, RadioTowerName
-	landmark  44,  76, Route35Name
+	landmark  44,  76, Route7Name
 	landmark  44,  60, NationalParkName
 	landmark  60,  60, Route36Name
 	landmark  60,  52, Route37Name
@@ -103,7 +103,7 @@ Route3Name:          db "Route 3@"
 Route4Name:          db "Route 4@"
 Route5Name:          db "Route 5@"
 Route6Name:          db "Route 6@"
-Route35Name:         db "Route 35@"
+Route7Name:          db "Route 7@"
 Route36Name:         db "Route 36@"
 Route37Name:         db "Route 37@"
 Route38Name:         db "Route 38@"

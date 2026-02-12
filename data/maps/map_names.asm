@@ -218,7 +218,7 @@ Lake_of_Rage_Map_Names: ;newgroup LAKE_OF_RAGE
 Violet_Map_Names: ;newgroup VIOLET
 	table_width 2, Violet_Map_Names                                               ; 10
 	dw Violet_Map_Name1 ; map_const ROUTE_4,;  1
-	dw Violet_Map_Name2 ; map_const ROUTE_35,;  2
+	dw Violet_Map_Name2 ; map_const ROUTE_7,;  2
 	dw Violet_Map_Name3 ; map_const ROUTE_36,;  3
 	dw Violet_Map_Name4 ; map_const ROUTE_37,;  4
 	dw Violet_Map_Name5 ; map_const VIOLET_CITY ; 5
@@ -230,8 +230,8 @@ Violet_Map_Names: ;newgroup VIOLET
 	dw Violet_Map_Name11 ; map_const VIOLET_KYLES_HOUSE ; 11
 	dw Violet_Map_Name12 ; map_const ROUTE_4_RUINS_OF_ALPH_GATE ; 12
 	dw Violet_Map_Name13 ; map_const ROUTE_4_POKECENTER_1F ; 13
-	dw Violet_Map_Name14 ; map_const ROUTE_35_GOLDENROD_GATE ; 14
-	dw Violet_Map_Name15 ; map_const ROUTE_35_NATIONAL_PARK_GATE ; 15
+	dw Violet_Map_Name14 ; map_const ROUTE_7_GOLDENROD_GATE ; 14
+	dw Violet_Map_Name15 ; map_const ROUTE_7_NATIONAL_PARK_GATE ; 15
 	dw Violet_Map_Name16 ; map_const ROUTE_36_RUINS_OF_ALPH_GATE ; 16
 	dw Violet_Map_Name17 ; map_const ROUTE_36_NATIONAL_PARK_GATE ; 17
 	assert_table_length NUM_VIOLET_MAPS
@@ -663,8 +663,8 @@ Lake_of_Rage_Map_Name6: ; map_const LAKE_OF_RAGE ; 6
 
 Violet_Map_Name1: ; map_const ROUTE_4,;  1
 	db "Route 4@"
-Violet_Map_Name2: ; map_const ROUTE_35,;  2
-	db "Route 35@"
+Violet_Map_Name2: ; map_const ROUTE_7,;  2
+	db "Route 7@"
 Violet_Map_Name3: ; map_const ROUTE_36,;  3
 	db "Route 36@"
 Violet_Map_Name4: ; map_const ROUTE_37,;  4
@@ -687,10 +687,10 @@ Violet_Map_Name12: ; map_const ROUTE_4_RUINS_OF_ALPH_GATE ; 12
 	db "Route 4-Ruin Gate@"
 Violet_Map_Name13: ; map_const ROUTE_4_POKECENTER_1F ; 13
 	db "Route 4 Center@"
-Violet_Map_Name14: ; map_const ROUTE_35_GOLDENROD_GATE ; 14
-	db "Route 35-Gold Gate@"
-Violet_Map_Name15: ; map_const ROUTE_35_NATIONAL_PARK_GATE ; 15
-	db "Route 35-Park Gate@"
+Violet_Map_Name14: ; map_const ROUTE_7_GOLDENROD_GATE ; 14
+	db "Route 7-Gold Gate@"
+Violet_Map_Name15: ; map_const ROUTE_7_NATIONAL_PARK_GATE ; 15
+	db "Route 7-Park Gate@"
 Violet_Map_Name16: ; map_const ROUTE_36_RUINS_OF_ALPH_GATE ; 16
 	db "Route 36-Ruin Gate@"
 Violet_Map_Name17: ; map_const ROUTE_36_NATIONAL_PARK_GATE ; 17

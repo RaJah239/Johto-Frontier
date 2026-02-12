@@ -156,7 +156,7 @@ JohtoWaterWildMons:
 	db 15, QUAGSIRE
 	end_water_wildmons
 
-	def_water_wildmons ROUTE_35
+	def_water_wildmons ROUTE_7
 	db 4 percent ; encounter rate
 	db 15, WOOPER
 	db 20, QUAGSIRE

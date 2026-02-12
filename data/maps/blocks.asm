@@ -103,7 +103,7 @@ Route2BerryHouse_Blocks:
 
 Route43MahoganyGate_Blocks:
 Route43Gate_Blocks:
-Route35GoldenrodGate_Blocks:
+Route7GoldenrodGate_Blocks:
 Route36RuinsOfAlphGate_Blocks:
 Route6IlexForestGate_Blocks:
 Route40BattleTowerGate_Blocks:
@@ -117,8 +117,8 @@ Route3_Blocks:
 Route27_Blocks:
 	INCBIN "maps/Route27.blk"
 
-Route35_Blocks:
-	INCBIN "maps/Route35.blk"
+Route7_Blocks:
+	INCBIN "maps/Route7.blk"
 
 Route43_Blocks:
 	INCBIN "maps/Route43.blk"
@@ -518,8 +518,8 @@ EcruteakTinTowerEntrance_Blocks:
 GoldenrodGameCorner_Blocks:
 	INCBIN "maps/GoldenrodGameCorner.blk"
 
-Route35NationalParkGate_Blocks:
-	INCBIN "maps/Route35NationalParkGate.blk"
+Route7NationalParkGate_Blocks:
+	INCBIN "maps/Route7NationalParkGate.blk"
 
 Route36NationalParkGate_Blocks:
 	INCBIN "maps/Route36NationalParkGate.blk"

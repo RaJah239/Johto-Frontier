@@ -118,7 +118,7 @@ ENDM
 	connection east, Route41, ROUTE_41, 0
 
 	map_attributes GoldenrodCity, GOLDENROD_CITY, $35, NORTH | SOUTH
-	connection north, Route35, ROUTE_35, 5
+	connection north, Route7, ROUTE_7, 5
 	connection south, Route6, ROUTE_6, 5
 
 	map_attributes OlivineCity, OLIVINE_CITY, $35, NORTH | WEST
@@ -174,13 +174,13 @@ ENDM
 	connection north, GoldenrodCity, GOLDENROD_CITY, -5
 	connection east, AzaleaTown, AZALEA_TOWN, 18
 
-	map_attributes Route35, ROUTE_35, $05, NORTH | SOUTH
+	map_attributes Route7, ROUTE_7, $05, NORTH | SOUTH
 	connection north, Route36, ROUTE_36, 0
 	connection south, GoldenrodCity, GOLDENROD_CITY, -5
 
 	map_attributes Route36, ROUTE_36, $05, NORTH | SOUTH | EAST
 	connection north, Route37, ROUTE_37, 10
-	connection south, Route35, ROUTE_35, 0
+	connection south, Route7, ROUTE_7, 0
 	connection east, VioletCity, VIOLET_CITY, 0
 
 	map_attributes Route37, ROUTE_37, $05, NORTH | SOUTH
@@ -356,8 +356,8 @@ ENDM
 	map_attributes VioletKylesHouse, VIOLET_KYLES_HOUSE, $00, 0
 	map_attributes Route4RuinsOfAlphGate, ROUTE_4_RUINS_OF_ALPH_GATE, $00, 0
 	map_attributes Route4Pokecenter1F, ROUTE_4_POKECENTER_1F, $00, 0
-	map_attributes Route35GoldenrodGate, ROUTE_35_GOLDENROD_GATE, $00, 0
-	map_attributes Route35NationalParkGate, ROUTE_35_NATIONAL_PARK_GATE, $00, 0
+	map_attributes Route7GoldenrodGate, ROUTE_7_GOLDENROD_GATE, $00, 0
+	map_attributes Route7NationalParkGate, ROUTE_7_NATIONAL_PARK_GATE, $00, 0
 	map_attributes Route36RuinsOfAlphGate, ROUTE_36_RUINS_OF_ALPH_GATE, $00, 0
 	map_attributes Route36NationalParkGate, ROUTE_36_NATIONAL_PARK_GATE, $00, 0
 	map_attributes GoldenrodGym, GOLDENROD_GYM, $00, 0

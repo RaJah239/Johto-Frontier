@@ -43,7 +43,7 @@ Route36NationalParkGateCheckIfContestRunningCallback:
 	endcallback
 
 Route36NationalParkGateCheckIfContestAvailableCallback:
-	checkevent EVENT_WARPED_FROM_ROUTE_35_NATIONAL_PARK_GATE
+	checkevent EVENT_WARPED_FROM_ROUTE_7_NATIONAL_PARK_GATE
 	iftrue .Return
 	readvar VAR_WEEKDAY
 	ifequal TUESDAY, .SetContestOfficer
@@ -789,27 +789,6 @@ BugCatchingContestant10BStillCompetingText:
 
 	para "not good enough to"
 	line "win."
-	done
-
-UnusedBugCatchingContestExplanationText:
-; duplicate of BugCatchingContestExplanationText in Route35NationalParkGate.asm
-	text "The Bug-Catching"
-	line "Contest is held on"
-
-	para "Tuesday, Thursday"
-	line "and Saturday."
-
-	para "Not only do you"
-	line "earn a prize just"
-
-	para "for participating,"
-	line "you also get to"
-
-	para "keep the bug"
-	line "#MON you may"
-
-	para "have at the end of"
-	line "the contest."
 	done
 
 Route36NationalParkGateOfficer1WellHoldPrizeText:
