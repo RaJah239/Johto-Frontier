@@ -65,7 +65,7 @@ TrainerClassNames::
 	li "Twins"
 	li "#fan"
 	li "<PKMN> Trainer"
-	li "Leader"
+	li "<PKMN> Trainer"
 	li "Officer"
 	li "Rocket"
 	li "Mysticalman"
