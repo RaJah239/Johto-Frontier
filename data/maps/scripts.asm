@@ -290,8 +290,8 @@ INCLUDE "maps/MahoganyPokecenter1F.asm"
 INCLUDE "maps/Route14EcruteakGate.asm"
 INCLUDE "maps/LakeOfRageHiddenPowerHouse.asm"
 INCLUDE "maps/LakeOfRageMagikarpHouse.asm"
-INCLUDE "maps/Route43MahoganyGate.asm"
-INCLUDE "maps/Route43Gate.asm"
+INCLUDE "maps/Route15MahoganyGate.asm"
+INCLUDE "maps/Route15Gate.asm"
 INCLUDE "maps/OaksLab.asm"
 
 
@@ -299,7 +299,7 @@ SECTION "Map Scripts 20", ROMX
 
 INCLUDE "maps/CherrygroveCity.asm"
 INCLUDE "maps/Route7.asm"
-INCLUDE "maps/Route43.asm"
+INCLUDE "maps/Route15.asm"
 INCLUDE "maps/Route44.asm"
 INCLUDE "maps/Route45.asm"
 

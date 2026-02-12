@@ -46,7 +46,7 @@ Landmarks:
 	landmark  76,  44, MtMortarName
 	landmark  84,  44, Route14Name
 	landmark 100,  44, MahoganyTownName
-	landmark 100,  36, Route43Name
+	landmark 100,  36, Route15Name
 	landmark 100,  28, LakeOfRageName
 	landmark 112,  44, Route44Name
 	landmark 124,  36, IcePathName
@@ -111,7 +111,7 @@ Route11Name:         db "Route 11@"
 Route12Name:         db "Route 12@"
 Route13Name:         db "Route 13@"
 Route14Name:         db "Route 14@"
-Route43Name:         db "Route 43@"
+Route15Name:         db "Route 15@"
 Route44Name:         db "Route 44@"
 Route45Name:         db "Route 45@"
 Route46Name:         db "Route 46@"

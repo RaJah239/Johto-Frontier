@@ -40,7 +40,7 @@
 	const LANDMARK_MT_MORTAR         ; 23
 	const LANDMARK_ROUTE_14          ; 22
 	const LANDMARK_MAHOGANY_TOWN     ; 24
-	const LANDMARK_ROUTE_43          ; 25
+	const LANDMARK_ROUTE_15          ; 25
 	const LANDMARK_LAKE_OF_RAGE      ; 26
 	const LANDMARK_ROUTE_44          ; 27
 	const LANDMARK_ICE_PATH          ; 28

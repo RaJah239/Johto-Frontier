@@ -209,9 +209,9 @@ Lake_of_Rage_Map_Names: ;newgroup LAKE_OF_RAGE
 	table_width 2, Lake_of_Rage_Map_Names                                         ;  9
 	dw Lake_of_Rage_Map_Name1 ; map_const LAKE_OF_RAGE_HIDDEN_POWER_HOUSE ;  1
 	dw Lake_of_Rage_Map_Name2 ; map_const LAKE_OF_RAGE_MAGIKARP_HOUSE ;  2
-	dw Lake_of_Rage_Map_Name3 ; map_const ROUTE_43_MAHOGANY_GATE ;  3
-	dw Lake_of_Rage_Map_Name4 ; map_const ROUTE_43_GATE ;  4
-	dw Lake_of_Rage_Map_Name5 ; map_const ROUTE_43,                                    10, 27 ;  5
+	dw Lake_of_Rage_Map_Name3 ; map_const ROUTE_15_MAHOGANY_GATE ;  3
+	dw Lake_of_Rage_Map_Name4 ; map_const ROUTE_15_GATE ;  4
+	dw Lake_of_Rage_Map_Name5 ; map_const ROUTE_15,                                    10, 27 ;  5
 	dw Lake_of_Rage_Map_Name6 ; map_const LAKE_OF_RAGE,                                20, 18 ;  6
 	assert_table_length NUM_LAKE_OF_RAGE_MAPS
 
@@ -652,12 +652,12 @@ Lake_of_Rage_Map_Name1: ; map_const LAKE_OF_RAGE_HIDDEN_POWER_HOUSE ;  1
 	db "Hidden Power House@"
 Lake_of_Rage_Map_Name2: ; map_const LAKE_OF_RAGE_MAGIKARP_HOUSE ;  2
 	db "Magikarp House@"
-Lake_of_Rage_Map_Name3: ; map_const ROUTE_43_MAHOGANY_GATE ;  3
-	db "Route 43, Gate 1@"
-Lake_of_Rage_Map_Name4: ; map_const ROUTE_43_GATE ;  4
-	db "Route 43, Gate 2@"
-Lake_of_Rage_Map_Name5: ; map_const ROUTE_43 ;  5
-	db "Route 43@"
+Lake_of_Rage_Map_Name3: ; map_const ROUTE_15_MAHOGANY_GATE ;  3
+	db "Route 15, Gate 1@"
+Lake_of_Rage_Map_Name4: ; map_const ROUTE_15_GATE ;  4
+	db "Route 15, Gate 2@"
+Lake_of_Rage_Map_Name5: ; map_const ROUTE_15 ;  5
+	db "Route 15@"
 Lake_of_Rage_Map_Name6: ; map_const LAKE_OF_RAGE ; 6
 	db "Lake Of Rage@"
 

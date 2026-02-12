@@ -1,19 +1,19 @@
 	object_const_def
-	const ROUTE43_SUPER_NERD1
-	const ROUTE43_SUPER_NERD2
-	const ROUTE43_SUPER_NERD3
-	const ROUTE43_FISHER
-	const ROUTE43_LASS
-	const ROUTE43_YOUNGSTER
-	const ROUTE43_POKE_BALL
-	const ROUTE43_BERRY_TREE1
-	const ROUTE43_APRICORN_TREE1
+	const ROUTE15_SUPER_NERD1
+	const ROUTE15_SUPER_NERD2
+	const ROUTE15_SUPER_NERD3
+	const ROUTE15_FISHER
+	const ROUTE15_LASS
+	const ROUTE15_YOUNGSTER
+	const ROUTE15_POKE_BALL
+	const ROUTE15_BERRY_TREE1
+	const ROUTE15_APRICORN_TREE1
 
-Route43_MapScripts:
+Route15_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_NEWMAP, Route43CheckIfRocketsScene
+	callback MAPCALLBACK_NEWMAP, Route15CheckIfRocketsScene
 	callback MAPCALLBACK_OBJECTS, .Weather
 
 .Weather:
@@ -21,14 +21,14 @@ Route43_MapScripts:
 	writemem wFieldWeather
 	endcallback
 
-Route43CheckIfRocketsScene:
+Route15CheckIfRocketsScene:
 	checkevent EVENT_CLEARED_ROCKET_HIDEOUT
 	iftrue .NoRockets
-	setmapscene ROUTE_43_GATE, SCENE_ROUTE43GATE_ROCKET_SHAKEDOWN
+	setmapscene ROUTE_15_GATE, SCENE_ROUTE15GATE_ROCKET_SHAKEDOWN
 	endcallback
 
 .NoRockets:
-	setmapscene ROUTE_43_GATE, SCENE_ROUTE43GATE_NOOP
+	setmapscene ROUTE_15_GATE, SCENE_ROUTE15GATE_NOOP
 	endcallback
 
 TrainerCamperSpencer:
@@ -292,16 +292,16 @@ TrainerPicnickerTiffany:
 	jumpstd PackFullFScript
 	end
 
-Route43Sign1:
-	jumptext Route43Sign1Text
+Route15Sign1:
+	jumptext Route15Sign1Text
 
-Route43Sign2:
-	jumptext Route43Sign2Text
+Route15Sign2:
+	jumptext Route15Sign2Text
 
-Route43TrainerTips:
-	jumptext Route43TrainerTipsText
+Route15TrainerTips:
+	jumptext Route15TrainerTipsText
 
-Route43MaxEther:
+Route15MaxEther:
 	itemball MAX_ETHER
 
 PokemaniacBenSeenText:
@@ -447,21 +447,21 @@ PicnickerTiffanyClefairyText:
 	line "CLEFAIRY?"
 	done
 
-Route43Sign1Text:
-	text "ROUTE 43"
+Route15Sign1Text:
+	text "ROUTE 15"
 
 	para "LAKE OF RAGE -"
 	line "MAHOGANY TOWN"
 	done
 
-Route43Sign2Text:
-	text "ROUTE 43"
+Route15Sign2Text:
+	text "ROUTE 15"
 
 	para "LAKE OF RAGE -"
 	line "MAHOGANY TOWN"
 	done
 
-Route43TrainerTipsText:
+Route15TrainerTipsText:
 	text "TRAINER TIPS"
 
 	para "All #MON have"
@@ -483,72 +483,72 @@ Route43TrainerTipsText:
 	line "#MON's type."
 	done
 
-Route43BerryTree1:
+Route15BerryTree1:
 	opentext
 	getitemname STRING_BUFFER_3, BITTER_BERRY
-	writetext Route43TreeText
+	writetext Route15TreeText
 	promptbutton
-	writetext Route43HeyItsBerryApricornText
+	writetext Route15HeyItsBerryApricornText
 	promptbutton
 	giveitem BITTER_BERRY
-	iffalse Route43NoRoomInBag
-	disappear ROUTE43_BERRY_TREE1
-	writetext Route43FoundItemText
+	iffalse Route15NoRoomInBag
+	disappear ROUTE15_BERRY_TREE1
+	writetext Route15FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route43ApricornTree1:
+Route15ApricornTree1:
 	opentext
 	getitemname STRING_BUFFER_3, PNK_APRICORN
-	writetext Route43TreeText
+	writetext Route15TreeText
 	promptbutton
-	writetext Route43HeyItsBerryApricornText
+	writetext Route15HeyItsBerryApricornText
 	promptbutton
 	giveitem PNK_APRICORN
-	iffalse Route43NoRoomInBag
-	disappear ROUTE43_APRICORN_TREE1
-	writetext Route43FoundItemText
+	iffalse Route15NoRoomInBag
+	disappear ROUTE15_APRICORN_TREE1
+	writetext Route15FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route43NoBerryOrApricorn:
+Route15NoBerryOrApricorn:
 	opentext
-	writetext Route43TreeText
+	writetext Route15TreeText
 	promptbutton
-	writetext Route43NothingHereText
+	writetext Route15NothingHereText
 	waitbutton
 	closetext
 	end
 
-Route43NoRoomInBag:
-	writetext Route43NoRoomInBagText
+Route15NoRoomInBag:
+	writetext Route15NoRoomInBagText
 	waitbutton
 	closetext
 	end
 
-Route43TreeText:
+Route15TreeText:
 	text_far _FruitBearingTreeText
 	text_end
 
-Route43NothingHereText:
+Route15NothingHereText:
 	text_far _NothingHereText
 	text_end
 
-Route43HeyItsBerryApricornText:
+Route15HeyItsBerryApricornText:
 	text_far _HeyItsFruitText
 	text_end
 
-Route43FoundItemText:
+Route15FoundItemText:
 	text_far _ObtainedFruitText
 	text_end
 
-Route43NoRoomInBagText:
+Route15NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
@@ -563,22 +563,22 @@ PokemaniacBrent_AgainGiveGoldBerryAfterBattleText:
 	line "Take it!"
 	done
 
-Route43_MapEvents:
+Route15_MapEvents:
 	def_warp_events
-	warp_event  9, 51, ROUTE_43_MAHOGANY_GATE, 1
-	warp_event 10, 51, ROUTE_43_MAHOGANY_GATE, 2
-	warp_event 17, 35, ROUTE_43_GATE, 3
-	warp_event 17, 31, ROUTE_43_GATE, 1
-	warp_event 18, 31, ROUTE_43_GATE, 2
+	warp_event  9, 51, ROUTE_15_MAHOGANY_GATE, 1
+	warp_event 10, 51, ROUTE_15_MAHOGANY_GATE, 2
+	warp_event 17, 35, ROUTE_15_GATE, 3
+	warp_event 17, 31, ROUTE_15_GATE, 1
+	warp_event 18, 31, ROUTE_15_GATE, 2
 
 	def_coord_events
 
 	def_bg_events
-	bg_event 13,  3, BGEVENT_READ, Route43Sign1
-	bg_event 11, 49, BGEVENT_READ, Route43Sign2
-	bg_event 16, 38, BGEVENT_READ, Route43TrainerTips
-	bg_event  1, 27, BGEVENT_READ, Route43NoBerryOrApricorn
-	bg_event  0, 26, BGEVENT_READ, Route43NoBerryOrApricorn
+	bg_event 13,  3, BGEVENT_READ, Route15Sign1
+	bg_event 11, 49, BGEVENT_READ, Route15Sign2
+	bg_event 16, 38, BGEVENT_READ, Route15TrainerTips
+	bg_event  1, 27, BGEVENT_READ, Route15NoBerryOrApricorn
+	bg_event  0, 26, BGEVENT_READ, Route15NoBerryOrApricorn
 
 	def_object_events
 	object_event 13,  5, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, TrainerPokemaniacBen, -1
@@ -587,6 +587,6 @@ Route43_MapEvents:
 	object_event  4, 16, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 4, TrainerFisherMarvin, -1
 	object_event  9, 25, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 2, TrainerPicnickerTiffany, -1
 	object_event 13, 40, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerCamperSpencer, -1
-	object_event 12, 32, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route43MaxEther, EVENT_ROUTE_43_MAX_ETHER
-	object_event  1, 27, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route43BerryTree1, EVENT_ROUTE_43_BERRY_1
-	object_event  0, 26, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route43ApricornTree1, EVENT_ROUTE_43_APRICORN_1
+	object_event 12, 32, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route15MaxEther, EVENT_ROUTE_15_MAX_ETHER
+	object_event  1, 27, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route15BerryTree1, EVENT_ROUTE_15_BERRY_1
+	object_event  0, 26, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route15ApricornTree1, EVENT_ROUTE_15_APRICORN_1

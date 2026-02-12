@@ -1,28 +1,28 @@
 	object_const_def
-	const ROUTE43MAHOGANYGATE_OFFICER
+	const ROUTE15MAHOGANYGATE_OFFICER
 
-Route43MahoganyGate_MapScripts:
+Route15MahoganyGate_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
 
-Route43MahoganyGateOfficer:
+Route15MahoganyGateOfficer:
 	faceplayer
 	opentext
 	checkevent EVENT_CLEARED_ROCKET_HIDEOUT
 	iftrue .RocketsCleared
-	writetext Route43MahoganyGateOfficerText
+	writetext Route15MahoganyGateOfficerText
 	waitbutton
 	closetext
 	end
 
 .RocketsCleared:
-	writetext Route43MahoganyGateOfficerRocketsClearedText
+	writetext Route15MahoganyGateOfficerRocketsClearedText
 	waitbutton
 	closetext
 	end
 
-Route43MahoganyGateOfficerText:
+Route15MahoganyGateOfficerText:
 	text "Only people headed"
 	line "up to LAKE OF RAGE"
 
@@ -30,16 +30,16 @@ Route43MahoganyGateOfficerText:
 	line "here lately."
 	done
 
-Route43MahoganyGateOfficerRocketsClearedText:
+Route15MahoganyGateOfficerRocketsClearedText:
 	text "Nobody goes up to"
 	line "LAKE OF RAGE these"
 	cont "days."
 	done
 
-Route43MahoganyGate_MapEvents:
+Route15MahoganyGate_MapEvents:
 	def_warp_events
-	warp_event  4,  0, ROUTE_43, 1
-	warp_event  5,  0, ROUTE_43, 2
+	warp_event  4,  0, ROUTE_15, 1
+	warp_event  5,  0, ROUTE_15, 2
 	warp_event  4,  7, MAHOGANY_TOWN, 5
 	warp_event  5,  7, MAHOGANY_TOWN, 5
 
@@ -48,4 +48,4 @@ Route43MahoganyGate_MapEvents:
 	def_bg_events
 
 	def_object_events
-	object_event  0,  4, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route43MahoganyGateOfficer, -1
+	object_event  0,  4, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route15MahoganyGateOfficer, -1

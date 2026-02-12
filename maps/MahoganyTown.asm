@@ -103,7 +103,7 @@ MahoganyTown_MapEvents:
 	warp_event 11,  7, MAHOGANY_MART_1F, 1
 	warp_event 17,  7, MAHOGANY_RED_GYARADOS_SPEECH_HOUSE, 1
 	warp_event  6, 13, MAHOGANY_GYM, 1
-	warp_event  9,  1, ROUTE_43_MAHOGANY_GATE, 3
+	warp_event  9,  1, ROUTE_15_MAHOGANY_GATE, 3
 	warp_event  3,  5, MAHOGANY_TRADE_BACK_KID_HOUSE, 1
 
 	def_coord_events

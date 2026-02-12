@@ -50,7 +50,7 @@ SwarmGrampsScript:
 
 .squirtle
 	setflag ENGINE_SWARM
-	swarm ROUTE_43
+	swarm ROUTE_15
 	writetext SwarmSquirtleText
 	sjump .WrappingUpSwarms
 
@@ -113,7 +113,7 @@ SwarmCharmanderText:
 SwarmSquirtleText:
 	text "There's a swarm of"
 	line "SQUIRTLE on"
-	cont "ROUTE 43!"
+	cont "ROUTE 15!"
 	done
 
 SwarmChikoritaText:

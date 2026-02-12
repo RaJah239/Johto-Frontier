@@ -131,12 +131,12 @@ ENDM
 	connection east, Route14, ROUTE_14, 9
 
 	map_attributes MahoganyTown, MAHOGANY_TOWN, $71, NORTH | WEST | EAST
-	connection north, Route43, ROUTE_43, 0
+	connection north, Route15, ROUTE_15, 0
 	connection west, Route14, ROUTE_14, 0
 	connection east, Route44, ROUTE_44, 0
 
 	map_attributes LakeOfRage, LAKE_OF_RAGE, $05, SOUTH
-	connection south, Route43, ROUTE_43, 5
+	connection south, Route15, ROUTE_15, 5
 
 	map_attributes BlackthornCity, BLACKTHORN_CITY, $71, SOUTH | WEST
 	connection south, Route45, ROUTE_45, 0
@@ -207,7 +207,7 @@ ENDM
 	connection west, EcruteakCity, ECRUTEAK_CITY, -9
 	connection east, MahoganyTown, MAHOGANY_TOWN, 0
 
-	map_attributes Route43, ROUTE_43, $05, NORTH | SOUTH
+	map_attributes Route15, ROUTE_15, $05, NORTH | SOUTH
 	connection north, LakeOfRage, LAKE_OF_RAGE, -5
 	connection south, MahoganyTown, MAHOGANY_TOWN, 0
 
@@ -346,8 +346,8 @@ ENDM
 	map_attributes AzaleaGym, AZALEA_GYM, $00, 0
 	map_attributes LakeOfRageHiddenPowerHouse, LAKE_OF_RAGE_HIDDEN_POWER_HOUSE, $00, 0
 	map_attributes LakeOfRageMagikarpHouse, LAKE_OF_RAGE_MAGIKARP_HOUSE, $00, 0
-	map_attributes Route43MahoganyGate, ROUTE_43_MAHOGANY_GATE, $00, 0
-	map_attributes Route43Gate, ROUTE_43_GATE, $00, 0
+	map_attributes Route15MahoganyGate, ROUTE_15_MAHOGANY_GATE, $00, 0
+	map_attributes Route15Gate, ROUTE_15_GATE, $00, 0
 	map_attributes VioletMart, VIOLET_MART, $00, 0
 	map_attributes VioletGym, VIOLET_GYM, $00, 0
 	map_attributes EarlsPokemonAcademy, EARLS_POKEMON_ACADEMY, $00, 0

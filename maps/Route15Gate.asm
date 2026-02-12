@@ -1,105 +1,105 @@
-DEF ROUTE43GATE_TOLL EQU 1000
+DEF ROUTE15GATE_TOLL EQU 1000
 
 	object_const_def
-	const ROUTE43GATE_OFFICER
-	const ROUTE43GATE_ROCKET1
-	const ROUTE43GATE_ROCKET2
+	const ROUTE15GATE_OFFICER
+	const ROUTE15GATE_ROCKET1
+	const ROUTE15GATE_ROCKET2
 
-Route43Gate_MapScripts:
+Route15Gate_MapScripts:
 	def_scene_scripts
-	scene_script Route43GateRocketShakedownScene, SCENE_ROUTE43GATE_ROCKET_SHAKEDOWN
-	scene_script Route43GateNoopScene,            SCENE_ROUTE43GATE_NOOP
+	scene_script Route15GateRocketShakedownScene, SCENE_ROUTE15GATE_ROCKET_SHAKEDOWN
+	scene_script Route15GateNoopScene,            SCENE_ROUTE15GATE_NOOP
 
 	def_callbacks
-	callback MAPCALLBACK_NEWMAP, Route43GateCheckIfRocketsCallback
+	callback MAPCALLBACK_NEWMAP, Route15GateCheckIfRocketsCallback
 
-Route43GateRocketShakedownScene:
-	sdefer Route43GateRocketTakeoverScript
+Route15GateRocketShakedownScene:
+	sdefer Route15GateRocketTakeoverScript
 	end
 
-Route43GateNoopScene:
+Route15GateNoopScene:
 	end
 
-Route43GateCheckIfRocketsCallback:
+Route15GateCheckIfRocketsCallback:
 	checkevent EVENT_CLEARED_ROCKET_HIDEOUT
 	iftrue .NoRockets
-	setmapscene ROUTE_43, 0 ; Route 43 does not have a scene variable
+	setmapscene ROUTE_15, 0 ; Route 15 does not have a scene variable
 	endcallback
 
 .NoRockets:
-	setmapscene ROUTE_43, 1 ; Route 43 does not have a scene variable
+	setmapscene ROUTE_15, 1 ; Route 15 does not have a scene variable
 	endcallback
 
-Route43GateRocketTakeoverScript:
+Route15GateRocketTakeoverScript:
 	playmusic MUSIC_ROCKET_ENCOUNTER
 	readvar VAR_FACING
 	ifequal DOWN, RocketScript_Southbound
 	ifequal UP, RocketScript_Northbound
-	setscene SCENE_ROUTE43GATE_NOOP
+	setscene SCENE_ROUTE15GATE_NOOP
 	end
 
 RocketScript_Southbound:
 	applymovement PLAYER, PlayerStepsIn
-	showemote EMOTE_SHOCK, ROUTE43GATE_ROCKET2, 15
-	applymovement ROUTE43GATE_ROCKET2, Rocket2Script_BlocksYouSouth
-	turnobject ROUTE43GATE_ROCKET1, UP
-	showemote EMOTE_SHOCK, ROUTE43GATE_ROCKET1, 15
-	applymovement ROUTE43GATE_ROCKET1, Rocket1Script_BlocksYouSouth
+	showemote EMOTE_SHOCK, ROUTE15GATE_ROCKET2, 15
+	applymovement ROUTE15GATE_ROCKET2, Rocket2Script_BlocksYouSouth
+	turnobject ROUTE15GATE_ROCKET1, UP
+	showemote EMOTE_SHOCK, ROUTE15GATE_ROCKET1, 15
+	applymovement ROUTE15GATE_ROCKET1, Rocket1Script_BlocksYouSouth
 	opentext
 	writetext RocketText_TollFee
 	promptbutton
-	checkmoney YOUR_MONEY, ROUTE43GATE_TOLL - 1
+	checkmoney YOUR_MONEY, ROUTE15GATE_TOLL - 1
 	ifequal HAVE_MORE, RocketScript_TollSouth
 	sjump RocketScript_YoureBrokeSouth
 
 RocketScript_TollSouth:
-	takemoney YOUR_MONEY, ROUTE43GATE_TOLL
+	takemoney YOUR_MONEY, ROUTE15GATE_TOLL
 	writetext RocketText_ThankYou
 	sjump RocketScript_ShakeDownSouth
 
 RocketScript_YoureBrokeSouth:
-	takemoney YOUR_MONEY, ROUTE43GATE_TOLL
+	takemoney YOUR_MONEY, ROUTE15GATE_TOLL
 	writetext RocketText_AllYouGot
 	sjump RocketScript_ShakeDownSouth
 
 RocketScript_ShakeDownSouth:
 	promptbutton
 	closetext
-	applymovement ROUTE43GATE_ROCKET1, Rocket1Script_LetsYouPassSouth
-	applymovement ROUTE43GATE_ROCKET2, Rocket2Script_LetsYouPassSouth
-	setscene SCENE_ROUTE43GATE_NOOP
+	applymovement ROUTE15GATE_ROCKET1, Rocket1Script_LetsYouPassSouth
+	applymovement ROUTE15GATE_ROCKET2, Rocket2Script_LetsYouPassSouth
+	setscene SCENE_ROUTE15GATE_NOOP
 	special RestartMapMusic
 	end
 
 RocketScript_Northbound:
-	showemote EMOTE_SHOCK, ROUTE43GATE_ROCKET1, 15
-	applymovement ROUTE43GATE_ROCKET1, Rocket1Script_BlocksYouNorth
-	turnobject ROUTE43GATE_ROCKET2, DOWN
-	showemote EMOTE_SHOCK, ROUTE43GATE_ROCKET2, 15
-	applymovement ROUTE43GATE_ROCKET2, Rocket2Script_BlocksYouNorth
+	showemote EMOTE_SHOCK, ROUTE15GATE_ROCKET1, 15
+	applymovement ROUTE15GATE_ROCKET1, Rocket1Script_BlocksYouNorth
+	turnobject ROUTE15GATE_ROCKET2, DOWN
+	showemote EMOTE_SHOCK, ROUTE15GATE_ROCKET2, 15
+	applymovement ROUTE15GATE_ROCKET2, Rocket2Script_BlocksYouNorth
 	opentext
 	writetext RocketText_TollFee
 	promptbutton
-	checkmoney YOUR_MONEY, ROUTE43GATE_TOLL - 1
+	checkmoney YOUR_MONEY, ROUTE15GATE_TOLL - 1
 	ifequal HAVE_MORE, RocketScript_TollNorth
 	sjump RocketScript_YoureBrokeNorth
 
 RocketScript_TollNorth:
-	takemoney YOUR_MONEY, ROUTE43GATE_TOLL
+	takemoney YOUR_MONEY, ROUTE15GATE_TOLL
 	writetext RocketText_ThankYou
 	sjump RocketScript_ShakeDownNorth
 
 RocketScript_YoureBrokeNorth:
-	takemoney YOUR_MONEY, ROUTE43GATE_TOLL
+	takemoney YOUR_MONEY, ROUTE15GATE_TOLL
 	writetext RocketText_AllYouGot
 	sjump RocketScript_ShakeDownNorth
 
 RocketScript_ShakeDownNorth:
 	promptbutton
 	closetext
-	applymovement ROUTE43GATE_ROCKET2, Rocket2Script_LetsYouPassNorth
-	applymovement ROUTE43GATE_ROCKET1, Rocket1Script_LetsYouPassNorth
-	setscene SCENE_ROUTE43GATE_NOOP
+	applymovement ROUTE15GATE_ROCKET2, Rocket2Script_LetsYouPassNorth
+	applymovement ROUTE15GATE_ROCKET1, Rocket1Script_LetsYouPassNorth
+	setscene SCENE_ROUTE15GATE_NOOP
 	special RestartMapMusic
 	end
 
@@ -196,7 +196,7 @@ RocketText_TollFee:
 	text "Hold it there,"
 	line "kiddo!"
 
-	para "The toll is ¥{d:ROUTE43GATE_TOLL}"
+	para "The toll is ¥{d:ROUTE15GATE_TOLL}"
 	line "to go through."
 	done
 
@@ -240,12 +240,12 @@ OfficerText_AvoidGrass:
 	cont "the grass."
 	done
 
-Route43Gate_MapEvents:
+Route15Gate_MapEvents:
 	def_warp_events
-	warp_event  4,  0, ROUTE_43, 4
-	warp_event  5,  0, ROUTE_43, 5
-	warp_event  4,  7, ROUTE_43, 3
-	warp_event  5,  7, ROUTE_43, 3
+	warp_event  4,  0, ROUTE_15, 4
+	warp_event  5,  0, ROUTE_15, 5
+	warp_event  4,  7, ROUTE_15, 3
+	warp_event  5,  7, ROUTE_15, 3
 
 	def_coord_events
 
@@ -253,5 +253,5 @@ Route43Gate_MapEvents:
 
 	def_object_events
 	object_event  0,  4, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, OfficerScript_GuardWithSludgeBomb, EVENT_LAKE_OF_RAGE_CIVILIANS
-	object_event  2,  4, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RocketScript_MakingABundle, EVENT_ROUTE_43_GATE_ROCKETS
-	object_event  7,  4, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RocketScript_MakingABundle, EVENT_ROUTE_43_GATE_ROCKETS
+	object_event  2,  4, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RocketScript_MakingABundle, EVENT_ROUTE_15_GATE_ROCKETS
+	object_event  7,  4, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RocketScript_MakingABundle, EVENT_ROUTE_15_GATE_ROCKETS

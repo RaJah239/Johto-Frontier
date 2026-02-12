@@ -8,11 +8,11 @@ TiffanyPhoneCalleeScript:
 	farsjump TiffanyNoItemScript
 
 .WantsBattle:
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_43
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_15
 	farsjump TiffanyAsleepScript
 
 .HasItem:
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_43
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_15
 	farsjump TiffanyHurryScript
 
 TiffanyPhoneCallerScript:
@@ -25,10 +25,10 @@ TiffanyPhoneCallerScript:
 
 .TiffanyHasPinkBow:
 	setflag ENGINE_TIFFANY_HAS_PINK_BOW
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_43
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_15
 	farsjump PhoneScript_FoundItem_Female
 
 .TiffanyWantsBattle:
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_43
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_15
 	setflag ENGINE_TIFFANY_READY_FOR_REMATCH
 	farsjump PhoneScript_WantsToBattle_Female

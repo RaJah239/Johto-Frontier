@@ -145,7 +145,7 @@ MahoganyGroupSprites:
 	db 0 ; end
 
 LakeOfRageGroupSprites:
-; Route43, LakeOfRage
+; Route15, LakeOfRage
 	db SPRITE_LANCE
 	db SPRITE_GRAMPS
 	db SPRITE_SUPER_NERD

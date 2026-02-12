@@ -59,7 +59,7 @@ SwarmGrassWildMons:
 	db 5, CHARMANDER
 
 ; Squirtle swarm
-	map_id ROUTE_43
+	map_id ROUTE_15
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 5, SQUIRTLE

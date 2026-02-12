@@ -101,8 +101,8 @@ CherrygroveEvolutionSpeechHouse_Blocks:
 Route2BerryHouse_Blocks:
 	INCBIN "maps/House1.blk"
 
-Route43MahoganyGate_Blocks:
-Route43Gate_Blocks:
+Route15MahoganyGate_Blocks:
+Route15Gate_Blocks:
 Route7GoldenrodGate_Blocks:
 Route8RuinsOfAlphGate_Blocks:
 Route6IlexForestGate_Blocks:
@@ -120,8 +120,8 @@ Route27_Blocks:
 Route7_Blocks:
 	INCBIN "maps/Route7.blk"
 
-Route43_Blocks:
-	INCBIN "maps/Route43.blk"
+Route15_Blocks:
+	INCBIN "maps/Route15.blk"
 
 Route11_Blocks:
 	INCBIN "maps/Route11.blk"

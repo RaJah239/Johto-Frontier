@@ -1740,7 +1740,7 @@ RadioChannels:
 	ld a, [wPokegearMapPlayerIconLandmark]
 	cp LANDMARK_MAHOGANY_TOWN
 	jr z, .ok
-	cp LANDMARK_ROUTE_43
+	cp LANDMARK_ROUTE_15
 	jr z, .ok
 	cp LANDMARK_LAKE_OF_RAGE
 	jr nz, .NoSignal
