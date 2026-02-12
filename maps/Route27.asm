@@ -300,19 +300,25 @@ Route27FisherStepLeftOnceMovement:
 	step_end
 
 Route27FisherHeyText:
-	text "Hey!"
+	text "Hello there."
 	done
 
 Route27FisherText:
-	text "Do you know what"
-	line "you just did?"
+	text "This way leads to"
+	line "#mon League HQ."
 
-	para "You've taken your"
-	line "first step into"
-	cont "KANTO."
+	para "It's every trainer's"
+	line "goal."
 
-	para "Check your #-"
-	line "GEAR MAP and see."
+	para "The trek is harsh"
+	line "and entry to the"
+	cont "Victory Road isn't"
+	cont "permitted unless a"
+	cont "a trainer has all"
+	cont "8 Johto Badges."
+
+	para "I won't stop you…"
+	line "Just be careful."
 	done
 
 CooltrainermBlakeSeenText:
@@ -467,8 +473,8 @@ Route27_MapEvents:
 	warp_event 36,  5, TOHJO_FALLS, 2
 
 	def_coord_events
-	coord_event 16, 10, SCENE_ROUTE27_FIRST_STEP_INTO_KANTO, FirstStepIntoKantoLeftScene
-	coord_event 17, 10, SCENE_ROUTE27_FIRST_STEP_INTO_KANTO, FirstStepIntoKantoRightScene
+	coord_event 18, 10, SCENE_ROUTE27_FIRST_STEP_INTO_KANTO, FirstStepIntoKantoLeftScene
+	coord_event 19, 10, SCENE_ROUTE27_FIRST_STEP_INTO_KANTO, FirstStepIntoKantoRightScene
 
 	def_bg_events
 	bg_event 25,  7, BGEVENT_READ, TohjoFallsSign
