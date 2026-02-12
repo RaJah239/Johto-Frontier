@@ -1,7 +1,7 @@
 	object_const_def
-	const ROUTE27SANDSTORMHOUSE_GRANNY
+	const ROUTE19SANDSTORMHOUSE_GRANNY
 
-Route27SandstormHouse_MapScripts:
+Route19SandstormHouse_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
@@ -91,10 +91,10 @@ SandstormHouseWomanDisloyalText:
 	cont "and trainers."
 	done
 
-Route27SandstormHouse_MapEvents:
+Route19SandstormHouse_MapEvents:
 	def_warp_events
-	warp_event  2,  7, ROUTE_27, 1
-	warp_event  3,  7, ROUTE_27, 1
+	warp_event  2,  7, ROUTE_19, 1
+	warp_event  3,  7, ROUTE_19, 1
 
 	def_coord_events
 

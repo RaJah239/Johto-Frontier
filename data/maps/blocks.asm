@@ -94,7 +94,7 @@ PokeSeersHouse_Blocks:
 PlayersNeighborsHouse_Blocks:
 Route26HealHouse_Blocks:
 DayOfWeekSiblingsHouse_Blocks:
-Route27SandstormHouse_Blocks:
+Route19SandstormHouse_Blocks:
 CherrygroveGymSpeechHouse_Blocks:
 GuideGentsHouse_Blocks:
 CherrygroveEvolutionSpeechHouse_Blocks:
@@ -114,8 +114,8 @@ Route11_SilverCaveGate_Blocks:
 Route3_Blocks:
 	INCBIN "maps/Route3.blk"
 
-Route27_Blocks:
-	INCBIN "maps/Route27.blk"
+Route19_Blocks:
+	INCBIN "maps/Route19.blk"
 
 Route7_Blocks:
 	INCBIN "maps/Route7.blk"

@@ -332,7 +332,7 @@ Cianwood_Map_Names: ;newgroup CIANWOOD
 New_Bark_Map_Names: ; newgroup NEW_BARK ; 24
 	table_width 2, New_Bark_Map_Names
 	dw New_Bark_Map_Name1 ; map_const ROUTE_26,                                    10, 54 ;  1
-	dw New_Bark_Map_Name2 ; map_const ROUTE_27,                                    40,  9 ;  2
+	dw New_Bark_Map_Name2 ; map_const ROUTE_19,                                    40,  9 ;  2
 	dw New_Bark_Map_Name3 ; map_const ROUTE_1,                                    30,  9 ;  3
 	dw New_Bark_Map_Name4 ; map_const NEW_BARK_TOWN,                               10,  9 ;  4
 	dw New_Bark_Map_Name5 ; map_const ELMS_LAB ;  5
@@ -342,7 +342,7 @@ New_Bark_Map_Names: ; newgroup NEW_BARK ; 24
 	dw New_Bark_Map_Name9 ; map_const ELMS_HOUSE ;  9
 	dw New_Bark_Map_Name10 ; map_const ROUTE_26_HEAL_HOUSE ; 10
 	dw New_Bark_Map_Name11 ; map_const DAY_OF_WEEK_SIBLINGS_HOUSE ; 11
-	dw New_Bark_Map_Name12 ; map_const ROUTE_27_SANDSTORM_HOUSE ; 12
+	dw New_Bark_Map_Name12 ; map_const ROUTE_19_SANDSTORM_HOUSE ; 12
 	dw New_Bark_Map_Name13 ; map_const ROUTE_1_ROUTE_18_GATE ; 13
 	assert_table_length NUM_NEW_BARK_MAPS
 
@@ -842,8 +842,8 @@ Cianwood_Map_Name23: ; map_const POWER_PLANT
 
 New_Bark_Map_Name1: ; map_const ROUTE_26,  1
 	db "Route 26@"
-New_Bark_Map_Name2: ; map_const ROUTE_27,  2
-	db "Route 27@"
+New_Bark_Map_Name2: ; map_const ROUTE_19,  2
+	db "Route 19@"
 New_Bark_Map_Name3: ; map_const ROUTE_1, ;  3
 	db "Route 1@"
 New_Bark_Map_Name4: ; map_const NEW_BARK_TOWN,;  4
@@ -862,8 +862,8 @@ New_Bark_Map_Name10: ; map_const ROUTE_26_HEAL_HOUSE ; 10
 	db "Route 26 House@"
 New_Bark_Map_Name11: ; map_const DAY_OF_WEEK_SIBLINGS_HOUSE ; 11
 	db "Day Siblings House@"
-New_Bark_Map_Name12: ; map_const ROUTE_27_SANDSTORM_HOUSE ; 12
-	db "Route 27 House@"
+New_Bark_Map_Name12: ; map_const ROUTE_19_SANDSTORM_HOUSE ; 12
+	db "Route 19 House@"
 New_Bark_Map_Name13: ; map_const ROUTE_1_ROUTE_18_GATE ; 13
 	db "Route 1 Gate@"
 

@@ -99,7 +99,7 @@ ENDM
 
 	map_attributes NewBarkTown, NEW_BARK_TOWN, $05, WEST | EAST
 	connection west, Route1, ROUTE_1, 0
-	connection east, Route27, ROUTE_27, 0
+	connection east, Route19, ROUTE_19, 0
 
 	map_attributes CherrygroveCity, CHERRYGROVE_CITY, $35, NORTH | EAST
 	connection north, Route2, ROUTE_2, 5
@@ -143,9 +143,9 @@ ENDM
 	connection west, Route16, ROUTE_16, 9
 
 	map_attributes Route26, ROUTE_26, $05, WEST
-	connection west, Route27, ROUTE_27, 45
+	connection west, Route19, ROUTE_19, 45
 
-	map_attributes Route27, ROUTE_27, $35, WEST | EAST
+	map_attributes Route19, ROUTE_19, $35, WEST | EAST
 	connection west, NewBarkTown, NEW_BARK_TOWN, 0
 	connection east, Route26, ROUTE_26, -45
 
@@ -431,7 +431,7 @@ ENDM
 	map_attributes ElmsHouse, ELMS_HOUSE, $00, 0
 	map_attributes Route26HealHouse, ROUTE_26_HEAL_HOUSE, $00, 0
 	map_attributes DayOfWeekSiblingsHouse, DAY_OF_WEEK_SIBLINGS_HOUSE, $00, 0
-	map_attributes Route27SandstormHouse, ROUTE_27_SANDSTORM_HOUSE, $00, 0
+	map_attributes Route19SandstormHouse, ROUTE_19_SANDSTORM_HOUSE, $00, 0
 	map_attributes Route1Route18Gate, ROUTE_1_ROUTE_18_GATE, $00, 0
 	map_attributes CherrygroveMart, CHERRYGROVE_MART, $00, 0
 	map_attributes CherrygrovePokecenter1F, CHERRYGROVE_POKECENTER_1F, $00, 0

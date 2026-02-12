@@ -49,7 +49,7 @@
 	const LANDMARK_ROUTE_17          ; 2b
 	const LANDMARK_ROUTE_18          ; 2d
 	const LANDMARK_TOHJO_FALLS       ; 5d
-	const LANDMARK_ROUTE_27          ; 5c
+	const LANDMARK_ROUTE_19          ; 5c
 	const LANDMARK_ROUTE_26          ; 5b
 	const LANDMARK_VICTORY_ROAD      ; 58
 	const LANDMARK_ROUTE_23          ; 59

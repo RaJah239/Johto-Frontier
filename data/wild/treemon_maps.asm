@@ -5,7 +5,7 @@ ENDM
 
 TreeMonMaps::
 	treemon_map ROUTE_26,                  TREEMON_SET_KANTO
-	treemon_map ROUTE_27,                  TREEMON_SET_KANTO
+	treemon_map ROUTE_19,                  TREEMON_SET_KANTO
 	treemon_map ROUTE_1,                   TREEMON_SET_ROUTE
 	treemon_map ROUTE_2,                   TREEMON_SET_ROUTE
 	treemon_map ROUTE_3,                   TREEMON_SET_ROUTE

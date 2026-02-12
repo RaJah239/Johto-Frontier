@@ -55,7 +55,7 @@ Landmarks:
 	landmark 124,  64, Route17Name
 	landmark 116,  88, Route18Name
 	landmark 140, 100, TohjoFallsName
-	landmark 148, 100, Route27Name
+	landmark 148, 100, Route19Name
 	landmark 148,  84, Route26Name
 	landmark 148,  52, VictoryRoadName
 	landmark 148,  44, Route23Name
@@ -96,7 +96,7 @@ IndigoPlateauName:   db "Indigo<BSP>Plateau@"
 VictoryRoadName:     db "Victory<BSP>Road@"
 Route23Name:         db "Route 23@"
 Route26Name:         db "Route 26@"
-Route27Name:         db "Route 27@"
+Route19Name:         db "Route 19@"
 Route1Name:          db "Route 1@"
 Route2Name:          db "Route 2@"
 Route3Name:          db "Route 3@"

@@ -124,7 +124,7 @@ INCLUDE "maps/PlayersNeighborsHouse.asm"
 INCLUDE "maps/ElmsHouse.asm"
 INCLUDE "maps/Route26HealHouse.asm"
 INCLUDE "maps/DayOfWeekSiblingsHouse.asm"
-INCLUDE "maps/Route27SandstormHouse.asm"
+INCLUDE "maps/Route19SandstormHouse.asm"
 INCLUDE "maps/Route1Route18Gate.asm"
 
 
@@ -307,7 +307,7 @@ INCLUDE "maps/Route17.asm"
 SECTION "Map Scripts 21", ROMX
 
 INCLUDE "maps/CianwoodCity.asm"
-INCLUDE "maps/Route27.asm"
+INCLUDE "maps/Route19.asm"
 INCLUDE "maps/Route1.asm"
 INCLUDE "maps/Route2.asm"
 INCLUDE "maps/Route10.asm"

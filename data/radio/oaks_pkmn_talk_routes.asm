@@ -17,4 +17,5 @@ OaksPKMNTalkRoutes:
 	map_id ROUTE_16
 	map_id ROUTE_17
 	map_id ROUTE_18
+	map_id ROUTE_19
 .End
