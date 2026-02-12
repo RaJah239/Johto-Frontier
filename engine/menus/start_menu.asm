@@ -664,10 +664,10 @@ Fast_Travel_Warp_Strings:
 	dba Dungeons_Map_Name15
 	dba Ecruteak_Map_Name9
 	dba Silver_Map_Name1
-	dba Olivine_Map_Name14
-	dba Cianwood_Map_Name16
+	dba Olivine_Map_Name13
+	dba Cianwood_Map_Name12
 	dba Cianwood_Map_Name3
-	dba Fast_Ship_Map_Name10
+	dba Fast_Ship_Map_Name3
 	dba Mahogany_Map_Name7
 	dba Lake_of_Rage_Map_Name6
 	dba Blackthorn_Map_Name10
