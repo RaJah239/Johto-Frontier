@@ -18,6 +18,36 @@ NewBarkTownFlypointCallback:
 	setflag ENGINE_FLYPOINT_NEW_BARK
 	endcallback
 
+NewBarkTown_INeedToGoMeetElm:
+	opentext
+	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
+	iftrue .MeetMomBeforeLeaving
+	writetext NeedToMeetElmText
+.PlayerTurnBack:
+	waitbutton
+	closetext
+	applymovement PLAYER, NewBarkTown_PlayerStepsLeft
+	turnobject PLAYER, LEFT
+	end
+
+.MeetMomBeforeLeaving:
+	writetext MeetMomBeforeLeavingText
+	sjump .PlayerTurnBack
+
+NewBarkTown_PlayerStepsLeft:
+	step LEFT
+	step_end
+
+NeedToMeetElmText:
+	text "Prof.Elm is wait-"
+	line "ing on me."
+	done
+
+MeetMomBeforeLeavingText:
+	text "I can't go before"
+	line "checking home."
+	done
+
 NewBarkTown_TeacherStopsYouScene1:
 	playmusic MUSIC_MOM
 	turnobject NEWBARKTOWN_TEACHER, LEFT
@@ -359,6 +389,8 @@ NewBarkTown_MapEvents:
 	def_coord_events
 	coord_event  1,  8, SCENE_NEWBARKTOWN_TEACHER_STOPS_YOU, NewBarkTown_TeacherStopsYouScene1
 	coord_event  1,  9, SCENE_NEWBARKTOWN_TEACHER_STOPS_YOU, NewBarkTown_TeacherStopsYouScene2
+	coord_event 18,  6, SCENE_NEWBARKTOWN_TEACHER_STOPS_YOU, NewBarkTown_INeedToGoMeetElm
+	coord_event 18,  7, SCENE_NEWBARKTOWN_TEACHER_STOPS_YOU, NewBarkTown_INeedToGoMeetElm
 
 	def_bg_events
 	bg_event  8,  8, BGEVENT_READ, NewBarkTownSign
