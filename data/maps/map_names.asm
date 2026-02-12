@@ -71,7 +71,7 @@ Mahogany_Map_Names: ;newgroup MAHOGANY
 	dw Mahogany_Map_Name3 ; map_const MAHOGANY_POKECENTER_1F ;  3
 	dw Mahogany_Map_Name4 ; map_const ROUTE_14_ECRUTEAK_GATE ;  4
 	dw Mahogany_Map_Name5 ; map_const ROUTE_14,  ;  5
-	dw Mahogany_Map_Name6 ; map_const ROUTE_44, ;  6
+	dw Mahogany_Map_Name6 ; map_const ROUTE_16, ;  6
 	dw Mahogany_Map_Name7 ; map_const MAHOGANY_TOWN,  ;  7
 	dw Mahogany_Map_Name8 ; map_const MAHOGANY_TRADE_BACK_KID_HOUSE ; 8
 	assert_table_length NUM_MAHOGANY_MAPS
@@ -417,8 +417,8 @@ Mahogany_Map_Name4: ; map_const ROUTE_14_ECRUTEAK_GATE ;  4
 	db "Route 14 Gate@"
 Mahogany_Map_Name5: ; map_const ROUTE_14,  ;  5
 	db "Route 14@"
-Mahogany_Map_Name6: ; map_const ROUTE_44, ;  6
-	db "Route 44@"
+Mahogany_Map_Name6: ; map_const ROUTE_16, ;  6
+	db "Route 16@"
 Mahogany_Map_Name7: ; map_const MAHOGANY_TOWN,  ;  7
 	db "Mahogany Town@"
 Mahogany_Map_Name8:

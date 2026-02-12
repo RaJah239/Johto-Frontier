@@ -42,7 +42,7 @@
 	const LANDMARK_MAHOGANY_TOWN     ; 24
 	const LANDMARK_ROUTE_15          ; 25
 	const LANDMARK_LAKE_OF_RAGE      ; 26
-	const LANDMARK_ROUTE_44          ; 27
+	const LANDMARK_ROUTE_16          ; 27
 	const LANDMARK_ICE_PATH          ; 28
 	const LANDMARK_BLACKTHORN_CITY   ; 29
 	const LANDMARK_DRAGONS_DEN       ; 2a

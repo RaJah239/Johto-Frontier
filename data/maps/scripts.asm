@@ -300,7 +300,7 @@ SECTION "Map Scripts 20", ROMX
 INCLUDE "maps/CherrygroveCity.asm"
 INCLUDE "maps/Route7.asm"
 INCLUDE "maps/Route15.asm"
-INCLUDE "maps/Route44.asm"
+INCLUDE "maps/Route16.asm"
 INCLUDE "maps/Route45.asm"
 
 

@@ -9,8 +9,8 @@ Route12_Blocks:
 Route8_Blocks:
 	INCBIN "maps/Route8.blk"
 
-Route44_Blocks:
-	INCBIN "maps/Route44.blk"
+Route16_Blocks:
+	INCBIN "maps/Route16.blk"
 
 ElmsHouse_Blocks:
 	INCBIN "maps/ElmsHouse.blk"

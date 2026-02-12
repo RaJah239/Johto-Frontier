@@ -57,7 +57,7 @@ ENDM
 	map_const MAHOGANY_POKECENTER_1F,                       5,  4 ;  3
 	map_const ROUTE_14_ECRUTEAK_GATE,                       5,  4 ;  4
 	map_const ROUTE_14,                                    30,  9 ;  5
-	map_const ROUTE_44,                                    30,  9 ;  6
+	map_const ROUTE_16,                                    30,  9 ;  6
 	map_const MAHOGANY_TOWN,                               10,  9 ;  7
 	map_const MAHOGANY_TRADE_BACK_KID_HOUSE,                4,  4 ;  8
 	endgroup

@@ -8,11 +8,11 @@ WiltonPhoneCalleeScript:
 	farsjump WiltonHaventFoundAnythingScript
 
 .WantsBattle:
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_44
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_16
 	farsjump WiltonNotBitingScript
 
 .HasItem:
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_44
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_16
 	farsjump WiltonWantThisScript
 
 WiltonPhoneCallerScript:
@@ -24,11 +24,11 @@ WiltonPhoneCallerScript:
 	ifequal 1, WiltonHasItem
 
 WiltonWantsBattle:
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_44
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_16
 	setflag ENGINE_WILTON_READY_FOR_REMATCH
 	farsjump PhoneScript_WantsToBattle_Male
 
 WiltonHasItem:
 	setflag ENGINE_WILTON_HAS_ITEM
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_44
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_16
 	farsjump PhoneScript_FoundItem_Male

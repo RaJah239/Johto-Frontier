@@ -48,7 +48,7 @@ Landmarks:
 	landmark 100,  44, MahoganyTownName
 	landmark 100,  36, Route15Name
 	landmark 100,  28, LakeOfRageName
-	landmark 112,  44, Route44Name
+	landmark 112,  44, Route16Name
 	landmark 124,  36, IcePathName
 	landmark 124,  44, BlackthornCityName
 	landmark 124,  40, DragonsDenName
@@ -112,7 +112,7 @@ Route12Name:         db "Route 12@"
 Route13Name:         db "Route 13@"
 Route14Name:         db "Route 14@"
 Route15Name:         db "Route 15@"
-Route44Name:         db "Route 44@"
+Route16Name:         db "Route 16@"
 Route45Name:         db "Route 45@"
 Route46Name:         db "Route 46@"
 DarkCaveName:        db "Dark Cave@"

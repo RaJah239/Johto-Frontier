@@ -128,7 +128,7 @@ CianwoodGroupSprites:
 	db 0 ; end
 
 MahoganyGroupSprites:
-; Route14, Route44, MahoganyTown
+; Route14, Route16, MahoganyTown
 	db SPRITE_GRAMPS
 	db SPRITE_YOUNGSTER
 	db SPRITE_LASS
