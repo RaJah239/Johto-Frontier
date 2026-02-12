@@ -3142,8 +3142,6 @@ wAzaleaTownSceneID::                              db
 wGoldenrodGymSceneID::                            db
 wGoldenrodMagnetTrainStationSceneID::             db
 wOlivineCitySceneID::                             db
-wRoute34SceneID::                                 db
-wRoute34IlexForestGateSceneID::                   db
 wEcruteakTinTowerEntranceSceneID::                db
 wWiseTriosRoomSceneID::                           db
 wEcruteakGymSceneID::                             db
@@ -3171,7 +3169,6 @@ wTeamRocketBaseB1FSceneID::                       db
 wTeamRocketBaseB2FSceneID::                       db
 wTeamRocketBaseB3FSceneID::                       db
 wGoldenrodUndergroundSwitchRoomEntrancesSceneID:: db
-wSilverCaveRoom3SceneID::                         db
 wVictoryRoadSceneID::                             db
 wDragonsDenB1FSceneID::                           db
 wDragonShrineSceneID::                            db
@@ -3185,7 +3182,7 @@ wOaksLab::                                        db ; Nayru62's scene in Oak's 
 wRoute23::                                        db
 wBattlePlaza::                                    db
 
-	ds 163
+	ds 166
 
 ; battle tower points
 wBattleTowerNormalPoints:: db
