@@ -18,8 +18,8 @@ ElmsHouse_Blocks:
 Pokecenter2F_Blocks:
 	INCBIN "maps/Pokecenter2F.blk"
 
-Route41_Blocks:
-	INCBIN "maps/Route41.blk"
+Route13_Blocks:
+	INCBIN "maps/Route13.blk"
 
 Route5_Blocks:
 	INCBIN "maps/Route5.blk"

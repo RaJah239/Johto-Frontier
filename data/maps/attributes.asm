@@ -115,7 +115,7 @@ ENDM
 	connection east, Route5, ROUTE_5, 0
 
 	map_attributes CianwoodCity, CIANWOOD_CITY, $35, EAST
-	connection east, Route41, ROUTE_41, 0
+	connection east, Route13, ROUTE_13, 0
 
 	map_attributes GoldenrodCity, GOLDENROD_CITY, $35, NORTH | SOUTH
 	connection north, Route7, ROUTE_7, 5
@@ -196,10 +196,10 @@ ENDM
 	connection east, Route10, ROUTE_10, 7
 
 	map_attributes Route12, ROUTE_12, $35, SOUTH | EAST
-	connection south, Route41, ROUTE_41, -15
+	connection south, Route13, ROUTE_13, -15
 	connection east, OlivineCity, OLIVINE_CITY, -9
 
-	map_attributes Route41, ROUTE_41, $35, NORTH | WEST
+	map_attributes Route13, ROUTE_13, $35, NORTH | WEST
 	connection north, Route12, ROUTE_12, 15
 	connection west, CianwoodCity, CIANWOOD_CITY, 0
 

@@ -107,7 +107,7 @@ GoldenrodGroupSprites:
 OlivineGroupSprites:
 ; Route10, Route11, OlivineCity
 CianwoodGroupSprites:
-; Route12, Route41, CianwoodCity, PowerPlantOutside
+; Route12, Route13, CianwoodCity, PowerPlantOutside
 	db SPRITE_RIVAL
 	db SPRITE_POKEFAN_M
 	db SPRITE_LASS

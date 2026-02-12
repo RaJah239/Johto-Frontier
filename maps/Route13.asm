@@ -1,34 +1,34 @@
 	object_const_def
-	const ROUTE41_OLIVINE_RIVAL1
-	const ROUTE41_OLIVINE_RIVAL2
-	const ROUTE41_OLIVINE_RIVAL3
-	const ROUTE41_OLIVINE_RIVAL4
-	const ROUTE41_OLIVINE_RIVAL5
-	const ROUTE41_SWIMMER_GIRL1
-	const ROUTE41_SWIMMER_GIRL2
-	const ROUTE41_SWIMMER_GIRL3
-	const ROUTE41_SWIMMER_GIRL4
-	const ROUTE41_SWIMMER_GIRL5
-	const ROUTE41_OTIS
+	const ROUTE13_OLIVINE_RIVAL1
+	const ROUTE13_OLIVINE_RIVAL2
+	const ROUTE13_OLIVINE_RIVAL3
+	const ROUTE13_OLIVINE_RIVAL4
+	const ROUTE13_OLIVINE_RIVAL5
+	const ROUTE13_SWIMMER_GIRL1
+	const ROUTE13_SWIMMER_GIRL2
+	const ROUTE13_SWIMMER_GIRL3
+	const ROUTE13_SWIMMER_GIRL4
+	const ROUTE13_SWIMMER_GIRL5
+	const ROUTE13_OTIS
 
-Route41_MapScripts:
+Route13_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, Route41OtisCallback
+	callback MAPCALLBACK_OBJECTS, Route13OtisCallback
 
-Route41OtisCallback:
+Route13OtisCallback:
 	; 10% chance of otis appearing
 	checkflag ENGINE_MET_OTIS_TODAY
 	iftrue .done
 	random 10
 	ifequal 0, .AppearOtis
 .done
-	disappear ROUTE41_OTIS
+	disappear ROUTE13_OTIS
 	endcallback
 
 .AppearOtis:
-	appear ROUTE41_OTIS
+	appear ROUTE13_OTIS
 	endcallback
 
 TrainerSwimmerfKaylee:
@@ -141,8 +141,8 @@ TrainerSwimmermMathew:
 	closetext
 	end
 
-Route41HiddenMaxEther:
-	hiddenitem MAX_ETHER, EVENT_ROUTE_41_HIDDEN_MAX_ETHER
+Route13HiddenMaxEther:
+	hiddenitem MAX_ETHER, EVENT_ROUTE_13_HIDDEN_MAX_ETHER
 
 SwimmermCharlieSeenText:
 	text "The water's warm"
@@ -351,19 +351,19 @@ SwimmerfWendyAfterBattleText:
 	line "it's scary."
 	done
 
-Route41OtisScript:
+Route13OtisScript:
 	callstd WanderingOddEggNPCScript
 	playsound SFX_WARP_TO
-	applymovement ROUTE41_OTIS, Route41OtisTeleportAwayMovement
-	disappear ROUTE41_OTIS
+	applymovement ROUTE13_OTIS, Route13OtisTeleportAwayMovement
+	disappear ROUTE13_OTIS
 	setflag ENGINE_MET_OTIS_TODAY
 	end
 
-Route41OtisTeleportAwayMovement:
+Route13OtisTeleportAwayMovement:
 	teleport_from
 	step_end
 
-Route41_MapEvents:
+Route13_MapEvents:
 	def_warp_events
 	warp_event 12, 17, WHIRL_ISLAND_NW, 1
 	warp_event 36, 19, WHIRL_ISLAND_NE, 1
@@ -373,7 +373,7 @@ Route41_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  9, 35, BGEVENT_ITEM, Route41HiddenMaxEther
+	bg_event  9, 35, BGEVENT_ITEM, Route13HiddenMaxEther
 
 	def_object_events
 	object_event 32,  6, SPRITE_SWIMMER_GUY, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerSwimmermCharlie, -1
@@ -386,4 +386,4 @@ Route41_MapEvents:
 	object_event 27, 34, SPRITE_SWIMMER_GIRL, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerSwimmerfDenise, -1
 	object_event 44, 28, SPRITE_SWIMMER_GIRL, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 4, TrainerSwimmerfKara, -1
 	object_event  9, 50, SPRITE_SWIMMER_GIRL, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 2, TrainerSwimmerfWendy, -1
-	object_event 28, 43, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route41OtisScript, EVENT_ROUTE_41_OTIS
+	object_event 28, 43, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route13OtisScript, EVENT_ROUTE_13_OTIS

@@ -313,7 +313,7 @@ Cable_Club_Map_Names: ;newgroup CABLE_CLUB
 Cianwood_Map_Names: ;newgroup CIANWOOD
 	table_width 2, Cianwood_Map_Names                                             ; 22
 	dw Cianwood_Map_Name1 ; map_const ROUTE_12,                                    10, 18 ;  1
-	dw Cianwood_Map_Name2 ; map_const ROUTE_41,                                    25, 27 ;  2
+	dw Cianwood_Map_Name2 ; map_const ROUTE_13,                                    25, 27 ;  2
 	dw Cianwood_Map_Name3 ; map_const CIANWOOD_CITY,                               15, 27 ;  3
 	dw Cianwood_Map_Name4 ; map_const MANIAS_HOUSE ;  4
 	dw Cianwood_Map_Name5 ; map_const CIANWOOD_GYM ;  5
@@ -811,8 +811,8 @@ Cable_Club_Map_Name6: ; map_const MOBILE_BATTLE_ROOM ;  6
 
 Cianwood_Map_Name1: ; map_const ROUTE_12,  1
 	db "Route 12@"
-Cianwood_Map_Name2: ; map_const ROUTE_41, ;  2
-	db "Route 41@"
+Cianwood_Map_Name2: ; map_const ROUTE_13, ;  2
+	db "Route 13@"
 Cianwood_Map_Name3: ; map_const CIANWOOD_CITY ;  3
 	db "Cianwood City@"
 Cianwood_Map_Name4: ; map_const MANIAS_HOUSE ;  4

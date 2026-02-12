@@ -322,7 +322,7 @@ INCLUDE "maps/BattlePlazaMagnetTrainStation.asm"
 INCLUDE "maps/Route3.asm"
 INCLUDE "maps/Route11.asm"
 INCLUDE "maps/Route12.asm"
-INCLUDE "maps/Route41.asm"
+INCLUDE "maps/Route13.asm"
 
 
 SECTION "Map Scripts 23", ROMX

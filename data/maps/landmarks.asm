@@ -41,7 +41,7 @@ Landmarks:
 	landmark  20,  60, Route12Name
 	landmark  20,  52, PowerPlantName
 	landmark  20,  92, WhirlIslandsName
-	landmark  20, 100, Route41Name
+	landmark  20, 100, Route13Name
 	landmark  12, 100, CianwoodCityName
 	landmark  76,  44, MtMortarName
 	landmark  84,  44, Route42Name
@@ -109,7 +109,7 @@ Route9Name:          db "Route 9@"
 Route10Name:         db "Route 10@"
 Route11Name:         db "Route 11@"
 Route12Name:         db "Route 12@"
-Route41Name:         db "Route 41@"
+Route13Name:         db "Route 13@"
 Route42Name:         db "Route 42@"
 Route43Name:         db "Route 43@"
 Route44Name:         db "Route 44@"
