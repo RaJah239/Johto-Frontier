@@ -127,7 +127,7 @@ ENDM
 
 	map_attributes EcruteakCity, ECRUTEAK_CITY, $05, SOUTH | WEST | EAST
 	connection south, Route9, ROUTE_9, 5
-	connection west, Route38, ROUTE_38, 5
+	connection west, Route10, ROUTE_10, 5
 	connection east, Route42, ROUTE_42, 9
 
 	map_attributes MahoganyTown, MAHOGANY_TOWN, $71, NORTH | WEST | EAST
@@ -187,13 +187,13 @@ ENDM
 	connection north, EcruteakCity, ECRUTEAK_CITY, -5
 	connection south, Route8, ROUTE_8, -10
 
-	map_attributes Route38, ROUTE_38, $05, WEST | EAST
+	map_attributes Route10, ROUTE_10, $05, WEST | EAST
 	connection west, Route39, ROUTE_39, -7
 	connection east, EcruteakCity, ECRUTEAK_CITY, -5
 
 	map_attributes Route39, ROUTE_39, $05, SOUTH | EAST
 	connection south, OlivineCity, OLIVINE_CITY, -5
-	connection east, Route38, ROUTE_38, 7
+	connection east, Route10, ROUTE_10, 7
 
 	map_attributes Route40, ROUTE_40, $35, SOUTH | EAST
 	connection south, Route41, ROUTE_41, -15
@@ -315,7 +315,7 @@ ENDM
 	map_attributes OlivineGoodRodHouse, OLIVINE_GOOD_ROD_HOUSE, $00, 0
 	map_attributes OlivineCafe, OLIVINE_CAFE, $00, 0
 	map_attributes OlivineMart, OLIVINE_MART, $00, 0
-	map_attributes Route38EcruteakGate, ROUTE_38_ECRUTEAK_GATE, $00, 0
+	map_attributes Route10EcruteakGate, ROUTE_10_ECRUTEAK_GATE, $00, 0
 	map_attributes Route39Barn, ROUTE_39_BARN, $00, 0
 	map_attributes Route39Farmhouse, ROUTE_39_FARMHOUSE, $00, 0
 	map_attributes MahoganyRedGyaradosSpeechHouse, MAHOGANY_RED_GYARADOS_SPEECH_HOUSE, $00, 0

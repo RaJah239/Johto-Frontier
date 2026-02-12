@@ -1,14 +1,14 @@
 	object_const_def
-	const ROUTE38_STANDING_YOUNGSTER1
-	const ROUTE38_LASS
-	const ROUTE38_STANDING_YOUNGSTER2
-	const ROUTE38_BEAUTY1
-	const ROUTE38_SAILOR
-	const ROUTE38_BEAUTY2
-	const ROUTE38_BERRY_TREE1
-	const ROUTE38_BERRY_TREE2
+	const ROUTE10_STANDING_YOUNGSTER1
+	const ROUTE10_LASS
+	const ROUTE10_STANDING_YOUNGSTER2
+	const ROUTE10_BEAUTY1
+	const ROUTE10_SAILOR
+	const ROUTE10_BEAUTY2
+	const ROUTE10_BERRY_TREE1
+	const ROUTE10_BERRY_TREE2
 
-Route38_MapScripts:
+Route10_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
@@ -284,11 +284,11 @@ TrainerBeautyOlivia:
 	closetext
 	end
 
-Route38Sign:
-	jumptext Route38SignText
+Route10Sign:
+	jumptext Route10SignText
 
-Route38TrainerTips:
-	jumptext Route38TrainerTipsText
+Route10TrainerTips:
+	jumptext Route10TrainerTipsText
 
 BirdKeeperTobySeenText:
 	text "Fly high into the"
@@ -417,14 +417,14 @@ BeautyOliviaAfterBattleText:
 	line "bottle at a time."
 	done
 
-Route38SignText:
-	text "ROUTE 38"
+Route10SignText:
+	text "ROUTE 10"
 
 	para "OLIVINE CITY -"
 	line "ECRUTEAK CITY"
 	done
 
-Route38TrainerTipsText:
+Route10TrainerTipsText:
 	text "TRAINER TIPS"
 
 	para "If a #MON is"
@@ -440,72 +440,72 @@ Route38TrainerTipsText:
 	cont "its evolution."
 	done
 
-Route38BerryTree1:
+Route10BerryTree1:
 	opentext
 	getitemname STRING_BUFFER_3, BURNT_BERRY
-	writetext Route38TreeText
+	writetext Route10TreeText
 	promptbutton
-	writetext Route38HeyItsBerryApricornText
+	writetext Route10HeyItsBerryApricornText
 	promptbutton
 	giveitem BURNT_BERRY
-	iffalse Route38NoRoomInBag
-	disappear ROUTE38_BERRY_TREE1
-	writetext Route38FoundItemText
+	iffalse Route10NoRoomInBag
+	disappear ROUTE10_BERRY_TREE1
+	writetext Route10FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route38BerryTree2:
+Route10BerryTree2:
 	opentext
 	getitemname STRING_BUFFER_3, MYSTERYBERRY
-	writetext Route38TreeText
+	writetext Route10TreeText
 	promptbutton
-	writetext Route38HeyItsBerryApricornText
+	writetext Route10HeyItsBerryApricornText
 	promptbutton
 	giveitem MYSTERYBERRY
-	iffalse Route38NoRoomInBag
-	disappear ROUTE38_BERRY_TREE2
-	writetext Route38FoundItemText
+	iffalse Route10NoRoomInBag
+	disappear ROUTE10_BERRY_TREE2
+	writetext Route10FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route38NoBerryOrApricorn:
+Route10NoBerryOrApricorn:
 	opentext
-	writetext Route38TreeText
+	writetext Route10TreeText
 	promptbutton
-	writetext Route38NothingHereText
+	writetext Route10NothingHereText
 	waitbutton
 	closetext
 	end
 
-Route38NoRoomInBag:
-	writetext Route38NoRoomInBagText
+Route10NoRoomInBag:
+	writetext Route10NoRoomInBagText
 	waitbutton
 	closetext
 	end
 
-Route38TreeText:
+Route10TreeText:
 	text_far _FruitBearingTreeText
 	text_end
 
-Route38NothingHereText:
+Route10NothingHereText:
 	text_far _NothingHereText
 	text_end
 
-Route38HeyItsBerryApricornText:
+Route10HeyItsBerryApricornText:
 	text_far _HeyItsFruitText
 	text_end
 
-Route38FoundItemText:
+Route10FoundItemText:
 	text_far _ObtainedFruitText
 	text_end
 
-Route38NoRoomInBagText:
+Route10NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
@@ -519,18 +519,18 @@ SchoolboyChad_AgainGiveTwistedSpoonAfterBattleText:
 	line "now?"
 	done
 
-Route38_MapEvents:
+Route10_MapEvents:
 	def_warp_events
-	warp_event 35,  8, ROUTE_38_ECRUTEAK_GATE, 1
-	warp_event 35,  9, ROUTE_38_ECRUTEAK_GATE, 2
+	warp_event 35,  8, ROUTE_10_ECRUTEAK_GATE, 1
+	warp_event 35,  9, ROUTE_10_ECRUTEAK_GATE, 2
 
 	def_coord_events
 
 	def_bg_events
-	bg_event 33,  7, BGEVENT_READ, Route38Sign
-	bg_event  5, 13, BGEVENT_READ, Route38TrainerTips
-	bg_event 12, 10, BGEVENT_READ, Route38NoBerryOrApricorn
-	bg_event 12,  9, BGEVENT_READ, Route38NoBerryOrApricorn
+	bg_event 33,  7, BGEVENT_READ, Route10Sign
+	bg_event  5, 13, BGEVENT_READ, Route10TrainerTips
+	bg_event 12, 10, BGEVENT_READ, Route10NoBerryOrApricorn
+	bg_event 12,  9, BGEVENT_READ, Route10NoBerryOrApricorn
 
 	def_object_events
 	object_event  4,  1, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 1, TrainerSchoolboyChad1, -1
@@ -539,5 +539,5 @@ Route38_MapEvents:
 	object_event 19,  9, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 1, TrainerBeautyValerie, -1
 	object_event 24,  5, SPRITE_SAILOR, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, TrainerSailorHarry, -1
 	object_event  5,  8, SPRITE_BEAUTY, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 1, TrainerBeautyOlivia, -1
-	object_event 12, 10, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route38BerryTree1, EVENT_ROUTE_38_BERRY_1
-	object_event 12,  9, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_ORANGE, OBJECTTYPE_SCRIPT, 0, Route38BerryTree2, EVENT_ROUTE_38_BERRY_2
+	object_event 12, 10, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route10BerryTree1, EVENT_ROUTE_10_BERRY_1
+	object_event 12,  9, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_ORANGE, OBJECTTYPE_SCRIPT, 0, Route10BerryTree2, EVENT_ROUTE_10_BERRY_2

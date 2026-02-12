@@ -168,7 +168,7 @@ INCLUDE "maps/OlivinePunishmentSpeechHouse.asm"
 INCLUDE "maps/OlivineGoodRodHouse.asm"
 INCLUDE "maps/OlivineCafe.asm"
 INCLUDE "maps/OlivineMart.asm"
-INCLUDE "maps/Route38EcruteakGate.asm"
+INCLUDE "maps/Route10EcruteakGate.asm"
 INCLUDE "maps/Route39Barn.asm"
 INCLUDE "maps/Route39Farmhouse.asm"
 INCLUDE "maps/ManiasHouse.asm"
@@ -310,7 +310,7 @@ INCLUDE "maps/CianwoodCity.asm"
 INCLUDE "maps/Route27.asm"
 INCLUDE "maps/Route1.asm"
 INCLUDE "maps/Route2.asm"
-INCLUDE "maps/Route38.asm"
+INCLUDE "maps/Route10.asm"
 
 
 SECTION "Map Scripts 22", ROMX

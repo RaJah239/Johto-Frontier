@@ -27,7 +27,7 @@
 	const LANDMARK_ECRUTEAK_CITY     ; 16
 	const LANDMARK_TIN_TOWER         ; 17
 	const LANDMARK_BURNED_TOWER      ; 18
-	const LANDMARK_ROUTE_38          ; 19
+	const LANDMARK_ROUTE_10          ; 19
 	const LANDMARK_SILVER_CAVE       ; 2e
 	const LANDMARK_ROUTE_39          ; 1a
 	const LANDMARK_OLIVINE_CITY      ; 1b

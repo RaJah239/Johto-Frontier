@@ -33,7 +33,7 @@ Landmarks:
 	landmark  60,  44, EcruteakCityName
 	landmark  62,  42, TinTowerName
 	landmark  58,  42, BurnedTowerName
-	landmark  44,  44, Route38Name
+	landmark  44,  44, Route10Name
 	landmark  36,  28, SilverCaveName
 	landmark  28,  48, Route39Name
 	landmark  28,  60, OlivineCityName
@@ -106,7 +106,7 @@ Route6Name:          db "Route 6@"
 Route7Name:          db "Route 7@"
 Route8Name:          db "Route 8@"
 Route9Name:          db "Route 9@"
-Route38Name:         db "Route 38@"
+Route10Name:         db "Route 10@"
 Route39Name:         db "Route 39@"
 Route40Name:         db "Route 40@"
 Route41Name:         db "Route 41@"

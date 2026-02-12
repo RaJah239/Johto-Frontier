@@ -51,8 +51,8 @@ Route6_Blocks:
 Route46_Blocks:
 	INCBIN "maps/Route46.blk"
 
-Route38_Blocks:
-	INCBIN "maps/Route38.blk"
+Route10_Blocks:
+	INCBIN "maps/Route10.blk"
 
 NurseJoyTrainingAcademy_Blocks:
 	INCBIN "maps/NurseJoyTrainingAcademy.blk"
@@ -129,7 +129,7 @@ Route39_Blocks:
 PlayersHouse1F_Blocks:
 	INCBIN "maps/PlayersHouse1F.blk"
 
-Route38EcruteakGate_Blocks:
+Route10EcruteakGate_Blocks:
 Route42EcruteakGate_Blocks:
 Route4RuinsOfAlphGate_Blocks:
 IlexForestAzaleaGate_Blocks:

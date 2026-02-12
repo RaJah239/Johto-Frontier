@@ -15,7 +15,7 @@ TreeMonMaps::
 	treemon_map ROUTE_7,                   TREEMON_SET_ROUTE
 	treemon_map ROUTE_8,                   TREEMON_SET_ROUTE
 	treemon_map ROUTE_9,                   TREEMON_SET_ROUTE
-	treemon_map ROUTE_38,                  TREEMON_SET_ROUTE
+	treemon_map ROUTE_10,                  TREEMON_SET_ROUTE
 	treemon_map ROUTE_39,                  TREEMON_SET_ROUTE
 	treemon_map ROUTE_40,                  TREEMON_SET_CITY
 	treemon_map ROUTE_41,                  TREEMON_SET_CITY

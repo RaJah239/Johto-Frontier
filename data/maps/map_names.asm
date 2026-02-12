@@ -56,10 +56,10 @@ Olivine_Map_Names: ;newgroup OLIVINE ;  1
 	dw Olivine_Map_Name6 ; map_const OLIVINE_GOOD_ROD_HOUSE ;  6
 	dw Olivine_Map_Name7 ; map_const OLIVINE_CAFE ;  7
 	dw Olivine_Map_Name8 ; map_const OLIVINE_MART ;  8
-	dw Olivine_Map_Name9 ; map_const ROUTE_38_ECRUTEAK_GATE ;  9
+	dw Olivine_Map_Name9 ; map_const ROUTE_10_ECRUTEAK_GATE ;  9
 	dw Olivine_Map_Name10 ; map_const ROUTE_39_BARN ; 10
 	dw Olivine_Map_Name11 ; map_const ROUTE_39_FARMHOUSE ; 11
-	dw Olivine_Map_Name12 ; map_const ROUTE_38, ; 12
+	dw Olivine_Map_Name12 ; map_const ROUTE_10, ; 12
 	dw Olivine_Map_Name13 ; map_const ROUTE_39, ; 13
 	dw Olivine_Map_Name14 ; map_const OLIVINE_CITY ; 14
 	assert_table_length NUM_OLIVINE_MAPS
@@ -394,14 +394,14 @@ Olivine_Map_Name7: ; map_const OLIVINE_CAFE ;  7
 	db "Olivine Cafe@"
 Olivine_Map_Name8: ; map_const OLIVINE_MART ;  8
 	db "Olivine #mart@"
-Olivine_Map_Name9: ; map_const ROUTE_38_ECRUTEAK_GATE ;  9
-	db "Route 38 Gate@"
+Olivine_Map_Name9: ; map_const ROUTE_10_ECRUTEAK_GATE ;  9
+	db "Route 10 Gate@"
 Olivine_Map_Name10: ; map_const ROUTE_39_BARN ; 10
 	db "Route 39 Barn@"
 Olivine_Map_Name11: ; map_const ROUTE_39_FARMHOUSE ; 11
 	db "Route 39 House@"
-Olivine_Map_Name12: ; map_const ROUTE_38, ; 12
-	db "Route 38@"
+Olivine_Map_Name12: ; map_const ROUTE_10, ; 12
+	db "Route 10@"
 Olivine_Map_Name13: ; map_const ROUTE_39, ; 13
 	db "Route 39@"
 Olivine_Map_Name14: ; map_const OLIVINE_CITY ; 14
