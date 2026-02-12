@@ -333,7 +333,7 @@ New_Bark_Map_Names: ; newgroup NEW_BARK ; 24
 	table_width 2, New_Bark_Map_Names
 	dw New_Bark_Map_Name1 ; map_const ROUTE_26,                                    10, 54 ;  1
 	dw New_Bark_Map_Name2 ; map_const ROUTE_27,                                    40,  9 ;  2
-	dw New_Bark_Map_Name3 ; map_const ROUTE_29,                                    30,  9 ;  3
+	dw New_Bark_Map_Name3 ; map_const ROUTE_1,                                    30,  9 ;  3
 	dw New_Bark_Map_Name4 ; map_const NEW_BARK_TOWN,                               10,  9 ;  4
 	dw New_Bark_Map_Name5 ; map_const ELMS_LAB ;  5
 	dw New_Bark_Map_Name6 ; map_const PLAYERS_HOUSE_1F ;  6
@@ -844,8 +844,8 @@ New_Bark_Map_Name1: ; map_const ROUTE_26,  1
 	db "Route 26@"
 New_Bark_Map_Name2: ; map_const ROUTE_27,  2
 	db "Route 27@"
-New_Bark_Map_Name3: ; map_const ROUTE_29, ;  3
-	db "Route 29@"
+New_Bark_Map_Name3: ; map_const ROUTE_1, ;  3
+	db "Route 1@"
 New_Bark_Map_Name4: ; map_const NEW_BARK_TOWN,;  4
 	db "New Bark Town@"
 New_Bark_Map_Name5: ; map_const ELMS_LAB ;  5

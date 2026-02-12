@@ -1,34 +1,34 @@
 	object_const_def
-	const ROUTE29_COOLTRAINER_M1
-	const ROUTE29_YOUNGSTER
-	const ROUTE29_TEACHER1
-	const ROUTE29_FISHER
-	const ROUTE29_COOLTRAINER_M2
-	const ROUTE29_TUSCANY
-	const ROUTE29_POKE_BALL
-	const ROUTE29_APRICORN1
-	const ROUTE29_BERRY1
-	const ROUTE29_BERRY2
+	const ROUTE1_COOLTRAINER_M1
+	const ROUTE1_YOUNGSTER
+	const ROUTE1_TEACHER1
+	const ROUTE1_FISHER
+	const ROUTE1_COOLTRAINER_M2
+	const ROUTE1_TUSCANY
+	const ROUTE1_POKE_BALL
+	const ROUTE1_APRICORN1
+	const ROUTE1_BERRY1
+	const ROUTE1_BERRY2
 
 
-Route29_MapScripts:
+Route1_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, Route29TuscanyCallback
+	callback MAPCALLBACK_OBJECTS, Route1TuscanyCallback
 
-Route29TuscanyCallback:
+Route1TuscanyCallback:
 	checkflag ENGINE_ZEPHYRBADGE
 	iftrue .DoesTuscanyAppear
 
 .TuscanyDisappears:
-	disappear ROUTE29_TUSCANY
+	disappear ROUTE1_TUSCANY
 	endcallback
 
 .DoesTuscanyAppear:
 	readvar VAR_WEEKDAY
 	ifnotequal TUESDAY, .TuscanyDisappears
-	appear ROUTE29_TUSCANY
+	appear ROUTE1_TUSCANY
 	endcallback
 
 CatchingTutorialDudeScript:
@@ -59,16 +59,16 @@ CatchingTutorialDudeScript:
 	closetext
 	end
 
-Route29YoungsterScript:
-	jumptextfaceplayer Route29YoungsterText
+Route1YoungsterScript:
+	jumptextfaceplayer Route1YoungsterText
 
-Route29TeacherScript:
-	jumptextfaceplayer Route29TeacherText
+Route1TeacherScript:
+	jumptextfaceplayer Route1TeacherText
 
-Route29FisherScript:
-	jumptextfaceplayer Route29FisherText
+Route1FisherScript:
+	jumptextfaceplayer Route1FisherText
 
-Route29CooltrainerMScript:
+Route1CooltrainerMScript:
 	faceplayer
 	opentext
 	checktime DAY
@@ -76,13 +76,13 @@ Route29CooltrainerMScript:
 	checktime EVE | NITE
 	iftrue .nite
 .day_morn
-	writetext Route29CooltrainerMText_WaitingForNight
+	writetext Route1CooltrainerMText_WaitingForNight
 	waitbutton
 	closetext
 	end
 
 .nite
-	writetext Route29CooltrainerMText_WaitingForMorning
+	writetext Route1CooltrainerMText_WaitingForMorning
 	waitbutton
 	closetext
 	end
@@ -123,13 +123,13 @@ TuscanyNotTuesdayScript:
 	closetext
 	end
 
-Route29Sign1:
-	jumptext Route29Sign1Text
+Route1Sign1:
+	jumptext Route1Sign1Text
 
-Route29Sign2:
-	jumptext Route29Sign2Text
+Route1Sign2:
+	jumptext Route1Sign2Text
 
-Route29Potion:
+Route1Potion:
 	itemball POTION
 
 CatchingTutorialDebriefText:
@@ -155,7 +155,7 @@ CatchingTutorialRepeatText:
 	cont "catch #MON?"
 	done
 
-Route29YoungsterText:
+Route1YoungsterText:
 	text "Yo. How are your"
 	line "#MON?"
 
@@ -166,7 +166,7 @@ Route29YoungsterText:
 	line "of the grass."
 	done
 
-Route29TeacherText:
+Route1TeacherText:
 	text "See those ledges?"
 	line "It's scary to jump"
 	cont "off them."
@@ -178,7 +178,7 @@ Route29TeacherText:
 	line "the grass."
 	done
 
-Route29FisherText:
+Route1FisherText:
 	text "I wanted to take a"
 	line "break, so I saved"
 
@@ -186,7 +186,7 @@ Route29FisherText:
 	line "progress."
 	done
 
-Route29CooltrainerMText_WaitingForNight:
+Route1CooltrainerMText_WaitingForNight:
 	text "I'm waiting for"
 	line "#MON that"
 
@@ -194,7 +194,7 @@ Route29CooltrainerMText_WaitingForNight:
 	line "night."
 	done
 
-Route29CooltrainerMText_WaitingForMorning:
+Route1CooltrainerMText_WaitingForMorning:
 	text "I'm waiting for"
 	line "#MON that"
 
@@ -254,127 +254,127 @@ TuscanyNotTuesdayText:
 	cont "is unfortunate…"
 	done
 
-Route29Sign1Text:
-	text "ROUTE 29"
+Route1Sign1Text:
+	text "ROUTE 1"
 
 	para "CHERRYGROVE CITY -"
 	line "NEW BARK TOWN"
 	done
 
-Route29Sign2Text:
-	text "ROUTE 29"
+Route1Sign2Text:
+	text "ROUTE 1"
 
 	para "CHERRYGROVE CITY -"
 	line "NEW BARK TOWN"
 	done
 
-Route29PinkApricornTree:
+Route1PinkApricornTree:
 	opentext
 	getitemname STRING_BUFFER_3, PNK_APRICORN
-	writetext Route29TreeText
+	writetext Route1TreeText
 	promptbutton
-	writetext Route29HeyItsBerryApricornText
+	writetext Route1HeyItsBerryApricornText
 	promptbutton
 	giveitem PNK_APRICORN
-	iffalse Route29NoRoomInBag
-	disappear ROUTE29_APRICORN1
-	writetext Route29FoundItemText
+	iffalse Route1NoRoomInBag
+	disappear ROUTE1_APRICORN1
+	writetext Route1FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route29BerryTree1:
+Route1BerryTree1:
 	opentext
 	getitemname STRING_BUFFER_3, BERRY
-	writetext Route29TreeText
+	writetext Route1TreeText
 	promptbutton
-	writetext Route29HeyItsBerryApricornText
+	writetext Route1HeyItsBerryApricornText
 	promptbutton
 	giveitem BERRY
-	iffalse Route29NoRoomInBag
-	disappear ROUTE29_BERRY1
-	writetext Route29FoundItemText
+	iffalse Route1NoRoomInBag
+	disappear ROUTE1_BERRY1
+	writetext Route1FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route29BerryTree2:
+Route1BerryTree2:
 	opentext
 	getitemname STRING_BUFFER_3, BERRY
-	writetext Route29TreeText
+	writetext Route1TreeText
 	promptbutton
-	writetext Route29HeyItsBerryApricornText
+	writetext Route1HeyItsBerryApricornText
 	promptbutton
 	giveitem BERRY
-	iffalse Route29NoRoomInBag
-	disappear ROUTE29_BERRY2
-	writetext Route29FoundItemText
+	iffalse Route1NoRoomInBag
+	disappear ROUTE1_BERRY2
+	writetext Route1FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route29NoBerryOrApricorn:
+Route1NoBerryOrApricorn:
 	opentext
-	writetext Route29TreeText
+	writetext Route1TreeText
 	promptbutton
-	writetext Route29NothingHereText
+	writetext Route1NothingHereText
 	waitbutton
 	closetext
 	end
 
-Route29NoRoomInBag:
-	writetext Route29NoRoomInBagText
+Route1NoRoomInBag:
+	writetext Route1NoRoomInBagText
 	waitbutton
 	closetext
 	end
 
-Route29TreeText:
+Route1TreeText:
 	text_far _FruitBearingTreeText
 	text_end
 
-Route29NothingHereText:
+Route1NothingHereText:
 	text_far _NothingHereText
 	text_end
 
-Route29HeyItsBerryApricornText:
+Route1HeyItsBerryApricornText:
 	text_far _HeyItsFruitText
 	text_end
 
-Route29FoundItemText:
+Route1FoundItemText:
 	text_far _ObtainedFruitText
 	text_end
 
-Route29NoRoomInBagText:
+Route1NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
-Route29_MapEvents:
+Route1_MapEvents:
 	def_warp_events
 	warp_event 27,  1, ROUTE_29_ROUTE_46_GATE, 3
 
 	def_coord_events
 
 	def_bg_events
-	bg_event 51,  7, BGEVENT_READ, Route29Sign1
-	bg_event  3,  5, BGEVENT_READ, Route29Sign2
-	bg_event 12,  2, BGEVENT_READ, Route29NoBerryOrApricorn
-	bg_event 13,  3, BGEVENT_READ, Route29NoBerryOrApricorn
-	bg_event 24, 12, BGEVENT_READ, Route29NoBerryOrApricorn
+	bg_event 51,  7, BGEVENT_READ, Route1Sign1
+	bg_event  3,  5, BGEVENT_READ, Route1Sign2
+	bg_event 12,  2, BGEVENT_READ, Route1NoBerryOrApricorn
+	bg_event 13,  3, BGEVENT_READ, Route1NoBerryOrApricorn
+	bg_event 24, 12, BGEVENT_READ, Route1NoBerryOrApricorn
 
 	def_object_events
 	object_event 50, 12, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, CatchingTutorialDudeScript, -1
-	object_event 27, 16, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route29YoungsterScript, -1
-	object_event 15, 11, SPRITE_TEACHER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route29TeacherScript, -1
-	object_event 25,  3, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route29FisherScript, -1
-	object_event 14,  4, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route29CooltrainerMScript, -1
-	object_event 29, 12, SPRITE_TEACHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, TuscanyScript, EVENT_ROUTE_29_TUSCANY_OF_TUESDAY
-	object_event 48,  2, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route29Potion, EVENT_ROUTE_29_POTION
-	object_event 12,  2, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route29PinkApricornTree, EVENT_ROUTE_1_APRICORN
-	object_event 13,  3, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route29BerryTree1, EVENT_ROUTE_1_BERRY1
-	object_event 24,  12, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route29BerryTree2, EVENT_ROUTE_1_BERRY2
+	object_event 27, 16, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route1YoungsterScript, -1
+	object_event 15, 11, SPRITE_TEACHER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route1TeacherScript, -1
+	object_event 25,  3, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route1FisherScript, -1
+	object_event 14,  4, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route1CooltrainerMScript, -1
+	object_event 1, 12, SPRITE_TEACHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, TuscanyScript, EVENT_ROUTE_1_TUSCANY_OF_TUESDAY
+	object_event 48,  2, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route1Potion, EVENT_ROUTE_1_POTION
+	object_event 12,  2, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route1PinkApricornTree, EVENT_ROUTE_1_APRICORN
+	object_event 13,  3, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route1BerryTree1, EVENT_ROUTE_1_BERRY1
+	object_event 24,  12, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route1BerryTree2, EVENT_ROUTE_1_BERRY2

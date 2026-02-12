@@ -9,7 +9,7 @@ Landmarks:
 	table_width 4, Landmarks
 	landmark  -8, -16, SpecialMapName
 	landmark 132, 100, NewBarkTownName
-	landmark 116, 100, Route29Name
+	landmark 116, 100, Route1Name
 	landmark  92, 100, CherrygroveCityName
 	landmark  92,  84, Route30Name
 	landmark 100,  60, DarkCaveName
@@ -97,7 +97,7 @@ VictoryRoadName:     db "Victory<BSP>Road@"
 Route23Name:         db "Route 23@"
 Route26Name:         db "Route 26@"
 Route27Name:         db "Route 27@"
-Route29Name:         db "Route 29@"
+Route1Name:         db "Route 1@"
 Route30Name:         db "Route 30@"
 Route31Name:         db "Route 31@"
 Route32Name:         db "Route 32@"

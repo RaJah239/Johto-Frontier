@@ -50,7 +50,7 @@ DayOfWeekSiblingsHousePokedexText3:
 	line "ROUTE 40"
 
 	para "Tuesday, TUSCANY"
-	line "ROUTE 29"
+	line "ROUTE 1"
 
 	para "Wednesday, WESLEY"
 	line "LAKE OF RAGE"

@@ -28,9 +28,9 @@ IndigoGroupSprites:
 	; 0 of max 9 walking sprites
 	db 0 ; end
 
-; Route29 and CherrygroveCity are connected
+; Route1 and CherrygroveCity are connected
 NewBarkGroupSprites:
-; Route26, Route27, Route29, NewBarkTown
+; Route26, Route27, Route1, NewBarkTown
 CherrygroveGroupSprites:
 ; Route30, Route31, CherrygroveCity
 	db SPRITE_RIVAL
