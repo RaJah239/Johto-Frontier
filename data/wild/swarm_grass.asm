@@ -87,7 +87,7 @@ SwarmGrassWildMons:
 	db 5, SQUIRTLE
 
 ; Chikorita swarm
-	map_id ROUTE_37
+	map_id ROUTE_9
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 5, CHIKORITA

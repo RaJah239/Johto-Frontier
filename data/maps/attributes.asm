@@ -126,7 +126,7 @@ ENDM
 	connection west, Route40, ROUTE_40, 9
 
 	map_attributes EcruteakCity, ECRUTEAK_CITY, $05, SOUTH | WEST | EAST
-	connection south, Route37, ROUTE_37, 5
+	connection south, Route9, ROUTE_9, 5
 	connection west, Route38, ROUTE_38, 5
 	connection east, Route42, ROUTE_42, 9
 
@@ -179,11 +179,11 @@ ENDM
 	connection south, GoldenrodCity, GOLDENROD_CITY, -5
 
 	map_attributes Route8, ROUTE_8, $05, NORTH | SOUTH | EAST
-	connection north, Route37, ROUTE_37, 10
+	connection north, Route9, ROUTE_9, 10
 	connection south, Route7, ROUTE_7, 0
 	connection east, VioletCity, VIOLET_CITY, 0
 
-	map_attributes Route37, ROUTE_37, $05, NORTH | SOUTH
+	map_attributes Route9, ROUTE_9, $05, NORTH | SOUTH
 	connection north, EcruteakCity, ECRUTEAK_CITY, -5
 	connection south, Route8, ROUTE_8, -10
 

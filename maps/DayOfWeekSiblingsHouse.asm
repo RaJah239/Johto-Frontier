@@ -65,7 +65,7 @@ DayOfWeekSiblingsHousePokedexText3:
 	line "BLACKTHORN CITY"
 
 	para "Sunday, SUNNY"
-	line "ROUTE 37"
+	line "ROUTE 9"
 	done
 
 DayOfWeekSiblingsHouse_MapEvents:

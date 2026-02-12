@@ -220,7 +220,7 @@ Violet_Map_Names: ;newgroup VIOLET
 	dw Violet_Map_Name1 ; map_const ROUTE_4,;  1
 	dw Violet_Map_Name2 ; map_const ROUTE_7,;  2
 	dw Violet_Map_Name3 ; map_const ROUTE_8,;  3
-	dw Violet_Map_Name4 ; map_const ROUTE_37,;  4
+	dw Violet_Map_Name4 ; map_const ROUTE_9,;  4
 	dw Violet_Map_Name5 ; map_const VIOLET_CITY ; 5
 	dw Violet_Map_Name6 ; map_const VIOLET_MART ;  6
 	dw Violet_Map_Name7 ; map_const VIOLET_GYM ;  7
@@ -667,8 +667,8 @@ Violet_Map_Name2: ; map_const ROUTE_7,;  2
 	db "Route 7@"
 Violet_Map_Name3: ; map_const ROUTE_8,;  3
 	db "Route 8@"
-Violet_Map_Name4: ; map_const ROUTE_37,;  4
-	db "Route 37@"
+Violet_Map_Name4: ; map_const ROUTE_9,;  4
+	db "Route 9@"
 Violet_Map_Name5: ; map_const VIOLET_CITY,;  5
 	db "Violet City@"
 Violet_Map_Name6: ; map_const VIOLET_MART ;  6

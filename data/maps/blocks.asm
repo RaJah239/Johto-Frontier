@@ -30,8 +30,8 @@ Route45_Blocks:
 Route1_Blocks:
 	INCBIN "maps/Route1.blk"
 
-Route37_Blocks:
-	INCBIN "maps/Route37.blk"
+Route9_Blocks:
+	INCBIN "maps/Route9.blk"
 
 Route2_Blocks:
 	INCBIN "maps/Route2.blk"

@@ -1,26 +1,26 @@
 	object_const_def
-	const ROUTE37_WEIRD_TREE1
-	const ROUTE37_WEIRD_TREE2
-	const ROUTE37_YOUNGSTER
-	const ROUTE37_SUNNY
-	const ROUTE37_APRICORN_TREE1
-	const ROUTE37_APRICORN_TREE2
-	const ROUTE37_APRICORN_TREE3
+	const ROUTE9_TWIN1
+	const ROUTE9_TWIN2
+	const ROUTE9_YOUNGSTER
+	const ROUTE9_SUNNY
+	const ROUTE9_APRICORN_TREE1
+	const ROUTE9_APRICORN_TREE2
+	const ROUTE9_APRICORN_TREE3
 
-Route37_MapScripts:
+Route9_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, Route37SunnyCallback
+	callback MAPCALLBACK_OBJECTS, Route9SunnyCallback
 
-Route37SunnyCallback:
+Route9SunnyCallback:
 	readvar VAR_WEEKDAY
 	ifequal SUNDAY, .SunnyAppears
-	disappear ROUTE37_SUNNY
+	disappear ROUTE9_SUNNY
 	endcallback
 
 .SunnyAppears:
-	appear ROUTE37_SUNNY
+	appear ROUTE9_SUNNY
 	endcallback
 
 TrainerTwinsAnnandanne1:
@@ -99,11 +99,11 @@ SunnyNotSundayScript:
 	closetext
 	end
 
-Route37Sign:
-	jumptext Route37SignText
+Route9Sign:
+	jumptext Route9SignText
 
-Route37HiddenEther:
-	hiddenitem ETHER, EVENT_ROUTE_37_HIDDEN_ETHER
+Route9HiddenEther:
+	hiddenitem ETHER, EVENT_ROUTE_9_HIDDEN_ETHER
 
 TwinsAnnandanne1SeenText:
 	text "ANN: ANNE and I"
@@ -222,113 +222,113 @@ SunnyNotSundayText:
 	cont "Um… I forgot!"
 	done
 
-Route37SignText:
-	text "ROUTE 37"
+Route9SignText:
+	text "ROUTE 9"
 	done
 
-Route37ApricornTree1:
+Route9ApricornTree1:
 	opentext
 	getitemname STRING_BUFFER_3, RED_APRICORN
-	writetext Route37TreeText
+	writetext Route9TreeText
 	promptbutton
-	writetext Route37HeyItsBerryApricornText
+	writetext Route9HeyItsBerryApricornText
 	promptbutton
 	giveitem RED_APRICORN
-	iffalse Route37NoRoomInBag
-	disappear ROUTE37_APRICORN_TREE1
-	writetext Route37FoundItemText
+	iffalse Route9NoRoomInBag
+	disappear ROUTE9_APRICORN_TREE1
+	writetext Route9FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route37ApricornTree2:
+Route9ApricornTree2:
 	opentext
 	getitemname STRING_BUFFER_3, BLU_APRICORN
-	writetext Route37TreeText
+	writetext Route9TreeText
 	promptbutton
-	writetext Route37HeyItsBerryApricornText
+	writetext Route9HeyItsBerryApricornText
 	promptbutton
 	giveitem BLU_APRICORN
-	iffalse Route37NoRoomInBag
-	disappear ROUTE37_APRICORN_TREE2
-	writetext Route37FoundItemText
+	iffalse Route9NoRoomInBag
+	disappear ROUTE9_APRICORN_TREE2
+	writetext Route9FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route37ApricornTree3:
+Route9ApricornTree3:
 	opentext
 	getitemname STRING_BUFFER_3, YLW_APRICORN
-	writetext Route37TreeText
+	writetext Route9TreeText
 	promptbutton
-	writetext Route37HeyItsBerryApricornText
+	writetext Route9HeyItsBerryApricornText
 	promptbutton
 	giveitem YLW_APRICORN
-	iffalse Route37NoRoomInBag
-	disappear ROUTE37_APRICORN_TREE3
-	writetext Route37FoundItemText
+	iffalse Route9NoRoomInBag
+	disappear ROUTE9_APRICORN_TREE3
+	writetext Route9FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route37NoBerryOrApricorn:
+Route9NoBerryOrApricorn:
 	opentext
-	writetext Route37TreeText
+	writetext Route9TreeText
 	promptbutton
-	writetext Route37NothingHereText
+	writetext Route9NothingHereText
 	waitbutton
 	closetext
 	end
 
-Route37NoRoomInBag:
-	writetext Route37NoRoomInBagText
+Route9NoRoomInBag:
+	writetext Route9NoRoomInBagText
 	waitbutton
 	closetext
 	end
 
-Route37TreeText:
+Route9TreeText:
 	text_far _FruitBearingTreeText
 	text_end
 
-Route37NothingHereText:
+Route9NothingHereText:
 	text_far _NothingHereText
 	text_end
 
-Route37HeyItsBerryApricornText:
+Route9HeyItsBerryApricornText:
 	text_far _HeyItsFruitText
 	text_end
 
-Route37FoundItemText:
+Route9FoundItemText:
 	text_far _ObtainedFruitText
 	text_end
 
-Route37NoRoomInBagText:
+Route9NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
-Route37_MapEvents:
+Route9_MapEvents:
 	def_warp_events
 
 	def_coord_events
 
 	def_bg_events
-	bg_event  5,  3, BGEVENT_READ, Route37Sign
-	bg_event  4,  2, BGEVENT_ITEM, Route37HiddenEther
-	bg_event 13,  5, BGEVENT_READ, Route37NoBerryOrApricorn
-	bg_event 16,  5, BGEVENT_READ, Route37NoBerryOrApricorn
-	bg_event 15,  7, BGEVENT_READ, Route37NoBerryOrApricorn
+	bg_event  5,  3, BGEVENT_READ, Route9Sign
+	bg_event  4,  2, BGEVENT_ITEM, Route9HiddenEther
+	bg_event 13,  5, BGEVENT_READ, Route9NoBerryOrApricorn
+	bg_event 16,  5, BGEVENT_READ, Route9NoBerryOrApricorn
+	bg_event 15,  7, BGEVENT_READ, Route9NoBerryOrApricorn
 
 	def_object_events
 	object_event  6, 12, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerTwinsAnnandanne1, -1
 	object_event  7, 12, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerTwinsAnnandanne2, -1
 	object_event  6,  6, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 1, TrainerPsychicGreg, -1
-	object_event 16,  8, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SunnyScript, EVENT_ROUTE_37_SUNNY_OF_SUNDAY
-	object_event 13,  5, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route37ApricornTree1, EVENT_ROUTE_37_APRICORN_1
-	object_event 16,  5, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route37ApricornTree2, EVENT_ROUTE_37_APRICORN_2
-	object_event 15,  7, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route37ApricornTree3, EVENT_ROUTE_37_APRICORN_3
+	object_event 16,  8, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SunnyScript, EVENT_ROUTE_9_SUNNY_OF_SUNDAY
+	object_event 13,  5, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route9ApricornTree1, EVENT_ROUTE_9_APRICORN_1
+	object_event 16,  5, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route9ApricornTree2, EVENT_ROUTE_9_APRICORN_2
+	object_event 15,  7, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route9ApricornTree3, EVENT_ROUTE_9_APRICORN_3

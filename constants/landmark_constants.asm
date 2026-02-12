@@ -23,7 +23,7 @@
 	const LANDMARK_ROUTE_7           ; 12
 	const LANDMARK_NATIONAL_PARK     ; 13
 	const LANDMARK_ROUTE_8           ; 14
-	const LANDMARK_ROUTE_37          ; 15
+	const LANDMARK_ROUTE_9           ; 15
 	const LANDMARK_ECRUTEAK_CITY     ; 16
 	const LANDMARK_TIN_TOWER         ; 17
 	const LANDMARK_BURNED_TOWER      ; 18

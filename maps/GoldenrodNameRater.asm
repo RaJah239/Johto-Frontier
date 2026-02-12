@@ -56,7 +56,7 @@ SwarmGrampsScript:
 
 .chikorita
 	setflag ENGINE_SWARM
-	swarm ROUTE_37
+	swarm ROUTE_9
 	writetext SwarmChikoritaText
 	sjump .WrappingUpSwarms
 
