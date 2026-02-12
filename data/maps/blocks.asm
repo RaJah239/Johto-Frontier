@@ -21,8 +21,8 @@ Pokecenter2F_Blocks:
 Route41_Blocks:
 	INCBIN "maps/Route41.blk"
 
-Route33_Blocks:
-	INCBIN "maps/Route33.blk"
+Route5_Blocks:
+	INCBIN "maps/Route5.blk"
 
 Route45_Blocks:
 	INCBIN "maps/Route45.blk"

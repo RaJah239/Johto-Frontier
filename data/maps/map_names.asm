@@ -201,7 +201,7 @@ Azalea_Map_Names: ;newgroup AZALEA
 	dw Azalea_Map_Name3 ; map_const AZALEA_MART ;  3
 	dw Azalea_Map_Name4 ; map_const KURTS_HOUSE ;  4
 	dw Azalea_Map_Name5 ; map_const AZALEA_GYM ;  5
-	dw Azalea_Map_Name6 ; map_const ROUTE_33,;  6
+	dw Azalea_Map_Name6 ; map_const ROUTE_5,;  6
 	dw Azalea_Map_Name7 ; map_const AZALEA_TOWN,;  7
 	assert_table_length NUM_AZALEA_MAPS
 
@@ -643,8 +643,8 @@ Azalea_Map_Name4: ; map_const KURTS_HOUSE ;  4
 	db "Kurt's house@"
 Azalea_Map_Name5: ; map_const AZALEA_GYM ;  5
 	db "Azalea Gym@"
-Azalea_Map_Name6: ; map_const ROUTE_33, ;  6
-	db "Route 33@"
+Azalea_Map_Name6: ; map_const ROUTE_5, ;  6
+	db "Route 5@"
 Azalea_Map_Name7: ; map_const AZALEA_TOWN, ; 7
 	db "Azalea Town@"
 

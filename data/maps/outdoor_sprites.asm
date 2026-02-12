@@ -73,7 +73,7 @@ EcruteakGroupSprites:
 	db 0 ; end
 
 AzaleaGroupSprites:
-; Route33, AzaleaTown
+; Route5, AzaleaTown
 	db SPRITE_GRAMPS
 	db SPRITE_YOUNGSTER
 	db SPRITE_POKEFAN_M

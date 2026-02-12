@@ -1,13 +1,13 @@
 	object_const_def
-	const ROUTE33_POKEFAN_M
-	const ROUTE33_LASS
-	const ROUTE33_BERRY_TREE1
-	const ROUTE33_BERRY_TREE2
-	const ROUTE33_APRICORN_TREE1
-	const ROUTE33_APRICORN_TREE2
-	const ROUTE33_APRICORN_TREE3
+	const ROUTE5_POKEFAN_M
+	const ROUTE5_LASS
+	const ROUTE5_BERRY_TREE1
+	const ROUTE5_BERRY_TREE2
+	const ROUTE5_APRICORN_TREE1
+	const ROUTE5_APRICORN_TREE2
+	const ROUTE5_APRICORN_TREE3
 
-Route33_MapScripts:
+Route5_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
@@ -18,8 +18,8 @@ Route33_MapScripts:
 	writemem wFieldWeather
 	endcallback
 
-Route33LassScript:
-	jumptextfaceplayer Route33LassText
+Route5LassScript:
+	jumptextfaceplayer Route5LassText
 
 TrainerHikerAnthony:
 	trainer HIKER, ANTHONY2, EVENT_BEAT_HIKER_ANTHONY, HikerAnthony2SeenText, HikerAnthony2BeatenText, 0, .Script
@@ -135,8 +135,8 @@ TrainerHikerAnthony:
 	jumpstd RematchMScript
 	end
 
-Route33Sign:
-	jumptext Route33SignText
+Route5Sign:
+	jumptext Route5SignText
 
 HikerAnthony2SeenText:
 	text "I came through the"
@@ -157,7 +157,7 @@ HikerAnthony2AfterText:
 	cont "mountains."
 	done
 
-Route33LassText:
+Route5LassText:
 	text "Pant, pant…"
 
 	para "I finally got"
@@ -173,127 +173,127 @@ Route33LassText:
 	line "outside."
 	done
 
-Route33SignText:
-	text "ROUTE 33"
+Route5SignText:
+	text "ROUTE 5"
 	done
 
-Route33BerryTree1:
+Route5BerryTree1:
 	opentext
 	getitemname STRING_BUFFER_3, PSNCUREBERRY
-	writetext Route33TreeText
+	writetext Route5TreeText
 	promptbutton
-	writetext Route33HeyItsBerryApricornText
+	writetext Route5HeyItsBerryApricornText
 	promptbutton
 	giveitem PSNCUREBERRY
-	iffalse Route33NoRoomInBag
-	disappear ROUTE33_BERRY_TREE1
-	writetext Route33FoundItemText
+	iffalse Route5NoRoomInBag
+	disappear ROUTE5_BERRY_TREE1
+	writetext Route5FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route33BerryTree2:
+Route5BerryTree2:
 	opentext
 	getitemname STRING_BUFFER_3, MINT_BERRY
-	writetext Route33TreeText
+	writetext Route5TreeText
 	promptbutton
-	writetext Route33HeyItsBerryApricornText
+	writetext Route5HeyItsBerryApricornText
 	promptbutton
 	giveitem MINT_BERRY
-	iffalse Route33NoRoomInBag
-	disappear ROUTE33_BERRY_TREE2
-	writetext Route33FoundItemText
+	iffalse Route5NoRoomInBag
+	disappear ROUTE5_BERRY_TREE2
+	writetext Route5FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route33ApricornTree1:
+Route5ApricornTree1:
 	opentext
 	getitemname STRING_BUFFER_3, RED_APRICORN
-	writetext Route33TreeText
+	writetext Route5TreeText
 	promptbutton
-	writetext Route33HeyItsBerryApricornText
+	writetext Route5HeyItsBerryApricornText
 	promptbutton
 	giveitem RED_APRICORN
-	iffalse Route33NoRoomInBag
-	disappear ROUTE33_APRICORN_TREE1
-	writetext Route33FoundItemText
+	iffalse Route5NoRoomInBag
+	disappear ROUTE5_APRICORN_TREE1
+	writetext Route5FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route33ApricornTree2:
+Route5ApricornTree2:
 	opentext
 	getitemname STRING_BUFFER_3, BLU_APRICORN
-	writetext Route33TreeText
+	writetext Route5TreeText
 	promptbutton
-	writetext Route33HeyItsBerryApricornText
+	writetext Route5HeyItsBerryApricornText
 	promptbutton
 	giveitem BLU_APRICORN
-	iffalse Route33NoRoomInBag
-	disappear ROUTE33_APRICORN_TREE2
-	writetext Route33FoundItemText
+	iffalse Route5NoRoomInBag
+	disappear ROUTE5_APRICORN_TREE2
+	writetext Route5FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route33ApricornTree3:
+Route5ApricornTree3:
 	opentext
 	getitemname STRING_BUFFER_3, GRN_APRICORN
-	writetext Route33TreeText
+	writetext Route5TreeText
 	promptbutton
-	writetext Route33HeyItsBerryApricornText
+	writetext Route5HeyItsBerryApricornText
 	promptbutton
 	giveitem GRN_APRICORN
-	iffalse Route33NoRoomInBag
-	disappear ROUTE33_APRICORN_TREE3
-	writetext Route33FoundItemText
+	iffalse Route5NoRoomInBag
+	disappear ROUTE5_APRICORN_TREE3
+	writetext Route5FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route33NoBerryOrApricorn:
+Route5NoBerryOrApricorn:
 	opentext
-	writetext Route33TreeText
+	writetext Route5TreeText
 	promptbutton
-	writetext Route33NothingHereText
+	writetext Route5NothingHereText
 	waitbutton
 	closetext
 	end
 
-Route33NoRoomInBag:
-	writetext Route33NoRoomInBagText
+Route5NoRoomInBag:
+	writetext Route5NoRoomInBagText
 	waitbutton
 	closetext
 	end
 
-Route33TreeText:
+Route5TreeText:
 	text_far _FruitBearingTreeText
 	text_end
 
-Route33NothingHereText:
+Route5NothingHereText:
 	text_far _NothingHereText
 	text_end
 
-Route33HeyItsBerryApricornText:
+Route5HeyItsBerryApricornText:
 	text_far _HeyItsFruitText
 	text_end
 
-Route33FoundItemText:
+Route5FoundItemText:
 	text_far _ObtainedFruitText
 	text_end
 
-Route33NoRoomInBagText:
+Route5NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
@@ -309,25 +309,25 @@ HikerAnthony_AgainGiveBerryJuiceAfterBattleText:
 	line "it? Go on now."
 	done
 
-Route33_MapEvents:
+Route5_MapEvents:
 	def_warp_events
 	warp_event 11,  9, UNION_CAVE_1F, 3
 
 	def_coord_events
 
 	def_bg_events
-	bg_event 11, 11, BGEVENT_READ, Route33Sign
-	bg_event  7, 11, BGEVENT_READ, Route33NoBerryOrApricorn
-	bg_event  7, 12, BGEVENT_READ, Route33NoBerryOrApricorn
-	bg_event 12, 16, BGEVENT_READ, Route33NoBerryOrApricorn
-	bg_event 13, 16, BGEVENT_READ, Route33NoBerryOrApricorn
-	bg_event 14, 16, BGEVENT_READ, Route33NoBerryOrApricorn
+	bg_event 11, 11, BGEVENT_READ, Route5Sign
+	bg_event  7, 11, BGEVENT_READ, Route5NoBerryOrApricorn
+	bg_event  7, 12, BGEVENT_READ, Route5NoBerryOrApricorn
+	bg_event 12, 16, BGEVENT_READ, Route5NoBerryOrApricorn
+	bg_event 13, 16, BGEVENT_READ, Route5NoBerryOrApricorn
+	bg_event 14, 16, BGEVENT_READ, Route5NoBerryOrApricorn
 
 	def_object_events
 	object_event  6, 13, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 2, TrainerHikerAnthony, -1
-	object_event  9, 14, SPRITE_LASS, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route33LassScript, -1
-	object_event  7, 11, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route33BerryTree1, EVENT_ROUTE_33_BERRY_1
-	object_event  7, 12, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, Route33BerryTree2, EVENT_ROUTE_33_BERRY_2
-	object_event 12, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route33ApricornTree1, EVENT_ROUTE_33_APRICORN_1
-	object_event 13, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route33ApricornTree2, EVENT_ROUTE_33_APRICORN_2
-	object_event 14, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route33ApricornTree3, EVENT_ROUTE_33_APRICORN_3
+	object_event  9, 14, SPRITE_LASS, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route5LassScript, -1
+	object_event  7, 11, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route5BerryTree1, EVENT_ROUTE_5_BERRY_1
+	object_event  7, 12, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, Route5BerryTree2, EVENT_ROUTE_5_BERRY_2
+	object_event 12, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route5ApricornTree1, EVENT_ROUTE_5_APRICORN_1
+	object_event 13, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route5ApricornTree2, EVENT_ROUTE_5_APRICORN_2
+	object_event 14, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route5ApricornTree3, EVENT_ROUTE_5_APRICORN_3

@@ -6,13 +6,13 @@ AnthonyPhoneCalleeScript:
 	farsjump AnthonyHangUpScript
 
 .WantsBattle:
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_33
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_5
 	farsjump AnthonyReminderScript
 
 AnthonyPhoneCallerScript:
 	gettrainername STRING_BUFFER_3, HIKER, ANTHONY2
 	farscall PhoneScript_GreetPhone_Male
-	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_33
+	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_5
 	setflag ENGINE_ANTHONY_READY_FOR_REMATCH
 	farsjump PhoneScript_WantsToBattle_Male
 

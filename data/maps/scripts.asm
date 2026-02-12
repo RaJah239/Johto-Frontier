@@ -337,7 +337,7 @@ INCLUDE "maps/Route46.asm"
 
 SECTION "Map Scripts 24", ROMX
 
-INCLUDE "maps/Route33.asm"
+INCLUDE "maps/Route5.asm"
 INCLUDE "maps/Route23.asm"
 INCLUDE "maps/SilverCavePokecenter1F.asm"
 INCLUDE "maps/Route39_SilverCaveGate.asm"

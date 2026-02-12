@@ -5,6 +5,7 @@ OaksPKMNTalkRoutes:
 	map_id ROUTE_2
 	map_id ROUTE_3
 	map_id ROUTE_4
+	map_id ROUTE_5
 	map_id ROUTE_34
 	map_id ROUTE_35
 	map_id ROUTE_37

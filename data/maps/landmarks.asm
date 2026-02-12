@@ -19,7 +19,7 @@ Landmarks:
 	landmark  68,  76, RuinsOfAlphName
 	landmark  76,  92, Route4Name
 	landmark  76, 124, UnionCaveName
-	landmark  72, 124, Route33Name
+	landmark  72, 124, Route5Name
 	landmark  60, 124, AzaleaTownName
 	landmark  62, 122, SlowpokeWellName
 	landmark  44, 124, IlexForestName
@@ -101,7 +101,7 @@ Route1Name:          db "Route 1@"
 Route2Name:          db "Route 2@"
 Route3Name:          db "Route 3@"
 Route4Name:          db "Route 4@"
-Route33Name:         db "Route 33@"
+Route5Name:          db "Route 5@"
 Route34Name:         db "Route 34@"
 Route35Name:         db "Route 35@"
 Route36Name:         db "Route 36@"
