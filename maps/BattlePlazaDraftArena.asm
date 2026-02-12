@@ -87,18 +87,19 @@ BattleArenaReceptionistScript:
 	ifequal 15, .SabrinaPlayer
 	ifequal 16, .BlainePlayer
 	ifequal 17, .WillPlayer
-	ifequal 18, .BrunoPlayer
-	ifequal 19, .KarenPlayer
-	ifequal 20, .LoreleiPlayer
-	ifequal 21, .AgathaPlayer
-	ifequal 22, .InsafPlayer
-	ifequal 23, .SilverPlayer
-	ifequal 24, .GiovanniPlayer
-	ifequal 25, .OakPlayer
-	ifequal 26, .LancePlayer
-	ifequal 27, .GreenPlayer
-	ifequal 28, .BluePlayer
-	ifequal 29, .RedPlayer
+	ifequal 18, .KogaPlayer
+	ifequal 19, .BrunoPlayer
+	ifequal 20, .KarenPlayer
+	ifequal 21, .LoreleiPlayer
+	ifequal 22, .AgathaPlayer
+	ifequal 23, .InsafPlayer
+	ifequal 24, .SilverPlayer
+	ifequal 25, .GiovanniPlayer
+	ifequal 26, .OakPlayer
+	ifequal 27, .LancePlayer
+	ifequal 28, .GreenPlayer
+	ifequal 29, .BluePlayer
+	ifequal 30, .RedPlayer
 	writetext AreYouSureText
 	yesorno
 	iffalse .ChoosePlayerCharacter
@@ -127,18 +128,19 @@ BattleArenaReceptionistScript:
 	ifequal 15, .SabrinaEnemy
 	ifequal 16, .BlaineEnemy
 	ifequal 17, .WillEnemy
-	ifequal 18, .BrunoEnemy
-	ifequal 19, .KarenEnemy
-	ifequal 20, .LoreleiEnemy
-	ifequal 21, .AgathaEnemy
-	ifequal 22, .InsafEnemy
-	ifequal 23, .SilverEnemy
-	ifequal 24, .GiovanniEnemy
-	ifequal 25, .OakEnemy
-	ifequal 26, .LanceEnemy
-	ifequal 27, .GreenEnemy
-	ifequal 28, .BlueEnemy
-	ifequal 29, .RedEnemy
+	ifequal 18, .KogaEnemy
+	ifequal 19, .BrunoEnemy
+	ifequal 20, .KarenEnemy
+	ifequal 21, .LoreleiEnemy
+	ifequal 22, .AgathaEnemy
+	ifequal 23, .InsafEnemy
+	ifequal 24, .SilverEnemy
+	ifequal 25, .GiovanniEnemy
+	ifequal 26, .OakEnemy
+	ifequal 27, .LanceEnemy
+	ifequal 28, .GreenEnemy
+	ifequal 29, .BlueEnemy
+	ifequal 30, .RedEnemy
 	writetext AreYouSureText
 	yesorno
 	iffalse .ChooseEnemyCharacter
@@ -151,7 +153,7 @@ BattleArenaReceptionistScript:
 	iffalse .ChoosePlayerCharacter
 
 .SampleAgain
-	random 28
+	random 29
 	ifequal 0, .FalknerPlayer
 	ifequal 1, .BugsyPlayer
 	ifequal 2, .WhitneyPlayer
@@ -168,18 +170,19 @@ BattleArenaReceptionistScript:
 	ifequal 13, .SabrinaPlayer
 	ifequal 14, .BlainePlayer
 	ifequal 15, .WillPlayer
-	ifequal 16, .BrunoPlayer
-	ifequal 17, .KarenPlayer
-	ifequal 18, .LoreleiPlayer
-	ifequal 19, .AgathaPlayer
-	ifequal 20, .InsafPlayer
-	ifequal 21, .SilverPlayer
-	ifequal 22, .GiovanniPlayer
-	ifequal 23, .OakPlayer
-	ifequal 24, .LancePlayer
-	ifequal 25, .GreenPlayer
-	ifequal 26, .BluePlayer
-	ifequal 27, .RedPlayer
+	ifequal 16, .KogaPlayer
+	ifequal 17, .BrunoPlayer
+	ifequal 18, .KarenPlayer
+	ifequal 19, .LoreleiPlayer
+	ifequal 20, .AgathaPlayer
+	ifequal 21, .InsafPlayer
+	ifequal 22, .SilverPlayer
+	ifequal 23, .GiovanniPlayer
+	ifequal 24, .OakPlayer
+	ifequal 25, .LancePlayer
+	ifequal 26, .GreenPlayer
+	ifequal 27, .BluePlayer
+	ifequal 28, .RedPlayer
 	sjump .SampleAgain
 
 .RandomEnemy:
@@ -188,7 +191,7 @@ BattleArenaReceptionistScript:
 	iffalse .ChooseEnemyCharacter
 
 .Resample
-	random 28
+	random 29
 	ifequal 0, .FalknerEnemy
 	ifequal 1, .BugsyEnemy
 	ifequal 2, .WhitneyEnemy
@@ -205,18 +208,19 @@ BattleArenaReceptionistScript:
 	ifequal 13, .SabrinaEnemy
 	ifequal 14, .BlaineEnemy
 	ifequal 15, .WillEnemy
-	ifequal 16, .BrunoEnemy
-	ifequal 17, .KarenEnemy
-	ifequal 18, .LoreleiEnemy
-	ifequal 19, .AgathaEnemy
-	ifequal 20, .InsafEnemy
-	ifequal 21, .SilverEnemy
-	ifequal 22, .GiovanniEnemy
-	ifequal 23, .OakEnemy
-	ifequal 24, .LanceEnemy
-	ifequal 25, .GreenEnemy
-	ifequal 26, .BlueEnemy
-	ifequal 27, .RedEnemy
+	ifequal 16, .KogaEnemy
+	ifequal 17, .BrunoEnemy
+	ifequal 18, .KarenEnemy
+	ifequal 19, .LoreleiEnemy
+	ifequal 20, .AgathaEnemy
+	ifequal 21, .InsafEnemy
+	ifequal 22, .SilverEnemy
+	ifequal 23, .GiovanniEnemy
+	ifequal 24, .OakEnemy
+	ifequal 25, .LanceEnemy
+	ifequal 26, .GreenEnemy
+	ifequal 27, .BlueEnemy
+	ifequal 28, .RedEnemy
 	sjump .Resample
 
 .FalknerPlayer:
@@ -491,6 +495,23 @@ BattleArenaReceptionistScript:
 	loadtrainer WILL, WILL1
 	sjump .StartBattle
 
+.KogaPlayer:
+	writetext PlayUsingKogaText
+	yesorno
+	iffalse .ChoosePlayerCharacter
+	setval KOGA
+	writemem wOtherTrainerClass
+	setval KOGA1
+	writemem wOtherTrainerID
+	special OverridePlayerParty
+    sjump .ChooseEnemyCharacter
+.KogaEnemy:
+	writetext PlayAgainstKogaText
+	yesorno
+	iffalse .ChooseEnemyCharacter
+	loadtrainer KOGA, KOGA1
+	sjump .StartBattle
+
 .BrunoPlayer:
 	writetext PlayUsingBrunoText
 	yesorno
@@ -701,7 +722,7 @@ BattleArenaReceptionistScript:
 	dw .CharacterMenuData
 	db 1 ; default option
 .CharacterMenuData:
-	db STATICMENU_CURSOR | STATICMENU_DISABLE_B | STATICMENU_WRAP ; flags
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
 	dn 5, 6 ; rows, columns
 	db 3 ; spacing
 	dba .CharacterText
@@ -724,6 +745,7 @@ BattleArenaReceptionistScript:
 	db "SB@"
 	db "BL@"
 	db "WL@"
+	db "KO@"
 	db "BN@"
 	db "KN@"
 	db "LO@"
@@ -736,7 +758,6 @@ BattleArenaReceptionistScript:
 	db "GR@"
 	db "BU@"
 	db "RD@"
-	db "EX@"
 
 BattleArenaPackFull:
 	setevent EVENT_DID_NOT_GET_BATTLE_ARENA_PRIZE
@@ -935,6 +956,16 @@ PlayUsingWillText:
 PlayAgainstWillText:
 	text "Play against"
 	line "Leader Will?"
+	done
+
+PlayUsingKogaText:
+	text "Play using Leader"
+	line "Koga's team?"
+	done
+
+PlayAgainstKogaText:
+	text "Play against"
+	line "Koga Will?"
 	done
 
 PlayUsingBrunoText:
