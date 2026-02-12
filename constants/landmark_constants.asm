@@ -46,7 +46,7 @@
 	const LANDMARK_ICE_PATH          ; 28
 	const LANDMARK_BLACKTHORN_CITY   ; 29
 	const LANDMARK_DRAGONS_DEN       ; 2a
-	const LANDMARK_ROUTE_45          ; 2b
+	const LANDMARK_ROUTE_17          ; 2b
 	const LANDMARK_ROUTE_46          ; 2d
 	const LANDMARK_TOHJO_FALLS       ; 5d
 	const LANDMARK_ROUTE_27          ; 5c

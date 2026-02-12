@@ -1,21 +1,21 @@
 	object_const_def
-	const ROUTE45_POKEFAN_M1
-	const ROUTE45_POKEFAN_M2
-	const ROUTE45_POKEFAN_M3
-	const ROUTE45_POKEFAN_M4
-	const ROUTE45_BLACK_BELT
-	const ROUTE45_COOLTRAINER_M
-	const ROUTE45_COOLTRAINER_F
-	const ROUTE45_OTIS
-	const ROUTE45_POKE_BALL1
-	const ROUTE45_POKE_BALL2
-	const ROUTE45_POKE_BALL3
-	const ROUTE45_YOUNGSTER
-	const ROUTE45_BERRY_TREE1
-	const ROUTE45_BERRY_TREE2
-	const ROUTE45_RAIKOU
+	const ROUTE17_POKEFAN_M1
+	const ROUTE17_POKEFAN_M2
+	const ROUTE17_POKEFAN_M3
+	const ROUTE17_POKEFAN_M4
+	const ROUTE17_BLACK_BELT
+	const ROUTE17_COOLTRAINER_M
+	const ROUTE17_COOLTRAINER_F
+	const ROUTE17_OTIS
+	const ROUTE17_POKE_BALL1
+	const ROUTE17_POKE_BALL2
+	const ROUTE17_POKE_BALL3
+	const ROUTE17_YOUNGSTER
+	const ROUTE17_BERRY_TREE1
+	const ROUTE17_BERRY_TREE2
+	const ROUTE17_RAIKOU
 
-Route45_MapScripts:
+Route17_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
@@ -36,7 +36,7 @@ Route45_MapScripts:
 	random 10
 	ifequal 0, .AppearOtis
 .done
-	disappear ROUTE45_OTIS
+	disappear ROUTE17_OTIS
 	endcallback
 
 .Sun:
@@ -55,7 +55,7 @@ Route45_MapScripts:
 	sjump .CheckOtis
 
 .AppearOtis:
-	appear ROUTE45_OTIS
+	appear ROUTE17_OTIS
 	endcallback
 
 TrainerBlackbeltKenji:
@@ -101,26 +101,26 @@ TrainerHikerParry:
 	checkflag ENGINE_PARRY_READY_FOR_REMATCH
 	iftrue .WantsBattle
 	checkcellnum PHONE_HIKER_PARRY
-	iftrue Route45NumberAcceptedM
+	iftrue Route17NumberAcceptedM
 	checkevent EVENT_PARRY_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskedAlready
 	writetext HikerParryAfterBattleText
 	promptbutton
 	setevent EVENT_PARRY_ASKED_FOR_PHONE_NUMBER
-	scall Route45AskNumber
+	scall Route17AskNumber
 	sjump .AskForNumber
 
 .AskedAlready:
-	scall Route45AskNumber
+	scall Route17AskNumber
 .AskForNumber:
 	askforphonenumber PHONE_HIKER_PARRY
-	ifequal PHONE_CONTACT_REFUSED, Route45NumberDeclinedM
+	ifequal PHONE_CONTACT_REFUSED, Route17NumberDeclinedM
 	gettrainername STRING_BUFFER_3, HIKER, PARRY1
-	scall Route45RegisteredNumberM
-	sjump Route45NumberAcceptedM
+	scall Route17RegisteredNumberM
+	sjump Route17NumberAcceptedM
 
 .WantsBattle:
-	scall Route45RematchM
+	scall Route17RematchM
 	winlosstext HikerParry3BeatenText, 0
 	checkevent EVENT_RESTORED_POWER_TO_KANTO
 	iftrue .LoadFight2
@@ -166,23 +166,23 @@ TrainerHikerParry:
 	jumpstd PackFullMScript
 	end
 
-Route45AskNumber:
+Route17AskNumber:
 	jumpstd AskNumber1MScript
 	end
 
-Route45RegisteredNumberM:
+Route17RegisteredNumberM:
 	jumpstd RegisteredNumberMScript
 	end
 
-Route45NumberAcceptedM:
+Route17NumberAcceptedM:
 	jumpstd NumberAcceptedMScript
 	end
 
-Route45NumberDeclinedM:
+Route17NumberDeclinedM:
 	jumpstd NumberDeclinedMScript
 	end
 
-Route45RematchM:
+Route17RematchM:
 	jumpstd RematchMScript
 	end
 
@@ -241,20 +241,20 @@ TrainerCamperQuentin:
 	closetext
 	end
 
-Route45Sign:
-	jumptext Route45SignText
+Route17Sign:
+	jumptext Route17SignText
 
-Route45Revive:
+Route17Revive:
 	itemball REVIVE
 
-Route45Elixer:
+Route17Elixer:
 	itemball ELIXER
 
-Route45MaxPotion:
+Route17MaxPotion:
 	itemball MAX_POTION
 
-Route45HiddenPpUp:
-	hiddenitem PP_UP, EVENT_ROUTE_45_HIDDEN_PP_UP
+Route17HiddenPpUp:
+	hiddenitem PP_UP, EVENT_ROUTE_17_HIDDEN_PP_UP
 
 HikerErikSeenText:
 	text "Be prepared for"
@@ -456,81 +456,81 @@ CamperQuentinAfterBattleText:
 	line "there, but…"
 	done
 
-Route45SignText:
-	text "ROUTE 45"
+Route17SignText:
+	text "ROUTE 17"
 	line "MOUNTAIN RD. AHEAD"
 	done
 
-Route45BerryTree1:
+Route17BerryTree1:
 	opentext
 	getitemname STRING_BUFFER_3, MIRACLEBERRY
-	writetext Route45TreeText
+	writetext Route17TreeText
 	promptbutton
-	writetext Route45HeyItsBerryApricornText
+	writetext Route17HeyItsBerryApricornText
 	promptbutton
 	giveitem MIRACLEBERRY
-	iffalse Route45NoRoomInBag
-	disappear ROUTE45_BERRY_TREE1
-	writetext Route45FoundItemText
+	iffalse Route17NoRoomInBag
+	disappear ROUTE17_BERRY_TREE1
+	writetext Route17FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route45BerryTree2:
+Route17BerryTree2:
 	opentext
 	getitemname STRING_BUFFER_3, GOLD_BERRY
-	writetext Route45TreeText
+	writetext Route17TreeText
 	promptbutton
-	writetext Route45HeyItsBerryApricornText
+	writetext Route17HeyItsBerryApricornText
 	promptbutton
 	giveitem GOLD_BERRY
-	iffalse Route45NoRoomInBag
-	disappear ROUTE45_BERRY_TREE2
-	writetext Route45FoundItemText
+	iffalse Route17NoRoomInBag
+	disappear ROUTE17_BERRY_TREE2
+	writetext Route17FoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
 	end
 
-Route45NoBerryOrApricorn:
+Route17NoBerryOrApricorn:
 	opentext
-	writetext Route45TreeText
+	writetext Route17TreeText
 	promptbutton
-	writetext Route45NothingHereText
+	writetext Route17NothingHereText
 	waitbutton
 	closetext
 	end
 
-Route45NoRoomInBag:
-	writetext Route45NoRoomInBagText
+Route17NoRoomInBag:
+	writetext Route17NoRoomInBagText
 	waitbutton
 	closetext
 	end
 
-Route45TreeText:
+Route17TreeText:
 	text_far _FruitBearingTreeText
 	text_end
 
-Route45NothingHereText:
+Route17NothingHereText:
 	text_far _NothingHereText
 	text_end
 
-Route45HeyItsBerryApricornText:
+Route17HeyItsBerryApricornText:
 	text_far _HeyItsFruitText
 	text_end
 
-Route45FoundItemText:
+Route17FoundItemText:
 	text_far _ObtainedFruitText
 	text_end
 
-Route45NoRoomInBagText:
+Route17NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
-Route45StationaryRaikouScript:
+Route17StationaryRaikouScript:
     faceplayer
 	opentext
 	writetext RaikouText
@@ -540,7 +540,7 @@ Route45StationaryRaikouScript:
 	loadvar VAR_BATTLETYPE, BATTLETYPE_SUICUNE
 	loadwildmon RAIKOU, 40
 	startbattle
-	disappear ROUTE45_RAIKOU
+	disappear ROUTE17_RAIKOU
 	reloadmapafterbattle
 	end
 	
@@ -548,29 +548,29 @@ RaikouText:
 	text "Rrrr!"
 	done
 
-Route45OtisScript:
+Route17OtisScript:
 	callstd WanderingOddEggNPCScript
 	playsound SFX_WARP_TO
-	applymovement ROUTE45_OTIS, Route45OtisTeleportAwayMovement
-	disappear ROUTE45_OTIS
+	applymovement ROUTE17_OTIS, Route17OtisTeleportAwayMovement
+	disappear ROUTE17_OTIS
 	setflag ENGINE_MET_OTIS_TODAY
 	end
 
-Route45OtisTeleportAwayMovement:
+Route17OtisTeleportAwayMovement:
 	teleport_from
 	step_end
 
-Route45_MapEvents:
+Route17_MapEvents:
 	def_warp_events
 	warp_event  2,  5, DARK_CAVE_BLACKTHORN_ENTRANCE, 1
 
 	def_coord_events
 
 	def_bg_events
-	bg_event 10,  4, BGEVENT_READ, Route45Sign
-	bg_event 13, 80, BGEVENT_ITEM, Route45HiddenPpUp
-	bg_event 16, 82, BGEVENT_READ, Route45NoBerryOrApricorn
-	bg_event 14, 82, BGEVENT_READ, Route45NoBerryOrApricorn
+	bg_event 10,  4, BGEVENT_READ, Route17Sign
+	bg_event 13, 80, BGEVENT_ITEM, Route17HiddenPpUp
+	bg_event 16, 82, BGEVENT_READ, Route17NoBerryOrApricorn
+	bg_event 14, 82, BGEVENT_READ, Route17NoBerryOrApricorn
 
 	def_object_events
 	object_event 10, 16, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 1, TrainerHikerErik, -1
@@ -580,11 +580,11 @@ Route45_MapEvents:
 	object_event 11, 50, SPRITE_BLACK_BELT, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 2, TrainerBlackbeltKenji, -1
 	object_event 17, 18, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerCooltrainermRyan, -1
 	object_event  5, 36, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainerfKelly, -1
-	object_event  6, 51, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route45OtisScript, EVENT_ROUTE_45_OTIS
-	object_event  5, 66, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route45Revive, EVENT_ROUTE_45_REVIVE
-	object_event  6, 20, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route45Elixer, EVENT_ROUTE_45_ELIXER
-	object_event  7, 33, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route45MaxPotion, EVENT_ROUTE_45_MAX_POTION
+	object_event  6, 51, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route17OtisScript, EVENT_ROUTE_17_OTIS
+	object_event  5, 66, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route17Revive, EVENT_ROUTE_17_REVIVE
+	object_event  6, 20, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route17Elixer, EVENT_ROUTE_17_ELIXER
+	object_event  7, 33, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route17MaxPotion, EVENT_ROUTE_17_MAX_POTION
 	object_event  4, 70, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, TrainerCamperQuentin, -1
-	object_event 16, 82, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_ORANGE, OBJECTTYPE_SCRIPT, 0, Route45BerryTree1, EVENT_ROUTE_45_BERRY_1
-	object_event 14, 82, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route45BerryTree2, EVENT_ROUTE_45_BERRY_2
-	object_event 13, 77, SPRITE_RAIKOU_OW, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route45StationaryRaikouScript, EVENT_ROUTE_45_RAIKOU
+	object_event 16, 82, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_ORANGE, OBJECTTYPE_SCRIPT, 0, Route17BerryTree1, EVENT_ROUTE_17_BERRY_1
+	object_event 14, 82, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route17BerryTree2, EVENT_ROUTE_17_BERRY_2
+	object_event 13, 77, SPRITE_RAIKOU_OW, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route17StationaryRaikouScript, EVENT_ROUTE_17_RAIKOU

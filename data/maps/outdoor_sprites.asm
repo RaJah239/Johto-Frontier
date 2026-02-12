@@ -163,7 +163,7 @@ LakeOfRageGroupSprites:
 	db 0 ; end
 
 BlackthornGroupSprites:
-; Route45, Route46, BlackthornCity
+; Route17, Route46, BlackthornCity
 	db SPRITE_GRAMPS
 	db SPRITE_YOUNGSTER
 	db SPRITE_LASS

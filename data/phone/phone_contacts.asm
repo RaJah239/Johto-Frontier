@@ -40,6 +40,6 @@ PhoneContacts:
 	phone PICNICKER,    TIFFANY3,              ROUTE_15,                  ANYTIME, TiffanyPhoneCalleeScript, ANYTIME, TiffanyPhoneCallerScript
 	phone BIRD_KEEPER,  VANCE1,                ROUTE_16,                  ANYTIME, VancePhoneCalleeScript,   ANYTIME, VancePhoneCallerScript
 	phone FISHER,       WILTON1,               ROUTE_16,                  ANYTIME, WiltonPhoneCalleeScript,  ANYTIME, WiltonPhoneCallerScript
-	phone HIKER,        PARRY1,                ROUTE_45,                  ANYTIME, ParryPhoneCalleeScript,   ANYTIME, ParryPhoneCallerScript
+	phone HIKER,        PARRY1,                ROUTE_17,                  ANYTIME, ParryPhoneCalleeScript,   ANYTIME, ParryPhoneCallerScript
 	phone PICNICKER,    ERIN1,                 ROUTE_46,                  ANYTIME, ErinPhoneCalleeScript,    ANYTIME, ErinPhoneCallerScript
 	assert_table_length NUM_PHONE_CONTACTS + 1

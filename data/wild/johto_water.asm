@@ -198,7 +198,7 @@ JohtoWaterWildMons:
 	db 15, QUAGSIRE
 	end_water_wildmons
 
-	def_water_wildmons ROUTE_45
+	def_water_wildmons ROUTE_17
 	db 4 percent ; encounter rate
 	db 20, MAGIKARP
 	db 15, MAGIKARP

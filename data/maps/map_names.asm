@@ -189,7 +189,7 @@ Blackthorn_Map_Names: ;newgroup BLACKTHORN
 	dw Blackthorn_Map_Name5 ; map_const BLACKTHORN_MART ;  5
 	dw Blackthorn_Map_Name6 ; map_const BLACKTHORN_POKECENTER_1F ;  6
 	dw Blackthorn_Map_Name7 ; map_const MOVE_DELETERS_HOUSE ;  7
-	dw Blackthorn_Map_Name8 ; map_const ROUTE_45,                                    10, 45 ;  8
+	dw Blackthorn_Map_Name8 ; map_const ROUTE_17,                                    10, 45 ;  8
 	dw Blackthorn_Map_Name9 ; map_const ROUTE_46,                                    10, 18 ;  9
 	dw Blackthorn_Map_Name10 ; map_const BLACKTHORN_CITY,                             20, 18 ; 10
 	assert_table_length NUM_BLACKTHORN_MAPS
@@ -625,8 +625,8 @@ Blackthorn_Map_Name6: ; map_const BLACKTHORN_POKECENTER_1F ;  6
 	db "Blackthorn Center@"
 Blackthorn_Map_Name7: ; map_const MOVE_DELETERS_HOUSE ;  7
 	db "Tutor House@"
-Blackthorn_Map_Name8: ; map_const ROUTE_45,;  8
-	db "Route 45@"
+Blackthorn_Map_Name8: ; map_const ROUTE_17,;  8
+	db "Route 17@"
 Blackthorn_Map_Name9: ; map_const ROUTE_46,;  9
 	db "Route 46@"
 Blackthorn_Map_Name10: ; map_const BLACKTHORN_CITY,;  6

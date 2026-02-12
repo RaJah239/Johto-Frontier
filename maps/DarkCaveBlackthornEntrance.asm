@@ -61,7 +61,7 @@ DarkCaveBlackthornEntrancePharmacistText2:
 
 DarkCaveBlackthornEntrance_MapEvents:
 	def_warp_events
-	warp_event 23,  3, ROUTE_45, 1
+	warp_event 23,  3, ROUTE_17, 1
 	warp_event  3, 25, DARK_CAVE_VIOLET_ENTRANCE, 2
 
 	def_coord_events

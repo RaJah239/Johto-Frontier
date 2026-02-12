@@ -24,8 +24,8 @@ Route13_Blocks:
 Route5_Blocks:
 	INCBIN "maps/Route5.blk"
 
-Route45_Blocks:
-	INCBIN "maps/Route45.blk"
+Route17_Blocks:
+	INCBIN "maps/Route17.blk"
 
 Route1_Blocks:
 	INCBIN "maps/Route1.blk"

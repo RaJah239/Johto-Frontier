@@ -139,7 +139,7 @@ ENDM
 	connection south, Route15, ROUTE_15, 5
 
 	map_attributes BlackthornCity, BLACKTHORN_CITY, $71, SOUTH | WEST
-	connection south, Route45, ROUTE_45, 0
+	connection south, Route17, ROUTE_17, 0
 	connection west, Route16, ROUTE_16, 9
 
 	map_attributes Route26, ROUTE_26, $05, WEST
@@ -215,13 +215,13 @@ ENDM
 	connection west, MahoganyTown, MAHOGANY_TOWN, 0
 	connection east, BlackthornCity, BLACKTHORN_CITY, -9
 
-	map_attributes Route45, ROUTE_45, $71, NORTH | WEST
+	map_attributes Route17, ROUTE_17, $71, NORTH | WEST
 	connection north, BlackthornCity, BLACKTHORN_CITY, 0
 	connection west, Route46, ROUTE_46, 36
 
 	map_attributes Route46, ROUTE_46, $05, SOUTH | EAST
 	connection south, Route1, ROUTE_1, -10
-	connection east, Route45, ROUTE_45, -36
+	connection east, Route17, ROUTE_17, -36
 
 
 	map_attributes Route23, ROUTE_23, $0f, 0
