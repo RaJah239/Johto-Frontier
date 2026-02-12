@@ -17,7 +17,7 @@ TreeMonMaps::
 	treemon_map ROUTE_9,                   TREEMON_SET_ROUTE
 	treemon_map ROUTE_10,                  TREEMON_SET_ROUTE
 	treemon_map ROUTE_11,                  TREEMON_SET_ROUTE
-	treemon_map ROUTE_40,                  TREEMON_SET_CITY
+	treemon_map ROUTE_12,                  TREEMON_SET_CITY
 	treemon_map ROUTE_41,                  TREEMON_SET_CITY
 	treemon_map ROUTE_42,                  TREEMON_SET_TOWN
 	treemon_map ROUTE_43,                  TREEMON_SET_LAKE
@@ -41,7 +41,7 @@ TreeMonMaps::
 
 RockMonMaps::
 	treemon_map CIANWOOD_CITY,             TREEMON_SET_ROCK
-	treemon_map ROUTE_40,                  TREEMON_SET_ROCK
+	treemon_map ROUTE_12,                  TREEMON_SET_ROCK
 	treemon_map DARK_CAVE_VIOLET_ENTRANCE, TREEMON_SET_ROCK
 	treemon_map SLOWPOKE_WELL_B1F,         TREEMON_SET_ROCK
 	db -1

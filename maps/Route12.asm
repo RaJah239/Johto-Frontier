@@ -1,32 +1,32 @@
 	object_const_def
-	const ROUTE40_OLIVINE_RIVAL1
-	const ROUTE40_OLIVINE_RIVAL2
-	const ROUTE40_SWIMMER_GIRL1
-	const ROUTE40_SWIMMER_GIRL2
-	const ROUTE40_ROCK1
-	const ROUTE40_ROCK2
-	const ROUTE40_ROCK3
-	const ROUTE40_LASS1
-	const ROUTE40_MONICA
-	const ROUTE40_POKEFAN_M
-	const ROUTE40_LASS2
-	const ROUTE40_STANDING_YOUNGSTER
+	const ROUTE12_OLIVINE_RIVAL1
+	const ROUTE12_OLIVINE_RIVAL2
+	const ROUTE12_SWIMMER_GIRL1
+	const ROUTE12_SWIMMER_GIRL2
+	const ROUTE12_ROCK1
+	const ROUTE12_ROCK2
+	const ROUTE12_ROCK3
+	const ROUTE12_LASS1
+	const ROUTE12_MONICA
+	const ROUTE12_POKEFAN_M
+	const ROUTE12_LASS2
+	const ROUTE12_STANDING_YOUNGSTER
 
-Route40_MapScripts:
+Route12_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, Route40MonicaCallback
+	callback MAPCALLBACK_OBJECTS, Route12MonicaCallback
 
-Route40MonicaCallback:
+Route12MonicaCallback:
 	clearevent EVENT_BATTLE_TOWER_OPEN_CIVILIANS
 	readvar VAR_WEEKDAY
 	ifequal MONDAY, .MonicaAppears
-	disappear ROUTE40_MONICA
+	disappear ROUTE12_MONICA
 	endcallback
 
 .MonicaAppears:
-	appear ROUTE40_MONICA
+	appear ROUTE12_MONICA
 	endcallback
 
 TrainerSwimmerfElaine:
@@ -73,22 +73,22 @@ TrainerSwimmermRandall:
 	closetext
 	end
 
-Route40Lass1Script:
-	jumptextfaceplayer Route40Lass1Text
+Route12Lass1Script:
+	jumptextfaceplayer Route12Lass1Text
 
-Route40PokefanMScript:
+Route12PokefanMScript:
 	special CheckMobileAdapterStatusSpecial
 	iftrue .mobile
-	jumptextfaceplayer Route40PokefanMText
+	jumptextfaceplayer Route12PokefanMText
 
 .mobile
-	jumptextfaceplayer Route40PokefanMText_Mobile
+	jumptextfaceplayer Route12PokefanMText_Mobile
 
-Route40Lass2Script:
-	jumptextfaceplayer Route40Lass2Text
+Route12Lass2Script:
+	jumptextfaceplayer Route12Lass2Text
 
-Route40StandingYoungsterScript:
-	jumptextfaceplayer Route40StandingYoungsterText
+Route12StandingYoungsterScript:
+	jumptextfaceplayer Route12StandingYoungsterText
 
 MonicaScript:
 	faceplayer
@@ -126,14 +126,14 @@ MonicaScript:
 	closetext
 	end
 
-Route40Sign:
-	jumptext Route40SignText
+Route12Sign:
+	jumptext Route12SignText
 
-Route40Rock:
+Route12Rock:
 	jumpstd SmashRockScript
 
-Route40HiddenHyperPotion:
-	hiddenitem HYPER_POTION, EVENT_ROUTE_40_HIDDEN_HYPER_POTION
+Route12HiddenHyperPotion:
+	hiddenitem HYPER_POTION, EVENT_ROUTE_12_HIDDEN_HYPER_POTION
 
 SwimmermSimonSeenText:
 	text "You have to warm"
@@ -208,7 +208,7 @@ SwimmerfPaulaAfterBattleText:
 	cont "carry me along."
 	done
 
-Route40Lass1Text:
+Route12Lass1Text:
 	text "Although you can't"
 	line "see it from here,"
 
@@ -216,14 +216,14 @@ Route40Lass1Text:
 	line "the sea."
 	done
 
-Route40PokefanMText:
+Route12PokefanMText:
 	text "Hm! There's a big"
 	line "building up ahead!"
 
 	para "What is it?"
 	done
 
-Route40PokefanMText_Mobile:
+Route12PokefanMText_Mobile:
 	text "Hm! Look at all"
 	line "those serious-"
 	cont "looking trainers"
@@ -232,7 +232,7 @@ Route40PokefanMText_Mobile:
 	para "What? What?"
 	done
 
-Route40Lass2Text:
+Route12Lass2Text:
 	text "I came to OLIVINE"
 	line "by ship to see the"
 
@@ -244,7 +244,7 @@ Route40Lass2Text:
 	cont "from a big city."
 	done
 
-Route40StandingYoungsterText:
+Route12StandingYoungsterText:
 	text "Have you gone to"
 	line "the BATTLE TOWER?"
 
@@ -303,33 +303,33 @@ MonicaNotMondayText:
 	cont "Monday. How sad…"
 	done
 
-Route40SignText:
-	text "ROUTE 40"
+Route12SignText:
+	text "ROUTE 12"
 
 	para "CIANWOOD CITY -"
 	line "OLIVINE CITY"
 	done
 
-Route40_MapEvents:
+Route12_MapEvents:
 	def_warp_events
-	warp_event  9,  5, ROUTE_40_BATTLE_TOWER_GATE, 1
+	warp_event  9,  5, ROUTE_12_POWER_PLANT_GATE, 1
 
 	def_coord_events
 
 	def_bg_events
-	bg_event 14, 10, BGEVENT_READ, Route40Sign
-	bg_event  7,  8, BGEVENT_ITEM, Route40HiddenHyperPotion
+	bg_event 14, 10, BGEVENT_READ, Route12Sign
+	bg_event  7,  8, BGEVENT_ITEM, Route12HiddenHyperPotion
 
 	def_object_events
 	object_event 14, 15, SPRITE_SWIMMER_GUY, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerSwimmermSimon, -1
 	object_event 18, 30, SPRITE_SWIMMER_GUY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 5, TrainerSwimmermRandall, -1
 	object_event  3, 19, SPRITE_SWIMMER_GIRL, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 4, TrainerSwimmerfElaine, -1
 	object_event 10, 25, SPRITE_SWIMMER_GIRL, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerSwimmerfPaula, -1
-	object_event  7, 11, SPRITE_ROCK, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route40Rock, -1
-	object_event  6,  9, SPRITE_ROCK, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route40Rock, -1
-	object_event  7,  8, SPRITE_ROCK, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route40Rock, -1
-	object_event 11, 13, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route40Lass1Script, -1
-	object_event  8, 10, SPRITE_BEAUTY, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MonicaScript, EVENT_ROUTE_40_MONICA_OF_MONDAY
-	object_event  7,  6, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route40PokefanMScript, -1
-	object_event 13,  4, SPRITE_LASS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route40Lass2Script, -1
-	object_event 16,  9, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route40StandingYoungsterScript, EVENT_BATTLE_TOWER_OPEN_CIVILIANS
+	object_event  7, 11, SPRITE_ROCK, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route12Rock, -1
+	object_event  6,  9, SPRITE_ROCK, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route12Rock, -1
+	object_event  7,  8, SPRITE_ROCK, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route12Rock, -1
+	object_event 11, 13, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route12Lass1Script, -1
+	object_event  8, 10, SPRITE_BEAUTY, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MonicaScript, EVENT_ROUTE_12_MONICA_OF_MONDAY
+	object_event  7,  6, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route12PokefanMScript, -1
+	object_event 13,  4, SPRITE_LASS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route12Lass2Script, -1
+	object_event 16,  9, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route12StandingYoungsterScript, EVENT_BATTLE_TOWER_OPEN_CIVILIANS

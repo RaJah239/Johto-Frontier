@@ -215,7 +215,7 @@ INCLUDE "maps/BattleTower1F.asm"
 INCLUDE "maps/BattleTowerBattleRoom.asm"
 INCLUDE "maps/BattleTowerElevator.asm"
 INCLUDE "maps/BattleTowerHallway.asm"
-INCLUDE "maps/Route40BattleTowerGate.asm"
+INCLUDE "maps/Route12PowerPlantGate.asm"
 INCLUDE "maps/PowerPlantOutside.asm"
 INCLUDE "maps/BattlePlazaMart.asm"
 
@@ -321,7 +321,7 @@ INCLUDE "maps/Route26.asm"
 INCLUDE "maps/BattlePlazaMagnetTrainStation.asm"
 INCLUDE "maps/Route3.asm"
 INCLUDE "maps/Route11.asm"
-INCLUDE "maps/Route40.asm"
+INCLUDE "maps/Route12.asm"
 INCLUDE "maps/Route41.asm"
 
 

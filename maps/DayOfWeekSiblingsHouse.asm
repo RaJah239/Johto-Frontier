@@ -47,7 +47,7 @@ DayOfWeekSiblingsHousePokedexText2:
 
 DayOfWeekSiblingsHousePokedexText3:
 	text "Monday, MONICA"
-	line "ROUTE 40"
+	line "ROUTE 12"
 
 	para "Tuesday, TUSCANY"
 	line "ROUTE 1"

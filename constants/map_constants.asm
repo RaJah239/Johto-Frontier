@@ -284,7 +284,7 @@ ENDM
 	endgroup
 
 	newgroup CIANWOOD                                             ; 22
-	map_const ROUTE_40,                                    10, 18 ;  1
+	map_const ROUTE_12,                                    10, 18 ;  1
 	map_const ROUTE_41,                                    25, 27 ;  2
 	map_const CIANWOOD_CITY,                               15, 29 ;  3
 	map_const MANIAS_HOUSE,                                 4,  4 ;  4
@@ -294,7 +294,7 @@ ENDM
 	map_const CIANWOOD_PHOTO_STUDIO,                        4,  4 ;  8
 	map_const CIANWOOD_LUGIA_SPEECH_HOUSE,                  4,  4 ;  9
 	map_const POKE_SEERS_HOUSE,                             4,  4 ; 10
-	map_const ROUTE_40_BATTLE_TOWER_GATE,                   5,  4 ; 15
+	map_const ROUTE_12_POWER_PLANT_GATE,                   5,  4 ; 15
 	map_const POWER_PLANT_OUTSIDE,                         10, 11 ; 16
 	map_const CIANWOOD_PORT,                               10, 18 ; 17
 	map_const CIANWOOD_PORT_PASSAGE,                       10,  9 ; 18

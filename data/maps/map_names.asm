@@ -312,7 +312,7 @@ Cable_Club_Map_Names: ;newgroup CABLE_CLUB
 
 Cianwood_Map_Names: ;newgroup CIANWOOD
 	table_width 2, Cianwood_Map_Names                                             ; 22
-	dw Cianwood_Map_Name1 ; map_const ROUTE_40,                                    10, 18 ;  1
+	dw Cianwood_Map_Name1 ; map_const ROUTE_12,                                    10, 18 ;  1
 	dw Cianwood_Map_Name2 ; map_const ROUTE_41,                                    25, 27 ;  2
 	dw Cianwood_Map_Name3 ; map_const CIANWOOD_CITY,                               15, 27 ;  3
 	dw Cianwood_Map_Name4 ; map_const MANIAS_HOUSE ;  4
@@ -322,7 +322,7 @@ Cianwood_Map_Names: ;newgroup CIANWOOD
 	dw Cianwood_Map_Name8 ; map_const CIANWOOD_PHOTO_STUDIO ;  8
 	dw Cianwood_Map_Name9 ; map_const CIANWOOD_LUGIA_SPEECH_HOUSE ;  9
 	dw Cianwood_Map_Name10 ; map_const POKE_SEERS_HOUSE ; 10
-	dw Cianwood_Map_Name15 ; map_const ROUTE_40_BATTLE_TOWER_GATE ; 15
+	dw Cianwood_Map_Name15 ; map_const ROUTE_12_POWER_PLANT_GATE ; 15
 	dw Cianwood_Map_Name16 ; map_const POWER_PLANT_OUTSIDE ; 16
 	dw Cianwood_Map_Name17 ; map_const CIANWOOD_PORT ; 17
 	dw Cianwood_Map_Name18 ; map_const CIANWOOD_PORT_PASSAGE ; 18
@@ -809,8 +809,8 @@ Cable_Club_Map_Name5: ; map_const MOBILE_TRADE_ROOM ;  5
 Cable_Club_Map_Name6: ; map_const MOBILE_BATTLE_ROOM ;  6
 	db "Mobile Battle@"                                          ; 21
 
-Cianwood_Map_Name1: ; map_const ROUTE_40,  1
-	db "Route 40@"
+Cianwood_Map_Name1: ; map_const ROUTE_12,  1
+	db "Route 12@"
 Cianwood_Map_Name2: ; map_const ROUTE_41, ;  2
 	db "Route 41@"
 Cianwood_Map_Name3: ; map_const CIANWOOD_CITY ;  3
@@ -829,8 +829,8 @@ Cianwood_Map_Name9: ; map_const CIANWOOD_LUGIA_SPEECH_HOUSE ;  9
 	db "Cianwood House@"
 Cianwood_Map_Name10: ; map_const POKE_SEERS_HOUSE ; 10
 	db "#seer House@"
-Cianwood_Map_Name15: ; map_const ROUTE_40_BATTLE_TOWER_GATE ; 15
-	db "Route 40 Gate@"
+Cianwood_Map_Name15: ; map_const ROUTE_12_POWER_PLANT_GATE ; 15
+	db "Route 12 Gate@"
 Cianwood_Map_Name16: ; map_const POWER_PLANT_OUTSIDE ; 16
 	db "Power Plant@"
 Cianwood_Map_Name17: ; map_const CIANWOOD_PORT, ; 17

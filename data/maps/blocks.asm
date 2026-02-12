@@ -3,8 +3,8 @@ SECTION "Map Blocks 1", ROMX
 Route4_Blocks:
 	INCBIN "maps/Route4.blk"
 
-Route40_Blocks:
-	INCBIN "maps/Route40.blk"
+Route12_Blocks:
+	INCBIN "maps/Route12.blk"
 
 Route8_Blocks:
 	INCBIN "maps/Route8.blk"
@@ -106,7 +106,7 @@ Route43Gate_Blocks:
 Route7GoldenrodGate_Blocks:
 Route8RuinsOfAlphGate_Blocks:
 Route6IlexForestGate_Blocks:
-Route40BattleTowerGate_Blocks:
+Route12PowerPlantGate_Blocks:
 Route29Route46Gate_Blocks:
 Route11_SilverCaveGate_Blocks:
 	INCBIN "maps/NorthSouthGate.blk"

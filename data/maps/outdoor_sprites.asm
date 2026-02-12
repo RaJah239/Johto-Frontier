@@ -103,11 +103,11 @@ GoldenrodGroupSprites:
 	db SPRITE_POKE_BALL
 	db 0 ; end
 
-; OlivineCity and Route40 are connected
+; OlivineCity and Route12 are connected
 OlivineGroupSprites:
 ; Route10, Route11, OlivineCity
 CianwoodGroupSprites:
-; Route40, Route41, CianwoodCity, PowerPlantOutside
+; Route12, Route41, CianwoodCity, PowerPlantOutside
 	db SPRITE_RIVAL
 	db SPRITE_POKEFAN_M
 	db SPRITE_LASS

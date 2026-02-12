@@ -38,7 +38,7 @@ Landmarks:
 	landmark  28,  48, Route11Name
 	landmark  28,  60, OlivineCityName
 	landmark  30,  62, LighthouseName
-	landmark  20,  60, Route40Name
+	landmark  20,  60, Route12Name
 	landmark  20,  52, PowerPlantName
 	landmark  20,  92, WhirlIslandsName
 	landmark  20, 100, Route41Name
@@ -108,7 +108,7 @@ Route8Name:          db "Route 8@"
 Route9Name:          db "Route 9@"
 Route10Name:         db "Route 10@"
 Route11Name:         db "Route 11@"
-Route40Name:         db "Route 40@"
+Route12Name:         db "Route 12@"
 Route41Name:         db "Route 41@"
 Route42Name:         db "Route 42@"
 Route43Name:         db "Route 43@"

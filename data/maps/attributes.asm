@@ -123,7 +123,7 @@ ENDM
 
 	map_attributes OlivineCity, OLIVINE_CITY, $35, NORTH | WEST
 	connection north, Route11, ROUTE_11, 5
-	connection west, Route40, ROUTE_40, 9
+	connection west, Route12, ROUTE_12, 9
 
 	map_attributes EcruteakCity, ECRUTEAK_CITY, $05, SOUTH | WEST | EAST
 	connection south, Route9, ROUTE_9, 5
@@ -195,12 +195,12 @@ ENDM
 	connection south, OlivineCity, OLIVINE_CITY, -5
 	connection east, Route10, ROUTE_10, 7
 
-	map_attributes Route40, ROUTE_40, $35, SOUTH | EAST
+	map_attributes Route12, ROUTE_12, $35, SOUTH | EAST
 	connection south, Route41, ROUTE_41, -15
 	connection east, OlivineCity, OLIVINE_CITY, -9
 
 	map_attributes Route41, ROUTE_41, $35, NORTH | WEST
-	connection north, Route40, ROUTE_40, 15
+	connection north, Route12, ROUTE_12, 15
 	connection west, CianwoodCity, CIANWOOD_CITY, 0
 
 	map_attributes Route42, ROUTE_42, $05, WEST | EAST
@@ -421,7 +421,7 @@ ENDM
 	map_attributes BattleTowerBattleRoom, BATTLE_TOWER_BATTLE_ROOM, $00, 0
 	map_attributes BattleTowerElevator, BATTLE_TOWER_ELEVATOR, $00, 0
 	map_attributes BattleTowerHallway, BATTLE_TOWER_HALLWAY, $00, 0
-	map_attributes Route40BattleTowerGate, ROUTE_40_BATTLE_TOWER_GATE, $00, 0
+	map_attributes Route12PowerPlantGate, ROUTE_12_POWER_PLANT_GATE, $00, 0
 	map_attributes PowerPlantOutside, POWER_PLANT_OUTSIDE, $05, 0
 	map_attributes VictoryRoadGate, VICTORY_ROAD_GATE, $00, 0
 	map_attributes ElmsLab, ELMS_LAB, $00, 0

@@ -76,8 +76,8 @@ PowerPlantOutsideSignText:
 PowerPlantOutside_MapEvents:
 	def_warp_events
 	warp_event  5,  5, POWER_PLANT, 1
-	warp_event  8, 15, ROUTE_40_BATTLE_TOWER_GATE, 3
-	warp_event  9, 15, ROUTE_40_BATTLE_TOWER_GATE, 4
+	warp_event  8, 15, ROUTE_12_POWER_PLANT_GATE, 3
+	warp_event  9, 15, ROUTE_12_POWER_PLANT_GATE, 4
 
 	def_coord_events
 
