@@ -631,7 +631,7 @@ BGEventJumptable:
 	dw .left
 	dw .ifset
 	dw .ifnotset
-	dw .itemifset
+	dw .jumptext ; BGEVENT_JUMPTEXT
 	dw .copy
 	assert_table_length NUM_BGEVENTS
 
@@ -723,6 +723,17 @@ BGEventJumptable:
 .dontread:
 	xor a
 	ret
+
+.jumptext
+	call PlayClickSFX
+	ld hl, wTempScriptBuffer + 2
+	ld a, [wCurBGEventScriptAddr + 1]
+	ld [hld], a
+	ld a, [wCurBGEventScriptAddr]
+	ld [hld], a
+	ld [hl], jumptext_command
+	ld a, [wMapScriptsBank]
+	jmp CallScript
 
 CheckBGEventFlag:
 	ld hl, wCurBGEventScriptAddr

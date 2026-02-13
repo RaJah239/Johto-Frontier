@@ -2261,7 +2261,7 @@ wPlayerTurningDirection:: db
 
 NEXTU
 ; std script buffer
-	ds 1
+wTempScriptBuffer:: db
 wJumpStdScriptBuffer:: ds 3
 
 NEXTU
