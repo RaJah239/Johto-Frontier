@@ -303,3 +303,9 @@ DEF NUM_FACINGS EQU const_value
 	const STEP_BACK_LEDGE    ; 7
 	const STEP_WALK_IN_PLACE ; 8
 DEF NUM_STEPS EQU const_value
+
+; Object Scripts - use skips for the ones we don't need or
+; rearrange engine\events\std_scripts.asm as needed
+	const_def
+	const_skip
+	const DIFFICULT_BOOKSHELF_SCRIPT
