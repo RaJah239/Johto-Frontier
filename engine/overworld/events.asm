@@ -557,7 +557,7 @@ ObjectEventTypeArray:
 	dbw OBJECTTYPE_TRAINER, .trainer
 	; the remaining four are dummy events
 	dbw OBJECTTYPE_3, .three
-	dbw OBJECTTYPE_4, .four
+	dbw OBJECTTYPE_COMMAND, .command
 	dbw OBJECTTYPE_5, .five
 	dbw OBJECTTYPE_6, .six
 	assert_table_length NUM_OBJECT_TYPES
@@ -597,9 +597,20 @@ ObjectEventTypeArray:
 	xor a
 	ret
 
-.four
-	xor a
-	ret
+.command
+	ld hl, MAPOBJECT_SIGHT_RANGE
+	add hl, bc
+	ld de, wTempScriptBuffer
+rept 3
+	ld a, [hli]
+	ld [de], a
+	inc de
+endr
+	ld a, [hl]
+	ld [de], a
+	ld hl, wTempScriptBuffer
+	ld a, [wMapScriptsBank]
+	jmp CallScript
 
 .five
 	xor a

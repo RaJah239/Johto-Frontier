@@ -121,7 +121,11 @@ MACRO object_event
 	dn \6, \5
 	db \9, \8
 	db \<10>
-	db \<11>
+	if \<10> == OBJECTTYPE_COMMAND
+		db \<11>_command ; command id
+	else
+		db \<11> ; sight_range
+	endc
 	dw \<12>, \<13>
 	; the dummy PlayerObjectTemplate object_event has no def_object_events
 	if DEF(_NUM_OBJECT_EVENTS)
