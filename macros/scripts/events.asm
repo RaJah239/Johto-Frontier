@@ -1126,4 +1126,9 @@ MACRO iftrue_jumptextfaceplayer
 	dw \1 ; text_pointer
 ENDM
 
+	const jumpthistextfaceplayer_command
+MACRO jumpthistextfaceplayer
+	db jumpthistextfaceplayer_command
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

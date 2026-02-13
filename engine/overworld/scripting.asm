@@ -267,6 +267,7 @@ ScriptCommandTable:
 	dw Script_nooryes                    ; ae
 	dw Script_writetextend               ; af
 	dw Script_iftrue_jumptextfaceplayer  ;
+	dw Script_jumpthistextfaceplayer     ;
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -357,26 +358,42 @@ Script_writetextend:
 	jmp ScriptJump
 
 Script_jumptextfaceplayer:
-	ld a, [wScriptBank]
-	ld [wScriptTextBank], a
-	call GetScriptByte
-	ld [wScriptTextAddr], a
-	call GetScriptByte
-	ld [wScriptTextAddr + 1], a
+	call _GetTextPointer
+	jr _Do_textfaceplayer
+
+Script_jumpthistextfaceplayer:
+	call _GetThisTextPointer
+_Do_textfaceplayer:
 	ld b, BANK(JumpTextFacePlayerScript)
 	ld hl, JumpTextFacePlayerScript
 	jmp ScriptJump
 
 Script_jumptext:
+	call _GetTextPointer
+	jr _Do_jumptext
+
+_Do_jumptext:
+	ld b, BANK(JumpTextScript)
+	ld hl, JumpTextScript
+	jmp ScriptJump
+
+_GetTextPointer:
 	ld a, [wScriptBank]
 	ld [wScriptTextBank], a
 	call GetScriptByte
 	ld [wScriptTextAddr], a
 	call GetScriptByte
 	ld [wScriptTextAddr + 1], a
-	ld b, BANK(JumpTextScript)
-	ld hl, JumpTextScript
-	jmp ScriptJump
+	ret
+
+_GetThisTextPointer:
+	ld a, [wScriptBank]
+	ld [wScriptTextBank], a
+	ld a, [wScriptPos]
+	ld [wScriptTextAddr], a
+	ld a, [wScriptPos + 1]
+	ld [wScriptTextAddr + 1], a
+	ret
 
 JumpTextFacePlayerScript:
 	faceplayer
