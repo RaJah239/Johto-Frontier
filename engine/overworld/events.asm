@@ -632,7 +632,7 @@ BGEventJumptable:
 	dw .ifset
 	dw .ifnotset
 	dw .jumptext ; BGEVENT_JUMPTEXT
-	dw .copy
+	dw .jumpstd  ; BGEVENT_JUMPSTD
 	assert_table_length NUM_BGEVENTS
 
 .up:
@@ -690,15 +690,6 @@ BGEventJumptable:
 	ld hl, HiddenItemScript
 	jmp CallScript
 
-.copy:
-	call CheckBGEventFlag
-	jr nz, .dontread
-	call GetMapScriptsBank
-	ld de, wHiddenItemData
-	ld bc, wHiddenItemDataEnd - wHiddenItemData
-	call FarCopyBytes
-	jr .dontread
-
 .ifset:
 	call CheckBGEventFlag
 	jr z, .dontread
@@ -732,6 +723,19 @@ BGEventJumptable:
 	ld a, [wCurBGEventScriptAddr]
 	ld [hld], a
 	ld [hl], jumptext_command
+	ld a, [wMapScriptsBank]
+	jmp CallScript
+
+.jumpstd
+	call PlayClickSFX
+	ld hl, wTempScriptBuffer + 3
+	ld a, [wCurBGEventScriptAddr]
+	ld [hld], a
+	ld a, jumpstd_command
+	ld [hld], a
+	ld a, [wCurBGEventScriptAddr + 1]
+	ld [hld], a
+	ld [hl], setval_command ; just to be safe (as opposed to directly writing to hScriptVar)
 	ld a, [wMapScriptsBank]
 	jmp CallScript
 
