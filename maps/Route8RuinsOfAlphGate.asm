@@ -24,7 +24,8 @@ Route8RuinsOfAlphGateOfficerScript:
 	end
 
 .NoRoom
-	writetextend YourBagIsFullText
+	writetext YourBagIsFullText
+	waitendtext
 
 Route8RuinsOfAlphGateGrampsScript:
 	jumptextfaceplayer Route8RuinsOfAlphGateGrampsText

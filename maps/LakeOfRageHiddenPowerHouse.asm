@@ -14,10 +14,12 @@ HiddenPowerGuy:
 	checkevent EVENT_MET_HIDDEN_POWER_GUY
 	iftrue .AlreadyMet
 	setevent EVENT_MET_HIDDEN_POWER_GUY
-	writetextend HiddenPowerGuyText1
+	writetext HiddenPowerGuyText1
+	waitendtext
 
 .AlreadyMet:
-	writetextend HiddenPowerGuyText2
+	writetext HiddenPowerGuyText2
+	waitendtext
 
 HiddenPowerGuyText1:
 	text "…You have strayed"

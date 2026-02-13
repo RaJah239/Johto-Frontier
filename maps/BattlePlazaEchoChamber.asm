@@ -59,7 +59,8 @@ EchoChamberReceptionistScript:
 	special LoadPokemonData
 	special HealParty
 	opentext
-	writetextend BattleLobbyBattleLoseText
+	writetext BattleLobbyBattleLoseText
+	waitendtext
 
 .done
 	closetext
@@ -95,7 +96,8 @@ EchoChamberReceptionistScript:
 
 EchoChamberPackFull:
 	setevent EVENT_DID_NOT_GET_ECHO_CHAMBER_PRIZE
-	writetextend BattleLobbyFullPackText
+	writetext BattleLobbyFullPackText
+	waitendtext
 
 EchoChamberIntroText:
 	text "Echo Chamber"

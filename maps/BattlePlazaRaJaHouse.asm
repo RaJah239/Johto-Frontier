@@ -18,10 +18,12 @@ BattlePlazaRaJaHouseRaJaScript:
 	setevent EVENT_GOT_START_MENU_WARP
 	writetext RaJaWarpMenuText
 	waitbutton
-	writetextend RaJaTeleportingText
+	writetext RaJaTeleportingText
+	waitendtext
 
 .HopeYouHaveFunWithThisGame:
-	writetextend HopeYouHaveFunWithThisGameText
+	writetext HopeYouHaveFunWithThisGameText
+	waitendtext
 
 TheSpeechText:
 	text "RaJa239: Yes, yes,"

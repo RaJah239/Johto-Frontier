@@ -143,7 +143,8 @@ Script_FailedBattleTowerChallenge:
 
 	opentext
 	special TryQuickSave
-	writetextend Text_ThanksForVisiting
+	writetext Text_ThanksForVisiting
+	waitendtext
 
 ResetBattleTowerMirrorModePoints:
 	; determine mode and pick WRAM pointer

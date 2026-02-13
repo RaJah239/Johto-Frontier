@@ -67,10 +67,12 @@ NuggetSellerScript:
 	end
 
 .NotEnoughMoney
-	writetextend NotEnoughMoneyText
+	writetext NotEnoughMoneyText
+	waitendtext
 
 .NoRoom:
-	writetextend NoNuggetRoomText
+	writetext NoNuggetRoomText
+	waitendtext
 
 .MoveMenuHeader:
 	db MENU_BACKUP_TILES ; flags

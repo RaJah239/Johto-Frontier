@@ -110,7 +110,8 @@ BattleArenaReceptionistScript:
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	special LoadPokemonData
-	writetextend BattleLobbyBattleLoseText
+	writetext BattleLobbyBattleLoseText
+	waitendtext
 
 .ChooseEnemyCharacter
 	writetext PickYourEnemyText
@@ -151,7 +152,8 @@ BattleArenaReceptionistScript:
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	special LoadPokemonData
-	writetextend BattleLobbyBattleLoseText
+	writetext BattleLobbyBattleLoseText
+	waitendtext
 
 .RandomPlayer:
 	writetext PlayUsingRandomPlayerText
@@ -767,7 +769,8 @@ BattleArenaReceptionistScript:
 
 BattleArenaPackFull:
 	setevent EVENT_DID_NOT_GET_BATTLE_ARENA_PRIZE
-	writetextend BattleLobbyFullPackText
+	writetext BattleLobbyFullPackText
+	waitendtext
 
 BattleArenaIntroText:
 	text "Battle Arena"

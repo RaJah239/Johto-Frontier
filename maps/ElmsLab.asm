@@ -68,7 +68,8 @@ ProfElmScript:
 	closetext
 	end
 .GoOnNowPlayer
-	writetextend ElmText_TakePokemonText
+	writetext ElmText_TakePokemonText
+	waitendtext
 
 ElmGiveMasterBallScript:
 	writetext ElmGiveMasterBallText1
@@ -330,7 +331,8 @@ AideScript_GiveYouBalls:
 	verbosegiveitem TYPE_CODEX
 	isdialogueminimal
 	iftrue .skip4
-	writetextend AllTheBestToYouText
+	writetext AllTheBestToYouText
+	waitbutton
 .skip4
 	closetext
 	end

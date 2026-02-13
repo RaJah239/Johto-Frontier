@@ -334,10 +334,12 @@ BattlePlazaMartTMCoinTraderScript:
     sjump .ConcludeTransaction
 
 .Refused:
-    writetextend WeAreOpenAlways
+    writetext WeAreOpenAlways
+    waitendtext
 
 .NotEnoughCrystals:
-    writetextend NotEnoughCrystalsText
+    writetext NotEnoughCrystalsText
+    waitendtext
 
 .ConcludeTransaction:
     special CrystalCountInBag
@@ -349,7 +351,8 @@ BattlePlazaMartTMCoinTraderScript:
     sjump .WantToBuyADifferentTM
 
 .CancelBuyingTMsScript:
-    writetextend ComeAgainAgainText
+    writetext ComeAgainAgainText
+    waitendtext
 
 ComeAgainAgainText:
     text "Please come again!"

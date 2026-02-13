@@ -25,7 +25,8 @@ MrPokemonsHouse_MrPokemonScript:
 	iffalse .LifeIsDelightful
 	checkitem SILVER_LEAF, 10
 	iftrue .TradeForGoldLeaf
-	writetextend NotEnoughSilverLeafText
+	writetext NotEnoughSilverLeafText
+	waitendtext
 
 .CollectThisEggFirst
 	writetext MrPokemonTogepiEggText
@@ -37,22 +38,26 @@ MrPokemonsHouse_MrPokemonScript:
 	callstd ReceiveTogepiEggScript
 	setevent EVENT_MR_POKEMON_TOGEPI_EGG
 .LifeIsDelightful
-	writetextend MrPokemonText_GoodLifeText
+	writetext MrPokemonText_GoodLifeText
+	waitendtext
 
 .TradeForGoldLeaf:
 	verbosegiveitem GOLD_LEAF
 	iffalse .NotEnoughSpace
 	takeitem SILVER_LEAF, 10
-	writetextend MrPokemonThanksForTheTradeText
+	writetext MrPokemonThanksForTheTradeText
+	waitendtext
 
 .NotEnoughSpace:
-	writetextend NotEnoughSpaceText
+	writetext NotEnoughSpaceText
+	waitendtext
 
 .eggname:
 	db "Egg@"
 
 .PartyFull:
-	writetextend MrPokemonFullPartyText
+	writetext MrPokemonFullPartyText
+	waitendtext
 
 MrPokemonTogepiEggText:
 	text "The owners of a"

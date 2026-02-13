@@ -26,16 +26,20 @@ BillScript:
 	waitsfx
 	givepoke EEVEE, 5
 	setevent EVENT_GOT_EEVEE
-	writetextend BillEeveeMayEvolveText
+	writetext BillEeveeMayEvolveText
+	waitendtext
 
 .NoRoom:
-	writetextend BillPartyFullText
+	writetext BillPartyFullText
+	waitendtext
 
 .Refused:
-	writetextend BillNoEeveeText
+	writetext BillNoEeveeText
+	waitendtext
 
 .GotEevee:
-	writetextend BillPopWontWorkText
+	writetext BillPopWontWorkText
+	waitendtext
 
 BillsMomScript:
 	jumptextfaceplayer BillsMomText_AfterEcruteak

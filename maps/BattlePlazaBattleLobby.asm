@@ -103,7 +103,8 @@ BattleLobbyReceptionistScript:
 	special LoadPokemonData
 	special HealParty
 	opentext
-	writetextend BattleLobbyBattleLoseText
+	writetext BattleLobbyBattleLoseText
+	waitendtext
 
 .win
 	dontrestartmapmusic
@@ -134,7 +135,8 @@ BattleLobbyReceptionistScript:
 
 BattleLobbyPackFull:
 	setevent EVENT_DID_NOT_GET_BATTLE_LOBBY_PRIZE
-	writetextend BattleLobbyFullPackText
+	writetext BattleLobbyFullPackText
+	waitendtext
 
 BattleLobbyReceptionist_MoveOutTheWay:
 	step UP

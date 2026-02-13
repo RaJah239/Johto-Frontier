@@ -16,7 +16,8 @@ EcruteakBlacksmithHouse_BlacksmithScript:
 	waitbutton
 	showemote EMOTE_SHOCK, ECRUTEAKBLACKSMITHHOUSE_BLACKSMITH, 15
 	faceplayer
-	writetextend BlacksmithMeetsPlayerText
+	writetext BlacksmithMeetsPlayerText
+	waitendtext
 
 .ShinyBallScript
 	faceplayer
@@ -45,16 +46,20 @@ EcruteakBlacksmithHouse_BlacksmithScript:
 	verbosegiveitem SHINY_BALL
 	iffalse .NoRoom
 	setevent EVENT_GOT_FIRST_SHINY_BALL_FOR_FREE
-	writetextend GiftThePlayerShinyBallText
+	writetext GiftThePlayerShinyBallText
+	waitendtext
 
 .DropByAnytime
-	writetextend ThanksForVisitingText
+	writetext ThanksForVisitingText
+	waitendtext
 
 .YouNeedMoreCrystals
-	writetextend YouNeedsMoreCrystalsText
+	writetext YouNeedsMoreCrystalsText
+	waitendtext
 
 .NoRoom
-	writetextend NoRoomForShinyBallText
+	writetext NoRoomForShinyBallText
+	waitendtext
 
 SomethingToDoText:
 	text "Ah…"
