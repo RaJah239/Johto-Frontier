@@ -76,3 +76,16 @@ ConvertPercentages::
 	and 1
 	add a, h
 	ret
+
+StackJumpTable::
+	pop hl
+	push de
+	ld e, a
+	ld d, 0
+	add hl, de
+	add hl, de
+	pop de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jp hl

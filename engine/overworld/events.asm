@@ -617,9 +617,10 @@ TryBGEvent:
 
 .is_bg_event:
 	ld a, [wCurBGEventType]
-	ld hl, BGEventJumptable
-	rst JumpTable
-	ret
+	cp BGEVENT_ITEM
+	jr nc, BGEventJumptable.itemifset
+	call StackJumpTable
+	; fallthrough
 
 BGEventJumptable:
 	table_width 2, BGEventJumptable
@@ -667,18 +668,27 @@ BGEventJumptable:
 	ret
 
 .itemifset:
-	call CheckBGEventFlag
+	ld a, [wCurBGEventScriptAddr]
+	ld e, a
+	ld a, [wCurBGEventScriptAddr+1]
+	ld d, a
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld a, c
+	and a
 	jr nz, .dontread
 	call PlayTalkObject
-	call GetMapScriptsBank
-	ld de, wHiddenItemData
-	ld bc, wHiddenItemDataEnd - wHiddenItemData
-	call FarCopyBytes
+	ld hl, wHiddenItemEvent
+	ld a, [wCurBGEventScriptAddr]
+	ld [hli], a ; wHiddenItemEvent
+	ld a, [wCurBGEventScriptAddr+1]
+	ld [hli], a ; wHiddenItemEvent + 1
+	ld a, [wCurBGEventType]
+	sub BGEVENT_ITEM
+	ld [hl], a ; wHiddenItemID
 	ld a, BANK(HiddenItemScript)
 	ld hl, HiddenItemScript
-	call CallScript
-	scf
-	ret
+	jmp CallScript
 
 .copy:
 	call CheckBGEventFlag

@@ -153,9 +153,11 @@ DEF SCENE_ALWAYS EQU -1
 	const BGEVENT_LEFT
 	const BGEVENT_IFSET
 	const BGEVENT_IFNOTSET
-	const BGEVENT_ITEM
+	const_skip
 	const BGEVENT_COPY
 DEF NUM_BGEVENTS EQU const_value
+
+DEF BGEVENT_ITEM EQU NUM_BGEVENTS
 
 ; object_event types
 ; ObjectEventTypeArray indexes (see engine/overworld/events.asm)
