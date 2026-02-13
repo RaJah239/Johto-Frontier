@@ -1114,12 +1114,6 @@ MACRO nooryes
 	db nooryes_command
 ENDM
 
-	const writetextend_command ; $af
-MACRO writetextend
-	db writetextend_command
-	dw \1 ; text_pointer
-ENDM
-
 	const iftrue_jumptextfaceplayer_command
 MACRO iftrue_jumptextfaceplayer
 	db iftrue_jumptextfaceplayer_command
