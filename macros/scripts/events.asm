@@ -1120,4 +1120,10 @@ MACRO writetextend
 	dw \1 ; text_pointer
 ENDM
 
+	const iftrue_jumptextfaceplayer_command
+MACRO iftrue_jumptextfaceplayer
+	db iftrue_jumptextfaceplayer_command
+	dw \1 ; text_pointer
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

@@ -266,6 +266,7 @@ ScriptCommandTable:
 	dw Script_isfieldactionsset          ; ad
 	dw Script_nooryes                    ; ae
 	dw Script_writetextend               ; af
+	dw Script_iftrue_jumptextfaceplayer  ;
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -337,6 +338,12 @@ Script_memcallasm:
 	ld a, b
 	rst FarCall
 	ret
+
+Script_iftrue_jumptextfaceplayer:
+	ld a, [wScriptVar]
+	and a
+	jr nz, Script_jumptextfaceplayer
+	jmp SkipTwoScriptBytes
 
 Script_writetextend:
 	ld a, [wScriptBank]
