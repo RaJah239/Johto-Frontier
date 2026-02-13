@@ -1131,4 +1131,82 @@ MACRO jumpthistextfaceplayer
 	db jumpthistextfaceplayer_command
 ENDM
 
+	const endtext_command
+MACRO endtext
+	db endtext_command
+ENDM
+
+	const waitendtext_command
+MACRO waitendtext
+	db waitendtext_command
+ENDM
+
+	const jumpthisopenedtext_command
+MACRO jumpthisopenedtext
+	db jumpthisopenedtext_command
+ENDM
+
+	const jumpopenedtext_command
+MACRO jumpopenedtext
+	db jumpopenedtext_command
+	dw \1 ; text_pointer
+ENDM
+
+	const iftrue_jumptext_command
+MACRO iftrue_jumptext
+	db iftrue_jumptext_command
+	dw \1 ; text_pointer
+ENDM
+
+	const iffalse_jumptext_command
+MACRO iffalse_jumptext
+	db iffalse_jumptext_command
+	dw \1 ; text_pointer
+ENDM
+
+	const iffalse_jumptextfaceplayer_command
+MACRO iffalse_jumptextfaceplayer
+	db iffalse_jumptextfaceplayer_command
+	dw \1 ; text_pointer
+ENDM
+
+	const iftrue_jumpopenedtext_command
+MACRO iftrue_jumpopenedtext
+	db iftrue_jumpopenedtext_command
+	dw \1 ; text_pointer
+ENDM
+
+	const iffalse_jumpopenedtext_command
+MACRO iffalse_jumpopenedtext
+	db iffalse_jumpopenedtext_command
+	dw \1 ; text_pointer
+ENDM
+
+	const jumpthistext_command
+MACRO jumpthistext
+	db jumpthistext_command
+ENDM
+
+	const showtext_command
+MACRO showtext
+	db showtext_command
+	dw \1 ; text_pointer
+ENDM
+
+	const showtextfaceplayer_command
+MACRO showtextfaceplayer
+	db showtextfaceplayer_command
+	dw \1 ; text_pointer
+ENDM
+
+	const iftrue_endtext_command
+MACRO iftrue_endtext
+	db iftrue_endtext_command
+ENDM
+
+	const iffalse_endtext_command
+MACRO iffalse_endtext
+	db iffalse_endtext_command
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

@@ -268,6 +268,20 @@ ScriptCommandTable:
 	dw Script_writetextend               ; af
 	dw Script_iftrue_jumptextfaceplayer  ;
 	dw Script_jumpthistextfaceplayer     ;
+	dw Script_endtext                    ;
+	dw Script_waitendtext                ;
+	dw Script_jumpthisopenedtext         ;
+	dw Script_jumpopenedtext             ;
+	dw Script_iftrue_jumptext            ;
+	dw Script_iffalse_jumptext           ;
+	dw Script_iffalse_jumptextfaceplayer ;
+	dw Script_iftrue_jumpopenedtext      ;
+	dw Script_iffalse_jumpopenedtext     ;
+	dw Script_jumpthistext               ;
+	dw Script_showtext                   ;
+	dw Script_showtextfaceplayer         ;
+	dw Script_iftrue_endtext             ;
+	dw Script_iffalse_endtext            ;
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -340,12 +354,6 @@ Script_memcallasm:
 	rst FarCall
 	ret
 
-Script_iftrue_jumptextfaceplayer:
-	ld a, [wScriptVar]
-	and a
-	jr nz, Script_jumptextfaceplayer
-	jmp SkipTwoScriptBytes
-
 Script_writetextend:
 	ld a, [wScriptBank]
 	ld [wScriptTextBank], a
@@ -356,6 +364,18 @@ Script_writetextend:
 	ld b, BANK(WriteTextWaitButtonClosetextEnd)
 	ld hl, WriteTextWaitButtonClosetextEnd
 	jmp ScriptJump
+
+Script_iftrue_jumptextfaceplayer:
+	ld a, [wScriptVar]
+	and a
+	jr nz, Script_jumptextfaceplayer
+	jmp SkipTwoScriptBytes
+
+Script_iffalse_jumptextfaceplayer:
+	ld a, [wScriptVar]
+	and a
+	jmp nz, SkipTwoScriptBytes
+	; fallthrough
 
 Script_jumptextfaceplayer:
 	call _GetTextPointer
@@ -368,14 +388,69 @@ _Do_textfaceplayer:
 	ld hl, JumpTextFacePlayerScript
 	jmp ScriptJump
 
+Script_iftrue_jumptext:
+	ld a, [wScriptVar]
+	and a
+	jr nz, Script_jumptext
+	jmp SkipTwoScriptBytes
+
+Script_iffalse_jumptext:
+	ld a, [wScriptVar]
+	and a
+	jmp nz, SkipTwoScriptBytes
+	; fallthrough
+
 Script_jumptext:
 	call _GetTextPointer
 	jr _Do_jumptext
 
+Script_jumpthistext:
+	call _GetThisTextPointer
 _Do_jumptext:
 	ld b, BANK(JumpTextScript)
 	ld hl, JumpTextScript
 	jmp ScriptJump
+
+Script_iftrue_jumpopenedtext:
+	ld a, [wScriptVar]
+	and a
+	jr nz, Script_jumpopenedtext
+	jmp SkipTwoScriptBytes
+
+Script_iffalse_jumpopenedtext:
+	ld a, [wScriptVar]
+	and a
+	jmp nz, SkipTwoScriptBytes
+	; fallthrough
+
+Script_jumpopenedtext:
+	call _GetTextPointer
+	jr _Do_jumpopenedtext
+
+Script_jumpthisopenedtext:
+	call _GetThisTextPointer
+_Do_jumpopenedtext:
+	ld b, BANK(JumpOpenedTextScript)
+	ld hl, JumpOpenedTextScript
+	jmp ScriptJump
+
+Script_iftrue_endtext:
+	ld a, [wScriptVar]
+	and a
+	ret z
+	jr Script_endtext
+
+Script_iffalse_endtext:
+	ld a, [wScriptVar]
+	and a
+	ret nz
+	jr Script_endtext
+
+Script_waitendtext:
+	call Script_waitbutton
+Script_endtext:
+	call Script_closetext
+	jmp Script_end
 
 _GetTextPointer:
 	ld a, [wScriptBank]
@@ -400,10 +475,9 @@ JumpTextFacePlayerScript:
 JumpTextScript:
 	opentext
 WriteTextWaitButtonClosetextEnd:
+JumpOpenedTextScript:
 	repeattext -1, -1
-	waitbutton
-	closetext
-	end
+	waitendtext
 
 Script_farjumptext:
 	call GetScriptByte
@@ -2316,6 +2390,16 @@ Script_nooryes:
 .no
 	ld [wScriptVar], a
 	ret
+
+Script_showtextfaceplayer:
+	call Script_faceplayer
+	; fallthrough
+
+Script_showtext:
+	call Script_opentext
+	call Script_writetext
+	call Script_waitbutton
+	; fallthrough
 
 Script_closetext:
 	call HDMATransferTilemapAndAttrmap_Menu
