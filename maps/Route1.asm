@@ -1,3 +1,34 @@
+Route1_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
+	callback MAPCALLBACK_OBJECTS, Route1TuscanyCallback
+
+Route1_MapEvents:
+	def_warp_events
+	warp_event 27,  1, ROUTE_1_ROUTE_18_GATE, 3
+
+	def_coord_events
+
+	def_bg_events
+	bg_event 51,  7, BGEVENT_JUMPTEXT, Route1Sign1Text
+	bg_event  3,  5, BGEVENT_JUMPTEXT, Route1Sign2Text
+	bg_event 12,  2, BGEVENT_READ, Route1NoBerryOrApricorn
+	bg_event 13,  3, BGEVENT_READ, Route1NoBerryOrApricorn
+	bg_event 24, 12, BGEVENT_READ, Route1NoBerryOrApricorn
+
+	def_object_events
+	object_event 50, 12, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, CatchingTutorialDudeScript, -1
+	object_event 27, 16, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route1YoungsterText, -1
+	object_event 15, 11, SPRITE_TEACHER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route1TeacherText, -1
+	object_event 25,  3, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route1FisherText, -1
+	object_event 14,  4, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route1CooltrainerMScript, -1
+	object_event 29, 12, SPRITE_TEACHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, TuscanyScript, EVENT_ROUTE_1_TUSCANY_OF_TUESDAY
+	object_event 48,  2, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route1Potion, EVENT_ROUTE_1_POTION
+	object_event 12,  2, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route1PinkApricornTree, EVENT_ROUTE_1_APRICORN
+	object_event 13,  3, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route1BerryTree1, EVENT_ROUTE_1_BERRY1
+	object_event 24,  12, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route1BerryTree2, EVENT_ROUTE_1_BERRY2
+
 	object_const_def
 	const ROUTE1_COOLTRAINER_M1
 	const ROUTE1_YOUNGSTER
@@ -10,25 +41,14 @@
 	const ROUTE1_BERRY1
 	const ROUTE1_BERRY2
 
-
-Route1_MapScripts:
-	def_scene_scripts
-
-	def_callbacks
-	callback MAPCALLBACK_OBJECTS, Route1TuscanyCallback
-
 Route1TuscanyCallback:
-	checkflag ENGINE_ZEPHYRBADGE
-	iftrue .DoesTuscanyAppear
-
-.TuscanyDisappears:
-	disappear ROUTE1_TUSCANY
-	endcallback
-
-.DoesTuscanyAppear:
 	readvar VAR_WEEKDAY
 	ifnotequal TUESDAY, .TuscanyDisappears
 	appear ROUTE1_TUSCANY
+	endcallback
+
+.TuscanyDisappears:
+	disappear ROUTE1_TUSCANY
 	endcallback
 
 CatchingTutorialDudeScript:
@@ -59,17 +79,11 @@ CatchingTutorialDudeScript:
 	closetext
 	end
 
-Route1TeacherScript:
-	jumptextfaceplayer Route1TeacherText
-
-Route1FisherScript:
-	jumptextfaceplayer Route1FisherText
-
 Route1CooltrainerMScript:
 	checktime DAY
 	iftrue_jumptextfaceplayer .day
 	checktime EVE | NITE
-	iftrue_jumptextfaceplayer .nite
+	iftrue_jumptextfaceplayer .evening_night
 	jumpthistextfaceplayer
 .morning
 	text "I'm waiting for"
@@ -85,7 +99,7 @@ Route1CooltrainerMScript:
 	cont "evening or night."
 	done
 
-.nite
+.evening_night
 	text "I'm waiting for"
 	line "#mon that"
 	cont "appear only in the"
@@ -337,27 +351,4 @@ Route1NoRoomInBagText:
 	text_far _CantCarryItemText
 	text_end
 
-Route1_MapEvents:
-	def_warp_events
-	warp_event 27,  1, ROUTE_1_ROUTE_18_GATE, 3
 
-	def_coord_events
-
-	def_bg_events
-	bg_event 51,  7, BGEVENT_JUMPTEXT, Route1Sign1Text
-	bg_event  3,  5, BGEVENT_JUMPTEXT, Route1Sign2Text
-	bg_event 12,  2, BGEVENT_READ, Route1NoBerryOrApricorn
-	bg_event 13,  3, BGEVENT_READ, Route1NoBerryOrApricorn
-	bg_event 24, 12, BGEVENT_READ, Route1NoBerryOrApricorn
-
-	def_object_events
-	object_event 50, 12, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, CatchingTutorialDudeScript, -1
-	object_event 27, 16, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route1YoungsterText, -1
-	object_event 15, 11, SPRITE_TEACHER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route1TeacherScript, -1
-	object_event 25,  3, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route1FisherScript, -1
-	object_event 14,  4, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route1CooltrainerMScript, -1
-	object_event 1, 12, SPRITE_TEACHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, TuscanyScript, EVENT_ROUTE_1_TUSCANY_OF_TUESDAY
-	object_event 48,  2, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route1Potion, EVENT_ROUTE_1_POTION
-	object_event 12,  2, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route1PinkApricornTree, EVENT_ROUTE_1_APRICORN
-	object_event 13,  3, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route1BerryTree1, EVENT_ROUTE_1_BERRY1
-	object_event 24,  12, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route1BerryTree2, EVENT_ROUTE_1_BERRY2
