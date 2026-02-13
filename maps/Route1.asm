@@ -66,19 +66,20 @@ Route1FisherScript:
 	jumptextfaceplayer Route1FisherText
 
 Route1CooltrainerMScript:
-	faceplayer
-	opentext
 	checktime DAY
-	iftrue .day_morn
+	iftrue_jumptextfaceplayer .day_morn
 	checktime EVE | NITE
 	iftrue .nite
 .day_morn
-	writetext Route1CooltrainerMText_WaitingForNight
-	waitbutton
-	closetext
-	end
+	text "I'm waiting for"
+	line "#MON that"
+
+	para "appear only at"
+	line "night."
+	done
 
 .nite
+	opentext
 	writetext Route1CooltrainerMText_WaitingForMorning
 	waitbutton
 	closetext
@@ -175,14 +176,6 @@ Route1FisherText:
 
 	para "to record my"
 	line "progress."
-	done
-
-Route1CooltrainerMText_WaitingForNight:
-	text "I'm waiting for"
-	line "#MON that"
-
-	para "appear only at"
-	line "night."
 	done
 
 Route1CooltrainerMText_WaitingForMorning:
