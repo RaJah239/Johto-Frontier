@@ -181,9 +181,6 @@ Route2TrainerTips:
 Route2Antidote:
 	itemball ANTIDOTE
 
-Route2HiddenPotion:
-	hiddenitem POTION, EVENT_ROUTE_2_HIDDEN_POTION
-
 YoungsterJoey1SeenText:
 	text "I just lost, so"
 	line "I'm trying to find"
@@ -481,11 +478,11 @@ Route2_MapEvents:
 	bg_event 13, 29, BGEVENT_READ, MrPokemonsHouseDirectionsSign
 	bg_event 15,  5, BGEVENT_READ, MrPokemonsHouseSign
 	bg_event  3, 21, BGEVENT_READ, Route2TrainerTips
-	bg_event 14,  9, BGEVENT_ITEM, Route2HiddenPotion
 	bg_event  5, 39, BGEVENT_READ, Route2NoBerryOrApricorn
 	bg_event  4, 39, BGEVENT_READ, Route2NoBerryOrApricorn
 	bg_event 11,  5, BGEVENT_READ, Route2NoBerryOrApricorn
 	bg_event 12,  6, BGEVENT_READ, Route2NoBerryOrApricorn
+	bg_event 14,  9, BGEVENT_ITEM + POTION, EVENT_ROUTE_2_HIDDEN_POTION
 
 	def_object_events
 	object_event  2, 28, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterJoey, -1
