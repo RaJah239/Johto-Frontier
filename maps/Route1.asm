@@ -123,12 +123,6 @@ TuscanyNotTuesdayScript:
 	closetext
 	end
 
-Route1Sign1:
-	jumptext Route1Sign1Text
-
-Route1Sign2:
-	jumptext Route1Sign2Text
-
 Route1Potion:
 	itemball POTION
 
@@ -361,8 +355,8 @@ Route1_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event 51,  7, BGEVENT_READ, Route1Sign1
-	bg_event  3,  5, BGEVENT_READ, Route1Sign2
+	bg_event 51,  7, BGEVENT_JUMPTEXT, Route1Sign1Text
+	bg_event  3,  5, BGEVENT_JUMPTEXT, Route1Sign2Text
 	bg_event 12,  2, BGEVENT_READ, Route1NoBerryOrApricorn
 	bg_event 13,  3, BGEVENT_READ, Route1NoBerryOrApricorn
 	bg_event 24, 12, BGEVENT_READ, Route1NoBerryOrApricorn
