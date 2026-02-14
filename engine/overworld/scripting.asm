@@ -283,7 +283,26 @@ ScriptCommandTable:
 	dw Script_iffalse_endtext            ;
 	dw Script_writethistext              ;
 	dw Script_jumpstashedtext            
+	dw Script_showthistext               ;
+	dw Script_showthistextfaceplayer     ;
 	assert_table_length NUM_EVENT_COMMANDS
+
+Script_showthistextfaceplayer:
+	push hl
+	call Script_faceplayer
+	call Script_opentext
+	pop hl
+	jr _Do_showthistext
+
+Script_showthistext:
+	push hl
+	call Script_opentext
+	pop hl
+_Do_showthistext:
+	call Script_writethistext
+	call Script_waitbutton
+	call HDMATransferTilemapAndAttrmap_Menu
+	jmp CloseText
 
 Script_jumpstashedtext:
 	ld a, [wScriptBank]

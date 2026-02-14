@@ -1213,4 +1213,14 @@ MACRO jumpstashedtext
 	db jumpstashedtext_command
 ENDM
 
+	const showthistext_command
+MACRO showthistext
+	db showthistext_command
+ENDM
+
+	const showthistextfaceplayer_command
+MACRO showthistextfaceplayer
+	db showthistextfaceplayer_command
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value
