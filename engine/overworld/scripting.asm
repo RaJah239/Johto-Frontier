@@ -282,7 +282,19 @@ ScriptCommandTable:
 	dw Script_iftrue_endtext             ;
 	dw Script_iffalse_endtext            ;
 	dw Script_writethistext              ;
+	dw Script_jumpstashedtext            
 	assert_table_length NUM_EVENT_COMMANDS
+
+Script_jumpstashedtext:
+	ld a, [wScriptBank]
+	ld [wScriptTextBank], a
+	ld a, [wStashedTextPointer]
+	ld [wScriptTextAddr], a
+	ld a, [wStashedTextPointer + 1]
+	ld [wScriptTextAddr + 1], a
+	ld b, BANK(JumpTextScript)
+	ld hl, JumpTextScript
+	jmp ScriptJump
 
 Script_writethistext:
 	ld hl, wScriptPos

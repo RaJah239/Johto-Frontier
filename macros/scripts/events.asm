@@ -1208,4 +1208,9 @@ MACRO writethistext
 	db writethistext_command
 ENDM
 
+	const jumpstashedtext_command
+MACRO jumpstashedtext
+	db jumpstashedtext_command
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

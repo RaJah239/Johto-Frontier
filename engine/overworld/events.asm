@@ -526,12 +526,11 @@ TryObjectEvent:
 	add hl, bc
 	ld a, [hl]
 	ldh [hLastTalked], a
-
-	ldh a, [hLastTalked]
 	call GetMapObject
 	ld hl, MAPOBJECT_TYPE
 	add hl, bc
 	ld a, [hl]
+	and MAPOBJECT_TYPE_MASK
 
 	push bc
 	ld de, 3
@@ -556,7 +555,7 @@ ObjectEventTypeArray:
 	dbw OBJECTTYPE_ITEMBALL, .itemball
 	dbw OBJECTTYPE_TRAINER, .trainer
 	; the remaining four are dummy events
-	dbw OBJECTTYPE_3, .three
+	dbw OBJECTTYPE_GENERICTRAINER, .trainer
 	dbw OBJECTTYPE_COMMAND, .command
 	dbw OBJECTTYPE_5, .five
 	dbw OBJECTTYPE_6, .six

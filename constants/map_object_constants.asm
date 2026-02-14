@@ -117,6 +117,8 @@ DEF MAPOBJECT_LENGTH EQU _RS
 DEF NUM_OBJECTS EQU 16
 DEF PLAYER_OBJECT EQU 0
 
+DEF MAPOBJECT_TYPE_MASK    EQU %00001111
+
 ; SpriteMovementData struct members (see data/sprites/map_objects.asm)
 rsreset
 DEF SPRITEMOVEATTR_MOVEMENT rb ; 0

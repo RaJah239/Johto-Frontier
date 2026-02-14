@@ -146,6 +146,13 @@ MACRO trainer
 	dw \4, \5, \6, \7
 ENDM
 
+MACRO generictrainer
+	; flag, group, id, seen text, win text
+	dw \3
+	db \1, \2
+	dw \4, \5
+ENDM
+
 MACRO itemball
 ;\1: item: from constants/item_constants.asm
 ;\2: quantity: default 1

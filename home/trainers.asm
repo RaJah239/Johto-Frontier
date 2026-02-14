@@ -34,8 +34,12 @@ _CheckTrainerBattle::
 	ld hl, MAPOBJECT_TYPE
 	add hl, de
 	ld a, [hl]
+	and MAPOBJECT_TYPE_MASK
 	cp OBJECTTYPE_TRAINER
+	jr z, .is_trainer
+	cp OBJECTTYPE_GENERICTRAINER
 	jr nz, .next
+.is_trainer
 
 ; Is visible on the map
 	ld hl, MAPOBJECT_OBJECT_STRUCT_ID
@@ -118,18 +122,51 @@ LoadTrainer_continue::
 	ldh a, [hLastTalked]
 	call GetMapObject
 
+	ld hl, MAPOBJECT_TYPE
+	add hl, bc
+	ld a, [hl]
+	and MAPOBJECT_TYPE_MASK
+	cp OBJECTTYPE_GENERICTRAINER
+	push af
+
 	ld hl, MAPOBJECT_SCRIPT_POINTER
 	add hl, bc
 	ld a, [wSeenTrainerBank]
 	call GetFarWord
 	ld de, wTempTrainer
+	pop af
+	push af
+	ld bc, wGenericTempTrainerHeaderEnd - wTempTrainer
+	jr z, .skipCopyingLossPtrAndScriptPtr
 	ld bc, wTempTrainerEnd - wTempTrainer
+.skipCopyingLossPtrAndScriptPtr
 	ld a, [wSeenTrainerBank]
 	call FarCopyBytes
+	pop af
+	jr nz, .notGenericTrainer
+	call SwapHLDE
+	; store 0 loss pointer
+	xor a
+	ld [hli], a
+	ld [hli], a
+	; store generic trainer script in script pointer
+	ld a, LOW(.generic_trainer_script)
+	ld [hli], a
+	ld [hl], HIGH(.generic_trainer_script)
+	; store after-battle text in wStashedTextPointer
+	ld hl, wStashedTextPointer
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hl], a
+.notGenericTrainer
 	xor a
 	ld [wRunningTrainerBattleScript], a
 	scf
 	ret
+.generic_trainer_script
+	endifjustbattled
+	jumpstashedtext
 
 FacingPlayerDistance_bc::
 	push de

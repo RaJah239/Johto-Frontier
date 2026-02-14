@@ -2181,6 +2181,7 @@ wTempTrainerClass:: db
 wTempTrainerID:: db
 wSeenTextPointer:: dw
 wWinTextPointer:: dw
+wGenericTempTrainerHeaderEnd::
 wLossTextPointer:: dw
 wScriptAfterPointer:: dw
 wRunningTrainerBattleScript:: db
@@ -2290,7 +2291,9 @@ wPoisonStepPartyFlags:: ds PARTY_LENGTH
 wPoisonStepDataEnd::
 ENDU
 
-	ds 23
+wStashedTextPointer:: dw
+
+	ds 19
 
 
 SECTION "More WRAM 1", WRAMX
