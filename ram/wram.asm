@@ -3472,8 +3472,58 @@ wPokeAnimBitmaskBuffer:: ds 7
 wPokeAnimStructEnd::
 
 
-SECTION "Metatiles", WRAMX
+SECTION "Battle Tower RAM", WRAMX
 
+w3_d000:: ds 1
+w3_d001:: ds 1
+w3_d002:: ds 16
+w3_d012:: ds $6e
+w3_d080:: ds 1
+w3_d081:: ds $f
+w3_d090:: ds $70
+
+w3_d100::
+wBT_OTTrainer:: battle_tower_struct wBT_OT
+	ds $20
+wBT_TrainerTextIndex:: db
+	ds 1
+w3_d202:: battle_tower_struct w3_d202
+w3_d2e2:: battle_tower_struct w3_d2e2
+w3_d3c2:: battle_tower_struct w3_d3c2
+w3_d4a2:: battle_tower_struct w3_d4a2
+w3_d582:: battle_tower_struct w3_d582
+w3_d662:: battle_tower_struct w3_d662
+
+UNION
+
+NEXTU
+wBTChoiceOfLvlGroup:: db
+	ds $1
+w3_d802:: ds 12
+w3_d80e:: db
+	ds $1
+w3_d810::
+	ds $59
+w3_d869:: ds $17
+w3_d880:: ds 1
+w3_d881:: ds 8
+w3_d889:: ds 1
+w3_d88a:: ds 4
+w3_d88e:: ds 1
+w3_d88f:: ds 4
+w3_d893:: ds 1
+w3_d894:: ds 1
+w3_d895:: ds 11
+w3_d8a0:: ds 1
+w3_d8a1:: ds 1
+w3_d8a2:: ds 1
+w3_d8a3:: ds 1
+ENDU
+
+w3_dffc:: ds 4
+
+
+SECTION "Metatiles", WRAMX
 
 wDecompressedMetatiles:: ds 256 * 16
 
@@ -3482,9 +3532,6 @@ SECTION "Attributes", WRAMX
 
 wDecompressedAttributes:: ds 256 * 16
 
-;SECTION "News Script RAM", WRAMX
-
-;w4_d000:: ds $1000
 
 SECTION "GBC Video", WRAMX, ALIGN[8]
 

@@ -639,7 +639,7 @@ Function17d370:
 	ld a, BANK(s6_a006)
 	call OpenSRAM
 	ld hl, s6_a006
-	ld de, w4_d000
+;	ld de, w4_d000
 	ld bc, $1000
 	call CopyBytes
 	call CloseSRAM
@@ -1181,7 +1181,7 @@ Function17d78d:
 	call OpenSRAM
 	ld hl, s6_a006
 	add hl, bc
-	ld de, w4_d000
+;	ld de, w4_d000
 	ld bc, $1000
 	call CopyBytes
 	call CloseSRAM
@@ -1364,7 +1364,7 @@ Function17d85d:
 .asm_17d8c7
 	call HlToCrashCheckPointer
 	push bc
-	ld a, $3
+	ld a, BANK("Battle Tower RAM")
 	ldh [rSVBK], a
 	ld hl, wc608
 	ld de, wBGPals1
