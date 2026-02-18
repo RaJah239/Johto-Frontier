@@ -13,9 +13,6 @@ PlayersNeighborsDaughterScript:
 PlayersNeighborScript:
 	jumptextfaceplayer PlayersNeighborText
 
-PlayersNeighborsHouseBookshelfScript:
-	jumpstd MagazineBookshelfScript
-
 PlayersNeighborsHouseRadioScript:
 	jumpstd Radio1Script
 
@@ -52,8 +49,8 @@ PlayersNeighborsHouse_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  0,  1, BGEVENT_READ, PlayersNeighborsHouseBookshelfScript
-	bg_event  1,  1, BGEVENT_READ, PlayersNeighborsHouseBookshelfScript
+	bg_event  0,  1, BGEVENT_JUMPSTD, MAGAZINE_BOOKSHELF_SCRIPT
+	bg_event  1,  1, BGEVENT_JUMPSTD, MAGAZINE_BOOKSHELF_SCRIPT
 	bg_event  7,  1, BGEVENT_READ, PlayersNeighborsHouseRadioScript
 
 	def_object_events
