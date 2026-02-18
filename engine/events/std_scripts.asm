@@ -6,8 +6,8 @@ ENDM
 StdScripts::
 	add_stdscript DifficultBookshelfScript
 	add_stdscript PictureBookshelfScript
-	add_stdscript PokecenterNurseScript
 	add_stdscript MagazineBookshelfScript
+	add_stdscript PokecenterNurseScript
 	add_stdscript TeamRocketOathScript
 	add_stdscript IncenseBurnerScript
 	add_stdscript MerchandiseShelfScript
