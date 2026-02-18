@@ -20,7 +20,7 @@ if DEF(_DEBUG)
 	object_event  3,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RegularMonScript, -1
 	object_event  2,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ShinyMonScript, -1
 	object_event  7,  5, SPRITE_PAPER, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, DebugOptions, -1
-	object_event  2,  3, SPRITE_RED, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RandomPartyTrainerScript, -1
+	object_event  2,  3, SPRITE_MAXIMA, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RandomPartyTrainerScript, -1
 endc
 
 	object_const_def
@@ -29,11 +29,11 @@ endc
 	const PLAYERSHOUSE2F_DOLL_2
 	const PLAYERSHOUSE2F_BIG_DOLL
 if DEF(_DEBUG)
-	const PLAYERSHOUSE2F_TEST_TRAINER
+	const PLAYERSHOUSE2F_TEST_TRAINER_SCARLET
 	const PLAYERSHOUSE2F_TEST_MON_REGULAR
 	const PLAYERSHOUSE2F_TEST_MON_SHINY
 	const PLAYERSHOUSE2F_DEBUGCOLOURPICKER
-	const PLAYERSHOUSE2F_MAXIMA
+	const PLAYERSHOUSE2F_RANDOM_PARTY_TRAINER
 endc
 
 PlayersHouse2F_MapScripts:
@@ -42,33 +42,6 @@ PlayersHouse2F_MapScripts:
 	def_callbacks
 	callback MAPCALLBACK_NEWMAP, PlayersHouse2FInitializeRoomCallback
 	callback MAPCALLBACK_TILES, PlayersHouse2FSetUpTileDecorationsCallback
-
-PlayersHouse2FInitializeRoomCallback:
-	special ToggleDecorationsVisibility
-	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_8
-	endcallback
-
-PlayersHouse2FSetUpTileDecorationsCallback:
-	special ToggleMaptileDecorations
-	endcallback
-
-PlayersHouseDoll1Script::
-	describedecoration DECODESC_LEFT_DOLL
-
-PlayersHouseDoll2Script:
-	describedecoration DECODESC_RIGHT_DOLL
-
-PlayersHouseBigDollScript:
-	describedecoration DECODESC_BIG_DOLL
-
-PlayersHouseGameConsoleScript:
-	describedecoration DECODESC_CONSOLE
-
-PlayersHousePosterScript:
-	conditional_event EVENT_PLAYERS_ROOM_POSTER, .Script
-
-.Script:
-	describedecoration DECODESC_POSTER
 
 PlayersHouseRadioScript:
 if DEF(_DEBUG)
@@ -197,60 +170,145 @@ else
 	iftrue .NormalRadio
 	playmusic MUSIC_POKEMON_TALK
 	opentext
-	writetext PlayersRadioText1
-	pause 45
-	writetext PlayersRadioText2
-	pause 45
-	writetext PlayersRadioText3
-	pause 45
+	writethistext
+		text "Prof.Oak's #mon"
+		line "Talk! Please tune"
+		cont "in next time!"
+		done
+	pause 30
+	writethistext
+		text "#mon Channel!"
+		done
+	pause 30
+	writethistext
+		text "This is DJ Mary,"
+		line "your co-host!"
+		done
+	pause 30
 	musicfadeout MUSIC_NEW_BARK_TOWN, 16
-	writetext PlayersRadioText4
-	pause 45
-	closetext
+	writethistext
+		text "#mon!"
+		line "#mon Channel…"
+		done
+	pause 30
 	setevent EVENT_LISTENED_TO_INITIAL_RADIO
-	end
+	endtext
 
 .NormalRadio:
 	jumpstd Radio1Script
 endc
 
+PlayersHouse2FInitializeRoomCallback:
+	special ToggleDecorationsVisibility
+	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_8
+	endcallback
+
+PlayersHouse2FSetUpTileDecorationsCallback:
+	special ToggleMaptileDecorations
+	endcallback
+
+PlayersHouseDoll1Script::
+	describedecoration DECODESC_LEFT_DOLL
+
+PlayersHouseDoll2Script:
+	describedecoration DECODESC_RIGHT_DOLL
+
+PlayersHouseBigDollScript:
+	describedecoration DECODESC_BIG_DOLL
+
+PlayersHouseGameConsoleScript:
+	describedecoration DECODESC_CONSOLE
+
+PlayersHousePosterScript:
+	conditional_event EVENT_PLAYERS_ROOM_POSTER, .Script
+
+.Script:
+	describedecoration DECODESC_POSTER
+
 PlayersHousePCScript:
 	opentext
 	special PlayersHousePC
 	iftrue .Warp
-	closetext
-	end
+	endtext
 .Warp:
 	warp NONE, 0, 0
 	end
 
-PlayersRadioText1:
-	text "Prof.Oak's #mon"
-	line "Talk! Please tune"
-	cont "in next time!"
-	done
-
-PlayersRadioText2:
-	text "#mon Channel!"
-	done
-
-PlayersRadioText3:
-	text "This is DJ Mary,"
-	line "your co-host!"
-	done
-
-PlayersRadioText4:
-	text "#mon!"
-	line "#Mon Channel…"
-	done
-
 if DEF(_DEBUG)
+DebugOptions:
+	opentext
+	writethistext
+		text "Welcome to the"
+		line "Debug Options."
+		done
+	loadmenu .MoveMenuHeader
+	verticalmenu
+	closewindow
+	ifequal 1, .AllBadges
+	ifequal 2, .FillPokedex
+	ifequal 3, .DebugColourPicker
+	ifequal 4, .Unused
+	sjump .finish
+
+.AllBadges
+	writethistext
+		text "All badges"
+		line "acquired!"
+		done
+	waitbutton
+	playsound SFX_1ST_PLACE
+	waitsfx
+	; all badges
+	setflag ENGINE_ZEPHYRBADGE
+	setflag ENGINE_HIVEBADGE
+	setflag ENGINE_PLAINBADGE
+	setflag ENGINE_FOGBADGE
+	setflag ENGINE_STORMBADGE
+	setflag ENGINE_MINERALBADGE
+	setflag ENGINE_GLACIERBADGE
+	setflag ENGINE_RISINGBADGE
+	sjump .finish
+
+.FillPokedex
+	special FillPokedex
+	writethistext
+		text "#dex Completed!"
+		line "#mon Master!"
+		done
+	waitbutton
+	playsound SFX_1ST_PLACE
+	waitsfx
+	sjump .finish
+
+.Unused
+	sjump .finish
+
+.DebugColourPicker
+	special DebugColourPicker
+.finish
+	endtext
+
+.MoveMenuHeader:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 0, 0, 19, TEXTBOX_Y - 1
+	dw .MenuData
+	db 1 ; default option
+
+.MenuData:
+	db STATICMENU_CURSOR ; flags
+	db 5 ; items
+	db "All Badges@"
+	db "#dex Completed@"
+	db "Debug Color@"
+	db "Unused@"
+	db "Cancel@"
+
 RandomPartyTrainerScript:
 	faceplayer
 	special BackupPartyHeldItems
 	special HealParty
 	winlosstext TestText, 0
-	loadtrainer INSAF, INSAF1
+	loadtrainer MAXIMA, MAXIMA1
 	startbattle
 	reloadmap
 	special RestorePartyHeldItems
@@ -292,80 +350,4 @@ ShinyMonScript:
 	reloadmap
 	special HealParty
 	end
-
-DebugOptions:
-	faceplayer
-	opentext
-	writetext WelcomeToDebugOptionsText
-	loadmenu .MoveMenuHeader
-	verticalmenu
-	closewindow
-	ifequal 1, .AllBadges
-	ifequal 2, .FillPokedex
-	ifequal 3, .DebugColourPicker
-	ifequal 4, .Unused
-	sjump .finish
-
-.AllBadges
-	writetext AllBadgesAcquiredText
-	waitbutton
-	playsound SFX_1ST_PLACE
-	waitsfx
-	; all badges
-	setflag ENGINE_ZEPHYRBADGE
-	setflag ENGINE_HIVEBADGE
-	setflag ENGINE_PLAINBADGE
-	setflag ENGINE_FOGBADGE
-	setflag ENGINE_STORMBADGE
-	setflag ENGINE_MINERALBADGE
-	setflag ENGINE_GLACIERBADGE
-	setflag ENGINE_RISINGBADGE
-	sjump .finish
-
-.FillPokedex
-	special FillPokedex
-	writetext FilledOutPokedexText
-	waitbutton
-	playsound SFX_1ST_PLACE
-	waitsfx
-	sjump .finish
-
-.Unused
-	sjump .finish
-
-.DebugColourPicker
-	special DebugColourPicker
-.finish
-	closetext
-	end
-
-.MoveMenuHeader:
-	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 0, 19, TEXTBOX_Y - 1
-	dw .MenuData
-	db 1 ; default option
-
-.MenuData:
-	db STATICMENU_CURSOR ; flags
-	db 5 ; items
-	db "All Badges@"
-	db "#dex Completed@"
-	db "Debug Color@"
-	db "Unused@"
-	db "Cancel@"
-
-WelcomeToDebugOptionsText:
-	text "Welcome to the"
-	line "Debug Options."
-	done
-
-AllBadgesAcquiredText:
-	text "All badges"
-	line "acquired!"
-	done
-
-FilledOutPokedexText:
-	text "#dex Completed!"
-	line "#mon Master!"
-	done
 endc
