@@ -181,7 +181,7 @@ ItemDescriptions:
 	dw RainbowWingDesc
 	dw AssaultVestDesc
 	dw BrickPieceDesc
-	dw TypeCodexDesc
+	dw TypeChartDesc
 	dw GripClawDesc
  	dw CatchCharmDesc
 	dw MembersCardDesc
@@ -995,9 +995,9 @@ MusicMailDesc:
 MirageMailDesc:
 	db   "MEW-print MAIL.@"
 
-TypeCodexDesc:
+TypeChartDesc:
 	db   "Summarizes all"
-	next "type advantages.@"
+	next "type interactions.@"
 
 GripClawDesc:
 	db   "Trapping moves"

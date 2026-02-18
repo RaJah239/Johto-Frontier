@@ -242,7 +242,7 @@ ItemNameOrder:
 ; Key Items Pocket - 27 total
 ; Permanent Key Items
 ; Items that are possibly frequently used
-	db TYPE_CODEX
+	db TYPE_CHART
 	db MEMBERS_CARD
 	db BICYCLE
 	db COIN_CASE

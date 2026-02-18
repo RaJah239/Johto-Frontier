@@ -186,7 +186,7 @@
 	const RAINBOW_WING ; b2
 	const ASSAULT_VEST ; b3
 	const BRICK_PIECE  ; b4
-	const TYPE_CODEX   ; be
+	const TYPE_CHART   ; be
 	const GRIP_CLAW    ; c3
  	const CATCH_CHARM  ; dc
  	const MEMBERS_CARD

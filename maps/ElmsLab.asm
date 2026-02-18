@@ -328,7 +328,7 @@ AideScript_GiveYouBalls:
 	writetext TakeTypeChartText
 	promptbutton
 .skip3
-	verbosegiveitem TYPE_CODEX
+	verbosegiveitem TYPE_CHART
 	isdialogueminimal
 	iftrue .skip4
 	writetext AllTheBestToYouText

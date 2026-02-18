@@ -110,7 +110,7 @@ if DEF(_DEBUG)
 	
 	; key items
 	giveitem MEMBERS_CARD
-	giveitem TYPE_CODEX
+	giveitem TYPE_CHART
 	giveitem BICYCLE
 	setflag ENGINE_BIKE_SHOP_CALL_ENABLED
 	setevent EVENT_GOT_BICYCLE	

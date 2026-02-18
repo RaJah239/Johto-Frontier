@@ -194,7 +194,7 @@ ItemEffects:
 	dw NoEffect            ; RAINBOW_WING
 	dw NoEffect            ; ASSAULT_VEST
 	dw NoEffect            ; BRICK_PIECE
-	dw TypeCodexEffect     ; TYPE_CODEX
+	dw TypeChartEffect     ; TYPE_CHART
 	dw NoEffect            ; GRIP_CLAW
 	dw NoEffect            ; CATCH_CHARM
 	dw MembersCardEffect   ; MEMBERS_CARD
@@ -3125,13 +3125,9 @@ ItemEffects_GetThirdMaxHP:
 	inc e ; At least 1.
 	ret
 
-TypeCodexEffect:
-	farcall LoadFontsBattleExtra
+TypeChartEffect:
 	call FadeToMenu
-	farcall BlankScreen
-	farcall LoadOW_BGPal7
-	call FadePalettes
-	farcall TypeChart
+	farcall _TypeChart
 	call Call_ExitMenu
 	xor a
 	ldh [hBGMapMode], a

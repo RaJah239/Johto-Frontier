@@ -180,7 +180,7 @@ ItemNames::
 	li "Rainbow Wing"
 	li "Assault Vest"
 	li "Brick Piece"
-	li "Type Codex"
+	li "Type Chart"
 	li "Grip Claw"
 	li "Catch Charm"
 	li "Member's Card"
