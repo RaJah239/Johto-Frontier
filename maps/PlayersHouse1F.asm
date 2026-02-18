@@ -1,3 +1,24 @@
+PlayersHouse1F_MapEvents:
+	def_warp_events
+	warp_event  6,  7, NEW_BARK_TOWN, 1
+	warp_event  7,  7, NEW_BARK_TOWN, 1
+	warp_event  9,  0, PLAYERS_HOUSE_2F, 1
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  0,  1, BGEVENT_JUMPTEXT, PlayersHouse1FStoveScript
+	bg_event  1,  1, BGEVENT_JUMPTEXT, PlayersHouse1FSinkScript
+	bg_event  2,  1, BGEVENT_JUMPTEXT, PlayersHouse1FFridgeScript
+	bg_event  4,  1, BGEVENT_JUMPTEXT, PlayersHouse1FTVScript
+
+	def_object_events
+	object_event  7,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MomScript, EVENT_PLAYERS_HOUSE_MOM_1
+	object_event  2,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, MORN, 0, OBJECTTYPE_SCRIPT, 0, MomScript, EVENT_PLAYERS_HOUSE_MOM_2
+	object_event  7,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, DAY, 0, OBJECTTYPE_SCRIPT, 0, MomScript, EVENT_PLAYERS_HOUSE_MOM_2
+	object_event  4,  3, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, EVE, 0, OBJECTTYPE_SCRIPT, 0, MomScript, EVENT_PLAYERS_HOUSE_MOM_2
+	object_event  0,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, NITE, 0, OBJECTTYPE_SCRIPT, 0, MomScript, EVENT_PLAYERS_HOUSE_MOM_2
+
 	object_const_def
 	const PLAYERSHOUSE1F_MOM1
 	const PLAYERSHOUSE1F_MOM2
@@ -42,7 +63,10 @@ MeetMomScript:
 	promptbutton
 	special SetDayOfWeek
 .SetDayOfWeek:
-	writetext IsItDSTText
+	writethistext
+		text "Is it Daylight"
+		line "Saving Time now?"
+		done
 	yesorno
 	iffalse .WrongDay
 	special InitialSetDSTFlag
@@ -57,23 +81,52 @@ MeetMomScript:
 .DayOfWeekDone:
 	isdialogueminimal
 	iftrue .skipthis
-	writetext ComeHomeForDSTText
+	writethistext
+		text "You can change the"
+		line "time on your #-"
+		cont "Gear but you'll"
+		cont "have come home to"
+		cont "adjust your clock"
+		cont "for Daylight"
+		cont "Saving Time."
+
+		para "By the way, do you"
+		line "know how to use"
+		cont "the Phone?"
+		done
 	yesorno
 	iffalse .ExplainPhone
-	sjump .KnowPhone
-
-.KnowPhone:
-	writetext KnowTheInstructionsText
+	writethistext
+		text "Great!"
+		done
 	promptbutton
 	sjump .FinishPhone
 
 .ExplainPhone:
-	writetext DontKnowTheInstructionsText
-	promptbutton
+	writethistext
+		text "I'll read the"
+		line "instructions."
+
+		para "Turn the #Gear"
+		line "on and select the"
+		cont "Phone icon."
+
+		para "Phone numbers are"
+		line "stored in memory."
+
+		para "Just choose a name"
+		line "you want to call."
+
+		para "Gee, isn't that"
+		line "convenient?"
+		done
+		promptbutton
 	; fallthrough
 
 .FinishPhone:
-	writetext InstructionsNextText
+	writethistext
+		text "Hurry along now."
+		done
 	waitbutton
 .skipthis
 	closetext
@@ -87,7 +140,6 @@ PokegearName:
 
 PlayersHouse1FReceiveItemStd:
 	jumpstd ReceiveItemScript
-	end
 
 MomScript:
 	playmusic MUSIC_MOM
@@ -95,7 +147,10 @@ MomScript:
 	opentext
 	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
 	iftrue .BankOfMom
-	writetext HurryUpElmIsWaitingText
+	writethistext
+		text "Prof.Elm is wait-"
+		line "ing for you."
+		done
 	waitbutton
 	closetext
 	special RestartMapMusic
@@ -109,18 +164,6 @@ MomScript:
 	closetext
 	special RestartMapMusic
 	end
-
-PlayersHouse1FTVScript:
-	jumptext PlayersHouse1FTVText
-
-PlayersHouse1FStoveScript:
-	jumptext PlayersHouse1FStoveText
-
-PlayersHouse1FSinkScript:
-	jumptext PlayersHouse1FSinkText
-
-PlayersHouse1FFridgeScript:
-	jumptext PlayersHouse1FFridgeText
 
 PlayerWalksTowardsMomMovement1:
 	step DOWN
@@ -161,6 +204,11 @@ ElmsLookingForYouText:
 	para "Here you go!"
 	done
 
+ElmsLookingForYouTextMin:
+	text "Take along your"
+	line "#gear…"
+	done
+
 MomGivesPokegearText:
 	text "#mon Gear, or"
 	line "just #Gear."
@@ -176,87 +224,11 @@ MomGivesPokegearText:
 	line "that!"
 	done
 
-IsItDSTText:
-	text "Is it Daylight"
-	line "Saving Time now?"
-	done
-
-ComeHomeForDSTText:
-	text "You can change the"
-	line "time on your #-"
-	cont "Gear but you'll"
-	cont "have come home to"
-	cont "adjust your clock"
-	cont "for Daylight"
-	cont "Saving Time."
-
-	para "By the way, do you"
-	line "know how to use"
-	cont "the Phone?"
-	done
-
-KnowTheInstructionsText:
-	text "Great!"
-	done
-
-DontKnowTheInstructionsText:
-	text "I'll read the"
-	line "instructions."
-
-	para "Turn the #Gear"
-	line "on and select the"
-	cont "Phone icon."
-
-	para "Phone numbers are"
-	line "stored in memory."
-
-	para "Just choose a name"
-	line "you want to call."
-
-	para "Gee, isn't that"
-	line "convenient?"
-	done
-
-InstructionsNextText:
-	text "Hurry along now."
-	done
-
-HurryUpElmIsWaitingText:
-	text "Prof.Elm is wait-"
-	line "ing for you."
-	done
-
-PlayersHouse1FStoveText:
-	text "Mom's specialty!"
-
-	para "Cinnabar Volcano"
-	line "Burger!"
-	done
-
-PlayersHouse1FSinkText:
-	text "The sink is spot-"
-	line "less. Mom likes it"
-	cont "clean."
-	done
-
-PlayersHouse1FFridgeText:
-	text "Let's see what's"
-	line "in the fridge…"
-
-	para "Fresh Water and"
-	line "tasty Lemonade!"
-	done
-
-ElmsLookingForYouTextMin:
-	text "Take along your"
-	line "#gear…"
-	done
-
 MomGivesPokegearTextMin:
 	text "Set the day…"
 	done
 
-PlayersHouse1FTVText:
+PlayersHouse1FTVScript:
 	text "There's a movie on"
 	line "TV: Stars dot the"
 	cont "sky as two boys"
@@ -266,23 +238,23 @@ PlayersHouse1FTVText:
 	line "rolling too!"
 	done
 
-PlayersHouse1F_MapEvents:
-	def_warp_events
-	warp_event  6,  7, NEW_BARK_TOWN, 1
-	warp_event  7,  7, NEW_BARK_TOWN, 1
-	warp_event  9,  0, PLAYERS_HOUSE_2F, 1
+PlayersHouse1FStoveScript:
+	text "Mom's specialty!"
 
-	def_coord_events
+	para "Cianwood Coral"
+	line "Cake!"
+	done
 
-	def_bg_events
-	bg_event  0,  1, BGEVENT_READ, PlayersHouse1FStoveScript
-	bg_event  1,  1, BGEVENT_READ, PlayersHouse1FSinkScript
-	bg_event  2,  1, BGEVENT_READ, PlayersHouse1FFridgeScript
-	bg_event  4,  1, BGEVENT_READ, PlayersHouse1FTVScript
+PlayersHouse1FSinkScript:
+	text "The sink is spot-"
+	line "less. Mom likes it"
+	cont "clean."
+	done
 
-	def_object_events
-	object_event  7,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MomScript, EVENT_PLAYERS_HOUSE_MOM_1
-	object_event  2,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, MORN, 0, OBJECTTYPE_SCRIPT, 0, MomScript, EVENT_PLAYERS_HOUSE_MOM_2
-	object_event  7,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, DAY, 0, OBJECTTYPE_SCRIPT, 0, MomScript, EVENT_PLAYERS_HOUSE_MOM_2
-	object_event  4,  3, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, EVE, 0, OBJECTTYPE_SCRIPT, 0, MomScript, EVENT_PLAYERS_HOUSE_MOM_2
-	object_event  0,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, NITE, 0, OBJECTTYPE_SCRIPT, 0, MomScript, EVENT_PLAYERS_HOUSE_MOM_2
+PlayersHouse1FFridgeScript:
+	text "Let's see what's"
+	line "in the fridge…"
+
+	para "Fresh Water and"
+	line "tasty Lemonade!"
+	done
