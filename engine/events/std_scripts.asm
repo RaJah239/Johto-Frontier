@@ -7,6 +7,8 @@ StdScripts::
 	add_stdscript DifficultBookshelfScript
 	add_stdscript PictureBookshelfScript
 	add_stdscript MagazineBookshelfScript
+	add_stdscript Radio1Script
+	add_stdscript Radio2Script
 	add_stdscript PokecenterNurseScript
 	add_stdscript TeamRocketOathScript
 	add_stdscript IncenseBurnerScript
@@ -15,8 +17,6 @@ StdScripts::
 	add_stdscript WindowScript
 	add_stdscript TVScript
 	add_stdscript HomepageScript ; unused
-	add_stdscript Radio1Script
-	add_stdscript Radio2Script
 	add_stdscript TrashCanScript
 	add_stdscript StrengthBoulderScript
 	add_stdscript SmashRockScript
