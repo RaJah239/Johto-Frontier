@@ -4,9 +4,9 @@ MACRO add_stdscript
 ENDM
 
 StdScripts::
-	add_stdscript PokecenterNurseScript
 	add_stdscript DifficultBookshelfScript
 	add_stdscript PictureBookshelfScript
+	add_stdscript PokecenterNurseScript
 	add_stdscript MagazineBookshelfScript
 	add_stdscript TeamRocketOathScript
 	add_stdscript IncenseBurnerScript

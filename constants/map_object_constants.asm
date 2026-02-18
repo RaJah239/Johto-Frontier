@@ -309,5 +309,5 @@ DEF NUM_STEPS EQU const_value
 ; Object Scripts - use skips for the ones we don't need or
 ; rearrange engine\events\std_scripts.asm as needed
 	const_def
-	const_skip
 	const DIFFICULT_BOOKSHELF_SCRIPT
+	const PICTURE_BOOKSHELF_SCRIPT
