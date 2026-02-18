@@ -1,3 +1,28 @@
+PlayersHouse2F_MapEvents:
+	def_warp_events
+	warp_event  7,  0, PLAYERS_HOUSE_1F, 3
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  2,  1, BGEVENT_UP, PlayersHousePCScript
+	bg_event  3,  1, BGEVENT_READ, PlayersHouseRadioScript
+	bg_event  5,  1, BGEVENT_READ, PlayersHouseBookshelfScript
+	bg_event  6,  0, BGEVENT_IFSET, PlayersHousePosterScript
+
+	def_object_events
+	object_event  4,  2, SPRITE_CONSOLE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseGameConsoleScript, EVENT_PLAYERS_HOUSE_2F_CONSOLE
+	object_event  4,  4, SPRITE_DOLL_1, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseDoll1Script, EVENT_PLAYERS_HOUSE_2F_DOLL_1
+	object_event  5,  4, SPRITE_DOLL_2, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseDoll2Script, EVENT_PLAYERS_HOUSE_2F_DOLL_2
+	object_event  0,  1, SPRITE_BIG_DOLL, SPRITEMOVEDATA_BIGDOLL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseBigDollScript, EVENT_PLAYERS_HOUSE_2F_BIG_DOLL
+if DEF(_DEBUG)
+	object_event  4,  2, SPRITE_SCARLET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TestTrainerScript, -1
+	object_event  3,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RegularMonScript, -1
+	object_event  2,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ShinyMonScript, -1
+	object_event  7,  5, SPRITE_PAPER, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, DebugOptions, -1
+	object_event  2,  3, SPRITE_RED, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RandomPartyTrainerScript, -1
+endc
+
 	object_const_def
 	const PLAYERSHOUSE2F_CONSOLE
 	const PLAYERSHOUSE2F_DOLL_1
@@ -48,66 +73,32 @@ PlayersHousePosterScript:
 PlayersHouseRadioScript:
 if DEF(_DEBUG)
 	opentext
-
-	; good party
+	; party
 	givepoke MAGIKARP, 50
-
 	; 1st mon moves
 	loadmem wPartyMon1Moves+0, SEED_BOMB
 	loadmem wPartyMon1Moves+1, SPLASH
 	loadmem wPartyMon1Moves+2, NO_MOVE
 	loadmem wPartyMon1Moves+3, NO_MOVE
-
 	closetext
-
 	; tms
 	giveitem TM_BRICK_BREAK, 50
 	giveitem TM_HEADBUTT, 50
 	giveitem TM_DIG, 50
 	giveitem TM_HIDDEN_POWER, 50
-
 	; hm
 	giveitem HM_FLY
-
 	; full pokegear
 	setflag ENGINE_POKEGEAR
 	setflag ENGINE_PHONE_CARD
 	setflag ENGINE_MAP_CARD
 	setflag ENGINE_RADIO_CARD
 	setflag ENGINE_START_MENU_WARP
-
 	; pokedex
 	setflag ENGINE_POKEDEX
-
-	; fly points
-;	setflag ENGINE_FLYPOINT_NEW_BARK
-;	setflag ENGINE_FLYPOINT_CHERRYGROVE
-;	setflag ENGINE_FLYPOINT_VIOLET
-;	setflag ENGINE_FLYPOINT_AZALEA
-;	setflag ENGINE_FLYPOINT_GOLDENROD
-;	setflag ENGINE_FLYPOINT_ECRUTEAK
-;	setflag ENGINE_FLYPOINT_OLIVINE
-;	setflag ENGINE_FLYPOINT_CIANWOOD
-;	setflag ENGINE_FLYPOINT_MAHOGANY
-;	setflag ENGINE_FLYPOINT_LAKE_OF_RAGE
-;	setflag ENGINE_FLYPOINT_BLACKTHORN
-;	setflag ENGINE_FLYPOINT_SILVER_CAVE
-;	setflag ENGINE_FLYPOINT_INDIGO_PLATEAU
-	
-	; new flypoints
-;	setflag ENGINE_FLYPOINT_RUINS_OF_ALPH
-;	setflag ENGINE_FLYPOINT_ROUTE_20
-;	setflag ENGINE_FLYPOINT_UNION_CAVE
-;	setflag ENGINE_FLYPOINT_NATIONAL_PARK
-;	setflag ENGINE_FLYPOINT_POWER_PLANT
 	; credits skip
 	setflag ENGINE_CREDITS_SKIP
-
-	; magnet train works
-	setevent EVENT_RESTORED_POWER_TO_KANTO
-
 	givemoney YOUR_MONEY, MAX_MONEY
-	
 	; key items
 	giveitem MEMBERS_CARD
 	giveitem TYPE_CHART
@@ -116,13 +107,11 @@ if DEF(_DEBUG)
 	setevent EVENT_GOT_BICYCLE	
 	giveitem COIN_CASE
 	givecoins MAX_COINS
-
 	; all rods
 	giveitem OLD_ROD
 	giveitem GOOD_ROD
 	giveitem SUPER_ROD
 	giveitem SHINY_CHARM
-
 	; overworld calls
 	giveitem TANGELA_CALL
 	giveitem MAREEP_CALL
@@ -131,13 +120,11 @@ if DEF(_DEBUG)
 	giveitem LANTURN_CALL
 	giveitem KINGDRA_CALL
 	giveitem MILOTIC_CALL
-
 	; useful items
 	giveitem MAX_REPEL, MAX_ITEM_STACK
 	giveitem ESCAPE_ROPE, MAX_ITEM_STACK
 	giveitem SACRED_ASH, MAX_ITEM_STACK
 	giveitem RARE_CANDY, MAX_ITEM_STACK
-
 	; vitamins
 	giveitem HYPER_EV_UP, MAX_ITEM_STACK
 	giveitem HP_UP, MAX_ITEM_STACK
@@ -146,18 +133,15 @@ if DEF(_DEBUG)
 	giveitem CALCIUM, MAX_ITEM_STACK
 	giveitem ZINC, MAX_ITEM_STACK
 	giveitem CARBOS, MAX_ITEM_STACK
-
 	; loot
 	giveitem CRYSTAL, MAX_ITEM_STACK
 	giveitem NUGGET, MAX_ITEM_STACK
 	giveitem SILVER_LEAF, MAX_ITEM_STACK
 	giveitem GOLD_LEAF, MAX_ITEM_STACK
-
 	; fossils
 	giveitem OLD_AMBER
 	giveitem DOME_FOSSIL
 	giveitem HELIX_FOSSIL
-
 	; all balls
 	giveitem MASTER_BALL, MAX_ITEM_STACK
 	giveitem SHINY_BALL, MAX_ITEM_STACK
@@ -170,11 +154,9 @@ if DEF(_DEBUG)
 	giveitem FRIEND_BALL, MAX_ITEM_STACK
 	giveitem MOON_BALL, MAX_ITEM_STACK
 	giveitem LOVE_BALL, MAX_ITEM_STACK
-
 	; fruits
 	giveitem SILVER_BERRY, MAX_ITEM_STACK
 	giveitem GOLD_BERRY, MAX_ITEM_STACK
-
 	; battle items
 	giveitem EVERSTONE, MAX_ITEM_STACK
 	giveitem TRICK_STICK, MAX_ITEM_STACK
@@ -199,7 +181,6 @@ if DEF(_DEBUG)
 	giveitem SUN_SHARD, MAX_ITEM_STACK
 	giveitem SAND_SHARD, MAX_ITEM_STACK
 	giveitem FROST_SHARD, MAX_ITEM_STACK
-
 	; intro events
 	addcellnum PHONE_MOM
 	setmapscene PLAYERS_HOUSE_1F, $1
@@ -271,7 +252,7 @@ RandomPartyTrainerScript:
 	faceplayer
 	special BackupPartyHeldItems
 	special HealParty
-	winlosstext TestText, TestText
+	winlosstext TestText, 0
 	loadtrainer INSAF, INSAF1
 	startbattle
 	reloadmap
@@ -390,29 +371,4 @@ FilledOutPokedexText:
 	text "#dex Completed!"
 	line "#mon Master!"
 	done
-endc
-
-PlayersHouse2F_MapEvents:
-	def_warp_events
-	warp_event  7,  0, PLAYERS_HOUSE_1F, 3
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  2,  1, BGEVENT_UP, PlayersHousePCScript
-	bg_event  3,  1, BGEVENT_READ, PlayersHouseRadioScript
-	bg_event  5,  1, BGEVENT_READ, PlayersHouseBookshelfScript
-	bg_event  6,  0, BGEVENT_IFSET, PlayersHousePosterScript
-
-	def_object_events
-	object_event  4,  2, SPRITE_CONSOLE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseGameConsoleScript, EVENT_PLAYERS_HOUSE_2F_CONSOLE
-	object_event  4,  4, SPRITE_DOLL_1, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseDoll1Script, EVENT_PLAYERS_HOUSE_2F_DOLL_1
-	object_event  5,  4, SPRITE_DOLL_2, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseDoll2Script, EVENT_PLAYERS_HOUSE_2F_DOLL_2
-	object_event  0,  1, SPRITE_BIG_DOLL, SPRITEMOVEDATA_BIGDOLL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseBigDollScript, EVENT_PLAYERS_HOUSE_2F_BIG_DOLL
-if DEF(_DEBUG)
-	object_event  4,  2, SPRITE_SCARLET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TestTrainerScript, -1
-	object_event  3,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RegularMonScript, -1
-	object_event  2,  5, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ShinyMonScript, -1
-	object_event  7,  5, SPRITE_PAPER, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, DebugOptions, -1
-	object_event  2,  3, SPRITE_RED, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RandomPartyTrainerScript, -1
 endc
