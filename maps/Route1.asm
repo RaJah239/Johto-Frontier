@@ -54,30 +54,44 @@ Route1TuscanyCallback:
 CatchingTutorialDudeScript:
 	faceplayer
 	opentext
-	writetext CatchingTutorialRepeatText
+	writethistext
+		text "Hello trainer!"
+		line "Want me to show"
+		cont "you how to catch"
+		cont "#mon?"
+		done
 	yesorno
-	iffalse .Declined
+	iffalse .declined
 	closetext
+	turnobject LAST_TALKED, DOWN
+	showthistext
+		text "Whoa!"
+		done
 	checktime MORN | DAY
 	iftrue .day_morn
 	loadwildmon HOOTHOOT, 5
 .loaded_mon:
 	catchtutorial BATTLETYPE_TUTORIAL
-	opentext
-	writetext CatchingTutorialDebriefText
-	waitbutton
-	closetext
-	end
+	jumpthistextfaceplayer
+		text "That's how you do"
+		line "it."
+
+		para "If you weaken them"
+		line "first, #mon are"
+		cont "easier to catch."
+		done
 
 .day_morn:
 	loadwildmon BUNEARY, 5
 	sjump .loaded_mon
 
-.Declined:
-	writetext CatchingTutorialDeclinedText
-	waitbutton
-	closetext
-	end
+.declined:
+	jumpthisopenedtext
+		text "#mon hide in"
+		line "the grass. Who"
+		cont "knows when they'll"
+		cont "pop out…"
+		done
 
 Route1CooltrainerMScript:
 	checktime DAY
@@ -107,76 +121,78 @@ Route1CooltrainerMScript:
 	done
 
 TuscanyScript:
-	faceplayer
-	opentext
 	checkevent EVENT_GOT_PINK_BOW_FROM_TUSCANY
-	iftrue TuscanyTuesdayScript
+	iftrue_jumptextfaceplayer .TuscanyTuesdayScript
+	opentext
+	faceplayer
 	readvar VAR_WEEKDAY
-	ifnotequal TUESDAY, TuscanyNotTuesdayScript
+	ifnotequal TUESDAY, .TuscanyNotTuesdayScript
 	checkevent EVENT_MET_TUSCANY_OF_TUESDAY
 	iftrue .MetTuscany
-	writetext MeetTuscanyText
+	writethistext
+	text "Tuscany: I do be-"
+	line "lieve that this is"
+	cont "the first time"
+	cont "we've met?"
+
+	para "Please allow me to"
+	line "introduce myself."
+
+	para "I am Tuscany of"
+	line "Tuesday."
+	done
 	promptbutton
 	setevent EVENT_MET_TUSCANY_OF_TUESDAY
 .MetTuscany:
-	writetext TuscanyGivesGiftText
+	writethistext
+		text "By way of intro-"
+		line "duction, please"
+		cont "accept this gift,"
+		cont "a Pink Bow."
+		done
 	promptbutton
 	verbosegiveitem PINK_BOW
-	iffalse TuscanyDoneScript
+	iffalse_endtext
 	setevent EVENT_GOT_PINK_BOW_FROM_TUSCANY
-	writetext TuscanyGaveGiftText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Tuscany: Wouldn't"
+		line "you agree that it"
+		cont "is most adorable?"
 
-TuscanyTuesdayScript:
-	writetext TuscanyTuesdayText
-	waitbutton
-TuscanyDoneScript:
-	closetext
-	end
+		para "It strengthens"
+		line "normal-type moves."
 
-TuscanyNotTuesdayScript:
-	writetext TuscanyNotTuesdayText
-	waitbutton
-	closetext
-	end
+		para "I am certain it"
+		line "will be of use."
+		done
 
-Route1Potion:
-	itemball POTION
+.TuscanyTuesdayScript:
+	text "Tuscany: Have you"
+	line "met Monica, my"
+	cont "older sister?"
 
-CatchingTutorialDebriefText:
-	text "That's how you do"
-	line "it."
+	para "Or my younger"
+	line "brother, Wesley?"
 
-	para "If you weaken them"
-	line "first, #MON are"
-	cont "easier to catch."
+	para "I am the second of"
+	line "seven children."
 	done
 
-CatchingTutorialDeclinedText:
-	text "#MON hide in"
-	line "the grass. Who"
-
-	para "knows when they'll"
-	line "pop out…"
-	done
-
-CatchingTutorialRepeatText:
-	text "Huh? You want me"
-	line "to show you how to"
-	cont "catch #MON?"
-	done
+.TuscanyNotTuesdayScript:
+	jumpthisopenedtext
+		text "Tuscany: Today is"
+		line "not Tuesday. That"
+		cont "is unfortunate…"
+		done
 
 Route1YoungsterText:
 	text "Yo. How are your"
-	line "#MON?"
+	line "#mon?"
 
 	para "If they're weak"
 	line "and not ready for"
-
-	para "battle, keep out"
-	line "of the grass."
+	cont "battle, keep out"
+	cont "of the grass."
 	done
 
 Route1TeacherText:
@@ -185,85 +201,34 @@ Route1TeacherText:
 	cont "off them."
 
 	para "But you can go to"
-	line "NEW BARK without"
-
-	para "walking through"
-	line "the grass."
+	line "New Bark without"
+	cont "walking through"
+	cont "the grass."
 	done
 
 Route1FisherText:
 	text "I wanted to take a"
 	line "break, so I saved"
-
-	para "to record my"
-	line "progress."
-	done
-
-MeetTuscanyText:
-	text "TUSCANY: I do be-"
-	line "lieve that this is"
-
-	para "the first time"
-	line "we've met?"
-
-	para "Please allow me to"
-	line "introduce myself."
-
-	para "I am TUSCANY of"
-	line "Tuesday."
-	done
-
-TuscanyGivesGiftText:
-	text "By way of intro-"
-	line "duction, please"
-
-	para "accept this gift,"
-	line "a PINK BOW."
-	done
-
-TuscanyGaveGiftText:
-	text "TUSCANY: Wouldn't"
-	line "you agree that it"
-	cont "is most adorable?"
-
-	para "It strengthens"
-	line "normal-type moves."
-
-	para "I am certain it"
-	line "will be of use."
-	done
-
-TuscanyTuesdayText:
-	text "TUSCANY: Have you"
-	line "met MONICA, my"
-	cont "older sister?"
-
-	para "Or my younger"
-	line "brother, WESLEY?"
-
-	para "I am the second of"
-	line "seven children."
-	done
-
-TuscanyNotTuesdayText:
-	text "TUSCANY: Today is"
-	line "not Tuesday. That"
-	cont "is unfortunate…"
+	cont "to record my"
+	cont "progress."
 	done
 
 Route1Sign1Text:
-	text "ROUTE 1"
+	text "Route 1"
 
-	para "CHERRYGROVE CITY -"
-	line "NEW BARK TOWN"
+	para "Cherrygrove City -"
+	line "New Bark Town"
 	done
 
 Route1Sign2Text:
-	text "ROUTE 1"
+	text "Route 1"
 
-	para "CHERRYGROVE CITY -"
-	line "NEW BARK TOWN"
+	para "Cherrygrove City -"
+	line "New Bark Town"
 	done
+
+Route1Potion:
+	itemball POTION
 
 Route1PinkApricornTree:
 	setval PNK_APRICORN
