@@ -10,6 +10,8 @@ StdScripts::
 	add_stdscript Radio1Script
 	add_stdscript Radio2Script
 	add_stdscript NoBerryOrFruitScript
+	add_stdscript PokecenterSignScript
+	add_stdscript MartSignScript
 	add_stdscript PokecenterNurseScript
 	add_stdscript TeamRocketOathScript
 	add_stdscript IncenseBurnerScript
@@ -21,8 +23,6 @@ StdScripts::
 	add_stdscript TrashCanScript
 	add_stdscript StrengthBoulderScript
 	add_stdscript SmashRockScript
-	add_stdscript PokecenterSignScript
-	add_stdscript MartSignScript
 	add_stdscript GoldenrodRocketsScript
 	add_stdscript RadioTowerRocketsScript
 	add_stdscript ElevatorButtonScript
