@@ -41,6 +41,9 @@ Route1_MapEvents:
 	const ROUTE1_BERRY1
 	const ROUTE1_BERRY2
 
+Route1NoBerryOrApricorn:
+	jumpstd NoBerryOrFruitScript
+
 Route1TuscanyCallback:
 	readvar VAR_WEEKDAY
 	ifnotequal TUESDAY, .TuscanyDisappears
@@ -316,15 +319,6 @@ Route1BerryTree2:
 	closetext
 	end
 
-Route1NoBerryOrApricorn:
-	opentext
-	writetext Route1TreeText
-	promptbutton
-	writetext Route1NothingHereText
-	waitbutton
-	closetext
-	end
-
 Route1NoRoomInBag:
 	writetext Route1NoRoomInBagText
 	waitbutton
@@ -333,10 +327,6 @@ Route1NoRoomInBag:
 
 Route1TreeText:
 	text_far _FruitBearingTreeText
-	text_end
-
-Route1NothingHereText:
-	text_far _NothingHereText
 	text_end
 
 Route1HeyItsBerryApricornText:

@@ -55,6 +55,14 @@ StdScripts::
 	add_stdscript ChanseyPokeCenterScript
 	add_stdscript MysteryGiftCarrieScript
 	add_stdscript WanderingOddEggNPCScript
+	add_stdscript NoBerryOrFruitScript
+
+NoBerryOrFruitScript:
+	opentext
+	farwritetext _FruitBearingTreeText
+	promptbutton
+	farwritetext _NothingHereText
+	waitendtext
 
 WanderingOddEggNPCScript:
 	faceplayer
