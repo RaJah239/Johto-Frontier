@@ -13,9 +13,9 @@ Route1_MapEvents:
 	def_bg_events
 	bg_event 51,  7, BGEVENT_JUMPTEXT, Route1Sign1Text
 	bg_event  3,  5, BGEVENT_JUMPTEXT, Route1Sign2Text
-	bg_event 12,  2, BGEVENT_READ, Route1NoBerryOrApricorn
-	bg_event 13,  3, BGEVENT_READ, Route1NoBerryOrApricorn
-	bg_event 24, 12, BGEVENT_READ, Route1NoBerryOrApricorn
+	bg_event 12,  2, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event 13,  3, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event 24, 12, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
 
 	def_object_events
 	object_event 50, 12, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, CatchingTutorialDudeScript, -1
@@ -279,6 +279,3 @@ Route1BerryTree2:
 	setval BERRY
 	setlasttalked ROUTE1_BERRY2
 	jumpstd BerryOrFruitScript
-
-Route1NoBerryOrApricorn:
-	jumpstd NoBerryOrFruitScript

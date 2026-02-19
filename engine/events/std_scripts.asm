@@ -9,6 +9,7 @@ StdScripts::
 	add_stdscript MagazineBookshelfScript
 	add_stdscript Radio1Script
 	add_stdscript Radio2Script
+	add_stdscript NoBerryOrFruitScript
 	add_stdscript PokecenterNurseScript
 	add_stdscript TeamRocketOathScript
 	add_stdscript IncenseBurnerScript
@@ -55,7 +56,6 @@ StdScripts::
 	add_stdscript ChanseyPokeCenterScript
 	add_stdscript MysteryGiftCarrieScript
 	add_stdscript WanderingOddEggNPCScript
-	add_stdscript NoBerryOrFruitScript
 	add_stdscript BerryOrFruitScript
 
 BerryOrFruitScript:
