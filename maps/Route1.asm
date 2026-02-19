@@ -41,9 +41,6 @@ Route1_MapEvents:
 	const ROUTE1_BERRY1
 	const ROUTE1_BERRY2
 
-Route1NoBerryOrApricorn:
-	jumpstd NoBerryOrFruitScript
-
 Route1TuscanyCallback:
 	readvar VAR_WEEKDAY
 	ifnotequal TUESDAY, .TuscanyDisappears
@@ -271,74 +268,41 @@ Route1Sign2Text:
 Route1PinkApricornTree:
 	opentext
 	getitemname STRING_BUFFER_3, PNK_APRICORN
-	writetext Route1TreeText
+	farwritetext _FruitBearingTreeText
 	promptbutton
-	writetext Route1HeyItsBerryApricornText
+	farwritetext _HeyItsFruitText
 	promptbutton
-	giveitem PNK_APRICORN
-	iffalse Route1NoRoomInBag
+	verbosegiveitem PNK_APRICORN
+	iffalse .done
 	disappear ROUTE1_APRICORN1
-	writetext Route1FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
+.done
+	endtext
 
 Route1BerryTree1:
 	opentext
 	getitemname STRING_BUFFER_3, BERRY
-	writetext Route1TreeText
+	farwritetext _FruitBearingTreeText
 	promptbutton
-	writetext Route1HeyItsBerryApricornText
+	farwritetext _HeyItsFruitText
 	promptbutton
-	giveitem BERRY
-	iffalse Route1NoRoomInBag
+	verbosegiveitem BERRY
+	iffalse .done
 	disappear ROUTE1_BERRY1
-	writetext Route1FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
+.done
+	endtext
 
 Route1BerryTree2:
 	opentext
 	getitemname STRING_BUFFER_3, BERRY
-	writetext Route1TreeText
+	writetext _FruitBearingTreeText
 	promptbutton
-	writetext Route1HeyItsBerryApricornText
+	writetext _HeyItsFruitText
 	promptbutton
-	giveitem BERRY
-	iffalse Route1NoRoomInBag
+	verbosegiveitem BERRY
+	iffalse .done
 	disappear ROUTE1_BERRY2
-	writetext Route1FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
+.done
+	endtext
 
-Route1NoRoomInBag:
-	writetext Route1NoRoomInBagText
-	waitbutton
-	closetext
-	end
-
-Route1TreeText:
-	text_far _FruitBearingTreeText
-	text_end
-
-Route1HeyItsBerryApricornText:
-	text_far _HeyItsFruitText
-	text_end
-
-Route1FoundItemText:
-	text_far _ObtainedFruitText
-	text_end
-
-Route1NoRoomInBagText:
-	text_far _CantCarryItemText
-	text_end
-
-
+Route1NoBerryOrApricorn:
+	jumpstd NoBerryOrFruitScript
