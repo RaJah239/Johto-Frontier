@@ -151,8 +151,7 @@ MomScript:
 		text "Prof.Elm is wait-"
 		line "ing for you."
 		done
-	waitbutton
-	closetext
+	waitclosetext
 	special RestartMapMusic
 	end
 
@@ -160,8 +159,7 @@ MomScript:
 	setevent EVENT_FIRST_TIME_BANKING_WITH_MOM
 	setmapscene NEW_BARK_TOWN, SCENE_NEWBARKTOWN_NOOP
 	special BankOfMom
-	waitbutton
-	closetext
+	waitclosetext
 	special RestartMapMusic
 	end
 
