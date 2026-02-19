@@ -113,8 +113,7 @@ NewBarkTownTeacherScript:
 	done
 
 CheatingScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkevent EVENT_CHEAT_MENU_ACCESSIBLE
 	iftrue .Start
 	writethistext
