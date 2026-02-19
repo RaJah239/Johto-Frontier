@@ -402,6 +402,7 @@ DEF porygonpc             EQUS "PorygonPCScript"
 DEF chanseypokecenter     EQUS "ChanseyPokeCenterScript"
 DEF wanderingoddeggnpcscript EQUS "WanderingOddEggNPCScript"
 DEF noberryorfruitscript  EQUS "NoBerryOrFruitScript"
+DEF berryorfruitscript    EQUS "BerryOrFruitScript"
 
 ; constants/charmap.asm
 charmap "%", "<BSP>"

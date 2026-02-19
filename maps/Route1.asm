@@ -266,43 +266,19 @@ Route1Sign2Text:
 	done
 
 Route1PinkApricornTree:
-	opentext
-	getitemname STRING_BUFFER_3, PNK_APRICORN
-	farwritetext _FruitBearingTreeText
-	promptbutton
-	farwritetext _HeyItsFruitText
-	promptbutton
-	verbosegiveitem PNK_APRICORN
-	iffalse .done
-	disappear ROUTE1_APRICORN1
-.done
-	endtext
+	setval PNK_APRICORN
+	setlasttalked ROUTE1_APRICORN1
+	jumpstd BerryOrFruitScript
 
 Route1BerryTree1:
-	opentext
-	getitemname STRING_BUFFER_3, BERRY
-	farwritetext _FruitBearingTreeText
-	promptbutton
-	farwritetext _HeyItsFruitText
-	promptbutton
-	verbosegiveitem BERRY
-	iffalse .done
-	disappear ROUTE1_BERRY1
-.done
-	endtext
+	setval BERRY
+	setlasttalked ROUTE1_BERRY1
+	jumpstd BerryOrFruitScript
 
 Route1BerryTree2:
-	opentext
-	getitemname STRING_BUFFER_3, BERRY
-	writetext _FruitBearingTreeText
-	promptbutton
-	writetext _HeyItsFruitText
-	promptbutton
-	verbosegiveitem BERRY
-	iffalse .done
-	disappear ROUTE1_BERRY2
-.done
-	endtext
+	setval BERRY
+	setlasttalked ROUTE1_BERRY2
+	jumpstd BerryOrFruitScript
 
 Route1NoBerryOrApricorn:
 	jumpstd NoBerryOrFruitScript

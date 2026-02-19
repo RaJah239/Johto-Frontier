@@ -56,6 +56,19 @@ StdScripts::
 	add_stdscript MysteryGiftCarrieScript
 	add_stdscript WanderingOddEggNPCScript
 	add_stdscript NoBerryOrFruitScript
+	add_stdscript BerryOrFruitScript
+
+BerryOrFruitScript:
+	opentext
+	getitemname STRING_BUFFER_3, USE_SCRIPT_VAR
+	farwritetext _FruitBearingTreeText
+	promptbutton
+	farwritetext _HeyItsFruitText
+	verbosegiveitem ITEM_FROM_MEM
+	iffalse .done
+	disappear LAST_TALKED
+.done
+	endtext
 
 NoBerryOrFruitScript:
 	opentext
