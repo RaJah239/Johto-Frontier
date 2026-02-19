@@ -1,3 +1,20 @@
+CherrygrovePokecenter1F_MapEvents:
+	def_warp_events
+	warp_event  3,  7, CHERRYGROVE_CITY, 1
+	warp_event  4,  7, CHERRYGROVE_CITY, 1
+	warp_event  0,  7, POKECENTER_2F, 1
+
+	def_coord_events
+
+	def_bg_events
+
+	def_object_events
+	object_event  3,  1, SPRITE_NURSE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, CherrygrovePokecenter1FNurseScript, -1
+	object_event  2,  3, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, CherrygrovePokecenter1FFisherText, -1
+	object_event  8,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, CherrygrovePokecenter1FGentlemanText, -1
+	object_event  1,  6, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, CherrygrovePokecenter1FTeacherText, -1
+	object_event  4,  1, SPRITE_CHANSEY, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CherrygrovePokecenterChanseyScript, -1
+
 	object_const_def
 	const CHERRYGROVEPOKECENTER1F_NURSE
 	const CHERRYGROVEPOKECENTER1F_FISHER
@@ -13,21 +30,11 @@ CherrygrovePokecenter1F_MapScripts:
 CherrygrovePokecenter1FNurseScript:
 	jumpstd PokecenterNurseScript
 
-CherrygrovePokecenter1FFisherScript:
-	jumptextfaceplayer CherrygrovePokecenter1FFisherText
-
-CherrygrovePokecenter1FGentlemanScript:
-	jumptextfaceplayer CherrygrovePokecenter1FGentlemanText
-
-CherrygrovePokecenter1FTeacherScript:
-	jumptextfaceplayer CherrygrovePokecenter1FTeacherText_CommCenterOpen
-
 CherrygrovePokecenter1FFisherText:
 	text "It's great. I can"
 	line "store any number"
-
-	para "of #MON, and"
-	line "it's all free."
+	cont "of #mon, and"
+	cont "it's all free."
 	done
 
 CherrygrovePokecenter1FGentlemanText:
@@ -36,31 +43,14 @@ CherrygrovePokecenter1FGentlemanText:
 	cont "to use."
 	done
 
-CherrygrovePokecenter1FTeacherText_CommCenterOpen:
-	text "The COMMUNICATION"
-	line "CENTER upstairs"
+CherrygrovePokecenter1FTeacherText:
+	text "The Communication"
+	line "Center upstairs,"
 	cont "was just built."
 
-	para "I traded #MON"
+	para "I traded #mon"
 	line "there already!"
 	done
 
 CherrygrovePokecenterChanseyScript:
 	jumpstd ChanseyPokeCenterScript
-
-CherrygrovePokecenter1F_MapEvents:
-	def_warp_events
-	warp_event  3,  7, CHERRYGROVE_CITY, 1
-	warp_event  4,  7, CHERRYGROVE_CITY, 1
-	warp_event  0,  7, POKECENTER_2F, 1
-
-	def_coord_events
-
-	def_bg_events
-
-	def_object_events
-	object_event  3,  1, SPRITE_NURSE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CherrygrovePokecenter1FNurseScript, -1
-	object_event  2,  3, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, CherrygrovePokecenter1FFisherScript, -1
-	object_event  8,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CherrygrovePokecenter1FGentlemanScript, -1
-	object_event  1,  6, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, CherrygrovePokecenter1FTeacherScript, -1
-	object_event  4,  1, SPRITE_CHANSEY, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CherrygrovePokecenterChanseyScript, -1
