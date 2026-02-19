@@ -1,3 +1,38 @@
+ElmsLab_MapEvents:
+	def_warp_events
+	warp_event  4, 11, NEW_BARK_TOWN, 2
+	warp_event  5, 11, NEW_BARK_TOWN, 2
+
+	def_coord_events
+	coord_event  4,  6, SCENE_ELMSLAB_CANT_LEAVE, LabTryToLeaveScript
+	coord_event  5,  6, SCENE_ELMSLAB_CANT_LEAVE, LabTryToLeaveScript
+	coord_event  4,  8, SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS, AideScript_WalkBalls1
+	coord_event  5,  8, SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS, AideScript_WalkBalls2
+
+	def_bg_events
+	bg_event  2,  1, BGEVENT_READ, ElmsLabHealingMachine
+	bg_event  0,  7, BGEVENT_JUMPTEXT, ElmsLabAdventureTip1Text
+	bg_event  1,  7, BGEVENT_JUMPTEXT, ElmsLabAdventureTip2Text
+	bg_event  2,  7, BGEVENT_JUMPTEXT, ElmsLabAdventureTip3Text
+	bg_event  3,  7, BGEVENT_JUMPTEXT, ElmsLabAdventureTip4Text
+	bg_event  6,  7, BGEVENT_JUMPTEXT, ElmsLabAdventureTip5Text
+	bg_event  7,  7, BGEVENT_JUMPTEXT, ElmsLabAdventureTip6Text
+	bg_event  8,  7, BGEVENT_JUMPTEXT, ElmsLabAdventureTip7Text
+	bg_event  9,  7, BGEVENT_JUMPTEXT, ElmsLabAdventureTip8Text
+	bg_event  9,  3, BGEVENT_JUMPTEXT, ElmsLabTrashcanText
+	bg_event  5,  0, BGEVENT_JUMPTEXT, ElmsLabWindowText
+	bg_event  3,  5, BGEVENT_DOWN, ElmsLabPC
+
+	def_object_events
+	object_event  5,  2, SPRITE_ELM, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ProfElmScript, -1
+	object_event  2,  9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_COMMAND, jumptextfaceplayer, AideText_ExplainBalls, -1
+	object_event  6,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, CyndaquilPokeBallScript, EVENT_CYNDAQUIL_POKEBALL_IN_ELMS_LAB
+	object_event  7,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TotodilePokeBallScript, EVENT_TOTODILE_POKEBALL_IN_ELMS_LAB
+	object_event  8,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ChikoritaPokeBallScript, EVENT_CHIKORITA_POKEBALL_IN_ELMS_LAB
+	object_event  0,  4, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ElmsLabPorygonPCScript, -1
+	object_event  7,  3, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, WorldNotebook, EVENT_ELMS_TRAVEL_NOTEBOOK
+	object_event  7,  9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ElmsAideScript2, -1
+
 	object_const_def
 	const ELMSLAB_ELM
 	const ELMSLAB_ELMS_AIDE1
@@ -37,10 +72,32 @@ ElmsLabWalkUpToElmScript:
 	turnobject ELMSLAB_ELM, RIGHT
 	isdialogueminimal
 	iftrue .skipthis1
-	opentext
-	writetext ElmText_Intro
-	waitbutton
-	closetext
+	showthistext
+		text "Elm: <PLAY_G>!"
+		line "There you are!"
+
+		para "You're finally of"
+		line "age, meaning it's"
+		cont "time to start your"
+		cont "very own #mon"
+		cont "adventure!"
+
+		para "Ah! Of course, you"
+		line "need #mon to"
+		cont "do just that!"
+
+		para "So!"
+
+		para "I'd like you to"
+		line "take a #mon"
+		cont "that I caught on"
+		cont "the table."
+
+		para "Wait a moment,"
+		line "even better!"
+
+		para "Take them all!"
+		done
 .skipthis1
 	applymovement ELMSLAB_ELM, ElmsLab_ElmToDefaultPositionMovement1
 	turnobject PLAYER, UP
@@ -48,47 +105,99 @@ ElmsLabWalkUpToElmScript:
 	turnobject PLAYER, RIGHT
 	opentext
 	writetextcheckdialogue ElmText_ChoosePokemon, ElmText_ChoosePokemonMin
-	waitbutton
 	setscene SCENE_ELMSLAB_CANT_LEAVE
-	closetext
-	end
+	waitendtext
+
+ElmText_ChoosePokemon:
+	text "Go on <PLAYER>."
+	done
+
+ElmText_ChoosePokemonMin:
+	text "Take all #mon"
+	line "on the table."
+	done
+
+ElmsLab_WalkUpToElmMovement:
+	step UP
+	step UP
+	step UP
+	step UP
+	step UP
+	step UP
+	step UP
+	turn_head LEFT
+	step_end
+
+ElmsLab_CantLeaveMovement:
+	step UP
+	step_end
+
+ElmsLab_ElmToDefaultPositionMovement1:
+	step UP
+	step_end
+
+ElmsLab_ElmToDefaultPositionMovement2:
+	step RIGHT
+	step RIGHT
+	step UP
+	turn_head DOWN
+	step_end
 
 ProfElmScript:
-	faceplayer
-	opentext
 	checkevent EVENT_GOT_MASTER_BALL_FROM_ELM
 	iftrue .ElmGenericDialogue
 	checkflag ENGINE_RISINGBADGE
-	iftrue ElmGiveMasterBallScript
+	iftrue .ElmGiveMasterBall
 .ElmGenericDialogue:
 	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
 	iffalse .GoOnNowPlayer
-	writetext ElmText_CallYou
-	waitbutton
-	closetext
-	end
-.GoOnNowPlayer
-	writetext ElmText_TakePokemonText
-	waitendtext
+	jumpthistext
+		text "Elm: <PLAY_G>, I'll"
+		line "call you if any-"
+		cont "thing comes up."
+		done
 
-ElmGiveMasterBallScript:
-	writetext ElmGiveMasterBallText1
+.GoOnNowPlayer:
+	jumpthistext
+		text "Go on <PLAYER> and"
+		line "take all #mon"
+		cont "on the table."
+		done
+
+.ElmGiveMasterBall:
+	showthistext
+		text "Elm: Hi, <PLAY_G>!"
+		line "I've this for you."
+
+		para "It's Master Ball!"
+		done
 	promptbutton
 	verbosegiveitem MASTER_BALL
 	iffalse .notdone
 	setevent EVENT_GOT_MASTER_BALL_FROM_ELM
-	writetext ElmGiveMasterBallText2
+	writethistext
+		text "It's the ultimate"
+		line "ball! It'll catch"
+		cont "any #mon with-"
+		cont "out fail."
+
+		para "You'll make better"
+		line "use of it than I."
+		done
 	waitbutton
 .notdone
-	closetext
-	end
+	endtext
 
 LabTryToLeaveScript:
 	turnobject ELMSLAB_ELM, DOWN
-	opentext
-	writetext LabWhereGoingText
-	waitbutton
-	closetext
+	showthistext
+		text "Elm: Wait! Where"
+		line "are you going?"
+	
+		para "There's still more"
+		line "#mon for you"
+		cont "to take."
+		done
 	applymovement PLAYER, ElmsLab_CantLeaveMovement
 	end
 
@@ -124,14 +233,37 @@ CyndaquilPokeBallScript:
 	checkevent EVENT_GOT_CHIKORITA_FROM_ELM
 	iffalse .exit_this_scene2
 	readvar VAR_FACING
-	ifequal RIGHT, ElmDirectionsScript
+	ifequal RIGHT, ElmGivesPokedexScript
 	applymovement PLAYER, AfterCyndaquilMovement
-	sjump ElmDirectionsScript
+	sjump ElmGivesPokedexScript
 
 .exit_this_scene1
 	closetext
 .exit_this_scene2
 	end
+
+TakeCyndaquilText:
+	text "Elm: You'll take"
+	line "Cyndaquil, the"
+	cont "fire #mon?"
+	done
+
+TakeCyndaquilTextMin:
+	text "Take Cyndaquil?"
+	done
+
+ReceivedStarterText:
+	text "<PLAYER> received"
+	line "@"
+	text_ram wStringBuffer3
+	text "!"
+	done
+
+AfterCyndaquilMovement:
+	step LEFT
+	step UP
+	turn_head UP
+	step_end
 
 TotodilePokeBallScript:
 	turnobject ELMSLAB_ELM, DOWN
@@ -165,12 +297,29 @@ TotodilePokeBallScript:
 	checkevent EVENT_GOT_CHIKORITA_FROM_ELM
 	iffalse .exit_this_scene2
 	applymovement PLAYER, AfterTotodileMovement
-	sjump ElmDirectionsScript
+	sjump ElmGivesPokedexScript
 
 .exit_this_scene1
 	closetext
 .exit_this_scene2
 	end
+
+TakeTotodileText:
+	text "Elm: Do you want"
+	line "Totodile, the"
+	cont "water #mon?"
+	done
+
+TakeTotodileTextMin:
+	text "Take Totodile?"
+	done
+
+AfterTotodileMovement:
+	step LEFT
+	step LEFT
+	step UP
+	turn_head UP
+	step_end
 
 ChikoritaPokeBallScript:
 	turnobject ELMSLAB_ELM, DOWN
@@ -204,306 +353,12 @@ ChikoritaPokeBallScript:
 	checkevent EVENT_GOT_TOTODILE_FROM_ELM
 	iffalse .exit_this_scene2
 	applymovement PLAYER, AfterChikoritaMovement
-	sjump ElmDirectionsScript
+	sjump ElmGivesPokedexScript
 
 .exit_this_scene1
 	closetext
 .exit_this_scene2
 	end
-
-ElmDirectionsScript:
-	turnobject PLAYER, UP
-	opentext
-	isdialogueminimal
-	iftrue .skipthis1
-	writetext ElmAdventureText1
-	promptbutton
-.skipthis1
-	writetext ElmsLab_GetDexText
-	playsound SFX_ITEM
-	waitsfx
-	setflag ENGINE_POKEDEX
-
-	isdialogueminimal
-	iftrue .skipthis2
-	writetext ElmsLab_GetDexInfoText
-.skipthis2
-	promptbutton
-	addcellnum PHONE_ELM
-	writetext GotElmsNumberText
-	waitsfx
-	playsound SFX_REGISTER_PHONE_NUMBER
-	waitsfx
-	closetext
-	turnobject ELMSLAB_ELM, LEFT
-	opentext
-	writetextcheckdialogue ElmAdventureText2, ElmAdventureText2Min
-	waitbutton
-	closetext
-	turnobject ELMSLAB_ELM, DOWN
-	opentext
-	writetextcheckdialogue ElmAdventureText3, ElmAdventureText3Min
-	waitbutton
-	closetext
-	showemote EMOTE_SHOCK, ELMSLAB_ELM, 15
-	turnobject ELMSLAB_ELM, RIGHT
-	pause 10
-	turnobject PLAYER, RIGHT
-	pause 10
-	appear ELMSLAB_BOOK
-
-	turnobject ELMSLAB_ELM, DOWN
-	pause 20
-	turnobject PLAYER, UP
-	pause 10
-	opentext
-	writetext HaveFunText
-	waitbutton
-	closetext
-	turnobject PLAYER, DOWN
-	setevent EVENT_GOT_A_POKEMON_FROM_ELM
-	setscene SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
-	end
-
-ElmsLabHealingMachine:
-	opentext
-	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue .CanHeal
-	writetext ElmsLabHealingMachineText1
-	waitbutton
-	closetext
-	end
-
-.CanHeal:
-	writetext ElmsLabHealingMachineText2
-	yesorno
-	iftrue ElmsLabHealingMachine_HealParty
-	closetext
-	end
-
-ElmsLabHealingMachine_HealParty:
-	special HealParty
-	special SaveMusic
-	playmusic MUSIC_NONE
-	setval HEALMACHINE_ELMS_LAB
-	special HealMachineAnim
-	pause 30
-	special RestoreMusic
-	closetext
-	end
-
-AideScript_WalkBalls1:
-	applymovement ELMSLAB_ELMS_AIDE1, AideWalksRight1
-	turnobject PLAYER, DOWN
-	scall AideScript_GiveYouBalls
-	applymovement ELMSLAB_ELMS_AIDE1, AideWalksLeft1
-	end
-
-AideScript_WalkBalls2:
-	applymovement ELMSLAB_ELMS_AIDE1, AideWalksRight2
-	turnobject PLAYER, DOWN
-	scall AideScript_GiveYouBalls
-	applymovement ELMSLAB_ELMS_AIDE1, AideWalksLeft2
-	end
-
-AideScript_GiveYouBalls:
-	opentext
-	isdialogueminimal
-	iftrue .skip1
-	writetext AideText_GiveYouBalls
-	promptbutton
-.skip1
-	getitemname STRING_BUFFER_4, POKE_BALL
-	scall AideScript_ReceiveTheBalls
-	giveitem POKE_BALL, 5
-	isdialogueminimal
-	iftrue .skip2
-	writetext AideText_ExplainBalls
-	promptbutton
-.skip2
-	itemnotify
-	setscene SCENE_ELMSLAB_NOOP
-	isdialogueminimal
-	iftrue .skip3
-	writetext TakeTypeChartText
-	promptbutton
-.skip3
-	verbosegiveitem TYPE_CHART
-	isdialogueminimal
-	iftrue .skip4
-	writetext AllTheBestToYouText
-	waitbutton
-.skip4
-	closetext
-	end
-
-AideScript_ReceiveTheBalls:
-	jumpstd ReceiveItemScript
-	end
-
-ElmsAideScript1:
-	faceplayer
-	opentext
-	writetext AideText_ExplainBalls
-	waitbutton
-	closetext
-	end
-
-ElmsLabWindow:
-	jumptext ElmsLabWindowText
-
-ElmsLabTrashcan:
-	jumptext ElmsLabTrashcanText
-
-ElmsLabPC:
-	jumptext ElmsLabPCText
-
-ElmsLabBookshelf:
-	jumpstd DifficultBookshelfScript
-
-ElmsLab_WalkUpToElmMovement:
-	step UP
-	step UP
-	step UP
-	step UP
-	step UP
-	step UP
-	step UP
-	turn_head LEFT
-	step_end
-
-ElmsLab_CantLeaveMovement:
-	step UP
-	step_end
-
-AideWalksRight1:
-	step RIGHT
-	step RIGHT
-	turn_head UP
-	step_end
-
-AideWalksRight2:
-	step RIGHT
-	step RIGHT
-	step RIGHT
-	turn_head UP
-	step_end
-
-AideWalksLeft1:
-	step LEFT
-	step LEFT
-	turn_head DOWN
-	step_end
-
-AideWalksLeft2:
-	step LEFT
-	step LEFT
-	step LEFT
-	turn_head DOWN
-	step_end
-
-ElmsLab_ElmToDefaultPositionMovement1:
-	step UP
-	step_end
-
-ElmsLab_ElmToDefaultPositionMovement2:
-	step RIGHT
-	step RIGHT
-	step UP
-	turn_head DOWN
-	step_end
-
-AfterCyndaquilMovement:
-	step LEFT
-	step UP
-	turn_head UP
-	step_end
-
-AfterTotodileMovement:
-	step LEFT
-	step LEFT
-	step UP
-	turn_head UP
-	step_end
-
-AfterChikoritaMovement:
-	step LEFT
-	step LEFT
-	step LEFT
-	step UP
-	turn_head UP
-	step_end
-
-ElmText_Intro:
-	text "Elm: <PLAY_G>!"
-	line "There you are!"
-
-	para "You're finally of"
-	line "age, meaning it's"
-	cont "time to start your"
-	cont "very own #mon"
-	cont "adventure!"
-
-	para "Ah! Of course, you"
-	line "need #mon to"
-	cont "do just that!"
-
-	para "So!"
-
-	para "I'd like you to"
-	line "take a #mon"
-	cont "that I caught on"
-	cont "the table."
-
-	para "Wait a moment,"
-	line "even better!"
-
-	para "Take them all!"
-	done
-
-ElmText_ChoosePokemon:
-	text "Go on <PLAYER>."
-	done
-
-ElmText_ChoosePokemonMin:
-	text "Take all #mon"
-	line "on the table."
-	done
-
-ElmText_TakePokemonText:
-	text "Go on <PLAYER> and"
-	line "take all #mon"
-	cont "on the table."
-	done
-
-LabWhereGoingText:
-	text "Elm: Wait! Where"
-	line "are you going?"
-	
-	para "There's still more"
-	line "#mon for you"
-	cont "to take."
-	done
-
-TakeCyndaquilText:
-	text "Elm: You'll take"
-	line "Cyndaquil, the"
-	cont "fire #mon?"
-	done
-
-TakeCyndaquilTextMin:
-	text "Take Cyndaquil?"
-	done
-
-TakeTotodileText:
-	text "Elm: Do you want"
-	line "Totodile, the"
-	cont "water #mon?"
-	done
-
-TakeTotodileTextMin:
-	text "Take Totodile?"
-	done
 
 TakeChikoritaText:
 	text "Elm: So, you like"
@@ -515,27 +370,38 @@ TakeChikoritaTextMin:
 	text "Take Chikorita?"
 	done
 
-ReceivedStarterText:
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer3
-	text "!"
-	done
+AfterChikoritaMovement:
+	step LEFT
+	step LEFT
+	step LEFT
+	step UP
+	turn_head UP
+	step_end
 
-ElmAdventureText1:
-	text "You're going to"
-	line "need more to start"
-	cont "adventuring."
+ElmGivesPokedexScript:
+	turnobject PLAYER, UP
+	opentext
+	isdialogueminimal
+	iftrue .skipthis1
+	writethistext
+		text "You're going to"
+		line "need more to start"
+		cont "adventuring."
 
-	para "Take this!"
-	done
-
-ElmsLab_GetDexText:
-	text "<PLAYER> received"
-	line "#dex!"
-	done
-
-ElmsLab_GetDexInfoText:
+		para "Take this!"
+		done
+	promptbutton
+.skipthis1
+	writethistext
+		text "<PLAYER> received"
+		line "#dex!"
+		done
+	playsound SFX_ITEM
+	waitsfx
+	setflag ENGINE_POKEDEX
+	isdialogueminimal
+	iftrue .skipthis2
+	writethistext
 	text "See? This is the"
 	line "latest version of"
 	cont "the #dex."
@@ -593,13 +459,55 @@ ElmsLab_GetDexInfoText:
 
 	para "It may be of use!"
 	done
+.skipthis2
+	promptbutton
+	addcellnum PHONE_ELM
+	writethistext
+		text "<PLAYER> got Elm's"
+		line "phone number."
+		done
+	waitsfx
+	playsound SFX_REGISTER_PHONE_NUMBER
+	waitsfx
+	closetext
+	turnobject ELMSLAB_ELM, LEFT
+	opentext
+	writetextcheckdialogue ElmAdventureText2, ElmAdventureText2Min
+	waitbutton
+	closetext
+	turnobject ELMSLAB_ELM, DOWN
+	opentext
+	writetextcheckdialogue ElmAdventureText3, ElmAdventureText3Min
+	waitbutton
+	closetext
+	showemote EMOTE_SHOCK, ELMSLAB_ELM, 15
+	turnobject ELMSLAB_ELM, RIGHT
+	pause 10
+	turnobject PLAYER, RIGHT
+	pause 10
+	appear ELMSLAB_BOOK
+	turnobject ELMSLAB_ELM, DOWN
+	pause 20
+	turnobject PLAYER, UP
+	pause 10
+	opentext
+	writethistext
+		text "Have fun out there"
+		line "<PLAYER>."
+		done
+	waitbutton
+	closetext
+	turnobject PLAYER, DOWN
+	setevent EVENT_GOT_A_POKEMON_FROM_ELM
+	setscene SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
+	end
 
 ElmAdventureText2:
-	text "If your #mon is"
-	line "hurt, you should"
+	text "If your #mon"
+	line "get hurt, you may"
 
-	para "heal it with this"
-	line "machine."
+	para "heal them with"
+	line "this machine."
 
 	para "Feel free to use"
 	line "it anytime."
@@ -623,55 +531,121 @@ ElmAdventureText3Min:
 	line "first timer."
 	done
 
-HaveFunText:
-	text "Have fun out there"
-	line "<PLAYER>"
-	done
+ElmsLabHealingMachine:
+	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
+	iftrue .CanHeal
+	jumpthistext
+		text "I wonder what this"
+		line "does?"
+		done
 
-GotElmsNumberText:
-	text "<PLAYER> got Elm's"
-	line "phone number."
-	done
+.CanHeal:
+	opentext
+	writethistext
+		text "Would you like to"
+		line "heal your #mon?"
+		done
+	yesorno
+	iftrue ElmsLabHealingMachine_HealParty
+	endtext
 
-ElmsLabHealingMachineText1:
-	text "I wonder what this"
-	line "does?"
-	done
+ElmsLabHealingMachine_HealParty:
+	special HealParty
+	special SaveMusic
+	playmusic MUSIC_NONE
+	setval HEALMACHINE_ELMS_LAB
+	special HealMachineAnim
+	pause 30
+	special RestoreMusic
+	endtext
 
-ElmsLabHealingMachineText2:
-	text "Would you like to"
-	line "heal your #mon?"
-	done
+AideScript_WalkBalls1:
+	applymovement ELMSLAB_ELMS_AIDE1, AideWalksRight1
+	turnobject PLAYER, DOWN
+	scall AideScript_GiveYouBalls
+	applymovement ELMSLAB_ELMS_AIDE1, AideWalksLeft1
+	end
 
-ElmText_CallYou:
-	text "Elm: <PLAY_G>, I'll"
-	line "call you if any-"
-	cont "thing comes up."
-	done
+AideWalksRight1:
+	step RIGHT
+	step RIGHT
+	turn_head UP
+	step_end
 
-ElmGiveMasterBallText1:
-	text "Elm: Hi, <PLAY_G>!"
-	line "I've this for you."
+AideWalksLeft1:
+	step LEFT
+	step LEFT
+	turn_head DOWN
+	step_end
 
-	para "It's Master Ball!"
-	done
+AideScript_WalkBalls2:
+	applymovement ELMSLAB_ELMS_AIDE1, AideWalksRight2
+	turnobject PLAYER, DOWN
+	scall AideScript_GiveYouBalls
+	applymovement ELMSLAB_ELMS_AIDE1, AideWalksLeft2
+	end
 
-ElmGiveMasterBallText2:
-	text "It's the ultimate"
-	line "ball! It'll catch"
-	cont "any #mon with-"
-	cont "out fail."
+AideWalksRight2:
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	turn_head UP
+	step_end
 
-	para "You'll make better"
-	line "use of it than I."
-	done
+AideWalksLeft2:
+	step LEFT
+	step LEFT
+	step LEFT
+	turn_head DOWN
+	step_end
 
-AideText_GiveYouBalls:
-	text "<PLAY_G>!"
+AideScript_GiveYouBalls:
+	opentext
+	isdialogueminimal
+	iftrue .skip1
+	writethistext
+		text "<PLAY_G>!"
 
-	para "Use these on your"
-	line "adventure!"
-	done
+		para "Use these on your"
+		line "adventure!"
+		done
+	promptbutton
+.skip1
+	getitemname STRING_BUFFER_4, POKE_BALL
+	scall AideScript_ReceiveTheBalls
+	giveitem POKE_BALL, 5
+	isdialogueminimal
+	iftrue .skip2
+	writetext AideText_ExplainBalls
+	promptbutton
+.skip2
+	itemnotify
+	setscene SCENE_ELMSLAB_NOOP
+	isdialogueminimal
+	iftrue .skip3
+	writethistext
+		text "Also, take this"
+		line "chart as well!"
+
+		para "It summarizes"
+		line "#mon type"
+		cont "effectiveness."
+		done
+	promptbutton
+.skip3
+	verbosegiveitem TYPE_CHART
+	isdialogueminimal
+	iftrue .skip4
+	writethistext
+		text "All the best to"
+		line "you, <PLAYER>!"
+		done
+	waitbutton
+.skip4
+	endtext
+
+AideScript_ReceiveTheBalls:
+	jumpstd ReceiveItemScript
 
 AideText_ExplainBalls:
 	text "To add to your"
@@ -697,18 +671,13 @@ AideText_ExplainBalls:
 	cont "in Violet City."
 	done
 
-TakeTypeChartText:
-	text "Also, take this"
-	line "chart as well!"
+ElmsLabPC:
+	jumpthistext
+	text "OBSERVATIONS ON"
+	line "#MON EVOLUTION"
 
-	para "It summarizes"
-	line "#mon type"
-	cont "effectiveness."
-	done
-
-AllTheBestToYouText:
-	text "All the best to"
-	line "you, <PLAYER>!"
+	para "…It says on the"
+	line "screen…"
 	done
 
 ElmsLabWindowText:
@@ -722,14 +691,6 @@ ElmsLabTrashcanText:
 	text "The wrapper from"
 	line "the snack Prof.Elm"
 	cont "ate is in there…"
-	done
-
-ElmsLabPCText:
-	text "OBSERVATIONS ON"
-	line "#MON EVOLUTION"
-
-	para "…It says on the"
-	line "screen…"
 	done
 
 WorldNotebook:
@@ -749,10 +710,18 @@ WorldNotebook:
 	sjump .list
 
 .ClassicRoute:
-	writetext WantToReadTheClassicRouteText
-	yesorno
-	iffalse .list
-	writetext ClassicRouteText
+	writethistext
+		text "You are free to"
+		line "traverse Johto as"
+		cont "you see fit but"
+
+		para "if you're new, the"
+		line "suggested way goes"
+		cont "from Route 1 to 19"
+		cont "with exploration"
+		cont "to all things one"
+		cont "may come across."
+		done
 	waitbutton
 	sjump .list
 
@@ -760,8 +729,7 @@ WorldNotebook:
 	sjump .list
 
 .Done:
-	closetext
-	end
+	endtext
 
 .MoveEnchancingAbilitiesHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -785,102 +753,57 @@ AdventuringText:
 	para "Read it?"
 	done
 
-WantToReadTheClassicRouteText:
-	text "You are free to"
-	line "traverse Johto as"
-	cont "you see fit but"
-
-	para "do you want to"
-	line "read how vanilla"
-	cont "#mon Crystal"
-	cont "had players go"
-	cont "through Johto?"
-	done
-
-ClassicRouteText:
-	text "The Classic Route"
-	line "through Johto"
-	cont "goes:"
-
-	para "New Bark Town,"
-	line "Cherrygrove City,"
-	cont "Route 30, 31,"
-	cont "Violet City,"
-	cont "Ruins of Alph,"
-	cont "Route 32,"
-	cont "Union Cave,"
-	cont "Route 33,"
-	cont "Azalea Town,"
-	cont "Ilex Forest,"
-	cont "Route 34,"
-	cont "Goldenrod City,"
-	cont "Route 35,"
-	cont "National Park,"
-	cont "Route 36, 37,"
-	cont "Ecruteak City,"
-	cont "Route 38, 39,"
-	cont "Olivine City,"
-	cont "Light House,"
-	cont "Route 40, 41,"
-	cont "Whirl Islands,"
-	cont "Cianwood City,"
-	cont "Mt.Mortar,"
-	cont "Route 42,"
-	cont "Mahogany Town,"
-	cont "Route 43,"
-	cont "Lake of Rage,"
-	cont "Route 44,"
-	cont "Ice Path,"
-	cont "Blackthorn City,"
-	cont "Dragon's Den,"
-	cont "Route 45, 46,"
-	cont "Tohjo Falls,"
-	cont "Route 27, 26,"
-	cont "Victory Road,"
-	cont "Route 23,"
-	cont "Indigo Plateau and"
-	cont "Mt.Silver."
-	done
-
 ElmsAideScript2:
+	faceplayer
+	pause 10
 	turnobject ELMSLAB_ELMS_AIDE2, UP
-	jumptext AideHelpfulInfoOnBookShelvesText
-
-AideHelpfulInfoOnBookShelvesText:
-	text "Those two rows of"
-	line "bookshelves have"
-	cont "information that I"
-	cont "suspect trainers"
-	cont "may like."
-	done
-
-ElmsLabAdventureTip1:
-	jumptext ElmsLabAdventureTip1Text
+	pause 30
+	jumpthistextfaceplayer
+		text "Those two rows of"
+		line "bookshelves have"
+		cont "information that I"
+		cont "suspect trainers"
+		cont "may like."
+		done
 
 ElmsLabAdventureTip1Text:
 	text "Press Start to"
 	line "open the Menu."
-	done
 
-ElmsLabAdventureTip2:
-	jumptext ElmsLabAdventureTip2Text
+	para "Record your trip"
+	line "with Save!"
+
+	para "Turn ON Fast Boot"
+	line "in Options to load"
+	cont "your Save quicker."
+	done
 
 ElmsLabAdventureTip2Text:
-	text "Record your trip"
-	line "with Save!"
-	done
-
-ElmsLabAdventureTip3:
-	jumptext ElmsLabAdventureTip3Text
-
-ElmsLabAdventureTip3Text:
-	text "Open your Pack and"
+	text "Open your Bag and"
 	line "press Select to"
 	cont "move items."
+
+	para "Press Start in the"
+	line "Bag to auto sort"
+	cont "items per pocket"
+	cont "whether in or out"
+	cont "of battles."
 	done
 
-ElmsLabAdventureTip4:
-	jumptext ElmsLabAdventureTip4Text
+ElmsLabAdventureTip3Text:
+	text "In Options Menu,"
+	line "switching Dialogue"
+	cont "to Minimal will"
+	cont "shorten all story"
+	cont "related, inter-"
+	cont "active NPCs and"
+	cont "Battle Facilities"
+	cont "text."
+	
+	para "Only use if one is"
+	line "familiar with lost"
+	cont "dialogue."
+	done
 
 ElmsLabAdventureTip4Text:
 	text "Check your #mon"
@@ -890,17 +813,23 @@ ElmsLabAdventureTip4Text:
 	line "moves."
 	done
 
-ElmsLabAdventureTip5:
-	jumptext ElmsLabAdventureTip5Text
-
 ElmsLabAdventureTip5Text:
 	text "Press Start in all"
 	line "battles to view"
 	cont "the foe's types."
-	done
+	
+	para "In Options Menu,"
+	line "setting Battles to"
+	cont "Quick, removes a"
+	cont "lot of text such"
+	cont "as effectiveness"
+	cont "to speed up all"
+	cont "battles."
 
-ElmsLabAdventureTip6:
-	jumptext ElmsLabAdventureTip6Text
+	para "Only use if one is"
+	line "familiar with lost"
+	cont "text."
+	done
 
 ElmsLabAdventureTip6Text:
 	text "Weather usually"
@@ -908,58 +837,23 @@ ElmsLabAdventureTip6Text:
 	cont "entering areas."
 	done
 
-ElmsLabAdventureTip7:
-	jumptext ElmsLabAdventureTip7Text
-
 ElmsLabAdventureTip7Text:
 	text "Talk to trainers"
 	line "after battles to"
 	cont "rematch them."
 	done
 
-ElmsLabAdventureTip8:
-	jumptext ElmsLabAdventureTip8Text
-
 ElmsLabAdventureTip8Text:
-	text "Press B twice in"
-	line "wild encounters to"
+	text "In wild battles,"
+	line "press B once to"
+	cont "jump to the Run"
+	cont "Option or twice to"
 	cont "quickly escape."
+	
+	para "Holding B down"
+	line "will turbo through"
+	cont "text."
 	done
 
 ElmsLabPorygonPCScript:
 	jumpstd PorygonPCScript
-
-ElmsLab_MapEvents:
-	def_warp_events
-	warp_event  4, 11, NEW_BARK_TOWN, 2
-	warp_event  5, 11, NEW_BARK_TOWN, 2
-
-	def_coord_events
-	coord_event  4,  6, SCENE_ELMSLAB_CANT_LEAVE, LabTryToLeaveScript
-	coord_event  5,  6, SCENE_ELMSLAB_CANT_LEAVE, LabTryToLeaveScript
-	coord_event  4,  8, SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS, AideScript_WalkBalls1
-	coord_event  5,  8, SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS, AideScript_WalkBalls2
-
-	def_bg_events
-	bg_event  2,  1, BGEVENT_READ, ElmsLabHealingMachine
-	bg_event  0,  7, BGEVENT_READ, ElmsLabAdventureTip1
-	bg_event  1,  7, BGEVENT_READ, ElmsLabAdventureTip2
-	bg_event  2,  7, BGEVENT_READ, ElmsLabAdventureTip3
-	bg_event  3,  7, BGEVENT_READ, ElmsLabAdventureTip4
-	bg_event  6,  7, BGEVENT_READ, ElmsLabAdventureTip5
-	bg_event  7,  7, BGEVENT_READ, ElmsLabAdventureTip6
-	bg_event  8,  7, BGEVENT_READ, ElmsLabAdventureTip7
-	bg_event  9,  7, BGEVENT_READ, ElmsLabAdventureTip8
-	bg_event  9,  3, BGEVENT_READ, ElmsLabTrashcan
-	bg_event  5,  0, BGEVENT_READ, ElmsLabWindow
-	bg_event  3,  5, BGEVENT_DOWN, ElmsLabPC
-
-	def_object_events
-	object_event  5,  2, SPRITE_ELM, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ProfElmScript, -1
-	object_event  2,  9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ElmsAideScript1, -1
-	object_event  6,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, CyndaquilPokeBallScript, EVENT_CYNDAQUIL_POKEBALL_IN_ELMS_LAB
-	object_event  7,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TotodilePokeBallScript, EVENT_TOTODILE_POKEBALL_IN_ELMS_LAB
-	object_event  8,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ChikoritaPokeBallScript, EVENT_CHIKORITA_POKEBALL_IN_ELMS_LAB
-	object_event  0,  4, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ElmsLabPorygonPCScript, -1
-	object_event  7,  3, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, WorldNotebook, EVENT_ELMS_TRAVEL_NOTEBOOK
-	object_event  7,  9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ElmsAideScript2, -1
