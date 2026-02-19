@@ -52,8 +52,7 @@ Route1TuscanyCallback:
 	endcallback
 
 CatchingTutorialDudeScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	writethistext
 		text "Hello trainer!"
 		line "Want me to show"
@@ -123,8 +122,7 @@ Route1CooltrainerMScript:
 TuscanyScript:
 	checkevent EVENT_GOT_PINK_BOW_FROM_TUSCANY
 	iftrue_jumptextfaceplayer .TuscanyTuesdayScript
-	opentext
-	faceplayer
+	faceplayeropentext
 	readvar VAR_WEEKDAY
 	ifnotequal TUESDAY, .TuscanyNotTuesdayScript
 	checkevent EVENT_MET_TUSCANY_OF_TUESDAY
