@@ -1223,4 +1223,14 @@ MACRO showthistextfaceplayer
 	db showthistextfaceplayer_command
 ENDM
 
+	const faceplayeropentext_command
+MACRO faceplayeropentext
+	db faceplayeropentext_command
+ENDM
+
+	const waitclosetext_command
+MACRO waitclosetext
+	db waitclosetext_command
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

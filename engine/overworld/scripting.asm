@@ -282,10 +282,20 @@ ScriptCommandTable:
 	dw Script_iftrue_endtext             ;
 	dw Script_iffalse_endtext            ;
 	dw Script_writethistext              ;
-	dw Script_jumpstashedtext            
+	dw Script_jumpstashedtext            ;
 	dw Script_showthistext               ;
 	dw Script_showthistextfaceplayer     ;
+	dw Script_faceplayeropentext         ;
+	dw Script_waitclosetext              ;
 	assert_table_length NUM_EVENT_COMMANDS
+
+Script_faceplayeropentext:
+	call Script_faceplayer
+	jmp Script_opentext
+
+Script_waitclosetext:
+	call Script_waitbutton
+	jmp Script_closetext
 
 Script_showthistextfaceplayer:
 	push hl
