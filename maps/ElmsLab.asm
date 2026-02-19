@@ -473,13 +473,11 @@ ElmGivesPokedexScript:
 	turnobject ELMSLAB_ELM, LEFT
 	opentext
 	writetextcheckdialogue ElmAdventureText2, ElmAdventureText2Min
-	waitbutton
-	closetext
+	waitclosetext
 	turnobject ELMSLAB_ELM, DOWN
 	opentext
 	writetextcheckdialogue ElmAdventureText3, ElmAdventureText3Min
-	waitbutton
-	closetext
+	waitclosetext
 	showemote EMOTE_SHOCK, ELMSLAB_ELM, 15
 	turnobject ELMSLAB_ELM, RIGHT
 	pause 10
@@ -495,8 +493,7 @@ ElmGivesPokedexScript:
 		text "Have fun out there"
 		line "<PLAYER>."
 		done
-	waitbutton
-	closetext
+	waitclosetext
 	turnobject PLAYER, DOWN
 	setevent EVENT_GOT_A_POKEMON_FROM_ELM
 	setscene SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
