@@ -188,34 +188,9 @@ TVText:
 	text "It's a TV."
 	done
 
-HomepageText:
-	text "#MON JOURNAL"
-	line "HOME PAGE…"
-
-	para "It hasn't been"
-	line "updated…"
-	done
-
-; not used
-	text "#MON RADIO!"
-
-	para "Call in with your"
-	line "requests now!"
-	done
-
 TrashCanText:
 	text "There's nothing in"
 	line "here…"
-	done
-
-; not used
-	text "A #MON may be"
-	line "able to move this."
-	done
-
-; not used
-	text "Maybe a #MON"
-	line "can break this."
 	done
 
 PokecenterSignText:
