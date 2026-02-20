@@ -841,11 +841,10 @@ ElmsLabAdventureTip7Text:
 	done
 
 ElmsLabAdventureTip8Text:
-	text "In wild battles,"
-	line "press B once to"
-	cont "jump to the Run"
-	cont "Option or twice to"
-	cont "quickly escape."
+	text "In battles, press"
+	line "the B button to"
+	cont "jump to the lower"
+	cont "right Option."
 	
 	para "Holding B down"
 	line "will turbo through"
