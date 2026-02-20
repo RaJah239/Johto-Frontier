@@ -6,7 +6,7 @@ _2DMenu_::
 	call Draw2DMenu
 	call UpdateSprites
 	call ApplyTilemap
-	jmp Get2DMenuSelection
+	jr Get2DMenuSelection
 
 _InterpretBattleMenu::
 	ld hl, CopyMenuData
@@ -370,7 +370,7 @@ _2DMenuInterpretJoypad:
 	bit A_BUTTON_F, a
 	jmp nz, .finish
 	bit B_BUTTON_F, a
-	jmp nz, .finish
+	jmp nz, .b_button
 	bit SELECT_F, a
 	jmp nz, .finish
 	bit START_F, a
@@ -474,6 +474,13 @@ _2DMenuInterpretJoypad:
 	ld [hl], $1
 .finish
 	xor a
+	ret
+
+.b_button
+	ld a, 2
+	ld [wMenuCursorY], a
+	ld [wMenuCursorX], a
+	xor a ; Clear carry flag, continue menu loop
 	ret
 
 Move2DMenuCursor:
