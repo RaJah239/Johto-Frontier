@@ -287,13 +287,7 @@ ReadTrainerPartyPieces:
     ; fallthrough
 
 .write_evs:
-;rept NUM_STATS
-;	ld [de], a ; 'a' contains EV value
-;	inc de
-;endr
-
-rept 6
-;	ld a, $ff
+rept 3
 	ld [de], a
 	inc de
 	ld [de], a
