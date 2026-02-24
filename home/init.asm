@@ -12,10 +12,6 @@ Reset::
 
 	ld hl, wJoypadDisable
 	set JOYPAD_DISABLE_SGB_TRANSFER_F, [hl]
-
-	ld c, 32
-	call DelayFrames
-
 	jr Init
 
 _Start::
