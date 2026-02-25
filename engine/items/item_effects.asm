@@ -379,7 +379,7 @@ ENDC
 .statuscheck
 	ld b, a
 	ld a, [wEnemyMonStatus]
-	and 1 << FRZ | SLP_MASK
+	and 1 << PSN | BRN | PAR | FRZ | SLP_MASK
 	ld c, 15
 	jr nz, .addstatus
 	ld a, [wEnemyMonStatus]
