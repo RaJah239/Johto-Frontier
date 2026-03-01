@@ -682,9 +682,13 @@ Fast_Travel_Warp:
 	ld [wMenuSelection], a
 	call SetUpTextbox
 .loop
+	ld hl, wOptions
+	set NO_TEXT_SCROLL, [hl]
+	push hl
 	ld hl, .WhereToText
 	call PrintText
-	call DelayFrame
+	pop hl
+	res NO_TEXT_SCROLL, [hl]
 	call UpdateSprites
 	call Fast_Travel_LocationMenu
 	ret z
