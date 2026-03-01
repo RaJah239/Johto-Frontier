@@ -628,7 +628,6 @@ OakSpeech:
 if DEF(_DEBUG)
  	ld hl, wOptions2
 	set FAST_BOOT, [hl]
-	set AUTO_BICYCLE, [hl]
 	set RUNNING_SHOES, [hl]
 	set NURSE_HEAL, [hl]
 
