@@ -1331,3 +1331,24 @@ _HyperEVUpText::
     text "All Effort Values"
     line "were maximized!"
     prompt
+
+_NomadSigilOn::
+    text "The Nomad Sigil"
+    line "radiates freedom!"
+
+    para "Wild encounters,"
+    line "generic trainer"
+    cont "challenges are now"
+    cont "turned Off!"
+
+    para "Whiteouts won't"
+    line "deduct money!"
+    prompt
+
+_NomadSigilOff::
+    text "The Nomad Sigil"
+    line "dims…"
+
+    para "The world returned"
+    line "to normal."
+    prompt

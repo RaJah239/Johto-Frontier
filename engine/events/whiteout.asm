@@ -66,6 +66,12 @@ BattleBGMap:
 	ret
 
 LoseWhiteOutMoney:
+	; check if nomad sigil is turned on
+	; loose no money on white out
+	ld a, [wNomadSigil]
+	and a
+	ret nz
+
 ; Lose money proportional to your badges and highest-level Pokémon.
 	ld hl, wMoney
 ; Check if you have any money

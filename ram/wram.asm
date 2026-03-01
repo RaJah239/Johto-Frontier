@@ -3119,7 +3119,9 @@ wFieldWeather::
 ; like gym trainers
 wNoRematch:: db
 
-	ds 9
+wNomadSigil:: db
+
+	ds 8
 
 ; map scene ids
 wPokecenter2FSceneID::                            db

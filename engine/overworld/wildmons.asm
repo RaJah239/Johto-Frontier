@@ -162,6 +162,13 @@ if DEF(_DEBUG)
 	cp A_BUTTON
 	jr z, .no_battle ; ignore encounters
 endc
+
+	; check if nomad sigil is turned on
+	; prevent wild encounters
+	ld a, [wNomadSigil]
+	and a
+	jr nz, .no_battle ; ignore encounters
+
 ; Try to trigger a wild encounter.
 	call .EncounterRate
 	jr nc, .no_battle

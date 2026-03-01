@@ -23,6 +23,12 @@ _CheckTrainerBattle::
 	push af
 	push de
 
+	; check if nomad sigil
+	; prevent generic trainer challenge 
+	ld a, [wNomadSigil]
+	and a
+	jr nz, .next
+
 ; Has a sprite
 	ld hl, MAPOBJECT_SPRITE
 	add hl, de

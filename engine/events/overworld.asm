@@ -2111,3 +2111,37 @@ CantCutScript:
 CanCutText:
 	text_far _CanCutText
 	text_end
+
+NomadSigilFunction:
+	call .NomadSigilFunction
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+
+.NomadSigilFunction:
+	ld a, [wNomadSigil]
+	xor 1
+	ld [wNomadSigil], a
+	and a
+	ld hl, NomadSigilOn
+	jr nz, .done
+	ld hl, NomadSigilOff
+
+.done
+	call PrintText
+	ld hl, Script_ReloadMap
+	call QueueScript
+	ld a, TRUE
+	ret
+
+Script_ReloadMap:
+	warp NONE, 0, 0
+	end
+
+NomadSigilOn:
+	text_far _NomadSigilOn
+	text_end
+
+NomadSigilOff:
+	text_far _NomadSigilOff
+	text_end

@@ -198,7 +198,7 @@ ItemEffects:
 	dw NoEffect            ; GRIP_CLAW
 	dw NoEffect            ; CATCH_CHARM
 	dw MembersCardEffect   ; MEMBERS_CARD
-	dw NoEffect            ; NOMAD_SIGIL
+	dw NomadSigilEffect    ; NOMAD_SIGIL
 	dw NoEffect            ; ITEM_E0
 	dw NoEffect            ; ITEM_E1
 	dw NoEffect            ; ITEM_E2
@@ -3153,3 +3153,6 @@ CheckFieldActions:
 	ld a, [wOptions3]
 	bit FIELD_ACTIONS, a
 	ret
+
+NomadSigilEffect:
+	farjp NomadSigilFunction
