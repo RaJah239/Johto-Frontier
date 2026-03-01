@@ -264,6 +264,7 @@ ItemNameOrder:
 	db MILOTIC_CALL
 
 ; Key Items that are possibly seldom used
+	db NOMAD_SIGIL
 	db SHINY_CHARM
 	db CLEAR_BELL
 	db SILVER_WING
@@ -283,7 +284,6 @@ ItemNameOrder:
 ; UNUSED ITEMS
 ; Unused Items - 11 total
 	db EGG_TICKET
- 	db ITEM_DF
  	db ITEM_E0
  	db ITEM_E1
  	db ITEM_E2

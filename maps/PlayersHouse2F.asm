@@ -73,6 +73,7 @@ if DEF(_DEBUG)
 	setflag ENGINE_CREDITS_SKIP
 	givemoney YOUR_MONEY, MAX_MONEY
 	; key items
+	giveitem NOMAD_SIGIL
 	giveitem MEMBERS_CARD
 	giveitem TYPE_CHART
 	giveitem BICYCLE

@@ -190,7 +190,7 @@
 	const GRIP_CLAW    ; c3
  	const CATCH_CHARM  ; dc
  	const MEMBERS_CARD
- 	const ITEM_DF
+ 	const NOMAD_SIGIL
  	const ITEM_E0
  	const ITEM_E1
  	const ITEM_E2

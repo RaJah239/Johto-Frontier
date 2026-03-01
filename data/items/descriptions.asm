@@ -185,7 +185,7 @@ ItemDescriptions:
 	dw GripClawDesc
  	dw CatchCharmDesc
 	dw MembersCardDesc
-	dw TeruSama26Desc
+	dw NomadSigilDesc
 	dw TeruSama26Desc
 	dw TeruSama26Desc
 	dw TeruSama26Desc
@@ -1010,6 +1010,10 @@ CatchCharmDesc:
 MembersCardDesc:
 	db   "Displays Battle"
 	next "Tower's streaks.@"
+
+NomadSigilDesc:
+	db   "Grants freedom to"
+	next "roam.@"
 
 TeruSama26Desc:
 TeruSama27Desc:

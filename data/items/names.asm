@@ -184,7 +184,7 @@ ItemNames::
 	li "Grip Claw"
 	li "Catch Charm"
 	li "Member's Card"
-	li "?"
+	li "Nomad Sigil"
 	li "?"
 	li "?"
 	li "?"
