@@ -3356,7 +3356,13 @@ InfoBoxLeftPress:
 .jump_to_page_2
 	call DecreasePage
 	call UpdatePageText
-	jmp StatChangesInfoBox
+	ld hl, wOptions
+	set NO_TEXT_SCROLL, [hl]
+	push hl
+	call StatChangesInfoBox
+	pop hl
+	res NO_TEXT_SCROLL, [hl]
+	ret
 
 .jump_to_page_3
 	call DecreasePage
@@ -3402,7 +3408,13 @@ InfoBoxRightPress:
 .jump_to_page_2
 	call IncreasePage
 	call UpdatePageText
-	jmp StatChangesInfoBox
+	ld hl, wOptions
+	set NO_TEXT_SCROLL, [hl]
+	push hl
+	call StatChangesInfoBox
+	pop hl
+	res NO_TEXT_SCROLL, [hl]
+	ret
 
 .jump_to_page_3
 	call IncreasePage
