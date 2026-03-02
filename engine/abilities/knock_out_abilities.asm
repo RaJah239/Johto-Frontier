@@ -48,14 +48,14 @@ KOBoost:
 	ret
 
 .flash_step
-	; don't boost if at level 2 or higher
+	; don't boost if at level 3 or higher
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [wPlayerSpdLevel]
 	jr z, .got_flash_step_level
 	ld a, [wEnemySpdLevel]
 .got_flash_step_level
-	cp BASE_STAT_LEVEL + 2
+	cp BASE_STAT_LEVEL + 3
 	ret nc
 
 	call ClearFailures
@@ -63,14 +63,14 @@ KOBoost:
 	jmp FlashStepBoost	
 
 .moxie
-	; don't boost if at level 2 or higher
+	; don't boost if at level 3 or higher
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [wPlayerAtkLevel]
 	jr z, .got_moxie_level
 	ld a, [wEnemyAtkLevel]
 .got_moxie_level
-	cp BASE_STAT_LEVEL + 2
+	cp BASE_STAT_LEVEL + 3
 	ret nc
 
 	call ClearFailures
@@ -78,14 +78,14 @@ KOBoost:
 	jmp MoxieBoost
 
 .ignis
-	; don't boost if at level 2 or higher
+	; don't boost if at level 3 or higher
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [wPlayerSAtkLevel]
 	jr z, .got_ignis_level
 	ld a, [wEnemySAtkLevel]
 .got_ignis_level
-	cp BASE_STAT_LEVEL + 2
+	cp BASE_STAT_LEVEL + 3
 	ret nc
 
 	call ClearFailures
@@ -93,14 +93,14 @@ KOBoost:
 	jmp IgnisBoost
 
 .bloodlust
-	; don't boost if attack is at level 2 or higher
+	; don't boost if attack is at level 3 or higher
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [wPlayerAtkLevel]
 	jr z, .got_atk_level
 	ld a, [wEnemyAtkLevel]
 .got_atk_level
-	cp BASE_STAT_LEVEL + 2
+	cp BASE_STAT_LEVEL + 3
 	jr nc, .sp_atk_boost
 
 	call ClearFailures
@@ -109,14 +109,14 @@ KOBoost:
 	; fallthrough
 
 .sp_atk_boost
-	; don't boost if special attack is at level 2 or higher
+	; don't boost if special attack is at level 3 or higher
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [wPlayerSAtkLevel]
 	jr z, .got_sp_atk_level
 	ld a, [wEnemySAtkLevel]
 .got_sp_atk_level
-	cp BASE_STAT_LEVEL + 2
+	cp BASE_STAT_LEVEL + 3
 	ret nc
 
 	call ClearFailures
