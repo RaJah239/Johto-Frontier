@@ -19,7 +19,7 @@ Route2_MapEvents:
 	bg_event 14,  9, BGEVENT_ITEM + POTION, EVENT_ROUTE_2_HIDDEN_POTION
 
 	def_object_events
-	object_event  2, 28, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterJoey, -1
+	object_event  2, 28, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerYoungsterJoey, -1
 	object_event  5, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerYoungsterMikey, -1
 	object_event  1,  7, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 3, TrainerBugCatcherDon, -1
 	object_event  7, 30, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route2YoungsterText_EveryoneIsBattling, -1
@@ -103,7 +103,18 @@ Route2BerryTeacherMovementExits:
 	step_end
 
 TrainerYoungsterJoey:
-	trainer YOUNGSTER, JOEY1, EVENT_BEAT_YOUNGSTER_JOEY, .SeenText, .BeatenText, 0, .Script
+	generictrainer YOUNGSTER, JOEY, EVENT_BEAT_YOUNGSTER_JOEY, .SeenText, .BeatenText
+
+.AfterText
+	text "Do I have to have"
+	line "more #mon in"
+	cont "order to battle"
+	cont "better?"
+
+	para "No! I'm sticking"
+	line "with this one no"
+	cont "matter what!"
+	done
 
 .SeenText
 	text "I just lost, so"
@@ -119,146 +130,6 @@ TrainerYoungsterJoey:
 	text "Ack! I lost again!"
 	line "Doggone it!"
 	done
-
-.Script:
-	loadvar VAR_CALLERID, PHONE_YOUNGSTER_JOEY
-	opentext
-	checkevent EVENT_JOEY_HP_UP
-	iftrue .RematchGift
-	checkflag ENGINE_JOEY_READY_FOR_REMATCH
-	iftrue .Rematch
-	checkcellnum PHONE_YOUNGSTER_JOEY
-	iftrue .NumberAccepted
-	checkevent EVENT_JOEY_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskAgain
-	writetext YoungsterJoey1AfterText
-	promptbutton
-	setevent EVENT_JOEY_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .RequestNumber
-
-.AskAgain:
-	scall .AskNumber
-.RequestNumber:
-	askforphonenumber PHONE_YOUNGSTER_JOEY
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, YOUNGSTER, JOEY1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
-
-.Rematch:
-	scall .RematchStd
-	winlosstext .BeatenText, 0
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight4
-	checkevent EVENT_CLEARED_RADIO_TOWER
-	iftrue .LoadFight3
-	checkflag ENGINE_FLYPOINT_OLIVINE
-	iftrue .LoadFight2
-	checkflag ENGINE_FLYPOINT_GOLDENROD
-	iftrue .LoadFight1
-	loadtrainer YOUNGSTER, JOEY1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_JOEY_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer YOUNGSTER, JOEY2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_JOEY_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer YOUNGSTER, JOEY3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_JOEY_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer YOUNGSTER, JOEY4
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_JOEY_READY_FOR_REMATCH
-	end
-
-.LoadFight4:
-	loadtrainer YOUNGSTER, JOEY5
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_JOEY_READY_FOR_REMATCH
-	opentext
-	writetext YoungsterJoeyText_GiveHPUpAfterBattle
-	waitbutton
-	verbosegiveitem HP_UP
-	iffalse .PackFull
-	closetext
-	end
-
-.RematchGift
-	writetext YoungsterJoeyText_GiveHPUpAfterBattleAgain
-	waitbutton
-	verbosegiveitem HP_UP
-	iffalse .PackFull
-	clearevent EVENT_JOEY_HP_UP
-	closetext
-	end	
-
-.AskNumber:
-	jumpstd AskNumber1MScript
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberMScript
-
-.NumberAccepted:
-	jumpstd NumberAcceptedMScript
-
-.NumberDeclined:
-	jumpstd NumberDeclinedMScript
-
-.RematchStd:
-	jumpstd RematchMScript
-
-.PackFull:
-	setevent EVENT_JOEY_HP_UP
-	jumpstd PackFullMScript
-
-YoungsterJoey1AfterText:
-	text "Do I have to have"
-	line "more #MON in"
-
-	para "order to battle"
-	line "better?"
-
-	para "No! I'm sticking"
-	line "with this one no"
-	cont "matter what!"
-	done
-
-YoungsterJoeyText_GiveHPUpAfterBattle:
-	text "I lost again…"
-	line "Gee, you're tough!"
-
-	para "I want you to have"
-	line "this."
-
-	para "Use it to get even"
-	line "tougher, OK?"
-
-	para "I'm going to get"
-	line "tougher too."
-	done
-
-YoungsterJoeyText_GiveHPUpAfterBattleAgain:
-	text "Made space for the"
-	line "HP UP? Take it!"
-	done
-
-
-
-
 
 TrainerYoungsterMikey:
 	generictrainer YOUNGSTER, MIKEY, EVENT_BEAT_YOUNGSTER_MIKEY, .SeenText, .BeatenText
