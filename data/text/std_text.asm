@@ -142,11 +142,11 @@ PictureBookshelfText:
 	done
 
 MagazineBookshelfText:
-	text "#MON magazines…"
-	line "#MON PAL,"
+	text "#mon magazines…"
+	line "#mon Pal,"
 
-	para "#MON HANDBOOK,"
-	line "#MON GRAPH…"
+	para "#mon Handbook,"
+	line "#mon Graph…"
 	done
 
 TeamRocketOathText:
@@ -171,12 +171,12 @@ IncenseBurnerText:
 	done
 
 MerchandiseShelfText:
-	text "Lots of #MON"
+	text "Lots of #mon"
 	line "merchandise!"
 	done
 
 LookTownMapText:
-	text "It's the TOWN MAP."
+	text "It's the Town Map."
 	done
 
 WindowText:
