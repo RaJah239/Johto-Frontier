@@ -543,31 +543,22 @@ PlaceDexEnd::
 	ret
 
 PromptText::
+	push de
 	ld a, [wLinkMode]
 	cp LINK_COLOSSEUM
-	jr z, .ok
-	cp LINK_MOBILE
-	jr z, .ok
-	call LoadBlinkingCursor
-
-.ok
+	call nz, LoadBlinkingCursor
 	call Text_WaitBGMap
 	call PromptButton
 	ld a, [wLinkMode]
 	cp LINK_COLOSSEUM
-	jr z, DoneText
-	cp LINK_MOBILE
-	jr z, DoneText
-	call UnloadBlinkingCursor
+	call nz, UnloadBlinkingCursor
+	pop de
+	; fallthrough
 
 DoneText::
 	pop hl
-	ld de, .stop
 	dec de
 	ret
-
-.stop:
-	text_end
 
 NullChar::
 	ld a, "?"
@@ -662,6 +653,10 @@ PrintTextboxTextAt::
 DoTextUntilTerminator::
 	ld a, [hli]
 	cp TX_END
+	ret z
+	cp "<DONE>"
+	ret z
+	cp "<PROMPT>"
 	ret z
 	call .TextCommand
 	jr DoTextUntilTerminator

@@ -281,7 +281,22 @@ ScriptCommandTable:
 	dw Script_showtextfaceplayer         ;
 	dw Script_iftrue_endtext             ;
 	dw Script_iffalse_endtext            ;
+	dw Script_writethistext              ;
 	assert_table_length NUM_EVENT_COMMANDS
+
+Script_writethistext:
+	ld hl, wScriptPos
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wScriptBank]
+	ld b, a
+	call MapTextbox
+	ld a, l
+	ld [wScriptPos], a
+	ld a, h
+	ld [wScriptPos + 1], a
+	ret
 
 StartScript:
 	ld hl, wScriptFlags

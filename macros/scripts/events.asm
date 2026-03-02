@@ -1203,4 +1203,9 @@ MACRO iffalse_endtext
 	db iffalse_endtext_command
 ENDM
 
+	const writethistext_command
+MACRO writethistext
+	db writethistext_command
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value
