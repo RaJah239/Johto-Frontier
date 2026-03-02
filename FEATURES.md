@@ -1,84 +1,157 @@
 # Features
-- Newbox
-- Nayru62's Super Pokédex: Base stats and info, Move Info (Lvl-Up Moves -> Field Moves (plus lvl learned and/or TM/HM/Move Tutor) -> Egg Moves -> TMs), Detailed area info, Evolution chart, and sprite page showing animated sprites (reflects shiny toggle too)
+- Newbox, a generation 3 styled box system for Pokémon management
+- Nayru62's Super Pokédex: Base stats and info, Move Info (Lvl-Up Moves -> Field Moves (plus lvl learned and/or TM/HM/Move Tutor) -> Egg Moves -> TMs), Detailed area info, Evolution chart, and sprite page showing animated sprites (shiny toggle too!)
+- 60 fps overworld
+- Can't run past spinning Trainers
+- Smooth fading added throughout the game
 - Unique Pokémon party icons
 - Instant Text
+- Hold down the B Button to auto advance/scroll text - stops at end of dialogue, Yes or No and menu boxes
+- "Pokemon" menu is now the default selected option in the Start menu
+- Time, day and weather added to Start Menu
+- Evening added as the fourth time of day (morning: 5am, day: 10am, evening: 5pm, night: 8pm)
+- Evening's wild encounters are 60% of the day's 40% of the night's on each encounter
+- All overworld encounters are set to 4% per tile stepped on, this doubles to 8% when on the bicycle
 - Sped up saving significantly
-
-
-## Pokémon (Changes/Swaps)
-
-- The entire Pokédex of 252 Pokémon can be caught in one game, each infinitely on a single save file
-
+- Press Up and Start on Suicune running screen to bring up the option to delete save file
+- Select + B resets the game
+- Set time in PokéGear
+- "Set Time" added to the Main Menu
+- Display seconds in PokéGear and Main Menu
+- Fruit and Battle pockets added + colored Bag Tabs for easier navigation
+- Press Start to sort items in Pack pockets (Item, Ball, Fruit, Key and Battle) in and out of battles
+- Cheat NPC to New Bark Town
+- Colored trainer card badges and added gym leader's names to their pictures
+- Exp.Share added to Option Menu - 100% Exp to all participants and 50% to non-participants until the player has entered the Hall of Fame, then the entire party receives 100% experience points
+- Color coded starter Pokéballs
+- Displays colored Pokémon pictures in over world
+- Overworld Porygons added throughout the game for PC access
+- Chanseys that heal the player’s party in the overworld added throughout the game
+- View present weather on map change
+- Default outdoor maps have 35% chance of rain and 35% chance of sun unless it is night with exceptions
+- PC usage sped up
+- Animate tiles even when textboxes are open
+- Survive overworld poisoning with 1 HP
+- Fruits and mushrooms respawn every 1,000 steps taken
+- Mart inventory changes with badge count
+- Show quantity already in Pack at Marts, (TMs don't show quantity)
+- Press Down when buying items to get the maximum affordable quantity
+- Link battle or trade Pokémon from the start of the game. Can't trade and battle with vanilla Pokémon Crystal
+- Gender corrected Link Battle/Trade Rooms
+- Can release HM users and overwrite HMs when learning moves
+- Prompt to automatically reuse Repel when one runs out
+- Generation 1 fossils added and a NPC to revive them
+- Stats option always displayed before field moves
+- Press A or B to stop the Bicycle in any downhill environments that forces bike usage
+- Show move names for TMs and HMs when receiving or buying
+- Name Rater can change traded Pokémon names
+- Name Rater and Move Deleter's menu loops to party after use
+- Allow fishing while surfing
+- Headbutting trees, smashing rocks and fishing may yield items if a Pokémon is encountered or not
+- Slot Machines payout adjusted
+- Voltorb flip added to Game Corner
+- Unused Memory Game added to Game Corner
+- Eggs can be released via the PC
+- Eggs hatch at Level 1
+- Egg get laid always after 255 steps
+- Daycare man still gives eggs if refused (he didn't in vanilla)
+- Eggs are not displayed in the healing machine animaton
+- Nidorina and Nidoqueen now have Egg groups and can breed either Nidoran♀ or Nidoran♀. Nidorino and Nidoking can also breed either Nidoran
+- Hatch Room was added to the Day Care out back. Only accessible via Bicycle. The old man appears there if your Pokémon laid any eggs and there’s a Porygon PC as well
+- Day care exp gain has been multiplied by 2 to 13, scales with Pokémon level - high level Pokémon is now a viable option
+- Daycare owners now say how many levels a Pokémon grew by and what level it is presently
+- Pokémon at the daycare gain 1 level per day the player hasn't played the game (minus one, so it doesn't increase every day)
+- Daily Mystery Gift NPC
+- Swarm system reworked to trigger by talking to a NPC daily
+- Correct grammar for plural trainers like Twins
+- Item Finder beep frequency is based on distance to closest hidden item
+- Releasing the beasts registers Entei, Raikou and Suicune in the Pokédex
+- Riakou and Entei are now stationary encounters
+- Sacred Ash doesn't check for a fainted Pokémon to be activated
+- "Call" items added that have the same effect as vanilla Crystal's HMs and surfing Pikachu still has a unique sprite
+- Moves Tutors, Move Relearner and Egg Tutor
+- Trade Back NPC added in Mahogany Town to evolve all Pokémon that require it
+- TMs are not infinite use by design choice but all can be obtained infinitely via the Battle Plaza's mart
+- Cianwood City daily photographer - raises happiness
+- All status conditions boost catch rate of all Pokémon
+- Can Teleport to the last visited Pokémon Centre from anywhere
+- Press A to use Flash in dark caves
 
 ## Battle Related
-
-- Fruit & Battle pockets + Bag Tabs
-- Shiny icon in battle for both Player and Enemy's Pokémon
-- Move Pokémon in party menu with Select button (Only outside Battles)
+- Type Chart changes: Ice resists Water and Electric. Poison is Super Effective vs Normal types
+- Items forbidden and forced Set Mode for all trainers
+- Trainers have no items to use on their Pokémon - just as the player
+- Fairy Type added
+- Frostbite replaced Freeze status
+- Experience points scales: higher level foes = more experience to lower level Pokémon
+- Print stat gain on level up
+- Max level of Pokémon is 50
+- All Pokémon obey regardless if traded or not
+- Press Start to view enemy types in Battle Menu
+- Push B in Battle Menu to go to the bottom right option
+- Quadruple effective and ineffective battle texts added
+- Removed vanilla Crystal's the 25% failure chance for AI status moves
+- Removed vanilla Crystal's the Gym badges boosts
+- Shiny Pokémon chance are now 1/256
+- Shiny icon added for both player and enemy's Pokémon in battle
+- Stat screen Condition added to display levels of happiness
+- Fourth stat page with caught time, level, location, effort values per stat, core trait (hidden power type) and Press Select to view Abilities
+- Move Pokémon in party menu with Select button (only outside battles)
+- Can swap held items of Pokémon outside of battles
 - Battle HUD Update
-- Display held items in battles
-- Pokéball's pocket set to Default in battle
+- All Pokémon DVs get calculated as 15 per stat
+- Show an icon for the current weather and time of day in battle
+- Display if items are held in battles
+- Option to check the Stats of Pokémon when forced switching
+- Physical/Special split added to moves
+- Print perfect accuracy as "---"
+- Added "Moves" to Menu Option in battle
+- Short beeping noise for low HP
+- Pokémon asleep last 1-3 turns
+- Pokéball's pocket set to default in wild encounters
+- Use unique colours for each thrown Pokéball
+- Gain experience from catching Pokémon
 - Effort Values replace Stat Experience, but can max all stats
-- Levitating (up arrow) added in Status Screen, Pokédex and Battle for floating Pokémon
+- Can max out Effort Values on all stats either by battle or item usage alone
+- Earned Effort Values are applied to stats after each battle
+- Don't gain experience at max level but still get Effort Values
+- Trainer's Effort Values scale based on owned badges
+- Levitating (up arrow) icon added in Status Screen, Pokédex and Battle
 - Can rematch any overworld trainer infinitely
+- Lose money proportional to number of badges and lead level Pokémon on whiteout
+- Quick Claw now has an activation text
+- Prevent burning fire types and frostbite on ice types
+- Toxic never misses when used by a Poison type
+- Display TOX instead of PSN if badly poisoned
+- Trapping moves do 1/8 damage each turn
+- Grass type Pokémon are immune to Powder/Spore based moves
+- Sandstorm raises the Special Defense of Rock type Pokémon by 50%
+- Hail raises the Defense of Ice type Pokémon by 50%
+- Music resumes where it left off after a battle
+- While Pokemon are asleep, all moves can't miss
+- Reduced happiness required for Pokémon that evolve via happiness
+- Life Orb still reduces HP with Pokémon that has Magic Guard ability
 
-## Moves (Changes/Swaps)
+## Item Changes
+- Light Ball doubles Pikachu's Attack as well as Special Attack
+- Everstone both prevents evolution and boosts unevolved Pokémon's Defense and Special Defense
+- Repels stops all encounters, regardless of level
 
-- Added: xxx
-- Removed: xxx
-
-
-## Overworld Mechanics
-
-- xxx
-
-
-## Maps
-
-- Changes
-
-## Events
-
-- xxx
-
-
-## Trainers
-
-- xxx
-
-
-## Items
-
-- xxx
-- xxx All of the decorations for your room are available in different places.
-- xxx Earn a Silver Trophy when you beat the Elite 4 and a Gold Trophy when you rematch them at higher levels.
-
+## Move Changes
+- Note: Many moves have been altered, these are just some
+- Focus Energy now adds a +2 critical level instead of +1
+- Spite to always lower PP by 5
+- Healing Light recovers 1/2 Max HP regularly and 2/3 Max HP in harsh sunlight but 1/3 Max HP in any other weather
+- Roar, Whirlwind, and Struggle are unaffected by accuracy or evasion, like Swift
+- Only HM is Fly
+- Explosion no longer halves defense before dealing damage
+- Multi-hit probabilities Updated: 50% for 3 hits, 25% for 4 hits and 12.5% for either 2 or 5 hits
+- Friend Ball increases happiness by 150
+- Lure Ball multiply catch rate by 4 if this is a fishing rod battle
+- Fast Ball multiply catch rate by 4 if enemy's base speed more than or equal to 100
+- Love and Heavy Ball works as intended
 
 ## Bug Fixes
 
 - All known vanilla Bugs and Glitches Fixes
 - Basic Design Flaws
-
-## Changes and Buffs
-
-### Pokémon
-
-- xxx Blastoise is Water/Steel.
-
-### Moves
-
-- xxx Cut is Steel-type, and has 50 power and 100% accuracy.
-
-## Graphics and Music
-
-- xxx Restored original Japanese sprites for Beauty, Fisher, Medium, Sage, and Swimmer♀.
-
-
-## More Tweaks
-
-- xxx Lowercase Pokémon, moves, items, types, names, etc.
-- xxxFast text by default.
-- xxx Stereo sound by default.
-- xxxThird Trainer Card page for Kanto badges.
-- xxx Fourth stats page for capture data formerly told by the Poké Seer.
