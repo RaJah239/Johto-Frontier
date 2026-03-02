@@ -328,7 +328,7 @@ VioletScript:
 	db 4 ; items
 	db "Sacred Ash ×5@"
 	db "Eon Mail   ×1@"
-	db "Crystal   ×11@"
+	db "Crystal    ×5@"
 	db "Cancel@"
 
 VioletIntroText:
@@ -398,7 +398,7 @@ ValueOurTradeText:
 
 PlayerGotFiveSacredAshText:
 	text "<PLAYER> got"
-	line "5 Sacred Ashes!@"
+	line "5× Sacred Ashes!@"
 	sound_item
 	text_promptbutton
 	text_end
@@ -412,7 +412,7 @@ PlayerGotEonMailText:
 
 PlayerGotNinetyElevenCrystalsText:
 	text "<PLAYER> got"
-	line "11 Crystals!@"
+	line "5× Crystals!@"
 	sound_item
 	text_promptbutton
 	text_end
