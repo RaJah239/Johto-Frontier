@@ -321,9 +321,15 @@ Script_jumpstashedtext:
 	ld [wScriptTextAddr], a
 	ld a, [wStashedTextPointer + 1]
 	ld [wScriptTextAddr + 1], a
-	ld b, BANK(JumpTextScript)
-	ld hl, JumpTextScript
+	ld b, BANK(AfterBattleTextScript)
+	ld hl, AfterBattleTextScript
 	jmp ScriptJump
+
+AfterBattleTextScript:
+	opentext
+	repeattext -1, -1
+	waitbutton
+	end
 
 Script_writethistext:
 	ld hl, wScriptPos

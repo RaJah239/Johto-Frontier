@@ -18,6 +18,7 @@ SeenByTrainerScript::
 
 StartBattleWithMapTrainerScript:
 	opentext
+RematchStartBattleWithMapTrainerScript:
 	trainertext TRAINERTEXT_SEEN
 	waitbutton
 	closetext
@@ -35,13 +36,12 @@ RematchScript:
 	scall AlreadyBeatenTrainerScript
 	readmem wNoRematch
 	iftrue .NoRematch
-	opentext
 	writetext AskForARematchText
 	yesorno
 	iffalse .refused
     loadtemptrainer
 	encountermusic
-	sjump StartBattleWithMapTrainerScript
+	sjump RematchStartBattleWithMapTrainerScript
 
 .refused:
 	closetext

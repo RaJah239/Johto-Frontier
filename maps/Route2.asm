@@ -20,8 +20,8 @@ Route2_MapEvents:
 
 	def_object_events
 	object_event  2, 28, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterJoey, -1
-	object_event  5, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 1, TrainerYoungsterMikey, -1
-	object_event  1,  7, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerBugCatcherDon, -1
+	object_event  5, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerYoungsterMikey, -1
+	object_event  1,  7, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 3, TrainerBugCatcherDon, -1
 	object_event  7, 30, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route2YoungsterText_EveryoneIsBattling, -1
 	object_event  2, 13, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route2CooltrainerFText, -1
 	object_event  8, 35, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route2Antidote, EVENT_ROUTE_2_ANTIDOTE
@@ -225,28 +225,6 @@ TrainerYoungsterJoey:
 	setevent EVENT_JOEY_HP_UP
 	jumpstd PackFullMScript
 
-TrainerYoungsterMikey:
-	trainer YOUNGSTER, MIKEY, EVENT_BEAT_YOUNGSTER_MIKEY, YoungsterMikeySeenText, YoungsterMikeyBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext YoungsterMikeyAfterText
-	waitbutton
-	closetext
-	end
-
-TrainerBugCatcherDon:
-	trainer BUG_CATCHER, DON, EVENT_BEAT_BUG_CATCHER_DON, BugCatcherDonSeenText, BugCatcherDonBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext BugCatcherDonAfterText
-	waitbutton
-	closetext
-	end
-
 YoungsterJoey1AfterText:
 	text "Do I have to have"
 	line "more #MON in"
@@ -257,49 +235,6 @@ YoungsterJoey1AfterText:
 	para "No! I'm sticking"
 	line "with this one no"
 	cont "matter what!"
-	done
-
-YoungsterMikeySeenText:
-	text "You're a #MON"
-	line "trainer, right?"
-
-	para "Then you have to"
-	line "battle!"
-	done
-
-YoungsterMikeyBeatenText:
-	text "That's strange."
-	line "I won before."
-	done
-
-YoungsterMikeyAfterText:
-	text "Becoming a good"
-	line "trainer is really"
-	cont "tough."
-
-	para "I'm going to bat-"
-	line "tle other people"
-	cont "to get better."
-	done
-
-BugCatcherDonSeenText:
-	text "Instead of a bug"
-	line "#MON, I found"
-	cont "a trainer!"
-	done
-
-BugCatcherDonBeatenText:
-	text "Argh! You're too"
-	line "strong!"
-	done
-
-BugCatcherDonAfterText:
-	text "I ran out of #"
-	line "BALLS while I was"
-	cont "catching #MON."
-
-	para "I should've bought"
-	line "some more…"
 	done
 
 YoungsterJoeyText_GiveHPUpAfterBattle:
@@ -319,6 +254,59 @@ YoungsterJoeyText_GiveHPUpAfterBattle:
 YoungsterJoeyText_GiveHPUpAfterBattleAgain:
 	text "Made space for the"
 	line "HP UP? Take it!"
+	done
+
+
+
+
+
+TrainerYoungsterMikey:
+	generictrainer YOUNGSTER, MIKEY, EVENT_BEAT_YOUNGSTER_MIKEY, .SeenText, .BeatenText
+
+.AfterText
+	text "Becoming a good"
+	line "trainer is really"
+	cont "tough."
+
+	para "I'm going to bat-"
+	line "tle other people"
+	cont "to get better."
+	done
+
+.SeenText
+	text "You're a #mon"
+	line "trainer, right?"
+
+	para "Then you have to"
+	line "battle!"
+	done
+
+.BeatenText
+	text "That's strange."
+	line "I won before."
+	done
+
+TrainerBugCatcherDon:
+	generictrainer BUG_CATCHER, DON, EVENT_BEAT_BUG_CATCHER_DON, .SeenText, .BeatenText
+
+.AfterText
+	text "I ran out of #"
+	line "Balls while I was"
+	cont "catching #mon."
+
+	para "I should've bought"
+	line "some more…"
+	done
+
+.SeenText
+	text "Instead of a bug"
+	line "#mon, I found"
+	cont "a trainer!"
+	done
+
+.BeatenText
+	text "Argh! You're too"
+	line "strong!"
 	done
 
 Route2YoungsterText_EveryoneIsBattling:
