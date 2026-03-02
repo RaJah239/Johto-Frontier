@@ -3,6 +3,7 @@ CheckBoostingAbilities:
 	call HandleRivalry
 	call HandleSandForce
 	call HandleTechnician
+	call HandleHugePower
 	call HandleMultiscale
 	call HandleThickFat
 	call HandleSolarPowerBoost
@@ -373,6 +374,16 @@ HandleStrongJaw:
 	jr FiftyPercentBoost
 
 INCLUDE "data/abilities/strong_jaw_mons.asm"
+
+HandleHugePower:
+	call GetCurrentMon
+	ld hl, HugePowerPokemon
+	call IsInByteArray
+	ret nc
+
+	jr HundredPercentBoost
+
+INCLUDE "data/abilities/huge_power_mons.asm"
 
 TwentyPercentNerf:
 	ld a, 80
