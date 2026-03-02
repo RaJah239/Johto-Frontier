@@ -1,8 +1,8 @@
-# WIP Project
+# Johto Frontier
 Ongoing Open World Johto region only game where you can do whatever you want, whenever you want, if anything at all
 
 
-# Johto Frontier
+# General Information
 - Recommended RGBDS version: v 0.7
 - Recommended Emulator: BGB
 - This project is based on [the Pokémon Crystal disassembly](https://github.com/pret/pokecrystal)
@@ -18,3 +18,5 @@ Ongoing Open World Johto region only game where you can do whatever you want, wh
 
 # [Credits](https://github.com/RaJah239/Johto-Frontier/blob/000-Johto-Frontier/CREDITS.md)
 
+# Known Bugs
+- Can turn a direction and get into a wild encounter before actually turning
