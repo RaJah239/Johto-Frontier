@@ -89,7 +89,7 @@
 	const EVENT_GOT_KENYA
 	const EVENT_GAVE_KENYA
 	const EVENT_GOT_HP_UP_FROM_RANDY
-	const EVENT_GOT_TM50_NIGHTMARE
+	const EVENT_GOT_TM_DARK_PULSE
 	const_skip
 	const_skip
 	const_skip

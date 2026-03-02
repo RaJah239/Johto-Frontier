@@ -37,6 +37,137 @@ Route3_MapScripts:
 
 	def_callbacks
 
+Route3MailRecipientScript:
+	faceplayeropentext
+	checkevent EVENT_GOT_TM_DARK_PULSE
+	iftrue .DescribeDarkPulse
+	checkevent EVENT_GOT_KENYA
+	iftrue .TryGiveKenya
+	jumpthisopenedtext
+		text "… Hnuurg… Huh?"
+
+		para "I walked too far"
+		line "today looking for"
+		cont "#mon."
+
+		para "My feet hurt and"
+		line "I'm sleepy…"
+
+		para "If I were a wild"
+		line "#mon, I'd be"
+		cont "easy to catch…"
+
+		para "…Zzzz…"
+		done
+
+.TryGiveKenya:
+	writethistext
+		text "…Zzzz… Huh?"
+
+		para "What's that? You"
+		line "have mail for me?"
+		done
+	promptbutton
+	checkpokemail ReceivedSpearowMailText
+	ifequal POKEMAIL_WRONG_MAIL, .WrongMail
+	ifequal POKEMAIL_REFUSED, .Refused
+	ifequal POKEMAIL_NO_MAIL, .NoMail
+	ifequal POKEMAIL_LAST_MON, .LastMon
+	; POKEMAIL_CORRECT
+	writethistext
+		text "<PLAYER> handed"
+		line "over the #mon"
+		cont "holding the mail."
+		done
+	promptbutton
+	writethistext
+		text "Let's see…"
+
+		para "…Dark Cave leads"
+		line "to another road…"
+
+		para "That's good to"
+		line "know."
+
+		para "Thanks for bring-"
+		line "ing this to me."
+
+		para "My friend's a good"
+		line "guy, and you're"
+		cont "swell too!"
+
+		para "I'd like to do"
+		line "something good in"
+		cont "return too!"
+
+		para "I know! I want you"
+		line "to have this!"
+		done
+	promptbutton
+	setevent EVENT_GAVE_KENYA
+	verbosegiveitem TM_TRICK
+	iffalse_endtext
+	setevent EVENT_GOT_TM_DARK_PULSE
+.DescribeDarkPulse:
+	writethistext
+	text "It's Dark Pulse."
+
+	para "A wicked move! May"
+	line "cause flinching!"
+
+	para "One single extra"
+	line "can swing the tide"
+	cont "of battle!"
+
+	line "Scary…"
+	done
+
+.WrongMail:
+	jumpthisopenedtext
+		text "This mail isn't"
+		line "for me."
+		done
+
+.Refused:
+	jumpthisopenedtext
+		text "What? You don't"
+		line "want anything?"
+		done
+
+.NoMail:
+	jumpthisopenedtext
+		text "Why is this #-"
+		line "mon so special?"
+
+		para "It doesn't have"
+		line "any mail."
+		done
+
+.LastMon:
+	jumpthisopenedtext
+		text "If I take that"
+		line "#mon from you,"
+		cont "what are you going"
+		cont "to use in battle?"
+		done
+
+ReceivedSpearowMailText:
+	db   "Dark Cave leads"
+	next "to another road@"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 TrainerBugCatcherWade1:
 	trainer BUG_CATCHER, WADE1, EVENT_BEAT_BUG_CATCHER_WADE, BugCatcherWade1SeenText, BugCatcherWade1BeatenText, 0, .Script
 
@@ -128,101 +259,24 @@ TrainerBugCatcherWade1:
 
 .AskPhoneNumber:
 	jumpstd AskNumber1MScript
-	end
 
 .RegisterNumber:
 	jumpstd RegisteredNumberMScript
-	end
 
 .AcceptedNumber:
 	jumpstd NumberAcceptedMScript
-	end
 
 .DeclinedNumber:
 	jumpstd NumberDeclinedMScript
-	end
 
 .Rematch:
 	jumpstd RematchMScript
-	end
 
 .Item:
 	jumpstd GiftMScript
-	end
 
 .PackFull:
 	jumpstd PackFullMScript
-	end
-
-Route3MailRecipientScript:
-	faceplayer
-	opentext
-	checkevent EVENT_GOT_TM50_NIGHTMARE
-	iftrue .DescribeNightmare
-	checkevent EVENT_GOT_KENYA
-	iftrue .TryGiveKenya
-	writetext Text_Route3SleepyMan
-	waitbutton
-	closetext
-	end
-
-.TryGiveKenya:
-	writetext Text_Route3SleepyManGotMail
-	promptbutton
-	checkpokemail ReceivedSpearowMailText
-	ifequal POKEMAIL_WRONG_MAIL, .WrongMail
-	ifequal POKEMAIL_REFUSED, .Refused
-	ifequal POKEMAIL_NO_MAIL, .NoMail
-	ifequal POKEMAIL_LAST_MON, .LastMon
-	; POKEMAIL_CORRECT
-	writetext Text_Route3HandOverMailMon
-	promptbutton
-	writetext Text_Route3ReadingMail
-	promptbutton
-	setevent EVENT_GAVE_KENYA
-	verbosegiveitem TM_TRICK
-	iffalse .NoRoomForItems
-	setevent EVENT_GOT_TM50_NIGHTMARE
-.DescribeNightmare:
-	writetext Text_Route3DescribeNightmare
-	waitbutton
-.NoRoomForItems:
-	closetext
-	end
-
-.WrongMail:
-	writetext Text_Route3WrongMail
-	waitbutton
-	closetext
-	end
-
-.NoMail:
-	writetext Text_Route3MissingMail
-	waitbutton
-	closetext
-	end
-
-.Refused:
-	writetext Text_Route3DeclinedToHandOverMail
-	waitbutton
-	closetext
-	end
-
-.LastMon:
-	writetext Text_Route3CantTakeLastMon
-	waitbutton
-	closetext
-	end
-
-ReceivedSpearowMailText:
-	db   "DARK CAVE leads"
-	next "to another road@"
-
-Route3Potion:
-	itemball POTION
-
-Route3PokeBall:
-	itemball POKE_BALL
 
 BugCatcherWade1SeenText:
 	text "I caught a bunch"
@@ -246,101 +300,21 @@ BugCatcherWade1AfterText:
 	cont "BOX automatically."
 	done
 
-Text_Route3SleepyMan:
-	text "… Hnuurg… Huh?"
 
-	para "I walked too far"
-	line "today looking for"
-	cont "#MON."
 
-	para "My feet hurt and"
-	line "I'm sleepy…"
 
-	para "If I were a wild"
-	line "#MON, I'd be"
-	cont "easy to catch…"
 
-	para "…Zzzz…"
-	done
 
-Text_Route3SleepyManGotMail:
-	text "…Zzzz… Huh?"
 
-	para "What's that? You"
-	line "have MAIL for me?"
-	done
 
-Text_Route3HandOverMailMon:
-	text "<PLAYER> handed"
-	line "over the #MON"
-	cont "holding the MAIL."
-	done
 
-Text_Route3ReadingMail:
-	text "Let's see…"
 
-	para "…DARK CAVE leads"
-	line "to another road…"
 
-	para "That's good to"
-	line "know."
 
-	para "Thanks for bring-"
-	line "ing this to me."
 
-	para "My friend's a good"
-	line "guy, and you're"
-	cont "swell too!"
 
-	para "I'd like to do"
-	line "something good in"
-	cont "return too!"
 
-	para "I know! I want you"
-	line "to have this!"
-	done
 
-Text_Route3DescribeNightmare:
-	text "TM50 is NIGHTMARE."
-
-	para "It's a wicked move"
-	line "that steadily cuts"
-
-	para "the HP of a sleep-"
-	line "ing enemy."
-
-	para "Ooooh…"
-	line "That's scary…"
-
-	para "I don't want to"
-	line "have bad dreams."
-	done
-
-Text_Route3WrongMail:
-	text "This MAIL isn't"
-	line "for me."
-	done
-
-Text_Route3MissingMail:
-	text "Why is this #-"
-	line "MON so special?"
-
-	para "It doesn't have"
-	line "any MAIL."
-	done
-
-Text_Route3DeclinedToHandOverMail:
-	text "What? You don't"
-	line "want anything?"
-	done
-
-Text_Route3CantTakeLastMon:
-	text "If I take that"
-	line "#MON from you,"
-
-	para "what are you going"
-	line "to use in battle?"
-	done
 
 Route3CooltrainerMText:
 	text "Dark Cave…"
@@ -373,6 +347,12 @@ Route3SignText:
 DarkCaveSignText:
 	text "Dark Cave"
 	done
+
+Route3Potion:
+	itemball POTION
+
+Route3PokeBall:
+	itemball POKE_BALL
 
 Route3BerryTree:
 	setval BITTER_BERRY
