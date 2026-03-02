@@ -9,11 +9,11 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - Nayru62 - Nayru62's Super Pokédex
 
 # Pokémon Sprites
-- SourApple - Aerodactyl, Ampharos, Spinark, Ariados, Marill, Azumarill, Chikorita, Bayleef, Meganium, Squirtle, Wartortle, Blastoise, Chansey, Blissey, Celebi, Charmander, Charmeleon, Charizard, Chinchou, Lanturn, Clefairy, Clefable, Corsola, Zubat, Golbat, Crobat, Delibird, Doduo, Dodrio, Phanpy, Donphan, Drowzee, Entei, Gastly, Haunter, Gligar, Granbull, Magikarp, Gyarados' back sprite, Heracross, Ho-Oh's front sprite, Houndour, Houndoom, Jynx, Hoothoot, Koffing, Weezing, Larvitar, Tyranitar, Magnemite, Magneton, Mantine, Meowth, Persian, Mewtwo, Miltank, Misdreavus, Natu, Xatu, Nidoran_M, Nidorino, Nidoking, Omastar's back sprite, Pidgey, Pidgeotto, Pidgeot, Swinub, Piloswine, Ponyta, Porygon, Porygon2, Mankey front sprite, Wooper's front sprite, Scyther, Scizor, Skarmory's back sprite, Slowpoke's backs sprite, Slowbro's back sprite, Smeargle's back sprite, Sneasel's back sprite, Staryu, Starmie, Sunflora's back sprite, Tangela's back sprite, eddiursa, Ursaring, Tencruel's front sprite, Togepi's back sprite, Togetic, Yanma, Totodile, Croconaw, Feraligatr, Seadra, Kingdra, Bellsprout, Weepinbell, Victreebel, Electabuzz, Gengar
+- Sour Apple - Aerodactyl, Ampharos, Spinark, Ariados, Marill, Azumarill, Chikorita, Bayleef, Meganium, Squirtle, Wartortle, Blastoise, Chansey, Blissey, Celebi, Charmander, Charmeleon, Charizard, Chinchou, Lanturn, Clefairy, Clefable, Corsola, Zubat, Golbat, Crobat, Delibird, Doduo, Dodrio, Phanpy, Donphan, Drowzee, Entei, Gastly, Haunter, Gligar, Granbull, Magikarp, Gyarados' back sprite, Heracross, Ho-Oh's front sprite, Houndour, Houndoom, Jynx, Hoothoot, Koffing, Weezing, Larvitar, Tyranitar, Magnemite, Magneton, Mantine, Meowth, Persian, Mewtwo, Miltank, Misdreavus, Natu, Xatu, Nidoran_M, Nidorino, Nidoking, Omastar's back sprite, Pidgey, Pidgeotto, Pidgeot, Swinub, Piloswine, Ponyta, Porygon, Porygon2, Mankey front sprite, Wooper's front sprite, Scyther, Scizor, Skarmory's back sprite, Slowpoke's backs sprite, Slowbro's back sprite, Smeargle's back sprite, Sneasel's back sprite, Staryu, Starmie, Sunflora's back sprite, Tangela's back sprite, eddiursa, Ursaring, Tencruel's front sprite, Togepi's back sprite, Togetic, Yanma, Totodile, Croconaw, Feraligatr, Seadra, Kingdra, Bellsprout, Weepinbell, Victreebel, Electabuzz, Gengar
 
 - ShadowOne333 - Suicune's back sprite, Annihilape
 
-- French Orange - Gyarados' front sprite, Gholdengo, Pikachu along with mauvesea
+- French Orange - Gyarados' front sprite, Moltres back sprite, Gholdengo, Pikachu along with mauvesea
 
 - PiaCRT - Gholdengo
 
@@ -50,7 +50,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - CynderQuill - Nown Sprite 
 
 # Party Pokémon Icons
-- SourApple - Aerodactyl, Mareep, Flaffy, Ampharos, Growlithe, Arcanine, Spinark, Ariados, Marill, Azumarill, Chikorita, Bayleef, Meganium, Squirtle, Wartortle, Blastoise, Chansey, Blissey, Celebi, Charmander, Charmeleon, Charizard, Chinchou, Lanturn, Clefairy, Clefable, Corsola, Zubat, Golbat, Crobat, Cyndaquil, Quilava, Typhlosion, Delibird, Seel, Dewgong, Ditto, Doduo, Dodrio, Phanpy, Donphan, Drowzee, Hypno, Egg, Gastly, Haunter, Gengar, Gligar, Snubbull, Muk, Grimer, Granbull, Magikarp, Gyarados, Heracross, Ho-Oh, Houndour, Houndoom, Jynx, Hoothoot, Koffing, Weezing, Lapras, Larvitar, Pupitar, Tyranitar, Magnemite, Mantine, Meowth, Persian, Mew, Mewtwo, Miltank, Misdreavus, Natu, Xatu, Nidoran_M, Nidorino, Nidoking, Nidoran_F, Nidorina, Nidoqueen, Remoraid, Octillery, Omastar, Onix, Pidgey, Pidgeotto, Pidgeot, Swinub, Piloswine, Ponyta, Rapidash, Porygon, Porygon2, Mankey, Primeape, Wooper, Quagsire, Scyther, Scizor, Shuckle, Skarmory, Slowpoke, Slowbro, Smeargle, Sneasel, Snorlax, Stanler, Staryu, Starmie, Sudowoodo, Suicune, Sunkern, Sunflora, Tangela, Tauros, Teddiursa, Ursaring, Tentacool, Togepi, Yanma, Eevee, Umbreon, Horsea, Seadra, Kingdra, Bellsprout, Weepinbell, Victreebel, Electabuzz
+- Sour Apple - Aerodactyl, Mareep, Flaffy, Ampharos, Growlithe, Arcanine, Spinark, Ariados, Marill, Azumarill, Chikorita, Bayleef, Meganium, Squirtle, Wartortle, Blastoise, Chansey, Blissey, Celebi, Charmander, Charmeleon, Charizard, Chinchou, Lanturn, Clefairy, Clefable, Corsola, Zubat, Golbat, Crobat, Cyndaquil, Quilava, Typhlosion, Delibird, Seel, Dewgong, Ditto, Doduo, Dodrio, Phanpy, Donphan, Drowzee, Hypno, Egg, Gastly, Haunter, Gengar, Gligar, Snubbull, Muk, Grimer, Granbull, Magikarp, Gyarados, Heracross, Ho-Oh, Houndour, Houndoom, Jynx, Hoothoot, Koffing, Weezing, Lapras, Larvitar, Pupitar, Tyranitar, Magnemite, Mantine, Meowth, Persian, Mew, Mewtwo, Miltank, Misdreavus, Natu, Xatu, Nidoran_M, Nidorino, Nidoking, Nidoran_F, Nidorina, Nidoqueen, Remoraid, Octillery, Omastar, Onix, Pidgey, Pidgeotto, Pidgeot, Swinub, Piloswine, Ponyta, Rapidash, Porygon, Porygon2, Mankey, Primeape, Wooper, Quagsire, Scyther, Scizor, Shuckle, Skarmory, Slowpoke, Slowbro, Smeargle, Sneasel, Snorlax, Stanler, Staryu, Starmie, Sudowoodo, Suicune, Sunkern, Sunflora, Tangela, Tauros, Teddiursa, Ursaring, Tentacool, Togepi, Yanma, Eevee, Umbreon, Horsea, Seadra, Kingdra, Bellsprout, Weepinbell, Victreebel, Electabuzz
 
 - Party Icons - Chamber, Solo993, Blue Emerald, Lake, Neslug, Pikachu25, Ryta, Koolboyman, Prism Team, LuigiTKO, EeVeeEe1999
 
@@ -59,7 +59,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 # Custom Pokémon Cries
 - Ax6 - Buneary, Chandelure, Darkrai, Drilbur, Duraludon, Excadrill, Lampent, Litwick, Lopunny
 
-- SourApple - Abomasnow, Absol, Altaria, Bagon, Baltoy, Blaziken, Bronzong, Bronzor, Claydol, Cradily, Feebas, Gabite, Garchomp, Gible, Grotle, Hariyama, Lileep, Makuhita, Milotic, Ralts, Regice, Regigigas, Regirock, Registeel, Salamence, Shelgon, Snover, Torterra, Turtwig, Victini
+- Sour Apple - Abomasnow, Absol, Altaria, Bagon, Baltoy, Blaziken, Bronzong, Bronzor, Claydol, Cradily, Feebas, Gabite, Garchomp, Gible, Grotle, Hariyama, Lileep, Makuhita, Milotic, Ralts, Regice, Regigigas, Regirock, Registeel, Salamence, Shelgon, Snover, Torterra, Turtwig, Victini
 
 - PiaCRT - Breloom, Rotom, Shroomish, Sneasler
 
@@ -73,21 +73,41 @@ If you see an error or missing credit in this file, please let me know on [Disco
 
 - Ferropexola - Dartrix, Decidueye, Rowlet
 
-# Pokémon Footprints
-- SourApple - Wooper
-
 # Trainer sprites
 - ShadowOne333 - Chris' overworld sprite
 - rjd1922 - Scientist's overworld sprite
+- MajorAgnostic - Cooltrainer male's overworld sprite update
+- Polished Crystal - Surfing Sprites, Agatha, Blaine, Blue, Brock, Bruno, Bugsy, Lance, Chuck, Clair, Erika, Falkner, Janine, Jasmine, Karen, Lorelei, Misty, Morty, Pryce, Silver, Sabrina, Whitney, Green and Will
+- French Orange - Maxima's trainer sprite
+
+# Other graphics
+- Timkun55 - Male and female bags
+- Sour Apple - sun, rain and sandstorm icons
+- Sour Apple - Wooper footprint
+- Sour Apple - ALL new move animations with new particles
+- AzureKeys - Runic Power's animation
+- LJSTARbird - Time of day battle images
 
 # Code
-- Timkun55 - Lots of general code help, colouring Bag Tabs + Battle icons, Pokédex bug fixes, Bag graphic
+- Pret Team - for all their amazing tutorials
+- Timkun55 - Lots of general code help, colouring Bag Tabs + Battle icons, Pokédex bug fixes, Bag graphic, porting Stat Up + Down animations  and Type Chart from Polished Crystal
 - Grate Oracle Lewot - Lots of code help
-- AndrewC101 - Lots of code used from AndrewC101's amazing Pokémon Abrosia
+- AndrewC101 - Lots of code used from AndrewC101's amazing Pokémon Abrosia including: Mirror trainer code, rematch any generic trainer, Abilities, Press Select on 4th Stat Page to view Abilities, Draft Arena, Mirror Matches, Update to Battle Tower
+- Polished Crystal's amazing team  for lots of code including: second options page, press A to use Flash in dark caves, text commands and more
 - 8bitZeta - General code help
+- FIQ & Sour Apple - custom Battle Palettes
 - 4rdorin - Pokédex bug fixes and general code help
+- Mauvesea - Shiny Charm
 - Idain & MajorAgnostic - Battle HUD Update
-- DamienDoury - Bag Tabs via Rangi42's polishedcrystal
+- CrystalShireEngine (3056ffa) - Smooth fading from PolishedCrystal/Prism
+- TPP - Music resumes where it left off after a battle via Polished Crystal
+- DamienDoury - Bag Tabs via Rangi42's polishedcrystal, Eggs are not displayed in the healing machine animaton, Earned Effort Values are applied to stats after each battlen, Day care exp gain has been multiplied by 2 to 13, scales with Pokémon level, "Pokemon" menu is now the default selected option in the Start menu, Daycare owners now say how many levels a Pokémon grew by and what level it is presently, Pokémon at the daycare gain 1 level per day the player hasn't played the game (minus one, so it doesn't increase every day), Fast Boot, Item Finder beep frequency is based on distance to closest hidden item, Hold down the B Button to auto advance/scroll text - stops at end of dialogue, Yes or No and menu boxes, Wide Lens
+- Dark98 - Display seconds in PokéGear and Main Menu
+- Alice-Not-Waifu - auto lowercase after the first letter
+
+# Music
+- mmmmmmmmmmmmmmmmm - Cave of Origin, RBY Indigo Plateau themes, Vs. Hoenn Champion
+- TriteHexagon: Zinnia Battle
 
 # Acknowledgments
 - Pret Team: https://pret.github.io/pokecrystal
@@ -121,3 +141,9 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - 8bitZeta: https://github.com/8bitZeta
 - DamienDoury: https://github.com/DamienDoury/pokecrystal
 - rjd1922: https://github.com/rjd1922
+- TPP: https://github.com/TwitchPlaysPokemon
+- mmmmmmmmmmmmmmmmm: https://soundcloud.com/mmmmmmmmmmmmmmmmm-1
+- LJSTARbird: https://github.com/LJSTARbird
+- Dark98: https://github.com/Dark98/pokeopencrystal
+- Alice-Not-Waifu: https://github.com/Alice-Not-Waifu/pokecrystal-wrenched
+- TriteHexagon: https://github.com/TriteHexagon
