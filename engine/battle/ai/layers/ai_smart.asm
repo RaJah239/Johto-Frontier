@@ -63,7 +63,6 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_HEAL,             AI_Smart_Heal ; updated
 	dbw EFFECT_TOXIC,            AI_Smart_Toxic ; updated
 	dbw EFFECT_LIGHT_SCREEN,     AI_Smart_LightScreen ; updated
-	dbw EFFECT_OHKO,             AI_Smart_Ohko ; good as is
 	dbw EFFECT_SUPER_FANG,       AI_Smart_SuperFang ; good as is
 	dbw EFFECT_TRAP_TARGET,      AI_Smart_TrapTarget ; good as is
 	dbw EFFECT_CONFUSE,          AI_Smart_Confuse ; updated
@@ -1803,20 +1802,6 @@ AI_Smart_Reflect:
 	jmp nc, StandardEncourage
 
 	jmp StandardDiscourage
-
-AI_Smart_Ohko:
-; Dismiss this move if player's level is higher than enemy's level.
-; Else, discourage this move is player's HP is below 50%.
-
-	ld a, [wBattleMonLevel]
-	ld b, a
-	ld a, [wEnemyMonLevel]
-	cp b
-	jmp c, AIDiscourageMove
-	call AICheckPlayerHalfHP
-	ret c
-	inc [hl]
-	ret
 
 AI_Smart_TrapTarget:
 ; wrap, fire spin, sand tomb, whirlpool

@@ -789,19 +789,6 @@ FlinchHit:
 	flinchtarget
 	endmove
 
-OHKOHit:
-	usedmovetext
-	doturn
-	stab
-	farcommand
-	moveanim
-	failuretext
-	applydamage
-	criticaltext
-	supereffectivetext
-	checkfaint
-	endmove
-
 RecoilHit:
 	usedmovetext
 	doturn

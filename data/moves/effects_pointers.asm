@@ -34,7 +34,6 @@ MoveEffectsPointers:
 	dw Toxic
 	dw LightScreen
 	dw TriAttack
-	dw OHKOHit
 	dw SuperFang
 	dw StaticDamage
 	dw TrapTarget
