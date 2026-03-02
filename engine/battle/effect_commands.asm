@@ -6005,7 +6005,7 @@ BattleCommand_Recoil:
 	ld c, a
 	jr nz, .min_damage
 	inc c
-	jr .min_damage
+	; fallthrough
 
 .min_damage
 	ld a, [hli]
