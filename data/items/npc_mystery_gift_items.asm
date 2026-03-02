@@ -1,35 +1,56 @@
 ; these numbers must between 0-255
+; 10/256 chance to get a berry
+
 NPC_MysteryGiftItems:
+	; eon mail
+	db 1, EON_MAIL
+
 	; recovery items
-	db 10, MOOMOO_MILK
-	db 10, ETHER
-	db 7, MAX_ETHER
-	db 5, ELIXER
-	db 3, MAX_ELIXER
-	db 5, REVIVE
-	db 3, MAX_REVIVE
-	db 1, SACRED_ASH
+	db 9, MOOMOO_MILK
+	db 9, ETHER
+	db 8, MAX_ETHER
+	db 6, ELIXER
+	db 4, MAX_ELIXER
+	db 4, REVIVE
+	db 4, MAX_REVIVE
+	db 2, SACRED_ASH
+
+	; treasure items
+	db 6, SILVER_LEAF
+	db 6, GOLD_LEAF
+	db 6, TINYMUSHROOM
+	db 6, BIG_MUSHROOM
+	db 6, NUGGET
+	db 2, CRYSTAL
+
+	; berries
+	db 6, MIRACLEBERRY
+	db 6, SILVER_BERRY
+	db 6, GOLD_BERRY
 
 	; pokeballs
-	db 12, POKE_BALL
-	db 8, GREAT_BALL
-	db 5, ULTRA_BALL
-	db 1, MASTER_BALL
+	db 8, POKE_BALL
+	db 6, GREAT_BALL
+	db 4, ULTRA_BALL
+	db 2, SHINY_BALL
+	db 2, MASTER_BALL
 
 	; evolution stones
-	db 5, MOON_STONE
-	db 5, SUN_STONE
-	db 5, FIRE_STONE
-	db 5, THUNDERSTONE
-	db 5, WATER_STONE
-	db 5, LEAF_STONE
-	db 5, EVERSTONE
+	db 6, MOON_STONE
+	db 6, SUN_STONE
+	db 6, FIRE_STONE
+	db 6, THUNDERSTONE
+	db 6, WATER_STONE
+	db 6, LEAF_STONE
+	db 6, EVERSTONE
 
 	; vitamins
-	db 5, HP_UP
-	db 5, PROTEIN
-	db 5, IRON
-	db 5, CALCIUM
-	db 5, ZINC
-	db 5, CARBOS
+	db 40, RARE_CANDY
+	db 6, HP_UP
+	db 6, PROTEIN
+	db 6, IRON
+	db 6, CALCIUM
+	db 6, ZINC
+	db 6, CARBOS
+	db 2, HYPER_EV_UP
 	db -1 ; end
