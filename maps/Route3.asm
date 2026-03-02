@@ -1,3 +1,27 @@
+Route3_MapEvents:
+	def_warp_events
+	warp_event  4,  6, ROUTE_3_VIOLET_GATE, 3
+	warp_event  4,  7, ROUTE_3_VIOLET_GATE, 4
+	warp_event 34,  5, DARK_CAVE_VIOLET_ENTRANCE, 1
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  7,  5, BGEVENT_JUMPTEXT, Route3SignText
+	bg_event 31,  5, BGEVENT_JUMPTEXT, DarkCaveSignText
+	bg_event 16,  7, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event 29,  7, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+
+	def_object_events
+	object_event 17,  7, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route3MailRecipientScript, -1
+	object_event  9,  5, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route3YoungsterText, -1
+	object_event 21, 13, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 5, TrainerBugCatcherWade1, -1
+	object_event 27,  8, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_RIGHT, 1, 1, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route3CooltrainerMText, -1
+	object_event 30,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route3Potion, EVENT_ROUTE_3_POTION
+	object_event 19, 15, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route3PokeBall, EVENT_ROUTE_3_POKE_BALL
+	object_event 16,  7, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route3BerryTree, EVENT_ROUTE_3_BERRY
+	object_event 29,  7, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLACK, OBJECTTYPE_SCRIPT, 0, Route3ApricornTree, EVENT_ROUTE_3_APRICORN
+
 	object_const_def
 	const ROUTE3_FISHER
 	const ROUTE3_YOUNGSTER
@@ -194,31 +218,11 @@ ReceivedSpearowMailText:
 	db   "DARK CAVE leads"
 	next "to another road@"
 
-Route3YoungsterScript:
-	jumptextfaceplayer Route3YoungsterText
-
-Route3Sign:
-	jumptext Route3SignText
-
-DarkCaveSign:
-	jumptext DarkCaveSignText
-
-Route3CooltrainerMScript:
-	jumptextfaceplayer Route3CooltrainerMText
-
 Route3Potion:
 	itemball POTION
 
 Route3PokeBall:
 	itemball POKE_BALL
-
-Route3CooltrainerMText:
-	text "DARK CAVE…"
-
-	para "If #MON could"
-	line "light it up, I'd"
-	cont "explore it."
-	done
 
 BugCatcherWade1SeenText:
 	text "I caught a bunch"
@@ -338,121 +342,45 @@ Text_Route3CantTakeLastMon:
 	line "to use in battle?"
 	done
 
+Route3CooltrainerMText:
+	text "Dark Cave…"
+
+	para "If #mon could"
+	line "light it up, I'd"
+	cont "explore it."
+	done
+
 Route3YoungsterText:
 	text "I found a good"
-	line "#MON in DARK"
-	cont "CAVE."
+	line "#mon in Dark"
+	cont "Cave."
 
 	para "I'm going to raise"
 	line "it to take on"
-	cont "FALKNER."
+	cont "Falkner."
 
 	para "He's the leader of"
-	line "VIOLET CITY's GYM."
+	line "Violet City's Gym."
 	done
 
 Route3SignText:
-	text "ROUTE 3"
+	text "Route 3"
 
-	para "VIOLET CITY -"
-	line "CHERRYGROVE CITY"
+	para "Violet City -"
+	line "Cherrygrove City"
 	done
 
 DarkCaveSignText:
-	text "DARK CAVE"
+	text "Dark Cave"
 	done
 
 Route3BerryTree:
-	opentext
-	getitemname STRING_BUFFER_3, BITTER_BERRY
-	writetext Route3TreeText
-	promptbutton
-	writetext Route3HeyItsBerryApricornText
-	promptbutton
-	giveitem BITTER_BERRY
-	iffalse Route3NoRoomInBag
-	disappear ROUTE3_BERRY_TREE
-	writetext Route3FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
+	setval BITTER_BERRY
+	setlasttalked ROUTE3_BERRY_TREE
+	jumpstd BerryOrFruitScript
+
 
 Route3ApricornTree:
-	opentext
-	getitemname STRING_BUFFER_3, BLK_APRICORN
-	writetext Route3TreeText
-	promptbutton
-	writetext Route3HeyItsBerryApricornText
-	promptbutton
-	giveitem BLK_APRICORN
-	iffalse Route3NoRoomInBag
-	disappear ROUTE3_APRICORN_TREE
-	writetext Route3FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
-Route3NoBerryOrApricorn:
-	opentext
-	writetext Route3TreeText
-	promptbutton
-	writetext Route3NothingHereText
-	waitbutton
-	closetext
-	end
-
-Route3NoRoomInBag:
-	writetext Route3NoRoomInBagText
-	waitbutton
-	closetext
-	end
-
-Route3TreeText:
-	text_far _FruitBearingTreeText
-	text_end
-
-Route3NothingHereText:
-	text_far _NothingHereText
-	text_end
-
-Route3HeyItsBerryApricornText:
-	text_far _HeyItsFruitText
-	text_end
-
-Route3FoundItemText:
-	text_far _ObtainedFruitText
-	text_end
-
-Route3NoRoomInBagText:
-	text_far _CantCarryItemText
-	text_end
-
-Route3_MapEvents:
-	def_warp_events
-	warp_event  4,  6, ROUTE_3_VIOLET_GATE, 3
-	warp_event  4,  7, ROUTE_3_VIOLET_GATE, 4
-	warp_event 34,  5, DARK_CAVE_VIOLET_ENTRANCE, 1
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  7,  5, BGEVENT_READ, Route3Sign
-	bg_event 31,  5, BGEVENT_READ, DarkCaveSign
-	bg_event 16,  7, BGEVENT_READ, Route3NoBerryOrApricorn
-	bg_event 29,  7, BGEVENT_READ, Route3NoBerryOrApricorn
-
-	def_object_events
-	object_event 17,  7, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route3MailRecipientScript, -1
-	object_event  9,  5, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route3YoungsterScript, -1
-	object_event 21, 13, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 5, TrainerBugCatcherWade1, -1
-	object_event 27,  8, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_RIGHT, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route3CooltrainerMScript, -1
-	object_event 30,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route3Potion, EVENT_ROUTE_3_POTION
-	object_event 19, 15, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route3PokeBall, EVENT_ROUTE_3_POKE_BALL
-
-
-	object_event 16,  7, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route3BerryTree, EVENT_ROUTE_3_BERRY
-	object_event 29,  7, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLACK, OBJECTTYPE_SCRIPT, 0, Route3ApricornTree, EVENT_ROUTE_3_APRICORN
+	setval BLK_APRICORN
+	setlasttalked ROUTE3_APRICORN_TREE
+	jumpstd BerryOrFruitScript
