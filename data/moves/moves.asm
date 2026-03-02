@@ -215,7 +215,7 @@ Moves:
 	move FREEZE_DRY,   EFFECT_FREEZE_DRY,         70, ICE,           SPECIAL,  100, 32,  10
 	move OUTRAGE,      EFFECT_RAMPAGE,           120, DRAGON,        PHYSICAL, 100, 16,   0
 	move SANDSTORM,    EFFECT_SANDSTORM,           0, ROCK,          STATUS,   100,  8,   0
-	move GIGA_DRAIN,   EFFECT_LEECH_HIT,          85, GRASS,         SPECIAL,  100, 24,   0
+	move GIGA_DRAIN,   EFFECT_LEECH_HIT,          80, GRASS,         SPECIAL,  100, 24,   0
 	move FIRE_FANG,    EFFECT_FIRE_FANG,          60, FIRE,          PHYSICAL, 100, 24,  10
 	move CHARM,        EFFECT_ATTACK_DOWN_2,       0, FAIRY,         STATUS,   100, 32,   0
 	move ROLLOUT,      EFFECT_ROLLOUT,            30, ROCK,          PHYSICAL,  95, 32,   0
