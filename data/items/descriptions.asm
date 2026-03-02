@@ -891,7 +891,7 @@ FastBallDesc:
 	next "ing fast #MON.@"
 
 WeatherRockDesc:
-	db   "8-turn priority"
+	db   "16-turn priority"
 	next "weather.@"
 
 LightBallDesc:
