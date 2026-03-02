@@ -579,6 +579,20 @@ CheckEnemyTurn:
 	jr EndTurn
 
 .no_disabled_move
+	; Assault Vest
+	; Taunt enemy when using Assault Vest
+	push hl
+	push bc
+	call GetUserItem
+	ld a, b
+	cp HELD_ASSAULT_VEST
+	pop bc
+	pop hl
+	jr nz, .checkTaunt
+	ld a, 255
+	ld [wEnemyTauntCount], a
+
+.checkTaunt
 	; Taunt
 	; Block enemy move on the turn taunt is used
 	ld a, [wEnemyTauntCount]

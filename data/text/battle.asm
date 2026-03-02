@@ -31,8 +31,10 @@ TargetsSpeedFellText:
 
 TrickText:
 	text "<USER>"
-	line "switched items"
-	cont "with its target!"
+	line "swapped items with"
+	cont "its target and"
+	cont "Disable effects"
+	cont "cleared!"
 	prompt
 
 TrickUserObtainedText:
@@ -1222,13 +1224,17 @@ AlreadyParalyzedText:
 StoleText:
 	text_ram wStringBuffer1
 	text " was"
-	line "stolen!"
+	line "stolen and"
+	cont "Disable effects"
+	cont "cleared!"
 	prompt
 
 KnockOffText:
 	text_ram wStringBuffer1
 	text " was"
-	line "knocked off!"
+	line "knocked off and"
+	cont "Disable effects"
+	cont "cleared!"
 	prompt
 
 CantEscapeNowText:

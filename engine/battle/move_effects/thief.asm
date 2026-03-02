@@ -90,6 +90,8 @@ BattleCommand_Thief:
 
 .stole
 	ld a, [wNamedObjectIndex]
+	cp ASSAULT_VEST
+	jr z, .clear_taunt
 	cp CHOICE_BAND
 	jr z, .handle_choice_item
 	cp CHOICE_SPECS
@@ -110,6 +112,21 @@ BattleCommand_Thief:
 	ld hl, wPlayerSubStatus5
 	res SUBSTATUS_ENCORED, [hl]
 	call SetPlayerTurn
+	jr .continue
+
+.clear_taunt
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .enemy_stole_player_assault_vest
+
+; player stole enemy assault vest
+	xor a
+	ld [wEnemyTauntCount], a
+	jr .continue
+
+.enemy_stole_player_assault_vest
+	xor a
+	ld [wPlayerTauntCount], a
 
 .continue
 .not_choice_item

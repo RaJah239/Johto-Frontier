@@ -64,6 +64,8 @@ BattleCommand_KnockOff:
 
 .handle_choice_item
 	ld a, [wNamedObjectIndex]
+	cp ASSAULT_VEST
+	jr z, .clear_taunt
 	cp CHOICE_BAND
 	jr z, .clear_encore
 	cp CHOICE_SPECS
@@ -82,6 +84,21 @@ BattleCommand_KnockOff:
 .enemy_removed_player_choice
 	ld hl, wPlayerSubStatus5
 	res SUBSTATUS_ENCORED, [hl]
+	jr .continue
+
+.clear_taunt
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .enemy_removed_player_assault_vest
+
+; player removed enemy assault vest
+	xor a
+	ld [wEnemyTauntCount], a
+	jr .continue
+
+.enemy_removed_player_assault_vest
+	xor a
+	ld [wPlayerTauntCount], a
 
 .continue
 	call GetItemName

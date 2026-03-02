@@ -105,6 +105,8 @@ BattleCommand_Trick:
 	res SUBSTATUS_ENCORED, [hl]
 	ld hl, wPlayerSubStatus5
 	res SUBSTATUS_ENCORED, [hl]
+	xor a
+	ld [wEnemyTauntCount], a
 
 .get_target_item
 	ld hl, wEnemyMonItem
@@ -124,4 +126,6 @@ BattleCommand_Trick:
 	res SUBSTATUS_ENCORED, [hl]
 	ld hl, wPlayerSubStatus5
 	res SUBSTATUS_ENCORED, [hl]
+	xor a
+	ld [wPlayerTauntCount], a
 	ret
