@@ -1,3 +1,20 @@
+MrPokemonsHouse_MapEvents:
+	def_warp_events
+	warp_event  2,  7, ROUTE_2, 2
+	warp_event  3,  7, ROUTE_2, 2
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  0,  1, BGEVENT_JUMPTEXT, MrPokemonsHouse_ForeignMagazinesText
+	bg_event  1,  1, BGEVENT_JUMPTEXT, MrPokemonsHouse_ForeignMagazinesText
+	bg_event  6,  1, BGEVENT_JUMPTEXT, MrPokemonsHouse_BrokenComputerText
+	bg_event  7,  1, BGEVENT_JUMPTEXT, MrPokemonsHouse_BrokenComputerText
+	bg_event  6,  4, BGEVENT_JUMPTEXT, MrPokemonsHouse_StrangeCoinsText
+
+	def_object_events
+	object_event  3,  5, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MrPokemonsHouse_MrPokemonScript, -1
+
 	object_const_def
 	const MRPOKEMONSHOUSE_GENTLEMAN
 
@@ -6,18 +23,8 @@ MrPokemonsHouse_MapScripts:
 
 	def_callbacks
 
-MrPokemonsHouse_ForeignMagazines:
-	jumptext MrPokemonsHouse_ForeignMagazinesText
-
-MrPokemonsHouse_BrokenComputer:
-	jumptext MrPokemonsHouse_BrokenComputerText
-
-MrPokemonsHouse_StrangeCoins:
-	jumptext MrPokemonsHouse_StrangeCoinsText
-
 MrPokemonsHouse_MrPokemonScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkevent EVENT_MR_POKEMON_TOGEPI_EGG
 	iffalse .CollectThisEggFirst
 	writetextcheckdialogue MrPokemonTradesSilverLeafText, MrPokemonTradesSilverLeafTextMin
@@ -25,11 +32,22 @@ MrPokemonsHouse_MrPokemonScript:
 	iffalse .LifeIsDelightful
 	checkitem SILVER_LEAF, 10
 	iftrue .TradeForGoldLeaf
-	writetext NotEnoughSilverLeafText
-	waitendtext
+	jumpthisopenedtext
+		text "You don't have the"
+		line "required amount…"
+		done
 
-.CollectThisEggFirst
-	writetext MrPokemonTogepiEggText
+.CollectThisEggFirst:
+	writethistext
+		text "The owners of a"
+		line "Day Care gave me"
+		cont "this Egg but it"
+		cont "needs to be in a"
+		cont "party to hatch."
+
+		para "You can have it,"
+		line "young trainer."
+		done
 	promptbutton
 	readvar VAR_PARTYCOUNT
 	ifequal PARTY_LENGTH, .PartyFull
@@ -37,38 +55,33 @@ MrPokemonsHouse_MrPokemonScript:
 	getstring STRING_BUFFER_4, .eggname
 	callstd ReceiveTogepiEggScript
 	setevent EVENT_MR_POKEMON_TOGEPI_EGG
-.LifeIsDelightful
-	writetext MrPokemonText_GoodLifeText
-	waitendtext
+.LifeIsDelightful:
+	jumpthisopenedtext
+		text "It's a good life!"
+		line "Lots to enjoy!"
+		done
 
 .TradeForGoldLeaf:
 	verbosegiveitem GOLD_LEAF
-	iffalse .NotEnoughSpace
+	iffalse_endtext
 	takeitem SILVER_LEAF, 10
-	writetext MrPokemonThanksForTheTradeText
-	waitendtext
-
-.NotEnoughSpace:
-	writetext NotEnoughSpaceText
-	waitendtext
+	jumpthisopenedtext
+		text "Thanks! Swing by"
+		line "any time!"
+		done
 
 .eggname:
 	db "Egg@"
 
 .PartyFull:
-	writetext MrPokemonFullPartyText
-	waitendtext
+		jumpthisopenedtext
+		text "Oh, no. You can't"
+		line "carry any more"
+		cont "#mon with you."
 
-MrPokemonTogepiEggText:
-	text "The owners of a"
-	line "Day Care gave me"
-	cont "this Egg but it"
-	cont "needs to be in a"
-	cont "party to hatch."
-
-	para "You can have it,"
-	line "young trainer."
-	done
+		para "You'll have to make"
+		line "room for this Egg."
+		done
 
 MrPokemonTradesSilverLeafText:
 	text "I collect the rare"
@@ -88,37 +101,6 @@ MrPokemonTradesSilverLeafTextMin:
 	line "for 1× Gold Leaf?"
 	done
 
-NotEnoughSpaceText:
-	text "Your bag needs"
-	line "more room to take"
-	cont "this."
-	done
-
-
-NotEnoughSilverLeafText:
-	text "You don't have the"
-	line "required amount…"
-	done
-
-MrPokemonThanksForTheTradeText:
-	text "Thanks! Swing by"
-	line "any time!"
-	done
-
-MrPokemonFullPartyText:
-	text "Oh, no. You can't"
-	line "carry any more"
-	cont "#mon with you."
-
-	para "You'll have to make"
-	line "room for this Egg."
-	done
-
-MrPokemonText_GoodLifeText:
-	text "It's a good life!"
-	line "Lots to enjoy!"
-	done
-
 MrPokemonsHouse_ForeignMagazinesText:
 	text "It's packed with"
 	line "foreign magazines."
@@ -129,7 +111,7 @@ MrPokemonsHouse_ForeignMagazinesText:
 
 MrPokemonsHouse_BrokenComputerText:
 	text "It's a big com-"
-	line "puter. Hmm. It's"
+	line "puter. Hmm… It's"
 	cont "broken."
 	
 	para "Maybe he was a"
@@ -143,20 +125,3 @@ MrPokemonsHouse_StrangeCoinsText:
 	para "Maybe they're from"
 	line "another country…"
 	done
-
-MrPokemonsHouse_MapEvents:
-	def_warp_events
-	warp_event  2,  7, ROUTE_2, 2
-	warp_event  3,  7, ROUTE_2, 2
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  0,  1, BGEVENT_READ, MrPokemonsHouse_ForeignMagazines
-	bg_event  1,  1, BGEVENT_READ, MrPokemonsHouse_ForeignMagazines
-	bg_event  6,  1, BGEVENT_READ, MrPokemonsHouse_BrokenComputer
-	bg_event  7,  1, BGEVENT_READ, MrPokemonsHouse_BrokenComputer
-	bg_event  6,  4, BGEVENT_READ, MrPokemonsHouse_StrangeCoins
-
-	def_object_events
-	object_event  3,  5, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MrPokemonsHouse_MrPokemonScript, -1
