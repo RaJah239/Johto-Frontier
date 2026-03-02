@@ -1,5 +1,5 @@
 ; List of all Pokemon that when knocks out or a foe faints
-; infront it, increase its special attack by 1 stage, max 2 stages
+; infront it, increase its special attack by 1 stage, max 3 stages
 
 IgnisPokemon:
 ;	db RAIKOU
