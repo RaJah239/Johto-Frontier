@@ -23,34 +23,49 @@ CherrygroveGymSpeechHouse_MapScripts:
 	def_callbacks
 
 CherrygroveGymSpeechHousePokefanMScript:
-	jumptextfaceplayer CherrygroveGymSpeechHousePokefanMText
+	faceplayeropentext
+	checkevent EVENT_CHERRYGROVE_SACRED_ASH
+	iftrue_jumpopenedtext .JourneyAndGrowth
+	readvar VAR_BADGES
+	ifgreater NUM_JOHTO_BADGES - 1, .AllEightBadges
+	jumpthisopenedtext 
+		text "You're trying to"
+		line "see how good you"
+		cont "are as a #mon"
+		cont "trainer?"
 
-CherrygroveGymSpeechHousePokefanMText:
-	text "You're trying to"
-	line "see how good you"
+		para "If you gather all"
+		line "8 Gym badges, I'll"
+		cont "give you something"
+		cont "for your trouble."
+		done
 
-	para "are as a #MON"
-	line "trainer?"
+.AllEightBadges:
+	writethistext
+		text "Congratulations on"
+		line "collecting all Gym"
+		cont "badges."
 
-	para "You better visit"
-	line "the #MON GYMS"
+		para "Have this!"
+		done
+	promptbutton
+	verbosegiveitem SACRED_ASH
+	iffalse_endtext
+	setevent EVENT_CHERRYGROVE_SACRED_ASH
+	jumpthisopenedtext
+		text "That'll surely be"
+		line "useful to you!"
+		done
 
-	para "all over JOHTO and"
-	line "collect BADGES."
-	
-	para "If you gather them"
-	line "all, I'll give you"
-	cont "something for your"
-	cont "trouble."
+.JourneyAndGrowth:
+	text "Journey and growth"
+	line "go hand in hand."
 	done
 
 CherrygroveGymSpeechHouseBugCatcherText:
-	text "When I get older,"
-	line "I'm going to be a"
-	cont "Gym Leader!"
+	text "Gym Leaders are"
+	line "cool!"
 
-	para "I make my #mon"
-	line "battle with my"
-	cont "friend's to make"
-	cont "them tougher!"
+	para "I want to be one"
+	line "when I grow up."
 	done
