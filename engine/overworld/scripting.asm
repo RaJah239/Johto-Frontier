@@ -747,8 +747,8 @@ Script_specialsound:
 	ld de, SFX_ITEM
 .play
 	call PlaySFX
-	call WaitSFX
-	ret
+	ld c, 30
+	jmp DelayFrames
 
 GetPocketName:
 	farcall CheckItemPocket
