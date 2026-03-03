@@ -15,6 +15,7 @@ StdScripts::
 	add_stdscript SmashRockScript
 	add_stdscript ChanseyPokeCenterScript
 	add_stdscript PokecenterNurseScript
+	add_stdscript ChanseyHealsOWScript
 	add_stdscript TeamRocketOathScript
 	add_stdscript IncenseBurnerScript
 	add_stdscript MerchandiseShelfScript
@@ -51,7 +52,6 @@ StdScripts::
 	add_stdscript PCScript
 	add_stdscript GameCornerCoinVendorScript
 	add_stdscript HappinessCheckScript
-	add_stdscript ChanseyHealsOWScript
 	add_stdscript PorygonPCScript
 	add_stdscript MysteryGiftCarrieScript
 	add_stdscript WanderingOddEggNPCScript
