@@ -30,11 +30,10 @@ GameCornerPrizeMonCheckDex:
 	call ExitAllMenus
 	ret
 
-UnusedSetSeenMon:
+SetMonAsSeen:
 	ld a, [wScriptVar]
 	dec a
-	call SetSeenMon
-	ret
+	jmp SetSeenMon
 
 FindPartyMonAboveLevel:
 	ld a, [wScriptVar]

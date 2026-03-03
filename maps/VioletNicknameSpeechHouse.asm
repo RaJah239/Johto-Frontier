@@ -23,6 +23,8 @@ VioletNicknameSpeechHouse_MapScripts:
 	def_callbacks
 
 VioletNicknameSpeechHouseBirdScript:
+	setval PIDGEY
+	special SetMonAsSeen
 	reanchormap
 	pokepic PIDGEY
 	cry PIDGEY

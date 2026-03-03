@@ -83,11 +83,11 @@ ReleaseTheBeasts:
 	setscene SCENE_BURNEDTOWERB1F_NOOP
 	setevent EVENT_RELEASED_THE_BEASTS
 	setval RAIKOU
-	special UnusedSetSeenMon
+	special SetMonAsSeen
 	setval ENTEI
-	special UnusedSetSeenMon
+	special SetMonAsSeen
 	setval SUICUNE
-	special UnusedSetSeenMon
+	special SetMonAsSeen
 	setmapscene ECRUTEAK_GYM, SCENE_ECRUTEAKGYM_NOOP
 	setmapscene CIANWOOD_CITY, SCENE_CIANWOODCITY_SUICUNE_AND_EUSINE
 	clearevent EVENT_SAW_SUICUNE_AT_CIANWOOD_CITY
