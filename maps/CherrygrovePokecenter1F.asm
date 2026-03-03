@@ -13,7 +13,7 @@ CherrygrovePokecenter1F_MapEvents:
 	object_event  2,  3, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, CherrygrovePokecenter1FFisherText, -1
 	object_event  8,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, CherrygrovePokecenter1FGentlemanText, -1
 	object_event  1,  6, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, CherrygrovePokecenter1FTeacherText, -1
-	object_event  4,  1, SPRITE_CHANSEY, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CherrygrovePokecenterChanseyScript, -1
+	chansey_event  4,  1, PAL_NPC_PINK
 
 	object_const_def
 	const CHERRYGROVEPOKECENTER1F_NURSE
@@ -51,6 +51,3 @@ CherrygrovePokecenter1FTeacherText:
 	para "I traded #mon"
 	line "there already!"
 	done
-
-CherrygrovePokecenterChanseyScript:
-	jumpstd ChanseyPokeCenterScript

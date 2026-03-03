@@ -13,6 +13,7 @@ StdScripts::
 	add_stdscript PokecenterSignScript
 	add_stdscript MartSignScript
 	add_stdscript SmashRockScript
+	add_stdscript ChanseyPokeCenterScript
 	add_stdscript PokecenterNurseScript
 	add_stdscript TeamRocketOathScript
 	add_stdscript IncenseBurnerScript
@@ -52,7 +53,6 @@ StdScripts::
 	add_stdscript HappinessCheckScript
 	add_stdscript ChanseyHealsOWScript
 	add_stdscript PorygonPCScript
-	add_stdscript ChanseyPokeCenterScript
 	add_stdscript MysteryGiftCarrieScript
 	add_stdscript WanderingOddEggNPCScript
 	add_stdscript BerryOrFruitScript

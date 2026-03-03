@@ -141,6 +141,14 @@ MACRO rocksmash_event
 	endc
 ENDM
 
+MACRO chansey_event
+	if _NARG == 3
+		object_event \1, \2, SPRITE_CHANSEY, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, \3, OBJECTTYPE_COMMAND, jumpstd, CHANSEY_POKECENTER_SCRIPT, -1
+	else
+		object_event \1, \2, SPRITE_CHANSEY, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, \3, OBJECTTYPE_COMMAND, jumpstd, CHANSEY_POKECENTER_SCRIPT, \4
+	endc
+ENDM
+
 MACRO trainer
 ;\1: trainer group
 ;\2: trainer id
