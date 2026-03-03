@@ -31,9 +31,6 @@ CianwoodPharmacist:
 	closetext
 	end
 
-CianwoodPharmacyBookshelf:
-	jumpstd DifficultBookshelfScript
-
 PharmacistGiveSecretpotionText:
 	text "Your #MON ap-"
 	line "pear to be fine."
