@@ -1,3 +1,28 @@
+EarlsPokemonAcademy_MapEvents:
+	def_warp_events
+	warp_event  3, 15, VIOLET_CITY, 4
+	warp_event  4, 15, VIOLET_CITY, 4
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  0,  1, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  1,  1, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  3,  0, BGEVENT_READ, AcademyBlackboard
+	bg_event  4,  0, BGEVENT_READ, AcademyBlackboard
+
+	def_object_events
+	object_event  4,  2, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, AcademyEarl, EVENT_EARLS_ACADEMY_EARL
+	object_event  2,  5, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyYoungster1Script, -1
+	object_event  3, 11, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyGameboyKid1Script, -1
+	object_event  4, 11, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyGameboyKid2Script, -1
+	object_event  4,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyYoungster2Script, -1
+	object_event  2,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, AcademyNotebook, -1
+	object_event  4,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MoveEnchancingAbilitiesNotebook, -1
+	object_event  4,  6, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, FleeMonsNotebook, -1
+	object_event  7,  3, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyYoungsterHardModeScript, -1
+	object_event  2,  9, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyTwin1Script, -1
+
 	object_const_def
 	const EARLSPOKEMONACADEMY_EARL
 	const EARLSPOKEMONACADEMY_YOUNGSTER1
@@ -141,9 +166,6 @@ AcademyNotebook:
 .Done:
 	closetext
 	end
-
-AcademyBookshelf:
-	jumpstd DifficultBookshelfScript
 
 AcademyEarlSpinMovement:
 	turn_head DOWN
@@ -579,6 +601,9 @@ FleeMonsNotebookText:
 	cont "asleep will bar"
 	cont "escape."
 
+	para "They all appear"
+	line "in swarms."
+
 	para "Read the list?"
 	done
 
@@ -611,28 +636,3 @@ ListofAllFleeMonsText:
 	cont "Totodile and"
 	cont "Turtwig."
 	done
-
-EarlsPokemonAcademy_MapEvents:
-	def_warp_events
-	warp_event  3, 15, VIOLET_CITY, 4
-	warp_event  4, 15, VIOLET_CITY, 4
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  0,  1, BGEVENT_READ, AcademyBookshelf
-	bg_event  1,  1, BGEVENT_READ, AcademyBookshelf
-	bg_event  3,  0, BGEVENT_READ, AcademyBlackboard
-	bg_event  4,  0, BGEVENT_READ, AcademyBlackboard
-
-	def_object_events
-	object_event  4,  2, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, AcademyEarl, EVENT_EARLS_ACADEMY_EARL
-	object_event  2,  5, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyYoungster1Script, -1
-	object_event  3, 11, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyGameboyKid1Script, -1
-	object_event  4, 11, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyGameboyKid2Script, -1
-	object_event  4,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyYoungster2Script, -1
-	object_event  2,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, AcademyNotebook, -1
-	object_event  4,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MoveEnchancingAbilitiesNotebook, -1
-	object_event  4,  6, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, FleeMonsNotebook, -1
-	object_event  7,  3, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyYoungsterHardModeScript, -1
-	object_event  2,  9, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyTwin1Script, -1
