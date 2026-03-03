@@ -133,6 +133,14 @@ MACRO object_event
 	endc
 ENDM
 
+MACRO rocksmash_event
+	if _NARG == 2
+		object_event \1, \2, SPRITE_ROCK, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumpstd, ROCK_SMASH_SCRIPT, -1
+	else
+		object_event \1, \2, SPRITE_ROCK, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumpstd, ROCK_SMASH_SCRIPT, \3
+	endc
+ENDM
+
 MACRO trainer
 ;\1: trainer group
 ;\2: trainer id
