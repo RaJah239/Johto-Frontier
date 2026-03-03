@@ -12,7 +12,6 @@ PhoneScript_RematchText_Male:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BUG_CATCHER_WADE, .Wade
 	ifequal PHONE_FISHER_RALPH, .Ralph
 	ifequal PHONE_HIKER_ANTHONY, .Anthony
 	ifequal PHONE_CAMPER_TODD, .Todd
@@ -42,11 +41,6 @@ PhoneScript_RematchText_Male:
 
 .Jose:
 	farwritetext JoseBattleRematchText
-	promptbutton
-	end
-
-.Wade:
-	farwritetext WadeBattleRematchText
 	promptbutton
 	end
 

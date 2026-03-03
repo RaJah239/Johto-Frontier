@@ -38,11 +38,6 @@ ReenaForwardScript:
 	promptbutton
 	sjump PhoneScript_HangUpText_Female
 
-WadeNoBerriesScript:
-	farwritetext WadeNoBerriesText
-	promptbutton
-	sjump PhoneScript_HangUpText_Male
-
 RalphNoItemScript:
 	farwritetext RalphImFishingText
 	promptbutton

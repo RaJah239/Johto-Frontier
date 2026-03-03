@@ -22,10 +22,6 @@ ReenaHurryScript:
 	farwritetext ReenaHurryText
 	end
 
-WadeQuickBattleScript:
-	farwritetext WadeQuickBattleText
-	end
-
 RalphReminderScript:
 	farwritetext RalphReminderText
 	end

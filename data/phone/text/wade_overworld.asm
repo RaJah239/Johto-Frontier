@@ -2,12 +2,12 @@ WadeAskNumberText:
 	text "You're awesome!"
 	line "I like you!"
 
-	para "I look for #MON"
+	para "I look for #mon"
 	line "here every day."
 
 	para "When I'm in the"
 	line "grass, I find all"
-	cont "kinds of BERRIES."
+	cont "kinds of Berries."
 
 	para "If you'd like,"
 	line "I'll share some."
@@ -19,9 +19,8 @@ WadeAskNumberText:
 WadeNumberAcceptedText:
 	text "You'll hear from"
 	line "me as soon as I"
-
-	para "find anything that"
-	line "you might like."
+	cont "find anything that"
+	cont "you might like."
 	done
 
 WadeNumberDeclinedText:
@@ -30,20 +29,7 @@ WadeNumberDeclinedText:
 	cont "get my number."
 	done
 
-WadeRematchText:
-	text "I was waiting for"
-	line "you. Let's battle!"
-	done
-
 WadeGiftText:
 	text "Good to see you!"
 	line "This is for you!"
-	done
-
-WadePackFullText:
-	text "Oops, your PACK's"
-	line "full. Too bad."
-
-	para "You should come"
-	line "back for it later."
 	done
