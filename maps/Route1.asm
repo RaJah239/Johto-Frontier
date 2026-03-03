@@ -232,12 +232,10 @@ Route1PinkApricornTree:
 	setval PNK_APRICORN
 	setlasttalked ROUTE1_APRICORN1
 	jumpstd BerryOrFruitScript
-
 Route1BerryTree1:
 	setval BERRY
 	setlasttalked ROUTE1_BERRY1
 	jumpstd BerryOrFruitScript
-
 Route1BerryTree2:
 	setval BERRY
 	setlasttalked ROUTE1_BERRY2
