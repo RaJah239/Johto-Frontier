@@ -16,6 +16,7 @@ StdScripts::
 	add_stdscript ChanseyPokeCenterScript
 	add_stdscript PokecenterNurseScript
 	add_stdscript ChanseyHealsOWScript
+	add_stdscript VariableMartScript
 	add_stdscript TeamRocketOathScript
 	add_stdscript IncenseBurnerScript
 	add_stdscript MerchandiseShelfScript
@@ -57,6 +58,33 @@ StdScripts::
 	add_stdscript WanderingOddEggNPCScript
 	add_stdscript BerryOrFruitScript
 
+VariableMartScript:
+	opentext
+	readvar VAR_BADGES
+	ifgreater 7, .EightBadgesMart
+	ifgreater 6, .SevenBadgesMart
+	ifgreater 4, .FiveBadgesMart
+	ifgreater 2, .ThreeBadgesMart
+	ifgreater 0, .OneBadgeMart
+	pokemart MARTTYPE_STANDARD, MART_NO_BADGES
+	endtext
+
+.OneBadgeMart:
+	pokemart MARTTYPE_STANDARD, MART_ONE_BADGE
+	endtext
+.ThreeBadgesMart:
+	pokemart MARTTYPE_STANDARD, MART_THREE_BADGES
+	endtext
+.FiveBadgesMart:
+	pokemart MARTTYPE_STANDARD, MART_FIVE_BADGES
+	endtext
+.SevenBadgesMart:
+	pokemart MARTTYPE_STANDARD, MART_SEVEN_BADGES
+	endtext
+.EightBadgesMart:
+	pokemart MARTTYPE_STANDARD, MART_EIGHT_BADGES
+	endtext
+
 BerryOrFruitScript:
 	opentext
 	getitemname STRING_BUFFER_3, USE_SCRIPT_VAR
@@ -64,9 +92,8 @@ BerryOrFruitScript:
 	promptbutton
 	farwritetext _HeyItsFruitText
 	verbosegiveitem ITEM_FROM_MEM
-	iffalse .done
+	iffalse_endtext
 	disappear LAST_TALKED
-.done
 	endtext
 
 NoBerryOrFruitScript:

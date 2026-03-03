@@ -204,7 +204,7 @@ MartSevenBadges:
 	db -1 ; end
 
 MartEightBadges:
-	db 17 ; # items
+	db 18 ; # items
 	db POKE_BALL
 	db GREAT_BALL
 	db ULTRA_BALL

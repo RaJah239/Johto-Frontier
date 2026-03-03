@@ -403,6 +403,7 @@ DEF chanseypokecenter     EQUS "ChanseyPokeCenterScript"
 DEF wanderingoddeggnpcscript EQUS "WanderingOddEggNPCScript"
 DEF noberryorfruitscript  EQUS "NoBerryOrFruitScript"
 DEF berryorfruitscript    EQUS "BerryOrFruitScript"
+DEF variablemartscript    EQUS "VariableMartScript"
 
 ; constants/charmap.asm
 charmap "%", "<BSP>"
