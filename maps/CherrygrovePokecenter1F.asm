@@ -9,26 +9,23 @@ CherrygrovePokecenter1F_MapEvents:
 	def_bg_events
 
 	def_object_events
-	object_event  3,  1, SPRITE_NURSE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, CherrygrovePokecenter1FNurseScript, -1
+	heal_event  3,  1, PAL_NPC_PINK
+	chansey_event  4,  1
 	object_event  2,  3, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, CherrygrovePokecenter1FFisherText, -1
 	object_event  8,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, CherrygrovePokecenter1FGentlemanText, -1
 	object_event  1,  6, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, CherrygrovePokecenter1FTeacherText, -1
-	chansey_event  4,  1, PAL_NPC_PINK
 
 	object_const_def
 	const CHERRYGROVEPOKECENTER1F_NURSE
+	const CHERRYGROVEPOKECENTER1F_CHANSEY
 	const CHERRYGROVEPOKECENTER1F_FISHER
 	const CHERRYGROVEPOKECENTER1F_GENTLEMAN
 	const CHERRYGROVEPOKECENTER1F_TEACHER
-	const CHERRYGROVEPOKECENTER1F_CHANSEY
 
 CherrygrovePokecenter1F_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-
-CherrygrovePokecenter1FNurseScript:
-	jumpstd PokecenterNurseScript
 
 CherrygrovePokecenter1FFisherText:
 	text "It's great. I can"
