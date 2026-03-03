@@ -13,27 +13,25 @@ EarlsPokemonAcademy_MapEvents:
 
 	def_object_events
 	object_event  4,  2, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, AcademyEarl, -1
-	object_event  2,  5, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyYoungster1Script, -1
+	object_event  2,  5, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, EarlsPokemonAcademyYoungster1Text, -1
+	object_event  4,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, EarlsPokemonAcademyYoungster2Text, -1
 	object_event  3, 11, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyGameboyKid1Script, -1
-	object_event  4, 11, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyGameboyKid2Script, -1
-	object_event  4,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyYoungster2Script, -1
-	object_event  2,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, AcademyNotebook, -1
-	object_event  4,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MoveEnchancingAbilitiesNotebook, -1
-	object_event  4,  6, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, FleeMonsNotebook, -1
-	object_event  7,  3, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyYoungsterHardModeScript, -1
-	object_event  2,  9, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyTwin1Script, -1
+	object_event  4, 11, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyGameboyKid2Script, -1
+	object_event  4, 10, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, AcademyNotebook, -1
+	object_event  3, 10, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MoveEnchancingAbilitiesNotebook, -1
+	object_event  2, 10, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, FleeMonsNotebook, -1
+	object_event  6, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyYoungsterHardModeScript, -1
 
 	object_const_def
 	const EARLSPOKEMONACADEMY_EARL
 	const EARLSPOKEMONACADEMY_YOUNGSTER1
+	const EARLSPOKEMONACADEMY_YOUNGSTER2
 	const EARLSPOKEMONACADEMY_GAMEBOY_KID1
 	const EARLSPOKEMONACADEMY_GAMEBOY_KID2
-	const EARLSPOKEMONACADEMY_YOUNGSTER2
 	const EARLSPOKEMONACADEMY_POKEDEX1
 	const EARLSPOKEMONACADEMY_POKEDEX2
 	const EARLSPOKEMONACADEMY_POKEDEX3
 	const EARLSPOKEMONACADEMY_YOUNGSTER3
-	const EARLSPOKEMONACADEMY_GIRL1
 
 EarlsPokemonAcademy_MapScripts:
 	def_scene_scripts
@@ -64,91 +62,6 @@ AcademyEarl:
 	waitbutton
 	closetext
 	end
-
-EarlsPokemonAcademyYoungster1Script:
-	jumptextfaceplayer EarlsPokemonAcademyYoungster1Text
-
-EarlsPokemonAcademyGameboyKid1Script:
-	faceplayer
-	opentext
-	writetext EarlsPokemonAcademyGameboyKid1Text
-	waitbutton
-	closetext
-	turnobject EARLSPOKEMONACADEMY_GAMEBOY_KID1, DOWN
-	end
-
-EarlsPokemonAcademyGameboyKid2Script:
-	faceplayer
-	opentext
-	writetext EarlsPokemonAcademyGameboyKid2Text
-	waitbutton
-	closetext
-	turnobject EARLSPOKEMONACADEMY_GAMEBOY_KID2, DOWN
-	end
-
-EarlsPokemonAcademyYoungster2Script:
-	jumptextfaceplayer EarlsPokemonAcademyYoungster2Text
-
-AcademyBlackboard:
-	opentext
-	writetext AcademyBlackboardText
-.Loop:
-	loadmenu .BlackboardMenuHeader
-	_2dmenu
-	closewindow
-	ifequal 1, .Poison
-	ifequal 2, .Paralysis
-	ifequal 3, .Sleep
-	ifequal 4, .Burn
-	ifequal 5, .Frostbite
-	closetext
-	end
-
-.Poison:
-	writetext AcademyPoisonText
-	waitbutton
-	sjump .Loop
-
-.Paralysis:
-	writetext AcademyParalysisText
-	waitbutton
-	sjump .Loop
-
-.Sleep:
-	writetext AcademySleepText
-	waitbutton
-	sjump .Loop
-
-.Burn:
-	writetext AcademyBurnText
-	waitbutton
-	sjump .Loop
-
-.Frostbite:
-	writetext AcademyFrostbiteText
-	waitbutton
-	sjump .Loop
-
-.BlackboardMenuHeader:
-	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 0, 11, 8
-	dw .MenuData
-	db 1 ; default option
-
-.MenuData:
-	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
-	dn 3, 2 ; rows, columns
-	db 5 ; spacing
-	dba .Text
-	dbw BANK(@), NULL
-
-.Text:
-	db "PSN@"
-	db "PAR@"
-	db "SLP@"
-	db "BRN@"
-	db "FRZ@"
-	db "QUIT@"
 
 AcademyNotebook:
 	opentext
@@ -248,113 +161,6 @@ AcademyEarlNoMoreToTeachText:
 
 	para "Good to #MON"
 	line "you must be!"
-	done
-
-EarlsPokemonAcademyYoungster1Text:
-	text "I'm taking notes"
-	line "of the teacher's"
-	cont "lecture."
-
-	para "I'd better copy"
-	line "the stuff on the"
-	cont "blackboard too."
-	done
-
-EarlsPokemonAcademyGameboyKid1Text:
-	text "I traded my best"
-	line "#MON to the"
-	cont "guy beside me."
-	done
-
-EarlsPokemonAcademyGameboyKid2Text:
-	text "Huh? The #MON I"
-	line "just got is hold-"
-	cont "ing something!"
-	done
-
-EarlsPokemonAcademyYoungster2Text:
-	text "A #MON holding"
-	line "a BERRY will heal"
-	cont "itself in battle."
-
-	para "Many other items"
-	line "can be held by"
-	cont "#MON…"
-
-	para "It sure is tough"
-	line "taking notes…"
-	done
-
-AcademyBlackboardText:
-	text "The blackboard"
-	line "describes #MON"
-
-	para "status changes in"
-	line "battle."
-	done
-
-AcademyPoisonText:
-	text "If poisoned, a"
-	line "#MON steadily"
-	cont "loses HP."
-
-	para "Poison lingers"
-	line "after the battle,"
-
-	para "and HP is lost as"
-	line "you walk."
-
-	para "To cure it, use an"
-	line "ANTIDOTE."
-	done
-
-AcademyParalysisText:
-	text "Paralysis reduces"
-	line "speed and may"
-	cont "prevent movement."
-
-	para "It remains after"
-	line "battle, so use"
-	cont "a PARLYZ HEAL."
-	done
-
-AcademySleepText:
-	text "If asleep, your"
-	line "#MON can't make"
-	cont "a move."
-
-	para "A sleeping #MON"
-	line "doesn't wake up"
-	cont "after battle."
-
-	para "Wake it up with"
-	line "an AWAKENING."
-	done
-
-AcademyBurnText:
-	text "A burn steadily"
-	line "consumes HP."
-
-	para "It also reduces"
-	line "attack power."
-
-	para "A burn lingers"
-	line "after battle."
-
-	para "Use a BURN HEAL as"
-	line "the cure."
-	done
-
-AcademyFrostbiteText:
-	text "If your #MON is"
-	line "frostbitten, it'll"
-	cont "gradually lose HP."
-
-	para "Its SPCL.ATK will"
-	line "also be halved."
-
-	para "Thaw it out with"
-	line "an ICE HEAL."
 	done
 
 AcademyNotebookText:
@@ -570,15 +376,6 @@ StrongJawMovesText:
 	cont "Thunder Fang."
 	done
 
-EarlsPokemonAcademyTwin1Script:
-	jumptextfaceplayer NVEText
-
-NVEText:
-	text "Did you know NVE"
-	line "is short for Not"
-	cont "Very Effective?"
-	done
-
 FleeMonsNotebook:
 	opentext
 	writetext FleeMonsNotebookText
@@ -636,3 +433,197 @@ ListofAllFleeMonsText:
 	cont "Totodile and"
 	cont "Turtwig."
 	done
+
+EarlsPokemonAcademyGameboyKid1Script:
+	faceplayeropentext
+	writethistext
+		text "I'm battling my pal"
+		line "here."
+	
+		para "He's not going to"
+		line "see this strategy!"
+		done
+	waitclosetext
+	turnobject EARLSPOKEMONACADEMY_GAMEBOY_KID1, DOWN
+	end
+
+EarlsPokemonAcademyGameboyKid2Script:
+	faceplayeropentext
+	writethistext
+		text "Bro here is play-"
+		line "ing Checkers while"
+		cont "I'm playing Chess!"
+		done
+	waitclosetext
+	turnobject EARLSPOKEMONACADEMY_GAMEBOY_KID2, DOWN
+	end
+
+EarlsPokemonAcademyYoungster2Text:
+	text "A #mon holding"
+	line "a Berry will heal"
+	cont "itself in battle."
+
+	para "Many other items"
+	line "can be held by"
+	cont "#mon…"
+
+	para "It sure is tough"
+	line "taking notes…"
+	done
+
+EarlsPokemonAcademyYoungster1Text:
+	text "I'm taking notes"
+	line "of the teacher's"
+	cont "lecture."
+
+	para "I'd better copy"
+	line "the stuff on the"
+	cont "blackboard too."
+	done
+
+AcademyBlackboard:
+	opentext
+	writethistext
+		text "The blackboard"
+		line "describes #mon"
+		cont "status changes in"
+		cont "battle."
+		done
+.Loop:
+	loadmenu .BlackboardMenuHeader
+	_2dmenu
+	closewindow
+	ifequal 1, .Poison
+	ifequal 2, .Paralysis
+	ifequal 3, .Sleep
+	ifequal 4, .Burn
+	ifequal 5, .Frostbite
+	endtext
+
+.Poison:
+	writethistext
+		text "If poisoned, a"
+		line "#mon looses 1/8"
+		cont "of their Max HP at"
+		cont "the of each turn"
+		cont "unless they knock-"
+		cont "out their foe."
+
+		para "TOX is a stronger"
+		line "version of Poison."
+
+		para "#mon loose 1/16"
+		line "of Max HP first"
+		cont "turn and then it"
+		cont "doubles each turn"
+		cont "after."
+
+		para "Switching #mon"
+		line "changes it to PSN."
+
+		para "Poison lingers"
+		line "after the battle,"
+		cont "and HP is lost as"
+		cont "you walk."
+
+		para "To cure it, use an"
+		line "Antidote."
+		done
+	waitbutton
+	sjump .Loop
+
+.Paralysis:
+	writethistext
+		text "Paralysis quarters"
+		line "speed."
+
+		para "It also has a 50<%>"
+		line "chance to prevent"
+		cont "acting each turn."
+
+		para "It remains after"
+		line "battle, so use"
+		cont "a Parlyz Heal."
+		done
+	waitbutton
+	sjump .Loop
+
+.Sleep:
+	writethistext
+		text "If asleep, your"
+		line "#mon can't make"
+		cont "a move."
+
+		para "Sleep lasts 1 to 3"
+		line "turns."
+
+		para "A sleeping #mon"
+		line "doesn't wake up"
+		cont "after battle."
+
+		para "Wake it up with"
+		line "an Awakening."
+		done
+	waitbutton
+	sjump .Loop
+
+.Burn:
+	writethistext
+		text "A burn steadily"
+		line "consumes 1/8 Max"
+		cont "HP at the end of"
+		cont "each turn provided"
+		cont "the foe doesn't"
+		cont "get knocked out."
+
+		para "It also halves"
+		line "attack power."
+
+		para "A burn lingers"
+		line "after battle."
+
+		para "Use a Burn Heal as"
+		line "the cure."
+		done
+	waitbutton
+	sjump .Loop
+
+.Frostbite:
+	writethistext
+		text "If your #mon is"
+		line "frostbitten, it'll"
+		cont "loose 1/8 of their"
+		cont "Max HP at the end"
+		cont "of each turn if"
+		cont "their foe doesn't"
+		cont "get knocked out."
+
+		para "Its Spcl.Atk will"
+		line "also be halved."
+
+		para "Thaw it out with"
+		line "an Ice Heal."
+		done
+	waitbutton
+	sjump .Loop
+
+.BlackboardMenuHeader:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 0, 0, 11, 8
+	dw .MenuData
+	db 1 ; default option
+
+.MenuData:
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
+	dn 3, 2 ; rows, columns
+	db 5 ; spacing
+	dba .Text
+	dbw BANK(@), NULL
+
+.Text:
+	db "PSN@"
+	db "PAR@"
+	db "SLP@"
+	db "BRN@"
+	db "FRB@"
+	db "QUIT@"
