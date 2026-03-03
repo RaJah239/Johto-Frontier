@@ -1,5 +1,43 @@
+VioletCity_MapEvents:
+	def_warp_events
+	warp_event 31, 25, VIOLET_POKECENTER_1F, 1
+	warp_event  9, 17, VIOLET_MART, 2
+	warp_event 18, 17, VIOLET_GYM, 1
+	warp_event 30, 17, EARLS_POKEMON_ACADEMY, 1
+	warp_event  3, 15, VIOLET_NICKNAME_SPEECH_HOUSE, 1
+	warp_event 21, 29, VIOLET_KYLES_HOUSE, 1
+	warp_event 23,  5, SPROUT_TOWER_1F, 1
+	warp_event 39, 24, ROUTE_3_VIOLET_GATE, 1
+	warp_event 39, 25, ROUTE_3_VIOLET_GATE, 2
+
+	def_coord_events
+
+	def_bg_events
+	bg_event 24, 20, BGEVENT_JUMPTEXT, VioletCitySignText
+	bg_event 15, 17, BGEVENT_JUMPTEXT, VioletGymSignText
+	bg_event 24,  8, BGEVENT_JUMPTEXT, SproutTowerSignText
+	bg_event 27, 17, BGEVENT_JUMPTEXT, EarlsPokemonAcademySignText
+	bg_event 32, 25, BGEVENT_JUMPSTD, POKECENTER_SIGN_SCRIPT
+	bg_event 10, 17, BGEVENT_JUMPSTD, MART_SIGN_SCRIPT
+	bg_event 37, 14, BGEVENT_ITEM + HYPER_POTION, EVENT_VIOLET_CITY_HIDDEN_HYPER_POTION
+	bg_event 14, 29, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event 12, 17, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event 13, 17, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event 13, 29, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+
+	def_object_events
+	object_event 28, 28, SPRITE_LASS, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, VioletCityLassText, -1
+	object_event 24, 14, SPRITE_SUPER_NERD, SPRITEMOVEDATA_WANDER, 1, 2, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, VioletCitySuperNerdText, -1
+	object_event 13, 15, SPRITE_GRAMPS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, VioletCityGrampsText, -1
+	object_event  5, 18, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, VioletCityYoungsterText, -1
+	object_event  4,  1, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, VioletCityPPUp, EVENT_VIOLET_CITY_PP_UP
+	object_event 35,  5, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, VioletCityRareCandy, EVENT_VIOLET_CITY_RARE_CANDY
+	object_event 14, 29, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, VioletCityBerryTree1, EVENT_VIOLET_CITY_BERRY1
+	object_event 13, 29, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, VioletCityBerryTree2, EVENT_VIOLET_CITY_BERRY2
+	object_event 12, 17, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_WHITE, OBJECTTYPE_SCRIPT, 0, VioletCityApricornTree1, EVENT_VIOLET_CITY_APRICORN_1
+	object_event 13, 17, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLACK, OBJECTTYPE_SCRIPT, 0, VioletCityApricornTree2, EVENT_VIOLET_CITY_APRICORN_2
+
 	object_const_def
-	const VIOLETCITY_EARL
 	const VIOLETCITY_LASS
 	const VIOLETCITY_SUPER_NERD
 	const VIOLETCITY_GRAMPS
@@ -21,348 +59,91 @@ VioletCityFlypointCallback:
 	setflag ENGINE_FLYPOINT_VIOLET
 	endcallback
 
-VioletCityEarlScript:
-	applymovement VIOLETCITY_EARL, VioletCitySpinningEarl_MovementData
-	faceplayer
-	opentext
-	writetext Text_EarlAsksIfYouBeatFalkner
-	waitbutton
-	closetext
-	playmusic MUSIC_SHOW_ME_AROUND
-	follow VIOLETCITY_EARL, PLAYER
-	applymovement VIOLETCITY_EARL, VioletCityFollowEarl_MovementData
-	turnobject PLAYER, RIGHT
-	applymovement VIOLETCITY_EARL, VioletCitySpinningEarl_MovementData
-	stopfollow
-	special RestartMapMusic
-	opentext
-	writetext Text_HereTeacherIAm
-	waitbutton
-	closetext
-	applymovement VIOLETCITY_EARL, VioletCitySpinningEarl_MovementData
-	applymovement VIOLETCITY_EARL, VioletCityFinishFollowEarl_MovementData
-	playsound SFX_ENTER_DOOR
-	disappear VIOLETCITY_EARL
-	clearevent EVENT_EARLS_ACADEMY_EARL
-	waitsfx
-	end
-
-VioletCityLassScript:
-	jumptextfaceplayer VioletCityLassText
-
-VioletCitySuperNerdScript:
-	jumptextfaceplayer VioletCitySuperNerdText
-
-VioletCityGrampsScript:
-	jumptextfaceplayer VioletCityGrampsText
-
-VioletCityYoungsterScript:
-	jumptextfaceplayer VioletCityYoungsterText
-
-VioletCitySign:
-	jumptext VioletCitySignText
-
-VioletGymSign:
-	jumptext VioletGymSignText
-
-SproutTowerSign:
-	jumptext SproutTowerSignText
-
-EarlsPokemonAcademySign:
-	jumptext EarlsPokemonAcademySignText
-
-VioletCityPokecenterSign:
-	jumpstd PokecenterSignScript
-
-VioletCityMartSign:
-	jumpstd MartSignScript
-
-VioletCityPPUp:
-	itemball PP_UP
-
-VioletCityRareCandy:
-	itemball RARE_CANDY
-
-VioletCityHiddenHyperPotion:
-	hiddenitem HYPER_POTION, EVENT_VIOLET_CITY_HIDDEN_HYPER_POTION
-
-VioletCityFollowEarl_MovementData:
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	turn_head RIGHT
-	turn_head DOWN
-	turn_head LEFT
-	turn_head UP
-	turn_head RIGHT
-	turn_head DOWN
-	turn_head LEFT
-	step_end
-
-VioletCityFinishFollowEarl_MovementData:
-	step UP
-	step_end
-
-VioletCitySpinningEarl_MovementData:
-	turn_head DOWN
-	turn_head LEFT
-	turn_head UP
-	turn_head RIGHT
-	turn_head DOWN
-	turn_head LEFT
-	turn_head UP
-	turn_head RIGHT
-	turn_head DOWN
-	turn_head LEFT
-	turn_head UP
-	turn_head RIGHT
-	turn_head DOWN
-	turn_head LEFT
-	step_end
-
-Text_EarlAsksIfYouBeatFalkner:
-	text "Hello! You are"
-	line "new trainer, yes?"
-
-	para "Then study you"
-	line "shall! Follow me!"
-	done
-
-Text_HereTeacherIAm:
-	text "Here, teacher I"
-	line "am. Good it is"
-	cont "you study here!"
-
-	para "There are books"
-	line "on the tables."
-
-	para "Read them all!"
-	done
-
 VioletCityLassText:
 	text "Ghosts are rumored"
 	line "to appear in"
-	cont "SPROUT TOWER."
+	cont "Sprout Tower."
 
 	para "They said normal-"
-	line "type #MON moves"
-
-	para "had no effect on"
-	line "ghosts."
+	line "type #mon moves"
+	cont "had no effect on"
+	cont "ghosts."
 	done
 
 VioletCitySuperNerdText:
 	text "Hey, you're a"
-	line "#MON trainer?"
+	line "#mon trainer?"
 
-	para "If you beat the"
-	line "GYM LEADER here,"
-
-	para "you'll be ready"
-	line "for prime time!"
+	para "The Gym should be"
+	line "your present goal."
 	done
 
 VioletCityGrampsText:
-	text "FALKNER, from the"
-	line "VIOLET #MON"
-
-	para "GYM, is a fine"
-	line "trainer!"
+	text "Falkner, from the"
+	line "Violet #mon"
+	cont "Gym, is a fine"
+	cont "trainer!"
 
 	para "He inherited his"
 	line "father's gym and"
-
-	para "has done a great"
-	line "job with it."
+	cont "has done a great"
+	cont "job with it."
 	done
 
 VioletCityYoungsterText:
-	text "I saw a wiggly"
+	text "I saw an odd"
 	line "tree up ahead!"
 
-	para "If you touch it,"
-	line "it squirms and"
-	cont "dances! Cool!"
+	para "If only I could"
+	line "reach it."
 	done
 
 VioletCitySignText:
-	text "VIOLET CITY"
+	text "Violet City"
 
 	para "The City of"
 	line "Nostalgic Scents"
 	done
 
 VioletGymSignText:
-	text "VIOLET CITY"
-	line "#MON GYM"
-	cont "LEADER: FALKNER"
+	text "Violet City"
+	line "#mon Gym"
+	cont "Leader: Falkner"
 
 	para "The Elegant Master"
-	line "of Flying #MON"
+	line "of Flying #mon"
 	done
 
 SproutTowerSignText:
-	text "SPROUT TOWER"
+	text "Sprout Tower"
 
 	para "Experience the"
-	line "Way of #MON"
+	line "Way of #mon"
 	done
 
 EarlsPokemonAcademySignText:
-	text "EARL'S #MON"
-	line "ACADEMY"
+	text "Earl's #mon"
+	line "Academy"
 	done
 
+VioletCityPPUp:
+	itemball PP_UP
+VioletCityRareCandy:
+	itemball RARE_CANDY
+
 VioletCityBerryTree1:
-	opentext
-	getitemname STRING_BUFFER_3, PRZCUREBERRY
-	writetext VioletCityTreeText
-	promptbutton
-	writetext VioletCityHeyItsBerryApricornText
-	promptbutton
-	giveitem PRZCUREBERRY
-	iffalse VioletCityNoRoomInBag
-	disappear VIOLETCITY_BERRY_TREE1
-	writetext VioletCityFoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval PRZCUREBERRY
+	setlasttalked VIOLETCITY_BERRY_TREE1
+	jumpstd BerryOrFruitScript
 VioletCityBerryTree2:
-	opentext
-	getitemname STRING_BUFFER_3, BURNT_BERRY
-	writetext VioletCityTreeText
-	promptbutton
-	writetext VioletCityHeyItsBerryApricornText
-	promptbutton
-	giveitem BURNT_BERRY
-	iffalse VioletCityNoRoomInBag
-	disappear VIOLETCITY_BERRY_TREE2
-	writetext VioletCityFoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval BURNT_BERRY
+	setlasttalked VIOLETCITY_BERRY_TREE2
+	jumpstd BerryOrFruitScript
 VioletCityApricornTree1:
-	opentext
-	getitemname STRING_BUFFER_3, WHT_APRICORN
-	writetext VioletCityTreeText
-	promptbutton
-	writetext VioletCityHeyItsBerryApricornText
-	promptbutton
-	giveitem WHT_APRICORN
-	iffalse VioletCityNoRoomInBag
-	disappear VIOLETCITY_APRICORN_TREE1
-	writetext VioletCityFoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval WHT_APRICORN
+	setlasttalked VIOLETCITY_APRICORN_TREE1
+	jumpstd BerryOrFruitScript
 VioletCityApricornTree2:
-	opentext
-	getitemname STRING_BUFFER_3, BLK_APRICORN
-	writetext VioletCityTreeText
-	promptbutton
-	writetext VioletCityHeyItsBerryApricornText
-	promptbutton
-	giveitem BLK_APRICORN
-	iffalse VioletCityNoRoomInBag
-	disappear VIOLETCITY_APRICORN_TREE2
-	writetext VioletCityFoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
-VioletCityNoBerryOrApricorn:
-	opentext
-	writetext VioletCityTreeText
-	promptbutton
-	writetext VioletCityNothingHereText
-	waitbutton
-	closetext
-	end
-
-VioletCityNoRoomInBag:
-	writetext VioletCityNoRoomInBagText
-	waitbutton
-	closetext
-	end
-
-VioletCityTreeText:
-	text_far _FruitBearingTreeText
-	text_end
-
-VioletCityNothingHereText:
-	text_far _NothingHereText
-	text_end
-
-VioletCityHeyItsBerryApricornText:
-	text_far _HeyItsFruitText
-	text_end
-
-VioletCityFoundItemText:
-	text_far _ObtainedFruitText
-	text_end
-
-VioletCityNoRoomInBagText:
-	text_far _CantCarryItemText
-	text_end
-
-VioletCity_MapEvents:
-	def_warp_events
-	warp_event 31, 25, VIOLET_POKECENTER_1F, 1
-	warp_event  9, 17, VIOLET_MART, 2
-	warp_event 18, 17, VIOLET_GYM, 1
-	warp_event 30, 17, EARLS_POKEMON_ACADEMY, 1
-	warp_event  3, 15, VIOLET_NICKNAME_SPEECH_HOUSE, 1
-	warp_event 21, 29, VIOLET_KYLES_HOUSE, 1
-	warp_event 23,  5, SPROUT_TOWER_1F, 1
-	warp_event 39, 24, ROUTE_3_VIOLET_GATE, 1
-	warp_event 39, 25, ROUTE_3_VIOLET_GATE, 2
-
-	def_coord_events
-
-	def_bg_events
-	bg_event 24, 20, BGEVENT_READ, VioletCitySign
-	bg_event 15, 17, BGEVENT_READ, VioletGymSign
-	bg_event 24,  8, BGEVENT_READ, SproutTowerSign
-	bg_event 27, 17, BGEVENT_READ, EarlsPokemonAcademySign
-	bg_event 32, 25, BGEVENT_READ, VioletCityPokecenterSign
-	bg_event 10, 17, BGEVENT_READ, VioletCityMartSign
-	bg_event 37, 14, BGEVENT_ITEM, VioletCityHiddenHyperPotion
-	bg_event 14, 29, BGEVENT_READ, VioletCityNoBerryOrApricorn
-	bg_event 12, 17, BGEVENT_READ, VioletCityNoBerryOrApricorn
-	bg_event 13, 17, BGEVENT_READ, VioletCityNoBerryOrApricorn
-	bg_event 13, 29, BGEVENT_READ, VioletCityNoBerryOrApricorn
-
-
-
-	def_object_events
-	object_event 18, 18, SPRITE_FISHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, VioletCityEarlScript, EVENT_VIOLET_CITY_EARL
-	object_event 28, 28, SPRITE_LASS, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, VioletCityLassScript, -1
-	object_event 24, 14, SPRITE_SUPER_NERD, SPRITEMOVEDATA_WANDER, 1, 2, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, VioletCitySuperNerdScript, -1
-	object_event 13, 15, SPRITE_GRAMPS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, VioletCityGrampsScript, -1
-	object_event  5, 18, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, VioletCityYoungsterScript, -1
-	object_event  4,  1, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, VioletCityPPUp, EVENT_VIOLET_CITY_PP_UP
-	object_event 35,  5, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, VioletCityRareCandy, EVENT_VIOLET_CITY_RARE_CANDY
-	object_event 14, 29, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, VioletCityBerryTree1, EVENT_VIOLET_CITY_BERRY1
-	object_event 13, 29, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, VioletCityBerryTree2, EVENT_VIOLET_CITY_BERRY2
-	object_event 12, 17, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_WHITE, OBJECTTYPE_SCRIPT, 0, VioletCityApricornTree1, EVENT_VIOLET_CITY_APRICORN_1
-	object_event 13, 17, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLACK, OBJECTTYPE_SCRIPT, 0, VioletCityApricornTree2, EVENT_VIOLET_CITY_APRICORN_2
+	setval BLK_APRICORN
+	setlasttalked VIOLETCITY_APRICORN_TREE2
+	jumpstd BerryOrFruitScript
