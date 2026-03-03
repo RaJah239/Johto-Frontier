@@ -261,7 +261,7 @@ TrainerPicnickerGina1:
 	sjump .PackFull
 
 .AskNumber:
-	jumpstd AskNumber1FScript
+	jumpstd AskNumberFScript
 	end
 
 .RegisteredNumber:

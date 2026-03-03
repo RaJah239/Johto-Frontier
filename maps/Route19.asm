@@ -251,7 +251,7 @@ TrainerCooltrainerfReena:
 	end
 
 .AskNumber:
-	jumpstd AskNumber1FScript
+	jumpstd AskNumberFScript
 	end
 
 .RegisteredNumber:

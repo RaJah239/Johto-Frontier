@@ -219,7 +219,7 @@ TrainerCooltrainerfBeth1:
 	end
 
 .AskNumber:
-	jumpstd AskNumber1FScript
+	jumpstd AskNumberFScript
 	end
 
 .RegisteredNumber:

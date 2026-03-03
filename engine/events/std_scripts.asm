@@ -35,7 +35,7 @@ StdScripts::
 	add_stdscript RematchMScript
 	add_stdscript GiftMScript
 	add_stdscript PackFullMScript
-	add_stdscript AskNumber1FScript
+	add_stdscript AskNumberFScript
 	add_stdscript RegisteredNumberFScript
 	add_stdscript NumberAcceptedFScript
 	add_stdscript NumberDeclinedFScript
@@ -1131,7 +1131,7 @@ PackFullMScript:
 	closetext
 	end
 
-AskNumber1FScript:
+AskNumberFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_POKEFAN_BEVERLY, .Beverly
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth

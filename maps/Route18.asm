@@ -119,7 +119,7 @@ TrainerPicnickerErin1:
 	end
 
 Route18AskNumber:
-	jumpstd AskNumber1FScript
+	jumpstd AskNumberFScript
 	end
 
 Route18RegisteredNumberF:
