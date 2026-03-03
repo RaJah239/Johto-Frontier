@@ -74,8 +74,12 @@ VioletCitySuperNerdText:
 	text "Hey, you're a"
 	line "#mon trainer?"
 
-	para "The Gym should be"
-	line "your present goal."
+	para "Gyms and after the"
+	line "Indigo Plateau"
+	cont "should be your"
+	cont "goals, exploring"
+	cont "along the way too"
+	cont "of course!"
 	done
 
 VioletCityGrampsText:
