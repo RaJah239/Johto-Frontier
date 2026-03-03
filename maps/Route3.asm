@@ -116,8 +116,8 @@ Route3MailRecipientScript:
 	line "cause flinching!"
 
 	para "One single extra"
-	line "can swing the tide"
-	cont "of battle!"
+	line "turn can swing the"
+	cont "tide of battle!"
 
 	line "Scary…"
 	done
