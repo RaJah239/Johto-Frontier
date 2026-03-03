@@ -243,7 +243,7 @@ TrainerSchoolboyChad1:
 	end
 
 .AskPhoneNumber:
-	jumpstd AskNumber1MScript
+	jumpstd AskNumberMScript
 	end
 
 .RegisteredChad:

@@ -195,7 +195,7 @@ TrainerBugCatcherArnie:
 	end
 
 Route7AskNumber:
-	jumpstd AskNumber1MScript
+	jumpstd AskNumberMScript
 	end
 
 Route7RegisteredNumberM:

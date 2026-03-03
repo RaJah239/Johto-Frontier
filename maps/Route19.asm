@@ -125,7 +125,7 @@ TrainerBirdKeeperJose2:
 	sjump .PackFull
 
 .AskNumber:
-	jumpstd AskNumber1MScript
+	jumpstd AskNumberMScript
 	end
 
 .RegisteredNumber:

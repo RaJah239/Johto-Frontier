@@ -72,7 +72,7 @@ TrainerPokefanmDerek:
 	end
 
 .AskNumber:
-	jumpstd AskNumber1MScript
+	jumpstd AskNumberMScript
 	end
 
 .RegisteredNumber:

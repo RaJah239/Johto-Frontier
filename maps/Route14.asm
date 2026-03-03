@@ -111,7 +111,7 @@ TrainerFisherTully:
 	sjump .PackFull
 
 .AskNumber:
-	jumpstd AskNumber1MScript
+	jumpstd AskNumberMScript
 
 .RegisteredNumber:
 	jumpstd RegisteredNumberMScript

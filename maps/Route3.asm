@@ -192,7 +192,7 @@ TrainerRoute3BugCatcher1:
 	waitbutton
 	setevent EVENT_WADE_ASKED_FOR_PHONE_NUMBER
 .AskAgain:
-	callstd AskNumber1MScript
+	callstd AskNumberMScript
 	askforphonenumber PHONE_BUG_CATCHER_WADE
 	ifequal PHONE_CONTACT_REFUSED, .DeclinedNumber
 	gettrainername STRING_BUFFER_3, BUG_CATCHER, WADE1

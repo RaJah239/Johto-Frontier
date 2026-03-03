@@ -167,7 +167,7 @@ TrainerHikerParry:
 	end
 
 Route17AskNumber:
-	jumpstd AskNumber1MScript
+	jumpstd AskNumberMScript
 	end
 
 Route17RegisteredNumberM:

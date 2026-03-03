@@ -112,7 +112,7 @@ TrainerCooltrainermGaven3:
 	end
 
 .AskNumber:
-	jumpstd AskNumber1MScript
+	jumpstd AskNumberMScript
 	end
 
 .RegisteredNumber:

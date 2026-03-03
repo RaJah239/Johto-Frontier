@@ -119,7 +119,7 @@ TrainerBirdKeeperVance1:
 	end
 
 Route16AskNumber:
-	jumpstd AskNumber1MScript
+	jumpstd AskNumberMScript
 	end
 
 Route16RegisteredNumberM:
@@ -232,7 +232,7 @@ TrainerFisherWilton1:
 	end
 
 Route16AskNumber1:
-	jumpstd AskNumber1MScript
+	jumpstd AskNumberMScript
 	end
 
 TrainerFisherEdgar:

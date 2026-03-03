@@ -28,7 +28,7 @@ StdScripts::
 	add_stdscript DayToTextScript
 	add_stdscript BugContestResultsWarpScript
 	add_stdscript BugContestResultsScript
-	add_stdscript AskNumber1MScript
+	add_stdscript AskNumberMScript
 	add_stdscript RegisteredNumberMScript
 	add_stdscript NumberAcceptedMScript
 	add_stdscript NumberDeclinedMScript
@@ -602,7 +602,7 @@ BugContestResults_CopyContestantsToResults:
 .skip10
 	end
 
-AskNumber1MScript:
+AskNumberMScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_SCHOOLBOY_JACK, .Jack
 	ifequal PHONE_SAILOR_HUEY, .Huey
