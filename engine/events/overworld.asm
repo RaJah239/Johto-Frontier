@@ -1640,6 +1640,7 @@ AskRockSmashScript:
 	writetext AskRockSmashText
 	yesorno
 	iftrue RockSmashScript
+	endtext
 
 .no
 	jumptext MaySmashText
