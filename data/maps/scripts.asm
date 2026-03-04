@@ -192,11 +192,16 @@ INCLUDE "maps/LancesRoom.asm"
 INCLUDE "maps/HallOfFame.asm"
 
 
-SECTION "Map Scripts 14", ROMX
+SECTION "Sprout Tower Map Scripts", ROMX
 
 INCLUDE "maps/SproutTower1F.asm"
 INCLUDE "maps/SproutTower2F.asm"
 INCLUDE "maps/SproutTower3F.asm"
+
+
+SECTION "Map Scripts 14", ROMX
+
+
 INCLUDE "maps/TinTower1F.asm"
 INCLUDE "maps/TinTower2F.asm"
 INCLUDE "maps/TinTower3F.asm"
