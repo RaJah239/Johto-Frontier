@@ -1,3 +1,23 @@
+RuinsOfAlphOmanyteChamber_MapEvents:
+	def_warp_events
+	warp_event  3,  9, RUINS_OF_ALPH_OUTSIDE, 4
+	warp_event  4,  9, RUINS_OF_ALPH_OUTSIDE, 4
+	warp_event  3,  3, RUINS_OF_ALPH_INNER_CHAMBER, 6
+	warp_event  4,  3, RUINS_OF_ALPH_INNER_CHAMBER, 7
+	warp_event  4,  0, RUINS_OF_ALPH_OMANYTE_ITEM_ROOM, 1
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  2,  3, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  5,  3, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  3,  2, BGEVENT_UP, RuinsOfAlphOmanyteChamberPuzzle
+	bg_event  4,  2, BGEVENT_JUMPTEXT, RuinsOfAlphOmanyteChamberDescriptionText
+	bg_event  3,  0, BGEVENT_UP, RuinsOfAlphOmanyteChamberWallPatternLeft
+	bg_event  4,  0, BGEVENT_UP, RuinsOfAlphOmanyteChamberWallPatternRight
+
+	def_object_events
+
 RuinsOfAlphOmanyteChamber_MapScripts:
 	def_scene_scripts
 	scene_script RuinsOfAlphOmanyteChamberCheckWallScene, SCENE_RUINSOFALPHOMANYTECHAMBER_CHECK_WALL
@@ -14,8 +34,6 @@ RuinsOfAlphOmanyteChamberCheckWallScene:
 
 .OpenWall:
 	sdefer RuinsOfAlphOmanyteChamberWallOpenScript
-	end
-
 RuinsOfAlphOmanyteChamberNoopScene:
 	end
 
@@ -43,8 +61,7 @@ RuinsOfAlphOmanyteChamberWallOpenScript:
 	refreshmap
 	earthquake 50
 	setscene SCENE_RUINSOFALPHOMANYTECHAMBER_NOOP
-	closetext
-	end
+	endtext
 
 RuinsOfAlphOmanyteChamberPuzzle:
 	reanchormap
@@ -73,86 +90,32 @@ RuinsOfAlphOmanyteChamberPuzzle:
 	warpcheck
 	end
 
-RuinsOfAlphOmanyteChamberAncientReplica:
-	jumptext RuinsOfAlphOmanyteChamberAncientReplicaText
-
-RuinsOfAlphOmanyteChamberDescriptionSign:
-	jumptext RuinsOfAlphOmanyteChamberDescriptionText
-
 RuinsOfAlphOmanyteChamberWallPatternLeft:
 	opentext
-	writetext RuinsOfAlphOmanyteChamberWallPatternLeftText
+	writetext RuinsOfAlphChamberWallPatternText
 	setval UNOWNWORDS_WATER
 	special DisplayUnownWords
-	closetext
-	end
+	endtext
 
 RuinsOfAlphOmanyteChamberWallPatternRight:
 	checkevent EVENT_WALL_OPENED_IN_OMANYTE_CHAMBER
 	iftrue .WallOpen
 	opentext
-	writetext RuinsOfAlphOmanyteChamberWallPatternRightText
+	writetext RuinsOfAlphChamberWallPatternText
 	setval UNOWNWORDS_WATER
 	special DisplayUnownWords
-	closetext
-	end
+	endtext
 
 .WallOpen:
-	opentext
-	writetext RuinsOfAlphOmanyteChamberWallHoleText
-	waitbutton
-	closetext
-	end
+	jumptextfaceplayer RuinsOfAlphChamberWallHoleText
 
-RuinsOfAlphOmanyteChamberSkyfallTopMovement:
+RuinsOfAlphOmanyteChamberSkyfallTopMovement: ; note about this to all chamber to reuse
 	skyfall_top
 	step_end
 
-RuinsOfAlphOmanyteChamberWallPatternLeftText:
-	text "Patterns appeared"
-	line "on the walls…"
-	done
-
-RuinsOfAlphOmanyteChamberWallPatternRightText:
-	text "Patterns appeared"
-	line "on the walls…"
-	done
-
-RuinsOfAlphOmanyteChamberWallHoleText:
-	text "There's a big hole"
-	line "in the wall!"
-	done
-
-RuinsOfAlphOmanyteChamberAncientReplicaText:
-	text "It's a replica of"
-	line "an ancient #-"
-	cont "MON."
-	done
-
 RuinsOfAlphOmanyteChamberDescriptionText:
-	text "This #MON"
+	text "This #mon"
 	line "drifted in the"
-
-	para "sea by twisting"
-	line "its ten tentacles."
+	cont "sea by twisting"
+	cont "its ten tentacles."
 	done
-
-RuinsOfAlphOmanyteChamber_MapEvents:
-	def_warp_events
-	warp_event  3,  9, RUINS_OF_ALPH_OUTSIDE, 4
-	warp_event  4,  9, RUINS_OF_ALPH_OUTSIDE, 4
-	warp_event  3,  3, RUINS_OF_ALPH_INNER_CHAMBER, 6
-	warp_event  4,  3, RUINS_OF_ALPH_INNER_CHAMBER, 7
-	warp_event  4,  0, RUINS_OF_ALPH_OMANYTE_ITEM_ROOM, 1
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  2,  3, BGEVENT_READ, RuinsOfAlphOmanyteChamberAncientReplica
-	bg_event  5,  3, BGEVENT_READ, RuinsOfAlphOmanyteChamberAncientReplica
-	bg_event  3,  2, BGEVENT_UP, RuinsOfAlphOmanyteChamberPuzzle
-	bg_event  4,  2, BGEVENT_UP, RuinsOfAlphOmanyteChamberDescriptionSign
-	bg_event  3,  0, BGEVENT_UP, RuinsOfAlphOmanyteChamberWallPatternLeft
-	bg_event  4,  0, BGEVENT_UP, RuinsOfAlphOmanyteChamberWallPatternRight
-
-	def_object_events
