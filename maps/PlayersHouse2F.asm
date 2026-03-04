@@ -100,6 +100,8 @@ if DEF(_DEBUG)
 	giveitem ESCAPE_ROPE, MAX_ITEM_STACK
 	giveitem SACRED_ASH, MAX_ITEM_STACK
 	giveitem RARE_CANDY, MAX_ITEM_STACK
+	giveitem RARE_CANDY, MAX_ITEM_STACK
+	giveitem RARE_CANDY, MAX_ITEM_STACK
 	; vitamins
 	giveitem HYPER_EV_UP, MAX_ITEM_STACK
 	giveitem HP_UP, MAX_ITEM_STACK
@@ -164,6 +166,10 @@ if DEF(_DEBUG)
 	setmapscene NEW_BARK_TOWN, SCENE_NEWBARKTOWN_NOOP
 	setevent EVENT_PLAYERS_HOUSE_MOM_1
 	clearevent EVENT_PLAYERS_HOUSE_MOM_2
+
+	; to change DST to test phone numbers
+	setevent EVENT_FIRST_TIME_BANKING_WITH_MOM
+	setevent EVENT_GOT_A_POKEMON_FROM_ELM
 	special HealParty
 	warp NONE, 0, 0
 	end
