@@ -83,7 +83,7 @@ RuinsOfAlphOmanyteChamberPuzzle:
 	refreshmap
 	playsound SFX_STRENGTH
 	earthquake 80
-	applymovement PLAYER, RuinsOfAlphOmanyteChamberSkyfallTopMovement
+	applymovement PLAYER, RuinsOfAlphChamberSkyfallTopMovement
 	playsound SFX_KINESIS
 	waitsfx
 	pause 20
@@ -108,10 +108,6 @@ RuinsOfAlphOmanyteChamberWallPatternRight:
 
 .WallOpen:
 	jumptextfaceplayer RuinsOfAlphChamberWallHoleText
-
-RuinsOfAlphOmanyteChamberSkyfallTopMovement: ; note about this to all chamber to reuse
-	skyfall_top
-	step_end
 
 RuinsOfAlphOmanyteChamberDescriptionText:
 	text "This #mon"

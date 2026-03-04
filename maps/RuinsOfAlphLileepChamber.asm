@@ -88,16 +88,12 @@ RuinsOfAlphLileepChamberPuzzle:
 	refreshmap
 	playsound SFX_STRENGTH
 	earthquake 80
-	applymovement PLAYER, RuinsOfAlphLileepChamberSkyfallTopMovement
+	applymovement PLAYER, RuinsOfAlphChamberSkyfallTopMovement
 	playsound SFX_KINESIS
 	waitsfx
 	pause 20
 	warpcheck
 	end
-
-RuinsOfAlphLileepChamberSkyfallTopMovement:
-	skyfall_top
-	step_end
 
 RuinsOfAlphLileepChamberScientistScript:
 	faceplayeropentext
@@ -194,6 +190,10 @@ RuinsOfAlphLileepChamberDescriptionText:
 	cont "to reefs in times"
 	cont "since past."
 	done
+
+RuinsOfAlphChamberSkyfallTopMovement:
+	skyfall_top
+	step_end
 
 RuinsOfAlphChamberWallHoleText:
 	text "There's a big hole"

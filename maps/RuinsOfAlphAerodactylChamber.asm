@@ -82,16 +82,12 @@ RuinsOfAlphAerodactylChamberPuzzle:
 	refreshmap
 	playsound SFX_STRENGTH
 	earthquake 80
-	applymovement PLAYER, RuinsOfAlphAerodactylChamberSkyfallTopMovement
+	applymovement PLAYER, RuinsOfAlphChamberSkyfallTopMovement
 	playsound SFX_KINESIS
 	waitsfx
 	pause 20
 	warpcheck
 	end
-
-RuinsOfAlphAerodactylChamberSkyfallTopMovement:
-	skyfall_top
-	step_end
 
 RuinsOfAlphAerodactylChamberWallPatternLeft:
 	opentext
