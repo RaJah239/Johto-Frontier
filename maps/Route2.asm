@@ -196,14 +196,7 @@ Route2CooltrainerFText:
 Route2TrainerTipsText:
 	text "Trainer Tips"
 
-	para "In addition to re-"
-	line "ducing a wild"
-	cont "#mon's HP to"
-	cont "red, using any"
-	cont "permanent status"
-	cont "effect on a wild"
-	cont "#mon makes it"
-	cont "easier to capture."
+	para "TODOTEXT"
 	done
 
 Route2SignText:
