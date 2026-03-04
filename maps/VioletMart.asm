@@ -28,10 +28,5 @@ VioletMartGrannyText:
 	done
 
 VioletMartCooltrainerMText:
-	text "#mon can hold"
-	line "items."
-
-	para "They know how to"
-	line "use all items in"
-	cont "the Battle Pocket."
+	text "TODOTEXT"
 	done
