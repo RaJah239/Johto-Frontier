@@ -488,12 +488,10 @@ ElmGivesPokedexScript:
 	pause 20
 	turnobject PLAYER, UP
 	pause 10
-	opentext
-	writethistext
+	showthistext
 		text "Have fun out there"
 		line "<PLAYER>."
 		done
-	waitclosetext
 	turnobject PLAYER, DOWN
 	setevent EVENT_GOT_A_POKEMON_FROM_ELM
 	setscene SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
