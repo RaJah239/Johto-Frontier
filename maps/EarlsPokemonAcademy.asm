@@ -6,10 +6,11 @@ EarlsPokemonAcademy_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  3,  0, BGEVENT_READ, AcademyBlackboard
+	bg_event  3,  0, BGEVENT_READ, AcademyBlackboard 
 	bg_event  4,  0, BGEVENT_READ, AcademyBlackboard
 	bg_event  0,  1, BGEVENT_READ, MoveEnchancingAbilitiesNotebook
 	bg_event  1,  1, BGEVENT_READ, FleeMonsNotebook
+	; TODOTEXT - more info about game on the next two bookshelves
 
 	def_object_events
 	object_event  4,  2, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, AcademyEarl, -1
@@ -82,8 +83,8 @@ AcademyEarl:
 
 		para "If #mon come"
 		line "out in battle even"
-		cont "briefly, it'll get"
-		cont "full Exp. Points."
+		cont "briefly, full Exp."
+		cont "Points, they get."
 
 		para "At top of list put"
 		line "weak #mon."
@@ -95,21 +96,18 @@ AcademyEarl:
 		line "not be, Exp.Share"
 		cont "in Options is."
 
-		para "Exp.Share gives"
-		line "party halve of all"
-		cont "Exp. earned."
+		para "Halve Exp. Points"
+		line "non participants."
 
 		para "Full Exp. Johto's"
-		line "Champion's team,"
-		cont "they get."
+		line "Champion's team."
 
 		para "This way, weak"
 		line "#mon strong"
 		cont "become!"
 
-		para "The item Lucky Egg"
-		line "when held boosts"
-		cont "Exp. gained."
+		para "Boosted Exp. Lucky"
+		line "Egg holders."
 		done
 	waitendtext
 
@@ -122,23 +120,6 @@ AcademyEarl:
 		para "Good to #mon"
 		line "you must be!"
 		done
-
-AcademyNotebook:
-	opentext
-	writetext AcademyNotebookText
-	yesorno
-	iffalse .Done
-	writetext AcademyNotebookText1
-	yesorno
-	iffalse .Done
-	writetext AcademyNotebookText2
-	yesorno
-	iffalse .Done
-	writetext AcademyNotebookText3
-	waitbutton
-.Done:
-	closetext
-	end
 
 AcademyEarlSpinMovement:
 	turn_head DOWN
@@ -156,67 +137,79 @@ AcademyEarlSpinMovement:
 	turn_head DOWN
 	step_end
 
-AcademyNotebookText:
-	text "It's this kid's"
-	line "notebook…"
+AcademyNotebook:
+	opentext
+	writethistext
+		text "It's this kid's"
+		line "notebook…"
 
-	para "Catch #MON"
-	line "using # BALLS."
+		para "Catch #mon"
+		line "using #balls."
 
-	para "Up to six can be"
-	line "in your party."
+		para "Up to six can be"
+		line "in your party."
 
-	para "Keep reading?"
-	done
+		para "Extras are sent"
+		line "to your PC."
 
-AcademyNotebookText1:
-	text "Before throwing a"
-	line "# BALL, weaken"
-	cont "the target first."
+		para "Keep reading?"
+		done
+	yesorno
+	iffalse .done
+	writethistext
+		text "Before throwing a"
+		line "#ball, weaken"
+		cont "the target first."
 
-	para "A poisoned or"
-	line "burned #MON is"
-	cont "easier to catch."
+		para "Statused #mon"
+		line "makes for easier"
+		cont "capture."
 
-	para "Keep reading?"
-	done
+		para "Keep reading?"
+		done
+	yesorno
+	iffalse .done
+	writethistext
+		text "Some moves may"
+		line "cause confusion."
 
-AcademyNotebookText2:
-	text "Some moves may"
-	line "cause confusion."
+		para "Confusion may make"
+		line "a #mon attack"
+		cont "itself."
 
-	para "Confusion may make"
-	line "a #MON attack"
-	cont "itself."
+		para "Leaving battle"
+		line "clears up any"
+		cont "confusion."
 
-	para "Leaving battle"
-	line "clears up any"
-	cont "confusion."
+		para "Keep reading?"
+		done
+	yesorno
+	iffalse .done
+	writethistext
+		text "People who catch"
+		line "and use #mon"
+		cont "in battle are"
+		cont "#mon trainers."
 
-	para "Keep reading?"
-	done
+		para "They are expected"
+		line "to visit #mon"
+		cont "Gyms and defeat"
+		cont "other trainers."
 
-AcademyNotebookText3:
-	text "People who catch"
-	line "and use #MON"
+		para "Their main goal is"
+		line "Indigo Plateau."
 
-	para "in battle are"
-	line "#MON trainers."
+		para "The next page"
+		line "is… Blank!"
 
-	para "They are expected"
-	line "to visit #MON"
+		para "Boy: E-he-he…"
 
-	para "GYMS and defeat"
-	line "other trainers."
-
-	para "The next page"
-	line "is… Blank!"
-
-	para "Boy: E-he-he…"
-
-	para "I haven't written"
-	line "anymore…"
-	done
+		para "I haven't written"
+		line "anymore…"
+		done
+	waitbutton
+.done:
+	endtext
 
 EarlsPokemonAcademyCooltrainerFHardModeScript:
 	faceplayeropentext
@@ -252,9 +245,10 @@ EarlsPokemonAcademyCooltrainerFHardModeScript:
 	iffalse_endtext
 	setevent EVENT_EARLS_ACADEMY_LUCKY_EGG
 	writethistext
-		text "It boosts Exp. of"
-		line "of the holder!"
-		
+		text "Its holder gains"
+		line "50<%> more Exp."
+		cont "Points!"
+
 		para "Also…"
 		done
 	waitbutton
@@ -262,9 +256,19 @@ EarlsPokemonAcademyCooltrainerFHardModeScript:
 
 MoveEnchancingAbilitiesNotebook:
 	opentext
-	writetext MoveEnchancingAbilitiesText
+	writethistext
+		text "It's about move"
+		line "buffing abilities."
+
+		para "These moves aren't"
+		line "boosted if they're"
+		cont "already the same"
+		cont "type as the user."
+
+		para "Want to read more?"
+		done
 	yesorno
-	iffalse .Done
+	iffalse .done
 .list:
 	loadmenu .MoveEnchancingAbilitiesHeader
 	verticalmenu
@@ -273,9 +277,8 @@ MoveEnchancingAbilitiesNotebook:
 	ifequal 2, .PunchingMoves
 	ifequal 3, .SharpnessMoves
 	ifequal 4, .StrongJawMoves
-.Done:
-	closetext
-	end
+.done:
+	endtext
 
 .MoveEnchancingAbilitiesHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -293,161 +296,136 @@ MoveEnchancingAbilitiesNotebook:
 	db "Cancel@"
 
 .BallisticsMoves
-	writetext BallisticsMovesText
+	writethistext
+		text "It's a list of all"
+		line "Ballistics Moves!"
+
+		para "They are all guns,"
+		line "blast and beams."
+
+		para "In alphabetical"
+		line "order, it goes:"
+
+		para "Aurora Beam,"
+		line "Bubblebeam,"
+		cont "Fire Blast,"
+		cont "Flash Cannon,"
+		cont "Gunk Shot,"
+		cont "Hyper Beam"
+		cont "Ice Beam,"
+		cont "Psybeam,"
+		cont "Rock Blast,"
+		cont "Signal Beam,"
+		cont "Sludge Bomb and"
+		cont "Water Gun."
+		done
 	sjump .list
 
 .PunchingMoves
-	writetext PunchingMovesText
+	writethistext
+		text "It's a list of all"
+		line "Punching Moves!"
+
+		para "In alphabetical"
+		line "order, it goes:"
+
+		para "Bullet Punch,"
+		line "Drain Punch,"
+		cont "Fire Punch,"
+		cont "Ice Punch,"
+		cont "Mach Punch,"
+		cont "Meteor Mash,"
+		cont "Shadow Punch and"
+		cont "Thunder Punch."
+		done
 	sjump .list
 
 .SharpnessMoves
-	writetext SharpnessMovesText
+	writethistext
+		text "It's a list of all"
+		line "Sharpness Moves!"
+
+		para "In alphabetical"
+		line "order, it goes:"
+
+		para "Cross Chop, Cut,"
+		line "Dragon Claw,"
+		cont "Leaf Blade,"
+		cont "Night Slash,"
+		cont "Psycho Cut, Slash,"
+		cont "Throat Chop and"
+		cont "X-Scissor."
+		done
 	sjump .list
 
 .StrongJawMoves
-	writetext StrongJawMovesText
+	writethistext
+		text "It's a list of all"
+		line "Strong Jaw Moves!"
+
+		para "In alphabetical"
+		line "order, it goes:"
+
+		para "Bite,"
+		line "Crunch,"
+		cont "Fire Fang,"
+		cont "Ice Fang and"
+		cont "Thunder Fang."
+		done
 	sjump .list
-
-MoveEnchancingAbilitiesText:
-	text "It's about move"
-	line "buffing abilities."
-
-	para "These moves aren't"
-	line "boosted if they're"
-	cont "already the same"
-	cont "type as the user."
-
-	para "Want to read more?"
-	done
-
-PunchingMovesText:
-	text "It's a list of all"
-	line "Punching Moves!"
-
-	para "In alphabetical"
-	line "order, it goes:"
-
-	para "Bullet Punch,"
-	line "Drain Punch,"
-	cont "Fire Punch,"
-	cont "Ice Punch,"
-	cont "Mach Punch,"
-	cont "Meteor Mash,"
-	cont "Shadow Punch and"
-	cont "Thunder Punch."
-	done
-
-SharpnessMovesText:
-	text "It's a list of all"
-	line "Sharpness Moves!"
-
-	para "In alphabetical"
-	line "order, it goes:"
-
-	para "Cross Chop, Cut,"
-	line "Dragon Claw,"
-	cont "Leaf Blade,"
-	cont "Night Slash,"
-	cont "Psycho Cut, Slash,"
-	cont "Throat Chop and"
-	cont "X-Scissor."
-	done
-
-BallisticsMovesText:
-	text "It's a list of all"
-	line "Ballistics Moves!"
-
-	para "They are all guns,"
-	line "blast and beams."
-
-	para "In alphabetical"
-	line "order, it goes:"
-
-	para "Aurora Beam,"
-	line "Bubblebeam,"
-	cont "Fire Blast,"
-	cont "Flash Cannon,"
-	cont "Gunk Shot,"
-	cont "Hyper Beam"
-	cont "Ice Beam,"
-	cont "Psybeam,"
-	cont "Rock Blast,"
-	cont "Signal Beam,"
-	cont "Sludge Bomb and"
-	cont "Water Gun."
-	done
-
-StrongJawMovesText:
-	text "It's a list of all"
-	line "Strong Jaw Moves!"
-
-	para "In alphabetical"
-	line "order, it goes:"
-
-	para "Bite,"
-	line "Crunch,"
-	cont "Fire Fang,"
-	cont "Ice Fang and"
-	cont "Thunder Fang."
-	done
 
 FleeMonsNotebook:
 	opentext
-	writetext FleeMonsNotebookText
+	writethistext
+		text "It's a list of all"
+		line "wild #mon that"
+		cont "have a 30<%> chance"
+		cont "to flee each turn."
+
+		para "Trapping moves or"
+		line "abilities or if"
+		cont "asleep will bar"
+		cont "escape."
+
+		para "They all appear"
+		line "in swarms."
+
+		para "Read the list?"
+		done
 	yesorno
 	iffalse .done
-	writetext ListofAllFleeMonsText
+	writethistext
+		text "In alphabetical"
+		line "order, they are:"
+
+		para "Bagon,"
+		line "Charmander,"
+		cont "Chikorita"
+		cont "Clefairy,"
+		cont "Cyndaquil,"
+		cont "Delibird,"
+		cont "Eevee,"
+		cont "Elekid,"
+		cont "Feebas,"
+		cont "Houndour,"
+		cont "Larvitar,"
+		cont "Meowth,"
+		cont "Phanpy,"
+		cont "Ralts,"
+		cont "Riolu,"
+		cont "Rowlet,"
+		cont "Smoochum,"
+		cont "Snubbull,"
+		cont "Squirtle,"
+		cont "Teddiursa,"
+		cont "Togepi,"
+		cont "Torchic,"
+		cont "Totodile and"
+		cont "Turtwig."
+		done
 	waitbutton
 .done
-	closetext
-	end
-
-FleeMonsNotebookText:
-	text "It's a list of all"
-	line "wild #mon that"
-	cont "have a 30<%> chance"
-	cont "to flee each turn."
-
-	para "Trapping moves or"
-	line "abilities or if"
-	cont "asleep will bar"
-	cont "escape."
-
-	para "They all appear"
-	line "in swarms."
-
-	para "Read the list?"
-	done
-
-ListofAllFleeMonsText:
-	text "In alphabetical"
-	line "order, they are:"
-
-	para "Bagon,"
-	line "Charmander,"
-	cont "Chikorita"
-	cont "Clefairy,"
-	cont "Cyndaquil,"
-	cont "Delibird,"
-	cont "Eevee,"
-	cont "Elekid,"
-	cont "Feebas,"
-	cont "Houndour,"
-	cont "Larvitar,"
-	cont "Meowth,"
-	cont "Phanpy,"
-	cont "Ralts,"
-	cont "Riolu,"
-	cont "Rowlet,"
-	cont "Smoochum,"
-	cont "Snubbull,"
-	cont "Squirtle,"
-	cont "Teddiursa,"
-	cont "Togepi,"
-	cont "Torchic,"
-	cont "Totodile and"
-	cont "Turtwig."
-	done
+	endtext
 
 EarlsPokemonAcademyGameboyKid1Script:
 	faceplayeropentext
@@ -529,7 +507,7 @@ AcademyBlackboard:
 		line "changes it to PSN."
 
 		para "Poison lingers"
-		line "after the battle,"
+		line "after the battle"
 		cont "and HP is lost as"
 		cont "you walk."
 
