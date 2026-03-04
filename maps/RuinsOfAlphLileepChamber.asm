@@ -154,10 +154,7 @@ RuinsOfAlphLileepChamberWallPatternRight:
 	endtext
 
 .WallOpen:
-	jumpthistext
-	text "There's a big hole"
-	line "in the wall!"
-	done
+	jumptextfaceplayer RuinsOfAlphChamberWallHoleText
 
 RuinsOfAlphLileepChamberScientistTremorText:
 	text "That tremor was"
@@ -196,4 +193,14 @@ RuinsOfAlphLileepChamberDescriptionText:
 	line "to rocks and clung"
 	cont "to reefs in times"
 	cont "since past."
+	done
+
+RuinsOfAlphChamberWallHoleText:
+	text "There's a big hole"
+	line "in the wall!"
+	done
+
+RuinsOfAlphChamberWallPatternText:
+	text "Patterns appeared"
+	line "on the walls…"
 	done

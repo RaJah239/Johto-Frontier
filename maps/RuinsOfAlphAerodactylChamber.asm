@@ -60,8 +60,7 @@ RuinsOfAlphAerodactylChamberWallOpenScript:
 	refreshmap
 	earthquake 50
 	setscene SCENE_RUINSOFALPHAERODACTYLCHAMBER_NOOP
-	closetext
-	end
+	endtext
 
 RuinsOfAlphAerodactylChamberPuzzle:
 	reanchormap
@@ -90,49 +89,28 @@ RuinsOfAlphAerodactylChamberPuzzle:
 	warpcheck
 	end
 
+RuinsOfAlphAerodactylChamberSkyfallTopMovement:
+	skyfall_top
+	step_end
+
 RuinsOfAlphAerodactylChamberWallPatternLeft:
 	opentext
-	writetext RuinsOfAlphAerodactylChamberWallPatternLeftText
+	writetext RuinsOfAlphChamberWallPatternText
 	setval UNOWNWORDS_LIGHT
 	special DisplayUnownWords
-	closetext
-	end
+	endtext
 
 RuinsOfAlphAerodactylChamberWallPatternRight:
 	checkevent EVENT_WALL_OPENED_IN_AERODACTYL_CHAMBER
 	iftrue .WallOpen
 	opentext
-	writetext RuinsOfAlphAerodactylChamberWallPatternRightText
+	writetext RuinsOfAlphChamberWallPatternText
 	setval UNOWNWORDS_LIGHT
 	special DisplayUnownWords
-	closetext
-	end
+	endtext
 
 .WallOpen:
-	opentext
-	writetext RuinsOfAlphAerodactylChamberWallHoleText
-	waitbutton
-	closetext
-	end
-
-RuinsOfAlphAerodactylChamberSkyfallTopMovement:
-	skyfall_top
-	step_end
-
-RuinsOfAlphAerodactylChamberWallPatternLeftText:
-	text "Patterns appeared"
-	line "on the walls…"
-	done
-
-RuinsOfAlphAerodactylChamberWallPatternRightText:
-	text "Patterns appeared"
-	line "on the walls…"
-	done
-
-RuinsOfAlphAerodactylChamberWallHoleText:
-	text "There's a big hole"
-	line "in the wall!"
-	done
+	jumptextfaceplayer RuinsOfAlphChamberWallHoleText
 
 RuinsOfAlphAerodactylChamberDescriptionText:
 	text "This flying #-"
