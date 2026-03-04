@@ -1,3 +1,35 @@
+Route8_MapEvents:
+	def_warp_events
+	warp_event 18,  8, ROUTE_8_NATIONAL_PARK_GATE, 3
+	warp_event 18,  9, ROUTE_8_NATIONAL_PARK_GATE, 4
+	warp_event 47, 13, ROUTE_8_RUINS_OF_ALPH_GATE, 1
+	warp_event 48, 13, ROUTE_8_RUINS_OF_ALPH_GATE, 2
+
+	def_coord_events
+	coord_event 20,  7, SCENE_ROUTE8_SUICUNE, Route8SuicuneScript
+	coord_event 22,  7, SCENE_ROUTE8_SUICUNE, Route8SuicuneScript
+
+	def_bg_events
+	bg_event 29,  1, BGEVENT_JUMPTEXT, Route8TrainerTips2Text
+	bg_event 45, 11, BGEVENT_JUMPTEXT, RuinsOfAlphNorthSignText
+	bg_event 55,  7, BGEVENT_JUMPTEXT, Route8SignText
+	bg_event 21,  7, BGEVENT_JUMPTEXT, Route8TrainerTips1Text
+	bg_event 21,  4, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event 50,  4, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event 51,  5, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+
+	def_object_events
+	object_event 20, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerPsychicMark, -1
+	object_event 31, 14, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 5, TrainerSchoolboyAlan1, -1
+	object_event 37,  6, SPRITE_SUDOWOODO, SPRITEMOVEDATA_SUDOWOODO, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SudowoodoScript, EVENT_ROUTE_8_SUDOWOODO
+	object_event 51,  7, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route8LassText, -1
+	object_event 44,  9, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route8RockSmashGuyScript, -1
+	object_event 46,  6, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ArthurScript, EVENT_ROUTE_8_ARTHUR_OF_THURSDAY
+	object_event 21,  6, SPRITE_SUICUNE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_SAW_SUICUNE_ON_ROUTE_8
+	object_event 21,  4, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_WHITE, OBJECTTYPE_SCRIPT, 0, Route8BerryTree1, EVENT_ROUTE_8_BERRY_1
+	object_event 51,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route8BerryTree2, EVENT_ROUTE_8_BERRY_2
+	object_event 50,  4, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route8ApricornTree1, EVENT_ROUTE_8_APRICORN_1
+
 	object_const_def
 	const ROUTE8_YOUNGSTER1
 	const ROUTE8_YOUNGSTER2
@@ -5,7 +37,6 @@
 	const ROUTE8_LASS1
 	const ROUTE8_FISHER
 	const ROUTE8_ARTHUR
-	const ROUTE8_FLORIA
 	const ROUTE8_SUICUNE
 	const ROUTE8_BERRY_TREE1
 	const ROUTE8_BERRY_TREE2
@@ -20,8 +51,6 @@ Route8_MapScripts:
 	callback MAPCALLBACK_OBJECTS, Route8ArthurCallback
 
 Route8Noop1Scene:
-	end
-
 Route8Noop2Scene:
 	end
 
@@ -49,10 +78,20 @@ Route8SuicuneScript:
 	setmapscene CIANWOOD_CITY, SCENE_CIANWOODCITY_SUICUNE_AND_EUSINE
 	end
 
+Route8SuicuneMovement:
+	set_sliding
+	fast_jump_step DOWN
+	fast_jump_step DOWN
+	fast_jump_step DOWN
+	fast_jump_step RIGHT
+	fast_jump_step RIGHT
+	fast_jump_step RIGHT
+	remove_sliding
+	step_end
+
 SudowoodoScript:
 	checkitem SQUIRTBOTTLE
 	iftrue .Fight
-
 	waitsfx
 	playsound SFX_SANDSTORM
 	applymovement ROUTE8_WEIRD_TREE, SudowoodoShakeMovement
@@ -60,34 +99,40 @@ SudowoodoScript:
 
 .Fight:
 	opentext
-	writetext UseSquirtbottleText
+	writethistext
+		text "It's a weird tree."
+		line "Use Squirtbottle?"
+		done
 	yesorno
-	iffalse DidntUseSquirtbottleScript
+	iffalse_endtext
 	closetext
 WateredWeirdTreeScript:: ; export (for when you use Squirtbottle from pack)
-	opentext
-	writetext UsedSquirtbottleText
-	waitbutton
-	closetext
+	showthistext
+		text "<PLAYER> used the"
+		line "Squirtbottle."
+		done
 	waitsfx
 	playsound SFX_SANDSTORM
 	applymovement ROUTE8_WEIRD_TREE, SudowoodoShakeMovement
-	opentext
-	writetext SudowoodoAttackedText
-	waitbutton
-	closetext
-	takeitem SQUIRTBOTTLE
+	showthistext
+		text "The weird tree"
+		line "doesn't like the"
+		cont "Squirtbottle!"
+
+		para "The weird tree"
+		line "attacked!"
+		done
+	setevent EVENT_FOUGHT_SUDOWOODO
 	loadwildmon SUDOWOODO, 20
 	startbattle
-	setevent EVENT_FOUGHT_SUDOWOODO
 	ifequal DRAW, DidntCatchSudowoodo
 	disappear ROUTE8_WEIRD_TREE
 	reloadmapafterbattle
 	end
 
-DidntUseSquirtbottleScript:
-	closetext
-	end
+SudowoodoShakeMovement:
+	tree_shake
+	step_end
 
 DidntCatchSudowoodo:
 	reloadmapafterbattle
@@ -96,73 +141,63 @@ DidntCatchSudowoodo:
 	special RefreshSprites
 	end
 
-Route8FloriaScript:
-	faceplayer
-	opentext
-	checkevent EVENT_TALKED_TO_FLORIA_AT_FLOWER_SHOP
-	iftrue .SecondTimeTalking
-	setevent EVENT_MET_FLORIA
-	writetext FloriaText1
-	waitbutton
-	closetext
-	clearevent EVENT_FLORIA_AT_FLOWER_SHOP
-	readvar VAR_FACING
-	ifequal UP, .Up
-	applymovement ROUTE8_FLORIA, FloriaMovement1
-	disappear ROUTE8_FLORIA
-	end
-
-.Up:
-	applymovement ROUTE8_FLORIA, FloriaMovement2
-	disappear ROUTE8_FLORIA
-	end
-
-.SecondTimeTalking:
-	writetext FloriaText2
-	waitbutton
-	closetext
-	end
+WeirdTreeMovement_Flee:
+	fast_jump_step UP
+	fast_jump_step UP
+	step_end
 
 Route8RockSmashGuyScript:
-	faceplayer
-	opentext
-	checkevent EVENT_GOT_TM08_ROCK_SMASH
+	faceplayeropentext
+	checkevent EVENT_GOT_TM_BRICK_BREAK
 	iftrue .AlreadyGotRockSmash
 	checkevent EVENT_FOUGHT_SUDOWOODO
 	iftrue .ClearedSudowoodo
-	writetext RockSmashGuyText1
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Wa-hey!"
+
+		para "I was going to"
+		line "snap that tree"
+		cont "with my straight-"
+		cont "arm punch."
+
+		para "But I couldn't!"
+		line "I'm a failure!"
+		done
 
 .ClearedSudowoodo:
-	writetext RockSmashGuyText2
+	writethistext
+		text "Did you clear that"
+		line "wretched tree?"
+
+		para "I'm impressed!"
+
+		para "I want you to"
+		line "have this."
+		done
 	promptbutton
 	verbosegiveitem TM_BRICK_BREAK
-	iffalse .NoRoomForTM
-	setevent EVENT_GOT_TM08_ROCK_SMASH
+	iffalse_endtext
+	setevent EVENT_GOT_TM_BRICK_BREAK
 .AlreadyGotRockSmash:
-	writetext RockSmashGuyText3
-	waitbutton
-.NoRoomForTM:
-	closetext
-	end
+	jumpthisopenedtext
+		text "That happens to be"
+		line "Brick Break."
 
-Route8LassScript:
-	faceplayer
-	opentext
-	checkevent EVENT_FOUGHT_SUDOWOODO
-	iftrue .ClearedSudowoodo
-	writetext Route8LassText
-	waitbutton
-	closetext
-	end
+		para "You can shatter"
+		line "rocks with just a"
+		cont "single well-aimed"
+		cont "smack."
 
-.ClearedSudowoodo:
-	writetext Route8LassText_ClearedSudowoodo
-	waitbutton
-	closetext
-	end
+		para "If any rocks are"
+		line "in your way, just"
+		cont "smash 'em up!"
+
+		para "It breaks Reflect"
+		line "and Light Screen"
+		cont "in battle too!"
+		done
+
+
 
 TrainerSchoolboyAlan1:
 	trainer SCHOOLBOY, ALAN1, EVENT_BEAT_SCHOOLBOY_ALAN, SchoolboyAlan1SeenText, SchoolboyAlan1BeatenText, 0, .Script
@@ -277,250 +312,6 @@ TrainerSchoolboyAlan1:
 	jumpstd PackFullMScript
 	end
 
-TrainerPsychicMark:
-	trainer PSYCHIC_T, MARK, EVENT_BEAT_PSYCHIC_MARK, PsychicMarkSeenText, PsychicMarkBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext PsychicMarkAfterBattleText
-	waitbutton
-	closetext
-	end
-
-ArthurScript:
-	faceplayer
-	opentext
-	checkevent EVENT_GOT_HARD_STONE_FROM_ARTHUR
-	iftrue .AlreadyGotStone
-	readvar VAR_WEEKDAY
-	ifnotequal THURSDAY, ArthurNotThursdayScript
-	checkevent EVENT_MET_ARTHUR_OF_THURSDAY
-	iftrue .MetArthur
-	writetext MeetArthurText
-	promptbutton
-	setevent EVENT_MET_ARTHUR_OF_THURSDAY
-.MetArthur:
-	writetext ArthurGivesGiftText
-	promptbutton
-	verbosegiveitem HARD_STONE
-	iffalse .BagFull
-	setevent EVENT_GOT_HARD_STONE_FROM_ARTHUR
-	writetext ArthurGaveGiftText
-	waitbutton
-	closetext
-	end
-
-.AlreadyGotStone:
-	writetext ArthurThursdayText
-	waitbutton
-.BagFull:
-	closetext
-	end
-
-ArthurNotThursdayScript:
-	writetext ArthurNotThursdayText
-	waitbutton
-	closetext
-	end
-
-Route8Sign:
-	jumptext Route8SignText
-
-RuinsOfAlphNorthSign:
-	jumptext RuinsOfAlphNorthSignText
-
-Route8TrainerTips1:
-	jumptext Route8TrainerTips1Text
-
-Route8TrainerTips2:
-	jumptext Route8TrainerTips2Text
-
-SudowoodoShakeMovement:
-	tree_shake
-	step_end
-
-WeirdTreeMovement_Flee:
-	fast_jump_step UP
-	fast_jump_step UP
-	step_end
-
-FloriaMovement1:
-	step DOWN
-	step DOWN
-	step DOWN
-	step LEFT
-	step LEFT
-	step LEFT
-	step LEFT
-	step LEFT
-	step LEFT
-	step_end
-
-FloriaMovement2:
-	step LEFT
-	step DOWN
-	step DOWN
-	step DOWN
-	step LEFT
-	step LEFT
-	step LEFT
-	step LEFT
-	step LEFT
-	step_end
-
-Route8SuicuneMovement:
-	set_sliding
-	fast_jump_step DOWN
-	fast_jump_step DOWN
-	fast_jump_step DOWN
-	fast_jump_step RIGHT
-	fast_jump_step RIGHT
-	fast_jump_step RIGHT
-	remove_sliding
-	step_end
-
-UseSquirtbottleText:
-	text "It's a weird tree."
-	line "Use SQUIRTBOTTLE?"
-	done
-
-UsedSquirtbottleText:
-	text "<PLAYER> used the"
-	line "SQUIRTBOTTLE."
-	done
-
-SudowoodoAttackedText:
-	text "The weird tree"
-	line "really hates the"
-	cont "SQUIRTBOTTLE!"
-
-	para "The weird tree"
-	line "destroyed the"
-
-	para "SQUIRTBOTTLE and"
-	line "attacked!"
-	done
-
-FloriaText1:
-	text "I'm the FLOWER"
-	line "SHOP's FLORIA!"
-
-	para "Listen, listen!"
-
-	para "When I sprinkled"
-	line "water on that"
-
-	para "wiggly tree, it"
-	line "jumped right up!"
-
-	para "It just has to be"
-	line "a #MON."
-
-	para "I bet it would be"
-	line "shocked out of its"
-
-	para "disguise if you"
-	line "soaked it!"
-
-	para "I know! I'll tell"
-	line "my sis and borrow"
-	cont "her water bottle!"
-	done
-
-FloriaText2:
-	text "When I told my sis"
-	line "about the jiggly"
-
-	para "tree, she said"
-	line "it's dangerous."
-
-	para "If I beat WHITNEY,"
-	line "I wonder if she'll"
-
-	para "lend me her water"
-	line "bottle…"
-	done
-
-RockSmashGuyText1:
-	text "Wa-hey!"
-
-	para "I was going to"
-	line "snap that tree"
-
-	para "with my straight-"
-	line "arm punch."
-
-	para "But I couldn't!"
-	line "I'm a failure!"
-	done
-
-RockSmashGuyText2:
-	text "Did you clear that"
-	line "wretched tree?"
-
-	para "I'm impressed!"
-	line "I want you to"
-	cont "have this."
-	done
-
-RockSmashGuyText3:
-	text "That happens to be"
-	line "Brick Break."
-
-	para "You can shatter"
-	line "rocks with just a"
-
-	para "single well-aimed"
-	line "smack."
-
-	para "If any rocks are"
-	line "in your way, just"
-	cont "smash 'em up!"
-
-	para "It breaks Reflect"
-	line "and Light Screen"
-	cont "in battle too!"
-	done
-
-Route8LassText:
-	text "An odd tree is"
-	line "blocking the way"
-	cont "to GOLDENROD CITY."
-
-	para "It's preventing"
-	line "me from shopping."
-
-	para "Something should"
-	line "be done about it."
-	done
-
-Route8LassText_ClearedSudowoodo:
-	text "That odd tree dis-"
-	line "appeared without a"
-	cont "trace."
-
-	para "Oh! That tree was"
-	line "really a #MON?"
-	done
-
-PsychicMarkSeenText:
-	text "I'm going to read"
-	line "your thoughts!"
-	done
-
-PsychicMarkBeatenText:
-	text "I misread you!"
-	done
-
-PsychicMarkAfterBattleText:
-	text "I'd be strong if"
-	line "only I could tell"
-
-	para "what my opponent"
-	line "was thinking."
-	done
-
 SchoolboyAlan1SeenText:
 	text "Thanks to my stud-"
 	line "ies, I'm ready for"
@@ -541,199 +332,136 @@ SchoolboyAlanBooksText:
 	cont "reading books."
 	done
 
-MeetArthurText:
-	text "ARTHUR: Who are"
-	line "you?"
+TrainerPsychicMark:
+	generictrainer PSYCHIC_T, MARK, EVENT_BEAT_PSYCHIC_MARK, .SeenText, .BeatenText
 
-	para "I'm ARTHUR of"
-	line "Thursday."
+.AfterText
+	text "I'd be strong if"
+	line "only I could tell"
+	cont "what my opponent"
+	cont "was thinking."
 	done
 
-ArthurGivesGiftText:
-	text "Here. You can have"
-	line "this."
+.SeenText
+	text "I'm going to read"
+	line "your thoughts!"
 	done
 
-ArthurGaveGiftText:
-	text "ARTHUR: A #MON"
+.BeatenText
+	text "I misread you!"
+	done
+
+ArthurScript:
+	faceplayeropentext
+	checkevent EVENT_GOT_HARD_STONE_FROM_ARTHUR
+	iftrue .AlreadyGotStone
+	readvar VAR_WEEKDAY
+	ifnotequal THURSDAY, ArthurNotThursdayScript
+	checkevent EVENT_MET_ARTHUR_OF_THURSDAY
+	iftrue .MetArthur
+	writethistext
+		text "Arthur: Who are"
+		line "you?"
+
+		para "I'm Arthur of"
+		line "Thursday."
+		done
+	promptbutton
+	setevent EVENT_MET_ARTHUR_OF_THURSDAY
+.MetArthur:
+	writethistext
+		text "Here. You can have"
+		line "this."
+		done
+	promptbutton
+	verbosegiveitem HARD_STONE
+	iffalse_endtext
+	setevent EVENT_GOT_HARD_STONE_FROM_ARTHUR
+	jumpthisopenedtext
+	text "Arthur: A #mon"
 	line "that uses rock-"
-
-	para "type moves should"
-	line "hold on to that."
+	cont "type moves should"
+	cont "hold on to that."
 
 	para "It pumps up rock-"
 	line "type attacks."
 	done
 
-ArthurThursdayText:
-	text "ARTHUR: I'm ARTHUR"
-	line "of Thursday. I'm"
+.AlreadyGotStone:
+	jumpthisopenedtext
+		text "Arthur: I'm Arthur"
+		line "of Thursday. I'm"
+		cont "the second son out"
+		cont "of seven children."
+		done
 
-	para "the second son out"
-	line "of seven children."
-	done
+ArthurNotThursdayScript:
+	jumpthisopenedtext
+		text "Arthur: Today's"
+		line "not Thursday. How"
+		cont "disappointing."
+		done
 
-ArthurNotThursdayText:
-	text "ARTHUR: Today's"
-	line "not Thursday. How"
-	cont "disappointing."
+Route8LassText:
+	text "I am going west to"
+	line "Goldenrod City for"
+	cont "a shopping spree."
+	
+	para "The Dept.Store has"
+	line "unmatched variety."
 	done
 
 Route8SignText:
-	text "ROUTE 8"
+	text "Route 8"
 	done
 
 RuinsOfAlphNorthSignText:
-	text "RUINS OF ALPH"
-	line "NORTH ENTRANCE"
+	text "Ruins Of Alph"
+	line "North Entrance"
 	done
 
 Route8TrainerTips1Text:
-	text "TRAINER TIPS"
+	text "Trainer Tips"
 
-	para "#MON stats"
-	line "vary--even within"
+	para "#mon stats do"
+	line "not vary within"
 	cont "the same species."
 
-	para "Their stats may be"
-	line "similar at first."
-
-	para "However, differ-"
-	line "ences will become"
-
-	para "pronounced as the"
-	line "#MON grow."
+	para "Core Trait and if"
+	line "of alternate color"
+	cont "are all their uni-"
+	cont "que differences."
 	done
 
 Route8TrainerTips2Text:
-	text "TRAINER TIPS"
+	text "Trainer Tips"
 
-	para "Use DIG to return"
-	line "to the entrance of"
-	cont "any place."
+	para "Use Dig or Escape"
+	line "Rope to return to"
+	cont "the entrance of"
+	cont "caves and certain"
+	cont "landmarks."
+	
+	text "Teleport returns"
+	line "you to the last"
+	cont "#mon Center"
+	cont "visited regardless"
+	cont "of where you are"
+	cont "presently."
 
-	para "It is convenient"
+	para "They're convenient"
 	line "for exploring"
-
-	para "caves and other"
-	line "landmarks."
 	done
 
 Route8BerryTree1:
-	opentext
-	getitemname STRING_BUFFER_3, ICE_BERRY
-	writetext Route8TreeText
-	promptbutton
-	writetext Route8HeyItsBerryApricornText
-	promptbutton
-	giveitem ICE_BERRY
-	iffalse Route8NoRoomInBag
-	disappear ROUTE8_BERRY_TREE1
-	writetext Route8FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval ICE_BERRY
+	setlasttalked ROUTE8_BERRY_TREE1
+	jumpstd BerryOrFruitScript
 Route8BerryTree2:
-	opentext
-	getitemname STRING_BUFFER_3, BERRY
-	writetext Route8TreeText
-	promptbutton
-	writetext Route8HeyItsBerryApricornText
-	promptbutton
-	giveitem BERRY
-	iffalse Route8NoRoomInBag
-	disappear ROUTE8_BERRY_TREE2
-	writetext Route8FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval BERRY
+	setlasttalked ROUTE8_BERRY_TREE2
+	jumpstd BerryOrFruitScript
 Route8ApricornTree1:
-	opentext
-	getitemname STRING_BUFFER_3, PNK_APRICORN
-	writetext Route8TreeText
-	promptbutton
-	writetext Route8HeyItsBerryApricornText
-	promptbutton
-	giveitem PNK_APRICORN
-	iffalse Route8NoRoomInBag
-	disappear ROUTE8_APRICORN_TREE1
-	writetext Route8FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
-Route8NoBerryOrApricorn:
-	opentext
-	writetext Route8TreeText
-	promptbutton
-	writetext Route8NothingHereText
-	waitbutton
-	closetext
-	end
-
-Route8NoRoomInBag:
-	writetext Route8NoRoomInBagText
-	waitbutton
-	closetext
-	end
-
-Route8TreeText:
-	text_far _FruitBearingTreeText
-	text_end
-
-Route8NothingHereText:
-	text_far _NothingHereText
-	text_end
-
-Route8HeyItsBerryApricornText:
-	text_far _HeyItsFruitText
-	text_end
-
-Route8FoundItemText:
-	text_far _ObtainedFruitText
-	text_end
-
-Route8NoRoomInBagText:
-	text_far _CantCarryItemText
-	text_end
-
-Route8_MapEvents:
-	def_warp_events
-	warp_event 18,  8, ROUTE_8_NATIONAL_PARK_GATE, 3
-	warp_event 18,  9, ROUTE_8_NATIONAL_PARK_GATE, 4
-	warp_event 47, 13, ROUTE_8_RUINS_OF_ALPH_GATE, 1
-	warp_event 48, 13, ROUTE_8_RUINS_OF_ALPH_GATE, 2
-
-	def_coord_events
-	coord_event 20,  7, SCENE_ROUTE8_SUICUNE, Route8SuicuneScript
-	coord_event 22,  7, SCENE_ROUTE8_SUICUNE, Route8SuicuneScript
-
-	def_bg_events
-	bg_event 29,  1, BGEVENT_READ, Route8TrainerTips2
-	bg_event 45, 11, BGEVENT_READ, RuinsOfAlphNorthSign
-	bg_event 55,  7, BGEVENT_READ, Route8Sign
-	bg_event 21,  7, BGEVENT_READ, Route8TrainerTips1
-	bg_event 21,  4, BGEVENT_READ, Route8NoBerryOrApricorn
-	bg_event 50,  4, BGEVENT_READ, Route8NoBerryOrApricorn
-	bg_event 51,  5, BGEVENT_READ, Route8NoBerryOrApricorn
-
-	def_object_events
-	object_event 20, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerPsychicMark, -1
-	object_event 31, 14, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 5, TrainerSchoolboyAlan1, -1
-	object_event 37,  6, SPRITE_SUDOWOODO, SPRITEMOVEDATA_SUDOWOODO, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SudowoodoScript, EVENT_ROUTE_8_SUDOWOODO
-	object_event 51,  8, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route8LassScript, -1
-	object_event 44,  9, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route8RockSmashGuyScript, -1
-	object_event 46,  6, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ArthurScript, EVENT_ROUTE_8_ARTHUR_OF_THURSDAY
-	object_event 33, 12, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route8FloriaScript, EVENT_FLORIA_AT_SUDOWOODO
-	object_event 21,  6, SPRITE_SUICUNE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_SAW_SUICUNE_ON_ROUTE_8
-	object_event 21,  4, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_WHITE, OBJECTTYPE_SCRIPT, 0, Route8BerryTree1, EVENT_ROUTE_8_BERRY_1
-	object_event 51,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route8BerryTree2, EVENT_ROUTE_8_BERRY_2
-	object_event 50,  4, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route8ApricornTree1, EVENT_ROUTE_8_APRICORN_1
+	setval PNK_APRICORN
+	setlasttalked ROUTE8_APRICORN_TREE1
+	jumpstd BerryOrFruitScript
