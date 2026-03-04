@@ -94,6 +94,7 @@ if DEF(_DEBUG)
 	giveitem LANTURN_CALL
 	giveitem KINGDRA_CALL
 	giveitem MILOTIC_CALL
+	giveitem SQUIRTBOTTLE
 	; useful items
 	giveitem MAX_REPEL, MAX_ITEM_STACK
 	giveitem ESCAPE_ROPE, MAX_ITEM_STACK
