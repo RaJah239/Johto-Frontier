@@ -395,7 +395,7 @@ TryFlashOW::
 	cp DARKNESS_PALSET
 	jr nz, .quit
 
-	; check if we own the the Lanturn Call
+	; check if we own the the mareep call
 	ld a, MAREEP_CALL
 	ld [wCurItem], a
 	ld hl, wNumItems
