@@ -19,7 +19,7 @@ Route8_MapEvents:
 	bg_event 51,  5, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
 
 	def_object_events
-	object_event 20, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerPsychicMark, -1
+	object_event 20, 12, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerPsychicMark, -1
 	object_event 31, 14, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 5, TrainerSchoolboyAlan, -1
 	object_event 37,  6, SPRITE_SUDOWOODO, SPRITEMOVEDATA_SUDOWOODO, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SudowoodoScript, EVENT_ROUTE_8_SUDOWOODO
 	object_event 51,  7, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route8LassText, -1
@@ -243,9 +243,10 @@ TrainerSchoolboyAlan:
 .AlanItem:
 	callstd GiftMScript
 	verbosegiveitem FIRE_STONE
-	iffalse_endtext
+	iffalse .done
 	clearflag ENGINE_ALAN_HAS_FIRE_STONE
-	endtext
+.done:
+	end
 
 .NumberAccepted:
 	jumpstd NumberAcceptedMScript
