@@ -1,3 +1,22 @@
+RuinsOfAlphResearchCenter_MapEvents:
+	def_warp_events
+	warp_event  2,  7, RUINS_OF_ALPH_OUTSIDE, 1
+	warp_event  3,  7, RUINS_OF_ALPH_OUTSIDE, 1
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  6,  5, BGEVENT_JUMPTEXT, RuinsOfAlphResearchCenterAcademicBooksText
+	bg_event  3,  4, BGEVENT_READ, RuinsOfAlphResearchCenterComputer
+	bg_event  7,  1, BGEVENT_READ, RuinsOfAlphResearchCenterPrinter
+
+	def_object_events
+	object_event  4,  5, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RuinsOfAlphResearchCenterScientist1Script, -1
+	object_event  5,  2, SPRITE_SCIENTIST, SPRITEMOVEDATA_WANDER, 2, 1, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RuinsOfAlphResearchCenterScientist2Script, -1
+	object_event  2,  5, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RuinsOfAlphResearchCenterScientist3Script, EVENT_RUINS_OF_ALPH_RESEARCH_CENTER_SCIENTIST
+	porygonpc_event 0, 2, PAL_NPC_RED
+	object_event  2,  2, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, FossilScientist, -1
+
 	object_const_def
 	const RUINSOFALPHRESEARCHCENTER_SCIENTIST1
 	const RUINSOFALPHRESEARCHCENTER_SCIENTIST2
@@ -13,11 +32,9 @@ RuinsOfAlphResearchCenter_MapScripts:
 	def_callbacks
 	callback MAPCALLBACK_OBJECTS, RuinsOfAlphResearchCenterScientistCallback
 
-RuinsOfAlphResearchCenterNoopScene:
-	end
-
 RuinsOfAlphResearchCenterGetUnownDexScene:
 	sdefer RuinsOfAlphResearchCenterGetUnownDexScript
+RuinsOfAlphResearchCenterNoopScene:
 	end
 
 RuinsOfAlphResearchCenterScientistCallback:
@@ -41,23 +58,51 @@ RuinsOfAlphResearchCenterGetUnownDexScript:
 	playsound SFX_TRANSACTION
 	pause 30
 	turnobject RUINSOFALPHRESEARCHCENTER_SCIENTIST3, DOWN
-	opentext
-	writetext RuinsOfAlphResearchCenterModifiedDexText
-	waitbutton
-	closetext
+	showthistext
+		text "Done!"
+
+		para "I modified your"
+		line "#dex."
+
+		para "I added an"
+		line "optional #dex"
+		cont "to store Unown"
+		cont "data."
+
+		para "It records them in"
+		line "the sequence that"
+		cont "they were caught."
+		done
 	applymovement RUINSOFALPHRESEARCHCENTER_SCIENTIST3, RuinsOfAlphResearchCenterApproachesPlayerMovement
 	opentext
-	writetext RuinsOfAlphResearchCenterDexUpgradedText
+	writethistext
+		text "<PLAYER>'s #dex"
+		line "was upgraded."
+		done
 	playsound SFX_ITEM
 	waitsfx
 	setflag ENGINE_UNOWN_DEX
 	writetext RuinsOfAlphResearchCenterScientist3Text
-	waitbutton
-	closetext
+	waitclosetext
 	applymovement RUINSOFALPHRESEARCHCENTER_SCIENTIST3, RuinsOfAlphResearchCenterLeavesPlayerMovement
 	setscene SCENE_RUINSOFALPHRESEARCHCENTER_NOOP
 	special RestartMapMusic
 	end
+
+RuinsOfAlphResearchCenterApproachesPlayerMovement:
+	step DOWN
+	step_end
+
+RuinsOfAlphResearchCenterLeavesPlayerMovement:
+	step UP
+	step_end
+
+RuinsOfAlphResearchCenterApproachesComputerMovement:
+	step UP
+	step UP
+	step LEFT
+	turn_head UP
+	step_end
 
 RuinsOfAlphResearchCenterScientist3Script:
 	faceplayer
@@ -70,73 +115,128 @@ RuinsOfAlphResearchCenterScientist3Script:
 	end
 
 .PrinterAvailable:
-	writetext RuinsOfAlphResearchCenterScientist3_PrinterAvailable
-	waitbutton
-	closetext
-	checkevent EVENT_CAUGHT_ALL_UNOWN
-	iffalse .ShowHiddenPowerOnStatsScreen
-	end
-
-.ShowHiddenPowerOnStatsScreen
 	setevent EVENT_CAUGHT_ALL_UNOWN
-	end
+	jumpthisopenedtext
+		text "You caught all the"
+		line "Unown variations?"
+
+		para "That's a great"
+		line "achievement!"
+
+		para "I've set up the"
+		line "printer here for"
+		cont "handling Unown."
+
+		para "Feel free to use"
+		line "it anytime."
+		done
+
+RuinsOfAlphResearchCenterScientist3Text:
+	text "The Unown you"
+	line "catch will all be"
+	cont "recorded."
+
+	para "Check to see how"
+	line "many kinds exist."
+	done
 
 RuinsOfAlphResearchCenterScientist1Script:
-	faceplayer
-	opentext
+	faceplayeropentext
 	readvar VAR_UNOWNCOUNT
 	ifequal NUM_UNOWN, .GotAllUnown
 	checkflag ENGINE_UNOWN_DEX
 	iftrue .GotUnownDex
 	checkevent EVENT_MADE_UNOWN_APPEAR_IN_RUINS
 	iftrue .UnownAppeared
-	writetext RuinsOfAlphResearchCenterScientist1Text
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "The ruins are"
+		line "about 1500 years"
+		cont "old."
+
+		para "But it's not known"
+		line "why they were"
+		cont "built--or by whom."
+		done
 
 .UnownAppeared:
-	writetext RuinsOfAlphResearchCenterScientist1Text_UnownAppeared
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "#mon appeared"
+		line "in the ruins?"
+
+		para "That's incredible"
+		line "news!"
+
+		para "We'll need to"
+		line "investigate this."
+		done
 
 .GotUnownDex:
-	writetext RuinsOfAlphResearchCenterScientist1Text_GotUnownDex
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "I wonder how many"
+		line "kinds of #mon"
+		cont "are in the ruins?"
+		done
 
 .GotAllUnown:
-	writetext RuinsOfAlphResearchCenterScientist1Text_GotAllUnown
-	waitbutton
-	closetext
 	clearevent EVENT_RUINS_OF_ALPH_OUTSIDE_TOURIST_YOUNGSTERS
-	end
+	jumpthisopenedtext
+		text "Our investigation,"
+		line "with your help, is"
+		cont "giving us insight"
+		cont "into the ruins."
+
+		para "The ruins appear"
+		line "to have been built"
+		cont "as a habitat for"
+		cont "#mon."
+		done
 
 RuinsOfAlphResearchCenterScientist2Script:
-	faceplayer
-	opentext
+	faceplayeropentext
 	readvar VAR_UNOWNCOUNT
 	ifequal NUM_UNOWN, .GotAllUnown
 	checkevent EVENT_MADE_UNOWN_APPEAR_IN_RUINS
 	iftrue .UnownAppeared
-	writetext RuinsOfAlphResearchCenterScientist2Text
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "There are odd pat-"
+		line "terns drawn on the"
+		cont "walls of the"
+		cont "ruins."
+
+		para "They must be the"
+		line "keys for unravel-"
+		cont "ing the mystery"
+		cont "of the ruins."
+		done
 
 .UnownAppeared:
-	writetext RuinsOfAlphResearchCenterScientist2Text_UnownAppeared
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "The strange #-"
+		line "mon you saw in the"
+		cont "ruins?"
+
+		para "They appear to be"
+		line "very much like the"
+		cont "drawings on the"
+		cont "walls there."
+
+		para "Hmm…"
+
+		para "That must mean"
+		line "there are many"
+		cont "kinds of them…"
+		done
 
 .GotAllUnown:
-	writetext RuinsOfAlphResearchCenterScientist2Text_GotAllUnown
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Why did those"
+		line "ancient patterns"
+		cont "appear on the wall"
+		cont "now?"
+
+		para "The mystery"
+		line "deepens…"
+		done
 
 RuinsOfAlphResearchCenterComputer:
 	opentext
@@ -145,16 +245,21 @@ RuinsOfAlphResearchCenterComputer:
 	readvar VAR_UNOWNCOUNT
 	ifequal NUM_UNOWN, .GotAllUnown
 .SkipChecking:
-	writetext RuinsOfAlphResearchCenterComputerText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Ruins Of Alph"
+
+		para "Exploration"
+		line "Year 25"
+		done
 
 .GotAllUnown:
-	writetext RuinsOfAlphResearchCenterComputerText_GotAllUnown
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Mystery #mon"
+		line "Name: Unown"
+
+		para "A total of {d:NUM_UNOWN}"
+		line "kinds found."
+		done
 
 RuinsOfAlphResearchCenterPrinter:
 	opentext
@@ -163,54 +268,48 @@ RuinsOfAlphResearchCenterPrinter:
 	readvar VAR_UNOWNCOUNT
 	ifequal NUM_UNOWN, .PrinterAvailable
 .SkipChecking:
-	writetext RuinsOfAlphResearchCenterPrinterText_DoesntWork
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "This doesn't seem"
+		line "to work yet."
+		done
 
 .PrinterAvailable:
-	writetext RuinsOfAlphResearchCenterUnownPrinterText
+	writethistext
+		text "Unown may be"
+		line "printed out."
+		done
 	waitbutton
 	special UnownPrinter
-	closetext
-	end
-
-RuinsOfAlphResearchCenterBookshelf:
-	jumptext RuinsOfAlphResearchCenterAcademicBooksText
-
-RuinsOfAlphResearchCenterApproachesComputerMovement:
-	step UP
-	step UP
-	step LEFT
-	turn_head UP
-	step_end
-
-RuinsOfAlphResearchCenterApproachesPlayerMovement:
-	step DOWN
-	step_end
-
-RuinsOfAlphResearchCenterLeavesPlayerMovement:
-	step UP
-	step_end
+	endtext
 
 FossilScientist:
-	faceplayer
-	opentext
-FossilScientistAgain:
-;	faceplayer
+	faceplayeropentext
+.FossilScientistAgain:
 	checkevent EVENT_MET_FOSSIL_SCIENTIST
 	iftrue .HaveAFossilForMe
-	writetext FossilScientistIntroText	
+	writethistext
+		text "Well, Hello there."
+		line "I'm a researcher."
+
+		para "I study ancient"
+		line "#mon fossils."
+
+		para "Do you have a"
+		line "fossil?"
+		done
 	setevent EVENT_MET_FOSSIL_SCIENTIST
 	sjump .FirstVisit
 
-.HaveAFossilForMe
-	writetext FossilScientistHaveAFossilText
-.FirstVisit
+.HaveAFossilForMe:
+	writethistext
+		text "Welcome once more!"
+		line "Found any fossils?"
+		done
+.FirstVisit:
 	checkevent EVENT_GAVE_SCIENTIST_OLD_AMBER
 	iftrue .GiveAerodactyl
 	checkevent EVENT_GAVE_SCIENTIST_DOME_FOSSIL
-	iftrue .GiveKabuto
+	iftrue .GiveLileep
 	checkevent EVENT_GAVE_SCIENTIST_HELIX_FOSSIL
 	iftrue .GiveOmanyte
 	waitbutton
@@ -222,7 +321,7 @@ FossilScientistAgain:
 	ifequal REVIVE_HELIX_FOSSIL, .HelixFossil
 	sjump .No
  
-.OldAmber
+.OldAmber:
 	checkitem OLD_AMBER
 	iffalse .No
 	getmonname STRING_BUFFER_3, AERODACTYL
@@ -258,19 +357,27 @@ FossilScientistAgain:
 	waitbutton
 	sjump .GaveScientistFossil
  
-.No
-	writetext FossilScientistNoText
-	waitbutton
-	closetext
-	end
+.No:
+	jumpthisopenedtext
+		text "No? That's alright."
+
+		para "Fossils may be"
+		line "found inside of"
+		cont "breakable rocks."
+
+		para "Come visit again"
+		line "if you find any."
+		done 
  
 .GaveScientistFossil:
-	writetext FossilScientistTimeText
+	writethistext
+		text "This'll just"
+		line "take a moment!"
+		done
 	playsound SFX_ZAP_CANNON
 	waitsfx
 	promptbutton
-	sjump FossilScientistAgain
-	closetext
+	sjump .FossilScientistAgain
  
 .GiveAerodactyl:
 	readvar VAR_PARTYCOUNT
@@ -285,11 +392,9 @@ FossilScientistAgain:
 	waitbutton
 	givepoke AERODACTYL, 5
 	writetext DropByWithFossilsText
-	waitbutton
-	closetext
-	end
+	waitendtext
  
-.GiveKabuto:
+.GiveLileep:
 	readvar VAR_PARTYCOUNT
 	ifequal PARTY_LENGTH, .NoRoom
 	clearevent EVENT_GAVE_SCIENTIST_DOME_FOSSIL
@@ -302,9 +407,7 @@ FossilScientistAgain:
 	waitbutton
 	givepoke LILEEP, 5
 	writetext DropByWithFossilsText
-	waitbutton
-	closetext
-	end
+	waitendtext
  
 .GiveOmanyte:
 	readvar VAR_PARTYCOUNT
@@ -319,15 +422,18 @@ FossilScientistAgain:
 	waitbutton
 	givepoke OMANYTE, 5
 	writetext DropByWithFossilsText
-	waitbutton
-	closetext
-	end
+	waitendtext
  
 .NoRoom:
-	writetext FossilScientistPartyFullText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Hmmm…?"
+
+		para "Your party is"
+		line "already full…"
+		
+		para "Return when you"
+		line "have a free slot."
+		done
  
 .MoveMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -339,36 +445,9 @@ FossilScientistAgain:
 	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
 	db 4 ; items
 	db "Old Amber@"
-	db "Dome Fossil@"
+	db "Root Fossil@"
 	db "Helix Fossil@"
 	db "Cancel@"
-
-FossilScientistIntroText:
-	text "Well, Hello there."
-	line "I'm a researcher."
-
-	para "I study ancient"
-	line "#mon fossils."
-
-	para "Do you have a"
-	line "fossil?"
-	done
-
-FossilScientistHaveAFossilText:
-	text "Welcome once more!"
-	line "Found any fossils?"
-	done
-
-FossilScientistNoText:
-	text "No? That's alright."
-
-	para "Fossils may be"
-	line "found inside of"
-	cont "breakable rocks."
-
-	para "Come visit again"
-	line "if you find any."
-	done 
 
 FossilScientistMonText:
 	text "Oh? That's"
@@ -397,21 +476,6 @@ FossilScientistGiveText:
 	line "over the fossil."
 	done
 
-FossilScientistTimeText:
-	text "This'll just"
-	line "take a moment!"
-	done
-
-FossilScientistPartyFullText:
-	text "Hmmm…?"
-
-	para "Your party is"
-	line "already full…"
-	
-	para "Return when you"
-	line "have a free slot."
-	done
-
 FossilScientistDoneText:
 	text "Your fossil has"
 	line "been resurrected!"
@@ -429,160 +493,6 @@ DropByWithFossilsText:
 	line "more fossils."
 	done
 
-RuinsOfAlphResearchCenterModifiedDexText:
-	text "Done!"
-
-	para "I modified your"
-	line "#dex."
-
-	para "I added an"
-	line "optional #dex"
-
-	para "to store UNOWN"
-	line "data."
-
-	para "It records them in"
-	line "the sequence that"
-	cont "they were caught."
-	done
-
-RuinsOfAlphResearchCenterDexUpgradedText:
-	text "<PLAYER>'s #dex"
-	line "was upgraded."
-	done
-
-RuinsOfAlphResearchCenterScientist3Text:
-	text "The Unown you"
-	line "catch will all be"
-	cont "recorded."
-
-	para "Check to see how"
-	line "many kinds exist."
-	done
-
-RuinsOfAlphResearchCenterScientist3_PrinterAvailable:
-	text "You caught all the"
-	line "Unown variations?"
-
-	para "That's a great"
-	line "achievement!"
-
-	para "I've set up the"
-	line "printer here for"
-	cont "handling Unown."
-
-	para "Feel free to use"
-	line "it anytime."
-	done
-
-RuinsOfAlphResearchCenterScientist1Text:
-	text "The Ruins are"
-	line "about 1500 years"
-	cont "old."
-
-	para "But it's not known"
-	line "why they were"
-	cont "built--or by whom."
-	done
-
-RuinsOfAlphResearchCenterScientist1Text_GotUnownDex:
-	text "I wonder how many"
-	line "kinds of #mon"
-	cont "are in the Ruins?"
-	done
-
-RuinsOfAlphResearchCenterScientist1Text_UnownAppeared:
-	text "#Mon appeared"
-	line "in the Ruins?"
-
-	para "That's incredible"
-	line "news!"
-
-	para "We'll need to"
-	line "investigate this."
-	done
-
-RuinsOfAlphResearchCenterScientist1Text_GotAllUnown:
-	text "Our investigation,"
-	line "with your help, is"
-
-	para "giving us insight"
-	line "into the Ruins."
-
-	para "The Ruins appear"
-	line "to have been built"
-
-	para "as a habitat for"
-	line "#mon."
-	done
-
-RuinsOfAlphResearchCenterScientist2Text:
-	text "There are odd pat-"
-	line "terns drawn on the"
-
-	para "walls of the"
-	line "Ruins."
-
-	para "They must be the"
-	line "keys for unravel-"
-	cont "ing the mystery"
-	cont "of the Ruins."
-	done
-
-RuinsOfAlphResearchCenterScientist2Text_UnownAppeared:
-	text "The strange #-"
-	line "mon you saw in the"
-	cont "Ruins?"
-
-	para "They appear to be"
-	line "very much like the"
-
-	para "drawings on the"
-	line "walls there."
-
-	para "Hmm…"
-
-	para "That must mean"
-	line "there are many"
-	cont "kinds of them…"
-	done
-
-RuinsOfAlphResearchCenterScientist2Text_GotAllUnown:
-	text "Why did those"
-	line "ancient patterns"
-
-	para "appear on the wall"
-	line "now?"
-
-	para "The mystery"
-	line "deepens…"
-	done
-
-RuinsOfAlphResearchCenterComputerText:
-	text "Ruins Of Alph"
-
-	para "Exploration"
-	line "Year 10"
-	done
-
-RuinsOfAlphResearchCenterComputerText_GotAllUnown:
-	text "Mystery #mon"
-	line "Name: Unown"
-
-	para "A total of {d:NUM_UNOWN}"
-	line "kinds found."
-	done
-
-RuinsOfAlphResearchCenterPrinterText_DoesntWork:
-	text "This doesn't seem"
-	line "to work yet."
-	done
-
-RuinsOfAlphResearchCenterUnownPrinterText:
-	text "Unown may be"
-	line "printed out."
-	done
-
 RuinsOfAlphResearchCenterAcademicBooksText:
 	text "There are many"
 	line "academic books."
@@ -591,25 +501,3 @@ RuinsOfAlphResearchCenterAcademicBooksText:
 	line "Mysteries of the"
 	cont "Ancients…"
 	done
-
-RuinsOfAlphResearchCenterPorygonPCScript:
-	jumpstd PorygonPCScript
-
-RuinsOfAlphResearchCenter_MapEvents:
-	def_warp_events
-	warp_event  2,  7, RUINS_OF_ALPH_OUTSIDE, 1
-	warp_event  3,  7, RUINS_OF_ALPH_OUTSIDE, 1
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  6,  5, BGEVENT_READ, RuinsOfAlphResearchCenterBookshelf
-	bg_event  3,  4, BGEVENT_READ, RuinsOfAlphResearchCenterComputer
-	bg_event  7,  1, BGEVENT_READ, RuinsOfAlphResearchCenterPrinter
-
-	def_object_events
-	object_event  4,  5, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RuinsOfAlphResearchCenterScientist1Script, -1
-	object_event  5,  2, SPRITE_SCIENTIST, SPRITEMOVEDATA_WANDER, 2, 1, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RuinsOfAlphResearchCenterScientist2Script, -1
-	object_event  2,  5, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RuinsOfAlphResearchCenterScientist3Script, EVENT_RUINS_OF_ALPH_RESEARCH_CENTER_SCIENTIST
-	object_event  0,  2, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RuinsOfAlphResearchCenterPorygonPCScript, -1
-	object_event  2,  2, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, FossilScientist, -1
