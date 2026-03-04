@@ -829,7 +829,7 @@ AerodactylPuzzleLZ:
 INCBIN "gfx/unown_puzzle/aerodactyl.2bpp.lz"
 
 KabutoPuzzleLZ:
-INCBIN "gfx/unown_puzzle/kabuto.2bpp.lz"
+INCBIN "gfx/unown_puzzle/lileep.2bpp.lz"
 
 OmanytePuzzleLZ:
 INCBIN "gfx/unown_puzzle/omanyte.2bpp.lz"
