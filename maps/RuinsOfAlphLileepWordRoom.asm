@@ -1,8 +1,3 @@
-RuinsOfAlphLileepWordRoom_MapScripts:
-	def_scene_scripts
-
-	def_callbacks
-
 RuinsOfAlphLileepWordRoom_MapEvents:
 	def_warp_events
 	warp_event  9,  5, RUINS_OF_ALPH_LILEEP_ITEM_ROOM, 3
@@ -14,3 +9,8 @@ RuinsOfAlphLileepWordRoom_MapEvents:
 	def_bg_events
 
 	def_object_events
+
+RuinsOfAlphLileepWordRoom_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
