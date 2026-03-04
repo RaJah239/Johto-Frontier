@@ -80,13 +80,13 @@ SpecialKabutoChamber:
 
 	call GetMapAttributesPointer
 	ld a, h
-	cp HIGH(RuinsOfAlphKabutoChamber_MapAttributes)
+	cp HIGH(RuinsOfAlphLileepChamber_MapAttributes)
 	jr nz, .done
 	ld a, l
-	cp LOW(RuinsOfAlphKabutoChamber_MapAttributes)
+	cp LOW(RuinsOfAlphLileepChamber_MapAttributes)
 	jr nz, .done
 
-	ld de, EVENT_WALL_OPENED_IN_KABUTO_CHAMBER
+	ld de, EVENT_WALL_OPENED_IN_LILEEP_CHAMBER
 	ld b, SET_FLAG
 	call EventFlagAction
 

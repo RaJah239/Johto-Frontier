@@ -124,17 +124,17 @@ Dungeons_Map_Names: ; newgroup DUNGEONS
 	dw Dungeons_Map_Name21 ; map_const RADIO_TOWER_5F
 	dw Dungeons_Map_Name22 ; map_const RUINS_OF_ALPH_OUTSIDE
 	dw Dungeons_Map_Name23 ; map_const RUINS_OF_ALPH_HO_OH_CHAMBER
-	dw Dungeons_Map_Name24 ; map_const RUINS_OF_ALPH_KABUTO_CHAMBER
+	dw Dungeons_Map_Name24 ; map_const RUINS_OF_ALPH_LILEEP_CHAMBER
 	dw Dungeons_Map_Name25 ; map_const RUINS_OF_ALPH_OMANYTE_CHAMBER
 	dw Dungeons_Map_Name26 ; map_const RUINS_OF_ALPH_AERODACTYL_CHAMBER
 	dw Dungeons_Map_Name27 ; map_const RUINS_OF_ALPH_INNER_CHAMBER
 	dw Dungeons_Map_Name28 ; map_const RUINS_OF_ALPH_RESEARCH_CENTER
 	dw Dungeons_Map_Name29 ; map_const RUINS_OF_ALPH_HO_OH_ITEM_ROOM
-	dw Dungeons_Map_Name30 ; map_const RUINS_OF_ALPH_KABUTO_ITEM_ROOM
+	dw Dungeons_Map_Name30 ; map_const RUINS_OF_ALPH_LILEEP_ITEM_ROOM
 	dw Dungeons_Map_Name31 ; map_const RUINS_OF_ALPH_OMANYTE_ITEM_ROOM
 	dw Dungeons_Map_Name32 ; map_const RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM
 	dw Dungeons_Map_Name33 ; map_const RUINS_OF_ALPH_HO_OH_WORD_ROOM
-	dw Dungeons_Map_Name34 ; map_const RUINS_OF_ALPH_KABUTO_WORD_ROOM
+	dw Dungeons_Map_Name34 ; map_const RUINS_OF_ALPH_LILEEP_WORD_ROOM
 	dw Dungeons_Map_Name35 ; map_const RUINS_OF_ALPH_OMANYTE_WORD_ROOM
 	dw Dungeons_Map_Name36 ; map_const RUINS_OF_ALPH_AERODACTYL_WORD_ROOM
 	dw Dungeons_Map_Name37 ; map_const UNION_CAVE_1F

@@ -3164,7 +3164,7 @@ wRadioTower5FSceneID::                            db
 wRuinsOfAlphOutsideSceneID::                      db
 wRuinsOfAlphResearchCenterSceneID::               db
 wRuinsOfAlphHoOhChamberSceneID::                  db
-wRuinsOfAlphKabutoChamberSceneID::                db
+wRuinsOfAlphLileepChamberSceneID::                db
 wRuinsOfAlphOmanyteChamberSceneID::               db
 wRuinsOfAlphAerodactylChamberSceneID::            db
 wRuinsOfAlphInnerChamberSceneID::                 db
