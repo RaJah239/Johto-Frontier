@@ -161,7 +161,7 @@ ItemEffects:
 	dw NoEffect            ; FLAME_ORB
 	dw NoEffect            ; LEFTOVERS
 	dw NoEffect            ; OLD_AMBER
-	dw NoEffect            ; DOME_FOSSIL
+	dw NoEffect            ; ROOT_FOSSIL
 	dw NoEffect            ; HELIX_FOSSIL
 	dw RestorePPEffect     ; MYSTERYBERRY
 	dw NoEffect            ; DRAGON_SCALE

@@ -308,7 +308,7 @@ FossilScientist:
 .FirstVisit:
 	checkevent EVENT_GAVE_SCIENTIST_OLD_AMBER
 	iftrue .GiveAerodactyl
-	checkevent EVENT_GAVE_SCIENTIST_DOME_FOSSIL
+	checkevent EVENT_GAVE_SCIENTIST_ROOT_FOSSIL
 	iftrue .GiveLileep
 	checkevent EVENT_GAVE_SCIENTIST_HELIX_FOSSIL
 	iftrue .GiveOmanyte
@@ -317,7 +317,7 @@ FossilScientist:
 	verticalmenu
 	closewindow
 	ifequal REVIVE_OLD_AMBER, .OldAmber
-	ifequal REVIVE_DOME_FOSSIL, .DomeFossil
+	ifequal REVIVE_ROOT_FOSSIL, .RootFossil
 	ifequal REVIVE_HELIX_FOSSIL, .HelixFossil
 	sjump .No
  
@@ -333,14 +333,14 @@ FossilScientist:
 	waitbutton
 	sjump .GaveScientistFossil
  
-.DomeFossil:
-	checkitem DOME_FOSSIL
+.RootFossil:
+	checkitem ROOT_FOSSIL
 	iffalse .No
 	getmonname STRING_BUFFER_3, LILEEP
 	writetext FossilScientistMonText
 	promptbutton
-	setevent EVENT_GAVE_SCIENTIST_DOME_FOSSIL
-	takeitem DOME_FOSSIL
+	setevent EVENT_GAVE_SCIENTIST_ROOT_FOSSIL
+	takeitem ROOT_FOSSIL
 	writetext FossilScientistGiveText
 	waitbutton
 	sjump .GaveScientistFossil
@@ -397,7 +397,7 @@ FossilScientist:
 .GiveLileep:
 	readvar VAR_PARTYCOUNT
 	ifequal PARTY_LENGTH, .NoRoom
-	clearevent EVENT_GAVE_SCIENTIST_DOME_FOSSIL
+	clearevent EVENT_GAVE_SCIENTIST_ROOT_FOSSIL
 	writetext FossilScientistDoneText
 	promptbutton
 	getmonname STRING_BUFFER_3, LILEEP

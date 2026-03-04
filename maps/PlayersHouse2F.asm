@@ -116,9 +116,9 @@ if DEF(_DEBUG)
 	giveitem SILVER_LEAF, MAX_ITEM_STACK
 	giveitem GOLD_LEAF, MAX_ITEM_STACK
 	; fossils
-	giveitem OLD_AMBER
-	giveitem DOME_FOSSIL
 	giveitem HELIX_FOSSIL
+	giveitem OLD_AMBER
+	giveitem ROOT_FOSSIL
 	; all balls
 	giveitem MASTER_BALL, MAX_ITEM_STACK
 	giveitem SHINY_BALL, MAX_ITEM_STACK

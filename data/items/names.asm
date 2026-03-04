@@ -147,7 +147,7 @@ ItemNames::
 	li "Flame Orb"
 	li "Leftovers"
 	li "Old Amber"
-	li "Dome Fossil"
+	li "Root Fossil"
 	li "Helix Fossil"
 	li "MysteryBerry"
 	li "Dragon Scale"

@@ -153,7 +153,7 @@
 	const FLAME_ORB    ; 91
 	const LEFTOVERS    ; 92
 	const OLD_AMBER    ; 87
-	const DOME_FOSSIL  ; 88
+	const ROOT_FOSSIL  ; 88
 	const HELIX_FOSSIL ; 89
 	const MYSTERYBERRY ; 96
 	const DRAGON_SCALE ; 97

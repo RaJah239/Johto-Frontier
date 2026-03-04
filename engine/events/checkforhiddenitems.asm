@@ -147,9 +147,9 @@ RockItemEncounter:
 	db 1, MAX_REVIVE
 	db 4, NUGGET
 	db 6, STAR_PIECE
-	db 10, DOME_FOSSIL
 	db 10, HELIX_FOSSIL
 	db 10, OLD_AMBER
+	db 10, ROOT_FOSSIL
 	db 12, BIG_PEARL
 	db 18, ETHER
 	db 24, HARD_STONE

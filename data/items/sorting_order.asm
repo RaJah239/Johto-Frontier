@@ -234,9 +234,9 @@ ItemNameOrder:
 	db BRICK_PIECE
 
 ; Fossils
-	db DOME_FOSSIL
 	db HELIX_FOSSIL
 	db OLD_AMBER
+	db ROOT_FOSSIL
 
 ; NEXT POCKET
 ; Key Items Pocket - 27 total
