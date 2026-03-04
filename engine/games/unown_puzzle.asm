@@ -811,7 +811,7 @@ LoadUnownPuzzlePiecesGFX:
 
 .LZPointers:
 ; entries correspond to UNOWNPUZZLE_* constants
-	dw KabutoPuzzleLZ
+	dw LileepPuzzleLZ
 	dw OmanytePuzzleLZ
 	dw AerodactylPuzzleLZ
 	dw HoOhPuzzleLZ
@@ -828,7 +828,7 @@ INCBIN "gfx/unown_puzzle/hooh.2bpp.lz"
 AerodactylPuzzleLZ:
 INCBIN "gfx/unown_puzzle/aerodactyl.2bpp.lz"
 
-KabutoPuzzleLZ:
+LileepPuzzleLZ:
 INCBIN "gfx/unown_puzzle/lileep.2bpp.lz"
 
 OmanytePuzzleLZ:

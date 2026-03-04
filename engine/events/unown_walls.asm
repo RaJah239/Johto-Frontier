@@ -74,7 +74,7 @@ SpecialAerodactylChamber:
 	pop de
 	ret
 
-SpecialKabutoChamber:
+SpecialLileepChamber:
 	push hl
 	push de
 

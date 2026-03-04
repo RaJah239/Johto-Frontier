@@ -1007,7 +1007,7 @@ EscapeRopeOrDig:
 	ret
 
 .escaperope
-	farcall SpecialKabutoChamber
+	farcall SpecialLileepChamber
 	ld hl, .UsedEscapeRopeScript
 	call QueueScript
 	ld a, $81

@@ -139,8 +139,8 @@ EvolutionMoves::
     db NO_MOVE      ; PORYGON
     db NO_MOVE      ; OMANYTE
     db NO_MOVE      ; OMASTAR
-    db NO_MOVE      ; KABUTO
-    db NO_MOVE      ; KABUTOPS
+    db NO_MOVE      ; LILEEP
+    db NO_MOVE      ; CRADILY
     db NO_MOVE      ; AERODACTYL
     db NO_MOVE      ; SNORLAX
     db NO_MOVE      ; ARTICUNO
