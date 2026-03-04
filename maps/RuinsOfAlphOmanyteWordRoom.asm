@@ -1,8 +1,3 @@
-RuinsOfAlphOmanyteWordRoom_MapScripts:
-	def_scene_scripts
-
-	def_callbacks
-
 RuinsOfAlphOmanyteWordRoom_MapEvents:
 	def_warp_events
 	warp_event  9,  7, RUINS_OF_ALPH_OMANYTE_ITEM_ROOM, 3
@@ -14,3 +9,8 @@ RuinsOfAlphOmanyteWordRoom_MapEvents:
 	def_bg_events
 
 	def_object_events
+
+RuinsOfAlphOmanyteWordRoom_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
