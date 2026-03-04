@@ -18,7 +18,7 @@ EarlsPokemonAcademy_MapEvents:
 	object_event  3, 11, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyGameboyKid1Script, -1
 	object_event  4, 11, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyGameboyKid2Script, -1
 	object_event  2,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, AcademyNotebook, -1
-	object_event  6, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyYoungsterHardModeScript, -1
+	object_event  6, 13, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyCooltrainerFHardModeScript, -1
 
 	object_const_def
 	const EARLSPOKEMONACADEMY_EARL
@@ -27,7 +27,7 @@ EarlsPokemonAcademy_MapEvents:
 	const EARLSPOKEMONACADEMY_GAMEBOY_KID1
 	const EARLSPOKEMONACADEMY_GAMEBOY_KID2
 	const EARLSPOKEMONACADEMY_POKEDEX1
-	const EARLSPOKEMONACADEMY_YOUNGSTER3
+	const EARLSPOKEMONACADEMY_COOLTRAINER_F
 
 EarlsPokemonAcademy_MapScripts:
 	def_scene_scripts
@@ -98,7 +98,7 @@ AcademyEarl:
 		cont "in Options is."
 
 		para "Exp.Share gives"
-		line "all party halve of"
+		line "party halve of all"
 		cont "Exp. earned."
 
 		para "Full Exp. Johto's"
@@ -220,25 +220,51 @@ AcademyNotebookText3:
 	line "anymore…"
 	done
 
-EarlsPokemonAcademyYoungsterHardModeScript:
-	jumptextfaceplayer EarlsPokemonAcademyYoungsterHardModeText
+EarlsPokemonAcademyCooltrainerFHardModeScript:
+	faceplayeropentext
+	checkevent EVENT_EARLS_ACADEMY_LUCKY_EGG
+	iffalse .LuckyEggGift
+.HardModeInfo:
+	jumpthisopenedtext
+		text "Have you tried out"
+		line "Hard Mode in your"
+		cont "Options menu?"
 
-EarlsPokemonAcademyYoungsterHardModeText:
-	text "Have you tried out"
-	line "Hard Mode in your"
-	cont "Options menu?"
+		para "It ups all enemy"
+		line "trainer's attack"
+		cont "and defense stats"
+		cont "by 20<%>!"
 
-	para "It ups all enemy"
-	line "trainer's attack"
-	cont "and defense stats"
-	cont "by 20<%>!"
-
-	para "It doesn't effect"
-	line "their hit points."
+		para "It doesn't effect"
+		line "their hit points."
 	
-	para "An unforgiving but"
-	line "worthy challenge!"
-	done
+		para "An unforgiving but"
+		line "worthy challenge!"
+		
+		para "Each bookshelf at"
+		line "the front has good"
+		cont "information too!"
+		done
+
+.LuckyEggGift:
+	writethistext
+		text "Hi. There's so much"
+		line "to learn!"
+
+		para "Like this item."
+		done
+	waitbutton
+	verbosegiveitem LUCKY_EGG
+	iffalse_endtext
+	setevent EVENT_EARLS_ACADEMY_LUCKY_EGG
+	writethistext
+		text "It boosts Exp. of"
+		line "of the holder!"
+		
+		para "Also…"
+		done
+	waitbutton
+	sjump .HardModeInfo
 
 MoveEnchancingAbilitiesNotebook:
 	opentext
