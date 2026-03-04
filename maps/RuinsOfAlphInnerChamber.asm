@@ -13,32 +13,32 @@ RuinsOfAlphInnerChamber_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  2,  3, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event  5,  3, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event  8,  3, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event 11,  3, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event 14,  3, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event 17,  3, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event  2,  8, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event  5,  8, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event  8,  8, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event 11,  8, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event 14,  8, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event 17,  8, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event  2, 13, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event 17, 13, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event  2, 18, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event  5, 18, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event  8, 18, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event 11, 18, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event 14, 18, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event 17, 18, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event  2, 24, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event  5, 24, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event  8, 24, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event 11, 24, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event 14, 24, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
-	bg_event 17, 24, BGEVENT_JUMPTEXT, RuinsOfAlphInnerChamberStatueText
+	bg_event  2,  3, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  5,  3, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  8,  3, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event 11,  3, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event 14,  3, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event 17,  3, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  2,  8, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  5,  8, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  8,  8, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event 11,  8, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event 14,  8, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event 17,  8, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  2, 13, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event 17, 13, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  2, 18, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  5, 18, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  8, 18, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event 11, 18, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event 14, 18, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event 17, 18, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  2, 24, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  5, 24, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  8, 24, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event 11, 24, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event 14, 24, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event 17, 24, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
 
 	def_object_events
 	chanseyheal_event  8, 11
@@ -98,7 +98,7 @@ RuinsOfAlphInnerChamberGrampsText:
 	line "for instance."
 	done
 
-RuinsOfAlphInnerChamberStatueText:
+RuinsOfAlphStatueText:
 	text "It's a replica of"
 	line "an ancient #-"
 	cont "mon."

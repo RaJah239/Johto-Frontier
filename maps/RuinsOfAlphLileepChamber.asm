@@ -1,3 +1,24 @@
+RuinsOfAlphLileepChamber_MapEvents:
+	def_warp_events
+	warp_event  3,  9, RUINS_OF_ALPH_OUTSIDE, 3
+	warp_event  4,  9, RUINS_OF_ALPH_OUTSIDE, 3
+	warp_event  3,  3, RUINS_OF_ALPH_INNER_CHAMBER, 4
+	warp_event  4,  3, RUINS_OF_ALPH_INNER_CHAMBER, 5
+	warp_event  4,  0, RUINS_OF_ALPH_LILEEP_ITEM_ROOM, 1
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  2,  3, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  5,  3, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  3,  2, BGEVENT_UP, RuinsOfAlphLileepChamberPuzzle
+	bg_event  4,  2, BGEVENT_JUMPTEXT, RuinsOfAlphLileepChamberDescriptionText
+	bg_event  4,  0, BGEVENT_UP, RuinsOfAlphLileepChamberWallPatternRight
+
+	def_object_events
+	object_event  5,  5, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, RuinsOfAlphLileepChamberReceptionistText, EVENT_RUINS_OF_ALPH_LILEEP_CHAMBER_RECEPTIONIST
+	object_event  3,  1, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RuinsOfAlphLileepChamberScientistScript, -1
+
 	object_const_def
 	const RUINSOFALPHLILEEPCHAMBER_RECEPTIONIST
 	const RUINSOFALPHLILEEPCHAMBER_SCIENTIST
@@ -17,8 +38,6 @@ RuinsOfAlphLileepChamberCheckWallScene:
 
 .OpenWall:
 	sdefer RuinsOfAlphLileepChamberWallOpenScript
-	end
-
 RuinsOfAlphLileepChamberNoopScene:
 	end
 
@@ -46,11 +65,7 @@ RuinsOfAlphLileepChamberWallOpenScript:
 	refreshmap
 	earthquake 50
 	setscene SCENE_RUINSOFALPHLILEEPCHAMBER_NOOP
-	closetext
-	end
-
-RuinsOfAlphLileepChamberReceptionistScript:
-	jumptextfaceplayer RuinsOfAlphLileepChamberReceptionistText
+	endtext
 
 RuinsOfAlphLileepChamberPuzzle:
 	reanchormap
@@ -80,9 +95,12 @@ RuinsOfAlphLileepChamberPuzzle:
 	warpcheck
 	end
 
+RuinsOfAlphLileepChamberSkyfallTopMovement:
+	skyfall_top
+	step_end
+
 RuinsOfAlphLileepChamberScientistScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	readvar VAR_UNOWNCOUNT
 	ifequal NUM_UNOWN, .AllUnownCaught
 	checkevent EVENT_WALL_OPENED_IN_LILEEP_CHAMBER
@@ -92,103 +110,53 @@ RuinsOfAlphLileepChamberScientistScript:
 	writetext RuinsOfAlphLileepChamberScientistTremorText
 	promptbutton
 .PuzzleIncomplete:
-	writetext RuinsOfAlphLileepChamberScientistCrypticText
-	waitbutton
-	closetext
+	writethistext
+		text "Recently, strange,"
+		line "cryptic patterns"
+		cont "have appeared."
+
+		para "It's odd. They"
+		line "weren't here a"
+		cont "little while ago…"
+
+		para "You should take a"
+		line "look at the walls."
+		done
+	waitclosetext
 	turnobject RUINSOFALPHLILEEPCHAMBER_SCIENTIST, UP
 	end
 
 .WallOpen:
-	writetext RuinsOfAlphLileepChamberScientistHoleText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Ah! Here's another"
+		line "huge hole!"
+
+		para "It's big enough to"
+		line "go through!"
+		done
 
 .AllUnownCaught:
-	writetext RuinsOfAlphLileepChamberScientistText_GotAllUnown
-	waitbutton
-	closetext
-	end
-
-RuinsOfAlphLileepChamberAncientReplica:
-	jumptext RuinsOfAlphLileepChamberAncientReplicaText
-
-RuinsOfAlphLileepChamberDescriptionSign:
-	jumptext RuinsOfAlphLileepChamberDescriptionText
-
-RuinsOfAlphLileepChamberWallPatternLeft:
-	opentext
-	writetext RuinsOfAlphLileepChamberWallPatternText
-	setval UNOWNWORDS_ESCAPE
-	special DisplayUnownWords
-	closetext
-	end
+	jumpthisopenedtext
+		text "Our investigation"
+		line "is going well!"
+		done
 
 RuinsOfAlphLileepChamberWallPatternRight:
 	checkevent EVENT_WALL_OPENED_IN_LILEEP_CHAMBER
 	iftrue .WallOpen
 	opentext
-	writetext RuinsOfAlphLileepChamberWallPatternText
+	writethistext
+		text "Patterns appeared"
+		line "on the walls…"
+		done
 	setval UNOWNWORDS_ESCAPE
 	special DisplayUnownWords
-	closetext
-	end
+	endtext
 
 .WallOpen:
-	opentext
-	writetext RuinsOfAlphLileepChamberWallHoleText
-	waitbutton
-	closetext
-	end
-
-RuinsOfAlphLileepChamberSkyfallTopMovement:
-	skyfall_top
-	step_end
-
-RuinsOfAlphLileepChamberReceptionistText:
-	text "Welcome to this"
-	line "chamber."
-
-	para "There are sliding"
-	line "panels that depict"
-
-	para "a #MON drawn by"
-	line "the ancients."
-
-	para "Slide the panels"
-	line "around to form the"
-	cont "picture."
-
-	para "To the right is a"
-	line "description of the"
-	cont "#MON."
-
-	para "Scientists in the"
-	line "back are examining"
-
-	para "some newly found"
-	line "patterns."
-	done
-
-RuinsOfAlphLileepChamberScientistCrypticText:
-	text "Recently, strange,"
-	line "cryptic patterns"
-	cont "have appeared."
-
-	para "It's odd. They"
-	line "weren't here a"
-	cont "little while ago…"
-
-	para "You should take a"
-	line "look at the walls."
-	done
-
-RuinsOfAlphLileepChamberScientistHoleText:
-	text "Ah! Here's another"
-	line "huge hole!"
-
-	para "It's big enough to"
-	line "go through!"
+	jumpthistext
+	text "There's a big hole"
+	line "in the wall!"
 	done
 
 RuinsOfAlphLileepChamberScientistTremorText:
@@ -200,53 +168,32 @@ RuinsOfAlphLileepChamberScientistTremorText:
 	cont "this wall here…"
 	done
 
-RuinsOfAlphLileepChamberWallPatternText:
-	text "Patterns appeared"
-	line "on the walls…"
-	done
+RuinsOfAlphLileepChamberReceptionistText:
+	text "Welcome to this"
+	line "chamber."
 
-RuinsOfAlphLileepChamberWallHoleText:
-	text "There's a big hole"
-	line "in the wall!"
-	done
+	para "There are sliding"
+	line "panels that depict"
+	cont "a #mon drawn by"
+	cont "the ancients."
 
-RuinsOfAlphLileepChamberAncientReplicaText:
-	text "It's a replica of"
-	line "an ancient #-"
-	cont "MON."
+	para "Slide the panels"
+	line "around to form the"
+	cont "picture."
+
+	para "To the right is a"
+	line "description of the"
+	cont "#mon."
+
+	para "Scientists in the"
+	line "back are examining"
+	cont "some newly found"
+	cont "patterns."
 	done
 
 RuinsOfAlphLileepChamberDescriptionText:
-	text "A #MON that hid"
-	line "on the sea floor."
-
-	para "Eyes on its back"
-	line "scanned the area."
+	text "A #mon rooted"
+	line "to rocks and clung"
+	cont "to reefs in times"
+	cont "since past."
 	done
-
-RuinsOfAlphLileepChamberScientistText_GotAllUnown:
-	text "Our investigation"
-	line "is going well!"
-	done
-
-RuinsOfAlphLileepChamber_MapEvents:
-	def_warp_events
-	warp_event  3,  9, RUINS_OF_ALPH_OUTSIDE, 3
-	warp_event  4,  9, RUINS_OF_ALPH_OUTSIDE, 3
-	warp_event  3,  3, RUINS_OF_ALPH_INNER_CHAMBER, 4
-	warp_event  4,  3, RUINS_OF_ALPH_INNER_CHAMBER, 5
-	warp_event  4,  0, RUINS_OF_ALPH_LILEEP_ITEM_ROOM, 1
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  2,  3, BGEVENT_READ, RuinsOfAlphLileepChamberAncientReplica
-	bg_event  5,  3, BGEVENT_READ, RuinsOfAlphLileepChamberAncientReplica
-	bg_event  3,  2, BGEVENT_UP, RuinsOfAlphLileepChamberPuzzle
-	bg_event  4,  2, BGEVENT_UP, RuinsOfAlphLileepChamberDescriptionSign
-	bg_event  3,  0, BGEVENT_UP, RuinsOfAlphLileepChamberWallPatternLeft
-	bg_event  4,  0, BGEVENT_UP, RuinsOfAlphLileepChamberWallPatternRight
-
-	def_object_events
-	object_event  5,  5, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RuinsOfAlphLileepChamberReceptionistScript, EVENT_RUINS_OF_ALPH_LILEEP_CHAMBER_RECEPTIONIST
-	object_event  3,  1, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RuinsOfAlphLileepChamberScientistScript, -1
