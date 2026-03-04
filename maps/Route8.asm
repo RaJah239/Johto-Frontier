@@ -20,7 +20,7 @@ Route8_MapEvents:
 
 	def_object_events
 	object_event 20, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerPsychicMark, -1
-	object_event 31, 14, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 5, TrainerSchoolboyAlan1, -1
+	object_event 31, 14, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 5, TrainerSchoolboyAlan, -1
 	object_event 37,  6, SPRITE_SUDOWOODO, SPRITEMOVEDATA_SUDOWOODO, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SudowoodoScript, EVENT_ROUTE_8_SUDOWOODO
 	object_event 51,  7, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route8LassText, -1
 	object_event 44,  9, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route8RockSmashGuyScript, -1
@@ -197,140 +197,61 @@ Route8RockSmashGuyScript:
 		cont "in battle too!"
 		done
 
+TrainerSchoolboyAlan:
+	trainer SCHOOLBOY, ALAN1, EVENT_BEAT_SCHOOLBOY_ALAN, .SeenText, .BeatenText, 0, .Script
 
-
-TrainerSchoolboyAlan1:
-	trainer SCHOOLBOY, ALAN1, EVENT_BEAT_SCHOOLBOY_ALAN, SchoolboyAlan1SeenText, SchoolboyAlan1BeatenText, 0, .Script
-
-.Script:
-	loadvar VAR_CALLERID, PHONE_SCHOOLBOY_ALAN
-	opentext
-	checkflag ENGINE_ALAN_HAS_FIRE_STONE
-	iftrue .GiveFireStone
-	checkflag ENGINE_ALAN_READY_FOR_REMATCH
-	iftrue .ChooseRematch
-	checkcellnum PHONE_SCHOOLBOY_ALAN
-	iftrue .NumberAccepted
-	checkevent EVENT_ALAN_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskAgainForPhoneNumber
-	writetext SchoolboyAlanBooksText
-	promptbutton
-	setevent EVENT_ALAN_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .ContinueAskForPhoneNumber
-
-.AskAgainForPhoneNumber:
-	scall .AskNumber
-.ContinueAskForPhoneNumber:
-	askforphonenumber PHONE_SCHOOLBOY_ALAN
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, SCHOOLBOY, ALAN1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
-
-.ChooseRematch:
-	scall .Rematch
-	winlosstext SchoolboyAlan1BeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight4
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight3
-	checkflag ENGINE_FLYPOINT_BLACKTHORN
-	iftrue .LoadFight2
-	checkflag ENGINE_FLYPOINT_OLIVINE
-	iftrue .LoadFight1
-	loadtrainer SCHOOLBOY, ALAN1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_ALAN_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer SCHOOLBOY, ALAN2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_ALAN_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer SCHOOLBOY, ALAN3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_ALAN_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer SCHOOLBOY, ALAN4
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_ALAN_READY_FOR_REMATCH
-	end
-
-.LoadFight4:
-	loadtrainer SCHOOLBOY, ALAN5
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_ALAN_READY_FOR_REMATCH
-	end
-
-.GiveFireStone:
-	scall .Gift
-	verbosegiveitem FIRE_STONE
-	iffalse .BagFull
-	clearflag ENGINE_ALAN_HAS_FIRE_STONE
-	closetext
-	end
-
-.BagFull:
-	sjump .PackFull
-
-.AskNumber:
-	jumpstd AskNumberMScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberMScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedMScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedMScript
-	end
-
-.Rematch:
-	jumpstd RematchMScript
-	end
-
-.Gift:
-	jumpstd GiftMScript
-	end
-
-.PackFull:
-	jumpstd PackFullMScript
-	end
-
-SchoolboyAlan1SeenText:
+.SeenText
 	text "Thanks to my stud-"
 	line "ies, I'm ready for"
-	cont "any #MON!"
+	cont "any #mon!"
 	done
 
-SchoolboyAlan1BeatenText:
+.BeatenText
 	text "Oops! Computation"
 	line "error?"
 	done
 
-SchoolboyAlanBooksText:
-	text "Darn. I study five"
-	line "hours a day too."
+.Script:
+	endifjustbattled
+	loadvar VAR_CALLERID, PHONE_SCHOOLBOY_ALAN
+	opentext
+	checkflag ENGINE_ALAN_HAS_FIRE_STONE
+	iftrue .AlanItem
+	checkcellnum PHONE_SCHOOLBOY_ALAN
+	iftrue .NumberAccepted
+	checkevent EVENT_ALAN_ASKED_FOR_PHONE_NUMBER
+	iftrue .AskAgain
+	writethistext
+.AfterText
+		text "Darn. I study five"
+		line "hours a day too."
 
-	para "There's more to"
-	line "learning than just"
-	cont "reading books."
-	done
+		para "There's more to"
+		line "learning than just"
+		cont "reading books."
+		done
+	promptbutton
+	setevent EVENT_ALAN_ASKED_FOR_PHONE_NUMBER
+.AskAgain:
+	callstd AskNumberMScript
+	askforphonenumber PHONE_SCHOOLBOY_ALAN
+	ifequal PHONE_CONTACT_REFUSED, .DeclinedNumber
+	gettrainername STRING_BUFFER_3, SCHOOLBOY, ALAN1
+	callstd RegisteredNumberMScript
+	sjump .NumberAccepted
+
+.AlanItem:
+	callstd GiftMScript
+	verbosegiveitem FIRE_STONE
+	iffalse_endtext
+	clearflag ENGINE_ALAN_HAS_FIRE_STONE
+	endtext
+
+.NumberAccepted:
+	jumpstd NumberAcceptedMScript
+
+.DeclinedNumber:
+	jumpstd NumberDeclinedMScript
 
 TrainerPsychicMark:
 	generictrainer PSYCHIC_T, MARK, EVENT_BEAT_PSYCHIC_MARK, .SeenText, .BeatenText

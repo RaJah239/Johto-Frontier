@@ -16,7 +16,6 @@ PhoneScript_RematchText_Male:
 	ifequal PHONE_HIKER_ANTHONY, .Anthony
 	ifequal PHONE_CAMPER_TODD, .Todd
 	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
-	ifequal PHONE_SCHOOLBOY_ALAN, .Alan
 	ifequal PHONE_SCHOOLBOY_CHAD, .Chad
 	ifequal PHONE_FISHER_TULLY, .Tully
 	ifequal PHONE_POKEMANIAC_BRENT, .Brent
@@ -61,11 +60,6 @@ PhoneScript_RematchText_Male:
 
 .Arnie:
 	farwritetext ArnieBattleRematchText
-	promptbutton
-	end
-
-.Alan:
-	farwritetext AlanBattleRematchText
 	promptbutton
 	end
 

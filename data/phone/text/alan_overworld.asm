@@ -21,25 +21,15 @@ AlanAskNumberText:
 AlanNumberAcceptedText:
 	text "I'll call you as"
 	line "soon as I find"
-
-	para "something. You can"
-	line "count on it!"
+	cont "something. You can"
+	cont "count on it!"
 	done
 
 AlanNumberDeclinedText:
 	text "Oh… I thought it"
 	line "would be a good"
-
-	para "break to call you"
-	line "when I'm studying…"
-	done
-
-AlanRematchText:
-	text "I waited around"
-	line "for you!"
-
-	para "I'm thoroughly"
-	line "prepared today!"
+	cont "break to call you"
+	cont "when I'm studying…"
 	done
 
 AlanGiftText:
@@ -48,11 +38,5 @@ AlanGiftText:
 	done
 
 AlanPackFullText:
-	text "Whoops!"
-
-	para "You can't carry"
-	line "any more items!"
-
-	para "I'll hold it until"
-	line "next time."
+	text " "
 	done
