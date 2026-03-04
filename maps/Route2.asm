@@ -196,7 +196,23 @@ Route2CooltrainerFText:
 Route2TrainerTipsText:
 	text "Trainer Tips"
 
-	para "TODOTEXT"
+	para "Talk to trainers"
+	line "after battle as"
+	cont "some trainers may"
+	cont "give out their"
+	cont "phone numbers."
+	
+	para "They only call to"
+	line "give gifts."
+
+	para "At 12:00am, if not"
+	line "collected, you"
+	cont "lose out until the"
+	cont "next call."
+
+	para "Changing DST at"
+	line "at your home may"
+	cont "prompt calls."
 	done
 
 Route2SignText:
