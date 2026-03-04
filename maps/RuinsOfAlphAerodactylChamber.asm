@@ -1,3 +1,23 @@
+RuinsOfAlphAerodactylChamber_MapEvents:
+	def_warp_events
+	warp_event  3,  9, RUINS_OF_ALPH_OUTSIDE, 5
+	warp_event  4,  9, RUINS_OF_ALPH_OUTSIDE, 5
+	warp_event  3,  3, RUINS_OF_ALPH_INNER_CHAMBER, 8
+	warp_event  4,  3, RUINS_OF_ALPH_INNER_CHAMBER, 9
+	warp_event  4,  0, RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM, 1
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  2,  3, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  5,  3, BGEVENT_JUMPTEXT, RuinsOfAlphStatueText
+	bg_event  3,  2, BGEVENT_UP, RuinsOfAlphAerodactylChamberPuzzle
+	bg_event  4,  2, BGEVENT_JUMPTEXT, RuinsOfAlphAerodactylChamberDescriptionText
+	bg_event  3,  0, BGEVENT_UP, RuinsOfAlphAerodactylChamberWallPatternLeft
+	bg_event  4,  0, BGEVENT_UP, RuinsOfAlphAerodactylChamberWallPatternRight
+
+	def_object_events
+
 RuinsOfAlphAerodactylChamber_MapScripts:
 	def_scene_scripts
 	scene_script RuinsOfAlphAerodactylChamberCheckWallScene, SCENE_RUINSOFALPHAERODACTYLCHAMBER_CHECK_WALL
@@ -13,8 +33,6 @@ RuinsOfAlphAerodactylChamberCheckWallScene:
 
 .OpenWall:
 	sdefer RuinsOfAlphAerodactylChamberWallOpenScript
-	end
-
 RuinsOfAlphAerodactylChamberNoopScene:
 	end
 
@@ -72,12 +90,6 @@ RuinsOfAlphAerodactylChamberPuzzle:
 	warpcheck
 	end
 
-RuinsOfAlphAerodactylChamberAncientReplica:
-	jumptext RuinsOfAlphAerodactylChamberAncientReplicaText
-
-RuinsOfAlphAerodactylChamberDescriptionSign:
-	jumptext RuinsOfAlphAerodactylChamberDescriptionText
-
 RuinsOfAlphAerodactylChamberWallPatternLeft:
 	opentext
 	writetext RuinsOfAlphAerodactylChamberWallPatternLeftText
@@ -122,36 +134,9 @@ RuinsOfAlphAerodactylChamberWallHoleText:
 	line "in the wall!"
 	done
 
-RuinsOfAlphAerodactylChamberAncientReplicaText:
-	text "It's a replica of"
-	line "an ancient #-"
-	cont "MON."
-	done
-
 RuinsOfAlphAerodactylChamberDescriptionText:
 	text "This flying #-"
-	line "MON attacked its"
-
-	para "prey with saw-like"
-	line "fangs."
+	line "mon attacked its"
+	cont "prey with saw-like"
+	cont "fangs."
 	done
-
-RuinsOfAlphAerodactylChamber_MapEvents:
-	def_warp_events
-	warp_event  3,  9, RUINS_OF_ALPH_OUTSIDE, 5
-	warp_event  4,  9, RUINS_OF_ALPH_OUTSIDE, 5
-	warp_event  3,  3, RUINS_OF_ALPH_INNER_CHAMBER, 8
-	warp_event  4,  3, RUINS_OF_ALPH_INNER_CHAMBER, 9
-	warp_event  4,  0, RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM, 1
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  2,  3, BGEVENT_READ, RuinsOfAlphAerodactylChamberAncientReplica
-	bg_event  5,  3, BGEVENT_READ, RuinsOfAlphAerodactylChamberAncientReplica
-	bg_event  3,  2, BGEVENT_UP, RuinsOfAlphAerodactylChamberPuzzle
-	bg_event  4,  2, BGEVENT_UP, RuinsOfAlphAerodactylChamberDescriptionSign
-	bg_event  3,  0, BGEVENT_UP, RuinsOfAlphAerodactylChamberWallPatternLeft
-	bg_event  4,  0, BGEVENT_UP, RuinsOfAlphAerodactylChamberWallPatternRight
-
-	def_object_events
