@@ -6,10 +6,10 @@ EarlsPokemonAcademy_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  0,  1, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
-	bg_event  1,  1, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
 	bg_event  3,  0, BGEVENT_READ, AcademyBlackboard
 	bg_event  4,  0, BGEVENT_READ, AcademyBlackboard
+	bg_event  0,  1, BGEVENT_READ, MoveEnchancingAbilitiesNotebook
+	bg_event  1,  1, BGEVENT_READ, FleeMonsNotebook
 
 	def_object_events
 	object_event  4,  2, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, AcademyEarl, -1
@@ -17,9 +17,7 @@ EarlsPokemonAcademy_MapEvents:
 	object_event  4,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, EarlsPokemonAcademyYoungster2Text, -1
 	object_event  3, 11, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyGameboyKid1Script, -1
 	object_event  4, 11, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyGameboyKid2Script, -1
-	object_event  4, 10, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, AcademyNotebook, -1
-	object_event  3, 10, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MoveEnchancingAbilitiesNotebook, -1
-	object_event  2, 10, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, FleeMonsNotebook, -1
+	object_event  2,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, AcademyNotebook, -1
 	object_event  6, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyYoungsterHardModeScript, -1
 
 	object_const_def
@@ -29,8 +27,6 @@ EarlsPokemonAcademy_MapEvents:
 	const EARLSPOKEMONACADEMY_GAMEBOY_KID1
 	const EARLSPOKEMONACADEMY_GAMEBOY_KID2
 	const EARLSPOKEMONACADEMY_POKEDEX1
-	const EARLSPOKEMONACADEMY_POKEDEX2
-	const EARLSPOKEMONACADEMY_POKEDEX3
 	const EARLSPOKEMONACADEMY_YOUNGSTER3
 
 EarlsPokemonAcademy_MapScripts:
@@ -40,28 +36,94 @@ EarlsPokemonAcademy_MapScripts:
 
 AcademyEarl:
 	applymovement EARLSPOKEMONACADEMY_EARL, AcademyEarlSpinMovement
-	faceplayer
-	opentext
-	writetext AcademyEarlIntroText
-	yesorno
-	iffalse .Part1
-	writetext AcademyEarlTeachHowToWinText
-	yesorno
-	iffalse .Done
-.Part1:
-	writetext AcademyEarlTeachMoreText
-	yesorno
-	iffalse .Done
-	writetext AcademyEarlTeachHowToRaiseWellText
-	waitbutton
-	closetext
-	end
+	faceplayeropentext
+	writethistext
+		text "Earl, I am!"
 
-.Done:
-	writetext AcademyEarlNoMoreToTeachText
-	waitbutton
-	closetext
-	end
+		para "Wonderful are"
+		line "#mon, yes!"
+
+		para "Teach you I will"
+		line "to be a better"
+		cont "trainer!"
+
+		para "What you want to"
+		line "know? Want to be"
+		cont "a winner is you?"
+		done
+	yesorno
+	iffalse .HowToRaisePokemon
+	writethistext
+		text "Good! Teach you,"
+		line "I will!"
+
+		para "In battle, #mon"
+		line "top on list jump"
+		cont "out first!"
+
+		para "Change order in"
+		line "list, make battle"
+		cont "easy, maybe!"
+
+		para "More from me you"
+		line "want to hear?"
+		done
+	yesorno
+	iffalse .done
+.HowToRaisePokemon:
+	writethistext
+		text "So, want to know"
+		line "how to raise"
+		cont "#mon well?"
+		done
+	yesorno
+	iffalse .done
+	writethistext
+		text "Fine! Teach you,"
+		line "I will!"
+
+		para "If #mon come"
+		line "out in battle even"
+		cont "briefly, it'll get"
+		cont "full Exp. Points."
+
+		para "At top of list put"
+		line "weak #mon."
+
+		para "Switch in battle"
+		line "quick!"
+
+		para "Good idea this may"
+		line "not be, Exp.Share"
+		cont "in Options is."
+
+		para "Exp.Share gives"
+		line "all party halve of"
+		cont "Exp. earned."
+
+		para "Full Exp. Johto's"
+		line "Champion's team,"
+		cont "they get."
+
+		para "This way, weak"
+		line "#mon strong"
+		cont "become!"
+
+		para "The item Lucky Egg"
+		line "when held boosts"
+		cont "Exp. gained."
+		done
+	waitendtext
+
+.done:
+		jumpthisopenedtext
+		text "Oh! Smart student"
+		line "you are! Nothing"
+		cont "more do I teach!"
+
+		para "Good to #mon"
+		line "you must be!"
+		done
 
 AcademyNotebook:
 	opentext
@@ -95,73 +157,6 @@ AcademyEarlSpinMovement:
 	turn_head RIGHT
 	turn_head DOWN
 	step_end
-
-AcademyEarlIntroText:
-	text "EARL, I am!"
-
-	para "Wonderful are"
-	line "#MON, yes!"
-
-	para "Teach you I will"
-	line "to be a better"
-	cont "trainer!"
-
-	para "What you want to"
-	line "know? Want to be"
-	cont "a winner is you?"
-	done
-
-AcademyEarlTeachHowToWinText:
-	text "Good! Teach you,"
-	line "I will!"
-
-	para "In battle, #MON"
-	line "top on list jump"
-	cont "out first!"
-
-	para "Change order in"
-	line "list, make battle"
-	cont "easy, maybe!"
-
-	para "More from me you"
-	line "want to hear?"
-	done
-
-AcademyEarlTeachMoreText:
-	text "So, want to know"
-	line "how to raise"
-	cont "#MON well?"
-	done
-
-AcademyEarlTeachHowToRaiseWellText:
-	text "Fine! Teach you,"
-	line "I will!"
-
-	para "If #MON come"
-	line "out in battle even"
-
-	para "briefly, some EXP."
-	line "Points it gets."
-
-	para "At top of list put"
-	line "weak #MON."
-
-	para "Switch in battle"
-	line "quick!"
-
-	para "This way, weak"
-	line "#MON strong"
-	cont "become!"
-	done
-
-AcademyEarlNoMoreToTeachText:
-	text "Oh! Smart student"
-	line "you are! Nothing"
-	cont "more do I teach!"
-
-	para "Good to #MON"
-	line "you must be!"
-	done
 
 AcademyNotebookText:
 	text "It's this kid's"
