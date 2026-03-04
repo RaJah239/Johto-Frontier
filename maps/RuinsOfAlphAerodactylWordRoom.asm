@@ -1,8 +1,3 @@
-RuinsOfAlphAerodactylWordRoom_MapScripts:
-	def_scene_scripts
-
-	def_callbacks
-
 RuinsOfAlphAerodactylWordRoom_MapEvents:
 	def_warp_events
 	warp_event  9,  5, RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM, 3
@@ -14,3 +9,8 @@ RuinsOfAlphAerodactylWordRoom_MapEvents:
 	def_bg_events
 
 	def_object_events
+
+RuinsOfAlphAerodactylWordRoom_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
