@@ -47,7 +47,7 @@ Tilesets::
 	tileset TilesetForest
 	tileset TilesetBetaWordRoom
 	tileset TilesetHoOhWordRoom
-	tileset TilesetKabutoWordRoom
+	tileset TilesetLileepWordRoom
 	tileset TilesetOmanyteWordRoom
 	tileset TilesetAerodactylWordRoom
 	assert_table_length NUM_TILESETS + 1

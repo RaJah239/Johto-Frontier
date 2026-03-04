@@ -67,7 +67,7 @@ INCLUDE "gfx/tilesets/park_palette_map.asm"
 TilesetRuinsOfAlphPalMap:
 TilesetBetaWordRoomPalMap:
 TilesetHoOhWordRoomPalMap:
-TilesetKabutoWordRoomPalMap:
+TilesetLileepWordRoomPalMap:
 TilesetOmanyteWordRoomPalMap:
 TilesetAerodactylWordRoomPalMap:
 INCLUDE "gfx/tilesets/ruins_of_alph_palette_map.asm"

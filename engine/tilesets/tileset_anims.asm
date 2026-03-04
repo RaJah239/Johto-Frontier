@@ -272,7 +272,7 @@ TilesetRadioTowerAnim:
 TilesetUndergroundAnim:
 TilesetBetaWordRoomAnim:
 TilesetHoOhWordRoomAnim:
-TilesetKabutoWordRoomAnim:
+TilesetLileepWordRoomAnim:
 TilesetOmanyteWordRoomAnim:
 TilesetAerodactylWordRoomAnim:
 	dw NULL,  WaitTileAnimation
