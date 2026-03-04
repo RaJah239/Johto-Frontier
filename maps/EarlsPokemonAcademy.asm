@@ -14,7 +14,6 @@ EarlsPokemonAcademy_MapEvents:
 	def_object_events
 	object_event  4,  2, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, AcademyEarl, -1
 	object_event  2,  5, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, EarlsPokemonAcademyYoungster1Text, -1
-	object_event  4,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, EarlsPokemonAcademyYoungster2Text, -1
 	object_event  3, 11, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyGameboyKid1Script, -1
 	object_event  4, 11, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, EarlsPokemonAcademyGameboyKid2Script, -1
 	object_event  2,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, AcademyNotebook, -1
@@ -23,7 +22,6 @@ EarlsPokemonAcademy_MapEvents:
 	object_const_def
 	const EARLSPOKEMONACADEMY_EARL
 	const EARLSPOKEMONACADEMY_YOUNGSTER1
-	const EARLSPOKEMONACADEMY_YOUNGSTER2
 	const EARLSPOKEMONACADEMY_GAMEBOY_KID1
 	const EARLSPOKEMONACADEMY_GAMEBOY_KID2
 	const EARLSPOKEMONACADEMY_POKEDEX1
@@ -240,10 +238,6 @@ EarlsPokemonAcademyCooltrainerFHardModeScript:
 	
 		para "An unforgiving but"
 		line "worthy challenge!"
-		
-		para "Each bookshelf at"
-		line "the front has good"
-		cont "information too!"
 		done
 
 .LuckyEggGift:
@@ -462,7 +456,8 @@ EarlsPokemonAcademyGameboyKid1Script:
 		line "here."
 	
 		para "He's not going to"
-		line "see this strategy!"
+		line "see this strategy"
+		cont "coming!"
 		done
 	waitclosetext
 	turnobject EARLSPOKEMONACADEMY_GAMEBOY_KID1, DOWN
@@ -479,27 +474,18 @@ EarlsPokemonAcademyGameboyKid2Script:
 	turnobject EARLSPOKEMONACADEMY_GAMEBOY_KID2, DOWN
 	end
 
-EarlsPokemonAcademyYoungster2Text:
-	text "A #mon holding"
-	line "a Berry will heal"
-	cont "itself in battle."
-
-	para "Many other items"
-	line "can be held by"
-	cont "#mon…"
-
-	para "It sure is tough"
-	line "taking notes…"
-	done
-
 EarlsPokemonAcademyYoungster1Text:
-	text "I'm taking notes"
-	line "of the teacher's"
-	cont "lecture."
+	text "#mon can hold"
+	line "items."
 
-	para "I'd better copy"
-	line "the stuff on the"
-	cont "blackboard too."
+	para "They know how to"
+	line "use Berries and"
+	cont "all items in the"
+	cont "Battle Pocket."
+
+	para "Each bookshelf and"
+	line "the blackboard"
+	cont "have more facts."
 	done
 
 AcademyBlackboard:
