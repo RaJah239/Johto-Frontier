@@ -31,9 +31,7 @@ HallOfFameEnterScript:
 	setval HEALMACHINE_HALL_OF_FAME
 	special HealMachineAnim
 	setevent EVENT_BEAT_ELITE_FOUR
-	setevent EVENT_RIVAL_SPROUT_TOWER
 	clearevent EVENT_RED_IN_MT_SILVER
-	setmapscene SPROUT_TOWER_3F, SCENE_SPROUTTOWER3F_NOOP
 	special HealParty
 	halloffame
 	end
