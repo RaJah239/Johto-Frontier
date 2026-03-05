@@ -1,3 +1,19 @@
+UnionCaveB2F_MapEvents:
+	def_warp_events
+	warp_event  5,  3, UNION_CAVE_B1F, 5
+
+	def_coord_events
+
+	def_bg_events
+
+	def_object_events
+	object_event 15, 19, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 3, TrainerCooltrainermNick, -1
+	object_event  5, 13, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 1, TrainerCooltrainerfGwen, -1
+	object_event  3, 30, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 3, TrainerCooltrainerfEmma, -1
+	object_event 16,  2, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, UnionCaveB2FElixer, EVENT_UNION_CAVE_B2F_ELIXER
+	object_event 12, 19, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, UnionCaveB2FHyperPotion, EVENT_UNION_CAVE_B2F_HYPER_POTION
+	object_event 11, 31, SPRITE_SURF, SPRITEMOVEDATA_SWIM_WANDER, 1, 1, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, UnionCaveLapras, EVENT_UNION_CAVE_B2F_LAPRAS
+
 	object_const_def
 	const UNIONCAVEB2F_ROCKER
 	const UNIONCAVEB2F_COOLTRAINER_F1
@@ -27,7 +43,14 @@ UnionCaveB2FLaprasCallback:
 
 UnionCaveLapras:
 	faceplayer
+	isfieldactionsset
+	iffalse .skipthis
+	reanchormap
+	pokepic LAPRAS
 	cry LAPRAS
+	waitbutton
+	closepokepic
+.skipthis
 	loadwildmon LAPRAS, 20
 	startbattle
 	disappear UNIONCAVEB2F_LAPRAS
@@ -36,45 +59,18 @@ UnionCaveLapras:
 	end
 
 TrainerCooltrainermNick:
-	trainer COOLTRAINERM, NICK, EVENT_BEAT_COOLTRAINERM_NICK, CooltrainermNickSeenText, CooltrainermNickBeatenText, 0, .Script
+	generictrainer COOLTRAINERM, NICK, EVENT_BEAT_COOLTRAINERM_NICK, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext CooltrainermNickAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "Your #mon style"
+	line "is stunning and"
+	cont "colorful, I admit."
 
-TrainerCooltrainerfGwen:
-	trainer COOLTRAINERF, GWEN, EVENT_BEAT_COOLTRAINERF_GWEN, CooltrainerfGwenSeenText, CooltrainerfGwenBeatenText, 0, .Script
+	para "You'll just keep"
+	line "getting better!"
+	done
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext CooltrainerfGwenAfterBattleText
-	waitbutton
-	closetext
-	end
-
-TrainerCooltrainerfEmma:
-	trainer COOLTRAINERF, EMMA, EVENT_BEAT_COOLTRAINERF_EMMA, CooltrainerfEmmaSeenText, CooltrainerfEmmaBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext CooltrainerfEmmaAfterBattleText
-	waitbutton
-	closetext
-	end
-
-UnionCaveB2FElixer:
-	itemball ELIXER
-
-UnionCaveB2FHyperPotion:
-	itemball HYPER_POTION
-
-CooltrainermNickSeenText:
+.SeenText
 	text "There are two"
 	line "kinds of people."
 
@@ -86,38 +82,44 @@ CooltrainermNickSeenText:
 	line "person are you?"
 	done
 
-CooltrainermNickBeatenText:
+.BeatenText
 	text "You've got"
 	line "dazzling style!"
 	done
 
-CooltrainermNickAfterBattleText:
-	text "Your #MON style"
-	line "is stunning and"
-	cont "colorful, I admit."
+TrainerCooltrainerfGwen:
+	generictrainer COOLTRAINERF, GWEN, EVENT_BEAT_COOLTRAINERF_GWEN, .SeenText, .BeatenText
 
-	para "You'll just keep"
-	line "getting better!"
-	done
-
-CooltrainerfGwenSeenText:
-	text "I'm in training."
-	line "Care for a round?"
-	done
-
-CooltrainerfGwenBeatenText:
-	text "Aww, no! You're"
-	line "too good for me."
-	done
-
-CooltrainerfGwenAfterBattleText:
+.AfterText
 	text "I'm going to train"
 	line "by myself until I"
 	cont "improve."
 	done
 
-CooltrainerfEmmaSeenText:
-	text "If the #MON I"
+.SeenText
+	text "I'm in training."
+	line "Care for a round?"
+	done
+
+.BeatenText
+	text "Aww, no! You're"
+	line "too good for me."
+	done
+
+TrainerCooltrainerfEmma:
+	generictrainer COOLTRAINERF, EMMA, EVENT_BEAT_COOLTRAINERF_EMMA, .SeenText, .BeatenText
+
+.AfterText
+	text "Just once a week,"
+	line "a #mon comes to"
+	cont "the water's edge."
+
+	para "I wanted to see"
+	line "that #mon…"
+	done
+
+.SeenText
+	text "If the #mon I"
 	line "liked were there,"
 	cont "I'd go anywhere."
 
@@ -125,32 +127,12 @@ CooltrainerfEmmaSeenText:
 	line "trainer does."
 	done
 
-CooltrainerfEmmaBeatenText:
+.BeatenText
 	text "I'd rather pet my"
 	line "babies than this!"
 	done
 
-CooltrainerfEmmaAfterBattleText:
-	text "Just once a week,"
-	line "a #MON comes to"
-	cont "the water's edge."
-
-	para "I wanted to see"
-	line "that #MON…"
-	done
-
-UnionCaveB2F_MapEvents:
-	def_warp_events
-	warp_event  5,  3, UNION_CAVE_B1F, 5
-
-	def_coord_events
-
-	def_bg_events
-
-	def_object_events
-	object_event 15, 19, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainermNick, -1
-	object_event  5, 13, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerCooltrainerfGwen, -1
-	object_event  3, 30, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainerfEmma, -1
-	object_event 16,  2, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, UnionCaveB2FElixer, EVENT_UNION_CAVE_B2F_ELIXER
-	object_event 12, 19, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, UnionCaveB2FHyperPotion, EVENT_UNION_CAVE_B2F_HYPER_POTION
-	object_event 11, 31, SPRITE_SURF, SPRITEMOVEDATA_SWIM_WANDER, 1, 1, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, UnionCaveLapras, EVENT_UNION_CAVE_B2F_LAPRAS
+UnionCaveB2FElixer:
+	itemball ELIXER
+UnionCaveB2FHyperPotion:
+	itemball HYPER_POTION
