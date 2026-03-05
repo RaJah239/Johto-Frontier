@@ -78,7 +78,8 @@ SlowpokeScript:
 		text "<……> <……>Yawn?"
 		done
 	cry SLOWPOKE
-	waitendtext
+	waitbutton
+	end
 
 VariableMartScript:
 	opentext

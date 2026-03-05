@@ -193,7 +193,8 @@ AzaleaTownIlexForestSignText:
 	done
 
 AzaleaTownSlowpokeScript:
-	jumpstd SlowpokeScript
+	callstd SlowpokeScript
+	endtext
 
 AzaleaTownApricornTree1:
 	setval WHT_APRICORN

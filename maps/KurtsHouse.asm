@@ -425,7 +425,7 @@ KurtScript_ImCheckingItNow:
 	waitbutton
 	turnobject KURTSHOUSE_KURT2, UP
 	writetext KurtsHouseKurtAhHaISeeText
-	waitclosetext
+	waitendtext
 
 KurtsGranddaughter1:
 	faceplayer
@@ -509,4 +509,21 @@ KurtsHouseStatueText:
 	done
 
 KurtsHouseSlowpoke:
-	jumpstd SlowpokeScript
+	callstd SlowpokeScript
+	writethistext
+		text "Huh? It has Mail."
+		line "Read it?"
+		done
+	yesorno
+	iffalse_endtext
+	jumpthisopenedtext
+		text "<PLAYER> read the"
+		line "mail."
+
+		para "Be good and look"
+		line "after the house"
+		cont "with Grandpa and"
+		cont "Slowpoke."
+
+		para "Love, Dad"
+		done
