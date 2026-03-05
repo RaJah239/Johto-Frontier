@@ -636,7 +636,6 @@ AskNumberMScript:
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 	ifequal PHONE_BUG_CATCHER_WADE, .Wade
-	ifequal PHONE_FISHER_RALPH, .Ralph
 	ifequal PHONE_HIKER_ANTHONY, .Anthony
 	ifequal PHONE_CAMPER_TODD, .Todd
 	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
@@ -663,9 +662,6 @@ AskNumberMScript:
 	end
 .Wade:
 	farwritetext WadeAskNumberText
-	end
-.Ralph:
-	farwritetext RalphAskNumberText
 	end
 .Anthony:
 	farwritetext AnthonyAskNumberText
@@ -716,7 +712,6 @@ NumberAcceptedMScript:
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 	ifequal PHONE_BUG_CATCHER_WADE, .Wade
-	ifequal PHONE_FISHER_RALPH, .Ralph
 	ifequal PHONE_HIKER_ANTHONY, .Anthony
 	ifequal PHONE_CAMPER_TODD, .Todd
 	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
@@ -752,11 +747,6 @@ NumberAcceptedMScript:
 .Wade:
 	farwritetext WadeNumberAcceptedText
 	waitbutton
-	end
-.Ralph:
-	farwritetext RalphNumberAcceptedText
-	waitbutton
-	closetext
 	end
 .Anthony:
 	farwritetext AnthonyNumberAcceptedText
@@ -820,7 +810,6 @@ NumberDeclinedMScript:
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 	ifequal PHONE_BUG_CATCHER_WADE, .Wade
-	ifequal PHONE_FISHER_RALPH, .Ralph
 	ifequal PHONE_HIKER_ANTHONY, .Anthony
 	ifequal PHONE_CAMPER_TODD, .Todd
 	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
@@ -856,11 +845,6 @@ NumberDeclinedMScript:
 .Wade:
 	farwritetext WadeNumberDeclinedText
 	waitbutton
-	end
-.Ralph:
-	farwritetext RalphNumberDeclinedText
-	waitbutton
-	closetext
 	end
 .Anthony:
 	farwritetext AnthonyNumberDeclinedText
@@ -923,7 +907,6 @@ RematchMScript:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_FISHER_RALPH, .Ralph
 	ifequal PHONE_HIKER_ANTHONY, .Anthony
 	ifequal PHONE_CAMPER_TODD, .Todd
 	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
@@ -951,11 +934,6 @@ RematchMScript:
 	end
 .Jose:
 	farwritetext JoseRematchText
-	waitbutton
-	closetext
-	end
-.Ralph:
-	farwritetext RalphRematchText
 	waitbutton
 	closetext
 	end
@@ -1045,7 +1023,6 @@ PackFullMScript:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_FISHER_RALPH, .Ralph
 	ifequal PHONE_HIKER_ANTHONY, .Anthony
 	ifequal PHONE_CAMPER_TODD, .Todd
 	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
@@ -1080,12 +1057,6 @@ PackFullMScript:
 	waitbutton
 	closetext
 	end
-.Ralph
-	farwritetext RalphPackFullText
-	waitbutton
-	closetext
-	end
-
 .Anthony
 	farwritetext AnthonyPackFullText
 	waitbutton

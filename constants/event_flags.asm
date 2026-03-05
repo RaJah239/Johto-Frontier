@@ -270,10 +270,10 @@
 	const_skip
 	const EVENT_BURNED_TOWER_1F_HIDDEN_ULTRA_BALL
 	const EVENT_BRENT_GOLD_BERRY
-	const_skip ; unused in Crystal
-	const_skip ; unused in Crystal
-	const_skip ; unused in Crystal
-	const_skip ; unused in Crystal
+	const_skip
+	const_skip
+	const_skip
+	const_skip
 ; Johto Frontier events
 	const EVENT_MET_VIOLET
 	const EVENT_CIANWOOD_GYM_BLOCKER
@@ -416,69 +416,69 @@
 	const EVENT_GAVE_KURT_PNK_APRICORN
 ; Phone events
 	const EVENT_JACK_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_BEVERLY_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_HUEY_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_GOT_PROTEIN_FROM_HUEY
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_GOT_CARBOS_FROM_VANCE
-	const_skip ; unused in Crystal
-	const_skip ; unused in Crystal
-	const_skip ; unused in Crystal
+	const_skip
+	const_skip
+	const_skip
 	const EVENT_GAVEN_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_BETH_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_JOSE_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_REENA_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_JOEY_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_WADE_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
-	const EVENT_RALPH_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
+	const_skip
+	const_skip
 	const EVENT_LIZ_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_ANTHONY_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_TODD_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_GINA_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
-	const_skip ; unused in Crystal
-	const_skip ; unused in Crystal
+	const_skip
+	const_skip
+	const_skip
 	const EVENT_ARNIE_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_ALAN_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
-	const_skip ; unused
-	const_skip ; unused
+	const_skip
+	const_skip
+	const_skip
 	const EVENT_DANA_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_CHAD_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_DEREK_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_TULLY_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_BRENT_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused
+	const_skip
 	const EVENT_TIFFANY_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_VANCE_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_WILTON_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_CHAD_TWISTEDSPOON
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_PARRY_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_ERIN_ASKED_FOR_PHONE_NUMBER
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_ARNIE_SILVERPOWDER
 ; Ruins of Alph puzzles
 	const EVENT_SOLVED_HO_OH_PUZZLE
@@ -626,10 +626,10 @@
 	const EVENT_TODD_MAX_ELIXER
 	const EVENT_ANTHONY_BERRY_JUICE
 	const EVENT_LIZ_MAX_REVIVE
-	const EVENT_RALPH_NUGGET
-	const_skip ; unused
-	const_skip ; unused
-	const_skip ; unused
+	const_skip
+	const_skip
+	const_skip
+	const_skip
 	const EVENT_HOLE_IN_BURNED_TOWER
 	const EVENT_FOUGHT_EUSINE
 	const EVENT_KOJI_ALLOWS_YOU_PASSAGE_TO_TIN_TOWER
@@ -640,7 +640,7 @@
 	const EVENT_VANCE_CARBOS
 	const EVENT_PARRY_IRON
 	const EVENT_ERIN_CALCIUM
-	const_skip ; unused
+	const_skip
 	const EVENT_MET_BUENA
 	const EVENT_GOT_ODD_EGG
 	const EVENT_GAVEN_CRYSTAL
@@ -857,7 +857,7 @@
 ; Blackbelt
 	const_skip
 	const EVENT_BEAT_BLACKBELT_YOSHI
-	const_skip ; unused
+	const_skip
 	const EVENT_BEAT_BLACKBELT_LAO
 	const EVENT_BEAT_SAILOR_STEELE
 	const EVENT_BEAT_BLACKBELT_KIYO
@@ -919,7 +919,7 @@
 	const_skip
 	const_skip
 ; Kimono Girl
-	const_skip ; unused
+	const_skip
 	const EVENT_BEAT_KIMONO_GIRL_NAOKO
 	const EVENT_BEAT_KIMONO_GIRL_SAYO
 	const EVENT_BEAT_KIMONO_GIRL_ZUKI
@@ -1364,7 +1364,7 @@
 	const_skip
 	const EVENT_GOLDENROD_SALE_OFF
 	const EVENT_GOLDENROD_SALE_ON
-	const_skip ; unused in Crystal
+	const_skip
 	const EVENT_ILEX_FOREST_APPRENTICE
 	const EVENT_ILEX_FOREST_CHARCOAL_MASTER
 	const EVENT_CHARCOAL_KILN_FARFETCH_D

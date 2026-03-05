@@ -24,7 +24,6 @@ PhoneContacts:
 	phone BIRD_KEEPER,  JOSE2,                 ROUTE_19,                  ANYTIME, JosePhoneCalleeScript,    ANYTIME, JosePhoneCallerScript
 	phone COOLTRAINERF, REENA1,                ROUTE_19,                  ANYTIME, ReenaPhoneCalleeScript,   ANYTIME, ReenaPhoneCallerScript
 	phone BUG_CATCHER,  WADE1,                 ROUTE_3,                   ANYTIME, WadePhoneCalleeScript,    ANYTIME, WadePhoneCallerScript
-	phone FISHER,       RALPH1,                ROUTE_4,                   ANYTIME, RalphPhoneCalleeScript,   ANYTIME, RalphPhoneCallerScript
 	phone PICNICKER,    LIZ1,                  ROUTE_4,                   ANYTIME, LizPhoneCalleeScript,     ANYTIME, LizPhoneCallerScript
 	phone HIKER,        ANTHONY2,              ROUTE_5,                   ANYTIME, AnthonyPhoneCalleeScript, ANYTIME, AnthonyPhoneCallerScript
 	phone CAMPER,       TODD1,                 ROUTE_6,                   ANYTIME, ToddPhoneCalleeScript,    ANYTIME, ToddPhoneCallerScript

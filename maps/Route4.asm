@@ -17,7 +17,7 @@ Route4_MapEvents:
 
 	def_object_events
 	object_event  8, 49, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 1, TrainerFisherJustin, -1
-	object_event 12, 56, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerFisherRalph1, -1
+	object_event 12, 56, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 3, TrainerFisherRalph, -1
 	object_event  6, 48, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerFisherHenry, -1
 	object_event 12, 22, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterAlbert, -1
 	object_event  4, 63, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterGordon, -1
@@ -199,119 +199,29 @@ TrainerFisherJustin:
 	text "Sploosh!"
 	done
 
-TrainerFisherRalph1:
-	trainer FISHER, RALPH1, EVENT_BEAT_FISHER_RALPH, FisherRalph1SeenText, FisherRalph1BeatenText, 0, .Script
+TrainerFisherRalph:
+	generictrainer FISHER, RALPH, EVENT_BEAT_FISHER_RALPH, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_FISHER_RALPH
-	opentext
-	checkevent EVENT_RALPH_NUGGET
-	iftrue .RematchGift
-	checkflag ENGINE_RALPH_READY_FOR_REMATCH
-	iftrue .Rematch
-	checkcellnum PHONE_FISHER_RALPH
-	iftrue .NumberAccepted
-	checkevent EVENT_RALPH_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskAgain
-	writetext FisherRalphAfterText
-	promptbutton
-	setevent EVENT_RALPH_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .AskForNumber
+.AfterText
+	text "Fishing is a life-"
+	line "long passion."
+	cont "#mon are life-"
+	cont "long friends!"
+	done
 
-.AskAgain:
-	scall .AskNumber
-.AskForNumber:
-	askforphonenumber PHONE_FISHER_RALPH
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, FISHER, RALPH1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
+.SeenText
+	text "I'm really good at"
+	line "both fishing and"
+	cont "#mon."
 
-.Rematch:
-	scall .RematchStd
-	winlosstext FisherRalph1BeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight4
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight3
-	checkflag ENGINE_FLYPOINT_LAKE_OF_RAGE
-	iftrue .LoadFight2
-	checkflag ENGINE_FLYPOINT_ECRUTEAK
-	iftrue .LoadFight1
-	loadtrainer FISHER, RALPH1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_RALPH_READY_FOR_REMATCH
-	end
+	para "I'm not about to"
+	line "lose to any kid!"
+	done
 
-.LoadFight1:
-	loadtrainer FISHER, RALPH2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_RALPH_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer FISHER, RALPH3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_RALPH_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer FISHER, RALPH4
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_RALPH_READY_FOR_REMATCH
-	end
-
-.LoadFight4:
-	loadtrainer FISHER, RALPH5
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_RALPH_READY_FOR_REMATCH
-	opentext
-	writetext FisherRalphText_GiveNuggetAfterBattleText
-	waitbutton
-	verbosegiveitem NUGGET
-	iffalse .PackFull
-	closetext
-	end
-
-.RematchGift
-	writetext FisherRalphText_AgainGiveNuggetAfterBattleText
-	waitbutton
-	verbosegiveitem NUGGET
-	iffalse .PackFull
-	clearevent EVENT_RALPH_NUGGET
-	closetext
-	end
-
-.PackFull:
-	setevent EVENT_RALPH_NUGGET
-	jumpstd PackFullMScript
-	end
-
-.AskNumber:
-	jumpstd AskNumberMScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberMScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedMScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedMScript
-	end
-
-.RematchStd:
-	jumpstd RematchMScript
-	end
+.BeatenText
+	text "Tch! I tried to"
+	line "rush things…"
+	done
 
 TrainerFisherHenry:
 	trainer FISHER, HENRY, EVENT_BEAT_FISHER_HENRY, FisherHenrySeenText, FisherHenryBeatenText, 0, .Script
@@ -509,27 +419,7 @@ FriedaScript:
 
 
 
-FisherRalph1SeenText:
-	text "I'm really good at"
-	line "both fishing and"
-	cont "#MON."
 
-	para "I'm not about to"
-	line "lose to any kid!"
-	done
-
-FisherRalph1BeatenText:
-	text "Tch! I tried to"
-	line "rush things…"
-	done
-
-FisherRalphAfterText:
-	text "Fishing is a life-"
-	line "long passion."
-
-	para "#MON are life-"
-	line "long friends!"
-	done
 
 FisherHenrySeenText:
 	text "My #MON?"
@@ -680,25 +570,6 @@ FriedaNotFridayText:
 
 	para "It's so boring"
 	line "when it's not!"
-	done
-
-
-
-
-
-
-
-FisherRalphText_GiveNuggetAfterBattleText:
-	text "You won after that"
-	line "much gas!"
-	
-	para "Fine. Take this!"
-	line "It yours to keep."
-	done
-
-FisherRalphText_AgainGiveNuggetAfterBattleText:
-	text "Ah! You're back!"
-	line "Accept it kiddo!"
 	done
 
 PicnickerLiz_GiveMaxReviveAfterBattleText:
