@@ -35,7 +35,7 @@ CharcoalKilnBoss:
 		cont "the Ilex Forest."
 
 		para "Where in the world"
-		line "is that lazy guy?"
+		cont "is that lazy guy?"
 		done
 
 .GotScytherCall:
