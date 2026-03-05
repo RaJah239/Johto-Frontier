@@ -1,5 +1,8 @@
 SECTION "Events", ROMX
 
+DEF FIRST_RESET_EVENT EQU EVENT_ILEX_FOREST_TINY_MUSHROOM1
+DEF LAST_RESET_EVENT  EQU EVENT_ROUTE_20_APRICORN_2
+
 OverworldLoop::
 	xor a ; MAPSTATUS_START
 	ld [wMapStatus], a
@@ -883,15 +886,15 @@ CountStep:
 	; Don't count steps in link communication rooms.
 	ld a, [wLinkMode]
 	and a
-	jmp nz, .done
+	jr nz, .done
 
 	; If there is a special phone call, don't count the step.
 	farcall CheckSpecialPhoneCall
-	jmp c, .doscript
+	jr c, .doscript
 
 	; If Repel wore off, don't count the step.
 	call DoRepelStep
-	jmp c, .doscript
+	jr c, .doscript
 
 	; Count the step for poison and total steps
 	ld hl, wPoisonStepCount
@@ -908,10 +911,10 @@ CountStep:
 	; Check for 1,000 steps (0x01F4)
 	ld a, [wStepCount]
 	cp $e8
-	jmp nz, .skip_resetting_steps_event
+	jr nz, .skip_resetting_steps_event
 	ld a, [wStepCountHi]
 	cp $03
-	jmp nz, .skip_resetting_steps_event
+	jr nz, .skip_resetting_steps_event
 
 	; Reset step counter to 0
 	xor a
@@ -919,68 +922,11 @@ CountStep:
 	ld [wStepCountHi], a
 
 	; Reset multiple event flags every 1,000 steps
-	ResetEventFlag EVENT_ILEX_FOREST_TINY_MUSHROOM1
-	ResetEventFlag EVENT_ILEX_FOREST_TINY_MUSHROOM2
-	ResetEventFlag EVENT_ILEX_FOREST_LARGE_MUSHROOM
-	ResetEventFlag EVENT_ROUTE_1_APRICORN
-	ResetEventFlag EVENT_ROUTE_1_BERRY1
-	ResetEventFlag EVENT_ROUTE_1_BERRY2
-	ResetEventFlag EVENT_ROUTE_2_BERRY1
-	ResetEventFlag EVENT_ROUTE_2_BERRY2
-	ResetEventFlag EVENT_ROUTE_2_APRICORN1
-	ResetEventFlag EVENT_ROUTE_2_APRICORN2
-	ResetEventFlag EVENT_ROUTE_3_BERRY
-	ResetEventFlag EVENT_ROUTE_3_APRICORN
-	ResetEventFlag EVENT_VIOLET_CITY_BERRY1
-	ResetEventFlag EVENT_VIOLET_CITY_BERRY2
-	ResetEventFlag EVENT_VIOLET_CITY_APRICORN_1
-	ResetEventFlag EVENT_VIOLET_CITY_APRICORN_2
-	ResetEventFlag EVENT_ROUTE_5_BERRY_1
-	ResetEventFlag EVENT_ROUTE_5_BERRY_2
-	ResetEventFlag EVENT_ROUTE_5_APRICORN_1
-	ResetEventFlag EVENT_ROUTE_5_APRICORN_2
-	ResetEventFlag EVENT_ROUTE_5_APRICORN_3
-	ResetEventFlag EVENT_AZALEA_TOWN_APRICORN_1
-	ResetEventFlag EVENT_AZALEA_TOWN_APRICORN_2
-	ResetEventFlag EVENT_ROUTE_7_BERRY_1
-	ResetEventFlag EVENT_ROUTE_7_APRICORN_1
-	ResetEventFlag EVENT_ROUTE_7_APRICORN_2
-	ResetEventFlag EVENT_ROUTE_7_APRICORN_3
-	ResetEventFlag EVENT_ROUTE_8_BERRY_1
-	ResetEventFlag EVENT_ROUTE_8_BERRY_2
-	ResetEventFlag EVENT_ROUTE_8_APRICORN_1
-	ResetEventFlag EVENT_ROUTE_9_APRICORN_1
-	ResetEventFlag EVENT_ROUTE_9_APRICORN_2
-	ResetEventFlag EVENT_ROUTE_9_APRICORN_3
-	ResetEventFlag EVENT_ROUTE_10_BERRY_1
-	ResetEventFlag EVENT_ROUTE_10_BERRY_2
-	ResetEventFlag EVENT_ROUTE_11_BERRY_1
-	ResetEventFlag EVENT_ROUTE_11_APRICORN_1
-	ResetEventFlag EVENT_ROUTE_14_APRICORN_1
-	ResetEventFlag EVENT_ROUTE_14_APRICORN_2
-	ResetEventFlag EVENT_ROUTE_14_APRICORN_3
-	ResetEventFlag EVENT_ROUTE_15_BERRY_1
-	ResetEventFlag EVENT_ROUTE_15_APRICORN_1
-	ResetEventFlag EVENT_ROUTE_16_BERRY_1
-	ResetEventFlag EVENT_ROUTE_16_BERRY_2
-	ResetEventFlag EVENT_ROUTE_16_APRICORN_1
-	ResetEventFlag EVENT_ROUTE_17_BERRY_1
-	ResetEventFlag EVENT_ROUTE_17_BERRY_2
-	ResetEventFlag EVENT_ROUTE_17_BERRY_3
-	ResetEventFlag EVENT_ROUTE_18_BERRY_1
-	ResetEventFlag EVENT_ROUTE_18_BERRY_2
-	ResetEventFlag EVENT_ROUTE_18_BERRY_3
-	ResetEventFlag EVENT_ROUTE_18_BERRY_4
-	ResetEventFlag EVENT_ROUTE_20_BERRY_1
-	ResetEventFlag EVENT_ROUTE_20_BERRY_2
-	ResetEventFlag EVENT_ROUTE_20_BERRY_3
-	ResetEventFlag EVENT_ROUTE_20_BERRY_4
-	ResetEventFlag EVENT_ROUTE_20_BERRY_5
-	ResetEventFlag EVENT_ROUTE_20_APRICORN_1
-	ResetEventFlag EVENT_ROUTE_20_APRICORN_2
+    ld de, FIRST_RESET_EVENT
+    ld bc, LAST_RESET_EVENT - FIRST_RESET_EVENT + 1
+    call ResetEventRange
 
 .skip_resetting_steps_event:
-
 	; Original happiness routine
 	ld a, [wStepCount]
 
@@ -1034,6 +980,27 @@ CountStep:
 .whiteout ; unreferenced
 	ld a, PLAYEREVENT_WHITEOUT
 	scf
+	ret
+
+; ResetEventRange
+; Input:
+;	DE = first event constant
+;	BC = number of events to reset
+; Destroys: AF
+ResetEventRange:
+.loop
+	push bc
+	push de
+	ld b, RESET_FLAG
+	call EventFlagAction
+	pop de
+	pop bc
+
+	inc de
+	dec bc
+	ld a, b
+	or c
+	jr nz, .loop
 	ret
 
 DoRepelStep:
