@@ -15,7 +15,7 @@ Route3_MapEvents:
 	def_object_events
 	object_event 17,  7, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route3MailRecipientScript, -1
 	object_event  9,  5, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route3YoungsterText, -1
-	object_event 21, 13, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 5, TrainerRoute3BugCatcher1, -1
+	object_event 21, 13, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 5, TrainerRoute3BugCatcherWade, -1
 	object_event 27,  8, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_RIGHT, 1, 1, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route3CooltrainerMText, -1
 	object_event 30,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route3Potion, EVENT_ROUTE_3_POTION
 	object_event 19, 15, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route3PokeBall, EVENT_ROUTE_3_POKE_BALL
@@ -155,8 +155,19 @@ ReceivedSpearowMailText:
 	db   "Dark Cave leads"
 	next "to another road@"
 
-TrainerRoute3BugCatcher1:
-	trainer BUG_CATCHER, WADE1, EVENT_BEAT_BUG_CATCHER_WADE, .SeenText, .BeatenText, 0, .Script
+TrainerRoute3BugCatcherWade:
+	generictrainer BUG_CATCHER, WADE, EVENT_BEAT_BUG_CATCHER_WADE, .SeenText, .BeatenText
+
+.AfterText
+	text "You can catch"
+	line "#mon even if"
+	cont "you have six with"
+	cont "you."
+
+	para "If you catch one,"
+	line "it'll go to your PC"
+	cont "Box automatically."
+	done
 
 .SeenText
 	text "I caught a bunch"
@@ -167,63 +178,6 @@ TrainerRoute3BugCatcher1:
 .BeatenText
 	text "Awwwww…"
 	done
-
-.Script:
-	endifjustbattled
-	loadvar VAR_CALLERID, PHONE_BUG_CATCHER_WADE
-	opentext
-	checkflag ENGINE_WADE_HAS_ITEM
-	iftrue .WadeItem
-	checkcellnum PHONE_BUG_CATCHER_WADE
-	iftrue .AcceptedNumber
-	checkevent EVENT_WADE_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskAgain
-	writethistext
-.AfterText
-		text "You can catch"
-		line "#mon even if"
-		para "you have six with"
-		line "you."
-
-		para "If you catch one,"
-		line "it'll go to your PC"
-		cont "Box automatically."
-		done
-	waitbutton
-	setevent EVENT_WADE_ASKED_FOR_PHONE_NUMBER
-.AskAgain:
-	callstd AskNumberMScript
-	askforphonenumber PHONE_BUG_CATCHER_WADE
-	ifequal PHONE_CONTACT_REFUSED, .DeclinedNumber
-	gettrainername STRING_BUFFER_3, BUG_CATCHER, WADE1
-	callstd RegisteredNumberMScript
-	sjump .AcceptedNumber
-
-.WadeItem:
-	callstd GiftMScript
-	random 3
-	ifequal 1, .SilverBerry
-	ifequal 2, .GoldBerry
-	verbosegiveitem MIRACLEBERRY
-.finish:
-	iffalse .done
-	clearflag ENGINE_WADE_HAS_ITEM
-.done:
-	end
-
-.SilverBerry:
-	verbosegiveitem SILVER_BERRY
-	sjump .finish
-
-.GoldBerry:
-	verbosegiveitem GOLD_BERRY
-	sjump .finish
-
-.AcceptedNumber:
-	jumpstd NumberAcceptedMScript
-
-.DeclinedNumber:
-	jumpstd NumberDeclinedMScript
 
 Route3CooltrainerMText:
 	text "Dark Cave…"

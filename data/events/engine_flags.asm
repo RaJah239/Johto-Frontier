@@ -159,14 +159,14 @@ EngineFlags:
 
 	engine_flag wDailyPhoneItemFlags, 0 ; beverly has nugget
 	engine_flag wDailyPhoneItemFlags, 1 ; jose has star piece
-	engine_flag wDailyPhoneItemFlags, 2 ; wade has item (see EVENT_WADE_HAS_*** in constants/event_flags.asm)
+	engine_flag wDailyPhoneItemFlags, 2 ; wade has item
 	engine_flag wDailyPhoneItemFlags, 3 ; gina has leaf stone
 	engine_flag wDailyPhoneItemFlags, 4 ; alan has fire stone
 	engine_flag wDailyPhoneItemFlags, 5 ; liz has thunderstone
 	engine_flag wDailyPhoneItemFlags, 6 ; derek has nugget
 	engine_flag wDailyPhoneItemFlags, 7 ; tully has water stone
 	engine_flag wDailyPhoneItemFlags, 8 ; tiffany has pink bow
-	engine_flag wDailyPhoneItemFlags, 9 ; wilton has item (see EVENT_WILTON_HAS_*** in constants/event_flags.asm)
+	engine_flag wDailyPhoneItemFlags, 9 ; wilton has item
 
 	engine_flag wDailyPhoneTimeOfDayFlags,  0 ; jack
 	engine_flag wDailyPhoneTimeOfDayFlags,  1 ; huey

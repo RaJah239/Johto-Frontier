@@ -28,11 +28,6 @@ JoseHangUpScript:
 	promptbutton
 	sjump PhoneScript_HangUpText_Male
 
-WadeHangUpScript:
-	farwritetext WadeNoBerriesText
-	promptbutton
-	sjump PhoneScript_HangUpText_Male
-
 ReenaForwardScript:
 	farwritetext ReenaForwardText
 	promptbutton

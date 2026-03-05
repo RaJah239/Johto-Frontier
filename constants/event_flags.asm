@@ -437,7 +437,7 @@
 	const_skip
 	const EVENT_JOEY_ASKED_FOR_PHONE_NUMBER
 	const_skip
-	const EVENT_WADE_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -807,8 +807,8 @@
 	const_skip
 	const EVENT_BEAT_SCHOOLBOY_JACK2
 	const EVENT_BEAT_SCHOOLBOY_JACK3
-	const EVENT_BEAT_SCHOOLBOY_ALAN2
-	const EVENT_BEAT_SCHOOLBOY_ALAN3
+	const_skip
+	const_skip
 	const EVENT_BEAT_SCHOOLBOY_CHAD2
 	const EVENT_BEAT_SCHOOLBOY_CHAD3
 ; Picnicker
@@ -1024,8 +1024,8 @@
 	const EVENT_BEAT_BUG_CATCHER_JOSH
 	const EVENT_BEAT_BUG_CATCHER_ARNIE
 	const_skip
-	const EVENT_BEAT_BUG_CATCHER_WADE2
-	const EVENT_BEAT_BUG_CATCHER_WADE3
+	const_skip
+	const_skip
 	const_skip
 	const EVENT_BEAT_BUG_CATCHER_ARNIE2
 	const EVENT_BEAT_BUG_CATCHER_ARNIE3

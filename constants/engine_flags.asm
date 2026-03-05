@@ -150,7 +150,7 @@
 ; wDailyPhoneItemFlags
 	const ENGINE_BEVERLY_HAS_NUGGET
 	const ENGINE_JOSE_HAS_STAR_PIECE
-	const ENGINE_WADE_HAS_ITEM
+	const ENGINE_WADE_HAS_ITEM ; unused
 	const ENGINE_GINA_HAS_LEAF_STONE
 	const ENGINE_ALAN_HAS_FIRE_STONE
 	const ENGINE_DANA_HAS_THUNDERSTONE
@@ -159,33 +159,33 @@
 	const ENGINE_TIFFANY_HAS_PINK_BOW
 	const ENGINE_WILTON_HAS_ITEM
 ; wDailyPhoneTimeOfDayFlags
-	const ENGINE_JACK_MONDAY_MORNING ; presently unused in Crystal Trove
-	const ENGINE_HUEY_WEDNESDAY_NIGHT ; presently unused in Crystal Trove
-	const ENGINE_GAVEN_THURSDAY_MORNING ; presently unused in Crystal Trove
-	const ENGINE_BETH_FRIDAY_AFTERNOON ; presently unused in Crystal Trove
-	const ENGINE_JOSE_SATURDAY_NIGHT ; presently unused in Crystal Trove
-	const ENGINE_REENA_SUNDAY_MORNING ; presently unused in Crystal Trove
-	const ENGINE_JOEY_MONDAY_AFTERNOON ; presently unused in Crystal Trove
-	const ENGINE_WADE_TUESDAY_NIGHT ; presently unused in Crystal Trove
-	const ENGINE_RALPH_WEDNESDAY_MORNING ; presently unused in Crystal Trove
-	const ENGINE_LIZ_THURSDAY_AFTERNOON ; presently unused in Crystal Trove
-	const ENGINE_ANTHONY_FRIDAY_NIGHT ; presently unused in Crystal Trove
-	const ENGINE_TODD_SATURDAY_MORNING ; presently unused in Crystal Trove
-	const ENGINE_GINA_SUNDAY_AFTERNOON ; presently unused in Crystal Trove
-	const ENGINE_ARNIE_TUESDAY_MORNING ; presently unused in Crystal Trove
-	const ENGINE_ALAN_WEDNESDAY_AFTERNOON ; presently unused in Crystal Trove
-	const ENGINE_DANA_THURSDAY_NIGHT ; presently unused in Crystal Trove
-	const ENGINE_CHAD_FRIDAY_MORNING ; presently unused in Crystal Trove
-	const ENGINE_TULLY_SUNDAY_NIGHT ; presently unused in Crystal Trove
-	const ENGINE_BRENT_MONDAY_MORNING ; presently unused in Crystal Trove
-	const ENGINE_TIFFANY_TUESDAY_AFTERNOON ; presently unused in Crystal Trove
-	const ENGINE_VANCE_WEDNESDAY_NIGHT ; presently unused in Crystal Trove
-	const ENGINE_WILTON_THURSDAY_MORNING ; presently unused in Crystal Trove
-	const ENGINE_PARRY_FRIDAY_AFTERNOON ; presently unused in Crystal Trove
-	const ENGINE_ERIN_SATURDAY_NIGHT ; presently unused in Crystal Trove
+	const ENGINE_JACK_MONDAY_MORNING ; unused
+	const ENGINE_HUEY_WEDNESDAY_NIGHT ; unused
+	const ENGINE_GAVEN_THURSDAY_MORNING ; unused
+	const ENGINE_BETH_FRIDAY_AFTERNOON ; unused
+	const ENGINE_JOSE_SATURDAY_NIGHT ; unused
+	const ENGINE_REENA_SUNDAY_MORNING ; unused
+	const ENGINE_JOEY_MONDAY_AFTERNOON ; unused
+	const ENGINE_WADE_TUESDAY_NIGHT ; unused
+	const ENGINE_RALPH_WEDNESDAY_MORNING ; unused
+	const ENGINE_LIZ_THURSDAY_AFTERNOON ; unused
+	const ENGINE_ANTHONY_FRIDAY_NIGHT ; unused
+	const ENGINE_TODD_SATURDAY_MORNING ; unused
+	const ENGINE_GINA_SUNDAY_AFTERNOON ; unused
+	const ENGINE_ARNIE_TUESDAY_MORNING ; unused
+	const ENGINE_ALAN_WEDNESDAY_AFTERNOON ; unused
+	const ENGINE_DANA_THURSDAY_NIGHT ; unused
+	const ENGINE_CHAD_FRIDAY_MORNING ; unused
+	const ENGINE_TULLY_SUNDAY_NIGHT ; unused
+	const ENGINE_BRENT_MONDAY_MORNING ; unused
+	const ENGINE_TIFFANY_TUESDAY_AFTERNOON ; unused
+	const ENGINE_VANCE_WEDNESDAY_NIGHT ; unused
+	const ENGINE_WILTON_THURSDAY_MORNING ; unused
+	const ENGINE_PARRY_FRIDAY_AFTERNOON ; unused
+	const ENGINE_ERIN_SATURDAY_NIGHT ; unused
 ; wPlayerSpriteSetupFlags
 	const ENGINE_KRIS_IN_CABLE_CLUB
 ; wSwarmFlags ; can have 8 daily swarm flags which are really daily flags
-	const ENGINE_DUNSPARCE_SWARM ; presently unused in Crystal Trove
-	const ENGINE_YANMA_SWARM ; presently unused in Crystal Trove
+	const ENGINE_DUNSPARCE_SWARM ; unused
+	const ENGINE_YANMA_SWARM ; unused
 DEF NUM_ENGINE_FLAGS EQU const_value
