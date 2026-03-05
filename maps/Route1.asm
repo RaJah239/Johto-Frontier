@@ -1,9 +1,3 @@
-Route1_MapScripts:
-	def_scene_scripts
-
-	def_callbacks
-	callback MAPCALLBACK_OBJECTS, Route1TuscanyCallback
-
 Route1_MapEvents:
 	def_warp_events
 	warp_event 27,  1, ROUTE_1_ROUTE_18_GATE, 3
@@ -40,6 +34,12 @@ Route1_MapEvents:
 	const ROUTE1_APRICORN1
 	const ROUTE1_BERRY1
 	const ROUTE1_BERRY2
+
+Route1_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
+	callback MAPCALLBACK_OBJECTS, Route1TuscanyCallback
 
 Route1TuscanyCallback:
 	readvar VAR_WEEKDAY
