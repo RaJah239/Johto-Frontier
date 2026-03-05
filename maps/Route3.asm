@@ -213,7 +213,6 @@ DarkCaveSignText:
 
 Route3Potion:
 	itemball POTION
-
 Route3PokeBall:
 	itemball POKE_BALL
 
@@ -221,8 +220,6 @@ Route3BerryTree:
 	setval BITTER_BERRY
 	setlasttalked ROUTE3_BERRY_TREE
 	jumpstd BerryOrFruitScript
-
-
 Route3ApricornTree:
 	setval BLK_APRICORN
 	setlasttalked ROUTE3_APRICORN_TREE

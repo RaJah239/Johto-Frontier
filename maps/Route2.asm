@@ -222,17 +222,14 @@ Route2BerryTree1:
 	setval BERRY
 	setlasttalked ROUTE2_BERRY_TREE1
 	jumpstd BerryOrFruitScript
-
 Route2BerryTree2:
 	setval PSNCUREBERRY
 	setlasttalked ROUTE2_BERRY_TREE2
 	jumpstd BerryOrFruitScript
-
 Route2ApricornTree1:
 	setval YLW_APRICORN
 	setlasttalked ROUTE2_APRICORN_TREE1
 	jumpstd BerryOrFruitScript
-
 Route2ApricornTree2:
 	setval GRN_APRICORN
 	setlasttalked ROUTE2_APRICORN_TREE2
