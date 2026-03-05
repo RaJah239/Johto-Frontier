@@ -639,7 +639,6 @@ AskNumberMScript:
 	ifequal PHONE_HIKER_ANTHONY, .Anthony
 	ifequal PHONE_CAMPER_TODD, .Todd
 	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
-	ifequal PHONE_SCHOOLBOY_ALAN, .Alan
 	ifequal PHONE_SCHOOLBOY_CHAD, .Chad
 	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
@@ -671,9 +670,6 @@ AskNumberMScript:
 	end
 .Arnie:
 	farwritetext ArnieAskNumberText
-	end
-.Alan:
-	farwritetext AlanAskNumberText
 	end
 .Chad:
 	farwritetext ChadAskNumberText
@@ -715,7 +711,6 @@ NumberAcceptedMScript:
 	ifequal PHONE_HIKER_ANTHONY, .Anthony
 	ifequal PHONE_CAMPER_TODD, .Todd
 	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
-	ifequal PHONE_SCHOOLBOY_ALAN, .Alan
 	ifequal PHONE_SCHOOLBOY_CHAD, .Chad
 	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
@@ -763,10 +758,6 @@ NumberAcceptedMScript:
 	waitbutton
 	closetext
 	end
-.Alan:
-	farwritetext AlanNumberAcceptedText
-	waitbutton
-	end
 .Chad:
 	farwritetext ChadNumberAcceptedText
 	waitbutton
@@ -813,7 +804,6 @@ NumberDeclinedMScript:
 	ifequal PHONE_HIKER_ANTHONY, .Anthony
 	ifequal PHONE_CAMPER_TODD, .Todd
 	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
-	ifequal PHONE_SCHOOLBOY_ALAN, .Alan
 	ifequal PHONE_SCHOOLBOY_CHAD, .Chad
 	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
@@ -860,10 +850,6 @@ NumberDeclinedMScript:
 	farwritetext ArnieNumberDeclinedText
 	waitbutton
 	closetext
-	end
-.Alan:
-	farwritetext AlanNumberDeclinedText
-	waitbutton
 	end
 .Chad:
 	farwritetext ChadNumberDeclinedText
@@ -987,7 +973,6 @@ GiftMScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 	ifequal PHONE_BUG_CATCHER_WADE, .Wade
-	ifequal PHONE_SCHOOLBOY_ALAN, .Alan
 	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
 	ifequal PHONE_FISHER_WILTON, .Wilton
@@ -998,10 +983,6 @@ GiftMScript:
 	end
 .Wade:
 	farwritetext WadeGiftText
-	promptbutton
-	end
-.Alan:
-	farwritetext AlanGiftText
 	promptbutton
 	end
 .Derek:
@@ -1076,11 +1057,6 @@ PackFullMScript:
 	end
 
 .Chad
-	farwritetext AlanPackFullText
-	waitbutton
-	closetext
-	end
-
 .Derek:
 	farwritetext ChadPackFullText
 	waitbutton

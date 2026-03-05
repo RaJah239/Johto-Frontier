@@ -29,7 +29,6 @@ PhoneContacts:
 	phone CAMPER,       TODD1,                 ROUTE_6,                   ANYTIME, ToddPhoneCalleeScript,    ANYTIME, ToddPhoneCallerScript
 	phone PICNICKER,    GINA1,                 ROUTE_6,                   ANYTIME, GinaPhoneCalleeScript,    ANYTIME, GinaPhoneCallerScript
 	phone BUG_CATCHER,  ARNIE1,                ROUTE_7,                   ANYTIME, ArniePhoneCalleeScript,   ANYTIME, ArniePhoneCallerScript
-	phone SCHOOLBOY,    ALAN1,                 ROUTE_8,                   ANYTIME, AlanPhoneCalleeScript,    ANYTIME, AlanPhoneCallerScript
 	phone LASS,         DANA1,                 ROUTE_10,                  ANYTIME, DanaPhoneCalleeScript,    ANYTIME, DanaPhoneCallerScript
 	phone SCHOOLBOY,    CHAD1,                 ROUTE_10,                  ANYTIME, ChadPhoneCalleeScript,    ANYTIME, ChadPhoneCallerScript
 	phone POKEFANM,     DEREK1,                ROUTE_11,                  ANYTIME, DerekPhoneCalleeScript,   ANYTIME, DerekPhoneCallerScript

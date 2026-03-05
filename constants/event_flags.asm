@@ -453,7 +453,7 @@
 	const_skip
 	const EVENT_ARNIE_ASKED_FOR_PHONE_NUMBER
 	const_skip
-	const EVENT_ALAN_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const_skip
 	const_skip

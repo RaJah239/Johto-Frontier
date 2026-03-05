@@ -122,7 +122,7 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass SCHOOLBOY ; 17
 	const JACK1
-	const ALAN1
+	const ALAN
 	const CHAD1
 	const JACK2
 	const JACK3

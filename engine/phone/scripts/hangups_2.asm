@@ -18,11 +18,6 @@ GinaComePickUpScript:
 	promptbutton
 	sjump PhoneScript_HangUpText_Female
 
-AlanComePickUpScript:
-	farwritetext AlanComePickUpGiftText
-	promptbutton
-	sjump PhoneScript_HangUpText_Male
-
 DanaComePickUpScript:
 	farwritetext DanaComePickUpText
 	promptbutton
