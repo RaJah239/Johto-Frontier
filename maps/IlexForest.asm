@@ -141,19 +141,36 @@ IlexForestCharcoalMasterScript:
 IlexForestHeadbuttGuyScript:
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_TM02_HEADBUTT
+	checkevent EVENT_GOT_TM_HEADBUTT
 	iftrue .AlreadyGotHeadbutt
 	writetext Text_HeadbuttIntro
 	promptbutton
 	verbosegiveitem TM_HEADBUTT
 	iffalse .BagFull
-	setevent EVENT_GOT_TM02_HEADBUTT
+	setevent EVENT_GOT_TM_HEADBUTT
 .AlreadyGotHeadbutt:
 	writetext Text_HeadbuttOutro
 	waitbutton
 .BagFull:
 	closetext
 	end
+
+Text_HeadbuttIntro:
+	text "What am I doing?"
+
+	para "I'm shaking trees"
+	line "using HEADBUTT."
+
+	para "It's fun. Here,"
+	line "you try it too!"
+	done
+
+Text_HeadbuttOutro:
+	text "Rattle trees with"
+	line "HEADBUTT. Some-"
+	cont "times, sleeping"
+	cont "#MON fall out."
+	done
 
 TrainerBugCatcherWayne:
 	trainer BUG_CATCHER, WAYNE, EVENT_BEAT_BUG_CATCHER_WAYNE, BugCatcherWayneSeenText, BugCatcherWayneBeatenText, 0, .Script
@@ -485,22 +502,7 @@ IlexForestPlayerStepsDownMovement:
 
 
 
-Text_HeadbuttIntro:
-	text "What am I doing?"
 
-	para "I'm shaking trees"
-	line "using HEADBUTT."
-
-	para "It's fun. Here,"
-	line "you try it too!"
-	done
-
-Text_HeadbuttOutro:
-	text "Rattle trees with"
-	line "HEADBUTT. Some-"
-	cont "times, sleeping"
-	cont "#MON fall out."
-	done
 
 
 

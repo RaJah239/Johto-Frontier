@@ -25,7 +25,7 @@ GoldenrodDeptStore5FCheckIfSundayCallback:
 GoldenrodDeptStore5FClerkScript:
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_TM02_HEADBUTT
+	checkevent EVENT_GOT_TM_HEADBUTT
 	iftrue .headbutt
 	checkevent EVENT_GOT_TM_BRICK_BREAK
 	iftrue .onlyrocksmash
