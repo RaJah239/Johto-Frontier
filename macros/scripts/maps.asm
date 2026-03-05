@@ -141,6 +141,14 @@ MACRO rocksmash_event
 	endc
 ENDM
 
+MACRO strengthboulder_event
+	if _NARG == 2
+		object_event \1, \2, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumpstd, STRENGTH_SCRIPT, -1
+	else
+		object_event \1, \2, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumpstd, STRENGTH_SCRIPT, \3
+	endc
+ENDM
+
 MACRO chansey_event
 	if _NARG == 2
 		object_event \1, \2, SPRITE_CHANSEY, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumpstd, CHANSEY_POKECENTER_SCRIPT, -1
