@@ -848,7 +848,7 @@
 	const_skip
 ; Gentleman
 	const EVENT_BEAT_GENTLEMAN_PRESTON
-	const_skip
+	const EVENT_BEAT_GENTLEMAN_CHARLES
 	const_skip
 	const_skip
 	const EVENT_BEAT_GENTLEMAN_ALFRED
@@ -987,8 +987,8 @@
 	const_skip
 	const EVENT_BEAT_LASS_KRISE
 	const EVENT_BEAT_LASS_CONNIE
-	const_skip
-	const_skip
+	const EVENT_BEAT_SCHOOLBOY_LIAM
+	const EVENT_BEAT_COOLTRAINERM_KYLE
 	const_skip
 	const_skip
 	const EVENT_BEAT_LASS_DANA
@@ -1020,7 +1020,7 @@
 	const EVENT_BEAT_HIKER_PARRY3
 ; Bug Catcher
 	const EVENT_BEAT_BUG_CATCHER_DON
-	const_skip
+	const EVENT_BEAT_BUG_CATCHER_EMMANUEL
 	const_skip
 	const EVENT_BEAT_BUG_CATCHER_WADE
 	const EVENT_BEAT_BUG_CATCHER_BENNY

@@ -9,18 +9,18 @@ SlowpokeWellB1F_MapEvents:
 
 	def_object_events
 	strengthboulder_event 3, 2
-	object_event 15,  7, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_GENERICTRAINER, 3, TrainerGruntM29, -1
-	object_event  5,  2, SPRITE_PROTON, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_GENERICTRAINER, 1, TrainerGruntM1, -1
-	object_event  5,  6, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_GENERICTRAINER, 2, TrainerGruntM2, -1
-	object_event 10,  4, SPRITE_ROCKET_GIRL, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 4, TrainerGruntF1, -1
-	object_event 10,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, SlowpokeWellB1FSuperPotion, EVENT_SLOWPOKE_WELL_B1F_SUPER_POTION
+	object_event 15, 14, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 1, TrainerSchoolboyLiam, -1
+	object_event  5,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_GENERICTRAINER, 1, TrainerGentlemanCharles, -1
+	object_event 11,  2, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 2, TrainerBugCatcherEmmanuel, -1
+	object_event  6,  2, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, OBJECTTYPE_GENERICTRAINER, 2, TrainerCooltrainerMKyle, -1
+	object_event 10,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, SlowpokeWellB1FSuperPotion, EVENT_SLOWPOKE_WELL_B1F_SUPER_POTION
 
 	object_const_def
 	const SLOWPOKEWELLB1F_BOULDER
-	const SLOWPOKEWELLB1F_ROCKET1
-	const SLOWPOKEWELLB1F_ROCKET2
-	const SLOWPOKEWELLB1F_ROCKET3
-	const SLOWPOKEWELLB1F_ROCKET_GIRL
+	const SLOWPOKEWELLB1F_YOUNGSTER
+	const SLOWPOKEWELLB1F_GENTLEMAN
+	const SLOWPOKEWELLB1F_BUGCATCHER
+	const SLOWPOKEWELLB1F_COOLTRAINERM
 	const SLOWPOKEWELLB1F_POKE_BALL
 
 SlowpokeWellB1F_MapScripts:
@@ -28,8 +28,8 @@ SlowpokeWellB1F_MapScripts:
 
 	def_callbacks
 
-TrainerGruntM29:
-	generictrainer GRUNTM, GRUNTM_29, EVENT_BEAT_, .SeenText, .BeatenText
+TrainerSchoolboyLiam:
+	generictrainer SCHOOLBOY, LIAM, EVENT_BEAT_SCHOOLBOY_LIAM, .SeenText, .BeatenText
 
 .AfterText
 	text "TODOTEXT"
@@ -43,8 +43,8 @@ TrainerGruntM29:
 	text "TODOTEXT"
 	done
 
-TrainerGruntM1:
-	generictrainer PROTON, PROTON1, EVENT_BEAT_, .SeenText, .BeatenText
+TrainerCooltrainerMKyle:
+	generictrainer COOLTRAINERM, KYLE, EVENT_BEAT_COOLTRAINERM_KYLE, .SeenText, .BeatenText
 
 .AfterText
 	text "TODOTEXT"
@@ -58,8 +58,8 @@ TrainerGruntM1:
 	text "TODOTEXT"
 	done
 
-TrainerGruntM2:
-	generictrainer GRUNTM, GRUNTM_2, EVENT_BEAT_, .SeenText, .BeatenText
+TrainerGentlemanCharles:
+	generictrainer GENTLEMAN, CHARLES, EVENT_BEAT_GENTLEMAN_CHARLES, .SeenText, .BeatenText
 
 .AfterText
 	text "TODOTEXT"
@@ -73,15 +73,17 @@ TrainerGruntM2:
 	text "TODOTEXT"
 	done
 
-TrainerGruntF1:
-	generictrainer GRUNTF, GRUNTF_1, EVENT_BEAT_, .SeenText, .BeatenText
+TrainerBugCatcherEmmanuel:
+	generictrainer BUG_CATCHER, EMMANUEL, EVENT_BEAT_BUG_CATCHER_EMMANUEL, .SeenText, .BeatenText
 
 .AfterText
 	text "TODOTEXT"
 	done
 
 .SeenText
-	text "TODOTEXT"
+	text "I'll even go down"
+	line "a well to find Bug"
+	cont "#mon!"
 	done
 
 .BeatenText
