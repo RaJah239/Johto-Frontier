@@ -443,7 +443,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_ANTHONY_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const EVENT_TODD_ASKED_FOR_PHONE_NUMBER
 	const_skip
@@ -624,7 +624,7 @@
 	const EVENT_WALL_OPENED_IN_AERODACTYL_CHAMBER
 	const EVENT_WELCOMED_TO_POKECOM_CENTER
 	const EVENT_TODD_MAX_ELIXER
-	const EVENT_ANTHONY_BERRY_JUICE
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -994,7 +994,7 @@
 	const EVENT_BEAT_LASS_DANA2
 	const EVENT_BEAT_LASS_DANA3
 ; Hiker
-	const EVENT_BEAT_HIKER_ANTHONY2
+	const_skip
 	const EVENT_BEAT_HIKER_RUSSELL
 	const EVENT_BEAT_HIKER_PHILLIP
 	const EVENT_BEAT_HIKER_LEONARD
@@ -1005,7 +1005,7 @@
 	const EVENT_BEAT_HIKER_PARRY
 	const EVENT_BEAT_HIKER_TIMOTHY
 	const EVENT_BEAT_HIKER_BAILEY
-	const EVENT_BEAT_HIKER_ANTHONY3
+	const_skip
 	const_skip
 	const_skip
 	const_skip

@@ -345,23 +345,19 @@ DEF KRIS EQU __trainer_class__
 	const CLYDE ; unused
 
 	trainerclass HIKER ; 2c
-	const ANTHONY1
+	const ANTHONY
 	const RUSSELL
 	const PHILLIP
 	const LEONARD
-	const ANTHONY2
 	const BENJAMIN
 	const ERIK
 	const MICHAEL
 	const PARRY1
 	const TIMOTHY
 	const BAILEY
-	const ANTHONY3
 	const DANIEL
 	const PARRY2
 	const PARRY3
-	const ANTHONY4
-	const ANTHONY5
 
 	trainerclass BIKER ; 2d
 	const BIKER_BENNY ; unused
