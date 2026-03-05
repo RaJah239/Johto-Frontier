@@ -15,7 +15,7 @@ IlexForest_MapEvents:
 
 	def_object_events
 	chanseyheal_event 10, 4
-	object_event 14, 31, SPRITE_SCYTHER_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, IlexForestFarfetchdScript, EVENT_ILEX_FOREST_FARFETCHD
+	object_event 14, 31, SPRITE_SCYTHER_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, IlexForestScytherScript, EVENT_ILEX_FOREST_SCYTHER
 	object_event  7, 28, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, IlexForestCharcoalApprenticeScript, EVENT_ILEX_FOREST_APPRENTICE
 	object_event  5, 28, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, IlexForestCharcoalMasterScript, EVENT_ILEX_FOREST_CHARCOAL_MASTER
 	object_event 15, 14, SPRITE_ROCKER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, IlexForestHeadbuttGuyScript, -1
@@ -32,7 +32,7 @@ IlexForest_MapEvents:
 
 	object_const_def
 	const ILEXFOREST_CHANSEY
-	const ILEXFOREST_FARFETCHD
+	const ILEXFOREST_SCYTHER
 	const ILEXFOREST_YOUNGSTER1
 	const ILEXFOREST_BLACK_BELT
 	const ILEXFOREST_ROCKER
@@ -51,12 +51,12 @@ IlexForest_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, IlexForestFarfetchdCallback
+	callback MAPCALLBACK_OBJECTS, IlexForestScytherCallback
 
-IlexForestFarfetchdCallback:
+IlexForestScytherCallback:
 	checkevent EVENT_GOT_SCYTHER_CALL
 	iftrue .Static
-	readmem wFarfetchdPosition
+	readmem wScytherPosition
 	ifequal  1, .PositionOne
 	ifequal  2, .PositionTwo
 	ifequal  3, .PositionThree
@@ -71,73 +71,73 @@ IlexForestFarfetchdCallback:
 	endcallback
 
 .PositionOne:
-	moveobject ILEXFOREST_FARFETCHD, 14, 31
-	appear ILEXFOREST_FARFETCHD
+	moveobject ILEXFOREST_SCYTHER, 14, 31
+	appear ILEXFOREST_SCYTHER
 	endcallback
 
 .PositionTwo:
-	moveobject ILEXFOREST_FARFETCHD, 15, 25
-	appear ILEXFOREST_FARFETCHD
+	moveobject ILEXFOREST_SCYTHER, 15, 25
+	appear ILEXFOREST_SCYTHER
 	endcallback
 
 .PositionThree:
-	moveobject ILEXFOREST_FARFETCHD, 20, 24
-	appear ILEXFOREST_FARFETCHD
+	moveobject ILEXFOREST_SCYTHER, 20, 24
+	appear ILEXFOREST_SCYTHER
 	endcallback
 
 .PositionFour:
-	moveobject ILEXFOREST_FARFETCHD, 29, 22
-	appear ILEXFOREST_FARFETCHD
+	moveobject ILEXFOREST_SCYTHER, 29, 22
+	appear ILEXFOREST_SCYTHER
 	endcallback
 
 .PositionFive:
-	moveobject ILEXFOREST_FARFETCHD, 28, 31
-	appear ILEXFOREST_FARFETCHD
+	moveobject ILEXFOREST_SCYTHER, 28, 31
+	appear ILEXFOREST_SCYTHER
 	endcallback
 
 .PositionSix:
-	moveobject ILEXFOREST_FARFETCHD, 24, 35
-	appear ILEXFOREST_FARFETCHD
+	moveobject ILEXFOREST_SCYTHER, 24, 35
+	appear ILEXFOREST_SCYTHER
 	endcallback
 
 .PositionSeven:
-	moveobject ILEXFOREST_FARFETCHD, 22, 31
-	appear ILEXFOREST_FARFETCHD
+	moveobject ILEXFOREST_SCYTHER, 22, 31
+	appear ILEXFOREST_SCYTHER
 	endcallback
 
 .PositionEight:
-	moveobject ILEXFOREST_FARFETCHD, 15, 29
-	appear ILEXFOREST_FARFETCHD
+	moveobject ILEXFOREST_SCYTHER, 15, 29
+	appear ILEXFOREST_SCYTHER
 	endcallback
 
 .PositionNine:
-	moveobject ILEXFOREST_FARFETCHD, 10, 35
-	appear ILEXFOREST_FARFETCHD
+	moveobject ILEXFOREST_SCYTHER, 10, 35
+	appear ILEXFOREST_SCYTHER
 	endcallback
 
 .PositionTen:
-	moveobject ILEXFOREST_FARFETCHD, 6, 28
-	appear ILEXFOREST_FARFETCHD
+	moveobject ILEXFOREST_SCYTHER, 6, 28
+	appear ILEXFOREST_SCYTHER
 	endcallback
 
 IlexForestCharcoalApprenticeScript:
 	faceplayer
 	opentext
-	checkevent EVENT_HERDED_FARFETCHD
-	iftrue .DoneFarfetchd
+	checkevent EVENT_HERDED_SCYTHER
+	iftrue .DoneScyther
 	writetext IlexForestApprenticeIntroText
 	waitbutton
 	closetext
 	end
 
-.DoneFarfetchd:
+.DoneScyther:
 	writetext IlexForestApprenticeAfterText
 	waitbutton
 	closetext
 	end
 
-IlexForestFarfetchdScript:
-	readmem wFarfetchdPosition
+IlexForestScytherScript:
+	readmem wScytherPosition
 	ifequal  1, .Position1
 	ifequal  2, .Position2
 	ifequal  3, .Position3
@@ -150,72 +150,78 @@ IlexForestFarfetchdScript:
 	ifequal 10, .Position10
 
 .Position1:
-	faceplayer
-	opentext
-	writetext Text_ItsTheMissingPokemon
+	setval SCYTHER
+	special SetMonAsSeen
+	faceplayeropentext
+	writethistext
+		text "It's the missing"
+		line "#mon!"
+		done
 	promptbutton
-	writetext Text_Kwaaaa
-	waitbutton
-	closetext
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetchd_Pos1_Pos2
-	moveobject ILEXFOREST_FARFETCHD, 15, 25
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 2
+	cry SCYTHER
+	writethistext
+		text "Scyther: Scyth!"
+		done
+	waitclosetext
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos1_Pos2
+	moveobject ILEXFOREST_SCYTHER, 15, 25
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 2
 	end
 
 .Position2:
 	scall .CryAndCheckFacing
 	ifequal DOWN, .Position2_Down
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetchd_Pos2_Pos3
-	moveobject ILEXFOREST_FARFETCHD, 20, 24
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 3
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos2_Pos3
+	moveobject ILEXFOREST_SCYTHER, 20, 24
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 3
 	end
 
 .Position2_Down:
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetchd_Pos2_Pos8
-	moveobject ILEXFOREST_FARFETCHD, 15, 29
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 8
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos2_Pos8
+	moveobject ILEXFOREST_SCYTHER, 15, 29
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 8
 	end
 
 .Position3:
 	scall .CryAndCheckFacing
 	ifequal LEFT, .Position3_Left
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetchd_Pos3_Pos4
-	moveobject ILEXFOREST_FARFETCHD, 29, 22
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 4
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos3_Pos4
+	moveobject ILEXFOREST_SCYTHER, 29, 22
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 4
 	end
 
 .Position3_Left:
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetchd_Pos3_Pos2
-	moveobject ILEXFOREST_FARFETCHD, 15, 25
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 2
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos3_Pos2
+	moveobject ILEXFOREST_SCYTHER, 15, 25
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 2
 	end
 
 .Position4:
 	scall .CryAndCheckFacing
 	ifequal UP, .Position4_Up
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetchd_Pos4_Pos5
-	moveobject ILEXFOREST_FARFETCHD, 28, 31
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 5
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos4_Pos5
+	moveobject ILEXFOREST_SCYTHER, 28, 31
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 5
 	end
 
 .Position4_Up:
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetchd_Pos4_Pos3
-	moveobject ILEXFOREST_FARFETCHD, 20, 24
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 3
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos4_Pos3
+	moveobject ILEXFOREST_SCYTHER, 20, 24
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 3
 	end
 
 .Position5:
@@ -223,80 +229,80 @@ IlexForestFarfetchdScript:
 	ifequal UP, .Position5_Up
 	ifequal LEFT, .Position5_Left
 	ifequal RIGHT, .Position5_Right
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetchd_Pos5_Pos6
-	moveobject ILEXFOREST_FARFETCHD, 24, 35
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 6
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos5_Pos6
+	moveobject ILEXFOREST_SCYTHER, 24, 35
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 6
 	end
 
 .Position5_Left:
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetchd_Pos5_Pos7
-	moveobject ILEXFOREST_FARFETCHD, 22, 31
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 7
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos5_Pos7
+	moveobject ILEXFOREST_SCYTHER, 22, 31
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 7
 	end
 
 .Position5_Up:
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetched_Pos5_Pos4_Up
-	moveobject ILEXFOREST_FARFETCHD, 29, 22
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 4
+	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos5_Pos4_Up
+	moveobject ILEXFOREST_SCYTHER, 29, 22
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 4
 	end
 
 .Position5_Right:
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetched_Pos5_Pos4_Right
-	moveobject ILEXFOREST_FARFETCHD, 29, 22
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 4
+	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos5_Pos4_Right
+	moveobject ILEXFOREST_SCYTHER, 29, 22
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 4
 	end
 
 .Position6:
 	scall .CryAndCheckFacing
 	ifequal RIGHT, .Position6_Right
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetched_Pos6_Pos7
-	moveobject ILEXFOREST_FARFETCHD, 22, 31
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 7
+	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos6_Pos7
+	moveobject ILEXFOREST_SCYTHER, 22, 31
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 7
 	end
 
 .Position6_Right:
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetched_Pos6_Pos5
-	moveobject ILEXFOREST_FARFETCHD, 28, 31
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 5
+	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos6_Pos5
+	moveobject ILEXFOREST_SCYTHER, 28, 31
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 5
 	end
 
 .Position7:
 	scall .CryAndCheckFacing
 	ifequal DOWN, .Position7_Down
 	ifequal LEFT, .Position7_Left
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetched_Pos7_Pos8
-	moveobject ILEXFOREST_FARFETCHD, 15, 29
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 8
+	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos7_Pos8
+	moveobject ILEXFOREST_SCYTHER, 15, 29
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 8
 	end
 
 .Position7_Left:
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetched_Pos7_Pos6
-	moveobject ILEXFOREST_FARFETCHD, 24, 35
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 6
+	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos7_Pos6
+	moveobject ILEXFOREST_SCYTHER, 24, 35
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 6
 	end
 
 .Position7_Down:
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetched_Pos7_Pos5
-	moveobject ILEXFOREST_FARFETCHD, 28, 31
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 5
+	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos7_Pos5
+	moveobject ILEXFOREST_SCYTHER, 28, 31
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 5
 	end
 
 .Position8:
@@ -304,74 +310,76 @@ IlexForestFarfetchdScript:
 	ifequal UP, .Position8_Up
 	ifequal LEFT, .Position8_Left
 	ifequal RIGHT, .Position8_Right
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetched_Pos8_Pos9
-	moveobject ILEXFOREST_FARFETCHD, 10, 35
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 9
+	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos8_Pos9
+	moveobject ILEXFOREST_SCYTHER, 10, 35
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 9
 	end
 
 .Position8_Right:
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetched_Pos8_Pos7
-	moveobject ILEXFOREST_FARFETCHD, 22, 31
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 7
+	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos8_Pos7
+	moveobject ILEXFOREST_SCYTHER, 22, 31
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 7
 	end
 
 .Position8_Up:
 .Position8_Left:
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetched_Pos8_Pos2
-	moveobject ILEXFOREST_FARFETCHD, 15, 25
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 2
+	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos8_Pos2
+	moveobject ILEXFOREST_SCYTHER, 15, 25
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 2
 	end
 
 .Position9:
 	scall .CryAndCheckFacing
 	ifequal DOWN, .Position9_Down
 	ifequal RIGHT, .Position9_Right
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetched_Pos9_Pos10
-	moveobject ILEXFOREST_FARFETCHD, 6, 28
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 10
+	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos9_Pos10
+	moveobject ILEXFOREST_SCYTHER, 6, 28
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 10
 	appear ILEXFOREST_BLACK_BELT
 	setevent EVENT_CHARCOAL_KILN_BOSS
-	setevent EVENT_HERDED_FARFETCHD
+	setevent EVENT_HERDED_SCYTHER
 	end
 
 .Position9_Right:
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetched_Pos9_Pos8_Right
-	moveobject ILEXFOREST_FARFETCHD, 15, 29
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 8
+	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos9_Pos8_Right
+	moveobject ILEXFOREST_SCYTHER, 15, 29
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 8
 	end
 
 .Position9_Down:
-	applymovement ILEXFOREST_FARFETCHD, MovementData_Farfetched_Pos9_Pos8_Down
-	moveobject ILEXFOREST_FARFETCHD, 15, 29
-	disappear ILEXFOREST_FARFETCHD
-	appear ILEXFOREST_FARFETCHD
-	loadmem wFarfetchdPosition, 8
+	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos9_Pos8_Down
+	moveobject ILEXFOREST_SCYTHER, 15, 29
+	disappear ILEXFOREST_SCYTHER
+	appear ILEXFOREST_SCYTHER
+	loadmem wScytherPosition, 8
 	end
 
 .Position10:
-	faceplayer
-	opentext
-	writetext Text_Kwaaaa
+	reanchormap
+	pokepic SCYTHER
+	cry SCYTHER
 	waitbutton
-	closetext
-	end
+	closepokepic
+	jumpthistextfaceplayer
+		text "Scyther: Scyth!"
+		done
 
 .CryAndCheckFacing:
 	faceplayer
-	opentext
-	writetext Text_Kwaaaa
-	waitbutton
-	closetext
+	cry SCYTHER
+	showthistext
+		text "Scyther: Scyth!"
+		done
 	readvar VAR_FACING
 	end
 
@@ -387,7 +395,7 @@ IlexForestCharcoalMasterScript:
 	writetext Text_CharcoalMasterOutro
 	waitbutton
 	closetext
-	setevent EVENT_ILEX_FOREST_FARFETCHD
+	setevent EVENT_ILEX_FOREST_SCYTHER
 	setevent EVENT_ILEX_FOREST_APPRENTICE
 	setevent EVENT_ILEX_FOREST_CHARCOAL_MASTER
 	clearevent EVENT_CHARCOAL_KILN_SCYTHER
@@ -487,7 +495,7 @@ IlexForestShrineScript:
 .DidntCatchCelebi:
 	end
 
-MovementData_Farfetchd_Pos1_Pos2:
+MovementData_Scyther_Pos1_Pos2:
 	big_step UP
 	big_step UP
 	big_step UP
@@ -495,7 +503,7 @@ MovementData_Farfetchd_Pos1_Pos2:
 	big_step UP
 	step_end
 
-MovementData_Farfetchd_Pos2_Pos3:
+MovementData_Scyther_Pos2_Pos3:
 	big_step UP
 	big_step UP
 	big_step RIGHT
@@ -506,7 +514,7 @@ MovementData_Farfetchd_Pos2_Pos3:
 	big_step DOWN
 	step_end
 
-MovementData_Farfetchd_Pos2_Pos8:
+MovementData_Scyther_Pos2_Pos8:
 	big_step DOWN
 	big_step DOWN
 	big_step DOWN
@@ -514,7 +522,7 @@ MovementData_Farfetchd_Pos2_Pos8:
 	big_step DOWN
 	step_end
 
-MovementData_Farfetchd_Pos3_Pos4:
+MovementData_Scyther_Pos3_Pos4:
 	big_step RIGHT
 	big_step RIGHT
 	big_step RIGHT
@@ -523,7 +531,7 @@ MovementData_Farfetchd_Pos3_Pos4:
 	big_step RIGHT
 	step_end
 
-MovementData_Farfetchd_Pos3_Pos2:
+MovementData_Scyther_Pos3_Pos2:
 	big_step UP
 	big_step LEFT
 	big_step LEFT
@@ -531,7 +539,7 @@ MovementData_Farfetchd_Pos3_Pos2:
 	big_step LEFT
 	step_end
 
-MovementData_Farfetchd_Pos4_Pos5:
+MovementData_Scyther_Pos4_Pos5:
 	big_step DOWN
 	big_step DOWN
 	big_step DOWN
@@ -540,14 +548,14 @@ MovementData_Farfetchd_Pos4_Pos5:
 	big_step DOWN
 	step_end
 
-MovementData_Farfetchd_Pos4_Pos3:
+MovementData_Scyther_Pos4_Pos3:
 	big_step LEFT
 	jump_step LEFT
 	big_step LEFT
 	big_step LEFT
 	step_end
 
-MovementData_Farfetchd_Pos5_Pos6:
+MovementData_Scyther_Pos5_Pos6:
 	big_step DOWN
 	big_step DOWN
 	big_step DOWN
@@ -559,7 +567,7 @@ MovementData_Farfetchd_Pos5_Pos6:
 	big_step LEFT
 	step_end
 
-MovementData_Farfetchd_Pos5_Pos7:
+MovementData_Scyther_Pos5_Pos7:
 	big_step LEFT
 	big_step LEFT
 	big_step LEFT
@@ -769,15 +777,6 @@ IlexForestApprenticeAfterText:
 	line "won't obey me be-"
 	cont "cause I don't have"
 	cont "a BADGE."
-	done
-
-Text_ItsTheMissingPokemon:
-	text "It's the missing"
-	line "#MON!"
-	done
-
-Text_Kwaaaa:
-	text "FARFETCH'D: Kwaa!"
 	done
 
 Text_CharcoalMasterIntro:

@@ -3103,7 +3103,7 @@ wTradeFlags:: flag_array NUM_NPC_TRADES
 wEmotePal:: db
 wMooMooBerries:: db
 wUndergroundSwitchPositions:: db
-wFarfetchdPosition:: db
+wScytherPosition:: db
 wExpShareToggle:: db
 wCopyEnemyParty:: db
 
