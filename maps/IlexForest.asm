@@ -22,12 +22,12 @@ IlexForest_MapEvents:
 	object_event 20, 32, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IlexForestRevive, EVENT_ILEX_FOREST_REVIVE
 	object_event  8, 29, SPRITE_KURT, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ILEX_FOREST_KURT
 	object_event  3, 24, SPRITE_LASS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, IlexForestLassText, EVENT_ILEX_FOREST_LASS
-	object_event 12,  1, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 0, TrainerBugCatcherWayne, -1
+	object_event 12,  1, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 0, TrainerBugCatcherWayne, -1
 	object_event  9, 17, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IlexForestXAttack, EVENT_ILEX_FOREST_X_ATTACK
 	object_event 17,  7, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IlexForestAntidote, EVENT_ILEX_FOREST_ANTIDOTE
 	object_event 27,  1, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IlexForestEther, EVENT_ILEX_FOREST_ETHER
-	object_event  3, 40, SPRITE_S_MUSHROOM, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, IlexForestTinyMushroomScript1, EVENT_ILEX_FOREST_TINY_MUSHROOM1
-	object_event  1,  7, SPRITE_S_MUSHROOM, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, IlexForestTinyMushroomScript2, EVENT_ILEX_FOREST_TINY_MUSHROOM2
+	object_event  3, 40, SPRITE_S_MUSHROOM, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, IlexForestTinyMushroomScript, EVENT_ILEX_FOREST_TINY_MUSHROOM1
+	object_event  1,  7, SPRITE_S_MUSHROOM, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, IlexForestTinyMushroomScript, EVENT_ILEX_FOREST_TINY_MUSHROOM2
 	object_event 26, 22, SPRITE_L_MUSHROOM, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, IlexForestLargeMushroomScript, EVENT_ILEX_FOREST_LARGE_MUSHROOM
 
 	object_const_def
@@ -139,52 +139,33 @@ IlexForestCharcoalMasterScript:
 		done
 
 IlexForestHeadbuttGuyScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkevent EVENT_GOT_TM_HEADBUTT
 	iftrue .AlreadyGotHeadbutt
-	writetext Text_HeadbuttIntro
+	writethistext
+		text "What am I doing?"
+
+		para "I'm shaking trees"
+		line "using Headbutt."
+
+		para "It's fun. Here,"
+		line "you try it too!"
+		done
 	promptbutton
 	verbosegiveitem TM_HEADBUTT
-	iffalse .BagFull
+	iffalse_endtext
 	setevent EVENT_GOT_TM_HEADBUTT
 .AlreadyGotHeadbutt:
-	writetext Text_HeadbuttOutro
-	waitbutton
-.BagFull:
-	closetext
-	end
-
-Text_HeadbuttIntro:
-	text "What am I doing?"
-
-	para "I'm shaking trees"
-	line "using HEADBUTT."
-
-	para "It's fun. Here,"
-	line "you try it too!"
-	done
-
-Text_HeadbuttOutro:
-	text "Rattle trees with"
-	line "HEADBUTT. Some-"
-	cont "times, sleeping"
-	cont "#MON fall out."
-	done
-
-TrainerBugCatcherWayne:
-	trainer BUG_CATCHER, WAYNE, EVENT_BEAT_BUG_CATCHER_WAYNE, BugCatcherWayneSeenText, BugCatcherWayneBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext BugCatcherWayneAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Rattle trees with"
+		line "Headbutt. Some-"
+		cont "times, sleeping"
+		cont "#mon or items"
+		cont "fall out."
+		done
 
 IlexForestShrineScript:
-	checkevent EVENT_FOREST_IS_RESTLESS
+	checkevent EVENT_FOREST_IS_RESTLESS ; this need to set to repeat this event
 	iftrue .ForestIsRestless
 	sjump .DontDoCelebiEvent
 
@@ -192,26 +173,50 @@ IlexForestShrineScript:
 	checkitem GS_BALL
 	iftrue .AskCelebiEvent
 .DontDoCelebiEvent:
-	jumptext Text_IlexForestShrine
+	jumpthistext
+		text "Ilex Forest"
+		line "Shrine…"
+
+		para "It's in honor of"
+		line "the forest's"
+		cont "protector…"
+		done
 
 .AskCelebiEvent:
 	opentext
-	writetext Text_ShrineCelebiEvent
-	yesorno
-	iftrue .CelebiEvent
-	closetext
-	end
+	writethistext
+		text "Ilex Forest"
+		line "Shrine…"
 
+		para "It's in honor of"
+		line "the forest's"
+		cont "protector…"
+
+		para "Oh? What is this?"
+
+		para "It's a hole."
+		line "It looks like the"
+
+		para "GS Ball would fit"
+		line "inside it."
+
+		para "Want to put the GS"
+		line "BalL here?"
+		done
+	yesorno
+	iffalse_endtext
 .CelebiEvent:
-	takeitem GS_BALL
+;	takeitem GS_BALL - don't take this, needed to repeat this event
 	clearevent EVENT_FOREST_IS_RESTLESS
 	setevent EVENT_AZALEA_TOWN_KURT
-	setevent EVENT_CELEBI_FATEFUL_ENCOUNTER
+	setevent EVENT_CELEBI_FATEFUL_ENCOUNTER ; remove after and give proper event to #dex
 	disappear ILEXFOREST_LASS
 	clearevent EVENT_ROUTE_6_ILEX_FOREST_GATE_LASS
-	writetext Text_InsertGSBall
-	waitbutton
-	closetext
+	writethistext
+		text "<PLAYER> put in the"
+		line "GS Ball."
+		done
+	waitclosetext
 	pause 20
 	showemote EMOTE_SHOCK, PLAYER, 20
 	special FadeOutMusic
@@ -229,248 +234,34 @@ IlexForestShrineScript:
 	iffalse .DidntCatchCelebi
 	appear ILEXFOREST_KURT
 	applymovement ILEXFOREST_KURT, IlexForestKurtStepsUpMovement
-	opentext
-	writetext Text_KurtCaughtCelebi
-	waitbutton
-	closetext
+	showthistext
+		text "Whew, wasn't that"
+		line "something!"
+
+		para "<PLAYER>, that was"
+		line "fantastic. Thanks!"
+
+		para "The legends about"
+		line "that Shrine were"
+		cont "real after all."
+
+		para "I feel inspired by"
+		line "what I just saw."
+
+		para "It motivates me to"
+		line "make better Balls!"
+
+		para "I'm going!"
+		done
 	applymovement ILEXFOREST_KURT, IlexForestKurtStepsDownMovement
 	disappear ILEXFOREST_KURT
 .DidntCatchCelebi:
 	end
 
-MovementData_Scyther_Pos1_Pos2:
-	big_step UP
-	big_step UP
-	big_step UP
-	big_step UP
-	big_step UP
-	step_end
-
-MovementData_Scyther_Pos2_Pos3:
-	big_step UP
-	big_step UP
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step DOWN
-	step_end
-
-MovementData_Scyther_Pos2_Pos8:
-	big_step DOWN
-	big_step DOWN
-	big_step DOWN
-	big_step DOWN
-	big_step DOWN
-	step_end
-
-MovementData_Scyther_Pos3_Pos4:
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	step_end
-
-MovementData_Scyther_Pos3_Pos2:
-	big_step UP
-	big_step LEFT
-	big_step LEFT
-	big_step LEFT
-	big_step LEFT
-	step_end
-
-MovementData_Scyther_Pos4_Pos5:
-	big_step DOWN
-	big_step DOWN
-	big_step DOWN
-	big_step DOWN
-	big_step DOWN
-	big_step DOWN
-	step_end
-
-MovementData_Scyther_Pos4_Pos3:
-	big_step LEFT
-	jump_step LEFT
-	big_step LEFT
-	big_step LEFT
-	step_end
-
-MovementData_Scyther_Pos5_Pos6:
-	big_step DOWN
-	big_step DOWN
-	big_step DOWN
-	big_step DOWN
-	big_step DOWN
-	big_step LEFT
-	big_step LEFT
-	big_step LEFT
-	big_step LEFT
-	step_end
-
-MovementData_Scyther_Pos5_Pos7:
-	big_step LEFT
-	big_step LEFT
-	big_step LEFT
-	big_step LEFT
-	step_end
-
-MovementData_Farfetched_Pos5_Pos4_Up:
-	big_step UP
-	big_step UP
-	big_step UP
-	big_step RIGHT
-	big_step UP
-	step_end
-
-MovementData_Farfetched_Pos5_Pos4_Right:
-	big_step RIGHT
-	turn_head UP
-	step_sleep 1
-	turn_head DOWN
-	step_sleep 1
-	turn_head UP
-	step_sleep 1
-	big_step DOWN
-	big_step DOWN
+IlexForestPlayerStepsDownMovement:
 	fix_facing
-	jump_step UP
-	step_sleep 8
-	step_sleep 8
+	slow_step DOWN
 	remove_fixed_facing
-	big_step UP
-	big_step UP
-	big_step UP
-	big_step UP
-	big_step UP
-	step_end
-
-MovementData_Farfetched_Pos6_Pos7:
-	big_step LEFT
-	big_step LEFT
-	big_step LEFT
-	big_step UP
-	big_step UP
-	big_step RIGHT
-	big_step UP
-	big_step UP
-	step_end
-
-MovementData_Farfetched_Pos6_Pos5:
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step UP
-	big_step UP
-	big_step UP
-	big_step UP
-	step_end
-
-MovementData_Farfetched_Pos7_Pos8:
-	big_step UP
-	big_step UP
-	big_step LEFT
-	big_step LEFT
-	big_step LEFT
-	big_step LEFT
-	big_step LEFT
-	step_end
-
-MovementData_Farfetched_Pos7_Pos6:
-	big_step DOWN
-	big_step DOWN
-	big_step LEFT
-	big_step DOWN
-	big_step DOWN
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	step_end
-
-MovementData_Farfetched_Pos7_Pos5:
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	step_end
-
-MovementData_Farfetched_Pos8_Pos9:
-	big_step DOWN
-	big_step LEFT
-	big_step DOWN
-	big_step DOWN
-	big_step DOWN
-	big_step DOWN
-	big_step DOWN
-	step_end
-
-MovementData_Farfetched_Pos8_Pos7:
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	step_end
-
-MovementData_Farfetched_Pos8_Pos2:
-	big_step UP
-	big_step UP
-	big_step UP
-	big_step UP
-	step_end
-
-MovementData_Farfetched_Pos9_Pos10:
-	big_step LEFT
-	big_step LEFT
-	fix_facing
-	jump_step RIGHT
-	step_sleep 8
-	step_sleep 8
-	remove_fixed_facing
-	big_step LEFT
-	big_step LEFT
-	big_step UP
-	big_step UP
-	big_step UP
-	big_step UP
-	big_step UP
-	big_step UP
-	step_end
-
-MovementData_Farfetched_Pos9_Pos8_Right:
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step UP
-	big_step UP
-	big_step UP
-	big_step UP
-	big_step UP
-	step_end
-
-MovementData_Farfetched_Pos9_Pos8_Down:
-	big_step LEFT
-	big_step LEFT
-	fix_facing
-	jump_step RIGHT
-	step_sleep 8
-	step_sleep 8
-	remove_fixed_facing
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step RIGHT
-	big_step UP
-	big_step UP
-	big_step UP
-	big_step UP
-	big_step UP
 	step_end
 
 IlexForestKurtStepsUpMovement:
@@ -487,268 +278,31 @@ IlexForestKurtStepsDownMovement:
 	step DOWN
 	step_end
 
-IlexForestPlayerStepsDownMovement:
-	fix_facing
-	slow_step DOWN
-	remove_fixed_facing
-	step_end
+TrainerBugCatcherWayne:
+	generictrainer BUG_CATCHER, WAYNE, EVENT_BEAT_BUG_CATCHER_WAYNE, .SeenText, .BeatenText
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Text_IlexForestShrine:
-	text "ILEX FOREST"
-	line "SHRINE…"
-
-	para "It's in honor of"
-	line "the forest's"
-	cont "protector…"
-	done
-
-Text_ShrineCelebiEvent:
-	text "ILEX FOREST"
-	line "SHRINE…"
-
-	para "It's in honor of"
-	line "the forest's"
-	cont "protector…"
-
-	para "Oh? What is this?"
-
-	para "It's a hole."
-	line "It looks like the"
-
-	para "GS BALL would fit"
-	line "inside it."
-
-	para "Want to put the GS"
-	line "BALL here?"
-	done
-
-Text_InsertGSBall:
-	text "<PLAYER> put in the"
-	line "GS BALL."
-	done
-
-Text_KurtCaughtCelebi:
-	text "Whew, wasn't that"
-	line "something!"
-
-	para "<PLAYER>, that was"
-	line "fantastic. Thanks!"
-
-	para "The legends about"
-	line "that SHRINE were"
-	cont "real after all."
-
-	para "I feel inspired by"
-	line "what I just saw."
-
-	para "It motivates me to"
-	line "make better BALLS!"
-
-	para "I'm going!"
-	done
-
-BugCatcherWayneSeenText:
-	text "Don't sneak up on"
-	line "me like that!"
-
-	para "You frightened a"
-	line "#MON away!"
-	done
-
-BugCatcherWayneBeatenText:
-	text "I hadn't seen that"
-	line "#MON before…"
-	done
-
-BugCatcherWayneAfterBattleText:
-	text "A #MON I've"
+.AfterText
+	text "A #mon I've"
 	line "never seen before"
-
-	para "fell out of the"
-	line "tree when I used"
-	cont "HEADBUTT."
+	cont "fell out of the"
+	cont "tree when I used"
+	cont "Headbutt."
 
 	para "I ought to use"
-	line "HEADBUTT in other"
+	line "Headbutt in other"
 	cont "places too."
 	done
 
-IlexForestLargeMushroomScript:
-; This whole script is written out rather than as an itemball
-	scall .IlexForestParasBattle
-	giveitem BIG_MUSHROOM
-	getitemname STRING_BUFFER_3, BIG_MUSHROOM
-	iffalse .IlexForestNoRoomInBagForMushroom
-	disappear ILEXFOREST_L_MUSHROOM
-	opentext
-	writetext IlexForestFoundMushroomText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-
-	sjump .EndingThisMushroomScript
-
-.IlexForestParasBattle:
-	random 3
-	ifnotequal 0, .skip
-; 33% chance
-	loadvar VAR_BATTLETYPE, BATTLETYPE_TRAP
-	loadwildmon SHROOMISH, 8
-	cry SHROOMISH
-	startbattle
-	reloadmapafterbattle
-.skip
-	end
-
-.IlexForestNoRoomInBagForMushroom:
-	opentext
-	getitemname STRING_BUFFER_3, TINYMUSHROOM
-	writetext IlexForestFoundMushroomText
-	promptbutton
-	writetext IlexForestNoRoomForMushroomText
-	waitbutton
-.EndingThisMushroomScript:
-	closetext
-	end
-
-IlexForestTinyMushroomScript1:
-; This whole script is written out rather than as an itemball
-	scall .IlexForestParasBattle
-	random 10
-; 10% chance of Big Mushroom
-	ifequal 0, .BigMushroon
-	giveitem TINYMUSHROOM
-	getitemname STRING_BUFFER_3, TINYMUSHROOM
-	sjump .SmallMushroon
-.BigMushroon:
-	giveitem BIG_MUSHROOM
-	getitemname STRING_BUFFER_3, BIG_MUSHROOM
-.SmallMushroon:
-	iffalse .IlexForestNoRoomInBagForMushroom
-	disappear ILEXFOREST_S_MUSHROOM1
-	opentext
-	writetext IlexForestFoundMushroomText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	sjump .EndingThisMushroomScript
-
-.IlexForestParasBattle:
-	random 3
-	ifnotequal 0, .skip
-; 33% chance
-	loadvar VAR_BATTLETYPE, BATTLETYPE_TRAP
-	loadwildmon SHROOMISH, 8
-	cry SHROOMISH
-	startbattle
-	reloadmapafterbattle
-.skip
-	end
-
-.IlexForestNoRoomInBagForMushroom:
-	opentext
-	getitemname STRING_BUFFER_3, TINYMUSHROOM
-	writetext IlexForestFoundMushroomText
-	promptbutton
-	writetext IlexForestNoRoomForMushroomText
-	waitbutton
-.EndingThisMushroomScript:
-	closetext
-	end
-
-IlexForestTinyMushroomScript2:
-; This whole script is written out rather than as an itemball
-	scall .IlexForestParasBattle
-; 10% chance of Big Mushroom
-	random 10
-	ifequal 0, .BigMushroon
-	giveitem TINYMUSHROOM
-	getitemname STRING_BUFFER_3, TINYMUSHROOM
-	sjump .SmallMushroon
-.BigMushroon:
-	giveitem BIG_MUSHROOM
-	getitemname STRING_BUFFER_3, BIG_MUSHROOM
-.SmallMushroon:
-	iffalse .IlexForestNoRoomInBagForMushroom
-	disappear ILEXFOREST_S_MUSHROOM2
-	opentext
-	writetext IlexForestFoundMushroomText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	sjump .EndingThisMushroomScript
-
-.IlexForestParasBattle:
-	random 3
-	ifnotequal 0, .skip
-; 33% chance
-	loadvar VAR_BATTLETYPE, BATTLETYPE_TRAP
-	loadwildmon SHROOMISH, 8
-	cry SHROOMISH
-	startbattle
-	reloadmapafterbattle
-.skip
-	end
-
-.IlexForestNoRoomInBagForMushroom:
-	opentext
-	getitemname STRING_BUFFER_3, TINYMUSHROOM
-	writetext IlexForestFoundMushroomText
-	promptbutton
-	writetext IlexForestNoRoomForMushroomText
-	waitbutton
-.EndingThisMushroomScript:
-	closetext
-	end
-
-IlexForestFoundMushroomText:
-	text_far _PlayerFoundItemText
-	text_end
-
-IlexForestNoRoomForMushroomText:
-	text_far _CantCarryItemText
-	text_end
-
-IlexForestLassText:
-	text "Did something"
-	line "happen to the"
-	cont "forest's guardian?"
+.SeenText
+	text "Let me try out"
+	line "#mon that fell"
+	cont "out this tree!"
 	done
 
-IlexForestSignpostText:
-	text "Ilex Forest is"
-	line "so overgrown with"
-	cont "trees that you"
-	cont "can't see the sky."
-
-	para "Please watch out"
-	line "for items that may"
-	cont "have been dropped."
+.BeatenText
+	text "Oh… And I thought"
+	line "they were strong…"
 	done
-
-IlexForestRevive:
-	itemball REVIVE
-IlexForestXAttack:
-	itemball POTION
-IlexForestAntidote:
-	itemball ANTIDOTE
-IlexForestEther:
-	itemball ETHER
 
 IlexForestScytherCallback:
 	checkevent EVENT_GOT_SCYTHER_CALL
@@ -926,7 +480,7 @@ IlexForestScytherScript:
 	end
 
 .Position5_Up:
-	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos5_Pos4_Up
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos5_Pos4_Up
 	moveobject ILEXFOREST_SCYTHER, 29, 22
 	disappear ILEXFOREST_SCYTHER
 	appear ILEXFOREST_SCYTHER
@@ -934,7 +488,7 @@ IlexForestScytherScript:
 	end
 
 .Position5_Right:
-	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos5_Pos4_Right
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos5_Pos4_Right
 	moveobject ILEXFOREST_SCYTHER, 29, 22
 	disappear ILEXFOREST_SCYTHER
 	appear ILEXFOREST_SCYTHER
@@ -944,7 +498,7 @@ IlexForestScytherScript:
 .Position6:
 	scall .CryAndCheckFacing
 	ifequal RIGHT, .Position6_Right
-	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos6_Pos7
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos6_Pos7
 	moveobject ILEXFOREST_SCYTHER, 22, 31
 	disappear ILEXFOREST_SCYTHER
 	appear ILEXFOREST_SCYTHER
@@ -952,7 +506,7 @@ IlexForestScytherScript:
 	end
 
 .Position6_Right:
-	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos6_Pos5
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos6_Pos5
 	moveobject ILEXFOREST_SCYTHER, 28, 31
 	disappear ILEXFOREST_SCYTHER
 	appear ILEXFOREST_SCYTHER
@@ -963,7 +517,7 @@ IlexForestScytherScript:
 	scall .CryAndCheckFacing
 	ifequal DOWN, .Position7_Down
 	ifequal LEFT, .Position7_Left
-	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos7_Pos8
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos7_Pos8
 	moveobject ILEXFOREST_SCYTHER, 15, 29
 	disappear ILEXFOREST_SCYTHER
 	appear ILEXFOREST_SCYTHER
@@ -971,7 +525,7 @@ IlexForestScytherScript:
 	end
 
 .Position7_Left:
-	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos7_Pos6
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos7_Pos6
 	moveobject ILEXFOREST_SCYTHER, 24, 35
 	disappear ILEXFOREST_SCYTHER
 	appear ILEXFOREST_SCYTHER
@@ -979,7 +533,7 @@ IlexForestScytherScript:
 	end
 
 .Position7_Down:
-	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos7_Pos5
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos7_Pos5
 	moveobject ILEXFOREST_SCYTHER, 28, 31
 	disappear ILEXFOREST_SCYTHER
 	appear ILEXFOREST_SCYTHER
@@ -991,7 +545,7 @@ IlexForestScytherScript:
 	ifequal UP, .Position8_Up
 	ifequal LEFT, .Position8_Left
 	ifequal RIGHT, .Position8_Right
-	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos8_Pos9
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos8_Pos9
 	moveobject ILEXFOREST_SCYTHER, 10, 35
 	disappear ILEXFOREST_SCYTHER
 	appear ILEXFOREST_SCYTHER
@@ -999,7 +553,7 @@ IlexForestScytherScript:
 	end
 
 .Position8_Right:
-	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos8_Pos7
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos8_Pos7
 	moveobject ILEXFOREST_SCYTHER, 22, 31
 	disappear ILEXFOREST_SCYTHER
 	appear ILEXFOREST_SCYTHER
@@ -1008,7 +562,7 @@ IlexForestScytherScript:
 
 .Position8_Up:
 .Position8_Left:
-	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos8_Pos2
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos8_Pos2
 	moveobject ILEXFOREST_SCYTHER, 15, 25
 	disappear ILEXFOREST_SCYTHER
 	appear ILEXFOREST_SCYTHER
@@ -1019,7 +573,7 @@ IlexForestScytherScript:
 	scall .CryAndCheckFacing
 	ifequal DOWN, .Position9_Down
 	ifequal RIGHT, .Position9_Right
-	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos9_Pos10
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos9_Pos10
 	moveobject ILEXFOREST_SCYTHER, 6, 28
 	disappear ILEXFOREST_SCYTHER
 	appear ILEXFOREST_SCYTHER
@@ -1030,7 +584,7 @@ IlexForestScytherScript:
 	end
 
 .Position9_Right:
-	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos9_Pos8_Right
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos9_Pos8_Right
 	moveobject ILEXFOREST_SCYTHER, 15, 29
 	disappear ILEXFOREST_SCYTHER
 	appear ILEXFOREST_SCYTHER
@@ -1038,7 +592,7 @@ IlexForestScytherScript:
 	end
 
 .Position9_Down:
-	applymovement ILEXFOREST_SCYTHER, MovementData_Farfetched_Pos9_Pos8_Down
+	applymovement ILEXFOREST_SCYTHER, MovementData_Scyther_Pos9_Pos8_Down
 	moveobject ILEXFOREST_SCYTHER, 15, 29
 	disappear ILEXFOREST_SCYTHER
 	appear ILEXFOREST_SCYTHER
@@ -1063,3 +617,320 @@ IlexForestScytherScript:
 		done
 	readvar VAR_FACING
 	end
+
+MovementData_Scyther_Pos1_Pos2:
+	big_step UP
+	big_step UP
+	big_step UP
+	big_step UP
+	big_step UP
+	step_end
+
+MovementData_Scyther_Pos2_Pos3:
+	big_step UP
+	big_step UP
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step DOWN
+	step_end
+
+MovementData_Scyther_Pos2_Pos8:
+	big_step DOWN
+	big_step DOWN
+	big_step DOWN
+	big_step DOWN
+	big_step DOWN
+	step_end
+
+MovementData_Scyther_Pos3_Pos4:
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	step_end
+
+MovementData_Scyther_Pos3_Pos2:
+	big_step UP
+	big_step LEFT
+	big_step LEFT
+	big_step LEFT
+	big_step LEFT
+	step_end
+
+MovementData_Scyther_Pos4_Pos5:
+	big_step DOWN
+	big_step DOWN
+	big_step DOWN
+	big_step DOWN
+	big_step DOWN
+	big_step DOWN
+	step_end
+
+MovementData_Scyther_Pos4_Pos3:
+	big_step LEFT
+	jump_step LEFT
+	big_step LEFT
+	big_step LEFT
+	step_end
+
+MovementData_Scyther_Pos5_Pos6:
+	big_step DOWN
+	big_step DOWN
+	big_step DOWN
+	big_step DOWN
+	big_step DOWN
+	big_step LEFT
+	big_step LEFT
+	big_step LEFT
+	big_step LEFT
+	step_end
+
+MovementData_Scyther_Pos5_Pos7:
+	big_step LEFT
+	big_step LEFT
+	big_step LEFT
+	big_step LEFT
+	step_end
+
+MovementData_Scyther_Pos5_Pos4_Up:
+	big_step UP
+	big_step UP
+	big_step UP
+	big_step RIGHT
+	big_step UP
+	step_end
+
+MovementData_Scyther_Pos5_Pos4_Right:
+	big_step RIGHT
+	turn_head UP
+	step_sleep 1
+	turn_head DOWN
+	step_sleep 1
+	turn_head UP
+	step_sleep 1
+	big_step DOWN
+	big_step DOWN
+	fix_facing
+	jump_step UP
+	step_sleep 8
+	step_sleep 8
+	remove_fixed_facing
+	big_step UP
+	big_step UP
+	big_step UP
+	big_step UP
+	big_step UP
+	step_end
+
+MovementData_Scyther_Pos6_Pos7:
+	big_step LEFT
+	big_step LEFT
+	big_step LEFT
+	big_step UP
+	big_step UP
+	big_step RIGHT
+	big_step UP
+	big_step UP
+	step_end
+
+MovementData_Scyther_Pos6_Pos5:
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step UP
+	big_step UP
+	big_step UP
+	big_step UP
+	step_end
+
+MovementData_Scyther_Pos7_Pos8:
+	big_step UP
+	big_step UP
+	big_step LEFT
+	big_step LEFT
+	big_step LEFT
+	big_step LEFT
+	big_step LEFT
+	step_end
+
+MovementData_Scyther_Pos7_Pos6:
+	big_step DOWN
+	big_step DOWN
+	big_step LEFT
+	big_step DOWN
+	big_step DOWN
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	step_end
+
+MovementData_Scyther_Pos7_Pos5:
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	step_end
+
+MovementData_Scyther_Pos8_Pos9:
+	big_step DOWN
+	big_step LEFT
+	big_step DOWN
+	big_step DOWN
+	big_step DOWN
+	big_step DOWN
+	big_step DOWN
+	step_end
+
+MovementData_Scyther_Pos8_Pos7:
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	step_end
+
+MovementData_Scyther_Pos8_Pos2:
+	big_step UP
+	big_step UP
+	big_step UP
+	big_step UP
+	step_end
+
+MovementData_Scyther_Pos9_Pos10:
+	big_step LEFT
+	big_step LEFT
+	fix_facing
+	jump_step RIGHT
+	step_sleep 8
+	step_sleep 8
+	remove_fixed_facing
+	big_step LEFT
+	big_step LEFT
+	big_step UP
+	big_step UP
+	big_step UP
+	big_step UP
+	big_step UP
+	big_step UP
+	step_end
+
+MovementData_Scyther_Pos9_Pos8_Right:
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step UP
+	big_step UP
+	big_step UP
+	big_step UP
+	big_step UP
+	step_end
+
+MovementData_Scyther_Pos9_Pos8_Down:
+	big_step LEFT
+	big_step LEFT
+	fix_facing
+	jump_step RIGHT
+	step_sleep 8
+	step_sleep 8
+	remove_fixed_facing
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step RIGHT
+	big_step UP
+	big_step UP
+	big_step UP
+	big_step UP
+	big_step UP
+	step_end
+
+IlexForestLargeMushroomScript:
+	scall IlexForestShroomishBattle
+	giveitem BIG_MUSHROOM
+	getitemname STRING_BUFFER_3, BIG_MUSHROOM
+	iffalse IlexForestNoRoomInBagForMushroom
+	sjump IlexForestGiveMushroom
+
+IlexForestTinyMushroomScript:
+	scall IlexForestShroomishBattle
+	random 10
+	ifequal 0, .big
+	giveitem TINYMUSHROOM
+	getitemname STRING_BUFFER_3, TINYMUSHROOM
+	sjump .continue
+
+.big
+	giveitem BIG_MUSHROOM
+	getitemname STRING_BUFFER_3, BIG_MUSHROOM
+.continue
+	iffalse IlexForestNoRoomInBagForMushroom
+IlexForestGiveMushroom:
+	disappear LAST_TALKED
+	opentext
+	writetext IlexForestFoundMushroomText
+	playsound SFX_ITEM
+	waitsfx
+	itemnotify
+	endtext
+
+IlexForestShroomishBattle:
+	random 3
+	ifnotequal 0, .skip
+	loadvar VAR_BATTLETYPE, BATTLETYPE_TRAP
+	loadwildmon SHROOMISH, 8
+	cry SHROOMISH
+	startbattle
+	reloadmapafterbattle
+.skip
+	end
+
+IlexForestNoRoomInBagForMushroom:
+	opentext
+	getitemname STRING_BUFFER_3, TINYMUSHROOM
+	writetext IlexForestFoundMushroomText
+	promptbutton
+	writetext IlexForestNoRoomForMushroomText
+	waitendtext
+
+IlexForestFoundMushroomText:
+	text_far _PlayerFoundItemText
+	text_end
+
+IlexForestNoRoomForMushroomText:
+	text_far _CantCarryItemText
+	text_end
+
+IlexForestLassText:
+	text "Did something"
+	line "happen to the"
+	cont "forest's guardian?"
+	done
+
+IlexForestSignpostText:
+	text "Ilex Forest is"
+	line "so overgrown with"
+	cont "trees that you"
+	cont "can't see the sky."
+
+	para "Please watch out"
+	line "for items that may"
+	cont "have been dropped."
+	done
+
+IlexForestRevive:
+	itemball REVIVE
+IlexForestXAttack:
+	itemball POTION
+IlexForestAntidote:
+	itemball ANTIDOTE
+IlexForestEther:
+	itemball ETHER
