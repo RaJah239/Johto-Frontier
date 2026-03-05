@@ -156,6 +156,7 @@ DEF SPRITE_POKEMON EQU const_value
 	const SPRITE_GHOLDENGO
 	const SPRITE_PIDGEY
 	const SPRITE_SLOWPOKE
+	const SPRITE_SCYTHER
 DEF NUM_POKEMON_SPRITES EQU const_value - SPRITE_POKEMON
 
 ; special GetMonSprite values (see engine/overworld/overworld.asm)

@@ -36,6 +36,9 @@ SpriteMons:
 	db LUGIA
 	db HO_OH
 	db GHOLDENGO
+
+; in use
 	db PIDGEY
 	db SLOWPOKE
+	db SCYTHER
 	assert_table_length NUM_POKEMON_SPRITES
