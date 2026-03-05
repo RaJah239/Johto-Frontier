@@ -1,3 +1,26 @@
+KurtsHouse_MapEvents:
+	def_warp_events
+	warp_event  3,  7, AZALEA_TOWN, 4
+	warp_event  4,  7, AZALEA_TOWN, 4
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  6,  1, BGEVENT_JUMPSTD, RADIO2SCRIPT
+	bg_event  5,  1, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  2,  1, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  3,  1, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  8,  0, BGEVENT_JUMPTEXT, KurtsHouseOakPhotoText
+	bg_event  9,  0, BGEVENT_JUMPTEXT, KurtsHouseOakPhotoText
+	bg_event  4,  1, BGEVENT_JUMPTEXT, KurtsHouseStatueText
+
+	def_object_events
+	object_event  3,  2, SPRITE_KURT, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Kurt1, EVENT_KURTS_HOUSE_KURT_1
+	object_event  5,  3, SPRITE_TWIN, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, KurtsGranddaughter1, EVENT_KURTS_HOUSE_GRANDDAUGHTER_1
+	object_event  6,  3, SPRITE_SLOWPOKE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, KurtsHouseSlowpoke, -1
+	object_event 14,  3, SPRITE_KURT, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Kurt2, EVENT_KURTS_HOUSE_KURT_2
+	object_event 11,  4, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, KurtsGranddaughter2, EVENT_KURTS_HOUSE_GRANDDAUGHTER_2
+
 	object_const_def
 	const KURTSHOUSE_KURT1
 	const KURTSHOUSE_TWIN1
@@ -12,8 +35,6 @@ KurtsHouse_MapScripts:
 	callback MAPCALLBACK_OBJECTS, KurtsHouseKurtCallback
 
 KurtsHouseKurtCallback:
-	checkevent EVENT_CLEARED_SLOWPOKE_WELL
-	iffalse .Done
 	checkevent EVENT_FOREST_IS_RESTLESS
 	iftrue .Done
 	checkflag ENGINE_KURT_MAKING_BALLS
@@ -419,18 +440,6 @@ KurtsHouseSlowpoke:
 	closetext
 	end
 
-KurtsHouseOakPhoto:
-	jumptext KurtsHouseOakPhotoText
-
-KurtsHouseCelebiStatue:
-	jumptext KurtsHouseCelebiStatueText
-
-KurtsHouseBookshelf:
-	jumpstd DifficultBookshelfScript
-
-KurtsHouseRadio:
-	jumpstd Radio2Script
-
 KurtsHouseKurtExitHouseMovement:
 	big_step DOWN
 	big_step DOWN
@@ -664,35 +673,12 @@ KurtsHouseSlowpokeText:
 	done
 
 KurtsHouseOakPhotoText:
-	text "…A young PROF."
-	line "OAK?"
+	text "…A young Prof."
+	line "Oak?"
 	done
 
-KurtsHouseCelebiStatueText:
+KurtsHouseStatueText:
 	text "It's a statue of"
 	line "the forest's pro-"
 	cont "tector."
 	done
-
-KurtsHouse_MapEvents:
-	def_warp_events
-	warp_event  3,  7, AZALEA_TOWN, 4
-	warp_event  4,  7, AZALEA_TOWN, 4
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  6,  1, BGEVENT_READ, KurtsHouseRadio
-	bg_event  8,  0, BGEVENT_READ, KurtsHouseOakPhoto
-	bg_event  9,  0, BGEVENT_READ, KurtsHouseOakPhoto
-	bg_event  5,  1, BGEVENT_READ, KurtsHouseBookshelf
-	bg_event  2,  1, BGEVENT_READ, KurtsHouseBookshelf
-	bg_event  3,  1, BGEVENT_READ, KurtsHouseBookshelf
-	bg_event  4,  1, BGEVENT_READ, KurtsHouseCelebiStatue
-
-	def_object_events
-	object_event  3,  2, SPRITE_KURT, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Kurt1, EVENT_KURTS_HOUSE_KURT_1
-	object_event  5,  3, SPRITE_TWIN, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, KurtsGranddaughter1, EVENT_KURTS_HOUSE_GRANDDAUGHTER_1
-	object_event  6,  3, SPRITE_SLOWPOKE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, KurtsHouseSlowpoke, -1
-	object_event 14,  3, SPRITE_KURT, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Kurt2, EVENT_KURTS_HOUSE_KURT_2
-	object_event 11,  4, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, KurtsGranddaughter2, EVENT_KURTS_HOUSE_GRANDDAUGHTER_2
