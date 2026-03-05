@@ -33,7 +33,6 @@ NewBarkGroupSprites:
 ; Route20, Route19, Route1, NewBarkTown
 CherrygroveGroupSprites:
 ; Route2, Route3, CherrygroveCity
-	db SPRITE_RIVAL
 	db SPRITE_TEACHER
 	db SPRITE_FISHER
 	db SPRITE_COOLTRAINER_M
@@ -78,8 +77,6 @@ AzaleaGroupSprites:
 	db SPRITE_YOUNGSTER
 	db SPRITE_POKEFAN_M
 	db SPRITE_TEACHER
-	db SPRITE_ROCKET
-	db SPRITE_RIVAL
 	db SPRITE_LASS
 	; 6 of max 9 walking sprites
 	db SPRITE_SLOWPOKE
