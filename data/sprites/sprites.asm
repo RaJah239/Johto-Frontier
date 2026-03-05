@@ -119,4 +119,5 @@ OverworldSprites:
 	overworld_sprite ApricornSpriteGFX, 4, STILL_SPRITE, PAL_OW_RED
 	overworld_sprite CheaterSpriteGFX, 12, WALKING_SPRITE, PAL_OW_BLACK
 	overworld_sprite OtisSpriteGFX, 12, WALKING_SPRITE, PAL_OW_BLUE
+	overworld_sprite ScytherOWSpriteGFX, 12, WALKING_SPRITE, PAL_OW_GREEN
 	assert_table_length NUM_OVERWORLD_SPRITES
