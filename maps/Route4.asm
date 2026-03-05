@@ -18,7 +18,7 @@ Route4_MapEvents:
 	def_object_events
 	object_event  8, 49, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 1, TrainerFisherJustin, -1
 	object_event 12, 56, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 3, TrainerFisherRalph, -1
-	object_event  6, 48, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerFisherHenry, -1
+	object_event  6, 48, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 1, TrainerFisherHenry, -1
 	object_event 12, 22, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterAlbert, -1
 	object_event  4, 63, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterGordon, -1
 	object_event  3, 45, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 3, TrainerCamperRoland, -1
@@ -224,15 +224,23 @@ TrainerFisherRalph:
 	done
 
 TrainerFisherHenry:
-	trainer FISHER, HENRY, EVENT_BEAT_FISHER_HENRY, FisherHenrySeenText, FisherHenryBeatenText, 0, .Script
+	generictrainer FISHER, HENRY, EVENT_BEAT_FISHER_HENRY, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext FisherHenryAfterText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "Freshly caught"
+	line "#mon are no"
+	cont "match for properly"
+	cont "raised ones."
+	done
+
+.SeenText
+	text "My #mon?"
+	line "Freshly caught!"
+	done
+
+.BeatenText
+	text "Splash?"
+	done
 
 TrainerPicnickerLiz1:
 	trainer PICNICKER, LIZ1, EVENT_BEAT_PICNICKER_LIZ, PicnickerLiz1SeenText, PicnickerLiz1BeatenText, 0, .Script
@@ -421,22 +429,7 @@ FriedaScript:
 
 
 
-FisherHenrySeenText:
-	text "My #MON?"
-	line "Freshly caught!"
-	done
 
-FisherHenryBeatenText:
-	text "SPLASH?"
-	done
-
-FisherHenryAfterText:
-	text "Freshly caught"
-	line "#MON are no"
-
-	para "match for properly"
-	line "raised ones."
-	done
 
 YoungsterAlbertSeenText:
 	text "I haven't seen you"
