@@ -1076,7 +1076,6 @@ AskNumberFScript:
 	ifequal PHONE_POKEFAN_BEVERLY, .Beverly
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_LIZ, .Liz
 	ifequal PHONE_PICNICKER_GINA, .Gina
 	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
@@ -1090,9 +1089,6 @@ AskNumberFScript:
 	end
 .Reena:
 	farwritetext ReenaAskNumberText
-	end
-.Liz:
-	farwritetext LizAskNumberText
 	end
 .Gina:
 	farwritetext GinaAskNumberText
@@ -1119,7 +1115,6 @@ NumberAcceptedFScript:
 	ifequal PHONE_POKEFAN_BEVERLY, .Beverly
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_LIZ, .Liz
 	ifequal PHONE_PICNICKER_GINA, .Gina
 	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
@@ -1137,11 +1132,6 @@ NumberAcceptedFScript:
 	end
 .Reena:
 	farwritetext ReenaNumberAcceptedText
-	waitbutton
-	closetext
-	end
-.Liz:
-	farwritetext LizNumberAcceptedText
 	waitbutton
 	closetext
 	end
@@ -1171,7 +1161,6 @@ NumberDeclinedFScript:
 	ifequal PHONE_POKEFAN_BEVERLY, .Beverly
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_LIZ, .Liz
 	ifequal PHONE_PICNICKER_GINA, .Gina
 	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
@@ -1189,11 +1178,6 @@ NumberDeclinedFScript:
 	end
 .Reena:
 	farwritetext ReenaNumberDeclinedText
-	waitbutton
-	closetext
-	end
-.Liz:
-	farwritetext LizNumberDeclinedText
 	waitbutton
 	closetext
 	end
@@ -1222,7 +1206,6 @@ RematchFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_LIZ, .Liz
 	ifequal PHONE_PICNICKER_GINA, .Gina
 	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
@@ -1235,11 +1218,6 @@ RematchFScript:
 	end
 .Reena:
 	farwritetext ReenaRematchText
-	waitbutton
-	closetext
-	end
-.Liz:
-	farwritetext LizRematchText
 	waitbutton
 	closetext
 	end
@@ -1293,7 +1271,6 @@ PackFullFScript:
 	ifequal PHONE_POKEFAN_BEVERLY, .Beverly
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_LIZ, .Liz
 	ifequal PHONE_PICNICKER_GINA, .Gina
 	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
@@ -1313,12 +1290,6 @@ PackFullFScript:
 
 .Reena
 	farwritetext ReenaPackFullText
-	waitbutton
-	closetext
-	end
-
-.Liz
-	farwritetext LizPackFullText
 	waitbutton
 	closetext
 	end

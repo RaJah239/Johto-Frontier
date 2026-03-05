@@ -22,10 +22,6 @@ ReenaHurryScript:
 	farwritetext ReenaHurryText
 	end
 
-LizReminderScript:
-	farwritetext LizReminderText
-	end
-
 AnthonyReminderScript:
 	farwritetext AnthonyReminderText
 	end

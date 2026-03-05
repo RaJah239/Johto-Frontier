@@ -23,7 +23,6 @@ PhoneContacts:
 	phone COOLTRAINERF, BETH1,                 ROUTE_20,                  ANYTIME, BethPhoneCalleeScript,    ANYTIME, BethPhoneCallerScript
 	phone BIRD_KEEPER,  JOSE2,                 ROUTE_19,                  ANYTIME, JosePhoneCalleeScript,    ANYTIME, JosePhoneCallerScript
 	phone COOLTRAINERF, REENA1,                ROUTE_19,                  ANYTIME, ReenaPhoneCalleeScript,   ANYTIME, ReenaPhoneCallerScript
-	phone PICNICKER,    LIZ1,                  ROUTE_4,                   ANYTIME, LizPhoneCalleeScript,     ANYTIME, LizPhoneCallerScript
 	phone HIKER,        ANTHONY2,              ROUTE_5,                   ANYTIME, AnthonyPhoneCalleeScript, ANYTIME, AnthonyPhoneCallerScript
 	phone CAMPER,       TODD1,                 ROUTE_6,                   ANYTIME, ToddPhoneCalleeScript,    ANYTIME, ToddPhoneCallerScript
 	phone PICNICKER,    GINA1,                 ROUTE_6,                   ANYTIME, GinaPhoneCalleeScript,    ANYTIME, GinaPhoneCallerScript

@@ -22,7 +22,7 @@ Route4_MapEvents:
 	object_event 12, 22, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterAlbert, -1
 	object_event  4, 63, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterGordon, -1
 	object_event  3, 45, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 3, TrainerCamperRoland, -1
-	object_event 10, 30, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerPicnickerLiz1, -1
+	object_event 10, 30, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 1, TrainerPicnickerLiz, -1
 	object_event 19,  8, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route4CooltrainerMScript, -1
 	object_event 11, 82, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerBirdKeeperPeter, -1
 	object_event  6, 53, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route4GreatBall, EVENT_ROUTE_4_GREAT_BALL
@@ -242,119 +242,29 @@ TrainerFisherHenry:
 	text "Splash?"
 	done
 
-TrainerPicnickerLiz1:
-	trainer PICNICKER, LIZ1, EVENT_BEAT_PICNICKER_LIZ, PicnickerLiz1SeenText, PicnickerLiz1BeatenText, 0, .Script
+TrainerPicnickerLiz:
+	generictrainer PICNICKER, LIZ, EVENT_BEAT_PICNICKER_LIZ, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_PICNICKER_LIZ
-	opentext
-	checkevent EVENT_LIZ_MAX_REVIVE
-	iftrue .RematchGift
-	checkflag ENGINE_LIZ_READY_FOR_REMATCH
-	iftrue .Rematch
-	checkcellnum PHONE_PICNICKER_LIZ
-	iftrue .NumberAccepted
-	checkevent EVENT_LIZ_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskAgain
-	writetext PicnickerLiz1AfterText
-	promptbutton
-	setevent EVENT_LIZ_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .AskForNumber
+.AfterText
+	text "I was having a"
+	line "nice chat too."
+	done
 
-.AskAgain:
-	scall .AskNumber
-.AskForNumber:
-	askforphonenumber PHONE_PICNICKER_LIZ
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, PICNICKER, LIZ1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
+.SeenText
+	text "Uh-huh. Yeah, and"
+	line "you know…"
 
-.Rematch:
-	scall .RematchStd
-	winlosstext PicnickerLiz1BeatenText, 0
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight4
-	checkevent EVENT_CLEARED_RADIO_TOWER
-	iftrue .LoadFight3
-	checkevent EVENT_CLEARED_ROCKET_HIDEOUT
-	iftrue .LoadFight2
-	checkflag ENGINE_FLYPOINT_ECRUTEAK
-	iftrue .LoadFight1
-	loadtrainer PICNICKER, LIZ1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_LIZ_READY_FOR_REMATCH
-	end
+	para "Pardon? Battle?"
+	line "I'm on the phone."
 
-.LoadFight1:
-	loadtrainer PICNICKER, LIZ2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_LIZ_READY_FOR_REMATCH
-	end
+	para "Oh, all right. But"
+	line "make it fast."
+	done
 
-.LoadFight2:
-	loadtrainer PICNICKER, LIZ3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_LIZ_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer PICNICKER, LIZ4
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_LIZ_READY_FOR_REMATCH
-	end
-
-.LoadFight4:
-	loadtrainer PICNICKER, LIZ5
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_LIZ_READY_FOR_REMATCH
-	opentext
-	writetext PicnickerLiz_GiveMaxReviveAfterBattleText
-	waitbutton
-	verbosegiveitem MAX_REVIVE
-	iffalse .PackFull
-	closetext
-	end
-
-.RematchGift
-	writetext PicnickerLiz_AgainGiveMaxReviveAfterBattleText
-	waitbutton
-	verbosegiveitem MAX_REVIVE
-	iffalse .PackFull
-	clearevent EVENT_LIZ_MAX_REVIVE
-	closetext
-	end
-
-.PackFull:
-	setevent EVENT_LIZ_MAX_REVIVE
-	jumpstd PackFullFScript
-	end
-
-.AskNumber:
-	jumpstd AskNumberFScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberFScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedFScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedFScript
-	end
-
-.RematchStd:
-	jumpstd RematchFScript
-	end
+.BeatenText
+	text "Oh! I've got to"
+	line "relieve my anger!"
+	done
 
 TrainerYoungsterAlbert:
 	trainer YOUNGSTER, ALBERT, EVENT_BEAT_YOUNGSTER_ALBERT, YoungsterAlbertSeenText, YoungsterAlbertBeatenText, 0, .Script
@@ -474,26 +384,7 @@ YoungsterGordonAfterText:
 
 
 
-PicnickerLiz1SeenText:
-	text "Uh-huh. Yeah, and"
-	line "you know…"
 
-	para "Pardon? Battle?"
-	line "I'm on the phone."
-
-	para "Oh, all right. But"
-	line "make it fast."
-	done
-
-PicnickerLiz1BeatenText:
-	text "Oh! I've got to"
-	line "relieve my anger!"
-	done
-
-PicnickerLiz1AfterText:
-	text "I was having a"
-	line "nice chat too."
-	done
 
 BirdKeeperPeterSeenText:
 	text "That BADGE! It's"
@@ -563,16 +454,6 @@ FriedaNotFridayText:
 
 	para "It's so boring"
 	line "when it's not!"
-	done
-
-PicnickerLiz_GiveMaxReviveAfterBattleText:
-	text "That was a great"
-	line "battle! Have this!"
-	done
-
-PicnickerLiz_AgainGiveMaxReviveAfterBattleText:
-	text "Made room right?"
-	line "All yours!"
 	done
 
 Route4OtisScript:

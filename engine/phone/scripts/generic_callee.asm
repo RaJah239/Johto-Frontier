@@ -94,7 +94,6 @@ PhoneScript_AnswerPhone_Female:
 	ifequal PHONE_POKEFAN_BEVERLY, .Beverly
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_LIZ, .Liz
 	ifequal PHONE_PICNICKER_GINA, .Gina
 	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
@@ -112,11 +111,6 @@ PhoneScript_AnswerPhone_Female:
 
 .Reena:
 	farwritetext ReenaAnswerPhoneText
-	promptbutton
-	end
-
-.Liz:
-	farwritetext LizAnswerPhoneText
 	promptbutton
 	end
 
@@ -232,7 +226,6 @@ PhoneScript_GreetPhone_Female:
 	ifequal PHONE_POKEFAN_BEVERLY, .Beverly
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_LIZ, .Liz
 	ifequal PHONE_PICNICKER_GINA, .Gina
 	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
@@ -250,11 +243,6 @@ PhoneScript_GreetPhone_Female:
 
 .Reena:
 	farwritetext ReenaGreetText
-	promptbutton
-	end
-
-.Liz:
-	farwritetext LizGreetText
 	promptbutton
 	end
 

@@ -441,7 +441,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_LIZ_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const EVENT_ANTHONY_ASKED_FOR_PHONE_NUMBER
 	const_skip
@@ -625,7 +625,7 @@
 	const EVENT_WELCOMED_TO_POKECOM_CENTER
 	const EVENT_TODD_MAX_ELIXER
 	const EVENT_ANTHONY_BERRY_JUICE
-	const EVENT_LIZ_MAX_REVIVE
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -822,8 +822,8 @@
 	const_skip
 	const EVENT_BEAT_PICNICKER_GINA2
 	const EVENT_BEAT_PICNICKER_ERIN
-	const EVENT_BEAT_PICNICKER_LIZ2
-	const EVENT_BEAT_PICNICKER_LIZ3
+	const_skip
+	const_skip
 	const_skip
 	const_skip
 	const EVENT_BEAT_PICNICKER_GINA3
