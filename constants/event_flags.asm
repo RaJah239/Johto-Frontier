@@ -435,7 +435,7 @@
 	const_skip
 	const EVENT_REENA_ASKED_FOR_PHONE_NUMBER
 	const_skip
-	const EVENT_JOEY_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -776,8 +776,8 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_FISHER_RALPH2
-	const EVENT_BEAT_FISHER_RALPH3
+	const_skip
+	const_skip
 	const EVENT_BEAT_FISHER_TULLY2
 	const EVENT_BEAT_FISHER_TULLY3
 	const EVENT_BEAT_FISHER_WILTON2
@@ -1145,8 +1145,8 @@
 	const EVENT_BEAT_YOUNGSTER_GORDON
 	const EVENT_BEAT_YOUNGSTER_SAMUEL
 	const EVENT_BEAT_YOUNGSTER_IAN
-	const EVENT_BEAT_YOUNGSTER_JOEY2
-	const EVENT_BEAT_YOUNGSTER_JOEY3
+	const_skip
+	const_skip
 	const_skip
 	const_skip
 	const_skip
