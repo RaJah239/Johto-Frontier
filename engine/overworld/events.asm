@@ -98,8 +98,7 @@ EnterMap:
 	ldh [hMapEntryMethod], a
 	ld a, MAPSTATUS_HANDLE
 	ld [wMapStatus], a
-	farcall DeleteSavedMusic
-	ret
+	farjp DeleteSavedMusic
 
 HandleMap:
 	call HandleMapTimeAndJoypad
@@ -124,8 +123,7 @@ MapEvents:
 	ret nz
 	call PlayerEvents
 	call DisableEvents
-	farcall ScriptEvents
-	ret
+	farjp ScriptEvents
 
 NextOverworldFrame:
 	; If we haven't already performed a delay outside DelayFrame as a result
@@ -144,8 +142,7 @@ HandleMapTimeAndJoypad:
 
 	call UpdateTime
 	call GetJoypad
-	call TimeOfDayPals
-	ret
+	jmp TimeOfDayPals
 
 HandleMapObjects:
 	farcall HandleNPCStep
@@ -156,14 +153,12 @@ _CheckObjectEnteringVisibleRange:
 	ld hl, wPlayerStepFlags
 	bit PLAYERSTEP_STOP_F, [hl]
 	ret z
-	farcall CheckObjectEnteringVisibleRange
-	ret
+	farjp CheckObjectEnteringVisibleRange
 
 HandleMapBackground:
 	farcall _UpdateSprites
 	farcall ScrollScreen
-	farcall PlaceMapNameSign
-	ret
+	farjp PlaceMapNameSign
 
 CheckPlayerState:
 	ld a, [wPlayerStepFlags]
@@ -190,8 +185,6 @@ PlayerEvents:
 	ld a, [wScriptRunning]
 	and a
 	ret nz
-
-	call Dummy_CheckEnabledMapEventsBit5 ; This is a waste of time
 
 	call CheckTrainerEvent
 	jr c, .ok
@@ -307,8 +300,7 @@ CheckTileEvent:
 	ld h, [hl]
 	ld l, a
 	call GetMapScriptsBank
-	call CallScript
-	ret
+	jmp CallScript
 
 CheckWildEncounterCooldown::
 	ld hl, wWildEncounterCooldown
@@ -323,22 +315,6 @@ CheckWildEncounterCooldown::
 SetUpFiveStepWildEncounterCooldown:
 	ld a, 5
 	ld [wWildEncounterCooldown], a
-	ret
-
-SetMinTwoStepWildEncounterCooldown:
-; dummied out
-	ret
-	ld a, [wWildEncounterCooldown]
-	cp 2
-	ret nc
-	ld a, 2
-	ld [wWildEncounterCooldown], a
-	ret
-
-Dummy_CheckEnabledMapEventsBit5:
-	call CheckEnabledMapEventsBit5
-	ret z
-	call SetXYCompareFlags
 	ret
 
 RunSceneScript:
@@ -527,8 +503,7 @@ ObjectEventTypeArray:
 	ld h, [hl]
 	ld l, a
 	call GetMapScriptsBank
-	call CallScript
-	ret
+	jmp CallScript
 
 .itemball
 	ld hl, MAPOBJECT_SCRIPT_POINTER
@@ -752,7 +727,6 @@ PlayerMovementPointers:
 	ret
 
 .jump:
-	call SetMinTwoStepWildEncounterCooldown
 	xor a
 	ld c, a
 	ret
@@ -1229,8 +1203,7 @@ _TryWildEncounter_BugContest:
 	call TryWildEncounter_BugContest
 	ret nc
 	call ChooseWildEncounter_BugContest
-	farcall CheckRepelEffect
-	ret
+	farjp CheckRepelEffect
 
 ChooseWildEncounter_BugContest::
 ; Pick a random mon out of ContestMons.
