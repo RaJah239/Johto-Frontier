@@ -66,7 +66,6 @@
 	const SPRITE_BLACK_BELT ; 41
 	const SPRITE_RECEPTIONIST ; 42
 	const SPRITE_OFFICER ; 43
-	const SPRITE_SLOWPOKE ; 45
 	const SPRITE_BIG_LAPRAS ; 47
 	const SPRITE_GYM_GUIDE ; 48
 	const SPRITE_SAILOR ; 49
@@ -156,6 +155,7 @@ DEF SPRITE_POKEMON EQU const_value
 	const SPRITE_HO_OH ; a2
 	const SPRITE_GHOLDENGO
 	const SPRITE_PIDGEY
+	const SPRITE_SLOWPOKE
 DEF NUM_POKEMON_SPRITES EQU const_value - SPRITE_POKEMON
 
 ; special GetMonSprite values (see engine/overworld/overworld.asm)

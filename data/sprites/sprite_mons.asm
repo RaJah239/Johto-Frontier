@@ -37,4 +37,5 @@ SpriteMons:
 	db HO_OH
 	db GHOLDENGO
 	db PIDGEY
+	db SLOWPOKE
 	assert_table_length NUM_POKEMON_SPRITES
