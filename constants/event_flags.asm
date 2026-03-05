@@ -1376,7 +1376,7 @@
 	const EVENT_CHARCOAL_KILN_BOSS
 	const EVENT_ROUTE_8_SUDOWOODO
 	const_skip
-	const EVENT_AZALEA_TOWN_SLOWPOKETAIL_ROCKET
+	const_skip
 	const_skip
 	const EVENT_SLOWPOKE_WELL_ROCKETS
 	const_skip
