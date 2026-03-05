@@ -78,7 +78,6 @@ OverworldSprites:
 	overworld_sprite PharmacistSpriteGFX, 12, WALKING_SPRITE, PAL_OW_BLUE
 	overworld_sprite MonsterSpriteGFX, 12, WALKING_SPRITE, PAL_OW_RED
 	overworld_sprite FairySpriteGFX, 12, WALKING_SPRITE, PAL_OW_RED
-	overworld_sprite BirdSpriteGFX, 12, WALKING_SPRITE, PAL_OW_RED
 	overworld_sprite DragonSpriteGFX, 12, WALKING_SPRITE, PAL_OW_RED
 	overworld_sprite BigOnixSpriteGFX, 12, STANDING_SPRITE, PAL_OW_BROWN
 	overworld_sprite N64SpriteGFX, 4, STILL_SPRITE, PAL_OW_BROWN

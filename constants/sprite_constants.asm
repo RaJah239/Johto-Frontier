@@ -73,7 +73,6 @@
 	const SPRITE_PHARMACIST ; 4b
 	const SPRITE_MONSTER ; 4c
 	const SPRITE_FAIRY ; 4d
-	const SPRITE_BIRD ; 4e
 	const SPRITE_DRAGON ; 4f
 	const SPRITE_BIG_ONIX ; 50
 	const SPRITE_N64 ; 51
