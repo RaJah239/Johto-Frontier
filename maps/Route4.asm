@@ -19,12 +19,12 @@ Route4_MapEvents:
 	object_event  8, 49, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 1, TrainerFisherJustin, -1
 	object_event 12, 56, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 3, TrainerFisherRalph, -1
 	object_event  6, 48, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 1, TrainerFisherHenry, -1
-	object_event 12, 22, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterAlbert, -1
-	object_event  4, 63, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterGordon, -1
+	object_event 12, 22, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerYoungsterAlbert, -1
+	object_event  4, 63, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerYoungsterGordon, -1
 	object_event  3, 45, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 3, TrainerCamperRoland, -1
 	object_event 10, 30, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 1, TrainerPicnickerLiz, -1
 	object_event 19,  8, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route4CooltrainerMScript, -1
-	object_event 11, 82, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerBirdKeeperPeter, -1
+	object_event 11, 82, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerBirdKeeperPeter, -1
 	object_event  6, 53, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route4GreatBall, EVENT_ROUTE_4_GREAT_BALL
 	object_event 15, 13, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route4RoarTMGuyScript, -1
 	object_event 12, 67, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, FriedaScript, EVENT_ROUTE_4_FRIEDA_OF_FRIDAY
@@ -132,17 +132,17 @@ Route4RoarTMGuyScript:
 	checkevent EVENT_GOT_TM05_ROAR
 	iftrue .AlreadyHaveRoar
 	writethistext
-	text "WROOOOAR!"
-	line "PEOPLE RUN WHEN I"
-	cont "ROAR! BUT YOU"
-	cont "CAME LOOKING!"
+		text "WROOOOAR!"
+		line "PEOPLE RUN WHEN I"
+		cont "ROAR! BUT YOU"
+		cont "CAME LOOKING!"
 
-	para "THAT PLEASES ME!"
-	line "NOW TAKE THIS!"
-	done
+		para "THAT PLEASES ME!"
+		line "NOW TAKE THIS!"
 
-	para "TODOTEXT this"
-	line "entire script."
+		para "TODOTEXT this"
+		line "entire script."
+		done
 	promptbutton
 	verbosegiveitem TM_ROAR
 	iffalse_endtext
@@ -267,81 +267,19 @@ TrainerPicnickerLiz:
 	done
 
 TrainerYoungsterAlbert:
-	trainer YOUNGSTER, ALBERT, EVENT_BEAT_YOUNGSTER_ALBERT, YoungsterAlbertSeenText, YoungsterAlbertBeatenText, 0, .Script
+	generictrainer YOUNGSTER, ALBERT, EVENT_BEAT_YOUNGSTER_ALBERT, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext YoungsterAlbertAfterText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "I'm going to try"
+	line "to be the best"
+	cont "with my favorites."
 
-TrainerYoungsterGordon:
-	trainer YOUNGSTER, GORDON, EVENT_BEAT_YOUNGSTER_GORDON, YoungsterGordonSeenText, YoungsterGordonBeatenText, 0, .Script
+	para "I'm not using the"
+	line "same tough #mon"
+	cont "as everyone else."
+	done
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext YoungsterGordonAfterText
-	waitbutton
-	closetext
-	end
-
-TrainerBirdKeeperPeter:
-	trainer BIRD_KEEPER, PETER, EVENT_BEAT_BIRD_KEEPER_PETER, BirdKeeperPeterSeenText, BirdKeeperPeterBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext BirdKeeperPeterAfterText
-	waitbutton
-	closetext
-	end
-
-FriedaScript:
-	faceplayer
-	opentext
-	checkevent EVENT_GOT_POISON_BARB_FROM_FRIEDA
-	iftrue .Friday
-	readvar VAR_WEEKDAY
-	ifnotequal FRIDAY, .NotFriday
-	checkevent EVENT_MET_FRIEDA_OF_FRIDAY
-	iftrue .MetFrieda
-	writetext MeetFriedaText
-	promptbutton
-	setevent EVENT_MET_FRIEDA_OF_FRIDAY
-.MetFrieda:
-	writetext FriedaGivesGiftText
-	promptbutton
-	verbosegiveitem POISON_BARB
-	iffalse .Done
-	setevent EVENT_GOT_POISON_BARB_FROM_FRIEDA
-	writetext FriedaGaveGiftText
-	waitbutton
-	closetext
-	end
-
-.Friday:
-	writetext FriedaFridayText
-	waitbutton
-.Done:
-	closetext
-	end
-
-.NotFriday:
-	writetext FriedaNotFridayText
-	waitbutton
-	closetext
-	end
-
-
-
-
-
-
-
-YoungsterAlbertSeenText:
+.SeenText
 	text "I haven't seen you"
 	line "around before."
 
@@ -349,112 +287,113 @@ YoungsterAlbertSeenText:
 	line "are pretty tough?"
 	done
 
-YoungsterAlbertBeatenText:
+.BeatenText
 	text "You're strong!"
 	done
 
-YoungsterAlbertAfterText:
-	text "I'm going to try"
-	line "to be the best"
-	cont "with my favorites."
+TrainerYoungsterGordon:
+	generictrainer YOUNGSTER, GORDON, EVENT_BEAT_YOUNGSTER_GORDON, .SeenText, .BeatenText
 
-	para "I'm not using the"
-	line "same tough #MON"
-	cont "as everyone else."
+.AfterText
+	text "The grass is full"
+	line "of clingy things."
 	done
 
-YoungsterGordonSeenText:
+.SeenText
 	text "I found some good"
-	line "#MON in the"
+	line "#mon in the"
 	cont "grass!"
 
 	para "I think they'll do"
 	line "it for me!"
 	done
 
-YoungsterGordonBeatenText:
+.BeatenText
 	text "Darn. I thought I"
 	line "could win."
 	done
 
-YoungsterGordonAfterText:
-	text "The grass is full"
-	line "of clingy things."
+TrainerBirdKeeperPeter:
+	generictrainer BIRD_KEEPER, PETER, EVENT_BEAT_BIRD_KEEPER_PETER, .SeenText, .BeatenText
+
+.AfterText
+	text "I should train"
+	line "again at the Gym"
+	cont "in Violet City."
 	done
 
-
-
-
-
-BirdKeeperPeterSeenText:
-	text "That BADGE! It's"
-	line "from VIOLET CITY!"
-
-	para "You beat FALKNER?"
+.SeenText
+	text "Have you visited"
+	line "Violet City Gym?"
 	done
 
-BirdKeeperPeterBeatenText:
+.BeatenText
 	text "I know what my"
 	line "weaknesses are."
 	done
 
-BirdKeeperPeterAfterText:
-	text "I should train"
-	line "again at the GYM"
-	cont "in VIOLET CITY."
-	done
+FriedaScript:
+	faceplayeropentext
+	checkevent EVENT_GOT_POISON_BARB_FROM_FRIEDA
+	iftrue .Friday
+	readvar VAR_WEEKDAY
+	ifnotequal FRIDAY, .NotFriday
+	checkevent EVENT_MET_FRIEDA_OF_FRIDAY
+	iftrue .MetFrieda
+	writethistext
+		text "Frieda: Yahoo!"
+		line "It's Friday!"
 
+		para "I'm Frieda of"
+		line "Friday!"
 
+		para "Nice to meet you!"
+		done
+	promptbutton
+	setevent EVENT_MET_FRIEDA_OF_FRIDAY
+.MetFrieda:
+	writethistext
+		text "Here's a Poison"
+		line "Barb for you!"
+		done
+	promptbutton
+	verbosegiveitem POISON_BARB
+	iffalse_endtext
+	setevent EVENT_GOT_POISON_BARB_FROM_FRIEDA
+	jumpthisopenedtext
+		text "Frieda: Give it to"
+		line "a #mon that has"
+		cont "poison-type moves."
 
+		para "Oh!"
 
+		para "It's wicked!"
 
-MeetFriedaText:
-	text "FRIEDA: Yahoo!"
-	line "It's Friday!"
+		para "You'll be shocked"
+		line "how good it makes"
+		cont "poison moves!"
+		done
 
-	para "I'm FRIEDA of"
-	line "Friday!"
+.Friday:
+	jumpthisopenedtext
+		text "Frieda: Hiya! What"
+		line "day do you like?"
 
-	para "Nice to meet you!"
-	done
+		para "I love Friday. No"
+		line "doubt about it!"
 
-FriedaGivesGiftText:
-	text "Here's a POISON"
-	line "BARB for you!"
-	done
+		para "Don't you think"
+		line "it's great too?"
+		done
 
-FriedaGaveGiftText:
-	text "FRIEDA: Give it to"
-	line "a #MON that has"
-	cont "poison-type moves."
+.NotFriday:
+	jumpthisopenedtext
+		text "Frieda: Isn't it"
+		line "Friday today?"
 
-	para "Oh!"
-
-	para "It's wicked!"
-
-	para "You'll be shocked"
-	line "how good it makes"
-	cont "poison moves!"
-	done
-
-FriedaFridayText:
-	text "FRIEDA: Hiya! What"
-	line "day do you like?"
-
-	para "I love Friday. No"
-	line "doubt about it!"
-
-	para "Don't you think"
-	line "it's great too?"
-	done
-
-FriedaNotFridayText:
-	text "FRIEDA: Isn't it"
-	line "Friday today?"
-
-	para "It's so boring"
-	line "when it's not!"
-	done
+		para "It's so boring"
+		line "when it's not!"
+		done
 
 Route4OtisScript:
 	callstd WanderingOddEggNPCScript
