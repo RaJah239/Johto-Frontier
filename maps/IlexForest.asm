@@ -121,20 +121,36 @@ IlexForestScytherCallback:
 	endcallback
 
 IlexForestCharcoalApprenticeScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkevent EVENT_HERDED_SCYTHER
 	iftrue .DoneScyther
-	writetext IlexForestApprenticeIntroText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Oh, man… My boss"
+		line "is going to be"
+		cont "steaming…"
+
+		para "The Scyther that"
+		line "Cuts trees for"
+		cont "charcoal took off"
+		cont "on me."
+
+		para "I can't go looking"
+		line "for it here in the"
+		cont "Ilex Forest."
+
+		para "It's too big, dark"
+		line "and scary for me…"
+		done
 
 .DoneScyther:
-	writetext IlexForestApprenticeAfterText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Wow! Thanks a"
+		line "whole bunch!"
+
+		para "My boss's #mon"
+		line "hasn't warmed up to"
+		cont "me yet…"
+		done
 
 IlexForestScytherScript:
 	readmem wScytherPosition
@@ -750,34 +766,8 @@ IlexForestPlayerStepsDownMovement:
 	remove_fixed_facing
 	step_end
 
-IlexForestApprenticeIntroText:
-	text "Oh, man… My boss"
-	line "is going to be"
-	cont "steaming…"
 
-	para "The FARFETCH'D"
-	line "that CUTS trees"
 
-	para "for charcoal took"
-	line "off on me."
-
-	para "I can't go looking"
-	line "for it here in the"
-	cont "ILEX FOREST."
-
-	para "It's too big, dark"
-	line "and scary for me…"
-	done
-
-IlexForestApprenticeAfterText:
-	text "Wow! Thanks a"
-	line "whole bunch!"
-
-	para "My boss's #MON"
-	line "won't obey me be-"
-	cont "cause I don't have"
-	cont "a BADGE."
-	done
 
 Text_CharcoalMasterIntro:
 	text "Ah! My FARFETCH'D!"
