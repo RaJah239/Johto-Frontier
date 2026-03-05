@@ -42,7 +42,7 @@ rept 3
 	special FadeInPalettes_EnableDynNoApply
 endr
 	waitsfx
-	isfieldactionsset
+	isfieldactionssettoquick
 	iffalse .skip
 	opentext
 	writetext .UseSacredAshText

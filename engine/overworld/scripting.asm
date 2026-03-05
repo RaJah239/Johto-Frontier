@@ -263,7 +263,7 @@ ScriptCommandTable:
 	dw Script_isdialogueminimal			 ; aa
 	dw Script_writetextcheckdialogue	 ; ab
 	dw Script_isquicknurseset            ; ac
-	dw Script_isfieldactionsset          ; ad
+	dw Script_isfieldactionssettoquick          ; ad
 	dw Script_nooryes                    ; ae
 	dw Script_iftrue_jumptextfaceplayer  ;
 	dw Script_jumpthistextfaceplayer     ;
@@ -350,12 +350,12 @@ StartScript:
 	set SCRIPT_RUNNING, [hl]
 	ret
 
-Script_isfieldactionsset:
+Script_isfieldactionssettoquick:
 	xor a
 	ld [wScriptVar], a
 	ld a, [wOptions3]
 	bit FIELD_ACTIONS, a
-	ret nz ; if z=0 we're in normal mode, therefore return since we already wrote 0 to wScriptVar (False)
+	ret z ; if z=0 we're in normal mode, therefore return since we already wrote 0 to wScriptVar (False)
 	xor a
 	inc a
 	ld [wScriptVar], a

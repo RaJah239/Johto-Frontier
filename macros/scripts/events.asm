@@ -1104,9 +1104,9 @@ MACRO isquicknurseset
 	db isquicknurseset_command
 ENDM
 
-	const isfieldactionsset_command ; $ad
-MACRO isfieldactionsset
-	db isfieldactionsset_command
+	const isfieldactionssettoquick_command ; $ad
+MACRO isfieldactionssettoquick
+	db isfieldactionssettoquick_command
 ENDM
 
 	const nooryes_command ; $ae

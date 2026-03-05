@@ -43,8 +43,8 @@ UnionCaveB2FLaprasCallback:
 
 UnionCaveLapras:
 	faceplayer
-	isfieldactionsset
-	iffalse .skipthis
+	isfieldactionssettoquick
+	iftrue .skipthis
 	reanchormap
 	pokepic LAPRAS
 	cry LAPRAS

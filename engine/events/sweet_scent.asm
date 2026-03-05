@@ -8,7 +8,7 @@ SweetScentFromMenu:
 .SweetScent:
 	refreshmap
 	special UpdateTimePals
-	isfieldactionsset
+	isfieldactionssettoquick
 	iffalse .skip
 	reanchormap
 	pokepic TANGELA
