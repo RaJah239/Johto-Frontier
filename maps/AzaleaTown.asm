@@ -117,27 +117,6 @@ AzaleaTownKurtScript:
 	turnobject AZALEATOWN_KURT_OUTSIDE, LEFT
 	end
 
-AzaleaTownSlowpokeScript:
-	isfieldactionssettoquick
-	iftrue .skipthis
-	reanchormap
-	pokepic SLOWPOKE
-	waitbutton
-	closepokepic
-.skipthis
-	opentext
-	writethistext
-		text "Slowpoke: …"
-
-		para "<……> <……> <……>"
-		pause 20
-		done
-	writethistext
-		text "<……> <……>Yawn?"
-		done
-	cry SLOWPOKE
-	waitendtext
-
 AzaleaTownGrampsText:
 	text "Even though the"
 	line "Slowpoke seem to"
@@ -212,6 +191,9 @@ AzaleaTownIlexForestSignText:
 	para "Enter through the"
 	line "gate."
 	done
+
+AzaleaTownSlowpokeScript:
+	jumpstd SlowpokeScript
 
 AzaleaTownApricornTree1:
 	setval WHT_APRICORN

@@ -404,6 +404,8 @@ DEF wanderingoddeggnpcscript EQUS "WanderingOddEggNPCScript"
 DEF noberryorfruitscript  EQUS "NoBerryOrFruitScript"
 DEF berryorfruitscript    EQUS "BerryOrFruitScript"
 DEF variablemartscript    EQUS "VariableMartScript"
+DEF slowpokescript        EQUS "SlowpokeScript"
+
 
 ; constants/charmap.asm
 charmap "%", "<BSP>"

@@ -57,6 +57,28 @@ StdScripts::
 	add_stdscript MysteryGiftCarrieScript
 	add_stdscript WanderingOddEggNPCScript
 	add_stdscript BerryOrFruitScript
+	add_stdscript SlowpokeScript
+
+SlowpokeScript:
+	isfieldactionssettoquick
+	iftrue .skipthis
+	reanchormap
+	pokepic SLOWPOKE
+	waitbutton
+	closepokepic
+.skipthis
+	opentext
+	writethistext
+		text "Slowpoke: …"
+
+		para "<……> <……> <……>"
+		pause 20
+		done
+	writethistext
+		text "<……> <……>Yawn?"
+		done
+	cry SLOWPOKE
+	waitendtext
 
 VariableMartScript:
 	opentext

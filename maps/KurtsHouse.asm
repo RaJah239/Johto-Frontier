@@ -431,15 +431,6 @@ KurtsGranddaughterFunScript:
 	closetext
 	end
 
-KurtsHouseSlowpoke:
-	faceplayer
-	opentext
-	writetext KurtsHouseSlowpokeText
-	cry SLOWPOKE
-	waitbutton
-	closetext
-	end
-
 KurtsHouseKurtExitHouseMovement:
 	big_step DOWN
 	big_step DOWN
@@ -667,11 +658,6 @@ KurtsGranddaughterGSBallText:
 	line "till he's done."
 	done
 
-KurtsHouseSlowpokeText:
-	text "SLOWPOKE: …"
-	line "Yawn?"
-	done
-
 KurtsHouseOakPhotoText:
 	text "…A young Prof."
 	line "Oak?"
@@ -682,3 +668,6 @@ KurtsHouseStatueText:
 	line "the forest's pro-"
 	cont "tector."
 	done
+
+KurtsHouseSlowpoke:
+	jumpstd SlowpokeScript
