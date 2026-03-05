@@ -11,7 +11,7 @@ UnionCaveB1F_MapEvents:
 	def_bg_events
 
 	def_object_events
-	chanseyheal_event  5, 19
+	chanseyheal_event 5, 19
 	strengthboulder_event  7, 10
 	object_event  9,  4, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 3, TrainerHikerPhillip, -1
 	object_event 16,  7, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 3, TrainerHikerLeonard, -1
