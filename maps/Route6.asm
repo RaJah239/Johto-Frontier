@@ -52,8 +52,6 @@ Route6_MapScripts:
 	callback MAPCALLBACK_OBJECTS, Route6EggCheckCallback
 
 Route6EggCheckCallback:
-	sjump .CheckMon1
-
 .CheckMon1:
 	checkflag ENGINE_DAY_CARE_MAN_HAS_MON
 	iffalse .HideMon1
@@ -62,8 +60,6 @@ Route6EggCheckCallback:
 
 .HideMon1:
 	setevent EVENT_DAY_CARE_MON_1
-	sjump .CheckMon2
-
 .CheckMon2:
 	checkflag ENGINE_DAY_CARE_LADY_HAS_MON
 	iffalse .HideMon2
@@ -77,14 +73,12 @@ Route6EggCheckCallback:
 DayCareMon1Script:
 	opentext
 	special DayCareMon1
-	closetext
-	end
+	endtext
 
 DayCareMon2Script:
 	opentext
 	special DayCareMon2
-	closetext
-	end
+	endtext
 
 TrainerCamperTodd1:
 	trainer CAMPER, TODD1, EVENT_BEAT_CAMPER_TODD, CamperTodd1SeenText, CamperTodd1BeatenText, 0, .Script
@@ -322,35 +316,59 @@ TrainerPicnickerGina1:
 	end
 
 OfficerKeithScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checktime NITE
 	iffalse .NoFight
 	checkevent EVENT_BEAT_OFFICER_KEITH
+	special SaveMusic
 	iftrue .AfterScript
 	playmusic MUSIC_OFFICER_ENCOUNTER
-	writetext OfficerKeithSeenText
-	waitbutton
-	closetext
-	winlosstext OfficerKeithWinText, 0
+	writethistext
+		text "Who goes there?"
+		line "What are you up"
+		cont "to?"
+		done
+	waitclosetext
+	winlosstext .BeatenText, 0
 	loadtrainer OFFICER, KEITH
 	startbattle
 	reloadmapafterbattle
+	special RestoreMusic
 	setevent EVENT_BEAT_OFFICER_KEITH
-	closetext
-	end
+	endtext
 
 .AfterScript:
-	writetext OfficerKeithAfterText
-	waitbutton
+	writethistext
+		text "Yep, I see nothing"
+		line "wrong today. You"
+		cont "be good and stay"
+		cont "out of trouble."
+
+		para "Up for a rematch?"
+		done
+	yesorno
+	iffalse_endtext
+	playmusic MUSIC_OFFICER_ENCOUNTER
+	promptbutton
 	closetext
+	winlosstext .BeatenText, 0
+	loadtrainer OFFICER, KEITH
+	startbattle
+	reloadmapafterbattle
+	special RestoreMusic
 	end
 
 .NoFight:
-	writetext OfficerKeithDaytimeText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+	text "I'm on patrol for"
+	line "suspicious indi-"
+	cont "viduals."
+	done
+
+.BeatenText
+	text "You're a tough"
+	line "little kid."
+	done
 
 TrainerYoungsterSamuel:
 	trainer YOUNGSTER, SAMUEL, EVENT_BEAT_YOUNGSTER_SAMUEL, YoungsterSamuelSeenText, YoungsterSamuelBeatenText, 0, .Script
@@ -525,30 +543,9 @@ PicnickerGina1AfterText:
 	cont "partner."
 	done
 
-OfficerKeithSeenText:
-	text "Who goes there?"
-	line "What are you up"
-	cont "to?"
-	done
 
-OfficerKeithWinText:
-	text "You're a tough"
-	line "little kid."
-	done
 
-OfficerKeithAfterText:
-	text "Yep, I see nothing"
-	line "wrong today. You"
 
-	para "be good and stay"
-	line "out of trouble."
-	done
-
-OfficerKeithDaytimeText:
-	text "I'm on patrol for"
-	line "suspicious indi-"
-	cont "viduals."
-	done
 
 PokefanmBrandonSeenText:
 	text "I just got my"
@@ -682,7 +679,7 @@ Route6TrainerTipsText:
 	text "Trainer Tips"
 
 	para "The Day Care gives"
-	cont "more Exp. Points"
+	line "more Exp. Points"
 	cont "to higher level"
 	cont "#mon."
 
