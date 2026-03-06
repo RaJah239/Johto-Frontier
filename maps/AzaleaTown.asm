@@ -142,6 +142,9 @@ AzaleaTownYoungsterText:
 	para "There's something"
 	line "ominous about that"
 	cont "place."
+
+	para "It comes to life"
+	line "at night."
 	done
 
 AzaleaTownSignText:
