@@ -19,11 +19,11 @@ Route6_MapEvents:
 
 	def_object_events
 	object_event 13,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 5, TrainerCamperTodd1, -1
-	object_event 15, 32, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterSamuel, -1
-	object_event 11, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterIan, -1
+	object_event 15, 32, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerYoungsterSamuel, -1
+	object_event 11, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerYoungsterIan, -1
 	object_event 10, 26, SPRITE_LASS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerPicnickerGina1, -1
 	object_event  9, 11, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, OfficerKeithScript, -1
-	object_event 18, 28, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerPokefanmBrandon, -1
+	object_event 18, 28, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 3, TrainerPokefanmBrandon, -1
 	object_event 13, 18, SPRITE_DAY_CARE_MON_1, SPRITEMOVEDATA_POKEMON, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareMon1Script, EVENT_DAY_CARE_MON_1
 	object_event 16, 18, SPRITE_DAY_CARE_MON_2, SPRITEMOVEDATA_POKEMON, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareMon2Script, EVENT_DAY_CARE_MON_2
 	object_event  8, 48, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 5, TrainerCooltrainerfIrene, -1
@@ -371,130 +371,188 @@ OfficerKeithScript:
 	done
 
 TrainerYoungsterSamuel:
-	trainer YOUNGSTER, SAMUEL, EVENT_BEAT_YOUNGSTER_SAMUEL, YoungsterSamuelSeenText, YoungsterSamuelBeatenText, 0, .Script
+	generictrainer YOUNGSTER, SAMUEL, EVENT_BEAT_YOUNGSTER_SAMUEL, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext YoungsterSamuelAfterText
-	waitbutton
-	closetext
-	end
-
-TrainerYoungsterIan:
-	trainer YOUNGSTER, IAN, EVENT_BEAT_YOUNGSTER_IAN, YoungsterIanSeenText, YoungsterIanBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext YoungsterIanAfterText
-	waitbutton
-	closetext
-	end
-
-TrainerPokefanmBrandon:
-	trainer POKEFANM, BRANDON, EVENT_BEAT_POKEFANM_BRANDON, PokefanmBrandonSeenText, PokefanmBrandonBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext PokefanmBrandonAfterText
-	waitbutton
-	closetext
-	end
-
-TrainerCooltrainerfIrene:
-	trainer COOLTRAINERF, IRENE, EVENT_BEAT_COOLTRAINERF_IRENE, CooltrainerfIreneSeenText, CooltrainerfIreneBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	checkevent EVENT_GOT_SOFT_SAND_FROM_KATE
-	iftrue .GotSoftSand
-	writetext CooltrainerfIreneAfterText1
-	waitbutton
-	closetext
-	end
-
-.GotSoftSand:
-	writetext CooltrainerfIreneAfterText2
-	waitbutton
-	closetext
-	end
-
-TrainerCooltrainerfJenn:
-	trainer COOLTRAINERF, JENN, EVENT_BEAT_COOLTRAINERF_JENN, CooltrainerfJennSeenText, CooltrainerfJennBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	checkevent EVENT_GOT_SOFT_SAND_FROM_KATE
-	iftrue .GotSoftSand
-	writetext CooltrainerfJennAfterText1
-	waitbutton
-	closetext
-	end
-
-.GotSoftSand:
-	writetext CooltrainerfJennAfterText2
-	waitbutton
-	closetext
-	end
-
-TrainerCooltrainerfKate:
-	trainer COOLTRAINERF, KATE, EVENT_BEAT_COOLTRAINERF_KATE, CooltrainerfKateSeenText, CooltrainerfKateBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	checkevent EVENT_GOT_SOFT_SAND_FROM_KATE
-	iftrue .GotSoftSand
-	writetext CooltrainerfKateOfferSoftSandText
-	promptbutton
-	verbosegiveitem SOFT_SAND
-	iffalse .BagFull
-	setevent EVENT_GOT_SOFT_SAND_FROM_KATE
-.GotSoftSand:
-	writetext CooltrainerfKateAfterText
-	waitbutton
-.BagFull:
-	closetext
-	end
-
-YoungsterSamuelSeenText:
-	text "This is where I do"
-	line "my training!"
-	done
-
-YoungsterSamuelBeatenText:
-	text "Beaten by a"
-	line "passing stranger!"
-	done
-
-YoungsterSamuelAfterText:
+.AfterText
 	text "I'm going to train"
 	line "even harder."
 
 	para "After all, I'm"
 	line "trying to become"
-	cont "a GYM LEADER."
+	cont "a Gym Leader."
 	done
 
-YoungsterIanSeenText:
-	text "I'm the best in my"
-	line "class at #MON."
+.SeenText
+	text "This is where I do"
+	line "my training!"
 	done
 
-YoungsterIanBeatenText:
-	text "No! There are bet-"
-	line "ter trainers…"
+.BeatenText
+	text "Beaten by a"
+	line "passing stranger!"
 	done
 
-YoungsterIanAfterText:
+TrainerYoungsterIan:
+	generictrainer YOUNGSTER, IAN, EVENT_BEAT_YOUNGSTER_IAN, .SeenText, .BeatenText
+
+.AfterText
 	text "I'm trying hard so"
 	line "I can be the star"
 	cont "in my class."
 	done
+
+.SeenText
+	text "I'm the best in my"
+	line "class at #mon."
+	done
+
+.BeatenText
+	text "No! There are bet-"
+	line "ter trainers…"
+	done
+
+TrainerPokefanmBrandon:
+	generictrainer POKEFANM, BRANDON, EVENT_BEAT_POKEFANM_BRANDON, .SeenText, .BeatenText
+
+.AfterText
+	text "My #mon knew"
+	line "moves I didn't"
+	cont "know it had."
+
+	para "That confounded me"
+	line "to no end!"
+	done
+
+.SeenText
+	text "I just got my"
+	line "#mon back from"
+	cont "Day-Care."
+
+	para "Let's see how much"
+	line "stronger it got!"
+	done
+
+.BeatenText
+	text "Why does it end"
+	line "this way?"
+	done
+
+TrainerCooltrainerfIrene:
+	trainer COOLTRAINERF, IRENE, EVENT_BEAT_COOLTRAINERF_IRENE, .SeenText, .BeatenText, 0, .Script
+
+.SeenText
+	text "Irene: Kyaaah!"
+	line "Someone found us!"
+	done
+
+.BeatenText
+	text "Irene: Ohhh!"
+	line "Too strong!"
+	done
+
+.Script:
+	endifjustbattled
+	opentext
+	checkevent EVENT_GOT_LEFTOVERS_FROM_KATE
+	iftrue .GotLeftoversFromKate
+	writethistext
+		text "Irene: My sister"
+		line "Kate will get you"
+		cont "for this!"
+		done
+	waitbutton
+	end
+
+.GotLeftoversFromKate:
+	writethistext
+		text "Irene: Isn't this"
+		line "beach great?"
+
+		para "It's our secret"
+		line "little getaway!"
+		done
+	waitbutton
+	end
+
+TrainerCooltrainerfJenn:
+	trainer COOLTRAINERF, JENN, EVENT_BEAT_COOLTRAINERF_JENN, .SeenText, .BeatenText, 0, .Script
+
+.SeenText
+	text "Jenn: You can't"
+	line "beat Irene and go"
+	cont "unpunished!"
+	done
+
+.BeatenText
+	text "Jenn: So sorry,"
+	line "Irene! Sis!"
+	done
+
+.Script:
+	endifjustbattled
+	opentext
+	checkevent EVENT_GOT_LEFTOVERS_FROM_KATE
+	iftrue .GotLeftoversFromKate
+	writethistext
+		text "Jenn: Don't get"
+		line "cocky! My sister"
+		cont "Kate is tough!"
+		done
+	waitbutton
+	end
+
+.GotLeftoversFromKate:
+	writethistext
+		text "Jenn: Sunlight"
+		line "makes your body"
+		cont "stronger."
+		done
+	waitbutton
+	end
+
+TrainerCooltrainerfKate:
+	trainer COOLTRAINERF, KATE, EVENT_BEAT_COOLTRAINERF_KATE, .SeenText, .BeatenText, 0, .Script
+
+.SeenText
+	text "Kate: You sure"
+	line "were mean to my"
+	cont "little sisters!"
+	done
+
+.BeatenText
+	text "Kate: No! I can't"
+	line "believe I lost."
+	done
+
+.Script:
+	endifjustbattled
+	opentext
+	checkevent EVENT_GOT_LEFTOVERS_FROM_KATE
+	iftrue .GotLeftoversFromKate
+	writethistext
+		text "Kate: You're too"
+		line "strong. I didn't"
+		cont "stand a chance."
+
+		para "Here. You deserve"
+		line "this."
+		done
+	promptbutton
+	verbosegiveitem LEFTOVERS
+	iffalse_endtext
+	setevent EVENT_GOT_LEFTOVERS_FROM_KATE
+.GotLeftoversFromKate:
+	writethistext
+		text "Kate: I'm sorry we"
+		line "jumped you."
+
+		para "We never expected"
+		line "anyone to find us"
+		cont "here. You sure"
+		cont "startled us."
+		done
+	waitbutton
+	end
 
 CamperTodd1SeenText:
 	text "I'm confident in"
@@ -547,111 +605,7 @@ PicnickerGina1AfterText:
 
 
 
-PokefanmBrandonSeenText:
-	text "I just got my"
-	line "#MON back from"
-	cont "DAY-CARE."
 
-	para "Let's see how much"
-	line "stronger it got!"
-	done
-
-PokefanmBrandonBeatenText:
-	text "Why does it end"
-	line "this way?"
-	done
-
-PokefanmBrandonAfterText:
-	text "My #MON knew"
-	line "moves I didn't"
-	cont "know it had."
-
-	para "That confounded me"
-	line "to no end!"
-	done
-
-CooltrainerfIreneSeenText:
-	text "IRENE: Kyaaah!"
-	line "Someone found us!"
-	done
-
-CooltrainerfIreneBeatenText:
-	text "IRENE: Ohhh!"
-	line "Too strong!"
-	done
-
-CooltrainerfIreneAfterText1:
-	text "IRENE: My sister"
-	line "KATE will get you"
-	cont "for this!"
-	done
-
-CooltrainerfIreneAfterText2:
-	text "IRENE: Isn't this"
-	line "beach great?"
-
-	para "It's our secret"
-	line "little getaway!"
-	done
-
-CooltrainerfJennSeenText:
-	text "JENN: You can't"
-	line "beat IRENE and go"
-	cont "unpunished!"
-	done
-
-CooltrainerfJennBeatenText:
-	text "JENN: So sorry,"
-	line "IRENE! Sis!"
-	done
-
-CooltrainerfJennAfterText1:
-	text "JENN: Don't get"
-	line "cocky! My sister"
-	cont "KATE is tough!"
-	done
-
-CooltrainerfJennAfterText2:
-	text "JENN: Sunlight"
-	line "makes your body"
-	cont "stronger."
-	done
-
-CooltrainerfKateSeenText:
-	text "KATE: You sure"
-	line "were mean to my"
-	cont "little sisters!"
-	done
-
-CooltrainerfKateBeatenText:
-	text "KATE: No! I can't"
-	line "believe I lost."
-	done
-
-CooltrainerfKateOfferSoftSandText:
-	text "KATE: You're too"
-	line "strong. I didn't"
-	cont "stand a chance."
-
-	para "Here. You deserve"
-	line "this."
-	done
-
-CooltrainerfKateAfterText:
-	text "KATE: I'm sorry we"
-	line "jumped you."
-
-	para "We never expected"
-	line "anyone to find us"
-
-	para "here. You sure"
-	line "startled us."
-	done
-
-Route6IlexForestSignText:
-	text "ILEX FOREST"
-	line "THROUGH THE GATE"
-	done
 
 
 
