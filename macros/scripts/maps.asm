@@ -185,7 +185,7 @@ MACRO variable_mart_event
 	if _NARG == 3
 		object_event \1, \2, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, \3, OBJECTTYPE_COMMAND, jumpstd, VARIABLE_MART_SCRIPT, -1
 	else
-		object_event \1, \2, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, \3, OBJECTTYPE_COMMAND, jumpstd, VARIABLE_MART_SCRIPT, \4
+		object_event \1, \2, SPRITE_CLERK, \3, 0, 0, -1, -1, \4, OBJECTTYPE_COMMAND, jumpstd, VARIABLE_MART_SCRIPT, -1
 	endc
 ENDM
 
