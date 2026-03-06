@@ -17,7 +17,7 @@ MysteryGiftNPC:
 
 	; failsafe item if one from the list wasn't chosen
 .failsafe
-	ld a, BERRY
+	ld a, FULL_RESTORE
 .done
 	ld [wScriptVar], a
 	ret
