@@ -38,23 +38,17 @@ GoldenrodCity_MapEvents:
 	bg_event  4, 26, BGEVENT_JUMPTEXT, GoldenrodCityBillsFamilyHouseSignText
 
 	def_object_events
-	object_event  7, 18, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityPokefanMScript, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 26, 16, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityYoungster1Script, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 12, 16, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, GoldenrodCityCooltrainerF1Script, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 20, 26, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_WANDER, 1, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityCooltrainerF2Script, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 19, 17, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodCityYoungster2Script, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 17, 10, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, GoldenrodCityLassScript, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 11, 27, SPRITE_GRAMPS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityGrampsScript, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event  4, 16, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocketScoutScript, EVENT_GOLDENROD_CITY_ROCKET_SCOUT
-	object_event 28, 19, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket1Script, EVENT_GOLDENROD_CITY_ROCKET_TAKEOVER
-	object_event  8, 15, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket2Script, EVENT_GOLDENROD_CITY_ROCKET_TAKEOVER
-	object_event 16, 23, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket3Script, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	object_event 29, 19, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket4Script, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	object_event 29,  7, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket5Script, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	object_event 31, 10, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket6Script, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
 	object_event 12, 22, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodCityMoveTutorScript, -1
+	object_event  7, 18, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodCityPokefanMText, -1
+	object_event 26, 16, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodCityYoungster1Text, -1
+	object_event 12, 16, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodCityCooltrainerF1Text, -1
+	object_event 20, 26, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_WANDER, 1, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityCooltrainerF2Script, -1
+	object_event 19, 17, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodCityYoungster2Text, -1
+	object_event 17, 10, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodCityLassText, -1
+	object_event 11, 27, SPRITE_GRAMPS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodCityGrampsText, -1
 
 	object_const_def
+	const GOLDENRODCITY_MOVETUTOR
 	const GOLDENRODCITY_POKEFAN_M1
 	const GOLDENRODCITY_YOUNGSTER1
 	const GOLDENRODCITY_COOLTRAINER_F1
@@ -62,14 +56,6 @@ GoldenrodCity_MapEvents:
 	const GOLDENRODCITY_YOUNGSTER2
 	const GOLDENRODCITY_LASS
 	const GOLDENRODCITY_GRAMPS
-	const GOLDENRODCITY_ROCKETSCOUT
-	const GOLDENRODCITY_ROCKET1
-	const GOLDENRODCITY_ROCKET2
-	const GOLDENRODCITY_ROCKET3
-	const GOLDENRODCITY_ROCKET4
-	const GOLDENRODCITY_ROCKET5
-	const GOLDENRODCITY_ROCKET6
-	const GOLDENRODCITY_MOVETUTOR
 
 GoldenrodCity_MapScripts:
 	def_scene_scripts
@@ -190,144 +176,30 @@ GoldenrodCityMoveTutorMoveText:
 	text_start
 	done
 
-GoldenrodCityPokefanMScript:
-	jumptextfaceplayer GoldenrodCityPokefanMText
-
-GoldenrodCityYoungster1Script:
-	jumptextfaceplayer GoldenrodCityYoungster1Text
-
-GoldenrodCityCooltrainerF1Script:
-	faceplayer
-	opentext
-	checkevent EVENT_CLEARED_RADIO_TOWER
-	iftrue .ClearedRadioTower
-	writetext GoldenrodCityCooltrainerF1Text
-	waitbutton
-	closetext
-	end
-
-.ClearedRadioTower:
-	writetext GoldenrodCityCooltrainerF1Text_ClearedRadioTower
-	waitbutton
-	closetext
-	end
-
 GoldenrodCityCooltrainerF2Script:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkflag ENGINE_RADIO_CARD
 	iftrue .GotRadioCard
-	writetext GoldenrodCityCooltrainerF2Text
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "The Radio Tower in"
+		line "Goldenrod City is"
+		cont "a landmark."
+
+		para "They're running a"
+		line "promotional cam- "
+		cont "paign right now."
+
+		para "They'll modify"
+		line "your #Gear,"
+		cont "so it can also"
+		cont "serve as a radio."
+		done
 
 .GotRadioCard:
-	writetext GoldenrodCityCooltrainerF2Text_GotRadioCard
-	waitbutton
-	closetext
-	end
-
-GoldenrodCityYoungster2Script:
-	jumptextfaceplayer GoldenrodCityYoungster2Text
-
-GoldenrodCityLassScript:
-	jumptextfaceplayer GoldenrodCityLassText
-
-GoldenrodCityGrampsScript:
-	jumptextfaceplayer GoldenrodCityGrampsText
-
-GoldenrodCityRocketScoutScript:
-	opentext
-	writetext GoldenrodCityRocketScoutText1
-	promptbutton
-	faceplayer
-	writetext GoldenrodCityRocketScoutText2
-	waitbutton
-	closetext
-	turnobject GOLDENRODCITY_ROCKETSCOUT, UP
-	end
-
-GoldenrodCityRocket1Script:
-	jumptextfaceplayer GoldenrodCityRocket1Text
-
-GoldenrodCityRocket2Script:
-	jumptextfaceplayer GoldenrodCityRocket2Text
-
-GoldenrodCityRocket3Script:
-	jumptextfaceplayer GoldenrodCityRocket3Text
-
-GoldenrodCityRocket4Script:
-	jumptextfaceplayer GoldenrodCityRocket4Text
-
-GoldenrodCityRocket5Script:
-	jumptextfaceplayer GoldenrodCityRocket5Text
-
-GoldenrodCityRocket6Script:
-	jumptextfaceplayer GoldenrodCityRocket6Text
-
-GoldenrodCityPokefanMText:
-	text "They built the new"
-	line "RADIO TOWER to"
-
-	para "replace the old,"
-	line "creaky one."
-	done
-
-GoldenrodCityYoungster1Text:
-	text "I know there's a"
-	line "new BIKE SHOP, but"
-
-	para "I can't find it"
-	line "anywhere."
-	done
-
-GoldenrodCityCooltrainerF1Text:
-	text "Is that man in"
-	line "black dressed up"
-
-	para "like a TEAM ROCKET"
-	line "member? How silly!"
-	done
-
-GoldenrodCityCooltrainerF1Text_ClearedRadioTower:
-	text "Was that man in"
-	line "black really part"
-
-	para "of TEAM ROCKET? I"
-	line "can't believe it!"
-	done
-
-GoldenrodCityCooltrainerF2Text:
-	text "The RADIO TOWER in"
-	line "GOLDENROD CITY is"
-	cont "a landmark."
-
-	para "They're running a"
-	line "promotional cam- "
-	cont "paign right now."
-
-	para "They'll modify"
-	line "your #GEAR,"
-
-	para "so it can also"
-	line "serve as a radio."
-	done
-
-GoldenrodCityCooltrainerF2Text_GotRadioCard:
-	text "Oh, your #GEAR"
-	line "works as a radio!"
-	done
-
-GoldenrodCityYoungster2Text:
-	text "E-he-he-he…"
-
-	para "I got in trouble"
-	line "for playing in the"
-
-	para "basement of the"
-	line "DEPT.STORE."
-	done
+	jumpthisopenedtext
+		text "Oh, your #Gear"
+		line "works as a radio!"
+		done
 
 GoldenrodCityLassText:
 	text "The men in that"
@@ -339,92 +211,41 @@ GoldenrodCityLassText:
 	cont "future."
 	done
 
+GoldenrodCityYoungster2Text:
+	text "E-he-he-he…"
+
+	para "I got in trouble"
+	line "for playing in the"
+
+	para "basement of the"
+	line "Dept.Store."
+	done
+
+GoldenrodCityCooltrainerF1Text:
+	text "I just love the"
+	line "vibe of this city."
+	done
+
+GoldenrodCityYoungster1Text:
+	text "I know there's a"
+	line "new Bike Shop, but"
+	cont "I can't find it"
+	cont "anywhere."
+	done
+
 GoldenrodCityGrampsText:
 	text "Whew! This is one"
 	line "big town. I don't"
-
-	para "know where any-"
-	line "thing is."
+	cont "know where any-"
+	cont "thing is."
 	done
 
-GoldenrodCityRocketScoutText1:
-	text "So this is the"
-	line "RADIO TOWER…"
+GoldenrodCityPokefanMText:
+	text "They built the new"
+	line "Radio Tower to"
+	cont "replace the old,"
+	cont "creaky one."
 	done
-
-GoldenrodCityRocketScoutText2:
-	text "What do you want,"
-	line "you pest? Scram!"
-	done
-
-GoldenrodCityRocket1Text:
-	text "Stay out of the"
-	line "way! Beat it!"
-	done
-
-GoldenrodCityRocket2Text:
-	text "Take over the"
-	line "RADIO TOWER…"
-
-	para "What? It's none of"
-	line "your business!"
-	done
-
-GoldenrodCityRocket3Text:
-	text "#MON? They're"
-	line "nothing more than"
-
-	para "tools for making"
-	line "money!"
-	done
-
-GoldenrodCityRocket4Text:
-	text "Our dream will"
-	line "soon come true…"
-
-	para "It was such a long"
-	line "struggle…"
-	done
-
-GoldenrodCityRocket5Text:
-	text "Hey, brat! You"
-	line "don't belong here!"
-	cont "Get lost!"
-	done
-
-GoldenrodCityRocket6Text:
-	text "Come taste the"
-	line "true terror of"
-	cont "TEAM ROCKET!"
-	done
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 GoldenrodCityStationSignText:
 	text "Goldenrod City"
