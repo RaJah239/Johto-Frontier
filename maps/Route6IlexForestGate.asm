@@ -1,9 +1,28 @@
+Route6IlexForestGate_MapEvents:
+	def_warp_events
+	warp_event  4,  0, ROUTE_6, 1
+	warp_event  5,  0, ROUTE_6, 2
+	warp_event  4,  7, ILEX_FOREST, 1
+	warp_event  5,  7, ILEX_FOREST, 1
+
+	def_coord_events
+	coord_event  4,  7, SCENE_ROUTE6ILEXFORESTGATE_TEACHER_BLOCKS_IF_FOREST_IS_RESTLESS, Route6IlexForestGateCelebiEvent
+
+	def_bg_events
+
+	def_object_events
+	porygonpc_event 1, 2, PAL_NPC_RED
+	object_event  9,  3, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route6IlexForestGateTeacherScript, EVENT_ROUTE_6_ILEX_FOREST_GATE_TEACHER_BEHIND_COUNTER
+	object_event  9,  4, SPRITE_LASS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route6IlexForestGateButterfreeScript, -1
+	object_event  3,  4, SPRITE_LASS, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route6IlexForestGateLassScript, EVENT_ROUTE_6_ILEX_FOREST_GATE_LASS
+	object_event  5,  7, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route6IlexForestGateTeacherScript, EVENT_ROUTE_6_ILEX_FOREST_GATE_TEACHER_IN_WALKWAY
+
 	object_const_def
+	const ROUTE6ILEXFORESTGATE_PORYGON_PC
 	const ROUTE6ILEXFORESTGATE_TEACHER1
 	const ROUTE6ILEXFORESTGATE_BUTTERFREE
 	const ROUTE6ILEXFORESTGATE_LASS
 	const ROUTE6ILEXFORESTGATE_TEACHER2
-	const ROUTE6ILEXFORESTGATE_PORYGON_PC
 
 Route6IlexForestGate_MapScripts:
 	def_scene_scripts
@@ -133,25 +152,3 @@ Route6IlexForestGateLassText:
 	line "must be a grass-"
 	cont "type #MON."
 	done
-
-Route6IlexForestGatePorygonPCScript:
-	jumpstd PorygonPCScript
-
-Route6IlexForestGate_MapEvents:
-	def_warp_events
-	warp_event  4,  0, ROUTE_6, 1
-	warp_event  5,  0, ROUTE_6, 2
-	warp_event  4,  7, ILEX_FOREST, 1
-	warp_event  5,  7, ILEX_FOREST, 1
-
-	def_coord_events
-	coord_event  4,  7, SCENE_ROUTE6ILEXFORESTGATE_TEACHER_BLOCKS_IF_FOREST_IS_RESTLESS, Route6IlexForestGateCelebiEvent
-
-	def_bg_events
-
-	def_object_events
-	object_event  9,  3, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route6IlexForestGateTeacherScript, EVENT_ROUTE_6_ILEX_FOREST_GATE_TEACHER_BEHIND_COUNTER
-	object_event  9,  4, SPRITE_LASS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route6IlexForestGateButterfreeScript, -1
-	object_event  3,  4, SPRITE_LASS, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route6IlexForestGateLassScript, EVENT_ROUTE_6_ILEX_FOREST_GATE_LASS
-	object_event  5,  7, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route6IlexForestGateTeacherScript, EVENT_ROUTE_6_ILEX_FOREST_GATE_TEACHER_IN_WALKWAY
-	object_event  1,  1, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route6IlexForestGatePorygonPCScript, -1
