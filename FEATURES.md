@@ -87,6 +87,7 @@
 - Print stat gain on level up
 - Max level of Pokémon is 50
 - All Pokémon obey regardless if traded or not
+- Can 100% run from any wild encounter
 - Press Start to view enemy types in Battle Menu
 - Push B in Battle Menu to go to the bottom right option
 - Quadruple effective and ineffective battle texts added
@@ -136,6 +137,10 @@
 - Light Ball doubles Pikachu's Attack as well as Special Attack
 - Everstone both prevents evolution and boosts unevolved Pokémon's Defense and Special Defense
 - Repels stops all encounters, regardless of level
+- Friend Ball increases happiness by 150
+- Lure Ball multiply catch rate by 4 if this is a fishing rod battle
+- Fast Ball multiply catch rate by 4 if enemy's base speed more than or equal to 100
+- Love and Heavy Ball works as intended
 
 ## Move Changes
 - Note: Many moves have been altered, these are just some
@@ -146,10 +151,6 @@
 - Only HM is Fly
 - Explosion no longer halves defense before dealing damage
 - Multi-hit probabilities Updated: 50% for 3 hits, 25% for 4 hits and 12.5% for either 2 or 5 hits
-- Friend Ball increases happiness by 150
-- Lure Ball multiply catch rate by 4 if this is a fishing rod battle
-- Fast Ball multiply catch rate by 4 if enemy's base speed more than or equal to 100
-- Love and Heavy Ball works as intended
 
 ## Bug Fixes
 
