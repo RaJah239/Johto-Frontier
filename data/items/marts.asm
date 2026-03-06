@@ -5,10 +5,6 @@ Marts:
 	dw MartGoldenrod2F2
 	dw MartGoldenrod3F
 	dw MartGoldenrod4F
-	dw MartGoldenrod5F1
-	dw MartGoldenrod5F2
-	dw MartGoldenrod5F3
-	dw MartGoldenrod5F4
 	dw MartMahogany1
 	dw MartMahogany2
 	dw MartMtMoon
@@ -61,32 +57,6 @@ MartGoldenrod4F:
 	db CALCIUM
 	db ZINC
 	db CARBOS
-	db -1 ; end
-
-MartGoldenrod5F1:
-	db 2 ; # items
-	db TM_THUNDERPUNCH
-	db TM_FIRE_PUNCH
-	db -1 ; end
-
-MartGoldenrod5F2:
-	db 2 ; # items
-	db TM_THUNDERPUNCH
-	db TM_FIRE_PUNCH
-	db TM_HEADBUTT
-	db -1 ; end
-
-MartGoldenrod5F3:
-	db 2 ; # items
-	db TM_THUNDERPUNCH
-	db TM_FIRE_PUNCH
-	db -1 ; end
-
-MartGoldenrod5F4:
-	db 3 ; # items
-	db TM_THUNDERPUNCH
-	db TM_FIRE_PUNCH
-	db TM_HEADBUTT
 	db -1 ; end
 
 MartMahogany1:

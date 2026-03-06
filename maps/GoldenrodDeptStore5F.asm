@@ -1,3 +1,23 @@
+GoldenrodDeptStore5F_MapEvents:
+	def_warp_events
+	warp_event 12,  0, GOLDENROD_DEPT_STORE_4F, 1
+	warp_event 15,  0, GOLDENROD_DEPT_STORE_6F, 1
+	warp_event  2,  0, GOLDENROD_DEPT_STORE_ELEVATOR, 1
+
+	def_coord_events
+
+	def_bg_events
+	bg_event 14,  0, BGEVENT_JUMPTEXT, GoldenrodDeptStore5FDirectoryText
+	bg_event  3,  0, BGEVENT_JUMPSTD, ELEVATOR_BUTTON_SCRIPT
+
+	def_object_events
+	object_event  8,  5, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FClerkScript, -1
+	object_event  3,  6, SPRITE_LASS, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FLassScript, -1
+	object_event  6,  3, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Mike, -1
+	object_event 13,  5, SPRITE_POKEFAN_M, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FPokefanMScript, -1
+	object_event  7,  5, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FReceptionistScript, EVENT_GOLDENROD_DEPT_STORE_5F_HAPPINESS_EVENT_LADY
+	object_event  9,  1, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FMysteryGiftCarrieScript, -1
+
 	object_const_def
 	const GOLDENRODDEPTSTORE5F_CLERK
 	const GOLDENRODDEPTSTORE5F_LASS
@@ -23,37 +43,6 @@ GoldenrodDeptStore5FCheckIfSundayCallback:
 	endcallback
 
 GoldenrodDeptStore5FClerkScript:
-	faceplayer
-	opentext
-	checkevent EVENT_GOT_TM_HEADBUTT
-	iftrue .headbutt
-	checkevent EVENT_GOT_TM_BRICK_BREAK
-	iftrue .onlyrocksmash
-	sjump .neither
-
-.headbutt
-	checkevent EVENT_GOT_TM_BRICK_BREAK
-	iftrue .both
-	sjump .onlyheadbutt
-
-.neither
-	pokemart MARTTYPE_STANDARD, MART_GOLDENROD_5F_1
-	closetext
-	end
-
-.onlyheadbutt
-	pokemart MARTTYPE_STANDARD, MART_GOLDENROD_5F_2
-	closetext
-	end
-
-.onlyrocksmash
-	pokemart MARTTYPE_STANDARD, MART_GOLDENROD_5F_3
-	closetext
-	end
-
-.both
-	pokemart MARTTYPE_STANDARD, MART_GOLDENROD_5F_4
-	closetext
 	end
 
 GoldenrodDeptStore5FReceptionistScript:
@@ -114,12 +103,6 @@ Mike:
 
 GoldenrodDeptStore5FPokefanMScript:
 	jumptextfaceplayer GoldenrodDeptStore5FPokefanMText
-
-GoldenrodDeptStore5FDirectory:
-	jumptext GoldenrodDeptStore5FDirectoryText
-
-GoldenrodDeptStore5FElevatorButton:
-	jumpstd ElevatorButtonScript
 
 GoldenrodDeptStore5FReceptionistOhYourMonDotDotDotText:
 	text "Hello. Oh, your"
@@ -332,22 +315,3 @@ DeclineMysteryGiftText:
 	line "okay?"
  	done
 
-GoldenrodDeptStore5F_MapEvents:
-	def_warp_events
-	warp_event 12,  0, GOLDENROD_DEPT_STORE_4F, 1
-	warp_event 15,  0, GOLDENROD_DEPT_STORE_6F, 1
-	warp_event  2,  0, GOLDENROD_DEPT_STORE_ELEVATOR, 1
-
-	def_coord_events
-
-	def_bg_events
-	bg_event 14,  0, BGEVENT_READ, GoldenrodDeptStore5FDirectory
-	bg_event  3,  0, BGEVENT_READ, GoldenrodDeptStore5FElevatorButton
-
-	def_object_events
-	object_event  8,  5, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FClerkScript, -1
-	object_event  3,  6, SPRITE_LASS, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FLassScript, -1
-	object_event  6,  3, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Mike, -1
-	object_event 13,  5, SPRITE_POKEFAN_M, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FPokefanMScript, -1
-	object_event  7,  5, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FReceptionistScript, EVENT_GOLDENROD_DEPT_STORE_5F_HAPPINESS_EVENT_LADY
-	object_event  9,  1, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FMysteryGiftCarrieScript, -1
