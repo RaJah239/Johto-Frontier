@@ -19,6 +19,7 @@ StdScripts::
 	add_stdscript VariableMartScript
 	add_stdscript PorygonPCScript
 	add_stdscript StrengthBoulderScript
+	add_stdscript ElevatorButtonScript
 	add_stdscript TeamRocketOathScript
 	add_stdscript IncenseBurnerScript
 	add_stdscript MerchandiseShelfScript
@@ -28,7 +29,6 @@ StdScripts::
 	add_stdscript TrashCanScript
 	add_stdscript GoldenrodRocketsScript
 	add_stdscript RadioTowerRocketsScript
-	add_stdscript ElevatorButtonScript
 	add_stdscript DayToTextScript
 	add_stdscript BugContestResultsWarpScript
 	add_stdscript BugContestResultsScript
