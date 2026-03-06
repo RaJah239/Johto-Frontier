@@ -13,6 +13,8 @@ Route6_MapEvents:
 	bg_event 12,  6, BGEVENT_JUMPTEXT, Route6SignText
 	bg_event 13, 33, BGEVENT_JUMPTEXT, Route6TrainerTipsText
 	bg_event 10, 13, BGEVENT_JUMPTEXT, DayCareSignText
+	bg_event 10, 36, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event  9, 36, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
 	bg_event  8, 32, BGEVENT_ITEM + RARE_CANDY, EVENT_ROUTE_6_HIDDEN_RARE_CANDY
 	bg_event 17, 19, BGEVENT_ITEM + HYPER_POTION, EVENT_ROUTE_6_HIDDEN_HYPER_POTION
 	bg_event  6,  6, BGEVENT_ITEM + FOCUS_SASH, EVENT_ROUTE_6_HIDDEN_FOCUS_SASH
@@ -30,6 +32,8 @@ Route6_MapEvents:
 	object_event  4, 48, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainerfJenn, -1
 	object_event  6, 51, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 2, TrainerCooltrainerfKate, -1
 	object_event  7, 30, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route6Nugget, EVENT_ROUTE_6_NUGGET
+	object_event  9, 36, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route6BerryTree, EVENT_ROUTE_6_BERRY
+	object_event 10, 36, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_WHITE, OBJECTTYPE_SCRIPT, 0, Route6ApricornTree, EVENT_ROUTE_6_APRICORN
 
 	object_const_def
 	const ROUTE6_YOUNGSTER1
@@ -44,6 +48,8 @@ Route6_MapEvents:
 	const ROUTE6_COOLTRAINER_F2
 	const ROUTE6_COOLTRAINER_F3
 	const ROUTE6_POKE_BALL
+	const ROUTE6_BERRY_TREE
+	const ROUTE6_APRICORN_TREE
 
 Route6_MapScripts:
 	def_scene_scripts
@@ -459,3 +465,12 @@ Route6SignText:
 
 Route6Nugget:
 	itemball NUGGET
+
+Route6BerryTree:
+	setval MIRACLEBERRY
+	setlasttalked ROUTE6_BERRY_TREE
+	jumpstd BerryOrFruitScript
+Route6ApricornTree:
+	setval WHT_APRICORN
+	setlasttalked ROUTE6_APRICORN_TREE
+	jumpstd BerryOrFruitScript

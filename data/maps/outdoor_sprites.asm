@@ -98,6 +98,8 @@ GoldenrodGroupSprites:
 	db SPRITE_DAY_CARE_MON_1
 	db SPRITE_DAY_CARE_MON_2
 	db SPRITE_POKE_BALL
+	db SPRITE_BERRY
+	db SPRITE_APRICORN
 	db 0 ; end
 
 ; OlivineCity and Route12 are connected
