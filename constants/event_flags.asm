@@ -452,7 +452,7 @@
 	const_skip
 	const EVENT_TODD_ASKED_FOR_PHONE_NUMBER
 	const_skip
-	const EVENT_GINA_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -825,13 +825,13 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_PICNICKER_GINA2
+	const_skip
 	const EVENT_BEAT_PICNICKER_ERIN
 	const_skip
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_PICNICKER_GINA3
+	const_skip
 	const EVENT_BEAT_PICNICKER_TIFFANY2
 	const EVENT_BEAT_PICNICKER_TIFFANY3
 	const EVENT_BEAT_PICNICKER_ERIN2

@@ -21,7 +21,7 @@ Route6_MapEvents:
 	object_event 13,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 5, TrainerCamperTodd1, -1
 	object_event 15, 32, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerYoungsterSamuel, -1
 	object_event 11, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerYoungsterIan, -1
-	object_event 10, 26, SPRITE_LASS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerPicnickerGina1, -1
+	object_event 10, 26, SPRITE_LASS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 3, TrainerPicnickerGina, -1
 	object_event  9, 11, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, OfficerKeithScript, -1
 	object_event 18, 28, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 3, TrainerPokefanmBrandon, -1
 	object_event 13, 18, SPRITE_DAY_CARE_MON_1, SPRITEMOVEDATA_POKEMON, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareMon1Script, EVENT_DAY_CARE_MON_1
@@ -202,118 +202,23 @@ TrainerCamperTodd1:
 	jumpstd RematchMScript
 	end
 
-TrainerPicnickerGina1:
-	trainer PICNICKER, GINA1, EVENT_BEAT_PICNICKER_GINA, PicnickerGina1SeenText, PicnickerGina1BeatenText, 0, .Script
+TrainerPicnickerGina:
+	generictrainer PICNICKER, GINA, EVENT_BEAT_PICNICKER_GINA, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_PICNICKER_GINA
-	opentext
-	checkflag ENGINE_GINA_HAS_LEAF_STONE
-	iftrue .LeafStone
-	checkflag ENGINE_GINA_READY_FOR_REMATCH
-	iftrue .Rematch
-	checkcellnum PHONE_PICNICKER_GINA
-	iftrue .NumberAccepted
-	checkevent EVENT_GINA_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskAgain
-	writetext PicnickerGina1AfterText
-	promptbutton
-	setevent EVENT_GINA_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .FinishAsk
+.AfterText
+	text "You're a perfect"
+	line "practice partner."
+	done
 
-.AskAgain:
-	scall .AskNumber
-.FinishAsk:
-	askforphonenumber PHONE_PICNICKER_GINA
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, PICNICKER, GINA1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
+.SeenText
+	text "Hi. Let's have a"
+	line "practice battle."
+	done
 
-.Rematch:
-	scall .RematchStd
-	winlosstext PicnickerGina1BeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight4
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight3
-	checkevent EVENT_CLEARED_RADIO_TOWER
-	iftrue .LoadFight2
-	checkflag ENGINE_FLYPOINT_MAHOGANY
-	iftrue .LoadFight1
-	loadtrainer PICNICKER, GINA1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_GINA_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer PICNICKER, GINA2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_GINA_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer PICNICKER, GINA3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_GINA_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer PICNICKER, GINA4
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_GINA_READY_FOR_REMATCH
-	end
-
-.LoadFight4:
-	loadtrainer PICNICKER, GINA5
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_GINA_READY_FOR_REMATCH
-	end
-
-.LeafStone:
-	scall .Gift
-	verbosegiveitem LEAF_STONE
-	iffalse .BagFull
-	clearflag ENGINE_GINA_HAS_LEAF_STONE
-	closetext
-	end
-
-.BagFull:
-	sjump .PackFull
-
-.AskNumber:
-	jumpstd AskNumberFScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberFScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedFScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedFScript
-	end
-
-.RematchStd:
-	jumpstd RematchFScript
-	end
-
-.Gift:
-	jumpstd GiftFScript
-	end
-
-.PackFull:
-	jumpstd PackFullFScript
-	end
+.BeatenText
+	text "Oh, no! I just"
+	line "can't win…"
+	done
 
 OfficerKeithScript:
 	faceplayeropentext
@@ -583,23 +488,7 @@ CamperToddSaleText:
 	line "up on a rooftop."
 	done
 
-PicnickerGina1SeenText:
-	text "Are you a trainer?"
 
-	para "Let's have a"
-	line "practice battle."
-	done
-
-PicnickerGina1BeatenText:
-	text "Oh, no! I just"
-	line "can't win…"
-	done
-
-PicnickerGina1AfterText:
-	text "You're too strong"
-	line "to be a practice"
-	cont "partner."
-	done
 
 
 

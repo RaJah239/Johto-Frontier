@@ -38,11 +38,6 @@ ToddNoItemScript:
 	promptbutton
 	sjump PhoneScript_HangUpText_Male
 
-GinaHangUpScript:
-	farwritetext GinaHaventFoundAnythingYetText
-	promptbutton
-	sjump PhoneScript_HangUpText_Female
-
 ArnieHangUpScript:
 	farwritetext ArnieWeAreNotReadyYetText
 	promptbutton

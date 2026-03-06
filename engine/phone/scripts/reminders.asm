@@ -26,10 +26,6 @@ ToddForwardScript:
 	farwritetext ToddLookingForwardToBattleText
 	end
 
-GinaReminderScript:
-	farwritetext GinaReminderText
-	end
-
 ArnieReminderScript:
 	farwritetext ArnieReminderText
 	end
