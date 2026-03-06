@@ -9,7 +9,7 @@ ItemNameOrder:
 
 
 
-; Item Pocket - 24 total
+; Item Pocket - 59 total
 ; Forever useful items
 	db REPEL
 	db SUPER_REPEL
@@ -17,58 +17,8 @@ ItemNameOrder:
 	db POKE_DOLL
 	db ESCAPE_ROPE
 
-; Evolution Items
-	db FIRE_STONE
-	db WATER_STONE
-	db LEAF_STONE
-	db THUNDERSTONE
-	db DRAGON_SCALE
-	db SUN_STONE
-	db MOON_STONE
-
-; Boxes
-	db NORMAL_BOX
-	db GORGEOUS_BOX
-
-; Mail
-	db BLUESKY_MAIL
-	db EON_MAIL
-	db FLOWER_MAIL
-	db LITEBLUEMAIL
-	db LOVELY_MAIL
-	db MIRAGE_MAIL
-	db MORPH_MAIL
-	db MUSIC_MAIL
-	db PORTRAITMAIL
-	db SURF_MAIL
-
-
-
-; NEXT POCKET
-; Ball Pocket - 13 total
-; Generic Pokéballs
-	db POKE_BALL
-	db GREAT_BALL
-	db ULTRA_BALL
-	db SHINY_BALL
-	db MASTER_BALL 
-	db PARK_BALL
-
-; Kurt's Pokéballs
-	db FAST_BALL
-	db FRIEND_BALL
-	db HEAVY_BALL
-	db LEVEL_BALL
-	db LOVE_BALL
-	db LURE_BALL
-	db MOON_BALL
-
-
-
-; NEXT POCKET
-; Medicine Pocket - 35 total
 ; Best restorative item in the game
-	db SACRED_ASH   ; 38
+	db SACRED_ASH
 
 ; HP restoring items
 	db POTION
@@ -118,6 +68,50 @@ ItemNameOrder:
 	db CALCIUM
 	db ZINC 
 	db CARBOS
+
+; Evolution Items
+	db FIRE_STONE
+	db WATER_STONE
+	db LEAF_STONE
+	db THUNDERSTONE
+	db DRAGON_SCALE
+	db SUN_STONE
+	db MOON_STONE
+
+; Boxes
+	db NORMAL_BOX
+	db GORGEOUS_BOX
+
+; Mail
+	db BLUESKY_MAIL
+	db EON_MAIL
+	db FLOWER_MAIL
+	db LITEBLUEMAIL
+	db LOVELY_MAIL
+	db MIRAGE_MAIL
+	db MORPH_MAIL
+	db MUSIC_MAIL
+	db PORTRAITMAIL
+	db SURF_MAIL
+
+; NEXT POCKET
+; Ball Pocket - 13 total
+; Generic Pokéballs
+	db POKE_BALL
+	db GREAT_BALL
+	db ULTRA_BALL
+	db SHINY_BALL
+	db MASTER_BALL 
+	db PARK_BALL
+
+; Kurt's Pokéballs
+	db FAST_BALL
+	db FRIEND_BALL
+	db HEAVY_BALL
+	db LEVEL_BALL
+	db LOVE_BALL
+	db LURE_BALL
+	db MOON_BALL
 
 
 
