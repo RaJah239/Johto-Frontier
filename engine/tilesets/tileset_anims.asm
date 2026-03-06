@@ -483,6 +483,12 @@ ForestTreeLeftAnimation:
 	ld b, h
 	ld c, l
 
+	; check if night
+	; animate trees
+	ld a, [wTimeOfDay]
+	cp NITE_F
+	jr nc, .do_animation
+
 ; Only animate this during the Celebi event
 	ld a, [wCelebiEvent]
 	bit CELEBIEVENT_FOREST_IS_RESTLESS_F, a
@@ -527,6 +533,12 @@ ForestTreeRightAnimation:
 	ld b, h
 	ld c, l
 
+	; check if night
+	; animate trees
+	ld a, [wTimeOfDay]
+	cp NITE_F
+	jr nc, .do_animation
+
 ; Only animate this during the Celebi event
 	ld a, [wCelebiEvent]
 	bit CELEBIEVENT_FOREST_IS_RESTLESS_F, a
@@ -567,6 +579,12 @@ ForestTreeLeftAnimation2:
 	ld b, h
 	ld c, l
 
+	; check if night
+	; animate trees
+	ld a, [wTimeOfDay]
+	cp NITE_F
+	jr nc, .do_animation
+
 ; Only animate this during the Celebi event
 	ld a, [wCelebiEvent]
 	bit CELEBIEVENT_FOREST_IS_RESTLESS_F, a
@@ -605,6 +623,12 @@ ForestTreeRightAnimation2:
 	ld hl, sp+0
 	ld b, h
 	ld c, l
+
+	; check if night
+	; animate trees
+	ld a, [wTimeOfDay]
+	cp NITE_F
+	jr nc, .do_animation
 
 ; Only animate this during the Celebi event
 	ld a, [wCelebiEvent]
