@@ -73,15 +73,8 @@ Pharmacist:
 	ret
 
 RooftopSale:
-	ld b, BANK(RooftopSaleMart1)
-	ld de, RooftopSaleMart1
-	ld hl, wStatusFlags
-	bit STATUSFLAGS_HALL_OF_FAME_F, [hl]
-	jr z, .ok
-	ld b, BANK(RooftopSaleMart2)
-	ld de, RooftopSaleMart2
-
-.ok
+	ld b, BANK(RooftopSaleMart)
+	ld de, RooftopSaleMart
 	call LoadMartPointer
 	call ReadMart
 	call LoadStandardMenuHeader

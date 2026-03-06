@@ -1,17 +1,28 @@
-RooftopSaleMart1:
-	db 5
-	dbw POKE_BALL,     150
-	dbw GREAT_BALL,    500
-	dbw SUPER_POTION,  500
-	dbw FULL_HEAL,     500
-	dbw REVIVE,       1200
-	db -1
+RooftopSaleMart:
+	db 17 ; 17 max
+	; pokeballs
+	dbw POKE_BALL,          50
+	dbw GREAT_BALL,        300
+	dbw ULTRA_BALL,        600
 
-RooftopSaleMart2:
-	db 5
-	dbw HYPER_POTION, 1000
-	dbw FULL_RESTORE, 2000
-	dbw FULL_HEAL,     500
-	dbw ULTRA_BALL,   1000
-	dbw PROTEIN,      7800
-	db -1
+	; good items
+	dbw MAX_REPEL,          50	
+	dbw ESCAPE_ROPE,        50
+	dbw FULL_HEAL,          50
+	dbw MAX_POTION,       1250
+	dbw FULL_RESTORE,     1500
+	dbw MAX_ELIXER,       2000
+	dbw MAX_REVIVE,       2000
+
+	; vitamins
+	dbw HP_UP,            3000
+	dbw PROTEIN,          3000
+	dbw IRON,             3000
+	dbw CALCIUM,          3000
+	dbw ZINC,             3000
+	dbw CARBOS,           3000
+
+	; cannot purchase more than what present money can buy
+	; perfect price because at max money, can only buy 49
+	dbw RARE_CANDY,      20000
+	db -1 ; end
