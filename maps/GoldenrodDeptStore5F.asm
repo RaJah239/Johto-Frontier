@@ -48,49 +48,82 @@ GoldenrodDeptStore5FPunchTutorScript:
 	end
 
 GoldenrodDeptStore5FReceptionistScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	readvar VAR_WEEKDAY
 	ifnotequal SUNDAY, .EventIsOver
-	checkflag ENGINE_GOLDENROD_DEPT_STORE_TM27_RETURN
+	checkflag ENGINE_GOLDENROD_DEPT_STORE_TM_GIVEAWAY
 	iftrue .EventIsOver
 	special GetFirstPokemonHappiness
-	writetext GoldenrodDeptStore5FReceptionistOhYourMonDotDotDotText
+	writethistext
+		text "Hello. Oh, your"
+		line "#mon…"
+		done
 	promptbutton
 	ifgreater 150 - 1, .VeryHappy
 	ifgreater 50 - 1, .SomewhatHappy
-	sjump .NotVeryHappy
-
-.VeryHappy:
-	writetext GoldenrodDeptStore5FReceptionistThisMoveShouldBePerfectText
-	promptbutton
-	verbosegiveitem TM_RETURN
-	iffalse .Done
-	setflag ENGINE_GOLDENROD_DEPT_STORE_TM27_RETURN
-	closetext
-	end
-
-.SomewhatHappy:
-	writetext GoldenrodDeptStore5FReceptionistItsAdorableText
-	waitbutton
-	closetext
-	end
-
 .NotVeryHappy:
-	writetext GoldenrodDeptStore5FReceptionistItLooksEvilHowAboutThisTMText
+	checkevent EVENT_TM_FAIRY_FLASH
+	iftrue .YouCantGetAnother
+	writethistext
+		text "It looks evil. How"
+		line "about this TM for"
+		cont "it?"
+		done
 	promptbutton
 	verbosegiveitem TM_AURA_SPHERE
-	iffalse .Done
-	setflag ENGINE_GOLDENROD_DEPT_STORE_TM27_RETURN
-	closetext
-	end
+	iffalse_endtext
+	setevent EVENT_TM_FAIRY_FLASH
+	setflag ENGINE_GOLDENROD_DEPT_STORE_TM_GIVEAWAY
+	endtext
+
+.VeryHappy:
+	checkevent EVENT_TM_DARK_PULSE
+	iftrue .YouCantGetAnother
+	writethistext
+		text "It's very attached"
+		line "to you."
+
+		para "This move should"
+		line "be perfect for a"
+		cont "pair like you."
+		done
+	promptbutton
+	verbosegiveitem TM_RETURN
+	iffalse_endtext
+	setevent EVENT_TM_DARK_PULSE
+	setflag ENGINE_GOLDENROD_DEPT_STORE_TM_GIVEAWAY
+	endtext
+
+.SomewhatHappy:
+	jumpthisopenedtext
+		text "It's adorable!"
+
+		para "You should teach"
+		line "it good TM moves."
+		done
 
 .EventIsOver:
-	writetext GoldenrodDeptStore5FReceptionistThereAreTMsPerfectForMonText
-	waitbutton
-.Done:
-	closetext
-	end
+	jumpthisopenedtext
+		text "There are sure to"
+		line "be TMs that are"
+		cont "just perfect for"
+		cont "your #mon."
+		done
+
+.YouCantGetAnother:
+	jumpthisopenedtext
+		text "I'm sorry."
+
+		para "There are two TMs"
+		line "that can be gotten"
+		cont "here but only once"
+		cont "each."
+
+		para "I check if your"
+		line "first #mon is"
+		cont "very happy or not"
+		cont "very happy."
+		done
 
 GoldenrodDeptStore5FLassScript:
 	jumptextfaceplayer GoldenrodDeptStore5FLassText
@@ -106,40 +139,15 @@ Mike:
 GoldenrodDeptStore5FPokefanMScript:
 	jumptextfaceplayer GoldenrodDeptStore5FPokefanMText
 
-GoldenrodDeptStore5FReceptionistOhYourMonDotDotDotText:
-	text "Hello. Oh, your"
-	line "#MON…"
-	done
 
-GoldenrodDeptStore5FReceptionistThisMoveShouldBePerfectText:
-	text "It's very attached"
-	line "to you."
 
-	para "This move should"
-	line "be perfect for a"
-	cont "pair like you."
-	done
 
-GoldenrodDeptStore5FReceptionistItsAdorableText:
-	text "It's adorable!"
 
-	para "You should teach"
-	line "it good TM moves."
-	done
 
-GoldenrodDeptStore5FReceptionistItLooksEvilHowAboutThisTMText:
-	text "It looks evil. How"
-	line "about this TM for"
-	cont "it?"
-	done
 
-GoldenrodDeptStore5FReceptionistThereAreTMsPerfectForMonText:
-	text "There are sure to"
-	line "be TMs that are"
 
-	para "just perfect for"
-	line "your #MON."
-	done
+
+
 
 GoldenrodDeptStore5FLassText:
 	text "On Sundays, a lady"

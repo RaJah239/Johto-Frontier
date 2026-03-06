@@ -39,7 +39,7 @@ Route3_MapScripts:
 
 Route3MailRecipientScript:
 	faceplayeropentext
-	checkevent EVENT_GOT_TM_DARK_PULSE
+	checkevent EVENT_GOT_TM_AURA_SPHERE
 	iftrue .DescribeDarkPulse
 	checkevent EVENT_GOT_KENYA
 	iftrue .TryGiveKenya
@@ -107,17 +107,16 @@ Route3MailRecipientScript:
 	setevent EVENT_GAVE_KENYA
 	verbosegiveitem TM_TRICK
 	iffalse_endtext
-	setevent EVENT_GOT_TM_DARK_PULSE
+	setevent EVENT_GOT_TM_AURA_SPHERE
 .DescribeDarkPulse:
 	writethistext
-	text "It's Dark Pulse."
+	text "It's Aura Sphere!"
 
-	para "A wicked move! May"
-	line "cause flinching!"
+	para "A wicked move! It"
+	line "never misses!"
 
-	para "One single extra"
-	line "turn can swing the"
-	cont "tide of battle!"
+	para "A deceptively good"
+	line "move!"
 
 	line "Scary…"
 	done
