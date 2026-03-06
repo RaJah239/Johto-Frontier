@@ -1,3 +1,35 @@
+Route6_MapEvents:
+	def_warp_events
+	warp_event 13, 37, ROUTE_6_ILEX_FOREST_GATE, 1
+	warp_event 14, 37, ROUTE_6_ILEX_FOREST_GATE, 2
+	warp_event 11, 14, DAY_CARE, 1
+	warp_event 11, 15, DAY_CARE, 2
+	warp_event 13, 15, DAY_CARE, 3
+	warp_event 19, 16, HATCH_ROOM, 2
+	warp_event 19, 17, HATCH_ROOM, 2
+	def_coord_events
+
+	def_bg_events
+	bg_event 12,  6, BGEVENT_JUMPTEXT, Route6SignText
+	bg_event 13, 33, BGEVENT_JUMPTEXT, Route6TrainerTipsText
+	bg_event 10, 13, BGEVENT_JUMPTEXT, DayCareSignText
+	bg_event  8, 32, BGEVENT_ITEM + RARE_CANDY, EVENT_ROUTE_6_HIDDEN_RARE_CANDY
+	bg_event 17, 19, BGEVENT_ITEM + SUPER_POTION, EVENT_ROUTE_6_HIDDEN_SUPER_POTION
+
+	def_object_events
+	object_event 13,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 5, TrainerCamperTodd1, -1
+	object_event 15, 32, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterSamuel, -1
+	object_event 11, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterIan, -1
+	object_event 10, 26, SPRITE_LASS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerPicnickerGina1, -1
+	object_event  9, 11, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, OfficerKeithScript, -1
+	object_event 18, 28, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerPokefanmBrandon, -1
+	object_event 13, 18, SPRITE_DAY_CARE_MON_1, SPRITEMOVEDATA_POKEMON, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareMon1Script, EVENT_DAY_CARE_MON_1
+	object_event 16, 18, SPRITE_DAY_CARE_MON_2, SPRITEMOVEDATA_POKEMON, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareMon2Script, EVENT_DAY_CARE_MON_2
+	object_event  8, 48, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 5, TrainerCooltrainerfIrene, -1
+	object_event  4, 48, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainerfJenn, -1
+	object_event  6, 51, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 2, TrainerCooltrainerfKate, -1
+	object_event  7, 30, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route6Nugget, EVENT_ROUTE_6_NUGGET
+
 	object_const_def
 	const ROUTE6_YOUNGSTER1
 	const ROUTE6_YOUNGSTER2
@@ -410,24 +442,6 @@ TrainerCooltrainerfKate:
 	closetext
 	end
 
-Route6Sign:
-	jumptext Route6SignText
-
-Route6TrainerTips:
-	jumptext Route6TrainerTipsText
-
-DayCareSign:
-	jumptext DayCareSignText
-
-Route6Nugget:
-	itemball NUGGET
-
-Route6HiddenRareCandy:
-	hiddenitem RARE_CANDY, EVENT_ROUTE_6_HIDDEN_RARE_CANDY
-
-Route6HiddenSuperPotion:
-	hiddenitem SUPER_POTION, EVENT_ROUTE_6_HIDDEN_SUPER_POTION
-
 YoungsterSamuelSeenText:
 	text "This is where I do"
 	line "my training!"
@@ -641,34 +655,11 @@ Route6IlexForestSignText:
 	line "THROUGH THE GATE"
 	done
 
-Route6SignText:
-	text "ROUTE 6"
 
-	para "GOLDENROD CITY -"
-	line "AZALEA TOWN"
 
-	para "ILEX FOREST"
-	line "SOMEWHERE BETWEEN"
-	done
 
-Route6TrainerTipsText:
-	text "TRAINER TIPS"
 
-	para "BERRY trees grow"
-	line "new BERRIES"
-	cont "every day."
 
-	para "Make a note of"
-	line "which trees bear"
-	cont "which BERRIES."
-	done
-
-DayCareSignText:
-	text "DAY-CARE"
-
-	para "LET US RAISE YOUR"
-	line "#MON FOR YOU!"
-	done
 
 CamperTodd_GiveMaxElixirAfterBattleText:
 	text "Great battle!"
@@ -679,34 +670,43 @@ CamperTodd_AgainGiveMaxElixirAfterBattleText:
 	text "Made space right?"
 	done
 
-Route6_MapEvents:
-	def_warp_events
-	warp_event 13, 37, ROUTE_6_ILEX_FOREST_GATE, 1
-	warp_event 14, 37, ROUTE_6_ILEX_FOREST_GATE, 2
-	warp_event 11, 14, DAY_CARE, 1
-	warp_event 11, 15, DAY_CARE, 2
-	warp_event 13, 15, DAY_CARE, 3
-	warp_event 19, 16, HATCH_ROOM, 2
-	warp_event 19, 17, HATCH_ROOM, 2
-	def_coord_events
+DayCareSignText:
+	text "Day-Care"
 
-	def_bg_events
-	bg_event 12,  6, BGEVENT_READ, Route6Sign
-	bg_event 13, 33, BGEVENT_READ, Route6TrainerTips
-	bg_event 10, 13, BGEVENT_READ, DayCareSign
-	bg_event  8, 32, BGEVENT_ITEM, Route6HiddenRareCandy
-	bg_event 17, 19, BGEVENT_ITEM, Route6HiddenSuperPotion
+	para "Let Us Raise Your"
+	line "#mon For You!"
+	done
 
-	def_object_events
-	object_event 13,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 5, TrainerCamperTodd1, -1
-	object_event 15, 32, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterSamuel, -1
-	object_event 11, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterIan, -1
-	object_event 10, 26, SPRITE_LASS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerPicnickerGina1, -1
-	object_event  9, 11, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, OfficerKeithScript, -1
-	object_event 18, 28, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerPokefanmBrandon, -1
-	object_event 13, 18, SPRITE_DAY_CARE_MON_1, SPRITEMOVEDATA_POKEMON, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareMon1Script, EVENT_DAY_CARE_MON_1
-	object_event 16, 18, SPRITE_DAY_CARE_MON_2, SPRITEMOVEDATA_POKEMON, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareMon2Script, EVENT_DAY_CARE_MON_2
-	object_event  8, 48, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 5, TrainerCooltrainerfIrene, -1
-	object_event  4, 48, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainerfJenn, -1
-	object_event  6, 51, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 2, TrainerCooltrainerfKate, -1
-	object_event  7, 30, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route6Nugget, EVENT_ROUTE_6_NUGGET
+Route6TrainerTipsText:
+	text "Trainer Tips"
+
+	para "The Day Care gives"
+	cont "more Exp. Points"
+	cont "to higher level"
+	cont "#mon."
+
+	para "This means that"
+	line "any #mon left"
+	cont "at the Day Care is"
+	cont "a viable option"
+	cont "for leveling up."
+	
+	para "#mon left in"
+	line "the Day Care also"
+	cont "gain 1 level every"
+	cont "other day the game"
+	cont "isn't turned on."
+	done
+
+Route6SignText:
+	text "Route 6"
+
+	para "Goldenrod City -"
+	line "Azalea Town"
+
+	para "Ilex Forest"
+	line "Somewhere Between"
+	done
+
+Route6Nugget:
+	itemball NUGGET
