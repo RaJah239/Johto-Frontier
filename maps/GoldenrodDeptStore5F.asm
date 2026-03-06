@@ -11,7 +11,7 @@ GoldenrodDeptStore5F_MapEvents:
 	bg_event  3,  0, BGEVENT_JUMPSTD, ELEVATOR_BUTTON_SCRIPT
 
 	def_object_events
-	object_event  8,  5, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FClerkScript, -1
+	object_event  8,  5, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FPunchTutorScript, -1
 	object_event  3,  6, SPRITE_LASS, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FLassScript, -1
 	object_event  6,  3, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Mike, -1
 	object_event 13,  5, SPRITE_POKEFAN_M, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore5FPokefanMScript, -1
@@ -42,7 +42,9 @@ GoldenrodDeptStore5FCheckIfSundayCallback:
 	appear GOLDENRODDEPTSTORE5F_RECEPTIONIST
 	endcallback
 
-GoldenrodDeptStore5FClerkScript:
+GoldenrodDeptStore5FPunchTutorScript:
+	; TODOTEXT
+	; add elemental punches tutor here
 	end
 
 GoldenrodDeptStore5FReceptionistScript:
@@ -162,9 +164,9 @@ GoldenrodDeptStore5FPokefanMText:
 
 GoldenrodDeptStore5FDirectoryText:
 	text "Customize Your"
-	line "#MON"
+	line "#mon"
 
-	para "5F TM CORNER"
+	para "5F Tutor Corner"
 	done
 
 GoldenrodDeptStore5FMysteryGiftCarrieScript:

@@ -69,8 +69,7 @@ GoldenrodDeptStore1FDirectoryText:
 
 	para "4F Medicine Box"
 
-	para "5F TM CORNER"
-	line "TODOTEXT"
+	para "5F Tutor Corner"
 
 	para "6F Tranquil Square"
 
