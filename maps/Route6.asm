@@ -18,7 +18,7 @@ Route6_MapEvents:
 	bg_event  6,  6, BGEVENT_ITEM + FOCUS_SASH, EVENT_ROUTE_6_HIDDEN_FOCUS_SASH
 
 	def_object_events
-	object_event 13,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 5, TrainerCamperTodd1, -1
+	object_event 13,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, TrainerCamperTodd, -1
 	object_event 15, 32, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerYoungsterSamuel, -1
 	object_event 11, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerYoungsterIan, -1
 	object_event 10, 26, SPRITE_LASS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 3, TrainerPicnickerGina, -1
@@ -80,126 +80,86 @@ DayCareMon2Script:
 	special DayCareMon2
 	endtext
 
-TrainerCamperTodd1:
-	trainer CAMPER, TODD1, EVENT_BEAT_CAMPER_TODD, CamperTodd1SeenText, CamperTodd1BeatenText, 0, .Script
+TrainerCamperTodd:
+	faceplayeropentext
+	checkevent EVENT_BEAT_CAMPER_TODD
+	iftrue .SkipThis
+	special SaveMusic
+	playmusic MUSIC_YOUNGSTER_ENCOUNTER
+	writethistext
+		text "I'm confident in"
+		line "my ability to"
+		cont "raise #mon."
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_CAMPER_TODD
+		para "Want to see?"
+		done
+	waitclosetext
+	winlosstext .BeatenText, 0
+	loadtrainer CAMPER, TODD
+	startbattle
+	reloadmapafterbattle
+	special RestoreMusic
+	setevent EVENT_BEAT_CAMPER_TODD
 	opentext
-	checkevent EVENT_TODD_MAX_ELIXER
-	iftrue .RematchGift
-	checkflag ENGINE_TODD_READY_FOR_REMATCH
-	iftrue .Rematch
+.SkipThis
+	loadvar VAR_CALLERID, PHONE_CAMPER_TODD
 	checkflag ENGINE_GOLDENROD_DEPT_STORE_SALE_IS_ON
 	iftrue .SaleIsOn
 	checkcellnum PHONE_CAMPER_TODD
 	iftrue .NumberAccepted
 	checkevent EVENT_TODD_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskAgain
-	writetext CamperTodd1AfterText
+	writethistext
+		text "Maybe I should"
+		line "take one to a Day-"
+		cont "Care or maybe use"
+		cont "some items…"
+		done
 	promptbutton
 	setevent EVENT_TODD_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .FinishAsk
-
 .AskAgain:
-	scall .AskNumber
-.FinishAsk:
+	callstd AskNumberMScript
 	askforphonenumber PHONE_CAMPER_TODD
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, CAMPER, TODD1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
+	gettrainername STRING_BUFFER_3, CAMPER, TODD
+	callstd RegisteredNumberMScript
+.NumberAccepted:
+	callstd NumberAcceptedMScript
+	sjump .ToddRematch
 
-.Rematch:
-	scall .RematchStd
-	winlosstext CamperTodd1BeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight4
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight3
-	checkflag ENGINE_FLYPOINT_BLACKTHORN
-	iftrue .LoadFight2
-	checkflag ENGINE_FLYPOINT_CIANWOOD
-	iftrue .LoadFight1
-	loadtrainer CAMPER, TODD1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_TODD_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer CAMPER, TODD2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_TODD_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer CAMPER, TODD3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_TODD_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer CAMPER, TODD4
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_TODD_READY_FOR_REMATCH
-	end
-
-.LoadFight4:
-	loadtrainer CAMPER, TODD5
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_TODD_READY_FOR_REMATCH
-	opentext
-	writetext CamperTodd_GiveMaxElixirAfterBattleText
-	waitbutton
-	verbosegiveitem MAX_ELIXER
-	iffalse .PackFull
-	closetext
-	end
-
-.RematchGift
-	writetext CamperTodd_AgainGiveMaxElixirAfterBattleText
-	waitbutton
-	verbosegiveitem MAX_ELIXER
-	iffalse .PackFull
-	clearevent EVENT_TODD_MAX_ELIXER
-	closetext
-	end
-
-.PackFull:
-	setevent EVENT_TODD_MAX_ELIXER
-	jumpstd PackFullMScript
-	end
+.BeatenText
+	text "Did I screw up my"
+	line "training?"
+	done
 
 .SaleIsOn:
-	writetext CamperToddSaleText
-	waitbutton
-	closetext
-	end
+	writethistext
+		text "Shopping under the"
+		line "sky!"
 
-.AskNumber:
-	jumpstd AskNumberMScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberMScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedMScript
-	end
+		para "It feels so nice"
+		line "up on a rooftop."
+		done
+	promptbutton
+	sjump .ToddRematch
 
 .NumberDeclined:
-	jumpstd NumberDeclinedMScript
-	end
-
-.RematchStd:
-	jumpstd RematchMScript
+	callstd NumberDeclinedMScript
+.ToddRematch:
+	writethistext
+		text "Up for a rematch?"
+		done
+	yesorno
+	iffalse_endtext
+	special SaveMusic
+	playmusic MUSIC_YOUNGSTER_ENCOUNTER
+	promptbutton
+	closetext
+	winlosstext .BeatenText, 0
+	loadtrainer CAMPER, TODD
+	startbattle
+	reloadmapafterbattle
+	special RestoreMusic
 	end
 
 TrainerPicnickerGina:
@@ -458,58 +418,6 @@ TrainerCooltrainerfKate:
 		done
 	waitbutton
 	end
-
-CamperTodd1SeenText:
-	text "I'm confident in"
-	line "my ability to"
-	cont "raise #MON."
-
-	para "Want to see?"
-	done
-
-CamperTodd1BeatenText:
-	text "Did I screw up my"
-	line "training?"
-	done
-
-CamperTodd1AfterText:
-	text "Maybe I should"
-	line "take one to a DAY-"
-
-	para "CARE. Or maybe use"
-	line "some items…"
-	done
-
-CamperToddSaleText:
-	text "Shopping under the"
-	line "sky!"
-
-	para "It feels so nice"
-	line "up on a rooftop."
-	done
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-CamperTodd_GiveMaxElixirAfterBattleText:
-	text "Great battle!"
-	line "Have this item!"
-	done
-
-CamperTodd_AgainGiveMaxElixirAfterBattleText:
-	text "Made space right?"
-	done
 
 DayCareSignText:
 	text "Day-Care"

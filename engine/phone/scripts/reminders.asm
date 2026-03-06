@@ -22,10 +22,6 @@ ReenaHurryScript:
 	farwritetext ReenaHurryText
 	end
 
-ToddForwardScript:
-	farwritetext ToddLookingForwardToBattleText
-	end
-
 ArnieReminderScript:
 	farwritetext ArnieReminderText
 	end

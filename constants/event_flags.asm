@@ -628,7 +628,7 @@
 	const EVENT_WALL_OPENED_IN_OMANYTE_CHAMBER
 	const EVENT_WALL_OPENED_IN_AERODACTYL_CHAMBER
 	const EVENT_WELCOMED_TO_POKECOM_CENTER
-	const EVENT_TODD_MAX_ELIXER
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -720,8 +720,8 @@
 	const_skip
 	const_skip
 	const EVENT_BEAT_CAMPER_TED
-	const EVENT_BEAT_CAMPER_TODD2
-	const EVENT_BEAT_CAMPER_TODD3
+	const_skip
+	const_skip
 	const_skip
 	const_skip
 	const_skip

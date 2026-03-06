@@ -421,15 +421,11 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass CAMPER ; 36
 	const ROLAND
-	const TODD1
+	const TODD
 	const IVAN
 	const ELLIOT
 	const TED
-	const TODD2
-	const TODD3
 	const SPENCER
-	const TODD4
-	const TODD5
 	const QUENTIN
 
 	trainerclass EXECUTIVEF ; 37
