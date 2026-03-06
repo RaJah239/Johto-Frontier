@@ -77,8 +77,9 @@ if DEF(_DEBUG)
 	giveitem MEMBERS_CARD
 	giveitem TYPE_CHART
 	giveitem BICYCLE
-	setflag ENGINE_BIKE_SHOP_CALL_ENABLED
-	setevent EVENT_GOT_BICYCLE	
+	clearflag ENGINE_BIKE_SHOP_CALL_ENABLED
+	setevent EVENT_GOT_BICYCLE
+	setmapscene DAY_CARE, SCENE_DAYCARE_NOOP
 	giveitem COIN_CASE
 	givecoins MAX_COINS
 	; all rods
