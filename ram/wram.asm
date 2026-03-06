@@ -2914,16 +2914,10 @@ wTimeCyclesSinceLastCall:: db
 wReceiveCallDelay_MinsRemaining:: db
 wReceiveCallDelay_StartTime:: ds 3
 
-	ds 3
-
 wBugContestMinsRemaining:: db
 wBugContestSecsRemaining:: db
 
-	ds 2
-
 wMapStatusEnd::
-
-	ds 2
 
 wCrystalData::
 wPlayerGender::
@@ -2999,8 +2993,6 @@ endr
 
 wStoneTableAddress:: dw
 
-	ds 25
-
 wUsedObjectPals:: db
 for n, 8
 wLoadedObjPal{d:n}:: db 
@@ -3009,7 +3001,7 @@ wNeededPalIndex:: db
 
 wMapObjects::
 wPlayerObject:: map_object wPlayer ; player is map object 0
-; wMap1Object - wMap15Object
+; wMap1Object - wMap17Object
 for n, 1, NUM_OBJECTS
 wMap{d:n}Object:: map_object wMap{d:n}
 endr
