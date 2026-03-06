@@ -19,11 +19,13 @@ IlexForest_MapEvents:
 	object_event  7, 28, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, IlexForestCharcoalApprenticeScript, EVENT_ILEX_FOREST_APPRENTICE
 	object_event  5, 28, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, IlexForestCharcoalMasterScript, EVENT_ILEX_FOREST_CHARCOAL_MASTER
 	object_event 15, 14, SPRITE_ROCKER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, IlexForestHeadbuttGuyScript, -1
-	object_event 20, 32, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IlexForestRevive, EVENT_ILEX_FOREST_REVIVE
 	object_event  8, 29, SPRITE_KURT, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ILEX_FOREST_KURT
 	object_event  3, 24, SPRITE_LASS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, IlexForestLassText, EVENT_ILEX_FOREST_LASS
-	object_event 12,  1, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 0, TrainerBugCatcherWayne, -1
-	object_event  9, 17, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IlexForestXAttack, EVENT_ILEX_FOREST_X_ATTACK
+	object_event 12,  1, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 0, TrainerBugCatcherWayne, -1
+	object_event  9, 17, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_GENERICTRAINER, 3, TrainerBugCatcherAdam, -1
+	object_event  2, 28, SPRITE_LASS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 4, TrainerLassSelina, -1
+	object_event 22, 33, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 1, TrainerSuperNerdTony, -1
+	object_event 20, 32, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IlexForestRevive, EVENT_ILEX_FOREST_REVIVE
 	object_event 17,  7, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IlexForestAntidote, EVENT_ILEX_FOREST_ANTIDOTE
 	object_event 27,  1, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IlexForestEther, EVENT_ILEX_FOREST_ETHER
 	object_event  3, 40, SPRITE_S_MUSHROOM, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, IlexForestTinyMushroomScript, EVENT_ILEX_FOREST_TINY_MUSHROOM1
@@ -36,13 +38,15 @@ IlexForest_MapEvents:
 	const ILEXFOREST_YOUNGSTER1
 	const ILEXFOREST_BLACK_BELT
 	const ILEXFOREST_ROCKER
-	const ILEXFOREST_POKE_BALL1
 	const ILEXFOREST_KURT
-	const ILEXFOREST_LASS
-	const ILEXFOREST_YOUNGSTER2
+	const ILEXFOREST_LASS1
+	const ILEXFOREST_BUGCATCHER1
+	const ILEXFOREST_BUGCATCHER2
+	const ILEXFOREST_LASS2
+	const ILEXFOREST_SUPERNERD
+	const ILEXFOREST_POKE_BALL1
 	const ILEXFOREST_POKE_BALL2
 	const ILEXFOREST_POKE_BALL3
-	const ILEXFOREST_POKE_BALL4
 	const ILEXFOREST_S_MUSHROOM1
 	const ILEXFOREST_S_MUSHROOM2
 	const ILEXFOREST_L_MUSHROOM
@@ -210,7 +214,7 @@ IlexForestShrineScript:
 	clearevent EVENT_FOREST_IS_RESTLESS
 	setevent EVENT_AZALEA_TOWN_KURT
 	setevent EVENT_CELEBI_FATEFUL_ENCOUNTER ; remove after and give proper event to #dex
-	disappear ILEXFOREST_LASS
+	disappear ILEXFOREST_LASS1
 	clearevent EVENT_ROUTE_6_ILEX_FOREST_GATE_LASS
 	writethistext
 		text "<PLAYER> put in the"
@@ -302,6 +306,51 @@ TrainerBugCatcherWayne:
 .BeatenText
 	text "Oh… And I thought"
 	line "they were strong…"
+	done
+
+TrainerBugCatcherAdam:
+	generictrainer BUG_CATCHER, ADAM, EVENT_BEAT_BUG_CATCHER_ADAM, .SeenText, .BeatenText
+
+.AfterText
+	text "TODOTEXT"
+	done
+
+.SeenText
+	text "TODOTEXT"
+	done
+
+.BeatenText
+	text "TODOTEXT"
+	done
+
+TrainerLassSelina:
+	generictrainer LASS, SELINA, EVENT_BEAT_LASS_SELINA, .SeenText, .BeatenText
+
+.AfterText
+	text "TODOTEXT"
+	done
+
+.SeenText
+	text "TODOTEXT"
+	done
+
+.BeatenText
+	text "TODOTEXT"
+	done
+
+TrainerSuperNerdTony:
+	generictrainer SUPER_NERD, TONY, EVENT_BEAT_SUPER_NERD_TONY, .SeenText, .BeatenText
+
+.AfterText
+	text "TODOTEXT"
+	done
+
+.SeenText
+	text "TODOTEXT"
+	done
+
+.BeatenText
+	text "TODOTEXT"
 	done
 
 IlexForestScytherCallback:
@@ -733,8 +782,8 @@ MovementData_Scyther_Pos6_Pos7:
 	big_step LEFT
 	big_step UP
 	big_step UP
-	big_step RIGHT
 	big_step UP
+	big_step RIGHT
 	big_step UP
 	step_end
 
@@ -761,8 +810,8 @@ MovementData_Scyther_Pos7_Pos8:
 
 MovementData_Scyther_Pos7_Pos6:
 	big_step DOWN
-	big_step DOWN
 	big_step LEFT
+	big_step DOWN
 	big_step DOWN
 	big_step DOWN
 	big_step RIGHT
@@ -928,8 +977,6 @@ IlexForestSignpostText:
 
 IlexForestRevive:
 	itemball REVIVE
-IlexForestXAttack:
-	itemball POTION
 IlexForestAntidote:
 	itemball ANTIDOTE
 IlexForestEther:

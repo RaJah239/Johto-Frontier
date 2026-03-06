@@ -163,6 +163,7 @@ DEF KRIS EQU __trainer_class__
 	const DANA3
 	const DANA4
 	const DANA5
+	const SELINA
 
 	trainerclass JANINE ; 1a
 	const JANINE1
@@ -281,6 +282,7 @@ DEF KRIS EQU __trainer_class__
 	const ARNIE5
 	const WAYNE
 	const EMMANUEL
+	const ADAM
 
 	trainerclass FISHER ; 25
 	const JUSTIN
@@ -336,6 +338,7 @@ DEF KRIS EQU __trainer_class__
 	const TERU
 	const HUGH
 	const MARKUS
+	const TONY
 
 	trainerclass RIVAL2 ; 2a
 	const RIVAL2_1_CHIKORITA
