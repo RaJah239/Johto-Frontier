@@ -265,6 +265,7 @@ IlexForestShrineScript:
 	applymovement ILEXFOREST_KURT, IlexForestKurtStepsDownMovement
 	disappear ILEXFOREST_KURT
 .DidntCatchCelebi:
+	special RestartMapMusic
 	end
 
 IlexForestPlayerStepsDownMovement:
