@@ -12,7 +12,7 @@ SpriteMons:
 	db MAGIKARP
 	db SQUIRTLE
 	db CHANSEY
-	db DITTO
+	db TANGELA
 	db FEEBAS
 	db PIKACHU
 	db CLEFAIRY
