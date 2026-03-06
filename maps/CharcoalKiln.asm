@@ -81,11 +81,14 @@ CharcoalKilnApprentice:
 CharcoalKilnScyther:
 	setval SCYTHER
 	special SetMonAsSeen
+	isfieldactionssettoquick
+	iftrue .skipthis
 	reanchormap
 	pokepic SCYTHER
 	cry SCYTHER
 	waitbutton
 	closepokepic
+.skipthis
 	jumpthistext
 		text "Scyther: Scyth!"
 		done

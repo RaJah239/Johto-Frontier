@@ -65,11 +65,14 @@ GoldenrodDeptStoreB1FBlackBelt3Text:
 GoldenrodDeptStoreB1FHariyamaScript:
 	setval HARIYAMA
 	special SetMonAsSeen
+	isfieldactionssettoquick
+	iftrue .skipthis
 	reanchormap
 	pokepic HARIYAMA
 	cry HARIYAMA
 	waitbutton
 	closepokepic
+.skipthis
 	jumpthistext
 		text "Hariyama: Yaaa!"
 		done

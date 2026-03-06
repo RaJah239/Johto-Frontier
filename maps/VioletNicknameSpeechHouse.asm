@@ -25,11 +25,14 @@ VioletNicknameSpeechHouse_MapScripts:
 VioletNicknameSpeechHouseBirdScript:
 	setval PIDGEY
 	special SetMonAsSeen
+	isfieldactionssettoquick
+	iftrue .skipthis
 	reanchormap
 	pokepic PIDGEY
 	cry PIDGEY
 	waitbutton
 	closepokepic
+.skipthis
 	jumpthistext
 		text "Strawberry: Pijji!"
 		done
