@@ -1,3 +1,59 @@
+GoldenrodCity_MapEvents:
+	def_warp_events
+	warp_event 15, 27, GOLDENROD_POKECENTER_1F, 1
+	warp_event 24,  7, GOLDENROD_GYM, 1
+	warp_event 29, 29, GOLDENROD_BIKE_SHOP, 1
+	warp_event 35, 25, GOLDENROD_HAPPINESS_RATER, 1
+	warp_event  5, 25, BILLS_FAMILYS_HOUSE, 1
+	warp_event  9, 13, GOLDENROD_MAGNET_TRAIN_STATION, 2
+	warp_event 29,  5, GOLDENROD_FLOWER_SHOP, 1
+	warp_event 33,  9, GOLDENROD_PP_SPEECH_HOUSE, 1
+	warp_event 15,  7, GOLDENROD_NAME_RATER, 1
+	warp_event 24, 27, GOLDENROD_DEPT_STORE_1F, 1
+	warp_event 14, 21, GOLDENROD_GAME_CORNER, 2
+	warp_event  5, 15, RADIO_TOWER_1F, 1
+	warp_event 19,  1, ROUTE_7_GOLDENROD_GATE, 3
+	warp_event  9,  5, GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES, 8
+	warp_event 11, 29, GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES, 5
+	warp_event 32, 15, GOLDENROD_MANSION_1F, 5
+	warp_event 33, 15, GOLDENROD_MANSION_1F, 5
+	warp_event 32, 21, GOLDENROD_MANSION_1F, 3
+
+	def_coord_events
+
+	def_bg_events
+	bg_event 16, 27, BGEVENT_JUMPSTD, POKECENTER_SIGN_SCRIPT
+	bg_event 10, 14, BGEVENT_JUMPTEXT, GoldenrodCityStationSignText
+	bg_event  4, 17, BGEVENT_JUMPTEXT, GoldenrodCityRadioTowerSignText
+	bg_event 26, 27, BGEVENT_JUMPTEXT, GoldenrodDeptStoreSignText
+	bg_event 26,  9, BGEVENT_JUMPTEXT, GoldenrodGymSignText
+	bg_event 22, 18, BGEVENT_JUMPTEXT, GoldenrodCitySignText
+	bg_event 30, 30, BGEVENT_JUMPTEXT, GoldenrodCityBikeShopSignText
+	bg_event 16, 22, BGEVENT_JUMPTEXT, GoldenrodCityGameCornerSignText
+	bg_event 12,  7, BGEVENT_JUMPTEXT, GoldenrodCityNameRaterSignText
+	bg_event  8,  6, BGEVENT_JUMPTEXT, GoldenrodCityUndergroundSignText
+	bg_event 12, 30, BGEVENT_JUMPTEXT, GoldenrodCityUndergroundSignText
+	bg_event 30,  6, BGEVENT_JUMPTEXT, GoldenrodCityFlowerShopSignText
+	bg_event 34, 22, BGEVENT_JUMPTEXT, GoldenrodCityMansionSignText
+	bg_event  4, 26, BGEVENT_JUMPTEXT, GoldenrodCityBillsFamilyHouseSignText
+
+	def_object_events
+	object_event  7, 18, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityPokefanMScript, EVENT_GOLDENROD_CITY_CIVILIANS
+	object_event 26, 16, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityYoungster1Script, EVENT_GOLDENROD_CITY_CIVILIANS
+	object_event 12, 16, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, GoldenrodCityCooltrainerF1Script, EVENT_GOLDENROD_CITY_CIVILIANS
+	object_event 20, 26, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_WANDER, 1, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityCooltrainerF2Script, EVENT_GOLDENROD_CITY_CIVILIANS
+	object_event 19, 17, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodCityYoungster2Script, EVENT_GOLDENROD_CITY_CIVILIANS
+	object_event 17, 10, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, GoldenrodCityLassScript, EVENT_GOLDENROD_CITY_CIVILIANS
+	object_event 11, 27, SPRITE_GRAMPS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityGrampsScript, EVENT_GOLDENROD_CITY_CIVILIANS
+	object_event  4, 16, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocketScoutScript, EVENT_GOLDENROD_CITY_ROCKET_SCOUT
+	object_event 28, 19, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket1Script, EVENT_GOLDENROD_CITY_ROCKET_TAKEOVER
+	object_event  8, 15, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket2Script, EVENT_GOLDENROD_CITY_ROCKET_TAKEOVER
+	object_event 16, 23, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket3Script, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event 29, 19, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket4Script, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event 29,  7, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket5Script, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event 31, 10, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket6Script, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event 12, 22, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodCityMoveTutorScript, -1
+
 	object_const_def
 	const GOLDENRODCITY_POKEFAN_M1
 	const GOLDENRODCITY_YOUNGSTER1
@@ -19,43 +75,51 @@ GoldenrodCity_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_NEWMAP, GoldenrodCityFlypointAndFloriaCallback
+	callback MAPCALLBACK_NEWMAP, GoldenrodCityFlypointCallback
 
-GoldenrodCityFlypointAndFloriaCallback:
+GoldenrodCityFlypointCallback:
 	setflag ENGINE_FLYPOINT_GOLDENROD
-	setflag ENGINE_REACHED_GOLDENROD
-	checkevent EVENT_MET_FLORIA
-	iftrue .FloriaDone
-	clearevent EVENT_FLORIA_AT_SUDOWOODO
-.FloriaDone:
 	endcallback
 
 GoldenrodCityMoveTutorScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkitem COIN_CASE
 	iffalse .NoCoinCaseText
 	special DisplayCoinCaseBalance
 	checkevent EVENT_MET_GOLDENROD_MOVE_TUTOR
 	iftrue .WantMeToTeachAGreatMove
-	writetext GoldenrodCityMoveTutorIntroText
+	writethistext
+		text "I can teach your"
+		line "#mon amazing"
+		cont "moves but each"
+		cont "costs 9,999 coins."
+		done
 	setevent EVENT_MET_GOLDENROD_MOVE_TUTOR
 	waitbutton
-.WantMeToTeachAGreatMove
-	writetext GoldenrodCityMoveTutorAskToTeachText
+.WantMeToTeachAGreatMove:
+	writethistext
+		text "Teach a move for"
+		line "9,999 coins?"
+		done
 	yesorno
 	iffalse .Refused
 	special DisplayCoinCaseBalance
 	checkcoins 9999
 	ifequal HAVE_LESS, .NotEnoughMoney
-	writetext GoldenrodCityMoveTutorWhichMoveShouldITeachText
+	writethistext
+		text "Which move should"
+		line "I teach?"
+		done
 	loadmenu .MoveMenuHeader
 	verticalmenu
 	closewindow
 	ifequal 1, .Flamethrower
 	ifequal 2, .Thunderbolt
 	ifequal 3, .IceBeam
-	sjump .Cancel
+.Cancel:
+	jumpthisopenedtext
+		text "Another time then…"
+		done
 
 .Flamethrower:
 	setval MT01_MOVE
@@ -93,16 +157,18 @@ GoldenrodCityMoveTutorScript:
 	db "Cancel@"
 
 .Refused:
-	writetext GoldenrodCityMoveTutorAwwButTheyreAmazingText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+	text "Aww… But they're"
+	line "amazing…"
+	done
 
 .NoCoinCaseText:
-	writetext GoldenrodCityMoveTutorNoCoinCaseText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+	text "I can teach your"
+	line "#mon amazing"
+	cont "if you owned a"
+	cont "Coin Case…"
+	done
 
 .TeachMove:
 	special DisplayCoinCaseBalance
@@ -110,22 +176,19 @@ GoldenrodCityMoveTutorScript:
 	waitsfx
 	playsound SFX_TRANSACTION
 	special DisplayCoinCaseBalance
-	writetext GoldenrodCityMoveTutorComeBackAnytimeText
-	waitbutton
-	closetext
-	end
-
-.Cancel:
-	writetext GoldenrodCityMoveTutorAnytimeThenText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+	text "Come back anytime!"
+	done
 
 .NotEnoughMoney:
-	writetext GoldenrodCityMoveTutorYouDontHaveEnoughCoinsText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+	text "…You don't have"
+	line "enough coins here…"
+	done
+
+GoldenrodCityMoveTutorMoveText:
+	text_start
+	done
 
 GoldenrodCityPokefanMScript:
 	jumptextfaceplayer GoldenrodCityPokefanMText
@@ -202,42 +265,6 @@ GoldenrodCityRocket5Script:
 
 GoldenrodCityRocket6Script:
 	jumptextfaceplayer GoldenrodCityRocket6Text
-
-GoldenrodCityStationSign:
-	jumptext GoldenrodCityStationSignText
-
-GoldenrodCityRadioTowerSign:
-	jumptext GoldenrodCityRadioTowerSignText
-
-GoldenrodDeptStoreSign:
-	jumptext GoldenrodDeptStoreSignText
-
-GoldenrodGymSign:
-	jumptext GoldenrodGymSignText
-
-GoldenrodCitySign:
-	jumptext GoldenrodCitySignText
-
-GoldenrodCityBikeShopSign:
-	jumptext GoldenrodCityBikeShopSignText
-
-GoldenrodCityGameCornerSign:
-	jumptext GoldenrodCityGameCornerSignText
-
-GoldenrodCityNameRaterSign:
-	jumptext GoldenrodCityNameRaterSignText
-
-GoldenrodCityUndergroundSignNorth:
-	jumptext GoldenrodCityUndergroundSignNorthText
-
-GoldenrodCityUndergroundSignSouth:
-	jumptext GoldenrodCityUndergroundSignSouthText
-
-GoldenrodCityPokecenterSign:
-	jumpstd PokecenterSignScript
-
-GoldenrodCityFlowerShopSign:
-	jumptext GoldenrodCityFlowerShopSignText
 
 GoldenrodCityPokefanMText:
 	text "They built the new"
@@ -371,35 +398,63 @@ GoldenrodCityRocket6Text:
 	cont "TEAM ROCKET!"
 	done
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 GoldenrodCityStationSignText:
-	text "GOLDENROD CITY"
-	line "STATION"
+	text "Goldenrod City"
+	line "Station"
 	done
 
 GoldenrodCityRadioTowerSignText:
-	text "GOLDENROD CITY"
-	line "RADIO TOWER"
+	text "Goldenrod City"
+	line "Radio Tower"
 	done
 
 GoldenrodDeptStoreSignText:
 	text "Full Selection of"
-	line "#MON Goods!"
+	line "#mon Goods!"
 
-	para "GOLDENROD CITY"
-	line "DEPT.STORE"
+	para "Goldenrod City"
+	line "Dept.Store"
 	done
 
 GoldenrodGymSignText:
-	text "GOLDENROD CITY"
-	line "#MON GYM"
-	cont "LEADER: WHITNEY"
+	text "Goldenrod City"
+	line "#mon Gym"
+	cont "Leader: Whitney"
 
 	para "The Incredibly"
 	line "Pretty Girl!"
 	done
 
 GoldenrodCitySignText:
-	text "GOLDENROD CITY"
+	text "Goldenrod City"
 
 	para "The Festive City"
 	line "of Opulent Charm"
@@ -408,153 +463,38 @@ GoldenrodCitySignText:
 GoldenrodCityBikeShopSignText:
 	text "The World is a"
 	line "Cycle Path!"
-	cont "BIKE SHOP"
+	cont "Bike Shop"
 	done
 
 GoldenrodCityGameCornerSignText:
 	text "Your Playground!"
 
-	para "GOLDENROD CITY"
-	line "GAME CORNER"
+	para "Goldenrod City"
+	line "Game Corner"
 	done
 
 GoldenrodCityNameRaterSignText:
-	text "#-BROS."
+	text "#-Bros."
 
 	para "We can help you"
 	line "and your friends!"
 	done
 
-GoldenrodCityUndergroundSignNorthText:
-	text "UNDERGROUND"
-	line "ENTRANCE"
-	done
-
-GoldenrodCityUndergroundSignSouthText:
-	text "UNDERGROUND"
-	line "ENTRANCE"
+GoldenrodCityUndergroundSignText:
+	text "Underground"
+	line "Entrance"
 	done
 
 GoldenrodCityFlowerShopSignText:
 	text "Blooming Beautiful"
-	line "FLOWER SHOP"
+	line "Flower Shop"
 	done
-
-GoldenrodCityMoveTutorNoCoinCaseText:
-	text "I can teach your"
-	line "#mon amazing"
-
-	para "if you owned a"
-	line "Coin Case…"
-	done
-
-GoldenrodCityMoveTutorIntroText:
-	text "I can teach your"
-	line "#mon amazing"
-
-	para "moves but each"
-	line "costs 9,999 coins."
-	done
-
-GoldenrodCityMoveTutorAskToTeachText:
-	text "Teach a move for"
-	line "9,999 coins?"
-	done
-
-GoldenrodCityMoveTutorAwwButTheyreAmazingText:
-	text "Aww… But they're"
-	line "amazing…"
-	done
-
-GoldenrodCityMoveTutorWhichMoveShouldITeachText:
-	text "Which move should"
-	line "I teach?"
-	done
-
-GoldenrodCityMoveTutorAnytimeThenText:
-	text "Another time then…"
-	done
-
-GoldenrodCityMoveTutorComeBackAnytimeText:
-	text "Come back anytime!"
-	done
-
-GoldenrodCityMoveTutorYouDontHaveEnoughCoinsText:
-	text "…You don't have"
-	line "enough coins here…"
-	done
-
-GoldenrodCityMoveTutorMoveText:
-	text_start
-	done
-
-GoldenrodCityMansionSign:
-	jumptext GoldenrodCityMansionSignText
 
 GoldenrodCityMansionSignText:
 	text "Goldenrod Mansion"
 	done
 
-GoldenrodCityBillsFamilyHouseSign:
-	jumptext GoldenrodCityBillsFamilyHouseSignText
-
 GoldenrodCityBillsFamilyHouseSignText:
 	text "Bill's Family"
 	line "House"
 	done
-
-GoldenrodCity_MapEvents:
-	def_warp_events
-	warp_event 15, 27, GOLDENROD_POKECENTER_1F, 1
-	warp_event 24,  7, GOLDENROD_GYM, 1
-	warp_event 29, 29, GOLDENROD_BIKE_SHOP, 1
-	warp_event 35, 25, GOLDENROD_HAPPINESS_RATER, 1
-	warp_event  5, 25, BILLS_FAMILYS_HOUSE, 1
-	warp_event  9, 13, GOLDENROD_MAGNET_TRAIN_STATION, 2
-	warp_event 29,  5, GOLDENROD_FLOWER_SHOP, 1
-	warp_event 33,  9, GOLDENROD_PP_SPEECH_HOUSE, 1
-	warp_event 15,  7, GOLDENROD_NAME_RATER, 1
-	warp_event 24, 27, GOLDENROD_DEPT_STORE_1F, 1
-	warp_event 14, 21, GOLDENROD_GAME_CORNER, 2
-	warp_event  5, 15, RADIO_TOWER_1F, 1
-	warp_event 19,  1, ROUTE_7_GOLDENROD_GATE, 3
-	warp_event  9,  5, GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES, 8
-	warp_event 11, 29, GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES, 5
-	warp_event 32, 15, GOLDENROD_MANSION_1F, 5
-	warp_event 33, 15, GOLDENROD_MANSION_1F, 5
-	warp_event 32, 21, GOLDENROD_MANSION_1F, 3
-
-	def_coord_events
-
-	def_bg_events
-	bg_event 10, 14, BGEVENT_READ, GoldenrodCityStationSign
-	bg_event  4, 17, BGEVENT_READ, GoldenrodCityRadioTowerSign
-	bg_event 26, 27, BGEVENT_READ, GoldenrodDeptStoreSign
-	bg_event 26,  9, BGEVENT_READ, GoldenrodGymSign
-	bg_event 22, 18, BGEVENT_READ, GoldenrodCitySign
-	bg_event 30, 30, BGEVENT_READ, GoldenrodCityBikeShopSign
-	bg_event 16, 22, BGEVENT_READ, GoldenrodCityGameCornerSign
-	bg_event 12,  7, BGEVENT_READ, GoldenrodCityNameRaterSign
-	bg_event  8,  6, BGEVENT_READ, GoldenrodCityUndergroundSignNorth
-	bg_event 12, 30, BGEVENT_READ, GoldenrodCityUndergroundSignSouth
-	bg_event 16, 27, BGEVENT_UP, GoldenrodCityPokecenterSign
-	bg_event 30,  6, BGEVENT_READ, GoldenrodCityFlowerShopSign
-	bg_event 34, 22, BGEVENT_READ, GoldenrodCityMansionSign
-	bg_event  4, 26, BGEVENT_READ, GoldenrodCityBillsFamilyHouseSign
-
-	def_object_events
-	object_event  7, 18, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityPokefanMScript, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 26, 16, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityYoungster1Script, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 12, 16, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, GoldenrodCityCooltrainerF1Script, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 20, 26, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_WANDER, 1, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityCooltrainerF2Script, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 19, 17, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodCityYoungster2Script, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 17, 10, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, GoldenrodCityLassScript, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 11, 27, SPRITE_GRAMPS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityGrampsScript, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event  4, 16, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocketScoutScript, EVENT_GOLDENROD_CITY_ROCKET_SCOUT
-	object_event 28, 19, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket1Script, EVENT_GOLDENROD_CITY_ROCKET_TAKEOVER
-	object_event  8, 15, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket2Script, EVENT_GOLDENROD_CITY_ROCKET_TAKEOVER
-	object_event 16, 23, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket3Script, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	object_event 29, 19, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket4Script, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	object_event 29,  7, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket5Script, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	object_event 31, 10, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityRocket6Script, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	object_event 12, 22, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodCityMoveTutorScript, -1
