@@ -1,5 +1,5 @@
 ; these numbers must between 0-255
-; 10/256 chance to get a berry
+; 10/256 chance to get a full restore
 
 NPC_MysteryGiftItems:
 	; eon mail
@@ -23,11 +23,6 @@ NPC_MysteryGiftItems:
 	db 6, NUGGET
 	db 2, CRYSTAL
 
-	; berries
-	db 6, MIRACLEBERRY
-	db 6, SILVER_BERRY
-	db 6, GOLD_BERRY
-
 	; pokeballs
 	db 8, POKE_BALL
 	db 6, GREAT_BALL
@@ -46,11 +41,11 @@ NPC_MysteryGiftItems:
 
 	; vitamins
 	db 40, RARE_CANDY
-	db 6, HP_UP
-	db 6, PROTEIN
-	db 6, IRON
-	db 6, CALCIUM
-	db 6, ZINC
-	db 6, CARBOS
+	db 9, HP_UP
+	db 9, PROTEIN
+	db 9, IRON
+	db 9, CALCIUM
+	db 9, ZINC
+	db 9, CARBOS
 	db 2, HYPER_EV_UP
 	db -1 ; end
