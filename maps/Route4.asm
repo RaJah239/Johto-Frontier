@@ -123,8 +123,9 @@ Route4CooltrainerMScript:
 
 .DontHaveZephyrBadge:
 	jumpthisopenedtext
-		text "You should try get"
-		line "Violet Gym's badge."
+		text "You should try to"
+		line "get Violet Gym's"
+		cont "badge."
 		done
 
 Route4RoarTMGuyScript:
