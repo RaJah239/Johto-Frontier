@@ -26,7 +26,7 @@ SpriteMons:
 	db AMPHAROS
 	db TENTACOOL
 	db TAUROS
-	db DITTO
+	db HARIYAMA ; in use
 	db VOLTORB
 	db LAPRAS
 	db URSALUNA

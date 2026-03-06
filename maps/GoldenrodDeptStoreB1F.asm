@@ -12,7 +12,7 @@ GoldenrodDeptStoreB1F_MapEvents:
 	object_event  9, 10, SPRITE_BLACK_BELT, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodDeptStoreB1FBlackBelt1Text, -1
 	object_event  4,  8, SPRITE_BLACK_BELT, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodDeptStoreB1FBlackBelt2Text, -1
 	object_event  6, 13, SPRITE_BLACK_BELT, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodDeptStoreB1FBlackBelt3Text, -1
-	object_event  7,  7, SPRITE_MACHOP, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStoreB1FMachopScript, -1
+	object_event  7,  7, SPRITE_HARIYAMA, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStoreB1FHariyamaScript, -1
 	object_event 10, 15, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, GoldenrodDeptStoreB1FMaxEther, EVENT_GOLDENROD_DEPT_STORE_B1F_MAX_ETHER
 	object_event 14,  2, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, GoldenrodDeptStoreB1FAmuletCoin, EVENT_GOLDENROD_DEPT_STORE_B1F_AMULET_COIN
 	object_event  6,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, GoldenrodDeptStoreB1FFullHeal, EVENT_GOLDENROD_DEPT_STORE_B1F_FULL_HEAL
@@ -65,16 +65,17 @@ GoldenrodDeptStoreB1FBlackBelt3Text:
 	line "want it!"
 	done
 
-GoldenrodDeptStoreB1FMachopScript:
-	opentext
-	writetext GoldenrodDeptStoreB1FMachokeText
+GoldenrodDeptStoreB1FHariyamaScript:
+	setval HARIYAMA
+	special SetMonAsSeen
+	reanchormap
+	pokepic HARIYAMA
+	cry HARIYAMA
 	waitbutton
-	closetext
-	end
-
-GoldenrodDeptStoreB1FMachokeText:
-	text "MACHOKE: Maaacho!"
-	done
+	closepokepic
+	jumpthistext
+		text "Hariyama: Yaaa!"
+		done
 
 GoldenrodDeptStoreB1FMaxEther:
 	itemball MAX_ETHER
