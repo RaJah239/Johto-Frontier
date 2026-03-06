@@ -33,9 +33,6 @@ GoldenrodDeptStoreB1F_MapScripts:
 
 	def_callbacks
 
-	checkevent EVENT_GOLDENROD_DEPT_STORE_B1F_LAYOUT_2
-	checkevent EVENT_GOLDENROD_DEPT_STORE_B1F_LAYOUT_3
-
 GoldenrodDeptStoreB1FBlackBelt1Text:
 	text "Hey, kid! You're"
 	line "holding us up!"
