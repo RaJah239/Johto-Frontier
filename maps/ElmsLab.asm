@@ -488,10 +488,26 @@ ElmGivesPokedexScript:
 	pause 20
 	turnobject PLAYER, UP
 	pause 10
-	showthistext
-		text "Have fun out there"
+	opentext
+	isdialogueminimal
+	iftrue .skipthis3
+	writethistext
+		text "Take 25× of these!"
+		done
+	promptbutton
+.skipthis3
+	verbosegiveitem MAX_REPEL, 25
+	isdialogueminimal
+	iftrue .skipthis4
+	writethistext
+		text "They make travel-"
+		line "ing convenient."
+
+		para "Have fun out there"
 		line "<PLAYER>."
 		done
+.skipthis4
+	waitclosetext
 	turnobject PLAYER, DOWN
 	setevent EVENT_GOT_A_POKEMON_FROM_ELM
 	setscene SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
