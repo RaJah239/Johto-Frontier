@@ -1,3 +1,22 @@
+GoldenrodNameRater_MapEvents:
+	def_warp_events
+	warp_event  2,  7, GOLDENROD_CITY, 9
+	warp_event  3,  7, GOLDENROD_CITY, 9
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  0,  1, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  1,  1, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  7,  1, BGEVENT_JUMPSTD, RADIO2SCRIPT
+
+	def_object_events
+	object_event  5,  3, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_LEFT, 2, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodNameRater, -1
+	object_event  2,  4, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, SwarmGrampsScript, -1
+	object_event  2,  3, SPRITE_SAGE, SPRITEMOVEDATA_STANDING_RIGHT, 2, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, MoveRelearnerScript, -1
+	object_event  5,  4, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodNameRaterMoveDeleterScript, -1
+	object_event  0,  5, SPRITE_FISHER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, HelpGuyText, -1
+
 	object_const_def
 	const GOLDENRODNAMERATER_NAME_RATER
 	const GOLDENRODNAMERATER_SWARM_GRAMPS
@@ -11,20 +30,59 @@ GoldenrodNameRater_MapScripts:
 	def_callbacks
 
 GoldenrodNameRater:
-	faceplayer
-	opentext
+	faceplayeropentext
 	special NameRater
-	waitbutton
-	closetext
+	waitclosetext
 	turnobject GOLDENRODNAMERATER_NAME_RATER, LEFT
 	end
 
+MoveRelearnerScript:
+	faceplayeropentext
+	special MoveRelearner
+	waitclosetext
+	turnobject GOLDENRODNAMERATER_MOVE_RELEARNER, RIGHT
+	end
+
+GoldenrodNameRaterMoveDeleterScript:
+	faceplayeropentext
+	special MoveDeletion
+	waitclosetext
+	turnobject GOLDENRODNAMERATER_MOVE_DELETER, LEFT
+	end
+
+HelpGuyText:
+	text "Hi! We're your"
+	line "one-stop #-"
+	cont "solution!"
+	
+	para "The man wearing"
+	line "the hat, changes"
+	cont "nicknames."
+
+	para "Next to him, he"
+	line "deletes moves."
+	
+	para "The man above"
+	line "gramps teaches"
+	cont "forgotten moves…"
+	cont "for a fee!"
+	
+	para "Gramps tells of"
+	line "#mon swarms."
+	
+	para "And me? I'm here"
+	line "to help too!"
+	done
+
 SwarmGrampsScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkflag ENGINE_SWARM
 	iftrue .skiprandomswarm
-	writetext GeneralPreSwarmText
+	writethistext
+		text "Let me see…"
+		line "What did the news"
+		cont "say?"
+		done
 	promptbutton
 	random 8
 	ifequal 0, .bulbasaur
@@ -85,18 +143,26 @@ SwarmGrampsScript:
 	sjump .WrappingUpSwarms
 
 .skiprandomswarm
-	writetext SkipSwarmText
+	writethistext
+		text "You forgot which"
+		line "#mon is swarm-"
+		cont "ing?"
+		
+		para "Me too! I'm old."
+
+		para "What I do remember"
+		line "is there are 8"
+		cont "#mon swarms and"
+		cont "they change at"
+		cont "midnight daily."
+
+		para "You ought to visit"
+		line "another day too."
+		done
 .WrappingUpSwarms:
-	waitbutton
-	closetext
+	waitclosetext
 	turnobject GOLDENRODNAMERATER_SWARM_GRAMPS, DOWN
 	end
-
-GeneralPreSwarmText:
-	text "Let me see…"
-	line "What did the news"
-	cont "say?"
-	done
 
 SwarmBulbasaurText:
 	text "There's a swarm of"
@@ -169,96 +235,3 @@ SwarmDittoText:
 	line "DITTO on"
 	cont "ROUTE 7!"
 	done
-
-SkipSwarmText:
-	text "You forgot which"
-	line "#MON is swarm-"
-	cont "ing?"
-	
-	para "Me too! I'm old."
-
-	para "What I do remember"
-	line "is there are 8"
-	para "#MON swarms and"
-	line "they change daily."
-
-	para "You ought to visit"
-	line "another day too."
-	done
-
-MoveRelearnerScript:
-	faceplayer
-	opentext
-	special MoveRelearner
-	waitbutton
-	closetext
-	turnobject GOLDENRODNAMERATER_MOVE_RELEARNER, RIGHT
-	end
-
-GoldenrodNameRaterBookshelf:
-	jumpstd DifficultBookshelfScript
-
-GoldenrodNameRaterRadio:
-	jumpstd Radio2Script
-
-GoldenrodNameRaterMoveDeleterScript:
-	faceplayer
-	opentext
-	special MoveDeletion
-	waitbutton
-	closetext
-	turnobject GOLDENRODNAMERATER_MOVE_DELETER, LEFT
-	end
-
-HelpGuyScript:
-	faceplayer
-	opentext
-	writetext IHelpText
-	waitbutton
-	closetext
-	end
-
-IHelpText:
-	text "Hi! We're your"
-	line "one-stop #-"
-	cont "solution!"
-	
-	para "The man wearing"
-	line "the hat, changes"
-	cont "nicknames."
-
-	para "Next to him, he"
-	line "deletes moves,"
-	cont "including HMs."
-	
-	para "The man above"
-	line "gramps teaches"
-
-	para "forgotten moves…"
-	line "for a fee!"
-	
-	para "Gramps tells of"
-	line "#MON swarms."
-	
-	para "And me? I'm here"
-	line "to help too!"
-	done
-
-GoldenrodNameRater_MapEvents:
-	def_warp_events
-	warp_event  2,  7, GOLDENROD_CITY, 9
-	warp_event  3,  7, GOLDENROD_CITY, 9
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  0,  1, BGEVENT_READ, GoldenrodNameRaterBookshelf
-	bg_event  1,  1, BGEVENT_READ, GoldenrodNameRaterBookshelf
-	bg_event  7,  1, BGEVENT_READ, GoldenrodNameRaterRadio
-
-	def_object_events
-	object_event  5,  3, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_LEFT, 2, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodNameRater, -1
-	object_event  2,  4, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, SwarmGrampsScript, -1
-	object_event  2,  3, SPRITE_SAGE, SPRITEMOVEDATA_STANDING_RIGHT, 2, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, MoveRelearnerScript, -1
-	object_event  5,  4, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodNameRaterMoveDeleterScript, -1
-	object_event  0,  5, SPRITE_FISHER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, HelpGuyScript, -1
