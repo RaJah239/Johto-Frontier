@@ -14,6 +14,7 @@ GoldenrodDeptStore3F_MapEvents:
 	object_event  6,  1, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodDeptStore3FClerkScript, -1
 	object_event 12,  5, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 1, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodDeptStore3FSuperNerdText, -1
 	object_event  2,  5, SPRITE_ROCKER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodDeptStore3FRockerText, -1
+	object_event  7,  4, SPRITE_TEACHER, SPRITEMOVEDATA_WANDER, 0, 1, -2, -2, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodDeptStore3FTeacherText, -1
 
 	object_const_def
 	const GOLDENRODDEPTSTORE3F_CLERK
@@ -50,6 +51,12 @@ GoldenrodDeptStore3FRockerText:
 	line "it works."
 
 	para "Am I right?"
+	done
+
+GoldenrodDeptStore3FTeacherText:
+	text "EOT means at the"
+	line "end of your first"
+	cont "turn."
 	done
 
 GoldenrodDeptStore3FDirectoryText:
