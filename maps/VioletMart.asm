@@ -28,5 +28,8 @@ VioletMartGrannyText:
 	done
 
 VioletMartCooltrainerMText:
-	text "TODOTEXT"
+	text "Repels prevent all"
+	line "wild encounters"
+	cont "regardless of your"
+	cont "#mon's level."
 	done
