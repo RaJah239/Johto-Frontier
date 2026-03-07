@@ -22,21 +22,6 @@ VioletNicknameSpeechHouse_MapScripts:
 
 	def_callbacks
 
-VioletNicknameSpeechHouseBirdScript:
-	setval PIDGEY
-	special SetMonAsSeen
-	isfieldactionssettoquick
-	iftrue .skipthis
-	reanchormap
-	pokepic PIDGEY
-	cry PIDGEY
-	waitbutton
-	closepokepic
-.skipthis
-	jumpthistext
-		text "Strawberry: Pijji!"
-		done
-
 VioletNicknameSpeechHouseLassText:
 	text "I call my Pidgey"
 	line "Strawberry!"
@@ -51,3 +36,18 @@ VioletNicknameSpeechHouseTeacherText:
 	line "she gives to her"
 	cont "#mon, I mean."
 	done
+
+VioletNicknameSpeechHouseBirdScript:
+	setval PIDGEY
+	special SetMonAsSeen
+	isfieldactionssettoquick
+	iftrue .skipthis
+	reanchormap
+	pokepic PIDGEY
+	cry PIDGEY
+	waitbutton
+	closepokepic
+.skipthis
+	jumpthistext
+		text "Strawberry: Pijji!"
+		done
