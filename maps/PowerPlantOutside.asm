@@ -82,10 +82,10 @@ PowerPlantOutside_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event 12,  6, BGEVENT_READ, PowerPlantOutsideSign
+	bg_event  6,  6, BGEVENT_READ, PowerPlantOutsideSign
 
 	def_object_events
-	object_event  6,  6, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, PowerPlantOutsideYoungsterScript, -1
+	object_event  7,  9, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, PowerPlantOutsideYoungsterScript, -1
 	object_event 13,  9, SPRITE_BEAUTY, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, PowerPlantOutsideBeautyScript, -1
-	object_event 12, 12, SPRITE_SAILOR, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PowerPlantOutsideSailorScript, EVENT_BATTLE_TOWER_OPEN_CIVILIANS
+	object_event 11, 12, SPRITE_SAILOR, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PowerPlantOutsideSailorScript, EVENT_BATTLE_TOWER_OPEN_CIVILIANS
 	object_event 12, 18, SPRITE_LASS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1

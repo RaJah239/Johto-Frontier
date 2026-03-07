@@ -16,6 +16,7 @@ GoldenrodNameRater_MapEvents:
 	object_event  2,  3, SPRITE_SAGE, SPRITEMOVEDATA_STANDING_RIGHT, 2, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, MoveRelearnerScript, -1
 	object_event  5,  4, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodNameRaterMoveDeleterScript, -1
 	object_event  0,  5, SPRITE_FISHER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, HelpGuyText, -1
+	object_event  3,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodNameRaterSwarmPokemonBook, -1
 
 	object_const_def
 	const GOLDENRODNAMERATER_NAME_RATER
@@ -23,6 +24,7 @@ GoldenrodNameRater_MapEvents:
 	const GOLDENRODNAMERATER_MOVE_RELEARNER
 	const GOLDENRODNAMERATER_MOVE_DELETER
 	const GOLDENRODNAMERATER_HELP_GUY
+	const GOLDENRODNAMERATER_SWARMBOOK
 
 GoldenrodNameRater_MapScripts:
 	def_scene_scripts
@@ -84,66 +86,283 @@ SwarmGrampsScript:
 		cont "say?"
 		done
 	promptbutton
-	random 8
-	ifequal 0, .bulbasaur
-	ifequal 1, .charmander
-	ifequal 2, .squirtle
-	ifequal 3, .chikorita
-	ifequal 4, .cyndaquil
-	ifequal 5, .totodile
-	ifequal 6, .togepi
-	ifequal 7, .ditto
+	random 27
+.resample:
+	ifequal  0, .Bagon
+	ifequal  1, .Bellsprout
+	ifequal  2, .Charmander
+	ifequal  3, .Chikorita
+	ifequal  4, .Clefairy
+	ifequal  5, .Cyndaquil
+	ifequal  6, .Delibird
+	ifequal  7, .Ditto
+	ifequal  8, .Eevee
+	ifequal  9, .Elekid
+	ifequal 10, .Feebas
+	ifequal 11, .Houndour
+	ifequal 12, .Larvitar
+	ifequal 13, .Meowth
+	ifequal 14, .Phanpy
+	ifequal 15, .Ralts
+	ifequal 16, .Riolu
+	ifequal 17, .Rowlet
+	ifequal 18, .Shroomish
+	ifequal 19, .Smoochum
+	ifequal 20, .Snubbull
+	ifequal 21, .Squirtle
+	ifequal 22, .Teddiursa
+	ifequal 23, .Togepi
+	ifequal 24, .Torchic
+	ifequal 25, .Totodile
+	ifequal 26, .Turtwig
+	sjump .resample
 
-.bulbasaur
+.Bagon:
 	setflag ENGINE_SWARM
-	swarm ROUTE_8
-	writetext SwarmBulbasaurText
-	sjump .WrappingUpSwarms
+	swarm DRAGONS_DEN_B1F
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Bagon at"
+		cont "Dragon's Den B1!"
+		done
 
-.charmander
+.Bellsprout:
+	setflag ENGINE_SWARM
+	swarm ROUTE_3
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Bellsprout at"
+		cont "Route 3!"
+		done
+
+.Charmander:
 	setflag ENGINE_SWARM
 	swarm BURNED_TOWER_1F
-	writetext SwarmCharmanderText
-	sjump .WrappingUpSwarms
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Charmander at"
+		cont "Burned Tower 1F!"
+		done
 
-.squirtle
-	setflag ENGINE_SWARM
-	swarm ROUTE_15
-	writetext SwarmSquirtleText
-	sjump .WrappingUpSwarms
-
-.chikorita
+.Chikorita:
 	setflag ENGINE_SWARM
 	swarm ROUTE_9
-	writetext SwarmChikoritaText
-	sjump .WrappingUpSwarms
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Chikorita at"
+		cont "Route 9!"
+		done
 
-.cyndaquil
+.Clefairy:
+	setflag ENGINE_SWARM
+	swarm MOUNT_MORTAR_1F_OUTSIDE
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Clefairy at"
+		cont "Mt.Mortar Outside!"
+		done
+
+.Cyndaquil:
 	setflag ENGINE_SWARM
 	swarm ROUTE_11
-	writetext SwarmCyndaquilText
-	sjump .WrappingUpSwarms
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Cyndaquil at"
+		cont "Route 11!"
+		done
 
-.totodile
+.Delibird:
 	setflag ENGINE_SWARM
-	swarm ROUTE_14
-	writetext SwarmTotodileText
-	sjump .WrappingUpSwarms
+	swarm ICE_PATH_1F
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Delibird at"
+		cont "Ice Path 1F!"
+		done
 
-.togepi
-	setflag ENGINE_SWARM
-	swarm ROUTE_6
-	writetext SwarmTogepiText
-	sjump .WrappingUpSwarms
-
-.ditto
+.Ditto:
 	setflag ENGINE_SWARM
 	swarm ROUTE_7
-	writetext SwarmDittoText
-	sjump .WrappingUpSwarms
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Ditto at"
+		cont "Route 7!"
+		done
+
+.Eevee:
+	setflag ENGINE_SWARM
+	swarm RUINS_OF_ALPH_OUTSIDE
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Eevee at"
+		cont "Ruins of Alph!"
+		done
+
+.Elekid:
+	setflag ENGINE_SWARM
+	swarm POWER_PLANT_OUTSIDE
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Elekid at Power"
+		cont "Plant Outside!"
+		done
+
+.Feebas:
+	setflag ENGINE_SWARM
+	swarm LAKE_OF_RAGE
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Feebas in the"
+		cont "Lake of Rage!"
+		done
+
+.Houndour:
+	setflag ENGINE_SWARM
+	swarm ROUTE_8
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Houndour at"
+		cont "Route 8!"
+		done
+
+.Larvitar:
+	setflag ENGINE_SWARM
+	swarm VICTORY_ROAD
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Larvitar at"
+		cont "Victory Road!"
+		done
+
+.Meowth:
+	setflag ENGINE_SWARM
+	swarm ROUTE_6
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Meowth at"
+		cont "Route 6!"
+		done
+
+.Phanpy:
+	setflag ENGINE_SWARM
+	swarm ROUTE_18
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Phanpy at"
+		cont "Route 18!"
+		done
+
+.Ralts:
+	setflag ENGINE_SWARM
+	swarm ROUTE_1
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Ralts at"
+		cont "Route 1!"
+		done
+
+.Riolu:
+	setflag ENGINE_SWARM
+	swarm UNION_CAVE_1F
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Riolu at"
+		cont "Union Cave 1F!"
+		done
+
+.Rowlet:
+	setflag ENGINE_SWARM
+	swarm ROUTE_2
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Rowlet at"
+		cont "Route 2!"
+		done
+
+.Shroomish:
+	setflag ENGINE_SWARM
+	swarm ILEX_FOREST
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Shroomish at"
+		cont "Ilex Forest!"
+		done
+
+.Smoochum:
+	setflag ENGINE_SWARM
+	swarm ICE_PATH_B3F
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Smoochum at"
+		cont "Ice Path B3F!"
+		done
+
+.Snubbull:
+	setflag ENGINE_SWARM
+	swarm NATIONAL_PARK
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Snubbull at"
+		cont "National Park!"
+		done
+
+.Squirtle:
+	setflag ENGINE_SWARM
+	swarm ROUTE_15
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Squirtle at"
+		cont "Route 15!"
+		done
+
+.Teddiursa:
+	setflag ENGINE_SWARM
+	swarm DARK_CAVE_VIOLET_ENTRANCE
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Teddiursa in"
+		cont "Dark Cave, West!"
+		done
+
+.Togepi:
+	setflag ENGINE_SWARM
+	swarm SILVER_CAVE_OUTSIDE
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Togepi at Mt."
+		cont "Silver Outside!"
+		done
+
+.Torchic:
+	setflag ENGINE_SWARM
+	swarm ROUTE_10
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Torchic at"
+		cont "Route 10!"
+		done
+
+.Totodile:
+	setflag ENGINE_SWARM
+	swarm ROUTE_14
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Totodile at"
+		cont "Route 14!"
+		done
+
+.Turtwig:
+	setflag ENGINE_SWARM
+	swarm ROUTE_17
+	jumpthisopenedtext
+		text "There's a swarm of"
+		line "Turtwig at"
+		cont "Route 17!"
+		done
+
 
 .skiprandomswarm
-	writethistext
+	jumpthisopenedtext
 		text "You forgot which"
 		line "#mon is swarm-"
 		cont "ing?"
@@ -151,7 +370,7 @@ SwarmGrampsScript:
 		para "Me too! I'm old."
 
 		para "What I do remember"
-		line "is there are 8"
+		line "is there are 26"
 		cont "#mon swarms and"
 		cont "they change at"
 		cont "midnight daily."
@@ -159,79 +378,54 @@ SwarmGrampsScript:
 		para "You ought to visit"
 		line "another day too."
 		done
-.WrappingUpSwarms:
-	waitclosetext
-	turnobject GOLDENRODNAMERATER_SWARM_GRAMPS, DOWN
-	end
 
-SwarmBulbasaurText:
-	text "There's a swarm of"
-	line "BULBASAUR at"
-	cont "ROUTE 8!"
-	done
+GoldenrodNameRaterSwarmPokemonBook:
+	opentext
+	writethistext
+		text "It's a list of all"
+		line "wild #mon that"
+		cont "appear in swarms."
+
+		para "Aside from Ditto,"
+		line "Bellsprout and"
+		cont "Shroomish, they"
+		cont "all have a 30<%>"
+		cont "chance to flee"
+		cont "each turn."
 	
-SwarmCharmanderText:
-	text "There's a swarm of"
-	line "CHARMANDER in the"
-	cont "BURNED TOWER!"
-	done
-	
-SwarmSquirtleText:
-	text "There's a swarm of"
-	line "SQUIRTLE on"
-	cont "ROUTE 15!"
-	done
+		para "Read the list?"
+		done
+	yesorno
+	iffalse_endtext
+	jumpthisopenedtext
+		text "In alphabetical"
+		line "order, they are:"
 
-SwarmChikoritaText:
-	text "There's a swarm of"
-	line "CHIKORITA on"
-	cont "ROUTE 37!"
-	done
-
-SwarmCyndaquilText:
-	text "There's a swarm of"
-	line "CYNDAQUIL on"
-	cont "ROUTE 11!"
-	done
-
-SwarmTotodileText:
-	text "There's a swarm of"
-	line "TOTODILE on"
-	cont "ROUTE 14!"
-	done
-
-SwarmPichuText:
-	text "There's a swarm of"
-	line "PICHU on"
-	cont "ROUTE 3!"
-	done
-
-SwarmCleffaText:
-	text "There's a swarm of"
-	line "CLEFFA in the"
-	cont "SLOWPOKE WELL!"
-	done
-
-SwarmIgglybuffText:
-	text "There's a swarm of"
-	line "IGGLYBUFF on"
-	cont "ROUTE 46!"
-	done
-
-SwarmTogepiText:
-	text "There's a swarm of"
-	line "TOGEPI on"
-	cont "ROUTE 6!"
-	done
-
-SwarmTyrogueText:
-	text "There's a swarm of"
-	line "TYROGUE in the"
-	cont "UNION CAVE!"
-	done
-
-SwarmDittoText:
-	text "There's a swarm of"
-	line "DITTO on"
-	cont "ROUTE 7!"
-	done
+		para "Bagon,"
+		line "Bellsprout,"
+		cont "Charmander,"
+		cont "Chikorita"
+		cont "Clefairy,"
+		cont "Cyndaquil,"
+		cont "Delibird,"
+		cont "Ditto,"
+		cont "Eevee,"
+		cont "Elekid,"
+		cont "Feebas,"
+		cont "Houndour,"
+		cont "Larvitar,"
+		cont "Meowth,"
+		cont "Phanpy,"
+		cont "Ralts,"
+		cont "Riolu,"
+		cont "Rowlet,"
+		cont "Shroomish,"
+		cont "Smoochum,"
+		cont "Snubbull,"
+		cont "Squirtle,"
+		cont "Teddiursa,"
+		cont "Togepi,"
+		cont "Torchic,"
+		cont "Totodile and"
+		cont "Turtwig."
+		done

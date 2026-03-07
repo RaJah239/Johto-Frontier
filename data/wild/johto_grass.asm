@@ -1,6 +1,33 @@
 ; Johto Pokémon in grass
 
 JohtoGrassWildMons:
+	def_grass_wildmons DRAGONS_DEN_B1F
+	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
+	; morn
+	db 3, TORCHIC
+	db 4, TORCHIC
+	db 5, TORCHIC
+	db 3, TORCHIC
+	db 6, TORCHIC
+	db 5, TORCHIC
+	db 5, TORCHIC
+	; day
+	db 3, TORCHIC
+	db 4, TORCHIC
+	db 5, TORCHIC
+	db 3, TORCHIC
+	db 6, TORCHIC
+	db 5, TORCHIC
+	db 5, TORCHIC
+	; nite
+	db 3, TORCHIC
+	db 4, TORCHIC
+	db 5, TORCHIC
+	db 3, TORCHIC
+	db 6, TORCHIC
+	db 5, TORCHIC
+	db 5, TORCHIC
+	end_grass_wildmons
 
 	def_grass_wildmons SPROUT_TOWER_2F
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
@@ -1795,6 +1822,35 @@ JohtoGrassWildMons:
 	end_grass_wildmons
 
 	def_grass_wildmons TOHJO_FALLS
+	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
+	; morn
+	db 3, TORCHIC
+	db 4, TORCHIC
+	db 5, TORCHIC
+	db 3, TORCHIC
+	db 6, TORCHIC
+	db 5, TORCHIC
+	db 5, TORCHIC
+	; day
+	db 3, TORCHIC
+	db 4, TORCHIC
+	db 5, TORCHIC
+	db 3, TORCHIC
+	db 6, TORCHIC
+	db 5, TORCHIC
+	db 5, TORCHIC
+	; nite
+	db 3, TORCHIC
+	db 4, TORCHIC
+	db 5, TORCHIC
+	db 3, TORCHIC
+	db 6, TORCHIC
+	db 5, TORCHIC
+	db 5, TORCHIC
+	end_grass_wildmons
+
+
+	def_grass_wildmons POWER_PLANT_OUTSIDE
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 3, TORCHIC
