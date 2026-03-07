@@ -1,3 +1,24 @@
+GoldenrodMansion3F_MapEvents:
+	def_warp_events
+	warp_event  0,  0, GOLDENROD_MANSION_ROOF, 1
+	warp_event  1,  0, GOLDENROD_MANSION_2F, 2
+	warp_event  6,  0, GOLDENROD_MANSION_2F, 3
+	warp_event  7,  0, GOLDENROD_MANSION_ROOF, 2
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  5,  8, BGEVENT_UP, GoldenrodMansion3FDevRoomSign
+	bg_event  4,  3, BGEVENT_UP, GoldenrodMansion3FDrawing
+	bg_event  1,  6, BGEVENT_UP, GoldenrodMansion3FGameProgram
+	bg_event  1,  3, BGEVENT_UP, GoldenrodMansion3FReferenceMaterial
+
+	def_object_events
+	object_event  3,  6, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GameFreakGameDesignerScript, -1
+	object_event  3,  4, SPRITE_GYM_GUIDE, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, GameFreakGraphicArtistScript, -1
+	object_event  0,  7, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, GameFreakProgrammerScript, -1
+	object_event  0,  4, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 2, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GameFreakCharacterDesignerScript, -1
+
 	object_const_def
 	const GoldenrodMansion3F_COOLTRAINER_M
 	const GoldenrodMansion3F_GYM_GUIDE
@@ -63,17 +84,11 @@ GameFreakProgrammerScript:
 GameFreakCharacterDesignerScript:
 	jumptextfaceplayer GameFreakCharacterDesignerText
 
-GoldenrodMansion3FDevRoomSign:
-	jumptext GoldenrodMansion3FDevRoomSignText
 
-GoldenrodMansion3FDrawing:
-	jumptext GoldenrodMansion3FDrawingText
 
-GoldenrodMansion3FGameProgram:
-	jumptext GoldenrodMansion3FGameProgramText
 
-GoldenrodMansion3FReferenceMaterial:
-	jumptext GoldenrodMansion3FReferenceMaterialText
+
+
 
 GameFreakGameDesignerText:
 	text "Is that right?"
@@ -155,49 +170,35 @@ GameFreakCharacterDesignerText:
 	para "Oh, I love them!"
 	done
 
-GoldenrodMansion3FDevRoomSignText:
-	text "GAME FREAK"
-	line "DEVELOPMENT ROOM"
-	done
 
-GoldenrodMansion3FDrawingText:
-	text "It's a detailed"
-	line "drawing of a"
-	cont "pretty girl."
-	done
 
-GoldenrodMansion3FGameProgramText:
-	text "It's the game"
-	line "program. Messing"
+GoldenrodMansion3FReferenceMaterial:
+	jumpthistext
+		text "It's crammed with"
+		line "reference materi-"
+		cont "als. There's even"
+		cont "a # Doll."
+		done
 
-	para "with it could put"
-	line "a bug in the game!"
-	done
+GoldenrodMansion3FDevRoomSign:
+	jumpthistext
+		text "Game Freak"
+		line "Development Room"
+		done
 
-GoldenrodMansion3FReferenceMaterialText:
-	text "It's crammed with"
-	line "reference materi-"
-	cont "als. There's even"
-	cont "a # DOLL."
-	done
+GoldenrodMansion3FDrawing:
+	jumpthistext
+		text "It's a detailed"
+		line "drawing of a"
+		cont "pretty girl."
+		done
 
-GoldenrodMansion3F_MapEvents:
-	def_warp_events
-	warp_event  0,  0, GOLDENROD_MANSION_ROOF, 1
-	warp_event  1,  0, GOLDENROD_MANSION_2F, 2
-	warp_event  6,  0, GOLDENROD_MANSION_2F, 3
-	warp_event  7,  0, GOLDENROD_MANSION_ROOF, 2
+GoldenrodMansion3FGameProgram:
+	jumpthistext
+		text "It's the game's"
+		line "program."
 
-	def_coord_events
-
-	def_bg_events
-	bg_event  5,  8, BGEVENT_UP, GoldenrodMansion3FDevRoomSign
-	bg_event  4,  3, BGEVENT_UP, GoldenrodMansion3FDrawing
-	bg_event  1,  6, BGEVENT_UP, GoldenrodMansion3FGameProgram
-	bg_event  1,  3, BGEVENT_UP, GoldenrodMansion3FReferenceMaterial
-
-	def_object_events
-	object_event  3,  6, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GameFreakGameDesignerScript, -1
-	object_event  3,  4, SPRITE_GYM_GUIDE, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, GameFreakGraphicArtistScript, -1
-	object_event  0,  7, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, GameFreakProgrammerScript, -1
-	object_event  0,  4, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 2, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GameFreakCharacterDesignerScript, -1
+		para "Messing with it"
+		line "could put another"
+		cont "bug in the game!"
+		done
