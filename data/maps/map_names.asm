@@ -408,7 +408,7 @@ Goldenrod_Map_Names: ; newgroup GOLDENROD
 	dw Goldenrod_Map_Name7  ; map_const GOLDENROD_MAGNET_TRAIN_STATION
 	dw Goldenrod_Map_Name8  ; map_const GOLDENROD_FLOWER_SHOP
 	dw Goldenrod_Map_Name9  ; map_const GOLDENROD_PP_SPEECH_HOUSE
-	dw Goldenrod_Map_Name10 ; map_const GOLDENROD_NAME_RATER
+	dw Goldenrod_Map_Name10 ; map_const GOLDENROD_POKE_BROS_HOUSE
 	dw Goldenrod_Map_Name11 ; map_const GOLDENROD_DEPT_STORE_1F
 	dw Goldenrod_Map_Name12 ; map_const GOLDENROD_DEPT_STORE_2F
 	dw Goldenrod_Map_Name13 ; map_const GOLDENROD_DEPT_STORE_3F

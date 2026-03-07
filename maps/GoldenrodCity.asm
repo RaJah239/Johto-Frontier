@@ -8,7 +8,7 @@ GoldenrodCity_MapEvents:
 	warp_event  9, 13, GOLDENROD_MAGNET_TRAIN_STATION, 2
 	warp_event 29,  5, GOLDENROD_FLOWER_SHOP, 1
 	warp_event 33,  9, GOLDENROD_PP_SPEECH_HOUSE, 1
-	warp_event 15,  7, GOLDENROD_NAME_RATER, 1
+	warp_event 15,  7, GOLDENROD_POKE_BROS_HOUSE, 1
 	warp_event 24, 27, GOLDENROD_DEPT_STORE_1F, 1
 	warp_event 14, 21, GOLDENROD_GAME_CORNER, 2
 	warp_event  5, 15, RADIO_TOWER_1F, 1

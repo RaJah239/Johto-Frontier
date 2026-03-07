@@ -84,7 +84,7 @@ LakeOfRageMagikarpHouse_Blocks:
 GoldenrodHappinessRater_Blocks:
 BillsFamilysHouse_Blocks:
 GoldenrodPPSpeechHouse_Blocks:
-GoldenrodNameRater_Blocks:
+GoldenrodPokeBrosHouse_Blocks:
 GoldenrodMansionRoofHouse_Blocks:
 ManiasHouse_Blocks:
 CianwoodPharmacy_Blocks:

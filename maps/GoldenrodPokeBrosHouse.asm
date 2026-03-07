@@ -1,4 +1,4 @@
-GoldenrodNameRater_MapEvents:
+GoldenrodPokeBrosHouse_MapEvents:
 	def_warp_events
 	warp_event  2,  7, GOLDENROD_CITY, 9
 	warp_event  3,  7, GOLDENROD_CITY, 9
@@ -11,45 +11,45 @@ GoldenrodNameRater_MapEvents:
 	bg_event  7,  1, BGEVENT_JUMPSTD, RADIO2SCRIPT
 
 	def_object_events
-	object_event  5,  3, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_LEFT, 2, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodNameRater, -1
+	object_event  5,  3, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_LEFT, 2, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodPokeBrosHouse, -1
 	object_event  2,  4, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, SwarmGrampsScript, -1
 	object_event  2,  3, SPRITE_SAGE, SPRITEMOVEDATA_STANDING_RIGHT, 2, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, MoveRelearnerScript, -1
-	object_event  5,  4, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodNameRaterMoveDeleterScript, -1
+	object_event  5,  4, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodPokeBrosHouseMoveDeleterScript, -1
 	object_event  0,  5, SPRITE_FISHER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, HelpGuyText, -1
-	object_event  3,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodNameRaterSwarmPokemonBook, -1
+	object_event  3,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodPokeBrosHouseSwarmPokemonBook, -1
 
 	object_const_def
-	const GOLDENRODNAMERATER_NAME_RATER
-	const GOLDENRODNAMERATER_SWARM_GRAMPS
-	const GOLDENRODNAMERATER_MOVE_RELEARNER
-	const GOLDENRODNAMERATER_MOVE_DELETER
-	const GOLDENRODNAMERATER_HELP_GUY
-	const GOLDENRODNAMERATER_SWARMBOOK
+	const GOLDENRODPOKEBROSHOUSE_NAME_RATER
+	const GOLDENRODPOKEBROSHOUSE_SWARM_GRAMPS
+	const GOLDENRODPOKEBROSHOUSE_MOVE_RELEARNER
+	const GOLDENRODPOKEBROSHOUSE_MOVE_DELETER
+	const GOLDENRODPOKEBROSHOUSE_HELP_GUY
+	const GOLDENRODPOKEBROSHOUSE_SWARMBOOK
 
-GoldenrodNameRater_MapScripts:
+GoldenrodPokeBrosHouse_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
 
-GoldenrodNameRater:
+GoldenrodPokeBrosHouse:
 	faceplayeropentext
 	special NameRater
 	waitclosetext
-	turnobject GOLDENRODNAMERATER_NAME_RATER, LEFT
+	turnobject LAST_TALKED, LEFT
 	end
 
 MoveRelearnerScript:
 	faceplayeropentext
 	special MoveRelearner
 	waitclosetext
-	turnobject GOLDENRODNAMERATER_MOVE_RELEARNER, RIGHT
+	turnobject LAST_TALKED, RIGHT
 	end
 
-GoldenrodNameRaterMoveDeleterScript:
+GoldenrodPokeBrosHouseMoveDeleterScript:
 	faceplayeropentext
 	special MoveDeletion
 	waitclosetext
-	turnobject GOLDENRODNAMERATER_MOVE_DELETER, LEFT
+	turnobject LAST_TALKED, LEFT
 	end
 
 HelpGuyText:
@@ -372,14 +372,14 @@ SwarmGrampsScript:
 		para "What I do remember"
 		line "is there are 26"
 		cont "#mon swarms and"
-		cont "they change at"
+		cont "they stop at"
 		cont "midnight daily."
 
 		para "You ought to visit"
 		line "another day too."
 		done
 
-GoldenrodNameRaterSwarmPokemonBook:
+GoldenrodPokeBrosHouseSwarmPokemonBook:
 	opentext
 	writethistext
 		text "It's a list of all"
