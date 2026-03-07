@@ -15,6 +15,8 @@ GoldenrodGameCorner_MapEvents:
 	def_coord_events
 
 	def_bg_events
+	bg_event 18, 13, BGEVENT_ITEM + LEFTOVERS, EVENT_GOLDENROD_GAME_CORNER_HiDDEN_RARE_LEFTOVERS
+	bg_event 18, 13, BGEVENT_JUMPSTD, TRASH_CAN_SCRIPT
 	bg_event  1, 10, BGEVENT_READ, GoldenrodGameCornerMemoryGameScript
 	bg_event  1, 11, BGEVENT_READ, GoldenrodGameCornerMemoryGameScript
 	bg_event  1,  6, BGEVENT_READ, GoldenrodGameCornerMemoryGameScript

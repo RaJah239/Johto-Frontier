@@ -20,13 +20,13 @@ StdScripts::
 	add_stdscript PorygonPCScript
 	add_stdscript StrengthBoulderScript
 	add_stdscript ElevatorButtonScript
+	add_stdscript TrashCanScript
 	add_stdscript TeamRocketOathScript
 	add_stdscript IncenseBurnerScript
 	add_stdscript MerchandiseShelfScript
 	add_stdscript TownMapScript
 	add_stdscript WindowScript
 	add_stdscript TVScript
-	add_stdscript TrashCanScript
 	add_stdscript GoldenrodRocketsScript
 	add_stdscript RadioTowerRocketsScript
 	add_stdscript DayToTextScript
