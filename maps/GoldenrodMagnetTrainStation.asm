@@ -1,6 +1,25 @@
+GoldenrodMagnetTrainStation_MapEvents:
+	def_warp_events
+	warp_event  8, 17, GOLDENROD_CITY, 6
+	warp_event  9, 17, GOLDENROD_CITY, 6
+	warp_event  6,  5, BATTLE_PLAZA_MAGNET_TRAIN_STATION, 4
+	warp_event 11,  5, BATTLE_PLAZA_MAGNET_TRAIN_STATION, 3
+
+	def_coord_events
+	coord_event 11,  6, SCENE_GOLDENRODMAGNETTRAINSTATION_ARRIVE_FROM_SAFFRON, Script_ArriveFromSaffron
+
+	def_bg_events
+
+	def_object_events
+	object_event  9,  9, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodMagnetTrainStationOfficerScript, -1
+	object_event 11, 13, SPRITE_GENTLEMAN, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodMagnetTrainStationGentlemanText, -1
+	object_event  6, 14, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodMagnetTrainStationCooltrainerMText, -1
+	object_event  6, 10, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_SPINRANDOM_FAST, 1, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodMagnetTrainStationBugCatcherText, -1
+
 	object_const_def
 	const GOLDENRODMAGNETTRAINSTATION_OFFICER
 	const GOLDENRODMAGNETTRAINSTATION_GENTLEMAN
+	const GOLDENRODMAGNETTRAINSTATION_COOLTRAINERM
 
 GoldenrodMagnetTrainStation_MapScripts:
 	def_scene_scripts
@@ -12,23 +31,16 @@ GoldenrodMagnetTrainStationNoopScene:
 	end
 
 GoldenrodMagnetTrainStationOfficerScript:
-	faceplayer
-	opentext
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .MagnetTrainToSaffron
-	writetext GoldenrodMagnetTrainStationOfficerTheTrainHasntComeInText
-	waitbutton
-	closetext
-	end
+	faceplayeropentext
+	writethistext
+		text "We'll soon depart"
+		line "to Battle Plaza."
 
-.MagnetTrainToSaffron:
-	writetext GoldenrodMagnetTrainStationOfficerAreYouComingAboardText
+		para "Are you coming on"
+		line "board?"
+		done
 	yesorno
 	iffalse .DecidedNotToRide
-	checkitem SILVER_LEAF
-	iffalse .PassNotInBag
-	writetext GoldenrodMagnetTrainStationOfficerRightThisWayText
-	waitbutton
 	closetext
 	applymovement GOLDENRODMAGNETTRAINSTATION_OFFICER, GoldenrodMagnetTrainStationOfficerApproachTrainDoorMovement
 	applymovement PLAYER, GoldenrodMagnetTrainStationPlayerApproachAndEnterTrainMovement
@@ -44,43 +56,11 @@ GoldenrodMagnetTrainStationOfficerScript:
 	turn_head DOWN
 	step_end
 
-.PassNotInBag:
-	writetext GoldenrodMagnetTrainStationOfficerYouDontHaveARailPassText
-	waitbutton
-	closetext
-	end
-
 .DecidedNotToRide:
-	writetext GoldenrodMagnetTrainStationOfficerHopeToSeeYouAgainText
-	waitbutton
-	closetext
-	end
-
-Script_ArriveFromSaffron:
-	applymovement GOLDENRODMAGNETTRAINSTATION_OFFICER, GoldenrodMagnetTrainStationOfficerApproachTrainDoorMovement
-	applymovement PLAYER, GoldenrodMagnetTrainStationPlayerLeaveTrainAndEnterStationMovement
-	applymovement GOLDENRODMAGNETTRAINSTATION_OFFICER, GoldenrodMagnetTrainStationOfficerReturnToBoardingGateMovement
-	opentext
-	writetext GoldenrodMagnetTrainStationOfficerArrivedInGoldenrodText
-	waitbutton
-	closetext
-	end
-
-GoldenrodMagnetTrainStationGentlemanScript:
-	jumptextfaceplayer GoldenrodMagnetTrainStationGentlemanText
-
-GoldenrodMagnetTrainStationOfficerApproachTrainDoorMovement:
-	step UP
-	step UP
-	step RIGHT
-	turn_head LEFT
-	step_end
-
-GoldenrodMagnetTrainStationOfficerReturnToBoardingGateMovement:
-	step LEFT
-	step DOWN
-	step DOWN
-	step_end
+	jumpthisopenedtext
+		text "We hope to see you"
+		line "again!"
+		done
 
 GoldenrodMagnetTrainStationPlayerApproachAndEnterTrainMovement:
 	step UP
@@ -93,6 +73,25 @@ GoldenrodMagnetTrainStationPlayerApproachAndEnterTrainMovement:
 	step UP
 	step_end
 
+GoldenrodMagnetTrainStationOfficerApproachTrainDoorMovement:
+	step UP
+	step UP
+	step RIGHT
+	turn_head LEFT
+	step_end
+
+Script_ArriveFromSaffron:
+	applymovement GOLDENRODMAGNETTRAINSTATION_OFFICER, GoldenrodMagnetTrainStationOfficerApproachTrainDoorMovement
+	applymovement PLAYER, GoldenrodMagnetTrainStationPlayerLeaveTrainAndEnterStationMovement
+	applymovement GOLDENRODMAGNETTRAINSTATION_OFFICER, GoldenrodMagnetTrainStationOfficerReturnToBoardingGateMovement
+	jumpthistext
+		text "We have arrived in"
+		line "Goldenrod."
+
+		para "We hope to see you"
+		line "again."
+		done
+
 GoldenrodMagnetTrainStationPlayerLeaveTrainAndEnterStationMovement:
 	step LEFT
 	step LEFT
@@ -103,77 +102,32 @@ GoldenrodMagnetTrainStationPlayerLeaveTrainAndEnterStationMovement:
 	turn_head UP
 	step_end
 
-GoldenrodMagnetTrainStationOfficerTheTrainHasntComeInText:
-	text "The train hasn't"
-	line "come in…"
-
-	para "I know! I'll carry"
-	line "the passengers on"
-	cont "my back!"
-
-	para "That won't work."
-	done
-
-GoldenrodMagnetTrainStationOfficerAreYouComingAboardText:
-	text "We'll soon depart"
-	line "for SAFFRON."
-
-	para "Are you coming"
-	line "aboard?"
-	done
-
-GoldenrodMagnetTrainStationOfficerRightThisWayText:
-	text "May I see your"
-	line "rail PASS, please?"
-
-	para "OK. Right this"
-	line "way, please."
-	done
-
-GoldenrodMagnetTrainStationOfficerYouDontHaveARailPassText:
-	text "Sorry. You don't"
-	line "have a rail PASS."
-	done
-
-GoldenrodMagnetTrainStationOfficerHopeToSeeYouAgainText:
-	text "We hope to see you"
-	line "again!"
-	done
-
-GoldenrodMagnetTrainStationOfficerArrivedInGoldenrodText:
-	text "We have arrived in"
-	line "GOLDENROD."
-
-	para "We hope to see you"
-	line "again."
-	done
+GoldenrodMagnetTrainStationOfficerReturnToBoardingGateMovement:
+	step LEFT
+	step DOWN
+	step DOWN
+	step_end
 
 GoldenrodMagnetTrainStationGentlemanText:
-	text "I'm the PRESIDENT."
+	text "The Magnet Train"
+	line "is the only way to"
+	cont "get to the far off"
+	cont "Battle Plaza."
 
-	para "My dream was to"
-	line "build a train that"
-
-	para "is faster than any"
-	line "#MON."
-
-	para "It really brings"
-	line "JOHTO much closer"
-	cont "to KANTO."
+	para "Unless…"
 	done
 
-GoldenrodMagnetTrainStation_MapEvents:
-	def_warp_events
-	warp_event  8, 17, GOLDENROD_CITY, 6
-	warp_event  9, 17, GOLDENROD_CITY, 6
-	warp_event  6,  5, BATTLE_PLAZA_MAGNET_TRAIN_STATION, 4
-	warp_event 11,  5, BATTLE_PLAZA_MAGNET_TRAIN_STATION, 3
+GoldenrodMagnetTrainStationCooltrainerMText:
+	text "The Battle Plaza"
+	line "has a number of"
+	cont "facilities."
 
-	def_coord_events
-	coord_event 11,  6, SCENE_GOLDENRODMAGNETTRAINSTATION_ARRIVE_FROM_SAFFRON, Script_ArriveFromSaffron
+	para "You don't even have"
+	line "to use your own"
+	cont "#mon in some."
+	done
 
-	def_bg_events
-
-	def_object_events
-	object_event  9,  9, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodMagnetTrainStationOfficerScript, -1
-	object_event 11, 14, SPRITE_GENTLEMAN, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodMagnetTrainStationGentlemanScript, EVENT_GOLDENROD_TRAIN_STATION_GENTLEMAN
+GoldenrodMagnetTrainStationBugCatcherText:
+	text "Yes! Yes! To the"
+	line "Battle Plaza I go!"
+	done
