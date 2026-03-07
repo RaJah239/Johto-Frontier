@@ -569,7 +569,7 @@ Cianwood_Map_Name11: db "Route 12 Gate@"
 Cianwood_Map_Name12: db "Power Plant@"
 Cianwood_Map_Name13: db "Cianwood Marina@"
 Cianwood_Map_Name14: db "Cianwood Passage@"
-Cianwood_Map_Name15: db "Power Plant"
+Cianwood_Map_Name15: db "Power Plant@"
 
 New_Bark_Map_Names: ; newgroup NEW_BARK
 	table_width 2, New_Bark_Map_Names
