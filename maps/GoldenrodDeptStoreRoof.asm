@@ -101,14 +101,25 @@ GoldenrodDeptStoreRoofPokefanFText:
 	done
 
 GoldenrodDeptStoreRoofTwinText:
-	text "They have bargain"
-	line "sales here every"
-	cont "so often."
+	text "The Dept.Store's"
+	line "owner lives in the"
+	cont "Goldenrod Mansion."
 
-	text "A kid named Todd"
-	line "on Route 6 always"
-	cont "knows when there's"
-	cont "a bargain."
+	para "She hires a vendor"
+	line "to have a bargain"
+	cont "sale here whenever"
+	cont "she feels like it."
+
+	para "The trick is, if"
+	line "keep pestering her"
+	cont "she'll cave and"
+	cont "have the vendor"
+	cont "come!"
+
+	para "Yay for pressuring"
+	line "the old!"
+
+	para "Hehe."
 	done
 
 GoldenrodDeptStoreRoofPokefanMText:
@@ -178,15 +189,13 @@ Binoculars3Text:
 	done
 
 PokeDollVendingMachine:
-	jumptext PokeDollVendingMachineText
+	jumpthistext
+		text "A vending machine"
+		line "for #mon dolls?"
 
-PokeDollVendingMachineText:
-	text "A vending machine"
-	line "for #MON dolls?"
+		para "Insert money, then"
+		line "turn the crank…"
 
-	para "Insert money, then"
-	line "turn the crank…"
-
-	para "But it's almost"
-	line "empty…"
-	done
+		para "But it's almost"
+		line "empty…"
+		done
