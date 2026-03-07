@@ -393,8 +393,8 @@ FleeMonsNotebook:
 		para "Read the list?"
 		done
 	yesorno
-	iffalse .done
-	writethistext
+	iffalse_endtext
+	jumpthisopenedtext
 		text "In alphabetical"
 		line "order, they are:"
 
@@ -423,9 +423,6 @@ FleeMonsNotebook:
 		cont "Totodile and"
 		cont "Turtwig."
 		done
-	waitbutton
-.done
-	endtext
 
 EarlsPokemonAcademyGameboyKid1Script:
 	faceplayeropentext
