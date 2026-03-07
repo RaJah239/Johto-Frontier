@@ -2476,6 +2476,9 @@ BattleCommand_SuperEffectiveLoopText:
 
 BattleCommand_SuperEffectiveText:
 	; Skip effectiveness text if fast battles is on
+	; TODOTEXT - do call CheckIfFastBattlesIsOn + jr z, with literal:
+	; ▲▲▲▲ Effective!, ▲▲ Effective!
+	; ▼▼▼▼ Resisted! , ▼▼ Resisted!
 	call CheckIfFastBattlesIsOn
 	ret nz
 
