@@ -43,7 +43,7 @@ rept 3
 endr
 	waitsfx
 	isfieldactionssettoquick
-	iffalse .skip
+	iftrue .skip
 	opentext
 	writetext .UseSacredAshText
 	playsound SFX_CAUGHT_MON

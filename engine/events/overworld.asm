@@ -316,7 +316,7 @@ Script_CutFromMenu:
 
 Script_Cut:
 	isfieldactionssettoquick
-	iffalse .skip
+	iftrue .skip
 	writetext UseCutText
 	refreshmap
 	pokepic SCYTHER
@@ -442,7 +442,7 @@ UseFlash:
 Script_UseFlash:
 	reanchormap
 	isfieldactionssettoquick
-	iffalse .skip
+	iftrue .skip
 	special UpdateTimePals
 	reanchormap
 	pokepic MAREEP
@@ -713,7 +713,7 @@ endc
 
 AskSurfScript:
 	isfieldactionssettoquick
-	iffalse AutoSurfScript
+	iftrue AutoSurfScript
 	opentext
 	checkevent EVENT_PIKA_SURF
 	iftrue .AskPikaSurf
@@ -797,7 +797,7 @@ FlyFunction:
 
 .FlyScript:
 	isfieldactionssettoquick
-	iffalse .skip
+	iftrue .skip
 	refreshmap
 	callasm HideSprites
 	callasm ClearSavedObjPals
@@ -932,7 +932,7 @@ Script_CantDoWaterfall:
 
 Script_AskWaterfall:
 	isfieldactionssettoquick
-	iffalse Script_AutoWaterfall
+	iftrue Script_AutoWaterfall
 	opentext
 	writetext .AskWaterfallText
 	yesorno
@@ -1040,7 +1040,7 @@ EscapeRopeOrDig:
 
 .UsedEscapeRopeScript:
 	isfieldactionssettoquick
-	iffalse .skip
+	iftrue .skip
 	refreshmap
 	special UpdateTimePals
 	writetext .UseEscapeRopeText
@@ -1048,7 +1048,7 @@ EscapeRopeOrDig:
 
 .UsedDigScript:
 	isfieldactionssettoquick
-	iffalse .skip
+	iftrue .skip
 	refreshmap
 	special UpdateTimePals
 	callasm PrepareOverworldMove
@@ -1133,7 +1133,7 @@ TeleportFunction:
 
 .TeleportScript:
 	isfieldactionssettoquick
-	iffalse .skip
+	iftrue .skip
 	refreshmap
 	special UpdateTimePals
 	callasm PrepareOverworldMove
@@ -1194,7 +1194,7 @@ Script_StrengthFromMenu:
 Script_UsedStrength:
 	callasm SetStrengthFlag
 	isfieldactionssettoquick
-	iffalse .skip
+	iftrue .skip
 	writetext .UseStrengthText
 	waitbutton
 	reanchormap
@@ -1234,7 +1234,7 @@ AskStrengthScript:
 
 .AskStrength:
 	isfieldactionssettoquick
-	iffalse .skip
+	iftrue .skip
 	opentext
 	writetext AskStrengthText
 	yesorno
@@ -1440,7 +1440,7 @@ Script_MightyWhirlpool:
 
 Script_AskWhirlpoolOW:
 	isfieldactionssettoquick
-	iffalse Script_AutoWhirlpool
+	iftrue Script_AutoWhirlpool
 	opentext
 	writetext AskWhirlpoolText
 	yesorno
@@ -1536,7 +1536,7 @@ TryHeadbuttOW::
 
 AskHeadbuttScript:
 	isfieldactionssettoquick
-	iffalse AutoHeadbuttScript
+	iftrue AutoHeadbuttScript
 	opentext
 	writetext AskHeadbuttText
 	yesorno
@@ -1635,7 +1635,7 @@ AskRockSmashScript:
 	ifequal 1, .no
 
 	isfieldactionssettoquick
-	iffalse AutoRockSmashScript
+	iftrue AutoRockSmashScript
 	opentext
 	writetext AskRockSmashText
 	yesorno
@@ -1781,7 +1781,7 @@ Script_NotEvenANibble:
 	end
 .no_item
 	isfieldactionssettoquick
-	iffalse .skip1
+	iftrue .skip1
 	writetext RodNothingText
 .skip1
 	sjump Script_NotEvenANibble_FallThrough
@@ -1796,7 +1796,7 @@ Script_NotEvenANibble2:
 	end
 .no_item
 	isfieldactionssettoquick
-	iffalse .skip2
+	iftrue .skip2
 	writetext RodNothingText
 .skip2
 	; fallthrough
@@ -1822,7 +1822,7 @@ Script_GotABite:
 	applymovement PLAYER, .Movement_RestoreRod
 
 	isfieldactionssettoquick
-	iffalse .skip
+	iftrue .skip
 	writetext RodBiteText
 .skip
 	callasm PutTheRodAway
@@ -1995,7 +1995,7 @@ Script_GetOnBike:
 	special UpdateTimePals
 	loadvar VAR_MOVEMENT, PLAYER_BIKE
 	isfieldactionssettoquick
-	iffalse .skip
+	iftrue .skip
 	writetext GotOnBikeText
 	waitbutton
 .skip
@@ -2014,7 +2014,7 @@ Script_GetOffBike:
 	special UpdateTimePals
 	loadvar VAR_MOVEMENT, PLAYER_NORMAL
 	isfieldactionssettoquick
-	iffalse .skip
+	iftrue .skip
 	writetext GotOffBikeText
 	waitbutton
 .skip
@@ -2071,7 +2071,7 @@ TryCutOW::
 AskCutScript:
 	opentext
 	isfieldactionssettoquick
-	iffalse .skip
+	iftrue .skip
 	sjump .regularscript
 
 .skip:

@@ -9,7 +9,7 @@ SweetScentFromMenu:
 	refreshmap
 	special UpdateTimePals
 	isfieldactionssettoquick
-	iffalse .skip
+	iftrue .skip
 	reanchormap
 	pokepic TANGELA
 	cry TANGELA
