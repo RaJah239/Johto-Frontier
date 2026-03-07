@@ -114,7 +114,6 @@ PhoneScript_HangUpText_Male:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_CAMPER_TODD, .Todd
 	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
 	ifequal PHONE_SCHOOLBOY_CHAD, .Chad
 	ifequal PHONE_POKEFANM_DEREK, .Derek
@@ -138,10 +137,6 @@ PhoneScript_HangUpText_Male:
 
 .Jose:
 	farwritetext JoseHangUpText
-	end
-
-.Todd:
-	farwritetext ToddHangUpText
 	end
 
 .Arnie:
@@ -246,8 +241,3 @@ PhoneScript_FoundItem_Female:
 .Tiffany:
 	farwritetext TiffanyFoundItemText
 	end
-
-ToddItemScript:
-	farwritetext ToddDepartmentStoreBargainSaleText
-	promptbutton
-	sjump PhoneScript_HangUpText_Male

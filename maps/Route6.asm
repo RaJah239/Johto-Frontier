@@ -20,7 +20,7 @@ Route6_MapEvents:
 	bg_event  6,  6, BGEVENT_ITEM + FOCUS_SASH, EVENT_ROUTE_6_HIDDEN_FOCUS_SASH
 
 	def_object_events
-	object_event 13,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, TrainerCamperTodd, -1
+	object_event 13,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 5, TrainerCamperTodd, -1
 	object_event 15, 32, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerYoungsterSamuel, -1
 	object_event 11, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerYoungsterIan, -1
 	object_event 10, 26, SPRITE_LASS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 3, TrainerPicnickerGina, -1
@@ -87,86 +87,27 @@ DayCareMon2Script:
 	endtext
 
 TrainerCamperTodd:
-	faceplayeropentext
-	checkevent EVENT_BEAT_CAMPER_TODD
-	iftrue .SkipThis
-	special SaveMusic
-	playmusic MUSIC_YOUNGSTER_ENCOUNTER
-	writethistext
-		text "I'm confident in"
-		line "my ability to"
-		cont "raise #mon."
+	generictrainer CAMPER, TODD, EVENT_BEAT_CAMPER_TODD, .SeenText, .BeatenText
 
-		para "Want to see?"
-		done
-	waitclosetext
-	winlosstext .BeatenText, 0
-	loadtrainer CAMPER, TODD
-	startbattle
-	reloadmapafterbattle
-	special RestoreMusic
-	setevent EVENT_BEAT_CAMPER_TODD
-	opentext
-.SkipThis
-	loadvar VAR_CALLERID, PHONE_CAMPER_TODD
-	checkflag ENGINE_GOLDENROD_DEPT_STORE_SALE_IS_ON
-	iftrue .SaleIsOn
-	checkcellnum PHONE_CAMPER_TODD
-	iftrue .NumberAccepted
-	checkevent EVENT_TODD_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskAgain
-	writethistext
-		text "Maybe I should"
-		line "take one to a Day-"
-		cont "Care or maybe use"
-		cont "some items…"
-		done
-	promptbutton
-	setevent EVENT_TODD_ASKED_FOR_PHONE_NUMBER
-.AskAgain:
-	callstd AskNumberMScript
-	askforphonenumber PHONE_CAMPER_TODD
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, CAMPER, TODD
-	callstd RegisteredNumberMScript
-.NumberAccepted:
-	callstd NumberAcceptedMScript
-	sjump .ToddRematch
+.AfterText
+	text "Maybe I should"
+	line "take one to a Day-"
+	cont "Care or maybe use"
+	cont "some items…"
+	done
+
+.SeenText
+	text "I'm confident in"
+	line "my ability to"
+	cont "raise #mon."
+
+	para "Want to see?"
+	done
 
 .BeatenText
 	text "Did I screw up my"
 	line "training?"
 	done
-
-.SaleIsOn:
-	writethistext
-		text "Shopping under the"
-		line "sky!"
-
-		para "It feels so nice"
-		line "up on a rooftop."
-		done
-	promptbutton
-	sjump .ToddRematch
-
-.NumberDeclined:
-	callstd NumberDeclinedMScript
-.ToddRematch:
-	writethistext
-		text "Up for a rematch?"
-		done
-	yesorno
-	iffalse_endtext
-	special SaveMusic
-	playmusic MUSIC_YOUNGSTER_ENCOUNTER
-	promptbutton
-	closetext
-	winlosstext .BeatenText, 0
-	loadtrainer CAMPER, TODD
-	startbattle
-	reloadmapafterbattle
-	special RestoreMusic
-	end
 
 TrainerPicnickerGina:
 	generictrainer PICNICKER, GINA, EVENT_BEAT_PICNICKER_GINA, .SeenText, .BeatenText

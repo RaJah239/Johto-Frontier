@@ -1,3 +1,0 @@
-ToddHurryScript:
-	farwritetext ToddHaveYouGoneToDepartmentStoreText
-	end

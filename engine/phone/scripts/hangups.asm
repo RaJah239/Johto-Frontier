@@ -33,11 +33,6 @@ ReenaForwardScript:
 	promptbutton
 	sjump PhoneScript_HangUpText_Female
 
-ToddNoItemScript:
-	farwritetext ToddSavingUpForBargainSaleText
-	promptbutton
-	sjump PhoneScript_HangUpText_Male
-
 ArnieHangUpScript:
 	farwritetext ArnieWeAreNotReadyYetText
 	promptbutton

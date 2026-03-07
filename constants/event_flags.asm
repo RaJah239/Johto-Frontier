@@ -452,7 +452,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_TODD_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const_skip
 	const_skip
