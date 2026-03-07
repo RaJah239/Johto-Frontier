@@ -194,8 +194,8 @@
 	const EVENT_LAKE_OF_RAGE_HIDDEN_MAX_POTION
 	const EVENT_LAKE_OF_RAGE_OTIS
 ; Crystal-exclusive events in Johto
-	const EVENT_MET_FLORIA
-	const EVENT_TALKED_TO_FLORIA_AT_FLOWER_SHOP
+	const_skip
+	const_skip
 	const EVENT_BUGGING_KURT_TOO_MUCH
 	const EVENT_TALKED_TO_RUINS_COWARD
 	const EVENT_GOT_DRATINI
@@ -1489,8 +1489,8 @@
 	const EVENT_BURNED_TOWER_1F_EUSINE
 	const EVENT_RANG_CLEAR_BELL_1
 	const EVENT_RANG_CLEAR_BELL_2
-	const EVENT_FLORIA_AT_FLOWER_SHOP
-	const EVENT_FLORIA_AT_SUDOWOODO
+	const_skip
+	const_skip
 	const EVENT_MET_GOLDENROD_MOVE_TUTOR
 	const_skip
 ; Unused: next 0 events
