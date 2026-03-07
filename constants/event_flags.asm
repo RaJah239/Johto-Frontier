@@ -231,7 +231,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_GOT_TM03_CURSE
+	const EVENT_GOT_TM_CURSE
 	const_skip
 	const_skip
 	const_skip
