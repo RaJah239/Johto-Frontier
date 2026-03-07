@@ -227,7 +227,7 @@
 	const EVENT_ROUTE_6_HIDDEN_FOCUS_SASH
 	const EVENT_TM_DARK_PULSE
 	const EVENT_TM_FAIRY_FLASH
-	const EVENT_ENABLE_DIPLOMA_PRINTING
+	const_skip
 	const_skip
 	const_skip
 	const_skip
