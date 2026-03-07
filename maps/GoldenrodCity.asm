@@ -36,6 +36,7 @@ GoldenrodCity_MapEvents:
 	bg_event 30,  6, BGEVENT_JUMPTEXT, GoldenrodCityFlowerShopSignText
 	bg_event 34, 22, BGEVENT_JUMPTEXT, GoldenrodCityMansionSignText
 	bg_event  4, 26, BGEVENT_JUMPTEXT, GoldenrodCityBillsFamilyHouseSignText
+	bg_event 34, 26, BGEVENT_JUMPTEXT, GoldenrodCityHappinessRaterSignText
 
 	def_object_events
 	object_event 12, 22, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodCityMoveTutorScript, -1
@@ -45,7 +46,7 @@ GoldenrodCity_MapEvents:
 	object_event 20, 26, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_WANDER, 1, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodCityCooltrainerF2Script, -1
 	object_event 19, 17, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodCityYoungster2Text, -1
 	object_event 17, 10, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodCityLassText, -1
-	object_event 11, 27, SPRITE_GRAMPS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodCityGrampsText, -1
+	object_event 11, 10, SPRITE_GRAMPS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, GoldenrodCityGrampsText, -1
 
 	object_const_def
 	const GOLDENRODCITY_MOVETUTOR
@@ -318,4 +319,12 @@ GoldenrodCityMansionSignText:
 GoldenrodCityBillsFamilyHouseSignText:
 	text "Bill's Family"
 	line "House"
+	done
+
+GoldenrodCityHappinessRaterSignText:
+	text "Happiness Rater"
+
+	para "Come get your"
+	line "#mon's happiness"
+	cont "rated!"
 	done
