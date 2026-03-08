@@ -9,7 +9,7 @@ AzaleaPokecenter1F_MapEvents:
 	def_bg_events
 
 	def_object_events
-	heal_event  3,  1, PAL_NPC_RED
+	heal_event  3,  1, PAL_NPC_GREEN
 	chansey_event  4,  1
 	object_event  9,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, AzaleaPokecenter1FGentlemanText, -1
 	object_event  6,  1, SPRITE_FISHING_GURU, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, AzaleaPokecenter1FFishingGuruText, -1
