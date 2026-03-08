@@ -949,7 +949,7 @@
 ; GruntM
 	const_skip
 	const_skip
-	const EVENT_BEAT_ROCKET_GRUNTM_3
+	const_skip
 	const EVENT_BEAT_ROCKET_GRUNTM_4
 	const EVENT_BEAT_ROCKET_GRUNTM_5
 	const EVENT_BEAT_ROCKET_GRUNTM_6

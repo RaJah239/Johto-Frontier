@@ -8,23 +8,23 @@ RadioTower1F_MapEvents:
 
 	def_bg_events
 	bg_event  3,  0, BGEVENT_JUMPTEXT, RadioTower1FDirectoryText
-	bg_event 13,  0, BGEVENT_JUMPTEXT, RadioTower1FLuckyChannelSignText
+	bg_event 13,  0, BGEVENT_JUMPTEXT, RadioTower1FRaffleSignText
 
 	def_object_events
 	object_event  5,  6, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, RadioTower1FReceptionistWelcomeText, -1
-	object_event 16,  4, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RadioTower1FLassScript, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 15,  4, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RadioTower1FYoungsterScript, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 14,  1, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_TRAINER, 3, TrainerGruntM3, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	object_event  8,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RadioTower1FRaffleManScript, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 12,  6, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, RadioTower1FRadioCardWomanScript, EVENT_GOLDENROD_CITY_CIVILIANS
+	object_event 16,  4, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, RadioTower1FLassText, -1
+	object_event 15,  4, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_COMMAND, jumptextfaceplayer, RadioTower1FYoungsterText, -1
+	object_event  8,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RadioTower1FRaffleManScript, -1
+	object_event 12,  6, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, RadioTower1FRadioCardWomanScript, -1
+	object_event  2,  2, SPRITE_FISHER, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, PAL_NPC_PINK, OBJECTTYPE_COMMAND, jumptextfaceplayer, RadioTowerFisherText, -1
 
 	object_const_def
 	const RADIOTOWER1F_RECEPTIONIST
 	const RADIOTOWER1F_LASS
 	const RADIOTOWER1F_YOUNGSTER
-	const RADIOTOWER1F_ROCKET
 	const RADIOTOWER1F_RAFFLEMAN
 	const RADIOTOWER1F_CARD_WOMAN
+	const RADIOTOWER1F_FISHER
 
 RadioTower1F_MapScripts:
 	def_scene_scripts
@@ -32,195 +32,141 @@ RadioTower1F_MapScripts:
 	def_callbacks
 
 RadioTower1FRaffleManScript:
+	; use special TryQuickSave to take money first
+	; use speical displymoney too to see lost money
 	end
 
 RadioTower1FRadioCardWomanScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkflag ENGINE_RADIO_CARD
 	iftrue .GotCard
-	writetext RadioTower1FRadioCardWomanOfferQuizText
+	writethistext
+		text "We have a special"
+		line "quiz campaign on"
+		cont "right now."
+
+		para "Answer five ques-"
+		line "tions correctly to"
+		cont "win a Radio Card."
+
+		para "Slide it into your"
+		line "#Gear to play"
+		cont "the radio anytime,"
+		cont "anywhere."
+
+		para "Would you like to"
+		line "take the quiz?"
+		done
 	yesorno
 	iffalse .NoQuiz
-	writetext RadioTower1FRadioCardWomanQuestion1Text
+	writethistext
+		text "Question 1:"
+
+		para "Is there a #mon"
+		line "that appears only"
+		cont "in the morning?"
+		done
 	yesorno
 	iffalse .WrongAnswer
 	playsound SFX_ELEVATOR_END
 	waitsfx
-	writetext RadioTower1FRadioCardWomanQuestion2Text
+	writethistext
+		text "Correct!"
+		line "Question 2:"
+
+		para "Is this statement"
+		line "correct?"
+
+		para "You can't buy a"
+		line "Berry at a Mart."
+		done
 	yesorno
 	iffalse .WrongAnswer
 	playsound SFX_ELEVATOR_END
 	waitsfx
-	writetext RadioTower1FRadioCardWomanQuestion3Text
+	writethistext
+		text "Bull's-eye!"
+		line "Question 3:"
+
+		para "Does TM01 contain"
+		line "the move Trick?"
+		done
 	yesorno
 	iftrue .WrongAnswer
 	playsound SFX_ELEVATOR_END
 	waitsfx
-	writetext RadioTower1FRadioCardWomanQuestion4Text
+	writethistext
+		text "So far so good!"
+		line "Question 4:"
+
+		para "Is Falkner the"
+		line "Violet Gym Leader"
+		cont "who uses flying"
+		cont "type #mon?"
+		done
 	yesorno
 	iffalse .WrongAnswer
 	playsound SFX_ELEVATOR_END
 	waitsfx
-	writetext RadioTower1FRadioCardWomanQuestion5Text
+	writethistext
+		text "Wow! Right again!"
+		line "Here's the final"
+		cont "question:"
+
+		para "Do Goldenrod Game"
+		line "Corner's slots"
+		cont "have Charmander"
+		cont "on their reels?"
+		done
 	yesorno
 	iftrue .WrongAnswer
 	playsound SFX_ELEVATOR_END
 	waitsfx
-	writetext RadioTower1FRadioCardWomanYouWinText
+	writethistext
+		text "Bingo! You got it!"
+		line "Congratulations!"
+
+		para "Here's your prize,"
+		line "a Radio Card!"
+		done
 	promptbutton
 	getstring STRING_BUFFER_4, .RadioCardText
-	scall .ReceiveItem
-	writetext RadioTower1FPokegearIsARadioText
+	callstd ReceiveItemScript
+	writethistext
+		text "<PLAYER>'s #Gear"
+		line "can now double as"
+		cont "a radio!"
+		done
 	promptbutton
 	setflag ENGINE_RADIO_CARD
 .GotCard:
-	writetext RadioTower1FRadioCardWomanTuneInText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Please tune in to"
+		line "our radio shows."
+		done
 
 .RadioCardText:
-	db "RADIO CARD@"
-
-.ReceiveItem:
-	jumpstd ReceiveItemScript
-	end
+	db "Radio Card@"
 
 .WrongAnswer:
 	playsound SFX_WRONG
-	writetext RadioTower1FRadioCardWomanWrongAnswerText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Oh, dear."
+		line "Sorry, but you"
+
+		para "got it wrong."
+		line "Please try again!"
+		done
 
 .NoQuiz:
-	writetext RadioTower1FRadioCardWomanNotTakingQuizText
-	waitbutton
-	closetext
-	end
-
-RadioTower1FLassScript:
-	jumptextfaceplayer RadioTower1FLassText
-
-RadioTower1FYoungsterScript:
-	jumptextfaceplayer RadioTower1FYoungsterText
-
-TrainerGruntM3:
-	trainer GRUNTM, GRUNTM_3, EVENT_BEAT_ROCKET_GRUNTM_3, GruntM3SeenText, GruntM3BeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext GruntM3AfterBattleText
-	waitbutton
-	closetext
-	end
-
-RadioTower1FRadioCardWomanOfferQuizText:
-	text "We have a special"
-	line "quiz campaign on"
-	cont "right now."
-
-	para "Answer five ques-"
-	line "tions correctly to"
-	cont "win a RADIO CARD."
-
-	para "Slide it into your"
-	line "#GEAR to play"
-
-	para "the radio anytime,"
-	line "anywhere."
-
-	para "Would you like to"
-	line "take the quiz?"
-	done
-
-RadioTower1FRadioCardWomanQuestion1Text:
-	text "Question 1:"
-
-	para "Is there a #MON"
-	line "that appears only"
-	cont "in the morning?"
-	done
-
-RadioTower1FRadioCardWomanQuestion2Text:
-	text "Correct!"
-	line "Question 2:"
-
-	para "Is this statement"
-	line "correct?"
-
-	para "You can't buy a"
-	line "BERRY at a MART."
-	done
-
-RadioTower1FRadioCardWomanQuestion3Text:
-	text "Bull's-eye!"
-	line "Question 3:"
-
-	para "Does HM01 contain"
-	line "the move FLASH?"
-	done
-
-RadioTower1FRadioCardWomanQuestion4Text:
-	text "So far so good!"
-	line "Question 4:"
-
-	para "Is FALKNER the"
-	line "VIOLET GYM LEADER"
-
-	para "who uses bird"
-	line "#MON?"
-	done
-
-RadioTower1FRadioCardWomanQuestion5Text:
-	text "Wow! Right again!"
-	line "Here's the final"
-	cont "question:"
-
-	para "Do GOLDENROD GAME"
-	line "CORNER's slots"
-
-	para "have CHARMANDER"
-	line "on their reels?"
-	done
-
-RadioTower1FRadioCardWomanYouWinText:
-	text "Bingo! You got it!"
-	line "Congratulations!"
-
-	para "Here's your prize,"
-	line "a RADIO CARD!"
-	done
-
-RadioTower1FPokegearIsARadioText:
-	text "<PLAYER>'s #GEAR"
-	line "can now double as"
-	cont "a radio!"
-	done
-
-RadioTower1FRadioCardWomanTuneInText:
-	text "Please tune in to"
-	line "our radio shows."
-	done
-
-RadioTower1FRadioCardWomanWrongAnswerText:
-	text "Oh, dear."
-	line "Sorry, but you"
-
-	para "got it wrong."
-	line "Please try again!"
-	done
-
-RadioTower1FRadioCardWomanNotTakingQuizText:
-	text "Oh. I see. Please"
-	line "see me if you"
-	cont "change your mind."
-	done
+	jumpthisopenedtext
+		text "Oh. I see. Please"
+		line "see me if you"
+		cont "change your mind."
+		done
 
 RadioTower1FLassText:
-	text "BEN is a fabulous"
+	text "Ben is a fabulous"
 	line "DJ."
 
 	para "His sweet voice"
@@ -228,45 +174,19 @@ RadioTower1FLassText:
 	done
 
 RadioTower1FYoungsterText:
-	text "I love MARY, from"
-	line "#MON TALK."
-
-	para "I only know what"
-	line "she sounds like,"
-	cont "though."
+	text "I love Mary, from"
+	line "#mon Talk."
 	done
 
-GruntM3SeenText:
-	text "We've finally"
-	line "taken over the"
-	cont "RADIO TOWER!"
+RadioTowerFisherText:
+	text "I've lost so much"
+	line "money at the"
+	cont "raffle…"
 
-	para "Now everyone will"
-	line "get to experience"
-
-	para "the true terror of"
-	line "TEAM ROCKET!"
-
-	para "We'll show you"
-	line "how scary we are!"
+	para "It's so addictive"
+	line "that is should've"
+	cont "had a warning!"
 	done
-
-GruntM3BeatenText:
-	text "Too strong! We"
-	line "must watch you…"
-	done
-
-GruntM3AfterBattleText:
-	text "You're too strong."
-
-	para "Our plan could be"
-	line "ruined. I must"
-	cont "warn the others…"
-	done
-
-
-
-
 
 RadioTower1FReceptionistWelcomeText:
 	text "Welcome!"
@@ -283,13 +203,13 @@ RadioTower1FDirectoryText:
 	line "   Office"
 	done
 
-RadioTower1FLuckyChannelSignText:
-	text "LUCKY CHANNEL!"
+RadioTower1FRaffleSignText:
+	text "Goldenrod's Raffle!"
 
-	para "Win with #MON"
-	line "ID numbers!"
+	para "For ¥500 per try,"
+	line "get the chance to"
+	cont "win a random item"
+	cont "or bust!"
 
-	para "Trade your #MON"
-	line "to collect differ-"
-	cont "ent ID numbers!"
+	para "Try your luck!"
 	done
