@@ -355,10 +355,6 @@ CheckPokerus:
 	farcall _CheckPokerus
 	jr ScriptReturnCarry
 
-ResetLuckyNumberShowFlag:
-	farcall LoadOrRegenerateLuckyIDNumber
-	ret
-
 CheckLuckyNumberShowFlag:
 	ld hl, wLuckyNumberShowFlag
 	bit LUCKYNUMBERSHOW_GAME_OVER_F, [hl]

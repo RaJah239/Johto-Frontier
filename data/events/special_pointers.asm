@@ -93,10 +93,7 @@ SpecialsPointers::
 	add_special DisplayCoinCaseBalance
 	add_special DisplayMoneyAndCoinBalance
 	add_special PlaceMoneyTopRight
-	add_special CheckForLuckyNumberWinners
 	add_special CheckLuckyNumberShowFlag
-	add_special ResetLuckyNumberShowFlag
-	add_special PrintTodaysLuckyNumber
 	add_special SelectApricornForKurt
 	add_special NameRater
 	add_special DisplayLinkRecord

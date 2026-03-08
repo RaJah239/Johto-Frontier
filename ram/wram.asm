@@ -1885,7 +1885,7 @@ ENDU
 wBufferMonBox:: db
 wBufferMonSlot:: db
 
-wLuckyNumberDigitsBuffer:: ds 5
+	ds 5
 
 wMonOrItemNameBuffer:: ds NAME_LENGTH
 	ds NAME_LENGTH
@@ -3307,11 +3307,10 @@ wSafariTimeRemaining:: dw
 
 wPhoneList:: ds CONTACT_LIST_SIZE + 1
 
-	ds 22
+	ds 23
 
 wLuckyNumberShowFlag:: db
 wRepelType:: db
-wLuckyIDNumber:: dw
 
 wRepelEffect:: db ; If a Repel is in use, it contains the nr of steps it's still active
 wBikeStep:: dw

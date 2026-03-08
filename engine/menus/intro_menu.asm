@@ -191,7 +191,6 @@ _ResetWRAM:
 	ld [hl], a
 	call CloseSRAM
 
-	call LoadOrRegenerateLuckyIDNumber
 	call InitializeMagikarpHouse
 
 	xor a
@@ -288,32 +287,6 @@ InitializeWorld:
 	farcall _InitializeStartDay
 	farcall InitializeEvents
 	ret
-
-LoadOrRegenerateLuckyIDNumber:
-	ld a, BANK(sLuckyIDNumber)
-	call OpenSRAM
-	ld a, [wCurDay]
-	inc a
-	ld b, a
-	ld a, [sLuckyNumberDay]
-	cp b
-	ld a, [sLuckyIDNumber + 1]
-	ld c, a
-	ld a, [sLuckyIDNumber]
-	jr z, .skip
-	ld a, b
-	ld [sLuckyNumberDay], a
-	call Random
-	ld c, a
-	call Random
-
-.skip
-	ld [wLuckyIDNumber], a
-	ld [sLuckyIDNumber], a
-	ld a, c
-	ld [wLuckyIDNumber + 1], a
-	ld [sLuckyIDNumber + 1], a
-	jmp CloseSRAM
 
 Continue:
 	farcall TryLoadSaveFile

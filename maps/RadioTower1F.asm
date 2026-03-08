@@ -33,9 +33,6 @@ RadioTower1F_MapScripts:
 
 RadioTower1FRaffleManScript:
 	end
-	special ResetLuckyNumberShowFlag
-	special PrintTodaysLuckyNumber
-	special CheckForLuckyNumberWinners
 
 RadioTower1FRadioCardWomanScript:
 	faceplayer

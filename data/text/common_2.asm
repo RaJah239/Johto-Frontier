@@ -919,32 +919,6 @@ _KarpGuruRecordText::
 	text_promptbutton
 	text_end
 
-_LuckyNumberMatchPartyText::
-	text "Congratulations!"
-
-	para "We have a match"
-	line "with the ID number"
-
-	para "of @"
-	text_decimal wBufferMonID, 2, 5
-	text " in"
-	line "your party."
-	prompt
-
-_LuckyNumberMatchPCText::
-	text "Congratulations!"
-
-	para "We have a match"
-	line "with the ID number"
-
-	para "of @"
-	text_decimal wBufferMonID, 2, 5
-	text " in Box"
-	line "“@"
-	text_ram wStringBuffer1
-	text "”."
-	prompt
-
 _CaughtAskNicknameText::
 	text "Give a nickname to"
 	line "the @"

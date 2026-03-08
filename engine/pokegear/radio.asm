@@ -908,10 +908,7 @@ BenFernText3B:
 
 LuckyNumberShow1:
 	call StartRadioStation
-	callfar CheckLuckyNumberShowFlag
-	jr nz, .dontreset
-	callfar ResetLuckyNumberShowFlag
-.dontreset
+;	dummied out TODOTEXT - replace this as the Game Corner music or something..
 	ld hl, LC_Text1
 	ld a, LUCKY_NUMBER_SHOW_2
 	jmp NextRadioLine
@@ -948,7 +945,6 @@ LuckyNumberShow7:
 
 LuckyNumberShow8:
 	ld hl, wStringBuffer1
-	ld de, wLuckyIDNumber
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
 	call PrintNum
 	ld a, "@"
