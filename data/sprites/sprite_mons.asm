@@ -20,7 +20,7 @@ SpriteMons:
 	db NATU
 	db STARMIE
 	db DITTO
-	db RAIKOU
+	db MARILL ; in use
 	db GRIMER
 	db BLISSEY
 	db AMPHAROS
@@ -32,13 +32,11 @@ SpriteMons:
 	db URSALUNA
 	db MOLTRES
 	db SNORLAX
-	db GYARADOS
-	db LUGIA
-	db HO_OH
-	db GHOLDENGO
-
-; in use
-	db PIDGEY
-	db SLOWPOKE
-	db SCYTHER
+	db GYARADOS ; in use
+	db LUGIA ; in use
+	db HO_OH ; in use
+	db GHOLDENGO ; in use
+	db PIDGEY ; in use
+	db SLOWPOKE ; in use
+	db SCYTHER ; in use
 	assert_table_length NUM_POKEMON_SPRITES
