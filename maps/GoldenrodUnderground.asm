@@ -16,6 +16,7 @@ GoldenrodUnderground_MapEvents:
 	bg_event  6, 13, BGEVENT_ITEM, GoldenrodUndergroundHiddenParlyzHeal
 	bg_event  4, 18, BGEVENT_ITEM, GoldenrodUndergroundHiddenSuperPotion
 	bg_event 17,  8, BGEVENT_ITEM, GoldenrodUndergroundHiddenAntidote
+	bg_event 19,  6, BGEVENT_JUMPTEXT, GoldenrodUndergroundText
 
 	def_object_events
 	object_event  5, 31, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 3, TrainerSupernerdEric, -1
@@ -213,7 +214,7 @@ TrainerPokemaniacDonald:
 	cont "hot tip."
 
 	para "You should talk to"
-	line "gramps in the #-"
+	line "gramps at #-"
 	cont "Bros. house."
 	done
 
@@ -509,6 +510,10 @@ HaircutBrosText_MuchHappier:
 	text_ram wStringBuffer3
 	text " looks"
 	line "delighted!"
+	done
+
+GoldenrodUndergroundText:
+	text "Basement"
 	done
 
 GoldenrodUndergroundCoinCase:
