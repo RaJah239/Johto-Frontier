@@ -78,7 +78,7 @@
 	const EVENT_GOT_SUNNY_DAY_FROM_RADIO_TOWER
 	const EVENT_GOT_PINK_BOW_FROM_MARY
 	const_skip
-	const EVENT_RECEIVED_CARD_KEY
+	const_skip
 	const EVENT_GOT_TM_BRICK_BREAK
 	const EVENT_LANCE_HEALED_YOU_IN_TEAM_ROCKET_BASE
 	const EVENT_GOT_MYSTIC_WATER_IN_CHERRYGROVE
@@ -960,8 +960,8 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_ROCKET_GRUNTM_14
-	const EVENT_BEAT_ROCKET_GRUNTM_15
+	const_skip
+	const_skip
 	const EVENT_BEAT_ROCKET_GRUNTM_16
 	const EVENT_BEAT_ROCKET_GRUNTM_17
 	const EVENT_BEAT_ROCKET_GRUNTM_18
@@ -970,7 +970,7 @@
 	const EVENT_BEAT_ROCKET_GRUNTM_21
 	const_skip
 	const_skip
-	const EVENT_BEAT_ROCKET_GRUNTM_24
+	const_skip
 	const_skip
 	const EVENT_BEAT_ROCKET_GRUNTM_28
 	const_skip
