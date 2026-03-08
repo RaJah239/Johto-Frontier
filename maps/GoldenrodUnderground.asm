@@ -13,8 +13,6 @@ GoldenrodUnderground_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event 18,  6, BGEVENT_READ, BasementDoorScript
-	bg_event 19,  6, BGEVENT_READ, GoldenrodUndergroundNoEntrySign
 	bg_event  6, 13, BGEVENT_ITEM, GoldenrodUndergroundHiddenParlyzHeal
 	bg_event  4, 18, BGEVENT_ITEM, GoldenrodUndergroundHiddenSuperPotion
 	bg_event 17,  8, BGEVENT_ITEM, GoldenrodUndergroundHiddenAntidote
@@ -512,56 +510,6 @@ HaircutBrosText_MuchHappier:
 	text " looks"
 	line "delighted!"
 	done
-
-BasementDoorScript::
-	opentext
-	iftrue .Open
-	checkitem BASEMENT_KEY
-	iftrue .Unlock
-	writetext GoldenrodUndergroundTheDoorsLockedText
-	waitbutton
-	closetext
-	end
-
-.Unlock:
-	playsound SFX_TRANSACTION
-	writetext GoldenrodUndergroundBasementKeyOpenedDoorText
-	waitbutton
-	closetext
-	changeblock 18, 6, $2e ; unlocked door
-	refreshmap
-	closetext
-	takeitem BASEMENT_KEY
-	end
-
-.Open:
-	writetext GoldenrodUndergroundTheDoorIsOpenText
-	waitbutton
-	closetext
-	end
-
-GoldenrodUndergroundNoEntrySign:
-	jumptext GoldenrodUndergroundNoEntryText
-
-GoldenrodUndergroundTheDoorsLockedText:
-	text "The door's locked…"
-	done
-
-GoldenrodUndergroundTheDoorIsOpenText:
-	text "The door is open."
-	done
-
-GoldenrodUndergroundBasementKeyOpenedDoorText:
-	text "The BASEMENT KEY"
-	line "opened the door."
-	done
-
-GoldenrodUndergroundNoEntryText:
-	text "NO ENTRY BEYOND"
-	line "THIS POINT"
-	done
-
-
 
 GoldenrodUndergroundCoinCase:
 	itemball COIN_CASE

@@ -146,7 +146,7 @@ ItemEffects:
 	dw TangelaCallEffect   ; TANGELA_CALL
 	dw NoEffect            ; STARDUST
 	dw NoEffect            ; STAR_PIECE
-	dw BasementKeyEffect   ; BASEMENT_KEY
+	dw NoEffect            ; BASEMENT_KEY
 	dw PokeBallEffect      ; SHINY_BALL
 	dw NoEffect            ; ITEM_87
 	dw NoEffect            ; SHINY_CHARM
@@ -2561,10 +2561,6 @@ SquirtbottleEffect:
 
 CardKeyEffect:
 	farcall _CardKey
-	ret
-
-BasementKeyEffect:
-	farcall _BasementKey
 	ret
 
 SacredAshEffect:
