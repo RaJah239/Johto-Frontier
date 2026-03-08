@@ -514,6 +514,10 @@ HaircutBrosText_MuchHappier:
 
 GoldenrodUndergroundText:
 	text "Basement"
+	
+	para "Unlocking Order:"
+	line "3 ▶ 2 ▶ 1"
+	cont "1 ▶ 3 ▶ 2 ▶ 1 ▶ 3"
 	done
 
 GoldenrodUndergroundCoinCase:
