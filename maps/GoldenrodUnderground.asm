@@ -13,9 +13,9 @@ GoldenrodUnderground_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  6, 13, BGEVENT_ITEM, GoldenrodUndergroundHiddenParlyzHeal
-	bg_event  4, 18, BGEVENT_ITEM, GoldenrodUndergroundHiddenSuperPotion
-	bg_event 17,  8, BGEVENT_ITEM, GoldenrodUndergroundHiddenAntidote
+	bg_event  6, 13, BGEVENT_ITEM + FULL_HEAL, EVENT_GOLDENROD_UNDERGROUND_HIDDEN_FULL_HEAL
+	bg_event  4, 18, BGEVENT_ITEM + HYPER_POTION, EVENT_GOLDENROD_UNDERGROUND_HIDDEN_HYPER_POTION
+	bg_event 17,  8, BGEVENT_ITEM + LIFE_ORB, EVENT_GOLDENROD_UNDERGROUND_HIDDEN_LIFE_ORB
 	bg_event 19,  6, BGEVENT_JUMPTEXT, GoldenrodUndergroundText
 
 	def_object_events
@@ -518,9 +518,3 @@ GoldenrodUndergroundText:
 
 GoldenrodUndergroundCoinCase:
 	itemball COIN_CASE
-GoldenrodUndergroundHiddenParlyzHeal:
-	hiddenitem PARLYZ_HEAL, EVENT_GOLDENROD_UNDERGROUND_HIDDEN_PARLYZ_HEAL
-GoldenrodUndergroundHiddenSuperPotion:
-	hiddenitem SUPER_POTION, EVENT_GOLDENROD_UNDERGROUND_HIDDEN_SUPER_POTION
-GoldenrodUndergroundHiddenAntidote:
-	hiddenitem ANTIDOTE, EVENT_GOLDENROD_UNDERGROUND_HIDDEN_ANTIDOTE
