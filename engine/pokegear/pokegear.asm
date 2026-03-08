@@ -1972,7 +1972,7 @@ NoRadioName:
 OaksPKMNTalkName:     db "Oak's <PK><MN> Talk@"
 PokedexShowName:      db "#dex Show@"
 PokemonMusicName:     db "#mon Music@"
-LuckyChannelName:     db "Lucky Channel@"
+LuckyChannelName:     db "Casino Beats@"
 UnownStationName:     db "?????@"
 NationalParkRadioName: db "National Park@"
 

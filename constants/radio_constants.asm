@@ -37,20 +37,6 @@ DEF NUM_RADIO_CHANNELS EQU const_value
 	const POKEMON_MUSIC_6        ; 1b
 	const POKEMON_MUSIC_7        ; 1c
 	const LETS_ALL_SING_2        ; 1d
-	const LUCKY_NUMBER_SHOW_2    ; 1e
-	const LUCKY_NUMBER_SHOW_3    ; 1f
-	const LUCKY_NUMBER_SHOW_4    ; 20
-	const LUCKY_NUMBER_SHOW_5    ; 21
-	const LUCKY_NUMBER_SHOW_6    ; 22
-	const LUCKY_NUMBER_SHOW_7    ; 23
-	const LUCKY_NUMBER_SHOW_8    ; 24
-	const LUCKY_NUMBER_SHOW_9    ; 25
-	const LUCKY_NUMBER_SHOW_10   ; 26
-	const LUCKY_NUMBER_SHOW_11   ; 27
-	const LUCKY_NUMBER_SHOW_12   ; 28
-	const LUCKY_NUMBER_SHOW_13   ; 29
-	const LUCKY_NUMBER_SHOW_14   ; 2a
-	const LUCKY_NUMBER_SHOW_15   ; 2b
 	const PLACES_AND_PEOPLE_2    ; 2c
 	const PLACES_AND_PEOPLE_3    ; 2d
 	const PLACES_AND_PEOPLE_4    ; 2e

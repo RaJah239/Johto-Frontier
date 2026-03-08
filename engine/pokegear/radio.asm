@@ -55,21 +55,6 @@ RadioJumptable:
 	dw BenFernMusic6     ; $1b
 	dw BenFernMusic7     ; $1c
 	dw FernMonMusic2     ; $1d
-; Lucky Number Show
-	dw LuckyNumberShow2  ; $1e
-	dw LuckyNumberShow3  ; $1f
-	dw LuckyNumberShow4  ; $20
-	dw LuckyNumberShow5  ; $21
-	dw LuckyNumberShow6  ; $22
-	dw LuckyNumberShow7  ; $23
-	dw LuckyNumberShow8  ; $24
-	dw LuckyNumberShow9  ; $25
-	dw LuckyNumberShow10 ; $26
-	dw LuckyNumberShow11 ; $27
-	dw LuckyNumberShow12 ; $28
-	dw LuckyNumberShow13 ; $29
-	dw LuckyNumberShow14 ; $2a
-	dw LuckyNumberShow15 ; $2b
 ; People & Places
 	dw PeoplePlaces2     ; $2c
 	dw PeoplePlaces3     ; $2d
@@ -908,142 +893,9 @@ BenFernText3B:
 
 LuckyNumberShow1:
 	call StartRadioStation
-;	dummied out TODOTEXT - replace this as the Game Corner music or something..
-	ld hl, LC_Text1
-	ld a, LUCKY_NUMBER_SHOW_2
-	jmp NextRadioLine
-
-LuckyNumberShow2:
-	ld hl, LC_Text2
-	ld a, LUCKY_NUMBER_SHOW_3
-	jmp NextRadioLine
-
-LuckyNumberShow3:
-	ld hl, LC_Text3
-	ld a, LUCKY_NUMBER_SHOW_4
-	jmp NextRadioLine
-
-LuckyNumberShow4:
-	ld hl, LC_Text4
-	ld a, LUCKY_NUMBER_SHOW_5
-	jmp NextRadioLine
-
-LuckyNumberShow5:
-	ld hl, LC_Text5
-	ld a, LUCKY_NUMBER_SHOW_6
-	jmp NextRadioLine
-
-LuckyNumberShow6:
-	ld hl, LC_Text6
-	ld a, LUCKY_NUMBER_SHOW_7
-	jmp NextRadioLine
-
-LuckyNumberShow7:
-	ld hl, LC_Text7
-	ld a, LUCKY_NUMBER_SHOW_8
-	jmp NextRadioLine
-
-LuckyNumberShow8:
-	ld hl, wStringBuffer1
-	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
-	call PrintNum
-	ld a, "@"
-	ld [wStringBuffer1 + 5], a
-	ld hl, LC_Text8
-	ld a, LUCKY_NUMBER_SHOW_9
-	jmp NextRadioLine
-
-LuckyNumberShow9:
-	ld hl, LC_Text9
-	ld a, LUCKY_NUMBER_SHOW_10
-	jmp NextRadioLine
-
-LuckyNumberShow10:
-	ld hl, LC_Text7
-	ld a, LUCKY_NUMBER_SHOW_11
-	jmp NextRadioLine
-
-LuckyNumberShow11:
-	ld hl, LC_Text8
-	ld a, LUCKY_NUMBER_SHOW_12
-	jmp NextRadioLine
-
-LuckyNumberShow12:
-	ld hl, LC_Text10
-	ld a, LUCKY_NUMBER_SHOW_13
-	jmp NextRadioLine
-
-LuckyNumberShow13:
-	ld hl, LC_Text11
-	call Random
-	and a
-	ld a, LUCKY_CHANNEL
-	jr nz, .okay
-	ld a, LUCKY_NUMBER_SHOW_14
-.okay
-	jmp NextRadioLine
-
-LuckyNumberShow14:
-	ld hl, LC_DragText1
-	ld a, LUCKY_NUMBER_SHOW_15
-	jmp NextRadioLine
-
-LuckyNumberShow15:
-	ld hl, LC_DragText2
-	ld a, LUCKY_CHANNEL
-	jmp NextRadioLine
-
-LC_Text1:
-	text_far _LC_Text1
-	text_end
-
-LC_Text2:
-	text_far _LC_Text2
-	text_end
-
-LC_Text3:
-	text_far _LC_Text3
-	text_end
-
-LC_Text4:
-	text_far _LC_Text4
-	text_end
-
-LC_Text5:
-	text_far _LC_Text5
-	text_end
-
-LC_Text6:
-	text_far _LC_Text6
-	text_end
-
-LC_Text7:
-	text_far _LC_Text7
-	text_end
-
-LC_Text8:
-	text_far _LC_Text8
-	text_end
-
-LC_Text9:
-	text_far _LC_Text9
-	text_end
-
-LC_Text10:
-	text_far _LC_Text10
-	text_end
-
-LC_Text11:
-	text_far _LC_Text11
-	text_end
-
-LC_DragText1:
-	text_far _LC_DragText1
-	text_end
-
-LC_DragText2:
-	text_far _LC_DragText2
-	text_end
+	ld a, 1
+	ld [wNumRadioLinesPrinted], a
+	ret
 
 PeoplePlaces1:
 	call StartRadioStation
