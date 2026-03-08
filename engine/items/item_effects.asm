@@ -140,7 +140,7 @@ ItemEffects:
 	dw RevivalHerbEffect   ; REVIVAL_HERB
 	dw NoEffect            ; HARD_STONE
 	dw NoEffect            ; LUCKY_EGG
-	dw CardKeyEffect       ; CARD_KEY
+	dw NoEffect            ; CARD_KEY
 	dw NoEffect            ; HEAVY_BOOTS
 	dw NoEffect            ; EGG_TICKET
 	dw TangelaCallEffect   ; TANGELA_CALL
@@ -2557,10 +2557,6 @@ PPRestoredText:
 
 SquirtbottleEffect:
 	farcall _Squirtbottle
-	ret
-
-CardKeyEffect:
-	farcall _CardKey
 	ret
 
 SacredAshEffect:

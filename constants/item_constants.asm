@@ -132,7 +132,7 @@
 	const REVIVAL_HERB ; 7c
 	const HARD_STONE   ; 7d
 	const LUCKY_EGG    ; 7e
-	const CARD_KEY     ; 7f
+	const CARD_KEY     ; 7f ; to replace
 	const HEAVY_BOOTS  ; 80
 	const EGG_TICKET   ; 81
 	const TANGELA_CALL ; 82

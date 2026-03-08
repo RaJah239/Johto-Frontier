@@ -480,7 +480,6 @@ GoldenrodRocketsScript:
 RadioTowerRocketsScript:
 	setflag ENGINE_ROCKETS_IN_RADIO_TOWER
 	clearevent EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	clearevent EVENT_USED_THE_CARD_KEY_IN_THE_RADIO_TOWER
 	specialphonecall SPECIALCALL_WEIRDBROADCAST
 	end
 
