@@ -186,6 +186,6 @@
 ; wPlayerSpriteSetupFlags
 	const ENGINE_KRIS_IN_CABLE_CLUB
 ; wSwarmFlags ; can have 8 daily swarm flags which are really daily flags
-	const ENGINE_DUNSPARCE_SWARM ; unused
+	const ENGINE_ALT_SWARM
 	const ENGINE_YANMA_SWARM ; unused
 DEF NUM_ENGINE_FLAGS EQU const_value
