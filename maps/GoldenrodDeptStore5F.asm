@@ -217,6 +217,7 @@ GoldenrodDeptStore5FMysteryGiftCarrieScript:
 		line "people shared with"
 		cont "you! Hehe!"
 		done
+	waitclosetext
 	turnobject LAST_TALKED, DOWN
 	end
 
