@@ -1,9 +1,29 @@
+RadioTower1F_MapEvents:
+	def_warp_events
+	warp_event  2,  7, GOLDENROD_CITY, 12
+	warp_event  3,  7, GOLDENROD_CITY, 12
+	warp_event 15,  0, RADIO_TOWER_2F, 2
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  3,  0, BGEVENT_JUMPTEXT, RadioTower1FDirectoryText
+	bg_event 13,  0, BGEVENT_JUMPTEXT, RadioTower1FLuckyChannelSignText
+
+	def_object_events
+	object_event  5,  6, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, RadioTower1FReceptionistWelcomeText, -1
+	object_event 16,  4, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RadioTower1FLassScript, EVENT_GOLDENROD_CITY_CIVILIANS
+	object_event 15,  4, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RadioTower1FYoungsterScript, EVENT_GOLDENROD_CITY_CIVILIANS
+	object_event 14,  1, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_TRAINER, 3, TrainerGruntM3, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event  8,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RadioTower1FRaffleManScript, EVENT_GOLDENROD_CITY_CIVILIANS
+	object_event 12,  6, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, RadioTower1FRadioCardWomanScript, EVENT_GOLDENROD_CITY_CIVILIANS
+
 	object_const_def
 	const RADIOTOWER1F_RECEPTIONIST
 	const RADIOTOWER1F_LASS
 	const RADIOTOWER1F_YOUNGSTER
 	const RADIOTOWER1F_ROCKET
-	const RADIOTOWER1F_LUCKYNUMBERMAN
+	const RADIOTOWER1F_RAFFLEMAN
 	const RADIOTOWER1F_CARD_WOMAN
 
 RadioTower1F_MapScripts:
@@ -11,105 +31,11 @@ RadioTower1F_MapScripts:
 
 	def_callbacks
 
-RadioTower1FReceptionistScript:
-	faceplayer
-	opentext
-	checkflag ENGINE_ROCKETS_IN_RADIO_TOWER
-	iftrue .Rockets
-	writetext RadioTower1FReceptionistWelcomeText
-	waitbutton
-	closetext
+RadioTower1FRaffleManScript:
 	end
-
-.Rockets:
-	writetext RadioTower1FReceptionistNoToursText
-	waitbutton
-	closetext
-	end
-
-RadioTower1FLuckyNumberManScript:
-	faceplayer
-	opentext
-	writetext RadioTower1FLuckyNumberManAskToPlayText
-	promptbutton
-	checkflag ENGINE_LUCKY_NUMBER_SHOW
-	iftrue .skip
 	special ResetLuckyNumberShowFlag
-.skip
 	special PrintTodaysLuckyNumber
-	checkflag ENGINE_LUCKY_NUMBER_SHOW
-	iftrue .GameOver
-	writetext RadioTower1FLuckyNumberManThisWeeksIdIsText
-	promptbutton
-	closetext
-	applymovement RADIOTOWER1F_LUCKYNUMBERMAN, RadioTower1FLuckyNumberManGoToPCMovement
-	opentext
-	writetext RadioTower1FLuckyNumberManCheckIfMatchText
-	promptbutton
-	waitsfx
-	writetext RadioTower1FLuckyNumberManDotDotDotText
-	playsound SFX_DEX_FANFARE_20_49
-	waitsfx
-	promptbutton
 	special CheckForLuckyNumberWinners
-	closetext
-	applymovement RADIOTOWER1F_LUCKYNUMBERMAN, RadioTower1FLuckyNumberManReturnToPlayerMovement
-	opentext
-	ifless 2, .NoPrize ; 0-1 digits match
-	ifless 3, .ThirdPlace ; 2 digits match
-	ifless 5, .SecondPlace ; 3-4 digits match
-	sjump .FirstPlace ; all digits match
-
-.GameOver:
-	writetext RadioTower1FLuckyNumberManComeAgainText
-	waitbutton
-	closetext
-	end
-
-.FirstPlace:
-	writetext RadioTower1FLuckyNumberManPerfectMatchText
-	playsound SFX_1ST_PLACE
-	waitsfx
-	promptbutton
-	giveitem MASTER_BALL
-	iffalse .BagFull
-	itemnotify
-	setflag ENGINE_LUCKY_NUMBER_SHOW
-	sjump .GameOver
-
-.SecondPlace:
-	writetext RadioTower1FLuckyNumberManOkayMatchText
-	playsound SFX_2ND_PLACE
-	waitsfx
-	promptbutton
-	giveitem LUCKY_EGG
-	iffalse .BagFull
-	itemnotify
-	setflag ENGINE_LUCKY_NUMBER_SHOW
-	sjump .GameOver
-
-.ThirdPlace:
-	writetext RadioTower1FLuckyNumberManWeakMatchText
-	playsound SFX_3RD_PLACE
-	waitsfx
-	promptbutton
-	giveitem PP_UP
-	iffalse .BagFull
-	itemnotify
-	setflag ENGINE_LUCKY_NUMBER_SHOW
-	sjump .GameOver
-
-.NoPrize:
-	writetext RadioTower1FLuckyNumberManNoneOfYourIDNumbersMatchText
-	waitbutton
-	closetext
-	end
-
-.BagFull:
-	writetext RadioTower1FLuckyNumberManNoRoomForYourPrizeText
-	waitbutton
-	closetext
-	end
 
 RadioTower1FRadioCardWomanScript:
 	faceplayer
@@ -193,113 +119,6 @@ TrainerGruntM3:
 	waitbutton
 	closetext
 	end
-
-RadioTower1FDirectory:
-	jumptext RadioTower1FDirectoryText
-
-RadioTower1FLuckyChannelSign:
-	jumptext RadioTower1FLuckyChannelSignText
-
-RadioTower1FLuckyNumberManGoToPCMovement:
-	step RIGHT
-	turn_head UP
-	step_end
-
-RadioTower1FLuckyNumberManReturnToPlayerMovement:
-	step LEFT
-	turn_head UP
-	step_end
-
-RadioTower1FReceptionistWelcomeText:
-	text "Welcome!"
-	done
-
-RadioTower1FReceptionistNoToursText:
-	text "Hello. I'm sorry,"
-	line "but we're not"
-	cont "offering any tours"
-	cont "today."
-	done
-
-RadioTower1FLuckyNumberManAskToPlayText:
-	text "Hi, are you here"
-	line "for the LUCKY NUM-"
-	cont "BER SHOW?"
-
-	para "Want me to check"
-	line "the ID numbers of"
-	cont "your #MON?"
-
-	para "If you get lucky,"
-	line "you win a prize."
-	done
-
-RadioTower1FLuckyNumberManThisWeeksIdIsText:
-	text "Today's ID number"
-	line "number is @"
-	text_ram wStringBuffer3
-	text "."
-	done
-
-RadioTower1FLuckyNumberManCheckIfMatchText:
-	text "Let's see if you"
-	line "have a match."
-	done
-
-RadioTower1FLuckyNumberManDotDotDotText:
-	text "<……>"
-	line "<……>"
-	done
-
-RadioTower1FLuckyNumberManComeAgainText:
-	text "Please come back"
-	line "tomorrow for the"
-	cont "next LUCKY NUMBER."
-	done
-
-RadioTower1FLuckyNumberManPerfectMatchText:
-	text "Wow! You have a"
-	line "perfect match of"
-	cont "all five numbers!"
-
-	para "We have a grand"
-	line "prize winner!"
-
-	para "You have won a"
-	line "MASTER BALL!"
-	done
-
-RadioTower1FLuckyNumberManOkayMatchText:
-	text "Hey! You've"
-	line "matched the last"
-	cont "three numbers!"
-
-	para "You've won second"
-	line "prize, a LUCKY"
-	cont "EGG!"
-	done
-
-RadioTower1FLuckyNumberManWeakMatchText:
-	text "Ooh, you've"
-	line "matched the last"
-	cont "two numbers."
-
-	para "You've won third"
-	line "prize, a PP UP."
-	done
-
-RadioTower1FLuckyNumberManNoneOfYourIDNumbersMatchText:
-	text "Nope, none of your"
-	line "ID numbers match."
-	done
-
-RadioTower1FLuckyNumberManNoRoomForYourPrizeText:
-	text "You've got no room"
-	line "for your prize."
-
-	para "Make room and come"
-	line "back right away."
-	done
 
 RadioTower1FRadioCardWomanOfferQuizText:
 	text "We have a special"
@@ -448,15 +267,23 @@ GruntM3AfterBattleText:
 	cont "warn the others…"
 	done
 
+
+
+
+
+RadioTower1FReceptionistWelcomeText:
+	text "Welcome!"
+	done
+
 RadioTower1FDirectoryText:
-	text "1F RECEPTION"
-	line "2F SALES"
+	text "1F Reception"
+	line "2F Sales"
 
-	para "3F PERSONNEL"
-	line "4F PRODUCTION"
+	para "3F Personnel"
+	line "4F Production"
 
-	para "5F DIRECTOR'S"
-	line "   OFFICE"
+	para "5F Director's"
+	line "   Office"
 	done
 
 RadioTower1FLuckyChannelSignText:
@@ -469,23 +296,3 @@ RadioTower1FLuckyChannelSignText:
 	line "to collect differ-"
 	cont "ent ID numbers!"
 	done
-
-RadioTower1F_MapEvents:
-	def_warp_events
-	warp_event  2,  7, GOLDENROD_CITY, 12
-	warp_event  3,  7, GOLDENROD_CITY, 12
-	warp_event 15,  0, RADIO_TOWER_2F, 2
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  3,  0, BGEVENT_READ, RadioTower1FDirectory
-	bg_event 13,  0, BGEVENT_READ, RadioTower1FLuckyChannelSign
-
-	def_object_events
-	object_event  5,  6, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RadioTower1FReceptionistScript, -1
-	object_event 16,  4, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RadioTower1FLassScript, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 15,  4, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RadioTower1FYoungsterScript, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 14,  1, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_TRAINER, 3, TrainerGruntM3, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	object_event  8,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RadioTower1FLuckyNumberManScript, EVENT_GOLDENROD_CITY_CIVILIANS
-	object_event 12,  6, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, RadioTower1FRadioCardWomanScript, EVENT_GOLDENROD_CITY_CIVILIANS

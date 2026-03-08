@@ -86,7 +86,7 @@
 	const ENGINE_FLYPOINT_SILVER_CAVE
 	const ENGINE_FLYPOINT_UNUSED
 ; wLuckyNumberShowFlag
-	const ENGINE_LUCKY_NUMBER_SHOW
+	const ENGINE_LUCKY_NUMBER_SHOW ; unused
 ; wStatusFlags2
 	const ENGINE_4F
 ; wDailyFlags1
