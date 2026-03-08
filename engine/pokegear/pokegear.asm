@@ -1800,14 +1800,14 @@ LoadStation_PokemonMusic:
 	ret
 
 LoadStation_LuckyChannel:
-	ld a, LUCKY_CHANNEL
+	ld a, CASINO_BEATS
 	ld [wCurRadioLine], a
 	xor a
 	ld [wNumRadioLinesPrinted], a
 	ld a, BANK(PlayRadioShow)
 	ld hl, PlayRadioShow
 	call Radio_BackUpFarCallParams
-	ld de, LuckyChannelName
+	ld de, CasinoBeatslName
 	ret
 
 LoadStation_BuenasPassword:
@@ -1972,7 +1972,7 @@ NoRadioName:
 OaksPKMNTalkName:     db "Oak's <PK><MN> Talk@"
 PokedexShowName:      db "#dex Show@"
 PokemonMusicName:     db "#mon Music@"
-LuckyChannelName:     db "Casino Beats@"
+CasinoBeatslName:     db "Casino Beats@"
 UnownStationName:     db "?????@"
 NationalParkRadioName: db "National Park@"
 

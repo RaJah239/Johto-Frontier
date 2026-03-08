@@ -24,7 +24,7 @@ RadioJumptable:
 	dw OaksPKMNTalk1     ; $00
 	dw PokedexShow1      ; $01
 	dw BenMonMusic1      ; $02
-	dw LuckyNumberShow1  ; $03
+	dw CasinoBeats       ; $03
 	dw BuenasPassword1   ; $04
 	dw PeoplePlaces1     ; $05
 	dw FernMonMusic1     ; $06
@@ -891,7 +891,7 @@ BenFernText3B:
 	text_far _BenFernText3B
 	text_end
 
-LuckyNumberShow1:
+CasinoBeats:
 	call StartRadioStation
 	ld a, 1
 	ld [wNumRadioLinesPrinted], a

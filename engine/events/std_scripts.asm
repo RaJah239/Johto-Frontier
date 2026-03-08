@@ -380,9 +380,9 @@ Radio1Script:
 	end
 
 Radio2Script:
-; Lucky Channel
+; Casino Beats
 	opentext
-	setval MAPRADIO_LUCKY_CHANNEL
+	setval MAPRADIO_CASINO_BEATS
 	special MapRadio
 	closetext
 	end
