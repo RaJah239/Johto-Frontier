@@ -68,6 +68,7 @@ _GetVarAction::
 	dwb NULL,                           RETVAR_STRBUF2
 	dwb wNumItems,                      RETVAR_ADDR_DE
 	dwb wNumBalls,                      RETVAR_ADDR_DE
+	dwb wNumBattles,                    RETVAR_ADDR_DE
 ; battle tower points
 	dwb wBattleTowerNormalPoints,           RETVAR_ADDR_DE
 	dwb wBattleTowerInversePoints,          RETVAR_ADDR_DE

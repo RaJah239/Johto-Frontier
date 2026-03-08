@@ -31,10 +31,111 @@ RadioTower1F_MapScripts:
 
 	def_callbacks
 
-RadioTower1FRaffleManScript:
-	; use special TryQuickSave to take money first
-	; use speical displymoney too to see lost money
-	end
+RadioTower1FRaffleManScript: ; TODOTEXT - to adjust item list and cost to play
+	opentext
+	checkevent EVENT_MET_RAFFLE_MAN
+	iftrue .WantToTryTheRaffle
+	writethistext
+		text "Welcome to Golden-"
+		line "rod's Radio Tower"
+		cont "Raffle!"
+		
+		para "For ¥100 per try,"
+		line "win a random item!"
+
+		para "What do you say?"
+		done
+	setevent EVENT_MET_RAFFLE_MAN
+.WantToTryTheRaffle:
+	special PlaceMoneyTopRight
+	writetextcheckdialogue RadioTower1FRaffleManPay, RadioTower1FRaffleManPayMin
+.TryAgain:
+	yesorno
+	iffalse_endtext
+	readvar VAR_ITEM_POCKET
+	ifequal VAR_ITEM_POCKET, .ItemPocketFull
+	readvar VAR_BALL_POCKET
+	ifequal VAR_BALL_POCKET, .BallPocketFull
+	readvar VAR_BATTLE_POCKET
+	ifequal VAR_BATTLE_POCKET, .BattlePocketFull
+.AskSave:
+	checkmoney YOUR_MONEY, 100
+	ifequal HAVE_LESS, .NotEnoughMoney
+	writethistext
+		text "You need save"
+		line "before, okay?"
+		done
+	yesorno
+	iffalse_endtext
+	takemoney YOUR_MONEY, 100
+	special PlaceMoneyTopRight
+	playsound SFX_TRANSACTION
+	waitsfx
+	special TryQuickSave
+	iffalse_endtext
+	callstd RaffleManNPCScript
+	writethistext
+		text "Try again?"
+		done
+	sjump .TryAgain
+
+.NotEnoughMoney:
+	jumpthisopenedtext
+		text "Sorry, you don't"
+		line "¥100…"
+		done
+
+.ItemPocketFull:
+	writethistext
+		text "Your Item Pocket"
+		line "is full!"
+		
+		para "If an Item is won,"
+		line "it'll be lost."
+		done
+	waitbutton
+	sjump .AskContinueAnyway
+
+.BallPocketFull:
+	writethistext
+		text "Your Ball Pocket"
+		line "is full!"
+		
+		para "If a Ball is won,"
+		line "it'll be lost."
+		done
+	waitbutton
+	sjump .AskContinueAnyway
+
+.BattlePocketFull:
+	writethistext
+		text "Your Battle Pocket"
+		line "is full!"
+		
+		para "If a Battle Item"
+		line "is won, it'll be"
+		cont "lost."
+		done
+	waitbutton
+.AskContinueAnyway:
+	writethistext
+		text "Do you want to"
+		line "continue anyway?"
+		done
+	yesorno
+	iffalse_endtext
+	sjump .AskSave
+
+RadioTower1FRaffleManPay:
+		text "Would you like to"
+		line "pay ¥100 for a"
+		cont "random item?"
+		done
+
+RadioTower1FRaffleManPayMin:
+		text "Pay ¥100 for a"
+		line "random item?"
+		done
 
 RadioTower1FRadioCardWomanScript:
 	faceplayeropentext
@@ -203,13 +304,11 @@ RadioTower1FDirectoryText:
 	line "   Office"
 	done
 
-RadioTower1FRaffleSignText:
+RadioTower1FRaffleSignText: ; TODOTEXT - to adjust cost to play as above
 	text "Goldenrod's Raffle!"
 
-	para "For ¥500 per try,"
-	line "get the chance to"
-	cont "win a random item"
-	cont "or bust!"
+	para "For ¥100 per try,"
+	line "win a random item!"
 
 	para "Try your luck!"
 	done

@@ -707,6 +707,10 @@ SECTION "Mystery Gift Section", ROMX
 INCLUDE "engine/events/mystery_gift_npc.asm"
 
 
+SECTION "Raffle Man Section", ROMX
+INCLUDE "engine/events/raffle_man_npc.asm"
+
+
 SECTION "Nayru Pokedex2", ROMX
 INCLUDE "engine/pokedex/pokedex_2.asm"
 

@@ -58,6 +58,12 @@ StdScripts::
 	add_stdscript WanderingOddEggNPCScript
 	add_stdscript BerryOrFruitScript
 	add_stdscript SlowpokeScript
+	add_stdscript RaffleManNPCScript
+
+RaffleManNPCScript:
+	callasm RaffleManNPC
+	verbosegiveitem ITEM_FROM_MEM
+	end
 
 SlowpokeScript:
 	isfieldactionssettoquick
