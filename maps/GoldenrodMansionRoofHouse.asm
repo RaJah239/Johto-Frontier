@@ -19,8 +19,7 @@ GoldenrodMansionRoofHouse_MapScripts:
 	def_callbacks
 
 GoldenrodMansionRoofHousePharmacistScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkevent EVENT_GOT_TM_CURSE
 	iftrue .GotCurse
 	writethistext
@@ -61,7 +60,7 @@ GoldenrodMansionRoofHousePharmacistScript:
 		cont "place…"
 
 		para "Ghosts from the"
-		line "right and left be-"
+		line "left and right be-"
 		cont "gan appearing and"
 		cont "chasing him!"
 
