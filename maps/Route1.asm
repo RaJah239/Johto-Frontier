@@ -184,13 +184,11 @@ TuscanyScript:
 		done
 
 Route1YoungsterText:
-	text "Yo. How are your"
-	line "#mon?"
-
-	para "If they're weak"
-	line "and not ready for"
-	cont "battle, keep out"
-	cont "of the grass."
+	text "You can run from"
+	line "all wild #mon"
+	cont "encounters without"
+	cont "a chance for fail-"
+	cont "ing."
 	done
 
 Route1TeacherText:
