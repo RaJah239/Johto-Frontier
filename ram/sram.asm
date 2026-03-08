@@ -247,7 +247,6 @@ sTrainerRankingFly:: ds 3
 sTrainerRankingSurf:: ds 3
 sTrainerRankingWaterfall:: ds 3
 sTrainerRankingWhiteOuts:: ds 3
-sTrainerRankingLuckyNumberShow:: ds 3
 sTrainerRankingPhoneCalls:: ds 3
 sTrainerRankingUnused2:: ds 3
 sTrainerRankingLinkBattles:: ds 3
@@ -268,7 +267,7 @@ sTrainerRankingBugContestScore:: ds 2
 sTrainerRankingsChecksum:: ds 2
 sTrainerRankingsEnd::
 
-sGSBallFlagBackupJP:: db ; unused
+	ds 7
 
 sTrainerRankingsBackup:: ds sTrainerRankingsEnd - sTrainerRankings
 

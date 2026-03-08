@@ -4,7 +4,6 @@ _InitializeStartDay:
 
 ClearDailyTimers:
 	xor a
-	ld [wLuckyNumberDayTimer], a
 	ld [wUnusedTwoDayTimer], a
 	ld [wDailyResetTimer], a
 	ret
@@ -98,7 +97,6 @@ endr					; this to tells rept 2 to only clear wDailyFlag1 up to here
 	ld [hli], a ; wDailyFlags2
 	ld [hli], a ; wSwarmFlags
 	ld [hl], a  ; wSwarmFlags + 1
-	ld [wLuckyNumberShowFlag], a
 	ld hl, wDailyRematchFlags
 rept 4
 	ld [hli], a
@@ -192,29 +190,6 @@ CheckUnusedTwoDayTimer:
 	ld hl, wUnusedTwoDayTimer
 	call UpdateTimeRemaining
 	ret
-
-RestartLuckyNumberCountdown:
-	call .GetDaysUntilNextFriday
-	ld hl, wLuckyNumberDayTimer
-	jmp InitNDaysCountdown
-
-.GetDaysUntilNextFriday:
-	call GetWeekday
-	ld c, a
-	ld a, FRIDAY
-	sub c
-	jr z, .friday_saturday
-	jr nc, .earlier ; could have done "ret nc"
-
-.friday_saturday
-	add 7
-
-.earlier
-	ret
-
-_CheckLuckyNumberShowFlag:
-	ld hl, wLuckyNumberDayTimer
-	jmp CheckDayDependentEventHL
 
 DoMysteryGiftIfDayHasPassed:
 	ld a, BANK(sMysteryGiftTimer)

@@ -3268,10 +3268,8 @@ wTimerEventStartDay:: db
 
 wFruitTreeFlags:: flag_array NUM_FRUIT_TREES
 
-	ds 2
+	ds 5
 
-wLuckyNumberDayTimer:: dw
-	ds 2
 wSpecialPhoneCallID:: db
 wBugContestStartTime:: ds 4 ; day, hour, min, sec
 wUnusedTwoDayTimerOn:: db
@@ -3307,9 +3305,8 @@ wSafariTimeRemaining:: dw
 
 wPhoneList:: ds CONTACT_LIST_SIZE + 1
 
-	ds 23
+	ds 24
 
-wLuckyNumberShowFlag:: db
 wRepelType:: db
 
 wRepelEffect:: db ; If a Repel is in use, it contains the nr of steps it's still active

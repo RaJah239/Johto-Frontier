@@ -355,11 +355,6 @@ CheckPokerus:
 	farcall _CheckPokerus
 	jr ScriptReturnCarry
 
-CheckLuckyNumberShowFlag:
-	ld hl, wLuckyNumberShowFlag
-	bit LUCKYNUMBERSHOW_GAME_OVER_F, [hl]
-	ret
-
 SnorlaxAwake:
 ; Check if the Poké Flute channel is playing, and if the player is standing
 ; next to Snorlax.

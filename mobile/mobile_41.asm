@@ -300,7 +300,7 @@ StubbedTrainerRankings_WildMonsCaught:
 StubbedTrainerRankings_HookedEncounters:
 	ret
 	ld hl, sTrainerRankingHookedEncounters
-	jmp StubbedTrainerRankings_Increment3Byte
+	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_EggsHatched:
 	ret
@@ -344,8 +344,6 @@ StubbedTrainerRankings_WhiteOuts:
 
 StubbedTrainerRankings_LuckyNumberShow:
 	ret
-	ld hl, sTrainerRankingLuckyNumberShow
-	jr StubbedTrainerRankings_Increment2Byte
 
 StubbedTrainerRankings_PhoneCalls:
 	ret
