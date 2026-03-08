@@ -3164,7 +3164,6 @@ wMahoganyMart1FSceneID::                          db
 wTeamRocketBaseB1FSceneID::                       db
 wTeamRocketBaseB2FSceneID::                       db
 wTeamRocketBaseB3FSceneID::                       db
-wGoldenrodUndergroundSwitchRoomEntrancesSceneID:: db
 wVictoryRoadSceneID::                             db
 wDragonsDenB1FSceneID::                           db
 wDragonShrineSceneID::                            db
@@ -3178,7 +3177,7 @@ wOaksLab::                                        db ; Nayru62's scene in Oak's 
 wRoute21::                                        db
 wBattlePlaza::                                    db
 
-	ds 167
+	ds 168
 
 ; battle tower points
 wBattleTowerNormalPoints:: db
