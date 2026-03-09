@@ -9,7 +9,6 @@ SpecialPhoneCallList:
 ; entries correspond to SPECIALCALL_* constants
 	table_width SPECIALCALL_SIZE, SpecialPhoneCallList
 	specialcall SpecialCallOnlyWhenOutside, PHONECONTACT_ELM,      ElmPhoneCallerScript
-	specialcall SpecialCallOnlyWhenOutside, PHONECONTACT_ELM,      ElmPhoneCallerScript
 	specialcall SpecialCallWhereverYouAre,  PHONECONTACT_BIKESHOP, BikeShopPhoneCallerScript
 	specialcall SpecialCallOnlyWhenOutside, PHONECONTACT_ELM,      ElmPhoneCallerScript
 	assert_table_length NUM_SPECIALCALLS

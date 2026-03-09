@@ -43,7 +43,6 @@ AzaleaGymBugsyScript:
 	waitsfx
 	setflag ENGINE_HIVEBADGE
 	readvar VAR_BADGES
-	scall AzaleaGymActivateRockets
 .FightDone:
 	checkevent EVENT_GOT_TM49_FURY_CUTTER
 	iftrue .GotFuryCutter
@@ -67,17 +66,6 @@ AzaleaGymBugsyScript:
 .NoRoomForFuryCutter:
 	closetext
 	end
-
-AzaleaGymActivateRockets:
-	ifequal 7, .RadioTowerRockets
-	ifequal 6, .GoldenrodRockets
-	end
-
-.GoldenrodRockets:
-	jumpstd GoldenrodRocketsScript
-
-.RadioTowerRockets:
-	jumpstd RadioTowerRocketsScript
 
 TrainerTwinsAmyandmay1:
 	trainer TWINS, AMYANDMAY1, EVENT_BEAT_TWINS_AMY_AND_MAY, TwinsAmyandmay1SeenText, TwinsAmyandmay1BeatenText, 0, .AfterScript

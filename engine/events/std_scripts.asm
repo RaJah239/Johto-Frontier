@@ -27,8 +27,6 @@ StdScripts::
 	add_stdscript TownMapScript
 	add_stdscript WindowScript
 	add_stdscript TVScript
-	add_stdscript GoldenrodRocketsScript
-	add_stdscript RadioTowerRocketsScript
 	add_stdscript DayToTextScript
 	add_stdscript BugContestResultsWarpScript
 	add_stdscript BugContestResultsScript
@@ -472,13 +470,6 @@ DayToTextScript:
 	db "Friday@"
 .SaturdayText:
 	db "Saturday@"
-
-GoldenrodRocketsScript:
-	end
-
-RadioTowerRocketsScript:
-	specialphonecall SPECIALCALL_WEIRDBROADCAST
-	end
 
 BugContestResultsWarpScript:
 	special ClearBGPalettes

@@ -60,7 +60,6 @@ CianwoodGymChuckScript:
 	waitsfx
 	setflag ENGINE_STORMBADGE
 	readvar VAR_BADGES
-	scall CianwoodGymActivateRockets
 .FightDone:
 	checkevent EVENT_GOT_TM01_METEOR_MASH
 	iftrue .AlreadyGotTM
@@ -84,17 +83,6 @@ CianwoodGymChuckScript:
 .BagFull:
 	closetext
 	end
-
-CianwoodGymActivateRockets:
-	ifequal 7, .RadioTowerRockets
-	ifequal 6, .GoldenrodRockets
-	end
-
-.GoldenrodRockets:
-	jumpstd GoldenrodRocketsScript
-
-.RadioTowerRockets:
-	jumpstd RadioTowerRocketsScript
 
 TrainerBlackbeltYoshi:
 	trainer BLACKBELT_T, YOSHI, EVENT_BEAT_BLACKBELT_YOSHI, BlackbeltYoshiSeenText, BlackbeltYoshiBeatenText, 0, .Script

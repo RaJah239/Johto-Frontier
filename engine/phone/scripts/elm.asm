@@ -11,14 +11,8 @@ ElmPhoneCalleeScript:
 
 ElmPhoneCallerScript:
 	readvar VAR_SPECIALPHONECALL
-	ifequal SPECIALCALL_WEIRDBROADCAST, .rocket
 	ifequal SPECIALCALL_MASTERBALL, .gift
 	farwritetext ElmPhoneDiscoveredPokerusText
-	specialphonecall SPECIALCALL_NONE
-	end
-
-.rocket
-	farwritetext ElmPhoneRadioTowerRocketTakeoverText
 	specialphonecall SPECIALCALL_NONE
 	end
 

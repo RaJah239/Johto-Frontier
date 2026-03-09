@@ -44,7 +44,6 @@ MahoganyGymPryceScript:
 	waitsfx
 	setflag ENGINE_GLACIERBADGE
 	readvar VAR_BADGES
-	scall MahoganyGymActivateRockets
 .FightDone:
 	checkevent EVENT_GOT_TM16_ICY_WIND
 	iftrue PryceScript_Defeat
@@ -69,17 +68,6 @@ PryceScript_Defeat:
 MahoganyGym_NoRoomForIcyWind:
 	closetext
 	end
-
-MahoganyGymActivateRockets:
-	ifequal 7, .RadioTowerRockets
-	ifequal 6, .GoldenrodRockets
-	end
-
-.GoldenrodRockets:
-	jumpstd GoldenrodRocketsScript
-
-.RadioTowerRockets:
-	jumpstd RadioTowerRocketsScript
 
 TrainerSkierRoxanne:
 	trainer SKIER, ROXANNE, EVENT_BEAT_SKIER_ROXANNE, SkierRoxanneSeenText, SkierRoxanneBeatenText, 0, .Script
