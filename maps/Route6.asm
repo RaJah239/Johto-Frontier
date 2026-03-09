@@ -129,11 +129,11 @@ TrainerPicnickerGina:
 
 OfficerKeithScript:
 	faceplayeropentext
-	checktime NITE
-	iffalse .NoFight
 	checkevent EVENT_BEAT_OFFICER_KEITH
 	special SaveMusic
 	iftrue .AfterScript
+	checktime NITE
+	iffalse .NoFight
 	playmusic MUSIC_OFFICER_ENCOUNTER
 	writethistext
 		text "Who goes there?"
