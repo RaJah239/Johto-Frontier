@@ -384,9 +384,8 @@ Radio1Script:
 	end
 
 Radio2Script:
-; Casino Beats
 	opentext
-	setval MAPRADIO_CASINO_BEATS
+	setval MAPRADIO_POKEMON_MUSIC
 	special MapRadio
 	closetext
 	end
