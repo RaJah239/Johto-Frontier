@@ -8,7 +8,6 @@ PhoneScript_WantsToBattle_Female:
 
 PhoneScript_RematchText_Male:
 	readvar VAR_CALLERID
-	ifequal PHONE_SCHOOLBOY_JACK, .Jack
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
@@ -18,11 +17,6 @@ PhoneScript_RematchText_Male:
 	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
 	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
-
-.Jack:
-	farwritetext JackBattleRematchText
-	promptbutton
-	end
 
 .Huey:
 	farwritetext HueyBattleRematchText
@@ -104,7 +98,6 @@ PhoneScript_RematchText_Female:
 
 PhoneScript_HangUpText_Male:
 	readvar VAR_CALLERID
-	ifequal PHONE_SCHOOLBOY_JACK, .Jack
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
@@ -115,10 +108,6 @@ PhoneScript_HangUpText_Male:
 	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
 	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
-
-.Jack:
-	farwritetext JackHangUpText
-	end
 
 .Huey:
 	farwritetext HueyHangUpText

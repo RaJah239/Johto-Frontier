@@ -422,7 +422,7 @@
 	const EVENT_GAVE_KURT_BLK_APRICORN
 	const EVENT_GAVE_KURT_PNK_APRICORN
 ; Phone events
-	const EVENT_JACK_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const EVENT_BEVERLY_ASKED_FOR_PHONE_NUMBER
 	const_skip
@@ -642,7 +642,7 @@
 	const EVENT_KOJI_ALLOWS_YOU_PASSAGE_TO_TIN_TOWER
 	const EVENT_FOUGHT_SUICUNE
 	const EVENT_GOT_RAINBOW_WING
-	const EVENT_JACK_ZINC
+	const_skip
 	const_skip
 	const EVENT_VANCE_CARBOS
 	const EVENT_PARRY_IRON
@@ -812,8 +812,8 @@
 	const EVENT_BEAT_SCHOOLBOY_CHAD
 	const_skip
 	const_skip
-	const EVENT_BEAT_SCHOOLBOY_JACK2
-	const EVENT_BEAT_SCHOOLBOY_JACK3
+	const_skip
+	const_skip
 	const_skip
 	const_skip
 	const EVENT_BEAT_SCHOOLBOY_CHAD2
@@ -1034,8 +1034,8 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_BUG_CATCHER_ARNIE2
-	const EVENT_BEAT_BUG_CATCHER_ARNIE3
+	const_skip
+	const_skip
 ; Officer
 	const EVENT_BEAT_OFFICER_KEITH
 	const EVENT_BEAT_OFFICER_DIRK

@@ -644,7 +644,6 @@ BugContestResults_CopyContestantsToResults:
 
 AskNumberMScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_SCHOOLBOY_JACK, .Jack
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
@@ -656,9 +655,6 @@ AskNumberMScript:
 	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
-.Jack:
-	farwritetext JackAskNumberText
-	end
 .Huey:
 	farwritetext HueyAskNumberText
 	end
@@ -700,7 +696,6 @@ RegisteredNumberMScript:
 
 NumberAcceptedMScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_SCHOOLBOY_JACK, .Jack
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
@@ -712,11 +707,6 @@ NumberAcceptedMScript:
 	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
-.Jack:
-	farwritetext JackNumberAcceptedText
-	waitbutton
-	closetext
-	end
 .Huey:
 	farwritetext HueyNumberAcceptedText
 	waitbutton
@@ -770,7 +760,6 @@ NumberAcceptedMScript:
 
 NumberDeclinedMScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_SCHOOLBOY_JACK, .Jack
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
@@ -782,11 +771,6 @@ NumberDeclinedMScript:
 	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
-.Jack:
-	farwritetext JackNumberDeclinedText
-	waitbutton
-	closetext
-	end
 .Huey:
 	farwritetext HueyNumberDeclinedText
 	waitbutton
@@ -840,7 +824,6 @@ NumberDeclinedMScript:
 
 RematchMScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_SCHOOLBOY_JACK, .Jack
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
@@ -851,11 +834,6 @@ RematchMScript:
 	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
-.Jack:
-	farwritetext JackRematchText
-	waitbutton
-	closetext
-	end
 .Huey:
 	farwritetext HueyRematchText
 	waitbutton
@@ -928,7 +906,6 @@ GiftMScript:
 
 PackFullMScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_SCHOOLBOY_JACK, .Jack
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
@@ -939,12 +916,6 @@ PackFullMScript:
 	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
 	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
-
-.Jack:
-	farwritetext JackPackFullText
-	waitbutton
-	closetext
-	end
 
 .Huey:
 	farwritetext HueyPackFullText

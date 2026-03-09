@@ -103,159 +103,33 @@ NationalParkTeacher1Script:
 		done
 
 TrainerSchoolboyJack:
-	trainer SCHOOLBOY, JACK1, EVENT_BEAT_SCHOOLBOY_JACK, SchoolboyJack1SeenText, SchoolboyJack1BeatenText, 0, .Script
+	generictrainer SCHOOLBOY, JACK, EVENT_BEAT_SCHOOLBOY_JACK, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_SCHOOLBOY_JACK
-	opentext
-	checkevent EVENT_JACK_ZINC
-	iftrue .RematchGift
-	checkflag ENGINE_JACK_READY_FOR_REMATCH
-	iftrue .Rematch
-	checkcellnum PHONE_SCHOOLBOY_JACK
-	iftrue .NumberAccepted
-	checkevent EVENT_JACK_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskAgain
-	writetext SchoolboyJackTradeMonText
-	promptbutton
-	setevent EVENT_JACK_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .RequestNumber
-
-.AskAgain:
-	scall .AskNumber
-.RequestNumber:
-	askforphonenumber PHONE_SCHOOLBOY_JACK
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, SCHOOLBOY, JACK1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
-
-.Rematch:
-	scall .RematchStd
-	winlosstext SchoolboyJack1BeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight4
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight3
-	checkevent EVENT_CLEARED_RADIO_TOWER
-	iftrue .LoadFight2
-	checkflag ENGINE_FLYPOINT_OLIVINE
-	iftrue .LoadFight1
-	loadtrainer SCHOOLBOY, JACK1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_JACK_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer SCHOOLBOY, JACK2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_JACK_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer SCHOOLBOY, JACK3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_JACK_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer SCHOOLBOY, JACK4
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_JACK_READY_FOR_REMATCH
-	end
-
-.LoadFight4:
-	loadtrainer SCHOOLBOY, JACK5
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_JACK_READY_FOR_REMATCH
-	opentext
-	writetext SchoolboyJackZincText
-	waitbutton
-	verbosegiveitem ZINC
-	iffalse .PackFull
-	closetext
-	end
-
-.RematchGift
-	writetext SchoolboyJackZincAgainText
-	waitbutton
-	verbosegiveitem ZINC
-	iffalse .PackFull
-	clearevent EVENT_JACK_ZINC
-	closetext
-	end
-
-.PackFull:
-	setevent EVENT_JACK_ZINC
-	jumpstd PackFullMScript
-	end
-
-.AskNumber:
-	jumpstd AskNumberMScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberMScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedMScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedMScript
-	end
-
-.RematchStd:
-	jumpstd RematchMScript
-	end
-
-SchoolboyJack1SeenText:
-	text "The world of"
-	line "#MON is deep."
-
-	para "There are still"
-	line "lots of things we"
-	cont "don't know."
-
-	para "But I know more"
-	line "than you do!"
-	done
-
-SchoolboyJack1BeatenText:
-	text "Wha-wha-what?"
-	done
-
-SchoolboyJackTradeMonText:
+.AfterText
 	text "There is a lot"
 	line "to learn."
 
 	para "For example…"
 
-	para "There are {d:NUM_TMS} kinds"
+	para "There are 50 kinds"
 	line "of TMs."
 
-	para "Traded #MON"
+	para "Traded #mon"
 	line "level up faster."
 	done
 
-SchoolboyJackZincText:
-	text "What a practical"
-	line "battle!"
-	
-	para "Take this won't"
-	line "you!"
+.SeenText
+	text "The world of"
+	line "#mon is deep."
+
+	para "There are still"
+	line "lots of things we"
+	cont "don't know."
 	done
 
-SchoolboyJackZincAgainText:
-	text "Hope you made room"
-	line "for it. Here!"
+.BeatenText
+	text "What a practical"
+	line "battle!"
 	done
 
 TrainerPokefanfBeverly:
