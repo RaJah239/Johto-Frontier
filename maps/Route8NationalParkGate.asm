@@ -821,7 +821,7 @@ Route8NationalParkGate_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  6,  0, BGEVENT_READ, BugCatchingContestExplanationSign
+	bg_event  6,  0, BGEVENT_JUMPTEXT, BugCatchingContestExplanationText
 
 	def_object_events
 	object_event  0,  3, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route8OfficerScriptContest, EVENT_ROUTE_8_NATIONAL_PARK_GATE_OFFICER_CONTEST_DAY

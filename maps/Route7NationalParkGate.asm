@@ -1,8 +1,26 @@
+Route7NationalParkGate_MapEvents:
+	def_warp_events
+	warp_event  3,  0, NATIONAL_PARK, 1
+	warp_event  4,  0, NATIONAL_PARK, 4
+	warp_event  3,  7, ROUTE_7, 3
+	warp_event  4,  7, ROUTE_7, 3
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  5,  0, BGEVENT_JUMPTEXT, BugCatchingContestExplanationText
+
+	def_object_events
+	chanseyheal_event 0,  7
+	object_event  2,  1, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route7OfficerScriptContest, EVENT_ROUTE_7_NATIONAL_PARK_GATE_OFFICER_CONTEST_DAY
+	object_event  6,  5, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route7NationalParkGateYoungsterText, EVENT_ROUTE_7_NATIONAL_PARK_GATE_YOUNGSTER
+	object_event  0,  3, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route7NationalParkGateOfficerScript, EVENT_ROUTE_7_NATIONAL_PARK_GATE_OFFICER_NOT_CONTEST_DAY
+
 	object_const_def
+	const ROUTE7NATIONALPARKGATE_CHANSEY
 	const ROUTE7NATIONALPARKGATE_OFFICER1
 	const ROUTE7NATIONALPARKGATE_YOUNGSTER
 	const ROUTE7NATIONALPARKGATE_OFFICER2
-	const ROUTE7NATIONALPARKGATE_CHANSEY
 
 Route7NationalParkGate_MapScripts:
 	def_scene_scripts
@@ -14,14 +32,10 @@ Route7NationalParkGate_MapScripts:
 	callback MAPCALLBACK_NEWMAP, Route7NationalParkGateCheckIfContestRunningCallback
 	callback MAPCALLBACK_OBJECTS, Route7NationalParkGateCheckIfContestAvailableCallback
 
-Route7NationalParkGateNoop1Scene:
-	end
-
-Route7NationalParkGateNoop2Scene:
-	end
-
 Route7NationalParkGateLeaveContestEarlyScene:
 	sdefer Route7NationalParkGateLeavingContestEarlyScript
+Route7NationalParkGateNoop1Scene:
+Route7NationalParkGateNoop2Scene:
 	end
 
 Route7NationalParkGateCheckIfContestRunningCallback:
@@ -62,15 +76,23 @@ Route7NationalParkGateLeavingContestEarlyScript:
 	writetext Route7NationalParkGateOfficer1WantToFinishText
 	yesorno
 	iffalse .GoBackToContest
-	writetext Route7NationalParkGateOfficer1WaitAtNorthGateText
-	waitbutton
-	closetext
+	writethistext
+		text "OK. Please wait at"
+		line "the North Gate for"
+
+		para "the announcement"
+		line "of the winners."
+		done
+	waitclosetext
 	jumpstd BugContestResultsWarpScript
 
 .GoBackToContest:
-	writetext Route7NationalParkGateOfficer1OkGoFinishText
-	waitbutton
-	closetext
+	writethistext
+		text "OK. Please get"
+		line "back outside and"
+		cont "finish up."
+		done
+	waitclosetext
 	scall Route7NationalParkGate_EnterContest
 	playsound SFX_ENTER_DOOR
 	special FadeOutPalettes
@@ -78,17 +100,21 @@ Route7NationalParkGateLeavingContestEarlyScript:
 	warpfacing UP, NATIONAL_PARK_BUG_CONTEST, 10, 47
 	end
 
+Route7NationalParkGatePlayerApproachOfficer1Movement:
+	step DOWN
+	turn_head LEFT
+	step_end
+
 Route7OfficerScriptContest:
 	readvar VAR_WEEKDAY
 	ifequal SUNDAY, Route7NationalParkGate_NoContestToday
 	ifequal MONDAY, Route7NationalParkGate_NoContestToday
 	ifequal WEDNESDAY, Route7NationalParkGate_NoContestToday
 	ifequal FRIDAY, Route7NationalParkGate_NoContestToday
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkflag ENGINE_DAILY_BUG_CONTEST
 	iftrue Route7NationalParkGate_ContestIsOver
-	scall Route7NationalParkGate_GetDayOfWeek
+	callstd DayToTextScript
 	writetext Route7NationalParkGateOfficer1AskToParticipateText
 	yesorno
 	iffalse Route7NationalParkGate_DeclinedToParticipate
@@ -99,14 +125,40 @@ Route7OfficerScriptContest:
 Route7NationalParkGate_OkayToProceed:
 	setflag ENGINE_BUG_CONTEST_TIMER
 	special PlayMapMusic
-	writetext Route7NationalParkGateOfficer1GiveParkBallsText
+	writethistext
+		text "Here are the Park"
+		line "Balls for the"
+		cont "Contest."
+		done
 	promptbutton
-	writetext Route7NationalParkGatePlayerReceivedParkBallsText
+	writethistext
+		text "<PLAYER> received"
+		line "{d:BUG_CONTEST_BALLS} PARK BALLS."
+		done
 	playsound SFX_ITEM
 	waitsfx
-	writetext Route7NationalParkGateOfficer1ExplainsRulesText
-	waitbutton
-	closetext
+	writethistext
+		text "The person who"
+		line "gets the strong-"
+		cont "est bug #mon"
+		cont "with the most HP"
+		cont "is the winner."
+
+		para "You have {d:BUG_CONTEST_MINUTES}"
+		line "minutes."
+
+		para "If you run out of"
+		line "Park Balls, you're"
+		cont "done."
+
+		para "You can keep the"
+		line "last #mon you"
+		cont "catch as your own."
+
+		para "Go out and do your"
+		line "best!"
+		done
+	waitclosetext
 	special GiveParkBalls
 	scall Route7NationalParkGate_EnterContest
 	playsound SFX_ENTER_DOOR
@@ -122,9 +174,19 @@ Route7NationalParkGate_EnterContest:
 	applymovement PLAYER, Route7NationalParkGatePlayerGoAroundOfficerAndEnterParkMovement
 	end
 
+Route7NationalParkGatePlayerGoAroundOfficerAndEnterParkMovement:
+	step RIGHT
+	step UP
+	step UP
+	step_end
+
 Route7NationalParkGate_FacingLeft:
 	applymovement PLAYER, Route7NationalParkGatePlayerEnterParkMovement
 	end
+
+Route7NationalParkGatePlayerEnterParkMovement:
+	step UP
+	step_end
 
 Route7NationalParkGate_LeaveTheRestBehind:
 	readvar VAR_PARTYCOUNT
@@ -141,233 +203,136 @@ Route7NationalParkGate_LessThanFullParty:
 	special ContestDropOffMons
 	iftrue Route7NationalParkGate_FirstMonIsFainted
 	setevent EVENT_LEFT_MONS_WITH_CONTEST_OFFICER
-	writetext Route7NationalParkGateOfficer1WellHoldYourMonText
+	writethistext
+		text "Fine, we'll hold"
+		line "your other #mon"
+		cont "while you compete."
+		done
 	promptbutton
-	writetext Route7NationalParkGatePlayersMonLeftWithHelperText
+	writethistext
+		text "<PLAYER>'s #mon"
+		line "were left with the"
+		cont "Contest Helper."
+		done
 	playsound SFX_GOT_SAFARI_BALLS
 	waitsfx
 	promptbutton
 	sjump Route7NationalParkGate_OkayToProceed
 
+Route7NationalParkGate_NoRoomInBox:
+	jumpthisopenedtext
+		text "Uh-oh…"
+		line "Both your party"
+		cont "and your PC Box"
+		cont "are full."
+
+		para "You have no room"
+		line "to put the bug"
+		cont "#mon you catch."
+
+		para "Please make room"
+		line "in your party or"
+		cont "your PC Box, then"
+		cont "come see me."
+		done
+
 Route7NationalParkGate_DeclinedToParticipate:
-	writetext Route7NationalParkGateOfficer1TakePartInFutureText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "OK. We hope you'll"
+		line "take part in the"
+		cont "future."
+		done
 
 Route7NationalParkGate_DeclinedToLeaveMonsBehind:
-	writetext Route7NationalParkGateOfficer1ChooseMonAndComeBackText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Please choose the"
+		line "#mon to be used"
+		cont "in the Contest,"
+		cont "then come see me."
+		done
 
 Route7NationalParkGate_FirstMonIsFainted:
-	writetext Route7NationalParkGateOfficer1FirstMonCantBattleText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Uh-oh…"
 
-Route7NationalParkGate_NoRoomInBox:
-	writetext Route7NationalParkGateOfficer1MakeRoomText
-	waitbutton
-	closetext
-	end
+		para "The first #mon"
+		line "in your party"
+		cont "can't battle."
+
+		para "Please switch it"
+		line "with the #mon"
+		cont "you want to use,"
+		cont "then come see me."
+		done
 
 Route7NationalParkGate_FirstMonIsEgg:
-	writetext Route7NationalParkGateOfficer1EggAsFirstMonText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Uh-oh…"
+
+		para "You have an Egg as"
+		line "the first #mon"
+		cont "in your party."
+
+		para "Please switch it"
+		line "with the #mon"
+		cont "you want to use,"
+		cont "then come see me."
+		done
 
 Route7NationalParkGate_ContestIsOver:
-	writetext Route7NationalParkGateOfficer1ContestIsOverText
-	waitbutton
-	closetext
-	end
-
-Route7NationalParkGate_NoContestToday:
-	jumptextfaceplayer Route7NationalParkGateOfficer1WeHoldContestsText
-
-Route7NationalParkGateOfficerScript:
-	faceplayer
-	opentext
-	checkflag ENGINE_DAILY_BUG_CONTEST
-	iftrue Route7NationalParkGate_ContestIsOver
-	writetext Route7NationalParkGateOfficer1WeHoldContestsText
-	waitbutton
-	closetext
-	end
-
-Route7NationalParkGateYoungsterScript:
-	jumptextfaceplayer Route7NationalParkGateYoungsterText
-
-BugCatchingContestExplanationSign:
-	jumptext BugCatchingContestExplanationText
-
-Route7NationalParkGate_GetDayOfWeek:
-	jumpstd DayToTextScript
-	end
-
-Route7NationalParkGatePlayerApproachOfficer1Movement:
-	step DOWN
-	turn_head LEFT
-	step_end
-
-Route7NationalParkGatePlayerGoAroundOfficerAndEnterParkMovement:
-	step RIGHT
-	step UP
-	step UP
-	step_end
-
-Route7NationalParkGatePlayerEnterParkMovement:
-	step UP
-	step_end
-
-Route7NationalParkGateOfficer1AskToParticipateText:
-	text "Today's @"
-	text_ram wStringBuffer3
-	text "."
-	line "That means the"
-
-	para "Bug-Catching Con-"
-	line "test is on today."
-
-	para "The rules are sim-"
-	line "ple."
-
-	para "Using one of your"
-	line "#MON, catch a"
-
-	para "bug #MON to be"
-	line "judged."
-
-	para "Would you like to"
-	line "give it a try?"
-	done
-
-Route7NationalParkGateOfficer1GiveParkBallsText:
-	text "Here are the PARK"
-	line "BALLS for the"
-	cont "Contest."
-	done
-
-Route7NationalParkGatePlayerReceivedParkBallsText:
-	text "<PLAYER> received"
-	line "{d:BUG_CONTEST_BALLS} PARK BALLS."
-	done
-
-Route7NationalParkGateOfficer1ExplainsRulesText:
-	text "The person who"
-	line "gets the strong-"
-	cont "est bug #MON"
-	cont "is the winner."
-
-	para "You have {d:BUG_CONTEST_MINUTES}"
-	line "minutes."
-
-	para "If you run out of"
-	line "PARK BALLS, you're"
-	cont "done."
-
-	para "You can keep the"
-	line "last #MON you"
-	cont "catch as your own."
-
-	para "Go out and catch"
-	line "the strongest bug"
-
-	para "#MON you can"
-	line "find!"
-	done
+	jumpthisopenedtext
+		text "Today's Contest is"
+		line "over. We hope you"
+		cont "will participate"
+		cont "in the future."
+		done
 
 Route7NationalParkGateOfficer1AskToUseFirstMonText:
 	text "Uh-oh…"
 
 	para "You have more than"
-	line "one #MON."
+	line "one #mon."
 
 	para "You'll have to use"
 	line "@"
 	text_ram wStringBuffer3
 	text ", the"
-
-	para "first #MON in"
-	line "your party."
+	cont "first #mon in"
+	cont "your party."
 
 	para "Is that OK with"
 	line "you?"
 	done
 
-Route7NationalParkGateOfficer1WellHoldYourMonText:
-	text "Fine, we'll hold"
-	line "your other #MON"
-	cont "while you compete."
-	done
+Route7NationalParkGate_NoContestToday:
+	jumptextfaceplayer Route7NationalParkGateOfficer1WeHoldContestsText
 
-Route7NationalParkGatePlayersMonLeftWithHelperText:
-	text "<PLAYER>'s #MON"
-	line "were left with the"
-	cont "CONTEST HELPER."
-	done
+Route7NationalParkGateOfficerScript:
+	faceplayeropentext
+	checkflag ENGINE_DAILY_BUG_CONTEST
+	iftrue Route7NationalParkGate_ContestIsOver
+	writetext Route7NationalParkGateOfficer1WeHoldContestsText
+	waitendtext
 
-Route7NationalParkGateOfficer1ChooseMonAndComeBackText:
-	text "Please choose the"
-	line "#MON to be used"
+Route7NationalParkGateOfficer1AskToParticipateText:
+	text "Today's @"
+	text_ram wStringBuffer3
+	text "."
 
-	para "in the Contest,"
-	line "then come see me."
-	done
+	para "That means the"
+	line "Bug-Catching Con-"
+	cont "test is on today."
 
-Route7NationalParkGateOfficer1TakePartInFutureText:
-	text "OK. We hope you'll"
-	line "take part in the"
-	cont "future."
-	done
+	para "The rules are sim-"
+	line "ple."
 
-Route7NationalParkGateOfficer1FirstMonCantBattleText:
-	text "Uh-oh…"
-	line "The first #MON"
+	para "Using one of your"
+	line "#mon, catch a"
+	cont "bug #mon to be"
+	cont "judged."
 
-	para "in your party"
-	line "can't battle."
-
-	para "Please switch it"
-	line "with the #MON"
-
-	para "you want to use,"
-	line "then come see me."
-	done
-
-Route7NationalParkGateOfficer1MakeRoomText:
-	text "Uh-oh…"
-	line "Both your party"
-
-	para "and your PC BOX"
-	line "are full."
-
-	para "You have no room"
-	line "to put the bug"
-	cont "#MON you catch."
-
-	para "Please make room"
-	line "in your party or"
-
-	para "your PC BOX, then"
-	line "come see me."
-	done
-
-Route7NationalParkGateOfficer1EggAsFirstMonText:
-	text "Uh-oh…"
-	line "You have an EGG as"
-
-	para "the first #MON"
-	line "in your party."
-
-	para "Please switch it"
-	line "with the #MON"
-
-	para "you want to use,"
-	line "then come see me."
+	para "Would you like to"
+	line "give it a try?"
 	done
 
 Route7NationalParkGateOfficer1WantToFinishText:
@@ -380,48 +345,24 @@ Route7NationalParkGateOfficer1WantToFinishText:
 	line "finish now?"
 	done
 
-Route7NationalParkGateOfficer1WaitAtNorthGateText:
-	text "OK. Please wait at"
-	line "the North Gate for"
-
-	para "the announcement"
-	line "of the winners."
-	done
-
-Route7NationalParkGateOfficer1OkGoFinishText:
-	text "OK. Please get"
-	line "back outside and"
-	cont "finish up."
-	done
-
-Route7NationalParkGateOfficer1ContestIsOverText:
-	text "Today's Contest is"
-	line "over. We hope you"
-
-	para "will participate"
-	line "in the future."
-	done
-
 Route7NationalParkGateOfficer1WeHoldContestsText:
 	text "We hold Contests"
 	line "regularly in the"
-
-	para "PARK. You should"
-	line "give it a shot."
+	cont "Park. You should"
+	cont "give it a shot."
 	done
 
 Route7NationalParkGateYoungsterText:
-	text "When is the next"
-	line "Bug-Catching Con-"
-	cont "test going to be?"
+	text "The Bug-Catching"
+	line "contest's details"
+	cont "are on the sign."
 	done
 
 BugCatchingContestExplanationText:
 	text "The Bug-Catching"
 	line "Contest is held on"
-
-	para "Tuesday, Thursday"
-	line "and Saturday."
+	cont "Tuesday, Thursday"
+	cont "and Saturday."
 
 	para "Prizes are earned"
 	line "via placement."
@@ -431,24 +372,3 @@ BugCatchingContestExplanationText:
 	cont "3rd: Gold Berry"
 	cont "None: Berry"
 	done
-
-Route7NationalParkGateChanseyScript:
-	jumpstd ChanseyHealsOWScript
-
-Route7NationalParkGate_MapEvents:
-	def_warp_events
-	warp_event  3,  0, NATIONAL_PARK, 1
-	warp_event  4,  0, NATIONAL_PARK, 4
-	warp_event  3,  7, ROUTE_7, 3
-	warp_event  4,  7, ROUTE_7, 3
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  5,  0, BGEVENT_READ, BugCatchingContestExplanationSign
-
-	def_object_events
-	object_event  2,  1, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route7OfficerScriptContest, EVENT_ROUTE_7_NATIONAL_PARK_GATE_OFFICER_CONTEST_DAY
-	object_event  6,  5, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route7NationalParkGateYoungsterScript, EVENT_ROUTE_7_NATIONAL_PARK_GATE_YOUNGSTER
-	object_event  0,  3, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route7NationalParkGateOfficerScript, EVENT_ROUTE_7_NATIONAL_PARK_GATE_OFFICER_NOT_CONTEST_DAY
-	object_event  0,  7, SPRITE_CHANSEY_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route7NationalParkGateChanseyScript, -1
