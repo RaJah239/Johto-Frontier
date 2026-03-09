@@ -4,6 +4,10 @@
 	const ECRUTEAKTINTOWERENTRANCE_SAGE3
 	const ECRUTEAKTINTOWERENTRANCE_GRAMPS
 
+; TODOTEXT here's how to set the blocking sage here:
+; 	setmapscene ECRUTEAK_TIN_TOWER_ENTRANCE, SCENE_ECRUTEAKTINTOWERENTRANCE_SAGE_BLOCKS
+
+
 EcruteakTinTowerEntrance_MapScripts:
 	def_scene_scripts
 	scene_script EcruteakTinTowerEntranceNoop1Scene, SCENE_ECRUTEAKTINTOWERENTRANCE_SAGE_BLOCKS

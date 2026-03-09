@@ -138,7 +138,7 @@
 	const TANGELA_CALL ; 82
 	const STARDUST     ; 83
 	const STAR_PIECE   ; 84
-	const BASEMENT_KEY ; 85
+	const BASEMENT_KEY ; 85 ; to replace
 	const SHINY_BALL   ; 86
 	const BLACK_SLUDGE ; 87
 	const SHINY_CHARM  ; 88

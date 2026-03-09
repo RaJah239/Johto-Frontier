@@ -474,12 +474,9 @@ DayToTextScript:
 	db "Saturday@"
 
 GoldenrodRocketsScript:
-	clearevent EVENT_GOLDENROD_CITY_ROCKET_TAKEOVER
 	end
 
 RadioTowerRocketsScript:
-	setflag ENGINE_ROCKETS_IN_RADIO_TOWER
-	clearevent EVENT_RADIO_TOWER_ROCKET_TAKEOVER
 	specialphonecall SPECIALCALL_WEIRDBROADCAST
 	end
 

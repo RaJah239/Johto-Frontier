@@ -1,494 +1,61 @@
-	object_const_def
-	const RADIOTOWER5F_FAKE_DIRECTOR
-	const RADIOTOWER5F_ROCKET
-	const RADIOTOWER5F_ROCKET_GIRL
-	const RADIOTOWER5F_ROCKER
-	const RADIOTOWER5F_POKE_BALL
-	const RADIOTOWER5F_REAL_DIRECTOR
-
-RadioTower5F_MapScripts:
-	def_scene_scripts
-	scene_script RadioTower5FNoop1Scene, SCENE_RADIOTOWER5F_FAKE_DIRECTOR
-	scene_script RadioTower5FNoop2Scene, SCENE_RADIOTOWER5F_ROCKET_BOSS
-	scene_script RadioTower5FNoop3Scene, SCENE_RADIOTOWER5F_NOOP
-
-	def_callbacks
-
-RadioTower5FNoop1Scene:
-	end
-
-RadioTower5FNoop2Scene:
-	end
-
-RadioTower5FNoop3Scene:
-	end
-
-FakeDirectorApproachesScript:
-	turnobject RADIOTOWER5F_FAKE_DIRECTOR, UP
-	showemote EMOTE_SHOCK, RADIOTOWER5F_FAKE_DIRECTOR, 15
-	opentext
-	writetext FakeDirectorTextBefore1
-	waitbutton
-	closetext
-	applymovement RADIOTOWER5F_FAKE_DIRECTOR, FakeDirectorMovement
-	special SaveMusic
-	playmusic MUSIC_ROCKET_ENCOUNTER
-	opentext
-	writetext FakeDirectorTextBefore2
-	waitbutton
-	closetext
-	applymovement RADIOTOWER5F_FAKE_DIRECTOR, FakeDirectorImpersonatorSpinMovement
-	faceplayer
-	variablesprite SPRITE_DIRECTOR_IMPERSONATOR, SPRITE_PETREL
-	special LoadUsedSpritesGFX
-	opentext
-	writetext PetrelRevealsHimselfText
-	waitbutton
-	winlosstext FakeDirectorWinText, 0
-	setlasttalked RADIOTOWER5F_FAKE_DIRECTOR
-	loadtrainer PETREL, PETREL2
-	startbattle
-	reloadmapafterbattle
-	opentext
-	writetext FakeDirectorTextAfter
-	promptbutton
-	verbosegiveitem BASEMENT_KEY
-	closetext
-	setscene SCENE_RADIOTOWER5F_ROCKET_BOSS
-	setevent EVENT_BEAT_ROCKET_EXECUTIVEM_3
-	end
-
-FakeDirectorImpersonatorSpinMovement:
-	turn_head DOWN
-	turn_head LEFT
-	turn_head UP
-	turn_head RIGHT
-	turn_head DOWN
-	turn_head LEFT
-	turn_head UP
-	turn_head RIGHT
-	turn_head DOWN
-	turn_head LEFT
-	turn_head UP
-	turn_head RIGHT
-	turn_head DOWN
-	step_end
-
-FakeDirectorScript:
-	faceplayer
-	opentext
-	writetext FakeDirectorTextAfter
-	waitbutton
-	closetext
-	end
-
-TrueDirector:
-	faceplayer
-	opentext
-	writetext RadioTower5FDirectorText
-	waitbutton
-	closetext
-	end
-
-TrainerExecutivef1:
-	trainer ARIANA, ARIANA2, EVENT_BEAT_ROCKET_EXECUTIVEF_1, Executivef1SeenText, Executivef1BeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext Executivef1AfterBattleText
-	waitbutton
-	closetext
-	end
-
-RadioTower5FRocketBossScript:
-	applymovement PLAYER, RadioTower5FPlayerTwoStepsLeftMovement
-	playmusic MUSIC_ROCKET_ENCOUNTER
-	turnobject RADIOTOWER5F_ROCKET, RIGHT
-	opentext
-	writetext RadioTower5FRocketBossBeforeText
-	waitbutton
-	closetext
-	winlosstext RadioTower5FRocketBossWinText, 0
-	setlasttalked RADIOTOWER5F_ROCKET
-	loadtrainer ARCHER, ARCHER1
-	startbattle
-	reloadmapafterbattle
-	opentext
-	writetext RadioTower5FRocketBossAfterText
-	waitbutton
-	closetext
-	special FadeOutToBlack
-	special ReloadSpritesNoPalettes
-	disappear RADIOTOWER5F_ROCKET
-	disappear RADIOTOWER5F_ROCKET_GIRL
-	pause 15
-	special FadeInFromBlack
-	setevent EVENT_BEAT_ROCKET_EXECUTIVEM_1
-	setevent EVENT_CLEARED_RADIO_TOWER
-	clearflag ENGINE_ROCKETS_IN_RADIO_TOWER
-	setevent EVENT_GOLDENROD_CITY_ROCKET_TAKEOVER
-	setevent EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	clearevent EVENT_MAHOGANY_MART_OWNERS
-	clearflag ENGINE_ROCKETS_IN_MAHOGANY
-	setevent EVENT_BLACKTHORN_CITY_SUPER_NERD_BLOCKS_GYM
-	clearevent EVENT_BLACKTHORN_CITY_SUPER_NERD_DOES_NOT_BLOCK_GYM
-	special PlayMapMusic
-	disappear RADIOTOWER5F_FAKE_DIRECTOR
-	moveobject RADIOTOWER5F_REAL_DIRECTOR, 12, 0
-	appear RADIOTOWER5F_REAL_DIRECTOR
-	applymovement RADIOTOWER5F_REAL_DIRECTOR, RadioTower5FDirectorWalksIn
-	turnobject PLAYER, RIGHT
-	opentext
-	writetext RadioTower5FDirectorThankYouText
-	promptbutton
-	verbosegiveitem CLEAR_BELL
-	writetext RadioTower5FDirectorDescribeClearBellText
-	waitbutton
-	closetext
-	setscene SCENE_RADIOTOWER5F_NOOP
-	setmapscene ECRUTEAK_TIN_TOWER_ENTRANCE, SCENE_ECRUTEAKTINTOWERENTRANCE_SAGE_BLOCKS
-	setevent EVENT_GOT_CLEAR_BELL
-	setevent EVENT_TEAM_ROCKET_DISBANDED
-	applymovement RADIOTOWER5F_REAL_DIRECTOR, RadioTower5FDirectorWalksOut
-	playsound SFX_EXIT_BUILDING
-	disappear RADIOTOWER5F_REAL_DIRECTOR
-	clearevent EVENT_RADIO_TOWER_5F_REAL_DIRECTOR
-	end
-
-Ben:
-	jumptextfaceplayer BenText
-
-RadioTower5FUltraBall:
-	itemball ULTRA_BALL
-
-RadioTower5FDirectorsOfficeSign:
-	jumptext RadioTower5FDirectorsOfficeSignText
-
-RadioTower5FStudio1Sign:
-	jumptext RadioTower5FStudio1SignText
-
-RadioTower5FBookshelf:
-	jumpstd MagazineBookshelfScript
-
-FakeDirectorMovement:
-	step LEFT
-	step LEFT
-	step LEFT
-	step UP
-	step UP
-	step_end
-
-RadioTower5FDirectorWalksIn:
-	step DOWN
-	step DOWN
-	step RIGHT
-	step RIGHT
-	step RIGHT
-	step RIGHT
-	step DOWN
-	step DOWN
-	step DOWN
-	step LEFT
-	step_end
-
-RadioTower5FDirectorWalksOut:
-	step RIGHT
-	step UP
-	step UP
-	step UP
-	step LEFT
-	step LEFT
-	step LEFT
-	step LEFT
-	step UP
-	step UP
-	step_end
-
-RadioTower5FPlayerTwoStepsLeftMovement:
-	step LEFT
-	step LEFT
-	step_end
-
-FakeDirectorTextBefore1:
-	text "Y-you! You came to"
-	line "rescue me?"
-	done
-
-FakeDirectorTextBefore2:
-	text "Is that what you"
-	line "were expecting?"
-
-	para "Wrong! I'm a"
-	line "charlatan, an"
-	cont "imposter!"
-
-	para "It is I, PETREL!"
-	done
-
-PetrelRevealsHimselfText:
-	text "I posed as the"
-	line "Director to sway"
-
-	para "the entire region"
-	line "in favor of"
-	cont "TEAM ROCKET!"
-
-	para "Do you want to"
-	line "know where we hid"
-	cont "the DIRECTOR?"
-
-	para "Sure, I'll tell"
-	line "but only if you"
-	cont "can beat me!"
-
-	para "It's time to pay"
-	line "for what you did"
-
-	para "at MAHOGANY TOWN"
-	line "<PLAY_G>!"
-	done
-
-FakeDirectorWinText:
-	text "OK, OK. I'll tell"
-	line "you where he is."
-	done
-
-FakeDirectorTextAfter:
-	text "Listen carefully."
-
-	para "We stashed the"
-	line "real DIRECTOR in"
-
-	para "the UNDERGROUND"
-	line "WAREHOUSE."
-
-	para "It's at the far"
-	line "end of the UNDER-"
-	cont "GROUND."
-
-	para "Since, I'm a such"
-	line "a nice guy, take"
-	cont "the BASEMENT KEY."
-
-	para "But I doubt you'll"
-	line "get that far."
-	done
-
-Executivef1SeenText:
-	text "Remember me from"
-	line "the HIDEOUT in"
-	cont "MAHOGANY TOWN?"
-
-	para "Looks like you're"
-	line "all alone this"
-	cont "time. So, let's"
-	cont "finish this!"
-	done
-
-Executivef1BeatenText:
-	text "Wh…Wha…Why are you"
-	line "so strong!?!"
-
-	para "I fought hard, but"
-	line "I still lost…"
-	done
-
-Executivef1AfterBattleText:
-	text "<PLAYER>, isn't it?"
-
-	para "What a waste… You"
-	line "could've used your"
-	cont "power for more."
-	
-	para "People like you"
-	line "will never grasp"
-	cont "our brilliance!"
-
-	para "It's a shame… I've"
-	line "come to respect"
-	cont "your strength."
-	done
-
-RadioTower5FRocketBossBeforeText:
-	text "Oh? You managed to"
-	line "get this far?"
-
-	para "You must be quite"
-	line "the trainer."
-
-	para "We intend to take"
-	line "over this RADIO"
-
-	para "STATION and an-"
-	line "nounce our come-"
-	cont "back."
-
-	para "That should bring"
-	line "our boss GIOVANNI"
-
-	para "back from his solo"
-	line "training."
-
-	para "We are going to"
-	line "regain our former"
-	cont "glory."
-
-	para "I won't allow you"
-	line "to interfere with"
-	cont "our plans."
-	done
-
-RadioTower5FRocketBossWinText:
-	text "That's impossible…"
-	
-	para "No! Forgive me,"
-	line "GIOVANNI!"
-	done
-
-RadioTower5FRocketBossAfterText:
-	text "How could this be?"
-
-	para "Our dreams have"
-	line "come to naught."
-
-	para "Did we all mis-"
-	line "understand the"
-
-	para "reason behind"
-	line "GIOVANNI's dis-"
-	cont "bandment?"
-
-	para "I need to mull"
-	line "this over."
-
-	para "Like GIOVANNI did"
-	line "before me, I will"
-
-	para "disband TEAM"
-	line "ROCKET here today."
-
-	para "Farewell."
-	done
-
-RadioTower5FDirectorThankYouText:
-	text "DIRECTOR: <PLAY_G>,"
-	line "thank you!"
-
-	para "Your courageous"
-	line "actions have saved"
-
-	para "#MON nation-"
-	line "wide."
-
-	para "I know it's not"
-	line "much, but please"
-	cont "take this."
-	done
-
-RadioTower5FDirectorDescribeClearBellText:
-	text "There used to be a"
-	line "tower right here"
-	cont "in GOLDENROD CITY."
-
-	para "But it was old and"
-	line "creaky."
-
-	para "So we replaced it"
-	line "with our RADIO"
-	cont "TOWER."
-
-	para "We dug up that"
-	line "bell during"
-	cont "construction."
-
-	para "I heard that all"
-	line "sorts of #MON"
-
-	para "lived in GOLDENROD"
-	line "in the past."
-
-	para "Perhaps…"
-
-	para "That bell has some"
-	line "connection to the"
-
-	para "TIN TOWER in"
-	line "ECRUTEAK CITY…"
-
-	para "Ah!"
-
-	para "That reminds me…"
-
-	para "I overheard TEAM"
-	line "ROCKET whispering."
-
-	para "Apparently, some-"
-	line "thing is going on"
-	cont "at the TIN TOWER."
-
-	para "I have no idea"
-	line "what is happening,"
-
-	para "but you might look"
-	line "into it."
-
-	para "OK, I better go to"
-	line "my OFFICE."
-	done
-
-RadioTower5FDirectorText:
-	text "DIRECTOR: Hello,"
-	line "<PLAY_G>!"
-
-	para "You know, I love"
-	line "#MON."
-
-	para "I built this RADIO"
-	line "TOWER so I could"
-
-	para "express my love"
-	line "of #MON."
-
-	para "It would be nice"
-	line "if people enjoyed"
-	cont "our programs."
-	done
-
-BenText:
-	text "BEN: Do you listen"
-	line "to our music?"
-	done
-
-RadioTower5FDirectorsOfficeSignText:
-	text "5F DIRECTOR'S"
-	line "   OFFICE"
-	done
-
-RadioTower5FStudio1SignText:
-	text "5F STUDIO 1"
-	done
-
 RadioTower5F_MapEvents:
 	def_warp_events
 	warp_event  0,  0, RADIO_TOWER_4F, 1
 	warp_event 12,  0, RADIO_TOWER_4F, 3
 
 	def_coord_events
-	coord_event  0,  3, SCENE_RADIOTOWER5F_FAKE_DIRECTOR, FakeDirectorApproachesScript
-	coord_event 16,  5, SCENE_RADIOTOWER5F_ROCKET_BOSS, RadioTower5FRocketBossScript
 
 	def_bg_events
-	bg_event  3,  0, BGEVENT_READ, RadioTower5FDirectorsOfficeSign
-	bg_event 11,  0, BGEVENT_READ, RadioTower5FStudio1Sign
-	bg_event 15,  0, BGEVENT_READ, RadioTower5FStudio1Sign
-	bg_event 16,  1, BGEVENT_READ, RadioTower5FBookshelf
-	bg_event 17,  1, BGEVENT_READ, RadioTower5FBookshelf
+	bg_event  3,  0, BGEVENT_JUMPTEXT, RadioTower5FDirectorsOfficeSignText
+	bg_event 11,  0, BGEVENT_JUMPTEXT, RadioTower5FStudio1SignText
+	bg_event 15,  0, BGEVENT_JUMPTEXT, RadioTower5FStudio1SignText
+	bg_event 16,  1, BGEVENT_JUMPSTD, MAGAZINE_BOOKSHELF_SCRIPT
+	bg_event 17,  1, BGEVENT_JUMPSTD, MAGAZINE_BOOKSHELF_SCRIPT
 
 	def_object_events
-	object_event  3,  6, SPRITE_DIRECTOR_IMPERSONATOR, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1,PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, FakeDirectorScript, EVENT_RADIO_TOWER_5F_DIRECTOR_FAKE
-	object_event 13,  5, SPRITE_ARCHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	object_event 17,  2, SPRITE_ARIANA, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerExecutivef1, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	object_event 13,  5, SPRITE_ROCKER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Ben, -1
+	object_event  3,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1,PAL_NPC_PURPLE, OBJECTTYPE_COMMAND, jumptextfaceplayer, RadioTower5FDirectorText, -1
+	object_event 13,  5, SPRITE_ROCKER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, RadioTower5FBenText, -1
 	object_event  8,  5, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, RadioTower5FUltraBall, EVENT_RADIO_TOWER_5F_ULTRA_BALL
-	object_event  3,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, TrueDirector, EVENT_RADIO_TOWER_5F_REAL_DIRECTOR
+
+	object_const_def
+	const RADIOTOWER5F_DIRECTOR
+	const RADIOTOWER5F_ROCKER
+	const RADIOTOWER5F_POKE_BALL
+
+RadioTower5F_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
+
+RadioTower5FDirectorText:
+	text "Director: Hello!"
+
+	para "You know, I love"
+	line "#mon."
+
+	para "I built this Radio"
+	line "Tower so I could"
+	cont "express my love"
+	cont "of #mon."
+
+	para "It would be nice"
+	line "if people enjoyed"
+	cont "our programs."
+	done
+
+RadioTower5FBenText:
+	text "Ben: Do you listen"
+	line "to our music?"
+	done
+
+RadioTower5FDirectorsOfficeSignText:
+	text "5F Director's"
+	line "   Office"
+	done
+
+RadioTower5FStudio1SignText:
+	text "5F Studio 1"
+	done
+
+RadioTower5FUltraBall:
+	itemball ULTRA_BALL

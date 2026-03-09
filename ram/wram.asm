@@ -3152,7 +3152,6 @@ wRoute15GateSceneID::                             db
 wTinTower1FSceneID::                              db
 wBurnedTower1FSceneID::                           db
 wBurnedTowerB1FSceneID::                          db
-wRadioTower5FSceneID::                            db
 wRuinsOfAlphOutsideSceneID::                      db
 wRuinsOfAlphResearchCenterSceneID::               db
 wRuinsOfAlphHoOhChamberSceneID::                  db
@@ -3177,7 +3176,7 @@ wOaksLab::                                        db ; Nayru62's scene in Oak's 
 wRoute21::                                        db
 wBattlePlaza::                                    db
 
-	ds 168
+	ds 169
 
 ; battle tower points
 wBattleTowerNormalPoints:: db
