@@ -41,7 +41,7 @@ Route3MailRecipientScript:
 	faceplayeropentext
 	checkevent EVENT_GOT_TM_AURA_SPHERE
 	iftrue .DescribeDarkPulse
-	checkevent EVENT_GOT_KENYA
+	checkevent EVENT_GOT_DURACELL
 	iftrue .TryGiveKenya
 	jumpthisopenedtext
 		text "… Hnuurg… Huh?"

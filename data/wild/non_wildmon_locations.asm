@@ -114,7 +114,7 @@ GiftMons::
 ; replace map_id with -1 to hide location but keep hint
 ; species, EVENT_FLAG, map_id, blurb string ptr
 	specialencounter SHUCKLE, 	EVENT_MANIA_TOOK_SHUCKIE_OR_LET_YOU_KEEP_HIM, MANIAS_HOUSE, ShuckieEvent_Str ; EVENT_GOT_SHUCKIE / EVENT_MANIA_TOOK_SHUCKIE_OR_LET_YOU_KEEP_HIM
-	specialencounter PIKACHU, 	EVENT_GOT_KENYA, 					ROUTE_7_GOLDENROD_GATE, KenyaEvent_Str
+	specialencounter PIKACHU, 	EVENT_GOT_DURACELL, 					ROUTE_7_GOLDENROD_GATE, KenyaEvent_Str
 	specialencounter MAGIKARP, 	EVENT_GOT_DRATINI, 					DRAGON_SHRINE, ExtremespeedDratini_Str
 	specialencounter EEVEE,	 	EVENT_GOT_EEVEE, 					BILLS_FAMILYS_HOUSE, BillsEevee_Str
 	specialencounter MAGIKARP, 	EVENT_GOT_TYROGUE_FROM_KIYO, 		MOUNT_MORTAR_1F_OUTSIDE, TyrogueEvent_Str
