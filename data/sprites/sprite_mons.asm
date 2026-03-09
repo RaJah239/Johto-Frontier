@@ -39,4 +39,5 @@ SpriteMons:
 	db PIDGEY ; in use
 	db SLOWPOKE ; in use
 	db SCYTHER ; in use
+	db MEOWTH ; in use
 	assert_table_length NUM_POKEMON_SPRITES

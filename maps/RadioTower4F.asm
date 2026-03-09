@@ -1,261 +1,3 @@
-	object_const_def
-	const RADIOTOWER4F_FISHER
-	const RADIOTOWER4F_TEACHER
-	const RADIOTOWER4F_GROWLITHE
-	const RADIOTOWER4F_ROCKET1
-	const RADIOTOWER4F_ROCKET2
-	const RADIOTOWER4F_ROCKET_GIRL
-	const RADIOTOWER4F_SCIENTIST
-
-RadioTower4F_MapScripts:
-	def_scene_scripts
-
-	def_callbacks
-
-RadioTower4FFisherScript:
-	jumptextfaceplayer RadioTower4FFisherText
-
-RadioTower4FDJMaryScript:
-	faceplayer
-	opentext
-	checkevent EVENT_GOT_PINK_BOW_FROM_MARY
-	iftrue .GotPinkBow
-	checkevent EVENT_CLEARED_RADIO_TOWER
-	iftrue .ClearedRockets
-	writetext RadioTower4FDJMaryText
-	waitbutton
-	closetext
-	end
-
-.ClearedRockets:
-	writetext RadioTower4FDJMaryText_ClearedRockets
-	promptbutton
-	verbosegiveitem PINK_BOW
-	iffalse .NoRoom
-	writetext RadioTower4FDJMaryText_GivePinkBow
-	waitbutton
-	closetext
-	setevent EVENT_GOT_PINK_BOW_FROM_MARY
-	end
-
-.GotPinkBow:
-	writetext RadioTower4FDJMaryText_After
-	waitbutton
-.NoRoom:
-	closetext
-	end
-
-RadioTowerMeowth:
-	opentext
-	writetext RadioTowerMeowthText
-	cry MEOWTH
-	waitbutton
-	closetext
-	end
-
-TrainerGruntM10:
-	trainer GRUNTM, GRUNTM_10, EVENT_BEAT_ROCKET_GRUNTM_10, GruntM10SeenText, GruntM10BeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext GruntM10AfterBattleText
-	waitbutton
-	closetext
-	end
-
-TrainerExecutivem2:
-	trainer PROTON, PROTON2, EVENT_BEAT_ROCKET_EXECUTIVEM_2, Executivem2SeenText, Executivem2BeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext Executivem2AfterBattleText
-	waitbutton
-	closetext
-	end
-
-TrainerGruntF4:
-	trainer GRUNTF, GRUNTF_4, EVENT_BEAT_ROCKET_GRUNTF_4, GruntF4SeenText, GruntF4BeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext GruntF4AfterBattleText
-	waitbutton
-	closetext
-	end
-
-TrainerScientistRich:
-	trainer SCIENTIST, RICH, EVENT_BEAT_SCIENTIST_RICH, ScientistRichSeenText, ScientistRichBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext ScientistRichAfterBattleText
-	waitbutton
-	closetext
-	end
-
-RadioTower4FProductionSign:
-	jumptext RadioTower4FProductionSignText
-
-RadioTower4FStudio2Sign:
-	jumptext RadioTower4FStudio2SignText
-
-RadioTower4FFisherText:
-	text "I listened to the"
-	line "radio while I was"
-	cont "at the RUINS."
-
-	para "I heard a strange"
-	line "broadcast there."
-	done
-
-RadioTower4FDJMaryText:
-	text "MARY: Why? Why do"
-	line "I have to suffer"
-	cont "through this?"
-
-	para "MEOWTH, help me!"
-	done
-
-RadioTower4FDJMaryText_ClearedRockets:
-	text "MARY: Oh! You're"
-	line "my little savior!"
-
-	para "Will you take this"
-	line "as my thanks?"
-	done
-
-RadioTower4FDJMaryText_GivePinkBow:
-	text "MARY: It's just"
-	line "right for #MON"
-
-	para "that know normal-"
-	line "type moves."
-	done
-
-RadioTower4FDJMaryText_After:
-	text "MARY: Please tune"
-	line "into me on PROF."
-
-	para "OAK'S #MON TALK"
-	line "show."
-	done
-
-RadioTowerMeowthText:
-	text "MEOWTH: Meowth…"
-	done
-
-GruntM10SeenText:
-	text "You plan to rescue"
-	line "the DIRECTOR?"
-
-	para "That won't be pos-"
-	line "sible because I'm"
-	cont "going to beat you!"
-	done
-
-GruntM10BeatenText:
-	text "No! Unbelievable!"
-	done
-
-GruntM10AfterBattleText:
-	text "I don't believe"
-	line "it! I was beaten!"
-	done
-
-Executivem2SeenText:
-	text "Wait a moment!"
-	
-	line "You're the one who"
-	cont "meddled in the"
-	cont "SLOWPOKE WELL!"
-
-	para "<PLAY_G>!"
-	
-	para "I see your game."
-	
-	para "Trying to provoke"
-	line "me, huh? Watch"
-	cont "out!"
-	
-	para "But if that is"
-	line "what you want,"
-
-	para "I'll unleash the"
-	line "fury of a TEAM"
-	cont "ROCKET EXECUTIVE"
-	cont "on you!"
-	done
-
-Executivem2BeatenText:
-	text "Ugh…Just what are"
-	line "you?!"
-	done
-
-Executivem2AfterBattleText:
-	text "You may have won"
-	line "now…but you've"
-
-	para "only fueled TEAM"
-	line "ROCKET's anger…"
-	done
-
-GruntF4SeenText:
-	text "Don't I think"
-	line "#MON are cute?"
-
-	para "I'll think my"
-	line "#MON are cute--"
-
-	para "after they beat"
-	line "yours!"
-	done
-
-GruntF4BeatenText:
-	text "Oh, no! They're so"
-	line "useless!"
-	done
-
-GruntF4AfterBattleText:
-	text "I love my"
-	line "beautiful self!"
-
-	para "Who cares about"
-	line "#MON?"
-	done
-
-ScientistRichSeenText:
-	text "Most excellent."
-
-	para "This RADIO TOWER"
-	line "will fulfill our"
-	cont "grand design."
-	done
-
-ScientistRichBeatenText:
-	text "Hmmm…"
-
-	para "All grand plans"
-	line "come with snags."
-	done
-
-ScientistRichAfterBattleText:
-	text "Do you honestly"
-	line "believe you can"
-	cont "stop TEAM ROCKET?"
-	done
-
-RadioTower4FProductionSignText:
-	text "4F PRODUCTION"
-	done
-
-RadioTower4FStudio2SignText:
-	text "4F STUDIO 2"
-	done
-
 RadioTower4F_MapEvents:
 	def_warp_events
 	warp_event  0,  0, RADIO_TOWER_5F, 1
@@ -266,14 +8,81 @@ RadioTower4F_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  7,  0, BGEVENT_READ, RadioTower4FProductionSign
-	bg_event 15,  0, BGEVENT_READ, RadioTower4FStudio2Sign
+	bg_event  7,  0, BGEVENT_JUMPTEXT, RadioTower4FProductionSignText
+	bg_event 15,  0, BGEVENT_JUMPTEXT, RadioTower4FStudio2SignText
 
 	def_object_events
-	object_event  6,  4, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RadioTower4FFisherScript, -1
+	object_event  6,  4, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, RadioTower4FFisherText, -1
 	object_event 14,  6, SPRITE_TEACHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, RadioTower4FDJMaryScript, -1
-	object_event 12,  7, SPRITE_GROWLITHE, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RadioTowerMeowth, -1
-	object_event  5,  6, SPRITE_ROCKET, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, 0, OBJECTTYPE_TRAINER, 3, TrainerGruntM10, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	object_event 14,  1, SPRITE_PROTON, SPRITEMOVEDATA_STANDING_LEFT, 2, 0, -1, -1, 0, OBJECTTYPE_TRAINER, 2, TrainerExecutivem2, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	object_event 12,  4, SPRITE_ROCKET_GIRL, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerGruntF4, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	object_event  4,  2, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 4, TrainerScientistRich, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event 12,  7, SPRITE_MEOWTH, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RadioTower4FMeowth, -1
+
+	object_const_def
+	const RADIOTOWER4F_FISHER
+	const RADIOTOWER4F_TEACHER
+	const RADIOTOWER4F_MEOWTH
+
+RadioTower4F_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
+
+RadioTower4FDJMaryScript:
+	faceplayeropentext
+	checkevent EVENT_GOT_PINK_BOW_FROM_MARY
+	iftrue .GotPinkBow
+	writethistext
+		text "Mary: My Meowth's"
+		line "Normal type moves"
+		cont "are powered up"
+		cont "thanks to this!"
+		done
+	promptbutton
+	verbosegiveitem PINK_BOW
+	iffalse_endtext
+	setevent EVENT_GOT_PINK_BOW_FROM_MARY
+	jumpthisopenedtext
+		text "Mary: It's just"
+		line "right for #mon"
+		cont "that know normal-"
+		cont "type moves."
+		done
+
+.GotPinkBow:
+	jumpthisopenedtext
+		text "Mary: Please tune"
+		line "into me on Prof."
+		cont "Oak's #mon Talk"
+		cont "show."
+		done
+
+RadioTower4FMeowth:
+	setval MEOWTH
+	special SetMonAsSeen
+	isfieldactionssettoquick
+	iftrue .skipthis
+	reanchormap
+	pokepic MEOWTH
+	cry MEOWTH
+	waitbutton
+	closepokepic
+.skipthis
+	jumpthistext
+		text "Meowth: Meow…"
+		done
+
+RadioTower4FFisherText:
+	text "I listened to the"
+	line "radio while I was"
+	cont "at the Ruins."
+
+	para "I heard a strange"
+	line "broadcast there."
+	done
+
+RadioTower4FProductionSignText:
+	text "4F Production"
+	done
+
+RadioTower4FStudio2SignText:
+	text "4F Studio 2"
+	done

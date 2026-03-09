@@ -860,7 +860,7 @@
 	const EVENT_BEAT_SCIENTIST_MITCH
 	const EVENT_BEAT_SCIENTIST_JED
 	const_skip
-	const EVENT_BEAT_SCIENTIST_RICH
+	const_skip
 ; Blackbelt
 	const_skip
 	const EVENT_BEAT_BLACKBELT_YOSHI
@@ -956,7 +956,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_ROCKET_GRUNTM_10
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -982,7 +982,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_ROCKET_GRUNTF_4
+	const_skip
 	const EVENT_BEAT_ROCKET_GRUNTF_5
 ; Lass
 	const EVENT_BEAT_LASS_CARRIE
@@ -1085,7 +1085,7 @@
 	const EVENT_BEAT_ROCKET_EXECUTIVEF_2
 ; ExecutiveM
 	const EVENT_BEAT_ROCKET_EXECUTIVEM_1
-	const EVENT_BEAT_ROCKET_EXECUTIVEM_2
+	const_skip
 	const EVENT_BEAT_ROCKET_EXECUTIVEM_3
 	const EVENT_BEAT_ROCKET_EXECUTIVEM_4
 ; Sailor
