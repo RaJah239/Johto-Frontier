@@ -29,8 +29,8 @@ SpriteMons:
 	db HARIYAMA ; in use
 	db VOLTORB
 	db LAPRAS
-	db URSALUNA
-	db MOLTRES
+	db RHYDON ; in use
+	db MOLTRES ; in use
 	db SNORLAX
 	db GYARADOS ; in use
 	db LUGIA ; in use
