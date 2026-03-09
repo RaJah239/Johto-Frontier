@@ -200,149 +200,24 @@ TrainerPicnickerKim:
 	done
 
 TrainerBugCatcherArnie:
-	trainer BUG_CATCHER, ARNIE1, EVENT_BEAT_BUG_CATCHER_ARNIE, BugCatcherArnieSeenText, BugCatcherArnieBeatenText, 0, .Script
+	generictrainer BUG_CATCHER, ARNIE, EVENT_BEAT_BUG_CATCHER_ARNIE, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_BUG_CATCHER_ARNIE
-	opentext
-	checkevent EVENT_ARNIE_SILVERPOWDER
-	iftrue .RematchGift
-	checkflag ENGINE_ARNIE_READY_FOR_REMATCH
-	iftrue .WantsBattle
-	checkcellnum PHONE_BUG_CATCHER_ARNIE
-	iftrue Route7NumberAcceptedM
-	checkevent EVENT_ARNIE_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	writetext BugCatcherArnieAfterBattleText
-	promptbutton
-	setevent EVENT_ARNIE_ASKED_FOR_PHONE_NUMBER
-	scall Route7AskNumber
-	sjump .AskForNumber
+.ArnieAfterText
+	text "My Venonat won me"
+	line "the Bug-Catching"
+	cont "Contest at the"
+	cont "National Park."
+	done
 
-.AskedAlready:
-	scall Route7AskNumber
-.AskForNumber:
-	askforphonenumber PHONE_BUG_CATCHER_ARNIE
-	ifequal PHONE_CONTACT_REFUSED, Route7NumberDeclinedM
-	gettrainername STRING_BUFFER_3, BUG_CATCHER, ARNIE1
-	scall Route7RegisteredNumberM
-	sjump Route7NumberAcceptedM
-
-.WantsBattle:
-	scall Route7RematchM
-	winlosstext BugCatcherArnieBeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight4
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight3
-	checkflag ENGINE_FLYPOINT_BLACKTHORN
-	iftrue .LoadFight2
-	checkflag ENGINE_FLYPOINT_LAKE_OF_RAGE
-	iftrue .LoadFight1
-	loadtrainer BUG_CATCHER, ARNIE1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_ARNIE_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer BUG_CATCHER, ARNIE2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_ARNIE_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer BUG_CATCHER, ARNIE3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_ARNIE_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer BUG_CATCHER, ARNIE4
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_ARNIE_READY_FOR_REMATCH
-	end
-
-.LoadFight4:
-	loadtrainer BUG_CATCHER, ARNIE5
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_ARNIE_READY_FOR_REMATCH
-	opentext
-	writetext BugCatcherArnie_GiveSilverPowderAfterBattleText
-	waitbutton
-	verbosegiveitem SILVERPOWDER
-	iffalse .PackFull
-	closetext
-	end
-
-.RematchGift
-	writetext BugCatcherArnie_AgainGiveSilverPowderAfterBattleText
-	waitbutton
-	verbosegiveitem SILVERPOWDER
-	iffalse .PackFull
-	clearevent EVENT_ARNIE_SILVERPOWDER
-	closetext
-	end
-
-.PackFull:
-	setevent EVENT_ARNIE_SILVERPOWDER
-	jumpstd PackFullMScript
-	end
-
-Route7AskNumber:
-	jumpstd AskNumberMScript
-	end
-
-Route7RegisteredNumberM:
-	jumpstd RegisteredNumberMScript
-	end
-
-Route7NumberAcceptedM:
-	jumpstd NumberAcceptedMScript
-	end
-
-Route7NumberDeclinedM:
-	jumpstd NumberDeclinedMScript
-	end
-
-Route7RematchM:
-	jumpstd RematchMScript
-	end
-
-
-BugCatcherArnieSeenText:
+.SeenText
 	text "I'll go anywhere"
-	line "if bug #MON"
+	line "if bug #mon"
 	cont "appear there."
 	done
 
-BugCatcherArnieBeatenText:
+.BeatenText
 	text "Huh? I shouldn't"
 	line "have lost that…"
-	done
-
-BugCatcherArnieAfterBattleText:
-	text "My VENONAT won me"
-	line "the Bug-Catching"
-
-	para "Contest at the"
-	line "NATIONAL PARK."
-	done
-
-
-
-BugCatcherArnie_GiveSilverPowderAfterBattleText:
-	text "Oh well. Take this"
-	line "for your victory!"
-	done
-
-BugCatcherArnie_AgainGiveSilverPowderAfterBattleText:
-	text "Made room have"
-	line "you? Take it."
 	done
 
 TrainerFirebreatherWalt:
@@ -366,11 +241,11 @@ TrainerFirebreatherWalt:
 
 TrainerOfficerDirk:
 	faceplayeropentext
-	checktime NITE
-	iffalse .NoFight
 	checkevent EVENT_BEAT_OFFICER_DIRK
 	special SaveMusic
 	iftrue .AfterScript
+	checktime NITE
+	iffalse .NoFight
 	playmusic MUSIC_OFFICER_ENCOUNTER
 	writethistext
 		text "Danger lurks in"
@@ -378,7 +253,7 @@ TrainerOfficerDirk:
 		done
 	waitclosetext
 	winlosstext .BeatenText, 0
-	loadtrainer OFFICER, KEITH
+	loadtrainer OFFICER, DIRK
 	startbattle
 	reloadmapafterbattle
 	special RestoreMusic
@@ -402,7 +277,7 @@ TrainerOfficerDirk:
 	promptbutton
 	closetext
 	winlosstext .BeatenText, 0
-	loadtrainer OFFICER, KEITH
+	loadtrainer OFFICER, DIRK
 	startbattle
 	reloadmapafterbattle
 	special RestoreMusic

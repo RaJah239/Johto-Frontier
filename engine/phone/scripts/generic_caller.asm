@@ -12,7 +12,6 @@ PhoneScript_RematchText_Male:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
 	ifequal PHONE_SCHOOLBOY_CHAD, .Chad
 	ifequal PHONE_FISHER_TULLY, .Tully
 	ifequal PHONE_POKEMANIAC_BRENT, .Brent
@@ -37,11 +36,6 @@ PhoneScript_RematchText_Male:
 
 .Jose:
 	farwritetext JoseBattleRematchText
-	promptbutton
-	end
-
-.Arnie:
-	farwritetext ArnieBattleRematchText
 	promptbutton
 	end
 
@@ -114,7 +108,6 @@ PhoneScript_HangUpText_Male:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
 	ifequal PHONE_SCHOOLBOY_CHAD, .Chad
 	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
@@ -137,10 +130,6 @@ PhoneScript_HangUpText_Male:
 
 .Jose:
 	farwritetext JoseHangUpText
-	end
-
-.Arnie:
-	farwritetext ArnieHangUpText
 	end
 
 .Chad:

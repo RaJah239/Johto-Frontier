@@ -62,7 +62,7 @@ BugContestant_PicnickerCindy:
 	dbw SUICUNE,    226
 
 BugContestant_BugCatcherJosh:
-	db BUG_CATCHER, ARNIE1
+	db BUG_CATCHER, ARNIE
 	dbw RAIKOU,     300
 	dbw ENTEI,      285
 	dbw SUICUNE,    226

@@ -458,7 +458,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_ARNIE_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -486,7 +486,7 @@
 	const_skip
 	const EVENT_ERIN_ASKED_FOR_PHONE_NUMBER
 	const_skip
-	const EVENT_ARNIE_SILVERPOWDER
+	const_skip
 ; Ruins of Alph puzzles
 	const EVENT_SOLVED_HO_OH_PUZZLE
 	const EVENT_SOLVED_LILEEP_PUZZLE

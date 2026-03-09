@@ -275,11 +275,7 @@ DEF KRIS EQU __trainer_class__
 	const BUG_CATCHER_BENNY
 	const AL
 	const JOSH
-	const ARNIE1
-	const ARNIE2
-	const ARNIE3
-	const ARNIE4
-	const ARNIE5
+	const ARNIE
 	const WAYNE
 	const EMMANUEL
 	const ADAM

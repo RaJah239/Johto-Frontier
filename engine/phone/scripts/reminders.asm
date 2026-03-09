@@ -22,10 +22,6 @@ ReenaHurryScript:
 	farwritetext ReenaHurryText
 	end
 
-ArnieReminderScript:
-	farwritetext ArnieReminderText
-	end
-
 DanaReminderScript:
 	farwritetext DanaReminderText
 	end

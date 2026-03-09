@@ -648,7 +648,6 @@ AskNumberMScript:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
 	ifequal PHONE_SCHOOLBOY_CHAD, .Chad
 	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
@@ -668,9 +667,6 @@ AskNumberMScript:
 	end
 .Jose:
 	farwritetext JoseAskNumberText
-	end
-.Arnie:
-	farwritetext ArnieAskNumberText
 	end
 .Chad:
 	farwritetext ChadAskNumberText
@@ -708,7 +704,6 @@ NumberAcceptedMScript:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
 	ifequal PHONE_SCHOOLBOY_CHAD, .Chad
 	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
@@ -734,11 +729,6 @@ NumberAcceptedMScript:
 	end
 .Jose:
 	farwritetext JoseNumberAcceptedText
-	waitbutton
-	closetext
-	end
-.Arnie:
-	farwritetext ArnieNumberAcceptedText
 	waitbutton
 	closetext
 	end
@@ -784,7 +774,6 @@ NumberDeclinedMScript:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
 	ifequal PHONE_SCHOOLBOY_CHAD, .Chad
 	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
@@ -810,11 +799,6 @@ NumberDeclinedMScript:
 	end
 .Jose:
 	farwritetext JoseNumberDeclinedText
-	waitbutton
-	closetext
-	end
-.Arnie:
-	farwritetext ArnieNumberDeclinedText
 	waitbutton
 	closetext
 	end
@@ -860,7 +844,6 @@ RematchMScript:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
 	ifequal PHONE_SCHOOLBOY_CHAD, .Chad
 	ifequal PHONE_FISHER_TULLY, .Tully
 	ifequal PHONE_POKEMANIAC_BRENT, .Brent
@@ -885,11 +868,6 @@ RematchMScript:
 	end
 .Jose:
 	farwritetext JoseRematchText
-	waitbutton
-	closetext
-	end
-.Arnie:
-	farwritetext ArnieRematchText
 	waitbutton
 	closetext
 	end
@@ -954,7 +932,6 @@ PackFullMScript:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BUG_CATCHER_ARNIE, .Arnie
 	ifequal PHONE_SCHOOLBOY_CHAD, .Chad
 	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
@@ -983,12 +960,6 @@ PackFullMScript:
 
 .Jose:
 	farwritetext JosePackFullText
-	waitbutton
-	closetext
-	end
-
-.Arnie
-	farwritetext ArniePackFullText
 	waitbutton
 	closetext
 	end
