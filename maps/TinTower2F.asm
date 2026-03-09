@@ -1,8 +1,3 @@
-TinTower2F_MapScripts:
-	def_scene_scripts
-
-	def_callbacks
-
 TinTower2F_MapEvents:
 	def_warp_events
 	warp_event 10, 14, TIN_TOWER_3F, 1
@@ -13,3 +8,8 @@ TinTower2F_MapEvents:
 	def_bg_events
 
 	def_object_events
+
+TinTower2F_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
