@@ -1,3 +1,36 @@
+Route7_MapEvents:
+	def_warp_events
+	warp_event  9, 33, ROUTE_7_GOLDENROD_GATE, 1
+	warp_event 10, 33, ROUTE_7_GOLDENROD_GATE, 2
+	warp_event  3,  5, ROUTE_7_NATIONAL_PARK_GATE, 3
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  1,  7, BGEVENT_READ, Route7SignText
+	bg_event 11, 31, BGEVENT_READ, Route7SignText
+	bg_event  2, 25, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event  2, 27, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event 14, 29, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event 15, 28, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+
+	def_object_events
+	object_event  4, 19, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 2, TrainerCamperIvan, -1
+	object_event  8, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 3, TrainerCamperElliot, -1
+	object_event  7, 20, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 3, TrainerPicnickerBrooke, -1
+	object_event 10, 26, SPRITE_LASS, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 1, TrainerPicnickerKim, -1
+	object_event 13, 28, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 0, TrainerBirdKeeperBryan, -1
+	object_event  2, 10, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 2, TrainerFirebreatherWalt, -1
+	object_event 16,  7, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_DOWN, 2, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 3, TrainerBugCatcherArnie, -1
+	object_event  5, 10, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 2, TrainerJugglerIrwin, -1
+	object_event  5,  6, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TrainerOfficerDirk, -1
+	object_event  7, 11, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route7TMRollout, EVENT_ROUTE_7_TM_ROLLOUT
+	object_event  2, 25, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_ORANGE, OBJECTTYPE_SCRIPT, 0, Route7BerryTree1, EVENT_ROUTE_7_BERRY_1
+	object_event  0, 27, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route7OtisScript, EVENT_ROUTE_7_OTIS
+	object_event  2, 27, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route7ApricornTree1, EVENT_ROUTE_7_APRICORN_1
+	object_event 14, 29, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route7ApricornTree2, EVENT_ROUTE_7_APRICORN_2
+	object_event 15, 28, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route7ApricornTree3, EVENT_ROUTE_7_APRICORN_1
+
 	object_const_def
 	const ROUTE7_YOUNGSTER1
 	const ROUTE7_YOUNGSTER2
@@ -36,69 +69,135 @@ Route7OtisCallback:
 	endcallback
 
 TrainerBirdKeeperBryan:
-	trainer BIRD_KEEPER, BRYAN, EVENT_BEAT_BIRD_KEEPER_BRYAN, BirdKeeperBryanSeenText, BirdKeeperBryanBeatenText, 0, .Script
+	generictrainer BIRD_KEEPER, BRYAN, EVENT_BEAT_BIRD_KEEPER_BRYAN, .SeenText,.BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext BirdKeeperBryanAfterBattleText
-	waitbutton
-	closetext
-	end
+.BattleText
+	text "Some #mon have"
+	line "a high base speed"
+	cont "of 100 or more."
+
+	para "Try catching them"
+	line "with Kurt's Fast"
+	cont "Ball."
+
+	para "Whenever I find a"
+	line "Wht Apricorn, I"
+	cont "take it to Kurt."
+
+	para "He turns it into a"
+	line "custom Ball."
+	done
+
+.SeenText
+	text "What kinds of"
+	line "Balls do you use?"
+	done
+
+.BeatenText
+	text "Yikes! Not fast"
+	line "enough!"
+	done
 
 TrainerJugglerIrwin:
-	trainer JUGGLER, IRWIN1, EVENT_BEAT_JUGGLER_IRWIN, JugglerIrwin1SeenText, JugglerIrwin1BeatenText, 0, .Script
+	generictrainer JUGGLER, IRWIN, EVENT_BEAT_JUGGLER_IRWIN, .SeenText, .BeatenText
 
-.Script:
-	opentext
-	writetext JugglerIrwinAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "I was going to"
+	line "dazzle you with my"
+	cont "prize #mon."
+
+	para "But your prowess"
+	line "electrified me!"
+	done
+
+.SeenText
+	text "Behold my graceful"
+	line "Ball dexterity!"
+	done
+
+.BeatenText
+	text "Whew! That was a"
+	line "jolt!"
+	done
 
 TrainerCamperIvan:
-	trainer CAMPER, IVAN, EVENT_BEAT_CAMPER_IVAN, CamperIvanSeenText, CamperIvanBeatenText, 0, .Script
+	generictrainer CAMPER, IVAN, EVENT_BEAT_CAMPER_IVAN, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext CamperIvanAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "Music on the radio"
+	line "changes the moods"
+	cont "of wild #mon."
+	done
+
+.SeenText
+	text "I've been getting"
+	line "#mon data off"
+	cont "my radio. I think"
+	cont "I'm good."
+	done
+
+.BeatenText
+	text "I give!"
+	done
 
 TrainerCamperElliot:
-	trainer CAMPER, ELLIOT, EVENT_BEAT_CAMPER_ELLIOT, CamperElliotSeenText, CamperElliotBeatenText, 0, .Script
+	generictrainer CAMPER, ELLIOT, EVENT_BEAT_CAMPER_ELLIOT, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext CamperElliotAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "I was humiliated"
+	line "in front of my"
+	cont "girlfriend…"
+	done
+
+.SeenText
+	text "I'm gonna show my"
+	line "girlfriend I'm hot"
+	cont "stuff!"
+	done
+
+.BeatenText
+	text "I wish you would"
+	line "have lost for me…"
+	done
 
 TrainerPicnickerBrooke:
-	trainer PICNICKER, BROOKE, EVENT_BEAT_PICNICKER_BROOKE, PicnickerBrookeSeenText, PicnickerBrookeBeatenText, 0, .Script
+	generictrainer PICNICKER, BROOKE, EVENT_BEAT_PICNICKER_BROOKE, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext PicnickerBrookeAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "I can count on my"
+	line "#mon more than"
+	cont "my boyfriend."
+	done
+
+.SeenText
+	text "My boyfriend's"
+	line "weak, so I can't"
+	cont "rely on him."
+	done
+
+.BeatenText
+	text "Oh, my! You're so"
+	line "strong!"
+	done
 
 TrainerPicnickerKim:
-	trainer PICNICKER, KIM, EVENT_BEAT_PICNICKER_KIM, PicnickerKimSeenText, PicnickerKimBeatenText, 0, .Script
+	generictrainer PICNICKER, KIM, EVENT_BEAT_PICNICKER_KIM, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext PicnickerKimAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "The Gym Badges are"
+	line "pretty. I collect"
+	cont "them."
+	done
+
+.SeenText
+	text "Are you going to"
+	line "the Gym? Me too!"
+	done
+
+.BeatenText
+	text "Oh. I couldn't"
+	line "win…"
+	done
 
 TrainerBugCatcherArnie:
 	trainer BUG_CATCHER, ARNIE1, EVENT_BEAT_BUG_CATCHER_ARNIE, BugCatcherArnieSeenText, BugCatcherArnieBeatenText, 0, .Script
@@ -214,166 +313,6 @@ Route7RematchM:
 	jumpstd RematchMScript
 	end
 
-TrainerFirebreatherWalt:
-	trainer FIREBREATHER, WALT, EVENT_BEAT_FIREBREATHER_WALT, FirebreatherWaltSeenText, FirebreatherWaltBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext FirebreatherWaltAfterBattleText
-	waitbutton
-	closetext
-	end
-
-TrainerOfficerDirk:
-	faceplayer
-	opentext
-	checktime NITE
-	iffalse .NotNight
-	checkevent EVENT_BEAT_OFFICER_DIRK
-	iftrue .AfterBattle
-	playmusic MUSIC_OFFICER_ENCOUNTER
-	writetext OfficerDirkSeenText
-	waitbutton
-	closetext
-	winlosstext OfficerDirkBeatenText, 0
-	loadtrainer OFFICER, DIRK
-	startbattle
-	reloadmapafterbattle
-	setevent EVENT_BEAT_OFFICER_DIRK
-	closetext
-	end
-
-.AfterBattle:
-	writetext OfficerDirkAfterBattleText
-	waitbutton
-	closetext
-	end
-
-.NotNight:
-	writetext OfficerDirkPrettyToughText
-	waitbutton
-	closetext
-	end
-
-Route7Sign:
-	jumptext Route7SignText
-
-Route7TMRollout:
-	itemball TM_ROLLOUT
-
-CamperIvanSeenText:
-	text "I've been getting"
-	line "#MON data off"
-
-	para "my radio. I think"
-	line "I'm good."
-	done
-
-CamperIvanBeatenText:
-	text "I give!"
-	done
-
-CamperIvanAfterBattleText:
-	text "Music on the radio"
-	line "changes the moods"
-	cont "of wild #MON."
-	done
-
-CamperElliotSeenText:
-	text "I'm gonna show my"
-	line "girlfriend I'm hot"
-	cont "stuff!"
-	done
-
-CamperElliotBeatenText:
-	text "I wish you would"
-	line "have lost for me…"
-	done
-
-CamperElliotAfterBattleText:
-	text "I was humiliated"
-	line "in front of my"
-	cont "girlfriend…"
-	done
-
-PicnickerBrookeSeenText:
-	text "My boyfriend's"
-	line "weak, so I can't"
-	cont "rely on him."
-	done
-
-PicnickerBrookeBeatenText:
-	text "Oh, my! You're so"
-	line "strong!"
-	done
-
-PicnickerBrookeAfterBattleText:
-	text "I can count on my"
-	line "#MON more than"
-	cont "my boyfriend."
-	done
-
-PicnickerKimSeenText:
-	text "Are you going to"
-	line "the GYM? Me too!"
-	done
-
-PicnickerKimBeatenText:
-	text "Oh. I couldn't"
-	line "win…"
-	done
-
-PicnickerKimAfterBattleText:
-	text "The GYM BADGES are"
-	line "pretty. I collect"
-	cont "them."
-	done
-
-BirdKeeperBryanSeenText:
-	text "What kinds of"
-	line "BALLS do you use?"
-	done
-
-BirdKeeperBryanBeatenText:
-	text "Yikes! Not fast"
-	line "enough!"
-	done
-
-BirdKeeperBryanAfterBattleText:
-	text "Some #MON flee"
-	line "right away."
-
-	para "Try catching them"
-	line "with KURT's FAST"
-	cont "BALL."
-
-	para "Whenever I find a"
-	line "WHT APRICORN, I"
-	cont "take it to KURT."
-
-	para "He turns it into a"
-	line "custom BALL."
-	done
-
-JugglerIrwin1SeenText:
-	text "Behold my graceful"
-	line "BALL dexterity!"
-	done
-
-JugglerIrwin1BeatenText:
-	text "Whew! That was a"
-	line "jolt!"
-	done
-
-JugglerIrwinAfterBattleText:
-	text "I was going to"
-	line "dazzle you with my"
-	cont "prize #MON."
-
-	para "But your prowess"
-	line "electrified me!"
-	done
 
 BugCatcherArnieSeenText:
 	text "I'll go anywhere"
@@ -394,150 +333,7 @@ BugCatcherArnieAfterBattleText:
 	line "NATIONAL PARK."
 	done
 
-FirebreatherWaltSeenText:
-	text "I'm practicing my"
-	line "fire breathing."
-	done
 
-FirebreatherWaltBeatenText:
-	text "Ow! I scorched the"
-	line "tip of my nose!"
-	done
-
-FirebreatherWaltAfterBattleText:
-	text "The #MON March"
-	line "on the radio lures"
-	cont "wild #MON."
-	done
-
-OfficerDirkSeenText:
-	text "Danger lurks in"
-	line "the night!"
-	done
-
-OfficerDirkBeatenText:
-	text "Whoops!"
-	done
-
-OfficerDirkAfterBattleText:
-	text "You know, night-"
-	line "time is fun in its"
-	cont "own ways."
-
-	para "But don't overdo"
-	line "it, OK?"
-	done
-
-OfficerDirkPrettyToughText:
-	text "Your #MON look"
-	line "pretty tough."
-
-	para "You could go any-"
-	line "where safely."
-	done
-
-Route7SignText:
-	text "ROUTE 7"
-	done
-
-Route7BerryTree1:
-	opentext
-	getitemname STRING_BUFFER_3, MYSTERYBERRY
-	writetext Route7TreeText
-	promptbutton
-	writetext Route7HeyItsBerryApricornText
-	promptbutton
-	giveitem MYSTERYBERRY
-	iffalse Route7NoRoomInBag
-	disappear ROUTE7_BERRY_TREE1
-	writetext Route7FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
-Route7ApricornTree1:
-	opentext
-	getitemname STRING_BUFFER_3, BLU_APRICORN
-	writetext Route7TreeText
-	promptbutton
-	writetext Route7HeyItsBerryApricornText
-	promptbutton
-	giveitem BLU_APRICORN
-	iffalse Route7NoRoomInBag
-	disappear ROUTE7_APRICORN_TREE1
-	writetext Route7FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
-Route7ApricornTree2:
-	opentext
-	getitemname STRING_BUFFER_3, YLW_APRICORN
-	writetext Route7TreeText
-	promptbutton
-	writetext Route7HeyItsBerryApricornText
-	promptbutton
-	giveitem YLW_APRICORN
-	iffalse Route7NoRoomInBag
-	disappear ROUTE7_APRICORN_TREE2
-	writetext Route7FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
-Route7ApricornTree3:
-	opentext
-	getitemname STRING_BUFFER_3, RED_APRICORN
-	writetext Route7TreeText
-	promptbutton
-	writetext Route7HeyItsBerryApricornText
-	promptbutton
-	giveitem RED_APRICORN
-	iffalse Route7NoRoomInBag
-	disappear ROUTE7_APRICORN_TREE3
-	writetext Route7FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
-Route7NoBerryOrApricorn:
-	opentext
-	writetext Route7TreeText
-	promptbutton
-	writetext Route7NothingHereText
-	waitbutton
-	closetext
-	end
-
-Route7NoRoomInBag:
-	writetext Route7NoRoomInBagText
-	waitbutton
-	closetext
-	end
-
-Route7TreeText:
-	text_far _FruitBearingTreeText
-	text_end
-
-Route7NothingHereText:
-	text_far _NothingHereText
-	text_end
-
-Route7HeyItsBerryApricornText:
-	text_far _HeyItsFruitText
-	text_end
-
-Route7FoundItemText:
-	text_far _ObtainedFruitText
-	text_end
 
 BugCatcherArnie_GiveSilverPowderAfterBattleText:
 	text "Oh well. Take this"
@@ -549,9 +345,81 @@ BugCatcherArnie_AgainGiveSilverPowderAfterBattleText:
 	line "you? Take it."
 	done
 
-Route7NoRoomInBagText:
-	text_far _CantCarryItemText
-	text_end
+TrainerFirebreatherWalt:
+	generictrainer FIREBREATHER, WALT, EVENT_BEAT_FIREBREATHER_WALT, .SeenText, .BeatenText
+
+.AfterText
+	text "The #mon March"
+	line "on the radio lures"
+	cont "wild #mon."
+	done
+
+.SeenText
+	text "I'm practicing my"
+	line "fire breathing."
+	done
+
+.BeatenText
+	text "Ow! I scorched the"
+	line "tip of my nose!"
+	done
+
+TrainerOfficerDirk:
+	faceplayeropentext
+	checktime NITE
+	iffalse .NoFight
+	checkevent EVENT_BEAT_OFFICER_DIRK
+	special SaveMusic
+	iftrue .AfterScript
+	playmusic MUSIC_OFFICER_ENCOUNTER
+	writethistext
+		text "Danger lurks in"
+		line "the night!"
+		done
+	waitclosetext
+	winlosstext .BeatenText, 0
+	loadtrainer OFFICER, KEITH
+	startbattle
+	reloadmapafterbattle
+	special RestoreMusic
+	setevent EVENT_BEAT_OFFICER_DIRK
+	endtext
+
+.AfterScript:
+	writethistext
+		text "You know, night-"
+		line "time is fun in its"
+		cont "own ways."
+
+		para "But don't overdo"
+		line "it, OK?"
+
+		para "Up for a rematch?"
+		done
+	yesorno
+	iffalse_endtext
+	playmusic MUSIC_OFFICER_ENCOUNTER
+	promptbutton
+	closetext
+	winlosstext .BeatenText, 0
+	loadtrainer OFFICER, KEITH
+	startbattle
+	reloadmapafterbattle
+	special RestoreMusic
+	end
+
+.NoFight:
+	jumpthisopenedtext
+		text "Your #mon look"
+		line "pretty tough."
+
+		para "You could go any-"
+		line "where safely."
+		done
+
+.BeatenText
+	text "Whoops!"
+	done
 
 Route7OtisScript:
 	callstd WanderingOddEggNPCScript
@@ -565,35 +433,26 @@ Route7OtisTeleportAwayMovement:
 	teleport_from
 	step_end
 
-Route7_MapEvents:
-	def_warp_events
-	warp_event  9, 33, ROUTE_7_GOLDENROD_GATE, 1
-	warp_event 10, 33, ROUTE_7_GOLDENROD_GATE, 2
-	warp_event  3,  5, ROUTE_7_NATIONAL_PARK_GATE, 3
+Route7SignText:
+	text "Route 7"
+	done
 
-	def_coord_events
+Route7TMRollout:
+	itemball TM_ROLLOUT
 
-	def_bg_events
-	bg_event  1,  7, BGEVENT_READ, Route7Sign
-	bg_event 11, 31, BGEVENT_READ, Route7Sign
-	bg_event  2, 25, BGEVENT_READ, Route7NoBerryOrApricorn
-	bg_event  2, 27, BGEVENT_READ, Route7NoBerryOrApricorn
-	bg_event 14, 29, BGEVENT_READ, Route7NoBerryOrApricorn
-	bg_event 15, 28, BGEVENT_READ, Route7NoBerryOrApricorn
-
-	def_object_events
-	object_event  4, 19, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 2, TrainerCamperIvan, -1
-	object_event  8, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerCamperElliot, -1
-	object_event  7, 20, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerPicnickerBrooke, -1
-	object_event 10, 26, SPRITE_LASS, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerPicnickerKim, -1
-	object_event 13, 28, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 0, TrainerBirdKeeperBryan, -1
-	object_event  2, 10, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 2, TrainerFirebreatherWalt, -1
-	object_event 16,  7, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_DOWN, 2, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerBugCatcherArnie, -1
-	object_event  5, 10, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, TrainerJugglerIrwin, -1
-	object_event  5,  6, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TrainerOfficerDirk, -1
-	object_event  7, 11, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route7TMRollout, EVENT_ROUTE_7_TM_ROLLOUT
-	object_event  2, 25, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_ORANGE, OBJECTTYPE_SCRIPT, 0, Route7BerryTree1, EVENT_ROUTE_7_BERRY_1
-	object_event  0, 27, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route7OtisScript, EVENT_ROUTE_7_OTIS
-	object_event  2, 27, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route7ApricornTree1, EVENT_ROUTE_7_APRICORN_1
-	object_event 14, 29, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route7ApricornTree2, EVENT_ROUTE_7_APRICORN_2
-	object_event 15, 28, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route7ApricornTree3, EVENT_ROUTE_7_APRICORN_1
+Route7BerryTree1:
+	setval MYSTERYBERRY
+	setlasttalked ROUTE7_BERRY_TREE1
+	jumpstd BerryOrFruitScript
+Route7ApricornTree1:
+	setval BLU_APRICORN
+	setlasttalked ROUTE7_APRICORN_TREE1
+	jumpstd BerryOrFruitScript
+Route7ApricornTree2:
+	setval YLW_APRICORN
+	setlasttalked ROUTE7_APRICORN_TREE2
+	jumpstd BerryOrFruitScript
+Route7ApricornTree3:
+	setval RED_APRICORN
+	setlasttalked ROUTE7_APRICORN_TREE3
+	jumpstd BerryOrFruitScript

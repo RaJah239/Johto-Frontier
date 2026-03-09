@@ -382,7 +382,7 @@ DEF KRIS EQU __trainer_class__
 	const RAY
 
 	trainerclass JUGGLER ; 31
-	const IRWIN1
+	const IRWIN
 
 	trainerclass BLACKBELT_T ; 32
 	const YOSHI
