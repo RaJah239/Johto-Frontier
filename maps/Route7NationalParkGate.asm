@@ -115,7 +115,7 @@ Route7OfficerScriptContest:
 	checkflag ENGINE_DAILY_BUG_CONTEST
 	iftrue Route7NationalParkGate_ContestIsOver
 	callstd DayToTextScript
-	writetext Route7NationalParkGateOfficer1AskToParticipateText
+	writetext Route78NationalParkGateOfficer1AskToParticipateText
 	yesorno
 	iffalse Route7NationalParkGate_DeclinedToParticipate
 	readvar VAR_PARTYCOUNT
@@ -314,7 +314,7 @@ Route7NationalParkGateOfficerScript:
 	writetext Route7NationalParkGateOfficer1WeHoldContestsText
 	waitendtext
 
-Route7NationalParkGateOfficer1AskToParticipateText:
+Route78NationalParkGateOfficer1AskToParticipateText:
 	text "Today's @"
 	text_ram wStringBuffer3
 	text "."
