@@ -1,3 +1,4 @@
+; TODOTEXT edit this when I know what it's gonna be for
 	object_const_def
 	const BURNEDTOWERB1F_BOULDER
 	const BURNEDTOWERB1F_RAIKOU1
