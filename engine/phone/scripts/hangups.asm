@@ -1,8 +1,3 @@
-BeverlyHangUpScript:
-	farwritetext BeverlyLetsChatAboutMonAgainText
-	promptbutton
-	sjump PhoneScript_HangUpText_Female
-
 HueyHangUpScript:
 	farwritetext HueyWeHaveToBattleAgainSometimeText
 	promptbutton

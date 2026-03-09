@@ -971,16 +971,12 @@ PackFullMScript:
 
 AskNumberFScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_POKEFAN_BEVERLY, .Beverly
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
 	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
 
-.Beverly:
-	farwritetext BeverlyAskNumberText
-	end
 .Beth:
 	farwritetext BethAskNumberText
 	end
@@ -1006,18 +1002,12 @@ RegisteredNumberFScript:
 
 NumberAcceptedFScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_POKEFAN_BEVERLY, .Beverly
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
 	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
 
-.Beverly:
-	farwritetext BeverlyNumberAcceptedText
-	waitbutton
-	closetext
-	end
 .Beth:
 	farwritetext BethNumberAcceptedText
 	waitbutton
@@ -1046,18 +1036,12 @@ NumberAcceptedFScript:
 
 NumberDeclinedFScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_POKEFAN_BEVERLY, .Beverly
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
 	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
 
-.Beverly:
-	farwritetext BeverlyNumberDeclinedText
-	waitbutton
-	closetext
-	end
 .Beth:
 	farwritetext BethNumberDeclinedText
 	waitbutton
@@ -1120,14 +1104,9 @@ RematchFScript:
 
 GiftFScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_POKEFAN_BEVERLY, .Beverly
 	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 
-.Beverly:
-	farwritetext BeverlyGiftText
-	promptbutton
-	end
 .Dana:
 	farwritetext DanaGiftText
 	promptbutton
@@ -1139,18 +1118,11 @@ GiftFScript:
 
 PackFullFScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_POKEFAN_BEVERLY, .Beverly
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
 	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
-
-.Beverly:
-	farwritetext BeverlyPackFullText
-	waitbutton
-	closetext
-	end
 
 .Beth
 	farwritetext BethPackFullText

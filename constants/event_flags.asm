@@ -424,7 +424,7 @@
 ; Phone events
 	const_skip
 	const_skip
-	const EVENT_BEVERLY_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const EVENT_HUEY_ASKED_FOR_PHONE_NUMBER
 	const_skip

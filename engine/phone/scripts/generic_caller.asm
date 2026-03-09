@@ -151,16 +151,11 @@ PhoneScript_HangUpText_Male:
 
 PhoneScript_HangUpText_Female:
 	readvar VAR_CALLERID
-	ifequal PHONE_POKEFAN_BEVERLY, .Beverly
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
 	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
-
-.Beverly:
-	farwritetext BeverlyHangUpText
-	end
 
 .Beth:
 	farwritetext BethHangUpText
@@ -204,13 +199,8 @@ PhoneScript_FoundItem_Male:
 
 PhoneScript_FoundItem_Female:
 	readvar VAR_CALLERID
-	ifequal PHONE_POKEFAN_BEVERLY, .Beverly
 	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
-
-.Beverly:
-	farwritetext BeverlyFoundItemText
-	end
 
 .Dana:
 	farwritetext DanaFoundItemText

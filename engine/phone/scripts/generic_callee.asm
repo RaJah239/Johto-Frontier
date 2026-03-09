@@ -67,17 +67,11 @@ PhoneScript_AnswerPhone_Male:
 
 PhoneScript_AnswerPhone_Female:
 	readvar VAR_CALLERID
-	ifequal PHONE_POKEFAN_BEVERLY, .Beverly
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
 	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
-
-.Beverly:
-	farwritetext BeverlyAnswerText
-	promptbutton
-	end
 
 .Beth:
 	farwritetext BethAnswerPhoneText
@@ -169,17 +163,11 @@ PhoneScript_GreetPhone_Male:
 
 PhoneScript_GreetPhone_Female:
 	readvar VAR_CALLERID
-	ifequal PHONE_POKEFAN_BEVERLY, .Beverly
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
 	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
-
-.Beverly:
-	farwritetext BeverlyGreetText
-	promptbutton
-	end
 
 .Beth:
 	farwritetext BethGreetText

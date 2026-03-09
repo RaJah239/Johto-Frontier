@@ -133,78 +133,16 @@ TrainerSchoolboyJack:
 	done
 
 TrainerPokefanfBeverly:
-	trainer POKEFANF, BEVERLY1, EVENT_BEAT_POKEFANF_BEVERLY, PokefanfBeverly1SeenText, PokefanfBeverly1BeatenText, 0, .Script
+	generictrainer POKEFANF, BEVERLY, EVENT_BEAT_POKEFANF_BEVERLY, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_POKEFAN_BEVERLY
-	endifjustbattled
-	opentext
-	checkflag ENGINE_BEVERLY_HAS_NUGGET
-	iftrue .GiveNugget
-	checkcellnum PHONE_POKEFAN_BEVERLY
-	iftrue .NumberAccepted
-	checkpoke MARILL
-	iffalse .NoMarill
-	checkevent EVENT_BEVERLY_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskAgain
-	writetext PokefanBeverlyCuteMonText
-	promptbutton
-	setevent EVENT_BEVERLY_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .RequestNumber
+.AfterText
+	text "I must say, your"
+	line "#mon are quite"
+	cont "cute, too."
+	done
 
-.AskAgain:
-	scall .AskNumber
-.RequestNumber:
-	askforphonenumber PHONE_POKEFAN_BEVERLY
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, POKEFANF, BEVERLY1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
-
-.GiveNugget:
-	scall .Gift
-	verbosegiveitem NUGGET
-	iffalse .NoRoom
-	clearflag ENGINE_BEVERLY_HAS_NUGGET
-	closetext
-	end
-
-.NoRoom:
-	sjump .PackFull
-
-.NoMarill:
-	writetext PokefanFBeverlyMarillFriendText
-	waitbutton
-	closetext
-	end
-
-.AskNumber:
-	jumpstd AskNumberFScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberFScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedFScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedFScript
-	end
-
-.Gift:
-	jumpstd GiftFScript
-	end
-
-.PackFull:
-	jumpstd PackFullFScript
-	end
-
-PokefanfBeverly1SeenText:
-	text "My #MON are"
+.SeenText
+	text "My #mon are"
 	line "simply darling."
 
 	para "Let me tell you"
@@ -212,26 +150,9 @@ PokefanfBeverly1SeenText:
 	cont "darlings make me."
 	done
 
-PokefanfBeverly1BeatenText:
+.BeatenText
 	text "I can beat you in"
 	line "pride, but…"
-	done
-
-PokefanBeverlyCuteMonText:
-	text "I must say, your"
-	line "#MON are quite"
-	cont "cute, too."
-	done
-
-PokefanFBeverlyMarillFriendText:
-	text "My friend keeps a"
-	line "MARILL!"
-
-	para "I find them very"
-	line "endearing."
-
-	para "Oh, I wish to see"
-	line "one soon…"
 	done
 
 TrainerPokefanmWilliam:
