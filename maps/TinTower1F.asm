@@ -57,7 +57,7 @@ TinTower1FNPCsCallback:
 	clearevent EVENT_TIN_TOWER_1F_WISE_TRIO_2
 	setevent EVENT_TIN_TOWER_1F_WISE_TRIO_1
 .GotRainbowWing:
-	checkevent EVENT_FOUGHT_HO_OH
+	checkevent EVENT_TIN_TOWER_ROOF_HO_OH
 	iffalse .Done
 	appear TINTOWER1F_EUSINE
 .Done:
@@ -197,7 +197,7 @@ TinTower1FSage3Script:
 	jumptextfaceplayer TinTower1FSage3Text
 
 TinTower1FSage4Script:
-	checkevent EVENT_FOUGHT_HO_OH
+	checkevent EVENT_TIN_TOWER_ROOF_HO_OH
 	iftrue .FoughtHoOh
 	jumptextfaceplayer TinTower1FSage4Text1
 
@@ -207,7 +207,7 @@ TinTower1FSage4Script:
 TinTower1FSage5Script:
 	faceplayer
 	opentext
-	checkevent EVENT_FOUGHT_HO_OH
+	checkevent EVENT_TIN_TOWER_ROOF_HO_OH
 	iftrue .FoughtHoOh
 	checkevent EVENT_GOT_RAINBOW_WING
 	iftrue .GotRainbowWing
@@ -237,7 +237,7 @@ TinTower1FSage5Script:
 	end
 
 TinTower1FSage6Script:
-	checkevent EVENT_FOUGHT_HO_OH
+	checkevent EVENT_TIN_TOWER_ROOF_HO_OH
 	iftrue .FoughtHoOh
 	jumptextfaceplayer TinTower1FSage6Text1
 

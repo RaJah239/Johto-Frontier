@@ -1,3 +1,14 @@
+TinTowerRoof_MapEvents:
+	def_warp_events
+	warp_event  9, 13, TIN_TOWER_9F, 4
+
+	def_coord_events
+
+	def_bg_events
+
+	def_object_events
+	object_event  9,  5, SPRITE_HO_OH, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TinTowerHoOh, EVENT_TIN_TOWER_ROOF_HO_OH
+
 	object_const_def
 	const TINTOWERROOF_HO_OH
 
@@ -13,47 +24,24 @@ TinTowerRoofHoOhCallback:
 	setval WEATHER_SUN
 	writemem wFieldWeather
 .skipWeather
-
-	checkevent EVENT_FOUGHT_HO_OH
-	iftrue .NoAppear
-	checkitem RAINBOW_WING
-	iftrue .Appear
-	sjump .NoAppear
-
-.Appear:
-	appear TINTOWERROOF_HO_OH
-	endcallback
-
-.NoAppear:
-	disappear TINTOWERROOF_HO_OH
 	endcallback
 
 TinTowerHoOh:
-	faceplayer
-	opentext
-	writetext HoOhText
+	isfieldactionssettoquick
+	iftrue .skipthis
+	reanchormap
+	pokepic HO_OH
 	cry HO_OH
-	pause 15
-	closetext
-	setevent EVENT_FOUGHT_HO_OH
+	waitbutton
+	closepokepic
+.skipthis
+	showthistext
+		text "Shaoooh!"
+		done
 	loadvar VAR_BATTLETYPE, BATTLETYPE_FORCEITEM
-	loadwildmon HO_OH, 60
+	loadwildmon HO_OH, 50
+	loadvar VAR_BATTLETYPE, BATTLETYPE_TRAP
 	startbattle
 	disappear TINTOWERROOF_HO_OH
 	reloadmapafterbattle
 	end
-
-HoOhText:
-	text "Shaoooh!"
-	done
-
-TinTowerRoof_MapEvents:
-	def_warp_events
-	warp_event  9, 13, TIN_TOWER_9F, 4
-
-	def_coord_events
-
-	def_bg_events
-
-	def_object_events
-	object_event  9,  5, SPRITE_HO_OH, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TinTowerHoOh, EVENT_TIN_TOWER_ROOF_HO_OH
