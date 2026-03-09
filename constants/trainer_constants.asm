@@ -460,9 +460,9 @@ DEF KRIS EQU __trainer_class__
 	const MIKI
 
 	trainerclass TWINS ; 3d
-	const AMYANDMAY1
 	const ANNANDANNE1
 	const ANNANDANNE2
+	const AMYANDMAY1
 	const AMYANDMAY2
 	const LEAANDPIA1
 
