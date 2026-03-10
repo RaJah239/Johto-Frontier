@@ -1436,7 +1436,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_OLIVINE_PORT_PASSAGE_POKEFAN_M
+	const_skip
 	const EVENT_ROUTE_7_NATIONAL_PARK_GATE_YOUNGSTER
 	const EVENT_LAKE_OF_RAGE_CIVILIANS
 	const_skip
