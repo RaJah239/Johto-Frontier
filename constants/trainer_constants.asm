@@ -149,7 +149,7 @@ DEF KRIS EQU __trainer_class__
 	const CARRIE
 	const BRIDGET
 	const KRISE
-	const CONNIE1
+	const CONNIE
 	const DANA
 	const SELINA
 
