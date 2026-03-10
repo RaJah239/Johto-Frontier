@@ -468,7 +468,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_DEREK_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const EVENT_TULLY_ASKED_FOR_PHONE_NUMBER
 	const_skip

@@ -18,8 +18,8 @@ Route11_MapEvents:
 
 	def_object_events
 	object_event 13, 43, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 5, TrainerSailorEugene, -1
-	object_event 10, 36, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerPokefanmDerek, -1
-	object_event 11, 33, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 4, TrainerPokefanfRuth, -1
+	object_event 10, 36, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 4, TrainerPokefanmDerek, -1
+	object_event 11, 33, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 2, TrainerPokefanfRuth, -1
 	object_event 13, 21, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 1, TrainerPsychicNorman, -1
 	object_event  4, 36, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TrainerPokefanfJaime, -1
 	object_event  9, 17, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, Route11BerryTree1, EVENT_ROUTE_11_BERRY_1
@@ -48,75 +48,28 @@ Route11_MapScripts:
 	def_callbacks
 
 TrainerPokefanmDerek:
-	trainer POKEFANM, DEREK1, EVENT_BEAT_POKEFANM_DEREK, PokefanmDerekSeenText, PokefanmDerekBeatenText, 0, .Script
+	generictrainer POKEFANM, DEREK, EVENT_BEAT_POKEFANM_DEREK, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_POKEFANM_DEREK
-	endifjustbattled
-	opentext
-	checkflag ENGINE_DEREK_HAS_NUGGET
-	iftrue .HasNugget
-	checkcellnum PHONE_POKEFANM_DEREK
-	iftrue .NumberAccepted
-	checkpoke PIKACHU
-	iffalse .WantsPikachu
-	checkevent EVENT_DEREK_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	writetext PokefanMDerekText_NotBragging
-	promptbutton
-	setevent EVENT_DEREK_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .AskForNumber
+.AfterText
+	text "I'm not listening"
+	line "to your bragging!"
 
-.AskedAlready:
-	scall .AskNumber
-.AskForNumber:
-	askforphonenumber PHONE_POKEFANM_DEREK
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, POKEFANM, DEREK1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
+	para "We # Fans have"
+	line "a policy of not"
+	cont "listening to other"
+	cont "people brag!"
+	done
 
-.HasNugget:
-	scall .Gift
-	verbosegiveitem NUGGET
-	iffalse .NoRoom
-	clearflag ENGINE_DEREK_HAS_NUGGET
-	closetext
-	end
+.SeenText
+	text "This is a good"
+	line "time to brag about"
+	cont "my Pikachu!"
+	done
 
-.NoRoom:
-	sjump .PackFull
-
-.WantsPikachu:
-	writetext PokefanMDerekPikachuIsItText
-	waitbutton
-	closetext
-	end
-
-.AskNumber:
-	jumpstd AskNumberMScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberMScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedMScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedMScript
-	end
-
-.Gift:
-	jumpstd GiftMScript
-	end
-
-.PackFull:
-	jumpstd PackFullMScript
-	end
+.BeatenText
+	text "I had no time to"
+	line "show off Pikachu…"
+	done
 
 TrainerPokefanfRuth:
 	generictrainer POKEFANF, RUTH, EVENT_BEAT_POKEFANF_RUTH, .SeenText, .BeatenText
@@ -256,48 +209,6 @@ TrainerPokefanfJaime:
 	text "Oh, how disap-"
 	line "pointing…"
 	done
-
-PokefanmDerekSeenText:
-	text "This is a good"
-	line "time to brag about"
-	cont "my PIKACHU!"
-	done
-
-PokefanmDerekBeatenText:
-	text "I had no time to"
-	line "show off PIKACHU…"
-	done
-
-PokefanMDerekText_NotBragging:
-	text "I'm not listening"
-	line "to your bragging!"
-
-	para "We # FANS have"
-	line "a policy of not"
-
-	para "listening to other"
-	line "people brag!"
-	done
-
-
-
-PokefanMDerekPikachuIsItText:
-	text "PIKACHU is it!"
-	line "Don't you agree?"
-	
-	para "If you had one, we"
-	line "could be friends!"
-	done
-
-
-
-
-
-
-
-
-
-
 
 Route11SignText:
 	text "Route 11"

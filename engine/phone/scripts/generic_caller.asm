@@ -89,7 +89,6 @@ PhoneScript_HangUpText_Male:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
 	ifequal PHONE_POKEMANIAC_BRENT, .Brent
 	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
@@ -106,10 +105,6 @@ PhoneScript_HangUpText_Male:
 
 .Jose:
 	farwritetext JoseHangUpText
-	end
-
-.Derek:
-	farwritetext DerekHangUpText
 	end
 
 .Tully:
@@ -158,15 +153,11 @@ PhoneScript_HangUpText_Female:
 PhoneScript_FoundItem_Male:
 	readvar VAR_CALLERID
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
 	ifequal PHONE_FISHER_WILTON, .Wilton
 
 .Jose:
 	farwritetext JoseFoundItemText
-	end
-.Derek:
-	farwritetext DerekFoundItemText
 	end
 .Tully:
 	farwritetext TullyFoundItemText

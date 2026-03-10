@@ -647,7 +647,6 @@ AskNumberMScript:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
 	ifequal PHONE_POKEMANIAC_BRENT, .Brent
 	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
@@ -662,9 +661,6 @@ AskNumberMScript:
 	end
 .Jose:
 	farwritetext JoseAskNumberText
-	end
-.Derek:
-	farwritetext DerekAskNumberText
 	end
 .Tully:
 	farwritetext TullyAskNumberText
@@ -695,7 +691,6 @@ NumberAcceptedMScript:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
 	ifequal PHONE_POKEMANIAC_BRENT, .Brent
 	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
@@ -714,11 +709,6 @@ NumberAcceptedMScript:
 	end
 .Jose:
 	farwritetext JoseNumberAcceptedText
-	waitbutton
-	closetext
-	end
-.Derek:
-	farwritetext DerekNumberAcceptedText
 	waitbutton
 	closetext
 	end
@@ -753,7 +743,6 @@ NumberDeclinedMScript:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
 	ifequal PHONE_POKEMANIAC_BRENT, .Brent
 	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
@@ -772,11 +761,6 @@ NumberDeclinedMScript:
 	end
 .Jose:
 	farwritetext JoseNumberDeclinedText
-	waitbutton
-	closetext
-	end
-.Derek:
-	farwritetext DerekNumberDeclinedText
 	waitbutton
 	closetext
 	end
@@ -861,16 +845,11 @@ RematchMScript:
 GiftMScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
 	ifequal PHONE_FISHER_WILTON, .Wilton
 
 .Jose:
 	farwritetext JoseGiftText
-	promptbutton
-	end
-.Derek:
-	farwritetext DerekGiftText
 	promptbutton
 	end
 .Tully:
@@ -887,7 +866,6 @@ PackFullMScript:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
 	ifequal PHONE_POKEMANIAC_BRENT, .Brent
 	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
@@ -912,11 +890,6 @@ PackFullMScript:
 	closetext
 	end
 
-.Derek:
-	farwritetext DerekPackFullText
-	waitbutton
-	closetext
-	end
 .Tully:
 	farwritetext TullyPackFullText
 	waitbutton
