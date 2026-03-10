@@ -3138,7 +3138,6 @@ wRoute8NationalParkGateSceneID::                  db
 wAzaleaTownSceneID::                              db
 wGoldenrodGymSceneID::                            db
 wGoldenrodMagnetTrainStationSceneID::             db
-wOlivineCitySceneID::                             db
 wEcruteakTinTowerEntranceSceneID::                db
 wWiseTriosRoomSceneID::                           db
 wEcruteakGymSceneID::                             db
@@ -3176,7 +3175,7 @@ wOaksLab::                                        db ; Nayru62's scene in Oak's 
 wRoute21::                                        db
 wBattlePlaza::                                    db
 
-	ds 169
+	ds 170
 
 ; battle tower points
 wBattleTowerNormalPoints:: db
