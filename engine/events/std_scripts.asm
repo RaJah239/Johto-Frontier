@@ -1182,21 +1182,15 @@ HappinessCheckScript:
 	ifless 50, .Unhappy
 	ifless 150, .KindaHappy
 	farwritetext HappinessText3
-	waitbutton
-	closetext
-	end
+	waitendtext
 
 .KindaHappy:
 	farwritetext HappinessText2
-	waitbutton
-	closetext
-	end
+	waitendtext
 
 .Unhappy:
 	farwritetext HappinessText1
-	waitbutton
-	closetext
-	end
+	waitendtext
 
 Movement_ContestResults_WalkAfterWarp:
 	step RIGHT
