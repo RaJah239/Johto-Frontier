@@ -1,28 +1,51 @@
+Route11_MapEvents:
+	def_warp_events
+	warp_event  1, 17, ROUTE_11_BARN, 1
+	warp_event  5, 17, ROUTE_11_FARMHOUSE, 1
+	warp_event  1, 17, ROUTE_11_BARN, 1
+	warp_event  9,  5, ROUTE_11_SILVER_CAVE_GATE, 1
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  5, 45, BGEVENT_JUMPTEXT, Route11TrainerTipsText
+	bg_event  9, 19, BGEVENT_JUMPTEXT, MoomooFarmSignText
+	bg_event 15, 21, BGEVENT_JUMPTEXT, Route11SignText
+	bg_event 11,  7, BGEVENT_JUMPTEXT, Route11MtSilverSignText
+	bg_event  9, 17, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event  8, 17, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event  5, 27, BGEVENT_ITEM + NUGGET, EVENT_ROUTE_11_HIDDEN_NUGGET
+
+	def_object_events
+	object_event 13, 43, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 5, TrainerSailorEugene, -1
+	object_event 10, 36, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerPokefanmDerek, -1
+	object_event 11, 33, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 4, TrainerPokefanfRuth, -1
+	object_event 13, 21, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 1, TrainerPsychicNorman, -1
+	object_event  4, 36, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TrainerPokefanfJaime, -1
+	object_event  9, 17, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, Route11BerryTree1, EVENT_ROUTE_11_BERRY_1
+	object_event  8, 17, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route11ApricornTree1, EVENT_ROUTE_11_APRICORN_1
+	object_event  3, 26, SPRITE_MILTANK, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route11Miltank, -1
+	object_event  6, 25, SPRITE_MILTANK, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route11Miltank, -1
+	object_event  4, 29, SPRITE_MILTANK, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route11Miltank, -1
+	object_event  8, 27, SPRITE_MILTANK, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route11Miltank, -1
+
 	object_const_def
 	const ROUTE11_SAILOR
 	const ROUTE11_POKEFAN_M
 	const ROUTE11_POKEFAN_F1
-	const ROUTE11_MILTANK1
-	const ROUTE11_MILTANK2
-	const ROUTE11_MILTANK3
-	const ROUTE11_MILTANK4
 	const ROUTE11_PSYCHIC_NORMAN
 	const ROUTE11_POKEFAN_F2
 	const ROUTE11_BERRY_TREE1
 	const ROUTE11_APRICORN_TREE1
+	const ROUTE11_MILTANK1
+	const ROUTE11_MILTANK2
+	const ROUTE11_MILTANK3
+	const ROUTE11_MILTANK4
 
 Route11_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-
-Route11Miltank:
-	opentext
-	writetext Route11MiltankText
-	cry MILTANK
-	waitbutton
-	closetext
-	end
 
 TrainerPokefanmDerek:
 	trainer POKEFANM, DEREK1, EVENT_BEAT_POKEFANM_DEREK, PokefanmDerekSeenText, PokefanmDerekBeatenText, 0, .Script
@@ -96,107 +119,142 @@ TrainerPokefanmDerek:
 	end
 
 TrainerPokefanfRuth:
-	trainer POKEFANF, RUTH, EVENT_BEAT_POKEFANF_RUTH, PokefanfRuthSeenText, PokefanfRuthBeatenText, 0, .Script
+	generictrainer POKEFANF, RUTH, EVENT_BEAT_POKEFANF_RUTH, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext PokefanfRuthAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "Do you know about"
+	line "baby #mon?"
+
+	para "I bet they're just"
+	line "adorable!"
+	done
+
+.SeenText
+	text "Such darling"
+	line "#mon."
+
+	para "Let's show our"
+	line "#mon together"
+	cont "at the same time."
+	done
+
+.BeatenText
+	text "I don't mind"
+	line "losing."
+	done
 
 TrainerSailorEugene:
-	trainer SAILOR, EUGENE, EVENT_BEAT_SAILOR_EUGENE, SailorEugeneSeenText, SailorEugeneBeatenText, 0, .Script
+	generictrainer SAILOR, EUGENE, EVENT_BEAT_SAILOR_EUGENE, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext SailorEugeneAfterBattleText
-	waitbutton
-	closetext
-	end
-
-TrainerPsychicNorman:
-	trainer PSYCHIC_T, NORMAN, EVENT_BEAT_PSYCHIC_NORMAN, PsychicNormanSeenText, PsychicNormanBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext PsychicNormanAfterBattleText
-	waitbutton
-	closetext
-	end
-
-TrainerPokefanfJaime:
-	faceplayer
-	opentext
-	checktime NITE
-	iffalse .NotNight
-	checkevent EVENT_BEAT_POKEFANF_JAIME
-	iftrue .Beaten
-	writetext PokefanfJaimeSeenText
-	waitbutton
-	closetext
-	winlosstext PokefanfJaimeBeatenText, 0
-	loadtrainer POKEFANF, JAIME
-	startbattle
-	reloadmapafterbattle
-	setevent EVENT_BEAT_POKEFANF_JAIME
-	closetext
-	end
-
-.Beaten:
-	writetext PokefanfJaimeAfterBattleText
-	waitbutton
-	closetext
-	end
-
-.NotNight:
-	writetext PokefanfJaimeHopeItGetsDarkText
-	waitbutton
-	closetext
-	end
-
-Route11Sign:
-	jumptext Route11SignText
-
-Route11MtSilverSign:
-	jumptext Route11MtSilverSignText
-
-MoomooFarmSign:
-	jumptext MoomooFarmSignText
-
-Route11TrainerTips:
-	jumptext Route11TrainerTipsText
-
-Route11HiddenNugget:
-	hiddenitem NUGGET, EVENT_ROUTE_11_HIDDEN_NUGGET
-
-Route11MiltankText:
-	text "MILTANK: Mooo!"
-	done
-
-SailorEugeneSeenText:
-	text "I just got back to"
-	line "OLIVINE."
-
-	para "So how about a"
-	line "#MON battle?"
-	done
-
-SailorEugeneBeatenText:
-	text "Awaaargh!"
-	done
-
-SailorEugeneAfterBattleText:
-	text "My #MON were"
+.AfterText
+	text "My #mon were"
 	line "caught and raised"
 	cont "overseas."
 
 	para "They're my compan-"
 	line "ions on those long"
 	cont "voyages."
+	done
+
+.SeenText
+	text "I just got back to"
+	line "Olivine."
+
+	para "So how about a"
+	line "#mon battle?"
+	done
+
+.BeatenText
+	text "Awaaargh!"
+	done
+
+TrainerPsychicNorman:
+	generictrainer PSYCHIC_T, NORMAN, EVENT_BEAT_PSYCHIC_NORMAN, .SeenText, .BeatenText
+
+.AfterText
+	text "You know how #-"
+	line "mon have different"
+	cont "abilities?"
+
+	para "People are like"
+	line "that too. Every-"
+	cont "one has different"
+	cont "potential."
+	done
+
+.SeenText
+	text "Let me see what"
+	line "your #mon are"
+	cont "capable of."
+	done
+
+.BeatenText
+	text "Ooh, your #mon"
+	line "have potential."
+	done
+
+TrainerPokefanfJaime:
+	faceplayeropentext
+	checkevent EVENT_BEAT_POKEFANF_JAIME
+	special SaveMusic
+	iftrue .AfterScript
+	checktime NITE
+	iffalse .NoFight
+	playmusic MUSIC_BEAUTY_ENCOUNTER
+	writethistext
+		text "You came at just"
+		line "the right time."
+
+		para "Let's battle."
+		done
+	waitclosetext
+	winlosstext .BeatenText, 0
+	loadtrainer POKEFANF, JAIME
+	startbattle
+	reloadmapafterbattle
+	special RestoreMusic
+	setevent EVENT_BEAT_POKEFANF_JAIME
+	endtext
+
+.AfterScript:
+	writethistext
+		text "I met my #mon"
+		line "at night, right"
+		cont "here on Route 11."
+
+		para "I'm not sure why,"
+		line "but it seems to"
+		cont "like it when I"
+		cont "train here."
+
+		para "It seems to become"
+		line "friendlier by"
+		cont "training here than"
+		cont "anywhere else."
+
+		para "Up for a rematch?"
+		done
+	yesorno
+	iffalse_endtext
+	playmusic MUSIC_BEAUTY_ENCOUNTER
+	promptbutton
+	closetext
+	winlosstext .BeatenText, 0
+	loadtrainer POKEFANF, JAIME
+	startbattle
+	reloadmapafterbattle
+	special RestoreMusic
+	end
+
+.NoFight:
+	jumpthisopenedtext
+		text "Ufufufu… I hope it"
+		line "gets dark soon."
+		done
+
+.BeatenText
+	text "Oh, how disap-"
+	line "pointing…"
 	done
 
 PokefanmDerekSeenText:
@@ -221,27 +279,7 @@ PokefanMDerekText_NotBragging:
 	line "people brag!"
 	done
 
-PokefanfRuthSeenText:
-	text "Such darling"
-	line "#MON."
 
-	para "Let's show our"
-	line "#MON together"
-	cont "at the same time."
-	done
-
-PokefanfRuthBeatenText:
-	text "I don't mind"
-	line "losing."
-	done
-
-PokefanfRuthAfterBattleText:
-	text "Do you know about"
-	line "baby #MON?"
-
-	para "I bet they're just"
-	line "adorable!"
-	done
 
 PokefanMDerekPikachuIsItText:
 	text "PIKACHU is it!"
@@ -251,193 +289,69 @@ PokefanMDerekPikachuIsItText:
 	line "could be friends!"
 	done
 
-PsychicNormanSeenText:
-	text "Let me see what"
-	line "your #MON are"
-	cont "capable of."
-	done
 
-PsychicNormanBeatenText:
-	text "Ooh, your #MON"
-	line "have potential."
-	done
 
-PsychicNormanAfterBattleText:
-	text "You know how #-"
-	line "MON have different"
-	cont "abilities?"
 
-	para "People are like"
-	line "that too. Every-"
-	cont "one has different"
-	cont "potential."
-	done
 
-PokefanfJaimeHopeItGetsDarkText:
-	text "Ufufufu… I hope it"
-	line "gets dark soon."
-	done
 
-PokefanfJaimeSeenText:
-	text "You came at just"
-	line "the right time."
 
-	para "Let's battle."
-	done
 
-PokefanfJaimeBeatenText:
-	text "Oh, how disap-"
-	line "pointing…"
-	done
 
-PokefanfJaimeAfterBattleText:
-	text "I met my MEOWTH at"
-	line "night, right here"
-	cont "on ROUTE 11."
 
-	para "I'm not sure why,"
-	line "but it seems to"
-
-	para "like it when I"
-	line "train here."
-
-	para "It seems to become"
-	line "friendlier by"
-
-	para "training here than"
-	line "anywhere else."
-	done
 
 Route11SignText:
-	text "ROUTE 11"
+	text "Route 11"
 
-	para "OLIVINE CITY -"
-	line "ECRUTEAK CITY"
+	para "Olivine City -"
+	line "Ecruteak City"
 	done
 
 Route11MtSilverSignText:
-	text "DANGER!"
-	line "MT.SILVER AHEAD!"
+	text "Danger!"
+	line "Mt.Silver Ahead!"
 	done
 
 MoomooFarmSignText:
-	text "MOOMOO FARM"
+	text "Moomoo Farm"
 
 	para "Enjoy Our Fresh"
 	line "and Tasty Milk"
 	done
 
 Route11TrainerTipsText:
-	text "TRAINER TIPS"
+	text "Trainer Tips"
 
-	para "Use HEADBUTT on"
+	para "Use Headbutt on"
 	line "trees to shake"
-	cont "#MON out."
+	cont "#mon out."
 
-	para "Different kinds of"
-	line "#MON drop out"
-	cont "of trees."
-
-	para "Use HEADBUTT on"
-	line "any tree you see!"
+	para "Every tree has a"
+	line "different chance"
+	cont "to drop #mon"
+	cont "but they all have"
+	cont "the same #mon."
 	done
 
+Route11Miltank:
+	setval MILTANK
+	special SetMonAsSeen
+	isfieldactionssettoquick
+	iftrue .skipthis
+	reanchormap
+	pokepic MILTANK
+	cry MILTANK
+	waitbutton
+	closepokepic
+.skipthis
+	jumpthistext
+		text "Miltank: Mooo!"
+		done
+
 Route11BerryTree1:
-	opentext
-	getitemname STRING_BUFFER_3, MINT_BERRY
-	writetext Route11TreeText
-	promptbutton
-	writetext Route11HeyItsBerryApricornText
-	promptbutton
-	giveitem MINT_BERRY
-	iffalse Route11NoRoomInBag
-	disappear ROUTE11_BERRY_TREE1
-	writetext Route11FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval MINT_BERRY
+	setlasttalked ROUTE11_BERRY_TREE1
+	jumpstd BerryOrFruitScript
 Route11ApricornTree1:
-	opentext
-	getitemname STRING_BUFFER_3, GRN_APRICORN
-	writetext Route11TreeText
-	promptbutton
-	writetext Route11HeyItsBerryApricornText
-	promptbutton
-	giveitem GRN_APRICORN
-	iffalse Route11NoRoomInBag
-	disappear ROUTE11_APRICORN_TREE1
-	writetext Route11FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
-Route11NoBerryOrApricorn:
-	opentext
-	writetext Route11TreeText
-	promptbutton
-	writetext Route11NothingHereText
-	waitbutton
-	closetext
-	end
-
-Route11NoRoomInBag:
-	writetext Route11NoRoomInBagText
-	waitbutton
-	closetext
-	end
-
-Route11TreeText:
-	text_far _FruitBearingTreeText
-	text_end
-
-Route11NothingHereText:
-	text_far _NothingHereText
-	text_end
-
-Route11HeyItsBerryApricornText:
-	text_far _HeyItsFruitText
-	text_end
-
-Route11FoundItemText:
-	text_far _ObtainedFruitText
-	text_end
-
-Route11NoRoomInBagText:
-	text_far _CantCarryItemText
-	text_end
-
-Route11_MapEvents:
-	def_warp_events
-	warp_event  1, 17, ROUTE_11_BARN, 1
-	warp_event  5, 17, ROUTE_11_FARMHOUSE, 1
-	warp_event  1, 17, ROUTE_11_BARN, 1
-	warp_event  9,  5, ROUTE_11_SILVER_CAVE_GATE, 1
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  5, 45, BGEVENT_READ, Route11TrainerTips
-	bg_event  9, 19, BGEVENT_READ, MoomooFarmSign
-	bg_event 15, 21, BGEVENT_READ, Route11Sign
-	bg_event 11,  7, BGEVENT_READ, Route11MtSilverSign
-	bg_event  5, 27, BGEVENT_ITEM, Route11HiddenNugget
-	bg_event  9, 17, BGEVENT_READ, Route11NoBerryOrApricorn
-	bg_event  8, 17, BGEVENT_READ, Route11NoBerryOrApricorn
-
-	def_object_events
-	object_event 13, 43, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 5, TrainerSailorEugene, -1
-	object_event 10, 36, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerPokefanmDerek, -1
-	object_event 11, 33, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerPokefanfRuth, -1
-	object_event  3, 26, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route11Miltank, -1
-	object_event  6, 25, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route11Miltank, -1
-	object_event  4, 29, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route11Miltank, -1
-	object_event  8, 27, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route11Miltank, -1
-	object_event 13, 21, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 1, TrainerPsychicNorman, -1
-	object_event  4, 36, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TrainerPokefanfJaime, -1
-	object_event  9, 17, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, Route11BerryTree1, EVENT_ROUTE_11_BERRY_1
-	object_event  8, 17, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route11ApricornTree1, EVENT_ROUTE_11_APRICORN_1
+	setval GRN_APRICORN
+	setlasttalked ROUTE11_APRICORN_TREE1
+	jumpstd BerryOrFruitScript

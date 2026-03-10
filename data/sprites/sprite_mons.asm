@@ -25,7 +25,7 @@ SpriteMons:
 	db BLISSEY
 	db AMPHAROS
 	db TENTACOOL
-	db TAUROS
+	db MILTANK ; in use
 	db HARIYAMA ; in use
 	db VOLTORB
 	db LAPRAS

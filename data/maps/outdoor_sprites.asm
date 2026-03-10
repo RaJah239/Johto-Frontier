@@ -117,7 +117,7 @@ CianwoodGroupSprites:
 	db SPRITE_POKEFAN_F
 	db SPRITE_EUSINE
 	; 8 of max 9 walking sprites
-	db SPRITE_TAUROS
+	db SPRITE_MILTANK
 	db SPRITE_BERRY
 	db SPRITE_APRICORN
 	db SPRITE_ROCK
