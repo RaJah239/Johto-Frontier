@@ -94,6 +94,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - Grate Oracle Lewot - Lots of code help
 - AndrewC101 - Lots of code used from AndrewC101's amazing Pokémon Abrosia including: Mirror trainer code, rematch any generic trainer, Abilities, Press Select on 4th Stat Page to view Abilities, Draft Arena, Mirror Matches, Update to Battle Tower
 - Polished Crystal's amazing team  for lots of code including: second options page, press A to use Flash in dark caves, text commands and more
+- PurnPum - Display TOX in battles and Battle Information Box in trainer battles
 - 8bitZeta - General code help
 - FIQ & Sour Apple - custom Battle Palettes
 - 4rdorin - Pokédex bug fixes and general code help
@@ -147,3 +148,4 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - Dark98: https://github.com/Dark98/pokeopencrystal
 - Alice-Not-Waifu: https://github.com/Alice-Not-Waifu/pokecrystal-wrenched
 - TriteHexagon: https://github.com/TriteHexagon
+- PurnPum: https://github.com/PurnPum
