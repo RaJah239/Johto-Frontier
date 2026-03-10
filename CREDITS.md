@@ -21,7 +21,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 
 - Nyuuk - Joltik, Galvantula, Snover, Abomasnow, Wyrdeer, Larvesta, Volcarona
 
-- SageDeoxys - Wimpod, Golisopod, Duraludon
+- SageDeoxys - Wimpod, Golisopod, Duraludon, Mamoswine
 
 - pokeachromicdevs - Katu, Octillery, Remoraid
 
