@@ -1,8 +1,3 @@
-WhirlIslandNW_MapScripts:
-	def_scene_scripts
-
-	def_callbacks
-
 WhirlIslandNW_MapEvents:
 	def_warp_events
 	warp_event  5,  7, ROUTE_13, 1
@@ -15,3 +10,8 @@ WhirlIslandNW_MapEvents:
 	def_bg_events
 
 	def_object_events
+
+WhirlIslandNW_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
