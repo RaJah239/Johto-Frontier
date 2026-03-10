@@ -69,7 +69,6 @@ PhoneScript_AnswerPhone_Female:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
 
@@ -80,11 +79,6 @@ PhoneScript_AnswerPhone_Female:
 
 .Reena:
 	farwritetext ReenaAnswerPhoneText
-	promptbutton
-	end
-
-.Dana:
-	farwritetext DanaAnswerPhoneText
 	promptbutton
 	end
 
@@ -165,7 +159,6 @@ PhoneScript_GreetPhone_Female:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
 
@@ -176,11 +169,6 @@ PhoneScript_GreetPhone_Female:
 
 .Reena:
 	farwritetext ReenaGreetText
-	promptbutton
-	end
-
-.Dana:
-	farwritetext DanaGreetText
 	promptbutton
 	end
 

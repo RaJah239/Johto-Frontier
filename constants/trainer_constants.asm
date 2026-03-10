@@ -154,11 +154,7 @@ DEF KRIS EQU __trainer_class__
 	const BRIDGET
 	const KRISE
 	const CONNIE1
-	const DANA1
-	const DANA2
-	const DANA3
-	const DANA4
-	const DANA5
+	const DANA
 	const SELINA
 
 	trainerclass JANINE ; 1a

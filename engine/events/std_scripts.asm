@@ -973,7 +973,6 @@ AskNumberFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
 
@@ -982,9 +981,6 @@ AskNumberFScript:
 	end
 .Reena:
 	farwritetext ReenaAskNumberText
-	end
-.Dana:
-	farwritetext DanaAskNumberText
 	end
 .Tiffany:
 	farwritetext TiffanyAskNumberText
@@ -1004,7 +1000,6 @@ NumberAcceptedFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
 
@@ -1015,11 +1010,6 @@ NumberAcceptedFScript:
 	end
 .Reena:
 	farwritetext ReenaNumberAcceptedText
-	waitbutton
-	closetext
-	end
-.Dana:
-	farwritetext DanaNumberAcceptedText
 	waitbutton
 	closetext
 	end
@@ -1038,7 +1028,6 @@ NumberDeclinedFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
 
@@ -1049,11 +1038,6 @@ NumberDeclinedFScript:
 	end
 .Reena:
 	farwritetext ReenaNumberDeclinedText
-	waitbutton
-	closetext
-	end
-.Dana:
-	farwritetext DanaNumberDeclinedText
 	waitbutton
 	closetext
 	end
@@ -1072,7 +1056,6 @@ RematchFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
 
@@ -1083,11 +1066,6 @@ RematchFScript:
 	end
 .Reena:
 	farwritetext ReenaRematchText
-	waitbutton
-	closetext
-	end
-.Dana:
-	farwritetext DanaRematchText
 	waitbutton
 	closetext
 	end
@@ -1104,13 +1082,8 @@ RematchFScript:
 
 GiftFScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 
-.Dana:
-	farwritetext DanaGiftText
-	promptbutton
-	end
 .Tiffany:
 	farwritetext TiffanyGiftText
 	promptbutton
@@ -1120,7 +1093,6 @@ PackFullFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_LASS_DANA, .Dana
 	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
 
@@ -1132,11 +1104,6 @@ PackFullFScript:
 
 .Reena
 	farwritetext ReenaPackFullText
-	waitbutton
-	closetext
-	end
-.Dana:
-	farwritetext DanaPackFullText
 	waitbutton
 	closetext
 	end

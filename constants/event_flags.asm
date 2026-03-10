@@ -464,7 +464,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_DANA_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const EVENT_CHAD_ASKED_FOR_PHONE_NUMBER
 	const_skip
@@ -998,8 +998,8 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_LASS_DANA2
-	const EVENT_BEAT_LASS_DANA3
+	const_skip
+	const_skip
 ; Hiker
 	const_skip
 	const EVENT_BEAT_HIKER_RUSSELL

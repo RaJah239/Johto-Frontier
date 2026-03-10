@@ -123,117 +123,30 @@ TrainerBeautyOlivia:
 	done
 
 TrainerLassDana:
-	trainer LASS, DANA1, EVENT_BEAT_LASS_DANA, LassDana1SeenText, LassDana1BeatenText, 0, .Script
+	generictrainer LASS, DANA, EVENT_BEAT_LASS_DANA, .SeenText, .BeatenText
 
-.Script
-	loadvar VAR_CALLERID, PHONE_LASS_DANA
-	opentext
-	checkflag ENGINE_DANA_HAS_THUNDERSTONE
-	iftrue .TryGiveThunderstone
-	checkflag ENGINE_DANA_READY_FOR_REMATCH
-	iftrue .DanaRematch
-	checkcellnum PHONE_LASS_DANA
-	iftrue .NumberAccepted
-	checkevent EVENT_DANA_ASKED_FOR_PHONE_NUMBER
-	iftrue .SecondTimeAsking
-	writetext LassDanaMoomooMilkText
-	promptbutton
-	setevent EVENT_DANA_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .AskForPhoneNumber
+.AfterText
+	text "I know something"
+	line "good!"
 
-.SecondTimeAsking:
-	scall .AskNumber
-.AskForPhoneNumber:
-	askforphonenumber PHONE_LASS_DANA
-	ifequal PHONE_CONTACT_REFUSED, .DeclinedPhoneNumber
-	gettrainername STRING_BUFFER_3, LASS, DANA1
-	scall .RegisteredPhoneNumber
-	sjump .NumberAccepted
+	para "Moomoo Farm's milk"
+	line "is famous for its"
+	cont "flavor."
+	done
 
-.DanaRematch:
-	scall .Rematch
-	winlosstext LassDana1BeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight4
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight3
-	checkevent EVENT_CLEARED_RADIO_TOWER
-	iftrue .LoadFight2
-	checkflag ENGINE_FLYPOINT_CIANWOOD
-	iftrue .LoadFight1
-	loadtrainer LASS, DANA1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_DANA_READY_FOR_REMATCH
-	end
+.SeenText
+	text "You seem to be"
+	line "good at #mon."
 
-.LoadFight1:
-	loadtrainer LASS, DANA2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_DANA_READY_FOR_REMATCH
-	end
+	para "If you are, how"
+	line "about giving me"
+	cont "some advice?"
+	done
 
-.LoadFight2:
-	loadtrainer LASS, DANA3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_DANA_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer LASS, DANA4
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_DANA_READY_FOR_REMATCH
-	end
-
-.LoadFight4:
-	loadtrainer LASS, DANA5
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_DANA_READY_FOR_REMATCH
-	end
-
-.TryGiveThunderstone:
-	scall .Gift
-	verbosegiveitem THUNDERSTONE
-	iffalse .NoRoomForThunderstone
-	clearflag ENGINE_DANA_HAS_THUNDERSTONE
-	closetext
-	end
-
-.NoRoomForThunderstone:
-	sjump .PackFull
-
-.AskNumber:
-	jumpstd AskNumberFScript
-	end
-
-.RegisteredPhoneNumber:
-	jumpstd RegisteredNumberFScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedFScript
-	end
-
-.DeclinedPhoneNumber:
-	jumpstd NumberDeclinedFScript
-	end
-
-.Rematch:
-	jumpstd RematchFScript
-	end
-
-.Gift:
-	jumpstd GiftFScript
-	end
-
-.PackFull:
-	jumpstd PackFullFScript
-	end
+.BeatenText
+	text "I see. So you can"
+	line "battle that way."
+	done
 
 TrainerSchoolboyChad:
 	trainer SCHOOLBOY, CHAD1, EVENT_BEAT_SCHOOLBOY_CHAD, SchoolboyChad1SeenText, SchoolboyChad1BeatenText, 0, .Script
@@ -376,28 +289,7 @@ SchoolboyChadSoManyTestsText:
 	cont "concentrate."
 	done
 
-LassDana1SeenText:
-	text "You seem to be"
-	line "good at #MON."
 
-	para "If you are, how"
-	line "about giving me"
-	cont "some advice?"
-	done
-
-LassDana1BeatenText:
-	text "I see. So you can"
-	line "battle that way."
-	done
-
-LassDanaMoomooMilkText:
-	text "I know something"
-	line "good!"
-
-	para "MOOMOO FARM's milk"
-	line "is famous for its"
-	cont "flavor."
-	done
 
 
 
