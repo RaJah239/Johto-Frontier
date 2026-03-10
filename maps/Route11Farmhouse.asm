@@ -20,6 +20,7 @@ PokefanM_DairyFarmer:
 	setevent EVENT_TALKED_TO_FARMER_ABOUT_MOOMOO
 	end
 
+; TODOTEXT make this sell 1 or a dozen, and chance the aftertext for Route 10 beauty about they only selling a bottle at a time
 FarmerMScript_SellMilk:
 	checkitem MOOMOO_MILK
 	iftrue FarmerMScript_Milking
