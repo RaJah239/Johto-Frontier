@@ -187,8 +187,7 @@ Route1YoungsterText:
 	text "You can run from"
 	line "all wild #mon"
 	cont "encounters without"
-	cont "a chance for fail-"
-	cont "ing."
+	cont "fail."
 	done
 
 Route1TeacherText:
