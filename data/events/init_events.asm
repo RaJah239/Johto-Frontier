@@ -95,7 +95,6 @@ InitialEvents:
 if DEF(_DEBUG)
 	dw EVENT_CAUGHT_ALL_UNOWN
 	dw EVENT_GOT_TM24_DRAGONBREATH
-	dw EVENT_OPENED_MT_SILVER
 endc
 
 ; Place new events that initialises on game start
