@@ -1,5 +1,20 @@
 DEF ROUTE11FARMHOUSE_MILK_PRICE EQU 500
 
+Route11Farmhouse_MapEvents:
+	def_warp_events
+	warp_event  2,  7, ROUTE_11, 2
+	warp_event  3,  7, ROUTE_11, 2
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  0,  1, BGEVENT_JUMPSTD, PICTURE_BOOKSHELF_SCRIPT
+	bg_event  1,  1, BGEVENT_JUMPSTD, PICTURE_BOOKSHELF_SCRIPT
+
+	def_object_events
+	object_event  3,  2, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, PokefanM_DairyFarmer, -1
+	object_event  5,  4, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, PokefanF_SnoreFarmer, -1
+
 	object_const_def
 	const ROUTE11FARMHOUSE_POKEFAN_M
 	const ROUTE11FARMHOUSE_POKEFAN_F
@@ -10,21 +25,44 @@ Route11Farmhouse_MapScripts:
 	def_callbacks
 
 PokefanM_DairyFarmer:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkevent EVENT_HEALED_MOOMOO
 	iftrue FarmerMScript_SellMilk
-	writetext FarmerMText_SickCow
-	waitbutton
-	closetext
 	setevent EVENT_TALKED_TO_FARMER_ABOUT_MOOMOO
-	end
+	jumpthisopenedtext
+		text "My Miltank ain't"
+		line "givin' me milk"
+		cont "n'more."
+
+		para "This here FARM's"
+		line "got famous milk."
+
+		para "Most everyone"
+		line "wants a drink."
+
+		para "It'll give me lots"
+		line "o' milk if'n I"
+		cont "feed it lots o'"
+		cont "Berries, I reckon."
+		done
 
 ; TODOTEXT make this sell 1 or a dozen, and chance the aftertext for Route 10 beauty about they only selling a bottle at a time
 FarmerMScript_SellMilk:
 	checkitem MOOMOO_MILK
 	iftrue FarmerMScript_Milking
-	writetext FarmerMText_BuyMilk
+	writethistext
+		text "How'd you like my"
+		line "Moomoo Milk?"
+
+		para "It's my pride and"
+		line "joy, there."
+
+		para "Give it to #mon"
+		line "to restore HP!"
+
+		para "I'll give it to ya"
+		line "fer just ¥{d:ROUTE11FARMHOUSE_MILK_PRICE}."
+		done
 	special PlaceMoneyTopRight
 	yesorno
 	iffalse FarmerMScript_NoSale
@@ -36,169 +74,79 @@ FarmerMScript_SellMilk:
 	special PlaceMoneyTopRight
 	waitsfx
 	playsound SFX_TRANSACTION
-	writetext FarmerMText_GotMilk
+	writethistext
+		text "Here ya go!"
+		line "Drink up'n enjoy!"
+		done
 	promptbutton
 	itemnotify
-	closetext
-	end
+	endtext
 
 FarmerMScript_NoMoney:
-	writetext FarmerMText_NoMoney
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Sorry, there."
+		line "No cash, no sale!"
+		done
 
 FarmerMScript_NoRoom:
-	writetext FarmerMText_NoRoom
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "I reckon yer"
+		line "Bag's full."
+		done
 
 FarmerMScript_NoSale:
-	writetext FarmerMText_NoSale
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "You don't want it?"
+		line "Come again, hear?"
+		done
 
 FarmerMScript_Milking:
-	writetext FarmerMText_Milking
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "I best go do my"
+		line "milkin'."
+		done
 
 PokefanF_SnoreFarmer:
-	faceplayer
-	opentext
-	checkevent EVENT_GOT_TM13_SNORE_FROM_MOOMOO_FARM
+	faceplayeropentext
+	checkevent EVENT_GOT_TM13_SNORE_FROM_MOOMOO_FARM ; TODOTEXT chance this when tms get sorted
 	iftrue FarmerFScript_GotSnore
 	checkevent EVENT_HEALED_MOOMOO
 	iftrue FarmerFScript_GiveSnore
-	writetext FarmerFText_InTrouble
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Our milk even goes"
+		line "over seas."
+
+		para "So if our own"
+		line "Miltank won't give"
+		cont "us any milk, we're"
+		cont "in trouble."
+		done
 
 FarmerFScript_GiveSnore:
-	writetext FarmerFText_HealedMiltank
+	writethistext
+		text "You fixed our"
+		line "Miltank, hon. Now"
+		cont "it gives Moomoo"
+		cont "Milk again."
+
+		para "Here's somethin'"
+		line "fer your trouble."
+		done
 	promptbutton
 	verbosegiveitem TM_SNORE
-	iffalse FarmerFScript_NoRoomForSnore
+	iffalse_endtext
 	setevent EVENT_GOT_TM13_SNORE_FROM_MOOMOO_FARM
 FarmerFScript_GotSnore:
-	writetext FarmerFText_SnoreSpeech
-	waitbutton
-FarmerFScript_NoRoomForSnore:
-	closetext
-	end
+	jumpthisopenedtext
+		text "That there's"
+		line "Snore."
 
-FarmhouseBookshelf:
-	jumpstd PictureBookshelfScript
+		para "It's a rare move"
+		line "that only works"
+		cont "while the #mon"
+		cont "is asleep."
 
-FarmerMText_SickCow:
-	text "My MILTANK ain't"
-	line "givin' me milk"
-	cont "n'more."
-
-	para "This here FARM's"
-	line "got famous milk."
-
-	para "Most everyone"
-	line "wants a drink."
-
-	para "It'll give me lots"
-	line "o' milk if'n I"
-
-	para "feed it lots o'"
-	line "BERRIES, I reckon."
-	done
-
-FarmerMText_BuyMilk:
-	text "How'd you like my"
-	line "MOOMOO MILK?"
-
-	para "It's my pride and"
-	line "joy, there."
-
-	para "Give it to #MON"
-	line "to restore HP!"
-
-	para "I'll give it to ya"
-	line "fer just ¥{d:ROUTE11FARMHOUSE_MILK_PRICE}."
-	done
-
-FarmerMText_GotMilk:
-	text "Here ya go!"
-	line "Drink up'n enjoy!"
-	done
-
-FarmerMText_NoMoney:
-	text "Sorry, there."
-	line "No cash, no sale!"
-	done
-
-FarmerMText_NoRoom:
-	text "I reckon yer"
-	line "PACK's full."
-	done
-
-FarmerMText_NoSale:
-	text "You don't want it?"
-	line "Come again, hear?"
-	done
-
-FarmerMText_Milking:
-	text "I best go do my"
-	line "milkin'."
-	done
-
-FarmerFText_InTrouble:
-	text "Our milk even goes"
-	line "out to KANTO."
-
-	para "So if our own"
-	line "MILTANK won't give"
-
-	para "us any milk, we're"
-	line "in trouble."
-	done
-
-FarmerFText_HealedMiltank:
-	text "You fixed our"
-	line "MILTANK, hon. Now"
-
-	para "it gives MOOMOO"
-	line "MILK again."
-
-	para "Here's somethin'"
-	line "fer your trouble."
-	done
-
-FarmerFText_SnoreSpeech:
-	text "That there's"
-	line "SNORE."
-
-	para "It's a rare move"
-	line "that only works"
-
-	para "while the #MON"
-	line "is asleep."
-
-	para "You best think how"
-	line "you ought to use"
-	cont "it, hon."
-	done
-
-Route11Farmhouse_MapEvents:
-	def_warp_events
-	warp_event  2,  7, ROUTE_11, 2
-	warp_event  3,  7, ROUTE_11, 2
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  0,  1, BGEVENT_READ, FarmhouseBookshelf
-	bg_event  1,  1, BGEVENT_READ, FarmhouseBookshelf
-
-	def_object_events
-	object_event  3,  2, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, PokefanM_DairyFarmer, -1
-	object_event  5,  4, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, PokefanF_SnoreFarmer, -1
+		para "You best think how"
+		line "you ought to use"
+		cont "it, hon."
+		done
