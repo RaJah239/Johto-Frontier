@@ -1,39 +1,3 @@
-	object_const_def
-	const OLIVINELIGHTHOUSE1F_SAILOR
-	const OLIVINELIGHTHOUSE1F_POKEFAN_F
-
-OlivineLighthouse1F_MapScripts:
-	def_scene_scripts
-
-	def_callbacks
-
-OlivineLighthouse1FSailorScript:
-	jumptextfaceplayer OlivineLighthouse1FSailorText
-
-OlivineLighthouse1FPokefanFScript:
-	jumptextfaceplayer OlivineLighthouse1FPokefanFText
-
-OlivineLighthouse1FSailorText:
-	text "People train at"
-	line "this LIGHTHOUSE."
-
-	para "It's not easy to"
-	line "climb because of"
-	cont "all the trainers."
-	done
-
-OlivineLighthouse1FPokefanFText:
-	text "In the past, #-"
-	line "MON used to light"
-
-	para "the sea around"
-	line "OLIVINE at night."
-
-	para "The LIGHTHOUSE was"
-	line "made in honor of"
-	cont "those #MON."
-	done
-
 OlivineLighthouse1F_MapEvents:
 	def_warp_events
 	warp_event 10, 17, OLIVINE_CITY, 8
@@ -47,5 +11,34 @@ OlivineLighthouse1F_MapEvents:
 	def_bg_events
 
 	def_object_events
-	object_event  8,  2, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, OlivineLighthouse1FSailorScript, -1
-	object_event 16,  9, SPRITE_POKEFAN_F, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, OlivineLighthouse1FPokefanFScript, -1
+	object_event  8,  2, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, OlivineLighthouse1FSailorText, -1
+	object_event 16,  9, SPRITE_POKEFAN_F, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 2, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, OlivineLighthouse1FPokefanFText, -1
+
+	object_const_def
+	const OLIVINELIGHTHOUSE1F_SAILOR
+	const OLIVINELIGHTHOUSE1F_POKEFAN_F
+
+OlivineLighthouse1F_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
+
+OlivineLighthouse1FSailorText:
+	text "People train at"
+	line "this Lighthouse."
+
+	para "It's not easy to"
+	line "climb because of"
+	cont "all the trainers."
+	done
+
+OlivineLighthouse1FPokefanFText:
+	text "In the past, #-"
+	line "mon used to light"
+	cont "the sea around"
+	cont "Olivine at night."
+
+	para "The Lighthouse was"
+	line "made in honor of"
+	cont "those #mon."
+	done
