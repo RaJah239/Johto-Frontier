@@ -1,15 +1,6 @@
-	object_const_def
-
-CianwoodPort_MapScripts:
-	def_scene_scripts
-
-	def_callbacks
-
-
 CianwoodPort_MapEvents:
 	def_warp_events
 	warp_event  9,  5, CIANWOOD_PORT_PASSAGE, 5
-	warp_event  7, 17, OLIVINE_PORT, 2
 
 	def_coord_events
 
@@ -18,3 +9,15 @@ CianwoodPort_MapEvents:
 
 
 	def_object_events
+	object_event  7, 11, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CianwoodPortSailor1Script, -1
+
+	object_const_def
+	const CIANWOODPORT_SAILOR1
+
+CianwoodPort_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
+
+CianwoodPortSailor1Script:
+	end
