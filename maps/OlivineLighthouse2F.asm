@@ -12,8 +12,8 @@ OlivineLighthouse2F_MapEvents:
 	def_bg_events
 
 	def_object_events
-	object_event  9,  3, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerSailorHuey, -1
-	object_event 17,  8, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerGentlemanAlfred, -1
+	object_event  9,  3, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 2, TrainerSailorHuey, -1
+	object_event 17,  8, SPRITE_GENTLEMAN, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerGentlemanAlfred, -1
 
 	object_const_def
 	const OLIVINELIGHTHOUSE2F_SAILOR
@@ -25,7 +25,7 @@ OlivineLighthouse2F_MapScripts:
 	def_callbacks
 
 TrainerGentlemanAlfred:
-	trainer GENTLEMAN, ALFRED, EVENT_BEAT_GENTLEMAN_ALFRED,.SeenText, .BeatenText
+	generictrainer GENTLEMAN, ALFRED, EVENT_BEAT_GENTLEMAN_ALFRED,.SeenText, .BeatenText
 
 .AfterText
 	text "Up top is a #-"
@@ -44,132 +44,22 @@ TrainerGentlemanAlfred:
 	done
 
 TrainerSailorHuey:
-	trainer SAILOR, HUEY1, EVENT_BEAT_SAILOR_HUEY, SailorHueySeenText, SailorHueyBeatenText, 0, .Script
+	generictrainer SAILOR, HUEY, EVENT_BEAT_SAILOR_HUEY, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_SAILOR_HUEY
-	opentext
-	checkevent EVENT_GOT_PROTEIN_FROM_HUEY
-	iftrue .RematchGift
-	checkflag ENGINE_HUEY_READY_FOR_REMATCH
-	iftrue .WantsBattle
-	checkcellnum PHONE_SAILOR_HUEY
-	iftrue .NumberAccepted
-	checkevent EVENT_HUEY_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedBefore
-	setevent EVENT_HUEY_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .AskForNumber
+.AfterText
+	text "What power!"
+	line "How would you like"
+	cont "to sail the seas"
+	cont "with me?"
+	done
 
-.AskedBefore:
-	scall .AskNumber
-.AskForNumber:
-	askforphonenumber PHONE_SAILOR_HUEY
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, SAILOR, HUEY1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
-
-.WantsBattle:
-	scall .Rematch
-	winlosstext SailorHueyBeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight3
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight2
-	checkevent EVENT_CLEARED_RADIO_TOWER
-	iftrue .LoadFight1
-	loadtrainer SAILOR, HUEY1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_HUEY_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer SAILOR, HUEY2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_HUEY_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer SAILOR, HUEY3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_HUEY_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer SAILOR, HUEY4
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_HUEY_READY_FOR_REMATCH
-	opentext
-	writetext SailorHueyGiveProteinText
-	waitbutton
-	verbosegiveitem PROTEIN
-	iffalse .PackFull
-	closetext
-	end
-
-.RematchGift
-	writetext SailorHueyGiveProteinAgainText
-	waitbutton
-	verbosegiveitem PROTEIN
-	iffalse .PackFull
-	clearevent EVENT_GOT_PROTEIN_FROM_HUEY
-	closetext
-	end	
-
-.AskNumber:
-	jumpstd AskNumberMScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberMScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedMScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedMScript
-	end
-
-.Rematch:
-	jumpstd RematchMScript
-	end
-
-.PackFull:
-	setevent EVENT_GOT_PROTEIN_FROM_HUEY
-	jumpstd PackFullMScript
-	end
-
-SailorHueySeenText:
+.SeenText
 	text "Men of the sea are"
 	line "always spoiling"
 	cont "for a good fight!"
 	done
 
-SailorHueyBeatenText:
+.BeatenText
 	text "Urf!"
 	line "I lose!"
 	done
-
-
-
-SailorHueyGiveProteinText:
-	text "Man! You're as"
-	line "tough as ever!"
-
-	para "Anyway, take this!"
-	done
-
-SailorHueyGiveProteinAgainText:
-	text "Here's the PROTEIN"
-	line "from last time."
-	
-	para "Made space right?"
-	done
-

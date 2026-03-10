@@ -1,7 +1,3 @@
-HueyWantsBattleScript:
-	farwritetext HueyReminderText
-	end
-
 GavenReminderScript:
 	farwritetext GavenReminderText
 	end

@@ -4,7 +4,6 @@ PhoneScript_Random2:
 
 PhoneScript_AnswerPhone_Male:
 	readvar VAR_CALLERID
-	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 	ifequal PHONE_FISHER_TULLY, .Tully
@@ -12,11 +11,6 @@ PhoneScript_AnswerPhone_Male:
 	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
 	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
-
-.Huey:
-	farwritetext HueyAnswerPhoneText
-	promptbutton
-	end
 
 .Gaven:
 	farwritetext GavenAnswerPhoneText
@@ -82,7 +76,6 @@ PhoneScript_AnswerPhone_Female:
 
 PhoneScript_GreetPhone_Male:
 	readvar VAR_CALLERID
-	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 	ifequal PHONE_FISHER_TULLY, .Tully
@@ -90,11 +83,6 @@ PhoneScript_GreetPhone_Male:
 	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
 	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
-
-.Huey:
-	farwritetext HueyGreetTexting
-	promptbutton
-	end
 
 .Gaven:
 	farwritetext GavenGreetText

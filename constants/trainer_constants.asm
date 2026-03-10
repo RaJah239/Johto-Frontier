@@ -306,14 +306,11 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass SAILOR ; 28
 	const EUGENE
-	const HUEY1
+	const HUEY
 	const TERRELL
 	const KENT
 	const ERNEST
 	const HARRY
-	const HUEY2
-	const HUEY3
-	const HUEY4
 	const STEELE
 
 	trainerclass SUPER_NERD ; 29

@@ -426,9 +426,9 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_HUEY_ASKED_FOR_PHONE_NUMBER
 	const_skip
-	const EVENT_GOT_PROTEIN_FROM_HUEY
+	const_skip
+	const_skip
 	const_skip
 	const EVENT_GOT_CARBOS_FROM_VANCE
 	const_skip
@@ -1099,8 +1099,8 @@
 	const_skip
 	const_skip
 	const EVENT_BEAT_SAILOR_HARRY
-	const EVENT_BEAT_SAILOR_HUEY2
-	const EVENT_BEAT_SAILOR_HUEY3
+	const_skip
+	const_skip
 ; Super Nerd
 	const EVENT_BEAT_SUPER_NERD_STAN
 	const EVENT_BEAT_SUPER_NERD_ERIC

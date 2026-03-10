@@ -644,7 +644,6 @@ BugContestResults_CopyContestantsToResults:
 
 AskNumberMScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 	ifequal PHONE_FISHER_TULLY, .Tully
@@ -653,9 +652,6 @@ AskNumberMScript:
 	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
-.Huey:
-	farwritetext HueyAskNumberText
-	end
 .Gaven:
 	farwritetext GavenAskNumberText
 	end
@@ -688,7 +684,6 @@ RegisteredNumberMScript:
 
 NumberAcceptedMScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 	ifequal PHONE_FISHER_TULLY, .Tully
@@ -697,11 +692,6 @@ NumberAcceptedMScript:
 	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
-.Huey:
-	farwritetext HueyNumberAcceptedText
-	waitbutton
-	closetext
-	end
 .Gaven:
 	farwritetext GavenNumberAcceptedText
 	waitbutton
@@ -740,7 +730,6 @@ NumberAcceptedMScript:
 
 NumberDeclinedMScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 	ifequal PHONE_FISHER_TULLY, .Tully
@@ -749,11 +738,6 @@ NumberDeclinedMScript:
 	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
-.Huey:
-	farwritetext HueyNumberDeclinedText
-	waitbutton
-	closetext
-	end
 .Gaven:
 	farwritetext GavenNumberDeclinedText
 	waitbutton
@@ -792,7 +776,6 @@ NumberDeclinedMScript:
 
 RematchMScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 	ifequal PHONE_FISHER_TULLY, .Tully
@@ -801,11 +784,6 @@ RematchMScript:
 	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
-.Huey:
-	farwritetext HueyRematchText
-	waitbutton
-	closetext
-	end
 .Gaven:
 	farwritetext GavenRematchText
 	waitbutton
@@ -863,7 +841,6 @@ GiftMScript:
 
 PackFullMScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 	ifequal PHONE_FISHER_TULLY, .Tully
@@ -871,12 +848,6 @@ PackFullMScript:
 	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
 	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
-
-.Huey:
-	farwritetext HueyPackFullText
-	waitbutton
-	closetext
-	end
 
 .Gaven
 	farwritetext GavenPackFullText
