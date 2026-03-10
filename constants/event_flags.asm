@@ -610,7 +610,7 @@
 	const EVENT_CONTEST_OFFICER_HAS_GOLD_BERRY
 	const EVENT_CONTEST_OFFICER_HAS_BERRY
 	const_skip
-	const EVENT_FOUGHT_LUGIA
+	const_skip
 	const EVENT_REENA_MOON_STONE
 	const_skip
 	const_skip
