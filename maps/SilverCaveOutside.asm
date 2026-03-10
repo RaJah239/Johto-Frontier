@@ -1,3 +1,18 @@
+SilverCaveOutside_MapEvents:
+	def_warp_events
+	warp_event 25, 19, SILVER_CAVE_POKECENTER_1F, 1
+	warp_event 18, 11, SILVER_CAVE_ROOM_1, 1
+	warp_event 25, 31, ROUTE_11_SILVER_CAVE_GATE, 3
+	warp_event 26, 31, ROUTE_11_SILVER_CAVE_GATE, 4
+
+	def_coord_events
+
+	def_bg_events
+	bg_event 26, 19, BGEVENT_JUMPSTD, POKECENTER_SIGN_SCRIPT
+	bg_event 17, 13, BGEVENT_JUMPTEXT, MtSilverSignText
+
+	def_object_events
+
 	object_const_def
 
 SilverCaveOutside_MapScripts:
@@ -35,27 +50,6 @@ SilverCaveOutsideFlypointCallback:
 	setflag ENGINE_FLYPOINT_SILVER_CAVE
 	endcallback
 
-MtSilverPokecenterSign:
-	jumpstd PokecenterSignScript
-
-MtSilverSign:
-	jumptext MtSilverSignText
-
 MtSilverSignText:
-	text "SILVER CAVE"
+	text "Silver Cave"
 	done
-
-SilverCaveOutside_MapEvents:
-	def_warp_events
-	warp_event 25, 19, SILVER_CAVE_POKECENTER_1F, 1
-	warp_event 18, 11, SILVER_CAVE_ROOM_1, 1
-	warp_event 25, 31, ROUTE_11_SILVER_CAVE_GATE, 3
-	warp_event 26, 31, ROUTE_11_SILVER_CAVE_GATE, 4
-
-	def_coord_events
-
-	def_bg_events
-	bg_event 26, 19, BGEVENT_READ, MtSilverPokecenterSign
-	bg_event 17, 13, BGEVENT_READ, MtSilverSign
-
-	def_object_events
