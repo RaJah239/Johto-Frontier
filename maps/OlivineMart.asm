@@ -1,79 +1,3 @@
-	object_const_def
-	const OLIVINEMART_CLERK
-	const OLIVINEMART_COOLTRAINER_F
-	const OLIVINEMART_LASS
-
-OlivineMart_MapScripts:
-	def_scene_scripts
-
-	def_callbacks
-
-OlivineMartClerkScript:
-	opentext
-	readvar VAR_BADGES
-	ifgreater 7, .EightBadgesMart
-	ifgreater 6, .SevenBadgesMart
-	ifgreater 4, .FiveBadgesMart
-	ifgreater 2, .ThreeBadgesMart
-	ifgreater 0, .OneBadgeMart
-	pokemart MARTTYPE_STANDARD, MART_NO_BADGES
-	closetext
-	end
-
-.OneBadgeMart:
-	pokemart MARTTYPE_STANDARD, MART_ONE_BADGE
-	closetext
-	end
-
-.ThreeBadgesMart:
-	pokemart MARTTYPE_STANDARD, MART_THREE_BADGES
-	closetext
-	end
-
-.FiveBadgesMart:
-	pokemart MARTTYPE_STANDARD, MART_FIVE_BADGES
-	closetext
-	end
-
-.SevenBadgesMart:
-	pokemart MARTTYPE_STANDARD, MART_SEVEN_BADGES
-	closetext
-	end
-
-.EightBadgesMart:
-	pokemart MARTTYPE_STANDARD, MART_EIGHT_BADGES
-	closetext
-	end
-
-OlivineMartCooltrainerFScript:
-	jumptextfaceplayer OlivineMartCooltrainerFText
-
-OlivineMartLassScript:
-	jumptextfaceplayer OlivineMartLassText
-
-OlivineMartCooltrainerFText:
-	text "Do your #MON"
-	line "already know the"
-
-	para "move for carrying"
-	line "people on water?"
-	done
-
-OlivineMartLassText:
-	text "My BUTTERFREE came"
-	line "from my boyfriend"
-	cont "overseas."
-
-	para "It carried some"
-	line "MAIL from him."
-
-	para "Want to know what"
-	line "it says?"
-
-	para "Let's see… Nope!"
-	line "It's a secret!"
-	done
-
 OlivineMart_MapEvents:
 	def_warp_events
 	warp_event  2,  7, OLIVINE_CITY, 7
@@ -84,6 +8,42 @@ OlivineMart_MapEvents:
 	def_bg_events
 
 	def_object_events
-	object_event  1,  3, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, OlivineMartClerkScript, -1
-	object_event  6,  2, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, OlivineMartCooltrainerFScript, -1
-	object_event  1,  6, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, OlivineMartLassScript, -1
+	variable_mart_event 1, 3, PAL_NPC_BLUE
+	object_event  6,  2, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, OlivineMartCooltrainerFText, -1
+	object_event  1,  6, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, OlivineMartLassText, -1
+
+	object_const_def
+	const OLIVINEMART_CLERK
+	const OLIVINEMART_COOLTRAINER_F
+	const OLIVINEMART_LASS
+
+OlivineMart_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
+
+OlivineMartCooltrainerFText:
+	text "Do your #mon"
+	line "already know the"
+	cont "move for carrying"
+	cont "people on water?"
+
+	para "I guess it's not"
+	line "needed if you have"
+	cont "a Lanturn Call."
+	done
+
+OlivineMartLassText:
+	text "My Beautifly came"
+	line "from my boyfriend"
+	cont "overseas."
+
+	para "It carried some"
+	line "Mail from him."
+
+	para "Want to know what"
+	line "it says?"
+
+	para "Let's see… Nope!"
+	line "It's a secret!"
+	done
