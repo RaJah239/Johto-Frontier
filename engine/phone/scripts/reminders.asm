@@ -18,10 +18,6 @@ ReenaHurryScript:
 	farwritetext ReenaHurryText
 	end
 
-ChadReminderScript:
-	farwritetext ChadReminderText
-	end
-
 TullyForwardScript:
 	farwritetext TullyForwardText
 	end

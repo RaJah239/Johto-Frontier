@@ -23,11 +23,6 @@ ReenaForwardScript:
 	promptbutton
 	sjump PhoneScript_HangUpText_Female
 
-ChadHangUpScript:
-	farwritetext ChadGoingToStudyHardText
-	promptbutton
-	sjump PhoneScript_HangUpText_Male
-
 DerekHangUpScript:
 	farwritetext DerekLetsGetTogetherText
 	promptbutton

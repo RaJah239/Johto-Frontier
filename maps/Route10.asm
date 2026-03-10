@@ -149,164 +149,28 @@ TrainerLassDana:
 	done
 
 TrainerSchoolboyChad:
-	trainer SCHOOLBOY, CHAD1, EVENT_BEAT_SCHOOLBOY_CHAD, SchoolboyChad1SeenText, SchoolboyChad1BeatenText, 0, .Script
+	generictrainer SCHOOLBOY, CHAD, EVENT_BEAT_SCHOOLBOY_CHAD, .SeenText, .BeatenText
 
-.Script
-	loadvar VAR_CALLERID, PHONE_SCHOOLBOY_CHAD
-	opentext
-	checkevent EVENT_CHAD_TWISTEDSPOON
-	iftrue .RematchGift
-	checkflag ENGINE_CHAD_READY_FOR_REMATCH
-	iftrue .ChadRematch
-	checkcellnum PHONE_SCHOOLBOY_CHAD
-	iftrue .HaveChadsNumber
-	checkevent EVENT_CHAD_ASKED_FOR_PHONE_NUMBER
-	iftrue .SecondTimeAsking
-	writetext SchoolboyChadSoManyTestsText
-	promptbutton
-	setevent EVENT_CHAD_ASKED_FOR_PHONE_NUMBER
-	scall .AskPhoneNumber
-	sjump .AskToRegisterNumber
-
-.SecondTimeAsking:
-	scall .AskPhoneNumber
-.AskToRegisterNumber:
-	askforphonenumber PHONE_SCHOOLBOY_CHAD
-	ifequal PHONE_CONTACT_REFUSED, .SaidNo
-	gettrainername STRING_BUFFER_3, SCHOOLBOY, CHAD1
-	scall .RegisteredChad
-	sjump .HaveChadsNumber
-
-.ChadRematch:
-	scall .Rematch
-	winlosstext SchoolboyChad1BeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight4
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight3
-	checkevent EVENT_CLEARED_RADIO_TOWER
-	iftrue .LoadFight2
-	checkflag ENGINE_FLYPOINT_MAHOGANY
-	iftrue .LoadFight1
-	loadtrainer SCHOOLBOY, CHAD1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_CHAD_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer SCHOOLBOY, CHAD2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_CHAD_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer SCHOOLBOY, CHAD3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_CHAD_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer SCHOOLBOY, CHAD4
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_CHAD_READY_FOR_REMATCH
-	end
-
-.LoadFight4:
-	loadtrainer SCHOOLBOY, CHAD5
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_CHAD_READY_FOR_REMATCH
-	opentext
-	writetext SchoolboyChad_GiveTwistedSpoonAfterBattleText
-	waitbutton
-	verbosegiveitem TWISTEDSPOON
-	iffalse .PackFull
-	closetext
-	end
-
-.RematchGift
-	writetext SchoolboyChad_AgainGiveTwistedSpoonAfterBattleText
-	waitbutton
-	verbosegiveitem TWISTEDSPOON
-	iffalse .PackFull
-	clearevent EVENT_CHAD_TWISTEDSPOON
-	closetext
-	end
-
-.PackFull:
-	setevent EVENT_CHAD_TWISTEDSPOON
-	jumpstd PackFullMScript
-	end
-
-.AskPhoneNumber:
-	jumpstd AskNumberMScript
-	end
-
-.RegisteredChad:
-	jumpstd RegisteredNumberMScript
-	end
-
-.HaveChadsNumber:
-	jumpstd NumberAcceptedMScript
-	end
-
-.SaidNo:
-	jumpstd NumberDeclinedMScript
-	end
-
-.Rematch:
-	jumpstd RematchMScript
-	end
-
-
-
-
-
-SchoolboyChad1SeenText:
-	text "Let me try some-"
-	line "thing I learned"
-	cont "today."
-	done
-
-SchoolboyChad1BeatenText:
-	text "I didn't study"
-	line "enough, I guess."
-	done
-
-SchoolboyChadSoManyTestsText:
+.AfterText
 	text "I have to take so"
 	line "many tests, I"
-
-	para "don't have much"
-	line "time for #MON."
+	cont "don't have much"
+	cont "time for #MON."
 
 	para "So when I do get"
 	line "to play, I really"
 	cont "concentrate."
 	done
 
-
-
-
-
-
-
-
-
-
-
-SchoolboyChad_GiveTwistedSpoonAfterBattleText:
-	text "Take this small"
-	line "item."
+.SeenText
+	text "Let me try some-"
+	line "thing I learned"
+	cont "today."
 	done
 
-SchoolboyChad_AgainGiveTwistedSpoonAfterBattleText:
-	text "Can a spoon fit"
-	line "now?"
+.BeatenText
+	text "I didn't study"
+	line "enough, I guess."
 	done
 
 Route10SignText:

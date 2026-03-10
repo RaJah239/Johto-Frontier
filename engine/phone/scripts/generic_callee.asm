@@ -7,7 +7,6 @@ PhoneScript_AnswerPhone_Male:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_SCHOOLBOY_CHAD, .Chad
 	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
 	ifequal PHONE_POKEMANIAC_BRENT, .Brent
@@ -27,11 +26,6 @@ PhoneScript_AnswerPhone_Male:
 
 .Jose:
 	farwritetext JoseAnswerPhoneText
-	promptbutton
-	end
-
-.Chad:
-	farwritetext ChadAnswerPhoneText
 	promptbutton
 	end
 
@@ -97,7 +91,6 @@ PhoneScript_GreetPhone_Male:
 	ifequal PHONE_SAILOR_HUEY, .Huey
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_SCHOOLBOY_CHAD, .Chad
 	ifequal PHONE_POKEFANM_DEREK, .Derek
 	ifequal PHONE_FISHER_TULLY, .Tully
 	ifequal PHONE_POKEMANIAC_BRENT, .Brent
@@ -117,11 +110,6 @@ PhoneScript_GreetPhone_Male:
 
 .Jose:
 	farwritetext JoseGreetText
-	promptbutton
-	end
-
-.Chad:
-	farwritetext ChadGreetText
 	promptbutton
 	end
 

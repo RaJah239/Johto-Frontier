@@ -282,7 +282,6 @@ INCLUDE "data/pokemon/names.asm"
 
 SECTION "Crystal Phone Text", ROMX
 
-INCLUDE "data/phone/text/chad_caller.asm"
 INCLUDE "data/phone/text/derek_caller.asm"
 INCLUDE "data/phone/text/tully_caller.asm"
 INCLUDE "data/phone/text/brent_caller.asm"
@@ -352,7 +351,6 @@ INCLUDE "engine/phone/scripts/bike_shop.asm"
 
 SECTION "Phone Text", ROMX
 
-INCLUDE "data/phone/text/chad_overworld.asm"
 INCLUDE "data/phone/text/derek_overworld.asm"
 INCLUDE "data/phone/text/tully_overworld.asm"
 INCLUDE "data/phone/text/brent_overworld.asm"
@@ -386,7 +384,6 @@ INCLUDE "engine/phone/scripts/gaven.asm"
 INCLUDE "engine/phone/scripts/beth.asm"
 INCLUDE "engine/phone/scripts/jose.asm"
 INCLUDE "engine/phone/scripts/reena.asm"
-INCLUDE "engine/phone/scripts/chad.asm"
 INCLUDE "engine/phone/scripts/derek.asm"
 INCLUDE "engine/phone/scripts/tully.asm"
 INCLUDE "engine/phone/scripts/brent.asm"
@@ -586,7 +583,6 @@ INCLUDE "data/phone/text/gaven_callee.asm"
 INCLUDE "data/phone/text/beth_callee.asm"
 INCLUDE "data/phone/text/jose_callee.asm"
 INCLUDE "data/phone/text/reena_callee.asm"
-INCLUDE "data/phone/text/chad_callee.asm"
 INCLUDE "data/phone/text/derek_callee.asm"
 INCLUDE "data/phone/text/tully_callee.asm"
 INCLUDE "data/phone/text/brent_callee.asm"

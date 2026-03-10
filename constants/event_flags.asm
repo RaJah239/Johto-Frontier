@@ -466,7 +466,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_CHAD_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const EVENT_DEREK_ASKED_FOR_PHONE_NUMBER
 	const_skip
@@ -480,7 +480,7 @@
 	const_skip
 	const EVENT_WILTON_ASKED_FOR_PHONE_NUMBER
 	const_skip
-	const EVENT_CHAD_TWISTEDSPOON
+	const_skip
 	const_skip
 	const EVENT_PARRY_ASKED_FOR_PHONE_NUMBER
 	const_skip
@@ -816,8 +816,8 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_SCHOOLBOY_CHAD2
-	const EVENT_BEAT_SCHOOLBOY_CHAD3
+	const_skip
+	const_skip
 ; Picnicker
 	const EVENT_BEAT_PICNICKER_LIZ
 	const EVENT_BEAT_PICNICKER_GINA

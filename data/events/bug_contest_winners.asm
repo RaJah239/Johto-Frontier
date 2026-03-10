@@ -74,7 +74,7 @@ BugContestant_YoungsterSamuel:
 	dbw SUICUNE,    226
 
 BugContestant_SchoolboyKipp:
-	db SCHOOLBOY, CHAD5
+	db SCHOOLBOY, CHAD
 	dbw RAIKOU,     300
 	dbw ENTEI,      285
 	dbw SUICUNE,    226

@@ -123,15 +123,11 @@ DEF KRIS EQU __trainer_class__
 	trainerclass SCHOOLBOY ; 17
 	const JACK
 	const ALAN
-	const CHAD1
+	const CHAD
 	const ALAN2
 	const ALAN3
-	const CHAD2
-	const CHAD3
 	const ALAN4
 	const ALAN5
-	const CHAD4
-	const CHAD5
 	const LIAM
 
 	trainerclass BIRD_KEEPER ; 18
