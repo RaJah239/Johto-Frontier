@@ -15,8 +15,7 @@ GoldenrodGameCorner_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event 18, 13, BGEVENT_ITEM + LEFTOVERS, EVENT_GOLDENROD_GAME_CORNER_HiDDEN_RARE_LEFTOVERS
-	bg_event 18, 13, BGEVENT_JUMPSTD, TRASH_CAN_SCRIPT
+	bg_event 18, 13, BGEVENT_READ, GoldenrodGameCornerTrashCan
 	bg_event  1, 10, BGEVENT_READ, GoldenrodGameCornerMemoryGameScript
 	bg_event  1, 11, BGEVENT_READ, GoldenrodGameCornerMemoryGameScript
 	bg_event  1,  6, BGEVENT_READ, GoldenrodGameCornerMemoryGameScript
@@ -443,3 +442,15 @@ GoldenrodGameCornerPokefanM2Text:
 	cont "Coin Case in the"
 	cont "Underground."
 	done
+
+GoldenrodGameCornerTrashCan:
+	checkevent EVENT_GOLDENROD_GAME_CORNER_HIDDEN_LEFTOVERS
+	iftrue .TrashEmpty
+	opentext
+	verbosegiveitem LEFTOVERS
+	iffalse_endtext
+	setevent EVENT_GOLDENROD_GAME_CORNER_HIDDEN_LEFTOVERS
+	endtext
+
+.TrashEmpty
+	jumpstd TrashCanScript
