@@ -10,17 +10,17 @@ VioletPokecenter1F_MapEvents:
 
 	def_object_events
 	heal_event  3,  1, PAL_NPC_PURPLE
+	chansey_event  4,  1
 	object_event  7,  6, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, VioletPokecenter1FGameboyKidText, -1
 	object_event  1,  4, SPRITE_GENTLEMAN, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, VioletPokecenter1FGentlemanText, -1
 	object_event  8,  1, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, VioletPokecenter1FYoungsterText, -1
-	chansey_event  4,  1
 
 	object_const_def
 	const VIOLETPOKECENTER1F_NURSE
+	const VIOLETPOKECENTER1F_CHANSEY
 	const VIOLETPOKECENTER1F_GAMEBOY_KID
 	const VIOLETPOKECENTER1F_GENTLEMAN
 	const VIOLETPOKECENTER1F_YOUNGSTER
-	const VIOLETPOKECENTER1F_CHANSEY
 
 VioletPokecenter1F_MapScripts:
 	def_scene_scripts
