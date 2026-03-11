@@ -1,3 +1,25 @@
+MahoganyTown_MapEvents:
+	def_warp_events
+	warp_event 15, 13, MAHOGANY_POKECENTER_1F, 1
+	warp_event 11,  7, MAHOGANY_MART_1F, 1
+	warp_event 17,  7, MAHOGANY_RED_GYARADOS_SPEECH_HOUSE, 1
+	warp_event  6, 13, MAHOGANY_GYM, 1
+	warp_event  9,  1, ROUTE_15_MAHOGANY_GATE, 3
+	warp_event  3,  5, MAHOGANY_TRADE_BACK_KID_HOUSE, 1
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  3,  9, BGEVENT_JUMPTEXT, MahoganyTownSignText
+	bg_event  9,  7, BGEVENT_JUMPTEXT, MahoganyTownRagecandybarSignText
+	bg_event  3, 13, BGEVENT_JUMPTEXT, MahoganyGymSignText
+	bg_event 16, 13, BGEVENT_JUMPTEXT, MahoganyTownPokecenterSign
+	bg_event  1,  5, BGEVENT_JUMPSTD, POKECENTER_SIGN_SCRIPT
+
+	def_object_events
+	object_event  6,  9, SPRITE_GRAMPS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MahoganyTownGrampsScript, -1
+	object_event 12,  8, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MahoganyTownLassScript, -1
+
 	object_const_def
 	const MAHOGANYTOWN_GRAMPS
 	const MAHOGANYTOWN_LASS
@@ -31,21 +53,6 @@ MahoganyTownGrampsScript:
 MahoganyTownLassScript:
 	jumptextfaceplayer MahoganyTownLassText
 
-MahoganyTownSign:
-	jumptext MahoganyTownSignText
-
-MahoganyTradeBackKidSign:
-	jumptext MahoganyTradeBackKidSignText
-
-MahoganyTownRagecandybarSign:
-	jumptext MahoganyTownRagecandybarSignText
-
-MahoganyGymSign:
-	jumptext MahoganyGymSignText
-
-MahoganyTownPokecenterSign:
-	jumpstd PokecenterSignScript
-
 MahoganyTownGrampsText:
 	text "Are you off to see"
 	line "the GYARADOS ram-"
@@ -71,7 +78,7 @@ MahoganyTownLassText:
 	done
 
 MahoganyTownSignText:
-	text "MAHOGANY TOWN"
+	text "Mahogany Town"
 
 	para "Welcome to the"
 	line "Home of the Ninja"
@@ -79,42 +86,20 @@ MahoganyTownSignText:
 
 MahoganyTownRagecandybarSignText:
 	text "While visiting"
-	line "MAHOGANY TOWN, try"
-	cont "a RAGECANDYBAR!"
+	line "Mahogany Town, try"
+	cont "a Ragecandybar!"
 	done
 
 MahoganyGymSignText:
-	text "MAHOGANY TOWN"
-	line "#MON GYM"
-	cont "LEADER: PRYCE"
+	text "Mahogany Town"
+	line "#mon Gym"
+	cont "Leader: PRYCE"
 
 	para "The Teacher of"
 	line "Winter's Harshness"
 	done
 
 MahoganyTradeBackKidSignText:
-	text "TRADEBACK KID'S"
-	line "HOUSE"
+	text "Tradeback Kid's"
+	line "House"
 	done
-
-MahoganyTown_MapEvents:
-	def_warp_events
-	warp_event 15, 13, MAHOGANY_POKECENTER_1F, 1
-	warp_event 11,  7, MAHOGANY_MART_1F, 1
-	warp_event 17,  7, MAHOGANY_RED_GYARADOS_SPEECH_HOUSE, 1
-	warp_event  6, 13, MAHOGANY_GYM, 1
-	warp_event  9,  1, ROUTE_15_MAHOGANY_GATE, 3
-	warp_event  3,  5, MAHOGANY_TRADE_BACK_KID_HOUSE, 1
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  3,  9, BGEVENT_READ, MahoganyTownSign
-	bg_event  9,  7, BGEVENT_READ, MahoganyTownRagecandybarSign
-	bg_event  3, 13, BGEVENT_READ, MahoganyGymSign
-	bg_event 16, 13, BGEVENT_READ, MahoganyTownPokecenterSign
-	bg_event  1,  5, BGEVENT_READ, MahoganyTradeBackKidSign
-
-	def_object_events
-	object_event  6,  9, SPRITE_GRAMPS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MahoganyTownGrampsScript, -1
-	object_event 12,  8, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MahoganyTownLassScript, -1
