@@ -354,12 +354,9 @@ DEF KRIS EQU __trainer_class__
 	const BROOKE
 	const KIM
 	const ERIN1
-	const TIFFANY1
-	const TIFFANY2
+	const TIFFANY
 	const ERIN2
-	const TIFFANY3
 	const ERIN3
-	const TIFFANY4
 
 	trainerclass CAMPER ; 36
 	const ROLAND

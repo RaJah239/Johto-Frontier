@@ -14,10 +14,6 @@ ReenaHurryScript:
 	farwritetext ReenaHurryText
 	end
 
-TiffanyAsleepScript:
-	farwritetext TiffanyHurryText
-	end
-
 VanceHurryHurryScript:
 	farwritetext VanceHurryHurryText
 	end

@@ -20,7 +20,7 @@ Route15_MapEvents:
 	object_event 13, 20, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerPokemaniacBrent, -1
 	object_event 14,  7, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 2, TrainerPokemaniacRon, -1
 	object_event  4, 16, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 4, TrainerFisherMarvin, -1
-	object_event  9, 25, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 2, TrainerPicnickerTiffany, -1
+	object_event  9, 25, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 2, TrainerPicnickerTiffany, -1
 	object_event 13, 40, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 3, TrainerCamperSpencer, -1
 	object_event 12, 32, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route15MaxEther, EVENT_ROUTE_15_MAX_ETHER
 	object_event  1, 27, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route15BerryTree1, EVENT_ROUTE_15_BERRY_1
@@ -166,160 +166,28 @@ TrainerPokemaniacBrent:
 	done
 
 TrainerPicnickerTiffany:
-	trainer PICNICKER, TIFFANY3, EVENT_BEAT_PICNICKER_TIFFANY, PicnickerTiffanySeenText, PicnickerTiffanyBeatenText, 0, .Script
+	generictrainer PICNICKER, TIFFANY, EVENT_BEAT_PICNICKER_TIFFANY, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_PICNICKER_TIFFANY
-	opentext
-	checkflag ENGINE_TIFFANY_HAS_PINK_BOW
-	iftrue .HasPinkBow
-	checkflag ENGINE_TIFFANY_READY_FOR_REMATCH
-	iftrue .WantsBattle
-	checkcellnum PHONE_PICNICKER_TIFFANY
-	iftrue .NumberAccepted
-	checkpoke CLEFAIRY
-	iffalse .NoClefairy
-	checkevent EVENT_TIFFANY_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	writetext PicnickerTiffanyWantsPicnicText
-	promptbutton
-	setevent EVENT_TIFFANY_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .AskForNumber
+.AfterText
+	text "Isn't my Clefable"
+	line "just the most"
+	cont "adorable thing?"
+	
+	para "Want to see my"
+	line "Clefable again?"
+	done
 
-.AskedAlready:
-	scall .AskNumber
-.AskForNumber:
-	askforphonenumber PHONE_PICNICKER_TIFFANY
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, PICNICKER, TIFFANY3
-	scall .RegisteredNumber
-	sjump .NumberAccepted
-
-.WantsBattle:
-	scall .Rematch
-	winlosstext PicnickerTiffanyBeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight3
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight2
-	checkevent EVENT_CLEARED_RADIO_TOWER
-	iftrue .LoadFight1
-	loadtrainer PICNICKER, TIFFANY3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_TIFFANY_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer PICNICKER, TIFFANY1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_TIFFANY_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer PICNICKER, TIFFANY2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_TIFFANY_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer PICNICKER, TIFFANY4
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_TIFFANY_READY_FOR_REMATCH
-	end
-
-.HasPinkBow:
-	scall .Gift
-	verbosegiveitem PINK_BOW
-	iffalse .NoRoom
-	clearflag ENGINE_TIFFANY_HAS_PINK_BOW
-	closetext
-	end
-
-.NoRoom:
-	sjump .PackFull
-
-.NoClefairy:
-	writetext PicnickerTiffanyClefairyText
-	waitbutton
-	closetext
-	end
-
-.AskNumber:
-	jumpstd AskNumberFScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberFScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedFScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedFScript
-	end
-
-.Rematch:
-	jumpstd RematchFScript
-	end
-
-.Gift:
-	jumpstd GiftFScript
-	end
-
-.PackFull:
-	jumpstd PackFullFScript
-	end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-PicnickerTiffanySeenText:
-	text "Are you going to"
-	line "LAKE OF RAGE too?"
+.SeenText
+	text "I'm having a picnic"
+	line "with my #mon."
 
 	para "Let's play for a "
 	line "little while!"
 	done
 
-PicnickerTiffanyBeatenText:
+.BeatenText
 	text "I played too much!"
 	done
-
-PicnickerTiffanyWantsPicnicText:
-	text "I'm having a pic-"
-	line "nic with #MON."
-
-	para "Won't you join us?"
-	done
-
-PicnickerTiffanyClefairyText:
-	text "Isn't my CLEFAIRY"
-	line "just the most"
-	cont "adorable thing?"
-	
-	para "Do you have a"
-	line "CLEFAIRY?"
-	done
-
-
 
 Route15TrainerTipsText:
 	text "Trainer Tips"

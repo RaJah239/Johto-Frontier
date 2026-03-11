@@ -474,7 +474,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_TIFFANY_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const EVENT_VANCE_ASKED_FOR_PHONE_NUMBER
 	const_skip
@@ -834,8 +834,8 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_PICNICKER_TIFFANY2
-	const EVENT_BEAT_PICNICKER_TIFFANY3
+	const_skip
+	const_skip
 	const EVENT_BEAT_PICNICKER_ERIN2
 	const_skip
 	const EVENT_BEAT_PICNICKER_TIFFANY

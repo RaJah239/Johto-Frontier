@@ -830,7 +830,6 @@ AskNumberFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
 
 .Beth:
@@ -838,9 +837,6 @@ AskNumberFScript:
 	end
 .Reena:
 	farwritetext ReenaAskNumberText
-	end
-.Tiffany:
-	farwritetext TiffanyAskNumberText
 	end
 .Erin:
 	farwritetext ErinAskNumberText
@@ -857,7 +853,6 @@ NumberAcceptedFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
 
 .Beth:
@@ -867,11 +862,6 @@ NumberAcceptedFScript:
 	end
 .Reena:
 	farwritetext ReenaNumberAcceptedText
-	waitbutton
-	closetext
-	end
-.Tiffany:
-	farwritetext TiffanyNumberAcceptedText
 	waitbutton
 	closetext
 	end
@@ -885,7 +875,6 @@ NumberDeclinedFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
 
 .Beth:
@@ -895,11 +884,6 @@ NumberDeclinedFScript:
 	end
 .Reena:
 	farwritetext ReenaNumberDeclinedText
-	waitbutton
-	closetext
-	end
-.Tiffany:
-	farwritetext TiffanyNumberDeclinedText
 	waitbutton
 	closetext
 	end
@@ -913,7 +897,6 @@ RematchFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
 
 .Beth:
@@ -926,11 +909,6 @@ RematchFScript:
 	waitbutton
 	closetext
 	end
-.Tiffany:
-	farwritetext TiffanyRematchText
-	waitbutton
-	closetext
-	end
 .Erin:
 	farwritetext ErinRematchText
 	waitbutton
@@ -939,18 +917,11 @@ RematchFScript:
 
 GiftFScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
-
-.Tiffany:
-	farwritetext TiffanyGiftText
-	promptbutton
-	end
 
 PackFullFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_TIFFANY, .Tiffany
 	ifequal PHONE_PICNICKER_ERIN, .Erin
 
 .Beth
@@ -961,11 +932,6 @@ PackFullFScript:
 
 .Reena
 	farwritetext ReenaPackFullText
-	waitbutton
-	closetext
-	end
-.Tiffany:
-	farwritetext TiffanyPackFullText
 	waitbutton
 	closetext
 	end
