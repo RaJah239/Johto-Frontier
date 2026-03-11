@@ -5,8 +5,7 @@ Marts:
 	dw MartGoldenrod2F2
 	dw MartGoldenrod3F
 	dw MartGoldenrod4F
-	dw MartMahogany1
-	dw MartMahogany2
+	dw MartMahogany
 	dw MartMtMoon
 	dw MartUnderground
 	dw MartNoBadges
@@ -59,14 +58,7 @@ MartGoldenrod4F:
 	db CARBOS
 	db -1 ; end
 
-MartMahogany1:
-	db 3 ; # items
-	db TINYMUSHROOM
-	db POKE_BALL
-	db POTION
-	db -1 ; end
-
-MartMahogany2:
+MartMahogany:
 	db 9 ; # items
 	db RAGECANDYBAR
 	db GREAT_BALL
