@@ -270,7 +270,7 @@
 	const_skip
 	const_skip
 	const EVENT_BURNED_TOWER_1F_HIDDEN_ULTRA_BALL
-	const EVENT_BRENT_GOLD_BERRY
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -472,7 +472,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BRENT_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const EVENT_TIFFANY_ASKED_FOR_PHONE_NUMBER
 	const_skip
@@ -941,8 +941,8 @@
 	const EVENT_BEAT_POKEMANIAC_BRENT
 	const EVENT_BEAT_POKEMANIAC_RON
 	const_skip
-	const EVENT_BEAT_POKEMANIAC_BRENT2
-	const EVENT_BEAT_POKEMANIAC_BRENT3
+	const_skip
+	const_skip
 	const EVENT_BEAT_POKEMANIAC_ISSAC
 	const EVENT_BEAT_POKEMANIAC_DONALD
 	const EVENT_BEAT_POKEMANIAC_ZACH

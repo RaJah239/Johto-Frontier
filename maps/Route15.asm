@@ -17,7 +17,7 @@ Route15_MapEvents:
 
 	def_object_events
 	object_event 13,  5, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 2, TrainerPokemaniacBen, -1
-	object_event 13, 20, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerPokemaniacBrent, -1
+	object_event 13, 20, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerPokemaniacBrent, -1
 	object_event 14,  7, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 2, TrainerPokemaniacRon, -1
 	object_event  4, 16, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 4, TrainerFisherMarvin, -1
 	object_event  9, 25, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 2, TrainerPicnickerTiffany, -1
@@ -147,109 +147,23 @@ TrainerFisherMarvin:
 	done
 
 TrainerPokemaniacBrent:
-	trainer POKEMANIAC, BRENT1, EVENT_BEAT_POKEMANIAC_BRENT, PokemaniacBrentSeenText, PokemaniacBrentBeatenText, 0, .Script
+	generictrainer POKEMANIAC, BRENT, EVENT_BEAT_POKEMANIAC_BRENT, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_POKEMANIAC_BRENT
-	opentext
-	checkevent EVENT_BRENT_GOLD_BERRY
-	iftrue .RematchGift
-	checkflag ENGINE_BRENT_READY_FOR_REMATCH
-	iftrue .WantsBattle
-	checkcellnum PHONE_POKEMANIAC_BRENT
-	iftrue .NumberAccepted
-	checkevent EVENT_BRENT_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	writetext PokemaniacBrentAfterBattleText
-	promptbutton
-	setevent EVENT_BRENT_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .AskForNumber
+.AfterText
+	text "I'd be happy just"
+	line "to own a single"
+	cont "rare #mon."
+	done
 
-.AskedAlready:
-	scall .AskNumber
-.AskForNumber:
-	askforphonenumber PHONE_POKEMANIAC_BRENT
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, POKEMANIAC, BRENT1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
+.SeenText
+	text "Hey! Do you have"
+	line "any rare #mon?"
+	done
 
-.WantsBattle:
-	scall .Rematch
-	winlosstext PokemaniacBrentBeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight3
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight2
-	loadtrainer POKEMANIAC, BRENT1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_BRENT_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer POKEMANIAC, BRENT2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_BRENT_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer POKEMANIAC, BRENT3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_BRENT_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer POKEMANIAC, BRENT4
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_BRENT_READY_FOR_REMATCH
-	opentext
-	writetext PokemaniacBrent_GiveGoldBerryAfterBattleText
-	waitbutton
-	verbosegiveitem GOLD_BERRY
-	iffalse .PackFull
-	closetext
-	end
-
-.RematchGift
-	writetext PokemaniacBrent_AgainGiveGoldBerryAfterBattleText
-	waitbutton
-	verbosegiveitem GOLD_BERRY
-	iffalse .PackFull
-	clearevent EVENT_BRENT_GOLD_BERRY
-	closetext
-	end
-
-.PackFull:
-	setevent EVENT_BRENT_GOLD_BERRY
-	jumpstd PackFullMScript
-	end
-
-.AskNumber:
-	jumpstd AskNumberMScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberMScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedMScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedMScript
-	end
-
-.Rematch:
-	jumpstd RematchMScript
-	end
-
-
+.BeatenText
+	text "Oh, my poor #-"
+	line "mon! Darling!"
+	done
 
 TrainerPicnickerTiffany:
 	trainer PICNICKER, TIFFANY3, EVENT_BEAT_PICNICKER_TIFFANY, PicnickerTiffanySeenText, PicnickerTiffanyBeatenText, 0, .Script
@@ -367,32 +281,7 @@ TrainerPicnickerTiffany:
 
 
 
-PokemaniacBrentSeenText:
-	text "Hey! Do you have"
-	line "any rare #MON?"
-	done
 
-PokemaniacBrentBeatenText:
-	text "Oh, my poor #-"
-	line "MON! Darlings!"
-	done
-
-PokemaniacBrentAfterBattleText:
-	text "I'd be happy just"
-	line "to own a single"
-	cont "rare #MON."
-	done
-
-PokemaniacBrent_GiveGoldBerryAfterBattleText:
-	text "Take this to be"
-	line "stronger for our"
-	cont "next battle."
-	done
-
-PokemaniacBrent_AgainGiveGoldBerryAfterBattleText:
-	text "Made room now?"
-	line "Take it!"
-	done
 
 
 

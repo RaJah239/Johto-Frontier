@@ -14,10 +14,6 @@ ReenaHurryScript:
 	farwritetext ReenaHurryText
 	end
 
-BrentReminderScript:
-	farwritetext BrentReminderText
-	end
-
 TiffanyAsleepScript:
 	farwritetext TiffanyHurryText
 	end

@@ -202,14 +202,11 @@ DEF KRIS EQU __trainer_class__
 	const CALVIN
 	const SHANE
 	const BEN
-	const BRENT1
+	const BRENT
 	const RON
-	const BRENT2
-	const BRENT3
 	const ISSAC
 	const DONALD
 	const ZACH
-	const BRENT4
 	const MILLER
 
 	trainerclass GRUNTM ; 1f
