@@ -1,41 +1,3 @@
-	object_const_def
-	const ROUTE15MAHOGANYGATE_OFFICER
-
-Route15MahoganyGate_MapScripts:
-	def_scene_scripts
-
-	def_callbacks
-
-Route15MahoganyGateOfficer:
-	faceplayer
-	opentext
-	checkevent EVENT_CLEARED_ROCKET_HIDEOUT
-	iftrue .RocketsCleared
-	writetext Route15MahoganyGateOfficerText
-	waitbutton
-	closetext
-	end
-
-.RocketsCleared:
-	writetext Route15MahoganyGateOfficerRocketsClearedText
-	waitbutton
-	closetext
-	end
-
-Route15MahoganyGateOfficerText:
-	text "Only people headed"
-	line "up to LAKE OF RAGE"
-
-	para "have been through"
-	line "here lately."
-	done
-
-Route15MahoganyGateOfficerRocketsClearedText:
-	text "Nobody goes up to"
-	line "LAKE OF RAGE these"
-	cont "days."
-	done
-
 Route15MahoganyGate_MapEvents:
 	def_warp_events
 	warp_event  4,  0, ROUTE_15, 1
@@ -48,4 +10,27 @@ Route15MahoganyGate_MapEvents:
 	def_bg_events
 
 	def_object_events
-	object_event  0,  4, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route15MahoganyGateOfficer, -1
+	object_event  0,  4, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route15MahoganyGateOfficerText, -1
+
+	object_const_def
+	const ROUTE15MAHOGANYGATE_OFFICER
+
+Route15MahoganyGate_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
+
+Route15MahoganyGateOfficerText:
+	text "The areas ahead"
+	line "are in perpetual"
+	cont "rainfall."
+	
+	para "Great for Water"
+	line "#mon, not so"
+	cont "for Fire."
+
+	para "I wonder if the"
+	line "Lake of Rage has"
+	cont "anything to do"
+	cont "with it…"
+	done
