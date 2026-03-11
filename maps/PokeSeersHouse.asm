@@ -1,3 +1,16 @@
+PokeSeersHouse_MapEvents:
+	def_warp_events
+	warp_event  2,  7, CIANWOOD_CITY, 7
+	warp_event  3,  7, CIANWOOD_CITY, 7
+
+	def_coord_events
+
+	def_bg_events
+
+	def_object_events
+	object_event  2,  3, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, SeerScript, -1
+	object_event  5,  4, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, NuggetSellerScript, -1
+
 	object_const_def
 	const POKESEERSHOUSE_GRANNY
 
@@ -7,38 +20,54 @@ PokeSeersHouse_MapScripts:
 	def_callbacks
 
 SeerScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	special PokeSeer
-	waitbutton
-	closetext
-	end
+	waitendtext
 
 NuggetSellerScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkevent MET_NUGGET_SELLER
 	iftrue .WantToBuySomeNuggets
-	writetext ThisOldMansLifeStory
+	writethistext
+		text "I've lived long,"
+		line "explored much,"
+		cont "adventured more"
+		cont "than most…"
+
+		para "Much knowledge I've"
+		line "gained but more"
+		cont "importantly, much"
+		cont "treasure!"
+
+		para "I've amassed a lot"
+		line "of Nuggets but I'm"
+		cont "not opposed to"
+		cont "parting with some."
+		done
 	waitbutton
 	setevent MET_NUGGET_SELLER
 .WantToBuySomeNuggets
-	writetext WantToBuySomeNuggetsText
+	writethistext
+		text "Do you want to buy"
+		line "some Nuggets?"
+		done
 	yesorno
-	iffalse .finish
+	iffalse_endtext
 	special PlaceMoneyTopRight
 	loadmenu .MoveMenuHeader
 	verticalmenu
 	closewindow
 	ifequal 1, .OneNugget
 	ifequal 2, .TenNuggets
-.finish
-	closetext
-	end
+	endtext
 
 .OneNugget
-	writetext OneNuggetCostText
-	promptbutton
+	writethistext
+		text "I'll take ¥7,500"
+		line "for 1× Nugget."
+		done
+	yesorno
+	iffalse_endtext
 	checkmoney YOUR_MONEY, 7500
 	ifequal HAVE_LESS, .NotEnoughMoney
 	giveitem NUGGET, 1
@@ -50,8 +79,12 @@ NuggetSellerScript:
 	sjump .FinishTheScam
 
 .TenNuggets
-	writetext TenNuggetCostText
-	promptbutton
+	writethistext
+		text "I'll take ¥75,000"
+		line "for 10× Nuggets."
+		done
+	yesorno
+	iffalse_endtext
 	checkmoney YOUR_MONEY, 75000
 	ifequal HAVE_LESS, .NotEnoughMoney
 	giveitem NUGGET, 10
@@ -63,16 +96,19 @@ NuggetSellerScript:
 .FinishTheScam
 	playsound SFX_ITEM
 	waitsfx
-	closetext
-	end
+	endtext
 
-.NotEnoughMoney
-	writetext NotEnoughMoneyText
-	waitendtext
+.NotEnoughMoney:
+	jumpthisopenedtext
+		text "Your funds have"
+		line "seen better days…"
+		done
 
 .NoRoom:
-	writetext NoNuggetRoomText
-	waitendtext
+	jumpthisopenedtext
+		text "Your pack's pocket"
+		line "is full…"
+		done
 
 .MoveMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -87,53 +123,11 @@ NuggetSellerScript:
 	db "Nugget ×10@"
 	db "Cancel@"
 
-ThisOldMansLifeStory:
-	text "I've lived long,"
-	line "explored much,"
-	cont "adventured more"
-	cont "than most…"
-
-	para "Much knowledge I've"
-	line "gained but more"
-	cont "importantly, much"
-	cont "treasure!"
-
-	para "I've amassed a lot"
-	line "of Nuggets but I'm"
-	cont "not opposed to"
-	cont "parting with some."
-	done
-
-WantToBuySomeNuggetsText:
-	text "Do you want to buy"
-	line "some Nuggets?"
-	done
-
-NotEnoughMoneyText:
-	text "Your funds have"
-	line "seen better days…"
-	done
-
-NoNuggetRoomText:
-	text "Your pack's pocket"
-	line "is full…"
-	done
-
-OneNuggetCostText:
-	text "I'll take ¥7,500"
-	line "for 1× Nugget."
-	done
-
 ReceivedOldManSingleNuggetText:
 	text "<PLAYER> got"
 	line "1× @"
 	text_ram wStringBuffer3
 	text "."
-	done
-
-TenNuggetCostText:
-	text "I'll take ¥75,000"
-	line "for 10× Nuggets."
 	done
 
 ReceivedOldManTenNuggetText:
@@ -142,16 +136,3 @@ ReceivedOldManTenNuggetText:
 	text_ram wStringBuffer3
 	text "."
 	done
-
-PokeSeersHouse_MapEvents:
-	def_warp_events
-	warp_event  2,  7, CIANWOOD_CITY, 7
-	warp_event  3,  7, CIANWOOD_CITY, 7
-
-	def_coord_events
-
-	def_bg_events
-
-	def_object_events
-	object_event  2,  3, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, SeerScript, -1
-	object_event  5,  4, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, NuggetSellerScript, -1
