@@ -1,3 +1,31 @@
+Route15_MapEvents:
+	def_warp_events
+	warp_event  9, 51, ROUTE_15_MAHOGANY_GATE, 1
+	warp_event 10, 51, ROUTE_15_MAHOGANY_GATE, 2
+	warp_event 17, 35, ROUTE_15_GATE, 3
+	warp_event 17, 31, ROUTE_15_GATE, 1
+	warp_event 18, 31, ROUTE_15_GATE, 2
+
+	def_coord_events
+
+	def_bg_events
+	bg_event 13,  3, BGEVENT_JUMPTEXT, Route15Sign1Text
+	bg_event 11, 49, BGEVENT_JUMPTEXT, Route15Sign2Text
+	bg_event 16, 38, BGEVENT_JUMPTEXT, Route15TrainerTipsText
+	bg_event  1, 27, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event  0, 26, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+
+	def_object_events
+	object_event 13,  5, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 2, TrainerPokemaniacBen, -1
+	object_event 13, 20, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerPokemaniacBrent, -1
+	object_event 14,  7, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 2, TrainerPokemaniacRon, -1
+	object_event  4, 16, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 4, TrainerFisherMarvin, -1
+	object_event  9, 25, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 2, TrainerPicnickerTiffany, -1
+	object_event 13, 40, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 3, TrainerCamperSpencer, -1
+	object_event 12, 32, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route15MaxEther, EVENT_ROUTE_15_MAX_ETHER
+	object_event  1, 27, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route15BerryTree1, EVENT_ROUTE_15_BERRY_1
+	object_event  0, 26, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route15ApricornTree1, EVENT_ROUTE_15_APRICORN_1
+
 	object_const_def
 	const ROUTE15_SUPER_NERD1
 	const ROUTE15_SUPER_NERD2
@@ -13,7 +41,6 @@ Route15_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_NEWMAP, Route15CheckIfRocketsScene
 	callback MAPCALLBACK_OBJECTS, .Weather
 
 .Weather:
@@ -21,37 +48,103 @@ Route15_MapScripts:
 	writemem wFieldWeather
 	endcallback
 
-Route15CheckIfRocketsScene:
-	checkevent EVENT_CLEARED_ROCKET_HIDEOUT
-	iftrue .NoRockets
-	setmapscene ROUTE_15_GATE, SCENE_ROUTE15GATE_ROCKET_SHAKEDOWN
-	endcallback
-
-.NoRockets:
-	setmapscene ROUTE_15_GATE, SCENE_ROUTE15GATE_NOOP
-	endcallback
-
 TrainerCamperSpencer:
-	trainer CAMPER, SPENCER, EVENT_BEAT_CAMPER_SPENCER, CamperSpencerSeenText, CamperSpencerBeatenText, 0, .Script
+	generictrainer CAMPER, SPENCER, EVENT_BEAT_CAMPER_SPENCER, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext CamperSpencerAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "I'm planning to"
+	line "camp at the Lake"
+	cont "Of Rage."
+	done
+
+.SeenText
+	text "I can do so much"
+	line "with my #mon--"
+	cont "it's super-fun!"
+	done
+
+.BeatenText
+	text "Losing isn't fun"
+	line "at all…"
+	done
 
 TrainerPokemaniacBen:
-	trainer POKEMANIAC, BEN, EVENT_BEAT_POKEMANIAC_BEN, PokemaniacBenSeenText, PokemaniacBenBeatenText, 0, .Script
+	generictrainer POKEMANIAC, BEN, EVENT_BEAT_POKEMANIAC_BEN, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext PokemaniacBenAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "What else do I"
+	line "like besides"
+	cont "#mon?"
+
+	para "Mary on the radio."
+	line "I bet she's cute!"
+	done
+
+.SeenText
+	text "I love #mon!"
+
+	para "That's why I"
+	line "started--and why"
+	cont "I'll keep on col-"
+	cont "lecting #mon!"
+	done
+
+.BeatenText
+	text "How could you do"
+	line "this to me?"
+	done
+
+TrainerPokemaniacRon:
+	generictrainer POKEMANIAC, RON, EVENT_BEAT_POKEMANIAC_RON, .SeenText, .BeatenText
+
+.AfterText
+	text "It's okay for"
+	line "people to like"
+	cont "different types"
+	cont "of #mon."
+
+	para "#mon isn't just"
+	line "about having the"
+	cont "most powerful one."
+	done
+
+.SeenText
+	text "TODOTEXT"
+	done
+
+.BeatenText
+	text "My Nidoking did"
+	line "pretty right on!"
+	done
+
+TrainerFisherMarvin:
+	generictrainer FISHER, MARVIN, EVENT_BEAT_FISHER_MARVIN, .SeenText, .BeatenText
+
+.AfterText
+	text "Kurt's Lure Ball"
+	line "is the best for"
+	cont "catching hooked"
+	cont "#mon."
+
+	para "It's much more"
+	line "effective than a"
+	cont "Ultra Ball."
+	done
+
+.SeenText
+	text "I'm in a slump."
+
+	para "Maybe it's the"
+	line "gear I'm using."
+
+	para "Let's battle for a"
+	line "change of pace!"
+	done
+
+.BeatenText
+	text "I lost, but I feel"
+	line "better anyway."
+	done
 
 TrainerPokemaniacBrent:
 	trainer POKEMANIAC, BRENT1, EVENT_BEAT_POKEMANIAC_BRENT, PokemaniacBrentSeenText, PokemaniacBrentBeatenText, 0, .Script
@@ -89,8 +182,6 @@ TrainerPokemaniacBrent:
 	iftrue .LoadFight3
 	checkevent EVENT_BEAT_ELITE_FOUR
 	iftrue .LoadFight2
-	checkevent EVENT_CLEARED_ROCKET_HIDEOUT
-	iftrue .LoadFight1
 	loadtrainer POKEMANIAC, BRENT1
 	startbattle
 	reloadmapafterbattle
@@ -158,27 +249,7 @@ TrainerPokemaniacBrent:
 	jumpstd RematchMScript
 	end
 
-TrainerPokemaniacRon:
-	trainer POKEMANIAC, RON, EVENT_BEAT_POKEMANIAC_RON, PokemaniacRonSeenText, PokemaniacRonBeatenText, 0, .Script
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext PokemaniacRonAfterBattleText
-	waitbutton
-	closetext
-	end
-
-TrainerFisherMarvin:
-	trainer FISHER, MARVIN, EVENT_BEAT_FISHER_MARVIN, FisherMarvinSeenText, FisherMarvinBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext FisherMarvinAfterBattleText
-	waitbutton
-	closetext
-	end
 
 TrainerPicnickerTiffany:
 	trainer PICNICKER, TIFFANY3, EVENT_BEAT_PICNICKER_TIFFANY, PicnickerTiffanySeenText, PicnickerTiffanyBeatenText, 0, .Script
@@ -292,41 +363,9 @@ TrainerPicnickerTiffany:
 	jumpstd PackFullFScript
 	end
 
-Route15Sign1:
-	jumptext Route15Sign1Text
 
-Route15Sign2:
-	jumptext Route15Sign2Text
 
-Route15TrainerTips:
-	jumptext Route15TrainerTipsText
 
-Route15MaxEther:
-	itemball MAX_ETHER
-
-PokemaniacBenSeenText:
-	text "I love #MON!"
-
-	para "That's why I"
-	line "started--and why"
-
-	para "I'll keep on col-"
-	line "lecting #MON!"
-	done
-
-PokemaniacBenBeatenText:
-	text "How could you do"
-	line "this to me?"
-	done
-
-PokemaniacBenAfterBattleText:
-	text "What else do I"
-	line "like besides"
-	cont "#MON?"
-
-	para "MARY on the radio."
-	line "I bet she's cute!"
-	done
 
 PokemaniacBrentSeenText:
 	text "Hey! Do you have"
@@ -344,80 +383,24 @@ PokemaniacBrentAfterBattleText:
 	cont "rare #MON."
 	done
 
-PokemaniacRonSeenText:
-	text "Would you get"
-	line "this?"
-
-	para "Some <RIVAL> guy"
-	line "made fun of my"
-	cont "#MON!"
-
-	para "Darn it! My #-"
-	line "MON's great!"
+PokemaniacBrent_GiveGoldBerryAfterBattleText:
+	text "Take this to be"
+	line "stronger for our"
+	cont "next battle."
 	done
 
-PokemaniacRonBeatenText:
-	text "My NIDOKING did"
-	line "pretty right on!"
+PokemaniacBrent_AgainGiveGoldBerryAfterBattleText:
+	text "Made room now?"
+	line "Take it!"
 	done
 
-PokemaniacRonAfterBattleText:
-	text "It's okay for"
-	line "people to like"
 
-	para "different types"
-	line "of #MON."
 
-	para "#MON isn't just"
-	line "about having the"
-	cont "most powerful one."
-	done
 
-FisherMarvinSeenText:
-	text "I'm in a slump."
 
-	para "Maybe it's the"
-	line "gear I'm using."
 
-	para "Let's battle for a"
-	line "change of pace!"
-	done
 
-FisherMarvinBeatenText:
-	text "I lost, but I feel"
-	line "better anyway."
-	done
 
-FisherMarvinAfterBattleText:
-	text "KURT's LURE BALL"
-	line "is the best for"
-
-	para "catching hooked"
-	line "#MON."
-
-	para "It's much more"
-	line "effective than a"
-	cont "ULTRA BALL."
-	done
-
-CamperSpencerSeenText:
-	text "I can do so much"
-	line "with my #MON--"
-	cont "it's super-fun!"
-	done
-
-CamperSpencerBeatenText:
-	text "Losing isn't fun"
-	line "at all…"
-	done
-
-CamperSpencerAfterBattleText:
-	text "What is going on"
-	line "at LAKE OF RAGE?"
-
-	para "We were planning"
-	line "to camp there."
-	done
 
 PicnickerTiffanySeenText:
 	text "Are you going to"
@@ -447,146 +430,49 @@ PicnickerTiffanyClefairyText:
 	line "CLEFAIRY?"
 	done
 
-Route15Sign1Text:
-	text "ROUTE 15"
 
-	para "LAKE OF RAGE -"
-	line "MAHOGANY TOWN"
-	done
-
-Route15Sign2Text:
-	text "ROUTE 15"
-
-	para "LAKE OF RAGE -"
-	line "MAHOGANY TOWN"
-	done
 
 Route15TrainerTipsText:
-	text "TRAINER TIPS"
+	text "Trainer Tips"
 
-	para "All #MON have"
+	para "All #mon have"
 	line "pros and cons"
-
-	para "depending on their"
-	line "types."
+	cont "depending on their"
+	cont "types."
 
 	para "If their types"
 	line "differ, a higher-"
-
-	para "level #MON may"
-	line "lose in battle."
+	cont "level #mon may"
+	cont "lose in battle."
 
 	para "Learn which types"
 	line "are strong and"
-
-	para "weak against your"
-	line "#MON's type."
+	cont "weak against your"
+	cont "#mon's type."
 	done
+
+Route15Sign1Text:
+	text "Route 15"
+
+	para "Lake Of Rage -"
+	line "Mahogany Town"
+	done
+
+Route15Sign2Text:
+	text "Route 15"
+
+	para "Lake Of Rage -"
+	line "Mahogany Town"
+	done
+
+Route15MaxEther:
+	itemball MAX_ETHER
 
 Route15BerryTree1:
-	opentext
-	getitemname STRING_BUFFER_3, BITTER_BERRY
-	writetext Route15TreeText
-	promptbutton
-	writetext Route15HeyItsBerryApricornText
-	promptbutton
-	giveitem BITTER_BERRY
-	iffalse Route15NoRoomInBag
-	disappear ROUTE15_BERRY_TREE1
-	writetext Route15FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval BITTER_BERRY
+	setlasttalked ROUTE15_BERRY_TREE1
+	jumpstd BerryOrFruitScript
 Route15ApricornTree1:
-	opentext
-	getitemname STRING_BUFFER_3, PNK_APRICORN
-	writetext Route15TreeText
-	promptbutton
-	writetext Route15HeyItsBerryApricornText
-	promptbutton
-	giveitem PNK_APRICORN
-	iffalse Route15NoRoomInBag
-	disappear ROUTE15_APRICORN_TREE1
-	writetext Route15FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
-Route15NoBerryOrApricorn:
-	opentext
-	writetext Route15TreeText
-	promptbutton
-	writetext Route15NothingHereText
-	waitbutton
-	closetext
-	end
-
-Route15NoRoomInBag:
-	writetext Route15NoRoomInBagText
-	waitbutton
-	closetext
-	end
-
-Route15TreeText:
-	text_far _FruitBearingTreeText
-	text_end
-
-Route15NothingHereText:
-	text_far _NothingHereText
-	text_end
-
-Route15HeyItsBerryApricornText:
-	text_far _HeyItsFruitText
-	text_end
-
-Route15FoundItemText:
-	text_far _ObtainedFruitText
-	text_end
-
-Route15NoRoomInBagText:
-	text_far _CantCarryItemText
-	text_end
-
-PokemaniacBrent_GiveGoldBerryAfterBattleText:
-	text "Take this to be"
-	line "stronger for our"
-	cont "next battle."
-	done
-
-PokemaniacBrent_AgainGiveGoldBerryAfterBattleText:
-	text "Made room now?"
-	line "Take it!"
-	done
-
-Route15_MapEvents:
-	def_warp_events
-	warp_event  9, 51, ROUTE_15_MAHOGANY_GATE, 1
-	warp_event 10, 51, ROUTE_15_MAHOGANY_GATE, 2
-	warp_event 17, 35, ROUTE_15_GATE, 3
-	warp_event 17, 31, ROUTE_15_GATE, 1
-	warp_event 18, 31, ROUTE_15_GATE, 2
-
-	def_coord_events
-
-	def_bg_events
-	bg_event 13,  3, BGEVENT_READ, Route15Sign1
-	bg_event 11, 49, BGEVENT_READ, Route15Sign2
-	bg_event 16, 38, BGEVENT_READ, Route15TrainerTips
-	bg_event  1, 27, BGEVENT_READ, Route15NoBerryOrApricorn
-	bg_event  0, 26, BGEVENT_READ, Route15NoBerryOrApricorn
-
-	def_object_events
-	object_event 13,  5, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, TrainerPokemaniacBen, -1
-	object_event 13, 20, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerPokemaniacBrent, -1
-	object_event 14,  7, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, TrainerPokemaniacRon, -1
-	object_event  4, 16, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 4, TrainerFisherMarvin, -1
-	object_event  9, 25, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 2, TrainerPicnickerTiffany, -1
-	object_event 13, 40, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerCamperSpencer, -1
-	object_event 12, 32, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route15MaxEther, EVENT_ROUTE_15_MAX_ETHER
-	object_event  1, 27, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route15BerryTree1, EVENT_ROUTE_15_BERRY_1
-	object_event  0, 26, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route15ApricornTree1, EVENT_ROUTE_15_APRICORN_1
+	setval PNK_APRICORN
+	setlasttalked ROUTE15_APRICORN_TREE1
+	jumpstd BerryOrFruitScript
