@@ -585,11 +585,11 @@
 	const EVENT_EXPLODING_TRAP_20
 	const EVENT_EXPLODING_TRAP_21
 	const EVENT_EXPLODING_TRAP_22
-	const EVENT_LEARNED_HAIL_GIOVANNI
 	const_skip
-	const EVENT_LEARNED_SLOWPOKETAIL
-	const EVENT_LEARNED_RATICATE_TAIL
-	const EVENT_OPENED_DOOR_TO_GIOVANNIS_OFFICE
+	const_skip
+	const_skip
+	const_skip
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -856,8 +856,8 @@
 	const_skip
 	const EVENT_BEAT_GENTLEMAN_ALFRED
 ; Scientist
-	const EVENT_BEAT_SCIENTIST_ROSS
-	const EVENT_BEAT_SCIENTIST_MITCH
+	const_skip
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -972,7 +972,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_ROCKET_GRUNTM_28
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -983,7 +983,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_ROCKET_GRUNTF_5
+	const_skip
 ; Lass
 	const EVENT_BEAT_LASS_CARRIE
 	const EVENT_BEAT_LASS_BRIDGET
@@ -1087,7 +1087,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_ROCKET_EXECUTIVEM_4
+	const_skip
 ; Sailor
 	const EVENT_BEAT_SAILOR_EUGENE
 	const EVENT_BEAT_SAILOR_HUEY
@@ -1238,7 +1238,7 @@
 	const EVENT_TEAM_ROCKET_BASE_B1F_ZOOM_LENS
 	const EVENT_TEAM_ROCKET_BASE_B2F_TM_KNOCK_OFF
 	const EVENT_TEAM_ROCKET_BASE_B3F_PROTEIN
-	const EVENT_TEAM_ROCKET_BASE_B3F_X_SPECIAL
+	const EVENT_TEAM_ROCKET_BASE_B3F_SUN_SHARD
 	const EVENT_TEAM_ROCKET_BASE_B3F_FULL_HEAL
 	const EVENT_TEAM_ROCKET_BASE_B3F_ICE_HEAL
 	const EVENT_ILEX_FOREST_REVIVE
@@ -1321,7 +1321,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_RIVAL_TEAM_ROCKET_BASE
+	const_skip
 	const_skip
 	const EVENT_RIVAL_VICTORY_ROAD
 	const_skip
@@ -1344,11 +1344,11 @@
 	const EVENT_LAKE_OF_RAGE_LANCE
 	const_skip
 	const_skip
-	const EVENT_TEAM_ROCKET_BASE_B3F_LANCE_PASSWORDS
+	const_skip
 	const EVENT_DRAGONS_DEN_CLAIR
 	const EVENT_TEAM_ROCKET_BASE_SECURITY_GRUNTS
-	const EVENT_TEAM_ROCKET_BASE_POPULATION
-	const EVENT_TEAM_ROCKET_BASE_B3F_EXECUTIVE
+	const_skip
+	const_skip
 	const EVENT_ROUTE_15_GATE_ROCKETS
 	const_skip
 	const_skip

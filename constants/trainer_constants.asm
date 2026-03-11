@@ -103,10 +103,6 @@ DEF KRIS EQU __trainer_class__
 	const LT_SURGE1
 
 	trainerclass SCIENTIST ; 14
-	const ROSS
-	const MITCH
-	const MARC
-	const RICH
 
 	trainerclass ERIKA ; 15
 	const ERIKA1
@@ -217,23 +213,6 @@ DEF KRIS EQU __trainer_class__
 	const MILLER
 
 	trainerclass GRUNTM ; 1f
-	const GRUNTM_2
-	const GRUNTM_3
-	const GRUNTM_4
-	const GRUNTM_5
-	const GRUNTM_6
-	const GRUNTM_7
-	const GRUNTM_8
-	const GRUNTM_9
-	const GRUNTM_10
-	const GRUNTM_11
-	const GRUNTM_13
-	const GRUNTM_14
-	const GRUNTM_15
-	const GRUNTM_24
-	const GRUNTM_25
-	const GRUNTM_28
-	const GRUNTM_29
 
 	trainerclass GENTLEMAN ; 20
 	const PRESTON
@@ -245,7 +224,6 @@ DEF KRIS EQU __trainer_class__
 	const CLARISSA
 
 	trainerclass TEACHER ; 22
-	const COLETTE ; unused
 
 	trainerclass SABRINA ; 23
 	const SABRINA1
@@ -363,10 +341,6 @@ DEF KRIS EQU __trainer_class__
 	const KENJI3
 
 	trainerclass EXECUTIVEM ; 33
-	const EXECUTIVEM_1
-	const EXECUTIVEM_2
-	const EXECUTIVEM_3
-	const EXECUTIVEM_4
 
 	trainerclass PSYCHIC_T ; 34
 	const NATHAN
@@ -462,11 +436,6 @@ DEF KRIS EQU __trainer_class__
 	const DIRK
 
 	trainerclass GRUNTF ; 42
-	const GRUNTF_1
-	const GRUNTF_2
-	const GRUNTF_3
-	const GRUNTF_4
-	const GRUNTF_5
 
 	trainerclass MYSTICALMAN ; 43
 	const EUSINE
@@ -480,11 +449,9 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass PROTON
 	const PROTON1
-	const PROTON2
 
 	trainerclass PETREL
 	const PETREL1
-	const PETREL2
 
 	trainerclass LORELEI
 	const LORELEI1
@@ -499,11 +466,9 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass ARIANA
 	const ARIANA1
-	const ARIANA2
 	
 	trainerclass ARCHER
 	const ARCHER1
-	const ARCHER2
 
 	trainerclass MAXIMA
 	const MAXIMA1

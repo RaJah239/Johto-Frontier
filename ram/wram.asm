@@ -3159,7 +3159,6 @@ wRuinsOfAlphOmanyteChamberSceneID::               db
 wRuinsOfAlphAerodactylChamberSceneID::            db
 wRuinsOfAlphInnerChamberSceneID::                 db
 wTeamRocketBaseB1FSceneID::                       db
-wTeamRocketBaseB3FSceneID::                       db
 wVictoryRoadSceneID::                             db
 wDragonsDenB1FSceneID::                           db
 wDragonShrineSceneID::                            db
@@ -3173,7 +3172,7 @@ wOaksLab::                                        db ; Nayru62's scene in Oak's 
 wRoute21::                                        db
 wBattlePlaza::                                    db
 
-	ds 172
+	ds 173
 
 ; battle tower points
 wBattleTowerNormalPoints:: db
