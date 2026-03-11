@@ -80,7 +80,7 @@
 	const_skip
 	const_skip
 	const EVENT_GOT_TM_BRICK_BREAK
-	const EVENT_LANCE_HEALED_YOU_IN_TEAM_ROCKET_BASE
+	const_skip
 	const EVENT_GOT_MYSTIC_WATER_IN_CHERRYGROVE
 	const EVENT_GOT_TM05_ROAR
 	const EVENT_GOT_EEVEE
@@ -96,7 +96,7 @@
 	const_skip
 	const EVENT_GOT_QUICK_CLAW
 	const EVENT_MET_HIDDEN_POWER_GUY
-	const EVENT_GOT_TM36_SLUDGE_BOMB
+	const EVENT_GOT_TM_SLUDGE_BOMB
 	const EVENT_GOT_ITEMFINDER
 	const EVENT_GOT_BICYCLE
 	const EVENT_GOT_SQUIRTBOTTLE
@@ -1346,10 +1346,10 @@
 	const_skip
 	const_skip
 	const EVENT_DRAGONS_DEN_CLAIR
-	const EVENT_TEAM_ROCKET_BASE_SECURITY_GRUNTS
 	const_skip
 	const_skip
-	const EVENT_ROUTE_15_GATE_ROCKETS
+	const_skip
+	const_skip
 	const_skip
 	const_skip
 	const EVENT_TEAM_ROCKET_BASE_B2F_ELECTRODE_1
@@ -1381,7 +1381,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_SLOWPOKE_WELL_ROCKETS
+	const_skip
 	const_skip
 	const EVENT_GUIDE_GENT_IN_HIS_HOUSE
 	const EVENT_GUIDE_GENT_VISIBLE_IN_CHERRYGROVE

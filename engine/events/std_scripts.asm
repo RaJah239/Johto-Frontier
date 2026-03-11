@@ -917,6 +917,7 @@ RematchFScript:
 
 GiftFScript:
 	readvar VAR_CALLERID
+	end
 
 PackFullFScript:
 	readvar VAR_CALLERID

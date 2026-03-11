@@ -3147,7 +3147,6 @@ wBattleTower1FSceneID::                           db
 wBattleTowerBattleRoomSceneID::                   db
 wBattleTowerElevatorSceneID::                     db
 wBattleTowerHallwaySceneID::                      db
-wRoute15GateSceneID::                             db
 wTinTower1FSceneID::                              db
 wBurnedTower1FSceneID::                           db
 wBurnedTowerB1FSceneID::                          db
@@ -3172,7 +3171,7 @@ wOaksLab::                                        db ; Nayru62's scene in Oak's 
 wRoute21::                                        db
 wBattlePlaza::                                    db
 
-	ds 173
+	ds 174
 
 ; battle tower points
 wBattleTowerNormalPoints:: db
