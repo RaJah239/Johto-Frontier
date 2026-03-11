@@ -1,3 +1,35 @@
+Route14_MapEvents:
+	def_warp_events
+	warp_event  0,  8, ROUTE_14_ECRUTEAK_GATE, 3
+	warp_event  0,  9, ROUTE_14_ECRUTEAK_GATE, 4
+	warp_event 10,  5, MOUNT_MORTAR_1F_OUTSIDE, 1
+	warp_event 28,  9, MOUNT_MORTAR_1F_OUTSIDE, 2
+	warp_event 46,  7, MOUNT_MORTAR_1F_OUTSIDE, 3
+
+	def_coord_events
+	coord_event 24, 14, SCENE_ROUTE14_SUICUNE, Route14SuicuneScript
+
+	def_bg_events
+	bg_event  4, 10, BGEVENT_JUMPTEXT, Route14Sign1Text
+	bg_event  7,  5, BGEVENT_JUMPTEXT, MtMortarSign1Text
+	bg_event 45,  9, BGEVENT_JUMPTEXT, MtMortarSign2Text
+	bg_event 54,  8, BGEVENT_JUMPTEXT, Route14Sign2Text
+	bg_event 16, 11, BGEVENT_ITEM + MAX_POTION, EVENT_ROUTE_14_HIDDEN_MAX_POTION
+	bg_event 27, 16, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event 28, 16, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event 29, 16, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+
+	def_object_events
+	object_event 40, 10, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerFisherTully, -1
+	object_event 51,  9, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 3, TrainerHikerBenjamin, -1
+	object_event 47,  8, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerPokemaniacShane, -1
+	object_event  6,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route14UltraBall, EVENT_ROUTE_14_ULTRA_BALL
+	object_event 33,  8, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route14SuperPotion, EVENT_ROUTE_14_SUPER_POTION
+	object_event 26, 16, SPRITE_SUICUNE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_SAW_SUICUNE_ON_ROUTE_14
+	object_event 27, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route14ApricornTree1, EVENT_ROUTE_14_APRICORN_1
+	object_event 28, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route14ApricornTree2, EVENT_ROUTE_14_APRICORN_2
+	object_event 29, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route14ApricornTree3, EVENT_ROUTE_14_APRICORN_3
+
 	object_const_def
 	const ROUTE14_FISHER
 	const ROUTE14_POKEFAN_M
@@ -17,8 +49,6 @@ Route14_MapScripts:
 	def_callbacks
 
 Route14Noop1Scene:
-	end
-
 Route14Noop2Scene:
 	end
 
@@ -33,6 +63,17 @@ Route14SuicuneScript:
 	clearevent EVENT_SAW_SUICUNE_ON_ROUTE_8
 	setmapscene ROUTE_8, SCENE_ROUTE8_SUICUNE
 	end
+
+Route14SuicuneMovement:
+	set_sliding
+	fast_jump_step UP
+	fast_jump_step UP
+	fast_jump_step UP
+	fast_jump_step RIGHT
+	fast_jump_step RIGHT
+	fast_jump_step RIGHT
+	remove_sliding
+	step_end
 
 TrainerFisherTully:
 	trainer FISHER, TULLY1, EVENT_BEAT_FISHER_TULLY, FisherTullySeenText, FisherTullyBeatenText, 0, .Script
@@ -131,64 +172,20 @@ TrainerFisherTully:
 .PackFull:
 	jumpstd PackFullMScript
 
-TrainerPokemaniacShane:
-	trainer POKEMANIAC, SHANE, EVENT_BEAT_POKEMANIAC_SHANE, PokemaniacShaneSeenText, PokemaniacShaneBeatenText, 0, .Script
+FisherTullyAfterBattleText:
+	text "I want to become"
+	line "the trainer Champ"
+	cont "using the #mon"
+	cont "I caught."
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext PokemaniacShaneAfterBattleText
-	waitbutton
-	closetext
-	end
-
-TrainerHikerBenjamin:
-	trainer HIKER, BENJAMIN, EVENT_BEAT_HIKER_BENJAMIN, HikerBenjaminSeenText, HikerBenjaminBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext HikerBenjaminAfterBattleText
-	waitbutton
-	closetext
-	end
-
-Route14Sign1:
-	jumptext Route14Sign1Text
-
-MtMortarSign1:
-	jumptext MtMortarSign1Text
-
-MtMortarSign2:
-	jumptext MtMortarSign2Text
-
-Route14Sign2:
-	jumptext Route14Sign2Text
-
-Route14UltraBall:
-	itemball ULTRA_BALL
-
-Route14SuperPotion:
-	itemball SUPER_POTION
-
-Route14HiddenMaxPotion:
-	hiddenitem MAX_POTION, EVENT_ROUTE_14_HIDDEN_MAX_POTION
-
-Route14SuicuneMovement:
-	set_sliding
-	fast_jump_step UP
-	fast_jump_step UP
-	fast_jump_step UP
-	fast_jump_step RIGHT
-	fast_jump_step RIGHT
-	fast_jump_step RIGHT
-	remove_sliding
-	step_end
+	para "That's the best"
+	line "part of fishing!"
+	done
 
 FisherTullySeenText:
 	text "Let me demonstrate"
 	line "the power of the"
-	cont "#MON I caught!"
+	cont "#mon I caught!"
 	done
 
 FisherTullyBeatenText:
@@ -196,203 +193,96 @@ FisherTullyBeatenText:
 	line "right."
 	done
 
-FisherTullyAfterBattleText:
-	text "I want to become"
-	line "the trainer CHAMP"
+TrainerPokemaniacShane:
+	generictrainer POKEMANIAC, SHANE, EVENT_BEAT_POKEMANIAC_SHANE, .SeenText, .BeatenText
 
-	para "using the #MON"
-	line "I caught."
+.AfterText
+	text "You're working on"
+	line "a #dex?"
 
-	para "That's the best"
-	line "part of fishing!"
+	para "Wow, you must know"
+	line "some pretty rare"
+	cont "#mon!"
+
+	para "May I please see"
+	line "it. Please?"
 	done
 
-HikerBenjaminSeenText:
-	text "Ah, it's good to"
-	line "be outside!"
-	cont "I feel so free!"
-	done
-
-HikerBenjaminBeatenText:
-	text "Gahahah!"
-	done
-
-HikerBenjaminAfterBattleText:
-	text "Losing feels in-"
-	line "significant if you"
-
-	para "look up at the big"
-	line "sky!"
-	done
-
-PokemaniacShaneSeenText:
-	text "HEY!"
+.SeenText
+	text "Hey!"
 
 	para "This is my secret"
 	line "place! Get lost,"
 	cont "you outsider!"
 	done
 
-PokemaniacShaneBeatenText:
+.BeatenText
 	text "I should have used"
-	line "my MOON STONE…"
+	line "my Moon Stone…"
 	done
 
-PokemaniacShaneAfterBattleText:
-	text "You're working on"
-	line "a #DEX?"
+TrainerHikerBenjamin:
+	generictrainer HIKER, BENJAMIN, EVENT_BEAT_HIKER_BENJAMIN, .SeenText, .BeatenText
 
-	para "Wow, you must know"
-	line "some pretty rare"
-	cont "#MON!"
+.AfterText
+	text "Losing feels in-"
+	line "significant if you"
+	cont "look up at the big"
+	cont "sky!"
+	done
 
-	para "May I please see"
-	line "it. Please?"
+.SeenText
+	text "Ah, it's good to"
+	line "be outside!"
+	cont "I feel so free!"
+	done
+
+.BeatenText
+	text "Gahahah!"
 	done
 
 Route14Sign1Text:
-	text "ROUTE 14"
+	text "Route 14"
 
-	para "ECRUTEAK CITY -"
-	line "MAHOGANY TOWN"
+	para "Ecruteak City -"
+	line "Mahogany Town"
 	done
 
 MtMortarSign1Text:
-	text "MT.MORTAR"
+	text "Mt.Mortar"
 
-	para "WATERFALL CAVE"
-	line "INSIDE"
+	para "Waterfall Cave"
+	line "Inside"
 	done
 
 MtMortarSign2Text:
-	text "MT.MORTAR"
+	text "Mt.Mortar"
 
-	para "WATERFALL CAVE"
-	line "INSIDE"
+	para "Waterfall Cave"
+	line "Inside"
 	done
 
 Route14Sign2Text:
-	text "ROUTE 14"
+	text "Route 14"
 
-	para "ECRUTEAK CITY -"
-	line "MAHOGANY TOWN"
+	para "Ecruteak City -"
+	line "Mahogany Town"
 	done
 
+Route14UltraBall:
+	itemball ULTRA_BALL
+Route14SuperPotion:
+	itemball SUPER_POTION
+
 Route14ApricornTree1:
-	opentext
-	getitemname STRING_BUFFER_3, PNK_APRICORN
-	writetext Route14TreeText
-	promptbutton
-	writetext Route14HeyItsBerryApricornText
-	promptbutton
-	giveitem PNK_APRICORN
-	iffalse Route14NoRoomInBag
-	disappear ROUTE14_APRICORN_TREE1
-	writetext Route14FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval PNK_APRICORN
+	setlasttalked ROUTE14_APRICORN_TREE1
+	jumpstd BerryOrFruitScript
 Route14ApricornTree2:
-	opentext
-	getitemname STRING_BUFFER_3, GRN_APRICORN
-	writetext Route14TreeText
-	promptbutton
-	writetext Route14HeyItsBerryApricornText
-	promptbutton
-	giveitem GRN_APRICORN
-	iffalse Route14NoRoomInBag
-	disappear ROUTE14_APRICORN_TREE2
-	writetext Route14FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval GRN_APRICORN
+	setlasttalked ROUTE14_APRICORN_TREE2
+	jumpstd BerryOrFruitScript
 Route14ApricornTree3:
-	opentext
-	getitemname STRING_BUFFER_3, YLW_APRICORN
-	writetext Route14TreeText
-	promptbutton
-	writetext Route14HeyItsBerryApricornText
-	promptbutton
-	giveitem YLW_APRICORN
-	iffalse Route14NoRoomInBag
-	disappear ROUTE14_APRICORN_TREE3
-	writetext Route14FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
-Route14NoBerryOrApricorn:
-	opentext
-	writetext Route14TreeText
-	promptbutton
-	writetext Route14NothingHereText
-	waitbutton
-	closetext
-	end
-
-Route14NoRoomInBag:
-	writetext Route14NoRoomInBagText
-	waitbutton
-	closetext
-	end
-
-Route14TreeText:
-	text_far _FruitBearingTreeText
-	text_end
-
-Route14NothingHereText:
-	text_far _NothingHereText
-	text_end
-
-Route14HeyItsBerryApricornText:
-	text_far _HeyItsFruitText
-	text_end
-
-Route14FoundItemText:
-	text_far _ObtainedFruitText
-	text_end
-
-Route14NoRoomInBagText:
-	text_far _CantCarryItemText
-	text_end
-
-Route14_MapEvents:
-	def_warp_events
-	warp_event  0,  8, ROUTE_14_ECRUTEAK_GATE, 3
-	warp_event  0,  9, ROUTE_14_ECRUTEAK_GATE, 4
-	warp_event 10,  5, MOUNT_MORTAR_1F_OUTSIDE, 1
-	warp_event 28,  9, MOUNT_MORTAR_1F_OUTSIDE, 2
-	warp_event 46,  7, MOUNT_MORTAR_1F_OUTSIDE, 3
-
-	def_coord_events
-	coord_event 24, 14, SCENE_ROUTE14_SUICUNE, Route14SuicuneScript
-
-	def_bg_events
-	bg_event  4, 10, BGEVENT_READ, Route14Sign1
-	bg_event  7,  5, BGEVENT_READ, MtMortarSign1
-	bg_event 45,  9, BGEVENT_READ, MtMortarSign2
-	bg_event 54,  8, BGEVENT_READ, Route14Sign2
-	bg_event 16, 11, BGEVENT_ITEM, Route14HiddenMaxPotion
-	bg_event 27, 16, BGEVENT_READ, Route14NoBerryOrApricorn
-	bg_event 28, 16, BGEVENT_READ, Route14NoBerryOrApricorn
-	bg_event 29, 16, BGEVENT_READ, Route14NoBerryOrApricorn
-
-	def_object_events
-	object_event 40, 10, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerFisherTully, -1
-	object_event 51,  9, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerHikerBenjamin, -1
-	object_event 47,  8, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerPokemaniacShane, -1
-	object_event  6,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route14UltraBall, EVENT_ROUTE_14_ULTRA_BALL
-	object_event 33,  8, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route14SuperPotion, EVENT_ROUTE_14_SUPER_POTION
-	object_event 26, 16, SPRITE_SUICUNE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_SAW_SUICUNE_ON_ROUTE_14
-
-	object_event 27, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, Route14ApricornTree1, EVENT_ROUTE_14_APRICORN_1
-	object_event 28, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route14ApricornTree2, EVENT_ROUTE_14_APRICORN_2
-	object_event 29, 16, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route14ApricornTree3, EVENT_ROUTE_14_APRICORN_3
+	setval YLW_APRICORN
+	setlasttalked ROUTE14_APRICORN_TREE3
+	jumpstd BerryOrFruitScript
