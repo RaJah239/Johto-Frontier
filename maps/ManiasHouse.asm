@@ -1,6 +1,6 @@
 	object_const_def
 	const MANIASHOUSE_ROCKER
-
+; TODOTEXT do this file when I know what it'll be used for
 ManiasHouse_MapScripts:
 	def_scene_scripts
 
