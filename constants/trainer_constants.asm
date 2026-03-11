@@ -105,7 +105,6 @@ DEF KRIS EQU __trainer_class__
 	trainerclass SCIENTIST ; 14
 	const ROSS
 	const MITCH
-	const JED
 	const MARC
 	const RICH
 
@@ -231,12 +230,9 @@ DEF KRIS EQU __trainer_class__
 	const GRUNTM_13
 	const GRUNTM_14
 	const GRUNTM_15
-	const GRUNTM_16
 	const GRUNTM_17
 	const GRUNTM_18
 	const GRUNTM_19
-	const GRUNTM_20
-	const GRUNTM_21
 	const GRUNTM_24
 	const GRUNTM_25
 	const GRUNTM_28
