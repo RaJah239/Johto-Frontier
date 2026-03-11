@@ -230,9 +230,6 @@ DEF KRIS EQU __trainer_class__
 	const GRUNTM_13
 	const GRUNTM_14
 	const GRUNTM_15
-	const GRUNTM_17
-	const GRUNTM_18
-	const GRUNTM_19
 	const GRUNTM_24
 	const GRUNTM_25
 	const GRUNTM_28

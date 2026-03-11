@@ -27,7 +27,7 @@ SpriteMons:
 	db TENTACOOL
 	db MILTANK ; in use
 	db HARIYAMA ; in use
-	db VOLTORB
+	db ELECTRODE
 	db LAPRAS
 	db RHYDON ; in use
 	db MOLTRES ; in use

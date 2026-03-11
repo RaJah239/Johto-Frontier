@@ -53,7 +53,7 @@ DecorationAttributes:
 	decoration DECO_DOLL,    GENGAR,          SET_UP_DOLL,       EVENT_DECO_GENGAR_DOLL,             SPRITE_GENGAR
 	decoration DECO_DOLL,    GENGAR,          SET_UP_DOLL,       EVENT_DECO_SHELLDER_DOLL,           SPRITE_GENGAR
 	decoration DECO_DOLL,    GRIMER,          SET_UP_DOLL,       EVENT_DECO_GRIMER_DOLL,             SPRITE_GRIMER
-	decoration DECO_DOLL,    VOLTORB,         SET_UP_DOLL,       EVENT_DECO_VOLTORB_DOLL,            SPRITE_VOLTORB
+	decoration DECO_DOLL,    ELECTRODE,       SET_UP_DOLL,       EVENT_DECO_ELECTRODE_DOLL,          SPRITE_ELECTRODE
 	decoration DECO_DOLL,    TURTWIG,         SET_UP_DOLL,       EVENT_DECO_WEEDLE_DOLL,             SPRITE_WEEDLE
 	decoration DECO_DOLL,    UNOWN,           SET_UP_DOLL,       EVENT_DECO_UNOWN_DOLL,              SPRITE_UNOWN
 	decoration DECO_DOLL,    TURTWIG,         SET_UP_DOLL,       EVENT_DECO_GEODUDE_DOLL,            SPRITE_GEODUDE
