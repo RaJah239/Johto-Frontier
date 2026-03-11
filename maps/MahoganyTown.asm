@@ -13,12 +13,12 @@ MahoganyTown_MapEvents:
 	bg_event  3,  9, BGEVENT_JUMPTEXT, MahoganyTownSignText
 	bg_event  9,  7, BGEVENT_JUMPTEXT, MahoganyTownRagecandybarSignText
 	bg_event  3, 13, BGEVENT_JUMPTEXT, MahoganyGymSignText
-	bg_event 16, 13, BGEVENT_JUMPTEXT, MahoganyTownPokecenterSign
-	bg_event  1,  5, BGEVENT_JUMPSTD, POKECENTER_SIGN_SCRIPT
+	bg_event 16, 13, BGEVENT_JUMPSTD, POKECENTER_SIGN_SCRIPT
+	bg_event  1,  5, BGEVENT_JUMPTEXT, MahoganyTradeBackKidSignText
 
 	def_object_events
-	object_event  6,  9, SPRITE_GRAMPS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MahoganyTownGrampsScript, -1
-	object_event 12,  8, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MahoganyTownLassScript, -1
+	object_event  6,  9, SPRITE_GRAMPS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, MahoganyTownGrampsText, -1
+	object_event 12,  8, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, MahoganyTownLassText, -1
 
 	object_const_def
 	const MAHOGANYTOWN_GRAMPS
@@ -34,39 +34,10 @@ MahoganyTownFlypointCallback:
 	setflag ENGINE_FLYPOINT_MAHOGANY
 	endcallback
 
-MahoganyTownGrampsScript:
-	faceplayer
-	opentext
-	checkevent EVENT_CLEARED_ROCKET_HIDEOUT
-	iftrue .ClearedRocketHideout
-	writetext MahoganyTownGrampsText
-	waitbutton
-	closetext
-	end
-
-.ClearedRocketHideout:
-	writetext MahoganyTownGrampsText_ClearedRocketHideout
-	waitbutton
-	closetext
-	end
-
-MahoganyTownLassScript:
-	jumptextfaceplayer MahoganyTownLassText
-
 MahoganyTownGrampsText:
 	text "Are you off to see"
-	line "the GYARADOS ram-"
-	cont "page at the LAKE?"
-	done
-
-MahoganyTownGrampsText_ClearedRocketHideout:
-	text "MAGIKARP have"
-	line "returned to LAKE"
-	cont "OF RAGE."
-
-	para "That should be"
-	line "good news for the"
-	cont "anglers there."
+	line "the Gyarados ram-"
+	cont "page at the Lake?"
 	done
 
 MahoganyTownLassText:
@@ -93,7 +64,7 @@ MahoganyTownRagecandybarSignText:
 MahoganyGymSignText:
 	text "Mahogany Town"
 	line "#mon Gym"
-	cont "Leader: PRYCE"
+	cont "Leader: Pryce"
 
 	para "The Teacher of"
 	line "Winter's Harshness"
