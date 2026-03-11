@@ -114,7 +114,7 @@
 DEF NUM_MUSIC_SONGS EQU const_value
 
 ; GetMapMusic picks music for these values (see home/map.asm)
- DEF MUSIC_MAHOGANY_MART EQU $fc
+; DEF MUSIC_MAHOGANY_MART EQU $fc
  DEF MUSIC_RADIO_TOWER   EQU $fd
 
 ; ExitPokegearRadio_HandleMusic uses these values

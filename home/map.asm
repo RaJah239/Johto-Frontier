@@ -2157,8 +2157,8 @@ GetMapMusic::
 	ld de, MAP_MUSIC
 	call GetMapField
 	ld a, c
-	cp MUSIC_MAHOGANY_MART
-	jr z, .mahoganymart
+;	cp MUSIC_MAHOGANY_MART
+;	jr z, .mahoganymart
 	cp MUSIC_RADIO_TOWER
  	jr z, .radiotower
 	farcall Function8b342
@@ -2180,16 +2180,16 @@ GetMapMusic::
 	ld de, MUSIC_GOLDENROD_CITY
 	jr .done
 
-.mahoganymart
-	ld a, [wStatusFlags2]
-	bit STATUSFLAGS2_ROCKETS_IN_MAHOGANY_F, a
-	jr z, .clearedmahogany
-	ld de, MUSIC_ROCKET_HIDEOUT
-	jr .done
-
-.clearedmahogany
-	ld de, MUSIC_CHERRYGROVE_CITY
-	jr .done
+;.mahoganymart
+;	ld a, [wStatusFlags2]
+;	bit STATUSFLAGS2_ROCKETS_IN_MAHOGANY_F, a
+;	jr z, .clearedmahogany
+;	ld de, MUSIC_ROCKET_HIDEOUT
+;	jr .done
+;
+;.clearedmahogany
+;	ld de, MUSIC_CHERRYGROVE_CITY
+;	jr .done
 
 GetMapTimeOfDay::
 	call GetPhoneServiceTimeOfDayByte
