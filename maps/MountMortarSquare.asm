@@ -1,3 +1,20 @@
+MountMortarSquare_MapEvents:
+	def_warp_events
+	warp_event 13,  7, MT_MORTAR_GIFT_SHOP, 1
+	warp_event 20,  5, MOUNT_MORTAR_2F_INSIDE, 3
+
+	def_coord_events
+	coord_event  7, 11, SCENE_MOUNTMORTARSQUARE_CLEFAIRY_DANCE, ClefairyDance
+
+	def_bg_events
+	bg_event  7,  7, BGEVENT_ITEM + MOON_STONE, EVENT_MT_MORTAR_SQUARE_HIDDEN_MOON_STONE
+	bg_event 17,  7, BGEVENT_JUMPTEXT, DontLitterSignText
+
+	def_object_events
+	object_event  6,  6, SPRITE_FAIRY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MT_MOON_SQUARE_CLEFAIRY
+	object_event  7,  6, SPRITE_FAIRY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MT_MOON_SQUARE_CLEFAIRY
+	rocksmash_event  7,  7, EVENT_MT_MOON_SQUARE_ROCK
+
 	object_const_def
 	const MOUNTMORTARSQUARE_FAIRY1
 	const MOUNTMORTARSQUARE_FAIRY2
@@ -68,15 +85,6 @@ ClefairyDance:
 .NoDancing:
 	end
 
-MountMortarSquareHiddenMoonStone:
-	hiddenitem MOON_STONE, EVENT_MT_MORTAR_SQUARE_HIDDEN_MOON_STONE
-
-DontLitterSign:
-	jumptext DontLitterSignText
-
-MtMoonSquareRock:
-	jumpstd SmashRockScript
-
 PlayerWalksUpToDancingClefairies:
 	step UP
 	step_end
@@ -122,23 +130,6 @@ ClefairyFleeMovement:
 	step_end
 
 DontLitterSignText:
-	text "MT.MOON SQUARE"
-	line "DON'T LITTER"
+	text "Mt.Mortar Square"
+	line "Don't Litter"
 	done
-
-MountMortarSquare_MapEvents:
-	def_warp_events
-	warp_event 13,  7, MT_MORTAR_GIFT_SHOP, 1
-	warp_event 20,  5, MOUNT_MORTAR_2F_INSIDE, 3
-
-	def_coord_events
-	coord_event  7, 11, SCENE_MOUNTMORTARSQUARE_CLEFAIRY_DANCE, ClefairyDance
-
-	def_bg_events
-	bg_event  7,  7, BGEVENT_ITEM, MountMortarSquareHiddenMoonStone
-	bg_event 17,  7, BGEVENT_READ, DontLitterSign
-
-	def_object_events
-	object_event  6,  6, SPRITE_FAIRY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MT_MOON_SQUARE_CLEFAIRY
-	object_event  7,  6, SPRITE_FAIRY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MT_MOON_SQUARE_CLEFAIRY
-	object_event  7,  7, SPRITE_ROCK, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MtMoonSquareRock, EVENT_MT_MOON_SQUARE_ROCK
