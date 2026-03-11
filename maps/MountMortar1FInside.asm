@@ -1,127 +1,3 @@
-	object_const_def
-	const MOUNTMORTAR1FINSIDE_BOULDER
-	const MOUNTMORTAR1FINSIDE_POKE_BALL1
-	const MOUNTMORTAR1FINSIDE_POKE_BALL2
-	const MOUNTMORTAR1FINSIDE_POKE_BALL3
-	const MOUNTMORTAR1FINSIDE_POKE_BALL4
-	const MOUNTMORTAR1FINSIDE_POKE_BALL5
-	const MOUNTMORTAR1FINSIDE_SUPER_NERD1
-	const MOUNTMORTAR1FINSIDE_SUPER_NERD2
-	const MOUNTMORTAR1FINSIDE_POKE_BALL6
-	const MOUNTMORTAR1FINSIDE_POKE_BALL7
-	const MOUNTMORTAR1FINSIDE_PORYGON_PC
-	const MOUNTMORTAR1FINSIDE_CHANSEY
-
-MountMortar1FInside_MapScripts:
-	def_scene_scripts
-
-	def_callbacks
-
-TrainerPokemaniacMiller:
-	trainer POKEMANIAC, MILLER, EVENT_BEAT_POKEMANIAC_MILLER, PokemaniacMillerSeenText, PokemaniacMillerBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext PokemaniacMillerAfterBattleText
-	waitbutton
-	closetext
-	end
-
-TrainerSupernerdMarkus:
-	trainer SUPER_NERD, MARKUS, EVENT_BEAT_SUPER_NERD_MARKUS, SupernerdMarkusSeenText, SupernerdMarkusBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext SupernerdMarkusAfterBattleText
-	waitbutton
-	closetext
-	end
-
-MountMortar1FBoulder:
-	jumpstd StrengthBoulderScript
-
-MountMortar1FInsideEscapeRope:
-	itemball ESCAPE_ROPE
-
-MountMortar1FInsideMaxRevive:
-	itemball MAX_REVIVE
-
-MountMortar1FInsideHyperPotion:
-	itemball HYPER_POTION
-
-MountMortar1FInsideMaxPotion:
-	itemball MAX_POTION
-
-MountMortar1FInsideNugget:
-	itemball NUGGET
-
-MountMortar1FInsideIron:
-	itemball IRON
-
-MountMortar1FInsideUltraBall:
-	itemball ULTRA_BALL
-
-MountMortar1FInsideHiddenMaxRepel:
-	hiddenitem MAX_REPEL, EVENT_MOUNT_MORTAR_1F_INSIDE_HIDDEN_MAX_REPEL
-
-PokemaniacMillerSeenText:
-	text "I'm not losing"
-	line "this time!"
-	done
-
-PokemaniacMillerBeatenText:
-	text "I lost to some"
-	line "kid…?"
-	done
-
-PokemaniacMillerAfterBattleText:
-	text "A while back, this"
-	line "karate dude wanted"
-
-	para "to battle. He was"
-	line "ridiculously good."
-
-	para "He just thrashed"
-	line "us silly."
-
-	para "He went in deeper"
-	line "saying it was for"
-
-	para "his training. I"
-	line "wonder how he is?"
-	done
-
-SupernerdMarkusSeenText:
-	text "Hey! HUGH!"
-	done
-
-SupernerdMarkusBeatenText:
-	text "I mistook you for"
-	line "someone else…"
-	done
-
-SupernerdMarkusAfterBattleText:
-	text "I came to explore"
-	line "MT.MORTAR, but I"
-
-	para "got separated from"
-	line "my partner…"
-
-	para "Did you run into a"
-	line "trainer who uses a"
-
-	para "SEADRA that knows"
-	line "WATERFALL?"
-	done
-
-MtMortarPorygonPCScript:
-	jumpstd PorygonPCScript
-
-MountMortar1FInsideChanseyScript:
-	jumpstd ChanseyHealsOWScript
-
 MountMortar1FInside_MapEvents:
 	def_warp_events
 	warp_event 11, 47, MOUNT_MORTAR_1F_OUTSIDE, 5
@@ -134,18 +10,104 @@ MountMortar1FInside_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event 30, 11, BGEVENT_ITEM, MountMortar1FInsideHiddenMaxRepel
+	bg_event 30, 11, BGEVENT_ITEM + MAX_REPEL, EVENT_MOUNT_MORTAR_1F_INSIDE_HIDDEN_MAX_REPEL
 
 	def_object_events
-	object_event 21, 43, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MountMortar1FBoulder, -1
+	chanseyheal_event 13,  2
+	porygonpc_event 15,  2, PAL_NPC_RED
+	strengthboulder_event 21, 43
+	object_event 33, 43, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerPokemaniacMiller, -1
+	object_event 24, 28, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 3, TrainerSupernerdMarkus, -1
 	object_event 35, 38, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, MountMortar1FInsideEscapeRope, EVENT_MOUNT_MORTAR_1F_INSIDE_ESCAPE_ROPE
 	object_event 16, 10, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, MountMortar1FInsideMaxRevive, EVENT_MOUNT_MORTAR_1F_INSIDE_MAX_REVIVE
 	object_event 10, 27, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, MountMortar1FInsideHyperPotion, EVENT_MOUNT_MORTAR_1F_INSIDE_HYPER_POTION
 	object_event 22, 20, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, MountMortar1FInsideMaxPotion, EVENT_MOUNT_MORTAR_1F_INSIDE_MAX_POTION
 	object_event 35, 19, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, MountMortar1FInsideNugget, EVENT_MOUNT_MORTAR_1F_INSIDE_NUGGET
-	object_event 33, 43, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerPokemaniacMiller, -1
-	object_event 24, 28, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerSupernerdMarkus, -1
 	object_event  8, 16, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, MountMortar1FInsideIron, EVENT_MOUNT_MORTAR_1F_INSIDE_IRON
 	object_event 17, 17, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, MountMortar1FInsideUltraBall, EVENT_MOUNT_MORTAR_1F_INSIDE_ULTRA_BALL
-	object_event 15,  2, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MtMortarPorygonPCScript, -1
-	object_event 13,  2, SPRITE_CHANSEY_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MountMortar1FInsideChanseyScript, -1
+
+	object_const_def
+	const MOUNTMORTAR1FINSIDE_PORYGON_PC
+	const MOUNTMORTAR1FINSIDE_CHANSEY
+	const MOUNTMORTAR1FINSIDE_BOULDER
+	const MOUNTMORTAR1FINSIDE_SUPER_NERD1
+	const MOUNTMORTAR1FINSIDE_SUPER_NERD2
+	const MOUNTMORTAR1FINSIDE_POKE_BALL1
+	const MOUNTMORTAR1FINSIDE_POKE_BALL2
+	const MOUNTMORTAR1FINSIDE_POKE_BALL3
+	const MOUNTMORTAR1FINSIDE_POKE_BALL4
+	const MOUNTMORTAR1FINSIDE_POKE_BALL5
+	const MOUNTMORTAR1FINSIDE_POKE_BALL6
+	const MOUNTMORTAR1FINSIDE_POKE_BALL7
+
+MountMortar1FInside_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
+
+TrainerPokemaniacMiller:
+	generictrainer POKEMANIAC, MILLER, EVENT_BEAT_POKEMANIAC_MILLER, .SeenText, .BeatenText
+
+.AfterText
+	text "A while back, this"
+	line "karate dude wanted"
+	cont "to battle. He was"
+	cont "ridiculously good."
+
+	para "He just thrashed"
+	line "us silly."
+
+	para "He went in deeper"
+	line "saying it was for"
+	cont "his training. I"
+	cont "wonder how he is?"
+	done
+
+.SeenText
+	text "I'm not losing"
+	line "this time!"
+	done
+
+.BeatenText
+	text "I lost to some"
+	line "kid…?"
+	done
+
+TrainerSupernerdMarkus:
+	generictrainer SUPER_NERD, MARKUS, EVENT_BEAT_SUPER_NERD_MARKUS, .SeenText, .BeatenText
+
+.AfterText
+	text "I came to explore"
+	line "Mt.Mortar, but I"
+	cont "got separated from"
+	cont "my partner…"
+
+	para "Did you run into a"
+	line "trainer who uses a"
+	cont "Seadra that knows"
+	cont "Waterfall?"
+	done
+
+.SeenText
+	text "Hey! Hugh!"
+	done
+
+.BeatenText
+	text "I mistook you for"
+	line "someone else…"
+	done
+
+MountMortar1FInsideEscapeRope:
+	itemball ESCAPE_ROPE
+MountMortar1FInsideMaxRevive:
+	itemball MAX_REVIVE
+MountMortar1FInsideHyperPotion:
+	itemball HYPER_POTION
+MountMortar1FInsideMaxPotion:
+	itemball MAX_POTION
+MountMortar1FInsideNugget:
+	itemball NUGGET
+MountMortar1FInsideIron:
+	itemball IRON
+MountMortar1FInsideUltraBall:
+	itemball ULTRA_BALL
