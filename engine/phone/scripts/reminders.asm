@@ -14,10 +14,6 @@ ReenaHurryScript:
 	farwritetext ReenaHurryText
 	end
 
-TullyForwardScript:
-	farwritetext TullyForwardText
-	end
-
 BrentReminderScript:
 	farwritetext BrentReminderText
 	end

@@ -20,7 +20,7 @@ Route14_MapEvents:
 	bg_event 29, 16, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
 
 	def_object_events
-	object_event 40, 10, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerFisherTully, -1
+	object_event 40, 10, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 1, TrainerFisherTully, -1
 	object_event 51,  9, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 3, TrainerHikerBenjamin, -1
 	object_event 47,  8, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerPokemaniacShane, -1
 	object_event  6,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route14UltraBall, EVENT_ROUTE_14_ULTRA_BALL
@@ -76,103 +76,9 @@ Route14SuicuneMovement:
 	step_end
 
 TrainerFisherTully:
-	trainer FISHER, TULLY1, EVENT_BEAT_FISHER_TULLY, FisherTullySeenText, FisherTullyBeatenText, 0, .Script
+	generictrainer FISHER, TULLY, EVENT_BEAT_FISHER_TULLY, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_FISHER_TULLY
-	opentext
-	checkflag ENGINE_TULLY_HAS_WATER_STONE
-	iftrue .HasWaterStone
-	checkflag ENGINE_TULLY_READY_FOR_REMATCH
-	iftrue .WantsBattle
-	checkcellnum PHONE_FISHER_TULLY
-	iftrue .NumberAccepted
-	checkevent EVENT_TULLY_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	writetext FisherTullyAfterBattleText
-	promptbutton
-	setevent EVENT_TULLY_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .AskForNumber
-
-.AskedAlready:
-	scall .AskNumber
-.AskForNumber:
-	askforphonenumber PHONE_FISHER_TULLY
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, FISHER, TULLY1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
-
-.WantsBattle:
-	scall .Rematch
-	winlosstext FisherTullyBeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight3
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight2
-	checkevent EVENT_CLEARED_ROCKET_HIDEOUT
-	iftrue .LoadFight1
-	loadtrainer FISHER, TULLY1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_TULLY_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer FISHER, TULLY2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_TULLY_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer FISHER, TULLY3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_TULLY_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer FISHER, TULLY4
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_TULLY_READY_FOR_REMATCH
-	end
-
-.HasWaterStone:
-	scall .Gift
-	verbosegiveitem WATER_STONE
-	iffalse .NoRoom
-	clearflag ENGINE_TULLY_HAS_WATER_STONE
-	closetext
-	end
-
-.NoRoom:
-	sjump .PackFull
-
-.AskNumber:
-	jumpstd AskNumberMScript
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberMScript
-
-.NumberAccepted:
-	jumpstd NumberAcceptedMScript
-
-.NumberDeclined:
-	jumpstd NumberDeclinedMScript
-
-.Rematch:
-	jumpstd RematchMScript
-
-.Gift:
-	jumpstd GiftMScript
-
-.PackFull:
-	jumpstd PackFullMScript
-
-FisherTullyAfterBattleText:
+.AfterText
 	text "I want to become"
 	line "the trainer Champ"
 	cont "using the #mon"
@@ -182,13 +88,13 @@ FisherTullyAfterBattleText:
 	line "part of fishing!"
 	done
 
-FisherTullySeenText:
+.SeenText
 	text "Let me demonstrate"
 	line "the power of the"
 	cont "#mon I caught!"
 	done
 
-FisherTullyBeatenText:
+.BeatenText
 	text "What? That's not"
 	line "right."
 	done

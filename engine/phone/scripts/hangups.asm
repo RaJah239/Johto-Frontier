@@ -18,11 +18,6 @@ ReenaForwardScript:
 	promptbutton
 	sjump PhoneScript_HangUpText_Female
 
-TullyNoItemScript:
-	farwritetext TullyNoItemText
-	promptbutton
-	sjump PhoneScript_HangUpText_Male
-
 BrentHangUpScript:
 	farwritetext BrentSorryImTooBusyText
 	promptbutton

@@ -470,7 +470,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_TULLY_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const EVENT_BRENT_ASKED_FOR_PHONE_NUMBER
 	const_skip
@@ -785,8 +785,8 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_FISHER_TULLY2
-	const EVENT_BEAT_FISHER_TULLY3
+	const_skip
+	const_skip
 	const EVENT_BEAT_FISHER_WILTON2
 	const EVENT_BEAT_FISHER_SCOTT
 	const EVENT_BEAT_FISHER_WILTON3
