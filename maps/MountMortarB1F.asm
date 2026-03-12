@@ -83,7 +83,7 @@ MountMortarB1FKiyoScript:
 		done
 	playsound SFX_CAUGHT_MON
 	waitsfx
-	givepoke RIOLU, 10
+	givepoke RIOLU, 5
 	setevent EVENT_GOT_RIOLU_FROM_KIYO
 	writetext RioluReceivedText
 	waitendtext
