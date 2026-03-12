@@ -13,6 +13,7 @@ LakeOfRageMagikarpHouse_MapEvents:
 	chanseyheal_event  6,  4
 	porygonpc_event 7,  5, PAL_NPC_RED
 	object_event  2,  4, SPRITE_FISHING_GURU, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MagikarpLengthRaterScript, -1
+	object_event  3,  4, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MagikarpRecordScript, -1
 
 	object_const_def
 	const LAKEOFRAGEMAGIKARPHOUSE_CHANSEY
@@ -24,11 +25,11 @@ LakeOfRageMagikarpHouse_MapScripts:
 
 	def_callbacks
 
-ajfalsdftext:
-	text_far _KarpGuruRecordText
-	text_end
+MagikarpRecordScript:
+	opentext
+	special MagikarpHouseSign
+	endtext
 
-; TODOTEXT find a way to determine the present record and display it
 MagikarpLengthRaterScript:
 	faceplayeropentext
 	checkevent EVENT_LAKE_OF_RAGE_MASTER_BALL_ON_STANDBY

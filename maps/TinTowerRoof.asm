@@ -37,12 +37,12 @@ TinTowerHoOhScript:
 	closepokepic
 .skipthis
 	showthistext
-		text "Shaoooh!"
+		text "Ho Oh: Shaoooh!"
 		done
 	loadvar VAR_BATTLETYPE, BATTLETYPE_FORCEITEM
 	loadwildmon HO_OH, 50
 	loadvar VAR_BATTLETYPE, BATTLETYPE_TRAP
 	startbattle
-	disappear TINTOWERROOF_HO_OH
+	disappear LAST_TALKED
 	reloadmapafterbattle
 	end

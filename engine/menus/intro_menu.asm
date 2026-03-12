@@ -253,7 +253,7 @@ InitializeMagikarpHouse:
 	ret
 
 .Ralph:
-	db "RALPH@"
+	db "Ralph@"
 
 InitializeNPCNames:
 	ld hl, .Rival

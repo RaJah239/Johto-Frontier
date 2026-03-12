@@ -40,11 +40,11 @@
 	const EVENT_MET_GOLDENROD_MANSION_OWNER
 	const EVENT_JASMINE_RETURNED_TO_GYM
 	const EVENT_CLEARED_RADIO_TOWER
-	const EVENT_CLEARED_ROCKET_HIDEOUT
+	const_skip
 	const_skip
 	const EVENT_ELMS_TRAVEL_NOTEBOOK
 	const_skip
-	const EVENT_REFUSED_TO_HELP_LANCE_AT_LAKE_OF_RAGE
+	const_skip
 	const EVENT_GOT_BERRY_FROM_ROUTE_2_HOUSE
 	const EVENT_MADE_WHITNEY_CRY
 	const EVENT_HERDED_SCYTHER
@@ -1341,7 +1341,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_LAKE_OF_RAGE_LANCE
+	const_skip
 	const_skip
 	const_skip
 	const_skip

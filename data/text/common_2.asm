@@ -909,7 +909,7 @@ _MagikarpGuruMeasureText::
 	prompt
 
 _KarpGuruRecordText::
-	text "CURRENT RECORD"
+	text "Current Record"
 
 	para "@"
 	text_ram wStringBuffer1

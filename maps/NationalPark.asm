@@ -274,7 +274,7 @@ NationalParkGholdengoScript:
     loadwildmon GHOLDENGO, 5
     loadvar VAR_BATTLETYPE, BATTLETYPE_TRAP
     startbattle
-    disappear NATIONALPARK_GHOLDENGO
+    disappear LAST_TALKED
     reloadmapafterbattle
     end
 
