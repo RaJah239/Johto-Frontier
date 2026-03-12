@@ -331,7 +331,7 @@ DEF KRIS EQU __trainer_class__
 	const LAO
 	const KIYO
 	const LUNG
-	const KENJI3
+	const KENJI
 
 	trainerclass EXECUTIVEM ; 33
 

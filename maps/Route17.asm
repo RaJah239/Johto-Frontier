@@ -11,14 +11,14 @@ Route17_MapEvents:
 	bg_event 14, 82, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
 
 	def_object_events
-	object_event 10, 16, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 1, TrainerHikerErik, -1
-	object_event 15, 65, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 2, TrainerHikerMichael, -1
+	object_event 10, 16, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 1, TrainerHikerErik, -1
+	object_event 15, 65, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 2, TrainerHikerMichael, -1
 	object_event  5, 28, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 2, TrainerHikerParry, -1
-	object_event  9, 65, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 1, TrainerHikerTimothy, -1
-	object_event 11, 50, SPRITE_BLACK_BELT, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 2, TrainerBlackbeltKenji, -1
-	object_event 17, 18, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerCooltrainermRyan, -1
-	object_event  5, 36, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainerfKelly, -1
-	object_event  4, 70, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, TrainerCamperQuentin, -1
+	object_event  9, 65, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 1, TrainerHikerTimothy, -1
+	object_event 11, 50, SPRITE_BLACK_BELT, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 2, TrainerBlackbeltKenji, -1
+	object_event 17, 18, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 1, TrainerCooltrainermRyan, -1
+	object_event  5, 36, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 3, TrainerCooltrainerfKelly, -1
+	object_event  4, 70, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 3, TrainerCamperQuentin, -1
 	object_event 13, 77, SPRITE_RAIKOU_OW, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route17StationaryRaikouScript, EVENT_ROUTE_17_RAIKOU
 	object_event  5, 66, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route17Revive, EVENT_ROUTE_17_REVIVE
 	object_event  6, 20, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route17Elixer, EVENT_ROUTE_17_ELIXER
@@ -88,36 +88,72 @@ Route17_MapScripts:
 	endcallback
 
 TrainerBlackbeltKenji:
-	trainer BLACKBELT_T, KENJI3, EVENT_BEAT_BLACKBELT_KENJI, BlackbeltKenji3SeenText, BlackbeltKenji3BeatenText, 0, .Script
+	generictrainer BLACKBELT_T, KENJI, EVENT_BEAT_BLACKBELT_KENJI, .SeenText, .BeatenText
 
-.Script:
-	opentext
-	writetext BlackbeltKenjiAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "Rest is as impor-"
+	line "tant as training."
+	done
+
+.SeenText
+	text "I was training"
+	line "here alone."
+
+	para "Behold the fruits"
+	line "of my labor!"
+	done
+
+.BeatenText
+	text "Waaaargh!"
+	done
 
 TrainerHikerErik:
-	trainer HIKER, ERIK, EVENT_BEAT_HIKER_ERIK, HikerErikSeenText, HikerErikBeatenText, 0, .Script
+	generictrainer HIKER, ERIK, EVENT_BEAT_HIKER_ERIK, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext HikerErikAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "Learn and grow!"
+	line "That's my motto."
+	done
+
+.SeenText
+	text "Be prepared for"
+	line "anything!"
+
+	para "Let me see if your"
+	line "#mon have been"
+	cont "raised properly!"
+	done
+
+.BeatenText
+	text "Oh, I lost that!"
+	done
 
 TrainerHikerMichael:
-	trainer HIKER, MICHAEL, EVENT_BEAT_HIKER_MICHAEL, HikerMichaelSeenText, HikerMichaelBeatenText, 0, .Script
+	generictrainer HIKER, MICHAEL, EVENT_BEAT_HIKER_MICHAEL, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext HikerMichaelAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "Boy, do I love"
+	line "HP Up! Mmmm, yum!"
+
+	para "I keep drinking my"
+	line "#mon's!"
+
+	para "I can't help it!"
+	done
+
+.SeenText
+	text "Yo! You're spunky!"
+	line "But you know what?"
+
+	para "When it comes to"
+	line "sheer spunkiness,"
+	cont "I'm the man!"
+	done
+
+.BeatenText
+	text "My #mon weren't"
+	line "spunky enough!"
+	done
 
 TrainerHikerParry:
 	trainer HIKER, PARRY3, EVENT_BEAT_HIKER_PARRY, HikerParry3SeenText, HikerParry3BeatenText, 0, .Script
@@ -216,106 +252,103 @@ Route17RematchM:
 	end
 
 TrainerHikerTimothy:
-	trainer HIKER, TIMOTHY, EVENT_BEAT_HIKER_TIMOTHY, HikerTimothySeenText, HikerTimothyBeatenText, 0, .Script
+	generictrainer HIKER, TIMOTHY, EVENT_BEAT_HIKER_TIMOTHY, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext HikerTimothyAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "The best thing to"
+	line "ever happen to me"
+	cont "was discovering"
+	cont "#mon."
+	done
+
+.SeenText
+	text "Why do I climb"
+	line "mountains?"
+
+	para "Because they're"
+	line "there."
+
+	para "Why do I train"
+	line "#mon?"
+
+	para "Because they're"
+	line "there!"
+	done
+
+.BeatenText
+	text "Losses…"
+	line "They're there too!"
+	done
 
 TrainerCooltrainermRyan:
-	trainer COOLTRAINERM, RYAN, EVENT_BEAT_COOLTRAINERM_RYAN, CooltrainermRyanSeenText, CooltrainermRyanBeatenText, 0, .Script
+	generictrainer COOLTRAINERM, RYAN, EVENT_BEAT_COOLTRAINERM_RYAN, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext CooltrainermRyanAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "I see you're rais-"
+	line "ing your #mon"
+	cont "with care."
+
+	para "The bond you build"
+	line "will save you in"
+	cont "tough situations."
+	done
+
+.SeenText
+	text "What are your"
+	line "thoughts on rais-"
+	cont "ing #mon?"
+	done
+
+.BeatenText
+	text "You've won my"
+	line "respect."
+	done
 
 TrainerCooltrainerfKelly:
-	trainer COOLTRAINERF, KELLY, EVENT_BEAT_COOLTRAINERF_KELLY, CooltrainerfKellySeenText, CooltrainerfKellyBeatenText, 0, .Script
+	generictrainer COOLTRAINERF, KELLY, EVENT_BEAT_COOLTRAINERF_KELLY, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext CooltrainerfKellyAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "I'm not in favor"
+	line "of overly power-"
+	cont "ful moves."
+
+	para "I want to win, but"
+	line "I also don't want"
+	cont "to harm #mon."
+	done
+
+.SeenText
+	text "What is your"
+	line "battle strategy?"
+
+	para "It is foolish to"
+	line "use strong moves"
+	cont "indiscriminately."
+	done
+
+.BeatenText
+	text "Fine. I lost."
+	done
 
 TrainerCamperQuentin:
-	faceplayer
-	opentext
-	checkevent EVENT_BEAT_CAMPER_QUENTIN
-	iftrue .Defeated
-	writetext CamperQuentinSeenText
-	waitbutton
-	closetext
-	winlosstext CamperQuentinBeatenText, 0
-	loadtrainer CAMPER, QUENTIN
-	startbattle
-	reloadmapafterbattle
-	setevent EVENT_BEAT_CAMPER_QUENTIN
-	closetext
-	end
+	generictrainer CAMPER, QUENTIN, EVENT_BEAT_CAMPER_QUENTIN, .SeenText, .BeatenText
 
-.Defeated:
-	writetext CamperQuentinAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "Have you been to"
+	line "the Draft Arena?"
 
-
-
-
-HikerErikSeenText:
-	text "Be prepared for"
-	line "anything!"
-
-	para "Let me see if your"
-	line "#MON have been"
-	cont "raised properly!"
+	para "I never, ever lose"
+	line "there, but…"
 	done
 
-HikerErikBeatenText:
-	text "Oh, I lost that!"
+.SeenText
+	text "I'm really, really"
+	line "tough!"
 	done
 
-HikerErikAfterBattleText:
-	text "I'll head back to"
-	line "BLACKTHORN's ICE"
-
-	para "PATH and train"
-	line "some more."
-	done
-
-HikerMichaelSeenText:
-	text "Yo! You're spunky!"
-	line "But you know what?"
-
-	para "When it comes to"
-	line "sheer spunkiness,"
-	cont "I'm the man!"
-	done
-
-HikerMichaelBeatenText:
-	text "My #MON weren't"
-	line "spunky enough!"
-	done
-
-HikerMichaelAfterBattleText:
-	text "Boy, do I love"
-	line "HP UP! Mmmm, yum!"
-
-	para "I keep drinking my"
-	line "#MON's!"
-
-	para "I can't help it!"
+.BeatenText
+	text "I was tough at the"
+	line "Draft Arena…"
 	done
 
 HikerParry3SeenText:
@@ -351,32 +384,7 @@ ParryRematchGiftText:
 	line "So take this, OK?"
 	done
 
-HikerTimothySeenText:
-	text "Why do I climb"
-	line "mountains?"
 
-	para "Because they're"
-	line "there."
-
-	para "Why do I train"
-	line "#MON?"
-
-	para "Because they're"
-	line "there!"
-	done
-
-HikerTimothyBeatenText:
-	text "Losses…"
-	line "They're there too!"
-	done
-
-HikerTimothyAfterBattleText:
-	text "The best thing to"
-	line "ever happen to me"
-
-	para "was discovering"
-	line "#MON."
-	done
 
 HikerParryGivesIronText:
 	text "I just can't find"
@@ -391,87 +399,13 @@ HikerParryGivesIronText:
 	line "when we last met."
 	done
 
-BlackbeltKenji3SeenText:
-	text "I was training"
-	line "here alone."
 
-	para "Behold the fruits"
-	line "of my labor!"
-	done
 
-BlackbeltKenji3BeatenText:
-	text "Waaaargh!"
-	done
 
-BlackbeltKenjiAfterBattleText:
-	text "This calls for"
-	line "extreme measures."
 
-	para "I must train else-"
-	line "where!"
-	done
 
-CooltrainermRyanSeenText:
-	text "What are your"
-	line "thoughts on rais-"
-	cont "ing #MON?"
-	done
 
-CooltrainermRyanBeatenText:
-	text "You've won my"
-	line "respect."
-	done
 
-CooltrainermRyanAfterBattleText:
-	text "I see you're rais-"
-	line "ing your #MON"
-	cont "with care."
-
-	para "The bond you build"
-	line "will save you in"
-	cont "tough situations."
-	done
-
-CooltrainerfKellySeenText:
-	text "What is your"
-	line "battle strategy?"
-
-	para "It is foolish to"
-	line "use strong moves"
-	cont "indiscriminately."
-	done
-
-CooltrainerfKellyBeatenText:
-	text "Fine. I lost."
-	done
-
-CooltrainerfKellyAfterBattleText:
-	text "I'm not in favor"
-	line "of overly power-"
-	cont "ful moves."
-
-	para "I want to win, but"
-	line "I also don't want"
-	cont "to harm #MON."
-	done
-
-CamperQuentinSeenText:
-	text "I'm really, really"
-	line "tough!"
-	done
-
-CamperQuentinBeatenText:
-	text "I was tough at the"
-	line "BATTLE TOWER…"
-	done
-
-CamperQuentinAfterBattleText:
-	text "Have you been to"
-	line "the BATTLE TOWER?"
-
-	para "I never, ever lose"
-	line "there, but…"
-	done
 
 Route17SignText:
 	text "Route 17"
