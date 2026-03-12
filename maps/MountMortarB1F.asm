@@ -88,7 +88,6 @@ MountMortarB1FKiyoScript:
 	writetext RioluReceivedText
 	waitendtext
 
-
 .GotRiolu:
 	writetext RioluReceivedText
 	promptbutton
