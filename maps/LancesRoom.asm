@@ -18,6 +18,7 @@ LancesRoomLockDoorScene:
 LancesRoomNoopScene:
 	end
 
+; TODOTEXT when I know what I want to do here..
 LancesRoomDoorsCallback:
 	checkevent EVENT_LANCES_ROOM_ENTRANCE_CLOSED
 	iffalse .KeepEntranceOpen
