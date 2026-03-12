@@ -440,7 +440,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_REENA_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -611,7 +611,7 @@
 	const EVENT_CONTEST_OFFICER_HAS_BERRY
 	const_skip
 	const_skip
-	const EVENT_REENA_MOON_STONE
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -1076,8 +1076,8 @@
 	const EVENT_BEAT_COOLTRAINERF_CYBIL
 	const EVENT_BEAT_COOLTRAINERF_JENN
 	const EVENT_BEAT_COOLTRAINERF_BETH3
-	const EVENT_BEAT_COOLTRAINERF_REENA2
-	const EVENT_BEAT_COOLTRAINERF_REENA3
+	const_skip
+	const_skip
 ; ExecutiveF
 	const_skip
 	const_skip

@@ -14,7 +14,7 @@ Route19_MapEvents:
 	def_object_events
 	object_event 48,  7, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 3, TrainerCooltrainermBlake, -1
 	object_event 58,  6, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 4, TrainerCooltrainermBrian, -1
-	object_event 72, 10, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerCooltrainerfReena, -1
+	object_event 72, 10, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 4, TrainerCooltrainerfReena, -1
 	object_event 37,  6, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 2, TrainerCooltrainerfMegan, -1
 	object_event 65,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerPsychicGilbert, -1
 	object_event 58, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerBirdKeeperJose, -1
@@ -170,100 +170,26 @@ TrainerCooltrainermBrian:
 	done
 
 TrainerCooltrainerfReena:
-	trainer COOLTRAINERF, REENA1, EVENT_BEAT_COOLTRAINERF_REENA, CooltrainerfReenaSeenText, CooltrainerfReenaBeatenText, 0, .Script
+	generictrainer COOLTRAINERF, REENA, EVENT_BEAT_COOLTRAINERF_REENA, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_COOLTRAINERF_REENA
-	opentext
-	checkevent EVENT_REENA_MOON_STONE
-	iftrue .RematchGift
-	checkflag ENGINE_REENA_READY_FOR_REMATCH
-	iftrue .WantsBattle
-	checkcellnum PHONE_COOLTRAINERF_REENA
-	iftrue .NumberAccepted
-	checkevent EVENT_REENA_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	writetext CooltrainerfReenaAfterBattleText
-	promptbutton
-	setevent EVENT_REENA_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .AskForNumber
+.AfterText
+	text "You're just a kid,"
+	line "but you're not to"
+	cont "be underestimated"
+	cont "either."
+	done
 
-.AskedAlready:
-	scall .AskNumber
-.AskForNumber:
-	askforphonenumber PHONE_COOLTRAINERF_REENA
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, COOLTRAINERF, REENA1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
+.SeenText
+	text "You shouldn't"
+	line "underestimate the"
+	cont "wild #mon in"
+	cont "these parts."
+	done
 
-.WantsBattle:
-	scall .Rematch
-	winlosstext CooltrainerfReenaBeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight2
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight1
-	loadtrainer COOLTRAINERF, REENA1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_REENA_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer COOLTRAINERF, REENA2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_REENA_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer COOLTRAINERF, REENA3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_REENA_READY_FOR_REMATCH
-	opentext
-	writetext CooltrainerfReenaText_GiveMoonStoneAfterBattle
-	waitbutton
-	verbosegiveitem MOON_STONE
-	iffalse .PackFull
-	closetext
-	end
-
-.RematchGift
-	writetext CooltrainerfReenaText_AgainGiveMoonStoneAfterBattle
-	waitbutton
-	verbosegiveitem MOON_STONE
-	iffalse .PackFull
-	clearevent EVENT_REENA_MOON_STONE
-	closetext
-	end
-
-.PackFull:
-	setevent EVENT_REENA_MOON_STONE
-	jumpstd PackFullFScript
-	end
-
-.AskNumber:
-	jumpstd AskNumberFScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberFScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedFScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedFScript
-	end
-
-.Rematch:
-	jumpstd RematchFScript
-	end
+.BeatenText
+	text "Oh! You're much"
+	line "too strong!"
+	done
 
 TrainerCooltrainerfMegan:
 	generictrainer COOLTRAINERF, MEGAN, EVENT_BEAT_COOLTRAINERF_MEGAN, .SeenText, .BeatenText
@@ -285,39 +211,6 @@ TrainerCooltrainerfMegan:
 .BeatenText
 	text "Oh! You're really"
 	line "strong!"
-	done
-
-CooltrainerfReenaSeenText:
-	text "You shouldn't"
-	line "underestimate the"
-
-	para "wild #MON in"
-	line "these parts."
-	done
-
-CooltrainerfReenaBeatenText:
-	text "Oh! You're much"
-	line "too strong!"
-	done
-
-CooltrainerfReenaAfterBattleText:
-	text "You're just a kid,"
-	line "but you're not to"
-
-	para "be underestimated"
-	line "either."
-	done
-
-
-
-CooltrainerfReenaText_GiveMoonStoneAfterBattle:
-	text "I'm in a giving"
-	line "mood. Take this!"
-	done
-
-CooltrainerfReenaText_AgainGiveMoonStoneAfterBattle:
-	text "Oh, back for my"
-	line "gift, are you?"
 	done
 
 Route19FisherText:

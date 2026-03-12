@@ -7,7 +7,6 @@
 	const PHONE_ELM
 	const PHONE_COOLTRAINERM_GAVEN
 	const PHONE_COOLTRAINERF_BETH
-	const PHONE_COOLTRAINERF_REENA
 DEF NUM_PHONE_CONTACTS EQU const_value - 1
 
 ; SpecialPhoneCallList indexes (see data/phone/special_calls.asm)

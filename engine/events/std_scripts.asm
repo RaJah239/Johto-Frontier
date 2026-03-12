@@ -704,13 +704,9 @@ PackFullMScript:
 AskNumberFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
-	ifequal PHONE_COOLTRAINERF_REENA, .Reena
 
 .Beth:
 	farwritetext BethAskNumberText
-	end
-.Reena:
-	farwritetext ReenaAskNumberText
 	end
 
 RegisteredNumberFScript:
@@ -723,15 +719,9 @@ RegisteredNumberFScript:
 NumberAcceptedFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
-	ifequal PHONE_COOLTRAINERF_REENA, .Reena
 
 .Beth:
 	farwritetext BethNumberAcceptedText
-	waitbutton
-	closetext
-	end
-.Reena:
-	farwritetext ReenaNumberAcceptedText
 	waitbutton
 	closetext
 	end
@@ -739,15 +729,9 @@ NumberAcceptedFScript:
 NumberDeclinedFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
-	ifequal PHONE_COOLTRAINERF_REENA, .Reena
 
 .Beth:
 	farwritetext BethNumberDeclinedText
-	waitbutton
-	closetext
-	end
-.Reena:
-	farwritetext ReenaNumberDeclinedText
 	waitbutton
 	closetext
 	end
@@ -755,15 +739,9 @@ NumberDeclinedFScript:
 RematchFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
-	ifequal PHONE_COOLTRAINERF_REENA, .Reena
 
 .Beth:
 	farwritetext BethRematchText
-	waitbutton
-	closetext
-	end
-.Reena:
-	farwritetext ReenaRematchText
 	waitbutton
 	closetext
 	end
@@ -775,16 +753,9 @@ GiftFScript:
 PackFullFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
-	ifequal PHONE_COOLTRAINERF_REENA, .Reena
 
 .Beth
 	farwritetext BethPackFullText
-	waitbutton
-	closetext
-	end
-
-.Reena
-	farwritetext ReenaPackFullText
 	waitbutton
 	closetext
 	end

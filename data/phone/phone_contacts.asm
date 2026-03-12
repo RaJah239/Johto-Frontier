@@ -18,5 +18,4 @@ PhoneContacts:
 	phone TRAINER_NONE, PHONECONTACT_ELM,      ELMS_LAB,                  ANYTIME, ElmPhoneCalleeScript,     0,       ElmPhoneCallerScript
 	phone COOLTRAINERM, GAVEN3,                ROUTE_20,                  ANYTIME, GavenPhoneCalleeScript,   ANYTIME, GavenPhoneCallerScript
 	phone COOLTRAINERF, BETH1,                 ROUTE_20,                  ANYTIME, BethPhoneCalleeScript,    ANYTIME, BethPhoneCallerScript
-	phone COOLTRAINERF, REENA1,                ROUTE_19,                  ANYTIME, ReenaPhoneCalleeScript,   ANYTIME, ReenaPhoneCallerScript
 	assert_table_length NUM_PHONE_CONTACTS + 1
