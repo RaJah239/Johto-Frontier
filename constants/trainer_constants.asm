@@ -391,6 +391,7 @@ DEF KRIS EQU __trainer_class__
 	const AMYANDMAY1
 	const AMYANDMAY2
 	const LEAANDPIA1
+	const LEAANDPIA2
 
 	trainerclass POKEFANF ; 3e
 	const BEVERLY
