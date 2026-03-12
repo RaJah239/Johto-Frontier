@@ -1,3 +1,17 @@
+Route19SandstormHouse_MapEvents:
+	def_warp_events
+	warp_event  2,  7, ROUTE_19, 1
+	warp_event  3,  7, ROUTE_19, 1
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  0,  1, BGEVENT_JUMPSTD, MAGAZINE_BOOKSHELF_SCRIPT
+	bg_event  1,  1, BGEVENT_JUMPSTD, MAGAZINE_BOOKSHELF_SCRIPT
+
+	def_object_events
+	object_event  2,  4, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SandstormHouseWoman, -1
+
 	object_const_def
 	const ROUTE19SANDSTORMHOUSE_GRANNY
 
@@ -6,9 +20,9 @@ Route19SandstormHouse_MapScripts:
 
 	def_callbacks
 
+; TODOTEXT turn this into a weather tutor
 SandstormHouseWoman:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkevent EVENT_GOT_TM37_SANDSTORM
 	iftrue .AlreadyGotItem
 	special GetFirstPokemonHappiness
@@ -35,9 +49,6 @@ SandstormHouseWoman:
 	waitbutton
 	closetext
 	end
-
-SandstormHouseBookshelf:
-	jumpstd MagazineBookshelfScript
 
 SandstormHouseWomanText1:
 	text "Where are you off"
@@ -90,17 +101,3 @@ SandstormHouseWomanDisloyalText:
 	line "that binds #MON"
 	cont "and trainers."
 	done
-
-Route19SandstormHouse_MapEvents:
-	def_warp_events
-	warp_event  2,  7, ROUTE_19, 1
-	warp_event  3,  7, ROUTE_19, 1
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  0,  1, BGEVENT_READ, SandstormHouseBookshelf
-	bg_event  1,  1, BGEVENT_READ, SandstormHouseBookshelf
-
-	def_object_events
-	object_event  2,  4, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SandstormHouseWoman, -1
