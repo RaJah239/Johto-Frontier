@@ -5,12 +5,12 @@ Route16_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event 53,  7, BGEVENT_READ, Route16Sign1
-	bg_event  6, 10, BGEVENT_READ, Route16Sign2
-	bg_event 32,  9, BGEVENT_ITEM, Route16HiddenElixer
-	bg_event  9,  5, BGEVENT_READ, Route16NoBerryOrApricorn
-	bg_event 53,  4, BGEVENT_READ, Route16NoBerryOrApricorn
-	bg_event  8,  4, BGEVENT_READ, Route16NoBerryOrApricorn
+	bg_event 53,  7, BGEVENT_READ, Route16Sign1Text
+	bg_event  6, 10, BGEVENT_READ, Route16Sign2Text
+	bg_event 32,  9, BGEVENT_ITEM + ELIXER, EVENT_ROUTE_16_HIDDEN_ELIXER
+	bg_event  9,  5, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event 53,  4, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event  8,  4, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
 
 	def_object_events
 	object_event 35,  3, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerFisherWilton1, -1
@@ -308,24 +308,6 @@ TrainerCooltrainermAllen:
 	closetext
 	end
 
-Route16Sign1:
-	jumptext Route16Sign1Text
-
-Route16Sign2:
-	jumptext Route16Sign2Text
-
-Route16MaxRevive:
-	itemball MAX_REVIVE
-
-Route16UltraBall:
-	itemball ULTRA_BALL
-
-Route16MaxRepel:
-	itemball MAX_REPEL
-
-Route16HiddenElixer:
-	hiddenitem ELIXER, EVENT_ROUTE_16_HIDDEN_ELIXER
-
 FisherWilton1SeenText:
 	text "Aack! You made me"
 	line "lose a #MON!"
@@ -503,99 +485,30 @@ CooltrainerfCybilAfterBattleText:
 	done
 
 Route16Sign1Text:
-	text "ROUTE 16"
-	line "ICE PATH AHEAD"
+	text "Route 16"
+	line "Ice Path Ahead"
 	done
 
 Route16Sign2Text:
-	text "ROUTE 16"
+	text "Route 16"
 
-	para "MAHOGANY TOWN -"
-	line "BLACKTHORN CITY"
+	para "Mahogany Town -"
+	line "Blackthorn City"
 	done
 
+Route16MaxRevive:
+	itemball MAX_REVIVE
+Route16UltraBall:
+	itemball ULTRA_BALL
+Route16MaxRepel:
+	itemball MAX_REPEL
+
 Route16BerryTree1:
-	opentext
-	getitemname STRING_BUFFER_3, BURNT_BERRY
-	writetext Route16TreeText
-	promptbutton
-	writetext Route16HeyItsBerryApricornText
-	promptbutton
-	giveitem BURNT_BERRY
-	iffalse Route16NoRoomInBag
-	disappear ROUTE16_BERRY_TREE1
-	writetext Route16FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval BURNT_BERRY
+	jumpstd BerryOrFruitScript
 Route16BerryTree2:
-	opentext
-	getitemname STRING_BUFFER_3, MIRACLEBERRY
-	writetext Route16TreeText
-	promptbutton
-	writetext Route16HeyItsBerryApricornText
-	promptbutton
-	giveitem MIRACLEBERRY
-	iffalse Route16NoRoomInBag
-	disappear ROUTE16_BERRY_TREE2
-	writetext Route16FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval MIRACLEBERRY
+	jumpstd BerryOrFruitScript
 Route16ApricornTree1:
-	opentext
-	getitemname STRING_BUFFER_3, WHT_APRICORN
-	writetext Route16TreeText
-	promptbutton
-	writetext Route16HeyItsBerryApricornText
-	promptbutton
-	giveitem WHT_APRICORN
-	iffalse Route16NoRoomInBag
-	disappear ROUTE16_APRICORN_TREE1
-	writetext Route16FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
-Route16NoBerryOrApricorn:
-	opentext
-	writetext Route16TreeText
-	promptbutton
-	writetext Route16NothingHereText
-	waitbutton
-	closetext
-	end
-
-Route16NoRoomInBag:
-	writetext Route16NoRoomInBagText
-	waitbutton
-	closetext
-	end
-
-Route16TreeText:
-	text_far _FruitBearingTreeText
-	text_end
-
-Route16NothingHereText:
-	text_far _NothingHereText
-	text_end
-
-Route16HeyItsBerryApricornText:
-	text_far _HeyItsFruitText
-	text_end
-
-Route16FoundItemText:
-	text_far _ObtainedFruitText
-	text_end
-
-Route16NoRoomInBagText:
-	text_far _CantCarryItemText
-	text_end
+	setval WHT_APRICORN
+	jumpstd BerryOrFruitScript
