@@ -1,4 +1,0 @@
-WiltonWantThisScript:
-	farwritetext WiltonWantThisText
-	promptbutton
-	sjump PhoneScript_HangUpText_Male

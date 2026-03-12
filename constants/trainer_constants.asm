@@ -132,13 +132,11 @@ DEF KRIS EQU __trainer_class__
 	const THEO
 	const TOBY
 	const DENIS
-	const VANCE1
+	const VANCE
 	const JOSE1
 	const PETER
 	const JOSE2
 	const JOSE3
-	const VANCE2
-	const VANCE3
 
 	trainerclass LASS ; 19
 	const CARRIE
@@ -244,11 +242,9 @@ DEF KRIS EQU __trainer_class__
 	const TULLY
 	const ANDRE
 	const RAYMOND
-	const WILTON1
+	const WILTON
 	const EDGAR
-	const WILTON2
 	const SCOTT
-	const WILTON3
 	const RALPH5
 
 	trainerclass SWIMMERM ; 26

@@ -430,7 +430,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_GOT_CARBOS_FROM_VANCE
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -476,9 +476,9 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_VANCE_ASKED_FOR_PHONE_NUMBER
 	const_skip
-	const EVENT_WILTON_ASKED_FOR_PHONE_NUMBER
+	const_skip
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -644,7 +644,7 @@
 	const EVENT_GOT_RAINBOW_WING
 	const_skip
 	const_skip
-	const EVENT_VANCE_CARBOS
+	const_skip
 	const EVENT_PARRY_IRON
 	const EVENT_ERIN_CALCIUM
 	const_skip
@@ -694,8 +694,8 @@
 	const_skip
 	const_skip
 	const EVENT_BEAT_BIRD_KEEPER_JOSE3
-	const EVENT_BEAT_BIRD_KEEPER_VANCE2
-	const EVENT_BEAT_BIRD_KEEPER_VANCE3
+	const_skip
+	const_skip
 ; Boarder
 	const EVENT_BEAT_BOARDER_RONALD
 	const EVENT_BEAT_BOARDER_BRAD
@@ -787,9 +787,9 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_FISHER_WILTON2
+	const_skip
 	const EVENT_BEAT_FISHER_SCOTT
-	const EVENT_BEAT_FISHER_WILTON3
+	const_skip
 ; Twins
 	const EVENT_BEAT_TWINS_AMY_AND_MAY
 	const EVENT_BEAT_TWINS_ANN_AND_ANNE

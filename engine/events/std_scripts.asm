@@ -646,8 +646,6 @@ AskNumberMScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
-	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
 .Gaven:
@@ -656,13 +654,6 @@ AskNumberMScript:
 .Jose:
 	farwritetext JoseAskNumberText
 	end
-.Vance:
-	farwritetext VanceAskNumberText
-	end
-.Wilton:
-	farwritetext WiltonAskNumber1Text
-	end
-
 .Parry:
 	farwritetext ParryAskNumberText
 	end
@@ -678,8 +669,6 @@ NumberAcceptedMScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
-	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
 .Gaven:
@@ -689,16 +678,6 @@ NumberAcceptedMScript:
 	end
 .Jose:
 	farwritetext JoseNumberAcceptedText
-	waitbutton
-	closetext
-	end
-.Vance:
-	farwritetext VanceNumberAcceptedText
-	waitbutton
-	closetext
-	end
-.Wilton:
-	farwritetext WiltonNumberAcceptedText
 	waitbutton
 	closetext
 	end
@@ -712,8 +691,6 @@ NumberDeclinedMScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
-	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
 .Gaven:
@@ -723,16 +700,6 @@ NumberDeclinedMScript:
 	end
 .Jose:
 	farwritetext JoseNumberDeclinedText
-	waitbutton
-	closetext
-	end
-.Vance:
-	farwritetext VanceNumberDeclinedText
-	waitbutton
-	closetext
-	end
-.Wilton:
-	farwritetext WiltonNumberDeclinedText
 	waitbutton
 	closetext
 	end
@@ -746,8 +713,6 @@ RematchMScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
-	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
 .Gaven:
@@ -760,16 +725,6 @@ RematchMScript:
 	waitbutton
 	closetext
 	end
-.Vance:
-	farwritetext VanceRematchText
-	waitbutton
-	closetext
-	end
-.Wilton:
-	farwritetext WiltonRematchText
-	waitbutton
-	closetext
-	end
 .Parry:
 	farwritetext ParryRematchText
 	waitbutton
@@ -779,23 +734,17 @@ RematchMScript:
 GiftMScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_FISHER_WILTON, .Wilton
 
 .Jose:
 	farwritetext JoseGiftText
 	promptbutton
 	end
-.Wilton:
-	farwritetext WiltonGiftText
-	promptbutton
-	end
+
 
 PackFullMScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
-	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
 .Gaven
@@ -806,17 +755,6 @@ PackFullMScript:
 
 .Jose:
 	farwritetext JosePackFullText
-	waitbutton
-	closetext
-	end
-
-.Vance:
-	farwritetext VancePackFullText
-	waitbutton
-	closetext
-	end
-.Wilton:
-	farwritetext WiltonPackFullText
 	waitbutton
 	closetext
 	end

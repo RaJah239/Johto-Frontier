@@ -10,30 +10,16 @@ PhoneScript_RematchText_Male:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
-	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
 .Gaven:
 	farwritetext GavenBattleRematchText
 	promptbutton
 	end
-
 .Jose:
 	farwritetext JoseBattleRematchText
 	promptbutton
 	end
-
-.Vance:
-	farwritetext VanceBattleRematchText
-	promptbutton
-	end
-
-.Wilton:
-	farwritetext WiltonBattleRematchText
-	promptbutton
-	end
-
 .Parry:
 	farwritetext ParryBattleRematchText
 	promptbutton
@@ -64,26 +50,14 @@ PhoneScript_HangUpText_Male:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
-	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
 .Gaven:
 	farwritetext GavenHangUpText
 	end
-
 .Jose:
 	farwritetext JoseHangUpText
 	end
-
-.Vance:
-	farwritetext VanceHangUpText
-	end
-
-.Wilton:
-	farwritetext WiltonHangUpText
-	end
-
 .Parry:
 	farwritetext ParryHangUpText
 	end
@@ -109,13 +83,9 @@ PhoneScript_HangUpText_Female:
 PhoneScript_FoundItem_Male:
 	readvar VAR_CALLERID
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_FISHER_WILTON, .Wilton
 
 .Jose:
 	farwritetext JoseFoundItemText
-	end
-.Wilton:
-	farwritetext WiltonFoundItemText
 	end
 
 PhoneScript_FoundItem_Female:

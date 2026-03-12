@@ -18,16 +18,6 @@ ReenaForwardScript:
 	promptbutton
 	sjump PhoneScript_HangUpText_Female
 
-VanceLookingForwardScript:
-	farwritetext VanceLookingForwardText
-	promptbutton
-	sjump PhoneScript_HangUpText_Male
-
-WiltonHaventFoundAnythingScript:
-	farwritetext WiltonHaventFoundAnythingText
-	promptbutton
-	sjump PhoneScript_HangUpText_Male
-
 ParryBattleWithMeScript:
 	farwritetext ParryBattleWithMeText
 	promptbutton

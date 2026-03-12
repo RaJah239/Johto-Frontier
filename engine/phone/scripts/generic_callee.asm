@@ -6,30 +6,16 @@ PhoneScript_AnswerPhone_Male:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
-	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
 .Gaven:
 	farwritetext GavenAnswerPhoneText
 	promptbutton
 	end
-
 .Jose:
 	farwritetext JoseAnswerPhoneText
 	promptbutton
 	end
-
-.Vance:
-	farwritetext VanceAnswerPhoneText
-	promptbutton
-	end
-
-.Wilton:
-	farwritetext WiltonAnswerPhoneText
-	promptbutton
-	end
-
 .Parry:
 	farwritetext ParryAnswerPhoneText
 	promptbutton
@@ -60,30 +46,16 @@ PhoneScript_GreetPhone_Male:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_BIRDKEEPER_VANCE, .Vance
-	ifequal PHONE_FISHER_WILTON, .Wilton
 	ifequal PHONE_HIKER_PARRY, .Parry
 
 .Gaven:
 	farwritetext GavenGreetText
 	promptbutton
 	end
-
 .Jose:
 	farwritetext JoseGreetText
 	promptbutton
 	end
-
-.Vance:
-	farwritetext VanceGreetText
-	promptbutton
-	end
-
-.Wilton:
-	farwritetext WiltonGreetText
-	promptbutton
-	end
-
 .Parry:
 	farwritetext ParryGreetText
 	promptbutton
