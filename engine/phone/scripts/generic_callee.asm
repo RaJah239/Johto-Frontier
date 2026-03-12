@@ -4,11 +4,6 @@ PhoneScript_Random2:
 
 PhoneScript_AnswerPhone_Male:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
-
-.Gaven:
-	farwritetext GavenAnswerPhoneText
-	promptbutton
 	end
 
 PhoneScript_AnswerPhone_Female:
@@ -22,11 +17,6 @@ PhoneScript_AnswerPhone_Female:
 
 PhoneScript_GreetPhone_Male:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
-
-.Gaven:
-	farwritetext GavenGreetText
-	promptbutton
 	end
 
 PhoneScript_GreetPhone_Female:

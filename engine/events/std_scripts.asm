@@ -644,10 +644,6 @@ BugContestResults_CopyContestantsToResults:
 
 AskNumberMScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
-
-.Gaven:
-	farwritetext GavenAskNumberText
 	end
 
 RegisteredNumberMScript:
@@ -659,32 +655,14 @@ RegisteredNumberMScript:
 
 NumberAcceptedMScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
-
-.Gaven:
-	farwritetext GavenNumberAcceptedText
-	waitbutton
-	closetext
 	end
 
 NumberDeclinedMScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
-
-.Gaven:
-	farwritetext GavenNumberDeclinedText
-	waitbutton
-	closetext
 	end
 
 RematchMScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
-
-.Gaven:
-	farwritetext GavenRematchText
-	waitbutton
-	closetext
 	end
 
 GiftMScript:
@@ -693,12 +671,6 @@ GiftMScript:
 
 PackFullMScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
-
-.Gaven
-	farwritetext GavenPackFullText
-	waitbutton
-	closetext
 	end
 
 AskNumberFScript:

@@ -149,11 +149,9 @@ DEF KRIS EQU __trainer_class__
 	const PAUL
 	const CODY
 	const MIKE
-	const GAVEN1
-	const GAVEN2
+	const GAVEN
 	const RYAN
 	const JAKE
-	const GAVEN3
 	const BLAKE
 	const BRIAN
 	const KEVIN

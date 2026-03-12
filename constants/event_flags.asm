@@ -434,7 +434,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_GAVEN_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const EVENT_BETH_ASKED_FOR_PHONE_NUMBER
 	const_skip
@@ -650,7 +650,7 @@
 	const_skip
 	const EVENT_MET_BUENA
 	const EVENT_GOT_ODD_EGG
-	const EVENT_GAVEN_CRYSTAL
+	const_skip
 	const EVENT_BETH_RARE_CANDY
 ; Unused: next 167 events
 
@@ -1043,8 +1043,8 @@
 	const EVENT_BEAT_COOLTRAINERM_PAUL
 	const EVENT_BEAT_COOLTRAINERM_CODY
 	const EVENT_BEAT_COOLTRAINERM_MIKE
-	const EVENT_BEAT_COOLTRAINERM_GAVEN2
-	const EVENT_BEAT_COOLTRAINERM_GAVEN3
+	const_skip
+	const_skip
 	const EVENT_BEAT_COOLTRAINERM_RYAN
 	const EVENT_BEAT_COOLTRAINERM_JAKE
 	const EVENT_BEAT_COOLTRAINERM_GAVEN

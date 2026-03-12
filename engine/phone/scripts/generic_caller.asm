@@ -8,11 +8,6 @@ PhoneScript_WantsToBattle_Female:
 
 PhoneScript_RematchText_Male:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
-
-.Gaven:
-	farwritetext GavenBattleRematchText
-	promptbutton
 	end
 
 PhoneScript_RematchText_Female:
@@ -26,10 +21,6 @@ PhoneScript_RematchText_Female:
 
 PhoneScript_HangUpText_Male:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
-
-.Gaven:
-	farwritetext GavenHangUpText
 	end
 
 PhoneScript_HangUpText_Female:

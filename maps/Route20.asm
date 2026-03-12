@@ -18,7 +18,7 @@ Route20_MapEvents:
 
 	def_object_events
 	object_event 14, 24, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 2, TrainerCooltrainermJake, -1
-	object_event  9, 38, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainermGaven3, -1
+	object_event  9, 38, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 3, TrainerCooltrainermGaven, -1
 	object_event 10, 56, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 3, TrainerCooltrainerfJoyce, -1
 	object_event  5,  8, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerCooltrainerfBeth1, -1
 	object_event 13, 79, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 2, TrainerPsychicRichard, -1
@@ -86,101 +86,32 @@ TrainerCooltrainermJake:
 	text "I blew it!"
 	done
 
-TrainerCooltrainermGaven3:
-	trainer COOLTRAINERM, GAVEN3, EVENT_BEAT_COOLTRAINERM_GAVEN, CooltrainermGaven3SeenText, CooltrainermGaven3BeatenText, 0, .Script
+TrainerCooltrainermGaven:
+	generictrainer COOLTRAINERM, GAVEN, EVENT_BEAT_COOLTRAINERM_GAVEN, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_COOLTRAINERM_GAVEN
-	opentext
-	checkevent EVENT_GAVEN_CRYSTAL
-	iftrue .RematchGift
-	checkflag ENGINE_GAVEN_READY_FOR_REMATCH
-	iftrue .WantsBattle
-	checkcellnum PHONE_COOLTRAINERM_GAVEN
-	iftrue .NumberAccepted
-	checkevent EVENT_GAVEN_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	writetext CooltrainermGavenAfterText
-	promptbutton
-	setevent EVENT_GAVEN_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .AskForNumber
+.AfterText
+	text "To get to #mon"
+	line "League, you have"
+	cont "to get through"
+	cont "Victory Road."
 
-.AskedAlready:
-	scall .AskNumber
-.AskForNumber:
-	askforphonenumber PHONE_COOLTRAINERM_GAVEN
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, COOLTRAINERM, GAVEN3
-	scall .RegisteredNumber
-	sjump .NumberAccepted
+	para "But Victory Road"
+	line "is tough."
 
-.WantsBattle:
-	scall .Rematch
-	winlosstext CooltrainermGaven3BeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight2
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight1
-	loadtrainer COOLTRAINERM, GAVEN3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_GAVEN_READY_FOR_REMATCH
-	end
+	para "Practically nobody"
+	line "goes there!"
+	done
 
-.LoadFight1:
-	loadtrainer COOLTRAINERM, GAVEN1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_GAVEN_READY_FOR_REMATCH
-	end
+.SeenText
+	text "By experiencing"
+	line "tough battles, you"
+	cont "gain power."
+	done
 
-.LoadFight2:
-	loadtrainer COOLTRAINERM, GAVEN2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_GAVEN_READY_FOR_REMATCH
-	opentext
-	writetext CooltrainermGavenText_GiveCrytalAfterBattle
-	waitbutton
-	verbosegiveitem CRYSTAL
-	iffalse .PackFull
-	closetext
-	end
-
-.RematchGift
-	writetext CooltrainermGavenAgainText_GiveCrytalAfterBattle
-	waitbutton
-	verbosegiveitem CRYSTAL
-	iffalse .PackFull
-	clearevent EVENT_GAVEN_CRYSTAL
-	closetext
-	end
-
-.PackFull:
-	setevent EVENT_GAVEN_CRYSTAL
-	jumpstd PackFullMScript
-	end
-
-.AskNumber:
-	jumpstd AskNumberMScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberMScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedMScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedMScript
-	end
-
-.Rematch:
-	jumpstd RematchMScript
-	end
+.BeatenText
+	text "Gaah! Life is even"
+	line "tougher!"
+	done
 
 TrainerCooltrainerfJoyce:
 	generictrainer COOLTRAINERF, JOYCE, EVENT_BEAT_COOLTRAINERF_JOYCE, .SeenText, .BeatenText
@@ -352,30 +283,7 @@ TrainerFisherScott:
 	line "battle!"
 	done
 
-CooltrainermGaven3SeenText:
-	text "By experiencing"
-	line "tough battles, you"
-	cont "gain power."
-	done
 
-CooltrainermGaven3BeatenText:
-	text "Gaah! Life is even"
-	line "tougher!"
-	done
-
-CooltrainermGavenAfterText:
-	text "To get to #MON"
-	line "LEAGUE, you have"
-
-	para "to get through"
-	line "VICTORY ROAD."
-
-	para "But VICTORY ROAD"
-	line "is tough."
-
-	para "Practically nobody"
-	line "goes there!"
-	done
 
 CooltrainerfBeth1SeenText:
 	text "I lost to a train-"
@@ -401,18 +309,6 @@ CooltrainerfBethAfterText:
 	text "#MON are in-"
 	line "valuable, lifelong"
 	cont "partners."
-	done
-
-CooltrainermGavenText_GiveCrytalAfterBattle:
-	text "You beat me again!"
-	line "Here's a something"
-	cont "for your effort!"
-	done
-
-
-CooltrainermGavenAgainText_GiveCrytalAfterBattle:
-	text "Ready to receive"
-	line "my gift?"
 	done
 
 CooltrainermBethText_GiveRareCandyAfterBattle:

@@ -1,8 +1,3 @@
-GavenHangUpNotThursdayScript:
-	farwritetext GavenHangUpNotThursdayText
-	promptbutton
-	sjump PhoneScript_HangUpText_Male
-
 BethHangUpScript:
 	farwritetext BethLetsBattleAgainSometimeText
 	promptbutton
