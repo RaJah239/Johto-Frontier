@@ -1314,7 +1314,7 @@
 	const EVENT_ROUTE_17_REVIVE
 	const EVENT_ROUTE_17_ELIXER
 	const EVENT_ROUTE_17_MAX_POTION
-	const EVENT_ROUTE_18_X_SPEED
+	const EVENT_ROUTE_18_HASTE_HERB
 ; Johto people
 	const_skip
 	const_skip
