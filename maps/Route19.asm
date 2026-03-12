@@ -1,3 +1,27 @@
+Route19_MapEvents:
+	def_warp_events
+	warp_event 33,  7, ROUTE_19_SANDSTORM_HOUSE, 1
+	warp_event 26,  5, TOHJO_FALLS, 1
+	warp_event 36,  5, TOHJO_FALLS, 2
+
+	def_coord_events
+	coord_event 18, 10, SCENE_ROUTE19_FIRST_STEP_INTO_KANTO, LeftScene
+	coord_event 19, 10, SCENE_ROUTE19_FIRST_STEP_INTO_KANTO, RightScene
+
+	def_bg_events
+	bg_event 25,  7, BGEVENT_JUMPTEXT, TohjoFallsSignText
+
+	def_object_events
+	object_event 48,  7, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 3, TrainerCooltrainermBlake, -1
+	object_event 58,  6, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 4, TrainerCooltrainermBrian, -1
+	object_event 72, 10, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerCooltrainerfReena, -1
+	object_event 37,  6, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 2, TrainerCooltrainerfMegan, -1
+	object_event 65,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerPsychicGilbert, -1
+	object_event 58, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerBirdKeeperJose2, -1
+	object_event 60, 12, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route19TMSolarbeam, EVENT_ROUTE_19_TM_SOLARBEAM
+	object_event 53, 12, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route19RareCandy, EVENT_ROUTE_19_RARE_CANDY
+	object_event 21, 10, SPRITE_FISHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route19FisherText, -1
+
 	object_const_def
 	const ROUTE19_COOLTRAINER_M1
 	const ROUTE19_COOLTRAINER_M2
@@ -17,45 +41,68 @@ Route19_MapScripts:
 	def_callbacks
 
 Route19Noop1Scene:
-	end
-
 Route19Noop2Scene:
 	end
 
-FirstStepIntoKantoLeftScene:
+LeftScene:
 	turnobject ROUTE19_FISHER, LEFT
 	showemote EMOTE_SHOCK, ROUTE19_FISHER, 15
 	applymovement ROUTE19_FISHER, Route19FisherStepLeftTwiceMovement
 	sjump FirstStepIntoKantoScene_Continue
 
-FirstStepIntoKantoRightScene:
+Route19FisherStepLeftTwiceMovement:
+	step LEFT
+	step LEFT
+	step_end
+
+RightScene:
 	turnobject ROUTE19_FISHER, LEFT
 	showemote EMOTE_SHOCK, ROUTE19_FISHER, 15
 	applymovement ROUTE19_FISHER, Route19FisherStepLeftOnceMovement
 FirstStepIntoKantoScene_Continue:
 	turnobject PLAYER, RIGHT
 	opentext
-	writetext Route19FisherHeyText
+	writethistext
+		text "Hello there."
+		done
 	promptbutton
 	writetext Route19FisherText
-	waitbutton
-	closetext
+	waitclosetext
 	setscene SCENE_ROUTE19_NOOP
 	end
 
-Route19FisherScript:
-	jumptextfaceplayer Route19FisherText
+Route19FisherStepLeftOnceMovement:
+	step LEFT
+	step_end
 
 TrainerPsychicGilbert:
-	trainer PSYCHIC_T, GILBERT, EVENT_BEAT_PSYCHIC_GILBERT, PsychicGilbertSeenText, PsychicGilbertBeatenText, 0, .Script
+	generictrainer PSYCHIC_T, GILBERT, EVENT_BEAT_PSYCHIC_GILBERT, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext PsychicGilbertAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "With your skills,"
+	line "you'll do well at"
+	cont "the League."
+
+	para "That's what my"
+	line "premonition says."
+	done
+
+.SeenText
+	text "Don't say a thing!"
+
+	para "Let me guess what"
+	line "you're thinking."
+
+	para "Mmmmmmm…"
+
+	para "I got it! You're"
+	line "on the #mon"
+	cont "League challenge!"
+	done
+
+.BeatenText
+	text "You're too much!"
+	done
 
 TrainerBirdKeeperJose2:
 	trainer BIRD_KEEPER, JOSE2, EVENT_BEAT_BIRD_KEEPER_JOSE2, BirdKeeperJose2SeenText, BirdKeeperJose2BeatenText, 0, .Script
@@ -153,26 +200,47 @@ TrainerBirdKeeperJose2:
 	end
 
 TrainerCooltrainermBlake:
-	trainer COOLTRAINERM, BLAKE, EVENT_BEAT_COOLTRAINERM_BLAKE, CooltrainermBlakeSeenText, CooltrainermBlakeBeatenText, 0, .Script
+	generictrainer COOLTRAINERM, BLAKE, EVENT_BEAT_COOLTRAINERM_BLAKE, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext CooltrainermBlakeAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "If you prevail on"
+	line "this harsh trek,"
+	cont "the truth will be"
+	cont "revealed!"
+
+	para "Heh, sorry, I just"
+	line "wanted to say"
+	cont "something cool."
+	done
+
+.SeenText
+	text "You look pretty"
+	line "strong."
+
+	para "Let me battle you!"
+	done
+
+.BeatenText
+	text "Yow!"
+	done
 
 TrainerCooltrainermBrian:
-	trainer COOLTRAINERM, BRIAN, EVENT_BEAT_COOLTRAINERM_BRIAN, CooltrainermBrianSeenText, CooltrainermBrianBeatenText, 0, .Script
+	generictrainer COOLTRAINERM, BRIAN, EVENT_BEAT_COOLTRAINERM_BRIAN, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext CooltrainermBrianAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "A good trainer can"
+	line "recognize other"
+	cont "good trainers."
+	done
+
+.SeenText
+	text "Hm? You're good,"
+	line "aren't you?"
+	done
+
+.BeatenText
+	text "Just as I thought!"
+	done
 
 TrainerCooltrainerfReena:
 	trainer COOLTRAINERF, REENA1, EVENT_BEAT_COOLTRAINERF_REENA, CooltrainerfReenaSeenText, CooltrainerfReenaBeatenText, 0, .Script
@@ -271,91 +339,25 @@ TrainerCooltrainerfReena:
 	end
 
 TrainerCooltrainerfMegan:
-	trainer COOLTRAINERF, MEGAN, EVENT_BEAT_COOLTRAINERF_MEGAN, CooltrainerfMeganSeenText, CooltrainerfMeganBeatenText, 0, .Script
+	generictrainer COOLTRAINERF, MEGAN, EVENT_BEAT_COOLTRAINERF_MEGAN, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext CooltrainerfMeganAfterBattleText
-	waitbutton
-	closetext
-	end
-
-TohjoFallsSign:
-	jumptext TohjoFallsSignText
-
-Route19TMSolarbeam:
-	itemball TM_SOLARBEAM
-
-Route19RareCandy:
-	itemball RARE_CANDY
-
-Route19FisherStepLeftTwiceMovement:
-	step LEFT
-	step LEFT
-	step_end
-
-Route19FisherStepLeftOnceMovement:
-	step LEFT
-	step_end
-
-Route19FisherHeyText:
-	text "Hello there."
+.AfterText
+	text "Evolution really"
+	line "does make #mon"
+	cont "stronger."
 	done
 
-Route19FisherText:
-	text "This way leads to"
-	line "#mon League HQ."
+.SeenText
+	text "It's rare to see"
+	line "anyone come here."
 
-	para "It's every trainer's"
-	line "goal."
-
-	para "The trek is harsh"
-	line "and entry to the"
-	cont "Victory Road isn't"
-	cont "permitted unless a"
-	cont "a trainer has all"
-	cont "8 Johto Badges."
-
-	para "I won't stop you…"
-	line "Just be careful."
+	para "Are you training"
+	line "on your own?"
 	done
 
-CooltrainermBlakeSeenText:
-	text "You look pretty"
-	line "strong."
-	cont "Let me battle you!"
-	done
-
-CooltrainermBlakeBeatenText:
-	text "Yow!"
-	done
-
-CooltrainermBlakeAfterBattleText:
-	text "If you prevail on"
-	line "this harsh trek,"
-
-	para "the truth will be"
-	line "revealed!"
-
-	para "Heh, sorry, I just"
-	line "wanted to say"
-	cont "something cool."
-	done
-
-CooltrainermBrianSeenText:
-	text "Hm? You're good,"
-	line "aren't you?"
-	done
-
-CooltrainermBrianBeatenText:
-	text "Just as I thought!"
-	done
-
-CooltrainermBrianAfterBattleText:
-	text "A good trainer can"
-	line "recognize other"
-	cont "good trainers."
+.BeatenText
+	text "Oh! You're really"
+	line "strong!"
 	done
 
 CooltrainerfReenaSeenText:
@@ -379,59 +381,6 @@ CooltrainerfReenaAfterBattleText:
 	line "either."
 	done
 
-CooltrainerfMeganSeenText:
-	text "It's rare to see"
-	line "anyone come here."
-
-	para "Are you training"
-	line "on your own?"
-	done
-
-CooltrainerfMeganBeatenText:
-	text "Oh! You're really"
-	line "strong!"
-	done
-
-CooltrainerfMeganAfterBattleText:
-	text "I'm checking out"
-	line "pre- and post-"
-	cont "evolution #MON."
-
-	para "Evolution really"
-	line "does make #MON"
-	cont "stronger."
-
-	para "But evolved forms"
-	line "also learn moves"
-	cont "later on."
-	done
-
-PsychicGilbertSeenText:
-	text "Don't say a thing!"
-
-	para "Let me guess what"
-	line "you're thinking."
-
-	para "Mmmmmmm…"
-
-	para "I got it! You're"
-	line "on the #MON"
-	cont "LEAGUE challenge!"
-	done
-
-PsychicGilbertBeatenText:
-	text "You're too much!"
-	done
-
-PsychicGilbertAfterBattleText:
-	text "With your skills,"
-	line "you'll do well at"
-	cont "the LEAGUE."
-
-	para "That's what my"
-	line "premonition says."
-	done
-
 BirdKeeperJose2SeenText:
 	text "Tweet! Tweet!"
 	line "Tetweet!"
@@ -449,13 +398,6 @@ BirdKeeperJose2AfterBattleText:
 	line "mand #MON."
 	done
 
-TohjoFallsSignText:
-	text "TOHJO FALLS"
-
-	para "THE LINK BETWEEN"
-	line "KANTO AND JOHTO"
-	done
-
 CooltrainerfReenaText_GiveMoonStoneAfterBattle:
 	text "I'm in a giving"
 	line "mood. Take this!"
@@ -466,26 +408,31 @@ CooltrainerfReenaText_AgainGiveMoonStoneAfterBattle:
 	line "gift, are you?"
 	done
 
-Route19_MapEvents:
-	def_warp_events
-	warp_event 33,  7, ROUTE_19_SANDSTORM_HOUSE, 1
-	warp_event 26,  5, TOHJO_FALLS, 1
-	warp_event 36,  5, TOHJO_FALLS, 2
+Route19FisherText:
+	text "This way leads to"
+	line "#mon League HQ."
 
-	def_coord_events
-	coord_event 18, 10, SCENE_ROUTE19_FIRST_STEP_INTO_KANTO, FirstStepIntoKantoLeftScene
-	coord_event 19, 10, SCENE_ROUTE19_FIRST_STEP_INTO_KANTO, FirstStepIntoKantoRightScene
+	para "It's every trainer's"
+	line "goal."
 
-	def_bg_events
-	bg_event 25,  7, BGEVENT_READ, TohjoFallsSign
+	para "The trek is harsh"
+	line "and entry to the"
+	cont "Victory Road isn't"
+	cont "permitted unless a"
+	cont "a trainer has all"
+	cont "8 Johto Badges."
 
-	def_object_events
-	object_event 48,  7, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainermBlake, -1
-	object_event 58,  6, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerCooltrainermBrian, -1
-	object_event 72, 10, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerCooltrainerfReena, -1
-	object_event 37,  6, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 2, TrainerCooltrainerfMegan, -1
-	object_event 65,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerPsychicGilbert, -1
-	object_event 58, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerBirdKeeperJose2, -1
-	object_event 60, 12, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route19TMSolarbeam, EVENT_ROUTE_19_TM_SOLARBEAM
-	object_event 53, 12, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route19RareCandy, EVENT_ROUTE_19_RARE_CANDY
-	object_event 21, 10, SPRITE_FISHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 3, Route19FisherScript, -1
+	para "I won't stop you…"
+	line "Just be careful."
+	done
+
+TohjoFallsSignText:
+	text "Tohjo Falls"
+
+	para "Waterfall Cave"
+	done
+
+Route19TMSolarbeam:
+	itemball TM_SOLARBEAM
+Route19RareCandy:
+	itemball RARE_CANDY
