@@ -168,14 +168,12 @@ DEF KRIS EQU __trainer_class__
 	const IRENE
 	const KELLY
 	const JOYCE
-	const BETH1
+	const BETH
 	const REENA
 	const MEGAN
-	const BETH2
 	const EMMA
 	const CYBIL
 	const JENN
-	const BETH3
 	const CARA
 
 	trainerclass BEAUTY ; 1d

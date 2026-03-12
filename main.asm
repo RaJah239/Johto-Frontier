@@ -330,8 +330,6 @@ INCLUDE "engine/games/slot_machine.asm"
 SECTION "Phone Scripts 1", ROMX
 
 INCLUDE "engine/phone/scripts/generic_caller.asm"
-INCLUDE "engine/phone/scripts/hangups.asm"
-INCLUDE "engine/phone/scripts/reminders.asm"
 INCLUDE "engine/phone/scripts/bike_shop.asm"
 
 
@@ -358,7 +356,6 @@ INCLUDE "engine/phone/scripts/unused.asm"
 INCLUDE "engine/phone/scripts/mom.asm"
 INCLUDE "engine/phone/scripts/bill.asm"
 INCLUDE "engine/phone/scripts/elm.asm"
-INCLUDE "engine/phone/scripts/beth.asm"
 INCLUDE "engine/phone/scripts/generic_callee.asm"
 INCLUDE "engine/events/trainer_scripts.asm"
 INCLUDE "engine/events/bug_contest/display_stats.asm"
@@ -507,7 +504,6 @@ INCLUDE "mobile/mobile_5c.asm"
 SECTION "Crystal Phone Text 2", ROMX
 
 INCLUDE "data/phone/text/bike_shop.asm"
-INCLUDE "data/phone/text/beth_caller.asm"
 
 
 SECTION "UpdateBattleHUDs", ROMX
@@ -528,7 +524,6 @@ INCLUDE "mobile/mobile_5f.asm"
 SECTION "Phone Text 2", ROMX
 
 INCLUDE "data/text/std_text.asm"
-INCLUDE "data/phone/text/beth_overworld.asm"
 
 
 SECTION "Special Phone Text", ROMX
@@ -536,7 +531,6 @@ SECTION "Special Phone Text", ROMX
 INCLUDE "data/phone/text/mom.asm"
 INCLUDE "data/phone/text/bill.asm"
 INCLUDE "data/phone/text/elm.asm"
-INCLUDE "data/phone/text/beth_callee.asm"
 INCLUDE "data/phone/text/unused.asm"
 
 

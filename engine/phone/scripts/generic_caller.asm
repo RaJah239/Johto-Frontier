@@ -12,11 +12,6 @@ PhoneScript_RematchText_Male:
 
 PhoneScript_RematchText_Female:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERF_BETH, .Beth
-
-.Beth:
-	farwritetext BethBattleRematchText
-	promptbutton
 	end
 
 PhoneScript_HangUpText_Male:
@@ -25,10 +20,6 @@ PhoneScript_HangUpText_Male:
 
 PhoneScript_HangUpText_Female:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERF_BETH, .Beth
-
-.Beth:
-	farwritetext BethHangUpText
 	end
 
 PhoneScript_FoundItem_Male:

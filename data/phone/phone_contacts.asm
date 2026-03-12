@@ -16,5 +16,4 @@ PhoneContacts:
 	phone TRAINER_NONE, PHONECONTACT_BIKESHOP, OAKS_LAB,                  0,       UnusedPhoneScript,        0,       UnusedPhoneScript
 	phone TRAINER_NONE, PHONECONTACT_BILL,     N_A,                       0,       UnusedPhoneScript,        0,       BillPhoneCallerScript
 	phone TRAINER_NONE, PHONECONTACT_ELM,      ELMS_LAB,                  ANYTIME, ElmPhoneCalleeScript,     0,       ElmPhoneCallerScript
-	phone COOLTRAINERF, BETH1,                 ROUTE_20,                  ANYTIME, BethPhoneCalleeScript,    ANYTIME, BethPhoneCallerScript
 	assert_table_length NUM_PHONE_CONTACTS + 1

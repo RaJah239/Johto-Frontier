@@ -8,11 +8,6 @@ PhoneScript_AnswerPhone_Male:
 
 PhoneScript_AnswerPhone_Female:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERF_BETH, .Beth
-
-.Beth:
-	farwritetext BethAnswerPhoneText
-	promptbutton
 	end
 
 PhoneScript_GreetPhone_Male:
@@ -21,9 +16,4 @@ PhoneScript_GreetPhone_Male:
 
 PhoneScript_GreetPhone_Female:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERF_BETH, .Beth
-
-.Beth:
-	farwritetext BethGreetText
-	promptbutton
 	end

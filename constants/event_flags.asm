@@ -436,7 +436,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BETH_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const_skip
 	const_skip
@@ -651,7 +651,7 @@
 	const EVENT_MET_BUENA
 	const EVENT_GOT_ODD_EGG
 	const_skip
-	const EVENT_BETH_RARE_CANDY
+	const_skip
 ; Unused: next 167 events
 
 	const_next 1000
@@ -1069,13 +1069,13 @@
 	const EVENT_BEAT_COOLTRAINERF_BETH
 	const EVENT_BEAT_COOLTRAINERF_REENA
 	const EVENT_BEAT_COOLTRAINERF_MEGAN
-	const EVENT_BEAT_COOLTRAINERF_BETH2
+	const_skip
 	const_skip
 	const_skip
 	const EVENT_BEAT_COOLTRAINERF_EMMA
 	const EVENT_BEAT_COOLTRAINERF_CYBIL
 	const EVENT_BEAT_COOLTRAINERF_JENN
-	const EVENT_BEAT_COOLTRAINERF_BETH3
+	const_skip
 	const_skip
 	const_skip
 ; ExecutiveF

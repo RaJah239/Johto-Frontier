@@ -5,7 +5,6 @@
 	const PHONE_OAK
 	const PHONE_BILL
 	const PHONE_ELM
-	const PHONE_COOLTRAINERF_BETH
 DEF NUM_PHONE_CONTACTS EQU const_value - 1
 
 ; SpecialPhoneCallList indexes (see data/phone/special_calls.asm)

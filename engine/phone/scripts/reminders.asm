@@ -1,3 +1,0 @@
-BethBattleReminderScript:
-	farwritetext BethReminderText
-	end

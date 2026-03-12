@@ -1,4 +1,0 @@
-BethHangUpScript:
-	farwritetext BethLetsBattleAgainSometimeText
-	promptbutton
-	sjump PhoneScript_HangUpText_Female

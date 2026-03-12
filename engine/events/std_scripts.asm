@@ -675,10 +675,6 @@ PackFullMScript:
 
 AskNumberFScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERF_BETH, .Beth
-
-.Beth:
-	farwritetext BethAskNumberText
 	end
 
 RegisteredNumberFScript:
@@ -690,32 +686,14 @@ RegisteredNumberFScript:
 
 NumberAcceptedFScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERF_BETH, .Beth
-
-.Beth:
-	farwritetext BethNumberAcceptedText
-	waitbutton
-	closetext
 	end
 
 NumberDeclinedFScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERF_BETH, .Beth
-
-.Beth:
-	farwritetext BethNumberDeclinedText
-	waitbutton
-	closetext
 	end
 
 RematchFScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERF_BETH, .Beth
-
-.Beth:
-	farwritetext BethRematchText
-	waitbutton
-	closetext
 	end
 
 GiftFScript:
@@ -724,12 +702,6 @@ GiftFScript:
 
 PackFullFScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_COOLTRAINERF_BETH, .Beth
-
-.Beth
-	farwritetext BethPackFullText
-	waitbutton
-	closetext
 	end
 
 RematchGiftFScript:

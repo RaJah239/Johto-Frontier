@@ -20,7 +20,7 @@ Route20_MapEvents:
 	object_event 14, 24, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 2, TrainerCooltrainermJake, -1
 	object_event  9, 38, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 3, TrainerCooltrainermGaven, -1
 	object_event 10, 56, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 3, TrainerCooltrainerfJoyce, -1
-	object_event  5,  8, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerCooltrainerfBeth1, -1
+	object_event  5,  8, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 4, TrainerCooltrainerfBeth, -1
 	object_event 13, 79, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 2, TrainerPsychicRichard, -1
 	object_event 10, 92, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 3, TrainerFisherScott, -1
 	object_event  9, 15, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route20MaxElixer, EVENT_ROUTE_20_MAX_ELIXER
@@ -141,101 +141,20 @@ TrainerCooltrainerfJoyce:
 	line "believe this!"
 	done
 
-TrainerCooltrainerfBeth1:
-	trainer COOLTRAINERF, BETH1, EVENT_BEAT_COOLTRAINERF_BETH, CooltrainerfBeth1SeenText, CooltrainerfBeth1BeatenText, 0, .Script
+TrainerCooltrainerfBeth:
+	generictrainer COOLTRAINERF, BETH, EVENT_BEAT_COOLTRAINERF_BETH, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_COOLTRAINERF_BETH
-	opentext
-	checkevent EVENT_BETH_RARE_CANDY
-	iftrue .RematchGift
-	checkflag ENGINE_BETH_READY_FOR_REMATCH
-	iftrue .WantsBattle
-	checkcellnum PHONE_COOLTRAINERF_BETH
-	iftrue .NumberAccepted
-	checkevent EVENT_BETH_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	writetext CooltrainerfBethAfterText
-	promptbutton
-	setevent EVENT_BETH_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .AskForNumber
+.AfterText
+	text "TODOTEXT"
+	done
 
-.AskedAlready:
-	scall .AskNumber
-.AskForNumber:
-	askforphonenumber PHONE_COOLTRAINERF_BETH
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, COOLTRAINERF, BETH1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
+.SeenText
+	text "TODOTEXT"
+	done
 
-.WantsBattle:
-	scall .Rematch
-	winlosstext CooltrainerfBeth1BeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight2
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight1
-	loadtrainer COOLTRAINERF, BETH1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_BETH_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer COOLTRAINERF, BETH2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_BETH_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer COOLTRAINERF, BETH3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_BETH_READY_FOR_REMATCH
-	opentext
-	writetext CooltrainermBethText_GiveRareCandyAfterBattle
-	waitbutton
-	verbosegiveitem RARE_CANDY
-	iffalse .PackFull
-	closetext
-	end
-
-.RematchGift
-	writetext CooltrainermBethText_AgainGiveRareCandyAfterBattle
-	waitbutton
-	verbosegiveitem RARE_CANDY
-	iffalse .PackFull
-	clearevent EVENT_BETH_RARE_CANDY
-	closetext
-	end
-
-.PackFull:
-	setevent EVENT_BETH_RARE_CANDY
-	jumpstd PackFullFScript
-	end
-
-.AskNumber:
-	jumpstd AskNumberFScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberFScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedFScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedFScript
-	end
-
-.Rematch:
-	jumpstd RematchFScript
-	end
+.BeatenText
+	text "TODOTEXT"
+	done
 
 TrainerPsychicRichard:
 	generictrainer PSYCHIC_T, RICHARD, EVENT_BEAT_PSYCHIC_RICHARD, .SeenText, .BeatenText
@@ -281,46 +200,6 @@ TrainerFisherScott:
 .BeatenText
 	text "No! Not in this"
 	line "battle!"
-	done
-
-
-
-CooltrainerfBeth1SeenText:
-	text "I lost to a train-"
-	line "er named <RIVAL>."
-
-	para "He was really"
-	line "strong, but…"
-
-	para "It was as if he"
-	line "absolutely had to"
-	cont "win at any cost."
-
-	para "I felt sorry for"
-	line "his #MON."
-	done
-
-CooltrainerfBeth1BeatenText:
-	text "#MON aren't"
-	line "tools of war."
-	done
-
-CooltrainerfBethAfterText:
-	text "#MON are in-"
-	line "valuable, lifelong"
-	cont "partners."
-	done
-
-CooltrainermBethText_GiveRareCandyAfterBattle:
-	text "You won when I'm"
-	line "this strong?"
-	
-	para "You deserve this!"
-	done
-
-CooltrainermBethText_AgainGiveRareCandyAfterBattle:
-	text "You're ready for"
-	line "this RARE CANDY?"
 	done
 
 Route20SignText:
