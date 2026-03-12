@@ -3121,7 +3121,6 @@ wTradeCenterSceneID::                             db
 wColosseumSceneID::                               db
 wTimeCapsuleSceneID::                             db
 wVictoryRoadGateSceneID::                         db
-wIndigoPlateauPokecenter1FSceneID::               db
 wWillsRoomSceneID::                               db
 wKogasRoomSceneID::                               db
 wBrunosRoomSceneID::                              db
@@ -3170,7 +3169,7 @@ wOaksLab::                                        db ; Nayru62's scene in Oak's 
 wRoute21::                                        db
 wBattlePlaza::                                    db
 
-	ds 175
+	ds 176
 
 ; battle tower points
 wBattleTowerNormalPoints:: db

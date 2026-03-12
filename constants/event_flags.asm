@@ -1512,7 +1512,7 @@
 	const EVENT_MT_MOON_SQUARE_ROCK
 	const EVENT_MT_MOON_SQUARE_CLEFAIRY
 	const_skip
-	const EVENT_INDIGO_PLATEAU_POKECENTER_RIVAL
+	const_skip
 	const_skip
 ; Kanto itemballs
 	const_skip

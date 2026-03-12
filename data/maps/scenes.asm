@@ -10,7 +10,6 @@ MapScenes::
 	scene_var COLOSSEUM,                                   wColosseumSceneID
 	scene_var TIME_CAPSULE,                                wTimeCapsuleSceneID
 	scene_var VICTORY_ROAD_GATE,                           wVictoryRoadGateSceneID
-	scene_var INDIGO_PLATEAU_POKECENTER_1F,                wIndigoPlateauPokecenter1FSceneID
 	scene_var WILLS_ROOM,                                  wWillsRoomSceneID
 	scene_var KOGAS_ROOM,                                  wKogasRoomSceneID
 	scene_var BRUNOS_ROOM,                                 wBrunosRoomSceneID
