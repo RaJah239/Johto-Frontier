@@ -1321,7 +1321,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_RIVAL_VICTORY_ROAD
+	const_skip
 	const_skip
 	const_skip
 	const EVENT_RIVAL_BURNED_TOWER
