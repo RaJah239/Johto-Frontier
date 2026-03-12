@@ -1,3 +1,17 @@
+KarensRoom_MapEvents:
+	def_warp_events
+	warp_event  4, 17, BRUNOS_ROOM, 3
+	warp_event  5, 17, BRUNOS_ROOM, 4
+	warp_event  4,  2, LANCES_ROOM, 1
+	warp_event  5,  2, LANCES_ROOM, 2
+
+	def_coord_events
+
+	def_bg_events
+
+	def_object_events
+	object_event  5,  7, SPRITE_KAREN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, KarenScript_Battle, -1
+
 	object_const_def
 	const KARENSROOM_KAREN
 
@@ -11,8 +25,6 @@ KarensRoom_MapScripts:
 
 KarensRoomLockDoorScene:
 	sdefer KarensRoomDoorLocksBehindYouScript
-	end
-
 KarensRoomNoopScene:
 	end
 
@@ -40,37 +52,6 @@ KarensRoomDoorLocksBehindYouScript:
 	waitsfx
 	end
 
-KarenScript_Battle:
-	faceplayer
-	opentext
-	checkevent EVENT_BEAT_ELITE_4_KAREN
-	iftrue KarenScript_AfterBattle
-	writetext KarenScript_KarenBeforeText
-	waitbutton
-	closetext
-	winlosstext KarenScript_KarenBeatenText, 0
-	loadtrainer KAREN, KAREN1
-	startbattle
-	reloadmapafterbattle
-	setevent EVENT_BEAT_ELITE_4_KAREN
-	opentext
-	writetext KarenScript_KarenDefeatText
-	waitbutton
-	closetext
-	playsound SFX_ENTER_DOOR
-	changeblock 4, 2, $16 ; open door
-	refreshmap
-	closetext
-	setevent EVENT_KARENS_ROOM_EXIT_OPEN
-	waitsfx
-	end
-
-KarenScript_AfterBattle:
-	writetext KarenScript_KarenDefeatText
-	waitbutton
-	closetext
-	end
-
 KarensRoom_EnterMovement:
 	step UP
 	step UP
@@ -78,28 +59,50 @@ KarensRoom_EnterMovement:
 	step UP
 	step_end
 
-KarenScript_KarenBeforeText:
-	text "I am KAREN of the"
-	line "ELITE FOUR."
+KarenScript_Battle:
+	faceplayeropentext
+	checkevent EVENT_BEAT_ELITE_4_KAREN
+	iftrue KarenScript_AfterBattle
+	writethistext
+		text "I am Karen of the"
+		line "Elite Four."
 
-	para "You're <PLAYER>?"
-	line "How amusing."
+		para "You're <PLAYER>?"
+		line "How amusing."
 
-	para "I love dark-type"
-	line "#MON."
+		para "I love dark-type"
+		line "#mon."
 
-	para "I find their wild,"
-	line "tough image to be"
+		para "I find their wild,"
+		line "tough image to be"
+		cont "so appealing. And"
+		cont "they're so strong."
 
-	para "so appealing. And"
-	line "they're so strong."
+		para "Think you can take"
+		line "them? Just try to"
+		cont "entertain me."
 
-	para "Think you can take"
-	line "them? Just try to"
-	cont "entertain me."
+		para "Let's go."
+		done
+	waitclosetext
+	winlosstext KarenScript_KarenBeatenText, 0
+	loadtrainer KAREN, KAREN1
+	startbattle
+	reloadmapafterbattle
+	setevent EVENT_BEAT_ELITE_4_KAREN
+	opentext
+	writetext KarenScript_KarenDefeatText
+	waitclosetext
+	playsound SFX_ENTER_DOOR
+	changeblock 4, 2, $16 ; open door
+	refreshmap
+	setevent EVENT_KARENS_ROOM_EXIT_OPEN
+	waitsfx
+	endtext
 
-	para "Let's go."
-	done
+KarenScript_AfterBattle:
+	writetext KarenScript_KarenDefeatText
+	waitendtext
 
 KarenScript_KarenBeatenText:
 	text "Well, aren't you"
@@ -108,9 +111,9 @@ KarenScript_KarenBeatenText:
 	done
 
 KarenScript_KarenDefeatText:
-	text "Strong #MON."
+	text "Strong #mon."
 
-	para "Weak #MON."
+	para "Weak #mon."
 
 	para "That is only the"
 	line "selfish perception"
@@ -118,28 +121,13 @@ KarenScript_KarenDefeatText:
 
 	para "Truly skilled"
 	line "trainers should"
-
-	para "try to win with"
-	line "their favorites."
+	cont "try to win with"
+	cont "their favorites."
 
 	para "I like your style."
 	line "You understand"
 	cont "what's important."
 
-	para "Go on--the CHAM-"
-	line "PION is waiting."
+	para "Go on--the Cham-"
+	line "pion is waiting."
 	done
-
-KarensRoom_MapEvents:
-	def_warp_events
-	warp_event  4, 17, BRUNOS_ROOM, 3
-	warp_event  5, 17, BRUNOS_ROOM, 4
-	warp_event  4,  2, LANCES_ROOM, 1
-	warp_event  5,  2, LANCES_ROOM, 2
-
-	def_coord_events
-
-	def_bg_events
-
-	def_object_events
-	object_event  5,  7, SPRITE_KAREN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, KarenScript_Battle, -1
