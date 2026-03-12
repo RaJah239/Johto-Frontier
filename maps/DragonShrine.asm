@@ -18,6 +18,8 @@ DragonShrineTakeTestScene:
 DragonShrineNoopScene:
 	end
 
+; TODOTEXT not sure what to do with here yet..
+
 DragonShrineTakeTestScript:
 	applymovement PLAYER, DragonShrinePlayerWalkInMovement
 	applymovement DRAGONSHRINE_ELDER1, DragonShrineElderStepDownMovement
