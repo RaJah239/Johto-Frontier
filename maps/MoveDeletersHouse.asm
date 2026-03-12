@@ -1,3 +1,19 @@
+MoveDeletersHouse_MapEvents:
+	def_warp_events
+	warp_event  2,  7, BLACKTHORN_CITY, 6
+	warp_event  3,  7, BLACKTHORN_CITY, 6
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  0,  1, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  1,  1, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+
+	def_object_events
+	object_event  2,  2, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MoveDeleter, -1
+	object_event  2,  4, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, EggTutorScript, -1
+	object_event  5,  4, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, BlackthornTutor1Script, -1
+
 	object_const_def
 	const MOVEDELETERSHOUSE_SUPER_NERD
 	const MOVEDELETERSHOUSE_EGG_TUTOR
@@ -9,67 +25,70 @@ MoveDeletersHouse_MapScripts:
 	def_callbacks
 
 MoveDeleter:
-	faceplayer
-	opentext
+	faceplayeropentext
 	special MoveDeletion
-	waitbutton
-	closetext
+	waitclosetext
 	turnobject MOVEDELETERSHOUSE_SUPER_NERD, UP
 	end
 
 EggTutorScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkevent EVENT_MET_EGG_TUTOR
 	iftrue .WantToTeachAnEggMove
-	writetext EggTutorIntroText
+	writethistext
+	    text "I'm the one and"
+	    line "only Egg Tutor!"
+
+	    para "I can teach your"
+	    line "#MON moves that"
+	    cont "they'd normally"
+	    cont "need crossbreeding"
+	    cont "to inherit."
+
+	    para "My service fee is"
+	    line "¥500,000."
+
+	    para "How about it?"
+	    done
 	setevent EVENT_MET_EGG_TUTOR
 	sjump .WantToTeachAnEggMoveAfterIntro
 
 .WantToTeachAnEggMove:
-	writetext EggTutorMoneyForEggMoveText
+	writethistext
+		text "Hi again! Want me"
+		line "me to teach your"
+
+		para "#mon an Egg"
+		line "move for ¥500,000?"
+		done
 .WantToTeachAnEggMoveAfterIntro:
 	special EggMaster
-	waitbutton
-	closetext
+	waitclosetext
 	turnobject MOVEDELETERSHOUSE_EGG_TUTOR, RIGHT
 	end
 
-EggTutorIntroText:
-    text "I'm the one and"
-    line "only Egg Tutor!"
-
-    para "I can teach your"
-    line "#MON moves that"
-
-    para "they'd normally"
-    line "need crossbreeding"
-    cont "to inherit."
-
-    para "My service fee is"
-    line "¥500,000."
-
-    para "How about it?"
-    done
-
-EggTutorMoneyForEggMoveText:
-	text "Hi again! Want me"
-	line "me to teach your"
-
-	para "#mon an Egg"
-	line "move for ¥500,000?"
-	done
-
 BlackthornTutor1Script:
-	faceplayer
-	opentext
-	writetext BlackthornMoveTutor1IntroText
+	faceplayeropentext
+	writethistext
+		text "Hello. I am a"
+		line "Move Tutor."
+		
+		para "For 9,999 coins,"
+		line "I'll teach your"
+		cont "#MON some very"
+		cont "powerful attacks!"
+		
+		para "Interested?"
+		done 
 	special DisplayCoinCaseBalance
 	yesorno
 	iffalse .Refused
 	checkcoins 9999
 	ifequal HAVE_LESS, .NotEnoughMoney
-	writetext BlackThornMoveTutor1WhatMoveShouldITeachText
+	writethistext
+		text "Which move should"
+		line "I teach?"
+		done
 	loadmenu .MoveMenuHeader
 	verticalmenu
 	closewindow
@@ -77,9 +96,10 @@ BlackthornTutor1Script:
 	ifequal 2, .SkyAttack
 	ifequal 3, .Outrage
 .Cancel:
-	writetext BlackThornMoveTutor1CancelText
-	waitbutton
-	closetext
+	writethistext
+		text "Maybe next time?"
+		done
+	waitclosetext
 	turnobject MOVEDELETERSHOUSE_OFFENSE_TUTOR, LEFT
 	end
 
@@ -105,16 +125,20 @@ BlackthornTutor1Script:
 	sjump .Cancel
 
 .Refused:
-	writetext BlackThornMoveTutor1ComeAgainText
-	waitbutton
-	closetext
+	writethistext
+		text "Come again if you"
+		line "change your mind."
+		done
+	waitclosetext
 	turnobject MOVEDELETERSHOUSE_OFFENSE_TUTOR, LEFT
 	end
 	
 .NotEnoughMoney:
-	writetext BlackthornMoveTutor1YouDontHaveEnoughMoneyText
-	waitbutton
-	closetext
+	writethistext
+		text "You don't have"
+		line "enough coins…"
+		done
+	waitclosetext
 	turnobject MOVEDELETERSHOUSE_OFFENSE_TUTOR, LEFT
 	end
 
@@ -123,9 +147,11 @@ BlackthornTutor1Script:
 	playsound SFX_TRANSACTION
 	takecoins 9999
 	special DisplayCoinCaseBalance
-	writetext BlackThornMoveTutor1ThankYouText
-	waitbutton
-	closetext
+	writethistext
+		text "Come visit as much"
+		line "as you want."
+		done
+	waitclosetext
 	turnobject MOVEDELETERSHOUSE_OFFENSE_TUTOR, LEFT
 	end 
 	
@@ -143,62 +169,6 @@ BlackthornTutor1Script:
 	db "Outrage@"
 	db "Cancel@"
 	
-BlackthornMoveTutor1IntroText:
-	text "Hello. I am a"
-	line "Move Tutor."
-	
-	para "For 9,999 coins,"
-	line "I'll teach your"
-
-	para "#MON some very"
-	line "powerful attacks!"
-	
-	para "Interested?"
-	done 
-
-BlackThornMoveTutor1ComeAgainText:
-	text "Come again if you"
-	line "change your mind."
-	done
-
-BlackThornMoveTutor1WhatMoveShouldITeachText:
-	text "Which move should"
-	line "I teach?"
-	done
-
-BlackThornMoveTutor1ThankYouText:
-	text "Come visit as much"
-	line "as you want."
-	done 
-
-BlackThornMoveTutor1CancelText:
-	text "Maybe next time?"
-	done 
-	
-BlackthornMoveTutor1YouDontHaveEnoughMoneyText:
-	text "You don't have"
-	line "enough coins…"
-	done
-
 BlackthornTutorMoveText:
 	text_start
 	done
-
-MoveDeletersHouseBookshelf:
-	jumpstd DifficultBookshelfScript
-
-MoveDeletersHouse_MapEvents:
-	def_warp_events
-	warp_event  2,  7, BLACKTHORN_CITY, 6
-	warp_event  3,  7, BLACKTHORN_CITY, 6
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  0,  1, BGEVENT_READ, MoveDeletersHouseBookshelf
-	bg_event  1,  1, BGEVENT_READ, MoveDeletersHouseBookshelf
-
-	def_object_events
-	object_event  2,  2, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MoveDeleter, -1
-	object_event  2,  4, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, EggTutorScript, -1
-	object_event  5,  4, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, BlackthornTutor1Script, -1
