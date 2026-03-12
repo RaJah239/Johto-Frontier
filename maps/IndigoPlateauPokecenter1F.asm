@@ -8,11 +8,10 @@ IndigoPlateauPokecenter1F_MapEvents:
 	def_coord_events
 
 	def_bg_events
-
 	def_object_events
 	heal_event  3,  7, PAL_NPC_PURPLE
 	chansey_event  4,  7
-	variable_mart_event 11,  7, PAL_NPC_PURPLE
+	object_event 11,  7, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, IndigoPlateauPokecenter1FClerkScript, -1
 	object_event  5, 10, SPRITE_POKEFAN_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, VioletScript, -1
 	object_event  1,  9, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TeleportGuyScript, -1
 	object_event 11, 11, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, IndigoPlateauPokecenter1FCooltrainerMText, -1
@@ -32,6 +31,11 @@ IndigoPlateauPokecenter1F_MapScripts:
 
 	def_callbacks
 	callback MAPCALLBACK_NEWMAP, IndigoPlateauPokecenter1FPrepareElite4Callback
+
+IndigoPlateauPokecenter1FClerkScript:
+	faceplayeropentext
+	pokemart MARTTYPE_STANDARD, MART_EIGHT_BADGES
+	endtext
 
 VioletScript:
 	faceplayeropentext
