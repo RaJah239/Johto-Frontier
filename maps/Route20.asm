@@ -1,3 +1,37 @@
+Route20_MapEvents:
+	def_warp_events
+	warp_event 15, 57, ROUTE_20_HEAL_HOUSE, 1
+	warp_event  7,  5, VICTORY_ROAD_GATE, 1
+	warp_event  5, 71, DAY_OF_WEEK_SIBLINGS_HOUSE, 1
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  8,  6, BGEVENT_JUMPTEXT, Route20SignText
+	bg_event 14, 54, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event 14, 53, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event 13, 53, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event 13, 54, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event  4, 95, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event  4, 96, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+	bg_event  5, 96, BGEVENT_JUMPSTD, NO_BERRY_OR_FRUIT_SCRIPT
+
+	def_object_events
+	object_event 14, 24, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 2, TrainerCooltrainermJake, -1
+	object_event  9, 38, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainermGaven3, -1
+	object_event 10, 56, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 3, TrainerCooltrainerfJoyce, -1
+	object_event  5,  8, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerCooltrainerfBeth1, -1
+	object_event 13, 79, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 2, TrainerPsychicRichard, -1
+	object_event 10, 92, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 3, TrainerFisherScott, -1
+	object_event  9, 15, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route20MaxElixer, EVENT_ROUTE_20_MAX_ELIXER
+	object_event 14, 54, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, Route20BerryTree1, EVENT_ROUTE_20_BERRY_1
+	object_event 14, 53, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route20BerryTree2, EVENT_ROUTE_20_BERRY_2
+	object_event 13, 53, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, Route20BerryTree3, EVENT_ROUTE_20_BERRY_3
+	object_event 13, 54, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route20BerryTree4, EVENT_ROUTE_20_BERRY_4
+	object_event  4, 95, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, Route20BerryTree5, EVENT_ROUTE_20_BERRY_5
+	object_event  4, 96, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route20ApricornTree1, EVENT_ROUTE_20_APRICORN_1
+	object_event  5, 96, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route20ApricornTree2, EVENT_ROUTE_20_APRICORN_2
+
 	object_const_def
 	const ROUTE20_COOLTRAINER_M1
 	const ROUTE20_COOLTRAINER_M2
@@ -22,18 +56,35 @@ Route20_MapScripts:
 
 .Flypoint:
 	setflag ENGINE_FLYPOINT_ROUTE_20
-	return
+	endcallback
 
 TrainerCooltrainermJake:
-	trainer COOLTRAINERM, JAKE, EVENT_BEAT_COOLTRAINERM_JAKE, CooltrainermJakeSeenText, CooltrainermJakeBeatenText, 0, .Script
+	generictrainer COOLTRAINERM, JAKE, EVENT_BEAT_COOLTRAINERM_JAKE, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext CooltrainermJakeAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "It's going to be"
+	line "tough to win at"
+	cont "the League."
+
+	para "I need to do some"
+	line "more training."
+
+	para "I hear that the"
+	line "League's Elite"
+	cont "Four are tougher"
+	cont "than Gym Leaders."
+	done
+
+.SeenText
+	text "I'm making my"
+	line "final preparations"
+	cont "for the #mon"
+	cont "League."
+	done
+
+.BeatenText
+	text "I blew it!"
+	done
 
 TrainerCooltrainermGaven3:
 	trainer COOLTRAINERM, GAVEN3, EVENT_BEAT_COOLTRAINERM_GAVEN, CooltrainermGaven3SeenText, CooltrainermGaven3BeatenText, 0, .Script
@@ -132,15 +183,32 @@ TrainerCooltrainermGaven3:
 	end
 
 TrainerCooltrainerfJoyce:
-	trainer COOLTRAINERF, JOYCE, EVENT_BEAT_COOLTRAINERF_JOYCE, CooltrainerfJoyceSeenText, CooltrainerfJoyceBeatenText, 0, .Script
+	generictrainer COOLTRAINERF, JOYCE, EVENT_BEAT_COOLTRAINERF_JOYCE, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext CooltrainerfJoyceAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "I've defeated"
+	line "eight Gym Leaders,"
+	cont "so I was feeling"
+	cont "confident."
+
+	para "I'll have to try"
+	line "harder next time."
+	done
+
+.SeenText
+	text "Since you've come"
+	line "this far, you must"
+	cont "be good."
+
+	para "I'm going to give"
+	line "this battle every-"
+	cont "thing I've got!"
+	done
+
+.BeatenText
+	text "No! I don't"
+	line "believe this!"
+	done
 
 TrainerCooltrainerfBeth1:
 	trainer COOLTRAINERF, BETH1, EVENT_BEAT_COOLTRAINERF_BETH, CooltrainerfBeth1SeenText, CooltrainerfBeth1BeatenText, 0, .Script
@@ -239,58 +307,49 @@ TrainerCooltrainerfBeth1:
 	end
 
 TrainerPsychicRichard:
-	trainer PSYCHIC_T, RICHARD, EVENT_BEAT_PSYCHIC_RICHARD, PsychicRichardSeenText, PsychicRichardBeatenText, 0, .Script
+	generictrainer PSYCHIC_T, RICHARD, EVENT_BEAT_PSYCHIC_RICHARD, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext PsychicRichardAfterBattleText
-	waitbutton
-	closetext
-	end
+.AfterText
+	text "People and #mon"
+	line "grow from their"
+	cont "experiences."
+
+	para "Don't get lazy and"
+	line "complacent."
+	done
+
+.SeenText
+	text "How long have you"
+	line "spent with your"
+	cont "#mon?"
+	done
+
+.BeatenText
+	text "That long huh?"
+	done
 
 TrainerFisherScott:
-	trainer FISHER, SCOTT, EVENT_BEAT_FISHER_SCOTT, FisherScottSeenText, FisherScottBeatenText, 0, .Script
+	generictrainer FISHER, SCOTT, EVENT_BEAT_FISHER_SCOTT, .SeenText, .BeatenText
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext FisherScottAfterBattleText
-	waitbutton
-	closetext
-	end
-
-Route20Sign:
-	jumptext Route20SignText
-
-Route20MaxElixer:
-	itemball MAX_ELIXER
-
-CooltrainermJakeSeenText:
-	text "I'm making my"
-	line "final preparations"
-
-	para "for the #MON"
-	line "LEAGUE."
+.AfterText
+	text "Just like in fish-"
+	line "ing, it's all over"
+	cont "in #mon if you"
+	cont "give up."
 	done
 
-CooltrainermJakeBeatenText:
-	text "I blew it!"
+.SeenText
+	text "I'm feeling great"
+	line "today!"
+
+	para "I feel like I"
+	line "could boot even"
+	cont "the League Champ!"
 	done
 
-CooltrainermJakeAfterBattleText:
-	text "It's going to be"
-	line "tough to win at"
-	cont "the LEAGUE."
-
-	para "I need to do some"
-	line "more training."
-
-	para "I hear that the"
-	line "LEAGUE's ELITE"
-
-	para "FOUR are tougher"
-	line "than GYM LEADERS."
+.BeatenText
+	text "No! Not in this"
+	line "battle!"
 	done
 
 CooltrainermGaven3SeenText:
@@ -316,32 +375,6 @@ CooltrainermGavenAfterText:
 
 	para "Practically nobody"
 	line "goes there!"
-	done
-
-CooltrainerfJoyceSeenText:
-	text "Since you've come"
-	line "this far, you must"
-	cont "be good."
-
-	para "I'm going to give"
-	line "this battle every-"
-	cont "thing I've got!"
-	done
-
-CooltrainerfJoyceBeatenText:
-	text "No! I don't"
-	line "believe this!"
-	done
-
-CooltrainerfJoyceAfterBattleText:
-	text "I've defeated"
-	line "eight GYM LEADERS,"
-
-	para "so I was feeling"
-	line "confident."
-
-	para "I'll have to try"
-	line "harder next time."
 	done
 
 CooltrainerfBeth1SeenText:
@@ -370,60 +403,6 @@ CooltrainerfBethAfterText:
 	cont "partners."
 	done
 
-PsychicRichardSeenText:
-	text "Wow, look at all"
-	line "those BADGES!"
-	cont "I'm impressed."
-
-	para "But you're not"
-	line "satisfied by just"
-
-	para "collecting them,"
-	line "right?"
-	done
-
-PsychicRichardBeatenText:
-	text "Good battle!"
-	done
-
-PsychicRichardAfterBattleText:
-	text "People and #MON"
-	line "grow from their"
-	cont "experiences."
-
-	para "Don't get lazy and"
-	line "complacent."
-	done
-
-FisherScottSeenText:
-	text "I'm feeling great"
-	line "today!"
-
-	para "I feel like I"
-	line "could boot even"
-	cont "the LEAGUE CHAMP!"
-	done
-
-FisherScottBeatenText:
-	text "No! Not in this"
-	line "battle!"
-	done
-
-FisherScottAfterBattleText:
-	text "Just like in fish-"
-	line "ing, it's all over"
-
-	para "in #MON if you"
-	line "give up."
-	done
-
-Route20SignText:
-	text "ROUTE 20"
-
-	para "#MON LEAGUE"
-	line "RECEPTION GATE"
-	done
-
 CooltrainermGavenText_GiveCrytalAfterBattle:
 	text "You beat me again!"
 	line "Here's a something"
@@ -443,196 +422,39 @@ CooltrainermBethText_GiveRareCandyAfterBattle:
 	para "You deserve this!"
 	done
 
-
 CooltrainermBethText_AgainGiveRareCandyAfterBattle:
 	text "You're ready for"
 	line "this RARE CANDY?"
 	done
 
+Route20SignText:
+	text "Route 20"
+
+	para "#mon League"
+	line "Reception Gate"
+	done
+
+Route20MaxElixer:
+	itemball MAX_ELIXER
+
 Route20BerryTree1:
-	opentext
-	getitemname STRING_BUFFER_3, GOLD_BERRY
-	writetext Route20TreeText
-	promptbutton
-	writetext Route20HeyItsBerryApricornText
-	promptbutton
-	giveitem GOLD_BERRY
-	iffalse Route20NoRoomInBag
-	disappear ROUTE20_BERRY_TREE1
-	writetext Route20FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval GOLD_BERRY
+	jumpstd BerryOrFruitScript
 Route20BerryTree2:
-	opentext
-	getitemname STRING_BUFFER_3, MIRACLEBERRY
-	writetext Route20TreeText
-	promptbutton
-	writetext Route20HeyItsBerryApricornText
-	promptbutton
-	giveitem MIRACLEBERRY
-	iffalse Route20NoRoomInBag
-	disappear ROUTE20_BERRY_TREE2
-	writetext Route20FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval MIRACLEBERRY
+	jumpstd BerryOrFruitScript
 Route20BerryTree3:
-	opentext
-	getitemname STRING_BUFFER_3, GOLD_BERRY
-	writetext Route20TreeText
-	promptbutton
-	writetext Route20HeyItsBerryApricornText
-	promptbutton
-	giveitem GOLD_BERRY
-	iffalse Route20NoRoomInBag
-	disappear ROUTE20_BERRY_TREE3
-	writetext Route20FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval GOLD_BERRY
+	jumpstd BerryOrFruitScript
 Route20BerryTree4:
-	opentext
-	getitemname STRING_BUFFER_3, MIRACLEBERRY
-	writetext Route20TreeText
-	promptbutton
-	writetext Route20HeyItsBerryApricornText
-	promptbutton
-	giveitem MIRACLEBERRY
-	iffalse Route20NoRoomInBag
-	disappear ROUTE20_BERRY_TREE4
-	writetext Route20FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval MIRACLEBERRY
+	jumpstd BerryOrFruitScript
 Route20BerryTree5:
-	opentext
-	getitemname STRING_BUFFER_3, MINT_BERRY
-	writetext Route20TreeText
-	promptbutton
-	writetext Route20HeyItsBerryApricornText
-	promptbutton
-	giveitem MINT_BERRY
-	iffalse Route20NoRoomInBag
-	disappear ROUTE20_BERRY_TREE5
-	writetext Route20FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval MINT_BERRY
+	jumpstd BerryOrFruitScript
 Route20ApricornTree1:
-	opentext
-	getitemname STRING_BUFFER_3, RED_APRICORN
-	writetext Route20TreeText
-	promptbutton
-	writetext Route20HeyItsBerryApricornText
-	promptbutton
-	giveitem RED_APRICORN
-	iffalse Route20NoRoomInBag
-	disappear ROUTE20_APRICORN_TREE1
-	writetext Route20FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
+	setval RED_APRICORN
+	jumpstd BerryOrFruitScript
 Route20ApricornTree2:
-	opentext
-	getitemname STRING_BUFFER_3, BLU_APRICORN
-	writetext Route20TreeText
-	promptbutton
-	writetext Route20HeyItsBerryApricornText
-	promptbutton
-	giveitem BLU_APRICORN
-	iffalse Route20NoRoomInBag
-	disappear ROUTE20_APRICORN_TREE2
-	writetext Route20FoundItemText
-	playsound SFX_ITEM
-	waitsfx
-	itemnotify
-	closetext
-	end
-
-Route20NoBerryOrApricorn:
-	opentext
-	writetext Route20TreeText
-	promptbutton
-	writetext Route20NothingHereText
-	waitbutton
-	closetext
-	end
-
-Route20NoRoomInBag:
-	writetext Route20NoRoomInBagText
-	waitbutton
-	closetext
-	end
-
-Route20TreeText:
-	text_far _FruitBearingTreeText
-	text_end
-
-Route20NothingHereText:
-	text_far _NothingHereText
-	text_end
-
-Route20HeyItsBerryApricornText:
-	text_far _HeyItsFruitText
-	text_end
-
-Route20FoundItemText:
-	text_far _ObtainedFruitText
-	text_end
-
-Route20NoRoomInBagText:
-	text_far _CantCarryItemText
-	text_end
-
-Route20_MapEvents:
-	def_warp_events
-	warp_event 15, 57, ROUTE_20_HEAL_HOUSE, 1
-	warp_event  7,  5, VICTORY_ROAD_GATE, 1
-	warp_event  5, 71, DAY_OF_WEEK_SIBLINGS_HOUSE, 1
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  8,  6, BGEVENT_READ, Route20Sign
-	bg_event 14, 54, BGEVENT_READ, Route20NoBerryOrApricorn
-	bg_event 14, 53, BGEVENT_READ, Route20NoBerryOrApricorn
-	bg_event 13, 53, BGEVENT_READ, Route20NoBerryOrApricorn
-	bg_event 13, 54, BGEVENT_READ, Route20NoBerryOrApricorn
-	bg_event  4, 95, BGEVENT_READ, Route20NoBerryOrApricorn
-	bg_event  4, 96, BGEVENT_READ, Route20NoBerryOrApricorn
-	bg_event  5, 96, BGEVENT_READ, Route20NoBerryOrApricorn
-
-	def_object_events
-	object_event 14, 24, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 2, TrainerCooltrainermJake, -1
-	object_event  9, 38, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainermGaven3, -1
-	object_event 10, 56, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainerfJoyce, -1
-	object_event  5,  8, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerCooltrainerfBeth1, -1
-	object_event 13, 79, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, TrainerPsychicRichard, -1
-	object_event 10, 92, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerFisherScott, -1
-	object_event  9, 15, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route20MaxElixer, EVENT_ROUTE_20_MAX_ELIXER
-	object_event 14, 54, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, Route20BerryTree1, EVENT_ROUTE_20_BERRY_1
-	object_event 14, 53, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route20BerryTree2, EVENT_ROUTE_20_BERRY_2
-	object_event 13, 53, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, Route20BerryTree3, EVENT_ROUTE_20_BERRY_3
-	object_event 13, 54, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route20BerryTree4, EVENT_ROUTE_20_BERRY_4
-	object_event  4, 95, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, Route20BerryTree5, EVENT_ROUTE_20_BERRY_5
-	object_event  4, 96, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route20ApricornTree1, EVENT_ROUTE_20_APRICORN_1
-	object_event  5, 96, SPRITE_APRICORN, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route20ApricornTree2, EVENT_ROUTE_20_APRICORN_2
+	setval BLU_APRICORN
+	jumpstd BerryOrFruitScript
