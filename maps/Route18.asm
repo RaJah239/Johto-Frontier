@@ -16,7 +16,7 @@ Route18_MapEvents:
 	def_object_events
 	object_event 12, 19, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 2, TrainerHikerBailey, -1
 	object_event  4, 14, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 2, TrainerCamperTed, -1
-	object_event  2, 13, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 2, TrainerPicnickerErin1, -1
+	object_event  2, 13, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_GENERICTRAINER, 2, TrainerPicnickerErin, -1
 	object_event  2, 18, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route18HasteHerb, EVENT_ROUTE_18_HASTE_HERB
 	object_event  7,  5, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Route18BerryTree1, EVENT_ROUTE_18_BERRY_1
 	object_event  8,  6, SPRITE_BERRY, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_YELLOW, OBJECTTYPE_SCRIPT, 0, Route18BerryTree2, EVENT_ROUTE_18_BERRY_2
@@ -86,103 +86,30 @@ TrainerCamperTed:
 	text "Wha…?"
 	done
 
-TrainerPicnickerErin1:
-	trainer PICNICKER, ERIN1, EVENT_BEAT_PICNICKER_ERIN, PicnickerErin1SeenText, PicnickerErin1BeatenText, 0, .Script
+TrainerPicnickerErin:
+	generictrainer PICNICKER, ERIN, EVENT_BEAT_PICNICKER_ERIN, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_PICNICKER_ERIN
-	opentext
-	checkevent EVENT_ERIN_CALCIUM
-	iftrue .HasCalcium
-	checkflag ENGINE_ERIN_READY_FOR_REMATCH
-	iftrue .WantsBattle
-	checkcellnum PHONE_PICNICKER_ERIN
-	iftrue Route18NumberAcceptedF
-	checkevent EVENT_ERIN_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	writetext PicnickerErinAfterBattleText
-	promptbutton
-	setevent EVENT_ERIN_ASKED_FOR_PHONE_NUMBER
-	scall Route18AskNumber
-	sjump .AskForNumber
+.AfterText
+	text "I've been to many"
+	line "Gyms, but the Gym"
+	cont "in Goldenrod is my"
+	cont "favorite."
 
-.AskedAlready:
-	scall Route18AskNumber
-.AskForNumber:
-	askforphonenumber PHONE_PICNICKER_ERIN
-	ifequal PHONE_CONTACT_REFUSED, Route18NumberDeclinedF
-	gettrainername STRING_BUFFER_3, PICNICKER, ERIN1
-	scall Route18RegisteredNumberF
-	sjump Route18NumberAcceptedF
+	para "It's filled with"
+	line "pretty flowers!"
+	done
 
-.WantsBattle:
-	scall Route18RematchF
-	winlosstext PicnickerErin1BeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight2
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight1
-	loadtrainer PICNICKER, ERIN1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_ERIN_READY_FOR_REMATCH
-	end
+.SeenText
+	text "I raise #mon"
+	line "too!"
 
-.LoadFight1:
-	loadtrainer PICNICKER, ERIN2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_ERIN_READY_FOR_REMATCH
-	end
+	para "Will you battle"
+	line "with me?"
+	done
 
-.LoadFight2:
-	loadtrainer PICNICKER, ERIN3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_ERIN_READY_FOR_REMATCH
-	scall Route18RematchGiftF
-	verbosegiveitem CALCIUM
-	iffalse ErinNoRoomForCalcium
-	closetext
-	end
-
-.HasCalcium:
-	writetext PicnickerErin_GiveCalciumAfterBattleAgain
-	waitbutton
-	verbosegiveitem CALCIUM
-	iffalse ErinNoRoomForCalcium
-	clearevent EVENT_ERIN_CALCIUM
-	closetext
-	end
-
-Route18AskNumber:
-	jumpstd AskNumberFScript
-	end
-
-Route18RegisteredNumberF:
-	jumpstd RegisteredNumberFScript
-	end
-
-Route18NumberAcceptedF:
-	jumpstd NumberAcceptedFScript
-	end
-
-Route18NumberDeclinedF:
-	jumpstd NumberDeclinedFScript
-	end
-
-Route18RematchF:
-	jumpstd RematchFScript
-	end
-
-ErinNoRoomForCalcium:
-	setevent EVENT_ERIN_CALCIUM
-	jumpstd PackFullFScript
-	end
-
-Route18RematchGiftF:
-	jumpstd RematchGiftFScript
-	end
+.BeatenText
+	text "Oh, rats!"
+	done
 
 TrainerHikerBailey:
 	generictrainer HIKER, BAILEY, EVENT_BEAT_HIKER_BAILEY, .SeenText, .BeatenText
@@ -202,49 +129,6 @@ TrainerHikerBailey:
 .BeatenText
 	text "Mercy! You showed"
 	line "me your power!"
-	done
-
-PicnickerErin1SeenText:
-	text "I raise #MON"
-	line "too!"
-
-	para "Will you battle"
-	line "with me?"
-	done
-
-PicnickerErin1BeatenText:
-	text "Oh, rats!"
-	done
-
-PicnickerErinAfterBattleText:
-	text "I've been to many"
-	line "GYMS, but the GYM"
-
-	para "in GOLDENROD is my"
-	line "favorite."
-
-	para "It's filled with"
-	line "pretty flowers!"
-	done
-
-PicnickerErin2BeatenText:
-	text "Aww… I keep losing"
-	line "all the time!"
-
-	para "I'll just have to"
-	line "try harder!"
-
-	para "Anyway, thanks for"
-	line "battling me again"
-
-	para "and again. Here's"
-	line "that present from"
-	cont "the other time."
-	done
-
-PicnickerErin_GiveCalciumAfterBattleAgain:
-	text "Nice! You're back"
-	line "for my gift!"
 	done
 
 Route18SignText:

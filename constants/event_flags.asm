@@ -484,7 +484,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_ERIN_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const_skip
 ; Ruins of Alph puzzles
@@ -646,7 +646,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_ERIN_CALCIUM
+	const_skip
 	const_skip
 	const EVENT_MET_BUENA
 	const EVENT_GOT_ODD_EGG
@@ -836,10 +836,10 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_BEAT_PICNICKER_ERIN2
+	const_skip
 	const_skip
 	const EVENT_BEAT_PICNICKER_TIFFANY
-	const EVENT_BEAT_PICNICKER_ERIN3
+	const_skip
 ; Guitarist
 	const_skip
 	const_skip

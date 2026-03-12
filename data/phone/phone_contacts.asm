@@ -20,5 +20,4 @@ PhoneContacts:
 	phone COOLTRAINERF, BETH1,                 ROUTE_20,                  ANYTIME, BethPhoneCalleeScript,    ANYTIME, BethPhoneCallerScript
 	phone BIRD_KEEPER,  JOSE2,                 ROUTE_19,                  ANYTIME, JosePhoneCalleeScript,    ANYTIME, JosePhoneCallerScript
 	phone COOLTRAINERF, REENA1,                ROUTE_19,                  ANYTIME, ReenaPhoneCalleeScript,   ANYTIME, ReenaPhoneCallerScript
-	phone PICNICKER,    ERIN1,                 ROUTE_18,                  ANYTIME, ErinPhoneCalleeScript,    ANYTIME, ErinPhoneCallerScript
 	assert_table_length NUM_PHONE_CONTACTS + 1

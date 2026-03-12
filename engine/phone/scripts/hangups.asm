@@ -17,8 +17,3 @@ ReenaForwardScript:
 	farwritetext ReenaForwardText
 	promptbutton
 	sjump PhoneScript_HangUpText_Female
-
-ErinWorkingHardScript:
-	farwritetext ErinWorkingHardText
-	promptbutton
-	sjump PhoneScript_HangUpText_Female

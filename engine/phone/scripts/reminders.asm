@@ -13,7 +13,3 @@ JoseReminderScript:
 ReenaHurryScript:
 	farwritetext ReenaHurryText
 	end
-
-ErinComeBattleScript:
-	farwritetext ErinComeBattleText
-	end

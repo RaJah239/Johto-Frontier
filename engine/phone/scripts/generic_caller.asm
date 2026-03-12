@@ -24,7 +24,6 @@ PhoneScript_RematchText_Female:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_ERIN, .Erin
 
 .Beth:
 	farwritetext BethBattleRematchText
@@ -33,11 +32,6 @@ PhoneScript_RematchText_Female:
 
 .Reena:
 	farwritetext ReenaBattleRematchText
-	promptbutton
-	end
-
-.Erin:
-	farwritetext ErinBattleRematchText
 	promptbutton
 	end
 
@@ -57,7 +51,6 @@ PhoneScript_HangUpText_Female:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_ERIN, .Erin
 
 .Beth:
 	farwritetext BethHangUpText
@@ -65,10 +58,6 @@ PhoneScript_HangUpText_Female:
 
 .Reena:
 	farwritetext ReenaHangUpText
-	end
-
-.Erin:
-	farwritetext ErinHangUpText
 	end
 
 PhoneScript_FoundItem_Male:

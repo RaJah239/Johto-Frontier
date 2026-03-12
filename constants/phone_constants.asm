@@ -9,7 +9,6 @@
 	const PHONE_COOLTRAINERF_BETH
 	const PHONE_BIRDKEEPER_JOSE
 	const PHONE_COOLTRAINERF_REENA
-	const PHONE_PICNICKER_ERIN
 DEF NUM_PHONE_CONTACTS EQU const_value - 1
 
 ; SpecialPhoneCallList indexes (see data/phone/special_calls.asm)

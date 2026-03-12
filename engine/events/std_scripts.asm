@@ -741,16 +741,12 @@ AskNumberFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_ERIN, .Erin
 
 .Beth:
 	farwritetext BethAskNumberText
 	end
 .Reena:
 	farwritetext ReenaAskNumberText
-	end
-.Erin:
-	farwritetext ErinAskNumberText
 	end
 
 RegisteredNumberFScript:
@@ -764,7 +760,6 @@ NumberAcceptedFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_ERIN, .Erin
 
 .Beth:
 	farwritetext BethNumberAcceptedText
@@ -776,17 +771,11 @@ NumberAcceptedFScript:
 	waitbutton
 	closetext
 	end
-.Erin:
-	farwritetext ErinNumberAcceptedText
-	waitbutton
-	closetext
-	end
 
 NumberDeclinedFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_ERIN, .Erin
 
 .Beth:
 	farwritetext BethNumberDeclinedText
@@ -798,17 +787,11 @@ NumberDeclinedFScript:
 	waitbutton
 	closetext
 	end
-.Erin:
-	farwritetext ErinNumberDeclinedText
-	waitbutton
-	closetext
-	end
 
 RematchFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_ERIN, .Erin
 
 .Beth:
 	farwritetext BethRematchText
@@ -817,11 +800,6 @@ RematchFScript:
 	end
 .Reena:
 	farwritetext ReenaRematchText
-	waitbutton
-	closetext
-	end
-.Erin:
-	farwritetext ErinRematchText
 	waitbutton
 	closetext
 	end
@@ -834,7 +812,6 @@ PackFullFScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERF_BETH, .Beth
 	ifequal PHONE_COOLTRAINERF_REENA, .Reena
-	ifequal PHONE_PICNICKER_ERIN, .Erin
 
 .Beth
 	farwritetext BethPackFullText
@@ -847,20 +824,9 @@ PackFullFScript:
 	waitbutton
 	closetext
 	end
-.Erin:
-	farwritetext ErinPackFullText
-	waitbutton
-	closetext
-	end
 
 RematchGiftFScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_PICNICKER_ERIN, .Erin
-
-.Erin:
-	opentext
-	farwritetext ErinRematchGiftText
-	promptbutton
 	end
 
 GymStatue1Script:

@@ -279,12 +279,6 @@ INCLUDE "engine/gfx/load_pics.asm"
 INCLUDE "data/pokemon/base_stats.asm"
 INCLUDE "data/pokemon/names.asm"
 
-
-SECTION "Crystal Phone Text", ROMX
-
-INCLUDE "data/phone/text/erin_caller.asm"
-
-
 SECTION "bank20", ROMX
 
 INCLUDE "engine/overworld/player_movement.asm"
@@ -344,7 +338,6 @@ INCLUDE "engine/phone/scripts/bike_shop.asm"
 SECTION "Phone Text", ROMX
 
 INCLUDE "data/phone/text/tully_overworld.asm"
-INCLUDE "data/phone/text/erin_overworld.asm"
 
 
 SECTION "bank2E", ROMX
@@ -369,7 +362,6 @@ INCLUDE "engine/phone/scripts/gaven.asm"
 INCLUDE "engine/phone/scripts/beth.asm"
 INCLUDE "engine/phone/scripts/jose.asm"
 INCLUDE "engine/phone/scripts/reena.asm"
-INCLUDE "engine/phone/scripts/erin.asm"
 INCLUDE "engine/phone/scripts/generic_callee.asm"
 INCLUDE "engine/events/trainer_scripts.asm"
 INCLUDE "engine/events/bug_contest/display_stats.asm"
@@ -558,7 +550,6 @@ INCLUDE "data/phone/text/gaven_callee.asm"
 INCLUDE "data/phone/text/beth_callee.asm"
 INCLUDE "data/phone/text/jose_callee.asm"
 INCLUDE "data/phone/text/reena_callee.asm"
-INCLUDE "data/phone/text/erin_callee.asm"
 INCLUDE "data/phone/text/unused.asm"
 
 
