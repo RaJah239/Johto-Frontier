@@ -645,13 +645,9 @@ BugContestResults_CopyContestantsToResults:
 AskNumberMScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
-	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 
 .Gaven:
 	farwritetext GavenAskNumberText
-	end
-.Jose:
-	farwritetext JoseAskNumberText
 	end
 
 RegisteredNumberMScript:
@@ -664,15 +660,9 @@ RegisteredNumberMScript:
 NumberAcceptedMScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
-	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 
 .Gaven:
 	farwritetext GavenNumberAcceptedText
-	waitbutton
-	closetext
-	end
-.Jose:
-	farwritetext JoseNumberAcceptedText
 	waitbutton
 	closetext
 	end
@@ -680,15 +670,9 @@ NumberAcceptedMScript:
 NumberDeclinedMScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
-	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 
 .Gaven:
 	farwritetext GavenNumberDeclinedText
-	waitbutton
-	closetext
-	end
-.Jose:
-	farwritetext JoseNumberDeclinedText
 	waitbutton
 	closetext
 	end
@@ -696,7 +680,6 @@ NumberDeclinedMScript:
 RematchMScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
-	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 
 .Gaven:
 	farwritetext GavenRematchText
@@ -704,35 +687,16 @@ RematchMScript:
 	closetext
 	end
 
-.Jose:
-	farwritetext JoseRematchText
-	waitbutton
-	closetext
-	end
-
 GiftMScript:
 	readvar VAR_CALLERID
-	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-
-.Jose:
-	farwritetext JoseGiftText
-	promptbutton
 	end
-
 
 PackFullMScript:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
-	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 
 .Gaven
 	farwritetext GavenPackFullText
-	waitbutton
-	closetext
-	end
-
-.Jose:
-	farwritetext JosePackFullText
 	waitbutton
 	closetext
 	end

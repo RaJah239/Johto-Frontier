@@ -9,14 +9,9 @@ PhoneScript_WantsToBattle_Female:
 PhoneScript_RematchText_Male:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
-	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 
 .Gaven:
 	farwritetext GavenBattleRematchText
-	promptbutton
-	end
-.Jose:
-	farwritetext JoseBattleRematchText
 	promptbutton
 	end
 
@@ -38,13 +33,9 @@ PhoneScript_RematchText_Female:
 PhoneScript_HangUpText_Male:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
-	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
 
 .Gaven:
 	farwritetext GavenHangUpText
-	end
-.Jose:
-	farwritetext JoseHangUpText
 	end
 
 PhoneScript_HangUpText_Female:
@@ -62,10 +53,6 @@ PhoneScript_HangUpText_Female:
 
 PhoneScript_FoundItem_Male:
 	readvar VAR_CALLERID
-	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-
-.Jose:
-	farwritetext JoseFoundItemText
 	end
 
 PhoneScript_FoundItem_Female:

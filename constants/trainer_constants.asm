@@ -119,10 +119,6 @@ DEF KRIS EQU __trainer_class__
 	const JACK
 	const ALAN
 	const CHAD
-	const ALAN2
-	const ALAN3
-	const ALAN4
-	const ALAN5
 	const LIAM
 
 	trainerclass BIRD_KEEPER ; 18
@@ -133,10 +129,8 @@ DEF KRIS EQU __trainer_class__
 	const TOBY
 	const DENIS
 	const VANCE
-	const JOSE1
+	const JOSE
 	const PETER
-	const JOSE2
-	const JOSE3
 
 	trainerclass LASS ; 19
 	const CARRIE

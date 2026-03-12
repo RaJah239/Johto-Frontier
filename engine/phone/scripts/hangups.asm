@@ -8,11 +8,6 @@ BethHangUpScript:
 	promptbutton
 	sjump PhoneScript_HangUpText_Female
 
-JoseHangUpScript:
-	farwritetext JoseHaventGottenItemYetText
-	promptbutton
-	sjump PhoneScript_HangUpText_Male
-
 ReenaForwardScript:
 	farwritetext ReenaForwardText
 	promptbutton

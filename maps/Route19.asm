@@ -17,7 +17,7 @@ Route19_MapEvents:
 	object_event 72, 10, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerCooltrainerfReena, -1
 	object_event 37,  6, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 2, TrainerCooltrainerfMegan, -1
 	object_event 65,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerPsychicGilbert, -1
-	object_event 58, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerBirdKeeperJose2, -1
+	object_event 58, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_GENERICTRAINER, 3, TrainerBirdKeeperJose, -1
 	object_event 60, 12, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route19TMSolarbeam, EVENT_ROUTE_19_TM_SOLARBEAM
 	object_event 53, 12, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route19RareCandy, EVENT_ROUTE_19_RARE_CANDY
 	object_event 21, 10, SPRITE_FISHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route19FisherText, -1
@@ -104,100 +104,27 @@ TrainerPsychicGilbert:
 	text "You're too much!"
 	done
 
-TrainerBirdKeeperJose2:
-	trainer BIRD_KEEPER, JOSE2, EVENT_BEAT_BIRD_KEEPER_JOSE2, BirdKeeperJose2SeenText, BirdKeeperJose2BeatenText, 0, .Script
+TrainerBirdKeeperJose:
+	generictrainer BIRD_KEEPER, JOSE, EVENT_BEAT_BIRD_KEEPER_JOSE, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_BIRDKEEPER_JOSE
-	opentext
-	checkflag ENGINE_JOSE_HAS_STAR_PIECE
-	iftrue .HasStarPiece
-	checkflag ENGINE_JOSE_READY_FOR_REMATCH
-	iftrue .WantsBattle
-	checkcellnum PHONE_BIRDKEEPER_JOSE
-	iftrue .NumberAccepted
-	checkevent EVENT_JOSE_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	writetext BirdKeeperJose2AfterBattleText
-	promptbutton
-	setevent EVENT_JOSE_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .AskForNumber
+.AfterText
+	text "Bird Keepers like"
+	line "me mimic bird"
+	cont "whistles to com-"
+	cont "mand #mon."
 
-.AskedAlready:
-	scall .AskNumber
-.AskForNumber:
-	askforphonenumber PHONE_BIRDKEEPER_JOSE
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, BIRD_KEEPER, JOSE2
-	scall .RegisteredNumber
-	sjump .NumberAccepted
+	para "Yes, we know we're"
+	line "weirdos."
+	done
 
-.WantsBattle:
-	scall .Rematch
-	winlosstext BirdKeeperJose2BeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight2
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight1
-	loadtrainer BIRD_KEEPER, JOSE2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_JOSE_READY_FOR_REMATCH
-	end
+.SeenText
+	text "Tweet! Tweet!"
+	line "Tetweet!"
+	done
 
-.LoadFight1:
-	loadtrainer BIRD_KEEPER, JOSE1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_JOSE_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer BIRD_KEEPER, JOSE3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_JOSE_READY_FOR_REMATCH
-	end
-
-.HasStarPiece:
-	scall .Gift
-	verbosegiveitem STAR_PIECE
-	iffalse .NoRoom
-	clearflag ENGINE_JOSE_HAS_STAR_PIECE
-	closetext
-	end
-
-.NoRoom:
-	sjump .PackFull
-
-.AskNumber:
-	jumpstd AskNumberMScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberMScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedMScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedMScript
-	end
-
-.Rematch:
-	jumpstd RematchMScript
-	end
-
-.Gift:
-	jumpstd GiftMScript
-	end
-
-.PackFull:
-	jumpstd PackFullMScript
-	end
+.BeatenText
+	text "Tweet!"
+	done
 
 TrainerCooltrainermBlake:
 	generictrainer COOLTRAINERM, BLAKE, EVENT_BEAT_COOLTRAINERM_BLAKE, .SeenText, .BeatenText
@@ -381,22 +308,7 @@ CooltrainerfReenaAfterBattleText:
 	line "either."
 	done
 
-BirdKeeperJose2SeenText:
-	text "Tweet! Tweet!"
-	line "Tetweet!"
-	done
 
-BirdKeeperJose2BeatenText:
-	text "Tweet!"
-	done
-
-BirdKeeperJose2AfterBattleText:
-	text "BIRD KEEPERS like"
-	line "me mimic bird"
-
-	para "whistles to com-"
-	line "mand #MON."
-	done
 
 CooltrainerfReenaText_GiveMoonStoneAfterBattle:
 	text "I'm in a giving"

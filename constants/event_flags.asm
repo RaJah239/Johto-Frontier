@@ -438,7 +438,7 @@
 	const_skip
 	const EVENT_BETH_ASKED_FOR_PHONE_NUMBER
 	const_skip
-	const EVENT_JOSE_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const EVENT_REENA_ASKED_FOR_PHONE_NUMBER
 	const_skip
@@ -690,10 +690,10 @@
 	const_skip
 	const EVENT_BEAT_BIRD_KEEPER_JOSE
 	const EVENT_BEAT_BIRD_KEEPER_PETER
-	const EVENT_BEAT_BIRD_KEEPER_JOSE2
 	const_skip
 	const_skip
-	const EVENT_BEAT_BIRD_KEEPER_JOSE3
+	const_skip
+	const_skip
 	const_skip
 	const_skip
 ; Boarder
