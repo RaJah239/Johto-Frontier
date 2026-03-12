@@ -1,3 +1,16 @@
+WillsRoom_MapEvents:
+	def_warp_events
+	warp_event  5, 17, INDIGO_PLATEAU_POKECENTER_1F, 4
+	warp_event  4,  2, KOGAS_ROOM, 1
+	warp_event  5,  2, KOGAS_ROOM, 2
+
+	def_coord_events
+
+	def_bg_events
+
+	def_object_events
+	object_event  5,  7, SPRITE_WILL, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, WillScript_Battle, -1
+
 	object_const_def
 	const WILLSROOM_WILL
 
@@ -11,8 +24,6 @@ WillsRoom_MapScripts:
 
 WillsRoomLockDoorScene:
 	sdefer WillsRoomDoorLocksBehindYouScript
-	end
-
 WillsRoomNoopScene:
 	end
 
@@ -40,37 +51,6 @@ WillsRoomDoorLocksBehindYouScript:
 	waitsfx
 	end
 
-WillScript_Battle:
-	faceplayer
-	opentext
-	checkevent EVENT_BEAT_ELITE_4_WILL
-	iftrue WillScript_AfterBattle
-	writetext WillScript_WillBeforeText
-	waitbutton
-	closetext
-	winlosstext WillScript_WillBeatenText, 0
-	loadtrainer WILL, WILL1
-	startbattle
-	reloadmapafterbattle
-	setevent EVENT_BEAT_ELITE_4_WILL
-	opentext
-	writetext WillScript_WillDefeatText
-	waitbutton
-	closetext
-	playsound SFX_ENTER_DOOR
-	changeblock 4, 2, $16 ; open door
-	refreshmap
-	closetext
-	setevent EVENT_WILLS_ROOM_EXIT_OPEN
-	waitsfx
-	end
-
-WillScript_AfterBattle:
-	writetext WillScript_WillDefeatText
-	waitbutton
-	closetext
-	end
-
 WillsRoom_EnterMovement:
 	step UP
 	step UP
@@ -78,30 +58,52 @@ WillsRoom_EnterMovement:
 	step UP
 	step_end
 
-WillScript_WillBeforeText:
-	text "Welcome to #MON"
-	line "LEAGUE, <PLAYER>."
+WillScript_Battle:
+	faceplayeropentext
+	checkevent EVENT_BEAT_ELITE_4_WILL
+	iftrue WillScript_AfterBattle
+	writethistext
+		text "Welcome to #mon"
+		line "League, <PLAYER>."
 
-	para "Allow me to intro-"
-	line "duce myself. I am"
-	cont "WILL."
+		para "Allow me to intro-"
+		line "duce myself. I am"
+		cont "Will."
 
-	para "I have trained all"
-	line "around the world,"
+		para "I have trained all"
+		line "around the world,"
+		cont "making my psychic"
+		cont "#mon powerful."
 
-	para "making my psychic"
-	line "#MON powerful."
+		para "And, at last, I've"
+		line "been accepted into"
+		cont "the Elite Four."
 
-	para "And, at last, I've"
-	line "been accepted into"
-	cont "the ELITE FOUR."
+		para "I can only keep"
+		line "getting better!"
 
-	para "I can only keep"
-	line "getting better!"
+		para "Losing is not an"
+		line "option!"
+		done
+	waitclosetext
+	winlosstext WillScript_WillBeatenText, 0
+	loadtrainer WILL, WILL1
+	startbattle
+	reloadmapafterbattle
+	setevent EVENT_BEAT_ELITE_4_WILL
+	opentext
+	writetext WillScript_WillDefeatText
+	waitclosetext
+	playsound SFX_ENTER_DOOR
+	changeblock 4, 2, $16 ; open door
+	refreshmap
+	setevent EVENT_WILLS_ROOM_EXIT_OPEN
+	waitsfx
+	endtext
 
-	para "Losing is not an"
-	line "option!"
-	done
+WillScript_AfterBattle:
+	writetext WillScript_WillDefeatText
+	waitendtext
 
 WillScript_WillBeatenText:
 	text "I… I can't…"
@@ -115,26 +117,11 @@ WillScript_WillDefeatText:
 
 	para "I will continue"
 	line "battling until I"
-
-	para "stand above all"
-	line "trainers!"
+	cont "stand above all"
+	cont "trainers!"
 
 	para "Now, <PLAYER>, move"
 	line "on and experience"
-
-	para "the true ferocity"
-	line "of the ELITE FOUR."
+	cont "the true ferocity"
+	cont "of the Elite Four."
 	done
-
-WillsRoom_MapEvents:
-	def_warp_events
-	warp_event  5, 17, INDIGO_PLATEAU_POKECENTER_1F, 4
-	warp_event  4,  2, KOGAS_ROOM, 1
-	warp_event  5,  2, KOGAS_ROOM, 2
-
-	def_coord_events
-
-	def_bg_events
-
-	def_object_events
-	object_event  5,  7, SPRITE_WILL, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, WillScript_Battle, -1
