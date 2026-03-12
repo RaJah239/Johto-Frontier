@@ -121,7 +121,7 @@ ROMX $27
 ROMX $28
 	"Phone Scripts 1"
 ROMX $29
-	"Phone Text"
+; used to be "Phone Text"
 ROMX $2a
 	"Map Blocks 1"
 ROMX $2b

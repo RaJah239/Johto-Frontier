@@ -36,7 +36,7 @@ MomPhoneNewBarkText:
 	text_ram wStringBuffer3
 	text "?"
 
-	para "Come see your MOM"
+	para "Come see your Mom"
 	line "sometime!"
 	done
 
@@ -57,7 +57,7 @@ MomOtherAreaText:
 	text "?"
 
 	para "Good luck on your"
-	line "#MON quest!"
+	line "#mon quest!"
 	done
 
 MomDeterminedText:
@@ -66,9 +66,8 @@ MomDeterminedText:
 
 	para "But, <PLAYER>, I"
 	line "know you're really"
-
-	para "determined. You'll"
-	line "be OK, right?"
+	cont "determined. You'll"
+	cont "be OK, right?"
 	done
 
 MomCheckBalanceText:
@@ -89,9 +88,8 @@ MomImportantToSaveText:
 MomYoureNotSavingText:
 	text "Oh, <PLAYER>,"
 	line "you're not saving"
-
-	para "any money. Would"
-	line "you like to save?"
+	cont "any money. Would"
+	cont "you like to save?"
 	done
 
 MomYouveSavedText:
@@ -124,7 +122,7 @@ MomPhoneNoPokemonText:
 	text "Hello?"
 
 	para "Oh, hi, <PLAYER>!"
-	line "Wasn't PROF.ELM"
+	line "Wasn't Prof.Elm"
 	cont "waiting for you?"
 	done
 

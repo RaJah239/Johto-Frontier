@@ -17,48 +17,42 @@ ElmPhoneDiscoveredPokerusText:
 
 	para "Apparently there's"
 	line "something called"
-
-	para "#RUS that in-"
-	line "fects #MON."
+	cont "#rus that in-"
+	cont "fects #mon."
 
 	para "Yes, it's like a"
 	line "virus, so it's"
-	cont "called #RUS."
+	cont "called #rus."
 
 	para "It has a chance to"
 	line "infect your party"
-
-	para "members after each"
-	line "battle."
+	cont "members after each"
+	cont "battle."
 
 	para "It doubles the"
-	line "EFFORT VALUES"
+	line "Effort Values"
+	cont "gained in battle"
+	cont "and nothing else."
 
-	para "gained in battle"
-	line "and nothing else."
-
-	para "so it's nothing to"
+	para "So it's nothing to"
 	line "worry about and" 
 	cont "quite beneficial!"
 	
 	para "It goes away in"
 	line "1 to 4 days but if"
-	
-	para "you store the"
-	line "infected #MON"
-	
-	para "overnight in your"
-	line "PC, it'll persist."
+	cont "you store the"
+	cont "infected #mon"
+	cont "overnight in your"
+	cont "PC, it'll persist."
 
 	para "I suggest you"
 	line "always keep an"
-
-	para "infected #MON"
-	line "in your PC."
+	cont "infected #mon"
+	cont "in your PC."
 
 	para "Lasty, a healed"
-	line "#MON can never"
-	cont "get back #RUS."
+	line "#mon can never"
+	cont "get back #rus."
 
 	para "I'll call you if"
 	line "I learn more. Bye!"
@@ -71,7 +65,7 @@ ElmPhoneGiftText:
 	line "here for you."
 
 	para "Could you swing by"
-	line "my LAB?"
+	line "my Lab?"
 
 	para "See you later!"
 	done

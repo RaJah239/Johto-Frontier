@@ -2,20 +2,19 @@ BillPhoneNewlyFullText:
 	text "Good day!"
 
 	para "This is the #-"
-	line "MON STORAGE SYSTEM"
+	line "Mon Storage System"
 
-	para "ADMINISTRATION"
-	line "SERVICE."
+	para "Administration"
+	line "Service."
 
-	para "That last #MON"
+	para "That last #mon"
 	line "you sent filled"
-	cont "your final BOX up."
+	cont "your final Box up."
 
 	para "You'll have to"
 	line "release some if"
-
-	para "you want to catch"
-	line "more #MON."
+	cont "you want to catch"
+	cont "more #mon."
 
 	para "Bye now!"
 	done

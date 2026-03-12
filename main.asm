@@ -332,12 +332,6 @@ SECTION "Phone Scripts 1", ROMX
 INCLUDE "engine/phone/scripts/generic_caller.asm"
 INCLUDE "engine/phone/scripts/bike_shop.asm"
 
-
-SECTION "Phone Text", ROMX
-
-INCLUDE "data/phone/text/tully_overworld.asm"
-
-
 SECTION "bank2E", ROMX
 
 INCLUDE "engine/events/map_name_sign.asm"
