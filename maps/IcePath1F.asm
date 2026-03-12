@@ -1,22 +1,3 @@
-	object_const_def
-	const ICEPATH1F_POKE_BALL1
-	const ICEPATH1F_POKE_BALL2
-	const ICEPATH1F_POKE_BALL3
-
-IcePath1F_MapScripts:
-	def_scene_scripts
-
-	def_callbacks
-
-IcePath1FHMWaterfall:
-	itemball MILOTIC_CALL
-
-IcePath1FPPUp:
-	itemball PP_UP
-
-IcePath1FProtein:
-	itemball PROTEIN
-
 IcePath1F_MapEvents:
 	def_warp_events
 	warp_event  4, 19, ROUTE_16, 1
@@ -32,3 +13,20 @@ IcePath1F_MapEvents:
 	object_event 31,  7, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IcePath1FHMWaterfall, EVENT_GOT_MILOTIC_CALL
 	object_event 32, 23, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IcePath1FPPUp, EVENT_ICE_PATH_1F_PP_UP
 	object_event 35,  9, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, IcePath1FProtein, EVENT_ICE_PATH_1F_PROTEIN
+
+	object_const_def
+	const ICEPATH1F_POKE_BALL1
+	const ICEPATH1F_POKE_BALL2
+	const ICEPATH1F_POKE_BALL3
+
+IcePath1F_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
+
+IcePath1FHMWaterfall:
+	itemball MILOTIC_CALL
+IcePath1FPPUp:
+	itemball PP_UP
+IcePath1FProtein:
+	itemball PROTEIN
