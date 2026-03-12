@@ -1,91 +1,80 @@
+NurseJoyTrainingAcademy_MapEvents:
+	def_warp_events
+	warp_event  4,  9, ROUTE_21, 5
+	warp_event  5,  9, ROUTE_21, 5
+
+	def_coord_events
+
+	def_bg_events
+
+	def_object_events
+	porygonpc_event  8,  1, PAL_NPC_RED
+	object_event  4,  1, SPRITE_NURSE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, NurseJoyTrainingNurseJoyScript, -1
+	object_event  9,  4, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, NurseJoyTraininCooltrainerMText, -1
+	object_event  1,  4, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, NurseJoyTraininCooltrainerFText, -1
+	object_event  5,  1, SPRITE_BLISSEY, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, NurseJoyTrainingBlisseyScript, -1
+
 	object_const_def
-	const NURSEJOYTRAINING_BLISSEY
 	const NURSEJOYTRAINING_PORYGON_PC
 	const NURSEJOYTRAINING_COOLTRAINER_M
 	const NURSEJOYTRAINING_COOLTRAINER_F
 	const NURSEJOYTRAINING_NURSE_JOY
+	const NURSEJOYTRAINING_BLISSEY
 
 NurseJoyTrainingAcademy_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
 
-NurseJoyTrainingBlisseyScript:
-	faceplayer
-	reanchormap
-	pokepic BLISSEY
-	cry BLISSEY
-	waitsfx
-	closepokepic
-	refreshmap
-	opentext
-	writetext BlisseyCryText
-	pause 20
-	closetext
-	end
-
-BlisseyCryText:
-	text "Blissey: Seyyyy!"
-	done
-
-NurseJoyTrainingPorygonPCScript:
-	jumpstd PorygonPCScript
-
-NurseJoyTrainingCooltrainerMScript:
-	jumptextfaceplayer NurseJoyTraininCooltrainerMText
-
-NurseJoyTraininCooltrainerMText:
-	text "These battles are"
-	line "tough!"
-
-	para "I'm taking a break."
-	done
-
-NurseJoyTrainingCooltrainerFScript:
-	jumptextfaceplayer NurseJoyTraininCooltrainerFText
-
-NurseJoyTraininCooltrainerFText:
-	text "This academy is"
-	line "great. It's too"
-
-	para "bad we can't earn"
-	line "money here but the"
-
-	para "good news is that"
-	line "we don't loose"
-	cont "money either."
-	done
-
 NurseJoyTrainingNurseJoyScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkevent EVENT_MET_NURSE_JOY
 	iftrue .TakeOnJoysChallenge
-	writetext NurseJoyMeetFirstTimeText
+	writethistext
+		text "Good day to you"
+		line "and welcome to my"
+		cont "training camp."
+
+		para "You may battle ag-"
+		line "ainst my team of"
+		cont "Blisseys to your"
+		cont "heart's content."
+		
+		para "They're great for"
+		line "experience!"
+
+		para "Your #mon are"
+		line "healed before and"
+		cont "after our bouts,"
+		cont "in addition to no"
+		cont "whiteouts!"
+		
+		para "Select one of my"
+		line "parties and start."
+
+		para "How about it?"
+		done
 	setevent EVENT_MET_NURSE_JOY
 	yesorno
-	iffalse .done1
+	iffalse_endtext
 	sjump .FirstTimeChallenge
-.done1
-	closetext
-	end
 
 .TakeOnJoysChallenge
-	writetext NurseJoysReadyForAChallengeText
+	writethistext
+		text "Ready for some"
+		line "training?"
+		done
 	yesorno
-	iffalse .done2
+	iffalse_endtext
 .FirstTimeChallenge
 	special HealParty
 	special BackupPartyHeldItems
 	special SaveMusic
-	writetext NurseJoysTrainingChallengeText
+	writethistext
+		text "Choose a team of"
+		line "mine to battle."
+		done
 	winlosstext NurseJoyBeatenText, 0
-	sjump .NurseJoysTeamSelector
-.done2
-	closetext
-	end
-
-.NurseJoysTeamSelector
 	loadmenu .NurseJoysTeamSelectorMenuHeader
 	_2dmenu
 	closewindow
@@ -94,8 +83,7 @@ NurseJoyTrainingNurseJoyScript:
 	ifequal 3, .level30
 	ifequal 4, .level40
 	ifequal 5, .level50
-	closetext
-	end
+	endtext
 
 .level10:
 	loadtrainer NURSE, NURSE1
@@ -119,10 +107,10 @@ NurseJoyTrainingNurseJoyScript:
 	startbattle
 	ifequal LOSE, .lose
 	reloadmapafterbattle
-	opentext
-	writetext NurseJoyAfterBattleText
-	waitbutton
-	closetext
+	showthistext
+		text "Keep coming back."
+		line "I'm here for you!"
+		done
 	special HealParty
 	special RestorePartyHeldItems
 	special RestoreMusic
@@ -131,11 +119,10 @@ NurseJoyTrainingNurseJoyScript:
 .lose
     special HealParty
     reloadmap
-    opentext
-    writetext NurseJoyWinAfterBattleText
-    waitbutton
-    closetext
-    end
+    jumpthistext
+		text "Aww… You'll get"
+		line "me next time…"
+		done
 
 .NurseJoysTeamSelectorMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -158,67 +145,38 @@ NurseJoyTrainingNurseJoyScript:
 	db "Lv50@"
 	db "Quit@"
 
-NurseJoyMeetFirstTimeText:
-	text "Good day to you"
-	line "and welcome to my"
-	cont "training camp."
-
-	para "You may battle ag-"
-	line "ainst my team of"
-	cont "Blisseys to your"
-	cont "heart's content."
-	
-	para "They're great for"
-	line "experience!"
-
-	para "Your #mon are"
-	line "healed before and"
-	cont "after our bouts,"
-	cont "in addition to no"
-	cont "whiteouts!"
-	
-	para "Select one of my"
-	line "parties and start."
-
-	para "How about it?"
-	done
-
-NurseJoysReadyForAChallengeText:
-	text "Ready for some"
-	line "training?"
-	done
-
-NurseJoysTrainingChallengeText:
-	text "Choose a team of"
-	line "mine to battle."
-	done
-
 NurseJoyBeatenText:
 	text "Good job trainer!"
 	done
 
-NurseJoyAfterBattleText:
-	text "Keep coming back."
-	line "I'm here for you!"
+NurseJoyTraininCooltrainerMText:
+	text "These battles are"
+	line "tough!"
+
+	para "I'm taking a break."
 	done
 
-NurseJoyWinAfterBattleText:
-	text "Aww… You'll get"
-	line "me next time…"
+NurseJoyTraininCooltrainerFText:
+	text "This academy is"
+	line "great. It's too"
+	cont "bad we can't earn"
+	cont "money here but the"
+	cont "good news is that"
+	cont "we don't loose"
+	cont "money either."
 	done
 
-NurseJoyTrainingAcademy_MapEvents:
-	def_warp_events
-	warp_event  4,  9, ROUTE_21, 5
-	warp_event  5,  9, ROUTE_21, 5
-
-	def_coord_events
-
-	def_bg_events
-
-	def_object_events
-	object_event  5,  1, SPRITE_BLISSEY, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, NurseJoyTrainingBlisseyScript, -1
-	object_event  8,  1, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, NurseJoyTrainingPorygonPCScript, -1
-	object_event  9,  4, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, NurseJoyTrainingCooltrainerMScript, -1
-	object_event  1,  4, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, NurseJoyTrainingCooltrainerFScript, -1
-	object_event  4,  1, SPRITE_NURSE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, NurseJoyTrainingNurseJoyScript, -1
+NurseJoyTrainingBlisseyScript:
+	setval BLISSEY
+	special SetMonAsSeen
+	isfieldactionssettoquick
+	iftrue .skipthis
+	reanchormap
+	pokepic BLISSEY
+	cry BLISSEY
+	waitbutton
+	closepokepic
+.skipthis
+	jumpthistext
+		text "Blissey: Seyyyy!"
+		done
