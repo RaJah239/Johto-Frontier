@@ -129,17 +129,13 @@ VioletCityRareCandy:
 
 VioletCityBerryTree1:
 	setval PRZCUREBERRY
-	setlasttalked VIOLETCITY_BERRY_TREE1
 	jumpstd BerryOrFruitScript
 VioletCityBerryTree2:
 	setval BURNT_BERRY
-	setlasttalked VIOLETCITY_BERRY_TREE2
 	jumpstd BerryOrFruitScript
 VioletCityApricornTree1:
 	setval WHT_APRICORN
-	setlasttalked VIOLETCITY_APRICORN_TREE1
 	jumpstd BerryOrFruitScript
 VioletCityApricornTree2:
 	setval BLK_APRICORN
-	setlasttalked VIOLETCITY_APRICORN_TREE2
 	jumpstd BerryOrFruitScript

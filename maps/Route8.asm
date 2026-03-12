@@ -343,13 +343,10 @@ Route8TrainerTips2Text:
 
 Route8BerryTree1:
 	setval ICE_BERRY
-	setlasttalked ROUTE8_BERRY_TREE1
 	jumpstd BerryOrFruitScript
 Route8BerryTree2:
 	setval BERRY
-	setlasttalked ROUTE8_BERRY_TREE2
 	jumpstd BerryOrFruitScript
 Route8ApricornTree1:
 	setval PNK_APRICORN
-	setlasttalked ROUTE8_APRICORN_TREE1
 	jumpstd BerryOrFruitScript

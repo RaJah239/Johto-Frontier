@@ -317,17 +317,13 @@ Route7TMRollout:
 
 Route7BerryTree1:
 	setval MYSTERYBERRY
-	setlasttalked ROUTE7_BERRY_TREE1
 	jumpstd BerryOrFruitScript
 Route7ApricornTree1:
 	setval BLU_APRICORN
-	setlasttalked ROUTE7_APRICORN_TREE1
 	jumpstd BerryOrFruitScript
 Route7ApricornTree2:
 	setval YLW_APRICORN
-	setlasttalked ROUTE7_APRICORN_TREE2
 	jumpstd BerryOrFruitScript
 Route7ApricornTree3:
 	setval RED_APRICORN
-	setlasttalked ROUTE7_APRICORN_TREE3
 	jumpstd BerryOrFruitScript

@@ -260,9 +260,7 @@ Route11Miltank:
 
 Route11BerryTree1:
 	setval MINT_BERRY
-	setlasttalked ROUTE11_BERRY_TREE1
 	jumpstd BerryOrFruitScript
 Route11ApricornTree1:
 	setval GRN_APRICORN
-	setlasttalked ROUTE11_APRICORN_TREE1
 	jumpstd BerryOrFruitScript

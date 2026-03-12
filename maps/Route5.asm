@@ -83,21 +83,16 @@ Route5SignText:
 
 Route5BerryTree1:
 	setval PSNCUREBERRY
-	setlasttalked ROUTE5_BERRY_TREE1
 	jumpstd BerryOrFruitScript
 Route5BerryTree2:
 	setval MINT_BERRY
-	setlasttalked ROUTE5_BERRY_TREE2
 	jumpstd BerryOrFruitScript
 Route5ApricornTree1:
 	setval RED_APRICORN
-	setlasttalked ROUTE5_APRICORN_TREE1
 	jumpstd BerryOrFruitScript
 Route5ApricornTree2:
 	setval BLU_APRICORN
-	setlasttalked ROUTE5_APRICORN_TREE2
 	jumpstd BerryOrFruitScript
 Route5ApricornTree3:
 	setval GRN_APRICORN
-	setlasttalked ROUTE5_APRICORN_TREE3
 	jumpstd BerryOrFruitScript

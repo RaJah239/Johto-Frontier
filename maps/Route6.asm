@@ -409,9 +409,7 @@ Route6Nugget:
 
 Route6BerryTree:
 	setval MIRACLEBERRY
-	setlasttalked ROUTE6_BERRY_TREE
 	jumpstd BerryOrFruitScript
 Route6ApricornTree:
 	setval WHT_APRICORN
-	setlasttalked ROUTE6_APRICORN_TREE
 	jumpstd BerryOrFruitScript

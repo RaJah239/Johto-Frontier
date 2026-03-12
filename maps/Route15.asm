@@ -227,9 +227,7 @@ Route15MaxEther:
 
 Route15BerryTree1:
 	setval BITTER_BERRY
-	setlasttalked ROUTE15_BERRY_TREE1
 	jumpstd BerryOrFruitScript
 Route15ApricornTree1:
 	setval PNK_APRICORN
-	setlasttalked ROUTE15_APRICORN_TREE1
 	jumpstd BerryOrFruitScript

@@ -184,13 +184,10 @@ Route9SignText:
 
 Route9ApricornTree1:
 	setval RED_APRICORN
-	setlasttalked ROUTE9_APRICORN_TREE1
 	jumpstd BerryOrFruitScript
 Route9ApricornTree2:
 	setval BLU_APRICORN
-	setlasttalked ROUTE9_APRICORN_TREE2
 	jumpstd BerryOrFruitScript
 Route9ApricornTree3:
 	setval YLW_APRICORN
-	setlasttalked ROUTE9_APRICORN_TREE3
 	jumpstd BerryOrFruitScript

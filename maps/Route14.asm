@@ -182,13 +182,10 @@ Route14SuperPotion:
 
 Route14ApricornTree1:
 	setval PNK_APRICORN
-	setlasttalked ROUTE14_APRICORN_TREE1
 	jumpstd BerryOrFruitScript
 Route14ApricornTree2:
 	setval GRN_APRICORN
-	setlasttalked ROUTE14_APRICORN_TREE2
 	jumpstd BerryOrFruitScript
 Route14ApricornTree3:
 	setval YLW_APRICORN
-	setlasttalked ROUTE14_APRICORN_TREE3
 	jumpstd BerryOrFruitScript

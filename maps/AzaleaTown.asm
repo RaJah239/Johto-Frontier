@@ -201,9 +201,7 @@ AzaleaTownSlowpokeScript:
 
 AzaleaTownApricornTree1:
 	setval WHT_APRICORN
-	setlasttalked AZALEATOWN_APRICORN_TREE1
 	jumpstd BerryOrFruitScript
 AzaleaTownApricornTree2:
 	setval BLK_APRICORN
-	setlasttalked AZALEATOWN_APRICORN_TREE2
 	jumpstd BerryOrFruitScript

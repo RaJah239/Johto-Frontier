@@ -198,9 +198,7 @@ Route10TrainerTipsText:
 
 Route10BerryTree1:
 	setval BURNT_BERRY
-	setlasttalked ROUTE10_BERRY_TREE1
 	jumpstd BerryOrFruitScript
 Route10BerryTree2:
 	setval MYSTERYBERRY
-	setlasttalked ROUTE10_BERRY_TREE2
 	jumpstd BerryOrFruitScript
