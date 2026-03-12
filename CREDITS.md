@@ -81,6 +81,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - French Orange - Maxima's trainer sprite
 
 # Other graphics
+- Th3Element05 - Alphabetical and 0-9 fonts
 - Timkun55 - Male and female bags
 - Sour Apple - sun, rain and sandstorm icons
 - Sour Apple - Wooper footprint
@@ -149,3 +150,4 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - Alice-Not-Waifu: https://github.com/Alice-Not-Waifu/pokecrystal-wrenched
 - TriteHexagon: https://github.com/TriteHexagon
 - PurnPum: https://github.com/PurnPum
+- Th3Element05 on Discord

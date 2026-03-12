@@ -6,6 +6,7 @@ DEF para   EQUS "db \"<PARA>\","  ; Start a new paragraph.
 DEF cont   EQUS "db \"<CONT>\","  ; Scroll to the next line.
 DEF done   EQUS "db \"<DONE>\""   ; End a text box.
 DEF prompt EQUS "db \"<PROMPT>\"" ; Prompt the player to end a text box (initiating some other event).
+DEF feed   EQUS "db \"<LF>\","    ; Text on next line with no gap.
 
 ; TextCommands indexes (see home/text.asm)
 	const_def

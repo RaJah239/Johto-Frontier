@@ -264,7 +264,7 @@ DisplayDexEntry:
 	ret
 
 String_pokemon:
-	db " #MON @"
+	db " #mon @"
 
 ; 4th Stats Page - code to display ability
 ; This must stay in this file
@@ -311,21 +311,21 @@ DisplayAbility:
 ; place pokedex page 1
 	pop de
 	pop af
-	hlcoord 1, 11
+	hlcoord 1, 10
 	push af
 	call PlaceFarString
 
 ; clear area
 	push de
 	lb bc, 5, SCREEN_WIDTH - 1
-	hlcoord 1, 11
+	hlcoord 1, 10
 	call ClearBox
 	pop de
 
 ; place pokedex page 2
 	inc de
 	pop af
-	hlcoord 1, 11
+	hlcoord 1, 10
 	jmp PlaceFarString
 
 ; This must stay in this file

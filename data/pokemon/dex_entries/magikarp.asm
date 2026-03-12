@@ -1,10 +1,18 @@
-	db "FISH@" ; species name
+	db "Fish@" ; species name
 	dw 211, 220 ; height, weight
 
-	db   "This weak and"
-	next "pathetic #MON"
-	next "gets easily pushed"
+    db   "While it's young,"
+    feed "it uses nutrients"
+    feed "that are stored"
+    feed "in seeds on its"
+    feed "back in order to"
+    feed "grow stronger."
+    feed "back in order to"
 
-	page "along rivers when"
-	next "there are strong"
-	next "currents.@"
+	page "XXXXXXXXXXXXXXXXXX"
+	feed "XXXXXXXXXXXXXXXXXX"
+	feed "XXXXXXXXXXXXXXXXXX"
+	feed "XXXXXXXXXXXXXXXXXX"
+	feed "XXXXXXXXXXXXXXXXXX"
+	feed "XXXXXXXXXXXXXXXXXX"
+	feed "XXXXXXXXXXXXXXXXXX@"
