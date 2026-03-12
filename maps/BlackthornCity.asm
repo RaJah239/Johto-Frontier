@@ -1,12 +1,41 @@
+BlackthornCity_MapEvents:
+	def_warp_events
+	warp_event 21, 29, BLACKTHORN_POKECENTER_1F, 1
+	warp_event 18, 11, BLACKTHORN_GYM_1F, 1
+	warp_event 13, 21, BLACKTHORN_DRAGON_SPEECH_HOUSE, 1
+	warp_event 29, 23, BLACKTHORN_EMYS_HOUSE, 1
+	warp_event 15, 29, BLACKTHORN_MART, 2
+	warp_event  9, 31, MOVE_DELETERS_HOUSE, 1
+	warp_event 36,  9, ICE_PATH_1F, 2
+	warp_event 20,  1, DRAGONS_DEN_1F, 1
+
+	def_coord_events
+
+	def_bg_events
+	bg_event 34, 24, BGEVENT_JUMPTEXT, BlackthornCitySignText
+	bg_event 17, 13, BGEVENT_JUMPTEXT, BlackthornGymSignText
+	bg_event  7, 31, BGEVENT_JUMPTEXT, TutorsHouseSignText
+	bg_event 21,  3, BGEVENT_JUMPTEXT, DragonDensSignText
+	bg_event  5, 25, BGEVENT_JUMPTEXT, BlackthornCityTrainerTipsText
+	bg_event 16, 29, BGEVENT_JUMPSTD, MART_SIGN_SCRIPT
+	bg_event 22, 29, BGEVENT_JUMPSTD, POKECENTER_SIGN_SCRIPT
+
+	def_object_events
+	object_event 22, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SantosScript, EVENT_BLACKTHORN_CITY_SANTOS_OF_SATURDAY
+	object_event 18, 12, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BlackthornCooltrainerMScript, EVENT_BLACKTHORN_COOLTRAINER_M_BLOCKS_CLAIRS_GYM
+	object_event 20,  2, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BlackthornGrampsScript, EVENT_BLACKTHORN_CITY_GRAMPS_BLOCKS_DRAGONS_DEN
+	object_event 24, 31, SPRITE_BLACK_BELT, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_COMMAND, jumptextfaceplayer, BlackthornBlackBeltText, -1
+	object_event  9, 25, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, BlackthornCooltrainerF1Text, -1
+	object_event 13, 15, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, BlackthornYoungsterText, -1
+	object_event 35, 19, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, BlackthornCooltrainerF2Text, -1
+
 	object_const_def
-	const BLACKTHORNCITY_SUPER_NERD1
-	const BLACKTHORNCITY_SUPER_NERD2
-	const BLACKTHORNCITY_GRAMPS1
-	const BLACKTHORNCITY_GRAMPS2
+	const BLACKTHORNCITY_SANTOS
+	const BLACKTHORNCITY_COOLTRAINER_M
+	const BLACKTHORNCITY_GRAMPS
 	const BLACKTHORNCITY_BLACK_BELT
 	const BLACKTHORNCITY_COOLTRAINER_F1
 	const BLACKTHORNCITY_YOUNGSTER1
-	const BLACKTHORNCITY_SANTOS
 	const BLACKTHORNCITY_COOLTRAINER_F2
 
 BlackthornCity_MapScripts:
@@ -30,181 +59,117 @@ BlackthornCitySantosCallback:
 	appear BLACKTHORNCITY_SANTOS
 	endcallback
 
-BlackthornSuperNerdScript:
-	faceplayer
-	opentext
-	checkevent EVENT_BEAT_CLAIR
-	iftrue .BeatClair
-	checkevent EVENT_CLEARED_RADIO_TOWER
-	iftrue .ClearedRadioTower
-	writetext Text_ClairIsOut
-	waitbutton
-	closetext
-	end
-
-.ClearedRadioTower:
-	writetext Text_ClairIsIn
-	waitbutton
-	closetext
-	end
-
-.BeatClair:
-	writetext Text_ClairIsBeaten
-	waitbutton
-	closetext
-	end
-
-BlackthornGramps1Script:
-	jumptextfaceplayer BlackthornGrampsRefusesEntryText
-
-BlackthornGramps2Script:
-	jumptextfaceplayer BlackthornGrampsGrantsEntryText
-
-BlackthornBlackBeltScript:
-	faceplayer
-	opentext
-	checkevent EVENT_CLEARED_RADIO_TOWER
-	iftrue .ClearedRadioTower
-	writetext BlackBeltText_WeirdRadio
-	waitbutton
-	closetext
-	end
-
-.ClearedRadioTower:
-	writetext BlackBeltText_VoicesInMyHead
-	waitbutton
-	closetext
-	end
-
-BlackthornCooltrainerF1Script:
-	jumptextfaceplayer BlackthornCooltrainerF1Text
-
-BlackthornYoungsterScript:
-	jumptextfaceplayer BlackthornYoungsterText
-
-BlackthornCooltrainerF2Script:
-	jumptextfaceplayer BlackthornCooltrainerF2Text
-
 SantosScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkevent EVENT_GOT_SPELL_TAG_FROM_SANTOS
 	iftrue .Saturday
 	readvar VAR_WEEKDAY
 	ifnotequal SATURDAY, .NotSaturday
 	checkevent EVENT_MET_SANTOS_OF_SATURDAY
 	iftrue .MetSantos
-	writetext MeetSantosText
+	writethistext
+		text "Santos: …"
+
+		para "It's Saturday…"
+
+		para "I'm Santos of"
+		line "Saturday…"
+		done
 	promptbutton
 	setevent EVENT_MET_SANTOS_OF_SATURDAY
 .MetSantos:
-	writetext SantosGivesGiftText
+	writethistext
+		text "You can have this…"
+		done
 	promptbutton
 	verbosegiveitem SPELL_TAG
-	iffalse .Done
+	iffalse_endtext
 	setevent EVENT_GOT_SPELL_TAG_FROM_SANTOS
-	writetext SantosGaveGiftText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Santos: …"
+
+		para "Spell Tag…"
+
+		para "Ghost-type moves"
+		line "get stronger…"
+
+		para "It will frighten"
+		line "you…"
+		done
 
 .Saturday:
-	writetext SantosSaturdayText
-	waitbutton
-.Done:
-	closetext
-	end
+	jumpthisopenedtext
+		text "Santos: …"
+
+		para "See you again on"
+		line "another Saturday…"
+
+		para "I won't have any"
+		line "more gifts…"
+		done
 
 .NotSaturday:
-	writetext SantosNotSaturdayText
-	waitbutton
-	closetext
+	jumpthisopenedtext
+		text "Santos: Today's"
+		line "not Saturday…"
+		done
+
+BlackthornCooltrainerMScript:
+	readvar VAR_BADGES
+	ifgreater NUM_JOHTO_BADGES - 2, .GotSevenBadges
+	jumpthistextfaceplayer
+		text "I am sorry."
+
+		para "Only those with"
+		line "seven Badges may"
+		cont "make a challenge."
+		done
+
+.GotSevenBadges:
+	showthistextfaceplayer
+		text "Clair, our Gym"
+		line "Leader, is waiting"
+		cont "for you."
+
+		para "Good luck!"
+
+		para "You'll need it."
+		done
+	applymovement BLACKTHORNCITY_COOLTRAINER_M, BlackthornWalkUpDisappears
+	playsound SFX_ENTER_DOOR
+	disappear LAST_TALKED
 	end
 
-BlackthornCitySign:
-	jumptext BlackthornCitySignText
+BlackthornWalkUpDisappears:
+	step UP
+	step_end
 
-BlackthornGymSign:
-	jumptext BlackthornGymSignText
+BlackthornGrampsScript:
+	checkevent EVENT_BEAT_CLAIR
+	iftrue .BlackthornGrampsGrantsEntry
+	jumpthistextfaceplayer
+		text "No. Only chosen"
+		line "trainers may train"
+		cont "here."
 
-MoveDeletersHouseSign:
-	jumptext MoveDeletersHouseSignText
+		para "Please leave."
+		done
 
-DragonDensSign:
-	jumptext DragonDensSignText
-
-BlackthornCityTrainerTips:
-	jumptext BlackthornCityTrainerTipsText
-
-BlackthornCityPokecenterSign:
-	jumpstd PokecenterSignScript
-
-BlackthornCityMartSign:
-	jumpstd MartSignScript
-
-Text_ClairIsOut:
-	text "I am sorry."
-
-	para "CLAIR, our GYM"
-	line "LEADER, entered"
-
-	para "the DRAGON'S DEN"
-	line "behind the GYM."
-
-	para "I have no idea"
-	line "when our LEADER"
-	cont "will return."
-	done
-
-Text_ClairIsIn:
-	text "CLAIR, our GYM"
-	line "LEADER, is waiting"
-	cont "for you."
-
-	para "However, it would"
-	line "be impossible for"
-
-	para "a run-of-the-mill"
-	line "trainer to win."
-	done
-
-Text_ClairIsBeaten:
-	text "You defeated"
-	line "CLAIR?"
-
-	para "That's amazing!"
-
-	para "I've never heard"
-	line "of her losing to"
-
-	para "anyone other than"
-	line "LANCE."
-	done
-
-BlackthornGrampsRefusesEntryText:
-	text "No. Only chosen"
-	line "trainers may train"
-
-	para "here."
-	line "Please leave."
-	done
-
-BlackthornGrampsGrantsEntryText:
-	text "If CLAIR allows"
+.BlackthornGrampsGrantsEntry:
+	showthistextfaceplayer
+	text "If Clair allows"
 	line "it, her grand-"
-	cont "father--our MASTER"
+	cont "father--our Master"
 	cont "--will also."
 
 	para "You may enter."
 	done
+	applymovement BLACKTHORNCITY_GRAMPS, BlackthornWalkUpDisappears
+	playsound SFX_ENTER_DOOR
+	disappear LAST_TALKED
+	end
 
-BlackBeltText_WeirdRadio:
-	text "My radio's busted?"
-	line "Lately, I only get"
-	cont "this weird signal."
-	done
-
-BlackBeltText_VoicesInMyHead:
+BlackthornBlackBeltText:
 	text "Arooo! Voices in"
 	line "my head!"
 
@@ -213,7 +178,7 @@ BlackBeltText_VoicesInMyHead:
 	done
 
 BlackthornCooltrainerF1Text:
-	text "The TUTORS' HOUSE"
+	text "The Tutors' House"
 	line "is popular with"
 	cont "serious trainers."
 	
@@ -223,123 +188,47 @@ BlackthornCooltrainerF1Text:
 BlackthornYoungsterText:
 	text "Dragon masters all"
 	line "come from the city"
-	cont "of BLACKTHORN."
-	done
-
-MeetSantosText:
-	text "SANTOS: …"
-
-	para "It's Saturday…"
-
-	para "I'm SANTOS of"
-	line "Saturday…"
-	done
-
-SantosGivesGiftText:
-	text "You can have this…"
-	done
-
-SantosGaveGiftText:
-	text "SANTOS: …"
-
-	para "SPELL TAG…"
-
-	para "Ghost-type moves"
-	line "get stronger…"
-
-	para "It will frighten"
-	line "you…"
-	done
-
-SantosSaturdayText:
-	text "SANTOS: …"
-
-	para "See you again on"
-	line "another Saturday…"
-
-	para "I won't have any"
-	line "more gifts…"
-	done
-
-SantosNotSaturdayText:
-	text "SANTOS: Today's"
-	line "not Saturday…"
+	cont "of Blackthorn."
 	done
 
 BlackthornCooltrainerF2Text:
-	text "Wow, you came"
-	line "through the ICE"
-	cont "PATH?"
-
-	para "You must be a real"
-	line "hotshot trainer!"
+	text "TODOTEXT"
 	done
 
 BlackthornCitySignText:
-	text "BLACKTHORN CITY"
+	text "Blackthorn City"
 
 	para "A Quiet Mountain"
 	line "Retreat"
 	done
 
 BlackthornGymSignText:
-	text "BLACKTHORN CITY"
-	line "#MON GYM"
-	cont "LEADER: CLAIR"
+	text "Blackthorn City"
+	line "#mon Gym"
+	cont "Leader: Clair"
 
 	para "The Blessed User"
-	line "of Dragon #MON"
+	line "of Dragon #mon"
 	done
 
-MoveDeletersHouseSignText:
-	text "TUTORS' HOUSE"
+TutorsHouseSignText:
+	text "Tutors' House"
+	
+	para "Get your #mon"
+	line "to the next level!"
 	done
 
 DragonDensSignText:
-	text "DRAGON'S DEN"
-	line "AHEAD"
+	text "Dragon's Den"
+	line "Ahead"
 	done
 
 BlackthornCityTrainerTipsText:
-	text "TRAINER TIPS"
+	text "Trainer Tips"
 
-	para "A #MON holding"
-	line "a MIRACLEBERRY"
-
-	para "will cure itself"
-	line "of any status"
+	para "A #mon holding"
+	line "a Miracleberry"
+	cont "will cure itself"
+	cont "of any status"
 	cont "problem."
 	done
-
-BlackthornCity_MapEvents:
-	def_warp_events
-	warp_event 21, 29, BLACKTHORN_POKECENTER_1F, 1
-	warp_event 18, 11, BLACKTHORN_GYM_1F, 1
-	warp_event 13, 21, BLACKTHORN_DRAGON_SPEECH_HOUSE, 1
-	warp_event 29, 23, BLACKTHORN_EMYS_HOUSE, 1
-	warp_event 15, 29, BLACKTHORN_MART, 2
-	warp_event  9, 31, MOVE_DELETERS_HOUSE, 1
-	warp_event 36,  9, ICE_PATH_1F, 2
-	warp_event 20,  1, DRAGONS_DEN_1F, 1
-
-	def_coord_events
-
-	def_bg_events
-	bg_event 34, 24, BGEVENT_READ, BlackthornCitySign
-	bg_event 17, 13, BGEVENT_READ, BlackthornGymSign
-	bg_event  7, 31, BGEVENT_READ, MoveDeletersHouseSign
-	bg_event 21,  3, BGEVENT_READ, DragonDensSign
-	bg_event  5, 25, BGEVENT_READ, BlackthornCityTrainerTips
-	bg_event 16, 29, BGEVENT_READ, BlackthornCityMartSign
-	bg_event 22, 29, BGEVENT_READ, BlackthornCityPokecenterSign
-
-	def_object_events
-	object_event 18, 12, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BlackthornSuperNerdScript, -1
-	object_event 19, 12, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BlackthornSuperNerdScript, -1
-	object_event 20,  2, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BlackthornGramps1Script, EVENT_BLACKTHORN_CITY_GRAMPS_BLOCKS_DRAGONS_DEN
-	object_event 21,  2, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BlackthornGramps2Script, EVENT_BLACKTHORN_CITY_GRAMPS_NOT_BLOCKING_DRAGONS_DEN
-	object_event 24, 31, SPRITE_BLACK_BELT, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, BlackthornBlackBeltScript, -1
-	object_event  9, 25, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BlackthornCooltrainerF1Script, -1
-	object_event 13, 15, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BlackthornYoungsterScript, -1
-	object_event 22, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SantosScript, EVENT_BLACKTHORN_CITY_SANTOS_OF_SATURDAY
-	object_event 35, 19, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, BlackthornCooltrainerF2Script, -1
