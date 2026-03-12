@@ -18,11 +18,6 @@ ReenaForwardScript:
 	promptbutton
 	sjump PhoneScript_HangUpText_Female
 
-ParryBattleWithMeScript:
-	farwritetext ParryBattleWithMeText
-	promptbutton
-	sjump PhoneScript_HangUpText_Male
-
 ErinWorkingHardScript:
 	farwritetext ErinWorkingHardText
 	promptbutton

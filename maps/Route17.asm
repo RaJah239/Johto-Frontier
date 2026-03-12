@@ -13,7 +13,7 @@ Route17_MapEvents:
 	def_object_events
 	object_event 10, 16, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 1, TrainerHikerErik, -1
 	object_event 15, 65, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 2, TrainerHikerMichael, -1
-	object_event  5, 28, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 2, TrainerHikerParry, -1
+	object_event  5, 28, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 2, TrainerHikerParry, -1
 	object_event  9, 65, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 1, TrainerHikerTimothy, -1
 	object_event 11, 50, SPRITE_BLACK_BELT, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_GENERICTRAINER, 2, TrainerBlackbeltKenji, -1
 	object_event 17, 18, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_GENERICTRAINER, 1, TrainerCooltrainermRyan, -1
@@ -156,100 +156,25 @@ TrainerHikerMichael:
 	done
 
 TrainerHikerParry:
-	trainer HIKER, PARRY3, EVENT_BEAT_HIKER_PARRY, HikerParry3SeenText, HikerParry3BeatenText, 0, .Script
+	generictrainer HIKER, PARRY, EVENT_BEAT_HIKER_PARRY, .SeenText, .BeatenText
 
-.Script:
-	loadvar VAR_CALLERID, PHONE_HIKER_PARRY
-	opentext
-	checkevent EVENT_PARRY_IRON
-	iftrue .HasIron
-	checkflag ENGINE_PARRY_READY_FOR_REMATCH
-	iftrue .WantsBattle
-	checkcellnum PHONE_HIKER_PARRY
-	iftrue Route17NumberAcceptedM
-	checkevent EVENT_PARRY_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	writetext HikerParryAfterBattleText
-	promptbutton
-	setevent EVENT_PARRY_ASKED_FOR_PHONE_NUMBER
-	scall Route17AskNumber
-	sjump .AskForNumber
+.AfterText
+	text "I'm not much good"
+	line "at thinking, see?"
 
-.AskedAlready:
-	scall Route17AskNumber
-.AskForNumber:
-	askforphonenumber PHONE_HIKER_PARRY
-	ifequal PHONE_CONTACT_REFUSED, Route17NumberDeclinedM
-	gettrainername STRING_BUFFER_3, HIKER, PARRY1
-	scall Route17RegisteredNumberM
-	sjump Route17NumberAcceptedM
+	para "So, I just plow"
+	line "ahead with power!"
+	done
 
-.WantsBattle:
-	scall Route17RematchM
-	winlosstext HikerParry3BeatenText, 0
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight2
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight1
-	loadtrainer HIKER, PARRY3
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_PARRY_READY_FOR_REMATCH
-	end
+.SeenText
+	text "My #mon are"
+	line "power packed!"
+	done
 
-.LoadFight1:
-	loadtrainer HIKER, PARRY1
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_PARRY_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer HIKER, PARRY2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_PARRY_READY_FOR_REMATCH
-	opentext
-	writetext ParryRematchGiftText
-	waitbutton
-	verbosegiveitem IRON
-	iffalse .HikerParryHasIron
-	closetext
-	end
-
-.HasIron
-	writetext HikerParryGivesIronText
-	waitbutton
-	verbosegiveitem IRON
-	iffalse .HikerParryHasIron
-	clearevent EVENT_PARRY_IRON
-	closetext
-	end
-
-.HikerParryHasIron:
-	setevent EVENT_PARRY_IRON
-	jumpstd PackFullMScript
-	end
-
-Route17AskNumber:
-	jumpstd AskNumberMScript
-	end
-
-Route17RegisteredNumberM:
-	jumpstd RegisteredNumberMScript
-	end
-
-Route17NumberAcceptedM:
-	jumpstd NumberAcceptedMScript
-	end
-
-Route17NumberDeclinedM:
-	jumpstd NumberDeclinedMScript
-	end
-
-Route17RematchM:
-	jumpstd RematchMScript
-	end
+.BeatenText
+	text "Wahahah! I'm the"
+	line "big loser!"
+	done
 
 TrainerHikerTimothy:
 	generictrainer HIKER, TIMOTHY, EVENT_BEAT_HIKER_TIMOTHY, .SeenText, .BeatenText
@@ -350,62 +275,6 @@ TrainerCamperQuentin:
 	text "I was tough at the"
 	line "Draft Arena…"
 	done
-
-HikerParry3SeenText:
-	text "My #MON are"
-	line "power packed!"
-	done
-
-HikerParry3BeatenText:
-	text "Wahahah! I'm the"
-	line "big loser!"
-	done
-
-HikerParryAfterBattleText:
-	text "I'm not much good"
-	line "at thinking, see?"
-
-	para "So, I just plow"
-	line "ahead with power!"
-	done
-
-ParryRematchGiftText:
-	text "Well, you're"
-	line "special all right."
-
-	para "If only I'd begun"
-	line "#MON when I was"
-	cont "a tad younger…"
-
-	para "I want you to work"
-	line "and succeed for"
-
-	para "the both of us."
-	line "So take this, OK?"
-	done
-
-
-
-HikerParryGivesIronText:
-	text "I just can't find"
-	line "a way to win!"
-
-	para "Keep it up!"
-
-	para "Oh, and take this"
-	line "--it's the gift"
-
-	para "you couldn't take"
-	line "when we last met."
-	done
-
-
-
-
-
-
-
-
 
 Route17SignText:
 	text "Route 17"

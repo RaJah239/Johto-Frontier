@@ -301,12 +301,10 @@ DEF KRIS EQU __trainer_class__
 	const BENJAMIN
 	const ERIK
 	const MICHAEL
-	const PARRY1
+	const PARRY
 	const TIMOTHY
 	const BAILEY
 	const DANIEL
-	const PARRY2
-	const PARRY3
 
 	trainerclass BIKER ; 2d
 	const BIKER_BENNY ; unused

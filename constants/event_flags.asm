@@ -482,7 +482,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_PARRY_ASKED_FOR_PHONE_NUMBER
+	const_skip
 	const_skip
 	const EVENT_ERIN_ASKED_FOR_PHONE_NUMBER
 	const_skip
@@ -645,7 +645,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_PARRY_IRON
+	const_skip
 	const EVENT_ERIN_CALCIUM
 	const_skip
 	const EVENT_MET_BUENA
@@ -1019,8 +1019,6 @@
 	const_skip
 	const_skip
 	const EVENT_BEAT_HIKER_DANIEL
-	const EVENT_BEAT_HIKER_PARRY2
-	const EVENT_BEAT_HIKER_PARRY3
 ; Bug Catcher
 	const EVENT_BEAT_BUG_CATCHER_DON
 	const EVENT_BEAT_BUG_CATCHER_EMMANUEL
@@ -1184,7 +1182,7 @@
 	const EVENT_BEAT_SAGE_GAKU
 	const EVENT_BEAT_SAGE_MASA
 	const EVENT_BEAT_SAGE_KOJI
-; Unused: next 116 events
+; Unused: next 118 events
 
 	const_next 1600
 ; Sprite visibility flags

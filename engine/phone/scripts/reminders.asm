@@ -14,10 +14,6 @@ ReenaHurryScript:
 	farwritetext ReenaHurryText
 	end
 
-ParryHaventYouGottenToScript:
-	farwritetext ParryHaventYouGottenToText
-	end
-
 ErinComeBattleScript:
 	farwritetext ErinComeBattleText
 	end

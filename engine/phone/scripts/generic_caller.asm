@@ -10,7 +10,6 @@ PhoneScript_RematchText_Male:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_HIKER_PARRY, .Parry
 
 .Gaven:
 	farwritetext GavenBattleRematchText
@@ -18,10 +17,6 @@ PhoneScript_RematchText_Male:
 	end
 .Jose:
 	farwritetext JoseBattleRematchText
-	promptbutton
-	end
-.Parry:
-	farwritetext ParryBattleRematchText
 	promptbutton
 	end
 
@@ -50,16 +45,12 @@ PhoneScript_HangUpText_Male:
 	readvar VAR_CALLERID
 	ifequal PHONE_COOLTRAINERM_GAVEN, .Gaven
 	ifequal PHONE_BIRDKEEPER_JOSE, .Jose
-	ifequal PHONE_HIKER_PARRY, .Parry
 
 .Gaven:
 	farwritetext GavenHangUpText
 	end
 .Jose:
 	farwritetext JoseHangUpText
-	end
-.Parry:
-	farwritetext ParryHangUpText
 	end
 
 PhoneScript_HangUpText_Female:
