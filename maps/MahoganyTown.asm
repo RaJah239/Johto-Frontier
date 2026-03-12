@@ -43,9 +43,8 @@ MahoganyTownGrampsText:
 MahoganyTownLassText:
 	text "Visit Grandma's"
 	line "shop. She sells"
-
-	para "stuff that nobody"
-	line "else has."
+	cont "stuff that nobody"
+	cont "else has."
 	done
 
 MahoganyTownSignText:
