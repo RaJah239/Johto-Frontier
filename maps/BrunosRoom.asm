@@ -1,3 +1,17 @@
+BrunosRoom_MapEvents:
+	def_warp_events
+	warp_event  4, 17, KOGAS_ROOM, 3
+	warp_event  5, 17, KOGAS_ROOM, 4
+	warp_event  4,  2, KARENS_ROOM, 1
+	warp_event  5,  2, KARENS_ROOM, 2
+
+	def_coord_events
+
+	def_bg_events
+
+	def_object_events
+	object_event  5,  7, SPRITE_BRUNO, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, BrunoScript_Battle, -1
+
 	object_const_def
 	const BRUNOSROOM_BRUNO
 
@@ -11,8 +25,6 @@ BrunosRoom_MapScripts:
 
 BrunosRoomLockDoorScene:
 	sdefer BrunosRoomDoorLocksBehindYouScript
-	end
-
 BrunosRoomNoopScene:
 	end
 
@@ -40,37 +52,6 @@ BrunosRoomDoorLocksBehindYouScript:
 	waitsfx
 	end
 
-BrunoScript_Battle:
-	faceplayer
-	opentext
-	checkevent EVENT_BEAT_ELITE_4_BRUNO
-	iftrue BrunoScript_AfterBattle
-	writetext BrunoScript_BrunoBeforeText
-	waitbutton
-	closetext
-	winlosstext BrunoScript_BrunoBeatenText, 0
-	loadtrainer BRUNO, BRUNO1
-	startbattle
-	reloadmapafterbattle
-	setevent EVENT_BEAT_ELITE_4_BRUNO
-	opentext
-	writetext BrunoScript_BrunoDefeatText
-	waitbutton
-	closetext
-	playsound SFX_ENTER_DOOR
-	changeblock 4, 2, $16 ; open door
-	refreshmap
-	closetext
-	setevent EVENT_BRUNOS_ROOM_EXIT_OPEN
-	waitsfx
-	end
-
-BrunoScript_AfterBattle:
-	writetext BrunoScript_BrunoDefeatText
-	waitbutton
-	closetext
-	end
-
 BrunosRoom_EnterMovement:
 	step UP
 	step UP
@@ -78,35 +59,57 @@ BrunosRoom_EnterMovement:
 	step UP
 	step_end
 
-BrunoScript_BrunoBeforeText:
-	text "I am BRUNO of the"
-	line "ELITE FOUR."
+BrunoScript_Battle:
+	faceplayeropentext
+	checkevent EVENT_BEAT_ELITE_4_BRUNO
+	iftrue BrunoScript_AfterBattle
+	writethistext
+		text "I am Bruno of the"
+		line "Elite Four."
 
-	para "I always train to"
-	line "the extreme be-"
-	cont "cause I believe in"
-	cont "our potential."
+		para "I always train to"
+		line "the extreme be-"
+		cont "cause I believe in"
+		cont "our potential."
 
-	para "That is how we"
-	line "became strong."
+		para "That is how we"
+		line "became strong."
 
-	para "Can you withstand"
-	line "our power?"
+		para "Can you withstand"
+		line "our power?"
 
-	para "Hm? I see no fear"
-	line "in you. You look"
+		para "Hm? I see no fear"
+		line "in you. You look"
+		cont "determined. Per-"
+		cont "fect for battle!"
 
-	para "determined. Per-"
-	line "fect for battle!"
+		para "Ready, <PLAYER>?"
+		line "You will bow down"
 
-	para "Ready, <PLAYER>?"
-	line "You will bow down"
+		para "to our overwhelm-"
+		line "ing power!"
 
-	para "to our overwhelm-"
-	line "ing power!"
+		para "Hoo hah!"
+		done
+	waitclosetext
+	winlosstext BrunoScript_BrunoBeatenText, 0
+	loadtrainer BRUNO, BRUNO1
+	startbattle
+	reloadmapafterbattle
+	setevent EVENT_BEAT_ELITE_4_BRUNO
+	opentext
+	writetext BrunoScript_BrunoDefeatText
+	waitclosetext
+	playsound SFX_ENTER_DOOR
+	changeblock 4, 2, $16 ; open door
+	refreshmap
+	setevent EVENT_BRUNOS_ROOM_EXIT_OPEN
+	waitsfx
+	endtext
 
-	para "Hoo hah!"
-	done
+BrunoScript_AfterBattle:
+	writetext BrunoScript_BrunoDefeatText
+	waitendtext
 
 BrunoScript_BrunoBeatenText:
 	text "Why? How could we"
@@ -121,17 +124,3 @@ BrunoScript_BrunoDefeatText:
 	para "Go face your next"
 	line "challenge!"
 	done
-
-BrunosRoom_MapEvents:
-	def_warp_events
-	warp_event  4, 17, KOGAS_ROOM, 3
-	warp_event  5, 17, KOGAS_ROOM, 4
-	warp_event  4,  2, KARENS_ROOM, 1
-	warp_event  5,  2, KARENS_ROOM, 2
-
-	def_coord_events
-
-	def_bg_events
-
-	def_object_events
-	object_event  5,  7, SPRITE_BRUNO, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, BrunoScript_Battle, -1
