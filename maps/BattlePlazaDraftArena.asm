@@ -1,9 +1,26 @@
+; TODOTEXT
 ; ============
 ; === Note ===
 ; ============
 ; in random mode here, add as many trainers as I have in game
 ; put a npc in the building that says there are more trainers
 ; in random mode that aren't available on the list of 29
+
+
+BattlePlazaDraftArena_MapEvents:
+	def_warp_events
+	warp_event  4, 13, BATTLE_PLAZA, 9
+	warp_event  3, 13, BATTLE_PLAZA, 8
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  2, 10, BGEVENT_JUMPTEXT, DraftArenaNoteSignText
+
+	def_object_events
+	object_event  3, 10, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BattleArenaReceptionistScript, -1
+	object_event  4,  3, SPRITE_UNKNOWN, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
+
 	object_const_def
 	const BATTLEPLAZABATTLEARENA_RECPTIONIST
 	const BATTLEPLAZABATTLEARENA_ENEMY
@@ -17,9 +34,16 @@ BattleArenaReceptionistScript:
 	opentext
 	checkevent EVENT_DID_NOT_GET_BATTLE_ARENA_PRIZE
 	iftrue .GivePrize
-	writetext BattleArenaIntroText
+	writethistext
+		text "Battle Arena"
+		line "welcomes you!"
+		done
 	special TryQuickSave
-	writetext UseYourOwnTeamText
+	iffalse_endtext
+	writethistext
+		text "Would you use your"
+		line "own #mon?"
+		done
 	nooryes
 	iftrue .PlayerUsesOwnTeam
 	sjump .ChoosePlayerCharacter
@@ -29,13 +53,13 @@ BattleArenaReceptionistScript:
 
 .StartBattle
 	writetext BattlePlazasReceptionistGoRightInText
-	waitbutton
-	closetext
+	waitclosetext
 	applymovement BATTLEPLAZABATTLEARENA_RECPTIONIST, BattlePlazasReceptionist_MoveOutTheWay
 	applymovement PLAYER, BattlePlazasPlayer_EnterBattleRoom
 	winlosstext BattlePlazasPlayerVictoryText, 0
 	startbattle
 	ifequal WIN, .win
+.lose
 	dontrestartmapmusic
 	reloadmap
 	pause 15
@@ -48,8 +72,8 @@ BattleArenaReceptionistScript:
 	special LoadPokemonData
 	special HealParty
 	special TryQuickSave
-	closetext
-	end
+	iffalse_endtext
+	endtext
 
 .win
 	dontrestartmapmusic
@@ -64,17 +88,20 @@ BattleArenaReceptionistScript:
 	special LoadPokemonData
 	special HealParty
 	special TryQuickSave
+	iffalse_endtext
 .GivePrize
 	verbosegiveitem CRYSTAL
 	iffalse BattleArenaPackFull
 	clearevent EVENT_DID_NOT_GET_BATTLE_ARENA_PRIZE
-	closetext
-	end
+	endtext
 
 .ChoosePlayerCharacter
-    writetext PickYourPlayerText
-    loadmenu .CharacterMenuHeader
-    _2dmenu
+	writethistext
+		text "Choose whose team"
+		line "to use."
+		done
+	loadmenu .CharacterMenuHeader
+	 _2dmenu
 	closewindow
 	ifequal 1, .RandomPlayer
 	ifequal 2, .FalknerPlayer
@@ -114,9 +141,12 @@ BattleArenaReceptionistScript:
 	waitendtext
 
 .ChooseEnemyCharacter
-	writetext PickYourEnemyText
-    loadmenu .CharacterMenuHeader
-    _2dmenu
+	writethistext
+		text "Choose whose team"
+		line "to battle against."
+		done
+	loadmenu .CharacterMenuHeader
+	_2dmenu
 	closewindow
 	ifequal 1, .RandomEnemy
 	ifequal 2, .FalknerEnemy
@@ -156,7 +186,10 @@ BattleArenaReceptionistScript:
 	waitendtext
 
 .RandomPlayer:
-	writetext PlayUsingRandomPlayerText
+	writethistext
+		text "Use a random"
+		line "trainer's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 
@@ -194,7 +227,10 @@ BattleArenaReceptionistScript:
 	sjump .SampleAgain
 
 .RandomEnemy:
-	writetext PlayAgainstRandomPlayerText
+	writethistext
+		text "Battle a random"
+		line "trainer's team?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 
@@ -232,7 +268,10 @@ BattleArenaReceptionistScript:
 	sjump .Resample
 
 .FalknerPlayer:
-	writetext PlayUsingFalknerText
+	writethistext
+		text "Play using Leader"
+		line "Falkner's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval FALKNER
@@ -242,14 +281,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .FalknerEnemy:
-	writetext PlayAgainstFalknerText
+	writethistext
+		text "Play against"
+		line "Leader Falkner?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer FALKNER, FALKNER1
 	sjump .StartBattle
 
 .BugsyPlayer:
-	writetext PlayUsingBugsyText
+	writethistext
+	text "Play using Leader"
+	line "Bugsy's team?"
+	done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval FALKNER
@@ -259,14 +304,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .BugsyEnemy:
-	writetext PlayAgainstBugsyText
+	writethistext
+	text "Play against"
+	line "Leader Bugsy?"
+	done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer BUGSY, BUGSY1
 	sjump .StartBattle
 
 .WhitneyPlayer:
-	writetext PlayUsingWhitneyText
+	writethistext
+		text "Play using Leader"
+		line "Whitney's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval WHITNEY
@@ -276,14 +327,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .WhitneyEnemy:
-	writetext PlayAgainstWhitneyText
+	writethistext
+		text "Play against"
+		line "Leader Whitney?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer WHITNEY, WHITNEY1
 	sjump .StartBattle
 
 .MortyPlayer:
-	writetext PlayUsingMortyText
+	writethistext
+		text "Play using Leader"
+		line "Morty's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval MORTY
@@ -293,14 +350,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .MortyEnemy:
-	writetext PlayAgainstMortyText
+	writethistext
+		text "Play against"
+		line "Leader Morty?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer MORTY, MORTY1
 	sjump .StartBattle
 
 .ChuckPlayer:
-	writetext PlayUsingChuckText
+	writethistext PlayUsingChuckText
+		text "Play using Leader"
+		line "Chuck's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval CHUCK
@@ -310,14 +373,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .ChuckEnemy:
-	writetext PlayAgainstChuckText
+	writethistext
+		text "Play against"
+		line "Leader Chuck?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer CHUCK, CHUCK1
 	sjump .StartBattle
 
 .JasminePlayer:
-	writetext PlayUsingJasmineText
+	writethistext
+		text "Play using Leader"
+		line "Jasmine's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval JASMINE
@@ -327,14 +396,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .JasmineEnemy:
-	writetext PlayAgainstJasmineText
+	writethistext
+		text "Play against"
+		line "Leader Jasmine?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer JASMINE, JASMINE1
 	sjump .StartBattle
 
 .PrycePlayer:
-	writetext PlayUsingPryceText
+	writethistext
+		text "Play using Leader"
+		line "Pryce's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval PRYCE
@@ -344,14 +419,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .PryceEnemy:
-	writetext PlayAgainstPryceText
+	writethistext
+		text "Play against"
+		line "Leader Pryce?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer PRYCE, PRYCE1
 	sjump .StartBattle
 
 .ClairPlayer:
-	writetext PlayUsingClairText
+	writethistext
+		text "Play using Leader"
+		line "Clair's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval CLAIR
@@ -361,14 +442,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .ClairEnemy:
-	writetext PlayAgainstClairText
+	writethistext
+		text "Play against"
+		line "Leader Clair?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer CLAIR, CLAIR1
 	sjump .StartBattle
 
 .BrockPlayer:
-	writetext PlayUsingBrockText
+	writethistext
+		text "Play using Leader"
+		line "Brock's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval BROCK
@@ -378,14 +465,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .BrockEnemy:
-	writetext PlayAgainstBrockText
+	writethistext
+		text "Play against"
+		line "Leader Brock?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer BROCK, BROCK1
 	sjump .StartBattle
 
 .MistyPlayer:
-	writetext PlayUsingMistyText
+	writethistext
+		text "Play using Leader"
+		line "Misty's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval MISTY
@@ -395,14 +488,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .MistyEnemy:
-	writetext PlayAgainstMistyText
+	writethistext
+		text "Play against"
+		line "Leader Misty?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer MISTY, MISTY1
 	sjump .StartBattle
 
 .SurgePlayer:
-	writetext PlayUsingSurgeText
+	writethistext
+		text "Play using Leader"
+		line "Surge's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval LT_SURGE
@@ -412,14 +511,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .SurgeEnemy:
-	writetext PlayAgainstSurgeText
+	writethistext
+		text "Play against"
+		line "Leader Surge?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer LT_SURGE, LT_SURGE1
 	sjump .StartBattle
 
 .ErikaPlayer:
-	writetext PlayUsingErikaText
+	writethistext
+		text "Play using Leader"
+		line "Erika's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval ERIKA
@@ -429,14 +534,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .ErikaEnemy:
-	writetext PlayAgainstErikaText
+	writethistext
+		text "Play against"
+		line "Leader Erika?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer ERIKA, ERIKA1
 	sjump .StartBattle
 
 .JaninePlayer:
-	writetext PlayUsingJanineText
+	writethistext
+		text "Play using Leader"
+		line "Janine's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval JANINE
@@ -446,14 +557,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .JanineEnemy:
-	writetext PlayAgainstJanineText
+	writethistext
+		text "Play against"
+		line "Leader Janine?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer JANINE, JANINE1
 	sjump .StartBattle
 
 .SabrinaPlayer:
-	writetext PlayUsingSabrinaText
+	writethistext
+		text "Play using Leader"
+		line "Sabrina's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval SABRINA
@@ -463,14 +580,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .SabrinaEnemy:
-	writetext PlayAgainstSabrinaText
+	writethistext
+		text "Play against"
+		line "Leader Sabrina?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer SABRINA, SABRINA1
 	sjump .StartBattle
 
 .BlainePlayer:
-	writetext PlayUsingBlaineText
+	writethistext
+		text "Play using Leader"
+		line "Blaine's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval BLAINE
@@ -480,14 +603,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .BlaineEnemy:
-	writetext PlayAgainstBlaineText
+	writethistext
+		text "Play against"
+		line "Leader Blaine?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer BLAINE, BLAINE1
 	sjump .StartBattle
 
 .WillPlayer:
-	writetext PlayUsingWillText
+	writethistext
+		text "Play using Elite"
+		line "Four Will's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval WILL
@@ -497,14 +626,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .WillEnemy:
-	writetext PlayAgainstWillText
+	writethistext
+		text "Play against Elite"
+		line "Four Will?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer WILL, WILL1
 	sjump .StartBattle
 
 .KogaPlayer:
-	writetext PlayUsingKogaText
+	writethistext
+		text "Play using Elite"
+		line "Four Koga's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval KOGA
@@ -514,14 +649,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .KogaEnemy:
-	writetext PlayAgainstKogaText
+	writethistext
+		text "Play against Elite"
+		line "Four Koga?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer KOGA, KOGA1
 	sjump .StartBattle
 
 .BrunoPlayer:
-	writetext PlayUsingBrunoText
+	writethistext
+		text "Play using Elite"
+		line "Four Bruno's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval BRUNO
@@ -531,14 +672,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .BrunoEnemy:
-	writetext PlayAgainstBrunoText
+	writethistext
+		text "Play against Elite"
+		line "Four Bruno?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer BRUNO, BRUNO1
 	sjump .StartBattle
 
 .KarenPlayer:
-	writetext PlayUsingKarenText
+	writethistext
+		text "Play using Elite"
+		line "Four Karen's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval KAREN
@@ -548,14 +695,21 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .KarenEnemy:
-	writetext PlayAgainstKarenText
+	writethistext
+		text "Play against Elite"
+		line "Four Karen?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer KAREN, KAREN1
 	sjump .StartBattle
 
 .LoreleiPlayer:
-	writetext PlayUsingLoreleiText
+	writethistext
+		text "Play using <PKMN>"
+		line "Trainer Lorelei's"
+		cont "team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval LORELEI
@@ -565,14 +719,21 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .LoreleiEnemy:
-	writetext PlayAgainstLoreleiText
+	writethistext
+		text "Play against <PKMN>"
+		line "Trainer Lorelei?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer LORELEI, LORELEI1
 	sjump .StartBattle
 
 .AgathaPlayer:
-	writetext PlayUsingAgathaText
+	writethistext
+		text "Play using <PKMN>"
+		line "Trainer Agatha's"
+		cont "team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval AGATHA
@@ -582,14 +743,21 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .AgathaEnemy:
-	writetext PlayAgainstAgathaText
+	writethistext
+		text "Play against <PKMN>"
+		line "Trainer Agatha?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer AGATHA, AGATHA1
 	sjump .StartBattle
 
 .InsafPlayer:
-	writetext PlayUsingInsafText
+	writethistext
+		text "Play using <PKMN>"
+		line "Trainer Insaf's"
+		cont "team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval INSAF
@@ -599,14 +767,21 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .InsafEnemy:
-	writetext PlayAgainstInsafText
+	writethistext
+		text "Play against"
+		line "<PKMN> Trainer Insaf?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer INSAF, INSAF1
 	sjump .StartBattle
 
 .SilverPlayer:
-	writetext PlayUsingSilverText
+	writethistext
+		text "Play using <PKMN>"
+		line "Trainer Silver's"
+		cont "team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval RIVAL1
@@ -616,14 +791,20 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .SilverEnemy:
-	writetext PlayAgainstSilverText
+	writethistext
+		text "Play against <PKMN>"
+		line "Trainer Silver?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer RIVAL1, RIVAL1_1_CHIKORITA
 	sjump .StartBattle
 
 .GiovanniPlayer:
-	writetext PlayUsingGiovanniText
+	writethistext
+		text "Play using Boss"
+		line "Giovanni's team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval GIOVANNI
@@ -633,14 +814,21 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .GiovanniEnemy:
-	writetext PlayAgainstGiovanniText
+	writethistext
+		text "Play against"
+		line "Boss Giovanni?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer GIOVANNI, GIOVANNI1
 	sjump .StartBattle
 
 .OakPlayer:
-	writetext PlayUsingOakText
+	writethistext
+		text "Play using"
+		line "Professor Oak's"
+		cont "team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval POKEMON_PROF
@@ -650,14 +838,21 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .OakEnemy:
-	writetext PlayAgainstOakText
+	writethistext
+		text "Play against"
+		line "Professor Oak?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer POKEMON_PROF, OAK1
 	sjump .StartBattle
 
 .LancePlayer:
-	writetext PlayUsingLanceText
+	writethistext
+		text "Play using"
+		line "Champion Lance's"
+		cont "team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval CHAMPION
@@ -667,14 +862,21 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .LanceEnemy:
-	writetext PlayAgainstLanceText
+	writethistext
+		text "Play against"
+		line "Champion Lance?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer CHAMPION, LANCE
 	sjump .StartBattle
 
 .GreenPlayer:
-	writetext PlayUsingGreenText
+	writethistext
+		text "Play using <PKMN>"
+		line "Trainer Green's"
+		cont "team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval GREEN
@@ -684,14 +886,21 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .GreenEnemy:
-	writetext PlayAgainstGreenText
+	writethistext
+		text "Play against <PKMN>"
+		line "Trainer Green?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer GREEN, GREEN1
 	sjump .StartBattle
 
 .BluePlayer:
-	writetext PlayUsingBlueText
+	writethistext
+		text "Play using <PKMN>"
+		line "Trainer Blue's"
+		cont "team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval BLUE
@@ -701,14 +910,21 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .BlueEnemy:
-	writetext PlayAgainstBlueText
+	writethistext
+		text "Play against <PKMN>"
+		line "Trainer Blue?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer BLUE, BLUE1
 	sjump .StartBattle
 
 .RedPlayer:
-	writetext PlayUsingRedText
+	writethistext
+		text "Play using <PKMN>"
+		line "Trainer Red's"
+		cont "team?"
+		done
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	setval RED
@@ -718,7 +934,10 @@ BattleArenaReceptionistScript:
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
 .RedEnemy:
-	writetext PlayAgainstRedText
+	writethistext
+		text "Play against <PKMN>"
+		line "Trainer Red?"
+		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	loadtrainer RED, RED1
@@ -772,342 +991,10 @@ BattleArenaPackFull:
 	writetext BattlePlazasFullPackText
 	waitendtext
 
-BattleArenaIntroText:
-	text "Battle Arena"
-	line "welcomes you!"
-	done
-
-UseYourOwnTeamText:
-	text "Would you use your"
-	line "own #mon?"
-	done
-
-PickYourPlayerText:
-	text "Choose whose team"
-	line "to use."
-	done
-
 AreYouSureText:
 	text "Cancel your"
 	line "challenge?"
 	done
-
-PickYourEnemyText:
-	text "Choose whose team"
-	line "to battle against."
-	done
-
-PlayUsingRandomPlayerText:
-	text "Use a random"
-	line "trainer's team?"
-	done
-
-PlayAgainstRandomPlayerText:
-	text "Battle a random"
-	line "trainer's team?"
-	done
-
-PlayUsingFalknerText:
-	text "Play using Leader"
-	line "Falkner's team?"
-	done
-
-PlayAgainstFalknerText:
-	text "Play against"
-	line "Leader Falkner?"
-	done
-
-PlayUsingBugsyText:
-	text "Play using Leader"
-	line "Bugsy's team?"
-	done
-
-PlayAgainstBugsyText:
-	text "Play against"
-	line "Leader Bugsy?"
-	done
-
-PlayUsingWhitneyText:
-	text "Play using Leader"
-	line "Whitney's team?"
-	done
-
-PlayAgainstWhitneyText:
-	text "Play against"
-	line "Leader Whitney?"
-	done
-
-PlayUsingMortyText:
-	text "Play using Leader"
-	line "Morty's team?"
-	done
-
-PlayAgainstMortyText:
-	text "Play against"
-	line "Leader Morty?"
-	done
-
-PlayUsingChuckText:
-	text "Play using Leader"
-	line "Chuck's team?"
-	done
-
-PlayAgainstChuckText:
-	text "Play against"
-	line "Leader Chuck?"
-	done
-
-PlayUsingJasmineText:
-	text "Play using Leader"
-	line "Jasmine's team?"
-	done
-
-PlayAgainstJasmineText:
-	text "Play against"
-	line "Leader Jasmine?"
-	done
-
-PlayUsingPryceText:
-	text "Play using Leader"
-	line "Pryce's team?"
-	done
-
-PlayAgainstPryceText:
-	text "Play against"
-	line "Leader Pryce?"
-	done
-
-PlayUsingClairText:
-	text "Play using Leader"
-	line "Clair's team?"
-	done
-
-PlayAgainstClairText:
-	text "Play against"
-	line "Leader Clair?"
-	done
-
-PlayUsingBrockText:
-	text "Play using Leader"
-	line "Brock's team?"
-	done
-
-PlayAgainstBrockText:
-	text "Play against"
-	line "Leader Brock?"
-	done
-
-PlayUsingMistyText:
-	text "Play using Leader"
-	line "Misty's team?"
-	done
-
-PlayAgainstMistyText:
-	text "Play against"
-	line "Leader Misty?"
-	done
-
-PlayUsingSurgeText:
-	text "Play using Leader"
-	line "Surge's team?"
-	done
-
-PlayAgainstSurgeText:
-	text "Play against"
-	line "Leader Surge?"
-	done
-
-PlayUsingErikaText:
-	text "Play using Leader"
-	line "Erika's team?"
-	done
-
-PlayAgainstErikaText:
-	text "Play against"
-	line "Leader Erika?"
-	done
-
-PlayUsingJanineText:
-	text "Play using Leader"
-	line "Janine's team?"
-	done
-
-PlayAgainstJanineText:
-	text "Play against"
-	line "Leader Janine?"
-	done
-
-PlayUsingSabrinaText:
-	text "Play using Leader"
-	line "Sabrina's team?"
-	done
-
-PlayAgainstSabrinaText:
-	text "Play against"
-	line "Leader Sabrina?"
-	done
-
-PlayUsingBlaineText:
-	text "Play using Leader"
-	line "Blaine's team?"
-	done
-
-PlayAgainstBlaineText:
-	text "Play against"
-	line "Leader Blaine?"
-	done
-
-PlayUsingWillText:
-	text "Play using Elite"
-	line "Four Will's team?"
-	done
-
-PlayAgainstWillText:
-	text "Play against Elite"
-	line "Four Will?"
-	done
-
-PlayUsingKogaText:
-	text "Play using Elite"
-	line "Four Koga's team?"
-	done
-
-PlayAgainstKogaText:
-	text "Play against Elite"
-	line "Four Koga?"
-	done
-
-PlayUsingBrunoText:
-	text "Play using Elite"
-	line "Four Bruno's team?"
-	done
-
-PlayAgainstBrunoText:
-	text "Play against Elite"
-	line "Four Bruno?"
-	done
-
-PlayUsingKarenText:
-	text "Play using Elite"
-	line "Four Karen's team?"
-	done
-
-PlayAgainstKarenText:
-	text "Play against Elite"
-	line "Four Karen?"
-	done
-
-PlayUsingLoreleiText:
-	text "Play using <PKMN>"
-	line "Trainer Lorelei's"
-	cont "team?"
-	done
-
-PlayAgainstLoreleiText:
-	text "Play against <PKMN>"
-	line "Trainer Lorelei?"
-	done
-
-PlayUsingAgathaText:
-	text "Play using <PKMN>"
-	line "Trainer Agatha's"
-	cont "team?"
-	done
-
-PlayAgainstAgathaText:
-	text "Play against <PKMN>"
-	line "Trainer Agatha?"
-	done
-
-PlayUsingInsafText:
-	text "Play using <PKMN>"
-	line "Trainer Insaf's"
-	cont "team?"
-	done
-
-PlayAgainstInsafText:
-	text "Play against"
-	line "<PKMN> Trainer Insaf?"
-	done
-
-PlayUsingSilverText:
-	text "Play using <PKMN>"
-	line "Trainer Silver's"
-	cont "team?"
-	done
-
-PlayAgainstSilverText:
-	text "Play against <PKMN>"
-	line "Trainer Silver?"
-	done
-
-PlayUsingGiovanniText:
-	text "Play using Boss"
-	line "Giovanni's team?"
-	done
-
-PlayAgainstGiovanniText:
-	text "Play against"
-	line "Boss Giovanni?"
-	done
-
-PlayUsingOakText:
-	text "Play using"
-	line "Professor Oak's"
-	cont "team?"
-	done
-
-PlayAgainstOakText:
-	text "Play against"
-	line "Professor Oak?"
-	done
-
-PlayUsingLanceText:
-	text "Play using"
-	line "Champion Lance's"
-	cont "team?"
-	done
-
-PlayAgainstLanceText:
-	text "Play against"
-	line "Champion Lance?"
-	done
-
-PlayUsingGreenText:
-	text "Play using <PKMN>"
-	line "Trainer Green's"
-	cont "team?"
-	done
-
-PlayAgainstGreenText:
-	text "Play against <PKMN>"
-	line "Trainer Green?"
-	done
-
-PlayUsingBlueText:
-	text "Play using <PKMN>"
-	line "Trainer Blue's"
-	cont "team?"
-	done
-
-PlayAgainstBlueText:
-	text "Play against <PKMN>"
-	line "Trainer Blue?"
-	done
-
-PlayUsingRedText:
-	text "Play using <PKMN>"
-	line "Trainer Red's"
-	cont "team?"
-	done
-
-PlayAgainstRedText:
-	text "Play against <PKMN>"
-	line "Trainer Red?"
-	done
-
-DraftArenaNoteSign:
-	jumptext DraftArenaNoteSignText
 
 DraftArenaNoteSignText:
 	text "You may battle us-"
@@ -1118,17 +1005,3 @@ DraftArenaNoteSignText:
 	para "Each victory will"
 	line "net you a Crystal."
 	done
-
-BattlePlazaDraftArena_MapEvents:
-	def_warp_events
-	warp_event  4, 13, BATTLE_PLAZA, 9
-	warp_event  3, 13, BATTLE_PLAZA, 8
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  2, 10, BGEVENT_READ, DraftArenaNoteSign
-
-	def_object_events
-	object_event  3, 10, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BattleArenaReceptionistScript, -1
-	object_event  4,  3, SPRITE_UNKNOWN, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
