@@ -121,8 +121,16 @@ DEF KRIS EQU __trainer_class__
 	const LIAM
 
 	trainerclass BIRD_KEEPER ; 18
-	const ROD
-	const ABE
+	const ABE1 ; violet gym trainer
+	const ABE2 ; violet gym trainer
+	const ABE3 ; violet gym trainer
+	const ABE4 ; violet gym trainer
+	const ABE5 ; violet gym trainer
+	const ROD1 ; violet gym trainer
+	const ROD2 ; violet gym trainer
+	const ROD3 ; violet gym trainer
+	const ROD4 ; violet gym trainer
+	const ROD5 ; violet gym trainer
 	const BRYAN
 	const THEO
 	const TOBY

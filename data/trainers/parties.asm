@@ -85,7 +85,6 @@ ScientistGroup:
 ErikaGroup:
 YoungsterGroup:
 SchoolboyGroup:
-BirdKeeperGroup:
 LassGroup:
 JanineGroup:
 CooltrainerMGroup:
@@ -253,6 +252,57 @@ AgathaGroup:
 
 	db "L@", TRAINERTYPE_NORMAL
 	db 2, ZUBAT
+	db -1 ; end
+
+BirdKeeperGroup:
+	; ABE (1)
+	db "Abe@", TRAINERTYPE_ITEM_MOVES
+	db LEVEL_FROM_PARTY, SWABLU,	BERRY,	TACKLE, NO_MOVE, NO_MOVE, NO_MOVE
+	db -1 ; end
+
+	; ABE (2)
+	db "Abe@", TRAINERTYPE_ITEM_MOVES
+	db LEVEL_FROM_PARTY, SWABLU,	BERRY,	TACKLE, NO_MOVE, NO_MOVE, NO_MOVE
+	db -1 ; end
+
+	; ABE (3)
+	db "Abe@", TRAINERTYPE_ITEM_MOVES
+	db LEVEL_FROM_PARTY, SWABLU,	BERRY,	TACKLE, NO_MOVE, NO_MOVE, NO_MOVE
+	db -1 ; end
+
+	; ABE (4)
+	db "Abe@", TRAINERTYPE_ITEM_MOVES
+	db LEVEL_FROM_PARTY, SWABLU,	BERRY,	TACKLE, NO_MOVE, NO_MOVE, NO_MOVE
+	db -1 ; end
+
+	; ABE (5)
+	db "Rod@", TRAINERTYPE_ITEM_MOVES
+	db LEVEL_FROM_PARTY, SWABLU,	BERRY,	TACKLE, NO_MOVE, NO_MOVE, NO_MOVE
+	db -1 ; end
+
+	; ROD (1)
+	db "Rod@", TRAINERTYPE_ITEM_MOVES
+	db LEVEL_FROM_PARTY, DODUO,	BERRY,	TACKLE, NO_MOVE, NO_MOVE, NO_MOVE
+	db -1 ; end
+
+	; ROD (2)
+	db "Rod@", TRAINERTYPE_ITEM_MOVES
+	db LEVEL_FROM_PARTY, DODUO,	BERRY,	TACKLE, NO_MOVE, NO_MOVE, NO_MOVE
+	db -1 ; end
+
+	; ROD (3)
+	db "Rod@", TRAINERTYPE_ITEM_MOVES
+	db LEVEL_FROM_PARTY, DODUO,	BERRY,	TACKLE, NO_MOVE, NO_MOVE, NO_MOVE
+	db -1 ; end
+
+	; ROD (4)
+	db "Rod@", TRAINERTYPE_ITEM_MOVES
+	db LEVEL_FROM_PARTY, DODUO,	BERRY,	TACKLE, NO_MOVE, NO_MOVE, NO_MOVE
+	db -1 ; end
+
+	; ROD (5)
+	db "Rod@", TRAINERTYPE_ITEM_MOVES
+	db LEVEL_FROM_PARTY, DODUO,	BERRY,	TACKLE, NO_MOVE, NO_MOVE, NO_MOVE
 	db -1 ; end
 
 KrisGroup:

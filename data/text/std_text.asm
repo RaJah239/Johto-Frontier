@@ -272,14 +272,14 @@ ContestResults_PartyFullText:
 GymStatue_CityGymText:
 	text_ram wStringBuffer3
 	text_start
-	line "#MON GYM"
+	line "#mon Gym"
 	done
 
 GymStatue_WinningTrainersText:
-	text "LEADER: @"
+	text "Leader: @"
 	text_ram wStringBuffer4
 	text_start
-	para "WINNING TRAINERS:"
+	para "Winning Trainers:"
 	line "<PLAYER>"
 	done
 

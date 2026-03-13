@@ -3167,8 +3167,9 @@ wBattlePlazaMagnetTrainStationSceneID::           db
 wOaksLab::                                        db
 wRoute21::                                        db
 wBattlePlaza::                                    db
+wVioletGym::                                      db
 
-	ds 177
+	ds 176
 
 ; battle tower points
 wBattleTowerNormalPoints:: db
