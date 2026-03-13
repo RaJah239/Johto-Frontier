@@ -29,5 +29,5 @@ LevitatePokemon::
 ;	db NOWN
 ;	db VICTINI
 ;	db CELEBI
-;	db MEW
+	db MEW
 	db -1 ; end
