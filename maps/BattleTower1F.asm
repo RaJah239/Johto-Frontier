@@ -4,7 +4,7 @@
 	const BATTLETOWER1F_COOLTRAINER_F
 	const BATTLETOWER1F_BUG_CATCHER
 	const BATTLETOWER1F_GRANNY
-
+; TODOTEXT to optimise this eventually
 BattleTower1F_MapScripts:
 	def_scene_scripts
 	scene_script BattleTower1FCheckStateScene, SCENE_BATTLETOWER1F_CHECKSTATE

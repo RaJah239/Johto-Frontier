@@ -1,7 +1,7 @@
 	object_const_def
 	const BATTLETOWERBATTLEROOM_YOUNGSTER
 	const BATTLETOWERBATTLEROOM_RECEPTIONIST
-
+; TODOTEXT to optimise this eventually
 BattleTowerBattleRoom_MapScripts:
 	def_scene_scripts
 	scene_script BattleTowerBattleRoomEnterScene, SCENE_BATTLETOWERBATTLEROOM_ENTER
