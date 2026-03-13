@@ -1,3 +1,15 @@
+BattleTowerElevator_MapEvents:
+	def_warp_events
+	warp_event  1,  3, BATTLE_TOWER_HALLWAY, 1
+	warp_event  2,  3, BATTLE_TOWER_HALLWAY, 1
+
+	def_coord_events
+
+	def_bg_events
+
+	def_object_events
+	object_event  1,  2, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MovementData_BattleTowerElevatorReceptionistWalksIn, -1
+
 	object_const_def
 	const BATTLETOWERELEVATOR_RECEPTIONIST
 
@@ -11,7 +23,6 @@ BattleTowerElevator_MapScripts:
 BattleTowerElevatorEnterScene:
 	sdefer BattleTowerElevatorRideElevatorScript
 	setscene SCENE_BATTLETOWERELEVATOR_NOOP
-	; fallthrough
 BattleTowerElevatorNoopScene:
 	end
 
@@ -41,15 +52,3 @@ MovementData_BattleTowerElevatorReceptionistWalksIn:
 MovementData_BattleTowerElevatorPlayerWalksIn:
 	turn_head DOWN
 	step_end
-
-BattleTowerElevator_MapEvents:
-	def_warp_events
-	warp_event  1,  3, BATTLE_TOWER_HALLWAY, 1
-	warp_event  2,  3, BATTLE_TOWER_HALLWAY, 1
-
-	def_coord_events
-
-	def_bg_events
-
-	def_object_events
-	object_event  1,  2, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MovementData_BattleTowerElevatorReceptionistWalksIn, -1
