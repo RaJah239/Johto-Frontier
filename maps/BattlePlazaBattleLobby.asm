@@ -1,3 +1,17 @@
+BattlePlazaBattleLobby_MapEvents:
+	def_warp_events
+	warp_event  4, 13, BATTLE_PLAZA, 7
+	warp_event  3, 13, BATTLE_PLAZA, 6
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  2, 10, BGEVENT_JUMPTEXT, BattleLobbyInfoSignText
+
+	def_object_events
+	object_event  3, 10, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, BattleLobbyReceptionistScript, -1
+	object_event  4,  3, SPRITE_UNKNOWN, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
+
 	object_const_def
 	const BATTLEPLAZABATTLELOBBY_RECEPTIONIST
 	const BATTLEPLAZABATTLELOBBY_ENEMY
@@ -11,9 +25,13 @@ BattleLobbyReceptionistScript:
 	opentext
 	checkevent EVENT_DID_NOT_GET_BATTLE_LOBBY_PRIZE
 	iftrue .GivePrize
-	writetext BattleLobbyIntroText
+	writethistext
+		text "Battle Lobby"
+		line "Welcomes you!"
+		done
 	promptbutton
 	special TryQuickSave
+	iffalse_endtext
 .ChooseMode
 	loadmenu .BattleLobbyModeTypeSelectionHeader
 	verticalmenu
@@ -66,12 +84,11 @@ BattleLobbyReceptionistScript:
 	; fallthrough
 
 .StartBattle:
-	writetext BattleLobbyReceptionistGoRightInText
-	waitbutton
-	closetext
-	applymovement BATTLEPLAZABATTLELOBBY_RECEPTIONIST, BattleLobbyReceptionist_MoveOutTheWay
-	applymovement PLAYER, BattleLobbyPlayer_EnterBattleRoom
-	winlosstext BattleLobbyPlayerVictoryText, 0
+	writetext BattlePlazasReceptionistGoRightInText
+	waitclosetext
+	applymovement BATTLEPLAZABATTLELOBBY_RECEPTIONIST, BattlePlazasReceptionist_MoveOutTheWay
+	applymovement PLAYER, BattlePlazasPlayer_EnterBattleRoom
+	winlosstext BattlePlazasPlayerVictoryText, 0
 .sample
 	random 3
 	ifequal 0, .Red
@@ -82,11 +99,9 @@ BattleLobbyReceptionistScript:
 .Red
 	loadtrainer RED, RED1
 	sjump .finish
-
 .Blue
 	loadtrainer BLUE, BLUE1
 	sjump .finish
-
 .Maxima
 	loadtrainer MAXIMA, MAXIMA1
 	; fallthrough
@@ -103,7 +118,7 @@ BattleLobbyReceptionistScript:
 	special LoadPokemonData
 	special HealParty
 	opentext
-	writetext BattleLobbyBattleLoseText
+	writetext BattlePlazasBattleLoseText
 	waitendtext
 
 .win
@@ -114,37 +129,35 @@ BattleLobbyReceptionistScript:
 	warpfacing UP, BATTLE_PLAZA_BATTLE_LOBBY, 3, 11
 	turnobject PLAYER, UP
 	opentext
-	writetext BattleLobbyBattleWinText
+	writetext BattlePlazasBattleWinText
 	promptbutton
 	special LoadPokemonData
 	special HealParty
 .GivePrize:
-	writetext BattleLobbyPrizeText
+	writetext BattlePlazasPrizeText
 	verbosegiveitem CRYSTAL
 	iffalse BattleLobbyPackFull
 	clearevent EVENT_DID_NOT_GET_BATTLE_LOBBY_PRIZE
-	closetext
-	end
+	endtext
 
 .Cancel:
-	writetext BattleLobbyPleaseComeAgainText
-	waitbutton
-	closetext
+	writetext BattlePlazasPleaseComeAgainText
+	waitclosetext
 	turnobject PLAYER, DOWN
 	end
 
 BattleLobbyPackFull:
 	setevent EVENT_DID_NOT_GET_BATTLE_LOBBY_PRIZE
-	writetext BattleLobbyFullPackText
+	writetext BattlePlazasFullPackText
 	waitendtext
 
-BattleLobbyReceptionist_MoveOutTheWay:
+BattlePlazasReceptionist_MoveOutTheWay:
 	step UP
     step RIGHT
     turn_head LEFT
     step_end
 
-BattleLobbyPlayer_EnterBattleRoom:
+BattlePlazasPlayer_EnterBattleRoom:
 	step UP
 	step UP
 	step UP
@@ -171,45 +184,37 @@ CheckHardModeASM:
     ld [wScriptVar], a
     ret
 
-BattleLobbyIntroText:
-	text "Battle Lobby"
-	line "Welcomes you!"
-	done
-
-BattleLobbyPleaseComeAgainText:
+BattlePlazasPleaseComeAgainText:
 	text "Do come again."
 	done
 
-BattleLobbyReceptionistGoRightInText:
+BattlePlazasReceptionistGoRightInText:
 	text "Please go right"
 	line "through."
 	done
 
-BattleLobbyPlayerVictoryText:
+BattlePlazasPlayerVictoryText:
 	text "Player Victory!"
 	done
 
-BattleLobbyBattleLoseText:
+BattlePlazasBattleLoseText:
 	text "We hope to serve"
 	line "you again."
     done
 
-BattleLobbyBattleWinText:
+BattlePlazasBattleWinText:
     text "Excellent work!"
     done
 
-BattleLobbyPrizeText:
+BattlePlazasPrizeText:
     text "Please accept"
     line "this prize."
     done
 
-BattleLobbyFullPackText:
+BattlePlazasFullPackText:
 	text "Return once you've"
 	line "made space for it."
 	done
-
-BattleLobbyInfoSign:
-	jumptext BattleLobbyInfoSignText
 
 BattleLobbyInfoSignText:
 	text "You may fight a"
@@ -219,17 +224,3 @@ BattleLobbyInfoSignText:
 	para "Each victory will"
 	line "net you a Crystal."
 	done
-
-BattlePlazaBattleLobby_MapEvents:
-	def_warp_events
-	warp_event  4, 13, BATTLE_PLAZA, 7
-	warp_event  3, 13, BATTLE_PLAZA, 6
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  2, 10, BGEVENT_READ, BattleLobbyInfoSign
-
-	def_object_events
-	object_event  3, 10, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, BattleLobbyReceptionistScript, -1
-	object_event  4,  3, SPRITE_UNKNOWN, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1

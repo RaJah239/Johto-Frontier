@@ -28,14 +28,14 @@ EchoChamberReceptionistScript:
 	yesorno
 	iffalse .done
 	special TryQuickSave
-	writetext BattleLobbyReceptionistGoRightInText
+	writetext BattlePlazasReceptionistGoRightInText
 	waitbutton
 	closetext
 
-	applymovement BATTLEPLAZAECHOCHAMBER_RECEPTIONIST, BattleLobbyReceptionist_MoveOutTheWay
-	applymovement PLAYER, BattleLobbyPlayer_EnterBattleRoom
+	applymovement BATTLEPLAZAECHOCHAMBER_RECEPTIONIST, BattlePlazasReceptionist_MoveOutTheWay
+	applymovement PLAYER, BattlePlazasPlayer_EnterBattleRoom
 
-	winlosstext BattleLobbyPlayerVictoryText, 0
+	winlosstext BattlePlazasPlayerVictoryText, 0
 
 	checkflag ENGINE_PLAYER_IS_FEMALE
 	iftrue .Female
@@ -59,7 +59,7 @@ EchoChamberReceptionistScript:
 	special LoadPokemonData
 	special HealParty
 	opentext
-	writetext BattleLobbyBattleLoseText
+	writetext BattlePlazasBattleLoseText
 	waitendtext
 
 .done
@@ -75,12 +75,12 @@ EchoChamberReceptionistScript:
 	warpfacing UP, BATTLE_PLAZA_ECHO_CHAMBER, 3, 11
 	turnobject PLAYER, UP
 	opentext
-	writetext BattleLobbyBattleWinText
+	writetext BattlePlazasBattleWinText
 	promptbutton
 	special LoadPokemonData
 	special HealParty
 .GivePrize:
-	writetext BattleLobbyPrizeText
+	writetext BattlePlazasPrizeText
 	verbosegiveitem AMULET_COIN
 	iffalse EchoChamberPackFull
 	clearevent EVENT_DID_NOT_GET_ECHO_CHAMBER_PRIZE
@@ -88,7 +88,7 @@ EchoChamberReceptionistScript:
 	end
 
 .Cancel:
-	writetext BattleLobbyPleaseComeAgainText
+	writetext BattlePlazasPleaseComeAgainText
 	waitbutton
 	closetext
 	turnobject PLAYER, DOWN
@@ -96,7 +96,7 @@ EchoChamberReceptionistScript:
 
 EchoChamberPackFull:
 	setevent EVENT_DID_NOT_GET_ECHO_CHAMBER_PRIZE
-	writetext BattleLobbyFullPackText
+	writetext BattlePlazasFullPackText
 	waitendtext
 
 EchoChamberIntroText:

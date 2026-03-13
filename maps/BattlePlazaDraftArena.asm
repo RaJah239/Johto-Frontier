@@ -28,12 +28,12 @@ BattleArenaReceptionistScript:
 	sjump .ChooseEnemyCharacter
 
 .StartBattle
-	writetext BattleLobbyReceptionistGoRightInText
+	writetext BattlePlazasReceptionistGoRightInText
 	waitbutton
 	closetext
-	applymovement BATTLEPLAZABATTLEARENA_RECPTIONIST, BattleLobbyReceptionist_MoveOutTheWay
-	applymovement PLAYER, BattleLobbyPlayer_EnterBattleRoom
-	winlosstext BattleLobbyPlayerVictoryText, 0
+	applymovement BATTLEPLAZABATTLEARENA_RECPTIONIST, BattlePlazasReceptionist_MoveOutTheWay
+	applymovement PLAYER, BattlePlazasPlayer_EnterBattleRoom
+	winlosstext BattlePlazasPlayerVictoryText, 0
 	startbattle
 	ifequal WIN, .win
 	dontrestartmapmusic
@@ -43,7 +43,7 @@ BattleArenaReceptionistScript:
 	warpfacing UP, BATTLE_PLAZA_DRAFT_ARENA, 3, 11
 	turnobject PLAYER, UP
 	opentext
-	writetext BattleLobbyBattleLoseText
+	writetext BattlePlazasBattleLoseText
 	waitbutton
 	special LoadPokemonData
 	special HealParty
@@ -59,7 +59,7 @@ BattleArenaReceptionistScript:
 	warpfacing UP, BATTLE_PLAZA_DRAFT_ARENA, 3, 11
 	turnobject PLAYER, UP
 	opentext
-	writetext BattleLobbyBattleWinText
+	writetext BattlePlazasBattleWinText
 	waitbutton
 	special LoadPokemonData
 	special HealParty
@@ -110,7 +110,7 @@ BattleArenaReceptionistScript:
 	yesorno
 	iffalse .ChoosePlayerCharacter
 	special LoadPokemonData
-	writetext BattleLobbyBattleLoseText
+	writetext BattlePlazasBattleLoseText
 	waitendtext
 
 .ChooseEnemyCharacter
@@ -152,7 +152,7 @@ BattleArenaReceptionistScript:
 	yesorno
 	iffalse .ChooseEnemyCharacter
 	special LoadPokemonData
-	writetext BattleLobbyBattleLoseText
+	writetext BattlePlazasBattleLoseText
 	waitendtext
 
 .RandomPlayer:
@@ -769,7 +769,7 @@ BattleArenaReceptionistScript:
 
 BattleArenaPackFull:
 	setevent EVENT_DID_NOT_GET_BATTLE_ARENA_PRIZE
-	writetext BattleLobbyFullPackText
+	writetext BattlePlazasFullPackText
 	waitendtext
 
 BattleArenaIntroText:
