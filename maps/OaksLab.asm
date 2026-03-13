@@ -1,10 +1,45 @@
+OaksLab_MapEvents:
+	def_warp_events
+	warp_event  4, 11, BATTLE_PLAZA, 4
+	warp_event  5, 11, BATTLE_PLAZA, 4
+
+	def_coord_events
+	coord_event  4,  6, SCENE_OAKS_LAB_NAYRU62, Nayru62CoordScript1
+	coord_event  5,  6, SCENE_OAKS_LAB_NAYRU62, Nayru62CoordScript2
+
+	def_bg_events
+	bg_event  6,  1, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  7,  1, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  8,  1, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  9,  1, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  0,  7, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  1,  7, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  2,  7, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  3,  7, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  6,  7, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  7,  7, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  8,  7, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  9,  7, BGEVENT_JUMPSTD, DIFFICULT_BOOKSHELF_SCRIPT
+	bg_event  4,  0, BGEVENT_JUMPTEXT, OaksLabPoster1Text
+	bg_event  5,  0, BGEVENT_JUMPTEXT, OaksLabPoster2Text
+	bg_event  9,  3, BGEVENT_JUMPTEXT, OaksLabTrashcanText
+	bg_event  0,  1, BGEVENT_JUMPTEXT, OaksLabPCText
+
+	def_object_events
+	chanseyheal_event 8, 4
+	porygonpc_event 0, 4, PAL_NPC_RED
+	object_event  4,  2, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, OakScript, -1
+	object_event  3,  5, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Nayru62Script, EVENT_OAKSLAB_NAYRU62
+	object_event  1,  8, SPRITE_SCIENTIST, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_COMMAND, jumptextfaceplayer, OaksAssistant1Text, -1
+	object_event  7,  8, SPRITE_SCIENTIST, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_COMMAND, jumptextfaceplayer, OaksAssistant2Text, -1
+
 	object_const_def
+	const OAKSLAB_CHANSEY
+	const OAKSLAB_PORYGON_PC
 	const OAKSLAB_OAK
+	const OAKSLAB_NAYRU62
 	const OAKSLAB_SCIENTIST1
 	const OAKSLAB_SCIENTIST2
-	const OAKSLAB_PORYGON_PC
-	const OAKSLAB_CHANSEY
-	const OAKSLAB_NAYRU62
 
 OaksLab_MapScripts:
 	def_scene_scripts
@@ -14,245 +49,97 @@ OaksLab_MapScripts:
 	def_callbacks
 
 OaksLabNoop1Scene:
-	; fallthrough
 OaksLabFNoop2Scene:
 	end
 
-Oak:
-	faceplayer
-	opentext
-	checkevent EVENT_OPENED_MT_SILVER
-	iftrue .CheckPokedex
-	checkevent EVENT_TALKED_TO_OAK_IN_KANTO
-	iftrue .CheckBadges
-	writetext OakWelcomeKantoText
-	promptbutton
-	setevent EVENT_TALKED_TO_OAK_IN_KANTO
-.CheckBadges:
-	readvar VAR_BADGES
-	ifequal NUM_BADGES, .OpenMtSilver
-	ifequal NUM_JOHTO_BADGES, .Complain
-	sjump .AhGood
+OakScript:
+	faceplayeropentext
+	checkevent EVENT_TALKED_TO_OAK_IN_BATTLE_PLAZA
+	iftrue .CheckPokedexOrBattle
+	writethistext
+		text "Oak: Ah, <PLAY_G>!"
+		line "I've heard of you"
+		cont "from Elm."
 
+		para "You made it far"
+		line "from New Bark!"
+
+		para "Give my regards"
+		line "to Elm when you"
+		cont "see him."
+
+		para "My lab was moved"
+		line "here from another"
+		cont "region."
+
+		para "I was a serious"
+		line "#mon trainer"
+		cont "aback and still"
+		cont "dabble in battles"
+		cont "today."
+
+		para "Talk to me again"
+		line "if you think you"
+		cont "are up for a ser-"
+		cont "ious challenge."
+		done
+	promptbutton
+	setevent EVENT_TALKED_TO_OAK_IN_BATTLE_PLAZA
 .CheckPokedex:
-	writetext OakLabDexCheckText
+	writethistext
+		text "How is your #-"
+		line "dex coming?"
+
+		para "Let's see…"
+		done
 	waitbutton
 	special ProfOaksPCBoot
-	writetext OakLabGoodbyeText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "If you're in the"
+		line "area, I hope you"
+		cont "come visit again."
+		done
 
-.OpenMtSilver:
-	writetext OakOpenMtSilverText
-	promptbutton
-	setevent EVENT_OPENED_MT_SILVER
-	sjump .CheckPokedex
+.CheckPokedexOrBattle:
+	writethistext
+		text "Say, <PLAYER>,"
+		line "are you up for"
+		cont "a practice battle?"
+		done
+	yesorno
+	iffalse .CheckPokedex
+	writethistext
+		text "Great! Don't worry"
+		line "about losing here."
 
-.Complain:
-	writetext OakNoKantoBadgesText
-	promptbutton
-	sjump .CheckPokedex
+		para "You'll not get a"
+		line "whiteout."
 
-.AhGood:
-	writetext OakYesKantoBadgesText
-	promptbutton
-	sjump .CheckPokedex
+		para "Let's both of us"
+		line "do our best 8-)"
+		done
+	waitclosetext
+	special SaveMusic
+	winlosstext .BeatenText, 0
+	loadtrainer POKEMON_PROF, OAK1
+	startbattle
+	reloadmap
+	special RestoreMusic
+	special HealParty
+	jumpthistext
+		text "That was pretty"
+		line "fun, wasn't it?"
 
-OaksAssistant1Script:
-	jumptextfaceplayer OaksAssistant1Text
+		para "Drop by anytime"
+		line "for another go."
+		done
 
-OaksAssistant2Script:
-	jumptextfaceplayer OaksAssistant2Text
-
-OaksLabBookshelf:
-	jumpstd DifficultBookshelfScript
-
-OaksLabPoster1:
-	jumptext OaksLabPoster1Text
-
-OaksLabPoster2:
-	jumptext OaksLabPoster2Text
-
-OaksLabTrashcan:
-	jumptext OaksLabTrashcanText
-
-OaksLabPC:
-	jumptext OaksLabPCText
-
-OakWelcomeKantoText:
-	text "OAK: Ah, <PLAY_G>!"
-	line "It's good of you"
-
-	para "to come all this"
-	line "way to KANTO."
-
-	para "What do you think"
-	line "of the trainers"
-
-	para "out here?"
-	line "Pretty tough, huh?"
+.BeatenText
+	text "Seems you love"
+	line "battling as much"
+	cont "as I did in my"
+	cont "youth!"
 	done
-
-OakLabDexCheckText:
-	text "How is your #-"
-	line "DEX coming?"
-
-	para "Let's see…"
-	done
-
-OakLabGoodbyeText:
-	text "If you're in the"
-	line "area, I hope you"
-	cont "come visit again."
-	done
-
-OakOpenMtSilverText:
-	text "OAK: Wow! That's"
-	line "excellent!"
-
-	para "You collected the"
-	line "BADGES of GYMS in"
-	cont "KANTO. Well done!"
-
-	para "I was right in my"
-	line "assessment of you."
-
-	para "Tell you what,"
-	line "<PLAY_G>. I'll make"
-
-	para "arrangements so"
-	line "that you can go to"
-	cont "MT.SILVER."
-
-	para "MT.SILVER is a big"
-	line "mountain that is"
-
-	para "home to many wild"
-	line "#MON."
-
-	para "It's too dangerous"
-	line "for your average"
-
-	para "trainer, so it's"
-	line "off limits. But"
-
-	para "we can make an"
-	line "exception in your"
-	cont "case, <PLAY_G>."
-
-	para "Go up to INDIGO"
-	line "PLATEAU. You can"
-
-	para "reach MT.SILVER"
-	line "from there."
-	done
-
-OakNoKantoBadgesText:
-	text "OAK: Hmm? You're"
-	line "not collecting"
-	cont "KANTO GYM BADGES?"
-
-	para "The GYM LEADERS in"
-	line "KANTO are as tough"
-
-	para "as any you battled"
-	line "in JOHTO."
-
-	para "I recommend that"
-	line "you challenge"
-	cont "them."
-	done
-
-OakYesKantoBadgesText:
-	text "OAK: Ah, you're"
-	line "collecting KANTO"
-	cont "GYM BADGES."
-
-	para "I imagine that"
-	line "it's hard, but the"
-
-	para "experience is sure"
-	line "to help you."
-
-	para "Come see me when"
-	line "you get them all."
-
-	para "I'll have a gift"
-	line "for you."
-
-	para "Keep trying hard,"
-	line "<PLAY_G>!"
-	done
-
-OaksAssistant1Text:
-	text "The PROF's #MON"
-	line "TALK radio program"
-
-	para "isn't aired here"
-	line "in KANTO."
-
-	para "It's a shame--I'd"
-	line "like to hear it."
-	done
-
-OaksAssistant2Text:
-	text "Don't tell anyone,"
-	line "but PROF.OAK'S"
-
-	para "#MON TALK isn't"
-	line "a live broadcast."
-	done
-
-OaksLabPoster1Text:
-	text "Press START to"
-	line "open the MENU."
-	done
-
-OaksLabPoster2Text:
-	text "The SAVE option is"
-	line "on the MENU."
-
-	para "Use it in a timely"
-	line "manner."
-	done
-
-OaksLabTrashcanText:
-	text "There's nothing in"
-	line "here…"
-	done
-
-OaksLabPCText:
-	text "There's an e-mail"
-	line "message on the PC."
-
-	para "…"
-
-	para "PROF.OAK, how is"
-	line "your research"
-	cont "coming along?"
-
-	para "I'm still plugging"
-	line "away."
-
-	para "I heard rumors"
-	line "that <PLAY_G> is"
-
-	para "getting quite a"
-	line "reputation."
-
-	para "I'm delighted to"
-	line "hear that."
-
-	para "ELM in NEW BARK"
-	line "TOWN 8-)"
-	done
-
-OaksLabPorygonPCScript:
-	jumpstd PorygonPCScript
-
-OaksLabChanseyScript:
-	jumpstd ChanseyHealsOWScript
 
 Nayru62CoordScript1:
 	turnobject PLAYER, LEFT
@@ -265,10 +152,18 @@ Nayru62CoordScript1:
 	opentext
 	writetext Nayru62IntroText
 	waitbutton
-	scall Nayru62Script
+	scall Nayru62ScriptNoOpenText
 	applymovement OAKSLAB_NAYRU62, OaksLabNayru62LeavesMovement1
 	setscene SCENE_OAKS_LAB_NOOP
 	end
+
+OaksLabNayru62ApproachesMovement1:
+	step RIGHT
+	step_end
+
+OaksLabNayru62LeavesMovement1:
+	step LEFT
+	step_end
 
 Nayru62CoordScript2:
 	turnobject PLAYER, LEFT
@@ -281,24 +176,50 @@ Nayru62CoordScript2:
 	opentext
 	writetext Nayru62IntroText
 	waitbutton
-	scall Nayru62Script
+	scall Nayru62ScriptNoOpenText
 	applymovement OAKSLAB_NAYRU62, OaksLabNayru62LeavesMovement2
 	setscene SCENE_OAKS_LAB_NOOP
 	end
 
+OaksLabNayru62ApproachesMovement2:
+	step RIGHT
+	step RIGHT
+	step_end
+
+OaksLabNayru62LeavesMovement2:
+	step LEFT
+	step LEFT
+	step_end
+
 Nayru62Script:
-	faceplayer
-	opentext
+	faceplayeropentext
+Nayru62ScriptNoOpenText:
 	checkevent EVENT_SHINY_CHARM_OBTAINED
 	iftrue .AreYouMakingingUseOfTheShinyCharm
-	writetext NayruHowsYourDexText
+	writethistext
+		text "Nayru62: Have you"
+		line "registered all 252"
+		cont "#mon yet?"
+		done
 	promptbutton
 	readvar VAR_DEXCAUGHT
 	ifequal 252, .PokedexCompleted
-	writetext NayruStillHaveABitMoreToCollectText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Seems like you've"
+		line "a bit more to go."
+		
+		para "Come visit me when"
+		line "it's completed."
+		
+		para "I'll have a gift"
+		line "for you then."
+		
+		para "In the meantime,"
+		line "work hard on it!"
+		
+		para "I'm cheering for"
+		line "you!"
+		done
 
 .PokedexCompleted
 	closetext
@@ -317,48 +238,62 @@ Nayru62Script:
 	turnobject OAKSLAB_NAYRU62, UP
 	turnobject OAKSLAB_NAYRU62, DOWN
 	turnobject OAKSLAB_NAYRU62, RIGHT
-	faceplayer
-	opentext
-	writetext Nayru62IncredibleJobText
+	faceplayeropentext
+	writethistext
+		text "OH MY!!!"
+		
+		para "This is incredibly"
+		line "rare and amazing!"
+		
+		para "Fantastic job on"
+		line "your endeavor!"
+		
+		para "I know it must've"
+		line "taken you a long"
+		cont "time to accomplish"
+		cont "this feat!"
+		
+		para "I have this item"
+		line "for you! Take it!"
+		done
 	promptbutton
 	verbosegiveitem SHINY_CHARM
-	writetext ShinyCharmExplanationText
 	setevent EVENT_SHINY_CHARM_OBTAINED
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "That's the one and"
+		line "only Shiny Charm!"
+		
+		para "With this item in"
+		line "your bag, the odds"
+		cont "of finding a shiny"
+		cont "#mon jumps to"
+		cont "1<%> per encounter!"
+		
+		para "Isn't that just"
+		line "awesome! Have fun"
+		cont "shiny hunting!"
+		done
 
 .AreYouMakingingUseOfTheShinyCharm
-	writetext AreYouFindingUseOfTheShinyCharmText
-	waitbutton
-	closetext
-	end
-
-OaksLabNayru62ApproachesMovement1:
-	step RIGHT
-	step_end
-
-OaksLabNayru62LeavesMovement1:
-	step LEFT
-	step_end
-
-OaksLabNayru62ApproachesMovement2:
-	step RIGHT
-	step RIGHT
-	step_end
-
-OaksLabNayru62LeavesMovement2:
-	step LEFT
-	step LEFT
-	step_end
+	jumpthisopenedtext
+		text "Nayru62: Why hello"
+		line "there <PLAY_G>."
+		
+		para "Making use of the"
+		line "Shiny Charm?"
+		
+		para "Recall, with it in"
+		line "your bag, there's"
+		cont "a 1<%> chance to"
+		cont "find a shiny #-"
+		cont "#mon per en-"
+		cont "counter!"
+		done
 
 Nayru62IntroText:
 	text "<PLAY_G>! Prof.Oak"
-	line "has told me loads"
-	cont "about you!"
-
-	para "He's mighty proud"
-	line "of you!"
+	line "has told me about"
+	cont "you!"
 
 	para "I've not introduced"
 	line "myself yet!"
@@ -372,128 +307,62 @@ Nayru62IntroText:
 	
 	para "His previous need-"
 	line "ed some augments."
-	
+
 	para "What? You've really"
 	line "enjoyed it!?"
-	
+
 	para "Well, I'm thrilled!"
-	
+
 	para "Say, if you record"
 	line "the data of all"
-	
-	para "252 #mon on it,"
-	line "come see me. Wait,"
+	cont "252 #mon on it,"
+	cont "come see me. Wait,"
 	cont "let's check now?"
 	done
 
-NayruHowsYourDexText:
-	text "Nayru62: Have you"
-	line "registered all 252"
-	cont "#mon yet?"
+OaksAssistant1Text:
+	text "The Prof's #mon"
+	line "Talk radio program"
+	cont "is pre-recorded."
 	done
 
-NayruStillHaveABitMoreToCollectText:
-	text "Seems like you've"
-	line "a bit more to go."
-	
-	para "Come visit me when"
-	line "it's completed."
-	
-	para "I'll have a gift"
-	line "for you then."
-	
-	para "In the meantime,"
-	line "work hard on it!"
-	
-	para "I'm cheering for"
-	line "you!"
+OaksAssistant2Text:
+	text "This lab is has"
+	line "been in operation"
+	cont "for 3 years now."
 	done
 
-Nayru62IncredibleJobText:
-	text "OH MY!!!"
-	
-	para "This is incredibly"
-	line "rare and amazing!"
-	
-	para "Fantastic job on"
-	line "your endeavor!"
-	
-	para "I know it must've"
-	line "taken you a long"
-	
-	para "time to accomplish"
-	line "this feat!"
-	
-	para "I have this item"
-	line "for you! Take it!"
-	done
-	
-ShinyCharmExplanationText:
-	text "That's the one and"
-	line "only Shiny Charm!"
-	
-	para "With this item in"
-	line "your bag, the odds"
-	
-	para "of finding a shiny"
-	line "#mon jumps to"
-	
-	para "3.125<%> per"
-	line "encounter!"
-	
-	para "Isn't that just"
-	line "awesome! Have fun"
-	cont "shiny hunting!"
+OaksLabPoster1Text:
+	text "Press Start to"
+	line "open the Menu."
 	done
 
-AreYouFindingUseOfTheShinyCharmText:
-	text "Nayru62: Why hello"
-	line "there <PLAY_G>."
-	
-	para "Making use of the"
-	line "Shiny Charm?"
-	
-	para "Recall, with it in"
-	line "your bag, there's"
-	
-	para "a 3.125<%> chance"
-	line "to find a"
-	
-	para "Shiny #mon"
-	line "per encounter!"
+OaksLabPoster2Text:
+	text "The Save option is"
+	line "on the Menu."
+
+	para "Use it in a timely"
+	line "manner."
 	done
 
-OaksLab_MapEvents:
-	def_warp_events
-	warp_event  4, 11, BATTLE_PLAZA, 4
-	warp_event  5, 11, BATTLE_PLAZA, 4
+OaksLabTrashcanText:
+	text "There's nothing in"
+	line "here…"
+	done
 
-	def_coord_events
-	coord_event  4,  6, SCENE_OAKS_LAB_NAYRU62, Nayru62CoordScript1
-	coord_event  5,  6, SCENE_OAKS_LAB_NAYRU62, Nayru62CoordScript2
+OaksLabPCText:
+	text "There's an e-mail"
+	line "message on the PC."
 
-	def_bg_events
-	bg_event  6,  1, BGEVENT_READ, OaksLabBookshelf
-	bg_event  7,  1, BGEVENT_READ, OaksLabBookshelf
-	bg_event  8,  1, BGEVENT_READ, OaksLabBookshelf
-	bg_event  9,  1, BGEVENT_READ, OaksLabBookshelf
-	bg_event  0,  7, BGEVENT_READ, OaksLabBookshelf
-	bg_event  1,  7, BGEVENT_READ, OaksLabBookshelf
-	bg_event  2,  7, BGEVENT_READ, OaksLabBookshelf
-	bg_event  3,  7, BGEVENT_READ, OaksLabBookshelf
-	bg_event  6,  7, BGEVENT_READ, OaksLabBookshelf
-	bg_event  7,  7, BGEVENT_READ, OaksLabBookshelf
-	bg_event  8,  7, BGEVENT_READ, OaksLabBookshelf
-	bg_event  9,  7, BGEVENT_READ, OaksLabBookshelf
-	bg_event  4,  0, BGEVENT_READ, OaksLabPoster1
-	bg_event  5,  0, BGEVENT_READ, OaksLabPoster2
-	bg_event  9,  3, BGEVENT_READ, OaksLabTrashcan
-	bg_event  0,  1, BGEVENT_READ, OaksLabPC
+	para "…"
 
-	def_object_events
-	object_event  4,  2, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Oak, -1
-	object_event  1,  8, SPRITE_SCIENTIST, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, OaksAssistant1Script, -1
-	object_event  7,  8, SPRITE_SCIENTIST, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, OaksAssistant2Script, -1
-	object_event  0,  4, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, OaksLabPorygonPCScript, -1
-	object_event  8,  4, SPRITE_CHANSEY_OW, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, OaksLabChanseyScript, -1
-	object_event  3,  5, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Nayru62Script, EVENT_OAKSLAB_NAYRU62
+	para "Prof.Oak, how is"
+	line "your research"
+	cont "coming along?"
+
+	para "I'm still plugging"
+	line "away."
+
+	para "ELM in NEW BARK"
+	line "TOWN 8-)"
+	done

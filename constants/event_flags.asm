@@ -238,7 +238,7 @@
 	const_skip
 	const_skip
 	const_skip
-	const EVENT_TALKED_TO_OAK_IN_KANTO
+	const EVENT_TALKED_TO_OAK_IN_BATTLE_PLAZA
 	const_skip
 	const_skip
 ; Kanto hidden items
@@ -1462,7 +1462,7 @@
 	const EVENT_BLACKTHORN_CITY_GRAMPS_BLOCKS_DRAGONS_DEN
 	const_skip
 	const EVENT_RUINS_OF_ALPH_LILEEP_CHAMBER_RECEPTIONIST
-	const EVENT_OPENED_MT_SILVER
+	const_skip
 	const_skip
 	const EVENT_LAKE_OF_RAGE_RED_GYARADOS
 	const EVENT_GOLDENROD_UNDERGROUND_GRANNY
