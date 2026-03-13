@@ -1,3 +1,21 @@
+BattlePlazaMagnetTrainStation_MapEvents:
+	def_warp_events
+	warp_event  8, 17, BATTLE_PLAZA, 1
+	warp_event  9, 17, BATTLE_PLAZA, 1
+	warp_event  6,  5, GOLDENROD_MAGNET_TRAIN_STATION, 4
+	warp_event 11,  5, GOLDENROD_MAGNET_TRAIN_STATION, 3
+
+	def_coord_events
+	coord_event 11,  6, SCENE_BATTLEPLAZAMAGNETTRAINSTATION_ARRIVE_FROM_GOLDENROD, Script_ArriveFromGoldenrod
+
+	def_bg_events
+
+	def_object_events
+	object_event  9,  9, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BattlePlazaMagnetTrainStationOfficerScript, -1
+	object_event 10, 14, SPRITE_GYM_GUIDE, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, BattlePlazaMagnetTrainStationGymGuideText, -1
+	object_event  6, 11, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, BattlePlazaMagnetTrainStationTeacherText, -1
+	object_event  6, 10, SPRITE_LASS, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, BattlePlazaMagnetTrainStationLassText, -1
+
 	object_const_def
 	const BATTLEPLAZAMAGNETTRAINSTATION_OFFICER
 	const BATTLEPLAZAMAGNETTRAINSTATION_GYM_GUIDE
@@ -14,14 +32,21 @@ BattlePlazaMagnetTrainStationNoopScene:
 	end
 
 BattlePlazaMagnetTrainStationOfficerScript:
-	faceplayer
-	opentext
-	writetext BattlePlazaMagnetTrainStationOfficerAreYouComingOnBoardText
+	faceplayeropentext
+	writethistext
+		text "We'll soon depart"
+		line "for Goldenrod."
+
+		para "Are you coming on"
+		line "board?"
+		done
 	yesorno
 	iffalse .DecidedNotToRide
-	writetext BattlePlazaMagnetTrainStationOfficerRightThisWayText
-	waitbutton
-	closetext
+	writethistext
+		text "OK. Right this"
+		line "way, please."
+		done
+	waitclosetext
 	applymovement BATTLEPLAZAMAGNETTRAINSTATION_OFFICER, BattlePlazaMagnetTrainStationOfficerApproachTrainDoorMovement
 	applymovement PLAYER, BattlePlazaMagnetTrainStationPlayerApproachAndEnterTrainMovement
 	setval TRUE
@@ -37,29 +62,22 @@ BattlePlazaMagnetTrainStationOfficerScript:
 	step_end
 
 .DecidedNotToRide:
-	writetext BattlePlazaMagnetTrainStationOfficerHopeToSeeYouAgainText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "We hope to see you"
+		line "again."
+		done
 
 Script_ArriveFromGoldenrod:
 	applymovement BATTLEPLAZAMAGNETTRAINSTATION_OFFICER, BattlePlazaMagnetTrainStationOfficerApproachTrainDoorMovement
 	applymovement PLAYER, BattlePlazaMagnetTrainStationPlayerLeaveTrainAndEnterStationMovement
 	applymovement BATTLEPLAZAMAGNETTRAINSTATION_OFFICER, BattlePlazaMagnetTrainStationOfficerReturnToBoardingGateMovement
-	opentext
-	writetext BattlePlazaMagnetTrainStationOfficerArrivedInRoute26Text
-	waitbutton
-	closetext
-	end
+	jumpthistext
+		text "We have arrived in"
+		line "Goldenrod City."
 
-BattlePlazaMagnetTrainStationGymGuideScript:
-	jumptextfaceplayer BattlePlazaMagnetTrainStationGymGuideText_ReturnedMachinePart
-
-BattlePlazaMagnetTrainStationTeacherScript:
-	jumptextfaceplayer BattlePlazaMagnetTrainStationTeacherText
-
-BattlePlazaMagnetTrainStationLassScript:
-	jumptextfaceplayer BattlePlazaMagnetTrainStationLassText
+		para "We hope to see you"
+		line "again."
+		done
 
 BattlePlazaMagnetTrainStationOfficerApproachTrainDoorMovement:
 	step UP
@@ -95,79 +113,20 @@ BattlePlazaMagnetTrainStationPlayerLeaveTrainAndEnterStationMovement:
 	turn_head UP
 	step_end
 
-BattlePlazaMagnetTrainStationOfficerAreYouComingOnBoardText:
-	text "We'll soon depart"
-	line "for GOLDENROD."
-
-	para "Are you coming on"
-	line "board?"
-	done
-
-BattlePlazaMagnetTrainStationOfficerRightThisWayText:
-	text "OK. Right this"
-	line "way, please."
-	done
-
-BattlePlazaMagnetTrainStationOfficerHopeToSeeYouAgainText:
-	text "We hope to see you"
-	line "again."
-	done
-
-BattlePlazaMagnetTrainStationOfficerArrivedInRoute26Text:
-	text "We have arrived in"
-	line "Route 26."
-
-	para "We hope to see you"
-	line "again."
-	done
-
-BattlePlazaMagnetTrainStationGymGuideText_ReturnedMachinePart:
+BattlePlazaMagnetTrainStationGymGuideText:
 	text "Whew…"
 
-	para "How many times"
-	line "have I gone back"
-
-	para "and forth between"
-	line "KANTO and JOHTO?"
+	para "Being on a train,"
+	line "even a fast one"
+	cont "is tiring…"
 	done
 
 BattlePlazaMagnetTrainStationTeacherText:
-	text "Before the MAGNET"
-	line "TRAIN STATION was"
-
-	para "built, there was a"
-	line "house there."
-
-	para "A little girl"
-	line "named COPYCAT used"
-	cont "to live there."
+	text "I'm going to the"
+	line "Draft Arena next."
 	done
 
 BattlePlazaMagnetTrainStationLassText:
-	text "Hi. Do you have a"
-	line "rail PASS? I have"
-
-	para "one. All the peo-"
-	line "ple in Route26 who"
-
-	para "ride the MAGNET"
-	line "TRAIN have PASSES."
+	text "The Battle Tower"
+	line "is tough!"
 	done
-
-BattlePlazaMagnetTrainStation_MapEvents:
-	def_warp_events
-	warp_event  8, 17, BATTLE_PLAZA, 1
-	warp_event  9, 17, BATTLE_PLAZA, 1
-	warp_event  6,  5, GOLDENROD_MAGNET_TRAIN_STATION, 4
-	warp_event 11,  5, GOLDENROD_MAGNET_TRAIN_STATION, 3
-
-	def_coord_events
-	coord_event 11,  6, SCENE_BATTLEPLAZAMAGNETTRAINSTATION_ARRIVE_FROM_GOLDENROD, Script_ArriveFromGoldenrod
-
-	def_bg_events
-
-	def_object_events
-	object_event  9,  9, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BattlePlazaMagnetTrainStationOfficerScript, -1
-	object_event 10, 14, SPRITE_GYM_GUIDE, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BattlePlazaMagnetTrainStationGymGuideScript, -1
-	object_event  6, 11, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BattlePlazaMagnetTrainStationTeacherScript, -1
-	object_event  6, 10, SPRITE_LASS, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, BattlePlazaMagnetTrainStationLassScript, -1
