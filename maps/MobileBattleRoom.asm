@@ -4,7 +4,7 @@ MobileBattleRoom_MapScripts:
 	scene_script MobileBattleRoomNoopScene,       SCENE_MOBILEBATTLEROOM_NOOP
 
 	def_callbacks
-
+; TODOTEXT to remove this
 MobileBattleRoomInitializeScene:
 	sdefer MobileBattleRoomInitializeAndPreparePokecenter2FScript
 	end

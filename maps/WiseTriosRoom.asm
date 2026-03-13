@@ -6,6 +6,7 @@
 	const WISETRIOSROOM_SAGE5
 	const WISETRIOSROOM_SAGE6
 
+; TODOTEXT when I figure what to do with this..
 WiseTriosRoom_MapScripts:
 	def_scene_scripts
 	scene_script WiseTriosRoomNoop1Scene, SCENE_WISETRIOSROOM_SAGE_BLOCKS

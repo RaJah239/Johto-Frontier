@@ -38,7 +38,7 @@ TimeCapsuleConsoleScript:
 	special TimeCapsule
 	newloadmap MAPSETUP_LINKRETURN
 	end
-
+; TODOTEXT to remove this
 TimeCapsuleFriendScript:
 	opentext
 	writetext .FriendReadyText

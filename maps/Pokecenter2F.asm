@@ -3,7 +3,7 @@
 	const POKECENTER2F_BATTLE_RECEPTIONIST
 	const POKECENTER2F_TIME_CAPSULE_RECEPTIONIST
 	const POKECENTER2F_OFFICER
-
+; TODOTEXT to optimise this
 Pokecenter2F_MapScripts:
 	def_scene_scripts
 	scene_script Pokecenter2FCheckMysteryGiftScene,      SCENE_POKECENTER2F_CHECK_MYSTERY_GIFT
