@@ -1665,14 +1665,14 @@ SetDynamicLevel:
 	ret c
 	cp 199
 	ret c
-	sub LEVEL_FROM_PARTY
+	sub PARTY_LV
 	ld b, a
 	ld a, [wTeamMaxLevel]
 	add b
 	cp MAX_LEVEL
 	ret c
 ; cap overflow at MAX_LEVEL
-	cp LEVEL_FROM_PARTY
+	cp PARTY_LV
 	ld a, MAX_LEVEL
 	ret c
 ; cap overflow at level 2

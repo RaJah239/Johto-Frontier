@@ -35,54 +35,165 @@ VioletGymNoopScene:
 	end
 
 ResetVioletGymTrainersCallback:
-;	checkevent EVENT_BEAT_FALKNER
-;	iffalse .ResetTrainers
-;	endcallback
-;.ResetTrainers
-;	clearevent EVENT_BEAT_BIRD_KEEPER_ROD
-;	clearevent EVENT_BEAT_BIRD_KEEPER_ABE
+	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
+	iftrue .ResetTrainers
+	checkevent EVENT_BEAT_FALKNER
+	iffalse .ResetTrainers
+	endcallback
+.ResetTrainers
+	clearevent EVENT_BEAT_BIRD_KEEPER_ROD
+	clearevent EVENT_BEAT_BIRD_KEEPER_ABE
 	endcallback
 
 VioletGymFalknerScript:
-	faceplayer
-	opentext
+	faceplayeropentext
+	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
+	iftrue .FalknerRematch
 	checkevent EVENT_BEAT_FALKNER
-	iftrue .FightDone
-	writetext FalknerIntroText
-	waitbutton
-	closetext
-	winlosstext FalknerWinLossText, 0
+	iftrue .GymBadgeBattleDone
+	writethistext
+		text "I'm Falkner, the"
+		line "Violet #mon Gym"
+		cont "leader!"
+
+		para "I am the Bird"
+		line "#mon user."
+
+		para "Allow me to show"
+		line "their majesty!"
+		done
+	waitclosetext
+	winlosstext FalknerLossText, 0
+	readvar VAR_BADGES
+	ifgreater 5, .SixOrSevenBadges
+	ifgreater 3, .FourOrFiveBadges
+	ifgreater 1, .TwoOrThreeBadges
+.ZeroOrOneBadge:
 	loadtrainer FALKNER, FALKNER1
+	sjump .StartBattle
+.TwoOrThreeBadges:
+	loadtrainer FALKNER, FALKNER2
+	sjump .StartBattle
+.FourOrFiveBadges:
+	loadtrainer FALKNER, FALKNER3
+	sjump .StartBattle
+.SixOrSevenBadges:
+	loadtrainer FALKNER, FALKNER4
+	; fallthrough
+
+.StartBattle:
 	startbattle
 	reloadmapafterbattle
+	playmusic MUSIC_GYM
 	setevent EVENT_BEAT_FALKNER
 	opentext
-	writetext ReceivedZephyrBadgeText
+	writethistext
+		text "<PLAYER> received"
+		line "Zephyrbadge."
+		done
 	playsound SFX_GET_BADGE
 	waitsfx
 	setflag ENGINE_ZEPHYRBADGE
-	readvar VAR_BADGES
-.FightDone:
-	checkevent EVENT_GOT_TM31_MUD_SLAP
+.GymBadgeBattleDone:
+	checkevent EVENT_GOT_VIOLET_GYM_TM
 	iftrue .SpeechAfterTM
-	setevent EVENT_BEAT_BIRD_KEEPER_ROD
-	setevent EVENT_BEAT_BIRD_KEEPER_ABE
-	writetext FalknerZephyrBadgeText
+	writethistext
+		text "Take this TM too!"
+		done
 	promptbutton
 	verbosegiveitem TM_MUD_SLAP
-	iffalse .NoRoomForMudSlap
-	setevent EVENT_GOT_TM31_MUD_SLAP
-	writetext FalknerTMMudSlapText
-	waitbutton
-	closetext
-	end
+	iffalse_endtext
+	setevent EVENT_GOT_VIOLET_GYM_TM
+	jumpthisopenedtext
+		text "Technical Machine"
+		line "or TM for short."
+
+		para "By using a TM, a"
+		line "#mon will"
+		cont "instantly learn a"
+		cont "new move."
+
+		para "Think before you"
+		line "act--a TM can be"
+		cont "used only once."
+
+		para "There's a place"
+		line "where all TMs can"
+		cont "be re-obtained as"
+		cont "many times as one"
+		cont "likes."
+		done
 
 .SpeechAfterTM:
-	writetext FalknerFightDoneText
-	waitbutton
-.NoRoomForMudSlap:
-	closetext
-	end
+	jumpthisopenedtext
+		text "I'm going to train"
+		line "harder to become"
+		cont "the greatest bird"
+		cont "master!"
+
+		para "Let's battle again"
+		line "when we both reach"
+		cont "new heights."
+		done
+
+.FalknerRematch:
+	writethistext
+		text "Falkner: Congrats"
+		line "on becoming champ-"
+		cont "ion, <PLAYER>!"
+
+		para "But you're not the"
+		line "only one who's been"
+		cont "flying high."
+		
+		para "I've worked hard"
+		line "since our last" 
+		cont "battle."
+		
+		para "Now my #mon are"
+		line "in top shape."
+		
+		para "Up for a rematch?"
+		done
+	yesorno
+	iffalse_endtext
+	writethistext
+		text "I'll show you the"
+		line "real power of the"
+		cont "magnificent bird"
+		cont "#mon!"
+		done 
+	winlosstext FalknerRematchLossText, 0
+	loadtrainer FALKNER, FALKNER5 ; super boss team
+	startbattle
+	reloadmapafterbattle
+	jumpthistext
+		text "Falkner: What an"
+		line "intense battle!"
+		
+		para "We've fought hard,"
+		line "but you've proven"
+		cont "once again, that"
+		cont "you're as tough as"
+		cont "ever!"
+		done 
+
+FalknerLossText:
+	text "No! My beloved"
+	line "bird #mon!"
+
+	para "All right."
+	line "Take this."
+
+	para "It's the official"
+	line "#mon League"
+	cont "Zephyrbadge."
+	done
+
+FalknerRematchLossText:
+	text "I understand…"
+	line "I'll bow out…"
+	done
 
 TrainerBirdKeeperAbe:
 	jumpthistextfaceplayer
@@ -247,100 +358,6 @@ VioletGymGuideScript:
 	closetext
 	end
 
-
-
-FalknerIntroText:
-	text "I'm FALKNER, the"
-	line "VIOLET #MON GYM"
-	cont "leader!"
-
-	para "People say you can"
-	line "clip flying-type"
-
-	para "#MON's wings"
-	line "with a jolt of"
-	cont "electricity…"
-
-	para "I won't allow such"
-	line "insults to bird"
-	cont "#MON!"
-
-	para "I'll show you the"
-	line "real power of the"
-
-	para "magnificent bird"
-	line "#MON!"
-	done
-
-FalknerWinLossText:
-	text "…Darn! My dad's"
-	line "cherished bird"
-	cont "#MON…"
-
-	para "All right."
-	line "Take this."
-
-	para "It's the official"
-	line "#MON LEAGUE"
-	cont "ZEPHYRBADGE."
-	done
-
-ReceivedZephyrBadgeText:
-	text "<PLAYER> received"
-	line "ZEPHYRBADGE."
-	done
-
-FalknerZephyrBadgeText:
-	text "It enables"
-	line "#MON to use"
-
-	para "FLASH, if they"
-	line "have it, anytime."
-
-	para "Here--take this"
-	line "too."
-	done
-
-FalknerTMMudSlapText:
-	text "By using a TM, a"
-	line "#MON will"
-
-	para "instantly learn a"
-	line "new move."
-
-	para "Think before you"
-	line "act--a TM can be"
-	cont "used only once."
-
-	para "TM31 contains"
-	line "MUD-SLAP."
-
-	para "It reduces the"
-	line "foe's accuracy"
-
-	para "while it causes"
-	line "damage."
-
-	para "In other words, it"
-	line "is both defensive"
-	cont "and offensive."
-	done
-
-FalknerFightDoneText:
-	text "There are #MON"
-	line "GYMS in cities and"
-	cont "towns ahead."
-
-	para "You should test"
-	line "your skills at"
-	cont "these GYMS."
-
-	para "I'm going to train"
-	line "harder to become"
-
-	para "the greatest bird"
-	line "master!"
-	done
 
 VioletGymGuideText:
 	text "Hey! I'm no train-"
