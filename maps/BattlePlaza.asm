@@ -17,15 +17,15 @@ BattlePlaza_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  4, 14, BGEVENT_READ, BattlePlazaTrainStationSign
-	bg_event 12,  6, BGEVENT_READ, BattlePlazaRaJaHouseSign
-	bg_event 30, 12, BGEVENT_READ, BattlePlazaBattleLobbyHouseSign
-	bg_event 11, 12, BGEVENT_READ, BattlePlazaDraftArenaSign
-	bg_event 22, 10, BGEVENT_READ, BattlePlazaBattleTowerSign
-	bg_event  4, 20, BGEVENT_READ, BattlePlazaProOaksLabSign
-	bg_event 11, 20, BGEVENT_READ, BattlePlazaMartSign
-	bg_event 20, 14, BGEVENT_READ, BattlePlazaSign
-	bg_event 28, 18, BGEVENT_READ, BattlePlazaEchoChamberSign
+	bg_event  4, 14, BGEVENT_JUMPTEXT, BattlePlazaTrainStationSignText
+	bg_event 12,  6, BGEVENT_JUMPTEXT, BattlePlazaRaJaHouseSignText
+	bg_event 30, 12, BGEVENT_JUMPTEXT, BattlePlazaBattleLobbyHouseSignText
+	bg_event 11, 12, BGEVENT_JUMPTEXT, BattlePlazaDraftArenaSignText
+	bg_event 22, 10, BGEVENT_JUMPTEXT, BattlePlazaBattleTowerSignText
+	bg_event  4, 20, BGEVENT_JUMPTEXT, BattlePlazaProOaksLabSignText
+	bg_event 11, 20, BGEVENT_JUMPTEXT, BattlePlazaMartSignText
+	bg_event 20, 14, BGEVENT_JUMPTEXT, BattlePlazaSignText
+	bg_event 28, 18, BGEVENT_JUMPTEXT, BattlePlazaEchoChamberSignText
 
 	def_object_events
 	object_event 11, 14, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MET_RAJA
@@ -52,12 +52,53 @@ MeetRaJaFirstTime:
 	appear BATTLEPLAZA_RAJA
 	applymovement BATTLEPLAZA_RAJA, BattlePlazaRaJaMovement1
 	opentext
-	writetext BattlePlazaRaJaIntroText
+	writethistext
+		text "Welcome <PLAYER>!"
+		line "I'm RaJa239."
+
+		para "Hmm… You've heard"
+		line "of me? Nevermind"
+		cont "that now."
+
+		para "This place is the"
+		line "Battle Plaza!"
+
+		para "A hub dedicated"
+		line "to various #mon"
+		cont "Battle Facilities!"
+		
+		para "You could've come"
+		line "here as soon as"
+		cont "you got #mon."
+		
+		para "You may or may not"
+		line "have had a good"
+		cont "time but that was"
+		cont "always the point!"
+
+		para "FREEDOM!"
+		
+		para "Do whatever you"
+		line "want, whenever you"
+		cont "want, if anything"
+		cont "at all!"
+		
+		para "Here's something"
+		line "that's useful here."
+		done
 	promptbutton
 	verbosegiveitem MEMBERS_CARD
-	writetext BattlePlazaRaJaFinishingText
-	waitbutton
-	closetext
+	writethistext
+		text "So, with that in"
+		line "mind, feel free to"
+		cont "explore and if you"
+		cont "want, you can drop"
+		cont "by my place next"
+		cont "door. Have fun."
+
+		para "Bye."
+		done
+	waitclosetext
 	applymovement BATTLEPLAZA_RAJA, BattlePlazaRaJaMovement2
 	disappear BATTLEPLAZA_RAJA
 	setscene SCENE_BATTLE_PLAZA_NOOP
@@ -87,58 +128,6 @@ BattlePlazaRaJaMovement2:
 	step UP
 	step_end
 
-BattlePlazaRaJaIntroText:
-	text "Welcome <PLAYER>!"
-	line "I'm RaJa239."
-
-	para "Hmm… You've heard"
-	line "of me? Nevermind"
-	cont "that now."
-
-	para "This place is the"
-	line "Battle Plaza!"
-
-	para "A hub dedicated"
-	line "to various #mon"
-	cont "Battle Facilities!"
-	
-	para "You could've come"
-	line "here as soon as"
-	cont "you got #mon."
-	
-	para "You may or may not"
-	line "have had a good"
-	cont "time but that was"
-	cont "always the point!"
-
-	para "FREEDOM!"
-	
-	para "Do whatever you"
-	line "want, whenever you"
-	cont "want, if anything"
-	cont "at all!"
-	
-	para "Here's something"
-	line "that's useful here."
-	done
-
-BattlePlazaRaJaFinishingText:
-	text "So, with that in"
-	line "mind, feel free to"
-	cont "explore and if you"
-	cont "want, you can drop"
-	cont "by my place next"
-	cont "door. Have fun."
-
-	para "Bye."
-	done
-
-BattlePlazaTrainStationSign:
-	jumptext BattlePlazaTrainStationSignText
-
-BattlePlazaRaJaHouseSign:
-	jumptext BattlePlazaRaJaHouseSignText
-
 BattlePlazaTrainStationSignText:
 	text "Battle Plaza's"
 	line "Train Station"
@@ -148,9 +137,6 @@ BattlePlazaRaJaHouseSignText:
 	text "RaJa239's House"
 	done
 
-BattlePlazaBattleLobbyHouseSign:
-	jumptext BattlePlazaBattleLobbyHouseSignText
-
 BattlePlazaBattleLobbyHouseSignText:
 	text "Battle Lobby"
 
@@ -159,9 +145,6 @@ BattlePlazaBattleLobbyHouseSignText:
 	cont "best!"
 	done
 
-BattlePlazaDraftArenaSign:
-	jumptext BattlePlazaDraftArenaSignText
-
 BattlePlazaDraftArenaSignText:
 	text "Draft Arena"
 	
@@ -169,9 +152,6 @@ BattlePlazaDraftArenaSignText:
 	line "own or other's"
 	cont "#mon!"
 	done
-
-BattlePlazaBattleTowerSign:
-	jumptext BattlePlazaBattleTowerSignText
 
 BattlePlazaBattleTowerSignText:
 	text "Battle Tower"
@@ -183,15 +163,9 @@ BattlePlazaBattleTowerSignText:
 	line "win streak!"
 	done
 
-BattlePlazaProOaksLabSign:
-	jumptext BattlePlazaProOaksLabSignText
-
 BattlePlazaProOaksLabSignText:
 	text "Prof. Oak's Lab"
 	done
-
-BattlePlazaMartSign:
-	jumptext BattlePlazaMartSignText
 
 BattlePlazaMartSignText:
 	text "Battle Plaza Mart"
@@ -200,19 +174,13 @@ BattlePlazaMartSignText:
 	line "battling needs!"
 	done
 
-BattlePlazaSign:
-	jumptext BattlePlazaSignText
-
 BattlePlazaSignText:
 	text "Battle Plaza"
 
 	para "Hub for trainers"
 	line "seeking endless"
-	cont "battling fun!"
+	cont "battles!"
 	done
-
-BattlePlazaEchoChamberSign:
-	jumptext BattlePlazaEchoChamberSignText
 
 BattlePlazaEchoChamberSignText:
 	text "Echo Chamber"
