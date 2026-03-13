@@ -1,6 +1,21 @@
+BattlePlazaMart_MapEvents:
+    def_warp_events
+    warp_event  4,  9, BATTLE_PLAZA, 10
+    warp_event 12,  9, BATTLE_PLAZA, 11
+    warp_event  3,  9, BATTLE_PLAZA, 10
+    warp_event 11,  9, BATTLE_PLAZA, 11
+    def_coord_events
+
+    def_bg_events
+
+    def_object_events
+    object_event 10,  1, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, BattlePlazaMartPorygonPCScript, -1
+    object_event 12,  1, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BattlePlazaMartTMCoinTraderScript, -1
+    object_event 13,  1, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, BattlePlazaMartTutorScript, -1
+
     object_const_def
-    const BATTLEPLAZAMART_CLERK_ALL_TMS
     const BATTLEPLAZAMART_PORYGON_PC
+    const BATTLEPLAZAMART_CLERK_ALL_TMS
     const BATTLEPLAZAMART_TUTOR
 
 BattlePlazaMart_MapScripts:
@@ -8,17 +23,32 @@ BattlePlazaMart_MapScripts:
 
     def_callbacks
 
+BattlePlazaMartPorygonPCScript:
+    jumpstd PorygonPCScript
+
 BattlePlazaMartTMCoinTraderScript:
-    faceplayer
-    opentext
+    faceplayeropentext
     special CrystalCountInBag
     checkevent EVENT_BATTLE_PLAZA_TM_MART_INTRO
     iftrue .WantToBuyATM
-    writetext BattlePlazaTMMartIntroText
+    writethistext
+        text "Greetings, welcome"
+        line "to the TM counter."
+
+        para "You can purchase"
+        line "any TM here for"
+        cont "10 Crystals."
+
+        para "Are you in need of"
+        line "anything?"
+        done
     setevent EVENT_BATTLE_PLAZA_TM_MART_INTRO
     sjump .WantToBuyATMAfterIntro
 .WantToBuyATM:
-    writetext BattlePlazaTMMartBuyTMText
+    writethistext
+        text "Welcome! Buy a TM"
+        line "for 10 Crystals?"
+        done
 .WantToBuyATMAfterIntro:
     yesorno
     iffalse .Refused
@@ -79,7 +109,10 @@ BattlePlazaMartTMCoinTraderScript:
     sjump .CancelBuyingTMsScript
 
 .NoRoom:
-    writetext YoureACollectorText
+    writethistext
+        text "You already have"
+        line "99! Pick another?"
+        done
     waitbutton
     sjump .WantToBuyADifferentTM
 
@@ -331,15 +364,7 @@ BattlePlazaMartTMCoinTraderScript:
 .TMTrick:
     verbosegiveitem TM_TRICK
     iffalse .NoRoom
-    sjump .ConcludeTransaction
-
-.Refused:
-    writetext WeAreOpenAlways
-    waitendtext
-
-.NotEnoughCrystals:
-    writetext NotEnoughCrystalsText
-    waitendtext
+    ; fallthrough
 
 .ConcludeTransaction:
     special CrystalCountInBag
@@ -350,63 +375,61 @@ BattlePlazaMartTMCoinTraderScript:
     waitbutton
     sjump .WantToBuyADifferentTM
 
+.Refused:
+    jumpthisopenedtext
+        text "We are open 24/7."
+        done
+
+.NotEnoughCrystals:
+    jumpthisopenedtext
+        text "You don't have"
+        line "10 Crystals…"
+        done
+
 .CancelBuyingTMsScript:
-    writetext ComeAgainAgainText
-    waitendtext
-
-ComeAgainAgainText:
-    text "Please come again!"
-    done
-
-BattlePlazaTMMartIntroText:
-    text "Greetings, welcome"
-    line "to the TM counter."
-
-    para "You can purchase"
-    line "any TM here for"
-    cont "10 Crystals."
-
-    para "Are you in need of"
-    line "anything?"
-    done
-
-BattlePlazaTMMartBuyTMText:
-    text "Welcome! Buy a TM"
-    line "for 10 Crystals?"
-    done
-
-WeAreOpenAlways:
-    text "We are open 24/7."
-    done
-
-NotEnoughCrystalsText:
-    text "You don't have"
-    line "10 Crystals…"
-    done
-
-YoureACollectorText:
-    text "You already have"
-    line "99! Pick another?"
-    done
-
-BattlePlazaMartPorygonPCScript:
-    jumpstd PorygonPCScript
+    jumpthisopenedtext
+        text "Please come again!"
+        done
 
 BattlePlazaMartTutorScript:
-    faceplayer
-    opentext
+    faceplayeropentext
     special CrystalCountInBag
     checkevent EVENT_MET_BATTLE_PLAZA_MOVE_TUTOR
     iftrue .WelcomeBackWantMeToTeach
-    writetext BattlePlazaMartTutorWantMeToTeachText
+    writethistext
+        text "Welcome! I'm am"
+        line "the Battle Plaza's"
+        cont "Move Tutor."
+
+        para "I can teach your"
+        line "precious #mon"
+        cont "special moves for"
+        cont "a varied amount"
+        cont "of Crystals each."
+
+        para "Want me to teach"
+        line "your #mon some"
+        cont "moves?"
+        done
     setevent EVENT_MET_BATTLE_PLAZA_MOVE_TUTOR
     sjump .TeachAnotherMove
 .WelcomeBackWantMeToTeach:
-    writetext BattlePlazaMartTutorWelcomeBackWantMeToTeachText
+    writethistext
+        text "Welcome once more"
+        line "esteemed trainer!"
+        
+        para "Shall I tutor a"
+        line "move onto your"
+        cont "#mon for a set"
+        cont "sum of Crystals?"
+        done
 .TeachAnotherMove:
     yesorno
     iffalse .Refused
-    writetext BattlePlazaMartTutorShallITeachText
+    writethistext
+        text "Which move shall"
+        line "I teach?"
+        done
     callasm .SetupMovesMenu
     callasm .LoadMovesMenu
     writetext BattlePlazaMartTutorMoveText
@@ -485,8 +508,7 @@ BattlePlazaMartTutorScript:
     jr nz, .display_needed_amount
 
     ld de, .ExitString
-    call PlaceString
-    jr .done
+    jmp PlaceString
 
 .display_needed_amount
     ld de, .CrystalText
@@ -494,9 +516,7 @@ BattlePlazaMartTutorScript:
     hlcoord 6, 1
     ld de, wMenuSelectionQuantity
     lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-    call PrintNum
-.done
-    ret
+    jmp PrintNum
 
 .CrystalText:
     db "Cost×@"
@@ -578,22 +598,29 @@ BattlePlazaMartTutorScript:
 .FullMoveListEnd:
 
 .NotEnough:
-    writetext BattlePlazaMartTutorNotEnoughCrystalsText
+    writethistext
+        text "You've not enough"
+        line "Crystals…"
+        done
     sjump .EndingOffBattlePlazaMartMoveTutor
 
 .Refused:
-    writetext BattlePlazaMartTutorDropByAnytimeText
+    writethistext
+        text "Drop by anytime!"
+        done
     sjump .EndingOffBattlePlazaMartMoveTutor
 
 .TeachMove:
     callasm .PayTutorInCrystals
-    writetext BattlePlazaMartTutorExcellentText
+    writethistext
+        text "Do visit again!"
+        line "We're always open!"
+        done
     playsound SFX_TRANSACTION
     waitsfx
     special CrystalCountInBag
 .EndingOffBattlePlazaMartMoveTutor:
-    waitbutton
-    closetext
+    waitclosetext
     turnobject BATTLEPLAZAMART_TUTOR, DOWN
     end
 
@@ -607,72 +634,8 @@ BattlePlazaMartTutorScript:
     ld a, -1
     ld [wCurItemQuantity], a
     ld hl, wNumItems
-    call TossItem
-    ret
-
-BattlePlazaMartTutorWantMeToTeachText:
-    text "Welcome! I'm am"
-    line "the Battle Plaza's"
-    cont "Move Tutor."
-
-    para "I can teach your"
-    line "precious #MON"
-
-    para "special moves for"
-    line "a varied amount"
-    cont "of Crystals each."
-
-    para "Want me to teach"
-    line "your #MON some"
-    cont "moves?"
-    done
-
-BattlePlazaMartTutorWelcomeBackWantMeToTeachText:
-    text "Welcome once more"
-    line "esteemed trainer!"
-    
-    para "Shall I tutor a"
-    line "move onto your"
-
-    para "#MON for a set"
-    line "sum of Crystals?"
-    done
-
-BattlePlazaMartTutorShallITeachText:
-    text "Which move shall"
-    line "I teach?"
-    done
-
-BattlePlazaMartTutorNotEnoughCrystalsText:
-    text "You've not enough"
-    line "Crystals…"
-    done
-
-BattlePlazaMartTutorDropByAnytimeText:
-    text "Drop by anytime!"
-    done
-
-BattlePlazaMartTutorExcellentText:
-    text "Do visit again!"
-    line "We're always open!"
-    done
+    jmp TossItem
 
 BattlePlazaMartTutorMoveText:
     text_start
     done
-
-BattlePlazaMart_MapEvents:
-
-    def_warp_events
-    warp_event  4,  9, BATTLE_PLAZA, 10
-    warp_event 12,  9, BATTLE_PLAZA, 11
-    warp_event  3,  9, BATTLE_PLAZA, 10
-    warp_event 11,  9, BATTLE_PLAZA, 11
-    def_coord_events
-
-    def_bg_events
-
-    def_object_events
-    object_event 12,  1, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BattlePlazaMartTMCoinTraderScript, -1
-    object_event 10,  1, SPRITE_PORYGON_OW, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, BattlePlazaMartPorygonPCScript, -1
-    object_event 13,  1, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, BattlePlazaMartTutorScript, -1
