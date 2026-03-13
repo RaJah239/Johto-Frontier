@@ -158,12 +158,14 @@ NurseJoyTraininCooltrainerMText:
 
 NurseJoyTraininCooltrainerFText:
 	text "This academy is"
-	line "great. It's too"
-	cont "bad we can't earn"
-	cont "money here but the"
-	cont "good news is that"
-	cont "we don't loose"
-	cont "money either."
+	line "great."
+
+	para "Losses don't take"
+	line "money."
+
+	para "It's too bad win-"
+	line "ning only nets a"
+	cont "stipend."
 	done
 
 NurseJoyTrainingBlisseyScript:

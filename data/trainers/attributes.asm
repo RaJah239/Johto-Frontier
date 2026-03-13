@@ -472,7 +472,7 @@ TrainerClassAttributes:
 
 ; NURSE
 	db NO_ITEM, NO_ITEM ; items
-	db 0; base reward
+	db 10; base reward
 	dw AI_TYPES | AI_BASIC | AI_SMART | AI_AGGRESSIVE | AI_FINAL_ATTACK
 	dw SWITCH_SOMETIMES | SWITCH_STATUS | CONTEXT_USE
 
