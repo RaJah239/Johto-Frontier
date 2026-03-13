@@ -559,11 +559,6 @@ Text_WeHopeToServeYouAgain:
 	line "you again."
 	done
 
-Text_PleaseStepThisWay:
-	text "Please step this"
-	line "way."
-	done
-
 Text_BattleTower_AskTypesMode:
 	text "Challenge which"
 	line "kind of battles?"

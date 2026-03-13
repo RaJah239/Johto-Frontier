@@ -1,3 +1,19 @@
+BattleTowerHallway_MapEvents:
+	def_warp_events
+	warp_event 11,  1, BATTLE_TOWER_ELEVATOR, 1
+	warp_event  5,  0, BATTLE_TOWER_BATTLE_ROOM, 1
+	warp_event  7,  0, BATTLE_TOWER_BATTLE_ROOM, 1
+	warp_event  9,  0, BATTLE_TOWER_BATTLE_ROOM, 1
+	warp_event 13,  0, BATTLE_TOWER_BATTLE_ROOM, 1
+	warp_event 15,  0, BATTLE_TOWER_BATTLE_ROOM, 1
+
+	def_coord_events
+
+	def_bg_events
+
+	def_object_events
+	object_event 11,  2, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BattleTowerHallway_MapEvents, -1
+
 	object_const_def
 	const BATTLETOWERHALLWAY_RECEPTIONIST
 
@@ -11,7 +27,6 @@ BattleTowerHallway_MapScripts:
 BattleTowerHallwayEnterScene:
 	sdefer BattleTowerHallwayChooseBattleRoomScript
 	setscene SCENE_BATTLETOWERHALLWAY_NOOP
-	; fallthrough
 BattleTowerHallwayNoopScene:
 	end
 
@@ -48,31 +63,15 @@ BattleTowerHallwayChooseBattleRoomScript:
 
 .L90L100:
 	applymovement BATTLETOWERHALLWAY_RECEPTIONIST, MovementData_BattleTowerHallwayWalkTo90100Room
-	sjump .EnterBattleRoom
+	; fallthrough
 
 .EnterBattleRoom:
 	faceobject PLAYER, BATTLETOWERHALLWAY_RECEPTIONIST
-	opentext
-	writetext Text_PleaseStepThisWay
-	waitbutton
-	closetext
+	showthistext
+		text "Please step this"
+		line "way."
+		done
 	stopfollow
 	applymovement PLAYER, MovementData_BattleTowerHallwayPlayerEntersBattleRoom
 	warpcheck
 	end
-
-BattleTowerHallway_MapEvents:
-	def_warp_events
-	warp_event 11,  1, BATTLE_TOWER_ELEVATOR, 1
-	warp_event  5,  0, BATTLE_TOWER_BATTLE_ROOM, 1
-	warp_event  7,  0, BATTLE_TOWER_BATTLE_ROOM, 1
-	warp_event  9,  0, BATTLE_TOWER_BATTLE_ROOM, 1
-	warp_event 13,  0, BATTLE_TOWER_BATTLE_ROOM, 1
-	warp_event 15,  0, BATTLE_TOWER_BATTLE_ROOM, 1
-
-	def_coord_events
-
-	def_bg_events
-
-	def_object_events
-	object_event 11,  2, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BattleTowerHallway_MapEvents, -1
