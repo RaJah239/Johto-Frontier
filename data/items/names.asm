@@ -191,11 +191,9 @@ ItemNames::
 	li "?"
 	li "?"
 	li "?"
-
-
-
-
-
+	li "?"
+	li "?"
+	li "?"
 	li "Surf Mail"
 	li "LiteBlueMail"
 	li "PortraitMail"
@@ -205,9 +203,6 @@ ItemNames::
 	li "Bluesky Mail"
 	li "Music Mail"
 	li "Mirage Mail"
-	li "?"
-	li "?"
-	li "?"
 	assert_list_length NUM_ITEMS
 	li "TM01"
 	li "TM02"

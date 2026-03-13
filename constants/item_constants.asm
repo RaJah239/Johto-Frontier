@@ -200,11 +200,7 @@
  	const ITEM_E6
  	const ITEM_E7
  	const ITEM_E8
- 
-
-
-
-
+; mail
  	const SURF_MAIL
 	const LITEBLUEMAIL
 	const PORTRAITMAIL
