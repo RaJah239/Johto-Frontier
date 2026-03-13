@@ -95,6 +95,7 @@
 - Removed vanilla Crystal's the Gym badges boosts
 - Shiny Pokémon chance are now 1/256
 - Shiny icon added for both player and enemy's Pokémon in battle
+- Shiny icon added to naming screen
 - Stat screen Condition added to display levels of happiness
 - Fourth stat page with caught time, level, location, effort values per stat, core trait (hidden power type) and Press Select to view Abilities
 - Move Pokémon in party menu with Select button (only outside battles)
