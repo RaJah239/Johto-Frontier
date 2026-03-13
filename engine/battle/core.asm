@@ -4610,7 +4610,7 @@ PrintPlayerHUD:
 	ld a, "♀"
 
 .got_gender_char
-	hlcoord 18, 8 ;  where the player's mon gender is printed
+	hlcoord 17, 8 ;  where the player's mon gender is printed
 	ld [hl], a
 	hlcoord 11, 8  ;  where the player's mon status is printed
 
@@ -4620,7 +4620,7 @@ PrintPlayerHUD:
 	ld a, c
 	and a 
 
-	hlcoord 15, 8 ; where the player mon's lvl is printed
+	hlcoord 14, 8 ; where the player mon's lvl is printed
 	ld a, [wBattleMonLevel]
 	ld [wTempMonLevel], a
 	jmp PrintLevel
@@ -4671,7 +4671,7 @@ DrawEnemyHUD:
 	farcall CheckShininess
 	jr nc, .not_shiny
 	ld a, "<⁂>"
-	hlcoord 10, 1
+	hlcoord 9, 1
 	ld [hl], a
 
 .not_shiny
@@ -4685,7 +4685,7 @@ DrawEnemyHUD:
 	ld a, "♀"
 
 .got_gender
-	hlcoord 9, 1 ;  where the enemy's mons gender is printed
+	hlcoord 8, 1 ;  where the enemy's mons gender is printed
 	ld [hl], a
 	hlcoord 2, 1  ;  where the enemy's mons status is printed
 
@@ -4695,7 +4695,7 @@ DrawEnemyHUD:
 	ld a, c
 	and a 
 
-	hlcoord 6, 1 ; where the enemy mon's lvl is printed
+	hlcoord 5, 1 ; where the enemy mon's lvl is printed
 	ld a, [wEnemyMonLevel]
 	ld [wTempMonLevel], a
 	call PrintLevel
