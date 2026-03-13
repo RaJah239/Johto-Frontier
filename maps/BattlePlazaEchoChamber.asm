@@ -1,3 +1,18 @@
+BattlePlazaEchoChamber_MapEvents:
+	def_warp_events
+	warp_event  4, 13, BATTLE_PLAZA, 13
+	warp_event  3, 13, BATTLE_PLAZA, 12
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  2, 10, BGEVENT_JUMPTEXT, EchoChamberInfoSignText
+
+	def_object_events
+	object_event  3, 10, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, EchoChamberReceptionistScript, -1
+	object_event  4,  3, SPRITE_CHRIS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MIRROR_CHRIS
+	object_event  4,  3, SPRITE_KRIS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MIRROR_KRIS
+
 	object_const_def
 	const BATTLEPLAZAECHOCHAMBER_RECEPTIONIST
 	const BATTLEPLAZAECHOCHAMBER_CHRIS
@@ -24,22 +39,24 @@ EchoChamberReceptionistScript:
 	opentext
 	checkevent EVENT_DID_NOT_GET_ECHO_CHAMBER_PRIZE
 	iftrue .GivePrize
-	writetext EchoChamberIntroText
+	writethistext
+		text "Echo Chamber"
+		line "welcomes you!"
+
+		para "Would you like to"
+		line "make an attempt?"
+		done
 	yesorno
 	iffalse .done
 	special TryQuickSave
+	iffalse_endtext
 	writetext BattlePlazasReceptionistGoRightInText
-	waitbutton
-	closetext
-
+	waitclosetext
 	applymovement BATTLEPLAZAECHOCHAMBER_RECEPTIONIST, BattlePlazasReceptionist_MoveOutTheWay
 	applymovement PLAYER, BattlePlazasPlayer_EnterBattleRoom
-
 	winlosstext BattlePlazasPlayerVictoryText, 0
-
 	checkflag ENGINE_PLAYER_IS_FEMALE
 	iftrue .Female
-
 	loadtrainer CAL, CAL1
 	startbattle
 	ifequal WIN, .win
@@ -84,8 +101,7 @@ EchoChamberReceptionistScript:
 	verbosegiveitem AMULET_COIN
 	iffalse EchoChamberPackFull
 	clearevent EVENT_DID_NOT_GET_ECHO_CHAMBER_PRIZE
-	closetext
-	end
+	endtext
 
 .Cancel:
 	writetext BattlePlazasPleaseComeAgainText
@@ -99,17 +115,6 @@ EchoChamberPackFull:
 	writetext BattlePlazasFullPackText
 	waitendtext
 
-EchoChamberIntroText:
-	text "Echo Chamber"
-	line "welcomes you!"
-
-	para "Would you like to"
-	line "make an attempt?"
-	done
-
-EchoChamberInfoSign:
-	jumptext EchoChamberInfoSignText
-
 EchoChamberInfoSignText:
 	text "You may fight a"
 	line "copy of your own"
@@ -118,18 +123,3 @@ EchoChamberInfoSignText:
 	para "Each victory nets"
 	line "an Amulet Coin."
 	done
-
-BattlePlazaEchoChamber_MapEvents:
-	def_warp_events
-	warp_event  4, 13, BATTLE_PLAZA, 13
-	warp_event  3, 13, BATTLE_PLAZA, 12
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  2, 10, BGEVENT_READ, EchoChamberInfoSign
-
-	def_object_events
-	object_event  3, 10, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, EchoChamberReceptionistScript, -1
-	object_event  4,  3, SPRITE_CHRIS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MIRROR_CHRIS
-	object_event  4,  3, SPRITE_KRIS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MIRROR_KRIS
