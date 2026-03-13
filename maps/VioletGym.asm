@@ -241,15 +241,9 @@ TrainerBirdKeeperAbeBattle:
 	ifgreater 5, .SixOrSevenBadges
 	ifgreater 3, .FourOrFiveBadges
 	ifgreater 1, .TwoOrThreeBadges
-.ZeroOrOneBadge
+.ZeroOrOneBadge:
 	loadtrainer BIRD_KEEPER, ABE1
-.StartBattle:
-	startbattle
-	reloadmapafterbattle
-	playmusic MUSIC_GYM
-	setevent EVENT_BEAT_BIRD_KEEPER_ABE
-	end
-
+	sjump .StartBattle
 .TwoOrThreeBadges:
 	loadtrainer BIRD_KEEPER, ABE2
 	sjump .StartBattle
@@ -261,7 +255,14 @@ TrainerBirdKeeperAbeBattle:
 	sjump .StartBattle
 .EightBadges:
 	loadtrainer BIRD_KEEPER, ABE5
-	sjump .StartBattle
+	; fallthrough
+
+.StartBattle:
+	startbattle
+	reloadmapafterbattle
+	playmusic MUSIC_GYM
+	setevent EVENT_BEAT_BIRD_KEEPER_ABE
+	end
 
 AbeToPlayerMovement1:
 	step RIGHT
@@ -310,16 +311,9 @@ TrainerBirdKeeperRodCheck:
 	ifgreater 5, .SixOrSevenBadges
 	ifgreater 3, .FourOrFiveBadges
 	ifgreater 1, .TwoOrThreeBadges
-.ZeroOrOneBadge
+.ZeroOrOneBadge:
 	loadtrainer BIRD_KEEPER, ROD1
-.StartBattle:
-	startbattle
-	reloadmapafterbattle
-	playmusic MUSIC_GYM
-	setevent EVENT_BEAT_BIRD_KEEPER_ROD
-.End
-	end
-
+	sjump .StartBattle
 .TwoOrThreeBadges:
 	loadtrainer BIRD_KEEPER, ROD2
 	sjump .StartBattle
@@ -331,7 +325,15 @@ TrainerBirdKeeperRodCheck:
 	sjump .StartBattle
 .EightBadges:
 	loadtrainer BIRD_KEEPER, ROD5
-	sjump .StartBattle
+	; fallthrough
+
+.StartBattle:
+	startbattle
+	reloadmapafterbattle
+	playmusic MUSIC_GYM
+	setevent EVENT_BEAT_BIRD_KEEPER_ROD
+.End
+	end
 
 RodToPlayerMovement:
 	step LEFT
@@ -343,50 +345,52 @@ BirdKeeperRodBeatenText:
 	done
 
 VioletGymGuideScript:
-	faceplayer
-	opentext
+	faceplayeropentext
+	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
+	iftrue .VioletGymGuideChampScript
 	checkevent EVENT_BEAT_FALKNER
 	iftrue .VioletGymGuideWinScript
-	writetext VioletGymGuideText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Hey! I'm no train-"
+		line "er but I can give"
+		cont "some advice!"
+
+		para "Believe me!"
+		line "If you believe, a"
+		cont "championship dream"
+		cont "can come true."
+
+		para "You believe?"
+		line "Then listen."
+
+		para "The grass-type is"
+		line "weak against the"
+		cont "flying-type. Keep"
+		cont "this in mind."
+		done
 
 .VioletGymGuideWinScript:
-	writetext VioletGymGuideWinText
-	waitbutton
-	closetext
-	end
+	jumpthisopenedtext
+		text "Nice battle! Keep"
+		line "it up, and you'll"
+		cont "be the Champ in no"
+		cont "time at all!"
+		done
 
+.VioletGymGuideChampScript:
+	jumpthisopenedtext
+		text "Champion <PLAYER>!"
 
-VioletGymGuideText:
-	text "Hey! I'm no train-"
-	line "er but I can give"
-	cont "some advice!"
+		para "Good to see you"
+		line "again."
 
-	para "Believe me!"
-	line "If you believe, a"
+		para "Here to brush up"
+		line "on your skills?"
 
-	para "championship dream"
-	line "can come true."
-
-	para "You believe?"
-	line "Then listen."
-
-	para "The grass-type is"
-	line "weak against the"
-
-	para "flying-type. Keep"
-	line "this in mind."
-	done
-
-VioletGymGuideWinText:
-	text "Nice battle! Keep"
-	line "it up, and you'll"
-
-	para "be the CHAMP in no"
-	line "time at all!"
-	done
+		para "Of course, you do"
+		line "not need my advice"
+		cont "anymore. Hehe."
+		done
 
 VioletGymStatue:
 	checkflag ENGINE_ZEPHYRBADGE
