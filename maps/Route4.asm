@@ -29,7 +29,7 @@ Route4_MapEvents:
 	object_event 15, 13, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route4RoarTMGuyScript, -1
 	object_event 12, 67, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, FriedaScript, EVENT_ROUTE_4_FRIEDA_OF_FRIDAY
 	object_event  3, 30, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route4Repel, EVENT_ROUTE_4_REPEL
-	object_event  8, 10, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route4OtisScript, EVENT_ROUTE_4_OTIS
+	object_event  8, 10, SPRITE_OTIS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route4OtisScript, EVENT_MET_OTIS_TODAY
 
 	object_const_def
 	const ROUTE4_FISHER1
@@ -400,7 +400,7 @@ Route4OtisScript:
 	callstd WanderingOddEggNPCScript
 	playsound SFX_WARP_TO
 	applymovement ROUTE4_OTIS, Route4OtisTeleportAwayMovement
-	disappear ROUTE4_OTIS
+	disappear LAST_TALKED
 	setflag ENGINE_MET_OTIS_TODAY
 	end
 
