@@ -51,7 +51,7 @@ if DEF(_DEBUG)
 	; 1st mon moves
 	loadmem wPartyMon1Moves+0, SEED_BOMB
 	loadmem wPartyMon1Moves+1, SPLASH
-	loadmem wPartyMon1Moves+2, NO_MOVE
+	loadmem wPartyMon1Moves+2, LOVELY_KISS
 	loadmem wPartyMon1Moves+3, NO_MOVE
 	closetext
 	; tms
