@@ -36,6 +36,10 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass WHITNEY ; 2
 	const WHITNEY1
+	const WHITNEY2
+	const WHITNEY3
+	const WHITNEY4
+	const WHITNEY5
 
 	trainerclass BUGSY ; 3
 	const BUGSY1
@@ -148,8 +152,16 @@ DEF KRIS EQU __trainer_class__
 	const PETER
 
 	trainerclass LASS ; 19
-	const CARRIE
-	const BRIDGET
+	const CARRIE1 ; goldenrod gym trainer
+	const CARRIE2 ; goldenrod gym trainer
+	const CARRIE3 ; goldenrod gym trainer
+	const CARRIE4 ; goldenrod gym trainer
+	const CARRIE5 ; goldenrod gym trainer
+	const BRIDGET1 ; goldenrod gym trainer
+	const BRIDGET2 ; goldenrod gym trainer
+	const BRIDGET3 ; goldenrod gym trainer
+	const BRIDGET4 ; goldenrod gym trainer
+	const BRIDGET5 ; goldenrod gym trainer
 	const KRISE
 	const CONNIE
 	const DANA
@@ -192,8 +204,16 @@ DEF KRIS EQU __trainer_class__
 	const CARA
 
 	trainerclass BEAUTY ; 1d
-	const VICTORIA
-	const SAMANTHA
+	const VICTORIA1 ; goldenrod gym trainer
+	const VICTORIA2 ; goldenrod gym trainer
+	const VICTORIA3 ; goldenrod gym trainer
+	const VICTORIA4 ; goldenrod gym trainer
+	const VICTORIA5 ; goldenrod gym trainer
+	const SAMANTHA1 ; goldenrod gym trainer
+	const SAMANTHA2 ; goldenrod gym trainer
+	const SAMANTHA3 ; goldenrod gym trainer
+	const SAMANTHA4 ; goldenrod gym trainer
+	const SAMANTHA5 ; goldenrod gym trainer
 	const VALERIE
 	const OLIVIA
 

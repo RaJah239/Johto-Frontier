@@ -1,3 +1,29 @@
+GoldenrodGym_MapEvents:
+	def_warp_events
+	warp_event  2, 17, GOLDENROD_CITY, 2
+	warp_event  3, 17, GOLDENROD_CITY, 2
+
+	def_coord_events
+	coord_event  0,  4, SCENE_GOLDENRODGYM_NOOP, TrainerBeautyVictoriaCheck1
+	coord_event  0,  3, SCENE_GOLDENRODGYM_NOOP, TrainerBeautyVictoriaCheck2
+	coord_event 19,  7, SCENE_GOLDENRODGYM_NOOP, TrainerBeautySamanthaCheck1
+	coord_event 19,  6, SCENE_GOLDENRODGYM_NOOP, TrainerBeautySamanthaCheck2
+	coord_event 13, 13, SCENE_GOLDENRODGYM_NOOP, TrainerLassCarrieCheck
+	coord_event  8,  5, SCENE_GOLDENRODGYM_NOOP, TrainerLassBridgetCheck
+
+	def_bg_events
+	bg_event  1, 15, BGEVENT_READ, GoldenrodGymStatue
+	bg_event  4, 15, BGEVENT_READ, GoldenrodGymStatue
+
+	def_object_events
+	object_event  8,  3, SPRITE_WHITNEY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodGymWhitneyScript, -1
+	object_event  9, 13, SPRITE_LASS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TrainerLassCarrie, -1
+	object_event  7,  5, SPRITE_LASS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TrainerLassBridget, -1
+	object_event  0,  2, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TrainerBeautyVictoria, -1
+	object_event 19,  5, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TrainerBeautySamantha, -1
+	object_event  5, 15, SPRITE_GYM_GUIDE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodGymGuideScript, -1
+	object_event  2, 16, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GoldenrodGymHPUpScript, EVENT_GOLDENROD_GYM_FIVE_HP_UPS
+
 	object_const_def
 	const GOLDENRODGYM_WHITNEY
 	const GOLDENRODGYM_LASS1
@@ -5,164 +31,506 @@
 	const GOLDENRODGYM_BEAUTY1
 	const GOLDENRODGYM_BEAUTY2
 	const GOLDENRODGYM_GYM_GUIDE
+	const GOLDENRODGYM_POKE_BALL
 
 GoldenrodGym_MapScripts:
 	def_scene_scripts
 	scene_script GoldenrodGymNoop1Scene, SCENE_GOLDENRODGYM_NOOP
-	scene_script GoldenrodGymNoop2Scene, SCENE_GOLDENRODGYM_WHITNEY_STOPS_CRYING
 
 	def_callbacks
     callback MAPCALLBACK_NEWMAP, ResetGoldenrodGymTrainersCallback
 
 ResetGoldenrodGymTrainersCallback:
-    checkevent EVENT_BEAT_WHITNEY
-    iffalse .ResetTrainers
-    endcallback
+	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
+	iftrue .ResetTrainers
+	checkevent EVENT_BEAT_WHITNEY
+	iffalse .ResetTrainers
+	endcallback
 .ResetTrainers
 	clearevent EVENT_BEAT_BEAUTY_VICTORIA
 	clearevent EVENT_BEAT_BEAUTY_SAMANTHA
 	clearevent EVENT_BEAT_LASS_CARRIE
 	clearevent EVENT_BEAT_LASS_BRIDGET
-    endcallback
+	endcallback
 
 GoldenrodGymNoop1Scene:
 	end
 
-GoldenrodGymNoop2Scene:
-	end
-
 GoldenrodGymWhitneyScript:
-	faceplayer
+	faceplayeropentext
+	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
+	iftrue .WhitneyRematch
 	checkevent EVENT_BEAT_WHITNEY
-	iftrue .FightDone
-	opentext
-	writetext WhitneyBeforeText
-	waitbutton
-	closetext
-	winlosstext WhitneyShouldntBeSoSeriousText, 0
+	iftrue .GymBadgeBattleDone
+	writethistext
+		text "Hi! I'm Whitney!"
+		line "I'm Goldenrod's Gym"
+		cont "Leader."
+
+		para "It's been a while"
+		line "now but I still"
+		cont "think #mon are"
+		cont "super-cute!"
+
+		para "I'd say I'm good"
+		line "at battling, you've"
+		cont "been warned!"
+		done
+	waitclosetext
+	winlosstext WhitneyLossText, 0
+	readvar VAR_BADGES
+	ifgreater 5, .SixOrSevenBadges
+	ifgreater 3, .FourOrFiveBadges
+	ifgreater 1, .TwoOrThreeBadges
+.ZeroOrOneBadge:
 	loadtrainer WHITNEY, WHITNEY1
+	sjump .StartBattle
+.TwoOrThreeBadges:
+	loadtrainer WHITNEY, WHITNEY2
+	sjump .StartBattle
+.FourOrFiveBadges:
+	loadtrainer WHITNEY, WHITNEY3
+	sjump .StartBattle
+.SixOrSevenBadges:
+	loadtrainer WHITNEY, WHITNEY4
+	; fallthrough
+
+.StartBattle:
 	startbattle
 	reloadmapafterbattle
+	playmusic MUSIC_GYM
 	setevent EVENT_BEAT_WHITNEY
-	setevent EVENT_MADE_WHITNEY_CRY
-	setscene SCENE_GOLDENRODGYM_WHITNEY_STOPS_CRYING
-	setevent EVENT_BEAT_BEAUTY_VICTORIA
-	setevent EVENT_BEAT_BEAUTY_SAMANTHA
-	setevent EVENT_BEAT_LASS_CARRIE
-	setevent EVENT_BEAT_LASS_BRIDGET
-.FightDone:
 	opentext
-	checkevent EVENT_MADE_WHITNEY_CRY
-	iffalse .StoppedCrying
-	writetext WhitneyYouMeanieText
-	waitbutton
-	closetext
-	end
-
-.StoppedCrying:
-	checkevent EVENT_GOT_TM45_ATTRACT
-	iftrue .GotAttract
-	checkflag ENGINE_PLAINBADGE
-	iftrue .GotPlainBadge
-	writetext WhitneyWhatDoYouWantText
-	promptbutton
-	waitsfx
-	writetext PlayerReceivedPlainBadgeText
+	writethistext
+		text "<PLAYER> received"
+		line "Plainbadge."
+		done
 	playsound SFX_GET_BADGE
 	waitsfx
 	setflag ENGINE_PLAINBADGE
-	readvar VAR_BADGES
-.GotPlainBadge:
-	writetext WhitneyPlainBadgeText
+.GymBadgeBattleDone:
+	checkevent EVENT_GOT_GOLDENROD_GYM_TM
+	iftrue .SpeechAfterTM
+	writethistext
+		text "Oh, you can have"
+		line "this too!"
+		done
 	promptbutton
 	verbosegiveitem TM_ATTRACT
-	iffalse .NoRoomForAttract
-	setevent EVENT_GOT_TM45_ATTRACT
-	writetext WhitneyAttractText
-	waitbutton
-	closetext
-	end
+	iffalse_endtext
+	setevent EVENT_GOT_GOLDENROD_GYM_TM
+	jumpthisopenedtext
+		text "It's Attract!"
+		line "It makes full use"
+		cont "of a #mon's"
+		cont "charm."
 
-.GotAttract:
-	writetext WhitneyGoodCryText
+		para "Some people consi-"
+		line "der it hax. Hehe."
+		done
+
+.SpeechAfterTM:
+	jumpthisopenedtext
+		text "Come for a visit"
+		line "again! Bye-bye!"
+		done
+
+.WhitneyRematch:
+	writethistext
+		text "Whitney: Hiya"
+		line "<PLAYER>!"
+
+		para "Thanks for coming"
+		line "to visit me."
+
+		para "My #mon and I"
+		line "have been training"
+		cont "diligently."
+
+		para "Let's see how they"
+		line "do against the"
+		cont "champion?"
+		done
+	yesorno
+	iffalse_endtext
+	writethistext
+		text "Great! We're going"
+		line "all out!"
+		done
 	waitbutton
-.NoRoomForAttract:
-	closetext
-	end
+	winlosstext WhitneyRematchLossText, 0
+	loadtrainer WHITNEY, WHITNEY5 ; super boss team
+	startbattle
+	reloadmapafterbattle
+	appear GOLDENRODGYM_POKE_BALL
+	jumpthistext
+		text "Whitney: You are"
+		line "still very strong."
+
+		para "I've more work to"
+		line "do to get to your"
+		cont "level."
+		
+		para "Let's do this again"
+		line "sometime."
+		done
+
+WhitneyLossText:
+	text "You're even better"
+	line "than me!"
+
+	para "You deserve this!"
+	done
+
+WhitneyRematchLossText:
+	text "We tried our best…"
+
+	para "There's always next"
+	line "time."
+	done
 
 TrainerLassCarrie:
-	trainer LASS, CARRIE, EVENT_BEAT_LASS_CARRIE, LassCarrieSeenText, LassCarrieBeatenText, 0, .Script
+	jumpthistextfaceplayer
+		text "Do my #mon"
+		line "think I'm cute?"
+		done
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext LassCarrieAfterBattleText
-	waitbutton
-	closetext
+TrainerLassCarrieCheck:
+	checkevent EVENT_BEAT_LASS_CARRIE
+	iftrue .End
+	playmusic MUSIC_LASS_ENCOUNTER
+	showemote EMOTE_SHOCK, GOLDENRODGYM_LASS1, 30
+	applymovement GOLDENRODGYM_LASS1, CarrieToPlayerMovement
+	showthistext
+		text "Don't let my"
+		line "#mon's cute"
+		cont "looks fool you."
+
+		para "They can whip you!"
+		done
+	winlosstext LassCarrieBeatenText, 0
+	readvar VAR_BADGES
+	ifgreater 7, .EightBadges
+	ifgreater 5, .SixOrSevenBadges
+	ifgreater 3, .FourOrFiveBadges
+	ifgreater 1, .TwoOrThreeBadges
+.ZeroOrOneBadge:
+	loadtrainer LASS, CARRIE1
+	sjump .StartBattle
+.TwoOrThreeBadges:
+	loadtrainer LASS, CARRIE2
+	sjump .StartBattle
+.FourOrFiveBadges:
+	loadtrainer LASS, CARRIE3
+	sjump .StartBattle
+.SixOrSevenBadges:
+	loadtrainer LASS, CARRIE4
+	sjump .StartBattle
+.EightBadges:
+	loadtrainer LASS, CARRIE5
+	; fallthrough
+
+.StartBattle:
+	startbattle
+	reloadmapafterbattle
+	playmusic MUSIC_GYM
+	setevent EVENT_BEAT_LASS_CARRIE
+.End
 	end
 
-WhitneyCriesScript:
-	showemote EMOTE_SHOCK, GOLDENRODGYM_LASS2, 15
-	applymovement GOLDENRODGYM_LASS2, BridgetWalksUpMovement
-	turnobject PLAYER, DOWN
-	opentext
-	writetext BridgetWhitneyCriesText
-	waitbutton
-	closetext
-	applymovement GOLDENRODGYM_LASS2, BridgetWalksAwayMovement
-	setscene SCENE_GOLDENRODGYM_NOOP
-	clearevent EVENT_MADE_WHITNEY_CRY
-	end
+CarrieToPlayerMovement:
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step_end
+
+LassCarrieBeatenText:
+	text "Darn… I thought"
+	line "you were weak…"
+	done
 
 TrainerLassBridget:
-	trainer LASS, BRIDGET, EVENT_BEAT_LASS_BRIDGET, LassBridgetSeenText, LassBridgetBeatenText, 0, .Script
+	faceplayer
+	checkevent EVENT_BEAT_LASS_BRIDGET
+	iftrue .AfterBattleText
+	playmusic MUSIC_LASS_ENCOUNTER
+	sjump TrainerLassBridgetBattle
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext LassBridgetAfterBattleText
-	waitbutton
-	closetext
+.AfterBattleText:
+	jumpthistext
+		text "I'm trying to beat"
+		line "Whitney, but…"
+		cont "It's depressing."
+
+		para "I'm okay! If I"
+		line "lose, I'll just"
+		cont "try harder next"
+		cont "time!"
+		done
+
+TrainerLassBridgetCheck:
+	checkevent EVENT_BEAT_LASS_BRIDGET
+	iftrue .End
+	playmusic MUSIC_LASS_ENCOUNTER
+	showemote EMOTE_SHOCK, GOLDENRODGYM_LASS2, 30
+	turnobject PLAYER, LEFT
+	sjump TrainerLassBridgetBattle
+.End
 	end
+
+TrainerLassBridgetBattle:
+	showthistext
+		text "I like cute #-"
+		line "mon better than"
+		cont "strong #mon."
+
+		para "But I have strong"
+		line "and cute #mon!"
+		done
+	winlosstext LassBridgetBeatenText, 0
+	readvar VAR_BADGES
+	ifgreater 7, .EightBadges
+	ifgreater 5, .SixOrSevenBadges
+	ifgreater 3, .FourOrFiveBadges
+	ifgreater 1, .TwoOrThreeBadges
+.ZeroOrOneBadge:
+	loadtrainer LASS, BRIDGET1
+	sjump .StartBattle
+.TwoOrThreeBadges:
+	loadtrainer LASS, BRIDGET2
+	sjump .StartBattle
+.FourOrFiveBadges:
+	loadtrainer LASS, BRIDGET3
+	sjump .StartBattle
+.SixOrSevenBadges:
+	loadtrainer LASS, BRIDGET4
+	sjump .StartBattle
+.EightBadges:
+	loadtrainer LASS, BRIDGET5
+	; fallthrough
+
+.StartBattle:
+	startbattle
+	reloadmapafterbattle
+	playmusic MUSIC_GYM
+	setevent EVENT_BEAT_LASS_BRIDGET
+	end
+
+LassBridgetBeatenText:
+	text "Oh, no, no, no!"
+	done
 
 TrainerBeautyVictoria:
-	trainer BEAUTY, VICTORIA, EVENT_BEAT_BEAUTY_VICTORIA, BeautyVictoriaSeenText, BeautyVictoriaBeatenText, 0, .Script
+	faceplayer
+	checkevent EVENT_BEAT_BEAUTY_VICTORIA
+	iftrue .AfterBattleText
+	playmusic MUSIC_BEAUTY_ENCOUNTER
+	sjump TrainerBeautyVictoriaBattle
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext BeautyVictoriaAfterBattleText
-	waitbutton
-	closetext
+.AfterBattleText:
+	jumpthistext
+		text "Wow, you must be"
+		line "good to beat me!"
+		
+		para "Keep it up!"
+		done
+
+TrainerBeautyVictoriaCheck1:
+	checkevent EVENT_BEAT_BEAUTY_VICTORIA
+	iftrue .End
+	sjump TrainerBeautyVictoriaStart1
+.End
 	end
+
+TrainerBeautyVictoriaCheck2:
+	checkevent EVENT_BEAT_BEAUTY_VICTORIA
+	iftrue .End
+	sjump TrainerBeautyVictoriaStart2
+.End
+	end
+
+TrainerBeautyVictoriaStart1:
+	playmusic MUSIC_BEAUTY_ENCOUNTER
+	showemote EMOTE_SHOCK, GOLDENRODGYM_BEAUTY1, 30
+	applymovement GOLDENRODGYM_BEAUTY1, VictoriaToPlayerMovement1
+	turnobject PLAYER, UP
+	sjump TrainerBeautyVictoriaBattle
+
+TrainerBeautyVictoriaStart2:
+	playmusic MUSIC_BEAUTY_ENCOUNTER
+	showemote EMOTE_SHOCK, GOLDENRODGYM_BEAUTY1, 30
+	turnobject PLAYER, UP
+	; fallthrough
+
+TrainerBeautyVictoriaBattle:
+	showthistext
+		text "Oh, you are a cute"
+		line "little trainer! "
+
+		para "I like you, but I"
+		line "won't hold back!"
+		done
+	winlosstext BeautyVictoriaBeatenText, 0
+	readvar VAR_BADGES
+	ifgreater 7, .EightBadges
+	ifgreater 5, .SixOrSevenBadges
+	ifgreater 3, .FourOrFiveBadges
+	ifgreater 1, .TwoOrThreeBadges
+.ZeroOrOneBadge:
+	loadtrainer BEAUTY, VICTORIA1
+	sjump .StartBattle
+.TwoOrThreeBadges:
+	loadtrainer BEAUTY, VICTORIA2
+	sjump .StartBattle
+.FourOrFiveBadges:
+	loadtrainer BEAUTY, VICTORIA3
+	sjump .StartBattle
+.SixOrSevenBadges:
+	loadtrainer BEAUTY, VICTORIA4
+	sjump .StartBattle
+.EightBadges:
+	loadtrainer BEAUTY, VICTORIA5
+	; fallthrough
+
+.StartBattle:
+	startbattle
+	reloadmapafterbattle
+	playmusic MUSIC_GYM
+	setevent EVENT_BEAT_BEAUTY_VICTORIA
+	end
+
+VictoriaToPlayerMovement1:
+	step DOWN
+	step_end
+
+BeautyVictoriaBeatenText:
+	text "Let's see… Oops,"
+	line "it's over?"
+	done
 
 TrainerBeautySamantha:
-	trainer BEAUTY, SAMANTHA, EVENT_BEAT_BEAUTY_SAMANTHA, BeautySamanthaSeenText, BeautySamanthaBeatenText, 0, .Script
+	faceplayer
+	checkevent EVENT_BEAT_BEAUTY_SAMANTHA
+	iftrue .AfterBattleText
+	playmusic MUSIC_BEAUTY_ENCOUNTER
+	sjump TrainerBeautySamanthaBattle
 
-.Script:
-	endifjustbattled
-	opentext
-	writetext BeautySamanthaAfterBattleText
-	waitbutton
-	closetext
+.AfterBattleText:
+	jumpthistext
+		text "I taught #mon"
+		line "moves for taking"
+		cont "on any type…"
+		done
+
+TrainerBeautySamanthaCheck1:
+	checkevent EVENT_BEAT_BEAUTY_SAMANTHA
+	iftrue .End
+	sjump TrainerBeautySamanthaStart1
+.End
 	end
+
+TrainerBeautySamanthaCheck2:
+	checkevent EVENT_BEAT_BEAUTY_SAMANTHA
+	iftrue .End
+	sjump TrainerBeautySamanthaStart2
+.End
+	end
+
+TrainerBeautySamanthaStart1:
+	playmusic MUSIC_BEAUTY_ENCOUNTER
+	showemote EMOTE_SHOCK, GOLDENRODGYM_BEAUTY2, 30
+	applymovement GOLDENRODGYM_BEAUTY2, SamanthaToPlayerMovement1
+	turnobject PLAYER, UP
+	sjump TrainerBeautySamanthaBattle
+
+TrainerBeautySamanthaStart2:
+	playmusic MUSIC_BEAUTY_ENCOUNTER
+	showemote EMOTE_SHOCK, GOLDENRODGYM_BEAUTY2, 30
+	turnobject PLAYER, UP
+	; fallthrough
+
+TrainerBeautySamanthaBattle:
+	showthistext
+		text "Give it your best"
+		line "shot, or I'll take"
+		cont "you down!"
+		done
+	winlosstext BeautySamanthaBeatenText, 0
+	readvar VAR_BADGES
+	ifgreater 7, .EightBadges
+	ifgreater 5, .SixOrSevenBadges
+	ifgreater 3, .FourOrFiveBadges
+	ifgreater 1, .TwoOrThreeBadges
+.ZeroOrOneBadge:
+	loadtrainer BEAUTY, SAMANTHA1
+	sjump .StartBattle
+.TwoOrThreeBadges:
+	loadtrainer BEAUTY, SAMANTHA2
+	sjump .StartBattle
+.FourOrFiveBadges:
+	loadtrainer BEAUTY, SAMANTHA3
+	sjump .StartBattle
+.SixOrSevenBadges:
+	loadtrainer BEAUTY, SAMANTHA4
+	sjump .StartBattle
+.EightBadges:
+	loadtrainer BEAUTY, SAMANTHA5
+	; fallthrough
+
+.StartBattle:
+	startbattle
+	reloadmapafterbattle
+	playmusic MUSIC_GYM
+	setevent EVENT_BEAT_BEAUTY_SAMANTHA
+	end
+
+SamanthaToPlayerMovement1:
+	step DOWN
+	step_end
+
+BeautySamanthaBeatenText:
+	text "No! Oh, my poor"
+	line "#mon!"
+	done
 
 GoldenrodGymGuideScript:
-	faceplayer
+	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
+	iftrue .GoldenrodGymGuideChampScript
 	checkevent EVENT_BEAT_WHITNEY
 	iftrue .GoldenrodGymGuideWinScript
-	opentext
-	writetext GoldenrodGymGuideText
-	waitbutton
-	closetext
-	end
+	jumpthistextfaceplayer
+		text "Yo! Champ in"
+		line "making!"
+
+		para "This Gym uses the"
+		line "normal and fairy"
+		cont "types."
+
+		para "They cover each-"
+		line "other's weaknesses"
+		cont "somewhat."
+
+		para "I recommend you"
+		line "use fighting and"
+		cont "poison-type #-"
+		cont "mon with liberal"
+		cont "switching."
+		done
 
 .GoldenrodGymGuideWinScript:
-	opentext
-	writetext GoldenrodGymGuideWinText
-	waitbutton
-	closetext
-	end
+	jumpthistextfaceplayer
+		text "You won? Great! I"
+		line "was busy admiring"
+		cont "the ladies here."
+		done
+
+.GoldenrodGymGuideChampScript:
+	jumpthistextfaceplayer
+		text "Yo Champ!"
+
+		para "Here to check out"
+		line "the ladies too?"
+		done
 
 GoldenrodGymStatue:
 	checkflag ENGINE_PLAINBADGE
@@ -172,223 +540,20 @@ GoldenrodGymStatue:
 	gettrainername STRING_BUFFER_4, WHITNEY, WHITNEY1
 	jumpstd GymStatue2Script
 
-BridgetWalksUpMovement:
-	step LEFT
-	turn_head UP
-	step_end
+GoldenrodGymHPUpScript:
+	disappear LAST_TALKED
+	opentext
+	giveitem HP_UP, 5
+	iffalse GoldenrodGymPlayersPackIsFull
+	jumpthisopenedtext
+		text "<PLAYER> got"
+		line "5× HP Ups!@"
+		sound_item
+		text_end
 
-BridgetWalksAwayMovement:
-	step RIGHT
-	turn_head LEFT
-	step_end
-
-WhitneyBeforeText:
-	text "Hi! I'm WHITNEY!"
-
-	para "Everyone was into"
-	line "#MON, so I got"
-	cont "into it too!"
-
-	para "#MON are"
-	line "super-cute!"
-
-	para "You want to bat-"
-	line "tle? I'm warning"
-	cont "you--I'm good!"
-	done
-
-WhitneyShouldntBeSoSeriousText:
-	text "Sob…"
-
-	para "…Waaaaaaah!"
-	line "You're mean!"
-
-	para "You shouldn't be"
-	line "so serious! You…"
-	cont "you child, you!"
-	done
-
-WhitneyYouMeanieText:
-	text "Waaaaah!"
-
-	para "Waaaaah!"
-
-	para "…Snivel, hic…"
-	line "…You meanie!"
-	done
-
-WhitneyWhatDoYouWantText:
-	text "…Sniff…"
-
-	para "What? What do you"
-	line "want? A BADGE?"
-
-	para "Oh, right."
-	line "I forgot. Here's"
-	cont "PLAINBADGE."
-	done
-
-PlayerReceivedPlainBadgeText:
-	text "<PLAYER> received"
-	line "PLAINBADGE."
-	done
-
-WhitneyPlainBadgeText:
-	text "PLAINBADGE lets"
-	line "your #MON use"
-
-	para "STRENGTH outside"
-	line "of battle."
-
-	para "Oh, you can have"
-	line "this too!"
-	done
-
-WhitneyAttractText:
-	text "It's ATTRACT!"
-	line "It makes full use"
-
-	para "of a #MON's"
-	line "charm."
-
-	para "Isn't it just per-"
-	line "fect for a cutie"
-	cont "like me?"
-	done
-
-WhitneyGoodCryText:
-	text "Ah, that was a"
-	line "good cry!"
-
-	para "Come for a visit"
-	line "again! Bye-bye!"
-	done
-
-LassCarrieSeenText:
-	text "Don't let my"
-	line "#MON's cute"
-
-	para "looks fool you."
-	line "They can whip you!"
-	done
-
-LassCarrieBeatenText:
-	text "Darn… I thought"
-	line "you were weak…"
-	done
-
-LassCarrieAfterBattleText:
-	text "Do my #MON"
-	line "think I'm cute?"
-	done
-
-LassBridgetSeenText:
-	text "I like cute #-"
-	line "MON better than"
-	cont "strong #MON."
-
-	para "But I have strong"
-	line "and cute #MON!"
-	done
-
-LassBridgetBeatenText:
-	text "Oh, no, no, no!"
-	done
-
-LassBridgetAfterBattleText:
-	text "I'm trying to beat"
-	line "WHITNEY, but…"
-	cont "It's depressing."
-
-	para "I'm okay! If I"
-	line "lose, I'll just"
-
-	para "try harder next"
-	line "time!"
-	done
-
-BridgetWhitneyCriesText:
-	text "Oh, no. You made"
-	line "WHITNEY cry."
-
-	para "It's OK. She'll"
-	line "stop soon. She"
-
-	para "always cries when"
-	line "she loses."
-	done
-
-BeautyVictoriaSeenText:
-	text "Oh, you are a cute"
-	line "little trainer! "
-
-	para "I like you, but I"
-	line "won't hold back!"
-	done
-
-BeautyVictoriaBeatenText:
-	text "Let's see… Oops,"
-	line "it's over?"
-	done
-
-BeautyVictoriaAfterBattleText:
-	text "Wow, you must be"
-	line "good to beat me!"
-	cont "Keep it up!"
-	done
-
-BeautySamanthaSeenText:
-	text "Give it your best"
-	line "shot, or I'll take"
-	cont "you down!"
-	done
-
-BeautySamanthaBeatenText:
-	text "No! Oh, MEOWTH,"
-	line "I'm so sorry!"
-	done
-
-BeautySamanthaAfterBattleText:
-	text "I taught MEOWTH"
-	line "moves for taking"
-	cont "on any type…"
-	done
-
-GoldenrodGymGuideText:
-	text "Yo! CHAMP in"
-	line "making!"
-
-	para "This GYM is home"
-	line "to normal-type"
-	cont "#MON trainers."
-
-	para "I recommend you"
-	line "use fighting-type"
-	cont "#MON."
-	done
-
-GoldenrodGymGuideWinText:
-	text "You won? Great! I"
-	line "was busy admiring"
-	cont "the ladies here."
-	done
-
-GoldenrodGym_MapEvents:
-	def_warp_events
-	warp_event  2, 17, GOLDENROD_CITY, 2
-	warp_event  3, 17, GOLDENROD_CITY, 2
-
-	def_coord_events
-	coord_event  8,  5, SCENE_GOLDENRODGYM_WHITNEY_STOPS_CRYING, WhitneyCriesScript
-
-	def_bg_events
-	bg_event  1, 15, BGEVENT_READ, GoldenrodGymStatue
-	bg_event  4, 15, BGEVENT_READ, GoldenrodGymStatue
-
-	def_object_events
-	object_event  8,  3, SPRITE_WHITNEY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodGymWhitneyScript, -1
-	object_event  9, 13, SPRITE_LASS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 4, TrainerLassCarrie, -1
-	object_event  9,  6, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 1, TrainerLassBridget, -1
-	object_event  0,  2, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerBeautyVictoria, -1
-	object_event 19,  5, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerBeautySamantha, -1
-	object_event  5, 15, SPRITE_GYM_GUIDE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, GoldenrodGymGuideScript, -1
+GoldenrodGymPlayersPackIsFull:
+	appear GOLDENRODGYM_POKE_BALL
+	jumpthisopenedtext
+		text "The Item Pocket"
+		line "is full…"
+		done
