@@ -189,7 +189,8 @@
 	const EVENT_DID_NOT_GET_BATTLE_ARENA_PRIZE
 	const EVENT_BATTLE_LOBBY_INVERSE_BATTLE
 	const EVENT_BATTLE_LOBBY_TYPELESS_BATTLE
-; Unused: next 19 events
+	const EVENT_VIOLET_GYM_THREE_RARE_CANDIES
+; Unused: next 18 events
 
 	const_next 200
 ; Kanto story events

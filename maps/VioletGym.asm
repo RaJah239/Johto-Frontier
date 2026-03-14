@@ -17,12 +17,14 @@ VioletGym_MapEvents:
 	object_event  7,  6, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 2, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TrainerBirdKeeperRod, -1
 	object_event  2, 10, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 2, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TrainerBirdKeeperAbe, -1
 	object_event  7, 13, SPRITE_GYM_GUIDE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, VioletGymGuideScript, -1
+	object_event  4, 14, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, VioletGymRareCandyScript, EVENT_VIOLET_GYM_THREE_RARE_CANDIES
 
 	object_const_def
 	const VIOLETGYM_FALKNER
 	const VIOLETGYM_YOUNGSTER1
 	const VIOLETGYM_YOUNGSTER2
 	const VIOLETGYM_GYM_GUIDE
+	const VIOLETGYM_POKE_BALL
 
 VioletGym_MapScripts:
 	def_scene_scripts
@@ -167,6 +169,7 @@ VioletGymFalknerScript:
 	loadtrainer FALKNER, FALKNER5 ; super boss team
 	startbattle
 	reloadmapafterbattle
+	appear VIOLETGYM_POKE_BALL
 	jumpthistext
 		text "Falkner: What an"
 		line "intense battle!"
@@ -399,3 +402,21 @@ VioletGymStatue:
 .Beaten:
 	gettrainername STRING_BUFFER_4, FALKNER, FALKNER1
 	jumpstd GymStatue2Script
+
+VioletGymRareCandyScript:
+	disappear LAST_TALKED
+	opentext
+	giveitem RARE_CANDY, 3
+	iffalse VioletGymPlayersPackIsFull
+	jumpthisopenedtext
+		text "<PLAYER> got"
+		line "3× Rare Candies!@"
+		sound_item
+		text_end
+
+VioletGymPlayersPackIsFull:
+	appear VIOLETGYM_POKE_BALL
+	jumpthisopenedtext
+		text "The Item Pocket"
+		line "is full…"
+		done
