@@ -57,4 +57,5 @@ MapScenes::
 	scene_var ROUTE_21,                                    wRoute21
 	scene_var BATTLE_PLAZA,                                wBattlePlaza
 	scene_var VIOLET_GYM,                                  wVioletGym
+	scene_var AZALEA_GYM,                                  wAzaleaGym
 	db -1 ; end

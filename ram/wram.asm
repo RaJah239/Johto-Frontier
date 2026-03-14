@@ -3168,8 +3168,9 @@ wOaksLab::                                        db
 wRoute21::                                        db
 wBattlePlaza::                                    db
 wVioletGym::                                      db
+wAzaleaGym::                                      db
 
-	ds 176
+	ds 175
 
 ; battle tower points
 wBattleTowerNormalPoints:: db

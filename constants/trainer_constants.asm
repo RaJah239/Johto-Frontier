@@ -39,6 +39,10 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass BUGSY ; 3
 	const BUGSY1
+	const BUGSY2
+	const BUGSY3
+	const BUGSY4
+	const BUGSY5
 
 	trainerclass MORTY ; 4
 	const MORTY1
@@ -223,11 +227,23 @@ DEF KRIS EQU __trainer_class__
 	const SABRINA1
 
 	trainerclass BUG_CATCHER ; 24
+	const JOSH1 ; azalea gym trainer
+	const JOSH2 ; azalea gym trainer
+	const JOSH3 ; azalea gym trainer
+	const JOSH4 ; azalea gym trainer
+	const JOSH5 ; azalea gym trainer
+	const BENNY1 ; azalea gym trainer
+	const BENNY2 ; azalea gym trainer
+	const BENNY3 ; azalea gym trainer
+	const BENNY4 ; azalea gym trainer
+	const BENNY5 ; azalea gym trainer
+	const AL1 ; azalea gym trainer
+	const AL2 ; azalea gym trainer
+	const AL3 ; azalea gym trainer
+	const AL4 ; azalea gym trainer
+	const AL5 ; azalea gym trainer
 	const DON
 	const WADE
-	const BUG_CATCHER_BENNY
-	const AL
-	const JOSH
 	const ARNIE
 	const WAYNE
 	const EMMANUEL
@@ -306,7 +322,7 @@ DEF KRIS EQU __trainer_class__
 	const DANIEL
 
 	trainerclass BIKER ; 2d
-	const BIKER_BENNY ; unused
+	const JIVES ; unused
 
 	trainerclass BLAINE ; 2e
 	const BLAINE1
@@ -398,10 +414,13 @@ DEF KRIS EQU __trainer_class__
 	const MIKI
 
 	trainerclass TWINS ; 3d
+	const AMYANDMAY1 ; azalea gym trainer
+	const AMYANDMAY2 ; azalea gym trainer
+	const AMYANDMAY3 ; azalea gym trainer
+	const AMYANDMAY4 ; azalea gym trainer
+	const AMYANDMAY5 ; azalea gym trainer
 	const ANNANDANNE1
 	const ANNANDANNE2
-	const AMYANDMAY1
-	const AMYANDMAY2
 	const LEAANDPIA1
 	const LEAANDPIA2
 

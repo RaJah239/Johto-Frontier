@@ -164,7 +164,8 @@ VioletGymFalknerScript:
 		line "real power of the"
 		cont "magnificent bird"
 		cont "#mon!"
-		done 
+		done
+	waitbutton
 	winlosstext FalknerRematchLossText, 0
 	loadtrainer FALKNER, FALKNER5 ; super boss team
 	startbattle

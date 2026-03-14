@@ -26,7 +26,7 @@ BugContestant_BugCatcherDon:
 	dbw SUICUNE,    226
 
 BugContestant_BugCatcherEd:
-	db BUG_CATCHER, JOSH
+	db BUG_CATCHER, JOSH1
 	dbw RAIKOU,     300
 	dbw ENTEI,      285
 	dbw SUICUNE,    226
@@ -44,7 +44,7 @@ BugContestant_PokefanMWilliam:
 	dbw SUICUNE,    226
 
 BugContestant_BugCatcherBenny:
-	db BUG_CATCHER, BUG_CATCHER_BENNY
+	db BUG_CATCHER, BENNY1
 	dbw RAIKOU,     300
 	dbw ENTEI,      285
 	dbw SUICUNE,    226
