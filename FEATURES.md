@@ -89,6 +89,7 @@
 - All Pokémon obey regardless if traded or not
 - Can 100% run from any wild encounter
 - Press Start to view enemy types in Battle Menu
+- Displays type effectiveness in Battle Menu
 - Push B in Battle Menu to go to the bottom right option
 - Quadruple effective and ineffective battle texts added
 - Removed vanilla Crystal's the 25% failure chance for AI status moves

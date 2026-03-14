@@ -5614,11 +5614,57 @@ MoveInfoBox:
 	hlcoord 2, 9
 	predef PrintMoveType
 
-; print "pp"
-	ld de, .pp_string ; "p"
-	hlcoord 2, 11
+; display type effectiveness in battle menu
+	; check if move has no power
+	; or not a special move like counter, mirror coat or seismic toss
+	; and bail
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	cp 2
+	jr c, .skip_type_effectiveness
+
+	call SetPlayerTurn
+	farcall BattleCheckTypeMatchup
+	ld a, [wTypeMatchup]
+	and a
+	jr z, .immune ; 0 damage
+
+	cp EFFECTIVE / 2
+	jr c, .very_ineffective ; 1/4x damage
+
+	cp EFFECTIVE
+	jr c, .not_very_effective ; 1/2x damage
+	jr z, .neutral
+
+	cp EFFECTIVE * 2 + 1
+	jr nc, .quad_effective ; 4x damage
+	ld de, .double_damage ; 2x damage
+	jr .print_effectiveness
+
+.not_very_effective
+	ld de, .half_damage
+	jr .print_effectiveness
+
+.very_ineffective
+	ld de, .quarter_damage
+	jr .print_effectiveness
+
+.neutral
+	ld de, .neutral_damage
+	jr .print_effectiveness
+
+.immune
+	ld de, .zero_damage
+	jr .print_effectiveness
+
+.quad_effective
+	ld de, .quadruple_damage
+	; fallthrough
+
+.print_effectiveness
+	hlcoord 1, 11
 	call PlaceString
 
+.skip_type_effectiveness
 ; print move BP (Base Power)
 	ld de, .power_string ; "p/"
 	hlcoord 4, 10
@@ -5702,8 +5748,18 @@ MoveInfoBox:
 	db " var@"
 .power_string:
 	db "p/@"
-.pp_string:
-	db "<boldp><boldp>@"
+.zero_damage:
+	db "×0@"
+.half_damage:
+	db "×<half>@"
+.quarter_damage:
+	db "×<quarter>@"
+.neutral_damage:
+	db "×1@"
+.double_damage:
+	db "×2@"
+.quadruple_damage:
+	db "×4@"
 .Disabled:
 	db "Disabled!@"
 

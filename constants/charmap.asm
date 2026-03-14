@@ -151,7 +151,7 @@
 	charmap "<⁂>",      $ca
 	charmap "<star>",    $cb
 	charmap "<float>",   $cc
-	charmap "<boldp>",   $cd
+	charmap "<quarter>", $cd
 	charmap "′",         $ce
 	charmap "″",         $cf
 
