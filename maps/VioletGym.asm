@@ -349,12 +349,11 @@ BirdKeeperRodBeatenText:
 	done
 
 VioletGymGuideScript:
-	faceplayeropentext
 	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
 	iftrue .VioletGymGuideChampScript
 	checkevent EVENT_BEAT_FALKNER
 	iftrue .VioletGymGuideWinScript
-	jumpthisopenedtext
+	jumpthistextfaceplayer
 		text "Hey! I'm no train-"
 		line "er but I can give"
 		cont "some advice!"
@@ -374,7 +373,7 @@ VioletGymGuideScript:
 		done
 
 .VioletGymGuideWinScript:
-	jumpthisopenedtext
+	jumpthistextfaceplayer
 		text "Nice battle! Keep"
 		line "it up, and you'll"
 		cont "be the Champ in no"
@@ -382,7 +381,7 @@ VioletGymGuideScript:
 		done
 
 .VioletGymGuideChampScript:
-	jumpthisopenedtext
+	jumpthistextfaceplayer
 		text "Champion <PLAYER>!"
 
 		para "Good to see you"
