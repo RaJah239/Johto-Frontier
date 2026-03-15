@@ -170,8 +170,10 @@ VioletGymFalknerScript:
 	loadtrainer FALKNER, FALKNER5 ; super boss team
 	startbattle
 	reloadmapafterbattle
+	clearevent EVENT_BEAT_BIRD_KEEPER_ROD
+	clearevent EVENT_BEAT_BIRD_KEEPER_ABE
 	appear VIOLETGYM_POKE_BALL
-	jumpthistext
+	showthistext
 		text "Falkner: What an"
 		line "intense battle!"
 		
@@ -181,6 +183,11 @@ VioletGymFalknerScript:
 		cont "you're as tough as"
 		cont "ever!"
 		done 
+	playsound SFX_WARP_TO
+	special FadeOutPalettes
+	waitsfx
+	warp VIOLET_GYM, 4, 15
+	end
 
 FalknerLossText:
 	text "No! My beloved"
