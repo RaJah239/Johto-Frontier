@@ -60,6 +60,10 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass JASMINE ; 6
 	const JASMINE1
+	const JASMINE2
+	const JASMINE3
+	const JASMINE4
+	const JASMINE5
 
 	trainerclass CHUCK ; 7
 	const CHUCK1
@@ -246,6 +250,11 @@ DEF KRIS EQU __trainer_class__
 	const CLARISSA
 
 	trainerclass TEACHER ; 22
+	const RAVEN1 ; olivine gym trainer
+	const RAVEN2 ; olivine gym trainer
+	const RAVEN3 ; olivine gym trainer
+	const RAVEN4 ; olivine gym trainer
+	const RAVEN5 ; olivine gym trainer
 
 	trainerclass SABRINA ; 23
 	const SABRINA1
@@ -333,6 +342,11 @@ DEF KRIS EQU __trainer_class__
 	const CLYDE ; unused
 
 	trainerclass HIKER ; 2c
+	const RUSTY1 ; olivine gym trainer
+	const RUSTY2 ; olivine gym trainer
+	const RUSTY3 ; olivine gym trainer
+	const RUSTY4 ; olivine gym trainer
+	const RUSTY5 ; olivine gym trainer
 	const ANTHONY
 	const RUSSELL
 	const PHILLIP

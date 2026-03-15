@@ -3169,8 +3169,9 @@ wRoute21::                                        db
 wBattlePlaza::                                    db
 wVioletGym::                                      db
 wAzaleaGym::                                      db
+wOlivineGym::                                     db
 
-	ds 175
+	ds 174
 
 ; battle tower points
 wBattleTowerNormalPoints:: db

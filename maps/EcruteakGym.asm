@@ -540,14 +540,14 @@ EcruteakGymCalciumScript:
 	disappear LAST_TALKED
 	opentext
 	giveitem CALCIUM, 5
-	iffalse EcruteakdGymPlayersPackIsFull
+	iffalse EcruteakGymPlayersPackIsFull
 	jumpthisopenedtext
 		text "<PLAYER> got"
 		line "5× Calciums!@"
 		sound_item
 		text_end
 
-EcruteakdGymPlayersPackIsFull:
+EcruteakGymPlayersPackIsFull:
 	appear ECRUTEAKGYM_POKE_BALL
 	jumpthisopenedtext
 		text "The Item Pocket"
