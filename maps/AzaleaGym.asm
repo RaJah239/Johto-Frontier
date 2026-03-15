@@ -178,8 +178,12 @@ AzaleaGymBugsyScript:
 	loadtrainer BUGSY, BUGSY5 ; super boss team
 	startbattle
 	reloadmapafterbattle
+	clearevent EVENT_BEAT_TWINS_AMY_AND_MAY
+	clearevent EVENT_BEAT_BUG_CATCHER_BENNY
+	clearevent EVENT_BEAT_BUG_CATCHER_AL
+	clearevent EVENT_BEAT_BUG_CATCHER_JOSH
 	appear AZALEAGYM_POKE_BALL
-	jumpthistext
+	showthistext
 		text "Bugsy: Amazing"
 		line "<PLAY_G>!"
 		
@@ -188,6 +192,11 @@ AzaleaGymBugsyScript:
 		cont "more places than"
 		cont "my research!"
 		done
+	playsound SFX_WARP_TO
+	special FadeOutPalettes
+	waitsfx
+	warp AZALEA_GYM, 4, 15
+	end
 
 BugsyLossText:
 	text "Whoa, amazing!"
