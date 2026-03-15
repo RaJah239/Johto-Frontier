@@ -50,6 +50,10 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass MORTY ; 4
 	const MORTY1
+	const MORTY2
+	const MORTY3
+	const MORTY4
+	const MORTY5
 
 	trainerclass PRYCE ; 5
 	const PRYCE1
@@ -399,12 +403,20 @@ DEF KRIS EQU __trainer_class__
 	const EXECUTIVEF_2
 
 	trainerclass SAGE ; 38
+	const PING1 ; ecruteak gym trainer
+	const PING2 ; ecruteak gym trainer
+	const PING3 ; ecruteak gym trainer
+	const PING4 ; ecruteak gym trainer
+	const PING5 ; ecruteak gym trainer 
+	const JEFFREY1 ; ecruteak gym trainer
+	const JEFFREY2 ; ecruteak gym trainer
+	const JEFFREY3 ; ecruteak gym trainer
+	const JEFFREY4 ; ecruteak gym trainer
+	const JEFFREY5 ; ecruteak gym trainer
 	const CHOW
 	const NICO
 	const JIN
 	const TROY
-	const JEFFREY
-	const PING
 	const EDMOND
 	const NEAL
 	const LI
@@ -413,8 +425,16 @@ DEF KRIS EQU __trainer_class__
 	const KOJI
 
 	trainerclass MEDIUM ; 39
-	const MARTHA
-	const GRACE
+	const GRACE1 ; ecruteak gym trainer
+	const GRACE2 ; ecruteak gym trainer
+	const GRACE3 ; ecruteak gym trainer
+	const GRACE4 ; ecruteak gym trainer
+	const GRACE5 ; ecruteak gym trainer
+	const MARTHA1 ; ecruteak gym trainer
+	const MARTHA2 ; ecruteak gym trainer
+	const MARTHA3 ; ecruteak gym trainer
+	const MARTHA4 ; ecruteak gym trainer
+	const MARTHA5 ; ecruteak gym trainer
 
 	trainerclass BOARDER ; 3a
 	const RONALD

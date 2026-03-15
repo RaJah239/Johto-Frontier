@@ -36,7 +36,7 @@ EcruteakCity_MapEvents:
 	object_event  3,  9, SPRITE_LASS, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EcruteakCityLass2Script, -1
 	object_event  9, 22, SPRITE_FISHER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, EcruteakCityFisherText, -1
 	object_event 10, 14, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, EcruteakCityYoungsterText, -1
-	object_event  3,  7, SPRITE_GRAMPS, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, EcruteakCityGramps3Text, EVENT_ECRUTEAK_CITY_GRAMPS
+	object_event  3,  7, SPRITE_GRAMPS, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, EcruteakCityGramps3Text, -1
 
 	object_const_def
 	const ECRUTEAKCITY_GRAMPS1
@@ -55,7 +55,15 @@ EcruteakCity_MapScripts:
 
 EcruteakCityFlypointCallback:
 	setflag ENGINE_FLYPOINT_ECRUTEAK
-	endcallback
+    checkevent EVENT_BEAT_MORTY
+    iffalse .ResetTrainers
+    endcallback
+.ResetTrainers
+	clearevent EVENT_BEAT_SAGE_JEFFREY
+	clearevent EVENT_BEAT_SAGE_PING
+	clearevent EVENT_BEAT_MEDIUM_MARTHA
+	clearevent EVENT_BEAT_MEDIUM_GRACE
+    endcallback
 
 EcruteakCityLass2Script:
 	checkevent EVENT_RELEASED_THE_BEASTS
