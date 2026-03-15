@@ -3171,8 +3171,9 @@ wVioletGym::                                      db
 wAzaleaGym::                                      db
 wOlivineGym::                                     db
 wCianwoodGym::                                    db
+wMahoganyGym::                                    db
 
-	ds 173
+	ds 172
 
 ; battle tower points
 wBattleTowerNormalPoints:: db

@@ -18,7 +18,7 @@
 	const EVENT_GOT_GOLDENROD_GYM_TM
 	const EVENT_GOT_ECRUTEAK_GYM_TM
 	const EVENT_GOT_OLIVINE_GYM_TM
-	const EVENT_GOT_TM16_ICY_WIND
+	const EVENT_GOT_MAHOGANY_GYM_TM
 	const EVENT_GOT_TM24_DRAGONBREATH
 ; HMs items (EVENT_GOT_MILOTIC_CALL is with the Johto itemballs)
 	const EVENT_GOT_MAREEP_CALL
@@ -193,7 +193,8 @@
 	const EVENT_ECRUTEAK_GYM_FIVE_CALCIUMS
 	const EVENT_OLIVINE_GYM_FIVE_IRONS
 	const EVENT_CIANWOOD_GYM_FIVE_PROTEINS
-; Unused: next 15 events
+	const EVENT_MAHOGANY_GYM_FIVE_ZINCS
+; Unused: next 16 events
 
 	const_next 200
 ; Kanto story events
@@ -503,7 +504,6 @@
 	const EVENT_BEAT_BIRD_KEEPER_PETER
 ; Boarder
 	const EVENT_BEAT_BOARDER_RONALD
-	const EVENT_BEAT_BOARDER_BRAD
 	const EVENT_BEAT_BOARDER_DOUGLAS
 ; Sage
 	const EVENT_BEAT_SAGE_CHOW
@@ -733,7 +733,7 @@
 	const EVENT_BEAT_SAGE_GAKU
 	const EVENT_BEAT_SAGE_MASA
 	const EVENT_BEAT_SAGE_KOJI
-; Unused: next 390 events
+; Unused: next 391 events
 
 	const_next 1600
 ; Sprite visibility flags

@@ -60,4 +60,5 @@ MapScenes::
 	scene_var AZALEA_GYM,                                  wAzaleaGym
 	scene_var OLIVINE_GYM,                                 wOlivineGym
 	scene_var CIANWOOD_GYM,                                wCianwoodGym
+	scene_var MAHOGANY_GYM,                                wMahoganyGym
 	db -1 ; end

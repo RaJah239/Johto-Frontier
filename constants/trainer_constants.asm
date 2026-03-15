@@ -57,6 +57,10 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass PRYCE ; 5
 	const PRYCE1
+	const PRYCE2
+	const PRYCE3
+	const PRYCE4
+	const PRYCE5
 
 	trainerclass JASMINE ; 6
 	const JASMINE1
@@ -250,8 +254,16 @@ DEF KRIS EQU __trainer_class__
 	const CHARLES
 
 	trainerclass SKIER ; 21
-	const ROXANNE
-	const CLARISSA
+	const ROXANNE1 ; mahogany gym trainer
+	const ROXANNE2 ; mahogany gym trainer
+	const ROXANNE3 ; mahogany gym trainer
+	const ROXANNE4 ; mahogany gym trainer
+	const ROXANNE5 ; mahogany gym trainer
+	const CLARISSA1 ; mahogany gym trainer
+	const CLARISSA2 ; mahogany gym trainer
+	const CLARISSA3 ; mahogany gym trainer
+	const CLARISSA4 ; mahogany gym trainer
+	const CLARISSA5 ; mahogany gym trainer
 
 	trainerclass TEACHER ; 22
 	const RAVEN1 ; olivine gym trainer
@@ -467,9 +479,16 @@ DEF KRIS EQU __trainer_class__
 	const MARTHA5 ; ecruteak gym trainer
 
 	trainerclass BOARDER ; 3a
-	const RONALD
-	const BRAD
-	const DOUGLAS
+	const RONALD1 ; mahogany gym trainer
+	const RONALD2 ; mahogany gym trainer
+	const RONALD3 ; mahogany gym trainer
+	const RONALD4 ; mahogany gym trainer
+	const RONALD5 ; mahogany gym trainer
+	const DOUGLAS1 ; mahogany gym trainer
+	const DOUGLAS2 ; mahogany gym trainer
+	const DOUGLAS3 ; mahogany gym trainer
+	const DOUGLAS4 ; mahogany gym trainer
+	const DOUGLAS5 ; mahogany gym trainer
 
 	trainerclass POKEFANM ; 3b
 	const WILLIAM
