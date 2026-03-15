@@ -855,8 +855,9 @@ LoadOrangePage:
 	and a
 	call nz, StatsScreen_Print_HiddenPow_Info
 
-	; Add sidequest to show Effort Values, presently if DragonBreadth's TM has been obtained
-	ld de, EVENT_GOT_TM24_DRAGONBREATH
+	; TODOTEXT
+	; Add sidequest to show Effort Values, presently this event is temporary
+	ld de, EVENT_UNLOCK_STAT_SCREEN_EFFORT_VALUES
 	ld b, CHECK_FLAG
 	call EventFlagAction
 	ld a, c

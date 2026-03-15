@@ -1,12 +1,35 @@
+BlackthornGym2F_MapEvents:
+	def_warp_events
+	warp_event  1,  7, BLACKTHORN_GYM_1F, 3
+	warp_event  7,  9, BLACKTHORN_GYM_1F, 4
+	warp_event  2,  5, BLACKTHORN_GYM_1F, 5 ; hole
+	warp_event  8,  7, BLACKTHORN_GYM_1F, 6 ; hole
+	warp_event  8,  3, BLACKTHORN_GYM_1F, 7 ; hole
+
+	def_coord_events
+
+	def_bg_events
+
+	def_object_events
+	strengthboulder_event  8,  2, EVENT_BOULDER_IN_BLACKTHORN_GYM_1
+	strengthboulder_event  2,  3, EVENT_BOULDER_IN_BLACKTHORN_GYM_2
+	strengthboulder_event  6, 16, EVENT_BOULDER_IN_BLACKTHORN_GYM_3
+	strengthboulder_event  3,  3
+	strengthboulder_event  6,  1
+	strengthboulder_event  8, 14
+	object_event  5, 13, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerCooltrainermCody, -1
+	object_event  4, 11, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerCooltrainerfFran, -1
+
 	object_const_def
-	const BLACKTHORNGYM2F_COOLTRAINER_M
-	const BLACKTHORNGYM2F_COOLTRAINER_F
 	const BLACKTHORNGYM2F_BOULDER1
 	const BLACKTHORNGYM2F_BOULDER2
 	const BLACKTHORNGYM2F_BOULDER3
 	const BLACKTHORNGYM2F_BOULDER4
 	const BLACKTHORNGYM2F_BOULDER5
 	const BLACKTHORNGYM2F_BOULDER6
+
+	const BLACKTHORNGYM2F_COOLTRAINER_M
+	const BLACKTHORNGYM2F_COOLTRAINER_F
 
 BlackthornGym2F_MapScripts:
 	def_scene_scripts
@@ -34,110 +57,66 @@ BlackthornGym2F_MapScripts:
 
 .Boulder3:
 	disappear BLACKTHORNGYM2F_BOULDER3
-	sjump .Fall
+	; fallthrough
 
 .Fall:
 	pause 30
 	scall .FX
-	opentext
-	writetext BlackthornGym2FBoulderFellText
-	waitbutton
-	closetext
-	end
+	jumpthistext
+		text "The boulder fell"
+		line "through!"
+		done
 
 .FX:
 	playsound SFX_STRENGTH
 	earthquake 80
 	end
 
-BlackthornGymBoulder:
-	jumpstd StrengthBoulderScript
-
 TrainerCooltrainermCody:
-	trainer COOLTRAINERM, CODY, EVENT_BEAT_COOLTRAINERM_CODY, CooltrainermCodySeenText, CooltrainermCodyBeatenText, 0, .Script
+	trainer COOLTRAINERM, CODY, EVENT_BEAT_COOLTRAINERM_CODY, .SeenText, .BeatenText, 0, .Script
 
 .Script:
+	loadmem wNoRematch, 1
 	endifjustbattled
-	opentext
-	writetext CooltrainermCodyAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumpthistextfaceplayer
+		text "Members of our"
+		line "dragon-user clan"
+		cont "can use dragon"
+		cont "#mon only after"
+		cont "our Master allows"
+		cont "it."
+		done
+
+.SeenText
+	text "We don't only use"
+	line "dragon #mon."
+	done
+
+.BeatenText
+	text "Damn! I need to"
+	line "set up faster!"
+	done
 
 TrainerCooltrainerfFran:
-	trainer COOLTRAINERF, FRAN, EVENT_BEAT_COOLTRAINERF_FRAN, CooltrainerfFranSeenText, CooltrainerfFranBeatenText, 0, .Script
+	trainer COOLTRAINERF, FRAN, EVENT_BEAT_COOLTRAINERF_FRAN, .SeenText, .BeatenText, 0, .Script
 
 .Script:
+	loadmem wNoRematch, 1
 	endifjustbattled
-	opentext
-	writetext CooltrainerfFranAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumpthistextfaceplayer
+		text "Uh-oh… Clair is"
+		line "going to be mad…"
+		done
 
-CooltrainermCodySeenText:
-	text "It's not as if we"
-	line "all use dragon-"
-	cont "type #MON."
-	done
-
-CooltrainermCodyBeatenText:
-	text "Rats! If only I"
-	line "had a dragon!"
-	done
-
-CooltrainermCodyAfterBattleText:
-	text "Members of our"
-	line "dragon-user clan"
-
-	para "can use dragon"
-	line "#MON only after"
-
-	para "our MASTER allows"
-	line "it."
-	done
-
-CooltrainerfFranSeenText:
+.SeenText
 	text "I can't allow a"
 	line "nameless trainer"
 	cont "past me!"
 
-	para "CLAIR would be"
+	para "Clair would be"
 	line "livid if I did!"
 	done
 
-CooltrainerfFranBeatenText:
+.BeatenText
 	text "Awww… I lost…"
 	done
-
-CooltrainerfFranAfterBattleText:
-	text "Uh-oh… CLAIR is"
-	line "going to be mad…"
-	done
-
-BlackthornGym2FBoulderFellText:
-	text "The boulder fell"
-	line "through!"
-	done
-
-BlackthornGym2F_MapEvents:
-	def_warp_events
-	warp_event  1,  7, BLACKTHORN_GYM_1F, 3
-	warp_event  7,  9, BLACKTHORN_GYM_1F, 4
-	warp_event  2,  5, BLACKTHORN_GYM_1F, 5 ; hole
-	warp_event  8,  7, BLACKTHORN_GYM_1F, 6 ; hole
-	warp_event  8,  3, BLACKTHORN_GYM_1F, 7 ; hole
-
-	def_coord_events
-
-	def_bg_events
-
-	def_object_events
-	object_event  4,  1, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerCooltrainermCody, -1
-	object_event  4, 11, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerCooltrainerfFran, -1
-	object_event  8,  2, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BlackthornGymBoulder, EVENT_BOULDER_IN_BLACKTHORN_GYM_1
-	object_event  2,  3, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BlackthornGymBoulder, EVENT_BOULDER_IN_BLACKTHORN_GYM_2
-	object_event  6, 16, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BlackthornGymBoulder, EVENT_BOULDER_IN_BLACKTHORN_GYM_3
-	object_event  3,  3, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BlackthornGymBoulder, -1
-	object_event  6,  1, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BlackthornGymBoulder, -1
-	object_event  8, 14, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BlackthornGymBoulder, -1

@@ -53,10 +53,24 @@ BlackthornCitySantosCallback:
 	readvar VAR_WEEKDAY
 	ifequal SATURDAY, .SantosAppears
 	disappear BLACKTHORNCITY_SANTOS
-	endcallback
+	sjump ResetBlackthornGymTrainers
 
 .SantosAppears:
 	appear BLACKTHORNCITY_SANTOS
+	; fallthrough
+
+ResetBlackthornGymTrainers:
+	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
+	iftrue .ResetTrainers
+	checkevent EVENT_BEAT_CLAIR
+	iffalse .ResetTrainers
+	endcallback
+.ResetTrainers
+	clearevent EVENT_BEAT_COOLTRAINERM_PAUL
+	clearevent EVENT_BEAT_COOLTRAINERM_CODY
+	clearevent EVENT_BEAT_COOLTRAINERM_MIKE
+	clearevent EVENT_BEAT_COOLTRAINERF_FRAN
+	clearevent EVENT_BEAT_COOLTRAINERF_LOLA
 	endcallback
 
 SantosScript:

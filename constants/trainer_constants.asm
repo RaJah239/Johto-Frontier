@@ -78,6 +78,7 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass CLAIR ; 8
 	const CLAIR1
+	const CLAIR2
 
 	trainerclass RIVAL1 ; 9
 	const RIVAL1_1_CHIKORITA
@@ -187,11 +188,11 @@ DEF KRIS EQU __trainer_class__
 	const JANINE1
 
 	trainerclass COOLTRAINERM ; 1b
+	const CODY ; blackthorn gym trainer - these need PARTY_LV
+	const PAUL ; blackthorn gym trainer - these need PARTY_LV
+	const MIKE ; blackthorn gym trainer - these need PARTY_LV
 	const NICK
 	const AARON
-	const PAUL
-	const CODY
-	const MIKE
 	const GAVEN
 	const RYAN
 	const JAKE
@@ -203,10 +204,10 @@ DEF KRIS EQU __trainer_class__
 	const KYLE
 
 	trainerclass COOLTRAINERF ; 1c
+	const FRAN ; blackthorn gym trainer - these need PARTY_LV
+	const LOLA ; blackthorn gym trainer - these need PARTY_LV
 	const GWEN
 	const LOIS
-	const FRAN
-	const LOLA
 	const KATE
 	const IRENE
 	const KELLY
