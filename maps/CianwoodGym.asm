@@ -1,143 +1,215 @@
+CianwoodGym_MapEvents:
+	def_warp_events
+	warp_event  4, 17, CIANWOOD_CITY, 3
+	warp_event  5, 17, CIANWOOD_CITY, 3
+
+	def_coord_events
+	coord_event  5,  12, SCENE_CIANWOODGYM_NOOP, TrainerBlackbeltYoshiCheck1
+	coord_event  4,  12, SCENE_CIANWOODGYM_NOOP, TrainerBlackbeltYoshiCheck2
+	coord_event  5,  9, SCENE_CIANWOODGYM_NOOP, TrainerSailorSteeleCheck1
+	coord_event  4,  9, SCENE_CIANWOODGYM_NOOP, TrainerSailorSteeleCheck2
+	coord_event  5,  4, SCENE_CIANWOODGYM_NOOP, TrainerBlackbeltLungCheck1
+	coord_event  4,  4, SCENE_CIANWOODGYM_NOOP, TrainerBlackbeltLungCheck2
+
+	def_bg_events
+	bg_event  3, 15, BGEVENT_READ, CianwoodGymStatue
+	bg_event  6, 15, BGEVENT_READ, CianwoodGymStatue
+
+	def_object_events
+	strengthboulder_event  5,  1
+	object_event  4,  1, SPRITE_CHUCK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, CianwoodGymChuckScript, -1
+	object_event  6, 12, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, TrainerBlackbeltYoshi, -1
+	object_event  3,  9, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, TrainerSailorSteele, -1
+	object_event  6,  4, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, TrainerBlackbeltLung, -1
+	object_event  7, 15, SPRITE_GYM_GUIDE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, CianwoodGymGuideScript, -1
+	object_event  4, 16, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CianwoodGymProteinScript, EVENT_CIANWOOD_GYM_FIVE_PROTEINS
+
 	object_const_def
+	const CIANWOODGYM_BOULDER
 	const CIANWOODGYM_CHUCK
 	const CIANWOODGYM_BLACK_BELT1
+	const CIANWOODGYM_SAILOR
 	const CIANWOODGYM_BLACK_BELT2
-	const CIANWOODGYM_BLACK_BELT3
-	const CIANWOODGYM_BLACK_BELT4
-	const CIANWOODGYM_BOULDER1
-	const CIANWOODGYM_BOULDER2
-	const CIANWOODGYM_BOULDER3
-	const CIANWOODGYM_BOULDER4
+	const CIANWOODGYM_GYM_GUIDE
+	const CIANWOODGYM_POKE_BALL
 
 CianwoodGym_MapScripts:
 	def_scene_scripts
+	scene_script CianwoodGymNoopScene, SCENE_CIANWOODGYM_NOOP
 
 	def_callbacks
     callback MAPCALLBACK_NEWMAP, ResetCianwoodGymTrainersCallback
 
+CianwoodGymNoopScene:
+	end
+
 ResetCianwoodGymTrainersCallback:
-    checkevent EVENT_BEAT_CHUCK
-    iffalse .ResetTrainers
-    endcallback
+	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
+	iftrue .ResetTrainers 
+	checkevent EVENT_BEAT_CHUCK
+	iffalse .ResetTrainers
+	endcallback
 .ResetTrainers
 	clearevent EVENT_BEAT_BLACKBELT_YOSHI
-	clearevent EVENT_BEAT_BLACKBELT_LAO
 	clearevent EVENT_BEAT_SAILOR_STEELE
 	clearevent EVENT_BEAT_BLACKBELT_LUNG
-    endcallback
+	endcallback
 
 CianwoodGymChuckScript:
-	faceplayer
-	opentext
+	faceplayeropentext
+	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
+	iftrue .ChuckRematch
 	checkevent EVENT_BEAT_CHUCK
-	iftrue .FightDone
-	writetext ChuckIntroText1
-	waitbutton
-	closetext
+	iftrue .GymBadgeBattleDone
+	writethistext
+		text "Wahahah!"
+
+		para "So you've come"
+		line "this far!"
+
+		para "Let me tell you,"
+		line "I'm tough!"
+
+		para "My #mon will"
+		line "crush stones and"
+		cont "shatter bones!"
+
+		para "Watch this!"
+		done
+	waitclosetext
 	turnobject CIANWOODGYM_CHUCK, RIGHT
-	opentext
-	writetext ChuckIntroText2
-	waitbutton
-	closetext
-	applymovement CIANWOODGYM_BOULDER1, CianwoodGymMovement_ChuckChucksBoulder
+	showthistext
+		text "Chuck: Urggh!"
+		line "…"
+
+		para "Oooarrgh!"
+		done
+	applymovement CIANWOODGYM_BOULDER, CianwoodGymMovement_ChuckChucksBoulder
 	playsound SFX_STRENGTH
 	earthquake 80
-	disappear CIANWOODGYM_BOULDER1
+	disappear CIANWOODGYM_BOULDER
 	pause 30
-	faceplayer
-	opentext
-	writetext ChuckIntroText3
-	waitbutton
-	closetext
+	showthistextfaceplayer
+		text "There! Scared now,"
+		line "are you?"
+
+		para "What?"
+		line "It has nothing to"
+		cont "do with #mon?"
+
+		para "That's true!"
+
+		para "Come on. We shall"
+		line "do battle!"
+		done
 	winlosstext ChuckLossText, 0
+	readvar VAR_BADGES
+	ifgreater 5, .SixOrSevenBadges
+	ifgreater 3, .FourOrFiveBadges
+	ifgreater 1, .TwoOrThreeBadges
+.ZeroOrOneBadge:
 	loadtrainer CHUCK, CHUCK1
+	sjump .StartBattle
+.TwoOrThreeBadges:
+	loadtrainer CHUCK, CHUCK2
+	sjump .StartBattle
+.FourOrFiveBadges:
+	loadtrainer CHUCK, CHUCK3
+	sjump .StartBattle
+.SixOrSevenBadges:
+	loadtrainer CHUCK, CHUCK4
+	; fallthrough
+
+.StartBattle:
 	startbattle
 	reloadmapafterbattle
+	playmusic MUSIC_GYM
 	setevent EVENT_BEAT_CHUCK
 	opentext
-	writetext GetStormBadgeText
+	writethistext
+		text "<PLAYER> received"
+		line "Stormbadge."
+		done
 	playsound SFX_GET_BADGE
 	waitsfx
 	setflag ENGINE_STORMBADGE
-	readvar VAR_BADGES
-.FightDone:
-	checkevent EVENT_GOT_TM01_METEOR_MASH
-	iftrue .AlreadyGotTM
-	setevent EVENT_BEAT_BLACKBELT_YOSHI
-	setevent EVENT_BEAT_BLACKBELT_LAO
-	setevent EVENT_BEAT_SAILOR_STEELE
-	setevent EVENT_BEAT_BLACKBELT_LUNG
-	writetext ChuckExplainBadgeText
+.GymBadgeBattleDone:
+	checkevent EVENT_GOT_CIANWOOD_GYM_TM
+	iftrue .SpeechAfterTM
+	writethistext
+		text "Here, take this"
+		line "too!"
+		done
 	promptbutton
 	verbosegiveitem TM_METEOR_MASH
-	iffalse .BagFull
-	setevent EVENT_GOT_TM01_METEOR_MASH
-	writetext ChuckExplainTMText
+	iffalse_endtext
+	setevent EVENT_GOT_CIANWOOD_GYM_TM
+	jumpthisopenedtext
+		text "That is Meteor"
+		line "Mash."
+
+		para "It may raise the"
+		line "user's Attack."
+		done
+
+.SpeechAfterTM:
+	jumpthisopenedtext
+		text "Wahahah! I enjoyed"
+		line "battling you!"
+
+		para "But a loss is a"
+		line "loss!"
+
+		para "From now on, I'm"
+		line "going to train 24"
+		cont "hours a day for"
+		cont "our eventual re-"
+		cont "match!"
+		done
+
+.ChuckRematch:
+	writethistext
+		text "Chuck: There you"
+		line "are <PLAYER>!"
+
+		para "Sorry for all the"
+		line "yelling."
+		
+		para "I just finished up"
+		line "my training."
+		
+		para "Up for another"
+		line "battle?"
+		done
+	yesorno
+	iffalse_endtext
+	writethistext
+		text "Taste the outcome"
+		line "of my rigorous"
+		cont "24-hours a day"
+		cont "training!"
+		done
 	waitbutton
-	closetext
+	winlosstext ChuckRematchLossText, 0
+	loadtrainer CHUCK, CHUCK5 ; super boss team
+	startbattle
+	reloadmapafterbattle
+	clearevent EVENT_BEAT_BLACKBELT_YOSHI
+	clearevent EVENT_BEAT_SAILOR_STEELE
+	clearevent EVENT_BEAT_BLACKBELT_LUNG
+	appear CIANWOODGYM_POKE_BALL
+	showthistext
+		text "Chuck: You're some-"
+		line "thing special kid!"
+
+		para "No wonder you"
+		line "became champion."
+		done 
+	playsound SFX_WARP_TO
+	special FadeOutPalettes
+	waitsfx
+	warp CIANWOOD_GYM, 4, 17
 	end
-
-.AlreadyGotTM:
-	writetext ChuckAfterText
-	waitbutton
-.BagFull:
-	closetext
-	end
-
-TrainerBlackbeltYoshi:
-	trainer BLACKBELT_T, YOSHI, EVENT_BEAT_BLACKBELT_YOSHI, BlackbeltYoshiSeenText, BlackbeltYoshiBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext BlackbeltYoshiAfterText
-	waitbutton
-	closetext
-	end
-
-TrainerBlackbeltLao:
-	trainer BLACKBELT_T, LAO, EVENT_BEAT_BLACKBELT_LAO, BlackbeltLaoSeenText, BlackbeltLaoBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext BlackbeltLaoAfterText
-	waitbutton
-	closetext
-	end
-
-TrainerSailorSteele:
-	trainer SAILOR, STEELE, EVENT_BEAT_SAILOR_STEELE, SailorSteeleSeenText, SailorSteeleBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext SailorSteeleAfterText
-	waitbutton
-	closetext
-	end
-
-TrainerBlackbeltLung:
-	trainer BLACKBELT_T, LUNG, EVENT_BEAT_BLACKBELT_LUNG, BlackbeltLungSeenText, BlackbeltLungBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
-	opentext
-	writetext BlackbeltLungAfterText
-	waitbutton
-	closetext
-	end
-
-CianwoodGymBoulder:
-	jumpstd StrengthBoulderScript
-
-CianwoodGymStatue:
-	checkflag ENGINE_STORMBADGE
-	iftrue .Beaten
-	jumpstd GymStatue1Script
-.Beaten:
-	gettrainername STRING_BUFFER_4, CHUCK, CHUCK1
-	jumpstd GymStatue2Script
 
 CianwoodGymMovement_ChuckChucksBoulder:
 	set_sliding
@@ -147,178 +219,309 @@ CianwoodGymMovement_ChuckChucksBoulder:
 	remove_sliding
 	step_end
 
-ChuckIntroText1:
-	text "WAHAHAH!"
-
-	para "So you've come"
-	line "this far!"
-
-	para "Let me tell you,"
-	line "I'm tough!"
-
-	para "My #MON will"
-	line "crush stones and"
-	cont "shatter bones!"
-
-	para "Watch this!"
-	done
-
-ChuckIntroText2:
-	text "CHUCK: Urggh!"
-	line "…"
-
-	para "Oooarrgh!"
-	done
-
-ChuckIntroText3:
-	text "There! Scared now,"
-	line "are you?"
-
-	para "What?"
-	line "It has nothing to"
-
-	para "do with #MON?"
-	line "That's true!"
-
-	para "Come on. We shall"
-	line "do battle!"
-	done
-
 ChuckLossText:
 	text "Wha? Huh?"
 	line "I lost?"
 
 	para "How about that!"
-	line "You're worthy of"
-	cont "STORMBADGE!"
+	
+	para "You're worthy of"
+	line "Stormbadge!"
 	done
 
-GetStormBadgeText:
-	text "<PLAYER> received"
-	line "STORMBADGE."
-	done
+ChuckRematchLossText:
+	text "We… lost… Back to"
+	line "training it is!"
+	done 
 
-ChuckExplainBadgeText:
-	text "STORMBADGE makes"
-	line "all #MON up to"
+TrainerBlackbeltYoshi:
+	jumpthistextfaceplayer
+		text "You seem to have a"
+		line "strong bond with"
+		cont "your #mon too!"
+		done
 
-	para "L70 obey, even"
-	line "traded ones."
+TrainerBlackbeltYoshiCheck1:
+	checkevent EVENT_BEAT_BLACKBELT_YOSHI
+	iftrue .End
+	sjump TrainerBlackbeltYoshiStart1
+.End
+	end
 
-	para "It also lets your"
-	line "#MON use FLY"
+TrainerBlackbeltYoshiCheck2:
+	checkevent EVENT_BEAT_BLACKBELT_YOSHI
+	iftrue .End
+	sjump TrainerBlackbeltYoshiStart2
+.End
+	end
 
-	para "when you're not in"
-	line "a battle."
+TrainerBlackbeltYoshiStart1:
+	playmusic MUSIC_HIKER_ENCOUNTER
+	showemote EMOTE_SHOCK, CIANWOODGYM_BLACK_BELT1, 30
+	turnobject PLAYER, RIGHT
+	sjump TrainerBlackbeltYoshiBattle
 
-	para "Here, take this"
-	line "too!"
-	done
+TrainerBlackbeltYoshiStart2:
+	playmusic MUSIC_HIKER_ENCOUNTER
+	showemote EMOTE_SHOCK, CIANWOODGYM_BLACK_BELT1, 30
+	applymovement CIANWOODGYM_BLACK_BELT1, BlackBeltToPlayerMovement
+	turnobject PLAYER, RIGHT
+	; fallthrough
 
-ChuckExplainTMText:
-	text "That is DYNAMIC-"
-	line "PUNCH."
+TrainerBlackbeltYoshiBattle:
+	showthistext
+		text "My #mon and I"
+		line "are bound togeth-"
+		cont "er by friendship."
 
-	para "It doesn't always"
-	line "hit, but when it"
+		para "Our bond will"
+		line "never be broken!"
+		done
+	winlosstext BlackbeltYoshiBeatenText, 0
+	readvar VAR_BADGES
+	ifgreater 7, .EightBadges
+	ifgreater 5, .SixOrSevenBadges
+	ifgreater 3, .FourOrFiveBadges
+	ifgreater 1, .TwoOrThreeBadges
+.ZeroOrOneBadge:
+	loadtrainer BLACKBELT_T, YOSHI1
+	sjump .StartBattle
+.TwoOrThreeBadges:
+	loadtrainer BLACKBELT_T, YOSHI2
+	sjump .StartBattle
+.FourOrFiveBadges:
+	loadtrainer BLACKBELT_T, YOSHI3
+	sjump .StartBattle
+.SixOrSevenBadges:
+	loadtrainer BLACKBELT_T, YOSHI4
+	sjump .StartBattle
+.EightBadges:
+	loadtrainer BLACKBELT_T, YOSHI5
+	; fallthrough
 
-	para "does, it causes"
-	line "confusion!"
-	done
-
-ChuckAfterText:
-	text "WAHAHAH! I enjoyed"
-	line "battling you!"
-
-	para "But a loss is a"
-	line "loss!"
-
-	para "From now on, I'm"
-	line "going to train 24"
-	cont "hours a day!"
-	done
-
-BlackbeltYoshiSeenText:
-	text "My #MON and I"
-	line "are bound togeth-"
-	cont "er by friendship."
-
-	para "Our bond will"
-	line "never be broken!"
-	done
+.StartBattle:
+	startbattle
+	reloadmapafterbattle
+	playmusic MUSIC_GYM
+	setevent EVENT_BEAT_BLACKBELT_YOSHI
+	end
 
 BlackbeltYoshiBeatenText:
 	text "This isn't real!"
 	done
 
-BlackbeltYoshiAfterText:
-	text "You seem to have a"
-	line "strong bond with"
-	cont "your #MON too!"
-	done
+TrainerSailorSteele:
+	jumpthistextfaceplayer
+		text "TODOTEXT"
+		done
 
-BlackbeltLaoSeenText:
-	text "We martial artists"
-	line "fear nothing!"
-	done
+TrainerSailorSteeleCheck1:
+	checkevent EVENT_BEAT_SAILOR_STEELE
+	iftrue .End
+	sjump TrainerSailorSteeleStart1
+.End
+	end
 
-BlackbeltLaoBeatenText:
-	text "That's shocking!"
-	done
+TrainerSailorSteeleCheck2:
+	checkevent EVENT_BEAT_SAILOR_STEELE
+	iftrue .End
+	sjump TrainerSailorSteeleStart2
+.End
+	end
 
-BlackbeltLaoAfterText:
-	text "Fighting #MON"
-	line "are afraid of psy-"
-	cont "chics…"
-	done
+TrainerSailorSteeleStart1:
+	playmusic MUSIC_HIKER_ENCOUNTER
+	showemote EMOTE_SHOCK, CIANWOODGYM_SAILOR, 30
+	applymovement CIANWOODGYM_SAILOR, SteeleToPlayerMovement
+	turnobject PLAYER, LEFT
+	sjump TrainerSailorSteeleBattle
 
-SailorSteeleSeenText:
-	text "I'm all rested now"
-	line "so let's battle!"
-	done
+TrainerSailorSteeleStart2:
+	playmusic MUSIC_HIKER_ENCOUNTER
+	showemote EMOTE_SHOCK, CIANWOODGYM_SAILOR, 30
+	turnobject PLAYER, LEFT
+	; fallthrough
+
+TrainerSailorSteeleBattle:
+	showthistext
+		text "TODOTEXT"
+		done
+	winlosstext SailorSteeleBeatenText, 0
+	readvar VAR_BADGES
+	ifgreater 7, .EightBadges
+	ifgreater 5, .SixOrSevenBadges
+	ifgreater 3, .FourOrFiveBadges
+	ifgreater 1, .TwoOrThreeBadges
+.ZeroOrOneBadge:
+	loadtrainer SAILOR, STEELE1
+	sjump .StartBattle
+.TwoOrThreeBadges:
+	loadtrainer SAILOR, STEELE2
+	sjump .StartBattle
+.FourOrFiveBadges:
+	loadtrainer SAILOR, STEELE3
+	sjump .StartBattle
+.SixOrSevenBadges:
+	loadtrainer SAILOR, STEELE4
+	sjump .StartBattle
+.EightBadges:
+	loadtrainer SAILOR, STEELE5
+	; fallthrough
+
+.StartBattle:
+	startbattle
+	reloadmapafterbattle
+	playmusic MUSIC_GYM
+	setevent EVENT_BEAT_SAILOR_STEELE
+	end
+
+SteeleToPlayerMovement:
+	step RIGHT
+	step_end
 
 SailorSteeleBeatenText:
-	text "You're tough!"
+	text "TODOTEXT"
 	done
 
-SailorSteeleAfterText:
-	text "I'm tired again…"
-	done
+TrainerBlackbeltLung:
+	jumpthistextfaceplayer
+		text "My #mon lost…"
+		line "My… my pride is"
+		cont "shattered…"
+		done
 
-BlackbeltLungSeenText:
-	text "My raging fists"
-	line "will shatter your"
-	cont "#MON!"
-	done
+TrainerBlackbeltLungCheck1:
+	checkevent EVENT_BEAT_BLACKBELT_LUNG
+	iftrue .End
+	sjump TrainerBlackbeltLungStart1
+.End
+	end
+
+TrainerBlackbeltLungCheck2:
+	checkevent EVENT_BEAT_BLACKBELT_LUNG
+	iftrue .End
+	sjump TrainerBlackbeltLungStart2
+.End
+	end
+
+TrainerBlackbeltLungStart1:
+	playmusic MUSIC_HIKER_ENCOUNTER
+	showemote EMOTE_SHOCK, CIANWOODGYM_BLACK_BELT2, 30
+	turnobject PLAYER, RIGHT
+	sjump TrainerBlackbeltLungBattle
+
+TrainerBlackbeltLungStart2:
+	playmusic MUSIC_HIKER_ENCOUNTER
+	showemote EMOTE_SHOCK, CIANWOODGYM_BLACK_BELT2, 30
+	applymovement CIANWOODGYM_BLACK_BELT2, BlackBeltToPlayerMovement
+	turnobject PLAYER, RIGHT
+	; fallthrough
+
+TrainerBlackbeltLungBattle:
+	showthistext
+		text "My raging fists"
+		line "will shatter your"
+		cont "#mon!"
+		done
+	winlosstext BlackbeltLungBeatenText, 0
+	readvar VAR_BADGES
+	ifgreater 7, .EightBadges
+	ifgreater 5, .SixOrSevenBadges
+	ifgreater 3, .FourOrFiveBadges
+	ifgreater 1, .TwoOrThreeBadges
+.ZeroOrOneBadge:
+	loadtrainer BLACKBELT_T, LUNG1
+	sjump .StartBattle
+.TwoOrThreeBadges:
+	loadtrainer BLACKBELT_T, LUNG2
+	sjump .StartBattle
+.FourOrFiveBadges:
+	loadtrainer BLACKBELT_T, LUNG3
+	sjump .StartBattle
+.SixOrSevenBadges:
+	loadtrainer BLACKBELT_T, LUNG4
+	sjump .StartBattle
+.EightBadges:
+	loadtrainer BLACKBELT_T, LUNG5
+	; fallthrough
+
+.StartBattle:
+	startbattle
+	reloadmapafterbattle
+	playmusic MUSIC_GYM
+	setevent EVENT_BEAT_BLACKBELT_LUNG
+	end
+
+BlackBeltToPlayerMovement:
+	step LEFT
+	step_end
 
 BlackbeltLungBeatenText:
 	text "I got shattered!"
 	done
 
-BlackbeltLungAfterText:
-	text "My #MON lost…"
-	line "My… my pride is"
-	cont "shattered…"
-	done
+CianwoodGymGuideScript:
+	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
+	iftrue .CianwoodGymGuideChampScript
+	checkevent EVENT_BEAT_CHUCK
+	iftrue .CianwoodGymGuideWinScript
+	jumpthistextfaceplayer
+		text "Chuck, the Gym"
+		line "Leader uses the"
+		cont "fighting-type."
 
-CianwoodGym_MapEvents:
-	def_warp_events
-	warp_event  4, 17, CIANWOOD_CITY, 3
-	warp_event  5, 17, CIANWOOD_CITY, 3
+		para "So you should"
+		line "confound him with"
+		cont "Psychic, Flying or"
+		cont "Fairy #mon."
 
-	def_coord_events
+		para "Wipe out his #-"
+		line "mon before they"
+		cont "can use their"
+		cont "physical strength."
+		done
 
-	def_bg_events
-	bg_event  3, 15, BGEVENT_READ, CianwoodGymStatue
-	bg_event  6, 15, BGEVENT_READ, CianwoodGymStatue
+.CianwoodGymGuideWinScript:
+	jumpthistextfaceplayer
+		text "<PLAYER>! You won!"
+		line "I could tell by"
+		cont "looking at you!"
+		done
 
-	def_object_events
-	object_event  4,  1, SPRITE_CHUCK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, CianwoodGymChuckScript, -1
-	object_event  2, 12, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerBlackbeltYoshi, -1
-	object_event  7, 12, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerBlackbeltLao, -1
-	object_event  3,  9, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_TRAINER, 2, TrainerSailorSteele, -1
-	object_event  5,  5, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 1, TrainerBlackbeltLung, -1
-	object_event  5,  1, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CianwoodGymBoulder, -1
-	object_event  3,  7, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CianwoodGymBoulder, -1
-	object_event  4,  7, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CianwoodGymBoulder, -1
-	object_event  5,  7, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CianwoodGymBoulder, -1
+.CianwoodGymGuideChampScript:
+	jumpthistextfaceplayer
+		text "There's a lot of"
+		line "shouting in here!"
+
+		para "Chuck might defeat"
+		line "you with noise!"
+
+		para "Haha. Sorry. I had"
+		line "too."
+		done
+
+CianwoodGymStatue:
+	checkflag ENGINE_STORMBADGE
+	iftrue .Beaten
+	jumpstd GymStatue1Script
+.Beaten:
+	gettrainername STRING_BUFFER_4, CHUCK, CHUCK1
+	jumpstd GymStatue2Script
+
+CianwoodGymProteinScript:
+	disappear LAST_TALKED
+	opentext
+	giveitem PROTEIN, 5
+	iffalse CianwoodGymPlayersPackIsFull
+	jumpthisopenedtext
+		text "<PLAYER> got"
+		line "5× Proteins!@"
+		sound_item
+		text_end
+
+CianwoodGymPlayersPackIsFull:
+	appear CIANWOODGYM_POKE_BALL
+	jumpthisopenedtext
+		text "The Item Pocket"
+		line "is full…"
+		done

@@ -14,7 +14,7 @@
 ; Johto Gym Leader TM gifts
 	const EVENT_GOT_VIOLET_GYM_TM
 	const EVENT_GOT_AZALEA_GYM_TM
-	const EVENT_GOT_TM01_METEOR_MASH
+	const EVENT_GOT_CIANWOOD_GYM_TM
 	const EVENT_GOT_GOLDENROD_GYM_TM
 	const EVENT_GOT_ECRUTEAK_GYM_TM
 	const EVENT_GOT_OLIVINE_GYM_TM
@@ -192,7 +192,8 @@
 	const EVENT_GOLDENROD_GYM_FIVE_HP_UPS
 	const EVENT_ECRUTEAK_GYM_FIVE_CALCIUMS
 	const EVENT_OLIVINE_GYM_FIVE_IRONS
-; Unused: next 16 events
+	const EVENT_CIANWOOD_GYM_FIVE_PROTEINS
+; Unused: next 15 events
 
 	const_next 200
 ; Kanto story events
@@ -572,7 +573,6 @@
 ; Scientist
 ; Blackbelt
 	const EVENT_BEAT_BLACKBELT_YOSHI
-	const EVENT_BEAT_BLACKBELT_LAO
 	const EVENT_BEAT_SAILOR_STEELE
 	const EVENT_BEAT_BLACKBELT_KIYO
 	const EVENT_BEAT_BLACKBELT_LUNG
@@ -733,7 +733,7 @@
 	const EVENT_BEAT_SAGE_GAKU
 	const EVENT_BEAT_SAGE_MASA
 	const EVENT_BEAT_SAGE_KOJI
-; Unused: next 391 events
+; Unused: next 390 events
 
 	const_next 1600
 ; Sprite visibility flags

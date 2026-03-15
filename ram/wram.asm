@@ -3170,8 +3170,9 @@ wBattlePlaza::                                    db
 wVioletGym::                                      db
 wAzaleaGym::                                      db
 wOlivineGym::                                     db
+wCianwoodGym::                                    db
 
-	ds 174
+	ds 173
 
 ; battle tower points
 wBattleTowerNormalPoints:: db

@@ -59,4 +59,5 @@ MapScenes::
 	scene_var VIOLET_GYM,                                  wVioletGym
 	scene_var AZALEA_GYM,                                  wAzaleaGym
 	scene_var OLIVINE_GYM,                                 wOlivineGym
+	scene_var CIANWOOD_GYM,                                wCianwoodGym
 	db -1 ; end

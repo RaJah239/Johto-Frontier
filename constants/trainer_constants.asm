@@ -67,6 +67,10 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass CHUCK ; 7
 	const CHUCK1
+	const CHUCK2
+	const CHUCK3
+	const CHUCK4
+	const CHUCK5
 
 	trainerclass CLAIR ; 8
 	const CLAIR1
@@ -314,13 +318,17 @@ DEF KRIS EQU __trainer_class__
 	const WENDY
 
 	trainerclass SAILOR ; 28
+	const STEELE1 ; cianwood gym trainer
+	const STEELE2 ; cianwood gym trainer
+	const STEELE3 ; cianwood gym trainer
+	const STEELE4 ; cianwood gym trainer
+	const STEELE5 ; cianwood gym trainer
 	const EUGENE
 	const HUEY
 	const TERRELL
 	const KENT
 	const ERNEST
 	const HARRY
-	const STEELE
 
 	trainerclass SUPER_NERD ; 29
 	const STAN
@@ -378,10 +386,18 @@ DEF KRIS EQU __trainer_class__
 	const IRWIN
 
 	trainerclass BLACKBELT_T ; 32
-	const YOSHI
+	const YOSHI1 ; cianwood gym trainer
+	const YOSHI2 ; cianwood gym trainer
+	const YOSHI3 ; cianwood gym trainer
+	const YOSHI4 ; cianwood gym trainer
+	const YOSHI5 ; cianwood gym trainer
+	const LUNG1 ; cianwood gym trainer
+	const LUNG2 ; cianwood gym trainer
+	const LUNG3 ; cianwood gym trainer
+	const LUNG4 ; cianwood gym trainer
+	const LUNG5 ; cianwood gym trainer
 	const LAO
 	const KIYO
-	const LUNG
 	const KENJI
 
 	trainerclass EXECUTIVEM ; 33
