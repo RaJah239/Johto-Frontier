@@ -162,8 +162,12 @@ GoldenrodGymWhitneyScript:
 	loadtrainer WHITNEY, WHITNEY5 ; super boss team
 	startbattle
 	reloadmapafterbattle
+	clearevent EVENT_BEAT_BEAUTY_VICTORIA
+	clearevent EVENT_BEAT_BEAUTY_SAMANTHA
+	clearevent EVENT_BEAT_LASS_CARRIE
+	clearevent EVENT_BEAT_LASS_BRIDGET
 	appear GOLDENRODGYM_POKE_BALL
-	jumpthistext
+	showthistext
 		text "Whitney: You are"
 		line "still very strong."
 
@@ -174,6 +178,11 @@ GoldenrodGymWhitneyScript:
 		para "Let's do this again"
 		line "sometime."
 		done
+	playsound SFX_WARP_TO
+	special FadeOutPalettes
+	waitsfx
+	warp GOLDENROD_GYM, 2, 17
+	end
 
 WhitneyLossText:
 	text "You're even better"
