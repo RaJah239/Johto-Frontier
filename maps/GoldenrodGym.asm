@@ -98,7 +98,6 @@ GoldenrodGymWhitneyScript:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
 	setevent EVENT_BEAT_WHITNEY
 	setevent EVENT_BEAT_BEAUTY_VICTORIA
 	setevent EVENT_BEAT_BEAUTY_SAMANTHA
@@ -112,7 +111,7 @@ GoldenrodGymWhitneyScript:
 	setflag ENGINE_PLAINBADGE
 .GymBadgeBattleDone:
 	checkevent EVENT_GOT_GOLDENROD_GYM_TM
-	iftrue .SpeechAfterTM
+	iftrue_jumpopenedtext .SpeechAfterTMText
 	writethistext
 		text "Oh, you can have"
 		line "this too!"
@@ -131,8 +130,7 @@ GoldenrodGymWhitneyScript:
 		line "der it hax. Hehe."
 		done
 
-.SpeechAfterTM:
-	jumpthisopenedtext
+.SpeechAfterTMText
 		text "Come for a visit"
 		line "again! Bye-bye!"
 		done
@@ -159,7 +157,7 @@ GoldenrodGymWhitneyScript:
 		text "Great! We're going"
 		line "all out!"
 		done
-	waitbutton
+	waitclosetext
 	winlosstext WhitneyRematchLossText, 0
 	loadtrainer WHITNEY, WHITNEY5 ; super boss team
 	startbattle
@@ -208,7 +206,8 @@ TrainerLassCarrie:
 
 TrainerLassCarrieCheck:
 	checkevent EVENT_BEAT_LASS_CARRIE
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_LASS_ENCOUNTER
 	showemote EMOTE_SHOCK, GOLDENRODGYM_LASS1, 30
 	applymovement GOLDENRODGYM_LASS1, CarrieToPlayerMovement
@@ -244,9 +243,8 @@ TrainerLassCarrieCheck:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_LASS_CARRIE
-.End
 	end
 
 CarrieToPlayerMovement:
@@ -264,6 +262,7 @@ TrainerLassBridget:
 	faceplayer
 	checkevent EVENT_BEAT_LASS_BRIDGET
 	iftrue .AfterBattleText
+	special SaveMusic
 	playmusic MUSIC_LASS_ENCOUNTER
 	sjump TrainerLassBridgetBattle
 
@@ -281,13 +280,12 @@ TrainerLassBridget:
 
 TrainerLassBridgetCheck:
 	checkevent EVENT_BEAT_LASS_BRIDGET
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_LASS_ENCOUNTER
 	showemote EMOTE_SHOCK, GOLDENRODGYM_LASS2, 30
 	turnobject PLAYER, LEFT
-	sjump TrainerLassBridgetBattle
-.End
-	end
+	; fallthrough
 
 TrainerLassBridgetBattle:
 	showthistext
@@ -323,7 +321,7 @@ TrainerLassBridgetBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_LASS_BRIDGET
 	end
 
@@ -335,6 +333,7 @@ TrainerBeautyVictoria:
 	faceplayer
 	checkevent EVENT_BEAT_BEAUTY_VICTORIA
 	iftrue .AfterBattleText
+	special SaveMusic
 	playmusic MUSIC_BEAUTY_ENCOUNTER
 	sjump TrainerBeautyVictoriaBattle
 
@@ -348,26 +347,22 @@ TrainerBeautyVictoria:
 
 TrainerBeautyVictoriaCheck1:
 	checkevent EVENT_BEAT_BEAUTY_VICTORIA
-	iftrue .End
-	sjump TrainerBeautyVictoriaStart1
-.End
-	end
-
-TrainerBeautyVictoriaCheck2:
-	checkevent EVENT_BEAT_BEAUTY_VICTORIA
-	iftrue .End
-	sjump TrainerBeautyVictoriaStart2
-.End
-	end
-
-TrainerBeautyVictoriaStart1:
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_BEAUTY_ENCOUNTER
 	showemote EMOTE_SHOCK, GOLDENRODGYM_BEAUTY1, 30
 	applymovement GOLDENRODGYM_BEAUTY1, VictoriaToPlayerMovement1
 	turnobject PLAYER, UP
 	sjump TrainerBeautyVictoriaBattle
 
-TrainerBeautyVictoriaStart2:
+VictoriaToPlayerMovement1:
+	step DOWN
+	step_end
+
+TrainerBeautyVictoriaCheck2:
+	checkevent EVENT_BEAT_BEAUTY_VICTORIA
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_BEAUTY_ENCOUNTER
 	showemote EMOTE_SHOCK, GOLDENRODGYM_BEAUTY1, 30
 	turnobject PLAYER, UP
@@ -406,13 +401,9 @@ TrainerBeautyVictoriaBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_BEAUTY_VICTORIA
 	end
-
-VictoriaToPlayerMovement1:
-	step DOWN
-	step_end
 
 BeautyVictoriaBeatenText:
 	text "Let's see… Oops,"
@@ -423,6 +414,7 @@ TrainerBeautySamantha:
 	faceplayer
 	checkevent EVENT_BEAT_BEAUTY_SAMANTHA
 	iftrue .AfterBattleText
+	special SaveMusic
 	playmusic MUSIC_BEAUTY_ENCOUNTER
 	sjump TrainerBeautySamanthaBattle
 
@@ -435,26 +427,22 @@ TrainerBeautySamantha:
 
 TrainerBeautySamanthaCheck1:
 	checkevent EVENT_BEAT_BEAUTY_SAMANTHA
-	iftrue .End
-	sjump TrainerBeautySamanthaStart1
-.End
-	end
-
-TrainerBeautySamanthaCheck2:
-	checkevent EVENT_BEAT_BEAUTY_SAMANTHA
-	iftrue .End
-	sjump TrainerBeautySamanthaStart2
-.End
-	end
-
-TrainerBeautySamanthaStart1:
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_BEAUTY_ENCOUNTER
 	showemote EMOTE_SHOCK, GOLDENRODGYM_BEAUTY2, 30
 	applymovement GOLDENRODGYM_BEAUTY2, SamanthaToPlayerMovement1
 	turnobject PLAYER, UP
 	sjump TrainerBeautySamanthaBattle
 
-TrainerBeautySamanthaStart2:
+SamanthaToPlayerMovement1:
+	step DOWN
+	step_end
+
+TrainerBeautySamanthaCheck2:
+	checkevent EVENT_BEAT_BEAUTY_SAMANTHA
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_BEAUTY_ENCOUNTER
 	showemote EMOTE_SHOCK, GOLDENRODGYM_BEAUTY2, 30
 	turnobject PLAYER, UP
@@ -491,13 +479,9 @@ TrainerBeautySamanthaBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_BEAUTY_SAMANTHA
 	end
-
-SamanthaToPlayerMovement1:
-	step DOWN
-	step_end
 
 BeautySamanthaBeatenText:
 	text "No! Oh, my poor"
@@ -506,9 +490,9 @@ BeautySamanthaBeatenText:
 
 GoldenrodGymGuideScript:
 	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
-	iftrue .GoldenrodGymGuideChampScript
+	iftrue_jumptextfaceplayer .GoldenrodGymGuideChampText
 	checkevent EVENT_BEAT_WHITNEY
-	iftrue .GoldenrodGymGuideWinScript
+	iftrue_jumptextfaceplayer .GoldenrodGymGuideWinText
 	jumpthistextfaceplayer
 		text "Yo! Champ in"
 		line "making!"
@@ -528,15 +512,13 @@ GoldenrodGymGuideScript:
 		cont "switching."
 		done
 
-.GoldenrodGymGuideWinScript:
-	jumpthistextfaceplayer
+.GoldenrodGymGuideWinText
 		text "You won? Great! I"
 		line "was busy admiring"
 		cont "the ladies here."
 		done
 
-.GoldenrodGymGuideChampScript:
-	jumpthistextfaceplayer
+.GoldenrodGymGuideChampText
 		text "Yo Champ!"
 
 		para "Here to check out"
@@ -564,7 +546,4 @@ GoldenrodGymHPUpScript:
 
 GoldenrodGymPlayersPackIsFull:
 	appear GOLDENRODGYM_POKE_BALL
-	jumpthisopenedtext
-		text "The Item Pocket"
-		line "is full…"
-		done
+	jumpstd ItemPocketIsFullScript
