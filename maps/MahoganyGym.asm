@@ -116,7 +116,7 @@ MahoganyGymPryceScript:
 	opentext
 	writethistext
 		text "<PLAYER> received"
-		line "Glacierbadge."
+		line "Glacier Badge."
 		done
 	playsound SFX_GET_BADGE
 	waitsfx

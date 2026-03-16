@@ -91,7 +91,7 @@ VioletGymFalknerScript:
 	opentext
 	writethistext
 		text "<PLAYER> received"
-		line "Zephyrbadge."
+		line "Zephyr Badge."
 		done
 	playsound SFX_GET_BADGE
 	waitsfx

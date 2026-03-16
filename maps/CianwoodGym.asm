@@ -128,7 +128,7 @@ CianwoodGymChuckScript:
 	opentext
 	writethistext
 		text "<PLAYER> received"
-		line "Stormbadge."
+		line "Storm Badge."
 		done
 	playsound SFX_GET_BADGE
 	waitsfx

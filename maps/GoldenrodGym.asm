@@ -105,7 +105,7 @@ GoldenrodGymWhitneyScript:
 	opentext
 	writethistext
 		text "<PLAYER> received"
-		line "Plainbadge."
+		line "Plain Badge."
 		done
 	playsound SFX_GET_BADGE
 	waitsfx

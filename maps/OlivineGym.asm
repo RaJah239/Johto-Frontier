@@ -96,7 +96,7 @@ OlivineGymJasmineScript:
 	opentext
 	writethistext
 		text "<PLAYER> received"
-		line "Mineralbadge."
+		line "Mineral Badge."
 		done
 	playsound SFX_GET_BADGE
 	waitsfx

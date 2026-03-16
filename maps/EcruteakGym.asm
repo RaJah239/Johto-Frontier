@@ -142,7 +142,7 @@ EcruteakGymMortyScript:
 	opentext
 	writethistext
 		text "<PLAYER> received"
-		line "Fogbadge."
+		line "Fog Badge."
 		done
 	playsound SFX_GET_BADGE
 	waitsfx

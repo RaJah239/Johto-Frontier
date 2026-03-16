@@ -111,7 +111,7 @@ AzaleaGymBugsyScript:
 	opentext
 	writethistext
 		text "<PLAYER> received"
-		line "Hivebadge."
+		line "Hive Badge."
 		done
 	playsound SFX_GET_BADGE
 	waitsfx
