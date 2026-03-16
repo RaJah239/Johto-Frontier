@@ -100,6 +100,8 @@ GoldenrodGymWhitneyScript:
 	reloadmapafterbattle
 	playmusic MUSIC_GYM
 	setevent EVENT_BEAT_WHITNEY
+	setevent EVENT_BEAT_BEAUTY_VICTORIA
+	setevent EVENT_BEAT_BEAUTY_SAMANTHA
 	opentext
 	writethistext
 		text "<PLAYER> received"

@@ -138,6 +138,7 @@ EcruteakGymMortyScript:
 	reloadmapafterbattle
 	playmusic MUSIC_GYM
 	setevent EVENT_BEAT_MORTY
+	setevent EVENT_BEAT_MEDIUM_GRACE
 	opentext
 	writethistext
 		text "<PLAYER> received"

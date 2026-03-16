@@ -106,6 +106,8 @@ AzaleaGymBugsyScript:
 	reloadmapafterbattle
 	playmusic MUSIC_GYM
 	setevent EVENT_BEAT_BUGSY
+	setevent EVENT_BEAT_BUG_CATCHER_AL
+	setevent EVENT_BEAT_BUG_CATCHER_JOSH
 	opentext
 	writethistext
 		text "<PLAYER> received"

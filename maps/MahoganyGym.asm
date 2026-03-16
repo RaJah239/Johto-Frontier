@@ -111,6 +111,8 @@ MahoganyGymPryceScript:
 	reloadmapafterbattle
 	playmusic MUSIC_GYM
 	setevent EVENT_BEAT_PRYCE
+	setevent EVENT_BEAT_SKIER_ROXANNE
+	setevent EVENT_BEAT_BOARDER_RONALD
 	opentext
 	writethistext
 		text "<PLAYER> received"
