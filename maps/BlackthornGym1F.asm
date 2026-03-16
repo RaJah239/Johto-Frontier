@@ -90,7 +90,7 @@ BlackthornGymClairScript:
 	setflag ENGINE_RISINGBADGE
 .GymBadgeBattleDone:
 	checkevent EVENT_GOT_BLACKTHORN_GYM_TM
-	iftrue .SpeechAfterTM
+	iftrue_jumpopenedtext .SpeechAfterTMText
 	writethistext
 		text "Allow me to give"
 		line "you this TM too."
@@ -122,8 +122,7 @@ BlackthornGymClairScript:
 		cont "your victory tale."
 		done
 
-.SpeechAfterTM:
-	jumpthisopenedtext
+.SpeechAfterTMText
 		text "Return as Champion"
 		line "and we'll have a"
 		cont "grand rematch."
@@ -162,7 +161,7 @@ BlackthornGymClairScript:
 		text "…Great. Let's do"
 		line "it!"
 		done
-	waitbutton
+	waitclosetext
 	winlosstext ClairRematchLossText, 0
 	loadtrainer CLAIR, CLAIR2 ; super boss team
 	startbattle
@@ -278,9 +277,9 @@ TrainerCooltrainerfLola:
 
 BlackthornGymGuideScript:
 	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
-	iftrue .BlackthornGymGuideChampScript
+	iftrue_jumptextfaceplayer .BlackthornGymGuideChampText
 	checkevent EVENT_BEAT_CLAIR
-	iftrue .BlackthornGymGuideWinScript
+	iftrue_jumptextfaceplayer .BlackthornGymGuideWinText
 	jumpthistextfaceplayer
 		text "Yo! Champ in"
 		line "making!"
@@ -299,8 +298,8 @@ BlackthornGymGuideScript:
 		para "You can't damage"
 		line "them very easily."
 
-		para "Ice and Fairy #-"
-		line "mon are useful"
+		para "Ice and Fairy"
+		line "#mon are useful"
 		cont "against them."
 		
 		para "Dragon too but"
@@ -308,8 +307,7 @@ BlackthornGymGuideScript:
 		cont "edged sword."
 		done
 
-.BlackthornGymGuideWinScript:
-	jumpthistextfaceplayer
+.BlackthornGymGuideWinText
 		text "You were great to"
 		line "beat Clair!"
 
@@ -322,8 +320,7 @@ BlackthornGymGuideScript:
 		cont "#mon Champion!"
 		done
 
-.BlackthornGymGuideChampScript:
-	jumpthistextfaceplayer
+.BlackthornGymGuideChampText
 		text "Champ, here to"
 		line "catch up with"
 		cont "Clair?"
@@ -353,7 +350,4 @@ BlackthornGymRareCandyScript:
 
 BlackthornGymPlayersPackIsFull:
 	appear BLACKTHORNGYM_POKE_BALL
-	jumpthisopenedtext
-		text "The Item Pocket"
-		line "is full…"
-		done
+	jumpstd ItemPocketIsFullScript
