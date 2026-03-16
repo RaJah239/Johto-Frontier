@@ -22,6 +22,11 @@ _FruitPackIsFullText::
 	line "full…"
 	done
 
+_ItemPocketIsFullText::
+	text "The Item Pocket"
+	line "is full…"
+	done
+
 _NothingHereText::
 	text "There's nothing"
 	line "here…"

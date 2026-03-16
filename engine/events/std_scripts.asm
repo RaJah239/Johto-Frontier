@@ -57,6 +57,11 @@ StdScripts::
 	add_stdscript BerryOrFruitScript
 	add_stdscript SlowpokeScript
 	add_stdscript RaffleManNPCScript
+	add_stdscript ItemPocketIsFullScript
+
+ItemPocketIsFullScript:
+	farwritetext _ItemPocketIsFullText
+	waitendtext
 
 RaffleManNPCScript:
 	callasm RaffleManNPC

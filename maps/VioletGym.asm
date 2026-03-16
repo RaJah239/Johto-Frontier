@@ -411,7 +411,4 @@ VioletGymRareCandyScript:
 
 VioletGymPlayersPackIsFull:
 	appear VIOLETGYM_POKE_BALL
-	jumpthisopenedtext
-		text "The Item Pocket"
-		line "is full…"
-		done
+	jumpstd ItemPocketIsFullScript

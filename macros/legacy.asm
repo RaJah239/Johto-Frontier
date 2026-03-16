@@ -403,7 +403,8 @@ DEF noberryorfruitscript  EQUS "NoBerryOrFruitScript"
 DEF berryorfruitscript    EQUS "BerryOrFruitScript"
 DEF variablemartscript    EQUS "VariableMartScript"
 DEF slowpokescript        EQUS "SlowpokeScript"
-
+DEF rafflemannpcscript    EQUS "RaffleManNPCScript"
+DEF itempocketisfullscript EQUS "ItemPocketIsFullScript"
 
 ; constants/charmap.asm
 charmap "%", "<BSP>"
