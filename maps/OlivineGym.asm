@@ -91,7 +91,6 @@ OlivineGymJasmineScript:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
 	setevent EVENT_BEAT_JASMINE
 	opentext
 	writethistext
@@ -103,7 +102,7 @@ OlivineGymJasmineScript:
 	setflag ENGINE_MINERALBADGE
 .GymBadgeBattleDone:
 	checkevent EVENT_GOT_OLIVINE_GYM_TM
-	iftrue .SpeechAfterTM
+	iftrue_jumpopenedtext .SpeechAfterTMText
 	writethistext
 		text "…Um… Please take"
 		line "this too…"
@@ -118,8 +117,7 @@ OlivineGymJasmineScript:
 		cont "TODOTEXT."
 		done
 
-.SpeechAfterTM:
-	jumpthisopenedtext
+.SpeechAfterTMText:
 		text "Um… I don't know"
 		line "how to say this,"
 		cont "but good luck…"
@@ -141,7 +139,7 @@ OlivineGymJasmineScript:
 		text "…Thank you. May"
 		line "we get started?"
 		done
-	waitbutton
+	waitclosetext
 	winlosstext JasmineRematchLossText, 0
 	loadtrainer JASMINE, JASMINE5 ; super boss team
 	startbattle
@@ -181,6 +179,7 @@ TrainerHikerRusty:
 	faceplayer
 	checkevent EVENT_BEAT_HIKER_RUSTY
 	iftrue .AfterBattleText
+	special SaveMusic
 	playmusic MUSIC_HIKER_ENCOUNTER
 	sjump TrainerHikerRustyBattle
 
@@ -196,25 +195,21 @@ TrainerHikerRusty:
 
 TrainerHikerRustyCheck1:
 	checkevent EVENT_BEAT_HIKER_RUSTY
-	iftrue .End
-	sjump TrainerHikerRustyStart1
-.End
-	end
-
-TrainerHikerRustyCheck2:
-	checkevent EVENT_BEAT_HIKER_RUSTY
-	iftrue .End
-	sjump TrainerHikerRustyStart2
-.End
-	end
-
-TrainerHikerRustyStart1:
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_HIKER_ENCOUNTER
 	showemote EMOTE_SHOCK, OLIVINEGYM_HIKER, 30
 	turnobject PLAYER, LEFT
 	sjump TrainerHikerRustyBattle
 
-TrainerHikerRustyStart2:
+RustyToPlayerMovement:
+	step RIGHT
+	step_end
+
+TrainerHikerRustyCheck2:
+	checkevent EVENT_BEAT_HIKER_RUSTY
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_HIKER_ENCOUNTER
 	showemote EMOTE_SHOCK, OLIVINEGYM_HIKER, 30
 	applymovement OLIVINEGYM_HIKER, RustyToPlayerMovement
@@ -253,13 +248,9 @@ TrainerHikerRustyBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_HIKER_RUSTY
 	end
-
-RustyToPlayerMovement:
-	step RIGHT
-	step_end
 
 HikerRustyBeatenText:
 	text "Oh no! You got"
@@ -270,6 +261,7 @@ TrainerTeacherRaven:
 	faceplayer
 	checkevent EVENT_BEAT_TEACHER_RAVEN
 	iftrue .AfterBattleText
+	special SaveMusic
 	playmusic MUSIC_BEAUTY_ENCOUNTER
 	sjump TrainerTeacherRavenBattle
 
@@ -282,25 +274,21 @@ TrainerTeacherRaven:
 
 TrainerTeacherRavenCheck1:
 	checkevent EVENT_BEAT_TEACHER_RAVEN
-	iftrue .End
-	sjump TrainerTeacherRavenStart1
-.End
-	end
-
-TrainerTeacherRavenCheck2:
-	checkevent EVENT_BEAT_TEACHER_RAVEN
-	iftrue .End
-	sjump TrainerTeacherRavenStart2
-.End
-	end
-
-TrainerTeacherRavenStart1:
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_BEAUTY_ENCOUNTER
 	showemote EMOTE_SHOCK, OLIVINEGYM_TEACHER, 30
 	turnobject PLAYER, RIGHT
 	sjump TrainerTeacherRavenBattle
 
-TrainerTeacherRavenStart2:
+RavenToPlayerMovement:
+	step LEFT
+	step_end
+
+TrainerTeacherRavenCheck2:
+	checkevent EVENT_BEAT_TEACHER_RAVEN
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_BEAUTY_ENCOUNTER
 	showemote EMOTE_SHOCK, OLIVINEGYM_TEACHER, 30
 	applymovement OLIVINEGYM_TEACHER, RavenToPlayerMovement
@@ -311,7 +299,7 @@ TrainerTeacherRavenBattle:
 	showthistext
 		text "Let me teach you"
 		line "about the steel"
-		cont "typing!"
+		cont "type!"
 		done
 	winlosstext TeacherRavenBeatenText, 0
 	readvar VAR_BADGES
@@ -338,13 +326,9 @@ TrainerTeacherRavenBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_TEACHER_RAVEN
 	end
-
-RavenToPlayerMovement:
-	step LEFT
-	step_end
 
 TeacherRavenBeatenText:
 	text "I was taught in-"
@@ -353,9 +337,9 @@ TeacherRavenBeatenText:
 
 OlivineGymGuideScript:
 	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
-	iftrue .OlivineGymGuideChampScript
+	iftrue_jumptextfaceplayer .OlivineGymGuideChampText
 	checkevent EVENT_BEAT_JASMINE
-	iftrue .OlivineGymGuideWinScript
+	iftrue_jumptextfaceplayer .OlivineGymGuideWinText
 	jumpthistextfaceplayer
 		text "Jasmine uses the"
 		line "steel-type."
@@ -368,15 +352,14 @@ OlivineGymGuideScript:
 		cont "well agaisnt them."
 		done
 
-.OlivineGymGuideWinScript:
-	jumpthistextfaceplayer
+.OlivineGymGuideWinText
 		text "That was awesome."
 
 		para "You carved through"
 		line "their defenses."
 		done
 
-.OlivineGymGuideChampScript:
+.OlivineGymGuideChampText
 	jumpthistextfaceplayer
 		text "Hey Champ!"
 
@@ -406,7 +389,4 @@ OlivineGymIronScript:
 
 OlivineGymPlayersPackIsFull:
 	appear OLIVINEGYM_POKE_BALL
-	jumpthisopenedtext
-		text "The Item Pocket"
-		line "is full…"
-		done
+	jumpstd ItemPocketIsFullScript
