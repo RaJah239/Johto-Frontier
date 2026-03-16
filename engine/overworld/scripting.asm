@@ -279,7 +279,7 @@ ScriptCommandTable:
 	dw Script_jumpthistext               ;
 	dw Script_showtext                   ;
 	dw Script_showtextfaceplayer         ;
-	dw Script_iftrue_endtext             ;
+	dw Script_iftrue_end             ;
 	dw Script_iffalse_endtext            ;
 	dw Script_writethistext              ;
 	dw Script_jumpstashedtext            ;
@@ -484,11 +484,11 @@ _Do_jumpopenedtext:
 	ld hl, JumpOpenedTextScript
 	jmp ScriptJump
 
-Script_iftrue_endtext:
+Script_iftrue_end:
 	ld a, [wScriptVar]
 	and a
 	ret z
-	jr Script_endtext
+	jmp Script_end
 
 Script_iffalse_endtext:
 	ld a, [wScriptVar]

@@ -1193,9 +1193,9 @@ MACRO showtextfaceplayer
 	dw \1 ; text_pointer
 ENDM
 
-	const iftrue_endtext_command
-MACRO iftrue_endtext
-	db iftrue_endtext_command
+	const iftrue_end_command
+MACRO iftrue_end
+	db iftrue_end_command
 ENDM
 
 	const iffalse_endtext_command
