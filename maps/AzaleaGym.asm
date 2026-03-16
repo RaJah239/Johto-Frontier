@@ -83,6 +83,7 @@ AzaleaGymBugsyScript:
 		cont "from my studies."
 		done
 	waitclosetext
+	special SaveMusic
 	winlosstext BugsyLossText, 0
 	readvar VAR_BADGES
 	ifgreater 5, .SixOrSevenBadges
@@ -104,7 +105,7 @@ AzaleaGymBugsyScript:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_BUGSY
 	setevent EVENT_BEAT_BUG_CATCHER_AL
 	setevent EVENT_BEAT_BUG_CATCHER_JOSH
@@ -118,7 +119,7 @@ AzaleaGymBugsyScript:
 	setflag ENGINE_HIVEBADGE
 .GymBadgeBattleDone:
 	checkevent EVENT_GOT_AZALEA_GYM_TM
-	iftrue .SpeechAfterTM
+	iftrue_jumpopenedtext .SpeechAfterTMText
 	writethistext
 		text "Here, I also want"
 		line "you to have this."
@@ -131,8 +132,8 @@ AzaleaGymBugsyScript:
 		text "TODOTEXT"
 		line "about this TM."
 		done
-.SpeechAfterTM:
-	jumpthisopenedtext
+
+.SpeechAfterTMText
 		text "Bug #mon are"
 		line "deep. There are"
 		cont "many mysteries to"
@@ -175,7 +176,7 @@ AzaleaGymBugsyScript:
 		text "Behold my Bug"
 		line "#mon research!"
 		done
-	waitbutton
+	waitclosetext
 	winlosstext BugsyRematchLossText, 0
 	loadtrainer BUGSY, BUGSY5 ; super boss team
 	startbattle
@@ -225,7 +226,8 @@ TrainerTwinsAmyandmay1:
 
 TrainerTwinsAmyandmay1Check:
 	checkevent EVENT_BEAT_TWINS_AMY_AND_MAY
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_LASS_ENCOUNTER
 	showemote EMOTE_SHOCK, AZALEAGYM_TWIN1, 30
 	showthistext
@@ -233,11 +235,8 @@ TrainerTwinsAmyandmay1Check:
 		line "challenging the"
 		cont "Leader? No way!"
 		done
-	winlosstext TwinsAmyandmay1BeatenText, 0
+	winlosstext TwinsAmyandmayBeatenText, 0
 	sjump TwinsAmyAndMayBattle
-
-.End
-	end
 
 TrainerTwinsAmyandmay2:
 	jumpthistextfaceplayer
@@ -248,19 +247,18 @@ TrainerTwinsAmyandmay2:
 
 TrainerTwinsAmyandmay2Check:
 	checkevent EVENT_BEAT_TWINS_AMY_AND_MAY
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_LASS_ENCOUNTER
 	showemote EMOTE_SHOCK, AZALEAGYM_TWIN2, 30
 	showthistext
 		text "May: You want to"
 		line "see the Leader?"
-		cont "We come first!"
-		done
-	winlosstext TwinsAmyandmay2BeatenText, 0
-	sjump TwinsAmyAndMayBattle
 
-.End
-	end
+		para "We come first!"
+		done
+	winlosstext TwinsAmyandmayBeatenText, 0
+	; fallthrough
 
 TwinsAmyAndMayBattle:
 	readvar VAR_BADGES
@@ -287,16 +285,11 @@ TwinsAmyAndMayBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_TWINS_AMY_AND_MAY
 	end
 
-TwinsAmyandmay1BeatenText:
-	text "Amy & May: Oh,"
-	line "double goodness!"
-	done
-
-TwinsAmyandmay2BeatenText:
+TwinsAmyandmayBeatenText:
 	text "Amy & May: Oh,"
 	line "double goodness!"
 	done
@@ -305,8 +298,9 @@ TrainerBugCatcherBenny:
 	faceplayer
 	checkevent EVENT_BEAT_BUG_CATCHER_BENNY
 	iftrue .AfterBattleText
+	special SaveMusic
 	playmusic MUSIC_YOUNGSTER_ENCOUNTER
-	sjump BennyIntroAndBattle
+	sjump TrainerBugCatcherBennyBattle
 
 .AfterBattleText:
 	jumpthistext
@@ -317,15 +311,14 @@ TrainerBugCatcherBenny:
 
 TrainerBugCatcherBennyCheck:
 	checkevent EVENT_BEAT_BUG_CATCHER_BENNY
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_YOUNGSTER_ENCOUNTER
 	showemote EMOTE_SHOCK, AZALEAGYM_BUG_CATCHER1, 30
 	turnobject PLAYER, RIGHT
-	sjump BennyIntroAndBattle
-.End
-	end
+	; fallthrough
 
-BennyIntroAndBattle:
+TrainerBugCatcherBennyBattle:
 	showthistext
 		text "Bug #mon evolve"
 		line "young. So they get"
@@ -357,7 +350,7 @@ BennyIntroAndBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_BUG_CATCHER_BENNY
 	end
 
@@ -370,8 +363,9 @@ TrainerBugCatcherAl:
 	faceplayer
 	checkevent EVENT_BEAT_BUG_CATCHER_AL
 	iftrue .AfterBattleText
+	special SaveMusic
 	playmusic MUSIC_YOUNGSTER_ENCOUNTER
-	sjump AlIntroAndBattle
+	sjump TrainerBugCatcherAlBattle
 
 .AfterBattleText:
 	jumpthistext
@@ -385,46 +379,43 @@ TrainerBugCatcherAl:
 
 TrainerBugCatcherAlCheck1:
 	checkevent EVENT_BEAT_BUG_CATCHER_AL
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_YOUNGSTER_ENCOUNTER
 	showemote EMOTE_SHOCK, AZALEAGYM_BUG_CATCHER2, 30
 	turnobject PLAYER, UP
-	sjump AlIntroAndBattle
-.End
-	end
+	sjump TrainerBugCatcherAlBattle
 
 TrainerBugCatcherAlCheck2:
 	checkevent EVENT_BEAT_BUG_CATCHER_AL
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_YOUNGSTER_ENCOUNTER
 	showemote EMOTE_SHOCK, AZALEAGYM_BUG_CATCHER2, 30
 	applymovement AZALEAGYM_BUG_CATCHER2, AlToPlayerMovement1
 	turnobject PLAYER, UP
-	sjump AlIntroAndBattle
-.End
-	end
+	sjump TrainerBugCatcherAlBattle
 
 AlToPlayerMovement1:
 	step DOWN
 	step_end
-
-TrainerBugCatcherAlCheck3:
-	checkevent EVENT_BEAT_BUG_CATCHER_AL
-	iftrue .End
-	playmusic MUSIC_YOUNGSTER_ENCOUNTER
-	showemote EMOTE_SHOCK, AZALEAGYM_BUG_CATCHER2, 30
-	applymovement AZALEAGYM_BUG_CATCHER2, AlToPlayerMovement2
-	turnobject PLAYER, UP
-	sjump AlIntroAndBattle
-.End
-	end
 
 AlToPlayerMovement2:
 	step DOWN
 	step DOWN
 	step_end
 
-AlIntroAndBattle:
+TrainerBugCatcherAlCheck3:
+	checkevent EVENT_BEAT_BUG_CATCHER_AL
+	iftrue_end
+	special SaveMusic
+	playmusic MUSIC_YOUNGSTER_ENCOUNTER
+	showemote EMOTE_SHOCK, AZALEAGYM_BUG_CATCHER2, 30
+	applymovement AZALEAGYM_BUG_CATCHER2, AlToPlayerMovement2
+	turnobject PLAYER, UP
+	; fallthrough
+
+TrainerBugCatcherAlBattle:
 	showthistext
 		text "Bug #mon are"
 		line "cool and tough!"
@@ -456,7 +447,7 @@ AlIntroAndBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_BUG_CATCHER_AL
 	end
 
@@ -469,8 +460,9 @@ TrainerBugCatcherJosh:
 	faceplayer
 	checkevent EVENT_BEAT_BUG_CATCHER_JOSH
 	iftrue .AfterBattleText
+	special SaveMusic
 	playmusic MUSIC_YOUNGSTER_ENCOUNTER
-	sjump JoshIntroAndBattle
+	sjump TrainerBugCatcherJoshBattle
 
 .AfterBattleText:
 	jumpthistext
@@ -481,46 +473,43 @@ TrainerBugCatcherJosh:
 
 TrainerBugCatcherJoshCheck1:
 	checkevent EVENT_BEAT_BUG_CATCHER_JOSH
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_YOUNGSTER_ENCOUNTER
 	showemote EMOTE_SHOCK, AZALEAGYM_BUG_CATCHER3, 30
 	turnobject PLAYER, UP
-	sjump JoshIntroAndBattle
-.End
-	end
+	sjump TrainerBugCatcherJoshBattle
 
 TrainerBugCatcherJoshCheck2:
 	checkevent EVENT_BEAT_BUG_CATCHER_JOSH
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_YOUNGSTER_ENCOUNTER
 	showemote EMOTE_SHOCK, AZALEAGYM_BUG_CATCHER3, 30
 	applymovement AZALEAGYM_BUG_CATCHER3, JoshToPlayerMovement1
 	turnobject PLAYER, UP
-	sjump JoshIntroAndBattle
-.End
-	end
+	sjump TrainerBugCatcherJoshBattle
 
 JoshToPlayerMovement1:
 	step DOWN
 	step_end
-
-TrainerBugCatcherJoshCheck3:
-	checkevent EVENT_BEAT_BUG_CATCHER_JOSH
-	iftrue .End
-	playmusic MUSIC_YOUNGSTER_ENCOUNTER
-	showemote EMOTE_SHOCK, AZALEAGYM_BUG_CATCHER3, 30
-	applymovement AZALEAGYM_BUG_CATCHER3, JoshToPlayerMovement2
-	turnobject PLAYER, UP
-	sjump JoshIntroAndBattle
-.End
-	end
 
 JoshToPlayerMovement2:
 	step DOWN
 	step DOWN
 	step_end
 
-JoshIntroAndBattle:
+TrainerBugCatcherJoshCheck3:
+	checkevent EVENT_BEAT_BUG_CATCHER_JOSH
+	iftrue_end
+	special SaveMusic
+	playmusic MUSIC_YOUNGSTER_ENCOUNTER
+	showemote EMOTE_SHOCK, AZALEAGYM_BUG_CATCHER3, 30
+	applymovement AZALEAGYM_BUG_CATCHER3, JoshToPlayerMovement2
+	turnobject PLAYER, UP
+	; fallthrough
+
+TrainerBugCatcherJoshBattle:
 	showthistext
 		text "My grown-up #-"
 		line "-mon are tough!"
@@ -550,7 +539,7 @@ JoshIntroAndBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_BUG_CATCHER_JOSH
 	end
 
@@ -568,9 +557,9 @@ AzaleaGymStatue:
 
 AzaleaGymGuideScript:
 	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
-	iftrue .AzaleaGymGuideChampScript
+	iftrue_jumptextfaceplayer .AzaleaGymGuideChampText
 	checkevent EVENT_BEAT_BUGSY
-	iftrue .AzaleaGymGuideWinScript
+	iftrue_jumptextfaceplayer .AzaleaGymGuideWinText
 	jumpthistextfaceplayer
 		text "Yo, challenger!"
 
@@ -592,16 +581,14 @@ AzaleaGymGuideScript:
 		cont "weaknesses too."
 		done
 
-.AzaleaGymGuideWinScript:
-	jumpthistextfaceplayer
+.AzaleaGymGuideWinText
 		text "Well done! That"
 		line "was a great clash"
 		cont "of talented young"
 		cont "trainers."
 		done
 
-.AzaleaGymGuideChampScript:
-	jumpthistextfaceplayer
+.AzaleaGymGuideChampText
 		text "Hey Champ!"
 
 		para "Back to squash"
@@ -621,7 +608,4 @@ AzaleaGymNuggetScript:
 
 AzaleaGymPlayersPackIsFull:
 	appear AZALEAGYM_POKE_BALL
-	jumpthisopenedtext
-		text "The Item Pocket"
-		line "is full…"
-		done
+	jumpstd ItemPocketIsFullScript
