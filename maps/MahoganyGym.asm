@@ -5,7 +5,7 @@ MahoganyGym_MapEvents:
 
 	def_coord_events
 	coord_event  9, 16, SCENE_MAHOGANY_GYM_NOOP, TrainerSkierRoxanneCheck
-	coord_event  3, 13, SCENE_MAHOGANY_GYM_NOOP, TrainerSkierClarissaCheck
+	coord_event  3, 13, SCENE_MAHOGANY_GYM_NOOP, TrainerSkierClarissaBattleCheck
 	coord_event  5, 10, SCENE_MAHOGANY_GYM_NOOP, TrainerBoarderRonaldCheck
 	coord_event  2,  5, SCENE_MAHOGANY_GYM_NOOP, TrainerBoarderDouglasCheck
 
@@ -17,7 +17,7 @@ MahoganyGym_MapEvents:
 	object_event  5,  3, SPRITE_PRYCE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, MahoganyGymPryceScript, -1
 	object_event  9, 17, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TrainerSkierRoxanne, -1
 	object_event  5,  9, SPRITE_ROCKER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TrainerBoarderRonald, -1
-	object_event  2, 13, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, TrainerSkierClarissa, -1
+	object_event  2, 13, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, TrainerSkierClarissaBattle, -1
 	object_event  2,  4, SPRITE_ROCKER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, TrainerBoarderDouglas, -1
 	object_event  7, 15, SPRITE_GYM_GUIDE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, MahoganyGymGuideScript, -1
 	object_event  4, 16, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MahoganyGymZincScript, EVENT_MAHOGANY_GYM_FIVE_ZINCS
@@ -109,7 +109,6 @@ MahoganyGymPryceScript:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
 	setevent EVENT_BEAT_PRYCE
 	setevent EVENT_BEAT_SKIER_ROXANNE
 	setevent EVENT_BEAT_BOARDER_RONALD
@@ -123,7 +122,7 @@ MahoganyGymPryceScript:
 	setflag ENGINE_GLACIERBADGE
 .GymBadgeBattleDone:
 	checkevent EVENT_GOT_MAHOGANY_GYM_TM
-	iftrue .SpeechAfterTM
+	iftrue_jumpopenedtext .SpeechAfterTMText
 	writethistext
 		text "This is a gift"
 		line "from me!"
@@ -144,8 +143,7 @@ MahoganyGymPryceScript:
 		cont "winter."
 		done
 
-.SpeechAfterTM:
-	jumpthisopenedtext
+.SpeechAfterTMText
 		text "When the ice and"
 		line "snow melt, spring"
 		cont "arrives."
@@ -189,7 +187,7 @@ MahoganyGymPryceScript:
 		para "Let our battle"
 		line "speak for us."
 		done
-	waitbutton
+	waitclosetext
 	winlosstext PryceRematchLossText, 0
 	loadtrainer PRYCE, PRYCE5 ; super boss team
 	startbattle
@@ -234,8 +232,9 @@ TrainerSkierRoxanne:
 	faceplayer
 	checkevent EVENT_BEAT_SKIER_ROXANNE
 	iftrue .AfterBattleText
+	special SaveMusic
 	playmusic MUSIC_BEAUTY_ENCOUNTER
-	sjump RoxanneIntroAndBattle
+	sjump TrainerSkierRoxanneBattle
 
 .AfterBattleText:
 	jumpthistext
@@ -247,15 +246,14 @@ TrainerSkierRoxanne:
 
 TrainerSkierRoxanneCheck:
 	checkevent EVENT_BEAT_SKIER_ROXANNE
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_BEAUTY_ENCOUNTER
 	showemote EMOTE_SHOCK, MAHOGANYGYM_BEAUTY1, 30
 	turnobject PLAYER, DOWN
-	sjump RoxanneIntroAndBattle
-.End
-	end
+	; fallthrough
 
-RoxanneIntroAndBattle:
+TrainerSkierRoxanneBattle:
 	showthistext
 		text "To get to Pryce,"
 		line "our Gym Leader,"
@@ -287,7 +285,7 @@ RoxanneIntroAndBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_SKIER_ROXANNE
 	end
 
@@ -296,10 +294,11 @@ SkierRoxanneBeatenText:
 	line "you in skiing!"
 	done
 
-TrainerSkierClarissa:
+TrainerSkierClarissaBattle:
 	faceplayer
 	checkevent EVENT_BEAT_SKIER_CLARISSA
 	iftrue .AfterBattleText
+	special SaveMusic
 	playmusic MUSIC_BEAUTY_ENCOUNTER
 	sjump ClarissaIntroAndBattle
 
@@ -310,14 +309,13 @@ TrainerSkierClarissa:
 		cont "about my skiing…"
 		done
 
-TrainerSkierClarissaCheck:
+TrainerSkierClarissaBattleCheck:
 	checkevent EVENT_BEAT_SKIER_CLARISSA
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_BEAUTY_ENCOUNTER
 	showemote EMOTE_SHOCK, MAHOGANYGYM_BEAUTY2, 30
-	sjump ClarissaIntroAndBattle
-.End
-	end
+	; fallthrough
 
 ClarissaIntroAndBattle:
 	showthistext
@@ -349,7 +347,7 @@ ClarissaIntroAndBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_SKIER_CLARISSA
 	end
 
@@ -362,8 +360,9 @@ TrainerBoarderRonald:
 	faceplayer
 	checkevent EVENT_BEAT_BOARDER_RONALD
 	iftrue .AfterBattleText
+	special SaveMusic
 	playmusic MUSIC_HIKER_ENCOUNTER
-	sjump RonaldIntroAndBattle
+	sjump TrainerBoarderRonaldBattle
 
 .AfterBattleText:
 	jumpthistext
@@ -375,14 +374,13 @@ TrainerBoarderRonald:
 
 TrainerBoarderRonaldCheck:
 	checkevent EVENT_BEAT_BOARDER_RONALD
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_HIKER_ENCOUNTER
 	showemote EMOTE_SHOCK, MAHOGANYGYM_ROCKER1, 30
-	sjump RonaldIntroAndBattle
-.End
-	end
+	; fallthrough
 
-RonaldIntroAndBattle:
+TrainerBoarderRonaldBattle:
 	showthistext
 		text "I'll frostbite"
 		line "your #mon, so"
@@ -414,7 +412,7 @@ RonaldIntroAndBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_BOARDER_RONALD
 	end
 
@@ -436,7 +434,8 @@ TrainerBoarderDouglas:
 
 TrainerBoarderDouglasCheck:
 	checkevent EVENT_BEAT_BOARDER_DOUGLAS
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_HIKER_ENCOUNTER
 	showemote EMOTE_SHOCK, MAHOGANYGYM_ROCKER2, 30
 	showthistext
@@ -468,9 +467,8 @@ TrainerBoarderDouglasCheck:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_BOARDER_DOUGLAS
-.End
 	end
 
 BoarderDouglasBeatenText:
@@ -480,9 +478,9 @@ BoarderDouglasBeatenText:
 
 MahoganyGymGuideScript:
 	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
-	iftrue .MahoganyGymGuideChampScript
+	iftrue_jumptextfaceplayer .MahoganyGymGuideChampText
 	checkevent EVENT_BEAT_PRYCE
-	iftrue .MahoganyGymGuideWinScript
+	iftrue_jumptextfaceplayer .MahoganyGymGuideWinText
 	jumpthistextfaceplayer
 		text "Pryce is a veteran"
 		line "who has trained"
@@ -504,8 +502,7 @@ MahoganyGymGuideScript:
 		cont "also work well."
 		done
 
-.MahoganyGymGuideWinScript:
-	jumpthistextfaceplayer
+.MahoganyGymGuideWinText
 		text "Pryce is some-"
 		line "thing, but you're"
 		cont "something else!"
@@ -516,8 +513,7 @@ MahoganyGymGuideScript:
 		cont "eration gap!"
 		done
 
-.MahoganyGymGuideChampScript:
-	jumpthistextfaceplayer
+.MahoganyGymGuideChampText
 		text "Pryce'll be pleased"
 		line "to see your rapid"
 		cont "growth."
@@ -544,7 +540,4 @@ MahoganyGymZincScript:
 
 MahoganyGymPlayersPackIsFull:
 	appear OLIVINEGYM_POKE_BALL
-	jumpthisopenedtext
-		text "The Item Pocket"
-		line "is full…"
-		done
+	jumpstd ItemPocketIsFullScript
