@@ -136,7 +136,6 @@ EcruteakGymMortyScript:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
 	setevent EVENT_BEAT_MORTY
 	setevent EVENT_BEAT_MEDIUM_GRACE
 	opentext
@@ -149,7 +148,7 @@ EcruteakGymMortyScript:
 	setflag ENGINE_FOGBADGE
 .GymBadgeBattleDone:
 	checkevent EVENT_GOT_ECRUTEAK_GYM_TM
-	iftrue .SpeechAfterTM
+	iftrue_jumpopenedtext .SpeechAfterTMText
 	writethistext
 		text "I want you to have"
 		line "this."
@@ -168,8 +167,7 @@ EcruteakGymMortyScript:
 		line "appeals to you."
 		done
 
-.SpeechAfterTM:
-	jumpthisopenedtext
+.SpeechAfterTMText
 		text "I see…"
 
 		para "Your journey has"
@@ -206,7 +204,7 @@ EcruteakGymMortyScript:
 	    text "Now witness my"
 		line "evolution!"
 		done
-	waitbutton
+	waitclosetext
 	winlosstext MortyRematchLossText, 0
 	loadtrainer MORTY, MORTY5 ; super boss team
 	startbattle
@@ -249,7 +247,8 @@ TrainerSageJeffrey:
 
 TrainerSageJeffreyCheck:
 	checkevent EVENT_BEAT_SAGE_JEFFREY
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_SAGE_ENCOUNTER
 	showemote EMOTE_SHOCK, ECRUTEAKGYM_SAGE1, 30
 	turnobject PLAYER, LEFT
@@ -290,9 +289,8 @@ TrainerSageJeffreyCheck:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_SAGE_JEFFREY
-.End
 	end
 
 SageJeffreyBeatenText:
@@ -304,6 +302,7 @@ TrainerSagePing:
 	faceplayer
 	checkevent EVENT_BEAT_SAGE_PING
 	iftrue .AfterBattleText
+	special SaveMusic
 	playmusic MUSIC_SAGE_ENCOUNTER
 	sjump TrainerSagePingBattle
 
@@ -321,25 +320,21 @@ TrainerSagePing:
 
 TrainerSagePingCheck1:
 	checkevent EVENT_BEAT_SAGE_PING
-	iftrue .End
-	sjump TrainerSagePingStart1
-.End
-	end
-
-TrainerSagePingCheck2:
-	checkevent EVENT_BEAT_SAGE_PING
-	iftrue .End
-	sjump TrainerSagePingStart2
-.End
-	end
-
-TrainerSagePingStart1:
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_SAGE_ENCOUNTER
 	showemote EMOTE_SHOCK, ECRUTEAKGYM_SAGE2, 30
 	turnobject PLAYER, LEFT
 	sjump TrainerSagePingBattle
 
-TrainerSagePingStart2:
+PingToPlayerMovement1:
+	step RIGHT
+	step_end
+
+TrainerSagePingCheck2:
+	checkevent EVENT_BEAT_SAGE_PING
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_SAGE_ENCOUNTER
 	showemote EMOTE_SHOCK, ECRUTEAKGYM_SAGE2, 30
 	applymovement ECRUTEAKGYM_SAGE2, PingToPlayerMovement1
@@ -377,13 +372,9 @@ TrainerSagePingBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_SAGE_PING
 	end
-
-PingToPlayerMovement1:
-	step RIGHT
-	step_end
 
 SagePingBeatenText:
 	text "Ah! Well done!"
@@ -397,7 +388,8 @@ TrainerMediumMartha:
 
 TrainerMediumMarthaCheck:
 	checkevent EVENT_BEAT_MEDIUM_MARTHA
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_SAGE_ENCOUNTER
 	showemote EMOTE_SHOCK, ECRUTEAKGYM_GRANNY1, 30
 	turnobject PLAYER, LEFT
@@ -429,9 +421,8 @@ TrainerMediumMarthaCheck:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_MEDIUM_MARTHA
-.End
 	end
 
 MediumMarthaBeatenText:
@@ -447,7 +438,8 @@ TrainerMediumGrace:
 
 TrainerMediumGraceCheck:
 	checkevent EVENT_BEAT_MEDIUM_GRACE
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_SAGE_ENCOUNTER
 	showemote EMOTE_SHOCK, ECRUTEAKGYM_GRANNY2, 30
 	turnobject PLAYER, RIGHT
@@ -480,9 +472,8 @@ TrainerMediumGraceCheck:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_MEDIUM_GRACE
-.End
 	end
 
 MediumGraceBeatenText:
@@ -493,9 +484,9 @@ MediumGraceBeatenText:
 
 EcruteakGymGuideScript:
 	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
-	iftrue .EcruteakGymGuideChampScript
+	iftrue_jumptextfaceplayer .EcruteakGymGuideChampText
 	checkevent EVENT_BEAT_MORTY
-	iftrue .EcruteakGymGuideWinScript
+	iftrue_jumptextfaceplayer .EcruteakGymGuideWinText
 	jumpthistextfaceplayer
 		text "Here is the home"
 		line "of the ghost-type"
@@ -512,8 +503,7 @@ EcruteakGymGuideScript:
 		cont "ing instead."
 		done
 
-.EcruteakGymGuideWinScript:
-	jumpthistextfaceplayer
+.EcruteakGymGuideWinText
 		text "Whew, <PLAYER>."
 		line "You did great!"
 
@@ -522,8 +512,7 @@ EcruteakGymGuideScript:
 		cont "pure terror!"
 		done
 
-.EcruteakGymGuideChampScript:
-	jumpthistextfaceplayer
+.EcruteakGymGuideChampText
 		text "Did you come here"
 		line "to put fear into"
 		cont "ghosts, Champ?"
@@ -550,7 +539,4 @@ EcruteakGymCalciumScript:
 
 EcruteakGymPlayersPackIsFull:
 	appear ECRUTEAKGYM_POKE_BALL
-	jumpthisopenedtext
-		text "The Item Pocket"
-		line "is full…"
-		done
+	jumpstd ItemPocketIsFullScript
