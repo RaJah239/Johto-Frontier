@@ -86,7 +86,6 @@ VioletGymFalknerScript:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
 	setevent EVENT_BEAT_FALKNER
 	opentext
 	writethistext
@@ -98,7 +97,7 @@ VioletGymFalknerScript:
 	setflag ENGINE_ZEPHYRBADGE
 .GymBadgeBattleDone:
 	checkevent EVENT_GOT_VIOLET_GYM_TM
-	iftrue .SpeechAfterTM
+	iftrue_jumpopenedtext .SpeechAfterTMText
 	writethistext
 		text "Take this TM too!"
 		done
@@ -126,8 +125,7 @@ VioletGymFalknerScript:
 		cont "likes."
 		done
 
-.SpeechAfterTM:
-	jumpthisopenedtext
+.SpeechAfterTMText
 		text "I'm going to train"
 		line "harder to become"
 		cont "the greatest bird"
@@ -165,7 +163,7 @@ VioletGymFalknerScript:
 		cont "magnificent bird"
 		cont "#mon!"
 		done
-	waitbutton
+	waitclosetext
 	winlosstext FalknerRematchLossText, 0
 	loadtrainer FALKNER, FALKNER5 ; super boss team
 	startbattle
@@ -215,25 +213,21 @@ TrainerBirdKeeperAbe:
 
 TrainerBirdKeeperAbeCheck1:
 	checkevent EVENT_BEAT_BIRD_KEEPER_ABE
-	iftrue .End
-	sjump TrainerBirdKeeperAbeStart1
-.End
-	end
-
-TrainerBirdKeeperAbeCheck2:
-	checkevent EVENT_BEAT_BIRD_KEEPER_ABE
-	iftrue .End
-	sjump TrainerBirdKeeperAbeStart2
-.End
-	end
-
-TrainerBirdKeeperAbeStart1:
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_YOUNGSTER_ENCOUNTER
 	showemote EMOTE_SHOCK, VIOLETGYM_YOUNGSTER2, 30
 	applymovement VIOLETGYM_YOUNGSTER2, AbeToPlayerMovement1
 	sjump TrainerBirdKeeperAbeBattle
 
-TrainerBirdKeeperAbeStart2:
+AbeToPlayerMovement1:
+	step RIGHT
+	step_end
+
+TrainerBirdKeeperAbeCheck2:
+	checkevent EVENT_BEAT_BIRD_KEEPER_ABE
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_YOUNGSTER_ENCOUNTER
 	showemote EMOTE_SHOCK, VIOLETGYM_YOUNGSTER2, 30
 	applymovement VIOLETGYM_YOUNGSTER2, AbeToPlayerMovement2
@@ -271,13 +265,9 @@ TrainerBirdKeeperAbeBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_BIRD_KEEPER_ABE
 	end
-
-AbeToPlayerMovement1:
-	step RIGHT
-	step_end
 
 AbeToPlayerMovement2:
 	step RIGHT
@@ -301,7 +291,8 @@ TrainerBirdKeeperRod:
 
 TrainerBirdKeeperRodCheck:
 	checkevent EVENT_BEAT_BIRD_KEEPER_ROD
-	iftrue .End
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_YOUNGSTER_ENCOUNTER
 	showemote EMOTE_SHOCK, VIOLETGYM_YOUNGSTER1, 30
 	applymovement VIOLETGYM_YOUNGSTER1, RodToPlayerMovement
@@ -341,9 +332,8 @@ TrainerBirdKeeperRodCheck:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_BIRD_KEEPER_ROD
-.End
 	end
 
 RodToPlayerMovement:
@@ -357,9 +347,9 @@ BirdKeeperRodBeatenText:
 
 VioletGymGuideScript:
 	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
-	iftrue .VioletGymGuideChampScript
+	iftrue_jumptextfaceplayer .VioletGymGuideChampText
 	checkevent EVENT_BEAT_FALKNER
-	iftrue .VioletGymGuideWinScript
+	iftrue_jumptextfaceplayer .VioletGymGuideWinText
 	jumpthistextfaceplayer
 		text "Hey! I'm no train-"
 		line "er but I can give"
@@ -379,16 +369,14 @@ VioletGymGuideScript:
 		cont "this in mind."
 		done
 
-.VioletGymGuideWinScript:
-	jumpthistextfaceplayer
+.VioletGymGuideWinText
 		text "Nice battle! Keep"
 		line "it up, and you'll"
 		cont "be the Champ in no"
 		cont "time at all!"
 		done
 
-.VioletGymGuideChampScript:
-	jumpthistextfaceplayer
+.VioletGymGuideChampText
 		text "Champion <PLAYER>!"
 
 		para "Good to see you"
