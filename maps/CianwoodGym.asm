@@ -123,7 +123,6 @@ CianwoodGymChuckScript:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
 	setevent EVENT_BEAT_CHUCK
 	opentext
 	writethistext
@@ -135,7 +134,7 @@ CianwoodGymChuckScript:
 	setflag ENGINE_STORMBADGE
 .GymBadgeBattleDone:
 	checkevent EVENT_GOT_CIANWOOD_GYM_TM
-	iftrue .SpeechAfterTM
+	iftrue_jumpopenedtext .SpeechAfterTMText
 	writethistext
 		text "Here, take this"
 		line "too!"
@@ -152,8 +151,7 @@ CianwoodGymChuckScript:
 		line "user's Attack."
 		done
 
-.SpeechAfterTM:
-	jumpthisopenedtext
+.SpeechAfterTMText
 		text "Wahahah! I enjoyed"
 		line "battling you!"
 
@@ -189,7 +187,7 @@ CianwoodGymChuckScript:
 		cont "24-hours a day"
 		cont "training!"
 		done
-	waitbutton
+	waitclosetext
 	winlosstext ChuckRematchLossText, 0
 	loadtrainer CHUCK, CHUCK5 ; super boss team
 	startbattle
@@ -243,25 +241,17 @@ TrainerBlackbeltYoshi:
 
 TrainerBlackbeltYoshiCheck1:
 	checkevent EVENT_BEAT_BLACKBELT_YOSHI
-	iftrue .End
-	sjump TrainerBlackbeltYoshiStart1
-.End
-	end
-
-TrainerBlackbeltYoshiCheck2:
-	checkevent EVENT_BEAT_BLACKBELT_YOSHI
-	iftrue .End
-	sjump TrainerBlackbeltYoshiStart2
-.End
-	end
-
-TrainerBlackbeltYoshiStart1:
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_HIKER_ENCOUNTER
 	showemote EMOTE_SHOCK, CIANWOODGYM_BLACK_BELT1, 30
 	turnobject PLAYER, RIGHT
 	sjump TrainerBlackbeltYoshiBattle
 
-TrainerBlackbeltYoshiStart2:
+TrainerBlackbeltYoshiCheck2:
+	checkevent EVENT_BEAT_BLACKBELT_YOSHI
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_HIKER_ENCOUNTER
 	showemote EMOTE_SHOCK, CIANWOODGYM_BLACK_BELT1, 30
 	applymovement CIANWOODGYM_BLACK_BELT1, BlackBeltToPlayerMovement
@@ -302,7 +292,7 @@ TrainerBlackbeltYoshiBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_BLACKBELT_YOSHI
 	end
 
@@ -317,26 +307,22 @@ TrainerSailorSteele:
 
 TrainerSailorSteeleCheck1:
 	checkevent EVENT_BEAT_SAILOR_STEELE
-	iftrue .End
-	sjump TrainerSailorSteeleStart1
-.End
-	end
-
-TrainerSailorSteeleCheck2:
-	checkevent EVENT_BEAT_SAILOR_STEELE
-	iftrue .End
-	sjump TrainerSailorSteeleStart2
-.End
-	end
-
-TrainerSailorSteeleStart1:
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_HIKER_ENCOUNTER
 	showemote EMOTE_SHOCK, CIANWOODGYM_SAILOR, 30
 	applymovement CIANWOODGYM_SAILOR, SteeleToPlayerMovement
 	turnobject PLAYER, LEFT
 	sjump TrainerSailorSteeleBattle
 
-TrainerSailorSteeleStart2:
+SteeleToPlayerMovement:
+	step RIGHT
+	step_end
+
+TrainerSailorSteeleCheck2:
+	checkevent EVENT_BEAT_SAILOR_STEELE
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_HIKER_ENCOUNTER
 	showemote EMOTE_SHOCK, CIANWOODGYM_SAILOR, 30
 	turnobject PLAYER, LEFT
@@ -371,13 +357,9 @@ TrainerSailorSteeleBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_SAILOR_STEELE
 	end
-
-SteeleToPlayerMovement:
-	step RIGHT
-	step_end
 
 SailorSteeleBeatenText:
 	text "TODOTEXT"
@@ -392,25 +374,17 @@ TrainerBlackbeltLung:
 
 TrainerBlackbeltLungCheck1:
 	checkevent EVENT_BEAT_BLACKBELT_LUNG
-	iftrue .End
-	sjump TrainerBlackbeltLungStart1
-.End
-	end
-
-TrainerBlackbeltLungCheck2:
-	checkevent EVENT_BEAT_BLACKBELT_LUNG
-	iftrue .End
-	sjump TrainerBlackbeltLungStart2
-.End
-	end
-
-TrainerBlackbeltLungStart1:
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_HIKER_ENCOUNTER
 	showemote EMOTE_SHOCK, CIANWOODGYM_BLACK_BELT2, 30
 	turnobject PLAYER, RIGHT
 	sjump TrainerBlackbeltLungBattle
 
-TrainerBlackbeltLungStart2:
+TrainerBlackbeltLungCheck2:
+	checkevent EVENT_BEAT_BLACKBELT_LUNG
+	iftrue_end
+	special SaveMusic
 	playmusic MUSIC_HIKER_ENCOUNTER
 	showemote EMOTE_SHOCK, CIANWOODGYM_BLACK_BELT2, 30
 	applymovement CIANWOODGYM_BLACK_BELT2, BlackBeltToPlayerMovement
@@ -448,7 +422,7 @@ TrainerBlackbeltLungBattle:
 .StartBattle:
 	startbattle
 	reloadmapafterbattle
-	playmusic MUSIC_GYM
+	special RestoreMusic
 	setevent EVENT_BEAT_BLACKBELT_LUNG
 	end
 
@@ -462,9 +436,9 @@ BlackbeltLungBeatenText:
 
 CianwoodGymGuideScript:
 	checkevent EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
-	iftrue .CianwoodGymGuideChampScript
+	iftrue_jumptextfaceplayer .CianwoodGymGuideChampText
 	checkevent EVENT_BEAT_CHUCK
-	iftrue .CianwoodGymGuideWinScript
+	iftrue_jumptextfaceplayer .CianwoodGymGuideWinText
 	jumpthistextfaceplayer
 		text "Chuck, the Gym"
 		line "Leader uses the"
@@ -481,15 +455,13 @@ CianwoodGymGuideScript:
 		cont "physical strength."
 		done
 
-.CianwoodGymGuideWinScript:
-	jumpthistextfaceplayer
+.CianwoodGymGuideWinText
 		text "<PLAYER>! You won!"
 		line "I could tell by"
 		cont "looking at you!"
 		done
 
-.CianwoodGymGuideChampScript:
-	jumpthistextfaceplayer
+.CianwoodGymGuideChampText
 		text "There's a lot of"
 		line "shouting in here!"
 
@@ -521,7 +493,4 @@ CianwoodGymProteinScript:
 
 CianwoodGymPlayersPackIsFull:
 	appear CIANWOODGYM_POKE_BALL
-	jumpthisopenedtext
-		text "The Item Pocket"
-		line "is full…"
-		done
+	jumpstd ItemPocketIsFullScript
