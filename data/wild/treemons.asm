@@ -22,7 +22,7 @@ RockSmashMons::
 ; Two tables each (common, rare).
 ; Structure:
 ;	db  %, species, level
-
+; TODOTEXT adjust after setting evo attacks
 TreeMonSet_City:
 TreeMonSet_Canyon:
 TreeMonSet_Town:
@@ -31,20 +31,84 @@ TreeMonSet_Kanto:
 TreeMonSet_Lake:
 TreeMonSet_Forest:
 ; common
-	db 50, HOOTHOOT,   10
-	db 15, HOOTHOOT,   10
-	db 15, HOOTHOOT,   10
-	db 10, HOOTHOOT,   10
-	db  5, HOOTHOOT,   10
-	db  5, HOOTHOOT,   10
+	db 5, WURMPLE,    15
+	db 4, SILCOON,    15
+	db 4, CASCOON,    15
+	db 3, BEAUTIFLY,  25
+	db 3, DUSTOX,     25
+	db 1, HERACROSS,  15
+	db 5, HOOTHOOT,   15
+	db 2, NOCTOWL,    25
+	db 5, PIDGEY,     15
+	db 2, PIDGEOTTO,  15
+	db 1, PIDGEOT,    15
+	db 5, ZUBAT,      15
+	db 2, GOLBAT,     15
+	db 1, CROBAT,     15
+	db 4, TEDDIURSA,  15
+	db 2, URSARING,   15
+	db 1, URSALUNA,   15
+	db 3, GLIGAR,     15
+	db 1, GLISCOR,    15
+	db 5, SPINARAK,   15
+	db 1, ARIADOS,    15
+	db 5, JOLTIK,     15
+	db 1, GALVANTULA, 15
+	db 4, VENIPEDE,   15
+	db 2, WHIRLIPEDE, 15
+	db 1, SCOLIPEDE,  15
+	db 4, SKORUPI,    15
+	db 1, DRAPION,    15
+	db 4, LARVESTA,   15
+	db 1, VOLCARONA,  15
+	db 4, MANKEY,     15
+	db 1, PRIMEAPE,   15
+	db 1, ANNIHILAPE, 15
+	db 4, FERROSEED,  15
+	db 1, FERROTHORN, 15
+	db 4, SCYTHER,    15
+	db 1, SCIZOR,     15
+	db 1, KLEAVOR,    15
 	db -1
-; rare
-	db 50, HOOTHOOT,   10
-	db 15, HOOTHOOT,   10
-	db 15, HOOTHOOT,   10
-	db 10, HOOTHOOT,   10
-	db  5, HOOTHOOT,   10
-	db  5, HOOTHOOT,   10
+; rare - same as above
+	db 5, WURMPLE,    15
+	db 4, SILCOON,    15
+	db 4, CASCOON,    15
+	db 3, BEAUTIFLY,  25
+	db 3, DUSTOX,     25
+	db 1, HERACROSS,  15
+	db 5, HOOTHOOT,   15
+	db 2, NOCTOWL,    25
+	db 5, PIDGEY,     15
+	db 2, PIDGEOTTO,  15
+	db 1, PIDGEOT,    15
+	db 5, ZUBAT,      15
+	db 2, GOLBAT,     15
+	db 1, CROBAT,     15
+	db 4, TEDDIURSA,  15
+	db 2, URSARING,   15
+	db 1, URSALUNA,   15
+	db 3, GLIGAR,     15
+	db 1, GLISCOR,    15
+	db 5, SPINARAK,   15
+	db 1, ARIADOS,    15
+	db 5, JOLTIK,     15
+	db 1, GALVANTULA, 15
+	db 4, VENIPEDE,   15
+	db 2, WHIRLIPEDE, 15
+	db 1, SCOLIPEDE,  15
+	db 4, SKORUPI,    15
+	db 1, DRAPION,    15
+	db 4, LARVESTA,   15
+	db 1, VOLCARONA,  15
+	db 4, MANKEY,     15
+	db 1, PRIMEAPE,   15
+	db 1, ANNIHILAPE, 15
+	db 4, FERROSEED,  15
+	db 1, FERROTHORN, 15
+	db 4, SCYTHER,    15
+	db 1, SCIZOR,     15
+	db 1, KLEAVOR,    15
 	db -1
 
 ; Rock smash sets dont have common/rare tables
