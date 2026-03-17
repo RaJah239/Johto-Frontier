@@ -70,10 +70,10 @@ PidgeottoEvosAttacks:
 PidgeotEvosAttacks:
 HoothootEvosAttacks:
 NoctowlEvosAttacks:
-ZubatEvosAttacks:
+ZubatEvosAttacks: ; lv 25 evo
 GolbatEvosAttacks:
 CrobatEvosAttacks:
-TeddiursaEvosAttacks:
+TeddiursaEvosAttacks: ; lv 30 evo
 UrsaringEvosAttacks:
 UrsalunaEvosAttacks:
 PhanpyEvosAttacks:
@@ -83,19 +83,19 @@ VictreebelEvosAttacks:
 MareepEvosAttacks:
 FlaaffyEvosAttacks:
 AmpharosEvosAttacks:
-NidoranFEvosAttacks:
+NidoranFEvosAttacks: ; lv 25 evo
 NidorinaEvosAttacks:
 NidoqueenEvosAttacks:
-NidoranMEvosAttacks:
+NidoranMEvosAttacks: ; lv 25 evo
 NidorinoEvosAttacks:
 NidokingEvosAttacks:
 WimpodEvosAttacks:
 GolisopodEvosAttacks:
 MarillEvosAttacks:
 AzumarillEvosAttacks:
-RhyhornEvosAttacks:
+RhyhornEvosAttacks: ; lv 30 evo
 RhydonEvosAttacks:
-DrilburEvosAttacks:
+DrilburEvosAttacks: ; lv 25 evo
 ExcadrillEvosAttacks:
 OnixEvosAttacks:
 SteelixEvosAttacks:
@@ -114,7 +114,7 @@ GrowlitheEvosAttacks:
 ArcanineEvosAttacks:
 HoundourEvosAttacks:
 HoundoomEvosAttacks:
-WooperEvosAttacks:
+WooperEvosAttacks: ; lv 25 evo
 QuagsireEvosAttacks:
 GligarEvosAttacks:
 GliscorEvosAttacks:
