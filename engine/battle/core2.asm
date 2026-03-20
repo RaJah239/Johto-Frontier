@@ -2425,20 +2425,52 @@ WaterTypeChart:
 .DefenderStringDoubleDamage:
 	db "2× Grass/Electric@"
 
-SeeBattleInfoText:
-	text "See Battle Info?"
-	done
-
 ForfeitMatchText:
 	text "Forfeit Battle?"
 	done
 
-BattleInfoOrForfeit:
-	ld hl, SeeBattleInfoText
-	call PrintText
-	call YesNoBox
-	jr nc, .see_info
+BattleChoiceMenuHeader:
+	db MENU_BACKUP_TILES
+	menu_coords 6, 12, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1
+	dw .MenuData
+	db 1
 
+.MenuData:
+	db STATICMENU_CURSOR | STATICMENU_WRAP
+	db 2
+	db "Battle Data@"
+	db "Forfeit?@"
+
+BattleChoiceMenu:
+	call GetTimeOfDayImage
+	ld hl, BattleChoiceMenuHeader
+	call LoadMenuHeader
+	call VerticalMenu
+	call CloseWindow
+	call WaitBGMap
+
+	; press B to exit
+    ldh a, [hJoyPressed]
+    and B_BUTTON
+    ret nz
+
+    ; options when pressing A
+	ld a, [wMenuCursorY]
+	dec a
+	jr z, .BattleData
+	dec a
+	jr z, .Forfeit
+	ret
+
+.BattleData
+	call ClearSprites
+	jr TrainerBattleInfo
+
+.Forfeit
+	; fallthrough
+
+BattleInfoOrForfeit:
+	call ClearSprites
 	ld hl, ForfeitMatchText
 	call PrintText
 	call NoYesBox
@@ -2466,9 +2498,6 @@ BattleInfoOrForfeit:
 .return_to_battle
 	xor a
 	ret
-
-.see_info
-	; fallthrough
 
 TrainerBattleInfo:
 	push hl
