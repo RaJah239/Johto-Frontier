@@ -2311,7 +2311,8 @@ BattleCommand_ApplyDamage:
 	dec a
 	ret z
 
-.focus_band_text
+	; focus band or sash or sturdy text and animation
+	farcall ItemRecoveryAnim
 	call GetOpponentItem
 	ld a, b
 	cp HELD_FOCUS_BAND
