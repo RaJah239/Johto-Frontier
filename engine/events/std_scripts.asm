@@ -136,8 +136,7 @@ NoBerryOrFruitScript:
 	waitendtext
 
 WanderingOddEggNPCScript:
-	faceplayer
-	opentext
+	faceplayeropentext
 	checkevent EVENT_MET_OTIS
 	iftrue .WeMetAgain
 	farwritetext OtisIntroText
@@ -152,44 +151,32 @@ WanderingOddEggNPCScript:
 	iffalse .Refused
 	checkcoins 7777
 	ifequal HAVE_LESS, .NotEnoughCoins
-
 	readvar VAR_PARTYCOUNT
 	ifequal PARTY_LENGTH, .PartyFull
-
 	special DisplayCoinCaseBalance
 	special GiveOddEgg
 	farwritetext OtisGaveARareEggText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
-
 	takecoins 7777
 	waitsfx
 	playsound SFX_TRANSACTION
 	special DisplayCoinCaseBalance
-
 	farwritetext OtisThanksText
-	waitbutton
-	closetext
-	end
+	waitendtext
 
 .Refused:
 	farwritetext RefusedOtisText
-	waitbutton
-	closetext
-	end
+	waitendtext
 
 .NotEnoughCoins:
     farwritetext OtisNotEnoughCoinsText
-	waitbutton
-	closetext
-	end
+	waitendtext
 
 .PartyFull:
 	farwritetext OtisPartyFullText
-	waitbutton
-	closetext
-	end
+	waitendtext
 
 MysteryGiftCarrieScript:
 	callasm MysteryGiftNPC

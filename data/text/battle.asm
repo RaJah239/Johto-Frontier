@@ -482,7 +482,7 @@ BattleText_NoForfeitingMatchText:
 BattleText_MonCantBeRecalled:
 	text_ram wBattleMonNickname
 	text_start
-	line "can't be recalled!"
+	line "is trapped!"
 	prompt
 
 BattleText_TheresNoPPLeftForThisMove:
