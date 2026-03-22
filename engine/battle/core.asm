@@ -4904,7 +4904,17 @@ BattleMenu_Pack:
 ;	scf
 ;	ret
 ;ENDC
+	
 	call ClearSprites
+	ld a, [wLinkMode]
+	and a
+	jr z, .not_linked
+
+	ld hl, BattleText_NoForfeitingMatchText
+	call StdBattleTextbox
+	jmp BattleMenu
+
+.not_linked
 	farcall ForfeitQuestionFunction
 	jmp c, SetEnemyTurn
 	jmp BattleMenu

@@ -478,6 +478,11 @@ BattleText_MonIsAlreadyOut:
 	line "is already out."
 	prompt
 
+BattleText_NoForfeitingMatchText:
+	text "You cannot forfeit"
+	line "a linked battle."
+	prompt
+
 BattleText_MonCantBeRecalled:
 	text_ram wBattleMonNickname
 	text_start
