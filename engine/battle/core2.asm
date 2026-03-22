@@ -484,8 +484,7 @@ FieldWeather:
 GetTimeOfDayImage:
 	; wipes out text before TimeOfDayImage
 	; mixes with text for split second
-	ld hl, BattleText_Null
-	call StdBattleTextbox
+	farcall EmptyBattleTextbox
 
 	ld a, [wTimeOfDay]
 	cp MORN_F

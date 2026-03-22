@@ -468,10 +468,6 @@ BattleText_UsersStringBuffer1Activated:
 	cont "activated!"
 	prompt
 
-BattleText_Null:
-	text " "
-	done
-
 BattleText_MonIsAlreadyOut:
 	text_ram wBattleMonNickname
 	text_start
