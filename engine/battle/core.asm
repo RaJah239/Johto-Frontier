@@ -3443,6 +3443,10 @@ TryToRunAwayFromBattle:
 	dec a
 	jr nz, .trainer_battle_info
 
+	; can't run from Shiny Pokemon
+	call BattleCheckEnemyShininess
+	jr c, .cant_escape
+
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
 	jr nz, .cant_escape
