@@ -548,7 +548,7 @@ GetTimeOfDayImage:
 	db $80, $1c ; y/x - top right
 	db $80, $14 ; y/x - top left
 
-TypeChart:
+TypeChart: ; TODOTEXT repurpose this
 	push hl
 	push de
 	push bc
@@ -2425,20 +2425,11 @@ WaterTypeChart:
 .DefenderStringDoubleDamage:
 	db "2× Grass/Electric@"
 
-SeeBattleInfoText:
-	text "See Battle Info?"
-	done
-
 ForfeitMatchText:
 	text "Forfeit Battle?"
 	done
 
-BattleInfoOrForfeit:
-	ld hl, SeeBattleInfoText
-	call PrintText
-	call YesNoBox
-	jr nc, .see_info
-
+ForfeitQuestionFunction:
 	ld hl, ForfeitMatchText
 	call PrintText
 	call NoYesBox
@@ -2466,9 +2457,6 @@ BattleInfoOrForfeit:
 .return_to_battle
 	xor a
 	ret
-
-.see_info
-	; fallthrough
 
 TrainerBattleInfo:
 	push hl

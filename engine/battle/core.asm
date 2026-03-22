@@ -3453,18 +3453,7 @@ TryToRunAwayFromBattle:
 	jr .print_inescapable_text
 
 .trainer_battle_info
-	ld a, [wLinkMode]
-	and a
-	jr z, .no_link
-	
-	; only have this during link battles
 	farjp TrainerBattleInfo
-
-.no_link
-	; only have this option in non-link battles
-	farcall BattleInfoOrForfeit
-	jmp c, SetEnemyTurn
-	ret
 
 .print_inescapable_text
 	call StdBattleTextbox
@@ -4851,15 +4840,15 @@ LoadBattleMenu2:
 BattleMenu_Pack:
 	ld a, [wLinkMode]
 	and a
-	jr nz, .PokemonTypeChart
+	jr nz, .ForfeitQuestionFunction
 
 	ld a, [wInBattleTowerBattle]
 	and a
-	jr nz, .PokemonTypeChart
+	jr nz, .ForfeitQuestionFunction
 
 	ld a, [wBattleMode]
 	bit WILD_BATTLE, a
-	jr nz, .PokemonTypeChart
+	jr nz, .ForfeitQuestionFunction
 
 	call LoadStandardMenuHeader
 
@@ -4904,19 +4893,20 @@ BattleMenu_Pack:
 	farcall GetTimeOfDayImage
 	jmp BattleMenu
 
-.PokemonTypeChart:
+.ForfeitQuestionFunction:
 ; instant win
-IF DEF(_DEBUG)
+;IF DEF(_DEBUG)
+;	call ClearSprites
+;	call FaintEnemyPokemon
+;	call WinTrainerBattle
+;	call WaitSFX
+;	call LoadTilemapToTempTilemap
+;	scf
+;	ret
+;ENDC
 	call ClearSprites
-	call FaintEnemyPokemon
-	call WinTrainerBattle
-	call WaitSFX
-	call LoadTilemapToTempTilemap
-	scf
-	ret
-ENDC
-	call ClearSprites
-	farcall TypeChart
+	farcall ForfeitQuestionFunction
+	jmp c, SetEnemyTurn
 	jmp BattleMenu
 
 .UseItem:
