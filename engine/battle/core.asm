@@ -3462,7 +3462,7 @@ TryToRunAwayFromBattle:
 
 .no_link
 	; only have this option in non-link battles
-	farcall BattleChoiceMenu
+	farcall BattleInfoOrForfeit
 	jmp c, SetEnemyTurn
 	ret
 
