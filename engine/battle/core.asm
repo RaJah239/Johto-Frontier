@@ -3454,16 +3454,13 @@ TryToRunAwayFromBattle:
 
 .cant_escape
 	ld hl, BattleText_CantEscape
-	jr .print_inescapable_text
-
-.trainer_battle_info
-	farjp TrainerBattleInfo
-
-.print_inescapable_text
 	call StdBattleTextbox
 	call LoadTilemapToTempTilemap
 	and a
 	ret
+
+.trainer_battle_info
+	farjp TrainerBattleInfo
 
 .can_escape
 	ld a, [wLinkMode]
