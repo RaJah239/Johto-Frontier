@@ -24,13 +24,11 @@ Load2DMenuData::
 
 StaticMenuJoypad::
 	callfar _StaticMenuJoypad
-	call GetMenuJoypad
-	ret
+	jr GetMenuJoypad
 
 ScrollingMenuJoypad::
 	callfar _ScrollingMenuJoypad
-	call GetMenuJoypad
-	ret
+	; fallthrough
 
 GetMenuJoypad::
 	push bc
@@ -64,8 +62,7 @@ HideCursor::
 	ret
 
 PushWindow::
-	callfar _PushWindow
-	ret
+	farjp _PushWindow
 
 ExitMenu::
 	push af
@@ -74,8 +71,7 @@ ExitMenu::
 	ret
 
 InitVerticalMenuCursor::
-	callfar _InitVerticalMenuCursor
-	ret
+	farjp _InitVerticalMenuCursor
 
 CloseWindow::
 	push af
@@ -89,32 +85,27 @@ RestoreTileBackup::
 	call MenuBoxCoord2Tile
 	call .copy
 	call MenuBoxCoord2Attr
-	call .copy
-	ret
+	; fallthrough
 
 .copy
 	call GetMenuBoxDims
 	inc b
 	inc c
-
 .row
 	push bc
 	push hl
-
 .col
 	ld a, [de]
 	ld [hli], a
 	dec de
 	dec c
 	jr nz, .col
-
 	pop hl
 	ld bc, SCREEN_WIDTH
 	add hl, bc
 	pop bc
 	dec b
 	jr nz, .row
-
 	ret
 
 PopWindow::
@@ -173,7 +164,9 @@ PlaceVerticalMenuItems::
 	inc hl
 	ld d, [hl]
 	call GetMenuTextStartCoord
-	call Coord2Tile ; hl now contains the tilemap address where we will start printing text.
+
+	; hl now contains the tilemap address where we will start printing text
+	call Coord2Tile
 	inc de
 	ld a, [de] ; Number of items
 	inc de
@@ -191,7 +184,6 @@ PlaceVerticalMenuItems::
 	ld a, [wMenuDataFlags]
 	bit 4, a
 	ret z
-
 	call MenuBoxCoord2Tile
 	ld a, [de]
 	ld c, a
@@ -224,10 +216,8 @@ GetMenuTextStartCoord::
 ; bit 7: if set, leave extra room on the left
 	ld a, [wMenuDataFlags]
 	bit 7, a
-	jr z, .bit_7_clear
+	ret z
 	inc c
-
-.bit_7_clear
 	ret
 
 ClearMenuBoxInterior::
@@ -237,16 +227,14 @@ ClearMenuBoxInterior::
 	call GetMenuBoxDims
 	dec b
 	dec c
-	call ClearBox
-	ret
+	jmp ClearBox
 
 ClearWholeMenuBox::
 	call MenuBoxCoord2Tile
 	call GetMenuBoxDims
 	inc c
 	inc b
-	call ClearBox
-	ret
+	jmp ClearBox
 
 MenuBoxCoord2Tile::
 	ld a, [wMenuBorderLeftCoord]
@@ -282,7 +270,7 @@ MenuBoxCoord2Attr::
 	ld a, [wMenuBorderTopCoord]
 	ld b, a
 
-; Return the address of wAttrmap(c, b) in hl.
+	; Return the address of wAttrmap(c, b) in hl.
 	xor a
 	ld h, a
 	ld l, b
@@ -304,8 +292,7 @@ MenuBoxCoord2Attr::
 
 LoadMenuHeader::
 	call CopyMenuHeader
-	call PushWindow
-	ret
+	jmp PushWindow
 
 CopyMenuHeader::
 	ld de, wMenuHeader
@@ -327,8 +314,7 @@ MenuTextbox::
 
 LoadMenuTextbox::
 	ld hl, .MenuHeader
-	call LoadMenuHeader
-	ret
+	jr LoadMenuHeader
 
 .MenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -338,13 +324,11 @@ LoadMenuTextbox::
 
 MenuTextboxBackup::
 	call MenuTextbox
-	call CloseWindow
-	ret
+	jmp CloseWindow
 
 LoadStandardMenuHeader::
 	ld hl, .MenuHeader
-	call LoadMenuHeader
-	ret
+	jr LoadMenuHeader
 
 .MenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -353,8 +337,7 @@ LoadStandardMenuHeader::
 	db 1 ; default option
 
 Call_ExitMenu::
-	call ExitMenu
-	ret
+	jmp ExitMenu
 
 VerticalMenu::
 	xor a
@@ -440,6 +423,7 @@ _YesNoBox::
 	add 4
 	ld [wMenuBorderBottomCoord], a
 	call PushWindow
+	; fallthrough
 
 InterpretTwoOptionMenu::
 	call VerticalMenu
@@ -475,8 +459,7 @@ YesNoMenuHeader::
 
 OffsetMenuHeader::
 	call _OffsetMenuHeader
-	call PushWindow
-	ret
+	jmp PushWindow
 
 _OffsetMenuHeader::
 	push de
@@ -508,8 +491,7 @@ DoNthMenu::
 	call InitMenuCursorAndButtonPermissions
 	call GetStaticMenuJoypad
 	call GetMenuJoypad
-	call MenuClickSound
-	ret
+	jmp MenuClickSound
 
 SetUpMenu::
 	call DrawVariableLengthMenuBox
@@ -523,8 +505,7 @@ DrawVariableLengthMenuBox::
 	call CopyMenuData
 	call GetMenuIndexSet
 	call AutomaticGetMenuBottomCoord
-	call MenuBox
-	ret
+	jmp MenuBox
 
 MenuWriteText::
 	xor a
@@ -619,11 +600,9 @@ InitMenuCursorAndButtonPermissions::
 .disallow_select
 	ld a, [wMenuDataFlags]
 	bit 2, a
-	jr z, .disallow_left_right
+	ret z
 	set D_LEFT_F, [hl]
 	set D_RIGHT_F, [hl]
-
-.disallow_left_right
 	ret
 
 GetScrollingMenuJoypad::
@@ -636,6 +615,7 @@ GetStaticMenuJoypad::
 	xor a
 	ld [wMenuJoypad], a
 	call StaticMenuJoypad
+	; fallthrough
 
 ContinueGettingMenuJoypad:
 	bit A_BUTTON_F, a
@@ -665,7 +645,6 @@ ContinueGettingMenuJoypad:
 .a_button
 	ld a, A_BUTTON
 	ld [wMenuJoypad], a
-
 .done
 	call GetMenuIndexSet
 	ld a, [wMenuCursorY]
@@ -698,8 +677,7 @@ PlaceMenuStrings::
 	ld d, h
 	ld e, l
 	pop hl
-	call PlaceString
-	ret
+	jmp PlaceString
 
 PlaceNthMenuStrings::
 	push de
@@ -711,8 +689,7 @@ PlaceNthMenuStrings::
 	ld d, [hl]
 	ld e, a
 	pop hl
-	call PlaceString
-	ret
+	jmp PlaceString
 
 MenuJumptable::
 	ld a, [wMenuSelection]
@@ -769,8 +746,7 @@ ClearWindowData::
 	assert wMenuMetadataEnd - wMenuMetadata == wMenuDataEnd - wMenuData
 	assert wMenuMetadataEnd - wMenuMetadata == wMoreMenuDataEnd - wMoreMenuData
 	xor a
-	call ByteFill
-	ret
+	jmp ByteFill
 
 MenuClickSound::
 	push af
@@ -794,8 +770,7 @@ PlayClickSFX::
 MenuTextboxWaitButton::
 	call MenuTextbox
 	call WaitButton
-	call ExitMenu
-	ret
+	jmp ExitMenu
 
 Place2DMenuItemName::
 	ldh [hTempBank], a
@@ -807,7 +782,6 @@ Place2DMenuItemName::
 	call PlaceString
 	pop af
 	rst Bankswitch
-
 	ret
 
 _2DMenu::
