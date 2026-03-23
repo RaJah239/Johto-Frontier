@@ -8,12 +8,6 @@ BattleStart_TrainerHuds:
 	ret z
 	jr ShowOTTrainerMonsRemaining
 
-EnemySwitch_TrainerHud:
-	ld a, $e4
-	ldh [rOBP0], a
-	call LoadBallIconGFX
-	jr ShowOTTrainerMonsRemaining
-
 ShowPlayerMonsRemaining:
 	call DrawPlayerPartyIconHUDBorder
 	ld hl, wPartyMon1HP
@@ -28,6 +22,12 @@ ShowPlayerMonsRemaining:
 	ld [wPlaceBallsDirection], a
 	ld hl, wShadowOAMSprite00
 	jmp LoadTrainerHudOAM
+
+EnemySwitch_TrainerHud:
+	ld a, $e4
+	ldh [rOBP0], a
+	call LoadBallIconGFX
+	; fallthrough
 
 ShowOTTrainerMonsRemaining:
 	call DrawEnemyHUDBorder
@@ -254,8 +254,7 @@ LoadBallIconGFX:
 	ld de, .gfx
 	ld hl, vTiles0 tile $31
 	lb bc, BANK(LoadBallIconGFX), 4
-	call Get2bppViaHDMA
-	ret
+	jmp Get2bppViaHDMA
 
 .gfx
 INCBIN "gfx/battle/balls.2bpp"
