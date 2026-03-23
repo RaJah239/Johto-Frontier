@@ -35,13 +35,17 @@ ShowOTTrainerMonsRemaining:
 	ld de, wOTPartyCount
 	call StageBallTilesData
 
+	ld hl, .tiles
+	ld de, wTrainerHUDTiles
+	ld bc, .tiles_end - .tiles
+	call CopyBytes
+	hlcoord 1, 2
+	ld de, 1 ; start on left
+	call PlaceHUDBorderTiles
+
 	; Clear item icon if unused on previous mon
 	hlcoord 1, 1
 	ld [hl], " "  ; space tile (blank)
-
-	; Clear caught ball icon if next mon wasn't caught yet
-	hlcoord 1, 2
-	ld [hl], $6d  ; black bar tile
 
 	; ldpixel wPlaceBallsX, 9, 4
 	ld hl, wPlaceBallsX
@@ -52,6 +56,13 @@ ShowOTTrainerMonsRemaining:
 	ld [wPlaceBallsDirection], a
 	ld hl, wShadowOAMSprite00 + PARTY_LENGTH * SPRITEOAMSTRUCT_LENGTH
 	jmp LoadTrainerHudOAM
+
+.tiles
+	db $6d ; left side
+	db $74 ; bottom left
+	db $78 ; bottom right
+	db $76 ; bottom side
+.tiles_end
 
 StageBallTilesData:
 	ld a, [de]
@@ -168,10 +179,10 @@ DrawEnemyHUDBorder:
 	ret
 
 .tiles
-	db $6d ; left side
-	db $74 ; bottom left
-	db $78 ; bottom right
-	db $76 ; bottom side
+	db $7f ; left side
+	db $7f ; bottom left
+	db $7f ; bottom right
+	db $7f ; bottom side
 .tiles_end
 
 PlaceHUDBorderTiles:
