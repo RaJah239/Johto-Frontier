@@ -1079,20 +1079,6 @@ ObjectEventText::
 	text_far _ObjectEventText
 	text_end
 
-BGEvent:: ; unreferenced
-	jumptext BGEventText
-
-BGEventText::
-	text_far _BGEventText
-	text_end
-
-CoordinatesEvent:: ; unreferenced
-	jumptext CoordinatesEventText
-
-CoordinatesEventText::
-	text_far _CoordinatesEventText
-	text_end
-
 CheckObjectMask::
 	ldh a, [hMapObjectIndex]
 	ld e, a
@@ -2121,9 +2107,6 @@ GetMapEnvironment::
 	ld a, c
 	jmp PopBCDEHL
 
-Map_DummyFunction:: ; unreferenced
-	ret
-
 GetAnyMapEnvironment::
 	push hl
 	push de
@@ -2245,11 +2228,4 @@ LoadMapTileset::
 
 	pop bc
 	pop hl
-	ret
-
-DummyEndPredef::
-; Unused function at the end of PredefPointers.
-rept 16
-	nop
-endr
 	ret
