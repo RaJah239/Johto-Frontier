@@ -126,11 +126,6 @@ CheckPhoneCall::
 	and a
 	jr nz, .no_call
 
-	; No calls if Trivial Calls are set to "Off"
-	ld a, [wOptions2]
-	and 1 << CASUAL_CALLS
-	jr nz, .no_call
-
 	call GetAvailableCallers
 	call ChooseRandomCaller
 	jr nc, .no_call

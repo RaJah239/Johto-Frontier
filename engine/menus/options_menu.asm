@@ -491,42 +491,7 @@ Options_MinimalDialogue:
 .Minimum:  db "Minimal@"
 
 Options_CasualCalls:
- 	ld hl, wOptions2
- 	ldh a, [hJoyPressed]
- 	bit D_LEFT_F, a
- 	jr nz, .LeftPressed
- 	bit D_RIGHT_F, a
- 	jr z, .NonePressed
- 	bit CASUAL_CALLS, [hl]
- 	jr nz, .ToggleOff
- 	jr .ToggleOn
- 
- .LeftPressed:
- 	bit CASUAL_CALLS, [hl]
- 	jr z, .ToggleOn
- 	jr .ToggleOff
- 
- .NonePressed:
- 	bit CASUAL_CALLS, [hl]
- 	jr nz, .ToggleOn
- 
- .ToggleOff:
- 	res CASUAL_CALLS, [hl]
- 	ld de, .On
- 	jr .Display
- 
- .ToggleOn:
- 	set CASUAL_CALLS, [hl]
- 	ld de, .Off
- 
- .Display:
- 	hlcoord 11, 13
- 	call PlaceString
- 	and a
- 	ret
- 
-.On:  db "On @"
-.Off: db "Off@"
+	ret
 
 Options_QuickNurse:
  	ld hl, wOptions2

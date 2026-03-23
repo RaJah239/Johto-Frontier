@@ -81,14 +81,13 @@ DEF GBPRINTER_DARKEST  EQU $7f
 
 ; wOptions2::
 	const_def
-	const CASUAL_CALLS ; 0
-	const RUNNING_SHOES ; 1
-	const MINIMAL_DIALOGUE ; 2
-	const AUTO_BICYCLE ; 3
-	const FAST_BOOT ; 4
-	const HARD_MODE ; 5
-	const NURSE_HEAL ; 6
-	const EXP_SHARE ; 7
+	const RUNNING_SHOES ; 0
+	const MINIMAL_DIALOGUE ; 1
+	const AUTO_BICYCLE ; 2
+	const FAST_BOOT ; 3
+	const HARD_MODE ; 4
+	const NURSE_HEAL ; 5
+	const EXP_SHARE ; 6
 
 ; wOptions3::
 	const_def

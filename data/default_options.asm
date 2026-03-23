@@ -7,8 +7,8 @@ DefaultOptions:
 	db FRAME_1
 ; wTextboxFlags: use text speed
 	db 1 << FAST_TEXT_DELAY_F
-; wOptions2: trival calls on
-	db 0 << CASUAL_CALLS
+; wOptions2
+	db 0 << RUNNING_SHOES
 	db 1 << MINIMAL_DIALOGUE
 
 	db $00
