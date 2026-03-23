@@ -88,6 +88,7 @@ DEF GBPRINTER_DARKEST  EQU $7f
 	const HARD_MODE ; 4
 	const NURSE_HEAL ; 5
 	const EXP_SHARE ; 6
+	const SCALED_EXP ; 7
 
 ; wOptions3::
 	const_def

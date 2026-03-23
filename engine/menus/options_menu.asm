@@ -82,7 +82,7 @@ StringOptions1:
 	db "        :<LF>"
 	db "Auto Bicycle<LF>"
 	db "        :<LF>"
-	db "Casual Calls<LF>"
+	db "Experience Gain<LF>"
 	db "        :<LF>"
 	db "Frame<LF>"
 	db "        :Type<LF>"
@@ -120,7 +120,7 @@ GetOptionPointer:
 	dw Options_Sound
 	dw Options_RunningShoes
 	dw Options_AutoBicycle
-	dw Options_CasualCalls
+	dw Options_Scaled_Exp
 	dw Options_Frame
 	dw Options_NextPrevious
 
@@ -490,8 +490,43 @@ Options_MinimalDialogue:
 .Normal:   db "Normal @"
 .Minimum:  db "Minimal@"
 
-Options_CasualCalls:
-	ret
+Options_Scaled_Exp:
+ 	ld hl, wOptions2
+ 	ldh a, [hJoyPressed]
+ 	bit D_LEFT_F, a
+ 	jr nz, .LeftPressed
+ 	bit D_RIGHT_F, a
+ 	jr z, .NonePressed
+ 	bit SCALED_EXP, [hl]
+ 	jr nz, .ToggleOff
+ 	jr .ToggleOn
+ 
+ .LeftPressed:
+ 	bit SCALED_EXP, [hl]
+ 	jr z, .ToggleOn
+ 	jr .ToggleOff
+ 
+ .NonePressed:
+ 	bit SCALED_EXP, [hl]
+ 	jr nz, .ToggleOn
+ 
+ .ToggleOff:
+ 	res SCALED_EXP, [hl]
+ 	ld de, .Normal
+ 	jr .Display
+ 
+ .ToggleOn:
+ 	set SCALED_EXP, [hl]
+ 	ld de, .Scaled
+ 
+ .Display:
+ 	hlcoord 11, 13
+ 	call PlaceString
+ 	and a
+ 	ret
+ 
+.Scaled:  db "Scaled@"
+.Normal:  db "Normal@"
 
 Options_QuickNurse:
  	ld hl, wOptions2

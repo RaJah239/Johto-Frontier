@@ -7106,6 +7106,11 @@ GiveExperiencePoints:
 	; Now apply level scaling to the result
 	; Scaling factor = ((2 * EnemyLevel + 10) ÷ (PlayerLevel + EnemyLevel + 10))
 
+	; check if exp scaling is turned on
+	ld a, [wOptions2]
+	bit SCALED_EXP, a
+	jr z, .skip_exp_scaling
+
 	; Get player mon's level
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Species
@@ -7148,6 +7153,7 @@ GiveExperiencePoints:
 	ld b, 4
 	call Divide
 
+.skip_exp_scaling:
 ; Boost Experience for traded Pokemon
 	pop bc
 	ld hl, MON_ID

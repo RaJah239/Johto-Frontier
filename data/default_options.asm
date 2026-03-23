@@ -8,9 +8,10 @@ DefaultOptions:
 ; wTextboxFlags: use text speed
 	db 1 << FAST_TEXT_DELAY_F
 ; wOptions2
-	db 0 << RUNNING_SHOES
 	db 1 << MINIMAL_DIALOGUE
 
+	; delete one of these of each added above
+	db $00
 	db $00
 	db $00
 .End
