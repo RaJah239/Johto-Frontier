@@ -1,13 +1,14 @@
 ClearBGPalettes::
 	call ClearPalettes
+	; fallthrough
+
 WaitBGMap::
 ; Tell VBlank to update BG Map
 	ld a, 1 ; BG Map 0 tiles
 	ldh [hBGMapMode], a
 ; Wait for it to do its magic
 	ld c, 4
-	call DelayFrames
-	ret
+	jmp DelayFrames
 
 WaitBGMap2::
 	ldh a, [hCGB]
@@ -23,8 +24,7 @@ WaitBGMap2::
 	ld a, 1
 	ldh [hBGMapMode], a
 	ld c, 4
-	call DelayFrames
-	ret
+	jmp DelayFrames
 
 IsCGB::
 	ldh a, [hCGB]
@@ -58,13 +58,13 @@ ApplyTilemap::
 	ld a, 1
 	ldh [hBGMapMode], a
 	ld c, 4
-	call DelayFrames
-	ret
+	jmp DelayFrames
 
 CGBOnly_CopyTilemapAtOnce::
 	ldh a, [hCGB]
 	and a
 	jr z, WaitBGMap
+	; fallthrough
 
 CopyTilemapAtOnce::
 	ldh a, [hBGMapMode]
@@ -205,6 +205,8 @@ ClearPalettes::
 
 GetMemSGBLayout::
 	ld b, SCGB_DEFAULT
+	; fallthrough
+
 GetSGBLayout::
 ; load sgb packets unless dmg
 
