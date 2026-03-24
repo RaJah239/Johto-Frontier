@@ -7,6 +7,7 @@ MoveEffectPriorities:
 	db EFFECT_RESET_STATS,  2
 	db EFFECT_SAFEGUARD,    2
 	db EFFECT_MIST,         2
+	db EFFECT_SLACK_OFF,    2
 	db EFFECT_FORCE_SWITCH, 0
 	db EFFECT_COUNTER,      0
 	db EFFECT_MIRROR_COAT,  0

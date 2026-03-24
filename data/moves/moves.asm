@@ -186,7 +186,7 @@ Moves:
 	move DRAGON_DANCE, EFFECT_DRAGON_DANCE,        0, DRAGON,        STATUS,   100, 32,   0
 	move TRICK,        EFFECT_TRICK,               0, PSYCHIC_TYPE,  STATUS,   100, 16,   0
 	move FLAME_CHARGE, EFFECT_SPEED_UP_HIT,       60, FIRE,          PHYSICAL, 100, 32, 100
-	move SLACK_OFF,    EFFECT_HEAL,                0, NORMAL,        STATUS,   100, 24,   0
+	move SLACK_OFF,    EFFECT_SLACK_OFF,           0, NORMAL,        STATUS,   100, 24,   0
 	move CURSE,        EFFECT_CURSE,               0, CURSE_TYPE,    STATUS,   100, 32,   0
 	move FLAIL,        EFFECT_REVERSAL,            1, NORMAL,        PHYSICAL, 100, 24,   0
 	move HURRICANE,    EFFECT_HURRICANE,         110, FLYING,        SPECIAL,   70, 16,  30

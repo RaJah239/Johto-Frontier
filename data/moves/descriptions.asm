@@ -556,6 +556,9 @@ ScreechDescription:
 	line "the foe's Defense.@"
 
 SlackOffdescription:
+	db   "Priority: Recovers"
+	line "1/2 Max HP.@"
+
 RoostDescription:
 MilkDrinkDescription:
 RecoverDescription:

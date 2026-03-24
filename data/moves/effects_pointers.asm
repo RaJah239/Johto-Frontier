@@ -161,4 +161,5 @@ MoveEffectsPointers:
 	dw ThunderFang
 	dw FireFang
 	dw Growth
+	dw SlackOff
 	assert_table_length NUM_MOVE_EFFECTS

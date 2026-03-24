@@ -847,6 +847,7 @@ ConfuseHit:
 	confusetarget
 	endmove
 
+SlackOff:
 Heal:
 	usedmovetext
 	doturn
