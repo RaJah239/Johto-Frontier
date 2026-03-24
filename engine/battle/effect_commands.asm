@@ -6963,7 +6963,7 @@ BattleCommand_CheckPowder:
 ; if the opponent is Grass-type
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
-	ld hl, PowderMoves
+	ld hl, PowderMoves_EffectCommands ; ensure `PowderMoves_AIStatus` matches
 	call IsInByteArray
 	ret nc
 
@@ -6986,6 +6986,12 @@ BattleCommand_CheckPowder:
 	ld a, 1
 	ld [wAttackMissed], a
 	ret
+
+PowderMoves_EffectCommands:
+	db POISONPOWDER
+	db SLEEP_POWDER
+	db STUN_SPORE
+	db -1 ; end
 
 AssaultVestSpDefBoost:
     push bc

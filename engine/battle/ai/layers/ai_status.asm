@@ -21,7 +21,7 @@ AI_Status:
 	push bc
 	push de
 	push hl
-	ld hl, PowderMoves
+	ld hl, PowderMoves_AIStatus ; ensure `PowderMoves_EffectCommands` matches
 	call IsInByteArray
 	pop hl
 	pop de
@@ -92,3 +92,9 @@ AI_Status:
 .immune
 	call AIDiscourageMove
 	jmp .checkmove
+
+PowderMoves_AIStatus::
+	db POISONPOWDER
+	db SLEEP_POWDER
+	db STUN_SPORE
+	db -1 ; end
