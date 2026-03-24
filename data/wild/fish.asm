@@ -13,11 +13,11 @@ FishGroups:
 	fishgroup 75 percent + 1, .Ocean_Old,            .Ocean_Good,            .Ocean_Super
 	fishgroup 75 percent + 1, .Lake_Old,             .Lake_Good,             .Lake_Super
 	fishgroup 75 percent + 1, .Pond_Old,             .Pond_Good,             .Pond_Super
-	fishgroup 75 percent + 1, .FEEBAS_Old,          .FEEBAS_Good,          .FEEBAS_Super
+	fishgroup 75 percent + 1, .FEEBAS_Old,           .FEEBAS_Good,           .FEEBAS_Super
 	fishgroup 75 percent + 1, .FEEBAS_Swarm_Old,     .Feebas_Swarm_Good,     .Feebas_Swarm_Super
 	fishgroup 75 percent + 1, .Remoraid_Swarm_Old,   .Remoraid_Swarm_Good,   .Remoraid_Swarm_Super
 	fishgroup 75 percent + 1, .Gyarados_Old,         .Gyarados_Good,         .Gyarados_Super
-	fishgroup 75 percent + 1, .FEEBAS_2_Old,        .FEEBAS_2_Good,        .FEEBAS_2_Super
+	fishgroup 75 percent + 1, .FEEBAS_2_Old,         .FEEBAS_2_Good,         .FEEBAS_2_Super
 	fishgroup 75 percent + 1, .WhirlIslands_Old,     .WhirlIslands_Good,     .WhirlIslands_Super
 	fishgroup 75 percent + 1, .FEEBAS_Old,           .Feebas_Good,           .Feebas_Super
 	fishgroup 75 percent + 1, .Remoraid_Old,         .Remoraid_Good,         .Remoraid_Super
@@ -248,34 +248,19 @@ FishGroups_Names::
  	dw Group13_Name
  	assert_table_length NUM_FISHGROUPS ; (13, NONE is not included in the count)
  
- Group1_Name:
- 	db " SHORE@"
- Group2_Name:
- 	db " OCEAN@"
- Group3_Name:
- 	db " LAKE@"
- Group4_Name:
- 	db " POND@"
- Group5_Name:
- 	db " FEEBAS@"
- Group6_Name:
- 	db " SWARM 1@"
- Group7_Name:
- 	db " SWARM 2@"
- Group8_Name:
- 	db " GYARADOS@"
- Group9_Name:
- 	db " ROUTE 45@"
- 	; db " FEEBAS 2@"
- Group10_Name:
- 	db " WHIRL@"
- Group11_Name:
- 	db " FEEBAS@"
- Group12_Name:
- 	db " REMORAID@"
- Group13_Name:
- 	db " ROUTE 12@"
- 	; db " FEEBAS 2@"
+ Group1_Name:  db " Shore@"
+ Group2_Name:  db " Ocean@"
+ Group3_Name:  db " Lake@"
+ Group4_Name:  db " Pond@"
+ Group5_Name:  db " Feebas@"
+ Group6_Name:  db " Swarm 1@"
+ Group7_Name:  db " Swarm 2@"
+ Group8_Name:  db " Gyarados@"
+ Group9_Name:  db " Route 17@"
+ Group10_Name: db " Whirl@"
+ Group11_Name: db " Feebas@"
+ Group12_Name: db " Remoraid@"
+ Group13_Name: db " Route 15@"
  
  GetFishGroupName:
  ; given fishing group num in 'a'
