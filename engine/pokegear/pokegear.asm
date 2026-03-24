@@ -1507,7 +1507,7 @@ ExitPokegearRadio_HandleMusic:
 	cp RESTART_MAP_MUSIC
 	jr z, .restart_map_music
 	cp ENTER_MAP_MUSIC
-	call z, PlayMapMusicBike
+	call z, TryRestartMapMusic
 	xor a
 	ld [wPokegearRadioMusicPlaying], a
 	ret
