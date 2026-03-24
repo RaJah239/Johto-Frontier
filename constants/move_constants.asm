@@ -178,7 +178,7 @@
 	const DRAGON_DANCE ; aa
 	const TRICK        ; ab
 	const FLAME_CHARGE ; ac
-	const SNORE        ; ad
+	const SLACK_OFF    ; ad
 	const CURSE        ; ae
 	const FLAIL        ; af
 	const HURRICANE    ; b0

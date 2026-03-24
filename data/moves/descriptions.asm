@@ -173,7 +173,7 @@ MoveDescriptions::
 	dw DragonDanceDescription
 	dw TrickDescription
 	dw FlameChargeDescription
-	dw SnoreDescription
+	dw SlackOffdescription
 	dw CurseDescription
 	dw FlailDescription
 	dw HurricaneDescription
@@ -555,6 +555,7 @@ ScreechDescription:
 	db   "Sharply reduces"
 	line "the foe's Defense.@"
 
+SlackOffdescription:
 RoostDescription:
 MilkDrinkDescription:
 RecoverDescription:
@@ -722,10 +723,6 @@ TrickDescription:
 FlameChargeDescription:
 	db   "An attack that ups"
 	line "user's Speed.@"
-
-SnoreDescription:
-	db   "An attack useable"
-	line "only while asleep.@"
 
 CurseDescription:
 	db   "Works differently"

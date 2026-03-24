@@ -77,7 +77,6 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_COUNTER,          AI_Smart_Counter ; updated
 	dbw EFFECT_ENCORE,           AI_Smart_Encore ; updated
 	dbw EFFECT_PAIN_SPLIT,       AI_Smart_PainSplit ; good as is
-	dbw EFFECT_SNORE,            AI_Smart_Snore ; updated
 	dbw EFFECT_SLEEP_TALK,       AI_Smart_SleepTalk ; updated
 	dbw EFFECT_DESTINY_BOND,     AI_Smart_DestinyBond ; updated
 	dbw EFFECT_REVERSAL,         AI_Smart_Reversal ; good as is
@@ -2257,7 +2256,6 @@ AI_Smart_PainSplit:
 	inc [hl]
 	ret
 
-AI_Smart_Snore:
 AI_Smart_SleepTalk:
 ; Greatly encourage this move if enemy is fast asleep.
 ; Greatly discourage this move otherwise.

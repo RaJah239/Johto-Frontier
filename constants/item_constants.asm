@@ -244,7 +244,7 @@ DEF TM01 EQU const_value
 	add_tm HIDDEN_POWER ; c9
 	add_tm SUNNY_DAY    ; ca
 	add_tm BULK_UP      ; cb
-	add_tm SNORE        ; cc
+	add_tm SLACK_OFF    ; cc
 	add_tm BLIZZARD     ; cd
 	add_tm HYPER_BEAM   ; ce
 	add_tm ICY_WIND     ; cf

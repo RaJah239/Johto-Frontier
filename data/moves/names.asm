@@ -172,7 +172,7 @@ MoveNames::
 	li "Dragon Dance"
 	li "Trick"
 	li "Flame Charge"
-	li "Snore"
+	li "Slack Off"
 	li "Curse"
 	li "Flail"
 	li "Hurricane"

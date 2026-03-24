@@ -174,7 +174,7 @@ BattleAnimations::
 	dw BattleAnim_DragonDance
 	dw BattleAnim_Trick
 	dw BattleAnim_FlameCharge
-	dw BattleAnim_Snore
+	dw BattleAnim_SlackOff
 	dw BattleAnim_Curse
 	dw BattleAnim_Flail
 	dw BattleAnim_Hurricane

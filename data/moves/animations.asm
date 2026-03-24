@@ -1772,6 +1772,7 @@ BattleAnimSub_Sludge:
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
+BattleAnim_SlackOff:
 BattleAnim_Recover:
 	anim_2gfx BATTLE_ANIM_GFX_BUBBLE, BATTLE_ANIM_GFX_SHINE
 	anim_sound 0, 0, SFX_SHARPEN
@@ -3844,19 +3845,6 @@ BattleAnim_FlameCharge:
 	anim_incobj 9
 	anim_wait 8
 	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_RED
-	anim_ret
-
-BattleAnim_Snore:
-	anim_2gfx BATTLE_ANIM_GFX_STATUS, BATTLE_ANIM_GFX_NOISE
-	anim_obj BATTLE_ANIM_OBJ_ASLEEP, 64, 80, $0
-	anim_wait 32
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $2, $0
-	anim_sound 0, 0, SFX_SNORE
-	.loop
-	anim_call BattleAnimSub_Sound
-	anim_wait 16
-	anim_loop 2, .loop
-	anim_wait 8
 	anim_ret
 
 BattleAnim_Snarl:

@@ -81,7 +81,6 @@ MoveEffectsPointers:
 	dw Counter
 	dw Encore
 	dw PainSplit
-	dw Snore
 	dw Sketch
 	dw SleepTalk
 	dw DestinyBond

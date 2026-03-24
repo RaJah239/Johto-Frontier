@@ -177,7 +177,7 @@ BattlePlazaMartTMCoinTraderScript:
     sjump .ConcludeTransaction
 
 .TMSnore:
-    verbosegiveitem TM_SNORE
+    verbosegiveitem TM_SLACK_OFF
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
