@@ -1,7 +1,7 @@
 	db SUDOWOODO ; 185
 
 	;   hp  atk  def  spd  sat  sdf
-	db  70, 120,  80, 108,  35,  87 ; 500 BST
+	db  75, 115,  78, 112,  55,  65 ; 500 BST
 	evs  2,   3,   1,   2,   0,   2
 
 	db ROCK, FIGHTING ; type
