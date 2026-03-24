@@ -12,8 +12,7 @@ UpdateTime::
 	call GetClock
 	call FixDays
 	call FixTime
-	farcall GetTimeOfDay
-	ret
+	farjp GetTimeOfDay
 
 GetClock::
 ; store clock data in hRTCDayHi-hRTCSeconds
@@ -52,8 +51,7 @@ GetClock::
 	ldh [hRTCDayHi], a
 
 ; unlatch clock / disable clock r/w
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 FixDays::
 ; fix day count
@@ -178,25 +176,19 @@ InitDayOfWeek::
 	ld [wStringBuffer2 + 2], a
 	ldh a, [hSeconds]
 	ld [wStringBuffer2 + 3], a
-	jr InitTime ; useless
+	; fallthrough
 
 InitTime::
-	farcall _InitTime
-	ret
+	farjp _InitTime
 
 ClearClock::
-	call .ClearhRTC
-	call SetClock
-	ret
-
-.ClearhRTC:
 	xor a
 	ldh [hRTCSeconds], a
 	ldh [hRTCMinutes], a
 	ldh [hRTCHours], a
 	ldh [hRTCDayLo], a
 	ldh [hRTCDayHi], a
-	ret
+	; fallthrough
 
 SetClock::
 ; set clock data from hram
@@ -242,8 +234,7 @@ SetClock::
 	ld [de], a
 
 ; cleanup
-	call CloseSRAM ; unlatch clock, disable clock r/w
-	ret
+	jmp CloseSRAM ; unlatch clock, disable clock r/w
 
 RecordRTCStatus::
 ; append flags to sRTCStatusFlags
@@ -254,13 +245,11 @@ RecordRTCStatus::
 	pop af
 	or [hl]
 	ld [hl], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 CheckRTCStatus::
 ; check sRTCStatusFlags
 	ld a, BANK(sRTCStatusFlags)
 	call OpenSRAM
 	ld a, [sRTCStatusFlags]
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
