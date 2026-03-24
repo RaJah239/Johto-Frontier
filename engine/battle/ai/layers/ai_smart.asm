@@ -61,6 +61,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_RESET_STATS,      AI_Smart_ResetStats ; good as is
 	dbw EFFECT_FORCE_SWITCH,     AI_Smart_ForceSwitch ; updated
 	dbw EFFECT_HEAL,             AI_Smart_Heal ; updated
+	dbw EFFECT_SLACK_OFF,        AI_Smart_Heal ; updated
 	dbw EFFECT_TOXIC,            AI_Smart_Toxic ; updated
 	dbw EFFECT_LIGHT_SCREEN,     AI_Smart_LightScreen ; updated
 	dbw EFFECT_SUPER_FANG,       AI_Smart_SuperFang ; good as is
@@ -337,7 +338,7 @@ AI_Smart_Taunt:
 ; if player has a setup move, status move, or healing move - encourage
     ld b, EFFECT_TAUNT
 	call PlayerHasMoveEffect
-	jr c, .encourage
+	jmp c, .encourage
     ld b, EFFECT_BULK_UP
 	call PlayerHasMoveEffect
 	jr c, .encourage
@@ -375,6 +376,9 @@ AI_Smart_Taunt:
 	call PlayerHasMoveEffect
 	jr c, .encourage
     ld b, EFFECT_HEAL
+	call PlayerHasMoveEffect
+	jr c, .encourage
+    ld b, EFFECT_SLACK_OFF
 	call PlayerHasMoveEffect
 	jr c, .encourage
     ld b, EFFECT_LEECH_SEED

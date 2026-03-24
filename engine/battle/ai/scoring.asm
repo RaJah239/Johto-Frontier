@@ -653,7 +653,7 @@ ShouldAIBoost:
 ; if player moves first consider if they can 2HKO
 	call CanPlayer2HKO
 	jr c, .decide_not_to_boost
-	jr .boost
+	jmp .boost
 
 .decide_not_to_boost
 ; if player is asleep and we get more than one turn before they wake up,
@@ -712,6 +712,9 @@ ShouldAIBoost:
 	cp EFFECT_HEAL
 	jr z, .check_2HKO_at_max_HP
 	cp EFFECT_WEATHER_HEAL
+	jr z, .check_2HKO_at_max_HP
+	cp EFFECT_SLACK_OFF
+	jr z, .check_2HKO_at_max_HP
 
 	push hl
 	push de

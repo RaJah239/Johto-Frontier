@@ -333,6 +333,10 @@ AI_Basic:
 	call AIHasMoveEffect
 	jr c, .explode_or_heal
 
+	ld b, EFFECT_SLACK_OFF
+	call AIHasMoveEffect
+	jr c, .explode_or_heal
+
 ; don't encourage explosion as much
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
 	cp EFFECT_EXPLOSION

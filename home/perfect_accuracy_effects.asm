@@ -50,4 +50,5 @@ PerfectAccuracyEffects::
   db EFFECT_BARRIER
   db EFFECT_TRICK_ROOM
   db EFFECT_FURY_DRIVE
+  db EFFECT_SLACK_OFF
   db -1 ; end

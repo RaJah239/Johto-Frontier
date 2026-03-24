@@ -16,6 +16,7 @@ AI_Redundant:
 .Moves:
 	dbw EFFECT_DREAM_EATER,  .DreamEater
 	dbw EFFECT_HEAL,         .Heal
+	dbw EFFECT_SLACK_OFF,    .Heal
 	dbw EFFECT_LIGHT_SCREEN, .LightScreen
 	dbw EFFECT_MIST,         .Mist
 	dbw EFFECT_FOCUS_ENERGY, .FocusEnergy
