@@ -12,3 +12,14 @@ INCLUDE "data/pokemon/egg_move_pointers.asm"
 
 NoEggMoves:
 	db -1 ; end
+
+CyndaquilEggMoves:
+QuilavaEggMoves:
+TyphlosionEggMoves:
+	db EXTREMESPEED
+	db FIRE_SPIN
+	db FLARE_BLITZ
+	db PLAY_ROUGH
+	db PURSUIT
+	db THRASH
+	db -1 ; end

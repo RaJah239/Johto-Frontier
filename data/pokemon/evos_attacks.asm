@@ -18,8 +18,26 @@ INCLUDE "data/pokemon/evos_attacks_pointers.asm"
 EvosAttacks::
 
 CyndaquilEvosAttacks:
+	db EVOLVE_LEVEL, 16, QUILAVA
 QuilavaEvosAttacks:
+	db EVOLVE_LEVEL, 36, TYPHLOSION
 TyphlosionEvosAttacks:
+	db 0 ; no more evolutions
+	db 1, TACKLE
+	db 1, LEER
+	db 6, EMBER
+	db 6, MUD_SLAP
+	db 9, SMOKESCREEN
+	db 12, FURY_STRIKES
+	db 16, SPARK
+	db 20, QUICK_ATTACK
+	db 24, FLAME_CHARGE
+	db 27, ROLLOUT
+	db 31, FLAMETHROWER
+	db 31, EARTH_POWER
+	db 36, DOUBLE_EDGE
+	db 0 ; no more level-up moves
+
 TotodileEvosAttacks:
 CroconawEvosAttacks:
 FeraligatrEvosAttacks:
