@@ -47,12 +47,12 @@ PlayersHouseRadioScript:
 if DEF(_DEBUG)
 	opentext
 	; party
-	givepoke MAGIKARP, 50
+	givepoke MAGIKARP, 5
 	; 1st mon moves
-	loadmem wPartyMon1Moves+0, SEED_BOMB
-	loadmem wPartyMon1Moves+1, SPLASH
-	loadmem wPartyMon1Moves+2, LOVELY_KISS
-	loadmem wPartyMon1Moves+3, NO_MOVE
+;	loadmem wPartyMon1Moves+0, SEED_BOMB
+;	loadmem wPartyMon1Moves+1, SPLASH
+;	loadmem wPartyMon1Moves+2, LOVELY_KISS
+;	loadmem wPartyMon1Moves+3, NO_MOVE
 	closetext
 	; tms
 	giveitem TM_BRICK_BREAK, 50
@@ -97,10 +97,10 @@ if DEF(_DEBUG)
 	giveitem MILOTIC_CALL
 	giveitem SQUIRTBOTTLE
 	; useful items
+	giveitem RARE_CANDY, MAX_ITEM_STACK
 	giveitem MAX_REPEL, MAX_ITEM_STACK
 	giveitem ESCAPE_ROPE, MAX_ITEM_STACK
 	giveitem SACRED_ASH, MAX_ITEM_STACK
-	giveitem RARE_CANDY, MAX_ITEM_STACK
 	; vitamins
 	giveitem HYPER_EV_UP, MAX_ITEM_STACK
 ;	giveitem HP_UP, MAX_ITEM_STACK
