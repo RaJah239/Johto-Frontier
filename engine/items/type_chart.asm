@@ -35,7 +35,7 @@ _TypeChart:
 
 	ld hl, TypeChartOBGFX
 	ld de, vTiles0
-	lb bc, BANK(TypeChartOBGFX), 34
+	lb bc, BANK(TypeChartOBGFX), 32
 	call DecompressRequest2bpp
 
 	ld hl, TypeChartOAMData
@@ -155,7 +155,7 @@ ENDM
 	oamdata 138,   8, $1c, 3 ; Normal x1 Dragon
 	oamdata 152,   8, $1c, 3 ; Normal x1 Fairy
 	; left off-white
-	oamdata  32,  30, $20, 2 ; Poison x2 Normal
+	oamdata  32,  30, $1e, 3 ; Poison x1 Normal
 	oamdata  32,  44, $1e, 3 ; Rock x1 Normal
 	oamdata  32,  72, $1e, 3 ; Fire x1 Normal
 	oamdata  32,  86, $1e, 3 ; Grass x1 Normal
