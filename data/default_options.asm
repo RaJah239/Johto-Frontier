@@ -10,7 +10,7 @@ DefaultOptions:
 ; wOptions2
 	db 1 << MINIMAL_DIALOGUE
 
-	; delete one of these of each added above
+	; delete one of these for each added above
 	db $00
 	db $00
 	db $00
