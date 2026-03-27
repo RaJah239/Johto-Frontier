@@ -3378,15 +3378,6 @@ InfoBoxRightPress:
 	jr z, .jump_to_page_4
 	cp 3
 	jr z, .jump_to_page_5
-	call IncreasePage
-	call UpdatePageText
-	jmp StatsInfoBox
-
-.jump_to_page_5
-	call IncreasePage
-	call UpdatePageText
-	jmp FoeAbilityPageInfoBox
-
 .jump_to_page_1
 	call IncreasePage
 	call UpdatePageText
@@ -3412,6 +3403,11 @@ InfoBoxRightPress:
 	call IncreasePage
 	call UpdatePageText
 	jmp FieldInfoBox2
+
+.jump_to_page_5
+	call IncreasePage
+	call UpdatePageText
+	jmp FoeAbilityPageInfoBox
 
 ; ========================
 ; Page counter functions
