@@ -47,12 +47,12 @@ PlayersHouseRadioScript:
 if DEF(_DEBUG)
 	opentext
 	; party
-	givepoke MAGIKARP, 5
+	givepoke MAGIKARP, 50
 	; 1st mon moves
-;	loadmem wPartyMon1Moves+0, SEED_BOMB
-;	loadmem wPartyMon1Moves+1, SPLASH
-;	loadmem wPartyMon1Moves+2, LOVELY_KISS
-;	loadmem wPartyMon1Moves+3, NO_MOVE
+	loadmem wPartyMon1Moves+0, SEED_BOMB
+	loadmem wPartyMon1Moves+1, SPLASH
+	loadmem wPartyMon1Moves+2, LOVELY_KISS
+	loadmem wPartyMon1Moves+3, NO_MOVE
 	closetext
 	; tms
 	giveitem TM_BRICK_BREAK, 50
@@ -69,8 +69,6 @@ if DEF(_DEBUG)
 	setflag ENGINE_START_MENU_WARP
 	; pokedex
 	setflag ENGINE_POKEDEX
-	; credits skip
-	setflag ENGINE_CREDITS_SKIP
 	givemoney YOUR_MONEY, MAX_MONEY
 	; key items
 	giveitem NOMAD_SIGIL
