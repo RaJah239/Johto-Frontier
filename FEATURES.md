@@ -76,6 +76,7 @@
 - All status conditions boost catch rate of all Pokémon
 - Can Teleport to the last visited Pokémon Centre from anywhere
 - Press A to use Flash in dark caves
+- Press Start to skip Credits
 
 ## Battle Related
 - Type Chart changes: Ice resists Water and Electric. Poison is Super Effective vs Normal types
