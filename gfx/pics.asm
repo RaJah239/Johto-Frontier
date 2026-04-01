@@ -167,7 +167,6 @@ OctilleryFrontpic:   INCBIN "gfx/pokemon/octillery/front.animated.2bpp.lz"
 JynxFrontpic:        INCBIN "gfx/pokemon/jynx/front.animated.2bpp.lz"
 SylveonFrontpic:     INCBIN "gfx/pokemon/sylveon/front.animated.2bpp.lz"
 DelibirdFrontpic:    INCBIN "gfx/pokemon/delibird/front.animated.2bpp.lz"
-DustoxFrontpic:      INCBIN "gfx/pokemon/dustox/front.animated.2bpp.lz"
 
 
 SECTION "Pics 9", ROMX
@@ -748,3 +747,4 @@ CalPicF:             INCBIN "gfx/trainers/kris.2bpp.lz"
 SECTION "Pics 27", ROMX
 BlainePic:           INCBIN "gfx/trainers/blaine.2bpp.lz"
 GreenPic:            INCBIN "gfx/trainers/green.2bpp.lz"
+DustoxFrontpic:      INCBIN "gfx/pokemon/dustox/front.animated.2bpp.lz"
