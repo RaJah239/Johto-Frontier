@@ -2561,11 +2561,7 @@ SquirtbottleEffect:
 
 SacredAshEffect:
 	farcall _SacredAsh
-	ld a, [wItemEffectSucceeded]
-	cp $1
-	ret nz
-	call UseDisposableItem
-	ret
+	jr UseDisposableItem
 
 NormalBoxEffect:
 	ld c, DECOFLAG_SILVER_TROPHY_DOLL
