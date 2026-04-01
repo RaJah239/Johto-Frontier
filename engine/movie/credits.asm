@@ -93,6 +93,8 @@ Credits::
 	call Credits_HandleBButton
 	call Credits_HandleAButton
 	jr nz, .exit_credits
+	call Credits_HandleStartButton
+	jr nz, .exit_credits
 
 	call Credits_Jumptable
 	call DelayFrame
@@ -111,6 +113,11 @@ Credits::
 	ldh [hVBlank], a
 	pop af
 	ldh [rSVBK], a
+	ret
+
+Credits_HandleStartButton:
+	ldh a, [hJoypadDown]
+	and START
 	ret
 
 Credits_HandleAButton:
