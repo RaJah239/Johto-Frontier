@@ -1021,7 +1021,7 @@ EdgeWarpScript:
 	reloadend MAPSETUP_CONNECTION
 
 ChangeDirectionScript:
-	callasm UnfreezeAllObjects
+	deactivatefacing 3
 	callasm EnableWildEncounters
 	end
 
@@ -1152,10 +1152,6 @@ RandomEncounter::
 	ret
 
 .ok
-	push bc
-	ld bc, wPlayerStruct
-	farcall ResetObject
-	pop bc
 	ld a, BANK(WildBattleScript)
 	ld hl, WildBattleScript
 	jr .done
