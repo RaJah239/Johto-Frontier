@@ -99,6 +99,7 @@
 - Shiny Pokémon chance are now 1/256
 - Shiny icon added for both player and enemy's Pokémon in battle
 - Shiny icon added to naming screen
+- Wild Pokémon drop held items after battle (no need to steal/trick/capture)
 - Stat screen Condition added to display levels of happiness
 - Fourth stat page with caught time, level, location, effort values per stat, core trait (hidden power type) and Press Select to view Abilities
 - Move Pokémon in party menu with Select button (only outside battles)

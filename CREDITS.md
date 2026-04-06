@@ -106,6 +106,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - DamienDoury - Bag Tabs via Rangi42's polishedcrystal, Eggs are not displayed in the healing machine animaton, Earned Effort Values are applied to stats after each battlen, Day care exp gain has been multiplied by 2 to 13, scales with Pokémon level, "Pokemon" menu is now the default selected option in the Start menu, Daycare owners now say how many levels a Pokémon grew by and what level it is presently, Pokémon at the daycare gain 1 level per day the player hasn't played the game (minus one, so it doesn't increase every day), Fast Boot, Item Finder beep frequency is based on distance to closest hidden item, Hold down the B Button to auto advance/scroll text - stops at end of dialogue, Yes or No and menu boxes, Wide Lens
 - Dark98 - Display seconds in PokéGear and Main Menu
 - Alice-Not-Waifu - auto lowercase after the first letter
+- AmmonRoberts - Wild Pokémon drop held items after battle (no need to steal/trick/capture)
 
 # Music
 - mmmmmmmmmmmmmmmmm - Cave of Origin, RBY Indigo Plateau themes, Vs. Hoenn Champion
@@ -151,3 +152,4 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - TriteHexagon: https://github.com/TriteHexagon
 - PurnPum: https://github.com/PurnPum
 - Th3Element05 on Discord
+- AmmonRoberts: https://github.com/AmmonRoberts/PokemonModernCrystal

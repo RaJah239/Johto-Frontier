@@ -1454,3 +1454,34 @@ BattleText_LinkErrorBattleCanceled:
 	para "The battle has"
 	line "been canceled…"
 	prompt
+
+BattleText_WildItemDropBag:
+	text "Foe dropped"
+	line "@"
+	text_ram wStringBuffer1
+	text_start
+	db "!"
+	prompt
+
+BattleText_WildItemDropPC:
+	text "Foe dropped"
+	line "@"
+	text_ram wStringBuffer1
+	text_start
+	db "!"
+
+	para "Sent to your PC!"
+	prompt
+
+BattleText_WildItemDropFull:
+	text "Foe dropped"
+	line "@"
+	text_ram wStringBuffer1
+	text_start
+	db " but…"
+
+	para "Both your Bag and"
+	line "PC are full!"
+
+	para "The item was lost."
+	prompt

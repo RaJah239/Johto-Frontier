@@ -1854,6 +1854,7 @@ HandleEnemyMonFaint:
 	dec a
 	jr nz, .trainer
 
+	call TryDropWildItem
 	ld a, 1
 	ld [wBattleEnded], a
 	ret
@@ -2442,6 +2443,7 @@ HandlePlayerMonFaint:
 	ld a, [wBattleMode]
 	dec a
 	jr nz, .trainer
+
 	ld a, $1
 	ld [wBattleEnded], a
 	ret
@@ -6033,28 +6035,15 @@ LoadEnemyMon:
 	ld a, [wBaseItem1]
 	jr z, .UpdateItem
 
-; Failing that, it's all up to chance
-;  Effective chances:
-;    75% None
-;    23% Item1
-;     2% Item2
-
-; 25% chance of getting an item
-	call BattleRandom
-	cp 75 percent + 1
-	ld a, NO_ITEM
-	jr c, .UpdateItem
-
-; From there, an 8% chance for Item2
-	call BattleRandom
-	cp 8 percent ; 8% of 25% = 2% Item2
-	ld a, [wBaseItem1]
-	jr nc, .UpdateItem
-	ld a, [wBaseItem2]
+; Failing that, it's all up to chance (75% NO_ITEM / 23% Item1 / 2% Item2).
+; _RollWildHeldItem (Crystal Features 1) writes the result to wEnemyMonItem.
+	farcall _RollWildHeldItem
+	jr .ItemSet
 
 .UpdateItem:
 	ld [wEnemyMonItem], a
 
+.ItemSet:
 ; Initialize DVs
 
 ; If we're in a trainer battle, DVs are predetermined

@@ -223,6 +223,7 @@ INCLUDE "mobile/mobile_menu.asm"
 INCLUDE "engine/pokemon/search_owned.asm"
 INCLUDE "mobile/mobile_12_2.asm"
 INCLUDE "engine/events/buena_menu.asm"
+INCLUDE "engine/battle/wild_item_drop.asm"
 
 
 SECTION "bank13", ROMX
