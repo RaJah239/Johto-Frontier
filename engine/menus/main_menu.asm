@@ -7,8 +7,8 @@
 	const_def
 	const MAINMENUITEM_CONTINUE			; 0
 	const MAINMENUITEM_NEW_GAME			; 1
-	const MAINMENUITEM_OPTION			; 2
-	const MAINMENUITEM_SET_TIME			; 3
+	const MAINMENUITEM_SET_TIME			; 2
+	const MAINMENUITEM_OPTIONS			; 3
 	const MAINMENUITEM_ABOUT			; 4
 
 MainMenu:
@@ -54,16 +54,16 @@ MainMenu:
 ; entries correspond to MAINMENUITEM_* constants
 	db "Continue@"
 	db "New Game@"
-	db "Options@"
 	db "Set Time@"
+	db "Options@"
 	db "About@"
 
 .Jumptable:
 ; entries correspond to MAINMENUITEM_* constants
 	dw MainMenu_Continue
 	dw MainMenu_NewGame
-	dw MainMenu_Option
 	dw MainMenu_SetTime
+	dw MainMenu_Options
 	dw MainMenu_About
 
 MainMenuItems:
@@ -72,7 +72,7 @@ MainMenuItems:
 	; MAINMENU_NEW_GAME
 	db 3
 	db MAINMENUITEM_NEW_GAME
-	db MAINMENUITEM_OPTION
+	db MAINMENUITEM_OPTIONS
 	db MAINMENUITEM_ABOUT
 	db -1
 
@@ -80,8 +80,8 @@ MainMenuItems:
 	db 5
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
-	db MAINMENUITEM_OPTION
 	db MAINMENUITEM_SET_TIME
+	db MAINMENUITEM_OPTIONS
 	db MAINMENUITEM_ABOUT
 	db -1
 
@@ -267,7 +267,7 @@ ClearTilemapEtc:
 MainMenu_NewGame:
 	farjp NewGame
 
-MainMenu_Option:
+MainMenu_Options:
 	farjp Option
 
 MainMenu_Continue:
