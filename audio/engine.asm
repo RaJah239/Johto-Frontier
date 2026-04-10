@@ -2298,6 +2298,10 @@ SetLRTracks:
 	ret
 
 _PlayMusic::
+	ld a, [wCalmCharm]
+	and a
+	ret nz
+
 ; load music
 	call MusicOff
 	ld hl, wMusicID

@@ -2146,3 +2146,33 @@ NomadSigilOn:
 NomadSigilOff:
 	text_far _NomadSigilOff
 	text_end
+
+CalmCharmFunction:
+	call .CalmCharmFunction
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+
+.CalmCharmFunction:
+	ld a, [wCalmCharm]
+	xor 1
+	ld [wCalmCharm], a
+	and a
+	ld hl, CalmCharmOn
+	jr nz, .done
+	ld hl, CalmCharmOff
+
+.done
+	call PrintText
+	ld hl, Script_ReloadMap
+	call QueueScript
+	ld a, TRUE
+	jmp RestartMapMusic
+
+CalmCharmOn:
+	text_far _CalmCharmOn
+	text_end
+
+CalmCharmOff:
+	text_far _CalmCharmOff
+	text_end

@@ -199,7 +199,7 @@ ItemEffects:
 	dw NoEffect            ; CATCH_CHARM
 	dw MembersCardEffect   ; MEMBERS_CARD
 	dw NomadSigilEffect    ; NOMAD_SIGIL
-	dw NoEffect            ; ITEM_E0
+	dw CalmCharmEffect     ; CALM_CHARM
 	dw NoEffect            ; ITEM_E1
 	dw NoEffect            ; ITEM_E2
 	dw NoEffect            ; ITEM_E3
@@ -3144,3 +3144,6 @@ CheckFieldActions:
 
 NomadSigilEffect:
 	farjp NomadSigilFunction
+
+CalmCharmEffect:
+	farjp CalmCharmFunction

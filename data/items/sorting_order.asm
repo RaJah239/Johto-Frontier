@@ -233,11 +233,13 @@ ItemNameOrder:
 	db ROOT_FOSSIL
 
 ; NEXT POCKET
-; Key Items Pocket - 27 total
+; Key Items Pocket - 28 total
 ; Permanent Key Items
 ; Items that are possibly frequently used
 	db TYPE_CHART
 	db MEMBERS_CARD
+	db NOMAD_SIGIL
+	db CALM_CHARM
 	db BICYCLE
 	db COIN_CASE
 	db ITEMFINDER
@@ -258,7 +260,6 @@ ItemNameOrder:
 	db MILOTIC_CALL
 
 ; Key Items that are possibly seldom used
-	db NOMAD_SIGIL
 	db SHINY_CHARM
 	db CLEAR_BELL
 	db SILVER_WING
@@ -276,9 +277,8 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 11 total
+; Unused Items - 9 total
 	db EGG_TICKET
- 	db ITEM_E0
  	db ITEM_E1
  	db ITEM_E2
  	db ITEM_E3

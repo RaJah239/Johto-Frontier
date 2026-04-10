@@ -186,7 +186,7 @@ ItemDescriptions:
  	dw CatchCharmDesc
 	dw MembersCardDesc
 	dw NomadSigilDesc
-	dw TeruSama26Desc
+	dw CalmCharmDesc
 	dw TeruSama26Desc
 	dw TeruSama26Desc
 	dw TeruSama27Desc
@@ -1014,6 +1014,10 @@ MembersCardDesc:
 NomadSigilDesc:
 	db   "Grants freedom to"
 	next "roam.@"
+
+CalmCharmDesc:
+	db   "Enable or Disable"
+	next "Background Music.@"
 
 TeruSama26Desc:
 TeruSama27Desc:

@@ -72,6 +72,7 @@ if DEF(_DEBUG)
 	givemoney YOUR_MONEY, MAX_MONEY
 	; key items
 	giveitem NOMAD_SIGIL
+	giveitem CALM_CHARM
 	giveitem MEMBERS_CARD
 	giveitem TYPE_CHART
 	giveitem BICYCLE

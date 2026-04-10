@@ -185,7 +185,7 @@ ItemNames::
 	li "Catch Charm"
 	li "Member's Card"
 	li "Nomad Sigil"
-	li "?"
+	li "Calm Charm"
 	li "?"
 	li "?"
 	li "?"
