@@ -19,4 +19,4 @@ Ongoing Open World Johto region only game where you can do whatever you want, wh
 # [Credits](https://github.com/RaJah239/Johto-Frontier/blob/000-Johto-Frontier/CREDITS.md)
 
 # Known Bugs
-- Can turn a direction and get into a wild encounter before actually turning
+- 
