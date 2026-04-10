@@ -414,7 +414,7 @@ ENDC
 	call Random
 
 	cp b
-	ld a, 0
+	xor a
 	jr z, .catch_without_fail
 	jr nc, .fail_to_catch
 
@@ -589,8 +589,8 @@ ENDC
 	jr nz, .not_celebi
 	ld hl, wBattleResult
 	set BATTLERESULT_CAUGHT_CELEBI, [hl]
-.not_celebi
 
+.not_celebi
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	jr z, .SendToPC
@@ -617,7 +617,6 @@ ENDC
 	ld [hl], a
 
 .SkipPartyMonFriendBall:
-
 	; skip nicknaming caught mon
 	call CheckIfFastBattlesIsOn
 	jmp nz, .return_from_capture
@@ -676,8 +675,8 @@ ENDC
 	; The captured mon is now first in the box
 	ld a, FRIEND_BALL_HAPPINESS
 	ld [wBufferMonHappiness], a
-.SkipBoxMonFriendBall:
 
+.SkipBoxMonFriendBall:
 	; skip nicknaming caught mon if it goes to the PC
 	call CheckIfFastBattlesIsOn
 	jr nz, .SkipBoxMonNickname
@@ -1020,6 +1019,7 @@ LureBallMultiplier:
 
 	sla b ; x4
 	ret nc
+
 .max
 	ld b, $ff
 	ret
@@ -1058,10 +1058,10 @@ MoonBallMultiplier:
 	sla b
 	jr c, .max
 	sla b
-	jr nc, .done
+	ret nc
+
 .max
 	ld b, $ff
-.done
 	ret
 
 LoveBallMultiplier: ; Cath rate = x4
@@ -1165,8 +1165,6 @@ LevelBallMultiplier:
 	ld b, $ff
 	ret
 
-; BallDodgedText and BallMissedText were used in Gen 1.
-
 BallBrokeFreeText:
 	text_far _BallBrokeFreeText
 	text_end
@@ -1219,12 +1217,10 @@ AskGiveNicknameText:
 	text_end
 
 ReturnToBattle_UseBall:
-	farcall _ReturnToBattle_UseBall
-	ret
+	farjp _ReturnToBattle_UseBall
 
 BicycleEffect:
-	farcall BikeFunction
-	ret
+	farjp BikeFunction
 
 EvoStoneEffect:
 	ld b, PARTYMENUACTION_EVO_STONE
@@ -1381,8 +1377,7 @@ RareCandy_StatBooster_GetParameters:
 	call GetBaseData
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
-	call GetNickname
-	ret
+	jmp GetNickname
 
 RareCandyEffect:
 	ld b, PARTYMENUACTION_HEALING_ITEM
@@ -1723,7 +1718,7 @@ FullRestoreEffect:
 	ld [wPartyMenuActionText], a
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, 0
+	xor a
 	ret
 
 BitterBerryEffect:
@@ -1739,8 +1734,7 @@ BitterBerryEffect:
 
 	ld hl, ConfusedNoMoreText
 	call StdBattleTextbox
-
-	ld a, 0
+	xor a
 
 .done
 	jmp StatusHealer_Jumptable
@@ -1781,11 +1775,12 @@ ItemRestore4THHP:
 	ld [wPartyMenuActionText], a
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, 0
+	xor a
 	ret
 
 EnergyRootEffect:
 	ld c, HAPPINESS_ENERGYROOT
+	; fallthrough
 
 EnergypowderEnergyRootCommon:
 	push bc
@@ -1802,7 +1797,7 @@ EnergypowderEnergyRootCommon:
 	call LooksBitterMessage
 
 .skip:
-	ld a, 0
+	xor a
 
 .skip_happiness
 	jmp StatusHealer_Jumptable
@@ -1831,7 +1826,7 @@ ItemRestoreHP:
 	ld [wPartyMenuActionText], a
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, 0
+	xor a
 	ret
 
 GetOneFourthMaxHP:
@@ -1901,8 +1896,7 @@ ChooseMonToUseItemOn:
 	call WaitBGMap
 	call SetDefaultBGPAndOBP
 	call DelayFrame
-	farcall PartyMenuSelect
-	ret
+	farjp PartyMenuSelect
 
 ItemActionText:
 	ld [wPartyMenuActionText], a
@@ -1949,9 +1943,10 @@ StatusHealer_NoEffect:
 StatusHealer_ExitMenu:
 	xor a
 	ld [wItemEffectSucceeded], a
+	; fallthrough
+
 StatusHealer_ClearPalettes:
-	call ClearPalettes
-	ret
+	jmp ClearPalettes
 
 IsItemUsedOnBattleMon:
 	ld a, [wBattleMode]
@@ -1978,6 +1973,8 @@ ReviveHalfHP:
 
 ReviveFullHP:
 	call LoadHPFromBuffer1
+	; fallthrough
+
 ContinueRevive:
 	ld a, MON_HP
 	call GetPartyParamLocation
@@ -2009,11 +2006,9 @@ RestoreHealth:
 	dec hl
 	ld a, [de]
 	sbc [hl]
-	jr c, .finish
+	ret c
 .full_hp
-	call ReviveFullHP
-.finish
-	ret
+	jr ReviveFullHP
 
 RemoveHP:
 	ld a, MON_HP + 1
@@ -2029,8 +2024,7 @@ RemoveHP:
 	ld [hld], a
 	ld [hl], a
 .okay
-	call LoadCurHPIntoBuffer3
-	ret
+	jr LoadCurHPIntoBuffer3
 
 IsMonFainted:
 	push de
@@ -2229,6 +2223,7 @@ MaxRepelEffect:
 
 RepelEffect:
 	ld b, 100
+	; fallthrough
 
 UseRepel:
 	ld a, [wRepelEffect]
@@ -2296,15 +2291,13 @@ GoodRodEffect:
 
 SuperRodEffect:
 	ld e, $2
-	jr UseRod
+	; fallthrough
 
 UseRod:
-	farcall FishFunction
-	ret
+	farjp FishFunction
 
 ItemfinderEffect:
-	farcall ItemFinder
-	ret
+	farjp ItemFinder
 
 RestorePPEffect:
 	ld a, [wCurItem]
@@ -2385,6 +2378,7 @@ RestorePPEffect:
 
 	ld hl, PPsIncreasedText
 	call PrintText
+	; fallthrough
 
 FinishPPRestore:
 	call ClearPalettes
@@ -2420,7 +2414,7 @@ BattleRestorePP:
 .loop
 	ld a, [de]
 	and a
-	jr z, .done
+	ret z
 	cp [hl]
 	jr nz, .next
 	push hl
@@ -2442,8 +2436,6 @@ endr
 	inc de
 	dec b
 	jr nz, .loop
-
-.done
 	ret
 
 Not_PP_Up:
@@ -2483,6 +2475,7 @@ Elixer_RestorePPofAllMoves:
 
 PPRestoreItem_NoEffect:
 	call WontHaveAnyEffectMessage
+	; fallthrough
 
 PPRestoreItem_Cancel:
 	call ClearPalettes
@@ -2556,8 +2549,7 @@ PPRestoredText:
 	text_end
 
 SquirtbottleEffect:
-	farcall _Squirtbottle
-	ret
+	farjp _Squirtbottle
 
 SacredAshEffect:
 	farcall _SacredAsh
@@ -2645,6 +2637,7 @@ Ball_BoxIsFullMessage:
 	ld hl, StorageFullText
 	jr z, .got_msg
 	ld hl, DatabaseTaxedText
+
 .got_msg
 	call PrintText
 
@@ -2809,6 +2802,7 @@ RestoreAllPP:
 	xor a ; PARTYMON
 	ld [wMonType], a
 	; fallthrough
+
 _RestoreAllPP:
 	xor a
 	ld [wMenuCursorY], a
@@ -2922,6 +2916,7 @@ GetMaxPPOfMove:
 GetMthMoveOfNthPartymon:
 	ld a, [wCurPartyMon]
 	call AddNTimes
+	; fallthrough
 
 GetMthMoveOfCurrentMon:
 	ld a, [wMenuCursorY]
@@ -2933,44 +2928,37 @@ GetMthMoveOfCurrentMon:
 ScytherCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
-	farcall CutFunction
-	ret
+	farjp CutFunction
 
 LanturnCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
-	farcall SurfFunction
-	ret
+	farjp SurfFunction
 
 DonphanCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
-	farcall StrengthFunction
-	ret
+	farjp StrengthFunction
 
 MareepCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
-	farcall FlashFunction
-	ret
+	farjp FlashFunction
 
 KingdraCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
-	farcall WhirlpoolFunction
-	ret
+	farjp WhirlpoolFunction
 
 MiloticCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
-	farcall WaterfallFunction
-	ret
+	farjp WaterfallFunction
 
 TangelaCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
-	farcall SweetScentFromMenu
-	ret
+	farjp SweetScentFromMenu
 
 HyperEVUpEffect:
 	ld b, PARTYMENUACTION_HEALING_ITEM
@@ -3093,7 +3081,7 @@ Restore3RDHPEffect:
 	ld [wPartyMenuActionText], a
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, 0
+	xor a
 	jmp StatusHealer_Jumptable
 
 ItemEffects_GetThirdMaxHP:
