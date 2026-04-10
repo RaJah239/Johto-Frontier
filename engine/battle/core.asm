@@ -2014,6 +2014,11 @@ StopDangerSound:
 	ret
 
 FaintYourPokemon:
+	hlcoord 11, 8
+	ld de, CoreFntString
+	call PlaceString
+	call DelayFrame
+
 	farcall KOBoost
 
 	call StopDangerSound
@@ -2044,7 +2049,14 @@ FaintYourPokemon:
 	ld hl, BattleText_MonFainted
 	jmp StdBattleTextbox
 
+CoreFntString: db "FNT@"
+
 FaintEnemyPokemon:
+	hlcoord 2, 1
+	ld de, CoreFntString
+	call PlaceString
+	call DelayFrame
+
 	farcall KOBoost
 
 	call WaitSFX
