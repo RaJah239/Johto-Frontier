@@ -2114,25 +2114,20 @@ CanCutText:
 	text_end
 
 NomadSigilFunction:
-	call .NomadSigilFunction
-	and $7f
-	ld [wFieldMoveSucceeded], a
-	ret
-
-.NomadSigilFunction:
 	ld a, [wNomadSigil]
 	xor 1
 	ld [wNomadSigil], a
 	and a
 	ld hl, NomadSigilOn
-	jr nz, .done
+	jr nz, .print
 	ld hl, NomadSigilOff
 
-.done
+.print
 	call PrintText
 	ld hl, Script_ReloadMap
 	call QueueScript
 	ld a, TRUE
+	ld [wFieldMoveSucceeded], a
 	ret
 
 Script_ReloadMap:
@@ -2148,25 +2143,20 @@ NomadSigilOff:
 	text_end
 
 CalmCharmFunction:
-	call .CalmCharmFunction
-	and $7f
-	ld [wFieldMoveSucceeded], a
-	ret
-
-.CalmCharmFunction:
 	ld a, [wCalmCharm]
 	xor 1
 	ld [wCalmCharm], a
 	and a
 	ld hl, CalmCharmOn
-	jr nz, .done
+	jr nz, .print
 	ld hl, CalmCharmOff
 
-.done
+.print
 	call PrintText
 	ld hl, Script_ReloadMap
 	call QueueScript
 	ld a, TRUE
+	ld [wFieldMoveSucceeded], a
 	jmp RestartMapMusic
 
 CalmCharmOn:
