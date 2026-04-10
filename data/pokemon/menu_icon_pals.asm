@@ -72,7 +72,7 @@ MonMenuIconPals:
 	icon_pals GREEN,  PURPLE ; BELLSPROUT
 	icon_pals GREEN,  PURPLE ; WEEPINBELL
 	icon_pals GREEN,  GREEN  ; VICTREEBEL
-	icon_pals PURPLE, PURPLE ; MAREEP
+	icon_pals BLUE,   PURPLE ; MAREEP
 	icon_pals PINK,   PINK   ; FLAAFFY
 	icon_pals BROWN,  BLUE   ; AMPHAROS
 	icon_pals BLUE,   PINK   ; NIDORAN_F
