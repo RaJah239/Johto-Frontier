@@ -79,14 +79,7 @@ DoBattle:
 	call SlideBattlePicOut
 	call LoadTilemapToTempTilemap
 	call ResetBattleParticipants
-	call InitBattleMon
-	call ResetPlayerStatLevels
-	call SendOutMonText
-	call NewBattleMonStatus
-	call BreakAttraction
-	call SendOutPlayerMon
-	call EmptyBattleTextbox
-	call LoadTilemapToTempTilemap
+	call InitBattleMon_Etc
 	call SetPlayerTurn
 	call SpikesDamage
 	ld a, [wLinkMode]
@@ -362,14 +355,12 @@ DetermineMoveOrder:
 	cp USING_INTERNAL_CLOCK
 	jr z, .player_2
 
-	call BattleRandom
-	cp 50 percent + 1
+	call Core_50_Percent
 	jmp c, .player_first
 	jmp .enemy_first
 
 .player_2
-	call BattleRandom
-	cp 50 percent + 1
+	call Core_50_Percent
 	jmp c, .enemy_first
 	jmp .player_first
 
@@ -390,9 +381,9 @@ DetermineMoveOrder:
 
 .equal_priority
 	call SetPlayerTurn
-	callfar GetUserItem
+	call _GetUserItem
 	push bc
-	callfar GetOpponentItem
+	call _GetOpponentItem
 	pop de
 	ld a, d
 	cp HELD_QUICK_CLAW
@@ -652,14 +643,12 @@ DetermineMoveOrder:
 	ldh a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
 	jr z, .player_2c
-	call BattleRandom
-	cp 50 percent + 1
+	call Core_50_Percent
 	jr c, .player_first
 	jr .enemy_first
 
 .player_2c
-	call BattleRandom
-	cp 50 percent + 1
+	call Core_50_Percent
 	jr c, .enemy_first
 .player_first
 	scf
@@ -1971,8 +1960,7 @@ UpdateBattleStateAndExperienceAfterEnemyFaint:
 	ld a, [wBattleMode]
 	dec a
 	call z, PlayVictoryMusic
-	call EmptyBattleTextbox
-	call LoadTilemapToTempTilemap
+	call EmptyBattleTextbox_LoadTilemapToTempTilemap
 	ld a, [wBattleResult]
 	and BATTLERESULT_BITMASK
 	ld [wBattleResult], a ; WIN
@@ -2168,7 +2156,7 @@ WinTrainerBattle:
 	and a
 	ld a, b
 	call z, PlayVictoryMusic
-	callfar Battle_GetTrainerName
+	call _Battle_GetTrainerName
 	call IsPluralTrainer
 	ld hl, BattleText_PluralEnemyWereDefeated
 	jr z, .got_defeat_phrase
@@ -2508,8 +2496,7 @@ UpdateFaintedPlayerMon:
 	ret
 
 AskUseNextPokemon:
-	call EmptyBattleTextbox
-	call LoadTilemapToTempTilemap
+	call EmptyBattleTextbox_LoadTilemapToTempTilemap
 ; We don't need to be here if we're in a Trainer battle,
 ; as that decision is made for us.
 	ld a, [wBattleMode]
@@ -2583,11 +2570,7 @@ ForcePlayerMonChoice:
 	call GetMemSGBLayout
 	call SetDefaultBGPAndOBP
 	call SendOutMonText
-	call NewBattleMonStatus
-	call BreakAttraction
-	call SendOutPlayerMon
-	call EmptyBattleTextbox
-	call LoadTilemapToTempTilemap
+	call NewBattleMonStatus_Etc
 	call SetPlayerTurn
 	call SpikesDamage
 	ld a, $1
@@ -2601,14 +2584,7 @@ PlayerPartyMonEntrance:
 	ld a, [wCurPartyMon]
 	ld [wCurBattleMon], a
 	call AddBattleParticipant
-	call InitBattleMon
-	call ResetPlayerStatLevels
-	call SendOutMonText
-	call NewBattleMonStatus
-	call BreakAttraction
-	call SendOutPlayerMon
-	call EmptyBattleTextbox
-	call LoadTilemapToTempTilemap
+	call InitBattleMon_Etc
 	call SetPlayerTurn
 	jmp SpikesDamage
 
@@ -3286,7 +3262,7 @@ ClearEnemyMonBox:
 	jmp FinishBattleAnim
 
 ShowBattleTextEnemySentOut:
-	callfar Battle_GetTrainerName
+	call _Battle_GetTrainerName
 	ld hl, BattleText_EnemySentOut
 	call StdBattleTextbox
 	jmp WaitBGMap
@@ -3657,11 +3633,7 @@ SwitchPlayerMon:
 	call AddBattleParticipant
 	call InitBattleMon
 	call ResetPlayerStatLevels
-	call NewBattleMonStatus
-	call BreakAttraction
-	call SendOutPlayerMon
-	call EmptyBattleTextbox
-	call LoadTilemapToTempTilemap
+	call NewBattleMonStatus_Etc
 	ld hl, wEnemyMonHP
 	ld a, [hli]
 	or [hl]
@@ -3783,7 +3755,7 @@ SpikesDamage:
 	call IsInByteArray
 	ret c
 
-	callfar GetUserItem
+	call _GetUserItem
 	ld a, b
 	cp HELD_HEAVY_BOOTS
 	ret z
@@ -4173,7 +4145,7 @@ HandleHealingItems:
 	jmp UseConfusionHealingItem
 
 HandleHPHealingItem:
-	callfar GetOpponentItem
+	call _GetOpponentItem
 	ld a, b
 	cp HELD_BERRY_4TH
 	jr z, .quarter
@@ -4301,7 +4273,7 @@ HandleHPHealingItem:
 
 UseOpponentItem:
 	call RefreshBattleHuds
-	callfar GetOpponentItem
+	call _GetOpponentItem
 	ld a, [hl]
 	ld [wNamedObjectIndex], a
 	call GetItemName
@@ -4341,7 +4313,7 @@ BattleDodgeAnimation:
 	jmp PopBCDEHL
 
 UseHeldStatusHealingItem:
-	callfar GetOpponentItem
+	call _GetOpponentItem
 	ld hl, HeldStatusHealingEffects
 .loop
 	ld a, [hli]
@@ -4401,7 +4373,7 @@ UseConfusionHealingItem:
 	call GetBattleVar
 	bit SUBSTATUS_CONFUSED, a
 	ret z
-	callfar GetOpponentItem
+	call _GetOpponentItem
 	ld a, b
 	cp HELD_HEAL_CONFUSION
 	jr z, .heal_status
@@ -4790,8 +4762,7 @@ BattleMenu:
 	jr z, .ok
 	call EmptyBattleTextbox
 	call UpdateBattleHuds
-	call EmptyBattleTextbox
-	call LoadTilemapToTempTilemap
+	call EmptyBattleTextbox_LoadTilemapToTempTilemap
 .ok
 
 .loop
@@ -5181,14 +5152,7 @@ BattleMonEntrance:
 	ld a, [wCurBattleMon]
 	ld [wCurPartyMon], a
 	call AddBattleParticipant
-	call InitBattleMon
-	call ResetPlayerStatLevels
-	call SendOutMonText
-	call NewBattleMonStatus
-	call BreakAttraction
-	call SendOutPlayerMon
-	call EmptyBattleTextbox
-	call LoadTilemapToTempTilemap
+	call InitBattleMon_Etc
 	call SetPlayerTurn
 	call SpikesDamage
 	ld a, $2
@@ -5208,8 +5172,7 @@ PassedBattleMonEntrance:
 	ld [wApplyStatLevelMultipliersToEnemy], a
 	call ApplyStatLevelMultiplierOnAllStats
 	call SendOutPlayerMon
-	call EmptyBattleTextbox
-	call LoadTilemapToTempTilemap
+	call EmptyBattleTextbox_LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	jmp SpikesDamage
 
@@ -5837,8 +5800,7 @@ ParseEnemyAction:
 	ld a, [wLinkMode]
 	and a
 	jr z, .not_linked
-	call EmptyBattleTextbox
-	call LoadTilemapToTempTilemap
+	call EmptyBattleTextbox_LoadTilemapToTempTilemap
 	ld a, [wBattlePlayerAction]
 	and a ; BATTLEPLAYERACTION_USEMOVE?
 	call z, LinkBattleSendReceiveAction
@@ -7373,8 +7335,7 @@ GiveExperiencePoints:
 	call ApplyStatLevelMultiplierOnAllStats
 	callfar ApplyStatusEffectOnPlayerStats
 	callfar UpdatePlayerHUD
-	call EmptyBattleTextbox
-	call LoadTilemapToTempTilemap
+	call EmptyBattleTextbox_LoadTilemapToTempTilemap
 	ld a, $1
 	ldh [hBGMapMode], a
 
@@ -8813,7 +8774,7 @@ BattleStartMessage:
 	call PlaySFX
 	call WaitSFX
 
-	farcall Battle_GetTrainerName
+	call _Battle_GetTrainerName
 
 	call IsPluralTrainer
 	ld hl, WantToBattlePluralText
@@ -8894,4 +8855,34 @@ GetMovePower:
 	ld a, BANK(Moves)
 	call GetFarByte
 	ld b, a
+	ret
+
+InitBattleMon_Etc:
+	call InitBattleMon
+	call ResetPlayerStatLevels
+	call SendOutMonText
+	; fallthrough
+
+NewBattleMonStatus_Etc:
+	call NewBattleMonStatus
+	call BreakAttraction
+	call SendOutPlayerMon
+	; fallthrough
+
+EmptyBattleTextbox_LoadTilemapToTempTilemap:
+	call EmptyBattleTextbox
+	jmp LoadTilemapToTempTilemap
+
+_GetUserItem:
+	farjp GetUserItem
+
+_GetOpponentItem:
+	farjp GetOpponentItem
+
+_Battle_GetTrainerName:
+	farjp Battle_GetTrainerName
+
+Core_50_Percent:
+	call BattleRandom
+	cp 50 percent + 1
 	ret
