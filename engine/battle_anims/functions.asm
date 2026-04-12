@@ -100,13 +100,9 @@ DoBattleAnimFrame:
 
 BattleAnimFunc_Null:
 	call BattleAnim_AnonJumptable
-.anon_dw
-	dw .zero
-	dw .one
-.one
-	call DeinitBattleAnimation
-.zero
-	ret
+
+	dw DoNothing
+	dw DeinitBattleAnimation
 
 BattleAnimFunc_ThrowFromUserToTargetAndDisappear:
 	call BattleAnimFunc_ThrowFromUserToTarget
