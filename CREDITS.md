@@ -49,6 +49,8 @@ If you see an error or missing credit in this file, please let me know on [Disco
 
 - CynderQuill - Nown Sprite 
 
+- PokéWilds - Excadrill
+
 # Party Pokémon Icons
 - Sour Apple - Aerodactyl, Mareep, Flaffy, Ampharos, Growlithe, Arcanine, Spinark, Ariados, Marill, Azumarill, Chikorita, Bayleef, Meganium, Squirtle, Wartortle, Blastoise, Chansey, Blissey, Celebi, Charmander, Charmeleon, Charizard, Chinchou, Lanturn, Clefairy, Clefable, Corsola, Zubat, Golbat, Crobat, Cyndaquil, Quilava, Typhlosion, Delibird, Seel, Dewgong, Ditto, Doduo, Dodrio, Phanpy, Donphan, Drowzee, Hypno, Egg, Gastly, Haunter, Gengar, Gligar, Snubbull, Muk, Grimer, Granbull, Magikarp, Gyarados, Heracross, Ho-Oh, Houndour, Houndoom, Jynx, Hoothoot, Koffing, Weezing, Lapras, Larvitar, Pupitar, Tyranitar, Magnemite, Mantine, Meowth, Persian, Mew, Mewtwo, Miltank, Misdreavus, Natu, Xatu, Nidoran_M, Nidorino, Nidoking, Nidoran_F, Nidorina, Nidoqueen, Remoraid, Octillery, Omastar, Onix, Pidgey, Pidgeotto, Pidgeot, Swinub, Piloswine, Ponyta, Rapidash, Porygon, Porygon2, Mankey, Primeape, Wooper, Quagsire, Scyther, Scizor, Shuckle, Skarmory, Slowpoke, Slowbro, Smeargle, Sneasel, Snorlax, Stanler, Staryu, Starmie, Sudowoodo, Suicune, Sunkern, Sunflora, Tangela, Tauros, Teddiursa, Ursaring, Tentacool, Togepi, Yanma, Eevee, Umbreon, Horsea, Seadra, Kingdra, Bellsprout, Weepinbell, Victreebel, Electabuzz
 
