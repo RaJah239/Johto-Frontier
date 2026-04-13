@@ -523,8 +523,6 @@ BattleAnimFunc_MoveFromUserToTargetSpinAround:
 	ld a, [hl]
 	cp $80
 	jr c, .SetCoords
-	; fallthrough
-
 .next
 	call BattleAnim_IncAnonJumptableIndex
 .one
@@ -591,8 +589,6 @@ BattleAnimFunc_MoveFromUserToTargetSpinAround:
 	ld a, [hl]
 	cp $b0
 	jmp nc, DeinitBattleAnimation
-	; fallthrough
-
 .SetCoords:
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
@@ -1819,8 +1815,8 @@ BattleAnimFunc_Kick:
 	dw DoNothing
 	dw DoNothing
 	dw .two   ; Jump Kick, Hi Jump Kick
-	dw .three ; Rolling Kick
-	dw .four  ; Rolling Kick (continued)
+	dw DoNothing
+	dw DoNothing
 
 .two
 	ld hl, BATTLEANIMSTRUCT_XCOORD
@@ -1845,36 +1841,6 @@ BattleAnimFunc_Kick:
 	ld hl, BATTLEANIMSTRUCT_YCOORD
 	add hl, bc
 	dec [hl]
-	ret
-
-.three
-	call BattleAnim_IncAnonJumptableIndex
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], $2c
-	ld hl, BATTLEANIMSTRUCT_FRAME
-	add hl, bc
-	ld [hl], $0
-	ld hl, BATTLEANIMSTRUCT_DURATION
-	add hl, bc
-	ld [hl], $80
-.four
-	ld hl, BATTLEANIMSTRUCT_XCOORD
-	add hl, bc
-	ld a, [hl]
-	cp $98
-	ret nc
-	inc [hl]
-	inc [hl]
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hl]
-	inc [hl]
-	ld d, $8
-	call BattleAnim_Sine
-	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], a
 	ret
 
 BattleAnimFunc_Egg:
@@ -3538,7 +3504,6 @@ BattleAnimFunc_Cotton:
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
 	add [hl]
-	; jr BattleAnim_StepCircle
 	; fallthrough
 
 BattleAnim_StepCircle:
