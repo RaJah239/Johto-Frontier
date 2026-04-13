@@ -269,50 +269,49 @@ DisplayMoveInfo:
 	call PrintNum
 
 .category_icon
-; Verify if it has power
+; Get move struct pointer
 	ld a, [wCurSpecies]
 	dec a
-	ld hl, Moves + MOVE_POWER
+	ld hl, Moves
 	ld bc, MOVE_LENGTH
 	call AddNTimes
+
+; Check MOVE_POWER
+	push hl
+	ld de, MOVE_POWER
+	add hl, de
 	ld a, BANK(Moves)
 	call GetFarByte
-	hlcoord 16, 12
+	pop hl
+
 	cp 2
 	jr c, .status_move
 
-; Verifify if physical or special
-	ld a, [wCurSpecies]
-	dec a
-	ld bc, MOVE_LENGTH
-	ld hl, Moves
-	call AddNTimes
-	ld de, wStringBuffer1
+; Check MOVE_TYPE
+	push hl
+	ld de, MOVE_TYPE
+	add hl, de
 	ld a, BANK(Moves)
-	call FarCopyBytes
-	ld a, [wStringBuffer1 + MOVE_TYPE]
+	call GetFarByte
+	pop hl
+
 	cp SPECIAL
 	jr nc, .special_category
 
-; IF PHYSICAL
+.physical_category
 	hlcoord 4, 9
 	ld de, .String_MovePhy
-	call PlaceString
-	ret
+	jmp PlaceString
 
-; IF SPECIAL
 .special_category
 	hlcoord 4, 9
 	ld de, .String_MoveSpe
-	call PlaceString
-	ret
+	jmp PlaceString
 
-; IF STATUS
 .status_move
 	hlcoord 4, 9
 	ld de, .String_MoveSta
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .PowAcc: db "p/   <%>@"
 .NA: db "---@"
