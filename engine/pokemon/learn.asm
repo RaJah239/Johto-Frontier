@@ -118,6 +118,7 @@ ForgetMove:
 	push hl
 	ld hl, AskForgetMoveText
 	call PrintText
+	call DisplayMoveInfo
 	call YesNoBox
 	pop hl
 	ret c
@@ -181,7 +182,154 @@ ForgetMove:
 	ret
 
 .cancel
+	farcall GetBattleMonBackpic
+	farcall SafeLoadTempTilemapToTilemap
 	scf
+	ret
+
+DisplayMoveInfo:
+	xor a
+	ldh [hBGMapMode], a
+
+	hlcoord 3, 8 ; upper right corner of the textbox
+	lb bc, 3, 9
+	call Textbox
+	call MobileTextBorder
+
+	ld a, [wPutativeTMHMMove] ; the memory location holding the new move
+	ld [wCurMove], a
+
+	; move types
+	ld a, [wCurSpecies]
+	ld b, a
+	hlcoord 5, 9
+	predef PrintMoveType
+
+	ld hl, Moves + MOVE_PP
+	call GetCurMovePropertyLearn
+	hlcoord 8, 11
+	ld [wTextDecimalByte], a
+	ld de, wTextDecimalByte
+	lb bc, 1, 2
+	call PrintNum
+	ld [hl], "/"
+	inc hl
+	lb bc, 1, 2
+	call PrintNum
+
+	hlcoord 7, 10
+	ld de, .PowAcc
+	call PlaceString
+
+	ld hl, Moves + MOVE_POWER
+	call GetCurMovePropertyLearn
+	hlcoord 4, 10
+	cp 2
+	jr c, .no_power
+	ld [wTextDecimalByte], a
+	ld de, wTextDecimalByte
+	lb bc, 1, 3
+	call PrintNum
+	jr .place_accuracy
+
+.no_power
+	ld de, .NA
+	call PlaceString
+
+.place_accuracy
+	ld hl, Moves + MOVE_POWER
+	call GetCurMovePropertyLearn
+
+	ld a, [wCurSpecies]
+	ld bc, MOVE_LENGTH
+
+	ld hl, (Moves + MOVE_EFFECT) - MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+
+	ld hl, PerfectAccuracyEffects
+	call IsInByteArray
+	jr nc, .imperfect
+
+	ld de, .NA
+	ld bc, 3
+	hlcoord 9, 10
+	call PlaceString
+	jr .category_icon
+
+.imperfect
+	ld hl, Moves + MOVE_ACC
+	call GetCurMovePropertyLearn
+	call ConvertPercentages
+	ld [wBuffer1], a
+	ld de, wBuffer1
+	hlcoord 9, 10
+	lb bc, 1, 3
+	call PrintNum
+
+.category_icon
+; Verify if it has power
+	ld a, [wCurSpecies]
+	dec a
+	ld hl, Moves + MOVE_POWER
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	hlcoord 16, 12
+	cp 2
+	jr c, .status_move
+
+; Verifify if physical or special
+	ld a, [wCurSpecies]
+	dec a
+	ld bc, MOVE_LENGTH
+	ld hl, Moves
+	call AddNTimes
+	ld de, wStringBuffer1
+	ld a, BANK(Moves)
+	call FarCopyBytes
+	ld a, [wStringBuffer1 + MOVE_TYPE]
+	cp SPECIAL
+	jr nc, .special_category
+
+; IF PHYSICAL
+	hlcoord 4, 9
+	ld de, .String_MovePhy
+	call PlaceString
+	ret
+
+; IF SPECIAL
+.special_category
+	hlcoord 4, 9
+	ld de, .String_MoveSpe
+	call PlaceString
+	ret
+
+; IF STATUS
+.status_move
+	hlcoord 4, 9
+	ld de, .String_MoveSta
+	call PlaceString
+	ret
+
+.PowAcc: db "p/   <%>@"
+.NA: db "---@"
+.String_MovePhy: db "<physical>@"
+.String_MoveSpe: db "<special>@"
+.String_MoveSta: db "<other>@"
+
+GetCurMovePropertyLearn:
+	ld a, [wCurMove]
+	dec a
+; Assuming hl = Moves + x, return attribute x of move a.
+	push bc
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	pop bc
 	ret
 
 LearnedMoveText:

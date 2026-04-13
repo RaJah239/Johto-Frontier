@@ -1521,7 +1521,7 @@ wCurSpecies:: db
 
 wNamedObjectType:: db
 
-	ds 1
+wCurMove:: db
 
 wJumptableIndex::
 wBattleTowerBattleEnded::
