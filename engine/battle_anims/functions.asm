@@ -477,6 +477,10 @@ BattleAnimFunc_Drop:
 	ld [hl], $30
 	inc hl
 	ld [hl], $48
+	inc hl
+	ld [hl], $00
+	inc hl
+	ld [hl], $00
 .one
 	ld hl, BATTLEANIMSTRUCT_VAR1
 	add hl, bc
@@ -485,6 +489,21 @@ BattleAnimFunc_Drop:
 	call BattleAnim_Sine
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
 	add hl, bc
+	ld [hl], a
+; apply x vel
+	ld hl, BATTLEANIMSTRUCT_VAR3
+	add hl, bc
+	ld a, [hl]
+	ld d, a
+	ld hl, BATTLEANIMSTRUCT_VAR4
+	add hl, bc
+	ld a, [hl]
+	add d
+	ld [hl], a
+	ld hl, BATTLEANIMSTRUCT_XOFFSET
+	add hl, bc
+	sra a
+	sra a
 	ld [hl], a
 	ld hl, BATTLEANIMSTRUCT_VAR1
 	add hl, bc
@@ -495,6 +514,28 @@ BattleAnimFunc_Drop:
 	ld hl, BATTLEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], $20
+; set x velocity based on initial X pos
+	ld hl, BATTLEANIMSTRUCT_XCOORD
+	add hl, bc
+	ld a, [hl]
+	cp 136
+	jr z, .none ; exactly centered
+	jr c, .left
+	ld d, 3
+	jr .got_vel
+.none
+	ld d, 0
+	jr .got_vel
+.left
+	ld d, -3
+.got_vel
+	ld hl, BATTLEANIMSTRUCT_VAR3
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr nz, .next
+	ld [hl], d
+.next
 	ld hl, BATTLEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
