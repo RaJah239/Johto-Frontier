@@ -28,7 +28,6 @@ BattleAnimFrameData:
 	dw .Frameset_Explosion           ; BATTLE_ANIM_FRAMESET_EXPLOSION
 	dw .Frameset_BigRock             ; BATTLE_ANIM_FRAMESET_BIG_ROCK
 	dw .Frameset_SmallRock           ; BATTLE_ANIM_FRAMESET_SMALL_ROCK
-	dw .Frameset_Strength            ; BATTLE_ANIM_FRAMESET_STRENGTH
 	dw .Frameset_SkullCrossbone      ; BATTLE_ANIM_FRAMESET_SKULL_CROSSBONE
 	dw .Frameset_Acid                ; BATTLE_ANIM_FRAMESET_ACID
 	dw .Frameset_SludgeBubble        ; BATTLE_ANIM_FRAMESET_SLUDGE_BUBBLE
@@ -455,10 +454,6 @@ BattleAnimFrameData:
 
 .Frameset_SmallRock:
 	oamframe BATTLE_ANIM_OAMSET_0F,  8
-	oamend
-
-.Frameset_Strength:
-	oamframe BATTLE_ANIM_OAMSET_1C,  8
 	oamend
 
 .Frameset_SkullCrossbone:

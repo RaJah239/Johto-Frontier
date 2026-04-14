@@ -35,7 +35,6 @@ BattleAnimOAMData:
 	battleanimoam $01, 16, .OAMData_00 ; BATTLE_ANIM_OAMSET_19
 	battleanimoam $05, 16, .OAMData_00 ; BATTLE_ANIM_OAMSET_1A
 	battleanimoam $00,  4, .OAMData_03 ; BATTLE_ANIM_OAMSET_1B
-	battleanimoam $05, 12, .OAMData_1c ; BATTLE_ANIM_OAMSET_1C
 	battleanimoam $02,  4, .OAMData_02 ; BATTLE_ANIM_OAMSET_1D
 	battleanimoam $06,  1, .OAMData_0f ; BATTLE_ANIM_OAMSET_1E
 	battleanimoam $07,  1, .OAMData_0f ; BATTLE_ANIM_OAMSET_1F

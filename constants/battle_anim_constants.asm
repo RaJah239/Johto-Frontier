@@ -64,7 +64,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_BALL_POOF           ; 1c
 	const BATTLE_ANIM_OBJ_BIG_ROCK            ; 1d
 	const BATTLE_ANIM_OBJ_SMALL_ROCK          ; 1e
-	const BATTLE_ANIM_OBJ_STRENGTH            ; 1f
 	const BATTLE_ANIM_OBJ_SEISMIC_TOSS        ; 20
 	const BATTLE_ANIM_OBJ_BUBBLE              ; 21
 	const BATTLE_ANIM_OBJ_SURF                ; 22
@@ -355,7 +354,6 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_EXPLOSION             ; 18
 	const BATTLE_ANIM_FRAMESET_BIG_ROCK              ; 19
 	const BATTLE_ANIM_FRAMESET_SMALL_ROCK            ; 1a
-	const BATTLE_ANIM_FRAMESET_STRENGTH              ; 1b
 	const BATTLE_ANIM_FRAMESET_SKULL_CROSSBONE       ; 1c
 	const BATTLE_ANIM_FRAMESET_ACID                  ; 1d
 	const BATTLE_ANIM_FRAMESET_SLUDGE_BUBBLE         ; 1f
@@ -541,7 +539,6 @@ DEF NUM_BATTLE_ANIM_FRAMESETS EQU const_value
 	const BATTLE_ANIM_OAMSET_19
 	const BATTLE_ANIM_OAMSET_1A
 	const BATTLE_ANIM_OAMSET_1B
-	const BATTLE_ANIM_OAMSET_1C
 	const BATTLE_ANIM_OAMSET_1D
 	const BATTLE_ANIM_OAMSET_1E
 	const BATTLE_ANIM_OAMSET_1F
