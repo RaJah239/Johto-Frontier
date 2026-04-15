@@ -3151,6 +3151,15 @@ BattleCommand_DamageCalc:
 	call GetBattleVar
 	and TYPE_MASK
 
+; Explosion halves defense
+	cp EFFECT_EXPLOSION
+	jr nz, .not_explosion
+
+	srl c
+	jr nz, .not_explosion
+	inc c
+
+.not_explosion
 ; Variable-hit moves and Conversion can have a power of 0.
 	cp EFFECT_MULTI_HIT
 	jr z, .skip_zero_damage_check

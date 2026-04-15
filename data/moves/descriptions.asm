@@ -671,8 +671,8 @@ SplashDescription:
 	line "whatsoever.@"
 
 ExplosionDescription:
-	db   "Very powerful but"
-	line "makes user faint.@"
+	db   "500 Power move but"
+	line "user faints after.@"
 
 RestDescription:
 	db   "Sleep for 2 turns"
