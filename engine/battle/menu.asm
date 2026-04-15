@@ -4,6 +4,8 @@ LoadBattleMenu:
 	ld hl, BattleMenuHeaderTrainer
 	jr nz, .trainer
 	ld hl, BattleMenuHeaderWild
+	; fallthrough
+
 .trainer
 	call LoadMenuHeader
 	ld a, [wBattleMenuCursorPosition]
@@ -11,8 +13,7 @@ LoadBattleMenu:
 	call InterpretBattleMenu
 	ld a, [wMenuCursorPosition]
 	ld [wBattleMenuCursorPosition], a
-	call ExitMenu
-	ret
+	jmp ExitMenu
 
 ContestBattleMenu:
 	ld hl, ContestBattleMenuHeader
@@ -25,8 +26,7 @@ CommonBattleMenu:
 	call _2DMenu
 	ld a, [wMenuCursorPosition]
 	ld [wBattleMenuCursorPosition], a
-	call ExitMenu
-	ret
+	jmp ExitMenu
 
 BattleMenuHeaderWild:
 	db MENU_BACKUP_TILES ; flags
@@ -89,5 +89,4 @@ ContestBattleMenuHeader:
 	hlcoord 17, 14
 	ld de, wParkBallsRemaining
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
-	ret
+	jmp PrintNum
