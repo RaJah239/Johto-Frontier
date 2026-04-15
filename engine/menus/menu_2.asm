@@ -4,8 +4,7 @@ PlaceMenuItemName:
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	pop hl
-	call PlaceString
-	ret
+	jmp PlaceString
 
 PlaceMartMenuItemName:
 	push de
@@ -21,10 +20,11 @@ PlaceMartMenuItemName:
 	ld de, wStringBuffer4 + STRLEN("TM##")
 	callfar AppendTMHMMoveName
 	ld de, wStringBuffer4
+	; fallthrough
+
 .place_string:
 	pop hl
-	call PlaceString
-	ret
+	jmp PlaceString
 
 PlaceMenuItemQuantity:
 	push de
@@ -34,17 +34,14 @@ PlaceMenuItemQuantity:
 	ld a, [wItemAttributeValue]
 	pop hl
 	and a
-	jr nz, .done
+	ret nz
 	ld de, $15
 	add hl, de
 	ld [hl], "×"
 	inc hl
 	ld de, wMenuSelectionQuantity
 	lb bc, 1, 2
-	call PrintNum
-
-.done
-	ret
+	jmp PrintNum
 
 PlaceItemInBagQuantity:
 	; Place a text box of size 1x7 at 0, 0.
@@ -70,8 +67,7 @@ PlaceItemInBagQuantity:
 .no_selection
 	jr ClearItemInBagQuantitysBox
 
-.InBagString:
-	db "Bag@"
+.InBagString: db "Bag@"
 
 ClearItemInBagQuantitysBox:
 	hlcoord 0, 0
@@ -82,8 +78,7 @@ ClearItemInBagQuantitysBox:
 	ld de, .BlankString
 	jmp PlaceString
 
-.BlankString:
-	db "@"
+.BlankString: db "@"
 
 PlaceMoneyTopRight:
 	ld hl, MoneyTopRightMenuHeader
@@ -99,6 +94,7 @@ PlaceMoneyAtTopLeftOfTextbox:
 	ld hl, MoneyTopRightMenuHeader
 	lb de, 0, 11
 	call OffsetMenuHeader
+	; fallthrough
 
 PlaceMoneyTextbox:
 	call MenuBox
@@ -107,8 +103,7 @@ PlaceMoneyTextbox:
 	add hl, de
 	ld de, wMoney
 	lb bc, PRINTNUM_MONEY | 3, 6
-	call PrintNum
-	ret
+	jmp PrintNum
 
 MoneyTopRightMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -137,8 +132,7 @@ DisplayCoinCaseBalance:
 	ld de, wCoins
 	lb bc, 2, 4
 	hlcoord 13, 1
-	call PrintNum
-	ret
+	jmp PrintNum
 
 DisplayMoneyAndCoinBalance:
 	hlcoord 5, 0
@@ -158,22 +152,17 @@ DisplayMoneyAndCoinBalance:
 	hlcoord 15, 3
 	ld de, wCoins
 	lb bc, 2, 4
-	call PrintNum
-	ret
+	jmp PrintNum
 
-MoneyString:
-	db "Money@"
-CoinString:
-	db "Coin@"
-ShowMoney_TerminatorString:
-	db "@"
+MoneyString: db "Money@"
+CoinString: db "Coin@"
+ShowMoney_TerminatorString: db "@"
 
 StartMenu_DrawBugContestStatusBox:
 	hlcoord 0, 0
 	ld b, 5
 	ld c, 17
-	call Textbox
-	ret
+	jmp Textbox
 
 StartMenu_PrintBugContestStatus:
 	ld hl, wOptions
@@ -219,14 +208,10 @@ StartMenu_PrintBugContestStatus:
 	ld [wOptions], a
 	ret
 
-.CaughtString:
-	db "Caught@"
-.BallsString:
-	db "Balls:@"
-.NoneString:
-	db "None@"
-.LevelString:
-	db "Level@"
+.CaughtString: db "Caught@"
+.BallsString: db "Balls:@"
+.NoneString: db "None@"
+.LevelString: db "Level@"
 
 FindApricornsInBag:
 ; Checks the bag for Apricorns.
