@@ -7,8 +7,7 @@ DEF NAMINGSCREEN_UNDERLINE  EQU "☎" ; $d9
 _NamingScreen:
 	call DisableSpriteUpdates
 	call NamingScreen
-	call ReturnToMapWithSpeechTextbox
-	ret
+	jmp ReturnToMapWithSpeechTextbox
 
 NamingScreen:
 	ld hl, wNamingScreenDestinationPointer
@@ -40,8 +39,7 @@ NamingScreen:
 	ldh [hMapAnims], a
 	pop af
 	ld [wOptions], a
-	call ClearJoypad
-	ret
+	jmp ClearJoypad
 
 .SetUpNamingScreen:
 	ld c, 15
@@ -58,8 +56,7 @@ NamingScreen:
 	call WaitBGMap
 	call WaitTop
 	call SetDefaultBGPAndOBP
-	call NamingScreen_InitNameEntry
-	ret
+	jmp NamingScreen_InitNameEntry
 
 .GetNamingScreenSetup:
 	ld a, [wNamingScreenType]
@@ -136,12 +133,11 @@ NamingScreen:
 	hlcoord 1, 4
 	ld [hl], "⁂"
 .not_shiny
-	call .StoreMonIconParams
-	ret
+	jmp .StoreMonIconParams
 
 .NicknameStrings:
-	db "'S@"
-	db "NICKNAME?@"
+	db "'s@"
+	db "Nickname?@"
 
 .Player:
 	farcall GetPlayerIcon
@@ -149,11 +145,9 @@ NamingScreen:
 	hlcoord 5, 2
 	ld de, .PlayerNameString
 	call PlaceString
-	call .StoreSpriteIconParams
-	ret
+	jmp .StoreSpriteIconParams
 
-.PlayerNameString:
-	db "YOUR NAME?@"
+.PlayerNameString: db "Your Name?@"
 
 .Rival:
 	ld de, RivalSpriteGFX
@@ -162,11 +156,9 @@ NamingScreen:
 	hlcoord 5, 2
 	ld de, .RivalNameString
 	call PlaceString
-	call .StoreSpriteIconParams
-	ret
+	jmp .StoreSpriteIconParams
 
-.RivalNameString:
-	db "RIVAL'S NAME?@"
+.RivalNameString: db "Rival's Name?@"
 
 .Mom:
 	ld de, MomSpriteGFX
@@ -175,11 +167,9 @@ NamingScreen:
 	hlcoord 5, 2
 	ld de, .MomNameString
 	call PlaceString
-	call .StoreSpriteIconParams
-	ret
+	jmp .StoreSpriteIconParams
 
-.MomNameString:
-	db "MOTHER'S NAME?@"
+.MomNameString: db "Mother's Name?@"
 
 .Box:
 	ld de, PokeBallSpriteGFX
@@ -199,21 +189,17 @@ NamingScreen:
 	hlcoord 5, 2
 	ld de, .BoxNameString
 	call PlaceString
-	call .StoreBoxIconParams
-	ret
+	jr .StoreBoxIconParams
 
-.BoxNameString:
-	db "BOX NAME?@"
+.BoxNameString: db "Box Name?@"
 
 .Tomodachi:
 	hlcoord 3, 2
 	ld de, .oTomodachi_no_namae_sutoringu
 	call PlaceString
-	call .StoreSpriteIconParams
-	ret
+	jr .StoreSpriteIconParams
 
-.oTomodachi_no_namae_sutoringu
-	db "おともだち　の　なまえは？@"
+.oTomodachi_no_namae_sutoringu db "@"
 
 .LoadSprite:
 	push de
@@ -244,8 +230,7 @@ NamingScreen:
 .not_kris
 	ld a, b
 	depixel 4, 4, 4, 0
-	call InitSpriteAnimStruct
-	ret
+	jmp InitSpriteAnimStruct
 
 .StoreMonIconParams:
 	ld a, MON_NAME_LENGTH - 1
@@ -464,8 +449,7 @@ NamingScreenJoypadLoop:
 	ret
 
 .b
-	call NamingScreen_DeleteCharacter
-	ret
+	jmp NamingScreen_DeleteCharacter
 
 .end
 	call NamingScreen_StoreEntry
@@ -480,19 +464,18 @@ NamingScreenJoypadLoop:
 	ld [hl], a
 	jr z, .upper
 	ld de, NameInputLower
-	call NamingScreen_ApplyTextInputMode
-	ret
+	jmp NamingScreen_ApplyTextInputMode
 
 .upper
 	ld de, NameInputUpper
-	call NamingScreen_ApplyTextInputMode
-	ret
+	jmp NamingScreen_ApplyTextInputMode
 
 .GetCursorPosition:
 	ld hl, wNamingScreenCursorObjectPointer
 	ld c, [hl]
 	inc hl
 	ld b, [hl]
+	; fallthrough
 
 NamingScreen_GetCursorPosition:
 	ld hl, SPRITEANIMSTRUCT_VAR2
@@ -689,6 +672,8 @@ NamingScreen_AnimateCursor:
 
 NamingScreen_TryAddCharacter:
 	ld a, [wNamingScreenLastCharacter] ; lost
+	; fallthrough
+
 MailComposition_TryAddCharacter:
 	ld a, [wNamingScreenMaxNameLength]
 	ld c, a
@@ -706,10 +691,12 @@ MailComposition_TryAddCharacter:
 	pop de
 .skipLowercase
 	ld a, [wNamingScreenLastCharacter]
+	; fallthrough
 
 NamingScreen_LoadNextCharacter:
 	call NamingScreen_GetTextCursorPosition
 	ld [hl], a
+	; fallthrough
 
 NamingScreen_AdvanceCursor_CheckEndOfString:
 	ld hl, wNamingScreenCurNameLength
@@ -758,8 +745,7 @@ NamingScreen_DeleteCharacter:
 	and a
 	ret nz
 	ld de, NameInputUpper
-	call NamingScreen_ApplyTextInputMode
-	ret
+	jmp NamingScreen_ApplyTextInputMode
 
 NamingScreen_GetTextCursorPosition:
 	push af
