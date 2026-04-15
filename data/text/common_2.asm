@@ -580,10 +580,6 @@ _AnEggCantHoldAnItemText::
 	line "an item."
 	prompt
 
-_PackNoItemText::
-	text "No items."
-	done
-
 _AskThrowAwayText::
 	text "Throw away how"
 	line "many?"

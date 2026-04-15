@@ -1774,10 +1774,6 @@ PC_Mart_BattlePocketMenuHeader:
 	dba PlaceMenuItemQuantity
 	dba UpdateItemDescription
 
-PackNoItemText: ; unreferenced
-	text_far _PackNoItemText
-	text_end
-
 AskThrowAwayText:
 	text_far _AskThrowAwayText
 	text_end
