@@ -181,6 +181,7 @@ BattleAnimFrameData:
 	dw .Frameset_Cotton              ; BATTLE_ANIM_FRAMESET_COTTON
 	dw .Frameset_OctazookaSmoke      ; BATTLEANIMFRAMESET_OCTAZOOKA_SMOKE
 	dw .Frameset_SeedBomb            ; BATTLEANIMFRAMESET_SEED_BOMB
+	dw .Frameset_FireBlastImpact     ; BATTLE_ANIM_FRAMESET_FIRE_BLAST_IMPACT
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
 .Frameset_SeedBomb:
@@ -1200,4 +1201,12 @@ BattleAnimFrameData:
 .Frameset_ShrinkingRingBig:
 	oamframe BATTLE_ANIM_OAMSET_BIG_RING1,  2
 	oamframe BATTLE_ANIM_OAMSET_BIG_RING2,  2
+	oamdelete
+
+.Frameset_FireBlastImpact:
+	oamframe BATTLE_ANIM_OAMSET_0F,  3
+	oamframe BATTLE_ANIM_OAMSET_0E,  2
+	oamframe BATTLE_ANIM_OAMSET_0A,  3
+	oamframe BATTLE_ANIM_OAMSET_0E,  4
+	oamframe BATTLE_ANIM_OAMSET_0A,  4
 	oamdelete
