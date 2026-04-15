@@ -3421,7 +3421,7 @@ TryToRunAwayFromBattle:
 	cp BATTLETYPE_CELEBI
 	jr z, .cant_escape
 	cp BATTLETYPE_FORCESHINY
-	jr z, .can_escape
+	jr z, .shiny_cant_escape
 	cp BATTLETYPE_SUICUNE
 	jr z, .cant_escape
 
@@ -3435,7 +3435,7 @@ TryToRunAwayFromBattle:
 
 	; can't run from Shiny Pokemon
 	call BattleCheckEnemyShininess
-	jr c, .cant_escape
+	jr c, .shiny_cant_escape
 
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
@@ -3444,6 +3444,13 @@ TryToRunAwayFromBattle:
 
 .cant_escape
 	ld hl, BattleText_CantEscape
+	call StdBattleTextbox
+	call LoadTilemapToTempTilemap
+	and a
+	ret
+
+.shiny_cant_escape
+	ld hl, BattleText_ShinyCantEscape
 	call StdBattleTextbox
 	call LoadTilemapToTempTilemap
 	and a

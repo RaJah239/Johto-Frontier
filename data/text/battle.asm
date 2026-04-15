@@ -447,6 +447,11 @@ BattleText_CantEscape:
 	text "Can't escape!"
 	prompt
 
+BattleText_ShinyCantEscape:
+	text "It has a unique"
+	line "color!"
+	prompt
+
 BattleText_UserHurtBySpikes:
 	text "<USER>'s"
 	line "hurt by SPIKES!"
