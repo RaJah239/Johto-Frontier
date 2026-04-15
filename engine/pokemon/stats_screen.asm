@@ -88,12 +88,10 @@ StatsScreenMobile:
 	rst JumpTable
 	call StatsScreen_WaitAnim
 	farcall MobileComms_CheckInactivityTimer
-	jr c, .exit
+	ret c
 	ld a, [wJumptableIndex]
 	bit 7, a
 	jr z, .loop
-
-.exit
 	ret
 
 StatsScreenPointerTable:
@@ -112,8 +110,7 @@ StatsScreen_WaitAnim:
 	jr nz, .try_anim
 	bit 5, [hl]
 	jr nz, .finish
-	call DelayFrame
-	ret
+	jmp DelayFrame
 
 .try_anim
 	farcall SetUpPokeAnim
@@ -123,15 +120,7 @@ StatsScreen_WaitAnim:
 .finish
 	ld hl, wStatsScreenFlags
 	res 5, [hl]
-	farcall HDMATransferTilemapToWRAMBank3
-	ret
-
-StatsScreen_SetJumptableIndex:
-	ld a, [wJumptableIndex]
-	and $80
-	or h
-	ld [wJumptableIndex], a
-	ret
+	farjp HDMATransferTilemapToWRAMBank3
 
 StatsScreen_Exit:
 	ld hl, wJumptableIndex
@@ -152,12 +141,17 @@ MonStatsInit:
 	ld hl, wStatsScreenFlags
 	set 4, [hl]
 	ld h, 4
-	call StatsScreen_SetJumptableIndex
-	ret
+	jr StatsScreen_SetJumptableIndex
 
 .egg
 	ld h, 1
-	call StatsScreen_SetJumptableIndex
+	; fallthrough
+
+StatsScreen_SetJumptableIndex:
+	ld a, [wJumptableIndex]
+	and $80
+	or h
+	ld [wJumptableIndex], a
 	ret
 
 EggStatsInit:
@@ -180,8 +174,7 @@ endc
 
 .quit
 	ld h, 7
-	call StatsScreen_SetJumptableIndex
-	ret
+	jr StatsScreen_SetJumptableIndex
 
 if DEF(_DEBUG)
 .hatch
@@ -229,18 +222,11 @@ MonStatsJoypad:
 	call StatsScreen_GetJoypad
 	jr nc, .next
 	ld h, 0
-	call StatsScreen_SetJumptableIndex
-	ret
+	jmp StatsScreen_SetJumptableIndex
 
 .next
 	and D_DOWN | D_UP | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON | SELECT
-	jr StatsScreen_JoypadAction
-
-StatsScreenWaitCry:
-	ld a, [wJumptableIndex]
-	inc a
-	ld [wJumptableIndex], a
-	ret
+	; fallthrough
 
 StatsScreen_JoypadAction:
 	push af
@@ -253,7 +239,7 @@ StatsScreen_JoypadAction:
 	bit D_LEFT_F, a
 	jmp nz, .d_left
 	bit D_RIGHT_F, a
-	jr nz, .d_right
+	jmp nz, .d_right
 	bit A_BUTTON_F, a
 	jr nz, .a_button
 	bit D_UP_F, a
@@ -262,12 +248,12 @@ StatsScreen_JoypadAction:
 	jr nz, .d_down
 	bit SELECT_F, a
 	jr nz, .select
-	jmp .done
+	ret
 
 .select
 	ld a, c
 	cp ORANGE_PAGE
-	jr nz, .select_done
+	ret nz
 	ld a, [wAbilityPageMode]
 	and a
 	jr nz, .show_more_details_page
@@ -279,16 +265,22 @@ StatsScreen_JoypadAction:
 	ld [wAbilityPageMode], a
 .refresh
 	ld c, ORANGE_PAGE ; last page
-	jr .set_page
-.select_done
-	ret
+	; fallthrough
+
+.set_page
+	ld a, [wStatsScreenFlags]
+	and ~STAT_PAGE_MASK
+	or c
+	ld [wStatsScreenFlags], a
+	ld h, 4
+	jmp StatsScreen_SetJumptableIndex
 
 .d_down
 	ld a, [wMonType]
 	cp BUFFERMON
 	jr z, .next_storage
 	cp BOXMON
-	jr nc, .done
+	ret nc
 	and a
 	ld a, [wPartyCount]
 	jr z, .next_mon
@@ -298,7 +290,7 @@ StatsScreen_JoypadAction:
 	ld a, [wCurPartyMon]
 	inc a
 	cp b
-	jr z, .done
+	ret z
 	ld [wCurPartyMon], a
 	ld b, a
 	ld a, [wMonType]
@@ -315,7 +307,7 @@ StatsScreen_JoypadAction:
 	jr z, .prev_storage
 	ld a, [wCurPartyMon]
 	and a
-	jr z, .done
+	ret z
 	dec a
 	ld [wCurPartyMon], a
 	ld b, a
@@ -350,33 +342,27 @@ StatsScreen_JoypadAction:
 .prev_storage
 	newfarcall PrevStorageBoxMon
 	jr nz, .load_storage_mon
-.done
-	ret
-
-.set_page
-	ld a, [wStatsScreenFlags]
-	and ~STAT_PAGE_MASK
-	or c
-	ld [wStatsScreenFlags], a
-	ld h, 4
-	call StatsScreen_SetJumptableIndex
 	ret
 
 .next_storage
 	newfarcall NextStorageBoxMon
-	jr z, .done
+	ret z
 .load_storage_mon
 	ld a, [wBufferMonAltSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 .load_mon
 	ld h, 0
-	call StatsScreen_SetJumptableIndex
-	ret
+	jmp StatsScreen_SetJumptableIndex
 
 .b_button
 	ld h, 7
-	call StatsScreen_SetJumptableIndex
+	jmp StatsScreen_SetJumptableIndex
+
+StatsScreenWaitCry:
+	ld a, [wJumptableIndex]
+	inc a
+	ld [wJumptableIndex], a
 	ret
 
 StatsScreen_CopyToTempMon:
@@ -470,8 +456,7 @@ StatsScreen_InitUpperHalf:
 	call SetHPPal
 	ld b, SCGB_STATS_SCREEN_HP_PALS
 	call GetSGBLayout
-	call DelayFrame
-	ret
+	jmp DelayFrame
 
 .PlaceGenderChar:
 	push hl
@@ -542,13 +527,8 @@ StatsScreen_LoadGFX:
 	call .LoadPals
 	ld hl, wStatsScreenFlags
 	bit 4, [hl]
-	jr nz, .place_frontpic
-	call SetDefaultBGPAndOBP
-	ret
-
-.place_frontpic
-	call StatsScreen_PlaceFrontpic
-	ret
+	jmp z, SetDefaultBGPAndOBP
+	jmp StatsScreen_PlaceFrontpic
 
 .ClearBox:
 	ld a, [wStatsScreenFlags]
@@ -557,8 +537,7 @@ StatsScreen_LoadGFX:
 	call StatsScreen_LoadPageIndicators
 	hlcoord 0, 8
 	lb bc, 10, 20
-	call ClearBox
-	ret
+	jmp ClearBox
 
 .LoadPals:
 	ld a, [wStatsScreenFlags]
@@ -747,8 +726,7 @@ LoadGreenPage:
 	hlcoord 12, 11
 	ld a, SCREEN_WIDTH * 2
 	ld [wListMovesLineSpacing], a
-	predef ListMovePP
-	ret
+	predef_jump ListMovePP
 
 .GetItemName:
 	ld de, .ThreeDashes
@@ -759,8 +737,7 @@ LoadGreenPage:
 	farcall TimeCapsule_ReplaceTeruSama
 	ld a, b
 	ld [wNamedObjectIndex], a
-	call GetItemName
-	ret
+	jmp GetItemName
 
 .Item:
 	db "Item@"
@@ -785,8 +762,7 @@ LoadBluePage:
 	jr nz, .vertical_divider
 	hlcoord 11, 8
 	ld bc, 6
-	predef PrintTempMonStats
-	ret
+	predef_jump PrintTempMonStats
 
 .PlaceOTInfo:
 	ld de, IDNoString
@@ -807,9 +783,9 @@ LoadBluePage:
 	call PlaceString
 	ld a, [wTempMonCaughtGender]
 	and a
-	jr z, .done
+	ret z
 	cp $7f
-	jr z, .done
+	ret z
 	and CAUGHT_GENDER_MASK
 	ld a, "♂"
 	jr z, .got_gender
@@ -817,7 +793,6 @@ LoadBluePage:
 .got_gender
 	hlcoord 9, 13
 	ld [hl], a
-.done
 	ret
 
 .OTNamePointers:
@@ -920,8 +895,7 @@ StatsScreen_Print_HiddenPow_Info:
 	farcall GetTypeName
 	ld de, wStringBuffer1
 	hlcoord 2, 17
-	call PlaceString
-	ret
+	jmp PlaceString
 
 HiddenPowerTypeString:
 	db "Core Trait:@"
@@ -1186,17 +1160,15 @@ StatsScreen_placeCaughtLocation:
 	farcall GetLandmarkName
 	ld de, wStringBuffer1
 	hlcoord 2, 9
-	call PlaceString
-	ret	
+	jmp PlaceString
+
 .unknown_location:
 	ld de, .MetUnknownMapString
 	hlcoord 2, 9
-	call PlaceString
-	ret
-.MetAtMapString:
-	db "Met:@"
-.MetUnknownMapString:
-	db "Trade@"
+	jmp PlaceString
+
+.MetAtMapString: db "Met:@"
+.MetUnknownMapString: db "Trade@"
 
 StatsScreen_placeCaughtTime:
 	; caught level
@@ -1228,8 +1200,7 @@ StatsScreen_placeCaughtTime:
 	call CopyName1
 	ld de, wStringBuffer2
 	hlcoord 6, 8
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .printegginfo:
 	ld a, [wTempMonCaughtTime]
@@ -1245,14 +1216,12 @@ StatsScreen_placeCaughtTime:
 	call CopyName1
 	ld de, wStringBuffer2
 	hlcoord 10, 8
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .unknown_time:
 	ld de, .unknown_time_text
 	hlcoord 6, 8
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .times
 	db "Morn@"
@@ -1283,19 +1252,15 @@ StatsScreen_placeCaughtLevel:
 .printegg:
 	ld de, .HatchedString
 	hlcoord 1, 8
-	call PlaceString
-	ret   
+	jmp PlaceString   
 
 .unknown_level
 	ld de, .MetUnknownLevelString
 	hlcoord 11, 8
-	call PlaceString
-	ret
+	jmp PlaceString
 
-.HatchedString:
-	db "Hatched:"
-.MetUnknownLevelString:
-	db "@"
+.HatchedString: db "Hatched:"
+.MetUnknownLevelString: db "@"
 
 StatsScreen_PrintAffection:
 	ld de, AffectionString
@@ -1326,23 +1291,12 @@ StatsScreen_PrintAffection:
 AffectionString:
 	db "Condition/@"
 	
-MaxString:
-	db "Overjoyed@"
-	
-HighString:
-	db "Happy@"
-	
-GoodString:
-	db "Content@"
-	
-MidString:
-	db "Average@"
-	
-LowString:
-	db "Unhappy@"
-	
-PoorString:
-	db "Miserable@"
+MaxString:  db "Overjoyed@"
+HighString: db "Happy@"
+GoodString: db "Content@"
+MidString:  db "Average@"
+LowString:  db "Unhappy@"
+PoorString: db "Miserable@"
 
 StatsScreen_PlaceFrontpic:
 	ld hl, wTempMonDVs
@@ -1351,24 +1305,21 @@ StatsScreen_PlaceFrontpic:
 	jr c, .egg
 	and a
 	jr z, .no_cry
-	jr .cry
-
-.egg
-	call .AnimateEgg
-	call SetDefaultBGPAndOBP
-	ret
-
-.no_cry
-	call .AnimateMon
-	call SetDefaultBGPAndOBP
-	ret
+	; fallthrough
 
 .cry
 	call SetDefaultBGPAndOBP
 	call .AnimateMon
 	ld a, [wCurPartySpecies]
-	call PlayMonCry2
-	ret
+	jmp PlayMonCry2
+
+.egg
+	call .AnimateEgg
+	jmp SetDefaultBGPAndOBP
+
+.no_cry
+	call .AnimateMon
+	jmp SetDefaultBGPAndOBP
 
 .AnimateMon:
 	ld hl, wStatsScreenFlags
@@ -1377,15 +1328,13 @@ StatsScreen_PlaceFrontpic:
 	cp UNOWN
 	jr z, .unown
 	hlcoord 0, 0
-	call PrepMonFrontpic
-	ret
+	jmp PrepMonFrontpic
 
 .unown
 	xor a
 	ld [wBoxAlignment], a
 	hlcoord 0, 0
-	call _PrepMonFrontpic
-	ret
+	jmp _PrepMonFrontpic
 
 .AnimateEgg:
 	ld a, [wCurPartySpecies]
@@ -1393,14 +1342,7 @@ StatsScreen_PlaceFrontpic:
 	jr z, .unownegg
 	ld a, TRUE
 	ld [wBoxAlignment], a
-	call .get_animation
-	ret
-
-.unownegg
-	xor a
-	ld [wBoxAlignment], a
-	call .get_animation
-	ret
+	; fallthrough
 
 .get_animation
 	ld a, [wCurPartySpecies]
@@ -1416,6 +1358,11 @@ StatsScreen_PlaceFrontpic:
 	ld hl, wStatsScreenFlags
 	set 6, [hl]
 	ret
+
+.unownegg
+	xor a
+	ld [wBoxAlignment], a
+	jr .get_animation
 
 StatsScreen_GetAnimationParam:
 	ld a, [wMonType]
@@ -1488,9 +1435,6 @@ StatsScreen_LoadTextboxSpaceGFX:
 	ldh [rVBK], a
 	jmp PopAFBCDEHL
 
-StatsScreenSpaceGFX: ; unreferenced
-INCBIN "gfx/font/space.2bpp"
-
 EggStatsScreen:
 	xor a
 	ldh [hBGMapMode], a
@@ -1552,11 +1496,10 @@ endc
 	cp 6
 	ret nc
 	ld de, SFX_2_BOOPS
-	call PlaySFX
-	ret
+	jmp PlaySFX
 
 EggString:
-	db "EGG@"
+	db "Egg@"
 
 FiveQMarkString:
 	db "?????@"
@@ -1578,7 +1521,7 @@ EggMoreTimeString:
 	next "more time, though.@"
 
 EggALotMoreTimeString:
-	db   "This EGG needs a"
+	db   "This Egg needs a"
 	next "lot more time to"
 	next "hatch.@"
 
@@ -1591,9 +1534,7 @@ StatsScreen_AnimateEgg:
 	jr c, .animate
 	ld e, $8
 	cp 11
-	jr c, .animate
-	ret
-
+	ret nc
 .animate
 	push de
 	ld a, $1
