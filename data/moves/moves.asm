@@ -145,7 +145,7 @@ Moves:
 	move SWIFT,        EFFECT_ALWAYS_HIT,         40, STEEL,         SPECIAL,  100, 40,   0
 	move NIGHT_SLASH,  EFFECT_NORMAL_HIT,         70, DARK,          PHYSICAL, 100, 32,   0
 	move FAKE_OUT,     EFFECT_FAKE_OUT,           40, NORMAL,        PHYSICAL, 100, 16, 100
-	move FURY_DRIVE,   EFFECT_FURY_DRIVE,          0, NORMAL,        STATUS,   100,  1,   0
+	move FURY_DRIVE,   EFFECT_FURY_DRIVE,          0, NORMAL,        STATUS,   100, 24,   0
 	move AMNESIA,      EFFECT_SP_DEF_UP_2,         0, PSYCHIC_TYPE,  STATUS,   100, 32,   0
 	move BUG_BUZZ,     EFFECT_SP_DEF_DOWN_HIT,    95, BUG,           SPECIAL,  100, 24,  30
 	move SOFTBOILED,   EFFECT_HEAL,                0, NORMAL,        STATUS,   100, 32,   0
