@@ -1,8 +1,8 @@
 	db ARIADOS ; 168
 
-	db  70,  90,  70,  40,  60,  60
-	evs  0,   2,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
+	db  80, 115,  70, 115,  50,  70 ; 500 BST
+	evs  1,   2,   1,   2,   0,   1
 
 	db BUG, POISON ; type
 	db 90 ; catch rate
