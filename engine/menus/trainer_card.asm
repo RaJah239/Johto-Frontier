@@ -108,8 +108,7 @@ TrainerCard_Page1_LoadGFX:
 	lb bc, BANK(CardStatusGFX), 86
 	call Request2bpp
 	call TrainerCard_Page1_PrintDexCaught_GameTime
-	call TrainerCard_IncrementJumptable
-	ret
+	jr TrainerCard_IncrementJumptable
 
 TrainerCard_Page1_Joypad:
 	call TrainerCard_Page1_PrintGameTime
@@ -120,7 +119,6 @@ TrainerCard_Page1_Joypad:
 	ld a, [hl]
 	and D_LEFT
 	ret z
-
 .badge_page
 	ld a, TRAINERCARDSTATE_PAGE2_LOADGFX
 	ld [wJumptableIndex], a
@@ -141,8 +139,7 @@ TrainerCard_Page2_LoadGFX:
 	lb bc, BANK(BadgeGFX), 44
 	call Request2bpp
 	call TrainerCard_Page2_3_InitObjectsAndStrings
-	call TrainerCard_IncrementJumptable
-	ret
+	jr TrainerCard_IncrementJumptable
 
 TrainerCard_Page2_Joypad:
 	ld hl, TrainerCard_JohtoBadgesOAM
@@ -157,13 +154,12 @@ TrainerCard_Page2_Joypad:
 	ld a, [hl]
 	and D_RIGHT
 	ret z
-
 .status_page
 	ld a, TRAINERCARDSTATE_PAGE1_LOADGFX
 	ld [wJumptableIndex], a
 	ret
 
-.Quit:
+.Quit
 	ld a, TRAINERCARDSTATE_QUIT
 	ld [wJumptableIndex], a
 	ret
@@ -206,8 +202,7 @@ TrainerCard_PrintTopHalfOfCard:
 	lb bc, 5, 7
 	xor a
 	ldh [hGraphicStartTile], a
-	predef PlaceGraphic
-	ret
+	predef_jump PlaceGraphic
 
 .Name_Money:
 	db   "Name/"
@@ -270,18 +265,14 @@ TrainerCard_Page1_PrintDexCaught_GameTime:
 	ret nz
 	hlcoord 1, 9
 	lb bc, 2, 17
-	call ClearBox
-	ret
+	jmp ClearBox
 
 .Dex_PlayTime:
 	db   "#dex"
 	next "Play Time@"
 
-.Battle_Points:
-	db "Battle Points:@"
-
-.Badges:
-	db "←Badges→@"
+.Battle_Points: db "Battle Points:@"
+.Badges: db "←Badges→@"
 
 .StatusTilemap:
 	db $29, $2a, $2b, $2c, $2d, -1
@@ -313,8 +304,7 @@ endr
 	xor a
 	ld [wTrainerCardBadgeFrameCounter], a
 	ld hl, TrainerCard_JohtoBadgesOAM
-	call TrainerCard_Page2_3_OAMUpdate
-	ret
+	jmp TrainerCard_Page2_3_OAMUpdate
 
 .BadgesTilemap:
 	db $79, $7a, $7b, $7c, $7d, -1 ; "Badges"
@@ -591,10 +581,8 @@ TrainerCard_JohtoBadgesOAM:
 	db $1c | (1 << 7), $20, $24, $20 | (1 << 7)
 
 CardStatusGFX: INCBIN "gfx/trainer_card/card_status.2bpp"
-
 LeaderGFX:  INCBIN "gfx/trainer_card/leaders.2bpp"
 LeaderGFX2: INCBIN "gfx/trainer_card/leaders.2bpp"
 BadgeGFX:   INCBIN "gfx/trainer_card/badges.2bpp"
 BadgeGFX2:  INCBIN "gfx/trainer_card/badges.2bpp"
-
 CardRightCornerGFX: INCBIN "gfx/trainer_card/card_right_corner.2bpp"
