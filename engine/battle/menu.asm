@@ -66,32 +66,6 @@ BattleMenuHeaderTrainer:
 	db "<PKMN>@"
 	db "Info@"
 
-SafariBattleMenuHeader:
-	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 12, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1
-	dw .MenuData
-	db 1 ; default option
-
-.MenuData:
-	db STATICMENU_CURSOR | STATICMENU_WRAP | STATICMENU_DISABLE_B ; flags
-	dn 2, 2 ; rows, columns
-	db 11 ; spacing
-	dba .Text
-	dba .PrintSafariBallsRemaining
-
-.Text:
-	db "サファりボール×　　@" ; "SAFARI BALL×  @"
-	db "エサをなげる@" ; "THROW BAIT"
-	db "いしをなげる@" ; "THROW ROCK"
-	db "にげる@" ; "RUN"
-
-.PrintSafariBallsRemaining:
-	hlcoord 17, 13
-	ld de, wSafariBallsRemaining
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
-	ret
-
 ContestBattleMenuHeader:
 	db MENU_BACKUP_TILES ; flags
 	menu_coords 4, 12, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1

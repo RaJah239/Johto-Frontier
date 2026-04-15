@@ -3297,12 +3297,10 @@ wHappinessStepCount:: db
 	ds 1
 
 wParkBallsRemaining::
-wSafariBallsRemaining:: db
-wSafariTimeRemaining:: dw
 
 wPhoneList:: ds CONTACT_LIST_SIZE + 1
 
-	ds 24
+	ds 29
 
 wRepelType:: db
 
