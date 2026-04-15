@@ -1297,25 +1297,6 @@ StatsScreen_placeCaughtLevel:
 .MetUnknownLevelString:
 	db "@"
 
-StatsScreen_LoadUnownFont:
-	ld a, BANK(sScratch)
-	call OpenSRAM
-	ld hl, UnownFont
-	; sScratch + $188 was the address of sDecompressBuffer in pokegold
-	ld de, sScratch + $188
-	ld bc, 38 tiles
-	ld a, BANK(UnownFont)
-	call FarCopyBytes
-	; ld hl, sScratch + $188
-	; ld bc, (NUM_UNOWN + 1) tiles
-	;call Pokedex_InvertTiles
-	ld de, sScratch + $188
-	ld hl, vTiles1 tile $3a ;FIRST_UNOWN_CHAR
-	lb bc, BANK(Pokedex_LoadUnownFont), NUM_UNOWN
-	call Request2bpp
-	call CloseSRAM
-	ret
-
 StatsScreen_PrintAffection:
 	ld de, AffectionString
 	hlcoord 0, 15
