@@ -60,14 +60,14 @@ _PlayerDecorationMenu:
 	dw DecoExitMenu,     .exit
 	assert_table_length NUM_DECO_CATEGORIES + 1
 
-.bed:      db "BED@"
-.carpet:   db "CARPET@"
-.plant:    db "PLANT@"
-.poster:   db "POSTER@"
-.game:     db "GAME CONSOLE@"
-.ornament: db "ORNAMENT@"
-.big_doll: db "BIG DOLL@"
-.exit:     db "EXIT@"
+.bed:      db "Bed@"
+.carpet:   db "Carpet@"
+.plant:    db "Plant@"
+.poster:   db "Poster@"
+.game:     db "Game Console@"
+.ornament: db "Ornament@"
+.big_doll: db "Big Doll@"
+.exit:     db "Exit@"
 
 .FindCategoriesWithOwnedDecos:
 	xor a
@@ -79,8 +79,7 @@ _PlayerDecorationMenu:
 	ld hl, wStringBuffer2
 	ld de, wDecoNameBuffer
 	ld bc, ITEM_NAME_LENGTH
-	call CopyBytes
-	ret
+	jmp CopyBytes
 
 .ClearStringBuffer2:
 	ld hl, wStringBuffer2
@@ -88,8 +87,7 @@ _PlayerDecorationMenu:
 	ld [hli], a
 	ld bc, ITEM_NAME_LENGTH - 1
 	ld a, -1
-	call ByteFill
-	ret
+	jmp ByteFill
 
 .AppendToStringBuffer2:
 	ld hl, wStringBuffer2
@@ -108,7 +106,7 @@ _PlayerDecorationMenu:
 	ld a, [hli]
 	ld d, a
 	or e
-	jr z, .done
+	ret z
 	push hl
 	call _de_
 	pop hl
@@ -120,8 +118,6 @@ _PlayerDecorationMenu:
 .next
 	inc hl
 	jr .loop
-.done
-	ret
 
 .owned_pointers:
 	table_width 3, _PlayerDecorationMenu.owned_pointers
@@ -142,14 +138,13 @@ Deco_FillTempWithMinusOne:
 	assert wNumOwnedDecoCategories + 1 == wOwnedDecoCategories
 	ld a, -1
 	ld bc, 16
-	call ByteFill
-	ret
+	jmp ByteFill
 
 CheckAllDecorationFlags:
 .loop
 	ld a, [hli]
 	cp -1
-	jr z, .done
+	ret z
 	push hl
 	push af
 	ld b, CHECK_FLAG
@@ -161,9 +156,6 @@ CheckAllDecorationFlags:
 	call nz, AppendDecoIndex
 	pop hl
 	jr .loop
-
-.done
-	ret
 
 AppendDecoIndex:
 	ld hl, wNumOwnedDecoCategories
@@ -355,8 +347,7 @@ PopulateDecoCategoryMenu:
 	call DoDecorationAction2
 
 .no_action_1
-	call ExitMenu
-	ret
+	jmp ExitMenu
 
 .beyond_eight
 	ld hl, wNumOwnedDecoCategories
@@ -381,13 +372,11 @@ PopulateDecoCategoryMenu:
 	call DoDecorationAction2
 
 .no_action_2
-	call ExitMenu
-	ret
+	jmp ExitMenu
 
 .empty
 	ld hl, .NothingToChooseText
-	call MenuTextboxBackup
-	ret
+	jmp MenuTextboxBackup
 
 .NothingToChooseText:
 	text_far _NothingToChooseText
@@ -424,16 +413,14 @@ PopulateDecoCategoryMenu:
 GetDecorationData:
 	ld hl, DecorationAttributes
 	ld bc, DECOATTR_STRUCT_LENGTH
-	call AddNTimes
-	ret
+	jmp AddNTimes
 
 GetDecorationName:
 	push hl
 	call GetDecorationData
 	call GetDecoName
 	pop hl
-	call CopyName2
-	ret
+	jmp CopyName2
 
 DecorationMenuFunction:
 	ld a, [wMenuSelection]
@@ -441,8 +428,7 @@ DecorationMenuFunction:
 	call GetDecorationData
 	call GetDecoName
 	pop hl
-	call PlaceString
-	ret
+	jmp PlaceString
 
 DoDecorationAction2:
 	ld a, [wMenuSelection]
@@ -490,8 +476,7 @@ DecorationFlagAction:
 	push bc
 	call GetDecorationFlag
 	pop bc
-	call EventFlagAction
-	ret
+	jmp EventFlagAction
 
 GetDecorationSprite:
 	ld a, c
@@ -751,6 +736,7 @@ DecoAction_putawayornament:
 
 .incave
 	call DecoAction_PutItAway_Ornament
+	; fallthrough
 
 DecoAction_FinishUp_Ornament:
 	call QueryWhichSide
@@ -913,8 +899,7 @@ GetDecorationName_c_de:
 	ld a, c
 	ld h, d
 	ld l, e
-	call GetDecorationName
-	ret
+	jmp GetDecorationName
 
 GetDecorationName_c:
 	ld a, c
@@ -929,8 +914,7 @@ SetSpecificDecorationFlag:
 	ld a, c
 	call GetDecorationID
 	ld b, SET_FLAG
-	call DecorationFlagAction
-	ret
+	jmp DecorationFlagAction
 
 GetDecorationID:
 	push hl
@@ -992,8 +976,7 @@ DecorationDesc_TownMapPoster:
 	writetext .LookTownMapText
 	waitbutton
 	special OverworldTownMap
-	closetext
-	end
+	endtext
 
 .LookTownMapText:
 	text_far _LookTownMapText
@@ -1162,5 +1145,4 @@ PadCoords_de:
 	ld a, e
 	add 4
 	ld e, a
-	call GetBlockLocation
-	ret
+	jmp GetBlockLocation
