@@ -881,10 +881,6 @@ _PhoneJustTalkToThemText::
 	line "that person!"
 	done
 
-_PhoneThankYouText::
-	text "Thank you!"
-	done
-
 _PasswordAskResetClockText::
 	text "Reset the clock?"
 	done
