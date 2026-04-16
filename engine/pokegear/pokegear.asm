@@ -1457,9 +1457,9 @@ PokegearPhoneContactSubmenu:
 .CallDeleteCancelStrings:
 	dwcoord 10, 6
 	db 3
-	db   "CALL"
-	next "DELETE"
-	next "CANCEL"
+	db   "Call"
+	next "Delete"
+	next "Cancel"
 	db   "@"
 
 .CallDeleteCancelJumptable:
@@ -1470,27 +1470,13 @@ PokegearPhoneContactSubmenu:
 .CallCancelStrings:
 	dwcoord 10, 8
 	db 2
-	db   "CALL"
-	next "CANCEL"
+	db   "Call"
+	next "Cancel"
 	db   "@"
 
 .CallCancelJumptable:
 	dw .Call
 	dw .Cancel
-
-GetAMPMHours: ; unreferenced
-	ldh a, [hHours]
-	cp NOON_HOUR
-	jr c, .am
-	sub NOON_HOUR
-	ld [wTempByteValue], a
-	scf
-	ret
-
-.am
-	ld [wTempByteValue], a
-	and a
-	ret
 
 Pokegear_SwitchPage:
 	ld de, SFX_READ_TEXT_2
@@ -1647,14 +1633,6 @@ UpdateRadioStation:
 	call PlaceString
 	ld a, $1
 	ldh [hBGMapMode], a
-	ret
-
-LoadPokegearRadioChannelPointer: ; unreferenced
-	ld [wPokegearRadioChannelBank], a
-	ld a, [hli]
-	ld [wPokegearRadioChannelAddr], a
-	ld a, [hli]
-	ld [wPokegearRadioChannelAddr + 1], a
 	ret
 
 RadioChannels:
@@ -1903,9 +1881,6 @@ LoadStation_EvolutionRadio:
 	ld hl, PlayRadioShow
 	call Radio_BackUpFarCallParams
 	ld de, UnownStationName
-	ret
-
-DummyLoadStation: ; unreferenced
 	ret
 
 RadioMusicRestartDE:
@@ -2266,7 +2241,6 @@ _FlyMap:
 	lb bc, BANK(FlyMapLabelBorderGFX), 6
 	call Request1bpp
 	call FlyMap
-	call Pokegear_DummyFunction
 	ld b, SCGB_POKEGEAR_PALS
 	call GetSGBLayout
 	call SetDefaultBGPAndOBP
@@ -2470,9 +2444,6 @@ HasVisitedSpawn:
 	ret
 
 INCLUDE "data/maps/flypoints.asm"
-
-Pokegear_DummyFunction:
-	ret
 
 FlyMap:
 	ld a, [wMapGroup]
@@ -3019,134 +2990,3 @@ PokedexNestIconGFX:
 INCBIN "gfx/pokegear/dexmap_nest_icon.2bpp"
 FlyMapLabelBorderGFX:
 INCBIN "gfx/pokegear/flymap_label_border.1bpp"
-
-EntireFlyMap: ; unreferenced
-; Similar to _FlyMap, but scrolls through the entire
-; Flypoints data of both regions. A debug function?
-	xor a
-	ld [wTownMapPlayerIconLandmark], a
-	call ClearBGPalettes
-	call ClearTilemap
-	call ClearSprites
-	ld hl, hInMenu
-	ld a, [hl]
-	push af
-	ld [hl], $1
-	xor a
-	ldh [hBGMapMode], a
-	farcall ClearSpriteAnims
-	call LoadTownMapGFX
-	ld de, FlyMapLabelBorderGFX
-	ld hl, vTiles2 tile $30
-	lb bc, BANK(FlyMapLabelBorderGFX), 6
-	call Request1bpp
-	call FillKantoMap
-	call TownMapBubble
-	call TownMapPals
-	hlbgcoord 0, 0, vBGMap1
-	call TownMapBGUpdate
-	call FillJohtoMap
-	call TownMapBubble
-	call TownMapPals
-	hlbgcoord 0, 0
-	call TownMapBGUpdate
-	call TownMapMon
-	ld a, c
-	ld [wTownMapCursorCoordinates], a
-	ld a, b
-	ld [wTownMapCursorCoordinates + 1], a
-	ld b, SCGB_POKEGEAR_PALS
-	call GetSGBLayout
-	call SetDefaultBGPAndOBP
-.loop
-	call JoyTextDelay
-	ld hl, hJoyPressed
-	ld a, [hl]
-	and B_BUTTON
-	jr nz, .pressedB
-	ld a, [hl]
-	and A_BUTTON
-	jr nz, .pressedA
-	call .HandleDPad
-	call GetMapCursorCoordinates
-	farcall PlaySpriteAnimations
-	call DelayFrame
-	jr .loop
-
-.pressedB
-	ld a, -1
-	jr .exit
-
-.pressedA
-	ld a, [wTownMapPlayerIconLandmark]
-	ld l, a
-	ld h, 0
-	add hl, hl
-	ld de, Flypoints + 1
-	add hl, de
-	ld a, [hl]
-.exit
-	ld [wTownMapPlayerIconLandmark], a
-	pop af
-	ldh [hInMenu], a
-	call ClearBGPalettes
-	ld a, SCREEN_HEIGHT_PX
-	ldh [hWY], a
-	xor a ; LOW(vBGMap0)
-	ldh [hBGMapAddress], a
-	ld a, HIGH(vBGMap0)
-	ldh [hBGMapAddress + 1], a
-	ld a, [wTownMapPlayerIconLandmark]
-	ld e, a
-	ret
-
-.HandleDPad:
-	ld hl, hJoyLast
-	ld a, [hl]
-	and D_DOWN | D_RIGHT
-	jr nz, .ScrollNext
-	ld a, [hl]
-	and D_UP | D_LEFT
-	jr nz, .ScrollPrev
-	ret
-
-.ScrollNext:
-	ld hl, wTownMapPlayerIconLandmark
-	ld a, [hl]
-	cp NUM_FLYPOINTS - 1
-	jr c, .NotAtEndYet
-	ld [hl], -1
-.NotAtEndYet:
-	inc [hl]
-	jr .FillMap
-
-.ScrollPrev:
-	ld hl, wTownMapPlayerIconLandmark
-	ld a, [hl]
-	and a
-	jr nz, .NotAtStartYet
-	ld [hl], NUM_FLYPOINTS
-.NotAtStartYet:
-	dec [hl]
-.FillMap:
-	ld a, [wTownMapPlayerIconLandmark]
-	cp KANTO_FLYPOINT
-	jr c, .InJohto
-	call FillKantoMap
-	xor a
-	ld b, HIGH(vBGMap1)
-	jr .Finally
-
-.InJohto:
-	call FillJohtoMap
-	ld a, SCREEN_HEIGHT_PX
-	ld b, HIGH(vBGMap0)
-.Finally:
-	ldh [hWY], a
-	ld a, b
-	ldh [hBGMapAddress + 1], a
-	call TownMapBubble
-	call WaitBGMap
-	xor a
-	ldh [hBGMapMode], a
-	ret
