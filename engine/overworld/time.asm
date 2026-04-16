@@ -1,7 +1,3 @@
-_InitializeStartDay:
-	call InitializeStartDay
-	ret
-
 ClearDailyTimers:
 	xor a
 	ld [wUnusedTwoDayTimer], a
