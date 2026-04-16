@@ -79,7 +79,7 @@
 - Press Start to skip Credits
 
 ## Battle Related
-- Type Chart changes: Ice resists Water and Electric. Poison is Super Effective vs Normal types
+- Type Chart changes: Ice resists Water and Electric.
 - Items forbidden and forced Set Mode for all trainers
 - Trainers have no items to use on their Pokémon - just as the player
 - Fairy Type added
