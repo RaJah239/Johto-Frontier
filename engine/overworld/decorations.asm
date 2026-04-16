@@ -564,13 +564,6 @@ GetDecoName:
 	ld a, e
 	jr .getpokename
 
-.unused: ; unreferenced
-	push de
-	call .getdeconame
-	pop de
-	ld a, e
-	jr .getdeconame
-
 .getpokename:
 	push bc
 	ld [wNamedObjectIndex], a
@@ -949,21 +942,6 @@ GetDecorationID:
 	ld a, [hl]
 	pop de
 	pop hl
-	ret
-
-SetAllDecorationFlags: ; unreferenced
-	ld hl, DecorationIDs
-.loop
-	ld a, [hli]
-	cp -1
-	jr z, .done
-	push hl
-	ld b, SET_FLAG
-	call DecorationFlagAction
-	pop hl
-	jr .loop
-
-.done
 	ret
 
 INCLUDE "data/decorations/decorations.asm"
