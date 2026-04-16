@@ -6,13 +6,11 @@ ClearDailyTimers:
 InitCallReceiveDelay::
 	xor a
 	ld [wTimeCyclesSinceLastCall], a
-
 NextCallReceiveDelay:
 	ld a, [wTimeCyclesSinceLastCall]
 	cp 3
 	jr c, .okay
 	ld a, 3
-
 .okay
 	ld e, a
 	ld d, 0
@@ -32,22 +30,9 @@ CheckReceiveCallTimer:
 	cp 3
 	jr nc, .ok
 	inc [hl]
-
 .ok
 	call NextCallReceiveDelay ; restart timer
 	scf
-	ret
-
-InitOneDayCountdown:
-	ld a, 1
-
-InitNDaysCountdown:
-	ld [hl], a
-	push hl
-	call UpdateTime
-	pop hl
-	inc hl
-	call CopyDayToHL
 	ret
 
 CheckDayDependentEventHL:
@@ -57,28 +42,21 @@ CheckDayDependentEventHL:
 	call GetDaysSince
 	pop hl
 	dec hl
-	call UpdateTimeRemaining
-	ret
+	jmp UpdateTimeRemaining
 
 RestartReceiveCallDelay:
 	ld hl, wReceiveCallDelay_MinsRemaining
 	ld [hl], a
 	call UpdateTime
 	ld hl, wReceiveCallDelay_StartTime
-	call CopyDayHourMinToHL
-	ret
+	jmp CopyDayHourMinToHL
 
 CheckReceiveCallDelay:
 	ld hl, wReceiveCallDelay_StartTime
 	call CalcMinsHoursDaysSince
 	call GetMinutesSinceIfLessThan60
 	ld hl, wReceiveCallDelay_MinsRemaining
-	call UpdateTimeRemaining
-	ret
-
-RestartDailyResetTimer:
-	ld hl, wDailyResetTimer
-	jr InitOneDayCountdown
+	jmp UpdateTimeRemaining
 
 CheckDailyResetTimer::
 	ld hl, wDailyResetTimer
@@ -104,7 +82,21 @@ endr
 rept 4
 	ld [hli], a
 endr
-	jr RestartDailyResetTimer
+	; fallthrough
+
+RestartDailyResetTimer:
+	ld hl, wDailyResetTimer
+	; fallthrough
+
+InitOneDayCountdown:
+	ld a, 1
+InitNDaysCountdown:
+	ld [hl], a
+	push hl
+	call UpdateTime
+	pop hl
+	inc hl
+	jmp CopyDayToHL
 
 StartBugContestTimer:
 	ld a, BUG_CONTEST_MINUTES
@@ -113,8 +105,7 @@ StartBugContestTimer:
 	ld [wBugContestSecsRemaining], a
 	call UpdateTime
 	ld hl, wBugContestStartTime
-	call CopyDayHourMinSecToHL
-	ret
+	jmp CopyDayHourMinSecToHL
 
 CheckBugContestTimer::
 	ld hl, wBugContestStartTime
@@ -131,7 +122,6 @@ CheckBugContestTimer::
 	sub b
 	jr nc, .okay
 	add 60
-
 .okay
 	ld [wBugContestSecsRemaining], a
 	ld a, [wMinutesSince]
@@ -153,8 +143,7 @@ CheckBugContestTimer::
 InitializeStartDay:
 	call UpdateTime
 	ld hl, wTimerEventStartDay
-	call CopyDayToHL
-	ret
+	jmp CopyDayToHL
 
 CheckPokerusTick::
 	ld hl, wTimerEventStartDay
@@ -195,8 +184,7 @@ DoMysteryGiftIfDayHasPassed:
 	ld [sMysteryGiftTimer], a
 	ld a, [hl]
 	ld [sMysteryGiftTimer + 1], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 UpdateTimeRemaining:
 ; If the amount of time elapsed exceeds the capacity of its
@@ -262,6 +250,7 @@ CalcSecsMinsHoursDaysSince:
 	ld [hl], c ; current seconds
 	dec hl
 	ld [wSecondsSince], a ; seconds since
+	; fallthrough
 
 _CalcMinsHoursDaysSince:
 	ldh a, [hMinutes]
