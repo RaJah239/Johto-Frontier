@@ -10,8 +10,7 @@ RunMapSetupScript::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call ReadMapSetupScript
-	ret
+	jmp ReadMapSetupScript
 
 INCLUDE "data/maps/setup_scripts.asm"
 
@@ -81,14 +80,13 @@ LoadMapObjects:
 	ld a, MAPCALLBACK_OBJECTS
 	call RunMapCallback
 	farcall LoadObjectMasks
-	farcall InitializeVisibleSprites
-	ret
+	farjp InitializeVisibleSprites
 
 ; By default outdoor maps have
 ; 35% chance of rain
 ; 35% chance of sun unless it is night
 HandleMapDefaultWeather:
-    ld a, [wMapGroup]
+	ld a, [wMapGroup]
 	ld b, a
 	ld a, [wMapNumber]
 	ld c, a
@@ -98,28 +96,31 @@ HandleMapDefaultWeather:
 	cp TOWN
 	jr z, .outdoor
 	jr .noWeather
+
 .outdoor
-    call Random
-    cp 35 percent
-    jr c, .rain
-    cp 70 percent
-    jr c, .sun
+	call Random
+	cp 35 percent
+	jr c, .rain
+	cp 70 percent
+	jr c, .sun
 .noWeather
-    ld a, WEATHER_NONE
-    jr .done
+	ld a, WEATHER_NONE
+	jr .done
+
 .rain
-    ld a, WEATHER_RAIN
-    jr .done
+	ld a, WEATHER_RAIN
+	jr .done
+
 .sun
-    ld a, [wTimeOfDay]
+	ld a, [wTimeOfDay]
 	cp NITE_F
 	ret z
 	cp EVE_F
 	ret z
-    ld a, WEATHER_SUN
+	ld a, WEATHER_SUN
 .done
-    ld [wFieldWeather], a
-    ret
+	ld [wFieldWeather], a
+	ret
 
 HandleAutoBicycle:
 	; check if Auto Bicycle is turned on
@@ -158,15 +159,12 @@ HandleAutoBicycle:
 	cp DUNGEON
 	jr z, .HopOnBike
 	ret nc
-
 .HopOnBike
 	push bc
 	ld a, PLAYER_BIKE
 	ld [wPlayerState], a
 	call UpdatePlayerSprite ; UpdateSprites
 	pop bc
-
-.done
 	ret
 
 IsOnWaterTile::
@@ -199,15 +197,11 @@ SkipUpdateMapSprites:
 
 CheckUpdatePlayerSprite:
 	call .CheckForcedBiking
-	jr c, .ok
+	jmp c, UpdatePlayerSprite
 	call .CheckSurfing
-	jr c, .ok
+	jmp c, UpdatePlayerSprite
 	call .ResetSurfingOrBikingState
-	jr c, .ok
-	ret
-
-.ok
-	call UpdatePlayerSprite
+	jmp c, UpdatePlayerSprite
 	ret
 
 .CheckForcedBiking:
@@ -272,12 +266,10 @@ CheckUpdatePlayerSprite:
 
 FadeOutMapMusic:
 	ld a, 6
-	call SkipMusic
-	ret
+	jmp SkipMusic
 
 ApplyMapPalettes:
-	farcall _UpdateTimePals
-	ret
+	farjp _UpdateTimePals
 
 FadeMapMusicAndPalettes:
 	ld e, LOW(MUSIC_NONE)
@@ -286,8 +278,7 @@ FadeMapMusicAndPalettes:
 	ld a, [wMusicFadeID + 1]
 	ld a, $4
 	ld [wMusicFade], a
-	farcall FadeOutPalettes
-	ret
+	farjp FadeOutPalettes
 
 ForceMapMusic:
 	ld a, [wPlayerState]
@@ -297,5 +288,4 @@ ForceMapMusic:
 	ld a, $88
 	ld [wMusicFade], a
 .notbiking
-	call TryRestartMapMusic
-	ret
+	jmp TryRestartMapMusic
