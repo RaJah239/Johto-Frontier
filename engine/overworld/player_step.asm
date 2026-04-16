@@ -73,10 +73,7 @@ HandlePlayerStep:
 	dw .fail1
 
 .fail1
-	ret
-
 .mobile
-	farcall StubbedTrainerRankings_StepCount
 	ret
 
 .fail2

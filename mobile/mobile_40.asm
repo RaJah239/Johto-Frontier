@@ -4490,7 +4490,6 @@ Function102423:
 	call Function102921
 	ret nc
 	farcall SaveAfterLinkTrade
-	farcall StubbedTrainerRankings_Trades
 	farcall BackupGSBallFlag
 	ld hl, wcd4b
 	set 1, [hl]
