@@ -16,8 +16,7 @@ HDMATransferAttrmapAndTilemapToWRAMBank3::
 	ld a, $1
 	ldh [rVBK], a
 	ld hl, wScratchAttrmap
-	call HDMATransferToWRAMBank3
-	ret
+	jmp HDMATransferToWRAMBank3
 
 HDMATransferTilemapToWRAMBank3::
 	ld hl, .Function
@@ -30,8 +29,7 @@ HDMATransferTilemapToWRAMBank3::
 	ld a, $0
 	ldh [rVBK], a
 	ld hl, wScratchTilemap
-	call HDMATransferToWRAMBank3
-	ret
+	jmp HDMATransferToWRAMBank3
 
 HDMATransferAttrmapToWRAMBank3:
 	ld hl, .Function
@@ -44,8 +42,7 @@ HDMATransferAttrmapToWRAMBank3:
 	ld a, $1
 	ldh [rVBK], a
 	ld hl, wScratchAttrmap
-	call HDMATransferToWRAMBank3
-	ret
+	jmp HDMATransferToWRAMBank3
 
 HDMATransferTilemapAndAttrmap_Overworld::
 	ld hl, .Function
@@ -73,9 +70,7 @@ HDMATransferTilemapAndAttrmap_Overworld::
 	call HDMATransfer_WaitForScanline128_toBGMap
 	pop af
 	ldh [rVBK], a
-	ei
-
-	ret
+	reti
 
 Mobile_HDMATransferTilemapAndAttrmap_Overworld:
 	ld hl, HDMATransferTilemapAndAttrmap_Overworld ; useless
@@ -104,9 +99,7 @@ Mobile_HDMATransferTilemapAndAttrmap_Overworld:
 	call HDMATransfer_NoDI
 	pop af
 	ldh [rVBK], a
-	ei
-
-	ret
+	reti
 
 _HDMATransferTilemapAndAttrmap_Menu::
 	ld hl, .Function
@@ -162,8 +155,7 @@ Mobile_HDMATransferTilemapAndAttrmap_Menu:
 	ld a, $0
 	ldh [rVBK], a
 	ld hl, wScratchTilemap
-	call HDMATransfer_WaitForScanline128_toBGMap
-	ret
+	jr HDMATransfer_WaitForScanline128_toBGMap
 
 CallInSafeGFXMode:
 	ldh a, [hBGMapMode]
@@ -199,6 +191,7 @@ HDMATransferToWRAMBank3:
 	call _LoadHDMAParameters
 	ld a, $23
 	ldh [hDMATransfer], a
+	; fallthrough
 
 WaitDMATransfer:
 .loop
@@ -352,9 +345,7 @@ _continue_HDMATransfer:
 	jr nz, .final_ly_loop
 	ld hl, rHDMA5
 	res 7, [hl]
-	ei
-
-	ret
+	reti
 
 _LoadHDMAParameters:
 	ld a, h
@@ -374,7 +365,6 @@ PadTilemapForHDMATransfer:
 
 PadAttrmapForHDMATransfer:
 	ld c, $0
-
 PadMapForHDMATransfer:
 ; pad a 20x18 map to 32x18 for HDMA transfer
 ; back up the padding value in c to hMapObjectIndex
@@ -542,8 +532,7 @@ HDMATransfer_OnlyTopFourRows:
 	ld c, $8
 	ld hl, wScratchTilemap
 	debgcoord 0, 0, vBGMap1
-	call HDMATransfer_WaitForScanline128
-	ret
+	jmp HDMATransfer_WaitForScanline128
 
 .Copy:
 	ld b, 4
