@@ -381,10 +381,9 @@ s6_a006:: ds $1000
 
 SECTION "SRAM Mobile 4", SRAM
 
-sMobileStadiumFlag:: db
 s7_a001:: db
 
-	ds $7fe
+	ds $7ff
 
 sMobileAdapterStatus2:: db
 

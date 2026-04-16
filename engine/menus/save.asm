@@ -361,38 +361,6 @@ SaveData:
 	call _SaveData
 	ret
 
-Function14d6c: ; unreferenced
-	ld a, BANK(s4_a60b) ; MBC30 bank used by JP Crystal; inaccessible by MBC3
-	call OpenSRAM
-	ld a, [s4_a60b] ; address of MBC30 bank
-	ld b, $0
-	and a
-	jr z, .ok
-	ld b, $2
-
-.ok
-	ld a, b
-	ld [s4_a60b], a ; address of MBC30 bank
-	call CloseSRAM
-	ret
-
-Function14d83: ; unreferenced
-	ld a, BANK(s4_a60c) ; aka BANK(s4_a60d) ; MBC30 bank used by JP Crystal; inaccessible by MBC3
-	call OpenSRAM
-	xor a
-	ld [s4_a60c], a ; address of MBC30 bank
-	ld [s4_a60d], a ; address of MBC30 bank
-	call CloseSRAM
-	ret
-
-DisableMobileStadium: ; unreferenced
-	ld a, BANK(sMobileStadiumFlag)
-	call OpenSRAM
-	xor a
-	ld [sMobileStadiumFlag], a
-	call CloseSRAM
-	ret
-
 HallOfFame_InitSaveIfNeeded:
 	ld a, [wSavedAtLeastOnce]
 	and a
