@@ -142,6 +142,5 @@ Function3f35::
 MobileHome_PlaceBox:
 Function3f7c::
 Function3f88::
-Function3f9f::
 	; dummied out Mobile Code.
 	ret

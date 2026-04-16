@@ -343,17 +343,8 @@ StubbedTrainerRankings_WhiteOuts:
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_LuckyNumberShow:
-	ret
-
 StubbedTrainerRankings_PhoneCalls:
 	ret
-	ld hl, sTrainerRankingPhoneCalls
-	jr StubbedTrainerRankings_Increment3Byte
-
-StubbedTrainerRankings_Unused2: ; unreferenced
-	ret
-	ld hl, sTrainerRankingUnused2
-	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_LinkBattles:
 	ret
@@ -372,11 +363,6 @@ StubbedTrainerRankings_Splash:
 StubbedTrainerRankings_TreeEncounters:
 	ret
 	ld hl, sTrainerRankingTreeEncounters
-	jr StubbedTrainerRankings_Increment3Byte
-
-StubbedTrainerRankings_Unused3: ; unreferenced
-	ret
-	ld hl, sTrainerRankingUnused3
 	jr StubbedTrainerRankings_Increment3Byte
 
 StubbedTrainerRankings_ColosseumWins:
@@ -418,10 +404,6 @@ StubbedTrainerRankings_Increment2Byte:
 	push bc
 	ld bc, 1
 	jr StubbedTrainerRankings_Increment
-
-StubbedTrainerRankings_Increment1Byte: ; unreferenced
-	push bc
-	ld bc, 0
 
 ; Increments a big-endian value of bc + 1 bytes at hl
 StubbedTrainerRankings_Increment:
@@ -524,17 +506,6 @@ RestoreGSBallFlag:
 	call CloseSRAM
 	ret
 
-VerifyTrainerRankingsChecksum: ; unreferenced
-	call CalculateTrainerRankingsChecksum
-	ld hl, sTrainerRankingsChecksum
-	ld a, d
-	cp [hl]
-	ret nz
-	inc hl
-	ld a, e
-	cp [hl]
-	ret
-
 ClearGSBallFlag:
 	ld a, BANK(sGSBallFlag)
 	call OpenSRAM
@@ -544,23 +515,13 @@ ClearGSBallFlag:
 	ret
 
 InitializeTrainerRankings: ; unreferenced
-; Initializes Trainer Rankings data for a new save file in JP Crystal.
+	ret
 	ld hl, sTrainerRankings
 	ld bc, sTrainerRankingsEnd - sTrainerRankings
-	xor a
-	call ByteFill
-
-	; Initialize the shortest Magikarp to 100.0 cm
 	ld hl, sTrainerRankingShortestMagikarp
-	ld a, $3
-	ld [hli], a
-	ld [hl], $e8
-
-	call UpdateTrainerRankingsChecksum
 	ld hl, sTrainerRankings
 	ld de, sTrainerRankingsBackup
 	ld bc, sTrainerRankingsEnd - sTrainerRankings
-	call CopyBytes
 	ret
 
 _MobilePrintNum::
@@ -1047,25 +1008,6 @@ Function1064c3:
 	pop bc
 	pop af
 	ldh [rSVBK], a
-	jr asm_1064ed
-
-Function1064d8: ; unreferenced
-	ldh a, [rSVBK]
-	push af
-	ld a, $6
-	ldh [rSVBK], a
-	push bc
-	push hl
-	ld hl, Function3f9f
-	ld a, b
-	rst FarCall
-	pop hl
-	pop bc
-	pop af
-	ldh [rSVBK], a
-	jr asm_1064ed
-
-asm_1064ed:
 	ld de, wDecompressScratch
 	ld b, $0
 	ldh a, [rSVBK]
@@ -1081,12 +1023,6 @@ asm_1064ed:
 	ldh [rVBK], a
 	pop af
 	ldh [rSVBK], a
-	ret
-
-Function10650a: ; unreferenced
-	ld de, MobilePhoneTilesGFX
-	lb bc, BANK(MobilePhoneTilesGFX), 17
-	call Get2bpp
 	ret
 
 MobileDialingFrameGFX:

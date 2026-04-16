@@ -248,11 +248,9 @@ sTrainerRankingSurf:: ds 3
 sTrainerRankingWaterfall:: ds 3
 sTrainerRankingWhiteOuts:: ds 3
 sTrainerRankingPhoneCalls:: ds 3
-sTrainerRankingUnused2:: ds 3
 sTrainerRankingLinkBattles:: ds 3
 sTrainerRankingSplash:: ds 3
 sTrainerRankingTreeEncounters:: ds 3
-sTrainerRankingUnused3:: ds 3
 sTrainerRankingColosseumWins:: ds 3
 sTrainerRankingColosseumLosses:: ds 3
 sTrainerRankingColosseumDraws:: ds 3
@@ -267,7 +265,7 @@ sTrainerRankingBugContestScore:: ds 2
 sTrainerRankingsChecksum:: ds 2
 sTrainerRankingsEnd::
 
-	ds 7
+	ds 13
 
 sTrainerRankingsBackup:: ds sTrainerRankingsEnd - sTrainerRankings
 
