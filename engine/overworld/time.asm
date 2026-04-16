@@ -1,6 +1,5 @@
 ClearDailyTimers:
 	xor a
-	ld [wUnusedTwoDayTimer], a
 	ld [wDailyResetTimer], a
 	ret
 
@@ -168,14 +167,6 @@ CheckPokerusTick::
 	farcall ApplyPokerusTick
 .done
 	xor a
-	ret
-
-CheckUnusedTwoDayTimer:
-	ld hl, wUnusedTwoDayTimerStartDate
-	call CalcDaysSince
-	call GetDaysSince
-	ld hl, wUnusedTwoDayTimer
-	call UpdateTimeRemaining
 	ret
 
 DoMysteryGiftIfDayHasPassed:

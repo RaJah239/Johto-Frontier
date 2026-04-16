@@ -3269,10 +3269,7 @@ wFruitTreeFlags:: flag_array NUM_FRUIT_TREES
 
 wSpecialPhoneCallID:: db
 wBugContestStartTime:: ds 4 ; day, hour, min, sec
-wUnusedTwoDayTimerOn:: db
-wUnusedTwoDayTimer:: db
-wUnusedTwoDayTimerStartDate:: db
-	ds 4
+	ds 7
 wMobileOrCable_LastSelection:: db
 wdc41:: ds 1
 wdc42:: ds 8
