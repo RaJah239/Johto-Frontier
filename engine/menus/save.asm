@@ -30,7 +30,11 @@ SaveAfterLinkTrade:
 	call SaveBackupChecksum
 	farcall BackupPartyMonMail
 	farcall SaveRTC
-	call ResumeGameLogic
+	; fallthrough
+
+ResumeGameLogic:
+	xor a ; FALSE
+	ld [wGameLogicPaused], a
 	ret
 
 Link_SaveGame:
@@ -45,11 +49,6 @@ ForceGameSave:
 
 PauseGameLogic:
 	ld a, TRUE
-	ld [wGameLogicPaused], a
-	ret
-
-ResumeGameLogic:
-	xor a ; FALSE
 	ld [wGameLogicPaused], a
 	ret
 
@@ -238,51 +237,13 @@ SaveStorageSystem:
 	ld hl, sNewBox1
 	ld de, sBackupNewBox1
 	; fallthrough
+
 CopyStorageSystem:
 	ld a, BANK(sNewBox1)
 	call OpenSRAM
 	ld bc, sNewBoxEnd - sNewBox1
 	call CopyBytes
 	jmp CloseSRAM
-
-UpdateStackTop:
-; sStackTop appears to be unused.
-; It could have been used to debug stack overflow during saving.
-	call FindStackTop
-	ld a, BANK(sStackTop)
-	call OpenSRAM
-	ld a, [sStackTop + 0]
-	ld e, a
-	ld a, [sStackTop + 1]
-	ld d, a
-	or e
-	jr z, .update
-	ld a, e
-	sub l
-	ld a, d
-	sbc h
-	jr c, .done
-
-.update
-	ld a, l
-	ld [sStackTop + 0], a
-	ld a, h
-	ld [sStackTop + 1], a
-
-.done
-	call CloseSRAM
-	ret
-
-FindStackTop:
-; Find the furthest point that sp has traversed to.
-; This is distinct from the current value of sp.
-	ld hl, wStackBottom
-.loop
-	ld a, [hl]
-	or a
-	ret nz
-	inc hl
-	jr .loop
 
 ErasePreviousSave:
 	call EraseHallOfFame
@@ -356,10 +317,6 @@ EraseBattleTowerStatus:
 	xor a
 	ld [sBattleTowerChallengeState], a
 	jmp CloseSRAM
-
-SaveData:
-	call _SaveData
-	ret
 
 HallOfFame_InitSaveIfNeeded:
 	ld a, [wSavedAtLeastOnce]
@@ -724,7 +681,7 @@ VerifyBackupChecksum:
 	pop af
 	ret
 
-_SaveData:
+SaveData:
 	; This is called within two scenarios:
 	;   a) ErasePreviousSave (the process of erasing the save from a previous game file)
 	;   b) unused mobile functionality
@@ -758,7 +715,7 @@ _LoadData:
 	ld bc, wCrystalDataEnd - wCrystalData
 	call CopyBytes
 
-	; This block originally had some mobile functionality to mirror _SaveData above, but instead it
+	; This block originally had some mobile functionality to mirror SaveData above, but instead it
 	; (harmlessly) writes the aforementioned wEventFlags to the unused wd479.
 
 	ld hl, wd479
