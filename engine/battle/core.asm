@@ -4331,6 +4331,22 @@ BattleDodgeAnimation:
 	call SwitchTurnCore
 	jmp PopBCDEHL
 
+; must stay in this file
+BattleFlinchAnimation:
+	push hl
+	push de
+	push bc
+	call EmptyBattleTextbox
+	ld a, MIMIC ; flinch animation
+	ld [wFXAnimID], a
+	call SwitchTurnCore
+	xor a
+	ld [wNumHits], a
+	ld [wFXAnimID + 1], a
+	predef PlayBattleAnim
+	call SwitchTurnCore
+	jmp PopBCDEHL
+
 UseHeldStatusHealingItem:
 	call _GetOpponentItem
 	ld hl, HeldStatusHealingEffects

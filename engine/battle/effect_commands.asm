@@ -5732,6 +5732,7 @@ BattleCommand_FlinchTarget:
 INCLUDE "data/abilities/inner_focus_mons.asm"
 
 FlinchTarget:
+	farcall BattleFlinchAnimation
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
 	call GetBattleVarAddr
 	set SUBSTATUS_FLINCHED, [hl]

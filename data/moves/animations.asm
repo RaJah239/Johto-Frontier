@@ -1,7 +1,19 @@
-BattleAnim_Mimic:
 BattleAnim_Miss:
 BattleAnim_Dummy:
 	anim_ret
+
+BattleAnim_BattleFlinch:
+    anim_1gfx BATTLE_ANIM_GFX_WATER
+    anim_call BattleAnim_TargetObj_2Row
+    anim_bgeffect BATTLE_BG_EFFECT_DIG, $0, BG_EFFECT_USER, $40
+    anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, $1, $20
+    anim_wait 8
+    anim_sound 0, 0, SFX_LICK
+    anim_obj BATTLE_ANIM_OBJ_WATER_GUN, 56, 100, $0
+    anim_wait 14
+    anim_incbgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING
+    anim_incbgeffect BATTLE_BG_EFFECT_DIG
+    anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_StatUp:
 	anim_1gfx BATTLE_ANIM_GFX_SPEED
@@ -3346,7 +3358,6 @@ BattleAnim_Facade:
 	anim_bgeffect BATTLE_BG_EFFECT_FLAIL, $0, $1, $0
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, $1, $20
 	anim_wait 8
-.loop
 	anim_sound 0, 0, SFX_RETURN
 	anim_obj BATTLE_ANIM_OBJ_WATER_GUN, 56, 80, $0
 	anim_wait 14

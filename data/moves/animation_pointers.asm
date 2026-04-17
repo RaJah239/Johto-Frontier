@@ -103,7 +103,7 @@ BattleAnimations::
 	dw BattleAnim_IronHead
 	dw BattleAnim_Teleport
 	dw BattleAnim_NightShade
-	dw BattleAnim_Mimic
+	dw BattleAnim_BattleFlinch
 	dw BattleAnim_Screech
 	dw BattleAnim_GunkShot
 	dw BattleAnim_Recover
