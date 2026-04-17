@@ -38,6 +38,7 @@ BattleArenaReceptionistScript:
 		text "Battle Arena"
 		line "welcomes you!"
 		done
+	promptbutton
 	special TryQuickSave
 	iffalse_endtext
 	writethistext
