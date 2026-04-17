@@ -11,7 +11,7 @@ MapSetupCommands:
 	add_mapsetup RestartMapMusic ; 04
 	add_mapsetup FadeToMapMusic ; 05
 	add_mapsetup FadeMapMusicAndPalettes ; 06
-	add_mapsetup TryRestartMapMusic ; 07
+	add_mapsetup PlayMapMusicBike ; 07
 	add_mapsetup ForceMapMusic ; 08
 	add_mapsetup FadeInToMusic ; 09
 	add_mapsetup LoadBlockData ; 0a (callback 1)

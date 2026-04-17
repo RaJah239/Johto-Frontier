@@ -44,7 +44,7 @@ MapSetupScript_Warp:
 	mapsetup SpawnInFacingDown
 	mapsetup EnableDynPalUpdatesNoApply
 	mapsetup RefreshMapSprites
-	mapsetup TryRestartMapMusic
+	mapsetup PlayMapMusicBike
 	mapsetup FadeInToMusic
 	mapsetup FadeInFromWhite
 	mapsetup ActivateMapAnims
@@ -158,7 +158,7 @@ MapSetupScript_LinkReturn:
 	mapsetup LoadMapPalettes
 	mapsetup EnableDynPalUpdatesNoApply
 	mapsetup RefreshMapSprites
-	mapsetup TryRestartMapMusic
+	mapsetup PlayMapMusicBike
 	mapsetup FadeInFromWhite
 	mapsetup ActivateMapAnims
 	mapsetup LoadWildMonData
@@ -181,7 +181,7 @@ MapSetupScript_Continue:
 	mapsetup LoadMapPalettes
 	mapsetup EnableDynPalUpdatesNoApply
 	mapsetup RefreshMapSprites
-	mapsetup TryRestartMapMusic
+	mapsetup PlayMapMusicBike
 	mapsetup FadeInFromWhite
 	mapsetup ActivateMapAnims
 	mapsetup LoadWildMonData
