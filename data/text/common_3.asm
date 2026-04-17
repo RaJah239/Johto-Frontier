@@ -203,8 +203,7 @@ _MobileBattleRemainingTimeText::
 	done
 
 _SavedTheGameText::
-	text "<PLAYER> saved"
-	line "the game."
+	text "Saved…!"
 	done
 
 _AnotherSaveFileText::
