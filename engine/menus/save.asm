@@ -10,8 +10,7 @@ SaveMenu:
 	call SavedTheGame
 	call ResumeGameLogic
 	call ExitMenu
-	and a
-	ret
+	jmp ReturnToMapFromSubmenu
 
 .refused
 	call ExitMenu
