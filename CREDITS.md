@@ -153,5 +153,5 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - Alice-Not-Waifu: https://github.com/Alice-Not-Waifu/pokecrystal-wrenched
 - TriteHexagon: https://github.com/TriteHexagon
 - PurnPum: https://github.com/PurnPum
-- Th3Element05 on Discord
+- Th3Element05: https://github.com/Th3Element05
 - AmmonRoberts: https://github.com/AmmonRoberts/PokemonModernCrystal
