@@ -146,7 +146,7 @@ SavedTheGame:
 	; copy the original text speed setting to the stack
 	ld a, [wOptions]
 	push af
-	; set text speed to instant
+	; set text speed to fast
 	ld a, TEXT_DELAY_FAST
 	ld [wOptions], a
 	; <PLAYER> saved the game!
