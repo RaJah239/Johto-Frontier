@@ -376,19 +376,14 @@ MonSubMenu_GetNextEvoAttackByte:
 	and a
 	jr z, .yes
 
-; Step 3: Check if mon can learn move via HM/TM/Move Tutor
-	ld a, FLY
-	call CheckMonCanLearn_TM_HM
-	jr c, .yes
-
-; Step 4: Check if Mon can learn move via LVL-UP
+; Step 3: Check if Mon can learn move via LVL-UP
 	ld a, FLY
 	call CheckLvlUpMoves
 	ret c ; fail
 .yes
 	ld a, MONMENUITEM_FLY
 	jmp AddMonMenuItem
-	
+
 	CanUseDig:
 ; Step 1: Location Check
 	call GetMapEnvironment

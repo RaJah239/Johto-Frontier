@@ -194,6 +194,7 @@ ItemNames::
 	li "?"
 	li "?"
 	li "?"
+	li "?"
 	li "Surf Mail"
 	li "LiteBlueMail"
 	li "PortraitMail"
@@ -255,7 +256,6 @@ ItemNames::
 	li "TM49"
 	li "TM50"
 	assert_list_length NUM_ITEMS + NUM_TMS
-	li "HM01"
 	assert_list_length NUM_ITEMS + NUM_TMS + NUM_HMS
 	li "?"
 	li "?"

@@ -208,9 +208,10 @@ ItemEffects:
 	dw NoEffect            ; ITEM_E6
 	dw NoEffect            ; ITEM_E7
 	dw NoEffect            ; ITEM_E8
-	assert_table_length ITEM_E8
+	dw NoEffect            ; ITEM_E9
+	assert_table_length ITEM_E9
 
-; The items past ITEM_E8 do not have effect entries:
+; The items past ITEM_E9 do not have effect entries:
 ;	SURF_MAIL
 ;	LITEBLUEMAIL
 ;	PORTRAITMAIL

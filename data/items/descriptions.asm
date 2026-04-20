@@ -195,6 +195,7 @@ ItemDescriptions:
 	dw TeruSama27Desc
 	dw TeruSama27Desc
 	dw TeruSama27Desc
+	dw TeruSama27Desc
 	dw SurfMailDesc
 	dw LiteBlueMailDesc
 	dw PortraitMailDesc
@@ -206,7 +207,6 @@ ItemDescriptions:
 	dw MirageMailDesc
 
 	assert_table_length NUM_ITEMS
-	dw TeruSama27Desc
 	dw TeruSama27Desc
 	dw TeruSama27Desc
 	dw TeruSama27Desc

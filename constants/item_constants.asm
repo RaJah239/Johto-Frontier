@@ -200,6 +200,7 @@
  	const ITEM_E6
  	const ITEM_E7
  	const ITEM_E8
+ 	const ITEM_E9
 ; mail
  	const SURF_MAIL
 	const LITEBLUEMAIL
@@ -296,7 +297,6 @@ MACRO add_hm
 ENDM
 
 DEF HM01 EQU const_value
-	add_hm FLY          ; f3
 DEF NUM_HMS EQU __tmhm_value__ - NUM_TMS - 1
 
 MACRO add_mt

@@ -137,7 +137,7 @@ CianwoodCityChucksWife:
 		line "take this HM."
 		done
 	promptbutton
-	verbosegiveitem HM_FLY
+;	verbosegiveitem HM_FLY TODOTEXT - to redo this script
 	setevent EVENT_GOT_HM01_FLY
 	writethistext
 		text "It's the only HM."

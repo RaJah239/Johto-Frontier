@@ -59,8 +59,6 @@ if DEF(_DEBUG)
 	giveitem TM_HEADBUTT, 50
 	giveitem TM_DIG, 50
 	giveitem TM_HIDDEN_POWER, 50
-	; hm
-	giveitem HM_FLY
 	; all fly points
 	setflag ENGINE_FLYPOINT_ROUTE_20
 	setflag ENGINE_FLYPOINT_INDIGO_PLATEAU
