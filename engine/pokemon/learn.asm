@@ -315,9 +315,9 @@ DisplayMoveInfo:
 
 .PowAcc: db "p/   <%>@"
 .NA: db "---@"
-.String_MovePhy: db "<physical>@"
-.String_MoveSpe: db "<special>@"
-.String_MoveSta: db "<other>@"
+.String_MovePhy: db "/Physical@"
+.String_MoveSpe: db "/Special @"
+.String_MoveSta: db "/Other   @"
 
 GetCurMovePropertyLearn:
 	ld a, [wCurMove]
