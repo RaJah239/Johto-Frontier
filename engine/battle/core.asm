@@ -4315,7 +4315,6 @@ ItemRecoveryAnim:
 	call SwitchTurnCore
 	jmp PopBCDEHL
 
-; must stay in this file
 BattleDodgeAnimation:
 	push hl
 	push de
@@ -4331,13 +4330,12 @@ BattleDodgeAnimation:
 	call SwitchTurnCore
 	jmp PopBCDEHL
 
-; must stay in this file
 BattleFlinchAnimation:
 	push hl
 	push de
 	push bc
 	call EmptyBattleTextbox
-	ld a, MIMIC ; flinch animation
+	ld a, ANIM_FLINCH
 	ld [wFXAnimID], a
 	call SwitchTurnCore
 	xor a

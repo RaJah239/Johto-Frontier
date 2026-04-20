@@ -577,14 +577,13 @@ BattlePlazaMartTutorScript:
     ret
 
 .FullMoveList:
-    db 15 ; list length
+    db 14 ; list length
 ; list items
     db TELEPORT, 1
     db SEISMIC_TOSS, 6
     db BUBBLEBEAM, 6
     db REFLECT, 4
     db BODY_SLAM, 12
-    db MIMIC, 10
     db THUNDER_WAVE, 12
     db PHOTON_BLAST, 18
     db MEGA_DRAIN, 17

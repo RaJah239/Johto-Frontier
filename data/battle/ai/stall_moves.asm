@@ -12,7 +12,6 @@ StallMoves:
 	db GROWTH
 	db STRING_SHOT
 	db AGILITY
-	db MIMIC
 	db SCREECH
 	db HARDEN
 	db DEFENSE_CURL

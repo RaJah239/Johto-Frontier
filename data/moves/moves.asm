@@ -115,7 +115,7 @@ Moves:
 	move IRON_HEAD,    EFFECT_FLINCH_HIT,         80, STEEL,         PHYSICAL, 100, 24,  30
 	move TELEPORT,     EFFECT_TELEPORT,            0, PSYCHIC_TYPE,  STATUS,   100, 32,   0
 	move NIGHT_SHADE,  EFFECT_SP_DEF_DOWN_HIT,    60, GHOST,         SPECIAL,  100, 24,  20
-	move MIMIC,        EFFECT_MIMIC,               0, NORMAL,        STATUS,   100, 16,   0 ; unused/ effect dummied out
+	move ANIM_FLINCH, EFFECT_SPLASH,               0, NORMAL,        STATUS,   100, 16,   0 ; only used for flinch animation
 	move SCREECH,      EFFECT_DEFENSE_DOWN_2,      0, NORMAL,        STATUS,   100, 32,   0
 	move GUNK_SHOT,    EFFECT_POISON_HIT,        120, POISON,        PHYSICAL,  85, 16,  20
 	move RECOVER,      EFFECT_HEAL,                0, NORMAL,        STATUS,   100, 24,   0
