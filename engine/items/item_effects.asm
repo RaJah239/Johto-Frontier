@@ -414,7 +414,7 @@ ENDC
 	call Random
 
 	cp b
-	xor a
+	ld a, 0
 	jr z, .catch_without_fail
 	jr nc, .fail_to_catch
 
@@ -1716,7 +1716,7 @@ FullRestoreEffect:
 	ld [wPartyMenuActionText], a
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	xor a
+	ld a, 0
 	ret
 
 BitterBerryEffect:
@@ -1732,7 +1732,8 @@ BitterBerryEffect:
 
 	ld hl, ConfusedNoMoreText
 	call StdBattleTextbox
-	xor a
+
+	ld a, 0
 
 .done
 	jmp StatusHealer_Jumptable
@@ -1773,7 +1774,7 @@ ItemRestore4THHP:
 	ld [wPartyMenuActionText], a
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	xor a
+	ld a, 0
 	ret
 
 EnergyRootEffect:
@@ -1795,7 +1796,7 @@ EnergypowderEnergyRootCommon:
 	call LooksBitterMessage
 
 .skip:
-	xor a
+	ld a, 0
 
 .skip_happiness
 	jmp StatusHealer_Jumptable
@@ -1824,7 +1825,7 @@ ItemRestoreHP:
 	ld [wPartyMenuActionText], a
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	xor a
+	ld a, 0
 	ret
 
 GetOneFourthMaxHP:
@@ -3079,7 +3080,7 @@ Restore3RDHPEffect:
 	ld [wPartyMenuActionText], a
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	xor a
+	ld a, 0
 	jmp StatusHealer_Jumptable
 
 ItemEffects_GetThirdMaxHP:
