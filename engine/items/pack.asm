@@ -152,6 +152,7 @@ Pack:
 	jmp Pack_InitColors
 
 .InitBallsPocket:
+	call ReInitBG_PackPocket ; needed when switching from TM Pocket
 	ld a, BALL_POCKET
 	ld [wCurPocket], a
 	call ClearPocketList
@@ -202,6 +203,7 @@ Pack:
 	jr .ItemBallsKey_LoadSubmenu
 	
 .InitBattlePocket:
+	call ReInitBG_PackPocket ; needed when switching from TM Pocket
 	ld a, BATTLE_POCKET
 	ld [wCurPocket], a
 	call ClearPocketList
@@ -693,6 +695,7 @@ BattlePack:
 	jmp TMHMSubmenu
 
 .InitBallsPocket:
+	call ReInitBG_PackPocket ; needed when switching from TM Pocket
 	ld a, BALL_POCKET
 	ld [wCurPocket], a
 	call ClearPocketList
@@ -743,6 +746,7 @@ BattlePack:
 	jr ItemSubmenu
 
 .InitBattlePocket:
+	call ReInitBG_PackPocket ; needed when switching from TM Pocket
 	ld a, BATTLE_POCKET
 	ld [wCurPocket], a
 	call ClearPocketList
@@ -1420,6 +1424,7 @@ Pack_InitGFX:
 	ld bc, $60 tiles
 	ld a, BANK(PackMenuGFX)
 	call FarCopyBytes
+ReInitBG_PackPocket: ; needed when switching from TM Pocket
 ; Background (blue if male, pink if female)
 	hlcoord 0, 1
 	ld bc, 11 * SCREEN_WIDTH

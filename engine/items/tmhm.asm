@@ -209,22 +209,22 @@ TMHM_JoypadLoop:
 	ldh [hBGMapMode], a
 	ld a, [w2DMenuFlags2]
 	bit 7, a
-	jr nz, TMHM_ScrollPocket
+	jmp nz, TMHM_ScrollPocket
 	ld a, b
 	ld [wMenuJoypad], a
 	bit A_BUTTON_F, a
-	jr nz, TMHM_ChooseTMorHM
+	jmp nz, TMHM_ChooseTMorHM
 	bit B_BUTTON_F, a
-	jr nz, TMHM_ExitPack
+	jmp nz, TMHM_ExitPack
 	bit D_RIGHT_F, a
-	jr nz, TMHM_ExitPocket
+	jmp nz, TMHM_ExitPocket
 	bit D_LEFT_F, a
-	jr nz, TMHM_ExitPocket
+	jmp nz, TMHM_ExitPocket
 TMHM_ShowTMMoveDescription:
 	call TMHM_CheckHoveringOverCancel
-	jr nc, TMHM_ExitPocket
-	hlcoord 0, 12
-	ld b, 4
+	jmp nc, TMHM_ExitPocket
+	hlcoord 0, 11
+	ld b, 5
 	ld c, SCREEN_WIDTH - 2
 	call Textbox
 	ld a, [wCurItem]
@@ -234,9 +234,169 @@ TMHM_ShowTMMoveDescription:
 	predef GetTMHMMove
 	ld a, [wTempTMHM]
 	ld [wCurSpecies], a
+
+; Print UI elements
+	hlcoord 1, 12
+	ld de, PowString
+	call PlaceString
+	hlcoord 1, 13
+	ld de, MoveAcc
+	call PlaceString
 	hlcoord 1, 14
-	call PrintMoveDescription
-	jr TMHM_JoypadLoop
+	ld de, MoveEff
+	call PlaceString
+
+; Print move category
+
+; Verify if it has power
+	ld a, [wCurSpecies]
+	dec a
+	ld hl, Moves + MOVE_POWER
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	hlcoord 16, 12
+	cp 2
+	jr c, .status_move
+	
+; Verifify if physical or special
+	ld a, [wCurSpecies]
+	dec a
+	ld bc, MOVE_LENGTH
+	ld hl, Moves
+	call AddNTimes
+	ld de, wStringBuffer1
+	ld a, BANK(Moves)
+	call FarCopyBytes
+	ld a, [wStringBuffer1 + MOVE_TYPE]
+	cp SPECIAL
+	jr nc, .special_category
+
+; IF PHYSICAL
+	hlcoord 10, 13
+	ld de, PhyCat
+	call PlaceString
+	jr .printed_effect_chance
+
+; IF SPECIAL
+.special_category
+	hlcoord 10, 13
+	ld de, SpeCat
+	call PlaceString
+	jr .printed_effect_chance
+
+; IF STATUS
+.status_move
+	hlcoord 10, 13
+	ld de, OtherCat
+	call PlaceString
+
+.printed_effect_chance
+
+; Print move effect chance
+	ld a, [wCurSpecies]
+	ld bc, MOVE_LENGTH
+	ld hl, (Moves + MOVE_CHANCE) - MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	cp 1
+	jr c, .if_null_chance
+	call ConvertPercentages
+	ld [wBuffer1], a
+	ld de, wBuffer1
+	lb bc, 1, 3
+	hlcoord 5, 14
+	call PrintNum
+	ld [hl], "<%>" ; displays percent symbol
+	hlcoord 8, 8
+	jr .skip_null_chance
+
+.if_null_chance
+	ld de, EmptyStr
+	ld bc, 3
+	hlcoord 5, 14
+	call PlaceString
+
+.skip_null_chance
+; Print move accuracy
+	ld a, [wCurSpecies]
+	ld bc, MOVE_LENGTH
+	ld hl, (Moves + MOVE_EFFECT) - MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+
+	ld hl, PerfectAccuracyEffects
+	call IsInByteArray
+	jr nc, .imperfect
+
+	ld de, EmptyStr
+	ld bc, 3
+	hlcoord 5, 13
+	call PlaceString
+	jr .done_accuracy
+
+.imperfect
+	ld a, [wCurSpecies]
+	ld bc, MOVE_LENGTH
+	ld hl, (Moves + MOVE_ACC) - MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+
+	Call ConvertPercentages
+	ld [wBuffer1], a
+	ld de, wBuffer1
+	lb bc, 1, 3
+	hlcoord 5, 13
+	call PrintNum
+	ld [hl], "<%>" ; displays percent symbol
+	hlcoord 7, 8
+
+.done_accuracy:
+; Print move type
+	ld a, [wCurSpecies]
+	ld b, a
+	hlcoord 10, 12
+	predef PrintMoveType
+
+; Print move power
+	ld a, [wCurSpecies]
+	dec a
+	ld hl, Moves + MOVE_POWER
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	hlcoord 5, 12
+	cp 2
+	jr c, .no_power
+	ld [wTextDecimalByte], a
+	ld de, wTextDecimalByte
+	lb bc, 1, 3
+	call PrintNum
+	jr .description
+
+.no_power
+	ld de, EmptyStr
+	call PlaceString
+
+; Print move description
+.description
+	hlcoord 1, 15
+	predef PrintMoveDescription
+	jmp TMHM_JoypadLoop
+
+; UI elements
+PowString: db "Pow/@"
+MoveAcc:   db "Hit/@"
+MoveEff:   db "Eff/@"
+EmptyStr:  db "---@"
+PhyCat:    db "/Physical@"
+SpeCat:    db "/Special @"
+OtherCat:  db "/Other   @"
 
 TMHM_ChooseTMorHM:
 	call TMHM_PlaySFX_ReadText2
@@ -292,7 +452,7 @@ TMHM_ScrollPocket:
 	jmp z, TMHM_JoypadLoop
 	dec [hl]
 	call TMHM_DisplayPocketItems
-	jr TMHM_ShowTMMoveDescription
+	jmp TMHM_ShowTMMoveDescription
 
 .skip
 	call TMHM_GetCurrentPocketPosition
@@ -318,7 +478,7 @@ TMHM_DisplayPocketItems:
 	jmp z, Tutorial_TMHMPocket
 
 	hlcoord 5, 2
-	lb bc, 10, 15
+	lb bc, 9, 15
 	ld a, " "
 	call ClearBox
 	call TMHM_GetCurrentPocketPosition
