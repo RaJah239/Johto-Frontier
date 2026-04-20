@@ -107,7 +107,6 @@
 	const IRON_HEAD    ; 63
 	const TELEPORT     ; 64
 	const NIGHT_SHADE  ; 65
-	const ANIM_FLINCH  ; 66 - flinch animation
 	const SCREECH      ; 67
 	const GUNK_SHOT    ; 68
 	const RECOVER      ; 69
@@ -259,6 +258,7 @@
 	const FLARE_BLITZ  ; fb
 	const POISON_JAB   ; fc
 	const WOOD_BASH    ; fd
+	const ANIM_FLINCH  ; 66 - flinch animation
 DEF NUM_ATTACKS EQU const_value - 1
 
 ; Battle animations use the same constants as the moves up to this point

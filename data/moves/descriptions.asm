@@ -102,7 +102,6 @@ MoveDescriptions::
 	dw IronHeadDescription
 	dw TeleportDescription
 	dw NightShadeDescription
-	dw MimicDescription
 	dw ScreechDescription
 	dw GunkShotDescription
 	dw RecoverDescription
@@ -254,12 +253,14 @@ MoveDescriptions::
 	dw FlareBlitzDescription
 	dw PoisonJabDescription
 	dw WoodBashDescription
+	dw AnimFlinchDescription
 	assert_table_length NUM_ATTACKS
 	dw MoveFEDescription
 	dw MoveFFDescription
 	dw Move00Description
 	assert_table_length $100
 
+AnimFlinchDescription:
 MoveFEDescription:
 MoveFFDescription:
 Move00Description:
@@ -542,10 +543,6 @@ QuickAttackDescription:
 TeleportDescription:
 	db   "A move for fleeing"
 	line "from battle.@"
-
-MimicDescription:
-	db   "Copies a move used"
-	line "by the foe.@"
 
 IceFangDescription:
 	db   "May frostbite or"

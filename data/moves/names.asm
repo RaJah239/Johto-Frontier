@@ -101,7 +101,6 @@ MoveNames::
 	li "Iron Head"
 	li "Teleport"
 	li "Night Shade"
-	li "Mimic"
 	li "Screech"
 	li "Gunk Shot"
 	li "Recover"
@@ -253,4 +252,5 @@ MoveNames::
 	li "Flare Blitz"
 	li "Poison Jab"
 	li "Wood Bash"
+	li " "
 	assert_list_length NUM_ATTACKS

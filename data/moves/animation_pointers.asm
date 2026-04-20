@@ -103,7 +103,6 @@ BattleAnimations::
 	dw BattleAnim_IronHead
 	dw BattleAnim_Teleport
 	dw BattleAnim_NightShade
-	dw BattleAnim_BattleFlinch
 	dw BattleAnim_Screech
 	dw BattleAnim_GunkShot
 	dw BattleAnim_Recover
@@ -255,6 +254,7 @@ BattleAnimations::
 	dw BattleAnim_FlareBlitz
 	dw BattleAnim_PoisonJab
 	dw BattleAnim_WoodBash
+	dw BattleAnim_BattleFlinch
 	assert_table_length NUM_ATTACKS + 1
 	dw BattleAnim_Dummy
 	dw BattleAnim_AnimBattleMiss
