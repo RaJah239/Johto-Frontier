@@ -130,7 +130,7 @@ BattleAnimFrameData:
 	dw .Frameset_HealBell            ; BATTLE_ANIM_FRAMESET_HEAL_BELL
 	dw .Frameset_BatonPass           ; BATTLE_ANIM_FRAMESET_BATON_PASS
 	dw .Frameset_Safeguard           ; BATTLE_ANIM_FRAMESET_SAFEGUARD
-	dw .Frameset_MegaphoneUnused     ; BATTLE_ANIM_FRAMESET_MEGAPHONE_UNUSED
+	dw .Frameset_FeathersUp          ; BATTLE_ANIM_FRAMESET_FEATHERS_UP
 	dw .Frameset_ItemBag             ; BATTLE_ANIM_FRAMESET_ITEM_BAG
 	dw .Frameset_SpiderWeb           ; BATTLE_ANIM_FRAMESET_SPIDER_WEB
 	dw .Frameset_Imp                 ; BATTLE_ANIM_FRAMESET_IMP
@@ -990,7 +990,7 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_B4,  8
 	oamend
 
-.Frameset_MegaphoneUnused:
+.Frameset_FeathersUp:
 	oamframe BATTLE_ANIM_OAMSET_6B,  8
 	oamend
 
