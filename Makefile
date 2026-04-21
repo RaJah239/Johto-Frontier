@@ -297,8 +297,6 @@ gfx/type_chart/bg.2bpp: tools/gfx += --remove-duplicates --remove-xflip --remove
 gfx/type_chart/bg0.2bpp: gfx/type_chart/bg.2bpp.vram1p gfx/type_chart/bg.2bpp.vram0p ; cat $^ > $@
 gfx/type_chart/ob.2bpp: tools/gfx += --interleave --png=$<
 
-gfx/font/unused_bold_font.1bpp: tools/gfx += --trim-whitespace
-
 gfx/sgb/sgb_border.2bpp: tools/gfx += --trim-whitespace
 gfx/sgb/sgb_border.sgb.tilemap: gfx/sgb/sgb_border.bin ; tr < $< -d '\000' > $@
 
