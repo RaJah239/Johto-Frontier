@@ -13,7 +13,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 
 - ShadowOne333 - Suicune's back sprite, Annihilape
 
-- French Orange - Gyarados' front sprite, Moltres back sprite, Gholdengo, Pikachu along with mauvesea
+- French Orange - Gyarados' front sprite, Moltres back sprite, Gholdengo
 
 - PiaCRT - Gholdengo
 
