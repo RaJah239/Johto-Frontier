@@ -1078,24 +1078,6 @@ asm_48922:
 	call DelayFrames
 	jr asm_48972
 
-Function4895a: ; unreferenced
-	ldh a, [hJoyPressed]
-	and a
-	jr z, .asm_48965
-	pop bc
-	ld b, $1
-	push bc
-	jr asm_48972
-
-.asm_48965
-	ldh a, [hJoyLast]
-	and a
-	jr z, asm_48972
-
-	pop bc
-	ld b, $1
-	push bc
-
 Function4896e:
 	pop bc
 	ld b, $0
