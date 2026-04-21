@@ -351,12 +351,13 @@ BattleAnimCommands::
 	dw BattleAnimCmd_KeepSpritesAndOAM
 	dw BattleAnimCmd_IfParamEqual
 	dw BattleAnimCmd_SetVar
+	dw BattleAnimCmd_IncVar
 	dw BattleAnimCmd_IfVarEqual
 	dw BattleAnimCmd_Jump
 	dw BattleAnimCmd_Loop
 	dw BattleAnimCmd_Call
 	dw BattleAnimCmd_Ret
-	assert_table_length 242 - FIRST_BATTLE_ANIM_CMD
+	assert_table_length 243 - FIRST_BATTLE_ANIM_CMD
 
 BattleAnimCmd_Ret:
 	ld hl, wBattleAnimFlags
@@ -449,6 +450,11 @@ BattleAnimCmd_Loop:
 BattleAnimCmd_SetVar:
 	call GetBattleAnimByte
 	ld [wBattleAnimVar], a
+	ret
+
+BattleAnimCmd_IncVar:
+	ld hl, wBattleAnimVar
+	inc [hl]
 	ret
 
 BattleAnimCmd_IfVarEqual:

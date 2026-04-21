@@ -198,6 +198,11 @@ MACRO anim_setvar
 	db \1 ; value
 ENDM
 
+	const anim_incvar_command ; $fa
+MACRO anim_incvar
+	db anim_incvar_command
+ENDM
+
 	const anim_if_var_equal_command ; $fb
 MACRO anim_if_var_equal
 	db anim_if_var_equal_command
