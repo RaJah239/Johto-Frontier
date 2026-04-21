@@ -277,7 +277,7 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 10 total
+; Unused Items - 9 total
 	db EGG_TICKET
  	db ITEM_E1
  	db ITEM_E2
