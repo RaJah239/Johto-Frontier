@@ -291,7 +291,7 @@ BattleAnimFunc_PokeBall:
 	dw .eight
 	dw DoNothing
 	dw .ten
-	dw DoNothing
+	dw DeinitBattleAnimation
 
 .zero ; init
 	call GetBallAnimPal
