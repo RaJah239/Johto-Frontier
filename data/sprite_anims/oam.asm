@@ -74,18 +74,6 @@ SpriteAnimOAMData:
 	spriteanimoam $00, .OAMData_PartyMonWithItem2        ; SPRITE_ANIM_OAMSET_PARTY_MON_WITH_ITEM_2
 	spriteanimoam $00, .OAMData_MagnetTrain              ; SPRITE_ANIM_OAMSET_MAGNET_TRAIN_RED_1
 	spriteanimoam $04, .OAMData_MagnetTrain              ; SPRITE_ANIM_OAMSET_MAGNET_TRAIN_RED_2
-	spriteanimoam $00, .OAMData_Unused43_4A              ; SPRITE_ANIM_OAMSET_UNUSED_43
-	spriteanimoam $30, .OAMData_Unused43_4A              ; SPRITE_ANIM_OAMSET_UNUSED_44
-	spriteanimoam $03, .OAMData_Unused43_4A              ; SPRITE_ANIM_OAMSET_UNUSED_45
-	spriteanimoam $33, .OAMData_Unused43_4A              ; SPRITE_ANIM_OAMSET_UNUSED_46
-	spriteanimoam $06, .OAMData_Unused43_4A              ; SPRITE_ANIM_OAMSET_UNUSED_47
-	spriteanimoam $36, .OAMData_Unused43_4A              ; SPRITE_ANIM_OAMSET_UNUSED_48
-	spriteanimoam $09, .OAMData_Unused43_4A              ; SPRITE_ANIM_OAMSET_UNUSED_49
-	spriteanimoam $39, .OAMData_Unused43_4A              ; SPRITE_ANIM_OAMSET_UNUSED_4A
-	spriteanimoam $0c, .OAMData_Unused4B                 ; SPRITE_ANIM_OAMSET_UNUSED_4B
-	spriteanimoam $0c, .OAMData_Unused4C                 ; SPRITE_ANIM_OAMSET_UNUSED_4C
-	spriteanimoam $3c, .OAMData_1x1_Palette0             ; SPRITE_ANIM_OAMSET_UNUSED_4D
-	spriteanimoam $3e, .OAMData_1x1_Palette0             ; SPRITE_ANIM_OAMSET_UNUSED_4E
 	spriteanimoam $00, .OAMData_Leaf                     ; SPRITE_ANIM_OAMSET_LEAF
 	spriteanimoam $00, .OAMData_Tree                     ; SPRITE_ANIM_OAMSET_TREE_1
 	spriteanimoam $00, .OAMData_CutTree2                 ; SPRITE_ANIM_OAMSET_CUT_TREE_2
@@ -252,18 +240,6 @@ SpriteAnimOAMData:
 	dbsprite  0,  2,  0,  0, $02, 0 | X_FLIP | Y_FLIP
 	dbsprite  1,  2,  0,  0, $01, 0 | X_FLIP | Y_FLIP
 	dbsprite  2,  2,  0,  0, $00, 0 | X_FLIP | Y_FLIP
-
-.OAMData_Unused43_4A:
-	db 9
-	dbsprite -2, -2,  4,  4, $00, 0
-	dbsprite -1, -2,  4,  4, $01, 0
-	dbsprite  0, -2,  4,  4, $02, 0
-	dbsprite -2, -1,  4,  4, $10, 0
-	dbsprite -1, -1,  4,  4, $11, 0
-	dbsprite  0, -1,  4,  4, $12, 0
-	dbsprite -2,  0,  4,  4, $20, 0
-	dbsprite -1,  0,  4,  4, $21, 0
-	dbsprite  0,  0,  4,  4, $22, 0
 
 .OAMData_GSIntroJigglypuffPikachu:
 	db 16
@@ -530,22 +506,6 @@ SpriteAnimOAMData:
 	dbsprite -1, -2,  4,  4, $00, 0 | OBP_NUM
 	dbsprite -1, -1,  4,  4, $00, 0 | OBP_NUM
 	dbsprite -1,  0,  4,  4, $00, 0 | OBP_NUM
-
-.OAMData_Unused4B:
-	db 6
-	dbsprite  0,  0,  0,  0, $00, 0
-	dbsprite  1,  0,  0,  0, $01, 0
-	dbsprite  2,  0,  0,  0, $01, 0
-	dbsprite  3,  0,  0,  0, $01, 0
-	dbsprite  4,  0,  0,  0, $02, 0
-	dbsprite  5,  0,  0,  0, $03, 0
-
-.OAMData_Unused4C:
-	db 4
-	dbsprite  0,  0,  0,  0, $00, 0
-	dbsprite  1,  0,  0,  0, $01, 0
-	dbsprite  2,  0,  0,  0, $02, 0
-	dbsprite  3,  0,  0,  0, $03, 0
 
 .OAMData_CutTree2:
 	db 4
