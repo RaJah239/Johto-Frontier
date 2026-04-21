@@ -91,11 +91,6 @@ INCLUDE "engine/events/print_unown.asm"
 INCLUDE "engine/pokemon/breeding.asm"
 
 
-SECTION "bank6", ROMX
-
-INCLUDE "engine/pokemon/correct_party_errors.asm"
-
-
 SECTION "Roofs", ROMX
 
 INCLUDE "engine/tilesets/mapgroup_roofs.asm"
