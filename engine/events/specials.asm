@@ -35,13 +35,6 @@ SetMonAsSeen:
 	dec a
 	jmp SetSeenMon
 
-FindPartyMonAboveLevel:
-	ld a, [wScriptVar]
-	ld b, a
-	farcall _FindPartyMonAboveLevel
-	jr z, FoundNone
-	jr FoundOne
-
 FindPartyMonAtLeastThatHappy:
 	ld a, [wScriptVar]
 	ld b, a
@@ -295,11 +288,6 @@ CheckCoinsAndCoinCase:
 .NoCoinCaseText:
 	text_far _NoCoinCaseText
 	text_end
-
-ClearBGPalettesBufferScreen:
-	call ClearBGPalettes
-	call BufferScreen
-	ret
 
 ScriptReturnCarry:
 	jr c, .carry

@@ -1,8 +1,3 @@
-_FindPartyMonAboveLevel:
-	ld hl, wPartyMon1Level
-	call FindAboveLevel
-	ret
-
 _FindPartyMonAtLeastThatHappy:
 	ld hl, wPartyMon1Happiness
 	call FindAtLeastThatHappy
@@ -61,35 +56,6 @@ FindAtLeastThatHappy:
 	ld c, a
 
 .lower
-	sla c
-	dec d
-	jr nz, .loop
-	call RetroactivelyIgnoreEggs
-	ld a, c
-	and a
-	ret
-
-FindAboveLevel:
-	ld c, $0
-	ld a, [wPartyCount]
-	ld d, a
-.loop
-	ld a, d
-	dec a
-	push hl
-	push bc
-	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
-	pop bc
-	ld a, b
-	cp [hl]
-	pop hl
-	jr c, .greater
-	ld a, c
-	or $1
-	ld c, a
-
-.greater
 	sla c
 	dec d
 	jr nz, .loop
