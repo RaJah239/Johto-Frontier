@@ -794,8 +794,8 @@ PartyMenuStrings:
 	dw TeachWhichPKMNString
 	dw MoveToWhereString
 	dw UseOnWhichPKMNString
-	dw ChooseAMonString ; Probably used to be ChooseAFemalePKMNString
-	dw ChooseAMonString ; Probably used to be ChooseAMalePKMNString
+	dw ChooseAMonString
+	dw ChooseAMonString
 	dw ToWhichPKMNString
 
 ChooseAMonString:
@@ -812,12 +812,6 @@ TeachWhichPKMNString:
 
 MoveToWhereString:
 	db "Move to where?@"
-
-ChooseAFemalePKMNString: ; unreferenced
-	db "Choose a ♀<PK><MN>.@"
-
-ChooseAMalePKMNString: ; unreferenced
-	db "Choose a ♂<PK><MN>.@"
 
 ToWhichPKMNString:
 	db "To which <PK><MN>?@"
