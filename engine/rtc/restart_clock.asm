@@ -202,12 +202,6 @@ RestartClock:
 	ld [wRestartClockPrevDivision], a
 	ret
 
-.UnusedPlaceCharsFragment: ; unreferenced
-	ld a, [wRestartClockUpArrowYCoord]
-	ld b, a
-	call Coord2Tile
-	ret
-
 .PlaceChars:
 	push de
 	call RestartClock_GetWraparoundTime
@@ -221,9 +215,3 @@ RestartClock:
 	add hl, bc
 	ld [hl], e
 	ret
-
-JPHourString: ; unreferenced
-	db "じ@" ; HR
-
-JPMinuteString: ; unreferenced
-	db "ふん@" ; MIN
