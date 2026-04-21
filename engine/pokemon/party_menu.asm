@@ -8,8 +8,7 @@ SelectMonFromParty:
 	call SetDefaultBGPAndOBP
 	call DelayFrame
 	call PartyMenuSelect
-	call ReturnToMapWithSpeechTextbox
-	ret
+	jmp ReturnToMapWithSpeechTextbox
 
 SelectTradeOrDayCareMon:
 	ld a, b
@@ -23,22 +22,50 @@ SelectTradeOrDayCareMon:
 	call SetDefaultBGPAndOBP
 	call DelayFrame
 	call PartyMenuSelect
-	call ReturnToMapWithSpeechTextbox
-	ret
+	jmp ReturnToMapWithSpeechTextbox
 
 InitPartyMenuLayout:
 	call LoadPartyMenuGFX
 	call InitPartyMenuWithCancel
 	call InitPartyMenuGFX
 	call WritePartyMenuTilemap
-	call PlacePartyMenuText
+	; fallthrough
+
+PlacePartyMenuText:
+	hlcoord 0, 14
+	lb bc, 2, 18
+	call Textbox
+	ld a, [wPartyCount]
+	and a
+	jr nz, .haspokemon
+	ld de, YouHaveNoPKMNString
+	jr .gotstring
+.haspokemon
+	ld a, [wPartyMenuActionText]
+	and $f ; drop high nibble
+	ld hl, PartyMenuStrings
+	ld e, a
+	ld d, 0
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+.gotstring
+	ld a, [wOptions]
+	push af
+	set NO_TEXT_SCROLL, a
+	ld [wOptions], a
+	hlcoord 1, 16 ; Coord
+	call PlaceString
+	pop af
+	ld [wOptions], a
 	ret
 
 LoadPartyMenuGFX:
 	call LoadFontsBattleExtra
 	callfar InitPartyMenuPalettes
-	callfar ClearSpriteAnims2
-	ret
+	farjp ClearSpriteAnims2
 
 WritePartyMenuTilemap:
 	ld hl, wOptions
@@ -101,16 +128,13 @@ PlacePartyNicknames:
 	inc b
 	dec c
 	jr nz, .loop
-
 .end
 	dec hl
 	dec hl
 	ld de, .CancelString
-	call PlaceString
-	ret
+	jmp PlaceString
 
-.CancelString:
-	db "Cancel@"
+.CancelString: db "Cancel@"
 
 PlacePartyHPBar:
 	xor a
@@ -151,8 +175,7 @@ PlacePartyHPBar:
 	dec c
 	jr nz, .loop
 	ld b, SCGB_PARTY_MENU
-	call GetSGBLayout
-	ret
+	jmp GetSGBLayout
 
 PlacePartymonHPBar:
 	ld a, b
@@ -177,8 +200,7 @@ PlacePartymonHPBar:
 	ld d, a
 	ld a, [hli]
 	ld e, a
-	predef ComputeHPBarPixels
-	ret
+	predef_jump ComputeHPBarPixels
 
 PlacePartyMenuHPDigits:
 	ld a, [wPartyCount]
@@ -210,7 +232,6 @@ PlacePartyMenuHPDigits:
 	inc de
 	lb bc, 2, 3
 	call PrintNum
-
 .next
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
@@ -247,12 +268,9 @@ PlacePartyMonLevel:
 	ld a, "<LV>"
 	ld [hli], a
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
-	; jr .okay
 .ThreeDigits:
 	lb bc, PRINTNUM_LEFTALIGN | 1, 3
-; .okay
 	call PrintNum
-
 .next
 	pop hl
 	ld de, SCREEN_WIDTH * 2
@@ -284,7 +302,6 @@ PlacePartyMonStatus:
 	ld d, h
 	pop hl
 	call PlaceStatusString
-
 .next
 	pop hl
 	ld de, SCREEN_WIDTH * 2
@@ -318,7 +335,6 @@ PlacePartyMonTMHMCompatibility:
 	pop hl
 	call .PlaceAbleNotAble
 	call PlaceString
-
 .next
 	pop hl
 	ld de, SCREEN_WIDTH * 2
@@ -342,7 +358,6 @@ PlacePartyMonTMHMCompatibility:
 
 .string_able
 	db "Able@"
-
 .string_not_able
 	db "Not Able@"
 
@@ -373,7 +388,6 @@ PlacePartyMonEvoStoneCompatibility:
 	call .DetermineCompatibility
 	pop hl
 	call PlaceString
-
 .next
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
@@ -457,7 +471,6 @@ PlacePartyMonGender:
 .got_gender
 	pop hl
 	call PlaceString
-
 .next
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
@@ -469,13 +482,11 @@ PlacePartyMonGender:
 	ret
 
 .male
-	db "♂…MALE@"
-
+	db "♂…Male@"
 .female
-	db "♀…FEMALE@"
-
+	db "♀…Female@"
 .unknown
-	db "…UNKNOWN@"
+	db "…Unknown@"
 
 PlacePartyMonMobileBattleSelection:
 	ld a, [wPartyCount]
@@ -609,8 +620,7 @@ InitPartyMenuGFX:
 	pop bc
 	dec c
 	jr nz, .loop
-	callfar PlaySpriteAnimations
-	ret
+	farjp PlaySpriteAnimations
 
 InitPartyMenuWithCancel:
 ; with cancel
@@ -629,10 +639,8 @@ InitPartyMenuWithCancel:
 	inc b
 	cp b
 	jr c, .done
-
 .skip
 	ld a, 1
-
 .done
 	ld [wMenuCursorY], a
 	ld a, A_BUTTON | B_BUTTON
@@ -739,7 +747,7 @@ PartyMenuSelect:
 	push hl
 	farcall SwitchPartyMons
 	farcall WritePartyMenuTilemap
-	farcall PlacePartyMenuText
+	call PlacePartyMenuText
 	pop hl
 	jr PartyMenuSelect
 
@@ -756,37 +764,6 @@ PartyMenuSelect:
 	scf
 	ret
 
-PlacePartyMenuText:
-	hlcoord 0, 14
-	lb bc, 2, 18
-	call Textbox
-	ld a, [wPartyCount]
-	and a
-	jr nz, .haspokemon
-	ld de, YouHaveNoPKMNString
-	jr .gotstring
-.haspokemon
-	ld a, [wPartyMenuActionText]
-	and $f ; drop high nibble
-	ld hl, PartyMenuStrings
-	ld e, a
-	ld d, 0
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld d, [hl]
-	ld e, a
-.gotstring
-	ld a, [wOptions]
-	push af
-	set NO_TEXT_SCROLL, a
-	ld [wOptions], a
-	hlcoord 1, 16 ; Coord
-	call PlaceString
-	pop af
-	ld [wOptions], a
-	ret
-
 PartyMenuStrings:
 	dw ChooseAMonString
 	dw UseOnWhichPKMNString
@@ -798,26 +775,13 @@ PartyMenuStrings:
 	dw ChooseAMonString
 	dw ToWhichPKMNString
 
-ChooseAMonString:
-	db "Choose a #mon.@"
-
-UseOnWhichPKMNString:
-	db "Use on which <PK><MN>?@"
-
-WhichPKMNString:
-	db "Which <PK><MN>?@"
-
-TeachWhichPKMNString:
-	db "Teach which <PK><MN>?@"
-
-MoveToWhereString:
-	db "Move to where?@"
-
-ToWhichPKMNString:
-	db "To which <PK><MN>?@"
-
-YouHaveNoPKMNString:
-	db "You have no <PK><MN>!@"
+ChooseAMonString:     db "Choose a #mon.@"
+UseOnWhichPKMNString: db "Use on which <PK><MN>?@"
+WhichPKMNString:      db "Which <PK><MN>?@"
+TeachWhichPKMNString: db "Teach which <PK><MN>?@"
+MoveToWhereString:    db "Move to where?@"
+ToWhichPKMNString:    db "To which <PK><MN>?@"
+YouHaveNoPKMNString:  db "You have no <PK><MN>!@"
 
 PrintPartyMenuActionText:
 	ld a, [wCurPartyMon]
@@ -826,7 +790,21 @@ PrintPartyMenuActionText:
 	ld a, [wPartyMenuActionText]
 	and $f
 	ld hl, .MenuActionTexts
-	call .PrintText
+;.PrintText:
+	ld e, a
+	ld d, 0
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wOptions]
+	push af
+	set NO_TEXT_SCROLL, a
+	ld [wOptions], a
+	call PrintText
+	pop af
+	ld [wOptions], a
 	ret
 
 .MenuActionTexts:
@@ -881,20 +859,3 @@ PrintPartyMenuActionText:
 .CameToItsSensesText:
 	text_far _CameToItsSensesText
 	text_end
-
-.PrintText:
-	ld e, a
-	ld d, 0
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, [wOptions]
-	push af
-	set NO_TEXT_SCROLL, a
-	ld [wOptions], a
-	call PrintText
-	pop af
-	ld [wOptions], a
-	ret
