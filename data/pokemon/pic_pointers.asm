@@ -1,6 +1,5 @@
 ; Pics are defined in gfx/pics.asm
 
-; 400 first here
 PokemonPicPointers::
 ; entries correspond to Pokémon species, two apiece
 	table_width 3 * 2, PokemonPicPointers
@@ -513,5 +512,5 @@ PokemonPicPointers::
  	dba MewtwoBackpic
  	assert_table_length NUM_POKEMON
 	dba EggPic
- 	dbw -1, -1 ; unused
+ 	dbw -1, -1
 	assert_table_length EGG
