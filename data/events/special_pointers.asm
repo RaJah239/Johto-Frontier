@@ -73,7 +73,6 @@ SpecialsPointers::
 	add_special RestartMapMusic ; bank 0
 	add_special HealMachineAnim
 	add_special SurfStartStep
-	add_special FindPartyMonAtLeastThatHappy ; unused
 	add_special FindPartyMonThatSpecies
 	add_special FindPartyMonThatSpeciesYourTrainerID
 	add_special DayCareMon1
