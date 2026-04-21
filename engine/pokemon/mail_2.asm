@@ -41,7 +41,6 @@ ReadAnyMail:
 	sub MAIL_LANG_ITALIAN
 	jr c, .got_font
 	ld de, SpanishItalianFont
-
 .got_font
 	ld hl, vTiles1
 	lb bc, BANK(StandardEnglishFont), $80
@@ -117,7 +116,6 @@ endc
 .invalid
 	ld hl, MailGFXPointers
 	inc hl
-
 .got_pointer
 	ld a, c
 	ld [wCurMailIndex], a
@@ -173,6 +171,7 @@ LoadLiteBlueMailGFX:
 	ld de, PortraitMailUnderlineGFX
 	ld c, 1 * LEN_1BPP_TILE
 	call LoadMailGFX_Color2
+	; fallthrough
 
 FinishLoadingSurfLiteBlueMailGFX:
 	ld de, SurfLiteBlueMailSmallShapesGFX
@@ -729,7 +728,6 @@ MailGFX_PlaceMessage:
 	cp MORPH_MAIL_INDEX
 	jr z, .place_author
 	hlcoord 5, 14
-
 .place_author
 	jmp PlaceString
 
@@ -782,8 +780,6 @@ Mail_Place14TileAlternatingRow:
 Mail_Place18TileAlternatingRow:
 	push af
 	ld b, 18 / 2
-	; fallthrough
-
 Mail_PlaceAlternatingRow:
 .loop
 	ld [hli], a
@@ -804,7 +800,6 @@ Mail_Place14TileAlternatingColumn:
 Mail_Place16TileAlternatingColumn:
 	push af
 	ld b, 16 / 2
-
 Mail_PlaceAlternatingColumn:
 .loop
 	ld [hl], a
@@ -834,8 +829,6 @@ Mail_DrawTopBottomBorder:
 
 Mail_DrawFullWidthBorder:
 	ld b, SCREEN_WIDTH
-	; fallthrough
-
 Mail_DrawRowLoop:
 .loop
 	ld [hli], a
