@@ -5394,9 +5394,6 @@ MoveSelectionScreen:
 	dec a
 	cp c
 	jr z, .move_disabled
-	ld a, [wUnusedPlayerLockedMove]
-	and a
-	jr nz, .skip2
 	ld a, [wMenuCursorY]
 	ld hl, wBattleMonMoves
 	ld c, a
