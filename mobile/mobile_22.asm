@@ -1703,7 +1703,6 @@ Function89b14: ; unreferenced
 	ret
 
 Function89b1e:
-	farcall Function4a485
 	call Function89b00
 	ret
 

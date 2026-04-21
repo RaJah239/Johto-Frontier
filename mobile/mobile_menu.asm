@@ -153,7 +153,6 @@ Function4a098:
 	farcall Function89de0
 	call Call_ExitMenu
 	call MG_Mobile_Layout_LoadPals
-	call Function4a485
 	pop bc
 	jmp Function49f16
 
@@ -433,10 +432,6 @@ Function4a28a:
 	xor a
 	ret
 
-MenuHeader_0x4a346: ; unreferenced
-	db MENU_BACKUP_TILES ; flags
-	menu_coords 12, 0, SCREEN_WIDTH - 1, 6
-
 String_4a34b:
 	db   "いれなおす"
 	next "けす"
@@ -490,14 +485,12 @@ Function4a373:
 	ret
 
 Function4a39a: ; unreferenced
-	call Function4a485
 	call Function4a492
 	call Function4a3aa
 	call SetDefaultBGPAndOBP
 	ret
 
 Function4a3a7:
-	call Function4a485
 Function4a3aa:
 	hlcoord 0, 0
 	lb bc, 3, 1
@@ -584,9 +577,6 @@ Function4a449: ; unreferenced
 	ld bc, SCREEN_WIDTH
 	ld a, " "
 	call ByteFill
-	ret
-
-Function4a485:
 	ret
 
 Function4a492:
