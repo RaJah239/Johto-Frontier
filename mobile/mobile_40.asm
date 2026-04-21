@@ -326,7 +326,6 @@ Function10020b:
 Function100232:
 	push de
 	farcall Function106464
-	call Function3f20
 	call UpdateSprites
 	hlcoord 1, 2
 	pop de
@@ -757,7 +756,6 @@ Function1004f4:
 
 Function100504:
 	push de
-	call Function3f20
 	call UpdateSprites
 	pop de
 	hlcoord 4, 2
