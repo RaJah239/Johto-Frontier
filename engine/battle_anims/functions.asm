@@ -263,14 +263,14 @@ BattleAnimFunction_PokeBall_BG:
 .anon_dw
 	dw .zero
 	dw BattleAnimFunc_PokeBall.one
-	dw BattleAnimFunc_PokeBall.two
+	dw DoNothing
 	dw BattleAnimFunc_PokeBall.three
 	dw BattleAnimFunc_PokeBall.four
-	dw BattleAnimFunc_PokeBall.five
+	dw DoNothing
 	dw BattleAnimFunc_PokeBall.six
 	dw BattleAnimFunc_PokeBall.seven
 	dw BattleAnimFunc_PokeBall.eight
-	dw BattleAnimFunc_PokeBall.nine
+	dw DoNothing
 	dw BattleAnimFunc_PokeBall.ten
 	dw DeinitBattleAnimation
 .zero
@@ -282,16 +282,17 @@ BattleAnimFunc_PokeBall:
 .anon_dw
 	dw .zero
 	dw .one
-	dw .two
+	dw DoNothing
 	dw .three
 	dw .four
-	dw .five
+	dw DoNothing
 	dw .six
 	dw .seven
 	dw .eight
-	dw .nine
+	dw DoNothing
 	dw .ten
-	dw .eleven
+	dw DoNothing
+
 .zero ; init
 	call GetBallAnimPal
 	jmp BattleAnim_IncAnonJumptableIndex
@@ -352,9 +353,6 @@ BattleAnimFunc_PokeBall:
 	ld hl, BATTLEANIMSTRUCT_JUMPTABLE_INDEX
 	add hl, bc
 	dec [hl]
-.two
-.five
-.nine
 	ret
 
 .seven
@@ -381,13 +379,10 @@ BattleAnimFunc_PokeBall:
 	dec a
 	ld [hl], a
 	and $1f
-	jr z, .eleven
+	jmp z, DeinitBattleAnimation
 	and $f
-	ret nz
-	jmp BattleAnim_IncAnonJumptableIndex
-
-.eleven
-	jmp DeinitBattleAnimation
+	call z, BattleAnim_IncAnonJumptableIndex
+	ret
 
 BattleAnimFunc_PokeBallBlocked:
 	call BattleAnim_AnonJumptable
