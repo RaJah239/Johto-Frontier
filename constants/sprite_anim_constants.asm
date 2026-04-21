@@ -157,7 +157,6 @@ DEF NUM_SPRITE_ANIM_FUNCS EQU const_value
 	const SPRITE_ANIM_FRAMESET_EVOLUTION_BALL_OF_LIGHT   ; 19
 	const SPRITE_ANIM_FRAMESET_RADIO_TUNING_KNOB         ; 1a
 	const SPRITE_ANIM_FRAMESET_MAGNET_TRAIN              ; 1b
-	const SPRITE_ANIM_FRAMESET_UNUSED_1C                 ; 1c
 	const SPRITE_ANIM_FRAMESET_LEAF                      ; 1d
 	const SPRITE_ANIM_FRAMESET_CUT_TREE                  ; 1e
 	const SPRITE_ANIM_FRAMESET_EGG_CRACK                 ; 1f
