@@ -277,7 +277,6 @@ BattleAnimations::
 	dw BattleAnim_Miss
 	dw BattleAnim_EnemyDamage
 	dw BattleAnim_PlayerDamage
-	dw BattleAnim_Wobble
 	dw BattleAnim_Shake
 	dw BattleAnim_HitConfusion
 	dw BattleAnim_InHail

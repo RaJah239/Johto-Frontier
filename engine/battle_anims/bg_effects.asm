@@ -123,7 +123,6 @@ BattleBGEffects:
 	dw BattleBGEffect_EndWater
 	dw BattleBGEffect_VibrateMon
 	dw BattleBGEffect_WobblePlayer
-	dw BattleBGEffect_WobbleScreen
 
 BattleBGEffect_End:
 	jr EndBattleBGEffect
@@ -1966,27 +1965,6 @@ BattleBGEffects_GetShakeAmount:
 	inc a
 	ld [hl], a
 	and a
-	ret
-
-BattleBGEffect_WobbleScreen:
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	cp $40
-	jr nc, .finish
-	ld d, $6
-	call BattleBGEffects_Sine
-	ldh [hSCX], a
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	add $2
-	ld [hl], a
-	ret
-
-.finish
-	xor a
-	ldh [hSCX], a
 	ret
 
 BattleBGEffect_GetNthDMGPal:

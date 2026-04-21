@@ -402,11 +402,6 @@ BattleAnim_PlayerDamage:
 	anim_wait 40
 	anim_ret
 
-BattleAnim_Wobble:
-	anim_bgeffect BATTLE_BG_EFFECT_WOBBLE_SCREEN, $0, $0, $0
-	anim_wait 40
-	anim_ret
-
 BattleAnim_Shake:
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $20, $2, $40
 	anim_wait 40
