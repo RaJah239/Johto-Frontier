@@ -3161,8 +3161,6 @@ Sfx_DexFanfare170199_Ch8:
 	note B_, 16
 	sound_ret
 
-	db sound_loop_cmd ; unused
-
 Sfx_DexFanfare200229:
 	channel_count 4
 	channel 5, Sfx_DexFanfare200229_Ch5
