@@ -1,9 +1,28 @@
+Pokecenter2F_MapEvents:
+	def_warp_events
+	warp_event  0,  7, POKECENTER_2F, -1
+	warp_event  5,  0, TRADE_CENTER, 1
+	warp_event  9,  0, COLOSSEUM, 1
+	warp_event 13,  2, TIME_CAPSULE, 1
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  7,  3, BGEVENT_READ, Pokecenter2FLinkRecordSign
+	bg_event 11,  3, BGEVENT_JUMPTEXT, EntryAbilitiesExtraText
+
+	def_object_events
+	object_event  5,  2, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, LinkReceptionistScript_Trade, -1
+	object_event  9,  2, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, LinkReceptionistScript_Battle, -1
+	object_event 13,  3, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, LinkReceptionistScript_TimeCapsule, -1
+	object_event  1,  1, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Pokecenter2FOfficerScript, EVENT_MYSTERY_GIFT_DELIVERY_GUY
+
 	object_const_def
 	const POKECENTER2F_TRADE_RECEPTIONIST
 	const POKECENTER2F_BATTLE_RECEPTIONIST
 	const POKECENTER2F_TIME_CAPSULE_RECEPTIONIST
 	const POKECENTER2F_OFFICER
-; TODOTEXT to optimise this
+
 Pokecenter2F_MapScripts:
 	def_scene_scripts
 	scene_script Pokecenter2FCheckMysteryGiftScene,      SCENE_POKECENTER2F_CHECK_MYSTERY_GIFT
@@ -42,7 +61,17 @@ Pokecenter2F_AppearMysteryGiftDeliveryGuy:
 
 LinkReceptionistScript_Trade:
 	opentext
-	writetext Text_TradeReceptionistIntro
+	writethistext
+		text "Welcome to Cable"
+		line "Trade Center."
+
+		para "You may trade your"
+		line "#mon here with"
+		cont "a friend."
+
+		para "Would you like to"
+		line "trade?"
+		done
 	yesorno
 	iffalse .Cancel
 	special SetBitsForLinkTradeRequest
@@ -63,8 +92,7 @@ LinkReceptionistScript_Trade:
 	iffalse .IncompatibleRooms
 	special CheckOtherPlayerGender
 	writetext Text_PleaseComeIn
-	waitbutton
-	closetext
+	waitclosetext
 	scall Pokecenter2F_EnterRoom
 	warpcheck
 	end
@@ -72,21 +100,18 @@ LinkReceptionistScript_Trade:
 .FriendNotReady:
 	special WaitForOtherPlayerToExit
 	writetext YourFriendIsNotReadyText
-	closetext
-	end
+	endtext
 
 .LinkedToFirstGen:
 	special FailedLinkToPast
 	writetext Text_CantLinkToThePast
 	special CloseLink
-	closetext
-	end
+	endtext
 
 .IncompatibleRooms:
 	writetext Text_IncompatibleRooms
 	special CloseLink
-	closetext
-	end
+	endtext
 
 .LinkTimedOut:
 	writetext Text_LinkTimedOut
@@ -97,12 +122,20 @@ LinkReceptionistScript_Trade:
 .AbortLink:
 	special WaitForOtherPlayerToExit
 .Cancel:
-	closetext
-	end
+	endtext
 
 LinkReceptionistScript_Battle:
 	opentext
-	writetext Text_BattleReceptionistIntro
+	writethistext
+		text "Welcome to Cable"
+		line "Club Colosseum."
+
+		para "You may battle a"
+		line "friend here."
+
+		para "Would you like to"
+		line "battle?"
+		done
 	yesorno
 	iffalse .Cancel
 	special SetBitsForBattleRequest
@@ -132,21 +165,18 @@ LinkReceptionistScript_Battle:
 .FriendNotReady:
 	special WaitForOtherPlayerToExit
 	writetext YourFriendIsNotReadyText
-	closetext
-	end
+	endtext
 
 .LinkedToFirstGen:
 	special FailedLinkToPast
 	writetext Text_CantLinkToThePast
 	special CloseLink
-	closetext
-	end
+	endtext
 
 .IncompatibleRooms:
 	writetext Text_IncompatibleRooms
 	special CloseLink
-	closetext
-	end
+	endtext
 
 .LinkTimedOut:
 	writetext Text_LinkTimedOut
@@ -157,8 +187,7 @@ LinkReceptionistScript_Battle:
 .AbortLink:
 	special WaitForOtherPlayerToExit
 .Cancel:
-	closetext
-	end
+	endtext
 
 Script_TimeCapsuleClosed:
 	faceplayer
@@ -212,8 +241,7 @@ LinkReceptionistScript_TimeCapsule:
 .FriendNotReady:
 	special WaitForOtherPlayerToExit
 	writetext YourFriendIsNotReadyText
-	closetext
-	end
+	endtext
 
 .LinkTimedOut:
 	writetext Text_LinkTimedOut
@@ -398,12 +426,6 @@ Script_LeftTimeCapsule:
 	setmapscene TIME_CAPSULE, SCENE_TIMECAPSULE_INITIALIZE
 	end
 
-Pokecenter2FLinkRecordSign:
-	reanchormap
-	special DisplayLinkRecord
-	closetext
-	end
-
 Pokecenter2FOfficerScript:
 	faceplayer
 	opentext
@@ -583,28 +605,9 @@ Pokecenter2FMovementData_ReceptionistStepsRightLooksLeft_2:
 	turn_head LEFT
 	step_end
 
-Text_BattleReceptionistIntro:
-	text "Welcome to CABLE"
-	line "CLUB COLOSSEUM."
 
-	para "You may battle a"
-	line "friend here."
 
-	para "Would you like to"
-	line "battle?"
-	done
 
-Text_TradeReceptionistIntro:
-	text "Welcome to CABLE"
-	line "TRADE CENTER."
-
-	para "You may trade your"
-	line "#MON here with"
-	cont "a friend."
-
-	para "Would you like to"
-	line "trade?"
-	done
 
 Text_TimeCapsuleReceptionistIntro:
 	text "Welcome to CABLE"
@@ -739,8 +742,10 @@ Text_LikeTheLook:
 	line "style look to you?"
 	done
 
-Pokecenter2FLinkExtraSign:
-	jumptext EntryAbilitiesExtraText
+Pokecenter2FLinkRecordSign:
+	reanchormap
+	special DisplayLinkRecord
+	endtext
 
 EntryAbilitiesExtraText:
 	text "Note: All"
@@ -758,22 +763,3 @@ EntryAbilitiesExtraText:
 	cont "of Turn 1 in"
 	cont "Linked Battles."
 	done
-
-Pokecenter2F_MapEvents:
-	def_warp_events
-	warp_event  0,  7, POKECENTER_2F, -1
-	warp_event  5,  0, TRADE_CENTER, 1
-	warp_event  9,  0, COLOSSEUM, 1
-	warp_event 13,  2, TIME_CAPSULE, 1
-
-	def_coord_events
-
-	def_bg_events
-	bg_event  7,  3, BGEVENT_READ, Pokecenter2FLinkRecordSign
-	bg_event 11,  3, BGEVENT_READ, Pokecenter2FLinkExtraSign
-
-	def_object_events
-	object_event  5,  2, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, LinkReceptionistScript_Trade, -1
-	object_event  9,  2, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, LinkReceptionistScript_Battle, -1
-	object_event 13,  3, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, LinkReceptionistScript_TimeCapsule, -1
-	object_event  1,  1, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Pokecenter2FOfficerScript, EVENT_MYSTERY_GIFT_DELIVERY_GUY
