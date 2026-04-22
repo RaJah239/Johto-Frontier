@@ -182,13 +182,6 @@ LinkReceptionistScript_Battle:
 .Cancel:
 	endtext
 
-LinkReceptionistScript_TimeCapsule: ; here
-	special CheckTimeCapsuleCompatibility
-	special WaitForLinkedFriend
-	special CheckLinkTimeout_Receptionist
-	special EnterTimeCapsule
-	end
-
 Script_LeftCableTradeCenter:
 	special WaitForOtherPlayerToExit
 	scall Script_WalkOutOfLinkTradeRoom
