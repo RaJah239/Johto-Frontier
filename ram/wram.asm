@@ -3160,7 +3160,6 @@ wRuinsOfAlphInnerChamberSceneID::                 db
 wTeamRocketBaseB1FSceneID::                       db
 wDragonShrineSceneID::                            db
 wMountMortarSquareSceneID::                       db
-wMobileTradeRoomSceneID::                         db
 wDayCareSceneID::                                 db
 wRoute30SceneID::                                 db
 wBattlePlazaMagnetTrainStationSceneID::           db
@@ -3173,7 +3172,7 @@ wOlivineGym::                                     db
 wCianwoodGym::                                    db
 wMahoganyGym::                                    db
 
-	ds 173
+	ds 174
 
 ; battle tower points
 wBattleTowerNormalPoints:: db

@@ -1,20 +1,7 @@
 MobileTradeRoom_MapScripts:
 	def_scene_scripts
-	scene_script MobileTradeRoomInitializeScene, SCENE_MOBILETRADEROOM_INITIALIZE
-	scene_script MobileTradeRoomNoopScene,       SCENE_MOBILETRADEROOM_NOOP
 
 	def_callbacks
-; TODOTEXT to remove this
-MobileTradeRoomInitializeScene:
-	sdefer MobileTradeRoomInitializeAndPreparePokecenter2FScript
-	end
-
-MobileTradeRoomNoopScene:
-	end
-
-MobileTradeRoomInitializeAndPreparePokecenter2FScript:
-	setscene SCENE_MOBILETRADEROOM_NOOP
-	end
 
 MobileTradeRoomConsoleScript:
 	reanchormap
