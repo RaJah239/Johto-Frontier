@@ -5345,7 +5345,7 @@ MoveSelectionScreen:
 	ldh [hBGMapMode], a
 	call ScrollingMenuJoypad
 	bit D_UP_F, a
-	jmp nz, .pressed_up
+	jr nz, .pressed_up
 	bit D_DOWN_F, a
 	jmp nz, .pressed_down
 	bit SELECT_F, a
