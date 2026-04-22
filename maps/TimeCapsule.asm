@@ -2,7 +2,7 @@
 	const TIMECAPSULE_CHRIS1
 	const TIMECAPSULE_CHRIS2
 
-TimeCapsule_MapScripts:
+TimeCapsule_MapScripts: ; here
 	def_scene_scripts
 	scene_script TimeCapsuleInitializeScene, SCENE_TIMECAPSULE_INITIALIZE
 	scene_script TimeCapsuleNoopScene,       SCENE_TIMECAPSULE_NOOP
@@ -31,7 +31,6 @@ TimeCapsuleSetWhichChrisCallback:
 
 TimeCapsuleInitializeAndPreparePokecenter2FScript:
 	setscene SCENE_TIMECAPSULE_NOOP
-	setmapscene POKECENTER_2F, SCENE_POKECENTER2F_LEAVE_TIME_CAPSULE
 	end
 
 TimeCapsuleConsoleScript:
