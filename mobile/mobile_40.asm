@@ -1086,17 +1086,6 @@ Function1006dc:
 	ld [de], a
 	ret
 
-MobileBattleResetTimer:
-	ld a, BANK(sMobileBattleTimer)
-	ld hl, sMobileBattleTimer
-	call OpenSRAM
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	call CloseSRAM
-	ret
-
 MobileBattleFixTimer:
 	ld a, BANK(sMobileBattleTimer)
 	ld hl, sMobileBattleTimer
@@ -6774,46 +6763,6 @@ WantToRushThroughAMobileBattleText:
 PleaseTryAgainTomorrowText:
 	text_far _PleaseTryAgainTomorrowText
 	text_end
-
-Function103780:
-	ld a, [wChosenCableClubRoom]
-	push af
-	call Function10378c
-	pop af
-	ld [wChosenCableClubRoom], a
-	ret
-
-Function10378c:
-	ld c, 0
-	ld hl, wSwarmFlags
-	bit SWARMFLAGS_MOBILE_4_F, [hl]
-	jr nz, .already_set
-	ld c, 1
-	ld hl, wSwarmFlags
-	set SWARMFLAGS_MOBILE_4_F, [hl]
-
-.already_set
-	push bc
-	farcall Link_SaveGame
-	pop bc
-	jr c, .failed_to_save
-	ld a, 1
-	ld [wScriptVar], a
-	ld a, c
-	and a
-	ret z
-	farcall MobileBattleResetTimer
-	ret
-
-.failed_to_save
-	xor a
-	ld [wScriptVar], a
-	ld a, c
-	and a
-	ret z
-	ld hl, wSwarmFlags
-	res SWARMFLAGS_MOBILE_4_F, [hl]
-	ret
 
 Function1037c2:
 	call MobileCheckRemainingBattleTime

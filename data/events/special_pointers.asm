@@ -151,7 +151,6 @@ SpecialsPointers::
 	add_special Function10383c
 	add_special RefreshSprites
 	add_special Function1037c2
-	add_special Function103780
 	add_special Function10387b
 	add_special AskRememberPassword
 	add_special LoadMapPalettes

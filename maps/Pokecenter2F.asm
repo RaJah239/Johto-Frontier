@@ -177,32 +177,8 @@ LinkReceptionistScript_Battle:
 
 .Mobile:
 	scall .SelectThreeMons
-	iffalse .Mobile_Abort
-	scall .Mobile_TrySave
-	iftrue .Mobile_Abort
 	scall BattleTradeMobile_WalkIn
 	warpcheck
-	end
-
-.Mobile_Abort:
-	end
-
-.Mobile_TrySave:
-	writetext Text_MustSaveGame
-	yesorno
-	iffalse .Mobile_DidNotSave
-	special Function103780
-	iffalse .Mobile_DidNotSave
-	writetext Text_PleaseComeIn
-	waitbutton
-	closetext
-	setval FALSE
-	end
-
-.Mobile_DidNotSave:
-	writetext Text_PleaseComeAgain
-	closetext
-	setval TRUE
 	end
 
 .SelectThreeMons:
