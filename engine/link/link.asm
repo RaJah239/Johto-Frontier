@@ -2427,17 +2427,6 @@ CheckBothSelectedSameRoom:
 	ld [wScriptVar], a
 	ret
 
-TimeCapsule:
-	vc_hook Wireless_TimeCapsule
-	ld a, LINK_TIMECAPSULE
-	ld [wLinkMode], a
-	call DisableSpriteUpdates
-	callfar LinkCommunications
-	call EnableSpriteUpdates
-	xor a
-	ldh [hVBlank], a
-	ret
-
 TradeCenter:
 	vc_hook Wireless_TradeCenter
 	ld a, LINK_TRADECENTER

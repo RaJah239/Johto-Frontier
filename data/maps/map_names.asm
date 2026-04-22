@@ -524,9 +524,8 @@ Cable_Club_Map_Names: ; newgroup CABLE_CLUB
 	dw Cable_Club_Map_Name1 ; map_const POKECENTER_2F
 	dw Cable_Club_Map_Name2 ; map_const TRADE_CENTER
 	dw Cable_Club_Map_Name3 ; map_const COLOSSEUM
-	dw Cable_Club_Map_Name4 ; map_const TIME_CAPSULE
-	dw Cable_Club_Map_Name5 ; map_const MOBILE_TRADE_ROOM
-	dw Cable_Club_Map_Name6 ; map_const MOBILE_BATTLE_ROOM
+	dw Cable_Club_Map_Name4 ; map_const MOBILE_TRADE_ROOM
+	dw Cable_Club_Map_Name5 ; map_const MOBILE_BATTLE_ROOM
 	assert_table_length NUM_CABLE_CLUB_MAPS
 
 Cable_Club_Map_Name1: db "@"
@@ -534,7 +533,6 @@ Cable_Club_Map_Name2: db "@"
 Cable_Club_Map_Name3: db "@"
 Cable_Club_Map_Name4: db "@"
 Cable_Club_Map_Name5: db "@"
-Cable_Club_Map_Name6: db "@"
 
 Cianwood_Map_Names: ; newgroup CIANWOOD
 	table_width 2, Cianwood_Map_Names

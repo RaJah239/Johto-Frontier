@@ -8,7 +8,6 @@ MapScenes::
 	scene_var POKECENTER_2F,                               wPokecenter2FSceneID
 	scene_var TRADE_CENTER,                                wTradeCenterSceneID
 	scene_var COLOSSEUM,                                   wColosseumSceneID
-	scene_var TIME_CAPSULE,                                wTimeCapsuleSceneID
 	scene_var VICTORY_ROAD_GATE,                           wVictoryRoadGateSceneID
 	scene_var WILLS_ROOM,                                  wWillsRoomSceneID
 	scene_var KOGAS_ROOM,                                  wKogasRoomSceneID

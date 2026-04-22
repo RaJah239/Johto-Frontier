@@ -3,7 +3,6 @@ Pokecenter2F_MapEvents:
 	warp_event  0,  7, POKECENTER_2F, -1
 	warp_event  5,  0, TRADE_CENTER, 1
 	warp_event  9,  0, COLOSSEUM, 1
-	warp_event 13,  2, TIME_CAPSULE, 1
 
 	def_coord_events
 
