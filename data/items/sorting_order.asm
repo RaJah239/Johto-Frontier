@@ -244,6 +244,7 @@ ItemNameOrder:
 	db COIN_CASE
 	db ITEMFINDER
 	db BLUE_CARD
+	db POCKET_PC
 
 ; Rods
 	db OLD_ROD
@@ -270,7 +271,6 @@ ItemNameOrder:
 	db CARD_KEY
 	db GS_BALL
 	db MYSTERY_EGG
-	db RED_SCALE
 	db SECRETPOTION
 	db SQUIRTBOTTLE
 

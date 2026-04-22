@@ -986,6 +986,16 @@ _PokecenterPCTurnOnText::
 	line "the PC."
 	prompt
 
+_PocketPCNoSignalText::
+	text "Bzzzzt!"
+
+	para "There is no"
+	line "signal!"
+
+	para "The PC cannot be"
+	line "accessed!"
+	done
+
 _PokecenterPCWhoseText::
 	text "Access whose PC?"
 	done

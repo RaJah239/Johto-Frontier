@@ -66,7 +66,7 @@ ItemDescriptions:
 	dw EtherDesc
 	dw MaxEtherDesc
 	dw ElixerDesc
-	dw RedScaleDesc
+	dw PocketPCDesc
 	dw SecretPotionDesc
 	dw MareepCallDesc
 	dw MysteryEggDesc
@@ -520,9 +520,9 @@ ElixerDesc:
 	db   "Restores PP of all"
 	next "moves by 10.@"
 
-RedScaleDesc:
-	db   "A scale from the"
-	next "red GYARADOS.@"
+PocketPCDesc:
+	db   "Access the PC"
+	next "right here!@"
 
 SecretPotionDesc:
 	db   "Fully heals any"

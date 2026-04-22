@@ -65,7 +65,7 @@ ItemNames::
 	li "Ether"
 	li "Max Ether"
 	li "Elixer"
-	li "Red Scale"
+	li "Pocket PC"
 	li "SecretPotion"
 	li "Mareep Call"
 	li "Mystery Egg"

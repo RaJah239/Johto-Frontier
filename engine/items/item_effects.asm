@@ -79,7 +79,7 @@ ItemEffects:
 	dw RestorePPEffect     ; ETHER
 	dw RestorePPEffect     ; MAX_ETHER
 	dw RestorePPEffect     ; ELIXER
-	dw NoEffect            ; RED_SCALE
+	dw PocketPCEffect      ; POCKET_PC
 	dw NoEffect            ; SECRETPOTION
 	dw MareepCallEffect    ; MAREEP_CALL
 	dw NoEffect            ; MYSTERY_EGG
@@ -3135,3 +3135,6 @@ NomadSigilEffect:
 
 CalmCharmEffect:
 	farjp CalmCharmFunction
+
+PocketPCEffect:
+	farjp PocketPCFunction

@@ -84,19 +84,19 @@ PokemonCenterPC:
 
 .Jumptable_Indoor:
 ; entries correspond to PCPCITEM_* constants
-	dw PlayersPC,    .String_PlayersPC
-	dw BillsPC,      .String_BillsPC
-	dw OaksPC,       .String_OaksPC
-	dw HallOfFamePC, .String_HallOfFame
-	dw TurnOffPC,    .String_TurnOff
+	dw PlayersPC,            .String_PlayersPC
+	dw BillsPC,              .String_BillsPC
+	dw OaksPC,               .String_OaksPC
+	dw HallOfFamePC,         .String_HallOfFame
+	dw TurnOffPCOrHealParty, .String_TurnOff
 
 .Jumptable_Outdoor:
 ; entries correspond to PCPCITEM_* constants
-	dw PlayersPC,    .String_PlayersPC
-	dw BillsPC,      .String_BillsPC
-	dw OaksPC,       .String_OaksPC
-	dw HallOfFamePC, .String_HallOfFame
-	dw TurnOffPC,    .String_HealParty
+	dw PlayersPC,            .String_PlayersPC
+	dw BillsPC,              .String_BillsPC
+	dw OaksPC,               .String_OaksPC
+	dw HallOfFamePC,         .String_HallOfFame
+	dw TurnOffPCOrHealParty, .String_HealParty
 
 .String_PlayersPC:  db "<PLAYER>'s PC@"
 .String_BillsPC:    db "Bill's PC@"
@@ -204,7 +204,15 @@ HallOfFamePC:
 	and a
 	ret
 
-TurnOffPC:
+TurnOffPCOrHealParty:
+	ld a, [wEnvironment]
+	cp INDOOR
+	jr z, .shutdown
+
+	farcall HealParty
+	ld de, SFX_FULL_HEAL
+	call PC_WaitPlaySFX
+.shutdown:
 	scf
 	ret
 
