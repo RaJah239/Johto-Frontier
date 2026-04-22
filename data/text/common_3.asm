@@ -97,33 +97,6 @@ _LinkAskTradeForText::
 	text "?"
 	done
 
-_TryAgainUsingSameSettingsText::
-	text "Try again using"
-	line "the same settings?"
-	done
-
-_MobileBattleLessThanOneMinuteLeftText::
-	text "There is less than"
-	line "1 min. left today!"
-	done
-
-_MobileBattleNoTimeLeftForLinkingText::
-	text "No time left for"
-	line "linking today."
-	done
-
-_PickThreeMonForMobileBattleText::
-	text "Pick three #MON"
-	line "for battle."
-	done
-
-_MobileBattleRemainingTimeText::
-	text "Today's remaining"
-	line "time is @"
-	text_decimal wStringBuffer2, 1, 2
-	text " min."
-	done
-
 _SavedTheGameText::
 	text "<PLAYER> saved"
 	line "the game."
@@ -654,29 +627,6 @@ _DeletedTheLoginPasswordText::
 	text "Deleted the LOG-IN"
 	line "PASSWORD."
 	done
-
-_MobilePickThreeMonForBattleText::
-	text "Pick three #MON"
-	line "for battle."
-	prompt
-
-_MobileUseTheseThreeMonText::
-	text_ram wMobileParticipant1Nickname
-	text ","
-	line "@"
-	text_ram wMobileParticipant2Nickname
-	text " and"
-	cont "@"
-	text_ram wMobileParticipant3Nickname
-	text "."
-
-	para "Use these three?"
-	done
-
-_MobileOnlyThreeMonMayEnterText::
-	text "Only three #MON"
-	line "may enter."
-	prompt
 
 _MobileCardFolderIntro1Text::
 	text "The CARD FOLDER"

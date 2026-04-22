@@ -58,10 +58,6 @@ DEF NUM_KANA EQU 45 ; length of SortedPokemon table (see mobile/fixed_words.asm)
 DEF MOBILE_LOGIN_PASSWORD_LENGTH EQU 17
 DEF MOBILE_PHONE_NUMBER_LENGTH EQU 20
 
-; Maximum amount of time allowed for mobile battles each day
-DEF MOBILE_BATTLE_ALLOWED_SECONDS EQU 0
-DEF MOBILE_BATTLE_ALLOWED_MINUTES EQU 10
-
 ; Trade corner request size
 ; DION addr $1e + request $8 + Name $5
 ; + party struct $30 + OT $5 + NICK $5

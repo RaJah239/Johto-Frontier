@@ -119,7 +119,6 @@ SpecialsPointers::
 	add_special Function11ba38
 	add_special GiveOddEgg
 	add_special Reset ; bank 0
-	add_special Function101225
 	add_special Function101231
 	add_special MoveTutor
 	add_special OmanyteChamber
@@ -141,11 +140,7 @@ SpecialsPointers::
 	add_special GiveDratini
 	add_special BeastsCheck
 	add_special MonCheck
-	add_special Function1037eb
-	add_special Function10383c
 	add_special RefreshSprites
-	add_special Function1037c2
-	add_special Function10387b
 	add_special AskRememberPassword
 	add_special LoadMapPalettes
 

@@ -5,7 +5,6 @@ MobileTradeRoom_MapScripts:
 
 MobileTradeRoomConsoleScript:
 	reanchormap
-	special Function1037c2
 	writetext MobileTradeRoom_EstablishingCommsText
 	waitbutton
 	refreshmap

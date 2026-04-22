@@ -1086,19 +1086,6 @@ Function1006dc:
 	ld [de], a
 	ret
 
-MobileBattleFixTimer:
-	ld a, BANK(sMobileBattleTimer)
-	ld hl, sMobileBattleTimer
-	call OpenSRAM
-	xor a ; MOBILE_BATTLE_ALLOWED_SECONDS
-	ld [hli], a
-	ld a, MOBILE_BATTLE_ALLOWED_MINUTES
-	ld [hli], a
-	xor a
-	ld [hli], a
-	call CloseSRAM
-	ret
-
 Function100720:
 	xor a
 	ld [wcd6a], a
@@ -1318,43 +1305,6 @@ String_10088e:
 
 String_10089f:
 	db "　むせいげん@"
-
-MobileBattleGetRemainingTime:
-; Calculates the difference between 10 minutes and sMobileBattleTimer
-; Returns minutes in c and seconds in b
-	ld a, BANK(sMobileBattleTimer)
-	ld hl, sMobileBattleTimer
-	call OpenSRAM
-	ld a, [hli]
-	ld [wStringBuffer2], a
-	ld a, [hli]
-	ld [wStringBuffer2 + 1], a
-	ld a, [hli]
-	ld [wStringBuffer2 + 2], a
-	call CloseSRAM
-	ld a, [wStringBuffer2 + 2]
-	ld b, a
-	ld a, MOBILE_BATTLE_ALLOWED_SECONDS
-	sub b
-	jr nc, .no_carry_seconds
-	add 60
-.no_carry_seconds
-	ld b, a
-	ld a, [wStringBuffer2 + 1]
-	ld c, a
-	ld a, MOBILE_BATTLE_ALLOWED_MINUTES
-	sbc c
-	ld c, a
-	jr c, .fail
-	ld a, [wStringBuffer2]
-	and a
-	jr nz, .fail
-	ret
-
-.fail
-	call MobileBattleFixTimer
-	ld c, 0
-	ret
 
 Function1008e0:
 	ldh a, [hBGMapMode]
@@ -2039,13 +1989,6 @@ LoadSelectedPartiesForColosseum:
 	ld a, [wStringBuffer2 + 3]
 	ld b, a
 	ret
-
-Function101225:
-	ld d, 1
-	ld e, BANK(Jumptable_101297)
-	ld bc, Jumptable_101297
-	call Function100000
-	jr Function10123d
 
 Function101231:
 	ld d, 2
@@ -6610,125 +6553,3 @@ Function103654:
 	set 5, [hl]
 	ld c, $01
 	ret
-
-Function1037c2:
-	call MobileCheckRemainingBattleTime
-	jr c, .nope
-	ld a, [wdc5f]
-	and a
-	jr z, .nope
-	ld hl, TryAgainUsingSameSettingsText
-	call PrintText
-	call YesNoBox
-	jr c, .nope
-	ld a, $01
-	ld [wScriptVar], a
-	ret
-
-.nope
-	xor a
-	ld [wdc5f], a
-	ld [wScriptVar], a
-	ret
-
-TryAgainUsingSameSettingsText:
-	text_far _TryAgainUsingSameSettingsText
-	text_end
-
-Function1037eb:
-	call MobileCheckRemainingBattleTime
-	jr nc, .asm_103807
-	ld hl, MobileBattleLessThanOneMinuteLeftText
-	call PrintText
-	call JoyWaitAorB
-	ld hl, MobileBattleNoTimeLeftForLinkingText
-	call PrintText
-	call JoyWaitAorB
-	xor a
-	ld [wScriptVar], a
-	ret
-
-.asm_103807
-	ld a, [wdc60]
-	and a
-	jr nz, .asm_103813
-	ld a, $01
-	ld [wScriptVar], a
-	ret
-
-.asm_103813
-	ld a, $02
-	ld [wScriptVar], a
-	ret
-
-MobileBattleLessThanOneMinuteLeftText:
-	text_far _MobileBattleLessThanOneMinuteLeftText
-	text_end
-
-MobileBattleNoTimeLeftForLinkingText:
-	text_far _MobileBattleNoTimeLeftForLinkingText
-	text_end
-
-MobileCheckRemainingBattleTime:
-	farcall CheckMobileAdapterStatus
-	bit 7, c
-	jr nz, .ok
-	farcall MobileBattleGetRemainingTime
-	ld a, c
-	cp 1
-	jr c, .fail
-
-.ok
-	xor a
-	ret
-
-.fail
-	scf
-	ret
-
-Function10383c:
-	ld a, $01
-	ld [wdc60], a
-	xor a
-	ld hl, wPlayerMonSelection
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
-	ld hl, PickThreeMonForMobileBattleText
-	call PrintText
-	call JoyWaitAorB
-	farcall Script_refreshmap
-	farcall Function4a94e
-	jr c, .asm_103870
-	ld hl, wd002
-	ld de, wPlayerMonSelection
-	ld bc, 3
-	call CopyBytes
-	xor a
-	ld [wScriptVar], a
-	ret
-
-.asm_103870
-	ld a, $01
-	ld [wScriptVar], a
-	ret
-
-PickThreeMonForMobileBattleText:
-	text_far _PickThreeMonForMobileBattleText
-	text_end
-
-Function10387b:
-	farcall CheckMobileAdapterStatus
-	bit 7, c
-	ret nz
-	farcall MobileBattleGetRemainingTime
-	ld a, c
-	ld [wStringBuffer2], a
-	ld hl, MobileBattleRemainingTimeText
-	call PrintText
-	call JoyWaitAorB
-	ret
-
-MobileBattleRemainingTimeText:
-	text_far _MobileBattleRemainingTimeText
-	text_end

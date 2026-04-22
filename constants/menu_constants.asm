@@ -79,7 +79,7 @@ DEF HMENURETURN_ASM    EQU %11111111
 	const PARTYMENUACTION_GIVE_MON
 	const PARTYMENUACTION_GIVE_MON_FEMALE ; unused
 	const PARTYMENUACTION_GIVE_ITEM
-	const PARTYMENUACTION_MOBILE ; mobile
+	const PARTYMENUACTION_MOBILE ; mobile ; unused
 DEF NUM_PARTYMENUACTIONS EQU const_value
 ; PrintPartyMenuActionText arguments (see engine/pokemon/party_menu.asm)
 	const_next $f0
