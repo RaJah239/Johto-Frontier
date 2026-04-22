@@ -14,7 +14,6 @@ MobileTradeRoomNoopScene:
 
 MobileTradeRoomInitializeAndPreparePokecenter2FScript:
 	setscene SCENE_MOBILETRADEROOM_NOOP
-	setmapscene POKECENTER_2F, SCENE_POKECENTER2F_LEAVE_MOBILE_TRADE_ROOM
 	end
 
 MobileTradeRoomConsoleScript:
@@ -34,8 +33,6 @@ MobileTradeRoom_EstablishingCommsText:
 
 MobileTradeRoom_MapEvents:
 	def_warp_events
-	warp_event  4,  7, POKECENTER_2F, 5
-	warp_event  5,  7, POKECENTER_2F, 5
 
 	def_coord_events
 

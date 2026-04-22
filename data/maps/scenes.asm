@@ -49,7 +49,6 @@ MapScenes::
 	scene_var DRAGON_SHRINE,                               wDragonShrineSceneID
 	scene_var MT_MORTAR_SQUARE,                            wMountMortarSquareSceneID
 	scene_var MOBILE_TRADE_ROOM,                           wMobileTradeRoomSceneID
-	scene_var MOBILE_BATTLE_ROOM,                          wMobileBattleRoomSceneID
 	scene_var DAY_CARE,                                    wDayCareSceneID
 	scene_var ROUTE_2,                                     wRoute30SceneID
 	scene_var BATTLE_PLAZA_MAGNET_TRAIN_STATION,           wBattlePlazaMagnetTrainStationSceneID

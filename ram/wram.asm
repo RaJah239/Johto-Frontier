@@ -3161,7 +3161,6 @@ wTeamRocketBaseB1FSceneID::                       db
 wDragonShrineSceneID::                            db
 wMountMortarSquareSceneID::                       db
 wMobileTradeRoomSceneID::                         db
-wMobileBattleRoomSceneID::                        db
 wDayCareSceneID::                                 db
 wRoute30SceneID::                                 db
 wBattlePlazaMagnetTrainStationSceneID::           db
@@ -3174,7 +3173,7 @@ wOlivineGym::                                     db
 wCianwoodGym::                                    db
 wMahoganyGym::                                    db
 
-	ds 172
+	ds 173
 
 ; battle tower points
 wBattleTowerNormalPoints:: db

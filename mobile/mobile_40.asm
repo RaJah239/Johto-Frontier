@@ -2040,11 +2040,6 @@ LoadSelectedPartiesForColosseum:
 	ld b, a
 	ret
 
-Function101220:
-	xor a
-	ld [wLinkMode], a
-	ret
-
 Function101225:
 	ld d, 1
 	ld e, BANK(Jumptable_101297)
