@@ -18,8 +18,16 @@ PokemonCenterPC:
 	call PC_PlayBootSound
 	ld hl, PokecenterPCWhoseText
 	call PC_DisplayTextWaitMenu
-	ld hl, .TopMenu
+
+	; determine which menu header to load
+	ld a, [wEnvironment]
+	cp INDOOR
+	ld hl, .TopMenu_Indoor
+	jr z, .got_header
+	ld hl, .TopMenu_Outdoor ; Default/Outdoor
+.got_header
 	call LoadMenuHeader
+
 .loop
 	xor a
 	ldh [hBGMapMode], a
@@ -27,31 +35,54 @@ PokemonCenterPC:
 	ld [wWhichIndexSet], a
 	call DoNthMenu
 	jr c, .shutdown
+	
 	ld a, [wMenuSelection]
-	ld hl, .Jumptable
+	; we need to dynamically find the correct jumptable again 
+	; or just point hl to the right one based on environment
+	ld hl, .Jumptable_Outdoor
+	ld b, a
+	ld a, [wEnvironment]
+	cp INDOOR
+	ld a, b
+	jr nz, .do_jump
+	ld hl, .Jumptable_Indoor
+
+.do_jump
 	call MenuJumptable
 	jr nc, .loop
 
 .shutdown
 	call PC_PlayShutdownSound
 	call ExitMenu
-	call CloseWindow
-	ret
+	jmp CloseWindow
 
-.TopMenu:
-	db MENU_BACKUP_TILES | MENU_NO_CLICK_SFX ; flags
+.TopMenu_Indoor:
+	db MENU_BACKUP_TILES | MENU_NO_CLICK_SFX
 	menu_coords 0, 0, 15, 12
-	dw .MenuData
-	db 1 ; default option
+	dw .MenuData_Indoor
+	db 1
 
-.MenuData:
-	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
+.MenuData_Indoor:
+	db STATICMENU_CURSOR | STATICMENU_WRAP
 	db 0 ; items
 	dw .WhichPC
 	dw PlaceNthMenuStrings
-	dw .Jumptable
+	dw .Jumptable_Indoor
 
-.Jumptable:
+.TopMenu_Outdoor:
+	db MENU_BACKUP_TILES | MENU_NO_CLICK_SFX
+	menu_coords 0, 0, 15, 12
+	dw .MenuData_Outdoor
+	db 1
+
+.MenuData_Outdoor:
+	db STATICMENU_CURSOR | STATICMENU_WRAP
+	db 0 ; items
+	dw .WhichPC
+	dw PlaceNthMenuStrings
+	dw .Jumptable_Outdoor
+
+.Jumptable_Indoor:
 ; entries correspond to PCPCITEM_* constants
 	dw PlayersPC,    .String_PlayersPC
 	dw BillsPC,      .String_BillsPC
@@ -59,10 +90,19 @@ PokemonCenterPC:
 	dw HallOfFamePC, .String_HallOfFame
 	dw TurnOffPC,    .String_TurnOff
 
+.Jumptable_Outdoor:
+; entries correspond to PCPCITEM_* constants
+	dw PlayersPC,    .String_PlayersPC
+	dw BillsPC,      .String_BillsPC
+	dw OaksPC,       .String_OaksPC
+	dw HallOfFamePC, .String_HallOfFame
+	dw TurnOffPC,    .String_HealParty
+
 .String_PlayersPC:  db "<PLAYER>'s PC@"
 .String_BillsPC:    db "Bill's PC@"
 .String_OaksPC:     db "Prof.Oak's PC@"
 .String_HallOfFame: db "Hall Of Fame@"
+.String_HealParty:  db "Heal Party@"
 .String_TurnOff:    db "Turn Off@"
 
 .WhichPC:
