@@ -1990,7 +1990,7 @@ LoadSelectedPartiesForColosseum:
 	ld b, a
 	ret
 
-Function101231:
+Function101231: ; unused
 	ld d, 2
 	ld e, BANK(Jumptable_101297)
 	ld bc, Jumptable_101297

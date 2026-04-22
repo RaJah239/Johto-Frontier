@@ -521,16 +521,12 @@ Silver_Map_Name3: db "Route 11 Gate@"
 ; "Refactor: Organised Battle Plaza as a separated Map Group, can add Outdoor Sprites now"
 Cable_Club_Map_Names: ; newgroup CABLE_CLUB
 	table_width 2, Cable_Club_Map_Names
-	dw Cable_Club_Map_Name1 ; map_const POKECENTER_2F
-	dw Cable_Club_Map_Name2 ; map_const TRADE_CENTER
-	dw Cable_Club_Map_Name3 ; map_const COLOSSEUM
-	dw Cable_Club_Map_Name4 ; map_const MOBILE_TRADE_ROOM
+	dw Cable_Club_Map_Name ; map_const POKECENTER_2F
+	dw Cable_Club_Map_Name ; map_const TRADE_CENTER
+	dw Cable_Club_Map_Name ; map_const COLOSSEUM
 	assert_table_length NUM_CABLE_CLUB_MAPS
 
-Cable_Club_Map_Name1: db "@"
-Cable_Club_Map_Name2: db "@"
-Cable_Club_Map_Name3: db "@"
-Cable_Club_Map_Name4: db "@"
+Cable_Club_Map_Name: db "@"
 
 Cianwood_Map_Names: ; newgroup CIANWOOD
 	table_width 2, Cianwood_Map_Names

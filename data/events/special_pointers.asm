@@ -119,7 +119,6 @@ SpecialsPointers::
 	add_special Function11ba38
 	add_special GiveOddEgg
 	add_special Reset ; bank 0
-	add_special Function101231
 	add_special MoveTutor
 	add_special OmanyteChamber
 	add_special Function11c1ab

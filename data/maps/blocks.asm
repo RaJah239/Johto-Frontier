@@ -623,9 +623,6 @@ BattlePlazaMart_Blocks:
 PokecomCenterAdminOfficeMobile_Blocks:
 	INCBIN "maps/PokecomCenterAdminOfficeMobile.blk"
 
-MobileTradeRoom_Blocks:
-	INCBIN "maps/MobileTradeRoom.blk"
-
 BattleTowerHallway_Blocks:
 	INCBIN "maps/BattleTowerHallway.blk"
 

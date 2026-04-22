@@ -400,7 +400,6 @@ ENDM
 	map_attributes Pokecenter2F, POKECENTER_2F, $00, 0
 	map_attributes TradeCenter, TRADE_CENTER, $00, 0
 	map_attributes Colosseum, COLOSSEUM, $00, 0
-	map_attributes MobileTradeRoom, MOBILE_TRADE_ROOM, $00, 0
 	map_attributes GoldenrodMansion1F, GOLDENROD_MANSION_1F, $00, 0
 	map_attributes GoldenrodMansion2F, GOLDENROD_MANSION_2F, $00, 0
 	map_attributes GoldenrodMansion3F, GOLDENROD_MANSION_3F, $00, 0
