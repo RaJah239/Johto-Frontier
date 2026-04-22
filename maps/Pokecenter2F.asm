@@ -110,11 +110,6 @@ LinkReceptionistScript_Trade:
 	closetext
 	end
 
-BattleTradeMobile_WalkIn:
-	applymovementlasttalked Pokecenter2FMobileMobileMovementData_ReceptionistWalksUpAndLeft_LookDown
-	applymovement PLAYER, Pokecenter2FMobileMovementData_PlayerWalksIntoMobileBattleRoom
-	end
-
 LinkReceptionistScript_Battle:
 	opentext
 	writetext Text_BattleReceptionistIntro
@@ -173,31 +168,6 @@ LinkReceptionistScript_Battle:
 	special WaitForOtherPlayerToExit
 .Cancel:
 	closetext
-	end
-
-.Mobile:
-	scall .SelectThreeMons
-	scall BattleTradeMobile_WalkIn
-	warpcheck
-	end
-
-.SelectThreeMons:
-	iffalse .Mobile_DidNotSelect
-	ifequal $1, .Mobile_OK
-	ifequal $2, .Mobile_OK
-	ifequal $3, .Mobile_InvalidParty
-	sjump .Mobile_DidNotSelect
-
-.Mobile_InvalidParty:
-	writetext Text_BrokeStadiumRules
-	waitbutton
-.Mobile_DidNotSelect:
-	closetext
-	setval FALSE
-	end
-
-.Mobile_OK:
-	setval TRUE
 	end
 
 Script_TimeCapsuleClosed:
@@ -509,12 +479,6 @@ Pokecenter2FMovementData_ReceptionistWalksUpAndLeft_LookRight:
 	turn_head RIGHT
 	step_end
 
-Pokecenter2FMobileMobileMovementData_ReceptionistWalksUpAndLeft_LookDown:
-	slow_step UP
-	slow_step LEFT
-	turn_head DOWN
-	step_end
-
 Pokecenter2FMovementData_ReceptionistStepsLeftLooksDown:
 	slow_step LEFT
 	turn_head DOWN
@@ -547,13 +511,6 @@ Pokecenter2FMovementData_PlayerTakesTwoStepsUp:
 	step_end
 
 Pokecenter2FMovementData_PlayerTakesOneStepUp:
-	step UP
-	step_end
-
-Pokecenter2FMobileMovementData_PlayerWalksIntoMobileBattleRoom:
-	step UP
-	step UP
-	step RIGHT
 	step UP
 	step_end
 
@@ -834,26 +791,6 @@ Text_ChangeTheLook:
 Text_LikeTheLook:
 	text "How does this"
 	line "style look to you?"
-	done
-
-Text_BrokeStadiumRules:
-	text "Excuse me!"
-
-	para "For STADIUM rules,"
-	line "please bring six"
-
-	para "different #MON,"
-	line "excluding EGGS."
-
-	para "The six #MON"
-	line "must be different."
-
-	para "Also, they must"
-	line "not be holding"
-	cont "identical items."
-
-	para "Please come back"
-	line "when you're ready."
 	done
 
 Pokecenter2FLinkExtraSign:
