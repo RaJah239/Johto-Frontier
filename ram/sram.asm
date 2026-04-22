@@ -211,7 +211,7 @@ s4_a60e:: dw
 
 	ds $1f0
 
-sMobileBattleTimer:: ds 3
+sMobileBattleTimer:: ds 3 ; unused
 
 	ds $7fd
 

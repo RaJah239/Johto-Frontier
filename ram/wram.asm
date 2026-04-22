@@ -639,7 +639,7 @@ wOTPatchLists:: ds SERIAL_PATCH_LIST_LENGTH
 SECTION UNION "Miscellaneous", WRAM0
 
 ; mobile
-wMobileTransferData:: ds 480
+wMobileTransferData:: ds 480 ; unused
 
 
 SECTION UNION "Miscellaneous", WRAM0
@@ -3266,8 +3266,7 @@ wFruitTreeFlags:: flag_array NUM_FRUIT_TREES
 
 wSpecialPhoneCallID:: db
 wBugContestStartTime:: ds 4 ; day, hour, min, sec
-	ds 7
-wMobileOrCable_LastSelection:: db
+	ds 8
 wdc41:: ds 1
 wdc42:: ds 8
 wBuenasPassword:: db

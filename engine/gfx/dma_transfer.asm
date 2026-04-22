@@ -72,7 +72,7 @@ HDMATransferTilemapAndAttrmap_Overworld::
 	ldh [rVBK], a
 	reti
 
-Mobile_HDMATransferTilemapAndAttrmap_Overworld:
+Mobile_HDMATransferTilemapAndAttrmap_Overworld: ; unreferenced
 	ld hl, HDMATransferTilemapAndAttrmap_Overworld ; useless
 	ld hl, .Function
 	jmp CallInSafeGFXMode

@@ -40,28 +40,6 @@ asm_108018:
 	mobiletradeanim MobileTradeAnim_ShowOTMonFromGTS
 	mobiletradeanim EndMobileTradeAnim
 
-Function108026:
-	ld a, $0
-	jr asm_10802c
-
-Function10802a:
-	ld a, $1
-
-asm_10802c:
-	ld [wcf65], a
-	ld de, .TradeAnimScript
-	jr RunMobileTradeAnim_Frontpics
-
-.TradeAnimScript: ; trade
-	mobiletradeanim MobileTradeAnim_ShowPlayerMonToBeSent
-	mobiletradeanim MobileTradeAnim_FadeToBlack
-	mobiletradeanim MobileTradeAnim_02
-	mobiletradeanim MobileTradeAnim_GiveTrademon1
-	mobiletradeanim MobileTradeAnim_05
-	mobiletradeanim MobileTradeAnim_GetTrademon1
-	mobiletradeanim MobileTradeAnim_ShowOTMonFromTrade
-	mobiletradeanim EndMobileTradeAnim
-
 Function10803d:
 	ld a, $0
 	ld [wcf65], a
@@ -85,35 +63,6 @@ Function10804d:
 	mobiletradeanim MobileTradeAnim_11
 	mobiletradeanim MobileTradeAnim_ShowOTMonFromGTS
 	mobiletradeanim EndMobileTradeAnim
-
-RunMobileTradeAnim_Frontpics:
-	ld hl, wTradeAnimAddress
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ldh a, [hMapAnims]
-	push af
-	xor a
-	ldh [hMapAnims], a
-	ld hl, wStateFlags
-	ld a, [hl]
-	push af
-	res SPRITE_UPDATES_DISABLED_F, [hl]
-	ld hl, wOptions
-	ld a, [hl]
-	push af
-	set NO_TEXT_SCROLL, [hl]
-	call Function1080b7
-.loop
-	call MobileTradeAnim_JumptableLoop
-	jr nc, .loop
-	pop af
-	ld [wOptions], a
-	pop af
-	ld [wStateFlags], a
-	pop af
-	ldh [hMapAnims], a
-	ret
 
 RunMobileTradeAnim_NoFrontpics:
 	ld hl, wTradeAnimAddress
@@ -142,81 +91,6 @@ RunMobileTradeAnim_NoFrontpics:
 	ld [wStateFlags], a
 	pop af
 	ldh [hMapAnims], a
-	ret
-
-Function1080b7:
-	xor a
-	ld [wJumptableIndex], a
-	call ClearBGPalettes
-	call ClearSprites
-	call ClearTilemap
-	call DisableLCD
-	call MobileTradeAnim_ClearTiles
-	call MobileTradeAnim_ClearBGMap
-	call LoadStandardFont
-	call LoadFontsBattleExtra
-
-	ld a, $1
-	ldh [rVBK], a
-	ld hl, MobileTradeGFX
-	ld de, vTiles2
-	call Decompress
-
-	ld a, $0
-	ldh [rVBK], a
-	ld hl, MobileTradeSpritesGFX
-	ld de, vTiles0 tile $20
-	call Decompress
-
-	call EnableLCD
-
-	xor a
-	ldh [hSCX], a
-	ldh [hSCY], a
-	ld a, $7
-	ldh [hWX], a
-	ld a, $90
-	ldh [hWY], a
-	farcall ClearSpriteAnims
-
-	call DelayFrame
-
-	ld de, TradeBallGFX
-	ld hl, vTiles0
-	lb bc, BANK(TradeBallGFX), 6
-	call Request2bpp
-
-	ld de, TradePoofGFX
-	ld hl, vTiles0 tile $06
-	lb bc, BANK(TradePoofGFX), 12
-	call Request2bpp
-
-	xor a ; SPRITE_ANIM_DICT_DEFAULT
-	ld hl, wSpriteAnimDict
-	ld [hli], a
-	ld [hl], $00
-
-	ld a, [wPlayerTrademonSpecies]
-	ld hl, wPlayerTrademonDVs
-	ld de, vTiles0 tile $30
-	call MobileTradeAnim_GetFrontpic
-
-	ld a, [wOTTrademonSpecies]
-	ld hl, wOTTrademonDVs
-	ld de, vTiles2 tile $31
-	call MobileTradeAnim_GetFrontpic
-
-	ld a, [wPlayerTrademonSpecies]
-	ld de, wPlayerTrademonSpeciesName
-	call MobileTradeAnim_InitSpeciesName
-
-	ld a, [wOTTrademonSpecies]
-	ld de, wOTTrademonSpeciesName
-	call MobileTradeAnim_InitSpeciesName
-
-	xor a
-	call Function108b98
-	call Function108af4
 	ret
 
 Function108157:
@@ -354,7 +228,6 @@ MobileTradeAnim_JumptableLoop:
 	ldh [hWY], a
 	call LoadStandardFont
 	call LoadFontsBattleExtra
-	farcall Stubbed_Function106462
 	farcall Function106464
 	scf
 	ret

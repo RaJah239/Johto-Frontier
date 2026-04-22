@@ -213,18 +213,6 @@ INCLUDE "gfx/mystery_gift/name_card_bg.pal"
 .OBPalette:
 INCLUDE "gfx/mystery_gift/name_card_ob.pal"
 
-Function49742:
-	ld hl, .MobileBorderPalettes
-	ld de, wBGPals1
-	ld bc, 8 palettes
-	ld a, BANK(wBGPals1)
-	call FarCopyWRAM
-	farcall ApplyPals
-	ret
-
-.MobileBorderPalettes:
-INCLUDE "gfx/trade/mobile_border.pal"
-
 _InitMG_Mobile_LinkTradePalMap:
 	hlcoord 0, 0, wAttrmap
 	lb bc, 16, 2
