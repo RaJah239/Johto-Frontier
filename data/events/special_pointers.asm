@@ -19,7 +19,6 @@ SpecialsPointers::
 	add_special CloseLink
 	add_special WaitForOtherPlayerToExit
 	add_special SetBitsForBattleRequest
-	add_special SetBitsForTimeCapsuleRequest
 	add_special TradeCenter
 	add_special Colosseum
 	add_special CableClubCheckWhichChris
