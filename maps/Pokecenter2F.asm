@@ -55,13 +55,6 @@ LinkReceptionistScript_Trade:
 	writetext Text_TradeReceptionistIntro
 	yesorno
 	iffalse .Cancel
-	special CheckMobileAdapterStatusSpecial
-	iffalse .NoMobile
-	writetext Text_TradeReceptionistMobile
-	special AskMobileOrCable
-	iffalse .Cancel
-	ifequal $1, .Mobile
-.NoMobile:
 	special SetBitsForLinkTradeRequest
 	writetext Text_PleaseWait
 	special WaitForLinkedFriend
@@ -117,35 +110,6 @@ LinkReceptionistScript_Trade:
 	closetext
 	end
 
-.Mobile:
-	scall .Mobile_TrySave
-	iftrue .Mobile_Abort
-	scall BattleTradeMobile_WalkIn
-	warpcheck
-	end
-
-.Mobile_Abort:
-	end
-
-.Mobile_TrySave:
-	writetext Text_MustSaveGame
-	yesorno
-	iffalse .Mobile_DidNotSave
-	special TryQuickSave
-	iffalse .Mobile_DidNotSave
-	special Function1011f1
-	writetext Text_PleaseComeIn
-	waitbutton
-	closetext
-	setval FALSE
-	end
-
-.Mobile_DidNotSave:
-	writetext Text_PleaseComeAgain
-	closetext
-	setval TRUE
-	end
-
 BattleTradeMobile_WalkIn:
 	applymovementlasttalked Pokecenter2FMobileMobileMovementData_ReceptionistWalksUpAndLeft_LookDown
 	applymovement PLAYER, Pokecenter2FMobileMovementData_PlayerWalksIntoMobileBattleRoom
@@ -156,13 +120,6 @@ LinkReceptionistScript_Battle:
 	writetext Text_BattleReceptionistIntro
 	yesorno
 	iffalse .Cancel
-	special CheckMobileAdapterStatusSpecial
-	iffalse .NoMobile
-	writetext Text_BattleReceptionistMobile
-	special AskMobileOrCable
-	iffalse .Cancel
-	ifequal $1, .Mobile
-.NoMobile:
 	special SetBitsForBattleRequest
 	writetext Text_PleaseWait
 	special WaitForLinkedFriend
@@ -236,7 +193,6 @@ LinkReceptionistScript_Battle:
 	iffalse .Mobile_DidNotSave
 	special Function103780
 	iffalse .Mobile_DidNotSave
-	special Function1011f1
 	writetext Text_PleaseComeIn
 	waitbutton
 	closetext
@@ -748,22 +704,6 @@ Pokecenter2FMovementData_ReceptionistStepsRightLooksLeft_2:
 	slow_step RIGHT
 	turn_head LEFT
 	step_end
-
-Text_BattleReceptionistMobile:
-	text "Would you like to"
-	line "battle over a GAME"
-
-	para "LINK cable or by"
-	line "mobile phone?"
-	done
-
-Text_TradeReceptionistMobile:
-	text "Would you like to"
-	line "trade over a GAME"
-
-	para "LINK cable or by"
-	line "mobile phone?"
-	done
 
 Text_BattleReceptionistIntro:
 	text "Welcome to CABLE"

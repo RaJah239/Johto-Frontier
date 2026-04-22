@@ -123,7 +123,6 @@ SpecialsPointers::
 	add_special Function11ba38
 	add_special GiveOddEgg
 	add_special Reset ; bank 0
-	add_special Function1011f1
 	add_special Function101220
 	add_special Function101225
 	add_special Function101231
@@ -136,7 +135,7 @@ SpecialsPointers::
 	add_special Function17d2b6
 	add_special Function17d2ce
 	add_special BattleTowerMobileError
-	add_special AskMobileOrCable
+	add_special AskMobileOrCable ; mobile
 	add_special HoOhChamber
 	add_special Function102142
 	add_special CelebiShrineEvent
@@ -152,7 +151,6 @@ SpecialsPointers::
 	add_special Function10383c
 	add_special RefreshSprites
 	add_special Function1037c2
-	add_special CheckMobileAdapterStatusSpecial
 	add_special Function103780
 	add_special Function10387b
 	add_special AskRememberPassword

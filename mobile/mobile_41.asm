@@ -288,13 +288,6 @@ endr
 
 ; functions related to the cable club and various NPC scripts referencing communications
 
-CheckMobileAdapterStatusSpecial: ; unused
-	; this routine calls CheckMobileAdapterStatus
-	; in the Japanese version
-	xor a
-	ld [wScriptVar], a
-	ret
-
 SetMobileAdapterStatus: ; unused
 	ret
 	; the instructions below are the

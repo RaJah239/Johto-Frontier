@@ -2051,29 +2051,6 @@ LoadSelectedPartiesForColosseum:
 	ld b, a
 	ret
 
-Function1011f1:
-	ld a, BANK(s4_a60c)
-	call OpenSRAM
-	ld a, [s4_a60c]
-	ld [wdc41], a
-	call CloseSRAM
-	ld hl, wdc41
-	res 4, [hl]
-	ld hl, wGameTimerPaused
-	bit GAME_TIMER_MOBILE_F, [hl]
-	jr z, .skip
-	ld hl, wdc41
-	set 4, [hl]
-
-.skip
-	call Function10209c
-	xor a
-	ld [wdc5f], a
-	ld [wdc60], a
-	ld a, LINK_MOBILE
-	ld [wLinkMode], a
-	ret
-
 Function101220:
 	xor a
 	ld [wLinkMode], a
@@ -3988,15 +3965,7 @@ Function10208e:
 	pop de
 	ret
 
-Function10209c:
-	ld a, $ff
-	ld hl, wdc42
-	ld bc, 8
-	call ByteFill
-	ret
-
 Function1020a8:
-	call Function10209c
 	ld c, $01
 	ld de, wdc42
 	farcall Function17a68f
