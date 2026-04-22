@@ -182,7 +182,6 @@ LinkReceptionistScript_Battle:
 	end
 
 .SelectThreeMons:
-	special Mobile_SelectThreeMons
 	iffalse .Mobile_DidNotSelect
 	ifequal $1, .Mobile_OK
 	ifequal $2, .Mobile_OK
