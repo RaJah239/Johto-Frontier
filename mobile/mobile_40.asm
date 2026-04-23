@@ -1,21 +1,3 @@
-SetRAMStateForMobile:
-	xor a
-	ld hl, wBGMapBuffer
-	ld bc, $65
-	call ByteFill
-	xor a
-	ld hl, wMobileWRAM
-	ld bc, wMobileWRAMEnd - wMobileWRAM
-	call ByteFill
-	ldh a, [rIE]
-	ld [wBGMapBuffer], a
-	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
-	xor a
-	ldh [hMapAnims], a
-	ldh [hLCDCPointer], a
-	ret
-
 EnableMobile:
 	xor a
 	ld hl, wOverworldMapBlocks

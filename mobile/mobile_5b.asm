@@ -1,30 +1,9 @@
 Function16c000: ; unreferenced
-	; Only for CGB
-	ldh a, [hCGB]
-	and a
-	ret z
-	; Only do this once per boot cycle
-	ldh a, [hSystemBooted]
-	and a
-	ret z
-	; Disable the joypad during mobile setup
-	ld a, [wJoypadDisable]
-	push af
-	set JOYPAD_DISABLE_SGB_TRANSFER_F, a
-	ld [wJoypadDisable], a
-	; Do stuff
-	call MobileSystemSplashScreen_InitGFX ; Load GFX
 	farcall SetRAMStateForMobile
 	farcall EnableMobile
 	call .RunJumptable
 	farcall DisableMobile
-	; Prevent this routine from running again
-	; until the next time the system is turned on
-	xor a
 	ldh [hSystemBooted], a
-	; Restore the flag state
-	pop af
-	ld [wJoypadDisable], a
 	ret
 
 .RunJumptable:
@@ -153,66 +132,6 @@ Function16c0fa:
 	ld [wd003], a
 	pop af
 	ret
-
-MobileSystemSplashScreen_InitGFX:
-	call DisableLCD
-	ld hl, vTiles2
-	ld de, .Tiles
-	lb bc, BANK(.Tiles), 104
-	call Get2bpp
-	call .LoadPals
-	call .LoadTilemap
-	call .LoadAttrmap
-	hlbgcoord 0, 0
-	call Function16cc73
-	call Function16cc02
-	xor a
-	ldh [hBGMapMode], a
-	call EnableLCD
-	ret
-
-.LoadPals:
-	ld de, wBGPals1
-	ld hl, MobileSplashScreenPalettes
-	ld bc, 8
-	ld a, $5
-	call FarCopyWRAM
-	farcall ApplyPals
-	ret
-
-.LoadTilemap:
-	hlcoord 0, 0
-	ld bc, 20
-	xor a
-	call ByteFill
-	ld hl, .Tilemap
-	decoord 0, 1
-	ld bc, $0154
-	call CopyBytes
-	ret
-
-.LoadAttrmap:
-	hlcoord 0, 0, wAttrmap
-	ld bc, SCREEN_WIDTH
-	xor a
-	call ByteFill
-	ld hl, .Attrmap
-	decoord 0, 1, wAttrmap
-	ld bc, 17 * SCREEN_WIDTH
-	call CopyBytes
-	ret
-
-.Tiles:
-INCBIN "gfx/mobile/mobile_splash.2bpp"
-
-.Tilemap:
-INCBIN "gfx/mobile/mobile_splash.tilemap"
-
-.Attrmap:
-INCBIN "gfx/mobile/mobile_splash.attrmap"
-
-MobileSplashScreenPalettes:
-INCLUDE "gfx/mobile/mobile_splash.pal"
 
 Function16c943:
 	ld a, [wd003]
@@ -513,22 +432,6 @@ Function16cb08:
 	ld [hl], a
 	ret
 
-Function16cb0f:
-	xor a
-	ld [wd1ea], a
-	ld [wd1eb], a
-	xor a
-	ld [wd1ec], a
-	ld a, $70
-	ld [wd1ee], a
-	ld a, $4
-	ld [wd1ed], a
-	ld a, $a0
-	ld [wd1ef], a
-	xor a
-	ld [wd1f0], a
-	ret
-
 Function16cb2e:
 	ld a, [wd1eb]
 	and a
@@ -602,13 +505,6 @@ Unknown_16cb86:
 	db 16,  8, 5, 0
 	db 16, 16, 6, 0
 
-Function16cba3:
-	xor a
-	ld [wd1f1], a
-	ld [wd1f2], a
-	ld [wd1f3], a
-	ret
-
 Function16cbae:
 	ld a, [wd1f1]
 	and a
@@ -657,125 +553,7 @@ Function16cbd1:
 Unknown_16cbfb:
 	db 0, 1, 2, 1, 0, 1, 2
 
-Function16cc02:
-	call Function16cc18
-	call Function16cc49
-	call Function16cc62
-	call Function16cc25
-	call Function16cc6e
-	call Function16cb0f
-	call Function16cba3
-	ret
-
-Function16cc18:
-	ld hl, vTiles1
-	ld de, MobileAdapterCheckGFX
-	lb bc, BANK(MobileAdapterCheckGFX), 46
-	call Get2bpp
-	ret
-
-Function16cc25:
-	ld hl, Unknown_16cfa9
-	ld de, wBGPals1 palette 1
-	call .CopyPal
-	ld hl, Unknown_16cfb1
-	ld de, wOBPals1
-	call .CopyPal
-	ld hl, Unknown_16cfb9
-	ld de, wOBPals1 palette 1
-	call .CopyPal
-	ret
-
-.CopyPal:
-	ld bc, 1 palettes
-	ld a, $5
-	jmp FarCopyWRAM
-
-Function16cc49:
-	hlcoord 4, 15
-	ld a, $80
-	call Function16cc5a
-	hlcoord 4, 16
-	ld a, $90
-	call Function16cc5a
-	ret
-
-Function16cc5a:
-	ld c, $10
-.asm_16cc5c
-	ld [hli], a
-	inc a
-	dec c
-	jr nz, .asm_16cc5c
-	ret
-
-Function16cc62:
-	hlcoord 0, 15, wAttrmap
-	ld bc, $0028
-	ld a, $1
-	call ByteFill
-	ret
-
-Function16cc6e:
-	hlbgcoord 0, 0, vBGMap1
-	jr Function16cc73
-
-Function16cc73:
-	ldh a, [rVBK]
-	push af
-	ld a, $0
-	ldh [rVBK], a
-	push hl
-	decoord 0, 0
-	call Function16cc90
-	pop hl
-	ld a, $1
-	ldh [rVBK], a
-	decoord 0, 0, wAttrmap
-	call Function16cc90
-	pop af
-	ldh [rVBK], a
-	ret
-
-Function16cc90:
-	ld bc, $1214
-.asm_16cc93
-	push bc
-.asm_16cc94
-	ld a, [de]
-	inc de
-	ld [hli], a
-	dec c
-	jr nz, .asm_16cc94
-	ld bc, $000c
-	add hl, bc
-	pop bc
-	dec b
-	jr nz, .asm_16cc93
-	ret
-
-MobileAdapterCheckGFX:
-INCBIN "gfx/mobile/mobile_splash_check.2bpp"
-
 Unknown_16cfa3:
 	RGB 31, 31, 31
 	RGB 25, 27, 29
 	RGB 16, 19, 25
-
-Unknown_16cfa9:
-	RGB 31, 31, 31
-	RGB 25, 27, 29
-	RGB 31, 31, 31
-	RGB 07, 07, 07
-
-Unknown_16cfb1:
-	RGB 31, 31, 31
-	RGB 13, 09, 18
-	RGB 26, 21, 16
-	RGB 07, 07, 07
-
-Unknown_16cfb9:
-	RGB 31, 31, 31
-	RGB 18, 05, 02
-	RGB 27, 11, 12
-	RGB 07, 07, 07

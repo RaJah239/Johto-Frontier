@@ -304,7 +304,6 @@ gfx/mobile/ascii_font.2bpp: tools/gfx += --trim-whitespace
 gfx/mobile/dialpad.2bpp: tools/gfx += --trim-whitespace
 gfx/mobile/dialpad_cursor.2bpp: tools/gfx += --trim-whitespace
 gfx/mobile/electro_ball.2bpp: tools/gfx += --remove-duplicates --remove-xflip --preserve=0x39
-gfx/mobile/mobile_splash.2bpp: tools/gfx += --remove-duplicates --remove-xflip
 gfx/mobile/card.2bpp: tools/gfx += --trim-whitespace
 gfx/mobile/card_2.2bpp: tools/gfx += --trim-whitespace
 gfx/mobile/card_folder.2bpp: tools/gfx += --trim-whitespace

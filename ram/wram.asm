@@ -221,7 +221,7 @@ wSpriteAnimationStructsEnd::
 
 NEXTU
 ; mobile data
-wMobileWRAM::
+wMobileWRAM:: ; maybe unused in the future
 wMobileErrorCodeBuffer:: ds 3
 wc303:: ds 2
 wc305:: ds 1
@@ -307,7 +307,7 @@ wBattlePlazaCrystalMoveTutor:: ds \
 	1 ; number of items
 ENDU
 	ds 3
-wMobileWRAMEnd::
+wMobileWRAMEnd:: ; maybe unused in the future
 
 
 SECTION "Sprites", WRAM0
