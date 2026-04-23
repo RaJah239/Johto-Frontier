@@ -45,7 +45,7 @@ DEF SCGB_DEFAULT EQU $ff
 ; GetCrystalCGBLayout arguments (see engine/gfx/crystal_layouts.asm)
 	const_def
 	const CRYSTAL_CGB_MOBILE_0
-	const CRYSTAL_CGB_MOBILE_1
+	const CRYSTAL_CGB_MOBILE_1 ; unused
 	const CRYSTAL_CGB_NAME_CARD
 
 ; PredefPals indexes (see gfx/sgb/predef.pal)

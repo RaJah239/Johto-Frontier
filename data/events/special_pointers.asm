@@ -112,7 +112,6 @@ SpecialsPointers::
 	add_special Reset ; bank 0
 	add_special MoveTutor
 	add_special OmanyteChamber
-	add_special Function11c1ab
 	add_special BattleTowerAction
 	add_special DisplayUnownWords
 	add_special Menu_ChallengeExplanationCancel

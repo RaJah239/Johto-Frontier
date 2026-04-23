@@ -176,7 +176,6 @@ Function4a0c2:
 	ld c, 2
 	call DelayFrames
 	ld c, $1
-	call InitMobileProfile
 	push af
 	call ClearBGPalettes
 	pop af
@@ -724,15 +723,7 @@ Function4a680:
 	ld [hli], a
 	ret
 
-Function4a6ab:
-	ld a, $2
-	call MenuClickSound
-	call ClearBGPalettes
-	ld b, SCGB_DIPLOMA
-	call GetSGBLayout
-	farcall Function11c1ab
-	pop bc
-	call LoadFontsExtra
+Function4a6ab: ; herenext
 	jmp Function4a4c4
 
 Function4a6c5:
