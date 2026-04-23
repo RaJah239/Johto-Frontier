@@ -131,14 +131,6 @@ Function3eea::
 	inc b
 	inc c
 	inc c
-	call Function3f35
 	pop bc
 	pop hl
-	call MobileHome_PlaceBox
-	ret
-
-Function3f35::
-MobileHome_PlaceBox:
-Function3f88::
-	; dummied out Mobile Code.
 	ret
