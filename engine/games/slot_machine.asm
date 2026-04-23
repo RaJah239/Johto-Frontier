@@ -190,38 +190,12 @@ SlotsLoop:
 	ld [wCurSpriteOAMAddr], a
 	callfar DoNextFrameForFirst16Sprites
 	call .PrintCoinsAndPayout
-	call .Stubbed_AlternateMatchingSevensPalette
 	call DelayFrame
 	and a
 	ret
 
 .stop
 	scf
-	ret
-
-.Stubbed_AlternateMatchingSevensPalette:
-; dummied out
-	ret
-	ld a, [wReel1ReelAction]
-	and a
-	ret nz
-	ld a, [wReel2ReelAction]
-	and a
-	ret nz
-	ld a, [wFirstTwoReelsMatchingSevens]
-	and a
-	jr nz, .matching_sevens
-	ld a, %11100100
-	call DmgToCgbBGPals
-	ret
-
-.matching_sevens
-	ld a, [wTextDelayFrames]
-	and $7
-	ret nz
-	ldh a, [rBGP]
-	xor %00001100 ; alternates two palettes
-	call DmgToCgbBGPals
 	ret
 
 .PrintCoinsAndPayout:
