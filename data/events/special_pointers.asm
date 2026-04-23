@@ -108,7 +108,6 @@ SpecialsPointers::
 	add_special BattleTowerRoomMenu
 	add_special BattleTowerBattle
 	add_special LoadOpponentTrainerAndPokemonWithOTSprite
-	add_special Function11ba38
 	add_special GiveOddEgg
 	add_special Reset ; bank 0
 	add_special MoveTutor

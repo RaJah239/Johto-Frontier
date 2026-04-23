@@ -4551,10 +4551,3 @@ AddMobileMonToParty:
 
 	call CloseSRAM
 	ret
-
-Function11ba38:
-	farcall CheckCurPartyMonFainted
-	ret c
-	xor a
-	ld [wScriptVar], a
-	ret
