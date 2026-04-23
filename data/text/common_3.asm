@@ -618,16 +618,6 @@ _MainMenuTimeUnknownText::
 	text "Clock time unknown"
 	done
 
-_DeleteSavedLoginPasswordText::
-	text "Delete the saved"
-	line "LOG-IN PASSWORD?"
-	done
-
-_DeletedTheLoginPasswordText::
-	text "Deleted the LOG-IN"
-	line "PASSWORD."
-	done
-
 _MobileCardFolderFinishRegisteringCardsText::
 	text "Finish registering"
 	line "CARDS?"
