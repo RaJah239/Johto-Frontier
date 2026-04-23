@@ -104,7 +104,6 @@ SpecialsPointers::
 
 ; Crystal only
 	add_special TradeCornerHoldMon
-	add_special Function11b879
 	add_special Function11b920
 	add_special Function11b93b
 	add_special BattleTowerRoomMenu
