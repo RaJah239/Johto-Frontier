@@ -4617,64 +4617,6 @@ Function11b6b4:
 	call AddMobileMonToParty
 	ret
 
-Function11b7e5:
-	ld a, [wMobileMonSpecies]
-	ld [wOTTrademonSpecies], a
-	ld [wCurPartySpecies], a
-	ld a, [wcd81]
-	ld [wc74e], a
-	ld hl, wMobileMonOT ; OT
-	ld de, wOTTrademonOTName
-	ld bc, 5
-	call CopyBytes
-	ld a, "@"
-	ld [de], a
-	ld a, [wMobileMonID]
-	ld [wOTTrademonID], a
-	ld a, [wMobileMonID + 1]
-	ld [wOTTrademonID + 1], a
-	ld hl, wMobileMonDVs
-	ld a, [hli]
-	ld [wOTTrademonDVs], a
-	ld a, [hl]
-	ld [wOTTrademonDVs + 1], a
-	ld bc, wMobileMon ; pokemon_data_start
-	farcall GetCaughtGender
-	ld a, c
-	ld [wOTTrademonCaughtData], a
-	call SpeechTextbox
-	call FadeToMenu
-	farcall MobileTradeAnimation_ReceiveGetmonFromGTS
-	farcall Function17d1f1
-	ld a, $1
-	ld [wForceEvolution], a
-	ld a, LINK_TRADECENTER
-	ld [wLinkMode], a
-	farcall EvolvePokemon
-	xor a
-	ld [wLinkMode], a
-	farcall SaveAfterLinkTrade
-	ld a, BANK(s5_a800)
-	call OpenSRAM
-	ld a, $5
-	ld [s5_a800], a
-	call CloseSRAM
-	ld a, [wMapGroup]
-	ld b, a
-	ld a, [wMapNumber]
-	ld c, a
-	call GetMapSceneID
-	ld a, d
-	or e
-	jr z, .asm_11b872
-	ld a, $1
-	ld [de], a
-
-.asm_11b872
-	call CloseSubmenu
-	call RestartMapMusic
-	ret
-
 Function11b879:
 	farcall BattleTower_CheckSaveFileExistsAndIsYours
 	ld a, [wScriptVar]

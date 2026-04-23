@@ -24,11 +24,6 @@ MobileTradeAnimation_SendGivemonToGTS:
 
 MobileTradeAnimation_RetrieveGivemonFromGTS:
 	ld a, $80
-	jr asm_108018
-
-MobileTradeAnimation_ReceiveGetmonFromGTS:
-	ld a, $0
-asm_108018:
 	ld [wcf65], a
 	ld de, .TradeAnimScript
 	jr RunMobileTradeAnim_NoFrontpics
