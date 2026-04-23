@@ -1,13 +1,6 @@
-Function118000:
-	ld a, $1
-	ld [wcd38], a
-	jr asm_11800b
-
 Function118007:
 	xor a
 	ld [wcd38], a
-
-asm_11800b:
 	call BattleTowerRoomMenu_InitRAM
 	ld a, $18
 	ld [wcd33], a
@@ -4615,18 +4608,6 @@ Function11b6b4:
 	ld a, [de]
 	ld [hl], a
 	call AddMobileMonToParty
-	ret
-
-Function11b920:
-	call Mobile46_InitJumptable
-	ld a, BANK(sOfferTrainerID)
-	call OpenSRAM
-	ld hl, sOfferTrainerID
-	ld de, wOfferTrainerID
-	ld bc, 8
-	call CopyBytes
-	call CloseSRAM
-	call Function118000
 	ret
 
 Function11b93b:

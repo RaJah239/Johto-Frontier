@@ -233,7 +233,7 @@ sTrainerRankingsBackup:: ds sTrainerRankingsEnd - sTrainerRankings
 s5_a800:: db
 
 sOfferEmail::      ds MOBILE_EMAIL_LENGTH
-sOfferTrainerID::  dw
+sOfferTrainerID::  dw ; unused
 sOfferSecretID::   dw
 sOfferGender::     db
 sOfferSpecies::    db
