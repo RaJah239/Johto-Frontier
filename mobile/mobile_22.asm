@@ -507,13 +507,6 @@ Function893ef:
 	call FarCopyBytes
 	ret
 
-Function893fe: ; unreferenced
-	call DisableLCD
-	call Function893ef
-	call EnableLCD
-	call DelayFrame
-	ret
-
 EZChatCursorGFX:
 INCBIN "gfx/mobile/ez_chat_cursor.2bpp"
 
@@ -791,13 +784,6 @@ Palette_895de:
 	RGB 07, 07, 06
 	RGB 07, 07, 06
 	RGB 00, 00, 00
-
-Function895e6: ; unreferenced
-	ld a, 7
-	hlcoord 0, 0, wAttrmap
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call ByteFill
-	ret
 
 Function895f2:
 	push bc
@@ -1688,18 +1674,6 @@ Function89a57:
 
 Function89b00:
 	farcall MG_Mobile_Layout_LoadPals
-	ret
-
-Function89b07:
-	call Mobile22_SetBGMapMode0
-	call DelayFrame
-	farcall Function4a3a7
-	ret
-
-Function89b14: ; unreferenced
-	call ClearBGPalettes
-	call Function89b07
-	call Function89b00
 	ret
 
 Function89b1e:
