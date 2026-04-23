@@ -340,19 +340,6 @@ MenuData_NormalInverseNeutral:
 	db "Inverse Mode@"
 	db "Neutral Mode@"
 
-Function17d2b6:
-	call Function17d2c0
-	farcall Function1181da
-	ret
-
-Function17d2c0:
-	xor a
-	ld [wJumptableIndex], a
-	ld [wcf64], a
-	ld [wcf65], a
-	ld [wcf66], a
-	ret
-
 Function17d2ce:
 	ld a, BANK(s5_aa72)
 	call OpenSRAM

@@ -124,45 +124,6 @@ Function118180:
 	ld [wScriptVar], a
 	jr .reset_banks
 
-Function1181da:
-	call BattleTowerRoomMenu_InitRAM
-	ld a, $2
-	ld [wcd38], a
-	ld a, $21
-	ld [wcd33], a
-	ld a, $22
-	ld [wcd34], a
-	ld a, $4
-	ld [wc3f0], a
-	ldh a, [rSVBK]
-	push af
-	ld a, $3
-	ldh [rSVBK], a
-.asm_1181f8
-	call JoyTextDelay
-	call Function118473
-	ld a, [wBattleTowerRoomMenuJumptableIndex]
-	cp $28
-	jr c, .asm_11820b
-	ld a, [wcd34]
-	ld [wBattleTowerRoomMenuJumptableIndex], a
-
-.asm_11820b
-	call Function1185c3
-	call BattleTowerRoomMenu_WriteMessage
-	farcall Function115dd3
-	farcall Function11619d
-	call DelayFrame
-	ld a, [wBattleTowerRoomMenuJumptableIndex]
-	ld hl, wcd33
-	cp [hl]
-	jr nz, .asm_1181f8
-	pop af
-	ldh [rSVBK], a
-	call BattleTowerRoomMenu_Cleanup
-	call ReturnToMapFromSubmenu
-	ret
-
 Function118233:
 	call BattleTowerRoomMenu_InitRAM
 	ld a, $1b
@@ -461,52 +422,6 @@ BattleTowerRoomMenu_Jumptable:
 	dw Function118e76 ; mobile
 	dw BattleTowerRoomMenu_CallRoomMenu2 ; mobile
 	dw Function118e76 ; mobile
-
-Function1185c3:
-	jumptable .Jumptable, wBattleTowerRoomMenuJumptableIndex
-
-.Jumptable:
-	dw Function11886e
-	dw Function118880
-	dw Function11878d
-	dw Function1188b0
-	dw Function11878d
-	dw Function1188b8
-	dw Function11878d
-	dw Function1188c0
-	dw Function11878d
-	dw Function1188c8
-	dw Function11878d
-	dw Function118903
-	dw SetNewsDownloadURL
-	dw Function11878d
-	dw Function118e92
-	dw Function11878d
-	dw Function118eb0
-	dw Function118ec6
-	dw Function118f0d
-	dw Function118f14
-	dw Function118f5e
-	dw Function11878d
-	dw Function118fc0
-	dw Function11878d
-	dw Function119054
-	dw Function1190d0
-	dw Function11878d
-	dw Function1190ec
-	dw Function118e6d
-	dw Function11878d
-	dw Function118e76
-	dw Function118e7e
-	dw Function11878d
-	dw BattleTowerRoomMenu_DoNothing
-	dw Function118e76
-	dw BattleTowerRoomMenu_CallRoomMenu2
-	dw BattleTowerRoomMenu_QuitMessage
-	dw BattleTowerRoomMenu_PlaceYesNoMenu
-	dw BattleTowerRoomMenu_UpdateYesNoMenu
-	dw Function11914e
-	dw Function118e76
 
 Function118624:
 	jumptable .Jumptable, wBattleTowerRoomMenuJumptableIndex
@@ -1256,92 +1171,6 @@ Function118e92:
 	ld bc, $0800
 	jmp Function118b10
 
-Function118eb0:
-	call Function118440
-	ld hl, w3_d802
-	ld de, wBGMapBuffer
-	ld bc, $000c
-	call CopyBytes
-	call Function1192cc
-	ret c
-	jmp BattleTowerRoomMenu_IncrementJumptable
-
-Function118ec6:
-	call Function118440
-	call SpeechTextbox
-	ld hl, w3_d80e
-	ld de, wc320
-	ld bc, $0026
-	call CopyBytes
-	xor a
-	ld [wc31f], a
-	ld a, LOW(wc320)
-	ld [wc31b], a
-	ld a, HIGH(wc320)
-	ld [wc31c], a
-	hlcoord 1, 14
-	ld a, l
-	ld [wc31d], a
-	ld a, h
-	ld [wc31e], a
-	ld a, $2
-	ld [wc31a], a
-	ld a, $1d
-	ld [wBattleTowerRoomMenu2JumptableIndex], a
-	ld a, $24
-	ld [wMobileInactivityTimerSeconds], a
-	ld a, $11
-	ld [wMobileInactivityTimerFrames], a
-	ld a, $1c
-	ld [wcd47], a
-	jmp BattleTowerRoomMenu_IncrementJumptable
-
-Function118f0d:
-	call BattleTowerRoomMenu2
-	ret c
-	call Function118440
-
-Function118f14:
-	call Function118440
-	ld a, [wcd51]
-	ld l, a
-	ld a, [wcd52]
-	ld h, a
-	ld de, wcc60
-	call Function1191ad
-	ret c
-	ld a, [wcc60]
-	and a
-	jr z, .DontSendSaveFile
-	ld hl, Text_SaveFileWillBeSent
-	call BattleTowerRoomMenu_SetMessage
-
-.DontSendSaveFile:
-	ld a, [wcd57]
-	ld l, a
-	ld a, [wcd58]
-	ld h, a
-	ld de, wcc60
-	call Function1191ad
-	ret c
-	ld hl, wcc60
-	call Function118e39
-	ld a, $9
-	ld [wBattleTowerRoomMenu2JumptableIndex], a
-	ld a, $24
-	ld [wMobileInactivityTimerSeconds], a
-	ld a, $13
-	ld [wMobileInactivityTimerFrames], a
-	ld a, $1c
-	ld [wcd47], a
-	jmp BattleTowerRoomMenu_IncrementJumptable
-
-Function118f5e:
-	call BattleTowerRoomMenu2
-	ret c
-	call Function118440
-	call DelayFrame
-
 Function118f68:
 	call Function119223
 	ret c
@@ -1384,45 +1213,6 @@ Function118f68:
 	jmp Function119e2b
 
 .asm_118fba
-	call BattleTowerRoomMenu_IncrementJumptable
-	jmp BattleTowerRoomMenu_IncrementJumptable
-
-Function118fc0:
-	call Function118440
-	ld a, [wcd55]
-	ld l, a
-	ld a, [wcd56]
-	ld h, a
-	ld de, wcc60
-	call Function1191ad
-	ret c
-	ld a, [wcc60]
-	and a
-	jr z, .asm_118ffa
-	ld a, [wcd51]
-	ld l, a
-	ld a, [wcd52]
-	ld h, a
-	ld de, wcc60
-	call Function1191ad
-	ret c
-	ld a, [wcc60]
-	and a
-	jr z, .asm_118ff2
-	ld hl, Text_SentSaveFileReadingNews
-	jr .asm_118ff5
-
-.asm_118ff2
-	ld hl, Text_ReadingNews
-
-.asm_118ff5
-	call BattleTowerRoomMenu_SetMessage
-	jr Function119009
-
-.asm_118ffa
-	ld hl, Text_ReadingNews
-	call BattleTowerRoomMenu_SetMessage
-	call BattleTowerRoomMenu_IncrementJumptable
 	call BattleTowerRoomMenu_IncrementJumptable
 	jmp BattleTowerRoomMenu_IncrementJumptable
 
@@ -1518,73 +1308,6 @@ Function119054:
 	ldh [rSVBK], a
 	call CloseSRAM
 	jmp BattleTowerRoomMenu_IncrementJumptable
-
-Function1190d0:
-	ld a, BANK(w3_d000)
-	ldh [rSVBK], a
-	ld a, [wcd57]
-	ld l, a
-	ld a, [wcd58]
-	ld h, a
-	ld de, wcc60
-	call Function1191ad
-	ret c
-	ld de, w3_d000
-	ld bc, $1000
-	jmp Function118b10
-
-Function1190ec:
-	ld a, BANK(s5_aa73)
-	call OpenSRAM
-	ld hl, wBGMapBuffer
-	ld de, s5_aa73
-	ld bc, 12
-	call CopyBytes
-	call CloseSRAM
-	ld a, BANK(s5_aa72)
-	call OpenSRAM
-	ld a, $1
-	ld [s5_aa72], a
-	call CloseSRAM
-	ld a, BANK(s6_a000)
-	call OpenSRAM
-	ld a, [w3_d000]
-	ld c, a
-	ld a, [w3_d000 + 1]
-	ld b, a
-	ld hl, wd002
-	ld de, s6_a000
-	call Function119192
-	ret c
-	ld a, [wcd89]
-	and $1
-	jr z, .asm_11913e
-	ld a, BANK(w6_d000)
-	ldh [rSVBK], a
-	ld a, [w6_d000]
-	ld c, a
-	ld a, [w6_d000 + 1]
-	ld b, a
-	ld hl, w6_d000 + 2
-	call Function119192
-	ret c
-
-.asm_11913e
-	ld a, BANK("Battle Tower RAM")
-	ldh [rSVBK], a
-	call CloseSRAM
-	ld hl, Text_ReceivedNews
-	call BattleTowerRoomMenu_SetMessage
-	jmp BattleTowerRoomMenu_IncrementJumptable
-
-Function11914e:
-	call BattleTowerRoomMenu2
-	ret c
-	ld a, $1c
-	ld [wBattleTowerRoomMenuJumptableIndex], a
-	ld a, $a
-	ld [wMobileErrorCodeBuffer], a
-	ret
 
 Function11915d:
 	ld hl, w3_d802
@@ -1826,37 +1549,6 @@ Function119223:
 	ld [wcd4d], a
 	ld a, d
 	ld [wcd4e], a
-	and a
-	ret
-
-Function1192cc:
-	ld a, BANK(s5_aa73)
-	call OpenSRAM
-	ld hl, s5_aa73
-	ld de, wc608
-	ld bc, 12
-	call CopyBytes
-	call CloseSRAM
-	ld hl, wc608
-	ld de, wcd20
-	ld c, $c
-.asm_1192e8
-	ld a, [de]
-	inc de
-	ld b, a
-	ld a, [hli]
-	cp b
-	jr nz, .asm_1192fe
-	dec c
-	jr nz, .asm_1192e8
-	ld a, $1f
-	ld [wBattleTowerRoomMenu2JumptableIndex], a
-	ld a, $27
-	ld [wBattleTowerRoomMenuJumptableIndex], a
-	scf
-	ret
-
-.asm_1192fe
 	and a
 	ret
 
@@ -3941,24 +3633,6 @@ Function11a9f0:
 	ld a, $1
 	and a
 	ret
-
-Text_SaveFileWillBeSent:
-	text "SAVE FILE will be"
-	line "sent."
-	done
-
-Text_SentSaveFileReadingNews:
-	text "Sent SAVE FILE."
-	line "Reading NEWS…"
-	done
-
-Text_ReadingNews:
-	text "Reading NEWS…"
-	done
-
-Text_ReceivedNews:
-	text "Received NEWS!"
-	done
 
 Text_QuitReadingNews:
 	text "Quit reading NEWS?"
