@@ -356,7 +356,7 @@ WRAMX 5
 	org $d300
 	"Battle Animations"
 	org $d800
-	"Mobile RAM"
+; "Mobile RAM" unused
 WRAMX 6
 	"Scratch RAM"
 WRAMX 7
