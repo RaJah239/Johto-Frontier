@@ -331,41 +331,8 @@ Function118284:
 	call BattleTowerRoomMenu_Cleanup
 	ret
 
-Function1182d5: ; unreferenced
-	call BattleTowerRoomMenu_InitRAM
-	ld a, $18
-	ld [wcd33], a
-	ld a, $19
-	ld [wcd34], a
-	ld a, $4
-	ld [wc3f0], a
-	ldh a, [rSVBK]
-	push af
-	ld a, $3
-	ldh [rSVBK], a
-.asm_1182ee
-	call JoyTextDelay
-	call Function118473
-	ld a, [wBattleTowerRoomMenuJumptableIndex]
-	cp $1b
-	jr c, .asm_118301
-	ld a, [wcd34]
-	ld [wBattleTowerRoomMenuJumptableIndex], a
-
-.asm_118301
+Function1182d5: ; unreferenced herenext
 	call Function118746
-	call BattleTowerRoomMenu_WriteMessage
-	farcall Function115dd3
-	farcall Function11619d
-	call DelayFrame
-	ld a, [wBattleTowerRoomMenuJumptableIndex]
-	ld hl, wcd33
-	cp [hl]
-	jr nz, .asm_1182ee
-	pop af
-	ldh [rSVBK], a
-	call BattleTowerRoomMenu_Cleanup
-	call ReturnToMapFromSubmenu
 	ret
 
 Function118329:
@@ -857,35 +824,9 @@ Function1186f5:
 	dw Function118e76
 
 Function118746:
-	jumptable .Jumptable, wBattleTowerRoomMenuJumptableIndex
-
-.Jumptable:
-	dw Function11886e
-	dw Function118880
-	dw Function11878d
-	dw Function1188b0
-	dw Function11878d
-	dw Function1188b8
-	dw Function11878d
-	dw Function1188c0
-	dw Function11878d
-	dw Function1188c8
-	dw Function11878d
-	dw Function118903
-	dw SetOddEggDownloadURL
-	dw Function11878d
-	dw Function1196f2
-	dw Function1197c9
-	dw Function1197dc
-	dw Function11878d
-	dw Function118e6d
-	dw Function11878d
-	dw Function119800
-	dw Function118e76
 	dw Function118e7e
 	dw Function11878d
 	dw BattleTowerRoomMenu_DoNothing
-	dw Function118e76
 	dw BattleTowerRoomMenu_CallRoomMenu2
 	dw Function118e76
 
@@ -1338,15 +1279,6 @@ SetStadiumDownloadURL:
 	ld bc, $1000
 	jr Function118b10
 
-SetOddEggDownloadURL:
-	ld hl, OddEggDownloadURL
-	ld de, wcc60
-	ld bc, $80
-	call CopyBytes
-	ld de, w3_d000
-	ld bc, $1000
-	jr Function118b10
-
 Function118ae4:
 	push bc
 	push de
@@ -1476,9 +1408,6 @@ NewsDownloadURL:
 
 StadiumDownloadURL:
 	db "http://gameboy.datacenter.ne.jp/cgb/download?name=/01/CGB-BXTJ/POKESTA/menu.cgb", 0
-
-OddEggDownloadURL:
-	db "http://gameboy.datacenter.ne.jp/cgb/download?name=/01/CGB-BXTJ/tamago/index.txt", 0
 
 popc
 
@@ -2941,159 +2870,6 @@ Function1196de:
 	add c
 	ret
 
-Function1196f2:
-	ld hl, wd002
-.asm_1196f5
-	call Function118b9a
-	ret nc
-	ld a, [hli]
-	cp $d
-	jr nz, .asm_1196f5
-	ld a, [hl]
-	cp $a
-	jr nz, .asm_1196f5
-	xor a
-	ld [hld], a
-	ld [hli], a
-	ld a, l
-	ld [wcd5b], a
-	ld a, h
-	ld [wcd5c], a
-	inc hl
-	ld e, l
-	ld d, h
-	ld a, [de]
-	inc de
-	cp $d
-	jr nz, .asm_119722
-	ld a, [de]
-	inc de
-	cp $a
-	jr nz, .asm_119722
-	ld a, $b
-	jmp SetMobileErrorCode
-
-.asm_119722
-	call Random
-	ld c, $0
-	ld b, c
-.asm_119728
-	call Function119798
-	ld a, d
-	cp $ff
-	jr nz, .asm_119735
-	ld a, e
-	cp $ff
-	jr z, .asm_11974c
-
-.asm_119735
-	ldh a, [hRandomSub]
-	cp d
-	jr c, .asm_11974c
-	jr z, .asm_11973e
-	jr .asm_119745
-
-.asm_11973e
-	ldh a, [hRandomAdd]
-	cp e
-	jr c, .asm_11974c
-	jr z, .asm_11974c
-
-.asm_119745
-	inc bc
-	ld a, c
-	or b
-	jr z, .asm_119770
-	jr .asm_119728
-
-.asm_11974c
-	ld a, [wcd5b]
-	ld l, a
-	ld a, [wcd5c]
-	ld h, a
-.asm_119754
-	ld a, [hld]
-	cp $58
-	jr nz, .asm_119754
-	ld d, $0
-.asm_11975b
-	inc d
-	ld a, [hld]
-	cp $58
-	jr z, .asm_11975b
-	inc hl
-	inc hl
-	ld a, d
-	dec a
-	jr z, .asm_11978e
-	dec a
-	jr z, .asm_119785
-	dec a
-	jr z, .asm_11977e
-	dec a
-	jr z, .asm_119775
-
-.asm_119770
-	ld a, $d3
-	jmp SetMobileErrorCode
-
-.asm_119775
-	ld a, b
-	and $f0
-	swap a
-	call Function1197bf
-	ld [hli], a
-
-.asm_11977e
-	ld a, b
-	and $f
-	call Function1197bf
-	ld [hli], a
-
-.asm_119785
-	ld a, c
-	and $f0
-	swap a
-	call Function1197bf
-	ld [hli], a
-
-.asm_11978e
-	ld a, c
-	and $f
-	call Function1197bf
-	ld [hli], a
-	jmp BattleTowerRoomMenu_IncrementJumptable
-
-Function119798:
-	ld d, $0
-	ld e, d
-	call Function1197b4
-	swap a
-	or d
-	ld d, a
-	call Function1197b4
-	or d
-	ld d, a
-	call Function1197b4
-	swap a
-	or e
-	ld e, a
-	call Function1197b4
-	or e
-	ld e, a
-	ret
-
-Function1197b4:
-	ld a, [hli]
-	cp $61
-	jr nc, .asm_1197bc
-	sub $30
-	ret
-
-.asm_1197bc
-	sub $57
-	ret
-
 Function1197bf:
 	cp $a
 	jr nc, .asm_1197c6
@@ -3103,65 +2879,6 @@ Function1197bf:
 .asm_1197c6
 	add $57
 	ret
-
-Function1197c9:
-	ld hl, wd002
-	call Function118e39
-	ld a, $9
-	ld [wBattleTowerRoomMenu2JumptableIndex], a
-	ld a, $12
-	ld [wMobileInactivityTimerSeconds], a
-	call BattleTowerRoomMenu_IncrementJumptable
-
-Function1197dc:
-	call BattleTowerRoomMenu2
-	ret c
-	call DelayFrame
-	ld hl, wd002
-	ld de, wcc60
-	ld bc, $0080
-	call CopyBytes
-	dec de
-	xor a
-	ld [de], a
-	call Function118b24
-	ld de, w3_d000
-	ld bc, $1000
-	ld a, MOBILEAPI_15
-	jmp Function119e2b
-
-Function119800:
-	ld a, $fd
-	ld [wc6d0], a
-	ld [wOTTrademonSpecies], a
-	ld a, [wcd81]
-	ld [wc74e], a
-	ld a, [wJumptableIndex]
-	push af
-	ld a, [wcf64]
-	push af
-	ld a, [wcf65]
-	push af
-	ld a, [wBattleTowerRoomMenuJumptableIndex]
-	push af
-	ld a, $1
-	ldh [rSVBK], a
-	call FadeToMenu
-	farcall Function10803d
-	call Function11a9ce
-	call RestartMapMusic
-	ld a, BANK("Battle Tower RAM")
-	ldh [rSVBK], a
-	pop af
-	ld [wBattleTowerRoomMenuJumptableIndex], a
-	pop af
-	ld [wcf65], a
-	pop af
-	ld [wcf64], a
-	pop af
-	ld [wJumptableIndex], a
-	farcall Function115dc3
-	jmp BattleTowerRoomMenu_IncrementJumptable
 
 Function11984e:
 	ld a, [wcd80]
@@ -5302,24 +5019,9 @@ Text_QuitReadingNews:
 	text "Quit reading NEWS?"
 	done
 
-Text_CanceledSendingSaveFile: ; unreferenced
-	text "Canceled sending"
-	line "SAVE FILE."
-	done
-
-Text_ReceivedOddEgg: ; unreferenced
-	text "ODD EGG"
-	line "was received!"
-	done
-
 Text_RegisteringRecord:
 	text "Registering your"
 	line "record…"
-	done
-
-Text_BattleRoomVisitLimit: ; unreferenced
-	text "One visit per day"
-	line "per BATTLE ROOM!"
 	done
 
 Text_PartyMonTopsThisLevel:
@@ -5344,39 +5046,6 @@ Text_CancelBattleRoomChallenge:
 Text_ExitGymLeaderHonorRoll:
 	text "Exit GYM LEADER"
 	line "HONOR ROLL?"
-	done
-
-Text_LinkingWithCenter: ; unreferenced
-	text "Linking with the"
-	line "CENTER…"
-	done
-
-;Text_WhatDoYouWantToDo:
-;	text "What do you want"
-;	line "to do?"
-;	done
-;
-;Text_CheckBattleRoomListByMaxLevel:
-;	text "Check BATTLE ROOM"
-;	line "list by max level?"
-;	done
-
-Text_EnterWhichBattleRoom: ; unreferenced
-	text "Enter which"
-	line "BATTLE ROOM?"
-	done
-
-Text_WhichBattleRoom: ; unreferenced
-	text "Which BATTLE ROOM?"
-	done
-
-Text_ThisBattleRoomPleaseWait: ; unreferenced
-	text_ram wStringBuffer3
-	text "'s ROOM"
-	line "@"
-	text_ram wStringBuffer4
-	text "?"
-	cont "Please wait…"
 	done
 
 Function11ac3e:
@@ -6238,22 +5907,6 @@ Function11b175:
 	scf
 	ret
 
-FillScreenWithTile32: ; unreferenced
-	hlcoord 0, 0
-	ld a, $32
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call ByteFill
-	ret
-
-CopyDataUntilFF: ; unreferenced
-.loop
-	ld a, [de]
-	cp $ff
-	ret z
-	inc de
-	ld [hli], a
-	jr .loop
-
 Function11b20b:
 	ld a, [wc7d1]
 	ld hl, wc7d0
@@ -6412,12 +6065,6 @@ Function11b295:
 	ld de, wStringBuffer4
 	call PlaceString
 	ret
-
-String_11b2fe: ; unreferenced
-	db "あげる#@"
-
-String_11b303: ; unreferenced
-	db "ほしい#@"
 
 String_11b308:
 	db "　　　　　@"

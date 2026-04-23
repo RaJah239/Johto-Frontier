@@ -40,19 +40,6 @@ asm_108018:
 	mobiletradeanim MobileTradeAnim_ShowOTMonFromGTS
 	mobiletradeanim EndMobileTradeAnim
 
-Function10803d:
-	ld a, $0
-	ld [wcf65], a
-	ld de, .TradeAnimScript
-	jr RunMobileTradeAnim_NoFrontpics
-
-.TradeAnimScript:
-	mobiletradeanim MobileTradeAnim_11
-	mobiletradeanim MobileTradeAnim_07
-	mobiletradeanim MobileTradeAnim_GetTrademon1
-	mobiletradeanim MobileTradeAnim_GetOddEgg
-	mobiletradeanim EndMobileTradeAnim
-
 Function10804d:
 	ld a, $0
 	ld [wcf65], a
@@ -255,7 +242,7 @@ MobileTradeAnim_JumptableLoop:
 	add_mobiletradeanim MobileTradeAnim_10                    ; 10
 	add_mobiletradeanim MobileTradeAnim_11                    ; 11
 	add_mobiletradeanim MobileTradeAnim_FadeToBlack           ; 12
-	add_mobiletradeanim MobileTradeAnim_GetOddEgg             ; 13 get odd egg
+	add_mobiletradeanim MobileTradeAnim_GetOddEgg             ; 13 ; unreferenced
 
 MobileTradeAnim_Next:
 	ld hl, wJumptableIndex
