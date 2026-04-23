@@ -343,7 +343,7 @@ CheckMobileAdapterStatus: ; unused
 	ld c, a
 	ret
 
-Function10635c:
+Function10635c: ; herenext
 	ld a, [wMobileCommsJumptableIndex]
 	bit 7, a
 	ret nz
