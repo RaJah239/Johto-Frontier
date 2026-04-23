@@ -4,12 +4,6 @@ BattleTowerRoomMenu:
 	farcall _BattleTowerRoomMenu
 	ret
 
-Function1700ba:
-; special
-	call InitBattleTowerChallengeRAM
-	farcall Function11811a
-	ret
-
 Function170114:
 	call InitBattleTowerChallengeRAM
 	call .Function170121

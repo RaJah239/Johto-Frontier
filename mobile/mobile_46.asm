@@ -77,15 +77,9 @@ Function11805f:
 	call ReturnToMapFromSubmenu
 	ret
 
-Function11811a:
-	ld a, 1
-	ld [wcd38], a
-	jr Function118125
-
 _BattleTowerRoomMenu:
 	xor a
 	ld [wcd38], a
-Function118125:
 	call BattleTowerRoomMenu_InitRAM
 	ld a, $3
 	ld [wcd33], a
