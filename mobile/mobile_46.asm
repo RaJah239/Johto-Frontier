@@ -331,10 +331,6 @@ Function118284:
 	call BattleTowerRoomMenu_Cleanup
 	ret
 
-Function1182d5: ; unreferenced herenext
-	call Function118746
-	ret
-
 Function118329:
 	call BattleTowerRoomMenu_InitRAM
 	ld a, $15
@@ -823,13 +819,6 @@ Function1186f5:
 	dw BattleTowerRoomMenu_CallRoomMenu2
 	dw Function118e76
 
-Function118746:
-	dw Function118e7e
-	dw Function11878d
-	dw BattleTowerRoomMenu_DoNothing
-	dw BattleTowerRoomMenu_CallRoomMenu2
-	dw Function118e76
-
 Function11878d:
 	ld a, [wc821]
 	bit 1, a
@@ -977,23 +966,6 @@ Function118880:
 	ld hl, $46
 	ld a, MOBILEAPI_01
 	jmp Function119e2b
-
-Function118896: ; unreferenced
-	ld a, [wc821]
-	bit 1, a
-	jr nz, .asm_1188a5
-	bit 2, a
-	jr nz, .asm_1188a5
-	bit 0, a
-	jr z, .asm_1188aa
-
-.asm_1188a5
-	ld a, MOBILEAPI_1A
-	jmp Function119e2b
-
-.asm_1188aa
-	call BattleTowerRoomMenu_IncrementJumptable
-	jmp BattleTowerRoomMenu_IncrementJumptable
 
 Function1188b0:
 	ld de, wc346
@@ -1223,24 +1195,6 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 	ld [wMobileInactivityTimerFrames], a
 	ret
 
-Function118a54: ; unreferenced
-	ld a, [wcd55]
-	ld l, a
-	ld a, [wcd56]
-	ld h, a
-	ld de, wc3ec
-	ld bc, $0004
-	jr Function118ae4
-
-Function118a65: ; unreferenced
-	ld hl, BattleDownloadURL
-	ld de, wcc60
-	ld bc, $80
-	call CopyBytes
-	ld de, w3_d000
-	ld bc, $1000
-	jmp Function118b10
-
 SetBattleDownloadURL:
 	ld hl, BattleDownloadURL
 	ld de, wcc60
@@ -1278,36 +1232,6 @@ SetStadiumDownloadURL:
 	ld de, w3_d000
 	ld bc, $1000
 	jr Function118b10
-
-Function118ae4:
-	push bc
-	push de
-	push hl
-	ld a, $8
-	ld [wBattleTowerRoomMenu2JumptableIndex], a
-	call BattleTowerRoomMenu2
-	pop hl
-	ld c, $0
-	ld de, wcc60
-.asm_118af5
-	ld a, [hli]
-	ld [de], a
-	inc de
-	and a
-	jr z, .asm_118b06
-	inc c
-	ld a, c
-	cp $a6
-	jr c, .asm_118af5
-	ld a, $da
-	jmp SetMobileErrorCode
-
-.asm_118b06
-	call Function118b24
-	pop de
-	pop bc
-	ld a, MOBILEAPI_15
-	jmp Function119e2b
 
 Function118b10:
 	push de
@@ -1410,48 +1334,6 @@ StadiumDownloadURL:
 	db "http://gameboy.datacenter.ne.jp/cgb/download?name=/01/CGB-BXTJ/POKESTA/menu.cgb", 0
 
 popc
-
-Function118d35: ; unreferenced
-	ld hl, $d200
-	ld a, [wcd38]
-	and a
-	jr nz, .asm_118d6e
-	ld a, [hli]
-	cp $94
-	jr nz, .asm_118d7b
-	ld a, [hl]
-	cp $5
-	jr nz, .asm_118d7b
-	ld a, [wcd4f]
-	add a
-	ld b, a
-	add a
-	add a
-	add b
-	ld b, a
-	ld a, BANK(s5_b2fb)
-	call OpenSRAM
-	ld a, b
-	ld [s5_b2fb], a
-	call CloseSRAM
-	farcall Function170be4
-	farcall Function1700c4
-	jr .asm_118d78
-
-.asm_118d6e
-	ld a, [hli]
-	cp $96
-	jr nz, .asm_118d7b
-	ld a, [hl]
-	cp $0
-	jr nz, .asm_118d7b
-
-.asm_118d78
-	jmp BattleTowerRoomMenu_IncrementJumptable
-
-.asm_118d7b
-	ld a, $d3
-	jmp SetMobileErrorCode
 
 Function118d80:
 	call Function118e06
@@ -3227,9 +3109,6 @@ setcharmap ascii
 XGameCode:
 	db "CGB-BXTJ-00", $0
 
-XGameResult: ; unreferenced
-	db "pokemon_crystal", $0
-
 popc
 
 Function119b0d:
@@ -3555,12 +3434,6 @@ BattleTowerRoomMenu_UpdateYesNoMenu:
 MenuHeader_119cf7:
 	db MENU_BACKUP_TILES ; flags
 	menu_coords 12, 7, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
-	dw NULL
-	db 0 ; default option
-
-MenuData_119cff: ; unreferenced
-	db MENU_BACKUP_TILES ; flags
-	menu_coords 15, 7, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
 	dw NULL
 	db 0 ; default option
 
@@ -4210,12 +4083,6 @@ String_11a2cf:
 String_11a2d3:
 	db "No@"
 
-MenuHeader_11a2d6: ; unreferenced
-	db MENU_BACKUP_TILES ; flags
-	menu_coords 14, 6, SCREEN_WIDTH - 1, 10
-	dw NULL
-	db 0 ; default option
-
 MenuHeader_11a2de:
 	db MENU_BACKUP_TILES ; flags
 	menu_coords 14, 7, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
@@ -4734,12 +4601,6 @@ String_11a7d7:
 String_11a7f4:
 	db   "　　　　　　　　　　　　　　　@"
 
-MenuHeader_11a804: ; unreferenced
-	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 0, SCREEN_WIDTH - 1, 5
-	dw NULL
-	db 0 ; default option
-
 Function11a80c:
 	ld de, hDivisor
 	ld bc, hDividend
@@ -4975,25 +4836,6 @@ Function11a9ce:
 
 Function11a9f0:
 	ld a, $1
-	and a
-	ret
-
-Function11a9f4: ; unreferenced
-	ld a, [wcd8a]
-	ld l, a
-	ld a, [wcd8b]
-	ld h, a
-	inc hl
-	ld a, l
-	ld [wcd8a], a
-	ld a, h
-	ld [wcd8b], a
-	ld de, $d5d0
-	add hl, de
-	bit 7, h
-	ret nz
-	ld a, $d6
-	call SetMobileErrorCode
 	and a
 	ret
 
@@ -6198,35 +6040,6 @@ Function11b397:
 	inc de
 	ld a, $5
 	ld [de], a ; attributes
-	inc de
-	jr .loop
-
-Function11b3b6: ; unreferenced
-.loop
-	ld a, [hl]
-	cp -1
-	ret z
-	ld a, [wcd4d]
-	and $7
-	swap a
-	add [hl]
-	inc hl
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	push hl
-	ld l, c
-	ld h, b
-	ld a, [wcd4e]
-	add [hl]
-	inc bc
-	ld [de], a
-	inc de
-	pop hl
-	ld a, $5
-	ld [de], a
 	inc de
 	jr .loop
 
