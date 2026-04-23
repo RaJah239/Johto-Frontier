@@ -676,12 +676,8 @@ wDebugGreenChannel:: db
 wDebugBlueChannel::  db
 
 NEXTU
-; debug tileset color picker
-wDebugPalette::
-wDebugWhiteTileColor:: ds 2
-wDebugLightTileColor:: ds 2
-wDebugDarkTileColor::  ds 2
-wDebugBlackTileColor:: ds 2
+; debug color picker
+	ds 9
 
 NEXTU
 wMobileMonSender:: ds NAME_LENGTH_JAPANESE - 1
@@ -1620,9 +1616,7 @@ wDebugColorCurMon:: db
 
 NEXTU
 ; debug tileset color picker
-wDebugTilesetCurPalette:: db
-wDebugTilesetRGBJumptableIndex:: db
-wDebugTilesetCurColor:: db
+	ds 3
 
 NEXTU
 ; stats screen
