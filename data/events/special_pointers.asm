@@ -106,7 +106,6 @@ SpecialsPointers::
 	add_special TradeCornerHoldMon
 	add_special Function11b93b
 	add_special BattleTowerRoomMenu
-	add_special Function170114
 	add_special BattleTowerBattle
 	add_special Function1704e1
 	add_special LoadOpponentTrainerAndPokemonWithOTSprite

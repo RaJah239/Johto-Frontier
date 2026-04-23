@@ -4,23 +4,6 @@ BattleTowerRoomMenu:
 	farcall _BattleTowerRoomMenu
 	ret
 
-Function170114:
-	call InitBattleTowerChallengeRAM
-	call .Function170121
-	farcall Function11805f
-	ret
-
-.Function170121:
-	ld a, BANK(s5_a948)
-	call OpenSRAM
-	ld hl, s5_a948
-	ld de, wc608
-	ld bc, 246
-	call CopyBytes
-	call CloseSRAM
-	call Function170c8b
-	ret
-
 BattleTowerBattle:
 	xor a ; FALSE
 	ld [wBattleTowerBattleEnded], a

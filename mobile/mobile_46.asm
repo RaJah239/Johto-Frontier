@@ -38,45 +38,6 @@ Function118007:
 BattleTowerRoomMenu_DoNothing:
 	ret
 
-Function11805f:
-	ld a, $1
-	ld [wcd38], a
-	call BattleTowerRoomMenu_InitRAM
-	ld a, $18
-	ld [wcd33], a
-	ld a, $19
-	ld [wcd34], a
-	ld a, $4
-	ld [wc3f0], a
-	ldh a, [rSVBK]
-	push af
-	ld a, $3
-	ldh [rSVBK], a
-.asm_11807d
-	call JoyTextDelay
-	call Function118473
-	ld a, [wBattleTowerRoomMenuJumptableIndex]
-	cp $1b
-	jr c, .asm_118090
-	ld a, [wcd34]
-	ld [wBattleTowerRoomMenuJumptableIndex], a
-
-.asm_118090
-	call Function11857c
-	call BattleTowerRoomMenu_WriteMessage
-	farcall Function115dd3
-	farcall Function11619d
-	call DelayFrame
-	ld a, [wBattleTowerRoomMenuJumptableIndex]
-	ld hl, wcd33
-	cp [hl]
-	jr nz, .asm_11807d
-	pop af
-	ldh [rSVBK], a
-	call BattleTowerRoomMenu_Cleanup
-	call ReturnToMapFromSubmenu
-	ret
-
 _BattleTowerRoomMenu:
 	xor a
 	ld [wcd38], a
@@ -501,39 +462,6 @@ BattleTowerRoomMenu_Jumptable:
 	dw BattleTowerRoomMenu_CallRoomMenu2 ; mobile
 	dw Function118e76 ; mobile
 
-Function11857c:
-	jumptable .Jumptable, wBattleTowerRoomMenuJumptableIndex
-
-.Jumptable:
-	dw Function11886e
-	dw Function118880
-	dw Function11878d
-	dw Function1188b0
-	dw Function11878d
-	dw Function1188b8
-	dw Function11878d
-	dw Function1188c0
-	dw Function11878d
-	dw Function1188c8
-	dw Function11878d
-	dw Function118903
-	dw SetBattleDownloadURL
-	dw Function11878d
-	dw Function11891c
-	dw Function1198ee
-	dw Function1198f7
-	dw Function11878d
-	dw Function119937
-	dw Function118e6d
-	dw Function11878d
-	dw Function118e76
-	dw Function118e7e
-	dw Function11878d
-	dw BattleTowerRoomMenu_DoNothing
-	dw Function118e76
-	dw BattleTowerRoomMenu_CallRoomMenu2
-	dw Function118e76
-
 Function1185c3:
 	jumptable .Jumptable, wBattleTowerRoomMenuJumptableIndex
 
@@ -907,24 +835,8 @@ Function118903:
 	call BattleTowerRoomMenu2
 	jmp BattleTowerRoomMenu_IncrementJumptable
 
-Function11891c:
-	call Function118b42
-	jmp BattleTowerRoomMenu_IncrementJumptable
-
 BattleTowerRoomMenu_PickLevelMessage:
-;	ld a, [wcd38]
-;	and a
-;	jr nz, .asm_11892d
-;	ld hl, Text_WhatDoYouWantToDo
-;	jr .asm_118930
-;
-;.asm_11892d
-;	ld hl, Text_CheckBattleRoomListByMaxLevel
-;
-;.asm_118930
-;	call BattleTowerRoomMenu_SetMessage
 	call BattleTowerRoomMenu_IncrementJumptable
-
 BattleTowerRoomMenu_PlacePickLevelMenu:
 	ld a, [wc31a]
 	and a
@@ -1074,15 +986,6 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 	ld [wMobileInactivityTimerFrames], a
 	ret
 
-SetBattleDownloadURL:
-	ld hl, BattleDownloadURL
-	ld de, wcc60
-	ld bc, $80
-	call CopyBytes
-	ld de, w3_d000
-	ld bc, $1000
-	jmp Function118b10
-
 SetExchangeDownloadURL:
 	ld hl, ExchangeDownloadURL
 	ld de, wcc60
@@ -1141,53 +1044,6 @@ Function118b24:
 	ld hl, wc346
 	ret
 
-Function118b42:
-	ld hl, wd002
-	ld a, l
-	ld [wcd51], a
-	ld a, h
-	ld [wcd52], a
-	call Function118b8c
-	ld a, l
-	ld [wcd55], a
-	ld [wcd59], a
-	ld a, h
-	ld [wcd56], a
-	ld [wcd5a], a
-	call Function118b8c
-	ld a, l
-	ld [wcd53], a
-	ld [wcd5d], a
-	ld a, h
-	ld [wcd54], a
-	ld [wcd5e], a
-	call Function118b8c
-	ld a, l
-	ld [wcd57], a
-	ld [wcd5b], a
-	ld a, h
-	ld [wcd58], a
-	ld [wcd5c], a
-	call Function118b8c
-	ld a, l
-	ld [wcd5f], a
-	ld a, h
-	ld [wcd60], a
-	ret
-
-Function118b8c:
-.asm_118b8c
-	call Function118b9a
-	ret nc
-	ld a, [hli]
-	cp $d
-	jr nz, .asm_118b8c
-	dec hl
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ret
-
 Function118b9a:
 	ld a, h
 	cp $e0
@@ -1202,9 +1058,6 @@ setcharmap ascii
 
 ExchangeDownloadURL:
 	db "http://gameboy.datacenter.ne.jp/cgb/download?name=/01/CGB-BXTJ/exchange/index.txt", 0
-
-BattleDownloadURL:
-	db "http://gameboy.datacenter.ne.jp/cgb/download?name=/01/CGB-BXTJ/battle/index.txt", 0
 
 NewsDownloadURL:
 	db "http://gameboy.datacenter.ne.jp/cgb/download?name=/01/CGB-BXTJ/news/index.txt", 0
@@ -2710,48 +2563,6 @@ Function11984e:
 	farcall Function115dc3
 	jmp BattleTowerRoomMenu_IncrementJumptable
 
-Function1198ee:
-	ld hl, Text_RegisteringRecord
-	call BattleTowerRoomMenu_SetMessage
-	call BattleTowerRoomMenu_IncrementJumptable
-
-Function1198f7:
-	ld a, [wc31a]
-	and a
-	ret nz
-	ld hl, wc608 + 2
-	call Function119940
-	ld hl, w3_d800
-	ld a, LOW(wc608)
-	ld [hli], a
-	ld a, HIGH(wc608)
-	ld [hli], a
-	ld a, $f6
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld a, LOW(wc708)
-	ld [hli], a
-	ld a, HIGH(wc708)
-	ld [hli], a
-	ld a, [wcd51]
-	ld [hli], a
-	ld a, [wcd52]
-	ld [hli], a
-	call Function119eb4
-	call Function119ec2
-	ld a, $40
-	ld [wcd89], a
-	ld hl, w3_d800
-	ld de, w3_de00
-	ld bc, $200
-	ld a, MOBILEAPI_16
-	jmp Function119e2b
-
-Function119937:
-	farcall BattleTowerAction_06
-	jmp BattleTowerRoomMenu_IncrementJumptable
-
 Function119940:
 	ld de, wEmailAddress
 	ld c, MOBILE_EMAIL_LENGTH
@@ -4151,11 +3962,6 @@ Text_ReceivedNews:
 
 Text_QuitReadingNews:
 	text "Quit reading NEWS?"
-	done
-
-Text_RegisteringRecord:
-	text "Registering your"
-	line "record…"
 	done
 
 Text_PartyMonTopsThisLevel:
