@@ -115,7 +115,6 @@ SpecialsPointers::
 	add_special BattleTowerAction
 	add_special DisplayUnownWords
 	add_special Menu_ChallengeExplanationCancel
-	add_special Function17d2ce
 	add_special BattleTowerMobileError
 	add_special HoOhChamber
 	add_special CelebiShrineEvent
