@@ -714,7 +714,7 @@ wUnknownMonMail::    mailmsg_jp wUnknownMonMail
 NEXTU
 wc608:: ds 7
 wc60f:: ds 9
-wc618:: ds 48
+wc618:: ds 48 ; unused
 wc648:: ds 2
 wc64a:: ds 62
 wc688:: ds 2
@@ -1405,7 +1405,7 @@ wcd50:: ds 1
 wcd51:: ds 1
 wcd52:: ds 1
 
-wMobileOpponentBattleMessage:: ; ds 12
+wMobileOpponentBattleMessage:: ; ds 12 unused
 wcd53:: ds 1
 wcd54:: ds 1
 wcd55:: ds 1
@@ -3666,7 +3666,7 @@ w5_da00:: ds $200
 w5_dc00:: ds $d
 w5_dc0d:: ds 4
 w5_dc11:: ds 9
-w5_MobileOpponentBattleMessages:: ds $c
+w5_MobileOpponentBattleMessages:: ds $c ; unused
 w5_MobileOpponentBattleStartMessage:: ds $c
 w5_MobileOpponentBattleWinMessage:: ds $c
 w5_MobileOpponentBattleLossMessage:: ds $c
