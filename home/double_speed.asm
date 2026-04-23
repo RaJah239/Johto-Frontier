@@ -8,13 +8,8 @@
 DoubleSpeed::
 	ld hl, rKEY1
 	bit 7, [hl]
-	jr z, SwitchSpeed
-	ret
-
-NormalSpeed::
-	ld hl, rKEY1
-	bit 7, [hl]
-	ret z
+	ret nz
+	; fallthrough
 
 SwitchSpeed::
 	set 0, [hl]

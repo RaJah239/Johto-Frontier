@@ -1,9 +1,5 @@
 Function16c000: ; unreferenced
-	farcall SetRAMStateForMobile
-	farcall EnableMobile
 	call .RunJumptable
-	farcall DisableMobile
-	ldh [hSystemBooted], a
 	ret
 
 .RunJumptable:
