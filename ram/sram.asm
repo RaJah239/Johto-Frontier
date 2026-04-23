@@ -215,7 +215,7 @@ sMobileBattleTimer:: ds 3 ; unused
 
 	ds $7fd
 
-sMobileAdapterStatus:: db
+sMobileAdapterStatus:: db ; unused
 
 
 SECTION "SRAM Mobile 2", SRAM
@@ -342,6 +342,6 @@ s7_a001:: db
 
 	ds $7ff
 
-sMobileAdapterStatus2:: db
+sMobileAdapterStatus2:: db ; unused
 
 ENDSECTION

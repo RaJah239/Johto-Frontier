@@ -288,44 +288,6 @@ endr
 
 ; functions related to the cable club and various NPC scripts referencing communications
 
-CheckMobileAdapterStatus: ; unused
-	or a
-	ret
-	; the instructions below are the
-	; original Japanese version code
-	ld a, BANK(sMobileAdapterStatus)
-	call OpenSRAM
-	ld a, [sMobileAdapterStatus]
-	cpl
-	ld b, a
-	call CloseSRAM
-	ld a, BANK(sMobileAdapterStatus2)
-	call OpenSRAM
-	ld a, [sMobileAdapterStatus2]
-	ld c, a
-	call CloseSRAM
-	ld a, c
-	cp b
-	jr nz, .nope
-
-	; check [sMobileAdapterStatus2] != 0
-	and a
-	jr z, .nope
-
-	; check !([sMobileAdapterStatus2] & %01110000)
-	and %10001111
-	cp c
-	jr nz, .nope
-
-	ld c, a
-	scf
-	ret
-
-.nope
-	xor a
-	ld c, a
-	ret
-
 Function106464::
 	ld de, MobileDialingFrameGFX
 	ld hl, vTiles2 tile $62

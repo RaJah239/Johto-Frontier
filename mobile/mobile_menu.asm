@@ -484,14 +484,7 @@ Function4a373:
 	ld [hli], a
 	ret
 
-Function4a39a: ; unreferenced
-	call Function4a492
-	call Function4a3aa
-	call SetDefaultBGPAndOBP
-	ret
-
 Function4a3a7:
-Function4a3aa:
 	hlcoord 0, 0
 	lb bc, 3, 1
 	xor a

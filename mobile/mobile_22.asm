@@ -975,7 +975,6 @@ Function896f5:
 	inc hl
 	ld b, 2
 
-Function896ff: ; unreferenced
 ; INPUT:
 ; hl = address of upper left corner of the area
 ; b = height
