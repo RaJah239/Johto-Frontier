@@ -628,61 +628,6 @@ _DeletedTheLoginPasswordText::
 	line "PASSWORD."
 	done
 
-_MobileCardFolderIntro1Text::
-	text "The CARD FOLDER"
-	line "stores your and"
-
-	para "your friends'"
-	line "CARDS."
-
-	para "A CARD contains"
-	line "information like"
-
-	para "the person's name,"
-	line "phone number and"
-	cont "profile."
-
-	para ""
-	done
-
-_MobileCardFolderIntro2Text::
-	text "This is your CARD."
-
-	para "Once you've"
-	line "entered your phone"
-
-	para "number, you can"
-	line "trade CARDS with"
-	cont "your friends."
-
-	para ""
-	done
-
-_MobileCardFolderIntro3Text::
-	text "If you have your"
-	line "friend's CARD, you"
-
-	para "can use it to make"
-	line "a call from a"
-
-	para "mobile phone on"
-	line "the 2nd floor of a"
-	cont "#MON CENTER."
-
-	para ""
-	done
-
-_MobileCardFolderIntro4Text::
-	text "To safely store"
-	line "your collection of"
-
-	para "CARDS, you must"
-	line "set a PASSCODE for"
-	cont "your CARD FOLDER."
-
-	para ""
-	done
-
 _MobileCardFolderFinishRegisteringCardsText::
 	text "Finish registering"
 	line "CARDS?"

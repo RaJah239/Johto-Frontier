@@ -1419,10 +1419,6 @@ Function48c63:
 	scf
 	ret
 
-Function48cda:
-	ld h, d
-	ld l, e
-
 Function48cdc:
 	push bc
 	push hl

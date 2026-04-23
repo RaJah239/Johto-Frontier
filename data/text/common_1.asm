@@ -108,38 +108,6 @@ _CameToItsSensesText::
 	line "to its senses."
 	done
 
-_EnterNewPasscodeText::
-	text "Please enter any"
-	line "four-digit number."
-	done
-
-_ConfirmPasscodeText::
-	text "Enter the same"
-	line "number to confirm."
-	done
-
-_PasscodesNotSameText::
-	text "That's not the"
-	line "same number."
-	done
-
-_PasscodeSetText::
-	text "Your PASSCODE has"
-	line "been set."
-
-	para "Enter this number"
-	line "next time to open"
-	cont "the CARD FOLDER."
-
-	para ""
-	done
-
-_FourZerosInvalidText::
-	text "0000 is invalid!"
-
-	para ""
-	done
-
 _OakTimeWokeUpText::
 	text "<……><……><……><……><……><……>"
 	line "<……><……><……><……><……><……>"
