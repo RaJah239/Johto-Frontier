@@ -150,7 +150,6 @@ Function4a098:
 	call PlaceHollowCursor
 	call WaitBGMap
 	call LoadStandardMenuHeader
-	farcall Function89de0
 	call Call_ExitMenu
 	call MG_Mobile_Layout_LoadPals
 	pop bc

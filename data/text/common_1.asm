@@ -140,22 +140,6 @@ _FourZerosInvalidText::
 	para ""
 	done
 
-_EnterPasscodeText::
-	text "Enter the CARD"
-	next "FOLDER PASSCODE."
-	done
-
-_IncorrectPasscodeText::
-	text "Incorrect"
-	line "PASSCODE!"
-
-	para ""
-	done
-
-_CardFolderOpenText::
-	text "CARD FOLDER open.@"
-	text_end
-
 _OakTimeWokeUpText::
 	text "<……><……><……><……><……><……>"
 	line "<……><……><……><……><……><……>"

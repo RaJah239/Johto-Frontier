@@ -301,8 +301,6 @@ gfx/sgb/sgb_border.2bpp: tools/gfx += --trim-whitespace
 gfx/sgb/sgb_border.sgb.tilemap: gfx/sgb/sgb_border.bin ; tr < $< -d '\000' > $@
 
 gfx/mobile/ascii_font.2bpp: tools/gfx += --trim-whitespace
-gfx/mobile/dialpad.2bpp: tools/gfx += --trim-whitespace
-gfx/mobile/dialpad_cursor.2bpp: tools/gfx += --trim-whitespace
 gfx/mobile/electro_ball.2bpp: tools/gfx += --remove-duplicates --remove-xflip --preserve=0x39
 gfx/mobile/card.2bpp: tools/gfx += --trim-whitespace
 gfx/mobile/card_2.2bpp: tools/gfx += --trim-whitespace
