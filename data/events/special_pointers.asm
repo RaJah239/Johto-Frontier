@@ -107,7 +107,6 @@ SpecialsPointers::
 	add_special Function11b93b
 	add_special BattleTowerRoomMenu
 	add_special BattleTowerBattle
-	add_special Function1704e1
 	add_special LoadOpponentTrainerAndPokemonWithOTSprite
 	add_special Function11ba38
 	add_special GiveOddEgg
