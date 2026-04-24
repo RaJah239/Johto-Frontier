@@ -244,11 +244,10 @@ MACRO dict
 		; Locals can use a short jump
 		jr z, \2
 	else
-		jmp z, \2
+		jp z, \2
 	endc
 ENDM
 
-	dict "<MOBILE>",  MobileScriptChar ; to go
 	dict "<LINE>",    LineChar
 	dict "<NEXT>",    NextLineChar
 	dict "<CR>",      CarriageReturnChar
@@ -287,12 +286,6 @@ ENDM
 	ld [hli], a
 	call PrintLetterDelay
 	jmp NextChar
-
-MobileScriptChar:: ; to go
-	ld c, l
-	ld b, h
-	farcall RunMobileScript
-	jmp PlaceNextChar
 
 MACRO print_name
 	push de
