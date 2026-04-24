@@ -186,7 +186,7 @@ SECTION "PokeDB Bank 2", SRAM
 sNewBoxMons2:: pokedb sNewBoxMons2, MONDB_ENTRIES
 
 
-SECTION "SRAM Mobile 1", SRAM
+SECTION "SRAM Mobile 1", SRAM ; to go
 
 	ds $7
 

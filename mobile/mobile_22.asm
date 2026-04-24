@@ -158,7 +158,7 @@ MenuData_0x892ab:
 	db "はい@"
 	db "いいえ@"
 
-Function892b4:
+Function892b4: ; to go
 	call Function8931b
 
 Function892b7:
@@ -209,7 +209,7 @@ Function892b7:
 	jr nz, .loop
 	ret
 
-Function8931b:
+Function8931b: ; to go
 	push hl
 	ld hl, s4_a03b
 	ld a, [wMenuSelection]
@@ -1246,7 +1246,7 @@ Function89a0c:
 	call PlaceString
 	ret
 
-Function89a57:
+Function89a57: ; to go
 	call JoyTextDelay_ForcehJoyDown ; joypad
 	bit D_UP_F, c
 	jr nz, .d_up
@@ -1330,14 +1330,14 @@ Function89a57:
 	scf
 	ret
 
-.Function89ac7:
+.Function89ac7: ; to go
 	call OpenSRAMBank4
 	call Function8931b
 	call .Function89ad4
 	call CloseSRAM
 	ret
 
-.Function89ad4:
+.Function89ad4: ; to go
 	push de
 	call Function8932d ; find a non-space character within 5 bytes of bc
 	jr c, .no_nonspace_character
@@ -1353,7 +1353,7 @@ Function89a57:
 	pop de
 	ret
 
-.Function89ae6:
+.Function89ae6: ; to go
 	ld hl, wd031
 	xor a
 	ld [hl], a
@@ -1487,7 +1487,7 @@ Palette_8a624:
 	RGB 31, 31, 31
 	RGB 00, 00, 00
 
-Function8a679:
+Function8a679: ; to go
 	call Function891de
 	call ClearBGPalettes
 	call Function893cc
@@ -1535,7 +1535,7 @@ Function8ac76:
 	call Function891fe
 	call Function8b677
 
-Function8ac7c:
+Function8ac7c: ; to go
 	call Function8b7bd
 	jr z, .asm_8acf0
 	ld a, c
@@ -1615,7 +1615,7 @@ MobileCardFolderFinishRegisteringCardsText:
 	text_far _MobileCardFolderFinishRegisteringCardsText
 	text_end
 
-Function8ad0b:
+Function8ad0b: ; to go
 .asm_8ad0b
 	ld a, [wMenuSelection]
 	ld [wd02f], a

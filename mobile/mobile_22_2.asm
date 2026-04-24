@@ -239,7 +239,7 @@ Function8b79e:
 	jr nz, .asm_8b7a9
 	ret
 
-Function8b7bd:
+Function8b7bd: ; to go
 	call Function8b855
 	ld hl, MenuHeader_0x8b867
 	call CopyMenuHeader
@@ -338,7 +338,7 @@ Function8b855:
 	ld [hl], a
 	ret
 
-MenuHeader_0x8b867:
+MenuHeader_0x8b867: ; to go
 	db MENU_BACKUP_TILES ; flags
 	menu_coords 1, 3, 18, 13
 	dw MenuData_0x8b870
@@ -346,7 +346,7 @@ MenuHeader_0x8b867:
 
 	db 0
 
-MenuData_0x8b870:
+MenuData_0x8b870: ; to go
 	db SCROLLINGMENU_ENABLE_FUNCTION3 | SCROLLINGMENU_DISPLAY_ARROWS | SCROLLINGMENU_ENABLE_RIGHT | SCROLLINGMENU_ENABLE_LEFT ; flags
 	db 5, 3 ; rows, columns
 	db SCROLLINGMENU_ITEMS_NORMAL ; item format
@@ -363,7 +363,7 @@ Function8b880:
 	call PrintNum
 	ret
 
-Function8b88c:
+Function8b88c: ; to go
 	call OpenSRAMBank4
 	ld h, d
 	ld l, e

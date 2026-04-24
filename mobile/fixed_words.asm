@@ -22,7 +22,7 @@ Function11c05d:
 	scf
 	ret
 
-Function11c075:
+Function11c075: ; to go
 	push de
 	ld a, c
 	call Function11c254
@@ -132,7 +132,7 @@ CopyMobileEZChatToC608:
 	ld bc, MON_NAME_LENGTH - 1
 	jr .copy_string
 
-Function11c254:
+Function11c254: ; to go
 	push af
 	ld a, BANK(sEZChatMessages)
 	call OpenSRAM
@@ -159,7 +159,7 @@ EZChat_ClearBottom12Rows:
 	call ByteFill
 	ret
 
-EZChat_MasterLoop:
+EZChat_MasterLoop: ; to go
 .loop
 	call JoyTextDelay
 	ldh a, [hJoyPressed]
@@ -1511,7 +1511,7 @@ Function11cb52:
 	ld d, a
 	call Function11ca7f
 
-Function11cb66:
+Function11cb66: ; to go
 	ld hl, wcd2a
 	ld de, hJoypadPressed
 	ld a, [de]

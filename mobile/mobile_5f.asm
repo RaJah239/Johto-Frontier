@@ -2742,7 +2742,7 @@ INCBIN "gfx/font/postal_mark.2bpp"
 PokemonNewsPalettes:
 INCLUDE "gfx/mobile/pokemon_news.pal"
 
-RunMobileScript::
+RunMobileScript:: ; to go
 	ld a, $6
 	call OpenSRAM
 	inc de
@@ -2755,7 +2755,7 @@ RunMobileScript::
 	call CloseSRAM
 	ret
 
-_RunMobileScript:
+_RunMobileScript: ; to go
 	ld a, [de]
 	inc de
 	cp "@"
@@ -3355,7 +3355,7 @@ Function17f382:
 	and a
 	ret
 
-Function17f3c9:
+Function17f3c9: ; to go
 	push bc
 	ld hl, wcd36
 	ld de, wc708

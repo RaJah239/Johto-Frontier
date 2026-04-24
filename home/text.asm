@@ -248,7 +248,7 @@ MACRO dict
 	endc
 ENDM
 
-	dict "<MOBILE>",  MobileScriptChar
+	dict "<MOBILE>",  MobileScriptChar ; to go
 	dict "<LINE>",    LineChar
 	dict "<NEXT>",    NextLineChar
 	dict "<CR>",      CarriageReturnChar
@@ -288,7 +288,7 @@ ENDM
 	call PrintLetterDelay
 	jmp NextChar
 
-MobileScriptChar::
+MobileScriptChar:: ; to go
 	ld c, l
 	ld b, h
 	farcall RunMobileScript
