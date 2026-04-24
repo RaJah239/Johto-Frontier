@@ -191,7 +191,7 @@ SECTION "SRAM Mobile 1", SRAM
 	ds $7
 
 sEZChatMessages::
-sEZChatIntroductionMessage:: ds EASY_CHAT_MESSAGE_LENGTH
+sEZChatIntroductionMessage:: ds EASY_CHAT_MESSAGE_LENGTH ; unused
 sEZChatBattleMessages::
 sEZChatBeginBattleMessage::  ds EASY_CHAT_MESSAGE_LENGTH
 sEZChatWinBattleMessage::    ds EASY_CHAT_MESSAGE_LENGTH
