@@ -37,7 +37,7 @@
 
 ; MobileEZChatCategoryPointers indexes (see mobile/fixed_words.asm)
 	const_def
-	const EZCHAT_POKEMON
+	const EZCHAT_POKEMON ; unused to remove
 	const EZCHAT_TYPES
 	const EZCHAT_GREETINGS
 	const EZCHAT_PEOPLE
@@ -61,6 +61,3 @@ DEF MOBILE_PHONE_NUMBER_LENGTH EQU 20
 ; + party struct $30 + OT $5 + NICK $5
 ; + JP Mail struct $2a
 DEF MOBILE_EMAIL_LENGTH EQU $1e
-
-DEF EASY_CHAT_MESSAGE_WORD_COUNT EQU 6
-DEF EASY_CHAT_MESSAGE_LENGTH EQU EASY_CHAT_MESSAGE_WORD_COUNT * 2 ; every word uses 2 bytes

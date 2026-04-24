@@ -382,7 +382,7 @@ SRAM $02
 SRAM $03
 	"PokeDB Bank 2"
 SRAM $04
-	"SRAM Mobile 1" ; to go, "SRAM Bank 4" instead
+	"SRAM Bank 4"
 SRAM $05
 	"SRAM Mobile 2"
 SRAM $06

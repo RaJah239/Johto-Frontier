@@ -186,37 +186,7 @@ SECTION "PokeDB Bank 2", SRAM
 sNewBoxMons2:: pokedb sNewBoxMons2, MONDB_ENTRIES
 
 
-SECTION "SRAM Mobile 1", SRAM ; to go
-
-	ds $7
-
-sEZChatMessages::
-sEZChatIntroductionMessage:: ds EASY_CHAT_MESSAGE_LENGTH ; unused
-sEZChatBattleMessages::
-sEZChatBeginBattleMessage::  ds EASY_CHAT_MESSAGE_LENGTH
-sEZChatWinBattleMessage::    ds EASY_CHAT_MESSAGE_LENGTH
-sEZChatLoseBattleMessage::   ds EASY_CHAT_MESSAGE_LENGTH
-
-s4_a037:: ds 4
-
-s4_a03b:: ds 37 * 40
-
-s4_a603:: ds 8
-
-s4_a60b:: db
-s4_a60c:: db
-s4_a60d:: db
-
-s4_a60e:: dw
-
-	ds $1f0
-
-sMobileBattleTimer:: ds 3 ; unused
-
-	ds $7fd
-
-sMobileAdapterStatus:: db ; unused
-
+SECTION "SRAM Bank 4", SRAM
 
 SECTION "SRAM Mobile 2", SRAM
 
