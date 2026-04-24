@@ -103,7 +103,6 @@ SpecialsPointers::
 	add_special PrintDiploma
 
 ; Crystal only
-	add_special TradeCornerHoldMon
 	add_special Function11b93b
 	add_special BattleTowerRoomMenu
 	add_special BattleTowerBattle

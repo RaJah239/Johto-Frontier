@@ -691,7 +691,7 @@ wOfferEmail::      ds MOBILE_EMAIL_LENGTH
 wOfferTrainerID::  dw
 wOfferSecretID::   dw
 wOfferGender::     db
-wOfferSpecies::    db
+wOfferSpecies::    db ; unused
 wOfferReqGender::  db
 wOfferReqSpecies:: db
 wOfferMonSender::  ds NAME_LENGTH_JAPANESE - 1

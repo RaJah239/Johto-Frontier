@@ -22,7 +22,7 @@ MobileTradeAnimation_SendGivemonToGTS:
 	mobiletradeanim MobileTradeAnim_0f
 	mobiletradeanim EndMobileTradeAnim
 
-MobileTradeAnimation_RetrieveGivemonFromGTS:
+MobileTradeAnimation_RetrieveGivemonFromGTS: ; unreferenced
 	ld a, $80
 	ld [wcf65], a
 	ld de, .TradeAnimScript
