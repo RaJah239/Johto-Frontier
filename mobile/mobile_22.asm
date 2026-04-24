@@ -158,9 +158,6 @@ MenuData_0x892ab:
 	db "はい@"
 	db "いいえ@"
 
-Function892b4: ; to go
-	call Function8931b
-
 Function892b7:
 	ld d, b
 	ld e, c
@@ -383,19 +380,6 @@ Function8942b:
 	ld bc, 4 tiles
 	ld a, BANK(CardSpriteGFX)
 	call FarCopyBytes
-	ret
-
-Function89448:
-; Clears the sprite array
-	push af
-	ld hl, wShadowOAM
-	ld d, 24 * SPRITEOAMSTRUCT_LENGTH
-	xor a
-.loop
-	ld [hli], a
-	dec d
-	jr nz, .loop
-	pop af
 	ret
 
 Function89455:
@@ -1422,52 +1406,6 @@ Function89b45:
 	pop hl
 	ret
 
-Function89d0d:
-	call Mobile22_SetBGMapMode0
-	ldh a, [rSVBK]
-	push af
-	ld a, $5
-	ldh [rSVBK], a
-
-	ld c, 8
-	ld de, wBGPals1
-.loop
-	push bc
-	ld hl, .Palette1
-	ld bc, 1 palettes
-	call CopyBytes
-	pop bc
-	dec c
-	jr nz, .loop
-
-	ld hl, .Palette2
-	ld de, wBGPals1 palette 2
-	ld bc, 1 palettes
-	call CopyBytes
-
-	pop af
-	ldh [rSVBK], a
-
-	call SetDefaultBGPAndOBP
-	farcall PrintMail
-	call Mobile22_SetBGMapMode1
-	ld c, 24
-	call DelayFrames
-	call RestartMapMusic
-	ret
-
-.Palette1:
-	RGB 31, 31, 31
-	RGB 19, 19, 19
-	RGB 15, 15, 15
-	RGB 00, 00, 00
-
-.Palette2:
-	RGB 31, 31, 31
-	RGB 19, 19, 19
-	RGB 19, 19, 19
-	RGB 00, 00, 00
-
 Function8a60d:
 	ldh a, [rSVBK]
 	push af
@@ -1486,50 +1424,6 @@ Palette_8a624:
 	RGB 31, 31, 31
 	RGB 31, 31, 31
 	RGB 00, 00, 00
-
-Function8a679: ; to go
-	call Function891de
-	call ClearBGPalettes
-	call Function893cc
-	call OpenSRAMBank4
-	call Function8931b
-	call Function89844
-	call CloseSRAM
-	call OpenSRAMBank4
-	call Function8939a
-	call Function89856
-	hlcoord 1, 13
-	call Function899fe
-	call Function891ab
-	call CloseSRAM
-.asm_8a6a3
-	call Function89a57
-	jr c, .asm_8a6a3
-	and a
-	jr z, Function8a679
-	ld hl, Jumptable_8a6bc
-	dec a
-	rst JumpTable
-	jr c, Function8a679
-	call Function891fe
-	call Function8b677
-	call Function89448
-	ret
-
-Jumptable_8a6bc:
-	dw Function8a6c0
-	dw Function8a6c5
-
-Function8a6c0:
-	call PlayClickSFX
-	and a
-	ret
-
-Function8a6c5:
-	call PlayClickSFX
-	call Function89d0d
-	scf
-	ret
 
 Function8ac76:
 	call Function891fe
