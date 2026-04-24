@@ -182,6 +182,7 @@ BattleAnimFrameData:
 	dw .Frameset_OctazookaSmoke      ; BATTLEANIMFRAMESET_OCTAZOOKA_SMOKE
 	dw .Frameset_SeedBomb            ; BATTLEANIMFRAMESET_SEED_BOMB
 	dw .Frameset_FireBlastImpact     ; BATTLE_ANIM_FRAMESET_FIRE_BLAST_IMPACT
+	dw .Frameset_Flamethrower_Alt    ; BATTLE_ANIM_FRAMESET_FLAMETHROWER_ALT
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
 .Frameset_SeedBomb:
@@ -354,6 +355,11 @@ BattleAnimFrameData:
 	oamend
 
 .Frameset_Flamethrower:
+	oamframe BATTLE_ANIM_OAMSET_0A,  4
+	oamframe BATTLE_ANIM_OAMSET_0E,  4
+	oamrestart
+
+.Frameset_Flamethrower_Alt:
 	oamframe BATTLE_ANIM_OAMSET_0E,  4
 	oamframe BATTLE_ANIM_OAMSET_0A,  4
 	oamrestart
