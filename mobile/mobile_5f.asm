@@ -90,7 +90,7 @@ CheckStringForErrors_IgnoreTerminator:
 	and a
 	ret
 
-Function17d0f3:
+Function17d0f3: ; to go
 	ld a, [wMobileMonSpecies]
 	ld [wOTTrademonSpecies], a
 	ld [wCurPartySpecies], a
@@ -504,8 +504,8 @@ Jumptable17d72a:
 	dw Function17d7e5
 	dw Function17d818
 	dw Function17d833
-	dw Function17d85d
-	dw Function17d902
+	dw Function17d85d ; to go
+	dw Function17d902 ; to go
 	dw Function17d93a
 	dw Function17d98b
 	dw Function17d9e3
@@ -536,7 +536,7 @@ Jumptable17d72a:
 	dw Function17e270
 	dw Function17e27f
 	dw Function17e293
-	dw Function17e2a7
+	dw Function17e2a7 ; to go
 	dw IncCrashCheckPointer_SaveGameData
 	dw IncCrashCheckPointer_SaveAfterLinkTrade
 	dw IncCrashCheckPointer_SaveBox
@@ -670,7 +670,7 @@ Function17d833:
 	call Function17e349
 	ret
 
-Function17d85d:
+Function17d85d: ; to go
 	call IncCrashCheckPointer
 	ld a, [hli]
 	ld e, a
@@ -770,7 +770,7 @@ Function17d85d:
 	call Function17e349
 	ret
 
-Function17d902:
+Function17d902: ; to go
 	call IncCrashCheckPointer
 	ld a, [hli]
 	ld e, a
@@ -2087,7 +2087,7 @@ Function17e293:
 	ld [de], a
 	ret
 
-Function17e2a7:
+Function17e2a7: ; to go
 	call IncCrashCheckPointer
 	call HlToCrashCheckPointer
 	call Function17e32b
@@ -2134,7 +2134,7 @@ Function17e2a7:
 	ld [wcd7a], a
 	ret
 
-Function17e309:
+Function17e309: ; to go
 	ld a, $2
 	ld [wc303], a
 	call Function17dcaf
@@ -2759,7 +2759,7 @@ Function17f4f6:
 	add hl, bc
 	jr .asm_17f509
 
-BattleTowerMobileError:
+BattleTowerMobileError: ; to go
 	call FadeToMenu
 	xor a
 	ld [wc303], a
@@ -2775,7 +2775,7 @@ BattleTowerMobileError:
 	call ExitAllMenus
 	ret
 
-DisplayMobileError:
+DisplayMobileError: ; to go
 .loop
 	call JoyTextDelay
 	call .RunJumptable

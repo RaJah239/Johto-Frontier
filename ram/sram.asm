@@ -188,7 +188,7 @@ sNewBoxMons2:: pokedb sNewBoxMons2, MONDB_ENTRIES
 
 SECTION "SRAM Bank 4", SRAM
 
-SECTION "SRAM Mobile 2", SRAM
+SECTION "SRAM Mobile 2", SRAM ; to go SECTION "SRAM Trainer Rankings", SRAM
 
 sTrainerRankings::
 sTrainerRankingsChecksum:: ds 2

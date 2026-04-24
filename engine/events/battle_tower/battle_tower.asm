@@ -49,7 +49,7 @@ RunBattleTowerTrainer:
 	ld [wLinkMode], a
 	farcall HealParty
 	call ReadBTTrainerParty
-	call Clears5_a89a
+	call Clears5_a89a ; to go
 
 	predef StartBattle
 
@@ -236,25 +236,25 @@ BattleTowerAction:
 	dw BattleTowerAction_GetChallengeState
 	dw BattleTowerAction_SetByteToQuickSaveChallenge
 	dw BattleTowerAction_SetByteToCancelChallenge
-	dw BattleTowerAction_05
-	dw BattleTowerAction_06
+	dw BattleTowerAction_05 ; to go and remove function after the constants
+	dw BattleTowerAction_06 ; to go
 	dw SaveBattleTowerLevelGroup
 	dw LoadBattleTowerLevelGroup
 	dw BattleTower_CheckSaveFileExistsAndIsYours
 	dw BattleTowerAction_0A
 	dw BattleTowerAction_GSBall
-	dw BattleTowerAction_0C
-	dw BattleTowerAction_0D
+	dw BattleTowerAction_0C ; to go
+	dw BattleTowerAction_0D ; to go
 	dw BattleTowerAction_EggTicket
 	dw BattleTowerAction_0F
-	dw BattleTowerAction_10
-	dw BattleTowerAction_11
-	dw BattleTowerAction_12
-	dw BattleTowerAction_13
+	dw BattleTowerAction_10 ; to go
+	dw BattleTowerAction_11 ; to go
+	dw BattleTowerAction_12 ; to go
+	dw BattleTowerAction_13 ; to go
 	dw BattleTowerAction_14
 	dw BattleTowerAction_15
-	dw BattleTowerAction_16
-	dw BattleTowerAction_17
+	dw BattleTowerAction_16 ; to go
+	dw BattleTowerAction_17 ; to go
 	dw ResetBattleTowerTrainersSRAM
 	dw BattleTower_GiveReward
 	dw BattleTowerAction_1C

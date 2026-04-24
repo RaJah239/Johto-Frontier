@@ -118,6 +118,9 @@ ClockContinue:
 	jr c, .dont_update
 
 .time_overflow
+	farjp ClearDailyTimers
+
+	ret ; to go
 	farcall ClearDailyTimers
 	farcall Function170923
 	ld a, BANK(s5_aa8c) ; aka BANK(s5_b2fa)

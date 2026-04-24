@@ -38,11 +38,11 @@ _BattleTowerRoomMenu:
 	pop af
 	ldh [rSVBK], a
 	call BattleTowerRoomMenu_Cleanup
-	call Function118180
+	call Function118180 ; to go
 	call ReturnToMapFromSubmenu
 	ret
 
-Function118180:
+Function118180: ; to go
 	ld a, [wScriptVar]
 	and a
 	ret nz
@@ -266,14 +266,14 @@ BattleTowerRoomMenu_InitRAM:
 	farcall Function106464
 	farcall Function115d99
 	farcall Function11615a
-	ld a, BANK(s5_bfff)
-	call OpenSRAM
-	xor a
-	ld [s5_bfff], a
+	ld a, BANK(s5_bfff) ; to go
+	call OpenSRAM ; to go
+	xor a ; to go
+	ld [s5_bfff], a ; to go
 	call CloseSRAM
 	ret
 
-Function118440:
+Function118440: ; to go
 	push af
 	ld a, BANK(s5_bfff)
 	call OpenSRAM
@@ -373,12 +373,12 @@ Function118624:
 	dw Function11878d
 	dw Function118e92
 	dw Function11878d
-	dw Function11915d
-	dw Function118f68
+	dw Function11915d ; to go
+	dw Function118f68 ; to go
 	dw Function11878d
 	dw Function119009
 	dw Function11878d
-	dw Function119054
+	dw Function119054 ; to go
 	dw Function118e6d
 	dw Function11878d
 	dw Function118e76
@@ -407,7 +407,7 @@ Function118671:
 	dw Function118903
 	dw Function119380
 	dw Function119388
-	dw Function1193a0
+	dw Function1193a0 ; to go
 	dw Function11878d
 	dw Function118e6d
 	dw Function11878d
@@ -650,9 +650,9 @@ Function1188c8:
 
 Function1188e7:
 	ld de, wc346
-	ld a, BANK(s5_aa4a)
+	ld a, BANK(s5_aa4a) ; to go comment out
 	call OpenSRAM
-	ld a, [s5_aa4a]
+	ld a, [s5_aa4a] ; to go comment out
 	call CloseSRAM
 	and a
 	ret z
@@ -871,7 +871,7 @@ Function118b24:
 	ld a, HIGH(wcc60)
 	ld [hli], a
 	call Function119eb4
-	call Function119ec2
+	call Function119ec2 ; to go
 	ld a, $80
 	ld [wcd89], a
 	ld hl, wc346
@@ -962,7 +962,7 @@ BattleTowerRoomMenu_CallRoomMenu2:
 	ret
 
 Function118e92:
-	call Function118440
+	call Function118440 ; to go
 	call Function1191d3
 	ld a, [wcd53]
 	ld l, a
@@ -975,7 +975,7 @@ Function118e92:
 	ld bc, $0800
 	jmp Function118b10
 
-Function118f68:
+Function118f68: ; to go
 	call Function119223
 	ret c
 	call Function118440
@@ -1021,7 +1021,7 @@ Function118f68:
 	jmp BattleTowerRoomMenu_IncrementJumptable
 
 Function119009:
-	call Function118440
+	call Function118440 ; to go
 	call Function119300
 	ld a, [wcd55]
 	ld l, a
@@ -1048,7 +1048,7 @@ Function119009:
 	ld a, HIGH(wcc60)
 	ld [hli], a
 	call Function119eb4
-	call Function119ec2
+	call Function119ec2 ; to go
 	ld a, $40
 	ld [wcd89], a
 	ld hl, wc346
@@ -1057,7 +1057,7 @@ Function119009:
 	ld a, MOBILEAPI_16
 	jmp Function119e2b
 
-Function119054:
+Function119054: ; to go
 	ld a, $6
 	call OpenSRAM
 	ld hl, wd002
@@ -1113,7 +1113,7 @@ Function119054:
 	call CloseSRAM
 	jmp BattleTowerRoomMenu_IncrementJumptable
 
-Function11915d:
+Function11915d: ; to go
 	ld hl, w3_d802
 	ld de, wcd20
 	ld bc, 12
@@ -1356,10 +1356,11 @@ Function119223:
 	and a
 	ret
 
-Function119300:
+Function119300: ; to go and edit like the commit
 	xor a
 	ld [wcd4b], a
 	ld [wcd4c], a
+
 	ld a, [wcd4d]
 	ld e, a
 	ld a, [wcd4e]
@@ -1459,7 +1460,7 @@ Function119388:
 	ld [wMobileInactivityTimerSeconds], a
 	call BattleTowerRoomMenu_IncrementJumptable
 
-Function1193a0:
+Function1193a0: ; to go
 	call BattleTowerRoomMenu2
 	ret c
 	call DelayFrame
@@ -1990,7 +1991,7 @@ Function1197bf:
 	add $57
 	ret
 
-BattleTowerRoomMenu_UberRestrictionMessage:
+BattleTowerRoomMenu_UberRestrictionMessage: ; to go
 	ld hl, Text_UberRestriction
 	call BattleTowerRoomMenu_SetMessage
 	call BattleTowerRoomMenu_IncrementJumptable
@@ -2089,7 +2090,7 @@ Function119eb4:
 	jr nz, .loop
 	ret
 
-Function119ec2:
+Function119ec2: ; to go
 	ld a, BANK(sMobileLoginPassword)
 	call OpenSRAM
 	xor a
@@ -2126,7 +2127,7 @@ BattleTowerRoomMenu2:
 	dw Function119f45
 	dw Function119f56
 	dw Function119f76
-	dw Function119f98
+	dw Function119f98 ; to go
 	dw Function11a113
 	dw Function11a129
 	dw Function11a131
@@ -2205,7 +2206,7 @@ Function119f76:
 	ld [wMobileInactivityTimerMinutes], a
 	jmp BattleTowerRoomMenu2_IncrementJumptable
 
-Function119f98:
+Function119f98: ; to go
 	call Function11a536
 	ret c
 	call PlayClickSFX
@@ -2254,7 +2255,7 @@ Function119f98:
 	scf
 	ret
 
-Function11a00e:
+Function11a00e: ; to go
 	ld a, BANK(sMobileLoginPassword)
 	call OpenSRAM
 	ld a, [sMobileLoginPassword]
@@ -3377,7 +3378,7 @@ Text_ExitGymLeaderHonorRoll:
 	line "HONOR ROLL?"
 	done
 
-Function11b6b4:
+Function11b6b4: ; to go
 	ld a, $5
 	call OpenSRAM
 	ld a, [wcd30]

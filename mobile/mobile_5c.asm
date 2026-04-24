@@ -1,6 +1,6 @@
 INCLUDE "engine/events/battle_tower/battle_tower.asm"
 
-Clears5_a89a:
+Clears5_a89a: ; to go
 	ld a, BANK(s5_a89a)
 	call OpenSRAM
 	ld hl, s5_a89a

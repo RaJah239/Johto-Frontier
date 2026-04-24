@@ -88,8 +88,8 @@ Jumptable_117728:
 	dw Function117764
 	dw Function1178aa
 	dw Function1178e8
-	dw Function117942
-	dw Function117976
+	dw Function117942 ; to go
+	dw Function117976 ; to go
 	dw Function117984
 	dw Function1179a7
 
@@ -391,7 +391,7 @@ Function1178e8:
 	call ExitMenu
 	jmp MobilePassword_IncrementJumptable
 
-Function117942:
+Function117942: ; to go
 	call SpeechTextbox
 	hlcoord 1, 14
 	ld de, SavedPasswordString
@@ -412,7 +412,7 @@ Function117942:
 	jr z, asm_11797e
 	call MobilePassword_IncrementJumptable
 
-Function117976:
+Function117976: ; to go
 	ld hl, wcd4e
 	dec [hl]
 	ret nz
@@ -522,7 +522,7 @@ Function117ae9:
 	dw Function117b28
 	dw Function117b31
 	dw Function117b4f
-	dw Function117bb6
+	dw Function117bb6 ; to go
 	dw Function117c4a
 
 Function117b06:
@@ -614,7 +614,7 @@ Function117b4f:
 	ld [wJumptableIndex], a
 	ret
 
-Function117bb6:
+Function117bb6: ; to go
 	call Function117c89
 	ld a, $1
 	ldh [hBGMapMode], a
