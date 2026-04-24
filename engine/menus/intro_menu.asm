@@ -166,6 +166,7 @@ _ResetWRAM:
 
 	ld hl, wNumPCItems
 	call .InitList
+	call .PCPotion
 
 	ld hl, wNumFruits
 	call .InitList
@@ -234,6 +235,14 @@ endc
 	dec a
 	ld [hl], a
 	ret
+
+.PCPotion:
+	ld a, POTION
+	ld [wCurItem], a
+	ld a, 1
+	ld [wItemQuantityChange], a
+	ld hl, wNumPCItems
+	jmp ReceiveItem
 
 InitializeMagikarpHouse:
 	ld hl, wBestMagikarpLengthFeet
