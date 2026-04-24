@@ -15,6 +15,14 @@
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups
 
-	; tm/hm learnset
-	tmhm FLAMETHROWER, THUNDERBOLT, ICE_BEAM, OUTRAGE, SKY_ATTACK, ROCK_SLIDE, SURF, EXPLOSION
+	; tm/tutor learnset
+	tmhm HEADBUTT, \
+		 FLAMETHROWER, \
+		 THUNDERBOLT, \
+		 ICE_BEAM, \
+		 EXPLOSION, \ 
+		 OUTRAGE, \
+		 ROCK_SLIDE, \
+		 SKY_ATTACK, \
+		 SURF
 	; end
