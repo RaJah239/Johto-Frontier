@@ -1,4 +1,4 @@
-GetMobileOTTrainerClass: ; mobile function
+GetMobileOTTrainerClass: ; mobile function ; unreferenced
 	ld h, b
 	ld l, c
 	call .GetMobileOTTrainerClass
