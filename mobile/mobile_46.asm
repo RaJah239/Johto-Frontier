@@ -26,8 +26,7 @@ _BattleTowerRoomMenu:
 .skip
 	call BattleTowerRoomMenu_Jumptable
 	call BattleTowerRoomMenu_WriteMessage
-	farcall Function115dd3
-	farcall Function11619d
+	farcall Function115dd3 ; remove this
 	call DelayFrame
 	ld a, [wBattleTowerRoomMenuJumptableIndex]
 	ld hl, wcd33
@@ -38,11 +37,11 @@ _BattleTowerRoomMenu:
 	pop af
 	ldh [rSVBK], a
 	call BattleTowerRoomMenu_Cleanup
-	call Function118180 ; to go
+	call Function118180 ; remove this
 	call ReturnToMapFromSubmenu
 	ret
 
-Function118180: ; to go
+Function118180: ; remove this
 	ld a, [wScriptVar]
 	and a
 	ret nz
@@ -112,7 +111,6 @@ Function118233:
 	call Function118624
 	call BattleTowerRoomMenu_WriteMessage
 	farcall Function115dd3
-	farcall Function11619d
 	call DelayFrame
 	ld a, [wBattleTowerRoomMenuJumptableIndex]
 	ld hl, wcd33
@@ -147,7 +145,6 @@ Function118284:
 	call Function1186f5
 	call BattleTowerRoomMenu_WriteMessage
 	farcall Function115dd3
-	farcall Function11619d
 	call DelayFrame
 	ld a, [wBattleTowerRoomMenuJumptableIndex]
 	ld hl, wcd33
@@ -183,7 +180,6 @@ Function118329:
 	call Function118671
 	call BattleTowerRoomMenu_WriteMessage
 	farcall Function115dd3
-	farcall Function11619d
 	call DelayFrame
 	ld a, [wBattleTowerRoomMenuJumptableIndex]
 	ld hl, wcd33
@@ -219,7 +215,6 @@ Function11837a:
 	call Function1186b2
 	call BattleTowerRoomMenu_WriteMessage
 	farcall Function115dd3
-	farcall Function11619d
 	call DelayFrame
 	ld a, [wBattleTowerRoomMenuJumptableIndex]
 	ld hl, wcd33
@@ -2337,7 +2332,6 @@ Function11a0ca:
 	ld [wMenuBorderBottomCoord], a
 	call PushWindow
 	farcall Function11765d
-	farcall Function17d3f6
 	farcall Function106464
 	call ExitMenu
 	farcall HDMATransferTilemapAndAttrmap_Overworld

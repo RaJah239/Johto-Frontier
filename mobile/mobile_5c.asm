@@ -43,53 +43,6 @@ CheckBTMonMovesForErrors:
 	jr nz, .loop
 	ret
 
-Function170cc6:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wDecompressScratch)
-	ldh [rSVBK], a
-	ld hl, PichuAnimatedMobileGFX
-	ld de, wDecompressScratch
-	call Decompress
-	ld a, 1
-	ldh [rVBK], a
-	ld de, wDecompressScratch
-	ld hl, vTiles0
-	lb bc, BANK(wDecompressScratch), 193
-	call Get2bpp
-	xor a
-	ldh [rVBK], a
-	ld hl, ElectroBallMobileGFX
-	ld de, wDecompressScratch
-	call Decompress
-	ld de, wBGPals1
-	ld hl, vTiles0
-	lb bc, BANK(wDecompressScratch), 83
-	call Get2bpp
-	pop af
-	ldh [rSVBK], a
-	ret
-
-Function170d02:
-	ld a, $1
-	ldh [rVBK], a
-	ld de, PichuBorderMobileGFX
-	ld hl, vTiles0 tile $c1
-	lb bc, BANK(PichuBorderMobileGFX), 24
-	call Get2bpp
-	xor a
-	ldh [rVBK], a
-	ret
-
-PichuAnimatedMobileGFX:
-INCBIN "gfx/mobile/pichu_animated.2bpp.lz"
-
-ElectroBallMobileGFX:
-INCBIN "gfx/mobile/electro_ball.2bpp.lz"
-
-PichuBorderMobileGFX:
-INCBIN "gfx/mobile/pichu_border.2bpp"
-
 Function171c87:
 	call DisableLCD
 	ld hl, AsciiFontGFX

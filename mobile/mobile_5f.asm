@@ -210,48 +210,6 @@ MenuData_NormalInverseNeutral:
 	db "Inverse Mode@"
 	db "Neutral Mode@"
 
-Function17d3f6:
-	call ClearBGPalettes
-	call ClearSprites
-	call ClearScreen
-	farcall HDMATransferTilemapAndAttrmap_Overworld
-
-Function17d405:
-	call DisableLCD
-	ld hl, vTiles0 tile $ee
-	ld de, wc608
-	ld bc, 1 tiles
-	call CopyBytes
-	ld a, $1
-	ldh [rVBK], a
-	ld hl, PokemonNewsGFX
-	ld de, vTiles1
-	ld bc, $48 tiles
-	call CopyBytes
-	xor a
-	ld hl, vTiles2 tile $7f
-	ld bc, 1 tiles
-	call ByteFill
-	ld hl, wc608
-	ld de, vTiles0 tile $ee
-	ld bc, 1 tiles
-	call CopyBytes
-	xor a
-	ldh [rVBK], a
-	call EnableLCD
-	ldh a, [rSVBK]
-	push af
-	ld a, $5
-	ldh [rSVBK], a
-	ld hl, PokemonNewsPalettes
-	ld de, wBGPals1
-	ld bc, 8 palettes
-	call CopyBytes
-	call SetDefaultBGPAndOBP
-	pop af
-	ldh [rSVBK], a
-	ret
-
 Function17d5f6:
 	ld a, $5
 	ldh [rSVBK], a
@@ -2602,14 +2560,8 @@ Function17e6de:
 	jr nz, .asm_17e6ee
 	ret
 
-PokemonNewsGFX:
-INCBIN "gfx/mobile/pokemon_news.2bpp"
-
 PostalMarkGFX:
 INCBIN "gfx/font/postal_mark.2bpp"
-
-PokemonNewsPalettes:
-INCLUDE "gfx/mobile/pokemon_news.pal"
 
 Function17f4f6:
 	ld a, [wcd6a]
