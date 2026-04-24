@@ -3514,45 +3514,6 @@ Function11b6b4:
 	call AddMobileMonToParty
 	ret
 
-Function11b93b:
-	ld a, BANK(s5_a800)
-	call OpenSRAM
-	xor a
-	ld [s5_a800], a
-	ld hl, sOfferGender
-	ld de, wc608
-	ld bc, TRADE_CORNER_REQUEST_LENGTH
-	call CopyBytes
-	call CloseSRAM
-
-	ld a, LOW(wUnknownGender)
-	ld [wMobileMonSpeciesPointer], a
-	ld a, HIGH(wUnknownGender)
-	ld [wMobileMonSpeciesPointer + 1], a
-
-	ld a, LOW(wUnknownMon)
-	ld [wMobileMonStructPointer], a
-	ld a, HIGH(wUnknownMon)
-	ld [wMobileMonStructPointer + 1], a
-
-	ld a, LOW(wUnknownMonOT)
-	ld [wMobileMonOTPointer], a
-	ld a, HIGH(wUnknownMonOT)
-	ld [wMobileMonOTPointer + 1], a
-
-	ld a, LOW(wUnknownMonNick)
-	ld [wMobileMonNicknamePointer], a
-	ld a, HIGH(wUnknownMonNick)
-	ld [wMobileMonNicknamePointer + 1], a
-
-	ld a, LOW(wUnknownMonMail)
-	ld [wMobileMonMailPointer], a
-	ld a, HIGH(wUnknownMonMail)
-	ld [wMobileMonMailPointer + 1], a
-	call AddMobileMonToParty
-	farcall SaveAfterLinkTrade
-	ret
-
 AddMobileMonToParty:
 	ld hl, wPartyCount
 	ld a, [hl]

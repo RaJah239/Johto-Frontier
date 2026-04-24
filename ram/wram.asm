@@ -701,15 +701,15 @@ wOfferMonNick::    ds NAME_LENGTH_JAPANESE - 1
 wOfferMonMail::    mailmsg_jp wOfferMonMail
 
 NEXTU
-wUnknownGender::     db
+wUnknownGender::     db ; unused
 wUnknownSpecies::    db
 wUnknownReqGender::  db
 wUnknownReqSpecies:: db
 wUnknownMonSender::  ds NAME_LENGTH_JAPANESE - 1
 wUnknownMon::        party_struct wUnknownMon
-wUnknownMonOT::      ds NAME_LENGTH_JAPANESE - 1
-wUnknownMonNick::    ds NAME_LENGTH_JAPANESE - 1
-wUnknownMonMail::    mailmsg_jp wUnknownMonMail
+wUnknownMonOT::      ds NAME_LENGTH_JAPANESE - 1 ; unused
+wUnknownMonNick::    ds NAME_LENGTH_JAPANESE - 1 ; unused
+wUnknownMonMail::    mailmsg_jp wUnknownMonMail  ; unused
 
 NEXTU
 wc608:: ds 7

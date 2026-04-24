@@ -234,8 +234,8 @@ s5_a800:: db
 
 sOfferEmail::      ds MOBILE_EMAIL_LENGTH
 sOfferTrainerID::  dw ; unused
-sOfferSecretID::   dw
-sOfferGender::     db
+sOfferSecretID::   dw ; unused
+sOfferGender::     db ; unused
 sOfferSpecies::    db ; unused
 sOfferReqGender::  db
 sOfferReqSpecies:: db
