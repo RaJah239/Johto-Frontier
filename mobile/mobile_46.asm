@@ -253,15 +253,7 @@ BattleTowerRoomMenu_InitRAM:
 	ldh [hMobileReceive], a
 	ldh [hMobile], a
 	ei
-	farcall Function106464
-	farcall Function115d99
-	farcall Function11615a
-	ld a, BANK(s5_bfff) ; to go
-	call OpenSRAM ; to go
-	xor a ; to go
-	ld [s5_bfff], a ; to go
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 Function118440: ; to go
 	push af
@@ -2289,7 +2281,6 @@ Function11a00e: ; to go
 	call CopyBytes
 	ld a, $1
 	ldh [rSVBK], a
-	farcall Function115d99
 	ld c, $0
 	farcall Function115e18
 	ld a, $1
@@ -2307,10 +2298,8 @@ Function11a00e: ; to go
 	call PushWindow
 	farcall Function11765d
 	farcall Function117ab4
-	farcall Function106464
 	call ExitMenu
 	farcall HDMATransferTilemapAndAttrmap_Overworld
-	farcall Function115d99
 	ld c, $0
 	farcall Function115e18
 	ld a, $1
@@ -2327,10 +2316,8 @@ Function11a0ca:
 	ld [wMenuBorderBottomCoord], a
 	call PushWindow
 	farcall Function11765d
-	farcall Function106464
 	call ExitMenu
 	farcall HDMATransferTilemapAndAttrmap_Overworld
-	farcall Function115d99
 	ld c, $0
 	farcall Function115e18
 	ld a, $1
@@ -3328,7 +3315,6 @@ Function11a9ce:
 	call ClearBGPalettes
 	call ReloadTilesetAndPalettes
 	call Call_ExitMenu
-	farcall Function106464
 	call GSReloadPalettes
 	farcall FinishExitMenu
 	call UpdateSprites

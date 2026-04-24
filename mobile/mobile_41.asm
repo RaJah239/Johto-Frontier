@@ -285,21 +285,3 @@ endr
 .asm_10630d
 	inc hl
 	ret
-
-; functions related to the cable club and various NPC scripts referencing communications
-
-Function106464::
-	ld de, MobileDialingFrameGFX
-	ld hl, vTiles2 tile $62
-	ld c, 9
-	ld b, BANK(MobileDialingFrameGFX)
-	call Get2bpp
-	ld de, $40b0
-	ld hl, vTiles2 tile $6b
-	ld b, $0f ; no graphics at 0f:40b0; JP leftover???
-	call Get2bpp
-	farcall LoadFrame
-	ret
-
-MobileDialingFrameGFX:
-INCBIN "gfx/mobile/dialing_frame.2bpp"

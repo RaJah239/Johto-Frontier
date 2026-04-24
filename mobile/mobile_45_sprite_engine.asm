@@ -1,21 +1,3 @@
-Function115d99:
-	ld de, MobileDialingGFX
-	ld hl, vTiles0 tile $60
-	lb bc, BANK(MobileDialingGFX), 20
-	call Get2bpp
-	xor a
-	ld [wc305], a
-	ld [wc306], a
-	ld [wc309], a
-	ld [wc30a], a
-	ld [wc30b], a
-	ld [wc30c], a
-	ld a, $10
-	ld [wc307], a
-	ld a, $18
-	ld [wc308], a
-	ret
-
 Function115dc3:
 	xor a
 	ld [wc305], a
@@ -95,33 +77,3 @@ Unknown_115e79:
 	db $0f, $08
 	db $00, $08
 	db -1
-
-MobileDialingGFX::
-INCBIN "gfx/mobile/dialing.2bpp"
-
-Function11615a:
-	xor a
-	ld [wc30d], a
-	ld [wc319], a
-	ld [wc310], a
-	ld [wc311], a
-	ld [wc312], a
-	ld [wc313], a
-	ld [wc314], a
-	ld [wc314 + 1], a
-	ld [wc314 + 4], a
-	ld [wc3f6], a
-	ld [wc3f8], a
-	ld [wc3f2], a
-	ld [wc3f4], a
-	ld a, $24
-	ld [wc3f5], a
-	ld a, $7
-	ld [wc3f7], a
-	ld a, $b0
-	ld [wc30e], a
-	ld [wc3f1], a
-	ld a, $48
-	ld [wc30f], a
-	ld [wc3f3], a
-	ret
