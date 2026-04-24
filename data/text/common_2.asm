@@ -996,6 +996,12 @@ _PocketPCNoSignalText::
 	line "accessed!"
 	done
 
+_HealedPartyShuttingDownText::
+	text "<PLAYER>'s Party"
+	line "was fully healed!"
+	roll "…shutting down…"
+	done
+
 _PokecenterPCWhoseText::
 	text "Access whose PC?"
 	done

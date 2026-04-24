@@ -212,9 +212,21 @@ TurnOffPCOrHealParty:
 	farcall HealParty
 	ld de, SFX_FULL_HEAL
 	call PC_WaitPlaySFX
+	push af
+	; set text speed to fast
+	ld a, TEXT_DELAY_FAST
+	ld [wOptions], a
+	ld hl, .HealedPartyShuttingDownText
+	call PrintText
+	; restore the original text speed setting
+	pop af
 .shutdown:
 	scf
 	ret
+
+.HealedPartyShuttingDownText:
+	text_far _HealedPartyShuttingDownText
+	text_end
 
 PC_PlayBootSound:
 	ld de, SFX_BOOT_PC
