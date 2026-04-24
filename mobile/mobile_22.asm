@@ -1425,89 +1425,18 @@ Palette_8a624:
 	RGB 31, 31, 31
 	RGB 00, 00, 00
 
-Function8ac76:
-	call Function891fe
-	call Function8b677
-
 Function8ac7c: ; to go
-	call Function8b7bd
-	jr z, .asm_8acf0
-	ld a, c
-	ld [wd02f], a
-	ld [wMenuSelection], a
-	call OpenSRAMBank4
 	call Function8931b
 	call Function8932d
-	call CloseSRAM
-	jr nc, .asm_8acb0
 	call OpenSRAMBank4
-	ld hl, $0011
-	add hl, bc
 	call Function89b45
-	call CloseSRAM
-	jr nc, .asm_8accc
-	call OpenSRAMBank4
 	call Function892b7
-	call CloseSRAM
-	jr .asm_8accc
-
-.asm_8acb0
 	call Function8ad0b
-	jr c, Function8ac76
-	and a
-	jr nz, .asm_8accc
-	call OpenSRAMBank4
-	ld h, b
-	ld l, c
-	ld d, $0
-	ld e, $6
-	add hl, de
-	ld d, h
-	ld e, l
-	pop hl
-	ld c, $1f
 	call Function89193
-	jr .asm_8ace4
-
-.asm_8accc
-	pop hl
-	call OpenSRAMBank4
-	ld d, b
-	ld e, c
-	ld c, $6
 	call Function89193
-	ld a, $6
-	add e
-	ld e, a
-	ld a, $0
-	adc d
-	ld d, a
-	ld c, $1f
 	call Function89193
-
-.asm_8ace4
-	call CloseSRAM
-	call LoadStandardFont
-	ld a, [wd02f]
-	ld c, a
-	and a
-	ret
-
-.asm_8acf0
-	ld hl, MobileCardFolderFinishRegisteringCardsText
-	call PrintText
-	ld a, $2
 	call Function89259
-	jmp c, Function8ac7c
-	call LoadStandardFont
-	pop de
-	ld c, $0
-	scf
-	ret
-
-MobileCardFolderFinishRegisteringCardsText:
-	text_far _MobileCardFolderFinishRegisteringCardsText
-	text_end
+	call Function891fe
 
 Function8ad0b: ; to go
 .asm_8ad0b

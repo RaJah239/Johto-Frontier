@@ -10,6 +10,3 @@ INCBIN "gfx/mobile/card_folder.2bpp"
 
 CardSpriteGFX::
 INCBIN "gfx/mobile/card_sprite.2bpp"
-
-MobileCardListGFX::
-INCBIN "gfx/mobile/card_list.2bpp"

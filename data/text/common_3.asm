@@ -618,11 +618,6 @@ _MainMenuTimeUnknownText::
 	text "Clock time unknown"
 	done
 
-_MobileCardFolderFinishRegisteringCardsText::
-	text "Finish registering"
-	line "CARDS?"
-	done
-
 _PhoneWrongNumberText::
 	text "Huh? Sorry, wrong"
 	line "number!"
