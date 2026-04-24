@@ -63,7 +63,7 @@ DEF NUM_SPRITEANIMDICT_ENTRIES EQU 10
 	const SPRITE_ANIM_OBJ_GS_INTRO_HO_OH_LUGIA      ; 1a
 	const SPRITE_ANIM_OBJ_HEADBUTT                  ; 1b
 	const SPRITE_ANIM_OBJ_EGG_HATCH                 ; 1c
-	const SPRITE_ANIM_OBJ_EZCHAT_CURSOR             ; 1d
+	const SPRITE_ANIM_OBJ_EZCHAT_CURSOR             ; 1d unused
 	const SPRITE_ANIM_OBJ_BLUE_WALK                 ; 1e
 	const SPRITE_ANIM_OBJ_MOBILE_TRADE_SENT_BALL    ; 1f
 	const SPRITE_ANIM_OBJ_MOBILE_TRADE_OT_BALL      ; 20

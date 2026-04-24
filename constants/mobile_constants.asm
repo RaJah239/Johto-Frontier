@@ -53,8 +53,6 @@
 	const EZCHAT_FAREWELLS
 	const EZCHAT_THISANDTHAT
 
-DEF NUM_KANA EQU 45 ; length of SortedPokemon table (see mobile/fixed_words.asm)
-
 DEF MOBILE_LOGIN_PASSWORD_LENGTH EQU 17
 DEF MOBILE_PHONE_NUMBER_LENGTH EQU 20
 

@@ -3363,7 +3363,6 @@ Function17f3c9: ; to go
 	call CopyBytes
 	pop de
 	ld c, $0
-	farcall Function11c075
 	push hl
 	ld hl, wc708
 	ld de, wcd36
