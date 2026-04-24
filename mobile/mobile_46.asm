@@ -26,7 +26,6 @@ _BattleTowerRoomMenu:
 .skip
 	call BattleTowerRoomMenu_Jumptable
 	call BattleTowerRoomMenu_WriteMessage
-	farcall Function115dd3 ; remove this
 	call DelayFrame
 	ld a, [wBattleTowerRoomMenuJumptableIndex]
 	ld hl, wcd33
@@ -110,7 +109,6 @@ Function118233:
 .asm_11825f
 	call Function118624
 	call BattleTowerRoomMenu_WriteMessage
-	farcall Function115dd3
 	call DelayFrame
 	ld a, [wBattleTowerRoomMenuJumptableIndex]
 	ld hl, wcd33
@@ -144,7 +142,6 @@ Function118284:
 .asm_1182b0
 	call Function1186f5
 	call BattleTowerRoomMenu_WriteMessage
-	farcall Function115dd3
 	call DelayFrame
 	ld a, [wBattleTowerRoomMenuJumptableIndex]
 	ld hl, wcd33
@@ -179,7 +176,6 @@ Function118329:
 .asm_118355
 	call Function118671
 	call BattleTowerRoomMenu_WriteMessage
-	farcall Function115dd3
 	call DelayFrame
 	ld a, [wBattleTowerRoomMenuJumptableIndex]
 	ld hl, wcd33
@@ -214,7 +210,6 @@ Function11837a:
 .asm_1183a6
 	call Function1186b2
 	call BattleTowerRoomMenu_WriteMessage
-	farcall Function115dd3
 	call DelayFrame
 	ld a, [wBattleTowerRoomMenuJumptableIndex]
 	ld hl, wcd33
