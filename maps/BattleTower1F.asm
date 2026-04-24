@@ -33,11 +33,8 @@ BattleTower1FCheckStateScene:
 	sdefer BattleTower_LeftWithoutSaving
 	setval BATTLETOWERACTION_CHALLENGECANCELED
 	special BattleTowerAction
-	setval BATTLETOWERACTION_06 ; to go
-	special BattleTowerAction ; to go
 .SkipEverything:
 	setscene SCENE_BATTLETOWER1F_NOOP
-	; fallthrough
 BattleTower1FNoopScene:
 	end
 
@@ -89,9 +86,6 @@ Script_ChooseChallenge:
 	special BattleTowerAction
 	special BattleTowerRoomMenu
 	ifequal $a, Script_Menu_ChallengeExplanationCancel
-	ifnotequal $0, Script_MobileError ; to go
-	setval BATTLETOWERACTION_11 ; to go
-	special BattleTowerAction ; to go
 	writetext Text_RightThisWayToYourBattleRoom
 	waitbutton
 	closetext
@@ -393,11 +387,6 @@ Script_BattleTowerSettings:
  	writetext Text_BattleTower_SetToTypelessMode
 	promptbutton
 	sjump Script_Menu_ChallengeExplanationCancel
-
-Script_MobileError:
-	special BattleTowerMobileError
-	closetext
-	end
 
 BattleTower_LeftWithoutSaving:
 	opentext

@@ -35,17 +35,6 @@ MobileTradeAnimation_RetrieveGivemonFromGTS: ; unreferenced
 	mobiletradeanim MobileTradeAnim_ShowOTMonFromGTS
 	mobiletradeanim EndMobileTradeAnim
 
-Function10804d:
-	ld a, $0
-	ld [wcf65], a
-	ld de, .TradeAnimScript
-	jr RunMobileTradeAnim_NoFrontpics
-
-.TradeAnimScript:
-	mobiletradeanim MobileTradeAnim_11
-	mobiletradeanim MobileTradeAnim_ShowOTMonFromGTS
-	mobiletradeanim EndMobileTradeAnim
-
 RunMobileTradeAnim_NoFrontpics:
 	ld hl, wTradeAnimAddress
 	ld [hl], e

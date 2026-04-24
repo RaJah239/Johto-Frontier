@@ -207,8 +207,8 @@ sOfferTrainerID::  dw ; unused
 sOfferSecretID::   dw ; unused
 sOfferGender::     db ; unused
 sOfferSpecies::    db ; unused
-sOfferReqGender::  db
-sOfferReqSpecies:: db
+sOfferReqGender::  db ; unused
+sOfferReqSpecies:: db ; unused
 sOfferMonSender::  ds NAME_LENGTH_JAPANESE - 1
 sOfferMon::        party_struct sOfferMon
 sOfferMonOT::      ds NAME_LENGTH_JAPANESE - 1

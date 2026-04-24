@@ -49,7 +49,6 @@ RunBattleTowerTrainer:
 	ld [wLinkMode], a
 	farcall HealParty
 	call ReadBTTrainerParty
-	call Clears5_a89a ; to go
 
 	predef StartBattle
 
@@ -236,25 +235,15 @@ BattleTowerAction:
 	dw BattleTowerAction_GetChallengeState
 	dw BattleTowerAction_SetByteToQuickSaveChallenge
 	dw BattleTowerAction_SetByteToCancelChallenge
-	dw BattleTowerAction_05 ; to go and remove function after the constants
-	dw BattleTowerAction_06 ; to go
 	dw SaveBattleTowerLevelGroup
 	dw LoadBattleTowerLevelGroup
 	dw BattleTower_CheckSaveFileExistsAndIsYours
 	dw BattleTowerAction_0A
 	dw BattleTowerAction_GSBall
-	dw BattleTowerAction_0C ; to go
-	dw BattleTowerAction_0D ; to go
 	dw BattleTowerAction_EggTicket
 	dw BattleTowerAction_0F
-	dw BattleTowerAction_10 ; to go
-	dw BattleTowerAction_11 ; to go
-	dw BattleTowerAction_12 ; to go
-	dw BattleTowerAction_13 ; to go
 	dw BattleTowerAction_14
 	dw BattleTowerAction_15
-	dw BattleTowerAction_16 ; to go
-	dw BattleTowerAction_17 ; to go
 	dw ResetBattleTowerTrainersSRAM
 	dw BattleTower_GiveReward
 	dw BattleTowerAction_1C
@@ -395,111 +384,6 @@ SetBattleTowerChallengeState:
 	call CloseSRAM
 	ret
 
-BattleTowerAction_05:
-	ld a, BANK(s5_aa8c) ; aka BANK(s5_be46)
-	call OpenSRAM
-	ld a, [s5_aa8c]
-	ld b, a
-	ld a, [s5_be46]
-	ld [wScriptVar], a
-	call CloseSRAM
-	and a
-	ret z
-	ld a, b
-	cp 2
-	jr nc, .asm_1707ef
-	push bc
-	call UpdateTime
-	pop bc
-	ld a, BANK(s5_aa8c)
-	call OpenSRAM
-	ld a, [s5_aa8b]
-	call CloseSRAM
-	ld c, a
-	ld a, [wCurDay]
-	sub c
-	jr c, .asm_1707e5
-	cp 8
-	jr nc, .asm_1707ef
-	ld a, b
-	and a
-	jr nz, .asm_1707ef
-	ret
-.asm_1707e5
-	ld hl, wCurDay
-	ld a, $8c
-	sub c
-	add [hl]
-	cp 8
-	ret c
-.asm_1707ef
-	ld a, 8
-	ld [wScriptVar], a
-
-BattleTowerAction_06:
-	ld a, BANK(s5_be46) ; aka BANK(s5_aa8b) and BANK(s5_aa8c)
-	call OpenSRAM
-	xor a
-	ld [s5_be46], a
-	ld [s5_aa8b], a
-	ld [s5_aa8c], a
-	call CloseSRAM
-	ret
-
-BattleTowerAction_16:
-	call UpdateTime
-	ld a, BANK(s5_b2f9) ; aka BANK(s5_b2fa)
-	call OpenSRAM
-	ld a, [wCurDay]
-	ld [s5_b2f9], a
-	xor a
-	ld [s5_b2fa], a
-	call CloseSRAM
-	ret
-
-BattleTowerAction_17:
-	xor a
-	ld [wScriptVar], a
-	ld a, BANK(s5_b2f9) ; aka BANK(s5_b2fa)
-	call OpenSRAM
-	ld a, [s5_b2f9]
-	ld c, a
-	ld a, [s5_b2fa]
-	ld b, a
-	call CloseSRAM
-	cp 2
-	jr nc, .asm_170853
-	push bc
-	call UpdateTime
-	pop bc
-	ld a, [wCurDay]
-	sub c
-	jr c, .asm_170849
-	cp 11
-	jr nc, .asm_170853
-	ld a, b
-	and a
-	jr nz, .asm_170853
-	ret
-
-.asm_170849
-	ld hl, wCurDay
-	ld a, 140
-	sub c
-	add [hl]
-	cp 11
-	ret c
-.asm_170853
-	ld a, 1
-	ld [wScriptVar], a
-	ld a, BANK(s5_b2f9) ; aka BANK(s5_b2fa)
-	call OpenSRAM
-	xor a
-	ld [s5_b2f9], a
-	ld [s5_b2fa], a
-	call CloseSRAM
-	ret
-
 SaveBattleTowerLevelGroup:
 	ld a, BANK(sBTChoiceOfLevelGroup)
 	call OpenSRAM
@@ -555,63 +439,6 @@ BattleTowerAction_GSBall:
 	call OpenSRAM
 	ld a, [sGSBallFlag]
 	ld [wScriptVar], a
-	call CloseSRAM
-	ret
-
-BattleTowerAction_0C:
-	call UpdateTime
-	ld a, BANK(s5_aa8b) ; aka BANK(s5_aa8c), BANK(s5_aa5d), BANK(s5_aa48), and BANK(s5_aa47)
-	call OpenSRAM
-	ld a, [wCurDay]
-	ld [s5_aa8b], a
-	xor a
-	ld [s5_aa8c], a
-	ld a, [s5_aa5d]
-	cp 2
-	jr nc, .asm_1708ec
-	ld a, [wCurDay]
-	ld [s5_aa48], a
-	ld a, 1
-	ld [s5_aa47], a
-.asm_1708ec
-	call CloseSRAM
-	ret
-
-BattleTowerAction_0D:
-	xor a ; FALSE
-	ld [wScriptVar], a
-	call UpdateTime
-	ld a, BANK(s5_aa48) ; aka BANK(s5_aa47)
-	call OpenSRAM
-	ld a, [s5_aa48]
-	ld c, a
-	ld a, [s5_aa47]
-	call CloseSRAM
-	and a
-	ret z
-	ld hl, wCurDay
-	ld a, c
-	cp [hl]
-	jr nz, Function170923
-	ld a, BANK(s5_aa5d)
-	call OpenSRAM
-	ld a, [s5_aa5d]
-	call CloseSRAM
-	cp 5
-	ret c
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
-
-Function170923:
-	ld a, BANK(s5_aa48) ; aka BANK(s5_aa47) and BANK(s5_aa5d)
-	call OpenSRAM
-	xor a
-	ld [s5_aa48], a
-	ld [s5_aa47], a
-	ld hl, s5_aa5d
-	ld bc, MOBILE_LOGIN_PASSWORD_LENGTH
-	call ByteFill
 	call CloseSRAM
 	ret
 
@@ -694,152 +521,6 @@ BattleTowerAction_0F:
 	ld [wScriptVar], a
 	pop af
 	ldh [rSVBK], a
-	ret
-
-BattleTowerAction_10:
-	xor a ; FALSE
-	ld [wScriptVar], a
-	ld a, BANK(s5_a800)
-	call OpenSRAM
-	ld a, [s5_a800]
-	call CloseSRAM
-	cp 6
-	jr nc, .invalid
-	ld e, a
-	ld d, 0
-	ld hl, .Jumptable
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
-
-.invalid
-	ld a, BANK(s5_a800)
-	call OpenSRAM
-	xor a
-	ld [s5_a800], a
-	call CloseSRAM
-	ret
-
-.Jumptable:
-	dw .NoAction
-	dw .NoAction
-	dw .DoAction1
-	dw .DoAction1
-	dw .Action4
-	dw .Action5
-
-.DoAction1:
-	ld a, BANK(s5_a800)
-	call OpenSRAM
-	ld a, 1
-	ld [s5_a800], a
-	call CloseSRAM
-
-.NoAction:
-	ret
-
-.Action4:
-	ld a, BANK(s5_b023) ; aka BANK(sOfferReqGender) and BANK(sOfferReqSpecies)
-	call OpenSRAM
-	ld hl, s5_b023
-	ld de, wc608
-	ld bc, 105
-	call CopyBytes
-	ld a, [sOfferReqGender]
-	ld [wcd30], a
-	ld a, [sOfferReqSpecies]
-	ld [wcd31], a
-	call CloseSRAM
-	farcall Function11b6b4
-	farcall Function17d0f3
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
-
-.Action5:
-	ld a, 0 ; ???
-	call OpenSRAM
-	ld hl, wRTC
-	ld de, wc608
-	ld bc, 4
-	call CopyBytes
-	call CloseSRAM
-	ld a, BANK(s5_b08c)
-	call OpenSRAM
-	ld hl, s5_b08c
-	ld de, wc608
-	ld c, 4
-.compare_loop
-	ld a, [de]
-	inc de
-	cp [hl]
-	jr nz, .different
-	inc hl
-	dec c
-	jr nz, .compare_loop
-	call CloseSRAM
-	ld a, [wMapGroup]
-	ld b, a
-	ld a, [wMapNumber]
-	ld c, a
-	call GetMapSceneID
-	ld a, d
-	or e
-	jr z, .no_scene
-	ld a, [de]
-	and a
-	ret nz
-
-.no_scene
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
-
-.different
-	call CloseSRAM
-	ld a, BANK(s5_a800)
-	call OpenSRAM
-	xor a
-	ld [s5_a800], a
-	call CloseSRAM
-	ld [wScriptVar], a
-	ld a, [wMapGroup]
-	ld b, a
-	ld a, [wMapNumber]
-	ld c, a
-	call GetMapSceneID
-	ld a, d
-	or e
-	jr z, .no_scene_2
-	xor a
-	ld [de], a
-
-.no_scene_2
-	ret
-
-BattleTowerAction_11:
-	ld c, FALSE
-	jr Set_s5_aa8d
-
-BattleTowerAction_12:
-	ld c, TRUE
-Set_s5_aa8d:
-	ld a, BANK(s5_aa8d)
-	call OpenSRAM
-	ld a, c
-	ld [s5_aa8d], a
-	call CloseSRAM
-	ret
-
-BattleTowerAction_13:
-	ld a, BANK(s5_aa8d)
-	call OpenSRAM
-	ld a, [s5_aa8d]
-	ld [wScriptVar], a
-	call CloseSRAM
 	ret
 
 BattleTowerAction_14:
