@@ -221,94 +221,6 @@ Function17d5f6:
 	ldh [rSVBK], a
 	ret
 
-Function17d60b:
-	ld a, $5
-	call OpenSRAM
-	ld hl, $b1d3
-	ld de, wc608
-	ld bc, $20
-	call CopyBytes
-	ld a, [$b1b1]
-	ld c, a
-	ld a, [$b1b2]
-	ld b, a
-	ld a, [$b1b3]
-	ld l, a
-	ld a, [$b1b4]
-	ld h, a
-	call CloseSRAM
-	ld a, $6
-	call OpenSRAM
-	ld de, wc708
-	ld a, c
-	and a
-	jr z, .asm_17d684
-.asm_17d63b
-	push bc
-	ld a, l
-	ld [de], a
-	inc de
-	ld a, h
-	ld [de], a
-	inc de
-	ld bc, $a
-	add hl, bc
-	pop bc
-	ld a, [hli]
-	ld [wcd4a], a
-	ld a, [hli]
-	ld [wcd49], a
-	push hl
-	push de
-	ld hl, wc608
-	ld e, b
-	ld d, $0
-	add hl, de
-	ld a, [hli]
-	ld [wcd4b], a
-	ld a, [hl]
-	ld [wcd4c], a
-	pop de
-	pop hl
-	inc b
-	inc b
-	dec c
-	dec c
-	jr z, .asm_17d684
-	push bc
-	push de
-	ld a, [wcd49]
-	ld c, a
-	ld a, [wcd4a]
-	ld b, a
-	ld a, [wcd4b]
-	ld e, a
-	ld a, [wcd4c]
-	ld d, a
-.asm_17d67a
-	add hl, de
-	dec bc
-	ld a, c
-	or b
-	jr nz, .asm_17d67a
-	pop de
-	pop bc
-	jr .asm_17d63b
-
-.asm_17d684
-	call CloseSRAM
-	ld a, $5
-	call OpenSRAM
-	ld hl, wc708
-	ld de, $b1b3
-	ld a, [$b1b1]
-	ld c, a
-	ld a, [$b1b2]
-	ld b, a
-	call CopyBytes
-	call CloseSRAM
-	ret
-
 Function17d711:
 .crash_loop
 	cp $31
@@ -1915,51 +1827,7 @@ Function17e293:
 	ld [de], a
 	ret
 
-Function17e2a7: ; to go
-	call IncCrashCheckPointer
-	call HlToCrashCheckPointer
-	call Function17e32b
-	xor a
-	ld [wcf66], a
-	farcall Function118233
-	ld de, PostalMarkGFX
-	ld hl, vTiles2 tile $60
-	lb bc, BANK(PostalMarkGFX), 1
-	call Get2bpp
-	ld a, [wMobileErrorCodeBuffer]
-	and a
-	jr z, .asm_17e2d8
-	cp $a
-	jr z, .asm_17e2f7
-	cp $b
-	jr z, .asm_17e300
-	call Function17e309
-	ret
-
-.asm_17e2d8
-	call Function17d60b
-	call Function17e349
-	xor a
-	ld [wcd7a], a
-	ld a, $5
-	call OpenSRAM
-	ld hl, $aa73
-	ld de, $aa7f
-	ld bc, $c
-	call CopyBytes
-	call CloseSRAM
-	ret
-
-.asm_17e2f7
-	call Function17e349
-	ld a, $1
-	ld [wcd7a], a
-	ret
-
-.asm_17e300
-	call Function17e349
-	ld a, $2
-	ld [wcd7a], a
+Function17e2a7: ; to go herenext
 	ret
 
 Function17e309: ; to go
@@ -2559,9 +2427,6 @@ Function17e6de:
 	dec b
 	jr nz, .asm_17e6ee
 	ret
-
-PostalMarkGFX:
-INCBIN "gfx/font/postal_mark.2bpp"
 
 Function17f4f6:
 	ld a, [wcd6a]
