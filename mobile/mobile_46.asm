@@ -127,7 +127,7 @@ BattleTowerRoomMenu_Jumptable:
 	dw BattleTowerRoomMenu_PickLevelMessage
 	dw BattleTowerRoomMenu_PlacePickLevelMenu
 	dw BattleTowerRoomMenu_UpdatePickLevelMenu
-	dw BattleTowerRoomMenu_DoNothing
+	dw BattleTowerRoomMenu_DoNothing ; use this for unused indexes like mobile
 	dw BattleTowerRoomMenu_PartyMonTopsThisLevelMessage
 	dw BattleTowerRoomMenu_WaitForMessage
 	dw BattleTowerRoomMenu_DelayRestartMenu
@@ -714,7 +714,7 @@ BattleTowerRoomMenu_IncrementJumptable:
 	inc [hl]
 	ret
 
-BattleTowerRoomMenu2:
+BattleTowerRoomMenu2: ; herenext
 	ldh a, [rSVBK]
 	ld [wcd8c], a
 	ld a, $1
@@ -732,7 +732,7 @@ BattleTowerRoomMenu2:
 	jumptable .Jumptable, wBattleTowerRoomMenu2JumptableIndex
 
 .Jumptable:
-	dw Function119f3f
+	dw Function119f3f ; use this for unused indexes like mobile, test what is are not needed
 	dw Function119f45
 	dw Function119f56
 	dw Function119f76
