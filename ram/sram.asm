@@ -190,13 +190,13 @@ SECTION "SRAM Bank 4", SRAM
 
 SECTION "SRAM Mobile 2", SRAM ; to go SECTION "SRAM Trainer Rankings", SRAM
 
-sTrainerRankings::
-sTrainerRankingsChecksum:: ds 2
-sTrainerRankingsEnd::
+sTrainerRankings:: ; unused
+sTrainerRankingsChecksum:: ds 2 ; unused
+sTrainerRankingsEnd:: ; unused
 
 	ds 130
 
-sTrainerRankingsBackup:: ds sTrainerRankingsEnd - sTrainerRankings
+sTrainerRankingsBackup:: ds sTrainerRankingsEnd - sTrainerRankings ; unused
 
 	ds $6fa
 

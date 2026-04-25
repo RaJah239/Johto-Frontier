@@ -35,7 +35,6 @@
 	const MOBILEAPI_20
 	const MOBILEAPI_21
 
-; MobileEZChatCategoryPointers indexes (see mobile/fixed_words.asm)
 	const_def
 	const EZCHAT_POKEMON ; unused to remove
 	const EZCHAT_TYPES

@@ -112,12 +112,6 @@ SGB_ApplyPartyMenuHPPals:
 	ld [hl], e
 	ret
 
-LoadTrainerClassPaletteAsNthBGPal:
-	ld a, [wTrainerClass]
-	call GetTrainerPalettePointer
-	ld a, e
-	jr LoadNthMiddleBGPal
-
 LoadMonPaletteAsNthBGPal:
 	ld a, [wCurPartySpecies]
 	call _GetMonPalettePointer
@@ -129,7 +123,6 @@ LoadMonPaletteAsNthBGPal:
 	inc hl
 	inc hl
 	inc hl
-
 LoadNthMiddleBGPal:
 	push hl
 	ld hl, wBGPals1
