@@ -37,10 +37,6 @@ _BattleTowerRoomMenu:
 BattleTowerRoomMenu_DoNothing:
 	ret
 
-Function118284:
-	call Function118473
-	ret
-
 BattleTowerRoomMenu_InitRAM:
 	di
 	ldh a, [rIE]

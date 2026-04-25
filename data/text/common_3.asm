@@ -590,30 +590,6 @@ _SlotsDarnText::
 	text "Darn!"
 	done
 
-_MobileStadiumEntryText::
-	text "Data for use in"
-	line "the MOBILE STADIUM"
-
-	para "of the N64 #MON"
-	line "STADIUM 2 can be"
-	cont "read here."
-
-	para "Read the data?"
-	done
-
-_MobileStadiumSuccessText::
-	text "Data transfer is"
-	line "complete."
-
-	para "We hope you enjoy"
-	line "MOBILE STADIUM"
-
-	para "battles in the N64"
-	line "#MON STADIUM 2."
-
-	para ""
-	done
-
 _MainMenuTimeUnknownText::
 	text "Clock time unknown"
 	done
