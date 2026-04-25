@@ -1443,7 +1443,7 @@ wcd74:: ds 1
 wOTMonSelection:: ds 2 ; ds BATTLETOWER_PARTY_LENGTH
 wcd77:: ds 1
 
-wMobileCrashCheckPointer:: dw
+wMobileCrashCheckPointer:: dw ; unused
 wcd7a:: ds 2
 wcd7c:: ds 3
 wcd7f:: ds 1

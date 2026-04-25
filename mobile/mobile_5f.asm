@@ -45,70 +45,6 @@ CheckStringForErrors:
 	and a
 	ret
 
-CheckStringForErrors_IgnoreTerminator:
-; Find control chars
-.loop
-	ld a, [de]
-	inc de
-	and a
-	jr z, .next
-	cp "<DEXEND>" + 1
-	jr nc, .next
-	cp "<NEXT>"
-	jr z, .next
-	cp "@"
-	jr z, .next
-
-	cp "ガ"
-	jr c, .end
-	cp "<PLAY_G>"
-	jr c, .next
-	cp "<JP_18>" + 1
-	jr c, .end
-	cp "<NI>"
-	jr c, .next
-	cp "<NO>" + 1
-	jr c, .end
-	cp "<ROUTE>"
-	jr c, .next
-	cp "<GREEN>" + 1
-	jr c, .end
-	cp "<ENEMY>"
-	jr c, .next
-	cp "<ENEMY>" + 1
-	jr c, .end
-	cp "<MOM>"
-	jr c, .next
-
-.end
-	scf
-	ret
-
-.next
-	dec c
-	jr nz, .loop
-	and a
-	ret
-
-CheckStringContainsLessThanBNextCharacters:
-.loop
-	ld a, [de]
-	inc de
-	cp "<NEXT>"
-	jr nz, .next_char
-	dec b
-	jr z, .done
-
-.next_char
-	dec c
-	jr nz, .loop
-	and a
-	ret
-
-.done
-	scf
-	ret
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Parameter: [wScriptVar] = 0..1
 ;
@@ -209,17 +145,3 @@ MenuData_NormalInverseNeutral:
 	db "Normal Mode@"
 	db "Inverse Mode@"
 	db "Neutral Mode@"
-
-IncCrashCheckPointer:
-	ld a, [wMobileCrashCheckPointer]
-	ld l, a
-	ld a, [wMobileCrashCheckPointer + 1]
-	ld h, a
-	inc hl
-
-HlToCrashCheckPointer:
-	ld a, l
-	ld [wMobileCrashCheckPointer], a
-	ld a, h
-	ld [wMobileCrashCheckPointer + 1], a
-	ret
