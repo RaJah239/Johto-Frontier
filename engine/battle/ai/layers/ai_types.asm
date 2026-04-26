@@ -29,6 +29,11 @@ AI_Types:
 	pop bc
 	pop hl
 
+; ignore type effectiveness for 0-damage status moves
+	ld a, [wEnemyMoveStruct + MOVE_POWER]
+	and a
+	jr z, .checkmove
+
 	ld a, [wTypeMatchup]
 	and a
 	jr z, .immune
@@ -37,9 +42,6 @@ AI_Types:
 	jr c, .noteffective
 
 ; effective
-	ld a, [wEnemyMoveStruct + MOVE_POWER]
-	and a
-	jr z, .checkmove
 	dec [hl]
 	jr .checkmove
 
