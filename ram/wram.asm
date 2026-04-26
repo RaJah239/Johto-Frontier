@@ -517,7 +517,11 @@ wCurrentBattleWindow:: db
 ; 3 - Party
 ; 4 - Run
 
-	ds 2
+wEnemyTypeDisplayActive:: db
+; 0 - no
+; 1 - yes
+
+	ds 1
 wEnemyBackupDVs:: dw ; used when enemy is transformed
 
 wDisabledMove:: db

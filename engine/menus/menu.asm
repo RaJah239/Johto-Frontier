@@ -324,9 +324,10 @@ MenuJoypadLoop:
 	ret c
 	ld a, [w2DMenuFlags1]
 	bit 7, a
-	ret nz
+	jr nz, ClearEnemyTypes
 	call GetMenuJoypad
 	ld b, a
+	call ClearEnemyTypes
 	ld a, [wMenuJoypadFilter]
 	and b
 	jr z, .loop
@@ -343,6 +344,20 @@ MenuJoypadLoop:
 	xor a
 	ldh [hBGMapMode], a
 	ret
+
+ClearEnemyTypes:
+	ld a, [wBattleMode]
+	and a
+	ret z
+	ld a, [wCurrentBattleWindow]
+	and a
+	ret nz ; Only do this on the main menu of a battle
+	ldh a, [hJoyPressed]
+	cp START
+	ret z ; no need to refresh if the button pushed was START
+	xor a
+	ld [wEnemyTypeDisplayActive], a
+	farjp UpdateEnemyHUD
 
 Do2DMenuRTCJoypad:
 .loopRTC
@@ -766,6 +781,9 @@ DisplayEnemyTypes:
 	ld a, [wCurrentBattleWindow]
 	and a
 	ret nz ; Only do this on the main menu of a battle
+	ld a, [wEnemyTypeDisplayActive]
+	cp 1
+	ret nc ; no need to refresh if the display is active
 
 	; play sound effect
 	ld de, SFX_MENU
@@ -784,4 +802,6 @@ DisplayEnemyTypes:
 	; coordinates of types
 	hlcoord 2, 1 
 	predef PrintEnemyMonTypes
+	ld a, 1
+	ld [wEnemyTypeDisplayActive], a
 	jmp ApplyTilemap
