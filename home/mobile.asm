@@ -1,54 +1,6 @@
 MobileAPI::
-; Mobile
-	cp $2
 	ld [wMobileAPIIndex], a
-	ld a, l
-	ld [wc986], a
-	ld a, h
-	ld [wc987], a
-	jr nz, .okay
-
-	ld [wc982], a
-	ld a, l
-	ld [wc981], a
-	ld hl, wc983
-	ld a, c
-	ld [hli], a
-	ld a, b
-	ld [hl], a
-
-.okay
-	ld hl, wc822
-	set 6, [hl]
-	ldh a, [hROMBank]
-	push af
-	ld a, BANK(_MobileAPI)
-	ld [wc981], a
-	rst Bankswitch
-
 	jmp _MobileAPI
-
-ReturnMobileAPI::
-; Return from _MobileAPI
-	ld [wc986], a
-	ld a, l
-	ld [wc987], a
-	ld a, h
-	ld [wMobileAPIIndex], a
-
-	pop bc
-	ld a, b
-	ld [wc981], a
-	rst Bankswitch
-
-	ld hl, wc822
-	res 6, [hl]
-	ld hl, wc987
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, [wc986]
-	ret
 
 MobileReceive::
 	ldh a, [hROMBank]

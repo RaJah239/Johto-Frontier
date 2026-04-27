@@ -53,7 +53,6 @@
 	const EZCHAT_THISANDTHAT
 
 DEF MOBILE_LOGIN_PASSWORD_LENGTH EQU 17
-DEF MOBILE_PHONE_NUMBER_LENGTH EQU 20
 
 ; Trade corner request size
 ; DION addr $1e + request $8 + Name $5
