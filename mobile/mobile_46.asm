@@ -671,7 +671,7 @@ BattleTowerRoomMenu_IncrementJumptable:
 	inc [hl]
 	ret
 
-BattleTowerRoomMenu2: ; herenext
+BattleTowerRoomMenu2:
 	ldh a, [rSVBK]
 	ld [wcd8c], a
 	ld a, $1
@@ -689,39 +689,39 @@ BattleTowerRoomMenu2: ; herenext
 	jumptable .Jumptable, wBattleTowerRoomMenu2JumptableIndex
 
 .Jumptable:
-	dw Function119f3f ; use this for unused indexes like mobile, test what is are not needed
-	dw Function119f45
-	dw Function119f56
-	dw Function119f76
-	dw Function119f98 ; to go
-	dw Function11a113
-	dw Function11a129
-	dw Function11a131
-	dw Function11a13d
-	dw Function11a14b
-	dw Function11a16d
-	dw Function11a192
-	dw Function11a2e6
-	dw Function11a302
-	dw Function11a33a
+	dw BattleTowerRoomMenu_DoNothing ; Function119f3f
+	dw BattleTowerRoomMenu_DoNothing ; Function119f45
+	dw BattleTowerRoomMenu_DoNothing ; Function119f56
+	dw BattleTowerRoomMenu_DoNothing ; Function119f76
+	dw BattleTowerRoomMenu_DoNothing ; Function119f98
+	dw BattleTowerRoomMenu_DoNothing ; Function11a113
+	dw BattleTowerRoomMenu_DoNothing ; Function11a129
+	dw BattleTowerRoomMenu_DoNothing ; Function11a131
+	dw BattleTowerRoomMenu_DoNothing ; Function11a13d
+	dw BattleTowerRoomMenu_DoNothing ; Function11a14b
+	dw BattleTowerRoomMenu_DoNothing ; Function11a16d
+	dw BattleTowerRoomMenu_DoNothing ; Function11a192
+	dw BattleTowerRoomMenu_DoNothing ; Function11a2e6
+	dw BattleTowerRoomMenu_DoNothing ; Function11a302
+	dw BattleTowerRoomMenu_DoNothing ; Function11a33a
 	dw BattleTowerRoomMenu2_PlaceYesNoMenu
 	dw BattleTowerRoomMenu2_UpdateYesNoMenu
-	dw Function11a357
-	dw Function11a36b
-	dw Function11a38d
-	dw Function11a3c5
-	dw Function11a3d9
-	dw Function11a3f9
-	dw Function11a41b
-	dw Function11a452
-	dw Function11a47a
-	dw Function11a488
-	dw Function11a49e
-	dw Function11a4db
-	dw Function11a4e8
-	dw Function11a4fe
-	dw Function11a466
-	dw Function11a47a
+	dw BattleTowerRoomMenu_DoNothing ; Function11a357
+	dw BattleTowerRoomMenu_DoNothing ; Function11a36b
+	dw BattleTowerRoomMenu_DoNothing ; Function11a38d
+	dw BattleTowerRoomMenu_DoNothing ; Function11a3c5
+	dw BattleTowerRoomMenu_DoNothing ; Function11a3d9
+	dw BattleTowerRoomMenu_DoNothing ; Function11a3f9
+	dw BattleTowerRoomMenu_DoNothing ; Function11a41b
+	dw BattleTowerRoomMenu_DoNothing ; Function11a452
+	dw BattleTowerRoomMenu_DoNothing ; Function11a47a
+	dw BattleTowerRoomMenu_DoNothing ; Function11a488
+	dw BattleTowerRoomMenu_DoNothing ; Function11a49e
+	dw BattleTowerRoomMenu_DoNothing ; Function11a4db
+	dw BattleTowerRoomMenu_DoNothing ; Function11a4e8
+	dw BattleTowerRoomMenu_DoNothing ; Function11a4fe
+	dw BattleTowerRoomMenu_DoNothing ; Function11a466
+	dw BattleTowerRoomMenu_DoNothing ; Function11a47a
 
 Function119f3f:
 	call Function11a5b9
