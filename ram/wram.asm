@@ -1189,11 +1189,11 @@ wc80c:: dw
 wc80e:: db
 wc80f:: db
 wc810:: dw
-wMobileSDK_PacketChecksum:: dw
+wMobileSDK_PacketChecksum:: dw ; unused
 wc814:: db
 wc815:: db
 wc816:: dw
-wMobileSDK_AdapterType:: db
+wMobileSDK_AdapterType:: db ; unused
 wc819:: db
 wc81a:: db
 wc81b:: db
@@ -1294,8 +1294,8 @@ wc9b2:: ds 3
 wc9b5:: db
 wc9b6:: ds 121
 
-wMobileSDK_ReceivePacketBufferAlt:: ds 11
-wMobileSDK_ReceivedBytes:: dw
+wMobileSDK_ReceivePacketBufferAlt:: ds 11 ; unused
+wMobileSDK_ReceivedBytes:: dw ; unused
 wMobileSDK_ReceivePacketBuffer:: ds 250
 wcb36:: db
 	ds 16
