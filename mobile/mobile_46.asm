@@ -128,18 +128,18 @@ BattleTowerRoomMenu_Jumptable:
 	dw BattleTowerRoomMenu_PlacePickLevelMenu
 	dw BattleTowerRoomMenu_UpdatePickLevelMenu
 	dw BattleTowerRoomMenu_DoNothing ; unused index
-	dw BattleTowerRoomMenu_DoNothing ; BattleTowerRoomMenu_PartyMonTopsThisLevelMessage
-	dw BattleTowerRoomMenu_DoNothing ; BattleTowerRoomMenu_WaitForMessage
-	dw BattleTowerRoomMenu_DoNothing ; BattleTowerRoomMenu_DelayRestartMenu
+	dw BattleTowerRoomMenu_DoNothing ; unused index
+	dw BattleTowerRoomMenu_DoNothing ; unused index
+	dw BattleTowerRoomMenu_DoNothing ; unused index
 	dw BattleTowerRoomMenu_QuitMessage
 	dw BattleTowerRoomMenu_PlaceYesNoMenu
 	dw BattleTowerRoomMenu_UpdateYesNoMenu
-	dw BattleTowerRoomMenu_DoNothing ; BattleTowerRoomMenu_UberRestrictionMessage
-	dw BattleTowerRoomMenu_DoNothing ; BattleTowerRoomMenu_WaitForMessage
-	dw BattleTowerRoomMenu_DoNothing ; BattleTowerRoomMenu_DelayRestartMenu
-	dw BattleTowerRoomMenu_DoNothing ; Function118e76 ; mobile
-	dw BattleTowerRoomMenu_DoNothing ; BattleTowerRoomMenu_CallRoomMenu2 ; mobile
-	dw BattleTowerRoomMenu_DoNothing ; Function118e76 ; mobile
+	dw BattleTowerRoomMenu_DoNothing ; unused index
+	dw BattleTowerRoomMenu_DoNothing ; unused index
+	dw BattleTowerRoomMenu_DoNothing ; unused index
+	dw BattleTowerRoomMenu_DoNothing ; unused index
+	dw BattleTowerRoomMenu_DoNothing ; unused index
+	dw BattleTowerRoomMenu_DoNothing ; unused index
 
 SetMobileErrorCode:
 	ld [wMobileErrorCodeBuffer], a
@@ -343,19 +343,6 @@ asm_118e3e:
 	ld [de], a
 	inc de
 	jr .asm_118e63
-
-Function118e76:
-	; Call $c in BattleTowerRoomMenu2
-	ld a, $c
-	ld [wBattleTowerRoomMenu2JumptableIndex], a
-	jmp BattleTowerRoomMenu_IncrementJumptable
-
-BattleTowerRoomMenu_CallRoomMenu2:
-	call BattleTowerRoomMenu2
-	ret c
-	ld a, [wcd33]
-	ld [wBattleTowerRoomMenuJumptableIndex], a
-	ret
 
 Function119471:
 	push af
@@ -629,36 +616,6 @@ Unknown_1196b8:
 	db "Sun"
 
 popc
-
-BattleTowerRoomMenu_UberRestrictionMessage: ; to go
-	ld hl, Text_UberRestriction
-	call BattleTowerRoomMenu_SetMessage
-	call BattleTowerRoomMenu_IncrementJumptable
-	jr BattleTowerRoomMenu_WaitForMessage
-
-BattleTowerRoomMenu_PartyMonTopsThisLevelMessage:
-	ld hl, Text_PartyMonTopsThisLevel
-	call BattleTowerRoomMenu_SetMessage
-	call BattleTowerRoomMenu_IncrementJumptable
-
-BattleTowerRoomMenu_WaitForMessage:
-	ld a, [wc31a]
-	and a
-	ret nz
-	ld a, $80
-	ld [wcd50], a
-	call BattleTowerRoomMenu_IncrementJumptable
-
-BattleTowerRoomMenu_DelayRestartMenu:
-	; Loops while (--[wcd50] != 0),
-	;   to create some sort of "delay" after the message is written on the screen,
-	;   before starting the menu again.
-	ld hl, wcd50
-	dec [hl]
-	ret nz
-	ld a, $0
-	ld [wBattleTowerRoomMenuJumptableIndex], a
-	ret
 
 BattleTowerRoomMenu_QuitMessage:
 	ld a, [wcd38]
@@ -1954,20 +1911,6 @@ Function11a9f0:
 
 Text_QuitReadingNews:
 	text "Quit reading NEWS?"
-	done
-
-Text_PartyMonTopsThisLevel:
-	text "A party #MON"
-	line "tops this level."
-	done
-
-Text_UberRestriction:
-	text_ram wcd49
-	text " may go"
-	line "only to BATTLE"
-
-	para "ROOMS that are"
-	line "Lv.70 or higher."
 	done
 
 Text_CancelBattleRoomChallenge:
