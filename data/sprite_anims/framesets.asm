@@ -42,8 +42,6 @@ SpriteAnimFrameData:
 	dw .Frameset_MobileTradeSentBall
 	dw .Frameset_MobileTradeOTBall
 	dw .Frameset_MobileTradeCableBulge
-	dw .Frameset_MobileTradeSentPulse
-	dw .Frameset_MobileTradeOTPulse
 	dw .Frameset_MobileTradePing
 	dw .Frameset_IntroSuicune
 	dw .Frameset_IntroSuicune2
@@ -326,14 +324,6 @@ SpriteAnimFrameData:
 	oamframe SPRITE_ANIM_OAMSET_MOBILE_TRADE_CABLE_BULGE_1,  3
 	oamframe SPRITE_ANIM_OAMSET_MOBILE_TRADE_CABLE_BULGE_2,  3
 	oamrestart
-
-.Frameset_MobileTradeSentPulse:
-	oamframe SPRITE_ANIM_OAMSET_MOBILE_TRADE_SENT_PULSE,  3
-	oamend
-
-.Frameset_MobileTradeOTPulse:
-	oamframe SPRITE_ANIM_OAMSET_MOBILE_TRADE_OT_PULSE,  3
-	oamend
 
 .Frameset_MobileTradePing:
 	oamframe SPRITE_ANIM_OAMSET_MOBILE_TRADE_PING_1,  2

@@ -6,7 +6,7 @@ _2DMenu_::
 	call Draw2DMenu
 	call UpdateSprites
 	call ApplyTilemap
-	jmp Get2DMenuSelection
+	jr Get2DMenuSelection
 
 _InterpretBattleMenu::
 	ld hl, CopyMenuData

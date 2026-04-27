@@ -7,99 +7,6 @@ MACRO mobiletradeanim
 	db (\1_MobileTradeCmd - MobileTradeAnim_JumptableLoop.Jumptable) / 2
 ENDM
 
-MobileTradeAnimation_SendGivemonToGTS:
-	ld a, $80
-	ld [wcf65], a
-	ld de, .TradeAnimScript
-	jr RunMobileTradeAnim_NoFrontpics
-
-.TradeAnimScript:
-	mobiletradeanim MobileTradeAnim_ShowPlayerMonForGTS
-	mobiletradeanim MobileTradeAnim_FadeToBlack
-	mobiletradeanim MobileTradeAnim_10
-	mobiletradeanim MobileTradeAnim_GiveTrademon1
-	mobiletradeanim MobileTradeAnim_06
-	mobiletradeanim MobileTradeAnim_0f
-	mobiletradeanim EndMobileTradeAnim
-
-MobileTradeAnimation_RetrieveGivemonFromGTS: ; unreferenced
-	ld a, $80
-	ld [wcf65], a
-	ld de, .TradeAnimScript
-	jr RunMobileTradeAnim_NoFrontpics
-
-.TradeAnimScript:
-	mobiletradeanim MobileTradeAnim_11
-	mobiletradeanim MobileTradeAnim_07
-	mobiletradeanim MobileTradeAnim_GetTrademon1
-	mobiletradeanim MobileTradeAnim_ShowOTMonFromGTS
-	mobiletradeanim EndMobileTradeAnim
-
-RunMobileTradeAnim_NoFrontpics:
-	ld hl, wTradeAnimAddress
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ldh a, [hMapAnims]
-	push af
-	xor a
-	ldh [hMapAnims], a
-	ld hl, wStateFlags
-	ld a, [hl]
-	push af
-	res 0, [hl]
-	ld hl, wOptions
-	ld a, [hl]
-	push af
-	set NO_TEXT_SCROLL, [hl]
-	call Function108157
-.loop
-	call MobileTradeAnim_JumptableLoop
-	jr nc, .loop
-	pop af
-	ld [wOptions], a
-	pop af
-	ld [wStateFlags], a
-	pop af
-	ldh [hMapAnims], a
-	ret
-
-Function108157:
-	xor a
-	ld [wJumptableIndex], a
-	call ClearBGPalettes
-	call ClearSprites
-	call ClearTilemap
-	call DisableLCD
-	call MobileTradeAnim_ClearTiles
-	call MobileTradeAnim_ClearBGMap
-	call LoadStandardFont
-	call LoadFontsBattleExtra
-	call EnableLCD
-	xor a
-	ldh [hSCX], a
-	ldh [hSCY], a
-	ld a, $7
-	ldh [hWX], a
-	ld a, $90
-	ldh [hWY], a
-	farcall ClearSpriteAnims
-	xor a ; SPRITE_ANIM_DICT_DEFAULT
-	ld hl, wSpriteAnimDict
-	ld [hli], a
-	ld [hl], $00
-	call DelayFrame
-	ld a, [wPlayerTrademonSpecies]
-	ld de, wPlayerTrademonSpeciesName
-	call MobileTradeAnim_InitSpeciesName
-	ld a, [wOTTrademonSpecies]
-	ld de, wOTTrademonSpeciesName
-	call MobileTradeAnim_InitSpeciesName
-	xor a
-	call Function108b98
-	call Function108af4
-	ret
-
 MobileTradeAnim_ClearTiles:
 	ld a, $1
 	ldh [rVBK], a
@@ -160,16 +67,6 @@ Function108229:
 	ld d, $0
 	ld e, ANIM_MON_TRADE
 	predef LoadMonAnimation
-	ret
-
-MobileTradeAnim_InitSpeciesName:
-	push de
-	ld [wNamedObjectIndex], a
-	call GetPokemonName
-	ld hl, wStringBuffer1
-	pop de
-	ld bc, MON_NAME_LENGTH
-	call CopyBytes
 	ret
 
 MobileTradeAnim_JumptableLoop:
@@ -824,7 +721,6 @@ MobileTradeAnim_GiveTrademon2:
 	xor a
 	ld [wcf64], a
 	depixel 9, 10, 2, 0
-	ld a, SPRITE_ANIM_OBJ_MOBILE_TRADE_SENT_PULSE
 	call InitSpriteAnimStruct
 .loop
 	ldh a, [hSCY]
@@ -850,7 +746,6 @@ MobileTradeAnim_05:
 	ld c, 60
 	call WaitMobileTradeSpriteAnims
 	depixel 30, 10, 2, 0
-	ld a, SPRITE_ANIM_OBJ_MOBILE_TRADE_OT_PULSE
 	call InitSpriteAnimStruct
 	call GetMobileTradeAnimByte
 	ld de, SFX_THROW_BALL
@@ -871,7 +766,6 @@ MobileTradeAnim_07:
 	ld c, 80
 	call DelayFrames
 	depixel 30, 10, 2, 0
-	ld a, SPRITE_ANIM_OBJ_MOBILE_TRADE_OT_PULSE
 	call InitSpriteAnimStruct
 	call GetMobileTradeAnimByte
 	ld de, SFX_THROW_BALL
@@ -1342,33 +1236,6 @@ Function108b98:
 MobileTradeAnim_DeleteSprites:
 	farcall DeinitializeAllSprites
 	call ClearSprites
-	ret
-
-MobileTradeAnim_AnimateSentPulse:
-	ld a, [wcf64]
-	and a
-	ret z
-	ld hl, SPRITEANIMSTRUCT_YCOORD
-	add hl, bc
-	ld a, [hl]
-	cp -1 * TILE_WIDTH - 6
-	jr z, .delete
-	sub 1 * TILE_WIDTH
-	ld [hl], a
-	ret
-
-.delete
-	farcall DeinitializeSprite
-	ret
-
-MobileTradeAnim_AnimateOTPulse:
-	ld hl, SPRITEANIMSTRUCT_YCOORD
-	add hl, bc
-	ld a, [hl]
-	cp 9 * TILE_WIDTH + 2
-	ret z
-	add 1 * TILE_WIDTH
-	ld [hl], a
 	ret
 
 Function108bec:

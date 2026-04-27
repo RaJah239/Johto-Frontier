@@ -93,8 +93,6 @@ SpriteAnimOAMData:
 	spriteanimoam $22, .OAMData_MobileTradePing1         ; SPRITE_ANIM_OAMSET_MOBILE_TRADE_PING_1
 	spriteanimoam $23, .OAMData_MobileTradePing2         ; SPRITE_ANIM_OAMSET_MOBILE_TRADE_PING_2
 	spriteanimoam $27, .OAMData_MobileTradePing3         ; SPRITE_ANIM_OAMSET_MOBILE_TRADE_PING_3
-	spriteanimoam $2a, .OAMData_MobileTradeSentPulse     ; SPRITE_ANIM_OAMSET_MOBILE_TRADE_SENT_PULSE
-	spriteanimoam $2a, .OAMData_MobileTradeOTPulse       ; SPRITE_ANIM_OAMSET_MOBILE_TRADE_OT_PULSE
 	spriteanimoam $00, .OAMData_IntroSuicune1            ; SPRITE_ANIM_OAMSET_INTRO_SUICUNE_1
 	spriteanimoam $08, .OAMData_IntroSuicune2            ; SPRITE_ANIM_OAMSET_INTRO_SUICUNE_2
 	spriteanimoam $60, .OAMData_IntroSuicune3            ; SPRITE_ANIM_OAMSET_INTRO_SUICUNE_3
@@ -633,20 +631,6 @@ SpriteAnimOAMData:
 .OAMData_MobileTradeCableBulge:
 	db 1
 	dbsprite -1, -1,  4,  4, $00, 2
-
-.OAMData_MobileTradeSentPulse:
-	db 4
-	dbsprite -1, -2,  4,  0, $00, 3
-	dbsprite -1, -1,  4,  0, $01, 3
-	dbsprite -1,  0,  4,  0, $02, 3
-	dbsprite -1,  1,  4,  0, $03, 3
-
-.OAMData_MobileTradeOTPulse:
-	db 4
-	dbsprite -1, -2,  4,  0, $03, 4 | Y_FLIP
-	dbsprite -1, -1,  4,  0, $02, 4 | Y_FLIP
-	dbsprite -1,  0,  4,  0, $01, 4 | Y_FLIP
-	dbsprite -1,  1,  4,  0, $00, 4 | Y_FLIP
 
 .OAMData_MobileTradePing1:
 	db 4
