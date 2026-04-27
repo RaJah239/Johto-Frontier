@@ -1296,10 +1296,10 @@ wc9b6:: ds 121
 
 wMobileSDK_ReceivePacketBufferAlt:: ds 11 ; unused
 wMobileSDK_ReceivedBytes:: dw ; unused
-wMobileSDK_ReceivePacketBuffer:: ds 250
+wMobileSDK_ReceivePacketBuffer:: ds 250 ; unused
 wcb36:: db
 	ds 16
-wMobileSDK_PacketBuffer:: ds 281
+wMobileSDK_PacketBuffer:: ds 281 ; unused
 wcc60:: ds 1
 wcc61:: ds 1
 wcc62:: ds 2
