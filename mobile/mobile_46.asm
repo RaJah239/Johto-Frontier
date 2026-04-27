@@ -171,7 +171,6 @@ BattleTowerRoomMenu_PlacePickLevelMenu:
 	ld a, $3
 	ldh [rSVBK], a
 	call BattleTowerRoomMenu_IncrementJumptable
-
 BattleTowerRoomMenu_UpdatePickLevelMenu:
 	hlcoord 13, 8
 	ld de, String_119d07
@@ -212,7 +211,6 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 
 .asm_1189c2
 	ld a, $50
-
 .asm_1189c4
 	ld [bc], a
 	pop af
@@ -231,27 +229,24 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 	jr nz, .d_down
 	ld a, [hl]
 	and D_UP
-	jr nz, .d_up
-.asm_1189e5
-	ret
-
-.d_down
-	ld hl, wcd4f
-	dec [hl]
-	jr nz, .asm_1189e5
-	ld a, [wcd4a]
-	ld [hl], a
-	jr .asm_1189e5
-
+	ret z
 .d_up
 	ld a, [wcd4a]
 	ld hl, wcd4f
 	inc [hl]
 	cp [hl]
-	jr nc, .asm_1189e5
+	ret nc
 	ld a, $1
 	ld [hl], a
-	jr .asm_1189e5
+	ret
+
+.d_down
+	ld hl, wcd4f
+	dec [hl]
+	ret nz
+	ld a, [wcd4a]
+	ld [hl], a
+	ret
 
 .a_button
 	call PlayClickSFX
@@ -277,7 +272,6 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 
 .b_button
 	call PlayClickSFX
-
 .asm_118a3c
 	ldh a, [rSVBK]
 	push af
@@ -339,9 +333,7 @@ BattleTowerRoomMenu2:
 	ld [wcd8c], a
 	ld a, $1
 	ldh [rSVBK], a
-
 	call .RunJumptable
-
 	ld a, [wcd8c]
 	ldh [rSVBK], a
 	ld a, $1
@@ -485,7 +477,6 @@ BattleTowerRoomMenu2_UpdateYesNoMenu:
 
 .asm_11a2b4
 	ld a, [wcd33]
-
 .exit_carry
 	ld [wcf66], a
 	ld a, $a
@@ -495,7 +486,6 @@ BattleTowerRoomMenu2_UpdateYesNoMenu:
 
 .b_button
 	call PlayClickSFX
-
 .exit_no_carry
 	call ExitMenu
 	farcall HDMATransferTilemapAndAttrmap_Overworld
