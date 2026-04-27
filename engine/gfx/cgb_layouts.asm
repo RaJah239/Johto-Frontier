@@ -84,7 +84,7 @@ _CGB_BattleGrayscale:
 	ld de, wOBPals1
 	ld c, 2
 	call CopyPalettes
-	jp _CGB_FinishBattleScreenLayout
+	jmp _CGB_FinishBattleScreenLayout
 
 SetDefaultBattlePalette:
 	ldh a, [rSVBK]
@@ -130,11 +130,11 @@ SetDefaultBattlePalette:
 
 SetBattlePal_Player:
 	call GetBattlemonBackpicPalettePointer
-	jp LoadPalette_White_Col1_Col2_Black
+	jmp LoadPalette_White_Col1_Col2_Black
 
 SetBattlePal_Enemy:
 	call GetEnemyFrontpicPalettePointer
-	jp LoadPalette_White_Col1_Col2_Black
+	jmp LoadPalette_White_Col1_Col2_Black
 
 SetBattlePal_EnemyHP:
 	ld a, [wEnemyHPPal]
@@ -150,26 +150,21 @@ SetBattlePal_HP:
 	add hl, hl
 	ld bc, HPBarPals
 	add hl, bc
-	jp LoadPalette_White_Col1_Col2_Black
+	jmp LoadPalette_White_Col1_Col2_Black
 
 SetBattlePal_Exp:
 	ld hl, ExpBarPalette
-	jp LoadPalette_White_Col1_Col2_Black
+	jmp LoadPalette_White_Col1_Col2_Black
 
 SetBattlePal_Icons:
     ld hl, BattleIconsPalette
-	jp LoadPalette_White_Col1_Col2_Black
+	jmp LoadPalette_White_Col1_Col2_Black
 
 SetBattlePal_Text:
-	; Mobile Adapter connectivity changes bg pal 7.
-	farcall Function100dc0 ; is a mobile adapter session active?
 	ld hl, PartyMenuBGPalette
-	jr nc, .got_pal
-	ld hl, PartyMenuBGMobilePalette
-.got_pal
 	ld bc, 1 palettes
 	ld a, BANK(wBGPals1)
-	jp FarCopyWRAM
+	jmp FarCopyWRAM
 
 _CGB_BattleColors:
 	ld de, wBGPals1
@@ -237,12 +232,7 @@ _CGB_FinishBattleScreenLayout:
 	ret
 
 InitPartyMenuBGPal7:
-	farcall Function100dc0
-Mobile_InitPartyMenuBGPal7:
 	ld hl, PartyMenuBGPalette
-	jr nc, .not_mobile
-	ld hl, PartyMenuBGMobilePalette
-.not_mobile
 	ld de, wBGPals1 palette 7
 	ld bc, 1 palettes
 	ld a, BANK(wBGPals1)
@@ -250,11 +240,7 @@ Mobile_InitPartyMenuBGPal7:
 	ret
 
 InitPartyMenuBGPal0:
-	farcall Function100dc0
 	ld hl, PartyMenuBGPalette
-	jr nc, .not_mobile
-	ld hl, PartyMenuBGMobilePalette
-.not_mobile
 	ld de, wBGPals1 palette 0
 	ld bc, 1 palettes
 	ld a, BANK(wBGPals1)
