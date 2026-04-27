@@ -1,78 +1,33 @@
-CheckStringForErrors:
-; Valid character ranges:
-; $0, $5 - $13, $19 - $1c, $26 - $34, $3a - $3e, $40 - $48, $60 - $ff
-.loop
-	ld a, [de]
-	inc de
-	and a ; "<NULL>"
-	jr z, .NextChar
-	cp FIRST_REGULAR_TEXT_CHAR
-	jr nc, .NextChar
-	cp "<NEXT>"
-	jr z, .NextChar
-	cp "@"
-	jr z, .Done
-	cp "ガ"
-	jr c, .Fail
-	cp "<PLAY_G>"
-	jr c, .NextChar
-	cp "<JP_18>" + 1
-	jr c, .Fail
-	cp "<NI>"
-	jr c, .NextChar
-	cp "<NO>" + 1
-	jr c, .Fail
-	cp "<ROUTE>"
-	jr c, .NextChar
-	cp "<GREEN>" + 1
-	jr c, .Fail
-	cp "<ENEMY>"
-	jr c, .NextChar
-	cp "<ENEMY>" + 1
-	jr c, .Fail
-	cp "<MOM>"
-	jr c, .NextChar
+;+=========================================+
+;| Parameter: [wScriptVar] = 0..1          |
+;|                                         |
+;| if [wScriptVar] == FALSE                |
+;|    Show expanded menu with 4 options    |
+;|    - News - News - ??? - Cancel         |
+;| if [wScriptVar] == TRUE                 |
+;|    Show BattleTower-Menu with 3 options |
+;|    - Challenge - Explanation - Cancel   | 
+;+=========================================+
 
-.Fail:
-	scf
-	ret
-
-.NextChar:
-	dec c
-	jr nz, .loop
-
-.Done:
-	and a
-	ret
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Parameter: [wScriptVar] = 0..1
-;
-; if [wScriptVar] == FALSE
-;    Show expanded menu with 4 options
-;    - News - News - ??? - Cancel
-; if [wScriptVar] == TRUE
-;    Show BattleTower-Menu with 3 options
-;    - Challenge - Explanation - Cancel
 Menu_ChallengeExplanationCancel:
+; Show expanded menu with 4 options
 	ld a, [wScriptVar]
 	and a
 	jr nz, .English
 	ld a, $4
 	ld [wScriptVar], a
-	ld hl, MenuHeader_ChallengeExplanationSettingsCancel ; Show expanded menu with 4 options
+	ld hl, MenuHeader_ChallengeExplanationSettingsCancel
 	jr .Load_Interpret
 
+; English Menu
 .English:
 	ld a, $4
 	ld [wScriptVar], a
-	ld hl, MenuHeader_ChallengeExplanationCancel ; English Menu
-
+	ld hl, MenuHeader_ChallengeExplanationCancel
 .Load_Interpret:
 	call LoadMenuHeader
 	call Function17d246
-	call CloseWindow
-	ret
+	jmp CloseWindow
 
 Function17d246:
 	call VerticalMenu
@@ -89,7 +44,6 @@ Function17d246:
 
 .UsewMenuCursorY:
 	ld a, [wMenuCursorY]
-
 .LoadToScriptVar:
 	ld [wScriptVar], a
 	ret
@@ -145,3 +99,50 @@ MenuData_NormalInverseNeutral:
 	db "Normal Mode@"
 	db "Inverse Mode@"
 	db "Neutral Mode@"
+
+CheckStringForErrors:
+; Valid character ranges:
+; $0, $5 - $13, $19 - $1c, $26 - $34, $3a - $3e, $40 - $48, $60 - $ff
+.loop
+	ld a, [de]
+	inc de
+	and a ; "<NULL>"
+	jr z, .NextChar
+	cp FIRST_REGULAR_TEXT_CHAR
+	jr nc, .NextChar
+	cp "<NEXT>"
+	jr z, .NextChar
+	cp "@"
+	jr z, .Done
+	cp "ガ"
+	jr c, .Fail
+	cp "<PLAY_G>"
+	jr c, .NextChar
+	cp "<JP_18>" + 1
+	jr c, .Fail
+	cp "<NI>"
+	jr c, .NextChar
+	cp "<NO>" + 1
+	jr c, .Fail
+	cp "<ROUTE>"
+	jr c, .NextChar
+	cp "<GREEN>" + 1
+	jr c, .Fail
+	cp "<ENEMY>"
+	jr c, .NextChar
+	cp "<ENEMY>" + 1
+	jr c, .Fail
+	cp "<MOM>"
+	jr c, .NextChar
+
+.Fail:
+	scf
+	ret
+
+.NextChar:
+	dec c
+	jr nz, .loop
+
+.Done:
+	and a
+	ret
