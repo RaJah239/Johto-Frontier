@@ -239,7 +239,7 @@ s5_aa48:: db
 
 s5_aa4a:: db
 
-sMobileLoginPassword:: ds MOBILE_LOGIN_PASSWORD_LENGTH
+sMobileLoginPassword:: ds MOBILE_LOGIN_PASSWORD_LENGTH ; unused
 
 	ds $1
 

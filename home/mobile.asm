@@ -121,16 +121,3 @@ MobileTimer::
 	pop bc
 	pop af
 	reti
-
-Function3eea::
-	push hl
-	push bc
-	ld de, wAttrmap - wTilemap
-	add hl, de
-	inc b
-	inc b
-	inc c
-	inc c
-	pop bc
-	pop hl
-	ret
