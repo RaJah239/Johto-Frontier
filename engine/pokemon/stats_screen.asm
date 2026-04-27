@@ -7,21 +7,11 @@ DEF NUM_STAT_PAGES EQU const_value
 
 DEF STAT_PAGE_MASK EQU %00000011
 
-BattleStatsScreenInit:
-	ld a, [wLinkMode]
-	cp LINK_MOBILE
-	jr nz, StatsScreenInit
-
-	ld a, [wBattleMode]
-	and a
-	jr z, StatsScreenInit
-	jr _MobileStatsScreenInit
-
 StatsScreenInit:
 	ld hl, StatsScreenMain
 	jr StatsScreenInit_gotaddress
 
-_MobileStatsScreenInit:
+_MobileStatsScreenInit: ; here
 	ld hl, StatsScreenMobile
 	; fallthrough
 
@@ -77,21 +67,10 @@ StatsScreenMain:
 	ret
 
 StatsScreenMobile:
-	xor a
-	ld [wJumptableIndex], a
-	ld [wStatsScreenFlags], a ; PINK_PAGE
-.loop
 	farcall Mobile_SetOverworldDelay
-	ld a, [wJumptableIndex]
-	and $7f
 	ld hl, StatsScreenPointerTable
-	rst JumpTable
 	call StatsScreen_WaitAnim
 	farcall MobileComms_CheckInactivityTimer
-	ret c
-	ld a, [wJumptableIndex]
-	bit 7, a
-	jr z, .loop
 	ret
 
 StatsScreenPointerTable:

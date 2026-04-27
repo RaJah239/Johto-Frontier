@@ -5049,7 +5049,7 @@ Battle_StatsScreen:
 	call LowVolume
 	xor a ; PARTYMON
 	ld [wMonType], a
-	farcall BattleStatsScreenInit
+	farcall StatsScreenInit
 	call MaxVolume
 
 	call DisableLCD

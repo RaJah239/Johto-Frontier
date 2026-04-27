@@ -33,39 +33,6 @@ _InterpretBattleMenu::
 	ld [wMenuCursorPosition], a
 	jr .display ; Then we go back to refreshing the menu and reading joypad inputs.
 
-_InterpretMobileMenu::
-	ld hl, CopyMenuData
-	ld a, [wMenuData_2DMenuItemStringsBank]
-	rst FarCall
-
-	call Draw2DMenu
-	farcall MobileTextBorder
-	call UpdateSprites
-	call ApplyTilemap
-	call Init2DMenuCursorPosition
-	ld hl, w2DMenuFlags1
-	set 7, [hl]
-.loop
-	call DelayFrame
-	farcall Function10032e
-	ld a, [wcd2b]
-	and a
-	jr nz, .quit
-	call MobileMenuJoypad
-	ld a, [wMenuJoypadFilter]
-	and c
-	jr z, .loop
-	jr Mobile_GetMenuSelection
-
-.quit
-	ld a, [w2DMenuNumCols]
-	ld c, a
-	ld a, [w2DMenuNumRows]
-	call SimpleMultiply
-	ld [wMenuCursorPosition], a
-	and a
-	ret
-
 Draw2DMenu:
 	xor a
 	ldh [hBGMapMode], a
@@ -76,7 +43,6 @@ Get2DMenuSelection:
 	call Init2DMenuCursorPosition
 	call StaticMenuJoypad
 	call MenuClickSound
-Mobile_GetMenuSelection:
 	ld a, [wMenuDataFlags]
 	bit 1, a
 	jr z, .skip
@@ -260,22 +226,6 @@ _ScrollingMenuJoypad::
 	call MenuJoypadLoop
 	pop af
 	ldh [hBGMapMode], a
-	ret
-
-MobileMenuJoypad:
-	ld hl, w2DMenuFlags2
-	res 7, [hl]
-	ldh a, [hBGMapMode]
-	push af
-	call Move2DMenuCursor
-	call Do2DMenuRTCJoypad
-	jr nc, .skip_joypad
-	call _2DMenuInterpretJoypad
-.skip_joypad
-	pop af
-	ldh [hBGMapMode], a
-	call GetMenuJoypad
-	ld c, a
 	ret
 
 _NoYesBox::

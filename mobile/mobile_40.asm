@@ -408,26 +408,6 @@ Mobile_SetOverworldDelay:
 	ld [wOverworldDelay], a
 	ret
 
-Function100dd8:
-	ld c, $01
-	ld b, $03
-	farcall AdvanceMobileInactivityTimerAndCheckExpired
-	jr c, .asm_100dfb
-	ld c, $3c
-	ld b, $01
-	call Function10079c
-	jr c, .asm_100dfb
-	farcall Function10032e
-	ld a, [wcd2b]
-	and a
-	jr nz, .asm_100dfb
-	xor a
-	ret
-
-.asm_100dfb
-	scf
-	ret
-
 MobileComms_CheckInactivityTimer:
 	ld a, [wOverworldDelay]
 	ld c, a
