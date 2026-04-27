@@ -434,9 +434,6 @@ INCLUDE "engine/events/crystals_tm_trader.asm"
 
 SECTION "mobile40", ROMX
 
-INCLUDE "mobile/mobile_40.asm"
-
-
 SECTION "bank41", ROMX
 
 INCLUDE "engine/gfx/dma_transfer.asm"
@@ -644,13 +641,11 @@ INCLUDE "gfx/weather_images.asm"
 
 
 SECTION "Dynamic Pals System", ROMX
-
 INCLUDE "engine/gfx/sprite_palettes.asm"
 INCLUDE "engine/gfx/dynamic_pals.asm"
 
 
 SECTION "Fade System", ROMX
-
 INCLUDE "engine/gfx/fade.asm"
 INCLUDE "engine/events/poisonstep_pals.asm"
 
