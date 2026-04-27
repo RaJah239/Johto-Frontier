@@ -8,6 +8,7 @@
 - Instant Text
 - Hold down the B Button to auto advance/scroll text - stops at end of dialogue, Yes or No and menu boxes
 - "Pokemon" menu is now the default selected option in the Start menu
+- View Pokédex entry of selected Pokémon in Menu
 - Time, day and weather added to Start Menu
 - Evening added as the fourth time of day (morning: 5am, day: 10am, evening: 5pm, night: 8pm)
 - Evening's wild encounters are 60% of the day's 40% of the night's on each encounter

@@ -134,6 +134,8 @@ GetMonSubmenuItems:
 .skip_moves
 	ld a, MONMENUITEM_SWITCH
 	call AddMonMenuItem
+	ld a, MONMENUITEM_POKEDEX
+	call AddMonMenuItem
 	ld a, MONMENUITEM_MOVE
 	call AddMonMenuItem
 	ld a, [wLinkMode]

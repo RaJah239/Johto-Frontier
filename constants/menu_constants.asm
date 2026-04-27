@@ -56,6 +56,7 @@
 	const MONMENUITEM_MOVE       ; 13
 	const MONMENUITEM_MAIL       ; 14
 	const MONMENUITEM_ERROR      ; 15
+	const MONMENUITEM_POKEDEX
 DEF NUM_MONMENUITEMS EQU const_value - 1
 
 ; MonMenuOptions categories
