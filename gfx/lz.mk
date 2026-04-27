@@ -15,7 +15,6 @@ gfx/intro/suicune_close.2bpp.lz: LZFLAGS += --method 2 --align 4
 gfx/intro/unown_back.2bpp.lz: LZFLAGS += --method 2 --align 4
 
 gfx/mobile/mobile_trade.%.lz: LZFLAGS += --align 4
-gfx/mobile/mobile_trade_sprites.2bpp.lz: LZFLAGS += --align 4
 
 gfx/new_game/shrink1.2bpp.lz: LZFLAGS += --align 4
 gfx/new_game/shrink2.2bpp.lz: LZFLAGS += --align 4

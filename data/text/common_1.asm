@@ -358,22 +358,6 @@ _ForYourMonWillTradeText::
 	text "."
 	done
 
-_MobilePlayerWillTradeMonText::
-	text_ram wPlayerTrademonSenderName
-	text " will"
-	line "trade @"
-	text_ram wPlayerTrademonSpeciesName
-	text_end
-
-_MobileForPartnersMonText::
-	text "for @"
-	text_ram wOTTrademonSenderName
-	text "'s"
-	line "@"
-	text_ram wOTTrademonSpeciesName
-	text "."
-	done
-
 _MobileTakeGoodCareOfMonText::
 	text "Take good care of"
 	line "@"
