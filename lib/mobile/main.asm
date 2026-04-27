@@ -530,7 +530,7 @@ Function1118c2:
 	inc [hl]
 	ret
 
-_Timer::
+_Timer:: ; herenext
 	ld a, [wc80b]
 	cp $4
 	call z, Function111b3c
