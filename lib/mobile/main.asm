@@ -28,29 +28,6 @@ MobileSDK_CopyBytes:
 	jr nz, .loop
 	ret
 
-ResetReceivePacketBuffer:
-; Clear two bytes at wMobileSDK_ReceivedBytes
-	xor a
-	ld hl, wMobileSDK_ReceivedBytes
-	ld [hli], a
-	ld [hl], a
-	ret
-
-Function11164f:
-	ld hl, wc815
-	xor a
-	ld [hli], a
-	ld a, [wc81f]
-	ld b, a
-	ld a, [wMobileSDK_AdapterType]
-	ld a, b
-	srl a
-	srl a
-	add b
-	add b
-	ld [hl], a
-	ret
-
 Function111664:
 	ld hl, wMobileSDK_ReceivedBytes
 	ld a, [hli]
@@ -400,69 +377,6 @@ Function1118c2:
 	call Function111664
 	ld hl, wc80a
 	inc [hl]
-	ret
-
-asm_111a40:
-	ld a, $4b
-
-asm_111a47:
-	ld hl, wc815
-	dec [hl]
-	jr nz, asm_111a40
-	inc hl
-	dec [hl]
-	jr nz, asm_111a40
-	inc hl
-	dec [hl]
-	jr z, .asm_111a63
-	ld hl, wc81f
-	ld a, [hli]
-	ld d, a
-	ld a, [hl]
-	ld hl, wc815
-	ld [hli], a
-	ld a, d
-	ld [hli], a
-	jr asm_111a40
-.asm_111a63
-	di
-	ld a, [wc86a]
-	cp $2a
-	jr z, .asm_111aa8
-	ld hl, wc9b2
-	inc [hl]
-	ld a, [hl]
-	cp $1
-	jr z, .asm_111a91
-	ld hl, wc822
-	res 5, [hl]
-	res 0, [hl]
-	ld hl, wc821
-	res 4, [hl]
-	ld a, $0
-	ld [wc805], a
-	ld a, $29
-	ld [wc86a], a
-	ld a, $1
-	ld [wc806], a
-	jr .asm_111aa8
-.asm_111a91
-	ld a, $29
-	ld [wc86a], a
-	xor a
-	ld [wc806], a
-	ld [wc86b], a
-	ld [wc80b], a
-	ld [wc800], a
-	ld a, $8
-	ld [wc807], a
-.asm_111aa8
-	call ResetReceivePacketBuffer
-	call Function11164f
-	ld hl, wc822
-	res 5, [hl]
-	res 0, [hl]
-	ei
 	ret
 
 Function111f02:
