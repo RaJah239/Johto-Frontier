@@ -9,13 +9,6 @@ DEF STAT_PAGE_MASK EQU %00000011
 
 StatsScreenInit:
 	ld hl, StatsScreenMain
-	jr StatsScreenInit_gotaddress
-
-_MobileStatsScreenInit: ; here
-	ld hl, StatsScreenMobile
-	; fallthrough
-
-StatsScreenInit_gotaddress:
 	ldh a, [hMapAnims]
 	push af
 	xor a
@@ -64,13 +57,6 @@ StatsScreenMain:
 	ld a, [wJumptableIndex]
 	bit 7, a
 	jr z, .loop
-	ret
-
-StatsScreenMobile:
-	farcall Mobile_SetOverworldDelay
-	ld hl, StatsScreenPointerTable
-	call StatsScreen_WaitAnim
-	farcall MobileComms_CheckInactivityTimer
 	ret
 
 StatsScreenPointerTable:
