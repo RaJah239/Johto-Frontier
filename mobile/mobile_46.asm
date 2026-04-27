@@ -127,19 +127,19 @@ BattleTowerRoomMenu_Jumptable:
 	dw BattleTowerRoomMenu_PickLevelMessage
 	dw BattleTowerRoomMenu_PlacePickLevelMenu
 	dw BattleTowerRoomMenu_UpdatePickLevelMenu
-	dw BattleTowerRoomMenu_DoNothing ; use this for unused indexes like mobile
-	dw BattleTowerRoomMenu_PartyMonTopsThisLevelMessage
-	dw BattleTowerRoomMenu_WaitForMessage
-	dw BattleTowerRoomMenu_DelayRestartMenu
+	dw BattleTowerRoomMenu_DoNothing ; unused index
+	dw BattleTowerRoomMenu_DoNothing ; BattleTowerRoomMenu_PartyMonTopsThisLevelMessage
+	dw BattleTowerRoomMenu_DoNothing ; BattleTowerRoomMenu_WaitForMessage
+	dw BattleTowerRoomMenu_DoNothing ; BattleTowerRoomMenu_DelayRestartMenu
 	dw BattleTowerRoomMenu_QuitMessage
 	dw BattleTowerRoomMenu_PlaceYesNoMenu
 	dw BattleTowerRoomMenu_UpdateYesNoMenu
-	dw BattleTowerRoomMenu_UberRestrictionMessage
-	dw BattleTowerRoomMenu_WaitForMessage
-	dw BattleTowerRoomMenu_DelayRestartMenu
-	dw Function118e76 ; mobile
-	dw BattleTowerRoomMenu_CallRoomMenu2 ; mobile
-	dw Function118e76 ; mobile
+	dw BattleTowerRoomMenu_DoNothing ; BattleTowerRoomMenu_UberRestrictionMessage
+	dw BattleTowerRoomMenu_DoNothing ; BattleTowerRoomMenu_WaitForMessage
+	dw BattleTowerRoomMenu_DoNothing ; BattleTowerRoomMenu_DelayRestartMenu
+	dw BattleTowerRoomMenu_DoNothing ; Function118e76 ; mobile
+	dw BattleTowerRoomMenu_DoNothing ; BattleTowerRoomMenu_CallRoomMenu2 ; mobile
+	dw BattleTowerRoomMenu_DoNothing ; Function118e76 ; mobile
 
 SetMobileErrorCode:
 	ld [wMobileErrorCodeBuffer], a
