@@ -86,9 +86,6 @@ ResetReceivePacketBuffer:
 	ld [hl], a
 	ret
 
-_MobileAPI:: ; herenext
-	dw MobileAPI_SetTimer
-
 Function1100b4:
 	push bc
 .loop
@@ -117,110 +114,12 @@ Function1100b4:
 	pop bc
 	ret
 
-MobileAPI_SetTimer:
-	xor a
-	ldh [rTAC], a
-	ld e, c
-	ld b, a
-	ld hl, Unknown_112089
-	add hl, bc
-	ld c, [hl]
-	inc hl
-	ldh a, [rKEY1]
-	bit 7, a
-	jr nz, .asm_1100f9
-	ld a, e
-	sra c
-	ld a, e
-	cp $4
-	jr nc, .asm_1100f9
-	ld de, $000f
-	add hl, de
-
-.asm_1100f9
-	ld a, c
-	ldh [rTMA], a
-	ldh [rTIMA], a
-	ld a, [hli]
-	ld [wc81f], a
-	ld [wc816], a
-	ld a, [hl]
-	ld [wc820], a
-	ld [wc815], a
-	ld c, LOW(rTAC)
-	ld a, rTAC_65536_HZ
-	ldh [c], a
-	ld a, 1 << rTAC_ON | rTAC_65536_HZ
-	ldh [c], a
-	ret
-
 Function110226:
 	ld a, $21
 	ld [wc80f], a
 	ld hl, wc821
 	set 1, [hl]
 	ret
-
-Function110393:
-	ld c, LOW(rIE)
-	ldh a, [c]
-	or (1 << SERIAL) | (1 << TIMER)
-	ldh [c], a
-	ret
-
-Function110432:
-	ld hl, wc821
-	set 0, [hl]
-	ret
-
-Function1104b0:
-	xor a
-	ld [wMobileSDK_SendCommandID], a
-	call Function110393
-	xor a
-	ld [wc86b], a
-	ld de, MobilePacket_Idle.End - MobilePacket_Idle
-	ld hl, MobilePacket_Idle
-	ld b, 1
-	jmp PacketSendBytes
-
-Function110596:
-	ld a, [wc821]
-	bit 0, a
-	jr nz, .asm_1105d9
-	ld a, [wc86a]
-	cp $1
-	jr nz, .asm_1105d9
-	ld a, [wc835]
-	or a
-	ret nz
-	ld a, b
-	ld [wcb36], a
-	xor a
-	ldh [rTAC], a
-	ld a, e
-	ld [wc86e], a
-	ld a, d
-	ld [wc86e + 1], a
-	xor a
-	ld [wc819], a
-	ld a, [wc870]
-	ld c, a
-	call MobileAPI_SetTimer
-	ld hl, wc829
-	ld a, LOW(wc880)
-	ld [hli], a
-	ld a, HIGH(wc880)
-	ld [hl], a
-	call Function1104b0
-	ld a, [wcb36]
-	ld [wc86a], a
-	xor a
-	jmp Function110432
-
-.asm_1105d9
-	pop hl
-	jmp Function110226
 
 Function11164f:
 	ld hl, wc815
@@ -1691,10 +1590,6 @@ Function111f97:
 
 	ds 14
 
-MobilePacket_Idle:
-	db $4b
-.End
-
 MobilePacket_BeginSession:
 	db $99, $66, MOBILE_COMMAND_BEGIN_SESSION, $00, $00, $08, "NINTENDO", $02, $77, $80, $00
 .End
@@ -1734,15 +1629,6 @@ MobilePacket_TransferData:
 MobilePacket_CloseTCPConnection:
 	db $99, $66, MOBILE_COMMAND_CLOSE_TCP_CONNECTION, $00, $00, $01
 .End
-
-Unknown_112089:
-	db -20, $14, $c9
-	db -28, $0f, $0e
-	db -32, $0c, $53
-	db -60, $07, $94
-	db -80, $05, $ee
-	db -20, $10, $b4
-	db -28, $0c, $dd
 
 Unknown_1120b0:
 	db "RCPT TO:<", 0

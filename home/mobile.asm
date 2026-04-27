@@ -1,7 +1,3 @@
-MobileAPI::
-	ld [wMobileAPIIndex], a
-	jmp _MobileAPI
-
 MobileReceive::
 	ldh a, [hROMBank]
 	push af
