@@ -292,45 +292,6 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 	ld [wMobileInactivityTimerFrames], a
 	ret
 
-Function118e39:
-	ld a, [hli]
-	and a
-	jr nz, Function118e39
-	dec hl
-
-asm_118e3e:
-	ld a, [hld]
-	cp $2f
-	jr nz, asm_118e3e
-	inc hl
-	inc hl
-	ld de, wcd85
-	ld c, $4
-.asm_118e4a
-	ld a, [hli]
-	cp $2e
-	jr z, .asm_118e63
-	cp $30
-	jr c, .asm_118e67
-	cp $3a
-	jr nc, .asm_118e67
-	sub $30
-	add $f6
-	ld [de], a
-	inc de
-	dec c
-	jr nz, .asm_118e4a
-	ld de, wcd85
-.asm_118e63
-	ld a, $50
-	ld [de], a
-	ret
-.asm_118e67
-	ld a, $f3
-	ld [de], a
-	inc de
-	jr .asm_118e63
-
 BattleTowerRoomMenu_QuitMessage:
 	ld a, [wcd38]
 	and a
@@ -456,6 +417,9 @@ BattleTowerRoomMenu2_PlaceYesNoMenu:
 	ld [wMobileInactivityTimerMinutes], a
 	jmp BattleTowerRoomMenu2_IncrementJumptable
 
+String_11a2cf: db "Yes@"
+String_11a2d3: db "No@"
+
 BattleTowerRoomMenu2_UpdateYesNoMenu:
 	ld hl, hJoyPressed
 	ld a, [hl]
@@ -543,12 +507,6 @@ BattleTowerRoomMenu2_UpdateYesNoMenu:
 	farcall HDMATransferTilemapAndAttrmap_Overworld
 	and a
 	ret
-
-String_11a2cf:
-	db "Yes@"
-
-String_11a2d3:
-	db "No@"
 
 MenuHeader_11a2de:
 	db MENU_BACKUP_TILES ; flags
