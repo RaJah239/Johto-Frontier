@@ -292,26 +292,15 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 	ld [wMobileInactivityTimerFrames], a
 	ret
 
+Text_CancelBattleRoomChallenge:
+	text "Cancel your Battle"
+	line "Room challenge?"
+	done
+
 BattleTowerRoomMenu_QuitMessage:
-	ld a, [wcd38]
-	and a
-	jr z, .asm_119cd1
-	dec a
-	jr z, .asm_119cd6
-	ld hl, Text_QuitReadingNews
-	jr .asm_119cd9
-
-.asm_119cd1
 	ld hl, Text_CancelBattleRoomChallenge
-	jr .asm_119cd9
-
-.asm_119cd6
-	ld hl, Text_ExitGymLeaderHonorRoll
-
-.asm_119cd9
 	call BattleTowerRoomMenu_SetMessage
 	call BattleTowerRoomMenu_IncrementJumptable
-
 BattleTowerRoomMenu_PlaceYesNoMenu:
 	ld a, [wc31a]
 	and a
@@ -319,7 +308,6 @@ BattleTowerRoomMenu_PlaceYesNoMenu:
 	ld a, $f
 	ld [wBattleTowerRoomMenu2JumptableIndex], a
 	call BattleTowerRoomMenu_IncrementJumptable
-
 BattleTowerRoomMenu_UpdateYesNoMenu:
 	; Only ever called when [wBattleTowerRoomMenu2JumptableIndex] is $10
 	call BattleTowerRoomMenu2
@@ -417,6 +405,12 @@ BattleTowerRoomMenu2_PlaceYesNoMenu:
 	ld [wMobileInactivityTimerMinutes], a
 	jmp BattleTowerRoomMenu2_IncrementJumptable
 
+MenuHeader_11a2de:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 14, 7, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
+	dw NULL
+	db 0 ; default option
+
 String_11a2cf: db "Yes@"
 String_11a2d3: db "No@"
 
@@ -508,12 +502,6 @@ BattleTowerRoomMenu2_UpdateYesNoMenu:
 	and a
 	ret
 
-MenuHeader_11a2de:
-	db MENU_BACKUP_TILES ; flags
-	menu_coords 14, 7, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
-	dw NULL
-	db 0 ; default option
-
 BattleTowerRoomMenu2_IncrementJumptable:
 	ld a, [wBattleTowerRoomMenu2JumptableIndex]
 	inc a
@@ -586,7 +574,6 @@ Function11a90f:
 	inc [hl]
 	ld a, $3
 	ldh [rSVBK], a
-
 BattleTowerRoomMenu_WriteMessage_DoNothing:
 	ret
 
@@ -631,11 +618,9 @@ Function11a971:
 	ld [wc31e], a
 	ld a, [wcd8d]
 	cp $50
-	jr nz, .asm_11a9bf
+	ret nz
 	xor a
 	ld [wc31a], a
-
-.asm_11a9bf
 	ret
 
 BattleTowerRoomMenu_SetMessage:
@@ -651,20 +636,6 @@ Function11a9f0:
 	ld a, $1
 	and a
 	ret
-
-Text_QuitReadingNews:
-	text "Quit reading NEWS?"
-	done
-
-Text_CancelBattleRoomChallenge:
-	text "Cancel your BATTLE"
-	line "ROOM challenge?"
-	done
-
-Text_ExitGymLeaderHonorRoll:
-	text "Exit GYM LEADER"
-	line "HONOR ROLL?"
-	done
 
 AddMobileMonToParty: ; used by `_GiveOddEgg:`
 	ld hl, wPartyCount
@@ -765,6 +736,4 @@ AddMobileMonToParty: ; used by `_GiveOddEgg:`
 	ld h, a
 	ld bc, MAIL_STRUCT_LENGTH
 	call CopyBytes
-
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
