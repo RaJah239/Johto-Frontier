@@ -191,8 +191,8 @@ DisplayMoveInfo:
 	xor a
 	ldh [hBGMapMode], a
 
-	hlcoord 3, 8 ; upper right corner of the textbox
-	lb bc, 3, 9
+	hlcoord 3, 7 ; upper right corner of the textbox
+	lb bc, 4, 9
 	call Textbox
 	call MobileTextBorder
 
@@ -202,7 +202,7 @@ DisplayMoveInfo:
 	; move types
 	ld a, [wCurSpecies]
 	ld b, a
-	hlcoord 5, 9
+	hlcoord 4, 8
 	predef PrintMoveType
 
 	ld hl, Moves + MOVE_PP
