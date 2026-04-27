@@ -1398,10 +1398,10 @@ wcd49:: db
 wcd4a:: ds 1
 wcd4b:: ds 1
 
-wEZChatCursorXCoord::
 wcd4c:: db
-wEZChatCursorYCoord::
 wcd4d:: db
+
+	ds 2
 
 wcd4e:: ds 1
 wcd4f:: ds 1

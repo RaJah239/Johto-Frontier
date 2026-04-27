@@ -18,7 +18,6 @@
 ; - BitmasksPointers (see gfx/pokemon/bitmask_pointers.asm)
 ; - FramesPointers (see gfx/pokemon/frame_pointers.asm)
 ; - MonMenuIconPals (see data/pokemon/menu_icon_pals.asm)
-; - EZChat_SortedPokemon (see data/pokemon/ezchat_order.asm)
 
 	; first 151 pokemon
 	const_def 1
