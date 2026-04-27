@@ -358,34 +358,6 @@ _ForYourMonWillTradeText::
 	text "."
 	done
 
-_MobileTakeGoodCareOfMonText::
-	text "Take good care of"
-	line "@"
-	text_ram wOTTrademonSpeciesName
-	text "."
-	done
-
-_MobilePlayersMonTrade2Text::
-	text_ram wPlayerTrademonSenderName
-	text "'s"
-	line "@"
-	text_ram wPlayerTrademonSpeciesName
-	text " trade…"
-	done
-
-_MobileTakeGoodCareOfText::
-	text "Take good care of"
-	line "@"
-	text_ram wOTTrademonSpeciesName
-	text "."
-	done
-
-_MobileTradeCameBackText::
-	text_ram wOTTrademonSpeciesName
-	text " came"
-	line "back!"
-	done
-
 ; Oak's Pokémon Talk
 
 _OPT_IntroText1::
@@ -935,15 +907,6 @@ _EnemyUsedOnText::
 	text_ram wEnemyMonNickname
 	text "!"
 	prompt
-
-; Mobile Adapter
-
-_StartingLinkText::
-	text "Starting link."
-	done
-
-; Mobile Adapter End
-
 
 _AskFloorElevatorText::
 	text "Which floor?"

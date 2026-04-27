@@ -445,11 +445,6 @@ INCLUDE "mobile/mobile_41.asm"
 INCLUDE "engine/gfx/load_overworld_font.asm"
 
 
-SECTION "mobile42", ROMX
-
-INCLUDE "mobile/mobile_42.asm"
-
-
 SECTION "Title", ROMX
 
 INCLUDE "engine/movie/title.asm"
