@@ -28,20 +28,6 @@ MobileSDK_CopyBytes:
 	jr nz, .loop
 	ret
 
-MobileSDK_CopyString:
-; Copy bytes from hl to de until a 0 is encountered.
-; Include the 0 in the copy, and count the number of
-; nonzero bytes copied.  Keep the de pointer at the
-; copied zero.
-.loop
-	ld a, [hli]
-	ld [de], a
-	or a
-	ret z
-	inc de
-	inc bc
-	jr .loop
-
 ResetReceivePacketBuffer:
 ; Clear two bytes at wMobileSDK_ReceivedBytes
 	xor a
@@ -840,27 +826,4 @@ Function113268:
 	or b
 	jr nz, .asm_113268
 	scf
-	ret
-
-Function113a40:
-.asm_113a40
-	or a
-	push hl
-	ld a, [hli]
-	rla
-	ld a, [hl]
-	rla
-	ld [hli], a
-	ld a, [hl]
-	rla
-	ld [hli], a
-	ld a, [hl]
-	rla
-	ld [hl], a
-	pop hl
-	ld a, [hl]
-	rla
-	ld [hl], a
-	dec b
-	jr nz, .asm_113a40
 	ret
