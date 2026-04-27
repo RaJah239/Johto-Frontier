@@ -42,9 +42,3 @@ CheckBTMonMovesForErrors:
 	dec c
 	jr nz, .loop
 	ret
-
-ChooseMobileCenterTilemap:
-INCBIN "gfx/mobile/mobile_center.tilemap"
-
-ChooseMobileCenterAttrmap:
-INCBIN "gfx/mobile/mobile_center.attrmap"
