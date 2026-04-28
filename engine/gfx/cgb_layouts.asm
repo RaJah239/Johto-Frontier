@@ -43,7 +43,6 @@ CGBLayoutJumptable:
 	dw _CGB_Pokedex_EvoPage
  	dw _CGB_Pokedex_PicsPage
 	dw _CGB_SlotMachine
-	dw _CGB_BetaTitleScreen
 	dw _CGB_GSIntro
 	dw _CGB_Diploma
 	dw _CGB_MapPals
@@ -827,24 +826,6 @@ _CGB_SlotMachine:
 	ld bc, 6 * SCREEN_WIDTH
 	ld a, $7 ; text palette
 	call ByteFill
-	call ApplyAttrmap
-	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
-
-_CGB_BetaTitleScreen:
-	ld hl, PalPacket_BetaTitleScreen + 1
-	call CopyFourPalettes
-	call WipeAttrmap
-	ld de, wOBPals1
-	ld a, PREDEFPAL_PACK
-	call GetPredefPal
-	call LoadHLPaletteIntoDE
-	hlcoord 0, 6, wAttrmap
-	lb bc, 12, SCREEN_WIDTH
-	ld a, $1
-	call FillBoxCGB
 	call ApplyAttrmap
 	call ApplyPals
 	ld a, TRUE

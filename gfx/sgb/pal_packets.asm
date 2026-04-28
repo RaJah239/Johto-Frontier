@@ -58,9 +58,6 @@ PalPacket_Pokegear:
 PalPacket_SlotMachine:
 	sgb_pal_set SLOT_MACHINE_0, SLOT_MACHINE_1, SLOT_MACHINE_2, SLOT_MACHINE_3
 
-PalPacket_BetaTitleScreen:
-	sgb_pal_set BETA_LOGO_1, BETA_LOGO_2, DIPLOMA, RB_PURPLEMON
-
 PalPacket_Diploma:
 	sgb_pal_set DIPLOMA, ROUTES, ROUTES, ROUTES
 
