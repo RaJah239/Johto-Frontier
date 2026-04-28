@@ -183,7 +183,7 @@ ROMX $43
 ROMX $44
 	"Fade System"
 ROMX $45
-	"Mobile Adapter SDK Mail"
+	"Battle Plaza Map Scripts" ; not needed
 ROMX $46
 	"Crystal Phone Text 2"
 ROMX $47
@@ -313,9 +313,6 @@ ROMX $7d
 ROMX $7e
 	"Crystal Events"
 ROMX $7f
-; Commented out this and its respective SECTION "Stadium 2 Checksums", ROMX[$7DE0], BANK[$7F] in main.asm as this particular bank is needed for Voltorb Flip
-;	org $7de0
-;	"Stadium 2 Checksums"
 	"Voltorb Flip"
 WRAM0
 	"Stack"
