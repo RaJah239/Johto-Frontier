@@ -462,16 +462,11 @@ INCLUDE "mobile/mobile_46.asm"
 SECTION "Battle Tower", ROMX
 
 INCLUDE "engine/events/battle_tower/trainer_text.asm"
-
+INCLUDE "engine/events/battle_tower/battle_tower.asm"
 
 SECTION "bank5B", ROMX
 
 INCLUDE "engine/link/link_trade.asm"
-
-
-SECTION "mobile5C", ROMX
-
-INCLUDE "mobile/mobile_5c.asm"
 
 
 SECTION "Crystal Phone Text 2", ROMX
