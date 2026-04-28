@@ -8,8 +8,6 @@ LoadSpecialMapPalette:
 
 .not_dark
 	ld a, [wMapTileset]
-	cp TILESET_POKECOM_CENTER
-	jr z, .pokecom_2f
 	cp TILESET_BATTLE_TOWER_INSIDE
 	jr z, .battle_tower_inside
 	cp TILESET_ICE_PATH
@@ -18,17 +16,10 @@ LoadSpecialMapPalette:
 	jr z, .house
 	cp TILESET_RADIO_TOWER
 	jr z, .radio_tower
-	cp TILESET_MANSION
-	jr z, .mansion_mobile
 	jr .do_nothing
 
 .darkness
 	call LoadDarknessPalette
-	scf
-	ret
-
-.pokecom_2f
-	call LoadPokeComPalette
 	scf
 	ret
 
@@ -56,11 +47,6 @@ LoadSpecialMapPalette:
 	scf
 	ret
 
-.mansion_mobile
-	call LoadMansionPalette
-	scf
-	ret
-
 .do_nothing
 	and a
 	ret
@@ -74,17 +60,6 @@ LoadDarknessPalette:
 
 DarknessPalette:
 INCLUDE "gfx/tilesets/darkness.pal"
-
-LoadPokeComPalette:
-	ld a, BANK(wBGPals1)
-	ld de, wBGPals1
-	ld hl, PokeComPalette
-	ld bc, 8 palettes
-	call FarCopyWRAM
-	ret
-
-PokeComPalette:
-INCLUDE "gfx/tilesets/pokecom_center.pal"
 
 LoadBattleTowerInsidePalette:
 	ld a, BANK(wBGPals1)
@@ -129,32 +104,3 @@ LoadRadioTowerPalette:
 
 RadioTowerPalette:
 INCLUDE "gfx/tilesets/radio_tower.pal"
-
-MansionPalette1:
-INCLUDE "gfx/tilesets/mansion_1.pal"
-
-LoadMansionPalette:
-	ld a, BANK(wBGPals1)
-	ld de, wBGPals1
-	ld hl, MansionPalette1
-	ld bc, 8 palettes
-	call FarCopyWRAM
-	ld a, BANK(wBGPals1)
-	ld de, wBGPals1 palette PAL_BG_YELLOW
-	ld hl, MansionPalette2
-	ld bc, 1 palettes
-	call FarCopyWRAM
-	ld a, BANK(wBGPals1)
-	ld de, wBGPals1 palette PAL_BG_WATER
-	ld hl, MansionPalette1 palette 6
-	ld bc, 1 palettes
-	call FarCopyWRAM
-	ld a, BANK(wBGPals1)
-	ld de, wBGPals1 palette PAL_BG_ROOF
-	ld hl, MansionPalette1 palette 8
-	ld bc, 1 palettes
-	call FarCopyWRAM
-	ret
-
-MansionPalette2:
-INCLUDE "gfx/tilesets/mansion_2.pal"

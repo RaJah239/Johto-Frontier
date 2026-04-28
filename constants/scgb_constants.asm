@@ -35,12 +35,6 @@ DEF CGB_PLAIN EQU SCGB_PLAIN
 DEF SCGB_PARTY_MENU_HP_BARS EQU $fc
 DEF SCGB_DEFAULT EQU $ff
 
-; GetCrystalCGBLayout arguments (see engine/gfx/crystal_layouts.asm)
-	const_def
-	const CRYSTAL_CGB_MOBILE_0 ; unused
-	const CRYSTAL_CGB_MOBILE_1 ; unused
-	const CRYSTAL_CGB_NAME_CARD
-
 ; PredefPals indexes (see gfx/sgb/predef.pal)
 ; GetPredefPal arguments (see engine/gfx/color.asm)
 	const_def

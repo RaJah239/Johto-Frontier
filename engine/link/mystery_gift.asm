@@ -1796,8 +1796,6 @@ InitNameCardLayout:
 	call CopyBytes
 	call EnableLCD
 	call WaitBGMap
-	ld b, CRYSTAL_CGB_NAME_CARD
-	farcall GetCrystalCGBLayout
 	jmp SetDefaultBGPAndOBP
 
 .Load6Row:
