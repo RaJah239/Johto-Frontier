@@ -54,7 +54,6 @@ CGBLayoutJumptable:
 	dw _CGB_MoveList
 	dw _CGB_BetaPikachuMinigame
 	dw _CGB_PokedexSearchOption
-	dw _CGB_BetaPoker
 	dw _CGB_Pokepic
 	dw _CGB_MagnetTrain
 	dw _CGB_PackPals
@@ -907,17 +906,6 @@ INCLUDE "gfx/intro/gs_shellder_lapras_ob.pal"
 	call GetPredefPal
 	call LoadHLPaletteIntoDE
 	call WipeAttrmap
-	ret
-
-_CGB_BetaPoker:
-	ld hl, BetaPokerPals
-	ld de, wBGPals1
-	ld bc, 5 palettes
-	ld a, BANK(wBGPals1)
-	call FarCopyWRAM
-	call ApplyPals
-	call WipeAttrmap
-	call ApplyAttrmap
 	ret
 
 _CGB_Diploma:
