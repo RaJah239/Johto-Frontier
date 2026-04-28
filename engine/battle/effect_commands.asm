@@ -764,6 +764,12 @@ BattleCommand_DoTurn:
 	ld a, [wCurOTMon]
 
 .player
+	call GetPartyLocation
+	push hl
+	call CheckMimicUsed
+	pop hl
+	ret c
+
 .consume_pp
 	ldh a, [hBattleTurn]
 	and a
@@ -789,11 +795,15 @@ BattleCommand_DoTurn:
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
-
+	cp ANIM_FLINCH
+	jr z, .mimic
 	ld hl, wWildMonMoves
 	add hl, bc
 	ld a, [hl]
+	cp ANIM_FLINCH
+	ret z
 
+.mimic
 	ld hl, wWildMonPP
 	call .consume_pp
 	ret
@@ -823,6 +833,36 @@ BattleCommand_DoTurn:
 	db EFFECT_ROLLOUT
 	db EFFECT_RAMPAGE
 	db -1
+
+CheckMimicUsed:
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wCurMoveNum]
+	jr z, .player
+	ld a, [wCurEnemyMoveNum]
+
+.player
+	ld c, a
+	ld a, MON_MOVES
+	call UserPartyAttr
+
+	ld a, BATTLE_VARS_MOVE
+	call GetBattleVar
+	cp ANIM_FLINCH
+	jr z, .mimic
+
+	ld b, 0
+	add hl, bc
+	ld a, [hl]
+	cp ANIM_FLINCH
+	jr nz, .mimic
+
+	scf
+	ret
+
+.mimic
+	and a
+	ret
 
 BattleCommand_Critical:
 ; Determine whether this attack's hit will be critical.
