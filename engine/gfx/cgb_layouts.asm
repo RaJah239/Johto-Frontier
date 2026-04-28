@@ -50,7 +50,6 @@ CGBLayoutJumptable:
 	dw _CGB_PartyMenu
 	dw _CGB_Evolution
 	dw _CGB_GSTitleScreen
-	dw _CGB_Unused0D
 	dw _CGB_MoveList
 	dw _CGB_BetaPikachuMinigame
 	dw _CGB_PokedexSearchOption
@@ -986,13 +985,6 @@ _CGB_GSTitleScreen:
 	call ApplyPals
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
-	ret
-
-_CGB_Unused0D:
-	ld hl, PalPacket_Diploma + 1
-	call CopyFourPalettes
-	call WipeAttrmap
-	call ApplyAttrmap
 	ret
 
 _CGB_UnownPuzzle:
