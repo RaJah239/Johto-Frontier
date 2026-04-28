@@ -449,10 +449,6 @@ SECTION "Title", ROMX
 INCLUDE "engine/movie/title.asm"
 
 
-SECTION "mobile45", ROMX
-
-INCLUDE "mobile/mobile_45_stadium.asm"
-
 SECTION "Battle Tower", ROMX
 
 INCLUDE "engine/events/battle_tower/trainer_text.asm" ; can be in another bank

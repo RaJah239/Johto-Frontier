@@ -1,3 +1,4 @@
+GiveOddEgg:
 _GiveOddEgg:
 	; Figure out which egg to give.
 
