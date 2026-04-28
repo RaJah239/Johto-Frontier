@@ -2013,7 +2013,6 @@ LinkTrade:
 
 .save
 	farcall SaveAfterLinkTrade
-	farcall BackupGSBallFlag
 	ld c, 40
 	call DelayFrames
 	hlcoord 0, 12

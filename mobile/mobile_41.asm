@@ -1,38 +1,3 @@
-; These functions deal with miscellaneous statistics
-; which were used for Trainer Rankings in Pokémon News.
-
-BackupGSBallFlag: ; unreferenced
-	ld a, BANK(sGSBallFlag)
-	call OpenSRAM
-	ld a, [sGSBallFlag]
-	push af
-	ld a, BANK(sGSBallFlagBackup)
-	call OpenSRAM
-	pop af
-	ld [sGSBallFlagBackup], a
-	call CloseSRAM
-	ret
-
-RestoreGSBallFlag:
-	ld a, BANK(sGSBallFlagBackup)
-	call OpenSRAM
-	ld a, [sGSBallFlagBackup]
-	push af
-	ld a, BANK(sGSBallFlag)
-	call OpenSRAM
-	pop af
-	ld [sGSBallFlag], a
-	call CloseSRAM
-	ret
-
-ClearGSBallFlag:
-	ld a, BANK(sGSBallFlag)
-	call OpenSRAM
-	xor a
-	ld [sGSBallFlag], a
-	call CloseSRAM
-	ret
-
 _MobilePrintNum::
 ; Supports signed 31-bit integers (up to 10 digits)
 ; b: Bits 0-4 = # bytes

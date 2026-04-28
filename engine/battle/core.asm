@@ -8329,7 +8329,6 @@ CleanUpBattleRAM:
 	jmp WaitSFX
 
 ShowLinkBattleParticipantsAfterEnd:
-	farcall BackupGSBallFlag
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1Status
 	call GetPartyLocation
@@ -8359,7 +8358,6 @@ DisplayLinkBattleResult:
 .store_result
 	hlcoord 6, 8
 	call PlaceString
-	farcall BackupGSBallFlag
 	ld c, 200
 	call DelayFrames
 
