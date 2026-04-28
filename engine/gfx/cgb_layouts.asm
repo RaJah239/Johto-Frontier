@@ -43,14 +43,12 @@ CGBLayoutJumptable:
 	dw _CGB_Pokedex_EvoPage
  	dw _CGB_Pokedex_PicsPage
 	dw _CGB_SlotMachine
-	dw _CGB_GSIntro
 	dw _CGB_Diploma
 	dw _CGB_MapPals
 	dw _CGB_PartyMenu
 	dw _CGB_Evolution
 	dw _CGB_GSTitleScreen
 	dw _CGB_MoveList
-	dw _CGB_BetaPikachuMinigame
 	dw _CGB_PokedexSearchOption
 	dw _CGB_Pokepic
 	dw _CGB_MagnetTrain
@@ -832,62 +830,6 @@ _CGB_SlotMachine:
 	ldh [hCGBPalUpdate], a
 	ret
 
-_CGB_GSIntro:
-	ld b, 0
-	ld hl, .Jumptable
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
-
-.Jumptable:
-	dw .ShellderLaprasScene
-	dw .JigglypuffPikachuScene
-	dw .StartersCharizardScene
-
-.ShellderLaprasScene:
-	ld hl, .ShellderLaprasBGPalette
-	ld de, wBGPals1
-	call LoadHLPaletteIntoDE
-	ld hl, .ShellderLaprasOBPals
-	ld de, wOBPals1
-	ld bc, 2 palettes
-	ld a, BANK(wOBPals1)
-	call FarCopyWRAM
-	call WipeAttrmap
-	ret
-
-.ShellderLaprasBGPalette:
-INCLUDE "gfx/intro/gs_shellder_lapras_bg.pal"
-
-.ShellderLaprasOBPals:
-INCLUDE "gfx/intro/gs_shellder_lapras_ob.pal"
-
-.JigglypuffPikachuScene:
-	ld de, wBGPals1
-	ld a, PREDEFPAL_GS_INTRO_JIGGLYPUFF_PIKACHU_BG
-	call GetPredefPal
-	call LoadHLPaletteIntoDE
-
-	ld de, wOBPals1
-	ld a, PREDEFPAL_GS_INTRO_JIGGLYPUFF_PIKACHU_OB
-	call GetPredefPal
-	call LoadHLPaletteIntoDE
-	call WipeAttrmap
-	ret
-
-.StartersCharizardScene:
-	ld hl, PalPacket_Pack + 1
-	call CopyFourPalettes
-	ld de, wOBPals1
-	ld a, PREDEFPAL_GS_INTRO_STARTERS_TRANSITION
-	call GetPredefPal
-	call LoadHLPaletteIntoDE
-	call WipeAttrmap
-	ret
-
 _CGB_Diploma:
 	ld hl, DiplomaPalettes
 	ld de, wBGPals1
@@ -1117,16 +1059,6 @@ _CGB_MoveList:
 	lb bc, 2, 9
 	ld a, $1
 	call FillBoxCGB
-	call ApplyAttrmap
-	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
-
-_CGB_BetaPikachuMinigame:
-	ld hl, PalPacket_BetaPikachuMinigame + 1
-	call CopyFourPalettes
-	call WipeAttrmap
 	call ApplyAttrmap
 	call ApplyPals
 	ld a, TRUE
