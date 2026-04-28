@@ -302,7 +302,6 @@ gfx/sgb/sgb_border.sgb.tilemap: gfx/sgb/sgb_border.bin ; tr < $< -d '\000' > $@
 
 gfx/mobile/electro_ball.2bpp: tools/gfx += --remove-duplicates --remove-xflip --preserve=0x39
 gfx/mobile/phone_tiles.2bpp: tools/gfx += --remove-whitespace
-gfx/mobile/pichu_animated.2bpp: tools/gfx += --trim-whitespace
 
 
 ### Catch-all graphics rules
