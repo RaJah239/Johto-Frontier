@@ -186,7 +186,7 @@ ROMX $45
 	"Mobile Adapter SDK Mail"
 	"mobile45"
 ROMX $46
-	"mobile46"
+	"Crystal Phone Text 2"
 ROMX $47
 	"Battle Tower"
 ROMX $48
@@ -238,7 +238,6 @@ ROMX $5b
 ROMX $5c
 	"Pics 21"
 ROMX $5d
-	"Crystal Phone Text 2"
 	"Pics 22"
 ROMX $5e
 	"UpdateBattleHUDs"

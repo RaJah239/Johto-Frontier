@@ -453,16 +453,11 @@ SECTION "mobile45", ROMX
 
 INCLUDE "mobile/mobile_45_stadium.asm"
 
-
-SECTION "mobile46", ROMX
-
-INCLUDE "mobile/mobile_46.asm"
-
-
 SECTION "Battle Tower", ROMX
 
-INCLUDE "engine/events/battle_tower/trainer_text.asm"
-INCLUDE "engine/events/battle_tower/battle_tower.asm"
+INCLUDE "engine/events/battle_tower/trainer_text.asm" ; can be in another bank
+INCLUDE "engine/events/battle_tower/battle_tower.asm" ; can be in another bank
+INCLUDE "engine/events/battle_tower/room_menu.asm" ; can be in another bank
 
 SECTION "bank5B", ROMX
 

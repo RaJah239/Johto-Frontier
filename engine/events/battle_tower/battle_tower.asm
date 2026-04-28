@@ -199,8 +199,6 @@ ReadBTTrainerParty:
 BT_ChrisName:
 	db "Chris@"
 
-INCLUDE "data/battle_tower/unknown_levels.asm"
-
 CopyBTTrainer_FromBT_OT_TowBT_OTTemp:
 ; copy the BattleTower-Trainer data that lies at 'wBT_OTTrainer' to 'wBT_OTTemp'
 	ldh a, [rSVBK]
