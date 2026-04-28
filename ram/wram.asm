@@ -279,8 +279,7 @@ wSpriteAnimDataEnd::
 ; mobile data
 UNION
 wc3cc:: ds 1
-wEmailAddress:: ds MOBILE_EMAIL_LENGTH
-	ds 1
+	ds 2
 wc3ec:: ds 1
 wc3ed:: ds 1
 wc3ee:: ds 1
@@ -691,7 +690,6 @@ wMobileMonNick::   ds NAME_LENGTH_JAPANESE - 1
 wMobileMonMail::   mailmsg_jp wMobileMonMail
 
 NEXTU
-wOfferEmail::      ds MOBILE_EMAIL_LENGTH
 wOfferTrainerID::  dw
 wOfferSecretID::   dw
 wOfferGender::     db
@@ -703,6 +701,8 @@ wOfferMon::        party_struct wOfferMon
 wOfferMonOT::      ds NAME_LENGTH_JAPANESE - 1
 wOfferMonNick::    ds NAME_LENGTH_JAPANESE - 1
 wOfferMonMail::    mailmsg_jp wOfferMonMail
+
+	ds 1
 
 NEXTU
 wUnknownGender::     db ; unused

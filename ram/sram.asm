@@ -202,7 +202,6 @@ sTrainerRankingsBackup:: ds sTrainerRankingsEnd - sTrainerRankings ; unused
 
 s5_a800:: db
 
-sOfferEmail::      ds MOBILE_EMAIL_LENGTH
 sOfferTrainerID::  dw ; unused
 sOfferSecretID::   dw ; unused
 sOfferGender::     db ; unused
@@ -226,7 +225,7 @@ s5_a8b2:: ds 150
 
 s5_a948:: ds 246
 
-	ds $3
+	ds $4
 
 s5_aa41:: ds 4
 
@@ -239,11 +238,7 @@ s5_aa48:: db
 
 s5_aa4a:: db
 
-sMobileLoginPassword:: ds MOBILE_LOGIN_PASSWORD_LENGTH ; unused
-
-	ds $1
-
-s5_aa5d:: ds MOBILE_LOGIN_PASSWORD_LENGTH
+	ds $3
 
 	ds $4
 
