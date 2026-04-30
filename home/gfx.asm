@@ -113,9 +113,7 @@ LoadFontsBattleExtra::
 	ret
 
 LoadFontsExtra::
-	farcall _LoadFontsExtra1
-	farcall _LoadFontsExtra2
-	ret
+	farjp _LoadFontsExtra
 
 DecompressRequest2bpp::
 	push de
