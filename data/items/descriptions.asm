@@ -815,8 +815,8 @@ ScopeLensDesc:
 	next "hit ratio.@"
 
 LifeOrbDesc:
-	db   "Convert life to"
-	next "boost power.@"
+	db   "1.3× Power for"
+	next "10<%> HP loss.@"
 
 ChoiceBandDesc:
 	db   "Boost Attack"

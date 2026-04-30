@@ -2508,7 +2508,7 @@ BattleCommand_CheckFaint:
 	cp HELD_LIFE_ORB
 	pop hl
 	jr nz, .noLifeOrb
-	farcall GetEighthMaxHP
+	farcall GetTenthMaxHP
 	farcall SubtractHPFromUser
 	ld hl, BattleText_UserLostSomeOfItsHP
 	call StdBattleTextbox

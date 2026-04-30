@@ -1650,6 +1650,32 @@ GetSixteenthMaxHP:
 	inc c
 	ret
 
+GetTenthMaxHP:
+; output: bc
+	call GetMaxHP
+
+	ld a, b
+	ldh [hDividend + 0], a
+	ld a, c
+	ldh [hDividend + 1], a
+
+	ld a, 10
+	ldh [hDivisor], a
+	ld b, 2
+	call Divide
+
+	ldh a, [hQuotient + 2]
+	ld b, a
+	ldh a, [hQuotient + 3]
+	ld c, a
+
+	; ensure at least 1
+	ld a, b
+	or c
+	ret nz
+	inc c
+	ret
+
 GetEighthMaxHP:
 ; output: bc
 	call GetQuarterMaxHP
