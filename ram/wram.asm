@@ -2752,7 +2752,7 @@ wCurBaseDataEnd::
 
 wCurDamage:: dw
 
-	ds 2
+	ds 3
 
 wMornEncounterRate::  db
 wDayEncounterRate::   db
@@ -2761,7 +2761,6 @@ wEveEncounterRate::   db
 wWaterEncounterRate:: db
 wListMoves_MoveIndicesBuffer:: ds NUM_MOVES
 wPutativeTMHMMove:: db
-wInitListType:: db
 wBattleHasJustStarted:: db
 
 wNamedObjectIndex::
