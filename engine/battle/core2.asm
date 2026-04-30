@@ -2539,15 +2539,17 @@ PrintStatChangeValue: ; Input is hl (either wPlayerStatX or wEnemyStatX) and bc 
 	ld [de], a
 	inc de
 	ld a, c
-	jmp .format_stat_change
+	jr .format_stat_change
 	sub 7			; a = a - 7
 	jr .insert
+
 .same
 	ld a, "▲"
 	ld [de], a
 	inc de
 	xor a
 	jr .insert
+
 .lowered
 	ld a, "▼"
 	ld [de], a

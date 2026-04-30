@@ -1257,7 +1257,7 @@ InitTradeMenuDisplay:
 	ld [wMenuCursorY], a
 	inc a
 	ld [wPlayerLinkAction], a
-	jmp LinkTrade_PlayerPartyMenu
+	jr LinkTrade_PlayerPartyMenu
 
 LinkTrade_OTPartyMenu:
 	ld a, OTPARTYMON
