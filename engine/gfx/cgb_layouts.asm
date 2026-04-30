@@ -6,10 +6,6 @@ CheckCGB:
 	ret
 
 LoadSGBLayout:
-	; SGB is not supported
-	; fallthrough
-
-LoadSGBLayoutCGB:
 	ld a, b
 	cp SCGB_DEFAULT
 	jr nz, .not_default
@@ -1158,21 +1154,6 @@ _CGB_Pokepic:
 	ret
 
 _CGB_MagnetTrain: ; unused
-	ld hl, PalPacket_MagnetTrain + 1
-	call CopyFourPalettes
-	call WipeAttrmap
-	hlcoord 0, 4, wAttrmap
-	lb bc, 10, SCREEN_WIDTH
-	ld a, PAL_BG_GREEN
-	call FillBoxCGB
-	hlcoord 0, 6, wAttrmap
-	lb bc, 6, SCREEN_WIDTH
-	ld a, PAL_BG_RED
-	call FillBoxCGB
-	call ApplyAttrmap
-	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
 	ret
 
 _CGB_GamefreakLogo:
