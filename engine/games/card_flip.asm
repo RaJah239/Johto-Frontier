@@ -10,7 +10,7 @@ _CardFlip:
 	call ClearBGPalettes
 	call ClearTilemap
 	call ClearSprites
-	ld de, MUSIC_NONE
+	ld e, MUSIC_NONE
 	call PlayMusic
 	call DelayFrame
 	call DisableLCD
@@ -50,7 +50,7 @@ _CardFlip:
 	ld a, $2
 	ld [wCardFlipCursorY], a
 	ld [wCardFlipCursorX], a
-	ld de, MUSIC_GAME_CORNER
+	ld e, MUSIC_GAME_CORNER
 	call PlayMusic
 .MasterLoop:
 	ld a, [wJumptableIndex]

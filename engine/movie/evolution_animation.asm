@@ -32,7 +32,7 @@ EvolutionAnimation:
 	ld a, %11100100
 	ldh [rOBP0], a
 
-	ld de, MUSIC_NONE
+	ld e, MUSIC_NONE
 	call PlayMusic
 
 	farcall ClearSpriteAnims
@@ -95,7 +95,7 @@ EvolutionAnimation:
 	call PlayMonCry
 .skip_cry
 
-	ld de, MUSIC_EVOLUTION
+	ld e, MUSIC_EVOLUTION
 	call PlayMusic
 
 	ld c, 80

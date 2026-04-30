@@ -1,8 +1,8 @@
 Intro_MainMenu:
-	ld de, MUSIC_NONE
+	ld e, MUSIC_NONE
 	call PlayMusic
 	call DelayFrame
-	ld de, MUSIC_MAIN_MENU
+	ld e, MUSIC_MAIN_MENU
 	ld a, e
 	ld [wMapMusic], a
 	call PlayMusic
@@ -313,9 +313,8 @@ Continue:
 .Check2Pass:
 	ld a, $8
 	ld [wMusicFade], a
-	ld a, LOW(MUSIC_NONE)
+	xor a ; MUSIC_NONE
 	ld [wMusicFadeID], a
-	ld a, HIGH(MUSIC_NONE)
 	ld [wMusicFadeID + 1], a
 	call ClearBGPalettes
 	call CloseWindow
@@ -588,7 +587,7 @@ endc
 
 if DEF(_DEBUG)
 else
-	ld de, MUSIC_ROUTE_30
+	ld e, MUSIC_ROUTE_30
 	call PlayMusic
 
 	ld c, 31
@@ -815,10 +814,8 @@ ShrinkPlayer:
 
 	ld a, 32 ; fade time
 	ld [wMusicFade], a
-	ld de, MUSIC_NONE
-	ld a, e
+	xor a
 	ld [wMusicFadeID], a
-	ld a, d
 	ld [wMusicFadeID + 1], a
 
 	ld de, SFX_ESCAPE_ROPE
@@ -1124,7 +1121,7 @@ TitleScreenEntrance:
 	ldh [hLCDCPointer], a
 
 ; Play the title screen music.
-	ld de, MUSIC_TITLE
+	ld e, MUSIC_TITLE
 	call PlayMusic
 
 	ld a, $88

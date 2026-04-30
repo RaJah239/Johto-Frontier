@@ -37,7 +37,7 @@ PlayBattleMusic:
 	farcall SaveMusic
 	xor a
 	ld [wMusicFade], a
-	ld de, MUSIC_NONE
+	ld e, MUSIC_NONE
 	call PlayMusic
 	call DelayFrame
 	call MaxVolume
@@ -52,11 +52,11 @@ PlayBattleMusic:
 	call .loadfromarray
 	jr c, .done
 
-	ld de, MUSIC_JOHTO_WILD_BATTLE
+	ld e, MUSIC_JOHTO_WILD_BATTLE
 	ld a, [wTimeOfDay]
 	cp NITE_F
 	jr c, .done ; not NITE_F or EVE_F
-	ld de, MUSIC_KANTO_WILD_BATTLE
+	ld e, MUSIC_KANTO_WILD_BATTLE
 	jr .done
 
 .trainermusic
@@ -66,7 +66,7 @@ PlayBattleMusic:
 	ld a, [wOtherTrainerID]
 	cp RIVAL2_2_CHIKORITA ; Rival in Indigo Plateau
 	jr c, .othertrainer
- 	ld de, MUSIC_CHAMPION_BATTLE
+ 	ld e, MUSIC_CHAMPION_BATTLE
  	jr z, .done
 
 .othertrainer
@@ -75,11 +75,11 @@ PlayBattleMusic:
 	call .loadfromarray
 	jr c, .done
 
-	ld de, MUSIC_KANTO_GYM_LEADER_BATTLE
+	ld e, MUSIC_KANTO_GYM_LEADER_BATTLE
 	farcall IsKantoGymLeader
 	jr c, .done
 
-	ld de, MUSIC_JOHTO_GYM_LEADER_BATTLE
+	ld e, MUSIC_JOHTO_GYM_LEADER_BATTLE
 	farcall IsGymLeader
 	jr c, .done
 
@@ -89,15 +89,15 @@ PlayBattleMusic:
 	ld c, a
 	call GetWorldMapLocation
 	cp LANDMARK_BATTLE_PLAZA
-	ld de, MUSIC_UNOVA_ELITE_FOUR_BATTLE
+	ld e, MUSIC_UNOVA_ELITE_FOUR_BATTLE
 	jr z, .done
 
 
 	ld a, [wLinkMode]
 	and a
-	ld de, MUSIC_JOHTO_TRAINER_BATTLE
+	ld e, MUSIC_JOHTO_TRAINER_BATTLE
 	jr nz, .done
-	ld de, MUSIC_JOHTO_TRAINER_BATTLE
+	ld e, MUSIC_JOHTO_TRAINER_BATTLE
 
 .done
 	call PlayMusic

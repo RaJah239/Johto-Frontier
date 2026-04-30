@@ -385,9 +385,8 @@ PlayCurMonCry:
 	jmp PlayMonCry
 
 FadeOutMusic:
-	ld a, LOW(MUSIC_NONE)
+	xor a ; MUSIC_NONE
 	ld [wMusicFadeID], a
-	ld a, HIGH(MUSIC_NONE)
 	ld [wMusicFadeID + 1], a
 	ld a, $2
 	ld [wMusicFade], a

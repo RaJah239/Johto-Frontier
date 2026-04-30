@@ -123,7 +123,7 @@ ENDM
 	ret
 
 .PlayHealMusic:
-	ld de, MUSIC_HEAL
+	ld e, MUSIC_HEAL
 	call PlayMusic
 	jmp .FlashPalettes8Times
 

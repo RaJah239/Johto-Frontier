@@ -832,7 +832,7 @@ ENDM
 	const playmusic_command ; $7f
 MACRO playmusic
 	db playmusic_command
-	dw \1 ; music_pointer
+	db \1 ; music_id
 ENDM
 
 	const encountermusic_command ; $80
@@ -866,7 +866,7 @@ ENDM
 	const playsound_command ; $85
 MACRO playsound
 	db playsound_command
-	dw \1 ; sound_pointer
+	db \1 ; sound_id
 ENDM
 
 	const waitsfx_command ; $86

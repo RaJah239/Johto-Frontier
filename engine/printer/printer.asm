@@ -417,7 +417,7 @@ Printer_ResetJoypadRegisters:
 	ret
 
 Printer_PlayMusic:
-	ld de, MUSIC_PRINTER
+	ld e, MUSIC_PRINTER
 	call PlayMusic2
 	ret
 

@@ -54,8 +54,8 @@ _LoadMusicByte::
 	ret
 
 PlayMusic::
-; Play music de.
-
+; Play music e.
+	ld d, 0
 	push hl
 	push de
 	push bc
@@ -84,8 +84,8 @@ PlayMusic::
 	jmp PopAFBCDEHL
 
 PlayMusic2::
-; Stop playing music, then play music de.
-
+; Stop playing music, then play music e.
+	ld d, 0
 	push hl
 	push de
 	push bc
@@ -98,7 +98,7 @@ PlayMusic2::
 	ld [MBC3RomBank], a
 
 	push de
-	ld de, MUSIC_NONE
+	ld e, MUSIC_NONE
 	call _PlayMusic
 	call DelayFrame
 	pop de
@@ -291,7 +291,7 @@ FadeToMapMusic::
 	ld [wMusicFade], a
 	ld a, e
 	ld [wMusicFadeID], a
-	ld a, d
+	xor a ; music hi byte is always 0
 	ld [wMusicFadeID + 1], a
 	ld a, e
 	ld [wMapMusic], a
@@ -311,7 +311,7 @@ PlayMapMusic::
 	jr z, .done
 
 	push de
-	ld de, MUSIC_NONE
+	ld e, MUSIC_NONE
 	call PlayMusic
 	call DelayFrame
 	pop de
@@ -331,14 +331,14 @@ PlayMapMusicBike::
 
 	xor a
 	ld [wDontPlayMapMusicOnReload], a
-	ld de, MUSIC_BICYCLE
+	ld e, MUSIC_BICYCLE
 	ld a, [wPlayerState]
 	cp PLAYER_BIKE
 	jr z, .play
 	call GetMapMusic_MaybeSpecial
 .play
 	push de
-	ld de, MUSIC_NONE
+	ld e, MUSIC_NONE
 	call PlayMusic
 	call DelayFrame
 	pop de
@@ -355,7 +355,7 @@ TryRestartMapMusic::
 	jr z, .restore
 	xor a
 	ld [wMapMusic], a
-	ld de, MUSIC_NONE
+	ld e, MUSIC_NONE
 	call PlayMusic
 	call DelayFrame
 	xor a
@@ -371,12 +371,11 @@ RestartMapMusic::
 	push de
 	push bc
 	push af
-	ld de, MUSIC_NONE
+	ld e, MUSIC_NONE
 	call PlayMusic
 	call DelayFrame
 	ld a, [wMapMusic]
 	ld e, a
-	ld d, 0
 	call PlayMusic
 	jmp PopAFBCDEHL
 
@@ -396,12 +395,12 @@ SpecialMapMusic::
 	ret
 
 .surf_pika
-	ld de, MUSIC_SURFING_PIKACHU
+	ld e, MUSIC_SURFING_PIKACHU
 	scf
 	ret
 
 .surf
-	ld de, MUSIC_SURF
+	ld e, MUSIC_SURF
 	scf
 	ret
 
@@ -416,7 +415,7 @@ SpecialMapMusic::
 	jr nz, .no
 
 .ranking
-	ld de, MUSIC_BUG_CATCHING_CONTEST_RANKING
+	ld e, MUSIC_BUG_CATCHING_CONTEST_RANKING
 	scf
 	ret
 
