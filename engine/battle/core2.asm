@@ -2539,6 +2539,7 @@ PrintStatChangeValue: ; Input is hl (either wPlayerStatX or wEnemyStatX) and bc 
 	ld [de], a
 	inc de
 	ld a, c
+	jmp .format_stat_change
 	sub 7			; a = a - 7
 	jr .insert
 .same
@@ -2548,6 +2549,31 @@ PrintStatChangeValue: ; Input is hl (either wPlayerStatX or wEnemyStatX) and bc 
 	xor a
 	jr .insert
 .lowered
+	ld a, "▼"
+	ld [de], a
+	inc de
+	ld a, 7
+	sub c
+.format_stat_change
+	ld a, c
+	cp 7			; 7 = no changes
+	jr c, .format_lowered
+	jr z, .format_same
+	ld a, "▲"
+	ld [de], a
+	inc de
+	ld a, c
+	sub 7			; a = a - 7
+	jr .insert
+
+.format_same
+	ld a, " "
+	ld [de], a
+	inc de
+	xor a
+	jr .insert
+
+.format_lowered
 	ld a, "▼"
 	ld [de], a
 	inc de
@@ -2699,7 +2725,7 @@ StatsInfoBoxLoop:
 	call CoordsBCtoHL
 	ld a, c
 	cp 14
-	jr nc, .finish
+	jmp nc, .finish
 	push bc
 	call PlaceString
 	pop bc
@@ -2710,8 +2736,27 @@ StatsInfoBoxLoop:
 	push de
 	push hl
 	ld a, c
+	cp 6
+	jr z, .effective_defense
 	cp 8
-	jr nz, .regular_speed
+	jr z, .effective_speed
+	cp 12
+	jr z, .effective_spdef
+	jr .regular_stat
+
+.effective_defense
+	ld a, b
+	cp 10
+	jr c, .player_defense
+	farcall LoadEnemyEffectiveDefense
+	ld de, hEnemyMonSpeed
+	jr .got_stat_ptr
+
+.player_defense
+	farcall LoadPlayerEffectiveDefense
+	jr .player_effective_stat
+
+.effective_speed
 	ld a, b
 	cp 10
 	jr c, .player_speed
@@ -2721,6 +2766,19 @@ StatsInfoBoxLoop:
 
 .player_speed
 	farcall LoadPlayerEffectiveSpeed
+	jr .player_effective_stat
+
+.effective_spdef
+	ld a, b
+	cp 10
+	jr c, .player_spdef
+	farcall LoadEnemyEffectiveSpDef
+	ld de, hEnemyMonSpeed
+	jr .got_stat_ptr
+
+.player_spdef
+	farcall LoadPlayerEffectiveSpDef
+.player_effective_stat
 	ldh a, [hMultiplicand + 1]
 	ldh [hEnemyMonSpeed + 0], a
 	ldh a, [hMultiplicand + 2]
@@ -2728,7 +2786,7 @@ StatsInfoBoxLoop:
 	ld de, hEnemyMonSpeed
 	jr .got_stat_ptr
 
-.regular_speed
+.regular_stat
 	ld d, h
 	ld e, l
 .got_stat_ptr
@@ -2747,7 +2805,7 @@ StatsInfoBoxLoop:
 	ld b, a
 	inc c
 	inc c
-	jr StatsInfoBoxLoop
+	jmp StatsInfoBoxLoop
 .finish
 	pop hl
 	ret
@@ -3340,47 +3398,9 @@ InfoBoxLeftPress:
 	ld de, SFX_SWITCH_POCKETS
 	call PlaySFX
 
-	ld a, [wTrainerInfoPage]
-	and a
-	jr z, .jump_to_page_5
-	cp 1
-	jr z, .jump_to_page_1
-	cp 2
-	jr z, .jump_to_page_2
-	cp 3
-	jr z, .jump_to_page_3
-	cp 4
-	ret nz
-.jump_to_page_4
 	call DecreasePage
 	call UpdatePageText
-	jmp FieldInfoBox2
-
-.jump_to_page_1
-	call DecreasePage
-	call UpdatePageText
-	jmp StatsInfoBox
-
-.jump_to_page_2
-	call DecreasePage
-	call UpdatePageText
-	ld hl, wOptions
-	set NO_TEXT_SCROLL, [hl]
-	push hl
-	call StatChangesInfoBox
-	pop hl
-	res NO_TEXT_SCROLL, [hl]
-	ret
-
-.jump_to_page_3
-	call DecreasePage
-	call UpdatePageText
-	jmp FieldInfoBox1
-
-.jump_to_page_5
-	call DecreasePage
-	call UpdatePageText
-	jmp FoeAbilityPageInfoBox
+	jr RenderTrainerInfoPage
 
 ; ========================
 ; Right button navigation
@@ -3390,44 +3410,20 @@ InfoBoxRightPress:
 	ld de, SFX_SWITCH_POCKETS
 	call PlaySFX
 
+	call IncreasePage
+	call UpdatePageText
+	; fallthrough
+
+RenderTrainerInfoPage:
 	ld a, [wTrainerInfoPage]
 	and a
-	jr z, .jump_to_page_2
+	jp z, StatChangesInfoBox
 	cp 1
-	jr z, .jump_to_page_3
+	jp z, StatsInfoBox
 	cp 2
-	jr z, .jump_to_page_4
+	jp z, FieldInfoBox1
 	cp 3
-	jr z, .jump_to_page_5
-.jump_to_page_1
-	call IncreasePage
-	call UpdatePageText
-	jmp StatsInfoBox
-
-.jump_to_page_2
-	call IncreasePage
-	call UpdatePageText
-	ld hl, wOptions
-	set NO_TEXT_SCROLL, [hl]
-	push hl
-	call StatChangesInfoBox
-	pop hl
-	res NO_TEXT_SCROLL, [hl]
-	ret
-
-.jump_to_page_3
-	call IncreasePage
-	call UpdatePageText
-	jmp FieldInfoBox1
-
-.jump_to_page_4
-	call IncreasePage
-	call UpdatePageText
-	jmp FieldInfoBox2
-
-.jump_to_page_5
-	call IncreasePage
-	call UpdatePageText
+	jp z, FieldInfoBox2
 	jmp FoeAbilityPageInfoBox
 
 ; ========================
