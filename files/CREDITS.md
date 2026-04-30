@@ -110,6 +110,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - Alice-Not-Waifu - auto lowercase after the first letter
 - AmmonRoberts - Wild Pokémon drop held items after battle (no need to steal/trick/capture)
 - ErikAnpin - View Pokédex entry of selected Pokémon in Menu
+- ShinyDragonHunter - code optimisation
 
 # Music
 - mmmmmmmmmmmmmmmmm - Cave of Origin, RBY Indigo Plateau themes, Vs. Hoenn Champion
@@ -157,3 +158,4 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - Th3Element05: https://github.com/Th3Element05
 - AmmonRoberts: https://github.com/AmmonRoberts/PokemonModernCrystal
 - ErikAnpin - https://github.com/ErikAnpin
+- ShinyDragonHunter - https://github.com/ShinyDragonHunter
