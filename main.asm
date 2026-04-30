@@ -170,6 +170,10 @@ SECTION "Battle Core 2", ROMX
 INCLUDE "engine/battle/core2.asm"
 
 
+SECTION "Battle Core 3", ROMX
+INCLUDE "engine/battle/core3.asm"
+
+
 SECTION "Turn End Effects", ROMX
 INCLUDE "engine/battle/turn_end_effects.asm"
 
@@ -448,6 +452,7 @@ INCLUDE "engine/pokegear/townmap_convertlinebreakcharacters.asm"
 
 SECTION "European Mail", ROMX
 INCLUDE "engine/pokemon/european_mail.asm"
+
 
 SECTION "Battle Tower Text", ROMX
 INCLUDE "data/battle_tower/trainer_text.asm"
