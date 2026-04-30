@@ -16,9 +16,6 @@ MACRO sgb_pal23
 	db (SGB_PAL23 << 3) + 1
 ENDM
 
-PalPacket_GSTitleScreen:
-	sgb_pal_set GS_TITLE_SCREEN_0, GS_TITLE_SCREEN_1, GS_TITLE_SCREEN_2, GS_TITLE_SCREEN_3
-
 PalPacket_MagnetTrain:
 	sgb_pal_set BETA_SHINY_GREENMON, CGB_BADGE, RB_BROWNMON, ROUTES
 
@@ -27,12 +24,6 @@ PalPacket_UnownPuzzle:
 
 PalPacket_AllPal0:
 	sgb_pal_set ROUTES, ROUTES, ROUTES, ROUTES
-
-PalPacket_GSIntroShellderLapras:
-	sgb_pal_set GS_INTRO_SHELLDER_LAPRAS, ROUTES, ROUTES, ROUTES
-
-PalPacket_BetaIntroVenusaur:
-	sgb_pal_set BETA_INTRO_VENUSAUR, ROUTES, ROUTES, ROUTES
 
 PalPacket_PartyMenu:
 	sgb_pal_set PARTY_ICON, HP_GREEN, HP_YELLOW, HP_RED
@@ -51,9 +42,6 @@ PalPacket_Diploma:
 
 PalPacket_TradeTube:
 	sgb_pal_set TRADE_TUBE, ROUTES, ROUTES, ROUTES
-
-PalPacket_GamefreakLogo:
-	sgb_pal_set GS_INTRO_GAMEFREAK_LOGO, ROUTES, ROUTES, ROUTES
 
 PalPacket_Pal01:
 	sgb_pal01
