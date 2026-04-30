@@ -34,7 +34,7 @@ DEF prob_total = 0
 	assert prob_total == 100, "OddEggProbabilities do not sum to 100%!"
 
 OddEggs:
-	table_width NICKNAMED_MON_STRUCT_LENGTH, OddEggs
+	table_width PARTYMON_STRUCT_LENGTH, OddEggs
 
 	db PIKACHU
 	db NO_ITEM
@@ -56,7 +56,6 @@ OddEggs:
 	bigdw 11 ; Spd
 	bigdw 8 ; SAtk
 	bigdw 8 ; SDef
-	db "EGG@@@@@@@@"
 
 	db RAIKOU
 	db NO_ITEM
@@ -78,7 +77,6 @@ OddEggs:
 	bigdw 12 ; Spd
 	bigdw 9 ; SAtk
 	bigdw 9 ; SDef
-	db "EGG@@@@@@@@"
 
 	db RAICHU
 	db NO_ITEM
@@ -100,7 +98,6 @@ OddEggs:
 	bigdw 6 ; Spd
 	bigdw 9 ; SAtk
 	bigdw 10 ; SDef
-	db "EGG@@@@@@@@"
 
 	db CHANSEY
 	db NO_ITEM
@@ -122,7 +119,6 @@ OddEggs:
 	bigdw 7 ; Spd
 	bigdw 10 ; SAtk
 	bigdw 11 ; SDef
-	db "EGG@@@@@@@@"
 
 	db BLISSEY
 	db NO_ITEM
@@ -144,7 +140,6 @@ OddEggs:
 	bigdw 6 ; Spd
 	bigdw 9 ; SAtk
 	bigdw 7 ; SDef
-	db "EGG@@@@@@@@"
 
 	db SNORLAX
 	db NO_ITEM
@@ -166,7 +161,6 @@ OddEggs:
 	bigdw 7 ; Spd
 	bigdw 10 ; SAtk
 	bigdw 8 ; SDef
-	db "EGG@@@@@@@@"
 
 	db MEW
 	db NO_ITEM
@@ -188,7 +182,6 @@ OddEggs:
 	bigdw 11 ; Spd
 	bigdw 13 ; SAtk
 	bigdw 11 ; SDef
-	db "EGG@@@@@@@@"
 
 	db MEWTWO
 	db NO_ITEM
@@ -210,7 +203,6 @@ OddEggs:
 	bigdw 12 ; Spd
 	bigdw 14 ; SAtk
 	bigdw 12 ; SDef
-	db "EGG@@@@@@@@"
 
 	db TENTACOOL
 	db NO_ITEM
@@ -232,7 +224,6 @@ OddEggs:
 	bigdw 13 ; Spd
 	bigdw 12 ; SAtk
 	bigdw 10 ; SDef
-	db "EGG@@@@@@@@"
 
 	db TENTACRUEL
 	db NO_ITEM
@@ -254,7 +245,6 @@ OddEggs:
 	bigdw 14 ; Spd
 	bigdw 13 ; SAtk
 	bigdw 11 ; SDef
-	db "EGG@@@@@@@@"
 
 	db TEDDIURSA
 	db NO_ITEM
@@ -276,7 +266,6 @@ OddEggs:
 	bigdw 14 ; Spd
 	bigdw 11 ; SAtk
 	bigdw 10 ; SDef
-	db "EGG@@@@@@@@"
 
 	db LAPRAS
 	db NO_ITEM
@@ -298,7 +287,6 @@ OddEggs:
 	bigdw 15 ; Spd
 	bigdw 12 ; SAtk
 	bigdw 11 ; SDef
-	db "EGG@@@@@@@@"
 
 	db LARVITAR
 	db NO_ITEM
@@ -320,7 +308,6 @@ OddEggs:
 	bigdw 8 ; Spd
 	bigdw 8 ; SAtk
 	bigdw 8 ; SDef
-	db "EGG@@@@@@@@"
 
 	db PUPITAR
 	db NO_ITEM
@@ -342,6 +329,5 @@ OddEggs:
 	bigdw 9 ; Spd
 	bigdw 9 ; SAtk
 	bigdw 9 ; SDef
-	db "EGG@@@@@@@@"
 
 	assert_table_length NUM_ODD_EGGS
