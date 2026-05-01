@@ -63,7 +63,7 @@ ROMX $0d
 ROMX $0e
 	"Enemy Trainers"
 ROMX $0f
-	"Battle Core"
+	"Voltorb Flip"
 ROMX $10
 	"bank10"
 	"Evolutions and Attacks"
@@ -141,7 +141,7 @@ ROMX $31
 ROMX $32
 	"bank32"
 ROMX $33
-	"Move Animations"
+	"Crystal Events"
 ROMX $34
 	"Pic Animations 1"
 ROMX $35
@@ -311,9 +311,9 @@ ROMX $7c
 ROMX $7d
 	"Effect Commands 2"
 ROMX $7e
-	"Crystal Events"
+	"Move Animations"
 ROMX $7f
-	"Voltorb Flip"
+	"Battle Core"
 WRAM0
 	"Stack"
 	"Audio RAM"
