@@ -107,35 +107,7 @@ DoBattle:
 .skipEffects
 	farcall FieldWeather
 	farcall GetTimeOfDayImage
-	jr BattleTurn
-
-WildFled_EnemyFled_LinkBattleCanceled:
-	call SafeLoadTempTilemapToTilemap
-	ld a, [wBattleResult]
-	and BATTLERESULT_BITMASK
-	add DRAW
-	ld [wBattleResult], a
-	ld a, [wLinkMode]
-	and a
-	ld hl, BattleText_WildFled
-	jr z, .print_text
-
-	ld a, [wBattleResult]
-	and BATTLERESULT_BITMASK
-	ld [wBattleResult], a ; WIN
-	ld hl, BattleText_EnemyFled
-
-.print_text
-	call StdBattleTextbox
-
-.skip_text
-	call StopDangerSound
-	ld de, SFX_RUN
-	call WaitPlaySFX
-	call SetPlayerTurn
-	ld a, 1
-	ld [wBattleEnded], a
-	ret
+	; fallthrough
 
 BattleTurn:
 .loop
@@ -211,6 +183,34 @@ BattleTurn:
 	and a
 	ret nz
 	jr .loop
+
+WildFled_EnemyFled_LinkBattleCanceled:
+	call SafeLoadTempTilemapToTilemap
+	ld a, [wBattleResult]
+	and BATTLERESULT_BITMASK
+	add DRAW
+	ld [wBattleResult], a
+	ld a, [wLinkMode]
+	and a
+	ld hl, BattleText_WildFled
+	jr z, .print_text
+
+	ld a, [wBattleResult]
+	and BATTLERESULT_BITMASK
+	ld [wBattleResult], a ; WIN
+	ld hl, BattleText_EnemyFled
+
+.print_text
+	call StdBattleTextbox
+
+.skip_text
+	call StopDangerSound
+	ld de, SFX_RUN
+	call WaitPlaySFX
+	call SetPlayerTurn
+	ld a, 1
+	ld [wBattleEnded], a
+	ret
 
 HandleBetweenTurnEffects:
 	farcall HandleSolarPowerHPLoss
