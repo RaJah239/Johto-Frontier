@@ -95,14 +95,9 @@
 	const SFX_SING                        ; 5c
 	const SFX_HYPER_BEAM                  ; 5d
 	const SFX_SHINE                       ; 5e
-	const SFX_UNKNOWN_5F                  ; 5f
-	const SFX_UNKNOWN_60                  ; 60
-	const SFX_UNKNOWN_61                  ; 61
 	const SFX_SWITCH_POCKETS              ; 62
-	const SFX_UNKNOWN_63                  ; 63
 	const SFX_BURN                        ; 64
 	const SFX_TITLE_SCREEN_ENTRANCE       ; 65
-	const SFX_UNKNOWN_66                  ; 66
 	const SFX_GET_COIN_FROM_SLOTS         ; 67
 	const SFX_PAY_DAY                     ; 68
 	const SFX_METRONOME                   ; 69
@@ -119,7 +114,6 @@
 	const SFX_CURSE                       ; 74
 	const SFX_RAGE                        ; 75
 	const SFX_THIEF                       ; 76
-	const SFX_THIEF_2                     ; 77
 	const SFX_SPIDER_WEB                  ; 78
 	const SFX_MIND_READER                 ; 79
 	const SFX_NIGHTMARE                   ; 7a
@@ -146,7 +140,6 @@
 	const SFX_MORNING_SUN                 ; 8f
 	const SFX_LEVEL_UP                    ; 90
 	const SFX_KEY_ITEM                    ; 91
-	const SFX_FANFARE_2                   ; 92
 	const SFX_REGISTER_PHONE_NUMBER       ; 93
 	const SFX_3RD_PLACE                   ; 94
 	const SFX_GET_EGG                     ; 96
@@ -166,8 +159,6 @@
 	const SFX_EVOLVED                     ; a4
 	const SFX_MASTER_BALL                 ; a5
 	const SFX_EGG_HATCH                   ; a6
-	const SFX_GS_INTRO_CHARIZARD_FIREBALL ; a7
-	const SFX_GS_INTRO_POKEMON_APPEARS    ; a8
 	const SFX_FLASH                       ; a9
 	const SFX_GAME_FREAK_LOGO_GS          ; aa
 	const SFX_NOT_VERY_EFFECTIVE          ; ab
@@ -180,7 +171,6 @@
 	const SFX_BATON_PASS                  ; b2
 	const SFX_BALL_WOBBLE                 ; b3
 	const SFX_SWEET_SCENT                 ; b4
-	const SFX_SWEET_SCENT_2               ; b5
 	const SFX_HIT_END_OF_EXP_BAR          ; b6
 	const SFX_GIVE_TRADEMON               ; b7
 	const SFX_GET_TRADEMON                ; b8
@@ -188,8 +178,6 @@
 	const SFX_STOP_SLOT                   ; ba
 	const SFX_2_BOOPS                     ; bb
 ; new to Crystal
-	const SFX_GLASS_TING                  ; bc
-	const SFX_GLASS_TING_2                ; bd
 	const SFX_INTRO_UNOWN_1               ; be
 	const SFX_INTRO_UNOWN_2               ; bf
 	const SFX_INTRO_UNOWN_3               ; c0
@@ -204,8 +192,6 @@
 	const SFX_GAME_FREAK_PRESENTS         ; c9
 	const SFX_TINGLE                      ; ca
 	const SFX_INTRO_WHOOSH                ; cb
-	const SFX_TWO_PC_BEEPS                ; cc
-	const SFX_4_NOTE_DITTY                ; cd
 	const SFX_TWINKLE                     ; ce
 	const SFX_THUNDERBOLT                 ; cf
 	const SFX_STAT_UP                     ; d0

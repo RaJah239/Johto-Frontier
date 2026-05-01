@@ -198,63 +198,6 @@ Sfx_Tingle_Ch5:
 	note G_, 13
 	sound_ret
 
-Sfx_TwoPcBeeps:
-	channel_count 1
-	channel 5, Sfx_TwoPcBeeps_Ch5
-
-Sfx_TwoPcBeeps_Ch5:
-	duty_cycle 2
-	square_note 2, 14, 8, 1986
-	square_note 2, 2, 8, 1986
-	square_note 2, 14, 8, 1986
-	square_note 2, 2, 8, 1986
-	sound_ret
-
-Sfx_4NoteDitty:
-	channel_count 3
-	channel 5, Sfx_4NoteDitty_Ch5
-	channel 6, Sfx_4NoteDitty_Ch6
-	channel 7, Sfx_4NoteDitty_Ch7
-
-Sfx_4NoteDitty_Ch5:
-	toggle_sfx
-	duty_cycle 2
-	note_type 2, 14, 8
-	transpose 0, 2
-	octave 4
-	note C_, 2
-	volume_envelope 4, 8
-	note C_, 2
-	volume_envelope 14, 8
-	note G_, 2
-	volume_envelope 4, 8
-	note G_, 2
-	octave 5
-	volume_envelope 14, 8
-	note E_, 2
-	volume_envelope 4, 8
-	note E_, 2
-	octave 6
-	volume_envelope 14, 8
-	note C_, 2
-	volume_envelope 4, 3
-	note C_, 16
-	sound_ret
-
-Sfx_4NoteDitty_Ch6:
-	toggle_sfx
-	note_type 2, 11, 8
-	rest 9
-	rest 16
-	sound_ret
-
-Sfx_4NoteDitty_Ch7:
-	toggle_sfx
-	note_type 2, 11, 8
-	rest 9
-	rest 16
-	sound_ret
-
 Sfx_Twinkle:
 	channel_count 1
 	channel 5, Sfx_Twinkle_Ch5

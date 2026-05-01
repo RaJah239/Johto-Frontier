@@ -96,14 +96,9 @@ SFX:
 	dba Sfx_Sing
 	dba Sfx_HyperBeam
 	dba Sfx_Shine
-	dba Sfx_Unknown5F
-	dba Sfx_Unknown60
-	dba Sfx_Unknown61
 	dba Sfx_SwitchPockets
-	dba Sfx_Unknown63
 	dba Sfx_Burn
 	dba Sfx_TitleScreenEntrance
-	dba Sfx_Unknown66
 	dba Sfx_GetCoinFromSlots
 	dba Sfx_PayDay
 	dba Sfx_Metronome
@@ -120,7 +115,6 @@ SFX:
 	dba Sfx_Curse
 	dba Sfx_Rage
 	dba Sfx_Thief
-	dba Sfx_Thief2
 	dba Sfx_SpiderWeb
 	dba Sfx_MindReader
 	dba Sfx_Nightmare
@@ -128,7 +122,7 @@ SFX:
 	dba Sfx_SweetKiss
 	dba Sfx_SweetKiss2
 	dba Sfx_BellyDrum
-	dba Sfx_Unknown7F
+	dba Sfx_Unknown7F ; toxic
 	dba Sfx_SludgeBomb
 	dba Sfx_Foresight
 	dba Sfx_Spite
@@ -147,7 +141,6 @@ SFX:
 	dba Sfx_MorningSun
 	dba Sfx_LevelUp
 	dba Sfx_KeyItem
-	dba Sfx_Fanfare2
 	dba Sfx_RegisterPhoneNumber
 	dba Sfx_3rdPlace
 	dba Sfx_GetEgg
@@ -167,8 +160,6 @@ SFX:
 	dba Sfx_Evolved
 	dba Sfx_MasterBall
 	dba Sfx_EggHatch
-	dba Sfx_GsIntroCharizardFireball
-	dba Sfx_GsIntroPokemonAppears
 	dba Sfx_Flash
 	dba Sfx_GameFreakLogoGs
 	dba Sfx_NotVeryEffective
@@ -181,7 +172,6 @@ SFX:
 	dba Sfx_BatonPass
 	dba Sfx_BallWobble
 	dba Sfx_SweetScent
-	dba Sfx_SweetScent2
 	dba Sfx_HitEndOfExpBar
 	dba Sfx_GiveTrademon
 	dba Sfx_GetTrademon
@@ -189,8 +179,6 @@ SFX:
 	dba Sfx_StopSlot
 	dba Sfx_2Boops
 ; new to Crystal
-	dba Sfx_GlassTing
-	dba Sfx_GlassTing2
 	dba Sfx_IntroUnown1
 	dba Sfx_IntroUnown2
 	dba Sfx_IntroUnown3
@@ -205,8 +193,6 @@ SFX:
 	dba Sfx_GameFreakPresents
 	dba Sfx_Tingle
 	dba Sfx_IntroWhoosh
-	dba Sfx_TwoPcBeeps
-	dba Sfx_4NoteDitty
 	dba Sfx_Twinkle
 	dba Sfx_Thunderbolt
 	dba Sfx_StatUp

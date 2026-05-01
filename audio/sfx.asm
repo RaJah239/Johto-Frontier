@@ -197,21 +197,9 @@ Sfx_Call:
 	channel_count 1
 	channel 5, Sfx_Call_Ch5
 
-Sfx_Unknown60:
-	channel_count 1
-	channel 8, Sfx_Unknown60_Ch8
-
-Sfx_Unknown61:
-	channel_count 1
-	channel 8, Sfx_Unknown61_Ch8
-
 Sfx_SwitchPockets:
 	channel_count 1
 	channel 8, Sfx_SwitchPockets_Ch8
-
-Sfx_Unknown63:
-	channel_count 1
-	channel 8, Sfx_Unknown63_Ch8
 
 Sfx_Burn:
 	channel_count 1
@@ -220,10 +208,6 @@ Sfx_Burn:
 Sfx_TitleScreenEntrance:
 	channel_count 1
 	channel 8, Sfx_TitleScreenEntrance_Ch8
-
-Sfx_Unknown66:
-	channel_count 1
-	channel 5, Sfx_Unknown66_Ch5
 
 Sfx_GetCoinFromSlots:
 	channel_count 1
@@ -468,10 +452,6 @@ Sfx_Shine:
 	channel_count 1
 	channel 5, Sfx_Shine_Ch5
 
-Sfx_Unknown5F:
-	channel_count 3
-	channel 5, Sfx_Unknown5F_Ch5
-	channel 6, Sfx_Unknown5F_Ch6
 Sfx_Sandstorm:
 	channel 8, Sfx_Sandstorm_Ch8
 	assert Sfx_Sandstorm_Ch8 == Sfx_Unknown5F_Ch8
@@ -947,12 +927,6 @@ Sfx_DexFanfare80109_Ch8:
 	note C_, 16
 	rest 16
 	sound_ret
-
-Sfx_Fanfare2:
-	channel_count 3
-	channel 5, Sfx_Fanfare2_Ch5
-	channel 6, Sfx_Fanfare2_Ch6
-	channel 8, Sfx_Fanfare2_Ch8
 
 Sfx_Fanfare:
 	channel_count 3
@@ -2167,29 +2141,6 @@ Sfx_Thief_Ch8:
 	sound_loop 2, Sfx_Thief_Ch8
 	sound_ret
 
-Sfx_Thief2:
-	channel_count 1
-	channel 5, Sfx_Thief2_Ch5
-
-Sfx_Thief2_Ch5:
-	toggle_sfx
-	note_type 2, 15, 4
-	duty_cycle 0
-	octave 4
-	note C#, 3
-	note A#, 3
-	volume_envelope 13, 2
-	note C#, 3
-	note A#, 3
-	volume_envelope 11, 1
-	note C_, 3
-	note A_, 3
-	volume_envelope 8, 1
-	note C_, 3
-	note A_, 3
-	toggle_sfx
-	sound_ret
-
 Sfx_SpiderWeb:
 	channel_count 2
 	channel 5, Sfx_SpiderWeb_Ch5
@@ -2798,39 +2749,6 @@ Sfx_EggHatch_Ch5:
 	note B_, 7
 	volume_envelope 4, 2
 	note B_, 7
-	sound_ret
-
-Sfx_GsIntroCharizardFireball:
-	channel_count 1
-	channel 8, Sfx_GsIntroCharizardFireball_Ch8
-
-Sfx_GsIntroCharizardFireball_Ch8:
-	noise_note 8, 12, -7, 77
-	noise_note 8, 15, 1, 55
-.loop1:
-	noise_note 1, 15, 8, 79
-	noise_note 0, 12, 8, 38
-	noise_note 1, 13, 8, 95
-	noise_note 0, 10, 8, 55
-	sound_loop 12, .loop1
-	noise_note 3, 15, 8, 111
-	noise_note 4, 13, 8, 95
-	noise_note 12, 13, 8, 92
-	noise_note 40, 13, 3, 79
-	sound_ret
-
-Sfx_GsIntroPokemonAppears:
-	channel_count 1
-	channel 8, Sfx_GsIntroPokemonAppears_Ch8
-
-Sfx_GsIntroPokemonAppears_Ch8:
-	noise_note 1, 8, 8, 79
-	noise_note 2, 8, -7, 2
-	noise_note 2, 5, -7, 18
-	noise_note 2, 3, -7, 34
-	noise_note 0, 15, 8, 39
-	noise_note 1, 15, 8, 79
-	noise_note 8, 15, 1, 0
 	sound_ret
 
 Sfx_Flash:
@@ -3511,34 +3429,6 @@ Sfx_BallBounce_Ch6:
 	square_note 23, 0, 0, 0
 	square_note 8, 2, 1, 1857
 	square_note 23, 0, 0, 0
-	sound_ret
-
-Sfx_SweetScent2:
-	channel_count 2
-	channel 5, Sfx_SweetScent2_Ch5
-	channel 8, Sfx_SweetScent2_Ch8
-
-Sfx_SweetScent2_Ch5:
-	pitch_sweep 10, -7
-	duty_cycle 1
-	square_note 6, 15, 8, 1520
-	square_note 2, 15, 1, 1568
-	square_note 16, 15, 1, 1616
-	pitch_sweep 0, 8
-	sound_ret
-
-Sfx_SweetScent2_Ch8:
-	noise_note 2, 14, 8, 34
-	noise_note 17, 10, -2, 0
-.loop1:
-	noise_note 4, 13, -1, 16
-	noise_note 8, 9, 1, 0
-	noise_note 2, 6, 1, 7
-	sound_loop 5, .loop1
-	noise_note 4, 9, -1, 0
-	noise_note 10, 6, 1, 0
-	noise_note 6, 5, -1, 0
-	noise_note 2, 2, 1, 7
 	sound_ret
 
 Sfx_HitEndOfExpBar:
@@ -4694,17 +4584,6 @@ Sfx_HyperBeam_Ch8:
 	sound_loop 26, Sfx_HyperBeam_Ch8
 	sound_ret
 
-Sfx_Unknown60_Ch8:
-	noise_note 6, 2, 0, 16
-	noise_note 6, 2, -7, 64
-	noise_note 6, 4, -7, 65
-	noise_note 6, 8, -7, 65
-	noise_note 6, 12, -7, 66
-	noise_note 8, 13, 7, 66
-	noise_note 15, 14, 7, 67
-	noise_note 15, 15, 2, 67
-	sound_ret
-
 Sfx_IntroWhoosh_Ch8:
 	noise_note 1, 1, 0, 16
 	noise_note 2, 2, 0, 16
@@ -4717,18 +4596,8 @@ Sfx_IntroWhoosh_Ch8:
 	noise_note 15, 9, 4, 34
 	sound_ret
 
-Sfx_Unknown61_Ch8:
-	noise_note 4, 13, 1, 65
-	sound_ret
-
 Sfx_SwitchPockets_Ch8:
 	noise_note 4, 12, 1, 66
-	sound_ret
-
-Sfx_Unknown63_Ch8:
-	noise_note 2, 6, -7, 33
-	noise_note 2, 10, -7, 49
-	noise_note 15, 15, 2, 65
 	sound_ret
 
 Sfx_Burn_Ch8:
@@ -4743,13 +4612,6 @@ Sfx_TitleScreenEntrance_Ch8:
 	noise_note 2, 10, 0, 37
 	noise_note 2, 11, 0, 38
 	noise_note 15, 12, 2, 38
-	sound_ret
-
-Sfx_Unknown66_Ch5:
-	duty_cycle 2
-	square_note 1, 15, 2, 1696
-	square_note 1, 15, 2, 1760
-	square_note 8, 15, 1, 1792
 	sound_ret
 
 Sfx_GetCoinFromSlots_Ch5:
@@ -4785,85 +4647,6 @@ Sfx_Metronome_Ch5:
 	square_note 8, 3, 0, 2016
 	square_note 15, 1, 2, 2016
 	pitch_sweep 0, 8
-	sound_ret
-
-Sfx_Unknown5F_Ch5:
-.loop:
-	square_note 2, 15, 7, 1537
-	square_note 2, 15, 7, 1793
-	sound_loop 8, .loop
-	sound_ret
-
-Sfx_Unknown5F_Ch6:
-	square_note 1, 15, 7, 65535
-	square_note 2, 15, 7, 1538
-	square_note 2, 15, 7, 1794
-	sound_loop 8, Sfx_Unknown5F_Ch5.loop
-	sound_ret
-
-Sfx_Fanfare2_Ch5:
-	toggle_sfx
-	sfx_priority_on
-	tempo 256
-	volume 7, 7
-	pitch_offset 1
-	duty_cycle 3
-	note_type 6, 11, 5
-	octave 3
-	note G#, 4
-	note_type 4, 11, 2
-	note F_, 2
-	note G#, 2
-	note A_, 2
-	note A#, 2
-	note F#, 2
-	note A#, 2
-	octave 4
-	note C_, 4
-	note C_, 2
-	note_type 4, 11, 6
-	note C#, 12
-	sfx_priority_off
-	sound_ret
-
-Sfx_Fanfare2_Ch6:
-	toggle_sfx
-	duty_cycle 2
-	note_type 6, 12, 5
-	octave 4
-	note C#, 6
-	note_type 4, 12, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note_type 4, 12, 2
-	note D#, 2
-	note C#, 2
-	note D#, 2
-	note E_, 4
-	note E_, 2
-	note_type 4, 12, 6
-	note F_, 12
-	sound_ret
-
-Sfx_Fanfare2_Ch8:
-	toggle_sfx
-	drum_speed 6
-	note C_, 1
-	octave 5
-	note C#, 2
-	rest 2
-	note C#, 2
-	rest 2
-	drum_speed 4
-	note C_, 1
-	note C#, 2
-	rest 2
-	note C#, 2
-	note D#, 2
-	rest 2
-	note F_, 2
-	note G#, 6
 	sound_ret
 
 Sfx_Fanfare_Ch5:
@@ -5014,28 +4797,4 @@ Sfx_StopSlot_Ch5:
 	duty_cycle 2
 	square_note 1, 15, 8, 1888
 	square_note 4, 8, 2, 1888
-	sound_ret
-
-Sfx_GlassTing:
-	channel_count 1
-	channel 5, Sfx_GlassTing_Ch5
-
-Sfx_GlassTing_Ch5:
-	duty_cycle 2
-	square_note 32, 13, 1, 2012
-	sound_ret
-
-Sfx_GlassTing2:
-	channel_count 2
-	channel 5, Sfx_GlassTing2_Ch5
-	channel 6, Sfx_GlassTing2_Ch6
-
-Sfx_GlassTing2_Ch5:
-	duty_cycle 2
-	square_note 16, 15, 1, 2012
-	sound_ret
-
-Sfx_GlassTing2_Ch6:
-	duty_cycle 2
-	square_note 16, 13, 1, 2013
 	sound_ret
