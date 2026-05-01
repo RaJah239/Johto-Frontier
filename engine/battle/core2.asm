@@ -3269,12 +3269,12 @@ MainText:
 .page1:
 	db "◀ Page 1/5 ▶@"
 .page1_content:
-	db " Stat Changes @"
+	db " Actual Stats @"
 
 .page2:
 	db "◀ Page 2/5 ▶@"
 .page2_content:
-	db " Actual Stats @"
+	db " Stat Changes @"
 
 .page3:
 	db "◀ Page 3/5 ▶@"
@@ -3455,9 +3455,9 @@ InfoBoxRightPress:
 RenderTrainerInfoPage:
 	ld a, [wTrainerInfoPage]
 	and a
-	jp z, StatChangesInfoBox
-	cp 1
 	jp z, StatsInfoBox
+	cp 1
+	jp z, StatChangesInfoBox
 	cp 2
 	jp z, FieldInfoBox1
 	cp 3
