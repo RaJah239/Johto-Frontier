@@ -5525,7 +5525,7 @@ ParseEnemyAction:
 	call SafeLoadTempTilemapToTilemap
 	ld a, [wBattleAction]
 	cp BATTLEACTION_STRUGGLE
-	jmp z, .struggle
+	jr z, .struggle
 	cp BATTLEACTION_SKIPTURN
 	jr z, .skip_turn
 	cp BATTLEACTION_SWITCH1
@@ -5559,12 +5559,6 @@ ParseEnemyAction:
 .skip_encore
 	call CheckEnemyLockedIn
 	jr nz, ResetVarsForSubstatusRage
-	jr .continue
-
-.skip_turn
-	ld a, $ff
-	jr .finish
-
 .continue
 	ld hl, wEnemyMonMoves
 	ld de, wEnemyMonPP
@@ -5579,13 +5573,18 @@ ParseEnemyAction:
 	ld a, [de]
 	and PP_MASK
 	jr nz, .enough_pp
-
 .disabled
 	inc hl
 	inc de
 	dec b
 	jr nz, .loop
-	jr .struggle
+.struggle
+	ld a, STRUGGLE
+	jr .finish
+
+.skip_turn
+	ld a, $ff
+	jr .finish
 
 .enough_pp
 	ld a, [wBattleMode]
@@ -5617,10 +5616,8 @@ ParseEnemyAction:
 	ld a, c
 	ld [wCurEnemyMoveNum], a
 	ld a, b
-
 .finish
 	ld [wCurEnemyMove], a
-
 .skip_load
 	call SetEnemyTurn
 	callfar UpdateMoveData
@@ -5632,10 +5629,6 @@ ParseEnemyAction:
 	xor a
 	ld [wEnemyProtectCount], a
 	ret
-
-.struggle
-	ld a, STRUGGLE
-	jr .finish
 
 ResetVarsForSubstatusRage:
 	xor a
