@@ -128,6 +128,17 @@ CheckAmuletCoin:
 	ld [wAmuletCoin], a
 	ret
 
+GetMovePower:
+	ld a, b
+	dec a
+	ld hl, Moves + MOVE_POWER
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	ld b, a
+	ret
+
 WriteDownOldStatsForGainCalculation::
 	inc hl ; Max HP.
 	inc hl ; Max HP + 1.

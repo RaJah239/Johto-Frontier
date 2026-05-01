@@ -5349,7 +5349,7 @@ MoveSelectionScreen:
 	ldh [hBGMapMode], a
 	call ScrollingMenuJoypad
 	bit D_UP_F, a
-	jr nz, .pressed_up
+	jmp nz, .pressed_up
 	bit D_DOWN_F, a
 	jmp nz, .pressed_down
 	bit SELECT_F, a
@@ -5411,15 +5411,14 @@ MoveSelectionScreen:
 	ld b, a                         ; a and b are the index of the current move
 	ld a, [wPlayerTauntCount]       ; a is now the player taunt count
 	and a                           ; is the player taunt count 0
-    ld a, b                         ; a is again the index of the current move
+	ld a, b                         ; a is again the index of the current move
 	jr z, .skip2                    ; if player taunt count is 0 we continue
 	push bc                         ; save b
-    call GetMovePower               ; get the move power in a
-    pop bc                          ; retrieve b
-    and a                           ; is the move power 0
-    ld a, b                         ; a in now index of the current move
-    jr z, .move_disabled            ; if power is 0 the move is disabled
-
+	farcall GetMovePower            ; get the move power in a
+	pop bc                          ; retrieve b
+	and a                           ; is the move power 0
+	ld a, b                         ; a in now index of the current move
+	jr z, .move_disabled            ; if power is 0 the move is disabled
 .skip2
 	ld [wCurPlayerMove], a
 	xor a
@@ -5431,7 +5430,6 @@ MoveSelectionScreen:
 
 .no_pp_left
 	ld hl, BattleText_TheresNoPPLeftForThisMove
-
 .place_textbox_start_over
 	push hl
 	call ClearSprites
@@ -8178,38 +8176,8 @@ LoadTrainerOrWildMonPic:
 	jr nz, .Trainer
 	ld a, [wTempWildMonSpecies]
 	ld [wCurPartySpecies], a
-
 .Trainer:
 	ld [wTempEnemyMonSpecies], a
-	ret
-
-InitEnemy:
-	ld a, [wOtherTrainerClass]
-	and a
-	jr nz, InitEnemyTrainer ; trainer
-	jmp InitEnemyWildmon ; wild
-
-BackUpBGMap2:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wDecompressScratch)
-	ldh [rSVBK], a
-	ld hl, wDecompressScratch
-	ld bc, $40 tiles ; vBGMap3 - vBGMap2
-	ld a, $2
-	call ByteFill
-	ldh a, [rVBK]
-	push af
-	ld a, $1
-	ldh [rVBK], a
-	ld de, wDecompressScratch
-	hlbgcoord 0, 0 ; vBGMap2
-	lb bc, BANK(BackUpBGMap2), $40
-	call Request2bpp
-	pop af
-	ldh [rVBK], a
-	pop af
-	ldh [rSVBK], a
 	ret
 
 InitEnemyTrainer:
@@ -8230,9 +8198,9 @@ InitEnemyTrainer:
 .self
 	callfar ReadPlayerPartyAsTrainerParty
 	jr .ok
+
 .notCal
 	callfar ReadTrainerParty
-
 .ok
 	ld de, vTiles2
 	callfar GetTrainerPic
@@ -8271,7 +8239,11 @@ InitEnemyTrainer:
 	inc [hl]
 	jr .partyloop
 
-InitEnemyWildmon:
+InitEnemy:
+	ld a, [wOtherTrainerClass]
+	and a
+	jr nz, InitEnemyTrainer ; trainer
+.InitEnemyWildmon
 	ld a, WILD_BATTLE
 	ld [wBattleMode], a
 	call LoadEnemyMon
@@ -8302,6 +8274,29 @@ InitEnemyWildmon:
 	hlcoord 12, 0
 	lb bc, 7, 7
 	predef_jump PlaceGraphic
+
+BackUpBGMap2:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wDecompressScratch)
+	ldh [rSVBK], a
+	ld hl, wDecompressScratch
+	ld bc, $40 tiles ; vBGMap3 - vBGMap2
+	ld a, $2
+	call ByteFill
+	ldh a, [rVBK]
+	push af
+	ld a, $1
+	ldh [rVBK], a
+	ld de, wDecompressScratch
+	hlbgcoord 0, 0 ; vBGMap2
+	lb bc, BANK(BackUpBGMap2), $40
+	call Request2bpp
+	pop af
+	ldh [rVBK], a
+	pop af
+	ldh [rSVBK], a
+	ret
 
 CleanUpBattleRAM:
 	xor a
@@ -8877,17 +8872,6 @@ BattleStartMessage:
 	call CheckIfFastBattlesIsOn
 	ret nz
 	jmp StdBattleTextbox
-
-GetMovePower:
-	ld a, b
-	dec a
-	ld hl, Moves + MOVE_POWER
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-	ld a, BANK(Moves)
-	call GetFarByte
-	ld b, a
-	ret
 
 InitBattleMon_Etc:
 	call InitBattleMon
