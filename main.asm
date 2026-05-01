@@ -590,3 +590,6 @@ INCLUDE "engine/abilities/knock_out_abilities.asm"
 
 SECTION "Winning Streaks", ROMX
 INCLUDE "data/events/streaks.asm"
+
+SECTION "Unused Book Like Function", ROMX
+INCLUDE "data/unused_book_like_function.asm"
