@@ -142,7 +142,7 @@ BattleTurn:
 	call UpdateBattleMonInParty
 	farcall AIChooseMove
 
-	call CheckPlayerLockedIn
+	farcall CheckPlayerLockedIn
 	jr c, .skip_iteration
 .loop1
 	call BattleMenu
@@ -675,33 +675,8 @@ CheckContestBattleOver:
 	and a
 	ret
 
-CheckPlayerLockedIn:
-	ld a, [wPlayerSubStatus4]
-	and 1 << SUBSTATUS_RECHARGE
-	jr nz, .quit
-
-	ld hl, wEnemySubStatus3
-	res SUBSTATUS_FLINCHED, [hl]
-	ld hl, wPlayerSubStatus3
-	res SUBSTATUS_FLINCHED, [hl]
-
-	ld a, [hl]
-	and 1 << SUBSTATUS_CHARGED | 1 << SUBSTATUS_RAMPAGE
-	jr nz, .quit
-
-	ld hl, wPlayerSubStatus1
-	bit SUBSTATUS_ROLLOUT, [hl]
-	jr nz, .quit
-
-	and a
-	ret
-
-.quit
-	scf
-	ret
-
 ParsePlayerAction:
-	call CheckPlayerLockedIn
+	farcall CheckPlayerLockedIn
 	jr c, .locked_in
 	ld hl, wPlayerSubStatus5
 	bit SUBSTATUS_ENCORED, [hl]

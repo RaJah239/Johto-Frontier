@@ -139,6 +139,31 @@ GetMovePower:
 	ld b, a
 	ret
 
+CheckPlayerLockedIn:
+	ld a, [wPlayerSubStatus4]
+	and 1 << SUBSTATUS_RECHARGE
+	jr nz, .quit
+
+	ld hl, wEnemySubStatus3
+	res SUBSTATUS_FLINCHED, [hl]
+	ld hl, wPlayerSubStatus3
+	res SUBSTATUS_FLINCHED, [hl]
+
+	ld a, [hl]
+	and 1 << SUBSTATUS_CHARGED | 1 << SUBSTATUS_RAMPAGE
+	jr nz, .quit
+
+	ld hl, wPlayerSubStatus1
+	bit SUBSTATUS_ROLLOUT, [hl]
+	jr nz, .quit
+
+	and a
+	ret
+
+.quit
+	scf
+	ret
+
 WriteDownOldStatsForGainCalculation::
 	inc hl ; Max HP.
 	inc hl ; Max HP + 1.
