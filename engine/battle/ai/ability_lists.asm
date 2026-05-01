@@ -153,11 +153,6 @@ SereneGracePokemon_AI:
     db TOGEKISS
     db -1 ; end
 
-MagicGuardPokemon_AI:
-    db CLEFAIRY
-    db CLEFABLE
-    db -1 ; end
-
 OverdrivePokemon_AI:
     db URSALUNA
     db PORYGONZ

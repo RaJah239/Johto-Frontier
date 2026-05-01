@@ -1337,7 +1337,7 @@ DoesPokemonHaveMagicGuard:
 	push hl
 	push de
 	push bc
-	ld hl, MagicGuardPokemon_AI
+	ld hl, MagicGuardPokemon
 	call IsInByteArray
 	pop bc
 	pop de

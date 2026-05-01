@@ -258,3 +258,163 @@ HandleWrap:
 	ld hl, BattleText_UserWasReleasedFromStringBuffer1
 .print_text
 	jmp StdBattleTextbox
+
+HandleWeather:
+	ld a, [wBattleWeather]
+	cp WEATHER_NONE
+	ret z
+
+	ld hl, wWeatherCount
+	dec [hl]
+	jr nz, .continues
+
+; ended
+	call CheckIfFastBattlesIsOn
+	jr nz, .skip_weather_end_text
+
+	ld hl, .WeatherEndedMessages
+	call .PrintWeatherMessage
+
+.skip_weather_end_text
+	xor a
+	ld [wBattleWeather], a
+	ret
+
+.continues
+	call CheckIfFastBattlesIsOn
+	jr nz, .skip_weather_text
+
+	ld hl, .WeatherMessages
+	call .PrintWeatherMessage
+
+.skip_weather_text
+	ld a, [wBattleWeather]
+	cp WEATHER_SANDSTORM
+	jr nz, .check_hail
+
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .enemy_first
+
+; player first
+	call SetPlayerTurn
+	call .SandstormDamage
+	call SetEnemyTurn
+	jr .SandstormDamage
+
+.enemy_first
+	call SetEnemyTurn
+	call .SandstormDamage
+	call SetPlayerTurn
+
+.SandstormDamage:
+; magic guard pokemon take no residual damage
+	call GetCurrentMon
+	ld hl, MagicGuardPokemon
+	call IsInByteArray
+	ret c
+
+	ld a, BATTLE_VARS_SUBSTATUS3
+	call GetBattleVar
+	bit SUBSTATUS_UNDERGROUND, a
+	ret nz
+
+	ld hl, wBattleMonType1
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .ok
+	ld hl, wEnemyMonType1
+.ok
+	ld a, [hli]
+	cp ROCK
+	ret z
+	cp GROUND
+	ret z
+	cp STEEL
+	ret z
+
+	ld a, [hl]
+	cp ROCK
+	ret z
+	cp GROUND
+	ret z
+	cp STEEL
+	ret z
+
+	farcall GetSixteenthMaxHP
+	farcall SubtractHPFromUser
+
+	ld hl, SandstormHitsText
+	jmp StdBattleTextbox
+
+.check_hail
+	ld a, [wBattleWeather]
+	cp WEATHER_HAIL
+	ret nz
+	
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .enemy_first_hail
+	
+; player first
+	call SetPlayerTurn
+	call .HailDamage
+	call SetEnemyTurn
+	jr .HailDamage
+	
+.enemy_first_hail
+	call SetEnemyTurn
+	call .HailDamage
+	call SetPlayerTurn
+	
+.HailDamage:
+	ld a, BATTLE_VARS_SUBSTATUS3
+	call GetBattleVar
+	bit SUBSTATUS_UNDERGROUND, a
+	ret nz
+	
+	ld hl, wBattleMonType1
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .ok1
+	ld hl, wEnemyMonType1
+.ok1
+	ld a, [hli]
+	cp ICE
+	ret z
+	
+	ld a, [hl]
+	cp ICE
+	ret z
+
+	farcall GetSixteenthMaxHP
+	farcall SubtractHPFromUser
+	
+	ld hl, PeltedByHailText
+	jmp StdBattleTextbox
+
+.PrintWeatherMessage:
+	ld a, [wBattleWeather]
+	dec a
+	ld c, a
+	ld b, 0
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jmp StdBattleTextbox
+
+.WeatherMessages:
+; entries correspond to WEATHER_* constants
+	dw BattleText_RainContinuesToFall
+	dw BattleText_TheSunlightContinuesToShine
+	dw BattleText_TheSandstormRages
+	dw BattleText_HailContinuesToFall
+
+.WeatherEndedMessages:
+; entries correspond to WEATHER_* constants
+	dw BattleText_TheRainStopped
+	dw BattleText_TheSunlightFaded
+	dw BattleText_TheSandstormSubsided
+	dw BattleText_TheHailStopped
