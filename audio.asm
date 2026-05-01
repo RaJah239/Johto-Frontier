@@ -28,15 +28,12 @@ INCLUDE "audio/music/trainervictory.asm"
 
 SECTION "Songs 2", ROMX
 
-INCLUDE "audio/music/route1.asm"
 INCLUDE "audio/music/route3.asm"
-INCLUDE "audio/music/route12.asm"
 INCLUDE "audio/music/kantogymbattle.asm"
 INCLUDE "audio/music/kantowildbattle.asm"
 INCLUDE "audio/music/pokemoncenter.asm"
 INCLUDE "audio/music/looklass.asm"
 INCLUDE "audio/music/lookofficer.asm"
-INCLUDE "audio/music/route2.asm"
 INCLUDE "audio/music/mtmoon.asm"
 INCLUDE "audio/music/showmearound.asm"
 INCLUDE "audio/music/gamecorner.asm"
@@ -55,7 +52,6 @@ INCLUDE "audio/music/route26.asm"
 INCLUDE "audio/music/ecruteakcity.asm"
 INCLUDE "audio/music/lakeofragerocketradio.asm"
 INCLUDE "audio/music/magnettrain.asm"
-INCLUDE "audio/music/lavendertown.asm"
 INCLUDE "audio/music/dancinghall.asm"
 INCLUDE "audio/music/contestresults.asm"
 INCLUDE "audio/music/route30.asm"
@@ -68,7 +64,6 @@ INCLUDE "audio/music/route29.asm"
 INCLUDE "audio/music/halloffame.asm"
 INCLUDE "audio/music/healpokemon.asm"
 INCLUDE "audio/music/evolution.asm"
-INCLUDE "audio/music/printer.asm"
 
 
 SECTION "Songs 4", ROMX
@@ -83,13 +78,8 @@ assert BANK(Music_WildPokemonVictory) == BANK(Music_SuccessfulCapture)
 INCLUDE "audio/music/gymleadervictory.asm"
 INCLUDE "audio/music/mtmoonsquare.asm"
 INCLUDE "audio/music/gym.asm"
-INCLUDE "audio/music/pallettown.asm"
 INCLUDE "audio/music/profoakspokemontalk.asm"
 INCLUDE "audio/music/profoak.asm"
-
-INCLUDE "audio/music/lookrival.asm"
-INCLUDE "audio/music/aftertherivalfight.asm"
-assert BANK(Music_LookRival) == BANK(Music_AfterTheRivalFight)
 
 INCLUDE "audio/music/surf.asm"
 INCLUDE "audio/music/nationalpark.asm"
@@ -108,8 +98,6 @@ INCLUDE "audio/music/mom.asm"
 INCLUDE "audio/music/victoryroad.asm"
 INCLUDE "audio/music/pokemonlullaby.asm"
 INCLUDE "audio/music/pokemonmarch.asm"
-INCLUDE "audio/music/goldsilveropening.asm"
-INCLUDE "audio/music/goldsilveropening2.asm"
 INCLUDE "audio/music/lookhiker.asm"
 
 INCLUDE "audio/music/lookrocket.asm"
@@ -124,7 +112,6 @@ INCLUDE "audio/music/bugcatchingcontest.asm"
 
 SECTION "Songs 5", ROMX
 
-INCLUDE "audio/music/mobileadaptermenu.asm"
 INCLUDE "audio/music/buenaspassword.asm"
 INCLUDE "audio/music/lookmysticalman.asm"
 INCLUDE "audio/music/crystalopening.asm"
@@ -145,7 +132,6 @@ INCLUDE "audio/music/postcredits.asm"
 
 SECTION "Extra Songs 3", ROMX
 
-INCLUDE "audio/music/mobileadapter.asm"
 INCLUDE "audio/music/clair.asm"
 
 SECTION "New Songs", ROMX

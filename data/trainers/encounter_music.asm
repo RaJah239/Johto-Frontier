@@ -12,7 +12,7 @@ TrainerEncounterMusic::
 	db MUSIC_LASS_ENCOUNTER        ; jasmine
 	db MUSIC_OFFICER_ENCOUNTER     ; chuck
 	db MUSIC_BEAUTY_ENCOUNTER      ; clair
-	db MUSIC_RIVAL_ENCOUNTER       ; rival1
+	db MUSIC_HIKER_ENCOUNTER       ; rival1
 	db MUSIC_HIKER_ENCOUNTER       ; pokemon_prof
 	db MUSIC_HIKER_ENCOUNTER       ; will
 	db MUSIC_HIKER_ENCOUNTER       ; cal
@@ -46,7 +46,7 @@ TrainerEncounterMusic::
 	db MUSIC_BEAUTY_ENCOUNTER      ; swimmerf
 	db MUSIC_HIKER_ENCOUNTER       ; sailor
 	db MUSIC_POKEMANIAC_ENCOUNTER  ; super_nerd
-	db MUSIC_RIVAL_ENCOUNTER       ; rival2
+	db MUSIC_HIKER_ENCOUNTER       ; rival2
 	db MUSIC_HIKER_ENCOUNTER       ; guitarist
 	db MUSIC_HIKER_ENCOUNTER       ; hiker
 	db MUSIC_HIKER_ENCOUNTER       ; biker
@@ -68,7 +68,7 @@ TrainerEncounterMusic::
 	db MUSIC_LASS_ENCOUNTER        ; twins
 	db MUSIC_BEAUTY_ENCOUNTER      ; pokefanf
 	db MUSIC_HIKER_ENCOUNTER       ; red
-	db MUSIC_RIVAL_ENCOUNTER       ; blue
+	db MUSIC_HIKER_ENCOUNTER       ; blue
 	db MUSIC_HIKER_ENCOUNTER       ; officer
 	db MUSIC_ROCKET_ENCOUNTER      ; gruntf
 	db MUSIC_HIKER_ENCOUNTER       ; mysticalman

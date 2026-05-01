@@ -5,9 +5,7 @@ Music:
 	table_width 3, Music
 	dba Music_Nothing
 	dba Music_TitleScreen
-	dba Music_Route1
 	dba Music_Route3
-	dba Music_Route12
 	dba Music_MagnetTrain
 	dba Music_KantoGymBattle
 	dba Music_KantoWildBattle
@@ -16,8 +14,6 @@ Music:
 	dba Music_LookLass
 	dba Music_LookOfficer
 	dba Music_HealPokemon
-	dba Music_LavenderTown
-	dba Music_Route2
 	dba Music_MtMoon
 	dba Music_ShowMeAround
 	dba Music_GameCorner
@@ -30,11 +26,8 @@ Music:
 	dba Music_GymLeaderVictory
 	dba Music_MtMoonSquare
 	dba Music_Gym
-	dba Music_PalletTown
 	dba Music_ProfOaksPokemonTalk
 	dba Music_ProfOak
-	dba Music_LookRival
-	dba Music_AfterTheRivalFight
 	dba Music_Surf
 	dba Music_Evolution
 	dba Music_NationalPark
@@ -82,8 +75,6 @@ Music:
 	dba Music_VictoryRoad
 	dba Music_PokemonLullaby
 	dba Music_PokemonMarch
-	dba Music_GoldSilverOpening
-	dba Music_GoldSilverOpening2
 	dba Music_MainMenu
 	dba Music_RuinsOfAlphInterior
 	dba Music_RocketTheme
@@ -91,12 +82,9 @@ Music:
 	dba Music_ContestResults
 	dba Music_BugCatchingContest
 	dba Music_LakeOfRageRocketRadio
-	dba Music_Printer
 	dba Music_PostCredits
 ; new to Crystal
 	dba Music_Clair
-	dba Music_MobileAdapterMenu
-	dba Music_MobileAdapter
 	dba Music_BuenasPassword
 	dba Music_LookMysticalMan
 	dba Music_CrystalOpening

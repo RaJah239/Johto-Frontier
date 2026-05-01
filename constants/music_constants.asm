@@ -3,9 +3,7 @@
 	const_def
 	const MUSIC_NONE                         ; 00
 	const MUSIC_TITLE                        ; 01
-	const MUSIC_ROUTE_1                      ; 02
 	const MUSIC_ROUTE_3                      ; 03
-	const MUSIC_ROUTE_12                     ; 04
 	const MUSIC_MAGNET_TRAIN                 ; 05
 	const MUSIC_KANTO_GYM_LEADER_BATTLE      ; 06
 	const MUSIC_KANTO_WILD_BATTLE            ; 08
@@ -14,8 +12,6 @@
 	const MUSIC_LASS_ENCOUNTER               ; 0b
 	const MUSIC_OFFICER_ENCOUNTER            ; 0c
 	const MUSIC_HEAL                         ; 0d
-	const MUSIC_LAVENDER_TOWN                ; 0e
-	const MUSIC_ROUTE_2                      ; 0f
 	const MUSIC_MT_MOON                      ; 10
 	const MUSIC_SHOW_ME_AROUND               ; 11
 	const MUSIC_GAME_CORNER                  ; 12
@@ -28,11 +24,8 @@
 	const MUSIC_GYM_VICTORY                  ; 19
 	const MUSIC_MT_MOON_SQUARE               ; 1a
 	const MUSIC_GYM                          ; 1b
-	const MUSIC_PALLET_TOWN                  ; 1c
 	const MUSIC_POKEMON_TALK                 ; 1d
 	const MUSIC_PROF_OAK                     ; 1e
-	const MUSIC_RIVAL_ENCOUNTER              ; 1f
-	const MUSIC_RIVAL_AFTER                  ; 20
 	const MUSIC_SURF                         ; 21
 	const MUSIC_EVOLUTION                    ; 22
 	const MUSIC_NATIONAL_PARK                ; 23
@@ -80,23 +73,18 @@
 	const MUSIC_VICTORY_ROAD                 ; 4f
 	const MUSIC_POKEMON_LULLABY              ; 50
 	const MUSIC_POKEMON_MARCH                ; 51
-	const MUSIC_GS_OPENING                   ; 52
-	const MUSIC_GS_OPENING_2                 ; 53
 	const MUSIC_MAIN_MENU                    ; 54
 	const MUSIC_RUINS_OF_ALPH_INTERIOR       ; 55
 	const MUSIC_ROCKET_OVERTURE              ; 56
 	const MUSIC_DANCING_HALL                 ; 57
 	const MUSIC_BUG_CATCHING_CONTEST_RANKING ; 58
 	const MUSIC_BUG_CATCHING_CONTEST         ; 59
-	const MUSIC_LAKE_OF_RAGE_ROCKET_RADIO    ; 5a
-	const MUSIC_PRINTER                      ; 5b
+	const MUSIC_LAKE_OF_RAGE_ROCKET_RADIO    ; 5a to remove
 	const MUSIC_POST_CREDITS                 ; 5c
 ; new to Crystal
 	const MUSIC_CLAIR                        ; 5d
-	const MUSIC_MOBILE_ADAPTER_MENU          ; 5e
-	const MUSIC_MOBILE_ADAPTER               ; 5f
 	const MUSIC_BUENAS_PASSWORD              ; 60
-	const MUSIC_MYSTICALMAN_ENCOUNTER        ; 61
+	const MUSIC_MYSTICALMAN_ENCOUNTER        ; 61 maybe remove
 	const MUSIC_CRYSTAL_OPENING              ; 62
 	const MUSIC_BATTLE_TOWER_THEME           ; 63
 	const MUSIC_SUICUNE_BATTLE               ; 64

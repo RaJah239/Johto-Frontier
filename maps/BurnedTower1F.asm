@@ -56,7 +56,6 @@ BurnedTowerRivalBattleScript:
 	pause 15
 	applymovement PLAYER, BurnedTowerMovement_PlayerWalksToRival
 	applymovement BURNEDTOWER1F_RIVAL, BurnedTowerMovement_RivalWalksToPlayer
-	playmusic MUSIC_RIVAL_ENCOUNTER
 	opentext
 	writetext BurnedTowerRival_BeforeText
 	waitbutton
@@ -93,7 +92,6 @@ BurnedTowerRivalBattleScript:
 
 .returnfrombattle
 	special DeleteSavedMusic
-	playmusic MUSIC_RIVAL_AFTER
 	opentext
 	writetext BurnedTowerRival_AfterText1
 	waitbutton
