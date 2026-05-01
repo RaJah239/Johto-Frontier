@@ -83,7 +83,6 @@ Music:
 	dba Music_BugCatchingContest
 	dba Music_LakeOfRageRocketRadio
 	dba Music_PostCredits
-; new to Crystal
 	dba Music_Clair
 	dba Music_BuenasPassword
 	dba Music_LookMysticalMan
@@ -91,7 +90,7 @@ Music:
 	dba Music_BattleTowerTheme
 	dba Music_SuicuneBattle
 	dba Music_BattleTowerLobby
-; trove
+; new
 	dba Music_FinalBattle
 	dba Music_MaxieArchieBattle
 	dba Music_GymLeaderBattle
