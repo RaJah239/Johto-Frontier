@@ -5283,7 +5283,7 @@ MoveInfoBox:
 	ld a, [hl]
 	and PP_MASK
 	ld [wStringBuffer1], a
-	call .PrintPP
+	farcall PrintPP
 
 	farcall UpdateMoveData
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
@@ -5424,6 +5424,8 @@ MoveInfoBox:
 	call PrintNum
 	ld [hl], "<%>" ; displays percent symbol
 	hlcoord 9, 9
+
+	farcall PrintDamage
 	ret
 
 .nopower_string:
@@ -5446,21 +5448,6 @@ MoveInfoBox:
 	db "×4@"
 .Disabled:
 	db "Disabled!@"
-
-.PrintPP:
-	hlcoord 5, 11
-	push hl
-	ld de, wStringBuffer1
-	lb bc, 1, 2
-	call PrintNum
-	pop hl
-	inc hl
-	inc hl
-	ld [hl], "/"
-	inc hl
-	ld de, wNamedObjectIndex
-	lb bc, 1, 2
-	jmp PrintNum
 
 CheckPlayerHasUsableMoves:
 	ld a, STRUGGLE

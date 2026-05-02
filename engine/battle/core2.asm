@@ -613,6 +613,76 @@ ForfeitQuestionFunction:
 	xor a
 	ret
 
+PrintDamage:
+	ld a, [wCurDamage]
+	ld h, a
+	ld a, [wCurDamage + 1]
+	ld l, a
+	push hl
+
+	ld a, [wTypeModifier]
+	push af
+	ld a, [wTypeMatchup]
+	push af
+	ld a, [wCurType]
+	push af
+	ld a, [wAttackMissed]
+	push af
+	ld a, [wCriticalHit]
+	push af
+	ld a, [wHalfDamage]
+	push af
+
+	xor a
+	ld [wTypeModifier], a
+	ld [wAttackMissed], a
+	ld [wCriticalHit], a
+	ld [wHalfDamage], a
+
+	farcall PlayerAttackDamage
+	farcall BattleCommand_DamageCalc
+	farcall BattleCommand_Stab
+
+	hlcoord 6, 12
+	ld de, wCurDamage
+	lb bc, 2, 3
+	call PrintNum
+
+	pop af
+	ld [wHalfDamage], a
+	pop af
+	ld [wCriticalHit], a
+	pop af
+	ld [wAttackMissed], a
+	pop af
+	ld [wCurType], a
+	pop af
+	ld [wTypeMatchup], a
+	pop af
+	ld [wTypeModifier], a
+
+	pop hl
+	ld a, h
+	ld [wCurDamage], a
+	ld a, l
+	ld [wCurDamage + 1], a
+	ret
+
+PrintPP:
+	hlcoord 5, 11
+	push hl
+	ld de, wStringBuffer1
+	lb bc, 1, 2
+	call PrintNum
+	pop hl
+	inc hl
+	inc hl
+	ld [hl], "/"
+	inc hl
+	ld de, wNamedObjectIndex
+	lb bc, 1, 2
+	jmp PrintNum
+
 TrainerBattleInfo:
 	push hl
 	push de
