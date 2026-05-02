@@ -141,13 +141,14 @@
 
 	charmap "<half>",    $c0
 	charmap "<+>",       $c1
+	charmap "<BoldP>",   $c2
 	charmap "<se>",      $c3
 	charmap "<le>",      $c4
 	charmap "<ct>",      $c5
 	charmap "<physical>",$c6
 	charmap "<special>", $c7
 	charmap "<other>",   $c8
-	charmap "<%>",       $c9 ; Percent symbol
+	charmap "<%>",       $c9
 	charmap "<⁂>",      $ca
 	charmap "<star>",    $cb
 	charmap "<float>",   $cc

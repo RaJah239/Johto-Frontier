@@ -614,6 +614,13 @@ ForfeitQuestionFunction:
 	ret
 
 PrintDamage:
+	; check if move has no power
+	; or not a special move like counter, mirror coat or seismic toss
+	; and bail
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	cp 2
+	ret c
+
 	ld a, [wCurDamage]
 	ld h, a
 	ld a, [wCurDamage + 1]
@@ -643,7 +650,15 @@ PrintDamage:
 	farcall BattleCommand_DamageCalc
 	farcall BattleCommand_Stab
 
-	hlcoord 6, 12
+	ld de, .dmg_string
+	hlcoord 1, 11
+	call PlaceString
+
+	ld de, .colon_string
+	hlcoord 6, 11
+	call PlaceString
+
+	hlcoord 7, 11
 	ld de, wCurDamage
 	lb bc, 2, 3
 	call PrintNum
@@ -668,8 +683,15 @@ PrintDamage:
 	ld [wCurDamage + 1], a
 	ret
 
+.dmg_string:   db "Dmg@"
+.colon_string: db ":@"
+
 PrintPP:
-	hlcoord 5, 11
+	ld de, .pp_string
+	hlcoord 2, 10
+	call PlaceString
+
+	hlcoord 5, 10
 	push hl
 	ld de, wStringBuffer1
 	lb bc, 1, 2
@@ -682,6 +704,8 @@ PrintPP:
 	ld de, wNamedObjectIndex
 	lb bc, 1, 2
 	jmp PrintNum
+
+.pp_string: db "<BoldP><BoldP>@"
 
 TrainerBattleInfo:
 	push hl

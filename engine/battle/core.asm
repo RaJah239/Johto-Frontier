@@ -5236,8 +5236,8 @@ MoveInfoBox:
 	xor a
 	ldh [hBGMapMode], a
 
-	hlcoord 0, 8 ; upper right corner of the textbox
-	lb bc, 3, 9
+	hlcoord 0, 7 ; upper right corner of the textbox
+	lb bc, 4, 9
 	call Textbox
 	call MobileTextBorder
 
@@ -5289,13 +5289,13 @@ MoveInfoBox:
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
 	ld b, a
 	farcall BattleGetMoveCategoryName
-	hlcoord 1, 9 ; Category coordinates
+	hlcoord 1, 8 ; Category coordinates
 	ld de, wStringBuffer1
 	call PlaceString
 
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
 	ld b, a
-	hlcoord 2, 9
+	hlcoord 2, 8
 	predef PrintMoveType
 
 ; display type effectiveness in battle menu
@@ -5345,16 +5345,16 @@ MoveInfoBox:
 	; fallthrough
 
 .print_effectiveness
-	hlcoord 1, 11
+	hlcoord 4, 11
 	call PlaceString
 
 .skip_type_effectiveness
 ; print move BP (Base Power)
 	ld de, .power_string ; "p/"
-	hlcoord 4, 10
+	hlcoord 4, 9
 	call PlaceString
 
-	hlcoord 1, 10
+	hlcoord 1, 9
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
 	cp EFFECT_LEVEL_DAMAGE
@@ -5404,7 +5404,7 @@ MoveInfoBox:
 
 	ld de, .nopower_string
 	ld bc, 3
-	hlcoord 6, 10
+	hlcoord 6, 9
 	jmp PlaceString
 
 .imperfect
@@ -5420,34 +5420,23 @@ MoveInfoBox:
 	ld [wBuffer1], a
 	ld de, wBuffer1
 	lb bc, 1, 3
-	hlcoord 6, 10
+	hlcoord 6, 9
 	call PrintNum
 	ld [hl], "<%>" ; displays percent symbol
-	hlcoord 9, 9
+	hlcoord 9, 8
 
-	farcall PrintDamage
-	ret
+	farjp PrintDamage
 
-.nopower_string:
-	db "---@"
-.place_var_string:
-	db " var@"
-.power_string:
-	db "p/@"
-.zero_damage:
-	db "×0@"
-.half_damage:
-	db "×<half>@"
-.quarter_damage:
-	db "×<quarter>@"
-.neutral_damage:
-	db "×1@"
-.double_damage:
-	db "×2@"
-.quadruple_damage:
-	db "×4@"
-.Disabled:
-	db "Disabled!@"
+.nopower_string:   db "---@"
+.place_var_string: db " var@"
+.power_string:     db "p/@"
+.zero_damage:      db "×0@"
+.half_damage:      db "×<half>@"
+.quarter_damage:   db "×<quarter>@"
+.neutral_damage:   db "×1@"
+.double_damage:    db "×2@"
+.quadruple_damage: db "×4@"
+.Disabled:         db "Disabled!@"
 
 CheckPlayerHasUsableMoves:
 	ld a, STRUGGLE
