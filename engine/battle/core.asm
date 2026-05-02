@@ -5236,8 +5236,8 @@ MoveInfoBox:
 	xor a
 	ldh [hBGMapMode], a
 
-	hlcoord 0, 7 ; upper right corner of the textbox
-	lb bc, 4, 9
+	hlcoord 0, 8 ; upper right corner of the textbox
+	lb bc, 3, 9
 	call Textbox
 	call MobileTextBorder
 
@@ -5288,14 +5288,14 @@ MoveInfoBox:
 	farcall UpdateMoveData
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
 	ld b, a
-	farcall GetMoveCategoryName
+	farcall BattleGetMoveCategoryName
 	hlcoord 1, 9 ; Category coordinates
 	ld de, wStringBuffer1
 	call PlaceString
 
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
 	ld b, a
-	hlcoord 1, 8
+	hlcoord 2, 9
 	predef PrintMoveType
 
 ; display type effectiveness in battle menu

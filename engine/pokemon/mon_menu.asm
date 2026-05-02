@@ -1447,9 +1447,12 @@ String_MoveEff:
 	db "Eff/@"
 String_MoveBlank:
 	db "---@"
-String_MovePhy:	db "/Physical@"
-String_MoveSpe: db "/Special @"
-String_MoveSta: db "/Other   @"
+String_MovePhy:
+	db "<physical>Physical@"
+String_MoveSpe:
+	db "<special>Special @"
+String_MoveSta:
+	db "<other>Other   @"
 
 PlaceMoveScreenArrows:
 	call PlaceMoveScreenLeftArrow
