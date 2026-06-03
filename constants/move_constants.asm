@@ -260,6 +260,7 @@
 	const WOOD_BASH    ; fd
 	const ANIM_FLINCH  ; 66 - flinch animation
 DEF NUM_ATTACKS EQU const_value - 1
+DEF NUM_REAL_MOVES EQU NUM_ATTACKS - 1
 
 ; Battle animations use the same constants as the moves up to this point
 	const_next $ff

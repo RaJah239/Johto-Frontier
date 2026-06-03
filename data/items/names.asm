@@ -66,7 +66,7 @@ ItemNames::
 	li "Max Ether"
 	li "Elixer"
 	li "Pocket PC"
-	li "SecretPotion"
+	li "Move Dex"
 	li "Mareep Call"
 	li "Mystery Egg"
 	li "Clear Bell"

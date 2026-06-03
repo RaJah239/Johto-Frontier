@@ -80,7 +80,7 @@ ItemEffects:
 	dw RestorePPEffect     ; MAX_ETHER
 	dw RestorePPEffect     ; ELIXER
 	dw PocketPCEffect      ; POCKET_PC
-	dw NoEffect            ; SECRETPOTION
+	dw MoveDexEffect       ; MOVE_DEX
 	dw MareepCallEffect    ; MAREEP_CALL
 	dw NoEffect            ; MYSTERY_EGG
 	dw NoEffect            ; CLEAR_BELL
@@ -3118,6 +3118,20 @@ MembersCardEffect:
 	farcall LoadOW_BGPal7
 	call FadePalettes
 	farcall MembersStreakCard
+	call Call_ExitMenu
+	xor a
+	ldh [hBGMapMode], a
+	farcall Pack_InitGFX
+	farcall WaitBGMap_DrawPackGFX
+	farjp Pack_InitColors
+
+MoveDexEffect:
+	farcall LoadFontsBattleExtra
+	call FadeToMenu
+	farcall BlankScreen
+	farcall LoadOW_BGPal7
+	call FadePalettes
+	farcall OpenAllMovesDetailsScreen
 	call Call_ExitMenu
 	xor a
 	ldh [hBGMapMode], a
