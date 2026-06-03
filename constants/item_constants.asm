@@ -72,7 +72,7 @@
 	const MAX_ETHER    ; 40
 	const ELIXER       ; 41
 	const POCKET_PC    ; 42
-	const SECRETPOTION ; 43 ; unused, replace this
+	const MOVE_DEX     ; 43
 	const MAREEP_CALL  ; 44
 	const MYSTERY_EGG  ; 45 ; unused, replace this
 	const CLEAR_BELL   ; 46

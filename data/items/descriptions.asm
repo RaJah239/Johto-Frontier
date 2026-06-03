@@ -67,7 +67,7 @@ ItemDescriptions:
 	dw MaxEtherDesc
 	dw ElixerDesc
 	dw PocketPCDesc
-	dw SecretPotionDesc
+	dw MoveDexDesc
 	dw MareepCallDesc
 	dw MysteryEggDesc
 	dw ClearBellDesc
@@ -524,9 +524,9 @@ PocketPCDesc:
 	db   "Access the PC"
 	next "right here!@"
 
-SecretPotionDesc:
-	db   "Fully heals any"
-	next "#MON.@"
+MoveDexDesc:
+	db   "Browse every move"
+	next "and its details.@"
 
 MareepCallDesc:
 	db   "Calls a MAREEP"

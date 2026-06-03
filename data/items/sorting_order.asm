@@ -271,7 +271,7 @@ ItemNameOrder:
 	db CARD_KEY
 	db GS_BALL
 	db MYSTERY_EGG
-	db SECRETPOTION
+	db MOVE_DEX
 	db SQUIRTBOTTLE
 
 
