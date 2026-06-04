@@ -256,4 +256,3 @@ EggReminderPaymentReceivedText:
     para "Come again, any-"
     line "time!"
     done
-
