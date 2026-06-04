@@ -4,7 +4,7 @@ MoveDetailsMenu_SetupScreen:
 	ld [wMenuCursorPosition], a
 	ld [wMenuScrollPosition], a
 
-	; Build the list frame and reserve space for the title row.
+	; build the list frame and reserve space for the title row
 	hlcoord 0, 0
 	lb bc, 9, 18
 	call TextboxBorder
@@ -12,30 +12,16 @@ MoveDetailsMenu_SetupScreen:
 	lb bc, 1, 16
 	call ClearBox
 
-	; Load the PP glyph without disturbing the menu arrows.
+	; load the PP glyph without disturbing the menu arrows
 	ld de, FontBattleExtra + 14 tiles
 	ld hl, vTiles2 tile $6e
 	lb bc, BANK(FontBattleExtra), 1
 	call Get2bppViaHDMA
 
-	; Needed for the level symbol on the party-mon variant.
-	farcall LoadStatsScreenPageTilesGFX
-	ret
+	; needed for the level symbol on the party-mon variant
+	farjp LoadStatsScreenPageTilesGFX
 
-MoveDetailsMenu_Run:
-	call ScrollingMenu
-	ld a, [wMenuJoypad]
-	cp B_BUTTON
-	jr z, .carry
-	ld a, [wMenuSelection]
-	ld [wPutativeTMHMMove], a
-	and a
-	ret
-
-.carry
-	scf
-	ret
-
+ChooseEggMoveToLearn::
 ChooseMoveToLearn::
 	farcall FadeOutToWhite
 	farcall BlankScreen
@@ -55,15 +41,26 @@ ChooseMoveToLearn::
 	call PrintLevel
 	jr MoveDetailsMenu_Run
 
-ChooseEggMoveToLearn::
-	jmp ChooseMoveToLearn
-
 OpenAllMovesDetailsScreen::
 	ld hl, MoveDetailsMenuAllMovesHeader
 	call MoveDetailsMenu_SetupScreen
 	ld a, HP_GREEN
 	ld [wPlayerHPPal], a
-	jmp MoveDetailsMenu_Run
+	; fallthrough
+
+MoveDetailsMenu_Run:
+	call ScrollingMenu
+	ld a, [wMenuJoypad]
+	cp B_BUTTON
+	jr z, .carry
+	ld a, [wMenuSelection]
+	ld [wPutativeTMHMMove], a
+	and a
+	ret
+
+.carry
+	scf
+	ret
 
 MoveDetailsMenuPartyMonHeader:
 	db MENU_BACKUP_TILES
@@ -277,20 +274,9 @@ MoveDetailsMenu_PrintMoveDetails:
 	ld bc, 3
 	jmp PlaceString
 
-MoveDetailsMenuTypeTopString:
-	db "┌───────┐@"
-
-MoveDetailsMenuTypeBottomString:
-	db "│       └──────────┐@"
-
-MoveDetailsMenuAttackString:
-	db "Pow/@"
-
-MoveDetailsMenuNullValueString:
-	db "---@"
-
-MoveDetailsMenuAccuracyString:
-	db "Acc/@"
-
-MoveDetailsMenuChanceString:
-	db "Eff/@"
+MoveDetailsMenuTypeTopString: db "┌───────┐@"
+MoveDetailsMenuTypeBottomString: db "│       └──────────┐@"
+MoveDetailsMenuAttackString: db "Pow/@"
+MoveDetailsMenuNullValueString: db "---@"
+MoveDetailsMenuAccuracyString: db "Hit/@"
+MoveDetailsMenuChanceString: db "Eff/@"
