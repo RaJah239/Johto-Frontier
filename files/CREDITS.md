@@ -95,7 +95,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - Pret Team - for all their amazing tutorials
 - Timkun55 - Lots of general code help, colouring Bag Tabs + Battle icons, Pokédex bug fixes, Bag graphic, porting Stat Up + Down animations  and Type Chart from Polished Crystal
 - Grate Oracle Lewot - Lots of code help
-- AndrewC101 - Lots of code used from AndrewC101's amazing Pokémon Abrosia including: Mirror trainer code, rematch any generic trainer, Abilities, Press Select on 4th Stat Page to view Abilities, Draft Arena, Mirror Matches, Update to Battle Tower
+- AndrewC101 - Lots of code used from AndrewC101's amazing Pokémon Abrosia including: Mirror trainer code, rematch any generic trainer, Abilities, Press Select on 4th Stat Page to view Abilities, Draft Arena, Mirror Matches, Update to Battle Tower, Move Dex item
 - Polished Crystal's amazing team  for lots of code including: second options page, press A to use Flash in dark caves, text commands and more
 - PurnPum - Display TOX in battles and Battle Information Box in trainer battles
 - 8bitZeta - General code help
