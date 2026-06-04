@@ -1084,8 +1084,8 @@ LoadMapPals:
 	pop af
 	ldh [rSVBK], a
 	farcall ClearSavedObjPals
-	ld hl, wPalFlags
-	set NO_DYN_PAL_APPLY_F, [hl]
+;	ld hl, wPalFlags
+;	set NO_DYN_PAL_APPLY_F, [hl]
 	farcall CheckForUsedObjPals
 
 	ld a, [wEnvironment]
