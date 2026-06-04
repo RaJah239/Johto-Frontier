@@ -525,8 +525,8 @@ PocketPCDesc:
 	next "right here!@"
 
 MoveDexDesc:
-	db   "Browse every move"
-	next "and its details.@"
+	db   "Browse all moves"
+	next "and their details.@"
 
 MareepCallDesc:
 	db   "Calls a MAREEP"
