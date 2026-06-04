@@ -151,8 +151,6 @@ ProfElmScript:
 .ElmGenericDialogue:
 	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
 	iffalse .GoOnNowPlayer
-	checkitem MOVE_DEX
-	iffalse .ElmGiveMoveDex
 	jumpthistext
 		text "Elm: <PLAY_G>, I'll"
 		line "call you if any-"
@@ -165,26 +163,6 @@ ProfElmScript:
 		line "take all #mon"
 		cont "on the table."
 		done
-
-.ElmGiveMoveDex:
-	opentext
-	writethistext
-		text "Elm: I still have"
-		line "something for you."
-
-		para "Take this Move Dex."
-		done
-	promptbutton
-	verbosegiveitem MOVE_DEX
-	iffalse .NoRoomForMoveDex
-	writethistext
-		text "Use it from your"
-		line "Key Items pocket"
-		cont "to browse moves."
-		done
-	waitbutton
-.NoRoomForMoveDex:
-	endtext
 
 .ElmGiveMasterBall:
 	showthistext
@@ -421,20 +399,6 @@ ElmGivesPokedexScript:
 	playsound SFX_ITEM
 	waitsfx
 	setflag ENGINE_POKEDEX
-	isdialogueminimal
-	iftrue .skip_move_dex_text
-	writethistext
-		text "And take this too."
-
-		para "It's a Move Dex."
-
-		para "It lets you browse"
-		line "every move and its"
-		cont "details."
-		done
-	promptbutton
-.skip_move_dex_text
-	verbosegiveitem MOVE_DEX
 	isdialogueminimal
 	iftrue .skipthis2
 	writethistext
