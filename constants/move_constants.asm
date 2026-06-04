@@ -258,7 +258,7 @@
 	const FLARE_BLITZ  ; fb
 	const POISON_JAB   ; fc
 	const WOOD_BASH    ; fd
-	const ANIM_FLINCH  ; 66 - flinch animation
+	const ANIM_FLINCH  ; 66 - flinch animation, doesn't show up in Move Dex
 DEF NUM_ATTACKS EQU const_value - 1
 DEF NUM_REAL_MOVES EQU NUM_ATTACKS - 1
 
