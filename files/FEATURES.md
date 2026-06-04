@@ -80,7 +80,8 @@
 - Press Start to skip Credits
 
 ## Battle Related
-- Type Chart changes: Ice resists Water and Electric.
+- Type Chart changes: Ice resists Water and Electric
+- "Move Dex" item added that displays all moves and their details
 - Items forbidden and forced Set Mode for all trainers
 - Trainers have no items to use on their Pokémon - just as the player
 - Fairy Type added
