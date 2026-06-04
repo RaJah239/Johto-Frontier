@@ -237,9 +237,10 @@ ItemNameOrder:
 ; Permanent Key Items
 ; Items that are possibly frequently used
 	db TYPE_CHART
-	db MEMBERS_CARD
+	db MOVE_DEX
 	db NOMAD_SIGIL
 	db CALM_CHARM
+	db MEMBERS_CARD
 	db BICYCLE
 	db COIN_CASE
 	db ITEMFINDER
@@ -271,7 +272,6 @@ ItemNameOrder:
 	db CARD_KEY
 	db GS_BALL
 	db MYSTERY_EGG
-	db MOVE_DEX
 	db SQUIRTBOTTLE
 
 
