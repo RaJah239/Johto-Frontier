@@ -86,7 +86,7 @@
 - Trainers have no items to use on their Pokémon - just as the player
 - Fairy Type added
 - Frostbite replaced Freeze status
-- Experience points scales: higher level foes = more experience to lower level Pokémon
+- Scaled Experience points (higher level foes = more experience to lower level Pokémon) option added
 - Print stat gain on level up
 - Max level of Pokémon is 50
 - All Pokémon obey regardless if traded or not
