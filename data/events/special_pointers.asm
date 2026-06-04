@@ -141,7 +141,6 @@ SpecialsPointers::
 	add_special RestoreMusic
 	add_special DeleteSavedMusic
 	add_special MoveRelearner
-	add_special OpenAllMovesDetailsMenu
 	add_special CrystalsTMTrader
 	add_special CianwoodPhotograph
 	add_special EggMaster

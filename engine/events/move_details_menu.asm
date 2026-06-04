@@ -65,25 +65,6 @@ OpenAllMovesDetailsScreen::
 	ld [wPlayerHPPal], a
 	jmp MoveDetailsMenu_Run
 
-OpenAllMovesDetailsMenu::
-	call FadeToMenu
-	farcall BlankScreen
-	farcall LoadOW_BGPal7
-	call FadePalettes
-	call OpenAllMovesDetailsScreen
-	call ExitAllMenus
-	jr c, .cancel
-	ld a, [wMenuSelection]
-	cp -1
-	jr z, .cancel
-	ld [wScriptVar], a
-	ret
-
-.cancel
-	xor a
-	ld [wScriptVar], a
-	ret
-
 MoveDetailsMenuPartyMonHeader:
 	db MENU_BACKUP_TILES
 	menu_coords 1, 1, SCREEN_WIDTH - 2, 9
