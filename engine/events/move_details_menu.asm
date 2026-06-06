@@ -21,7 +21,6 @@ MoveDetailsMenu_SetupScreen:
 	; needed for the level symbol on the party-mon variant
 	farjp LoadStatsScreenPageTilesGFX
 
-ChooseEggMoveToLearn::
 ChooseMoveToLearn::
 	farcall FadeOutToWhite
 	farcall BlankScreen

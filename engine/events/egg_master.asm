@@ -25,7 +25,7 @@ EggMaster:
     call PrintText
 
 .loop_move_menu
-    call ChooseEggMoveToLearn
+    call ChooseMoveToLearn
     jr c, .loop_party_menu
     ld a, [wMenuSelection]
     ld [wNamedObjectIndex], a
