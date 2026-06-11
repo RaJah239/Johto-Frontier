@@ -1,9 +1,9 @@
 _NameRaterHelloText::
 	text "Hello, hello! I'm"
-	line "the NAME RATER."
+	line "the Name Rater."
 
 	para "I rate the names"
-	line "of #MON."
+	line "of #mon."
 
 	para "Would you like me"
 	line "to rate names?"
@@ -11,11 +11,11 @@ _NameRaterHelloText::
 
 _TeamGainedExpText::
 	text "Remaining team got"
-	line "EXP via EXP.SHARE!"
+	line "Exp via Exp.Share!"
 	prompt
 
 _NameRaterWhichMonText::
-	text "Which #MON's"
+	text "Which #mon's"
 	line "nickname should I"
 	cont "rate for you?"
 	prompt
@@ -55,7 +55,7 @@ _NameRaterComeAgainText::
 
 _NameRaterEggText::
 	text "Whoa… That's just"
-	line "an EGG."
+	line "an Egg."
 	prompt
 
 _NameRaterSameNameText::
@@ -70,7 +70,7 @@ _NameRaterSameNameText::
 
 _NameRaterNamedText::
 	text "All right. This"
-	line "#MON is now"
+	line "#mon is now"
 	cont "named @"
 	text_ram wStringBuffer1
 	text "."
@@ -86,14 +86,14 @@ _BoostedExpPointsText::
 	line "a boosted"
 	cont "@"
 	text_decimal wStringBuffer2, 2, 5
-	text " EXP. Points!"
+	text " Exp. Points!"
 	prompt
 
 _ExpPointsText::
 	text_start
 	line "@"
 	text_decimal wStringBuffer2, 2, 5
-	text " EXP. Points!"
+	text " Exp. Points!"
 	prompt
 
 _GoMonText::
@@ -148,7 +148,7 @@ _ContainedMoveText::
 	text "Teach @"
 	text_ram wStringBuffer2
 	text_start
-	line "to a #MON?"
+	line "to a #mon?"
 	done
 
 _TMHMNotCompatibleText::
@@ -191,8 +191,8 @@ _MysteryGiftCommErrorText::
 	prompt
 
 _RetrieveMysteryGiftText::
-	text "Must retrieve GIFT"
-	line "at #MON CENTER."
+	text "Must retrieve Gift"
+	line "at #mon Center."
 	prompt
 
 _YourFriendIsNotReadyText::
@@ -202,11 +202,11 @@ _YourFriendIsNotReadyText::
 
 _MysteryGiftFiveADayText::
 	text "Sorry--only five"
-	line "GIFTS a day."
+	line "Gifts a day."
 	prompt
 
 _MysteryGiftOneADayText::
-	text "Sorry. One GIFT"
+	text "Sorry. One Gift"
 	line "a day per person."
 	prompt
 
@@ -233,19 +233,19 @@ _NameCardReceivedCardText::
 	text "Received"
 	line "@"
 	text_ram wMysteryGiftCardHolderName
-	text "'s CARD."
+	text "'s Card."
 	prompt
 
 _NameCardListedCardText::
 	text_ram wMysteryGiftCardHolderName
-	text "'s CARD was"
+	text "'s Card was"
 	line "listed as no.@"
 	text_decimal wTextDecimalByte, 1, 2
 	text "."
 	prompt
 
 _NameCardNotRegisteredCardText::
-	text "The CARD was not"
+	text "The Card was not"
 	line "registered."
 	prompt
 
@@ -260,7 +260,7 @@ _NameCardLinkCommErrorText::
 	prompt
 
 _BadgeRequiredText::
-	text "Sorry! A new BADGE"
+	text "Sorry! A new Badge"
 	line "is required."
 	prompt
 
@@ -270,17 +270,17 @@ _CantUseItemText::
 	prompt
 
 _UseCutText::
-	text "SCYTHER appeared"
+	text "Scyther appeared"
 	line "and cut!"
 	prompt
 
 _CutNothingText::
 	text "There's nothing to"
-	line "CUT here."
+	line "Cut here."
 	prompt
 
 _MareepLit::
-	text "MAREEP lit the"
+	text "Mareep lit the"
 	line "path ahead!@"
 	text_promptbutton
 	text_end
@@ -302,7 +302,7 @@ _AlreadySurfingText::
 
 _AskSurfText::
 	text "The water is calm."
-	line  "Call LANTURN?"
+	line  "Call Lanturn?"
 	done
 
 _AskPikaSurfText::
@@ -330,12 +330,12 @@ _AskWaterfallText::
 _UseDigText::
 	text_ram wStringBuffer2
 	text " used"
-	line "DIG!"
+	line "Dig!"
 	done
 
 _UseEscapeRopeText::
 	text "<PLAYER> used an"
-	line "ESCAPE ROPE."
+	line "Escape Rope."
 	done
 
 _CantUseDigText::
@@ -345,7 +345,7 @@ _CantUseDigText::
 
 _TeleportReturnText::
 	text "Return to the last"
-	line "#MON CENTER."
+	line "#mon Center."
 	done
 
 _CantUseTeleportText::
@@ -356,7 +356,7 @@ _CantUseTeleportText::
 	done
 
 _UseStrengthText::
-	text "DONPHAN used its"
+	text "Donphan used its"
 	line "strength!"
 	done
 
@@ -367,7 +367,7 @@ _MoveBoulderText::
 
 _AskStrengthText::
 	text "This can be moved."
-	line "Call DONPHAN?"
+	line "Call Donphan?"
 	done
 
 _BouldersMoveText::
@@ -386,27 +386,27 @@ _UseWhirlpoolText::
 
 _MayPassWhirlpoolText::
 	text "It's a vicious"
-	line "WHIRLPOOL!"
+	line "Whirlpool!"
 	done
 
 _AskWhirlpoolText::
-	text "A WHIRLPOOL is in"
+	text "A Whirlpool is in"
 	line "the way."
 
-	para "Call KINGDRA?"
+	para "Call Kingdra?"
 	done
 
 _UseHeadbuttText::
 	text_ram wStringBuffer2
 	text " did a"
-	line "HEADBUTT!"
+	line "Headbutt!"
 	prompt
 
 _AskHeadbuttText::
-	text "A #MON could be"
+	text "A #mon could be"
 	line "in this tree."
 
-	para "Want to HEADBUTT"
+	para "Want to Headbutt"
 	line "it?"
 	done
 
@@ -417,7 +417,7 @@ _UseRockSmashText::
 	prompt
 
 _MaySmashText::
-	text "Maybe a #MON"
+	text "Maybe a #mon"
 	line "can break this."
 	done
 
@@ -464,10 +464,10 @@ _GotOffBikeText::
 
 _AskCutText::
 	text "This tree can be"
-	line "CUT!"
+	line "Cut!"
 
 	para "Want to call"
-	line "SCYTHER?"
+	line "Scyther?"
 	done
 
 _SycterUsedCutText::
@@ -476,7 +476,7 @@ _SycterUsedCutText::
 
 _CanCutText::
 	text "This tree can be"
-	line "CUT!"
+	line "Cut!"
 	done
 
 _FoundItemText::
@@ -494,7 +494,7 @@ _CantCarryItemText::
 
 _WhitedOutText::
 	text "<PLAYER> is out of"
-	line "useable #MON!"
+	line "useable #mon!"
 
 	para "<PLAYER> whited"
 	line "out!"
@@ -502,7 +502,7 @@ _WhitedOutText::
 
 _WhitedOutToWildMonText::
 	text "<PLAYER> is out of"
-	line "useable #MON!"
+	line "useable #mon!"
 
 	para "<PLAYER> panicked"
 	line "and dropped"
@@ -519,7 +519,7 @@ _WhitedOutToWildMonText::
 
 _WhitedOutToTrainerText::
 	text "<PLAYER> is out of"
-	line "useable #MON!"
+	line "useable #mon!"
 
 	para "<PLAYER> paid"
 	line "¥@"
@@ -535,13 +535,13 @@ _WhitedOutToTrainerText::
 	done
 
 _ItemfinderItemNearbyText::
-	text "Yes! ITEMFINDER"
+	text "Yes! Item Finder"
 	line "indicates there's"
 	cont "an item nearby."
 	prompt
 
 _ItemfinderNopeText::
-	text "Nope! ITEMFINDER"
+	text "Nope! Item Finder"
 	line "isn't responding."
 	prompt
 
@@ -553,7 +553,7 @@ _PoisonFaintText::
 	prompt
 
 _UseSweetScentText::
-	text "TANGELA sends out"
+	text "Tangela sends out"
 	line "a viney lure!"
 	done
 
@@ -571,12 +571,12 @@ _SquirtbottleNothingText::
 	done
 
 _UseSacredAshText::
-	text "<PLAYER>'s #MON"
+	text "<PLAYER>'s #mon"
 	line "were all healed!"
 	done
 
 _AnEggCantHoldAnItemText::
-	text "An EGG can't hold"
+	text "An Egg can't hold"
 	line "an item."
 	prompt
 
@@ -608,7 +608,7 @@ _OakThisIsntTheTimeText::
 
 _YouDontHaveAMonText::
 	text "You don't have a"
-	line "#MON!"
+	line "#mon!"
 	prompt
 
 _RegisteredItemText::
@@ -717,7 +717,7 @@ _BreedClearboxText::
 _BreedEggHatchText::
 	text_ram wStringBuffer1
 	text " came"
-	line "out of its EGG!@"
+	line "out of its Egg!@"
 	sound_caught_mon
 	text_promptbutton
 	text_end
@@ -733,7 +733,7 @@ _BreedAskNicknameText::
 	text_ram wBreedMon2Nickname
 	text_start
 	line "that was left with"
-	cont "the DAY-CARE LADY."
+	cont "the Day-Care Lady."
 	done
 
 _LeftWithDayCareManText::
@@ -749,31 +749,31 @@ _LeftWithDayCareLadyText::
 	done
 
 _BreedNoInterestText::
-	text "Both #MON are"
+	text "Both #mon are"
 	line "incompatible."
 	prompt
 
 _BreedShowsInterestText::
-	text "Both #MON are"
+	text "Both #mon are"
 	line "compatible."
 	prompt
 
 _EmptyMailboxText::
-	text "There's no MAIL"
+	text "There's no Mail"
 	line "here."
 	prompt
 
 _MailClearedPutAwayText::
-	text "The cleared MAIL"
+	text "The cleared Mail"
 	line "was put away."
 	prompt
 
 _MailPackFullText::
-	text "The PACK is full."
+	text "The Bag is full."
 	prompt
 
 _MailMessageLostText::
-	text "The MAIL's message"
+	text "The Mail's message"
 	line "will be lost. OK?"
 	done
 
@@ -783,32 +783,32 @@ _MailAlreadyHoldingItemText::
 	prompt
 
 _MailEggText::
-	text "An EGG can't hold"
-	line "any MAIL."
+	text "An Egg can't hold"
+	line "any Mail."
 	prompt
 
 _MailMovedFromBoxText::
-	text "The MAIL was moved"
-	line "from the MAILBOX."
+	text "The Mail was moved"
+	line "from the Mailbox."
 	prompt
 
 _WasSentToBillsPCText::
 	text_ram wStringBuffer1
 	text " was"
-	line "sent to BILL's PC."
+	line "sent to Bill's PC."
 	prompt
 
 _PCGottaHavePokemonText::
 	text "You gotta have"
-	line "#MON to call!"
+	line "#mon to call!"
 	prompt
 
 _PCMonHoldingMailText::
-	text "There is a #MON"
-	line "holding MAIL."
+	text "There is a #mon"
+	line "holding Mail."
 
 	para "Please remove the"
-	line "MAIL."
+	line "Mail."
 	prompt
 
 _ContestCaughtMonText::
@@ -818,7 +818,7 @@ _ContestCaughtMonText::
 	prompt
 
 _ContestAskSwitchText::
-	text "Switch #MON?"
+	text "Switch #mon?"
 	done
 
 _ContestAlreadyCaughtText::
@@ -896,7 +896,7 @@ _ContestJudging_ThirdPlaceScoreText::
 
 _MagikarpGuruMeasureText::
 	text "Let me measure"
-	line "that MAGIKARP."
+	line "that Magikarp."
 
 	para "…Hm, it measures"
 	line "@"
@@ -925,7 +925,7 @@ _CaughtAskNicknameText::
 
 _PokecenterPCCantUseText::
 	text "Bzzzzt! You must"
-	line "have a #MON to"
+	line "have a #mon to"
 	cont "use this!"
 	prompt
 
@@ -1007,39 +1007,39 @@ _PokecenterPCWhoseText::
 	done
 
 _PokecenterOaksPCText::
-	text "#DEX Rating"
+	text "#dex Rating"
 	line "System opened."
 	prompt
 
 _OakPCText1::
-	text "Rate #DEX?"
+	text "Rate #dex?"
 	done
 
 _OakPCText2::
-	text "Current #DEX"
+	text "Current #dex"
 	line "completion level:"
 	prompt
 
 _OakPCText3::
 	text_ram wStringBuffer3
-	text " #MON seen"
+	text " #mon seen"
 	line "@"
 	text_ram wStringBuffer4
-	text " #MON owned"
+	text " #mon owned"
 
-	para "PROF.OAK's"
+	para "Prof.Oak's"
 	line "Rating:"
 	done
 
 _OakRating01::
-	text "Look for #MON"
+	text "Look for #mon"
 	line "in grassy areas!"
 	done
 
 _OakRating02::
 	text "Good. I see you"
 	line "understand how to"
-	cont "use # BALLS."
+	cont "use # Balls."
 	done
 
 _OakRating03::
@@ -1052,33 +1052,33 @@ _OakRating03::
 
 _OakRating04::
 	text "You need to fill"
-	line "up the #DEX."
+	line "up the #dex."
 
 	para "Catch different"
-	line "kinds of #MON!"
+	line "kinds of #mon!"
 	done
 
 _OakRating05::
 	text "You're trying--I"
 	line "can see that."
 
-	para "Your #DEX is"
+	para "Your #dex is"
 	line "coming together."
 	done
 
 _OakRating06::
 	text "To evolve, some"
-	line "#MON grow,"
+	line "#mon grow,"
 
 	para "others use the"
-	line "effects of STONES."
+	line "effects of Stones."
 	done
 
 _OakRating07::
 	text "Have you gotten a"
-	line "fishing ROD? You"
+	line "fishing Rod? You"
 
-	para "can catch #MON"
+	para "can catch #mon"
 	line "by fishing."
 	done
 
@@ -1089,7 +1089,7 @@ _OakRating08::
 	done
 
 _OakRating09::
-	text "Some #MON only"
+	text "Some #mon only"
 	line "appear during"
 
 	para "certain times of"
@@ -1097,7 +1097,7 @@ _OakRating09::
 	done
 
 _OakRating10::
-	text "Your #DEX is"
+	text "Your #dex is"
 	line "filling up. Keep"
 	cont "up the good work!"
 	done
@@ -1106,27 +1106,27 @@ _OakRating11::
 	text "I'm impressed."
 	line "You're evolving"
 
-	para "#MON, not just"
+	para "#mon, not just"
 	line "catching them."
 	done
 
 _OakRating12::
-	text "Have you met KURT?"
-	line "His custom BALLS"
+	text "Have you met Kurt?"
+	line "His custom Balls"
 	cont "should help."
 	done
 
 _OakRating13::
 	text "Wow. You've found"
-	line "more #MON than"
+	line "more #mon than"
 
-	para "the last #DEX"
+	para "the last #dex"
 	line "research project."
 	done
 
 _OakRating14::
 	text "Are you trading"
-	line "your #MON?"
+	line "your #mon?"
 
 	para "It's tough to do"
 	line "this alone!"
@@ -1134,13 +1134,13 @@ _OakRating14::
 
 _OakRating15::
 	text "Wow! You've hit"
-	line "200! Your #DEX"
+	line "200! Your #dex"
 	cont "is looking great!"
 	done
 
 _OakRating16::
 	text "You've found so"
-	line "many #MON!"
+	line "many #mon!"
 
 	para "You've really"
 	line "helped my studies!"
@@ -1150,12 +1150,12 @@ _OakRating17::
 	text "Magnificent! You"
 	line "could become a"
 
-	para "#MON professor"
+	para "#mon professor"
 	line "right now!"
 	done
 
 _OakRating18::
-	text "Your #DEX is"
+	text "Your #dex is"
 	line "amazing! You're"
 
 	para "ready to turn"
@@ -1164,7 +1164,7 @@ _OakRating18::
 
 _OakRating19::
 	text "Whoa! A perfect"
-	line "#DEX! I've"
+	line "#dex! I've"
 
 	para "dreamt about this!"
 	line "Congratulations!"
@@ -1252,7 +1252,7 @@ _PokemonHoldItemText::
 
 _PokemonRemoveMailText::
 	text "Please remove the"
-	line "MAIL first."
+	line "Mail first."
 	prompt
 
 _PokemonNotHoldingText::
@@ -1292,17 +1292,17 @@ _ItemCantHeldText::
 	prompt
 
 _CantPlaceMailInStorageText::
-	text "Can't place MAIL in"
+	text "Can't place Mail in"
 	line "storage."
 	prompt
 
 _MailLoseMessageText::
-	text "The MAIL will lose"
+	text "The Mail will lose"
 	line "its message. OK?"
 	done
 
 _MailDetachedText::
-	text "MAIL detached from"
+	text "Mail detached from"
 	line "@"
 	text_ram wStringBuffer1
 	text "."
@@ -1310,21 +1310,21 @@ _MailDetachedText::
 
 _MailNoSpaceText::
 	text "There's no space"
-	line "for removing MAIL."
+	line "for removing Mail."
 	prompt
 
 _MailAskSendToPCText::
 	text "Send the removed"
-	line "MAIL to your PC?"
+	line "Mail to your PC?"
 	done
 
 _MailboxFullText::
-	text "Your PC's MAILBOX"
+	text "Your PC's Mailbox"
 	line "is full."
 	prompt
 
 _MailSentToPCText::
-	text "The MAIL was sent"
+	text "The Mail was sent"
 	line "to your PC."
 	prompt
 
@@ -1334,7 +1334,7 @@ _PokemonNotEnoughHPText::
 
 _MayRegisterItemText::
 	text "An item in your"
-	line "PACK may be"
+	line "Bag may be"
 
 	para "registered for use"
 	line "on SELECT Button."
@@ -1345,19 +1345,19 @@ _OakText1::
 	line "keep you waiting!"
 
 	para "Welcome to the"
-	line "world of #MON!"
+	line "world of #mon!"
 
-	para "My name is OAK."
+	para "My name is Oak."
 
 	para "People call me the"
-	line "#MON PROF."
+	line "#mon Prof."
 	prompt
 
 _OakText2::
 	text "This world is in-"
 	line "habited by crea-"
 	cont "tures that we call"
-	cont "#MON.@"
+	cont "#mon.@"
 	text_end
 
 _OakText3::
@@ -1365,14 +1365,14 @@ _OakText3::
 	text_end
 
 _OakText4::
-	text "People and #MON"
+	text "People and #mon"
 	line "live together by"
 
 	para "supporting each"
 	line "other."
 
 	para "Some people play"
-	line "with #MON, some"
+	line "with #mon, some"
 	cont "battle with them."
 	prompt
 
@@ -1384,14 +1384,14 @@ _OakText4Min::
 _OakText5::
 	text "But we don't know"
 	line "everything about"
-	cont "#MON yet."
+	cont "#mon yet."
 
 	para "There are still"
 	line "many mysteries to"
 	cont "solve."
 
 	para "That's why I study"
-	line "#MON every day."
+	line "#mon every day."
 	prompt
 
 _OakText5Min::
@@ -1409,12 +1409,12 @@ _AboutText::
 	line "or nothing at all."
 
 	para "A Generation Two"
-	line "#MON experience"
+	line "#mon experience"
 
 	para "with QOL features,"
 	line "collecting all"
 	
-	para "#MON infinitely"
+	para "#mon infinitely"
 	line "in one save file,"
 	
 	para "increased replay"

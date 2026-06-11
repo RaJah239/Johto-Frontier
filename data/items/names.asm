@@ -54,7 +54,7 @@ ItemNames::
 	li "Haste Herb"
 	li "Sand Shard"
 	li "Coin Case"
-	li "ItemFinder"
+	li "Item Finder"
 	li "Light Clay"
 	li "Focus Sash"
 	li "Old Rod"
