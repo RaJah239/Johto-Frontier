@@ -5283,7 +5283,7 @@ MoveInfoBox:
 	ld a, [hl]
 	and PP_MASK
 	ld [wStringBuffer1], a
-	call .PrintPP
+	call PrintPP
 
 	farcall UpdateMoveData
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
@@ -5426,28 +5426,18 @@ MoveInfoBox:
 	hlcoord 9, 9
 	ret
 
-.nopower_string:
-	db "---@"
-.place_var_string:
-	db " var@"
-.power_string:
-	db "p/@"
-.zero_damage:
-	db "×0@"
-.half_damage:
-	db "×<half>@"
-.quarter_damage:
-	db "×<quarter>@"
-.neutral_damage:
-	db "×1@"
-.double_damage:
-	db "×2@"
-.quadruple_damage:
-	db "×4@"
-.Disabled:
-	db "Disabled!@"
+.nopower_string: db "---@"
+.place_var_string: db " var@"
+.power_string: db "p/@"
+.zero_damage: db "×0@"
+.half_damage: db "×<half>@"
+.quarter_damage: db "×<quarter>@"
+.neutral_damage: db "×1@"
+.double_damage: db "×2@"
+.quadruple_damage: db "×4@"
+.Disabled: db "Disabled!@"
 
-.PrintPP:
+PrintPP:
 	hlcoord 5, 11
 	push hl
 	ld de, wStringBuffer1
