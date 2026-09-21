@@ -246,7 +246,7 @@ AI_Basic:
 ; === Ability: Volt Absorb ===
 ; ============================
 	cp ELECTRIC
-	jr nz, .check_safeguard
+	jr nz, .check_power
 	ld a, [wBattleMonSpecies]
 	push hl
 	push de
@@ -258,17 +258,7 @@ AI_Basic:
 	pop hl
 	jmp c, .discourage ; discourage if poison immune pokemon - loop back to check move
 
-.check_safeguard
-; Dismiss Safeguard if it's already active.
-	ld a, [wPlayerScreens]
-	bit SCREENS_SAFEGUARD, a
-	jmp z, .checkmove
-
-; Dismiss Mist if it's already active.
-	ld a, [wPlayerScreens]
-	bit SCREENS_MIST, a
-	jmp z, .checkmove
-
+.check_power
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
 	jmp z, .checkmove
