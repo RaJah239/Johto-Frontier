@@ -3427,6 +3427,20 @@ wPokemonDataEnd::
 wGameDataEnd::
 
 
+SECTION "Party Stash", WRAMX, BANK[2]
+
+; The session copy of the player's party stash (see save.asm): the
+; NPC in Cherrygrove City holds the player's whole party here while
+; the player runs around with six random level 5 stand-ins. Saving
+; commits it to the SRAM slots in sram.asm. Access it with
+; rSVBK = BANK(wPartyStashData).
+wPartyStashData::
+wPartyStashActive:: db ; nonzero while the NPC is holding the player's party
+wPartyStash:: ds wPartyMonNicknamesEnd - wPartyCount
+wPartyStashDataEnd::
+wPartyStashCheck1:: db ; written with SAVE_CHECK_VALUE_1 when valid
+wPartyStashCheck2:: db
+
 SECTION "Pic Animations", WRAMX
 
 wTempTilemap::

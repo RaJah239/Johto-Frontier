@@ -153,6 +153,9 @@ SpecialsPointers::
 	add_special LoadPokemonData
 	add_special OverridePlayerParty
 	add_special ClearMartBag
+	add_special CheckPartyStash
+	add_special StashPlayerParty
+	add_special UnstashPlayerParty
 
 if DEF(_DEBUG)
 	add_special FillPokedex

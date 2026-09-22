@@ -20,6 +20,7 @@ CherrygroveCity_MapEvents:
 	object_event 23,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, CherrygroveYoungsterText, -1
 	object_event  7, 12, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, MysticWaterGuy, -1
 	object_event 26,  4, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, CherrygroveBagCleaner, -1
+	object_event 28,  4, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, CherrygrovePartyHolder, -1
 
 	object_const_def
 	const CHERRYGROVECITY_GRAMPS
@@ -27,6 +28,7 @@ CherrygroveCity_MapEvents:
 	const CHERRYGROVECITY_YOUNGSTER
 	const CHERRYGROVECITY_FISHER
 	const CHERRYGROVECITY_BAGCLEANER
+	const CHERRYGROVECITY_PARTYHOLDER
 
 CherrygroveCity_MapScripts:
 	def_scene_scripts
@@ -376,6 +378,68 @@ CherrygroveBagCleaner:
 .No:
 	writethistext
 		text "OK. I'll be here."
+		done
+	waitclosetext
+	end
+
+CherrygrovePartyHolder:
+	faceplayer
+	opentext
+	special CheckPartyStash
+	iftrue .Return
+	writethistext
+		text "I keep #MON safe"
+		line "for folk passing"
+		line "through town."
+
+		para "Want me to hold"
+		line "yours?"
+		done
+	yesorno
+	iffalse .Refuse
+	special StashPlayerParty
+	iftrue .Stashed
+	writethistext
+		text "You have no #MON"
+		line "for me to hold!"
+		done
+	waitclosetext
+	end
+.Stashed
+	writethistext
+		text "Done! Six #MON"
+		line "at level five"
+
+		para "are yours for"
+		line "now. Come back"
+
+		para "anytime to swap"
+		line "back!"
+		done
+	waitclosetext
+	end
+.Return
+	writethistext
+		text "Still holding"
+		line "your #MON!"
+
+		para "Want them back?"
+		done
+	yesorno
+	iffalse .Refuse
+	special UnstashPlayerParty
+	writethistext
+		text "Here they are!"
+		line "The six stand-ins"
+
+		para "are gone now."
+		done
+	waitclosetext
+	end
+.Refuse
+	writethistext
+		text "Suit yourself!"
+		line "I'll be here."
 		done
 	waitclosetext
 	end

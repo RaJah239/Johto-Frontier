@@ -87,6 +87,7 @@ NewGame:
 	ld [wDebugFlags], a
 	call ResetWRAM
 	farcall ResetMartStash
+	farcall ResetPartyStash
 	farcall ClearSavedObjPals
 	call NewGame_ClearTilemapEtc
 	call CheckVBA

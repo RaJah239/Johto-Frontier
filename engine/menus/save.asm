@@ -334,6 +334,10 @@ SavePlayerData:
 	ld de, sCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
+	; commit the party stash to the saved slot (SRAM bank 1, the
+	; same bank this routine already has open)
+	ld hl, sSavedPartyStashData
+	call SavePartyStashToSRAM
 	; commit the session stash to the saved slot (SRAM bank 0)
 	call CloseSRAM
 	ld a, BANK(sMartSessionBagData)
@@ -392,6 +396,10 @@ SaveBackupPlayerData:
 	ld de, sBackupCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
+	; commit the party stash to the backup slot (SRAM bank 0, the
+	; same bank this routine already has open)
+	ld hl, sBackupPartyStashData
+	call SavePartyStashToSRAM
 	; commit the session stash to the backup-saved slot (SRAM bank 0,
 	; the same bank this routine already has open)
 	ld hl, sMartBackupSavedBagData
@@ -572,6 +580,10 @@ LoadPlayerData:
 	ld de, wCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
+	; restore the party stash from the saved slot (SRAM bank 1, the
+	; same bank this routine already has open)
+	ld hl, sSavedPartyStashData
+	call LoadPartyStashFromSRAM
 	; restore the session stash from the saved slot (SRAM bank 0)
 	call CloseSRAM
 	ld a, BANK(sMartSessionBagData)
@@ -791,6 +803,324 @@ ClearMartBag::
 	call WriteMartBagSentinels
 	jmp CloseSRAM
 
+; Party stash: an NPC in Cherrygrove City holds the player's entire
+; party and hands over six random level 5 stand-ins in return; talking
+; to him again swaps the original party back. The session copy lives
+; in WRAMX bank 2 (wPartyStash); saving commits it to SRAM bank 1's
+; saved slot (alongside the main save data) and SRAM bank 0's backup
+; slot (alongside the backup save data), mirroring the mart bag stash.
+; Every copy is [active][data][check values], and the check values go
+; down last so a partial write is never mistaken for valid data.
+
+ResetPartyStash::
+; Starting a new game: forget the previous session's stash, so the
+; old game's held party cannot leak into this one. The saved slots
+; are left alone; they belong to save files that still exist on the
+; cartridge, and the first save overwrites them anyway. (Also called
+; from LoadPlayerData/LoadBackupPlayerData when a save file predates
+; the stash.)
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPartyStashData)
+	ldh [rSVBK], a
+	ld hl, wPartyStashData
+	ld bc, wPartyStashDataEnd - wPartyStashData
+	xor a
+	call ByteFill
+	ld a, SAVE_CHECK_VALUE_1
+	ld [wPartyStashCheck1], a
+	ld a, SAVE_CHECK_VALUE_2
+	ld [wPartyStashCheck2], a
+	pop af
+	ldh [rSVBK], a
+	ret
+
+SavePartyStashToSRAM:
+; hl = address of a party stash struct in SRAM (saved or backup);
+; its SRAM bank must be open. Copies the session stash there (WRAMX
+; bank 2 and SRAM are visible at the same time), writing the check
+; values last.
+	ld d, h
+	ld e, l
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPartyStashData)
+	ldh [rSVBK], a
+	ld hl, wPartyStashData
+	ld bc, wPartyStashDataEnd - wPartyStashData
+	call CopyBytes ; de now points at the check values
+	pop af
+	ldh [rSVBK], a
+	ld a, SAVE_CHECK_VALUE_1
+	ld [de], a
+	inc de
+	ld a, SAVE_CHECK_VALUE_2
+	ld [de], a
+	ret
+
+LoadPartyStashFromSRAM:
+; hl = address of a party stash struct in SRAM (saved or backup);
+; its SRAM bank must be open. Copies it into the session stash in
+; WRAMX bank 2, or resets the session stash if the check values are
+; invalid (a save file from before this feature: the NPC simply has
+; nobody's party yet).
+	ld d, h
+	ld e, l
+	ld bc, sSavedPartyStashDataEnd - sSavedPartyStashData
+	add hl, bc ; hl -> the check values
+	ld a, [hli]
+	cp SAVE_CHECK_VALUE_1
+	jr nz, .reset
+	ld a, [hl]
+	cp SAVE_CHECK_VALUE_2
+	jr nz, .reset
+	ld h, d
+	ld l, e ; hl -> the struct start
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPartyStashData)
+	ldh [rSVBK], a
+	ld de, wPartyStashData
+	ld bc, wPartyStashDataEnd - wPartyStashData
+	call CopyBytes
+	; the session stash needs valid check values too, or a later
+	; validate would treat it as uninitialized and empty it
+	ld a, SAVE_CHECK_VALUE_1
+	ld [wPartyStashCheck1], a
+	ld a, SAVE_CHECK_VALUE_2
+	ld [wPartyStashCheck2], a
+	pop af
+	ldh [rSVBK], a
+	ret
+.reset
+	call ResetPartyStash
+	ret
+
+CopyPartyToStash:
+; Copies the party block into the session stash. The two ends sit in
+; different WRAM banks, so the bank is switched around every byte and
+; the ambient party bank is selected again before returning.
+	ld hl, wPartyCount
+	ld de, wPartyStash
+	ld bc, wPartyMonNicknamesEnd - wPartyCount
+.loop
+	ld a, BANK(wPartyCount)
+	ldh [rSVBK], a
+	ld a, [hli]
+	push af
+	ld a, BANK(wPartyStashData)
+	ldh [rSVBK], a
+	pop af
+	ld [de], a
+	inc de
+	dec bc
+	ld a, b
+	or c
+	jr nz, .loop
+	ld a, BANK(wPartyCount)
+	ldh [rSVBK], a
+	ret
+
+CopyStashToParty:
+; The reverse of CopyPartyToStash: the session stash goes back over
+; the live party, discarding whatever was in it. Ends with the
+; ambient party bank selected.
+	ld hl, wPartyStash
+	ld de, wPartyCount
+	ld bc, wPartyMonNicknamesEnd - wPartyCount
+.loop
+	ld a, BANK(wPartyStashData)
+	ldh [rSVBK], a
+	ld a, [hli]
+	push af
+	ld a, BANK(wPartyCount)
+	ldh [rSVBK], a
+	pop af
+	ld [de], a
+	inc de
+	dec bc
+	ld a, b
+	or c
+	jr nz, .loop
+	ret
+
+CheckPartyStash::
+; Returns in wScriptVar whether the NPC is currently holding a party.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPartyStashData)
+	ldh [rSVBK], a
+	ld c, 0
+	ld a, [wPartyStashCheck1]
+	cp SAVE_CHECK_VALUE_1
+	jr nz, .done
+	ld a, [wPartyStashCheck2]
+	cp SAVE_CHECK_VALUE_2
+	jr nz, .done
+	ld a, [wPartyStashActive]
+	ld c, a ; nonzero iff the NPC is holding a party
+.done
+	pop af
+	ldh [rSVBK], a
+	ld a, c
+	ld [wScriptVar], a
+	ret
+
+StashPlayerParty::
+; Take the player's party: stash it, wipe it, and hand out six random
+; level 5 stand-ins in its place. Returns in wScriptVar.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPartyStashData)
+	ldh [rSVBK], a
+	; refuse unless the stash is valid and empty
+	ld a, [wPartyStashCheck1]
+	cp SAVE_CHECK_VALUE_1
+	jr nz, .fail
+	ld a, [wPartyStashCheck2]
+	cp SAVE_CHECK_VALUE_2
+	jr nz, .fail
+	ld a, [wPartyStashActive]
+	and a
+	jr nz, .fail
+	; refuse an empty party
+	ld a, BANK(wPartyCount)
+	ldh [rSVBK], a
+	ld a, [wPartyCount]
+	and a
+	jr z, .fail
+	; copy the party into the stash, then commit it: the active byte
+	; and check values go down last
+	call CopyPartyToStash
+	ld a, BANK(wPartyStashData)
+	ldh [rSVBK], a
+	ld a, TRUE
+	ld [wPartyStashActive], a
+	ld a, SAVE_CHECK_VALUE_1
+	ld [wPartyStashCheck1], a
+	ld a, SAVE_CHECK_VALUE_2
+	ld [wPartyStashCheck2], a
+	pop af
+	ldh [rSVBK], a
+	; wipe the live party; the six adds below rebuild the count,
+	; species list, structs, OTs and nicknames
+	ld hl, wPartyCount
+	ld bc, wPartyMonNicknamesEnd - wPartyCount
+	xor a
+	call ByteFill
+	; hand out six random level 5 stand-ins, given the way the game
+	; gives gift #MON: no held item, level-up moves, full health
+	xor a
+	ld [wBattleMode], a
+	ld a, PARTYMON
+	ld [wMonType], a
+	ld a, 5
+	ld [wCurPartyLevel], a
+	ld b, PARTY_LENGTH
+.give_loop
+	push bc
+	call .GiveRandomMon
+	pop bc
+	dec b
+	jr nz, .give_loop
+	ld a, TRUE
+	ld [wScriptVar], a
+	ret
+.fail
+	pop af
+	ldh [rSVBK], a
+	xor a
+	ld [wScriptVar], a
+	ret
+
+.GiveRandomMon:
+; Adds one random species at level 5. The dex flags are put back the
+; way they were found first: these six are borrowed, not owned, so
+; the Pokédex must look exactly as it did before the swap (same idea
+; as GiveEgg). Unown is excluded because registering its letter in
+; the Unown Dex is state the stash cannot restore.
+	call .RandomSpecies
+	ld [wCurPartySpecies], a
+	dec a
+	call CheckCaughtMon ; a = nonzero if already caught
+	push af
+	ld a, [wCurPartySpecies]
+	dec a
+	call CheckSeenMon ; a = nonzero if already seen
+	push af
+	predef TryAddMonToParty
+	; restore the seen flag if it was clear before
+	pop af
+	and a
+	jr nz, .seen_ok
+	ld a, [wCurPartySpecies]
+	dec a
+	ld c, a
+	ld d, 0
+	ld hl, wPokedexSeen
+	ld b, RESET_FLAG
+	predef SmallFarFlagAction
+.seen_ok
+	; restore the caught flag likewise
+	pop af
+	and a
+	jr nz, .caught_ok
+	ld a, [wCurPartySpecies]
+	dec a
+	ld c, a
+	ld d, 0
+	ld hl, wPokedexCaught
+	ld b, RESET_FLAG
+	predef SmallFarFlagAction
+.caught_ok
+	ret
+
+.RandomSpecies:
+; A species from 1 to NUM_POKEMON, never Unown.
+	call Random
+	cp NUM_POKEMON
+	jr nc, .RandomSpecies
+	inc a
+	cp UNOWN
+	jr z, .RandomSpecies
+	ret
+
+UnstashPlayerParty::
+; Give the original party back, discarding the six stand-ins.
+; Returns in wScriptVar.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPartyStashData)
+	ldh [rSVBK], a
+	; refuse unless a valid stash is present
+	ld a, [wPartyStashCheck1]
+	cp SAVE_CHECK_VALUE_1
+	jr nz, .fail
+	ld a, [wPartyStashCheck2]
+	cp SAVE_CHECK_VALUE_2
+	jr nz, .fail
+	ld a, [wPartyStashActive]
+	and a
+	jr z, .fail
+	; hand the party back; the check values stay valid, so the stash
+	; now reads as a clean empty one
+	call CopyStashToParty
+	ld a, BANK(wPartyStashData)
+	ldh [rSVBK], a
+	xor a
+	ld [wPartyStashActive], a
+	pop af
+	ldh [rSVBK], a
+	ld a, TRUE
+	ld [wScriptVar], a
+	ret
+.fail
+	pop af
+	ldh [rSVBK], a
+	xor a
+	ld [wScriptVar], a
+	ret
+
 VerifyChecksum:
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
@@ -819,6 +1149,10 @@ LoadBackupPlayerData:
 	ld de, wCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
+	; restore the party stash from the backup slot (SRAM bank 0, the
+	; same bank this routine already has open)
+	ld hl, sBackupPartyStashData
+	call LoadPartyStashFromSRAM
 	ld hl, sMartBackupSavedBagData
 	call LoadStashedBagFromSRAM
 	jmp CloseSRAM

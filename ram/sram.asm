@@ -113,6 +113,32 @@ sMartBackupSavedBagDataEnd::
 sMartBackupSavedBagCheck1:: db
 sMartBackupSavedBagCheck2:: db
 
+SECTION "Party Stash Save", SRAM, BANK[1]
+
+; The saved copy of the player's party stash. The session copy lives
+; in WRAMX bank 2 (wPartyStash); SavePlayerData commits it here
+; (bank 1, the same bank that routine already has open), and
+; LoadPlayerData restores it from here. Same layout as the session
+; stash: active byte, data, check values written last.
+sSavedPartyStashData::
+sSavedPartyStashActive:: db ; nonzero while the NPC is holding the player's party
+sSavedPartyStash:: ds wPartyMonNicknamesEnd - wPartyCount
+sSavedPartyStashDataEnd::
+sSavedPartyStashCheck1:: db ; written with SAVE_CHECK_VALUE_1 when valid
+sSavedPartyStashCheck2:: db
+
+SECTION "Party Stash Backup", SRAM, BANK[0]
+
+; The backup-save copy, committed by SaveBackupPlayerData and
+; restored by LoadBackupPlayerData (bank 0, which both already have
+; open). It lands in the free space after the Mart Bag Stash.
+sBackupPartyStashData::
+sBackupPartyStashActive:: db
+sBackupPartyStash:: ds wPartyMonNicknamesEnd - wPartyCount
+sBackupPartyStashDataEnd::
+sBackupPartyStashCheck1:: db
+sBackupPartyStashCheck2:: db
+
 SECTION "Save", SRAM
 
 sOptions:: ds wOptionsEnd - wOptions
