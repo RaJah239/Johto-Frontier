@@ -334,6 +334,14 @@ SavePlayerData:
 	ld de, sCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
+
+	; commit the session stash to the saved slot (SRAM bank 0)
+	call CloseSRAM
+	ld a, BANK(sDungeonSessionBagData)
+	call OpenSRAM
+	ld hl, sDungeonBagData
+	call SaveDungeonBagToSRAM
+
 	jmp CloseSRAM
 
 SavePokemonData:
@@ -386,6 +394,12 @@ SaveBackupPlayerData:
 	ld de, sBackupCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
+
+	; commit the session stash to the backup-saved slot (SRAM bank 0)
+	; the same bank this routine already has open
+	ld hl, sDungeonBackupSavedBagData
+	call SaveDungeonBagToSRAM
+
 	jmp CloseSRAM
 
 SaveBackupPokemonData:
@@ -562,6 +576,14 @@ LoadPlayerData:
 	ld de, wCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
+
+	; restore the session stash from the saved slot (SRAM bank 0)
+	call CloseSRAM
+	ld a, BANK(sDungeonSessionBagData)
+	call OpenSRAM
+	ld hl, sDungeonBagData
+	call LoadDungeonBagFromSRAM
+
 	call CloseSRAM
 	ld a, BANK(sBattleTowerChallengeState)
 	call OpenSRAM
@@ -580,6 +602,199 @@ LoadPokemonData:
 	ld de, wPokemonData
 	ld bc, wPokemonDataEnd - wPokemonData
 	call CopyBytes
+	jmp CloseSRAM
+
+SaveDungeonBagToSRAM:
+; hl = address of a stash struct in SRAM (saved or backup-saved);
+; SRAM bank 0 must be open. Copies the session stash there, writing
+; the check values last so a partial write is never mistaken for
+; valid data.
+	ld d, h
+	ld e, l
+	ld hl, sDungeonSessionBagData
+	ld bc, sDungeonSessionBagDataEnd - sDungeonSessionBagData
+	call CopyBytes ; de now points at the check values
+	ld a, SAVE_CHECK_VALUE_1
+	ld [de], a
+	inc de
+	ld a, SAVE_CHECK_VALUE_2
+	ld [de], a
+	ret
+
+LoadDungeonBagFromSRAM:
+; hl = address of a stash struct in SRAM (saved or backup-saved);
+; SRAM bank 0 must be open. Copies it into the session stash, or
+; resets the session stash if the check values are invalid (a save
+; file from before the dungeon bag existed: the field bag is simply
+; live, and the dungeon bag starts empty).
+	ld d, h
+	ld e, l
+	ld bc, sDungeonBagDataEnd - sDungeonBagData
+	add hl, bc ; hl -> the check values
+	ld a, [hli]
+	cp SAVE_CHECK_VALUE_1
+	jr nz, .reset
+	ld a, [hl]
+	cp SAVE_CHECK_VALUE_2
+	jr nz, .reset
+	ld h, d
+	ld l, e
+	ld de, sDungeonSessionBagData
+	ld bc, sDungeonSessionBagDataEnd - sDungeonSessionBagData
+	call CopyBytes
+	; the session stash needs valid check values too, or the next map
+	; transition would treat it as uninitialized and empty it
+	ld a, SAVE_CHECK_VALUE_1
+	ld [sDungeonSessionBagCheck1], a
+	ld a, SAVE_CHECK_VALUE_2
+	ld [sDungeonSessionBagCheck2], a
+	ret
+
+.reset
+	; fallthrough
+
+ResetDungeonSessionStash::
+; Rebuild the session stash as a pristine empty dungeon bag: zeroed
+; counts and data, valid check values, and the -1 terminator in the
+; first slot of every list pocket, exactly as ResetWRAM's .InitList
+; leaves the live bag on a fresh game. Without those terminators the
+; pack draws garbage rows instead of Cancel, and PutItemInPocket's
+; scan for -1 runs off the end of the pocket and deposits the item
+; wherever the first stray -1 sits. SRAM bank 0 must be open.
+	ld hl, sDungeonSessionBagData
+	ld bc, sDungeonSessionBagDataEnd - sDungeonSessionBagData
+	xor a
+	call ByteFill
+	ld a, SAVE_CHECK_VALUE_1
+	ld [sDungeonSessionBagCheck1], a
+	ld a, SAVE_CHECK_VALUE_2
+	ld [sDungeonSessionBagCheck2], a
+	ld hl, sDungeonSessionBag
+	; fallthrough
+
+WriteDungeonBagSentinels:
+; hl = a bag in the wTMsHMs-to-wNumPCItems layout, just zeroed.
+; Give each list pocket the -1 terminator in its first item slot;
+; the flat TM/HM array needs none, like .InitList.
+	ld a, -1
+	push hl
+	ld de, wItems - wTMsHMs
+	add hl, de
+	ld [hl], a
+	ld de, wKeyItems - wItems
+	add hl, de
+	ld [hl], a
+	ld de, wBalls - wKeyItems
+	add hl, de
+	ld [hl], a
+	ld de, wFruits - wBalls
+	add hl, de
+	ld [hl], a
+	ld de, wBattles - wFruits
+	add hl, de
+	ld [hl], a
+	pop hl
+	ret
+
+ResetDungeonStash::
+; Starting a new game: forget the previous session's stash, so the
+; old game's stashed bag cannot leak into this one. The saved slots
+; are left alone; they belong to save files that still exist on the
+; cartridge, and the first save overwrites them anyway.
+	ld a, BANK(sDungeonSessionBagData)
+	call OpenSRAM
+	call ResetDungeonSessionStash
+	jmp CloseSRAM
+
+SanitizeDungeonBag::
+; Whichever side holds the dungeon bag, per the active flag, must have
+; intact terminators; a bag missing one predates them (a save from
+; the buggy build), so rebuild it as empty. The field bag is never
+; touched. SRAM bank 0 must be open.
+	ld a, [sDungeonSessionBagActive]
+	and a
+	ld hl, wTMsHMs ; active: the live bag is the dungeon bag
+	jr nz, .got_base
+	ld hl, sDungeonSessionBag ; inactive: the stash holds it
+.got_base
+	push hl
+	ld de, wNumItems - wTMsHMs
+	call .checkQuantity
+	jr nz, .corrupt
+	ld de, wNumBalls - wTMsHMs
+	call .checkQuantity
+	jr nz, .corrupt
+	ld de, wNumFruits - wTMsHMs
+	call .checkQuantity
+	jr nz, .corrupt
+	ld de, wNumBattles - wTMsHMs
+	call .checkQuantity
+	jr nz, .corrupt
+	ld de, wNumKeyItems - wTMsHMs
+	call .checkNormal
+	jr nz, .corrupt
+	pop hl
+	ret
+
+.checkQuantity:
+; de = the pocket's count byte offset. Returns z if the terminator
+; sits where it belongs: quantity format is two bytes per entry.
+	push hl
+	add hl, de
+	ld a, [hl] ; count
+	add a      ; 2 * count (max 32 per pocket, so no overflow)
+	ld c, a
+	ld b, 0
+	inc hl     ; -> first item slot
+	add hl, bc
+	ld a, [hl]
+	cp -1
+	pop hl
+	ret
+
+.checkNormal:
+; de = the pocket's count byte offset; key items are one byte each.
+	push hl
+	add hl, de
+	ld a, [hl]
+	ld c, a
+	ld b, 0
+	inc hl
+	add hl, bc
+	ld a, [hl]
+	cp -1
+	pop hl
+	ret
+
+.corrupt
+	pop hl
+	push hl
+	ld bc, wNumPCItems - wTMsHMs
+	xor a
+	call ByteFill
+	pop hl
+	jmp WriteDungeonBagSentinels
+
+ClearDungeonBag::
+; Empty the Dungeon bag
+; Whichever copy the active flag points at is emptied with proper
+; -1 terminators, so the bag stays valid for the sanitizer, the pack
+; and the next save; the field bag is never touched. SRAM bank 0 is
+; opened here.
+	ld a, BANK(sDungeonSessionBagData)
+	call OpenSRAM
+	ld a, [sDungeonSessionBagActive]
+	and a
+	ld hl, wTMsHMs ; active: the live bag is the Dungeon bag
+	jr nz, .got_base
+	ld hl, sDungeonSessionBag ; inactive: the stash holds it
+.got_base
+	push hl
+	ld bc, wNumPCItems - wTMsHMs
+	xor a
+	call ByteFill
+	pop hl
+	call WriteDungeonBagSentinels
 	jmp CloseSRAM
 
 VerifyChecksum:
@@ -610,6 +825,8 @@ LoadBackupPlayerData:
 	ld de, wCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
+	ld hl, sDungeonBackupSavedBagData
+	call LoadDungeonBagFromSRAM
 	jmp CloseSRAM
 
 LoadBackupPokemonData:

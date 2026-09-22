@@ -1,4 +1,5 @@
 HandleNewMap:
+	call CheckDungeonBag
 	call ResetMapBufferEventFlags
 	call ResetFlashIfOutOfCave
 	call GetCurrentMapSceneID
@@ -14,6 +15,64 @@ HandleContinueMap:
 	call GetMapTimeOfDay
 	ld [wMapTimeOfDay], a
 	ret
+
+CheckDungeonBag:
+; Cherrygrove Mart has its own bag. The live bag (wTMsHMs to
+; wNumPCItems) and the session stash in SRAM (sDungeonSessionBag) are
+; swapped whenever a map wants the other one: Cherrygrove Mart wants
+; the stash, every other map wants the live one. Every map-changing
+; setup script runs this after the new map's group and number are in
+; place; the continue setup does not need it, since LoadPlayerData
+; restores the stash that matches the saved map. This also repairs
+; an uninitialized session stash (SRAM is not cleared on boot, and a
+; new game only resets the session copy).
+; Which bag this map wants is computed before SRAM is opened, from
+; wMapGroup/wMapNumber, which live in the ambient WRAM bank.
+	ld a, [wMapGroup]
+	cp GROUP_CHERRYGROVE_MART
+	jr nz, .want_field_bag
+	ld a, [wMapNumber]
+	cp MAP_CHERRYGROVE_MART
+	jr nz, .want_field_bag
+	ld a, TRUE
+	jr .got_want
+
+.want_field_bag
+	xor a ; the field bag
+.got_want
+	push af ; which bag this map wants, across the stash repair
+	ld a, BANK(sDungeonSessionBagData)
+	call OpenSRAM
+	ld a, [sDungeonSessionBagCheck1]
+	cp SAVE_CHECK_VALUE_1
+	jr nz, .init_stash
+	ld a, [sDungeonSessionBagCheck2]
+	cp SAVE_CHECK_VALUE_2
+	jr z, .have_stash
+.init_stash
+	farcall ResetDungeonSessionStash
+.have_stash
+	pop af
+	ld b, a
+	ld a, [sDungeonSessionBagActive]
+	cp b
+	jr nz, .swap
+	jmp CloseSRAM ; the live bag already matches this map
+.swap
+; swap the live bag and the stash, byte for byte
+	ld a, b
+	push af ; the desired state, across the swap
+	ld hl, wTMsHMs
+	ld de, sDungeonSessionBag
+	ld bc, wNumPCItems - wTMsHMs
+	call SwapBytes
+	pop af
+	ld [sDungeonSessionBagActive], a
+	; A stash built before the list terminators existed leaves the
+	; dungeon bag unable to hold items; rebuild it if so. This examines
+	; only whichever side holds the dungeon bag, never the field bag.
+	farcall SanitizeDungeonBag
+	jmp CloseSRAM
 
 EnterMapConnection:
 ; Return carry if a connection has been entered.
