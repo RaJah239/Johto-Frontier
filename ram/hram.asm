@@ -185,7 +185,8 @@ hFunctionTargetHi:: db
 hDelayFrameLY:: db
 
 hWaitForBButtonRelease:: db
+hAHoldFrames:: db
 
-	ds 12
+	ds 11
 
 ENDSECTION
