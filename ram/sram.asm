@@ -78,6 +78,41 @@ sBackupCheckValue2:: db ; loaded with SAVE_CHECK_VALUE_2, used to check save cor
 
 sStackTop:: dw
 
+; Cherrygrove Mart's second bag (see CheckMartBag). All three copies
+; live in SRAM bank 0 so that any one of them can be copied to or
+; from another directly: an SRAM bank cannot be read and written in
+; one pass while a different bank is selected, and there is no free
+; WRAM buffer to stage a copy in.
+SECTION "Mart Bag Stash", SRAM, BANK[0]
+
+; The session copy: CheckMartBag swaps this with the live bag
+; whenever a map wants the other one, so it changes during play.
+; SavePlayerData commits it to the saved copy below; LoadPlayerData
+; restores it from there.
+sMartSessionBagData::
+sMartSessionBagActive:: db ; nonzero if the live bag is the Cherrygrove Mart bag
+sMartSessionBag:: ds wNumPCItems - wTMsHMs
+sMartSessionBagDataEnd::
+sMartSessionBagCheck1:: db ; written with SAVE_CHECK_VALUE_1 when valid
+sMartSessionBagCheck2:: db
+
+; The copy committed by saving, restored by LoadPlayerData.
+sMartSavedBagData::
+sMartSavedBagActive:: db
+sMartSavedBag:: ds wNumPCItems - wTMsHMs
+sMartSavedBagDataEnd::
+sMartSavedBagCheck1:: db
+sMartSavedBagCheck2:: db
+
+; The backup-save copy, committed by SaveBackupPlayerData and
+; restored by LoadBackupPlayerData.
+sMartBackupSavedBagData::
+sMartBackupSavedBagActive:: db
+sMartBackupSavedBag:: ds wNumPCItems - wTMsHMs
+sMartBackupSavedBagDataEnd::
+sMartBackupSavedBagCheck1:: db
+sMartBackupSavedBagCheck2:: db
+
 SECTION "Save", SRAM
 
 sOptions:: ds wOptionsEnd - wOptions

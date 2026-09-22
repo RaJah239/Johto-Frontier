@@ -86,6 +86,7 @@ NewGame:
 	xor a
 	ld [wDebugFlags], a
 	call ResetWRAM
+	farcall ResetMartStash
 	farcall ClearSavedObjPals
 	call NewGame_ClearTilemapEtc
 	call CheckVBA
