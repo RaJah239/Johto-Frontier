@@ -769,6 +769,28 @@ SanitizeMartBag::
 	pop hl
 	jmp WriteMartBagSentinels
 
+ClearMartBag::
+; Empty the Cherrygrove Mart bag, for an NPC who offers to clean it
+; out. Whichever copy the active flag points at is emptied with proper
+; -1 terminators, so the bag stays valid for the sanitizer, the pack
+; and the next save; the field bag is never touched. SRAM bank 0 is
+; opened here.
+	ld a, BANK(sMartSessionBagData)
+	call OpenSRAM
+	ld a, [sMartSessionBagActive]
+	and a
+	ld hl, wTMsHMs ; active: the live bag is the mart bag
+	jr nz, .got_base
+	ld hl, sMartSessionBag ; inactive: the stash holds it
+.got_base
+	push hl
+	ld bc, wNumPCItems - wTMsHMs
+	xor a
+	call ByteFill
+	pop hl
+	call WriteMartBagSentinels
+	jmp CloseSRAM
+
 VerifyChecksum:
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData

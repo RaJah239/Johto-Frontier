@@ -152,6 +152,7 @@ SpecialsPointers::
 	add_special GetPartyCountWithoutEggs
 	add_special LoadPokemonData
 	add_special OverridePlayerParty
+	add_special ClearMartBag
 
 if DEF(_DEBUG)
 	add_special FillPokedex

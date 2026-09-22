@@ -19,12 +19,14 @@ CherrygroveCity_MapEvents:
 	object_event 27, 12, SPRITE_TEACHER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, CherrygroveTeacherScript, -1
 	object_event 23,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, CherrygroveYoungsterText, -1
 	object_event  7, 12, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, MysticWaterGuy, -1
+	object_event 26,  4, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, CherrygroveBagCleaner, -1
 
 	object_const_def
 	const CHERRYGROVECITY_GRAMPS
 	const CHERRYGROVECITY_TEACHER
 	const CHERRYGROVECITY_YOUNGSTER
 	const CHERRYGROVECITY_FISHER
+	const CHERRYGROVECITY_BAGCLEANER
 
 CherrygroveCity_MapScripts:
 	def_scene_scripts
@@ -350,3 +352,30 @@ CherrygroveCitySignText:
 GuideGentsHouseSignText:
 	text "Guide Gent's House"
 	done
+
+CherrygroveBagCleaner:
+	faceplayeropentext
+	writethistext
+		text "I clean up the"
+		line "CHERRYGROVE MART."
+
+		para "Want me to toss"
+		line "everything you've"
+
+		para "bought there?"
+		done
+	yesorno
+	iffalse .No
+	special ClearMartBag
+	writethistext
+		text "Consider it done!"
+		line "It's spotless!"
+		done
+	waitclosetext
+	end
+.No:
+	writethistext
+		text "OK. I'll be here."
+		done
+	waitclosetext
+	end
