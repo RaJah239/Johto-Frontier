@@ -1784,7 +1784,7 @@ wInBattleTowerBattle::
 ; 1 BattleTower-Battle
 	db
 
-wCurOptionsPage:: db
+wOptionsScrollOffset:: db
 
 wFXAnimID:: dw
 

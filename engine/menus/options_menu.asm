@@ -1,4 +1,7 @@
-DEF NUM_OPTIONS EQU 7
+DEF NUM_OPTIONS EQU 15
+DEF OPTIONS_VISIBLE_ROWS EQU 6
+DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
+DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
 
 _Option:
 	call ClearJoypad
@@ -7,25 +10,18 @@ _Option:
 	push af
 	ld [hl], TRUE
 	call ClearBGPalettes
-	hlcoord 0, 0
-	lb bc, SCREEN_HEIGHT - 2, SCREEN_WIDTH - 2
-	call Textbox
-	hlcoord 2, 2
-	ld de, StringOptions1
-	call PlaceString
 	xor a
-	ld [wCurOptionsPage], a
-
-	call OptionsMenu_LoadOptions
-
-	xor a
+	ld [wOptionsScrollOffset], a
 	ld [wJumptableIndex], a
+	call OptionsMenu_Redraw
 	call WaitBGMap
 	ld b, SCGB_DIPLOMA
 	call GetSGBLayout
 	call SetDefaultBGPAndOBP
 
 .joypad_loop
+	xor a
+	ldh [hBGMapMode], a
 	call JoyTextDelay
 	ldh a, [hJoyPressed]
 	and START | B_BUTTON
@@ -34,9 +30,19 @@ _Option:
 	jr c, .dpad
 	call GetOptionPointer
 	jr c, .ExitOptions
+	jr .wait
 
 .dpad
+	and a
+	jr z, .move_cursor
+	call OptionsMenu_Redraw
+	jr .wait
+
+.move_cursor
 	call Options_UpdateCursorPosition
+.wait
+	ld a, 1
+	ldh [hBGMapMode], a
 	ld c, 3
 	call DelayFrames
 	jr .joypad_loop
@@ -49,12 +55,86 @@ _Option:
 	ldh [hInMenu], a
 	ret
 
-OptionsMenu_LoadOptions:
+OptionsMenu_Redraw:
 	xor a
+	ldh [hBGMapMode], a
+	hlcoord 0, 0
+	lb bc, SCREEN_HEIGHT - 2, SCREEN_WIDTH - 2
+	call Textbox
+	call OptionsMenu_DrawLabels
+	call OptionsMenu_LoadOptions
+	call Options_UpdateCursorPosition
+	ld a, 1
+	ldh [hBGMapMode], a
+	ret
+
+OptionsMenu_DrawLabels:
+	hlcoord 2, 2
+	ld a, [wOptionsScrollOffset]
+	ld b, a
+	ld c, OPTIONS_VISIBLE_ROWS
+.loop
+	push bc
+	push hl
+	ld a, b
+	ld hl, .Labels
+	ld bc, 2
+	call AddNTimes
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	pop hl
+	call PlaceString
+	pop bc
+	ld de, 2 * SCREEN_WIDTH
+	add hl, de
+	inc b
+	dec c
+	jr nz, .loop
+	ret
+
+.Labels:
+	dw .TextSpeed
+	dw .BattleScene
+	dw .Sound
+	dw .RunningShoes
+	dw .AutoBicycle
+	dw .ScaledExp
+	dw .QuickNurse
+	dw .FieldActions
+	dw .FasterBattles
+	dw .ExpShare
+	dw .MinimalDialogue
+	dw .FastBoot
+	dw .HardMode
+	dw .Frame
+	dw .Done
+
+.TextSpeed:       db "Text Speed@"
+.BattleScene:     db "Battle Scene@"
+.Sound:           db "Audio Mode@"
+.RunningShoes:    db "Running Shoes@"
+.AutoBicycle:     db "Auto Bicycle@"
+.ScaledExp:       db "Experience Gain@"
+.Frame:           db "Frame   :Type@"
+.QuickNurse:      db "#mon Center@"
+.FieldActions:    db "Field Actions@"
+.FasterBattles:   db "Battles@"
+.ExpShare:        db "Exp.Share@"
+.MinimalDialogue: db "Dialogue/Text@"
+.FastBoot:        db "Fast Boot@"
+.HardMode:        db "Hard Mode@"
+.Done:            db "Done@"
+
+OptionsMenu_LoadOptions:
+	ld a, [wJumptableIndex]
+	push af
+	ld a, [wOptionsScrollOffset]
 	ld [wJumptableIndex], a
+	xor a
 	ldh [hJoyPressed], a
-	ld c, $7 ; number of items on the menu minus 1 (for done)
-.print_text_loop ; this next will display the settings of each option when the menu is opened
+	ld c, OPTIONS_VISIBLE_ROWS
+.print_text_loop
 	push bc
 	xor a
 	ldh [hJoyLast], a
@@ -64,54 +144,12 @@ OptionsMenu_LoadOptions:
 	inc [hl]
 	dec c
 	jr nz, .print_text_loop
-	ld a, [wCurOptionsPage]
-	and a
-	call z, UpdateFrame
-	ld a, 1
-	ldh [hBGMapMode], a
+	pop af
+	ld [wJumptableIndex], a
 	ret
 
-StringOptions1:
-	db "Text Speed<LF>"
-	db "        :<LF>"
-	db "Battle Scene<LF>"
-	db "        :<LF>"
-	db "Audio Mode<LF>"
-	db "        :<LF>"
-	db "Running Shoes<LF>"
-	db "        :<LF>"
-	db "Auto Bicycle<LF>"
-	db "        :<LF>"
-	db "Experience Gain<LF>"
-	db "        :<LF>"
-	db "Frame<LF>"
-	db "        :Type<LF>"
-	db "Next Page@"
-
-StringOptions2:
-	db "#mon Center<LF>"
-	db "        :<LF>"
-	db "Field Actions<LF>"
-	db "        :<LF>"
-	db "Battles<LF>"
-	db "        :<LF>"
-	db "Exp.Share<LF>"
-	db "        :<LF>"
-	db "Dialogue/Text<LF>"
-	db "        :<LF>"
-	db "Fast Boot<LF>"
-	db "        :<LF>"
-	db "Hard Mode<LF>"
-	db "         <LF>"
-	db "Previous Page@"
-
 GetOptionPointer:
-	ld a, [wCurOptionsPage]
-	and a
 	ld a, [wJumptableIndex]
-	jr z, .page1
-	add NUM_OPTIONS + 1
-.page1
 	call StackJumpTable
 
 .Pointers:
@@ -121,9 +159,6 @@ GetOptionPointer:
 	dw Options_RunningShoes
 	dw Options_AutoBicycle
 	dw Options_Scaled_Exp
-	dw Options_Frame
-	dw Options_NextPrevious
-
 	dw Options_QuickNurse
 	dw Options_FieldActions
 	dw Options_FasterBattles
@@ -131,7 +166,8 @@ GetOptionPointer:
 	dw Options_MinimalDialogue
 	dw Options_FastBoot
 	dw Options_HardMode
-	dw Options_NextPrevious
+	dw Options_Frame
+	dw Options_Done
 
 	const_def
 	const OPT_TEXT_SPEED_FAST ; 1
@@ -159,18 +195,15 @@ Options_TextSpeed:
 	and a
 	jr nz, .Decrease
 	ld c, OPT_TEXT_SPEED_NONE + 1
-
 .Decrease:
 	dec c
 	ld a, d
-
 .Save:
 	ld b, a
 	ld a, [wOptions]
 	and $f0
 	or b
 	ld [wOptions], a
-
 .NonePressed:
 	ld b, 0
 	ld hl, .Strings
@@ -179,7 +212,7 @@ Options_TextSpeed:
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	hlcoord 11, 3
+	call OptionsMenu_PlaceValue
 	call PlaceString
 	and a
 	ret
@@ -242,7 +275,7 @@ Options_BattleScene:
 	ld de, .Off
 
 .Display:
-	hlcoord 11, 5
+	call OptionsMenu_PlaceValue
 	call PlaceString
 	and a
 	ret
@@ -280,7 +313,7 @@ Options_ExpShare:
 	ld de, .On
 
 .Display:
-	hlcoord 11, 9
+	call OptionsMenu_PlaceValue
 	call PlaceString
 	and a
 	ret
@@ -316,9 +349,8 @@ Options_RunningShoes:
 .ToggleOn:
 	set RUNNING_SHOES, [hl]
 	ld de, .On
-
 .Display:
-	hlcoord 11, 9
+	call OptionsMenu_PlaceValue
 	call PlaceString
 	and a
 	ret
@@ -354,9 +386,8 @@ Options_HardMode:
 .ToggleOn:
 	set HARD_MODE, [hl]
 	ld de, .On
-
 .Display:
-	hlcoord 11, 15
+	call OptionsMenu_PlaceValue
 	call PlaceString
 	and a
 	ret
@@ -383,8 +414,7 @@ Options_FasterBattles:
 .NonePressed:
  	bit FAST_BATTLES, [hl]
  	jr nz, .ToggleOn
- 
-.ToggleOff:
+ .ToggleOff:
  	res FAST_BATTLES, [hl]
  	ld de, .Off
  	jr .Display
@@ -394,7 +424,7 @@ Options_FasterBattles:
  	ld de, .On
  
 .Display:
-	hlcoord 11, 7
+	call OptionsMenu_PlaceValue
 	call PlaceString
 	and a
 	ret
@@ -426,7 +456,6 @@ Options_Sound:
 .SetMono:
 	res STEREO, [hl]
 	call RestartMapMusic
-
 .ToggleMono:
 	ld de, .Mono
 	jr .Display
@@ -434,12 +463,10 @@ Options_Sound:
 .SetStereo:
 	set STEREO, [hl]
 	call RestartMapMusic
-
 .ToggleStereo:
 	ld de, .Stereo
-
 .Display:
-	hlcoord 11, 7
+	call OptionsMenu_PlaceValue
 	call PlaceString
 	and a
 	ret
@@ -477,7 +504,7 @@ Options_MinimalDialogue:
 	ld de, .Normal
 
 .Display:
-	hlcoord 11, 11
+	call OptionsMenu_PlaceValue
 	call PlaceString
 	and a
 	ret
@@ -520,8 +547,8 @@ Options_Scaled_Exp:
  	ld de, .Scaled
  
  .Display:
- 	hlcoord 11, 13
- 	call PlaceString
+	call OptionsMenu_PlaceValue
+	call PlaceString
  	and a
  	ret
  
@@ -556,9 +583,8 @@ Options_QuickNurse:
  .ToggleOn:
  	set NURSE_HEAL, [hl]
  	ld de, .On
- 
-.Display:
-	hlcoord 11, 3
+ .Display:
+	call OptionsMenu_PlaceValue
 	call PlaceString
 	and a
 	ret
@@ -594,10 +620,9 @@ Options_FastBoot:
  .ToggleOn:
  	set FAST_BOOT, [hl]
  	ld de, .On
- 
- .Display:
- 	hlcoord 11, 13
- 	call PlaceString
+  .Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
  	and a
  	ret
 
@@ -632,10 +657,9 @@ Options_FieldActions:
  .ToggleOn:
  	set FIELD_ACTIONS, [hl]
  	ld de, .Quick
- 
- .Display:
- 	hlcoord 11, 5
- 	call PlaceString
+  .Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
  	and a
  	ret
 
@@ -661,8 +685,7 @@ Options_AutoBicycle:
  .NonePressed:
  	bit AUTO_BICYCLE, [hl]
  	jr nz, .ToggleOn
- 
- .ToggleOff:
+  .ToggleOff:
  	res AUTO_BICYCLE, [hl]
  	ld de, .Off
  	jr .Display
@@ -670,10 +693,9 @@ Options_AutoBicycle:
  .ToggleOn:
  	set AUTO_BICYCLE, [hl]
  	ld de, .On
- 
- .Display:
- 	hlcoord 11, 11
- 	call PlaceString
+  .Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
  	and a
  	ret
 
@@ -687,8 +709,7 @@ Options_Frame:
 	jr nz, .LeftPressed
 	bit D_RIGHT_F, a
 	jr nz, .RightPressed
-	and a
-	ret
+	jr UpdateFrame
 
 .RightPressed:
 	ld a, [hl]
@@ -698,47 +719,40 @@ Options_Frame:
 .LeftPressed:
 	ld a, [hl]
 	dec a
-
 .Save:
 	maskbits NUM_FRAMES
 	ld [hl], a
 UpdateFrame:
+; Place the digit on the label's own line (next to "Frame"), not on
+; the value line below it: +5 columns reaches col 16, -1 row goes
+; from the value row to the label row.
+	call OptionsMenu_PlaceValue
+	ld bc, 5 - SCREEN_WIDTH
+	add hl, bc
 	ld a, [wTextboxFrame]
-	hlcoord 16, 15 ; where on the screen the number is drawn
 	add "1"
 	ld [hl], a
 	call LoadFontsExtra
 	and a
 	ret
 
-Options_NextPrevious:
-	ld hl, wCurOptionsPage
+Options_Done:
 	ldh a, [hJoyPressed]
-	and A_BUTTON | D_LEFT | D_RIGHT
-	jr z, .NonePressed
-	bit 0, [hl]
-	jr z, .Page2
-;.Page1:
-	res 0, [hl]
-	ld de, StringOptions1
-	jr .Display
-.Page2:
-	set 0, [hl]
-	ld de, StringOptions2
-.Display:
-	push de
-	hlcoord 0, 0
-	lb bc, 16, 18
-	call Textbox
-	pop de
-	hlcoord 2, 2
+	and A_BUTTON
+	jr nz, .exit
+; No value to show; blank the value column so stale text
+; from the previous screen doesn't linger
+	call OptionsMenu_PlaceValue
+	ld de, .Blank
 	call PlaceString
-	call OptionsMenu_LoadOptions
-	ld a, $7
-	ld [wJumptableIndex], a
-.NonePressed:
 	and a
 	ret
+
+.exit
+	scf
+	ret
+
+.Blank: db "       @"
 
 OptionsControl:
 	ld hl, wJumptableIndex
@@ -751,13 +765,30 @@ OptionsControl:
 	ret
 
 .DownPressed:
-	ld a, [hl] ; load the cursor position to a
-	cp NUM_OPTIONS ; maximum number of items in option menu
+	ld a, [hl]
+	cp NUM_OPTIONS - 1
 	jr nz, .Increase
-	ld [hl], -1
-	; fallthrough
+	xor a
+	ld [hl], a
+	ld [wOptionsScrollOffset], a
+	jr .Redraw
+
 .Increase:
 	inc [hl]
+	ld a, [wOptionsScrollOffset]
+	add OPTIONS_VISIBLE_ROWS
+	ld b, a
+	ld a, [hl]
+	cp b
+	jr c, .NoRedraw
+	ld hl, wOptionsScrollOffset
+	inc [hl]
+.Redraw:
+	ld a, 1
+	scf
+	ret
+.NoRedraw:
+	xor a
 	scf
 	ret
 
@@ -765,25 +796,101 @@ OptionsControl:
 	ld a, [hl]
 	and a
 	jr nz, .Decrease
-	ld [hl], NUM_OPTIONS + 1 ; number of option items + 1
-	; fallthrough
+	ld a, NUM_OPTIONS - 1
+	ld [hl], a
+	ld a, NUM_OPTIONS - OPTIONS_VISIBLE_ROWS
+	ld [wOptionsScrollOffset], a
+	jr .Redraw
 .Decrease:
 	dec [hl]
-	scf
-	ret
+	ld a, [wOptionsScrollOffset]
+	ld b, a
+	ld a, [hl]
+	cp b
+	jr nc, .NoRedraw
+	ld hl, wOptionsScrollOffset
+	dec [hl]
+	jr .Redraw
+
+OptionsMenu_PlaceValue:
+	ld a, [wJumptableIndex]
+	ld b, a
+	ld a, [wOptionsScrollOffset]
+	ld c, a
+	ld a, b
+	sub c
+	hlcoord 11, 3
+	ld bc, 2 * SCREEN_WIDTH
+	jmp AddNTimes
 
 Options_UpdateCursorPosition:
 	hlcoord 1, 1
 	ld de, SCREEN_WIDTH
-	ld c, SCREEN_HEIGHT - 2
+; Blank only the option rows (rows 1 to 2 * OPTIONS_VISIBLE_ROWS).
+; The rows below hold the description box, which must not be
+; erased here.
+	ld c, 2 * OPTIONS_VISIBLE_ROWS
 .loop
 	ld [hl], " "
 	add hl, de
 	dec c
 	jr nz, .loop
+	ld a, [wJumptableIndex]
+	ld b, a
+	ld a, [wOptionsScrollOffset]
+	ld c, a
+	ld a, b
+	sub c
 	hlcoord 1, 2
 	ld bc, 2 * SCREEN_WIDTH
-	ld a, [wJumptableIndex]
 	call AddNTimes
 	ld [hl], "▶"
-	ret
+	; fallthrough
+
+OptionsMenu_DrawDescription:
+	hlcoord 0, DESCRIPTION_BOX_Y
+	lb bc, 2, SCREEN_WIDTH - 2
+	call Textbox
+	ld a, [wJumptableIndex]
+	ld hl, .Descriptions
+	ld bc, 2
+	call AddNTimes
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	hlcoord TEXTBOX_INNERX, DESCRIPTION_TEXT_Y
+	jmp PlaceString
+
+.Descriptions:
+; One entry per option, in the same order as .Labels and .Pointers.
+	dw .DescTextSpeed
+	dw .DescBattleScene
+	dw .DescSound
+	dw .DescRunningShoes
+	dw .DescAutoBicycle
+	dw .DescScaledExp
+	dw .DescQuickNurse
+	dw .DescFieldActions
+	dw .DescFasterBattles
+	dw .DescExpShare
+	dw .DescMinimalDialogue
+	dw .DescFastBoot
+	dw .DescHardMode
+	dw .DescFrame
+	dw .DescDone
+
+.DescTextSpeed: db "Adjust your text<LF>speed.@"
+.DescBattleScene: db "Turn On or Off<LF>Battle Animations.@"
+.DescSound: db "Play music in<LF>Mono or Stereo.@"
+.DescRunningShoes: db "Set default to<LF>walk or run.@"
+.DescAutoBicycle: db "Get on the Bicycle<LF>outdoors.@"
+.DescScaledExp: db "Regular or Scaled<LF>Experience.@"
+.DescQuickNurse: db "#mon Center<LF>fast or slow heal.@"
+.DescFieldActions: db "Normal or Fast<LF>Field Actions.@"
+.DescFasterBattles: db "Reduce the text<LF>in battles.@"
+.DescExpShare: db "Share Experience<LF>with the party.@"
+.DescMinimalDialogue: db "Reduce all NPC<LF>text or not.@"
+.DescFastBoot: db "Load your save<LF>file immediately.@"
+.DescHardMode: db "Choose your mode<LF>to play in.@"
+.DescFrame: db "Select your border<LF>of textboxes.@"
+.DescDone: db "Save and Exit<LF>@"
