@@ -769,8 +769,60 @@ CheckMenuOW:
 	jr nz, .Select
 
 	bit START_F, a
+	jr z, .CheckStartHold
+
+; Start was just pressed. Count the hold instead of opening the
+; menu right away: a quick tap opens the menu when Start is
+; released, while holding it for START_SAVE_HOLD_FRAMES frames
+; saves the game instead.
+	ld a, 1
+	ld [wStartHoldFrames], a
+	jr .NoMenu
+
+.CheckStartHold:
+	ld a, [wStartHoldFrames]
+	and a
 	jr z, .NoMenu
 
+	ldh a, [hJoyReleased]
+	bit START_F, a
+	jr nz, .StartReleased
+
+	ldh a, [hJoyDown]
+	bit START_F, a
+	jr nz, .HoldStart
+
+; Start is not held and was not released this frame: the release
+; must have happened while a script was running. Forget the hold
+; instead of opening the menu later.
+	xor a
+	ld [wStartHoldFrames], a
+	jr .NoMenu
+
+.HoldStart:
+	ld a, [wStartHoldFrames]
+	inc a
+	ld [wStartHoldFrames], a
+	cp START_SAVE_HOLD_FRAMES
+	jr c, .NoMenu
+
+; Start has been held long enough: save the game!
+	xor a
+	ld [wStartHoldFrames], a
+	ld a, [wLinkMode]
+	and a
+	jr nz, .NoMenu ; never save while linked
+	ld a, BANK(QuickSaveScript)
+	ld hl, QuickSaveScript
+	call CallScript
+	scf
+	ret
+
+.StartReleased:
+; Start was released before the timeout: act like a normal
+; Start press and open the start menu.
+	xor a
+	ld [wStartHoldFrames], a
 	ld a, BANK(StartMenuScript)
 	ld hl, StartMenuScript
 	call CallScript
@@ -788,6 +840,12 @@ CheckMenuOW:
 	call CallScript
 	scf
 	ret
+
+QuickSaveScript:
+; Triggered by holding Start in the overworld.
+	opentext
+	callasm QuickSaveGame
+	endtext
 
 StartMenuScript:
 	callasm StartMenu
