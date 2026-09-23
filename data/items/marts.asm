@@ -14,6 +14,7 @@ Marts:
 	dw MartFiveBadges
 	dw MartSevenBadges
 	dw MartEightBadges
+	dw MartCherrygrove
 	assert_table_length NUM_MARTS
 
 MartCianwood:
@@ -197,4 +198,14 @@ DefaultMart:
 	db 2 ; # items
 	db POKE_BALL
 	db POTION
+	db -1 ; end
+
+MartCherrygrove:
+	db 6 ; # items
+	db POKE_BALL
+	db TM_METEOR_MASH ; TM01, in place of the usual Potion
+	db ANTIDOTE
+	db PARLYZ_HEAL
+	db AWAKENING
+	db REPEL
 	db -1 ; end

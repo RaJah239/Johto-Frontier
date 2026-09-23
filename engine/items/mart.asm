@@ -624,8 +624,8 @@ MartPlaceInBagQuantity:
 	jr z, .get_ball_pocket
 	cp BATTLE
 	jr z, .get_battle_pocket
-	cp TM01
-	jr z, .ClearItemInBagQuantitysBox
+	cp TM_HM
+	jr z, .get_tm_pocket
 	; cp FRUITS
 	ld hl, wNumFruits
 	jr z, .check_bag
@@ -645,6 +645,22 @@ MartPlaceInBagQuantity:
 	ld hl, wNumBattles
 .check_bag
 	call CheckQuantityInBag
+	farjp PlaceItemInBagQuantity
+
+.get_tm_pocket
+; The TM/HM pocket is a bare count array indexed by (id - TM01).
+	ld a, [wCurItem]
+	sub TM01
+	ld c, a
+	ld b, 0
+	ld hl, wTMsHMs
+	add hl, bc
+	ld a, [hl]
+	cp MAX_ITEM_STACK + 1
+	jr c, .tm_ok
+	ld a, MAX_ITEM_STACK
+.tm_ok
+	ld [wMenuSelectionQuantity], a
 	farjp PlaceItemInBagQuantity
 
 CheckQuantityInBag:
