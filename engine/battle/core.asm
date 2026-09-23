@@ -5307,17 +5307,17 @@ ParseEnemyAction:
 	jmp nz, .skip_load
 	ld a, [wEnemySubStatus3]
 	and 1 << SUBSTATUS_CHARGED | 1 << SUBSTATUS_RAMPAGE
-	jr nz, .skip_load
+	jmp nz, .skip_load
 
 	ld hl, wEnemySubStatus5
 	bit SUBSTATUS_ENCORED, [hl]
 	ld a, [wLastEnemyMove]
-	jr nz, .finish
+	jmp nz, .finish
 	ld hl, wEnemyMonMoves
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
-	jr .finish
+	jmp .finish
 
 .not_linked
 	ld hl, wEnemySubStatus5
@@ -5328,7 +5328,7 @@ ParseEnemyAction:
 
 .skip_encore
 	call CheckEnemyLockedIn
-	jr nz, ResetVarsForSubstatusRage
+	jmp nz, ResetVarsForSubstatusRage
 .continue
 	ld hl, wEnemyMonMoves
 	ld de, wEnemyMonPP
@@ -5361,6 +5361,7 @@ ParseEnemyAction:
 	dec a
 	jr nz, .skip_load
 ; wild
+	ld e, 64 ; self-heal rerolls allowed before giving up
 .loop2
 	ld hl, wEnemyMonMoves
 	call BattleRandom
@@ -5383,6 +5384,25 @@ ParseEnemyAction:
 	ld a, [hl]
 	and PP_MASK
 	jr z, .loop2
+	; Wildmons should not waste a turn on a self-healing move
+	; when they are already at full HP. Encore and other locked-in
+	; moves never reach this loop; if every usable move is a heal,
+	; the reroll budget runs out and it is picked anyway.
+	farcall AICheckEnemyMaxHP
+	jr nc, .accept_move
+	ld a, b
+	newfarcall AIGetEnemyMove
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	cp EFFECT_HEAL
+	jr z, .try_reroll
+	cp EFFECT_SLACK_OFF
+	jr z, .try_reroll
+	cp EFFECT_WEATHER_HEAL
+	jr nz, .accept_move
+.try_reroll
+	dec e
+	jr nz, .loop2
+.accept_move
 	ld a, c
 	ld [wCurEnemyMoveNum], a
 	ld a, b

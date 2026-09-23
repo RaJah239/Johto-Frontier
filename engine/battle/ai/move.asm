@@ -51,7 +51,7 @@ AIChooseMove:
 	inc b
 	ld a, b
 	cp NUM_MOVES + 1
-	jr z, .ApplyLayers
+	jr z, .CheckFullHPHeal
 	inc hl
 	ld a, [de]
 	inc de
@@ -59,6 +59,36 @@ AIChooseMove:
 	jr nz, .CheckMovePP
 	ld [hl], 80
 	jr .CheckMovePP
+
+; Don't pick self-healing moves if we are already at full HP.
+; AI_Basic's redundancy check only discourages them (+20), which can
+; still lose a score tie, so score them as unusable instead.
+.CheckFullHPHeal:
+	farcall AICheckEnemyMaxHP
+	jr nc, .ApplyLayers
+	ld hl, wEnemyMonMoves
+	ld de, wEnemyAIMoveScores
+	ld b, NUM_MOVES
+.check_heal:
+	ld a, [hl]
+	and a
+	jr z, .ApplyLayers
+	newfarcall AIGetEnemyMove
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	cp EFFECT_HEAL
+	jr z, .ban_heal
+	cp EFFECT_SLACK_OFF
+	jr z, .ban_heal
+	cp EFFECT_WEATHER_HEAL
+	jr nz, .next_heal
+.ban_heal
+	ld a, 80
+	ld [de], a
+.next_heal
+	inc hl
+	inc de
+	dec b
+	jr nz, .check_heal
 
 ; Apply AI scoring layers depending on the trainer class.
 .ApplyLayers:
