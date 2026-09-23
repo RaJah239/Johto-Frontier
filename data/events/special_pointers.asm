@@ -156,6 +156,9 @@ SpecialsPointers::
 	add_special CheckPartyStash
 	add_special StashPlayerParty
 	add_special UnstashPlayerParty
+	add_special ChooseMonForPikachuTrade
+	add_special TradeChosenMonForPikachu
+	add_special SetPikachuTradeReward
 
 if DEF(_DEBUG)
 	add_special FillPokedex

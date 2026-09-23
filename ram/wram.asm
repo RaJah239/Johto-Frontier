@@ -162,7 +162,10 @@ wMovementDataBank:: db
 wMovementDataAddress:: dw
 wIndexedMovement2Pointer:: dw
 
-	ds 2
+; Pending reward for the Cherrygrove City Pikachu trader
+; (chosen from the NPC's roster menu).
+wPikachuTradeSpecies:: db
+wPikachuTradeLevel:: db
 
 wContinueReadingMovement:: db
 

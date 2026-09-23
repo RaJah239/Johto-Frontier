@@ -21,6 +21,7 @@ CherrygroveCity_MapEvents:
 	object_event  7, 12, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, MysticWaterGuy, -1
 	object_event 26,  4, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, CherrygroveBagCleaner, -1
 	object_event 28,  4, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, CherrygrovePartyHolder, -1
+	object_event 27,  4, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, CherrygrovePikachuTrader, -1
 
 	object_const_def
 	const CHERRYGROVECITY_GRAMPS
@@ -29,6 +30,7 @@ CherrygroveCity_MapEvents:
 	const CHERRYGROVECITY_FISHER
 	const CHERRYGROVECITY_BAGCLEANER
 	const CHERRYGROVECITY_PARTYHOLDER
+	const CHERRYGROVECITY_PIKACHUTRADER
 
 CherrygroveCity_MapScripts:
 	def_scene_scripts
@@ -443,3 +445,81 @@ CherrygrovePartyHolder:
 		done
 	waitclosetext
 	end
+
+CherrygrovePikachuTrader:
+	faceplayer
+	opentext
+	writethistext
+		text "I'm a #MON"
+		line "collector! Pick a"
+		cont "rare one from my"
+		cont "roster, and I'll"
+		cont "take one of yours!"
+		done
+	loadmenu .RewardMenuHeader
+	verticalmenu
+	closewindow
+	iffalse .ChangedMind
+	special SetPikachuTradeReward
+	iffalse .ChangedMind
+	special ChooseMonForPikachuTrade
+	iffalse .ChangedMind
+	writethistext
+		text "Ooh, @"
+		text_ram wStringBuffer1
+		text "!"
+		line "It's a deal for"
+		cont "@"
+		text_ram wStringBuffer3
+		text "!"
+
+		para "Give me your word?"
+		done
+	yesorno
+	iffalse .Refuse
+	special TradeChosenMonForPikachu
+	iffalse .ChangedMind
+	writethistext
+		text "Byebye @"
+		text_ram wStringBuffer2
+		text "!"
+		line "Say hello to your"
+		cont "new @"
+		text_ram wStringBuffer1
+		text "!"
+		done
+	waitclosetext
+	end
+.Refuse:
+	writethistext
+		text "No? Can't blame"
+		line "you. I'll be here"
+		cont "if you change"
+		cont "your mind."
+		done
+	waitclosetext
+	end
+.ChangedMind:
+	writethistext
+		text "Some other time,"
+		line "then!"
+		done
+	waitclosetext
+	end
+.RewardMenuHeader:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 0, 2, 15, TEXTBOX_Y - 1
+	dw .RewardMenuData
+	db 1 ; default option
+
+.RewardMenuData:
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
+	db 5 ; items
+; Rows 1-4 must match PikachuTradeRewards order in
+; engine/events/npc_trade.asm; row 5 fails that table's range
+; check and cancels the trade.
+	db "PIKACHU@"
+	db "ENTEI@"
+	db "SUICUNE@"
+	db "RAIKOU@"
+	db "Cancel@"

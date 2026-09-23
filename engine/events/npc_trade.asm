@@ -502,3 +502,129 @@ NPCTradeCompleteText4:
 NPCTradeAfterText4:
 	text_far _NPCTradeAfterText4
 	text_end
+
+ChooseMonForPikachuTrade::
+; Let the player pick which party mon to give away.
+; Also re-stages the pending reward's name in wStringBuffer3 for
+; the confirmation text (the party menu may clobber the buffers).
+; Returns wScriptVar = TRUE with wCurPartyMon set, the mon's
+; nickname in wStringBuffer1 and the reward name in
+; wStringBuffer3, or FALSE if canceled (or no mons).
+	ld a, [wPartyCount]
+	and a
+	jr z, .cancel
+	ld b, PARTYMENUACTION_GIVE_MON
+	farcall SelectTradeOrDayCareMon
+	jr c, .cancel
+; GetPokemonName writes wStringBuffer1, so stage the reward name
+; before restoring the mon's nickname.
+	ld a, [wPikachuTradeSpecies]
+	ld [wNamedObjectIndex], a
+	call GetPokemonName
+	ld hl, wStringBuffer1
+	ld de, wStringBuffer3
+	ld bc, MON_NAME_LENGTH
+	call CopyBytes
+	call GetCurNickname
+	ld a, TRUE
+	ld [wScriptVar], a
+	ret
+
+.cancel
+	xor a
+	ld [wScriptVar], a
+	ret
+
+TradeChosenMonForPikachu::
+; Replace the chosen mon with the pending reward picked from the
+; NPC's roster menu.
+; Returns wScriptVar = TRUE on success, FALSE if there is nothing
+; to trade.
+	ld a, [wPartyCount]
+	and a
+	jr z, .fail
+	ld a, [wPikachuTradeSpecies]
+	and a
+	jr z, .fail ; the roster menu never ran
+; Park the nickname; TryAddMonToParty overwrites wStringBuffer1
+; with the new mon's name.
+	ld hl, wStringBuffer1
+	ld de, wStringBuffer2
+	ld bc, MON_NAME_LENGTH
+	call CopyBytes
+; Take the chosen mon out of the party (shifts species, stats,
+; OTs, nicknames and mail; closes SRAM).
+	xor a
+	ld [wPokemonWithdrawDepositParameter], a ; REMOVE_PARTY
+	callfar RemoveMonFromParty
+; Give the pending reward.
+	ld a, [wPikachuTradeSpecies]
+	ld [wCurPartySpecies], a
+	ld a, [wPikachuTradeLevel]
+	ld [wCurPartyLevel], a
+	xor a
+	ld [wMonType], a ; PARTYMON
+	ld [wBattleMode], a ; clean gift-mon path
+	predef TryAddMonToParty
+	ld a, [wPikachuTradeSpecies]
+	call PlayMonCry
+; Stage the reward's name for the farewell text.
+	ld a, [wPikachuTradeSpecies]
+	ld [wNamedObjectIndex], a
+	call GetPokemonName
+	ld a, TRUE
+	ld [wScriptVar], a
+	ret
+
+.fail
+	xor a
+	ld [wScriptVar], a
+	ret
+
+PikachuTradeRewards:
+; species, level — one row per roster menu entry. Keep the row
+; order in sync with .RewardMenuData in maps/CherrygroveCity.asm
+; (the menu's fifth row is Cancel and fails the range check below).
+	db PIKACHU,  5
+	db ENTEI,   50
+	db SUICUNE, 50
+	db RAIKOU,  50
+DEF NUM_PIKACHU_TRADE_REWARDS EQU (@ - PikachuTradeRewards) / 2
+
+SetPikachuTradeReward::
+; The roster menu put its 1-based selection in wScriptVar.
+; Stores the matching species/level from PikachuTradeRewards and
+; stages the species name in wStringBuffer3 for the confirmation
+; text (wStringBuffer1 belongs to the mon being given).
+; Returns wScriptVar = TRUE, or FALSE if the selection is invalid
+; (0 = menu canceled, NUM_PIKACHU_TRADE_REWARDS+1 = Cancel).
+	ld a, [wScriptVar]
+	and a
+	jr z, .fail
+	dec a
+	cp NUM_PIKACHU_TRADE_REWARDS
+	jr nc, .fail
+	ld l, a
+	ld h, 0
+	add hl, hl
+	ld de, PikachuTradeRewards
+	add hl, de
+	ld a, [hli]
+	ld [wPikachuTradeSpecies], a
+	ld a, [hl]
+	ld [wPikachuTradeLevel], a
+	ld a, [wPikachuTradeSpecies]
+	ld [wNamedObjectIndex], a
+	call GetPokemonName
+	ld hl, wStringBuffer1
+	ld de, wStringBuffer3
+	ld bc, MON_NAME_LENGTH
+	call CopyBytes
+	ld a, TRUE
+	ld [wScriptVar], a
+	ret
+
+.fail
+	xor a
+	ld [wScriptVar], a
+	ret
