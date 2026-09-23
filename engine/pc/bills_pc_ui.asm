@@ -3338,6 +3338,14 @@ BillsPC_RestoreUI:
 	call ClearSprites
 	newfarcall ClearSpriteAnims
 
+	; Load the UI graphics before the icons: BillsPC_LoadUI begins with
+	; ClearVBank1, which wipes all of VRAM bank 1 (partially, since the
+	; display is on). Loading it after the icons would garble the
+	; freshly restored icon tiles at vTiles4 and leave the box grid
+	; scrambled until a full re-init. UseBillsPC loads the UI first and
+	; the icons last for the same reason.
+	call BillsPC_LoadUI
+
 	; This needs to be done in case a frontpic anim overwrote data here.
 	ld a, 1
 	ldh [rVBK], a
@@ -3347,8 +3355,6 @@ BillsPC_RestoreUI:
 
 	xor a
 	ldh [rVBK], a
-
-	call BillsPC_LoadUI
 
 	; Fixes cursor palettes.
 	ld a, [wBillsPC_CursorMode]
