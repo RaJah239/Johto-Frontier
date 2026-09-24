@@ -27,6 +27,9 @@ BattleCommand_Disable:
 	ld c, $ff
 .loop
 	inc c
+	ld a, c
+	cp NUM_MOVES
+	jr nc, .failed
 	ld a, [hli]
 	cp b
 	jr nz, .loop

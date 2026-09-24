@@ -306,7 +306,9 @@ AI_TrySwitch:
 	ld a, d
 	cp 2
 	jr nc, AI_Switch
-	; fallthrough
+	; With fewer than two alive, there is nobody to switch to.
+	and a
+	ret
 
 AI_Switch:
 ; if enemy's Perish Count is 1 or

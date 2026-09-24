@@ -30,12 +30,15 @@ AIChooseMove:
 
 	ld hl, wEnemyMonMoves
 	ld c, 0
+	ld b, NUM_MOVES
 .CheckDisabledMove:
 	cp [hl]
 	jr z, .ScoreDisabledMove
 	inc c
 	inc hl
-	jr .CheckDisabledMove
+	dec b
+	jr nz, .CheckDisabledMove
+	jr .CheckPP
 .ScoreDisabledMove:
 	ld hl, wEnemyAIMoveScores
 	ld b, 0
@@ -147,6 +150,11 @@ AIChooseMove:
 
 ; Decrement the scores of all moves one by one until one reaches 0.
 .DecrementScores:
+	; If the enemy's moveset is empty, every restart below lands on the same
+	; zero move and never progresses; Struggle instead of spinning forever.
+	ld a, [wEnemyMonMoves]
+	and a
+	jr z, .use_struggle
 	ld hl, wEnemyAIMoveScores
 	ld de, wEnemyMonMoves
 	ld c, NUM_MOVES
@@ -168,6 +176,11 @@ AIChooseMove:
 	jr z, .DecrementScores
 
 	jr .DecrementNextScore
+
+.use_struggle:
+	ld a, STRUGGLE
+	ld [wCurEnemyMove], a
+	ret
 
 ; In order to avoid bias towards the moves located first in memory, increment the scores
 ; that were decremented one more time than the rest (in case there was a tie).

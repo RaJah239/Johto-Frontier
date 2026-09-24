@@ -590,6 +590,7 @@ FindEnemyMonsWithASuperEffectiveMove:
 	push bc
 	; for move on mon:
 	lb bc, NUM_MOVES, 0
+	ld e, 0
 .loop3
 	; if move is None: break
 	ld a, [hli]
@@ -617,7 +618,7 @@ FindEnemyMonsWithASuperEffectiveMove:
 
 	; if neutral: load 1 and continue
 	ld e, 1
-	jr c, .nope
+	jr z, .nope
 
 	; if super-effective: load 2 and break
 	ld e, 2

@@ -2732,6 +2732,7 @@ FindMonInOTPartyToSwitchIntoBattle:
 	jr z, .discourage
 	call LookUpTheEffectivenessOfEveryMove
 	call IsThePlayerMonTypesEffectiveAgainstOTMon
+	call CheckPlayerMovesVsOTMon
 	jr .loop
 
 .discourage
@@ -2767,6 +2768,9 @@ LookUpTheEffectivenessOfEveryMove:
 	pop bc
 	pop de
 	pop hl
+	ld a, [wEnemyMoveStruct + MOVE_POWER]
+	and a
+	jr z, .loop
 	ld a, [wTypeMatchup]
 	cp EFFECTIVE + 1
 	jr c, .loop
@@ -2822,6 +2826,88 @@ IsThePlayerMonTypesEffectiveAgainstOTMon:
 	res 0, [hl]
 	ret
 
+CheckPlayerMovesVsOTMon:
+; Evaluate the player's actual moves against a candidate switch-in.
+; Sets bit 0 of wPlayerEffectivenessVsEnemyMons if the player has a
+; super-effective damaging move and this mon has no counter for it,
+; and of wEnemyEffectivenessVsPlayerMons if this mon resists one of
+; the player's damaging moves and is not already marked good.
+	push af
+	push bc
+	push de
+	push hl
+	ld hl, wBattleMonMoves
+	ld c, 0
+.next_move
+	ld a, [hl]
+	and a
+	jr z, .done_moves
+	push hl
+	push bc
+	dec a
+	ld hl, Moves
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld de, wEnemyMoveStruct
+	ld a, BANK(Moves)
+	call FarCopyBytes
+	pop bc
+	; Status moves don't count as threats or counters.
+	ld a, [wEnemyMoveStruct + MOVE_POWER]
+	and a
+	jr z, .advance
+	; Compute this move's matchup against the candidate's types.
+	push bc
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	ld [wPlayerMoveStruct + MOVE_TYPE], a
+	call SetPlayerTurn
+	callfar BattleCheckTypeMatchup
+	pop bc
+	ld a, [wTypeMatchup]
+	cp EFFECTIVE + 1
+	jr nc, .se
+	cp EFFECTIVE
+	jr c, .resisted
+.advance
+	pop hl
+	inc hl
+	jr .next_move
+.se
+	ld a, c
+	or 1
+	ld c, a
+	jr .advance
+.resisted
+	ld a, c
+	or 2
+	ld c, a
+	jr .advance
+.done_moves
+	ld a, c
+	and 1
+	jr nz, .player_threatens
+	; The player has no super-effective damaging move here: not a bad pick.
+	ld hl, wPlayerEffectivenessVsEnemyMons
+	res 0, [hl]
+	bit 1, c
+	jr z, .ret
+	; It shrugs off at least one of the player's damaging moves: prefer it.
+	ld hl, wEnemyEffectivenessVsPlayerMons
+	set 0, [hl]
+	jr .ret
+.player_threatens
+	ld hl, wEnemyEffectivenessVsPlayerMons
+	bit 0, [hl]
+	jr nz, .ret ; it has a counter move: leave the flags alone
+	ld hl, wPlayerEffectivenessVsEnemyMons
+	set 0, [hl]
+.ret
+	pop hl
+	pop de
+	pop bc
+	pop af
+	ret
+
 ScoreMonTypeMatchups:
 .loop1
 	ld hl, wEnemyEffectivenessVsPlayerMons
@@ -2831,57 +2917,131 @@ ScoreMonTypeMatchups:
 	jr nc, .loop1
 	ld a, [wOTPartyCount]
 	ld b, a
-	ld c, [hl]
-.loop2
-	sla c
-	jr nc, .okay
-	dec b
-	jr z, .loop5
-	jr .loop2
+	; Build a mask of the in-party slots: slot 0 = bit 7, N slots total.
+	ld a, 8
+	sub b
+	ld c, a
+	ld a, $ff
+.make_valid_mask
+	sla a
+	dec c
+	jr nz, .make_valid_mask
+	ld c, a
 
-.okay
+	; Tier 1: a mon that counters or walls the player.
 	ld a, [wEnemyEffectivenessVsPlayerMons]
 	and a
-	jr z, .okay2
-	ld b, -1
-	ld c, a
-.loop3
-	inc b
-	sla c
-	jr nc, .loop3
+	jr z, .safe_tier
+	call .random_pick
 	ret
 
-.okay2
-	ld b, -1
+.safe_tier
+	; Tier 2: any living, non-active mon the player can't hit
+	; super-effectively.
 	ld a, [wPlayerEffectivenessVsEnemyMons]
-	ld c, a
-.loop4
+	cpl
+	and c
+	jr z, .loop5
+	call .random_pick
+	ret
+
+.random_pick
+	; Pick a random set bit of 'a' (bit 7 = slot 0); returns the slot in b.
+	push af
+	ld d, 0
+.count_bits
+	sla a
+	jr nc, .bit_done
+	inc d
+.bit_done
+	and a
+	jr nz, .count_bits
+	push de
+	call BattleRandom
+	pop de
+	and 7
+.mod_loop
+	cp d
+	jr c, .mod_done
+	sub d
+	jr .mod_loop
+.mod_done
+	ld e, a
+	inc e
+	pop af
+	ld b, -1
+.walk
 	inc b
-	sla c
-	jr c, .loop4
+	sla a
+	jr nc, .walk
+	dec e
+	jr nz, .walk
 	ret
 
 .loop5
+	; No tier had a candidate; pick a random living, non-active mon.
+	; Scan once for any such mon first so this can never spin forever.
 	ld a, [wOTPartyCount]
+	ld e, a
+	ld d, 0
+.find_target
+	ld a, d
+	cp e
+	jr nc, .no_target
+	ld a, [wCurOTMon]
+	cp d
+	jr z, .next_target
+	ld hl, wOTPartyMon1HP
+	push de
+	push bc
+	ld a, d
+	call GetPartyLocation
+	pop bc
+	pop de
+	ld a, [hli]
+	or [hl]
+	jr nz, .have_target
+.next_target
+	inc d
+	jr .find_target
+
+.no_target
+	ld a, [wCurOTMon]
 	ld b, a
+	ret
+
+.have_target
+	; d = some living, non-active slot; try a few random picks, then fall
+	; back to it.
+	ld c, 32
+.reroll
+	push de
+	push bc
 	call BattleRandom
+	pop bc
+	pop de
 	and $7
-	cp b
-	jr nc, .loop5
+	cp e
+	jr nc, .retry
 	ld b, a
 	ld a, [wCurOTMon]
 	cp b
-	jr z, .loop5
+	jr z, .retry
 	ld hl, wOTPartyMon1HP
+	push de
 	push bc
 	ld a, b
 	call GetPartyLocation
 	pop bc
+	pop de
 	ld a, [hli]
-	ld c, a
-	ld a, [hl]
-	or c
-	jr z, .loop5
+	or [hl]
+	jr z, .retry
+	ret
+.retry
+	dec c
+	jr nz, .reroll
+	ld b, d
 	ret
 
 LoadEnemyMonToSwitchTo:

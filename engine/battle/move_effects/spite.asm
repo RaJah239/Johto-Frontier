@@ -18,6 +18,9 @@ BattleCommand_Spite:
 	ld c, -1
 .loop
 	inc c
+	ld a, c
+	cp NUM_MOVES
+	jr nc, .failed
 	ld a, [hli]
 	cp b
 	jr nz, .loop
