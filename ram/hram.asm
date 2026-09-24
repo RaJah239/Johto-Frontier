@@ -187,6 +187,11 @@ hDelayFrameLY:: db
 hWaitForBButtonRelease:: db
 hAHoldFrames:: db
 
-	ds 11
+; Save-backed PRNG state (see Random in home/random.asm and
+; sRandomState in ram/sram.asm). Kept in HRAM so Random can step it
+; from any bank with no banking dance.
+hRandomState:: ds 4
+
+	ds 7
 
 ENDSECTION

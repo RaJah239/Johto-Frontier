@@ -334,6 +334,15 @@ SavePlayerData:
 	ld de, sCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
+	; commit the PRNG state while this bank is open
+	ldh a, [hRandomState]
+	ld [sRandomState], a
+	ldh a, [hRandomState + 1]
+	ld [sRandomState + 1], a
+	ldh a, [hRandomState + 2]
+	ld [sRandomState + 2], a
+	ldh a, [hRandomState + 3]
+	ld [sRandomState + 3], a
 	; commit the party stash to the saved slot (SRAM bank 1, the
 	; same bank this routine already has open)
 	ld hl, sSavedPartyStashData
@@ -396,6 +405,16 @@ SaveBackupPlayerData:
 	ld de, sBackupCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
+	; commit the PRNG state to the backup slot while this bank is
+	; open
+	ldh a, [hRandomState]
+	ld [sBackupRandomState], a
+	ldh a, [hRandomState + 1]
+	ld [sBackupRandomState + 1], a
+	ldh a, [hRandomState + 2]
+	ld [sBackupRandomState + 2], a
+	ldh a, [hRandomState + 3]
+	ld [sBackupRandomState + 3], a
 	; commit the party stash to the backup slot (SRAM bank 0, the
 	; same bank this routine already has open)
 	ld hl, sBackupPartyStashData
@@ -580,6 +599,16 @@ LoadPlayerData:
 	ld de, wCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
+	; restore the PRNG state; an old save leaves it zero, and
+	; Random reseeds itself on the next call
+	ld a, [sRandomState]
+	ldh [hRandomState], a
+	ld a, [sRandomState + 1]
+	ldh [hRandomState + 1], a
+	ld a, [sRandomState + 2]
+	ldh [hRandomState + 2], a
+	ld a, [sRandomState + 3]
+	ldh [hRandomState + 3], a
 	; restore the party stash from the saved slot (SRAM bank 1, the
 	; same bank this routine already has open)
 	ld hl, sSavedPartyStashData
@@ -1149,6 +1178,15 @@ LoadBackupPlayerData:
 	ld de, wCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
+	; restore the PRNG state from the backup slot
+	ld a, [sBackupRandomState]
+	ldh [hRandomState], a
+	ld a, [sBackupRandomState + 1]
+	ldh [hRandomState + 1], a
+	ld a, [sBackupRandomState + 2]
+	ldh [hRandomState + 2], a
+	ld a, [sBackupRandomState + 3]
+	ldh [hRandomState + 3], a
 	; restore the party stash from the backup slot (SRAM bank 0, the
 	; same bank this routine already has open)
 	ld hl, sBackupPartyStashData

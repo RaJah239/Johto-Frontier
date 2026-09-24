@@ -62,19 +62,6 @@ VBlank0::
 	ld hl, hVBlankCounter
 	inc [hl]
 
-	; advance random variables
-	ldh a, [rDIV]
-	ld b, a
-	ldh a, [hRandomAdd]
-	adc b
-	ldh [hRandomAdd], a
-
-	ldh a, [rDIV]
-	ld b, a
-	ldh a, [hRandomSub]
-	sbc b
-	ldh [hRandomSub], a
-
 	ldh a, [hROMBank]
 	ldh [hROMBankBackup], a
 

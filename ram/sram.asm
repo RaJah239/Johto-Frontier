@@ -70,7 +70,12 @@ sBackupCurMapData::  ds wCurMapDataEnd - wCurMapData
 sBackupPokemonData:: ds wPokemonDataEnd - wPokemonData
 sBackupGameDataEnd::
 
-	ds $18a
+; Save-backed PRNG state for the backup slot (see Random in
+; home/random.asm). Kept at the front of the padding so no save
+; field moves and the checksum range is unchanged.
+sBackupRandomState:: ds 4
+
+	ds $186
 
 sBackupChecksum:: dw
 
@@ -151,7 +156,14 @@ sCurMapData::  ds wCurMapDataEnd - wCurMapData
 sPokemonData:: ds wPokemonDataEnd - wPokemonData
 sGameDataEnd::
 
-	ds $18a
+; Save-backed PRNG state (see Random in home/random.asm). It lives
+; at the front of the padding after the checksummed region so that
+; adding it does not move any save field; a save file from before
+; this feature leaves it zero, which Random treats as "not seeded
+; yet" and reseeds from the divider.
+sRandomState:: ds 4
+
+	ds $186
 
 sChecksum:: dw
 
