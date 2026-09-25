@@ -115,12 +115,36 @@ GetTrainerBackpic:
 	ret
 
 CheckAmuletCoin:
-	ld a, [wBattleMonItem]
+; Set wAmuletCoin if ANY Pokémon in the party holds an Amulet
+; Coin, whether or not it has entered battle. This runs on every
+; send-out (the first one covers the whole battle), and the flag
+; then persists until the battle ends.
+	ld a, [wPartyCount]
+	and a
+	ret z
 	ld b, a
+	ld hl, wPartyMons + MON_ITEM
+.loop
+	ld a, [hl]
+	and a
+	jr z, .next ; not holding an item
+	push bc     ; b = remaining mons; GetItemHeldEffect uses bc
+	push hl     ; farcall clobbers hl (the walk pointer)
+	ld b, a     ; b = item
 	farcall GetItemHeldEffect
-	ld a, b
+	ld a, b     ; b = held effect
 	cp HELD_AMULET_COIN
-	ret nz
+	pop hl      ; pops do not affect flags
+	pop bc
+	jr z, .found
+.next
+	ld de, PARTYMON_STRUCT_LENGTH
+	add hl, de
+	dec b
+	jr nz, .loop
+	ret
+
+.found
 	ld a, 1
 	ld [wAmuletCoin], a
 	ret
