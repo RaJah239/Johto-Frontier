@@ -19,6 +19,20 @@ SaveMenu:
 	scf
 	ret
 
+QuickSaveGame::
+; Quick-save triggered by holding Start in the overworld
+; asks before overwriting a different player's save file
+	; never save while linked
+	ld a, [wLinkMode]
+	and a
+	ret nz
+
+	call AskOverwriteSaveFile
+	ret c ; the player refused the overwrite
+	call PauseGameLogic
+	call SavedTheGame
+	jr ResumeGameLogic
+
 SaveAfterLinkTrade:
 	call PauseGameLogic
 	farcall StageRTCTimeForSave

@@ -122,6 +122,7 @@ wInputType::        db
 wAutoInputAddress:: dw
 wAutoInputBank::    db
 wAutoInputLength::  db
+wStartHoldFrames::  db
 
 wDebugFlags:: db
 wGameLogicPaused:: db
