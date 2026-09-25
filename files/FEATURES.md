@@ -143,6 +143,7 @@
 - While Pokemon are asleep, all moves can't miss
 - Reduced happiness required for Pokémon that evolve via happiness
 - Life Orb still reduces HP with Pokémon that has Magic Guard ability
+- Amulet Coin doubles earnings regardless of Pokémon equipping it
 
 ## Item Changes
 - Light Ball doubles Pikachu's Attack as well as Special Attack
