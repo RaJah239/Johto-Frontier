@@ -3296,7 +3296,7 @@ ConfusionDamageCalc:
 	ld a, b
 	cp HELD_LIFE_ORB
 	pop hl
-	jr nz, .continue
+	jr nz, .choice_band
 	ld a, 13
 	ldh [hMultiplier], a
 	call Multiply
@@ -3305,6 +3305,7 @@ ConfusionDamageCalc:
 	ld b, 4
 	call Divide
 
+.choice_band
 ; ========================
 ; ===== Choice Band ======
 ; ========================
