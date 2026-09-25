@@ -1845,6 +1845,7 @@ wOptions3::
 ; bit 1: field actions normal/quick
 ; bit 2: fast battles normal/quick
 ; bit 3: turbo a
+; bit 4: quick save
 	db
 
 	ds 1

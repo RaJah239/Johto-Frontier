@@ -768,6 +768,12 @@ CheckMenuOW:
 	bit SELECT_F, a
 	jr nz, .Select
 
+	push af
+	ld a, [wOptions3]
+	bit QUICK_SAVE, a
+	jr z, .no_quick_save
+
+	pop af
 	bit START_F, a
 	jr z, .CheckStartHold
 
@@ -837,6 +843,16 @@ CheckMenuOW:
 	call PlayTalkObject
 	ld a, BANK(SelectMenuScript)
 	ld hl, SelectMenuScript
+	call CallScript
+	scf
+	ret
+
+.no_quick_save:
+	pop af
+	bit START_F, a
+	jr z, .NoMenu
+	ld a, BANK(StartMenuScript)
+	ld hl, StartMenuScript
 	call CallScript
 	scf
 	ret
