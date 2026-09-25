@@ -111,6 +111,7 @@ PrintDexEntry:
 	call DelayFrame
 	dec c
 	jr nz, .low_volume_delay_frames
+	call MaxVolume ; undo the LowVolume fade, or music stays quiet after printing
 
 	pop af
 	ld [wPrinterQueueLength], a

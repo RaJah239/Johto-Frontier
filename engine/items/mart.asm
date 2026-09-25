@@ -626,7 +626,7 @@ MartPlaceInBagQuantity:
 	jr z, .get_battle_pocket
 	cp TM_HM
 	jr z, .get_tm_pocket
-	; cp FRUITS
+	cp FRUITS
 	ld hl, wNumFruits
 	jr z, .check_bag
 

@@ -2838,6 +2838,7 @@ CheckPlayerMovesVsOTMon:
 	push hl
 	ld hl, wBattleMonMoves
 	ld c, 0
+	ld b, NUM_MOVES
 .next_move
 	ld a, [hl]
 	and a
@@ -2871,7 +2872,9 @@ CheckPlayerMovesVsOTMon:
 .advance
 	pop hl
 	inc hl
-	jr .next_move
+	dec b
+	jr nz, .next_move
+	jr .done_moves
 .se
 	ld a, c
 	or 1
@@ -5529,14 +5532,21 @@ ParseEnemyAction:
 	ld c, a
 	ld b, 0
 	add hl, bc
-	ld a, [wEnemyDisableCount]
-	swap a
-	and $f
-	dec a
-	cp c
-	jr z, .loop2
+	; Reject the disabled move by its ID, exactly as the .loop precheck
+	; above does. Rejecting by the slot index in wEnemyDisableCount made
+	; the two predicates disagree whenever the moveset changed while
+	; Disable was active (Transform/Sketch): .loop could still find a
+	; usable slot that .loop2 then refused, and with only one usable
+	; move left this loop never exited. Both predicates being identical
+	; means .loop's guarantee that a usable slot exists is inherited
+	; here, so this terminates in at most a few draws.
 	ld a, [hl]
 	and a
+	jr z, .loop2
+	push hl
+	ld hl, wEnemyDisabledMove
+	cp [hl]
+	pop hl
 	jr z, .loop2
 	ld hl, wEnemyMonPP
 	add hl, bc

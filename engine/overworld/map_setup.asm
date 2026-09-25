@@ -114,9 +114,9 @@ HandleMapDefaultWeather:
 .sun
 	ld a, [wTimeOfDay]
 	cp NITE_F
-	ret z
+	jr z, .noWeather
 	cp EVE_F
-	ret z
+	jr z, .noWeather
 	ld a, WEATHER_SUN
 .done
 	ld [wFieldWeather], a
