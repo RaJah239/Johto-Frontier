@@ -1280,15 +1280,22 @@ GameInit::
 	ldh [hWY], a
 	call WaitBGMap
 
+	; "Booting Options"
+	ld a, [wOptions2]
+	bit FAST_BOOT, a
+	jr nz, .InGame
+	ld a, [wTextboxFlags]
+	bit MAIN_MENU_BOOT_F, a
+	; Main Menu: the file-select screen whose first entry is Continue.
+	jmp nz, Intro_MainMenu
+
+	jmp IntroSequence
+
+.InGame:
 	ld a, [wSaveFileExists]
 	and a
 	jmp z, IntroSequence
 
-	ld a, [wOptions2]
-	bit FAST_BOOT, a
-	jmp z, IntroSequence
-
-	; Fast boot.
 	farcall TryLoadSaveFile
 	jmp c, IntroSequence ; If loading failed.
 

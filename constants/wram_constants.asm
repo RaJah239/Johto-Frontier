@@ -75,6 +75,10 @@ DEF NUM_FRAMES EQU const_value
 ; 0 = Normal, 1 = Scaled (wOptions2 SCALED_EXP, the low bit),
 ; 2 = Zero (this bit, the high one).
 	const ZERO_EXP_F        ; 2
+; "Booting Options" is a 0-2 value split across two bytes as well,
+; but the bits run the other way round: 0 = Intro and 2 = In Game
+; are wOptions2 FAST_BOOT (the low bit), 1 = Main Menu is this bit.
+	const MAIN_MENU_BOOT_F  ; 3
 
 ; wGBPrinterBrightness::
 DEF GBPRINTER_LIGHTEST EQU $00

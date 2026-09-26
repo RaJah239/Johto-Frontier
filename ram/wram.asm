@@ -1822,6 +1822,8 @@ wTextboxFlags::
 ; bit 0: 1-frame text delay
 ; bit 4: no text delay
 ; ZERO_EXP_F: "Zero" Experience Gain, paired with wOptions2 SCALED_EXP
+; MAIN_MENU_BOOT_F: "Booting Options" = Main Menu, paired with
+;   wOptions2 FAST_BOOT (= In Game); neither bit set = Intro
 	db
 wGBPrinterBrightness::
 ; bit 0-6: brightness
@@ -1832,14 +1834,14 @@ wGBPrinterBrightness::
 ;   darkest:  $7F
 	db
 wOptions2::
-; bit 1: casual calls off/on
-; bit 2: running shoes off/on
-; bit 3: minimal dialogue off/on
-; bit 4: auto bicycle off/on
-; bit 5: fast boot off/on
-; bit 6: hard mode off/on
-; bit 7: nurse heal normal/quick
-; bit 8: exp share off/on
+; bit 0: running shoes off/on
+; bit 1: minimal dialogue off/on
+; bit 2: auto bicycle off/on
+; bit 3: booting options, low bit (1 = In Game; see MAIN_MENU_BOOT_F)
+; bit 4: hard mode off/on
+; bit 5: nurse heal normal/quick
+; bit 6: exp share off/on
+; bit 7: experience gain normal/scaled
 	db
 
 wOptions3::
