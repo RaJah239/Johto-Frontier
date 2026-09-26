@@ -4639,6 +4639,11 @@ UpdateHPPal:
 BattleMenu:
 	xor a
 	ld [wCurrentBattleWindow], a
+; The enemy type box is an overlay on the HUD above; UpdateBattleHuds
+; below repaints the HUD, so the overlay is no longer on screen. Drop
+; the flag too or Select would refuse to redraw it for the rest of this
+; battle.
+	ld [wEnemyTypeDisplayActive], a
 	ldh [hBGMapMode], a
 	call LoadTempTilemapToTilemap
 	farcall GetTimeOfDayImage

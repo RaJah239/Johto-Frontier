@@ -347,10 +347,16 @@ Menu_WasButtonPressed:
 	callfar PlaySpriteAnimationsAndDelayFrame
 
 .skip_to_joypad
+; hJoyPressed is not a live input: it is a delta that only GetJoypad
+; recomputes, so reading it before JoyTextDelay can pick up a press from
+; long before this menu opened. The clearest case is selecting Tangela
+; Call with Select: that press is still sitting in hJoyPressed when the
+; battle menu first runs, which drew the enemy type box over the HUD the
+; instant a wild mon appeared. Refresh first, then test.
+	call JoyTextDelay
 	ldh a, [hJoyPressed]
 	cp SELECT
 	call z, DisplayEnemyTypes
-	call JoyTextDelay
 	call GetMenuJoypad
 	and a
 	ret z
