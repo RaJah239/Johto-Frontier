@@ -3115,9 +3115,8 @@ wFieldWeather::
 wNoRematch:: db
 
 wNomadSigil:: db
-wCalmCharm:: db
 
-	ds 7
+	ds 8
 
 ; map scene ids
 wPokecenter2FSceneID::                            db
