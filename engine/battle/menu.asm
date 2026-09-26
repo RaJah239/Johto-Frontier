@@ -23,7 +23,7 @@ ContestBattleMenu:
 CommonBattleMenu:
 	ld a, [wBattleMenuCursorPosition]
 	ld [wMenuCursorPosition], a
-	call _2DMenu
+	call InterpretBattleMenu
 	ld a, [wMenuCursorPosition]
 	ld [wBattleMenuCursorPosition], a
 	jmp ExitMenu
