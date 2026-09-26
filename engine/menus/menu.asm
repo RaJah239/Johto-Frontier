@@ -278,6 +278,28 @@ MenuJoypadLoop:
 	call GetMenuJoypad
 	ld b, a
 	call ClearEnemyTypes
+
+; Start on the main battle menu jumps straight to <PKMN>, exactly as if
+; the player had moved the cursor onto it and pressed A: park the cursor
+; on row 2, column 1 and quit, so Get2DMenuSelection reports position 3
+; and BattleMenu dispatches to BattleMenu_PKMN. Gated the same way as
+; DisplayEnemyTypes so no other menu is affected.
+	ld a, b
+	bit START_F, a
+	jr z, .filter
+	ld a, [wBattleMode]
+	and a
+	jr z, .filter
+	ld a, [wCurrentBattleWindow]
+	and a
+	jr nz, .filter
+	ld a, 2
+	ld [wMenuCursorY], a
+	ld a, 1
+	ld [wMenuCursorX], a
+	ret
+
+.filter
 	ld a, [wMenuJoypadFilter]
 	and b
 	jr z, .loop
@@ -303,8 +325,8 @@ ClearEnemyTypes:
 	and a
 	ret nz ; Only do this on the main menu of a battle
 	ldh a, [hJoyPressed]
-	cp START
-	ret z ; no need to refresh if the button pushed was START
+	cp SELECT
+	ret z ; no need to refresh if the button pushed was SELECT
 	xor a
 	ld [wEnemyTypeDisplayActive], a
 	farjp UpdateEnemyHUD
@@ -327,10 +349,16 @@ Menu_WasButtonPressed:
 	callfar PlaySpriteAnimationsAndDelayFrame
 
 .skip_to_joypad
-	ldh a, [hJoyPressed]
-	cp START
-	call z, DisplayEnemyTypes
+; hJoyPressed is not a live input: it is a delta that only GetJoypad
+; recomputes, so reading it before JoyTextDelay can pick up a press from
+; long before this menu opened. The clearest case is selecting Tangela
+; Call with Select: that press is still sitting in hJoyPressed when the
+; battle menu first runs, which drew the enemy type box over the HUD the
+; instant a wild mon appeared. Refresh first, then test.
 	call JoyTextDelay
+	ldh a, [hJoyPressed]
+	cp SELECT
+	call z, DisplayEnemyTypes
 	call GetMenuJoypad
 	and a
 	ret z
