@@ -6,6 +6,9 @@
 - Smooth fading added throughout the game
 - Unique Pokémon party icons
 - Instant Text
+- Option to Hold "A" for 30 frames or 1 second to rapid-fire "A" - ~7.5 "A" presses per second
+- Option to Hold "B" to rapid-fire "B" - ~7.5 "B" presses per second
+- Option to Hold "Start" for 30 frames to save the game in the overworld
 - Hold down the B Button to auto advance/scroll text - stops at end of dialogue, Yes or No and menu boxes
 - "Pokemon" menu is now the default selected option in the Start menu
 - View Pokédex entry of selected Pokémon in Menu
