@@ -128,7 +128,7 @@ OptionsMenu_DrawLabels:
 .TurboB:          db "Turbo B@"
 .ExpShare:        db "Exp.Share@"
 .MinimalDialogue: db "Dialogue/Text@"
-.FastBoot:        db "Fast Boot@"
+.FastBoot:        db "Booting Options@"
 .HardMode:        db "Hard Mode@"
 .BagSort:         db "Sorting Order@"
 .EncounterRate:   db "Encounter Rate@"
@@ -785,41 +785,106 @@ Options_QuickNurse:
 .Off: db "Normal@"
 
 Options_FastBoot:
- 	ld hl, wOptions2
- 	ldh a, [hJoyPressed]
- 	bit D_LEFT_F, a
- 	jr nz, .LeftPressed
- 	bit D_RIGHT_F, a
- 	jr z, .NonePressed
- 	bit FAST_BOOT, [hl]
- 	jr nz, .ToggleOff
- 	jr .ToggleOn
- 
- .LeftPressed:
- 	bit FAST_BOOT, [hl]
- 	jr z, .ToggleOn
- 	jr .ToggleOff
- 
- .NonePressed:
- 	bit FAST_BOOT, [hl]
- 	jr nz, .ToggleOn
- 
- .ToggleOff:
- 	res FAST_BOOT, [hl]
- 	ld de, .Off
- 	jr .Display
- 
- .ToggleOn:
- 	set FAST_BOOT, [hl]
- 	ld de, .On
-  .Display:
+; Three boot targets packed across two bytes. FAST_BOOT (wOptions2)
+; is the low bit and MAIN_MENU_BOOT_F (wTextboxFlags) the high one,
+; but the bit values are deliberately not the display order: the old
+; FAST_BOOT toggle has always meant "In Game", so it keeps meaning
+; exactly that and an existing save does not silently change what it
+; does. The stored pair therefore reads 0 = Intro, 1 (high) = Main
+; Menu, 2 (low) = In Game, and .Save writes them back the same way.
+; Both bits set cannot come from the menu; only other code setting
+; FAST_BOOT on top of a saved Main Menu produces it, and low wins
+; there too so it still reads In Game.
+	call .GetCurrent
+	ldh a, [hJoyPressed]
+	bit D_RIGHT_F, a
+	jr nz, .RightPressed
+	bit D_LEFT_F, a
+	jr z, .ShowCurrent
+; Left: Intro -> In Game -> Main Menu -> Intro
+	ld a, c
+	and a
+	jr nz, .Decrease
+	ld a, 2
+	jr .Save
+.Decrease:
+	dec a
+	jr .Save
+.RightPressed:
+; Right: Intro -> Main Menu -> In Game -> Intro
+	ld a, c
+	cp 2
+	jr c, .Increase
+	xor a
+	jr .Save
+.Increase:
+	inc a
+.Save:
+	ld c, a
+; high bit: Main Menu
+	ld a, [wTextboxFlags]
+	res MAIN_MENU_BOOT_F, a
+	ld b, a
+	ld a, c
+	and 1
+	jr z, .HighDone
+	set MAIN_MENU_BOOT_F, b
+.HighDone:
+	ld a, b
+	ld [wTextboxFlags], a
+; low bit: In Game
+	ld a, [wOptions2]
+	res FAST_BOOT, a
+	ld b, a
+	ld a, c
+	and 2
+	jr z, .LowDone
+	set FAST_BOOT, b
+.LowDone:
+	ld a, b
+	ld [wOptions2], a
+.ShowCurrent:
+	ld b, 0
+	ld hl, .Strings
+	add hl, bc
+	add hl, bc
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+; One column left of the usual value column: "Main Menu" is nine
+; characters and column 11 only leaves room for eight before the
+; textbox border.
 	call OptionsMenu_PlaceValue
+	dec hl
 	call PlaceString
- 	and a
- 	ret
+	and a
+	ret
 
-.On:  db "On @"
-.Off: db "Off@"
+; c = the current boot target, 0-2. FAST_BOOT is tested first so a
+; save that only carries the old toggle still reads as In Game.
+.GetCurrent:
+	ld a, [wOptions2]
+	bit FAST_BOOT, a
+	ld c, 2
+	ret nz
+	ld c, 0
+	ld a, [wTextboxFlags]
+	bit MAIN_MENU_BOOT_F, a
+	ret z
+	inc c
+	ret
+
+.Strings:
+	table_width 2, .Strings
+	dw .Intro
+	dw .MainMenu
+	dw .InGame
+	dw .InGame
+	assert_table_length 4
+
+.Intro:    db "Intro    @"
+.MainMenu: db "Main Menu@"
+.InGame:   db "In Game  @"
 
 Options_FieldActions:
  	ld hl, wOptions3
@@ -1207,7 +1272,7 @@ OptionsMenu_DrawDescription:
 .DescTurboB: db "Hold 'B' briefly<LF>to turbo press B.@"
 .DescExpShare: db "Share Experience<LF>with the party.@"
 .DescMinimalDialogue: db "Reduce all NPC<LF>text or not.@"
-.DescFastBoot: db "Load your save<LF>file immediately.@"
+.DescFastBoot: db "Intro, Main Menu,<LF>or In Game.@"
 .DescHardMode: db "Choose your mode<LF>to play in.@"
 .DescFrame: db "Select your border<LF>of textboxes.@"
 .DescBagSort: db "Sort the bag by<LF>Usefulness or A-Z.@"

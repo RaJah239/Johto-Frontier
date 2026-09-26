@@ -784,9 +784,11 @@ ElmsLabAdventureTip1Text:
 	para "Record your trip"
 	line "with Save!"
 
-	para "Turn ON Fast Boot"
-	line "in Options to load"
-	cont "your Save quicker."
+	para "Booting Options"
+	line "decide where the"
+	cont "game starts:"
+	cont "Intro, Main Menu"
+	cont "or In Game."
 	done
 
 ElmsLabAdventureTip2Text:

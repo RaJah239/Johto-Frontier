@@ -23,6 +23,7 @@
 - Press Start to sort items in Pack pockets (Item, Ball, Fruit, Key and Battle) in and out of battles
 - "Sorting Order" option chooses how Start sorts the Bag: "Useful" keeps the hand-curated usefulness order, "A-Z" sorts alphabetically by item name
 - "Encounter Rate" option multiplies wild encounters: "Normal", "Double" or "Quadruple"
+- "Fast Boot" option renamed to "Booting Options" with three targets: "Intro" plays the intro sequence, "Main Menu" skips it and lands on the Continue screen, "In Game" loads the save straight into the game
 - Cheat NPC to New Bark Town
 - Colored trainer card badges and added gym leader's names to their pictures
 - Exp.Share added to Option Menu - 100% Exp to all participants and 50% to non-participants until the player has entered the Hall of Fame, then the entire party receives 100% experience points
