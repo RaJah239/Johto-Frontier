@@ -2290,6 +2290,18 @@ _PlayMusic::
 	and a
 	ret nz
 
+; The Music Off option silences background music. Every music start
+; funnels through here, so a set flag means nothing new can begin.
+; MUSIC_NONE still goes through: stopping music is always allowed,
+; and it is what actually silences the track when the option is set.
+	ld a, [wOptions3]
+	bit NO_MUSIC, a
+	jr z, .play
+	ld a, e
+	and a
+	ret nz
+.play
+
 ; load music
 	call MusicOff
 	ld hl, wMusicID

@@ -96,6 +96,7 @@ DEF GBPRINTER_DARKEST  EQU $7f
 	const FAST_BATTLES ; 1
 	const TURBO_B_BUTTON ; 2
 	const TURBO_A_BUTTON ; 3
+	const NO_MUSIC ; 4
 
 ; wOptionsInit::
 DEF OPTIONS_INIT_DONE EQU 1
