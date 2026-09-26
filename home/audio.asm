@@ -250,6 +250,17 @@ IsSFXPlaying::
 MaxVolume::
 	ld a, MAX_VOLUME
 	ld [wVolume], a
+
+	; If a cry is still playing, it saved the pre-cry volume in
+	; wLastVolume and will write it back to wVolume when it ends
+	; (RestoreVolume), undoing the above. Retarget that pending restore
+	; to max, so screens that lower the volume around a cry (stats
+	; screen, battle stats screen, ...) always come back at full volume.
+	ld a, [wLastVolume]
+	and a
+	ret z
+	ld a, MAX_VOLUME
+	ld [wLastVolume], a
 	ret
 
 LowVolume::
