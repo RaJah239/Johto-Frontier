@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 15
+DEF NUM_OPTIONS EQU 16
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -105,6 +105,7 @@ OptionsMenu_DrawLabels:
 	dw .FasterBattles
 	dw .ExpShare
 	dw .MinimalDialogue
+	dw .TurboAButton
 	dw .FastBoot
 	dw .HardMode
 	dw .Frame
@@ -122,6 +123,7 @@ OptionsMenu_DrawLabels:
 .FasterBattles:   db "Battles@"
 .ExpShare:        db "Exp.Share@"
 .MinimalDialogue: db "Dialogue/Text@"
+.TurboAButton:    db "Turbo A Button@"
 .FastBoot:        db "Fast Boot@"
 .HardMode:        db "Hard Mode@"
 .Done:            db "Done@"
@@ -164,6 +166,7 @@ GetOptionPointer:
 	dw Options_FasterBattles
 	dw Options_ExpShare
 	dw Options_MinimalDialogue
+	dw Options_TurboAButton
 	dw Options_FastBoot
 	dw Options_HardMode
 	dw Options_Frame
@@ -629,6 +632,43 @@ Options_FastBoot:
 .On:  db "On @"
 .Off: db "Off@"
 
+Options_TurboAButton:
+ 	ld hl, wOptions3
+ 	ldh a, [hJoyPressed]
+ 	bit D_LEFT_F, a
+ 	jr nz, .LeftPressed
+ 	bit D_RIGHT_F, a
+ 	jr z, .NonePressed
+ 	bit TURBO_A_BUTTON, [hl]
+ 	jr nz, .ToggleOff
+ 	jr .ToggleOn
+ 
+ .LeftPressed:
+ 	bit TURBO_A_BUTTON, [hl]
+ 	jr z, .ToggleOn
+ 	jr .ToggleOff
+ 
+ .NonePressed:
+ 	bit TURBO_A_BUTTON, [hl]
+ 	jr nz, .ToggleOn
+ 
+ .ToggleOff:
+ 	res TURBO_A_BUTTON, [hl]
+ 	ld de, .Off
+ 	jr .Display
+ 
+ .ToggleOn:
+ 	set TURBO_A_BUTTON, [hl]
+ 	ld de, .On
+  .Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+ 	and a
+ 	ret
+
+.On:  db "On @"
+.Off: db "Off@"
+
 Options_FieldActions:
  	ld hl, wOptions3
  	ldh a, [hJoyPressed]
@@ -874,6 +914,7 @@ OptionsMenu_DrawDescription:
 	dw .DescFasterBattles
 	dw .DescExpShare
 	dw .DescMinimalDialogue
+	dw .DescTurboAButton
 	dw .DescFastBoot
 	dw .DescHardMode
 	dw .DescFrame
@@ -890,6 +931,7 @@ OptionsMenu_DrawDescription:
 .DescFasterBattles: db "Reduce the text<LF>in battles.@"
 .DescExpShare: db "Share Experience<LF>with the party.@"
 .DescMinimalDialogue: db "Reduce all NPC<LF>text or not.@"
+.DescTurboAButton: db "Hold 'A' 1 second<LF>to rapid press A.@"
 .DescFastBoot: db "Load your save<LF>file immediately.@"
 .DescHardMode: db "Choose your mode<LF>to play in.@"
 .DescFrame: db "Select your border<LF>of textboxes.@"

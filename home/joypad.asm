@@ -7,11 +7,15 @@ Joypad::
 
 ClearJoypad::
 	xor a
-; Pressed this frame (delta)
 	ldh [hJoyPressed], a
-; Currently pressed
 	ldh [hJoyDown], a
-; A has not been held down
+
+	ld a, [wOptions3]
+	bit TURBO_A_BUTTON, a
+	ret nz
+
+	; Turbo A enabled
+	xor a
 	ldh [hAHoldFrames], a
 	ret
 
@@ -27,7 +31,6 @@ UpdateJoypad::
 ; hJoypadPressed: pressed this frame (delta)
 ; hJoypadDown: currently pressed
 ; hJoypadSum: pressed so far
-
 ; Any of these three bits can be used to disable input.
 	ld a, [wJoypadDisable]
 	and (1 << JOYPAD_DISABLE_MON_FAINT_F) | (1 << JOYPAD_DISABLE_SGB_TRANSFER_F) | (1 << 4)
@@ -85,6 +88,11 @@ endr
 ; the first 30 frames of the hold are normal, and after that
 ; A is toggled on for 4 frames and off for 4 frames, for
 ; about 7.5 presses per second.
+	; Turbo A Button option is on
+	ld a, [wOptions3]
+	bit TURBO_A_BUTTON, a
+	jr z, .a_disabled
+
 	ld a, b
 	and A_BUTTON
 	jr z, .a_released
@@ -103,6 +111,13 @@ endr
 	jr .no_turbo_a
 
 .a_released
+	xor a
+	ldh [hAHoldFrames], a
+	jr .no_turbo_a
+
+.a_disabled
+; Option is off: keep the hold counter at zero so enabling it
+; mid-hold still starts with 4 normal frames.
 	xor a
 	ldh [hAHoldFrames], a
 .no_turbo_a

@@ -94,6 +94,7 @@ DEF GBPRINTER_DARKEST  EQU $7f
 	const_def
 	const FIELD_ACTIONS ; 0
 	const FAST_BATTLES ; 1
+	const TURBO_A_BUTTON ; 2
 
 ; wWalkingDirection::
 	const_def -1
