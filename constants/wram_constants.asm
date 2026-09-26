@@ -71,6 +71,10 @@ DEF NUM_FRAMES EQU const_value
 	const_def
 	const FAST_TEXT_DELAY_F ; 0
 	const TEXT_DELAY_F      ; 1
+; "Experience Gain" is a 0-2 value split across two bytes:
+; 0 = Normal, 1 = Scaled (wOptions2 SCALED_EXP, the low bit),
+; 2 = Zero (this bit, the high one).
+	const ZERO_EXP_F        ; 2
 
 ; wGBPrinterBrightness::
 DEF GBPRINTER_LIGHTEST EQU $00

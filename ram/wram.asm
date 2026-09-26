@@ -1824,6 +1824,7 @@ wTextboxFrame::
 wTextboxFlags::
 ; bit 0: 1-frame text delay
 ; bit 4: no text delay
+; ZERO_EXP_F: "Zero" Experience Gain, paired with wOptions2 SCALED_EXP
 	db
 wGBPrinterBrightness::
 ; bit 0-6: brightness

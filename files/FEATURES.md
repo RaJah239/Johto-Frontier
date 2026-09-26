@@ -90,6 +90,7 @@
 - Fairy Type added
 - Frostbite replaced Freeze status
 - Scaled Experience points (higher level foes = more experience to lower level Pokémon) option added
+- "Experience Gain" option's third mode "Zero" - no experience is gained from battles and the experience gained message is not shown
 - Print stat gain on level up
 - Max level of Pokémon is 50
 - All Pokémon obey regardless if traded or not

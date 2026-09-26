@@ -650,42 +650,102 @@ Options_MinimalDialogue:
 .Minimum:  db "Minimal@"
 
 Options_Scaled_Exp:
- 	ld hl, wOptions2
- 	ldh a, [hJoyPressed]
- 	bit D_LEFT_F, a
- 	jr nz, .LeftPressed
- 	bit D_RIGHT_F, a
- 	jr z, .NonePressed
- 	bit SCALED_EXP, [hl]
- 	jr nz, .ToggleOff
- 	jr .ToggleOn
- 
- .LeftPressed:
- 	bit SCALED_EXP, [hl]
- 	jr z, .ToggleOn
- 	jr .ToggleOff
- 
- .NonePressed:
- 	bit SCALED_EXP, [hl]
- 	jr nz, .ToggleOn
- 
- .ToggleOff:
- 	res SCALED_EXP, [hl]
- 	ld de, .Normal
- 	jr .Display
- 
- .ToggleOn:
- 	set SCALED_EXP, [hl]
- 	ld de, .Scaled
- 
- .Display:
+; Three modes packed across two bytes: SCALED_EXP (wOptions2) is the
+; low bit and ZERO_EXP_F (wTextboxFlags) the high one, so 0 = Normal,
+; 1 = Scaled, 2 = Zero. SCALED_EXP stays where it was so a save that
+; was already on Scaled still reads as Scaled. Both bits set cannot
+; come from the menu; .Strings has a fourth entry so the index stays
+; in bounds, and it shows Zero, which is what the battle code does
+; with that value too.
+	call .GetCurrent
+	ldh a, [hJoyPressed]
+	bit D_RIGHT_F, a
+	jr nz, .RightPressed
+	bit D_LEFT_F, a
+	jr z, .ShowCurrent
+; Left: Normal -> Zero -> Scaled -> Normal
+	ld a, c
+	and a
+	jr nz, .Decrease
+	ld a, 2
+	jr .Save
+.Decrease:
+	dec a
+	jr .Save
+.RightPressed:
+; Right: Normal -> Scaled -> Zero -> Normal
+	ld a, c
+	cp 2
+	jr c, .Increase
+	xor a
+	jr .Save
+.Increase:
+	inc a
+.Save:
+	ld c, a
+; low bit -> wOptions2 SCALED_EXP
+	ld a, [wOptions2]
+	res SCALED_EXP, a
+	ld b, a
+	ld a, c
+	and 1
+	jr z, .ScaledOff
+	set SCALED_EXP, b
+.ScaledOff:
+	ld a, b
+	ld [wOptions2], a
+; high bit -> wTextboxFlags ZERO_EXP_F
+	ld a, [wTextboxFlags]
+	res ZERO_EXP_F, a
+	ld b, a
+	ld a, c
+	and 2
+	jr z, .ZeroOff
+	set ZERO_EXP_F, b
+.ZeroOff:
+	ld a, b
+	ld [wTextboxFlags], a
+
+.ShowCurrent:
+	ld b, 0
+	ld hl, .Strings
+	add hl, bc
+	add hl, bc
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
 	call OptionsMenu_PlaceValue
 	call PlaceString
- 	and a
- 	ret
- 
-.Scaled:  db "Scaled@"
-.Normal:  db "Normal@"
+	and a
+	ret
+
+; c = the current mode, 0-3, built from the two bits.
+.GetCurrent:
+	ld c, 0
+	ld a, [wOptions2]
+	bit SCALED_EXP, a
+	jr z, .ReadZero
+	inc c
+.ReadZero:
+	ld a, [wTextboxFlags]
+	bit ZERO_EXP_F, a
+	jr z, .GotCurrent
+	inc c
+	inc c
+.GotCurrent:
+	ret
+
+.Strings:
+	table_width 2, .Strings
+	dw .Normal
+	dw .Scaled
+	dw .Zero
+	dw .Zero
+	assert_table_length 4
+
+.Normal: db "Normal@"
+.Scaled: db "Scaled@"
+.Zero:   db "Zero  @"
 
 Options_QuickNurse:
  	ld hl, wOptions2
@@ -1139,7 +1199,7 @@ OptionsMenu_DrawDescription:
 .DescSound: db "Play music in<LF>Mono, Stereo or Off.@"
 .DescRunningShoes: db "Set default to<LF>walk or run.@"
 .DescAutoBicycle: db "Get on the Bicycle<LF>outdoors.@"
-.DescScaledExp: db "Regular or Scaled<LF>Experience.@"
+.DescScaledExp: db "Normal, Scaled or<LF>Zero experience.@"
 .DescQuickNurse: db "#mon Center<LF>fast or slow heal.@"
 .DescFieldActions: db "Normal or Fast<LF>Field Actions.@"
 .DescFasterBattles: db "Reduce the text<LF>in battles.@"

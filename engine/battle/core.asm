@@ -6714,6 +6714,12 @@ GiveExperiencePoints:
 	ld a, [hl]
 	cp MAX_LEVEL
 	jmp nc, .next_mon
+; "Experience Gain" set to Zero: give nothing and say nothing.
+; Without this the regular text would report "gained 0 EXP points",
+; and the mon would still be handed an experience bar animation.
+	ld a, [wTextboxFlags]
+	bit ZERO_EXP_F, a
+	jmp nz, .next_mon
 	push bc
 
 	; Original Gen II formula: (BaseExp × EnemyLevel) ÷ 7
