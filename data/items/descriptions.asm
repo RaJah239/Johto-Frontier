@@ -69,7 +69,7 @@ ItemDescriptions:
 	dw PocketPCDesc
 	dw MoveDexDesc
 	dw MareepCallDesc
-	dw MysteryEggDesc
+	dw AmbrosiaDesc
 	dw ClearBellDesc
 	dw SilverWingDesc
 	dw MoomooMilkDesc
@@ -532,9 +532,9 @@ MareepCallDesc:
 	db   "Calls a MAREEP"
 	next "to light the way.@"
 
-MysteryEggDesc:
-	db   "An EGG obtained"
-	next "from MR.#MON.@"
+AmbrosiaDesc:
+	db   "Fully heals the"
+	next "entire party.@"
 
 ClearBellDesc:
 	db   "Makes a gentle"

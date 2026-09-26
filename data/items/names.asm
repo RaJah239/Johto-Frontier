@@ -68,7 +68,7 @@ ItemNames::
 	li "Pocket PC"
 	li "Move Dex"
 	li "Mareep Call"
-	li "Mystery Egg"
+	li "Ambrosia"
 	li "Clear Bell"
 	li "Silver Wing"
 	li "Moomoo Milk"

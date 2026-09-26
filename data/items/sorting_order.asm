@@ -240,6 +240,7 @@ ItemNameOrder:
 	db MOVE_DEX
 	db NOMAD_SIGIL
 	db MEMBERS_CARD
+	db AMBROSIA
 	db BICYCLE
 	db COIN_CASE
 	db ITEMFINDER
@@ -270,7 +271,6 @@ ItemNameOrder:
 	db BASEMENT_KEY
 	db CARD_KEY
 	db GS_BALL
-	db MYSTERY_EGG
 	db SQUIRTBOTTLE
 
 

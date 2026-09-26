@@ -82,7 +82,7 @@ ItemEffects:
 	dw PocketPCEffect      ; POCKET_PC
 	dw MoveDexEffect       ; MOVE_DEX
 	dw MareepCallEffect    ; MAREEP_CALL
-	dw NoEffect            ; MYSTERY_EGG
+	dw AmbrosiaEffect      ; AMBROSIA
 	dw NoEffect            ; CLEAR_BELL
 	dw NoEffect            ; SILVER_WING
 	dw RestoreHPEffect     ; MOOMOO_MILK
@@ -3149,3 +3149,28 @@ NomadSigilEffect:
 
 PocketPCEffect:
 	farjp PocketPCFunction
+
+AmbrosiaEffect:
+; Heals the whole party
+; gets the player out of every menu
+; and back to the overworld
+	ld hl, AmbrosiaScript
+	call QueueScript
+	ld a, 1
+	ld [wItemEffectSucceeded], a
+	ret
+
+AmbrosiaScript:
+	special HealParty
+	refreshmap
+	playsound SFX_MORNING_SUN
+	waitsfx
+	isdialogueminimal
+	iftrue_end
+	opentext
+	writetext .AmbrosiaText
+	waitendtext
+
+.AmbrosiaText:
+	text_far _UseSacredAshText
+	text_end
