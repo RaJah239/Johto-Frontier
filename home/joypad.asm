@@ -13,6 +13,8 @@ ClearJoypad::
 	ldh [hJoyDown], a
 ; A has not been held down
 	ldh [hAHoldFrames], a
+; B has not been held down
+	ldh [hBHoldFrames], a
 	ret
 
 UpdateJoypad::
@@ -40,9 +42,10 @@ UpdateJoypad::
 	jr .read
 
 .disabled
-; Input is off, so forget how long A has been held.
+; Input is off, so forget how long A and B have been held.
 	xor a
 	ldh [hAHoldFrames], a
+	ldh [hBHoldFrames], a
 	ret
 
 .read
@@ -106,6 +109,41 @@ endr
 	xor a
 	ldh [hAHoldFrames], a
 .no_turbo_a
+; Holding B turns it into a turbo B button too, using exactly the
+; same timing as turbo A: the first 4 frames of the hold are normal,
+; and after that B is toggled on for 4 frames and off for 4 frames.
+; This is only active while the Turbo B Button option is on.
+	ld a, [wOptions3]
+	bit TURBO_B_BUTTON, a
+	jr z, .b_disabled
+	ld a, b
+	and B_BUTTON
+	jr z, .b_released
+	ldh a, [hBHoldFrames]
+	cp 4
+	jr nc, .turbo_b
+	inc a
+	ldh [hBHoldFrames], a
+	jr .no_turbo_b
+
+.turbo_b
+	ldh a, [hVBlankCounter]
+	and 4 ; 4 frames on, 4 frames off
+	jr nz, .no_turbo_b
+	res B_BUTTON_F, b ; off phase: let go for a few frames
+	jr .no_turbo_b
+
+.b_released
+	xor a
+	ldh [hBHoldFrames], a
+	jr .no_turbo_b
+
+.b_disabled
+; Option is off: keep the hold counter at zero so enabling it
+; mid-hold still starts with 4 normal frames.
+	xor a
+	ldh [hBHoldFrames], a
+.no_turbo_b
 ; To get the delta we xor the last frame's input with the new one.
 	ldh a, [hJoypadDown] ; last frame
 	ld e, a

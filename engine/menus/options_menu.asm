@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 15
+DEF NUM_OPTIONS EQU 16
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -103,6 +103,7 @@ OptionsMenu_DrawLabels:
 	dw .QuickNurse
 	dw .FieldActions
 	dw .FasterBattles
+	dw .TurboB
 	dw .ExpShare
 	dw .MinimalDialogue
 	dw .FastBoot
@@ -120,6 +121,7 @@ OptionsMenu_DrawLabels:
 .QuickNurse:      db "#mon Center@"
 .FieldActions:    db "Field Actions@"
 .FasterBattles:   db "Battles@"
+.TurboB:          db "Turbo B@"
 .ExpShare:        db "Exp.Share@"
 .MinimalDialogue: db "Dialogue/Text@"
 .FastBoot:        db "Fast Boot@"
@@ -162,6 +164,7 @@ GetOptionPointer:
 	dw Options_QuickNurse
 	dw Options_FieldActions
 	dw Options_FasterBattles
+	dw Options_TurboB
 	dw Options_ExpShare
 	dw Options_MinimalDialogue
 	dw Options_FastBoot
@@ -431,6 +434,44 @@ Options_FasterBattles:
 
 .On:  db "Quick @"
 .Off: db "Normal@"
+
+Options_TurboB:
+	ld hl, wOptions3
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit TURBO_B_BUTTON, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+
+.LeftPressed:
+	bit TURBO_B_BUTTON, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+
+.NonePressed:
+	bit TURBO_B_BUTTON, [hl]
+	jr nz, .ToggleOn
+
+.ToggleOff:
+	res TURBO_B_BUTTON, [hl]
+	ld de, .Off
+	jr .Display
+
+.ToggleOn:
+	set TURBO_B_BUTTON, [hl]
+	ld de, .On
+
+.Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.Off: db "Off@"
+.On:  db "On @"
 
 Options_Sound:
 	ld hl, wOptions
@@ -872,6 +913,7 @@ OptionsMenu_DrawDescription:
 	dw .DescQuickNurse
 	dw .DescFieldActions
 	dw .DescFasterBattles
+	dw .DescTurboB
 	dw .DescExpShare
 	dw .DescMinimalDialogue
 	dw .DescFastBoot
@@ -888,6 +930,7 @@ OptionsMenu_DrawDescription:
 .DescQuickNurse: db "#mon Center<LF>fast or slow heal.@"
 .DescFieldActions: db "Normal or Fast<LF>Field Actions.@"
 .DescFasterBattles: db "Reduce the text<LF>in battles.@"
+.DescTurboB: db "Hold 'B' briefly<LF>to turbo press B.@"
 .DescExpShare: db "Share Experience<LF>with the party.@"
 .DescMinimalDialogue: db "Reduce all NPC<LF>text or not.@"
 .DescFastBoot: db "Load your save<LF>file immediately.@"

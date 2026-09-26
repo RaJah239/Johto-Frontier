@@ -1847,6 +1847,7 @@ wOptions2::
 wOptions3::
 ; bit 1: field actions normal/quick
 ; bit 2: fast battles normal/quick
+; bit 3: turbo b button off/on
 	db
 
 	ds 1
