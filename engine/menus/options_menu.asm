@@ -442,38 +442,81 @@ Options_FasterBattles:
 .Off: db "Normal@"
 
 Options_Sound:
-	ld hl, wOptions
 	ldh a, [hJoyPressed]
+	bit D_RIGHT_F, a
+	jr nz, .RightPressed
 	bit D_LEFT_F, a
 	jr nz, .LeftPressed
-	bit D_RIGHT_F, a
-	jr z, .NonePressed
-	bit STEREO, [hl]
+	jr .NonePressed
+
+.RightPressed:
+; Mono -> Stereo -> No -> Mono
+	ld a, [wOptions3]
+	bit NO_MUSIC, a
 	jr nz, .SetMono
+	ld a, [wOptions]
+	bit STEREO, a
+	jr nz, .SetNoMusic
 	jr .SetStereo
 
 .LeftPressed:
-	bit STEREO, [hl]
-	jr z, .SetStereo
-	jr .SetMono
+; Mono -> No -> Stereo -> Mono
+	ld a, [wOptions3]
+	bit NO_MUSIC, a
+	jr nz, .SetStereo
+	ld a, [wOptions]
+	bit STEREO, a
+	jr nz, .SetMono
+	jr .SetNoMusic
 
 .NonePressed:
-	bit STEREO, [hl]
-	jr nz, .ToggleStereo
-	jr .ToggleMono
-
-.SetMono:
-	res STEREO, [hl]
-	call RestartMapMusic
-.ToggleMono:
+; No direction pressed: just show whatever is currently selected.
+	ld a, [wOptions3]
+	bit NO_MUSIC, a
+	jr nz, .ShowNoMusic
+	ld a, [wOptions]
+	bit STEREO, a
+	jr nz, .ShowStereo
+.ShowMono:
 	ld de, .Mono
 	jr .Display
 
-.SetStereo:
-	set STEREO, [hl]
-	call RestartMapMusic
-.ToggleStereo:
+.ShowStereo:
 	ld de, .Stereo
+	jr .Display
+
+.ShowNoMusic:
+	ld de, .No
+	jr .Display
+
+.SetMono:
+	ld a, [wOptions]
+	res STEREO, a
+	ld [wOptions], a
+	ld a, [wOptions3]
+	res NO_MUSIC, a
+	ld [wOptions3], a
+	jr .Restart
+
+.SetStereo:
+	ld a, [wOptions]
+	set STEREO, a
+	ld [wOptions], a
+	ld a, [wOptions3]
+	res NO_MUSIC, a
+	ld [wOptions3], a
+	jr .Restart
+
+.SetNoMusic:
+	ld a, [wOptions3]
+	set NO_MUSIC, a
+	ld [wOptions3], a
+; Restarting with the flag set stops the current track, and the gate
+; in _PlayMusic keeps everything after it silent.
+.Restart:
+	call RestartMapMusic
+	jr .NonePressed
+
 .Display:
 	call OptionsMenu_PlaceValue
 	call PlaceString
@@ -482,6 +525,7 @@ Options_Sound:
 
 .Mono:   db "Mono  @"
 .Stereo: db "Stereo@"
+.No:     db "None  @"
 
 Options_MinimalDialogue:
 	ld hl, wOptions2
@@ -1004,7 +1048,7 @@ OptionsMenu_DrawDescription:
 
 .DescTextSpeed: db "Adjust your text<LF>speed.@"
 .DescBattleScene: db "Turn On or Off<LF>Battle Animations.@"
-.DescSound: db "Play music in<LF>Mono or Stereo.@"
+.DescSound: db "Music/BGB Audio:<LF>Mono, Stereo, Off.@"
 .DescRunningShoes: db "Set default to<LF>walk or run.@"
 .DescAutoBicycle: db "Get on the Bicycle<LF>outdoors.@"
 .DescScaledExp: db "Regular or Scaled<LF>Experience.@"

@@ -1847,6 +1847,7 @@ wOptions3::
 ; bit 3: turbo a
 ; bit 4: quick save
 ; bit 5: turbo b
+; bit 6: music off/on
 	db
 
 	ds 1
