@@ -549,6 +549,21 @@ TryLoadSaveData:
 	call CopyBytes
 	jmp ClearClock
 
+MigrateTurboAOption::
+; Turbo A has existed since before it had an option, so a save written
+; before the option was added has to keep behaving the way its owner
+; was already playing: turbo A on. wOptionsInit records that this save
+; has been given the current option defaults, so that switching
+; Turbo A off later actually sticks across reloads.
+	ld a, [wOptionsInit]
+	cp OPTIONS_INIT_DONE
+	ret z
+	ld hl, wOptions3
+	set TURBO_A_BUTTON, [hl]
+	ld a, OPTIONS_INIT_DONE
+	ld [wOptionsInit], a
+	ret
+
 INCLUDE "data/default_options.asm"
 
 CheckPrimarySaveFile:

@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 16
+DEF NUM_OPTIONS EQU 17
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -103,6 +103,7 @@ OptionsMenu_DrawLabels:
 	dw .QuickNurse
 	dw .FieldActions
 	dw .FasterBattles
+	dw .TurboA
 	dw .TurboB
 	dw .ExpShare
 	dw .MinimalDialogue
@@ -121,6 +122,7 @@ OptionsMenu_DrawLabels:
 .QuickNurse:      db "#mon Center@"
 .FieldActions:    db "Field Actions@"
 .FasterBattles:   db "Battles@"
+.TurboA:          db "Turbo A@"
 .TurboB:          db "Turbo B@"
 .ExpShare:        db "Exp.Share@"
 .MinimalDialogue: db "Dialogue/Text@"
@@ -164,6 +166,7 @@ GetOptionPointer:
 	dw Options_QuickNurse
 	dw Options_FieldActions
 	dw Options_FasterBattles
+	dw Options_TurboA
 	dw Options_TurboB
 	dw Options_ExpShare
 	dw Options_MinimalDialogue
@@ -434,6 +437,44 @@ Options_FasterBattles:
 
 .On:  db "Quick @"
 .Off: db "Normal@"
+
+Options_TurboA:
+	ld hl, wOptions3
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit TURBO_A_BUTTON, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+
+.LeftPressed:
+	bit TURBO_A_BUTTON, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+
+.NonePressed:
+	bit TURBO_A_BUTTON, [hl]
+	jr nz, .ToggleOn
+
+.ToggleOff:
+	res TURBO_A_BUTTON, [hl]
+	ld de, .Off
+	jr .Display
+
+.ToggleOn:
+	set TURBO_A_BUTTON, [hl]
+	ld de, .On
+
+.Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.Off: db "Off@"
+.On:  db "On @"
 
 Options_TurboB:
 	ld hl, wOptions3
@@ -913,6 +954,7 @@ OptionsMenu_DrawDescription:
 	dw .DescQuickNurse
 	dw .DescFieldActions
 	dw .DescFasterBattles
+	dw .DescTurboA
 	dw .DescTurboB
 	dw .DescExpShare
 	dw .DescMinimalDialogue
@@ -930,6 +972,7 @@ OptionsMenu_DrawDescription:
 .DescQuickNurse: db "#mon Center<LF>fast or slow heal.@"
 .DescFieldActions: db "Normal or Fast<LF>Field Actions.@"
 .DescFasterBattles: db "Reduce the text<LF>in battles.@"
+.DescTurboA: db "Hold 'A' briefly<LF>to turbo press A.@"
 .DescTurboB: db "Hold 'B' briefly<LF>to turbo press B.@"
 .DescExpShare: db "Share Experience<LF>with the party.@"
 .DescMinimalDialogue: db "Reduce all NPC<LF>text or not.@"

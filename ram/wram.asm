@@ -1848,9 +1848,14 @@ wOptions3::
 ; bit 1: field actions normal/quick
 ; bit 2: fast battles normal/quick
 ; bit 3: turbo b button off/on
+; bit 4: turbo a button off/on
 	db
 
-	ds 1
+; Set to OPTIONS_INIT_DONE once this save has been given the current
+; option defaults (see MigrateTurboAOption). Distinguishes a save that
+; predates an option from a player deliberately switching it off.
+wOptionsInit::
+	db
 wOptionsEnd::
 
 ; Time buffer, for counting the amount of time since

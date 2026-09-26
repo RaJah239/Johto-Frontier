@@ -1269,6 +1269,7 @@ CopyrightString:
 
 GameInit::
 	farcall TryLoadSaveData
+	farcall MigrateTurboAOption
 	call ClearWindowData
 	call ClearBGPalettes
 	call ClearTilemap
