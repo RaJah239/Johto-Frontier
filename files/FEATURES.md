@@ -22,6 +22,7 @@
 - Set time in PokéGear
 - "Set Time" added to the Main Menu
 - Display seconds in PokéGear and Main Menu
+- All Bag pockets loop when scrolling: Up on the first item jumps to the bottom of the list and Down on the last row jumps back to the top
 - Fruit and Battle pockets added + colored Bag Tabs for easier navigation
 - Press Start to sort items in Pack pockets (Item, Ball, Fruit, Key and Battle) in and out of battles
 - Cheat NPC to New Bark Town
