@@ -231,7 +231,7 @@ _ScrollingMenuJoypad::
 _NoYesBox::
 	ld hl, .NoYesMenuHeader
 	call CopyMenuHeader
-	lb bc, 1, 7
+	lb bc, SCREEN_WIDTH - 6, 7
 	ld a, b
 	ld [wMenuBorderLeftCoord], a
 	add 5

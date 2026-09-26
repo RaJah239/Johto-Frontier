@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 18
+DEF NUM_OPTIONS EQU 19
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -94,6 +94,7 @@ OptionsMenu_DrawLabels:
 	ret
 
 .Labels:
+	table_width 2, .Labels
 	dw .TextSpeed
 	dw .BattleScene
 	dw .Sound
@@ -101,6 +102,7 @@ OptionsMenu_DrawLabels:
 	dw .AutoBicycle
 	dw .ScaledExp
 	dw .QuickNurse
+	dw .RematchPrompt
 	dw .FieldActions
 	dw .FasterBattles
 	dw .ExpShare
@@ -112,6 +114,7 @@ OptionsMenu_DrawLabels:
 	dw .HardMode
 	dw .Frame
 	dw .Done
+	assert_table_length NUM_OPTIONS
 
 .TextSpeed:       db "Text Speed@"
 .BattleScene:     db "Battle Scene@"
@@ -121,6 +124,7 @@ OptionsMenu_DrawLabels:
 .ScaledExp:       db "Experience Gain@"
 .Frame:           db "Frame   :Type@"
 .QuickNurse:      db "#mon Center@"
+.RematchPrompt:   db "Rematch Prompt@"
 .FieldActions:    db "Field Actions@"
 .FasterBattles:   db "Battles@"
 .ExpShare:        db "Exp.Share@"
@@ -159,6 +163,7 @@ GetOptionPointer:
 	call StackJumpTable
 
 .Pointers:
+	table_width 2, .Pointers
 	dw Options_TextSpeed
 	dw Options_BattleScene
 	dw Options_Sound
@@ -166,6 +171,7 @@ GetOptionPointer:
 	dw Options_AutoBicycle
 	dw Options_Scaled_Exp
 	dw Options_QuickNurse
+	dw Options_RematchPrompt
 	dw Options_FieldActions
 	dw Options_FasterBattles
 	dw Options_ExpShare
@@ -177,6 +183,7 @@ GetOptionPointer:
 	dw Options_HardMode
 	dw Options_Frame
 	dw Options_Done
+	assert_table_length NUM_OPTIONS
 
 	const_def
 	const OPT_TEXT_SPEED_FAST ; 1
@@ -1028,6 +1035,47 @@ UpdateFrame:
 	and a
 	ret
 
+Options_RematchPrompt:
+; Which answer the rematch question lists first, stored in wTextboxFlags
+; REMATCH_NOYES_F. RematchScript reads the bit and runs either the
+; yesorno or the nooryes script command, so the value shown here is the
+; order the player actually sees.
+	ld hl, wTextboxFlags
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit REMATCH_NOYES_F, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+
+.LeftPressed:
+	bit REMATCH_NOYES_F, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+
+.NonePressed:
+	bit REMATCH_NOYES_F, [hl]
+	jr nz, .ToggleOn
+
+.ToggleOff:
+	res REMATCH_NOYES_F, [hl]
+	ld de, .YesOrNo
+	jr .Display
+
+.ToggleOn:
+	set REMATCH_NOYES_F, [hl]
+	ld de, .NoOrYes
+.Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.YesOrNo: db "Yes@"
+.NoOrYes: db "No @"
+
 Options_Done:
 	ldh a, [hJoyPressed]
 	and A_BUTTON
@@ -1155,6 +1203,7 @@ OptionsMenu_DrawDescription:
 
 .Descriptions:
 ; One entry per option, in the same order as .Labels and .Pointers.
+	table_width 2, .Descriptions
 	dw .DescTextSpeed
 	dw .DescBattleScene
 	dw .DescSound
@@ -1162,6 +1211,7 @@ OptionsMenu_DrawDescription:
 	dw .DescAutoBicycle
 	dw .DescScaledExp
 	dw .DescQuickNurse
+	dw .DescRematchPrompt
 	dw .DescFieldActions
 	dw .DescFasterBattles
 	dw .DescExpShare
@@ -1173,6 +1223,7 @@ OptionsMenu_DrawDescription:
 	dw .DescHardMode
 	dw .DescFrame
 	dw .DescDone
+	assert_table_length NUM_OPTIONS
 
 .DescTextSpeed: db "Adjust your text<LF>speed.@"
 .DescBattleScene: db "Turn On or Off<LF>Battle Animations.@"
@@ -1181,6 +1232,7 @@ OptionsMenu_DrawDescription:
 .DescAutoBicycle: db "Get on the Bicycle<LF>outdoors.@"
 .DescScaledExp: db "Normal, Scaled or<LF>Zero experience.@"
 .DescQuickNurse: db "#mon Center<LF>fast or slow heal.@"
+.DescRematchPrompt: db "Which comes first:<LF>'Yes' or 'No'.@"
 .DescFieldActions: db "Normal or Fast<LF>Field Actions.@"
 .DescFasterBattles: db "Reduce the text<LF>in battles.@"
 .DescExpShare: db "Share Experience<LF>with the party.@"
