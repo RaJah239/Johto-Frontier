@@ -2141,31 +2141,6 @@ NomadSigilOff:
 	text_far _NomadSigilOff
 	text_end
 
-CalmCharmFunction:
-	ld a, [wCalmCharm]
-	xor 1
-	ld [wCalmCharm], a
-	and a
-	ld hl, CalmCharmOn
-	jr nz, .print
-	ld hl, CalmCharmOff
-
-.print
-	call PrintText
-	ld hl, Script_ReloadMap
-	call QueueScript
-	ld a, TRUE
-	ld [wFieldMoveSucceeded], a
-	jmp RestartMapMusic
-
-CalmCharmOn:
-	text_far _CalmCharmOn
-	text_end
-
-CalmCharmOff:
-	text_far _CalmCharmOff
-	text_end
-
 PocketPCFunction:
     ld a, [wEnvironment]
     cp INDOOR 

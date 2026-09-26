@@ -1063,13 +1063,3 @@ _NomadSigilOff::
     para "The world returned"
     line "to normal."
     prompt
-
-_CalmCharmOn::
-	text "Background Music"
-	line "was Disabled."
-	prompt
-
-_CalmCharmOff::
-	text "Background Music"
-	line "was Enabled."
-	prompt

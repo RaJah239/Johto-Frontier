@@ -2286,10 +2286,6 @@ SetLRTracks:
 	ret
 
 _PlayMusic::
-	ld a, [wCalmCharm]
-	and a
-	ret nz
-
 ; The Music Off option silences background music. Every music start
 ; funnels through here, so a set flag means nothing new can begin.
 ; MUSIC_NONE still goes through: stopping music is always allowed,

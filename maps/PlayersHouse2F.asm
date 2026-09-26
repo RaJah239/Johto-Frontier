@@ -91,7 +91,6 @@ if DEF(_DEBUG)
 	giveitem MOVE_DEX
 	giveitem NOMAD_SIGIL
 	giveitem POCKET_PC
-	giveitem CALM_CHARM
 	giveitem MEMBERS_CARD
 	giveitem TYPE_CHART
 	giveitem BICYCLE
