@@ -69,6 +69,7 @@
 - Releasing the beasts registers Entei, Raikou and Suicune in the Pokédex
 - Riakou and Entei are now stationary encounters
 - Sacred Ash doesn't check for a fainted Pokémon to be activated
+- "Heal Kit" key item fully heals the party (HP, status and PP) and closes every menu, returning you straight to the overworld - usable from the Bag or registered to Select
 - "Call" items added that have the same effect as vanilla Crystal's HMs and surfing Pikachu still has a unique sprite
 - Moves Tutors, Move Relearner and Egg Tutor
 - Trade Back NPC added in Mahogany Town to evolve all Pokémon that require it

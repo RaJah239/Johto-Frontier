@@ -133,6 +133,7 @@ if DEF(_DEBUG)
 	setflag ENGINE_POKEDEX
 	givemoney YOUR_MONEY, MAX_MONEY
 	; key items
+	giveitem HEAL_KIT
 	giveitem MOVE_DEX
 	giveitem NOMAD_SIGIL
 	giveitem POCKET_PC

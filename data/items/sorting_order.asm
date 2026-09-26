@@ -271,7 +271,7 @@ ItemNameOrder:
 	db BASEMENT_KEY
 	db CARD_KEY
 	db GS_BALL
-	db MYSTERY_EGG
+	db HEAL_KIT
 	db SQUIRTBOTTLE
 
 

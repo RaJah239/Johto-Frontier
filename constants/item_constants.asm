@@ -74,7 +74,7 @@
 	const POCKET_PC    ; 42
 	const MOVE_DEX     ; 43
 	const MAREEP_CALL  ; 44
-	const MYSTERY_EGG  ; 45 ; unused, replace this
+	const HEAL_KIT     ; 45 ; replaces unused MYSTERY_EGG
 	const CLEAR_BELL   ; 46
 	const SILVER_WING  ; 47
 	const MOOMOO_MILK  ; 48

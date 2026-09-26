@@ -82,7 +82,7 @@ ItemEffects:
 	dw PocketPCEffect      ; POCKET_PC
 	dw MoveDexEffect       ; MOVE_DEX
 	dw MareepCallEffect    ; MAREEP_CALL
-	dw NoEffect            ; MYSTERY_EGG
+	dw HealKitEffect      ; HEAL_KIT
 	dw NoEffect            ; CLEAR_BELL
 	dw NoEffect            ; SILVER_WING
 	dw RestoreHPEffect     ; MOOMOO_MILK
@@ -2554,6 +2554,39 @@ SquirtbottleEffect:
 SacredAshEffect:
 	farcall _SacredAsh
 	jr UseDisposableItem
+
+HealKitEffect:
+; Heals the whole party, then gets the player out of every menu and back to
+; the overworld.
+; From Start > Bag, UseItem.Field only sets PACKSTATE_QUITRUNSCRIPT;
+; StartMenu_Pack then calls ExitAllMenus and returns 4, which maps to
+; .ExitMenuRunScript (hMenuReturn = HMENURETURN_SCRIPT), so StartMenuCallback
+; memjumps to the script below.
+; From a registered (Select) item, UseRegisteredItem.Overworld returns the
+; same hMenuReturn, so SelectMenuCallback runs it.
+; Unlike Sacred Ash, this is a key item, so it is never consumed.
+	ld hl, HealKitScript
+	call QueueScript
+	ld a, 1
+	ld [wItemEffectSucceeded], a
+	ret
+
+HealKitScript:
+	special HealParty
+	refreshmap
+	playsound SFX_FULL_HEAL
+	waitsfx
+	isfieldactionssettoquick
+	iftrue .skip_text
+	opentext
+	writethistext
+		text "Your #mon are"
+		line "all healed up!"
+		done
+	waitbutton
+	closetext
+.skip_text
+	end
 
 NormalBoxEffect:
 	ld c, DECOFLAG_SILVER_TROPHY_DOLL
