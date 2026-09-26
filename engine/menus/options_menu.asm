@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 19
+DEF NUM_OPTIONS EQU 20
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -94,6 +94,7 @@ OptionsMenu_DrawLabels:
 	ret
 
 .Labels:
+	table_width 2, .Labels
 	dw .TextSpeed
 	dw .BattleScene
 	dw .Sound
@@ -112,7 +113,9 @@ OptionsMenu_DrawLabels:
 	dw .Frame
 	dw .BagSort
 	dw .EncounterRate
+	dw .RematchPrompt
 	dw .Done
+	assert_table_length NUM_OPTIONS
 
 .TextSpeed:       db "Text Speed@"
 .BattleScene:     db "Battle Scene@"
@@ -132,6 +135,7 @@ OptionsMenu_DrawLabels:
 .HardMode:        db "Hard Mode@"
 .BagSort:         db "Sorting Order@"
 .EncounterRate:   db "Encounter Rate@"
+.RematchPrompt:   db "Rematch Prompt@"
 .Done:            db "Done@"
 
 OptionsMenu_LoadOptions:
@@ -161,6 +165,7 @@ GetOptionPointer:
 	call StackJumpTable
 
 .Pointers:
+	table_width 2, .Pointers
 	dw Options_TextSpeed
 	dw Options_BattleScene
 	dw Options_Sound
@@ -179,7 +184,9 @@ GetOptionPointer:
 	dw Options_Frame
 	dw Options_BagSort
 	dw Options_EncounterRate
+	dw Options_RematchPrompt
 	dw Options_Done
+	assert_table_length NUM_OPTIONS
 
 	const_def
 	const OPT_TEXT_SPEED_FAST ; 1
@@ -1112,6 +1119,47 @@ Options_EncounterRate:
 .Double:    db "Double   @"
 .Quadruple: db "Quadruple@"
 
+Options_RematchPrompt:
+; Which answer the rematch question lists first, stored in wTextboxFlags
+; REMATCH_NOYES_F. RematchScript reads the bit and runs either the
+; yesorno or the nooryes script command, so the value shown here is the
+; order the player actually sees.
+	ld hl, wTextboxFlags
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit REMATCH_NOYES_F, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+
+.LeftPressed:
+	bit REMATCH_NOYES_F, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+
+.NonePressed:
+	bit REMATCH_NOYES_F, [hl]
+	jr nz, .ToggleOn
+
+.ToggleOff:
+	res REMATCH_NOYES_F, [hl]
+	ld de, .YesOrNo
+	jr .Display
+
+.ToggleOn:
+	set REMATCH_NOYES_F, [hl]
+	ld de, .NoOrYes
+.Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.YesOrNo: db "YesOrNo@"
+.NoOrYes: db "NoOrYes@"
+
 Options_Done:
 	ldh a, [hJoyPressed]
 	and A_BUTTON
@@ -1239,6 +1287,7 @@ OptionsMenu_DrawDescription:
 
 .Descriptions:
 ; One entry per option, in the same order as .Labels and .Pointers.
+	table_width 2, .Descriptions
 	dw .DescTextSpeed
 	dw .DescBattleScene
 	dw .DescSound
@@ -1257,7 +1306,9 @@ OptionsMenu_DrawDescription:
 	dw .DescFrame
 	dw .DescBagSort
 	dw .DescEncounterRate
+	dw .DescRematchPrompt
 	dw .DescDone
+	assert_table_length NUM_OPTIONS
 
 .DescTextSpeed: db "Adjust your text<LF>speed.@"
 .DescBattleScene: db "Turn On or Off<LF>Battle Animations.@"
@@ -1277,4 +1328,5 @@ OptionsMenu_DrawDescription:
 .DescFrame: db "Select your border<LF>of textboxes.@"
 .DescBagSort: db "Sort the bag by<LF>Usefulness or A-Z.@"
 .DescEncounterRate: db "Wild encounters at<LF>1x, 2x or 4x rate.@"
+.DescRematchPrompt: db "Which comes first:<LF>'Yes' or 'No'.@"
 .DescDone: db "Save and Exit<LF>@"

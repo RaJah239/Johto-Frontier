@@ -1827,6 +1827,8 @@ wTextboxFlags::
 ; ZERO_EXP_F: "Zero" Experience Gain, paired with wOptions2 SCALED_EXP
 ; MAIN_MENU_BOOT_F: "Booting Options" = Main Menu, paired with
 ;   wOptions2 FAST_BOOT (= In Game); neither bit set = Intro
+; REMATCH_NOYES_F: "Rematch Prompt" = NoOrYes; clear = the yesorno
+;   command, set = nooryes (see RematchScript)
 	db
 wGBPrinterBrightness::
 ; bit 0-6: brightness

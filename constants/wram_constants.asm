@@ -79,6 +79,12 @@ DEF NUM_FRAMES EQU const_value
 ; but the bits run the other way round: 0 = Intro and 2 = In Game
 ; are wOptions2 FAST_BOOT (the low bit), 1 = Main Menu is this bit.
 	const MAIN_MENU_BOOT_F  ; 3
+; Bits 4 and 5 are held for a "Battle Speed" option that is not in the
+; tree, so this one jumps over them and lands at 6.
+	const_next 6
+; "Rematch Prompt": clear = "YesOrNo" (the yesorno script command),
+; set = "NoOrYes" (nooryes). Picks which answer RematchScript lists first.
+	const REMATCH_NOYES_F   ; 6
 
 ; wGBPrinterBrightness::
 DEF GBPRINTER_LIGHTEST EQU $00
