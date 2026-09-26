@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 17
+DEF NUM_OPTIONS EQU 18
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -110,6 +110,7 @@ OptionsMenu_DrawLabels:
 	dw .FastBoot
 	dw .HardMode
 	dw .Frame
+	dw .BagSort
 	dw .Done
 
 .TextSpeed:       db "Text Speed@"
@@ -128,6 +129,7 @@ OptionsMenu_DrawLabels:
 .MinimalDialogue: db "Dialogue/Text@"
 .FastBoot:        db "Fast Boot@"
 .HardMode:        db "Hard Mode@"
+.BagSort:         db "Sorting Order@"
 .Done:            db "Done@"
 
 OptionsMenu_LoadOptions:
@@ -173,6 +175,7 @@ GetOptionPointer:
 	dw Options_FastBoot
 	dw Options_HardMode
 	dw Options_Frame
+	dw Options_BagSort
 	dw Options_Done
 
 	const_def
@@ -862,6 +865,35 @@ UpdateFrame:
 	and a
 	ret
 
+Options_BagSort:
+; Two orders behind Start's bag sort: usefulness (the hand-curated
+; ItemNameOrder list, and the default) to the left, A-Z to the right.
+	ld hl, wOptions3
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .ShowCurrent
+	set BAG_SORT_ALPHA, [hl]
+	jr .ShowCurrent
+
+.LeftPressed:
+	res BAG_SORT_ALPHA, [hl]
+
+.ShowCurrent:
+	bit BAG_SORT_ALPHA, [hl]
+	ld de, .Alpha
+	jr nz, .Display
+	ld de, .Useful
+.Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.Useful: db "Useful @"
+.Alpha:  db "A-Z    @"
+
 Options_Done:
 	ldh a, [hJoyPressed]
 	and A_BUTTON
@@ -1005,6 +1037,7 @@ OptionsMenu_DrawDescription:
 	dw .DescFastBoot
 	dw .DescHardMode
 	dw .DescFrame
+	dw .DescBagSort
 	dw .DescDone
 
 .DescTextSpeed: db "Adjust your text<LF>speed.@"
@@ -1023,4 +1056,5 @@ OptionsMenu_DrawDescription:
 .DescFastBoot: db "Load your save<LF>file immediately.@"
 .DescHardMode: db "Choose your mode<LF>to play in.@"
 .DescFrame: db "Select your border<LF>of textboxes.@"
+.DescBagSort: db "Sort the bag by<LF>Usefulness or A-Z.@"
 .DescDone: db "Save and Exit<LF>@"

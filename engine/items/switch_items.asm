@@ -339,9 +339,12 @@ SortItemsInBag:
 	ret 
 
 ; @param a: Item index
-; @return a: Index in name_order.asm
+; @return a: Sort rank of that item
 ; @clobbers hl
 GetSortingItemIndex:
+; Ranks are just an item's position in whichever ordering list the
+; Sorting Order option selects, so the bag can be sorted by usefulness
+; (the hand-curated ItemNameOrder) or A-Z (ItemNameOrderAlphabetical).
 	push bc
 	call ItemSwitch_GetNthItem
 ; Check if the item is "CANCEL", if so, skip to .done
@@ -352,12 +355,22 @@ GetSortingItemIndex:
 	ld c, [hl]
 	ld b, 0
 	ld hl, ItemNameOrder
+	ld a, [wOptions3]
+	bit BAG_SORT_ALPHA, a
+	jr z, .lookupLoop
+	ld hl, ItemNameOrderAlphabetical
 .lookupLoop
 	ld a, [hli]
 	cp a, c
 	jr z, .done
 	inc b
-	jr .lookupLoop
+; Safety bound: a bare scan would run straight off the end of the list
+; and never terminate if an id not in it ever reached here. Anything
+; unlisted ties at rank NUM_ITEMS + 1, so it keeps its own order and
+; sorts after everything that does have a rank.
+	ld a, b
+	cp NUM_ITEMS + 1
+	jr c, .lookupLoop
 .done
 	ld a, b
 	pop bc

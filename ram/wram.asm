@@ -1850,6 +1850,7 @@ wOptions3::
 ; bit 3: turbo b button off/on
 ; bit 4: turbo a button off/on
 ; bit 5: music off/on
+; bit 6: bag sort by usefulness / by a-z
 	db
 
 ; Set to OPTIONS_INIT_DONE once this save has been given the current
