@@ -157,12 +157,25 @@ ScrollingMenuJoyAction:
 	ld hl, wMenuScrollPosition
 	ld a, [hl]
 	and a
-	jr z, .xor_dec_up
-	dec [hl]
+	jr nz, .scroll_up
+	; On the first item: loop around to the bottom of the list.
+	call ScrollingMenu_CanWrap
+	jmp nc, xor_a_dec_a
+	ld a, [wScrollingMenuListSize]
+	ld hl, wMenuData_ScrollingMenuHeight
+	sub [hl]
+	inc a
+	jr nc, .wrap_up_scroll
+	xor a ; list is shorter than the window: stay at the top
+.wrap_up_scroll
+	ld [wMenuScrollPosition], a
+	ld a, [w2DMenuNumRows]
+	ld [wMenuCursorY], a
 	jmp xor_a
 
-.xor_dec_up
-	jmp xor_a_dec_a
+.scroll_up
+	dec [hl]
+	jmp xor_a
 
 .d_down
 	ld hl, w2DMenuFlags2
@@ -174,12 +187,41 @@ ScrollingMenuJoyAction:
 	ld b, a
 	ld a, [wScrollingMenuListSize]
 	cp b
-	jr c, .xor_dec_down
+	jr nc, .scroll_down
+	; On the last row: loop around to the first item.
+	call ScrollingMenu_CanWrap
+	jmp nc, xor_a_dec_a
+	xor a
+	ld [wMenuScrollPosition], a
+	ld a, 1
+	ld [wMenuCursorY], a
+	jmp xor_a
+
+.scroll_down
 	inc [hl]
 	jmp xor_a
 
-.xor_dec_down
-	jmp xor_a_dec_a
+ScrollingMenu_CanWrap:
+; Carry set if this menu should loop its list.
+; STATICMENU_WRAP is only honored where the menu also declares the
+; ScrollingMenu left/right pair; that pair is what lets
+; ScrollingMenuJoyAction hand D_LEFT/D_RIGHT back to the caller (the bag
+; uses it to switch pockets). Other scrolling menus either leave
+; STATICMENU_WRAP clear or reuse that bit as SCROLLINGMENU_ENABLE_FUNCTION3,
+; so requiring all three keeps the loop to the bag's pocket menus.
+	ld a, [wScrollingMenuListSize]
+	and a
+	jr z, .no ; nothing to loop over
+	ld a, [wMenuDataFlags]
+	and STATICMENU_WRAP | STATICMENU_ENABLE_LEFT_RIGHT | STATICMENU_ENABLE_START
+	cp STATICMENU_WRAP | STATICMENU_ENABLE_LEFT_RIGHT | STATICMENU_ENABLE_START
+	jr nz, .no
+	scf
+	ret
+
+.no
+	and a ; clear carry
+	ret
 
 ScrollingMenu_GetCursorPosition:
 	ld a, [wMenuScrollPosition]

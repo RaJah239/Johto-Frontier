@@ -449,19 +449,47 @@ TMHM_ScrollPocket:
 	ld hl, wTMHMPocketScrollPosition
 	ld a, [hl]
 	and a
-	jmp z, TMHM_JoypadLoop
+	jr nz, .scroll_up
+	; On the first row: loop around to the bottom of the list. The list is
+	; the TMs plus a trailing Cancel row, just like every other pocket, so
+	; its last page - five rows with Cancel at the bottom - starts count - 4
+	; in. Landing on count - 5 leaves exactly five TMs on screen, which
+	; means DisplayPocketItems never reaches the Cancel row at all.
+	call TMHM_CountPocketItems
+	and a
+	jmp z, TMHM_JoypadLoop ; empty pocket: no Cancel row to land on
+	cp 5 ; Cancel included, the whole list already fits on screen
+	jr c, .wrap_up_cursor ; short list: only the cursor has to move
+	sub 4
+	ld [wTMHMPocketScrollPosition], a
+.wrap_up_cursor
+	ld a, [w2DMenuNumRows]
+	ld [wMenuCursorY], a
+	dec a
+	ld [wTMHMPocketCursor], a
+	call TMHM_DisplayPocketItems
+	jmp TMHM_ShowTMMoveDescription
+
+.scroll_up
 	dec [hl]
 	call TMHM_DisplayPocketItems
 	jmp TMHM_ShowTMMoveDescription
 
 .skip
+	; TMHM_GetCurrentPocketPosition scans for a set quantity and has no
+	; end check, so keep an empty pocket well away from it.
+	call TMHM_CountPocketItems
+	and a
+	jmp z, TMHM_JoypadLoop
+	cp 5 ; Cancel included, the whole list fits on screen
+	jr c, .wrap_down
 	call TMHM_GetCurrentPocketPosition
 	ld b, 5
 .loop
 	inc c
 	ld a, c
 	cp NUM_TMS + NUM_HMS + 1
-	jmp nc, TMHM_JoypadLoop
+	jr nc, .wrap_down
 	ld a, [hli]
 	and a
 	jr z, .loop
@@ -471,6 +499,34 @@ TMHM_ScrollPocket:
 	inc [hl]
 	call TMHM_DisplayPocketItems
 	jmp TMHM_ShowTMMoveDescription
+
+.wrap_down
+	; On the last row: loop around to the first row. A short list never
+	; scrolls, so there is nothing to rewind here and this is purely a
+	; cursor wrap back up to the first item.
+	xor a
+	ld [wTMHMPocketScrollPosition], a
+	ld [wTMHMPocketCursor], a
+	inc a
+	ld [wMenuCursorY], a
+	call TMHM_DisplayPocketItems
+	jmp TMHM_ShowTMMoveDescription
+
+; Returns in a how many TMs/HMs the player actually owns.
+TMHM_CountPocketItems:
+	ld hl, wTMsHMs
+	ld c, NUM_TMS + NUM_HMS
+	ld b, 0
+.loop
+	ld a, [hli]
+	and a
+	jr z, .next
+	inc b
+.next
+	dec c
+	jr nz, .loop
+	ld a, b
+	ret
 
 TMHM_DisplayPocketItems:
 	ld a, [wBattleType]
