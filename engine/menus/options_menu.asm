@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 18
+DEF NUM_OPTIONS EQU 19
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -111,6 +111,7 @@ OptionsMenu_DrawLabels:
 	dw .HardMode
 	dw .Frame
 	dw .BagSort
+	dw .EncounterRate
 	dw .Done
 
 .TextSpeed:       db "Text Speed@"
@@ -130,6 +131,7 @@ OptionsMenu_DrawLabels:
 .FastBoot:        db "Fast Boot@"
 .HardMode:        db "Hard Mode@"
 .BagSort:         db "Sorting Order@"
+.EncounterRate:   db "Encounter Rate@"
 .Done:            db "Done@"
 
 OptionsMenu_LoadOptions:
@@ -176,6 +178,7 @@ GetOptionPointer:
 	dw Options_HardMode
 	dw Options_Frame
 	dw Options_BagSort
+	dw Options_EncounterRate
 	dw Options_Done
 
 	const_def
@@ -894,6 +897,96 @@ Options_BagSort:
 .Useful: db "Useful @"
 .Alpha:  db "A-Z    @"
 
+Options_EncounterRate:
+; Three rates packed into wOptions3: ENCOUNTER_RATE is the low bit and
+; ENCOUNTER_RATE_HI the high one, so 0 = Normal, 1 = Double,
+; 2 = Quadruple. Both bits set cannot come from the menu, but .Strings
+; has a fourth entry so it stays in bounds regardless.
+	ld hl, wOptions3
+	ld a, [hl]
+	and ((1 << ENCOUNTER_RATE) | (1 << ENCOUNTER_RATE_HI))
+; The pair still sits in bits 6-7, so the mask leaves $00/$40/$80/$c0.
+; Rotate it down into bits 0-1 first: c has to be a 0/1/2 index, not
+; the raw field.
+	rlca
+	rlca
+	ld c, a
+	ldh a, [hJoyPressed]
+	bit D_RIGHT_F, a
+	jr nz, .RightPressed
+	bit D_LEFT_F, a
+	jr z, .ShowCurrent
+; Left: Normal -> Quadruple -> Double -> Normal
+	ld a, c
+	and a
+	jr nz, .Decrease
+	ld a, 2
+	jr .Save
+.Decrease:
+	dec a
+	jr .Save
+.RightPressed:
+; Right: Normal -> Double -> Quadruple -> Normal
+	ld a, c
+	cp 2
+	jr c, .Increase
+	xor a
+	jr .Save
+.Increase:
+	inc a
+.Save:
+	ld c, a
+	ld a, c
+	and 1
+	jr z, .ClearDouble
+	set ENCOUNTER_RATE, [hl]
+	jr .CheckQuadruple
+.ClearDouble:
+	res ENCOUNTER_RATE, [hl]
+.CheckQuadruple:
+	ld a, c
+	and 2
+	jr z, .ClearQuadruple
+	set ENCOUNTER_RATE_HI, [hl]
+	jr .ShowCurrent
+.ClearQuadruple:
+	res ENCOUNTER_RATE_HI, [hl]
+.ShowCurrent:
+	ld a, [hl]
+	and ((1 << ENCOUNTER_RATE) | (1 << ENCOUNTER_RATE_HI))
+	rlca
+	rlca
+	ld c, a
+	ld b, 0
+	ld hl, .Strings
+	add hl, bc
+	add hl, bc
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+; One column left of the usual value column: "Quadruple" is nine
+; characters and column 11 only leaves room for eight before the
+; textbox border.
+	call OptionsMenu_PlaceValue
+	dec hl
+	call PlaceString
+	and a
+	ret
+
+.Strings:
+; The field is two bits wide, so the index can only ever be 0-3 and
+; this table must have exactly four entries.
+	table_width 2, .Strings
+	dw .Normal
+	dw .Double
+	dw .Quadruple
+	dw .Quadruple
+	assert_table_length 4
+
+.Normal:    db "Normal   @"
+.Double:    db "Double   @"
+.Quadruple: db "Quadruple@"
+
 Options_Done:
 	ldh a, [hJoyPressed]
 	and A_BUTTON
@@ -1038,6 +1131,7 @@ OptionsMenu_DrawDescription:
 	dw .DescHardMode
 	dw .DescFrame
 	dw .DescBagSort
+	dw .DescEncounterRate
 	dw .DescDone
 
 .DescTextSpeed: db "Adjust your text<LF>speed.@"
@@ -1057,4 +1151,5 @@ OptionsMenu_DrawDescription:
 .DescHardMode: db "Choose your mode<LF>to play in.@"
 .DescFrame: db "Select your border<LF>of textboxes.@"
 .DescBagSort: db "Sort the bag by<LF>Usefulness or A-Z.@"
+.DescEncounterRate: db "Wild encounters at<LF>1x, 2x or 4x rate.@"
 .DescDone: db "Save and Exit<LF>@"

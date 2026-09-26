@@ -117,8 +117,13 @@ INCLUDE "engine/events/kurt_selectquantity_interpretjoypad.asm"
 
 SECTION "bankA", ROMX
 INCLUDE "engine/link/link.asm"
-INCLUDE "engine/overworld/wildmons.asm"
 INCLUDE "engine/battle/link_result.asm"
+
+; Its own bank: "bankA" is completely full, and every reference into
+; wildmons.asm from outside the file is a farcall/farjp/dba, so its
+; bank is free to change.
+SECTION "Wildmons", ROMX
+INCLUDE "engine/overworld/wildmons.asm"
 
 
 SECTION "bankB", ROMX
@@ -369,9 +374,14 @@ INCLUDE "engine/games/memory_game.asm"
 
 
 SECTION "bank39", ROMX
-INCLUDE "engine/menus/options_menu.asm"
 INCLUDE "engine/movie/splash.asm"
 INCLUDE "engine/movie/intro.asm"
+
+; Kept out of "bank39" because that bank has no room left for new
+; options rows. Nothing outside this file references it except
+; `farcall _Option`, so its bank is free to change.
+SECTION "Options Menu", ROMX
+INCLUDE "engine/menus/options_menu.asm"
 
 
 SECTION "bank3E", ROMX

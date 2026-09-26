@@ -1851,6 +1851,8 @@ wOptions3::
 ; bit 4: turbo a button off/on
 ; bit 5: music off/on
 ; bit 6: bag sort by usefulness / by a-z
+; bit 7: encounter rate low bit  (0 = normal, 1 = double)
+; bit 8: encounter rate high bit (0 = normal, 1 = quadruple)
 	db
 
 ; Set to OPTIONS_INIT_DONE once this save has been given the current

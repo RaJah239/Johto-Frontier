@@ -192,6 +192,7 @@ endc
 	call ApplyCyclingEffectOnEncounterRate
 	call ApplyMusicEffectOnEncounterRate
 	call ApplyCleanseTagEffectOnEncounterRate
+	call ApplyEncounterRateOption
 	call Random
 	cp b
 	ret
@@ -251,6 +252,30 @@ ApplyCleanseTagEffectOnEncounterRate::
 
 .cleansetag
 	srl b
+	ret
+
+ApplyEncounterRateOption::
+; The Options row "Encounter Rate": Normal leaves the threshold alone,
+; Double and Quadruple multiply it by 2 and 4. Saturating on purpose -
+; a plain double of a high threshold would wrap past 255 and land on a
+; *lower* rate than before.
+	ld a, [wOptions3]
+	bit ENCOUNTER_RATE_HI, a
+	jr nz, .quadruple
+	bit ENCOUNTER_RATE, a
+	ret z ; Normal
+.double
+	ld a, b
+	add a
+	jr c, .saturate
+	ld b, a
+	ret
+.quadruple
+	call .double
+	call .double
+	ret
+.saturate
+	ld b, 255
 	ret
 
 ChooseWildEncounter:

@@ -291,6 +291,9 @@ ROMX $74
 	"Pokedex Entries 193-251"
 ROMX $75
 	"The End"
+ROMX $76
+	"Options Menu"
+	"Wildmons"
 ROMX $77
 	"Unown Font"
 	"Print Party"

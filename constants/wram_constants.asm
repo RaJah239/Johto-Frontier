@@ -98,6 +98,10 @@ DEF GBPRINTER_DARKEST  EQU $7f
 	const TURBO_A_BUTTON ; 3
 	const NO_MUSIC ; 4
 	const BAG_SORT_ALPHA ; 5
+; Encounter Rate packs a 0-2 value across these two bits:
+; 0 = Normal, 1 (low bit) = Double, 2 (high bit) = Quadruple
+	const ENCOUNTER_RATE ; 6
+	const ENCOUNTER_RATE_HI ; 7
 
 ; wOptionsInit::
 DEF OPTIONS_INIT_DONE EQU 1
