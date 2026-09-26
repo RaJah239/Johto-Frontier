@@ -278,6 +278,26 @@ MenuJoypadLoop:
 	call GetMenuJoypad
 	ld b, a
 	call ClearEnemyTypes
+; Start on the main battle menu jumps straight to <PKMN>, exactly as if
+; the player had moved the cursor onto it and pressed A: park the cursor
+; on row 2, column 1 and quit, so Get2DMenuSelection reports position 3
+; and BattleMenu dispatches to BattleMenu_PKMN. Gated the same way as
+; DisplayEnemyTypes so no other menu is affected.
+	ld a, b
+	bit START_F, a
+	jr z, .filter
+	ld a, [wBattleMode]
+	and a
+	jr z, .filter
+	ld a, [wCurrentBattleWindow]
+	and a
+	jr nz, .filter
+	ld a, 2
+	ld [wMenuCursorY], a
+	ld a, 1
+	ld [wMenuCursorX], a
+	ret
+.filter
 	ld a, [wMenuJoypadFilter]
 	and b
 	jr z, .loop
@@ -303,8 +323,8 @@ ClearEnemyTypes:
 	and a
 	ret nz ; Only do this on the main menu of a battle
 	ldh a, [hJoyPressed]
-	cp START
-	ret z ; no need to refresh if the button pushed was START
+	cp SELECT
+	ret z ; no need to refresh if the button pushed was SELECT
 	xor a
 	ld [wEnemyTypeDisplayActive], a
 	farjp UpdateEnemyHUD
@@ -328,7 +348,7 @@ Menu_WasButtonPressed:
 
 .skip_to_joypad
 	ldh a, [hJoyPressed]
-	cp START
+	cp SELECT
 	call z, DisplayEnemyTypes
 	call JoyTextDelay
 	call GetMenuJoypad

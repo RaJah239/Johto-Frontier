@@ -92,9 +92,10 @@
 - All Pokémon obey regardless if traded or not
 - Can 100% run from any wild encounter
 - Can't run from wild Shiny Pokémon
-- Press Start to view enemy types in Battle Menu
+- Press Select to view enemy types in Battle Menu
 - Displays type effectiveness in Battle Menu
 - Push B in Battle Menu to go to the bottom right option (Run/Info)
+- Press Start in Battle Menu to go straight to the Pokémon menu
 - Quadruple effective and ineffective battle texts added
 - Removed vanilla Crystal's the 25% failure chance for AI status moves
 - Removed vanilla Crystal's the Gym badges boosts
