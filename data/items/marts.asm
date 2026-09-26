@@ -93,10 +93,10 @@ MartNoBadges:
 	db 6 ; # items
 	db POKE_BALL
 	db POTION
-	db ANTIDOTE
-	db PARLYZ_HEAL
-	db AWAKENING
-	db REPEL
+	db NOMAD_SIGIL
+	db CHOICE_BAND
+	db TM_HYPER_BEAM
+	db BERRY
 	db -1 ; end
 
 MartOneBadge:
