@@ -185,7 +185,8 @@ hFunctionTargetHi:: db
 hDelayFrameLY:: db
 
 hAHoldFrames:: db
+hBHoldFrames:: db
 
-	ds 12
+	ds 11
 
 ENDSECTION

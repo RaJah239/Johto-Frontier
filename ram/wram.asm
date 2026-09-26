@@ -1846,6 +1846,7 @@ wOptions3::
 ; bit 2: fast battles normal/quick
 ; bit 3: turbo a
 ; bit 4: quick save
+; bit 5: turbo b
 	db
 
 	ds 1
