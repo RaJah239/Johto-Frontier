@@ -6912,8 +6912,12 @@ AnimateFailedMove:
 	jmp BattleCommand_RaiseSub
 
 BattleCommand_MoveDelay:
-; Wait 10 frames.
+; Wait 10 frames, or 5 when "Battle Speed" is Double.
 	ld c, 10
+	call CheckIfDoubleBattleSpeed
+	jr z, .delay
+	srl c
+.delay
 	jmp DelayFrames
 
 BattleCommand_ClearText:

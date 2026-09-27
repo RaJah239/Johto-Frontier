@@ -8,6 +8,7 @@ _AnimateHPBar:
 	call ShortAnim_UpdateVariables
 	pop hl
 	pop bc
+	call HPBarAnim_TryShortExtraTick
 	push af
 	push bc
 	push hl
@@ -28,6 +29,7 @@ _AnimateHPBar:
 	pop hl
 	pop bc
 	ret c
+	call HPBarAnim_TryLongExtraTick
 	push af
 	push bc
 	push hl
@@ -130,6 +132,64 @@ _AnimateHPBar:
 	ld [wCurHPAnimDeltaHP], a
 	ld a, e
 	ld [wCurHPAnimDeltaHP + 1], a
+	ret
+
+HPBarAnim_TryShortExtraTick:
+; "Battle Speed: Double" squeezes one more HP math step in before the
+; one safe BG map update, so the bar drains in about half the frames.
+; Carry in means the bar is already finished, so pass it straight on.
+	ret c
+	call HPBarAnim_GetExtraTicks
+	and a
+	ret z
+	push de
+	ld e, a
+.loop
+	push de
+	push bc
+	push hl
+	call ShortAnim_UpdateVariables
+	pop hl
+	pop bc
+	pop de
+	jr c, .done
+	dec e
+	jr nz, .loop
+.done
+	pop de
+	ret
+
+HPBarAnim_TryLongExtraTick:
+	call HPBarAnim_GetExtraTicks
+	and a
+	ret z
+	push de
+	ld e, a
+.loop
+	push de
+	push bc
+	push hl
+	call LongAnim_UpdateVariables
+	pop hl
+	pop bc
+	pop de
+	jr c, .done
+	dec e
+	jr nz, .loop
+.done
+	pop de
+	ret
+
+HPBarAnim_GetExtraTicks:
+; Extra HP math updates for this BG-map refresh: 0 at Normal speed,
+; 1 at Double.
+	call CheckIfDoubleBattleSpeed
+	jr nz, .double
+	xor a
+	ret
+
+.double
+	ld a, 1
 	ret
 
 ShortAnim_UpdateVariables:

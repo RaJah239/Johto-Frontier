@@ -29,7 +29,7 @@ DoBattleTransition:
 	bit 7, a ; BATTLETRANSITION_END?
 	jr nz, .done
 	call BattleTransitionJumptable
-	call DelayFrame
+	call BattleTransitionDelayFrame
 	jr .loop
 
 .done
@@ -154,6 +154,68 @@ ConvertTrainerBattlePokeballTilesTo2bpp:
 
 TrainerBattlePokeballTiles:
 INCBIN "gfx/overworld/trainer_battle_pokeball_tiles.2bpp"
+
+BattleTransitionDelayFrame:
+; "Battle Speed: Double" runs one extra state-machine tick before the
+; next real VBlank, so the screen transition finishes in about half the
+; time. Only states that merely advance an animation counter get the
+; extra tick; setup and hand-off states keep one tick per frame so their
+; staged VRAM work is not dropped.
+	call CheckIfDoubleBattleSpeed
+	jr z, .delay
+	call BattleTransition_ShouldRunExtraTick
+	jr z, .delay
+	call BattleTransitionJumptable
+.delay
+	jmp DelayFrame
+
+BattleTransition_ShouldRunExtraTick:
+; Return z unless [wJumptableIndex] names a state that is safe to run
+; twice per frame: the three Flash steps and the wavy/speckle outros.
+; Everything else ($01-$02 setup, $06/$0e/$15/$1d scene hand-offs, the
+; other outros, and $20 finish) has to keep its normal cadence.
+	ld a, [wJumptableIndex]
+	bit 7, a ; BATTLETRANSITION_END?
+	jr nz, .no
+
+	cp BATTLETRANSITION_CAVE + 2
+	jr c, .check_cave_sine
+	cp BATTLETRANSITION_CAVE + 5
+	jr c, .yes
+
+.check_cave_sine
+	cp BATTLETRANSITION_CAVE + 7
+	jr z, .yes
+
+	cp BATTLETRANSITION_CAVE_STRONGER + 2
+	jr c, .check_no_cave
+	cp BATTLETRANSITION_CAVE_STRONGER + 5
+	jr c, .yes
+
+.check_no_cave
+	cp BATTLETRANSITION_NO_CAVE + 2
+	jr c, .check_stronger_no_cave
+	cp BATTLETRANSITION_NO_CAVE + 5
+	jr c, .yes
+
+.check_stronger_no_cave
+	cp BATTLETRANSITION_NO_CAVE_STRONGER + 2
+	jr c, .check_speckle
+	cp BATTLETRANSITION_NO_CAVE_STRONGER + 5
+	jr c, .yes
+
+.check_speckle
+	cp BATTLETRANSITION_NO_CAVE_STRONGER + 7
+	jr z, .yes
+
+.no
+	xor a
+	ret
+
+.yes
+	ld a, 1
+	and a
+	ret
 
 BattleTransitionJumptable:
 	jumptable .Jumptable, wJumptableIndex

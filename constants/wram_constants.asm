@@ -82,6 +82,9 @@ DEF NUM_FRAMES EQU const_value
 ; "Rematch Prompt": clear = "YesOrNo" (the yesorno script command),
 ; set = "NoOrYes" (nooryes). Picks which answer RematchScript lists first.
 	const REMATCH_NOYES_F   ; 4
+; "Battle Speed" is a 0-2 value too, but only its low bit is needed:
+; clear = "Normal", set = "Double". Bit 5 stays spare for a third speed.
+	const DOUBLE_BATTLE_SPEED_F ; 5
 
 ; wGBPrinterBrightness::
 DEF GBPRINTER_LIGHTEST EQU $00

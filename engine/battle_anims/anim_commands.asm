@@ -41,7 +41,7 @@ _PlayBattleAnim:
 	ldh [hBGMapMode], a
 
 	call DelayFrame
-	jmp WaitSFX
+	jmp BattleAnimWaitSFX
 
 BattleAnimRunScript:
 	ld a, [wFXAnimID + 1]
@@ -82,7 +82,7 @@ BattleAnimRunScript:
 	ld [wFXAnimID + 1], a
 
 .hi_byte
-	call WaitSFX
+	call BattleAnimWaitSFX
 	call PlayHitSound
 	call RunBattleAnimScript
 
@@ -171,6 +171,7 @@ RunBattleAnimScript:
 	call nz, DelayFrame
 
 .not_dark_pulse
+	call BattleAnim_TryExtraTicks
 	call DelayFrame
 
 .done
@@ -195,6 +196,112 @@ BattleAnim_ClearOAM:
 	ld [hli], a
 	dec c
 	jr nz, .loop2
+	ret
+
+BattleAnim_TryExtraTicks:
+; "Battle Speed: Double" takes one extra logical animation step before
+; the real-frame wait, so a move's animation finishes in about half the
+; time. Skip it once the animation is over, and whenever a BG map or
+; tile request is still waiting on VBlank, since a second step would
+; race the first one.
+	call CheckIfDoubleBattleSpeed
+	ret z
+	ld a, [wBattleAnimFlags]
+	bit BATTLEANIM_STOP_F, a
+	ret nz
+	call BattleAnim_HasPendingVideoRequest
+	ret nz
+	call RunBattleAnimCommand
+	farcall ExecuteBGEffects
+	call BattleAnim_UpdateOAM_All
+	call PushLYOverrides
+	; fallthrough
+
+BattleAnimRequestPals:
+	ldh a, [hCGB]
+	and a
+	ret z
+
+	ldh a, [rBGP]
+	ld b, a
+	ld a, [wBGP]
+	cp b
+	call nz, BattleAnim_SetBGPals
+
+	ldh a, [rOBP0]
+	ld b, a
+	ld a, [wOBP0]
+	cp b
+	jmp nz, BattleAnim_SetOBPals
+	ret
+
+BattleAnim_HasPendingVideoRequest:
+; Return nz if a BG map or 2bpp request still needs a real VBlank.
+; The one exception is the LY override staging PushLYOverrides just set
+; up: repeating it replaces that request with the newer data, so it does
+; not count as pending.
+	ldh a, [hBGMapMode]
+	and a
+	ret nz
+	ld a, [wRequested2bppSize]
+	and a
+	ret z
+	cp (wLYOverridesEnd - wLYOverrides) / LEN_2BPP_TILE
+	ret nz
+	ld a, [wRequested2bppSource]
+	cp LOW(wLYOverridesBackup)
+	ret nz
+	ld a, [wRequested2bppSource + 1]
+	cp HIGH(wLYOverridesBackup)
+	ret nz
+	ld a, [wRequested2bppDest]
+	cp LOW(wLYOverrides)
+	ret nz
+	ld a, [wRequested2bppDest + 1]
+	cp HIGH(wLYOverrides)
+	ret nz
+	xor a
+	ret
+
+BattleAnimWaitSFX:
+; Like WaitSFX, but at "Battle Speed: Double" every SFX channel also
+; gets one extra note-duration tick per real frame, so the same sound
+; ends in about half the time instead of simply being cut short.
+	call CheckIfDoubleBattleSpeed
+	jmp z, WaitSFX
+
+	push hl
+	push de
+	push bc
+.wait
+	call IsSFXPlaying
+	jr c, .done
+	ld hl, wChannel5Flags1
+	call .speed_up
+	ld hl, wChannel6Flags1
+	call .speed_up
+	ld hl, wChannel7Flags1
+	call .speed_up
+	ld hl, wChannel8Flags1
+	call .speed_up
+	call DelayFrame
+	jr .wait
+
+.done
+	pop bc
+	pop de
+	pop hl
+	ret
+
+.speed_up
+	bit SOUND_CHANNEL_ON, [hl]
+	ret z
+	ld de, CHANNEL_NOTE_DURATION - CHANNEL_FLAGS1
+	add hl, de
+	ld a, [hl]
+	cp 2
+	ret c
+	dec [hl]
 	ret
 
 BattleAnimClearHud:
@@ -224,24 +331,6 @@ BattleAnimRestoreHuds:
 	ldh [hBGMapMode], a
 	call Delay3
 	jmp WaitTop
-
-BattleAnimRequestPals:
-	ldh a, [hCGB]
-	and a
-	ret z
-
-	ldh a, [rBGP]
-	ld b, a
-	ld a, [wBGP]
-	cp b
-	call nz, BattleAnim_SetBGPals
-
-	ldh a, [rOBP0]
-	ld b, a
-	ld a, [wOBP0]
-	cp b
-	jmp nz, BattleAnim_SetOBPals
-	ret
 
 ClearActorHud:
 	ldh a, [hBattleTurn]

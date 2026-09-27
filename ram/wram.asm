@@ -1826,6 +1826,8 @@ wTextboxFlags::
 ;   wOptions2 FAST_BOOT (= In Game); neither bit set = Intro
 ; REMATCH_NOYES_F: "Rematch Prompt" = NoOrYes; clear = the yesorno
 ;   command, set = nooryes (see RematchScript)
+; DOUBLE_BATTLE_SPEED_F: "Battle Speed" = Double; clear = Normal
+;   (see CheckIfDoubleBattleSpeed)
 	db
 wGBPrinterBrightness::
 ; bit 0-6: brightness
