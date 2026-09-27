@@ -1829,14 +1829,7 @@ wTextboxFlags::
 ; DOUBLE_BATTLE_SPEED_F: "Battle Speed" = Double; clear = Normal
 ;   (see CheckIfDoubleBattleSpeed)
 	db
-wGBPrinterBrightness::
-; bit 0-6: brightness
-;   lightest: $00
-;   lighter:  $20
-;   normal:   $40 (default)
-;   darker:   $60
-;   darkest:  $7F
-	db
+
 wOptions2::
 ; bit 0: running shoes off/on
 ; bit 1: minimal dialogue off/on
@@ -1849,12 +1842,15 @@ wOptions2::
 	db
 
 wOptions3::
-; bit 1: field actions normal/quick
-; bit 2: fast battles normal/quick
-; bit 3: turbo a
-; bit 4: quick save
-; bit 5: turbo b
-; bit 6: music off/on
+; bit 0: field actions normal/quick
+; bit 1: fast battles normal/quick
+; bit 2: turbo a
+; bit 3: quick save
+; bit 4: turbo b
+; bit 5: music off/on
+	db
+
+wOptions4::
 	db
 
 	ds 1

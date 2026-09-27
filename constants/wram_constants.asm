@@ -86,13 +86,6 @@ DEF NUM_FRAMES EQU const_value
 ; clear = "Normal", set = "Double". Bit 5 stays spare for a third speed.
 	const DOUBLE_BATTLE_SPEED_F ; 5
 
-; wGBPrinterBrightness::
-DEF GBPRINTER_LIGHTEST EQU $00
-DEF GBPRINTER_LIGHTER  EQU $20
-DEF GBPRINTER_NORMAL   EQU $40
-DEF GBPRINTER_DARKER   EQU $60
-DEF GBPRINTER_DARKEST  EQU $7f
-
 ; wOptions2::
 	const_def
 	const RUNNING_SHOES ; 0
@@ -112,6 +105,9 @@ DEF GBPRINTER_DARKEST  EQU $7f
 	const QUICK_SAVE ; 3
 	const TURBO_B_BUTTON ; 4
 	const NO_MUSIC ; 5
+
+; wOptions4::
+	const_def
 
 ; wWalkingDirection::
 	const_def -1
