@@ -816,9 +816,9 @@ Options_FastBoot:
 	dw .InGame
 	assert_table_length 4
 
-.Intro:    db "Intro  @"
-.MainMenu: db "Menu   @"
-.InGame:   db "In Game@"
+.Intro:    db "Intro    @"
+.MainMenu: db "Main Menu@"
+.InGame:   db "In Game  @"
 
 Options_BattleSpeed:
 ; How fast the battle engine runs, stored in wTextboxFlags
@@ -1070,10 +1070,10 @@ Options_Frame:
 	ld [hl], a
 UpdateFrame:
 ; Place the digit on the label's own line (next to "Frame"), not on
-; the value line below it: +5 columns reaches col 16, -1 row goes
+; the value line below it: +6 columns reaches col 16, -1 row goes
 ; from the value row to the label row.
 	call OptionsMenu_PlaceValue
-	ld bc, 5 - SCREEN_WIDTH
+	ld bc, 6 - SCREEN_WIDTH
 	add hl, bc
 	ld a, [wTextboxFrame]
 	add "1"
@@ -1206,7 +1206,7 @@ OptionsMenu_PlaceValue:
 	ld c, a
 	ld a, b
 	sub c
-	hlcoord 11, 3
+	hlcoord 10, 3
 	ld bc, 2 * SCREEN_WIDTH
 	jmp AddNTimes
 
