@@ -83,6 +83,18 @@
 - Press A to use Flash in dark caves
 - Press Start to skip Credits
 
+## Anti Save-Scumming RNG (save-tied PRNG)
+How it works: Random numbers no longer come from the console's hardware divider (which is different every boot — that's why resetting used to reroll everything). Instead, everything runs off a deterministic 32-bit xorshift PRNG whose 4-byte state is written into your save file — main slot and backup slot both — every time you save, and restored when you load. Loading a save resumes the exact random sequence you were on when you saved, so the same actions after loading always produce the same results. Real-world randomness only enters once: a single seed at New Game (or on the first load of a save made before this feature), taken from the divider, scanline and frame counter.
+
+What it affects: All single-player rolls — wild encounters (species, level, slot), shiny rolls, DV generation, wild held items, Pokérus, critical hits, damage variance, accuracy, escape odds, trainer AI decisions, Odd Egg, Voltorb Flip, Game Corner, phone calls, NPC movement, and so on. Link battles are unaffected (they use their own synced PRNG). Odds themselves are unchanged; only rerolling is.
+
+Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs rolled when the encounter starts, so it's part of this sequence.
+
+- Before: save in front of the legend → check → soft reset → a fresh shiny roll every attempt.
+- Now: the roll is tied to your save point. Reload and repeat your steps and you get the identical result every time — resetting can no longer reroll a stationary (or wild) shiny.
+- Getting a different roll means actually advancing the RNG — keep playing and save at a new point, or do different things between loading and the encounter — not just resetting.
+- In short: catching it shiny is still possible, but "reset until it pops" is gone.
+
 ## Battle Related
 - Type Chart changes: Ice resists Water and Electric
 - "Move Dex" item added that displays all moves and their details
