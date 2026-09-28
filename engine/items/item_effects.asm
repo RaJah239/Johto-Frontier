@@ -3183,7 +3183,7 @@ AmbrosiaScript:
 	refreshmap
 	playsound SFX_MORNING_SUN
 	waitsfx
-	isdialogueminimal
+	callasm CheckFieldActionsAsm
 	iftrue_end
 	opentext
 	writetext .AmbrosiaText
@@ -3192,3 +3192,9 @@ AmbrosiaScript:
 .AmbrosiaText:
 	text_far _UseSacredAshText
 	text_end
+
+CheckFieldActionsAsm:
+	ld a, [wOptions3]
+	and 1 << FIELD_ACTIONS
+	ld [wScriptVar], a
+	ret
