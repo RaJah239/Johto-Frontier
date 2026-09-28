@@ -126,8 +126,15 @@ HandleDrizzle:
 	ld a, 255
 	ld [wWeatherCount], a
 
-	ld hl, BattleText_DrizzleText
-	jmp StdBattleTextbox
+	; slide the ability popup over the acting side's HUD
+	ld b, BANK(AbilityPopup_DrizzleText)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	ld de, AbilityPopup_DrizzleText
+	farjp ShowAbilityPopup
+
+AbilityPopup_DrizzleText:
+	db "Drizzle@"
 
 INCLUDE "data/abilities/drizzle_mons.asm"
 
@@ -411,6 +418,13 @@ HandleNonLinkIntimidate:
 	call IsInByteArray
 	ret nc
 
+	; slide the ability popup over the acting side's HUD
+	ld b, BANK(AbilityPopup_IntimidateText)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	ld de, AbilityPopup_IntimidateText
+	farcall ShowAbilityPopup
+
 	ld a, [wOptions]
 	bit BATTLE_SCENE, a
 	jr nz, .skip_anim
@@ -418,13 +432,12 @@ HandleNonLinkIntimidate:
 	; play leer animation
 	ld de, LEER
 	farcall Call_PlayBattleAnim
-
 .skip_anim
-	ld hl, IntimidateText
-	call StdBattleTextbox
-
 	farcall BattleCommand_AttackDown
 	farjp BattleCommand_StatDownMessage
+
+AbilityPopup_IntimidateText:
+	db "Intimidate@"
 
 INCLUDE "data/abilities/intimidate_mons.asm"
 

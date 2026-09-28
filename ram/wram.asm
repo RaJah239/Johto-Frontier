@@ -632,6 +632,19 @@ wSomeoneIsRampaging:: db
 
 wBattleEnd::
 
+; battle-only ability popup (ShowAbilityPopup in engine/battle/misc.asm);
+; only in use while that routine is on the stack
+wAbilityPopupStaging::
+	ds SCREEN_WIDTH * ABILITY_POPUP_HEIGHT ; the box, built here once
+wAbilityPopupStagingEnd::
+wAbilityPopupSaved::
+	ds SCREEN_WIDTH * ABILITY_POPUP_HEIGHT ; tiles underneath the box
+wAbilityPopupTopRow:: db ; first row the box covers
+wAbilityPopupRestX:: db ; x position of the box at rest
+wAbilityPopupThird:: db ; hBGMapThird holding those rows
+wAbilityPopupBoxX:: db ; current x position, signed
+wAbilityPopupSlideTbl:: dw ; slide table for the current phase
+
 
 SECTION UNION "Miscellaneous", WRAM0
 
