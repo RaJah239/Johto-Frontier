@@ -23,6 +23,7 @@ endc
 	ld d, 0
 	ld hl, BTTrainerClassGenders
 	add hl, de
+	call Random
 	ld a, [hl]
 	and a
 	jr nz, .female
