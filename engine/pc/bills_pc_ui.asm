@@ -3338,7 +3338,15 @@ BillsPC_RestoreUI:
 	call ClearSprites
 	newfarcall ClearSpriteAnims
 
-	; This needs to be done in case a frontpic anim overwrote data here.
+	; Load the UI first, then the icons: BillsPC_LoadUI starts
+	; with ClearVBank1, which wipes every tile in VRAM bank 1 -
+	; icon tiles included - so loading them before would leave the
+	; icon area blank or holding leftovers (e.g. the stats
+	; screen's frontpic anim). This matches the order UseBillsPC
+	; uses at startup, and runs after GetSGBLayout so the per-mon
+	; icon palettes still hold when they are written.
+	call BillsPC_LoadUI
+
 	ld a, 1
 	ldh [rVBK], a
 
@@ -3347,8 +3355,6 @@ BillsPC_RestoreUI:
 
 	xor a
 	ldh [rVBK], a
-
-	call BillsPC_LoadUI
 
 	; Fixes cursor palettes.
 	ld a, [wBillsPC_CursorMode]
