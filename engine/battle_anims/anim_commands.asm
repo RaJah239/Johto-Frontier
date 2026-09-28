@@ -446,7 +446,8 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Loop
 	dw BattleAnimCmd_Call
 	dw BattleAnimCmd_Ret
-	assert_table_length 243 - FIRST_BATTLE_ANIM_CMD
+	dw BattleAnimCmd_IfDoubleSpeed
+	assert_table_length 244 - FIRST_BATTLE_ANIM_CMD
 
 BattleAnimCmd_Ret:
 	ld hl, wBattleAnimFlags
@@ -579,6 +580,35 @@ BattleAnimCmd_IfParamEqual:
 	ld hl, wBattleAnimParam
 	cp [hl]
 	jr z, .jump
+
+	ld hl, wBattleAnimAddress
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	inc de
+	inc de
+	ld [hl], d
+	dec hl
+	ld [hl], e
+	ret
+
+.jump
+	call GetBattleAnimByte
+	ld e, a
+	call GetBattleAnimByte
+	ld d, a
+	ld hl, wBattleAnimAddress
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ret
+
+BattleAnimCmd_IfDoubleSpeed:
+; Jump to the address in the script if "Battle Speed" is set to
+; Double (DOUBLE_BATTLE_SPEED_F); otherwise skip the address and
+; fall through to the next command.
+	call CheckIfDoubleBattleSpeed
+	jr nz, .jump
 
 	ld hl, wBattleAnimAddress
 	ld e, [hl]
