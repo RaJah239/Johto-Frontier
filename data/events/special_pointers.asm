@@ -153,6 +153,7 @@ SpecialsPointers::
 	add_special LoadPokemonData
 	add_special OverridePlayerParty
 	add_special ClearDungeonBag
+	add_special PartyKeeperShowTeam
 
 if DEF(_DEBUG)
 	add_special FillPokedex

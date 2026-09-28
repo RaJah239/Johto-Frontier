@@ -404,6 +404,11 @@ PrintDiploma:
 	call ExitAllMenus
 	ret
 
+PartyKeeperShowTeam:
+; open the party menu to look over team
+; returns once they back out of the menu
+	farjp StartMenu_Pokemon
+
 TrainerHouse:
 	ld a, BANK(sMysteryGiftTrainerHouseFlag)
 	call OpenSRAM
