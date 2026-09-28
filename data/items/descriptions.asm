@@ -532,10 +532,6 @@ MareepCallDesc:
 	db   "Calls a MAREEP"
 	next "to light the way.@"
 
-AmbrosiaDesc:
-	db   "Fully heals the"
-	next "entire party.@"
-
 ClearBellDesc:
 	db   "Makes a gentle"
 	next "ringing.@"
@@ -867,9 +863,10 @@ TrickStickDesc:
 	db   "Gives priority to"
 	next "Trick Room.@"
 
+AmbrosiaDesc:
 SacredAshDesc:
 	db   "Fully heals all"
-	next "player's #MON.@"
+	next "player's #mon.@"
 
 HeavyBallDesc:
 	db   "A BALL for catch-"
