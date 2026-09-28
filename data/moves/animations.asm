@@ -1016,6 +1016,7 @@ BattleAnim_LeechSeed:
 	anim_ret
 
 BattleAnim_SeedBomb:
+	anim_if_double_speed .double_speed
 	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
 	anim_2gfx BATTLE_ANIM_GFX_PLANT, BATTLE_ANIM_GFX_EXPLOSION
 	anim_sound 16, 2, SFX_VINE_WHIP
@@ -1050,6 +1051,9 @@ BattleAnim_SeedBomb:
 	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 136, 62, $0
 	anim_wait 24
 	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_RED
+	anim_ret
+
+.double_speed
 	anim_ret
 
 BattleAnim_MeteorMash:

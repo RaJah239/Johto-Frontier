@@ -233,3 +233,9 @@ ENDM
 MACRO anim_ret
 	db anim_ret_command
 ENDM
+
+	const anim_if_double_speed_command ; $f3
+MACRO anim_if_double_speed
+	db anim_if_double_speed_command
+	dw \1 ; address
+ENDM
