@@ -5,7 +5,7 @@ MACRO item_attribute
 	dn \6, \7
 ENDM
 
-ItemAttributes:
+ItemAttributes::
 ; entries correspond to item ids (see constants/item_constants.asm)
 	table_width ITEMATTR_STRUCT_LENGTH, ItemAttributes
 ; MASTER_BALL

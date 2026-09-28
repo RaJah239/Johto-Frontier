@@ -397,9 +397,13 @@ CherrygrovePartyKeeperScript:
 	sjump .ReviewTeam
 
 .KeepTeam:
+	callasm EquipPartyKeeperTeamItems
 	jumpthisopenedtext
 		text "Very well. Those"
 		line "six are all yours."
+
+		para "I also gave each"
+		line "something to hold!"
 
 		para "Come back any time"
 		line "to get your old"
@@ -537,6 +541,43 @@ DEF PARTY_KEEPER_SPECIES_COUNT EQU PartyKeeperSpeciesListEnd - PartyKeeperSpecie
 if PARTY_KEEPER_SPECIES_COUNT < 1
 	fail "PartyKeeperSpeciesList has no species in it"
 endc
+
+; =========================================================================
+; Party Keeper berry pool
+; -------------------------------------------------------------------------
+; EDIT THIS LIST to change which berries can be tucked into a new
+; team member's hands: one item constant per line, and no terminator
+; is needed - the count is just the distance between the labels.
+; The battle half of the gift has no list of its own: it takes
+; anything whose attributes put it in the Battle pocket.
+; =========================================================================
+PartyKeeperBerryList:
+	db SILVER_BERRY
+	db GOLD_BERRY
+	db MIRACLEBERRY
+PartyKeeperBerryListEnd:
+
+DEF PARTY_KEEPER_BERRY_COUNT EQU PartyKeeperBerryListEnd - PartyKeeperBerryList
+
+if PARTY_KEEPER_BERRY_COUNT < 1
+	fail "PartyKeeperBerryList has no berries in it"
+endc
+
+; =========================================================================
+; Party Keeper item ban list
+; -------------------------------------------------------------------------
+; EDIT THIS LIST to keep items out of the battle half of the gift:
+; one item constant per line, no terminator needed - the count is
+; the distance between the labels. An empty list is fine: it just
+; means nothing is banned. The berry half is a whitelist of its
+; own, so this list only ever filters the battle walk.
+; =========================================================================
+PartyKeeperBanList:
+	db AMULET_COIN
+	db DRAGON_SCALE
+PartyKeeperBanListEnd:
+
+DEF PARTY_KEEPER_BAN_COUNT EQU PartyKeeperBanListEnd - PartyKeeperBanList
 
 ; =========================================================================
 ; Party Keeper routines, called from the script with `callasm`.
@@ -809,3 +850,215 @@ AddPartyKeeperMon:
 	ld hl, wPokedexSeen
 	ld b, RESET_FLAG
 	predef_jump SmallFarFlagAction
+
+PickPartyKeeperHeldItem:
+; -> a: a random held item from the keeper's gift pool, chosen by
+; the carry flag coming in: carry set draws one of the berries
+; named in PartyKeeperBerryList, carry clear walks the
+; Battle-pocket entries in ItemAttributes. The berry side draws
+; only from its own short list, so no other Fruit-pocket berry
+; can turn up; the battle side keeps walking the table and picks
+; up new Battle-pocket items on its own, skipping anything named
+; in PartyKeeperBanList. The pocket byte is read straight out of
+; ItemAttributes with GetFarByte, one entry at a time, so this
+; runs from any bank the same way GetItemAttr does from its own.
+; NO_ITEM only comes back if the Battle pocket has run dry, which
+; the shipped data cannot do. EquipPartyKeeperTeamItems hands out
+; the flag per slot.
+	jr c, .berry
+
+	; 1. battle half: count the BATTLE entries that are not
+	;    banned -> c
+	ld e, BATTLE
+	ld hl, ItemAttributes + ITEMATTR_POCKET
+	ld a, BANK(ItemAttributes)
+	ld d, a ; the table's bank
+	ld b, NUM_ITEMS
+	ld c, 0
+.count
+	ld a, NUM_ITEMS
+	sub b
+	inc a ; the item id under the cursor
+	push hl
+	call .IsBanned
+	pop hl ; pop does not touch the flags set above
+	jr c, .countNext
+	ld a, d
+	call GetFarByte
+	and $f
+	cp e
+	jr nz, .countNext
+	inc c
+.countNext
+	push de
+	ld de, ITEMATTR_STRUCT_LENGTH
+	add hl, de
+	pop de
+	dec b
+	jr nz, .count
+
+	; 2. land uniformly on one of the c matches
+	ld a, c
+	and a
+	jr z, .none
+	push de
+	call RandomRange ; a -> [0, c)
+	pop de
+	ld b, a ; matches left to step over
+
+	; 3. walk the table again, skipping banned entries the same
+	;    way the count pass did, and stop on the chosen match
+	ld hl, ItemAttributes + ITEMATTR_POCKET
+	ld a, BANK(ItemAttributes)
+	ld d, a
+	ld c, 1 ; item id under the cursor
+.walk
+	ld a, c
+	push hl
+	call .IsBanned
+	pop hl ; pop does not touch the flags set above
+	jr c, .walkNext
+	ld a, d
+	call GetFarByte
+	and $f
+	cp e
+	jr nz, .walkNext
+	ld a, b
+	and a
+	jr z, .found
+	dec b
+.walkNext
+	push de
+	ld de, ITEMATTR_STRUCT_LENGTH
+	add hl, de
+	pop de
+	inc c
+	jr .walk
+.found
+	ld a, c
+	ret
+
+.none
+	ld a, NO_ITEM
+	ret
+
+.berry
+	; uniform pick from the keeper's berry list; no terminator byte
+	; is needed because the count is the distance between the labels
+	ld a, PARTY_KEEPER_BERRY_COUNT
+	call RandomRange
+	ld hl, PartyKeeperBerryList
+	and a
+	jr z, .berryFound
+.berryWalk
+	inc hl
+	dec a
+	jr nz, .berryWalk
+.berryFound
+	ld a, [hl]
+	ret
+
+.IsBanned:
+; carry set if the item id in a is named in PartyKeeperBanList.
+; Clobbers a and hl (the caller pushes its table cursor around the
+; call); bc and de come back untouched, and carry is the result.
+	push bc
+	ld c, a ; the item id under test
+	ld hl, PartyKeeperBanList
+	ld b, PARTY_KEEPER_BAN_COUNT
+.banScan
+	ld a, b
+	and a
+	jr z, .notBanned ; the list ran out
+	ld a, [hl]
+	cp c
+	jr z, .banned
+	inc hl
+	dec b
+	jr .banScan
+.banned
+	scf
+	jr .banRet
+.notBanned
+	and a ; clear carry
+.banRet
+	pop bc ; pop does not touch the flags
+	ret
+
+EquipPartyKeeperTeamItems:
+; Give each of the six members of the fresh team a held item of its
+; own, all six different from each other: the first slot always
+; gets a berry from PartyKeeperBerryList and the remaining five
+; always get Battle-pocket items (anything not on
+; PartyKeeperBanList), re-rolled whenever an earlier slot already
+; holds the same one. This runs at final keep only: the keeper
+; reaches this point after
+; DepositPartyForRandomTeam/RerollPartyKeeperTeam has refilled the
+; party to PARTY_LENGTH, so all six slots are present. The item is
+; written straight into MON_ITEM rather than routed through the
+; bag, so no pocket-full case exists, and the stash still carries
+; the old team's own held items across untouched.
+	ld b, PARTY_LENGTH
+	ld hl, wPartyMons + MON_ITEM
+.slot
+	push bc
+	push hl
+; b counts down from PARTY_LENGTH, so the first slot is the one
+; still at PARTY_LENGTH: berry for it, battle item for the rest
+	ld a, b
+	cp PARTY_LENGTH
+	ccf ; carry in = berry half
+	call PickPartyKeeperHeldItem
+	pop hl
+	ld [hl], a ; equip it
+
+; no two members may hold the same item: walk the slots filled so
+; far (from the top of the party up to this one) and re-roll on a
+; hit. The first slot has nothing before it, so its berry never
+; comes back here - and berries live in a different pocket from
+; the battle items, so it cannot collide with them either.
+	ld b, a ; the item under test
+	ld d, h
+	ld e, l ; de = this slot, the end of the walk
+	ld hl, wPartyMons + MON_ITEM
+.dupeCheck
+	ld a, h
+	cp d
+	jr nz, .scanSlot
+	ld a, l
+	cp e
+	jr z, .slotDone ; every earlier slot passed
+.scanSlot
+	ld a, [hl]
+	cp b
+	jr z, .repick ; an earlier slot already holds it
+	push de
+	ld de, PARTYMON_STRUCT_LENGTH
+	add hl, de
+	pop de
+	jr .dupeCheck
+
+.repick
+; the battle side again; the first slot cannot reach this, and
+; the battle pool holds far more entries than the five draws
+; need, so this terminates
+	push de
+	push bc
+	and a ; carry clear = battle half
+	call PickPartyKeeperHeldItem
+	pop bc
+	pop de
+	ld h, d
+	ld l, e ; back to this slot
+	ld [hl], a ; replace it
+	ld b, a
+	ld hl, wPartyMons + MON_ITEM
+	jr .dupeCheck
+
+.slotDone
+	ld de, PARTYMON_STRUCT_LENGTH
+	add hl, de ; the next slot's item byte
+	pop bc
+	dec b
+	jr nz, .slot
+	ret
