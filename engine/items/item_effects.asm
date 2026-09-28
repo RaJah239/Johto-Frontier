@@ -3151,6 +3151,10 @@ PocketPCEffect:
 	farjp PocketPCFunction
 
 AmbrosiaEffect:
+    ld a, [wEnvironment]
+    cp INDOOR 
+    jr z, .NotIndoors
+
 ; Heals the whole party
 ; gets the player out of every menu
 ; and back to the overworld
@@ -3159,6 +3163,20 @@ AmbrosiaEffect:
 	ld a, 1
 	ld [wItemEffectSucceeded], a
 	ret
+
+.NotIndoors:
+	ld hl, .NotIndoorsScript
+	jmp CallScript
+
+
+.NotIndoorsScript
+    opentext
+    writetext NoIndoorsText
+    waitendtext
+
+NoIndoorsText:
+    text_far _AmbrosiaNotIndoorsText
+    text_end
 
 AmbrosiaScript:
 	special HealParty

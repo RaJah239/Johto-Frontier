@@ -986,6 +986,11 @@ _PokecenterPCTurnOnText::
 	line "the PC."
 	prompt
 
+_AmbrosiaNotIndoorsText::
+	text "This item doesn't"
+	line "work indoors…"
+	done
+
 _PocketPCNoSignalText::
 	text "Bzzzzt!"
 
