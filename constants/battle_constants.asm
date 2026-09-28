@@ -105,6 +105,19 @@ DEF SPDSPCDV_SHINY EQU $FF
 	const BATTLETYPE_INVERSE
 	const BATTLETYPE_TYPELESS
 
+; ability popup (ShowAbilityPopup in engine/battle/misc.asm)
+DEF ABILITY_POPUP_WIDTH EQU 12 ; box width in tiles, borders included
+DEF ABILITY_POPUP_HEIGHT EQU 4 ; box height in tiles, 2 of them text
+DEF ABILITY_POPUP_TEXT_LENGTH EQU 15 ; chars that fit on a line
+DEF ABILITY_POPUP_SLIDE_FRAMES EQU 10
+DEF ABILITY_POPUP_HOLD_FRAMES EQU 60 ; how many frames to have the box appear
+DEF ABILITY_POPUP_OAM_SPRITES EQU 12 ; both party ball strips
+DEF ABILITY_POPUP_OAM_BYTES EQU 48
+
+	const_def
+	const ABILITY_POPUP_PLAYER
+	const ABILITY_POPUP_ENEMY
+
 ; BattleVarPairs indexes (see home/battle_vars.asm)
 	const_def
 	const BATTLE_VARS_SUBSTATUS1

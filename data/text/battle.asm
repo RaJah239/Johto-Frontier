@@ -1033,12 +1033,6 @@ ReflectBarrierText:
 	line "Defense rose!"
 	prompt
 
-IntimidateText:
-	text "<USER>'s"
-	line "Intimidate"
-	cont "activated!"
-	prompt
-
 DisarmText:
 	text "<USER>'s"
 	line "Disarm"
@@ -1378,14 +1372,6 @@ HydrationText:
 	text "<USER>'s"
 	line "Hydration made"
 	cont "itself healthy!"
-	prompt
-
-BattleText_DrizzleText:
-	text "<USER>'s"
-	line "Drizzle activated!"
-	
-	para "A downpour"
-	line "started!"
 	prompt
 
 BattleText_DroughtText:
