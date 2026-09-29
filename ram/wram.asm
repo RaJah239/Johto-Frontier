@@ -3104,7 +3104,9 @@ wPokegearFlags::
 wRadioTuningKnob:: db
 wLastDexMode:: db
 wCurPokedexColor:: db ; current dex color
+wRegisteredItemSlot1::
 wWhichRegisteredItem:: db
+wRegisteredItemSlot2::
 wRegisteredItem:: db
 
 wPlayerState:: db
@@ -3132,7 +3134,9 @@ wNoRematch:: db
 
 wNomadSigil:: db
 
-	ds 8
+wRegisteredItemSlot3:: db
+wRegisteredItemSlot4:: db
+	ds 6
 
 ; map scene ids
 wPokecenter2FSceneID::                            db
