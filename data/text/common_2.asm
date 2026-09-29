@@ -1338,11 +1338,11 @@ _PokemonNotEnoughHPText::
 	prompt
 
 _MayRegisterItemText::
-	text "An item in your"
-	line "Bag may be"
+	text "Up to four items"
+	line "in your Bag may be"
 
 	para "registered for use"
-	line "on SELECT Button."
+	line "on Select Button."
 	done
 
 _OakText1::

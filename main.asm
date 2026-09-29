@@ -465,6 +465,10 @@ SECTION "Battle Tower Trainer Data", ROMX
 INCLUDE "data/battle_tower/unknown.asm"
 
 
+SECTION "Multiple Item Registering", ROMX
+INCLUDE "engine/overworld/multi_select_menu.asm"
+
+
 SECTION "Crystal Events", ROMX
 INCLUDE "engine/events/battle_tower/load_trainer.asm"
 INCLUDE "engine/events/odd_egg.asm"

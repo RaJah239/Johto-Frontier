@@ -505,7 +505,7 @@ PlayerDepositItemMenu:
 	and a
 	jr z, .close
 	call .TryDepositItem
-	farcall CheckRegisteredItem
+	farcall ValidateRegisteredItems
 	jr .loop
 
 .close
