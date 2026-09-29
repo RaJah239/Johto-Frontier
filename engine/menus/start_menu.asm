@@ -734,10 +734,13 @@ Fast_Travel_LocationMenu:
 	ldh [hBGMapMode], a
 	call InitScrollingMenu
 	call UpdateSprites
+.input_loop
 	call ScrollingMenu
 	ld a, [wMenuJoypad]
 	cp B_BUTTON
 	jr z, .cancel
+	cp A_BUTTON
+	jr nz, .input_loop ; D_LEFT/D_RIGHT handed back by the menu: keep browsing
 	ld a, [wMenuSelection]
 	cp -1
 	jr nz, .done
@@ -758,7 +761,11 @@ Fast_Travel_LocationMenu:
 	db 0
 
 .MenuData:
-	db SCROLLINGMENU_DISPLAY_ARROWS ; flags
+	; ENABLE_LEFT | ENABLE_RIGHT are the pair ScrollingMenu_CanWrap
+	; requires for the list to loop (plus ENABLE_FUNCTION3, whose bit
+	; doubles as STATICMENU_WRAP). They also hand D_LEFT/D_RIGHT back to
+	; the caller, which the input loop above ignores.
+	db SCROLLINGMENU_DISPLAY_ARROWS | SCROLLINGMENU_ENABLE_LEFT | SCROLLINGMENU_ENABLE_RIGHT | SCROLLINGMENU_ENABLE_FUNCTION3 ; flags
 	; if "columns" is > 0, a second menu function is expected,
 	; and the game will crash if it does not exist!
 	db 5, 0 ; rows, columns
@@ -766,7 +773,7 @@ Fast_Travel_LocationMenu:
 	dba .Maps
 	dba .PrintMapNames
 	dba NULL
-	dba NULL
+	dba .NoOp ; function 3 runs on every redraw; keep it harmless
 
 .Maps:
 	db NUM_FAST_TRAVEL_WARP_MAPS
@@ -781,6 +788,7 @@ endr
 	call Fast_Travel_GetName
 	pop hl
 	call FarPlaceString
+.NoOp:
 	ret
 
 Fast_Travel_GetName:
