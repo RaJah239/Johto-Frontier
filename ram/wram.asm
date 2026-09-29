@@ -3193,7 +3193,13 @@ wOlivineGym::                                     db
 wCianwoodGym::                                    db
 wMahoganyGym::                                    db
 
-	ds 174
+	ds 156
+wScore:: ds 3
+wScoreCardPage:: db
+wScoreCardDelay:: db
+wScoreValue:: ds 3
+wScoreDigits:: ds 7
+wScorePlace:: ds 3
 
 ; battle tower points
 wBattleTowerNormalPoints:: db

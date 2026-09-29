@@ -124,6 +124,7 @@ CianwoodGymChuckScript:
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_CHUCK
+	callasm ScoreAddOne
 	opentext
 	writethistext
 		text "<PLAYER> received"

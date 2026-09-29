@@ -20,10 +20,12 @@ NewBarkTown_MapEvents:
 	def_object_events
 	object_event  6,  8, SPRITE_TEACHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, NewBarkTownTeacherScript, -1
 	object_event 13,  9, SPRITE_UNKNOWN, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CheatingScript, EVENT_NEWBARK_CHEATER_KUN_EXITS
+	object_event 17,  9, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, NewBarkTownFisherScript, -1
 
 	object_const_def
 	const NEWBARKTOWN_TEACHER
 	const NEWBARKTOWN_CHEAT_NPC
+	const NEWBARKTOWN_FISHER
 
 NewBarkTown_MapScripts:
 	def_scene_scripts
@@ -246,3 +248,50 @@ NewBarkTownElmsLabSign:
 NewBarkTownElmsHouseSign:
 	text "Elm's House"
 	done
+
+NewBarkTownFisherScript:
+	faceplayeropentext
+	writethistext
+		text "I'm the score"
+		line "keeper here."
+
+		para "Want me to adjust"
+		line "your score?"
+		done
+	promptbutton
+	loadmenu .MenuHeader
+	verticalmenu
+	closewindow
+	ifequal 1, .Raise
+	ifequal 2, .Lower
+	jumpthisopenedtext
+		text "Come back if you"
+		line "change your mind!"
+		done
+
+.Raise:
+	callasm ScoreAddOne
+	jumpthisopenedtext
+		text "Your score went"
+		line "up by one!"
+		done
+
+.Lower:
+	callasm ScoreSubOne
+	jumpthisopenedtext
+		text "Your score went"
+		line "down by one!"
+		done
+
+.MenuHeader:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 0, 0, SCREEN_WIDTH - 1, 8
+	dw .MenuData
+	db 1 ; default option
+
+.MenuData:
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
+	db 3 ; items
+	db "Raise@"
+	db "Lower@"
+	db "Cancel@"

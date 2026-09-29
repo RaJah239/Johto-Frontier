@@ -601,3 +601,6 @@ INCLUDE "data/events/streaks.asm"
 
 SECTION "Unused Book Like Function", ROMX
 INCLUDE "data/unused_book_like_function.asm"
+
+SECTION "Score Card", ROMX
+INCLUDE "engine/items/score_card.asm"

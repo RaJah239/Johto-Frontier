@@ -87,6 +87,7 @@ VioletGymFalknerScript:
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_FALKNER
+	callasm ScoreAddOne
 	opentext
 	writethistext
 		text "<PLAYER> received"

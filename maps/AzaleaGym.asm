@@ -107,6 +107,7 @@ AzaleaGymBugsyScript:
 	reloadmapafterbattle
 	special RestoreMusic
 	setevent EVENT_BEAT_BUGSY
+	callasm ScoreAddOne
 	setevent EVENT_BEAT_BUG_CATCHER_AL
 	setevent EVENT_BEAT_BUG_CATCHER_JOSH
 	opentext

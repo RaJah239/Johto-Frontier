@@ -79,6 +79,7 @@ BlackthornGymClairScript:
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_CLAIR
+	callasm ScoreAddOne
 	setevent EVENT_UNLOCK_STAT_SCREEN_EFFORT_VALUES
 	opentext
 	writethistext
