@@ -186,7 +186,7 @@ ItemDescriptions:
  	dw CatchCharmDesc
 	dw MembersCardDesc
 	dw NomadSigilDesc
-	dw TeruSama26Desc
+	dw ScoreCardDesc
 	dw TeruSama26Desc
 	dw TeruSama26Desc
 	dw TeruSama27Desc
@@ -1011,6 +1011,9 @@ MembersCardDesc:
 NomadSigilDesc:
 	db   "Grants freedom to"
 	next "roam.@"
+
+ScoreCardDesc:
+	db   "Shows your score.@"
 
 TeruSama26Desc:
 TeruSama27Desc:

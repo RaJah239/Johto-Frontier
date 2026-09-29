@@ -110,6 +110,7 @@ MahoganyGymPryceScript:
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_PRYCE
+	callasm ScoreAddOne
 	setevent EVENT_BEAT_SKIER_ROXANNE
 	setevent EVENT_BEAT_BOARDER_RONALD
 	opentext

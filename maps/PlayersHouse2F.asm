@@ -94,6 +94,7 @@ if DEF(_DEBUG)
 	giveitem POCKET_PC
 	giveitem MEMBERS_CARD
 	giveitem TYPE_CHART
+	giveitem SCORE_CARD
 	giveitem BICYCLE
 	clearflag ENGINE_BIKE_SHOP_CALL_ENABLED
 	setevent EVENT_GOT_BICYCLE

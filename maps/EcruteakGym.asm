@@ -137,6 +137,7 @@ EcruteakGymMortyScript:
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_MORTY
+	callasm ScoreAddOne
 	setevent EVENT_BEAT_MEDIUM_GRACE
 	opentext
 	writethistext

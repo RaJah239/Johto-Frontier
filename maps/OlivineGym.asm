@@ -92,6 +92,7 @@ OlivineGymJasmineScript:
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_JASMINE
+	callasm ScoreAddOne
 	opentext
 	writethistext
 		text "<PLAYER> received"

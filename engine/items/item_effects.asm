@@ -199,7 +199,7 @@ ItemEffects:
 	dw NoEffect            ; CATCH_CHARM
 	dw MembersCardEffect   ; MEMBERS_CARD
 	dw NomadSigilEffect    ; NOMAD_SIGIL
-	dw NoEffect            ; ITEM_E0
+	dw ScoreCardEffect     ; SCORE_CARD
 	dw NoEffect            ; ITEM_E1
 	dw NoEffect            ; ITEM_E2
 	dw NoEffect            ; ITEM_E3
@@ -3118,6 +3118,20 @@ MembersCardEffect:
 	farcall LoadOW_BGPal7
 	call FadePalettes
 	farcall MembersStreakCard
+	call Call_ExitMenu
+	xor a
+	ldh [hBGMapMode], a
+	farcall Pack_InitGFX
+	farcall WaitBGMap_DrawPackGFX
+	farjp Pack_InitColors
+
+ScoreCardEffect:
+	farcall LoadFontsBattleExtra
+	call FadeToMenu
+	farcall BlankScreen
+	farcall LoadOW_BGPal7
+	call FadePalettes
+	farcall _ScoreCard
 	call Call_ExitMenu
 	xor a
 	ldh [hBGMapMode], a
