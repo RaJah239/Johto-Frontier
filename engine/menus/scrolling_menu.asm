@@ -208,7 +208,9 @@ ScrollingMenu_CanWrap:
 ; ScrollingMenuJoyAction hand D_LEFT/D_RIGHT back to the caller (the bag
 ; uses it to switch pockets). Other scrolling menus either leave
 ; STATICMENU_WRAP clear or reuse that bit as SCROLLINGMENU_ENABLE_FUNCTION3,
-; so requiring all three keeps the loop to the bag's pocket menus.
+; so requiring all three keeps the loop to menus that declare the pair on
+; purpose: the bag's pocket menus (switch pockets) and the fast travel
+; warp menu (whose input loop ignores the returned D_LEFT/D_RIGHT).
 	ld a, [wScrollingMenuListSize]
 	and a
 	jr z, .no ; nothing to loop over
