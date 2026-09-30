@@ -2366,7 +2366,20 @@ GetFailureResultText:
 	ld a, [wTypeModifier]
 	and EFFECTIVENESS_MASK
 	jr z, .got_text
+
+; A target that is protected, underground or flying did not dodge;
+; it simply was not there to hit, so skip the dodge animation.
+	ld a, BATTLE_VARS_SUBSTATUS1_OPP
+	call GetBattleVar
+	bit SUBSTATUS_PROTECT, a
+	jr nz, .no_dodge_anim
+	ld a, BATTLE_VARS_SUBSTATUS3_OPP
+	call GetBattleVar
+	and 1 << SUBSTATUS_UNDERGROUND | 1 << SUBSTATUS_FLYING
+	jr nz, .no_dodge_anim
 	farcall BattleDodgeAnimation
+
+.no_dodge_anim
 	ld hl, AttackMissedText
 	ld de, AttackMissed2Text
 	ld a, [wCriticalHit]
