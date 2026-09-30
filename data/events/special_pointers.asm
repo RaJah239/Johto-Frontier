@@ -141,7 +141,7 @@ SpecialsPointers::
 	add_special RestoreMusic
 	add_special DeleteSavedMusic
 	add_special MoveRelearner
-	add_special CrystalsTMTrader
+	add_special BattlePlazaTMCoinTrader
 	add_special CianwoodPhotograph
 	add_special EggMaster
 	add_special PlayerGivesAwayAnEggForAdoption

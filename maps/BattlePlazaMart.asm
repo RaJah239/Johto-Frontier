@@ -28,16 +28,16 @@ BattlePlazaMartPorygonPCScript:
 
 BattlePlazaMartTMCoinTraderScript:
     faceplayeropentext
-    special CrystalCountInBag
+    special DisplayCoinCaseBalance
     checkevent EVENT_BATTLE_PLAZA_TM_MART_INTRO
     iftrue .WantToBuyATM
     writethistext
         text "Greetings, welcome"
         line "to the TM counter."
 
-        para "You can purchase"
-        line "any TM here for"
-        cont "10 Crystals."
+        para "Every TM has its"
+        line "own price, paid"
+        cont "in coins."
 
         para "Are you in need of"
         line "anything?"
@@ -46,16 +46,18 @@ BattlePlazaMartTMCoinTraderScript:
     sjump .WantToBuyATMAfterIntro
 .WantToBuyATM:
     writethistext
-        text "Welcome! Buy a TM"
-        line "for 10 Crystals?"
+        text "Welcome! Care to"
+        line "buy a TM? Each is"
+        cont "priced in coins."
         done
 .WantToBuyATMAfterIntro:
     yesorno
     iffalse .Refused
-    checkitem CRYSTAL, 10
-    ifequal HAVE_LESS, .NotEnoughCrystals
+    callasm .ResetTMCursor
 .WantToBuyADifferentTM:
-    special CrystalsTMTrader
+    special BattlePlazaTMCoinTrader
+    ifequal 51, .NotEnoughCoins
+    ifequal 52, .NoRoom
     ifequal 1,  .TMMeteorMash
     ifequal 2,  .TMHeadbutt
     ifequal 3,  .TMCurse
@@ -367,11 +369,9 @@ BattlePlazaMartTMCoinTraderScript:
     ; fallthrough
 
 .ConcludeTransaction:
-    special CrystalCountInBag
-    takeitem CRYSTAL, 10
     waitsfx
     playsound SFX_TRANSACTION
-    special CrystalCountInBag
+    special DisplayCoinCaseBalance
     waitbutton
     sjump .WantToBuyADifferentTM
 
@@ -380,16 +380,27 @@ BattlePlazaMartTMCoinTraderScript:
         text "We are open 24/7."
         done
 
-.NotEnoughCrystals:
-    jumpthisopenedtext
+.NotEnoughCoins:
+    writethistext
         text "You don't have"
-        line "10 Crystals…"
+        line "enough coins…"
         done
+    waitbutton
+    sjump .WantToBuyADifferentTM
 
 .CancelBuyingTMsScript:
     jumpthisopenedtext
         text "Please come again!"
         done
+
+; A fresh conversation starts on TM1; the loop-backs jump over the
+; yesorno above, so the menu keeps its cursor across transactions.
+.ResetTMCursor:
+    xor a
+    ld [wMenuScrollPosition], a
+    inc a
+    ld [wMenuCursorPosition], a
+    ret
 
 BattlePlazaMartTutorScript:
     faceplayeropentext
