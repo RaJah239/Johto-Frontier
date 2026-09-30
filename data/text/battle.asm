@@ -288,6 +288,10 @@ PerishCountText:
 	text "!"
 	prompt
 
+BattleText_Null:
+	text " "
+	done
+
 BattleText_TargetRecoveredWithItem:
 	text "<TARGET>"
 	line "recovered with"
