@@ -519,7 +519,8 @@ BattlePlazaMartTutorScript:
     jr nz, .display_needed_amount
 
     ld de, .ExitString
-    jmp PlaceString
+    call PlaceString
+    jr .show_move_info
 
 .display_needed_amount
     ld de, .CrystalText
@@ -527,7 +528,25 @@ BattlePlazaMartTutorScript:
     hlcoord 6, 1
     ld de, wMenuSelectionQuantity
     lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-    jmp PrintNum
+    call PrintNum
+
+.show_move_info
+; And the hovered move's own stats, in the same box below the list
+; that the TM counter uses, so both menus read alike.
+    ld a, [wMenuSelection]
+    cp -1 ; CANCEL
+    jr z, .clear_move_info
+    ld [wCurSpecies], a
+    farcall DrawMoveInfoBox
+    ret
+
+.clear_move_info
+; Nothing hovered: redraw the box empty so the last move's stats do
+; not linger once Cancel is highlighted.
+    hlcoord 0, 11
+    ld b, 5
+    ld c, SCREEN_WIDTH - 2
+    jmp Textbox
 
 .CrystalText:
     db "Cost×@"

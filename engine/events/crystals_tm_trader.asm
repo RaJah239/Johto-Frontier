@@ -174,22 +174,61 @@ endr
 	jmp PrintNum
 
 .TMInBagQuantity:
-; Show the hovered TM's stats in the description box below the list:
-; the bag TM/HM pocket's box and rows unchanged (see
-; TMHM_ShowTMMoveDescription), so it reads exactly like the pocket.
-; Also show, like the mart, how many copies of the TM are in the bag.
-; The list holds indexes (1-50), so map the selection to the real TM
-; item id first.
+; Show the hovered TM's stats in the description box below the list
+; through DrawMoveInfoBox, and, like the mart, how many copies of the
+; TM are in the bag. The list holds indexes (1-50), so map the
+; selection to the real TM item id first.
 	ld a, [wMenuSelection]
 	cp -1
-	jmp z, .cancel_row
+	jr z, .cancel_row
 	call GetTMs
 	ld a, [hl]
 	ld [wCurItem], a
 	farcall GetTMHMItemMove ; wTempTMHM <- this TM's move
 	ld a, [wTempTMHM]
 	ld [wCurSpecies], a
+	call DrawMoveInfoBox
 
+; How many copies of the hovered TM are in the bag.
+	ld a, [wCurItem]
+	sub TM01
+	ld c, a
+	ld b, 0
+	ld hl, wTMsHMs
+	add hl, bc
+	ld a, [hl]
+	cp MAX_ITEM_STACK + 1
+	jr c, .stacked_ok
+	ld a, MAX_ITEM_STACK
+.stacked_ok
+	ld [wMenuSelectionQuantity], a
+	farjp PlaceItemInBagQuantity
+
+.cancel_row
+; Nothing to count on Cancel: redraw the description box empty so the
+; last TM's stats do not linger, and keep the Bag box's frame open
+; instead of blanking the area white.
+	hlcoord 0, 11
+	ld b, 5
+	ld c, SCREEN_WIDTH - 2
+	call Textbox
+	hlcoord 0, 0
+	ld b, 1
+	ld c, 7
+	call Textbox
+	hlcoord 1, 1
+	ld de, .BagString
+	jmp PlaceString
+
+.BagString db "Bag@"
+
+DrawMoveInfoBox::
+; Draw the move info box below a scrolling menu for the move in
+; wCurSpecies: the bag TM/HM pocket's box and rows unchanged (see
+; TMHM_ShowTMMoveDescription), so it reads exactly like the pocket.
+; The Battle Plaza TM counter and the crystal Move Tutor both use it,
+; so the two menus' bottom boxes match.
+;
 ; The box's top border sits on row 11, closing over the list box's
 ; bottom border; its five interior rows run down to the screen edge,
 ; exactly the bag TM pocket's box.
@@ -330,39 +369,8 @@ endr
 ; the bottom border with no spare interior row left over.
 	hlcoord 1, 15
 	predef PrintMoveDescription
+	ret
 
-; How many copies of the hovered TM are in the bag.
-	ld a, [wCurItem]
-	sub TM01
-	ld c, a
-	ld b, 0
-	ld hl, wTMsHMs
-	add hl, bc
-	ld a, [hl]
-	cp MAX_ITEM_STACK + 1
-	jr c, .stacked_ok
-	ld a, MAX_ITEM_STACK
-.stacked_ok
-	ld [wMenuSelectionQuantity], a
-	farjp PlaceItemInBagQuantity
-
-.cancel_row
-; Nothing to count on Cancel: redraw the description box empty so the
-; last TM's stats do not linger, and keep the Bag box's frame open
-; instead of blanking the area white.
-	hlcoord 0, 11
-	ld b, 5
-	ld c, SCREEN_WIDTH - 2
-	call Textbox
-	hlcoord 0, 0
-	ld b, 1
-	ld c, 7
-	call Textbox
-	hlcoord 1, 1
-	ld de, .BagString
-	jmp PlaceString
-
-.BagString db "Bag@"
 .PowString db "Pow/@"
 .HitString db "Hit/@"
 .EffString db "Eff/@"
