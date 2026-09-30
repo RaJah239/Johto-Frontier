@@ -411,6 +411,18 @@ Jumptable_GiveTossQuit:
 	dw TossMenu
 	dw QuitItemSubmenu
 
+MenuHeader_SortItems:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 11, 7, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
+	dw .MenuData
+	db 1 ; default option
+
+.MenuData:
+	db STATICMENU_CURSOR | STATICMENU_WRAP | STATICMENU_NO_TOP_SPACING ; flags
+	db 2 ; items
+	db "Custom@"
+	db "Alpha@"
+
 UseItem:
 	farcall CheckItemMenu
 	ld a, [wItemAttributeValue]
@@ -1375,11 +1387,7 @@ Pack_InterpretJoypad:
 	ret
 
 .start
-	farcall SortItemsInBag
-	ld de, SFX_TALLY
-	call WaitPlaySFX
-	scf
-	ret
+	jr Pack_SortMenu
 
 .switching_item
 	ld a, [hl]
@@ -1400,6 +1408,37 @@ Pack_InterpretJoypad:
 .end_switch
 	xor a
 	ld [wSwitchItem], a
+	scf
+	ret
+
+Pack_SortMenu:
+; Ask how to sort the bag, then sort it. Always returns with carry set, as
+; Pack_InterpretJoypad expects; on B nothing is sorted.
+; VerticalMenu's CopyMenuData clobbers all of wMenuData (it's a union),
+; including the bag list pointer and item format that the sort reads
+; through ItemSwitch_GetNthItem. Save the scrolling menu's data pointer
+; and re-copy it afterwards, the same way ScrollingMenu does on entry.
+	ld a, [wMenuDataPointer]
+	ld c, a
+	ld a, [wMenuDataPointer + 1]
+	ld b, a
+	push bc
+	ld hl, MenuHeader_SortItems
+	call LoadMenuHeader
+	call VerticalMenu
+	call ExitMenu
+	pop bc
+	ld a, c
+	ld [wMenuDataPointer], a
+	ld a, b
+	ld [wMenuDataPointer + 1], a
+	call CopyMenuData
+	ret c ; B was pressed: don't sort anything
+	; VerticalMenu leaves the chosen row in wMenuCursorY, and
+	; GetSortingItemIndex reads it back to pick the sort order.
+	farcall SortItemsInBag
+	ld de, SFX_TALLY
+	call WaitPlaySFX
 	scf
 	ret
 

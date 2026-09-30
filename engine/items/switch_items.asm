@@ -309,7 +309,7 @@ SortItemsInBag:
 
 ; Item ID isn't "CANCEL", so we continue
 	dec a
-; Check if A is before or after C in the ItemNameOrder table
+; Check if A is before or after C in the active sort order table
 	cp c
 	jr nc, .sortingOK
 
@@ -339,8 +339,13 @@ SortItemsInBag:
 	ret 
 
 ; @param a: Item index
-; @return a: Index in name_order.asm
+; @return a: Index of the item in the active sort order table
 ; @clobbers hl
+;
+; The sort order comes from wMenuCursorY, which VerticalMenu leaves holding
+; the row the player just picked in the pack's sort menu:
+;   1: ItemNameOrder  - the hand-made "Custom" order
+;   2: ItemAlphaOrder - alphabetical by item name
 GetSortingItemIndex:
 	push bc
 	call ItemSwitch_GetNthItem
@@ -352,6 +357,10 @@ GetSortingItemIndex:
 	ld c, [hl]
 	ld b, 0
 	ld hl, ItemNameOrder
+	ld a, [wMenuCursorY]
+	dec a
+	jr z, .lookupLoop
+	ld hl, ItemAlphaOrder
 .lookupLoop
 	ld a, [hli]
 	cp a, c
