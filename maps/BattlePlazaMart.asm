@@ -461,10 +461,18 @@ BattlePlazaMartTutorScript:
     ld [wMenuScrollPosition], a
     ldh [hBGMapMode], a
     call InitScrollingMenu
+.input_loop
     call ScrollingMenu
+; Keep wMenuCursorPosition on the highlighted row: the menu reopens
+; from it, and the loop reenters whenever the menu hands back a key it
+; is not confirming with (D_LEFT/D_RIGHT, now that the list wraps).
+    ld a, [wMenuCursorY]
+    ld [wMenuCursorPosition], a
     ld a, [wMenuJoypad]
     cp B_BUTTON
     jr z, .cancel_selection
+    cp A_BUTTON
+    jr nz, .input_loop
     ld a, [wMenuSelection]
     cp -1 ; CANCEL
     jr z, .cancel_selection
@@ -499,7 +507,11 @@ BattlePlazaMartTutorScript:
     db 1
 
 .MovesMenuData:
-    db SCROLLINGMENU_DISPLAY_ARROWS | SCROLLINGMENU_ENABLE_FUNCTION3
+    ; ENABLE_LEFT | ENABLE_RIGHT are the pair ScrollingMenu_CanWrap
+    ; requires for the list to loop (plus ENABLE_FUNCTION3, whose bit
+    ; doubles as STATICMENU_WRAP). They also hand D_LEFT/D_RIGHT back
+    ; to the caller, which .LoadMovesMenu's input loop ignores.
+    db SCROLLINGMENU_DISPLAY_ARROWS | SCROLLINGMENU_ENABLE_LEFT | SCROLLINGMENU_ENABLE_RIGHT | SCROLLINGMENU_ENABLE_FUNCTION3 ; flags
     db 3 ; height
     db 1 ; width ("1" triggers Function 2 to run)
     db SCROLLINGMENU_ITEMS_QUANTITY ; item format
@@ -519,7 +531,8 @@ BattlePlazaMartTutorScript:
     jr nz, .display_needed_amount
 
     ld de, .ExitString
-    jmp PlaceString
+    call PlaceString
+    jr .show_move_info
 
 .display_needed_amount
     ld de, .CrystalText
@@ -527,13 +540,27 @@ BattlePlazaMartTutorScript:
     hlcoord 6, 1
     ld de, wMenuSelectionQuantity
     lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-    jmp PrintNum
+    call PrintNum
 
-.CrystalText:
-    db "Cost×@"
+.show_move_info
+; And the hovered move's own stats, in the same box below the list
+; that the TM counter uses, so both menus read alike.
+    ld a, [wMenuSelection]
+    cp -1 ; CANCEL
+    jr z, .clear_move_info
+    ld [wCurSpecies], a
+    farjp DrawMoveInfoBox
 
-.ExitString:
-    db "@"
+.clear_move_info
+; Nothing hovered: redraw the box empty so the last move's stats do
+; not linger once Cancel is highlighted.
+    hlcoord 0, 11
+    ld b, 5
+    ld c, SCREEN_WIDTH - 2
+    jmp Textbox
+
+.CrystalText: db "Cost×@"
+.ExitString: db "@"
 
 .DisplayAmountOkNotReally:
 ; this is usually for displaying something on the right
@@ -561,7 +588,6 @@ BattlePlazaMartTutorScript:
     ld l, a
     ld a, -1
     ld [hl], a
-.got_menu
     ret
 
 .GetAmountOfCrystals:
