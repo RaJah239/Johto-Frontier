@@ -311,21 +311,21 @@ DisplayAbility:
 ; place pokedex page 1
 	pop de
 	pop af
-	hlcoord 1, 10
+	hlcoord 1, 11
 	push af
 	call PlaceFarString
 
 ; clear area
 	push de
 	lb bc, 5, SCREEN_WIDTH - 1
-	hlcoord 1, 10
+	hlcoord 1, 11
 	call ClearBox
 	pop de
 
 ; place pokedex page 2
 	inc de
 	pop af
-	hlcoord 1, 10
+	hlcoord 1, 11
 	jmp PlaceFarString
 
 ; This must stay in this file
