@@ -27,6 +27,10 @@ HandleLevitate:
 	call IsInByteArray
     ret nc
 
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	jr nz, .skip_ability_banner
+
 ; ===========================================================================+
     ; ability popup box                                                      |
 	; slide the ability popup over the TARGET's HUD (the one with Levitate)  |
@@ -38,8 +42,15 @@ HandleLevitate:
 	ld b, BANK(AbilityPopup_LevitateText) ;                                  |
 	ld de, AbilityPopup_LevitateText ;                                       |
 	farcall ShowAbilityPopup ;                                               |
+	jr .finish_ability
 ; ===========================================================================+
 
+.skip_ability_banner
+	; add some delay so the text isn't instantly skipped
+	ld c, 30
+	call DelayFrames
+
+.finish_ability
 	ld hl, LevitateText
 	call StdBattleTextbox
 	jmp AttackedMissed

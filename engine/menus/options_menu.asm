@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 20
+DEF NUM_OPTIONS EQU 21
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -106,6 +106,7 @@ OptionsMenu_DrawLabels:
 	dw .FieldActions
 	dw .FasterBattles
 	dw .BattleSpeed
+	dw .AbilityBanners
 	dw .ExpShare
 	dw .MinimalDialogue
 	dw .TurboAButton
@@ -129,6 +130,7 @@ OptionsMenu_DrawLabels:
 .FieldActions:    db "Field Actions@"
 .FasterBattles:   db "Battles@"
 .BattleSpeed:     db "Battle Speed@"
+.AbilityBanners:  db "Ability Banners@"
 .ExpShare:        db "Exp.Share@"
 .MinimalDialogue: db "Dialogue/Text@"
 .TurboAButton:    db "Turbo A Button@"
@@ -177,6 +179,7 @@ GetOptionPointer:
 	dw Options_FieldActions
 	dw Options_FasterBattles
 	dw Options_BattleSpeed
+	dw Options_AbilityBanners
 	dw Options_ExpShare
 	dw Options_MinimalDialogue
 	dw Options_TurboAButton
@@ -901,6 +904,44 @@ Options_TurboAButton:
 .On:  db "On @"
 .Off: db "Off@"
 
+Options_AbilityBanners:
+ 	ld hl, wOptions4
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit ABILITY_BANNERS, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+
+.LeftPressed:
+	bit ABILITY_BANNERS, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+
+.NonePressed:
+	bit ABILITY_BANNERS, [hl]
+	jr nz, .ToggleOn
+
+.ToggleOff:
+	res ABILITY_BANNERS, [hl]
+	ld de, .Yes
+	jr .Display
+
+.ToggleOn:
+	set ABILITY_BANNERS, [hl]
+	ld de, .No
+
+.Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.Yes: db "Yes@"
+.No:  db "No @"
+
 Options_TurboBButton:
  	ld hl, wOptions3
  	ldh a, [hJoyPressed]
@@ -1262,6 +1303,7 @@ OptionsMenu_DrawDescription:
 	dw .DescFieldActions
 	dw .DescFasterBattles
 	dw .DescBattleSpeed
+	dw .DescAbilityBanners
 	dw .DescExpShare
 	dw .DescMinimalDialogue
 	dw .DescTurboAButton
@@ -1273,23 +1315,24 @@ OptionsMenu_DrawDescription:
 	dw .DescDone
 	assert_table_length NUM_OPTIONS
 
-.DescTextSpeed: db "Adjust your text<LF>speed.@"
-.DescBattleScene: db "Turn On or Off<LF>Battle Animations.@"
-.DescSound: db "Music/BGB Audio:<LF>Mono, Stereo, Off.@"
-.DescRunningShoes: db "Set default to<LF>walk or run.@"
-.DescAutoBicycle: db "Get on the Bicycle<LF>outdoors.@"
-.DescScaledExp: db "Normal, Scaled or<LF>Zero experience.@"
-.DescQuickNurse: db "#mon Center<LF>fast or slow heal.@"
-.DescRematchPrompt: db "Which comes first:<LF>'Yes' or 'No'.@"
-.DescFieldActions: db "Normal or Fast<LF>Field Actions.@"
-.DescFasterBattles: db "Reduce the text<LF>in battles.@"
-.DescBattleSpeed:   db "Play battles at<LF>Normal or Double.@"
-.DescExpShare: db "Share Experience<LF>with the party.@"
+.DescTextSpeed:       db "Adjust your text<LF>speed.@"
+.DescBattleScene:     db "Turn On or Off<LF>Battle Animations.@"
+.DescSound:           db "Music/BGB Audio:<LF>Mono, Stereo, Off.@"
+.DescRunningShoes:    db "Set default to<LF>walk or run.@"
+.DescAutoBicycle:     db "Get on the Bicycle<LF>outdoors.@"
+.DescScaledExp:       db "Normal, Scaled or<LF>Zero experience.@"
+.DescQuickNurse:      db "#mon Center<LF>fast or slow heal.@"
+.DescRematchPrompt:   db "Which comes first:<LF>'Yes' or 'No'.@"
+.DescFieldActions:    db "Normal or Fast<LF>Field Actions.@"
+.DescFasterBattles:   db "Reduce the text<LF>in battles.@"
+.DescBattleSpeed:     db "Play battles at<LF>Normal or Double.@"
+.DescAbilityBanners:  db "Display ability<LF>activation box.@"
+.DescExpShare:        db "Share Experience<LF>with the party.@"
 .DescMinimalDialogue: db "Reduce all NPC<LF>text or not.@"
-.DescTurboAButton: db "Hold 'A' briefly<LF>to rapid-fire 'A'.@"
-.DescTurboBButton: db "Hold 'B' to rapid-<LF>'B'.@"
-.DescQuickSave: db "Long press 'Start'<LF>to save the game.@"
-.DescFastBoot: db "Intro, Main Menu,<LF>or In Game.@"
-.DescHardMode: db "Choose your mode<LF>to play in.@"
-.DescFrame: db "Select your border<LF>of textboxes.@"
-.DescDone: db "Save and Exit<LF>@"
+.DescTurboAButton:    db "Hold 'A' briefly<LF>to rapid-fire 'A'.@"
+.DescTurboBButton:    db "Hold 'B' to rapid-<LF>'B'.@"
+.DescQuickSave:       db "Long press 'Start'<LF>to save the game.@"
+.DescFastBoot:        db "Intro, Main Menu,<LF>or In Game.@"
+.DescHardMode:        db "Choose your mode<LF>to play in.@"
+.DescFrame:           db "Select your border<LF>of textboxes.@"
+.DescDone:            db "Save and Exit<LF>@"

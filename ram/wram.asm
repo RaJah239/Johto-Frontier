@@ -1864,6 +1864,7 @@ wOptions3::
 	db
 
 wOptions4::
+; bit 0: ability banners
 	db
 
 	ds 1
