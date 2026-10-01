@@ -52,7 +52,7 @@ if DEF(_DEBUG)
 	loadmem wPartyMon1Moves+0, SEED_BOMB
 	loadmem wPartyMon1Moves+1, SPLASH
 	loadmem wPartyMon1Moves+2, LOVELY_KISS
-	loadmem wPartyMon1Moves+3, FLY
+	loadmem wPartyMon1Moves+3, THUNDER
 	closetext
 	; tms
 	giveitem TM_BRICK_BREAK, 50

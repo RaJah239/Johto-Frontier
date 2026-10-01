@@ -2367,8 +2367,8 @@ GetFailureResultText:
 	and EFFECTIVENESS_MASK
 	jr z, .got_text
 
-; A target that is protected, underground or flying did not dodge;
-; it simply was not there to hit, so skip the dodge animation.
+; if a target that is protected, underground, flying
+; skip the dodge animation
 	ld a, BATTLE_VARS_SUBSTATUS1_OPP
 	call GetBattleVar
 	bit SUBSTATUS_PROTECT, a
@@ -2377,6 +2377,31 @@ GetFailureResultText:
 	call GetBattleVar
 	and 1 << SUBSTATUS_UNDERGROUND | 1 << SUBSTATUS_FLYING
 	jr nz, .no_dodge_anim
+
+; check for levitate ability when hit by a Ground-type move
+; skip the dodge animation
+    ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	jr nz, .checkType
+	ld a, [wPlayerMoveStruct + MOVE_TYPE]
+.checkType
+	and TYPE_MASK
+	cp GROUND
+	jr nz, .check_levitate_done
+
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMonSpecies]
+	jr z, .check_levitate
+	ld a, [wBattleMonSpecies]
+
+.check_levitate
+	ld hl, LevitatePokemon
+	call IsInByteArray
+	jr c, .no_dodge_anim
+
+.check_levitate_done
 	farcall BattleDodgeAnimation
 
 .no_dodge_anim
