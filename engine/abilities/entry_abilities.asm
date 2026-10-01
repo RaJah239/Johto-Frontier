@@ -418,12 +418,15 @@ HandleNonLinkIntimidate:
 	call IsInByteArray
 	ret nc
 
-	; slide the ability popup over the acting side's HUD
-	ld b, BANK(AbilityPopup_IntimidateText)
-	ldh a, [hBattleTurn]
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
-	ld de, AbilityPopup_IntimidateText
-	farcall ShowAbilityPopup
+; ===========================================================================+
+    ; ability popup box                                                      |
+	; slide the ability popup over the acting side's HUD                     |
+	ld b, BANK(AbilityPopup_IntimidateText) ;                                |
+	ldh a, [hBattleTurn] ;                                                   |
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY                     |
+	ld de, AbilityPopup_IntimidateText ;                                     |
+	farcall ShowAbilityPopup ;                                               |
+; ===========================================================================+
 
 	ld a, [wOptions]
 	bit BATTLE_SCENE, a

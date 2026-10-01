@@ -27,14 +27,25 @@ HandleLevitate:
 	call IsInByteArray
     ret nc
 
-    ; add some delay so the text 
-    ; isn't instantly skipped
-	ld c, 30
-	call DelayFrames
+; ===========================================================================+
+    ; ability popup box                                                      |
+	; slide the ability popup over the TARGET's HUD (the one with Levitate)  |
+	; hBattleTurn = 0 means player is attacking, so target is enemy          |
+	; hBattleTurn = 1 means enemy is attacking, so target is player          |
+	ldh a, [hBattleTurn] ;                                                   |
+	xor 1 ;                                                                  |
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY (target's side)     |
+	ld b, BANK(AbilityPopup_LevitateText) ;                                  |
+	ld de, AbilityPopup_LevitateText ;                                       |
+	farcall ShowAbilityPopup ;                                               |
+; ===========================================================================+
 
 	ld hl, LevitateText
 	call StdBattleTextbox
 	jmp AttackedMissed
+
+AbilityPopup_LevitateText:
+	db "Levitate@"
 
 HandleWaterAbsorb:
     ldh a, [hBattleTurn]
