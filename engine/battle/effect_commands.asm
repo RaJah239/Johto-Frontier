@@ -1648,22 +1648,39 @@ BattleCommand_CheckHit:
 	ret
 
 .not_fire_blast_or_true_flame_mon
-; ==============================
-; === Ability: True Blizzard ===
-; ==============================
+; ===========================
+; === Ability: Frost Lock ===
+; ===========================
 	; check if blizzard was used
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	cp BLIZZARD
-	jr nz, .not_blizzard_or_true_blizzard_mon
+	jr nz, .not_blizzard_or_frost_lock_mon
 
 	; check it is was a true blizzard pokemon
 	call GetCurrentMon
 	ld hl, TrueBlizzardPokemon
 	call IsInByteArray
-	ret c
+	jr nc, .not_blizzard_or_frost_lock_mon
 
-.not_blizzard_or_true_blizzard_mon
+	CheckEventFlag EVENT_FROST_LOCK
+	ret nz
+
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	ret nz
+
+	; slide the ability popup over the acting side's HUD
+	ld b, BANK(AbilityPopup_FrostLockText)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	ld de, AbilityPopup_FrostLockText
+	farcall ShowAbilityPopup
+
+	SetEventFlag EVENT_FROST_LOCK
+	ret
+
+.not_blizzard_or_frost_lock_mon
 ; ============================
 ; === Ability: Sure Stream ===
 ; ============================
