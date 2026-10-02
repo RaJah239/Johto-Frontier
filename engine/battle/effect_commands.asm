@@ -1596,7 +1596,24 @@ BattleCommand_CheckHit:
 	call GetCurrentMon
 	ld hl, StormboundPokemon
 	call IsInByteArray
-	ret c
+	jr nc, .not_thunder_or_stormbound_mon
+
+	CheckEventFlag EVENT_STORMBOUND
+	ret nz
+
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	ret nz
+
+	; slide the ability popup over the acting side's HUD
+	ld b, BANK(AbilityPopup_StormboundText)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	ld de, AbilityPopup_StormboundText
+	farcall ShowAbilityPopup
+
+	SetEventFlag EVENT_STORMBOUND
+	ret
 
 .not_thunder_or_stormbound_mon
 

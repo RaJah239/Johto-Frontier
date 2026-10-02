@@ -3,3 +3,6 @@
 StormboundPokemon:
 ;    db RAICHU
     db -1 ; end
+
+AbilityPopup_StormboundText:
+    db "Stormbound@"
