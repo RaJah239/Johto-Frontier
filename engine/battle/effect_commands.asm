@@ -2372,11 +2372,11 @@ GetFailureResultText:
 	ld a, BATTLE_VARS_SUBSTATUS1_OPP
 	call GetBattleVar
 	bit SUBSTATUS_PROTECT, a
-	jr nz, .no_dodge_anim
+	jmp nz, .no_dodge_anim
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
 	call GetBattleVar
 	and 1 << SUBSTATUS_UNDERGROUND | 1 << SUBSTATUS_FLYING
-	jr nz, .no_dodge_anim
+	jmp nz, .no_dodge_anim
 
 ; check for levitate ability when hit by a Ground-type move
 ; skip the dodge animation
@@ -2450,6 +2450,30 @@ GetFailureResultText:
 	jr c, .no_dodge_anim
 
 .flame_ward_done
+; check for grounded ability when hit by an Electric-type move
+; skip the dodge animation
+    ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	jr nz, .checkType4
+	ld a, [wPlayerMoveStruct + MOVE_TYPE]
+.checkType4
+	and TYPE_MASK
+	cp ELECTRIC
+	jr nz, .grounded_done
+
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMonSpecies]
+	jr z, .check_grounded
+	ld a, [wBattleMonSpecies]
+
+.check_grounded
+	ld hl, VoltAbsorbPokemon
+	call IsInByteArray
+	jr c, .no_dodge_anim
+
+.grounded_done
 	farcall BattleDodgeAnimation
 
 .no_dodge_anim
