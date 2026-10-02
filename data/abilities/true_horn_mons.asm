@@ -11,4 +11,5 @@ AbilityPopup_TrueHornText:
 ResetSureHitEvents:
     ResetEventFlag EVENT_TRUE_HORN
     ResetEventFlag EVENT_STORMBOUND
+    ResetEventFlag EVENT_TRUE_FLAME
     ret

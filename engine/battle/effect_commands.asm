@@ -1582,7 +1582,6 @@ BattleCommand_CheckHit:
 	ret
 
 .not_megahorn_or_true_horn_mon
-
 ; ===========================
 ; === Ability: Stormbound ===
 ; ===========================
@@ -1616,7 +1615,6 @@ BattleCommand_CheckHit:
 	ret
 
 .not_thunder_or_stormbound_mon
-
 ; ===========================
 ; === Ability: True Flame ===
 ; ===========================
@@ -1630,10 +1628,26 @@ BattleCommand_CheckHit:
 	call GetCurrentMon
 	ld hl, TrueFlamePokemon
 	call IsInByteArray
-	ret c
+	jr nc, .not_fire_blast_or_true_flame_mon
+
+	CheckEventFlag EVENT_TRUE_FLAME
+	ret nz
+
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	ret nz
+
+	; slide the ability popup over the acting side's HUD
+	ld b, BANK(AbilityPopup_TrueFlameText)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	ld de, AbilityPopup_TrueFlameText
+	farcall ShowAbilityPopup
+
+	SetEventFlag EVENT_TRUE_FLAME
+	ret
 
 .not_fire_blast_or_true_flame_mon
-
 ; ==============================
 ; === Ability: True Blizzard ===
 ; ==============================
@@ -1650,7 +1664,6 @@ BattleCommand_CheckHit:
 	ret c
 
 .not_blizzard_or_true_blizzard_mon
-
 ; ============================
 ; === Ability: Sure Stream ===
 ; ============================
@@ -1667,7 +1680,6 @@ BattleCommand_CheckHit:
 	ret c
 
 .not_hydro_pump_or_sure_stream_mon
-
 ; ============================
 ; === Ability: Stonefall =====
 ; ============================
@@ -1684,7 +1696,6 @@ BattleCommand_CheckHit:
 	ret c
 
 .not_rock_slide_or_stonefall_mon
-
 ; ============================
 ; === Ability: Stonebound =====
 ; ============================
@@ -1701,7 +1712,6 @@ BattleCommand_CheckHit:
 	ret c
 
 .not_stone_edge_or_stonebound_mon
-
 ; ==============================
 ; === Ability: Hypnotic Aura ===
 ; ==============================
@@ -1718,7 +1728,6 @@ BattleCommand_CheckHit:
 	ret c
 
 .not_hypnosis_or_hypnotic_aura_mon
-
 ; ================================
 ; === Ability: Lullaby Mastery ===
 ; ================================
@@ -1735,7 +1744,6 @@ BattleCommand_CheckHit:
 	ret c
 
 .not_sing_or_lullaby_mastery_mon
-
 ; ============================
 ; === Ability: Meteor Lock ===
 ; ============================
@@ -1752,7 +1760,6 @@ BattleCommand_CheckHit:
 	ret c
 
 .not_meteor_mash_or_meteor_lock_mon
-
 	call .StatModifiers
 
 	ld a, [wPlayerMoveStruct + MOVE_ACC]

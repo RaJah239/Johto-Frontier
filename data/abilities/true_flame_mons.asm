@@ -3,3 +3,6 @@
 TrueFlamePokemon:
 ;    db MOLTRES
     db -1 ; end
+
+AbilityPopup_TrueFlameText:
+    db "True Flame@"
