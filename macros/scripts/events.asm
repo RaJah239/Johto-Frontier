@@ -1239,4 +1239,48 @@ MACRO showdefensiveability
 	call ShowDefensiveAbilityBanner
 ENDM
 
+; ==========================================================================
+; === Macro: check_ability_popup                                        ===
+; ==========================================================================
+; Checks if a specific move was used and if the Pokemon has the ability,
+; then shows the ability popup and sets the event flag.
+; Parameters:
+;   \1 - Move animation constant (e.g., MEGAHORN)
+;   \2 - Pokemon list (e.g., TrueHornPokemon)
+;   \3 - Event flag to check/set (e.g., EVENT_TRUE_HORN)
+;   \4 - Ability popup text label (e.g., AbilityPopup_TrueHornText)
+; ==========================================================================
+MACRO check_ability_popup
+	; Check if the specific move was used
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp \1
+	jr nz, .skip\@
+
+	; Check if the Pokemon has the ability
+	call GetCurrentMon
+	ld hl, \2
+	call IsInByteArray
+	jr nc, .skip\@
+
+	CheckEventFlag \3
+	ret nz
+
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	ret nz
+
+	; Slide the ability popup over the USER's HUD
+	ld b, BANK(\4)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY (user's side)
+	ld de, \4
+	farcall ShowAbilityPopup
+
+	SetEventFlag \3
+	ret
+
+.skip\@
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value
