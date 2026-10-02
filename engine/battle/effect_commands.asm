@@ -2383,9 +2383,9 @@ GetFailureResultText:
     ldh a, [hBattleTurn]
 	and a
 	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	jr nz, .checkType
+	jr nz, .checkType1
 	ld a, [wPlayerMoveStruct + MOVE_TYPE]
-.checkType
+.checkType1
 	and TYPE_MASK
 	cp GROUND
 	jr nz, .check_levitate_done
@@ -2402,6 +2402,30 @@ GetFailureResultText:
 	jr c, .no_dodge_anim
 
 .check_levitate_done
+; check for waterproof ability when hit by a water-type move
+; skip the dodge animation
+    ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	jr nz, .checkType2
+	ld a, [wPlayerMoveStruct + MOVE_TYPE]
+.checkType2
+	and TYPE_MASK
+	cp WATER
+	jr nz, .check_waterproof_done
+
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMonSpecies]
+	jr z, .check_waterproof
+	ld a, [wBattleMonSpecies]
+
+.check_waterproof
+	ld hl, WaterAbsorbPokemon
+	call IsInByteArray
+	jr c, .no_dodge_anim
+
+.check_waterproof_done
 	farcall BattleDodgeAnimation
 
 .no_dodge_anim
