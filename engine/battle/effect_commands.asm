@@ -1481,7 +1481,9 @@ BattleCommand_DamageVariation:
 	ret
 
 BattleCommand_CheckHit:
-	
+; ================================================================================
+; === Defensive Abilities: Flame War, Grounded, Immunity, Levitate, Waterproof ===
+; ================================================================================
 	farcall DefensiveAbilities
 
 	farcall DreamEaterMiss
