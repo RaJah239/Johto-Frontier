@@ -2365,139 +2365,70 @@ GetFailureResultText:
 	ld de, DoesntAffectText
 	ld a, [wTypeModifier]
 	and EFFECTIVENESS_MASK
-	jmp z, .got_text
+	jr z, .got_text
 
-; if a target that is protected, underground, flying
-; skip the dodge animation
+; protected / underground / flying targets skip the dodge animation
+	; check if protecting
 	ld a, BATTLE_VARS_SUBSTATUS1_OPP
 	call GetBattleVar
 	bit SUBSTATUS_PROTECT, a
-	jmp nz, .no_dodge_anim
+	jr nz, .no_dodge_anim
+
+	; check if underground or flying
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
 	call GetBattleVar
 	and 1 << SUBSTATUS_UNDERGROUND | 1 << SUBSTATUS_FLYING
-	jmp nz, .no_dodge_anim
+	jr nz, .no_dodge_anim
 
-; check for levitate ability when hit by a Ground-type move
-; skip the dodge animation
-    ldh a, [hBattleTurn]
+; get move type
+	ldh a, [hBattleTurn]
 	and a
 	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	jr nz, .checkType1
+	jr nz, .got_move_type
 	ld a, [wPlayerMoveStruct + MOVE_TYPE]
-.checkType1
+
+.got_move_type
 	and TYPE_MASK
+
+; get target species
+	ld b, a
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMonSpecies]
+	jr z, .got_species
+	ld a, [wBattleMonSpecies]
+
+.got_species
+	ld c, a
+	ld a, b
+
+; find immunity table for this move type
 	cp GROUND
-	jr nz, .levitate_done
-
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMonSpecies]
-	jr z, .check_levitate
-	ld a, [wBattleMonSpecies]
-
-.check_levitate
 	ld hl, LevitatePokemon
-	call IsInByteArray
-	jmp c, .no_dodge_anim
+	jr z, .check_if_immune
 
-.levitate_done
-; check for waterproof ability when hit by a Water-type move
-; skip the dodge animation
-    ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	jr nz, .checkType2
-	ld a, [wPlayerMoveStruct + MOVE_TYPE]
-.checkType2
-	and TYPE_MASK
 	cp WATER
-	jr nz, .waterproof_done
-
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMonSpecies]
-	jr z, .check_waterproof
-	ld a, [wBattleMonSpecies]
-
-.check_waterproof
 	ld hl, WaterproofPokemon
-	call IsInByteArray
-	jr c, .no_dodge_anim
+	jr z, .check_if_immune
 
-.waterproof_done
-; check for flame ward ability when hit by a Fire-type move
-; skip the dodge animation
-    ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	jr nz, .checkType3
-	ld a, [wPlayerMoveStruct + MOVE_TYPE]
-.checkType3
-	and TYPE_MASK
 	cp FIRE
-	jr nz, .flame_ward_done
-
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMonSpecies]
-	jr z, .check_flame_ward
-	ld a, [wBattleMonSpecies]
-
-.check_flame_ward
 	ld hl, FlameWardPokemon
-	call IsInByteArray
-	jr c, .no_dodge_anim
+	jr z, .check_if_immune
 
-.flame_ward_done
-; check for grounded ability when hit by an Electric-type move
-; skip the dodge animation
-    ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	jr nz, .checkType4
-	ld a, [wPlayerMoveStruct + MOVE_TYPE]
-.checkType4
-	and TYPE_MASK
 	cp ELECTRIC
-	jr nz, .grounded_done
-
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMonSpecies]
-	jr z, .check_grounded
-	ld a, [wBattleMonSpecies]
-
-.check_grounded
 	ld hl, GroundedPokemon
-	call IsInByteArray
-	jr c, .no_dodge_anim
+	jr z, .check_if_immune
 
-.grounded_done
-; check for immunity ability when hit by an Poison-type move
-; skip the dodge animation
-    ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	jr nz, .checkType5
-	ld a, [wPlayerMoveStruct + MOVE_TYPE]
-.checkType5
-	and TYPE_MASK
 	cp POISON
-	jr nz, .immunity_done
-
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMonSpecies]
-	jr z, .check_immunity
-	ld a, [wBattleMonSpecies]
-
-.check_immunity
 	ld hl, ImmunityPokemon
+	jr nz, .dodge
+
+.check_if_immune
+	ld a, c
 	call IsInByteArray
 	jr c, .no_dodge_anim
 
-.immunity_done
+.dodge
 	farcall BattleDodgeAnimation
 
 .no_dodge_anim
