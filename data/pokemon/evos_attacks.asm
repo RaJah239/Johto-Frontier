@@ -285,7 +285,7 @@ DittoEvosAttacks:
 MewEvosAttacks:
 MewtwoEvosAttacks:
 	db 0 ; no more evolutions
-	db 1, SPLASH
+	db 1, MEGAHORN
 	db 0 ; no more level-up moves
 
 ; to redo
