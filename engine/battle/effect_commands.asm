@@ -1767,9 +1767,7 @@ BattleCommand_CheckHit:
 	call ResetDamage
 
 .Missed:
-	ld a, 1
-	ld [wAttackMissed], a
-	ret
+	jmp Eff_Comands_AttackedMissed
 
 .WideLensBoost:
 	push bc
@@ -4787,9 +4785,7 @@ BattleCommand_StatDown:
 .CantLower:
 	ld a, 3
 	ld [wFailedMessage], a
-	ld a, 1
-	ld [wAttackMissed], a
-	ret
+	jr Eff_Comands_AttackedMissed
 
 .Failed:
 	ld a, 1
@@ -4800,9 +4796,7 @@ BattleCommand_StatDown:
 .Mist:
 	ld a, 2
 	ld [wFailedMessage], a
-	ld a, 1
-	ld [wAttackMissed], a
-	ret
+	jr Eff_Comands_AttackedMissed
 
 .resilience:
 	ld a, [wOptions]
@@ -4829,6 +4823,7 @@ BattleCommand_StatDown:
 	call StdBattleTextbox
 	ld a, 2
 	ld [wFailedMessage], a
+Eff_Comands_AttackedMissed:
 	ld a, 1
 	ld [wAttackMissed], a
 	ret
@@ -7054,11 +7049,9 @@ BattleCommand_CheckPowder:
 	ld a, [hl]
 	cp GRASS
 	ret nz
-	;fallthrough
+
 .Immune:
-	ld a, 1
-	ld [wAttackMissed], a
-	ret
+	jmp Eff_Comands_AttackedMissed
 
 PowderMoves_EffectCommands:
 	db POISONPOWDER
