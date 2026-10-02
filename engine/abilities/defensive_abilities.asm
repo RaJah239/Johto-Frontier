@@ -190,14 +190,36 @@ HandleVoltAbsorb:
 	call IsInByteArray
     ret nc
 
-    ; add some delay so the text 
-    ; isn't instantly skipped
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	jr nz, .skip_ability_banner
+
+; ===========================================================================+
+    ; ability popup box                                                      |
+	; slide the ability popup over the TARGET's HUD (the one with Levitate)  |
+	; hBattleTurn = 0 means player is attacking, so target is enemy          |
+	; hBattleTurn = 1 means enemy is attacking, so target is player          |
+	ldh a, [hBattleTurn] ;                                                   |
+	xor 1 ;                                                                  |
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY (target's side)     |
+	ld b, BANK(AbilityPopupGrounded) ;                                  |
+	ld de, AbilityPopupGrounded ;                                       |
+	farcall ShowAbilityPopup ;                                               |
+	jr .finish_ability
+; ===========================================================================+
+
+.skip_ability_banner
+    ; add some delay so the text isn't instantly skipped
 	ld c, 30
 	call DelayFrames
 
+.finish_ability
 	ld hl, VoltAbsorbText
 	call StdBattleTextbox
 	jr AttackedMissed
+
+AbilityPopupGrounded:
+	db "Grounded@"
 
 INCLUDE "data/abilities/volt_absorb_mons.asm"
 
