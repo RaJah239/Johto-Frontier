@@ -1233,4 +1233,10 @@ MACRO waitclosetext
 	db waitclosetext_command
 ENDM
 
+MACRO showdefensiveability
+	ld b, BANK(\1)
+	ld de, \1
+	call ShowDefensiveAbilityBanner
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

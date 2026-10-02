@@ -97,3 +97,19 @@ StackJumpTable::
 	ld h, [hl]
 	ld l, a
 	jp hl
+
+ShowDefensiveAbilityBanner::
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	jr nz, .skip
+
+	ldh a, [hBattleTurn]
+	xor 1
+	ld c, a
+	; b = bank of text
+	; de = text pointer
+	farjp ShowAbilityPopup
+
+.skip
+	ld c, 30
+	jmp DelayFrames

@@ -149,7 +149,7 @@ INCLUDE "data/battle/weather_modifiers.asm"
 
 assert ABILITY_POPUP_OAM_BYTES == 2 * PARTY_LENGTH * SPRITEOAMSTRUCT_LENGTH
 
-ShowAbilityPopup:
+ShowAbilityPopup::
 ; Slides a two-line "Ability:" popup over a battle HUD box.
 ; No-op outside of battle (wBattleMode = 0).
 ; Call it with a plain farcall:
