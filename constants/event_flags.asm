@@ -350,9 +350,12 @@
 	const EVENT_ALLURE_PLAYER
 	const EVENT_ALLURE_FOE
 
+; Sure Hit Abilities
+	const EVENT_TRUE_HORN
+
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 209 events
+; Unused: next 208 events
 
 	const_next 600
 ; Kurt Apricorn events

@@ -1562,7 +1562,24 @@ BattleCommand_CheckHit:
 	call GetCurrentMon
 	ld hl, TrueHornPokemon
 	call IsInByteArray
-	ret c
+	jr nc, .not_megahorn_or_true_horn_mon
+
+	CheckEventFlag EVENT_TRUE_HORN
+	ret nz
+
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	ret nz
+
+	; slide the ability popup over the acting side's HUD
+	ld b, BANK(AbilityPopup_TrueHornText)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	ld de, AbilityPopup_TrueHornText
+	farcall ShowAbilityPopup
+
+	SetEventFlag EVENT_TRUE_HORN
+	ret
 
 .not_megahorn_or_true_horn_mon
 
