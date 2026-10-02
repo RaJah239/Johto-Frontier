@@ -1721,15 +1721,32 @@ BattleCommand_CheckHit:
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	cp ROCK_SLIDE
-	jr nz, .not_rock_slide_or_stonefall_mon
+	jr nz, .not_rock_slide_or_stone_fall_mon
 
 	; check it is was a stonefall pokemon
 	call GetCurrentMon
 	ld hl, StonefallPokemon
 	call IsInByteArray
-	ret c
+	jr nc, .not_rock_slide_or_stone_fall_mon
 
-.not_rock_slide_or_stonefall_mon
+	CheckEventFlag EVENT_STONE_FALL
+	ret nz
+
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	ret nz
+
+	; slide the ability popup over the acting side's HUD
+	ld b, BANK(AbilityPopup_Stone_FallText)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	ld de, AbilityPopup_Stone_FallText
+	farcall ShowAbilityPopup
+
+	SetEventFlag EVENT_STONE_FALL
+	ret
+
+.not_rock_slide_or_stone_fall_mon
 ; ============================
 ; === Ability: Stonebound =====
 ; ============================
