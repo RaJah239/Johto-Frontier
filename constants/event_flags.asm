@@ -355,10 +355,11 @@
 	const EVENT_STORMBOUND
 	const EVENT_TRUE_FLAME
 	const EVENT_FROST_LOCK
+	const EVENT_HYDRO_AIM
 
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 205 events
+; Unused: next 204 events
 
 	const_next 600
 ; Kurt Apricorn events

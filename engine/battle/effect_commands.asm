@@ -1681,22 +1681,39 @@ BattleCommand_CheckHit:
 	ret
 
 .not_blizzard_or_frost_lock_mon
-; ============================
-; === Ability: Sure Stream ===
-; ============================
+; ==========================
+; === Ability: Hydro Aim ===
+; ==========================
 	; check if blizzard was used
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	cp HYDRO_PUMP
-	jr nz, .not_hydro_pump_or_sure_stream_mon
+	jr nz, .not_hydro_pump_or_hydro_aim_mon
 
 	; check it is was a sure stream pokemon
 	call GetCurrentMon
 	ld hl, SureStreamPokemon
 	call IsInByteArray
-	ret c
+	jr nc, .not_hydro_pump_or_hydro_aim_mon
 
-.not_hydro_pump_or_sure_stream_mon
+	CheckEventFlag EVENT_HYDRO_AIM
+	ret nz
+
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	ret nz
+
+	; slide the ability popup over the acting side's HUD
+	ld b, BANK(AbilityPopup_HydroAimText)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	ld de, AbilityPopup_HydroAimText
+	farcall ShowAbilityPopup
+
+	SetEventFlag EVENT_HYDRO_AIM
+	ret
+
+.not_hydro_pump_or_hydro_aim_mon
 ; ============================
 ; === Ability: Stonefall =====
 ; ============================

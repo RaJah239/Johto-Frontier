@@ -7,3 +7,5 @@ SureStreamPokemon:
 ;    db MILOTIC
 ;    db GYARADOS
     db -1 ; end
+
+AbilityPopup_HydroAimText: db "Hydro Aim@"

@@ -12,4 +12,5 @@ ResetSureHitEvents:
     ResetEventFlag EVENT_STORMBOUND
     ResetEventFlag EVENT_TRUE_FLAME
     ResetEventFlag EVENT_FROST_LOCK
+    ResetEventFlag EVENT_HYDRO_AIM
     ret
