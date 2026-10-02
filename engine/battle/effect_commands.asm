@@ -1480,6 +1480,33 @@ BattleCommand_DamageVariation:
 	ld [hl], a
 	ret
 
+DEF FIRST_SURE_HIT_EVENT EQU EVENT_TRUE_HORN
+DEF LAST_SURE_HIT_EVENT  EQU EVENT_ASTRAL_AIM
+
+ResetSureHitEvents:
+	; reset all sure hit event flags
+    ld de, FIRST_SURE_HIT_EVENT
+    ld bc, LAST_SURE_HIT_EVENT - FIRST_SURE_HIT_EVENT + 1
+; ResetEventRange
+; Input:
+;	DE = first event constant
+;	BC = number of events to reset
+; Destroys: AF
+.loop
+	push bc
+	push de
+	ld b, RESET_FLAG
+	call EventFlagAction
+	pop de
+	pop bc
+
+	inc de
+	dec bc
+	ld a, b
+	or c
+	jr nz, .loop
+	ret
+
 BattleCommand_CheckHit:
 ; ================================================================================
 ; === Defensive Abilities: Flame War, Grounded, Immunity, Levitate, Waterproof ===
