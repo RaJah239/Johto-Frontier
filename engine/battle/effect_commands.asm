@@ -2399,7 +2399,7 @@ GetFailureResultText:
 .check_levitate
 	ld hl, LevitatePokemon
 	call IsInByteArray
-	jr c, .no_dodge_anim
+	jmp c, .no_dodge_anim
 
 .levitate_done
 ; check for waterproof ability when hit by a Water-type move
@@ -2474,6 +2474,30 @@ GetFailureResultText:
 	jr c, .no_dodge_anim
 
 .grounded_done
+; check for immunity ability when hit by an Poison-type move
+; skip the dodge animation
+    ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	jr nz, .checkType5
+	ld a, [wPlayerMoveStruct + MOVE_TYPE]
+.checkType5
+	and TYPE_MASK
+	cp POISON
+	jr nz, .immunity_done
+
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMonSpecies]
+	jr z, .check_immunity
+	ld a, [wBattleMonSpecies]
+
+.check_immunity
+	ld hl, ImmunityPokemon
+	call IsInByteArray
+	jr c, .no_dodge_anim
+
+.immunity_done
 	farcall BattleDodgeAnimation
 
 .no_dodge_anim
