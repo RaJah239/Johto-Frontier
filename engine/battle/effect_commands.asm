@@ -1760,7 +1760,24 @@ BattleCommand_CheckHit:
 	call GetCurrentMon
 	ld hl, StoneboundPokemon
 	call IsInByteArray
-	ret c
+	jr nc, .not_stone_edge_or_stonebound_mon
+
+	CheckEventFlag EVENT_STONEBOUND
+	ret nz
+
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	ret nz
+
+	; slide the ability popup over the acting side's HUD
+	ld b, BANK(AbilityPopup_StoneboundText)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	ld de, AbilityPopup_StoneboundText
+	farcall ShowAbilityPopup
+
+	SetEventFlag EVENT_STONEBOUND
+	ret
 
 .not_stone_edge_or_stonebound_mon
 ; ==============================

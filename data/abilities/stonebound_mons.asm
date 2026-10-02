@@ -5,3 +5,5 @@ StoneboundPokemon:
 ;    db SUDOWOODO
 ;    db AERODACTYL
     db -1 ; end
+
+AbilityPopup_StoneboundText: db "Stonebound@"
