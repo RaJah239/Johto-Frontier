@@ -1780,22 +1780,39 @@ BattleCommand_CheckHit:
 	ret
 
 .not_stone_edge_or_stonebound_mon
-; ==============================
-; === Ability: Hypnotic Aura ===
-; ==============================
+; ===========================
+; === Ability: Dream Gaze ===
+; ===========================
 	; check if hypnosis was used
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	cp HYPNOSIS
-	jr nz, .not_hypnosis_or_hypnotic_aura_mon
+	jr nz, .not_hypnosis_or_dream_gaze_mon
 
 	; check it is was a hypnotic aura pokemon
 	call GetCurrentMon
 	ld hl, HypnoticAuraPokemon
 	call IsInByteArray
-	ret c
+	jr nc, .not_hypnosis_or_dream_gaze_mon
 
-.not_hypnosis_or_hypnotic_aura_mon
+	CheckEventFlag EVENT_DREAM_GAZE
+	ret nz
+
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	ret nz
+
+	; slide the ability popup over the acting side's HUD
+	ld b, BANK(AbilityPopup_DreamGazeText)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	ld de, AbilityPopup_DreamGazeText
+	farcall ShowAbilityPopup
+
+	SetEventFlag EVENT_DREAM_GAZE
+	ret
+
+.not_hypnosis_or_dream_gaze_mon
 ; ================================
 ; === Ability: Lullaby Mastery ===
 ; ================================

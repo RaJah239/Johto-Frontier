@@ -4,3 +4,5 @@ HypnoticAuraPokemon:
 ;   db DROWZEE
 ;   db HYPNO
     db -1 ; end
+
+AbilityPopup_DreamGazeText: db "Dream Gaze@"

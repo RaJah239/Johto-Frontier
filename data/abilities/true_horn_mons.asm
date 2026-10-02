@@ -15,4 +15,5 @@ ResetSureHitEvents:
     ResetEventFlag EVENT_HYDRO_AIM
     ResetEventFlag EVENT_STONE_FALL
     ResetEventFlag EVENT_STONEBOUND
+    ResetEventFlag EVENT_DREAM_GAZE
     ret
