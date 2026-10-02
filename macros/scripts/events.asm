@@ -1249,7 +1249,6 @@ ENDM
 ;   \2 - Pokemon list (e.g., TrueHornPokemon)
 ;   \3 - Event flag to check/set (e.g., EVENT_TRUE_HORN)
 ;   \4 - Ability popup text label (e.g., AbilityPopup_TrueHornText)
-;   \5 - Event flag constant (e.g., EVENT_TRUE_HORN)
 ; ==========================================================================
 MACRO check_ability_popup
 	; Check if the specific move was used
@@ -1271,15 +1270,14 @@ MACRO check_ability_popup
 	bit ABILITY_BANNERS, a
 	ret nz
 
-	; Slide the ability popup over the TARGET's HUD
+	; Slide the ability popup over the USER's HUD
 	ld b, BANK(\4)
 	ldh a, [hBattleTurn]
-	xor 1
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY (target's side)
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY (user's side)
 	ld de, \4
 	farcall ShowAbilityPopup
 
-	SetEventFlag \5
+	SetEventFlag \3
 	ret
 
 .skip\@
