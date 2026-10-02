@@ -4,3 +4,5 @@ LullabyMasteryPokemon:
 ;   db CLEFAIRY
 ;   db CLEFABLE
     db -1 ; end
+
+AbilityPopup_DreamSongText: db "Dream Song@"

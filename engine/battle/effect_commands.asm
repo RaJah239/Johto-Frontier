@@ -1813,22 +1813,39 @@ BattleCommand_CheckHit:
 	ret
 
 .not_hypnosis_or_dream_gaze_mon
-; ================================
-; === Ability: Lullaby Mastery ===
-; ================================
+; ===========================
+; === Ability: Dream Song ===
+; ===========================
 	; check if sing was used
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	cp SING
-	jr nz, .not_sing_or_lullaby_mastery_mon
+	jr nz, .not_sing_or_dream_song_mon
 
 	; check it is was a lullaby mastery pokemon
 	call GetCurrentMon
 	ld hl, LullabyMasteryPokemon
 	call IsInByteArray
-	ret c
+	jr nc, .not_sing_or_dream_song_mon
 
-.not_sing_or_lullaby_mastery_mon
+	CheckEventFlag EVENT_DREAM_SONG
+	ret nz
+
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	ret nz
+
+	; slide the ability popup over the acting side's HUD
+	ld b, BANK(AbilityPopup_DreamSongText)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	ld de, AbilityPopup_DreamSongText
+	farcall ShowAbilityPopup
+
+	SetEventFlag EVENT_DREAM_SONG
+	ret
+
+.not_sing_or_dream_song_mon
 ; ============================
 ; === Ability: Meteor Lock ===
 ; ============================
