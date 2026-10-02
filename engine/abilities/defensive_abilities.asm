@@ -6,26 +6,15 @@ DefensiveAbilities:
 	; fallthrough
 
 HandleLevitate:
-    ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	jr nz, .checkType
-	ld a, [wPlayerMoveStruct + MOVE_TYPE]
-.checkType
-	and TYPE_MASK
+	call GetDefensiveMoveType
 	cp GROUND
-    ret nz
+	ret nz
 
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMonSpecies]
-	jr z, .check_levitate
-	ld a, [wBattleMonSpecies]
-
-.check_levitate
+	call GetDefensiveSpecies
 	ld hl, LevitatePokemon
 	call IsInByteArray
-    ret nc
+	ret nc
+
 	showdefensiveability AbilityPopup_LevitateText
 	ld hl, LevitateText
 	call StdBattleTextbox
@@ -34,27 +23,17 @@ HandleLevitate:
 AbilityPopup_LevitateText:
 	db "Levitate@"
 
+
 HandleWaterAbsorb:
-    ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	jr nz, .checkType
-	ld a, [wPlayerMoveStruct + MOVE_TYPE]
-.checkType
-	and TYPE_MASK
+	call GetDefensiveMoveType
 	cp WATER
-    ret nz
+	ret nz
 
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMonSpecies]
-	jr z, .check_water_absorb
-	ld a, [wBattleMonSpecies]
-
-.check_water_absorb
+	call GetDefensiveSpecies
 	ld hl, WaterAbsorbPokemon
 	call IsInByteArray
-    ret nc
+	ret nc
+
 	showdefensiveability AbilityPopup_WaterproofText
 	ld hl, WaterAbsorbText
 	call StdBattleTextbox
@@ -65,60 +44,39 @@ AbilityPopup_WaterproofText:
 
 INCLUDE "data/abilities/water_absorb_mons.asm"
 
+
 HandleFireAbsorb:
-    ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	jr nz, .checkType
-	ld a, [wPlayerMoveStruct + MOVE_TYPE]
-.checkType
-	and TYPE_MASK
+	call GetDefensiveMoveType
 	cp FIRE
-    ret nz
+	ret nz
 
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMonSpecies]
-	jr z, .check_fire_absorb
-	ld a, [wBattleMonSpecies]
-
-.check_fire_absorb
+	call GetDefensiveSpecies
 	ld hl, FireAbsorbPokemon
 	call IsInByteArray
-    ret nc
+	ret nc
+
 	showdefensiveability AbilityPopup_FlameWardText
 	ld hl, FireAbsorbText
 	call StdBattleTextbox
 	jr AttackedMissed
 
-INCLUDE "data/abilities/fire_absorb_mons.asm"
-
 AbilityPopup_FlameWardText:
 	db "Flame Ward@"
 
+INCLUDE "data/abilities/fire_absorb_mons.asm"
+
+
 HandleVoltAbsorb:
-    ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	jr nz, .checkType
-	ld a, [wPlayerMoveStruct + MOVE_TYPE]
-.checkType
-	and TYPE_MASK
+	call GetDefensiveMoveType
 	cp ELECTRIC
-    ret nz
+	ret nz
 
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMonSpecies]
-	jr z, .check_volt_absorb
-	ld a, [wBattleMonSpecies]
-
-.check_volt_absorb
+	call GetDefensiveSpecies
 	ld hl, VoltAbsorbPokemon
 	call IsInByteArray
-    ret nc
-    showdefensiveability AbilityPopup_GroundedText
-.finish_ability
+	ret nc
+
+	showdefensiveability AbilityPopup_GroundedText
 	ld hl, VoltAbsorbText
 	call StdBattleTextbox
 	jr AttackedMissed
@@ -128,32 +86,17 @@ AbilityPopup_GroundedText:
 
 INCLUDE "data/abilities/volt_absorb_mons.asm"
 
-AttackedMissed:
-	ld a, 1
-	ld [wAttackMissed], a
-	ret
 
 HandleImmunity:
-    ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	jr nz, .checkType
-	ld a, [wPlayerMoveStruct + MOVE_TYPE]
-.checkType
-	and TYPE_MASK
+	call GetDefensiveMoveType
 	cp POISON
-    ret nz
+	ret nz
 
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMonSpecies]
-	jr z, .check_immunity
-	ld a, [wBattleMonSpecies]
-
-.check_immunity
+	call GetDefensiveSpecies
 	ld hl, ImmunityPokemon
 	call IsInByteArray
-    ret nc
+	ret nc
+
 	showdefensiveability AbilityPopup_ImmunityText
 	ld hl, ImmunityText
 	call StdBattleTextbox
@@ -163,3 +106,36 @@ AbilityPopup_ImmunityText:
 	db "Immunity@"
 
 INCLUDE "data/abilities/immunity_mons.asm"
+
+
+; ===========================================================================
+; Get the type of the move currently attacking.
+; Returns: A = move type
+; ===========================================================================
+GetDefensiveMoveType:
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	jr nz, .got_type
+	ld a, [wPlayerMoveStruct + MOVE_TYPE]
+
+.got_type
+	and TYPE_MASK
+	ret
+
+; ===========================================================================
+; Get the species being attacked.
+; Returns: A = defending Pokémon species
+; ===========================================================================
+GetDefensiveSpecies:
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMonSpecies]
+	ret z
+	ld a, [wBattleMonSpecies]
+	ret
+
+AttackedMissed:
+	ld a, 1
+	ld [wAttackMissed], a
+	ret
