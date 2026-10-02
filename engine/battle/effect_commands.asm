@@ -2365,7 +2365,7 @@ GetFailureResultText:
 	ld de, DoesntAffectText
 	ld a, [wTypeModifier]
 	and EFFECTIVENESS_MASK
-	jr z, .got_text
+	jmp z, .got_text
 
 ; if a target that is protected, underground, flying
 ; skip the dodge animation
@@ -2388,7 +2388,7 @@ GetFailureResultText:
 .checkType1
 	and TYPE_MASK
 	cp GROUND
-	jr nz, .check_levitate_done
+	jr nz, .levitate_done
 
 	ldh a, [hBattleTurn]
 	and a
@@ -2401,8 +2401,8 @@ GetFailureResultText:
 	call IsInByteArray
 	jr c, .no_dodge_anim
 
-.check_levitate_done
-; check for waterproof ability when hit by a water-type move
+.levitate_done
+; check for waterproof ability when hit by a Water-type move
 ; skip the dodge animation
     ldh a, [hBattleTurn]
 	and a
@@ -2412,7 +2412,7 @@ GetFailureResultText:
 .checkType2
 	and TYPE_MASK
 	cp WATER
-	jr nz, .check_waterproof_done
+	jr nz, .waterproof_done
 
 	ldh a, [hBattleTurn]
 	and a
@@ -2425,7 +2425,31 @@ GetFailureResultText:
 	call IsInByteArray
 	jr c, .no_dodge_anim
 
-.check_waterproof_done
+.waterproof_done
+; check for flame ward ability when hit by a Fire-type move
+; skip the dodge animation
+    ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	jr nz, .checkType3
+	ld a, [wPlayerMoveStruct + MOVE_TYPE]
+.checkType3
+	and TYPE_MASK
+	cp FIRE
+	jr nz, .flame_ward_done
+
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wEnemyMonSpecies]
+	jr z, .check_flame_ward
+	ld a, [wBattleMonSpecies]
+
+.check_flame_ward
+	ld hl, FireAbsorbPokemon
+	call IsInByteArray
+	jr c, .no_dodge_anim
+
+.flame_ward_done
 	farcall BattleDodgeAnimation
 
 .no_dodge_anim
