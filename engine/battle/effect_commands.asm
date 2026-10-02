@@ -2421,7 +2421,7 @@ GetFailureResultText:
 	ld a, [wBattleMonSpecies]
 
 .check_waterproof
-	ld hl, WaterAbsorbPokemon
+	ld hl, WaterproofPokemon
 	call IsInByteArray
 	jr c, .no_dodge_anim
 
@@ -2445,7 +2445,7 @@ GetFailureResultText:
 	ld a, [wBattleMonSpecies]
 
 .check_flame_ward
-	ld hl, FireAbsorbPokemon
+	ld hl, FlameWardPokemon
 	call IsInByteArray
 	jr c, .no_dodge_anim
 
@@ -2469,7 +2469,7 @@ GetFailureResultText:
 	ld a, [wBattleMonSpecies]
 
 .check_grounded
-	ld hl, VoltAbsorbPokemon
+	ld hl, GroundedPokemon
 	call IsInByteArray
 	jr c, .no_dodge_anim
 

@@ -106,13 +106,13 @@ WaterAbsorbText:
 	cont "water attacks!"
 	prompt
 
-FireAbsorbText:
+FlameWardText:
 	text "<TARGET> is"
 	line "unaffected by fire"
 	cont "attacks!"
 	prompt
 
-VoltAbsorbText:
+GroundedText:
 	text "<TARGET> is"
 	line "unaffected by"
 	cont "electric attacks!"

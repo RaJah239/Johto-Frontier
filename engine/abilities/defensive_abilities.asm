@@ -1,36 +1,20 @@
 DefensiveAbilities:
-	call HandleWaterAbsorb
-	call HandleFireAbsorb
-	call HandleVoltAbsorb
+	call HandleFlameWard
+	call HandleGrounded
 	call HandleImmunity
+	call HandleLevitate
 	; fallthrough
 
-HandleLevitate:
-	call GetDefensiveMoveType
-	cp GROUND
-	ret nz
-
-	call GetDefensiveSpecies
-	ld hl, LevitatePokemon
-	call IsInByteArray
-	ret nc
-
-	showdefensiveability AbilityPopup_LevitateText
-	ld hl, LevitateText
-	call StdBattleTextbox
-	jmp AttackedMissed
-
-AbilityPopup_LevitateText:
-	db "Levitate@"
-
-
-HandleWaterAbsorb:
+; ===========================
+; === Ability: Waterproof === 
+; ===========================
+HandleWaterproof:
 	call GetDefensiveMoveType
 	cp WATER
 	ret nz
 
 	call GetDefensiveSpecies
-	ld hl, WaterAbsorbPokemon
+	ld hl, WaterproofPokemon
 	call IsInByteArray
 	ret nc
 
@@ -42,51 +26,60 @@ HandleWaterAbsorb:
 AbilityPopup_WaterproofText:
 	db "Waterproof@"
 
-INCLUDE "data/abilities/water_absorb_mons.asm"
+INCLUDE "data/abilities/defensive_abilities/waterproof_mons.asm"
 
 
-HandleFireAbsorb:
+; ============================
+; === Ability: Flame Guard === 
+; ============================
+HandleFlameWard:
 	call GetDefensiveMoveType
 	cp FIRE
 	ret nz
 
 	call GetDefensiveSpecies
-	ld hl, FireAbsorbPokemon
+	ld hl, FlameWardPokemon
 	call IsInByteArray
 	ret nc
 
 	showdefensiveability AbilityPopup_FlameWardText
-	ld hl, FireAbsorbText
+	ld hl, FlameWardText
 	call StdBattleTextbox
-	jr AttackedMissed
+	jmp AttackedMissed
 
 AbilityPopup_FlameWardText:
 	db "Flame Ward@"
 
-INCLUDE "data/abilities/fire_absorb_mons.asm"
+INCLUDE "data/abilities/defensive_abilities/flame_ward_mons.asm"
 
 
-HandleVoltAbsorb:
+; =========================
+; === Ability: Grounded === 
+; =========================
+HandleGrounded:
 	call GetDefensiveMoveType
 	cp ELECTRIC
 	ret nz
 
 	call GetDefensiveSpecies
-	ld hl, VoltAbsorbPokemon
+	ld hl, GroundedPokemon
 	call IsInByteArray
 	ret nc
 
 	showdefensiveability AbilityPopup_GroundedText
-	ld hl, VoltAbsorbText
+	ld hl, GroundedText
 	call StdBattleTextbox
 	jr AttackedMissed
 
 AbilityPopup_GroundedText:
 	db "Grounded@"
 
-INCLUDE "data/abilities/volt_absorb_mons.asm"
+INCLUDE "data/abilities/defensive_abilities/grounded_mons.asm"
 
 
+; =========================
+; === Ability: Immunity === 
+; =========================
 HandleImmunity:
 	call GetDefensiveMoveType
 	cp POISON
@@ -105,12 +98,34 @@ HandleImmunity:
 AbilityPopup_ImmunityText:
 	db "Immunity@"
 
-INCLUDE "data/abilities/immunity_mons.asm"
+INCLUDE "data/abilities/defensive_abilities/immunity_mons.asm"
+
+
+; =========================
+; === Ability: Levitate === 
+; =========================
+HandleLevitate:
+	call GetDefensiveMoveType
+	cp GROUND
+	ret nz
+
+	call GetDefensiveSpecies
+	ld hl, LevitatePokemon
+	call IsInByteArray
+	ret nc
+
+	showdefensiveability AbilityPopup_LevitateText
+	ld hl, LevitateText
+	call StdBattleTextbox
+	jr AttackedMissed
+
+AbilityPopup_LevitateText:
+	db "Levitate@"
 
 
 ; ===========================================================================
 ; Get the type of the move currently attacking.
-; Returns: A = move type
+; Returns: a = move type
 ; ===========================================================================
 GetDefensiveMoveType:
 	ldh a, [hBattleTurn]
@@ -125,7 +140,7 @@ GetDefensiveMoveType:
 
 ; ===========================================================================
 ; Get the species being attacked.
-; Returns: A = defending Pokémon species
+; Returns: a = defending Pokémon species
 ; ===========================================================================
 GetDefensiveSpecies:
 	ldh a, [hBattleTurn]

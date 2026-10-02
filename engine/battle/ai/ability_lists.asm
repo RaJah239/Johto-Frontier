@@ -67,7 +67,7 @@ PhotosynthesisPokemon_AI:
     db TROPIUS
     db -1 ; end
 
-FireAbsorbPokemon_AI:
+FlameWardPokemon_AI:
     db CYNDAQUIL
     db QUILAVA
     db TYPHLOSION
@@ -80,7 +80,7 @@ FireAbsorbPokemon_AI:
     db CHANDELURE
     db -1 ; end
 
-WaterAbsorbPokemon_AI:
+WaterproofPokemon_AI:
     db LAPRAS
     db WOOPER
     db QUAGSIRE
@@ -89,7 +89,7 @@ WaterAbsorbPokemon_AI:
     db LANTURN
     db -1 ; end
 
-VoltAbsorbPokemon_AI:
+GroundedPokemon_AI:
     db CHINCHOU
     db LANTURN
     db RAIKOU

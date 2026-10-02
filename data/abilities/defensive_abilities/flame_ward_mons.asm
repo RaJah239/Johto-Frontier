@@ -1,9 +1,9 @@
 ; List of all Pokemon that are unaffected
 ; by fire attacks
 
-; Note: This list must match engine/battle/ai/ability_lists.asm `FireAbsorbPokemon_AI`
+; Note: This list must match engine/battle/ai/ability_lists.asm `FlameWardPokemon_AI`
 
-;FireAbsorbPokemon_AI
+;FlameWardPokemon_AI
 ;	db CYNDAQUIL
 ;	db QUILAVA
 ;	db TYPHLOSION
@@ -16,7 +16,7 @@
 ;	db CHANDELURE
 ;	db -1 ; end
 
-FireAbsorbPokemon:
+FlameWardPokemon:
 ;	db CYNDAQUIL
 ;	db QUILAVA
 ;	db TYPHLOSION

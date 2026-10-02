@@ -215,7 +215,7 @@ AI_Basic:
 	push hl
 	push de
 	push bc
-	ld hl, FireAbsorbPokemon_AI
+	ld hl, FlameWardPokemon_AI
 	call IsInByteArray
 	pop bc
 	pop de
@@ -233,7 +233,7 @@ AI_Basic:
 	push hl
 	push de
 	push bc
-	ld hl, WaterAbsorbPokemon_AI
+	ld hl, WaterproofPokemon_AI
 	call IsInByteArray
 	pop bc
 	pop de
@@ -251,7 +251,7 @@ AI_Basic:
 	push hl
 	push de
 	push bc
-	ld hl, VoltAbsorbPokemon_AI
+	ld hl, GroundedPokemon_AI
 	call IsInByteArray
 	pop bc
 	pop de
