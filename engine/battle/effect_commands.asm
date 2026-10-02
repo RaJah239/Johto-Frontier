@@ -1846,22 +1846,39 @@ BattleCommand_CheckHit:
 	ret
 
 .not_sing_or_dream_song_mon
-; ============================
-; === Ability: Meteor Lock ===
-; ============================
+; ===========================
+; === Ability: Astral Aim ===
+; ===========================
 	; check if meteor mash was used
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	cp METEOR_MASH
-	jr nz, .not_meteor_mash_or_meteor_lock_mon
+	jr nz, .not_meteor_mash_or_astral_aim_mon
 
 	; check it is was a meteor lock pokemon
 	call GetCurrentMon
 	ld hl, MeteorLockPokemon
 	call IsInByteArray
-	ret c
+	jr nc, .not_meteor_mash_or_astral_aim_mon
 
-.not_meteor_mash_or_meteor_lock_mon
+	CheckEventFlag EVENT_ASTRAL_AIM
+	ret nz
+
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	ret nz
+
+	; slide the ability popup over the acting side's HUD
+	ld b, BANK(AbilityPopup_AstralAimText)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	ld de, AbilityPopup_AstralAimText
+	farcall ShowAbilityPopup
+
+	SetEventFlag EVENT_ASTRAL_AIM
+	ret
+
+.not_meteor_mash_or_astral_aim_mon
 	call .StatModifiers
 
 	ld a, [wPlayerMoveStruct + MOVE_ACC]

@@ -4,3 +4,5 @@ MeteorLockPokemon:
 ;   db RIOLU
 ;   db LUCARIO
     db -1 ; end
+
+AbilityPopup_AstralAimText: db "Astral Aim@"

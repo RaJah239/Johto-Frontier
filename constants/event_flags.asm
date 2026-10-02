@@ -349,7 +349,6 @@
 	const EVENT_DISARM_FOE
 	const EVENT_ALLURE_PLAYER
 	const EVENT_ALLURE_FOE
-	const EVENT_DREAM_SONG
 
 ; Sure Hit Abilities
 	const EVENT_TRUE_HORN
@@ -360,10 +359,12 @@
 	const EVENT_STONE_FALL
 	const EVENT_STONEBOUND
 	const EVENT_DREAM_GAZE
+	const EVENT_DREAM_SONG
+	const EVENT_ASTRAL_AIM
 
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 200 events
+; Unused: next 199 events
 
 	const_next 600
 ; Kurt Apricorn events

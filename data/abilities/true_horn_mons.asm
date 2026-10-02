@@ -17,4 +17,5 @@ ResetSureHitEvents:
     ResetEventFlag EVENT_STONEBOUND
     ResetEventFlag EVENT_DREAM_GAZE
     ResetEventFlag EVENT_DREAM_SONG
+    ResetEventFlag EVENT_ASTRAL_AIM
     ret
