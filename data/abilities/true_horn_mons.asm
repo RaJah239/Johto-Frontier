@@ -5,4 +5,4 @@ TrueHornPokemon:
     db MAGIKARP
     db -1 ; end
 
-AbilityPopup_TrueHornText: db "True Horn@"
+TrueHornText: db "True Horn@"

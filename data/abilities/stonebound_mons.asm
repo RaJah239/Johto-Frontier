@@ -6,4 +6,4 @@ StoneboundPokemon:
 ;    db AERODACTYL
     db -1 ; end
 
-AbilityPopup_StoneboundText: db "Stonebound@"
+StoneboundText: db "Stonebound@"

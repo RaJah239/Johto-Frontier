@@ -1480,8 +1480,8 @@ BattleCommand_DamageVariation:
 	ld [hl], a
 	ret
 
-DEF FIRST_SURE_HIT_EVENT EQU EVENT_TRUE_HORN
-DEF LAST_SURE_HIT_EVENT  EQU EVENT_ASTRAL_AIM
+DEF FIRST_SURE_HIT_EVENT EQU EVENT_TRUE_HORN_PLAYER
+DEF LAST_SURE_HIT_EVENT  EQU EVENT_ASTRAL_AIM_FOE
 
 ResetSureHitEvents:
 	; reset all sure hit event flags
@@ -1579,333 +1579,53 @@ BattleCommand_CheckHit:
 ; ==========================
 ; === Ability: True Horn ===
 ; ==========================
-	; check if megahorn was used
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	cp MEGAHORN
-	jr nz, .not_megahorn_or_true_horn_mon
+	surefire_ability MEGAHORN, TrueHornPokemon, EVENT_TRUE_HORN_PLAYER, EVENT_TRUE_HORN_FOE, TrueHornText
 
-	; check it is was a true horn pokemon
-	call GetCurrentMon
-	ld hl, TrueHornPokemon
-	call IsInByteArray
-	jr nc, .not_megahorn_or_true_horn_mon
-
-	CheckEventFlag EVENT_TRUE_HORN
-	ret nz
-
-	ld a, [wOptions4]
-	bit ABILITY_BANNERS, a
-	ret nz
-
-	; slide the ability popup over the acting side's HUD
-	ld b, BANK(AbilityPopup_TrueHornText)
-	ldh a, [hBattleTurn]
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
-	ld de, AbilityPopup_TrueHornText
-	farcall ShowAbilityPopup
-
-	SetEventFlag EVENT_TRUE_HORN
-	ret
-
-.not_megahorn_or_true_horn_mon
 ; ===========================
 ; === Ability: Stormbound ===
 ; ===========================
-	; check if thunder was used
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	cp THUNDER
-	jr nz, .not_thunder_or_stormbound_mon
+	surefire_ability THUNDER, StormboundPokemon, EVENT_STORMBOUND_PLAYER, EVENT_STORMBOUND_FOE, StormboundText
 
-	; check it is was a stormbound pokemon
-	call GetCurrentMon
-	ld hl, StormboundPokemon
-	call IsInByteArray
-	jr nc, .not_thunder_or_stormbound_mon
-
-	CheckEventFlag EVENT_STORMBOUND
-	ret nz
-
-	ld a, [wOptions4]
-	bit ABILITY_BANNERS, a
-	ret nz
-
-	; slide the ability popup over the acting side's HUD
-	ld b, BANK(AbilityPopup_StormboundText)
-	ldh a, [hBattleTurn]
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
-	ld de, AbilityPopup_StormboundText
-	farcall ShowAbilityPopup
-
-	SetEventFlag EVENT_STORMBOUND
-	ret
-
-.not_thunder_or_stormbound_mon
 ; ===========================
 ; === Ability: True Flame ===
 ; ===========================
-	; check if fire blast was used
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	cp FIRE_BLAST
-	jr nz, .not_fire_blast_or_true_flame_mon
+	surefire_ability FIRE_BLAST, TrueFlamePokemon, EVENT_TRUE_FLAME_PLAYER, EVENT_TRUE_FLAME_FOE, TrueFlameText
 
-	; check it is was a true flame pokemon
-	call GetCurrentMon
-	ld hl, TrueFlamePokemon
-	call IsInByteArray
-	jr nc, .not_fire_blast_or_true_flame_mon
-
-	CheckEventFlag EVENT_TRUE_FLAME
-	ret nz
-
-	ld a, [wOptions4]
-	bit ABILITY_BANNERS, a
-	ret nz
-
-	; slide the ability popup over the acting side's HUD
-	ld b, BANK(AbilityPopup_TrueFlameText)
-	ldh a, [hBattleTurn]
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
-	ld de, AbilityPopup_TrueFlameText
-	farcall ShowAbilityPopup
-
-	SetEventFlag EVENT_TRUE_FLAME
-	ret
-
-.not_fire_blast_or_true_flame_mon
 ; ===========================
 ; === Ability: Frost Lock ===
 ; ===========================
-	; check if blizzard was used
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	cp BLIZZARD
-	jr nz, .not_blizzard_or_frost_lock_mon
+	surefire_ability BLIZZARD, TrueBlizzardPokemon, EVENT_FROST_LOCK_PLAYER, EVENT_FROST_LOCK_FOE, FrostLockText
 
-	; check it is was a true blizzard pokemon
-	call GetCurrentMon
-	ld hl, TrueBlizzardPokemon
-	call IsInByteArray
-	jr nc, .not_blizzard_or_frost_lock_mon
-
-	CheckEventFlag EVENT_FROST_LOCK
-	ret nz
-
-	ld a, [wOptions4]
-	bit ABILITY_BANNERS, a
-	ret nz
-
-	; slide the ability popup over the acting side's HUD
-	ld b, BANK(AbilityPopup_FrostLockText)
-	ldh a, [hBattleTurn]
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
-	ld de, AbilityPopup_FrostLockText
-	farcall ShowAbilityPopup
-
-	SetEventFlag EVENT_FROST_LOCK
-	ret
-
-.not_blizzard_or_frost_lock_mon
 ; ==========================
 ; === Ability: Hydro Aim ===
 ; ==========================
-	; check if blizzard was used
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	cp HYDRO_PUMP
-	jr nz, .not_hydro_pump_or_hydro_aim_mon
+	surefire_ability HYDRO_PUMP, SureStreamPokemon, EVENT_HYDRO_AIM_PLAYER, EVENT_HYDRO_AIM_FOE, HydroAimText
 
-	; check it is was a sure stream pokemon
-	call GetCurrentMon
-	ld hl, SureStreamPokemon
-	call IsInByteArray
-	jr nc, .not_hydro_pump_or_hydro_aim_mon
-
-	CheckEventFlag EVENT_HYDRO_AIM
-	ret nz
-
-	ld a, [wOptions4]
-	bit ABILITY_BANNERS, a
-	ret nz
-
-	; slide the ability popup over the acting side's HUD
-	ld b, BANK(AbilityPopup_HydroAimText)
-	ldh a, [hBattleTurn]
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
-	ld de, AbilityPopup_HydroAimText
-	farcall ShowAbilityPopup
-
-	SetEventFlag EVENT_HYDRO_AIM
-	ret
-
-.not_hydro_pump_or_hydro_aim_mon
 ; ============================
 ; === Ability: Stonefall =====
 ; ============================
-	; check if rock slide was used
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	cp ROCK_SLIDE
-	jr nz, .not_rock_slide_or_stone_fall_mon
+	surefire_ability ROCK_SLIDE, StonefallPokemon, EVENT_STONE_FALL_PLAYER, EVENT_STONE_FALL_FOE, Stone_FallText
 
-	; check it is was a stonefall pokemon
-	call GetCurrentMon
-	ld hl, StonefallPokemon
-	call IsInByteArray
-	jr nc, .not_rock_slide_or_stone_fall_mon
-
-	CheckEventFlag EVENT_STONE_FALL
-	ret nz
-
-	ld a, [wOptions4]
-	bit ABILITY_BANNERS, a
-	ret nz
-
-	; slide the ability popup over the acting side's HUD
-	ld b, BANK(AbilityPopup_Stone_FallText)
-	ldh a, [hBattleTurn]
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
-	ld de, AbilityPopup_Stone_FallText
-	farcall ShowAbilityPopup
-
-	SetEventFlag EVENT_STONE_FALL
-	ret
-
-.not_rock_slide_or_stone_fall_mon
 ; ============================
 ; === Ability: Stonebound =====
 ; ============================
-	; check if stone edge was used
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	cp STONE_EDGE
-	jr nz, .not_stone_edge_or_stonebound_mon
+	surefire_ability STONE_EDGE, StoneboundPokemon, EVENT_STONEBOUND_PLAYER, EVENT_STONEBOUND_FOE, StoneboundText
 
-	; check it is was a stonebound pokemon
-	call GetCurrentMon
-	ld hl, StoneboundPokemon
-	call IsInByteArray
-	jr nc, .not_stone_edge_or_stonebound_mon
-
-	CheckEventFlag EVENT_STONEBOUND
-	ret nz
-
-	ld a, [wOptions4]
-	bit ABILITY_BANNERS, a
-	ret nz
-
-	; slide the ability popup over the acting side's HUD
-	ld b, BANK(AbilityPopup_StoneboundText)
-	ldh a, [hBattleTurn]
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
-	ld de, AbilityPopup_StoneboundText
-	farcall ShowAbilityPopup
-
-	SetEventFlag EVENT_STONEBOUND
-	ret
-
-.not_stone_edge_or_stonebound_mon
 ; ===========================
 ; === Ability: Dream Gaze ===
 ; ===========================
-	; check if hypnosis was used
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	cp HYPNOSIS
-	jr nz, .not_hypnosis_or_dream_gaze_mon
+	surefire_ability HYPNOSIS, HypnoticAuraPokemon, EVENT_DREAM_GAZE_PLAYER, EVENT_DREAM_GAZE_FOE, DreamGazeText
 
-	; check it is was a hypnotic aura pokemon
-	call GetCurrentMon
-	ld hl, HypnoticAuraPokemon
-	call IsInByteArray
-	jr nc, .not_hypnosis_or_dream_gaze_mon
-
-	CheckEventFlag EVENT_DREAM_GAZE
-	ret nz
-
-	ld a, [wOptions4]
-	bit ABILITY_BANNERS, a
-	ret nz
-
-	; slide the ability popup over the acting side's HUD
-	ld b, BANK(AbilityPopup_DreamGazeText)
-	ldh a, [hBattleTurn]
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
-	ld de, AbilityPopup_DreamGazeText
-	farcall ShowAbilityPopup
-
-	SetEventFlag EVENT_DREAM_GAZE
-	ret
-
-.not_hypnosis_or_dream_gaze_mon
 ; ===========================
 ; === Ability: Dream Song ===
 ; ===========================
-	; check if sing was used
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	cp SING
-	jr nz, .not_sing_or_dream_song_mon
+	surefire_ability SING, LullabyMasteryPokemon, EVENT_DREAM_SONG_PLAYER, EVENT_DREAM_SONG_FOE, DreamSongText
 
-	; check it is was a lullaby mastery pokemon
-	call GetCurrentMon
-	ld hl, LullabyMasteryPokemon
-	call IsInByteArray
-	jr nc, .not_sing_or_dream_song_mon
-
-	CheckEventFlag EVENT_DREAM_SONG
-	ret nz
-
-	ld a, [wOptions4]
-	bit ABILITY_BANNERS, a
-	ret nz
-
-	; slide the ability popup over the acting side's HUD
-	ld b, BANK(AbilityPopup_DreamSongText)
-	ldh a, [hBattleTurn]
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
-	ld de, AbilityPopup_DreamSongText
-	farcall ShowAbilityPopup
-
-	SetEventFlag EVENT_DREAM_SONG
-	ret
-
-.not_sing_or_dream_song_mon
 ; ===========================
 ; === Ability: Astral Aim ===
 ; ===========================
-	; check if meteor mash was used
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	cp METEOR_MASH
-	jr nz, .not_meteor_mash_or_astral_aim_mon
+	surefire_ability METEOR_MASH, MeteorLockPokemon, EVENT_ASTRAL_AIM_PLAYER, EVENT_ASTRAL_AIM_FOE, AstralAimText
 
-	; check it is was a meteor lock pokemon
-	call GetCurrentMon
-	ld hl, MeteorLockPokemon
-	call IsInByteArray
-	jr nc, .not_meteor_mash_or_astral_aim_mon
-
-	CheckEventFlag EVENT_ASTRAL_AIM
-	ret nz
-
-	ld a, [wOptions4]
-	bit ABILITY_BANNERS, a
-	ret nz
-
-	; slide the ability popup over the acting side's HUD
-	ld b, BANK(AbilityPopup_AstralAimText)
-	ldh a, [hBattleTurn]
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
-	ld de, AbilityPopup_AstralAimText
-	farcall ShowAbilityPopup
-
-	SetEventFlag EVENT_ASTRAL_AIM
-	ret
-
-.not_meteor_mash_or_astral_aim_mon
 	call .StatModifiers
 
 	ld a, [wPlayerMoveStruct + MOVE_ACC]

@@ -1239,4 +1239,71 @@ MACRO showdefensiveability
 	call ShowDefensiveAbilityBanner
 ENDM
 
+; ==========================================================================
+; === Macro: surefire_ability                                        ===
+; ==========================================================================
+; Checks if a specific move was used and if the TARGET Pokemon has the ability,
+; then shows the ability popup and sets the event flag (separate for player/enemy).
+; Parameters:
+;   \1 - Move animation constant (e.g., MEGAHORN)
+;   \2 - Pokemon list (e.g., TrueHornPokemon)
+;   \3 - Event flag for PLAYER (when player's Pokemon has the ability as target)
+;   \4 - Event flag for ENEMY (when enemy's Pokemon has the ability as target)
+;   \5 - Ability popup text label (e.g., TrueHornText)
+; ==========================================================================
+MACRO surefire_ability
+	; Check if the specific move was used
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp \1
+	jr nz, .skip\@
+
+	; Check if the TARGET Pokemon has the ability
+	call GetCurrentMon
+	ld hl, \2
+	call IsInByteArray
+	jr nc, .skip\@
+
+	; Select the correct event flag based on who is the target
+	; hBattleTurn = 0: player attacking → enemy is target → use enemy event (\4)
+	; hBattleTurn = 1: enemy attacking → player is target → use player event (\3)
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .check_enemy_event\@
+	; Enemy's turn, player is target
+	CheckEventFlag \3
+	ret nz
+	jr .show_popup\@
+
+.check_enemy_event\@
+	; Player's turn, enemy is target
+	CheckEventFlag \4
+	ret nz
+
+.show_popup\@
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	ret nz
+
+	; Slide the ability popup over the TARGET's HUD
+	ld b, BANK(\5)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY (target's side)
+	ld de, \5
+	farcall ShowAbilityPopup
+
+	; Set the correct event flag
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .set_enemy_event\@
+	SetEventFlag \3
+	ret
+
+.set_enemy_event\@
+	SetEventFlag \4
+	ret
+
+.skip\@
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

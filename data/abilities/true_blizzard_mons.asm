@@ -4,4 +4,4 @@ TrueBlizzardPokemon:
 ;    db ARTICUNO
     db -1 ; end
 
-AbilityPopup_FrostLockText: db "Frost Lock@"
+FrostLockText: db "Frost Lock@"

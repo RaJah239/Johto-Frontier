@@ -8,4 +8,4 @@ SureStreamPokemon:
 ;    db GYARADOS
     db -1 ; end
 
-AbilityPopup_HydroAimText: db "Hydro Aim@"
+HydroAimText: db "Hydro Aim@"

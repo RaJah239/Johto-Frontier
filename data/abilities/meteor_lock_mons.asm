@@ -5,4 +5,4 @@ MeteorLockPokemon:
 ;   db LUCARIO
     db -1 ; end
 
-AbilityPopup_AstralAimText: db "Astral Aim@"
+AstralAimText: db "Astral Aim@"

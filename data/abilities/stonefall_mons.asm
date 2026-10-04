@@ -4,4 +4,4 @@ StonefallPokemon:
 ;    db AERODACTYL
     db -1 ; end
 
-AbilityPopup_Stone_FallText: db "Stone Fall@"
+Stone_FallText: db "Stone Fall@"
