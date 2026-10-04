@@ -1579,52 +1579,52 @@ BattleCommand_CheckHit:
 ; ==========================
 ; === Ability: True Horn ===
 ; ==========================
-	check_ability_popup MEGAHORN, TrueHornPokemon, EVENT_TRUE_HORN, AbilityPopup_TrueHornText
+	check_ability_popup MEGAHORN, TrueHornPokemon, EVENT_TRUE_HORN, EVENT_TRUE_HORN_FOE, AbilityPopup_TrueHornText
 
 ; ===========================
 ; === Ability: Stormbound ===
 ; ===========================
-	check_ability_popup THUNDER, StormboundPokemon, EVENT_STORMBOUND, AbilityPopup_StormboundText
+	check_ability_popup THUNDER, StormboundPokemon, EVENT_STORMBOUND, EVENT_STORMBOUND_FOE, AbilityPopup_StormboundText
 
 ; ===========================
 ; === Ability: True Flame ===
 ; ===========================
-	check_ability_popup FIRE_BLAST, TrueFlamePokemon, EVENT_TRUE_FLAME, AbilityPopup_TrueFlameText
+	check_ability_popup FIRE_BLAST, TrueFlamePokemon, EVENT_TRUE_FLAME, EVENT_TRUE_FLAME_FOE, AbilityPopup_TrueFlameText
 
 ; ===========================
 ; === Ability: Frost Lock ===
 ; ===========================
-	check_ability_popup BLIZZARD, TrueBlizzardPokemon, EVENT_FROST_LOCK, AbilityPopup_FrostLockText
+	check_ability_popup BLIZZARD, TrueBlizzardPokemon, EVENT_FROST_LOCK, EVENT_FROST_LOCK_FOE, AbilityPopup_FrostLockText
 
 ; ==========================
 ; === Ability: Hydro Aim ===
 ; ==========================
-	check_ability_popup HYDRO_PUMP, SureStreamPokemon, EVENT_HYDRO_AIM, AbilityPopup_HydroAimText
+	check_ability_popup HYDRO_PUMP, SureStreamPokemon, EVENT_HYDRO_AIM, EVENT_HYDRO_AIM_FOE, AbilityPopup_HydroAimText
 
 ; ============================
 ; === Ability: Stonefall =====
 ; ============================
-	check_ability_popup ROCK_SLIDE, StonefallPokemon, EVENT_STONE_FALL, AbilityPopup_Stone_FallText
+	check_ability_popup ROCK_SLIDE, StonefallPokemon, EVENT_STONE_FALL, EVENT_STONE_FALL_FOE, AbilityPopup_Stone_FallText
 
 ; ============================
 ; === Ability: Stonebound =====
 ; ============================
-	check_ability_popup STONE_EDGE, StoneboundPokemon, EVENT_STONEBOUND, AbilityPopup_StoneboundText
+	check_ability_popup STONE_EDGE, StoneboundPokemon, EVENT_STONEBOUND, EVENT_STONEBOUND_FOE, AbilityPopup_StoneboundText
 
 ; ===========================
 ; === Ability: Dream Gaze ===
 ; ===========================
-	check_ability_popup HYPNOSIS, HypnoticAuraPokemon, EVENT_DREAM_GAZE, AbilityPopup_DreamGazeText
+	check_ability_popup HYPNOSIS, HypnoticAuraPokemon, EVENT_DREAM_GAZE, EVENT_DREAM_GAZE_FOE, AbilityPopup_DreamGazeText
 
 ; ===========================
 ; === Ability: Dream Song ===
 ; ===========================
-	check_ability_popup SING, LullabyMasteryPokemon, EVENT_DREAM_SONG, AbilityPopup_DreamSongText
+	check_ability_popup SING, LullabyMasteryPokemon, EVENT_DREAM_SONG, EVENT_DREAM_SONG_FOE, AbilityPopup_DreamSongText
 
 ; ===========================
 ; === Ability: Astral Aim ===
 ; ===========================
-	check_ability_popup METEOR_MASH, MeteorLockPokemon, EVENT_ASTRAL_AIM, AbilityPopup_AstralAimText
+	check_ability_popup METEOR_MASH, MeteorLockPokemon, EVENT_ASTRAL_AIM, EVENT_ASTRAL_AIM_FOE, AbilityPopup_AstralAimText
 
 	call .StatModifiers
 
