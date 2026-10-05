@@ -177,7 +177,7 @@ BattleCommand_CheckTurn:
 	call StdBattleTextbox
 
 .skip_fast_asleep_text
-	; Snore and Sleep Talk bypass sleep.
+	; Sleep Talk bypass sleep.
 	ld a, [wCurPlayerMove]
 	cp SLEEP_TALK
 	jr z, .not_asleep
@@ -427,7 +427,7 @@ CheckEnemyTurn:
 	jr .not_asleep
 
 .fast_asleep
-	; Snore and Sleep Talk bypass sleep.
+	; Sleep Talk bypass sleep.
 	ld a, [wCurEnemyMove]
 	cp SLEEP_TALK
 	jr z, .not_asleep
@@ -6080,10 +6080,10 @@ BattleCommand_Confuse:
 
 .not_already_confused
 	call CheckSubstituteOpp
-	jr nz, BattleCommand_Confuse_CheckSnore_Swagger_ConfuseHit
+	jr nz, BattleCommand_Confuse_Swagger_ConfuseHit
 	ld a, [wAttackMissed]
 	and a
-	jr nz, BattleCommand_Confuse_CheckSnore_Swagger_ConfuseHit
+	jr nz, BattleCommand_Confuse_Swagger_ConfuseHit
 BattleCommand_FinishConfusingTarget:
 	ld bc, wEnemyConfuseCount
 	ldh a, [hBattleTurn]
@@ -6127,7 +6127,7 @@ BattleCommand_FinishConfusingTarget:
 	ld hl, UseConfusionHealingItem
 	jmp CallBattleCore
 
-BattleCommand_Confuse_CheckSnore_Swagger_ConfuseHit:
+BattleCommand_Confuse_Swagger_ConfuseHit:
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
 	cp EFFECT_CONFUSE_HIT
@@ -7107,7 +7107,6 @@ INCLUDE "engine/battle/move_effects/rollout.asm"
 INCLUDE "engine/battle/move_effects/return.asm"
 INCLUDE "engine/battle/move_effects/baton_pass.asm"
 
-INCLUDE "engine/battle/move_effects/snore.asm"
 INCLUDE "engine/battle/move_effects/sketch.asm"
 INCLUDE "engine/battle/move_effects/sleep_talk.asm"
 INCLUDE "engine/battle/move_effects/destiny_bond.asm"

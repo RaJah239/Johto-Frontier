@@ -1056,27 +1056,6 @@ PainSplit:
 	farcommand
 	endmove
 
-Snore:
-	usedmovetext
-	doturn
-	critical
-	damagestats
-	damagecalc
-	stab
-	damagevariation
-	checkhit
-	effectchance
-	snore
-	moveanim
-	failuretext
-	applydamage
-	criticaltext
-	supereffectivetext
-	checkfaint
-	flinchtarget
-	kingsrock
-	endmove
-
 Sketch:
 	usedmovetext
 	doturn

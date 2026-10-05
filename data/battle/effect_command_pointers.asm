@@ -56,7 +56,6 @@ BattleCommandPointers:
 	dw BattleCommand_Rampage
 	dw BattleCommand_CheckRampage
 	dw BattleCommand_ConstantDamage
-	dw BattleCommand_Snore
 	dw BattleCommand_Sketch
 	dw BattleCommand_SleepTalk
 	dw BattleCommand_DestinyBond

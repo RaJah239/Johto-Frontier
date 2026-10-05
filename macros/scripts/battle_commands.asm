@@ -56,7 +56,6 @@ ENDM
 	command rampage                 ; 3d
 	command checkrampage            ; 3e
 	command constantdamage          ; 3f
-	command snore                   ; 43
 	command sketch                  ; 46
 	command sleeptalk               ; 48
 	command destinybond             ; 49
