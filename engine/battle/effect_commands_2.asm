@@ -30,6 +30,7 @@ INCLUDE "engine/battle/move_effects/growth.asm"
 INCLUDE "engine/battle/move_effects/curse.asm"
 INCLUDE "engine/battle/move_effects/protect.asm"
 INCLUDE "engine/battle/move_effects/bulk_up.asm"
+INCLUDE "engine/battle/move_effects/calmmind.asm"
 
 ; Weather duration when Weather Rock is equipped
 ; Rock: 16, No Rock: 5

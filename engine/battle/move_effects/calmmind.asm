@@ -5,6 +5,7 @@ BattleCommand_CalmMind:
 	and a
 	jr z, .go
 	ld bc, wEnemyStatLevels
+
 .go
 ; check if stats can go higher
 ; Special Attack
@@ -15,6 +16,7 @@ BattleCommand_CalmMind:
 	ld a, [bc]
 	cp MAX_STAT_LEVEL
 	jr c, .raise
+
 ; Special Defense
 	inc bc
 	ld a, [bc]
@@ -24,19 +26,20 @@ BattleCommand_CalmMind:
 ; Raise Defense and Special Defense.
     ld a, $1
 	ld [wBattleAnimParam], a
-	call AnimateCurrentMove
-	call BattleCommand_SwitchTurn
-	call ResetMiss
-	call BattleCommand_SwitchTurn
-	call BattleCommand_SpecialAttackUp
-	call BattleCommand_StatUpMessage
-	call ResetMiss
-	call BattleCommand_SpecialDefenseUp
-	jmp BattleCommand_StatUpMessage
+	farcall AnimateCurrentMove
+	farcall BattleCommand_SwitchTurn
+	farcall ResetMiss
+	farcall BattleCommand_SwitchTurn
+	farcall BattleCommand_SpecialAttackUp
+	farcall BattleCommand_StatUpMessage
+	farcall ResetMiss
+	farcall BattleCommand_SpecialDefenseUp
+	farjp BattleCommand_StatUpMessage
+
 .cantraise
 ; Can't raise either stat.
 	ld b, ABILITY + 1
-	call GetStatName
-	call AnimateFailedMove
+	farcall GetStatName
+	farcall AnimateFailedMove
 	ld hl, WontRiseAnymoreText
 	jmp StdBattleTextbox

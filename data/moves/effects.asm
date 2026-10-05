@@ -1524,7 +1524,7 @@ BulkUp:
 CalmMind:
 	usedmovetext
 	doturn
-	calmmind
+	farcommand
 	endmove
 
 DragonDance:
