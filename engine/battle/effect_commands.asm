@@ -21,7 +21,6 @@ DoEnemyTurn:
 
 DoTurn:
 ; Read in and execute the user's move effects for this turn.
-
 	xor a
 	ld [wTurnEnded], a
 
@@ -33,6 +32,7 @@ DoTurn:
 	ret nz
 
 	call UpdateMoveData
+	; fallthrough
 
 DoMove:
 ; Get the user's move effect.
@@ -98,7 +98,6 @@ DoMove:
 	call GetFarWord
 
 	call .DoMoveEffectCommand
-
 	jr .ReadMoveEffectCommand
 
 .DoMoveEffectCommand:
@@ -358,12 +357,10 @@ CantMove:
 	and ~(1 << SUBSTATUS_RAMPAGE | 1 << SUBSTATUS_CHARGED)
 	ld [hl], a
 
-
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	cp FLY
 	jr z, .fly_dig
-
 	cp DIG
 	ret nz
 
@@ -570,7 +567,6 @@ CheckEnemyTurn:
 	jr nz, .no_disabled_move
 
 	call MoveDisabled
-
 	call CantMove
 	jr EndTurn
 
@@ -721,7 +717,6 @@ BattleCommand_DoTurn:
 	ld bc, wEnemyTurnsTaken
 
 .proceed
-
 ; If we've gotten this far, this counts as a turn.
 	ld a, [bc]
 	inc a
@@ -806,8 +801,7 @@ BattleCommand_DoTurn:
 
 .mimic
 	ld hl, wWildMonPP
-	call .consume_pp
-	ret
+	jr .consume_pp
 
 .out_of_pp
 	call BattleCommand_MoveDelay
@@ -867,7 +861,6 @@ CheckMimicUsed:
 
 BattleCommand_Critical:
 ; Determine whether this attack's hit will be critical.
-
 	xor a
 	ld [wCriticalHit], a
 
@@ -896,7 +889,7 @@ BattleCommand_Critical:
 	ld c, 0
 
 	cp CHANSEY
-	jr nz, .Farfetchd
+	jr nz, .Tropius
 	ld a, [hl]
 	cp LUCKY_PUNCH
 	jr nz, .FocusEnergy
@@ -905,7 +898,7 @@ BattleCommand_Critical:
 	ld c, 2
 	jmp .Tally
 
-.Farfetchd:
+.Tropius:
 	cp TROPIUS
 	jr nz, .FocusEnergy
 	ld a, [hl]
@@ -1136,7 +1129,6 @@ BattleCommand_Stab:
 	call GetBattleVar
 	bit SUBSTATUS_IDENTIFIED, a
 	jr nz, .end
-
 	jr .TypesLoop
 
 .SkipForesightCheck:
@@ -1163,6 +1155,7 @@ BattleCommand_Stab:
 	inc a
 	ld [wAttackMissed], a
 	xor a
+
 .NotImmune:
 	ldh [hMultiplier], a
 	add b
