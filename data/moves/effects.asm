@@ -1864,7 +1864,7 @@ Acrobatics:
 	damagecalc
 	stab
 	damagevariation
-	acrobatics
+	farcommand
 	checkhit
 	moveanim
 	failuretext

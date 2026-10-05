@@ -137,7 +137,6 @@ ENDM
 	command facade                  ; be
 	command hurricaneaccuracy       ; bf
 	command farcommand              ; c0
-	command acrobatics
 	command checkcontact
 	command checksubstitute
 DEF NUM_EFFECT_COMMANDS EQU const_value - 1

@@ -9,4 +9,4 @@ BattleCommand_Acrobatics:
 	ld a, [hl]
 	and a
 	ret nz
-	jmp DoubleDamage
+	farjp DoubleDamage

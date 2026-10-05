@@ -57,4 +57,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_PERISH_SONG,     BattleCommand_PerishSong
 	dbw EFFECT_ATTRACT,         BattleCommand_Attract
 	dbw EFFECT_SAFEGUARD,       BattleCommand_Safeguard
+	dbw EFFECT_ACROBATICS,      BattleCommand_Acrobatics
 	db -1 ; end

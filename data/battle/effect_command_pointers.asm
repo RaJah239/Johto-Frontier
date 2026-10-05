@@ -137,7 +137,6 @@ BattleCommandPointers:
 	dw BattleCommand_Facade
 	dw BattleCommand_HurricaneAccuracy
 	dw BattleCommand_FarCommand
-	dw BattleCommand_Acrobatics
 	dw BattleCommand_CheckContact
 	dw BattleCommand_CheckSubstitute
 	assert_table_length NUM_EFFECT_COMMANDS
