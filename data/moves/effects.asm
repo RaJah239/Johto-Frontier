@@ -1596,7 +1596,7 @@ Hex:
 	damagecalc
 	stab
 	damagevariation
-	hex
+	farcommand
 	checkhit
 	moveanim
 	failuretext

@@ -141,7 +141,6 @@ BattleCommandPointers:
 	dw BattleCommand_Defog
 	dw BattleCommand_QuiverDance
 	dw BattleCommand_Burn
-	dw BattleCommand_Hex
 	dw BattleCommand_Facade
 	dw BattleCommand_HurricaneAccuracy
 	dw BattleCommand_FarCommand
