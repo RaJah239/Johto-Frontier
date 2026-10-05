@@ -1,6 +1,6 @@
 ; List of all Pokemon that cannot be critical hit
 
-BattleArmorPokemon:
+CritGuardPokemon:
 ;    db TURTWIG
 ;    db GROTLE
 ;    db TORTERRA

@@ -864,14 +864,6 @@ BattleCommand_Critical:
 	xor a
 	ld [wCriticalHit], a
 
-; =============================
-; === Ability: Battle Armor === 
-; =============================
-	call GetOpposingMon
-	ld hl, BattleArmorPokemon
-	call IsInByteArray
-	ret c
-
 	ld a, BATTLE_VARS_MOVE_POWER
 	call GetBattleVar
 	and a
@@ -907,7 +899,7 @@ BattleCommand_Critical:
 
 ; +2 critical level
 	ld c, 2
-	jr .Tally
+	jmp .Tally
 
 .FocusEnergy:
 	ld a, BATTLE_VARS_SUBSTATUS4
@@ -936,9 +928,20 @@ BattleCommand_Critical:
 	call GetBattleVar
 	cp SLASH
 	jr nz, .continue1
-	ld a, 1
-	ld [wCriticalHit], a
+
+; ===========================
+; === Ability: Crit Guard === 
+; ===========================
+	call GetOpposingMon
+	ld hl, CritGuardPokemon
+	call IsInByteArray
+	jr nc, .crit_guard_check_finished1
+
+	showdefensiveability AbilitySlideIn_CritGuardText
 	ret
+
+.crit_guard_check_finished1
+	jmp CriticialHitLoaded
 
 .continue1
 ; =================================
@@ -957,9 +960,20 @@ BattleCommand_Critical:
 	call GetBattleVar
 	cp LEAF_BLADE
 	jr nz, .continue2
-	ld a, 1
-	ld [wCriticalHit], a
+
+; ===========================
+; === Ability: Crit Guard === 
+; ===========================
+	call GetOpposingMon
+	ld hl, CritGuardPokemon
+	call IsInByteArray
+	jr nc, .crit_guard_check_finished2
+
+	showdefensiveability AbilitySlideIn_CritGuardText
 	ret
+
+.crit_guard_check_finished2
+	jmp CriticialHitLoaded
 
 .continue2
 ; ===========================
@@ -1010,12 +1024,28 @@ BattleCommand_Critical:
 	call BattleRandom
 	cp [hl]
 	ret nc
+
+; ===========================
+; === Ability: Crit Guard === 
+; ===========================
+	call GetOpposingMon
+	ld hl, CritGuardPokemon
+	call IsInByteArray
+	jr nc, .crit_guard_check_finished3
+
+	showdefensiveability AbilitySlideIn_CritGuardText
+	ret
+
+.crit_guard_check_finished3
+CriticialHitLoaded:
 	ld a, 1
 	ld [wCriticalHit], a
 	ret
 
+AbilitySlideIn_CritGuardText: db "Crit Guard@"
+
 INCLUDE "data/moves/critical_hit_moves.asm"
-INCLUDE "data/abilities/battle_armor_mons.asm"
+INCLUDE "data/abilities/crit_guard_mons.asm"
 INCLUDE "data/abilities/slash_crits_mons.asm"
 INCLUDE "data/abilities/leaf_blade_crits_mons.asm"
 INCLUDE "data/abilities/super_luck_mons.asm"
@@ -4528,7 +4558,7 @@ BattleCommand_StatDown:
 	ld [wLoweredStat], a
 
 	call CheckMist
-	jmp nz, .Mist
+	jr nz, .Mist
 
 	ld hl, wEnemyStatLevels
 	ldh a, [hBattleTurn]
