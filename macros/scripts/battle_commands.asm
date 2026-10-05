@@ -56,7 +56,6 @@ ENDM
 	command rampage                 ; 3d
 	command checkrampage            ; 3e
 	command constantdamage          ; 3f
-	command sleeptalk               ; 48
 	command destinybond             ; 49
 	command spite                   ; 4a
 	command falseswipe              ; 4b

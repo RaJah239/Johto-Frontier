@@ -1065,7 +1065,7 @@ Sketch:
 SleepTalk:
 	usedmovetext
 	doturn
-	sleeptalk
+	farcommand
 	endmove
 
 DestinyBond:

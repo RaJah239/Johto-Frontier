@@ -1,5 +1,5 @@
 BattleCommand_SleepTalk:
-	call ClearLastMove
+	farcall ClearLastMove
 	ld a, [wAttackMissed]
 	and a
 	jr nz, .fail
@@ -48,21 +48,21 @@ BattleCommand_SleepTalk:
 	call GetBattleVarAddr
 	ld a, e
 	ld [hl], a
-	call CheckUserIsCharging
+	farcall CheckUserIsCharging
 	jr nz, .charging
 	ld a, [wBattleAnimParam]
 	push af
-	call BattleCommand_LowerSub
+	farcall BattleCommand_LowerSub
 	pop af
 	ld [wBattleAnimParam], a
 .charging
-	call LoadMoveAnim
-	call UpdateMoveData
-	jmp ResetTurn
+	farcall LoadMoveAnim
+	farcall UpdateMoveData
+	farjp ResetTurn
 
 .fail
-	call AnimateFailedMove
-	jmp TryPrintButItFailed
+	farcall AnimateFailedMove
+	farjp TryPrintButItFailed
 
 .safely_check_has_usable_move
 	push hl

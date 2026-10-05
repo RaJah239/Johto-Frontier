@@ -69,4 +69,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_FACADE,          BattleCommand_Facade
 	dbw EFFECT_ENCORE,          BattleCommand_Encore
 	dbw EFFECT_SKETCH,          BattleCommand_Sketch
+	dbw EFFECT_SLEEP_TALK,      BattleCommand_SleepTalk
 	db -1 ; end
