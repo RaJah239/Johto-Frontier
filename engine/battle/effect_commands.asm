@@ -1647,7 +1647,6 @@ BattleCommand_CheckHit:
 	call BattleRandom
 	cp b
 	jr nc, .Miss
-
 .Hit:
 	ret
 
@@ -2376,34 +2375,16 @@ FailText_CheckOpponentProtect:
 	jmp StdBattleTextbox
 
 BattleCommand_CriticalText:
-; Prints the message for critical hits or one-hit KOs.
-
-; If there is no message to be printed, wait 20 frames.
 	ld a, [wCriticalHit]
 	and a
-	jr z, .wait
+	ret z
 
-	dec a
-	add a
-	ld hl, .texts
-	ld b, 0
-	ld c, a
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	ld hl, CriticalHitText
 	call StdBattleTextbox
 
 	xor a
 	ld [wCriticalHit], a
-
-.wait
-	ld c, 10
-	jmp DelayFrames
-
-.texts
-	dw CriticalHitText
-	dw OneHitKOText
+	ret
 
 BattleCommand_StartLoop:
 	ld hl, wPlayerRolloutCount
