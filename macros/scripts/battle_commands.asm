@@ -68,7 +68,6 @@ ENDM
 	command kingsrock               ; 4d
 	command arenatrap               ; 51
 	command defrost                 ; 53
-	command curse                   ; 54
 	command protect                 ; 55
 	command spikes                  ; 56
 	command perishsong              ; 58

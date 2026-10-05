@@ -4989,6 +4989,11 @@ ResetMiss:
 	ld [wAttackMissed], a
 	ret
 
+; Take the stat to lower from wLoweredStat. Use this rather than LowerStat when
+; calling from another bank: farcall spends a on the bank number, so LowerStat
+; never sees a stat the caller set in a.
+LowerStatFar:
+	ld a, [wLoweredStat]
 LowerStat:
 	ld [wLoweredStat], a
 
@@ -7095,7 +7100,6 @@ StartWeatherItem:
 	ld [wWeatherCount], a
 	ret
 
-INCLUDE "engine/battle/move_effects/curse.asm"
 INCLUDE "engine/battle/move_effects/protect.asm"
 INCLUDE "engine/battle/move_effects/bulk_up.asm"
 INCLUDE "engine/battle/move_effects/calmmind.asm"

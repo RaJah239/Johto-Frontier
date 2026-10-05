@@ -1163,7 +1163,7 @@ Trick:
 Curse:
 	usedmovetext
 	doturn
-	curse
+	farcommand
 	endmove
 
 Protect:
