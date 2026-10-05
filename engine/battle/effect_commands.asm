@@ -687,23 +687,24 @@ BattleCommand_DoTurn:
 	cp HELD_CHOICE_BAND
 	jr z, .lock
 	cp HELD_CHOICE_SPECS
-	jr z, .lock
-	jr .continue
+	jr nz, .continue
+
 .lock
 	ld a, BATTLE_VARS_SUBSTATUS5
 	call GetBattleVarAddr
 	set SUBSTATUS_ENCORED, [hl]
-    ldh a, [hBattleTurn]
-  	and a
-  	jr nz, .enemy
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .enemy
 	ld a, 255
 	ld [wPlayerEncoreCount], a
 	jr .continue
+
 .enemy
 	ld a, 255
 	ld [wEnemyEncoreCount], a
-.continue
 
+.continue
 	call CheckUserIsCharging
 	ret nz
 
