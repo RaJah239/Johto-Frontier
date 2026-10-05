@@ -1264,7 +1264,7 @@ Return:
 Safeguard:
 	usedmovetext
 	doturn
-	safeguard
+	farcommand
 	endmove
 
 BatonPass:

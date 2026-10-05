@@ -56,4 +56,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_SPIKES,          BattleCommand_Spikes
 	dbw EFFECT_PERISH_SONG,     BattleCommand_PerishSong
 	dbw EFFECT_ATTRACT,         BattleCommand_Attract
+	dbw EFFECT_SAFEGUARD,       BattleCommand_Safeguard
 	db -1 ; end

@@ -72,7 +72,6 @@ ENDM
 	command rolloutpower            ; 5c
 	command happinesspower          ; 60
 	command damagecalc              ; 62
-	command safeguard               ; 64
 	command checksafeguard          ; 65
 	command batonpass               ; 67
 	command pursuit                 ; 68

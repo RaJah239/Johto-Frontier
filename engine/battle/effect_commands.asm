@@ -7104,9 +7104,8 @@ BattleCommand_Mimic:
 	ret
 
 INCLUDE "engine/battle/move_effects/rollout.asm"
-
 INCLUDE "engine/battle/move_effects/return.asm"
-INCLUDE "engine/battle/move_effects/safeguard.asm"
+
 INCLUDE "engine/battle/move_effects/acrobatics.asm"
 INCLUDE "engine/battle/move_effects/baton_pass.asm"
 INCLUDE "engine/battle/move_effects/pursuit.asm"

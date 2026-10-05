@@ -72,7 +72,6 @@ BattleCommandPointers:
 	dw BattleCommand_RolloutPower
 	dw BattleCommand_HappinessPower
 	dw BattleCommand_DamageCalc
-	dw BattleCommand_Safeguard
 	dw BattleCommand_CheckSafeguard
 	dw BattleCommand_BatonPass
 	dw BattleCommand_Pursuit
