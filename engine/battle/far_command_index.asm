@@ -60,4 +60,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_ACROBATICS,      BattleCommand_Acrobatics
 	dbw EFFECT_PURSUIT,         BattleCommand_Pursuit
 	dbw EFFECT_RAPID_SPIN,      BattleCommand_ClearHazards
+	dbw EFFECT_HIDDEN_POWER,    BattleCommand_HiddenPower
 	db -1 ; end

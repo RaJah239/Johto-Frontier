@@ -75,7 +75,6 @@ ENDM
 	command checksafeguard          ; 65
 	command batonpass               ; 67
 	command weatherheal
-	command hiddenpower             ; 6d
 	command attackup                ; 70
 	command defenseup               ; 71
 	command speedup                 ; 72

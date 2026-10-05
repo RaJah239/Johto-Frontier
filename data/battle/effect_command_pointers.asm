@@ -75,7 +75,6 @@ BattleCommandPointers:
 	dw BattleCommand_CheckSafeguard
 	dw BattleCommand_BatonPass
 	dw BattleCommand_WeatherBasedHeal
-	dw BattleCommand_HiddenPower
 	dw BattleCommand_AttackUp
 	dw BattleCommand_DefenseUp
 	dw BattleCommand_SpeedUp

@@ -1324,7 +1324,7 @@ HiddenPower:
 	usedmovetext
 	doturn
 	critical
-	hiddenpower
+	farcommand
 	damagecalc
 	stab
 	damagevariation
