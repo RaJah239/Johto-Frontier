@@ -7100,7 +7100,6 @@ StartWeatherItem:
 	ld [wWeatherCount], a
 	ret
 
-INCLUDE "engine/battle/move_effects/protect.asm"
 INCLUDE "engine/battle/move_effects/bulk_up.asm"
 INCLUDE "engine/battle/move_effects/calmmind.asm"
 INCLUDE "engine/battle/move_effects/dragondance.asm"

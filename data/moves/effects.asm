@@ -1169,7 +1169,7 @@ Curse:
 Protect:
 	usedmovetext
 	doturn
-	protect
+	farcommand
 	endmove
 
 Spikes:

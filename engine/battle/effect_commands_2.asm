@@ -28,6 +28,7 @@ INCLUDE "engine/battle/move_effects/trick.asm"
 INCLUDE "engine/battle/move_effects/knock_off.asm"
 INCLUDE "engine/battle/move_effects/growth.asm"
 INCLUDE "engine/battle/move_effects/curse.asm"
+INCLUDE "engine/battle/move_effects/protect.asm"
 
 ; Weather duration when Weather Rock is equipped
 ; Rock: 16, No Rock: 5

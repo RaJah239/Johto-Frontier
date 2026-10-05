@@ -42,4 +42,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_KNOCK_OFF,       BattleCommand_KnockOff
 	dbw EFFECT_GROWTH,          BattleCommand_Growth
 	dbw EFFECT_CURSE,           BattleCommand_Curse
+	dbw EFFECT_PROTECT,         BattleCommand_Protect
 	db -1 ; end
