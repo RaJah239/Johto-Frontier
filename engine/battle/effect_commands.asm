@@ -913,7 +913,7 @@ BattleCommand_Critical:
 
 ; +2 critical level
 	ld c, 2
-	jmp .Tally
+	jr .Tally
 
 .FocusEnergy:
 	ld a, BATTLE_VARS_SUBSTATUS4
@@ -930,14 +930,10 @@ BattleCommand_Critical:
 ; === Ability: Slash Crits === 
 ; ============================
 	call GetCurrentMon
-	push hl
-	push de
 	push bc
 	ld hl, SlashCritsPokemon
 	call IsInByteArray
 	pop bc
-	pop de
-	pop hl
 	jr c, .check_slash
 	jr .continue1
 
@@ -955,14 +951,10 @@ BattleCommand_Critical:
 ; === Ability: Leaf Blade Crits === 
 ; =================================
 	call GetCurrentMon
-	push hl
-	push de
 	push bc
 	ld hl, LeafBladeCritsPokemon
 	call IsInByteArray
 	pop bc
-	pop de
-	pop hl
 	jr c, .check_leaf_blade
 	jr .continue2
 
@@ -980,14 +972,10 @@ BattleCommand_Critical:
 ; === Ability: Super Luck ===
 ; ===========================
 	call GetCurrentMon
-	push hl
-	push de
 	push bc
 	ld hl, SuperLuckPokemon
 	call IsInByteArray
 	pop bc
-	pop de
-	pop hl
 	jr c, .increase_critical
 	jr .continue3
 
@@ -3441,14 +3429,10 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 ; === Ability: Sniper === 
 ; =======================
 	call GetCurrentMon
-	push hl
-	push de
 	push bc
 	ld hl, SniperPokemon
 	call IsInByteArray
 	pop bc
-	pop de
-	pop hl
 	jr c, .sniper_mons_damage
 	jr .regular_crit_damage
 
