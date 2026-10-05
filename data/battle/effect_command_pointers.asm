@@ -126,7 +126,6 @@ BattleCommandPointers:
 	dw BattleCommand_SuperEffectiveLoopText
 	dw BattleCommand_StartLoop
 	dw BattleCommand_Curl
-	dw BattleCommand_StickyWeb
 	dw BattleCommand_Burn
 	dw BattleCommand_Facade
 	dw BattleCommand_HurricaneAccuracy

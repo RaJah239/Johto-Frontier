@@ -1506,7 +1506,7 @@ ToxicSpikes:
 StickyWeb:
 	usedmovetext
 	doturn
-	stickyweb
+	farcommand
 	endmove
 
 Defog:

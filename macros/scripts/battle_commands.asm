@@ -126,7 +126,6 @@ ENDM
 	command supereffectivelooptext  ; ad
 	command startloop               ; ae
 	command curl                    ; af
-	command stickyweb
 	command burn                    ; bb
 	command facade                  ; be
 	command hurricaneaccuracy       ; bf
