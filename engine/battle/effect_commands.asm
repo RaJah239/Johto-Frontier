@@ -2449,7 +2449,7 @@ BattleCommand_CheckFaint:
 ; checkfaint
 
 ; Faint the opponent if its HP reached zero
-;  and faint the user along with it if it used Destiny Bond.
+; and faint the user along with it if it used Destiny Bond.
 ; Ends the move effect if the opponent faints.
 
 	ld hl, wEnemyMonHP
@@ -3162,7 +3162,6 @@ ConfusionDamageCalc:
 	call Divide
 
 ; Item boosts
-
  ; Item boosts don't apply to confusion damage
  	ld a, [wIsConfusionDamage]
  	and a
@@ -3473,7 +3472,6 @@ BattleCommand_ConstantDamage:
 	ld a, 0
 	jr nz, .got_power
 	ld b, 1
-	;jr .got_power ; commented out to save space
 
 .got_power
 	ld hl, wCurDamage
@@ -3580,8 +3578,7 @@ PlayFXAnimID:
 
 	ld c, 3
 	call DelayFrames
-	callfar PlayBattleAnim
-	ret
+	farjp PlayBattleAnim
 
 DoEnemyDamage:
 	ld hl, wCurDamage
@@ -3660,8 +3657,8 @@ DoPlayerDamage:
 
 .ignore_substitute
 	; Subtract wCurDamage from wBattleMonHP.
-	;  store original HP in little endian wHPBuffer2
-	;  store new HP in little endian wHPBuffer3
+	; store original HP in little endian wHPBuffer2
+	; store new HP in little endian wHPBuffer3
 	ld a, [hld]
 	ld b, a
 	ld a, [wBattleMonHP + 1]
@@ -3895,7 +3892,6 @@ BattleCommand_PoisonTarget:
 
 	ld hl, WasPoisonedText
 	call StdBattleTextbox
-
 	farjp UseHeldStatusHealingItem
 
 BattleCommand_Poison:
@@ -3922,7 +3918,6 @@ BattleCommand_Poison:
 	ld hl, SerenityPokemon
 	call IsInByteArray
 	jr c, Serenity
-	; fallthrough
 
 	ld hl, DidntAffect1Text
 	ld a, BATTLE_VARS_STATUS_OPP
@@ -3977,6 +3972,7 @@ BattleCommand_Poison:
 	ld de, wEnemyToxicCount
 	jr z, .ok
 	ld de, wPlayerToxicCount
+
 .ok
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
@@ -3990,6 +3986,7 @@ CheckIfTargetIsGivenType:
 	and a
 	jr z, .ok
 	ld de, wBattleMonType1
+
 .ok
 	ld a, [de]
 	inc de
@@ -4249,7 +4246,6 @@ BattleCommand_FreezeTarget:
 
 	ld hl, GotAFrostbiteText
 	call StdBattleTextbox
-
 	farjp UseHeldStatusHealingItem
 
 BattleCommand_ParalyzeTarget:
@@ -4264,7 +4260,6 @@ BattleCommand_ParalyzeTarget:
 	ld a, [wTypeModifier]
 	and EFFECTIVENESS_MASK
 	ret z
-	; fallthrough
 
 ; ===========================================
 ; === Ability: Serenity - Paralyze Target ===
@@ -4273,7 +4268,6 @@ BattleCommand_ParalyzeTarget:
 	ld hl, SerenityPokemon
 	call IsInByteArray
 	ret c
-	; fallthrough
 
 ; ===========================
 ; === Ability: Sure Shock ===
@@ -4296,7 +4290,6 @@ BattleCommand_ParalyzeTarget:
 .paralyze
 	xor a
 	ld [wEffectFailed], a
-	; fallthrough
 
 .done
 	ld a, [wEffectFailed]
@@ -4549,14 +4542,10 @@ BattleCommand_StatDown:
 ; ===========================
 ; === Ability: Resilience ===
 ; ===========================
-	push hl
-	push de
 	push bc
 	ld hl, ResiliencePokemon
 	call IsInByteArray
 	pop bc
-	pop de
-	pop hl
 	jr c, .resilience
 
 ; Attempt to lower the stat.
@@ -5651,7 +5640,6 @@ CheckOpponentWentFirst:
 
 BattleCommand_HeldFlinch:
 ; kingsrock
-
 	ld a, [wAttackMissed]
 	and a
 	ret nz
@@ -5750,15 +5738,8 @@ BattleCommand_Charge:
 
 .mimic
 	call ResetDamage
-
 	ld hl, .UsedText
 	call BattleTextbox
-
-	;ld a, BATTLE_VARS_MOVE_EFFECT
-	;call GetBattleVar
-	;cp EFFECT_SKULL_BASH
-	;ld b, endturn_command
-	;jmp z, SkipToBattleCommand
 	jmp EndMoveEffect
 
 .UsedText:
@@ -5913,7 +5894,6 @@ BattleCommand_Recoil:
 	ld c, a
 	jr nz, .min_damage
 	inc c
-	; fallthrough
 
 .min_damage
 	ld a, [hli]
@@ -5991,7 +5971,6 @@ BattleCommand_Confuse:
 	ld hl, SerenityPokemon
 	call IsInByteArray
 	jmp c, Serenity
-	; fallthrough
 
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
 	call GetBattleVarAddr
@@ -6007,6 +5986,8 @@ BattleCommand_Confuse:
 	ld a, [wAttackMissed]
 	and a
 	jr nz, BattleCommand_Confuse_Swagger_ConfuseHit
+	; fallthrough
+
 BattleCommand_FinishConfusingTarget:
 	ld bc, wEnemyConfuseCount
 	ldh a, [hBattleTurn]
@@ -6073,7 +6054,6 @@ BattleCommand_Paralyze:
 	ld hl, SerenityPokemon
 	call IsInByteArray
 	jmp c, Serenity
-	; fallthrough
 
 	ld a, [wAttackMissed]
 	and a
@@ -6111,7 +6091,6 @@ BattleCommand_Paralyze:
 
 BattleCommand_RechargeNextTurn:
 ; rechargenextturn
-
 ; ==========================
 ; === Ability: Overdrive ===
 ; ==========================
@@ -6800,6 +6779,7 @@ PlayOpponentBattleAnim:
 CallBattleCore:
 	ld a, BANK("Battle Core")
 	rst FarCall
+BattleCommand_Mimic:
 	ret
 
 AnimateFailedMove:
@@ -6967,7 +6947,6 @@ BattleCommand_CheckSubstitute:
 
 	ld hl, SubstitueBlocksSwaggerText
 	call StdBattleTextbox
-
 	jmp EndMoveEffect
 
 Fifty_PercentBoost:
@@ -7020,7 +6999,6 @@ StartWeatherItem:
 	ld [wBattleWeather], a
 	ld a, 8
 	ld [wWeatherCount], a
-BattleCommand_Mimic:
 	ret
 
 INCLUDE "engine/battle/move_effects/rollout.asm"
