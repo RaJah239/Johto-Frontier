@@ -40,7 +40,6 @@ ENDM
 	command confuse                 ; 2a
 	command confusetarget           ; 2b
 	command heal                    ; 2c
-	command transform               ; 2d
 	command screen                  ; 2e
 	command poison                  ; 2f
 	command paralyze                ; 30

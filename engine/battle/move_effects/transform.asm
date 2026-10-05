@@ -1,11 +1,16 @@
 BattleCommand_Transform:
-	call ClearLastMove
+	farcall ClearLastMove
 	ld a, BATTLE_VARS_SUBSTATUS5_OPP
 	call GetBattleVarAddr
 	bit SUBSTATUS_TRANSFORMED, [hl]
-	jmp nz, BattleEffect_ButItFailed
-	call CheckHiddenOpponent
-	jmp nz, BattleEffect_ButItFailed
+	jr nz, .failed
+	farcall CheckHiddenOpponent
+	jr nz, .failed
+	jr .mimic
+.failed
+	farjp BattleEffect_ButItFailed
+
+.mimic
 	xor a
 	ld [wNumHits], a
 	ld [wFXAnimID + 1], a
@@ -16,15 +21,15 @@ BattleCommand_Transform:
 	bit SUBSTATUS_SUBSTITUTE, [hl]
 	push af
 	jr z, .mimic_substitute
-	call CheckUserIsCharging
+	farcall CheckUserIsCharging
 	jr nz, .mimic_substitute
 	ld a, SUBSTITUTE
-	call LoadAnim
+	farcall LoadAnim
 .mimic_substitute
 	ld a, BATTLE_VARS_SUBSTATUS5
 	call GetBattleVarAddr
 	set SUBSTATUS_TRANSFORMED, [hl]
-	call ResetActorDisable
+	farcall ResetActorDisable
 	ld hl, wBattleMonSpecies
 	ld de, wEnemyMonSpecies
 	ldh a, [hBattleTurn]
@@ -107,7 +112,7 @@ BattleCommand_Transform:
 	ld de, wPlayerStatLevels
 	ld bc, 8
 	call BattleSideCopy
-	call _CheckBattleScene
+	farcall _CheckBattleScene
 	jr c, .mimic_anims
 	ldh a, [hBattleTurn]
 	and a
@@ -117,12 +122,12 @@ BattleCommand_Transform:
 .got_byte
 	and a
 	jr nz, .mimic_anims
-	call LoadMoveAnim
+	farcall LoadMoveAnim
 	jr .after_anim
 
 .mimic_anims
-	call BattleCommand_MoveDelay
-	call BattleCommand_RaiseSubNoAnim
+	farcall BattleCommand_MoveDelay
+	farcall BattleCommand_RaiseSubNoAnim
 .after_anim
 	xor a
 	ld [wNumHits], a
@@ -131,9 +136,12 @@ BattleCommand_Transform:
 	ld [wBattleAnimParam], a
 	pop af
 	ld a, SUBSTITUTE
-	call nz, LoadAnim
+	call nz, .LoadAimFarcall
 	ld hl, TransformedText
 	jmp StdBattleTextbox
+
+.LoadAimFarcall
+	farjp LoadAnim
 
 BattleSideCopy:
 ; Copy bc bytes from hl to de if it's the player's turn.

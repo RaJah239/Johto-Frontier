@@ -857,7 +857,7 @@ Heal:
 Transform:
 	usedmovetext
 	doturn
-	transform
+	farcommand
 	endmove
 
 LightScreen:

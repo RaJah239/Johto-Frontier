@@ -73,4 +73,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_DESTINY_BOND,    BattleCommand_DestinyBond
 	dbw EFFECT_SPITE,           BattleCommand_Spite
 	dbw EFFECT_HEAL_BELL,       BattleCommand_HealBell
+	dbw EFFECT_TRANSFORM,       BattleCommand_Transform
 	db -1 ; end

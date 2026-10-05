@@ -40,7 +40,6 @@ BattleCommandPointers:
 	dw BattleCommand_Confuse
 	dw BattleCommand_ConfuseTarget
 	dw BattleCommand_Heal
-	dw BattleCommand_Transform
 	dw BattleCommand_Screen
 	dw BattleCommand_Poison
 	dw BattleCommand_Paralyze
