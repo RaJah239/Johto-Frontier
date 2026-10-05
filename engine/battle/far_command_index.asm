@@ -72,4 +72,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_SLEEP_TALK,      BattleCommand_SleepTalk
 	dbw EFFECT_DESTINY_BOND,    BattleCommand_DestinyBond
 	dbw EFFECT_SPITE,           BattleCommand_Spite
+	dbw EFFECT_HEAL_BELL,       BattleCommand_HealBell
 	db -1 ; end

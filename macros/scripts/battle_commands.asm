@@ -57,7 +57,6 @@ ENDM
 	command checkrampage            ; 3e
 	command constantdamage          ; 3f
 	command falseswipe              ; 4b
-	command healbell                ; 4c
 	command kingsrock               ; 4d
 	command arenatrap               ; 51
 	command defrost                 ; 53

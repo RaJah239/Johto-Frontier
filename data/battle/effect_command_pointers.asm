@@ -57,7 +57,6 @@ BattleCommandPointers:
 	dw BattleCommand_CheckRampage
 	dw BattleCommand_ConstantDamage
 	dw BattleCommand_FalseSwipe
-	dw BattleCommand_HealBell
 	dw BattleCommand_HeldFlinch
 	dw BattleCommand_ArenaTrap
 	dw BattleCommand_Defrost

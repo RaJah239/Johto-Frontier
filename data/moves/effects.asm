@@ -1103,7 +1103,7 @@ FalseSwipe:
 HealBell:
 	usedmovetext
 	doturn
-	healbell
+	farcommand
 	endmove
 
 Thief:
