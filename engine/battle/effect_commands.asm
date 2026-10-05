@@ -1790,8 +1790,7 @@ BattleCommand_CheckHit:
 	call IsInByteArray
 	jr nc, .skip_compound_eyes
 
-	ld a, 30
-	add 100
+	ld a, 130
 	call AccuracyCalc
 
 .skip_compound_eyes
