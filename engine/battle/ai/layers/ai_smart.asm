@@ -80,7 +80,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_PAIN_SPLIT,       AI_Smart_PainSplit ; good as is
 	dbw EFFECT_SLEEP_TALK,       AI_Smart_SleepTalk ; updated
 	dbw EFFECT_DESTINY_BOND,     AI_Smart_DestinyBond ; updated
-	dbw EFFECT_REVERSAL,         AI_Smart_Reversal ; good as is
+	dbw EFFECT_FLAIL,            AI_Smart_Flail
 	dbw EFFECT_SPITE,            AI_Smart_Spite ; good as is
 	dbw EFFECT_HEAL_BELL,        AI_Smart_HealBell ; updated
 	dbw EFFECT_PRIORITY_HIT,     AI_Smart_PriorityHit ; updated
@@ -2371,7 +2371,7 @@ AI_Smart_DestinyBond:
 	dec [hl]
 	ret
 
-AI_Smart_Reversal:
+AI_Smart_Flail:
 ; Discourage this move if enemy's HP is above 25%.
 
 	call AICheckEnemyQuarterHP

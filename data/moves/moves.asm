@@ -187,7 +187,7 @@ Moves:
 	move FLAME_CHARGE, EFFECT_SPEED_UP_HIT,       60, FIRE,          PHYSICAL, 100, 32, 100
 	move SLACK_OFF,    EFFECT_SLACK_OFF,           0, NORMAL,        STATUS,   100, 24,   0
 	move CURSE,        EFFECT_CURSE,               0, CURSE_TYPE,    STATUS,   100, 32,   0
-	move FLAIL,        EFFECT_REVERSAL,            1, NORMAL,        PHYSICAL, 100, 24,   0
+	move FLAIL,        EFFECT_FLAIL,            1, NORMAL,        PHYSICAL, 100, 24,   0
 	move HURRICANE,    EFFECT_HURRICANE,         110, FLYING,        SPECIAL,   70, 16,  30
 	move AEROBLAST,    EFFECT_LEECH_HIT,          95, FLYING,        SPECIAL,   95, 24,   0
 	move VENOSHOCK,    EFFECT_VENOSHOCK,          65, POISON,        SPECIAL,  100, 16,   0
