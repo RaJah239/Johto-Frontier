@@ -48,4 +48,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_DRAGON_DANCE,    BattleCommand_DragonDance
 	dbw EFFECT_CLOSE_COMBAT,    BattleCommand_CloseCombat
 	dbw EFFECT_HEX,             BattleCommand_Hex
+	dbw EFFECT_VENOSHOCK,       BattleCommand_Venoshock
 	db -1 ; end

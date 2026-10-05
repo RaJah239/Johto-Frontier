@@ -7100,7 +7100,6 @@ StartWeatherItem:
 	ld [wWeatherCount], a
 	ret
 
-INCLUDE "engine/battle/move_effects/venoshock.asm"
 INCLUDE "engine/battle/move_effects/fury_drive.asm"
 INCLUDE "engine/battle/move_effects/quiver_dance.asm"
 INCLUDE "engine/battle/move_effects/stealth_rock.asm"

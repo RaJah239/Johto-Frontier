@@ -144,7 +144,6 @@ BattleCommandPointers:
 	dw BattleCommand_Facade
 	dw BattleCommand_HurricaneAccuracy
 	dw BattleCommand_FarCommand
-	dw BattleCommand_Venoshock
 	dw BattleCommand_FuryDrive
 	dw BattleCommand_Acrobatics
 	dw BattleCommand_CheckContact

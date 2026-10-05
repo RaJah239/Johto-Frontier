@@ -1783,7 +1783,7 @@ Venoshock:
 	damagecalc
 	stab
 	damagevariation
-	venoshock
+	farcommand
 	checkhit
 	moveanim
 	failuretext
