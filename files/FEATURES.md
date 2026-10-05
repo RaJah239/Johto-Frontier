@@ -142,6 +142,7 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Don't gain experience at max level but still get Effort Values
 - Trainer's Effort Values scale based on owned badges
 - Levitating (up arrow) icon added in Status Screen, Pokédex and Battle
+- Upon learning a 5th move, can press Down to view the move's details 
 - Can rematch any overworld trainer infinitely
 - Lose money proportional to number of badges and lead level Pokémon on whiteout
 - Quick Claw now has an activation text
