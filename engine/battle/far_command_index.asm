@@ -67,4 +67,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_STICKY_WEB,      BattleCommand_StickyWeb
 	dbw EFFECT_HURRICANE,       BattleCommand_HurricaneAccuracy
 	dbw EFFECT_FACADE,          BattleCommand_Facade
+	dbw EFFECT_ENCORE,          BattleCommand_Encore
 	db -1 ; end

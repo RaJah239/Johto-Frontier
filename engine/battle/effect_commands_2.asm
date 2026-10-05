@@ -51,6 +51,7 @@ INCLUDE "engine/battle/move_effects/counter_mirror_coat.asm"
 INCLUDE "engine/battle/move_effects/sticky_web.asm"
 INCLUDE "engine/battle/move_effects/hurricane.asm"
 INCLUDE "engine/battle/move_effects/facade.asm"
+INCLUDE "engine/battle/move_effects/encore.asm"
 
 ; Weather duration when Weather Rock is equipped
 ; Rock: 16, No Rock: 5

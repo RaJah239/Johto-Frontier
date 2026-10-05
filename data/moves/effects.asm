@@ -1046,7 +1046,7 @@ Encore:
 	usedmovetext
 	doturn
 	checkhit
-	encore
+	farcommand
 	endmove
 
 PainSplit:

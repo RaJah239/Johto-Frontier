@@ -29,7 +29,7 @@ BattleCommand_Encore:
 	jmp z, .failed
 	ld a, [wAttackMissed]
 	and a
-	jr nz, .failed
+	jmp nz, .failed
 	ld a, BATTLE_VARS_SUBSTATUS5_OPP
 	call GetBattleVarAddr
 	bit SUBSTATUS_ENCORED, [hl]
@@ -41,7 +41,7 @@ BattleCommand_Encore:
 	inc a
 	inc a
 	ld [de], a
-	call CheckOpponentWentFirst
+	farcall CheckOpponentWentFirst
 	jr nz, .finish_move
 	ldh a, [hBattleTurn]
 	and a
@@ -105,12 +105,12 @@ BattleCommand_Encore:
 	ld [wCurEnemyMove], a
 	dec a
 	ld de, wEnemyMoveStruct
-	call GetMoveData
+	call GetMoveDataEffCmd2
 
 .finish_move
-	call AnimateCurrentMove
+	farcall AnimateCurrentMove
 	ld hl, GotAnEncoreText
 	jmp StdBattleTextbox
 
 .failed
-	jmp PrintDidntAffect2
+	farjp PrintDidntAffect2
