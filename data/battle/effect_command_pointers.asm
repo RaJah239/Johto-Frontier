@@ -128,7 +128,6 @@ BattleCommandPointers:
 	dw BattleCommand_Curl
 	dw BattleCommand_Burn
 	dw BattleCommand_Facade
-	dw BattleCommand_HurricaneAccuracy
 	dw BattleCommand_FarCommand
 	dw BattleCommand_CheckContact
 	dw BattleCommand_CheckSubstitute

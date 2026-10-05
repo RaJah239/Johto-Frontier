@@ -128,7 +128,6 @@ ENDM
 	command curl                    ; af
 	command burn                    ; bb
 	command facade                  ; be
-	command hurricaneaccuracy       ; bf
 	command farcommand              ; c0
 	command checkcontact
 	command checksubstitute

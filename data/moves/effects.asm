@@ -1632,7 +1632,7 @@ Hurricane:
 	critical
 	damagestats
 	damagecalc
-	hurricaneaccuracy
+	farcommand
 	checkhit
 	effectchance
 	stab

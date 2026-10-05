@@ -65,4 +65,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_MIRROR_COAT,     BattleCommand_MirrorCoat
 	dbw EFFECT_COUNTER,         BattleCommand_Counter
 	dbw EFFECT_STICKY_WEB,      BattleCommand_StickyWeb
+	dbw EFFECT_HURRICANE,       BattleCommand_HurricaneAccuracy
 	db -1 ; end
