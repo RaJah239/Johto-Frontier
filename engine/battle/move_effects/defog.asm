@@ -14,7 +14,7 @@ BattleCommand_Defog:
 	ld [wWeatherCount], a
 
 ; clear all screens
-    ld a, 1
+    xor a
     ld hl, wPlayerSafeguardCount
     ld [hli], a
     ld [hli], a
@@ -24,7 +24,7 @@ BattleCommand_Defog:
     ld [hli], a
     ld [hl], a
 
-    ld a, 1
+    xor a
     ld hl, wPlayerMistCount
     ld [hli], a
     ld [hli], a
@@ -47,6 +47,6 @@ BattleCommand_Defog:
 	res SCREENS_STICKY_WEB, [hl]
 
 ; finish move
-    call AnimateCurrentMove
+    farcall AnimateCurrentMove
 	ld hl, ClearFieldText
 	jmp StdBattleTextbox

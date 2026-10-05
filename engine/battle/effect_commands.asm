@@ -7100,7 +7100,6 @@ StartWeatherItem:
 	ld [wWeatherCount], a
 	ret
 
-INCLUDE "engine/battle/move_effects/defog.asm"
 INCLUDE "engine/battle/move_effects/spikes.asm"
 INCLUDE "engine/battle/move_effects/perish_song.asm"
 INCLUDE "engine/battle/move_effects/rollout.asm"

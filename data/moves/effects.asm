@@ -1512,7 +1512,7 @@ StickyWeb:
 Defog:
 	usedmovetext
 	doturn
-	defog
+	farcommand
 	endmove
 
 BulkUp:

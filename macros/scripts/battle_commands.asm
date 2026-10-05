@@ -137,7 +137,6 @@ ENDM
 	command startloop               ; ae
 	command curl                    ; af
 	command stickyweb
-	command defog
 	command burn                    ; bb
 	command facade                  ; be
 	command hurricaneaccuracy       ; bf
