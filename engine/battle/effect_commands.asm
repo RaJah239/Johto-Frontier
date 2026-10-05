@@ -3238,22 +3238,28 @@ ConfusionDamageCalc:
 ; ===== half damage - used for Sucker Punch =====
 	ld a, [wHalfDamage]
 	and a
-	jr z, .life_orb
+	jr z, .damage_boosting_items
 	call HalfDamage
 	xor a
 	ld [wHalfDamage], a
 
-.life_orb
-; =====================
-; ==== Life Orb =======
-; =====================
-; life orb - x1.3 damage but take recoil (dealt with in CheckFaint)
-	push hl
+.damage_boosting_items
 	call GetUserItem
 	ld a, b
+
 	cp HELD_LIFE_ORB
-	pop hl
-	jr nz, .choice_band
+	jr z, .life_orb
+	cp HELD_CHOICE_BAND
+	jr z, .choice_band
+	cp HELD_CHOICE_SPECS
+	jr z, .choice_specs
+	cp HELD_MUSCLE_BAND
+	jr z, .muscle_band
+	cp HELD_WISE_GLASSES
+	jr z, .wise_glasses
+	jr .continue
+
+.life_orb
 	ld a, 13
 	ldh [hMultiplier], a
 	call Multiply
@@ -3261,69 +3267,33 @@ ConfusionDamageCalc:
 	ldh [hDivisor], a
 	ld b, 4
 	call Divide
+	jr .continue
 
 .choice_band
-; ========================
-; ===== Choice Band ======
-; ========================
-; choice band - x1.5 damage but permanent encore
-	push hl
-	call GetUserItem
-	ld a, b
-	cp HELD_CHOICE_BAND
-	pop hl
-	jr nz, .choice_specs
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar
 	cp SPECIAL
-	jr nc, .choice_specs
+	jr nc, .continue
 	call Fifty_PercentBoost
+	jr .continue
 
 .choice_specs
-; =========================
-; ===== Choice Specs ======
-; =========================
-; choice specs - x1.5 damage but permanent encore
-	push hl
-	call GetUserItem
-	ld a, b
-	cp HELD_CHOICE_SPECS
-	pop hl
-	jr nz, .muscle_band
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar
 	cp SPECIAL
-	jr c, .muscle_band
+	jr c, .continue
 	call Fifty_PercentBoost
+	jr .continue
 
 .muscle_band
-; ========================
-; ===== Muscle Band ======
-; ========================
-; muscle band - x1.1 damage
-	push hl
-	call GetUserItem
-	ld a, b
-	cp HELD_MUSCLE_BAND
-	pop hl
-	jr nz, .wise_glasses
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar
 	cp SPECIAL
-	jr nc, .wise_glasses
+	jr nc, .continue
 	call TenPercentBoost
+	jr .continue
 
 .wise_glasses
-; =========================
-; ===== Wise Glasses ======
-; =========================
-; wise glasses - x1.1 damage
-	push hl
-	call GetUserItem
-	ld a, b
-	cp HELD_WISE_GLASSES
-	pop hl
-	jr nz, .continue
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar
 	cp SPECIAL
