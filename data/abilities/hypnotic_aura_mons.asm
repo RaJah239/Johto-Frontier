@@ -1,6 +1,6 @@
 ; List of all Pokemon whose hypnosis never misses
 
-HypnoticAuraPokemon:
+DreamGazePokemon:
 ;   db DROWZEE
 ;   db HYPNO
     db -1 ; end

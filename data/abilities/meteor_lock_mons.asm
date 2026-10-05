@@ -1,6 +1,6 @@
 ; List of all Pokemon whose meteor mash never misses
 
-MeteorLockPokemon:
+AstralAimPokemon:
 ;   db RIOLU
 ;   db LUCARIO
     db -1 ; end

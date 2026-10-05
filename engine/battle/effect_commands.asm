@@ -1594,12 +1594,12 @@ BattleCommand_CheckHit:
 ; ===========================
 ; === Ability: Frost Lock ===
 ; ===========================
-	surefire_ability BLIZZARD, TrueBlizzardPokemon, EVENT_FROST_LOCK_PLAYER, EVENT_FROST_LOCK_FOE, FrostLockText
+	surefire_ability BLIZZARD, FrostLockPokemon, EVENT_FROST_LOCK_PLAYER, EVENT_FROST_LOCK_FOE, FrostLockText
 
 ; ==========================
 ; === Ability: Hydro Aim ===
 ; ==========================
-	surefire_ability HYDRO_PUMP, SureStreamPokemon, EVENT_HYDRO_AIM_PLAYER, EVENT_HYDRO_AIM_FOE, HydroAimText
+	surefire_ability HYDRO_PUMP, HydroAimPokemon, EVENT_HYDRO_AIM_PLAYER, EVENT_HYDRO_AIM_FOE, HydroAimText
 
 ; ============================
 ; === Ability: Stonefall =====
@@ -1614,17 +1614,17 @@ BattleCommand_CheckHit:
 ; ===========================
 ; === Ability: Dream Gaze ===
 ; ===========================
-	surefire_ability HYPNOSIS, HypnoticAuraPokemon, EVENT_DREAM_GAZE_PLAYER, EVENT_DREAM_GAZE_FOE, DreamGazeText
+	surefire_ability HYPNOSIS, DreamGazePokemon, EVENT_DREAM_GAZE_PLAYER, EVENT_DREAM_GAZE_FOE, DreamGazeText
 
 ; ===========================
 ; === Ability: Dream Song ===
 ; ===========================
-	surefire_ability SING, LullabyMasteryPokemon, EVENT_DREAM_SONG_PLAYER, EVENT_DREAM_SONG_FOE, DreamSongText
+	surefire_ability SING, DreamSongPokemon, EVENT_DREAM_SONG_PLAYER, EVENT_DREAM_SONG_FOE, DreamSongText
 
 ; ===========================
 ; === Ability: Astral Aim ===
 ; ===========================
-	surefire_ability METEOR_MASH, MeteorLockPokemon, EVENT_ASTRAL_AIM_PLAYER, EVENT_ASTRAL_AIM_FOE, AstralAimText
+	surefire_ability METEOR_MASH, AstralAimPokemon, EVENT_ASTRAL_AIM_PLAYER, EVENT_ASTRAL_AIM_FOE, AstralAimText
 
 	call .StatModifiers
 

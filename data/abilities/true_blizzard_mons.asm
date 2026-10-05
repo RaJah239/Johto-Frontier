@@ -1,6 +1,6 @@
 ; List of all Pokemon whose blizzard never misses
 
-TrueBlizzardPokemon:
+FrostLockPokemon:
 ;    db ARTICUNO
     db -1 ; end
 

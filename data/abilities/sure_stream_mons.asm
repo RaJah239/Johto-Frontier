@@ -1,6 +1,6 @@
 ; List of all Pokemon whose hydro pump never misses
 
-SureStreamPokemon:
+HydroAimPokemon:
 ;    db BLASTOISE
 ;    db FERALIGATR
 ;    db KINGDRA
