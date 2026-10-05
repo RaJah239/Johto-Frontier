@@ -56,7 +56,6 @@ ENDM
 	command rampage                 ; 3d
 	command checkrampage            ; 3e
 	command constantdamage          ; 3f
-	command spite                   ; 4a
 	command falseswipe              ; 4b
 	command healbell                ; 4c
 	command kingsrock               ; 4d

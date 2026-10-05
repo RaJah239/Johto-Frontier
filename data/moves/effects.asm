@@ -1078,7 +1078,7 @@ Spite:
 	usedmovetext
 	doturn
 	checkhit
-	spite
+	farcommand
 	endmove
 
 FalseSwipe:

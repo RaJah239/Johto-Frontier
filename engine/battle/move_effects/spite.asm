@@ -69,7 +69,7 @@ BattleCommand_Spite:
 	ld [hl], e
 .transformed
 	push de
-	call AnimateCurrentMove
+	farcall AnimateCurrentMove
 	pop de
 	ld a, d
 	ld [wTextDecimalByte], a
@@ -77,4 +77,4 @@ BattleCommand_Spite:
 	jmp StdBattleTextbox
 
 .failed
-	jmp PrintDidntAffect2
+	farjp PrintDidntAffect2
