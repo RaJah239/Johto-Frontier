@@ -35,7 +35,6 @@ BattleCommandPointers:
 	dw BattleCommand_EndLoop
 	dw BattleCommand_FlinchTarget
 	dw BattleCommand_Recoil
-	dw BattleCommand_FocusEnergy
 	dw BattleCommand_Confuse
 	dw BattleCommand_ConfuseTarget
 	dw BattleCommand_Heal

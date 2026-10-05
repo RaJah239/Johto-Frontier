@@ -76,4 +76,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_TRANSFORM,       BattleCommand_Transform
 	dbw EFFECT_SUBSTITUTE,      BattleCommand_Substitute
 	dbw EFFECT_MIST,            BattleCommand_Mist
+	dbw EFFECT_FOCUS_ENERGY,    BattleCommand_FocusEnergy
 	db -1 ; end

@@ -4,10 +4,10 @@ BattleCommand_FocusEnergy:
 	bit SUBSTATUS_FOCUS_ENERGY, [hl]
 	jr nz, .already_pumped
 	set SUBSTATUS_FOCUS_ENERGY, [hl]
-	call AnimateCurrentMove
+	farcall AnimateCurrentMove
 	ld hl, GettingPumpedText
 	jmp StdBattleTextbox
 
 .already_pumped
-	call AnimateFailedMove
-	jmp PrintButItFailed
+	farcall AnimateFailedMove
+	farjp PrintButItFailed

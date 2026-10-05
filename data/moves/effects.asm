@@ -817,7 +817,7 @@ Mist:
 FocusEnergy:
 	usedmovetext
 	doturn
-	focusenergy
+	farcommand
 	endmove
 
 DoConfuse:
