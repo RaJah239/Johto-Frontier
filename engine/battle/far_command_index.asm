@@ -54,4 +54,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_STEALTH_ROCK,    BattleCommand_StealthRock
 	dbw EFFECT_DEFOG,           BattleCommand_Defog
 	dbw EFFECT_SPIKES,          BattleCommand_Spikes
+	dbw EFFECT_PERISH_SONG,     BattleCommand_PerishSong
 	db -1 ; end

@@ -68,7 +68,6 @@ BattleCommandPointers:
 	dw BattleCommand_HeldFlinch
 	dw BattleCommand_ArenaTrap
 	dw BattleCommand_Defrost
-	dw BattleCommand_PerishSong
 	dw BattleCommand_CheckCurl
 	dw BattleCommand_RolloutPower
 	dw BattleCommand_Attract

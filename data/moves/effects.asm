@@ -1188,7 +1188,7 @@ Foresight:
 PerishSong:
 	usedmovetext
 	doturn
-	perishsong
+	farcommand
 	endmove
 
 Sandstorm:

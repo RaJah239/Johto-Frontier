@@ -68,7 +68,6 @@ ENDM
 	command kingsrock               ; 4d
 	command arenatrap               ; 51
 	command defrost                 ; 53
-	command perishsong              ; 58
 	command checkcurl               ; 5b
 	command rolloutpower            ; 5c
 	command attract                 ; 5f
