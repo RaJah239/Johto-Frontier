@@ -1530,7 +1530,7 @@ CalmMind:
 DragonDance:
 	usedmovetext
 	doturn
-	dragondance
+	farcommand
 	endmove
 
 QuiverDance:

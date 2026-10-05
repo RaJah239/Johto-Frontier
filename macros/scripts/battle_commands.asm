@@ -139,7 +139,6 @@ ENDM
 	command stealthrock
 	command stickyweb
 	command defog
-	command dragondance             ; b9
 	command quiverdance             ; ba
 	command burn                    ; bb
 	command closecombat

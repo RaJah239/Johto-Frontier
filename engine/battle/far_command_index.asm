@@ -45,4 +45,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_PROTECT,         BattleCommand_Protect
 	dbw EFFECT_BULK_UP,         BattleCommand_BulkUp
 	dbw EFFECT_CALM_MIND,       BattleCommand_CalmMind
+	dbw EFFECT_DRAGON_DANCE,    BattleCommand_DragonDance
 	db -1 ; end
