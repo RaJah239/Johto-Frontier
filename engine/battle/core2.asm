@@ -720,7 +720,6 @@ PrintStatChangeValue: ; Input is hl (either wPlayerStatX or wEnemyStatX) and bc 
 	ld [de], a
 	inc de
 	ld a, c
-	jr .format_stat_change
 	sub 7			; a = a - 7
 	jr .insert
 
@@ -732,31 +731,6 @@ PrintStatChangeValue: ; Input is hl (either wPlayerStatX or wEnemyStatX) and bc 
 	jr .insert
 
 .lowered
-	ld a, "▼"
-	ld [de], a
-	inc de
-	ld a, 7
-	sub c
-.format_stat_change
-	ld a, c
-	cp 7			; 7 = no changes
-	jr c, .format_lowered
-	jr z, .format_same
-	ld a, "▲"
-	ld [de], a
-	inc de
-	ld a, c
-	sub 7			; a = a - 7
-	jr .insert
-
-.format_same
-	ld a, " "
-	ld [de], a
-	inc de
-	xor a
-	jr .insert
-
-.format_lowered
 	ld a, "▼"
 	ld [de], a
 	inc de
