@@ -7103,7 +7103,6 @@ StartWeatherItem:
 BattleCommand_Mimic:
 	ret
 
-INCLUDE "engine/battle/move_effects/spikes.asm"
 INCLUDE "engine/battle/move_effects/perish_song.asm"
 INCLUDE "engine/battle/move_effects/rollout.asm"
 INCLUDE "engine/battle/move_effects/attract.asm"

@@ -53,4 +53,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_QUIVER_DANCE,    BattleCommand_QuiverDance
 	dbw EFFECT_STEALTH_ROCK,    BattleCommand_StealthRock
 	dbw EFFECT_DEFOG,           BattleCommand_Defog
+	dbw EFFECT_SPIKES,          BattleCommand_Spikes
 	db -1 ; end

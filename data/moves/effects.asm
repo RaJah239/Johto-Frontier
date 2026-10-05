@@ -1175,7 +1175,7 @@ Protect:
 Spikes:
 	usedmovetext
 	doturn
-	spikes
+	farcommand
 	endmove
 
 Foresight:
