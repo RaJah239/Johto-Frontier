@@ -1,4 +1,4 @@
-FlailReversalPower:
+FlailPower:
 	; hp bar pixels, power
 	db HP_BAR_LENGTH_PX / 48,   200
 	db HP_BAR_LENGTH_PX / 12,   150

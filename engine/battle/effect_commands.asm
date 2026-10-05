@@ -3603,7 +3603,7 @@ BattleCommand_ConstantDamage:
 	call Divide
 	ldh a, [hQuotient + 3]
 	ld b, a
-	ld hl, FlailReversalPower
+	ld hl, FlailPower
 
 .reversal_loop
 	ld a, [hli]
@@ -3635,6 +3635,8 @@ BattleCommand_ConstantDamage:
 	pop hl
 	ld [hl], 1
 	ret
+
+INCLUDE "data/moves/flail_power.asm"
 
 FarPlayBattleAnimation:
 ; play animation de
@@ -7114,7 +7116,6 @@ INCLUDE "engine/battle/move_effects/rapid_spin.asm"
 INCLUDE "engine/battle/move_effects/hidden_power.asm"
 INCLUDE "engine/battle/move_effects/belly_drum.asm"
 INCLUDE "engine/battle/move_effects/mirror_coat.asm"
-INCLUDE "data/moves/flail_reversal_power.asm"
 INCLUDE "engine/battle/move_effects/sticky_web.asm"
 INCLUDE "engine/battle/move_effects/hurricane.asm"
 INCLUDE "engine/battle/move_effects/facade.asm"
