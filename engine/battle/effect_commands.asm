@@ -888,7 +888,7 @@ BattleCommand_Critical:
 
 ; +2 critical level
 	ld c, 2
-	jmp .Tally
+	jr .Tally
 
 .Tropius:
 	cp TROPIUS
@@ -899,7 +899,7 @@ BattleCommand_Critical:
 
 ; +2 critical level
 	ld c, 2
-	jmp .Tally
+	jr .Tally
 
 .FocusEnergy:
 	ld a, BATTLE_VARS_SUBSTATUS4
@@ -912,93 +912,66 @@ BattleCommand_Critical:
 	inc c
 
 .CheckCritical:
-; ============================
-; === Ability: Slash Crits === 
-; ============================
+; Slash Crits and Leaf Blade Crits only apply to a single move each, so
+; check the animation first and only look the species up once it has
+; picked a list. IsInByteArray wipes every register, so keep the species
+; on the stack for the lookups that follow.
 	call GetCurrentMon
-	push bc
-	ld hl, SlashCritsPokemon
-	call IsInByteArray
-	pop bc
-	jr c, .check_slash
-	jr .continue1
-
-.check_slash
+	push af
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	cp SLASH
-	jr nz, .continue1
+	jr z, .SlashCrits
+	cp LEAF_BLADE
+	jr z, .LeafBladeCrits
+	jr .SuperLuck
 
-; ===========================
-; === Ability: Crit Guard === 
-; ===========================
-	call GetOpposingMon
-	ld hl, CritGuardPokemon
-	call IsInByteArray
-	jr nc, .crit_guard_check_finished1
-
-	showdefensiveability AbilitySlideIn_CritGuardText
-	ret
-
-.crit_guard_check_finished1
-	jmp CriticialHitLoaded
-
-.continue1
 ; =================================
-; === Ability: Leaf Blade Crits === 
+; === Ability: Leaf Blade Crits ===
 ; =================================
-	call GetCurrentMon
-	push bc
+.LeafBladeCrits:
 	ld hl, LeafBladeCritsPokemon
+	jr .AbilityMon
+
+; ============================
+; === Ability: Slash Crits ===
+; ============================
+.SlashCrits:
+	ld hl, SlashCritsPokemon
+
+.AbilityMon:
+	pop af
+	push bc
 	call IsInByteArray
 	pop bc
-	jr c, .check_leaf_blade
-	jr .continue2
+	jr c, .AbilityHit
+	push af
 
-.check_leaf_blade
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	cp LEAF_BLADE
-	jr nz, .continue2
-
-; ===========================
-; === Ability: Crit Guard === 
-; ===========================
-	call GetOpposingMon
-	ld hl, CritGuardPokemon
-	call IsInByteArray
-	jr nc, .crit_guard_check_finished2
-
-	showdefensiveability AbilitySlideIn_CritGuardText
-	ret
-
-.crit_guard_check_finished2
-	jmp CriticialHitLoaded
-
-.continue2
 ; ===========================
 ; === Ability: Super Luck ===
 ; ===========================
-	call GetCurrentMon
+.SuperLuck:
+	pop af
 	push bc
 	ld hl, SuperLuckPokemon
 	call IsInByteArray
 	pop bc
-	jr c, .increase_critical
-	jr .continue3
+	jr nc, .continue
 
 ; super luck mons have an innate +2 critical hit level
-.increase_critical
 	inc c
 	inc c
 
-.continue3
+; The move always lands a critical hit, unless the target has Crit Guard.
+.AbilityHit:
+	jr .CritGuard
+
+.continue
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
-	ld de, 1
 	ld hl, CriticalHitMoves
 	push bc
-	call IsInArray
+	call IsInByteArray
 	pop bc
 	jr nc, .ScopeLens
 
@@ -1026,17 +999,18 @@ BattleCommand_Critical:
 	ret nc
 
 ; ===========================
-; === Ability: Crit Guard === 
+; === Ability: Crit Guard ===
 ; ===========================
+.CritGuard:
 	call GetOpposingMon
 	ld hl, CritGuardPokemon
 	call IsInByteArray
-	jr nc, .crit_guard_check_finished3
+	jr nc, .crit_guard_checks_done
 
 	showdefensiveability AbilitySlideIn_CritGuardText
 	ret
 
-.crit_guard_check_finished3
+.crit_guard_checks_done
 CriticialHitLoaded:
 	ld a, 1
 	ld [wCriticalHit], a
