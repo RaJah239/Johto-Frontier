@@ -677,7 +677,7 @@ RestDescription:
 
 FacadeDescription:
 	db   "Doubles damage if"
-	line "Psn, Brn, or Prz.@"
+	line "Psn, Brn or Prz.@"
 
 HexDescription:
 	db "Double damage to"
