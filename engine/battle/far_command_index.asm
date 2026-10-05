@@ -43,4 +43,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_GROWTH,          BattleCommand_Growth
 	dbw EFFECT_CURSE,           BattleCommand_Curse
 	dbw EFFECT_PROTECT,         BattleCommand_Protect
+	dbw EFFECT_BULK_UP,         BattleCommand_BulkUp
 	db -1 ; end

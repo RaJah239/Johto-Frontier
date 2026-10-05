@@ -20,19 +20,20 @@ BattleCommand_BulkUp:
 ; Raise Attack and Defense, and lower Speed.
 	ld a, $1
 	ld [wBattleAnimParam], a
-	call AnimateCurrentMove
-	call BattleCommand_SwitchTurn
-	call ResetMiss
-	call BattleCommand_SwitchTurn
-	call BattleCommand_AttackUp
-	call BattleCommand_StatUpMessage
-	call ResetMiss
-	call BattleCommand_DefenseUp
-	jmp BattleCommand_StatUpMessage
+	farcall AnimateCurrentMove
+	farcall BattleCommand_SwitchTurn
+	farcall ResetMiss
+	farcall BattleCommand_SwitchTurn
+	farcall BattleCommand_AttackUp
+	farcall BattleCommand_StatUpMessage
+	farcall ResetMiss
+	farcall BattleCommand_DefenseUp
+	farjp BattleCommand_StatUpMessage
+
 .cantraise
 ; Can't raise either stat.
 	ld b, ABILITY + 1
-	call GetStatName
-	call AnimateFailedMove
+	farcall GetStatName
+	farcall AnimateFailedMove
 	ld hl, WontRiseAnymoreText
 	jmp StdBattleTextbox

@@ -1518,7 +1518,7 @@ Defog:
 BulkUp:
 	usedmovetext
 	doturn
-	bulkup
+	farcommand
 	endmove
 
 CalmMind:
