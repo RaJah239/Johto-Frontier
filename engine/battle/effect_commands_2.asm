@@ -40,6 +40,7 @@ INCLUDE "engine/battle/move_effects/stealth_rock.asm"
 INCLUDE "engine/battle/move_effects/defog.asm"
 INCLUDE "engine/battle/move_effects/spikes.asm"
 INCLUDE "engine/battle/move_effects/perish_song.asm"
+INCLUDE "engine/battle/move_effects/attract.asm"
 
 ; Weather duration when Weather Rock is equipped
 ; Rock: 16, No Rock: 5

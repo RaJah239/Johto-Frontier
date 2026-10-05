@@ -70,7 +70,6 @@ BattleCommandPointers:
 	dw BattleCommand_Defrost
 	dw BattleCommand_CheckCurl
 	dw BattleCommand_RolloutPower
-	dw BattleCommand_Attract
 	dw BattleCommand_HappinessPower
 	dw BattleCommand_DamageCalc
 	dw BattleCommand_Safeguard

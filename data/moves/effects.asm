@@ -1239,7 +1239,7 @@ Attract:
 	usedmovetext
 	doturn
 	checkhit
-	attract
+	farcommand
 	endmove
 
 Return:

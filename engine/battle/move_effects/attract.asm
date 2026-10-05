@@ -4,7 +4,7 @@ BattleCommand_Attract:
 	jr nz, .failed
 	call CheckOppositeGender
 	jr c, .failed
-	call CheckHiddenOpponent
+	farcall CheckHiddenOpponent
 	jr nz, .failed
 	ld a, BATTLE_VARS_SUBSTATUS1_OPP
 	call GetBattleVarAddr
@@ -12,14 +12,14 @@ BattleCommand_Attract:
 	jr nz, .failed
 
 	set SUBSTATUS_IN_LOVE, [hl]
-	call AnimateCurrentMove
+	farcall AnimateCurrentMove
 
 ; 'fell in love!'
 	ld hl, FellInLoveText
 	jmp StdBattleTextbox
 
 .failed
-	jmp FailMove
+	farjp FailMove
 
 CheckOppositeGender:
 	ld a, MON_SPECIES

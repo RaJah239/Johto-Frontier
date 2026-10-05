@@ -70,7 +70,6 @@ ENDM
 	command defrost                 ; 53
 	command checkcurl               ; 5b
 	command rolloutpower            ; 5c
-	command attract                 ; 5f
 	command happinesspower          ; 60
 	command damagecalc              ; 62
 	command safeguard               ; 64
