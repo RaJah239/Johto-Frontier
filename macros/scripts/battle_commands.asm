@@ -56,7 +56,6 @@ ENDM
 	command rampage                 ; 3d
 	command checkrampage            ; 3e
 	command constantdamage          ; 3f
-	command counter                 ; 40
 	command encore                  ; 41
 	command snore                   ; 43
 	command sketch                  ; 46
@@ -113,7 +112,6 @@ ENDM
 	command switchturn              ; 93
 	command doubleflyingdamage      ; 98
 	command doubleundergrounddamage ; 99
-	command mirrorcoat              ; 9a
 	command doubleminimizedamage    ; 9d
 	command skipsuncharge           ; 9e
 	command teleport                ; a0

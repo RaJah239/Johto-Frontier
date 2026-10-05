@@ -1034,7 +1034,7 @@ Reversal:
 Counter:
 	usedmovetext
 	doturn
-	counter
+	farcommand
 	moveanim
 	failuretext
 	applydamage
@@ -1379,7 +1379,7 @@ BellyDrum:
 MirrorCoat:
 	usedmovetext
 	doturn
-	mirrorcoat
+	farcommand
 	moveanim
 	failuretext
 	applydamage

@@ -1691,7 +1691,7 @@ BattleCommand_CheckHit:
 
 .zoom_lens
 ; Only works if user goes second
-	farcall CheckOpponentWentFirst
+	call CheckOpponentWentFirst
 	ret z
 	jmp Add20PercentToB
 
@@ -7107,11 +7107,9 @@ INCLUDE "engine/battle/move_effects/rollout.asm"
 INCLUDE "engine/battle/move_effects/return.asm"
 INCLUDE "engine/battle/move_effects/baton_pass.asm"
 
-INCLUDE "engine/battle/move_effects/mirror_coat.asm"
 INCLUDE "engine/battle/move_effects/sticky_web.asm"
 INCLUDE "engine/battle/move_effects/hurricane.asm"
 INCLUDE "engine/battle/move_effects/facade.asm"
-INCLUDE "engine/battle/move_effects/counter.asm"
 INCLUDE "engine/battle/move_effects/encore.asm"
 INCLUDE "engine/battle/move_effects/snore.asm"
 INCLUDE "engine/battle/move_effects/sketch.asm"

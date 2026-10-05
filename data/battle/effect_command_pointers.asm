@@ -56,7 +56,6 @@ BattleCommandPointers:
 	dw BattleCommand_Rampage
 	dw BattleCommand_CheckRampage
 	dw BattleCommand_ConstantDamage
-	dw BattleCommand_Counter
 	dw BattleCommand_Encore
 	dw BattleCommand_Snore
 	dw BattleCommand_Sketch
@@ -113,7 +112,6 @@ BattleCommandPointers:
 	dw BattleCommand_SwitchTurn
 	dw BattleCommand_DoubleFlyingDamage
 	dw BattleCommand_DoubleUndergroundDamage
-	dw BattleCommand_MirrorCoat
 	dw BattleCommand_DoubleMinimizeDamage
 	dw BattleCommand_SkipSunCharge
 	dw BattleCommand_Teleport
