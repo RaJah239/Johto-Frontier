@@ -1977,10 +1977,7 @@ BattleCommand_LowerSub:
 	jr z, .rollout_rampage
 	cp EFFECT_RAMPAGE
 	jr z, .rollout_rampage
-
-	ld a, 1
-	and a
-	ret
+	jmp AEqualsOne
 
 .rollout_rampage
 	ld a, [wSomeoneIsRampaging]
@@ -2749,9 +2746,7 @@ PlayerAttackDamage:
 	ld a, [wBattleMonLevel]
 	ld e, a
 
-	ld a, 1
-	and a
-	ret
+	jmp AEqualsOne
 
 TruncateHL_BC:
 .loop
@@ -3056,9 +3051,11 @@ EnemyAttackDamage:
 
 	ld a, [wEnemyMonLevel]
 	ld e, a
+	; fallthrough
 
-	ld a, 1
-	and a
+AEqualsOne:
+	xor a
+	inc a
 	ret
 
 BattleCommand_ClearMissDamage:
@@ -3416,9 +3413,7 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 .dont_floor
 
 ; Returns nz and nc.
-	ld a, 1
-	and a
-	ret
+	jmp AEqualsOne
 
 .CriticalMultiplier:
 	ld a, [wCriticalHit]
@@ -4840,9 +4835,7 @@ TryLowerStat:
 	call CalcEnemyStats
 	call BattleCommand_SwitchTurn
 .end
-	ld a, 1
-	and a
-	ret
+	jmp AEqualsOne
 
 BattleCommand_StatUpFailText:
 	ld a, [wFailedMessage]
@@ -6501,10 +6494,7 @@ CheckUserMove:
 
 	dec c
 	jr nz, .loop
-
-	ld a, 1
-	and a
-	ret
+	jmp AEqualsOne
 
 ResetTurn:
 	ld hl, wPlayerCharging
