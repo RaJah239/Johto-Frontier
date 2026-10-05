@@ -1,7 +1,5 @@
 BattleCommand_FuryDrive:
 ; fury drive
-; note: can't seem to `farcommand` this
-
 	ld bc, wPlayerStatLevels
 	ldh a, [hBattleTurn]
 	and a
@@ -29,35 +27,37 @@ BattleCommand_FuryDrive:
 ; Lower Defense and Special Defence
     ld a, $1
 	ld [wBattleAnimParam], a
-	call AnimateCurrentMove
+	farcall AnimateCurrentMove
     ld a, DEFENSE
-	call LowerStat
-	call BattleCommand_SwitchTurn
-	call BattleCommand_StatDownMessage
+    ld [wLoweredStat], a
+	farcall LowerStatFar
+	farcall BattleCommand_SwitchTurn
+	farcall BattleCommand_StatDownMessage
 
-    call BattleCommand_SwitchTurn
+    farcall BattleCommand_SwitchTurn
     ld a, SP_DEFENSE
-	call LowerStat
-    call BattleCommand_SwitchTurn
-	call BattleCommand_StatDownMessage
+    ld [wLoweredStat], a
+	farcall LowerStatFar
+    farcall BattleCommand_SwitchTurn
+	farcall BattleCommand_StatDownMessage
 
-	call ResetMiss
-	call BattleCommand_SwitchTurn
-	call BattleCommand_AttackUp2
-	call BattleCommand_StatUpMessage
+	farcall ResetMiss
+	farcall BattleCommand_SwitchTurn
+	farcall BattleCommand_AttackUp2
+	farcall BattleCommand_StatUpMessage
 
-	call ResetMiss
-	call BattleCommand_SpecialAttackUp2
-	call BattleCommand_StatUpMessage
+	farcall ResetMiss
+	farcall BattleCommand_SpecialAttackUp2
+	farcall BattleCommand_StatUpMessage
 
-	call ResetMiss
-	call BattleCommand_SpeedUp2
-	jmp BattleCommand_StatUpMessage
+	farcall ResetMiss
+	farcall BattleCommand_SpeedUp2
+	farjp BattleCommand_StatUpMessage
 
 .cantraise
 ; Can't raise either stat.
 	ld b, ABILITY + 1
-	call GetStatName
-	call AnimateFailedMove
+	farcall GetStatName
+	farcall AnimateFailedMove
 	ld hl, WontRiseAnymoreText
 	jmp StdBattleTextbox

@@ -144,7 +144,6 @@ ENDM
 	command facade                  ; be
 	command hurricaneaccuracy       ; bf
 	command farcommand              ; c0
-	command furydrive
 	command acrobatics
 	command checkcontact
 	command checksubstitute

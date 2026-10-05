@@ -49,4 +49,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_CLOSE_COMBAT,    BattleCommand_CloseCombat
 	dbw EFFECT_HEX,             BattleCommand_Hex
 	dbw EFFECT_VENOSHOCK,       BattleCommand_Venoshock
+	dbw EFFECT_FURY_DRIVE,      BattleCommand_FuryDrive
 	db -1 ; end

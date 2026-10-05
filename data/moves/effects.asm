@@ -1797,7 +1797,7 @@ Venoshock:
 FuryDrive:
 	usedmovetext
 	doturn
-	furydrive
+	farcommand
 	endmove
 
 TrickRoom:
