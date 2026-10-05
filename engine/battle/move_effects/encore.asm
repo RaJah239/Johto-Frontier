@@ -74,7 +74,7 @@ BattleCommand_Encore:
 	ld [wCurPlayerMove], a
 	dec a
 	ld de, wPlayerMoveStruct
-	call GetMoveData
+	newfarcall GetMoveData
 	jr .finish_move
 
 .force_last_enemy_move
