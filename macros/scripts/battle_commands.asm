@@ -35,7 +35,6 @@ ENDM
 	command endloop                 ; 24
 	command flinchtarget            ; 25
 	command recoil                  ; 27
-	command mist                    ; 28
 	command focusenergy             ; 29
 	command confuse                 ; 2a
 	command confusetarget           ; 2b

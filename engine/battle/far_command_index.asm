@@ -75,4 +75,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_HEAL_BELL,       BattleCommand_HealBell
 	dbw EFFECT_TRANSFORM,       BattleCommand_Transform
 	dbw EFFECT_SUBSTITUTE,      BattleCommand_Substitute
+	dbw EFFECT_MIST,            BattleCommand_Mist
 	db -1 ; end

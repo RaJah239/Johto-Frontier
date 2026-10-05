@@ -12,10 +12,10 @@ BattleCommand_Mist:
 	set SCREENS_MIST, [hl]
 	ld a, 5
 	ld [de], a
-	call AnimateCurrentMove
+	farcall AnimateCurrentMove
 	ld hl, MistText
 	jmp StdBattleTextbox
 
 .failed
-	call AnimateFailedMove
-	jmp PrintButItFailed
+	farcall AnimateFailedMove
+	farjp PrintButItFailed

@@ -811,7 +811,7 @@ RecoilHit:
 Mist:
 	usedmovetext
 	doturn
-	mist
+	farcommand
 	endmove
 
 FocusEnergy:
