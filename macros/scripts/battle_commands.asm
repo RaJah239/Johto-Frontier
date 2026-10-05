@@ -111,7 +111,6 @@ ENDM
 	command statdownanim            ; 91
 	command statupanim              ; 92
 	command switchturn              ; 93
-	command bellydrum               ; 95
 	command doubleflyingdamage      ; 98
 	command doubleundergrounddamage ; 99
 	command mirrorcoat              ; 9a

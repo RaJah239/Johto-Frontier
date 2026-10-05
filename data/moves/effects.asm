@@ -1373,7 +1373,7 @@ FakeOut:
 BellyDrum:
 	usedmovetext
 	doturn
-	bellydrum
+	farcommand
 	endmove
 
 MirrorCoat:

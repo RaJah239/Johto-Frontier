@@ -61,4 +61,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_PURSUIT,         BattleCommand_Pursuit
 	dbw EFFECT_RAPID_SPIN,      BattleCommand_ClearHazards
 	dbw EFFECT_HIDDEN_POWER,    BattleCommand_HiddenPower
+	dbw EFFECT_BELLY_DRUM,      BattleCommand_BellyDrum
 	db -1 ; end
