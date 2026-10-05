@@ -293,7 +293,7 @@ HandleReflectBarrier:
 	; don't play damage effect when animation goes off
 	xor a
 	ld [wNumHits], a
-	call Call_PlayBattleAnim_OnlyIfVisible
+	farcall Call_PlayBattleAnim_OnlyIfVisible
 
 	ld a, [wOptions]
 	bit BATTLE_SCENE, a
@@ -366,7 +366,7 @@ HandleLightBarrier:
 	; don't play damage effect when animation goes off
 	xor a
 	ld [wNumHits], a
-	call Call_PlayBattleAnim_OnlyIfVisible
+	farcall Call_PlayBattleAnim_OnlyIfVisible
 
 	ld a, [wOptions]
 	bit BATTLE_SCENE, a
@@ -1118,7 +1118,7 @@ HandleFortify:
 	; don't play damage effect when animation goes off
 	xor a
 	ld [wNumHits], a
-	call Call_PlayBattleAnim_OnlyIfVisible
+	farcall Call_PlayBattleAnim_OnlyIfVisible
 
 	ld a, [wOptions]
 	bit BATTLE_SCENE, a
