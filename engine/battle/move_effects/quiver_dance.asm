@@ -28,22 +28,23 @@ BattleCommand_QuiverDance:
 ; Raise Speed, Special Attack and Special Defense.
     ld a, $1
 	ld [wBattleAnimParam], a
-	call AnimateCurrentMove
-	call BattleCommand_SwitchTurn
-	call ResetMiss
-	call BattleCommand_SwitchTurn
-	call BattleCommand_SpecialAttackUp
-	call BattleCommand_StatUpMessage
-	call ResetMiss
-	call BattleCommand_SpecialDefenseUp
-	call BattleCommand_StatUpMessage
-	call ResetMiss
-	call BattleCommand_SpeedUp
-	jp BattleCommand_StatUpMessage
+	farcall AnimateCurrentMove
+	farcall BattleCommand_SwitchTurn
+	farcall ResetMiss
+	farcall BattleCommand_SwitchTurn
+	farcall BattleCommand_SpecialAttackUp
+	farcall BattleCommand_StatUpMessage
+	farcall ResetMiss
+	farcall BattleCommand_SpecialDefenseUp
+	farcall BattleCommand_StatUpMessage
+	farcall ResetMiss
+	farcall BattleCommand_SpeedUp
+	farjp BattleCommand_StatUpMessage
+
 .cantraise
 ; Can't raise either stat.
 	ld b, ABILITY + 1
-	call GetStatName
-	call AnimateFailedMove
+	farcall GetStatName
+	farcall AnimateFailedMove
 	ld hl, WontRiseAnymoreText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox

@@ -35,6 +35,7 @@ INCLUDE "engine/battle/move_effects/close_combat.asm"
 INCLUDE "engine/battle/move_effects/hex.asm"
 INCLUDE "engine/battle/move_effects/venoshock.asm"
 INCLUDE "engine/battle/move_effects/fury_drive.asm"
+INCLUDE "engine/battle/move_effects/quiver_dance.asm"
 
 ; Weather duration when Weather Rock is equipped
 ; Rock: 16, No Rock: 5

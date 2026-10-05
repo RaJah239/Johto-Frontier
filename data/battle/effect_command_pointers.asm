@@ -139,7 +139,6 @@ BattleCommandPointers:
 	dw BattleCommand_StealthRock
 	dw BattleCommand_StickyWeb
 	dw BattleCommand_Defog
-	dw BattleCommand_QuiverDance
 	dw BattleCommand_Burn
 	dw BattleCommand_Facade
 	dw BattleCommand_HurricaneAccuracy

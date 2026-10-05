@@ -50,4 +50,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_HEX,             BattleCommand_Hex
 	dbw EFFECT_VENOSHOCK,       BattleCommand_Venoshock
 	dbw EFFECT_FURY_DRIVE,      BattleCommand_FuryDrive
+	dbw EFFECT_QUIVER_DANCE,    BattleCommand_QuiverDance
 	db -1 ; end

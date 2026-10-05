@@ -139,7 +139,6 @@ ENDM
 	command stealthrock
 	command stickyweb
 	command defog
-	command quiverdance             ; ba
 	command burn                    ; bb
 	command facade                  ; be
 	command hurricaneaccuracy       ; bf

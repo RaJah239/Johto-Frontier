@@ -1536,7 +1536,7 @@ DragonDance:
 QuiverDance:
 	usedmovetext
 	doturn
-	quiverdance
+	farcommand
 	endmove
 
 DoBurn:
