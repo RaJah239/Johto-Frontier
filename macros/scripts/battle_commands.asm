@@ -74,7 +74,6 @@ ENDM
 	command damagecalc              ; 62
 	command checksafeguard          ; 65
 	command batonpass               ; 67
-	command pursuit                 ; 68
 	command clearhazards            ; 69
 	command weatherheal
 	command hiddenpower             ; 6d

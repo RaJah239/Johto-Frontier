@@ -1281,7 +1281,7 @@ Pursuit:
 	damagecalc
 	stab
 	damagevariation
-	pursuit
+	farcommand
 	checkhit
 	moveanim
 	failuretext

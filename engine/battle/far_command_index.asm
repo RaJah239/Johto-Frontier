@@ -58,4 +58,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_ATTRACT,         BattleCommand_Attract
 	dbw EFFECT_SAFEGUARD,       BattleCommand_Safeguard
 	dbw EFFECT_ACROBATICS,      BattleCommand_Acrobatics
+	dbw EFFECT_PURSUIT,         BattleCommand_Pursuit
 	db -1 ; end

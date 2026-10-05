@@ -6,6 +6,7 @@ BattleCommand_Pursuit:
 	and a
 	jr z, .ok
 	ld hl, wPlayerIsSwitching
+
 .ok
 	ld a, [hl]
 	and a
