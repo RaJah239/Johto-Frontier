@@ -1319,6 +1319,8 @@ CheckTypeMatchup:
 	pop bc
 	ldh a, [hQuotient + 3]
 	ld [wTypeMatchup], a
+	and a
+	jr z, .End
 	jr .TypesLoop
 
 .End:
