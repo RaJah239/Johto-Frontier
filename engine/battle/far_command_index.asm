@@ -68,4 +68,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_HURRICANE,       BattleCommand_HurricaneAccuracy
 	dbw EFFECT_FACADE,          BattleCommand_Facade
 	dbw EFFECT_ENCORE,          BattleCommand_Encore
+	dbw EFFECT_SKETCH,          BattleCommand_Sketch
 	db -1 ; end

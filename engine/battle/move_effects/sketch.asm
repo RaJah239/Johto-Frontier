@@ -1,21 +1,21 @@
 BattleCommand_Sketch:
-	call ClearLastMove
+	farcall ClearLastMove
 ; Don't sketch during a link battle
 	ld a, [wLinkMode]
 	and a
 	jr z, .not_linked
-	call AnimateFailedMove
-	jmp PrintNothingHappened
+	farcall AnimateFailedMove
+	farjp PrintNothingHappened
 
 .not_linked
 ; If the opponent has a substitute up, fail.
-	call CheckSubstituteOpp
+	farcall CheckSubstituteOpp
 	jmp nz, .fail
 ; If the user is transformed, fail.
  	ld a, BATTLE_VARS_SUBSTATUS5
 	call GetBattleVarAddr
 	bit SUBSTATUS_TRANSFORMED, [hl]
-	jr nz, .fail
+	jmp nz, .fail
 ; Get the user's moveset in its party struct.
 ; This move replacement shall be permanent.
 ; Pointer will be in de.
@@ -65,7 +65,7 @@ BattleCommand_Sketch:
 	push hl
 	dec a
 	ld hl, Moves + MOVE_PP
-	call GetMoveAttr
+	newfarcall GetMoveAttr
 	pop hl
 	ld bc, wBattleMonPP - wBattleMonMoves
 	add hl, bc
@@ -105,11 +105,11 @@ BattleCommand_Sketch:
 	ld [hl], a
 .done_copy
 	call GetMoveName
-	call AnimateCurrentMove
+	farcall AnimateCurrentMove
 
 	ld hl, SketchedText
 	jmp StdBattleTextbox
 
 .fail
-	call AnimateFailedMove
-	jmp PrintDidntAffect
+	farcall AnimateFailedMove
+	farjp PrintDidntAffect

@@ -1059,7 +1059,7 @@ PainSplit:
 Sketch:
 	usedmovetext
 	doturn
-	sketch
+	farcommand
 	endmove
 
 SleepTalk:
