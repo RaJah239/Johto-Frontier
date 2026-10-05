@@ -131,6 +131,7 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Physical/Special split added to moves
 - Print perfect accuracy as "---"
 - Added "Moves" to Menu Option in battle
+- Transform gives full PP instead of a flat 5
 - Short beeping noise for low HP
 - Pokémon asleep last 1-3 turns
 - Pokéball's pocket set to default in wild encounters
