@@ -136,7 +136,6 @@ ENDM
 	command supereffectivelooptext  ; ad
 	command startloop               ; ae
 	command curl                    ; af
-	command stealthrock
 	command stickyweb
 	command defog
 	command burn                    ; bb

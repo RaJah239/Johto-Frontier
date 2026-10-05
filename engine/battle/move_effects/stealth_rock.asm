@@ -1,13 +1,13 @@
 BattleCommand_StealthRock:
-; rocks
+; stealth rock
 
 	ld hl, wEnemyScreens
 	ldh a, [hBattleTurn]
 	and a
 	jr z, .got_screens
 	ld hl, wPlayerScreens
-.got_screens
 
+.got_screens
 ; Fails if rocks are already down!
 
 	bit SCREENS_STEALTH_ROCK, [hl]
@@ -15,9 +15,9 @@ BattleCommand_StealthRock:
 
 	set SCREENS_STEALTH_ROCK, [hl]
 
-	call AnimateCurrentMove
+	farcall AnimateCurrentMove
 	ld hl, StealthRockText
 	jmp StdBattleTextbox
 
 .failed
-	jmp FailMove
+	farjp FailMove

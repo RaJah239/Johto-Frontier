@@ -51,4 +51,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_VENOSHOCK,       BattleCommand_Venoshock
 	dbw EFFECT_FURY_DRIVE,      BattleCommand_FuryDrive
 	dbw EFFECT_QUIVER_DANCE,    BattleCommand_QuiverDance
+	dbw EFFECT_STEALTH_ROCK,    BattleCommand_StealthRock
 	db -1 ; end

@@ -1494,7 +1494,7 @@ Hail:
 StealthRock:
 	usedmovetext
 	doturn
-	stealthrock
+	farcommand
 	endmove
 
 ToxicSpikes:
