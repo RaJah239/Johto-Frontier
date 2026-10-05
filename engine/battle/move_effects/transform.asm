@@ -24,7 +24,7 @@ BattleCommand_Transform:
 	farcall CheckUserIsCharging
 	jr nz, .mimic_substitute
 	ld a, SUBSTITUTE
-	farcall LoadAnim
+	newfarcall LoadAnim
 .mimic_substitute
 	ld a, BATTLE_VARS_SUBSTATUS5
 	call GetBattleVarAddr

@@ -909,7 +909,7 @@ DoParalyze:
 Substitute:
 	usedmovetext
 	doturn
-	substitute
+	farcommand
 	endmove
 
 HyperBeam:

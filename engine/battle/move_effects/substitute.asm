@@ -1,5 +1,5 @@
 BattleCommand_Substitute:
-	call BattleCommand_MoveDelay
+	farcall BattleCommand_MoveDelay
 	ld hl, wBattleMonMaxHP
 	ld de, wPlayerSubstituteHP
 	ldh a, [hBattleTurn]
@@ -54,7 +54,7 @@ BattleCommand_Substitute:
 	xor a
 	ld [hl], a
 	ld [de], a
-	call _CheckBattleScene
+	farcall _CheckBattleScene
 	jr c, .no_anim
 
 	xor a
@@ -62,25 +62,28 @@ BattleCommand_Substitute:
 	ld [wFXAnimID + 1], a
 	ld [wBattleAnimParam], a
 	ld a, SUBSTITUTE
-	call LoadAnim
+	newfarcall LoadAnim
 	jr .finish
 
 .no_anim
-	call BattleCommand_RaiseSubNoAnim
+	farcall BattleCommand_RaiseSubNoAnim
 .finish
 	ld hl, MadeSubstituteText
 	call StdBattleTextbox
 	jmp RefreshBattleHuds
 
 .already_has_sub
-	call CheckUserIsCharging
-	call nz, BattleCommand_RaiseSub
+	farcall CheckUserIsCharging
+	call nz, .raise_sub
 	ld hl, HasSubstituteText
 	jr .jmp_stdbattletextbox
 
 .too_weak_to_sub
-	call CheckUserIsCharging
-	call nz, BattleCommand_RaiseSub
+	farcall CheckUserIsCharging
+	call nz, .raise_sub
 	ld hl, TooWeakSubText
 .jmp_stdbattletextbox
 	jmp StdBattleTextbox
+
+.raise_sub
+	farjp BattleCommand_RaiseSub

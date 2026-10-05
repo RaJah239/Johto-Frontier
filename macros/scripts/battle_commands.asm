@@ -43,7 +43,6 @@ ENDM
 	command screen                  ; 2e
 	command poison                  ; 2f
 	command paralyze                ; 30
-	command substitute              ; 31
 	command rechargenextturn        ; 32
 	command mimic                   ; 33
 	command metronome               ; 34

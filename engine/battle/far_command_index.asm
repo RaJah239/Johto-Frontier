@@ -74,4 +74,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_SPITE,           BattleCommand_Spite
 	dbw EFFECT_HEAL_BELL,       BattleCommand_HealBell
 	dbw EFFECT_TRANSFORM,       BattleCommand_Transform
+	dbw EFFECT_SUBSTITUTE,      BattleCommand_Substitute
 	db -1 ; end
