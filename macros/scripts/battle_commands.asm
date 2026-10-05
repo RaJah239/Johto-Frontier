@@ -127,7 +127,6 @@ ENDM
 	command startloop               ; ae
 	command curl                    ; af
 	command burn                    ; bb
-	command facade                  ; be
 	command farcommand              ; c0
 	command checkcontact
 	command checksubstitute

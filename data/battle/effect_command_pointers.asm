@@ -127,7 +127,6 @@ BattleCommandPointers:
 	dw BattleCommand_StartLoop
 	dw BattleCommand_Curl
 	dw BattleCommand_Burn
-	dw BattleCommand_Facade
 	dw BattleCommand_FarCommand
 	dw BattleCommand_CheckContact
 	dw BattleCommand_CheckSubstitute

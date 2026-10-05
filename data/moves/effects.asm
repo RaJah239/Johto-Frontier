@@ -1615,7 +1615,7 @@ Facade:
 	damagecalc
 	stab
 	damagevariation
-	facade
+	farcommand
 	checkhit
 	moveanim
 	failuretext

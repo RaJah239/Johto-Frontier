@@ -7107,7 +7107,6 @@ INCLUDE "engine/battle/move_effects/rollout.asm"
 INCLUDE "engine/battle/move_effects/return.asm"
 INCLUDE "engine/battle/move_effects/baton_pass.asm"
 
-INCLUDE "engine/battle/move_effects/facade.asm"
 INCLUDE "engine/battle/move_effects/encore.asm"
 INCLUDE "engine/battle/move_effects/snore.asm"
 INCLUDE "engine/battle/move_effects/sketch.asm"

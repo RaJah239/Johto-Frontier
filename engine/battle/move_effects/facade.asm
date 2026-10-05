@@ -7,34 +7,33 @@ BattleCommand_Facade:
 	ld hl, wEnemyMonStatus
 .got_status
 	bit PAR, [hl]
-	jmp nz, DoubleDamage
+	jr nz, DoubleDamageEffCmds2
 
 	bit BRN, [hl]
 	jr nz, QuadrupleDamage
 
 	bit PSN, [hl]
-	jmp nz, DoubleDamage
+	jr nz, DoubleDamageEffCmds2
 	ret
 
 QuadrupleDamage:
 	ld hl, wCurDamage + 1
 
-	; First doubling
+	; first doubling
 	sla [hl]
 	dec hl
 	rl [hl]
-	jr c, .overflow
+	jr c, Overflow
+	; fallthrough to second doubling
 
-	; Second doubling
+DoubleDamageEffCmds2:
 	ld hl, wCurDamage + 1
 	sla [hl]
 	dec hl
 	rl [hl]
-	jr c, .overflow
+	ret nc
 
-	ret
-
-.overflow
+Overflow:
 	ld a, $ff
 	ld [hli], a
 	ld [hl], a
