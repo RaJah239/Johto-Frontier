@@ -1563,7 +1563,7 @@ CloseCombat:
 	applydamage
 	criticaltext
 	supereffectivetext
-	closecombat
+	farcommand
 	checkfaint
 	kingsrock
 	endmove

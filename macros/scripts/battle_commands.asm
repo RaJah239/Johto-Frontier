@@ -141,7 +141,6 @@ ENDM
 	command defog
 	command quiverdance             ; ba
 	command burn                    ; bb
-	command closecombat
 	command hex
 	command facade                  ; be
 	command hurricaneaccuracy       ; bf

@@ -2,17 +2,18 @@ BattleCommand_CloseCombat:
 	ld a, [wAttackMissed]
 	and a
 	ret nz
-	
+
 	ld a, DEFENSE
-	call LowerStat
-	call BattleCommand_SwitchTurn
-	call BattleCommand_StatDownMessage
-	call ResetMiss
-	call BattleCommand_SwitchTurn
+	ld [wLoweredStat], a
+	farcall LowerStatFar
+	farcall BattleCommand_SwitchTurn
+	farcall BattleCommand_StatDownMessage
+	farcall ResetMiss
+	farcall BattleCommand_SwitchTurn
 	ld a, SP_DEFENSE
-	call LowerStat
-	call BattleCommand_SwitchTurn
-	call BattleCommand_StatDownMessage
-	call ResetMiss
-	jmp BattleCommand_SwitchTurn
-	
+	ld [wLoweredStat], a
+	farcall LowerStatFar
+	farcall BattleCommand_SwitchTurn
+	farcall BattleCommand_StatDownMessage
+	farcall ResetMiss
+	farjp BattleCommand_SwitchTurn
