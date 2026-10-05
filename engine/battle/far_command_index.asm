@@ -70,4 +70,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_ENCORE,          BattleCommand_Encore
 	dbw EFFECT_SKETCH,          BattleCommand_Sketch
 	dbw EFFECT_SLEEP_TALK,      BattleCommand_SleepTalk
+	dbw EFFECT_DESTINY_BOND,    BattleCommand_DestinyBond
 	db -1 ; end

@@ -1071,7 +1071,7 @@ SleepTalk:
 DestinyBond:
 	usedmovetext
 	doturn
-	destinybond
+	farcommand
 	endmove
 
 Spite:

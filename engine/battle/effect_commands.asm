@@ -7107,7 +7107,6 @@ INCLUDE "engine/battle/move_effects/rollout.asm"
 INCLUDE "engine/battle/move_effects/return.asm"
 INCLUDE "engine/battle/move_effects/baton_pass.asm"
 
-INCLUDE "engine/battle/move_effects/destiny_bond.asm"
 INCLUDE "engine/battle/move_effects/spite.asm"
 INCLUDE "engine/battle/move_effects/heal_bell.asm"
 INCLUDE "engine/battle/move_effects/transform.asm"
