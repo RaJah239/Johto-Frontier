@@ -7098,6 +7098,7 @@ StartWeatherItem:
 	ld [wBattleWeather], a
 	ld a, 8
 	ld [wWeatherCount], a
+BattleCommand_Mimic:
 	ret
 
 INCLUDE "engine/battle/move_effects/spikes.asm"
@@ -7126,7 +7127,6 @@ INCLUDE "engine/battle/move_effects/destiny_bond.asm"
 INCLUDE "engine/battle/move_effects/spite.asm"
 INCLUDE "engine/battle/move_effects/heal_bell.asm"
 INCLUDE "engine/battle/move_effects/transform.asm"
-INCLUDE "engine/battle/move_effects/mimic.asm"
 INCLUDE "engine/battle/move_effects/substitute.asm"
 INCLUDE "engine/battle/move_effects/mist.asm"
 INCLUDE "engine/battle/move_effects/focus_energy.asm"
