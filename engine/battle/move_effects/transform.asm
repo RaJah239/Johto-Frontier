@@ -92,10 +92,23 @@ BattleCommand_Transform:
 	inc de
 	and a
 	jr z, .done_move
-	cp SKETCH
-	ld a, 1
-	jr z, .done_move
-	ld a, 5
+; a = the move copied from the target; give it that move's full max PP
+	ld c, a
+	push hl
+	push de
+	push bc
+	dec c
+	ld a, c
+	ld hl, Moves
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld de, wStringBuffer1
+	ld a, BANK(Moves)
+	call FarCopyBytes
+	pop bc
+	pop de
+	pop hl
+	ld a, [wStringBuffer1 + MOVE_PP]
 .done_move
 	ld [hli], a
 	dec b
