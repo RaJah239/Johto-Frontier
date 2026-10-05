@@ -44,6 +44,7 @@ INCLUDE "engine/battle/move_effects/attract.asm"
 INCLUDE "engine/battle/move_effects/safeguard.asm"
 INCLUDE "engine/battle/move_effects/acrobatics.asm"
 INCLUDE "engine/battle/move_effects/pursuit.asm"
+INCLUDE "engine/battle/move_effects/rapid_spin.asm"
 
 ; Weather duration when Weather Rock is equipped
 ; Rock: 16, No Rock: 5

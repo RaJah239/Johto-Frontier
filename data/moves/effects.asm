@@ -1307,7 +1307,7 @@ RapidSpin:
 	applydamage
 	criticaltext
 	supereffectivetext
-	clearhazards
+	farcommand
 	speedup
 	statupmessage
 	checkfaint

@@ -29,8 +29,8 @@ BattleCommand_ClearHazards:
 	res SUBSTATUS_LEECH_SEED, [hl]
 	ld hl, ShedLeechSeedText
 	call StdBattleTextbox
-.not_leeched
 
+.not_leeched
 	ld hl, wPlayerScreens
 	ld de, wPlayerWrapCount
 	ldh a, [hBattleTurn]
