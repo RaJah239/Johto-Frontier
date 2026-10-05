@@ -369,12 +369,13 @@
 	const EVENT_DREAM_GAZE_FOE
 	const EVENT_DREAM_SONG_PLAYER
 	const EVENT_DREAM_SONG_FOE
+	const EVENT_CRIT_LOCK
 	const EVENT_ASTRAL_AIM_PLAYER
 	const EVENT_ASTRAL_AIM_FOE
 
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 189 events
+; Unused: next 188 events
 
 	const_next 600
 ; Kurt Apricorn events

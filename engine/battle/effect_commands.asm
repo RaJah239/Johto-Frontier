@@ -888,7 +888,7 @@ BattleCommand_Critical:
 
 ; +2 critical level
 	ld c, 2
-	jr .Tally
+	jmp .Tally
 
 .Tropius:
 	cp TROPIUS
@@ -964,6 +964,22 @@ BattleCommand_Critical:
 
 ; The move always lands a critical hit, unless the target has Crit Guard.
 .AbilityHit:
+
+; ==========================
+; === Ability: Crit Lock ===
+; ==========================
+
+	CheckEventFlag EVENT_CRIT_LOCK
+	jr nz, .CritGuard
+
+	; slide the ability box over the acting side's HUD
+	ld b, BANK(AbilitySlideIn_CritlockText)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	ld de, AbilitySlideIn_CritlockText
+	farcall ShowAbilityPopup
+
+	SetEventFlag EVENT_CRIT_LOCK
 	jr .CritGuard
 
 .continue
@@ -1016,6 +1032,7 @@ CriticialHitLoaded:
 	ld [wCriticalHit], a
 	ret
 
+AbilitySlideIn_CritlockText: db "Crit Lock@"
 AbilitySlideIn_CritGuardText: db "Crit Guard@"
 
 INCLUDE "data/moves/critical_hit_moves.asm"
