@@ -422,12 +422,32 @@ ScrollingMenu_UpdateDisplay:
 	ld a, [wMenuDataFlags]
 	bit 4, a ; place arrows
 	ret z
+
+; Hide the down arrow when there is nothing below the last visible row
+	ld a, [wMenuSelection]
+	push af
+	ld a, [wCurItem]
+	push af
+
+	ld a, [wMenuData_ScrollingMenuHeight]
+	call ScrollingMenu_GetListItemCoordAndFunctionArgs
+
+	ld a, [wMenuSelection]
+	and a
+	jr z, .restore
+
 	ld a, [wMenuBorderBottomCoord]
 	ld b, a
 	ld a, [wMenuBorderRightCoord]
 	ld c, a
 	call Coord2Tile
 	ld [hl], "▼"
+
+.restore
+	pop af
+	ld [wCurItem], a
+	pop af
+	ld [wMenuSelection], a
 	ret
 
 .cancel
