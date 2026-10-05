@@ -3457,13 +3457,13 @@ BattleCommand_ConstantDamage:
 .got_turn
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
+	ld c, a
 	cp EFFECT_LEVEL_DAMAGE
 	ld b, [hl]
 	ld a, 0
 	jr z, .got_power
 
-	ld a, BATTLE_VARS_MOVE_EFFECT
-	call GetBattleVar
+	ld a, c
 	cp EFFECT_SUPER_FANG
 	jr z, .super_fang
 
