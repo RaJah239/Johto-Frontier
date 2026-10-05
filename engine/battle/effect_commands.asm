@@ -2985,7 +2985,7 @@ EnemyAttackDamage:
 	ld b, a
 	ld c, [hl]
 	ld hl, wEnemyAttack
-	jr c, .meteormittsorlightball
+	jr .meteormittsorlightball
 
 .body_press
 ; Use enemy's defense instead of attack for Body Press
