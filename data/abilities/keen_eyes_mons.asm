@@ -1,6 +1,6 @@
 ; List of all Pokemon that automatically get a 1.3 accuracy boost on all moves
 
-CompoundEyesMons:
+KeenEyesMons:
 ;	db STARYU
 ;	db STARMIE
 ;	db HOOTHOOT

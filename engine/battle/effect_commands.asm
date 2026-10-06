@@ -1813,18 +1813,19 @@ BattleCommand_CheckHit:
 	dec d
 	jr nz, .accuracy_loop
 
-; ==============================
-; === Ability: Compound Eyes ===
-; ==============================
+; ==========================
+; === Ability: Keen Eyes ===
+; ==========================
 	call GetCurrentMon
-	ld hl, CompoundEyesMons
+	ld hl, KeenEyesMons
 	call IsInByteArray
-	jr nc, .skip_compound_eyes
+	jr nc, .skip_keen_eyes
 
+	ShowSureAbilityPopup EVENT_KEEN_EYES_PLAYER, EVENT_KEEN_EYES_FOE, KeenEyesText
 	ld a, 130
 	call AccuracyCalc
 
-.skip_compound_eyes
+.skip_keen_eyes
 	; if the result is more than 2 bytes, max out at 100%
 	ldh a, [hQuotient + 2]
 	and a
@@ -1836,6 +1837,8 @@ BattleCommand_CheckHit:
 	pop hl
 	ld [hl], a
 	ret
+
+KeenEyesText: db "Keen Eyes@"
 
 AccuracyCalc:
 	ldh [hMultiplier], a
@@ -1858,7 +1861,7 @@ INCLUDE "data/abilities/lullaby_mastery_mons.asm"
 INCLUDE "data/abilities/meteor_lock_mons.asm"
 INCLUDE "data/abilities/fade_in_mons.asm"
 INCLUDE "data/abilities/snow_cloak_mons.asm"
-INCLUDE "data/abilities/compound_eyes_mons.asm"
+INCLUDE "data/abilities/keen_eyes_mons.asm"
 
 INCLUDE "data/battle/accuracy_multipliers.asm"
 
