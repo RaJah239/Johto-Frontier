@@ -83,6 +83,11 @@ SerenityText:
 	line "Immune to status!"
 	prompt
 
+FeralMindBattleText:
+	text "<USER> can"
+	line "freely act!"
+	done
+
 BecameHealthyText:
 	text "<USER>"
 	line "became healthy!"

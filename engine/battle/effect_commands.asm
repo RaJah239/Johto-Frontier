@@ -5204,15 +5204,21 @@ BattleCommand_Rampage:
 	and SLP_MASK
 	ret nz
 
-; ============================
-; === Ability: Feral Focus ===
-; ============================
+; ===========================
+; === Ability: Feral Mind ===
+; ===========================
 	; freely use rapage moves
 	call GetCurrentMon
-	ld hl, FeralFocusPokemon
+	ld hl, FeralMindPokemon
 	call IsInByteArray
-	ret c
+	jr nc, .feral_mind_done
 
+	ld hl, FeralMindBattleText
+	call StdBattleTextbox
+	ShowGenericAbilityPopup EVENT_FERAL_MIND_PLAYER, EVENT_FERAL_MIND_FOE, FeralMindText
+	ret
+
+.feral_mind_done
 	ld de, wPlayerRolloutCount
 	ldh a, [hBattleTurn]
 	and a
@@ -5231,7 +5237,9 @@ BattleCommand_Rampage:
 	ld [wSomeoneIsRampaging], a
 	ret
 
-INCLUDE "data/abilities/feral_focus_mons.asm"
+FeralMindText: db "Feral Mind@"
+
+INCLUDE "data/abilities/feral_mind_mons.asm"
 
 SetBattleDraw:
 	ld a, [wBattleResult]
