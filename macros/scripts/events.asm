@@ -1302,4 +1302,48 @@ MACRO surefire_ability
 .skip\@
 ENDM
 
+; ==========================================================================
+; === Macro: ShowSureAbilityPopup                                      ===
+; ==========================================================================
+; Shows an ability popup once per side.
+; Parameters:
+;   \1 - Player event flag
+;   \2 - Foe event flag
+;   \3 - Ability popup text label
+;
+; Example:
+;   ShowSureAbilityPopup EVENT_SURE_SHOCK_PLAYER, EVENT_SURE_SHOCK_FOE, AbilitySlideIn_SureShockText
+;
+MACRO ShowSureAbilityPopup
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .\@Foe
+
+	; Player
+	CheckEventFlag \1
+	jr nz, .\@Done
+
+	ld b, BANK(\3)
+	ld c, ABILITY_POPUP_PLAYER
+	ld de, \3
+	farcall ShowAbilityPopup
+
+	SetEventFlag \1
+	jr .\@Done
+
+.\@Foe:
+	; Foe
+	CheckEventFlag \2
+	jr nz, .\@Done
+
+	ld b, BANK(\3)
+	ld c, ABILITY_POPUP_ENEMY
+	ld de, \3
+	farcall ShowAbilityPopup
+
+	SetEventFlag \2
+
+.\@Done:
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

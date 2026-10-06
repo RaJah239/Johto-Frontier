@@ -4174,38 +4174,7 @@ BattleCommand_BurnTarget:
 
 	; 100% burn foe
 .burn
-	; Check if this side has already displayed Kindle
-	ldh a, [hBattleTurn]
-	and a
-	jr nz, .FoeKindle
-
-	; Player's Kindle
-	CheckEventFlag EVENT_KINDLE_PLAYER
-	jr nz, .continue
-
-	; slide the ability box over the acting side's HUD
-	ld b, BANK(AbilitySlideIn_KindleText)
-	ld c, ABILITY_POPUP_PLAYER
-	ld de, AbilitySlideIn_KindleText
-	farcall ShowAbilityPopup
-
-	SetEventFlag EVENT_KINDLE_PLAYER
-	jr .continue
-
-.FoeKindle:
-	; Foe's Kindle
-	CheckEventFlag EVENT_KINDLE_FOE
-	jr nz, .continue
-
-	; slide the ability box over the acting side's HUD
-	ld b, BANK(AbilitySlideIn_KindleText)
-	ld c, ABILITY_POPUP_ENEMY
-	ld de, AbilitySlideIn_KindleText
-	farcall ShowAbilityPopup
-
-	SetEventFlag EVENT_KINDLE_FOE
-
-.continue
+	ShowSureAbilityPopup EVENT_KINDLE_PLAYER, EVENT_KINDLE_FOE, KindleText
 	xor a
 	ld [wEffectFailed], a
 
@@ -4239,7 +4208,7 @@ BattleCommand_BurnTarget:
 
 	farjp UseHeldStatusHealingItem
 
-AbilitySlideIn_KindleText: db "Kindle@"
+KindleText: db "Kindle@"
 
 INCLUDE "data/abilities/kindle_mons.asm"
 
@@ -4347,38 +4316,7 @@ BattleCommand_ParalyzeTarget:
 
 	; 100% paralyze foe
 .paralyze
-	; Check if this side has already displayed Sure Shock
-	ldh a, [hBattleTurn]
-	and a
-	jr nz, .FoeSureShock
-
-	; Player's Sure Shock
-	CheckEventFlag EVENT_SURE_SHOCK_PLAYER
-	jr nz, .continue
-
-	; slide the ability box over the acting side's HUD
-	ld b, BANK(AbilitySlideIn_SureShockText)
-	ld c, ABILITY_POPUP_PLAYER
-	ld de, AbilitySlideIn_SureShockText
-	farcall ShowAbilityPopup
-
-	SetEventFlag EVENT_SURE_SHOCK_PLAYER
-	jr .continue
-
-.FoeSureShock:
-	; Foe's Sure Shock
-	CheckEventFlag EVENT_SURE_SHOCK_FOE
-	jr nz, .continue
-
-	; slide the ability box over the acting side's HUD
-	ld b, BANK(AbilitySlideIn_SureShockText)
-	ld c, ABILITY_POPUP_ENEMY
-	ld de, AbilitySlideIn_SureShockText
-	farcall ShowAbilityPopup
-
-	SetEventFlag EVENT_SURE_SHOCK_FOE
-
-.continue
+	ShowSureAbilityPopup EVENT_SURE_SHOCK_PLAYER, EVENT_SURE_SHOCK_FOE, SureShockText
 	xor a
 	ld [wEffectFailed], a
 
@@ -4410,7 +4348,7 @@ BattleCommand_ParalyzeTarget:
 	ld hl, UseHeldStatusHealingItem
 	jmp CallBattleCore
 
-AbilitySlideIn_SureShockText: db "Sure Shock@"
+SureShockText: db "Sure Shock@"
 
 INCLUDE "data/abilities/sure_shock_mons.asm"
 INCLUDE "data/abilities/serenity_mons.asm"
