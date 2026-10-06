@@ -293,11 +293,26 @@ MenuJoypadLoop:
 	ld a, [wCurrentBattleWindow]
 	and a
 	jr nz, .filter
+; UP + START together open the type chart; START alone still jumps
+; straight to <PKMN>. UP can land a frame or two after START, so give
+; the chord a few frames to complete before falling back.
+	ld c, 6
+.chord_wait
+	ldh a, [hJoyDown]
+	bit D_UP_F, a
+	jr nz, .type_chart
+	call JoyTextDelay
+	call DelayFrame
+	dec c
+	jr nz, .chord_wait
 	ld a, 2
 	ld [wMenuCursorY], a
 	ld a, 1
 	ld [wMenuCursorX], a
 	ret
+.type_chart
+	call ShowBattleTypeChart
+	jr .loop
 
 .filter
 	ld a, [wMenuJoypadFilter]
@@ -330,6 +345,26 @@ ClearEnemyTypes:
 	xor a
 	ld [wEnemyTypeDisplayActive], a
 	farjp UpdateEnemyHUD
+
+ShowBattleTypeChart:
+; Open the type chart over the main battle menu, then rebuild
+; everything it overwrites: fonts and HP bars, both mon pics, the
+; saved battle tilemap, the time-of-day icon, the battle palettes
+; and attrmap (GetMemSGBLayout reapplies wDefaultSGBLayout, which
+; regenerates the attrmap and pushes it), and the menu box itself.
+	farcall _TypeChart
+	call ClearSprites
+	farcall _LoadBattleFontsHPBar
+	farcall GetBattleMonBackpic
+	farcall GetEnemyMonFrontpic
+	call LoadTempTilemapToTilemap
+	farcall GetTimeOfDayImage
+	call GetMemSGBLayout
+	call SetDefaultBGPAndOBP
+	call Draw2DMenu
+	call MobileTextBorder
+	call UpdateSprites
+	jmp ApplyTilemap
 
 Do2DMenuRTCJoypad:
 .loopRTC
