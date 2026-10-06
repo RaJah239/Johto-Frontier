@@ -1381,7 +1381,6 @@ BattleCommand_Burn:
 	ld hl, SerenityPokemon
 	call IsInByteArray
 	jmp c, Serenity
-	; fallthrough
 
 	ld hl, DidntAffect1Text
 	ld a, BATTLE_VARS_STATUS_OPP
@@ -3825,7 +3824,6 @@ BattleCommand_SleepTarget:
 	ld hl, SerenityPokemon
 	call IsInByteArray
 	jr c, Serenity
-	; fallthrough
 
 	call CheckForStatusIfAlreadyHasAny
 	jr nz, .fail
@@ -3866,13 +3864,11 @@ BattleCommand_SleepTarget:
 	jmp StdBattleTextbox
 
 Serenity:
-	; add some delay so the text 
-	; isn't instantly skipped
-	ld c, 30
-	call DelayFrames
-
+	showdefensiveability AbilitySlideIn_SerenityText
 	ld hl, SerenityText
 	jmp StdBattleTextbox
+
+AbilitySlideIn_SerenityText: db "Serenity@"
 
 BattleCommand_PoisonTarget:
 	call CheckSubstituteOpp
@@ -3891,18 +3887,18 @@ BattleCommand_PoisonTarget:
 	call CheckIfTargetIsGivenType
 	ret z
 
+	ld a, [wEffectFailed]
+	and a
+	ret nz
+
 ; =========================================
 ; === Ability: Serenity - Poison Target ===
 ; =========================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
 	call IsInByteArray
-	ret c
-	; fallthrough
+	jr c, Serenity
 
-	ld a, [wEffectFailed]
-	and a
-	ret nz
 	call SafeCheckSafeguard
 	ret nz
 
@@ -3938,7 +3934,7 @@ BattleCommand_Poison:
 	call GetOpposingMon
 	ld hl, SerenityPokemon
 	call IsInByteArray
-	jr c, Serenity
+	jmp c, Serenity
 
 	ld hl, DidntAffect1Text
 	ld a, BATTLE_VARS_STATUS_OPP
@@ -4142,15 +4138,6 @@ BattleCommand_BurnTarget:
 	call CheckIfTargetIsGivenType
 	ret z
 
-; =======================================
-; === Ability: Serenity - Burn Target ===
-; =======================================
-	call GetOpposingMon
-	ld hl, SerenityPokemon
-	call IsInByteArray
-	ret c
-	; fallthrough
-
 ; =======================
 ; === Ability: Kindle ===
 ; =======================
@@ -4178,6 +4165,15 @@ BattleCommand_BurnTarget:
 	ld a, [wEffectFailed]
 	and a
 	ret nz
+
+; =======================================
+; === Ability: Serenity - Burn Target ===
+; =======================================
+	call GetOpposingMon
+	ld hl, SerenityPokemon
+	call IsInByteArray
+	jmp c, Serenity
+
 	call SafeCheckSafeguard
 	ret nz
 	ld a, BATTLE_VARS_STATUS_OPP
@@ -4241,18 +4237,18 @@ BattleCommand_FreezeTarget:
 	call CheckIfTargetIsGivenType
 	ret z
 
+	ld a, [wEffectFailed]
+	and a
+	ret nz
+
 ; ===========================================
 ; === Ability: Serenity - Frostbite Target ==
 ; ===========================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
 	call IsInByteArray
-	ret c
-	; fallthrough
+	jmp c, Serenity
 
-	ld a, [wEffectFailed]
-	and a
-	ret nz
 	call SafeCheckSafeguard
 	ret nz
 	ld a, BATTLE_VARS_STATUS_OPP
@@ -4282,14 +4278,6 @@ BattleCommand_ParalyzeTarget:
 	and EFFECTIVENESS_MASK
 	ret z
 
-; ===========================================
-; === Ability: Serenity - Paralyze Target ===
-; ===========================================
-	call GetOpposingMon
-	ld hl, SerenityPokemon
-	call IsInByteArray
-	ret c
-
 ; ===========================
 ; === Ability: Sure Shock ===
 ; ===========================
@@ -4316,6 +4304,15 @@ BattleCommand_ParalyzeTarget:
 	ld a, [wEffectFailed]
 	and a
 	ret nz
+
+; ===========================================
+; === Ability: Serenity - Paralyze Target ===
+; ===========================================
+	call GetOpposingMon
+	ld hl, SerenityPokemon
+	call IsInByteArray
+	jmp c, Serenity
+
 	call SafeCheckSafeguard
 	ret nz
 	ld a, BATTLE_VARS_STATUS_OPP
@@ -5963,17 +5960,18 @@ BattleCommand_Recoil:
 INCLUDE "data/abilities/rock_head_mons.asm"
 
 BattleCommand_ConfuseTarget:
+	ld a, [wEffectFailed]
+	and a
+	ret nz
+
 ; ===========================================
 ; === Ability: Serenity - Confuse Target ===
 ; ===========================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
 	call IsInByteArray
-	ret c
+	jmp c, Serenity
 
-	ld a, [wEffectFailed]
-	and a
-	ret nz
 	call SafeCheckSafeguard
 	ret nz
 	call CheckSubstituteOpp

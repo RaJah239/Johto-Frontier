@@ -79,9 +79,8 @@ InnerFocusText:
 	prompt
 
 SerenityText:
-	text "<TARGET>'s"
-	line "Serenity nullifies"
-	cont "status problems!"
+	text "<TARGET> is"
+	line "Immune to status!"
 	prompt
 
 ResilienceText:
