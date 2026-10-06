@@ -899,7 +899,7 @@ BattleCommand_Critical:
 
 ; +2 critical level
 	ld c, 2
-	jr .Tally
+	jmp .Tally
 
 .FocusEnergy:
 	ld a, BATTLE_VARS_SUBSTATUS4
@@ -964,22 +964,39 @@ BattleCommand_Critical:
 
 ; The move always lands a critical hit, unless the target has Crit Guard.
 .AbilityHit:
-
 ; ==========================
 ; === Ability: Crit Lock ===
 ; ==========================
+	; Check if this side has already displayed Crit Lock
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .FoeCritLock
 
-	CheckEventFlag EVENT_CRIT_LOCK
+	; Player's Crit Lock
+	CheckEventFlag EVENT_CRIT_LOCK_PLAYER
 	jr nz, .CritGuard
 
 	; slide the ability box over the acting side's HUD
 	ld b, BANK(AbilitySlideIn_CritlockText)
-	ldh a, [hBattleTurn]
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	ld c, ABILITY_POPUP_PLAYER
 	ld de, AbilitySlideIn_CritlockText
 	farcall ShowAbilityPopup
 
-	SetEventFlag EVENT_CRIT_LOCK
+	SetEventFlag EVENT_CRIT_LOCK_PLAYER
+	jr .CritGuard
+
+.FoeCritLock:
+	; Foe's Crit Lock
+	CheckEventFlag EVENT_CRIT_LOCK_FOE
+	jr nz, .CritGuard
+
+	; slide the ability box over the acting side's HUD
+	ld b, BANK(AbilitySlideIn_CritlockText)
+	ld c, ABILITY_POPUP_ENEMY
+	ld de, AbilitySlideIn_CritlockText
+	farcall ShowAbilityPopup
+
+	SetEventFlag EVENT_CRIT_LOCK_FOE
 	jr .CritGuard
 
 .continue
