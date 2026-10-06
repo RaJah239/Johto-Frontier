@@ -915,11 +915,10 @@ MistText:
 	line "shrouded in Mist!"
 	prompt
 
-RockHeadText:
-	text "<USER>'s"
-	line "Rock Head prevents"
-	cont "recoil!"
-	prompt
+RockHeadBattleText:
+	text "Does not take"
+	line "recoil damage!"
+	done
 
 StatsCantDropText:
 	text "<TARGET>'s"

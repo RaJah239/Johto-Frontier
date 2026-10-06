@@ -5878,8 +5878,10 @@ BattleCommand_Recoil:
 	jr .finish_rock_head
 
 .rock_head
-	ld hl, RockHeadText
-	jmp StdBattleTextbox
+	ld hl, RockHeadBattleText
+	call StdBattleTextbox
+	ShowGenericAbilityPopup EVENT_ROCK_HEAD_PLAYER, EVENT_ROCK_HEAD_FOE, RockHeadText
+	ret
 
 .finish_rock_head
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -5948,6 +5950,8 @@ BattleCommand_Recoil:
 
 	ld hl, RecoilText
 	jmp StdBattleTextbox
+
+RockHeadText: db "Rock Head@"
 
 INCLUDE "data/abilities/rock_head_mons.asm"
 
