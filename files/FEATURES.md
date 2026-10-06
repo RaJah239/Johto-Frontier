@@ -100,6 +100,7 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - "Move Dex" item added that displays all moves and their details
 - Items forbidden and forced Set Mode for all trainers
 - Trainers have no items to use on their Pokémon - just as the player
+- Trainers have max PP on all their moves
 - Fairy Type added
 - Frostbite replaced Freeze status
 - Scaled (higher level foes = more experience to lower level Pokémon) and Zero experience options added 
