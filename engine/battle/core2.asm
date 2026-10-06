@@ -786,6 +786,94 @@ StatsInfoBox:
 	ld hl, wEnemyMonMaxHP
 	jmp StatsInfoBoxLoop
 
+FoeDetailsPageInfoBox:
+	hlcoord 0, 0
+	ld b, 14
+	ld c, 18
+	call Textbox
+	ld b, 14
+	ld c, 18
+
+	hlcoord 0, 0
+	ld b, 3
+	ld c, 18
+	call Textbox
+
+	ld de, .FoeItemString
+	hlcoord 1, 1
+	call PlaceString
+
+	xor a
+	ldh [hBGMapMode], a
+	ld [wSwappingMove], a
+
+	ld a, [wEnemyMonItem]
+	and a
+	jr nz, .hasItem
+	ld de, .NoItem
+	jr .printItemName
+
+.hasItem
+	ld [wNamedObjectIndex], a
+	call GetItemName
+
+.printItemName
+	hlcoord 2, 3
+	call PlaceString
+
+	ld de, .FoeMovesString
+	hlcoord 1, 5
+	call PlaceString
+
+	; ListMoves reads its move list from wListMoves_MoveIndicesBuffer,
+	; so fill it with the live enemy battle moves.
+	ld hl, wEnemyMonMoves
+	ld de, wListMoves_MoveIndicesBuffer
+	ld bc, NUM_MOVES
+	call CopyBytes
+	ld a, SCREEN_WIDTH * 2
+	ld [wListMovesLineSpacing], a
+	hlcoord 2, 7
+	predef ListMoves
+	hlcoord 15, 7
+	call .ListCurrentMovePP
+	call WaitBGMap
+	jmp SetDefaultBGPAndOBP
+
+.ListCurrentMovePP
+	ld de, wEnemyMonPP
+	ld a, [wNumMoves]
+	inc a
+	ld b, a
+
+.loop
+	ld a, [de]
+	and PP_MASK
+	ld [wStringBuffer1], a
+
+	push bc
+	push de
+	push hl
+	ld de, wStringBuffer1
+	lb bc, 1, 2
+	call PrintNum
+	pop hl
+	pop de
+	pop bc
+
+	inc de
+	push bc
+	ld bc, SCREEN_WIDTH * 2
+	add hl, bc
+	pop bc
+	dec b
+	jr nz, .loop
+	ret
+
+.FoeItemString db "Foe's Item:@"
+.NoItem db "None@"
+.FoeMovesString db "Foe's Moves:@"
+
 FoeAbilityPageInfoBox:
 	hlcoord 0, 0
 	ld b, 14
@@ -1386,28 +1474,33 @@ FieldInfoBoxPlaceElement: ; input: bc -> coords, hl -> Field text, de -> Count
 
 MainText:
 .page1:
-	db "◀ Page 1/5 ▶@"
+	db "◀ Page 1/6 ▶@"
 .page1_content:
 	db " Actual Stats @"
 
 .page2:
-	db "◀ Page 2/5 ▶@"
+	db "◀ Page 2/6 ▶@"
 .page2_content:
 	db " Stat Changes @"
 
 .page3:
-	db "◀ Page 3/5 ▶@"
+	db "◀ Page 3/6 ▶@"
 .page3_content:
 	db "Field/Status 1@"
 
 .page4:
-	db "◀ Page 4/5 ▶@"
+	db "◀ Page 4/6 ▶@"
 .page4_content:
 	db "Field/Status 2@"
 
 .page5:
-	db "◀ Page 5/5 ▶@"
+	db "◀ Page 5/6 ▶@"
 .page5_content:
+	db " Enemy Details@"
+
+.page6:
+	db "◀ Page 6/6 ▶@"
+.page6_content:
 	db "   Ability    @"
 
 .player:
@@ -1581,6 +1674,8 @@ RenderTrainerInfoPage:
 	jp z, FieldInfoBox1
 	cp 3
 	jp z, FieldInfoBox2
+	cp 4
+	jp z, FoeDetailsPageInfoBox
 	jmp FoeAbilityPageInfoBox
 
 ; ========================
@@ -1589,7 +1684,7 @@ RenderTrainerInfoPage:
 IncreasePage:
 	ld a, [wTrainerInfoPage]
 	inc a
-	cp 5                     ; Pages 0..5 (inclusive)
+	cp 6                     ; Pages 0..5 (inclusive)
 	jr c, .store
 	xor a                    ; Wrap to page 0
 .store
@@ -1600,7 +1695,7 @@ DecreasePage:
 	ld a, [wTrainerInfoPage]
 	or a
 	jr nz, .dec
-	ld a, 5                  ; Wrap to last page
+	ld a, 6                  ; Wrap to last page
 .dec
 	dec a
 	ld [wTrainerInfoPage], a
@@ -1621,6 +1716,8 @@ UpdatePageText:
 	jr z, .page_4
 	cp 4
 	jr z, .page_5
+	cp 5
+	jr z, .page_6
 
 ; Default: page 0
 	ld de, MainText.page1
@@ -1650,6 +1747,12 @@ UpdatePageText:
 	ld de, MainText.page5
 	call PlaceString
 	ld de, MainText.page5_content
+	jr .done
+
+.page_6
+	ld de, MainText.page6
+	call PlaceString
+	ld de, MainText.page6_content
 .done
 	hlcoord 4, 16
 	jmp PlaceString
