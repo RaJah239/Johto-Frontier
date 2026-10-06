@@ -4147,7 +4147,7 @@ BattleCommand_BurnTarget:
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVarAddr
 	and a
-	jr nz, Defrost
+	jmp nz, Defrost
 	ld a, [wTypeModifier]
 	and EFFECTIVENESS_MASK
 	ret z
@@ -4174,9 +4174,40 @@ BattleCommand_BurnTarget:
 
 	; 100% burn foe
 .burn
+	; Check if this side has already displayed Kindle
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .FoeKindle
+
+	; Player's Kindle
+	CheckEventFlag EVENT_KINDLE_PLAYER
+	jr nz, .continue
+
+	; slide the ability box over the acting side's HUD
+	ld b, BANK(AbilitySlideIn_KindleText)
+	ld c, ABILITY_POPUP_PLAYER
+	ld de, AbilitySlideIn_KindleText
+	farcall ShowAbilityPopup
+
+	SetEventFlag EVENT_KINDLE_PLAYER
+	jr .continue
+
+.FoeKindle:
+	; Foe's Kindle
+	CheckEventFlag EVENT_KINDLE_FOE
+	jr nz, .continue
+
+	; slide the ability box over the acting side's HUD
+	ld b, BANK(AbilitySlideIn_KindleText)
+	ld c, ABILITY_POPUP_ENEMY
+	ld de, AbilitySlideIn_KindleText
+	farcall ShowAbilityPopup
+
+	SetEventFlag EVENT_KINDLE_FOE
+
+.continue
 	xor a
 	ld [wEffectFailed], a
-	; fallthrough
 
 .done
 	ld a, [wEffectFailed]
@@ -4207,6 +4238,8 @@ BattleCommand_BurnTarget:
 	call StdBattleTextbox
 
 	farjp UseHeldStatusHealingItem
+
+AbilitySlideIn_KindleText: db "Kindle@"
 
 INCLUDE "data/abilities/kindle_mons.asm"
 
