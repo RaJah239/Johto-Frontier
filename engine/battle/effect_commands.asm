@@ -64,6 +64,64 @@ PriorityBattleText_Call:
 
 PreemptText: db "Preempt@"
 
+; ===========================
+; === Ability: Type Sync ===
+; ===========================
+TypeSyncPopup:
+; Show the ability popup the first time each side uses a damaging STAB
+; move with a Type Sync pokemon this battle. The popup flags are reset by
+; ResetSureHitEvents at the start of every battle.
+; The 2x STAB itself is applied by BattleCommand_Stab, which the AI also
+; calls while scoring, so the popup check lives here (move use only).
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp STRUGGLE
+	ret z
+
+	ld a, BATTLE_VARS_MOVE_POWER
+	call GetBattleVar
+	and a
+	ret z ; status moves get no STAB
+
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	and TYPE_MASK
+	ld c, a ; c = move type
+
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .foe
+	ld hl, wBattleMonType1
+	ld a, [wBattleMonSpecies]
+	jr .got_user
+
+.foe
+	ld hl, wEnemyMonType1
+	ld a, [wEnemyMonSpecies]
+
+.got_user
+	; a = user species, hl = user's type pair, c = move type
+	ld b, a
+	ld a, [hli]
+	cp c
+	jr z, .stab
+	ld a, [hl]
+	cp c
+	ret nz
+
+.stab
+	ld a, b
+	ld hl, TypeSyncPokemon
+	call IsInByteArray
+	ret nc
+
+	ld hl, TypeSyncBattleText
+	call StdBattleTextbox
+	ShowGenericAbilityPopup EVENT_TYPE_SYNC_PLAYER, EVENT_TYPE_SYNC_FOE, TypeSyncText
+	ret
+
+TypeSyncText: db "Type Sync@"
+
 DoPlayerTurn:
 	call SetPlayerTurn
 	ld a, [wBattlePlayerAction]
@@ -99,10 +157,11 @@ DoTurn:
 
 	call UpdateMoveData
 
-; ================================
-; === Ability: Priority popup ===
-; ================================
+; ==========================================
+; === Ability popups when a move is used ===
+; ==========================================
 	call PriorityAbilityPopup
+	call TypeSyncPopup
 	; fallthrough
 
 DoMove:

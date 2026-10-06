@@ -64,6 +64,11 @@ PriorityBattleText:
 	line "priority!"
 	done
 
+TypeSyncBattleText:
+	text "This move deals"
+	line "200<%> damage!"
+	done
+
 SturdyBattleText:
 	text "Held on from being"
 	line "knocked out!"
