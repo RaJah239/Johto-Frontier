@@ -383,12 +383,14 @@
 	const EVENT_FERAL_MIND_FOE
 	const EVENT_ROCK_HEAD_PLAYER
 	const EVENT_ROCK_HEAD_FOE
+	const EVENT_OVERDRIVE_PLAYER
+	const EVENT_OVERDRIVE_FOE
 	const EVENT_ASTRAL_AIM_PLAYER
 	const EVENT_ASTRAL_AIM_FOE
 
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 177 events
+; Unused: next 175 events
 
 	const_next 600
 ; Kurt Apricorn events

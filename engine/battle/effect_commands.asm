@@ -6112,12 +6112,20 @@ BattleCommand_RechargeNextTurn:
 	call GetCurrentMon
 	ld hl, OverdrivePokemon
 	call IsInByteArray
-	ret c
+	jr nc, .overdrive_done
 
+	ld hl, OverdriveBattleText
+	call StdBattleTextbox
+	ShowGenericAbilityPopup EVENT_OVERDRIVE_PLAYER, EVENT_OVERDRIVE_FOE, OverdriveText
+	ret
+
+.overdrive_done
 	ld a, BATTLE_VARS_SUBSTATUS4
 	call GetBattleVarAddr
 	set SUBSTATUS_RECHARGE, [hl]
 	ret
+
+OverdriveText: db "Overdrive@"
 
 INCLUDE "data/abilities/overdrive_mons.asm"
 

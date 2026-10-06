@@ -83,6 +83,11 @@ SerenityText:
 	line "Immune to status!"
 	prompt
 
+OverdriveBattleText:
+	text "<TARGET>"
+	line "skips recharge!"
+	done
+
 FeralMindBattleText:
 	text "<USER> can"
 	line "freely act!"
