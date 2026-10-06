@@ -83,12 +83,6 @@ SerenityText:
 	line "Immune to status!"
 	prompt
 
-ResilienceText:
-	text "<TARGET>'s"
-	line "Resilience"
-	cont "activated!"
-	prompt
-
 BecameHealthyText:
 	text "<USER>"
 	line "became healthy!"

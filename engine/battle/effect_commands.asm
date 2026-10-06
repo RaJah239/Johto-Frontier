@@ -4645,34 +4645,15 @@ BattleCommand_StatDown:
 	jr Eff_Comands_AttackedMissed
 
 .resilience:
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_resilience_anim
-
-	; play focus energy animation
-	call BattleCommand_SwitchTurn
-	xor a
-	ld [wNumHits], a
-	ld de, FOCUS_ENERGY
-	farcall Call_PlayBattleAnim
-	call BattleCommand_SwitchTurn
-	jr .after_resilience_anim
-
-.skip_resilience_anim
-	; add some delay so the text 
-	; isn't instantly skipped
-	ld c, 30
-	call DelayFrames
-
-.after_resilience_anim
-	ld hl, ResilienceText
-	call StdBattleTextbox
+	showdefensiveability ResilienceText
 	ld a, 2
 	ld [wFailedMessage], a
 Eff_Comands_AttackedMissed:
 	ld a, 1
 	ld [wAttackMissed], a
 	ret
+
+ResilienceText: db "Resilience@"
 
 INCLUDE "data/abilities/resilience_mons.asm"
 
