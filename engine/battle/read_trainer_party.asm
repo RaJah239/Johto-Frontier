@@ -62,7 +62,86 @@ ReadTrainerParty:
 	ld d, h
 	ld e, l
 	call ReadTrainerPartyPieces
+	call MaximizeOTPartyPP
 	jmp ComputeTrainerReward
+
+MaximizeOTPartyPP:
+; every pokemon in the ot party maximum pp for each of its moves:
+; base pp plus three pp-ups
+; trainer battles copy these bytes into wenemymonpp at send-out
+; wild pokemon and the cal mirror party do not go through here
+	ld a, [wOTPartyCount]
+	and a
+	ret z
+	ld b, a
+	ld hl, wOTPartyMon1Moves
+.mon_loop
+	push bc
+; de = this mon's PP field; hl = its moves field
+	ld d, h
+	ld e, l
+	ld a, MON_PP - MON_MOVES
+	add a, e
+	ld e, a
+	jr nc, .got_pp_ptr
+	inc d
+.got_pp_ptr
+	call .maximize_mon
+	pop bc
+; step hl to the next mon's moves field
+	ld a, PARTYMON_STRUCT_LENGTH - NUM_MOVES
+	add a, l
+	ld l, a
+	jr nc, .next_mon
+	inc h
+.next_mon
+	dec b
+	jr nz, .mon_loop
+	ret
+
+.maximize_mon
+; hl = moves, de = PP; advances both by NUM_MOVES. Clobbers a, b, c.
+rept NUM_MOVES
+	ld a, [hli]
+	and a
+	jr nz, .got_move\@
+	xor a ; empty moveslot: no PP
+	jr .store_pp\@
+.got_move\@
+	push hl
+	dec a
+	ld hl, Moves + MOVE_PP
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte ; a = base PP
+	pop hl
+	ld c, a ; c = base PP
+; each PP-Up adds base/5 PP (per-up amount capped at 7), as in ComputeMaxPP
+	ldh [hDividend + 3], a
+	xor a
+	ldh [hDividend], a
+	ldh [hDividend + 1], a
+	ldh [hDividend + 2], a
+	ld a, 5
+	ldh [hDivisor], a
+	ld b, 4
+	call Divide ; preserves hl, de, bc
+	ldh a, [hQuotient + 3]
+	cp 8
+	jr c, .bonus_ok\@
+	ld a, 7
+.bonus_ok\@
+	ld b, a
+	add a, a
+	add a, b ; a = 3 x bonus
+	add a, c ; a = base PP + 3 PP-Ups = max PP
+	or PP_UP_MASK ; record all three PP-Ups
+.store_pp\@
+	ld [de], a
+	inc de
+endr
+	ret
 
 ReadTrainerPartyPieces:
 	ld h, d

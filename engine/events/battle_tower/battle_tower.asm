@@ -194,7 +194,8 @@ ReadBTTrainerParty:
 	jr nz, .otpartymon_loop
 	ld a, -1
 	ld [bc], a
-	ret
+; Battle Tower opponents fight with Max PP, like other trainers
+	farjp MaximizeOTPartyPP
 
 BT_ChrisName:
 	db "Chris@"
