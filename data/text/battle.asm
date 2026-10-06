@@ -59,6 +59,11 @@ SolarPowerText:
 	cont "Solar Power!"
 	prompt
 
+PriorityBattleText:
+	text "This move gets"
+	line "priority!"
+	done
+
 SturdyBattleText:
 	text "Held on from being"
 	line "knocked out!"

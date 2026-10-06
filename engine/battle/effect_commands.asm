@@ -1,3 +1,69 @@
+; =============================
+; === Ability: Priority ===
+; =============================
+PriorityAbilityPopup:
+; Show the ability popup the first time each side uses one of the priority
+; moves with its matching species this battle. Every move has its own pair
+; of popup flags, reset by ResetSureHitEvents at the start of every battle.
+; The priority boost itself comes from GetMovePriority in core.asm.
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .foe
+
+	; player
+	ld a, [wCurPlayerMove]
+	ld c, a
+	ld a, [wBattleMonSpecies]
+	jr .got_user
+
+.foe
+	ld a, [wCurEnemyMove]
+	ld c, a
+	ld a, [wEnemyMonSpecies]
+
+.got_user
+	; a = user's species, c = move being used
+	ld b, a
+	ld a, c
+	cp IRON_HEAD
+	jr nz, .not_iron_head
+	ld a, b
+	cp BLASTOISE
+	ret nz
+	call PriorityBattleText_Call
+	ShowGenericAbilityPopup EVENT_IRON_HEAD_PLAYER, EVENT_IRON_HEAD_FOE, PreemptText
+	ret
+
+.not_iron_head
+	cp CURSE
+	jr nz, .not_curse
+	ld a, b
+	cp SNORLAX
+	ret nz
+	call PriorityBattleText_Call
+	ShowGenericAbilityPopup EVENT_CURSE_PLAYER, EVENT_CURSE_FOE, PreemptText
+	ret
+
+.not_curse
+	cp ZEN_HEADBUTT
+	ret nz
+	ld a, b
+	cp DROWZEE
+	jr z, .popup_zen
+	cp HYPNO
+	ret nz
+
+.popup_zen
+	call PriorityBattleText_Call
+	ShowGenericAbilityPopup EVENT_ZEN_HEADBUTT_PLAYER, EVENT_ZEN_HEADBUTT_FOE, PreemptText
+	ret
+
+PriorityBattleText_Call:
+	ld hl, PriorityBattleText
+	jmp StdBattleTextbox
+
+PreemptText: db "Preempt@"
+
 DoPlayerTurn:
 	call SetPlayerTurn
 	ld a, [wBattlePlayerAction]
@@ -32,6 +98,11 @@ DoTurn:
 	ret nz
 
 	call UpdateMoveData
+
+; ================================
+; === Ability: Priority popup ===
+; ================================
+	call PriorityAbilityPopup
 	; fallthrough
 
 DoMove:
@@ -1493,13 +1564,13 @@ BattleCommand_DamageVariation:
 	ld [hl], a
 	ret
 
-DEF FIRST_SURE_HIT_EVENT EQU EVENT_TRUE_HORN_PLAYER
-DEF LAST_SURE_HIT_EVENT  EQU EVENT_ASTRAL_AIM_FOE
+DEF FIRST_NEW_BATTLE_RESET_EVENT EQU EVENT_TRUE_HORN_PLAYER
+DEF LAST_NEW_BATTLE_RESET_EVENT  EQU EVENT_ZEN_HEADBUTT_FOE
 
 ResetSureHitEvents:
 	; reset all sure hit event flags
-    ld de, FIRST_SURE_HIT_EVENT
-    ld bc, LAST_SURE_HIT_EVENT - FIRST_SURE_HIT_EVENT + 1
+    ld de, FIRST_NEW_BATTLE_RESET_EVENT
+    ld bc, LAST_NEW_BATTLE_RESET_EVENT - FIRST_NEW_BATTLE_RESET_EVENT + 1
 ; ResetEventRange
 ; Input:
 ;	DE = first event constant
