@@ -59,11 +59,8 @@ SolarPowerText:
 	cont "Solar Power!"
 	prompt
 
-SturdyText:
-	text "<TARGET>'s"
-	line "Stury activated!"
-
-	para "Held on from being"
+SturdyBattleText:
+	text "Held on from being"
 	line "knocked out!"
 	prompt
 

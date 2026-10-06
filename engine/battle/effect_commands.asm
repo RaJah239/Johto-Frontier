@@ -2171,9 +2171,9 @@ BattleCommand_FailureText:
 	jmp EndMoveEffect
 
 BattleCommand_ApplyDamage:
-; =================================
-; ========== Sturdy ===============
-; =================================
+; =======================
+; === Ability: Sturdy ===
+; =======================
 	call GetOpposingMon
 	ld hl, SturdyPokemon
 	call IsInByteArray
@@ -2231,24 +2231,27 @@ BattleCommand_ApplyDamage:
 	dec a
 	ret z
 
-	; focus band or sash or sturdy text and animation
-	farcall ItemRecoveryAnim
+	; Focus Band/Sash or Sturdy text and animation
 	call GetOpponentItem
-	ld a, b
-	cp HELD_FOCUS_BAND
-	jr z, .hungontext
-	cp HELD_FOCUS_SASH
-	jr nz, .sturdytext
-
-.hungontext:
 	ld a, [hl]
 	ld [wNamedObjectIndex], a
+
+	; Check which item/ability activated
 	call GetItemName
-	ld hl, HungOnText
+	ld a, b
+	cp HELD_FOCUS_BAND
+	jr z, .item_recovery
+	cp HELD_FOCUS_SASH
+	jr z, .item_recovery
+
+	; Sturdy — skip item recovery animation
+	showdefensiveability SturdyText
+	ld hl, SturdyBattleText
 	jmp StdBattleTextbox
 
-.sturdytext
-	ld hl, SturdyText
+.item_recovery
+	farcall ItemRecoveryAnim
+	ld hl, HungOnText
 	jmp StdBattleTextbox
 
 .update_damage_taken
@@ -2281,6 +2284,8 @@ BattleCommand_ApplyDamage:
 	inc de
 	ld [de], a
 	ret
+
+SturdyText: db "Sturdy@"
 
 INCLUDE "data/abilities/sturdy_mons.asm"
 
