@@ -102,6 +102,7 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Trainers have no items to use on their Pokémon - just as the player
 - Trainers have max PP on all their moves
 - Fairy Type added
+- Press UP+START in any battle or encounter to open the type chart
 - Frostbite replaced Freeze status
 - Scaled (higher level foes = more experience to lower level Pokémon) and Zero experience options added 
 - Print stat gain on level up
