@@ -1178,7 +1178,7 @@ ResidualDamage:
 .not_seeded
 
 	call HasUserFainted
-	jr z, .fainted
+	jmp z, .fainted
 
 	ld a, BATTLE_VARS_SUBSTATUS1
 	call GetBattleVarAddr
@@ -1201,6 +1201,39 @@ ResidualDamage:
 	jr z, .not_nightmare
 
 .nightmare
+	; Check if this side has already displayed Bad Dreams
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .BadDreamsFoe
+
+	; Player
+	CheckEventFlag EVENT_BAD_DREAMS_PLAYER
+	jr nz, .in_night_mare
+
+	; Show popup
+	ld b, BANK(BadDreamsText)
+	ld c, ABILITY_POPUP_ENEMY
+	ld de, BadDreamsText
+	farcall ShowAbilityPopup
+
+	; Mark player popup as shown
+	SetEventFlag EVENT_BAD_DREAMS_PLAYER
+	jr .in_night_mare
+
+.BadDreamsFoe:
+	; Foe
+	CheckEventFlag EVENT_BAD_DREAMS_FOE
+	jr nz, .in_night_mare
+
+	; Show popup
+	ld b, BANK(BadDreamsText)
+	ld c, ABILITY_POPUP_PLAYER
+	ld de, BadDreamsText
+	farcall ShowAbilityPopup
+
+	; Mark foe popup as shown
+	SetEventFlag EVENT_BAD_DREAMS_FOE
+.in_night_mare
 	xor a
 	ld [wNumHits], a
 	ld de, ANIM_IN_NIGHTMARE
@@ -1250,6 +1283,8 @@ ResidualDamage:
 	call RefreshBattleHuds
 	xor a
 	ret
+
+BadDreamsText: db "Bad Dreams@"
 
 INCLUDE "data/abilities/bad_dreams_mons.asm"
 
