@@ -373,12 +373,14 @@
 	const EVENT_CRIT_LOCK_FOE
 	const EVENT_KINDLE_PLAYER
 	const EVENT_KINDLE_FOE
+	const EVENT_SURE_SHOCK_PLAYER
+	const EVENT_SURE_SHOCK_FOE
 	const EVENT_ASTRAL_AIM_PLAYER
 	const EVENT_ASTRAL_AIM_FOE
 
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 187 events
+; Unused: next 185 events
 
 	const_next 600
 ; Kurt Apricorn events

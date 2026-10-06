@@ -4347,6 +4347,38 @@ BattleCommand_ParalyzeTarget:
 
 	; 100% paralyze foe
 .paralyze
+	; Check if this side has already displayed Sure Shock
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .FoeSureShock
+
+	; Player's Sure Shock
+	CheckEventFlag EVENT_SURE_SHOCK_PLAYER
+	jr nz, .continue
+
+	; slide the ability box over the acting side's HUD
+	ld b, BANK(AbilitySlideIn_SureShockText)
+	ld c, ABILITY_POPUP_PLAYER
+	ld de, AbilitySlideIn_SureShockText
+	farcall ShowAbilityPopup
+
+	SetEventFlag EVENT_SURE_SHOCK_PLAYER
+	jr .continue
+
+.FoeSureShock:
+	; Foe's Sure Shock
+	CheckEventFlag EVENT_SURE_SHOCK_FOE
+	jr nz, .continue
+
+	; slide the ability box over the acting side's HUD
+	ld b, BANK(AbilitySlideIn_SureShockText)
+	ld c, ABILITY_POPUP_ENEMY
+	ld de, AbilitySlideIn_SureShockText
+	farcall ShowAbilityPopup
+
+	SetEventFlag EVENT_SURE_SHOCK_FOE
+
+.continue
 	xor a
 	ld [wEffectFailed], a
 
@@ -4377,6 +4409,8 @@ BattleCommand_ParalyzeTarget:
 	call PrintParalyze
 	ld hl, UseHeldStatusHealingItem
 	jmp CallBattleCore
+
+AbilitySlideIn_SureShockText: db "Sure Shock@"
 
 INCLUDE "data/abilities/sure_shock_mons.asm"
 INCLUDE "data/abilities/serenity_mons.asm"
