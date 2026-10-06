@@ -1473,145 +1473,60 @@ FieldInfoBoxPlaceElement: ; input: bc -> coords, hl -> Field text, de -> Count
 	jmp PlaceString
 
 MainText:
-.page1:
-	db "◀ Page 1/6 ▶@"
-.page1_content:
-	db " Actual Stats @"
+.page1:         db "◀ Page 1/6 ▶@"
+.page1_content: db " Actual Stats @"
+.page2:         db "◀ Page 2/6 ▶@"
+.page2_content: db " Stat Changes @"
+.page3:         db "◀ Page 3/6 ▶@"
+.page3_content: db "Field/Status 1@"
+.page4:         db "◀ Page 4/6 ▶@"
+.page4_content: db "Field/Status 2@"
+.page5:         db "◀ Page 5/6 ▶@"
+.page5_content: db " Enemy Details@"
+.page6:         db "◀ Page 6/6 ▶@"
+.page6_content: db "   Ability    @"
 
-.page2:
-	db "◀ Page 2/6 ▶@"
-.page2_content:
-	db " Stat Changes @"
-
-.page3:
-	db "◀ Page 3/6 ▶@"
-.page3_content:
-	db "Field/Status 1@"
-
-.page4:
-	db "◀ Page 4/6 ▶@"
-.page4_content:
-	db "Field/Status 2@"
-
-.page5:
-	db "◀ Page 5/6 ▶@"
-.page5_content:
-	db " Enemy Details@"
-
-.page6:
-	db "◀ Page 6/6 ▶@"
-.page6_content:
-	db "   Ability    @"
-
-.player:
-	db " Player @"
-	
-.enemy:
-	db " Enemy @"
+.player: db " Player @"
+.enemy:  db " Enemy @"
 
 StatTexts:
-.health:
-	db "HP:  @"
-
-.attack:
-	db "Atk: @"
-
-.defense:
-	db "Def: @"
-
-.speed:
-	db "Spe: @"
-	
-.sattack:
-	db "SAtk:@"
-	
-.sdefense:
-	db "SDef:@"
-	
-.accuracy:
-	db "Acc: @"
-	
-.evasiveness:
-	db "Eva:@"
+.health:      db "HP:  @"
+.attack:      db "Atk: @"
+.defense:     db "Def: @"
+.speed:       db "Spe: @"
+.sattack:     db "SAtk:@"
+.sdefense:    db "SDef:@"
+.accuracy:    db "Acc: @"
+.evasiveness: db "Eva:@"
 
 FieldTexts:
-.weather:
-	db " Weather@"
+.weather: db " Weather@"
+.none:    db "Normal@"
+.sun:     db "Sunny@"
+.rain:    db "Raining@"
+.sand:    db "Sandstorm@"
+.hail:    db "Hail@"
 	
-.none:
-	db "Normal@"
-	
-.sun:
-	db "Sunny@"
-
-.rain:
-	db "Raining@"
-	
-.sand:
-	db "Sandstorm@"
-	
-.hail:
-	db "Hail@"
-	
-.spikes:
-	db "Spikes@"
-
-.toxicspikes:
-	db "T.Spikes@"
-
-.stickyweb:
-	db "S.Web@"
-
-.stealthrock:
-	db "S.Rock@"
-
-.toxic:
-	db "Toxic@"
-
-.reflect:
-	db "Reflect@"
-	
-.lightscreen:
-	db "L.Screen@"
-
-.trickroom:
-	db "T.Room@"
-
-.safeguard:
-	db "S.Guard@"
-
-.mist:
-	db "Mist@"
-
-.confused:
-	db "Confused@"
-	
-.encored:
-	db "Encored@"
-	
-.disabled:
-	db "Disabled@"
-
-.taunt:
-	db "Taunt@"
-
-.leech_seed:
-	db "Seeded@"
-
-.turnsleft:
-	db " turns left@"
-
-.turnleft:
-	db " turn left@"
-
-.infinite:
-	db "@"
-	
-.turns:
-	db " turns@"
-
-.turn:
-	db " turn@"
+.spikes:      db "Spikes@"
+.toxicspikes: db "T.Spikes@"
+.stickyweb:   db "S.Web@"
+.stealthrock: db "S.Rock@"
+.toxic:       db "Toxic@"
+.reflect:     db "Reflect@"
+.lightscreen: db "L.Screen@"
+.trickroom:   db "T.Room@"
+.safeguard:   db "S.Guard@"
+.mist:        db "Mist@"
+.confused:    db "Confused@"
+.encored:     db "Encored@"
+.disabled:    db "Disabled@"
+.taunt:       db "Taunt@"
+.leech_seed:  db "Seeded@"
+.turnsleft:   db " turns left@"
+.turnleft:    db " turn left@"
+.infinite:    db "@"
+.turns:       db " turns@"
+.turn:        db " turn@"
 
 JoyWaitAorBorDPADInfoTrainer:
 .loop
