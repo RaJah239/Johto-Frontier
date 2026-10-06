@@ -29,7 +29,7 @@ EntryAbilities2NonLink:
 ; so if a mon was switched in mid-battle,
 ; the foe will get their move off and even ko'd
 ; before this ability triggers
-EntryAbilities2:
+EntryAbilities2: ; this should be called in "EntryAbilities2NonLink" above to work non linked
 	call HandleCleanSweep
 	call HandleLightBarrier
 	call HandleIntimidate
