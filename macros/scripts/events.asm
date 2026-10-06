@@ -1303,7 +1303,7 @@ MACRO surefire_ability
 ENDM
 
 ; ==========================================================================
-; === Macro: ShowSureAbilityPopup                                      ===
+; === Macro: ShowGenericAbilityPopup                                      ===
 ; ==========================================================================
 ; Shows an ability popup once per side.
 ; Parameters:
@@ -1312,9 +1312,9 @@ ENDM
 ;   \3 - Ability popup text label
 ;
 ; Example:
-;   ShowSureAbilityPopup EVENT_SURE_SHOCK_PLAYER, EVENT_SURE_SHOCK_FOE, AbilitySlideIn_SureShockText
+;   ShowGenericAbilityPopup EVENT_SURE_SHOCK_PLAYER, EVENT_SURE_SHOCK_FOE, AbilitySlideIn_SureShockText
 ;
-MACRO ShowSureAbilityPopup
+MACRO ShowGenericAbilityPopup
 	ldh a, [hBattleTurn]
 	and a
 	jr nz, .\@Foe

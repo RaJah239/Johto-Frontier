@@ -1821,7 +1821,7 @@ BattleCommand_CheckHit:
 	call IsInByteArray
 	jr nc, .skip_keen_eyes
 
-	ShowSureAbilityPopup EVENT_KEEN_EYES_PLAYER, EVENT_KEEN_EYES_FOE, KeenEyesText
+	ShowGenericAbilityPopup EVENT_KEEN_EYES_PLAYER, EVENT_KEEN_EYES_FOE, KeenEyesText
 	ld a, 130
 	call AccuracyCalc
 
@@ -4177,7 +4177,7 @@ BattleCommand_BurnTarget:
 
 	; 100% burn foe
 .burn
-	ShowSureAbilityPopup EVENT_KINDLE_PLAYER, EVENT_KINDLE_FOE, KindleText
+	ShowGenericAbilityPopup EVENT_KINDLE_PLAYER, EVENT_KINDLE_FOE, KindleText
 	xor a
 	ld [wEffectFailed], a
 
@@ -4319,7 +4319,7 @@ BattleCommand_ParalyzeTarget:
 
 	; 100% paralyze foe
 .paralyze
-	ShowSureAbilityPopup EVENT_SURE_SHOCK_PLAYER, EVENT_SURE_SHOCK_FOE, SureShockText
+	ShowGenericAbilityPopup EVENT_SURE_SHOCK_PLAYER, EVENT_SURE_SHOCK_FOE, SureShockText
 	xor a
 	ld [wEffectFailed], a
 
