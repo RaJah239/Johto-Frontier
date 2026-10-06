@@ -961,42 +961,14 @@ BattleCommand_Critical:
 ; super luck mons have an innate +2 critical hit level
 	inc c
 	inc c
+	jr .continue
 
 ; The move always lands a critical hit, unless the target has Crit Guard.
 .AbilityHit:
 ; ==========================
 ; === Ability: Crit Lock ===
 ; ==========================
-	; Check if this side has already displayed Crit Lock
-	ldh a, [hBattleTurn]
-	and a
-	jr nz, .FoeCritLock
-
-	; Player's Crit Lock
-	CheckEventFlag EVENT_CRIT_LOCK_PLAYER
-	jr nz, .CritGuard
-
-	; slide the ability box over the acting side's HUD
-	ld b, BANK(AbilitySlideIn_CritlockText)
-	ld c, ABILITY_POPUP_PLAYER
-	ld de, AbilitySlideIn_CritlockText
-	farcall ShowAbilityPopup
-
-	SetEventFlag EVENT_CRIT_LOCK_PLAYER
-	jr .CritGuard
-
-.FoeCritLock:
-	; Foe's Crit Lock
-	CheckEventFlag EVENT_CRIT_LOCK_FOE
-	jr nz, .CritGuard
-
-	; slide the ability box over the acting side's HUD
-	ld b, BANK(AbilitySlideIn_CritlockText)
-	ld c, ABILITY_POPUP_ENEMY
-	ld de, AbilitySlideIn_CritlockText
-	farcall ShowAbilityPopup
-
-	SetEventFlag EVENT_CRIT_LOCK_FOE
+	ShowGenericAbilityPopup EVENT_CRIT_LOCK_PLAYER, EVENT_CRIT_LOCK_FOE, CritlockText
 	jr .CritGuard
 
 .continue
@@ -1040,7 +1012,7 @@ BattleCommand_Critical:
 	call IsInByteArray
 	jr nc, .crit_guard_checks_done
 
-	showdefensiveability AbilitySlideIn_CritGuardText
+	showdefensiveability CritGuardText
 	ret
 
 .crit_guard_checks_done
@@ -1049,8 +1021,8 @@ CriticialHitLoaded:
 	ld [wCriticalHit], a
 	ret
 
-AbilitySlideIn_CritlockText: db "Crit Lock@"
-AbilitySlideIn_CritGuardText: db "Crit Guard@"
+CritlockText: db "Crit Lock@"
+CritGuardText: db "Crit Guard@"
 
 INCLUDE "data/moves/critical_hit_moves.asm"
 INCLUDE "data/abilities/crit_guard_mons.asm"
