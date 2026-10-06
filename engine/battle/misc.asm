@@ -166,6 +166,10 @@ ShowAbilityPopup::
 	and a
 	ret z
 
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	ret nz
+
 	ld a, c
 	and a
 	jr nz, .enemy

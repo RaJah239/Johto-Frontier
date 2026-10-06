@@ -1281,10 +1281,6 @@ MACRO surefire_ability
 	ret nz
 
 .show_popup\@
-	ld a, [wOptions4]
-	bit ABILITY_BANNERS, a
-	ret nz
-
 	; Slide the ability popup over the TARGET's HUD
 	ld b, BANK(\5)
 	ldh a, [hBattleTurn]
