@@ -1899,25 +1899,29 @@ BattleCommand_EffectChance:
 	ld a, [wEnemyMonSpecies]
 .got_move_chance
 
-; ==============================
-; === Ability: Serene Grace ====
-; ==============================
+; ==========================
+; === Ability: Blessing ====
+; ==========================
 	push bc
 	push de
 	push hl
-	ld hl, SereneGracePokemon
+	ld hl, BlessingPokemon
 	call IsInByteArray
 	pop hl
 	pop de
 	pop bc
-	jr c, .serene_grace
-	jr .finish_serene_grace
+	jr c, .blessing
+	jr .finish_blessing
 
 	; double effect chance
-.serene_grace
-	sla [hl]
+.blessing
+	push hl
+	ShowGenericAbilityPopup EVENT_BLESSING_PLAYER, EVENT_BLESSING_FOE, BlessingText
+	pop hl
 
-.finish_serene_grace
+	sla [hl] ; 2x effect chance
+
+.finish_blessing
  	ld a, [hl]
  	sub 100 percent
  	; If chance was 100%, RNG won't be called (carry not set)
@@ -1933,7 +1937,9 @@ BattleCommand_EffectChance:
 	and a
 	ret
 
-INCLUDE "data/abilities/serene_grace_mons.asm"
+BlessingText: db "Blessing@"
+
+INCLUDE "data/abilities/blessing_mons.asm"
 
 BattleCommand_LowerSub:
 	ld a, BATTLE_VARS_SUBSTATUS4

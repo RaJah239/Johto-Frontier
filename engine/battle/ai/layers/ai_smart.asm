@@ -2460,7 +2460,7 @@ AI_Smart_Flinch:
 ; encourage if enemy has serene grace ability pokemon
 	ld a, [wEnemyMonSpecies]
 	push hl
-	ld hl, SereneGracePokemon_AI
+	ld hl, BlessingPokemon_AI
 	call IsInByteArray
 	pop hl
 	ret c

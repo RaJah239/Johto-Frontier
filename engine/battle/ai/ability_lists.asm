@@ -145,7 +145,7 @@ SturdyPokemon_AI:
     db REGIROCK
     db -1 ; end
 
-SereneGracePokemon_AI:
+BlessingPokemon_AI:
     db CHANSEY
     db BLISSEY
     db TOGEPI
