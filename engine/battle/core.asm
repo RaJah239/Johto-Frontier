@@ -437,8 +437,8 @@ DetermineMoveOrder:
 	; reverse the turn order
 	call CompareBattleEffectiveSpeed
 	jr z, .speed_tie
-	jr nc, .enemy_first
-	jr .player_first
+	jmp nc, .enemy_first
+	jmp .player_first
 
 .speed_check
 	; check player Pokémon
@@ -477,9 +477,14 @@ DetermineMoveOrder:
 	cp 33 percent + 1
 	jr c, .continue ; 1/3 chance
 
-	call ItemRecoveryAnim
-	ld hl, BattleText_QuickDrawFoe
+	ld hl, BattleText_QuickDraw
 	call StdBattleTextbox
+
+	ld b, BANK(QuickDrawAbilityText)
+	ld c, ABILITY_POPUP_ENEMY
+	ld de, QuickDrawAbilityText
+	farcall ShowAbilityPopup
+
 	jr .enemy_first
 
 ; player moves first
@@ -488,9 +493,14 @@ DetermineMoveOrder:
 	cp 33 percent + 1
 	jr c, .continue ; 1/3 chance
 
-	call SwitchCoreItemRecoveryAnim
-	ld hl, BattleText_QuickDrawPlayer
+	ld hl, BattleText_QuickDraw
 	call StdBattleTextbox
+
+	ld b, BANK(QuickDrawAbilityText)
+	ld c, ABILITY_POPUP_PLAYER
+	ld de, QuickDrawAbilityText
+	farcall ShowAbilityPopup
+
 	jr .player_first
 
 .continue
@@ -536,6 +546,8 @@ DetermineMoveOrder:
 	ret
 
 INCLUDE "data/abilities/quick_draw_mons.asm"
+
+QuickDrawAbilityText: db "Quick Draw@"
 
 CompareBattleEffectiveSpeed:
 	call LoadPlayerEffectiveSpeed

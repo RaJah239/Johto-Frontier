@@ -140,23 +140,10 @@ MoltingText:
 	cont "itself healthy!"
 	prompt
 
-BattleText_QuickDrawPlayer:
-	text "<USER>'s"
-	line "Quick Draw"
-	cont "activates!"
-
-	para "Makes an attempt"
+BattleText_QuickDraw:
+	text "Makes an attempt"
 	line "to act first!"
-	prompt
-
-BattleText_QuickDrawFoe:
-	text "<TARGET>'s"
-	line "Quick Draw"
-	cont "activates!"
-
-	para "Makes an attempt"
-	line "to act first!"
-	prompt
+	done
 
 WildPokemonAppearedText:
 	text "Wild @"
