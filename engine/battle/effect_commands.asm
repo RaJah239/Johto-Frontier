@@ -1054,6 +1054,7 @@ BattleCommand_Stab:
 
 	ldh a, [hBattleTurn]
 	and a
+	ld a, [wBattleMonSpecies]
 	jr z, .go ; Who Attacks and who Defends
 
 	ld hl, wEnemyMonType1
@@ -1064,6 +1065,7 @@ BattleCommand_Stab:
 	ld a, [hli]
 	ld d, a
 	ld e, [hl]
+	ld a, [wEnemyMonSpecies]
 
 .go
 	ld a, BATTLE_VARS_MOVE_TYPE
@@ -1088,17 +1090,33 @@ BattleCommand_Stab:
 	jr .SkipStab
 
 .stab
+; ==========================
+; === Ability: Type Sync ===
+; ==========================
+	push de
+	call GetCurrentMon
+	ld hl, TypeSyncPokemon
+	call IsInByteArray
+	pop de
+
 	ld hl, wCurDamage + 1
 	ld a, [hld]
 	ld h, [hl]
 	ld l, a
 
+	jr c, .type_sync
 	ld b, h
 	ld c, l
 	srl b
 	rr c
 	add hl, bc
+	jr .store_stab_damage
 
+.type_sync
+	; Type Sync turns STAB into 2x instead of the usual 1.5x
+	add hl, hl
+
+.store_stab_damage
 	ld a, h
 	ld [wCurDamage], a
 	ld a, l
@@ -1227,6 +1245,8 @@ BattleCommand_Stab:
 	or b
 	ld [wTypeModifier], a
 	ret
+
+INCLUDE "data/abilities/type_sync_mons.asm"
 
 CheckStealthRockTypeMatchup:
 	ld hl, wBattleMonType1
