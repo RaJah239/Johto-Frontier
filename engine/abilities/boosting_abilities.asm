@@ -134,8 +134,10 @@ HandleSandForce:
 	ret nz
 
 .SandForceBoost:
+	ShowGenericAbilityPopup EVENT_SAND_FORCE_PLAYER, EVENT_SAND_FORCE_FOE, SandForceText
 	jmp ThirtyPercentBoost
 
+SandForceText: db "Sand Force@"
 INCLUDE "data/abilities/sand_force_mons.asm"
 
 HandleTechnician:
