@@ -13,13 +13,9 @@ CheckBoostingAbilities:
 	call HandlePillowFort
 	call HandleChrysalisHide
 	call HandleMoveEnchancingAbilities
-
-; added last to recalculate after boosting abilities are factored in
-; hard mode
-	;CheckIfHardModeAndBoost 
-	;ret
 	; fallthrough
 
+; added last to recalculate after boosting abilities are factored in
 ; =================
 ; === Hard Mode ===
 ; =================
@@ -72,8 +68,10 @@ HandleGuts:
 	call GetBattleVar
 	cp SPECIAL
 	ret nc
+	ShowGenericAbilityPopup EVENT_GUTS_PLAYER, EVENT_GUTS_FOE, GutsText
 	jmp FiftyPercentBoost
 
+GutsText: db "Guts@"
 INCLUDE "data/abilities/guts_mons.asm"
 
 HandleRivalry:
