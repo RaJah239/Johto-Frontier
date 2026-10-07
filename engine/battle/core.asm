@@ -2752,56 +2752,238 @@ AddBattleParticipant:
 	predef_jump SmallFarFlagAction
 
 FindMonInOTPartyToSwitchIntoBattle:
-	ld b, -1
-	ld a, %000001
-	ld [wEnemyEffectivenessVsPlayerMons], a
-	ld [wPlayerEffectivenessVsEnemyMons], a
+; Choose which OT mon to send out, evaluating the player's active moveset.
+; Priority:
+; 1. A mon that has a super-effective move against the player's active mon.
+; 2. A mon that takes 0x or <=0.5x damage from every damaging move the
+;    player's active mon knows.
+; 3. A mon that takes the least damage from the player's active mon's moves.
+; Returns the 0-based party index in b.
+	ldh a, [hBattleTurn]
+	ld [wEnemySwitchSavedTurn], a
+	ld a, [wCurDamage]
+	ld [wEnemySwitchSavedDamage], a
+	ld a, [wCurDamage + 1]
+	ld [wEnemySwitchSavedDamage + 1], a
+	call OTSwitchSaveActiveMon
+	call OTSwitchFindResistsAll
+	jr c, .done
+	call OTSwitchFindSuperEffective
+	jr c, .done
+	call OTSwitchFindLeastDamage
+
+.done
+	push bc
+	call OTSwitchRestoreActiveMon
+	pop bc
+	ld a, [wEnemySwitchSavedTurn]
+	ldh [hBattleTurn], a
+	ld a, [wEnemySwitchSavedDamage]
+	ld [wCurDamage], a
+	ld a, [wEnemySwitchSavedDamage + 1]
+	ld [wCurDamage + 1], a
+	ret
+
+OTSwitchSaveActiveMon:
+	ld a, [wEnemyMonSpecies]
+	ld [wEnemySwitchSavedMonSpecies], a
+	ld a, [wEnemyMonItem]
+	ld [wEnemySwitchSavedMonItem], a
+	ld a, [wEnemyMonLevel]
+	ld [wEnemySwitchSavedMonLevel], a
+	ld hl, wEnemyMonDefense
+	ld de, wEnemySwitchSavedMonDefense
+	ld bc, 2
+	call CopyBytes
+	ld hl, wEnemyMonSpclDef
+	ld de, wEnemySwitchSavedMonSpclDef
+	ld bc, 2
+	call CopyBytes
+	ld a, [wEnemyMonType1]
+	ld [wEnemySwitchSavedMonType1], a
+	ld a, [wEnemyMonType2]
+	ld [wEnemySwitchSavedMonType2], a
+	ld hl, wEnemyDefense
+	ld de, wEnemySwitchSavedMonBoostedDefense
+	ld bc, 2
+	call CopyBytes
+	ld hl, wEnemySpDef
+	ld de, wEnemySwitchSavedMonBoostedSpclDef
+	ld bc, 2
+	jmp CopyBytes
+
+OTSwitchRestoreActiveMon:
+	ld a, [wEnemySwitchSavedMonSpecies]
+	ld [wEnemyMonSpecies], a
+	ld a, [wEnemySwitchSavedMonItem]
+	ld [wEnemyMonItem], a
+	ld a, [wEnemySwitchSavedMonLevel]
+	ld [wEnemyMonLevel], a
+	ld hl, wEnemySwitchSavedMonDefense
+	ld de, wEnemyMonDefense
+	ld bc, 2
+	call CopyBytes
+	ld hl, wEnemySwitchSavedMonSpclDef
+	ld de, wEnemyMonSpclDef
+	ld bc, 2
+	call CopyBytes
+	ld a, [wEnemySwitchSavedMonType1]
+	ld [wEnemyMonType1], a
+	ld a, [wEnemySwitchSavedMonType2]
+	ld [wEnemyMonType2], a
+	ld hl, wEnemySwitchSavedMonBoostedDefense
+	ld de, wEnemyDefense
+	ld bc, 2
+	call CopyBytes
+	ld hl, wEnemySwitchSavedMonBoostedSpclDef
+	ld de, wEnemySpDef
+	ld bc, 2
+	jmp CopyBytes
+
+OTSwitchFindSuperEffective:
+	xor a
+	ld [wEnemySwitchCandidate], a
 .loop
-	ld hl, wEnemyEffectivenessVsPlayerMons
-	sla [hl]
-	inc hl ; wPlayerEffectivenessVsEnemyMons
-	sla [hl]
-	inc b
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
 	ld a, [wOTPartyCount]
 	cp b
-	jmp z, ScoreMonTypeMatchups
+	jr z, .none
 	ld a, [wCurOTMon]
 	cp b
-	jr z, .discourage
-	ld hl, wOTPartyMon1HP
+	jr z, .next
+	call OTSwitchIsAliveCandidate
+	jr nc, .next
+	call OTSwitchHasSuperEffectiveMove
+	jr nc, .next
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
+	scf
+	ret
+
+.next
+	ld a, [wEnemySwitchCandidate]
+	inc a
+	ld [wEnemySwitchCandidate], a
+	jr .loop
+
+.none
+	and a
+	ret
+
+OTSwitchFindResistsAll:
+	call OTSwitchPlayerHasDamagingMove
+	jr nc, .none
+	xor a
+	ld [wEnemySwitchCandidate], a
+.loop
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
+	ld a, [wOTPartyCount]
+	cp b
+	jr z, .none
+	ld a, [wCurOTMon]
+	cp b
+	jr z, .next
+	call OTSwitchIsAliveCandidate
+	jr nc, .next
+	call OTSwitchCandidateResistsAll
+	jr nc, .next
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
+	scf
+	ret
+
+.next
+	ld a, [wEnemySwitchCandidate]
+	inc a
+	ld [wEnemySwitchCandidate], a
+	jr .loop
+
+.none
+	and a
+	ret
+
+OTSwitchFindLeastDamage:
+	ld a, $ff
+	ld [wEnemySwitchBestDamage], a
+	ld [wEnemySwitchBestDamage + 1], a
+	xor a
+	ld [wEnemySwitchBestIndex], a
+	ld [wEnemySwitchCandidate], a
+.loop
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
+	ld a, [wOTPartyCount]
+	cp b
+	jr z, .done
+	ld a, [wCurOTMon]
+	cp b
+	jr z, .next
+	call OTSwitchIsAliveCandidate
+	jr nc, .next
+	call OTSwitchCandidateMaxDamage
+	ld a, [wEnemySwitchMaxDamage]
+	ld e, a
+	ld a, [wEnemySwitchMaxDamage + 1]
+	ld d, a
+	ld a, [wEnemySwitchBestDamage]
+	ld c, a
+	ld a, [wEnemySwitchBestDamage + 1]
+	ld b, a
+	ld a, d
+	cp b
+	jr c, .better
+	jr nz, .next
+	ld a, e
+	cp c
+	jr nc, .next
+.better
+	ld a, e
+	ld [wEnemySwitchBestDamage], a
+	ld a, d
+	ld [wEnemySwitchBestDamage + 1], a
+	ld a, [wEnemySwitchCandidate]
+	ld [wEnemySwitchBestIndex], a
+.next
+	ld a, [wEnemySwitchCandidate]
+	inc a
+	ld [wEnemySwitchCandidate], a
+	jr .loop
+
+.done
+	ld a, [wEnemySwitchBestIndex]
+	ld b, a
+	ret
+
+OTSwitchIsAliveCandidate:
 	push bc
+	ld hl, wOTPartyMon1HP
 	ld a, b
 	call GetPartyLocation
 	ld a, [hli]
-	ld c, a
-	ld a, [hl]
-	or c
+	or [hl]
 	pop bc
-	jr z, .discourage
-	call LookUpTheEffectivenessOfEveryMove
-	call IsThePlayerMonTypesEffectiveAgainstOTMon
-	jr .loop
+	jr nz, .alive
+	and a
+	ret
 
-.discourage
-	ld hl, wPlayerEffectivenessVsEnemyMons
-	set 0, [hl]
-	jr .loop
+.alive
+	scf
+	ret
 
-LookUpTheEffectivenessOfEveryMove:
+OTSwitchHasSuperEffectiveMove:
 	push bc
 	ld hl, wOTPartyMon1Moves
 	ld a, b
 	call GetPartyLocation
 	pop bc
-	ld e, NUM_MOVES + 1
+	ld b, NUM_MOVES
 .loop
-	dec e
-	ret z
 	ld a, [hli]
 	and a
-	ret z
+	jr z, .no
 	push hl
-	push de
 	push bc
 	dec a
 	ld hl, Moves
@@ -2812,27 +2994,103 @@ LookUpTheEffectivenessOfEveryMove:
 	call FarCopyBytes
 	call SetEnemyTurn
 	callfar BattleCheckTypeMatchup
-	pop bc
-	pop de
-	pop hl
 	ld a, [wTypeMatchup]
+	pop bc
+	pop hl
 	cp EFFECTIVE + 1
-	jr c, .loop
-	ld hl, wEnemyEffectivenessVsPlayerMons
-	set 0, [hl]
+	jr nc, .yes
+	dec b
+	jr nz, .loop
+.no
+	and a
 	ret
 
-IsThePlayerMonTypesEffectiveAgainstOTMon:
-; Calculates the effectiveness of the types of the PlayerMon
-; against the OTMon
+.yes
+	scf
+	ret
+
+OTSwitchPlayerHasDamagingMove:
+	ld hl, wBattleMonMoves
+	ld b, NUM_MOVES
+.loop
+	ld a, [hli]
+	and a
+	jr z, .no
+	push hl
 	push bc
-	ld hl, wOTPartyCount
-	ld a, b
-	inc a
-	ld c, a
+	dec a
+	ld hl, Moves
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld de, wPlayerMoveStruct
+	ld a, BANK(Moves)
+	call FarCopyBytes
+	pop bc
+	pop hl
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	jr nz, .yes
+	dec b
+	jr nz, .loop
+.no
+	and a
+	ret
+
+.yes
+	scf
+	ret
+
+OTSwitchCandidateResistsAll:
+	call OTSwitchLoadCandidateTypes
+	call SetPlayerTurn
+	ld hl, wBattleMonMoves
+	ld b, NUM_MOVES
+.loop
+	ld a, [hli]
+	and a
+	jr z, .yes
+	push hl
+	push bc
+	dec a
+	ld hl, Moves
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld de, wPlayerMoveStruct
+	ld a, BANK(Moves)
+	call FarCopyBytes
+	pop bc
+	pop hl
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	jr z, .next
+	push hl
+	push bc
+	callfar BattleCheckTypeMatchup
+	ld a, [wTypeMatchup]
+	pop bc
+	pop hl
+	cp NOT_VERY_EFFECTIVE + 1
+	jr nc, .no
+.next
+	dec b
+	jr nz, .loop
+.yes
+	scf
+	ret
+
+.no
+	and a
+	ret
+
+OTSwitchLoadCandidateTypes:
+; Copy the base types of OT party member b into wEnemyMonType.
+	push bc
+	ld hl, wOTPartySpecies
+	ld c, b
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
+	pop bc
 	dec a
 	ld hl, BaseData + BASE_TYPES
 	ld bc, BASE_DATA_SIZE
@@ -2840,96 +3098,117 @@ IsThePlayerMonTypesEffectiveAgainstOTMon:
 	ld de, wEnemyMonType
 	ld bc, BASE_CATCH_RATE - BASE_TYPES
 	ld a, BANK(BaseData)
-	call FarCopyBytes
-	ld a, [wBattleMonType1]
-	ld [wPlayerMoveStruct + MOVE_TYPE], a
-	call SetPlayerTurn
-	callfar BattleCheckTypeMatchup
-	ld a, [wTypeMatchup]
-	cp EFFECTIVE + 1
-	jr nc, .super_effective
-	ld a, [wBattleMonType2]
-	ld [wPlayerMoveStruct + MOVE_TYPE], a
-	callfar BattleCheckTypeMatchup
-	ld a, [wTypeMatchup]
-	cp EFFECTIVE + 1
-	jr nc, .super_effective
-	pop bc
-	ret
+	jmp FarCopyBytes
 
-.super_effective
-	pop bc
-	ld hl, wEnemyEffectivenessVsPlayerMons
-	bit 0, [hl]
-	jr nz, .reset
-	inc hl ; wPlayerEffectivenessVsEnemyMons
-	set 0, [hl]
-	ret
-
-.reset
-	res 0, [hl]
-	ret
-
-ScoreMonTypeMatchups:
-.loop1
-	ld hl, wEnemyEffectivenessVsPlayerMons
-	sla [hl]
-	inc hl ; wPlayerEffectivenessVsEnemyMons
-	sla [hl]
-	jr nc, .loop1
-	ld a, [wOTPartyCount]
-	ld b, a
-	ld c, [hl]
-.loop2
-	sla c
-	jr nc, .okay
-	dec b
-	jr z, .loop5
-	jr .loop2
-
-.okay
-	ld a, [wEnemyEffectivenessVsPlayerMons]
-	and a
-	jr z, .okay2
-	ld b, -1
-	ld c, a
-.loop3
-	inc b
-	sla c
-	jr nc, .loop3
-	ret
-
-.okay2
-	ld b, -1
-	ld a, [wPlayerEffectivenessVsEnemyMons]
-	ld c, a
-.loop4
-	inc b
-	sla c
-	jr c, .loop4
-	ret
-
-.loop5
-	ld a, [wOTPartyCount]
-	ld b, a
-	call BattleRandom
-	and $7
-	cp b
-	jr nc, .loop5
-	ld b, a
-	ld a, [wCurOTMon]
-	cp b
-	jr z, .loop5
-	ld hl, wOTPartyMon1HP
+OTSwitchCandidateMaxDamage:
+; Return in wEnemySwitchMaxDamage the largest amount of damage the player's
+; active mon can deal to OT party member b.
 	push bc
+	ld hl, wOTPartyMon1
 	ld a, b
 	call GetPartyLocation
 	pop bc
-	ld a, [hli]
-	ld c, a
 	ld a, [hl]
-	or c
-	jr z, .loop5
+	ld [wCurSpecies], a
+	ld [wEnemyMonSpecies], a
+	ld de, MON_ITEM
+	add hl, de
+	ld a, [hl]
+	ld [wEnemyMonItem], a
+	push bc
+	ld hl, wOTPartyMon1
+	ld a, b
+	call GetPartyLocation
+	pop bc
+	ld de, MON_LEVEL
+	add hl, de
+	ld a, [hl]
+	ld [wEnemyMonLevel], a
+	push bc
+	ld hl, wOTPartyMon1
+	ld a, b
+	call GetPartyLocation
+	pop bc
+	ld de, MON_DEF
+	add hl, de
+	ld a, [hli]
+	ld [wEnemyMonDefense], a
+	ld [wEnemyDefense], a
+	ld a, [hl]
+	ld [wEnemyMonDefense + 1], a
+	ld [wEnemyDefense + 1], a
+	push bc
+	ld hl, wOTPartyMon1
+	ld a, b
+	call GetPartyLocation
+	pop bc
+	ld de, MON_SDF
+	add hl, de
+	ld a, [hli]
+	ld [wEnemyMonSpclDef], a
+	ld [wEnemySpDef], a
+	ld a, [hl]
+	ld [wEnemyMonSpclDef + 1], a
+	ld [wEnemySpDef + 1], a
+	call GetBaseData
+	ld a, [wBaseType1]
+	ld [wEnemyMonType1], a
+	ld a, [wBaseType2]
+	ld [wEnemyMonType2], a
+	xor a
+	ld [wEnemySwitchMaxDamage], a
+	ld [wEnemySwitchMaxDamage + 1], a
+	ld [wCriticalHit], a
+	call SetPlayerTurn
+	ld hl, wBattleMonMoves
+	ld b, NUM_MOVES
+.loop
+	ld a, [hli]
+	and a
+	jr z, .done
+	push hl
+	push bc
+	dec a
+	ld hl, Moves
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld de, wPlayerMoveStruct
+	ld a, BANK(Moves)
+	call FarCopyBytes
+	pop bc
+	pop hl
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	jr z, .next
+	push hl
+	push bc
+	callfar PlayerAttackDamage
+	callfar BattleCommand_DamageCalc
+	callfar BattleCommand_Stab
+	pop bc
+	pop hl
+	ld a, [wCurDamage]
+	ld e, a
+	ld a, [wCurDamage + 1]
+	ld d, a
+	ld a, [wEnemySwitchMaxDamage]
+	ld c, a
+	ld a, [wEnemySwitchMaxDamage + 1]
+	cp d
+	jr c, .update
+	jr nz, .next
+	ld a, c
+	cp e
+	jr nc, .next
+.update
+	ld a, e
+	ld [wEnemySwitchMaxDamage], a
+	ld a, d
+	ld [wEnemySwitchMaxDamage + 1], a
+.next
+	dec b
+	jr nz, .loop
+.done
 	ret
 
 LoadEnemyMonToSwitchTo:

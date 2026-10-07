@@ -58,7 +58,7 @@ AI_SwitchOrTryItem:
 	bit SWITCH_RARELY_F, [hl]
 	jr nz, SwitchRarely
 	bit SWITCH_SOMETIMES_F, [hl]
-	jr nz, SwitchSometimes
+	jmp nz, SwitchSometimes
 	; fallthrough
 
 DontSwitch:
@@ -96,10 +96,9 @@ SwitchOften:
 	; fallthrough
 
 .switch
-	ld a, [wEnemySwitchMonParam]
-	and $f
-	inc a
-	; In register 'a' is the number (1-6) of the mon to switch to
+	callfar FindMonInOTPartyToSwitchIntoBattle
+	inc b
+	ld a, b
 	ld [wEnemySwitchMonIndex], a
 	jr AI_TrySwitch
 
@@ -136,9 +135,9 @@ SwitchRarely:
 	; fallthrough
 
 .switch
-	ld a, [wEnemySwitchMonParam]
-	and $f
-	inc a
+	callfar FindMonInOTPartyToSwitchIntoBattle
+	inc b
+	ld a, b
 	ld [wEnemySwitchMonIndex], a
 	jr AI_TrySwitch
 
@@ -172,10 +171,9 @@ SwitchSometimes:
 	; fallthrough
 
 .switch
-	ld a, [wEnemySwitchMonParam]
-	and $f
-	inc a
-	; In register 'a' is the number (1-6) of the mon to switch to
+	callfar FindMonInOTPartyToSwitchIntoBattle
+	inc b
+	ld a, b
 	ld [wEnemySwitchMonIndex], a
 	; fallthrough
 
