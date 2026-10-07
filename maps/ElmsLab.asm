@@ -825,7 +825,7 @@ WorldNotebook:
 	callasm .NotebookMenuOpen
 .list:
 	callasm .NotebookSelect
-	ifequal 13, .CloseMenu
+	ifequal 14, .CloseMenu
 	ifequal 0, .ClassicRoute ; 1st option
 	ifequal 1, .Placeholder1
 	ifequal 2, .Placeholder2
@@ -838,7 +838,8 @@ WorldNotebook:
 	ifequal 9, .Placeholder9
 	ifequal 10, .Placeholder10
 	ifequal 11, .Placeholder11
-	ifequal 12, .Placeholder12 ; last option
+	ifequal 12, .Placeholder12
+	ifequal 13, .Placeholder13 ; last option
 	sjump .list
 
 .ClassicRoute:
@@ -917,6 +918,11 @@ WorldNotebook:
 	waitbutton
 	sjump .list
 
+.Placeholder13:
+	writetext ElmsBookPlaceholder13Text
+	waitbutton
+	sjump .list
+
 .CloseMenu:
 	callasm .NotebookMenuClose
 .Done:
@@ -952,7 +958,7 @@ WorldNotebook:
 	ret
 
 .cancel:
-	ld a, 13
+	ld a, 14
 	ld [wScriptVar], a
 	ret
 
@@ -977,7 +983,7 @@ WorldNotebook:
 	dba .NotebookMenuFunction3
 
 .NotebookMenuItems:
-	db 13 ; count (Classic Route + 12 chapters)
+	db 14 ; count (Classic Route + 13 chapters)
 	db 0 ; Classic Route
 	db 1
 	db 2
@@ -991,6 +997,7 @@ WorldNotebook:
 	db 10
 	db 11
 	db 12
+	db 13
 	db -1 ; Cancel
 
 .NotebookMenuFunction3:
@@ -1006,7 +1013,7 @@ WorldNotebook:
 	jmp PlaceString
 
 .placeholder:
-	dec a ; selection 1..12 -> 0..11
+	dec a ; selection 1..13 -> 0..12
 	add a ; each table entry is a 2-byte pointer
 	ld e, a
 	ld d, 0
@@ -1033,6 +1040,7 @@ WorldNotebook:
 	dw .Placeholder10Name
 	dw .Placeholder11Name
 	dw .Placeholder12Name
+	dw .Placeholder13Name
 
 .Placeholder1Name:  db "Text 01@"
 .Placeholder2Name:  db "Text 02@"
@@ -1046,6 +1054,7 @@ WorldNotebook:
 .Placeholder10Name: db "Text 10@"
 .Placeholder11Name: db "Text 11@"
 .Placeholder12Name: db "Text 12@"
+.Placeholder13Name: db "Text 13@"
 
 ElmsBookPlaceholder1Text:
 	text "Placeholder 01."
@@ -1082,4 +1091,7 @@ ElmsBookPlaceholder11Text:
 	done
 ElmsBookPlaceholder12Text:
 	text "Placeholder 12."
+	done
+ElmsBookPlaceholder13Text:
+	text "Placeholder 13."
 	done
