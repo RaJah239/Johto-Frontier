@@ -551,7 +551,7 @@ GetEnemyFrontpicPalettePointer:
 
 GetPlayerOrMonPalettePointer:
 	and a
-	jr nz, GetMonNormalOrShinyPalettePointer
+	jmp nz, GetMonNormalOrShinyPalettePointer
 	ld a, [wPlayerSpriteSetupFlags]
 	bit PLAYERSPRITESETUP_FEMALE_TO_MALE_F, a
 	jr nz, .male
@@ -567,7 +567,7 @@ GetPlayerOrMonPalettePointer:
 
 GetFrontpicPalettePointer:
 	and a
-	jr nz, GetMonNormalOrShinyPalettePointer
+	jmp nz, GetMonNormalOrShinyPalettePointer
 	ld a, [wTrainerClass]
 
 GetTrainerPalettePointer:
@@ -587,13 +587,60 @@ BattleObjectPals:
 INCLUDE "gfx/battle_anims/battle_anims.pal"
 
 _GetMonPalettePointer:
+	; Input: a = species. Output: hl = pointer to a 4-byte normal palette
+	; followed immediately by a 4-byte shiny palette, plus a (species).
+	; Preserves de. Clobbers bc, hl.
+	ld c, a
+	push de
 	ld l, a
 	ld h, 0
 	add hl, hl
 	add hl, hl
 	add hl, hl
-	ld bc, PokemonPalettes
-	add hl, bc
+	ld de, PokemonPalettes
+	add hl, de
+	push hl                  ; save the default ROM pointer
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wMonPalOverrideSlots)
+	ldh [rSVBK], a
+	; Species past the override table (e.g. EGG) have no entry; fall
+	; back to the ROM palette instead of reading out of bounds.
+	ld a, c
+	cp NUM_POKEMON + 1
+	jr nc, .no_override
+	ld a, c
+	ld e, a
+	ld d, 0
+	ld hl, wMonPalOverrideSlots
+	add hl, de
+	ld a, [hl]
+	and a
+	jr z, .no_override
+	; a = entry index + 1
+	dec a
+	ld l, a
+	ld h, 0
+	add hl, hl               ; * 2
+	ld d, h
+	ld e, l
+	add hl, hl               ; * 4
+	add hl, hl               ; * 8
+	add hl, de               ; * 10
+	ld de, wMonPalOverrideEntries + 2 ; skip species and flags
+	add hl, de
+	pop af
+	ldh [rSVBK], a
+	ld a, c
+	pop bc                   ; discard the saved ROM pointer
+	pop de
+	ret
+.no_override
+	pop af
+	ldh [rSVBK], a
+	ld a, c
+	pop hl
+	pop de
 	ret
 
 GetMonNormalOrShinyPalettePointer:

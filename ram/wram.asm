@@ -3743,3 +3743,17 @@ wWindowStack:: ds $1000 - 1
 wWindowStackBottom:: ds 1
 
 ENDSECTION
+
+
+SECTION "Mon Palette Overrides", WRAMX[$d462], BANK[5]
+
+; Persistent per-species palette overrides
+; wMonPalOverrideEntries must live in the same WRAM
+; bank as wBGPals1 (bank 5) because the palette loaders select that bank
+; before dereferencing the pointers returned by _GetMonPalettePointer.
+wMonPalOverrideCount:: db
+; wMonPalOverrideSlots[species] is (entry index + 1), or 0 if the species
+; has no override.
+wMonPalOverrideSlots:: ds NUM_POKEMON + 1
+; Each entry: species, flags, normal palette (4 bytes), shiny palette (4 bytes).
+wMonPalOverrideEntries:: ds MAX_MON_PAL_OVERRIDES * MON_PAL_OVERRIDE_SIZE

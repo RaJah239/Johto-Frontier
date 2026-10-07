@@ -344,6 +344,8 @@ SavePlayerData:
 	ldh a, [hRandomState + 3]
 	ld [sRandomState + 3], a
 
+	callfar SaveMonPalOverridesToSRAM
+
 	; commit the session stash to the saved slot (SRAM bank 0)
 	call CloseSRAM
 	ld a, BANK(sDungeonSessionBagData)
@@ -413,6 +415,8 @@ SaveBackupPlayerData:
 	ld [sBackupRandomState + 2], a
 	ldh a, [hRandomState + 3]
 	ld [sBackupRandomState + 3], a
+
+	callfar SaveBackupMonPalOverridesToSRAM
 
 	; commit the session stash to the backup-saved slot (SRAM bank 0)
 	; the same bank this routine already has open
@@ -605,6 +609,8 @@ LoadPlayerData:
 	ldh [hRandomState + 2], a
 	ld a, [sRandomState + 3]
 	ldh [hRandomState + 3], a
+
+	callfar LoadMonPalOverridesFromSRAM
 
 	; restore the session stash from the saved slot (SRAM bank 0)
 	call CloseSRAM
@@ -863,6 +869,7 @@ LoadBackupPlayerData:
 	ldh [hRandomState + 2], a
 	ld a, [sBackupRandomState + 3]
 	ldh [hRandomState + 3], a
+	callfar LoadBackupMonPalOverridesFromSRAM
 	ld hl, sDungeonBackupSavedBagData
 	call LoadDungeonBagFromSRAM
 	jmp CloseSRAM

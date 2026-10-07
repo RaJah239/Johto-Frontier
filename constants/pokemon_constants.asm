@@ -315,3 +315,11 @@ DEF NUM_POKEMON EQU const_value - 1
 	const UNOWN_Y ; 25
 	const UNOWN_Z ; 26
 DEF NUM_UNOWN EQU const_value - 1 ; 26
+
+; Persistent per-species palette overrides (see the palette editor NPC).
+; Each override entry is: species, flags, normal colors (4 bytes), shiny colors (4 bytes).
+DEF MAX_MON_PAL_OVERRIDES EQU 32
+DEF MON_PAL_OVERRIDE_SIZE EQU 10
+; Bits in the flags byte.
+DEF MON_PAL_FLAG_NORMAL EQU 0
+DEF MON_PAL_FLAG_SHINY EQU 1

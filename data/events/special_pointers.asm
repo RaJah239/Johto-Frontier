@@ -131,6 +131,8 @@ SpecialsPointers::
 
 ; New specials starts here
 	add_special DebugColourPicker
+	add_special MonPaletteEditor
+	add_special MonPaletteReset
 	add_special _VoltorbFlip
 	add_special BackupPartyHeldItems
 	add_special RestorePartyHeldItems

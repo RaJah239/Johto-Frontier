@@ -75,7 +75,12 @@ sBackupGameDataEnd::
 ; field moves and the checksum range is unchanged.
 sBackupRandomState:: ds 4
 
-	ds $186
+sBackupMonPalOverrides::
+sBackupMonPalOverrideCount:: db
+sBackupMonPalOverrideCheck:: db
+sBackupMonPalOverrideEntries:: ds MAX_MON_PAL_OVERRIDES * MON_PAL_OVERRIDE_SIZE
+
+	ds $186 - (2 + MAX_MON_PAL_OVERRIDES * MON_PAL_OVERRIDE_SIZE)
 
 sBackupChecksum:: dw
 
@@ -145,7 +150,15 @@ sGameDataEnd::
 ; yet" and reseeds from the divider.
 sRandomState:: ds 4
 
-	ds $186
+; Per-species palette overrides (see the palette editor NPC). Written
+; with sMonPalOverrideCheck = SAVE_CHECK_VALUE_1 when valid; an older
+; save leaves garbage here, which the check value rejects.
+sMonPalOverrides::
+sMonPalOverrideCount:: db
+sMonPalOverrideCheck:: db
+sMonPalOverrideEntries:: ds MAX_MON_PAL_OVERRIDES * MON_PAL_OVERRIDE_SIZE
+
+	ds $186 - (2 + MAX_MON_PAL_OVERRIDES * MON_PAL_OVERRIDE_SIZE)
 
 sChecksum:: dw
 

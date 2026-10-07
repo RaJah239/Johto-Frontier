@@ -1092,6 +1092,10 @@ _GetCursorMon:
 	ld bc, wBufferMonDVs
 	ld a, [wBufferMonAltSpecies]
 	newfarcall GetMonNormalOrShinyPalettePointer
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals1) ; palette overrides live in this WRAM bank
+	ldh [rSVBK], a
 	ld de, wBillsPC_PokepicPal
 	push de
 	ld b, 4
@@ -1105,6 +1109,9 @@ _GetCursorMon:
 	jr nz, .loop
 
 	pop hl
+
+	pop af
+	ldh [rSVBK], a
 
 	; Show or hide item icon
 	ld hl, wShadowOAMSprite30

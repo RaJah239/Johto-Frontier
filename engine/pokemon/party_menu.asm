@@ -1,4 +1,16 @@
 SelectMonFromParty:
+	call _SelectMonFromParty
+	jmp ReturnToMapWithSpeechTextbox
+
+; As above, except that picking a Pokemon does not rebuild the map: the
+; party menu stays on screen so the caller can transition straight out of
+; it. Cancelling still returns to the map as usual.
+SelectMonFromPartyNoMap:
+	call _SelectMonFromParty
+	ret nc
+	jmp ReturnToMapWithSpeechTextbox
+
+_SelectMonFromParty:
 	call DisableSpriteUpdates
 	xor a
 	ld [wPartyMenuActionText], a
@@ -7,8 +19,7 @@ SelectMonFromParty:
 	call WaitBGMap
 	call SetDefaultBGPAndOBP
 	call DelayFrame
-	call PartyMenuSelect
-	jmp ReturnToMapWithSpeechTextbox
+	jmp PartyMenuSelect
 
 SelectTradeOrDayCareMon:
 	ld a, b
