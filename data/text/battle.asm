@@ -1387,13 +1387,9 @@ BattleText_SandStreamText:
 	prompt
 
 TenacityHealingText:
-	text "<USER>'s"
-	line "Tenacity"
-	cont "activated!"
-
-	para "<USER>"
+	text "<USER>"
 	line "healed its status!"
-	prompt
+	done
 
 HydrationHealingText:
 	text "<USER>'s"

@@ -46,11 +46,20 @@ HandleTenacity:
 	cp 33 percent + 1
 	ret nc ; 1/3 chance
 
-	call DoStatusRecovery
+	; status recovery
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	and a
+	ret z
+	xor a
+	ld [hl], a
 
 	ld hl, TenacityHealingText
-	jmp StdBattleTextbox
+	call StdBattleTextbox
+	ShowActivationOrEntryOrKOAbilityPopup TenacityText
+	ret
 
+TenacityText: db "Tenacity@"
 INCLUDE "data/abilities/tenacity_mons.asm"
 
 HandleRegenerator:
@@ -166,7 +175,13 @@ HandleHydration:
 	cp WEATHER_RAIN
 	ret nz
 
-	call DoStatusRecovery
+	; status recovery
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	and a
+	ret z
+	xor a
+	ld [hl], a
 
 	ld hl, HydrationHealingText
 	jmp StdBattleTextbox
@@ -440,15 +455,3 @@ HandleSandBody:
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/sand_body_mons.asm"
-
-DoStatusRecovery:
-	ld a, BATTLE_VARS_STATUS
-	call GetBattleVarAddr
-	and a
-	ret z
-	xor a
-	ld [hl], a
-	farcall SwitchTurnCore
-	farcall ItemRecoveryAnim
-	farcall SwitchTurnCore
-	farjp CalcPokemonStats
