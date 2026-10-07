@@ -415,12 +415,14 @@
 	const EVENT_SOLAR_POWER_FOE_HP_LOSS
 	const EVENT_IRON_ARM_PLAYER
 	const EVENT_IRON_ARM_FOE
+	const EVENT_ZEN_FOCUS_PLAYER
+	const EVENT_ZEN_FOCUS_FOE
 	const EVENT_ZEN_HEADBUTT_PLAYER
 	const EVENT_ZEN_HEADBUTT_FOE
 
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 147 events
+; Unused: next 145 events
 
 	const_next 600
 ; Kurt Apricorn events

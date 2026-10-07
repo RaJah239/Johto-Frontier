@@ -8,7 +8,7 @@ CheckBoostingAbilities:
 	call HandleThickFat
 	call HandleSolarPowerBoost
 	call HandleIronArm
-	call HandleMentalFocus
+	call HandleZenFocus
 	call HandleRainSurge
 	call HandlePillowFort
 	call HandleChrysalisHide
@@ -229,9 +229,9 @@ HandleIronArm:
 IronArmText: db "Iron Arm@"
 INCLUDE "data/abilities/iron_arm_mons.asm"
 
-HandleMentalFocus:
+HandleZenFocus:
 	call GetCurrentMon
-	ld hl, MentalFocusPokemon
+	ld hl, ZenFocusPokemon
 	call IsInByteArray
 	ret nc
 
@@ -240,9 +240,11 @@ HandleMentalFocus:
 	and TYPE_MASK
 	cp PSYCHIC_TYPE
 	ret nz
+	ShowGenericAbilityPopup EVENT_ZEN_FOCUS_PLAYER, EVENT_ZEN_FOCUS_FOE, ZenFocusText
 	jmp FiftyPercentBoost
 
-INCLUDE "data/abilities/mental_focus_mons.asm"
+ZenFocusText: db "Zen Focus@"
+INCLUDE "data/abilities/zen_focus_mons.asm"
 
 HandleRainSurge:
 	call GetCurrentMon
