@@ -1,6 +1,6 @@
-; ==========================================
-; === Ability: Moxie, Ignis & Flash Step ===
-; ==========================================
+; ===============================================================
+; === Ability: Moxie, Ignis, Flash Step, Blood Lust & Renewal ===
+; ===============================================================
 KOBoost:
 	push bc
 	call GetCurrentMon
@@ -24,7 +24,7 @@ KOBoost:
 	call GetCurrentMon
 	ld hl, IgnisPokemon
 	call IsInByteArray
-	jr c, .ignis
+	jmp c, .ignis
 
 	call GetCurrentMon
 	ld hl, FlashStepPokemon
@@ -32,9 +32,9 @@ KOBoost:
 	jr c, .flash_step
 
 	call GetCurrentMon
-	ld hl, BattleFeastPokemon
+	ld hl, LifeDrainPokemon
 	call IsInByteArray
-	jmp c, .battle_feast
+	jmp c, .life_drain
 
 	call GetCurrentMon
 	ld hl, RenewalPokemon
@@ -44,7 +44,7 @@ KOBoost:
 	call GetCurrentMon
 	ld hl, BloodlustPokemon
 	call IsInByteArray
-	jr c, .bloodlust
+	jmp c, .bloodlust
 	ret
 
 .flash_step
@@ -60,7 +60,9 @@ KOBoost:
 
 	call ClearFailures
 	ld [wNumHits], a
-	jmp FlashStepBoost	
+	ShowEntryAbilityPopup FlashStepText
+	farcall BattleCommand_SpeedUp
+	farjp BattleCommand_StatUpMessage
 
 .moxie
 	; don't boost if at level 3 or higher
@@ -75,7 +77,9 @@ KOBoost:
 
 	call ClearFailures
 	ld [wNumHits], a
-	jmp MoxieBoost
+	ShowEntryAbilityPopup MoxieText
+	farcall BattleCommand_AttackUp
+	farjp BattleCommand_StatUpMessage
 
 .ignis
 	; don't boost if at level 3 or higher
@@ -90,7 +94,9 @@ KOBoost:
 
 	call ClearFailures
 	ld [wNumHits], a
-	jmp IgnisBoost
+	ShowEntryAbilityPopup IgnisText
+	farcall BattleCommand_SpecialAttackUp
+	farjp BattleCommand_StatUpMessage
 
 .bloodlust
 	; don't boost if attack is at level 3 or higher
@@ -105,9 +111,9 @@ KOBoost:
 
 	call ClearFailures
 	ld [wNumHits], a
-	call BloodlustAtkBoost
-	; fallthrough
-
+	ShowEntryAbilityPopup BloodLustText
+	farcall BattleCommand_AttackUp
+	farcall BattleCommand_StatUpMessage
 .sp_atk_boost
 	; don't boost if special attack is at level 3 or higher
 	ldh a, [hBattleTurn]
@@ -121,9 +127,11 @@ KOBoost:
 
 	call ClearFailures
 	ld [wNumHits], a
-	jmp BloodlustSpAtkBoost
+	ShowEntryAbilityPopup BloodLustText
+	farcall BattleCommand_SpecialAttackUp
+	farjp BattleCommand_StatUpMessage
 
-.battle_feast
+.life_drain
 	call ClearFailures
 	ld [wNumHits], a
 
@@ -132,13 +140,13 @@ KOBoost:
 ; ==================
 	ldh a, [hBattleTurn]
 	and a
-	jr nz, .enemy_turn_battle_feast
+	jr nz, .enemy_turn_life_drain
 
 ; =====================
 ; === Player's Turn ===
 ; =====================
 
-.enemy_turn_battle_feast
+.enemy_turn_life_drain
 	ld hl, wBattleMonHP
 	ldh a, [hBattleTurn]
 	and a
@@ -159,19 +167,14 @@ KOBoost:
 	ret z
 
 .restore
+	ShowEntryAbilityPopup LifeDrainText
 	farcall GetEighthMaxHP
 	farcall SwitchTurnCore
-	farcall RestoreHP
-
-	call CheckIfFastBattlesIsOn
-	ret nz
-	ld hl, BattleText_BattleFeastText
-	jmp StdBattleTextbox
+	farjp RestoreHP
 
 .renewal
 	call ClearFailures
 	ld [wNumHits], a
-
 ; ==================
 ; === Check Turn ===
 ; ==================
@@ -182,7 +185,6 @@ KOBoost:
 ; =====================
 ; === Player's Turn ===
 ; =====================
-
 .enemy_turn_renewal
 	ld a, BATTLE_VARS_STATUS
 	call GetBattleVarAddr
@@ -190,131 +192,22 @@ KOBoost:
 	ret z
 	xor a
 	ld [hl], a
-	farcall SwitchTurnCore
-	farcall ItemRecoveryAnim
-	farcall SwitchTurnCore
-	ld hl, RenewalText
-	call BattleTextbox
+	ShowEntryAbilityPopup RenewalText
 	farjp CalcPokemonStats
 
-MoxieBoost:
-	call PlayBoostAnimation
-	farcall BattleCommand_AttackUp
-    ld hl, MoxieText
-    jmp BattleTextbox
-
-IgnisBoost:
-	call PlayBoostAnimation
-	farcall BattleCommand_SpecialAttackUp
-    ld hl, IgnisText
-    jmp BattleTextbox
-
-FlashStepBoost:
-	call PlayBoostAnimation
-	farcall BattleCommand_SpeedUp
-    ld hl, FlashStepText
-    jmp BattleTextbox
-
-BloodlustAtkBoost:
-	call PlayBoostAnimation
-	farcall BattleCommand_AttackUp
-    ld hl, BloodlustAtkBoostText
-    jmp BattleTextbox
-
-BloodlustSpAtkBoost:
-	call PlayBoostAnimation
-	farcall BattleCommand_SpecialAttackUp
-    ld hl, BloodlustSpAtkBoostText
-    jmp BattleTextbox
-
-MoxieText:
-	text "<USER>'s"
-	line "Moxie activated!"
-
-	para "<USER>'s"
-	line "Attack went up!"
-	prompt
-
-IgnisText:
-	text "<USER>'s"
-	line "Ignis activated!"
-
-	para "<USER>'s"
-	line "Sp.Attack went up!"
-	prompt
-
-FlashStepText:
-	text "<USER>'s"
-	line "Flash Step"
-	cont "activated!"
-
-	para "<USER>'s"
-	line "Speed went up!"
-	prompt
-
-BloodlustAtkBoostText:
-	text "<USER>'s"
-	line "Bloodlust"
-	cont "activated!"
-
-	para "<USER>'s"
-	line "Attack went up!"
-	prompt
-
-BloodlustSpAtkBoostText:
-	text "<USER>'s"
-	line "Bloodlust"
-	cont "activated!"
-
-	para "<USER>'s"
-	line "Sp.Attack went up!"
-	prompt
-
-RenewalText:
-	text "<USER>'s"
-	line "Renewal activated!"
-
-	para "<USER>"
-	line "became healthy!"
-	prompt
+FlashStepText: db "Flash Step@"
+MoxieText:     db "Moxie@"
+IgnisText:     db "Ignis@"
+BloodLustText: db "Blood Lust@"
+LifeDrainText: db "Life Drain@"
+RenewalText:   db "Renewal@"
 
 INCLUDE "data/abilities/moxie_mons.asm"
 INCLUDE "data/abilities/ignis_mons.asm"
 INCLUDE "data/abilities/flash_step_mons.asm"
 INCLUDE "data/abilities/bloodlust_mons.asm"
-INCLUDE "data/abilities/battle_feast_mons.asm"
+INCLUDE "data/abilities/life_drain_mons.asm"
 INCLUDE "data/abilities/renewal_mons.asm"
-
-PlayBoostAnimation:
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skipAnim
-
-	ld de, ANIM_STAT_UP
-	call ShouldPlayAnimQuestionMark
-	jr c, .skipAnim
-
-	farcall Call_PlayBattleAnim
-	scf
-	ret
-
-.skipAnim
-	xor a
-	ret
-
-; skip boost animation in wild battles
-ShouldPlayAnimQuestionMark:
-	ld a, [wBattleMode]
-	bit WILD_BATTLE, a
-	jr nz, .no
-
-.yes
-	scf
-	ret
-
-.no
-	xor a
-	ret
 
 ; fail-safe should anything go awry
 ; and prevent stat ups when a pokemon has zero hp
