@@ -150,8 +150,10 @@ HandleTechnician:
 	call GetBattleVar
 	cp 61            ; power < 61 → boost
 	ret nc           ; power >= 61, no boost
+	ShowGenericAbilityPopup EVENT_TECHNICIAN_PLAYER, EVENT_TECHNICIAN_FOE, TechnicianText
 	jmp FiftyPercentBoost
 
+TechnicianText: db "Technician@"
 INCLUDE "data/abilities/technician_mons.asm"
 
 HandleMultiscale:
