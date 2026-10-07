@@ -1,5 +1,5 @@
 TurnEndAbilities:
-	call HandleRegenerator
+	call HandleRecovery
 	call HandleSpeedBoost
 	call HandleHydration
 	call HandleIceBody
@@ -62,7 +62,7 @@ HandleTenacity:
 TenacityText: db "Tenacity@"
 INCLUDE "data/abilities/tenacity_mons.asm"
 
-HandleRegenerator:
+HandleRecovery:
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
 	jr z, .DoEnemyFirst
@@ -82,7 +82,7 @@ HandleRegenerator:
 
 .do_it
 	call GetCurrentMon
-	ld hl, RegeneratorPokemon
+	ld hl, RecoveryPokemon
 	call IsInByteArray
 	ret nc
 
@@ -106,16 +106,16 @@ HandleRegenerator:
 	ret z
 
 .restore
+	ld hl, BattleText_TargetRegenerates
+	call StdBattleTextbox
+	ShowActivationOrEntryOrKOAbilityPopup RecoveryText
+
 	farcall GetSixteenthMaxHP
 	farcall SwitchTurnCore
-	farcall RestoreHP
+	farjp RestoreHP
 
-	call CheckIfFastBattlesIsOn
-	ret nz
-	ld hl, BattleText_TargetRegenerates
-	jmp StdBattleTextbox
-
-INCLUDE "data/abilities/regenerator_mons.asm"
+RecoveryText: db "Recovery@"
+INCLUDE "data/abilities/recovery_mons.asm"
 
 HandleSpeedBoost:
 	ldh a, [hSerialConnectionStatus]

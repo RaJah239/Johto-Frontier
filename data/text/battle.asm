@@ -14,9 +14,9 @@ BattleText_QuickClaw:
 	prompt
 
 BattleText_TargetRegenerates:
-	text "<TARGET>"
+	text "<USER>"
 	line "regenerates."
-	prompt
+	done
 
 BattleText_BattleFeastText:
 	text "<TARGET>"
