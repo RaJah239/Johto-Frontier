@@ -60,7 +60,7 @@ KOBoost:
 
 	call ClearFailures
 	ld [wNumHits], a
-	ShowEntryAbilityPopup FlashStepText
+	ShowEntryOrKOAbilityPopup FlashStepText
 	farcall BattleCommand_SpeedUp
 	farjp BattleCommand_StatUpMessage
 
@@ -77,7 +77,7 @@ KOBoost:
 
 	call ClearFailures
 	ld [wNumHits], a
-	ShowEntryAbilityPopup MoxieText
+	ShowEntryOrKOAbilityPopup MoxieText
 	farcall BattleCommand_AttackUp
 	farjp BattleCommand_StatUpMessage
 
@@ -94,7 +94,7 @@ KOBoost:
 
 	call ClearFailures
 	ld [wNumHits], a
-	ShowEntryAbilityPopup IgnisText
+	ShowEntryOrKOAbilityPopup IgnisText
 	farcall BattleCommand_SpecialAttackUp
 	farjp BattleCommand_StatUpMessage
 
@@ -111,7 +111,7 @@ KOBoost:
 
 	call ClearFailures
 	ld [wNumHits], a
-	ShowEntryAbilityPopup BloodLustText
+	ShowEntryOrKOAbilityPopup BloodLustText
 	farcall BattleCommand_AttackUp
 	farcall BattleCommand_StatUpMessage
 .sp_atk_boost
@@ -127,7 +127,7 @@ KOBoost:
 
 	call ClearFailures
 	ld [wNumHits], a
-	ShowEntryAbilityPopup BloodLustText
+	ShowEntryOrKOAbilityPopup BloodLustText
 	farcall BattleCommand_SpecialAttackUp
 	farjp BattleCommand_StatUpMessage
 
@@ -167,7 +167,7 @@ KOBoost:
 	ret z
 
 .restore
-	ShowEntryAbilityPopup LifeDrainText
+	ShowEntryOrKOAbilityPopup LifeDrainText
 	farcall GetEighthMaxHP
 	farcall SwitchTurnCore
 	farjp RestoreHP
@@ -192,7 +192,7 @@ KOBoost:
 	ret z
 	xor a
 	ld [hl], a
-	ShowEntryAbilityPopup RenewalText
+	ShowEntryOrKOAbilityPopup RenewalText
 	farjp CalcPokemonStats
 
 FlashStepText: db "Flash Step@"

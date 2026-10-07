@@ -418,7 +418,7 @@ HandleNonLinkIntimidate:
 	call IsInByteArray
 	ret nc
 
-	ShowEntryAbilityPopup IntimidateText
+	ShowEntryOrKOAbilityPopup IntimidateText
 
 	ld a, [wOptions]
 	bit BATTLE_SCENE, a
