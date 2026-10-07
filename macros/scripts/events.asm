@@ -1303,6 +1303,26 @@ MACRO surefire_ability
 ENDM
 
 ; ==========================================================================
+; === Macro: ShowEntryAbilityPopup                                               ===
+; ==========================================================================
+; Shows an ability popup over the ACTING Pokemon's HUD.
+; Parameters:
+;   \1 - Ability popup text label (e.g., IntimidateText)
+;
+; Example:
+;   ShowEntryAbilityPopup IntimidateText
+; ==========================================================================
+
+MACRO ShowEntryAbilityPopup
+	; Slide the ability popup over the acting side's HUD
+	ld b, BANK(\1)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	ld de, \1
+	farcall ShowAbilityPopup
+ENDM
+
+; ==========================================================================
 ; === Macro: ShowGenericAbilityPopup                                      ===
 ; ==========================================================================
 ; Shows an ability popup once per side.

@@ -418,15 +418,7 @@ HandleNonLinkIntimidate:
 	call IsInByteArray
 	ret nc
 
-; ===========================================================================+
-    ; ability popup box                                                      |
-	; slide the ability popup over the acting side's HUD                     |
-	ld b, BANK(AbilityPopup_IntimidateText) ;                                |
-	ldh a, [hBattleTurn] ;                                                   |
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY                     |
-	ld de, AbilityPopup_IntimidateText ;                                     |
-	farcall ShowAbilityPopup ;                                               |
-; ===========================================================================+
+	ShowEntryAbilityPopup IntimidateText
 
 	ld a, [wOptions]
 	bit BATTLE_SCENE, a
@@ -439,9 +431,7 @@ HandleNonLinkIntimidate:
 	farcall BattleCommand_AttackDown
 	farjp BattleCommand_StatDownMessage
 
-AbilityPopup_IntimidateText:
-	db "Intimidate@"
-
+IntimidateText: db "Intimidate@"
 INCLUDE "data/abilities/intimidate_mons.asm"
 
 HandleBattleStance:
