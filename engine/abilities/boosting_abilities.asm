@@ -358,7 +358,7 @@ HandleBallistics:
 	call IsInByteArray
 	ret nc
 	ShowGenericAbilityPopup EVENT_BALLISTICS_PLAYER, EVENT_BALLISTICS_FOE, BallisticsText
-	jr FiftyPercentBoost
+	jmp FiftyPercentBoost
 
 BallisticsText: db "Ballistics@"
 INCLUDE "data/abilities/ballistics_mons.asm"
@@ -374,9 +374,10 @@ HandleIronFist:
 	ld hl, PunchingMoves
 	call IsInByteArray
 	ret nc
-
+	ShowGenericAbilityPopup EVENT_IRON_FIST_PLAYER, EVENT_IRON_FIST_FOE, IronFistText
 	jr TwentyPercentBoost
 
+IronFistText: db "Iron Fist@"
 INCLUDE "data/abilities/iron_fist_mons.asm"
 
 HandleStrongJaw:
