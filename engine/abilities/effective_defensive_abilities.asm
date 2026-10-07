@@ -14,8 +14,10 @@ HandleTintedLens:
 	and EFFECTIVENESS_MASK
 	cp NOT_VERY_EFFECTIVE
 	ret nz
+	ShowGenericAbilityPopup EVENT_TINTED_LENS_PLAYER, EVENT_TINTED_LENS_FOE, TintedLensText
 	jr Hundred_PercentBoost
 
+TintedLensText: db "TintedLens@"
 INCLUDE "data/abilities/tinted_lens_mons.asm"
 
 HandleSolidRock:
