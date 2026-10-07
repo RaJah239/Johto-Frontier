@@ -709,12 +709,21 @@ AI_Smart_NastyPlot:
 	cp BASE_STAT_LEVEL + 2
 	jmp c, StandardEncourage
 
+; at +2 or higher
 ; discourage after boost if afflicted with toxic
 	call IsAIToxified
 	jmp c, StandardDiscourage
 
-; encourage if we have no reason not to
-	jmp StandardEncourage
+; only go higher if the player is also boosting
+	ld a, [wPlayerSAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardEncourage
+	ld a, [wPlayerAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardEncourage
+
+; player not boosting much, stop at +2
+	jmp StandardDiscourage
 
 AI_Smart_SwordsDance:
 ; discourage if player can ko at current HP
@@ -733,12 +742,20 @@ AI_Smart_SwordsDance:
 	cp BASE_STAT_LEVEL + 2
 	jmp c, StandardEncourage
 
+; at +2 or higher
 ; discourage after boost if afflicted with toxic
 	call IsAIToxified
 	jmp c, StandardDiscourage
 
-; encourage if we have no reason not to
-	jmp StandardEncourage
+; only go higher if the player is also boosting
+	ld a, [wPlayerAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardEncourage
+	ld a, [wPlayerSAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardEncourage
+
+	jmp StandardDiscourage
 
 AI_Smart_QuiverDance:
 ; discourage if player can ko at current HP
@@ -774,10 +791,20 @@ AI_Smart_QuiverDance:
 	cp BASE_STAT_LEVEL + 2
 	jmp c, StandardEncourage
 
+; at +2 or higher
 ; discourage after boost if afflicted with toxic
 	call IsAIToxified
 	jmp c, StandardDiscourage
-	ret
+
+; only go higher if the player is also boosting
+	ld a, [wPlayerSAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardEncourage
+	ld a, [wPlayerAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardEncourage
+
+	jmp StandardDiscourage
 
 AI_Smart_CalmMind:
 ; discourage if player can ko at current HP
@@ -807,12 +834,21 @@ AI_Smart_CalmMind:
 	cp BASE_STAT_LEVEL + 2
 	jmp c, StandardEncourage
 
+; at +2 or higher
 ; discourage after boost if afflicted with toxic
 	call IsAIToxified
 	jmp c, StandardDiscourage
 
-; encourage if we have no reason not to
-	jmp StandardEncourage
+; only go higher if the player is also boosting
+	ld a, [wPlayerSAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardEncourage
+	ld a, [wPlayerAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardEncourage
+
+; player not boosting much, stop at +2
+	jmp StandardDiscourage
 
 AI_Smart_DragonDance:
 ; discourage if player can ko at current HP
@@ -874,8 +910,15 @@ AI_Smart_DragonDance:
 	call IsAIToxified
 	jmp c, StandardDiscourage
 
-; encourage if we have no reason not to
-	jmp StandardEncourage
+; only go higher if the player is also boosting
+	ld a, [wPlayerAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardEncourage
+	ld a, [wPlayerSAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardEncourage
+
+	jmp StandardDiscourage
 
 AI_Smart_Venoshock:
 ; Greatly encourage this move if the player is poisoned.
@@ -2704,8 +2747,15 @@ AI_Smart_BulkUp:
 	call IsAIToxified
 	jmp c, StandardDiscourage
 
-; encourage if we have no reason not to
-	jmp StandardEncourage
+; only go higher if the player is also boosting
+	ld a, [wPlayerAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardEncourage
+	ld a, [wPlayerSAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardEncourage
+
+	jmp StandardDiscourage
 
 AI_Smart_Curse:
 	ld a, [wEnemyMonType1]
@@ -2760,6 +2810,17 @@ AI_Smart_Curse:
 ; discourage after boost if afflicted with toxic
 	call IsAIToxified
 	jr c, .discourage
+
+; only go higher if the player is also boosting
+	ld a, [wPlayerAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .encourage
+	ld a, [wPlayerSAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .encourage
+
+	inc [hl]
+	inc [hl]
 	ret
 
 .strongEncourage
