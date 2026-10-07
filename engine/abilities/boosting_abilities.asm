@@ -357,9 +357,10 @@ HandleBallistics:
 	ld hl, BallisticsMoves
 	call IsInByteArray
 	ret nc
-
+	ShowGenericAbilityPopup EVENT_BALLISTICS_PLAYER, EVENT_BALLISTICS_FOE, BallisticsText
 	jr FiftyPercentBoost
 
+BallisticsText: db "Ballistics@"
 INCLUDE "data/abilities/ballistics_mons.asm"
 
 HandleIronFist:
