@@ -53,7 +53,7 @@ TrickTargetObtainedText:
 	text "."
 	prompt
 
-SolarPowerText:
+SolarPowerBattleText:
 	text "<USER> is"
 	line "hurt by its"
 	cont "Solar Power!"

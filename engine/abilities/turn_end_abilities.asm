@@ -7,6 +7,7 @@ TurnEndAbilities:
 	call HandleSandBody
 	call HandleTenacity
 	call HandlePhotosynthesis
+	call HandleSolarPowerHPLoss
 	ret
 
 SolarPowerHPLossPokemon:
@@ -374,11 +375,15 @@ HandleSolarPowerHPLoss:
 	cp WEATHER_SUN
 	ret nz
 
+	ShowGenericAbilityPopup EVENT_SOLAR_POWER_PLAYER_HP_LOSS, EVENT_SOLAR_POWER_FOE_HP_LOSS, SolarPowerHPLossText
+
 	; subtract 1/8 max hp end of each turn
 	farcall GetEighthMaxHP
 	farcall SubtractHPFromUser
-	ld hl, SolarPowerText
+	ld hl, SolarPowerBattleText
 	jmp StdBattleTextbox
+
+SolarPowerHPLossText: db "SolarPower@"
 
 HandleSandBody:
 	ldh a, [hSerialConnectionStatus]

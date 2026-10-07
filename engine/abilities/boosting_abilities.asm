@@ -206,8 +206,10 @@ HandleSolarPowerBoost:
 	call GetBattleVar
 	cp SPECIAL
 	ret c
+	ShowGenericAbilityPopup EVENT_SOLAR_POWER_PLAYER, EVENT_SOLAR_POWER_FOE, SolarPowerText
 	jmp FiftyPercentBoost
 
+SolarPowerText: db "SolarPower@"
 INCLUDE "data/abilities/solar_power_mons.asm"
 
 HandleSteelWorker:
