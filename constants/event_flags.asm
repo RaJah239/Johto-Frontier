@@ -427,12 +427,14 @@
 	const EVENT_BALLISTICS_FOE
 	const EVENT_IRON_FIST_PLAYER
 	const EVENT_IRON_FIST_FOE
+	const EVENT_STRONG_JAW_PLAYER
+	const EVENT_STRONG_JAW_FOE
 	const EVENT_ZEN_HEADBUTT_PLAYER
 	const EVENT_ZEN_HEADBUTT_FOE
 
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 135 events
+; Unused: next 133 events
 
 	const_next 600
 ; Kurt Apricorn events

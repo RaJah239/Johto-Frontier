@@ -375,7 +375,7 @@ HandleIronFist:
 	call IsInByteArray
 	ret nc
 	ShowGenericAbilityPopup EVENT_IRON_FIST_PLAYER, EVENT_IRON_FIST_FOE, IronFistText
-	jr TwentyPercentBoost
+	jmp TwentyPercentBoost
 
 IronFistText: db "Iron Fist@"
 INCLUDE "data/abilities/iron_fist_mons.asm"
@@ -391,9 +391,10 @@ HandleStrongJaw:
 	ld hl, StrongJawMoves
 	call IsInByteArray
 	ret nc
-
+	ShowGenericAbilityPopup EVENT_STRONG_JAW_PLAYER, EVENT_STRONG_JAW_FOE, StrongJawText
 	jr FiftyPercentBoost
 
+StrongJawText: db "Strong Jaw@"
 INCLUDE "data/abilities/strong_jaw_mons.asm"
 
 HandleHugePower:
