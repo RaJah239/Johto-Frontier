@@ -340,9 +340,10 @@ HandleSharpness:
 	ld hl, SharpMoves
 	call IsInByteArray
 	ret nc
-
+	ShowGenericAbilityPopup EVENT_SHARPNESS_PLAYER, EVENT_SHARPNESS_FOE, SharpnessText
 	jmp FiftyPercentBoost
 
+SharpnessText: db "Sharpness@"
 INCLUDE "data/abilities/sharpness_mons.asm"
 
 HandleBallistics:
