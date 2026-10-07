@@ -962,11 +962,12 @@ BattleCommand_Critical:
 	ld hl, SuperLuckPokemon
 	call IsInByteArray
 	pop bc
-	jr nc, .continue
+	jmp nc, .continue
 
 ; super luck mons have an innate +2 critical hit level
 	inc c
 	inc c
+	ShowGenericAbilityPopup EVENT_SUPER_LUCK_PLAYER, EVENT_SUPER_LUCK_FOE, SuperLuckText
 	jr .continue
 
 ; The move always lands a critical hit, unless the target has Crit Guard.
@@ -1027,6 +1028,7 @@ CriticialHitLoaded:
 	ld [wCriticalHit], a
 	ret
 
+SuperLuckText: db "Super Luck@"
 CritlockText: db "Crit Lock@"
 CritGuardText: db "Crit Guard@"
 
