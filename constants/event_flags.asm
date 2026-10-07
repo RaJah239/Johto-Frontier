@@ -397,12 +397,14 @@
 	const EVENT_TYPE_SYNC_FOE
 	const EVENT_GUTS_PLAYER
 	const EVENT_GUTS_FOE
+	const EVENT_RIVALRY_PLAYER
+	const EVENT_RIVALRY_FOE
 	const EVENT_ZEN_HEADBUTT_PLAYER
 	const EVENT_ZEN_HEADBUTT_FOE
 
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 165 events
+; Unused: next 163 events
 
 	const_next 600
 ; Kurt Apricorn events

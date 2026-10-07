@@ -83,8 +83,10 @@ HandleRivalry:
 	farcall CheckOppositeGender
 	ret c
 	jmp z, TwentyFivePercentBoost
+	ShowGenericAbilityPopup EVENT_RIVALRY_PLAYER, EVENT_RIVALRY_FOE, RivalryText
 	jmp TwentyFivePercentNerf
 
+RivalryText: db "Rivalry@"
 INCLUDE "data/abilities/rivalry_mons.asm"
 
 HandleSandForce:
