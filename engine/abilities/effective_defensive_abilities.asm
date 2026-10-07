@@ -32,11 +32,15 @@ HandleSolidRock:
 	jr z, .nerf_damage
 	cp SUPER_EFFECTIVE
 	ret nz
-	jr Half_Damage
+	showdefensiveability SolidRockText
+	call Half_Damage
+	ret
 .nerf_damage
+	showdefensiveability SolidRockText
 	call Half_Damage
 	jr Half_Damage
 
+SolidRockText: db "Solid Rock@"
 INCLUDE "data/abilities/solid_rock_mons.asm"
 
 HandleFurCoat:
@@ -49,8 +53,10 @@ HandleFurCoat:
 	call GetBattleVar
 	cp SPECIAL
 	ret nc
+	showdefensiveability FurCoatText
 	jr Fifty_PercentNerf
 
+FurCoatText: db "Fur Coat@"
 INCLUDE "data/abilities/fur_coat_mons.asm"
 
 Hundred_PercentBoost:
