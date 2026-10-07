@@ -407,12 +407,14 @@
 	const EVENT_MULTISCALE_FOE
 	const EVENT_SUPER_LUCK_PLAYER
 	const EVENT_SUPER_LUCK_FOE
+	const EVENT_THICK_FAT_PLAYER
+	const EVENT_THICK_FAT_FOE
 	const EVENT_ZEN_HEADBUTT_PLAYER
 	const EVENT_ZEN_HEADBUTT_FOE
 
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 155 events
+; Unused: next 153 events
 
 	const_next 600
 ; Kurt Apricorn events

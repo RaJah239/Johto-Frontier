@@ -183,8 +183,10 @@ HandleThickFat:
 	jmp z, FiftyPercentNerf
 	cp ICE
 	ret nz
+	ShowGenericAbilityPopup EVENT_THICK_FAT_PLAYER, EVENT_THICK_FAT_FOE, ThickFatText
 	jmp FiftyPercentNerf
 
+ThickFatText: db "Thick Fat@"
 INCLUDE "data/abilities/thick_fat_mons.asm"
 
 ; handle the HP loss in engine/abilities/turn_end_abilities.asm 
