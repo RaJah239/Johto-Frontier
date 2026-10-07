@@ -7,7 +7,6 @@ TurnEndAbilities:
 	call HandleSandBody
 	call HandleTenacity
 	call HandlePhotosynthesis
-	call HandleSolarPowerHPLoss
 	ret
 
 SolarPowerHPLossPokemon:
