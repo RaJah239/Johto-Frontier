@@ -704,59 +704,6 @@ ElmsLabTrashcanText:
 	cont "ate is in there…"
 	done
 
-WorldNotebook:
-	opentext
-	writetext AdventuringText
-	yesorno
-	iffalse .Done
-.list:
-	loadmenu .MoveEnchancingAbilitiesHeader
-	verticalmenu
-	closewindow
-	ifequal 1, .ClassicRoute
-	ifequal 2, .Placeholder
-	ifequal 3, .Placeholder
-	ifequal 4, .Placeholder
-	ifequal 5, .Done
-	sjump .list
-
-.ClassicRoute:
-	writethistext
-		text "You are free to"
-		line "traverse Johto as"
-		cont "you see fit but"
-
-		para "if you're new, the"
-		line "suggested way goes"
-		cont "from Route 1 to 19"
-		cont "with exploration"
-		cont "to all things one"
-		cont "may come across."
-		done
-	waitbutton
-	sjump .list
-
-.Placeholder:
-	sjump .list
-
-.Done:
-	endtext
-
-.MoveEnchancingAbilitiesHeader:
-	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 0, 19, TEXTBOX_Y - 1
-	dw .MenuData
-	db 1 ; default option
-
-.MenuData:
-	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
-	db 5 ; items
-	db "Classic Route@"
-	db "Placeholder@"
-	db "Placeholder@"
-	db "Placeholder@"
-	db "Cancel@"
-
 AdventuringText:
 	text "It's a book about"
 	line "adventuring!"
@@ -865,4 +812,274 @@ ElmsLabAdventureTip8Text:
 	para "Holding B down"
 	line "will turbo through"
 	cont "text."
+	done
+
+; =================================
+; === Scrolling Menu Map Script ===
+; =================================
+WorldNotebook:
+	opentext
+	writetext AdventuringText
+	yesorno
+	iffalse .Done
+	callasm .NotebookMenuOpen
+.list:
+	callasm .NotebookSelect
+	ifequal 13, .CloseMenu
+	ifequal 0, .ClassicRoute ; 1st option
+	ifequal 1, .Placeholder1
+	ifequal 2, .Placeholder2
+	ifequal 3, .Placeholder3
+	ifequal 4, .Placeholder4
+	ifequal 5, .Placeholder5
+	ifequal 6, .Placeholder6
+	ifequal 7, .Placeholder7
+	ifequal 8, .Placeholder8
+	ifequal 9, .Placeholder9
+	ifequal 10, .Placeholder10
+	ifequal 11, .Placeholder11
+	ifequal 12, .Placeholder12 ; last option
+	sjump .list
+
+.ClassicRoute:
+	writethistext
+		text "You are free to"
+		line "traverse Johto as"
+		cont "you see fit but"
+
+		para "if you're new, the"
+		line "suggested way goes"
+		cont "from Route 1 to 19"
+		cont "with exploration"
+		cont "to all things one"
+		cont "may come across."
+		done
+	waitbutton
+	sjump .list
+
+.Placeholder1:
+	writetext ElmsBookPlaceholder1Text
+	waitbutton
+	sjump .list
+
+.Placeholder2:
+	writetext ElmsBookPlaceholder2Text
+	waitbutton
+	sjump .list
+
+.Placeholder3:
+	writetext ElmsBookPlaceholder3Text
+	waitbutton
+	sjump .list
+
+.Placeholder4:
+	writetext ElmsBookPlaceholder4Text
+	waitbutton
+	sjump .list
+
+.Placeholder5:
+	writetext ElmsBookPlaceholder5Text
+	waitbutton
+	sjump .list
+
+.Placeholder6:
+	writetext ElmsBookPlaceholder6Text
+	waitbutton
+	sjump .list
+
+.Placeholder7:
+	writetext ElmsBookPlaceholder7Text
+	waitbutton
+	sjump .list
+
+.Placeholder8:
+	writetext ElmsBookPlaceholder8Text
+	waitbutton
+	sjump .list
+
+.Placeholder9:
+	writetext ElmsBookPlaceholder9Text
+	waitbutton
+	sjump .list
+
+.Placeholder10:
+	writetext ElmsBookPlaceholder10Text
+	waitbutton
+	sjump .list
+
+.Placeholder11:
+	writetext ElmsBookPlaceholder11Text
+	waitbutton
+	sjump .list
+
+.Placeholder12:
+	writetext ElmsBookPlaceholder12Text
+	waitbutton
+	sjump .list
+
+.CloseMenu:
+	callasm .NotebookMenuClose
+.Done:
+	endtext
+
+.NotebookMenuOpen:
+	call ClearSprites
+	ld hl, wStateFlags
+	res SPRITE_UPDATES_DISABLED_F, [hl]
+	call LoadStandardMenuHeader
+	ld hl, .NotebookMenuHeader
+	call CopyMenuHeader
+	xor a
+	ld [wMenuCursorPosition], a
+	ld [wMenuScrollPosition], a
+	ldh [hBGMapMode], a
+	jmp InitScrollingMenu
+
+.NotebookSelect:
+.input_loop
+	call ScrollingMenu
+	ld a, [wMenuCursorY]
+	ld [wMenuCursorPosition], a
+	ld a, [wMenuJoypad]
+	cp B_BUTTON
+	jr z, .cancel
+	cp A_BUTTON
+	jr nz, .input_loop
+	ld a, [wMenuSelection]
+	cp -1 ; Cancel
+	jr z, .cancel
+	ld [wScriptVar], a
+	ret
+
+.cancel:
+	ld a, 13
+	ld [wScriptVar], a
+	ret
+
+.NotebookMenuClose:
+	ld hl, wStateFlags
+	set SPRITE_UPDATES_DISABLED_F, [hl]
+	jmp CloseWindow
+
+.NotebookMenuHeader:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 1, 1, SCREEN_WIDTH - 2, 10
+	dw .NotebookMenuData
+	db 1 ; default option
+
+.NotebookMenuData:
+	db SCROLLINGMENU_DISPLAY_ARROWS | SCROLLINGMENU_ENABLE_LEFT | SCROLLINGMENU_ENABLE_RIGHT | SCROLLINGMENU_ENABLE_FUNCTION3 ; flags
+	db 5, 0 ; rows, columns
+	db SCROLLINGMENU_ITEMS_NORMAL ; item format
+	dba .NotebookMenuItems
+	dba .NotebookMenuEntryName
+	dbw 0, NULL
+	dba .NotebookMenuFunction3
+
+.NotebookMenuItems:
+	db 13 ; count (Classic Route + 12 chapters)
+	db 0 ; Classic Route
+	db 1
+	db 2
+	db 3
+	db 4
+	db 5
+	db 6
+	db 7
+	db 8
+	db 9
+	db 10
+	db 11
+	db 12
+	db -1 ; Cancel
+
+.NotebookMenuFunction3:
+	ret
+
+.NotebookMenuEntryName:
+	ld a, [wMenuSelection]
+	push de
+	and a
+	jr nz, .placeholder
+	ld de, .ClassicRouteEntryName
+	pop hl
+	jmp PlaceString
+
+.placeholder:
+	dec a ; selection 1..12 -> 0..11
+	add a ; each table entry is a 2-byte pointer
+	ld e, a
+	ld d, 0
+	ld hl, .PlaceholderEntryNames
+	add hl, de
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	pop hl
+	jmp PlaceString
+
+.ClassicRouteEntryName:
+	db "Classic Route@"
+.PlaceholderEntryNames:
+	dw .Placeholder1Name
+	dw .Placeholder2Name
+	dw .Placeholder3Name
+	dw .Placeholder4Name
+	dw .Placeholder5Name
+	dw .Placeholder6Name
+	dw .Placeholder7Name
+	dw .Placeholder8Name
+	dw .Placeholder9Name
+	dw .Placeholder10Name
+	dw .Placeholder11Name
+	dw .Placeholder12Name
+
+.Placeholder1Name:  db "Text 01@"
+.Placeholder2Name:  db "Text 02@"
+.Placeholder3Name:  db "Text 03@"
+.Placeholder4Name:  db "Text 04@"
+.Placeholder5Name:  db "Text 05@"
+.Placeholder6Name:  db "Text 06@"
+.Placeholder7Name:  db "Text 07@"
+.Placeholder8Name:  db "Text 08@"
+.Placeholder9Name:  db "Text 09@"
+.Placeholder10Name: db "Text 10@"
+.Placeholder11Name: db "Text 11@"
+.Placeholder12Name: db "Text 12@"
+
+ElmsBookPlaceholder1Text:
+	text "Placeholder 01."
+	done
+ElmsBookPlaceholder2Text:
+	text "Placeholder 02."
+	done
+ElmsBookPlaceholder3Text:
+	text "Placeholder 03."
+	done
+ElmsBookPlaceholder4Text:
+	text "Placeholder 04."
+	done
+ElmsBookPlaceholder5Text:
+	text "Placeholder 05."
+	done
+ElmsBookPlaceholder6Text:
+	text "Placeholder 06."
+	done
+ElmsBookPlaceholder7Text:
+	text "Placeholder 07."
+	done
+ElmsBookPlaceholder8Text:
+	text "Placeholder 08."
+	done
+ElmsBookPlaceholder9Text:
+	text "Placeholder 09."
+	done
+ElmsBookPlaceholder10Text:
+	text "Placeholder 10."
+	done
+ElmsBookPlaceholder11Text:
+	text "Placeholder 11."
+	done
+ElmsBookPlaceholder12Text:
+	text "Placeholder 12."
 	done
