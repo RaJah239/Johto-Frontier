@@ -419,12 +419,14 @@
 	const EVENT_ZEN_FOCUS_FOE
 	const EVENT_RAIN_SURGE_PLAYER
 	const EVENT_RAIN_SURGE_FOE
+	const EVENT_PILLOW_FORT_PLAYER
+	const EVENT_PILLOW_FORT_FOE
 	const EVENT_ZEN_HEADBUTT_PLAYER
 	const EVENT_ZEN_HEADBUTT_FOE
 
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 143 events
+; Unused: next 141 events
 
 	const_next 600
 ; Kurt Apricorn events

@@ -278,8 +278,10 @@ HandlePillowFort:
 	call GetBattleVar
 	cp SPECIAL
 	ret nc
+	ShowGenericAbilityPopup EVENT_PILLOW_FORT_PLAYER, EVENT_PILLOW_FORT_FOE, PillowFortText
 	jmp TwentyFivePercentNerf
 
+PillowFortText: db "PillowFort@"
 INCLUDE "data/abilities/pillow_fort_mons.asm"
 
 HandleChrysalisHide:
