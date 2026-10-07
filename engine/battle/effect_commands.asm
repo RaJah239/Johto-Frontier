@@ -5646,20 +5646,23 @@ BattleCommand_FlinchTarget:
 	and a
 	ret nz
 
-; ====================
-; === Inner Focus ====
-; ====================
+; =========================
+; === Ability: Unshaken ===
+; =========================
 	call GetOpposingMon
-	ld hl, InnerFocusPokemon
+	ld hl, UnshakenPokemon
 	call IsInByteArray
 	jr c, .no_flinch
 	jr FlinchTarget
 
 .no_flinch
-	ld hl, InnerFocusText
-	jmp StdBattleTextbox
+	ld hl, UnshakenBattleText
+	call StdBattleTextbox
+	showdefensiveability UnshakenText
+	ret
 
-INCLUDE "data/abilities/inner_focus_mons.asm"
+UnshakenText: db "Unshaken@"
+INCLUDE "data/abilities/unshaken_mons.asm"
 
 FlinchTarget:
 	farcall BattleFlinchAnimation

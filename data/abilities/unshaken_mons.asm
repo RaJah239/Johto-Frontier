@@ -1,6 +1,6 @@
 ; List of all Pokemon that can't be flinched
 
-InnerFocusPokemon:
+UnshakenPokemon:
 ;    db ZUBAT
 ;    db GOLBAT
 ;    db CROBAT

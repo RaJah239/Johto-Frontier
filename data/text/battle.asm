@@ -79,11 +79,10 @@ AllureText:
 	line "Allure activated!"
 	prompt
 
-InnerFocusText:
-	text "<TARGET>'s"
-	line "Inner Focus barred"
-	cont "flinching!"
-	prompt
+UnshakenBattleText:
+	text "<TARGET>"
+	line "can't flinch!"
+	done
 
 SerenityText:
 	text "<TARGET> is"
