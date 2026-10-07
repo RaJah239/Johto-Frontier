@@ -7,7 +7,7 @@ CheckBoostingAbilities:
 	call HandleMultiscale
 	call HandleThickFat
 	call HandleSolarPowerBoost
-	call HandleSteelWorker
+	call HandleIronArm
 	call HandleMentalFocus
 	call HandleRainSurge
 	call HandlePillowFort
@@ -212,9 +212,9 @@ HandleSolarPowerBoost:
 SolarPowerText: db "SolarPower@"
 INCLUDE "data/abilities/solar_power_mons.asm"
 
-HandleSteelWorker:
+HandleIronArm:
 	call GetCurrentMon
-	ld hl, SteelWorkerPokemon
+	ld hl, IronArmPokemon
 	call IsInByteArray
 	ret nc
 
@@ -223,9 +223,11 @@ HandleSteelWorker:
 	and TYPE_MASK
 	cp STEEL
 	ret nz
+	ShowGenericAbilityPopup EVENT_IRON_ARM_PLAYER, EVENT_IRON_ARM_FOE, IronArmText
 	jmp FiftyPercentBoost
 
-INCLUDE "data/abilities/steel_worker_mons.asm"
+IronArmText: db "Iron Arm@"
+INCLUDE "data/abilities/iron_arm_mons.asm"
 
 HandleMentalFocus:
 	call GetCurrentMon
