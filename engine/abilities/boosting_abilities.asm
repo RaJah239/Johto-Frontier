@@ -262,8 +262,10 @@ HandleRainSurge:
 	call GetBattleVar
 	cp SPECIAL
 	ret c
+	ShowGenericAbilityPopup EVENT_RAIN_SURGE_PLAYER, EVENT_RAIN_SURGE_FOE, RainSurgeText
 	jmp FiftyPercentBoost
 
+RainSurgeText: db "Rain Surge@"
 INCLUDE "data/abilities/rain_surge_mons.asm"
 
 HandlePillowFort:
