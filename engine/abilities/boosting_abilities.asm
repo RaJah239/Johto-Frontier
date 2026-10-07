@@ -164,8 +164,10 @@ HandleMultiscale:
 
 	farcall CheckOpponentFullHP
 	ret nz
+	ShowGenericAbilityPopup EVENT_MULTISCALE_PLAYER, EVENT_MULTISCALE_FOE, MultiscaleText
 	jmp FiftyPercentNerf
 
+MultiscaleText: db "Multiscale@"
 INCLUDE "data/abilities/multiscale_mons.asm"
 
 HandleThickFat:
