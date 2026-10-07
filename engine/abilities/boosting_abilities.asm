@@ -392,7 +392,7 @@ HandleStrongJaw:
 	call IsInByteArray
 	ret nc
 	ShowGenericAbilityPopup EVENT_STRONG_JAW_PLAYER, EVENT_STRONG_JAW_FOE, StrongJawText
-	jr FiftyPercentBoost
+	jmp FiftyPercentBoost
 
 StrongJawText: db "Strong Jaw@"
 INCLUDE "data/abilities/strong_jaw_mons.asm"
@@ -402,9 +402,10 @@ HandleHugePower:
 	ld hl, HugePowerPokemon
 	call IsInByteArray
 	ret nc
-
+	ShowGenericAbilityPopup EVENT_HUGE_POWER_PLAYER, EVENT_HUGE_POWER_FOE, HugePowerText
 	jr HundredPercentBoost
 
+HugePowerText: db "Huge Power@"
 INCLUDE "data/abilities/huge_power_mons.asm"
 
 TwentyPercentNerf:
