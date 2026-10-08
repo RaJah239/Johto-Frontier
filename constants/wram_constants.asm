@@ -106,6 +106,7 @@ DEF NUM_FRAMES EQU const_value
 	const TURBO_B_BUTTON ; 4
 	const NO_MUSIC ; 5
 	const MON_CRIES ; 6
+	const SHINY_ESCAPE ; 7
 
 ; wOptions4::
 	const_def

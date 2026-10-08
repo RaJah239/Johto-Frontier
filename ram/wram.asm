@@ -1877,6 +1877,7 @@ wOptions3::
 ; bit 4: turbo b
 ; bit 5: music off/on
 ; bit 6: mon cries on/off
+; bit 7: shiny escape
 	db
 
 wOptions4::

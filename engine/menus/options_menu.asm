@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 24
+DEF NUM_OPTIONS EQU 25
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -104,6 +104,7 @@ OptionsMenu_DrawLabels:
 	dw .QuickNurse
 	dw .IntrosOutros
 	dw .MonCries
+	dw .ShinyEscape
 	dw .RematchPrompt
 	dw .PokePics
 	dw .FieldActions
@@ -131,6 +132,7 @@ OptionsMenu_DrawLabels:
 .QuickNurse:      db "#mon Center@"
 .IntrosOutros:    db "Intros & Outros@"
 .MonCries:        db "#mon Cries@"
+.ShinyEscape:     db "Shiny Escape@"
 .RematchPrompt:   db "Rematch Prompt@"
 .PokePics:        db "OW #pics@"
 .FieldActions:    db "Field Actions@"
@@ -183,6 +185,7 @@ GetOptionPointer:
 	dw Options_QuickNurse
 	dw Options_IntrosOutros
 	dw Options_MonCries
+	dw Options_ShinyEscape
 	dw Options_RematchPrompt
 	dw Options_Pokepics
 	dw Options_FieldActions
@@ -591,6 +594,43 @@ Options_MinimalDialogue:
 
 .Normal:   db "Normal @"
 .Minimum:  db "Minimal@"
+
+Options_ShinyEscape:
+	ld hl, wOptions4
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit SHINY_ESCAPE, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+ 
+ .LeftPressed:
+	bit SHINY_ESCAPE, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+ 
+ .NonePressed:
+	bit SHINY_ESCAPE, [hl]
+	jr nz, .ToggleOn
+ 
+ .ToggleOff:
+	res SHINY_ESCAPE, [hl]
+	ld de, .On
+	jr .Display
+ 
+ .ToggleOn:
+	set SHINY_ESCAPE, [hl]
+	ld de, .Off
+ .Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.On:  db "On @"
+.Off: db "Off@"
 
 Options_IntrosOutros:
 	ld hl, wOptions4
@@ -1421,6 +1461,7 @@ OptionsMenu_DrawDescription:
 	dw .DescQuickNurse
 	dw .DescIntrosOutros
 	dw .DescMonCries
+	dw .DescShinyEscape
 	dw .DescRematchPrompt
 	dw .DescPokepics
 	dw .DescFieldActions
@@ -1447,6 +1488,7 @@ OptionsMenu_DrawDescription:
 .DescQuickNurse:      db "#mon Center<LF>fast or slow heal.@"
 .DescIntrosOutros:    db "Encounter & Battle<LF>intros & outros.@"
 .DescMonCries:        db "#mon cries in<LF>battles?@"
+.DescShinyEscape:     db "Run away from<LF>shiny #mon?@"
 .DescRematchPrompt:   db "Which comes first:<LF>'Yes' or 'No'.@"
 .DescPokepics:        db "View overworld<LF>#pics?@"
 .DescFieldActions:    db "Normal or Fast<LF>Field Actions.@"
