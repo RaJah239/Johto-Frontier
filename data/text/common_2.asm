@@ -664,7 +664,7 @@ Text_BattleFoeEffectActivate::
 
 _BattleStatSharplyFellText::
 	text_pause
-	text "<SCROLL>sharply fell!"
+	text "<SCROLL>plummeted!"
 	prompt
 
 _BattleStatFellText::
