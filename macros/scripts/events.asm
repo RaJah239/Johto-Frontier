@@ -1109,6 +1109,11 @@ MACRO isfieldactionssettoquick
 	db isfieldactionssettoquick_command
 ENDM
 
+	const ispokepicsonoroff_command ; $ad
+MACRO ispokepicsonoroff
+	db ispokepicsonoroff_command
+ENDM
+
 	const nooryes_command ; $ae
 MACRO nooryes
 	db nooryes_command

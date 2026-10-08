@@ -246,7 +246,7 @@ Route11TrainerTipsText:
 Route11Miltank:
 	setval MILTANK
 	special SetMonAsSeen
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic MILTANK

@@ -69,7 +69,7 @@ MoomooScript:
 	iftrue .HappyCow
 	setval MILTANK
 	special SetMonAsSeen
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis1
 	reanchormap
 	pokepic MILTANK
@@ -155,7 +155,7 @@ MoomooScript:
 		done
 
 .HappyCow:
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis2
 	reanchormap
 	pokepic MILTANK

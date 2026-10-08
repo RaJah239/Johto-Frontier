@@ -171,7 +171,7 @@ NurseJoyTraininCooltrainerFText:
 NurseJoyTrainingBlisseyScript:
 	setval BLISSEY
 	special SetMonAsSeen
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic BLISSEY

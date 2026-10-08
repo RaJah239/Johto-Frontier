@@ -36,7 +36,7 @@ BlackthornDragonSpeechHouseGrannyText:
 BlackthornDragonSpeechHouseCharmanderScript:
 	setval CHARMANDER
 	special SetMonAsSeen
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic CHARMANDER

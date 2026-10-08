@@ -373,7 +373,7 @@ RadioTowerBuenaPrizeReceptionistScript:
 RadioTower2FMarillScript:
 	setval MARILL
 	special SetMonAsSeen
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic MARILL

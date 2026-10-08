@@ -69,7 +69,7 @@ RaffleManNPCScript:
 	end
 
 SlowpokeScript:
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic SLOWPOKE

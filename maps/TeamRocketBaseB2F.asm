@@ -29,7 +29,7 @@ TeamRocketBaseB2F_MapScripts:
 	def_callbacks
 
 RocketElectrode:
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic ELECTRODE

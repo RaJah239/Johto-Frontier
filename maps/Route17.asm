@@ -282,7 +282,7 @@ Route17SignText:
 	done
 
 Route17StationaryRaikouScript:
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic RAIKOU

@@ -260,7 +260,7 @@ PlayerWalksAroundFountain:
 	step_end
 
 NationalParkGholdengoScript:
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic GHOLDENGO
@@ -344,7 +344,7 @@ NationalParkTrainerTipsText:
 NationalParkMeowthScript:
 	setval MEOWTH
 	special SetMonAsSeen
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic MEOWTH

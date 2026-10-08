@@ -315,7 +315,7 @@ Script_CutFromMenu:
 	special UpdateTimePals
 
 Script_Cut:
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skip
 	writetext UseCutText
 	refreshmap
@@ -441,7 +441,7 @@ UseFlash:
 
 Script_UseFlash:
 	reanchormap
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skip
 	special UpdateTimePals
 	reanchormap
@@ -712,7 +712,7 @@ endc
 	ret
 
 AskSurfScript:
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue AutoSurfScript
 	opentext
 	checkevent EVENT_PIKA_SURF
@@ -796,7 +796,7 @@ FlyFunction:
 	ret
 
 .FlyScript:
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skip
 	refreshmap
 	callasm HideSprites
@@ -930,7 +930,7 @@ Script_CantDoWaterfall:
 	text_end
 
 Script_AskWaterfall:
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue Script_AutoWaterfall
 	opentext
 	writetext .AskWaterfallText
@@ -1046,7 +1046,7 @@ EscapeRopeOrDig:
 	sjump .UsedDigOrEscapeRopeScript
 
 .UsedDigScript:
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skip
 	refreshmap
 	special UpdateTimePals
@@ -1131,7 +1131,7 @@ TeleportFunction:
 	text_end
 
 .TeleportScript:
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skip
 	refreshmap
 	special UpdateTimePals
@@ -1192,7 +1192,7 @@ Script_StrengthFromMenu:
 
 Script_UsedStrength:
 	callasm SetStrengthFlag
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skip
 	writetext .UseStrengthText
 	waitbutton
@@ -1534,7 +1534,7 @@ TryHeadbuttOW::
 	ret
 
 AskHeadbuttScript:
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue AutoHeadbuttScript
 	opentext
 	writetext AskHeadbuttText
@@ -1633,7 +1633,7 @@ AskRockSmashScript:
 	callasm HasRockSmash
 	ifequal 1, .no
 
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue AutoRockSmashScript
 	opentext
 	writetext AskRockSmashText

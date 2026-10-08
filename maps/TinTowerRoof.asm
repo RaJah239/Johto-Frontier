@@ -28,7 +28,7 @@ TinTowerRoofHoOhCallback:
 
 ; TODOTEXT map callback to prevent roof access unless the player has silver wing
 TinTowerHoOhScript:
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic HO_OH

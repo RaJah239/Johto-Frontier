@@ -224,7 +224,7 @@ IndigoPlateauPokecenter1FCooltrainerMText:
 NatuScript:
 	setval NATU
 	special SetMonAsSeen
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic NATU

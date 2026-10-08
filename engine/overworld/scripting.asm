@@ -261,6 +261,7 @@ ScriptCommandTable:
 	dw Script_writetextcheckdialogue	 ; ab
 	dw Script_isquicknurseset            ; ac
 	dw Script_isfieldactionssettoquick   ; ad
+	dw Script_ispokepicsonoroff
 	dw Script_nooryes                    ; ae
 	dw Script_iftrue_jumptextfaceplayer  ;
 	dw Script_jumpthistextfaceplayer     ;
@@ -353,6 +354,17 @@ Script_isfieldactionssettoquick:
 	ld a, [wOptions3]
 	bit FIELD_ACTIONS, a
 	ret z ; if z=0 we're in normal mode, therefore return since we already wrote 0 to wScriptVar (False)
+	xor a
+	inc a
+	ld [wScriptVar], a
+	ret
+
+Script_ispokepicsonoroff:
+	xor a
+	ld [wScriptVar], a
+	ld a, [wOptions4]
+	bit POKE_PICS, a
+	ret z
 	xor a
 	inc a
 	ld [wScriptVar], a

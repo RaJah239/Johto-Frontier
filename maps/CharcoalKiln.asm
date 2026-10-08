@@ -81,7 +81,7 @@ CharcoalKilnApprentice:
 CharcoalKilnScyther:
 	setval SCYTHER
 	special SetMonAsSeen
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic SCYTHER

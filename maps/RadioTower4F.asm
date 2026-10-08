@@ -58,7 +58,7 @@ RadioTower4FDJMaryScript:
 RadioTower4FMeowth:
 	setval MEOWTH
 	special SetMonAsSeen
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic MEOWTH

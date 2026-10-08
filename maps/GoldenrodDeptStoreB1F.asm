@@ -65,7 +65,7 @@ GoldenrodDeptStoreB1FBlackBelt3Text:
 GoldenrodDeptStoreB1FHariyamaScript:
 	setval HARIYAMA
 	special SetMonAsSeen
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic HARIYAMA

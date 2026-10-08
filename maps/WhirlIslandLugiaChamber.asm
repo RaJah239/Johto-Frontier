@@ -19,7 +19,7 @@ WhirlIslandLugiaChamber_MapScripts:
 
 ; TODOTEXT map callback to prevent the door from opening unless the player has silver wing
 WhirlIslandLugiaScript:
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic LUGIA

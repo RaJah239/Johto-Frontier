@@ -229,7 +229,7 @@ MagikarpHouseSignText:
 	done
 
 RedGyaradosScript:
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic GYARADOS

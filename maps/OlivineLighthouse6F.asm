@@ -24,7 +24,7 @@ OlivineLighthouse6F_MapScripts:
 OlivineLighthouseAmphy:
 	setval AMPHAROS
 	special SetMonAsSeen
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic AMPHAROS

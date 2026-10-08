@@ -40,7 +40,7 @@ VioletNicknameSpeechHouseTeacherText:
 VioletNicknameSpeechHouseBirdScript:
 	setval PIDGEY
 	special SetMonAsSeen
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic PIDGEY

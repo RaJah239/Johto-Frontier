@@ -307,7 +307,7 @@ DanceTheaterFancyPanel:
 DanceTheaterRhydonScript:
 	setval RHYDON
 	special SetMonAsSeen
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic RHYDON

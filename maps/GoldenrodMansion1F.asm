@@ -107,7 +107,7 @@ CeladonMansionManagersSuiteSign:
 GoldenrodMansion1FGrowlithe:
 	setval GROWLITHE
 	special SetMonAsSeen
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic GROWLITHE
@@ -122,7 +122,7 @@ GoldenrodMansion1FGrowlithe:
 GoldenrodMansion1FClefairy:
 	setval CLEFAIRY
 	special SetMonAsSeen
-	isfieldactionssettoquick
+	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
 	pokepic CLEFAIRY
