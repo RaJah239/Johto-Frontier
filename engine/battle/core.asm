@@ -7001,7 +7001,6 @@ GiveExperiencePoints:
 	jr nz, .ExpShareON
 
 	; Skip regular exp text if fast battles is on
-	call CheckStatusText
 	ld a, [wOptions4]
 	bit EXP_N_LV_UP, a
 	jr nz, .ExpShareON

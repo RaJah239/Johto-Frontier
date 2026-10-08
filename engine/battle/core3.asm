@@ -489,7 +489,8 @@ HandleWeather:
 	jr nz, .continues
 
 ; ended
-	call CheckStatusText
+	ld a, [wOptions4]
+	bit WEATHER_TEXT, a
 	jr nz, .skip_weather_end_text
 
 	ld hl, .WeatherEndedMessages
@@ -501,7 +502,8 @@ HandleWeather:
 	ret
 
 .continues
-	call CheckStatusText
+	ld a, [wOptions4]
+	bit WEATHER_TEXT, a
 	jr nz, .skip_weather_text
 
 	ld hl, .WeatherMessages

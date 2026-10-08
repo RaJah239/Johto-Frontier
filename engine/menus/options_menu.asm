@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 27
+DEF NUM_OPTIONS EQU 28
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -102,6 +102,7 @@ OptionsMenu_DrawLabels:
 	dw .AutoBicycle
 	dw .ScaledExp
 	dw .QuickNurse
+	dw .WeatherText
 	dw .IntrosOutros
 	dw .MonCries
 	dw .ShinyEscape
@@ -132,6 +133,7 @@ OptionsMenu_DrawLabels:
 .ScaledExp:       db "Experience Gain@"
 .Frame:           db "Frame   :Type@"
 .QuickNurse:      db "#mon Center@"
+.WeatherText:     db "Weather Text@"
 .IntrosOutros:    db "Intros & Outros@"
 .MonCries:        db "#mon Cries@"
 .ShinyEscape:     db "Shiny Escape@"
@@ -187,6 +189,7 @@ GetOptionPointer:
 	dw Options_AutoBicycle
 	dw Options_Scaled_Exp
 	dw Options_QuickNurse
+	dw Options_WeatherText
 	dw Options_IntrosOutros
 	dw Options_MonCries
 	dw Options_ShinyEscape
@@ -628,6 +631,43 @@ Options_ShinyEscape:
  
  .ToggleOn:
 	set SHINY_ESCAPE, [hl]
+	ld de, .Off
+ .Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.On:  db "On @"
+.Off: db "Off@"
+
+Options_WeatherText:
+	ld hl, wOptions4
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit WEATHER_TEXT, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+ 
+ .LeftPressed:
+	bit WEATHER_TEXT, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+ 
+ .NonePressed:
+	bit WEATHER_TEXT, [hl]
+	jr nz, .ToggleOn
+ 
+ .ToggleOff:
+	res WEATHER_TEXT, [hl]
+	ld de, .On
+	jr .Display
+ 
+ .ToggleOn:
+	set WEATHER_TEXT, [hl]
 	ld de, .Off
  .Display:
 	call OptionsMenu_PlaceValue
@@ -1539,6 +1579,7 @@ OptionsMenu_DrawDescription:
 	dw .DescAutoBicycle
 	dw .DescScaledExp
 	dw .DescQuickNurse
+	dw .DescWeatherText
 	dw .DescIntrosOutros
 	dw .DescMonCries
 	dw .DescShinyEscape
@@ -1568,6 +1609,7 @@ OptionsMenu_DrawDescription:
 .DescAutoBicycle:     db "Get on the Bicycle<LF>outdoors.@"
 .DescScaledExp:       db "Normal, Scaled or<LF>Zero experience.@"
 .DescQuickNurse:      db "#mon Center<LF>fast or slow heal.@"
+.DescWeatherText:     db "Weather lingers or<LF>ends text.@"
 .DescIntrosOutros:    db "Encounter & Battle<LF>intros & outros.@"
 .DescMonCries:        db "#mon cries in<LF>battles?@"
 .DescShinyEscape:     db "Run away from<LF>shiny #mon?@"

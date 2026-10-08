@@ -1886,6 +1886,7 @@ wOptions4::
 ; bit 2: intros_outros
 ; bit 3: exp_n_lv_up
 ; bit 4: effective_text
+; bit 5: weather text
 	db
 
 	ds 1
