@@ -105,10 +105,10 @@ OptionsMenu_DrawLabels:
 	dw .WeatherText
 	dw .IntrosOutros
 	dw .MonCries
-	dw .ShinyEscape
 	dw .RematchPrompt
 	dw .PokePics
 	dw .FieldActions
+	dw .StatSkipMessage
 	dw .EffectiveText
 	dw .StatusText
 	dw .FieldHazardsText
@@ -138,10 +138,10 @@ OptionsMenu_DrawLabels:
 .WeatherText:     db "Weather Text@"
 .IntrosOutros:    db "Intros & Outros@"
 .MonCries:        db "#mon Cries@"
-.ShinyEscape:     db "Shiny Escape@"
 .RematchPrompt:   db "Rematch Prompt@"
 .PokePics:        db "OW #pics@"
 .FieldActions:    db "Field Actions@"
+.StatSkipMessage: db "Stat Messages@"
 .EffectiveText:   db "Effective Text@"
 .StatusText:      db "Status Text@"
 .FieldHazardsText:db "Field Hazards@"
@@ -196,10 +196,10 @@ GetOptionPointer:
 	dw Options_WeatherText
 	dw Options_IntrosOutros
 	dw Options_MonCries
-	dw Options_ShinyEscape
 	dw Options_RematchPrompt
 	dw Options_Pokepics
 	dw Options_FieldActions
+	dw Options_StatSkipMessages
 	dw Options_EffectiveText
 	dw Options_StatusText
 	dw Options_FieldHazardsText
@@ -610,33 +610,33 @@ Options_MinimalDialogue:
 .Normal:   db "Normal @"
 .Minimum:  db "Minimal@"
 
-Options_ShinyEscape:
-	ld hl, wOptions4
+Options_StatSkipMessages:
+	ld hl, wOptions3
 	ldh a, [hJoyPressed]
 	bit D_LEFT_F, a
 	jr nz, .LeftPressed
 	bit D_RIGHT_F, a
 	jr z, .NonePressed
-	bit SHINY_ESCAPE, [hl]
+	bit STAT_MESSAGES, [hl]
 	jr nz, .ToggleOff
 	jr .ToggleOn
  
  .LeftPressed:
-	bit SHINY_ESCAPE, [hl]
+	bit STAT_MESSAGES, [hl]
 	jr z, .ToggleOn
 	jr .ToggleOff
  
  .NonePressed:
-	bit SHINY_ESCAPE, [hl]
+	bit STAT_MESSAGES, [hl]
 	jr nz, .ToggleOn
  
  .ToggleOff:
-	res SHINY_ESCAPE, [hl]
+	res STAT_MESSAGES, [hl]
 	ld de, .On
 	jr .Display
  
  .ToggleOn:
-	set SHINY_ESCAPE, [hl]
+	set STAT_MESSAGES, [hl]
 	ld de, .Off
  .Display:
 	call OptionsMenu_PlaceValue
@@ -644,8 +644,8 @@ Options_ShinyEscape:
 	and a
 	ret
 
-.On:  db "On @"
-.Off: db "Off@"
+.On:  db "Show@"
+.Off: db "Skip@"
 
 Options_Nicknaming:
 	ld hl, wOptions4
@@ -1662,10 +1662,10 @@ OptionsMenu_DrawDescription:
 	dw .DescWeatherText
 	dw .DescIntrosOutros
 	dw .DescMonCries
-	dw .DescShinyEscape
 	dw .DescRematchPrompt
 	dw .DescPokepics
 	dw .DescFieldActions
+	dw .DescStatSkipMessages
 	dw .DescEffectiveText
 	dw .DescStatusText
 	dw .DescFieldHazardsText
@@ -1694,10 +1694,10 @@ OptionsMenu_DrawDescription:
 .DescWeatherText:     db "Weather lingers or<LF>ends text.@"
 .DescIntrosOutros:    db "Encounter & Battle<LF>intros & outros.@"
 .DescMonCries:        db "#mon cries in<LF>battles?@"
-.DescShinyEscape:     db "Run away from<LF>shiny #mon?@"
 .DescRematchPrompt:   db "Which comes first:<LF>'Yes' or 'No'.@"
 .DescPokepics:        db "View overworld<LF>#pics?@"
 .DescFieldActions:    db "Normal or Fast<LF>Field Actions.@"
+.DescStatSkipMessages:db "Stat Up or Down<LF>messages.@"
 .DescEffectiveText:   db "Show Effectiveness<LF>text or not.@"
 .DescStatusText:      db "Status text in<LF>battles.@"
 .DescFieldHazardsText:db "S.Rock, Spikes and<LF>T.Spikes text.@"

@@ -4745,6 +4745,10 @@ BattleCommand_StatDownMessage:
 	call BattleCommand_SwitchTurn
 
 .skip_stat_down_anim
+	ld a, [wOptions3]
+	bit STAT_MESSAGES, a
+	ret nz
+
 	ld a, [wLoweredStat]
 	and $f
 	ld b, a
@@ -4912,6 +4916,10 @@ BattleCommand_StatUpMessage:
 	farcall Call_PlayBattleAnim	
 
 .skip_stat_up_anim
+	ld a, [wOptions3]
+	bit STAT_MESSAGES, a
+	ret nz
+
 	ld a, [wLoweredStat]
 	and $f
 	ld b, a
