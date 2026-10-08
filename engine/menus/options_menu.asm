@@ -100,29 +100,29 @@ OptionsMenu_DrawLabels:
 	dw .Sound
 	dw .RunningShoes
 	dw .AutoBicycle
-	dw .ScaledExp
+	dw .MinimalDialogue
 	dw .QuickNurse
-	dw .WeatherText
+	dw .FieldActions
+	dw .PokePics
+	dw .BattleSpeed
 	dw .IntrosOutros
 	dw .MonCries
-	dw .RematchPrompt
-	dw .PokePics
-	dw .FieldActions
-	dw .StatSkipMessage
+	dw .WeatherText
+	dw .AbilityBanners
+	dw .StatSkipMessages
 	dw .EffectiveText
 	dw .StatusText
 	dw .FieldHazardsText
-	dw .BattleSpeed
-	dw .AbilityBanners
+	dw .ScaledExp
 	dw .ExpShare
 	dw .ExpNLvUp
 	dw .Nicknaming
-	dw .MinimalDialogue
+	dw .RematchPrompt
+	dw .HardMode
 	dw .TurboAButton
 	dw .TurboBButton
 	dw .QuickSave
 	dw .FastBoot
-	dw .HardMode
 	dw .Frame
 	dw .Done
 	assert_table_length NUM_OPTIONS
@@ -132,30 +132,30 @@ OptionsMenu_DrawLabels:
 .Sound:           db "Audio Mode@"
 .RunningShoes:    db "Running Shoes@"
 .AutoBicycle:     db "Auto Bicycle@"
-.ScaledExp:       db "Experience Gain@"
-.Frame:           db "Frame   :Type@"
+.MinimalDialogue: db "Dialogue/Text@"
 .QuickNurse:      db "#mon Center@"
-.WeatherText:     db "Weather Text@"
+.FieldActions:    db "Field Actions@"
+.PokePics:        db "#pics@"
+.BattleSpeed:     db "Battle Speed@"
 .IntrosOutros:    db "Intros & Outros@"
 .MonCries:        db "#mon Cries@"
-.RematchPrompt:   db "Rematch Prompt@"
-.PokePics:        db "OW #pics@"
-.FieldActions:    db "Field Actions@"
-.StatSkipMessage: db "Stat Messages@"
+.WeatherText:     db "Weather Text@"
+.AbilityBanners:  db "Ability Banners@"
+.StatSkipMessages:db "Stat Messages@"
 .EffectiveText:   db "Effective Text@"
 .StatusText:      db "Status Text@"
 .FieldHazardsText:db "Field Hazards@"
-.BattleSpeed:     db "Battle Speed@"
-.AbilityBanners:  db "Ability Banners@"
+.ScaledExp:       db "Experience Gain@"
 .ExpShare:        db "Exp.Share@"
 .ExpNLvUp:        db "Exp & Level Up@"
 .Nicknaming:      db "Nicknaming@"
-.MinimalDialogue: db "Dialogue/Text@"
+.RematchPrompt:   db "Rematch Prompt@"
+.HardMode:        db "Hard Mode@"
 .TurboAButton:    db "Turbo A Button@"
 .TurboBButton:    db "Turbo B Button@"
 .QuickSave:       db "Quick Save@"
 .FastBoot:        db "Booting Options@"
-.HardMode:        db "Hard Mode@"
+.Frame:           db "Frame   :Type@"
 .Done:            db "Done@"
 
 OptionsMenu_LoadOptions:
@@ -191,29 +191,29 @@ GetOptionPointer:
 	dw Options_Sound
 	dw Options_RunningShoes
 	dw Options_AutoBicycle
-	dw Options_Scaled_Exp
+	dw Options_MinimalDialogue
 	dw Options_QuickNurse
-	dw Options_WeatherText
+	dw Options_FieldActions
+	dw Options_Pokepics
+	dw Options_BattleSpeed
 	dw Options_IntrosOutros
 	dw Options_MonCries
-	dw Options_RematchPrompt
-	dw Options_Pokepics
-	dw Options_FieldActions
+	dw Options_WeatherText
+	dw Options_AbilityBanners
 	dw Options_StatSkipMessages
 	dw Options_EffectiveText
 	dw Options_StatusText
 	dw Options_FieldHazardsText
-	dw Options_BattleSpeed
-	dw Options_AbilityBanners
+	dw Options_Scaled_Exp
 	dw Options_ExpShare
 	dw Options_ExpNLvUp
 	dw Options_Nicknaming
-	dw Options_MinimalDialogue
+	dw Options_RematchPrompt
+	dw Options_HardMode
 	dw Options_TurboAButton
 	dw Options_TurboBButton
 	dw Options_QuickSave
 	dw Options_FastBoot
-	dw Options_HardMode
 	dw Options_Frame
 	dw Options_Done
 	assert_table_length NUM_OPTIONS
@@ -565,7 +565,7 @@ Options_Sound:
 
 .Mono:   db "Mono  @"
 .Stereo: db "Stereo@"
-.No:     db "None  @"
+.No:     db "Off   @"
 
 Options_MinimalDialogue:
 	ld hl, wOptions2
@@ -829,8 +829,8 @@ Options_ExpNLvUp:
 	and a
 	ret
 
-.On:  db "Enabled @"
-.Off: db "Disabled@"
+.On:  db "Show@"
+.Off: db "Skip@"
 
 Options_IntrosOutros:
 	ld hl, wOptions4
@@ -1657,56 +1657,56 @@ OptionsMenu_DrawDescription:
 	dw .DescSound
 	dw .DescRunningShoes
 	dw .DescAutoBicycle
-	dw .DescScaledExp
+	dw .DescMinimalDialogue
 	dw .DescQuickNurse
-	dw .DescWeatherText
+	dw .DescFieldActions
+	dw .DescPokepics
+	dw .DescBattleSpeed
 	dw .DescIntrosOutros
 	dw .DescMonCries
-	dw .DescRematchPrompt
-	dw .DescPokepics
-	dw .DescFieldActions
+	dw .DescWeatherText
+	dw .DescAbilityBanners
 	dw .DescStatSkipMessages
 	dw .DescEffectiveText
 	dw .DescStatusText
 	dw .DescFieldHazardsText
-	dw .DescBattleSpeed
-	dw .DescAbilityBanners
+	dw .DescScaledExp
 	dw .DescExpShare
 	dw .DescExpNLvUp
 	dw .DescNicknaming
-	dw .DescMinimalDialogue
+	dw .DescRematchPrompt
+	dw .DescHardMode
 	dw .DescTurboAButton
 	dw .DescTurboBButton
 	dw .DescQuickSave
 	dw .DescFastBoot
-	dw .DescHardMode
 	dw .DescFrame
 	dw .DescDone
 	assert_table_length NUM_OPTIONS
 
-.DescTextSpeed:       db "Adjust your text<LF>speed.@"
+.DescTextSpeed:       db "Adjust the text<LF>speed.@"
 .DescBattleScene:     db "Turn On or Off<LF>Battle Animations.@"
 .DescSound:           db "Music/BGB Audio:<LF>Mono, Stereo, Off.@"
-.DescRunningShoes:    db "Set default to<LF>walk or run.@"
-.DescAutoBicycle:     db "Get on the Bicycle<LF>outdoors.@"
+.DescRunningShoes:    db "Set default to<LF>run or walk.@"
+.DescAutoBicycle:     db "Automount Bicycle<LF>when outdoors.@"
 .DescScaledExp:       db "Normal, Scaled or<LF>Zero experience.@"
 .DescQuickNurse:      db "#mon Center<LF>fast or slow heal.@"
 .DescWeatherText:     db "Weather lingers or<LF>ends text.@"
 .DescIntrosOutros:    db "Encounter & Battle<LF>intros & outros.@"
-.DescMonCries:        db "#mon cries in<LF>battles?@"
+.DescMonCries:        db "#mon cries in<LF>battles.@"
 .DescRematchPrompt:   db "Which comes first:<LF>'Yes' or 'No'.@"
-.DescPokepics:        db "View overworld<LF>#pics?@"
-.DescFieldActions:    db "Normal or Fast<LF>Field Actions.@"
+.DescPokepics:        db "Viewing overworld<LF>#pics.@"
+.DescFieldActions:    db "Normal or Quick<LF>Field Actions.@"
 .DescStatSkipMessages:db "Stat Up or Down<LF>messages.@"
 .DescEffectiveText:   db "Show Effectiveness<LF>text or not.@"
 .DescStatusText:      db "Status text in<LF>battles.@"
 .DescFieldHazardsText:db "S.Rock, Spikes and<LF>T.Spikes text.@"
 .DescBattleSpeed:     db "Play battles at<LF>Normal or Double.@"
-.DescAbilityBanners:  db "Display ability<LF>activation box.@"
+.DescAbilityBanners:  db "Display ability<LF>activation banner.@"
 .DescExpShare:        db "Share Experience<LF>with the party.@"
 .DescExpNLvUp:        db "EXP Gain, Level Up<LF>and Stat Gains.@"
-.DescNicknaming:      db "Nickname caught<LF>caught #mon.@"
-.DescMinimalDialogue: db "Reduce all NPC<LF>text or not.@"
+.DescNicknaming:      db "Nickname hatched<LF>or caught #mon.@"
+.DescMinimalDialogue: db "Removes or reduces<LF>all NPC text.@"
 .DescTurboAButton:    db "Hold 'A' briefly<LF>to rapid-fire 'A'.@"
 .DescTurboBButton:    db "Hold 'B' to rapid-<LF>'B'.@"
 .DescQuickSave:       db "Long press 'Start'<LF>to save the game.@"
