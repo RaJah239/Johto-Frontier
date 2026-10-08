@@ -17,11 +17,21 @@ SeenByTrainerScript::
 	; fallthrough
 
 StartBattleWithMapTrainerScript:
+	isdialogueminimal
+	iftrue .skipthis
+
 	opentext
+.skipthis
+	; fallthrough
+
 RematchStartBattleWithMapTrainerScript:
+	isdialogueminimal
+	iftrue .skipthis
+
 	trainertext TRAINERTEXT_SEEN
 	waitbutton
 	closetext
+.skipthis
 	loadtemptrainer
 	startbattle
 	reloadmapafterbattle
