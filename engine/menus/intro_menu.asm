@@ -580,7 +580,6 @@ if DEF(_DEBUG)
 
 	ld hl, wOptions3
 	set FIELD_ACTIONS, [hl]
-	set FAST_BATTLES, [hl]
 endc
 
 	farcall InitClock

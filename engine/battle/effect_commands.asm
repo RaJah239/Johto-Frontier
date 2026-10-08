@@ -175,7 +175,7 @@ BattleCommand_CheckTurn:
 	jr .not_asleep
 
 .fast_asleep
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .skip_fast_asleep_text
 
 	ld hl, FastAsleepText
@@ -403,7 +403,7 @@ CheckEnemyTurn:
 	jr z, .woke_up
 
 	; skip fast asleep text
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .skip_fast_asleep_text
 
 	ld hl, FastAsleepText
@@ -2461,7 +2461,7 @@ BattleCommand_SuperEffectiveLoopText:
 
 BattleCommand_SuperEffectiveText:
 	; skip effectiveness text if fast battles is on
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	ret nz
 
 	ld a, [wTypeModifier]
@@ -5377,7 +5377,8 @@ BattleCommand_ForceSwitch:
 	callfar ForceEnemySwitch
 
 	; skip dragged out text
-	call CheckIfFastBattlesIsOn
+	ld a, [wOptions4]
+	bit INTRO_OUTROS, a
 	jr nz, .skip_dragged_out_text
 
 	ld hl, DraggedOutText
@@ -5479,7 +5480,7 @@ BattleCommand_ForceSwitch:
 	call CallBattleCore
 
 	; skip dragged out text
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .skip_dragged_out_text2
 
 	ld hl, DraggedOutText
@@ -5985,7 +5986,7 @@ BattleCommand_Recoil:
 	call RefreshBattleHuds
 
 	; skip recoil text
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	ret nz
 
 	ld hl, RecoilText
@@ -6308,7 +6309,7 @@ BattleCommand_Heal:
 	call RefreshBattleHuds
 
 	; skip regained health text
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	ret nz
 
 	ld hl, RegainedHealthText
@@ -6318,7 +6319,7 @@ BattleCommand_Heal:
 	call AnimateFailedMove
 
 	; skip health is full text
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	ret nz
 
 	ld hl, HPIsFullText
@@ -6651,7 +6652,7 @@ BattleCommand_WeatherBasedHeal:
 	call UpdateUserInParty
 
 	; skip regained health text
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	ret nz
 
 ; 'regained health!'
@@ -6662,7 +6663,7 @@ BattleCommand_WeatherBasedHeal:
 	call AnimateFailedMove
 
 	; skip health is full text
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	ret nz
 
 ; 'hp is full!'

@@ -617,7 +617,7 @@ ENDC
 
 .SkipPartyMonFriendBall:
 	; skip nicknaming caught mon
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jmp nz, .return_from_capture
 
 	ld hl, AskGiveNicknameText
@@ -677,7 +677,7 @@ ENDC
 
 .SkipBoxMonFriendBall:
 	; skip nicknaming caught mon if it goes to the PC
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .SkipBoxMonNickname
 
 	ld hl, AskGiveNicknameText

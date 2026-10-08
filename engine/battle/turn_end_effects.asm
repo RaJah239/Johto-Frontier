@@ -664,7 +664,7 @@ HandleFlameOrb:
 	ret nc
 	call ClearSprites
 
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .skip
 
 	ld hl, FlameOrbText
@@ -754,7 +754,7 @@ HandleToxicOrb:
 	ret nc
 	call ClearSprites
 
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .skip
 
 	ld hl, ToxicOrbText

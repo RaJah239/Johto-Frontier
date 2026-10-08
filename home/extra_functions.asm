@@ -5,9 +5,9 @@ CheckDialogueMode::
 	bit MINIMAL_DIALOGUE, a
 	ret
 
-CheckIfFastBattlesIsOn::
+CheckStatusText::
 	ld a, [wOptions3]
-	bit FAST_BATTLES, a
+	bit STATUS_TEXT, a
 	ret
 
 CheckIfDoubleBattleSpeed::

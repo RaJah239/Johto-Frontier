@@ -489,7 +489,7 @@ HandleWeather:
 	jr nz, .continues
 
 ; ended
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .skip_weather_end_text
 
 	ld hl, .WeatherEndedMessages
@@ -501,7 +501,7 @@ HandleWeather:
 	ret
 
 .continues
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .skip_weather_text
 
 	ld hl, .WeatherMessages

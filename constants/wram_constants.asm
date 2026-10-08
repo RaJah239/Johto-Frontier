@@ -100,7 +100,7 @@ DEF NUM_FRAMES EQU const_value
 ; wOptions3::
 	const_def
 	const FIELD_ACTIONS ; 0
-	const FAST_BATTLES ; 1
+	const STATUS_TEXT ; 1
 	const TURBO_A_BUTTON ; 2
 	const QUICK_SAVE ; 3
 	const TURBO_B_BUTTON ; 4

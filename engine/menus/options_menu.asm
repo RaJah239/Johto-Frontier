@@ -108,7 +108,7 @@ OptionsMenu_DrawLabels:
 	dw .RematchPrompt
 	dw .PokePics
 	dw .FieldActions
-	dw .FasterBattles
+	dw .StatusText
 	dw .BattleSpeed
 	dw .AbilityBanners
 	dw .ExpShare
@@ -136,7 +136,7 @@ OptionsMenu_DrawLabels:
 .RematchPrompt:   db "Rematch Prompt@"
 .PokePics:        db "OW #pics@"
 .FieldActions:    db "Field Actions@"
-.FasterBattles:   db "Battles@"
+.StatusText:   db "Status Text@"
 .BattleSpeed:     db "Battle Speed@"
 .AbilityBanners:  db "Ability Banners@"
 .ExpShare:        db "Exp.Share@"
@@ -189,7 +189,7 @@ GetOptionPointer:
 	dw Options_RematchPrompt
 	dw Options_Pokepics
 	dw Options_FieldActions
-	dw Options_FasterBattles
+	dw Options_StatusText
 	dw Options_BattleSpeed
 	dw Options_AbilityBanners
 	dw Options_ExpShare
@@ -429,33 +429,33 @@ Options_HardMode:
 .Off: db "Off@"
 .On:  db "On @"
 
-Options_FasterBattles:
+Options_StatusText:
  	ld hl, wOptions3
  	ldh a, [hJoyPressed]
  	bit D_LEFT_F, a
  	jr nz, .LeftPressed
  	bit D_RIGHT_F, a
  	jr z, .NonePressed
- 	bit FAST_BATTLES, [hl]
+ 	bit STATUS_TEXT, [hl]
  	jr nz, .ToggleOff
  	jr .ToggleOn
  
 .LeftPressed:
- 	bit FAST_BATTLES, [hl]
+ 	bit STATUS_TEXT, [hl]
  	jr z, .ToggleOn
  	jr .ToggleOff
  
 .NonePressed:
- 	bit FAST_BATTLES, [hl]
+ 	bit STATUS_TEXT, [hl]
  	jr nz, .ToggleOn
  .ToggleOff:
- 	res FAST_BATTLES, [hl]
- 	ld de, .Off
+ 	res STATUS_TEXT, [hl]
+ 	ld de, .On
  	jr .Display
  
 .ToggleOn:
- 	set FAST_BATTLES, [hl]
- 	ld de, .On
+ 	set STATUS_TEXT, [hl]
+ 	ld de, .Off
  
 .Display:
 	call OptionsMenu_PlaceValue
@@ -463,8 +463,8 @@ Options_FasterBattles:
 	and a
 	ret
 
-.On:  db "Quick @"
-.Off: db "Normal@"
+.On:  db "On @"
+.Off: db "Off@"
 
 Options_Sound:
 	ldh a, [hJoyPressed]
@@ -1465,7 +1465,7 @@ OptionsMenu_DrawDescription:
 	dw .DescRematchPrompt
 	dw .DescPokepics
 	dw .DescFieldActions
-	dw .DescFasterBattles
+	dw .DescStatusText
 	dw .DescBattleSpeed
 	dw .DescAbilityBanners
 	dw .DescExpShare
@@ -1492,7 +1492,7 @@ OptionsMenu_DrawDescription:
 .DescRematchPrompt:   db "Which comes first:<LF>'Yes' or 'No'.@"
 .DescPokepics:        db "View overworld<LF>#pics?@"
 .DescFieldActions:    db "Normal or Fast<LF>Field Actions.@"
-.DescFasterBattles:   db "Reduce the text<LF>in battles.@"
+.DescStatusText:      db "Status text in<LF>battles.@"
 .DescBattleSpeed:     db "Play battles at<LF>Normal or Double.@"
 .DescAbilityBanners:  db "Display ability<LF>activation box.@"
 .DescExpShare:        db "Share Experience<LF>with the party.@"

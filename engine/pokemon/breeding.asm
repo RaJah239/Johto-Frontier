@@ -361,7 +361,7 @@ HatchEggs:
 	ld e, l
 
 	; skip nicknaming hatched mon
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .nonickname
 
 	push de

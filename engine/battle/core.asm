@@ -1129,7 +1129,7 @@ ResidualDamage:
 .got_anim
 
 	; skip status text
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .skip_status_text
 
 	push de
@@ -1192,7 +1192,7 @@ ResidualDamage:
 	ldh [hBGMapMode], a
 	call RestoreHP
 
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .not_seeded
 	ld hl, LeechSeedSapsText
 	call StdBattleTextbox
@@ -3874,7 +3874,7 @@ SpikesDamage:
 	push hl
 	push de
 
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .skip_spikes_text
 
 	ld hl, BattleText_UserHurtBySpikes ; "hurt by SPIKES!"
@@ -3905,7 +3905,7 @@ SpikesDamage:
 	push hl
 	push de
 
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .skip_stealth_rock_text
 
 	ld hl, BattleText_UserHurtByStealthRock
@@ -4004,7 +4004,7 @@ SpikesDamage:
 	call Call_PlayBattleAnim
 	call RefreshBattleHuds
 
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .skip_toxic_spikes_text
 
 	ld hl, WasPoisonedText
@@ -7001,7 +7001,7 @@ GiveExperiencePoints:
 	jr nz, .ExpShareON
 
 	; Skip regular exp text if fast battles is on
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .ExpShareON
 
 	ld hl, Text_MonGainedExpPoint
@@ -7012,7 +7012,7 @@ GiveExperiencePoints:
 	jr nz, .AfterText
 
 	; Skip exp share text if fast battles is on
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .AfterText
 
 	inc a
@@ -7205,7 +7205,7 @@ GiveExperiencePoints:
 	call WaitSFX
 
 	; Skip GrewToLevel text if fast battles is on
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .next
 
 	ld hl, BattleText_StringBuffer1GrewToLevel
@@ -7219,7 +7219,7 @@ GiveExperiencePoints:
 	predef CopyMonToTempMon
 
 	; Skip lv up stat text and textbox if fast battles is on
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .skip
 
 	hlcoord 9, 0
@@ -7464,7 +7464,7 @@ AnimateExpBar:
 	call WaitSFX
 
 	; Skip GrewToLevel text if fast battles is on
-	call CheckIfFastBattlesIsOn
+	call CheckStatusText
 	jr nz, .next2
 
 	ld hl, BattleText_StringBuffer1GrewToLevel
