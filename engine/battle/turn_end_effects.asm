@@ -308,7 +308,8 @@ HandleLeftovers:
 	farcall GetEighthMaxHP
 	farcall SubtractHPFromTarget
 	ld hl, BattleText_TargetHurtByItem
-	jmp StdBattleTextbox
+	call StdBattleTextbox
+	farjp CheckFaint_EnemyThenPlayer
 	
 .check_leftovers
 	cp HELD_LEFTOVERS
