@@ -88,7 +88,6 @@ if DEF(_DEBUG)
 	setflag ENGINE_POKEDEX
 	givemoney YOUR_MONEY, MAX_MONEY
 	; key items
-	giveitem AMBROSIA
 	giveitem MOVE_DEX
 	giveitem POCKET_PC
 	giveitem MEMBERS_CARD

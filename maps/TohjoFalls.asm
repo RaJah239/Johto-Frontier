@@ -6,6 +6,7 @@ TohjoFalls_MapEvents:
 	def_coord_events
 
 	def_bg_events
+	bg_event 10, 14, BGEVENT_ITEM + AMBROSIA, EVENT_TOHJO_FALLS_AMBROSIA
 
 	def_object_events
 	object_event  2,  6, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, TohjoFallsMoonStone, EVENT_TOHJO_FALLS_MOON_STONE
