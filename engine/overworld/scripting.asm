@@ -531,7 +531,14 @@ _GetThisTextPointer:
 JumpTextFacePlayerScript:
 	faceplayer
 JumpTextScript:
+	isdialogueminimal
+	iftrue .skipthis
 	opentext
+	repeattext -1, -1
+	waitclosetext
+.skipthis
+	end
+
 JumpOpenedTextScript:
 	repeattext -1, -1
 	waitendtext
