@@ -103,7 +103,8 @@ DEF NUM_FRAMES EQU const_value
 	const ABILITY_BANNERS ; 0
 	const POKE_PICS ; 1
 	const INTRO_OUTROS ; 2
-	const EXP_N_LV_UP
+	const EXP_N_LV_UP ; 3
+	const EFFECTIVE_TEXT ; 4
 
 ; wWalkingDirection::
 	const_def -1

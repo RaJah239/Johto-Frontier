@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 26
+DEF NUM_OPTIONS EQU 27
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -108,6 +108,7 @@ OptionsMenu_DrawLabels:
 	dw .RematchPrompt
 	dw .PokePics
 	dw .FieldActions
+	dw .EffectiveText
 	dw .StatusText
 	dw .BattleSpeed
 	dw .AbilityBanners
@@ -137,7 +138,8 @@ OptionsMenu_DrawLabels:
 .RematchPrompt:   db "Rematch Prompt@"
 .PokePics:        db "OW #pics@"
 .FieldActions:    db "Field Actions@"
-.StatusText:   db "Status Text@"
+.EffectiveText:   db "Effective Text@"
+.StatusText:      db "Status Text@"
 .BattleSpeed:     db "Battle Speed@"
 .AbilityBanners:  db "Ability Banners@"
 .ExpShare:        db "Exp.Share@"
@@ -191,6 +193,7 @@ GetOptionPointer:
 	dw Options_RematchPrompt
 	dw Options_Pokepics
 	dw Options_FieldActions
+	dw Options_EffectiveText
 	dw Options_StatusText
 	dw Options_BattleSpeed
 	dw Options_AbilityBanners
@@ -625,6 +628,43 @@ Options_ShinyEscape:
  
  .ToggleOn:
 	set SHINY_ESCAPE, [hl]
+	ld de, .Off
+ .Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.On:  db "On @"
+.Off: db "Off@"
+
+Options_EffectiveText:
+	ld hl, wOptions4
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit EFFECTIVE_TEXT, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+ 
+ .LeftPressed:
+	bit EFFECTIVE_TEXT, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+ 
+ .NonePressed:
+	bit EFFECTIVE_TEXT, [hl]
+	jr nz, .ToggleOn
+ 
+ .ToggleOff:
+	res EFFECTIVE_TEXT, [hl]
+	ld de, .On
+	jr .Display
+ 
+ .ToggleOn:
+	set EFFECTIVE_TEXT, [hl]
 	ld de, .Off
  .Display:
 	call OptionsMenu_PlaceValue
@@ -1505,6 +1545,7 @@ OptionsMenu_DrawDescription:
 	dw .DescRematchPrompt
 	dw .DescPokepics
 	dw .DescFieldActions
+	dw .DescEffectiveText
 	dw .DescStatusText
 	dw .DescBattleSpeed
 	dw .DescAbilityBanners
@@ -1533,6 +1574,7 @@ OptionsMenu_DrawDescription:
 .DescRematchPrompt:   db "Which comes first:<LF>'Yes' or 'No'.@"
 .DescPokepics:        db "View overworld<LF>#pics?@"
 .DescFieldActions:    db "Normal or Fast<LF>Field Actions.@"
+.DescEffectiveText:   db "Show Effectiveness<LF>text or not.@"
 .DescStatusText:      db "Status text in<LF>battles.@"
 .DescBattleSpeed:     db "Play battles at<LF>Normal or Double.@"
 .DescAbilityBanners:  db "Display ability<LF>activation box.@"

@@ -2461,7 +2461,8 @@ BattleCommand_SuperEffectiveLoopText:
 
 BattleCommand_SuperEffectiveText:
 	; skip effectiveness text if fast battles is on
-	call CheckStatusText
+	ld a, [wOptions4]
+	bit EFFECTIVE_TEXT, a
 	ret nz
 
 	ld a, [wTypeModifier]

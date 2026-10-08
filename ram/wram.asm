@@ -1885,6 +1885,7 @@ wOptions4::
 ; bit 1: pokepics
 ; bit 2: intros_outros
 ; bit 3: exp_n_lv_up
+; bit 4: effective_text
 	db
 
 	ds 1
