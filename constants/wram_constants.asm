@@ -110,6 +110,7 @@ DEF NUM_FRAMES EQU const_value
 	const_def
 	const ABILITY_BANNERS ; 0
 	const POKE_PICS ; 1
+	const INTRO_OUTROS ; 2
 
 ; wWalkingDirection::
 	const_def -1

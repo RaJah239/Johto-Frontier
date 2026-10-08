@@ -1790,8 +1790,8 @@ FaintYourPokemon:
 	lb bc, 5, 11
 	call ClearBox
 
-	; Skip player mon fainted text if fast battles is on
-	call CheckIfFastBattlesIsOn
+	; Skip player mon fainted text
+	call CheckIntrosOutros
 	ret nz
 
 	ld hl, BattleText_MonFainted
@@ -1829,8 +1829,8 @@ FaintEnemyPokemon:
 	lb bc, 4, 10
 	call ClearBox
 
-	; Skip foe mon fainted text if fast battles is on
-	call CheckIfFastBattlesIsOn
+	; Skip foe mon fainted text
+	call CheckIntrosOutros
 	ret nz
 
 	ld hl, BattleText_EnemyMonFainted
@@ -1916,7 +1916,13 @@ WinTrainerBattle:
 	and a
 	ld a, b
 	call z, PlayVictoryMusic
+
+	; Skip trainer was defeated battle text
+	call CheckIntrosOutros
+	jr nz, .skip_victory_text
+
 	call _Battle_GetTrainerName
+
 	call IsPluralTrainer
 	ld hl, BattleText_PluralEnemyWereDefeated
 	jr z, .got_defeat_phrase
@@ -1924,6 +1930,7 @@ WinTrainerBattle:
 .got_defeat_phrase:
 	call StdBattleTextbox
 
+.skip_victory_text
 	ld a, [wLinkMode]
 	and a
 	ret nz
@@ -2658,8 +2665,8 @@ EnemySwitch:
 	call ClearEnemyMonBox
 	call ShowBattleTextEnemySentOut
 
-	; Skip ShowBattleTextEnemySentOut text if fast battles is on
-	call CheckIfFastBattlesIsOn
+	; Skip ShowBattleTextEnemySentOut text
+	call CheckIntrosOutros
 	jr nz, .skip2
 
 	call ShowSetEnemyMonAndSendOutAnimation
@@ -2689,8 +2696,8 @@ EnemySwitch_SetMode:
 	call ClearEnemyMonBox
 	call CheckDialogueMode
 
-	; Skip ShowBattleTextEnemySentOut text if fast battles is on
-	call CheckIfFastBattlesIsOn
+	; Skip ShowBattleTextEnemySentOut text
+	call CheckIntrosOutros
 	jr nz, .send_out_animation
 
 	call ShowBattleTextEnemySentOut
@@ -3522,8 +3529,8 @@ TryToRunAwayFromBattle:
 	call WaitPlaySFX
 	pop de
 
-	; Skip GotAwaySafely text if fast battles is on
-	call CheckIfFastBattlesIsOn
+	; Skip GotAwaySafely text
+	call CheckIntrosOutros
 	jr nz, .skip
 
 	ld hl, BattleText_GotAwaySafely
@@ -4120,8 +4127,8 @@ PursuitSwitch:
  	ld [wCurBattleMon], a
 	call PlayerMonFaintedAnimation
 
-	; Skip player mon fainted text if fast battles is on
-	call CheckIfFastBattlesIsOn
+	; Skip player mon fainted text
+	call CheckIntrosOutros
 	jr nz, .skip
 
 	ld hl, BattleText_MonFainted
@@ -4141,8 +4148,8 @@ PursuitSwitch:
 	call WaitSFX
 	call EnemyMonFaintedAnimation
 
-	; Skip foe mon fainted text if fast battles is on
-	call CheckIfFastBattlesIsOn
+	; Skip foe mon fainted text
+	call CheckIntrosOutros
 	jr nz, .skip
 
 	ld hl, BattleText_EnemyMonFainted
@@ -8601,6 +8608,10 @@ BattleStartMessage:
 	call PlaySFX
 	call WaitSFX
 
+	; Skip trainer wants to battle text
+	call CheckIntrosOutros
+	jr nz, .PrintBattleStartText
+
 	call _Battle_GetTrainerName
 
 	call IsPluralTrainer
@@ -8642,8 +8653,8 @@ BattleStartMessage:
 	call PlayStereoCry
 
 .skip_cry
-	; Skip PokemonAttacked text if fast battles is on
-	call CheckIfFastBattlesIsOn
+	; Skip PokemonAttacked text
+	call CheckIntrosOutros
 	jr nz, .PrintBattleStartText
 
 	ld a, [wBattleType]
@@ -8667,9 +8678,9 @@ BattleStartMessage:
 	farcall BattleStart_TrainerHuds
 	pop hl
 
-	; Skip PokemonAttacked text if fast battles is on
+	; Skip PokemonAttacked text
 	; need to do this or the game would crash
-	call CheckIfFastBattlesIsOn
+	call CheckIntrosOutros
 	ret nz
 	jmp StdBattleTextbox
 
@@ -8701,4 +8712,9 @@ _Battle_GetTrainerName:
 Core_50_Percent:
 	call BattleRandom
 	cp 50 percent + 1
+	ret
+
+CheckIntrosOutros:
+	ld a, [wOptions4]
+	bit INTRO_OUTROS, a
 	ret
