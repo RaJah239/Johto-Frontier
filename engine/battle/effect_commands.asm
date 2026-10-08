@@ -1145,9 +1145,11 @@ BattleCommand_Stab:
 	jr z, .inverse
 	ld hl, TypeMatchups
 	jr .TypesLoop
+
 .inverse
- 	ld hl, InverseTypeMatchups
- 	jr .TypesLoop
+	ld hl, InverseTypeMatchups
+	jr .TypesLoop
+
 .typeless
 	ld hl, NoTypeMatchups
 
@@ -1295,9 +1297,11 @@ CheckTypeMatchup:
 	jr z, .inverse
 	ld hl, TypeMatchups
 	jr .TypesLoop
+
 .inverse
 	ld hl, InverseTypeMatchups
 	jr .TypesLoop
+
 .typeless
 	ld hl, NoTypeMatchups
 

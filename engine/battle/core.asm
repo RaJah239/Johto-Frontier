@@ -429,11 +429,16 @@ DetermineMoveOrder:
 	; Trick Room
 	; The slower Pokemon attacks first
 .trick_room_check
+	ld a, [wBattleType]
+	cp BATTLETYPE_TRICK_ROOM
+	jr z, .trick_room_active
 	ld a, [wTrickRoomCount]
 	and a
 	jr z, .speed_check
 
-	; if Trick Room is active
+.trick_room_active
+
+	; if Trick Room is active (from move or battle type)
 	; reverse the turn order
 	call CompareBattleEffectiveSpeed
 	jr z, .speed_tie
@@ -1928,10 +1933,13 @@ WinTrainerBattle:
 	ld a, [wBattleType]
 	cp BATTLETYPE_CANLOSE
 	jr nz, .skip_heal
-
-	ld a, [wBattleType]
 	cp BATTLETYPE_INVERSE
-	jr nz, .skip_heal
+	jr z, .do_heal
+	cp BATTLETYPE_TRICK_ROOM
+	jr z, .do_heal
+	jr .skip_heal
+
+.do_heal
 	predef HealParty
 
 .skip_heal

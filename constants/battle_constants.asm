@@ -103,6 +103,7 @@ DEF SPDSPCDV_SHINY EQU $FF
 	const BATTLETYPE_CELEBI
 	const BATTLETYPE_SUICUNE
 	const BATTLETYPE_INVERSE
+	const BATTLETYPE_TRICK_ROOM
 	const BATTLETYPE_TYPELESS
 
 ; ability popup (ShowAbilityPopup in engine/battle/misc.asm)
