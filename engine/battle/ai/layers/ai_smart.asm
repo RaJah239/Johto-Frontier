@@ -1723,11 +1723,11 @@ AI_Smart_Heal:
 ; prioritize healing above scoring KOs
 	ld a, [wEnemyMonSpecies]
 	cp LUGIA
-	jr nz, .normal_encourage
+	jr z, .big_encourage
 	cp HO_OH
-	jr nz, .normal_encourage
+	jr z, .big_encourage
 	cp MEWTWO
-	jr nz, .normal_encourage
+	jr z, .big_encourage
 
 .big_encourage
 rept 8
