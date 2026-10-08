@@ -8738,11 +8738,6 @@ Core_50_Percent:
 	cp 50 percent + 1
 	ret
 
-CheckIntrosOutros:
-	ld a, [wOptions4]
-	bit INTRO_OUTROS, a
-	ret
-
 CheckMonCries:
 	ld a, [wOptions3]
 	bit MON_CRIES, a

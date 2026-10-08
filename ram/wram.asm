@@ -1888,6 +1888,7 @@ wOptions4::
 ; bit 4: effective_text
 ; bit 5: weather text
 ; bit 6: field hazards
+; bit 7: nicknaming
 	db
 
 	ds 1

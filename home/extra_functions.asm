@@ -10,6 +10,16 @@ CheckStatusText::
 	bit STATUS_TEXT, a
 	ret
 
+CheckIntrosOutros::
+	ld a, [wOptions4]
+	bit INTRO_OUTROS, a
+	ret
+
+CheckNicknaming::
+	ld a, [wOptions4]
+	bit NICKNAMING, a
+	ret
+
 CheckIfDoubleBattleSpeed::
 ; "Battle Speed": z = Normal, nz = Double (see DOUBLE_BATTLE_SPEED_F).
 ; Battle code reads this instead of poking wTextboxFlags itself, so the

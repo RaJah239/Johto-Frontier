@@ -5481,7 +5481,7 @@ BattleCommand_ForceSwitch:
 	call CallBattleCore
 
 	; skip dragged out text
-	call CheckStatusText
+	call CheckIntrosOutros
 	jr nz, .skip_dragged_out_text2
 
 	ld hl, DraggedOutText
@@ -5985,11 +5985,6 @@ BattleCommand_Recoil:
 	ld [wWhichHPBar], a
 	predef AnimateHPBar
 	call RefreshBattleHuds
-
-	; skip recoil text
-	call CheckStatusText
-	ret nz
-
 	ld hl, RecoilText
 	jmp StdBattleTextbox
 

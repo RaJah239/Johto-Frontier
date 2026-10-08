@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 29
+DEF NUM_OPTIONS EQU 30
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -116,6 +116,7 @@ OptionsMenu_DrawLabels:
 	dw .AbilityBanners
 	dw .ExpShare
 	dw .ExpNLvUp
+	dw .Nicknaming
 	dw .MinimalDialogue
 	dw .TurboAButton
 	dw .TurboBButton
@@ -148,6 +149,7 @@ OptionsMenu_DrawLabels:
 .AbilityBanners:  db "Ability Banners@"
 .ExpShare:        db "Exp.Share@"
 .ExpNLvUp:        db "Exp & Level Up@"
+.Nicknaming:      db "Nicknaming@"
 .MinimalDialogue: db "Dialogue/Text@"
 .TurboAButton:    db "Turbo A Button@"
 .TurboBButton:    db "Turbo B Button@"
@@ -205,6 +207,7 @@ GetOptionPointer:
 	dw Options_AbilityBanners
 	dw Options_ExpShare
 	dw Options_ExpNLvUp
+	dw Options_Nicknaming
 	dw Options_MinimalDialogue
 	dw Options_TurboAButton
 	dw Options_TurboBButton
@@ -634,6 +637,43 @@ Options_ShinyEscape:
  
  .ToggleOn:
 	set SHINY_ESCAPE, [hl]
+	ld de, .Off
+ .Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.On:  db "On @"
+.Off: db "Off@"
+
+Options_Nicknaming:
+	ld hl, wOptions4
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit NICKNAMING, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+ 
+ .LeftPressed:
+	bit NICKNAMING, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+ 
+ .NonePressed:
+	bit NICKNAMING, [hl]
+	jr nz, .ToggleOn
+ 
+ .ToggleOff:
+	res NICKNAMING, [hl]
+	ld de, .On
+	jr .Display
+ 
+ .ToggleOn:
+	set NICKNAMING, [hl]
 	ld de, .Off
  .Display:
 	call OptionsMenu_PlaceValue
@@ -1633,6 +1673,7 @@ OptionsMenu_DrawDescription:
 	dw .DescAbilityBanners
 	dw .DescExpShare
 	dw .DescExpNLvUp
+	dw .DescNicknaming
 	dw .DescMinimalDialogue
 	dw .DescTurboAButton
 	dw .DescTurboBButton
@@ -1664,6 +1705,7 @@ OptionsMenu_DrawDescription:
 .DescAbilityBanners:  db "Display ability<LF>activation box.@"
 .DescExpShare:        db "Share Experience<LF>with the party.@"
 .DescExpNLvUp:        db "EXP Gain, Level Up<LF>and Stat Gains.@"
+.DescNicknaming:      db "Nickname caught<LF>caught #mon.@"
 .DescMinimalDialogue: db "Reduce all NPC<LF>text or not.@"
 .DescTurboAButton:    db "Hold 'A' briefly<LF>to rapid-fire 'A'.@"
 .DescTurboBButton:    db "Hold 'B' to rapid-<LF>'B'.@"
