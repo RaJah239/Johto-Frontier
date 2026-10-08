@@ -1711,6 +1711,6 @@ OptionsMenu_DrawDescription:
 .DescTurboBButton:    db "Hold 'B' to rapid-<LF>'B'.@"
 .DescQuickSave:       db "Long press 'Start'<LF>to save the game.@"
 .DescFastBoot:        db "Intro, Main Menu,<LF>or In Game.@"
-.DescHardMode:        db "Choose your mode<LF>to play in.@"
+.DescHardMode:        db "20<%> trainer boost<LF>Sp/Atk & Sp/Def.@"
 .DescFrame:           db "Select your border<LF>of textboxes.@"
 .DescDone:            db "Save and Exit<LF>@"
