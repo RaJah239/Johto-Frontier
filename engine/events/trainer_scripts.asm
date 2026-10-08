@@ -33,7 +33,15 @@ AlreadyBeatenTrainerScript:
 	scripttalkafter
 
 RematchScript:
+	isdialogueminimal
+	iftrue .skipthis
+
 	scall AlreadyBeatenTrainerScript
+	sjump .load_trainer
+
+.skipthis
+	opentext
+.load_trainer
 	readmem wNoRematch
 	iftrue .NoRematch
 	writetext AskForARematchText
