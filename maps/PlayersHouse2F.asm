@@ -90,7 +90,6 @@ if DEF(_DEBUG)
 	; key items
 	giveitem AMBROSIA
 	giveitem MOVE_DEX
-	giveitem NOMAD_SIGIL
 	giveitem POCKET_PC
 	giveitem MEMBERS_CARD
 	giveitem TYPE_CHART

@@ -196,7 +196,8 @@
 	const EVENT_MAHOGANY_GYM_FIVE_ZINCS
 	const EVENT_BLACKTHORN_GYM_7_RARE_CANDIES
 	const EVENT_UNLOCK_STAT_SCREEN_EFFORT_VALUES
-; Unused: next 14 events
+	const EVENT_NEW_BARK_TOWN_NOMAD_SIGIL
+; Unused: next 13 events
 
 	const_next 200
 ; Kanto story events
