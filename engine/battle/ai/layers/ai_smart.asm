@@ -1662,6 +1662,10 @@ AI_Smart_Heal:
 	jr c, .discourage
 
 .not_rest_heal
+; don't heal if at full HP
+	call AICheckEnemyMaxHP
+	jr c, .discourage
+
 ; don't heal if afflicted with toxic
 	call IsAIToxified
 	jr c, .discourage
