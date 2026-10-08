@@ -105,6 +105,7 @@ DEF NUM_FRAMES EQU const_value
 	const QUICK_SAVE ; 3
 	const TURBO_B_BUTTON ; 4
 	const NO_MUSIC ; 5
+	const MON_CRIES ; 6
 
 ; wOptions4::
 	const_def

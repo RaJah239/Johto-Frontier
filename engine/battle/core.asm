@@ -1773,7 +1773,7 @@ FaintYourPokemon:
 	call WaitSFX
 
 	; Skip player mon's cry when fainting
-	call CheckIfFastBattlesIsOn
+	call CheckMonCries
 	jr nz, .skip_player_mon_faint_cry
 	
 	; plays player mon's cry when fainting
@@ -1810,7 +1810,7 @@ FaintEnemyPokemon:
 	call WaitSFX
 
 	; Skip enemy mon's cry when fainting
-	call CheckIfFastBattlesIsOn
+	call CheckMonCries
 	jr nz, .skip_enemy_mon_faint_cry
 
 	; plays enemy mon's cry when fainting
@@ -3356,6 +3356,10 @@ ShowSetEnemyMonAndSendOutAnimation:
 	jr .skip_cry
 
 .cry_no_anim
+	; Skip player mon's cry
+	call CheckMonCries
+	jr nz, .skip_cry
+
 	ld a, $f
 	ld [wCryTracks], a
 	ld a, [wTempEnemyMonSpecies]
@@ -3738,6 +3742,11 @@ SendOutPlayerMon:
 	ld c, l
 	farcall CheckFaintedFrzSlp
 	jr c, .statused
+
+	; Skip player mon's cry
+	call CheckMonCries
+	jr nz, .statused
+
 	ld a, $f0
 	ld [wCryTracks], a
 	ld a, [wCurPartySpecies]
@@ -4114,10 +4123,16 @@ PursuitSwitch:
 	or [hl]
 	jr nz, .done
 
+	; Skip player mon's cry
+	call CheckMonCries
+	jr nz, .skip_cry
+
 	ld a, $f0
 	ld [wCryTracks], a
 	ld a, [wBattleMonSpecies]
 	call PlayStereoCry
+
+.skip_cry
 	ld a, [wCurBattleMon]
  	push af
 	ld a, [wLastPlayerMon]
@@ -8647,6 +8662,10 @@ BattleStartMessage:
 	jr .skip_cry ; cry is played during the animation
 
 .cry_no_anim
+	; Skip player mon's cry
+	call CheckMonCries
+	jr nz, .skip_cry
+
 	ld a, $f
 	ld [wCryTracks], a
 	ld a, [wTempEnemyMonSpecies]
@@ -8717,4 +8736,9 @@ Core_50_Percent:
 CheckIntrosOutros:
 	ld a, [wOptions4]
 	bit INTRO_OUTROS, a
+	ret
+
+CheckMonCries:
+	ld a, [wOptions3]
+	bit MON_CRIES, a
 	ret

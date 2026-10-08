@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 23
+DEF NUM_OPTIONS EQU 24
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -103,6 +103,7 @@ OptionsMenu_DrawLabels:
 	dw .ScaledExp
 	dw .QuickNurse
 	dw .IntrosOutros
+	dw .MonCries
 	dw .RematchPrompt
 	dw .PokePics
 	dw .FieldActions
@@ -129,6 +130,7 @@ OptionsMenu_DrawLabels:
 .Frame:           db "Frame   :Type@"
 .QuickNurse:      db "#mon Center@"
 .IntrosOutros:    db "Intros & Outros@"
+.MonCries:        db "#mon Cries@"
 .RematchPrompt:   db "Rematch Prompt@"
 .PokePics:        db "OW #pics@"
 .FieldActions:    db "Field Actions@"
@@ -180,6 +182,7 @@ GetOptionPointer:
 	dw Options_Scaled_Exp
 	dw Options_QuickNurse
 	dw Options_IntrosOutros
+	dw Options_MonCries
 	dw Options_RematchPrompt
 	dw Options_Pokepics
 	dw Options_FieldActions
@@ -616,6 +619,43 @@ Options_IntrosOutros:
  
  .ToggleOn:
 	set INTRO_OUTROS, [hl]
+	ld de, .Off
+ .Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.On:  db "On @"
+.Off: db "Off@"
+
+Options_MonCries:
+	ld hl, wOptions3
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit MON_CRIES, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+ 
+ .LeftPressed:
+	bit MON_CRIES, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+ 
+ .NonePressed:
+	bit MON_CRIES, [hl]
+	jr nz, .ToggleOn
+ 
+ .ToggleOff:
+	res MON_CRIES, [hl]
+	ld de, .On
+	jr .Display
+ 
+ .ToggleOn:
+	set MON_CRIES, [hl]
 	ld de, .Off
  .Display:
 	call OptionsMenu_PlaceValue
@@ -1380,6 +1420,7 @@ OptionsMenu_DrawDescription:
 	dw .DescScaledExp
 	dw .DescQuickNurse
 	dw .DescIntrosOutros
+	dw .DescMonCries
 	dw .DescRematchPrompt
 	dw .DescPokepics
 	dw .DescFieldActions
@@ -1405,6 +1446,7 @@ OptionsMenu_DrawDescription:
 .DescScaledExp:       db "Normal, Scaled or<LF>Zero experience.@"
 .DescQuickNurse:      db "#mon Center<LF>fast or slow heal.@"
 .DescIntrosOutros:    db "Encounter & Battle<LF>intros & outros.@"
+.DescMonCries:        db "#mon cries in<LF>battles?@"
 .DescRematchPrompt:   db "Which comes first:<LF>'Yes' or 'No'.@"
 .DescPokepics:        db "View overworld<LF>#pics?@"
 .DescFieldActions:    db "Normal or Fast<LF>Field Actions.@"

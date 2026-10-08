@@ -1876,6 +1876,7 @@ wOptions3::
 ; bit 3: quick save
 ; bit 4: turbo b
 ; bit 5: music off/on
+; bit 6: mon cries on/off
 	db
 
 wOptions4::
