@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 21
+DEF NUM_OPTIONS EQU 22
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -103,6 +103,7 @@ OptionsMenu_DrawLabels:
 	dw .ScaledExp
 	dw .QuickNurse
 	dw .RematchPrompt
+	dw .PokePics
 	dw .FieldActions
 	dw .FasterBattles
 	dw .BattleSpeed
@@ -127,6 +128,7 @@ OptionsMenu_DrawLabels:
 .Frame:           db "Frame   :Type@"
 .QuickNurse:      db "#mon Center@"
 .RematchPrompt:   db "Rematch Prompt@"
+.PokePics:        db "OW #pics@"
 .FieldActions:    db "Field Actions@"
 .FasterBattles:   db "Battles@"
 .BattleSpeed:     db "Battle Speed@"
@@ -176,6 +178,7 @@ GetOptionPointer:
 	dw Options_Scaled_Exp
 	dw Options_QuickNurse
 	dw Options_RematchPrompt
+	dw Options_Pokepics
 	dw Options_FieldActions
 	dw Options_FasterBattles
 	dw Options_BattleSpeed
@@ -583,6 +586,43 @@ Options_MinimalDialogue:
 .Normal:   db "Normal @"
 .Minimum:  db "Minimal@"
 
+Options_Pokepics:
+	ld hl, wOptions4
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit POKE_PICS, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+ 
+ .LeftPressed:
+	bit POKE_PICS, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+ 
+ .NonePressed:
+	bit POKE_PICS, [hl]
+	jr nz, .ToggleOn
+ 
+ .ToggleOff:
+	res POKE_PICS, [hl]
+	ld de, .On
+	jr .Display
+ 
+ .ToggleOn:
+	set POKE_PICS, [hl]
+	ld de, .Off
+ .Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.On:  db "On @"
+.Off: db "Off@"
+
 Options_Scaled_Exp:
 ; Three modes packed across two bytes: SCALED_EXP (wOptions2) is the
 ; low bit and ZERO_EXP_F (wTextboxFlags) the high one, so 0 = Normal,
@@ -683,33 +723,33 @@ Options_Scaled_Exp:
 .Zero:   db "Zero  @"
 
 Options_QuickNurse:
- 	ld hl, wOptions2
- 	ldh a, [hJoyPressed]
- 	bit D_LEFT_F, a
- 	jr nz, .LeftPressed
- 	bit D_RIGHT_F, a
- 	jr z, .NonePressed
- 	bit NURSE_HEAL, [hl]
- 	jr nz, .ToggleOff
- 	jr .ToggleOn
+	ld hl, wOptions2
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit NURSE_HEAL, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
  
  .LeftPressed:
- 	bit NURSE_HEAL, [hl]
- 	jr z, .ToggleOn
- 	jr .ToggleOff
+	bit NURSE_HEAL, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
  
  .NonePressed:
- 	bit NURSE_HEAL, [hl]
- 	jr nz, .ToggleOn
+	bit NURSE_HEAL, [hl]
+	jr nz, .ToggleOn
  
  .ToggleOff:
- 	res NURSE_HEAL, [hl]
- 	ld de, .Off
- 	jr .Display
+	res NURSE_HEAL, [hl]
+	ld de, .Off
+	jr .Display
  
  .ToggleOn:
- 	set NURSE_HEAL, [hl]
- 	ld de, .On
+	set NURSE_HEAL, [hl]
+	ld de, .On
  .Display:
 	call OptionsMenu_PlaceValue
 	call PlaceString
@@ -1300,6 +1340,7 @@ OptionsMenu_DrawDescription:
 	dw .DescScaledExp
 	dw .DescQuickNurse
 	dw .DescRematchPrompt
+	dw .DescPokepics
 	dw .DescFieldActions
 	dw .DescFasterBattles
 	dw .DescBattleSpeed
@@ -1323,6 +1364,7 @@ OptionsMenu_DrawDescription:
 .DescScaledExp:       db "Normal, Scaled or<LF>Zero experience.@"
 .DescQuickNurse:      db "#mon Center<LF>fast or slow heal.@"
 .DescRematchPrompt:   db "Which comes first:<LF>'Yes' or 'No'.@"
+.DescPokepics:        db "View overworld<LF>#pics?@"
 .DescFieldActions:    db "Normal or Fast<LF>Field Actions.@"
 .DescFasterBattles:   db "Reduce the text<LF>in battles.@"
 .DescBattleSpeed:     db "Play battles at<LF>Normal or Double.@"

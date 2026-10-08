@@ -1880,6 +1880,7 @@ wOptions3::
 
 wOptions4::
 ; bit 0: ability banners
+; bit 1: pokepics
 	db
 
 	ds 1

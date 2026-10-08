@@ -109,6 +109,7 @@ DEF NUM_FRAMES EQU const_value
 ; wOptions4::
 	const_def
 	const ABILITY_BANNERS ; 0
+	const POKE_PICS ; 1
 
 ; wWalkingDirection::
 	const_def -1
