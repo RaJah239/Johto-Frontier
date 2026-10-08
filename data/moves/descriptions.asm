@@ -13,7 +13,7 @@ MoveDescriptions::
 	dw AquaJetDescription
 	dw BulkUpDescription
 	dw FlashCannonDescription
-	dw RazorWindDescription
+	dw AirSlashDescription
 	dw SwordsDanceDescription
 	dw CutDescription
 	dw GustDescription
@@ -284,7 +284,6 @@ StoneEdgeDescription:
 ThroatChopDescription:
 CrossChopDescription:
 LeafBladeDescription:
-RazorWindDescription:
 PsychoCutDescription:
 NightSlashDescription:
 SlashDescription:
@@ -322,6 +321,7 @@ StickyWebDescription:
 	db   "Slows foes when"
 	line "they switch in.@"
 
+AirSlashDescription:
 RockSlideDescription:
 LowKickDescription:
 BiteDescription:

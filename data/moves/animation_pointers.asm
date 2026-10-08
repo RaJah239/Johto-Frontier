@@ -14,7 +14,7 @@ BattleAnimations::
 	dw BattleAnim_AquaJet
 	dw BattleAnim_BulkUp
 	dw BattleAnim_FlashCannon
-	dw BattleAnim_RazorWind
+	dw BattleAnim_AirSlash
 	dw BattleAnim_SwordsDance
 	dw BattleAnim_Cut
 	dw BattleAnim_Gust

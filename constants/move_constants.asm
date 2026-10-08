@@ -18,7 +18,7 @@
 	const AQUA_JET     ; 0a
 	const BULK_UP      ; 0b
 	const FLASH_CANNON ; 0c
-	const RAZOR_WIND   ; 0d
+	const AIR_SLASH    ; 0d
 	const SWORDS_DANCE ; 0e
 	const CUT          ; 0f
 	const GUST         ; 10

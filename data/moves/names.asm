@@ -12,7 +12,7 @@ MoveNames::
 	li "Aqua Jet"
 	li "Bulk Up"
 	li "Flash Cannon"
-	li "Razor Wind"
+	li "Air Slash"
 	li "Swords Dance"
 	li "Cut"
 	li "Gust"
