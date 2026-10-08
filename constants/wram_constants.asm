@@ -106,6 +106,7 @@ DEF NUM_FRAMES EQU const_value
 	const EXP_N_LV_UP ; 3
 	const EFFECTIVE_TEXT ; 4
 	const WEATHER_TEXT ; 5
+	const FIELD_HAZARDS ; 6
 
 ; wWalkingDirection::
 	const_def -1

@@ -3874,7 +3874,7 @@ SpikesDamage:
 	push hl
 	push de
 
-	call CheckStatusText
+	call CheckFieldHazards
 	jr nz, .skip_spikes_text
 
 	ld hl, BattleText_UserHurtBySpikes ; "hurt by SPIKES!"
@@ -3905,7 +3905,7 @@ SpikesDamage:
 	push hl
 	push de
 
-	call CheckStatusText
+	call CheckFieldHazards
 	jr nz, .skip_stealth_rock_text
 
 	ld hl, BattleText_UserHurtByStealthRock
@@ -4004,7 +4004,7 @@ SpikesDamage:
 	call Call_PlayBattleAnim
 	call RefreshBattleHuds
 
-	call CheckStatusText
+	call CheckFieldHazards
 	jr nz, .skip_toxic_spikes_text
 
 	ld hl, WasPoisonedText
@@ -8746,4 +8746,9 @@ CheckIntrosOutros:
 CheckMonCries:
 	ld a, [wOptions3]
 	bit MON_CRIES, a
+	ret
+
+CheckFieldHazards:
+	ld a, [wOptions4]
+	bit FIELD_HAZARDS, a
 	ret

@@ -1887,6 +1887,7 @@ wOptions4::
 ; bit 3: exp_n_lv_up
 ; bit 4: effective_text
 ; bit 5: weather text
+; bit 6: field hazards
 	db
 
 	ds 1
