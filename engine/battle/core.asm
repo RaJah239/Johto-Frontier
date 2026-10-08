@@ -247,6 +247,10 @@ HandleBetweenTurnEffects:
 
 .NoMoreFaintingConditions:
 	farcall FarTurnEndEffects
+; Black Sludge faint inside turn-end effects can end the battle
+	ld a, [wBattleEnded]
+	and a
+	ret nz
 	farcall TurnEndAbilities
 	call HandleHealingItems
 	call UpdateBattleMonInParty

@@ -1,5 +1,10 @@
 FarTurnEndEffects:
 	call HandleLeftovers
+; Black Sludge damage can end the battle; don't run the
+; remaining turn-end handlers on an ended battle
+	ld a, [wBattleEnded]
+	and a
+	ret nz
 	call HandleMysteryberry
 	call HandleStatBoostingHeldItems
 	call HandleWeatherItem
@@ -273,12 +278,19 @@ HandleLeftovers:
 	jr z, .DoEnemyFirst
 	call SetPlayerTurn
 	call .do_it
+; skip the other side's item if the faint ended the battle
+	ld a, [wBattleEnded]
+	and a
+	ret nz
 	call SetEnemyTurn
 	jr .do_it
 
 .DoEnemyFirst:
 	call SetEnemyTurn
 	call .do_it
+	ld a, [wBattleEnded]
+	and a
+	ret nz
 	call SetPlayerTurn
 .do_it
 
