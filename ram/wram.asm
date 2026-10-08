@@ -1884,6 +1884,7 @@ wOptions4::
 ; bit 0: ability banners
 ; bit 1: pokepics
 ; bit 2: intros_outros
+; bit 3: exp_n_lv_up
 	db
 
 	ds 1

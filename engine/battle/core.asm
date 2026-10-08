@@ -7002,6 +7002,8 @@ GiveExperiencePoints:
 
 	; Skip regular exp text if fast battles is on
 	call CheckStatusText
+	ld a, [wOptions4]
+	bit EXP_N_LV_UP, a
 	jr nz, .ExpShareON
 
 	ld hl, Text_MonGainedExpPoint
@@ -7012,7 +7014,8 @@ GiveExperiencePoints:
 	jr nz, .AfterText
 
 	; Skip exp share text if fast battles is on
-	call CheckStatusText
+	ld a, [wOptions4]
+	bit EXP_N_LV_UP, a
 	jr nz, .AfterText
 
 	inc a
@@ -7205,7 +7208,8 @@ GiveExperiencePoints:
 	call WaitSFX
 
 	; Skip GrewToLevel text if fast battles is on
-	call CheckStatusText
+	ld a, [wOptions4]
+	bit EXP_N_LV_UP, a
 	jr nz, .next
 
 	ld hl, BattleText_StringBuffer1GrewToLevel
@@ -7219,7 +7223,8 @@ GiveExperiencePoints:
 	predef CopyMonToTempMon
 
 	; Skip lv up stat text and textbox if fast battles is on
-	call CheckStatusText
+	ld a, [wOptions4]
+	bit EXP_N_LV_UP, a
 	jr nz, .skip
 
 	hlcoord 9, 0
@@ -7464,7 +7469,8 @@ AnimateExpBar:
 	call WaitSFX
 
 	; Skip GrewToLevel text if fast battles is on
-	call CheckStatusText
+	ld a, [wOptions4]
+	bit EXP_N_LV_UP, a
 	jr nz, .next2
 
 	ld hl, BattleText_StringBuffer1GrewToLevel

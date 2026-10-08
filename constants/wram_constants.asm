@@ -69,21 +69,11 @@ DEF NUM_FRAMES EQU const_value
 
 ; wTextboxFlags::
 	const_def
-	const FAST_TEXT_DELAY_F ; 0
-	const TEXT_DELAY_F      ; 1
-; "Experience Gain" is a 0-2 value split across two bytes:
-; 0 = Normal, 1 = Scaled (wOptions2 SCALED_EXP, the low bit),
-; 2 = Zero (this bit, the high one).
-	const ZERO_EXP_F        ; 2
-; "Booting Options" is a 0-2 value split across two bytes as well,
-; but the bits run the other way round: 0 = Intro and 2 = In Game
-; are wOptions2 FAST_BOOT (the low bit), 1 = Main Menu is this bit.
-	const MAIN_MENU_BOOT_F  ; 3
-; "Rematch Prompt": clear = "YesOrNo" (the yesorno script command),
-; set = "NoOrYes" (nooryes). Picks which answer RematchScript lists first.
-	const REMATCH_NOYES_F   ; 4
-; "Battle Speed" is a 0-2 value too, but only its low bit is needed:
-; clear = "Normal", set = "Double". Bit 5 stays spare for a third speed.
+	const FAST_TEXT_DELAY_F     ; 0
+	const TEXT_DELAY_F          ; 1
+	const ZERO_EXP_F            ; 2
+	const MAIN_MENU_BOOT_F      ; 3
+	const REMATCH_NOYES_F       ; 4
 	const DOUBLE_BATTLE_SPEED_F ; 5
 
 ; wOptions2::
@@ -113,6 +103,7 @@ DEF NUM_FRAMES EQU const_value
 	const ABILITY_BANNERS ; 0
 	const POKE_PICS ; 1
 	const INTRO_OUTROS ; 2
+	const EXP_N_LV_UP
 
 ; wWalkingDirection::
 	const_def -1
