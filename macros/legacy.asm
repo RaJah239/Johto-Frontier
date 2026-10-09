@@ -405,6 +405,7 @@ DEF variablemartscript    EQUS "VariableMartScript"
 DEF slowpokescript        EQUS "SlowpokeScript"
 DEF rafflemannpcscript    EQUS "RaffleManNPCScript"
 DEF itempocketisfullscript EQUS "ItemPocketIsFullScript"
+DEF grandgauntletitemsscript EQUS "GrandGauntletItemsScript"
 
 ; constants/charmap.asm
 charmap "%", "<BSP>"

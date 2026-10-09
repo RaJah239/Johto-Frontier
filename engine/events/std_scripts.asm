@@ -58,6 +58,14 @@ StdScripts::
 	add_stdscript SlowpokeScript
 	add_stdscript RaffleManNPCScript
 	add_stdscript ItemPocketIsFullScript
+	add_stdscript GrandGauntletItemsScript
+
+GrandGauntletItemsScript:
+	opentext
+	callasm GrandGauntletItem
+	verbosegiveitem ITEM_FROM_MEM
+	disappear LAST_TALKED
+	endtext
 
 ItemPocketIsFullScript:
 	farwritetext _ItemPocketIsFullText

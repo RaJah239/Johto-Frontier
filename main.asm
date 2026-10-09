@@ -606,3 +606,7 @@ INCLUDE "engine/items/score_card.asm"
 
 SECTION "Music Player", ROMX
 INCLUDE "engine/items/music_player.asm"
+
+
+SECTION "Grand Gauntlet Items", ROMX
+INCLUDE "engine/events/grand_gauntlet_items.asm"
