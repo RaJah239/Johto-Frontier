@@ -298,33 +298,9 @@ EvolveAfterBattle_MasterLoop:
 	call LearnEvolutionMove
 	call LearnLevelMoves
 
-; SetSeenAndCaughtMon would book the new species into the Pokédex
-; whether or not the player has ever seen or caught it. Look both
-; flags up first and reset whatever that call newly sets, so the
-; evolution leaves the Pokédex exactly as it found it and a species
-; the player already had keeps its flags - the same dance GiveEgg
-; and AddPartyKeeperMon do around TryAddMonToParty.
-	ld a, [wTempSpecies]
-	dec a
-	call CheckSeenMon
-	ld a, c
-	push af ; seen before we evolved?
-	ld a, [wTempSpecies]
-	dec a
-	call CheckCaughtMon
-	ld a, c
-	push af ; caught before we evolved?
-
 	ld a, [wTempSpecies]
 	dec a
 	call SetSeenAndCaughtMon
-
-	pop af
-	and a ; already caught -> leave the flag alone
-	call z, .unregisterCaught
-	pop af
-	and a ; already seen -> leave the flag alone
-	call z, .unregisterSeen
 
 	ld a, [wTempSpecies]
 	cp UNOWN
@@ -343,24 +319,6 @@ EvolveAfterBattle_MasterLoop:
 	ld l, e
 	ld h, d
 	jmp EvolveAfterBattle_MasterLoop
-
-.unregisterCaught
-	ld a, [wTempSpecies]
-	dec a
-	ld c, a
-	ld d, 0
-	ld hl, wPokedexCaught
-	ld b, RESET_FLAG
-	predef_jump SmallFarFlagAction
-
-.unregisterSeen
-	ld a, [wTempSpecies]
-	dec a
-	ld c, a
-	ld d, 0
-	ld hl, wPokedexSeen
-	ld b, RESET_FLAG
-	predef_jump SmallFarFlagAction
 
 .dont_evolve_1
 	inc hl

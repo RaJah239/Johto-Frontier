@@ -601,6 +601,11 @@ StartMenuYesNo:
 	call YesNoBox
 	jmp ExitMenu
 
+StartMenuNoYes:
+	call MenuTextbox
+	call NoYesBox
+	jmp ExitMenu
+
 ComposeMailMessage:
 	ld de, wTempMailMessage
 	farcall _ComposeMailMessage

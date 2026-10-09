@@ -10,6 +10,7 @@
 	const STARTMENUITEM_POKEGEAR ; 7
 	const STARTMENUITEM_QUIT     ; 8
 	const STARTMENUITEM_WARP     ; 9
+	const STARTMENUITEM_GIVEUP   ; 10
 
 StartMenu::
 	call ClearWindowData
@@ -186,6 +187,7 @@ StartMenu::
 	dw StartMenu_Pokegear, .PokegearString, .EmptyDesc
 	dw StartMenu_Quit,     .QuitString,     .EmptyDesc
 	dw StartMenu_Warp,     .WarpString,     .EmptyDesc
+	dw StartMenu_GiveUp,   .GiveUpString,   .EmptyDesc
 
 .PokedexString:  db "#dex@"
 .PartyString:    db "#mon@"
@@ -197,6 +199,7 @@ StartMenu::
 .PokegearString: db "<POKE>Gear@"
 .QuitString:     db "Quit@"
 .WarpString:     db "Warp@"
+.GiveUpString:   db "Give Up@"
 
 .EmptyDesc:
 	db   "@"
@@ -307,6 +310,21 @@ endr
 	ld a, STARTMENUITEM_OPTION
 	call .AppendMenuList
 
+	; The Grand Gauntlet battle room has no warps of its own, so in
+	; there Exit/Warp is swapped for Give Up: abandon the run and warp
+	; back to the lobby stairs. The lobby's MAPCALLBACK_NEWMAP callback
+	; hands the stored party back on arrival.
+	ld a, [wMapGroup]
+	cp GROUP_BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1
+	jr nz, .not_gauntlet_battle_room
+	ld a, [wMapNumber]
+	cp MAP_BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1
+	jr nz, .not_gauntlet_battle_room
+	ld a, STARTMENUITEM_GIVEUP
+	call .AppendMenuList
+	jr .next
+
+.not_gauntlet_battle_room
 	; Bug Catching contest must always have the Exit Option
 	ld hl, wStatusFlags2
 	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, [hl]
@@ -510,6 +528,44 @@ StartMenu_Quit:
 
 .StartMenuContestEndText:
 	text_far _StartMenuContestEndText
+	text_end
+
+StartMenu_GiveUp:
+; Abandon a Grand Gauntlet run from the battle room. The room has no
+; warps, so this is the only way out: confirm, then queue a warp back
+; to the lobby stairs. The lobby's MAPCALLBACK_NEWMAP callback calls
+; TakeBackHeldParty on arrival, which drops the rented team and hands
+; the stashed one back, so this routine only has to ask and warp.
+
+	ld hl, .GiveUpConfirmText1
+	call StartMenuNoYes
+	jr c, .DontGiveUp
+	ld hl, .GiveUpConfirmText2
+	call StartMenuNoYes
+	jr c, .DontGiveUp
+	ld hl, .GiveUpConfirmText3
+	call StartMenuNoYes
+	jr c, .DontGiveUp
+	ld a, BANK(GrandGauntletGiveUpScript)
+	ld hl, GrandGauntletGiveUpScript
+	call FarQueueScript
+	ld a, 4 ; .ExitMenuRunScript
+	ret
+
+.DontGiveUp:
+	ld a, 0 ; .Reopen
+	ret
+
+.GiveUpConfirmText1:
+	text_far _GrandGauntletGiveUpConfirmText1
+	text_end
+
+.GiveUpConfirmText2:
+	text_far _AreYouReallyReallySureText
+	text_end
+
+.GiveUpConfirmText3:
+	text_far _GrandGauntletGiveUpConfirmText3
 	text_end
 
 StartMenu_Save:

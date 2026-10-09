@@ -1,4 +1,8 @@
 HealParty:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPartySpecies)
+	ldh [rSVBK], a
 	xor a
 	ld [wCurPartyMon], a
 	ld hl, wPartySpecies
@@ -20,6 +24,8 @@ HealParty:
 	jr .loop
 
 .done
+	pop af
+	ldh [rSVBK], a
 	ret
 
 HealPartyMon:

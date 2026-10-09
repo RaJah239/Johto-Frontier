@@ -24,6 +24,11 @@ Script_Whiteout:
 	waitbutton
 	special FadeOutPalettes
 	pause 40
+; A Grand Gauntlet run stashed the real party and handed out a rented
+; team. On whiteout, hand the real party back before healing so it is
+; the one that gets healed. This is a guarded no-op (see
+; TakeBackHeldParty) on every ordinary whiteout with no stash.
+	callasm TakeBackHeldParty
 	special HealParty
 	callasm GetWhiteoutSpawn
 	farscall Script_AbortBugContest
@@ -95,6 +100,14 @@ LoseWhiteOutMoney:
 	ld a, [hl]
 	ldh [hMultiplier], a
 ; Get your highest party mon level
+; wPartyCount/wPartyMon1Level live in WRAM bank 1 and this
+; scan reads them directly, so switch to the party's bank
+; first -- otherwise it scans a different bank's bytes and
+; the money penalty is computed from garbage.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPartyCount)
+	ldh [rSVBK], a
 	ld a, [wPartyCount]
 	ld c, a
 	ld hl, wPartyMon1Level
@@ -108,6 +121,8 @@ LoseWhiteOutMoney:
 	add hl, de
 	dec c
 	jr nz, .loop
+	pop af
+	ldh [rSVBK], a
 ; Multiply the badge factor by the max level
 	xor a
 	ldh [hMultiplicand + 0], a

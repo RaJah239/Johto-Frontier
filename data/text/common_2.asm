@@ -1199,6 +1199,25 @@ _StartMenuContestEndText::
 	line "end the Contest?"
 	done
 
+_GrandGauntletGiveUpConfirmText1::
+	text "Give up on this"
+	line "run?"
+
+	para "Your progress will"
+	line "be lost."
+
+	para "Your #mon"
+	line "will be returned."
+
+	para "Are you sure?"
+	done
+
+
+_GrandGauntletGiveUpConfirmText3::
+	text "This can't be un-"
+	line "done! Give up???"
+	done
+
 _ItemsTossOutHowManyText::
 	text "Toss out how many"
 	line "@"

@@ -115,6 +115,7 @@ sDungeonBagDataEnd::
 ; restored by LoadBackupPlayerData.
 sDungeonBackupSavedBagData::
 sDungeonBackupSavedBag:: ds wNumPCItems - wTMsHMs
+sDungeonBackupSavedBagTail:: ds 3
 
 ; The Cherrygrove City Party Keeper holds the player's whole party here
 ; while he hands out a random team. It lives in SRAM so it survives
