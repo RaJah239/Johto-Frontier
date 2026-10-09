@@ -162,7 +162,7 @@ BattleTowerRoomMenu_PlacePickLevelMenu:
 	ld a, $1
 	ldh [rSVBK], a
 	ld hl, Strings_L50 ; Address to list of strings with the choosable levels
-	ld a, 2                 ; 10 levels to choose from, including 'Cancel'-option
+	ld a, 3                 ; 2 challenges to choose from, including 'Cancel'-option
 	ld [wcd4a], a
 	ld a, l
 	ld [wcd4b], a
@@ -268,7 +268,7 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 
 	ld a, [wcd4f]
 	ld [w3_d800], a
-	jr BattleTowerRoomMenu_IncrementJumptable
+	jmp BattleTowerRoomMenu_IncrementJumptable
 
 .b_button
 	call PlayClickSFX
@@ -320,7 +320,9 @@ String_119d07:
 	db "   ▼@"
 
 Strings_L50:
-	db "Enter @@"
+; Challenges; each entry is a fixed 8-byte slot (6 chars + "@@").
+	db "Elite @@"
+	db "Champ @@"
 	db "Cancel@@"
 
 BattleTowerRoomMenu_IncrementJumptable:

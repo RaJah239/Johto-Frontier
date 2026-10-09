@@ -115,7 +115,7 @@ Script_ChooseChallenge:
 
 .MirrorText:
 	db "Normal Battle@"
-	db "Mirror Battle@"
+	db "Random Battle@"
 	db "Info@"
 	db "Cancel@"
 
@@ -123,8 +123,8 @@ MirrorBattlesText:
 	text "Normal Battle: use"
 	line "your own team."
 
-	para "Mirror Battle: use"
-	line "your foe's team in"
+	para "Random Battle: use"
+	line "a random team in"
 	cont "each round against"
 	cont "them."
 	done

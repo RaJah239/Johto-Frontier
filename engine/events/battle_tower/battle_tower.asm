@@ -48,6 +48,13 @@ RunBattleTowerTrainer:
 	xor a
 	ld [wLinkMode], a
 	farcall HealParty
+	; Random Battle: replace the player's party with a pool-generated team
+	; for this battle; LoadPokemonData restores the saved party afterwards.
+	ld a, [wCopyEnemyParty]
+	and a
+	jr z, .skip_random_team
+	farcall BattleTower_GenerateRandomPlayerParty
+.skip_random_team
 	call ReadBTTrainerParty
 
 	predef StartBattle
