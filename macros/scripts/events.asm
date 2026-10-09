@@ -1394,6 +1394,39 @@ MACRO gg_trainer
 	end
 ENDM
 
+; Macro for Grand Gauntlet silent trainers with 50/50 random selection.
+; \1 = event flag (e.g., EVENT_GG_ROOM_1_TRAINER_1)
+; \2 = primary trainer class (e.g., SCARLET)
+; \3 = primary trainer party (e.g., SCARLET1)
+; \4 = alt trainer class (e.g., MAXIMA)
+; \5 = alt trainer party (e.g., MAXIMA1)
+MACRO gg_trainer_random
+	checkevent \1
+	iftrue_end
+	faceplayer
+	special BackupPartyHeldItems
+	winlosstext NoText, NoText
+	random 2
+	ifequal 0, .alt_trainer
+	loadtrainer \2, \3
+.sjump_main
+	loadvar VAR_BATTLETYPE, BATTLETYPE_CANLOSE
+	startbattle
+	reloadmap
+	iffalse .done
+	sjump .heal
+.done
+	setevent \1
+.heal
+	special RestorePartyHeldItems
+	special HealParty
+	end
+
+.alt_trainer:
+	loadtrainer \4, \5
+	sjump .sjump_main
+ENDM
+
 ; Shared empty dialogue for silent trainers.
 MACRO no_text
 	text "<……>"
