@@ -1371,4 +1371,34 @@ MACRO ShowGenericAbilityPopup
 .\@Done:
 ENDM
 
+; Macro for Grand Gauntlet silent trainers
+; \1 = event flag (e.g., EVENT_GG_ROOM_1_TRAINER_1)
+; \2 = trainer party (e.g., SCARLET1, SCARLET2, SCARLET3)
+MACRO gg_trainer
+	checkevent \1
+	iftrue_end
+	faceplayer
+	special BackupPartyHeldItems
+	winlosstext NoText, NoText
+	loadtrainer SCARLET, \2
+	loadvar VAR_BATTLETYPE, BATTLETYPE_CANLOSE
+	startbattle
+	reloadmap
+	iffalse .done
+	sjump .heal
+.done
+	setevent \1
+.heal
+	special RestorePartyHeldItems
+	special HealParty
+	end
+ENDM
+
+; Shared empty dialogue for silent trainers.
+MACRO no_text
+	text "<……>"
+	line "<……>"
+	done
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

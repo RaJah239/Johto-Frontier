@@ -28,66 +28,13 @@ BattlePlazaGrandGauntletBattleRoom1_MapScripts:
 	def_callbacks
 
 GG1Trainer1:
-	checkevent EVENT_GG_ROOM_1_TRAINER_1
-	iftrue_end
-	faceplayer
-	special BackupPartyHeldItems
-	winlosstext NoText, NoText
-	loadtrainer SCARLET, SCARLET1
-	loadvar VAR_BATTLETYPE, BATTLETYPE_CANLOSE
-	startbattle
-	reloadmap
-	iffalse .done
-	sjump .heal
-.done
-	setevent EVENT_GG_ROOM_1_TRAINER_1
-.heal
-	special RestorePartyHeldItems
-	special HealParty
-	end
-
+	gg_trainer EVENT_GG_ROOM_1_TRAINER_1, SCARLET1
 GG1Trainer2:
-	checkevent EVENT_GG_ROOM_1_TRAINER_2
-	iftrue_end
-	faceplayer
-	special BackupPartyHeldItems
-	winlosstext NoText, NoText
-	loadtrainer SCARLET, SCARLET1
-	loadvar VAR_BATTLETYPE, BATTLETYPE_CANLOSE
-	startbattle
-	reloadmap
-	iffalse .done
-	sjump .heal
-.done
-	setevent EVENT_GG_ROOM_1_TRAINER_2
-.heal
-	special RestorePartyHeldItems
-	special HealParty
-	end
-
+	gg_trainer EVENT_GG_ROOM_1_TRAINER_2, SCARLET1
 GG1Trainer3:
-	checkevent EVENT_GG_ROOM_1_TRAINER_3
-	iftrue_end
-	faceplayer
-	special BackupPartyHeldItems
-	winlosstext NoText, NoText
-	loadtrainer SCARLET, SCARLET1
-	loadvar VAR_BATTLETYPE, BATTLETYPE_CANLOSE
-	startbattle
-	reloadmap
-	iffalse .done
-	sjump .heal
-.done
-	setevent EVENT_GG_ROOM_1_TRAINER_3
-.heal
-	special RestorePartyHeldItems
-	special HealParty
-	end
-
+	gg_trainer EVENT_GG_ROOM_1_TRAINER_3, SCARLET1
 NoText:
-	text "<……>"
-	line "<……>"
-	done
+	no_text
 
 GGR1Crystal:
 	checkevent EVENT_GG_ROOM_1_TRAINER_1
