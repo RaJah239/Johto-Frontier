@@ -69,6 +69,9 @@ BattlePlazaDraftArena_Blocks:
 BattlePlazaBattleLobby_Blocks:
 	INCBIN "maps/BattlePlazaBattleLobby.blk"
 
+BattlePlazaGrandGauntletBattleRoom1_Blocks:
+	INCBIN "maps/BattlePlazaGrandGauntletBattleRoom.blk"
+
 BattlePlazaRaJaHouse_Blocks:
 OlivineTimsHouse_Blocks:
 OlivinePunishmentSpeechHouse_Blocks:

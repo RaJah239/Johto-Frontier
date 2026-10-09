@@ -8,7 +8,7 @@ BattlePlazaGrandGauntlet_MapEvents:
 	def_bg_events
 
 	def_object_events
-	object_event  4,  3, SPRITE_UNKNOWN, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
+	object_event  4,  3, SPRITE_UNKNOWN, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, GrandGauntletReceptionistScript, -1
 
 	object_const_def
 
@@ -16,3 +16,10 @@ BattlePlazaGrandGauntlet_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
+
+GrandGauntletReceptionistScript:
+	playsound SFX_WARP_TO
+	special FadeOutPalettes
+	waitsfx
+	warp BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1, 2, 9
+	end

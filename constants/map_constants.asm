@@ -342,6 +342,7 @@ ENDM
 	map_const BATTLE_PLAZA_DRAFT_ARENA,                     4,  7 ; 11
 	map_const BATTLE_PLAZA_ECHO_CHAMBER,                    4,  7 ; 12
 	map_const BATTLE_PLAZA_GRAND_GAUNTLET,                  4,  7 ; 13
+	map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1,    3,  5 ; 14
 	endgroup
 
 DEF NUM_MAP_GROUPS EQU const_value ; 17

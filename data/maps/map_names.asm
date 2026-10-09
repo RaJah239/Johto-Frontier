@@ -636,6 +636,7 @@ Battle_Plaza_Names: ; newgroup BATTLE_PLAZA
 	dw Battle_Plaza_Name11 ; map_const BATTLE_PLAZA_DRAFT_ARENA
 	dw Battle_Plaza_Name12 ; map_const BATTLE_PLAZA_ECHO_CHAMBER
 	dw Battle_Plaza_Name13 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET
+	dw Battle_Plaza_Name14 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1
 	assert_table_length NUM_BATTLE_PLAZA_MAPS
 
 Battle_Plaza_Name1:  db "Battle Plaza@"
@@ -651,3 +652,4 @@ Battle_Plaza_Name10: db "Battle Lobby@"
 Battle_Plaza_Name11: db "Draft Arena@"
 Battle_Plaza_Name12: db "Echo Chamber@"
 Battle_Plaza_Name13: db "Grand Gauntlet@"
+Battle_Plaza_Name14: db "Battle Room 1@"
