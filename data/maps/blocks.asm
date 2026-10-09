@@ -70,7 +70,7 @@ BattlePlazaBattleLobby_Blocks:
 	INCBIN "maps/BattlePlazaBattleLobby.blk"
 
 BattlePlazaGrandGauntletBattleRoom1_Blocks:
-	INCBIN "maps/BattlePlazaGrandGauntletBattleRoom1.blk"
+	INCBIN "maps/BattlePlazaGrandGauntletBattleRoom.blk"
 
 BattlePlazaRaJaHouse_Blocks:
 OlivineTimsHouse_Blocks:
