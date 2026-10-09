@@ -192,7 +192,7 @@
  	const MEMBERS_CARD
  	const NOMAD_SIGIL
  	const SCORE_CARD
- 	const ITEM_E1
+ 	const MUSIC_PLAYER
  	const ITEM_E2
  	const ITEM_E3
  	const ITEM_E4

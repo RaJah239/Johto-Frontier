@@ -58,6 +58,7 @@ CGBLayoutJumptable:
 	dw _CGB_TrainerOrMonFrontpicPals
 	dw _CGB_MysteryGift
 	dw _CGB_Plain
+	dw _CGB_MusicPlayer
 	assert_table_length NUM_SCGB_LAYOUTS
 
 _CGB_BattleGrayscale:
@@ -1265,3 +1266,31 @@ INCLUDE "gfx/diploma/plain.pal" ; todo: replace this polished port
 
 PokegearOBPals:
 INCLUDE "gfx/icons/icons.pal" ; todo: replace this polished port
+
+_CGB_MusicPlayer:
+	ld hl, .MusicPlayerPalettes
+	ld de, wBGPals1
+	ld bc, 2 palettes
+	ld a, BANK(wBGPals1)
+	call FarCopyWRAM
+	call ApplyPals
+	call WipeAttrmap
+
+	hlcoord 0, 0, wAttrmap
+	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld a, $0
+	call ByteFill
+
+	hlcoord 0, 0, wAttrmap
+	lb bc, 3, 2
+	ld a, $1
+	call FillBoxCGB
+
+	hlcoord 18, 0, wAttrmap
+	lb bc, 3, 2
+	ld a, $1
+	call FillBoxCGB
+	jmp ApplyAttrmap
+
+.MusicPlayerPalettes:
+INCLUDE "gfx/music_player/music_player.pal"

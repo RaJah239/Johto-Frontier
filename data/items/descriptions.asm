@@ -187,7 +187,7 @@ ItemDescriptions:
 	dw MembersCardDesc
 	dw NomadSigilDesc
 	dw ScoreCardDesc
-	dw TeruSama26Desc
+	dw MusicPlayerDesc
 	dw TeruSama26Desc
 	dw TeruSama27Desc
 	dw TeruSama27Desc
@@ -259,6 +259,10 @@ ItemDescriptions:
 	dw TeruSama32Desc
 	dw TeruSama33Desc
 	assert_table_length $ff
+
+MusicPlayerDesc:
+	db   "Play any song"
+	next "from your Pack.@"
 
 MasterBallDesc:
 	db   "The best BALL. It"

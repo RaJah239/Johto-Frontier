@@ -134,7 +134,8 @@ wMapTimeOfDay:: db
 
 wPalFlags:: db
 
-	ds 2
+; Song ID saved from the Music Player; replaces the battle theme while set.
+wPersistentBattleMusicOverride:: ds 2
 
 wPrinterConnectionOpen:: db
 wPrinterOpcode:: db

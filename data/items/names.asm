@@ -186,7 +186,7 @@ ItemNames::
 	li "Member's Card"
 	li "Nomad Sigil"
 	li "Score Card"
-	li "?"
+	li "Music Player"
 	li "?"
 	li "?"
 	li "?"

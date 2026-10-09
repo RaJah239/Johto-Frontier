@@ -42,6 +42,14 @@ PlayBattleMusic:
 	call DelayFrame
 	call MaxVolume
 
+	; A track saved from the Music Player overrides the battle theme.
+	ld a, [wPersistentBattleMusicOverride + 1]
+	ld d, a
+	ld a, [wPersistentBattleMusicOverride]
+	ld e, a
+	or d
+	jr nz, .done
+
 	; Are we fighting a trainer?
 	ld a, [wOtherTrainerClass]
 	and a

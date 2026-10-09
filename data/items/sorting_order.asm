@@ -236,11 +236,12 @@ ItemNameOrder:
 ; Key Items Pocket - 28 total
 ; Permanent Key Items
 ; Items that are possibly frequently used
-	db TYPE_CHART
+	db MUSIC_PLAYER
 	db MOVE_DEX
 	db NOMAD_SIGIL
 	db MEMBERS_CARD
 	db SCORE_CARD
+	db TYPE_CHART
 	db AMBROSIA
 	db BICYCLE
 	db COIN_CASE
@@ -277,9 +278,8 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 9 total
+; Unused Items - 8 total
 	db EGG_TICKET
- 	db ITEM_E1
  	db ITEM_E2
  	db ITEM_E3
  	db ITEM_E4
@@ -300,8 +300,6 @@ ItemAlphaOrder:
 ; data/items/names.asm (case- and accent-insensitive; ties break on item id).
 ; NO_ITEM leads so it sorts to the top, like ItemNameOrder.
 	db NO_ITEM
-
-	db ITEM_E1
 	db ITEM_E2
 	db ITEM_E3
 	db ITEM_E4
@@ -425,6 +423,7 @@ ItemAlphaOrder:
 	db MOVE_DEX
 	db MUSCLE_BAND
 	db MUSIC_MAIL
+	db MUSIC_PLAYER
 	db MYSTERYBERRY
 	db MYSTIC_WATER
 	db NEVERMELTICE

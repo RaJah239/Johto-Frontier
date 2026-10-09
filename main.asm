@@ -602,3 +602,7 @@ INCLUDE "data/events/streaks.asm"
 
 SECTION "Score Card", ROMX
 INCLUDE "engine/items/score_card.asm"
+
+
+SECTION "Music Player", ROMX
+INCLUDE "engine/items/music_player.asm"

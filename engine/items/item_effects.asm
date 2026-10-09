@@ -200,7 +200,7 @@ ItemEffects:
 	dw MembersCardEffect   ; MEMBERS_CARD
 	dw NomadSigilEffect    ; NOMAD_SIGIL
 	dw ScoreCardEffect     ; SCORE_CARD
-	dw NoEffect            ; ITEM_E1
+	dw MusicPlayerEffect   ; MUSIC_PLAYER
 	dw NoEffect            ; ITEM_E2
 	dw NoEffect            ; ITEM_E3
 	dw NoEffect            ; ITEM_E4
@@ -2280,6 +2280,24 @@ CoinCaseEffect:
 .CoinCaseCountText:
 	text_far _CoinCaseCountText
 	text_end
+
+MusicPlayerEffect:
+	farcall BlankScreen
+	call LoadStandardFont
+	farcall _MusicPlayer
+	ld a, [wUsingItemWithSelect]
+	and a
+	ret z
+	call ClearBGPalettes
+	call ReloadTilesetAndPalettes
+	call UpdateSprites
+	call GSReloadPalettes
+	ld b, SCGB_MAPPALS
+	call GetSGBLayout
+	farcall LoadOW_BGPal7
+	call WaitBGMap2
+	farcall FadeInFromWhite
+	jmp EnableSpriteUpdates
 
 OldRodEffect:
 	ld e, $0
