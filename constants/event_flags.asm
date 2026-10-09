@@ -823,7 +823,16 @@
 	const EVENT_BEAT_SAGE_GAKU
 	const EVENT_BEAT_SAGE_MASA
 	const EVENT_BEAT_SAGE_KOJI
-; Unused: next 391 events
+
+; grand gauntlet events
+	const EVENT_FIRST_GG
+
+	const GG_ROOM_1_ITEM_2
+	const GG_ROOM_1_ITEM_3
+
+	const EVENT_LAST_GG
+
+; Unused: next 387 events
 
 	const_next 1600
 ; Sprite visibility flags
@@ -1124,13 +1133,7 @@
 	const EVENT_MOUNT_MORTAR_B1F_PP_UP
 	const EVENT_RADIO_TOWER_5F_ULTRA_BALL
 	const EVENT_DARK_CAVE_VIOLET_ENTRANCE_RAIN_SHARD
-
-; grand gauntlet events
-	const GG_ROOM_1_ITEM_1
-	const GG_ROOM_1_ITEM_2
-	const GG_ROOM_1_ITEM_3
-
-; Unused: next 84 events
+; Unused: next 87 events
 
 	const_next 2048
 DEF NUM_EVENTS EQU const_value ; 800

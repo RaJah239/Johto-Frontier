@@ -25,8 +25,7 @@ GrandGauntletGiveBackPartyCallback:
 	; Hand back any party left stashed
 	callasm TakeBackHeldParty
 	callasm ClearDungeonBag
-
-	clearevent EVENT_ROUTE_1_POTION ; only for testing purposes
+	callasm ResetGrandGauntletEvents
 	endcallback
 
 GrandGauntletGiveUpScript::
@@ -823,4 +822,31 @@ EquipPartyKeeperTeamItems:
 	pop bc
 	dec b
 	jr nz, .slot
+	ret
+
+DEF FIRST_GG_EVENT EQU EVENT_FIRST_GG
+DEF LAST_GG_RESET_EVENT  EQU EVENT_LAST_GG
+
+ResetGrandGauntletEvents:
+	; reset all sure hit event flags
+    ld de, FIRST_GG_EVENT
+    ld bc, LAST_GG_RESET_EVENT - FIRST_GG_EVENT + 1
+; ResetEventRange
+; Input:
+;	DE = first event constant
+;	BC = number of events to reset
+; Destroys: AF
+.loop
+	push bc
+	push de
+	ld b, RESET_FLAG
+	call EventFlagAction
+	pop de
+	pop bc
+
+	inc de
+	dec bc
+	ld a, b
+	or c
+	jr nz, .loop
 	ret
