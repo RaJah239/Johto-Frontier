@@ -63,8 +63,7 @@ DoBattleTransition:
 	pop af
 	vc_hook Stop_reducing_battle_transition_flashing
 	ldh [hVBlank], a
-	call DelayFrame
-	ret
+	jmp DelayFrame
 
 .InitGFX:
 	ld a, [wLinkMode]
@@ -93,14 +92,12 @@ DoBattleTransition:
 	ld [hl], a
 	ld a, BALL_POCKET
 	ld [wLastPocket], a
-	call WipeLYOverrides
-	ret
+	jmp WipeLYOverrides
 
 .NonMobile_LoadPokeballTiles:
 	call LoadTrainerBattlePokeballTiles
 	hlbgcoord 0, 0
-	call ConvertTrainerBattlePokeballTilesTo2bpp
-	ret
+	jr ConvertTrainerBattlePokeballTilesTo2bpp
 
 LoadTrainerBattlePokeballTiles:
 ; Load the tiles used in the Pokeball Graphic that fills the screen
@@ -352,8 +349,7 @@ StartTrainerBattle_SetUpBGMap:
 StartTrainerBattle_Flash:
 	call .DoFlashAnimation
 	ret nc
-	call StartTrainerBattle_NextScene
-	ret
+	jr StartTrainerBattle_NextScene
 
 .DoFlashAnimation:
 	ld a, [wTimeOfDayPalset]
@@ -420,8 +416,7 @@ StartTrainerBattle_SineWave:
 	ld a, [wBattleTransitionCounter]
 	cp $60
 	jr nc, .end
-	call .DoSineWave
-	ret
+	jr .DoSineWave
 
 .end
 	ld a, BATTLETRANSITION_FINISH
@@ -848,6 +843,80 @@ INCLUDE "gfx/overworld/rocket_battle.pal"
 	ret z
 	cp GIOVANNI
 	ret z
+
+	; gym leaders
+	ld de, BugsyTransition
+    cp BUGSY 
+    ret z
+    ld de, WhitneyTransition
+    cp WHITNEY
+    ret z  
+    ld de, FalknerTransition
+    cp FALKNER 
+    ret z 
+    ld de, MortyTransition
+    cp MORTY 
+    ret z 
+    ld de, ChuckTransition
+    cp CHUCK 
+    ret z 
+    ld de, JasmineTransition
+    cp JASMINE 
+    ret z  
+    ld de, PryceTransition
+    cp PRYCE 
+    ret z 
+    ld de, ClairTransition
+    cp CLAIR 
+    ret z
+    ld de, BrockTransition 
+    cp BROCK 
+    ret z
+    ld de, BlaineTransition
+    cp BLAINE 
+    ret z
+    ld de, BlueTransition
+    cp BLUE 
+    ret z
+	ld de, LtSurgeTransition
+	cp LT_SURGE
+	ret z
+    ld de, MistyTransition
+    cp MISTY 
+    ret z
+    ld de, ErikaTransition
+    cp ERIKA 
+    ret z
+    ld de, SabrinaTransition
+    cp SABRINA 
+    ret z 
+    ld de, JanineTransition
+    cp JANINE 
+    ret z   	
+
+	; elite 4
+	ld de, Elite4Transition
+    cp KOGA
+	ret z
+    cp BRUNO
+	ret z
+    cp KAREN
+	ret z
+    cp WILL
+	ret z
+
+   ; champions
+    ld de, ChampionTransition
+    cp CHAMPION
+	ret z
+	cp RED
+	ret z
+	cp POKEMON_PROF
+	ret z
+	cp INSAF
+	ret z
+	cp GREEN
+	ret z
 	ld de, PokeBallTransition
 	ret
 
@@ -873,6 +942,342 @@ opt b.X ; . = 0, X = 1
 	bigdw %......XXXX......
 popo
 
+FalknerTransition:
+pusho
+opt b.X ; . = 0, X = 0
+	bigdw %....XXXXXXXX....
+	bigdw %..XX........XX..
+	bigdw %XX..XXX..XXX..XX
+	bigdw %X.XXX.X..X.XXX.X
+	bigdw %X.X.X.X..X.X.X.X
+	bigdw %X.X.X.XXXX.X.X.X
+	bigdw %X.X.X.X..X.X.X.X
+	bigdw %X.X.X.X..X.X.X.X
+	bigdw %X.X.X.X..X.X.X.X
+	bigdw %X.X.X.X..X.X.X.X
+	bigdw %X.X.X.X..X.X.X.X
+	bigdw %X.X.XXX..XXX.X.X
+	bigdw %X.X.X......X.X.X
+	bigdw %X.XXX......XXX.X
+	bigdw %X.X..........X.X
+	bigdw %XXX..........XXX
+popo
+
+BugsyTransition:
+pusho
+opt b.X ; . = 0, X = 0
+	bigdw %......XXXX......
+	bigdw %....XXXXXXXX....
+	bigdw %..XXXXXXXXXXXX..
+	bigdw %..X..........X..
+	bigdw %.X.....XX.....X.
+	bigdw %.X....XXXX....X.
+	bigdw %X.....XXXX.....X
+	bigdw %X......XX......X
+	bigdw %X...XX....XX...X
+	bigdw %X..XXXX..XXXX..X
+	bigdw %.X.XXXX..XXXX.X.
+	bigdw %.X..XX....XX..X.
+	bigdw %..X..........X..
+	bigdw %..XX........XX..
+	bigdw %....XX....XX....
+	bigdw %......XXXX......
+popo
+
+WhitneyTransition:
+pusho
+opt b.X ; . = 0, X = 0
+	bigdw %.......XX.......
+	bigdw %......X.XX......
+	bigdw %.....X...XX.....
+	bigdw %....X.....XX....
+	bigdw %...X.......XX...
+	bigdw %..X.........XX..
+	bigdw %.X...........XX.
+	bigdw %X.............XX
+	bigdw %X.............XX
+	bigdw %.X...........XX.
+	bigdw %..X.........XX..
+	bigdw %...X.......XX...
+	bigdw %....X.....XX....
+	bigdw %.....X...XX.....
+	bigdw %......XXXX......
+	bigdw %.......XX.......
+popo
+
+MortyTransition:
+pusho
+opt b.X ; . = 0, X = 0
+	bigdw %.....XXXXXX.....
+	bigdw %...XX......XX...
+	bigdw %..X..........X..
+	bigdw %.X....X..X....X.
+	bigdw %.X...XX..XX...X.
+	bigdw %X...XXX..XXX..XX
+	bigdw %X.............XX
+	bigdw %X.............XX
+	bigdw %.X...........XX.
+	bigdw %.X...........XX.
+	bigdw %..X.........XX..
+	bigdw %...X.....XXXX...
+	bigdw %....X....XXX....
+	bigdw %.....XX...X.....
+	bigdw %.......XX..X....
+	bigdw %.........XXXX...
+popo
+
+ChuckTransition:
+pusho
+opt b.X ; . = 0, X = 0
+	bigdw %....XXXXXXXX....
+	bigdw %.XXXX..X...XXXX.
+	bigdw %.X..X..X...X..X.
+	bigdw %.X..X..X...X..X.
+	bigdw %XX..X..X...X..XX
+	bigdw %X...X..X...X...X
+	bigdw %X...X..X...X...X
+	bigdw %X...X..X...X...X
+	bigdw %XXXXXXXXXX.X...X
+	bigdw %X........X.X...X
+	bigdw %X........XXXXXXX
+	bigdw %XXXXXXXXXX....XX
+	bigdw %.X............X.
+	bigdw %.X............X.
+	bigdw %.XXXX.......XXX.
+	bigdw %....XXXXXXXX....
+popo
+
+JasmineTransition:
+pusho
+opt b.X ; . = 0, X = 0
+	bigdw %.....XXXXXX.....
+	bigdw %....XXXXXXXX....
+	bigdw %...XX..X.XXXX...
+	bigdw %..XX..X.XXX..X..
+	bigdw %.XX..X.XXX....X.
+	bigdw %XX..X.XXX....X.X
+	bigdw %XX.X.XXX....X..X
+	bigdw %XX.XXX.....X.X.X
+	bigdw %X.XXX.....X.XX.X
+	bigdw %XXXX.....X.XX..X
+	bigdw %XXX.....X.XX...X
+	bigdw %.XX....X.XX...X.
+	bigdw %..X...X.XX...X..
+	bigdw %...X.X.XX...X...
+	bigdw %....X......X....
+	bigdw %.....XXXXXX.....
+popo
+
+PryceTransition:
+pusho
+opt b.X ; . = 0, X = 0
+	bigdw %.......XX.......
+	bigdw %.....XX..XX.....
+	bigdw %...XX...X..XX...
+	bigdw %.XX..XX.X....XX.
+	bigdw %X...X...XXX.X..X
+	bigdw %X.X...X.X.XXX..X
+	bigdw %X.XXX...XXX....X
+	bigdw %X.X.XXX.X...X..X
+	bigdw %X.X.X...XXX.X..X
+	bigdw %X.X...X.X.XXX..X
+	bigdw %X.X..XX.X..XX..X
+	bigdw %X..XX...XXX....X
+	bigdw %.XX..XX.X....XX.
+	bigdw %...XX...X..XX...
+	bigdw %.....XX..XX.....
+	bigdw %.......XX.......
+popo
+
+ClairTransition:
+pusho
+opt b.X ; . = 0, X = 0
+	bigdw %..XXXXXXXXXXXX..
+	bigdw %..X..X....X..X..
+	bigdw %.XX..X....X..XX.
+	bigdw %X..XX......XX..X
+	bigdw %X..............X
+	bigdw %X...X......X...X
+	bigdw %X...XX....XX...X
+	bigdw %X....XX..XX....X
+	bigdw %X..............X
+	bigdw %.XXX........XXX.
+	bigdw %..XXXX....XXXX..
+	bigdw %...XX.X..X.XX...
+	bigdw %....X.X..X.X....
+	bigdw %....XX....XX....
+	bigdw %.....X....X.....
+	bigdw %......XXXX......
+popo
+
+BrockTransition:
+pusho 
+opt b.X ; . = 0, X = 0
+    bigdw %................
+	bigdw %................
+	bigdw %......XXXX......
+	bigdw %.....X....X.....
+	bigdw %....X......X....
+	bigdw %...X........X...
+	bigdw %..X...XXXX...X..
+	bigdw %.X...X....X...X.
+	bigdw %.X...X....X...X.
+	bigdw %.X...X....X...X.
+	bigdw %.X...X....X...X.
+	bigdw %..X...XXXX...X..
+	bigdw %...X........X...
+	bigdw %....X......X....
+	bigdw %.....X....X.....
+	bigdw %......XXXX......
+popo
+
+BlaineTransition:
+pusho 
+opt b.X ; . = 0, X = 0
+    bigdw %................
+    bigdw %.......X........
+	bigdw %......X.X.......
+	bigdw %..X...X.X...X...
+	bigdw %.X.X.X...X.X.X..
+	bigdw %.X..XX...XX..X..
+	bigdw %.X...........X..
+	bigdw %.X.....X.....X..
+	bigdw %..X....X....X...
+	bigdw %..X...X.X...X...
+	bigdw %.X...X...X...X..
+	bigdw %.X...X...X...X..
+	bigdw %..X...XXX...X...
+	bigdw %...X.......X....
+	bigdw %....XX...XX.....
+	bigdw %......XXX.......
+popo
+
+BlueTransition:
+pusho 
+opt b.X ; . = 0, X = 0
+    bigdw %................
+	bigdw %................
+	bigdw %....XXXXX.......
+	bigdw %...X..X..X......
+	bigdw %..X.XXXXXX......
+	bigdw %..X.XXXXXXX.....
+	bigdw %..XXXXXXXX.X....
+	bigdw %..X.XXXXXXXX....
+	bigdw %..X.XXXXX..XX...
+	bigdw %...XXXXX.X.X.X..
+	bigdw %.....X.X..X..X..
+	bigdw %......XXXX.X.X..
+	bigdw %........X...XX..
+	bigdw %.........XXXX.X.
+	bigdw %.............X.X
+	bigdw %..............XX
+popo
+
+LtSurgeTransition:
+pusho 
+opt b.X ; . = 0, X = 0
+    bigdw %........X.......
+	bigdw %.......X.X......
+	bigdw %......X...X.....
+	bigdw %...XXXX...XXX...
+	bigdw %...X..XXXX..X...
+	bigdw %..XX.X....X.X...
+	bigdw %.X..X......XXX..
+	bigdw %X...X......X..X.
+	bigdw %.X..X......X...X
+	bigdw %..XXX......X..X.
+	bigdw %...X.X....X.XX..
+	bigdw %...X..XXXX..X...
+	bigdw %...XXX...XXXX...
+	bigdw %.....X...X......
+	bigdw %......X.X.......
+	bigdw %.......X........
+popo
+
+MistyTransition:
+pusho
+opt b.X ; . = 0, X = 0
+    bigdw %................
+	bigdw %................
+	bigdw %.......X........
+	bigdw %......X.X.......
+	bigdw %......X.X.......
+	bigdw %.....X...X......
+	bigdw %.....X...X......
+	bigdw %....X.....X.....
+	bigdw %...X.......X....
+	bigdw %...X...X...X....
+	bigdw %..X...X.X...X...
+	bigdw %..X..X...X..X...
+	bigdw %..X...X.X...X...
+	bigdw %...X...X...X....
+	bigdw %....XX...XX.....
+	bigdw %......XXX.......
+popo
+
+ErikaTransition:
+pusho
+opt b.X ; . = 0, X = 0
+    bigdw %.......XX.......
+	bigdw %......X..X......
+	bigdw %...XXX....XXX...
+	bigdw %..X...X..X...X..
+	bigdw %..X....XX....X..
+	bigdw %..X....XX....X..
+	bigdw %.X.X..X..X..X.X.
+	bigdw %X...XX.XX.XX...X
+	bigdw %X...XX.XX.XX...X
+	bigdw %.X.X..X..X..X.X.
+	bigdw %..X....XX....X..
+	bigdw %..X....XX....X..
+	bigdw %..X...X..X...X..
+	bigdw %...XXX....XXX...
+	bigdw %......X..X......
+	bigdw %.......XX.......
+popo
+
+SabrinaTransition:
+pusho
+opt b.X ; . = 0, X = 0
+    bigdw %................
+	bigdw %................
+	bigdw %................
+	bigdw %......XXX.......
+	bigdw %....XX...XX.....
+	bigdw %...X.......X....
+	bigdw %..X...XXX...X...
+	bigdw %..X..X...X..X...
+	bigdw %.X..X.....X..X..
+	bigdw %.X..X.....X..X..
+	bigdw %.X..X.....X..X..
+	bigdw %..X..X...X..X...
+	bigdw %..X...XXX...X...
+	bigdw %...X.......X....
+	bigdw %....XX...XX.....
+	bigdw %......XXX.......
+popo
+
+JanineTransition:
+pusho
+opt b.X ; . = 0, X = 0
+    bigdw %................
+	bigdw %................
+	bigdw %....XX....XX....
+	bigdw %...X..X..X..X...
+	bigdw %..X....XX....X..
+	bigdw %..X.....X....X..
+	bigdw %.X......X.....X.
+	bigdw %.X......X.....X.
+	bigdw %.X......X.....X.
+	bigdw %..X.....X....X..
+	bigdw %..X.....X....X..
+	bigdw %...X....X...X...
+	bigdw %....X...X..X....
+	bigdw %.....X..X.X.....
+	bigdw %......X.XX......
+	bigdw %.......XX.......
+popo
+
 TeamRocketTransition:
 pusho
 opt b.X ; . = 0, X = 1
@@ -892,6 +1297,48 @@ opt b.X ; . = 0, X = 1
 	bigdw %XXXXX.....XXXXX.
 	bigdw %XXXXX......XXXXX
 	bigdw %XXXXX......XXXXX
+popo
+
+Elite4Transition:
+pusho
+opt b.X ; . = 0, X = 1
+	bigdw %................
+	bigdw %........XXX.....
+	bigdw %......XXX.......
+	bigdw %......XXX.......
+	bigdw %....XXX.........
+	bigdw %....XXX.........
+	bigdw %..XXX...........
+	bigdw %..XXX...........
+	bigdw %XXX...XXXX......
+	bigdw %XXX...XXXX......
+	bigdw %XXXXXXXXXXXXXXXX
+	bigdw %XXXXXXXXXXXXXXXX
+	bigdw %......XXXX......
+	bigdw %......XXXX......
+	bigdw %......XXXX......
+	bigdw %................
+popo
+
+ChampionTransition:
+pusho
+opt b.X ; . = 0, X = 1
+	bigdw %................
+	bigdw %................
+	bigdw %X......XX......X
+	bigdw %XX....XXXX....XX
+	bigdw %XX....XXXX....XX
+	bigdw %XXX..XX..XX..XXX
+	bigdw %XXX..XX..XX..XXX
+	bigdw %X.XXXX....XXXX.X
+	bigdw %XX............XX
+	bigdw %XX............XX
+	bigdw %XX............XX
+	bigdw %XX............XX
+	bigdw %XXXXXXXXXXXXXXXX
+	bigdw %XXXXXXXXXXXXXXXX
+	bigdw %................
+	bigdw %................
 popo
 
 WipeLYOverrides:
