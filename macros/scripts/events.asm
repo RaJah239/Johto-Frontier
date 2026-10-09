@@ -1401,4 +1401,32 @@ MACRO no_text
 	done
 ENDM
 
+; Macro for Grand Gauntlet room crystal: checks that all required
+; trainers are beaten, then offers to warp to the next floor.
+; \1..N = event flags that must all be set (e.g., EVENT_GG_ROOM_1_TRAINER_1, ...)
+; \N+1 = map constant (e.g., BATTLE_PLAZA_GRAND_GAUNTLET)
+; \N+2 = X coordinate
+; \N+3 = Y coordinate
+MACRO gg_room_crystal
+	REPT _NARG - 3
+		checkevent \1
+		iffalse .done
+		SHIFT
+	ENDR
+	opentext
+	writethistext
+		text "Warp to the next"
+		line "floor?"
+		done
+	yesorno
+	iffalse_endtext
+	closetext
+	playsound SFX_WARP_TO
+	special FadeOutPalettes
+	waitsfx
+	warp \1, \2, \3
+.done
+	end
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

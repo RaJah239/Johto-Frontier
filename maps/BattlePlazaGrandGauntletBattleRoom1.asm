@@ -37,26 +37,7 @@ NoText:
 	no_text
 
 GGR1Crystal:
-	checkevent EVENT_GG_ROOM_1_TRAINER_1
-	iffalse .done
-	checkevent EVENT_GG_ROOM_1_TRAINER_2
-	iffalse .done
-	checkevent EVENT_GG_ROOM_1_TRAINER_3
-	iffalse .done
-	opentext
-	writethistext
-		text "Warp to the next"
-		line "floor?"
-		done
-	yesorno
-	iffalse_endtext
-	closetext
-	playsound SFX_WARP_TO
-	special FadeOutPalettes
-	waitsfx
-	warp BATTLE_PLAZA_GRAND_GAUNTLET, 3, 13
-.done
-	end
+	gg_room_crystal EVENT_GG_ROOM_1_TRAINER_1, EVENT_GG_ROOM_1_TRAINER_2, EVENT_GG_ROOM_1_TRAINER_3, BATTLE_PLAZA_GRAND_GAUNTLET, 3, 13
 
 GGR1Item1:
 GGR1Item2:
