@@ -91,6 +91,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - Sour Apple - ALL new move animations with new particles
 - AzureKeys - Runic Power's animation
 - LJSTARbird - Time of day battle images
+- French Orange - chest and crystal overworld sprites
 
 # Code
 - Pret Team - for all their amazing tutorials
