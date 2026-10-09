@@ -72,17 +72,17 @@ _GetVarAction::
 ; battle tower points
 	dwb wBattleTowerNormalPoints,           RETVAR_ADDR_DE
 	dwb wBattleTowerInversePoints,          RETVAR_ADDR_DE
-	dwb wBattleTowerTypelessPoints,         RETVAR_ADDR_DE
+	dwb wBattleTowerTrickRoomPoints,        RETVAR_ADDR_DE
 	dwb wBattleTowerHardModeNormalPoints,   RETVAR_ADDR_DE
 	dwb wBattleTowerHardModeInversePoints,  RETVAR_ADDR_DE
 	dwb wBattleTowerHardModeTypelessPoints, RETVAR_ADDR_DE
-; battle tower mirror mode points
-	dwb wBattleTowerMirrorModeNormalPoints,           RETVAR_ADDR_DE
-	dwb wBattleTowerMirrorModeInversePoints,          RETVAR_ADDR_DE
-	dwb wBattleTowerMirrorModeTypelessPoints,         RETVAR_ADDR_DE
-	dwb wBattleTowerMirrorModeHardModeNormalPoints,   RETVAR_ADDR_DE
-	dwb wBattleTowerMirrorModeHardModeInversePoints,  RETVAR_ADDR_DE
-	dwb wBattleTowerMirrorModeHardModeTypelessPoints, RETVAR_ADDR_DE
+; battle tower random mode points
+	dwb wBattleTowerRandomModeNormalPoints,           RETVAR_ADDR_DE
+	dwb wBattleTowerRandomModeInversePoints,          RETVAR_ADDR_DE
+	dwb wBattleTowerRandomModeTrickRoomPoints,        RETVAR_ADDR_DE
+	dwb wBattleTowerRandomModeHardModeNormalPoints,   RETVAR_ADDR_DE
+	dwb wBattleTowerRandomModeHardModeInversePoints,  RETVAR_ADDR_DE
+	dwb wBattleTowerRandomModeHardModeTrickRoomPoints,RETVAR_ADDR_DE
 
 .CountCaughtMons:
 ; Caught mons.

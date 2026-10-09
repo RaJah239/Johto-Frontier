@@ -30,16 +30,16 @@ Script_BattleRoomLoop:
 	battletowertext BATTLETOWERTEXT_INTRO
 	promptbutton
 	closetext
-	checkevent EVENT_BATTLE_TOWER_TYPELESS_MODE
-	iftrue .Typeless
+	checkevent EVENT_BATTLE_TOWER_TRICK_ROOM_MODE
+	iftrue .trick_room
 	checkevent EVENT_BATTLE_TOWER_INVERSE_MODE
 	iftrue .Inverse
 	sjump .Merge2
 .Inverse:
 	loadvar VAR_BATTLETYPE, BATTLETYPE_INVERSE
 	sjump .Merge2
-.Typeless:
-	loadvar VAR_BATTLETYPE, BATTLETYPE_TYPELESS
+.trick_room:
+	loadvar VAR_BATTLETYPE, BATTLETYPE_TRICK_ROOM
 .Merge2:
 	special BattleTowerBattle ; predef StartBattle
 	special FadeOutPalettes
@@ -127,11 +127,11 @@ Script_FailedBattleTowerChallenge:
 	callasm CheckHardModeASM
 	iftrue .mirror_hard
 
-	callasm ResetBattleTowerMirrorModePoints
+	callasm ResetBattleTowerRandomModePoints
 	sjump .finish
 
 .mirror_hard
-	callasm ResetBattleTowerMirrorModeHardModePoints
+	callasm ResetBattleTowerRandomModeHardModePoints
 
 .finish
 	; give back player their party
@@ -143,24 +143,24 @@ Script_FailedBattleTowerChallenge:
 	writetext Text_ThanksForVisiting
 	waitendtext
 
-ResetBattleTowerMirrorModePoints:
+ResetBattleTowerRandomModePoints:
 	; determine mode and pick WRAM pointer
 	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
 	jr nz, .inverse
 
-	CheckEventFlag EVENT_BATTLE_TOWER_TYPELESS_MODE
-	jr nz, .typeless
+	CheckEventFlag EVENT_BATTLE_TOWER_TRICK_ROOM_MODE
+	jr nz, .trick_room
 
 .normal
-	ld hl, wBattleTowerMirrorModeNormalPoints
+	ld hl, wBattleTowerRandomModeNormalPoints
 	jr .set_zero
 
 .inverse
-	ld hl, wBattleTowerMirrorModeInversePoints
+	ld hl, wBattleTowerRandomModeInversePoints
 	jr .set_zero
 
-.typeless
-	ld hl, wBattleTowerMirrorModeTypelessPoints
+.trick_room
+	ld hl, wBattleTowerRandomModeTrickRoomPoints
 
 .set_zero
 	ld a, 0
@@ -172,8 +172,8 @@ ResetBattleTowerPoints:
 	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
 	jr nz, .inverse
 
-	CheckEventFlag EVENT_BATTLE_TOWER_TYPELESS_MODE
-	jr nz, .typeless
+	CheckEventFlag EVENT_BATTLE_TOWER_TRICK_ROOM_MODE
+	jr nz, .trick_room
 
 .normal
 	ld hl, wBattleTowerNormalPoints
@@ -183,32 +183,32 @@ ResetBattleTowerPoints:
 	ld hl, wBattleTowerInversePoints
 	jr .set_zero
 
-.typeless
-	ld hl, wBattleTowerTypelessPoints
+.trick_room
+	ld hl, wBattleTowerTrickRoomPoints
 
 .set_zero
 	ld a, 0
 	ld [hl], a
 	ret
 
-ResetBattleTowerMirrorModeHardModePoints:
+ResetBattleTowerRandomModeHardModePoints:
 	; determine mode and pick WRAM pointer
 	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
 	jr nz, .inverse
 
-	CheckEventFlag EVENT_BATTLE_TOWER_TYPELESS_MODE
-	jr nz, .typeless
+	CheckEventFlag EVENT_BATTLE_TOWER_TRICK_ROOM_MODE
+	jr nz, .trick_room
 
 .normal
-	ld hl, wBattleTowerMirrorModeHardModeNormalPoints
+	ld hl, wBattleTowerRandomModeHardModeNormalPoints
 	jr .set_zero
 
 .inverse
-	ld hl, wBattleTowerMirrorModeHardModeInversePoints
+	ld hl, wBattleTowerRandomModeHardModeInversePoints
 	jr .set_zero
 
-.typeless
-	ld hl, wBattleTowerMirrorModeHardModeTypelessPoints
+.trick_room
+	ld hl, wBattleTowerRandomModeHardModeTrickRoomPoints
 
 .set_zero
 	ld a, 0
@@ -220,8 +220,8 @@ ResetHardModeBattleTowerPoints:
 	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
 	jr nz, .inverse
 
-	CheckEventFlag EVENT_BATTLE_TOWER_TYPELESS_MODE
-	jr nz, .typeless
+	CheckEventFlag EVENT_BATTLE_TOWER_TRICK_ROOM_MODE
+	jr nz, .trick_room
 
 .normal
 	ld hl, wBattleTowerHardModeNormalPoints
@@ -231,7 +231,7 @@ ResetHardModeBattleTowerPoints:
 	ld hl, wBattleTowerHardModeInversePoints
 	jr .set_zero
 
-.typeless
+.trick_room
 	ld hl, wBattleTowerHardModeTypelessPoints
 
 .set_zero

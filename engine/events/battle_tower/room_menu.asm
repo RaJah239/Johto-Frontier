@@ -830,7 +830,7 @@ MenuData_NormalInverseNeutral:
 	db 3
 	db "Normal Mode@"
 	db "Inverse Mode@"
-	db "Neutral Mode@"
+	db "Trick Room@"
 
 CheckStringForErrors:
 ; Valid character ranges:

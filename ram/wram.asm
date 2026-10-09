@@ -3229,18 +3229,18 @@ wScorePlace:: ds 3
 ; battle tower points
 wBattleTowerNormalPoints:: db
 wBattleTowerInversePoints:: db
-wBattleTowerTypelessPoints:: db
+wBattleTowerTrickRoomPoints:: db
 wBattleTowerHardModeNormalPoints:: db
 wBattleTowerHardModeInversePoints:: db
 wBattleTowerHardModeTypelessPoints:: db
 
-; battle tower mirror mode points
-wBattleTowerMirrorModeNormalPoints:: db
-wBattleTowerMirrorModeInversePoints:: db
-wBattleTowerMirrorModeTypelessPoints:: db
-wBattleTowerMirrorModeHardModeNormalPoints:: db
-wBattleTowerMirrorModeHardModeInversePoints:: db
-wBattleTowerMirrorModeHardModeTypelessPoints:: db
+; battle tower random mode points
+wBattleTowerRandomModeNormalPoints:: db
+wBattleTowerRandomModeInversePoints:: db
+wBattleTowerRandomModeTrickRoomPoints:: db
+wBattleTowerRandomModeHardModeNormalPoints:: db
+wBattleTowerRandomModeHardModeInversePoints:: db
+wBattleTowerRandomModeHardModeTrickRoomPoints:: db
 
 wChartScrollDelay:: db
 

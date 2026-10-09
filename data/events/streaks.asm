@@ -43,7 +43,7 @@ MemberCardMainText:
 .page2:
 	db "◀ Page  2/2  ▶@"
 .page2_content:
-	db "Battle Tower Mirror@"
+	db "Battle Tower Random@"
 
 WaitButtonMemberCardInfoBox:
 	ldh a, [hOAMUpdate]
@@ -130,7 +130,7 @@ MemberCardLeftPress:
 .jump_to_page_2:
 	call DecreaseMemberCardPage
 	call UpdateMemberCardPageText
-	jmp BattleTowerMirrorModeStreakCard
+	jmp BattleTowerRandomModeStreakCard
 
 .jump_to_page_1:
 	call DecreaseMemberCardPage
@@ -156,7 +156,7 @@ MemberCardRightPress:
 .jump_to_page_2:
 	call IncreaseMemberCardPage
 	call UpdateMemberCardPageText
-	jmp BattleTowerMirrorModeStreakCard
+	jmp BattleTowerRandomModeStreakCard
 	
 ; ========================
 ; Page counter functions
@@ -212,11 +212,11 @@ BattleTowerStreakCard:
 	lb bc, 1, 3
 	call PrintNum
 
-	ld de, .NeutralModeString
+	ld de, .TrickRoomString
 	hlcoord 2, 7
 	call PlaceString
 
-	ld de, wBattleTowerTypelessPoints
+	ld de, wBattleTowerTrickRoomPoints
 	hlcoord 14, 7
 	lb bc, 1, 3
 	call PrintNum
@@ -244,7 +244,7 @@ BattleTowerStreakCard:
 	call PrintNum
 
 
-	ld de, .NeutralModeString
+	ld de, .TrickRoomString
 	hlcoord 2, 13
 	call PlaceString
 
@@ -263,10 +263,10 @@ BattleTowerStreakCard:
 	db "Normal Mode@"
 .InverseModeString:
 	db "Inverse Mode@"
-.NeutralModeString:
-	db "Neutral Mode@"
+.TrickRoomString:
+	db "Trick Room@"
 
-BattleTowerMirrorModeStreakCard:
+BattleTowerRandomModeStreakCard:
 	hlcoord 0, 0
 	lb bc, 14, 18
 	call Textbox
@@ -287,7 +287,7 @@ BattleTowerMirrorModeStreakCard:
 	hlcoord 2, 5
 	call PlaceString
 
-	ld de, wBattleTowerMirrorModeNormalPoints
+	ld de, wBattleTowerRandomModeNormalPoints
 	hlcoord 14, 5
 	lb bc, 1, 3
 	call PrintNum
@@ -296,16 +296,16 @@ BattleTowerMirrorModeStreakCard:
 	hlcoord 2, 6
 	call PlaceString
 
-	ld de, wBattleTowerMirrorModeInversePoints
+	ld de, wBattleTowerRandomModeInversePoints
 	hlcoord 14, 6
 	lb bc, 1, 3
 	call PrintNum
 
-	ld de, .NeutralModeString
+	ld de, .TrickRoomString
 	hlcoord 2, 7
 	call PlaceString
 
-	ld de, wBattleTowerMirrorModeTypelessPoints
+	ld de, wBattleTowerRandomModeTrickRoomPoints
 	hlcoord 14, 7
 	lb bc, 1, 3
 	call PrintNum
@@ -318,7 +318,7 @@ BattleTowerMirrorModeStreakCard:
 	hlcoord 2, 11
 	call PlaceString
 
-	ld de, wBattleTowerMirrorModeHardModeNormalPoints
+	ld de, wBattleTowerRandomModeHardModeNormalPoints
 	hlcoord 14, 11
 	lb bc, 1, 3
 	call PrintNum
@@ -327,17 +327,17 @@ BattleTowerMirrorModeStreakCard:
 	hlcoord 2, 12
 	call PlaceString
 
-	ld de, wBattleTowerMirrorModeHardModeInversePoints
+	ld de, wBattleTowerRandomModeHardModeInversePoints
 	hlcoord 14, 12
 	lb bc, 1, 3
 	call PrintNum
 
 
-	ld de, .NeutralModeString
+	ld de, .TrickRoomString
 	hlcoord 2, 13
 	call PlaceString
 
-	ld de, wBattleTowerMirrorModeHardModeTypelessPoints
+	ld de, wBattleTowerRandomModeHardModeTrickRoomPoints
 	hlcoord 14, 13
 	lb bc, 1, 3
 	jmp PrintNum
@@ -345,7 +345,7 @@ BattleTowerMirrorModeStreakCard:
 .FacilityString1:
 	db " <physical> Battle Tower <physical>@"
 .FacilityString2:
-	db " <physical> Mirror <physical>@"
+	db " <physical> Random <physical>@"
 .RegularModeString:
 	db " - Regular Mode -@"
 .HardModeString:
@@ -354,5 +354,5 @@ BattleTowerMirrorModeStreakCard:
 	db "Normal Mode@"
 .InverseModeString:
 	db "Inverse Mode@"
-.NeutralModeString:
-	db "Neutral Mode@"
+.TrickRoomString:
+	db "Trick Room@"

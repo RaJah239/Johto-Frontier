@@ -178,32 +178,32 @@ Script_GivePlayerPointsThenPrize:
 .MirrorMode:
     callasm CheckHardModeASM
     iftrue .MirrorHardMode
-    callasm AwardBattleTowerMirrorModePoints
+    callasm AwardBattleTowerRandomModePoints
     sjump .Finish
 
 .MirrorHardMode:
-    callasm AwardBattleTowerMirrorModeHardModePoints
+    callasm AwardBattleTowerRandomModeHardModePoints
 
 .Finish:
     sjump Script_GivePlayerPrize
 
-AwardBattleTowerMirrorModeHardModePoints:
+AwardBattleTowerRandomModeHardModePoints:
 	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
 	jr nz, .inverse
 
-	CheckEventFlag EVENT_BATTLE_TOWER_TYPELESS_MODE
+	CheckEventFlag EVENT_BATTLE_TOWER_TRICK_ROOM_MODE
 	jr nz, .typeless
 
 .normal
-	ld hl, wBattleTowerMirrorModeHardModeNormalPoints
+	ld hl, wBattleTowerRandomModeHardModeNormalPoints
 	jr .got_ptr
 
 .inverse
-	ld hl, wBattleTowerMirrorModeHardModeInversePoints
+	ld hl, wBattleTowerRandomModeHardModeInversePoints
 	jr .got_ptr
 
 .typeless
-	ld hl, wBattleTowerMirrorModeHardModeTypelessPoints
+	ld hl, wBattleTowerRandomModeHardModeTrickRoomPoints
 
 .got_ptr
 	ld a, [hl]
@@ -224,7 +224,7 @@ AwardBattleTowerHardModePoints:
 	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
 	jr nz, .inverse
 
-	CheckEventFlag EVENT_BATTLE_TOWER_TYPELESS_MODE
+	CheckEventFlag EVENT_BATTLE_TOWER_TRICK_ROOM_MODE
 	jr nz, .typeless
 
 .normal
@@ -253,24 +253,24 @@ AwardBattleTowerHardModePoints:
 	ld [hl], a
 	ret
 
-AwardBattleTowerMirrorModePoints:
+AwardBattleTowerRandomModePoints:
 	; choose WRAM pointer based on mode
 	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
 	jr nz, .inverse
 
-	CheckEventFlag EVENT_BATTLE_TOWER_TYPELESS_MODE
+	CheckEventFlag EVENT_BATTLE_TOWER_TRICK_ROOM_MODE
 	jr nz, .typeless
 
 .normal
-	ld hl, wBattleTowerMirrorModeNormalPoints
+	ld hl, wBattleTowerRandomModeNormalPoints
 	jr .got_ptr
 
 .inverse
-	ld hl, wBattleTowerMirrorModeInversePoints
+	ld hl, wBattleTowerRandomModeInversePoints
 	jr .got_ptr
 
 .typeless
-	ld hl, wBattleTowerMirrorModeTypelessPoints
+	ld hl, wBattleTowerRandomModeTrickRoomPoints
 
 .got_ptr
 	ld a, [hl]
@@ -292,7 +292,7 @@ AwardBattleTowerPoints:
 	CheckEventFlag EVENT_BATTLE_TOWER_INVERSE_MODE
 	jr nz, .inverse
 
-	CheckEventFlag EVENT_BATTLE_TOWER_TYPELESS_MODE
+	CheckEventFlag EVENT_BATTLE_TOWER_TRICK_ROOM_MODE
 	jr nz, .typeless
 
 .normal
@@ -304,7 +304,7 @@ AwardBattleTowerPoints:
 	jr .got_ptr
 
 .typeless
-	ld hl, wBattleTowerTypelessPoints
+	ld hl, wBattleTowerTrickRoomPoints
 
 .got_ptr
 	ld a, [hl]
@@ -364,27 +364,27 @@ Script_BattleTowerSettings:
 	special Menu_BattleTowerSettings
 	ifequal 1, .SetNormalMode
 	ifequal 2, .SetInverseMode
-	ifequal 3, .SetTypelessMode
+	ifequal 3, .SetTrickRoomMode
 	sjump Script_BattleTowerHopeToServeYouAgain
 
 .SetNormalMode:
 	clearevent EVENT_BATTLE_TOWER_INVERSE_MODE
- 	clearevent EVENT_BATTLE_TOWER_TYPELESS_MODE
+ 	clearevent EVENT_BATTLE_TOWER_TRICK_ROOM_MODE
  	writetext Text_BattleTower_SetToNormalMode
 	promptbutton
 	sjump Script_Menu_ChallengeExplanationCancel
 
 .SetInverseMode:
-	clearevent EVENT_BATTLE_TOWER_TYPELESS_MODE
+	clearevent EVENT_BATTLE_TOWER_TRICK_ROOM_MODE
  	setevent EVENT_BATTLE_TOWER_INVERSE_MODE
  	writetext Text_BattleTower_SetToInverseMode
 	promptbutton
 	sjump Script_Menu_ChallengeExplanationCancel
 
-.SetTypelessMode:
+.SetTrickRoomMode:
 	clearevent EVENT_BATTLE_TOWER_INVERSE_MODE
- 	setevent EVENT_BATTLE_TOWER_TYPELESS_MODE
- 	writetext Text_BattleTower_SetToTypelessMode
+ 	setevent EVENT_BATTLE_TOWER_TRICK_ROOM_MODE
+ 	writetext Text_BattleTower_SetToTrickRoomMode
 	promptbutton
 	sjump Script_Menu_ChallengeExplanationCancel
 
@@ -563,9 +563,9 @@ Text_BattleTower_SetToInverseMode:
 	line "to inverse mode."
 	done
 
-Text_BattleTower_SetToTypelessMode:
-	text "Type matchups set"
-	line "to neutral mode."
+Text_BattleTower_SetToTrickRoomMode:
+	text "Turn orders are"
+	line "reversed."
 	done
 
 Text_BattleTower_LeftWithoutSaving:
