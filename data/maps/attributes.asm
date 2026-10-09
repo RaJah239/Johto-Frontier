@@ -449,3 +449,4 @@ ENDM
 	map_attributes BattlePlazaBattleLobby, BATTLE_PLAZA_BATTLE_LOBBY, $00, 0
 	map_attributes BattlePlazaDraftArena, BATTLE_PLAZA_DRAFT_ARENA, $00, 0
 	map_attributes BattlePlazaEchoChamber, BATTLE_PLAZA_ECHO_CHAMBER, $00, 0
+	map_attributes BattlePlazaGrandGauntlet, BATTLE_PLAZA_GRAND_GAUNTLET, $00, 0

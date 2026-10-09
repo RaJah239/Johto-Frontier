@@ -13,6 +13,8 @@ BattlePlaza_MapEvents:
 	warp_event 17, 19, BATTLE_PLAZA_MART, 4
 	warp_event 24, 19, BATTLE_PLAZA_ECHO_CHAMBER, 2
 	warp_event 25, 19, BATTLE_PLAZA_ECHO_CHAMBER, 1
+	warp_event  4,  3, BATTLE_PLAZA_GRAND_GAUNTLET, 2
+	warp_event  5,  3, BATTLE_PLAZA_GRAND_GAUNTLET, 1
 
 	def_coord_events
 
@@ -26,6 +28,7 @@ BattlePlaza_MapEvents:
 	bg_event 11, 20, BGEVENT_JUMPTEXT, BattlePlazaMartSignText
 	bg_event 20, 14, BGEVENT_JUMPTEXT, BattlePlazaSignText
 	bg_event 28, 18, BGEVENT_JUMPTEXT, BattlePlazaEchoChamberSignText
+	bg_event  3,  4, BGEVENT_JUMPTEXT, BattlePlazaGrandGauntletSignText
 
 	def_object_events
 	object_event 11, 14, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MET_RAJA
@@ -187,4 +190,11 @@ BattlePlazaEchoChamberSignText:
 
 	para "Try your luck"
 	line "against yourself!"
+	done
+
+BattlePlazaGrandGauntletSignText:
+	text "Grand Gauntlet"
+
+	para "Battle your way"
+	line "through 50 floors!"
 	done

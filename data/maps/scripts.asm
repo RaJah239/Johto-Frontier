@@ -361,4 +361,7 @@ INCLUDE "maps/BattlePlazaBattleLobby.asm"
 INCLUDE "maps/BattlePlazaDraftArena.asm"
 INCLUDE "maps/BattlePlazaEchoChamber.asm"
 
+SECTION "Battle Plaza Grand Gauntlet Scripts", ROMX
+INCLUDE "maps/BattlePlazaGrandGauntlet.asm"
+
 ENDSECTION
