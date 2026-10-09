@@ -119,7 +119,7 @@ BattlePlazaGrandGauntletReceptionistScript:
 	playsound SFX_WARP_TO
 	special FadeOutPalettes
 	waitsfx
-	warp BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1, 2, 9
+	warp BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1, 2, 5
 	end
 
 .BattleLobbyModeTypeSelectionHeader:
