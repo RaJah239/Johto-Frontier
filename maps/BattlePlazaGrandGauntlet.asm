@@ -22,8 +22,6 @@ BattlePlazaGrandGauntlet_MapScripts:
 	callback MAPCALLBACK_NEWMAP, GrandGauntletGiveBackPartyCallback
 
 GrandGauntletGiveBackPartyCallback:
-	; Hand back any party left stashed
-	callasm TakeBackHeldParty
 	callasm ResetGrandGauntletEvents
 	endcallback
 
@@ -76,7 +74,7 @@ BattlePlazaGrandGauntletReceptionistScript:
 		line "random #mon."
 		done
 
-	callasm DepositPartyForRandomTeam
+	callasm RerollPartyKeeperTeam
 
 	playsound SFX_DEX_FANFARE_20_49
 	waitsfx
@@ -316,75 +314,6 @@ DEF PARTY_KEEPER_BAN_COUNT EQU PartyKeeperBanListEnd - PartyKeeperBanList
 DEF PARTY_KEEPER_LEVEL  EQU 5
 DEF PARTY_KEEPER_RETRIES EQU 64
 
-OpenPartyKeeperSRAM:
-; Select the stash's SRAM bank. This tail-calls OpenSRAM, so it returns
-; straight to our caller with SRAM open.
-	ld a, BANK(sPartyStashCheck1)
-	jmp OpenSRAM
-
-CheckPartyKeeperStash:
-; wScriptVar = 1 while the Keeper still has a party in his care.
-; SRAM is never cleared on boot, so trust nothing without check values.
-	call OpenPartyKeeperSRAM
-	ld a, [sPartyStashCheck1]
-	cp SAVE_CHECK_VALUE_1
-	jr nz, .empty
-	ld a, [sPartyStashCheck2]
-	cp SAVE_CHECK_VALUE_2
-	jr nz, .empty
-	ld a, [sPartyStashHeld]
-	and a
-	jr z, .empty
-	; A stashed party always holds 1 to PARTY_LENGTH mon, since we
-	; refuse to take an empty one. Random SRAM that happens to carry
-	; the check values above is vanishingly unlikely to carry a sane
-	; count as well, and a false "held" would let the next deposit
-	; overwrite the real stored party.
-	ld a, [sPartyStashParty]
-	and a
-	jr z, .empty
-	cp PARTY_LENGTH + 1
-	jr nc, .empty
-	call CloseSRAM
-	ld a, 1
-	ld [wScriptVar], a
-	ret
-
-.empty
-	call CloseSRAM
-	xor a
-	ld [wScriptVar], a
-	ret
-
-DepositPartyForRandomTeam:
-; Bank the whole party, then refill the party with six random Lv5 mon.
-	; 1. copy wPartyCount..wPartyMonNicknamesEnd into the stash
-	call OpenPartyKeeperSRAM
-	ld hl, wPartyCount
-	ld de, sPartyStashParty
-	ld bc, wPartyMonNicknamesEnd - wPartyCount
-	; wPartyCount lives in WRAM bank 1 and CopyBytes does not switch
-	; SVBK, so switch to the party's bank for the read and restore it,
-	; mirroring TakeBackHeldParty's copy in the other direction. The
-	; receptionist-script context happens to run with SVBK already at
-	; bank 1, but this must not depend on that.
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wPartyCount)
-	ldh [rSVBK], a
-	call CopyBytes
-	pop af
-	ldh [rSVBK], a
-	ld a, 1
-	ld [sPartyStashHeld], a
-	ld a, SAVE_CHECK_VALUE_1
-	ld [sPartyStashCheck1], a
-	ld a, SAVE_CHECK_VALUE_2
-	ld [sPartyStashCheck2], a
-	call CloseSRAM
-	; empty the party and fill it with a fresh team
-	; fallthrough
-
 RerollPartyKeeperTeam:
 ; Throw away whatever team is live and draw another one. The player's
 ; original party is already sitting in the stash, so unlike the deposit
@@ -409,51 +338,6 @@ RerollPartyKeeperTeam:
 	dec b
 	jr nz, .fill
 	ret
-
-TakeBackHeldParty::
-; Hand the stored party back, dropping the random team. This runs from
-; the Grand Gauntlet entry callback and from the whiteout script, so it
-; must be a no-op unless a party is really stashed: most callers have
-; nothing to return, and an unguarded copy would stomp the live party
-; with stale SRAM. The guard mirrors CheckPartyKeeperStash.
-	call OpenPartyKeeperSRAM
-	ld a, [sPartyStashCheck1]
-	cp SAVE_CHECK_VALUE_1
-	jr nz, .nothing
-	ld a, [sPartyStashCheck2]
-	cp SAVE_CHECK_VALUE_2
-	jr nz, .nothing
-	ld a, [sPartyStashHeld]
-	and a
-	jr z, .nothing
-	; A stashed party holds 1..PARTY_LENGTH mon; reject a zero or
-	; out-of-range count so random SRAM cannot pose as a stash.
-	ld a, [sPartyStashParty]
-	and a
-	jr z, .nothing
-	cp PARTY_LENGTH + 1
-	jr nc, .nothing
-	ld hl, sPartyStashParty
-	ld de, wPartyCount
-	ld bc, wPartyMonNicknamesEnd - wPartyCount
-	; wPartyCount lives in WRAM bank 1, and CopyBytes never touches
-	; SVBK. Whiteout and the Give Up warp both reach this routine with
-	; SVBK left at whatever the last palette/graphics routine restored
-	; it to, which is not bank 1 -- so without this switch the stashed
-	; party is copied into the wrong WRAM bank and the loaned team is
-	; left sitting in the live party. Switch to the party's bank for
-	; the copy and restore afterwards, like every other WRAM-bank copy.
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wPartyCount)
-	ldh [rSVBK], a
-	call CopyBytes
-	pop af
-	ldh [rSVBK], a
-	xor a
-	ld [sPartyStashHeld], a
-.nothing
-	jmp CloseSRAM
 
 ResetPartyToEmpty:
 ; Leave wPartyCount..wPartyMonNicknamesEnd in the shape a fresh game
@@ -753,11 +637,6 @@ EquipPartyKeeperTeamItems:
 ; PartyKeeperBanList), re-rolled whenever an earlier slot already
 ; holds the same one. This runs at final keep only: the keeper
 ; reaches this point after
-; DepositPartyForRandomTeam/RerollPartyKeeperTeam has refilled the
-; party to PARTY_LENGTH, so all six slots are present. The item is
-; written straight into MON_ITEM rather than routed through the
-; bag, so no pocket-full case exists, and the stash still carries
-; the old team's own held items across untouched.
 	ld b, PARTY_LENGTH
 	ld hl, wPartyMons + MON_ITEM
 .slot

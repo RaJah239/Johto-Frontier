@@ -88,21 +88,6 @@ sBackupCheckValue2:: db ; loaded with SAVE_CHECK_VALUE_2, used to check save cor
 
 sStackTop:: dw
 
-; The Cherrygrove City Party Keeper holds the player's whole party here
-; while he hands out a random team. It lives in SRAM so it survives
-; saving and reloading, and outside the saved-game block so the save
-; layout - and every existing save file - stays exactly as it is. Like
-; the dungeon bag above it carries check values: SRAM is never cleared
-; on boot, so an unwritten stash must not read back as a held party.
-SECTION "Party Stash", SRAM, BANK[0]
-
-sPartyStash::
-sPartyStashHeld:: db ; nonzero while the Keeper has a party in his care
-sPartyStashParty:: ds wPartyMonNicknamesEnd - wPartyCount
-sPartyStashEnd::
-sPartyStashCheck1:: db ; written with SAVE_CHECK_VALUE_1 when valid
-sPartyStashCheck2:: db
-
 SECTION "Save", SRAM
 
 sOptions:: ds wOptionsEnd - wOptions
