@@ -306,29 +306,29 @@ PartyKeeperBanList:
 	db DRAGON_SCALE
 PartyKeeperBanListEnd:
 
-DEF PARTY_KEEPER_BAN_COUNT EQU PartyKeeperBanListEnd - PartyKeeperBanList
+DEF PARTY_ROLLER_BAN_COUNT EQU PartyKeeperBanListEnd - PartyKeeperBanList
 
 ; =========================================================================
 ; Party Keeper routines, called from the script with `callasm`.
 ; =========================================================================
-DEF PARTY_KEEPER_LEVEL  EQU 5
-DEF PARTY_KEEPER_RETRIES EQU 64
+DEF PARTY_ROLLER_LEVEL  EQU 5
+DEF PARTY_ROLLER_RETRIES EQU 64
 
 RerollPartyKeeperTeam:
 ; Throw away whatever team is live and draw another one. The player's
 ; original party is already sitting in the stash, so unlike the deposit
 ; above this must not stash again - doing that would overwrite the very
 ; team it is supposed to be protecting.
-	; 2. empty the live party
+	; 1. empty the live party
 	call ResetPartyToEmpty
 
-	; 3. fill it back up
+	; 2. fill it back up
 	ld b, PARTY_LENGTH
 .fill
 	push bc
 	call PickPartyKeeperSpecies
 	ld [wCurPartySpecies], a
-	ld a, PARTY_KEEPER_LEVEL
+	ld a, PARTY_ROLLER_LEVEL
 	ld [wCurPartyLevel], a
 	xor a
 	ld [wMonType], a ; our party, not an opposing one
@@ -374,7 +374,7 @@ PickPartyKeeperSpecies:
 ; with fewer than PARTY_LENGTH entries already placed there is always
 ; one left, so a repeat cannot happen for any list that holds at least
 ; PARTY_LENGTH species.
-	ld c, PARTY_KEEPER_RETRIES
+	ld c, PARTY_ROLLER_RETRIES
 .try
 	push bc
 	call .RandomFromList
@@ -609,7 +609,7 @@ PickPartyKeeperHeldItem:
 	push bc
 	ld c, a ; the item id under test
 	ld hl, PartyKeeperBanList
-	ld b, PARTY_KEEPER_BAN_COUNT
+	ld b, PARTY_ROLLER_BAN_COUNT
 .banScan
 	ld a, b
 	and a
