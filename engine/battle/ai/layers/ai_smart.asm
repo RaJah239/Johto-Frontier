@@ -3790,14 +3790,34 @@ AI_Smart_Gust:
 AI_Smart_Solarbeam:
 ; 80% chance to encourage this move when it's sunny.
 ; 90% chance to discourage this move when it's raining.
+; When no weather: discourage if player can KO on charge turn
 
 	ld a, [wBattleWeather]
 	cp WEATHER_SUN
 	jr z, .encourage
 
 	cp WEATHER_RAIN
-	ret nz
+	jr z, .discourage_rain
 
+; No weather - Solarbeam requires charge turn
+; Discourage if player can KO before attack lands
+	call CanPlayerKO
+	jmp c, StandardDiscourage
+
+	; Also discourage if we're slower and player can 2HKO (they get 2 hits before we attack)
+	call DoesAIOutSpeedPlayer
+	jr c, .check_2hko
+	call CanPlayer2HKO
+	jmp c, StandardDiscourage
+
+.check_2hko
+	; We're faster, but still vulnerable on charge turn
+	call CanPlayer2HKO
+	jmp c, StandardDiscourage
+
+	ret
+
+.discourage_rain
 	call AI_90_10
 	ret c
 
