@@ -52,3 +52,12 @@ MapSetupCommands:
 	add_mapsetup EnableDynPalUpdates ; 30
 	add_mapsetup FadeOutPalettes ; 31
 	add_mapsetup EnableDynPalUpdatesNoApply ; 32
+	add_mapsetup HandleMapDefaultWeather ; 33
+	add_mapsetup ClearWeather ; 34
+	add_mapsetup SetCurrentWeather ; 35
+	add_mapsetup SaveWeatherFadeSource ; 36
+	add_mapsetup MapConnWeatherFade ; 37
+	add_mapsetup SelectWeatherObjPalette ; 38
+	add_mapsetup CancelWeatherFade ; 39
+	add_mapsetup ResumeWeather ; 3a
+	add_mapsetup PrepareWeatherForFullScreen ; 3b

@@ -75,16 +75,17 @@ SuspendMapAnims:
 	ret
 
 LoadMapObjects:
-	call HandleMapDefaultWeather
-	call HandleAutoBicycle
 	ld a, MAPCALLBACK_OBJECTS
 	call RunMapCallback
 	farcall LoadObjectMasks
-	farjp InitializeVisibleSprites
+	farcall InitializeVisibleSprites
+	; Map callbacks can override the default weather.
+	newfarcall SetCurrentWeather
+	newfarcall SelectWeatherObjPalette
+	farjp LoadWeatherGraphics
 
-; By default outdoor maps have
-; 35% chance of rain
-; 35% chance of sun unless it is night
+; Outdoor maps: 25% rain, 25% sun, 50% clear.
+; Sun becomes clear weather at night.
 HandleMapDefaultWeather:
 	ld a, [wMapGroup]
 	ld b, a
@@ -95,28 +96,24 @@ HandleMapDefaultWeather:
 	jr z, .outdoor
 	cp TOWN
 	jr z, .outdoor
-	jr .noWeather
-
+	jr .no_weather
 .outdoor
 	call Random
-	cp 35 percent
+	cp 25 percent ; total 1/4 for rain
 	jr c, .rain
-	cp 70 percent
+	call Random
+	cp 33 percent ; total 3/4 x 1/3 = 1/4 for sun
 	jr c, .sun
-.noWeather
+.no_weather ; total 3/4 x 2/3 = 1/2 for no weather
 	ld a, WEATHER_NONE
 	jr .done
-
 .rain
 	ld a, WEATHER_RAIN
 	jr .done
-
 .sun
 	ld a, [wTimeOfDay]
 	cp NITE_F
-	ret z
-	cp EVE_F
-	ret z
+	jr z, .no_weather
 	ld a, WEATHER_SUN
 .done
 	ld [wFieldWeather], a

@@ -306,6 +306,7 @@ ROMX $7a
 	"Unused Egg Pic"
 ROMX $7b
 	"Battle Tower Text"
+	"Overworld Weather"
 ROMX $7c
 	"Battle Tower Trainer Data"
 ROMX $7d
@@ -346,6 +347,8 @@ WRAMX 5
 	"GBC Video"
 	org $d300
 	"Battle Animations"
+	org $d700
+	"Weather Fade Start Palettes"
 	org $d800
 ; "Mobile RAM" unused
 WRAMX 6
