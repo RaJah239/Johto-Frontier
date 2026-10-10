@@ -780,8 +780,10 @@ CanPlayer2HKO:
 ; exception for porygon-z which can use Hyper Beam consecutively
 ; and ursaluna that uses giga impact consecutively
 	ld a, [wBattleMonSpecies]
+	push hl
 	ld hl, OverdrivePokemon_AI
 	call IsInByteArray
+	pop hl
 	jr c, .set_flag
 
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
@@ -850,8 +852,10 @@ CanPlayer2HKOMaxHP:
 
 ; skip moves that can't be used on consecutive turns - exception for Porygonz which can use Hyper Beam consecutively
 	ld a, [wBattleMonSpecies]
+	push hl
 	ld hl, OverdrivePokemon_AI
 	call IsInByteArray
+	pop hl
 	jr c, .set_flag
 
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
@@ -923,8 +927,10 @@ CanPlayer3HKOMaxHP:
 
 ; skip moves that can't be used on consecutive turns - exception for Porygonz which can use Hyper Beam consecutively
 	ld a, [wBattleMonSpecies]
+	push hl
 	ld hl, OverdrivePokemon_AI
 	call IsInByteArray
+	pop hl
 	jr c, .set_flag
 
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
@@ -1043,8 +1049,10 @@ CanAI2HKO:
 
 ; skip moves that can't be used on consecutive turns, except hyper beam
 	ld a, [wEnemyMonSpecies]
+	push hl
 	ld hl, OverdrivePokemon_AI
 	call IsInByteArray
+	pop hl
 	jr c, .set_flag
 
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
@@ -1113,8 +1121,10 @@ CanAI2HKOMaxHP:
 
 ; skip moves that can't be used on consecutive turns, except hyper beam
 	ld a, [wEnemyMonSpecies]
+	push hl
 	ld hl, OverdrivePokemon_AI
 	call IsInByteArray
+	pop hl
 	jr c, .set_flag
 
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
@@ -1187,8 +1197,10 @@ CanAI3HKO:
 ; skip moves that can't be used on consecutive turns, except hyper beam
 ; skip moves that can't be used on consecutive turns, except hyper beam
 	ld a, [wEnemyMonSpecies]
+	push hl
 	ld hl, OverdrivePokemon_AI
 	call IsInByteArray
+	pop hl
 	jr c, .set_flag
 
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
