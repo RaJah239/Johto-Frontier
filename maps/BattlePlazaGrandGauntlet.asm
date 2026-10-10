@@ -73,12 +73,9 @@ BattlePlazaGrandGauntletReceptionistScript:
 		text "I'll give you six"
 		line "random #mon."
 		done
-
 	callasm RerollPartyKeeperTeam
-
 	playsound SFX_DEX_FANFARE_20_49
 	waitsfx
-
 	writethistext
 		text "Done! Your party"
 		line "is safe with me."
@@ -262,7 +259,7 @@ PartyKeeperSpeciesList:
 	db OMANYTE
 	db LILEEP
 	db AERODACTYL
-	db -1
+	db -1 ; end
 PartyKeeperSpeciesListEnd:
 
 DEF PARTY_KEEPER_SPECIES_COUNT EQU PartyKeeperSpeciesListEnd - PartyKeeperSpeciesList - 1
@@ -333,7 +330,7 @@ RerollPartyKeeperTeam:
 	xor a
 	ld [wMonType], a ; our party, not an opposing one
 	ld [wBattleMode], a ; no wild item, level-appropriate moves
-	call AddPartyKeeperMon
+	predef TryAddMonToParty
 	pop bc
 	dec b
 	jr nz, .fill
@@ -448,52 +445,6 @@ PickPartyKeeperSpecies:
 .duplicate
 	scf
 	ret
-
-AddPartyKeeperMon:
-; Adds wCurPartySpecies at wCurPartyLevel to the party, then leaves the
-; Pokédex exactly as it found it. TryAddMonToParty unconditionally runs
-; SetSeenAndCaughtMon, which would book six new species into the player's
-; Pokédex every time the random team is handed out. So both flags are
-; looked up first, and any flag that call newly set is cleared again on
-; the way out -- a species the player already owned keeps its flag.
-	ld a, [wCurPartySpecies]
-	dec a
-	call CheckSeenMon
-	ld a, c
-	push af ; seen before we added it?
-	ld a, [wCurPartySpecies]
-	dec a
-	call CheckCaughtMon
-	ld a, c
-	push af ; caught before we added it?
-
-	predef TryAddMonToParty
-
-	pop af
-	and a ; already caught -> leave the flag alone
-	call z, .unregisterCaught
-	pop af
-	and a ; already seen -> leave the flag alone
-	call z, .unregisterSeen
-	ret
-
-.unregisterCaught
-	ld a, [wCurPartySpecies]
-	dec a
-	ld c, a
-	ld d, 0
-	ld hl, wPokedexCaught
-	ld b, RESET_FLAG
-	predef_jump SmallFarFlagAction
-
-.unregisterSeen
-	ld a, [wCurPartySpecies]
-	dec a
-	ld c, a
-	ld d, 0
-	ld hl, wPokedexSeen
-	ld b, RESET_FLAG
-	predef_jump SmallFarFlagAction
 
 PickPartyKeeperHeldItem:
 ; -> a: a random held item from the keeper's gift pool, chosen by
