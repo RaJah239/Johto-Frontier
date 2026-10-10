@@ -298,17 +298,6 @@ endr
 	ld a, [wLinkMode]
 	and a
 	jr nz, .no_save
-
-	; no save menu in grand gauntlet
-	ld a, [wMapGroup]
-	cp GROUP_BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1
-	jr nz, .not_gauntlet_battle_room
-	ld a, [wMapNumber]
-	cp MAP_BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1
-	jr nz, .not_gauntlet_battle_room
-	jr .no_save
-
-.not_gauntlet_battle_room
 	ld hl, wStatusFlags2
 	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, [hl]
 	ld a, STARTMENUITEM_QUIT
@@ -327,15 +316,15 @@ endr
 	; hands the stored party back on arrival.
 	ld a, [wMapGroup]
 	cp GROUP_BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1
-	jr nz, .not_gauntlet_giveup
+	jr nz, .not_gauntlet_battle_room
 	ld a, [wMapNumber]
 	cp MAP_BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1
-	jr nz, .not_gauntlet_giveup
+	jr nz, .not_gauntlet_battle_room
 	ld a, STARTMENUITEM_GIVEUP
 	call .AppendMenuList
 	jr .next
 
-.not_gauntlet_giveup
+.not_gauntlet_battle_room
 	; Bug Catching contest must always have the Exit Option
 	ld hl, wStatusFlags2
 	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, [hl]

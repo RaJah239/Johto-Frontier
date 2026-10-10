@@ -773,15 +773,6 @@ CheckMenuOW:
 	bit QUICK_SAVE, a
 	jr z, .no_quick_save
 
-	; no save menu in grand gauntlet
-	ld a, [wMapGroup]
-	cp GROUP_BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1
-	jr nz, .quick_save_ok
-	ld a, [wMapNumber]
-	cp MAP_BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1
-	jr z, .no_quick_save
-
-.quick_save_ok
 	pop af
 	bit START_F, a
 	jr z, .CheckStartHold
