@@ -126,12 +126,13 @@ AIChooseMove:
 	ld a, [de]
 	inc de
 	and a
-	jr z, .DecrementScores
+	jr z, .skip_empty_slot
 
 	; We are done whenever a score reaches 0
 	dec [hl]
 	jr z, .PickLowestScoreMoves
 
+.skip_empty_slot
 	; If we just decremented the fourth move's score, go back to the first move
 	inc hl
 	dec c
