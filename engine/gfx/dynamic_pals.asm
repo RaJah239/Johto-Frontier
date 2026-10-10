@@ -56,6 +56,32 @@ CheckForUsedObjPals::
 	xor a
 	ld [wUsedObjectPals], a
 
+	; Reserve the weather's object palette slot so the allocator
+	; never hands it out.
+	ld a, [wWeatherPalSlot]
+	cp NUM_OVERWORLD_OBJ_PALETTES
+	jr nc, .no_weather_pal
+	; Set bit <slot> in wUsedObjectPals.
+	ld b, a
+	inc b
+	ld a, 1
+.weath_shift
+	dec b
+	jr z, .weath_mask_done
+	add a, a
+	jr .weath_shift
+.weath_mask_done
+	ld [wUsedObjectPals], a
+	; Forget any object palette recorded in that slot, so pass 2
+	; relocates its owner; the weather restores its own colors.
+	ld a, [wWeatherPalSlot]
+	ld c, a
+	ld b, 0
+	ld hl, wLoadedObjPal0
+	add hl, bc
+	ld [hl], -1
+.no_weather_pal
+
 	; Scan for active objects first and mark those pals still in use.
 	ld hl, wPalFlags
 	set SCAN_OBJECTS_FIRST_F, [hl]

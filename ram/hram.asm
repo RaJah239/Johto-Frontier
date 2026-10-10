@@ -192,6 +192,9 @@ hBHoldFrames:: db
 ; from any bank with no banking dance.
 hRandomState:: ds 4
 
-	ds 7
+; Weather palette fade scratch byte
+hWeatherFadeProgress:: db
+
+	ds 6
 
 ENDSECTION

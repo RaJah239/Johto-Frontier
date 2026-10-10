@@ -13,6 +13,7 @@
 	const STARTMENUITEM_GIVEUP   ; 10
 
 StartMenu::
+	newfarcall PrepareWeatherForFullScreen
 	call ClearWindowData
 
 	ld de, SFX_MENU

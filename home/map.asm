@@ -1861,6 +1861,7 @@ CheckCurrentMapCoordEvents::
 	ret
 
 FadeToMenu::
+	newfarcall PrepareWeatherForFullScreen
 	xor a
 	ldh [hBGMapMode], a
 	call LoadStandardMenuHeader
