@@ -24,7 +24,6 @@ BattlePlazaGrandGauntlet_MapScripts:
 GrandGauntletGiveBackPartyCallback:
 	; Hand back any party left stashed
 	callasm TakeBackHeldParty
-	callasm ClearDungeonBag
 	callasm ResetGrandGauntletEvents
 	endcallback
 
