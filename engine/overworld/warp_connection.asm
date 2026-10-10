@@ -17,9 +17,9 @@ HandleContinueMap:
 	ret
 
 CheckDungeonBag:
-; Grand Gauntlet has its own bag. The live bag (wTMsHMs to
+; Cherrygrove Mart has its own bag. The live bag (wTMsHMs to
 ; wNumPCItems) and the session stash in SRAM (sDungeonSessionBag) are
-; swapped whenever a map wants the other one: Grant Gauntlet wants
+; swapped whenever a map wants the other one: Cherrygrove Mart wants
 ; the stash, every other map wants the live one. Every map-changing
 ; setup script runs this after the new map's group and number are in
 ; place; the continue setup does not need it, since LoadPlayerData
@@ -29,10 +29,10 @@ CheckDungeonBag:
 ; Which bag this map wants is computed before SRAM is opened, from
 ; wMapGroup/wMapNumber, which live in the ambient WRAM bank.
 	ld a, [wMapGroup]
-	cp GROUP_BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1
+	cp GROUP_CHERRYGROVE_MART
 	jr nz, .want_field_bag
 	ld a, [wMapNumber]
-	cp MAP_BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1
+	cp MAP_CHERRYGROVE_MART
 	jr nz, .want_field_bag
 	ld a, TRUE
 	jr .got_want
