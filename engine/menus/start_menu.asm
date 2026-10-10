@@ -531,12 +531,9 @@ StartMenu_Quit:
 	text_end
 
 StartMenu_GiveUp:
-; Abandon a Grand Gauntlet run from the battle room. The room has no
+; abandon a grand gauntlet run from the battle room. the room has no
 ; warps, so this is the only way out: confirm, then queue a warp back
-; to the lobby stairs. The lobby's MAPCALLBACK_NEWMAP callback calls
-; TakeBackHeldParty on arrival, which drops the rented team and hands
-; the stashed one back, so this routine only has to ask and warp.
-
+; to the lobby stairs
 	ld hl, .GiveUpConfirmText1
 	call StartMenuNoYes
 	jr c, .DontGiveUp

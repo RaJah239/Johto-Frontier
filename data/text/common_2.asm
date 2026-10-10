@@ -1203,15 +1203,12 @@ _GrandGauntletGiveUpConfirmText1::
 	text "Give up on this"
 	line "run?"
 
-	para "Your progress will"
-	line "be lost."
-
-	para "Your #mon"
-	line "will be returned."
+	para "Your progress and"
+	line "team here will be"
+	cont "lost."
 
 	para "Are you sure?"
 	done
-
 
 _GrandGauntletGiveUpConfirmText3::
 	text "This can't be un-"

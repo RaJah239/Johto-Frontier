@@ -24,11 +24,6 @@ Script_Whiteout:
 	waitbutton
 	special FadeOutPalettes
 	pause 40
-; A Grand Gauntlet run stashed the real party and handed out a rented
-; team. On whiteout, hand the real party back before healing so it is
-; the one that gets healed. This is a guarded no-op (see
-; TakeBackHeldParty) on every ordinary whiteout with no stash.
-	callasm TakeBackHeldParty
 	special HealParty
 	callasm GetWhiteoutSpawn
 	farscall Script_AbortBugContest
