@@ -5002,6 +5002,71 @@ BattleAnim_Crunch:
 
 BattleAnim_HiddenPower:
 	anim_1gfx BATTLE_ANIM_GFX_CHARGE
+	anim_if_param_equal FIGHTING, .fighting
+	anim_if_param_equal FLYING, .flying
+	anim_if_param_equal POISON, .poison
+	anim_if_param_equal GROUND, .ground
+	anim_if_param_equal ROCK, .rock
+	anim_if_param_equal BUG, .bug
+	anim_if_param_equal GHOST, .ghost
+	anim_if_param_equal STEEL, .steel
+	anim_if_param_equal FIRE, .fire
+	anim_if_param_equal WATER, .water
+	anim_if_param_equal GRASS, .grass
+	anim_if_param_equal ELECTRIC, .electric
+	anim_if_param_equal PSYCHIC_TYPE, .psychic
+	anim_if_param_equal ICE, .ice
+	anim_if_param_equal DRAGON, .dragon
+	anim_if_param_equal DARK, .dark
+	anim_jump .done
+.fighting
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_FIGHTING
+	anim_jump .done
+.flying
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_FLYING
+	anim_jump .done
+.poison
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_PURPLE
+	anim_jump .done
+.ground
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_GROUND
+	anim_jump .done
+.rock
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_ROCK
+	anim_jump .done
+.bug
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_BUG
+	anim_jump .done
+.dragon
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_DRAGON
+	anim_jump .done
+.dark
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_DARK
+	anim_jump .done
+.steel
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_STEEL
+	anim_jump .done
+.fire
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
+	anim_jump .done
+.water
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_WATER
+	anim_jump .done
+.grass
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_GREEN
+	anim_jump .done
+.electric
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_YELLOW
+	anim_jump .done
+.psychic
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_PSYCHIC
+	anim_jump .done
+.ice
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_ICE
+	anim_jump .done
+.ghost
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_GHOST
+.done
 	anim_call BattleAnim_TargetObj_1Row
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, $1, $20
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
@@ -5024,6 +5089,71 @@ BattleAnim_HiddenPower:
 
 BattleAnim_HiddenForce:
 	anim_1gfx BATTLE_ANIM_GFX_CHARGE
+	anim_if_param_equal FIGHTING, .fighting
+	anim_if_param_equal FLYING, .flying
+	anim_if_param_equal POISON, .poison
+	anim_if_param_equal GROUND, .ground
+	anim_if_param_equal ROCK, .rock
+	anim_if_param_equal BUG, .bug
+	anim_if_param_equal GHOST, .ghost
+	anim_if_param_equal STEEL, .steel
+	anim_if_param_equal FIRE, .fire
+	anim_if_param_equal WATER, .water
+	anim_if_param_equal GRASS, .grass
+	anim_if_param_equal ELECTRIC, .electric
+	anim_if_param_equal PSYCHIC_TYPE, .psychic
+	anim_if_param_equal ICE, .ice
+	anim_if_param_equal DRAGON, .dragon
+	anim_if_param_equal DARK, .dark
+	anim_jump .done
+.fighting
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_FIGHTING
+	anim_jump .done
+.flying
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_FLYING
+	anim_jump .done
+.poison
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_PURPLE
+	anim_jump .done
+.ground
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_GROUND
+	anim_jump .done
+.rock
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_ROCK
+	anim_jump .done
+.bug
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_BUG
+	anim_jump .done
+.dragon
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_DRAGON
+	anim_jump .done
+.dark
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_DARK
+	anim_jump .done
+.steel
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_STEEL
+	anim_jump .done
+.fire
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
+	anim_jump .done
+.water
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_WATER
+	anim_jump .done
+.grass
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_GREEN
+	anim_jump .done
+.electric
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_YELLOW
+	anim_jump .done
+.psychic
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_PSYCHIC
+	anim_jump .done
+.ice
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_ICE
+	anim_jump .done
+.ghost
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_HP_GHOST
+.done
 	anim_call BattleAnim_TargetObj_1Row
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, $1, $20
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $2, $0

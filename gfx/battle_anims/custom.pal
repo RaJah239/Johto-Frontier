@@ -92,6 +92,56 @@ if !DEF(MONOCHROME)
 	RGB 28, 28, 28
 	RGB 16, 16, 16
 	RGB 10, 10, 10
+; hp fighting
+	RGB 31, 31, 31
+	RGB 31, 15, 00
+	RGB 19, 00, 00
+	RGB 00, 00, 00
+; hp flying
+	RGB 31, 31, 31
+	RGB 19, 21, 30
+	RGB 08, 10, 18
+	RGB 00, 00, 00
+; hp ground
+	RGB 31, 31, 31
+	RGB 26, 22, 11
+	RGB 14, 10, 03
+	RGB 00, 00, 00
+; hp rock
+	RGB 31, 31, 31
+	RGB 23, 21, 17
+	RGB 11, 10, 06
+	RGB 00, 00, 00
+; hp bug
+	RGB 31, 31, 31
+	RGB 22, 25, 00
+	RGB 11, 15, 02
+	RGB 00, 00, 00
+; hp dragon
+	RGB 31, 31, 31
+	RGB 20, 16, 26
+	RGB 07, 07, 22
+	RGB 00, 00, 00
+; hp dark
+	RGB 31, 31, 31
+	RGB 18, 16, 14
+	RGB 09, 07, 06
+	RGB 00, 00, 00
+; hp steel
+	RGB 31, 31, 31
+	RGB 21, 21, 24
+	RGB 10, 11, 15
+	RGB 00, 00, 00
+; hp psychic
+	RGB 31, 31, 31
+	RGB 31, 16, 27
+	RGB 22, 01, 19
+	RGB 00, 00, 00
+; hp ghost
+	RGB 31, 31, 31
+	RGB 19, 16, 22
+	RGB 10, 08, 13
+	RGB 00, 00, 00
 else
 rept NUM_CUSTOM_BATTLE_PALETTES - 6
 	MONOCHROME_RGB_FOUR

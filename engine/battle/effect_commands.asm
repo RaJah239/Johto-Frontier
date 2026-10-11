@@ -2058,6 +2058,8 @@ BattleCommand_MoveAnimNoSub:
 	jr z, .alternate_anim
 	cp EFFECT_POISON_MULTI_HIT
 	jr z, .alternate_anim
+	cp EFFECT_HIDDEN_POWER
+	jr z, .hidden_power
 	xor a
 	ld [wBattleAnimParam], a
 
@@ -2075,6 +2077,19 @@ BattleCommand_MoveAnimNoSub:
 	ret nz
 .clear_sprite
 	jmp AppearUserLowerSub
+
+.hidden_power
+; Pass Hidden Power's current type to its animation, so it can pick
+; a matching palette.
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	and TYPE_MASK
+	ld [wBattleAnimParam], a
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	ld e, a
+	ld d, 0
+	jmp PlayFXAnimID
 
 .alternate_anim
 	ld a, [wBattleAnimParam]
