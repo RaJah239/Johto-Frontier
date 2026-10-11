@@ -326,54 +326,36 @@ ReadTrainerPartyPieces:
 	jr .write_evs
 
 .NotInBattlePlaza
-	; auto-set all trainer EVs based on badges
-    ld hl, wJohtoBadges
+	; Count the badges actually owned.
+	ld a, [wJohtoBadges]
+	ld b, a
+	ld c, 0
 
-	bit RISINGBADGE, [hl]
-	ld a, 252
-	jr nz, .write_evs
+.count_badges
+	srl b
+	jr nc, .next_badge
+	inc c
+.next_badge
+	ld a, b
+	and a
+	jr nz, .count_badges
 
-	bit GLACIERBADGE, [hl]
-	ld a, 223
-	jr nz, .write_evs
+	; Look up the EV value for this badge count.
+	ld hl, .EVValues
+	ld b, 0
+	add hl, bc
+	ld a, [hl]
 
-	bit MINERALBADGE, [hl]
-	ld a, 191
-	jr nz, .write_evs
+.write_evs
+	rept 3
+		ld [de], a
+		inc de
+		ld [de], a
+		inc de
+	endr
 
-	bit STORMBADGE, [hl]
-	ld a, 159
-	jr nz, .write_evs
-
-	bit FOGBADGE, [hl]
-	ld a, 127
-	jr nz, .write_evs
-
-	bit PLAINBADGE, [hl]
-	ld a, 95
-	jr nz, .write_evs
-
-	bit HIVEBADGE, [hl]
-	ld a, 63
-	jr nz, .write_evs
-
-	bit ZEPHYRBADGE, [hl]
-	ld a, 31
-	jr nz, .write_evs
-
-    ; No badges → 0 EVs
-    xor a
+	pop hl
     ; fallthrough
-
-.write_evs:
-rept 3
-	ld [de], a
-	inc de
-	ld [de], a
-	inc de
-endr
-
-    pop hl
 
 .evs_done
 ; item?
@@ -502,6 +484,9 @@ endr
 	jmp nz, .start_random
 	pop hl
 	ret
+
+.EVValues:
+	db 0, 31, 63, 95, 127, 159, 191, 223, 252
 
 ReadPlayerPartyAsTrainerParty:
     ; clear OT party count
