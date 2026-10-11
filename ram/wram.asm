@@ -3542,14 +3542,25 @@ w3_de00:: ds $200
 ENDU
 
 
-SECTION "News Script RAM", WRAMX
+SECTION "Metatiles", WRAMX
 
+; The current tileset's full metatile table, decompressed by the
+; DecompressMetatiles mapsetup command; _LoadOverworldTilemap draws the
+; screen directly from it. The mobile news script buffer (w4_d000) shares
+; this bank; they are never used at the same time.
+UNION
+wDecompressedMetatiles:: ds 256 * 16
+
+NEXTU
 w4_d000:: ds $1000
+ENDU
 
-SECTION "Surrounding Data", WRAMX
+SECTION "Attributes", WRAMX
 
-wSurroundingTiles:: ds SURROUNDING_WIDTH * SURROUNDING_HEIGHT
-wSurroundingAttributes:: ds SURROUNDING_WIDTH * SURROUNDING_HEIGHT
+; The current tileset's metatile attribute table (up to 128 blocks),
+; decompressed by the DecompressMetatiles mapsetup command.
+; Placed at $d200 in bank 2 by layout.link, after "Pic Animations".
+wDecompressedAttributes:: ds 128 * 16
 
 
 SECTION "GBC Video", WRAMX, ALIGN[8]
