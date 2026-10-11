@@ -51,3 +51,58 @@ Steel:     db "Steel@"
 Dragon:    db "Dragon@"
 Dark:      db "Dark@"
 Fairy:     db "Fairy@"
+
+TypeNamesShort:
+; entries correspond to types (see constants/type_constants.asm)
+; 3-letter abbreviations used in the battle moves menu info box.
+	table_width 2, TypeNamesShort
+
+	dw NormalShort
+	dw FightingShort
+	dw FlyingShort
+	dw PoisonShort
+	dw GroundShort
+	dw RockShort
+	dw BirdShort
+	dw BugShort
+	dw GhostShort
+	dw SteelShort
+	assert_table_length UNUSED_TYPES
+
+rept UNUSED_TYPES_END - UNUSED_TYPES - 1 ; discount CURSE_TYPE
+	dw NormalShort
+endr
+	dw CurseTypeShort
+	assert_table_length UNUSED_TYPES_END
+
+	dw FireShort
+	dw WaterShort
+	dw GrassShort
+	dw ElectricShort
+	dw PsychicShort
+	dw IceShort
+	dw DragonShort
+	dw DarkShort
+	dw FairyShort
+	assert_table_length TYPES_END
+
+NormalShort:    db "Nrm@"
+FightingShort:  db "Fgt@"
+FlyingShort:    db "Fly@"
+PoisonShort:    db "Psn@"
+GroundShort:    db "Grn@"
+RockShort:      db "Rck@"
+BirdShort:      db "Brd@"
+BugShort:       db "Bug@"
+GhostShort:     db "Gho@"
+SteelShort:     db "Stl@"
+CurseTypeShort: db "???@"
+FireShort:      db "Fir@"
+WaterShort:     db "Wtr@"
+GrassShort:     db "Grs@"
+ElectricShort:  db "Ele@"
+PsychicShort:   db "Psy@"
+IceShort:       db "Ice@"
+DragonShort:    db "Dra@"
+DarkShort:      db "Drk@"
+FairyShort:     db "Fry@"

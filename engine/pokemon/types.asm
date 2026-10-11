@@ -136,6 +136,55 @@ PrintBattleMoveType:
     ld b, a
     jr PrintType
 
+PrintMoveTypeShort:
+; Print the 3-letter abbreviation of the type of move b at hl.
+; Used in the battle moves menu info box.
+
+	push hl
+	ld a, b
+	cp HIDDEN_POWER
+	jr z, .print_hidden_power
+	cp HIDDEN_FORCE
+	jr z, .print_hidden_power
+	dec a
+	ld bc, MOVE_LENGTH
+	ld hl, Moves
+	call AddNTimes
+	ld de, wStringBuffer1
+	ld a, BANK(Moves)
+	call FarCopyBytes
+	ld a, [wStringBuffer1 + MOVE_TYPE]
+	and TYPE_MASK
+	pop hl
+
+	ld b, a
+	jr PrintTypeShort
+
+.print_hidden_power
+	call GetHiddenPowerType
+	pop hl
+	ld b, a
+	; fallthrough
+
+PrintTypeShort:
+; Print the 3-letter abbreviation of type b at hl.
+; Used in the battle moves menu info box.
+
+	ld a, b
+
+	push hl
+	add a
+	ld hl, TypeNamesShort
+	ld e, a
+	ld d, 0
+	add hl, de
+	ld a, [hli]
+	ld e, a
+	ld d, [hl]
+	pop hl
+
+	jmp PlaceString
+
 PrintMoveType:
 ; Print the type of move b at hl.
 

@@ -12,6 +12,6 @@ BattleCategoryNames:
 	dw .Special
 	dw .Other
 
-.Physical: db "<physical>@"
-.Special:  db "<special>@"
-.Other:    db "<other>@"
+.Physical: db "Phy/@"
+.Special:  db "Spc/@"
+.Other:    db "Oth/@"

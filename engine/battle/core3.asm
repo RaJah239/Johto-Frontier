@@ -61,8 +61,8 @@ MoveInfoBox:
 
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
 	ld b, a
-	hlcoord 2, 9
-	predef PrintMoveType
+	hlcoord 5, 9
+	predef PrintMoveTypeShort
 
 ; display type effectiveness in battle menu
 	; check if move has no power
@@ -111,7 +111,7 @@ MoveInfoBox:
 	; fallthrough
 
 .print_effectiveness
-	hlcoord 1, 11
+	hlcoord 8, 9
 	call PlaceString
 
 .skip_type_effectiveness

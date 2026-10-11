@@ -73,3 +73,4 @@ PredefPointers::
 	add_predef GetMonTypeIndex
 	add_predef PrintEnemyMonTypes
 	add_predef PrintTempMonLevelUpStats
+	add_predef PrintMoveTypeShort
