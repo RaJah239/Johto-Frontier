@@ -188,8 +188,16 @@ AI_Smart_Growth:
 	call IsAIToxified
 	jmp c, StandardDiscourage
 
-; encourage if we have no reason not to
-	jmp StandardEncourage
+; only go higher if the player is also boosting
+	ld a, [wPlayerAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardEncourage
+	ld a, [wPlayerSAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardEncourage
+
+; player not boosting much, stop at +2
+	jmp StandardDiscourage
 
 AI_Smart_KnockOff:
 ; 80% chance to encourage this move if the player is holding a battle item
@@ -481,13 +489,57 @@ AI_Smart_LesserStatChange:
 	jr nc, .discourage
 	call ShouldAIBoost
 	jr nc, .discourage
+
+; check which stat this effect boosts
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	cp EFFECT_DEFENSE_UP
+	jr z, .check_defense
+	cp EFFECT_DEFENSE_CURL
+	jr z, .check_defense
+	cp EFFECT_FOCUS_ENERGY
+	jr z, .check_focus_energy
+	cp EFFECT_SAFEGUARD
+	jr z, .check_safeguard
+	cp EFFECT_MIST
+	jr z, .check_mist
+	ret
+
+.check_defense
+	ld a, [wEnemyDefLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr c, .ret
+	ld a, [wPlayerDefLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .ret
+	jmp StandardDiscourage
+
+.check_focus_energy
+; focus energy - don't use if already have focus energy
+	ld a, [wEnemySubStatus5]
+	bit SUBSTATUS_FOCUS_ENERGY, a
+	jmp nz, StandardDiscourage
+	ret
+
+.check_safeguard
+	ld a, [wEnemyScreens]
+	bit SCREENS_SAFEGUARD, a
+	jmp nz, StandardDiscourage
+	ret
+
+.check_mist
+	ld a, [wEnemyScreens]
+	bit SCREENS_MIST, a
+	jmp nz, StandardDiscourage
+	ret
+
+.ret
 	ret
 
 .discourage
 	inc [hl]
 	inc [hl]
 	inc [hl]
-    ret
+	ret
 
 AI_Smart_StealthRock:
 ; don't use if already up
@@ -554,7 +606,19 @@ AI_Smart_Agility:
 	call CanPlayerKO
 	jmp c, StandardDiscourage
 
-; otherwise use
+; discourage if speed already at +2
+	ld a, [wEnemySpdLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr c, .encourage
+
+; at +2 or higher - only go higher if player is also boosting speed
+	ld a, [wPlayerSpdLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardEncourage
+
+	jmp StandardDiscourage
+
+.encourage
 	jmp StrongEncourage
 
 AI_Smart_Barrier:
@@ -573,6 +637,15 @@ AI_Smart_Barrier:
 	jr c, .encourage
     call CanPlayerKO
     jr c, .discourage
+
+; discourage at +2 unless player is also boosting defense
+	ld a, [wEnemyDefLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr c, .encourage
+	ld a, [wPlayerDefLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .encourage
+	jr .discourage
 
 ; encourage enough to overcome encouragement to score a ko
 .encourage
@@ -1956,11 +2029,20 @@ AI_Smart_SpDefenseUp2:
 	call ShouldAIBoost
 	jr nc, .discourage
 
-; Discourage this move if enemy's special defense level is higher than +3.
+; Discourage this move if enemy's special defense level is higher than +2.
 	ld a, [wEnemySDefLevel]
-	cp BASE_STAT_LEVEL + 4
+	cp BASE_STAT_LEVEL + 3
 	jr nc, .discourage
 
+; at +2 - only go higher if player is also boosting special defense
+	cp BASE_STAT_LEVEL + 2
+	jr c, .continue
+	ld a, [wPlayerSDefLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .continue
+	jr .discourage
+
+.continue
 ; greatly encourage this move if
 ; enemy's Special Defense level is lower than +3,
 ; and the player's Pokémon is Special-oriented.
