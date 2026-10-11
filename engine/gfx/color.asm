@@ -1139,7 +1139,7 @@ LoadMapPals:
 	cp TOWN
 	jr z, .outside
 	cp ROUTE
-	ret nz
+	jr nz, .finish
 .outside
 	ld a, [wMapGroup]
 	add a
@@ -1165,7 +1165,8 @@ LoadMapPals:
 	ld bc, 4
 	ld a, BANK(wBGPals1)
 	call FarCopyWRAM
-	ret
+.finish
+	farjp ApplyMapWeatherPalettes
 
 LoadDexTypePals:
  	ldh a, [rSVBK]

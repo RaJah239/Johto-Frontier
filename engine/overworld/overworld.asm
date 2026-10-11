@@ -156,7 +156,7 @@ LoadMiscTiles:
 	ld c, EMOTE_BOULDER_DUST
 .outdoor
 	farcall LoadEmote
-	ret
+	farjp LoadWeatherGraphics
 
 SafeGetSprite:
 	push hl
