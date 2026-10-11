@@ -2184,10 +2184,12 @@ Script_LoadPocketPC:
 	reloadmappart
 	special UpdateTimePals
 	special PokemonCenterPC
+	closetext
 	reloadmappart
 	end
 
 Script_LoadPocketPC_Register:
 	special PokemonCenterPC
+	closetext
 	reloadmappart
 	end
