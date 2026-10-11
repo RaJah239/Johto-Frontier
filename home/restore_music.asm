@@ -13,7 +13,7 @@ SaveMusic::
 
 	ld a, [rSVBK]
 	push af
-	ld a, $4
+	ld a, BANK(wSoundEngineBackup)
 	ld [rSVBK], a
 
 	ld de, wSoundEngineBackup
@@ -42,7 +42,7 @@ RestoreMusic::
 
 	ld a, [rSVBK]
 	push af
-	ld a, $4
+	ld a, BANK(wSoundEngineBackup)
 	ld [rSVBK], a
 
 	ld hl, wSoundEngineBackup
@@ -80,7 +80,7 @@ DeleteSavedMusic::
 	ld a, [rSVBK]
 	push af
 
-	ld a, $4
+	ld a, BANK(wSoundEngineBackup)
 	ld [rSVBK], a
 	xor a
 	ld [wSoundEngineBackup], a
