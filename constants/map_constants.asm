@@ -26,7 +26,6 @@ ENDM
 ; `newgroup` indexes are for:
 ; - MapGroupPointers (see data/maps/maps.asm)
 ; - MapGroupRoofs (see data/maps/roofs.asm)
-; - OutdoorSprites (see data/maps/outdoor_sprites.asm)
 ; - RoofPals (see gfx/tilesets/roofs.pal)
 ; `map_const` indexes are for the sub-tables of MapGroupPointers (see data/maps/maps.asm)
 ; Each map also has associated data:

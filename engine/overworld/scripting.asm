@@ -1147,7 +1147,9 @@ Script_variablesprite:
 	add hl, de
 	call GetScriptByte
 	ld [hl], a
-	ret
+	xor a
+	ld [hUsedSpriteIndex], a
+	farjp ReloadSpriteIndex
 
 Script_appear:
 	call GetScriptByte

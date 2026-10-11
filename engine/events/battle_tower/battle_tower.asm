@@ -587,13 +587,16 @@ LoadOpponentTrainerAndPokemonWithOTSprite:
 	inc hl
 	ld a, [wBTTempOTSprite]
 	ld [hl], a
-	ld hl, wUsedSprites
-	add hl, de
-	ld [hli], a
-	ldh [hUsedSpriteIndex], a
+	ldh a, [hObjectStructIndex]
+	push af
+	ld hl, MAPOBJECT_OBJECT_STRUCT_ID
+	add hl, bc
 	ld a, [hl]
-	ldh [hUsedSpriteTile], a
-	farcall GetUsedSprite
+	ldh [hObjectStructIndex], a
+	ld a, [wBTTempOTSprite]
+	farcall GetSpriteVTile
+	pop af
+	ldh [hObjectStructIndex], a
 	ret
 
 CheckBTMonMovesForErrors:

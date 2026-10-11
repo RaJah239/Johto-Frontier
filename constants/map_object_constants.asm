@@ -37,6 +37,7 @@ DEF OBJECT_PAL_INDEX        rb ; 21
                             rb_skip 6
 DEF OBJECT_LENGTH EQU _RS
 DEF NUM_OBJECT_STRUCTS EQU 13 ; see wObjectStructs
+DEF FIRST_VRAM1_OBJECT_STRUCT EQU 10
 
 ; object_struct OBJECT_DIRECTION values
 DEF OW_DOWN  EQU DOWN  << 2
