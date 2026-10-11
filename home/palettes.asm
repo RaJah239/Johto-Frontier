@@ -321,14 +321,6 @@ ReloadSpritesNoPalettes::
 	call DelayFrame
 	ret
 
-LoadOverworldAttrmapPals::
-	homecall _LoadOverworldAttrmapPals
-	ret
-
-ScrollBGMapPalettes::
-	homecall _ScrollBGMapPalettes
-	ret
-
 SetBlackObjectPals::
 	ldh a, [rSVBK]
 	push af
