@@ -1937,6 +1937,16 @@ CopyMapPartial::
 	ld bc, wMapPartialEnd - wMapPartial
 	call CopyBytes
 
+	; wEnvironment is packed: high nibble = location sign,
+	; low nibble = environment. Unpack them.
+	ld a, [wEnvironment]
+	and $f0
+	swap a
+	ld [wSign], a
+	ld a, [wEnvironment]
+	and $f
+	ld [wEnvironment], a
+
 	pop af
 	rst Bankswitch
 	ret
@@ -1995,6 +2005,7 @@ GetMapEnvironment::
 	ld de, MAP_ENVIRONMENT
 	call GetMapField
 	ld a, c
+	and $f
 	jmp PopBCDEHL
 
 GetAnyMapEnvironment::
@@ -2004,6 +2015,7 @@ GetAnyMapEnvironment::
 	ld de, MAP_ENVIRONMENT
 	call GetAnyMapField
 	ld a, c
+	and $f
 	jmp PopBCDEHL
 
 GetAnyMapTileset::

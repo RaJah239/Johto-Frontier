@@ -29,6 +29,18 @@ DEF MAP_LENGTH EQU _RS
 	const DUNGEON
 DEF NUM_ENVIRONMENTS EQU const_value - 1
 
+; location signs (wSign; packed into the high nibble of wEnvironment)
+; SignPals and Signs indexes (see gfx/signs/signs.pal and gfx/font.asm)
+	const_def
+	const SIGN_WOOD
+	const SIGN_CITY
+	const SIGN_FOREST
+	const SIGN_CAVE
+	const SIGN_ROUTE
+	const SIGN_WATER
+	const SIGN_BUILDING
+DEF NUM_SIGNS EQU const_value
+
 ; map palettes (wMapTimeOfDay)
 	const_def
 	const PALETTE_AUTO

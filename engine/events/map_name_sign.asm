@@ -1,5 +1,8 @@
 DEF MAP_NAME_SIGN_START EQU $c0
 
+; number of tiles in each map sign frame (see Signs in gfx/font.asm)
+DEF NUM_SIGN_TILES EQU 8
+
 ; wLandmarkSignTimer
 DEF MAPSIGNSTAGE_1_SLIDEOLD EQU $63
 DEF MAPSIGNSTAGE_2_LOADGFX  EQU $57
@@ -131,7 +134,7 @@ PlaceMapNameSign::
 	ret nc
 	sub MAPSIGNSTAGE_3_SLIDEIN
 	jr c, .graphics_ok
-	ret nz
+	jr nz, LoadMapNameSignGFX
 	push hl
 	call InitMapNameFrame
 	call PlaceMapNameCenterAlign
@@ -170,12 +173,64 @@ PlaceMapNameSign::
 	ldh [hLCDCPointer], a
 	ret
 
+LoadMapNameSignGFX:
+; Load the current map's sign tiles and palette.
+	ld hl, Signs
+	ld bc, NUM_SIGN_TILES tiles
+	ld a, [wSign]
+	call AddNTimes
+	ld d, h
+	ld e, l
+	ld hl, vTiles0 tile (MAP_NAME_SIGN_START + 1)
+	lb bc, BANK(Signs), NUM_SIGN_TILES
+	call Get2bpp
+	; copy the sign palette over the text palette
+	ld hl, SignPals
+	ld bc, 1 palettes
+	ld a, [wSign]
+	call AddNTimes
+	ld de, wBGPals1 palette PAL_BG_TEXT
+	call FarCopyColorWRAM
+	; A weather fade lerps the BG palettes over several frames; don't
+	; snap them here, or the transition flashes.
+	ldh a, [hCGB]
+	and a
+	jr nz, .check_fade
+	jp SetDefaultBGPAndOBP
+.check_fade
+	ld a, [wWeatherFlags]
+	bit WEATHER_FADE_ACTIVE_F, a
+	jr nz, .fade_active
+	jp SetDefaultBGPAndOBP
+.fade_active
+	; The fade owns the BG palettes; just request an upload so the
+	; new text palette takes effect.
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	ret
+
+SignPals:
+	table_width 1 palettes, SignPals
+INCLUDE "gfx/signs/signs.pal"
+	assert_table_length NUM_SIGNS
+
 InitMapNameFrame:
 	hlcoord 0, 0, wAttrmap
 	lb bc, 5, SCREEN_WIDTH
 	call InitMapSignAttrmap
-	call PlaceMapNameFrame
-	ret
+	; the sign's right column reuses the left column's tiles,
+	; flipped via attributes
+	ld de, SCREEN_WIDTH
+	ld b, 4
+	hlcoord 19, 0, wAttrmap
+.flip_column
+	ld a, [hl]
+	or X_FLIP
+	ld [hl], a
+	add hl, de
+	dec b
+	jr nz, .flip_column
+	jmp PlaceMapNameFrame
 
 PlaceMapNameCenterAlign:
 	ld a, [wCurLandmark]
@@ -270,32 +325,32 @@ PlaceMapNameFrame:
 	ld a, MAP_NAME_SIGN_START + 2
 	call .FillTopBottom
 	; top right
-	ld a, MAP_NAME_SIGN_START + 4
+	ld a, MAP_NAME_SIGN_START + 1
 	ld [hli], a
 	; left, first line
-	ld a, MAP_NAME_SIGN_START + 5
+	ld a, MAP_NAME_SIGN_START + 4
 	ld [hli], a
 	; first line
 	call .FillMiddle
 	; right, first line
-	ld a, MAP_NAME_SIGN_START + 12
+	ld a, MAP_NAME_SIGN_START + 5
 	ld [hli], a
 
 	; left, second line
-	ld a, MAP_NAME_SIGN_START + 5
+	ld a, MAP_NAME_SIGN_START + 4
 	ld [hli], a
 	call .FillMiddle
-	ld a, MAP_NAME_SIGN_START + 12
+	ld a, MAP_NAME_SIGN_START + 5
 	ld [hli], a
 
 	; bottom left
-	ld a, MAP_NAME_SIGN_START + 7
+	ld a, MAP_NAME_SIGN_START + 6
 	ld [hli], a
 	; bottom
-	ld a, MAP_NAME_SIGN_START + 8
+	ld a, MAP_NAME_SIGN_START + 7
 	call .FillTopBottom
 	; bottom right
-	ld a, MAP_NAME_SIGN_START + 10
+	ld a, MAP_NAME_SIGN_START + 6
 	ld [hl], a
 	ret
 

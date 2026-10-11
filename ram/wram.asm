@@ -2529,6 +2529,7 @@ wMapAttributesBank:: db
 wMapTileset:: db
 wEnvironment:: db
 wMapAttributesPointer:: dw
+wSign:: db
 wMapPartialEnd::
 
 wMapAttributes::
