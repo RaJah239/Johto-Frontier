@@ -145,9 +145,9 @@
 	charmap "<se>",      $c3
 	charmap "<le>",      $c4
 	charmap "<ct>",      $c5
-	charmap "<physical>",$c6
-	charmap "<special>", $c7
-	charmap "<other>",   $c8
+	charmap "<physical>",$c6 ; used once
+	charmap "<special>", $c7 ; used nowhere
+	charmap "<other>",   $c8 ; used nowhere
 	charmap "<%>",       $c9 ; Percent symbol
 	charmap "<⁂>",      $ca
 	charmap "<star>",    $cb
