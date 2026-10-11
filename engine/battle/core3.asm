@@ -64,6 +64,11 @@ MoveInfoBox:
 	hlcoord 5, 9
 	predef PrintMoveTypeShort
 
+; print "PP:"
+	ld de, .pp_string ; "PP"
+	hlcoord 2, 11
+	call PlaceString
+
 ; display type effectiveness in battle menu
 	; check if move has no power
 	; or not a special move like counter, mirror coat or seismic toss
@@ -195,6 +200,7 @@ MoveInfoBox:
 .nopower_string: db "---@"
 .place_var_string: db " var@"
 .power_string: db "p/@"
+.pp_string: db "<PP><PP>:@"
 .zero_damage: db "×0@"
 .half_damage: db "×<half>@"
 .quarter_damage: db "×<quarter>@"

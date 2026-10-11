@@ -141,6 +141,7 @@
 
 	charmap "<half>",    $c0
 	charmap "<+>",       $c1
+	charmap "<PP>",      $c2
 	charmap "<se>",      $c3
 	charmap "<le>",      $c4
 	charmap "<ct>",      $c5
