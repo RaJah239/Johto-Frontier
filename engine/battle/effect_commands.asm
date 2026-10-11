@@ -4601,10 +4601,12 @@ BattleCommand_StatDown:
 ; ===========================
 ; === Ability: Resilience ===
 ; ===========================
+	push hl
 	push bc
 	ld hl, ResiliencePokemon
 	call IsInByteArray
 	pop bc
+	pop hl
 	jr c, .resilience
 
 ; Attempt to lower the stat.
