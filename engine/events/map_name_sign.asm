@@ -133,6 +133,12 @@ PlaceMapNameSign::
 	jr c, .graphics_ok
 	ret nz
 	push hl
+	; The banner frame/text tiles live in the overworld font block
+	; (vTiles1), which sprite facing data can overwrite ($40-$4f facing
+	; blocks land at $8c00 in bank 0). Reload just those tiles right
+	; before display; reloading the whole font here would stall for
+	; many frames while the LCD is on.
+	farcall LoadMapNameSignTiles
 	call InitMapNameFrame
 	call PlaceMapNameCenterAlign
 	farcall HDMATransfer_OnlyTopFourRows
