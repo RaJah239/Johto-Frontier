@@ -10,6 +10,26 @@ ItemNameOrder:
 
 
 ; Item Pocket - 60 total
+; Vitamins
+	db RARE_CANDY
+	db PP_UP
+	db HYPER_EV_UP
+	db HP_UP
+	db PROTEIN
+	db IRON
+	db CALCIUM
+	db ZINC 
+	db CARBOS
+
+; Evolution Items
+	db FIRE_STONE
+	db WATER_STONE
+	db LEAF_STONE
+	db THUNDERSTONE
+	db DRAGON_SCALE
+	db SUN_STONE
+	db MOON_STONE
+
 ; Forever useful items
 	db REPEL
 	db SUPER_REPEL
@@ -57,26 +77,6 @@ ItemNameOrder:
 	db ENERGY_ROOT
 	db HEAL_POWDER
 	db REVIVAL_HERB
-
-; Vitamins
-	db RARE_CANDY
-	db HYPER_EV_UP
-	db PP_UP
-	db HP_UP
-	db PROTEIN
-	db IRON
-	db CALCIUM
-	db ZINC 
-	db CARBOS
-
-; Evolution Items
-	db FIRE_STONE
-	db WATER_STONE
-	db LEAF_STONE
-	db THUNDERSTONE
-	db DRAGON_SCALE
-	db SUN_STONE
-	db MOON_STONE
 
 ; Boxes
 	db NORMAL_BOX

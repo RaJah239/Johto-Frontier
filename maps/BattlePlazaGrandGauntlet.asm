@@ -79,16 +79,113 @@ GrandGauntletEntryPenalty:
 	or c
 	jr nz, .clear_tms
 
-	; Remove every copy of these items.
+	; remove all berries
+	ld a, BERRY
+	ld [wCurItem], a
+	call .RemoveAllMatchingBerries
+
+	ld a, BITTER_BERRY
+	ld [wCurItem], a
+	call .RemoveAllMatchingBerries
+
+	ld a, BURNT_BERRY
+	ld [wCurItem], a
+	call .RemoveAllMatchingBerries
+
+	ld a, GOLD_BERRY
+	ld [wCurItem], a
+	call .RemoveAllMatchingBerries
+
+	ld a, ICE_BERRY
+	ld [wCurItem], a
+	call .RemoveAllMatchingBerries
+
+	ld a, MINT_BERRY
+	ld [wCurItem], a
+	call .RemoveAllMatchingBerries
+
+	ld a, MIRACLEBERRY
+	ld [wCurItem], a
+	call .RemoveAllMatchingBerries
+
+	ld a, MYSTERYBERRY
+	ld [wCurItem], a
+	call .RemoveAllMatchingBerries
+
+	ld a, PRZCUREBERRY
+	ld [wCurItem], a
+	call .RemoveAllMatchingBerries
+
+	ld a, PSNCUREBERRY
+	ld [wCurItem], a
+	call .RemoveAllMatchingBerries
+
+	ld a, SILVER_BERRY
+	ld [wCurItem], a
+	call .RemoveAllMatchingBerries
+
+	; remove these specific items
 	ld a, RARE_CANDY
 	ld [wCurItem], a
 	call .RemoveAllMatchingItems
 
-	ld a, MAX_REPEL
+	ld a, PP_UP
 	ld [wCurItem], a
 	call .RemoveAllMatchingItems
 
-	ld a, ESCAPE_ROPE
+	ld a, HYPER_EV_UP
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	ld a, HP_UP
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	ld a, PROTEIN
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	ld a, IRON
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	ld a, CALCIUM
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	ld a, ZINC
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	ld a, CARBOS
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	ld a, FIRE_STONE
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	ld a, WATER_STONE
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	ld a, LEAF_STONE
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	ld a, THUNDERSTONE
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	ld a, DRAGON_SCALE
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	ld a, SUN_STONE
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	ld a, MOON_STONE
 	ld [wCurItem], a
 	call .RemoveAllMatchingItems
 
@@ -136,6 +233,46 @@ GrandGauntletEntryPenalty:
 
 	; Restart to remove any additional stacks.
 	jr .restart
+
+.RemoveAllMatchingBerries:
+.restart2
+	ld hl, wFruits
+.search2
+	ld a, [hli]
+	cp -1
+	ret z
+	ld c, a
+	ld a, [wCurItem]
+	cp c
+	jr z, .found2
+	; Skip this item's quantity.
+	inc hl
+	jr .search2
+
+.found2
+	; HL points to the matching item's quantity.
+	dec hl
+	ld d, h
+	ld e, l
+
+	; Source is the next item pair.
+	inc hl
+	inc hl
+
+	; Shift remaining entries left, including the terminator.
+.copy2
+	ld a, [hli]
+	ld [de], a
+	inc de
+	cp -1
+	jr nz, .copy2
+
+	; One item entry has been removed.
+	ld hl, wNumFruits
+	dec [hl]
+
+	; Restart to remove any additional stacks.
+	jr .restart2
 
 BattlePlazaGrandGauntletReceptionistScript:
 	opentext
