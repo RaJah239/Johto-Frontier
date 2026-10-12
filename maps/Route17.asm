@@ -51,13 +51,22 @@ Route17_MapScripts:
 	callback MAPCALLBACK_OBJECTS, .WeatherAndOtis
 
 .WeatherAndOtis:
+	checktime EVE | NITE
+	iffalse .DayWeather
+	random 3
+	ifequal 0, .Sandstorm
+	ifequal 1, .Rain
+	setval WEATHER_NONE
+	writemem wFieldWeather
+	sjump .CheckOtis
+
+.DayWeather
 	random 4
 	ifequal 0, .Sun
 	ifequal 1, .Rain
 	ifequal 2, .Sandstorm
 	setval WEATHER_NONE
 	writemem wFieldWeather
-
 .CheckOtis
 	; 10% chance of otis appearing
 	checkflag ENGINE_MET_OTIS_TODAY
