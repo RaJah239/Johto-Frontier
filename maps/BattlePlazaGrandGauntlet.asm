@@ -58,38 +58,84 @@ GrandGauntletGiveUpPenalty:
 	; fallthrough
 
 GrandGauntletEntryPenalty:
-	; 2. items pocket: count to zero, then a terminator in the first
-	;    slot (and the old entries cleared, so a stale id cannot
-	;    survive a future terminator shift)
-	xor a
-	ld [wNumItems], a
-	ld hl, wItems
-	ld bc, MAX_ITEMS * 2 + 1
-	ld a, -1
-	call ByteFill
+	; Preserve the current item selection.
+	ld a, [wCurItem]
+	push af
 
-	; 3. berries pocket
-	xor a
-	ld [wNumFruits], a
-	ld hl, wFruits
-	ld bc, MAX_FRUITS * 2 + 1
-	ld a, -1
-	call ByteFill
-
-	; 4. battle pocket
+	; Clear Battle pocket.
 	xor a
 	ld [wNumBattles], a
-	ld hl, wBattles
-	ld bc, MAX_BATTLES * 2 + 1
 	ld a, -1
-	call ByteFill
+	ld [wBattles], a
 
-	; 5. TMs and HMs: the pocket is the wTMsHMs bit list, so every
-	;    owned TM/HM disappears with the bits
-	xor a
+	; Clear all TM/HM ownership.
 	ld hl, wTMsHMs
 	ld bc, NUM_TMS + NUM_HMS
-	jmp ByteFill
+.clear_tms
+	xor a
+	ld [hli], a
+	dec bc
+	ld a, b
+	or c
+	jr nz, .clear_tms
+
+	; Remove every copy of these items.
+	ld a, RARE_CANDY
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	ld a, MAX_REPEL
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	ld a, ESCAPE_ROPE
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	; Restore the previous item selection.
+	pop af
+	ld [wCurItem], a
+	ret
+
+.RemoveAllMatchingItems:
+.restart
+	ld hl, wItems
+.search
+	ld a, [hli]
+	cp -1
+	ret z
+	ld c, a
+	ld a, [wCurItem]
+	cp c
+	jr z, .found
+	; Skip this item's quantity.
+	inc hl
+	jr .search
+
+.found
+	; HL points to the matching item's quantity.
+	dec hl
+	ld d, h
+	ld e, l
+
+	; Source is the next item pair.
+	inc hl
+	inc hl
+
+	; Shift remaining entries left, including the terminator.
+.copy
+	ld a, [hli]
+	ld [de], a
+	inc de
+	cp -1
+	jr nz, .copy
+
+	; One item entry has been removed.
+	ld hl, wNumItems
+	dec [hl]
+
+	; Restart to remove any additional stacks.
+	jr .restart
 
 BattlePlazaGrandGauntletReceptionistScript:
 	opentext
