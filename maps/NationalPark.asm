@@ -57,11 +57,21 @@ NationalPark_MapScripts:
 
 .Weather:
 	checktime EVE | NITE
-	iftrue .skipWeather
+	iftrue .NightWeather
 	setval WEATHER_SUN
 	writemem wFieldWeather
-.skipWeather
 	endcallback
+
+.NightWeather
+	random 2
+	ifequal 0, .Rain
+	setval WEATHER_NONE
+	writemem wFieldWeather
+	endcallback
+
+.Rain:
+	setval WEATHER_RAIN
+	writemem wFieldWeather
 
 .Flypoint:
 	setflag ENGINE_FLYPOINT_NATIONAL_PARK
