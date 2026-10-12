@@ -195,6 +195,13 @@ hRandomState:: ds 4
 ; Weather palette fade scratch byte
 hWeatherFadeProgress:: db
 
-	ds 6
+; Tileset index whose metatile/attribute tables are currently decompressed
+; into wDecompressedMetatiles/wDecompressedAttributes. 0 means nothing is
+; cached, which is safe because tileset indices start at 1.
+; DecompressMetatiles skips its work when the map's tileset is already
+; decompressed, so map connections never re-decompress an unchanged tileset.
+hDecompressedTileset:: db
+
+	ds 5
 
 ENDSECTION

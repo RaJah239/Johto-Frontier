@@ -290,6 +290,16 @@ ForceMapMusic:
 DecompressMetatiles:
 ; Decompress the current tileset's metatile and attribute tables into WRAM,
 ; so _LoadOverworldTilemap can draw the screen directly from them.
+; Both tables only depend on the tileset, so they are decompressed once:
+; entering a map that uses the tileset already in WRAM (route to route, or
+; reloading after a battle) skips this work, which keeps connections seamless.
+	ldh a, [hDecompressedTileset]
+	ld hl, wMapTileset
+	cp [hl]
+	ret z
+
+	ld a, [hl]
+	ldh [hDecompressedTileset], a
 	ld hl, wTilesetBlocksBank
 	ld c, BANK(wDecompressedMetatiles)
 	ld de, wDecompressedMetatiles
