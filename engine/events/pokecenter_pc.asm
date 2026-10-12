@@ -580,6 +580,12 @@ PlayerDepositItemMenu:
 	ret
 
 .DepositItem:
+	; TMs/HMs set the CANT_TOSS permission but can still be deposited in
+	; stacks, so ask for a quantity for them just like any other item.
+	farcall CheckItemPocket
+	ld a, [wItemAttributeValue]
+	cp TM_HM
+	jr z, .AskQuantity
 	farcall _CheckTossableItem
 	ld a, [wItemAttributeValue]
 	and a
