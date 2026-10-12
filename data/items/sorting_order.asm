@@ -9,7 +9,7 @@ ItemNameOrder:
 
 
 
-; Item Pocket - 59 total
+; Item Pocket - 60 total
 ; Forever useful items
 	db REPEL
 	db SUPER_REPEL

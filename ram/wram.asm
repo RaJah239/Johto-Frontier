@@ -3226,7 +3226,7 @@ wOlivineGym::                                     db
 wCianwoodGym::                                    db
 wMahoganyGym::                                    db
 
-	ds 156
+	ds 65
 wScore:: ds 3
 wScoreCardPage:: db
 wScoreCardDelay:: db
@@ -3265,8 +3265,6 @@ wTempMonStatGainDisplay:: db
 wEventFlags:: flag_array NUM_EVENTS
 
 wCurBox:: db
-
-	ds 128
 
 wCelebiEvent::
 ; bit 2: forest is restless
@@ -3318,16 +3316,13 @@ wDailyResetTimer:: dw
 wDailyFlags1:: ds 2 ; Has 16 right now but only uses 9
 wDailyFlags2:: db
 wSwarmFlags:: db
-	ds 1
 wTimerEventStartDay:: db
 
 wFruitTreeFlags:: flag_array NUM_FRUIT_TREES
 
-	ds 5
-
 wSpecialPhoneCallID:: db
 wBugContestStartTime:: ds 4 ; day, hour, min, sec
-	ds 8
+
 wdc41:: ds 1
 wdc42:: ds 8
 wBuenasPassword:: db
@@ -3354,7 +3349,7 @@ wParkBallsRemaining::
 
 wPhoneList:: ds CONTACT_LIST_SIZE + 1
 
-	ds 29
+	ds 10
 
 wRepelType:: db
 
@@ -3378,7 +3373,7 @@ wBackupWarpNumber:: db
 wBackupMapGroup::   db
 wBackupMapNumber::  db
 
-	ds 3
+	ds 1
 
 wLastSpawnMapGroup:: db
 wLastSpawnMapNumber:: db
