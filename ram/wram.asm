@@ -2350,7 +2350,13 @@ wLastWeatherMapGroup:: db
 wLastWeatherMapNumber:: db
 wGroupWeather:: db
 
-	ds 7
+; Music player: track the last outdoor map and its default music
+; so the overworld music stays the same unless changing routes/cities.
+wLastMusicMapGroup:: db
+wLastMusicMapNumber:: db
+wMapMusicForGroup:: db
+
+	ds 4
 
 
 SECTION "More WRAM 1", WRAMX

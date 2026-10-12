@@ -101,7 +101,7 @@ HandleMapDefaultWeather:
 ; buildings are clear; the outdoor weather is remembered for
 ; when you head back outside.
 	ld a, WEATHER_NONE
-	jr .done
+	jr .done_weather
 
 .outdoor
 ; re-roll only when this is a different outdoor map than the
@@ -109,12 +109,12 @@ HandleMapDefaultWeather:
 	ld a, [wMapGroup]
 	ld hl, wLastWeatherMapGroup
 	cp [hl]
-	jr nz, .roll
+	jr nz, .roll_weather
 	ld a, [wMapNumber]
 	ld hl, wLastWeatherMapNumber
 	cp [hl]
-	jr z, .same_map
-.roll
+	jr z, .same_map_weather
+.roll_weather
 	ld a, [wMapGroup]
 	ld [wLastWeatherMapGroup], a
 	ld a, [wMapNumber]
@@ -137,22 +137,72 @@ HandleMapDefaultWeather:
 	ld a, WEATHER_SUN
 .save_group
 	ld [wGroupWeather], a
-.same_map
+.same_map_weather
 ; Apply the map's weather; sun becomes clear at night.
 	ld a, [wGroupWeather]
 	cp WEATHER_SUN
-	jr nz, .done
+	jr nz, .done_weather
 ; Sun becomes clear weather at night.
 	ld a, [wTimeOfDay]
 	cp NITE_F
 	jr z, .clear
 	ld a, WEATHER_SUN
-	jr .done
+	jr .done_weather
 
 .clear
 	ld a, WEATHER_NONE
-.done
+.done_weather
 	ld [wFieldWeather], a
+
+; Music player: track outdoor map changes so the overworld
+; music stays the same unless changing routes/cities.
+; Persistent battle music is cleared on outdoor map change.
+	ld a, [wMapGroup]
+	ld b, a
+	ld a, [wMapNumber]
+	ld c, a
+	call GetMapEnvironment
+	cp ROUTE
+	jr z, .outdoor_music
+	cp TOWN
+	jr z, .outdoor_music
+	ret
+
+.outdoor_music
+; Check if this is a different outdoor map than last time.
+	ld a, [wMapGroup]
+	ld hl, wLastMusicMapGroup
+	cp [hl]
+	jr nz, .new_outdoor_map
+	ld a, [wMapNumber]
+	ld hl, wLastMusicMapNumber
+	cp [hl]
+	jr z, .same_outdoor_map
+
+.new_outdoor_map
+; New outdoor map: update tracking, get its default music,
+; clear persistent battle music, and set wMapMusic.
+	ld a, [wMapGroup]
+	ld [wLastMusicMapGroup], a
+	ld a, [wMapNumber]
+	ld [wLastMusicMapNumber], a
+
+	call GetMapMusic_MaybeSpecial
+	ld a, [wMapMusic]
+	ld [wMapMusicForGroup], a
+
+	xor a
+	ld [wPersistentBattleMusicOverride], a
+	ld [wPersistentBattleMusicOverride + 1], a
+
+	ld a, [wMapMusicForGroup]
+	ld [wMapMusic], a
+	ret
+
+.same_outdoor_map
+; Same outdoor map: restore the tracked map music if needed.
+	ld a, [wMapMusicForGroup]
+	ld [wMapMusic], a
 	ret
 
 HandleAutoBicycle:
