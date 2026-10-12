@@ -2343,7 +2343,14 @@ wWeatherFadeFrame:: db
 wOverworldWeatherStateEnd::
 assert wOverworldWeatherStateEnd - wOverworldWeatherState == OVERWORLD_WEATHER_STATE_SIZE
 
-	ds 10
+; The overworld weather is re-rolled each time you reach a new
+; outdoor map, so it stays the same when entering and leaving
+; buildings within a map.
+wLastWeatherMapGroup:: db
+wLastWeatherMapNumber:: db
+wGroupWeather:: db
+
+	ds 7
 
 
 SECTION "More WRAM 1", WRAMX

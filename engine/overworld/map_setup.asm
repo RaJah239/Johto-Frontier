@@ -85,8 +85,9 @@ LoadMapObjects:
 	newfarcall SelectWeatherObjPalette
 	farjp LoadWeatherGraphics
 
-; Outdoor maps: 35% rain, 35% sun, 30% clear.
-; Sun becomes clear weather at night.
+; the weather is re-rolled each time you reach a new outdoor
+; map, so it stays the same when entering and leaving
+; buildings within a map.
 HandleMapDefaultWeather:
 	ld a, [wMapGroup]
 	ld b, a
@@ -97,25 +98,59 @@ HandleMapDefaultWeather:
 	jr z, .outdoor
 	cp TOWN
 	jr z, .outdoor
-	jr .no_weather
+; buildings are clear; the outdoor weather is remembered for
+; when you head back outside.
+	ld a, WEATHER_NONE
+	jr .done
+
 .outdoor
+; re-roll only when this is a different outdoor map than the
+; last one, so the weather is stable across a building visit.
+	ld a, [wMapGroup]
+	ld hl, wLastWeatherMapGroup
+	cp [hl]
+	jr nz, .roll
+	ld a, [wMapNumber]
+	ld hl, wLastWeatherMapNumber
+	cp [hl]
+	jr z, .same_map
+.roll
+	ld a, [wMapGroup]
+	ld [wLastWeatherMapGroup], a
+	ld a, [wMapNumber]
+	ld [wLastWeatherMapNumber], a
+; outdoor maps: 35% rain, 35% sun, 30% clear.
 	call Random
 	cp 35 percent ; 35% for rain
 	jr c, .rain
-	call Random
 	cp 70 percent ; 35% for sun
 	jr c, .sun
-.no_weather ; 30% no weather
+.none ; 30% no weather
 	ld a, WEATHER_NONE
-	jr .done
+	jr .save_group
+
 .rain
 	ld a, WEATHER_RAIN
-	jr .done
+	jr .save_group
+
 .sun
+	ld a, WEATHER_SUN
+.save_group
+	ld [wGroupWeather], a
+.same_map
+; Apply the map's weather; sun becomes clear at night.
+	ld a, [wGroupWeather]
+	cp WEATHER_SUN
+	jr nz, .done
+; Sun becomes clear weather at night.
 	ld a, [wTimeOfDay]
 	cp NITE_F
-	jr z, .no_weather
+	jr z, .clear
 	ld a, WEATHER_SUN
+	jr .done
+
+.clear
+	ld a, WEATHER_NONE
 .done
 	ld [wFieldWeather], a
 	ret
