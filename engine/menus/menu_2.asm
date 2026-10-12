@@ -43,6 +43,19 @@ PlaceMenuItemQuantity:
 	lb bc, 1, 2
 	jmp PrintNum
 
+PlacePCItemQuantity:
+; Like PlaceMenuItemQuantity, but always shows a quantity. TMs/HMs have the
+; CANT_TOSS permission set, so they would otherwise be listed without a count.
+	push de
+	pop hl
+	ld de, $15
+	add hl, de
+	ld [hl], "×"
+	inc hl
+	ld de, wMenuSelectionQuantity
+	lb bc, 1, 2
+	jmp PrintNum
+
 PlaceItemInBagQuantity:
 	; Place a text box of size 1x7 at 0, 0.
 	hlcoord 0, 0
