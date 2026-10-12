@@ -11,6 +11,7 @@ BattlePlazaGrandGauntlet_MapEvents:
 	object_event  4,  3, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
 	object_event  3, 10, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, BattlePlazaGrandGauntletReceptionistScript, -1
 	object_event  1, 12, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, BattlePlazaGrandGauntletYoungsterText, -1
+	object_event  7, 12, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, DittoSellerScript, -1
 
 	object_const_def
 	const BATTLEPLAZAGRANDGAUNTLET_QUEST_GIVER
@@ -117,6 +118,10 @@ BattlePlazaGrandGauntletReceptionistScript:
 	sjump .ChooseMode
 
 .Enter:
+	readvar VAR_PARTYCOUNT
+	ifgreater 1, .YouDontMeetRequirements
+	checkpokelevel DITTO, 50
+	iffalse_endtext
 	writethistext
 		text "Please go right"
 		line "through."
@@ -154,6 +159,9 @@ BattlePlazaGrandGauntletReceptionistScript:
 	playsound SFX_DEX_FANFARE_20_49
 	waitsfx
 	sjump .ReviewTeam
+
+.YouDontMeetRequirements:
+	endtext
 
 .KeepTeam:
 	callasm EquipPartyKeeperTeamItems
@@ -748,3 +756,39 @@ BattlePlazaGrandGauntletYoungsterText:
 	cont "taken on the"
 	cont "Grand Gauntlet."
 	done
+
+DittoSellerScript:
+	faceplayeropentext
+	special PlaceMoneyTopRight
+	writethistext
+		text "Want a Ditto to be"
+		line "able to enter?"
+
+		para "It'll cost ¥50."
+		line "What do you say?"
+		done
+	yesorno
+	iffalse_endtext
+	readvar VAR_PARTYCOUNT
+	ifequal PARTY_LENGTH, .NoRoom
+	checkmoney YOUR_MONEY, 50
+	ifequal HAVE_LESS, .NotEnoughMoney
+	takemoney YOUR_MONEY, 50
+	special PlaceMoneyTopRight
+	playsound SFX_TRANSACTION
+	waitsfx
+	playsound SFX_CAUGHT_MON
+	waitsfx
+	givepoke DITTO, 50
+	endtext
+
+.NoRoom:
+	jumpthisopenedtext
+		text "You have no room"
+		line "in your party!"
+		done
+
+.NotEnoughMoney:
+	jumpthisopenedtext
+		text "You even have ¥50…"
+		done

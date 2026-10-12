@@ -300,6 +300,13 @@ MACRO checkpoke
 	db \1 ; pkmn
 ENDM
 
+	const checkpokelevel_command ; $31
+MACRO checkpokelevel
+	db checkpokelevel_command
+	db \1 ; pkmn
+	db \2 ; level
+ENDM
+
 	const givepoke_command ; $2d
 MACRO givepoke
 	if _NARG == 2

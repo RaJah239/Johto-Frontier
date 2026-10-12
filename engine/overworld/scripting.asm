@@ -132,6 +132,7 @@ ScriptCommandTable:
 	dw Script_checkcellnum               ; 2a
 	dw Script_checktime                  ; 2b
 	dw Script_checkpoke                  ; 2c
+	dw Script_checkpokelevel
 	dw Script_givepoke                   ; 2d
 	dw Script_giveegg                    ; 2e
 	dw Script_givepokemail               ; 2f
@@ -2034,6 +2035,41 @@ Script_checkpoke:
 	ld hl, wPartySpecies
 	call IsInByteArray
 	ret nc
+	ld a, TRUE
+	ld [wScriptVar], a
+	ret
+
+Script_checkpokelevel:
+	xor a
+	ld [wScriptVar], a
+	call GetScriptByte
+	ld c, a ; species
+	call GetScriptByte
+	ld d, a ; min level
+	ld hl, wPartySpecies
+	ld e, PARTY_LENGTH
+.loop:
+	dec e
+	ret z
+	ld a, [hli]
+	cp c
+	jr nz, .loop
+	; found species at index (PARTY_LENGTH - e - 1)
+	ld a, PARTY_LENGTH - 1
+	sub e
+	ld e, a
+	ld hl, wPartyMon1Level
+	ld bc, PARTYMON_STRUCT_LENGTH
+.loop2:
+	and a
+	jr z, .check
+	add hl, bc
+	dec a
+	jr .loop2
+.check:
+	ld a, [hl]
+	cp d
+	ret c
 	ld a, TRUE
 	ld [wScriptVar], a
 	ret
