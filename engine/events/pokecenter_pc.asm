@@ -405,6 +405,12 @@ PlayerWithdrawItemMenu:
 
 .Submenu:
 	; check if the item has a quantity
+	; TMs/HMs set the CANT_TOSS permission but are stored in stacks, so
+	; ask for a quantity for them just like any other item.
+	farcall CheckItemPocket
+	ld a, [wItemAttributeValue]
+	cp TM_HM
+	jr z, .askquantity
 	farcall _CheckTossableItem
 	ld a, [wItemAttributeValue]
 	and a
