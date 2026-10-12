@@ -530,9 +530,6 @@ PlayerDepositItemMenu:
 .TryDepositItem:
 	farcall CheckItemPocket
 	ld a, [wItemAttributeValue]
-	cp TM_HM
-	jr z, .CantDeposit
-	ld a, [wItemAttributeValue]
 	cp KEY_ITEM
 	jr z, .CantDeposit
 

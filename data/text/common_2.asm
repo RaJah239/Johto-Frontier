@@ -958,8 +958,8 @@ _PlayersPCNoItemsText::
 	prompt
 
 _CantDepositText::
-	text "TM/HM or Key Items"
-	line "can't be deposited."
+	text "Key Items can't"
+	line "be deposited."
 	prompt
 
 _PlayersPCHowManyDepositText::
