@@ -352,7 +352,9 @@ HandleLeftovers:
 	farcall SwitchTurnCore
 	farcall RestoreHP
 	ld hl, BattleText_TargetRecoveredWithItem
-	jmp StdBattleTextbox
+	call StdBattleTextbox
+	ld c, 30
+	jmp DelayFrames
 
 HandleMysteryberry:
 	ldh a, [hSerialConnectionStatus]

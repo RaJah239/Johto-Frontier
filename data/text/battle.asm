@@ -290,11 +290,10 @@ BattleText_Null:
 
 BattleText_TargetRecoveredWithItem:
 	text "<TARGET>"
-	line "recovered with"
-	cont "@"
+	line "@"
 	text_ram wStringBuffer1
-	text "."
-	prompt
+	text " regen!"
+	done
 
 BattleText_UserRecoveredPPUsing:
 	text "<USER>"
