@@ -74,7 +74,9 @@ InitMapNameSign::
 	jr .value_ok
 
 .stage_4_visible
-	ld a, MAPSIGNSTAGE_1_SLIDEOLD
+; When the old sign is visible and a new sign is triggered, immediately
+; hide the old sign by jumping to the loading stage.
+	ld a, MAPSIGNSTAGE_2_LOADGFX
 .value_ok
 	ld [wLandmarkSignTimer], a
 	ret
@@ -175,6 +177,12 @@ PlaceMapNameSign::
 
 LoadMapNameSignGFX:
 ; Load the current map's sign tiles and palette.
+; Retire the old sign first: its frame tiles live at
+; MAP_NAME_SIGN_START+1..+8 and would otherwise be overwritten
+; while it is still on screen.
+	ld a, $90
+	ldh [rWY], a
+	ldh [hWY], a
 	ld hl, Signs
 	ld bc, NUM_SIGN_TILES tiles
 	ld a, [wSign]
