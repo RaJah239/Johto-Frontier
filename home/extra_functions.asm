@@ -20,14 +20,6 @@ CheckNicknaming::
 	bit NICKNAMING, a
 	ret
 
-CheckIfDoubleBattleSpeed::
-; "Battle Speed": z = Normal, nz = Double (see DOUBLE_BATTLE_SPEED_F).
-; Battle code reads this instead of poking wTextboxFlags itself, so the
-; bit only has one definition.
-	ld a, [wTextboxFlags]
-	bit DOUBLE_BATTLE_SPEED_F, a
-	ret
-
 GetCurrentMon::
 	ldh a, [hBattleTurn]
 	and a

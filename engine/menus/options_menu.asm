@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 30
+DEF NUM_OPTIONS EQU 29
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -104,7 +104,6 @@ OptionsMenu_DrawLabels:
 	dw .QuickNurse
 	dw .FieldActions
 	dw .PokePics
-	dw .BattleSpeed
 	dw .IntrosOutros
 	dw .MonCries
 	dw .WeatherText
@@ -136,7 +135,6 @@ OptionsMenu_DrawLabels:
 .QuickNurse:      db "#mon Center@"
 .FieldActions:    db "Field Actions@"
 .PokePics:        db "#pics@"
-.BattleSpeed:     db "Battle Speed@"
 .IntrosOutros:    db "Intros & Outros@"
 .MonCries:        db "#mon Cries@"
 .WeatherText:     db "Weather Text@"
@@ -195,7 +193,6 @@ GetOptionPointer:
 	dw Options_QuickNurse
 	dw Options_FieldActions
 	dw Options_Pokepics
-	dw Options_BattleSpeed
 	dw Options_IntrosOutros
 	dw Options_MonCries
 	dw Options_WeatherText
@@ -1183,50 +1180,6 @@ Options_FastBoot:
 .MainMenu: db "Main Menu@"
 .InGame:   db "In Game  @"
 
-Options_BattleSpeed:
-; How fast the battle engine runs, stored in wTextboxFlags
-; DOUBLE_BATTLE_SPEED_F: clear = "Normal", set = "Double". Double makes
-; the engine take two steps per real frame (see CheckIfDoubleBattleSpeed
-; for the three places that read it), so animations, HP bars, the movedelay
-; wait and the pre-battle transition all take about half as long.
-; Text speed stays under the separate "Battles" option.
-	ld hl, wTextboxFlags
-	ldh a, [hJoyPressed]
-	bit D_LEFT_F, a
-	jr nz, .LeftPressed
-	bit D_RIGHT_F, a
-	jr z, .NonePressed
-	bit DOUBLE_BATTLE_SPEED_F, [hl]
-	jr nz, .ToggleOff
-	jr .ToggleOn
-
-.LeftPressed:
-	bit DOUBLE_BATTLE_SPEED_F, [hl]
-	jr z, .ToggleOn
-	jr .ToggleOff
-
-.NonePressed:
-	bit DOUBLE_BATTLE_SPEED_F, [hl]
-	jr nz, .ToggleOn
-
-.ToggleOff:
-	res DOUBLE_BATTLE_SPEED_F, [hl]
-	ld de, .Normal
-	jr .Display
-
-.ToggleOn:
-	set DOUBLE_BATTLE_SPEED_F, [hl]
-	ld de, .Double
-
-.Display:
-	call OptionsMenu_PlaceValue
-	call PlaceString
-	and a
-	ret
-
-.Normal: db "Normal@"
-.Double: db "Double@"
-
 Options_TurboAButton:
  	ld hl, wOptions3
  	ldh a, [hJoyPressed]
@@ -1661,7 +1614,6 @@ OptionsMenu_DrawDescription:
 	dw .DescQuickNurse
 	dw .DescFieldActions
 	dw .DescPokepics
-	dw .DescBattleSpeed
 	dw .DescIntrosOutros
 	dw .DescMonCries
 	dw .DescWeatherText
@@ -1701,7 +1653,6 @@ OptionsMenu_DrawDescription:
 .DescEffectiveText:   db "Show Effectiveness<LF>text or not.@"
 .DescStatusText:      db "Status text in<LF>battles.@"
 .DescFieldHazardsText:db "S.Rock, Spikes and<LF>T.Spikes text.@"
-.DescBattleSpeed:     db "Play battles at<LF>Normal or Double.@"
 .DescAbilityBanners:  db "Display ability<LF>activation banner.@"
 .DescExpShare:        db "Share Experience<LF>with the party.@"
 .DescExpNLvUp:        db "EXP Gain, Level Up<LF>and Stat Gains.@"
