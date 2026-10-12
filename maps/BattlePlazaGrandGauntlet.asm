@@ -10,10 +10,12 @@ BattlePlazaGrandGauntlet_MapEvents:
 	def_object_events
 	object_event  4,  3, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
 	object_event  3, 10, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, BattlePlazaGrandGauntletReceptionistScript, -1
+	object_event  1, 12, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, BattlePlazaGrandGauntletYoungsterText, -1
 
 	object_const_def
 	const BATTLEPLAZAGRANDGAUNTLET_QUEST_GIVER
 	const BATTLEPLAZAGRANDGAUNTLET_RECEPTIONIST
+	const BATTLEPLAZAGRANDGAUNTLET_BUGCATCHER
 
 BattlePlazaGrandGauntlet_MapScripts:
 	def_scene_scripts
@@ -735,3 +737,14 @@ ResetGrandGauntletEvents:
 	or c
 	jr nz, .loop
 	ret
+
+BattlePlazaGrandGauntletYoungsterText:
+	text "The PC can store"
+	line "up to 150 items."
+
+	para "That's enough for"
+	line "my entire invent-"
+	cont "ory that can't be"
+	cont "taken on the"
+	cont "Grand Gauntlet."
+	done
