@@ -532,9 +532,8 @@ StartMenu_Quit:
 	text_end
 
 StartMenu_GiveUp:
-; abandon a grand gauntlet run from the battle room. the room has no
-; warps, so this is the only way out: confirm, then queue a warp back
-; to the lobby stairs
+; abandon a grand gauntlet run from the battle room replaces the party
+; with a single level-50 Ditto and warps back to the lobby stairs
 	ld hl, .GiveUpConfirmText1
 	call StartMenuNoYes
 	jr c, .DontGiveUp

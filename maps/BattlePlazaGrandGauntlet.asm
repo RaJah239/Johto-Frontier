@@ -27,11 +27,66 @@ GrandGauntletGiveBackPartyCallback:
 
 GrandGauntletGiveUpScript::
 	closetext
+	callasm GrandGauntletGiveUpPenalty
 	playsound SFX_WARP_TO
 	special FadeOutPalettes
 	waitsfx
 	warp BATTLE_PLAZA_GRAND_GAUNTLET, 3, 13
 	end
+
+DEF GG_GIVE_UP_DITTO_LEVEL EQU 50
+
+GrandGauntletGiveUpPenalty:
+; Abandoning a run costs the player the team they were loaned and
+; everything they picked up along the way: the party is replaced by a
+; single level-50 Ditto and the bag is stripped back to key items and
+; balls - items, berries, battle items and TMs/HMs are all wiped.
+; The PC keeps whatever was stored there; only carried pockets go.
+	; 1. one level-50 Ditto in slot 1 and nothing else
+	call ResetPartyToEmpty
+	ld a, DITTO
+	ld [wCurPartySpecies], a
+	ld a, GG_GIVE_UP_DITTO_LEVEL
+	ld [wCurPartyLevel], a
+	xor a
+	ld [wMonType], a ; our party, not an opposing one
+	ld [wBattleMode], a ; no wild item, level-appropriate moves
+	predef TryAddMonToParty
+	; fallthrough
+
+GrandGauntletEntryPenalty:
+	; 2. items pocket: count to zero, then a terminator in the first
+	;    slot (and the old entries cleared, so a stale id cannot
+	;    survive a future terminator shift)
+	xor a
+	ld [wNumItems], a
+	ld hl, wItems
+	ld bc, MAX_ITEMS * 2 + 1
+	ld a, -1
+	call ByteFill
+
+	; 3. berries pocket
+	xor a
+	ld [wNumFruits], a
+	ld hl, wFruits
+	ld bc, MAX_FRUITS * 2 + 1
+	ld a, -1
+	call ByteFill
+
+	; 4. battle pocket
+	xor a
+	ld [wNumBattles], a
+	ld hl, wBattles
+	ld bc, MAX_BATTLES * 2 + 1
+	ld a, -1
+	call ByteFill
+
+	; 5. TMs and HMs: the pocket is the wTMsHMs bit list, so every
+	;    owned TM/HM disappears with the bits
+	xor a
+	ld hl, wTMsHMs
+	ld bc, NUM_TMS + NUM_HMS
+	jmp ByteFill
 
 BattlePlazaGrandGauntletReceptionistScript:
 	opentext
@@ -110,6 +165,7 @@ BattlePlazaGrandGauntletReceptionistScript:
 		para "Enjoy your run!"
 		done
 	waitclosetext
+	callasm GrandGauntletEntryPenalty
 	playsound SFX_WARP_TO
 	special FadeOutPalettes
 	waitsfx
