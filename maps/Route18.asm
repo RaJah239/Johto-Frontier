@@ -40,6 +40,16 @@ Route18_MapScripts:
 	callback MAPCALLBACK_OBJECTS, .Weather
 
 .Weather:
+	checktime EVE | NITE
+	iffalse .DayWeather
+	random 3
+	ifequal 0, .Sandstorm
+	ifequal 1, .Rain
+	setval WEATHER_NONE
+	writemem wFieldWeather
+	endcallback
+
+.DayWeather
 	random 4
 	ifequal 0, .Sun
 	ifequal 1, .Rain
