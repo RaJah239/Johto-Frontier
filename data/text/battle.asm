@@ -32,9 +32,7 @@ TargetsSpeedFellText:
 TrickText:
 	text "<USER>"
 	line "swapped items with"
-	cont "its target and"
-	cont "Encore effects"
-	cont "cleared!"
+	cont "its target!"
 	prompt
 
 TrickUserObtainedText:
@@ -1213,17 +1211,13 @@ AlreadyParalyzedText:
 StoleText:
 	text_ram wStringBuffer1
 	text " was"
-	line "stolen and"
-	roll "Encore effects"
-	roll "cleared!"
+	line "stolen!"
 	prompt
 
 KnockOffText:
 	text_ram wStringBuffer1
 	text " was"
-	line "knocked off and"
-	roll "Encore effects"
-	roll "cleared!"
+	line "knocked off!"
 	prompt
 
 CantEscapeNowText:
