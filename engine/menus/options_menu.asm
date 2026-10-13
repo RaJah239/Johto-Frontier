@@ -1664,4 +1664,4 @@ OptionsMenu_DrawDescription:
 .DescFastBoot:        db "Intro, Main Menu,<LF>or In Game.@"
 .DescHardMode:        db "20<%> trainer boost<LF>Sp/Atk & Sp/Def.@"
 .DescFrame:           db "Select your border<LF>of textboxes.@"
-.DescDone:            db "Save and Exit<LF>@"
+.DescDone:            db "Save and Exit.<LF>@"
