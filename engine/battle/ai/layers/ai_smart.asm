@@ -243,6 +243,17 @@ AI_Smart_FuryDrive:
 	call IsAttackMaxed
 	jmp c, StandardDiscourage
 
+; if we can KO but are slower, and player has no priority move, encourage speed boost
+	call CanAIKO
+	jr nc, .no_ko_fd
+	call DoesAIOutSpeedPlayer
+	jr c, .no_ko_fd
+	ld b, EFFECT_PRIORITY_HIT
+	call PlayerHasMoveEffect
+	jr c, .no_ko_fd
+	jmp StrongEncourage
+
+.no_ko_fd
 ; should boost
 	call ShouldAIBoost
 	jmp nc, StandardDiscourage
@@ -606,6 +617,17 @@ AI_Smart_Agility:
 	call CanPlayerKO
 	jmp c, StandardDiscourage
 
+; if we can KO but are slower, and player has no priority move, encourage speed boost
+	call CanAIKO
+	jr nc, .no_ko
+	call DoesAIOutSpeedPlayer
+	jr c, .no_ko
+	ld b, EFFECT_PRIORITY_HIT
+	call PlayerHasMoveEffect
+	jr c, .no_ko
+	jmp StrongEncourage
+
+.no_ko
 ; discourage if speed already at +2
 	ld a, [wEnemySpdLevel]
 	cp BASE_STAT_LEVEL + 2
@@ -841,6 +863,17 @@ AI_Smart_QuiverDance:
 	jmp c, StandardDiscourage
 
 .should_boost
+; if we can KO but are slower, and player has no priority move, encourage speed boost
+	call CanAIKO
+	jr nc, .no_ko_qd
+	call DoesAIOutSpeedPlayer
+	jr c, .no_ko_qd
+	ld b, EFFECT_PRIORITY_HIT
+	call PlayerHasMoveEffect
+	jr c, .no_ko_qd
+	jmp StrongEncourage
+
+.no_ko_qd
 	call ShouldAIBoost
 	jmp nc, StandardDiscourage
 
@@ -931,6 +964,17 @@ AI_Smart_DragonDance:
 	call IsAttackMaxed
 	jmp c, StandardDiscourage
 
+; if we can KO but are slower, and player has no priority move, encourage speed boost
+	call CanAIKO
+	jr nc, .no_ko_dd
+	call DoesAIOutSpeedPlayer
+	jr c, .no_ko_dd
+	ld b, EFFECT_PRIORITY_HIT
+	call PlayerHasMoveEffect
+	jr c, .no_ko_dd
+	jmp StrongEncourage
+
+.no_ko_dd
 ; should boost
 	call ShouldAIBoost
 	jmp nc, StandardDiscourage
