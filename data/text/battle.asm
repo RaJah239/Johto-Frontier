@@ -1214,16 +1214,16 @@ StoleText:
 	text_ram wStringBuffer1
 	text " was"
 	line "stolen and"
-	cont "Encore effects"
-	cont "cleared!"
+	roll "Encore effects"
+	roll "cleared!"
 	prompt
 
 KnockOffText:
 	text_ram wStringBuffer1
 	text " was"
 	line "knocked off and"
-	cont "Encore effects"
-	cont "cleared!"
+	roll "Encore effects"
+	roll "cleared!"
 	prompt
 
 CantEscapeNowText:
