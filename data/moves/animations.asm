@@ -3131,7 +3131,7 @@ BattleAnim_DreamEater:
 	anim_call BattleAnimSub_Drain
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_WATER
 	anim_call BattleAnimSub_Glimmer
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
 	anim_ret
 
 BattleAnim_LeechLife:
