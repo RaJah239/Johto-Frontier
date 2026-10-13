@@ -2185,6 +2185,18 @@ AI_Smart_Paralyze:
 	pop hl
 	jr c, .discourage
 
+; never use Thunder Wave against Ground types
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	cp THUNDER_WAVE
+	jr nz, .not_thunder_wave
+	ld a, [wBattleMonType1]
+	cp GROUND
+	jr z, .discourage
+	ld a, [wBattleMonType2]
+	cp GROUND
+	jr z, .discourage
+
+.not_thunder_wave
 ; encourage if enemy is slower than player.
 ; 50% chance to discourage otherwise
 	call DoesAIOutSpeedPlayer
