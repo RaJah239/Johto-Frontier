@@ -5257,8 +5257,8 @@ BattleMonEntrance:
 	lb bc, 5, 11
 	call ClearBox
 
-	ld a, [wCurBattleMon]
-	ld [wCurPartyMon], a
+	ld a, [wCurPartyMon]
+	ld [wCurBattleMon], a
 	call AddBattleParticipant
 	call InitBattleMon_Etc
 	call SetPlayerTurn
@@ -5276,10 +5276,13 @@ PassedBattleMonEntrance:
 	ld [wCurBattleMon], a
 	call AddBattleParticipant
 	call InitBattleMon
+	call SendOutMonText
+	call NewBattleMonStatus
+	call BreakAttraction
+	call SendOutPlayerMon
 	xor a ; FALSE
 	ld [wApplyStatLevelMultipliersToEnemy], a
 	call ApplyStatLevelMultiplierOnAllStats
-	call SendOutPlayerMon
 	call EmptyBattleTextbox_LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	jmp SpikesDamage
