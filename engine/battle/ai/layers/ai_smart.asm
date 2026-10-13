@@ -3451,17 +3451,6 @@ AI_Smart_BatonPass:
 	pop hl
 	jr c, .discourage
 
-; even if we benefit from passing, don't use if we will be koed
-	call DoesEnemyHaveIntactFocusSashOrSturdy
-	jr c, .skipKOCheck
-	call CanPlayerKO
-	jr c, .discourage
-
-; discourage if we will be koed
-	call ShouldAIBoost
-	jr nc, .discourage
-
-.skipKOCheck
 ; encourage if we have good stat boosts to pass
 	ld a, [wEnemyAtkLevel]
 	cp BASE_STAT_LEVEL + 2
