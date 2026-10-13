@@ -171,20 +171,18 @@ BattleTowerPool_Champ:
 	bt_mon VOLCARONA, LEFTOVERS, FLAMETHROWER, BUG_BUZZ, QUIVER_DANCE, RECOVER
 	bt_mon GARCHOMP, ASSAULT_VEST, OUTRAGE, IRON_HEAD, EARTHQUAKE, STONE_EDGE
 	bt_mon TYRANITAR, BRIGHTPOWDER, EARTHQUAKE, CRUNCH, STONE_EDGE, DRAGON_DANCE
+BattleTowerPool_ChampEnd:
 
-; The final battle of a Champ challenge always includes this record,
-; placed at a random slot (see MaybeForceChampFinalMewtwo in
+; Mewtwo is excluded from the regular pool; it only appears on the
+; guaranteed final battle slot (see MaybeForceChampFinalMewtwo in
 ; engine/events/battle_tower/load_trainer.asm).
-; Additional Mewtwo variants (different item/moves) go under this label,
-; before BattleTowerPool_ChampEnd; the guarantee picks one of these
-; records at random, so each variant has an equal chance.
 BattleTowerMon_Mewtwo:
 	bt_mon MEWTWO, LEFTOVERS, PSYBLAST, FLAMETHROWER, DRAIN_PUNCH, RECOVER
 	bt_mon MEWTWO, LEFTOVERS, PSYBLAST, AURA_SPHERE, CALM_MIND, RECOVER
 	bt_mon MEWTWO, LEFTOVERS, DRAIN_PUNCH, ZEN_HEADBUTT, BULK_UP, RECOVER
-BattleTowerPool_ChampEnd:
+BattleTowerMon_MewtwoEnd:
 	assert_bt_pool BattleTowerPool_Champ, BattleTowerPool_ChampEnd
-	assert (BattleTowerPool_ChampEnd - BattleTowerMon_Mewtwo) / BATTLETOWER_MON_STRUCT_LENGTH >= 1, "Champ pool must keep at least one Mewtwo record"
+	assert (BattleTowerMon_MewtwoEnd - BattleTowerMon_Mewtwo) / BATTLETOWER_MON_STRUCT_LENGTH >= 1, "Mewtwo variants must exist for final battle"
 
 BattleTowerChallengePools:
 ; Elite
@@ -192,7 +190,7 @@ BattleTowerChallengePools:
 	dba BattleTowerPool_Elite
 	db (BattleTowerPool_EliteEnd - BattleTowerPool_Elite) / BATTLETOWER_MON_STRUCT_LENGTH
 
-; Champ (both pools mixed)
+; Champ (both pools mixed, but Mewtwo excluded from regular pool)
 	db 2
 	dba BattleTowerPool_Elite
 	db (BattleTowerPool_EliteEnd - BattleTowerPool_Elite) / BATTLETOWER_MON_STRUCT_LENGTH

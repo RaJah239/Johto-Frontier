@@ -207,7 +207,7 @@ MaybeForceChampFinalMewtwo:
 	; Pick one of the Mewtwo variant records under the label at random,
 	; then expand it over a random team slot (0 to 5), so every variant
 	; has an equal chance at the guaranteed spot.
-	ld a, (BattleTowerPool_ChampEnd - BattleTowerMon_Mewtwo) / BATTLETOWER_MON_STRUCT_LENGTH
+	ld a, (BattleTowerMon_MewtwoEnd - BattleTowerMon_Mewtwo) / BATTLETOWER_MON_STRUCT_LENGTH
 	call RandomRange
 	ld hl, BattleTowerMon_Mewtwo
 	ld bc, BATTLETOWER_MON_STRUCT_LENGTH
