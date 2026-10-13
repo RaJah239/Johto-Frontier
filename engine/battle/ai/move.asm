@@ -117,10 +117,9 @@ AIChooseMove:
 
 ; Decrement the scores of all moves one by one until one reaches 0.
 .DecrementScores:
+	ld c, NUM_MOVES           ; ← RESET c each outer iteration
 	ld hl, wEnemyAIMoveScores
 	ld de, wEnemyMonMoves
-	ld c, NUM_MOVES
-
 .DecrementNextScore:
 	; If the enemy has no moves, this will infinite.
 	ld a, [de]
