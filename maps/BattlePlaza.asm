@@ -32,9 +32,11 @@ BattlePlaza_MapEvents:
 
 	def_object_events
 	object_event 11, 14, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MET_RAJA
+	object_event 10, 16, SPRITE_LASS, SPRITEMOVEDATA_WANDER, 1, 2, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, BattlePlazaLassText, -1
 
 	object_const_def
 	const BATTLEPLAZA_RAJA
+	const BATTLEPLAZA_LASS
 
 BattlePlaza_MapScripts:
 	def_scene_scripts
@@ -172,6 +174,11 @@ BattlePlazaRaJaMovement2:
 	step UP
 	step UP
 	step_end
+
+BattlePlazaLassText:
+	text "The weather sure"
+	line "is erratic here."
+	done
 
 BattlePlazaTrainStationSignText:
 	text "Battle Plaza's"
