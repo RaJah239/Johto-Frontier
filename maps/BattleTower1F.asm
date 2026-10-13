@@ -630,10 +630,12 @@ Text_BattleTowerYoungster:
 	done
 
 Text_BattleTowerCooltrainerF:
-	text "There are lots of"
-	line "Battle Rooms, but"
-	cont "I'm going to win"
-	cont "them all!"
+	text "There is a super"
+	line "strong #mon"
+	cont "that always appear"
+	cont "in the final round"
+	cont "of the Champ"
+	cont "Challenge."
 	done
 
 Text_BattleTowerGranny:
