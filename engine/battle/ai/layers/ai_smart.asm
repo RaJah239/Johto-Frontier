@@ -236,26 +236,9 @@ AI_Smart_RecoilHit:
 	ret
 
 AI_Smart_FuryDrive:
-; discourage if player can ko at current HP
-	call CanPlayerKO
-	jmp c, StandardDiscourage
-
-	call IsAttackMaxed
-	jmp c, StandardDiscourage
-
-; if we can KO but are slower, and player has no priority move, encourage speed boost
-	call CanAIKO
-	jr nc, .no_ko_fd
-	call DoesAIOutSpeedPlayer
-	jr c, .no_ko_fd
-	ld b, EFFECT_PRIORITY_HIT
-	call PlayerHasMoveEffect
-	jr c, .no_ko_fd
-	jmp StrongEncourage
-
-.no_ko_fd
-; should boost
-	call ShouldAIBoost
+; just use once before attacking
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL + 2
 	jmp nc, StandardDiscourage
 
 ; discourage if enemy is paralyzed
@@ -263,52 +246,65 @@ AI_Smart_FuryDrive:
 	and 1 << PAR
 	jmp nz, StandardDiscourage
 
-; discourage if player speed is +2 or higher
-	ld a, [wPlayerSpdLevel]
-	cp BASE_STAT_LEVEL + 2
-	jmp nc, StandardDiscourage
-
 ; never use while in trick room
 	ld a, [wTrickRoomCount]
 	and a
 	jmp nz, StandardDiscourage
 
-; discourage if players level is >10 higher than AI
-	ld a, [wBattleMonLevel]
-	ld b, a
-	ld a, [wEnemyMonLevel]
-	add 10
-	cp b
+; if players last move was sucker punch - 50% chance to boost
+	ld a, [wCurPlayerMove]
+	call AIGetPlayerMove
+	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
+	cp EFFECT_SUCKER_PUNCH
+	jr nz, .notUsingSuckerPunch
+	call AI_50_50
+	jr c, .skipKOCheck
+
+.notUsingSuckerPunch
+; don't use if we will be koed
+; skip if player is asleep
+	ld a, [wBattleMonStatus]
+	and SLP_MASK
+	jr nz, .skipKOCheck
+; discourage if player can 2HKO and either has priority move or is >= +2 speed
+	call CanPlayer2HKO
+	jr nc, .checkSash
+	ld b, EFFECT_PRIORITY_HIT
+	call PlayerHasMoveEffect
+	jmp c, StandardDiscourage
+	ld a, [wPlayerSpdLevel]
+	cp BASE_STAT_LEVEL + 2
+	jmp nc, StandardDiscourage
+
+.checkSash
+; is the weather sandstorm, if so don't skip ko check due to focus sash or sturdy (no mon with shell smash is immune to sandstorm)
+	ld a, [wBattleWeather]
+	cp WEATHER_SANDSTORM
+	jr z, .checkKO
+
+; skip if we have sash/sturdy
+	call DoesEnemyHaveIntactFocusSashOrSturdy
+	jr c, .skipKOCheck
+
+.checkKO
+; consider OHKO, assuming we will outspeed after use
+	call CanPlayerKO
 	jmp c, StandardDiscourage
 
-; some pokemon have double boost sets with dragondance and bulkup/swordsdance
-; in such cases we want to use dragondance first to get to +1 speed,
-; then only use the other boost
-	ld b, EFFECT_GROWTH
+.skipKOCheck
+; is the player behind a sub, then don't use, unless we have baton pass
+	ld b, EFFECT_BATON_PASS
 	call AIHasMoveEffect
-	jr c, .use_first_and_not_again
-	ld b, EFFECT_BULK_UP
-	call AIHasMoveEffect
-	jr c, .use_first_and_not_again
-	ld b, EFFECT_ATTACK_UP_2
-	call AIHasMoveEffect
-	jr c, .use_first_and_not_again
-	jr .normalEncourage
+	jr c, .skipSubCheck
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a	;check for substitute bit
+	jmp nz, StandardDiscourage
 
-.use_first_and_not_again
-	ld a, [wEnemySpdLevel]
-	cp BASE_STAT_LEVEL + 1
-	jmp c, StrongEncourage
-	jmp StandardDiscourage
-
-.normalEncourage
-; discourage after boost if afflicted with toxic
-	call IsAIToxified
-	jmp c, StandardDiscourage
-
-; encourage if we have no reason not to
-rept 30
-	dec [hl]
+.skipSubCheck
+.encourage
+; this needs to be enough to overcome encouragement from having a move that can KO
+rept 12
+    dec [hl]
 endr
 	ret
 
