@@ -13,7 +13,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 
 - ShadowOne333 - Suicune's back sprite, Annihilape
 
-- French Orange - Donphan back sprite, Entei back sprite, Gholdengo, Gyarados' front sprite, Haunter back sprite, Moltres back sprite
+- French Orange - Entei back sprite, Gholdengo, Gyarados' front sprite, Haunter back sprite, Moltres back sprite
 
 - PiaCRT - Gholdengo
 
