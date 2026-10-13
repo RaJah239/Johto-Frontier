@@ -1695,105 +1695,114 @@ AI_Smart_SlackOff:
 	jr c, AI_Smart_Heal
 	; fallthrough
 
+; ============================================================================
+; AI_Smart_Heal
+; Decides whether the AI should use a healing move.
+; Output: modifies score at hl (negative = encourage, positive = discourage)
+; ============================================================================
 AI_Smart_Heal:
-; don't use if choice locked
+	; Don't use if choice-locked (Choice Band/Specs/Scarf)
 	call DoesEnemyHaveChoiceItem
 	jmp c, .discourage
 
-; if we have boosted evasion just heal below half
+	; If evasion boosted (+2 or more), be more willing to heal
 	ld a, [wEnemyEvaLevel]
 	cp BASE_STAT_LEVEL + 2
 	jr nc, .heal_below_half_max_HP
 
-; if the player is using smeargle just attack, kill it!
+	; If player has Smeargle, just attack it
 	ld a, [wBattleMonSpecies]
 	cp SMEARGLE
 	jmp z, .discourage
 
-; check if the move is rest, it must be handled differently
+	; Rest needs special handling
 	ld a, [wEnemyMoveStruct + MOVE_ANIM]
 	cp REST
 	jr nz, .not_rest_heal
 
-; if it is rest, check if the enemy is afflicted with toxic
-; if so, cancel any switching and heal below 1/2 hp
+.rest_check_toxic
+	; If toxiced, force heal (and cancel switching)
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_TOXIC, a
 	jr z, .rest_heal
-	ld a, $0
+	xor a
 	ld [wEnemyIsSwitching], a
-	jr .not_rest_heal
+	jr .rest_heal           ; Skip IsAIToxified check for Rest
 
 .rest_heal
-; for rest don't heal if player can 3hko from max hp,
-; unless ai also knows sleep talk
-; then don't use if player can 2hko from max hp
+	; Don't Rest if player can 3HKO from max HP
+	; With Sleep Talk: only discourage if player can 1HKO (safer with Sleep Talk)
 	ld b, EFFECT_SLEEP_TALK
 	call AIHasMoveEffect
-	jr c, .not_rest_heal
+	jr c, .check_rest_1hko
 	call CanPlayer3HKOMaxHP
+	jr c, .discourage
+	jr .not_rest_heal
+
+.check_rest_1hko
+	call CanPlayerKO
 	jr c, .discourage
 
 .not_rest_heal
-; don't heal if at full HP
+	; Don't heal at full HP
 	call AICheckEnemyMaxHP
 	jr c, .discourage
 
-; don't heal if afflicted with toxic
+	; Don't heal if toxiced (other heals don't cure status)
 	call IsAIToxified
 	jr c, .discourage
 
-; don't heal if player can 2 shot from max hp, no point
+	; Don't heal if player can 2HKO from max HP (no point)
 	call CanPlayer2HKOMaxHP
 	jr c, .discourage
 
-; if we are faster and player is flying or underground,
-; encourage heal if we can be 1hko
-	call DoesAIOutSpeedPlayer
-	jr nc, .check_quarter_max_hp
-	call CanPlayerKO
-	jr nc, .check_quarter_max_hp
-	ld a, [wPlayerSubStatus3]
-	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
-	jr nz, .big_encourage
-
-.check_quarter_max_hp
-; always heal when below 1/4 hp
-	call AICheckEnemyQuarterHP
-	jr nc, .encourage
-
-; if faster than the player, heal if the player can 1hko
-	call DoesAIOutSpeedPlayer
-	jr nc, .player_moves_first
-	call CanPlayerKO
-	jr c, .encourage
-	jr .check_mewtwo
-
-; if slower than the player, heal if player can 2hko
-.player_moves_first
-    call CanPlayer2HKO
-    jr c, .encourage
-
-.check_mewtwo
-; lugia, ho-oh & mewtwo always heal when below half
-; also heal below half if we have increased evasion
+	; --- Legendary-specific logic first (different thresholds) ---
 	ld a, [wEnemyMonSpecies]
 	cp LUGIA
-	jr z, .heal_below_half_max_HP
+	jr z, .legendary_heal_check
 	cp HO_OH
-	jr z, .heal_below_half_max_HP
+	jr z, .legendary_heal_check
 	cp MEWTWO
-	jr z, .heal_below_half_max_HP
+	jr z, .legendary_heal_check
+
+	; Non-legendary: only consider healing if below 1/2 HP
+	call AICheckEnemyHalfHP
+	jr c, .discourage
+
+	; --- Speed-based evaluation ---
+	call DoesAIOutSpeedPlayer
+	jr nc, .player_moves_first
+
+.ai_moves_first
+	; AI moves first: if player can KO, encourage heal
+	call CanPlayerKO
+	jr c, .encourage
+	jr .check_quarter_max_hp
+
+.player_moves_first
+	; Player moves first: if player can 2HKO, encourage heal
+	call CanPlayer2HKO
+	jr c, .encourage
+
+.check_quarter_max_hp
+	; Always heal when below 1/4 HP
+	call AICheckEnemyQuarterHP
+	jr c, .encourage
+
+	; Non-legendary above 1/4 HP but below 1/2: discourage
 	jr .discourage
 
 .heal_below_half_max_HP
 	call AICheckEnemyHalfHP
 	jr c, .discourage
-	; fallthrough
+	jr .encourage
 
+.legendary_heal_check
+	; Lugia/Ho-Oh/Mewtwo: heal below half HP
+	call AICheckEnemyHalfHP
+	jr c, .discourage
 .encourage
-; lugia, ho-oh & mewtwo should play defensively and 
-; prioritize healing above scoring KOs
+	; Legendary: big encourage
 	ld a, [wEnemyMonSpecies]
 	cp LUGIA
 	jr z, .big_encourage
@@ -1801,6 +1810,7 @@ AI_Smart_Heal:
 	jr z, .big_encourage
 	cp MEWTWO
 	jr z, .big_encourage
+	jr .normal_encourage
 
 .big_encourage
 rept 8
