@@ -24,7 +24,7 @@ BlackthornCity_MapEvents:
 	object_event 22, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SantosScript, EVENT_BLACKTHORN_CITY_SANTOS_OF_SATURDAY
 	object_event 18, 12, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BlackthornCooltrainerMScript, EVENT_BLACKTHORN_COOLTRAINER_M_BLOCKS_CLAIRS_GYM
 	object_event 20,  2, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BlackthornGrampsScript, EVENT_BLACKTHORN_CITY_GRAMPS_BLOCKS_DRAGONS_DEN
-	object_event 24, 31, SPRITE_BLACK_BELT, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_COMMAND, jumptextfaceplayer, BlackthornBlackBeltText, -1
+	object_event 24, 31, SPRITE_BLACK_BELT, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, BlackthornBlackBeltScript, -1
 	object_event  9, 25, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, BlackthornCooltrainerF1Text, -1
 	object_event 13, 15, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, BlackthornYoungsterText, -1
 	object_event 35, 19, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, BlackthornCooltrainerF2Text, -1
@@ -185,13 +185,33 @@ BlackthornGrampsScript:
 	disappear LAST_TALKED
 	end
 
-BlackthornBlackBeltText:
-	text "Arooo! Voices in"
-	line "my head!"
+BlackthornBlackBeltScript:
+	faceplayeropentext
+	checkitem MUSIC_PLAYER
+	iftrue .HaveMusicPlayer
+	writethistext
+		text "You look like you"
+		line "can do with a"
+		cont "control in your"
+		cont "music!"
 
-	para "Huh? I'm listening"
-	line "to my radio!"
-	done
+		para "Have this!"
+		done
+	verbosegiveitem MUSIC_PLAYER
+.HaveMusicPlayer
+	jumpthisopenedtext
+		text "You can play music"
+		line "tracks and even"
+		cont "set your battle"
+		cont "track!"
+
+		para "Music stays the"
+		line "same unless chang-"
+		cont "routes or cities."
+
+		para "This includes"
+		line "Battle music."
+		done
 
 BlackthornCooltrainerF1Text:
 	text "The Tutors' House"
