@@ -170,7 +170,7 @@ Moves:
 	move HIDDEN_FORCE, EFFECT_HIDDEN_POWER,       70, CURSE_TYPE,    PHYSICAL, 100, 24,   0
 	move REST,         EFFECT_HEAL,                0, PSYCHIC_TYPE,  STATUS,   100, 24,   0
 	move ROCK_SLIDE,   EFFECT_FLINCH_HIT,         80, ROCK,          PHYSICAL,  95, 24,  30
-	move RUNIC_POWER,  EFFECT_ALL_UP_HIT,        100, CURSE_TYPE,    SPECIAL,  100, 24,  50
+	move RUNIC_POWER,  EFFECT_ALL_UP_HIT,        100, CURSE_TYPE,    SPECIAL,  100, 10,  20
 	move FACADE,       EFFECT_FACADE,             70, NORMAL,        PHYSICAL, 100, 24,   0
 	move HEX,          EFFECT_HEX,                65, GHOST,         SPECIAL,  100, 16,   0
 	move PHOTON_BLAST, EFFECT_TRI_ATTACK,         80, NORMAL,        SPECIAL,  100, 24,  30
