@@ -246,11 +246,63 @@ HandleBetweenTurnEffects:
 	ret c
 
 .NoMoreFaintingConditions:
+	call HandleLeftovers
 	farcall FarTurnEndEffects
 	farcall TurnEndAbilities
 	call HandleHealingItems
 	call UpdateBattleMonInParty
 	jmp LoadTilemapToTempTilemap
+
+HandleLeftovers:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .DoEnemyFirst
+	call SetPlayerTurn
+	call .do_it
+	call SetEnemyTurn
+	jp .do_it
+
+.DoEnemyFirst:
+	call SetEnemyTurn
+	call .do_it
+	call SetPlayerTurn
+.do_it
+
+	callfar GetUserItem
+	ld a, [hl]
+	ld [wNamedObjectIndex], a
+	call GetItemName
+	ld a, b
+	cp HELD_LEFTOVERS
+	ret nz
+
+	ld hl, wBattleMonHP
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_hp
+	ld hl, wEnemyMonHP
+
+.got_hp
+; Don't restore if we're already at max HP
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	cp b
+	jr nz, .restore
+	ld a, [hl]
+	cp c
+	ret z
+
+.restore
+	call GetSixteenthMaxHP
+	call SwitchTurnCore
+	call RestoreHP
+	ld hl, BattleText_TargetRecoveredWithItem
+	call StdBattleTextbox
+	ld c, 30
+	jmp DelayFrames
 
 HasAnyoneFainted:
  	call HasPlayerFainted

@@ -1,5 +1,4 @@
 FarTurnEndEffects:
-	call HandleLeftovers
 	call HandleMysteryberry
 	call HandleStatBoostingHeldItems
 	call HandleWeatherItem
@@ -266,83 +265,6 @@ BattleItemAnimCommon:
 	ld [wNumHits], a
 	ld [wFXAnimID + 1], a
 	predef_jump PlayBattleAnim
-
-HandleLeftovers:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .DoEnemyFirst
-	call SetPlayerTurn
-	call .do_it
-	call SetEnemyTurn
-	jr .do_it
-
-.DoEnemyFirst:
-	call SetEnemyTurn
-	call .do_it
-	call SetPlayerTurn
-.do_it
-
-	callfar GetUserItem
-	ld a, [hl]
-	ld [wNamedObjectIndex], a
-	call GetItemName
-	ld a, b
-	cp HELD_BLACK_SLUDGE
-	jr nz, .check_leftovers
-	
-; check if user is poison type
-	ld hl, wBattleMonType1
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .gottype
-	ld hl, wEnemyMonType1
-.gottype
-	ld a, [hli]
-	cp POISON
-	jr z, .get_hp
-	ld a, [hl]
-	cp POISON
-	jr z, .get_hp
-
-; User is not poison, deal damage
-	farcall GetEighthMaxHP
-	farcall SubtractHPFromTarget
-	ld hl, BattleText_TargetHurtByItem
-	call StdBattleTextbox
-	farjp CheckFaint_EnemyThenPlayer
-	
-.check_leftovers
-	cp HELD_LEFTOVERS
-	ret nz
-
-.get_hp
-	ld hl, wBattleMonHP
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .got_hp
-	ld hl, wEnemyMonHP
-
-.got_hp
-; Don't restore if we're already at max HP
-	ld a, [hli]
-	ld b, a
-	ld a, [hli]
-	ld c, a
-	ld a, [hli]
-	cp b
-	jr nz, .restore
-	ld a, [hl]
-	cp c
-	ret z
-
-.restore
-	farcall GetSixteenthMaxHP
-	farcall SwitchTurnCore
-	farcall RestoreHP
-	ld hl, BattleText_TargetRecoveredWithItem
-	call StdBattleTextbox
-	ld c, 30
-	jmp DelayFrames
 
 HandleMysteryberry:
 	ldh a, [hSerialConnectionStatus]
