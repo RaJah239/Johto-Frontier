@@ -324,7 +324,8 @@ NationalParkTeacher2Text:
 
 NationalParkGameboyKidScript:
 	showthistextfaceplayer
-		text "TODOTEXT"
+		text "It's sunny here all"
+		line "day, every day!"
 		done
 	turnobject NATIONALPARK_GAMEBOY_KID, DOWN
 	end

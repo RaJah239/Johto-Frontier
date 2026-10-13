@@ -19,10 +19,12 @@ MahoganyTown_MapEvents:
 	def_object_events
 	object_event  6,  9, SPRITE_GRAMPS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, MahoganyTownGrampsText, -1
 	object_event 12,  8, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, MahoganyTownLassText, -1
+	object_event 13, 12, SPRITE_TWIN, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, MahoganyTownGirlText, -1
 
 	object_const_def
 	const MAHOGANYTOWN_GRAMPS
 	const MAHOGANYTOWN_LASS
+	const MAHOGANYTOWN_GIRL
 
 MahoganyTown_MapScripts:
 	def_scene_scripts
@@ -45,6 +47,11 @@ MahoganyTownLassText:
 	line "shop. She sells"
 	cont "stuff that nobody"
 	cont "else has."
+	done
+
+MahoganyTownGirlText:
+	text "I like to play in"
+	line "Route 16's snow."
 	done
 
 MahoganyTownSignText:

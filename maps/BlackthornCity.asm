@@ -28,6 +28,7 @@ BlackthornCity_MapEvents:
 	object_event  9, 25, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, BlackthornCooltrainerF1Text, -1
 	object_event 13, 15, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, BlackthornYoungsterText, -1
 	object_event 35, 19, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, BlackthornCooltrainerF2Text, -1
+	object_event  5, 32, SPRITE_POKEFAN_M, SPRITEMOVEDATA_WANDER, 2, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, BlackthornPokefanText, -1
 
 	object_const_def
 	const BLACKTHORNCITY_SANTOS
@@ -37,6 +38,7 @@ BlackthornCity_MapEvents:
 	const BLACKTHORNCITY_COOLTRAINER_F1
 	const BLACKTHORNCITY_YOUNGSTER1
 	const BLACKTHORNCITY_COOLTRAINER_F2
+	const BLACKTHORNCITY_POKEFAN_M
 
 BlackthornCity_MapScripts:
 	def_scene_scripts
@@ -207,6 +209,12 @@ BlackthornYoungsterText:
 
 BlackthornCooltrainerF2Text:
 	text "TODOTEXT"
+	done
+
+BlackthornPokefanText:
+	text "Route 17 and 18"
+	line "can sometimes have"
+	cont "sandstorms."
 	done
 
 BlackthornCitySignText:
