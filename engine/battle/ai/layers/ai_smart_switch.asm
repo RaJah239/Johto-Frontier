@@ -92,7 +92,6 @@ AI_Smart_Switch:
 	ret c
 	jr .check_setup_and_switch_if_we_cant_KO
 
-;.check_setup_and_wwitch_if_player_sets_up
 ; don't switch if enemy mon is already set up
 	call IsAISetup
 	ret c
