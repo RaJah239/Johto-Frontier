@@ -311,16 +311,19 @@ endr
 	ld a, STARTMENUITEM_OPTION
 	call .AppendMenuList
 
-	; The Grand Gauntlet battle room has no warps of its own, so in
+	; The Grand Gauntlet battle rooms have no warps of their own, so in
 	; there Exit/Warp is swapped for Give Up: abandon the run and warp
-	; back to the lobby stairs. The lobby's MAPCALLBACK_NEWMAP callback
-	; hands the stored party back on arrival.
+	; back to the lobby stairs.
+	; All 50 battle rooms share the same group, consecutive map numbers.
 	ld a, [wMapGroup]
 	cp GROUP_BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1
 	jr nz, .not_gauntlet_battle_room
 	ld a, [wMapNumber]
 	cp MAP_BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1
-	jr nz, .not_gauntlet_battle_room
+	jr c, .not_gauntlet_battle_room
+	ld a, [wMapNumber]
+	cp MAP_BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_50 + 1
+	jr nc, .not_gauntlet_battle_room
 	ld a, STARTMENUITEM_GIVEUP
 	call .AppendMenuList
 	jr .next
