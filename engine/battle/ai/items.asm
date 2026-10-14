@@ -41,6 +41,10 @@ AI_SwitchOrTryItem:
 	and a
 	jr nz, DontSwitch
 
+	; don't switch while our own mon is boosted (+3 or more in any stat)
+	call CheckEnemyStatAtPlus3
+	jmp c, DontSwitch
+
 	; Clean Sweep: if the player's active mon has +4 or more in any stat,
 	; switch in a fresh CleanSweep mon, even if one is already out.
 	; FindAliveCleanSweepMon skips the active mon, so this always picks a
@@ -444,6 +448,23 @@ CheckPlayerStatAtPlus4:
 .loop
 	ld a, [hli]
 	cp BASE_STAT_LEVEL + 4
+	jr nc, .yes
+	dec b
+	jr nz, .loop
+	and a
+	ret
+
+.yes
+	scf
+	ret
+
+CheckEnemyStatAtPlus3:
+; returns carry if any stat level of the enemy's active mon is +3 or higher
+	ld hl, wEnemyStatLevels
+	ld b, 7 ; ATTACK .. EVASION
+.loop
+	ld a, [hli]
+	cp BASE_STAT_LEVEL + 3
 	jr nc, .yes
 	dec b
 	jr nz, .loop

@@ -4,7 +4,7 @@
 
 ## General
 - If the enemy can KO but is slower and player has no priority move, speed boosting moves are encouraged to possibly get the jump on the next Pokémon to be sent out
-- AI doesn't switch if already set up (+2 in any stats)
+- AI doesn't switch if already set up (+2 or higher in Attack/Special Attack/Defense/Special Defense, or +3 or higher in any stat)
 - Switches if enemy is choice locked into a move that is not very effective or a doesn't affect or has zero PP
 - Switch if enemy attack or special attack at -2 or lower, unless the other offense is boosted
 - Switches to a fresh Clean Sweep (Defog ability) Pokémon when the player hits +4 or when fainting, even if one is out
