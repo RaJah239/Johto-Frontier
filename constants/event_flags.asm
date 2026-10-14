@@ -824,6 +824,7 @@
 	const EVENT_BEAT_SAGE_MASA
 	const EVENT_BEAT_SAGE_KOJI
 
+	const EVENT_GRAND_GAUNTLET_WARNING ; do not reset this flag
 ; grand gauntlet events
 	const EVENT_FIRST_GG
 
@@ -835,7 +836,7 @@
 
 	const EVENT_LAST_GG
 
-; Unused: next 384 events
+; Unused: next 383 events
 
 	const_next 1600
 ; Sprite visibility flags

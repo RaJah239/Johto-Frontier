@@ -122,6 +122,7 @@ GrandGauntletInfoSignScript:
 		cont "Sun Stone and"
 		cont "Moon Stone."
 		done
+	setevent EVENT_GRAND_GAUNTLET_WARNING
 	waitbutton
 	sjump .ChooseOption
 
@@ -444,9 +445,20 @@ GrandGauntletEntryPenalty:
 
 BattlePlazaGrandGauntletReceptionistScript:
 	opentext
+	checkevent EVENT_GRAND_GAUNTLET_WARNING
+	iffalse .ReadTheSign
 	writethistext
 		text "The Grand Gauntlet"
 		line "Welcomes you!"
+	
+		para "Store banned items"
+		line "in your PC first,"
+		cont "if you have not"
+		cont "done so already."
+
+		para "View the sign to"
+		line "the left if a re-"
+		cont "minder is needed."
 		done
 	promptbutton
 .ChooseMode
@@ -454,25 +466,36 @@ BattlePlazaGrandGauntletReceptionistScript:
 	verticalmenu
 	closewindow
 	ifequal 1, .Enter
-	ifequal 2, .Explanation
 	ifequal 3, .Cancel
 .Cancel:
 	closetext
 	turnobject PLAYER, DOWN
 	end
 
-.Explanation:
-	writethistext
-		text "Fun ahead!"
+.ReadTheSign
+	jumpthisopenedtext
+		text "Welcome to the"
+		line "Grand Gauntlet!"
+
+		para "To the left has"
+		line "informatin about"
+		cont "this facility."
+
+		para "It is of utmost"
+		line "importance to read"
+		cont "it, especially the"
+		cont "section on banned"
+		cont "items."
+
+		para "Return once you"
+		line "have."
 		done
-	waitbutton
-	sjump .ChooseMode
 
 .Enter:
 	readvar VAR_PARTYCOUNT
 	ifgreater 1, .YouDontMeetRequirements
 	checkpokelevel FEEBAS, 50
-	iffalse_endtext
+	iffalse .YouDontMeetRequirements
 	writethistext
 		text "Please go right"
 		line "through."
@@ -483,17 +506,18 @@ BattlePlazaGrandGauntletReceptionistScript:
 
 	opentext
 	writethistext
-		text "I'll give you six"
+		text "Let me take that"
+		line "Feebas off your"
+		cont "hands."
+
+		para "I'll give you six"
 		line "random #mon."
 		done
 	callasm RerollPartyKeeperTeam
 	playsound SFX_DEX_FANFARE_20_49
 	waitsfx
 	writethistext
-		text "Done! Your party"
-		line "is safe with me."
-
-		para "Here is a new team"
+		text "Here is a new team"
 		line "of six #mon."
 
 		para "Have a look at"
@@ -512,7 +536,18 @@ BattlePlazaGrandGauntletReceptionistScript:
 	sjump .ReviewTeam
 
 .YouDontMeetRequirements:
-	endtext
+	jumpthisopenedtext
+		text "Sorry, you don't"
+		line "meet the rules to"
+		cont "enter."
+
+		para "Your party must"
+		line "only be a single"
+		cont "Lv 50 Feebas."
+
+		para "We employ a seller"
+		line "on this floor."
+		done
 
 .KeepTeam:
 	callasm EquipPartyKeeperTeamItems
@@ -535,15 +570,14 @@ BattlePlazaGrandGauntletReceptionistScript:
 
 .BattleLobbyModeTypeSelectionHeader:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 0, 13, 7
+	menu_coords 0, 0, 8, 5
 	dw .MenuData
 	db 1 ; default option
 
 .MenuData:
 	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
-	db 3 ; items
+	db 2 ; items
 	db "Enter@"
-	db "Explanation@"
 	db "Cancel@"
 
 Receptionist_MoveOutTheWay:
