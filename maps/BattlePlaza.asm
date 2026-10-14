@@ -33,10 +33,12 @@ BattlePlaza_MapEvents:
 	def_object_events
 	object_event 11, 14, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_MET_RAJA
 	object_event 10, 16, SPRITE_LASS, SPRITEMOVEDATA_WANDER, 1, 2, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, BattlePlazaLassText, -1
+	object_event  7,  6, SPRITE_FISHING_GURU, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_COMMAND, jumptextfaceplayer, BattlePlazaFisherText, -1
 
 	object_const_def
 	const BATTLEPLAZA_RAJA
 	const BATTLEPLAZA_LASS
+	const BATTLEPLAZA_FISHER
 
 BattlePlaza_MapScripts:
 	def_scene_scripts
@@ -178,6 +180,14 @@ BattlePlazaRaJaMovement2:
 BattlePlazaLassText:
 	text "The weather sure"
 	line "is erratic here."
+	done
+
+BattlePlazaFisherText:
+	text "What do you think"
+	line "they do with the"
+	cont "Feebas you don't"
+	cont "get back from the"
+	cont "Grand Gauntlet?"
 	done
 
 BattlePlazaTrainStationSignText:
