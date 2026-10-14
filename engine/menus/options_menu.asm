@@ -948,6 +948,15 @@ Options_Scaled_Exp:
 ; come from the menu; .Strings has a fourth entry so the index stays
 ; in bounds, and it shows Zero, which is what the battle code does
 ; with that value too.
+
+; Locked to Scaled during a Grand Gauntlet run: still draw it, but
+; ignore left/right so it can only be changed outside.
+	ld a, [wGrandGauntletRun]
+	and a
+	jr z, .NotLocked
+	ld c, 1 ; Scaled
+	jr .ShowCurrent
+.NotLocked:
 	call .GetCurrent
 	ldh a, [hJoyPressed]
 	bit D_RIGHT_F, a

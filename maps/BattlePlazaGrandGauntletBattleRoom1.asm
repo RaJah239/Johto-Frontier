@@ -35,6 +35,13 @@ GrandGauntletBattleRoom1Entered:
 SetGrandGauntletRun:
 	ld a, 1
 	ld [wGrandGauntletRun], a
+	; Experience Gain is locked to Scaled for the run.
+	ld a, [wOptions2]
+	set SCALED_EXP, a
+	ld [wOptions2], a
+	ld a, [wTextboxFlags]
+	res ZERO_EXP_F, a
+	ld [wTextboxFlags], a
 	ret
 
 GG1Trainer1:
