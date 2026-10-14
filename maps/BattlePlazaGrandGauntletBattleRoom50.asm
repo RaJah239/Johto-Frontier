@@ -41,10 +41,14 @@ GGR50Item3:
 
 GGR50Crystal:
 ; prizes	
-;	cont "594× Rare Candy,"
-;	cont "6× Hyper EV Up and"
-;	cont "¥999,999."
-
+	; 3 stacks of 99× Rare Candy
+	clearevent EVENT_GG_PRIZE_RARE_CANDY_1
+	clearevent EVENT_GG_PRIZE_RARE_CANDY_2
+	clearevent EVENT_GG_PRIZE_RARE_CANDY_3
+	; 6× Hyper EV Up
+	clearevent EVENT_GG_PRIZE_HYPER_EV_UP
+	; maximise money
+	givemoney YOUR_MONEY, MAX_MONEY
 	playsound SFX_WARP_TO
 	special FadeOutPalettes
 	waitsfx
