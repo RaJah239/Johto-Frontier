@@ -43,6 +43,9 @@ GrandGauntletGiveUpPenalty:
 	; Giving up ends the run.
 	xor a
 	ld [wGrandGauntletRun], a
+	; Put back the Experience Gain mode from before the run.
+	ld a, [wGrandGauntletPrevExpMode]
+	call ApplyExpMode
 ; Abandoning a run costs the player the team they were loaned and
 ; everything they picked up along the way: the party is replaced by a
 ; single level-50 Ditto and the bag is stripped back to key items and

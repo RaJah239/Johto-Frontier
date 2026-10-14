@@ -33,14 +33,55 @@ GrandGauntletBattleRoom1Entered:
 	endcallback
 
 SetGrandGauntletRun:
+	ld a, [wGrandGauntletRun]
+	and a
+	jr nz, .already_running
+	; First entry of the run: remember the current Experience Gain mode
+	; so it can be put back when the run ends.
+	call GetExpMode
+	ld [wGrandGauntletPrevExpMode], a
+.already_running
 	ld a, 1
 	ld [wGrandGauntletRun], a
 	; Experience Gain is locked to Scaled for the run.
+	ld a, 1 ; Scaled
+	call ApplyExpMode
+	ret
+
+; Returns the current Experience Gain mode in a:
+; 0 = Normal, 1 = Scaled, 2 = Zero
+GetExpMode:
+	ld c, 0
 	ld a, [wOptions2]
+	bit SCALED_EXP, a
+	jr z, .not_scaled
+	inc c
+.not_scaled
+	ld a, [wTextboxFlags]
+	bit ZERO_EXP_F, a
+	jr z, .not_zero
+	inc c
+	inc c
+.not_zero
+	ld a, c
+	ret
+
+; Applies the Experience Gain mode in a (0 = Normal, 1 = Scaled, 2 = Zero)
+ApplyExpMode:
+	ld b, a
+	ld a, [wOptions2]
+	res SCALED_EXP, a
+	bit 0, b
+	jr z, .not_scaled
 	set SCALED_EXP, a
+.not_scaled
 	ld [wOptions2], a
 	ld a, [wTextboxFlags]
 	res ZERO_EXP_F, a
+	bit 1, b
+	jr z, .not_zero
+	set ZERO_EXP_F, a
+.not_zero
 	ld [wTextboxFlags], a
 	ret
 
