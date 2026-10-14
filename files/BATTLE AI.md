@@ -5,6 +5,9 @@
 ## General
 - If the enemy can KO but is slower and player has no priority move, speed boosting moves are encouraged to possibly get the jump on the next Pokémon to be sent out
 - AI doesn't switch if already set up (+2 in any stats)
+- Switches if enemy is choice locked into a move that is not very effective or a doesn't affect or has zero PP
+- Switch if enemy attack or special attack at -2 or lower, unless the other offense is boosted
+- Switches if enemy attack at -2 or lower and has unboosted Special Attack
 - 80+% to switch if under a curse, nightmare, in love, confused, leech seed, badly poisoned after 4 turns
 - 80+% chance to switch if Accuracy is below -1
 - 80+% chance to switch if any non-Speed stat (because of Curse) is below -2
