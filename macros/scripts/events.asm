@@ -1434,6 +1434,59 @@ MACRO gg_trainer_random
 	sjump .sjump_main
 ENDM
 
+; Macro for Grand Gauntlet silent trainers (section 2: rooms 26-50)
+; Uses NoText2 to avoid label conflicts with section 1
+; \1 = event flag (e.g., EVENT_GG_ROOM_TRAINER_1)
+; \2 = trainer party (e.g., SCARLET1, SCARLET2, SCARLET3)
+MACRO gg_trainer2
+	checkevent \1
+	iftrue_end
+	faceplayer
+	special BackupPartyHeldItems
+	winlosstext NoText2, NoText2
+	loadtrainer SCARLET, \2
+	loadvar VAR_BATTLETYPE, BATTLETYPE_CANLOSE
+	startbattle
+	reloadmapafterbattle
+	callasm FadeInPalettes_EnableDynNoApply
+	setevent \1
+	special RestorePartyHeldItems
+	special HealParty
+	end
+ENDM
+
+; Example: gg_trainer_random2 EVENT_GG_ROOM_TRAINER_1, SCARLET, SCARLET1, MAXIMA, MAXIMA1
+; Macro for Grand Gauntlet silent trainers with 50/50 random selection (section 2: rooms 26-50)
+; Uses NoText2 to avoid label conflicts with section 1
+; \1 = event flag (e.g., EVENT_GG_ROOM_TRAINER_1)
+; \2 = primary trainer class (e.g., SCARLET)
+; \3 = primary trainer party (e.g., SCARLET1)
+; \4 = alt trainer class (e.g., MAXIMA)
+; \5 = alt trainer party (e.g., MAXIMA1)
+MACRO gg_trainer_random2
+	checkevent \1
+	iftrue_end
+	faceplayer
+	special BackupPartyHeldItems
+	winlosstext NoText2, NoText2
+	random 2
+	ifequal 0, .alt_trainer
+	loadtrainer \2, \3
+.sjump_main
+	loadvar VAR_BATTLETYPE, BATTLETYPE_CANLOSE
+	startbattle
+	reloadmapafterbattle
+	callasm FadeInPalettes_EnableDynNoApply
+	setevent \1
+	special RestorePartyHeldItems
+	special HealParty
+	end
+
+.alt_trainer:
+	loadtrainer \4, \5
+	sjump .sjump_main
+ENDM
+
 ; Shared empty dialogue for silent trainers.
 MACRO no_text
 	text "<……>"
@@ -1461,6 +1514,12 @@ MACRO gg_room_crystal
 	yesorno
 	iffalse_endtext
 	closetext
+	clearevent EVENT_GG_ROOM_ITEM_1
+	clearevent EVENT_GG_ROOM_ITEM_2
+	clearevent EVENT_GG_ROOM_ITEM_3
+	clearevent EVENT_GG_ROOM_TRAINER_1
+	clearevent EVENT_GG_ROOM_TRAINER_2
+	clearevent EVENT_GG_ROOM_TRAINER_3
 	playsound SFX_WARP_TO
 	special FadeOutPalettes
 	waitsfx

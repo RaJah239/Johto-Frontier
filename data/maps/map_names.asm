@@ -637,6 +637,55 @@ Battle_Plaza_Names: ; newgroup BATTLE_PLAZA
 	dw Battle_Plaza_Name12 ; map_const BATTLE_PLAZA_ECHO_CHAMBER
 	dw Battle_Plaza_Name13 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET
 	dw Battle_Plaza_Name14 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1
+	dw Battle_Plaza_Name15 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_2
+	dw Battle_Plaza_Name16 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_3
+	dw Battle_Plaza_Name17 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_4
+	dw Battle_Plaza_Name18 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_5
+	dw Battle_Plaza_Name19 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_6
+	dw Battle_Plaza_Name20 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_7
+	dw Battle_Plaza_Name21 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_8
+	dw Battle_Plaza_Name22 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_9
+	dw Battle_Plaza_Name23 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_10
+	dw Battle_Plaza_Name24 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_11
+	dw Battle_Plaza_Name25 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_12
+	dw Battle_Plaza_Name26 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_13
+	dw Battle_Plaza_Name27 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_14
+	dw Battle_Plaza_Name28 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_15
+	dw Battle_Plaza_Name29 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_16
+	dw Battle_Plaza_Name30 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_17
+	dw Battle_Plaza_Name31 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_18
+	dw Battle_Plaza_Name32 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_19
+	dw Battle_Plaza_Name33 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_20
+	dw Battle_Plaza_Name34 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_21
+	dw Battle_Plaza_Name35 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_22
+	dw Battle_Plaza_Name36 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_23
+	dw Battle_Plaza_Name37 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_24
+	dw Battle_Plaza_Name38 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_25
+	dw Battle_Plaza_Name39 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_26
+	dw Battle_Plaza_Name40 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_27
+	dw Battle_Plaza_Name41 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_28
+	dw Battle_Plaza_Name42 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_29
+	dw Battle_Plaza_Name43 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_30
+	dw Battle_Plaza_Name44 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_31
+	dw Battle_Plaza_Name45 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_32
+	dw Battle_Plaza_Name46 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_33
+	dw Battle_Plaza_Name47 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_34
+	dw Battle_Plaza_Name48 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_35
+	dw Battle_Plaza_Name49 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_36
+	dw Battle_Plaza_Name50 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_37
+	dw Battle_Plaza_Name51 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_38
+	dw Battle_Plaza_Name52 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_39
+	dw Battle_Plaza_Name53 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_40
+	dw Battle_Plaza_Name54 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_41
+	dw Battle_Plaza_Name55 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_42
+	dw Battle_Plaza_Name56 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_43
+	dw Battle_Plaza_Name57 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_44
+	dw Battle_Plaza_Name58 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_45
+	dw Battle_Plaza_Name59 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_46
+	dw Battle_Plaza_Name60 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_47
+	dw Battle_Plaza_Name61 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_48
+	dw Battle_Plaza_Name62 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_49
+	dw Battle_Plaza_Name63 ; map_const BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_50
 	assert_table_length NUM_BATTLE_PLAZA_MAPS
 
 Battle_Plaza_Name1:  db "Battle Plaza@"
@@ -653,3 +702,52 @@ Battle_Plaza_Name11: db "Draft Arena@"
 Battle_Plaza_Name12: db "Echo Chamber@"
 Battle_Plaza_Name13: db "Grand Gauntlet@"
 Battle_Plaza_Name14: db "Battle Room 1@"
+Battle_Plaza_Name15: db "Battle Room 2@"
+Battle_Plaza_Name16: db "Battle Room 3@"
+Battle_Plaza_Name17: db "Battle Room 4@"
+Battle_Plaza_Name18: db "Battle Room 5@"
+Battle_Plaza_Name19: db "Battle Room 6@"
+Battle_Plaza_Name20: db "Battle Room 7@"
+Battle_Plaza_Name21: db "Battle Room 8@"
+Battle_Plaza_Name22: db "Battle Room 9@"
+Battle_Plaza_Name23: db "Battle Room 10@"
+Battle_Plaza_Name24: db "Battle Room 11@"
+Battle_Plaza_Name25: db "Battle Room 12@"
+Battle_Plaza_Name26: db "Battle Room 13@"
+Battle_Plaza_Name27: db "Battle Room 14@"
+Battle_Plaza_Name28: db "Battle Room 15@"
+Battle_Plaza_Name29: db "Battle Room 16@"
+Battle_Plaza_Name30: db "Battle Room 17@"
+Battle_Plaza_Name31: db "Battle Room 18@"
+Battle_Plaza_Name32: db "Battle Room 19@"
+Battle_Plaza_Name33: db "Battle Room 20@"
+Battle_Plaza_Name34: db "Battle Room 21@"
+Battle_Plaza_Name35: db "Battle Room 22@"
+Battle_Plaza_Name36: db "Battle Room 23@"
+Battle_Plaza_Name37: db "Battle Room 24@"
+Battle_Plaza_Name38: db "Battle Room 25@"
+Battle_Plaza_Name39: db "Battle Room 26@"
+Battle_Plaza_Name40: db "Battle Room 27@"
+Battle_Plaza_Name41: db "Battle Room 28@"
+Battle_Plaza_Name42: db "Battle Room 29@"
+Battle_Plaza_Name43: db "Battle Room 30@"
+Battle_Plaza_Name44: db "Battle Room 31@"
+Battle_Plaza_Name45: db "Battle Room 32@"
+Battle_Plaza_Name46: db "Battle Room 33@"
+Battle_Plaza_Name47: db "Battle Room 34@"
+Battle_Plaza_Name48: db "Battle Room 35@"
+Battle_Plaza_Name49: db "Battle Room 36@"
+Battle_Plaza_Name50: db "Battle Room 37@"
+Battle_Plaza_Name51: db "Battle Room 38@"
+Battle_Plaza_Name52: db "Battle Room 39@"
+Battle_Plaza_Name53: db "Battle Room 40@"
+Battle_Plaza_Name54: db "Battle Room 41@"
+Battle_Plaza_Name55: db "Battle Room 42@"
+Battle_Plaza_Name56: db "Battle Room 43@"
+Battle_Plaza_Name57: db "Battle Room 44@"
+Battle_Plaza_Name58: db "Battle Room 45@"
+Battle_Plaza_Name59: db "Battle Room 46@"
+Battle_Plaza_Name60: db "Battle Room 47@"
+Battle_Plaza_Name61: db "Battle Room 48@"
+Battle_Plaza_Name62: db "Battle Room 49@"
+Battle_Plaza_Name63: db "Battle Room 50@"

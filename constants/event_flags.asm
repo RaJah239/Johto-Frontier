@@ -828,15 +828,16 @@
 ; grand gauntlet events
 	const EVENT_FIRST_GG
 
-	const EVENT_GG_ROOM_1_ITEM_2
-	const EVENT_GG_ROOM_1_ITEM_3
-	const EVENT_GG_ROOM_1_TRAINER_1
-	const EVENT_GG_ROOM_1_TRAINER_2
-	const EVENT_GG_ROOM_1_TRAINER_3
+	const EVENT_GG_ROOM_ITEM_1
+	const EVENT_GG_ROOM_ITEM_2
+	const EVENT_GG_ROOM_ITEM_3
+	const EVENT_GG_ROOM_TRAINER_1
+	const EVENT_GG_ROOM_TRAINER_2
+	const EVENT_GG_ROOM_TRAINER_3
 
 	const EVENT_LAST_GG
 
-; Unused: next 383 events
+; Unused: next 382 events
 
 	const_next 1600
 ; Sprite visibility flags
