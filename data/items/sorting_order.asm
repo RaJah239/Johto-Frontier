@@ -142,13 +142,12 @@ ItemNameOrder:
 
 
 ; NEXT POCKET
-; Battle Pocket - 59 total
+; Battle Pocket - 58 total
 
 ; Battle related Held Items
 	db AMULET_COIN
 	db ASSAULT_VEST
 	db BERRY_JUICE
-	db BLACK_SLUDGE
 	db BLACKBELT_I
 	db BLACKGLASSES
 	db BRIGHTPOWDER
@@ -278,8 +277,9 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 8 total
+; Unused Items - 10 total
 	db EGG_TICKET
+ 	db ITEM_E1
  	db ITEM_E2
  	db ITEM_E3
  	db ITEM_E4
@@ -300,6 +300,7 @@ ItemAlphaOrder:
 ; data/items/names.asm (case- and accent-insensitive; ties break on item id).
 ; NO_ITEM leads so it sorts to the top, like ItemNameOrder.
 	db NO_ITEM
+	db ITEM_E1
 	db ITEM_E2
 	db ITEM_E3
 	db ITEM_E4
@@ -320,7 +321,6 @@ ItemAlphaOrder:
 	db BIG_MUSHROOM
 	db BIG_PEARL
 	db BITTER_BERRY
-	db BLACK_SLUDGE
 	db BLACKBELT_I
 	db BLACKGLASSES
 	db BLK_APRICORN

@@ -140,7 +140,7 @@
 	const STAR_PIECE   ; 84
 	const BASEMENT_KEY ; 85 ; to replace
 	const SHINY_BALL   ; 86
-	const BLACK_SLUDGE ; 87
+	const ITEM_E1      ; 87
 	const SHINY_CHARM  ; 88
 	const ZINC         ; 89
 	const CHARCOAL     ; 8a

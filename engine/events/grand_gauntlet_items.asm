@@ -28,9 +28,8 @@ GrandGauntletItemList:
 	db 5, QUICK_CLAW
 	db 5, HEAVY_BOOTS
 
-	; battle items - 108
+	; battle items - 107
 	db 3, BERRY_JUICE
-	db 3, BLACK_SLUDGE
 	db 3, BLACKBELT_I
 	db 3, BLACKGLASSES
 	db 3, BRIGHTPOWDER

@@ -3399,8 +3399,6 @@ AI_Smart_Trick:
 	jmp z, DoIt
 	cp TOXIC_ORB
 	jmp z, DoIt
-	cp BLACK_SLUDGE
-	jmp z, DoIt
 	jmp StandardDiscourage
 
 AI_Smart_Attract:
