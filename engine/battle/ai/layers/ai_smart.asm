@@ -1289,6 +1289,13 @@ AI_Smart_Sleep:
 	pop hl
 	jr c, .discourage
 
+; check if the move is Lovely Kiss
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	cp LOVELY_KISS
+	jr nz, .notLovelyKiss
+	jr .useMove
+
+.notLovelyKiss
 ; greatly encourage sleep inducing moves
 ; if the enemy has either dream eater
 	ld b, EFFECT_DREAM_EATER
@@ -1311,7 +1318,7 @@ AI_Smart_Sleep:
 .encourage50
 	call AI_50_50
 	ret c
-
+.useMove
 rept 12
     dec [hl]
 endr
