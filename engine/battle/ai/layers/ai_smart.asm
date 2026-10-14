@@ -1774,7 +1774,7 @@ AI_Smart_Heal:
 	jr z, .rest_heal
 	xor a
 	ld [wEnemyIsSwitching], a
-	jr .rest_heal           ; Skip IsAIToxified check for Rest
+	jr .legendary_heal_check
 
 .rest_heal
 	; Don't Rest if player can 3HKO from max HP

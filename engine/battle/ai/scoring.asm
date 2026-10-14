@@ -546,7 +546,16 @@ ShouldAIBoost:
 	call DoesEnemyHaveChoiceItem
 	jmp c, .dont_boost
 
+; don't boost once Toxic has started ramping.
+; Count 4 means the AI has already taken three Toxic ticks.
+    call IsAIToxified
+    jr nc, .checkSuckerPunch
+    ld a, [wEnemyToxicCount]
+    cp 4
+    jp nc, .dont_boost
+
 ; if players last move was sucker punch - 50% chance to boost
+.checkSuckerPunch
 	ld a, [wCurPlayerMove]
 	call AIGetPlayerMove
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
