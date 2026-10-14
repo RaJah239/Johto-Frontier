@@ -387,6 +387,10 @@ MonSubMenu_GetNextEvoAttackByte:
 	jmp AddMonMenuItem
 
 	CanUseDig:
+	; Unavailable during a Grand Gauntlet run.
+	ld a, [wGrandGauntletRun]
+	and a
+	ret nz
 ; Step 1: Location Check
 	call GetMapEnvironment
 	cp CAVE
@@ -423,6 +427,10 @@ MonSubMenu_GetNextEvoAttackByte:
 	ret
 	
 	CanUseTeleport:
+	; Unavailable during a Grand Gauntlet run.
+	ld a, [wGrandGauntletRun]
+	and a
+	ret nz
 ; Step 1: Check if mon knows move
 	ld a, TELEPORT
 	call CheckMonKnowsMove
