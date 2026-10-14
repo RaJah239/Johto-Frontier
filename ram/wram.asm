@@ -3239,7 +3239,11 @@ wOlivineGym::                                     db
 wCianwoodGym::                                    db
 wMahoganyGym::                                    db
 
-	ds 65
+	ds 64
+
+; nonzero while the player is on a Grand Gauntlet run
+wGrandGauntletRun:: db
+
 wScore:: ds 3
 wScoreCardPage:: db
 wScoreCardDelay:: db

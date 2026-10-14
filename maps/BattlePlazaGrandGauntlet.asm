@@ -40,6 +40,9 @@ GrandGauntletGiveUpScript::
 DEF GG_GIVE_UP_DITTO_LEVEL EQU 50
 
 GrandGauntletGiveUpPenalty:
+	; Giving up ends the run.
+	xor a
+	ld [wGrandGauntletRun], a
 ; Abandoning a run costs the player the team they were loaned and
 ; everything they picked up along the way: the party is replaced by a
 ; single level-50 Ditto and the bag is stripped back to key items and

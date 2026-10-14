@@ -26,6 +26,16 @@ BattlePlazaGrandGauntletBattleRoom1_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
+	callback MAPCALLBACK_NEWMAP, GrandGauntletBattleRoom1Entered
+
+GrandGauntletBattleRoom1Entered:
+	callasm SetGrandGauntletRun
+	endcallback
+
+SetGrandGauntletRun:
+	ld a, 1
+	ld [wGrandGauntletRun], a
+	ret
 
 GG1Trainer1:
 	gg_trainer EVENT_GG_ROOM_1_TRAINER_1, SCARLET1
