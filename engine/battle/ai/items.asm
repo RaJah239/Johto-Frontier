@@ -43,7 +43,7 @@ AI_SwitchOrTryItem:
 
 	; don't switch while our own mon is boosted (+3 or more in any stat)
 	call CheckEnemyStatAtPlus3
-	jmp c, DontSwitch
+	jr c, DontSwitch
 
 	; Clean Sweep: if the player's active mon has +4 or more in any stat,
 	; switch in a fresh CleanSweep mon, even if one is already out.
