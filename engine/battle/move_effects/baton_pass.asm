@@ -42,10 +42,10 @@ BattleCommand_BatonPass:
 ; Wildmons don't have anything to switch to
 	ld a, [wBattleMode]
 	dec a ; WILDMON
-	jmp z, FailedBatonPass
+	jr z, FailedBatonPass
 
 	call CheckAnyOtherAliveEnemyMons
-	jmp z, FailedBatonPass
+	jr z, FailedBatonPass
 
 	call UpdateEnemyMonInParty
 	call AnimateCurrentMove
@@ -65,29 +65,6 @@ BattleCommand_BatonPass:
 
 	ld hl, SpikesDamage
 	call CallBattleCore
-
-	; these abilities work in both link and unlinked battles
-	ld hl, EntryAbilities1
-	call CallBattleCore
-
-	; check if in a link battle
-    ld a, [wLinkMode]
-    and a
-    jr nz, .linked_battle
-
-	; activate these abilities in non-link battles only
-	call ClearSprites
-	ld hl, EntryAbilities2NonLink
-	call CallBattleCore
-	jr .unlinked_battle
-
-.linked_battle
-	; activate these abilities in link battles only
-	call ClearSprites
-	ld hl, EntryAbilities2
-	call CallBattleCore
-
-.unlinked_battle
 	jr ResetBatonPassStatus
 
 BatonPass_LinkPlayerSwitch:
