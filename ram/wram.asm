@@ -3239,12 +3239,14 @@ wOlivineGym::                                     db
 wCianwoodGym::                                    db
 wMahoganyGym::                                    db
 
-	ds 63
+	ds 62
 
 ; nonzero while the player is on a Grand Gauntlet run
 wGrandGauntletRun:: db
 ; Experience Gain mode from before the run, restored when it ends
 wGrandGauntletPrevExpMode:: db
+; Exp. Share on/off from before the run, restored when it ends
+wGrandGauntletPrevExpShare:: db
 
 wScore:: ds 3
 wScoreCardPage:: db

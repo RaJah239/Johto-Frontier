@@ -331,6 +331,12 @@ Options_BattleScene:
 
 Options_ExpShare:
 	ld hl, wExpShareToggle
+	; Forced on during a Grand Gauntlet run: still draw it, but ignore
+	; left/right so it can only be changed outside.
+	ld a, [wGrandGauntletRun]
+	and a
+	jr nz, .ToggleOn
+
 	ldh a, [hJoyPressed]
 	bit D_LEFT_F, a
 	jr nz, .LeftPressed

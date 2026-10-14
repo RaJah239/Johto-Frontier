@@ -36,17 +36,24 @@ SetGrandGauntletRun:
 	ld a, [wGrandGauntletRun]
 	and a
 	jr nz, .already_running
-	; First entry of the run: remember the current Experience Gain mode
-	; so it can be put back when the run ends.
+
+	; First entry of the run
+	; remember the current Experience Gain mode and 
+	; Exp Share setting so they can be put back when the run ends.
+
 	call GetExpMode
 	ld [wGrandGauntletPrevExpMode], a
+	call GetExpShare
+	ld [wGrandGauntletPrevExpShare], a
+
 .already_running
 	ld a, 1
 	ld [wGrandGauntletRun], a
-	; Experience Gain is locked to Scaled for the run.
+	; Experience Gain is locked to Scaled and Exp. Share is on for the run.
 	ld a, 1 ; Scaled
 	call ApplyExpMode
-	ret
+	ld a, 1 ; on
+	jr ApplyExpShare
 
 ; Returns the current Experience Gain mode in a:
 ; 0 = Normal, 1 = Scaled, 2 = Zero
@@ -83,6 +90,27 @@ ApplyExpMode:
 	set ZERO_EXP_F, a
 .not_zero
 	ld [wTextboxFlags], a
+	ret
+
+; Returns the current Exp. Share setting in a: 0 = off, 1 = on
+GetExpShare:
+	ld hl, wExpShareToggle
+	xor a
+	bit EXP_SHARE, [hl]
+	ret z
+	inc a
+	ret
+
+; Applies the Exp. Share setting in a (0 = off, 1 = on)
+ApplyExpShare:
+	ld hl, wExpShareToggle
+	bit 0, a
+	jr z, .off
+	set EXP_SHARE, [hl]
+	ret
+
+.off
+	res EXP_SHARE, [hl]
 	ret
 
 GG1Trainer1:
