@@ -6,12 +6,13 @@ BattlePlazaGrandGauntlet_MapEvents:
 	def_coord_events
 
 	def_bg_events
+	bg_event  2, 10, BGEVENT_READ, GrandGauntletInfoSignScript
 
 	def_object_events
 	object_event  4,  3, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
 	object_event  3, 10, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, BattlePlazaGrandGauntletReceptionistScript, -1
 	object_event  1, 12, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, BattlePlazaGrandGauntletYoungsterText, -1
-	object_event  7, 12, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, DittoSellerScript, -1
+	object_event  7, 12, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, FeebasSellerScript, -1
 
 	object_const_def
 	const BATTLEPLAZAGRANDGAUNTLET_QUEST_GIVER
@@ -28,6 +29,161 @@ GrandGauntletGiveBackPartyCallback:
 	callasm ResetGrandGauntletEvents
 	endcallback
 
+GrandGauntletInfoSignScript:
+	opentext
+	writethistext
+		text "Grand Gauntlet"
+		line "info sign."
+		done
+	waitbutton
+.ChooseOption:
+	loadmenu .InfoMenuHeader
+	verticalmenu
+	closewindow
+	ifequal 1, .Explanation
+	ifequal 2, .Requirements
+	ifequal 3, .BannedItems
+	ifequal 4, .ForcedOptions
+	ifequal 5, .Prizes
+	endtext
+
+.Explanation:
+	writethistext
+		text "The Grand Gauntlet"
+		line "is a 50 floor"
+		cont "challenge."
+
+		para "We replace your"
+		line "Lv 50 Feebas with"
+		cont "a random party."
+
+		para "They all come at"
+		line "level 5 and will"
+		cont "be equipped with"
+		cont "an item each."
+		done
+	waitbutton
+	sjump .ChooseOption
+
+.Requirements:
+	writethistext
+		text "Grand Gauntlet"
+		line "Requirements:"
+	
+		para "Party must only be"
+		line "a single Lv 50"
+		cont "Feebas."
+
+		para "We employ a seller"
+		line "on this floor."
+		done
+	waitbutton
+	sjump .ChooseOption
+
+.BannedItems:
+	writethistext
+		text "Certain items are"
+		line "banned and can't be"
+		cont "entered with."
+
+		para "If in possession,"
+		line "they'll be lost."
+
+		para "Store them all via"
+		line "your PC."
+
+		para "Here's a complete"
+		line "list:"
+
+		para "All Berries,"
+		line "All TMs,"
+		cont "All Battle Items,"
+
+		para "and specific ones"
+		line "from your Item"
+		cont "Pocket:"
+
+		para "Vitamins:"
+		line "Rare Candy,"
+		cont "PP Up"
+		cont "Hyper EV Up,"
+		cont "HP Up,"
+		cont "Protein,"
+		cont "Iron,"
+		cont "Calcium,"
+		cont "Zinc and Carbos."
+
+		para "Evolution Items:"
+		line "Fire Stone,"
+		cont "Water Stone,"
+		cont "Leaf Stone,"
+		cont "Thunderstone,"
+		cont "Dragon Scale,"
+		cont "Sun Stone and"
+		cont "Moon Stone."
+		done
+	waitbutton
+	sjump .ChooseOption
+
+.ForcedOptions:
+	writethistext
+		text "On entry to the"
+		line "Battle Room, the"
+		cont "following Options"
+		cont "are enforced:"
+
+		para "Exp. Gain: Scaled"
+		line "Exp.Share: On"
+
+		para "Exiting reverts"
+		line "back to previous"
+		cont "settings."
+		done
+	waitbutton
+	sjump .ChooseOption
+
+.Prizes:
+	writethistext
+		text "Completing all 50"
+		line "floors nets you"
+		cont "the team you over-"
+		cont "came it with plus"
+		cont "594× Rare Candy,"
+		cont "6× Hyper EV Up and"
+		cont "¥999,999."
+
+		para "The items appear"
+		line "near the exit."
+
+		para "Claim all before"
+		line "more attempts."
+
+		para "Giving up will"
+		line "send you back to"
+		cont "this hall and give"
+		cont "you a Feebas to"
+		cont "replace the one"
+		cont "you entered with."
+		done
+	waitbutton
+	sjump .ChooseOption
+
+.InfoMenuHeader:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 0, 0, 16, 12
+	dw .InfoMenuData
+	db 1 ; default option
+
+.InfoMenuData:
+	db STATICMENU_CURSOR | STATICMENU_WRAP | STATICMENU_NO_TOP_SPACING ; flags
+	db 6 ; items
+	db "Explanation@"
+	db "Requirements@"
+	db "Banned Items@"
+	db "Forced Options@"
+	db "Prizes@"
+	db "Cancel@"
+
 GrandGauntletGiveUpScript::
 	closetext
 	callasm GrandGauntletGiveUpPenalty
@@ -37,7 +193,7 @@ GrandGauntletGiveUpScript::
 	warp BATTLE_PLAZA_GRAND_GAUNTLET, 3, 13
 	end
 
-DEF GG_GIVE_UP_DITTO_LEVEL EQU 50
+DEF GG_GIVE_UP_FEEBAS_LEVEL EQU 50
 
 GrandGauntletGiveUpPenalty:
 	; Giving up ends the run.
@@ -54,14 +210,14 @@ GrandGauntletGiveUpPenalty:
 
 ; Abandoning a run costs the player the team they were loaned and
 ; everything they picked up along the way: the party is replaced by a
-; single level-50 Ditto and the bag is stripped back to key items and
+; single level-50 Feebas and the bag is stripped back to key items and
 ; balls - items, berries, battle items and TMs/HMs are all wiped.
 ; The PC keeps whatever was stored there; only carried pockets go.
-	; 1. one level-50 Ditto in slot 1 and nothing else
+	; 1. one level-50 Feebas in slot 1 and nothing else
 	call ResetPartyToEmpty
-	ld a, DITTO
+	ld a, FEEBAS
 	ld [wCurPartySpecies], a
-	ld a, GG_GIVE_UP_DITTO_LEVEL
+	ld a, GG_GIVE_UP_FEEBAS_LEVEL
 	ld [wCurPartyLevel], a
 	xor a
 	ld [wMonType], a ; our party, not an opposing one
@@ -315,7 +471,7 @@ BattlePlazaGrandGauntletReceptionistScript:
 .Enter:
 	readvar VAR_PARTYCOUNT
 	ifgreater 1, .YouDontMeetRequirements
-	checkpokelevel DITTO, 50
+	checkpokelevel FEEBAS, 50
 	iffalse_endtext
 	writethistext
 		text "Please go right"
@@ -952,12 +1108,12 @@ BattlePlazaGrandGauntletYoungsterText:
 	cont "Grand Gauntlet."
 	done
 
-DittoSellerScript:
+FeebasSellerScript:
 	faceplayeropentext
 	special PlaceMoneyTopRight
 	writethistext
-		text "Want a Ditto to be"
-		line "able to enter?"
+		text "Want a Feebas to"
+		line "be able to enter?"
 
 		para "It'll cost ¥50."
 		line "What do you say?"
@@ -974,7 +1130,7 @@ DittoSellerScript:
 	waitsfx
 	playsound SFX_CAUGHT_MON
 	waitsfx
-	givepoke DITTO, 50
+	givepoke FEEBAS, 50
 	endtext
 
 .NoRoom:
