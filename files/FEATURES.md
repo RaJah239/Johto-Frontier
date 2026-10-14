@@ -9,7 +9,6 @@
 - Option to Hold "A" for 30 frames or 1 second to rapid-fire "A" - ~7.5 "A" presses per second
 - Option to Hold "B" to rapid-fire "B" - ~7.5 "B" presses per second
 - Option to Hold "Start" for 30 frames to save the game in the overworld
-- Hold down the B Button to auto advance/scroll text - stops at end of dialogue, Yes or No and menu boxes
 - "Pokemon" menu is now the default selected option in the Start menu
 - View Pokédex entry of selected Pokémon in Menu
 - Time, day and weather added to Start Menu
@@ -24,7 +23,7 @@
 - Display seconds in PokéGear and Main Menu
 - All Bag pockets loop when scrolling: Up on the first item jumps to the bottom of the list and Down on the last row jumps back to the top
 - Fruit and Battle pockets added + colored Bag Tabs for easier navigation
-- Press Start to sort items in Pack pockets (Item, Ball, Fruit, Key and Battle) in and out of battles
+- Press Start to sort items (Custom or Alphabetical) in Pack pockets (Item, Ball, Fruit, Key and Battle) in and out of battles
 - Cheat NPC to New Bark Town
 - Colored trainer card badges and added gym leader's names to their pictures
 - Exp.Share added to Option Menu - 100% Exp to all participants and 50% to non-participants until the player has entered the Hall of Fame, then the entire party receives 100% experience points
@@ -41,7 +40,7 @@
 - Mart inventory changes with badge count
 - Show quantity already in Pack at Marts, (TMs don't show quantity)
 - Press Down when buying items to get the maximum affordable quantity
-- Link battle or trade Pokémon from the start of the game. Can't trade and battle with vanilla Pokémon Crystal
+- Link trade Pokémon from the start of the game. Can't trade with vanilla Pokémon Crystal
 - Gender corrected Link Battle/Trade Rooms
 - Can release HM users and overwrite HMs when learning moves
 - Prompt to automatically reuse Repel when one runs out
@@ -182,6 +181,5 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Multi-hit probabilities Updated: 50% for 3 hits, 25% for 4 hits and 12.5% for either 2 or 5 hits
 
 ## Bug Fixes
-
 - All known vanilla Bugs and Glitches Fixes
 - Basic Design Flaws
