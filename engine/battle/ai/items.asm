@@ -41,6 +41,20 @@ AI_SwitchOrTryItem:
 	and a
 	jr nz, DontSwitch
 
+	; Clean Sweep: if the player's active mon has +4 or more in any stat,
+	; switch in a fresh CleanSweep mon, even if one is already out.
+	; FindAliveCleanSweepMon skips the active mon, so this always picks a
+	; different CleanSweep mon (which re-triggers its on-entry Defog).
+	call CheckPlayerStatAtPlus4
+	jr nc, .no_clean_sweep_switch
+	farcall FindAliveCleanSweepMon
+	jr nc, .no_clean_sweep_switch
+	inc b
+	ld a, b
+	ld [wEnemySwitchMonIndex], a
+	jmp AI_TrySwitch
+
+.no_clean_sweep_switch
 	; always load the first trainer class in wTrainerClass for Battle Tower trainers
 	ld hl, TrainerClassAttributes + TRNATTR_AI_ITEM_SWITCH
 	ld a, [wInBattleTowerBattle]
@@ -420,6 +434,23 @@ CheckSetUp:
 	ret
 
 .switch
+	scf
+	ret
+
+CheckPlayerStatAtPlus4:
+; returns carry if any stat level of the player's active mon is +4 or higher
+	ld hl, wPlayerStatLevels
+	ld b, 7 ; ATTACK .. EVASION
+.loop
+	ld a, [hli]
+	cp BASE_STAT_LEVEL + 4
+	jr nc, .yes
+	dec b
+	jr nz, .loop
+	and a
+	ret
+
+.yes
 	scf
 	ret
 

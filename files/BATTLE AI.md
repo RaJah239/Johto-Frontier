@@ -7,6 +7,7 @@
 - AI doesn't switch if already set up (+2 in any stats)
 - Switches if enemy is choice locked into a move that is not very effective or a doesn't affect or has zero PP
 - Switch if enemy attack or special attack at -2 or lower, unless the other offense is boosted
+- Switches to a fresh Clean Sweep (Defog ability) Pokémon when the player hits +4 or when fainting, even if one is out
 - Switches if enemy attack at -2 or lower and has unboosted Special Attack
 - 80+% to switch if under a curse, nightmare, in love, confused, leech seed, badly poisoned after 4 turns
 - 80+% chance to switch if Accuracy is below -1

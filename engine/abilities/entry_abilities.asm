@@ -779,6 +779,64 @@ HandleCleanSweep:
 
 INCLUDE "data/abilities/clean_sweep_mons.asm"
 
+IsCleanSweepSpecies:
+; returns carry if the species in c is present in CleanSweepPokemon
+	ld a, c
+	ld hl, CleanSweepPokemon
+	jmp IsInByteArray
+
+FindAliveCleanSweepMon:
+; Find the first alive, non-active OT party mon whose species is in
+; CleanSweepPokemon.
+; Returns carry and the 0-based party index in b, or no carry if none.
+	xor a
+	ld [wEnemySwitchCandidate], a
+.loop
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
+	ld a, [wOTPartyCount]
+	cp b
+	jr z, .none
+	ld a, [wCurOTMon]
+	cp b
+	jr z, .next
+
+	; skip fainted mons
+	push bc
+	ld hl, wOTPartyMon1HP
+	ld a, b
+	call GetPartyLocation
+	ld a, [hli]
+	or [hl]
+	pop bc
+	jr z, .next
+
+	; is its species in the CleanSweep list?
+	push bc
+	ld hl, wOTPartyMon1
+	ld a, b
+	call GetPartyLocation
+	ld a, [hl]
+	ld c, a
+	call IsCleanSweepSpecies
+	pop bc
+	jr nc, .next
+
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
+	scf
+	ret
+
+.next
+	ld a, [wEnemySwitchCandidate]
+	inc a
+	ld [wEnemySwitchCandidate], a
+	jr .loop
+
+.none
+	and a
+	ret
+
 HandleRockSnare:
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK

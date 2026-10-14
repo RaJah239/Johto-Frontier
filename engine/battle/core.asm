@@ -1952,6 +1952,15 @@ EnemyPartyMonEntrance:
 	push af
 	xor a
 	ld [wEnemySwitchMonIndex], a
+
+	; Clean Sweep: prefer a CleanSweep mon as the KO replacement
+	farcall FindAliveCleanSweepMon
+	jr nc, .no_clean_sweep_replacement
+	inc b
+	ld a, b
+	ld [wEnemySwitchMonIndex], a
+
+.no_clean_sweep_replacement
 	call NewEnemyMonStatus
 	call ResetEnemyStatLevels
 	call BreakAttraction
