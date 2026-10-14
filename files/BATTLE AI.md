@@ -4,6 +4,12 @@
 
 ## General
 - If the enemy can KO but is slower and player has no priority move, speed boosting moves are encouraged to possibly get the jump on the next Pokémon to be sent out
+- AI doesn't switch if already set up (+2 in any stats)
+- 80+% to switch if under a curse, nightmare, in love, confused, leech seed, badly poisoned after 4 turns
+- 80+% chance to switch if Accuracy is below -1
+- 80+% chance to switch if any non-Speed stat (because of Curse) is below -2
+- 40% to switch if Encored or Destiny Bonded
+- ~33% chance to switch if any non-Speed stat is at -2
 
 ## Reworked forced switches (KO replacement, Baton Pass) and voluntary AI switches to best answer the player active Pokémon, in priority order:
 - A Pokémon that takes 0x or <=0.5x from every damaging move the player knows
