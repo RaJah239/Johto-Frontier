@@ -14,6 +14,11 @@ BattlePlazaGrandGauntlet_MapEvents:
 	object_event  1, 12, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, BattlePlazaGrandGauntletYoungsterText, -1
 	object_event  7, 12, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, FeebasSellerScript, -1
 
+	object_event  1, 13, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, BattlePlazaGrandGauntletRareCandy1, EVENT_GG_PRIZE_RARE_CANDY_1
+	object_event  2, 13, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, BattlePlazaGrandGauntletRareCandy2, EVENT_GG_PRIZE_RARE_CANDY_2
+	object_event  5, 13, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, BattlePlazaGrandGauntletRareCandy3, EVENT_GG_PRIZE_RARE_CANDY_3
+	object_event  6, 13, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, BattlePlazaGrandGauntletHyperEVUp, EVENT_GG_PRIZE_HYPER_EV_UP
+
 	object_const_def
 	const BATTLEPLAZAGRANDGAUNTLET_QUEST_GIVER
 	const BATTLEPLAZAGRANDGAUNTLET_RECEPTIONIST
@@ -149,7 +154,7 @@ GrandGauntletInfoSignScript:
 		line "floors nets you"
 		cont "the team you over-"
 		cont "came it with plus"
-		cont "594× Rare Candy,"
+		cont "297× Rare Candy,"
 		cont "6× Hyper EV Up and"
 		cont "¥999,999."
 
@@ -1177,3 +1182,10 @@ FeebasSellerScript:
 	jumpthisopenedtext
 		text "You even have ¥50…"
 		done
+
+BattlePlazaGrandGauntletRareCandy1:
+BattlePlazaGrandGauntletRareCandy2:
+BattlePlazaGrandGauntletRareCandy3:
+	itemball RARE_CANDY, 99
+BattlePlazaGrandGauntletHyperEVUp:
+	itemball HYPER_EV_UP, 6
