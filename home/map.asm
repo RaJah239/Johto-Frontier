@@ -1805,6 +1805,7 @@ ReturnToMapWithSpeechTextbox::
 	call GetSGBLayout
 	farcall LoadOW_BGPal7
 	call UpdateTimePals
+	newfarcall PrepareWeatherForFullScreen
 	call DelayFrame
 	farcall LoadWeatherGraphics
 	ld a, $1
