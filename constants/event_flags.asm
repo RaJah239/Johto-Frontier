@@ -823,23 +823,21 @@
 	const EVENT_BEAT_SAGE_GAKU
 	const EVENT_BEAT_SAGE_MASA
 	const EVENT_BEAT_SAGE_KOJI
-
-	const EVENT_GRAND_GAUNTLET_WARNING ; do not reset this flag
 ; grand gauntlet events
-	const EVENT_FIRST_GG
+	const EVENT_GRAND_GAUNTLET_WARNING ; do not reset this flag
+; this block of events below resets
 	const EVENT_GG_ROOM_ITEM_1
 	const EVENT_GG_ROOM_ITEM_2
 	const EVENT_GG_ROOM_ITEM_3
 	const EVENT_GG_ROOM_TRAINER_1
 	const EVENT_GG_ROOM_TRAINER_2
 	const EVENT_GG_ROOM_TRAINER_3
-	const EVENT_LAST_GG
-
+; this block of events above resets
 	const EVENT_GG_PRIZE_RARE_CANDY_1
 	const EVENT_GG_PRIZE_RARE_CANDY_2
 	const EVENT_GG_PRIZE_RARE_CANDY_3
 	const EVENT_GG_PRIZE_HYPER_EV_UP
-; Unused: next 378 events
+; Unused: next 380 events
 
 	const_next 1600
 ; Sprite visibility flags

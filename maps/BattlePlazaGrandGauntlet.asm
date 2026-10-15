@@ -1109,8 +1109,8 @@ EquipPartyKeeperTeamItems:
 	jr nz, .slot
 	ret
 
-DEF FIRST_GG_EVENT EQU EVENT_FIRST_GG
-DEF LAST_GG_RESET_EVENT  EQU EVENT_LAST_GG
+DEF FIRST_GG_EVENT EQU EVENT_GG_ROOM_ITEM_1
+DEF LAST_GG_RESET_EVENT  EQU EVENT_GG_ROOM_TRAINER_3
 
 ResetGrandGauntletEvents:
 	; reset all sure hit event flags
