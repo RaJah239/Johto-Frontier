@@ -1,13 +1,13 @@
-	db AZUMARILL ; 184
+	db AZUMARILL ; 078
 
-	db 100,  50,  80,  50,  50,  80
-	evs  3,   0,   0,   0,   0,   0
+	db 100,  55,  80,  60,  60,  95 ; 450 BST
+	evs  2,   0,   1,   1,   1,   2
 	;   hp  atk  def  spd  sat  sdf
 
-	db WATER, WATER ; type
+	db WATER, FAIRY ; type
 	db 75 ; catch rate
-	db 153 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 210 ; base exp
+	db MINT_BERRY, MYSTIC_WATER ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/azumarill/front.dimensions"

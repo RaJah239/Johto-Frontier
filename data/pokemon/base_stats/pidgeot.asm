@@ -1,13 +1,13 @@
-	db PIDGEOT ; 018
+	db PIDGEOT ; 052
 
-	db  83,  80,  75,  91,  70,  70
-	evs  0,   0,   0,   3,   0,   0
+	db  83,  66,  75, 121, 120,  70 ; 535 BST
+	evs  1,   1,   1,   3,   3,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db NORMAL, FLYING ; type
 	db 45 ; catch rate
-	db 172 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 230 ; base exp
+	db RED_APRICORN, SHARP_BEAK ; items
 	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch
 	INCBIN "gfx/pokemon/pidgeot/front.dimensions"

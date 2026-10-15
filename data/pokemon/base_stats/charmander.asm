@@ -1,13 +1,13 @@
-	db CHARMANDER ; 004
+	db CHARMANDER ; 013
 
-	db  39,  52,  43,  65,  60,  50
-	evs  0,   0,   0,   1,   0,   0
+	db  39,  52,  43,  65,  60,  50 ; 309 BST
+	evs  0,   0,   0,   1,   1,   0
 	;   hp  atk  def  spd  sat  sdf
 
-	db FIRE, FIRE ; type
+	db FIRE, DRAGON ; type
 	db 45 ; catch rate
-	db 65 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 62 ; base exp
+	db BERRY, BURNT_BERRY ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/charmander/front.dimensions"

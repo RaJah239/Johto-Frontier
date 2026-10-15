@@ -1,13 +1,13 @@
-	db PIKACHU ; 025
+	db PIKACHU ; 022
 
-	db  35,  55,  30,  90,  50,  40
-	evs  0,   0,   0,   2,   0,   0
+	db  45,  80,  50, 120,  75,  60 ; 430 BST
+	evs  0,   1,   0,   3,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db ELECTRIC, ELECTRIC ; type
 	db 190 ; catch rate
-	db 82 ; base exp
-	db NO_ITEM, BERRY ; items
+	db 112 ; base exp
+	db PRZCUREBERRY, LIGHT_BALL ; items
 	db GENDER_F50 ; gender ratio
 	db 10 ; step cycles to hatch
 	INCBIN "gfx/pokemon/pikachu/front.dimensions"

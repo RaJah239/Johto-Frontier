@@ -1,13 +1,13 @@
-	db ZUBAT ; 041
+	db ZUBAT ; 055
 
-	db  40,  45,  35,  55,  30,  40
+	db  40,  45,  35,  55,  30,  40 ; 245 BST
 	evs  0,   0,   0,   1,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
-	db POISON, FLYING ; type
+	db DARK, FLYING ; type
 	db 255 ; catch rate
-	db 54 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 55 ; base exp
+	db BITTER_BERRY, BLK_APRICORN ; items
 	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch
 	INCBIN "gfx/pokemon/zubat/front.dimensions"

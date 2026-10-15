@@ -1,13 +1,13 @@
-	db RALTS ; species ID
+	db RALTS ; 035
 
-	db  28,  25,  25,  40,  45,  35
+	db  28,  25,  25,  40,  45,  35 ; 198 BST
 	evs  0,   0,   0,   0,   1,   0
 	;   hp  atk  def  spd  sat  sdf
 
-	db PSYCHIC_TYPE, PSYCHIC_TYPE ; type
+	db PSYCHIC_TYPE, FAIRY ; type
 	db 235 ; catch rate
 	db 40 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db BERRY, GRN_APRICORN ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/ralts/front.dimensions"

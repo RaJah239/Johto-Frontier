@@ -1,13 +1,13 @@
-	db ARCANINE ; 059
+	db ARCANINE ; 097
 
-	db  90, 110,  80,  95, 100,  80
-	evs  0,   2,   0,   0,   0,   0
+	db  90, 110,  80,  95, 100,  80 ; 555 BST
+	evs  2,   2,   1,   2,   2,   1
 	;   hp  atk  def  spd  sat  sdf
 
-	db FIRE, FIRE ; type
+	db FIRE, NORMAL ; type
 	db 75 ; catch rate
-	db 213 ; base exp
-	db BURNT_BERRY, BURNT_BERRY ; items
+	db 215 ; base exp
+	db BURNT_BERRY, CHARCOAL ; items
 	db GENDER_F25 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/arcanine/front.dimensions"

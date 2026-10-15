@@ -1,13 +1,13 @@
-	db QUAGSIRE ; 195
+	db QUAGSIRE ; 101
 
-	db  95,  85,  85,  35,  65,  65
-	evs  2,   0,   0,   0,   0,   0
-	;   hp  atk  def  spd  sat  sdf
+	db   105,  95,  95,  40,  75,  95 ; 505 BST
+	evs    2,   2,   2,   0,   1,   2
+	;     hp  atk  def  spd  sat  sdf
 
 	db WATER, GROUND ; type
 	db 90 ; catch rate
-	db 137 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 215 ; base exp
+	db NO_ITEM, SOFT_SAND ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/quagsire/front.dimensions"

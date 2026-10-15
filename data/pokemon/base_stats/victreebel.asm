@@ -1,13 +1,13 @@
-	db VICTREEBEL ; 071
+	db VICTREEBEL ; 065
 
-	db  80, 105,  65,  70, 100,  60
-	evs  0,   3,   0,   0,   0,   0
+	db  90, 115,  65,  70, 115,  80 ; 535 BST
+	evs  2,   2,   1,   1,   2,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db GRASS, POISON ; type
 	db 45 ; catch rate
-	db 191 ; base exp
-	db SILVER_LEAF, GOLD_LEAF ; items
+	db 230 ; base exp
+	db GRN_APRICORN, GOLD_LEAF ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/victreebel/front.dimensions"

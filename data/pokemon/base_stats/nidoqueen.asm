@@ -1,13 +1,13 @@
-	db NIDOQUEEN ; 031
+	db NIDOQUEEN ; 071
 
-	db  90,  82,  87,  76,  75,  85
-	evs  3,   0,   0,   0,   0,   0
+	db  90,  92,  92,  76,  75,  90 ; 515 BST
+	evs  2,   2,   2,   1,   1,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db POISON, GROUND ; type
 	db 45 ; catch rate
-	db 194 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 230 ; base exp
+	db BLU_APRICORN, SOFT_SAND ; items
 	db GENDER_F100 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/nidoqueen/front.dimensions"

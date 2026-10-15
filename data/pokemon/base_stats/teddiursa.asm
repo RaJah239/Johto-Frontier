@@ -1,13 +1,13 @@
-	db TEDDIURSA ; 216
+	db TEDDIURSA ; 058
 
-	db  60,  80,  50,  40,  50,  50
-	evs  0,   1,   0,   0,   0,   0
+	db  60,  80,  50,  40,  50,  50 ; 330 BST
+	evs  1,   1,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db NORMAL, NORMAL ; type
 	db 120 ; catch rate
-	db 124 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 120 ; base exp
+	db BERRY, BERRY ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/teddiursa/front.dimensions"

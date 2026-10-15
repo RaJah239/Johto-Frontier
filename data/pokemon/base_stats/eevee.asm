@@ -1,13 +1,13 @@
-	db EEVEE ; 133
+	db EEVEE ; 024
 
-	db  55,  55,  50,  55,  45,  65
-	evs  0,   0,   0,   0,   0,   1
+	db  65,  75,  70,  75,  65,  85 ; 435 BST
+	evs  1,   1,   1,   1,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db NORMAL, NORMAL ; type
 	db 45 ; catch rate
 	db 92 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db RED_APRICORN, ETHER ; items
 	db GENDER_F12_5 ; gender ratio
 	db 35 ; step cycles to hatch
 	INCBIN "gfx/pokemon/eevee/front.dimensions"

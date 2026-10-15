@@ -1,13 +1,13 @@
-	db FEEBAS
+	db FEEBAS ; 030
 
-	db  20, 15,  20,  80,  10,  55
+	db  20, 15,  20,  80,  10,  55 ; 200 BST
 	evs  0,  0,   0,   1,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db WATER, WATER	; type
 	db 255 ; catch rate
-	db 20 ; base exp
-	db NO_ITEM, DRAGON_SCALE ; items
+	db 40 ; base exp
+	db PSNCUREBERRY, DRAGON_SCALE ; items
 	db GENDER_F50  ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/feebas/front.dimensions"

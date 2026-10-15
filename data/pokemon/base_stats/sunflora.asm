@@ -1,13 +1,13 @@
-	db SUNFLORA ; 192
+	db SUNFLORA ; 047
 
-	db  75,  75,  55,  30, 105,  85
-	evs  0,   0,   0,   0,   2,   0
+	db  80,  75,  55,  30, 125,  85 ; 450 BST
+	evs  1,   1,   0,   0,   3,   2
 	;   hp  atk  def  spd  sat  sdf
 
-	db GRASS, GRASS ; type
+	db GRASS, FIRE ; type
 	db 120 ; catch rate
-	db 146 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 200 ; base exp
+	db GRN_APRICORN, SUN_STONE ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/sunflora/front.dimensions"

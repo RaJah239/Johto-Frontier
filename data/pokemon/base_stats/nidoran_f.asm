@@ -1,13 +1,13 @@
-	db NIDORAN_F ; 029
+	db NIDORAN_F ; 069
 
-	db  55,  47,  52,  41,  40,  40
+	db  60,  47,  52,  41,  40,  40 ; 280 BST
 	evs  1,   0,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db POISON, POISON ; type
 	db 235 ; catch rate
-	db 59 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 55 ; base exp
+	db BERRY, BLU_APRICORN ; items
 	db GENDER_F100 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/nidoran_f/front.dimensions"

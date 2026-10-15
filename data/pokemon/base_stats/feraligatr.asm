@@ -1,13 +1,13 @@
-	db FERALIGATR ; 6
+	db FERALIGATR ; 006
 
-	;   hp  atk  def  spd  sat  sdf
-	db  85, 110, 100,  78,  79,  83 ; 535 BST
-	evs  1,   2,   2,   1,   1,   1
+	;   hp  atk  def  spd  sat  sdf ; 535 BST
+	db  85, 125, 107,  78,  69,  71
+	evs  1,   3,   2,   1,   1,   1
 
 	db WATER, DARK ; type
 	db 45 ; catch rate
-	db 100 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 239 ; base exp
+	db BLU_APRICORN, MYSTIC_WATER ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/feraligatr/front.dimensions"

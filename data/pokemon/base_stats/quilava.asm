@@ -1,13 +1,13 @@
-	db QUILAVA ; 2
+	db QUILAVA ; 002
 
-	;   hp  atk  def  spd  sat  sdf
-	db  64,  78,  52,  81,  78,  52 ; 405 BST
+	;   hp  atk  def  spd  sat  sdf ; 405 BST
+	db  64,  78,  52,  81,  78,  52
 	evs  1,   1,   0,   1,   1,   0
 
 	db FIRE, GROUND ; type
 	db 45 ; catch rate
-	db 75 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 142 ; base exp
+	db BERRY, CHARCOAL ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/quilava/front.dimensions"

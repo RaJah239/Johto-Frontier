@@ -1,13 +1,13 @@
-	db AMPHAROS ; 181
+	db AMPHAROS ; 068
 
-	db  90,  75,  75,  55, 115,  90
-	evs  0,   0,   0,   0,   3,   0
+	db  95,  60,  90,  50, 135, 105 ; 535 BST
+	evs  2,   1,   2,   0,   3,   2
 	;   hp  atk  def  spd  sat  sdf
 
-	db ELECTRIC, ELECTRIC ; type
+	db ELECTRIC, DRAGON ; type
 	db 45 ; catch rate
-	db 194 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 235 ; base exp
+	db YLW_APRICORN, DRAGON_FANG ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/ampharos/front.dimensions"
