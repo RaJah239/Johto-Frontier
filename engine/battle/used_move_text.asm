@@ -147,7 +147,7 @@ MoveTable:
 	db SKY_ATTACK   ; 8f
 	db TRANSFORM    ; 90
 	db CALM_MIND    ; 91
-	db HYPER_VOICE  ; 92
+	db VOLT_SWITCH  ; 92
 	db ACROBATICS   ; 93
 	db MIRROR_SHOT  ; 94
 	db SIGNAL_BEAM  ; 95

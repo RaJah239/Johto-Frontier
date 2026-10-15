@@ -144,7 +144,7 @@ MoveNames::
 	li "Sky Attack"
 	li "Transform"
 	li "Calm Mind"
-	li "Hyper Voice"
+	li "Volt Switch"
 	li "Acrobatics"
 	li "Mirror Shot"
 	li "Singal Beam"

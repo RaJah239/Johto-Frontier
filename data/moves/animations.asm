@@ -4036,24 +4036,27 @@ BattleAnim_ScaryFace:
 	anim_wait 48
 	anim_ret
 
-BattleAnim_HyperVoice:
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_FIRE
-	anim_2gfx BATTLE_ANIM_GFX_NOISE, BATTLE_ANIM_GFX_PSYCHIC
-.loop
-	anim_cry $0
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $2
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $30, $2, $0
-	anim_call BattleAnimSub_Sound
-	anim_obj BATTLE_ANIM_OBJ_WAVE,  7, 0, 11, 0, $2
-	anim_obj BATTLE_ANIM_OBJ_WAVE,  7, 0, 13, 0, $2
-	anim_obj BATTLE_ANIM_OBJ_WAVE,  9, 0, 11, 0, $2
-	anim_obj BATTLE_ANIM_OBJ_WAVE,  9, 0, 13, 0, $2
-	anim_wait 28
-	anim_call BattleAnimSub_Sound
-	anim_wait 28
-	anim_loop 2, .loop
-	anim_wait 8
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+BattleAnim_VoltSwitch:
+	anim_2gfx BATTLE_ANIM_GFX_LIGHTNING, BATTLE_ANIM_GFX_EXPLOSION
+	anim_sound 0, 0, SFX_ZAP_CANNON
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $3
+	anim_obj BATTLE_ANIM_OBJ_THUNDER_WAVE, 48, 92, $0
+	anim_wait 24
+	anim_setobj $1, $3
+	anim_wait 1
+	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_HIT
+	anim_sound 0, 0, SFX_MENU
+	anim_bgeffect BATTLE_BG_EFFECT_HIDE_MON, $0, BG_EFFECT_USER, $0
+	anim_call BattleAnimSub_SpeedLines
+	anim_wait 12
+	anim_sound 0, 1, SFX_TACKLE
+	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_LIGHTNING
+	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 48, $0
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $2
+	anim_sound 0, 1, SFX_THUNDER
+	anim_obj BATTLE_ANIM_OBJ_THUNDER_RIGHT, 152, 68, $0
+	anim_wait 64
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, BG_EFFECT_USER, $0
 	anim_ret
 
 BattleAnim_SuckerPunch:

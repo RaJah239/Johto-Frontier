@@ -150,7 +150,7 @@
 	const SKY_ATTACK   ; 8f
 	const TRANSFORM    ; 90
 	const CALM_MIND    ; 91
-	const HYPER_VOICE  ; 92
+	const VOLT_SWITCH  ; 92
 	const ACROBATICS   ; 93
 	const MIRROR_SHOT  ; 94
 	const SIGNAL_BEAM  ; 95

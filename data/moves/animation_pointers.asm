@@ -146,7 +146,7 @@ BattleAnimations::
 	dw BattleAnim_SkyAttack
 	dw BattleAnim_Transform
 	dw BattleAnim_CalmMind
-	dw BattleAnim_HyperVoice
+	dw BattleAnim_VoltSwitch
 	dw BattleAnim_Acrobatics
 	dw BattleAnim_MirrorShot
 	dw BattleAnim_SignalBeam

@@ -145,7 +145,7 @@ MoveDescriptions::
 	dw SkyAttackDescription
 	dw TransformDescription
 	dw CalmMindDescription
-	dw HyperVoiceDescription
+	dw VoltSwitchDescription
 	dw AcrobaticsDescription
 	dw MirrorShotDescription
 	dw SignalBeamDescription
@@ -274,6 +274,7 @@ TrickRoomDescription:
 	db   "Reverses the move"
 	line "order for 5 turns.@"
 
+VoltSwitchDescription:
 UTurnDescription:
 	db   "Attacks, then swap"
 	line "out if possible.@"
@@ -877,7 +878,6 @@ MegahornDescription:
 
 WaterGunDescription:
 HydroPumpDescription:
-HyperVoiceDescription:
 DragonPulseDescription:
 	db   "An attack that may"
 	line "increase Sp.Atk.@"
