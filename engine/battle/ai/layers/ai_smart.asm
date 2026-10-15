@@ -623,7 +623,7 @@ AI_Smart_Spikes:
 
 AI_Smart_Hazards:
 ; Don't use if enemy has rapid spin or defog
-	ld a, [wLastPlayerMove]
+	ld a, [wCurPlayerMove]
 	cp RAPID_SPIN
 	jmp z, StandardDiscourage
 	cp DEFOG
