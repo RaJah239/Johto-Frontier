@@ -32,7 +32,7 @@ AI_Smart_Switch:
 	add hl, bc
 	ld a, [hl]
 	and PP_MASK
-	jr z, .switch
+	jmp z, .switch
 
 .not_encored
 ; don't switch if enemy is weakened, just let it die
@@ -42,22 +42,34 @@ AI_Smart_Switch:
 ; switch if enemy accuracy at -2 or lower
 	ld a, [wEnemyAccLevel]
 	cp BASE_STAT_LEVEL - 1
-	jr c, .switch
+	jmp c, .switch
 
-; switch if enemy attack or special attack at -2 or lower,
-; unless the other offense is boosted
-	ld a, [wEnemyAtkLevel]
-	cp BASE_STAT_LEVEL + 1
-	jr nc, .magic_guard
-	ld a, [wEnemySAtkLevel]
-	cp BASE_STAT_LEVEL + 1
-	jr nc, .magic_guard
-	ld a, [wEnemyAtkLevel]
+; switch if the enemy's role-appropriate offense is at -2 or lower
+; don't do this if either offense is currently boosted or the mon is mixed
+    ld a, [wEnemyAtkLevel]
+    cp BASE_STAT_LEVEL + 1
+    jr nc, .magic_guard
+    ld a, [wEnemySAtkLevel]
+    cp BASE_STAT_LEVEL + 1
+    jr nc, .magic_guard
+	call IsEnemyPhysicalOrSpecial
+	jr z, .magic_guard
+	jr c, .checkLoweredAttack
+    ld a, [wEnemySAtkLevel]
 	cp BASE_STAT_LEVEL - 1
-	jr c, .check_setup_and_switch_if_we_cant_KO
-	ld a, [wEnemySAtkLevel]
+	jr c, .switchForLoweredOffense
+	jr .magic_guard
+
+.checkLoweredAttack
+    ld a, [wEnemyAtkLevel]
 	cp BASE_STAT_LEVEL - 1
-	jr c, .check_setup_and_switch_if_we_cant_KO
+	jr c, .switchForLoweredOffense
+	jr .magic_guard
+
+.switchForLoweredOffense
+	call AI_80_20
+	ret c
+	jr .check_setup_and_switch_if_we_cant_KO
 
 .magic_guard
 ; Pokemon who are immune to residual damage (magic guard) should not be considered
@@ -110,12 +122,22 @@ AI_Smart_Switch:
 	ret
 	
 .check_setup_and_switch_if_we_cant_KO
+	ld a, [wCurPlayerMove]
+	cp SUBSTITUTE
+	jr z, .skipKOCheck
+	cp PROTECT
+	jr z, .skipKOCheck
+
+    call DoesPlayerHaveIntactFocusSashOrSturdy
+    jr c, .skipKOCheck
+
 	call CanAIKO
 	ret c
 	call IsAISetup
 	ret c
-	; fallthrough
-
+.skipKOCheck
+    call IsAISetup
+    ret c
 .switch
 ; can't switch if trapped
 	ld a, [wBattleMonSpecies]

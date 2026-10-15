@@ -1375,6 +1375,70 @@ CanAI3HKO:
 	xor a ; clear carry flag
 	ret
 
+DoesPlayerHaveIntactFocusSashOrSturdy:
+; Is the AI at full HP
+	call AICheckPlayerMaxHP
+	jr nc, .no
+
+; focus sash
+	push hl
+	push de
+	ld a, [wBattleMonItem]
+	ld [wNamedObjectIndex], a
+	ld b, a
+	callfar GetItemHeldEffect
+	ld a, b
+	cp HELD_FOCUS_SASH
+	pop de
+	pop hl
+	jr z, .yes
+
+; sturdy
+	ld a, [wBattleMonSpecies]
+	push bc
+	push hl
+	push de
+	ld hl, SturdyPokemon_AI
+	call IsInByteArray
+	pop de
+	pop hl
+	pop bc
+	jr c, .yes
+
+.no
+	xor a ; clear carry flag
+	ret
+
+.yes
+	scf
+	ret
+
+; return carry if enemy base Attack is higher than base Special Attack
+; return z if the base offenses are tied
+IsEnemyPhysicalOrSpecial:
+	push bc
+	ld a, [wEnemyMonSpecies]
+	ld [wCurSpecies], a
+	call GetBaseData
+	ld a, [wBaseAttack]
+	ld b, a
+	ld a, [wBaseSpecialAttack]
+	cp b
+	pop bc
+	jr c, .yes
+	jr z, .tie
+	ld a, 1
+	and a
+	ret
+
+.tie
+	xor a
+	ret
+
+.yes
+	scf
+	ret
+
 ; return carry if players Attack is higher than Special Attack
 IsPlayerPhysicalOrSpecial:
 	; compare high bytes
