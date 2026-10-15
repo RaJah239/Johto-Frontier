@@ -2312,6 +2312,18 @@ AI_Smart_Substitute:
 	ld b, EFFECT_TOXIC
 	call PlayerHasMoveEffect
 	jr c, .hasStatus
+	ld b, EFFECT_CONFUSE
+	call PlayerHasMoveEffect
+	jr c, .hasStatus
+	ld b, EFFECT_BURN
+	call PlayerHasMoveEffect
+	jr c, .hasStatus
+	ld b, EFFECT_LEECH_SEED
+	call PlayerHasMoveEffect
+	jr c, .hasStatus
+	ld b, EFFECT_ACCURACY_DOWN
+	call PlayerHasMoveEffect
+	jr c, .hasStatus
 
 ; if player can 3HKO from max hp the discourage sub
 	call CanPlayer3HKOMaxHP
