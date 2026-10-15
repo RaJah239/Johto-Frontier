@@ -1,13 +1,13 @@
-	db DONPHAN ; 232
+	db DONPHAN ; 062
 
+	db  90, 120, 100,  45,  50, 100 ; 505 BST
+	evs  2,   3,   2,   0,   0,   2
 	;   hp  atk  def  spd  sat  sdf
-	db 100, 120, 120,  45,  60,  60 ; 505 BST
-	evs  2,   3,   3,   0,   1,   1
 
 	db GROUND, FIGHTING ; type
-	db 45 ; catch rate
-	db 189 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 60 ; catch rate
+	db 215 ; base exp
+	db BLK_APRICORN, BLACKBELT_I ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/donphan/front.dimensions"

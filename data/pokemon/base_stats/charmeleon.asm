@@ -1,13 +1,13 @@
-	db CHARMELEON ; 005
+	db CHARMELEON ; 014
 
-	db  58,  64,  58,  80,  80,  65
-	evs  0,   0,   0,   1,   1,   0
+	db  58,  64,  58,  80,  80,  65 ; 405 BST
+	evs  0,   1,   0,   1,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
-	db FIRE, FIRE ; type
+	db FIRE, DRAGON ; type
 	db 45 ; catch rate
 	db 142 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db BERRY, SUN_SHARD ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/charmeleon/front.dimensions"

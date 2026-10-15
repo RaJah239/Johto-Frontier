@@ -1,12 +1,12 @@
-	db WEEPINBELL ; 070
+	db WEEPINBELL ; 064
 
 	db  65,  90,  50,  55,  85,  45
-	evs  0,   2,   0,   0,   0,   0
+	evs  1,   2,   0,   0,   1,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db GRASS, POISON ; type
 	db 120 ; catch rate
-	db 151 ; base exp
+	db 150 ; base exp
 	db GRN_APRICORN, SILVER_LEAF ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch

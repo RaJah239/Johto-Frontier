@@ -1,13 +1,13 @@
-	db WURMPLE ; Species ID
+	db WURMPLE ; 039
 
-	db  45,  45,  45,  20,  20,  30
+	db  45,  45,  35,  20,  20,  30 ; 195 BST
 	evs  1,   0,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db BUG, BUG ; type
 	db 255 ; catch rate
-	db 55 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 56 ; base exp
+	db BITTER_BERRY, PNK_APRICORN ; items
 	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch
 	INCBIN "gfx/pokemon/wurmple/front.dimensions"

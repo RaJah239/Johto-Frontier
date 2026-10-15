@@ -1,13 +1,13 @@
-	db BLASTOISE ; 009
+	db BLASTOISE ; 018
 
-	db  79,  83, 100,  78,  85, 105
-	evs  0,   0,   0,   0,   0,   3
+	db  84,  83, 100,  78,  85, 105 ; 535 BST
+	evs  1,   1,   2,   1,   1,   2
 	;   hp  atk  def  spd  sat  sdf
 
-	db WATER, WATER ; type
+	db WATER, STEEL ; type
 	db 45 ; catch rate
-	db 210 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 239 ; base exp
+	db RAIN_SHARD, MYSTIC_WATER ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/blastoise/front.dimensions"

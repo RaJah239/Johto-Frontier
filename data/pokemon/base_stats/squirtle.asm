@@ -1,13 +1,13 @@
-	db SQUIRTLE ; 007
+	db SQUIRTLE ; 016
 
-	db  44,  48,  65,  43,  50,  64
-	evs  0,   0,   1,   0,   0,   0
+	db  44,  48,  65,  43,  50,  64 ; 314 BST
+	evs  0,   0,   1,   0,   0,   1
 	;   hp  atk  def  spd  sat  sdf
 
-	db WATER, WATER ; type
+	db WATER, STEEL ; type
 	db 45 ; catch rate
-	db 66 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 63 ; base exp
+	db BERRY, PSNCUREBERRY ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/squirtle/front.dimensions"

@@ -1,13 +1,13 @@
-	db PIDGEOTTO ; 017
+	db PIDGEOTTO ; 051
 
-	db  63,  60,  55,  71,  50,  50
-	evs  0,   0,   0,   2,   0,   0
+	db  63,  50,  55,  71,  61,  50 ; 350 BST
+	evs  1,   0,   0,   1,   1,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db NORMAL, FLYING ; type
 	db 120 ; catch rate
-	db 113 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 122 ; base exp
+	db RED_APRICORN, RED_APRICORN ; items
 	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch
 	INCBIN "gfx/pokemon/pidgeotto/front.dimensions"

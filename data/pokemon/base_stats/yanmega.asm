@@ -1,13 +1,13 @@
-	db YANMEGA ; Species ID
+	db YANMEGA ; 045
 
-	db  86,  76,  86, 105, 126,  56
-	evs  0,   2,   0,   0,   0,   0
+	db  86,  76,  86, 105, 126,  56 ; 535 BST
+	evs  1,   1,   1,   2,   3,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db BUG, DRAGON ; type
 	db 30 ; catch rate
-	db 180 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 220 ; base exp
+	db MINT_BERRY, DRAGON_FANG ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/yanmega/front.dimensions"

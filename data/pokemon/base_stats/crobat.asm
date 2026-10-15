@@ -1,13 +1,13 @@
-	db CROBAT ; 169
+	db CROBAT ; 057
 
-	db  85,  90,  80, 130,  70,  80
-	evs  0,   0,   0,   3,   0,   0
+	db  85,  90,  80, 130,  70,  80 ; 535 BST
+	evs  1,   2,   1,   3,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
-	db POISON, FLYING ; type
+	db DARK, FLYING ; type
 	db 90 ; catch rate
-	db 204 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 230 ; base exp
+	db BLK_APRICORN, BLACKGLASSES ; items
 	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch
 	INCBIN "gfx/pokemon/crobat/front.dimensions"

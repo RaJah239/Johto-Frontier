@@ -1,13 +1,13 @@
-	db LOPUNNY ; species ID
+	db LOPUNNY ; 049
 
-	db  65,  76,  84, 105,  54,  96
-	evs  0,   0,   0,   2,   0,   0
+	db  65,  95,  84, 105,  59,  97 ; 505 BST
+	evs  1,   2,   1,   2,   0,   2
 	;   hp  atk  def  spd  sat  sdf
 
-	db NORMAL, NORMAL ; type
+	db NORMAL, FIGHTING ; type
 	db 60 ; catch rate
-	db 168 ; base exp
-	db NO_ITEM, LUCKY_EGG ; items
+	db 210 ; base exp
+	db PRZCUREBERRY, BLACKBELT_I ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/lopunny/front.dimensions"

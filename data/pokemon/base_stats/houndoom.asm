@@ -1,13 +1,13 @@
-	db HOUNDOOM ; 229
+	db HOUNDOOM ; 099
 
-	db  75,  90,  50,  95, 110,  80
-	evs  0,   0,   0,   0,   2,   0
+	db  75,  90,  50, 100, 110,  80 ; 505 BST
+	evs  1,   2,   0,   2,   2,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db DARK, FIRE ; type
 	db 45 ; catch rate
-	db 204 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 205 ; base exp
+	db MINT_BERRY, BLACKGLASSES ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/houndoom/front.dimensions"

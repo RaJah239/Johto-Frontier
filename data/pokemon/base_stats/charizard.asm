@@ -1,13 +1,13 @@
-	db CHARIZARD ; 006
+	db CHARIZARD ; 015
 
-	db  78,  84,  78, 100, 110,  85
-	evs  0,   0,   0,   0,   3,   0
+	db  78,  84,  78, 101, 109,  85 ; 535 BST
+	evs  1,   1,   1,   2,   2,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db FIRE, DRAGON ; type
 	db 45 ; catch rate
-	db 245 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 236 ; base exp
+	db SUN_SHARD, CHARCOAL ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/charizard/front.dimensions"

@@ -1,13 +1,13 @@
-	db SYLVEON ; species ID
+	db SYLVEON ; 026
 
-	db  95,  65,  65,  60, 110, 130
-	evs  0,   0,   0,   0,   0,   2
+	db  95,  65,  65,  60, 110, 130 ; 525 BST
+	evs  2,   1,   1,   1,   2,   3
 	;   hp  atk  def  spd  sat  sdf
 
-	db NORMAL, NORMAL ; type
+	db FAIRY, FAIRY ; type
 	db 45 ; catch rate
 	db 184 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db PNK_APRICORN, PP_UP ; items
 	db GENDER_F12_5 ; gender ratio
 	db 35 ; step cycles to hatch
 	INCBIN "gfx/pokemon/sylveon/front.dimensions"

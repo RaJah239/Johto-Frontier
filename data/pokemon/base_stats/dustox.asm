@@ -1,13 +1,13 @@
-	db DUSTOX ; Species ID
+	db DUSTOX ; 043
 
-	db  75,  75,  70,  75,  50,  105
-	evs  0,   0,   0,   0,   0,   3
+	db  75,  75,  70,  75,  50,  105 ; 450 BST
+	evs  1,   1,   1,   1,   0,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db BUG, POISON ; type
 	db 45 ; catch rate
 	db 173 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db BLK_APRICORN, POISON_BARB ; items
 	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch
 	INCBIN "gfx/pokemon/dustox/front.dimensions"

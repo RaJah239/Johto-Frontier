@@ -1,13 +1,13 @@
-	db GOLISOPOD ; Species ID
+	db GOLISOPOD ; 076
 
-	db  75, 125, 140,  40,  60,  90
-	evs  0,   0,   2,   0,   0,   0
+	db  75, 125, 140,  40,  60,  90 ; 530 BST
+	evs  2,   3,   3,   0,   1,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db BUG, WATER ; type
 	db 45 ; catch rate
-	db 186 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 215 ; base exp
+	db MYSTERYBERRY, QUICK_CLAW ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/golisopod/front.dimensions"
