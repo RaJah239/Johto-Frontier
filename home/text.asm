@@ -165,7 +165,7 @@ PrintTextboxText::
 SetUpTextbox::
 	push hl
 	call SpeechTextbox
-	call UpdateSprites
+	call SafeUpdateSprites
 	call ApplyTilemap
 	pop hl
 	ret
