@@ -1462,100 +1462,19 @@ AI_Smart_Explosion:
 	ret
 
 AI_Smart_EvasionUp:
-; Dismiss this move if enemy's evasion can't raise anymore.
+; encourage to +4 and discourage after
 	ld a, [wEnemyEvaLevel]
-	cp MAX_STAT_LEVEL
-	jmp nc, AIDiscourageMove
-
-; If enemy's HP is full...
-	call AICheckEnemyMaxHP
-	jr nc, .hp_mismatch_1
-
-; ...greatly encourage this move if player is badly poisoned.
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_TOXIC, a
-	jr nz, .greatly_encourage
-
-; ...70% chance to greatly encourage this move if player is not badly poisoned.
-	call Random
-	cp 70 percent
-	jr nc, .not_encouraged
-
-.greatly_encourage
+	cp BASE_STAT_LEVEL + 4
+	jr nc, .discourage
+	dec [hl]
 	dec [hl]
 	dec [hl]
 	ret
-
-.hp_mismatch_1
-
-; Greatly discourage this move if enemy's HP is below 25%.
-	call AICheckEnemyQuarterHP
-	jr nc, .hp_mismatch_2
-
-; If enemy's HP is above 25% but not full, 4% chance to greatly encourage this move.
-	call Random
-	cp 4 percent
-	jr c, .greatly_encourage
-
-; If enemy's HP is between 25% and 50%,...
-	call AICheckEnemyHalfHP
-	jr nc, .hp_mismatch_3
-
-; If enemy's HP is above 50% but not full, 20% chance to greatly encourage this move.
-	call AI_80_20
-	jr c, .greatly_encourage
-	jr .not_encouraged
-
-.hp_mismatch_3
-; ...50% chance to greatly discourage this move.
-	call AI_50_50
-	jr c, .not_encouraged
-
-.hp_mismatch_2
-	inc [hl]
-	inc [hl]
-
-; 30% chance to end up here if enemy's HP is full and player is not badly poisoned.
-; 77% chance to end up here if enemy's HP is above 50% but not full.
-; 96% chance to end up here if enemy's HP is between 25% and 50%.
-; 100% chance to end up here if enemy's HP is below 25%.
-; In other words, we only end up here if the move has not been encouraged or dismissed.
-.not_encouraged
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_TOXIC, a
-	jr nz, .maybe_greatly_encourage
-
-	ld a, [wPlayerSubStatus4]
-	bit SUBSTATUS_LEECH_SEED, a
-	jr nz, .maybe_encourage
-
-; Discourage this move if enemy's evasion level is higher than player's accuracy level.
-	ld a, [wEnemyEvaLevel]
-	ld b, a
-	ld a, [wPlayerAccLevel]
-	cp b
-	jr c, .discourage
-
-; Greatly encourage this move if the player is in the middle of Rollout.
-
-	ld a, [wPlayerSubStatus1]
-	bit SUBSTATUS_ROLLOUT, a
-	jr nz, .greatly_encourage
-
 .discourage
 	inc [hl]
-	ret
-
-; Player is badly poisoned.
-; 70% chance to greatly encourage this move.
-; This would counter any previous discouragement.
-.maybe_greatly_encourage
-	call Random
-	cp 31 percent + 1
-	ret c
-
-	dec [hl]
-	dec [hl]
+	inc [hl]
+	inc [hl]
+	inc [hl]
 	ret
 
 ; Player is seeded.
