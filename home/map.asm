@@ -1794,6 +1794,7 @@ ReturnToMapWithSpeechTextbox::
 	farcall ClearSavedObjPals
 	farcall DisableDynPalUpdates
 	call ReloadTilesetAndPalettes
+	farcall EnableDynPalUpdatesNoApply
 	hlcoord 0, 12
 	lb bc, 4, 18
 	call Textbox
