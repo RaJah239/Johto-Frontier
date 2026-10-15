@@ -1807,6 +1807,7 @@ ReturnToMapWithSpeechTextbox::
 	farcall LoadOW_BGPal7
 	call UpdateTimePals
 	call DelayFrame
+	farcall LoadWeatherGraphics
 	ld a, $1
 	ldh [hMapAnims], a
 	pop af
