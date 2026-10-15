@@ -5,7 +5,6 @@ CriticalHitMoves:
 	db AEROBLAST
 	db CROSS_CHOP
 	db X_SCISSOR
-	db DRAGON_CLAW
 	db THROAT_CHOP
 	db NIGHT_SLASH
 	db PSYCHO_CUT

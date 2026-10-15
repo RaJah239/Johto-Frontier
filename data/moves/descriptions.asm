@@ -288,7 +288,6 @@ LeafBladeDescription:
 PsychoCutDescription:
 NightSlashDescription:
 SlashDescription:
-DragonClawDescription:
 XScissorDescription:
 KarateChopDescription:
 	db   "Has a high criti-"
@@ -403,6 +402,11 @@ FlamethrowerDescription:
 MistDescription:
 	db   "Priority: Prevent"
 	line "stat reduction.@"
+
+
+DragonClawDescription:
+	db   "A strong attack"
+	line "with claws.@"
 
 SurfDescription:
 	db   "A strong water-"
