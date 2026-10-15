@@ -119,4 +119,5 @@ BattleCommandPointers:
 	dw BattleCommand_FarCommand
 	dw BattleCommand_CheckContact
 	dw BattleCommand_CheckSubstitute
+	dw BattleCommand_HitAndSwitch
 	assert_table_length NUM_EFFECT_COMMANDS

@@ -1964,3 +1964,22 @@ Growth:
 	doturn
 	farcommand
 	endmove
+
+HitAndSwitch:
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	hitandswitch
+	kingsrock
+	endmove

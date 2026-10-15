@@ -162,4 +162,5 @@ MoveEffectsPointers:
 	dw FireFang
 	dw Growth
 	dw SlackOff
+	dw HitAndSwitch
 	assert_table_length NUM_MOVE_EFFECTS

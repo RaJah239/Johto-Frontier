@@ -7206,6 +7206,7 @@ TypeSyncPopup:
 
 TypeSyncText: db "Type Sync@"
 
+INCLUDE "engine/battle/move_effects/hitandswitch.asm"
 INCLUDE "engine/battle/move_effects/rollout.asm"
 INCLUDE "engine/battle/move_effects/return.asm"
 INCLUDE "engine/battle/move_effects/baton_pass.asm"

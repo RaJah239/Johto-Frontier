@@ -2713,6 +2713,14 @@ SlideBattlePicOut:
 	jr nz, .back
 	ret
 
+EnemyUTurnSwitch:
+	call FindMonInOTPartyToSwitchIntoBattle
+	; 'b' contains the PartyNr of the mon the AI will switch to
+	ld a, b
+	inc a
+	ld [wEnemySwitchMonIndex], a
+	; fallthrough
+
 ForceEnemySwitch:
 	call ResetEnemyBattleVars
 	ld a, [wEnemySwitchMonIndex]
