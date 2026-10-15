@@ -1463,6 +1463,7 @@ GivePoke::
 	farcall GiveANickname_YesNo
 	pop de
 	jr c, .skip_nickname
+	farcall PrepareWeatherForFullScreen
 	call InitNickname
 
 .skip_nickname
