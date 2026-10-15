@@ -153,7 +153,28 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_KNOCK_OFF,        AI_Smart_KnockOff
 	dbw EFFECT_GROWTH,           AI_Smart_Growth
 	dbw EFFECT_HIT_AND_SWITCH,   AI_Smart_HitAndSwitch
+	dbw EFFECT_LEVEL_DAMAGE,     AI_Smart_StaticDamage
 	db -1 ; end
+
+AI_Smart_StaticDamage:
+; don't use Seismic Toss on Ghost-types
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	cp SEISMIC_TOSS
+	ret nz
+
+	ld a, [wBattleMonType1]
+	cp GHOST
+	jr z, .discourage
+
+	ld a, [wBattleMonType2]
+	cp GHOST
+	ret nz
+
+.discourage
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	ret
 
 AI_Smart_HitAndSwitch:
 ; slightly prefer pivoting when the player can 2hko us,
