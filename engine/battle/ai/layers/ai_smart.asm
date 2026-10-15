@@ -3547,6 +3547,14 @@ AI_Smart_Pursuit:
 AI_Smart_RapidSpin:
 ; 80% chance to greatly encourage this move if the enemy is
 ; trapped (Bind effect), seeded, or surrounded by field hazards
+	call DoesAIOutSpeedPlayer
+	jr nc, .slower
+	call CanAI2HKO
+	ret c
+
+.slower
+	call CanAIKO
+	ret c
 
 	ld a, [wEnemyWrapCount]
 	and a
