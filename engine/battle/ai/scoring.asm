@@ -722,6 +722,10 @@ ShouldAIBoost:
 	cp EFFECT_SLACK_OFF
 	jr z, .check_2HKO_at_max_HP
 
+    ld a, [wBattleHasJustStarted]
+    and a
+    jr nz, .dont_boost
+
 	push hl
 	push de
 	push bc
@@ -1143,7 +1147,7 @@ CanAIKO:
 	jr nc, .loop_AI_KO_moves
 
 ; skip moves that can't be used on consecutive turns, except hyper beam
-	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
 	cp EFFECT_EXPLOSION
 	jr z, .loop_AI_KO_moves
 	cp EFFECT_SOLARBEAM
@@ -1211,7 +1215,7 @@ CanAI2HKO:
 	pop hl
 	jr c, .set_flag
 
-	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
 	cp EFFECT_EXPLOSION
 	jr z, .loop_moves
 	cp EFFECT_HYPER_BEAM
@@ -1283,7 +1287,7 @@ CanAI2HKOMaxHP:
 	pop hl
 	jr c, .set_flag
 
-	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
 	cp EFFECT_EXPLOSION
 	jr z, .loop_moves
 	cp EFFECT_HYPER_BEAM
@@ -1359,7 +1363,7 @@ CanAI3HKO:
 	pop hl
 	jr c, .set_flag
 
-	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
 	cp EFFECT_EXPLOSION
 	jr z, .loop_AI_3HKO_moves
 	cp EFFECT_HYPER_BEAM
