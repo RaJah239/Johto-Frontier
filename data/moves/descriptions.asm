@@ -130,7 +130,7 @@ MoveDescriptions::
 	dw BulletPunchDescription
 	dw SwiftDescription
 	dw NightSlashDescription
-	dw FakeOutDescription
+	dw UTurnDescription
 	dw FuryDriveDescription
 	dw AmnesiaDescription
 	dw BugBuzzDescription
@@ -274,9 +274,9 @@ TrickRoomDescription:
 	db   "Reverses the move"
 	line "order for 5 turns.@"
 
-FakeOutDescription:
-	db   "A first-turn only"
-	line "flinching move.@"
+UTurnDescription:
+	db   "Attacks, then swap"
+	line "out if possible.@"
 
 RockThrowDescription:
 CutDescription:

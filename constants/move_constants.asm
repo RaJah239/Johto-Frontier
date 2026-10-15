@@ -135,7 +135,7 @@
 	const BULLET_PUNCH ; 80
 	const SWIFT        ; 81
 	const NIGHT_SLASH  ; 82
-	const FAKE_OUT     ; 83
+	const U_TURN       ; 83
 	const FURY_DRIVE   ; 84
 	const AMNESIA      ; 85
 	const BUG_BUZZ     ; 86

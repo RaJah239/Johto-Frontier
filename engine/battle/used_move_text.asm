@@ -132,7 +132,7 @@ MoveTable:
 	db BULLET_PUNCH ; 80
 	db SWIFT        ; 81
 	db NIGHT_SLASH  ; 82
-	db FAKE_OUT     ; 83
+	db U_TURN       ; 83
 	db FURY_DRIVE   ; 84
 	db AMNESIA      ; 85
 	db BUG_BUZZ     ; 86

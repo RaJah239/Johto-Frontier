@@ -131,7 +131,7 @@ BattleAnimations::
 	dw BattleAnim_BulletPunch
 	dw BattleAnim_Swift
 	dw BattleAnim_NightSlash
-	dw BattleAnim_FakeOut
+	dw BattleAnim_UTurn
 	dw BattleAnim_FuryDrive
 	dw BattleAnim_Amnesia
 	dw BattleAnim_BugBuzz

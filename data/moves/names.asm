@@ -129,7 +129,7 @@ MoveNames::
 	li "Bullet Punch"
 	li "Swift"
 	li "Night Slash"
-	li "Fake Out"
+	li "U-Turn"
 	li "Fury Drive"
 	li "Amnesia"
 	li "Bug Buzz"
