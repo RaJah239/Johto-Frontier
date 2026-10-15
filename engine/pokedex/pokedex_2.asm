@@ -62,7 +62,7 @@
  DEF NUM_FIELD_MOVES EQU 14 
  DEF MOVESPAGES_CONT_MASK EQU %00000011
 
-AnimateDexSearchSlowpoke:
+AnimateDexSearchSlowpoke: ; unreferenced
 	ld hl, .FrameIDs
 	ld b, 25
 .loop

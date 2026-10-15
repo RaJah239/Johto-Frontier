@@ -1233,7 +1233,6 @@ Pokedex_InitSearchScreen:
 	xor a
 	ldh [hBGMapMode], a
 	call ClearSprites
-	call Pokedex_LoadSlowpokeGFX ; restoring our precious Slowpoke Sprite
 	call Pokedex_DrawSearchScreenBG
 	call Pokedex_InitArrowCursor
 	ld a, NORMAL + 1
@@ -1242,9 +1241,6 @@ Pokedex_InitSearchScreen:
 	ld [wDexSearchMonType2], a
 	call Pokedex_PlaceSearchScreenTypeStrings
 	ld [wDexConvertedMonType], a
-	xor a
-	ld [wDexSearchSlowpokeFrame], a
-	farcall DoDexSearchSlowpokeFrame
 	call WaitBGMap
 	ld a, SCGB_POKEDEX_SEARCH_OPTION
 	call Pokedex_GetSGBLayout
@@ -1303,7 +1299,6 @@ Pokedex_UpdateSearchScreen:
 	ld a, DEXSEARCH_SOURCE_TYPE
 	ld [wDexConvertedMonType], a
 	call Pokedex_SearchForMons
-	farcall AnimateDexSearchSlowpoke
 	ld a, [wDexSearchResultCount]
 	and a
 	jr nz, .show_search_results
