@@ -7,6 +7,7 @@ DEF NAMINGSCREEN_UNDERLINE  EQU "☎" ; $d9
 _NamingScreen:
 	call DisableSpriteUpdates
 	call NamingScreen
+	farcall PrepareWeatherForFullScreen
 	jmp ReturnToMapWithSpeechTextbox
 
 NamingScreen:
