@@ -112,7 +112,6 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_FACADE,           AI_Smart_Facade ; good as is
 	dbw EFFECT_HEX,              AI_Smart_Hex ; good as is
 	dbw EFFECT_HURRICANE,        AI_Smart_Hurricane ; updated
-	dbw EFFECT_FAKE_OUT,         AI_Smart_Fake_Out ; good as is
 	dbw EFFECT_FREEZE_DRY,       AI_Smart_FreezeDry ; good as is
 	dbw EFFECT_BODY_PRESS,       AI_Smart_BodyPress ; good as is
 	dbw EFFECT_AVALANCHE,        AI_Smart_Avalanche ; good as is
@@ -1394,18 +1393,6 @@ AI_Smart_Explosion:
 	inc [hl]
 	inc [hl]
 	inc [hl]
-	ret
-
-AI_Smart_Fake_Out:
-; 90% chance to greatly encourage this move.
-; The AI_Basic layer will make sure that
-; Fake Out is only used
-; on the enemy's first turn out.
-	call AI_90_10
-	ret c
-	dec [hl]
-	dec [hl]
-	dec [hl]
 	ret
 
 AI_Smart_EvasionUp:

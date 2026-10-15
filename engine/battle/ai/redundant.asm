@@ -41,14 +41,8 @@ AI_Redundant:
 	dbw EFFECT_WEATHER_HEAL, .Heal
 	dbw EFFECT_SWAGGER,      .Swagger
 	dbw EFFECT_HAIL,         .Hail
-	dbw EFFECT_FAKE_OUT,     .FakeOut
 	dbw EFFECT_TRICK,        .Trick
 	db -1
-
-.FakeOut:
-	ld a, [wEnemyTurnsTaken]
-	and a
-	ret
 
 .Trick:
 	ld a, [wEnemyMonItem]

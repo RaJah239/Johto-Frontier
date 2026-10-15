@@ -113,7 +113,6 @@ MoveEffectsPointers:
 	dw SunnyDay
 	dw AttackUpHit
 	dw AllUpHit
-	dw FakeOut
 	dw BellyDrum
 	dw MirrorCoat
 	dw Earthquake

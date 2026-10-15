@@ -1329,26 +1329,6 @@ SunnyDay:
 	farcommand
 	endmove
 
-FakeOut:
-	usedmovetext
-	doturn
-	farcommand
-	critical
-	damagestats
-	damagecalc
-	stab
-	damagevariation
-	checkhit
-	effectchance
-	moveanim
-	failuretext
-	applydamage
-	criticaltext
-	supereffectivetext
-	checkfaint
-	flinchtarget
-	endmove
-
 BellyDrum:
 	usedmovetext
 	doturn

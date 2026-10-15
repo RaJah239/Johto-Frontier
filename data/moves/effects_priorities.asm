@@ -1,6 +1,5 @@
 MoveEffectPriorities:
 	db EFFECT_PROTECT,      3
-	db EFFECT_FAKE_OUT,     2
 	db EFFECT_PRIORITY_HIT, 2
 	db EFFECT_DREAM_EATER,  2
 	db EFFECT_SUCKER_PUNCH, 2
