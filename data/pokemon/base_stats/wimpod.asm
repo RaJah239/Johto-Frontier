@@ -1,13 +1,13 @@
-	db WIMPOD ; Species ID
+	db WIMPOD ; 075
 
-	db  25,  35,  40,  80,  20,  30
+	db  25,  35,  40,  80,  20,  30 ; 230 BST
 	evs  0,   0,   0,   1,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db BUG, WATER ; type
 	db 90 ; catch rate
 	db 46 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db PRZCUREBERRY, MYSTERYBERRY ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/wimpod/front.dimensions"

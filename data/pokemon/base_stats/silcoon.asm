@@ -1,13 +1,13 @@
-	db SILCOON ; Species ID
+	db SILCOON ; 040
 
-	db  50,  35,  55,  15,  25,  25
-	evs  0,   0,   2,   0,   0,   0
+	db  50,  35,  55,  15,  25,  25 ; 205 BST
+	evs  0,   0,   1,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db BUG, BUG ; type
 	db 120 ; catch rate
 	db 72 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db ICE_BERRY, WHT_APRICORN ; items
 	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch
 	INCBIN "gfx/pokemon/silcoon/front.dimensions"

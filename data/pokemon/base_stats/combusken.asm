@@ -1,13 +1,13 @@
-	db COMBUSKEN ; species ID
+	db COMBUSKEN ; 028
 
-	db  60,  85,  60,  55,  85,  60
-	evs  0,   1,   0,   0,   1,   1
+	db  60,  85,  60,  55,  85,  60 ; 405 BST
+	evs  1,   1,   1,   0,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db FIRE, FIGHTING ; type
 	db 45 ; catch rate
 	db 142 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db RED_APRICORN, BLACKBELT_I ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/combusken/front.dimensions"

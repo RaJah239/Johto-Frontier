@@ -1,13 +1,13 @@
-	db ALTARIA ; Spieces ID
+	db ALTARIA ; 091
 
-	db  75,  75,  90,  80,  75, 105
-	evs  0,   0,   0,   0,   0,   2
+	db  75,  75,  90,  80,  80, 105 ; 505 BST
+	evs  1,   1,   2,   1,   1,   2
 	;   hp  atk  def  spd  sat  sdf
 
-	db DRAGON, FLYING ; type
+	db DRAGON, FAIRY ; type
 	db 45 ; catch rate
-	db 172 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 215 ; base exp
+	db BLU_APRICORN, POLKADOT_BOW ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/altaria/front.dimensions"

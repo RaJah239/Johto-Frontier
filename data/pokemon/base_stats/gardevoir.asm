@@ -1,13 +1,13 @@
-	db GARDEVOIR ; species ID
+	db GARDEVOIR ; 037
 
-	db  68,  65,  65,  80, 125, 115
-	evs  0,   0,   0,   0,   3,   0
+	db  68,  65,  65,  80, 125, 115 ; 518 BST
+	evs  1,   1,   1,   1,   3,   2
 	;   hp  atk  def  spd  sat  sdf
 
-	db PSYCHIC_TYPE, PSYCHIC_TYPE ; type
+	db PSYCHIC_TYPE, FAIRY ; type
 	db 45 ; catch rate
 	db 236 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db NO_ITEM, POLKADOT_BOW ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/gardevoir/front.dimensions"

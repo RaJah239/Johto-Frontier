@@ -1,13 +1,13 @@
-	db MAGIKARP ; 129
+	db MAGIKARP ; 085
 
-	db  20,  10,  55,  80,  15,  20
+	db  20,  10,  55,  80,  15,  20 ; 200 BST
 	evs  0,   0,   0,   1,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db WATER, WATER ; type
 	db 255 ; catch rate
-	db 20 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 40 ; base exp
+	db RED_APRICORN, MYSTIC_WATER ; items
 	db GENDER_F50 ; gender ratio
 	db 5 ; step cycles to hatch
 	INCBIN "gfx/pokemon/magikarp/front.dimensions"

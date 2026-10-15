@@ -1,13 +1,13 @@
-	db NIDORINO ; 033
+	db NIDORINO ; 073
 
-	db  61,  72,  57,  65,  55,  55
-	evs  0,   2,   0,   0,   0,   0
+	db  61,  55,  57,  65,  72,  55 ; 365 BST
+	evs  1,   0,   0,   1,   1,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db POISON, POISON ; type
 	db 120 ; catch rate
-	db 118 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 120 ; base exp
+	db NO_ITEM, PNK_APRICORN ; items
 	db GENDER_F0 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/nidorino/front.dimensions"

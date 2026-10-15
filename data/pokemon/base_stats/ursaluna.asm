@@ -1,13 +1,13 @@
-	db URSALUNA ; Species ID
+	db URSALUNA ; 060
 
-	db 130,  45,  80,  50,  140, 105
-	evs  0,   0,   0,   0,   0,   2
+	db 130, 140, 105,  50,  45,  80 ; 550 BST
+	evs  3,   3,   2,   0,   0,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db GROUND, NORMAL ; type
 	db 20 ; catch rate
-	db 236 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 240 ; base exp
+	db NO_ITEM, GOLD_BERRY ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/ursaluna/front.dimensions"

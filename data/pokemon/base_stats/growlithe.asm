@@ -1,13 +1,13 @@
-	db GROWLITHE ; 058
+	db GROWLITHE ; 096
 
-	db  55,  70,  45,  60,  70,  50
-	evs  0,   1,   0,   0,   0,   0
+	db  55,  70,  45,  60,  70,  50 ; 350 BST
+	evs  0,   1,   0,   1,   1,   0
 	;   hp  atk  def  spd  sat  sdf
 
-	db FIRE, FIRE ; type
+	db FIRE, NORMAL ; type
 	db 190 ; catch rate
-	db 91 ; base exp
-	db BURNT_BERRY, BURNT_BERRY ; items
+	db 90 ; base exp
+	db BURNT_BERRY, PINK_BOW ; items
 	db GENDER_F25 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/growlithe/front.dimensions"

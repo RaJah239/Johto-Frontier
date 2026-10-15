@@ -1,13 +1,13 @@
-	db BLAZIKEN ; species ID
+	db BLAZIKEN ; 029
 
-	db  80, 120,  70,  80, 110,  70
-	evs  0,   3,   0,   0,   0,   0
+	db  80, 125,  70,  80, 110,  70 ; 535 BST
+	evs  1,   3,   1,   1,   2,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db FIRE, FIGHTING ; type
 	db 45 ; catch rate
 	db 239 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db RED_APRICORN, BLACKBELT_I ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/blaziken/front.dimensions"

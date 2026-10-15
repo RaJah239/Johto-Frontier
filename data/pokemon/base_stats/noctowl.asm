@@ -1,13 +1,13 @@
-	db NOCTOWL ; 164
+	db NOCTOWL ; 054
 
-	db 100,  50,  50,  70,  76,  96
-	evs  2,   0,   0,   0,   0,   0
+	db 100,  60,  60,  70,  94, 121 ; 505 BST
+	evs  2,   1,   1,   1,   2,   3
 	;   hp  atk  def  spd  sat  sdf
 
 	db NORMAL, FLYING ; type
 	db 90 ; catch rate
-	db 162 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 210 ; base exp
+	db MINT_BERRY, TWISTEDSPOON ; items
 	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch
 	INCBIN "gfx/pokemon/noctowl/front.dimensions"

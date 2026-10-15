@@ -1,13 +1,13 @@
-	db MILOTIC
+	db MILOTIC ; 031
 
-	db  95, 60,  79,  81,  100, 125
-	evs  0,  0,   0,   0,    0,   2
+	db  95, 60,  79,  81,  100, 125 ; 540 BST
+	evs  2,  1,   1,   1,    2,   3
 	;   hp  atk  def  spd  sat  sdf
 
 	db WATER, WATER	; type
 	db 60 ; catch rate
 	db 189 ; base exp
-	db NO_ITEM, DRAGON_SCALE ; items
+	db PSNCUREBERRY, DRAGON_SCALE ; items
 	db GENDER_F50  ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/milotic/front.dimensions"

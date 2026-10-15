@@ -1,13 +1,13 @@
-	db GENGAR ; 094
+	db GENGAR ; 089
 
-	db  60,  65,  60, 110, 130,  75
-	evs  0,   0,   0,   0,   3,   0
+	db  65,  60,  60, 110, 135,  75 ; 505 BST
+	evs  1,   1,   1,   2,   3,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db GHOST, POISON ; type
 	db 45 ; catch rate
-	db 190 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 230 ; base exp
+	db NO_ITEM, SPELL_TAG ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/gengar/front.dimensions"

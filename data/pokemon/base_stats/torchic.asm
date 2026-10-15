@@ -1,13 +1,13 @@
-	db TORCHIC ; species ID
+	db TORCHIC ; 027
 
-	db  45,  60,  40,  45,  70,  50
-	evs  0,   0,   0,   0,   1,   0
+	db  45,  60,  40,  45,  70,  50 ; 310 BST
+	evs  0,   1,   0,   0,   1,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db FIRE, FIRE ; type
 	db 45 ; catch rate
-	db 65 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 62 ; base exp
+	db BERRY, RED_APRICORN ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/torchic/front.dimensions"

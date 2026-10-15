@@ -1,13 +1,13 @@
-	db MARILL ; 183
+	db MARILL ; 077
 
-	db  70,  20,  50,  40,  20,  50
-	evs  2,   0,   0,   0,   0,   0
+	db  70,  30,  50,  40,  20,  55 ; 265 BST
+	evs  1,   0,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
-	db WATER, WATER ; type
+	db WATER, FAIRY ; type
 	db 190 ; catch rate
-	db 58 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 90 ; base exp
+	db WHT_APRICORN, MINT_BERRY ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/marill/front.dimensions"

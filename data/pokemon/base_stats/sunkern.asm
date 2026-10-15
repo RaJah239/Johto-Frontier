@@ -1,13 +1,13 @@
-	db SUNKERN ; 191
+	db SUNKERN ; 046
 
-	db  30,  30,  30,  30,  30,  30
+	db  50,  40,  30,  20,  60,  55 ; 255 BST
 	evs  0,   0,   0,   0,   1,   0
 	;   hp  atk  def  spd  sat  sdf
 
-	db GRASS, GRASS ; type
+	db GRASS, FIRE ; type
 	db 235 ; catch rate
-	db 52 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 50 ; base exp
+	db GRN_APRICORN, SUN_STONE ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/sunkern/front.dimensions"

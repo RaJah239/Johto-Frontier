@@ -1,13 +1,13 @@
-	db BUNEARY ; species ID
+	db BUNEARY ; 048
 
-	db  55,  66,  44,  85,  44,  56
-	evs  0,   0,   0,   1,   0,   0
+	db  55,  66,  44,  85,  44,  56 ; 350 BST
+	evs  0,   1,   0,   1,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db NORMAL, NORMAL ; type
 	db 190 ; catch rate
 	db 70 ; base exp
-	db NO_ITEM, LUCKY_EGG ; items
+	db BERRY, PINK_BOW ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/buneary/front.dimensions"
