@@ -526,13 +526,11 @@ DoesAIOutSpeedPlayer:
 	xor a
 	ret
 
+; functions to check if the player can KO the AI
+; and decide to use boosting moves
 ; =============================
 ; === AI Boosting Functions ===
 ; =============================
-
-; functions to check if the player can KO the AI
-; and decide to use boosting moves
-
 ; decide if AI should use boosting moves
 ; generally don't boost if player will just KO anyway
 ; returns carry if the AI can boost
@@ -546,13 +544,13 @@ ShouldAIBoost:
 	call DoesEnemyHaveChoiceItem
 	jmp c, .dont_boost
 
-; don't boost once Toxic has started ramping.
-; Count 4 means the AI has already taken three Toxic ticks.
+; don't boost once Toxic has started ramping
+; count 4 means the ai has already taken three toxic ticks
     call IsAIToxified
     jr nc, .checkSuckerPunch
     ld a, [wEnemyToxicCount]
     cp 4
-    jp nc, .dont_boost
+    jmp nc, .dont_boost
 
 ; if players last move was sucker punch - 50% chance to boost
 .checkSuckerPunch

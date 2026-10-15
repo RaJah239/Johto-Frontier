@@ -47,104 +47,104 @@ AI_Smart:
 	jr .checkmove
 
 AI_Smart_EffectHandlers:
-	dbw EFFECT_SLEEP,            AI_Smart_Sleep ; updated
-	dbw EFFECT_EXPLOSION,        AI_Smart_Explosion ; updated
-	dbw EFFECT_DREAM_EATER,      AI_Smart_DreamEater ; good as is
-	dbw EFFECT_EVASION_UP,       AI_Smart_EvasionUp ; good as is
-	dbw EFFECT_ALWAYS_HIT,       AI_Smart_AlwaysHit ; updated
-	dbw EFFECT_ACCURACY_DOWN,    AI_Smart_AccuracyDown ; updated
-	dbw EFFECT_ATTACK_DOWN,      AI_Smart_AttackDown ; updated
-	dbw EFFECT_ATTACK_DOWN_2,    AI_Smart_AttackDown ; updated
-	dbw EFFECT_DEFENSE_DOWN,     AI_Smart_DefenseDown ; newly added
-	dbw EFFECT_DEFENSE_DOWN_2,   AI_Smart_DefenseDown ; newly added
-	dbw EFFECT_SPEED_DOWN_2,     AI_Smart_SpeedDown ; newly added
-	dbw EFFECT_RESET_STATS,      AI_Smart_ResetStats ; good as is
-	dbw EFFECT_FORCE_SWITCH,     AI_Smart_ForceSwitch ; updated
-	dbw EFFECT_HEAL,             AI_Smart_Heal ; updated
+	dbw EFFECT_SLEEP,            AI_Smart_Sleep
+	dbw EFFECT_EXPLOSION,        AI_Smart_Explosion
+	dbw EFFECT_DREAM_EATER,      AI_Smart_DreamEater
+	dbw EFFECT_EVASION_UP,       AI_Smart_EvasionUp
+	dbw EFFECT_ALWAYS_HIT,       AI_Smart_AlwaysHit
+	dbw EFFECT_ACCURACY_DOWN,    AI_Smart_AccuracyDown
+	dbw EFFECT_ATTACK_DOWN,      AI_Smart_AttackDown
+	dbw EFFECT_ATTACK_DOWN_2,    AI_Smart_AttackDown
+	dbw EFFECT_DEFENSE_DOWN,     AI_Smart_DefenseDown
+	dbw EFFECT_DEFENSE_DOWN_2,   AI_Smart_DefenseDown
+	dbw EFFECT_SPEED_DOWN_2,     AI_Smart_SpeedDown
+	dbw EFFECT_RESET_STATS,      AI_Smart_ResetStats
+	dbw EFFECT_FORCE_SWITCH,     AI_Smart_ForceSwitch
+	dbw EFFECT_HEAL,             AI_Smart_Heal
 	dbw EFFECT_SLACK_OFF,        AI_Smart_SlackOff
-	dbw EFFECT_TOXIC,            AI_Smart_Toxic ; updated
-	dbw EFFECT_LIGHT_SCREEN,     AI_Smart_LightScreen ; updated
-	dbw EFFECT_SUPER_FANG,       AI_Smart_SuperFang ; good as is
-	dbw EFFECT_TRAP_TARGET,      AI_Smart_TrapTarget ; good as is
-	dbw EFFECT_CONFUSE,          AI_Smart_Confuse ; updated
-	dbw EFFECT_SP_DEF_UP_2,      AI_Smart_SpDefenseUp2 ; updated
-	dbw EFFECT_REFLECT,          AI_Smart_Reflect ; updated
-	dbw EFFECT_PARALYZE,         AI_Smart_Paralyze ; updated
-	dbw EFFECT_SPEED_DOWN_HIT,   AI_Smart_SpeedDownHit ; updated
-	dbw EFFECT_SUBSTITUTE,       AI_Smart_Substitute ; updated
-	dbw EFFECT_HYPER_BEAM,       AI_Smart_HyperBeam ; updated
-	dbw EFFECT_LEECH_SEED,       AI_Smart_LeechSeed ; updated
-	dbw EFFECT_DISABLE,          AI_Smart_Disable ; updated
-	dbw EFFECT_COUNTER,          AI_Smart_Counter ; updated
-	dbw EFFECT_ENCORE,           AI_Smart_Encore ; updated
-	dbw EFFECT_PAIN_SPLIT,       AI_Smart_PainSplit ; good as is
-	dbw EFFECT_SLEEP_TALK,       AI_Smart_SleepTalk ; updated
-	dbw EFFECT_DESTINY_BOND,     AI_Smart_DestinyBond ; updated
+	dbw EFFECT_TOXIC,            AI_Smart_Toxic
+	dbw EFFECT_LIGHT_SCREEN,     AI_Smart_LightScreen
+	dbw EFFECT_SUPER_FANG,       AI_Smart_SuperFang
+	dbw EFFECT_TRAP_TARGET,      AI_Smart_TrapTarget
+	dbw EFFECT_CONFUSE,          AI_Smart_Confuse
+	dbw EFFECT_SP_DEF_UP_2,      AI_Smart_SpDefenseUp2
+	dbw EFFECT_REFLECT,          AI_Smart_Reflect
+	dbw EFFECT_PARALYZE,         AI_Smart_Paralyze
+	dbw EFFECT_SPEED_DOWN_HIT,   AI_Smart_SpeedDownHit
+	dbw EFFECT_SUBSTITUTE,       AI_Smart_Substitute
+	dbw EFFECT_HYPER_BEAM,       AI_Smart_HyperBeam
+	dbw EFFECT_LEECH_SEED,       AI_Smart_LeechSeed
+	dbw EFFECT_DISABLE,          AI_Smart_Disable
+	dbw EFFECT_COUNTER,          AI_Smart_Counter
+	dbw EFFECT_ENCORE,           AI_Smart_Encore
+	dbw EFFECT_PAIN_SPLIT,       AI_Smart_PainSplit
+	dbw EFFECT_SLEEP_TALK,       AI_Smart_SleepTalk
+	dbw EFFECT_DESTINY_BOND,     AI_Smart_DestinyBond
 	dbw EFFECT_FLAIL,            AI_Smart_Flail
-	dbw EFFECT_SPITE,            AI_Smart_Spite ; good as is
-	dbw EFFECT_HEAL_BELL,        AI_Smart_HealBell ; updated
-	dbw EFFECT_PRIORITY_HIT,     AI_Smart_PriorityHit ; updated
-	dbw EFFECT_THIEF,            AI_Smart_Thief ; updated
-	dbw EFFECT_MEAN_LOOK,        AI_Smart_MeanLook ; updated
-	dbw EFFECT_CURSE,            AI_Smart_Curse ; updated
-	dbw EFFECT_PROTECT,          AI_Smart_Protect ; updated
-	dbw EFFECT_FORESIGHT,        AI_Smart_Foresight ; good as is
-	dbw EFFECT_PERISH_SONG,      AI_Smart_PerishSong ; updated
-	dbw EFFECT_SANDSTORM,        AI_Smart_Sandstorm ; updated
-	dbw EFFECT_ROLLOUT,          AI_Smart_Rollout ; good as is
-	dbw EFFECT_SWAGGER,          AI_Smart_Swagger ; updated
-	dbw EFFECT_ATTRACT,          AI_Smart_Attract ; good as is
-	dbw EFFECT_BATON_PASS,       AI_Smart_BatonPass ; updated
-	dbw EFFECT_PURSUIT,          AI_Smart_Pursuit ; updated
-	dbw EFFECT_RAPID_SPIN,       AI_Smart_RapidSpin ; updated
-	dbw EFFECT_WEATHER_HEAL,     AI_Smart_Heal ; updated
-	dbw EFFECT_HIDDEN_POWER,     AI_Smart_HiddenPower ; good as is
-	dbw EFFECT_RAIN_DANCE,       AI_Smart_RainDance ; updated
-	dbw EFFECT_SUNNY_DAY,        AI_Smart_SunnyDay ; updated
-	dbw EFFECT_BELLY_DRUM,       AI_Smart_BellyDrum ; updated
-	dbw EFFECT_MIRROR_COAT,      AI_Smart_MirrorCoat ; updated
-	dbw EFFECT_EARTHQUAKE,       AI_Smart_Earthquake ; good as is
-	dbw EFFECT_GUST,             AI_Smart_Gust ; good as is
-	dbw EFFECT_SOLARBEAM,        AI_Smart_Solarbeam ; good as is
-	dbw EFFECT_THUNDER,          AI_Smart_Thunder ; updated
-	dbw EFFECT_FLY,              AI_Smart_Fly ; updated
-	dbw EFFECT_HAIL,             AI_Smart_Hail ; updated
-	dbw EFFECT_FACADE,           AI_Smart_Facade ; good as is
-	dbw EFFECT_HEX,              AI_Smart_Hex ; good as is
-	dbw EFFECT_HURRICANE,        AI_Smart_Hurricane ; updated
-	dbw EFFECT_FREEZE_DRY,       AI_Smart_FreezeDry ; good as is
-	dbw EFFECT_BODY_PRESS,       AI_Smart_BodyPress ; good as is
-	dbw EFFECT_AVALANCHE,        AI_Smart_Avalanche ; good as is
-	dbw EFFECT_BRICK_BREAK,      AI_Smart_BrickBreak ; updated
-	dbw EFFECT_PARALYZE_HIT,     AI_Smart_ParalyzeTarget ; updated
-	dbw EFFECT_ACROBATICS,       AI_Smart_Acrobatics ; good as is
-	dbw EFFECT_TRICK,            AI_Smart_Trick ; good as is
-	dbw EFFECT_VENOSHOCK,        AI_Smart_Venoshock ; good as is
-	dbw EFFECT_DRAGON_DANCE,     AI_Smart_DragonDance ; updated
-	dbw EFFECT_CALM_MIND,        AI_Smart_CalmMind ; updated
-	dbw EFFECT_QUIVER_DANCE,     AI_Smart_QuiverDance ; updated
-	dbw EFFECT_ATTACK_UP_2,      AI_Smart_SwordsDance ; updated
-	dbw EFFECT_SP_ATK_UP_2,      AI_Smart_NastyPlot ; updated
-	dbw EFFECT_BULK_UP,          AI_Smart_BulkUp ; updated
-	dbw EFFECT_BARRIER,          AI_Smart_Barrier ; added
-	dbw EFFECT_SPEED_UP_2,       AI_Smart_Agility ; added
-	dbw EFFECT_SPIKES,           AI_Smart_Spikes ; added
-	dbw EFFECT_STEALTH_ROCK,     AI_Smart_StealthRock ; added
-    dbw EFFECT_TOXIC_SPIKES,     AI_Smart_ToxicSpikes ; added
-    dbw EFFECT_STICKY_WEB,       AI_Smart_StickyWeb ; added
-    dbw EFFECT_FLINCH_HIT,       AI_Smart_Flinch ; added
-    dbw EFFECT_DEFENSE_UP,       AI_Smart_LesserStatChange ; added
-    dbw EFFECT_FOCUS_ENERGY,     AI_Smart_LesserStatChange ; added
-    dbw EFFECT_SAFEGUARD,        AI_Smart_LesserStatChange ; added
+	dbw EFFECT_SPITE,            AI_Smart_Spite
+	dbw EFFECT_HEAL_BELL,        AI_Smart_HealBell
+	dbw EFFECT_PRIORITY_HIT,     AI_Smart_PriorityHit
+	dbw EFFECT_THIEF,            AI_Smart_Thief
+	dbw EFFECT_MEAN_LOOK,        AI_Smart_MeanLook
+	dbw EFFECT_CURSE,            AI_Smart_Curse
+	dbw EFFECT_PROTECT,          AI_Smart_Protect
+	dbw EFFECT_FORESIGHT,        AI_Smart_Foresight
+	dbw EFFECT_PERISH_SONG,      AI_Smart_PerishSong
+	dbw EFFECT_SANDSTORM,        AI_Smart_Sandstorm
+	dbw EFFECT_ROLLOUT,          AI_Smart_Rollout
+	dbw EFFECT_SWAGGER,          AI_Smart_Swagger
+	dbw EFFECT_ATTRACT,          AI_Smart_Attract
+	dbw EFFECT_BATON_PASS,       AI_Smart_BatonPass
+	dbw EFFECT_PURSUIT,          AI_Smart_Pursuit
+	dbw EFFECT_RAPID_SPIN,       AI_Smart_RapidSpin
+	dbw EFFECT_WEATHER_HEAL,     AI_Smart_Heal
+	dbw EFFECT_HIDDEN_POWER,     AI_Smart_HiddenPower
+	dbw EFFECT_RAIN_DANCE,       AI_Smart_RainDance
+	dbw EFFECT_SUNNY_DAY,        AI_Smart_SunnyDay
+	dbw EFFECT_BELLY_DRUM,       AI_Smart_BellyDrum
+	dbw EFFECT_MIRROR_COAT,      AI_Smart_MirrorCoat
+	dbw EFFECT_EARTHQUAKE,       AI_Smart_Earthquake
+	dbw EFFECT_GUST,             AI_Smart_Gust
+	dbw EFFECT_SOLARBEAM,        AI_Smart_Solarbeam
+	dbw EFFECT_THUNDER,          AI_Smart_Thunder
+	dbw EFFECT_FLY,              AI_Smart_Fly
+	dbw EFFECT_HAIL,             AI_Smart_Hail
+	dbw EFFECT_FACADE,           AI_Smart_Facade
+	dbw EFFECT_HEX,              AI_Smart_Hex
+	dbw EFFECT_HURRICANE,        AI_Smart_Hurricane
+	dbw EFFECT_FREEZE_DRY,       AI_Smart_FreezeDry
+	dbw EFFECT_BODY_PRESS,       AI_Smart_BodyPress
+	dbw EFFECT_AVALANCHE,        AI_Smart_Avalanche
+	dbw EFFECT_BRICK_BREAK,      AI_Smart_BrickBreak
+	dbw EFFECT_PARALYZE_HIT,     AI_Smart_ParalyzeTarget
+	dbw EFFECT_ACROBATICS,       AI_Smart_Acrobatics
+	dbw EFFECT_TRICK,            AI_Smart_Trick
+	dbw EFFECT_VENOSHOCK,        AI_Smart_Venoshock
+	dbw EFFECT_DRAGON_DANCE,     AI_Smart_DragonDance
+	dbw EFFECT_CALM_MIND,        AI_Smart_CalmMind
+	dbw EFFECT_QUIVER_DANCE,     AI_Smart_QuiverDance
+	dbw EFFECT_ATTACK_UP_2,      AI_Smart_SwordsDance
+	dbw EFFECT_SP_ATK_UP_2,      AI_Smart_NastyPlot
+	dbw EFFECT_BULK_UP,          AI_Smart_BulkUp
+	dbw EFFECT_BARRIER,          AI_Smart_Barrier
+	dbw EFFECT_SPEED_UP_2,       AI_Smart_Agility
+	dbw EFFECT_SPIKES,           AI_Smart_Spikes
+	dbw EFFECT_STEALTH_ROCK,     AI_Smart_StealthRock
+    dbw EFFECT_TOXIC_SPIKES,     AI_Smart_ToxicSpikes
+    dbw EFFECT_STICKY_WEB,       AI_Smart_StickyWeb
+    dbw EFFECT_FLINCH_HIT,       AI_Smart_Flinch
+    dbw EFFECT_DEFENSE_UP,       AI_Smart_LesserStatChange
+    dbw EFFECT_FOCUS_ENERGY,     AI_Smart_LesserStatChange
+    dbw EFFECT_SAFEGUARD,        AI_Smart_LesserStatChange
     dbw EFFECT_MIST,             AI_Smart_LesserStatChange
-    dbw EFFECT_DEFENSE_CURL,     AI_Smart_LesserStatChange ; added
-    dbw EFFECT_DEFOG,            AI_Smart_Defog ; added
-    dbw EFFECT_TRICK_ROOM,       AI_Smart_TrickRoom ; added
-    dbw EFFECT_BURN,             AI_Smart_Burn ; added
+    dbw EFFECT_DEFENSE_CURL,     AI_Smart_LesserStatChange
+    dbw EFFECT_DEFOG,            AI_Smart_Defog
+    dbw EFFECT_TRICK_ROOM,       AI_Smart_TrickRoom
+    dbw EFFECT_BURN,             AI_Smart_Burn
     dbw EFFECT_BURN_HIT,         AI_Smart_BurnTarget
-    dbw EFFECT_TAUNT,            AI_Smart_Taunt ; added
-	dbw EFFECT_SUCKER_PUNCH,     AI_Smart_SuckerPunch ; added
-	dbw EFFECT_FURY_DRIVE,       AI_Smart_FuryDrive ; added
+    dbw EFFECT_TAUNT,            AI_Smart_Taunt
+	dbw EFFECT_SUCKER_PUNCH,     AI_Smart_SuckerPunch
+	dbw EFFECT_FURY_DRIVE,       AI_Smart_FuryDrive
 	dbw EFFECT_RECOIL_HIT,       AI_Smart_RecoilHit
 	dbw EFFECT_RECOIL_DEF_DN_HIT,AI_Smart_RecoilHit
 	dbw EFFECT_FLARE_BLITZ,      AI_Smart_RecoilHit
@@ -1371,7 +1371,6 @@ endr
 
 AI_Smart_Explosion:
 ; explosion
-
 ; never use against ghost types
 	ld a, [wBattleMonType1]
 	cp GHOST
@@ -2613,14 +2612,12 @@ AI_Smart_Flail:
 AI_Smart_HealBell:
 ; dismiss this move if none of the enemy's pokemon are statused
 ; encourage this move if any of the enemy's pokemon are statused
-
 	push hl
 	ld a, [wOTPartyCount]
 	ld b, a
 	ld c, 0
 	ld hl, wOTPartyMon1HP
 	ld de, PARTYMON_STRUCT_LENGTH
-
 .loop
 	push hl
 	ld a, [hli]
@@ -2634,7 +2631,6 @@ AI_Smart_HealBell:
 	ld a, [hl]
 	or c
 	ld c, a
-
 .next
 	pop hl
 	add hl, de
