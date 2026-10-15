@@ -1806,7 +1806,8 @@ ReturnToMapWithSpeechTextbox::
 	call GetSGBLayout
 	farcall LoadOW_BGPal7
 	call UpdateTimePals
-	farcall EnableDynPalUpdates
+	call GetSGBLayout
+	farcall LoadOW_BGPal7
 	call DelayFrame
 	ld a, $1
 	ldh [hMapAnims], a

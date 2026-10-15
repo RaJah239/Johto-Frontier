@@ -338,7 +338,12 @@ ResumeWeather::
 
 PrepareWeatherForFullScreen::
 	call ClearWeatherSprites
-	jp CancelWeatherFade
+	xor a
+	ld [wWeatherFadeSteps], a
+	ld [wWeatherFadeFrame], a
+	ld hl, wWeatherFlags
+	res WEATHER_FADE_ACTIVE_F, [hl]
+	ret
 
 LoadWeatherGraphics::
 ; Load the active particle tiles into VRAM bank 0.
