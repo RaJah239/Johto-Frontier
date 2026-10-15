@@ -28,6 +28,7 @@ CloseText::
 	res TEXT_STATE_F, [hl]
 	push af
 	newfarcall ResumeWeather
+	newfarcall PrepareWeatherForFullScreen
 	pop af
 	ret
 
