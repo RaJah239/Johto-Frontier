@@ -152,7 +152,53 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_CLOSE_COMBAT,     AI_Smart_CloseCombat
 	dbw EFFECT_KNOCK_OFF,        AI_Smart_KnockOff
 	dbw EFFECT_GROWTH,           AI_Smart_Growth
+	dbw EFFECT_HIT_AND_SWITCH,   AI_Smart_HitAndSwitch
 	db -1 ; end
+
+AI_Smart_HitAndSwitch:
+; slightly prefer pivoting when the player can 2hko us,
+; but we cannot 2hko them
+	push hl
+	farcall FindAliveEnemyMons
+	pop hl
+	ret c
+	push hl
+	farcall CheckAnyOtherAlivePartyMons
+	pop hl
+	ret z
+
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	cp VOLT_SWITCH
+	jr nz, .check_damage_race
+
+; do not volt switch into ground-types
+	ld a, [wBattleMonType1]
+	cp GROUND
+	jp z, AIDiscourageMove
+	ld a, [wBattleMonType2]
+	cp GROUND
+	jp z, AIDiscourageMove
+
+; do not volt switch into electric-immune ability target
+	ld a, [wBattleMonSpecies]
+	push hl
+	push de
+	push bc
+	ld hl, GroundedPokemon_AI
+	call IsInByteArray
+	pop bc
+	pop de
+	pop hl
+	jmp c, AIDiscourageMove
+	jr .check_damage_race
+
+.check_damage_race
+	call CanPlayer2HKO
+	ret nc
+	call CanAI2HKO
+	ret c
+	dec [hl]
+	ret
 
 AI_Smart_Growth:
 ; discourage if player can ko at current HP
