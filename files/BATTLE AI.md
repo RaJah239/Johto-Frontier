@@ -2,7 +2,7 @@
 
 ## General Information
 - The AI *does not* read the player’s input
-- The AI *knows* all of the player’s moves and items
+- The AI *knows* all of the player’s moves and held items
 - The player can view the enemy’s moves and items via the ‘Info’ tab during trainer battles
 
 ## Extensively Improved AI (Credit: Pokémon Ambrosia)
