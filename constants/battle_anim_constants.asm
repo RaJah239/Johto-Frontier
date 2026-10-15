@@ -787,6 +787,7 @@ assert NUM_BATTLE_ANIM_OAMSETS <= FIRST_OAM_CMD, \
 	const BATTLE_BG_EFFECT_END_WATER                        ; 32
 	const BATTLE_BG_EFFECT_VIBRATE_MON                      ; 33
 	const BATTLE_BG_EFFECT_WOBBLE_PLAYER                    ; 34
+	const BATTLE_BG_EFFECT_DOUBLE_TEAM
 DEF NUM_BATTLE_BG_EFFECTS EQU const_value - 1
 
 ; wBattleAnimTileDict keys (see wram.asm)

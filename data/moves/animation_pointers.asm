@@ -198,7 +198,7 @@ BattleAnimations::
 	dw BattleAnim_PerishSong
 	dw BattleAnim_IcyWind
 	dw BattleAnim_SandTomb
-	dw BattleAnim_Snarl
+	dw BattleAnim_DoubleTeam
 	dw BattleAnim_FreezeDry
 	dw BattleAnim_Outrage
 	dw BattleAnim_Sandstorm

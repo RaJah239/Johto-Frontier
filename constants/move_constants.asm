@@ -202,7 +202,7 @@
 	const PERISH_SONG  ; c3
 	const ICY_WIND     ; c4
 	const SAND_TOMB    ; c5
-	const SNARL        ; c6
+	const DOUBLE_TEAM  ; c6
 	const FREEZE_DRY   ; c7
 	const OUTRAGE      ; c8
 	const SANDSTORM    ; c9

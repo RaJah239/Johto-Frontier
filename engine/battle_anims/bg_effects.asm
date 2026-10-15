@@ -123,6 +123,7 @@ BattleBGEffects:
 	dw BattleBGEffect_EndWater
 	dw BattleBGEffect_VibrateMon
 	dw BattleBGEffect_WobblePlayer
+	dw BattleBGEffect_DoubleTeam
 
 BattleBGEffect_End:
 	jr EndBattleBGEffect
@@ -1894,6 +1895,97 @@ BattleBGEffect_WobblePlayer:
 	ret
 
 .two
+	jmp BattleAnim_ResetLCDStatCustom
+
+BattleBGEffect_DoubleTeam:
+	call BattleBGEffects_AnonJumptable
+.anon_dw
+	dw .zero
+	dw .one
+	dw .two
+	dw .three
+	dw .four
+	dw .five
+
+.zero
+	call BattleBGEffects_IncAnonJumptableIndex
+	call BattleBGEffects_ClearLYOverrides
+	ld a, JP_INSTRUCTION
+	ld [hFunctionInstruction], a
+	ld a, LOW(rSCX)
+	call BattleBGEffect_SetLCDStatCustoms1
+	ldh a, [hLYOverrideEnd]
+	inc a
+	ldh [hLYOverrideEnd], a
+	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
+	add hl, bc
+	ld [hl], $0
+	ret
+
+.one
+	ld hl, BG_EFFECT_STRUCT_PARAM
+	add hl, bc
+	ld a, [hl]
+	cp $10
+	jr nc, .next
+	inc [hl]
+	jr .UpdateLYOverrides
+
+.three
+	ld hl, BG_EFFECT_STRUCT_PARAM
+	add hl, bc
+	ld a, [hl]
+	cp $ff
+	jr z, .next
+	dec [hl]
+	jr .UpdateLYOverrides
+
+.next
+	jmp BattleBGEffects_IncAnonJumptableIndex
+
+.two
+	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
+	add hl, bc
+	ld a, [hl]
+	ld d, $2
+	call BattleBGEffects_Sine
+	ld hl, BG_EFFECT_STRUCT_PARAM
+	add hl, bc
+	add [hl]
+	call .UpdateLYOverrides
+	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
+	add hl, bc
+	ld a, [hl]
+	add $4
+	ld [hl], a
+.four
+	ret
+
+.UpdateLYOverrides:
+	ld e, a
+	xor $ff
+	inc a
+	ld d, a
+	ld h, HIGH(wLYOverridesBackup)
+	ldh a, [hLYOverrideStart]
+	ld l, a
+	ldh a, [hLYOverrideEnd]
+	sub l
+	srl a
+	push af
+.loop
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	inc hl
+	dec a
+	jr nz, .loop
+	pop af
+	ret nc
+	ld [hl], e
+	ret
+
+.five
 	jmp BattleAnim_ResetLCDStatCustom
 
 BattleBGEffect_Rollout:

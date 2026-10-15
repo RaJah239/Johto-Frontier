@@ -210,7 +210,7 @@ Moves:
 	move PERISH_SONG,  EFFECT_PERISH_SONG,         0, NORMAL,        STATUS,   100,  8,   0
 	move ICY_WIND,     EFFECT_SPEED_DOWN_HIT,     60, ICE,           SPECIAL,  100, 24, 100
 	move SAND_TOMB,    EFFECT_TRAP_TARGET,        40, GROUND,        PHYSICAL,  95, 32,   0
-	move SNARL,        EFFECT_SP_ATK_DOWN_HIT,    55, DARK,          SPECIAL,  100, 24, 100
+	move DOUBLE_TEAM,  EFFECT_EVASION_UP,          0, NORMAL,        STATUS,   100, 15,   0
 	move FREEZE_DRY,   EFFECT_FREEZE_DRY,         70, ICE,           SPECIAL,  100, 32,  10
 	move OUTRAGE,      EFFECT_RAMPAGE,           120, DRAGON,        PHYSICAL, 100, 16,   0
 	move SANDSTORM,    EFFECT_SANDSTORM,           0, ROCK,          STATUS,   100,  8,   0

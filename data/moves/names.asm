@@ -196,7 +196,7 @@ MoveNames::
 	li "Perish Song"
 	li "Icy Wind"
 	li "Sand Tomb"
-	li "Snarl"
+	li "Double Team"
 	li "Freeze-Dry"
 	li "Outrage"
 	li "Sandstorm"

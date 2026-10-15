@@ -197,7 +197,7 @@ MoveDescriptions::
 	dw PerishSongDescription
 	dw IcyWindDescription
 	dw SandTombDescription
-	dw SnarlDescription
+	dw DoubleTeamDescription
 	dw FreezeDryDescription
 	dw OutrageDescription
 	dw SandstormDescription
@@ -339,9 +339,9 @@ TackleDescription:
 	db   "A full-body charge"
 	line "attack.@"
 
-SnarlDescription:
-	db "An attack that"
-	line "lowers Sp.Atk.@"
+DoubleTeamDescription:
+	db   "Increases evasion"
+	line "by 1 stage.@"
 
 FireSpinDescription:
 SandTombDescription:

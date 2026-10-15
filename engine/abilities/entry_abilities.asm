@@ -1323,8 +1323,8 @@ HandleInfernalHowl:
 	bit BATTLE_SCENE, a
 	jr nz, .skip_anim
 
-	; play snarl animation
-	ld de, SNARL
+	; play growl animation
+	ld de, GROWL
 	farcall Call_PlayBattleAnim
 
 .skip_anim

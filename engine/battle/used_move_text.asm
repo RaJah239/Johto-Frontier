@@ -199,7 +199,7 @@ MoveTable:
 	db PERISH_SONG  ; c3
 	db ICY_WIND     ; c4
 	db SAND_TOMB    ; c5
-	db SNARL        ; c6
+	db DOUBLE_TEAM  ; c6
 	db FREEZE_DRY   ; c7
 	db OUTRAGE      ; c8
 	db SANDSTORM    ; c9
