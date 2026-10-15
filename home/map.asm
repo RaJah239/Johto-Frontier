@@ -1783,6 +1783,7 @@ FinishExitMenu::
 	farcall LoadOW_BGPal7
 	call WaitBGMap2
 	farcall FadeInPalettes_EnableDynNoApply
+	farcall PrepareWeatherForFullScreen
 	jmp EnableSpriteUpdates
 
 ReturnToMapWithSpeechTextbox::
