@@ -1282,8 +1282,8 @@ Pokedex_UpdateSearchScreen:
 .ArrowCursorData:
 	db D_UP | D_DOWN, 5
 	dwcoord 2, 4  ; AREA SEARCH
-	dwcoord 2, 6  ; TYPE 1
-	dwcoord 2, 8  ; TYPE 2
+	dwcoord 2, 7  ; TYPE 1
+	dwcoord 2, 9  ; TYPE 2
 	dwcoord 2, 12 ; TYPE SEARCH
 	dwcoord 2, 14 ; CANCEL
 
@@ -2144,13 +2144,13 @@ Pokedex_DrawSearchScreenBG:
 	hlcoord 0, 1
 	ld de, .Title
 	call Pokedex_PlaceString
-	hlcoord 8, 6
+	hlcoord 8, 7
 	ld de, .TypeLeftRightArrows
 	call Pokedex_PlaceString
-	hlcoord 8, 8
+	hlcoord 8, 9
 	ld de, .TypeLeftRightArrows
 	call Pokedex_PlaceString
-	hlcoord 3, 6
+	hlcoord 3, 7
 	ld de, .Types
 	call PlaceString
 	hlcoord 3, 4
@@ -2849,10 +2849,10 @@ Pokedex_PlaceSearchScreenTypeStrings:
 	ld a, " "
 	call Pokedex_FillBox
 	ld a, [wDexSearchMonType1]
-	hlcoord 9, 6
+	hlcoord 9, 7
 	call Pokedex_PlaceTypeString
 	ld a, [wDexSearchMonType2]
-	hlcoord 9, 8
+	hlcoord 9, 9
 	call Pokedex_PlaceTypeString
 	ld a, $1
 	ldh [hBGMapMode], a
