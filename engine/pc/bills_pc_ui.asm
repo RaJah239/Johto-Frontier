@@ -866,7 +866,45 @@ MoveCurMonToBox:
 	push bc
 	call BillsPC_PerformQuickAnim
 	pop bc
+	call CheckPartyShift
+	; Refresh the Pokepic panel (and mon data) to reflect the mon that now
+	; occupies the cursor's slot, or blank it if the slot is now empty.
 	; fallthrough
+
+GetCursorMon:
+; Prints data about Pokémon at cursor if nothing is held (underline to force).
+; Returns z if cursor is on an empty pkmn slot.
+	; Only handle box arrows if we're holding a mon
+	call BillsPC_GetCursorHeldSlot
+	bit 7, b
+	jr nz, _GetCursorMon
+	inc c
+	dec c
+	jr z, _GetCursorMon
+
+	call BillsPC_UpdateCursorLocation
+	; fallthrough
+BillsPC_SetBoxArrows:
+	ld a, [wBillsPC_CursorPos]
+	cp $10
+	jr c, .box_cursors
+
+	; Clear box switch arrows.
+	ld a, " "
+	hlcoord 8, 5
+	ld [hl], a
+	hlcoord 18, 5
+	ld [hl], a
+	xor a
+	ret
+
+.box_cursors
+	hlcoord 8, 5
+	ld [hl], "◀"
+	hlcoord 18, 5
+	ld [hl], "▶"
+	ret
+
 CheckPartyShift:
 ; Shifts entries around to ensure there are no blank party entries.
 ; This is a purely graphical effect, internal PC functions has already
@@ -908,40 +946,6 @@ CheckPartyShift:
 	ld h, a
 	ld a, [hl]
 	and a
-	ret
-
-GetCursorMon:
-; Prints data about Pokémon at cursor if nothing is held (underline to force).
-; Returns z if cursor is on an empty pkmn slot.
-	; Only handle box arrows if we're holding a mon
-	call BillsPC_GetCursorHeldSlot
-	bit 7, b
-	jr nz, _GetCursorMon
-	inc c
-	dec c
-	jr z, _GetCursorMon
-
-	call BillsPC_UpdateCursorLocation
-	; fallthrough
-BillsPC_SetBoxArrows:
-	ld a, [wBillsPC_CursorPos]
-	cp $10
-	jr c, .box_cursors
-
-	; Clear box switch arrows.
-	ld a, " "
-	hlcoord 8, 5
-	ld [hl], a
-	hlcoord 18, 5
-	ld [hl], a
-	xor a
-	ret
-
-.box_cursors
-	hlcoord 8, 5
-	ld [hl], "◀"
-	hlcoord 18, 5
-	ld [hl], "▶"
 	ret
 
 _GetCursorMon:
