@@ -49,8 +49,14 @@ GGR50Crystal:
 	clearevent EVENT_GG_PRIZE_HYPER_EV_UP
 	; maximise money
 	givemoney YOUR_MONEY, MAX_MONEY
+	callasm FinishGrandGauntlet
 	playsound SFX_WARP_TO
 	special FadeOutPalettes
 	waitsfx
 	warp BATTLE_PLAZA_GRAND_GAUNTLET, 3, 13
 	end
+
+FinishGrandGauntlet:
+	xor a
+	ld [wGrandGauntletRun], a
+	ret
