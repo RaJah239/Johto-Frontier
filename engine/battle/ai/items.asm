@@ -442,6 +442,11 @@ CheckSetUp:
 	ret
 
 CheckPlayerStatAtPlus4:
+; don't check for +4 boost if evasion is at level 2 or more
+	ld a, [wEnemyEvaLevel]
+	cp BASE_STAT_LEVEL + 2
+	ret nc
+
 ; returns carry if any stat level of the player's active mon is +4 or higher
 	ld hl, wPlayerStatLevels
 	ld b, 7 ; ATTACK .. EVASION
