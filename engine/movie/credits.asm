@@ -320,7 +320,7 @@ ParseCredits:
 	call .get
 	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes
-	call PlaceString
+	call Credits_PlaceString
 	jr .loop
 
 .theend
@@ -404,6 +404,14 @@ ParseCredits:
 	pop de
 	pop hl
 	ret
+
+Credits_PlaceString:
+; The copyright string is raw tile indices (it starts with the "©" tile,
+; COPYRIGHT_TILE), not text, so it bypasses PlaceString's text dictionary.
+	ld a, [de]
+	cp COPYRIGHT_TILE
+	jmp z, PlaceTileString
+	jmp PlaceString
 
 ConstructCreditsTilemap:
 	xor a

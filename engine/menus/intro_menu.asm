@@ -1243,7 +1243,7 @@ Copyright:
 	call Request2bpp
 	hlcoord 2, 7
 	ld de, CopyrightString
-	jmp PlaceString
+	jmp PlaceTileString ; raw tile indices, not text
 
 ; The screen is made of pre-rendered tiles, so the string holds raw tile
 ; indices. They are kept at $80 and up: PlaceNextChar feeds every byte below
