@@ -690,6 +690,8 @@ PCItemsJoypad:
 	jr z, .a_1
 	cp SELECT
 	jr z, .select_1
+	cp START
+	jr z, .sort
 	jr .next
 
 .moving_stuff_around
@@ -724,6 +726,10 @@ PCItemsJoypad:
 	scf
 	ret
 
+.sort
+	farcall Pack_SortMenu
+	jr .next
+
 .PCItemsMenuData:
 	db MENU_BACKUP_TILES ; flags
 	menu_coords 4, 1, 18, 10
@@ -731,7 +737,9 @@ PCItemsJoypad:
 	db 1 ; default option
 
 .MenuData:
-	db SCROLLINGMENU_ENABLE_SELECT | SCROLLINGMENU_ENABLE_FUNCTION3 | SCROLLINGMENU_DISPLAY_ARROWS ; flags
+; SCROLLINGMENU_ENABLE_START lets START be reported to PCItemsJoypad, which
+; opens the same Custom/Alpha sort menu the bag uses.
+	db SCROLLINGMENU_ENABLE_SELECT | SCROLLINGMENU_ENABLE_FUNCTION3 | SCROLLINGMENU_DISPLAY_ARROWS | SCROLLINGMENU_ENABLE_START ; flags
 	db 4, 8 ; rows, columns
 	db SCROLLINGMENU_ITEMS_QUANTITY ; item format
 	dbw 0, wNumPCItems

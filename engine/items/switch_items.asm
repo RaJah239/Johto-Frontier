@@ -346,6 +346,13 @@ SortItemsInBag:
 ; the row the player just picked in the pack's sort menu:
 ;   1: ItemNameOrder  - the hand-made "Custom" order
 ;   2: ItemAlphaOrder - alphabetical by item name
+;
+; TMs are item ids past NUM_ITEMS (TM01 is the first, up to TM50) and are
+; not listed in either table, so a lookup would run off the end of the
+; table and land on some arbitrary byte. Give them their own item id as the
+; sort index instead: it is greater than every listed item's table position,
+; so they sort after the listed items, and equal to their item constant, so
+; they keep TM01, TM02, ... order in both sort modes.
 GetSortingItemIndex:
 	push bc
 	call ItemSwitch_GetNthItem
@@ -355,6 +362,12 @@ GetSortingItemIndex:
 	inc a
 	jr z, .done
 	ld c, [hl]
+; TMs are the only items with an id at or past TM01 (normal items stop at
+; NUM_ITEMS); index them by their item id.
+	ld a, c
+	cp TM01
+	ld b, c
+	jr nc, .done
 	ld b, 0
 	ld hl, ItemNameOrder
 	ld a, [wMenuCursorY]

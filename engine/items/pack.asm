@@ -1415,13 +1415,21 @@ Pack_SortMenu:
 ; Ask how to sort the bag, then sort it. Always returns with carry set, as
 ; Pack_InterpretJoypad expects; on B nothing is sorted.
 ; VerticalMenu's CopyMenuData clobbers all of wMenuData (it's a union),
-; including the bag list pointer and item format that the sort reads
-; through ItemSwitch_GetNthItem. Save the scrolling menu's data pointer
-; and re-copy it afterwards, the same way ScrollingMenu does on entry.
+; including the list pointer and item format that the sort reads through
+; ItemSwitch_GetNthItem. Save the scrolling menu's data pointer and
+; re-copy it afterwards, the same way ScrollingMenu does on entry.
 	ld a, [wMenuDataPointer]
 	ld c, a
 	ld a, [wMenuDataPointer + 1]
 	ld b, a
+	push bc
+; The scrolling menu may live in a different bank than this routine -- the
+; PC item list is in bank 5, but this runs out of bank 4 -- and
+; CopyMenuData reads wMenuDataPointer through the *current* bank. Save the
+; data's bank as well, and copy it back out of the right one below.
+	ld a, [wMenuDataBank]
+	ld c, a
+	ld b, 0
 	push bc
 	ld hl, MenuHeader_SortItems
 	call LoadMenuHeader
@@ -1429,10 +1437,17 @@ Pack_SortMenu:
 	call ExitMenu
 	pop bc
 	ld a, c
+	ld [wMenuDataBank], a
+	pop bc
+	ld a, c
 	ld [wMenuDataPointer], a
 	ld a, b
 	ld [wMenuDataPointer + 1], a
-	call CopyMenuData
+; CopyMenuData dereferences wMenuDataPointer in whichever bank is mapped, so
+; run it in the bank the menu data actually lives in.
+	ld a, [wMenuDataBank]
+	ld hl, CopyMenuData
+	rst FarCall
 	ret c ; B was pressed: don't sort anything
 	; VerticalMenu leaves the chosen row in wMenuCursorY, and
 	; GetSortingItemIndex reads it back to pick the sort order.
