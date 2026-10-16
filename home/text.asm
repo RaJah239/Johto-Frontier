@@ -296,6 +296,8 @@ PlaceDictWord:
 ; string (text compression, see constants/text_dict_charmap.asm), or the
 ; character itself if it has none.
 	push de
+	ld b, a ; keep the character: a control-code dict entry such as <BSP>
+	        ; may have replaced a before we got here; .literal prints it back
 	ld e, a
 	ld d, 0
 	ldh a, [hROMBank]
@@ -324,7 +326,7 @@ PlaceDictWord:
 	pop af
 	rst Bankswitch
 	pop de
-	ld a, [de]
+	ld a, b
 	jr PlaceLiteralChar
 
 MACRO print_name
