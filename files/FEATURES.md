@@ -24,7 +24,7 @@
 - Display seconds in PokéGear and Main Menu
 - All Bag pockets loop when scrolling: Up on the first item jumps to the bottom of the list and Down on the last row jumps back to the top
 - Fruit and Battle pockets added + colored Bag Tabs for easier navigation
-- Press Start to sort items (Custom or Alphabetical) in Pack pockets (Item, Ball, Fruit, Key and Battle) in and out of battles
+- Press Start to sort items (Custom or Alphabetical) in Pack pockets (Item, Ball, Fruit, Key and Battle) in and out of battles and the PC (with TMs being grouped together by number)
 - Cheat NPC to New Bark Town
 - Colored trainer card badges and added gym leader's names to their pictures
 - Exp.Share added to Option Menu - 100% Exp to all participants and 50% to non-participants until the player has entered the Hall of Fame, then the entire party receives 100% experience points
