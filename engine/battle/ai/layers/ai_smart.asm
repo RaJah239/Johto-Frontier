@@ -295,6 +295,10 @@ AI_Smart_CloseCombat:
 	ret
 
 AI_Smart_RecoilHit:
+	ld hl, RockHeadPokemon_AI
+	call IsInByteArray
+	ret c
+
 ; discourage this move if enemy's hp is lower than 50%
 	call AICheckEnemyHalfHP
 	ret c
