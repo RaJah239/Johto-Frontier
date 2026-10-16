@@ -342,6 +342,8 @@ PlacePartyMonTMHMCompatibility:
 	add hl, de
 	ld a, [hl]
 	ld [wCurPartySpecies], a
+	ld a, b
+	ld [wCurPartyMon], a
 	predef CanLearnTMHMMove
 	pop hl
 	call .PlaceAbleNotAble
@@ -357,18 +359,50 @@ PlacePartyMonTMHMCompatibility:
 	ret
 
 .PlaceAbleNotAble:
+; c = 1 if the mon can learn the TM/HM move.
+; If the mon already knows the move, display "Learned@" instead.
+	push bc
+	push hl
 	ld a, c
 	and a
-	jr nz, .able
-	ld de, .string_not_able
+	jr z, .not_able_compat
+
+; Can learn - check if already known.
+	ld a, [wCurPartyMon]
+	ld [wCurPartyMon], a
+	ld a, MON_MOVES
+	call GetPartyParamLocation
+	ld a, [wPutativeTMHMMove]
+	ld b, a
+	ld c, NUM_MOVES
+.known_loop
+	ld a, [hli]
+	cp b
+	jr z, .learned
+	dec c
+	jr nz, .known_loop
+; not learned
+	pop hl
+	pop bc
+	ld de, .string_able
 	ret
 
-.able
-	ld de, .string_able
+.learned
+	pop hl
+	pop bc
+	ld de, .string_learned
+	ret
+
+.not_able_compat
+	pop hl
+	pop bc
+	ld de, .string_not_able
 	ret
 
 .string_able
 	db "Able@"
+.string_learned
+	db "Learned@"
 .string_not_able
 	db "Not Able@"
 
