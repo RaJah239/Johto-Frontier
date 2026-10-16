@@ -113,6 +113,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - AmmonRoberts - Wild Pokémon drop held items after battle (no need to steal/trick/capture)
 - ErikAnpin - View Pokédex entry of selected Pokémon in Menu
 - ShinyDragonHunter - code optimisation
+- aaronjeter - text compression
 
 # Music
 - mmmmmmmmmmmmmmmmm - Cave of Origin, RBY Indigo Plateau themes, Vs. Hoenn Champion
@@ -161,3 +162,4 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - AmmonRoberts: https://github.com/AmmonRoberts/PokemonModernCrystal
 - ErikAnpin - https://github.com/ErikAnpin
 - ShinyDragonHunter - https://github.com/ShinyDragonHunter
+- aaronjeter - https://github.com/aaronjeter
