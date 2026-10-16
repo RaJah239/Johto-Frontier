@@ -203,21 +203,25 @@ ScrollingMenuJoyAction:
 
 ScrollingMenu_CanWrap:
 ; Carry set if this menu should loop its list.
-; STATICMENU_WRAP is only honored where the menu also declares the
-; ScrollingMenu left/right pair; that pair is what lets
-; ScrollingMenuJoyAction hand D_LEFT/D_RIGHT back to the caller (the bag
-; uses it to switch pockets). Other scrolling menus either leave
-; STATICMENU_WRAP clear or reuse that bit as SCROLLINGMENU_ENABLE_FUNCTION3,
-; so requiring all three keeps the loop to menus that declare the pair on
-; purpose: the bag's pocket menus (switch pockets) and the fast travel
-; warp menu (whose input loop ignores the returned D_LEFT/D_RIGHT).
+; Bit 5 of the flags is STATICMENU_WRAP to a static menu but
+; SCROLLINGMENU_ENABLE_FUNCTION3 to a scrolling one, so on its own it says
+; nothing: the mart and the move-details pages set it only to update their
+; description. A looping menu also sets one of the scrolling flags that
+; only a looping caller provides:
+;   - the ENABLE_LEFT / ENABLE_RIGHT pair (bits 2/3), which
+;     ScrollingMenuJoyAction hands back as D_LEFT/D_RIGHT: the bag's pocket
+;     menus and the fast travel warp menu switch on them, while the TM
+;     trader, the map list and the notebook just ignore them;
+;   - SCROLLINGMENU_ENABLE_START (bit 6): the PC item list, whose caller
+;     uses START to sort and ignores any left/right, so it declares no pair.
 	ld a, [wScrollingMenuListSize]
 	and a
 	jr z, .no ; nothing to loop over
 	ld a, [wMenuDataFlags]
-	and STATICMENU_WRAP | STATICMENU_ENABLE_LEFT_RIGHT | STATICMENU_ENABLE_START
-	cp STATICMENU_WRAP | STATICMENU_ENABLE_LEFT_RIGHT | STATICMENU_ENABLE_START
-	jr nz, .no
+	bit 5, a ; STATICMENU_WRAP / SCROLLINGMENU_ENABLE_FUNCTION3
+	jr z, .no
+	and STATICMENU_ENABLE_LEFT_RIGHT | STATICMENU_ENABLE_START | SCROLLINGMENU_ENABLE_START
+	jr z, .no
 	scf
 	ret
 

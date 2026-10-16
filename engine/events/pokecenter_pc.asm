@@ -738,7 +738,10 @@ PCItemsJoypad:
 
 .MenuData:
 ; SCROLLINGMENU_ENABLE_START lets START be reported to PCItemsJoypad, which
-; opens the same Custom/Alpha sort menu the bag uses.
+; opens the same Custom/Alpha sort menu the bag uses. It is also what
+; ScrollingMenu_CanWrap keys off to let the list loop top to bottom (and so
+; wrap from the first item down to Cancel and back); the PC declares no
+; ENABLE_LEFT/ENABLE_RIGHT pair, so it stays out of the left/right handling.
 	db SCROLLINGMENU_ENABLE_SELECT | SCROLLINGMENU_ENABLE_FUNCTION3 | SCROLLINGMENU_DISPLAY_ARROWS | SCROLLINGMENU_ENABLE_START ; flags
 	db 4, 8 ; rows, columns
 	db SCROLLINGMENU_ITEMS_QUANTITY ; item format
