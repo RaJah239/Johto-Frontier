@@ -268,7 +268,7 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 
 	ld a, [wcd4f]
 	ld [w3_d800], a
-	jmp BattleTowerRoomMenu_IncrementJumptable
+	jr BattleTowerRoomMenu_IncrementJumptable
 
 .b_button
 	call PlayClickSFX
