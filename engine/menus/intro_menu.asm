@@ -1238,25 +1238,29 @@ Copyright:
 	call ClearTilemap
 	call LoadFontsExtra
 	ld de, CopyrightGFX
-	ld hl, vTiles2 tile $60
+	ld hl, vTiles1 ; BG tiles $80-$9c (see ram/vram.asm)
 	lb bc, BANK(CopyrightGFX), 29
 	call Request2bpp
 	hlcoord 2, 7
 	ld de, CopyrightString
 	jmp PlaceString
 
+; The screen is made of pre-rendered tiles, so the string holds raw tile
+; indices. They are kept at $80 and up: PlaceNextChar feeds every byte below
+; TEXT_DICT_LIMIT ($80) through the text dictionary, which would otherwise
+; expand these tile numbers into garbage (see constants/text_dict_charmap.asm).
 CopyrightString:
 	; ©1995-2001 Nintendo
-	db   $60, $61, $62, $63, $64, $65, $66
-	db   $67, $68, $69, $6a, $6b, $6c
+	db   $80, $81, $82, $83, $84, $85, $86
+	db   $87, $88, $89, $8a, $8b, $8c
 
 	; ©1995-2001 Creatures inc.
-	next $60, $61, $62, $63, $64, $65, $66
-	db   $6d, $6e, $6f, $70, $71, $72, $7a, $7b, $7c
+	next $80, $81, $82, $83, $84, $85, $86
+	db   $8d, $8e, $8f, $90, $91, $92, $9a, $9b, $9c
 
 	; ©1995-2001 GAME FREAK inc.
-	next $60, $61, $62, $63, $64, $65, $66
-	db   $73, $74, $75, $76, $77, $78, $79, $7a, $7b, $7c
+	next $80, $81, $82, $83, $84, $85, $86
+	db   $93, $94, $95, $96, $97, $98, $99, $9a, $9b, $9c
 
 	db "@"
 
