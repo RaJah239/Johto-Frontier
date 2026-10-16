@@ -7,7 +7,15 @@
 ;- Rare Egg Hunter - got all odd eggs
 ;- Treasure Hunter - found all hidden items
 ;- Have hints around the world of achievements
-; etc.
+; Defeat all Gym leaders v2
+; Defeat all foreign leaders
+; Defeat all former E4 Members: Defeated the Old Guard
+; Grand Champion: only fightable after beating all Johto & Kanto gym leaders
+; Battled all overworld trainers - 
+; will have to use a lot or events or arrange them jn order to make a check
+; Found all OW items
+; Found all hidden items
+; Caught all legends etc. 
 
 _ScoreCard::
 ; Score Card: a 10-page book-style viewer for the score.
