@@ -308,18 +308,6 @@ BattleCommand_CheckTurn:
 	jmp EndTurn
 
 .no_disabled_move
-	; Assault Vest
-	; Taunt player when using Assault Vest
-	push hl
-	push bc
-	call GetUserItem
-	ld a, b
-	cp HELD_ASSAULT_VEST
-	pop bc
-	pop hl
-	jr nz, .checkTaunt
-	ld a, 255
-	ld [wPlayerTauntCount], a
 
 .checkTaunt
 	; Taunt
@@ -577,18 +565,6 @@ CheckEnemyTurn:
 	jr EndTurn
 
 .no_disabled_move
-	; Assault Vest
-	; Taunt enemy when using Assault Vest
-	push hl
-	push bc
-	call GetUserItem
-	ld a, b
-	cp HELD_ASSAULT_VEST
-	pop bc
-	pop hl
-	jr nz, .checkTaunt
-	ld a, 255
-	ld [wEnemyTauntCount], a
 
 .checkTaunt
 	; Taunt
