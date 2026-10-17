@@ -1,4 +1,4 @@
-# AI
+# Battle AI
 
 ## General Information
 - The AI *does not* read the player’s input
