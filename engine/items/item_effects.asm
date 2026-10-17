@@ -148,7 +148,7 @@ ItemEffects:
 	dw NoEffect            ; STAR_PIECE
 	dw NoEffect            ; BASEMENT_KEY
 	dw PokeBallEffect      ; SHINY_BALL
-	dw NoEffect            ; ITEM_87
+	dw NoEffect            ; EXPERT_BELT
 	dw NoEffect            ; SHINY_CHARM
 	dw VitaminEffect       ; ZINC
 	dw NoEffect            ; CHARCOAL

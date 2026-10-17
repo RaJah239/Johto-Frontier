@@ -1254,6 +1254,48 @@ BattleCommand_Stab:
 	and STAB_DAMAGE
 	or b
 	ld [wTypeModifier], a
+
+; ===================
+; === Expert Belt ===
+; ===================
+; Boost super effective (2x) and extremely effective (4x) hits by 20%.
+; It has to happen here rather than in BattleCommand_DamageCalc, which runs
+; before the type matchup (and therefore wTypeModifier) is known
+	call GetUserItem
+	ld a, b
+	cp HELD_EXPERT_BELT
+	ret nz
+
+	ld a, [wTypeModifier]
+	and EFFECTIVENESS_MASK
+	cp SUPER_EFFECTIVE
+	ret c
+
+; * 120
+; The running damage lives in wCurDamage; load it into hMultiplicand.
+	xor a
+	ldh [hMultiplicand + 0], a
+	ld hl, wCurDamage
+	ld a, [hli]
+	ldh [hMultiplicand + 1], a
+	ld a, [hl]
+	ldh [hMultiplicand + 2], a
+
+	ld a, 120
+	ldh [hMultiplier], a
+	call Multiply
+
+; / 100
+	ld a, 100
+	ldh [hDivisor], a
+	ld b, 4
+	call Divide
+
+	ld hl, wCurDamage
+	ldh a, [hQuotient + 2]
+	ld [hli], a
+	ldh a, [hQuotient + 3]
+	ld [hl], a
 	ret
 
 INCLUDE "data/abilities/type_sync_mons.asm"

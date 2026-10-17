@@ -135,7 +135,7 @@ ItemDescriptions:
 	dw StarPieceDesc
 	dw BasementKeyDesc
 	dw ShinyBallDesc
-	dw TeruSama26Desc
+	dw ExpertBeltDesc
 	dw ShinyCharmDesc
 	dw ZincDesc
 	dw CharcoalDesc
@@ -762,6 +762,10 @@ LuckyEggDesc:
 AegisGemDesc:
 	db   "Halves damage from"
 	next "the first hit.@"
+
+ExpertBeltDesc:
+	db   "20<%> boost to"
+	next "SE and EE hits.@"
 
 HeavyBootsDesc:
 	db   "Grants immunity"

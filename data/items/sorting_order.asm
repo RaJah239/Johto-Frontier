@@ -142,7 +142,7 @@ ItemNameOrder:
 
 
 ; NEXT POCKET
-; Battle Pocket - 59 total
+; Battle Pocket - 60 total
 
 ; Battle related Held Items
 	db AEGIS_GEM
@@ -159,6 +159,7 @@ ItemNameOrder:
 	db CLEANSE_TAG
 	db DRAGON_FANG
 	db EVERSTONE
+ 	db EXPERT_BELT
 	db FLAME_ORB
 	db FOCUS_BAND
 	db FOCUS_SASH
@@ -277,9 +278,8 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 10 total
+; Unused Items - 9 total
 	db EGG_TICKET
- 	db ITEM_E1
  	db ITEM_E2
  	db ITEM_E3
  	db ITEM_E4
@@ -300,7 +300,6 @@ ItemAlphaOrder:
 ; data/items/names.asm (case- and accent-insensitive; ties break on item id).
 ; NO_ITEM leads so it sorts to the top, like ItemNameOrder.
 	db NO_ITEM
-	db ITEM_E1
 	db ITEM_E2
 	db ITEM_E3
 	db ITEM_E4
@@ -353,6 +352,7 @@ ItemAlphaOrder:
 	db ESCAPE_ROPE
 	db ETHER
 	db EVERSTONE
+	db EXPERT_BELT
 	db FAST_BALL
 	db FIRE_STONE
 	db FLAME_ORB

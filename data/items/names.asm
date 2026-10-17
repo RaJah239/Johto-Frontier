@@ -134,7 +134,7 @@ ItemNames::
 	li "Star Piece"
 	li "Basement Key"
 	li "Shiny Ball"
-	li "?"
+	li "Expert Belt"
 	li "Shiny Charm"
 	li "Zinc"
 	li "Charcoal"
