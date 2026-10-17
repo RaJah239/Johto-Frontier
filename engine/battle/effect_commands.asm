@@ -689,6 +689,8 @@ BattleCommand_DoTurn:
 	cp HELD_CHOICE_BAND
 	jr z, .lock
 	cp HELD_CHOICE_SPECS
+	jr z, .lock
+	cp HELD_CHOICE_SCARF
 	jr nz, .continue
 
 .lock
@@ -5194,6 +5196,9 @@ CalcPlayerStats:
 	ld hl, ApplyFrbEffectOnSpclAttack
 	call CallBattleCore
 
+	ld hl, ApplyChoiceScarfEffectOnSpeed
+	call CallBattleCore
+
 	jmp BattleCommand_SwitchTurn
 
 CalcEnemyStats:
@@ -5213,6 +5218,9 @@ CalcEnemyStats:
 	call CallBattleCore
 
 	ld hl, ApplyFrbEffectOnSpclAttack
+	call CallBattleCore
+
+	ld hl, ApplyChoiceScarfEffectOnSpeed
 	call CallBattleCore
 
 	jmp BattleCommand_SwitchTurn

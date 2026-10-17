@@ -3380,6 +3380,8 @@ AI_Smart_Trick:
 	jmp z, DoIt
 	cp CHOICE_SPECS
 	jmp z, DoIt
+	cp CHOICE_SCARF
+	jmp z, DoIt
 	cp FLAME_ORB
 	jmp z, DoIt
 	cp TOXIC_ORB

@@ -95,6 +95,8 @@ BattleCommand_Thief:
 	cp CHOICE_BAND
 	jr z, .handle_choice_item
 	cp CHOICE_SPECS
+	jr z, .handle_choice_item
+	cp CHOICE_SCARF
 	jr nz, .not_choice_item
 
 .handle_choice_item

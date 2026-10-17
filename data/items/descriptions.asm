@@ -188,7 +188,7 @@ ItemDescriptions:
 	dw NomadSigilDesc
 	dw ScoreCardDesc
 	dw MusicPlayerDesc
-	dw TeruSama26Desc
+	dw ChoiceScarfDesc
 	dw TeruSama27Desc
 	dw TeruSama27Desc
 	dw TeruSama27Desc
@@ -820,6 +820,10 @@ LifeOrbDesc:
 
 ChoiceBandDesc:
 	db   "Boost Attack"
+	next "but lock moves.@"
+
+ChoiceScarfDesc:
+	db   "50<%> speed boost"
 	next "but lock moves.@"
 
 MetalCoatDesc:

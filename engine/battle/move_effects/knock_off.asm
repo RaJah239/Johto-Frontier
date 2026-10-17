@@ -69,6 +69,8 @@ BattleCommand_KnockOff:
 	cp CHOICE_BAND
 	jr z, .clear_encore
 	cp CHOICE_SPECS
+	jr z, .clear_encore
+	cp CHOICE_SCARF
 	jr nz, .continue
 
 .clear_encore

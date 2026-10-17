@@ -6482,7 +6482,8 @@ ApplyStatusEffectOnStats:
 	ldh [hBattleTurn], a
 	call ApplyPrzEffectOnSpeed
 	call ApplyFrbEffectOnSpclAttack
-	jr ApplyBrnEffectOnAttack
+	call ApplyChoiceScarfEffectOnSpeed
+	jmp ApplyBrnEffectOnAttack
 
 ApplyFrbEffectOnSpclAttack:
 	ldh a, [hBattleTurn]
@@ -6566,6 +6567,52 @@ ApplyPrzEffectOnSpeed:
 
 .enemy_ok
 	ld [hl], b
+	ret
+
+; ====================
+; === Choice Scarf ===
+; ====================
+ApplyChoiceScarfEffectOnSpeed:
+; boost the user's speed by 50% while it holds a choice scarf
+; runs right after the turn is switched
+; so hbattleturn is the opposite of the mon whose stats were just calculated
+; (same convention as ApplyPrzEffectOnSpeed)
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .enemy
+
+	ld a, [wBattleMonItem]
+	ld b, a
+	callfar GetItemHeldEffect
+	ld a, b
+	cp HELD_CHOICE_SCARF
+	ret nz
+	ld hl, wBattleMonSpeed + 1
+	jr .boost
+
+.enemy
+	ld a, [wEnemyMonItem]
+	ld b, a
+	callfar GetItemHeldEffect
+	ld a, b
+	cp HELD_CHOICE_SCARF
+	ret nz
+	ld hl, wEnemyMonSpeed + 1
+
+.boost
+	ld a, [hld] ; high byte
+	ld b, a
+	ld a, [hl] ; low byte
+	ld e, a
+	ld d, b
+	srl a
+	rr b ; ba = Speed / 2
+	add e
+	ld [hl], a ; low byte
+	inc hl
+	ld a, d
+	adc b
+	ld [hl], a ; high byte
 	ret
 
 ApplyBrnEffectOnAttack:

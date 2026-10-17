@@ -109,7 +109,7 @@ DEF MAIL_STRUCT_LENGTH_JP EQU $2a ; mailmsg_jp struct
 	const HELD_EVASION_UP
 	const HELD_GRIP_CLAW
 	const HELD_EXPERT_BELT
-	const_skip
+	const HELD_CHOICE_SCARF
 	const_skip
 	const_skip
 	const HELD_WISE_GLASSES

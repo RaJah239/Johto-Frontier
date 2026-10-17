@@ -201,7 +201,7 @@ ItemEffects:
 	dw NomadSigilEffect    ; NOMAD_SIGIL
 	dw ScoreCardEffect     ; SCORE_CARD
 	dw MusicPlayerEffect   ; MUSIC_PLAYER
-	dw NoEffect            ; ITEM_E2
+	dw NoEffect            ; CHOICE_SCARF
 	dw NoEffect            ; ITEM_E3
 	dw NoEffect            ; ITEM_E4
 	dw NoEffect            ; ITEM_E5

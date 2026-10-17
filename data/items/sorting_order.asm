@@ -155,6 +155,7 @@ ItemNameOrder:
 	db CATCH_CHARM
 	db CHARCOAL
 	db CHOICE_BAND
+	db CHOICE_SCARF
 	db CHOICE_SPECS
 	db CLEANSE_TAG
 	db DRAGON_FANG
@@ -278,9 +279,8 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 9 total
+; Unused Items - 8 total
 	db EGG_TICKET
- 	db ITEM_E2
  	db ITEM_E3
  	db ITEM_E4
  	db ITEM_E5
@@ -300,7 +300,6 @@ ItemAlphaOrder:
 ; data/items/names.asm (case- and accent-insensitive; ties break on item id).
 ; NO_ITEM leads so it sorts to the top, like ItemNameOrder.
 	db NO_ITEM
-	db ITEM_E2
 	db ITEM_E3
 	db ITEM_E4
 	db ITEM_E5
@@ -336,6 +335,7 @@ ItemAlphaOrder:
 	db CATCH_CHARM
 	db CHARCOAL
 	db CHOICE_BAND
+	db CHOICE_SCARF
 	db CHOICE_SPECS
 	db CLEANSE_TAG
 	db CLEAR_BELL

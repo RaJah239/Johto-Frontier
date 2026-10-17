@@ -187,7 +187,7 @@ ItemNames::
 	li "Nomad Sigil"
 	li "Score Card"
 	li "Music Player"
-	li "?"
+	li "Choice Scarf"
 	li "?"
 	li "?"
 	li "?"

@@ -772,6 +772,8 @@ DoesEnemyHaveChoiceItem:
 	jr z, .yes
 	cp HELD_CHOICE_SPECS
 	jr z, .yes
+	cp HELD_CHOICE_SCARF
+	jr z, .yes
 	pop de
 	pop hl
 	xor a
