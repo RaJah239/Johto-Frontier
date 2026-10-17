@@ -164,6 +164,12 @@ HandleMapBackground:
 	farjp PlaceMapNameSign
 
 CheckPlayerState:
+; treat an in-progress turn like an unfinished step
+; so it always completes first
+	ld a, [wPlayerStepType]
+	cp STEP_TYPE_TURN
+	jr z, .noevents
+
 	ld a, [wPlayerStepFlags]
 	bit PLAYERSTEP_CONTINUE_F, a
 	jr z, .events
