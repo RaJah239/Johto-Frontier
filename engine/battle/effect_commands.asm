@@ -308,6 +308,22 @@ BattleCommand_CheckTurn:
 	jmp EndTurn
 
 .no_disabled_move
+	; Assault Vest
+	; Block status moves (0 power) when holding Assault Vest
+	push hl
+	push bc
+	call GetUserItem
+	ld a, b
+	cp HELD_ASSAULT_VEST
+	pop bc
+	pop hl
+	jr nz, .checkTaunt
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	jr nz, .checkTaunt
+	call MoveDisabled
+	call CantMove
+	jmp EndTurn
 
 .checkTaunt
 	; Taunt
@@ -526,7 +542,7 @@ CheckEnemyTurn:
 	call DoEnemyDamage
 	call BattleCommand_RaiseSub
 	call CantMove
-	jr EndTurn
+	jmp EndTurn
 
 .not_confused
 	ld a, [wEnemySubStatus1]
@@ -565,6 +581,22 @@ CheckEnemyTurn:
 	jr EndTurn
 
 .no_disabled_move
+	; Assault Vest
+	; Block status moves (0 power) when holding Assault Vest
+	push hl
+	push bc
+	call GetUserItem
+	ld a, b
+	cp HELD_ASSAULT_VEST
+	pop bc
+	pop hl
+	jr nz, .checkTaunt
+	ld a, [wEnemyMoveStruct + MOVE_POWER]
+	and a
+	jr nz, .checkTaunt
+	call MoveDisabled
+	call CantMove
+	jr EndTurn
 
 .checkTaunt
 	; Taunt
