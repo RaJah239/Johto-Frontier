@@ -62,7 +62,7 @@ GrandGauntletItemList:
 	db 3, TWISTEDSPOON
 	db 3, WIDE_LENS
 	db 3, X_ACCURACY
-	db 3, X_EVADE
+	db 3, ITEM_PLACEHOLDER
 	db 3, ZOOM_LENS
 
 	; weather items - 18

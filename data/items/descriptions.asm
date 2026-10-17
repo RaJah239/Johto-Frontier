@@ -171,7 +171,7 @@ ItemDescriptions:
 	dw GorgeousBoxDesc
 	dw SunStoneDesc
 	dw PolkadotBowDesc
-	dw XEvadeDesc
+	dw PlaceholderDesc
 	dw UpGradeDesc
 	dw BerryDesc
 	dw GoldBerryDesc
@@ -468,9 +468,8 @@ HasteHerbDesc:
 	db   "Raises Speed at"
 	next "end of turn 1.@"
 
-XEvadeDesc:
-	db   "Raises Evasion at"
-	next "end of turn 1.@"
+PlaceholderDesc:
+	db   "?@"
 
 XAccuracyDesc:
 	db   "Raises accuracy at"

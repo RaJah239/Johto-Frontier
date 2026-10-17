@@ -184,7 +184,7 @@ ItemEffects:
 	dw GorgeousBoxEffect   ; GORGEOUS_BOX
 	dw EvoStoneEffect      ; SUN_STONE
 	dw NoEffect            ; POLKADOT_BOW
-	dw NoEffect            ; X_EVADE
+	dw NoEffect            ; ITEM_PLACEHOLDER
 	dw NoEffect            ; UP_GRADE
 	dw RestoreHPEffect     ; BERRY
 	dw Restore3RDHPEffect  ; GOLD_BERRY

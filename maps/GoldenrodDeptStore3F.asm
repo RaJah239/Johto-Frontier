@@ -40,17 +40,9 @@ GoldenrodDeptStore3FSuperNerdText:
 	cont "#mon."
 	done
 
-GoldenrodDeptStore3FRockerText:
+GoldenrodDeptStore3FRockerText: ; TODOTEXT
 	text "Do you use X Evade"
 	line "in battle?"
-
-	para "Some people think"
-	line "that's cheap."
-	
-	para "But… If it works,"
-	line "it works."
-
-	para "Am I right?"
 	done
 
 GoldenrodDeptStore3FTeacherText:

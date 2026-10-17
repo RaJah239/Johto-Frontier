@@ -38,14 +38,13 @@ MartGoldenrod2F2:
 	db -1 ; end
 
 MartGoldenrod3F:
-	db 7 ; # items
+	db 6 ; # items
 	db SUN_SHARD
 	db RAIN_SHARD
 	db FROST_SHARD
 	db SAND_SHARD
 	db HASTE_HERB
 	db X_ACCURACY
-	db X_EVADE
 	db -1 ; end
 
 MartGoldenrod4F:

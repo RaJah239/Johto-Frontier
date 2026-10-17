@@ -170,7 +170,7 @@ ItemNames::
 	li "Gorgeous Box"
 	li "Sun Stone"
 	li "Polkadot Bow"
-	li "X Evade"
+	li "?"
 	li "Up-Grade"
 	li "Berry"
 	li "Gold Berry"

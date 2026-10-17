@@ -19,7 +19,7 @@
 	const BASEMENT_KEY ; 85 ; to replace
 	const NORMAL_BOX   ; a7
 	const GORGEOUS_BOX ; a8
-	const X_EVADE      ; ab
+	const ITEM_PLACEHOLDER ; ab
 	const SQUIRTBOTTLE ; af
 	const RAINBOW_WING ; b2
 	const ITEM_E3
