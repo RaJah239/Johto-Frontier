@@ -142,9 +142,10 @@ ItemNameOrder:
 
 
 ; NEXT POCKET
-; Battle Pocket - 58 total
+; Battle Pocket - 59 total
 
 ; Battle related Held Items
+	db AEGIS_GEM
 	db AMULET_COIN
 	db ASSAULT_VEST
 	db BERRY_JUICE
@@ -232,7 +233,7 @@ ItemNameOrder:
 	db ROOT_FOSSIL
 
 ; NEXT POCKET
-; Key Items Pocket - 28 total
+; Key Items Pocket - 27 total
 ; Permanent Key Items
 ; Items that are possibly frequently used
 	db MUSIC_PLAYER
@@ -270,7 +271,6 @@ ItemNameOrder:
 
 ; Temporary Key Items
 	db BASEMENT_KEY
-	db CARD_KEY
 	db GS_BALL
 	db SQUIRTBOTTLE
 
@@ -309,6 +309,7 @@ ItemAlphaOrder:
 	db ITEM_E7
 	db ITEM_E8
 	db ITEM_E9
+	db AEGIS_GEM
 	db AMBROSIA
 	db AMULET_COIN
 	db ANTIDOTE
@@ -333,7 +334,6 @@ ItemAlphaOrder:
 	db BURNT_BERRY
 	db CALCIUM
 	db CARBOS
-	db CARD_KEY
 	db CATCH_CHARM
 	db CHARCOAL
 	db CHOICE_BAND

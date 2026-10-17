@@ -126,7 +126,7 @@ ItemNames::
 	li "Revival Herb"
 	li "Hard Stone"
 	li "Lucky Egg"
-	li "Card Key"
+	li "Aegis Gem"
 	li "Heavy Boots"
 	li "Egg Ticket"
 	li "Tangela Call"

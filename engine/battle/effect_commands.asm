@@ -2198,6 +2198,41 @@ BattleCommand_FailureText:
 	jmp EndMoveEffect
 
 BattleCommand_ApplyDamage:
+	call GetOpponentItem
+	ld a, [hl]
+	ld [wNamedObjectIndex], a
+	call GetItemName
+	ld a, b
+	cp HELD_AEGIS_GEM
+	jr nz, .check_sturdy
+
+; =========================
+; === Item: Aegis Gem =====
+; =========================
+; Halve the current 16-bit damage.
+	ld hl, wCurDamage
+	srl [hl]
+	inc hl
+	rr [hl]
+
+; Minimum damage of 1.
+	ld a, [wCurDamage]
+	ld b, a
+	ld a, [wCurDamage + 1]
+	or b
+	jr nz, .consume_aegis
+	inc a
+	ld [wCurDamage + 1], a
+
+.consume_aegis
+	callfar ConsumeHeldItem
+	farcall ItemRecoveryAnim
+	ld hl, AegisGemText
+	call StdBattleTextbox
+	ld c, 30
+	call DelayFrames
+
+.check_sturdy
 ; =======================
 ; === Ability: Sturdy ===
 ; =======================
@@ -2217,7 +2252,7 @@ BattleCommand_ApplyDamage:
 	cp HELD_FOCUS_SASH
 	jr nz, .damage
 
-; check if target is at full hp
+; Check if target is at full HP.
 .focus_sash_effect
 	farcall CheckOpponentFullHP
 	jr nz, .damage
@@ -2258,12 +2293,12 @@ BattleCommand_ApplyDamage:
 	dec a
 	ret z
 
-	; Focus Band/Sash or Sturdy text and animation
+; Focus Band/Sash or Sturdy text and animation.
 	call GetOpponentItem
 	ld a, [hl]
 	ld [wNamedObjectIndex], a
 
-	; Check which item/ability activated
+; Check which item/ability activated.
 	call GetItemName
 	ld a, b
 	cp HELD_FOCUS_BAND
@@ -2271,7 +2306,7 @@ BattleCommand_ApplyDamage:
 	cp HELD_FOCUS_SASH
 	jr z, .item_recovery
 
-	; Sturdy — skip item recovery animation
+; Sturdy — skip item recovery animation.
 	showdefensiveability SturdyText
 	ld hl, SturdyBattleText
 	jmp StdBattleTextbox

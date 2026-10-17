@@ -639,6 +639,11 @@ HungOnText:
 	text "!"
 	prompt
 
+AegisGemText:
+	text "Aegis Gem halved"
+	line "the damage!"
+	done
+
 InLoveWithText:
 	text "<USER>"
 	line "is in love with"

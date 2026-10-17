@@ -127,7 +127,7 @@ ItemDescriptions:
 	dw RevivalHerbDesc
 	dw HardStoneDesc
 	dw LuckyEggDesc
-	dw CardKeyDesc
+	dw AegisGemDesc
 	dw HeavyBootsDesc
 	dw EggTicketDesc
 	dw TangelaCallDesc
@@ -759,9 +759,9 @@ LuckyEggDesc:
 	db   "Earns extra EXP."
 	next "points.@"
 
-CardKeyDesc:
-	db   "Opens shutters in"
-	next "the RADIO TOWER.@"
+AegisGemDesc:
+	db   "Halves damage from"
+	next "the first hit.@"
 
 HeavyBootsDesc:
 	db   "Grants immunity"

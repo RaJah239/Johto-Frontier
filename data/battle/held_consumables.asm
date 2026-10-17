@@ -19,4 +19,5 @@ ConsumableEffects:
 	db HELD_SET_HAIL
 	db HELD_ACCURACY_UP
 	db HELD_EVASION_UP
+	db HELD_AEGIS_GEM
 	db -1 ; end
