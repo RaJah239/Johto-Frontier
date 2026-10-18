@@ -393,6 +393,10 @@ SwapPartyItem:
 	farcall PartyMenuSelect
 	bit 1, b
 	jr c, .DontSwap
+	; don't allow swapping items with eggs
+	ld a, [wCurPartySpecies]
+	cp EGG
+	jr z, .DontSwap
 	; wSwitchMon contains first selected pkmn
 	; wCurPartyMon contains second selected pkmn
 	; getting pkmn2 item and putting into stack item addr + item id
