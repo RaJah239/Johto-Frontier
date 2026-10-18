@@ -110,6 +110,11 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - All Pokémon obey regardless if traded or not
 - Can 100% run from any wild encounter
 - Can't run from wild Shiny Pokémon
+- Shiny Pokémon, like all other Pokémon can have all hidden power types except Normal and Fairy
+- Shiny Pokémon chance are now 1/256
+- Shiny icon added for both player and enemy's Pokémon in battle
+- Shiny icon added to naming screen
+- Wild Pokémon drop held items after battle (no need to steal/trick/capture)
 - Press Start in Battle Menu to go straight to the Pokémon menu
 - Press Select to view enemy types in Battle Menu
 - Displays type effectiveness in Battle Menu
@@ -117,10 +122,6 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Quadruple effective and ineffective battle texts added
 - Removed vanilla Crystal's the 25% failure chance for AI status moves
 - Removed vanilla Crystal's the Gym badges boosts
-- Shiny Pokémon chance are now 1/256
-- Shiny icon added for both player and enemy's Pokémon in battle
-- Shiny icon added to naming screen
-- Wild Pokémon drop held items after battle (no need to steal/trick/capture)
 - Stat screen Condition added to display levels of happiness
 - Fourth stat page with caught time, level, location, effort values per stat, core trait (hidden power type) and Press Select to view Abilities
 - Move Pokémon in party menu with Select button (only outside battles)
