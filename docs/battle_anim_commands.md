@@ -172,7 +172,10 @@ Does nothing. Unused.
 ## `$EE`: <code>anim_if_param_and <i>value</i>, <i>address</i></code>
 
 
-## `$EF`: <code>anim_jumpuntil <i>address</i></code>
+## `$E7`: `anim_clearopponenthud`
+the
+attacker's HUD, which is cleared before every animation and restored
+afterwards along with this one).
 
 Jumps to another script and decrements `param` until it reaches 0. Similar to `anim_loop`.
 

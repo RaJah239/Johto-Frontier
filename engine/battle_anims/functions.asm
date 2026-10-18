@@ -97,6 +97,7 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_Hurricane
 	dw BattleAnimFunc_RadialMoveOut_Slow
 	dw BattleAnimFunc_Flamethrower
+	dw BattleAnimFunc_RadialMoveOut_VerySlow
 	assert_table_length NUM_BATTLE_ANIM_FUNCS
 
 BattleAnimFunc_Null:
@@ -3878,6 +3879,38 @@ Step_VerySlow:
 	jmp nc, DeinitBattleAnimation
 	jr Rad_Move
 
+BattleAnimFunc_RadialMoveOut_VerySlow:
+	call BattleAnim_AnonJumptable
+
+	dw InitRadial
+	dw Step_VerySlowFar ; for Moonblast
+
+Step_VerySlowFar:
+	call Get_Rad_Pos
+	ld hl, 0.5 ; speed
+	call Set_Rad_Pos
+	cp 120 ; final position
+	jmp nc, DeinitBattleAnimation
+	; fallthrough
+
+Rad_Move:
+	ld hl, BATTLEANIMSTRUCT_PARAM
+	add hl, bc
+	ld e, [hl]
+	push de
+	ld a, e
+	call BattleAnim_Sine
+	ld hl, BATTLEANIMSTRUCT_YOFFSET
+	add hl, bc
+	ld [hl], a
+	pop de
+	ld a, e
+	call BattleAnim_Cosine
+	ld hl, BATTLEANIMSTRUCT_XOFFSET
+	add hl, bc
+	ld [hl], a
+	ret
+
 Step_Short:
 	call Get_Rad_Pos
 	ld hl, 6.0 ; speed
@@ -3902,24 +3935,6 @@ Set_Rad_Pos:
 	add hl, bc
 	ld [hli], a
 	ld [hl], e
-	ret
-
-Rad_Move:
-	ld hl, BATTLEANIMSTRUCT_PARAM
-	add hl, bc
-	ld e, [hl]
-	push de
-	ld a, e
-	call BattleAnim_Sine
-	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], a
-	pop de
-	ld a, e
-	call BattleAnim_Cosine
-	ld hl, BATTLEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
 	ret
 
 BattleAnimFunc_Hurricane:
