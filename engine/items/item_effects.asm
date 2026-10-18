@@ -259,6 +259,20 @@ PokeBallEffect:
 	cp BATTLETYPE_TUTORIAL
 	jmp z, .catch_without_fail
 
+	push bc
+	call GetHighestPartyLevel
+	ld c, a
+	ld a, [wEnemyMonLevel]
+	cp c
+	jr c, .not_too_strong
+	jr z, .not_too_strong
+	pop bc
+	ld hl, BallTooStrongText
+	jmp PrintText
+
+.not_too_strong
+	pop bc
+
 	; check if unown
 	ld a, [wEnemyMonSpecies]
 	cp UNOWN
@@ -788,6 +802,24 @@ ENDC
 	dec [hl]
 	ret
 
+GetHighestPartyLevel:
+	ld a, [wPartyCount]
+	ld d, a
+	ld e, 0
+	ld hl, wPartyMon1Level
+	ld bc, PARTYMON_STRUCT_LENGTH
+.next
+	ld a, [hl]
+	cp e
+	jr c, .ok
+	ld e, a
+.ok
+	add hl, bc
+	dec d
+	jr nz, .next
+	ld a, e
+	ret
+
 BallMultiplierFunctionTable:
 ; table of routines that increase or decrease the catch rate based on
 ; which ball is used in a certain situation.
@@ -1178,6 +1210,10 @@ BallAlmostHadItText:
 
 BallSoCloseText:
 	text_far _BallSoCloseText
+	text_end
+
+BallTooStrongText:
+	text_far _BallTooStrongText
 	text_end
 
 Text_GotchaMonWasCaught:

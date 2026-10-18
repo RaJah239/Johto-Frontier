@@ -790,6 +790,11 @@ _BallSoCloseText::
 	line "close too!"
 	prompt
 
+_BallTooStrongText::
+	text "Above party level!"
+	line "Can't capture it!"
+	prompt
+
 Text_BallCaught::
 	text "Gotcha! @"
 	text_ram wEnemyMonNickname
