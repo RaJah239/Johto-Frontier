@@ -298,7 +298,7 @@ PlacePartyMonStatus:
 	ret z
 	ld c, a
 	ld b, 0
-	hlcoord 5, 2
+	hlcoord 4, 2
 .loop
 	push bc
 	push hl
@@ -494,7 +494,7 @@ PlacePartyMonGender:
 	ret z
 	ld c, a
 	ld b, 0
-	hlcoord 12, 2
+	hlcoord 7, 2 ; directly to the left of the level
 .loop
 	push bc
 	push hl
@@ -507,15 +507,14 @@ PlacePartyMonGender:
 	xor a
 	ld [wMonType], a
 	call GetGender
-	ld de, .unknown
+	ld a, " " ; genderless
 	jr c, .got_gender
-	ld de, .male
+	ld a, "♂" ; male
 	jr nz, .got_gender
-	ld de, .female
-
+	ld a, "♀" ; female
 .got_gender
 	pop hl
-	call PlaceString
+	ld [hl], a
 .next
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
@@ -525,13 +524,6 @@ PlacePartyMonGender:
 	dec c
 	jr nz, .loop
 	ret
-
-.male
-	db "♂…Male@"
-.female
-	db "♀…Female@"
-.unknown
-	db "…Unknown@"
 
 PlacePartyMonMobileBattleSelection:
 	ld a, [wPartyCount]
