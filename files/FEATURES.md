@@ -151,6 +151,7 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Lose money proportional to number of badges and lead level Pokémon on whiteout
 - Quick Claw now has an activation text
 - Prevent burning fire types and frostbite on ice types
+- Burn and frostbite deal 1/16 max HP of damage each turn
 - Toxic never misses when used by a Poison type
 - Display TOX instead of PSN if badly poisoned
 - Trapping moves do 1/8 damage each turn
