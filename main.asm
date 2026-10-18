@@ -467,6 +467,7 @@ INCLUDE "engine/overworld/weather.asm"
 
 SECTION "Battle Tower Trainer Data", ROMX
 INCLUDE "data/battle_tower/unknown.asm"
+INCLUDE "engine/pokemon/party_menu_held_item_icons.asm"
 
 
 SECTION "Multiple Item Registering", ROMX
