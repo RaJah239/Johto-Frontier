@@ -232,6 +232,8 @@ TMHM_ShowTMMoveDescription:
 	jmp nc, .no_tmhm
 	ld [wTempTMHM], a
 	predef GetTMHMMove
+	farcall LoadTMHMIconPalette
+	call SetDefaultBGPAndOBP
 	ld a, [wTempTMHM]
 	ld [wCurSpecies], a
 

@@ -16,10 +16,11 @@ UpdateItemIconAndDescription::
 	jr _LoadItemIcon
 
 LoadTMHMIcon::
-	ld a, [wCurItem]
-	ld c, a
+; blit the TM/HM icon; its colors come from LoadTMHMIconPalette
+	ld hl, TMHMIcon
 	ld de, vTiles2 tile $06 ; pack icon window
-	jr _LoadItemIcon
+	lb bc, BANK(TMHMIcon), $9
+	jp DecompressRequest2bpp
 
 ClearTMHMIcon::
 	ld c, NO_ITEM
@@ -35,10 +36,14 @@ _LoadItemIcon:
 	ret
 
 DecompressItemIcon:
+; c = item id; ids of NUM_ITEMS + 1 and up (TMs, and the bag's
+; Cancel row, which reports $ff, ...) have no icon, so they get
+; the blank one, like in timkun55
 	ld a, c
-	cp TM01
-	ld hl, TMHMIcon
-	jr nc, .got_ptr
+	cp NUM_ITEMS + 1
+	jr c, .ok_id
+	xor a
+.ok_id
 	ld hl, ItemIconPointers
 	ld c, a
 	ld b, 0
@@ -47,7 +52,6 @@ DecompressItemIcon:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-.got_ptr
 	lb bc, BANK(BlankItemIcon), $9
 	jp DecompressRequest2bpp
 

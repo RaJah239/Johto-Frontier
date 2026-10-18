@@ -1264,5 +1264,102 @@ INCLUDE "gfx/pokegear/pokegear.pal"
 FemalePokegearPals:
 INCLUDE "gfx/pokegear/pokegear_f.pal"
 
+LoadTMHMIconPalette::
+; Load the TM icon's colors (BG palette 7 colors 1-2), tinted by the
+; type of the move that the TM teaches, like polishedcrystal.
+; wTempTMHM must hold the TM's move id beforehand (see GetTMHMMove).
+	ld a, [wTempTMHM]
+	dec a
+	ld hl, Moves + MOVE_TYPE
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	and TYPE_MASK
+	ld hl, TMHMTypeIconPals
+	ld c, a
+	ld b, 0
+rept 4
+	add hl, bc
+endr
+	ld de, wBGPals1 palette 7 + 2
+	ld bc, 4
+	call FarCopyColorWRAM
+	ld hl, .BlackColor
+	ld bc, 2
+	jp FarCopyColorWRAM
+
+.BlackColor:
+	RGB 00, 00, 00
+
+TMHMTypeIconPals:
+; Indexed by the type constants directly. Those are not contiguous
+; (BIRD, the unused types 10-18 and CURSE_TYPE), but a TM can only
+; teach a real type, so the unused slots repeat NORMAL's colors.
+	table_width PAL_COLOR_SIZE * 2, TMHMTypeIconPals
+; NORMAL
+	RGB 28, 28, 29
+	RGB 24, 24, 23
+; FIGHTING
+	RGB 30, 24, 18
+	RGB 31, 13, 00
+; FLYING
+	RGB 21, 29, 31
+	RGB 24, 24, 23
+; POISON
+	RGB 31, 25, 20
+	RGB 24, 11, 26
+; GROUND
+	RGB 31, 31, 18
+	RGB 28, 24, 08
+; ROCK
+	RGB 30, 27, 20
+	RGB 27, 21, 08
+; BIRD (unused)
+	RGB 28, 28, 29
+	RGB 24, 24, 23
+; BUG
+	RGB 27, 30, 24
+	RGB 17, 29, 13
+; GHOST
+	RGB 29, 25, 30
+	RGB 24, 11, 26
+; STEEL
+	RGB 26, 26, 25
+	RGB 05, 19, 19
+; unused types 10-18 and CURSE_TYPE
+	rept 10
+	RGB 28, 28, 29
+	RGB 24, 24, 23
+	endr
+; FIRE
+	RGB 31, 27, 18
+	RGB 31, 20, 03
+; WATER
+	RGB 21, 26, 30
+	RGB 00, 20, 29
+; GRASS
+	RGB 22, 30, 26
+	RGB 00, 29, 20
+; ELECTRIC
+	RGB 31, 28, 14
+	RGB 31, 24, 00
+; PSYCHIC
+	RGB 31, 26, 24
+	RGB 31, 20, 18
+; ICE
+	RGB 22, 30, 31
+	RGB 11, 26, 29
+; DRAGON
+	RGB 17, 24, 31
+	RGB 31, 21, 14
+; DARK
+	RGB 22, 26, 25
+	RGB 05, 19, 19
+; FAIRY
+	RGB 29, 23, 30
+	RGB 31, 17, 26
+	assert_table_length FAIRY + 1
+
 SlotMachinePals:
 INCLUDE "gfx/slots/slots.pal"
