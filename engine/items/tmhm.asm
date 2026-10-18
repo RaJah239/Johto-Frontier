@@ -229,7 +229,7 @@ TMHM_ShowTMMoveDescription:
 	call Textbox
 	ld a, [wCurItem]
 	cp NUM_TMS + NUM_HMS + 1
-	jr nc, TMHM_JoypadLoop
+	jmp nc, .no_tmhm
 	ld [wTempTMHM], a
 	predef GetTMHMMove
 	ld a, [wTempTMHM]
@@ -387,6 +387,11 @@ TMHM_ShowTMMoveDescription:
 .description
 	hlcoord 1, 15
 	predef PrintMoveDescription
+	farcall LoadTMHMIcon
+	jmp TMHM_JoypadLoop
+
+.no_tmhm
+	farcall ClearTMHMIcon
 	jmp TMHM_JoypadLoop
 
 ; UI elements

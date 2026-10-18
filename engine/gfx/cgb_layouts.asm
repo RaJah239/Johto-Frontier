@@ -1109,6 +1109,10 @@ _CGB_PackPals:
     lb bc, 3, 5
     ld a, $1
     call FillBoxCGB
+    hlcoord 1, 7, wAttrmap ; item icon
+    lb bc, 3, 3
+    ld a, $7
+    call FillBoxCGB
     call ApplyAttrmap
     call ApplyPals
     ld a, TRUE

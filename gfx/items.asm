@@ -3,12 +3,31 @@
 
 UpdateItemIconAndBagQuantity::
 	farcall MartPlaceInBagQuantity
-	jr _UpdateItemIcon
-
-_UpdateItemIcon:
 	ld a, [wCurItem]
 	ld c, a
-	ld de, vTiles2 tile $1d
+	ld de, vTiles2 tile $1d ; mart icon window
+	jr _LoadItemIcon
+
+UpdateItemIconAndDescription::
+	farcall UpdateItemDescription
+	ld a, [wCurItem]
+	ld c, a
+	ld de, vTiles2 tile $06 ; pack icon window
+	jr _LoadItemIcon
+
+LoadTMHMIcon::
+	ld a, [wCurItem]
+	ld c, a
+	ld de, vTiles2 tile $06 ; pack icon window
+	jr _LoadItemIcon
+
+ClearTMHMIcon::
+	ld c, NO_ITEM
+	ld de, vTiles2 tile $06 ; pack icon window
+	jr _LoadItemIcon
+
+_LoadItemIcon:
+; c = item id, de = VRAM destination
 	call DecompressItemIcon
 	farcall LoadItemIconPalette
 	call SetDefaultBGPAndOBP
