@@ -964,9 +964,60 @@ Options_Scaled_Exp:
 	jr .ShowCurrent
 .NotLocked:
 	call .GetCurrent
+
+	; Check if all 8 Johto badges are obtained
+	; If not, Normal (0) is unavailable - skip over it
+	ld a, [wJohtoBadges]
+	cp $ff
+	jr z, .AllBadges
+
+	; Not all badges: remap modes so 0=Scaled, 1=Zero
+	; Current c: 0=Normal, 1=Scaled, 2=Zero
+	; Remapped:  0->1, 1->1 (stay), 2->2
+	ld a, c
+	and a
+	jr z, .ForceScaled ; if Normal, force to Scaled
+	cp 1
+	jr z, .CheckInput  ; Scaled is fine
+	; c == 2 (Zero) is fine
+	jr .CheckInput
+
+.ForceScaled:
+	ld c, 1 ; force to Scaled
+
+.CheckInput:
 	ldh a, [hJoyPressed]
 	bit D_RIGHT_F, a
 	jr nz, .RightPressed
+	bit D_LEFT_F, a
+	jr z, .ShowCurrent
+; Left (no badges): Scaled -> Zero -> Scaled
+	ld a, c
+	cp 2
+	jr nz, .LeftToZero
+	ld c, 1
+	jr .Save
+
+.LeftToZero:
+	ld c, 2
+	jr .Save
+
+.RightPressed:
+; Right (no badges): Scaled -> Zero -> Scaled
+	ld a, c
+	cp 2
+	jr nz, .RightToZero
+	ld c, 1
+	jr .Save
+
+.RightToZero:
+	ld c, 2
+	jr .Save
+
+.AllBadges:
+	ldh a, [hJoyPressed]
+	bit D_RIGHT_F, a
+	jr nz, .RightPressedAll
 	bit D_LEFT_F, a
 	jr z, .ShowCurrent
 ; Left: Normal -> Zero -> Scaled -> Normal
@@ -980,7 +1031,7 @@ Options_Scaled_Exp:
 	dec a
 	jr .Save
 
-.RightPressed:
+.RightPressedAll:
 ; Right: Normal -> Scaled -> Zero -> Normal
 	ld a, c
 	cp 2
@@ -1656,7 +1707,7 @@ OptionsMenu_DrawDescription:
 .DescSound:           db "Music/BGB Audio:<LF>Mono, Stereo, Off.@"
 .DescRunningShoes:    db "Set default to<LF>run or walk.@"
 .DescAutoBicycle:     db "Automount Bicycle<LF>when outdoors.@"
-.DescScaledExp:       db "Normal, Scaled or<LF>Zero experience.@"
+.DescScaledExp:       db "Scaled. 8 badges:<LF>Normal or Zero.@"
 .DescQuickNurse:      db "#mon Center<LF>fast or slow heal.@"
 .DescWeatherText:     db "Weather lingers or<LF>ends text.@"
 .DescIntrosOutros:    db "Encounter & Battle<LF>intros & outros.@"
