@@ -357,7 +357,31 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Loop
 	dw BattleAnimCmd_Call
 	dw BattleAnimCmd_Ret
-	assert_table_length 243 - FIRST_BATTLE_ANIM_CMD
+	dw BattleAnimCmd_ClearOpponentHud
+	assert_table_length 244 - FIRST_BATTLE_ANIM_CMD
+
+BattleAnimCmd_ClearOpponentHud:
+; Clear the HUD of the target of the attack
+; (the opposite of ClearActorHud, which clears the attacker's HUD).
+; The script redraws both HUDs after the animation ends.
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .enemy
+
+.player
+	hlcoord 9, 7
+	lb bc, 5, 11
+	jr .clear
+
+.enemy
+	hlcoord 1, 0
+	lb bc, 4, 10
+
+.clear
+	call ClearBox
+	ld a, $1
+	ldh [hBGMapMode], a
+	ret
 
 BattleAnimCmd_Ret:
 	ld hl, wBattleAnimFlags

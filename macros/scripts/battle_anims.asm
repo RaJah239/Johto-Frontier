@@ -233,3 +233,8 @@ ENDM
 MACRO anim_ret
 	db anim_ret_command
 ENDM
+
+	const anim_clearopponenthud_command
+MACRO anim_clearopponenthud
+	db anim_clearopponenthud_command
+ENDM
