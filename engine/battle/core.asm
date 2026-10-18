@@ -7057,7 +7057,8 @@ GiveExperiencePoints:
 	call Divide
 
 	; Now apply level scaling to the result
-	; Scaling factor = ((2 * EnemyLevel + 10) ÷ (PlayerLevel + EnemyLevel + 10))
+	; Scaling factor = ((EnemyLevel + 10) / (PlayerLevel + 10))^3
+	; This aggressively penalizes higher-level Pokémon fighting lower-level enemies
 
 	; check if exp scaling is turned on
 	ld a, [wOptions2]
@@ -7073,21 +7074,17 @@ GiveExperiencePoints:
 	ld a, [hl]               ; a = player level
 	ld b, a
 
-	; Calculate scaling numerator: (2 × EnemyLevel + 10)
+	; Calculate scaling numerator: (EnemyLevel + 10)
 	ld a, [wEnemyMonLevel]
-	sla a
 	add 10
-	ld c, a                  ; c = numerator
+	ld c, a                  ; c = enemy_level + 10
 
-	; Calculate scaling denominator: (PlayerLevel + EnemyLevel + 10)
+	; Calculate scaling denominator: (PlayerLevel + 10)
 	ld a, b                  ; player level
-	ld d, a
-	ld a, [wEnemyMonLevel]
-	add d
 	add 10
-	ld d, a                  ; d = denominator
+	ld d, a                  ; d = player_level + 10
 
-	; Move quotient to multiplicand for scaling
+	; Move base exp quotient to multiplicand for scaling
 	ldh a, [hQuotient + 2]
 	ldh [hMultiplicand + 1], a
 	ldh a, [hQuotient + 3]
@@ -7095,12 +7092,48 @@ GiveExperiencePoints:
 	xor a
 	ldh [hMultiplicand + 0], a
 
-	; Multiply by scaling numerator
+	; --- First multiply: multiply by (EnemyLevel + 10) ---
 	ld a, c
 	ldh [hMultiplier], a
 	call Multiply
 
-	; Divide by scaling denominator
+	; --- First divide: divide by (PlayerLevel + 10) ---
+	ld a, d
+	ldh [hDivisor], a
+	ld b, 4
+	call Divide
+
+	; --- Second multiply: multiply by (EnemyLevel + 10) again ---
+	ldh a, [hQuotient + 1]
+	ldh [hMultiplicand + 0], a
+	ldh a, [hQuotient + 2]
+	ldh [hMultiplicand + 1], a
+	ldh a, [hQuotient + 3]
+	ldh [hMultiplicand + 2], a
+
+	ld a, c
+	ldh [hMultiplier], a
+	call Multiply
+
+	; --- Second divide: divide by (PlayerLevel + 10) again ---
+	ld a, d
+	ldh [hDivisor], a
+	ld b, 4
+	call Divide
+
+	; --- Third multiply: multiply by (EnemyLevel + 10) again (cubing the ratio) ---
+	ldh a, [hQuotient + 1]
+	ldh [hMultiplicand + 0], a
+	ldh a, [hQuotient + 2]
+	ldh [hMultiplicand + 1], a
+	ldh a, [hQuotient + 3]
+	ldh [hMultiplicand + 2], a
+
+	ld a, c
+	ldh [hMultiplier], a
+	call Multiply
+
+	; --- Third divide: divide by (PlayerLevel + 10) again ---
 	ld a, d
 	ldh [hDivisor], a
 	ld b, 4
