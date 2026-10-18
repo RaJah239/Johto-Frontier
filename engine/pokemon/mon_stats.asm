@@ -262,6 +262,33 @@ GetGender:
 	cp GENDER_UNKNOWN
 	jr z, .Genderless
 
+; Certain species are always one gender, regardless of the Attack DV bit.
+	ld a, [wCurPartySpecies]
+; always female
+	cp MILTANK
+	jr z, .AlwaysFemale
+	cp NIDORAN_F
+	jr z, .AlwaysFemale
+	cp NIDORINA
+	jr z, .AlwaysFemale
+	cp NIDOQUEEN
+	jr z, .AlwaysFemale
+	cp CHANSEY
+	jr z, .AlwaysFemale
+	cp BLISSEY
+	jr z, .AlwaysFemale
+	cp JYNX
+	jr z, .AlwaysFemale
+; always male
+	cp NIDORAN_M
+	jr z, .AlwaysMale
+	cp NIDORINO
+	jr z, .AlwaysMale
+	cp NIDOKING
+	jr z, .AlwaysMale
+	cp TAUROS
+	jr z, .AlwaysMale
+
 ; The Attack DV's top bit picks the gender: clear = male, set = female.
 ; DVs are rolled at random when the mon is created, so this is an even
 ; chance either way, and it stays fixed for the life of that mon (and is
@@ -270,10 +297,12 @@ GetGender:
 	and $80
 	jr z, .Male
 
+.AlwaysFemale:
 .Female:
 	xor a
 	ret
 
+.AlwaysMale:
 .Male:
 	ld a, 1
 	and a
