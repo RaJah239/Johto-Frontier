@@ -1207,7 +1207,7 @@ ResidualDamage:
 	xor a
 	ld [wNumHits], a
 	call Call_PlayBattleAnim_OnlyIfVisible
-	call GetEighthMaxHP
+	call GetSixteenthMaxHP
 	ld de, wPlayerToxicCount
 	ldh a, [hBattleTurn]
 	and a
