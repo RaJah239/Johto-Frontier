@@ -200,8 +200,9 @@ GetGender:
 ; a = 0: f = nc|z;  female
 ;        f = c:  genderless
 
-; This is determined by comparing the Attack and Speed DVs
-; with the species' gender ratio.
+; Gender comes from the top bit of the Attack DV. The species' gender
+; ratio no longer skews the odds, so every gendered species has an even
+; chance of being male or female.
 
 ; Figure out what type of monster struct we're looking at.
 
@@ -246,45 +247,28 @@ GetGender:
 	call AddNTimes
 
 .DVs:
-; Attack DV
-	ld a, [hli]
-	and $f0
-	ld b, a
-; Speed DV
-	ld a, [hl]
-	and $f0
-	swap a
-
-; Put our DVs together.
-	or b
-	ld b, a
-
-; We need the gender ratio to do anything with this.
-	push bc
+; Base data is only needed to tell genderless species apart; the ratio
+; itself is ignored.
+	push hl
 	ld a, [wCurPartySpecies]
 	dec a
 	ld hl, BaseData + BASE_GENDER
 	ld bc, BASE_DATA_SIZE
 	call AddNTimes
-	pop bc
-
 	ld a, BANK(BaseData)
 	call GetFarByte
-
-; The higher the ratio, the more likely the monster is to be female.
+	pop hl
 
 	cp GENDER_UNKNOWN
 	jr z, .Genderless
 
-	and a ; GENDER_F0?
+; The Attack DV's top bit picks the gender: clear = male, set = female.
+; DVs are rolled at random when the mon is created, so this is an even
+; chance either way, and it stays fixed for the life of that mon (and is
+; inherited by its offspring through the usual DV halving).
+	ld a, [hl]
+	and $80
 	jr z, .Male
-
-	cp GENDER_F100
-	jr z, .Female
-
-; Values below the ratio are male, and vice versa.
-	cp b
-	jr c, .Male
 
 .Female:
 	xor a
