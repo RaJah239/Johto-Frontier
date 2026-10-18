@@ -18,12 +18,8 @@ ENDM
 ; Pools were derived from the previous full-record table (136 pokemon):
 ; Elite = the regular 111 mons, Champ = the remaining 25.
 ;
-; nothing here should use hidden power
-; as the dv player copy mechanic doesn't work here
-; nor should shiny pokemon be put here
 ; effort values are maxed (252 per stat), DVs are rolled randomly per mon
 ; (see ExpandBattleTowerCompactMonToTemp)
-
 ; Legacy label retained for older references; new selection uses BattleTowerChallengePools.
 BattleTowerMons:
 
