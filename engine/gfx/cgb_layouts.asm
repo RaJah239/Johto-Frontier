@@ -59,6 +59,7 @@ CGBLayoutJumptable:
 	dw _CGB_MysteryGift
 	dw _CGB_Plain
 	dw _CGB_MusicPlayer
+	dw _CGB_BuyMenu
 	assert_table_length NUM_SCGB_LAYOUTS
 
 _CGB_BattleGrayscale:
@@ -1294,3 +1295,32 @@ _CGB_MusicPlayer:
 
 .MusicPlayerPalettes:
 INCLUDE "gfx/music_player/music_player.pal"
+
+_CGB_BuyMenu:
+	ld hl, MartMenuPals
+	ld de, wBGPals1
+	ld bc, 3 palettes
+	ld a, BANK(wBGPals1)
+	call FarCopyWRAM
+
+	call WipeAttrmap
+
+; price column
+	hlcoord 6, 4, wAttrmap
+	lb bc, 7, 1
+	ld a, $2
+	call FillBoxWithByte
+
+; item icon
+	hlcoord 1, 8, wAttrmap
+	lb bc, 3, 3
+	ld a, $7
+	call FillBoxWithByte
+
+	call InitPartyMenuOBPals
+	call ApplyAttrmap
+	call ApplyPals
+	ret
+
+MartMenuPals:
+INCLUDE "gfx/mart/mart.pal"

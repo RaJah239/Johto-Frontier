@@ -617,3 +617,7 @@ INCLUDE "engine/events/grand_gauntlet_items.asm"
 
 SECTION "Text Dictionary", ROMX
 INCLUDE "data/text/text_dictionary.asm"
+
+
+SECTION "Item Icons", ROMX
+INCLUDE "gfx/items.asm"

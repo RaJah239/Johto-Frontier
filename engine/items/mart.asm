@@ -332,15 +332,70 @@ BuyMenu:
 	farcall BlankScreen
 	farcall LoadOW_BGPal7
 	call FadePalettes
-	xor a
-	ld [wMenuScrollPositionBackup], a
-	ld a, 1
-	ld [wMenuCursorPositionBackup], a
+	call BuyMenu_InitGFX
 .loop
 	call BuyMenuLoop ; menu loop
 	jr nc, .loop
 	call CloseSubmenu
 	ret
+
+BuyMenu_InitGFX:
+	xor a
+	ldh [hBGMapMode], a
+	call ClearBGPalettes
+	call ClearTilemap
+	call ClearSprites
+	call DisableLCD
+
+	ld hl, MartMenuGFX
+	ld de, vTiles2 tile $18
+	ld bc, 14 tiles
+	ld a, BANK(MartMenuGFX)
+	call FarCopyBytes
+
+; stamp the item icon frame on the left side of the buy menu
+	hlcoord 0, 3
+	ld de, .BuyLeftColumnTilemapString
+	ld bc, SCREEN_WIDTH - 5
+.loop
+	ld a, [de]
+	and a
+	jr nz, .continue
+	add hl, bc
+	jr .next
+.continue
+	cp $ff
+	jr z, .ok
+	ld [hli], a
+.next
+	inc de
+	jr .loop
+.ok
+	call EnableLCD
+	call WaitBGMap
+	ld b, SCGB_BUY_MENU
+	call LoadSGBLayout
+	call SetDefaultBGPAndOBP
+	xor a
+	ld [wMenuScrollPositionBackup], a
+	ld a, 1
+	ld [wMenuCursorPositionBackup], a
+	call DelayFrame
+	ret
+
+.BuyLeftColumnTilemapString:
+	db $18, $18, $18, $18, $18, 0
+	db $18, $18, $18, $18, $18, 0
+	db $18, $18, $18, $18, $18, 0
+	db $18, $18, $18, $18, $18, 0
+	db $18, $1b, $1b, $1b, $18, 0
+	db $19, $1d, $1e, $1f, $1a, 0
+	db $19, $20, $21, $22, $1a, 0
+	db $19, $23, $24, $25, $1a, 0
+	db $18, $1c, $1c, $1c, $18, -1
+
+MartMenuGFX:
+INCBIN "gfx/mart/mart_menu.2bpp"
 
 LoadBuyMenuText:
 ; load text from a nested table
@@ -583,7 +638,7 @@ MartFinalPriceText:
 
 MenuHeader_Buy:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 1, 3, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
+	menu_coords 6, 3, 19, 11
 	dw .MenuData
 	db 1 ; default option
 
@@ -594,7 +649,7 @@ MenuHeader_Buy:
 	dbw 0, wCurMartCount
 	dba PlaceMartMenuItemName
 	dba .PrintBCDPrices
-	dba MartPlaceInBagQuantity
+	dba UpdateItemIconAndBagQuantity
 
 .PrintBCDPrices:
 	ld a, [wScrollingMenuCursorPosition]
@@ -608,7 +663,7 @@ MenuHeader_Buy:
 	ld d, h
 	ld e, l
 	pop hl
-	ld bc, SCREEN_WIDTH
+	ld bc, SCREEN_WIDTH - 4
 	add hl, bc
 	ld c, PRINTNUM_LEADINGZEROS | PRINTNUM_MONEY | 3
 	call PrintBCDNumber
