@@ -918,7 +918,21 @@ GetMovePriority:
 
 	; standard priority
 .regular_priority
+	; preserve the holder's item (in c) across getmoveeffect, which clobbers it
+	ld a, c
+	push af
 	call GetMoveEffect
+	pop af
+	ld c, a
+	; Light Clay gives priority to Light Screen and Reflect
+	cp LIGHT_CLAY
+	jr nz, .no_light_clay
+	ld a, b
+	cp EFFECT_LIGHT_SCREEN
+	jr z, .priority_2
+	cp EFFECT_REFLECT
+	jr z, .priority_2
+.no_light_clay
 	ld hl, MoveEffectPriorities
 .loop
 	ld a, [hli]

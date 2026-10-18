@@ -484,8 +484,8 @@ ItemfinderDesc:
 	next "items in the area.@"
 
 LightClayDesc:
-	db   "Extends screens"
-	next "to 8 turns.@"
+	db   "Priority: Screens"
+	next "last 8 turns.@"
 
 FocusSashDesc:
 	db   "Endures 1 OHKO at"
