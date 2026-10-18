@@ -365,8 +365,6 @@ ExpandBattleTowerCompactMonToTemp:
 	ld [wBT_OTTempMon1Exp + 2], a
 
 	; All Battle Tower mons fight with maxed effort values (252 per stat).
-	; DVs stay zero (see the notes in data/battle_tower/parties.asm);
-	; they were cleared by the ByteFill above.
 	ld a, 252
 	ld hl, wBT_OTTempMon1EVs
 	ld c, NUM_STATS
@@ -374,6 +372,14 @@ ExpandBattleTowerCompactMonToTemp:
 	ld [hli], a
 	dec c
 	jr nz, .ev_loop
+
+	; Every generated mon then rolls its own DVs, the same way a mon caught
+	; in the wild does (see GeneratePartyMonStats), so no two Battle Tower
+	; mons share an identical stat spread. The ByteFill above cleared them.
+	call Random
+	ld [wBT_OTTempMon1DVs], a
+	call Random
+	ld [wBT_OTTempMon1DVs + 1], a
 
 	ld hl, wBT_OTTempMon1Moves
 	ld de, wBT_OTTempMon1PP

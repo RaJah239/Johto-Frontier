@@ -21,7 +21,8 @@ ENDM
 ; nothing here should use hidden power
 ; as the dv player copy mechanic doesn't work here
 ; nor should shiny pokemon be put here
-; effort values are maxed (252 per stat), DVs stay zero (see ExpandBattleTowerCompactMonToTemp)
+; effort values are maxed (252 per stat), DVs are rolled randomly per mon
+; (see ExpandBattleTowerCompactMonToTemp)
 
 ; Legacy label retained for older references; new selection uses BattleTowerChallengePools.
 BattleTowerMons:
