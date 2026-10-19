@@ -219,10 +219,51 @@ endr
 	jmp PlaceString
 
 .locked:
-	ld de, .UnavailableString
+	; Build "Unavailable XX" in wStringBuffer4
+	; where XX is the TM number (1-50)
+	push hl  ; save destination
+	ld a, [wMenuSelection]
+	; Calculate tens and ones digits
+	ld b, 0  ; tens counter
+.tens_loop:
+	cp 10
+	jr c, .tens_done
+	sub 10
+	inc b
+	jr .tens_loop
+
+.tens_done:
+	; b = tens digit, a = ones digit
+	push af  ; save ones digit
+	push bc  ; save tens digit
+	; Copy "Unavailable " to wStringBuffer4
+	ld hl, .UnavailablePrefix
+	ld de, wStringBuffer4
+	ld bc, 12
+	call CopyBytes
+	; de now points to position 12
+	pop bc  ; restore tens digit (b)
+	pop af  ; restore ones digit (a)
+	; Write tens digit
+	push af  ; save ones digit again
+	ld a, b
+	add $f6
+	ld [de], a
+	inc de
+	; Write ones digit
+	pop af  ; restore ones digit
+	add $f6
+	ld [de], a
+	inc de
+	; Null terminator
+	ld a, $50
+	ld [de], a
+	; Set de to point to the string
+	ld de, wStringBuffer4
+	pop hl  ; hl = destination
 	jmp PlaceString
 
-.UnavailableString: db "Unavailable@"
+.UnavailablePrefix: db "Unavailable @"
 
 .PrintTMPrices:
 ; de points right of the TM's name; print the price one row below,

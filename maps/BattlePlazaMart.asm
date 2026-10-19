@@ -650,7 +650,8 @@ BattlePlazaMartTutorScript:
     inc b
     jr .find_index
 .found:
-    ; b = index, look up event flag
+    ; b = index (0-13), save it
+    push bc
     ld c, b
     ld b, 0
     ld hl, TutorUnlockEvents
@@ -662,11 +663,54 @@ BattlePlazaMartTutorScript:
     ld d, a  ; de = event flag
     ld b, CHECK_FLAG
     call EventFlagAction
+    pop bc  ; restore index (b)
     jr nz, .show_name  ; unlocked
-    ; locked: show "Unavailable"
-    pop hl
-    ld de, .UnavailableString
+    ; locked: show "Unavailable XX" where XX = index + 1
+    ; Save index
+    push bc
+    ; Calculate tens and ones digits
+    ld a, b  ; a = index (0-13)
+    inc a  ; 1-14 (move number)
+    ld b, 0  ; tens counter
+.tens_loop:
+    cp 10
+    jr c, .tens_done
+    sub 10
+    inc b
+    jr .tens_loop
+
+.tens_done:
+    ; b = tens digit, a = ones digit
+    push af  ; save ones digit
+    push bc  ; save tens digit
+    ; Copy "Unavailable " to wStringBuffer4
+    ld hl, .UnavailablePrefix
+    ld de, wStringBuffer4
+    ld bc, 12
+    call CopyBytes
+    ; de now points to position 12
+    pop bc  ; restore tens digit (b)
+    pop af  ; restore ones digit (a)
+    ; Write tens digit
+    push af  ; save ones digit again
+    ld a, b
+    add $f6
+    ld [de], a
+    inc de
+    ; Write ones digit
+    pop af  ; restore ones digit
+    add $f6
+    ld [de], a
+    inc de
+    ; Null terminator
+    ld a, $50
+    ld [de], a
+    ; Set de to point to the string
+    ld de, wStringBuffer4
+    pop bc  ; restore index (not needed, but balance stack)
+    pop hl  ; hl = destination (from initial push de)
     jmp PlaceString
+
 .show_name:
     ld a, [wMenuSelection]
     ld [wNamedObjectIndex], a
@@ -681,7 +725,7 @@ BattlePlazaMartTutorScript:
     pop hl
     jmp PlaceString
 
-.UnavailableString: db "Unavailable@"
+.UnavailablePrefix: db "Unavailable @"
 
 .SetupMovesMenu:
 ; copy the whole move list
