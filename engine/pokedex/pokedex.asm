@@ -456,8 +456,7 @@ Pokedex_UpdateDexEntryScreen:
 Pokedex_Page:
 	call Pokedex_GetSelectedMon
 	ld [wPrevDexEntry], a
-	farcall DisplayDexEntry
-	ret
+	farjp DisplayDexEntry
  
  Pokedex_toggle_shininess_Entry:
  	call Pokedex_toggle_shininess1
@@ -677,8 +676,7 @@ Handle_Button_Banner:
 BaseStat_Page:
 	call Handle_Button_Banner
  	call Pokedex_GetSelectedMon
- 	farcall DisplayDexMonStats
- 	ret
+ 	farjp DisplayDexMonStats
 
 Moves_Page:
 	call Handle_Button_Banner

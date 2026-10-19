@@ -107,8 +107,7 @@ CalculateCostAgainstPlayerMoney:
     call CopyBytes
     ld bc, hMoneyTemp
     ld de, wMoney
-    farcall CompareMoney
-    ret
+    farjp CompareMoney
 
 ; The cost for learning a move.
 EggMoveCost:

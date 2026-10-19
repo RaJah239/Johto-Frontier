@@ -374,8 +374,7 @@ TryRestartMapMusic::
 	ret
 
 .restore
-	farcall RestoreMusic
-	ret
+	farjp RestoreMusic
 
 RestartMapMusic::
 	push hl

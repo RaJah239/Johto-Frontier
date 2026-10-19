@@ -101,16 +101,13 @@ SafeHDMATransfer::
 	ret
 
 UpdatePlayerSprite::
-	farcall _UpdatePlayerSprite
-	ret
+	farjp _UpdatePlayerSprite
 
 LoadStandardFont::
-	farcall _LoadStandardFont
-	ret
+	farjp _LoadStandardFont
 
 LoadFontsBattleExtra::
-	farcall _LoadFontsBattleExtra
-	ret
+	farjp _LoadFontsBattleExtra
 
 LoadFontsExtra::
 	farjp _LoadFontsExtra

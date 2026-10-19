@@ -824,8 +824,7 @@ FlyFunction:
 	farcall CheckForUsedObjPals
 	call DelayFrame
 	call UpdatePlayerSprite
-	farcall LoadOverworldFont
-	ret
+	farjp LoadOverworldFont
 
 WaterfallFunction:
 	call .TryWaterfall

@@ -32,8 +32,7 @@ HallOfFame::
 	call AnimateHallOfFame
 	pop af
 	ld b, a
-	farcall Credits
-	ret
+	farjp Credits
 
 RedCredits::
 	call HallOfFame_FadeOutMusic
@@ -45,8 +44,7 @@ RedCredits::
 	ld [wSpawnAfterChampion], a
 	ld a, [wStatusFlags]
 	ld b, a
-	farcall Credits
-	ret
+	farjp Credits
 
 HallOfFame_FadeOutMusic:
 	xor a ; MUSIC_NONE
@@ -590,8 +588,7 @@ HOF_AnimatePlayerPic:
 
 .HardModeOff:
 	call WaitBGMap
-	farcall ProfOaksPCRating
-	ret
+	farjp ProfOaksPCRating
 
 .PlayTime:
 	db "Play Time@"

@@ -46,5 +46,4 @@ HiddenPowerDamage:
 
 ; Get the rest of the damage formula variables
 ; based on the new type.
-	farcall BattleCommand_DamageStats ; damagestats
-	ret
+	farjp BattleCommand_DamageStats ; damagestats

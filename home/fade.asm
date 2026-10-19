@@ -37,5 +37,4 @@ FadePalettes::
 	xor a
 	ld [wPalFadeMode], a
 DoFadePalettes::
-	farcall _DoFadePalettes
-	ret
+	farjp _DoFadePalettes

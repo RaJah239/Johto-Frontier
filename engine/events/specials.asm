@@ -72,8 +72,7 @@ NameRival:
 	db "Silver@"
 
 NameRater:
-	farcall _NameRater
-	ret
+	farjp _NameRater
 
 OverworldTownMap:
 	call FadeToMenu
@@ -155,8 +154,7 @@ BugContestJudging:
 MapRadio:
 	ld a, [wScriptVar]
 	ld e, a
-	farcall PlayRadio
-	ret
+	farjp PlayRadio
 
 UnownPuzzle:
 	call FadeToMenu
@@ -449,8 +447,7 @@ RestorePartyHeldItems:
 	ret
 
 TradebackNPC:
-	farcall TradebackKid
-	ret
+	farjp TradebackKid
 
 PlayerGivesAwayAnEggForAdoption:
 	farcall SelectMonFromParty

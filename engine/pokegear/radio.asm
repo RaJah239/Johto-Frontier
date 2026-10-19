@@ -833,8 +833,7 @@ StartPokemonMusicChannel:
 	jr z, .SunTueThurSun
 	ld e, MUSIC_POKEMON_LULLABY
 .SunTueThurSun:
-	callfar RadioMusicRestartDE
-	ret
+	farjp RadioMusicRestartDE
 
 BenIntroText1:
 	text_far _BenIntroText1
@@ -1639,8 +1638,7 @@ StartRadioStation:
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	callfar RadioMusicRestartDE
-	ret
+	farjp RadioMusicRestartDE
 
 INCLUDE "data/radio/channel_music.asm"
 

@@ -68,8 +68,7 @@ Pokedex_PlayMonCry_AnimateFrontpic:
 	ld a, [wPokedexEntryType]
 	inc a
 	ld [wPokedexEntryType], a
-	callfar PlaySpriteAnimations
-	ret
+	farjp PlaySpriteAnimations
 
 .Pokedex_WaitAnim:
 	ld hl, wStatsScreenFlags
@@ -87,8 +86,7 @@ Pokedex_PlayMonCry_AnimateFrontpic:
 .finish
 	ld hl, wStatsScreenFlags
 	res 5, [hl]
-	farcall HDMATransferTilemapToWRAMBank3
-	ret
+	farjp HDMATransferTilemapToWRAMBank3
 
 Pokedex_PlaceBackPic:
 	ld a, $1

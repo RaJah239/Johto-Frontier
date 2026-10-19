@@ -214,16 +214,13 @@ SpriteAnimFunc_GSIntroHoOhLugia:
 	ret
 
 SpriteAnimFunc_NamingScreenCursor:
-	callfar NamingScreen_AnimateCursor
-	ret
+	farjp NamingScreen_AnimateCursor
 
 SpriteAnimFunc_MailCursor:
-	callfar ComposeMail_AnimateCursor
-	ret
+	farjp ComposeMail_AnimateCursor
 
 SpriteAnimFunc_GameFreakLogo:
-	callfar GameFreakLogoSpriteAnim
-	ret
+	farjp GameFreakLogoSpriteAnim
 
 SpriteAnimFunc_GSGameFreakLogoStar:
 	ld hl, SPRITEANIMSTRUCT_VAR1
@@ -354,8 +351,7 @@ SpriteAnimFunc_GSGameFreakLogoSparkle:
 	ret
 
 SpriteAnimFunc_SlotsGolem:
-	callfar Slots_AnimateGolem
-	ret
+	farjp Slots_AnimateGolem
 
 SpriteAnimFunc_SlotsChansey:
 	callfar Slots_AnimateChansey
@@ -402,12 +398,10 @@ SpriteAnimFunc_SlotsChanseyEgg:
 	ret
 
 SpriteAnimFunc_PokegearArrow:
-	callfar AnimatePokegearModeIndicatorArrow
-	ret
+	farjp AnimatePokegearModeIndicatorArrow
 
 SpriteAnimFunc_MemoryGameCursor:
-	callfar MemoryGame_InterpretJoypad_AnimateCursor
-	ret
+	farjp MemoryGame_InterpretJoypad_AnimateCursor
 
 SpriteAnimFunc_TradePokeBall:
 	call AnimSeqs_AnonJumptable
@@ -552,8 +546,7 @@ SpriteAnimFunc_TradeTubeBulge:
 	ret
 
 SpriteAnimFunc_TrademonInTube:
-	callfar TradeAnim_AnimateTrademonInTube
-	ret
+	farjp TradeAnim_AnimateTrademonInTube
 
 SpriteAnimFunc_RevealNewMon:
 	ld hl, SPRITEANIMSTRUCT_VAR1
@@ -593,8 +586,7 @@ SpriteAnimFunc_RevealNewMon:
 	ret
 
 SpriteAnimFunc_RadioTuningKnob:
-	callfar AnimateTuningKnob
-	ret
+	farjp AnimateTuningKnob
 
 SpriteAnimFunc_CutLeaves:
 	ld hl, SPRITEANIMSTRUCT_VAR2
@@ -825,8 +817,7 @@ SpriteAnimFunc_IntroSuicuneAway:
 	ret
 
 SpriteAnimFunc_Celebi:
-	farcall UpdateCelebiPosition
-	ret
+	farjp UpdateCelebiPosition
 
 AnimSeqs_AnonJumptable:
 	ld hl, sp+0

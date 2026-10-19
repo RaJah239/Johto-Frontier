@@ -58,8 +58,7 @@ CopyBackpic:
 ExitBattle:
 	farcall UpdatePartyStats
 	call .HandleEndOfBattle
-	farcall CleanUpBattleRAM
-	ret
+	farjp CleanUpBattleRAM
 
 .HandleEndOfBattle:
 	ld a, [wLinkMode]
@@ -68,8 +67,7 @@ ExitBattle:
 	farcall ShowLinkBattleParticipantsAfterEnd
 	ld c, 150
 	call DelayFrames
-	farcall DisplayLinkBattleResult
-	ret
+	farjp DisplayLinkBattleResult
 
 .not_linked
 	ld a, [wBattleResult]
@@ -78,8 +76,7 @@ ExitBattle:
 	xor a
 	ld [wForceEvolution], a
 	predef EvolveAfterBattle
-	farcall GivePokerusAndConvertBerries
-	ret
+	farjp GivePokerusAndConvertBerries
 
 GetTrainerBackpic:
 ; Load the player character's backpic (6x6) into VRAM starting from vTiles2 tile $31.
@@ -100,8 +97,7 @@ GetTrainerBackpic:
 	jr z, .Chris
 
 ; It's a girl.
-	farcall GetKrisBackpic
-	ret
+	farjp GetKrisBackpic
 
 .Chris:
 ; It's a boy.

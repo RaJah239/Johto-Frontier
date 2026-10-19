@@ -75,12 +75,10 @@ NewGame_ClearTilemapEtc:
 MysteryGift:
 	call UpdateTime
 	farcall DoMysteryGiftIfDayHasPassed
-	farcall DoMysteryGift
-	ret
+	farjp DoMysteryGift
 
 Option:
-	farcall _Option
-	ret
+	farjp _Option
 
 NewGame:
 	xor a
@@ -287,8 +285,7 @@ InitializeWorld:
 	call ShrinkPlayer
 	farcall SpawnPlayer
 	farcall InitializeStartDay
-	farcall InitializeEvents
-	ret
+	farjp InitializeEvents
 
 Continue:
 	farcall TryLoadSaveFile
@@ -758,8 +755,7 @@ NamePlayer:
 	jr z, .NewName
 	call StorePlayerName
 	farcall ApplyMonOrTrainerPals
-	farcall MovePlayerPicLeft
-	ret
+	farjp MovePlayerPicLeft
 
 .NewName:
 	ld b, NAME_PLAYER
@@ -1042,8 +1038,7 @@ StartTitleScreen:
 	dw ResetClock
 
 .TitleScreen:
-	farcall _TitleScreen
-	ret
+	farjp _TitleScreen
 
 RunTitleScreen:
 	ld a, [wJumptableIndex]
@@ -1105,8 +1100,7 @@ TitleScreenEntrance:
 	dec b
 	jr nz, .loop
 
-	farcall AnimateTitleCrystal
-	ret
+	farjp AnimateTitleCrystal
 
 .done
 ; Next scene

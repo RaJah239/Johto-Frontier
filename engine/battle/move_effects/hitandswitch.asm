@@ -49,8 +49,7 @@ BattleCommand_HitAndSwitch:
 SwitchMoveTransitionIntoMenu:
 	call LoadStandardMenuHeader
 	farcall SetUpBattlePartyMenu
-	farcall ForcePickSwitchMonInBattle
-	ret
+	farjp ForcePickSwitchMonInBattle
 
 SwitchMoveReturnToBattleScene:
 	call ClearPalettes

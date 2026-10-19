@@ -1,8 +1,7 @@
 BattleTowerRoomMenu:
 ; special
 	call InitBattleTowerChallengeRAM
-	farcall _BattleTowerRoomMenu
-	ret
+	farjp _BattleTowerRoomMenu
 
 BattleTowerBattle:
 	xor a ; FALSE
@@ -320,8 +319,7 @@ BattleTowerAction_1D:
 	ret
 
 BattleTower_SaveOptions:
-	farcall SaveOptions
-	ret
+	farjp SaveOptions
 
 BattleTower_RandomlyChooseReward:
 ; Generate a random stat boosting item.

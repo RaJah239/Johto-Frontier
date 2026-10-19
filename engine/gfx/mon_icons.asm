@@ -519,8 +519,7 @@ SetOWFlyMonColor:
 	add a
 	add a
 	ld e, a
-	farcall SetFirstOBJPalette
-	ret
+	farjp SetFirstOBJPalette
 
 GetMemIconGFX:
 	ld a, [wCurIconTile]

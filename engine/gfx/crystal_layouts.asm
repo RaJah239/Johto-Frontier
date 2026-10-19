@@ -85,8 +85,7 @@ _LoadTradeRoomBGPals:
 	ld bc, 6 palettes
 	ld a, BANK(wBGPals1)
 	call FarCopyWRAM
-	farcall ApplyPals
-	ret
+	farjp ApplyPals
 
 TradeRoomPalette:
 INCLUDE "gfx/trade/border.pal"
