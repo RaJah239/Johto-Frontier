@@ -216,6 +216,15 @@ ReadTrainerPartyPieces:
 	call GetNextTrainerDataByte
 	ld [wCurPartySpecies], a
 
+	; auto-evolve if the scaled level exceeds the evolution threshold.
+	; farcall overwrites hl with the target address, so pass the trainer
+	; data pointer in de instead.
+	push hl
+	ld d, h
+	ld e, l
+	farcall CheckAndEvolveTrainerMon
+	pop hl
+
 ; add to party
 	ld a, OTPARTYMON
 	ld [wMonType], a
@@ -1782,3 +1791,22 @@ MinLevelTable:
 	db 34 ; 5 badges
 	db 38 ; 6 badges
 	db 42 ; 7 badges
+
+GetPlayerHighestPartyLevel:
+; Return the highest level among the player's party Pokémon in a.
+	ld a, [wPartyCount]
+	ld d, a
+	ld e, 0
+	ld hl, wPartyMon1Level
+	ld bc, PARTYMON_STRUCT_LENGTH
+.next
+	ld a, [hl]
+	cp e
+	jr c, .ok
+	ld e, a
+.ok
+	add hl, bc
+	dec d
+	jr nz, .next
+	ld a, e
+	ret
