@@ -58,6 +58,7 @@ BattlePlazaMartTMCoinTraderScript:
     special BattlePlazaTMCoinTrader
     ifequal 51, .NotEnoughCoins
     ifequal 52, .NoRoom
+    ifequal 53, .Unavailable
     ifequal 1,  .TMMeteorMash
     ifequal 2,  .TMHeadbutt
     ifequal 3,  .TMCurse
@@ -127,6 +128,12 @@ BattlePlazaMartTMCoinTraderScript:
     verbosegiveitem TM_HEADBUTT
     iffalse .NoRoom
     sjump .ConcludeTransaction
+
+.Unavailable:
+    jumpthisopenedtext
+        text "This TM is not"
+        line "available yet."
+        done
 
 .TMCurse:
     verbosegiveitem TM_CURSE

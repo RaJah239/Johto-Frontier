@@ -44,6 +44,41 @@ BattlePlazaTMCoinTrader:
 	ld a, [hl]
 	ldh [hMoneyTemp + 1], a
 
+; Load the TM's big-endian price into hMoneyTemp.
+	ld a, [wScriptVar]
+	dec a
+	ld c, a
+	ld b, 0
+	ld hl, TMPrices
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ldh [hMoneyTemp], a
+	ld a, [hl]
+	ldh [hMoneyTemp + 1], a
+
+; Check if the selected TM is unlocked (its event flag is set).
+; TMUnlockEvents is a table of 50 event flags, one per TM.
+	ld a, [wScriptVar]
+	dec a  ; 0-based index
+	ld c, a
+	ld b, 0
+	ld hl, TMUnlockEvents
+	add hl, bc
+	add hl, bc  ; 2 bytes per entry
+	ld a, [hli]
+	ld e, a
+	ld a, [hl]
+	ld d, a  ; de = event flag
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	jr nz, .charge_coins
+; Event not set: return 53 (locked) without charging.
+	ld a, 53
+	ld [wScriptVar], a
+	ret
+
+.charge_coins:
 ; Charge the coins if the player can afford them.
 	ld bc, hMoneyTemp
 	farcall CheckCoins
@@ -132,6 +167,38 @@ endr
 	db -1
 
 .tmname
+	; Check if this TM is unlocked (skip for cancel row)
+	ld a, [wMenuSelection]
+	cp -1
+	jr z, .show_name
+	and a
+	jr z, .show_name
+
+	; Save destination pointer
+	push de
+
+	; Look up event flag for this TM
+	dec a
+	ld c, a
+	ld b, 0
+	ld hl, TMUnlockEvents
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld e, a
+	ld a, [hl]
+	ld d, a  ; de = event flag
+	ld b, CHECK_FLAG
+	call EventFlagAction
+
+	; Restore destination
+	pop hl  ; hl = destination
+	jr z, .locked  ; event not set
+
+	; unlocked: restore de from hl and continue
+	ld d, h
+	ld e, l
+.show_name:
 	ld a, [wMenuSelection]
 	call GetTMs
 	ld a, [hl]
@@ -150,6 +217,12 @@ endr
 .place_string:
 	pop hl
 	jmp PlaceString
+
+.locked:
+	ld de, .UnavailableString
+	jmp PlaceString
+
+.UnavailableString: db "Unavailable@"
 
 .PrintTMPrices:
 ; de points right of the TM's name; print the price one row below,
@@ -491,3 +564,57 @@ TMPrices:
 	bigdw 5500 ; Fire Punch
 	bigdw 2400 ; Shadow Punch
 	bigdw 7100 ; Trick
+
+TMUnlockEvents:
+; 50 event flags, one per TM (16-bit each).
+; TM is only purchasable if the corresponding event is set.
+	dw EVENT_BEAT_FALKNER ; TM 1
+	dw EVENT_BEAT_BUGSY ; TM 2
+	dw EVENT_BEAT_WHITNEY ; TM 3
+	dw EVENT_BEAT_MORTY ; TM 4
+	dw EVENT_BEAT_JASMINE ; TM 5
+	dw EVENT_BEAT_CHUCK ; TM 6
+	dw EVENT_BEAT_PRYCE ; TM 7
+	dw EVENT_BEAT_CLAIR ; TM 8
+	dw EVENT_BEAT_ELITE_4_WILL ; TM 9
+	dw EVENT_BEAT_ELITE_4_KOGA ; TM 10
+	dw EVENT_BEAT_ELITE_4_BRUNO ; TM 11
+	dw EVENT_BEAT_ELITE_4_KAREN ; TM 12
+	dw EVENT_BEAT_CHAMPION_LANCE ; TM 13
+	dw EVENT_BEAT_ELITE_FOUR ; TM 14
+	dw EVENT_BEAT_SWIMMERF_ELAINE ; TM 15
+	dw EVENT_BEAT_SWIMMERF_PAULA ; TM 16
+	dw EVENT_BEAT_SWIMMERF_KAYLEE ; TM 17
+	dw EVENT_BEAT_SWIMMERF_SUSIE ; TM 18
+	dw EVENT_BEAT_SWIMMERF_DENISE ; TM 19
+	dw EVENT_BEAT_SWIMMERF_KARA ; TM 20
+	dw EVENT_BEAT_SWIMMERF_WENDY ; TM 21
+	dw EVENT_BEAT_BIRD_KEEPER_ROD ; TM 22
+	dw EVENT_BEAT_BIRD_KEEPER_ABE ; TM 23
+	dw EVENT_BEAT_BIRD_KEEPER_BRYAN ; TM 24
+	dw EVENT_BEAT_BIRD_KEEPER_THEO ; TM 25
+	dw EVENT_BEAT_BIRD_KEEPER_TOBY ; TM 26
+	dw EVENT_BEAT_BIRD_KEEPER_DENIS ; TM 27
+	dw EVENT_BEAT_BIRD_KEEPER_VANCE ; TM 28
+	dw EVENT_BEAT_BIRD_KEEPER_JOSE ; TM 29
+	dw EVENT_BEAT_BIRD_KEEPER_PETER ; TM 30
+	dw EVENT_BEAT_BOARDER_RONALD ; TM 31
+	dw EVENT_BEAT_BOARDER_DOUGLAS ; TM 32
+	dw EVENT_BEAT_SAGE_CHOW ; TM 33
+	dw EVENT_BEAT_SAGE_NICO ; TM 34
+	dw EVENT_BEAT_SAGE_JIN ; TM 35
+	dw EVENT_BEAT_SAGE_TROY ; TM 36
+	dw EVENT_BEAT_SAGE_JEFFREY ; TM 37
+	dw EVENT_BEAT_SAGE_PING ; TM 38
+	dw EVENT_BEAT_SAGE_EDMOND ; TM 39
+	dw EVENT_BEAT_SAGE_NEAL ; TM 40
+	dw EVENT_BEAT_CAMPER_ROLAND ; TM 41
+	dw EVENT_BEAT_CAMPER_TODD ; TM 42
+	dw EVENT_BEAT_CAMPER_IVAN ; TM 43
+	dw EVENT_BEAT_CAMPER_ELLIOT ; TM 44
+	dw EVENT_BEAT_CAMPER_TED ; TM 45
+	dw EVENT_BEAT_CAMPER_SPENCER ; TM 46
+	dw EVENT_BEAT_BURGLAR_DUNCAN ; TM 47
+	dw EVENT_BEAT_BURGLAR_EDDIE ; TM 48
+	dw EVENT_BEAT_PSYCHIC_NATHAN ; TM 49
+	dw EVENT_BEAT_PSYCHIC_GREG ; TM 50
