@@ -452,6 +452,7 @@ BattlePlazaMartTutorScript:
     callasm .LoadMovesMenu
     writetext BattlePlazaMartTutorMoveText
     ifequal 2, .NotEnough
+    ifequal 3, .LockedMove
     iffalse .CloseTutor
     special MoveTutor2
     iffalse .TeachMove
@@ -488,6 +489,46 @@ BattlePlazaMartTutorScript:
     ld hl, wMenuSelection
     ld a, [hli]
     ld [wNamedObjectIndex], a
+    ; Check if this move is unlocked
+    ld c, a  ; c = move ID
+    ld hl, wBattlePlazaCrystalMoveTutor
+    inc hl  ; skip count byte
+    ld b, 0  ; index counter
+.find_move_index:
+    ld a, [hl]
+    cp -1
+    jr z, .move_not_found
+    cp c
+    jr z, .move_found
+    inc hl
+    inc hl
+    inc b
+    jr .find_move_index
+.move_found:
+    ; b = index, look up event flag
+    ld c, b
+    ld b, 0
+    push hl
+    ld hl, TutorUnlockEvents
+    add hl, bc
+    add hl, bc
+    ld a, [hli]
+    ld e, a
+    ld a, [hl]
+    ld d, a
+    ld b, CHECK_FLAG
+    call EventFlagAction
+    pop hl
+    jr nz, .move_unlocked
+    ; locked: return 3
+    ld a, 3
+    ld [wScriptVar], a
+    ret
+
+.move_unlocked:
+    ld hl, wMenuSelection
+    ld a, [hli]
+    ld [wNamedObjectIndex], a
     ld a, [hl]
     ld [wBattlePlazaCrystalMoveTutor], a ; not used for menus anymore at this point
     ld b, a
@@ -497,6 +538,22 @@ BattlePlazaMartTutorScript:
     ld a, TRUE
     ld [wScriptVar], a
     ret
+
+.move_not_found:
+    ld a, [wMenuSelection]
+    ld [wNamedObjectIndex], a
+    ld hl, wMenuSelection
+    ld a, [hli]
+    ld a, [hl]
+    ld [wBattlePlazaCrystalMoveTutor], a
+    ld b, a
+    call .GetAmountOfCrystals
+    cp b
+    jr c, .not_enough_crystals
+    ld a, TRUE
+    ld [wScriptVar], a
+    ret
+
 .cancel_selection:
     ld a, FALSE
     ld [wScriptVar], a
@@ -577,10 +634,54 @@ BattlePlazaMartTutorScript:
 .DisplayMoveName:
     push de
     ld a, [wMenuSelection]
+    ; Find the index of this move in the move list
+    ld c, a  ; c = move ID to find
+    ld hl, wBattlePlazaCrystalMoveTutor
+    inc hl  ; skip count byte
+    ld b, 0  ; index counter
+.find_index:
+    ld a, [hl]
+    cp -1  ; terminator
+    jr z, .not_found
+    cp c
+    jr z, .found
+    inc hl  ; skip move ID
+    inc hl  ; skip cost
+    inc b
+    jr .find_index
+.found:
+    ; b = index, look up event flag
+    ld c, b
+    ld b, 0
+    ld hl, TutorUnlockEvents
+    add hl, bc
+    add hl, bc  ; 2 bytes per entry
+    ld a, [hli]
+    ld e, a
+    ld a, [hl]
+    ld d, a  ; de = event flag
+    ld b, CHECK_FLAG
+    call EventFlagAction
+    jr nz, .show_name  ; unlocked
+    ; locked: show "Unavailable"
+    pop hl
+    ld de, .UnavailableString
+    jmp PlaceString
+.show_name:
+    ld a, [wMenuSelection]
     ld [wNamedObjectIndex], a
     call GetMoveName
     pop hl
     jmp PlaceString
+
+.not_found:
+    ld a, [wMenuSelection]
+    ld [wNamedObjectIndex], a
+    call GetMoveName
+    pop hl
+    jmp PlaceString
+
+.UnavailableString: db "Unavailable@"
 
 .SetupMovesMenu:
 ; copy the whole move list
@@ -640,6 +741,13 @@ BattlePlazaMartTutorScript:
     db -1 ; terminator
 .FullMoveListEnd:
 
+
+.LockedMove:
+    jumpthisopenedtext
+        text "This move is not"
+        line "available yet."
+        done
+
 .NotEnough:
     writethistext
         text "You've not enough"
@@ -682,3 +790,19 @@ BattlePlazaMartTutorScript:
 BattlePlazaMartTutorMoveText:
     text_start
     done
+
+TutorUnlockEvents:
+    dw EVENT_BEAT_FALKNER ; Move 1
+    dw EVENT_BEAT_BUGSY ; Move 2
+    dw EVENT_BEAT_WHITNEY ; Move 3
+    dw EVENT_BEAT_MORTY ; Move 4
+    dw EVENT_BEAT_JASMINE ; Move 5
+    dw EVENT_BEAT_CHUCK ; Move 6
+    dw EVENT_BEAT_PRYCE ; Move 7
+    dw EVENT_BEAT_CLAIR ; Move 8
+    dw EVENT_BEAT_ELITE_4_WILL ; Move 9
+    dw EVENT_BEAT_ELITE_4_KOGA ; Move 10
+    dw EVENT_BEAT_ELITE_4_BRUNO ; Move 11
+    dw EVENT_BEAT_ELITE_4_KAREN ; Move 12
+    dw EVENT_BEAT_CHAMPION_LANCE ; Move 13
+    dw EVENT_BEAT_ELITE_FOUR ; Move 14
