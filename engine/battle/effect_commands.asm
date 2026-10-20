@@ -4844,6 +4844,10 @@ BattleCommand_StatDownMessage:
 	call BattleCommand_SwitchTurn
 	xor a
 	ld [wNumHits], a
+	; Select the animation colour for the stat that changed.
+	ld a, [wLoweredStat]
+	and $f
+	ld [wBattleAnimParam], a
 	ld de, ANIM_STAT_DOWN
 	farcall Call_PlayBattleAnim
 	call BattleCommand_SwitchTurn
@@ -5016,6 +5020,10 @@ BattleCommand_StatUpMessage:
 	; play animation after every stat up
 	xor a
 	ld [wNumHits], a
+	; Select the animation colour for the stat that changed.
+	ld a, [wLoweredStat]
+	and $f
+	ld [wBattleAnimParam], a
 	ld de, ANIM_STAT_UP
 	farcall Call_PlayBattleAnim	
 

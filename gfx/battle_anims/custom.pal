@@ -152,6 +152,36 @@ if !DEF(MONOCHROME)
 	RGB 31, 31, 31
 	RGB 10, 31, 31
 	RGB 16, 17, 29
+; stat attack
+	RGB 31, 31, 31
+	RGB 31, 16, 13
+	RGB 31, 07, 05
+	RGB 00, 00, 00
+; stat defense
+	RGB 31, 31, 31
+	RGB 13, 25, 31
+	RGB 06, 15, 31
+	RGB 00, 00, 00
+; stat speed
+	RGB 31, 31, 31
+	RGB 31, 27, 08
+	RGB 31, 16, 03
+	RGB 00, 00, 00
+; stat sp. attack
+	RGB 31, 31, 31
+	RGB 29, 20, 31
+	RGB 18, 10, 31
+	RGB 00, 00, 00
+; stat sp. defense
+	RGB 31, 31, 31
+	RGB 13, 31, 20
+	RGB 06, 22, 12
+	RGB 00, 00, 00
+; stat evasion
+	RGB 31, 31, 31
+	RGB 06, 31, 29
+	RGB 03, 18, 17
+	RGB 00, 00, 00
 else
 rept NUM_CUSTOM_BATTLE_PALETTES - 6
 	MONOCHROME_RGB_FOUR

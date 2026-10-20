@@ -18,7 +18,20 @@ BattleAnim_BattleFlinch:
 BattleAnim_StatUp:
 	anim_1gfx BATTLE_ANIM_GFX_SPEED
 	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_BLACK_REPEATING, $0, BG_EFFECT_USER, $40
-	anim_obp0 $30
+	anim_obp0 $e4
+	; Colour the animation based on the stat that changed.
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_ATTACK
+	anim_if_param_equal ATTACK, .statup_palette_done
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_DEFENSE
+	anim_if_param_equal DEFENSE, .statup_palette_done
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_SPEED
+	anim_if_param_equal SPEED, .statup_palette_done
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_SP_ATTACK
+	anim_if_param_equal SP_ATTACK, .statup_palette_done
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_SP_DEFENSE
+	anim_if_param_equal SP_DEFENSE, .statup_palette_done
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_EVASION
+.statup_palette_done
 	anim_sound 0, 0, SFX_STAT_UP
 .loop
 	anim_obj BATTLE_ANIM_OBJ_STAT_UP,   5, 4,  13, 6, $6
@@ -38,12 +51,26 @@ BattleAnim_StatUp:
 	anim_loop 2, .loop
 	anim_wait 8
 	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_BLACK_REPEATING
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_StatDown:
 	anim_1gfx BATTLE_ANIM_GFX_SPEED
 	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_BLACK_REPEATING, $0, BG_EFFECT_USER, $40
-	anim_obp0 $30
+	anim_obp0 $e4
+	; Colour the animation based on the stat that changed.
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_ATTACK
+	anim_if_param_equal ATTACK, .statdown_palette_done
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_DEFENSE
+	anim_if_param_equal DEFENSE, .statdown_palette_done
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_SPEED
+	anim_if_param_equal SPEED, .statdown_palette_done
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_SP_ATTACK
+	anim_if_param_equal SP_ATTACK, .statdown_palette_done
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_SP_DEFENSE
+	anim_if_param_equal SP_DEFENSE, .statdown_palette_done
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_EVASION
+.statdown_palette_done
 	anim_sound 0, 0, SFX_STAT_DOWN
 .loop
 	anim_obj BATTLE_ANIM_OBJ_STAT_DOWN, 5, 4,  7, 6, $6
@@ -63,6 +90,7 @@ BattleAnim_StatDown:
 	anim_loop 2, .loop
 	anim_wait 8
 	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_BLACK_REPEATING
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_AnimBattleMiss:

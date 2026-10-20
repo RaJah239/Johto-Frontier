@@ -4080,7 +4080,7 @@ SpikesDamage:
 ; ====================================
 	call GetCurrentMon
 	cp CHIKORITA ; to prevent poisoning from Toxic Spikes
-	jr z, .pop
+	jmp z, .pop
 	cp BAYLEEF
 	jr z, .pop
 	cp MEGANIUM ; to prevent poisoning from Toxic Spikes
@@ -4162,6 +4162,9 @@ SpikesDamage:
 	push hl
 	push de
 
+	; Sticky Web lowers Speed; colour the animation accordingly.
+	ld a, SPEED
+	ld [wBattleAnimParam], a
 	ld de, ANIM_STAT_DOWN
 	call Call_PlayBattleAnim
 	call SwitchTurnCore
