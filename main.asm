@@ -450,10 +450,6 @@ INCLUDE "engine/events/catch_tutorial_input.asm"
 INCLUDE "engine/pokegear/townmap_convertlinebreakcharacters.asm"
 
 
-SECTION "European Mail", ROMX
-INCLUDE "engine/pokemon/european_mail.asm"
-
-
 SECTION "Battle Tower Text", ROMX
 INCLUDE "data/battle_tower/trainer_text.asm"
 
