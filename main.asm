@@ -532,8 +532,6 @@ INCLUDE "engine/pokedex/pokedex_2.asm"
 
 
 SECTION "Bank3E Overflow", ROMX
-INCLUDE "engine/link/time_capsule.asm"
-INCLUDE "engine/link/time_capsule_2.asm"
 INCLUDE "engine/events/magikarp.asm"
 
 

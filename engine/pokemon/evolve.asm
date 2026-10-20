@@ -154,10 +154,6 @@ EvolveAfterBattle_MasterLoop:
 	inc a
 	jr z, .proceed
 
-	ld a, [wLinkMode]
-	cp LINK_TIMECAPSULE
-	jmp z, .dont_evolve_3
-
 	ld a, [wTempMonItem]
 	cp b
 	jmp nz, .dont_evolve_3

@@ -1065,40 +1065,12 @@ for n, 1, PARTY_LENGTH + 1
 wLinkPlayerPartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
 endr
 
-NEXTU
-; time capsule party data
-wTimeCapsulePlayerData::
-; wTimeCapsulePartyMon1 - wTimeCapsulePartyMon6
-for n, 1, PARTY_LENGTH + 1
-wTimeCapsulePartyMon{d:n}:: red_party_struct wTimeCapsulePartyMon{d:n}
-endr
-
-wTimeCapsulePartyMonOTs::
-; wTimeCapsulePartyMon1OT - wTimeCapsulePartyMon6OT
-for n, 1, PARTY_LENGTH + 1
-wTimeCapsulePartyMon{d:n}OT:: ds NAME_LENGTH
-endr
-
-wTimeCapsulePartyMonNicknames::
-; wTimeCapsulePartyMon1Nickname - wTimeCapsulePartyMon6Nickname
-for n, 1, PARTY_LENGTH + 1
-wTimeCapsulePartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
-endr
-
 ENDU
 
 
 SECTION UNION "Overworld Map", WRAM0
 
-; link data prep
-	ds 1000
-wCurLinkOTPartyMonTypePointer:: dw
-
-wLinkOTPartyMonTypes::
-; wLinkOTPartyMon1Type - wLinkOTPartyMon6Type
-for n, 1, PARTY_LENGTH + 1
-wLinkOTPartyMon{d:n}Type:: dw
-endr
+	ds 1014
 
 
 SECTION UNION "Overworld Map", WRAM0

@@ -22,7 +22,7 @@ Pokecenter2F_MapEvents:
 
 Pokecenter2F_MapScripts:
 	def_scene_scripts
-	scene_script Pokecenter2FCheckMysteryGiftScene,      SCENE_POKECENTER2F_CHECK_MYSTERY_GIFT
+	scene_script Pokecenter2FNoopScene,                 SCENE_POKECENTER2F_CHECK_MYSTERY_GIFT
 	scene_script Pokecenter2FLeaveTradeCenterScene,      SCENE_POKECENTER2F_LEAVE_TRADE_CENTER
 	scene_script Pokecenter2FLeaveColosseumScene,        SCENE_POKECENTER2F_LEAVE_COLOSSEUM
 
@@ -31,7 +31,10 @@ Pokecenter2F_MapScripts:
 Pokecenter2FCheckMysteryGiftScene:
 	clearevent EVENT_MYSTERY_GIFT_DELIVERY_GUY
 	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	sdefer Pokecenter2F_AppearMysteryGiftDeliveryGuy ; remove TODOTEXT
+	sjump Pokecenter2F_AppearMysteryGiftDeliveryGuy ; remove TODOTEXT
+	end
+
+Pokecenter2FNoopScene:
 	end
 
 Pokecenter2FLeaveTradeCenterScene:
