@@ -419,16 +419,15 @@ Goldenrod_Map_Names: ; newgroup GOLDENROD
 	dw Goldenrod_Map_Name18 ; map_const GOLDENROD_DEPT_STORE_ROOF
 	dw Goldenrod_Map_Name19 ; map_const GOLDENROD_GAME_CORNER
 	dw Goldenrod_Map_Name20 ; map_const GOLDENROD_POKECENTER_1F
-	dw Goldenrod_Map_Name21 ; map_const POKECOM_CENTER_ADMIN_OFFICE_MOBILE
-	dw Goldenrod_Map_Name22 ; map_const ILEX_FOREST_AZALEA_GATE
-	dw Goldenrod_Map_Name23 ; map_const ROUTE_6_ILEX_FOREST_GATE
-	dw Goldenrod_Map_Name24 ; map_const DAY_CARE
-	dw Goldenrod_Map_Name25 ; map_const HATCH_ROOM
-	dw Goldenrod_Map_Name26 ; map_const GOLDENROD_MANSION_1F
-	dw Goldenrod_Map_Name27 ; map_const GOLDENROD_MANSION_2F
-	dw Goldenrod_Map_Name28 ; map_const GOLDENROD_MANSION_3F
-	dw Goldenrod_Map_Name29 ; map_const GOLDENROD_MANSION_ROOF
-	dw Goldenrod_Map_Name30 ; map_const GOLDENROD_MANSION_ROOF_HOUSE
+	dw Goldenrod_Map_Name21 ; map_const ILEX_FOREST_AZALEA_GATE
+	dw Goldenrod_Map_Name22 ; map_const ROUTE_6_ILEX_FOREST_GATE
+	dw Goldenrod_Map_Name23 ; map_const DAY_CARE
+	dw Goldenrod_Map_Name24 ; map_const HATCH_ROOM
+	dw Goldenrod_Map_Name25 ; map_const GOLDENROD_MANSION_1F
+	dw Goldenrod_Map_Name26 ; map_const GOLDENROD_MANSION_2F
+	dw Goldenrod_Map_Name27 ; map_const GOLDENROD_MANSION_3F
+	dw Goldenrod_Map_Name28 ; map_const GOLDENROD_MANSION_ROOF
+	dw Goldenrod_Map_Name29 ; map_const GOLDENROD_MANSION_ROOF_HOUSE
 	assert_table_length NUM_GOLDENROD_MAPS
 
 Goldenrod_Map_Name1:  db "Route 6@"
@@ -451,16 +450,15 @@ Goldenrod_Map_Name17: db "Golden. Dept. Lift@"
 Goldenrod_Map_Name18: db "Golden. Dept. Roof@"
 Goldenrod_Map_Name19: db "Golden. GameCorner@"
 Goldenrod_Map_Name20: db "Goldenrod Center@"
-Goldenrod_Map_Name21: db "#com Cen Office@"
-Goldenrod_Map_Name22: db "Azalea - Ilex gate@"
-Goldenrod_Map_Name23: db "Ilex - Rt. 6 Gate@"
-Goldenrod_Map_Name24: db "Route 6 Day Care@"
-Goldenrod_Map_Name25: db "Hatch Room@"
-Goldenrod_Map_Name26: db "Gold. Mansion 1F@"
-Goldenrod_Map_Name27: db "Gold. Mansion 2F@"
-Goldenrod_Map_Name28: db "Gold. Mansion 3F@"
-Goldenrod_Map_Name29: db "Gold. Mansion Roof@"
-Goldenrod_Map_Name30: db "Gold. Mansion 4F@"
+Goldenrod_Map_Name21: db "Azalea - Ilex gate@"
+Goldenrod_Map_Name22: db "Ilex - Rt. 6 Gate@"
+Goldenrod_Map_Name23: db "Route 6 Day Care@"
+Goldenrod_Map_Name24: db "Hatch Room@"
+Goldenrod_Map_Name25: db "Gold. Mansion 1F@"
+Goldenrod_Map_Name26: db "Gold. Mansion 2F@"
+Goldenrod_Map_Name27: db "Gold. Mansion 3F@"
+Goldenrod_Map_Name28: db "Gold. Mansion Roof@"
+Goldenrod_Map_Name29: db "Gold. Mansion 4F@"
 
 Fast_Ship_Map_Names: ; newgroup FAST_SHIP
 	table_width 2, Fast_Ship_Map_Names
