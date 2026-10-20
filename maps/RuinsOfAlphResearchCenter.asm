@@ -8,7 +8,6 @@ RuinsOfAlphResearchCenter_MapEvents:
 	def_bg_events
 	bg_event  6,  5, BGEVENT_JUMPTEXT, RuinsOfAlphResearchCenterAcademicBooksText
 	bg_event  3,  4, BGEVENT_READ, RuinsOfAlphResearchCenterComputer
-	bg_event  7,  1, BGEVENT_READ, RuinsOfAlphResearchCenterPrinter
 
 	def_object_events
 	object_event  4,  5, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RuinsOfAlphResearchCenterScientist1Script, -1
@@ -260,27 +259,6 @@ RuinsOfAlphResearchCenterComputer:
 		para "A total of {d:NUM_UNOWN}"
 		line "kinds found."
 		done
-
-RuinsOfAlphResearchCenterPrinter:
-	opentext
-	checkevent EVENT_RUINS_OF_ALPH_RESEARCH_CENTER_SCIENTIST
-	iftrue .SkipChecking
-	readvar VAR_UNOWNCOUNT
-	ifequal NUM_UNOWN, .PrinterAvailable
-.SkipChecking:
-	jumpthisopenedtext
-		text "This doesn't seem"
-		line "to work yet."
-		done
-
-.PrinterAvailable:
-	writethistext
-		text "Unown may be"
-		line "printed out."
-		done
-	waitbutton
-	special UnownPrinter
-	endtext
 
 FossilScientist:
 	faceplayeropentext

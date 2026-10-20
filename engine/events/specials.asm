@@ -80,12 +80,6 @@ OverworldTownMap:
 	call ExitAllMenus
 	ret
 
-UnownPrinter:
-	call FadeToMenu
-	farcall _UnownPrinter
-	call ExitAllMenus
-	ret
-
 DisplayLinkRecord:
 	call FadeToMenu
 	farcall _DisplayLinkRecord
@@ -348,12 +342,6 @@ FadeOutMusic:
 Diploma:
 	call FadeToMenu
 	farcall _Diploma
-	call ExitAllMenus
-	ret
-
-PrintDiploma:
-	call FadeToMenu
-	farcall _PrintDiploma
 	call ExitAllMenus
 	ret
 

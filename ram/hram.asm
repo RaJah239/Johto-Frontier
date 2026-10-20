@@ -46,7 +46,7 @@ hInMenu:: db
 
 hMapWidthPlus6:: db
 
-hPrinter:: db
+	ds 1
 hGraphicStartTile:: db
 hMoveMon:: db
 
