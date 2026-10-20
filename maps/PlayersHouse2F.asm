@@ -47,12 +47,12 @@ PlayersHouseRadioScript:
 if DEF(_DEBUG)
 	opentext
 	; party
-	givepoke MAGIKARP, 50
+	givepoke PIKACHU, 49, LIGHT_BALL
 	; 1st mon moves
-	loadmem wPartyMon1Moves+0, SEED_BOMB
+	loadmem wPartyMon1Moves+0, THUNDERBOLT
 	loadmem wPartyMon1Moves+1, SPLASH
 	loadmem wPartyMon1Moves+2, LOVELY_KISS
-	loadmem wPartyMon1Moves+3, THUNDER
+	loadmem wPartyMon1Moves+3, EXTREMESPEED
 	closetext
 	; tms
 	giveitem TM_BRICK_BREAK, 50
