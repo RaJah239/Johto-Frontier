@@ -29,13 +29,9 @@ Pokecenter2F_MapScripts:
 	def_callbacks
 
 Pokecenter2FCheckMysteryGiftScene:
-	special CheckMysteryGift
-	ifequal $0, .done
 	clearevent EVENT_MYSTERY_GIFT_DELIVERY_GUY
 	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	iftrue .done
-	sdefer Pokecenter2F_AppearMysteryGiftDeliveryGuy
-.done
+	sdefer Pokecenter2F_AppearMysteryGiftDeliveryGuy ; remove TODOTEXT
 	end
 
 Pokecenter2FLeaveTradeCenterScene:
@@ -260,7 +256,6 @@ Pokecenter2FOfficerScript:
 	writetext Text_MysteryGiftDeliveryGuy_HereYouGo
 	promptbutton
 	waitsfx
-	special GetMysteryGiftItem
 	iffalse .BagIsFull
 	itemnotify
 	setevent EVENT_MYSTERY_GIFT_DELIVERY_GUY

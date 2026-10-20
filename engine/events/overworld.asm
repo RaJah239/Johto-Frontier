@@ -47,20 +47,6 @@ CheckEngineFlag:
 	xor a
 	ret
 
-CheckBadge:
-; Check engine flag a (ENGINE_ZEPHYRBADGE thru ENGINE_EARTHBADGE)
-; Display "Badge required" text and return carry if the badge is not owned
-	call CheckEngineFlag
-	ret nc
-	ld hl, .BadgeRequiredText
-	call MenuTextboxBackup ; push text to queue
-	scf
-	ret
-
-.BadgeRequiredText:
-	text_far _BadgeRequiredText
-	text_end
-
 CheckPartyMove:
 ; Check if a monster in your party has move d.
 
@@ -487,12 +473,6 @@ SurfFunction:
 	dw .AlreadySurfing
 
 .TrySurf:
-if DEF(_DEBUG)
-else
-	ld de, ENGINE_FOGBADGE
-	call CheckBadge
-	jr c, .nofogbadge
-endc
 	ld hl, wBikeFlags
 	bit BIKEFLAGS_ALWAYS_ON_BIKE_F, [hl]
 	jr nz, .cannotsurf
@@ -511,12 +491,11 @@ endc
 	jr c, .cannotsurf
 	ld a, $1
 	ret
-.nofogbadge
-	ld a, $80
-	ret
+
 .alreadyfail
 	ld a, $3
 	ret
+
 .cannotsurf
 	ld a, $2
 	ret

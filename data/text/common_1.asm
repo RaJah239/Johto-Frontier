@@ -950,16 +950,6 @@ _SavingRecordText::
 	line "Don't Turn Off!"
 	done
 
-_ReceiveItemText::
-	text_ram wPlayerName
-	text " received"
-	line "@"
-	text_ram wStringBuffer1
-	text "!@"
-	sound_item
-	text_promptbutton
-	text_end
-
 _NoCoinsText::
 	text "You have no coins."
 	prompt

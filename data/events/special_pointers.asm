@@ -22,8 +22,6 @@ SpecialsPointers::
 	add_special TradeCenter
 	add_special Colosseum
 	add_special CableClubCheckWhichChris
-	add_special CheckMysteryGift
-	add_special GetMysteryGiftItem
 	add_special CheckOtherPlayerGender
 
 ; Map events
@@ -97,7 +95,6 @@ SpecialsPointers::
 	add_special DaisysGrooming
 	add_special PlayCurMonCry
 	add_special ProfOaksPCBoot
-	add_special TrainerHouse ; unused
 	add_special FadeOutMusic
 	add_special Diploma
 	add_special PrintDiploma

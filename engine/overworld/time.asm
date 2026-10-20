@@ -158,34 +158,6 @@ CheckPokerusTick::
 	xor a
 	ret
 
-DoMysteryGiftIfDayHasPassed:
-	ld a, BANK(sMysteryGiftTimer)
-	call OpenSRAM
-	ld hl, sMysteryGiftTimer
-	ld a, [hli]
-	ld [wTempMysteryGiftTimer], a
-	ld a, [hl]
-	ld [wTempMysteryGiftTimer + 1], a
-	call CloseSRAM
-
-	ld hl, wTempMysteryGiftTimer
-	call CheckDayDependentEventHL
-	jr nc, .not_timed_out
-	ld hl, wTempMysteryGiftTimer
-	call InitOneDayCountdown
-	call CloseSRAM
-	farcall ResetDailyMysteryGiftLimitIfUnlocked
-
-.not_timed_out
-	ld a, BANK(sMysteryGiftTimer)
-	call OpenSRAM
-	ld hl, wTempMysteryGiftTimer
-	ld a, [hli]
-	ld [sMysteryGiftTimer], a
-	ld a, [hl]
-	ld [sMysteryGiftTimer + 1], a
-	jmp CloseSRAM
-
 UpdateTimeRemaining:
 ; If the amount of time elapsed exceeds the capacity of its
 ; unit, skip this part.

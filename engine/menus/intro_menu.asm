@@ -72,11 +72,6 @@ NewGame_ClearTilemapEtc:
 	call ClearWindowData
 	ret
 
-MysteryGift:
-	call UpdateTime
-	farcall DoMysteryGiftIfDayHasPassed
-	farjp DoMysteryGift
-
 Option:
 	farjp _Option
 
@@ -175,16 +170,6 @@ _ResetWRAM:
 	call .InitList
 
 	xor a
-	ld a, BANK(sMysteryGiftItem) ; aka BANK(sMysteryGiftUnlocked)
-	call OpenSRAM
-	ld hl, sMysteryGiftItem
-	xor a
-	ld [hli], a
-	assert sMysteryGiftItem + 1 == sMysteryGiftUnlocked
-	dec a ; -1
-	ld [hl], a
-	call CloseSRAM
-
 	call InitializeMagikarpHouse
 
 	xor a
@@ -322,7 +307,6 @@ Continue:
 	ld c, 20
 	call DelayFrames
 .Go:
-	farcall CopyMysteryGiftReceivedDecorationsToPC
 	farcall ClockContinue
 	ld a, [wSpawnAfterChampion]
 	cp SPAWN_LANCE
