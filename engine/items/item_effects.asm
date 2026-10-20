@@ -297,7 +297,66 @@ IF DEF(_DEBUG)
 ENDC
 	ld a, [wCurItem]
 	cp MASTER_BALL
-	jmp z, .catch_without_fail
+	jr nz, .not_a_master_ball
+
+	; The Master Ball always fails on Mew, Mewtwo, Lugia and Ho-Oh.
+	; Like a too-strong mon, it bounces off without being consumed.
+	ld a, [wEnemyMonSpecies]
+	cp ROTOM
+	jr z, .master_ball_fails
+	cp ABSOL
+	jr z, .master_ball_fails
+	cp DURALUDON
+	jr z, .master_ball_fails
+	cp GHOLDENGO
+	jr z, .master_ball_fails
+	cp DARKRAI
+	jr z, .master_ball_fails
+	cp REGIROCK
+	jr z, .master_ball_fails
+	cp REGICE
+	jr z, .master_ball_fails
+	cp REGISTEEL
+	jr z, .master_ball_fails
+	cp REGIGIGAS
+	jr z, .master_ball_fails
+	cp ARTICUNO
+	jr z, .master_ball_fails
+	cp ZAPDOS
+	jr z, .master_ball_fails
+	cp MOLTRES
+	jr z, .master_ball_fails
+	cp LUGIA
+	jr z, .master_ball_fails
+	cp RAIKOU
+	jr z, .master_ball_fails
+	cp ENTEI
+	jr z, .master_ball_fails
+	cp SUICUNE
+	jr z, .master_ball_fails
+	cp HO_OH
+	jr z, .master_ball_fails
+	cp UNOWN
+	jr z, .master_ball_fails
+	cp NOWN
+	jr z, .master_ball_fails
+	cp VICTINI
+	jr z, .master_ball_fails
+	cp CELEBI
+	jr z, .master_ball_fails
+	cp DITTO
+	jr z, .master_ball_fails
+	cp MEW
+	jr z, .master_ball_fails
+	cp MEWTWO
+	jr z, .master_ball_fails
+	jmp .catch_without_fail
+
+.master_ball_fails
+	ld hl, BallWontWorkText
+	jmp PrintText
+
+.not_a_master_ball
 	ld a, [wCurItem]
 	ld c, a
 	ld hl, BallMultiplierFunctionTable
@@ -1214,6 +1273,10 @@ BallSoCloseText:
 
 BallTooStrongText:
 	text_far _BallTooStrongText
+	text_end
+
+BallWontWorkText:
+	text_far _BallWontWorkText
 	text_end
 
 Text_GotchaMonWasCaught:

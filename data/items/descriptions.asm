@@ -265,8 +265,8 @@ MusicPlayerDesc:
 	next "from your Pack.@"
 
 MasterBallDesc:
-	db   "The best BALL. It"
-	next "never misses.@"
+	db   "It never fails on"
+	next "regular #mon.@"
 
 UltraBallDesc:
 	db   "A BALL with a high"

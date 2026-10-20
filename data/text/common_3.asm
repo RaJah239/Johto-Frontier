@@ -795,6 +795,11 @@ _BallTooStrongText::
 	line "Can't capture it!"
 	prompt
 
+_BallWontWorkText::
+	text "It's too powerful!"
+	line "The Ball failed!"
+	prompt
+
 Text_BallCaught::
 	text "Gotcha! @"
 	text_ram wEnemyMonNickname
