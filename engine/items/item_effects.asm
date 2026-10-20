@@ -268,7 +268,7 @@ PokeBallEffect:
 	jr z, .not_too_strong
 	pop bc
 	ld hl, BallTooStrongText
-	jmp PrintText
+	jmp .burst_ball
 
 .not_too_strong
 	pop bc
@@ -354,7 +354,7 @@ ENDC
 
 .master_ball_fails
 	ld hl, BallWontWorkText
-	jmp PrintText
+	jmp .burst_ball
 
 .not_a_master_ball
 	ld a, [wCurItem]
@@ -497,26 +497,8 @@ ENDC
 
 .fail_to_catch
 	ld [wWildMon], a
-	ld c, 10
-	call DelayFrames
-
-	ld a, [wCurItem]
-	cp POKE_BALL + 1 ; Assumes Master/Ultra/Great come before
-	jr c, .not_kurt_ball
-	ld a, POKE_BALL
-.not_kurt_ball
-	ld [wBattleAnimParam], a
-
-	ld de, ANIM_THROW_POKE_BALL
-	ld a, e
-	ld [wFXAnimID], a
-	ld a, d
-	ld [wFXAnimID + 1], a
-	xor a
-	ldh [hBattleTurn], a
-	ld [wThrownBallWobbleCount], a
-	ld [wNumHits], a
-	predef PlayBattleAnim
+	xor a ; normal throw: wobble count starts at 0
+	call .ThrowBallAnim
 
 	ld a, [wWildMon]
 	and a
@@ -860,6 +842,47 @@ ENDC
 	ld hl, wParkBallsRemaining
 	dec [hl]
 	ret
+
+.burst_ball
+; The ball is rejected outright (too strong for the party, or a pokemon
+; the Master Ball can't work on): play the throw animation with the ball
+; bursting open, then show the message. The ball bounces off without
+; being consumed.
+	push hl
+	xor a
+	ld [wWildMon], a ; the animation reads 0 as "escaped"
+	ld a, 3 ; start count: the first wobble check reports "escaped"
+	call .ThrowBallAnim
+	pop hl
+	call PrintText
+	jmp ClearSprites
+
+.ThrowBallAnim:
+; Play the ball throw animation.
+; a = 0 for the normal wobble sequence; 3 makes the first wobble check
+; report "escaped", so the ball bursts open as soon as it lands.
+	push af
+	ld c, 10
+	call DelayFrames
+
+	ld a, [wCurItem]
+	cp POKE_BALL + 1 ; Assumes Master/Ultra/Great come before
+	jr c, .not_kurt_ball
+	ld a, POKE_BALL
+.not_kurt_ball
+	ld [wBattleAnimParam], a
+
+	ld de, ANIM_THROW_POKE_BALL
+	ld a, e
+	ld [wFXAnimID], a
+	ld a, d
+	ld [wFXAnimID + 1], a
+	xor a
+	ldh [hBattleTurn], a
+	ld [wNumHits], a
+	pop af
+	ld [wThrownBallWobbleCount], a
+	predef_jump PlayBattleAnim
 
 GetHighestPartyLevel:
 	ld a, [wPartyCount]
