@@ -897,8 +897,8 @@ GetMovePriority:
 	; check move
 	cp IRON_HEAD
 	jr z, .mon_check
-	cp CURSE
-	jr z, .mon_check2
+;	cp CURSE
+;	jr z, .mon_check2
 	cp ZEN_HEADBUTT
 	jr z, .mon_check3
 
@@ -959,19 +959,19 @@ GetMovePriority:
 	; Neither is Blastoise
 	jr .regular_priority
 
-.mon_check2
+;.mon_check2
 	; check if player is using snorlax
-	ld a, [wBattleMonSpecies]
-	cp SNORLAX
-	jr z, .priority_2
+;	ld a, [wBattleMonSpecies]
+;	cp SNORLAX
+;	jr z, .priority_2
 
 	; check if foe is using Snorlax
-	ld a, [wEnemyMonSpecies]
-	cp SNORLAX
-	jr z, .priority_2
+;	ld a, [wEnemyMonSpecies]
+;	cp SNORLAX
+;	jr z, .priority_2
 
 	; Neither is Snorlax
-	jr .regular_priority
+;	jr .regular_priority
 
 .mon_check3
 	; check if player is using drowzee or hypno

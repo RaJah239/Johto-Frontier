@@ -5,6 +5,6 @@
 ; ===================================
 ; in engine/battle/core.asm" `GetMovePriority:`
 
-; Snolax gets priority Curse
+; Snolax gets priority Curse - temporarily removed
 ; Blastoise gets priority Iron Head
 ; Drowzee and Hypno both get priority Zen Headbutt
