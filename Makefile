@@ -4,7 +4,6 @@ roms := \
 	johtofrontier_au.gbc \
 	johtofrontier_debug.gbc \
 	johtofrontier11_debug.gbc
-patches := johtofrontier11.patch
 
 rom_obj := \
 	audio.o \
@@ -29,7 +28,6 @@ johtofrontier11_obj       := $(rom_obj:.o=11.o)
 johtofrontier_au_obj      := $(rom_obj:.o=_au.o)
 johtofrontier_debug_obj   := $(rom_obj:.o=_debug.o)
 johtofrontier11_debug_obj := $(rom_obj:.o=11_debug.o)
-johtofrontier11_vc_obj    := $(rom_obj:.o=11_vc.o)
 
 
 ### Build tools
@@ -61,7 +59,6 @@ crystal11:       johtofrontier11.gbc
 crystal_au:      johtofrontier_au.gbc
 d:               johtofrontier_debug.gbc
 crystal11_debug: johtofrontier11_debug.gbc
-crystal11_vc:    johtofrontier11.patch
 
 clean: tidy
 	find gfx \
@@ -82,21 +79,15 @@ tidy:
 	$(RM) $(roms) \
 	      $(roms:.gbc=.sym) \
 	      $(roms:.gbc=.map) \
-	      $(patches) \
-	      $(patches:.patch=_vc.gbc) \
-	      $(patches:.patch=_vc.sym) \
-	      $(patches:.patch=_vc.map) \
-	      $(patches:%.patch=vc/%.constants.sym) \
 	      $(johtofrontier_obj) \
 	      $(johtofrontier11_obj) \
-	      $(johtofrontier11_vc_obj) \
 	      $(johtofrontier_au_obj) \
 	      $(johtofrontier_debug_obj) \
 	      $(johtofrontier11_debug_obj) \
 	      rgbdscheck.o
 	$(MAKE) clean -C tools/
 
-compare: $(roms) $(patches)
+compare: $(roms)
 	@$(SHA1) -c roms.sha1
 
 tools:
@@ -119,10 +110,6 @@ $(johtofrontier11_obj):       RGBASMFLAGS += -D _CRYSTAL11
 $(johtofrontier_au_obj):      RGBASMFLAGS += -D _CRYSTAL11 -D _CRYSTAL_AU
 $(johtofrontier_debug_obj):   RGBASMFLAGS += -D _DEBUG
 $(johtofrontier11_debug_obj): RGBASMFLAGS += -D _CRYSTAL11 -D _DEBUG
-$(johtofrontier11_vc_obj):    RGBASMFLAGS += -D _CRYSTAL11 -D _CRYSTAL11_VC
-
-%.patch: vc/%.constants.sym %_vc.gbc %.gbc vc/%.patch.template
-	tools/make_patch $*_vc.sym $^ $@
 
 rgbdscheck.o: rgbdscheck.asm
 	$(RGBASM) -o $@ $<
@@ -148,7 +135,6 @@ $(foreach obj, $(johtofrontier11_obj), $(eval $(call DEP,$(obj),$(obj:11.o=.asm)
 $(foreach obj, $(johtofrontier_au_obj), $(eval $(call DEP,$(obj),$(obj:_au.o=.asm))))
 $(foreach obj, $(johtofrontier_debug_obj), $(eval $(call DEP,$(obj),$(obj:_debug.o=.asm))))
 $(foreach obj, $(johtofrontier11_debug_obj), $(eval $(call DEP,$(obj),$(obj:11_debug.o=.asm))))
-$(foreach obj, $(johtofrontier11_vc_obj), $(eval $(call DEP,$(obj),$(obj:11_vc.o=.asm))))
 
 # Dependencies for VC files that need to run scan_includes
 %.constants.sym: %.constants.asm $(shell tools/scan_includes %.constants.asm) $(preinclude_deps) | rgbdscheck.o
@@ -162,7 +148,6 @@ johtofrontier11_opt       = -Cjv -t PM_CRYSTAL -i BYTE -n 1 -k 01 -l 0x33 -m 0x1
 johtofrontier_au_opt      = -Cjv -t PM_CRYSTAL -i BYTU -n 0 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
 johtofrontier_debug_opt   = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
 johtofrontier11_debug_opt = -Cjv -t PM_CRYSTAL -i BYTE -n 1 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
-johtofrontier11_vc_opt    = -Cjv -t PM_CRYSTAL -i BYTE -n 1 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
 
 %.gbc: $$(%_obj) layout.link
 	$(RGBLINK) -n $*.sym -m $*.map -l layout.link -o $@ $(filter %.o,$^)

@@ -612,7 +612,6 @@ Script_yesorno:
 	ld a, TRUE
 .no
 	ld [wScriptVar], a
-	vc_hook Unknown_yesorno_ret
 	ret
 
 Script_loadmenu:
