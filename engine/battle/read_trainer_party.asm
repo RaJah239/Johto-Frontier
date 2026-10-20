@@ -71,10 +71,22 @@ MaximizeOTPartyPP:
 ; trainer battles copy these bytes into wenemymonpp at send-out
 ; wild pokemon and the cal mirror party do not go through here
 	ld a, [wOTPartyCount]
+	ld hl, wOTPartyMon1Moves
+	jr MaximizePartyPP
+
+MaximizePlayerPartyPP:
+; same as above, but for the player's own party; used for copied teams
+; (e.g. the Battle Tower Random Battle team), so they fight with max pp
+; like the opponent they were copied from
+	ld a, [wPartyCount]
+	ld hl, wPartyMon1Moves
+	; fallthrough
+
+MaximizePartyPP:
+; hl = first mon's moves field, a = number of mons
 	and a
 	ret z
 	ld b, a
-	ld hl, wOTPartyMon1Moves
 .mon_loop
 	push bc
 ; de = this mon's PP field; hl = its moves field

@@ -598,6 +598,10 @@ BattleTower_GenerateRandomPlayerParty:
 	dec b
 	jr nz, .party_loop
 
+	; The random team fights with maxed PP (base PP plus three PP-Ups),
+	; like the opponent's team; the party WRAMX bank is still selected here.
+	farcall MaximizePlayerPartyPP
+
 	pop af
 	ldh [rSVBK], a
 	ret
