@@ -115,10 +115,14 @@ SelectTM:
 	ld a, [wMenuCursorY]
 	ld [wMenuCursorPosition], a
 	ld a, [wMenuJoypad]
+	cp D_RIGHT
+	jr z, .page_down
+	cp D_LEFT
+	jr z, .page_up
 	cp B_BUTTON
 	jr z, .nope
 	cp A_BUTTON
-	jr nz, .input_loop ; D_LEFT/D_RIGHT handed back by the menu: keep browsing
+	jr nz, .input_loop
 	ld a, [wMenuSelection]
 	cp -1
 	jr nz, .done
@@ -129,6 +133,50 @@ SelectTM:
 .done
 	ld c, a
 	ret
+
+; Left/Right jump a whole window (page) at a time. The scroll position is
+; clamped like InitScrollingMenuCursor does, and the next ScrollingMenu
+; call redraws the list, so the highlight keeps its row on screen.
+.page_down
+	ld b, 1
+	jr .page
+
+.page_up
+	ld b, -1
+.page
+	ld a, [wMenuData_ScrollingMenuHeight]
+	ld c, a
+	ld a, [wMenuScrollPosition]
+	bit 7, b
+	jr nz, .page_back
+	add c
+	ld c, a
+	; max = (listSize + 1) - height, floored at 0
+	ld a, [wScrollingMenuListSize]
+	inc a
+	ld d, a
+	ld a, [wMenuData_ScrollingMenuHeight]
+	ld e, a
+	ld a, d
+	sub e
+	jr nc, .have_max
+	xor a
+.have_max
+	cp c
+	jr nc, .use_new
+	; newScroll exceeds maxScroll: keep the max
+	ld c, a
+.use_new
+	ld a, c
+	ld [wMenuScrollPosition], a
+	jr .input_loop
+.page_back
+	sub c
+	jr nc, .back_ok
+	xor a
+.back_ok
+	ld [wMenuScrollPosition], a
+	jr .input_loop
 
 .MenuHeader
 	db MENU_BACKUP_TILES ; flags

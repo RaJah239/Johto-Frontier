@@ -477,6 +477,10 @@ BattlePlazaMartTutorScript:
     ld a, [wMenuCursorY]
     ld [wMenuCursorPosition], a
     ld a, [wMenuJoypad]
+    cp D_RIGHT
+    jp z, .page_down
+    cp D_LEFT
+    jp z, .page_up
     cp B_BUTTON
     jr z, .cancel_selection
     cp A_BUTTON
@@ -558,6 +562,51 @@ BattlePlazaMartTutorScript:
     ld a, FALSE
     ld [wScriptVar], a
     ret
+
+; Left/Right jump a whole window (page) at a time. The scroll position is
+; clamped like InitScrollingMenuCursor does, and the next ScrollingMenu
+; call redraws the list, so the highlight keeps its row on screen.
+.page_down
+    ld b, 1
+    jr .page
+
+.page_up
+    ld b, -1
+.page
+    ld a, [wMenuData_ScrollingMenuHeight]
+    ld c, a
+    ld a, [wMenuScrollPosition]
+    bit 7, b
+    jr nz, .page_back
+    add c
+    ld c, a
+    ; max = (listSize + 1) - height, floored at 0
+    ld a, [wScrollingMenuListSize]
+    inc a
+    ld d, a
+    ld a, [wMenuData_ScrollingMenuHeight]
+    ld e, a
+    ld a, d
+    sub e
+    jr nc, .have_max
+    xor a
+.have_max
+    cp c
+    jr nc, .use_new
+    ; newScroll exceeds maxScroll: keep the max
+    ld c, a
+.use_new
+    ld a, c
+    ld [wMenuScrollPosition], a
+    jmp .input_loop
+
+.page_back
+    sub c
+    jr nc, .back_ok
+    xor a
+.back_ok
+    ld [wMenuScrollPosition], a
+    jmp .input_loop
 
 .not_enough_crystals:
     ld a, 2
