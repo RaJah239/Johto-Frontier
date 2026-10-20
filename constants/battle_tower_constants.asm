@@ -8,7 +8,7 @@ DEF BATTLE_TOWER_STRUCT_LENGTH EQU NAME_LENGTH + 6 * NICKNAMED_MON_STRUCT_LENGTH
 
 ; Compact Battle Tower pool records (see data/battle_tower/parties.asm)
 DEF BATTLETOWER_MON_STRUCT_LENGTH EQU 1 + 1 + NUM_MOVES ; species, item, moves
-DEF BATTLETOWER_CHALLENGE_POOL_ENTRY_LENGTH EQU 1 + 2 + 1 ; bank, address, count
+DEF BATTLETOWER_CHALLENGE_POOL_ENTRY_LENGTH EQU 1 + 2 + 2 ; bank, address, 16-bit count
 DEF BATTLETOWER_ENEMY_PARTY_LENGTH EQU 6
 DEF BATTLETOWER_LEVEL EQU 50 ; both Battle Tower teams always fight at this level
 

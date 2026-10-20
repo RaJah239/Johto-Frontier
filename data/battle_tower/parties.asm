@@ -5,8 +5,9 @@ MACRO bt_mon
 ENDM
 
 MACRO assert_bt_pool
+	assert (\2 - \1) <= $4000, "\1 must fit in a single ROMX bank"
 	assert (\2 - \1) % BATTLETOWER_MON_STRUCT_LENGTH == 0, "\1 length must use compact BT mon records"
-	assert (\2 - \1) / BATTLETOWER_MON_STRUCT_LENGTH <= $ff, "\1 must fit in a one-byte compact BT pool count"
+	assert (\2 - \1) / BATTLETOWER_MON_STRUCT_LENGTH <= $ffff, "\1 must fit in a one-word compact BT pool count"
 ENDM
 
 ; ============
@@ -21,8 +22,19 @@ ENDM
 ; effort values are maxed (252 per stat), DVs are rolled randomly per mon
 ; (see ExpandBattleTowerCompactMonToTemp)
 ; Legacy label retained for older references; new selection uses BattleTowerChallengePools.
-BattleTowerMons:
+;
+; Pools hold 16-bit mon counts (see BATTLETOWER_CHALLENGE_POOL_ENTRY_LENGTH),
+; and each pool lives in its own ROMX bank (see the SECTIONs below), so a
+; single pool can hold as many bt_mon records as fit in one bank (~2730).
+; A challenge's pools are treated as one concatenated list, so to store
+; more mons than one bank allows, just declare another pool section and
+; list it in that challenge's record in BattleTowerChallengePools below;
+; selection stays uniform across all of the listed pools.
 
+	PUSHS
+	SECTION "Battle Tower Elite Pool", ROMX
+
+BattleTowerMons:
 BattleTowerPool_Elite:
 ;	bt_mon CHANSEY, GOLD_BERRY, EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
 ;	bt_mon ABOMASNOW, MIRACLEBERRY, EXTREMESPEED, CRUNCH, FLAMETHROWER, SCALD
@@ -163,6 +175,11 @@ BattleTowerPool_Elite:
 BattleTowerPool_EliteEnd:
 	assert_bt_pool BattleTowerPool_Elite, BattleTowerPool_EliteEnd
 
+	POPS
+
+	PUSHS
+	SECTION "Battle Tower Champ Pool", ROMX
+
 BattleTowerPool_Champ:
 	bt_mon RAIKOU, LEFTOVERS, THUNDERBOLT, CRUNCH, SCALD, EARTHQUAKE
 	bt_mon ENTEI, CHARCOAL, FLARE_BLITZ, EARTHQUAKE, STONE_EDGE, EXTREMESPEED
@@ -186,28 +203,43 @@ BattleTowerPool_Champ:
 	bt_mon FERROTHORN, FOCUS_SASH, THUNDER_WAVE, STEALTH_ROCK, EXPLOSION, SPIDER_WEB
 	bt_mon VOLCARONA, LEFTOVERS, FLAMETHROWER, BUG_BUZZ, QUIVER_DANCE, RECOVER
 BattleTowerPool_ChampEnd:
+	assert_bt_pool BattleTowerPool_Champ, BattleTowerPool_ChampEnd
+
+	POPS
 
 ; Mewtwo is excluded from the regular pool; it only appears on the
 ; guaranteed final battle slot (see MaybeForceChampFinalMewtwo in
-; engine/events/battle_tower/load_trainer.asm).
+; engine/events/battle_tower/load_trainer.asm)
+; 255 is the limit for this list
 BattleTowerMon_Mewtwo:
 	bt_mon MEWTWO, LEFTOVERS, PSYBLAST, FLAMETHROWER, DRAIN_PUNCH, RECOVER
 	bt_mon MEWTWO, LEFTOVERS, PSYBLAST, AURA_SPHERE, CALM_MIND, RECOVER
 	bt_mon MEWTWO, LEFTOVERS, DRAIN_PUNCH, ZEN_HEADBUTT, BULK_UP, RECOVER
 BattleTowerMon_MewtwoEnd:
-	assert_bt_pool BattleTowerPool_Champ, BattleTowerPool_ChampEnd
+	assert (BattleTowerMon_MewtwoEnd - BattleTowerMon_Mewtwo) % BATTLETOWER_MON_STRUCT_LENGTH == 0, "Mewtwo variants must use compact BT mon records"
+	assert (BattleTowerMon_MewtwoEnd - BattleTowerMon_Mewtwo) / BATTLETOWER_MON_STRUCT_LENGTH <= $ff, "Mewtwo variants must fit in a one-byte count"
 	assert (BattleTowerMon_MewtwoEnd - BattleTowerMon_Mewtwo) / BATTLETOWER_MON_STRUCT_LENGTH >= 1, "Mewtwo variants must exist for final battle"
 
 BattleTowerChallengePools:
+; One record per challenge; each record is a pool count followed by that
+; many entries of "dba pool, dw mon count" (see
+; BATTLETOWER_CHALLENGE_POOL_ENTRY_LENGTH and PickRandomBattleTowerCompactMon).
 ; Elite
 	db 1
 	dba BattleTowerPool_Elite
-	db (BattleTowerPool_EliteEnd - BattleTowerPool_Elite) / BATTLETOWER_MON_STRUCT_LENGTH
+	dw (BattleTowerPool_EliteEnd - BattleTowerPool_Elite) / BATTLETOWER_MON_STRUCT_LENGTH
 
 ; Champ (both pools mixed, but Mewtwo excluded from regular pool)
 	db 2
 	dba BattleTowerPool_Elite
-	db (BattleTowerPool_EliteEnd - BattleTowerPool_Elite) / BATTLETOWER_MON_STRUCT_LENGTH
+	dw (BattleTowerPool_EliteEnd - BattleTowerPool_Elite) / BATTLETOWER_MON_STRUCT_LENGTH
 	dba BattleTowerPool_Champ
-	db (BattleTowerPool_ChampEnd - BattleTowerPool_Champ) / BATTLETOWER_MON_STRUCT_LENGTH
+	dw (BattleTowerPool_ChampEnd - BattleTowerPool_Champ) / BATTLETOWER_MON_STRUCT_LENGTH
 BattleTowerChallengePoolsEnd:
+
+; A challenge walks its pools with a single 16-bit mon index, so every
+; challenge's combined pool count must stay within one word, and each
+; challenge must list at least one pool with at least one mon.
+	assert (BattleTowerPool_EliteEnd - BattleTowerPool_Elite) / BATTLETOWER_MON_STRUCT_LENGTH >= 1, "Elite pool must have at least one mon"
+	assert (BattleTowerPool_ChampEnd - BattleTowerPool_Champ) / BATTLETOWER_MON_STRUCT_LENGTH >= 1, "Champ pool must have at least one mon"
+	assert (BattleTowerPool_EliteEnd - BattleTowerPool_Elite + BattleTowerPool_ChampEnd - BattleTowerPool_Champ) / BATTLETOWER_MON_STRUCT_LENGTH <= $ffff, "Champ's combined pools must fit in a one-word mon count"

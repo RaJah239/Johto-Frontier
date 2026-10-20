@@ -230,35 +230,142 @@ MaybeForceChampFinalMewtwo:
 PickRandomBattleTowerCompactMon:
 ; Return a: species, b: bank, hl: compact bt_mon entry. Preserve de, since
 ; the caller keeps the wBT_OTTrainer write cursor there.
+; The pools listed for a challenge act as one concatenated list (see
+; data/battle_tower/parties.asm), so every mon is equally likely no
+; matter which banks the pools are split across.
 	push de
 	call GetBattleTowerChallengePools
-	ld a, [hli] ; pool count for this challenge
-	call RandomRange
-	ld bc, BATTLETOWER_CHALLENGE_POOL_ENTRY_LENGTH
-	call AddNTimes
+	ld a, [hli]
+	ld c, a ; pool count for this challenge
+	ld b, 0
+	push bc ; save the pool count
+	push hl ; -> first pool entry
 
-	ld a, [hli]
-	ld b, a ; compact pool bank
-	ld a, [hli]
-	ld e, a ; compact pool address low
-	ld a, [hli]
-	ld d, a ; compact pool address high
-	ld a, [hl] ; compact pool entry count
-	ld c, a
+; Sum the per-pool counts into the total number of mons (de).
+	ld de, 0
+.sum_pools_loop
+	inc hl ; skip the pool's bank byte
+	inc hl ; skip its address low byte
+	inc hl ; skip its address high byte
+	ld a, [hli] ; count low
+	add e
+	ld e, a
+	ld a, [hli] ; count high
+	adc d
+	ld d, a
+	dec c
+	jr nz, .sum_pools_loop
 
-	ld a, b
-	ldh [hTempBank], a
-	ld a, c
-	call RandomRange
+	call BattleTowerRandomLessThanDE ; de = random mon index over the pools
+
+	pop hl ; -> first pool entry
+	pop bc ; c = pool count
+
+.find_pool_loop
+; hl -> the pool entry. The index lands in this pool iff it is smaller
+; than the pool's count.
+	inc hl ; skip the pool's bank byte
+	inc hl ; skip its address low byte
+	inc hl ; skip its address high byte
+	ld a, [hli] ; count low
+	ld b, a
+	ld a, [hl] ; count high
+
+; Compare the index (de) against the count (b:a): carry iff index < count.
+	push hl ; -> count high
+	ld h, a ; count high
+	ld a, e
+	sub b ; index low - count low
+	ld a, d
+	sbc h ; index high - count high
+	pop hl ; -> count high
+	jr c, .use_pool
+
+.next_pool
+; Drop this pool's count from the index and step to the next entry.
+	ld a, e
+	sub b
+	ld e, a
+	ld a, [hl]
+	sbc d
+	ld d, a
+	inc hl ; -> next pool entry
+	dec c
+	jr nz, .find_pool_loop
+; The index was summed from these very counts, so a pool always matches
+; before the entries run out; treat the last entry as a graceful fallback.
+
+.use_pool
+; Found it: de = index within the pool, hl -> the pool's count high byte.
+	dec hl
+	dec hl
+	dec hl
+	dec hl ; -> the pool entry
+; hl = de * BATTLETOWER_MON_STRUCT_LENGTH
+	push hl
 	ld h, d
 	ld l, e
-	ld bc, BATTLETOWER_MON_STRUCT_LENGTH
-	call AddNTimes
+	add hl, hl ; x2
+	add hl, hl ; x4
+	ld b, d
+	ld c, e
+	add hl, bc ; x5
+	add hl, bc ; x6
+	pop de ; de -> the pool entry
+; hl += the pool's base address
+	ld a, [de]
+	ld b, a ; pool bank
+	inc de
+	ld a, [de] ; address low
+	add l
+	ld l, a
+	inc de
+	ld a, [de] ; address high
+	adc h
+	ld h, a
 
-	ldh a, [hTempBank]
-	ld b, a
+	ld a, b
 	call GetFarByte
 	pop de
+	ret
+
+BattleTowerRandomLessThanDE:
+; Return a random 16-bit value in [0, de). Input de must be nonzero.
+; The high byte is drawn from [0, de >> 8]; when it lands on the top
+; value, the low byte is capped to the total's low byte, and anything
+; at or above the total is rejected. Every value is then equally
+; likely, even though 8-bit random ranges cannot divide a 16-bit
+; total evenly.
+.retry
+	ld a, d
+	and a
+	jr z, .small_total ; fits in one byte: plain 8-bit range
+	cp $ff
+	jr z, .high_byte_any ; d + 1 would overflow; any byte is in range
+	inc a
+	call RandomRange ; a in [0, d]
+	jr .have_high_byte
+.high_byte_any
+	call Random
+.have_high_byte
+	ld b, a ; candidate high byte
+	cp d
+	jr z, .limit_low_byte
+	call Random ; below the top value: any low byte is in range
+	jr .got_low_byte
+.limit_low_byte
+	call Random
+	cp e
+	jr nc, .retry ; at or above the total: roll again
+.got_low_byte
+	ld e, a ; low byte
+	ld a, b
+	ld d, a ; high byte
+	ret
+.small_total
+	ld a, e
+	call RandomRange
+	ld e, a
 	ret
 
 GetBattleTowerChallengePools:
@@ -284,6 +391,7 @@ GetBattleTowerChallengePools:
 	ld a, [hli] ; pool count
 	ld c, a
 	ld b, 0
+	add hl, bc
 	add hl, bc
 	add hl, bc
 	add hl, bc
