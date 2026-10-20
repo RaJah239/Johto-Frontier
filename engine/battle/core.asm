@@ -7068,6 +7068,15 @@ GiveExperiencePoints:
 	bit SCALED_EXP, a
 	jr z, .skip_exp_scaling
 
+	; Chansey and Blissey always give unscaled (normal) experience,
+	; even when Experience Gain is set to Scaled. They are the classic
+	; EXP-training targets, so the level-scaling penalty is skipped.
+	ld a, [wEnemyMonSpecies]
+	cp CHANSEY
+	jr z, .skip_exp_scaling
+	cp BLISSEY
+	jr z, .skip_exp_scaling
+
 	; Get player mon's level
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Species
