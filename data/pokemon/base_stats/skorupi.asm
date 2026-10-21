@@ -1,13 +1,13 @@
-	db SKORUPI ; Species ID
+	db SKORUPI ; 124
 
-	db  40,  50,  90,  65,  30,  55
-	evs  0,   0,   1,   0,   0,   0
+	db  40,  50,  90,  65,  30,  55 ; 330 BST
+	evs  0,   0,   2,   1,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db POISON, BUG ; type
 	db 120 ; catch rate
-	db 66 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 65 ; base exp
+	db BERRY, MYSTERYBERRY ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/skorupi/front.dimensions"

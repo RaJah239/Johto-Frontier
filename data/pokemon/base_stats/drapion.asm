@@ -1,13 +1,13 @@
-	db DRAPION ; Species ID
+	db DRAPION ; 125
 
-	db  70,  90, 100,  95,  60,  95
-	evs  0,   0,   2,   0,   0,   0
+	db  70,  95, 110,  95,  60,  75 ; 505 BST
+	evs  1,   2,   2,   2,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db POISON, DARK ; type
 	db 45 ; catch rate
-	db 175 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 200 ; base exp
+	db MINT_BERRY, MYSTERYBERRY ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/drapion/front.dimensions"

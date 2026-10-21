@@ -1,13 +1,13 @@
-	db GIBLE ; Species ID
+	db GIBLE ; 104
 
-	db  58,  70,  45,  42,  40,  45
+	db  58,  70,  45,  42,  40,  45 ; 300 BST
 	evs  0,   1,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db DRAGON, GROUND ; type
 	db 45 ; catch rate
 	db 60 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db BLU_APRICORN, SOFT_SAND ; items
 	db GENDER_F50 ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/gible/front.dimensions"

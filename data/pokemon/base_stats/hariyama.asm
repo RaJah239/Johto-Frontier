@@ -1,14 +1,14 @@
-	db HARIYAMA ; 043
+	db HARIYAMA ; 108
 
-	db 144, 120,  60,  50,  40,  60
-	evs  2,   0,   0,   0,   0,   0
+	db 150, 125,  70,  50,  40,  70 ; 505 BST
+	evs  3,   3,   1,   0,   0,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db FIGHTING, FIGHTING ; type
-	db 200 ; catch rate
-	db 184 ; base exp
-	db NO_ITEM, NO_ITEM ; items
-	db GENDER_F25 ; gender ratio
+	db 60 ; catch rate
+	db 215 ; base exp
+	db YLW_APRICORN, BLACKBELT_I ; items
+	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/hariyama/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

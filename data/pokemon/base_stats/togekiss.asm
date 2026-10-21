@@ -8,7 +8,7 @@
 	db 30 ; catch rate
 	db 245 ; base exp
 	db WHT_APRICORN, BRIGHTPOWDER ; items
-	db GENDER_F12_5 ; gender ratio
+	db GENDER_F50 ; gender ratio
 	db 10 ; step cycles to hatch
 	INCBIN "gfx/pokemon/togekiss/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

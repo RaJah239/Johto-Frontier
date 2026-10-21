@@ -1,13 +1,13 @@
-	db VOLCARONA ; Species ID
+	db VOLCARONA ; 127
 
-	db  85,  60,  65, 135, 105, 100
-	evs  0,   0,   0,   0,   3,   0
+	db  85,  60,  65, 135, 105, 100 ; 550 BST
+	evs  2,   1,   1,   3,   2,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db BUG, FIRE ; type
 	db 3 ; catch rate
 	db 255 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db PSNCUREBERRY, CHARCOAL ; items
 	db GENDER_F50 ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/volcarona/front.dimensions"

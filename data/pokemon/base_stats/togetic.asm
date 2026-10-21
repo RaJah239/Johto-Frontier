@@ -8,7 +8,7 @@
 	db 75 ; catch rate
 	db 142 ; base exp
 	db WHT_APRICORN, MIRACLEBERRY ; items
-	db GENDER_F12_5 ; gender ratio
+	db GENDER_F50 ; gender ratio
 	db 10 ; step cycles to hatch
 	INCBIN "gfx/pokemon/togetic/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

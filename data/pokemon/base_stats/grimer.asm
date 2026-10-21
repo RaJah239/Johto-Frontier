@@ -1,13 +1,13 @@
-	db GRIMER ; 088
+	db GRIMER ; 149
 
-	db  80,  80,  50,  25,  40,  50
-	evs  1,   0,   0,   0,   0,   0
+	db  80,  80,  50,  25,  40,  55 ; 330 BST
+	evs  1,   1,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
-	db POISON, POISON ; type
+	db POISON, DARK ; type
 	db 190 ; catch rate
 	db 90 ; base exp
-	db NO_ITEM, NUGGET ; items
+	db BLK_APRICORN, NUGGET ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/grimer/front.dimensions"

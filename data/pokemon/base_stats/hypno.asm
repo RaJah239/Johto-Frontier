@@ -1,13 +1,13 @@
-	db HYPNO ; 097
+	db HYPNO ; 145
 
-	db  85,  73,  70,  67,  73, 115
-	evs  0,   0,   0,   0,   0,   2
+	db  85,  90,  80,  67,  68, 115 ; 505 BST
+	evs  1,   2,   1,   1,   1,   2
 	;   hp  atk  def  spd  sat  sdf
 
-	db PSYCHIC_TYPE, PSYCHIC_TYPE ; type
+	db PSYCHIC_TYPE, DARK ; type
 	db 75 ; catch rate
-	db 165 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 205 ; base exp
+	db MINT_BERRY, BLACKGLASSES ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/hypno/front.dimensions"

@@ -1,13 +1,13 @@
-	db DROWZEE ; 096
+	db DROWZEE ; 144
 
-	db  60,  48,  45,  42,  43,  90
-	evs  0,   0,   0,   0,   0,   1
+	db  60,  50,  45,  42,  43,  90 ; 330 BST
+	evs  1,   0,   0,   0,   0,   2
 	;   hp  atk  def  spd  sat  sdf
 
-	db PSYCHIC_TYPE, PSYCHIC_TYPE ; type
+	db PSYCHIC_TYPE, DARK ; type
 	db 190 ; catch rate
-	db 102 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 90 ; base exp
+	db MINT_BERRY, TWISTEDSPOON ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/drowzee/front.dimensions"

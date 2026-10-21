@@ -8,7 +8,7 @@
 	db 45 ; catch rate
 	db 184 ; base exp
 	db BLK_APRICORN, RARE_CANDY ; items
-	db GENDER_F12_5 ; gender ratio
+	db GENDER_F50 ; gender ratio
 	db 35 ; step cycles to hatch
 	INCBIN "gfx/pokemon/umbreon/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

@@ -1,13 +1,13 @@
-	db WEEZING ; 110
+	db WEEZING ; 148
 
-	db  65,  90, 120,  60,  85,  70
-	evs  0,   0,   2,   0,   0,   0
-	;   hp  atk  def  spd  sat  sdf
+	db  100,  95, 120,  60,  60,  70 ; 505 BST
+	evs   2,   2,   3,   1,   1,   1
+	;    hp  atk  def  spd  sat  sdf
 
-	db POISON, POISON ; type
+	db POISON, FIRE ; type
 	db 60 ; catch rate
-	db 173 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 205 ; base exp
+	db RED_APRICORN, CHARCOAL ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/weezing/front.dimensions"

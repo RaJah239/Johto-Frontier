@@ -8,7 +8,7 @@
 	db 45 ; catch rate
 	db 236 ; base exp
 	db GRN_APRICORN, MIRACLE_SEED ; items
-	db GENDER_F12_5 ; gender ratio
+	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/meganium/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

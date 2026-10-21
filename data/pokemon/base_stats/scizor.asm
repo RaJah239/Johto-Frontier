@@ -1,13 +1,13 @@
-	db SCIZOR ; 212
+	db SCIZOR ; 135
 
-	db  70, 130, 100,  65,  55,  80
-	evs  0,   2,   0,   0,   0,   0
+	db  70, 130, 100,  65,  60,  80 ; 505 BST
+	evs  1,   3,   2,   1,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db BUG, STEEL ; type
-	db 25 ; catch rate
-	db 200 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 45 ; catch rate
+	db 205 ; base exp
+	db NO_ITEM, METAL_COAT ; items
 	db GENDER_F50 ; gender ratio
 	db 25 ; step cycles to hatch
 	INCBIN "gfx/pokemon/scizor/front.dimensions"

@@ -1,13 +1,13 @@
-	db GALVANTULA ; Species ID
+	db GALVANTULA ; 123
 
-	db  70,  77,  60, 118, 107,  60
-	evs  0,   0,   0,   2,   0,   0
+	db  80,  77,  64, 118, 102,  64 ; 505 BST
+	evs  1,   1,   1,   2,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db BUG, ELECTRIC ; type
 	db 75 ; catch rate
-	db 165 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 205 ; base exp
+	db YLW_APRICORN, SILVERPOWDER ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/galvantula/front.dimensions"

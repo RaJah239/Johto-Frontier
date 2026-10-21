@@ -8,7 +8,7 @@
 	db 45 ; catch rate
 	db 239 ; base exp
 	db RED_APRICORN, BLACKBELT_I ; items
-	db GENDER_F12_5 ; gender ratio
+	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/blaziken/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

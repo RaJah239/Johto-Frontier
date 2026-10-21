@@ -1,13 +1,13 @@
-	db SLOWBRO ; 080
+	db SLOWBRO ; 114
 
-	db  95,  75, 110,  30, 100,  80
-	evs  0,   0,   2,   0,   0,   0
-	;   hp  atk  def  spd  sat  sdf
+	db  100,  70, 110,  30, 110,  85 ; 505 BST
+	evs   2,   1,   2,   0,   2,   1
+	;    hp  atk  def  spd  sat  sdf
 
 	db WATER, PSYCHIC_TYPE ; type
 	db 75 ; catch rate
-	db 164 ; base exp
-	db NO_ITEM, KINGS_ROCK ; items
+	db 210 ; base exp
+	db MINT_BERRY, KINGS_ROCK ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/slowbro/front.dimensions"

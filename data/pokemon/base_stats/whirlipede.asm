@@ -1,13 +1,13 @@
-	db WHIRLIPEDE ; Species ID
+	db WHIRLIPEDE ; 120
 
-	db  40,  55,  99,  47,  40,  79
-	evs  0,   0,   2,   0,   0,   0
+	db  40,  55,  99,  47,  40,  79 ; 360 BST
+	evs  0,   0,   2,   0,   0,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db BUG, POISON ; type
 	db 120 ; catch rate
 	db 126 ; base exp
-	db POISON_BARB, POISON_BARB ; items
+	db PSNCUREBERRY, SILVERPOWDER ; items
 	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch
 	INCBIN "gfx/pokemon/whirlipede/front.dimensions"

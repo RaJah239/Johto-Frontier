@@ -1,13 +1,13 @@
-	db TANGROWTH ; Species ID
+	db TANGROWTH ; 139
 
-	db  100, 100, 125,  50, 110,  50
-	evs   0,   0,   2,   0,   0,   0
+	db  100, 100,  88,  50, 110,  87 ; 535 BST
+	evs   2,   2,   1,   0,   2,   1
 	;    hp  atk  def  spd  sat  sdf
 
 	db GRASS, WATER ; type
 	db 30 ; catch rate
-	db 200 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 210 ; base exp
+	db GRN_APRICORN, MIRACLE_SEED ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/tangrowth/front.dimensions"

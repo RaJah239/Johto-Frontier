@@ -1,13 +1,13 @@
-	db SCYTHER ; 123
+	db SCYTHER ; 134
 
-	db  70, 110,  80, 105,  55,  80
-	evs  0,   1,   0,   0,   0,   0
+	db  70, 110,  80, 105,  55,  80 ; 500 BST
+	evs  1,   2,   1,   2,   0,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db BUG, FLYING ; type
 	db 45 ; catch rate
-	db 187 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 190 ; base exp
+	db NO_ITEM, SILVERPOWDER ; items
 	db GENDER_F50 ; gender ratio
 	db 25 ; step cycles to hatch
 	INCBIN "gfx/pokemon/scyther/front.dimensions"

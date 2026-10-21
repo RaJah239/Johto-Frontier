@@ -1,13 +1,13 @@
-	db JOLTIK ; Species ID
+	db JOLTIK ; 122
 
-	db  50,  47,  50,  65,  57,  50
-	evs  0,   0,   0,   1,   0,   0
+	db  50,  45,  50,  65,  60,  50 ; 320 BST
+	evs  0,   0,   0,   1,   1,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db BUG, ELECTRIC ; type
 	db 190 ; catch rate
-	db 64 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 65 ; base exp
+	db ICE_BERRY, YLW_APRICORN ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/joltik/front.dimensions"

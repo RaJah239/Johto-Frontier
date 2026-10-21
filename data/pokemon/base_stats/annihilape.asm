@@ -1,13 +1,13 @@
-	db ANNIHILAPE ; Species ID
+	db ANNIHILAPE ; 131
 
-	db 110, 115,  80,  90,  50,  90
-	evs  0,   3,   0,   0,   0,   0
+	db  85, 115,  60,  95,  80,  70 ; 505 BST
+	evs  2,   2,   1,   2,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db FIGHTING, GHOST ; type
-	db 45 ; catch rate
-	db 240 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 75 ; catch rate
+	db 210 ; base exp
+	db BLK_APRICORN, BLACKBELT_I ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/annihilape/front.dimensions"

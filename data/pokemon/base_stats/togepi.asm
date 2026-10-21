@@ -8,7 +8,7 @@
 	db 190 ; catch rate
 	db 49 ; base exp
 	db BERRY, EVERSTONE ; items
-	db GENDER_F12_5 ; gender ratio
+	db GENDER_F50 ; gender ratio
 	db 10 ; step cycles to hatch
 	INCBIN "gfx/pokemon/togepi/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

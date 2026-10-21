@@ -8,7 +8,7 @@
 	db 190 ; catch rate
 	db 90 ; base exp
 	db BURNT_BERRY, PINK_BOW ; items
-	db GENDER_F25 ; gender ratio
+	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/growlithe/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

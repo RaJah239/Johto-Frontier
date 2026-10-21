@@ -8,7 +8,7 @@
 	db 45 ; catch rate
 	db 142 ; base exp
 	db BERRY, SAND_SHARD ; items
-	db GENDER_F12_5 ; gender ratio
+	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/grotle/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

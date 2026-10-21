@@ -8,7 +8,7 @@
 	db 45 ; catch rate
 	db 62 ; base exp
 	db BERRY, RED_APRICORN ; items
-	db GENDER_F12_5 ; gender ratio
+	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/cyndaquil/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

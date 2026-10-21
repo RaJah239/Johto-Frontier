@@ -1,13 +1,13 @@
-	db GARCHOMP ; Species ID
+	db GARCHOMP ; 106
 
-	db 108, 130,  95, 102,  80,  85
-	evs  0,   3,   0,   0,   0,   0
+	db 108, 130,  95, 102,  80,  85 ; 600 BST
+	evs  2,   3,   2,   2,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db DRAGON, GROUND ; type
 	db 45 ; catch rate
-	db 236 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 240 ; base exp
+	db RED_APRICORN, LIFE_ORB ; items
 	db GENDER_F50 ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/garchomp/front.dimensions"

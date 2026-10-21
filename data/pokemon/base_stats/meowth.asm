@@ -1,13 +1,13 @@
-	db MEOWTH ; 052
+	db MEOWTH ; 140
 
-	db  40,  45,  35,  90,  40,  40
-	evs  0,   0,   0,   1,   0,   0
+	db  40,  45,  35,  90,  50,  40 ; 300 BST
+	evs  0,   0,   0,   2,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db NORMAL, NORMAL ; type
 	db 255 ; catch rate
-	db 69 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 70 ; base exp
+	db BERRY, AMULET_COIN ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/meowth/front.dimensions"

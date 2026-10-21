@@ -1,14 +1,14 @@
-	db GRANBULL ; 210
+	db GRANBULL ; 143
 
-	db  90, 120,  75,  45,  60,  60
-	evs  0,   2,   0,   0,   0,   0
+	db  90, 125,  75,  65,  70,  80 ; 505 BST
+	evs  2,   3,   1,   1,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
-	db NORMAL, NORMAL ; type
+	db FAIRY, FIGHTING ; type
 	db 75 ; catch rate
-	db 178 ; base exp
-	db NO_ITEM, NO_ITEM ; items
-	db GENDER_F75 ; gender ratio
+	db 205 ; base exp
+	db PNK_APRICORN, POLKADOT_BOW ; items
+	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/granbull/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

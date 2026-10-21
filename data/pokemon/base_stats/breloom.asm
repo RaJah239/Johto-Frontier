@@ -1,12 +1,12 @@
-	db BRELOOM ; species ID
+	db BRELOOM ; 116
 
-	db  60, 130,  80,  70,  60,  60
-	evs  0,   2,   0,   0,   0,   0
+	db  60, 135,  75,  80,  80,  75 ; 505 BST
+	evs  1,   3,   1,   1,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db GRASS, FIGHTING ; type
 	db 90 ; catch rate
-	db 161 ; base exp
+	db 210 ; base exp
 	db TINYMUSHROOM, BIG_MUSHROOM ; items
 	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch

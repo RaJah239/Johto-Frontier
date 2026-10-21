@@ -1,13 +1,13 @@
-	db SPINARAK ; 167
+	db SPINARAK ; 117
 
-	db  40,  60,  40,  30,  40,  40
-	evs  0,   1,   0,   0,   0,   0
+	db  45,  60,  45,  60,  45,  45 ; 300 BST
+	evs  0,   1,   0,   1,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
-	db BUG, POISON ; type
+	db BUG, DARK ; type
 	db 255 ; catch rate
-	db 54 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 70 ; base exp
+	db BERRY, GRN_APRICORN ; items
 	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch
 	INCBIN "gfx/pokemon/spinarak/front.dimensions"

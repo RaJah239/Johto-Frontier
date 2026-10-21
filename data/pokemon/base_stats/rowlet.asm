@@ -8,7 +8,7 @@
 	db 45 ; catch rate
 	db 64 ; base exp
 	db BERRY, GRN_APRICORN ; items
-	db GENDER_F12_5 ; gender ratio
+	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch
 	INCBIN "gfx/pokemon/rowlet/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

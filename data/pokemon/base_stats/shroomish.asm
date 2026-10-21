@@ -1,7 +1,7 @@
-	db SHROOMISH ; species ID
+	db SHROOMISH ; 115
 
-	db  20,  10, 230,  05,  10, 230
-	evs  1,   0,   0,   0,   0,   0
+	db  60,  40,  60,  35,  45,  60 ; 300 BST
+	evs  1,   0,   1,   0,   0,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db GRASS, GRASS ; type

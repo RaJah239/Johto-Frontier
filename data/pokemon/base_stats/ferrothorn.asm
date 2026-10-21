@@ -1,13 +1,13 @@
-	db FERROTHORN ; species ID
+	db FERROTHORN ; 133
 
-	db  74,  94, 131,  20,  54, 116
-	evs  0,   0,   2,   0,   0,   0
+	db  85,  94, 131,  20,  59, 116 ; 505 BST
+	evs  1,   2,   3,   0,   0,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db GRASS, STEEL ; type
 	db 90 ; catch rate
-	db 171 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 205 ; base exp
+	db YLW_APRICORN, FOCUS_SASH ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/ferrothorn/front.dimensions"

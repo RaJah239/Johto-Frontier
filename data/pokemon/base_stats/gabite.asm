@@ -1,13 +1,13 @@
-	db GABITE ; Species ID
+	db GABITE ; 105
 
-	db  68,  90,  65,  82,  50,  55
-	evs  0,   2,   0,   0,   0,   0
+	db  68,  90,  65,  82,  50,  55 ; 410 BST
+	evs  1,   2,   1,   1,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db DRAGON, GROUND ; type
 	db 45 ; catch rate
 	db 144 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db GRN_APRICORN, DRAGON_FANG ; items
 	db GENDER_F50 ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/gabite/front.dimensions"

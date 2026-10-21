@@ -1,13 +1,13 @@
-	db MUK ; 089
+	db MUK ; 150
 
-	db 105, 105,  75,  50,  65, 100
-	evs  1,   1,   0,   0,   0,   0
+	db 105, 110,  75,  50,  65, 100 ; 505 BST
+	evs  2,   2,   1,   0,   1,   2
 	;   hp  atk  def  spd  sat  sdf
 
-	db POISON, POISON ; type
+	db POISON, DARK ; type
 	db 75 ; catch rate
-	db 157 ; base exp
-	db NO_ITEM, NUGGET ; items
+	db 205 ; base exp
+	db BLK_APRICORN, NUGGET ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/muk/front.dimensions"
