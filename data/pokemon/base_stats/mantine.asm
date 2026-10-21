@@ -1,13 +1,13 @@
-	db MANTINE ; 226
+	db MANTINE ; 171
 
-	db  65,  40,  70,  70,  80, 140
-	evs  0,   0,   0,   0,   0,   2
+	db  85,  70,  65, 130, 100,  50 ; 500 BST
+	evs  1,   1,   1,   3,   2,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db WATER, FLYING ; type
-	db 25 ; catch rate
-	db 168 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 45 ; catch rate
+	db 190 ; base exp
+	db NO_ITEM, SILVER_BERRY ; items
 	db GENDER_F50 ; gender ratio
 	db 25 ; step cycles to hatch
 	INCBIN "gfx/pokemon/mantine/front.dimensions"

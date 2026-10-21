@@ -1,11 +1,11 @@
-	db GHOLDENGO ; 252
+	db GHOLDENGO ; 232
 
 	;   hp  atk  def  spd  sat  sdf
 	db  87,  60,  95,  84, 133,  91 ; 550 BST
-	evs  0,   0,   0,   0,   2,   0
+	evs  1,   1,   2,   1,   3,   2
 
 	db STEEL, GHOST ; type
-	db 45 ; catch rate
+	db 3 ; catch rate
 	db 220 ; base exp
 	db NUGGET, NUGGET ; items
 	db GENDER_UNKNOWN ; gender ratio

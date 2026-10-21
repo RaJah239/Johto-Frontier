@@ -1,13 +1,13 @@
-	db PILOSWINE ; 221
+	db PILOSWINE ; 193
 
-	db 100, 100,  80,  50,  60,  60
-	evs  1,   1,   0,   0,   0,   0
+	db 100, 100,  80,  50,  60,  60 ; 450 BST
+	evs  2,   2,   1,   0,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db ICE, GROUND ; type
 	db 75 ; catch rate
 	db 160 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db WHT_APRICORN, NEVERMELTICE ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/piloswine/front.dimensions"

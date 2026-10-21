@@ -1,14 +1,14 @@
-	db RIOLU ; Spieces ID
+	db RIOLU ; 202
 
-	db  40,  70,  40,  60,  35,  40
-	evs  0,   1,   0,   0,   0,   0
+	db  40,  70,  40,  60,  50,  40 ; 300 BST
+	evs  0,   1,   0,   1,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db FIGHTING, FIGHTING ; type
 	db 75 ; catch rate
-	db 57 ; base exp
-	db NO_ITEM, NO_ITEM ; items
-	db GENDER_F12_5 ; gender ratio
+	db 65 ; base exp
+	db BERRY, BLACKBELT_I ; items
+	db GENDER_F50 ; gender ratio
 	db 25 ; step cycles to hatch
 	INCBIN "gfx/pokemon/riolu/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

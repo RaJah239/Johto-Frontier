@@ -1,12 +1,12 @@
-	db HO_OH ; 250
+	db HO_OH ; 245
 
-	db 106, 130,  90,  90, 110, 154
-	evs  0,   0,   0,   0,   0,   3
 	;   hp  atk  def  spd  sat  sdf
+	db 106, 130,  90,  90, 110, 154 ; 680 BST
+	evs  2,   3,   2,   2,   2,   3
 
 	db FIRE, FLYING ; type
 	db 3 ; catch rate
-	db 220 ; base exp
+	db 255 ; base exp
 	db SACRED_ASH, SACRED_ASH ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 120 ; step cycles to hatch

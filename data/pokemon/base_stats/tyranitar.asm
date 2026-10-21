@@ -1,13 +1,13 @@
-	db TYRANITAR ; 248
+	db TYRANITAR ; 214
 
-	db 100, 134, 110,  61,  95, 100
-	evs  0,   3,   0,   0,   0,   0
+	db 100, 134, 110,  61,  95, 100 ; 600 BST
+	evs  2,   3,   2,   1,   2,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db ROCK, DARK ; type
 	db 45 ; catch rate
-	db 218 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 240 ; base exp
+	db NO_ITEM, BLACKGLASSES ; items
 	db GENDER_F50 ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/tyranitar/front.dimensions"

@@ -1,13 +1,13 @@
-	db REGIROCK ; species ID
+	db REGIROCK ; 234
 
-	db 100, 100, 200,  50,  50, 100
-	evs  0,   0,   3,   0,   0,   0
+	db 100, 100, 200,  50,  50, 100 ; 600 BST
+	evs  2,   2,   3,   0,   0,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db ROCK, ROCK ; type
 	db 3 ; catch rate
-	db 255 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 240 ; base exp
+	db HARD_STONE, HARD_STONE ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 80 ; step cycles to hatch
 	INCBIN "gfx/pokemon/regirock/front.dimensions"

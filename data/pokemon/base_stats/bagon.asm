@@ -1,7 +1,7 @@
-	db BAGON ; Species ID
+	db BAGON ; 215
 
-	db  45,  75,  60,  50,  40,  30
-	evs  0,   1,   0,   0,   0,   0
+	db  45,  75,  60,  50,  40,  30 ; 300 BST
+	evs  0,   1,   1,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db DRAGON, DRAGON ; type

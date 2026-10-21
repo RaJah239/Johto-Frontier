@@ -1,13 +1,13 @@
-	db TAUROS ; 128
+	db TAUROS ; 155
 
-	db  75, 100,  95, 110,  40,  70
-	evs  0,   1,   0,   1,   0,   0
+	db  75, 120,  95, 110,  30,  70 ; 500 BST
+	evs  1,   3,   2,   2,   0,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db NORMAL, NORMAL ; type
 	db 45 ; catch rate
-	db 211 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 200 ; base exp
+	db BERRY, SILVER_BERRY ; items
 	db GENDER_F0 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/tauros/front.dimensions"

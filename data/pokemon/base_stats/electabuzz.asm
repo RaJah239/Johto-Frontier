@@ -1,14 +1,14 @@
-	db ELECTABUZZ ; 125
+	db ELECTABUZZ ; 159
 
-	db  65,  83,  57, 105,  95,  85
-	evs  0,   0,   0,   2,   0,   0
+	db  75,  55,  75,  95, 125,  80 ; 505 BST
+	evs  1,   0,   1,   2,   3,   2
 	;   hp  atk  def  spd  sat  sdf
 
-	db ELECTRIC, ELECTRIC ; type
+	db ELECTRIC, FIGHTING ; type
 	db 45 ; catch rate
-	db 156 ; base exp
-	db NO_ITEM, NO_ITEM ; items
-	db GENDER_F25 ; gender ratio
+	db 205 ; base exp
+	db NO_ITEM, MAGNET ; items
+	db GENDER_F50 ; gender ratio
 	db 25 ; step cycles to hatch
 	INCBIN "gfx/pokemon/electabuzz/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

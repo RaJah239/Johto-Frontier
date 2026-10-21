@@ -1,13 +1,13 @@
-	db ABSOL ; Species ID
+	db ABSOL ; 230
 
-	db  65, 130,  70, 115,  45,  75
-	evs  0,   2,   0,   0,   0,   2
+	db  65, 154,  60, 151,  75,  60 ; 565 BST
+	evs  1,   3,   1,   3,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db DARK, FAIRY ; type
 	db 3 ; catch rate
 	db 220 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db BLACKGLASSES, POLKADOT_BOW ; items
 	db GENDER_F50 ; gender ratio
 	db 50 ; step cycles to hatch
 	INCBIN "gfx/pokemon/absol/front.dimensions"

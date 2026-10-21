@@ -1,13 +1,13 @@
-	db VOLTORB ; 100
+	db VOLTORB ; 156
 
-	db  40,  30,  50, 100,  55,  55
-	evs  0,   0,   0,   1,   0,   0
+	db  40,  30,  50, 100,  55,  55 ; 330 BST
+	evs  0,   0,   0,   2,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
-	db ELECTRIC, ELECTRIC ; type
+	db ELECTRIC, GRASS ; type
 	db 190 ; catch rate
-	db 103 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 85 ; base exp
+	db RED_APRICORN, NO_ITEM ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/voltorb/front.dimensions"

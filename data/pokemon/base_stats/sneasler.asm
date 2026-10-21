@@ -1,13 +1,13 @@
-	db SNEASLER ; Species ID
+	db SNEASLER ; 197
 
-	db  80, 130,  60, 120,  40,  80
-	evs  0,   2,   0,   0,   0,   0
+	db  80, 130,  60, 120,  40,  80 ; 510 BST
+	evs  1,   3,   1,   3,   0,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db FIGHTING, POISON ; type
-	db 20 ; catch rate
-	db 200 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 45 ; catch rate
+	db 205 ; base exp
+	db NO_ITEM, BRIGHTPOWDER ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/sneasler/front.dimensions"

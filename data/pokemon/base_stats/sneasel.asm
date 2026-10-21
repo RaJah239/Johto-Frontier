@@ -1,12 +1,12 @@
-	db SNEASEL ; 215
+	db SNEASEL ; 195
 
-	db  55,  95,  55, 115,  35,  75
-	evs  0,   0,   0,   1,   0,   0
+	db  55,  95,  55, 115,  35,  75 ; 430 BST
+	evs  0,   2,   0,   2,   0,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db DARK, ICE ; type
 	db 60 ; catch rate
-	db 132 ; base exp
+	db 130 ; base exp
 	db NO_ITEM, QUICK_CLAW ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch

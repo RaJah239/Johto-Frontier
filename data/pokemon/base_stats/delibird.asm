@@ -1,13 +1,13 @@
-	db DELIBIRD ; 225
+	db DELIBIRD ; 186
 
-	db  45,  55,  45,  75,  65,  45
-	evs  0,   0,   0,   1,   0,   0
+	db  60, 100,  45, 125, 125,  45 ; 500 BST
+	evs  1,   2,   0,   3,   3,   0
 	;   hp  atk  def  spd  sat  sdf
 
-	db ICE, FLYING ; type
+	db ICE, FAIRY ; type
 	db 45 ; catch rate
-	db 183 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 200 ; base exp
+	db NO_ITEM, FOCUS_SASH ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/delibird/front.dimensions"

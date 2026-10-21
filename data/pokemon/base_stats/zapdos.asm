@@ -1,13 +1,13 @@
-	db ZAPDOS ; 145
+	db ZAPDOS ; 240
 
-	db  90,  90,  85, 100, 125,  90
-	evs  0,   0,   0,   0,   3,   0
+	db  90,  90,  85, 120, 125,  90 ; 600 BST
+	evs  2,   2,   1,   3,   3,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db ELECTRIC, FLYING ; type
 	db 3 ; catch rate
-	db 216 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 240 ; base exp
+	db MAGNET, MAGNET ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 80 ; step cycles to hatch
 	INCBIN "gfx/pokemon/zapdos/front.dimensions"

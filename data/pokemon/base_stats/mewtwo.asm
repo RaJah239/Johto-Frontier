@@ -1,13 +1,13 @@
-	db MEWTWO ; 150
+	db MEWTWO ; 252
 
-	db 106, 110,  90, 130, 154,  90
-	evs  0,   0,   0,   0,   3,   0
+	db 106, 110,  90, 130, 154,  90 ; 680 BST
+	evs  2,   2,   2,   3,   3,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db PSYCHIC_TYPE, PSYCHIC_TYPE ; type
 	db 3 ; catch rate
-	db 220 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 255 ; base exp
+	db LIFE_ORB, LIFE_ORB ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 120 ; step cycles to hatch
 	INCBIN "gfx/pokemon/mewtwo/front.dimensions"

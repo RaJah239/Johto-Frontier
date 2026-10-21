@@ -1,13 +1,13 @@
-	db BLISSEY ; 242
+	db BLISSEY ; 210
 
-	db 255,  10,  10,  55,  75, 135
-	evs  3,   0,   0,   0,   0,   0
+	db 255,  10,  10,  55,  75, 135 ; 540 BST
+	evs  3,   0,   0,   0,   1,   3
 	;   hp  atk  def  spd  sat  sdf
 
 	db NORMAL, NORMAL ; type
 	db 30 ; catch rate
 	db 255 ; base exp
-	db NO_ITEM, LUCKY_EGG ; items
+	db LUCKY_EGG, LUCKY_EGG ; items
 	db GENDER_F100 ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/blissey/front.dimensions"

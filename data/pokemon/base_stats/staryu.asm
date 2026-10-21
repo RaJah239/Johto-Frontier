@@ -1,12 +1,12 @@
-	db STARYU ; 120
+	db STARYU ; 165
 
-	db  30,  45,  55,  85,  70,  55
-	evs  0,   0,   0,   1,   0,   0
+	db  30,  45,  55,  85,  70,  55 ; 340 BST
+	evs  0,   0,   0,   1,   1,   0
 	;   hp  atk  def  spd  sat  sdf
 
-	db WATER, WATER ; type
+	db WATER, FAIRY ; type
 	db 225 ; catch rate
-	db 106 ; base exp
+	db 105 ; base exp
 	db STARDUST, STAR_PIECE ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 20 ; step cycles to hatch

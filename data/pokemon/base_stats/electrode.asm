@@ -1,13 +1,13 @@
-	db ELECTRODE ; 101
+	db ELECTRODE ; 157
 
-	db  60,  50,  70, 140,  80,  80
-	evs  0,   0,   0,   2,   0,   0
+	db  50,  60,  70, 150,  95,  80 ; 505 BST
+	evs  1,   0,   1,   3,   2,   1
 	;   hp  atk  def  spd  sat  sdf
 
-	db ELECTRIC, ELECTRIC ; type
+	db ELECTRIC, GRASS ; type
 	db 60 ; catch rate
-	db 150 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 200 ; base exp
+	db RED_APRICORN, NO_ITEM ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/electrode/front.dimensions"

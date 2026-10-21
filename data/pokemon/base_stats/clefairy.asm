@@ -1,14 +1,14 @@
-	db CLEFAIRY ; 035
+	db CLEFAIRY ; 180
 
-	db  70,  45,  48,  35,  60,  65
-	evs  2,   0,   0,   0,   0,   0
+	db  70,  45,  48,  35,  62,  65 ; 325 BST
+	evs  1,   0,   0,   0,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
-	db FAIRY, FAIRY ; type
+	db FAIRY, STEEL ; type
 	db 150 ; catch rate
-	db 68 ; base exp
+	db 110 ; base exp
 	db MYSTERYBERRY, MOON_STONE ; items
-	db GENDER_F75 ; gender ratio
+	db GENDER_F50 ; gender ratio
 	db 10 ; step cycles to hatch
 	INCBIN "gfx/pokemon/clefairy/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

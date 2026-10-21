@@ -1,13 +1,13 @@
-	db DARKRAI ; Species ID
+	db DARKRAI ; 233
 
-	db  70,  90,  90, 125, 135,  90
-	evs  0,   0,   0,   1,   2,   2
+	db  70,  90,  90, 125, 135,  90 ; 600 BST
+	evs  1,   2,   2,   3,   3,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db DARK, DARK ; type
 	db 3 ; catch rate
-	db 255 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 240 ; base exp
+	db BLACKGLASSES, BLACKGLASSES ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 120 ; step cycles to hatch
 	INCBIN "gfx/pokemon/darkrai/front.dimensions"

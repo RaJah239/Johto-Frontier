@@ -1,14 +1,14 @@
-	db LUCARIO ; Spieces ID
+	db LUCARIO ; 203
 
-	db  70, 100,  70,  90, 115,  70
+	db  70, 110,  70,  90, 115,  70 ; 525 BST
 	evs  0,   1,   0,   0,   1,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db FIGHTING, STEEL ; type
 	db 45 ; catch rate
-	db 184 ; base exp
-	db NO_ITEM, NO_ITEM ; items
-	db GENDER_F12_5 ; gender ratio
+	db 210 ; base exp
+	db MYSTERYBERRY, FOCUS_BAND ; items
+	db GENDER_F50 ; gender ratio
 	db 25 ; step cycles to hatch
 	INCBIN "gfx/pokemon/lucario/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

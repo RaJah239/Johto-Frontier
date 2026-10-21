@@ -1,12 +1,12 @@
-	db MEW ; 151
+	db MEW ; 251
 
-	db 100, 100, 100, 100, 100, 100
-	evs  3,   0,   0,   0,   0,   0
+	db 100, 100, 100, 100, 100, 100 ; 600 BST
+	evs  2,   2,   2,   2,   2,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db PSYCHIC_TYPE, PSYCHIC_TYPE ; type
-	db 45 ; catch rate
-	db 64 ; base exp
+	db 3 ; catch rate
+	db 240 ; base exp
 	db MIRACLEBERRY, MIRACLEBERRY ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 120 ; step cycles to hatch

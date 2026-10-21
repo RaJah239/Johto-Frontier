@@ -1,13 +1,13 @@
-	db HORSEA ; Species ID
+	db BALTOY ; 200
 
-	db  40,  40,  55,  55,  40,  70
+	db  40,  40,  55,  55,  40,  70 ; 300 BST
 	evs  0,   0,   0,   0,   0,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db GROUND, PSYCHIC_TYPE ; type
 	db 255 ; catch rate
-	db 58 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 60 ; base exp
+	db NO_ITEM, SOFT_SAND ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/baltoy/front.dimensions"

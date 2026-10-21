@@ -1,13 +1,13 @@
-	db SKARMORY ; 227
+	db SKARMORY ; 206
 
-	db  65,  80, 140,  70,  40,  70
-	evs  0,   0,   2,   0,   0,   0
+	db  65,  80, 140,  70,  40,  70 ; 465 BST
+	evs  1,   1,   3,   1,   0,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db STEEL, FLYING ; type
 	db 25 ; catch rate
-	db 168 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 200 ; base exp
+	db WHT_APRICORN, METAL_COAT ; items
 	db GENDER_F50 ; gender ratio
 	db 25 ; step cycles to hatch
 	INCBIN "gfx/pokemon/skarmory/front.dimensions"

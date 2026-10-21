@@ -1,13 +1,13 @@
-	db SNOVER ; Species ID
+	db SNOVER ; 198
 
-	db  60,  62,  50,  40,  62,  60
-	evs  0,   1,   0,   0,   0,   1
+	db  60,  62,  50,  40,  62,  60 ; 334 BST
+	evs  1,   1,   0,   0,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db GRASS, ICE ; type
 	db 120 ; catch rate
 	db 67 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db ICE_BERRY, MIRACLE_SEED ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/snover/front.dimensions"

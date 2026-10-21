@@ -1,12 +1,12 @@
-	db SHELGON ; Species ID
+	db SHELGON ; 216
 
-	db  65,  95, 100,  50,  60,  50
-	evs  0,   0,   2,   0,   0,   0
+	db  65,  95, 100,  50,  60,  50 ; 420 BST
+	evs  1,   2,   2,   0,   1,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db DRAGON, DRAGON ; type
 	db 45 ; catch rate
-	db 147 ; base exp
+	db 150 ; base exp
 	db NO_ITEM, DRAGON_FANG ; items
 	db GENDER_F50 ; gender ratio
 	db 40 ; step cycles to hatch

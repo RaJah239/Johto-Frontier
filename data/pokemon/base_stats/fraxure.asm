@@ -1,13 +1,13 @@
-	db FRAXURE ; Species ID
+	db FRAXURE ; 219
 
-	db  66, 117,  70,  67,  40,  50
-	evs  0,   2,   0,   0,   0,   0
+	db  66, 117,  70,  67,  40,  50 ; 410 BST
+	evs  1,   2,   1,   1,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db DRAGON, DRAGON ; type
 	db 60 ; catch rate
 	db 144 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db NO_ITEM, DRAGON_SCALE ; items
 	db GENDER_F50 ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/fraxure/front.dimensions"

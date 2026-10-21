@@ -1,13 +1,13 @@
-	db CHANSEY ; 113
+	db CHANSEY ; 209
 
-	db 250,  05,  05,  50,  35, 105
-	evs  2,   0,   0,   0,   0,   0
+	db 250,  05,  05,  50,  35, 105 ; 450 BST
+	evs  3,   0,   0,   0,   0,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db NORMAL, NORMAL ; type
 	db 30 ; catch rate
 	db 255 ; base exp
-	db NO_ITEM, LUCKY_EGG ; items
+	db LUCKY_EGG, LUCKY_EGG ; items
 	db GENDER_F100 ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/chansey/front.dimensions"

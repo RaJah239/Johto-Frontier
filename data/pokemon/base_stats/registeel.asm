@@ -1,13 +1,13 @@
-	db REGISTEEL ; species ID
+	db REGISTEEL ; 236
 
 	db 100,  75, 150,  50,  75, 150
-	evs  0,   0,   2,   0,   0,   1
+	evs  2,   1,   3,   0,   1,   3
 	;   hp  atk  def  spd  sat  sdf
 
 	db STEEL, STEEL ; type
 	db 3 ; catch rate
-	db 255 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 240 ; base exp
+	db METAL_COAT, METAL_COAT ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 80 ; step cycles to hatch
 	INCBIN "gfx/pokemon/registeel/front.dimensions"

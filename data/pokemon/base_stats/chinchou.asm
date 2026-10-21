@@ -1,13 +1,13 @@
-	db CHINCHOU ; 170
+	db CHINCHOU ; 169
 
-	db  75,  38,  38,  67,  56,  56
-	evs  1,   0,   0,   0,   0,   0
+	db  75,  38,  38,  67,  56,  56 ; 330 BST
+	evs  1,   0,   0,   1,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db WATER, ELECTRIC ; type
 	db 190 ; catch rate
-	db 90 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 80 ; base exp
+	db NO_ITEM, MYSTIC_WATER ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/chinchou/front.dimensions"

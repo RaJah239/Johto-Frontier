@@ -1,13 +1,13 @@
-	db OCTILLERY ; 224
+	db OCTILLERY ; 168
 
-	;   hp  atk  def  spd  sat  sdf
-	db  80,  80,  80,  70, 115,  80 ; BST - 505
+	;   hp  atk  def  spd  sat  sdf ; 505 BST
+	db  80,  80,  80,  70, 115,  80
 	evs  1,   1,   1,   1,   2,   1
 
 	db WATER, FIRE ; type
 	db 75 ; catch rate
-	db 164 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 200 ; base exp
+	db RED_APRICORN, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/octillery/front.dimensions"

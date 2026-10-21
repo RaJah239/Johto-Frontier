@@ -1,13 +1,13 @@
-	db LAPRAS ; 131
+	db LAPRAS ; 179
 
-	db 130,  85,  80,  60,  85,  95
-	evs  2,   0,   0,   0,   0,   0
+	db 130,  85,  80,  60,  85,  95 ; 535 BST
+	evs  3,   1,   1,   1,   1,   2
 	;   hp  atk  def  spd  sat  sdf
 
-	db WATER, ICE ; type
+	db DRAGON, ICE ; type
 	db 45 ; catch rate
-	db 219 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 236 ; base exp
+	db ICE_BERRY, DRAGON_FANG ; items
 	db GENDER_F50 ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/lapras/front.dimensions"

@@ -1,13 +1,13 @@
-	db MISMAGIUS ; Species ID
+	db MISMAGIUS ; 208
 
-	db  60,  60,  60, 105, 130, 100
-	evs  0,   0,   0,   0,   1,   1
+	db  60,  50,  60, 105, 130, 100 ; 505 BST
+	evs  1,   0,   1,   2,   3,   2
 	;   hp  atk  def  spd  sat  sdf
 
-	db GHOST, GHOST	; type
+	db GHOST, FAIRY	; type
 	db 45 ; catch rate
 	db 220 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db BLK_APRICORN, POLKADOT_BOW ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/mismagius/front.dimensions"

@@ -1,13 +1,13 @@
-	db SEADRA ; 117
+	db SEADRA ; 177
 
-	db  55,  65,  95,  85,  95,  45
-	evs  0,   0,   1,   0,   1,   0
+	db  55,  65,  95,  85,  95,  45 ; 440 BST
+	evs  0,   1,   2,   1,   2,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db WATER, WATER ; type
 	db 75 ; catch rate
 	db 155 ; base exp
-	db NO_ITEM, DRAGON_SCALE ; items
+	db BLU_APRICORN, DRAGON_SCALE ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/seadra/front.dimensions"

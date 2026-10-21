@@ -1,13 +1,13 @@
-	db VICTINI ; Species ID
+	db VICTINI ; 248
 
-	db 100, 100, 100, 100, 100, 100
-	evs  3,   0,   0,   0,   0,   0
+	db 100, 100, 100, 100, 100, 100 ; 600 BST
+	evs  2,   2,   2,   2,   2,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db PSYCHIC_TYPE, FIRE ; type
 	db 3 ; catch rate
 	db 240 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db TWISTEDSPOON, CHARCOAL ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 120 ; step cycles to hatch
 	INCBIN "gfx/pokemon/victini/front.dimensions"

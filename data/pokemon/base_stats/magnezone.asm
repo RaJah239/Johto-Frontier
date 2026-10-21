@@ -1,13 +1,13 @@
-	db MAGNEZONE ; Species ID
+	db MAGNEZONE ; 162
 
 	db  70,  70, 115,  60, 130,  90 ; 535 BST
-	evs  0,   0,   0,   0,   3,   0
+	evs  1,   1,   2,   1,   3,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db ELECTRIC, STEEL ; type
 	db 30 ; catch rate
 	db 236 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db WHT_APRICORN, METAL_COAT ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/magnezone/front.dimensions"

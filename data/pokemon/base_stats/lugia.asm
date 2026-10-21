@@ -1,13 +1,13 @@
-	db LUGIA ; 249
+	db LUGIA ; 241
 
-	db 106,  90, 130, 110,  90, 154
-	evs  0,   0,   0,   0,   0,   3
+	db 106,  90, 130, 110,  90, 154 ; 680 BST
+	evs  2,   2,   3,   2,   2,   3
 	;   hp  atk  def  spd  sat  sdf
 
 	db WATER, FLYING ; type
 	db 3 ; catch rate
-	db 220 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 255 ; base exp
+	db LEFTOVERS, LEFTOVERS ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 120 ; step cycles to hatch
 	INCBIN "gfx/pokemon/lugia/front.dimensions"

@@ -1,13 +1,13 @@
-	db LITWICK ; Species ID
+	db LITWICK ; 151
 
-	db  50,  30,  55,  20,  65,  55
+	db  50,  30,  55,  20,  65,  55 ; 275 BST
 	evs  0,   0,   0,   0,   1,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db GHOST, FIRE ; type
 	db 190 ; catch rate
 	db 55 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db BURNT_BERRY, WHT_APRICORN ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/litwick/front.dimensions"

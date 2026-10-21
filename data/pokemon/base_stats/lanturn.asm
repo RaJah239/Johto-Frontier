@@ -1,13 +1,13 @@
-	db LANTURN ; 171
+	db LANTURN ; 170
 
-	db 125,  58,  58,  67,  76,  76
-	evs  2,   0,   0,   0,   0,   0
+	db 130,  58,  73,  67, 101,  76 ; 505 BST
+	evs  3,   0,   1,   1,   2,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db WATER, ELECTRIC ; type
 	db 75 ; catch rate
-	db 156 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 205 ; base exp
+	db NO_ITEM, MYSTIC_WATER ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/lanturn/front.dimensions"

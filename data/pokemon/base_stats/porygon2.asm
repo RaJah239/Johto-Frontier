@@ -1,12 +1,12 @@
-	db PORYGON2 ; 233
+	db PORYGON2 ; 222
 
-	db  85,  80,  90,  60, 105,  95
-	evs  0,   0,   0,   0,   2,   0
+	db  85,  80,  90,  60, 105,  95 ; 515 BST
+	evs  1,   1,   2,   1,   2,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db NORMAL, NORMAL ; type
 	db 45 ; catch rate
-	db 180 ; base exp
+	db 200 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 20 ; step cycles to hatch

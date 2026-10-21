@@ -1,13 +1,13 @@
-	db DEWGONG ; 087
+	db DEWGONG ; 175
 
-	db  90,  70,  80,  70,  70,  95
-	evs  0,   0,   0,   0,   0,   2
-	;   hp  atk  def  spd  sat  sdf
+	db  100,  90,  90,  70,  60,  95 ; 505 BST
+	evs   2,   2,   2,   1,   1,   2
+	;    hp  atk  def  spd  sat  sdf
 
 	db WATER, ICE ; type
 	db 75 ; catch rate
-	db 176 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 190 ; base exp
+	db WHT_APRICORN, NEVERMELTICE ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/dewgong/front.dimensions"

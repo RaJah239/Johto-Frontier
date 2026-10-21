@@ -1,13 +1,13 @@
-	db WEAVILE ; Species ID
+	db WEAVILE ; 196
 
-	db  70, 120,  65, 125,  45,  85
-	evs  0,   1,   0,   1,   0,   0
+	db  70, 120,  65, 125,  45,  85 ; 510 BST
+	evs  1,   3,   1,   3,   0,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db DARK, ICE ; type
 	db 45 ; catch rate
-	db 179 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 205 ; base exp
+	db NO_ITEM, BRIGHTPOWDER ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/weavile/front.dimensions"

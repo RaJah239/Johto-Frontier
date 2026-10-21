@@ -1,7 +1,7 @@
-	db PORYGON ; 137
+	db PORYGON ; 221
 
-	db  65,  60,  70,  40,  85,  75
-	evs  0,   0,   0,   0,   1,   0
+	db  65,  60,  70,  40,  85,  75 ; 395 BST
+	evs  1,   1,   1,   0,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db NORMAL, NORMAL ; type

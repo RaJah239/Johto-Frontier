@@ -1,12 +1,12 @@
-	db STARMIE ; 121
+	db STARMIE ; 166
 
-	db  60,  75,  85, 115, 100,  85
-	evs  0,   0,   0,   2,   0,   0
+	db  60,  75,  85, 115, 100,  85 ; 520 BST
+	evs  1,   1,   1,   2,   2,   1
 	;   hp  atk  def  spd  sat  sdf
 
-	db WATER, PSYCHIC_TYPE ; type
+	db WATER, FAIRY ; type
 	db 60 ; catch rate
-	db 207 ; base exp
+	db 215 ; base exp
 	db STARDUST, STAR_PIECE ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 20 ; step cycles to hatch

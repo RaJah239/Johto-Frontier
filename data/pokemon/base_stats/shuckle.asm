@@ -1,13 +1,13 @@
-	db SHUCKLE ; 213
+	db SHUCKLE ; 163
 
-	db  20,  10, 230,  05,  10, 230
-	evs  0,   0,   1,   0,   0,   1
+	db  20,  10, 230,  05,  10, 230 ; 505 BST
+	evs  0,   0,   3,   0,   0,   3
 	;   hp  atk  def  spd  sat  sdf
 
 	db BUG, ROCK ; type
 	db 190 ; catch rate
-	db 80 ; base exp
-	db BERRY, BERRY ; items
+	db 190 ; base exp
+	db BERRY, BERRY_JUICE ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/shuckle/front.dimensions"

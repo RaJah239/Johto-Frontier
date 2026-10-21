@@ -1,13 +1,13 @@
-	db MAGNETON ; 082
+	db MAGNETON ; 161
 
-	db  50,  60,  95,  70, 120,  70
-	evs  0,   0,   0,   0,   2,   0
+	db  50,  60,  95,  70, 120,  70 ; 465 BST
+	evs  0,   1,   2,   1,   3,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db ELECTRIC, STEEL ; type
 	db 60 ; catch rate
-	db 161 ; base exp
-	db NO_ITEM, METAL_COAT ; items
+	db 160 ; base exp
+	db WHT_APRICORN, METAL_COAT ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/magneton/front.dimensions"

@@ -1,13 +1,13 @@
-	db CLAYDOL ; Species ID
+	db CLAYDOL ; 201
 
-	db  60,  70, 105,  75,  70, 120
-	evs  0,   0,   0,   0,   0,   2
+	db  65,  70, 105,  75,  70, 120 ; 505 BST
+	evs  1,   1,   2,   1,   1,   3
 	;   hp  atk  def  spd  sat  sdf
 
 	db GROUND, PSYCHIC_TYPE ; type
 	db 90 ; catch rate
-	db 175 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 200 ; base exp
+	db NO_ITEM, SOFT_SAND ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/claydol/front.dimensions"

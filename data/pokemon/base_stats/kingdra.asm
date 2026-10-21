@@ -1,12 +1,12 @@
-	db KINGDRA ; 230
+	db KINGDRA ; 178
 
-	db  75,  95,  95,  85,  95,  95
-	evs  0,   1,   0,   0,   1,   1
+	db  75,  95,  95,  85,  95,  95 ; 540 BST
+	evs  1,   2,   2,   1,   2,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db WATER, DRAGON ; type
 	db 45 ; catch rate
-	db 207 ; base exp
+	db 236 ; base exp
 	db NO_ITEM, DRAGON_SCALE ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch

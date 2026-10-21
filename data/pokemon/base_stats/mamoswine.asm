@@ -1,13 +1,13 @@
-	db MAMOSWINE ; Species ID
+	db MAMOSWINE ; 194
 
-	db 110, 130,  80,  75,  60,  80
-	evs  0,   3,   0,   0,   0,   0
+	db 110, 130,  80,  75,  60,  80 ; 535 BST
+	evs  2,   3,   1,   1,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db ICE, GROUND ; type
 	db 50 ; catch rate
 	db 239 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db WHT_APRICORN, SOFT_SAND ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/mamoswine/front.dimensions"

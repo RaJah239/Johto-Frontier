@@ -1,14 +1,14 @@
-	db SNORLAX ; 143
+	db SNORLAX ; 211
 
-	db 160, 110,  65,  30,  65, 110
-	evs  2,   0,   0,   0,   0,   0
+	db 160, 110,  65,  30,  65, 110 ; 540 BST
+	evs  3,   2,   1,   0,   1,   3
 	;   hp  atk  def  spd  sat  sdf
 
 	db NORMAL, NORMAL ; type
 	db 25 ; catch rate
 	db 154 ; base exp
 	db LEFTOVERS, LEFTOVERS ; items
-	db GENDER_F12_5 ; gender ratio
+	db GENDER_F50 ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/snorlax/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)

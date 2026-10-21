@@ -1,13 +1,13 @@
-	db SWINUB ; 220
+	db SWINUB ; 192
 
-	db  50,  50,  40,  50,  30,  30
+	db  50,  60,  40,  50,  30,  30 ; 260 BST
 	evs  0,   1,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db ICE, GROUND ; type
 	db 225 ; catch rate
 	db 78 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db ICE_BERRY, NEVERMELTICE ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/swinub/front.dimensions"

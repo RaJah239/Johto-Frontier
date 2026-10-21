@@ -1,13 +1,13 @@
-	db ROTOM ; Species ID
+	db ROTOM ; 229
 
 	;   hp  atk  def  spd  sat  sdf
-	db  60,  40,  92,  96, 120,  92 ; BST 500
-	evs  0,   0,   0,   0,   0,   2
+	db  60,  65, 107,  91, 110, 107 ; 540 BST
+	evs  1,   1,   2,   2,   2,   2
 
 	db ELECTRIC, GHOST ; type
 	db 3 ; catch rate
-	db 200 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	db 240 ; base exp
+	db MAGNET, SPELL_TAG ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/rotom/front.dimensions"
