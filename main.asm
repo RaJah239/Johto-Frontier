@@ -80,6 +80,7 @@ INCLUDE "engine/events/money.asm"
 INCLUDE "data/items/marts.asm"
 INCLUDE "engine/events/mom.asm"
 INCLUDE "engine/events/daycare.asm"
+INCLUDE "engine/events/view_unown_stamps.asm"
 INCLUDE "engine/pokemon/breeding.asm"
 
 

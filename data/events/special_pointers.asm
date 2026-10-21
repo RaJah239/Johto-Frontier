@@ -44,6 +44,7 @@ SpecialsPointers::
 	add_special NameRival ; unused
 	add_special SetDayOfWeek
 	add_special OverworldTownMap
+	add_special UnownPrinter
 	add_special MapRadio
 	add_special UnownPuzzle
 	add_special SlotMachine
@@ -152,5 +153,6 @@ SpecialsPointers::
 	add_special PartyKeeperShowTeam
 
 if DEF(_DEBUG)
+	add_special SetAllUnownCaught
 	add_special FillPokedex
 endc

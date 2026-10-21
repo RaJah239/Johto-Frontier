@@ -270,7 +270,7 @@ DebugOptions:
 	ifequal 1, .AllBadges
 	ifequal 2, .FillPokedex
 	ifequal 3, .DebugColourPicker
-	ifequal 4, .Unused
+	ifequal 4, .UnownPrinter
 	sjump .finish
 
 .AllBadges
@@ -303,7 +303,9 @@ DebugOptions:
 	waitsfx
 	sjump .finish
 
-.Unused
+.UnownPrinter
+	special SetAllUnownCaught
+	special UnownPrinter
 	sjump .finish
 
 .DebugColourPicker
@@ -323,7 +325,7 @@ DebugOptions:
 	db "All Badges@"
 	db "#dex Completed@"
 	db "Debug Color@"
-	db "Unused@"
+	db "Unown Printer@"
 	db "Cancel@"
 
 RandomPartyTrainerScript:

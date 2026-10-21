@@ -80,6 +80,11 @@ OverworldTownMap:
 	call ExitAllMenus
 	ret
 
+UnownPrinter:
+	call FadeToMenu
+	farcall _UnownPrinter
+	jmp ExitAllMenus
+
 DisplayLinkRecord:
 	call FadeToMenu
 	farcall _DisplayLinkRecord
@@ -408,6 +413,18 @@ PlayerGivesAwayAnEggForAdoption:
 	ret
 
 if DEF(_DEBUG)
+SetAllUnownCaught:
+	ld b, NUM_UNOWN
+	ld hl, wUnownDex
+	ld c, 1
+.loop
+	ld a, c
+	ld [hli], a
+	inc c
+	dec b
+	jr nz, .loop
+	ret
+
 FillPokedex:
 	ld a, UNOWN_A
 	ld [wFirstUnownSeen], a
@@ -423,4 +440,5 @@ FillPokedex:
 	ret z
 	ld [wScriptVar], a
 	jr .loop
+
 endc
