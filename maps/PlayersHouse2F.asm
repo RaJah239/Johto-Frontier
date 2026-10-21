@@ -32,7 +32,7 @@ if DEF(_DEBUG)
 	const PLAYERSHOUSE2F_TEST_TRAINER_SCARLET
 	const PLAYERSHOUSE2F_TEST_MON_REGULAR
 	const PLAYERSHOUSE2F_TEST_MON_SHINY
-	const PLAYERSHOUSE2F_DEBUGCOLOURPICKER
+	const PLAYERSHOUSE2F_DEBUGCOLOURINGBOOK
 	const PLAYERSHOUSE2F_RANDOM_PARTY_TRAINER
 endc
 
@@ -269,9 +269,24 @@ DebugOptions:
 	closewindow
 	ifequal 1, .AllBadges
 	ifequal 2, .FillPokedex
-	ifequal 3, .DebugColourPicker
+	ifequal 3, .DebugPaletteEditor
 	ifequal 4, .UnownPrinter
 	sjump .finish
+
+.MoveMenuHeader:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 0, 0, 19, TEXTBOX_Y - 1
+	dw .MenuData
+	db 1 ; default option
+
+.MenuData:
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
+	db 5 ; items
+	db "All Badges@"
+	db "#dex Completed@"
+	db "Palette Editor@"
+	db "Unown Printer@"
+	db "Cancel@"
 
 .AllBadges
 	writethistext
@@ -306,27 +321,97 @@ DebugOptions:
 .UnownPrinter
 	special SetAllUnownCaught
 	special UnownPrinter
-	sjump .finish
-
-.DebugColourPicker
-	special DebugColourPicker
 .finish
 	endtext
 
-.MoveMenuHeader:
+.DebugPaletteEditor
+	writethistext
+		text "I mix #mon"
+		line "paints as a hobby."
+
+		para "I can edit 32"
+		line "unique #mon"
+		cont "and then you'd have"
+		cont "default some to"
+		cont "do more."
+
+		para "Shall I change a"
+		line "colour or return"
+		cont "one to default?"
+		done
+	loadmenu PlayerHouseRoom2PaletteNPCMenuHeader
+	verticalmenu
+	closewindow
+	ifequal 1, .change
+	ifequal 2, .restore
+	jumpthisopenedtext
+		text "No? That's a"
+		line "shame. Come back"
+		cont "anytime."
+		done
+
+.change
+	special MonPaletteEditor
+	ifequal 0, .NextTime
+	ifequal 1, .NiceWork
+	ifequal 3, .Egg
+	jumpthisopenedtext
+		text "Sorry, only 32 can"
+		line "be adjusted."
+		
+		para "Set back another"
+		line "to default so you"
+		cont "can edit more."
+		done
+
+.restore
+	special MonPaletteReset
+	ifequal 1, .restored
+	ifequal 2, .alreadyDefault
+	ifequal 3, .Egg
+	waitendtext
+
+.restored
+	jumpthisopenedtext
+		text "Done! That's back"
+		line "to its original"
+		cont "colours."
+		done
+
+.alreadyDefault
+	jumpthisopenedtext
+		text "Hmm? That one"
+		line "already has its"
+		cont "original colours."
+		done
+
+.NiceWork
+	jumpthisopenedtext
+		text "Nice work!"
+		done
+
+.NextTime
+	jumpthisopenedtext
+		text "Next time, then!"
+		done
+
+.Egg
+	jumpthisopenedtext
+		text "Sorry, you can't"
+		line "edit an Egg!"
+		done
+
+PlayerHouseRoom2PaletteNPCMenuHeader:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 0, 19, TEXTBOX_Y - 1
-	dw .MenuData
+	menu_coords 0, 6, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
+	dw PlayerHouseRoom2PaletteNPCMenuData
 	db 1 ; default option
 
-.MenuData:
-	db STATICMENU_CURSOR ; flags
-	db 5 ; items
-	db "All Badges@"
-	db "#dex Completed@"
-	db "Debug Color@"
-	db "Unown Printer@"
-	db "Cancel@"
+PlayerHouseRoom2PaletteNPCMenuData:
+	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
+	db 2 ; items
+	db "Change colours@"
+	db "Return to default@"
 
 RandomPartyTrainerScript:
 	faceplayer
