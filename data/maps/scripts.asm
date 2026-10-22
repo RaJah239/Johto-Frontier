@@ -19,7 +19,7 @@ INCLUDE "maps/GoldenrodDeptStoreRoof.asm"
 INCLUDE "maps/GoldenrodGameCorner.asm"
 
 
-SECTION "Ruins of Alph's Maps", ROMX
+SECTION "Ruins of Alph's Maps 1", ROMX
 
 INCLUDE "maps/RuinsOfAlphOutside.asm"
 INCLUDE "maps/RuinsOfAlphHoOhChamber.asm"
@@ -27,7 +27,6 @@ INCLUDE "maps/RuinsOfAlphLileepChamber.asm"
 INCLUDE "maps/RuinsOfAlphOmanyteChamber.asm"
 INCLUDE "maps/RuinsOfAlphAerodactylChamber.asm"
 INCLUDE "maps/RuinsOfAlphInnerChamber.asm"
-INCLUDE "maps/RuinsOfAlphResearchCenter.asm"
 INCLUDE "maps/RuinsOfAlphHoOhItemRoom.asm"
 INCLUDE "maps/RuinsOfAlphLileepItemRoom.asm"
 INCLUDE "maps/RuinsOfAlphOmanyteItemRoom.asm"
@@ -36,6 +35,11 @@ INCLUDE "maps/RuinsOfAlphHoOhWordRoom.asm"
 INCLUDE "maps/RuinsOfAlphLileepWordRoom.asm"
 INCLUDE "maps/RuinsOfAlphOmanyteWordRoom.asm"
 INCLUDE "maps/RuinsOfAlphAerodactylWordRoom.asm"
+
+
+SECTION "Ruins of Alph's Maps 2", ROMX
+
+INCLUDE "maps/RuinsOfAlphResearchCenter.asm"
 
 
 SECTION "Map Scripts 2", ROMX
