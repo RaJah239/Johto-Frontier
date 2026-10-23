@@ -1778,15 +1778,17 @@ wOptions3::
 wOptions4::
 ; bit 0: ability banners
 ; bit 1: pokepics
-; bit 2: intros_outros
-; bit 3: exp_n_lv_up
-; bit 4: effective_text
+; bit 2: intros outros
+; bit 3: exp n lv up
+; bit 4: effective text
 ; bit 5: weather text
 ; bit 6: field hazards
 ; bit 7: nicknaming
 	db
 
-	ds 1
+wOptions5::
+; bit 0: knock flair
+
 wOptionsEnd::
 
 ; Time buffer, for counting the amount of time since

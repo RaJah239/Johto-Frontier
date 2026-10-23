@@ -13,6 +13,5 @@ DefaultOptions:
 	; delete one of these for each added above
 	db $00
 	db $00
-	db $00
 .End
 	assert DefaultOptions.End - DefaultOptions == wOptionsEnd - wOptions

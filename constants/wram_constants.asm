@@ -108,6 +108,10 @@ DEF NUM_FRAMES EQU const_value
 	const FIELD_HAZARDS ; 6
 	const NICKNAMING ; 7
 
+; wOptions5::
+	const_def
+	const KNOCKOUT_FLAIR ; 5
+
 ; wWalkingDirection::
 	const_def -1
 	const STANDING ; -1

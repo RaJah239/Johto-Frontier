@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 29
+DEF NUM_OPTIONS EQU 30
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -112,6 +112,7 @@ OptionsMenu_DrawLabels:
 	dw .EffectiveText
 	dw .StatusText
 	dw .FieldHazardsText
+	dw .KnockoutFlair
 	dw .ScaledExp
 	dw .ExpShare
 	dw .ExpNLvUp
@@ -143,6 +144,7 @@ OptionsMenu_DrawLabels:
 .EffectiveText:   db "Effective Text@"
 .StatusText:      db "Status Text@"
 .FieldHazardsText:db "Field Hazards@"
+.KnockoutFlair:   db "Knockout Flair@"
 .ScaledExp:       db "Experience Gain@"
 .ExpShare:        db "Exp.Share@"
 .ExpNLvUp:        db "Exp & Level Up@"
@@ -201,6 +203,7 @@ GetOptionPointer:
 	dw Options_EffectiveText
 	dw Options_StatusText
 	dw Options_FieldHazardsText
+	dw Options_KnockoutFlair
 	dw Options_Scaled_Exp
 	dw Options_ExpShare
 	dw Options_ExpNLvUp
@@ -677,6 +680,43 @@ Options_Nicknaming:
  
  .ToggleOn:
 	set NICKNAMING, [hl]
+	ld de, .Off
+ .Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.On:  db "On @"
+.Off: db "Off@"
+
+Options_KnockoutFlair:
+	ld hl, wOptions5
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit KNOCKOUT_FLAIR, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+ 
+ .LeftPressed:
+	bit KNOCKOUT_FLAIR, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+ 
+ .NonePressed:
+	bit KNOCKOUT_FLAIR, [hl]
+	jr nz, .ToggleOn
+ 
+ .ToggleOff:
+	res KNOCKOUT_FLAIR, [hl]
+	ld de, .On
+	jr .Display
+ 
+ .ToggleOn:
+	set KNOCKOUT_FLAIR, [hl]
 	ld de, .Off
  .Display:
 	call OptionsMenu_PlaceValue
@@ -1688,6 +1728,7 @@ OptionsMenu_DrawDescription:
 	dw .DescEffectiveText
 	dw .DescStatusText
 	dw .DescFieldHazardsText
+	dw .DescKnockoutFlairText
 	dw .DescScaledExp
 	dw .DescExpShare
 	dw .DescExpNLvUp
@@ -1719,6 +1760,7 @@ OptionsMenu_DrawDescription:
 .DescEffectiveText:   db "Show Effectiveness<LF>text or not.@"
 .DescStatusText:      db "Status text in<LF>battles.@"
 .DescFieldHazardsText:db "S.Rock, Spikes and<LF>T.Spikes text.@"
+.DescKnockoutFlairText: db "Foe animation post<LF>knockouts.@"
 .DescAbilityBanners:  db "Display ability<LF>activation banner.@"
 .DescExpShare:        db "Share Experience<LF>with the party.@"
 .DescExpNLvUp:        db "EXP Gain, Level Up<LF>and Stat Gains.@"
