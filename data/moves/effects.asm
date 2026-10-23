@@ -1669,27 +1669,6 @@ WildCharge:
 	paralyzetarget
 	endmove
 
-FreezeDry:
-	usedmovetext
-	doturn
-	critical
-	damagestats
-	damagecalc
-	stab
-	damagevariation
-	farcommand
-	checkhit
-	effectchance
-	moveanim
-	failuretext
-	applydamage
-	criticaltext
-	supereffectivetext
-	checkfaint
-	kingsrock
-	freezetarget
-	endmove
-
 SuckerPunch:
 	usedmovetext
 	doturn

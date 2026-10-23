@@ -141,7 +141,6 @@ MoveEffectsPointers:
 	dw SpAtkUpHit
 	dw NormalHit
 	dw FlareBlitz
-	dw FreezeDry
 	dw NormalHit	; EFFECT_BODY_PRESS
 	dw SuckerPunch
 	dw Revenge

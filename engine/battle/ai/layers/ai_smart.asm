@@ -112,7 +112,6 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_FACADE,           AI_Smart_Facade
 	dbw EFFECT_HEX,              AI_Smart_Hex
 	dbw EFFECT_HURRICANE,        AI_Smart_Hurricane
-	dbw EFFECT_FREEZE_DRY,       AI_Smart_FreezeDry
 	dbw EFFECT_BODY_PRESS,       AI_Smart_BodyPress
 	dbw EFFECT_AVALANCHE,        AI_Smart_Avalanche
 	dbw EFFECT_BRICK_BREAK,      AI_Smart_BrickBreak
@@ -1287,21 +1286,6 @@ AI_Smart_Avalanche:
 .discourage
 	inc [hl]
 .done
-	ret
-
-AI_Smart_FreezeDry:
-; 80% chance to encourage this move if the player is a water type
-	ld a, [wBattleMonType1]
-	cp WATER
-	jr z, .encourage
-	ld a, [wBattleMonType2]
-	cp WATER
-	ret nz
-
-.encourage
-	call AI_80_20
-	ret c
-	dec [hl]
 	ret
 
 AI_Smart_Facade:
