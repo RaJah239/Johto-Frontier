@@ -2301,6 +2301,12 @@ HandlePlayerMonFaint:
 	jmp z, WinTrainerBattle
 
 .notfainted
+	; animate mon + cry when KO'ing the player
+	hlcoord 12, 0
+	ld d, $0
+	ld e, ANIM_MON_SLOW
+	predef AnimateFrontpic
+
 	call AskUseNextPokemon
 	jr nc, .switch
 	ld a, $1
