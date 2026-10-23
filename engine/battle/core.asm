@@ -2303,6 +2303,8 @@ HandlePlayerMonFaint:
 .notfainted
 	ld a, [wOptions5]
 	bit KNOCKOUT_FLAIR, a
+	call StopDangerSound
+	call WaitSFX
 	jr nz, .skip_ko_flair
 	; animate mon + cry when KO'ing the player
 	hlcoord 12, 0
