@@ -1,5 +1,5 @@
 ; these numbers must between 0-255
-; 4/256 chance to get a rare candy
+; 2/256 chance to get a rare candy
 
 GrandGauntletItemList:
 	; evolution stones 42
@@ -74,6 +74,7 @@ GrandGauntletItemList:
 
 	; max stats - 2
 	db 2, HYPER_EV_UP
+	db 2, PP_MAX
 	db -1 ; end
 
 

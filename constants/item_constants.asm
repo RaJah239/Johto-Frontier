@@ -138,9 +138,9 @@
 	const TANGELA_CALL ; 82
 	const STARDUST     ; 83
 	const STAR_PIECE   ; 84
-	const BASEMENT_KEY ; 85 ; to replace
+	const PP_MAX       ; 85
 	const SHINY_BALL   ; 86
-	const EXPERT_BELT   ; 87
+	const EXPERT_BELT  ; 87
 	const SHINY_CHARM  ; 88
 	const ZINC         ; 89
 	const CHARCOAL     ; 8a

@@ -146,7 +146,7 @@ ItemEffects:
 	dw TangelaCallEffect   ; TANGELA_CALL
 	dw NoEffect            ; STARDUST
 	dw NoEffect            ; STAR_PIECE
-	dw NoEffect            ; BASEMENT_KEY
+	dw RestorePPEffect     ; PP_MAX
 	dw PokeBallEffect      ; SHINY_BALL
 	dw NoEffect            ; EXPERT_BELT
 	dw NoEffect            ; SHINY_CHARM
@@ -2460,6 +2460,8 @@ RestorePPEffect:
 	ld a, [wTempRestorePPItem]
 	cp PP_UP
 	jr z, .ppup
+	cp PP_MAX
+	jr z, .ppup
 	ld hl, RestoreThePPOfWhichMoveText
 
 .ppup
@@ -2490,8 +2492,11 @@ RestorePPEffect:
 
 	ld a, [wTempRestorePPItem]
 	cp PP_UP
+	jr z, .ppup2
+	cp PP_MAX
 	jmp nz, Not_PP_Up
 
+.ppup2
 	ld a, [hl]
 	cp SKETCH
 	jr z, .CantUsePPUpOnSketch
@@ -2508,15 +2513,40 @@ RestorePPEffect:
 	jr .loop2
 
 .do_ppup
+	ld c, PP_UP_MASK
+	ld a, [wTempRestorePPItem]
+	cp PP_MAX
+	ld b, 3
+	jr z, .pp_restore_loop
+	ld b, 1
+.pp_restore_loop
+	push hl
+	push bc
 	ld a, [hl]
 	add PP_UP_ONE
 	ld [hl], a
 	ld a, TRUE
 	ld [wUsePPUp], a
 	call ApplyPPUp
-	call Play_SFX_FULL_HEAL
+	pop bc
+	pop hl
 
+; Unless PP is maxed, we might want to continue increasing PP further.
+	ld a, [hl]  ; wPartyMon1Moves
+	and c  ; PP_UP_MASK
+	cp c
+	jr z, .maxed_pp
+	dec b
+	jr nz, .pp_restore_loop
+
+.maxed_pp
+	call Play_SFX_FULL_HEAL
 	ld hl, PPsIncreasedText
+	ld a, [wTempRestorePPItem]
+	cp PP_UP
+	jr z, .ppup3
+	ld hl, PPsMaximizedText
+.ppup3
 	call PrintText
 	; fallthrough
 
@@ -2682,6 +2712,10 @@ PPIsMaxedOutText:
 
 PPsIncreasedText:
 	text_far _PPsIncreasedText
+	text_end
+
+PPsMaximizedText:
+	text_far _PPsMaximizedText
 	text_end
 
 PPRestoredText:

@@ -132,7 +132,7 @@ ItemNames::
 	li "Tangela Call"
 	li "Stardust"
 	li "Star Piece"
-	li "Basement Key"
+	li "PP Max"
 	li "Shiny Ball"
 	li "Expert Belt"
 	li "Shiny Charm"

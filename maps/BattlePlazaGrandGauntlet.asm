@@ -110,7 +110,8 @@ GrandGauntletInfoSignScript:
 
 		para "Vitamins:"
 		line "Rare Candy,"
-		cont "PP Up"
+		cont "PP Max,"
+		cont "PP Up,"
 		cont "Hyper EV Up,"
 		cont "HP Up,"
 		cont "Protein,"
@@ -300,6 +301,10 @@ GrandGauntletEntryPenalty:
 
 	; remove these specific items
 	ld a, RARE_CANDY
+	ld [wCurItem], a
+	call .RemoveAllMatchingItems
+
+	ld a, PP_MAX
 	ld [wCurItem], a
 	call .RemoveAllMatchingItems
 

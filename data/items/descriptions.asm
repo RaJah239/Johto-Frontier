@@ -133,7 +133,7 @@ ItemDescriptions:
 	dw TangelaCallDesc
 	dw StardustDesc
 	dw StarPieceDesc
-	dw BasementKeyDesc
+	dw PPMaxDesc
 	dw ShinyBallDesc
 	dw ExpertBeltDesc
 	dw ShinyCharmDesc
@@ -786,8 +786,9 @@ StarPieceDesc:
 	db   "A hunk of red gem."
 	next "Sell very high.@"
 
-BasementKeyDesc:
-	db   "Opens doors.@"
+PPMaxDesc:
+	db   "Maximizes PP of"
+	next "a selected move.@"
 
 ShinyBallDesc:
 	db   "The caught #mon"

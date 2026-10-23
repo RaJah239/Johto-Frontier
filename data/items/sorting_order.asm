@@ -12,6 +12,7 @@ ItemNameOrder:
 ; Item Pocket - 60 total
 ; Vitamins
 	db RARE_CANDY
+	db PP_MAX
 	db PP_UP
 	db HYPER_EV_UP
 	db HP_UP
@@ -235,7 +236,7 @@ ItemNameOrder:
 	db ROOT_FOSSIL
 
 ; NEXT POCKET
-; Key Items Pocket - 27 total
+; Key Items Pocket - 26 total
 ; Permanent Key Items
 ; Items that are possibly frequently used
 	db MUSIC_PLAYER
@@ -272,7 +273,6 @@ ItemNameOrder:
 	db RAINBOW_WING
 
 ; Temporary Key Items
-	db BASEMENT_KEY
 	db GS_BALL
 	db SQUIRTBOTTLE
 
@@ -313,7 +313,6 @@ ItemAlphaOrder:
 	db ANTIDOTE
 	db ASSAULT_VEST
 	db AWAKENING
-	db BASEMENT_KEY
 	db BERRY
 	db BERRY_JUICE
 	db BICYCLE
@@ -444,6 +443,7 @@ ItemAlphaOrder:
 	db POLKADOT_BOW
 	db PORTRAITMAIL
 	db POTION
+	db PP_MAX
 	db PP_UP
 	db PROTEIN
 	db PRZCUREBERRY
