@@ -1746,6 +1746,12 @@ SetTeamMaxLevel:
 	; fallthrough
 
 SetDynamicLevel:
+	push af
+	ld a, [wOptions5]
+	bit TRAINER_SCALING, a
+	jr nz, .trainer_scaling
+
+	pop af
 	cp MAX_LEVEL + 1
 	ret c
 
@@ -1767,6 +1773,11 @@ SetDynamicLevel:
 	cp MAX_LEVEL
 	ret c
 	ld a, MAX_LEVEL
+	ret
+
+.trainer_scaling
+	pop af
+	ld a, [wTeamMaxLevel]
 	ret
 
 CountBadges:

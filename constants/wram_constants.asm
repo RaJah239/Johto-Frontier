@@ -110,7 +110,8 @@ DEF NUM_FRAMES EQU const_value
 
 ; wOptions5::
 	const_def
-	const KNOCKOUT_FLAIR ; 5
+	const KNOCKOUT_FLAIR ; 05
+	const TRAINER_SCALING ; 1
 
 ; wWalkingDirection::
 	const_def -1
