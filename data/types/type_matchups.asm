@@ -121,6 +121,14 @@ TypeMatchups:
 	db FAIRY,        DRAGON,       SUPER_EFFECTIVE
 	db FAIRY,        DARK,         SUPER_EFFECTIVE
 	db FAIRY,        STEEL,        NOT_VERY_EFFECTIVE
+	db ICE2,         WATER,        SUPER_EFFECTIVE
+	db ICE2,         GRASS,        SUPER_EFFECTIVE
+	db ICE2,         ICE,          NOT_VERY_EFFECTIVE
+	db ICE2,         GROUND,       SUPER_EFFECTIVE
+	db ICE2,         FLYING,       SUPER_EFFECTIVE
+	db ICE2,         DRAGON,       SUPER_EFFECTIVE
+	db ICE2,         STEEL,        NOT_VERY_EFFECTIVE
+	db ICE2,         FIRE,         NOT_VERY_EFFECTIVE
 
 	db -2 ; end (with Foresight)
 
@@ -257,5 +265,13 @@ InverseTypeMatchups:
 	db FAIRY,        DRAGON,       NOT_VERY_EFFECTIVE
 	db FAIRY,        DARK,         NOT_VERY_EFFECTIVE
 	db FAIRY,        STEEL,        SUPER_EFFECTIVE
+   db ICE2,         WATER,        NOT_VERY_EFFECTIVE
+   db ICE2,         GRASS,        NOT_VERY_EFFECTIVE
+   db ICE2,         ICE,          SUPER_EFFECTIVE
+   db ICE2,         GROUND,       NOT_VERY_EFFECTIVE
+   db ICE2,         FLYING,       NOT_VERY_EFFECTIVE
+   db ICE2,         DRAGON,       NOT_VERY_EFFECTIVE
+   db ICE2,         STEEL,        SUPER_EFFECTIVE
+   db ICE2,         FIRE,         SUPER_EFFECTIVE
 NoTypeMatchups:
    db -1 ; end

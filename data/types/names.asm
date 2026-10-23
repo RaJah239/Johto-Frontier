@@ -29,6 +29,7 @@ endr
 	dw Dragon
 	dw Dark
 	dw Fairy
+	dw Ice2
 	assert_table_length TYPES_END
 
 Normal:    db "Normal@"
@@ -51,6 +52,7 @@ Steel:     db "Steel@"
 Dragon:    db "Dragon@"
 Dark:      db "Dark@"
 Fairy:     db "Fairy@"
+Ice2:      db "Ice@"
 
 TypeNamesShort:
 ; entries correspond to types (see constants/type_constants.asm)
@@ -84,6 +86,7 @@ endr
 	dw DragonShort
 	dw DarkShort
 	dw FairyShort
+	dw Ice2Short
 	assert_table_length TYPES_END
 
 NormalShort:    db "Nrm@"
@@ -106,3 +109,4 @@ IceShort:       db "Ice@"
 DragonShort:    db "Dra@"
 DarkShort:      db "Drk@"
 FairyShort:     db "Fry@"
+Ice2Short:      db "Ice@"

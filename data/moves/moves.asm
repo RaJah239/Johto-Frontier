@@ -71,7 +71,7 @@ Moves:
 	move WATER_GUN,    EFFECT_SP_ATK_UP_HIT,      40, WATER,         SPECIAL,  100, 40,  10
 	move HYDRO_PUMP,   EFFECT_SP_ATK_UP_HIT,     120, WATER,         SPECIAL,   85, 16,  10
 	move SURF,         EFFECT_NORMAL_HIT,         95, WATER,         PHYSICAL, 100, 24,   0
-	move ICE_BEAM,     EFFECT_FREEZE_HIT,         95, ICE,           SPECIAL,  100, 24,  10
+	move ICE_BEAM,     EFFECT_FREEZE_HIT,         80, ICE,           SPECIAL,  100, 24,  30
 	move BLIZZARD,     EFFECT_BLIZZARD,          120, ICE,           SPECIAL,   70, 16,  30
 	move PSYBEAM,      EFFECT_CONFUSE_HIT,        65, PSYCHIC_TYPE,  SPECIAL,  100, 32,  10
 	move BUBBLEBEAM,   EFFECT_SPEED_DOWN_HIT,     65, WATER,         SPECIAL,  100, 32,  20
@@ -211,7 +211,7 @@ Moves:
 	move ICY_WIND,     EFFECT_SPEED_DOWN_HIT,     60, ICE,           SPECIAL,  100, 24, 100
 	move SAND_TOMB,    EFFECT_TRAP_TARGET,        40, GROUND,        PHYSICAL,  95, 32,   0
 	move DOUBLE_TEAM,  EFFECT_EVASION_UP,          0, NORMAL,        STATUS,   100, 15,   0
-	move FREEZE_DRY,   EFFECT_FREEZE_DRY,         70, ICE,           SPECIAL,  100, 32,  10
+	move FREEZE_DRY,   EFFECT_FREEZE_HIT,         95, ICE2,          SPECIAL,  100, 32,  10
 	move OUTRAGE,      EFFECT_RAMPAGE,           120, DRAGON,        PHYSICAL, 100, 16,   0
 	move SANDSTORM,    EFFECT_SANDSTORM,           0, ROCK,          STATUS,   100,  8,   0
 	move GIGA_DRAIN,   EFFECT_LEECH_HIT,          80, GRASS,         SPECIAL,  100, 24,   0
