@@ -559,7 +559,7 @@ ScreechDescription:
 
 SlackOffdescription:
 	db   "Priority: Recovers"
-	line "1/2 Max HP.@"
+	line "1/3 Max HP.@"
 
 RoostDescription:
 MilkDrinkDescription:

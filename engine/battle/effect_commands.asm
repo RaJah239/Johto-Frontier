@@ -6414,6 +6414,14 @@ BattleCommand_Heal:
 
 .not_rest
 	jr z, .restore_full_hp
+	ld a, b
+	cp SLACK_OFF
+	jr nz, .not_slack_off
+	ld hl, GetThirdMaxHP
+	call CallBattleCore
+	jr .finish
+
+.not_slack_off
 	ld hl, GetHalfMaxHP
 	call CallBattleCore
 	jr .finish
