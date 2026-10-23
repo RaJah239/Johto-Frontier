@@ -1,7 +1,7 @@
 	db DECIDUEYE ; 034
 
-	db  83, 107,  75,  70, 100, 100 ; 535
-	evs  1,   2,   1,   1,   2,   2
+	db   80,  50,  90,  85, 135,  95 ; 535
+	evs   1,   0,   2,   1,   3,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db GRASS, GHOST ; type

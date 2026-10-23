@@ -1,7 +1,7 @@
 	db DARTRIX ; 033
 
-	db  78,  75,  75,  52,  70,  70 ; 420 BST
-	evs  2,   0,   0,   0,   0,   0
+	db  78,  52,  75,  75,  70,  70 ; 420 BST
+	evs  1,   0,   1,   1,   1,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db GRASS, FLYING ; type

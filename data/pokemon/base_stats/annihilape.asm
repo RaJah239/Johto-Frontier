@@ -1,7 +1,7 @@
 	db ANNIHILAPE ; 131
 
-	db  85, 115,  60,  95,  80,  70 ; 505 BST
-	evs  2,   2,   1,   2,   1,   1
+	db  85,  80, 60,  95,  115,  70 ; 505 BST
+	evs  2,   1,   1,   2,   2,   1
 	;   hp  atk  def  spd  sat  sdf
 
 	db FIGHTING, GHOST ; type

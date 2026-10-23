@@ -1,7 +1,7 @@
 	db NIDOQUEEN ; 071
 
-	db  90,  92,  92,  76,  75,  90 ; 515 BST
-	evs  2,   2,   2,   1,   1,   2
+	db  90,  65,  92,  76, 102,  90 ; 515 BST
+	evs  2,   1,   2,   1,   2,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db POISON, GROUND ; type
