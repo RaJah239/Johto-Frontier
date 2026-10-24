@@ -233,10 +233,6 @@ INCLUDE "engine/events/poke_seer.asm"
 
 SECTION "bank14", ROMX
 INCLUDE "engine/pokemon/party_menu.asm"
-INCLUDE "engine/events/poisonstep.asm"
-INCLUDE "engine/events/sweet_scent.asm"
-INCLUDE "engine/events/squirtbottle.asm"
-INCLUDE "engine/events/sacred_ash.asm"
 INCLUDE "engine/pokemon/tempmon.asm"
 INCLUDE "engine/pokemon/types.asm"
 INCLUDE "engine/pokemon/categories.asm"
@@ -246,6 +242,15 @@ INCLUDE "engine/pokemon/switchpartymons.asm"
 INCLUDE "engine/gfx/load_pics.asm"
 INCLUDE "data/pokemon/base_stats.asm"
 INCLUDE "data/pokemon/names.asm"
+
+
+SECTION "bank15", ROMX
+INCLUDE "engine/events/poisonstep.asm"
+INCLUDE "engine/events/sweet_scent.asm"
+INCLUDE "engine/events/squirtbottle.asm"
+INCLUDE "engine/events/sacred_ash.asm"
+
+
 
 SECTION "bank20", ROMX
 INCLUDE "engine/overworld/player_movement.asm"

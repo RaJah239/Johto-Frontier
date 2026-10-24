@@ -3341,7 +3341,7 @@ wPartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
 endr
 wPartyMonNicknamesEnd::
 
-	ds 22
+	ds 19
 
 wPartyMonItemBackup:: ds PARTY_LENGTH
 

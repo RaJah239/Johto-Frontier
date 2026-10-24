@@ -308,6 +308,7 @@ MACRO add_mt
 	add_tmnum \1
 ENDM
 
+; up to 40 tutor moves can be added
 DEF MT01 EQU const_value
 	add_mt FLAMETHROWER
 	add_mt THUNDERBOLT
@@ -329,6 +330,27 @@ DEF MT01 EQU const_value
 	add_mt SWORDS_DANCE
 	add_mt DOUBLE_EDGE
 	add_mt EXPLOSION
+	add_mt ABSORB
+	add_mt ACID
+	add_mt ACROBATICS
+	add_mt AERIAL_ACE
+	add_mt AEROBLAST
+	add_mt AGILITY
+	add_mt AIR_SLASH
+	add_mt AMNESIA
+	add_mt ANCIENTPOWER
+	add_mt AQUA_JET
+	add_mt AURORA_BEAM
+	add_mt AVALANCHE
+	add_mt BARRIER
+	add_mt BATON_PASS
+	add_mt BELLY_DRUM
+	add_mt BITE
+	add_mt BODY_PRESS
+	add_mt BUG_BITE
+	add_mt CONFUSION
+	add_mt CROSS_CHOP
+
 DEF NUM_TUTORS = __tmhm_value__ - NUM_TMS - NUM_HMS - 1
 
 DEF NUM_TM_HM_TUTOR EQU NUM_TMS + NUM_HMS + NUM_TUTORS
