@@ -233,56 +233,56 @@ ENDM
 
 ; see data/moves/tmhm_moves.asm for moves
 DEF TM01 EQU const_value
-	add_tm ATTRACT
-	add_tm AURA_SPHERE
-	add_tm AVALANCHE
-	add_tm BODY_PRESS
-	add_tm BULK_UP
-	add_tm CALM_MIND
-	add_tm CURSE
-	add_tm DARK_PULSE
-	add_tm DRAIN_PUNCH
-	add_tm EARTHQUAKE
-	add_tm FACADE
-	add_tm FAIRY_FLASH
-	add_tm FLAMETHROWER
-	add_tm FLASH_CANNON
-	add_tm FOCUS_BLAST
-	add_tm GIGA_DRAIN
-	add_tm GUNK_SHOT
-	add_tm HEX
-	add_tm ICE_BEAM
-	add_tm IRON_HEAD
-	add_tm KNOCK_OFF
-	add_tm LIGHT_SCREEN
-	add_tm NASTY_PLOT
-	add_tm OUTRAGE
-	add_tm PLAY_ROUGH
-	add_tm POWER_GEM
-	add_tm PROTECT
-	add_tm PSYCHIC_M
-	add_tm PSYSHOCK
-	add_tm REFLECT
-	add_tm RETURN
-	add_tm ROCK_SLIDE
-	add_tm ROOST
-	add_tm SCALD
-	add_tm SHADOW_BALL
-	add_tm SIGNAL_BEAM
-	add_tm SLUDGE_BOMB
-	add_tm SOLARBEAM
-	add_tm STEEL_WING
-	add_tm SUBSTITUTE
-	add_tm SWAGGER
-	add_tm SWORDS_DANCE
-	add_tm THUNDER_WAVE
-	add_tm THUNDERBOLT
-	add_tm TOXIC
-	add_tm U_TURN
-	add_tm VENOSHOCK
-	add_tm WILL_O_WISP
-	add_tm X_SCISSOR
-	add_tm ZEN_HEADBUTT
+	add_tm ATTRACT      ; whitney
+	add_tm AURA_SPHERE  ; route 9 trainer - defeat all trainers in the vicinity - npc says how many they are always
+	add_tm AVALANCHE    ; pryce
+	add_tm BODY_PRESS   ; roar guy
+	add_tm BULK_UP      ; goldenrod deptstore, basement npc
+	add_tm CALM_MIND    ; cianwood city trainer - defeat all route 13 trainers - npc says how many they are always
+	add_tm CURSE        ; trainer that appears only in the night in the sprout tower - hint via wandering girl outside
+	add_tm DARK_PULSE   ; goldenrod deptstore TM giver for lowest happiness first slot pokemon
+	add_tm DRAIN_PUNCH  ; chuck
+	add_tm EARTHQUAKE   ; dark cave, blackthorn entrance side
+	add_tm FACADE       ; route 12 trainer on shore - defeat all route 12 trainers - npc says how many they are always
+	add_tm FAIRY_FLASH  ; mahogany town trainer - defeat all route 16 trainers - npc says how many they are always
+	add_tm FLAMETHROWER ; goldenrod game corner
+	add_tm FLASH_CANNON ; silver cave inside, needs waterfall
+	add_tm FOCUS_BLAST  ; defeat all route 15 trainers
+	add_tm GIGA_DRAIN   ; goldenrod plant shop - maybe some quest?
+	add_tm GUNK_SHOT    ; defeat all route 19 trainers
+	add_tm HEX          ; burned tower itemball
+	add_tm ICE_BEAM     ; goldenrod game corner
+	add_tm IRON_HEAD    ; jasmine
+	add_tm KNOCK_OFF    ; dark cave, exit to south to Route 18, need brick break
+	add_tm LIGHT_SCREEN ; behind violet gym water
+	add_tm NASTY_PLOT   ; ruins of alph, strength needed
+	add_tm OUTRAGE      ; clair
+	add_tm PLAY_ROUGH   ; whirl island
+	add_tm POWER_GEM    ; another whirld island
+	add_tm PROTECT      ; another another whirld island
+	add_tm PSYCHIC_M    ; Union Cave, surf needed, to go to lapras area
+	add_tm PSYSHOCK     ; NPC in pokeseer house
+	add_tm REFLECT      ; defeat all route 7 and national park trainers
+	add_tm RETURN       ; goldenrod dept store
+	add_tm ROCK_SLIDE   ; another another another whirl island
+	add_tm ROOST        ; falkner
+	add_tm SCALD        ; ake of rage on right of hidden power guy
+	add_tm SHADOW_BALL  ; morty
+	add_tm SIGNAL_BEAM  ; national park
+	add_tm SLUDGE_BOMB  ; gate guard to lake of rage
+	add_tm SOLARBEAM    ; vanilla spot
+	add_tm STEEL_WING   ; outside silver cave 
+	add_tm SUBSTITUTE   ; underground locked area goldenrod
+	add_tm SWAGGER      ; light house, vanilla spot
+	add_tm SWORDS_DANCE ; dragon's den itemball
+	add_tm THUNDER_WAVE ; power plant manager after battle
+	add_tm THUNDERBOLT  ; goldenrod game corner
+	add_tm TOXIC        ; rocket hideout mahoghany
+	add_tm U_TURN       ; bugsy
+	add_tm VENOSHOCK    ; defeat route 10 trainers
+	add_tm WILL_O_WISP  ; defeat route 11 trainers
+	add_tm X_SCISSOR    ; defeat route 17 trainers
+	add_tm ZEN_HEADBUTT ; defeat route 20 trainers
 DEF NUM_TMS EQU __tmhm_value__ - 1
 
 MACRO add_hm
