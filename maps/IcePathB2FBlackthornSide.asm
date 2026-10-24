@@ -20,4 +20,4 @@ IcePathB2FBlackthornSide_MapScripts:
 	def_callbacks
 
 IcePathB2FBlackthornSideTMRest:
-	itemball TM_REST
+	itemball TM_THUNDER_WAVE

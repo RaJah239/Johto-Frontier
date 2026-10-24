@@ -70,6 +70,6 @@ HiddenPowerGuy:
 		done
 
 LakeOfRageHiddenPowerHouseTMHiddenPower:
-	itemball TM_HIDDEN_POWER
+	itemball POTION ; TODOTEXT
 LakeOfRageHiddenPowerHouseTMHiddenForce:
-	itemball TM_HIDDEN_FORCE
+	itemball POTION ; TODOTEXT

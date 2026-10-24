@@ -94,7 +94,7 @@ BlackthornTutor1Script:
 	closewindow
 	ifequal 1, .RockSlide
 	ifequal 2, .SkyAttack
-	ifequal 3, .Outrage
+	ifequal 3, .DoubleEdge
 .Cancel:
 	writethistext
 		text "Maybe next time?"
@@ -117,8 +117,8 @@ BlackthornTutor1Script:
 	ifequal FALSE, .TeachMove
 	sjump .Cancel
 
-.Outrage:
-	setval OUTRAGE 
+.DoubleEdge:
+	setval DOUBLE_EDGE 
 	writetext BlackthornTutorMoveText
 	special MoveTutor
 	ifequal FALSE, .TeachMove
@@ -166,7 +166,7 @@ BlackthornTutor1Script:
 	db 4 ; items
 	db "Rock Slide@"
 	db "Sky Attack@"
-	db "Outrage@"
+	db "Double Edge@"
 	db "Cancel@"
 	
 BlackthornTutorMoveText:

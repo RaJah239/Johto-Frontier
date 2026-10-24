@@ -145,7 +145,7 @@ Route4RoarTMGuyScript:
 		line "entire script."
 		done
 	promptbutton
-	verbosegiveitem TM_ROAR
+;	verbosegiveitem TM_ROAR TODOTEXT
 	iffalse_endtext
 	setevent EVENT_GOT_TM05_ROAR
 .AlreadyHaveRoar:

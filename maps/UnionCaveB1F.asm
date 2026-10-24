@@ -133,6 +133,6 @@ TrainerHikerLeonard:
 	done
 
 UnionCaveB1FTMSwift:
-	itemball TM_SWIFT
+	itemball POTION ; TODOTEXT
 UnionCaveB1FSunShard:
 	itemball SUN_SHARD

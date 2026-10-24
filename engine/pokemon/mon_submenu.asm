@@ -405,12 +405,12 @@ MonSubMenu_GetNextEvoAttackByte:
 	and a
 	jr z, .yes
 
-; Step 3: Check if TM/HM is in bag
-	ld a, TM_DIG
-	ld [wCurItem], a
-	ld hl, wNumItems
-	call CheckItem
-	ret nc ; .fail ; TM not in bag
+; Step 3: Check if TM/HM is in bag TODOTEXT
+;	ld a, TM_DIG
+;	ld [wCurItem], a
+;	ld hl, wNumItems
+;	call CheckItem
+;	ret nc ; .fail ; TM not in bag
 
 ; Step 4: Check if Mon can learn Dig via TM/HM/Move Tutor
 	ld a, DIG

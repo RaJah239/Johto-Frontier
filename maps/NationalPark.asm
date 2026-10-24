@@ -370,4 +370,4 @@ NationalParkMeowthScript:
 NationalParkParlyzHeal:
 	itemball PARLYZ_HEAL
 NationalParkTMDig:
-	itemball TM_DIG
+	itemball POTION ; TODOTEXT

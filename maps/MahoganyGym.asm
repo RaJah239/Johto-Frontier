@@ -129,7 +129,7 @@ MahoganyGymPryceScript:
 		line "from me!"
 		done
 	promptbutton
-	verbosegiveitem TM_ICY_WIND
+	verbosegiveitem TM_AVALANCHE
 	iffalse_endtext
 	setevent EVENT_GOT_MAHOGANY_GYM_TM
 	jumpthisopenedtext

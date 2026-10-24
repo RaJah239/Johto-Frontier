@@ -107,14 +107,13 @@ GoldenrodGameCornerTMVendor_LoopScript:
 	ifequal 3, .Flamethrower
 	sjump GoldenrodGameCornerPrizeVendor_CancelPurchaseScript
 
-; TODOTEXT - uh... change these to the right TMs
 .ThunderBolt:
 	checkcoins GOLDENRODGAMECORNER_TM_COINS
 	ifequal HAVE_LESS, GoldenrodGameCornerPrizeVendor_NotEnoughCoinsScript
-	getitemname STRING_BUFFER_3, TM_THUNDER
+	getitemname STRING_BUFFER_3, TM_THUNDERBOLT
 	scall GoldenrodGameCornerPrizeVendor_ConfirmPurchaseScript
 	iffalse GoldenrodGameCornerPrizeVendor_CancelPurchaseScript
-	giveitem TM_THUNDER
+	giveitem TM_THUNDERBOLT
 	iffalse GoldenrodGameCornerPrizeMonVendor_NoRoomForPrizeScript
 	takecoins GOLDENRODGAMECORNER_TM_COINS
 	sjump GoldenrodGameCornerTMVendor_FinishScript
@@ -122,10 +121,10 @@ GoldenrodGameCornerTMVendor_LoopScript:
 .IceBeam:
 	checkcoins GOLDENRODGAMECORNER_TM_COINS
 	ifequal HAVE_LESS, GoldenrodGameCornerPrizeVendor_NotEnoughCoinsScript
-	getitemname STRING_BUFFER_3, TM_BLIZZARD
+	getitemname STRING_BUFFER_3, TM_ICE_BEAM
 	scall GoldenrodGameCornerPrizeVendor_ConfirmPurchaseScript
 	iffalse GoldenrodGameCornerPrizeVendor_CancelPurchaseScript
-	giveitem TM_BLIZZARD
+	giveitem TM_ICE_BEAM
 	iffalse GoldenrodGameCornerPrizeMonVendor_NoRoomForPrizeScript
 	takecoins GOLDENRODGAMECORNER_TM_COINS
 	sjump GoldenrodGameCornerTMVendor_FinishScript
@@ -133,10 +132,10 @@ GoldenrodGameCornerTMVendor_LoopScript:
 .Flamethrower:
 	checkcoins GOLDENRODGAMECORNER_TM_COINS
 	ifequal HAVE_LESS, GoldenrodGameCornerPrizeVendor_NotEnoughCoinsScript
-	getitemname STRING_BUFFER_3, TM_FIRE_BLAST
+	getitemname STRING_BUFFER_3, TM_FLAMETHROWER
 	scall GoldenrodGameCornerPrizeVendor_ConfirmPurchaseScript
 	iffalse GoldenrodGameCornerPrizeVendor_CancelPurchaseScript
-	giveitem TM_FIRE_BLAST
+	giveitem TM_FLAMETHROWER
 	iffalse GoldenrodGameCornerPrizeMonVendor_NoRoomForPrizeScript
 	takecoins GOLDENRODGAMECORNER_TM_COINS
 	sjump GoldenrodGameCornerTMVendor_FinishScript

@@ -313,7 +313,7 @@ Route7SignText:
 	done
 
 Route7TMRollout:
-	itemball TM_ROLLOUT
+	itemball POTION ; TODOTEXT
 
 Route7BerryTree1:
 	setval MYSTERYBERRY

@@ -250,7 +250,7 @@ RedGyaradosScript:
 LakeOfRageElixer:
 	itemball ELIXER
 LakeOfRageTMDetect:
-	itemball TM_DISARM_VOICE
+	itemball POTION ; TODOTEXT
 
 LakeOfRageOtisScript:
 	callstd WanderingOddEggNPCScript

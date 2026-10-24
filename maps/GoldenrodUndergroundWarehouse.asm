@@ -51,6 +51,6 @@ GoldenrodUndergroundWarehouseResetSwitchesCallback:
 GoldenrodUndergroundWarehouseMaxEther:
 	itemball MAX_ETHER
 GoldenrodUndergroundWarehouseTMSleepTalk:
-	itemball TM_SLEEP_TALK ; TODOTEXT - change event's name when this gets edited
+	itemball TM_SWORDS_DANCE ; TODOTEXT - change event's name when this gets edited
 GoldenrodUndergroundWarehouseUltraBall:
 	itemball ULTRA_BALL

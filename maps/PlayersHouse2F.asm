@@ -55,10 +55,7 @@ if DEF(_DEBUG)
 	loadmem wPartyMon1Moves+3, EXTREMESPEED
 	closetext
 	; tms
-	giveitem TM_BRICK_BREAK, 50
-	giveitem TM_HEADBUTT, 50
-	giveitem TM_DIG, 50
-	giveitem TM_HIDDEN_POWER, 50
+
 	; all fly points
 	setflag ENGINE_FLYPOINT_ROUTE_20
 	setflag ENGINE_FLYPOINT_INDIGO_PLATEAU

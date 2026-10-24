@@ -133,7 +133,7 @@ FarmerFScript_GiveSnore:
 		line "fer your trouble."
 		done
 	promptbutton
-	verbosegiveitem TM_SLACK_OFF
+;	verbosegiveitem TM_SLACK_OFF TODOTEXT
 	iffalse_endtext
 	setevent EVENT_GOT_TM13_SNORE_FROM_MOOMOO_FARM
 FarmerFScript_GotSnore:

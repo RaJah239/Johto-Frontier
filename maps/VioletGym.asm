@@ -103,7 +103,7 @@ VioletGymFalknerScript:
 		text "Take this TM too!"
 		done
 	promptbutton
-	verbosegiveitem TM_MUD_SLAP
+	verbosegiveitem TM_ROOST
 	iffalse_endtext
 	setevent EVENT_GOT_VIOLET_GYM_TM
 	jumpthisopenedtext

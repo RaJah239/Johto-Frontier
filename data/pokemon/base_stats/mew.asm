@@ -16,11 +16,10 @@
 	dn EGG_NONE, EGG_NONE ; egg groups
 
 	; tm/tutor learnset
-	tmhm HEADBUTT, \
+	tmhm AVALANCHE, \
 		 FLAMETHROWER, \
 		 THUNDERBOLT, \
 		 ICE_BEAM, \
-		 EXPLOSION, \ 
 		 OUTRAGE, \
 		 ROCK_SLIDE, \
 		 SKY_ATTACK, \

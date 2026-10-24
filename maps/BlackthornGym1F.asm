@@ -97,7 +97,7 @@ BlackthornGymClairScript:
 		line "you this TM too."
 		done
 	promptbutton
-	verbosegiveitem TM_DRAGON_PULSE
+	verbosegiveitem TM_OUTRAGE
 	iffalse_endtext
 	setevent EVENT_GOT_BLACKTHORN_GYM_TM
 	jumpthisopenedtext

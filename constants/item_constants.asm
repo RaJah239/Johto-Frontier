@@ -233,56 +233,56 @@ ENDM
 
 ; see data/moves/tmhm_moves.asm for moves
 DEF TM01 EQU const_value
-	add_tm METEOR_MASH  ; bf
-	add_tm HEADBUTT     ; c0
-	add_tm CURSE        ; c1
-	add_tm ROLLOUT      ; c2
-	add_tm ROAR         ; c4
-	add_tm TOXIC        ; c5
-	add_tm CALM_MIND    ; c6
-	add_tm BRICK_BREAK  ; c7
-	add_tm TACKLE       ; c8
-	add_tm HIDDEN_POWER ; c9
-	add_tm SUNNY_DAY    ; ca
-	add_tm BULK_UP      ; cb
-	add_tm SLACK_OFF    ; cc
-	add_tm BLIZZARD     ; cd
-	add_tm HYPER_BEAM   ; ce
-	add_tm ICY_WIND     ; cf
-	add_tm PROTECT      ; d0
-	add_tm RAIN_DANCE   ; d1
-	add_tm GIGA_DRAIN   ; d2
-	add_tm POWER_GEM    ; d3
-	add_tm AURA_SPHERE  ; d4
-	add_tm SOLARBEAM    ; d5
-	add_tm SILVER_WIND  ; d6
-	add_tm DRAGON_PULSE ; d7
-	add_tm THUNDER      ; d8
-	add_tm EARTHQUAKE   ; d9
-	add_tm RETURN       ; da
-	add_tm DIG          ; db
-	add_tm PSYCHIC_M    ; dd
-	add_tm SHADOW_BALL  ; de
-	add_tm MUD_SLAP     ; df
-	add_tm GUNK_SHOT    ; e0
-	add_tm HIDDEN_FORCE ; e1
-	add_tm SWAGGER      ; e2
-	add_tm SLEEP_TALK   ; e3
-	add_tm SLUDGE_BOMB  ; e4
-	add_tm SANDSTORM    ; e5
-	add_tm FIRE_BLAST   ; e6
-	add_tm SWIFT        ; e7
-	add_tm DEFENSE_CURL ; e8
-	add_tm THUNDERPUNCH ; e9
-	add_tm DREAM_EATER  ; ea
-	add_tm DISARM_VOICE ; eb
-	add_tm REST         ; ec
-	add_tm ATTRACT      ; ed
-	add_tm KNOCK_OFF    ; ee
-	add_tm STEEL_WING   ; ef
-	add_tm FIRE_PUNCH   ; f0
-	add_tm SHADOW_PUNCH ; f1
-	add_tm TRICK        ; f2
+	add_tm ATTRACT
+	add_tm AURA_SPHERE
+	add_tm AVALANCHE
+	add_tm BODY_PRESS
+	add_tm BULK_UP
+	add_tm CALM_MIND
+	add_tm CURSE
+	add_tm DARK_PULSE
+	add_tm DRAIN_PUNCH
+	add_tm EARTHQUAKE
+	add_tm FACADE
+	add_tm FAIRY_FLASH
+	add_tm FLAMETHROWER
+	add_tm FLASH_CANNON
+	add_tm FOCUS_BLAST
+	add_tm GIGA_DRAIN
+	add_tm GUNK_SHOT
+	add_tm HEX
+	add_tm ICE_BEAM
+	add_tm IRON_HEAD
+	add_tm KNOCK_OFF
+	add_tm LIGHT_SCREEN
+	add_tm NASTY_PLOT
+	add_tm OUTRAGE
+	add_tm PLAY_ROUGH
+	add_tm POWER_GEM
+	add_tm PROTECT
+	add_tm PSYCHIC_M
+	add_tm PSYSHOCK
+	add_tm REFLECT
+	add_tm RETURN
+	add_tm ROCK_SLIDE
+	add_tm ROOST
+	add_tm SCALD
+	add_tm SHADOW_BALL
+	add_tm SIGNAL_BEAM
+	add_tm SLUDGE_BOMB
+	add_tm SOLARBEAM
+	add_tm STEEL_WING
+	add_tm SUBSTITUTE
+	add_tm SWAGGER
+	add_tm SWORDS_DANCE
+	add_tm THUNDER_WAVE
+	add_tm THUNDERBOLT
+	add_tm TOXIC
+	add_tm U_TURN
+	add_tm VENOSHOCK
+	add_tm WILL_O_WISP
+	add_tm X_SCISSOR
+	add_tm ZEN_HEADBUTT
 DEF NUM_TMS EQU __tmhm_value__ - 1
 
 MACRO add_hm
@@ -309,47 +309,51 @@ MACRO add_mt
 ENDM
 
 ; up to 40 tutor moves can be added
+; 30 presntly added
 DEF MT01 EQU const_value
-	add_mt FLAMETHROWER
-	add_mt THUNDERBOLT
-	add_mt ICE_BEAM
-	add_mt ROCK_SLIDE
-	add_mt SKY_ATTACK
-	add_mt OUTRAGE
+; golden rod tutor
+	add_mt FIRE_BLAST
+	add_mt THUNDER
+	add_mt BLIZZARD
+; spearow npc recepient
+	add_mt REST
+	add_mt SLEEP_TALK
+; cianwood tutor
+	add_mt THUNDERPUNCH
+	add_mt FIRE_PUNCH
+	add_mt ICE_PUNCH
+; goldenrod mart tutor
+	add_mt THUNDER_FANG
+	add_mt ICE_FANG
+	add_mt FIRE_FANG
+; ecruteak dance theater
 	add_mt SURF
-	add_mt TELEPORT
-	add_mt SEISMIC_TOSS
-	add_mt BUBBLEBEAM
-	add_mt REFLECT
-	add_mt BODY_SLAM
-	add_mt THUNDER_WAVE
-	add_mt PHOTON_BLAST
-	add_mt MEGA_DRAIN
-	add_mt SUBSTITUTE
-	add_mt METRONOME
-	add_mt SWORDS_DANCE
+; ice path npc
+	add_mt ICY_WIND
+; blackthorn tutor house
+	add_mt SKY_ATTACK
 	add_mt DOUBLE_EDGE
-	add_mt EXPLOSION
-	add_mt ABSORB
-	add_mt ACID
-	add_mt ACROBATICS
-	add_mt AERIAL_ACE
-	add_mt AEROBLAST
-	add_mt AGILITY
-	add_mt AIR_SLASH
-	add_mt AMNESIA
-	add_mt ANCIENTPOWER
-	add_mt AQUA_JET
-	add_mt AURORA_BEAM
-	add_mt AVALANCHE
-	add_mt BARRIER
-	add_mt BATON_PASS
-	add_mt BELLY_DRUM
-	add_mt BITE
-	add_mt BODY_PRESS
-	add_mt BUG_BITE
-	add_mt CONFUSION
-	add_mt CROSS_CHOP
+	add_mt FLARE_BLITZ
+	add_mt WILD_CHARGE
+; npc in nurse joy's training academy
+	add_mt GIGA_IMPACT
+	add_mt HYPER_BEAM
+; union cave tutor
+	add_mt SWIFT
+; lake of rage tutor
+	add_mt HIDDEN_FORCE
+	add_mt HIDDEN_POWER
+; old woman on the way to victory road, 5 badge requirement
+	add_mt SUNNY_DAY
+	add_mt RAIN_DANCE
+	add_mt SANDSTORM
+	add_mt HAIL
+; newbark town free tutor
+	add_mt FALSE_SWIPE
+; single tutor
+	add_mt BULLDOZE
+	add_mt ROCK_TOMB
+	add_mt POUNCE
 
 DEF NUM_TUTORS = __tmhm_value__ - NUM_TMS - NUM_HMS - 1
 

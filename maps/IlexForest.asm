@@ -149,7 +149,7 @@ IlexForestCharcoalMasterScript:
 
 IlexForestHeadbuttGuyScript:
 	faceplayeropentext
-	checkevent EVENT_GOT_TM_HEADBUTT
+;	checkevent EVENT_GOT_TM_HEADBUTT ; replace event with checkitem Headbutt call x TODOTEXT
 	iftrue .AlreadyGotHeadbutt
 	writethistext
 		text "What am I doing?"
@@ -161,9 +161,9 @@ IlexForestHeadbuttGuyScript:
 		line "you try it too!"
 		done
 	promptbutton
-	verbosegiveitem TM_HEADBUTT
+;	verbosegiveitem TM_HEADBUTT
 	iffalse_endtext
-	setevent EVENT_GOT_TM_HEADBUTT
+;	setevent EVENT_GOT_TM_HEADBUTT
 .AlreadyGotHeadbutt:
 	jumpthisopenedtext
 		text "Rattle trees with"

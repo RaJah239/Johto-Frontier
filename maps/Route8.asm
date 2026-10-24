@@ -175,7 +175,7 @@ Route8RockSmashGuyScript:
 		line "have this."
 		done
 	promptbutton
-	verbosegiveitem TM_BRICK_BREAK
+;	verbosegiveitem TM_BRICK_BREAK TODOTEXT
 	iffalse_endtext
 	setevent EVENT_GOT_TM_BRICK_BREAK
 .AlreadyGotRockSmash:

@@ -62,4 +62,4 @@ DarkCaveBlackthornEntrancePharmacistScript:
 DarkCaveBlackthornEntranceRevive:
 	itemball REVIVE
 DarkCaveBlackthornEntranceTMSnore:
-	itemball TM_SLACK_OFF
+	itemball POTION ; TODOTEXT

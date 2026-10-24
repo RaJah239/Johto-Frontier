@@ -126,7 +126,7 @@ AzaleaGymBugsyScript:
 		line "you to have this."
 		done
 	promptbutton
-	verbosegiveitem TM_MUD_SLAP
+	verbosegiveitem TM_U_TURN
 	iffalse_endtext
 	setevent EVENT_GOT_AZALEA_GYM_TM
 	jumpthisopenedtext

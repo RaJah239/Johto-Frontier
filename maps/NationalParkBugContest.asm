@@ -147,4 +147,4 @@ BugCatchingContestBlockerText:
 NationalParkBugContestParlyzHeal:
 	itemball PARLYZ_HEAL
 NationalParkBugContestTMDig:
-	itemball TM_DIG
+	itemball POTION ; TODOTEXT

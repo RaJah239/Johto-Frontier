@@ -59,7 +59,7 @@ MountMortar2FInsideMaxPotion:
 MountMortar2FInsideRareCandy:
 	itemball RARE_CANDY
 MountMortar2FInsideTMDefenseCurl:
-	itemball TM_DEFENSE_CURL
+	itemball TM_X_SCISSOR ; TODOTEXT
 MountMortar2FInsideDragonScale:
 	itemball DRAGON_SCALE
 MountMortar2FInsideElixer:

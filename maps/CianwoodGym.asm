@@ -141,7 +141,7 @@ CianwoodGymChuckScript:
 		line "too!"
 		done
 	promptbutton
-	verbosegiveitem TM_METEOR_MASH
+	verbosegiveitem TM_DRAIN_PUNCH
 	iffalse_endtext
 	setevent EVENT_GOT_CIANWOOD_GYM_TM
 	jumpthisopenedtext

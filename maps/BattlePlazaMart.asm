@@ -59,56 +59,56 @@ BattlePlazaMartTMCoinTraderScript:
     ifequal 51, .NotEnoughCoins
     ifequal 52, .NoRoom
     ifequal 53, .Unavailable
-    ifequal 1,  .TMMeteorMash
-    ifequal 2,  .TMHeadbutt
+    ifequal 1,  .TMDrainPunch
+    ifequal 2,  .TMAavalanche
     ifequal 3,  .TMCurse
-    ifequal 4,  .TMRollout
-    ifequal 5,  .TMRoar
+    ifequal 4,  .TMFocusBlast
+    ifequal 5,  .TMHex
     ifequal 6,  .TMToxic
     ifequal 7,  .TMCalmMind
-    ifequal 8,  .TMBrickBreak
-    ifequal 9,  .TMPsychUp
-    ifequal 10, .TMHiddenPower
-    ifequal 11, .TMSunnyDay
+    ifequal 8,  .TMIronHead
+    ifequal 9,  .TMLightScreen
+    ifequal 10, .TMNastyPlot
+    ifequal 11, .TMPsyshock
     ifequal 12, .TMSweetScent
-    ifequal 13, .TMSnore
+    ifequal 13, .TMRockSlide
     ifequal 14, .TMBlizzard
-    ifequal 15, .TMHyperBeam
-    ifequal 16, .TMIcyWind
+    ifequal 15, .TMFlashCannon
+    ifequal 16, .TMDarkPulse
     ifequal 17, .TMProtect
-    ifequal 18, .TMRainDance
+    ifequal 18, .TMRoost
     ifequal 19, .TMGigaDrain
     ifequal 20, .TMPowerGem
     ifequal 21, .TMFrustration
     ifequal 22, .TMSolarbeam
-    ifequal 23, .TMIronTail
-    ifequal 24, .TMDragonBreadth
+    ifequal 23, .TMScald
+    ifequal 24, .TMFacade
     ifequal 25, .TMThunder
     ifequal 26, .TMEarthquake
     ifequal 27, .TMReturn
-    ifequal 28, .TMDig
+    ifequal 28, .TMFairyFlash
     ifequal 29, .TMPsychic
     ifequal 30, .TMShadowBall
-    ifequal 31, .TMMudSlap
+    ifequal 31, .TMPlayRough
     ifequal 32, .TMGunkShot
-    ifequal 33, .TMHiddenForce
+    ifequal 33, .TMSignalBeam
     ifequal 34, .TMSwagger
-    ifequal 35, .TMSleepTalk
+    ifequal 35, .TMSwordsDance
     ifequal 36, .TMSludgeBomb
-    ifequal 37, .TMSandStorm
+    ifequal 37, .TMOutrage
     ifequal 38, .TMFireBlast
-    ifequal 39, .TMSwift
-    ifequal 40, .TMDefenseCurl
+    ifequal 39, .TMZenHeadbutt
+    ifequal 40, .TMXScissor
     ifequal 41, .TMThunderPunch
-    ifequal 42, .TMDreamEater
-    ifequal 43, .TMDetect
-    ifequal 44, .TMRest
+    ifequal 42, .TMWillOWisp
+    ifequal 43, .TMVenoshock
+    ifequal 44, .TMThunderWave
     ifequal 45, .TMAttract
     ifequal 46, .TMKnockOff
     ifequal 47, .TMStealWing
     ifequal 48, .TMFirePunch
-    ifequal 49, .TMFuryCutter
-    ifequal 50, .TMTrick
+    ifequal 49, .TMSubstitute
+    ifequal 50, .TMUTurn
     sjump .CancelBuyingTMsScript
 
 .NoRoom:
@@ -119,13 +119,13 @@ BattlePlazaMartTMCoinTraderScript:
     waitbutton
     sjump .WantToBuyADifferentTM
 
-.TMMeteorMash:
-    verbosegiveitem TM_METEOR_MASH
+.TMDrainPunch:
+    verbosegiveitem TM_DRAIN_PUNCH
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMHeadbutt:
-    verbosegiveitem TM_HEADBUTT
+.TMAavalanche:
+    verbosegiveitem TM_AVALANCHE
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
@@ -140,13 +140,13 @@ BattlePlazaMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMRollout:
-    verbosegiveitem TM_ROLLOUT
+.TMFocusBlast:
+    verbosegiveitem TM_FOCUS_BLAST
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMRoar:
-    verbosegiveitem TM_ROAR
+.TMHex:
+    verbosegiveitem TM_HEX
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
@@ -160,23 +160,23 @@ BattlePlazaMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMBrickBreak:
-    verbosegiveitem TM_BRICK_BREAK
+.TMIronHead:
+    verbosegiveitem TM_IRON_HEAD
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMPsychUp:
-    verbosegiveitem TM_TACKLE
+.TMLightScreen:
+    verbosegiveitem TM_LIGHT_SCREEN
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMHiddenPower:
-    verbosegiveitem TM_HIDDEN_POWER
+.TMNastyPlot:
+    verbosegiveitem TM_NASTY_PLOT
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMSunnyDay:
-    verbosegiveitem TM_SUNNY_DAY
+.TMPsyshock:
+    verbosegiveitem TM_PSYSHOCK
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
@@ -185,23 +185,23 @@ BattlePlazaMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMSnore:
-    verbosegiveitem TM_SLACK_OFF
+.TMRockSlide:
+    verbosegiveitem TM_ROCK_SLIDE
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
 .TMBlizzard:
-    verbosegiveitem TM_BLIZZARD
+    verbosegiveitem TM_ICE_BEAM
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMHyperBeam:
-    verbosegiveitem TM_HYPER_BEAM
+.TMFlashCannon:
+    verbosegiveitem TM_FLASH_CANNON
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMIcyWind:
-    verbosegiveitem TM_ICY_WIND
+.TMDarkPulse:
+    verbosegiveitem TM_DARK_PULSE
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
@@ -210,8 +210,8 @@ BattlePlazaMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMRainDance:
-    verbosegiveitem TM_RAIN_DANCE
+.TMRoost:
+    verbosegiveitem TM_ROOST
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
@@ -235,18 +235,18 @@ BattlePlazaMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMIronTail:
-    verbosegiveitem TM_SILVER_WIND
+.TMScald:
+    verbosegiveitem TM_SCALD
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMDragonBreadth:
-    verbosegiveitem TM_DRAGON_PULSE
+.TMFacade:
+    verbosegiveitem TM_FACADE
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
 .TMThunder:
-    verbosegiveitem TM_THUNDER
+    verbosegiveitem TM_THUNDERBOLT
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
@@ -260,8 +260,8 @@ BattlePlazaMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMDig:
-    verbosegiveitem TM_DIG
+.TMFairyFlash:
+    verbosegiveitem TM_FAIRY_FLASH
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
@@ -275,8 +275,8 @@ BattlePlazaMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMMudSlap:
-    verbosegiveitem TM_MUD_SLAP
+.TMPlayRough:
+    verbosegiveitem TM_PLAY_ROUGH
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
@@ -285,8 +285,8 @@ BattlePlazaMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMHiddenForce:
-    verbosegiveitem TM_HIDDEN_FORCE
+.TMSignalBeam:
+    verbosegiveitem TM_SIGNAL_BEAM
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
@@ -295,8 +295,8 @@ BattlePlazaMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMSleepTalk:
-    verbosegiveitem TM_SLEEP_TALK
+.TMSwordsDance:
+    verbosegiveitem TM_SWORDS_DANCE
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
@@ -305,43 +305,43 @@ BattlePlazaMartTMCoinTraderScript:
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMSandStorm:
-    verbosegiveitem TM_SANDSTORM
+.TMOutrage:
+    verbosegiveitem TM_OUTRAGE
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
 .TMFireBlast:
-    verbosegiveitem TM_FIRE_BLAST
+    verbosegiveitem TM_FLAMETHROWER
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMSwift:
-    verbosegiveitem TM_SWIFT
+.TMZenHeadbutt:
+    verbosegiveitem TM_ZEN_HEADBUTT
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMDefenseCurl:
-    verbosegiveitem TM_DEFENSE_CURL
+.TMXScissor:
+    verbosegiveitem TM_X_SCISSOR
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
 .TMThunderPunch:
-    verbosegiveitem TM_THUNDERPUNCH
+    ; verbosegiveitem TM_THUNDERPUNCH TODOTEXT
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMDreamEater:
-    verbosegiveitem TM_DREAM_EATER
+.TMWillOWisp:
+    verbosegiveitem TM_WILL_O_WISP
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMDetect:
-    verbosegiveitem TM_DISARM_VOICE
+.TMVenoshock:
+    verbosegiveitem TM_VENOSHOCK
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMRest:
-    verbosegiveitem TM_REST
+.TMThunderWave:
+    verbosegiveitem TM_THUNDER_WAVE
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
@@ -361,17 +361,17 @@ BattlePlazaMartTMCoinTraderScript:
     sjump .ConcludeTransaction
 
 .TMFirePunch:
-    verbosegiveitem TM_FIRE_PUNCH
+ ;   verbosegiveitem TM_FIRE_PUNCH TODOTEXT
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMFuryCutter:
-    verbosegiveitem TM_SHADOW_PUNCH
+.TMSubstitute:
+    verbosegiveitem TM_SUBSTITUTE
     iffalse .NoRoom
     sjump .ConcludeTransaction
 
-.TMTrick:
-    verbosegiveitem TM_TRICK
+.TMUTurn:
+    verbosegiveitem TM_U_TURN
     iffalse .NoRoom
     ; fallthrough
 

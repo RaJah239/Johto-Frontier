@@ -51,4 +51,4 @@ SlowpokeWellB2FGymGuideScript:
 		done
 
 SlowpokeWellB2FTMRainDance:
-	itemball TM_RAIN_DANCE
+	itemball POTION ; TODOTEXT

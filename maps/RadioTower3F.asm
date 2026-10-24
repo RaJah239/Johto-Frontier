@@ -38,7 +38,7 @@ RadioTower3FCooltrainerFScript:
 		cont "accept it."
 		done
 	promptbutton
-	verbosegiveitem TM_SUNNY_DAY
+;	verbosegiveitem TM_SUNNY_DAY ; TODOTEXT
 	iffalse_endtext
 	setevent EVENT_GOT_SUNNY_DAY_FROM_RADIO_TOWER
 	jumpthisopenedtext

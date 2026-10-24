@@ -105,7 +105,7 @@ Route3MailRecipientScript:
 		done
 	promptbutton
 	setevent EVENT_GAVE_KENYA
-	verbosegiveitem TM_TRICK
+;	verbosegiveitem TM_TRICK TODOTEXT
 	iffalse_endtext
 	setevent EVENT_GOT_TM_AURA_SPHERE
 .DescribeDarkPulse:

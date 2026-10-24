@@ -1489,12 +1489,12 @@ TryHeadbuttOW::
 	call CheckPartyMove
 	jr nc, .can_use
 
-; Step 2
-	ld a, TM_HEADBUTT
-	ld [wCurItem], a
-	ld hl, wNumItems
-	call CheckItem
-	jr z, .no
+; Step 2 ; TODOTEXT
+;	ld a, TM_HEADBUTT
+;	ld [wCurItem], a
+;	ld hl, wNumItems
+;	call CheckItem
+;	jr z, .no
 
 ; Step 3
 	ld d, HEADBUTT
@@ -1637,11 +1637,11 @@ HasRockSmash:
 	jr nc, .yes
 
 ; Step 2
-	ld a, TM_BRICK_BREAK
-	ld [wCurItem], a
-	ld hl, wNumItems
-	call CheckItem
-	jr z, .no
+;	ld a, TM_BRICK_BREAK TODOTEXT
+;	ld [wCurItem], a
+;	ld hl, wNumItems
+;	call CheckItem
+;	jr z, .no
 
 ; Step 3
 	ld d, BRICK_BREAK

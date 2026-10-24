@@ -109,7 +109,7 @@ OlivineGymJasmineScript:
 		line "this too…"
 		done
 	promptbutton
-	verbosegiveitem TM_SILVER_WIND
+	verbosegiveitem TM_IRON_HEAD
 	iffalse_endtext
 	setevent EVENT_GOT_OLIVINE_GYM_TM
 	jumpthisopenedtext
