@@ -187,7 +187,6 @@ SelectTM:
 	menu_coords 1, 3, SCREEN_WIDTH - 2, 10
 	dw .MenuData
 	db 1 ; default option
-
 	db 0
 
 .MenuData:
@@ -382,7 +381,7 @@ endr
 	ld de, .BagString
 	jmp PlaceString
 
-.BagString db "Bag@"
+.BagString: db "Bag@"
 
 DrawMoveInfoBox::
 ; Draw the move info box below a scrolling menu for the move in
@@ -525,8 +524,8 @@ DrawMoveInfoBox::
 .no_power
 	ld de, .BlankString
 	call PlaceString
-.printed_power
 
+.printed_power
 ; ...and its description in the pocket's rows 15-16, flush against
 ; the bottom border with no spare interior row left over.
 	hlcoord 1, 15
@@ -549,110 +548,110 @@ GetTMs:
 	ret
 
 TMMenuItems:
-	db TM_DRAIN_PUNCH
-	db TM_AVALANCHE
-	db TM_CURSE
-	db TM_FOCUS_BLAST
-	db TM_HEX
-	db TM_TOXIC
-	db TM_CALM_MIND
-	db TM_IRON_HEAD
-	db TM_LIGHT_SCREEN
-	db TM_NASTY_PLOT
-	db TM_PSYSHOCK
-	db TM_BULK_UP
-	db TM_ROCK_SLIDE
-	db TM_ICE_BEAM
-	db TM_FLASH_CANNON
-	db TM_DARK_PULSE
-	db TM_PROTECT
-	db TM_ROOST
-	db TM_GIGA_DRAIN
-	db TM_POWER_GEM
-	db TM_AURA_SPHERE
-	db TM_SOLARBEAM
-	db TM_SCALD
-	db TM_FACADE
-	db TM_THUNDERBOLT
-	db TM_EARTHQUAKE
-	db TM_RETURN
-	db TM_FAIRY_FLASH
-	db TM_PSYCHIC_M
-	db TM_SHADOW_BALL
-	db TM_PLAY_ROUGH
-	db TM_GUNK_SHOT
-	db TM_SIGNAL_BEAM
-	db TM_SWAGGER
-	db TM_SWORDS_DANCE
-	db TM_SLUDGE_BOMB
-	db TM_OUTRAGE
-	db TM_FLAMETHROWER
-	db TM_ZEN_HEADBUTT
-	db TM_X_SCISSOR
-;	db TM_THUNDERPUNCH TODOTEXT
-	db TM_WILL_O_WISP
-	db TM_VENOSHOCK
-	db TM_THUNDER_WAVE
-	db TM_ATTRACT
-	db TM_KNOCK_OFF
-	db TM_STEEL_WING
-;	db TM_FIRE_PUNCH TODOTEXT
-	db TM_SUBSTITUTE
-	db TM_U_TURN
+	db ATTRACT
+	db AURA_SPHERE
+	db AVALANCHE
+	db BODY_PRESS
+	db BULK_UP
+	db CALM_MIND
+	db CURSE
+	db DARK_PULSE
+	db DRAIN_PUNCH
+	db EARTHQUAKE
+	db FACADE
+	db FAIRY_FLASH
+	db FLAMETHROWER
+	db FLASH_CANNON
+	db FOCUS_BLAST
+	db GIGA_DRAIN
+	db GUNK_SHOT
+	db HEX
+	db ICE_BEAM
+	db IRON_HEAD
+	db KNOCK_OFF
+	db LIGHT_SCREEN
+	db NASTY_PLOT
+	db OUTRAGE
+	db PLAY_ROUGH
+	db POWER_GEM
+	db PROTECT
+	db PSYCHIC_M
+	db PSYSHOCK
+	db REFLECT
+	db RETURN
+	db ROCK_SLIDE
+	db ROOST
+	db SCALD
+	db SHADOW_BALL
+	db SIGNAL_BEAM
+	db SLUDGE_BOMB
+	db SOLARBEAM
+	db STEEL_WING
+	db SUBSTITUTE
+	db SWAGGER
+	db SWORDS_DANCE
+	db THUNDER_WAVE
+	db THUNDERBOLT
+	db TOXIC
+	db U_TURN
+	db VENOSHOCK
+	db WILL_O_WISP
+	db X_SCISSOR
+	db ZEN_HEADBUTT
 
 TMPrices:
 ; Big-endian coin prices (HI, LO), one per TMMenuItems entry,
 ; each a four-digit amount from 1000 to 9999.
-	bigdw 8537 ; Meteor Mash
-	bigdw 1500 ; Headbutt
-	bigdw 4500 ; Curse
-	bigdw 2200 ; Rollout
-	bigdw 3000 ; Roar
-	bigdw 6100 ; Toxic
-	bigdw 7400 ; Calm Mind
-	bigdw 5000 ; Brick Break
-	bigdw 1000 ; Tackle
-	bigdw 5400 ; Hidden Power
-	bigdw 3500 ; Sunny Day
-	bigdw 7000 ; Bulk Up
-	bigdw 7800 ; Slack Off
-	bigdw 7900 ; Blizzard
-	bigdw 9000 ; Hyper Beam
-	bigdw 2500 ; Icy Wind
-	bigdw 4900 ; Protect
-	bigdw 3300 ; Rain Dance
-	bigdw 6500 ; Giga Drain
-	bigdw 4000 ; Power Gem
-	bigdw 7500 ; Aura Sphere
-	bigdw 6900 ; SolarBeam
-	bigdw 4200 ; Silver Wind
-	bigdw 7200 ; Dragon Pulse
-	bigdw 8200 ; Thunder
-	bigdw 9500 ; Earthquake
-	bigdw 4800 ; Return
-	bigdw 3200 ; Dig
-	bigdw 8800 ; Psychic
-	bigdw 6800 ; Shadow Ball
-	bigdw 1800 ; Mud-Slap
-	bigdw 6200 ; Gunk Shot
-	bigdw 5900 ; Hidden Force
-	bigdw 2000 ; Swagger
-	bigdw 4600 ; Sleep Talk
-	bigdw 5800 ; Sludge Bomb
-	bigdw 3100 ; Sandstorm
-	bigdw 8100 ; Fire Blast
-	bigdw 1200 ; Swift
-	bigdw 1100 ; Defense Curl
-	bigdw 5600 ; ThunderPunch
-	bigdw 4100 ; Dream Eater
-	bigdw 1600 ; Disarm Voice
-	bigdw 6600 ; Rest
-	bigdw 2800 ; Attract
-	bigdw 6000 ; Knock Off
-	bigdw 4400 ; Steel Wing
-	bigdw 5500 ; Fire Punch
-	bigdw 2400 ; Shadow Punch
-	bigdw 7100 ; Trick
+	bigdw 8537 ; Attract
+	bigdw 1500 ; Aura Sphere
+	bigdw 4500 ; Avalanche
+	bigdw 2200 ; Body Press
+	bigdw 3000 ; Bulk Up
+	bigdw 6100 ; Calm Mind
+	bigdw 7400 ; Curse
+	bigdw 5000 ; Dark Pulse
+	bigdw 1000 ; Drain Punch
+	bigdw 5400 ; Earthquake
+	bigdw 3500 ; Facade
+	bigdw 7000 ; Fairy Flash
+	bigdw 7800 ; Flamethrower
+	bigdw 7900 ; Flash Cannon
+	bigdw 9000 ; Focus Blast
+	bigdw 2500 ; Giga Drain
+	bigdw 4900 ; Gunk Shot
+	bigdw 3300 ; Hex
+	bigdw 6500 ; Ice Beam
+	bigdw 4000 ; Iron Head
+	bigdw 7500 ; Knock Off
+	bigdw 6900 ; Light Screen
+	bigdw 4200 ; Nasty Plot
+	bigdw 7200 ; Outrage
+	bigdw 8200 ; Play Rough
+	bigdw 9500 ; Power Gem
+	bigdw 4800 ; Protect
+	bigdw 3200 ; Psychic
+	bigdw 8800 ; Psyshock
+	bigdw 6800 ; Reflect
+	bigdw 1800 ; Return
+	bigdw 6200 ; Rock Slide
+	bigdw 5900 ; Roost
+	bigdw 2000 ; Scald
+	bigdw 4600 ; Shadow Ball
+	bigdw 5800 ; Signal Beam
+	bigdw 3100 ; Sludge Bomb
+	bigdw 8100 ; Solarbeam
+	bigdw 1200 ; Steel Wing
+	bigdw 1100 ; Substitute
+	bigdw 5600 ; Swagger
+	bigdw 4100 ; Swords Dance
+	bigdw 1600 ; Thunder Wave
+	bigdw 6600 ; Thunderbolt
+	bigdw 2800 ; Toxic
+	bigdw 6000 ; U Turn
+	bigdw 4400 ; Venoshock
+	bigdw 5500 ; Will-O-Wisp
+	bigdw 2400 ; X-Scissor
+	bigdw 7100 ; Zen Headbutt
 
 TMUnlockEvents:
 ; 50 event flags, one per TM (16-bit each).
