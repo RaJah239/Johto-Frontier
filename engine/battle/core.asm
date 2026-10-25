@@ -2301,35 +2301,6 @@ HandlePlayerMonFaint:
 	jmp z, WinTrainerBattle
 
 .notfainted
-	push af
-	ld a, [wOptions5]
-	bit KNOCKOUT_FLAIR, a
-	jr nz, .skip_ko_flair
-
-	call StopDangerSound
-	call WaitSFX
-
-	; animate mon + cry when KO'ing the player
-	; AnimateFrontpic animates wCurPartySpecies and draws its frames from
-	; VRAM bank 1, so point it at the foe and reload the foe's pic first;
-	; GetEnemyMonFrontpic refreshes bank 0 and bank 1 together.
-	; (Same setup as ShowSetEnemyMonAndSendOutAnimation.)
-	ld a, [wCurPartySpecies]
-	push af
-	ld a, [wEnemyMonSpecies]
-	ld [wCurPartySpecies], a
-	call GetEnemyMonFrontpic
-	hlcoord 12, 0
-	ld d, $0
-	ld e, ANIM_MON_SLOW
-	predef AnimateFrontpic
-	ld a, $1
-	ldh [hBGMapMode], a ; AnimateFrontpic leaves this cleared
-	pop af
-	ld [wCurPartySpecies], a
-
-.skip_ko_flair
-	pop af
 	call AskUseNextPokemon
 	jr nc, .switch
 	ld a, $1

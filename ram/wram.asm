@@ -1787,7 +1787,7 @@ wOptions4::
 	db
 
 wOptions5::
-; bit 0: knock flair
+; bit 0: trainer scaling
 
 wOptionsEnd::
 
