@@ -48,8 +48,18 @@ OpenAllMovesDetailsScreen::
 	; fallthrough
 
 MoveDetailsMenu_Run:
+	ld a, [wMenuCursorPosition]
+	ld [wMenuCursorY], a
+	ld [wMenuScrollPosition], a
+.input_loop
 	call ScrollingMenu
+	ld a, [wMenuCursorY]
+	ld [wMenuCursorPosition], a
 	ld a, [wMenuJoypad]
+	cp D_RIGHT
+	jr z, .page_down
+	cp D_LEFT
+	jr z, .page_up
 	cp B_BUTTON
 	jr z, .carry
 	ld a, [wMenuSelection]
@@ -60,6 +70,70 @@ MoveDetailsMenu_Run:
 .carry
 	scf
 	ret
+
+.page_down
+	ld b, 1
+	jr .page
+
+.page_up
+	ld b, -1
+.page
+	ld c, 4
+	ld a, [wMenuScrollPosition]
+	bit 7, b
+	jr nz, .page_up_do
+.page_down_do
+	ld a, [wMenuScrollPosition]
+	add a, c
+	ld d, a
+	ld a, [wScrollingMenuListSize]
+	inc a
+	ld b, a
+	ld a, [wMenuData_ScrollingMenuHeight]
+	ld e, a
+	ld a, b
+	sub e
+	jr nc, .have_max_dn
+	xor a
+.have_max_dn
+	inc a
+	ld e, a
+	ld a, d
+	sub e
+	jr nc, .wrapped_dn
+	ld a, d
+	jr .store_dn
+.wrapped_dn
+	ld a, d
+	sub e
+.store_dn
+	ld [wMenuScrollPosition], a
+	jr .input_loop
+
+.page_up_do
+	ld a, [wMenuScrollPosition]
+	sub c
+	jr nc, .store_up
+	ld a, [wScrollingMenuListSize]
+	inc a
+	ld b, a
+	ld a, [wMenuData_ScrollingMenuHeight]
+	ld e, a
+	ld a, b
+	sub e
+	jr nc, .have_max_up
+	xor a
+.have_max_up
+	inc a
+	ld e, a
+	ld a, [wMenuScrollPosition]
+	ld b, a
+	ld a, e
+	sub c
+	add a, b
+.store_up
+	ld [wMenuScrollPosition], a
+	jr .input_loop
 
 MoveDetailsMenuPartyMonHeader:
 	db MENU_BACKUP_TILES
@@ -83,7 +157,7 @@ MoveDetailsMenuAllMovesHeader:
 	db 1
 
 MoveDetailsMenuAllMovesData:
-	db SCROLLINGMENU_DISPLAY_ARROWS | SCROLLINGMENU_ENABLE_FUNCTION3
+	db SCROLLINGMENU_DISPLAY_ARROWS | SCROLLINGMENU_ENABLE_LEFT | SCROLLINGMENU_ENABLE_RIGHT | SCROLLINGMENU_ENABLE_FUNCTION3
 	db 4, SCREEN_WIDTH + 2
 	db SCROLLINGMENU_ITEMS_NORMAL
 	dba MoveDetailsMenuAllMovesList
