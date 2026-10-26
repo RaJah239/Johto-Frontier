@@ -53,9 +53,11 @@ ReadTrainerParty:
 	jr .skip_trainer
 
 .got_trainer
+	call ApplyScaledTrainerParty
+.skip_trainer_name
 	call GetNextTrainerDataByte
 	cp "@"
-	jr nz, .got_trainer ; Skip name.
+	jr nz, .skip_trainer_name ; Skip name.
 
 	call GetNextTrainerDataByte
 	ld [wOtherTrainerType], a
@@ -64,6 +66,85 @@ ReadTrainerParty:
 	call ReadTrainerPartyPieces
 	call MaximizeOTPartyPP
 	jmp ComputeTrainerReward
+
+ApplyScaledTrainerParty:
+; If this trainer has level-bracket parties, replace the trainer entry
+; pointer (hl) and bank with the party that matches the player's highest
+; party level (wTeamMaxLevel).
+; If the level is above every bracket, the last bracket's party is used.
+	push hl
+	ld a, [wOtherTrainerClass]
+	ld b, a
+	ld a, [wOtherTrainerID]
+	ld c, a
+	ld hl, ScaledTrainerPartyTable
+.find_trainer
+	ld a, [hli]
+	cp $ff
+	jr z, .not_found
+	cp b
+	jr nz, .next_trainer
+	ld a, [hli]
+	cp c
+	jr z, .found_trainer
+	inc hl
+	inc hl
+	jr .find_trainer
+.next_trainer
+	inc hl
+	inc hl
+	inc hl
+	jr .find_trainer
+
+.found_trainer
+	ld a, [hli]
+	ld e, a
+	ld d, [hl]
+	ld h, d
+	ld l, e
+	ld b, 0 ; bank of the last bracket used (0 = none yet)
+.find_bracket
+	ld a, [hli]
+	cp $ff
+	jr z, .use_last_bracket
+	ld c, a
+	ld a, [wTeamMaxLevel]
+	cp c
+	jr c, .select_current
+	jr z, .select_current
+	; Above this bracket: remember it and keep looking.
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	jr .find_bracket
+
+.select_current
+	ld a, [hli]
+	ld [wTrainerGroupBank], a
+	ld a, [hli]
+	ld e, a
+	ld a, [hl]
+	ld h, a
+	ld l, e
+	pop bc
+	ret
+
+.use_last_bracket
+	ld a, b
+	and a
+	jr z, .not_found
+	ld [wTrainerGroupBank], a
+	ld h, d
+	ld l, e
+	pop bc
+	ret
+
+.not_found
+	pop hl
+	ret
 
 MaximizeOTPartyPP:
 ; every pokemon in the ot party maximum pp for each of its moves:
@@ -1833,3 +1914,5 @@ GetPlayerHighestPartyLevel:
 	jr nz, .next
 	ld a, e
 	ret
+
+INCLUDE "data/trainers/scaled_parties.asm"

@@ -66,24 +66,7 @@ VioletGymFalknerScript:
 		done
 	waitclosetext
 	winlosstext FalknerLossText, 0
-	readvar VAR_BADGES
-	ifgreater 5, .SixOrSevenBadges
-	ifgreater 3, .FourOrFiveBadges
-	ifgreater 1, .TwoOrThreeBadges
-.ZeroOrOneBadge:
 	loadtrainer FALKNER, FALKNER1
-	sjump .StartBattle
-.TwoOrThreeBadges:
-	loadtrainer FALKNER, FALKNER2
-	sjump .StartBattle
-.FourOrFiveBadges:
-	loadtrainer FALKNER, FALKNER3
-	sjump .StartBattle
-.SixOrSevenBadges:
-	loadtrainer FALKNER, FALKNER4
-	; fallthrough
-
-.StartBattle:
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_FALKNER

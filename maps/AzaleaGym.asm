@@ -85,24 +85,7 @@ AzaleaGymBugsyScript:
 	waitclosetext
 	special SaveMusic
 	winlosstext BugsyLossText, 0
-	readvar VAR_BADGES
-	ifgreater 5, .SixOrSevenBadges
-	ifgreater 3, .FourOrFiveBadges
-	ifgreater 1, .TwoOrThreeBadges
-.ZeroOrOneBadge:
 	loadtrainer BUGSY, BUGSY1
-	sjump .StartBattle
-.TwoOrThreeBadges:
-	loadtrainer BUGSY, BUGSY2
-	sjump .StartBattle
-.FourOrFiveBadges:
-	loadtrainer BUGSY, BUGSY3
-	sjump .StartBattle
-.SixOrSevenBadges:
-	loadtrainer BUGSY, BUGSY4
-	; fallthrough
-
-.StartBattle:
 	startbattle
 	reloadmapafterbattle
 	special RestoreMusic
