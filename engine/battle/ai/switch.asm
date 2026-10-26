@@ -228,45 +228,26 @@ CheckAbleToSwitch:
 	; 80+% chance to switch if Nightmared, Cursed, or infatuated
 	ld a, [wEnemySubStatus1]
 	and 1 << SUBSTATUS_NIGHTMARE | 1 << SUBSTATUS_CURSE | 1 << SUBSTATUS_IN_LOVE
-	jmp nz, .likely_switch
+	jr nz, .likely_switch
 
 	; 80+% chance to switch if Confused
 	ld a, [wEnemySubStatus3]
 	bit SUBSTATUS_CONFUSED, a
-	jmp nz, .likely_switch
+	jr nz, .likely_switch
 
 	; 80+% chance to switch if Seeded
 	ld a, [wEnemySubStatus4]
 	bit SUBSTATUS_LEECH_SEED, a
-	jmp nz, .likely_switch
+	jr nz, .likely_switch
 
-	; 80% chance to switch if badly poisoned for 4+ turns
-	ld a, [wEnemySubStatus5]
-	bit SUBSTATUS_TOXIC, a
-	jr z, .no_toxic
-
-	ld a, [wEnemyToxicCount]
-	cp 4
-	jr c, .no_toxic
-
-	; 80% chance to switch
-	call Random
-	cp 80 percent
-	jr nc, .no_toxic
-	jr .toxic_switch
-
-.toxic_switch
-	jr .likely_switch
-
-.no_toxic
 	; 50% chance of skipping SubStatus5 checks
 	call EffectCommands_50_50
 	jr c, .no_status
 
-	; ~40% chance (due to above 50/50) to switch if
+	; ~40% chance (due to above 50/50) to switch if badly poisoned,
 	; Encored, or Destiny Bonded
 	ld a, [wEnemySubStatus5]
-	and 1 << SUBSTATUS_ENCORED | 1 << SUBSTATUS_DESTINY_BOND
+	and 1 << SUBSTATUS_TOXIC | 1 << SUBSTATUS_ENCORED | 1 << SUBSTATUS_DESTINY_BOND
 	jr nz, .likely_switch
 
 .no_status
