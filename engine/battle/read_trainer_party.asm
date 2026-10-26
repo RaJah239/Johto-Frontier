@@ -428,25 +428,32 @@ ReadTrainerPartyPieces:
 	jr .write_evs
 
 .NotInBattlePlaza
-	; Count the badges actually owned.
-	ld a, [wJohtoBadges]
-	ld b, a
-	ld c, 0
-
-.count_badges
-	srl b
-	jr nc, .next_badge
-	inc c
-.next_badge
-	ld a, b
-	and a
-	jr nz, .count_badges
-
-	; Look up the EV value for this badge count.
-	ld hl, .EVValues
-	ld b, 0
-	add hl, bc
+	push de
+	push hl
+	call GetOTPartyMaxLevel
+	ld hl, .TrainerLevelEVValues
+	ld c, a
+.loop_level_ev
+	ld a, [hli]
+	cp $ff
+	jr z, .got_level_ev_last
+	cp c
+	jr c, .next_level_ev
+	jr .got_level_ev
+.next_level_ev
+	inc hl
+	jr .loop_level_ev
+.got_level_ev
+	dec hl
 	ld a, [hl]
+	jr .got_level_ev_done
+.got_level_ev_last
+	dec hl
+	dec hl
+	ld a, [hl]
+.got_level_ev_done
+	pop hl
+	pop de
 
 .write_evs
 	rept 3
@@ -587,8 +594,36 @@ ReadTrainerPartyPieces:
 	pop hl
 	ret
 
-.EVValues:
-	db 0, 31, 63, 95, 127, 159, 191, 223, 252
+.TrainerLevelEVValues:
+	db  9,  31 ; lv  9-13
+	db 14,  63 ; lv 14-18
+	db 19,  95 ; lv 19-23
+	db 24, 127 ; lv 24-29
+	db 30, 159 ; lv 30-33
+	db 34, 191 ; lv 34-37
+	db 38, 223 ; lv 38-41
+	db 42, 252 ; lv 42-50
+	db $ff, 0
+
+GetOTPartyMaxLevel:
+	ld a, [wOTPartyCount]
+	and a
+	ret z
+	ld d, a
+	ld e, 0
+	ld hl, wOTPartyMon1Level
+	ld bc, PARTYMON_STRUCT_LENGTH
+.loop
+	ld a, [hl]
+	cp e
+	jr c, .next
+	ld e, a
+.next
+	add hl, bc
+	dec d
+	jr nz, .loop
+	ld a, e
+	ret
 
 ReadPlayerPartyAsTrainerParty:
     ; clear OT party count
