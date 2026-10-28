@@ -1,7 +1,7 @@
 	db STEELIX ; 084
 
 	;   hp  atk  def  spd  sat  sdf
-	db 100,  85, 160,  30,  30, 100 ; BST 505
+	db 100,  85, 200,  30,  25, 65 ; BST 505
 	evs  2,   1,   3,   0,   0,   2
 
 	db STEEL, GROUND ; type
