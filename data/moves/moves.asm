@@ -118,7 +118,7 @@ Moves:
 	move HYDRO_PUMP,   EFFECT_SP_ATK_UP_HIT,     120, WATER,         SPECIAL,   85, 10,  10
 	move HYPER_BEAM,   EFFECT_HYPER_BEAM,        140, NORMAL,        SPECIAL,  100,  5,   0
 	move HYPNOSIS,     EFFECT_SLEEP,               0, PSYCHIC_TYPE,  STATUS,    70, 20,   0
-	move ICE_BEAM,     EFFECT_FREEZE_HIT,         80, ICE,           SPECIAL,  100, 15,  30
+	move ICE_BEAM,     EFFECT_FREEZE_HIT,         95, ICE,           SPECIAL,  100, 15,  10
 	move ICE_FANG,     EFFECT_ICE_FANG,           60, ICE,           PHYSICAL, 100, 15,  10
 	move ICE_PUNCH,    EFFECT_FREEZE_HIT,         75, ICE,           PHYSICAL, 100, 15,  20
 	move ICE_SHARD,    EFFECT_PRIORITY_HIT,       40, ICE,           PHYSICAL, 100, 30,   0
