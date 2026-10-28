@@ -560,10 +560,6 @@ INCLUDE "engine/gfx/fade.asm"
 INCLUDE "engine/events/poisonstep_pals.asm"
 
 
-SECTION "Trainer Scaling", ROMX
-INCLUDE "engine/battle/trainer_scaling.asm"
-
-
 SECTION "Time Of Day Images", ROMX
 INCLUDE "gfx/timeofday_images.asm"
 
