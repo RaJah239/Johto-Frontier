@@ -123,7 +123,7 @@
 	const GS_BALL      ; 73
 	const BLUE_CARD    ; 74
 	const MIRACLE_SEED ; 75
-	const METEOR_MITTS ; 76
+	const POLAR_FANG   ; 76
 	const FOCUS_BAND   ; 77
 	const CRYSTAL      ; 78
 	const ENERGYPOWDER ; 79

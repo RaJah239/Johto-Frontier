@@ -46,7 +46,7 @@ GrandGauntletItemList:
 	db 3, LUCKY_EGG
 	db 3, MAGNET
 	db 3, METAL_COAT
-	db 3, METEOR_MITTS
+	db 3, POLAR_FANG
 	db 3, MIRACLE_SEED
 	db 3, MYSTIC_WATER
 	db 3, NEVERMELTICE

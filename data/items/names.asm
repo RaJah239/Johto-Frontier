@@ -117,7 +117,7 @@ ItemNames::
 	li "GS Ball"
 	li "Blue Card"
 	li "Miracle Seed"
-	li "Meteor Mitts"
+	li "Polar Fang"
 	li "Focus Band"
 	li "Crystal"
 	li "EnergyPowder"

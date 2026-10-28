@@ -2768,27 +2768,27 @@ PlayerAttackDamage:
 
 	ld hl, wBattleMonAttack
 	call CheckDamageStatsCritical
-	jr c, .meteormittsorlightball
+	jr c, .PolarFangorLightBall
 
 	ld hl, wEnemyDefense
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
 	ld hl, wPlayerAttack
-	jr .meteormittsorlightball
+	jr .PolarFangorLightBall
 
 .body_press
 ; Use player's defense instead of attack for Body Press
 	ld hl, wBattleMonDefense
 	call CheckDamageStatsCritical
-	jr c, .meteormittsorlightball ; Use boosted stats
+	jr c, .PolarFangorLightBall ; Use boosted stats
 
 	ld hl, wEnemyDefense
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
 	ld hl, wPlayerDefense
-	jr .meteormittsorlightball
+	jr .PolarFangorLightBall
 
 .special
 ; Psyshock is a special move, but targets the foe's defense stat.
@@ -2831,9 +2831,9 @@ PlayerAttackDamage:
 	call LightBallBoost
 	jr .done
 
-.meteormittsorlightball
+.PolarFangorLightBall
 ; Note: Returns player attack at hl in hl.
-	call MeteorMittsOrLightBallBoost
+	call PolarFangorLightBallBoost
 
 .done
 	push hl
@@ -2935,10 +2935,10 @@ CheckDamageStatsCritical:
 	pop hl
 	ret
 
-MeteorMittsOrLightBallBoost:
+PolarFangorLightBallBoost:
 ; Return in hl the stat value at hl.
 
-; If the attacking monster is Clefairy or Clefable and
+; If the attacking monster is Seel or Dewgong and
 ; it's holding a Meteor Mitts, or if it's Pikachu and
 ; it's holding a Light Ball, double it.
 	push bc
@@ -2956,9 +2956,9 @@ MeteorMittsOrLightBallBoost:
 	pop hl
 	cp PIKACHU
 	jr z, .lightball
-	ld b, CLEFAIRY
-	ld c, CLEFABLE
-	ld d, METEOR_MITTS
+	ld b, DEWGONG
+	ld c, SEEL
+	ld d, POLAR_FANG
 	call SpeciesItemBoost
 	jr .done
 
@@ -3077,27 +3077,27 @@ EnemyAttackDamage:
 
 	ld hl, wEnemyMonAttack
 	call CheckDamageStatsCritical
-	jr c, .meteormittsorlightball
+	jr c, .PolarFangorLightBall
 
 	ld hl, wPlayerDefense
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
 	ld hl, wEnemyAttack
-	jr .meteormittsorlightball
+	jr .PolarFangorLightBall
 
 .body_press
 ; Use enemy's defense instead of attack for Body Press
 	ld hl, wEnemyMonDefense
 	call CheckDamageStatsCritical
-	jr c, .meteormittsorlightball ; Use boosted stats
+	jr c, .PolarFangorLightBall ; Use boosted stats
 
 	ld hl, wPlayerDefense
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
 	ld hl, wEnemyDefense
-	jr .meteormittsorlightball
+	jr .PolarFangorLightBall
 
 .special
 ; Psyshock is a special move, but targets the player's defense stat.
@@ -3138,8 +3138,8 @@ EnemyAttackDamage:
 	call LightBallBoost
 	jr .done
 
-.meteormittsorlightball
-	call MeteorMittsOrLightBallBoost
+.PolarFangorLightBall
+	call PolarFangorLightBallBoost
 
 .done
 	push hl

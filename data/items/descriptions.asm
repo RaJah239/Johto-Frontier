@@ -118,7 +118,7 @@ ItemDescriptions:
 	dw GSBallDesc
 	dw BlueCardDesc
 	dw MiracleSeedDesc
-	dw MeteorMittsDesc
+	dw PolarFangDesc
 	dw FocusBandDesc
 	dw CrystalDesc
 	dw EnergyPowderDesc
@@ -722,9 +722,9 @@ MiracleSeedDesc:
 	db   "Powers up grass-"
 	next "type moves.@"
 
-MeteorMittsDesc:
-	db   "Doubles Clefairy"
-	next "line's Attack.@"
+PolarFangDesc:
+	db   "Doubles Dewgong's"
+	next "line Attack.@"
 
 FocusBandDesc:
 	db   "May prevent faint-"

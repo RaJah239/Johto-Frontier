@@ -14,7 +14,7 @@ RuinsOfAlphAerodactylItemRoom_MapEvents:
 	def_object_events
 	object_event  2,  6, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, RuinsOfAlphAerodactylItemRoomFlameOrb, EVENT_AERODACTYL_ITEM_ROOM_FLAME_ORB
 	object_event  5,  6, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, RuinsOfAlphAerodactylItemRoomMoonStone, EVENT_AERODACTYL_ITEM_ROOM_MOON_STONE
-	object_event  2,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, RuinsOfAlphAerodactylItemRoomMeteorMitts, EVENT_AERODACTYL_ITEM_ROOM_METEOR_MITTS
+	object_event  2,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, RuinsOfAlphAerodactylItemRoomMeteorMitts, EVENT_AERODACTYL_ITEM_ROOM_POLAR_FANG
 	object_event  5,  4, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, RuinsOfAlphAerodactylItemRoomSunStone, EVENT_AERODACTYL_ITEM_ROOM_SUNSTONE
 
 	object_const_def
@@ -33,6 +33,6 @@ RuinsOfAlphAerodactylItemRoomFlameOrb:
 RuinsOfAlphAerodactylItemRoomMoonStone:
 	itemball MOON_STONE
 RuinsOfAlphAerodactylItemRoomMeteorMitts:
-	itemball METEOR_MITTS
+	itemball POLAR_FANG
 RuinsOfAlphAerodactylItemRoomSunStone:
 	itemball SUN_STONE

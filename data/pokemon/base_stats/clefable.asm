@@ -7,7 +7,7 @@
 	db FAIRY, STEEL ; type
 	db 25 ; catch rate
 	db 220 ; base exp
-	db MYSTERYBERRY, METEOR_MITTS ; items
+	db MYSTERYBERRY, POLAR_FANG ; items
 	db GENDER_F50 ; gender ratio
 	db 10 ; step cycles to hatch
 	INCBIN "gfx/pokemon/clefable/front.dimensions"
