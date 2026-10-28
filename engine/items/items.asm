@@ -367,6 +367,8 @@ CheckTheItem:
 	ret
 
 ReceiveKeyItem:
+	call CheckKeyItems
+	ret c
 	ld hl, wNumKeyItems
 	ld a, [hli]
 	cp MAX_KEY_ITEMS
