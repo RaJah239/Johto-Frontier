@@ -1,6 +1,6 @@
 	db XATU ; 094
 
-	db  65,  70,  70, 115, 125,  70 ; 515 BST
+	db  75,  70,  70, 115, 125,  80 ; 535 BST
 	evs  1,   1,   1,   2,   3,   1
 	;   hp  atk  def  spd  sat  sdf
 
