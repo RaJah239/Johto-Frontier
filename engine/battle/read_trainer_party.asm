@@ -1878,19 +1878,10 @@ SetDynamicLevel:
 	ld b, a
 
 	ld a, [wTeamMaxLevel]
-	add b              ; a = calculated level
-
-	push af            ; save calculated level
-	call GetDynamicMinLevel ; c = minimum level
-	pop af             ; restore calculated level
-
-	; ---- clamp to minimum ----
-	cp c
-	jr nc, .check_max
-	ld a, c
-.check_max
+	add b
 	cp MAX_LEVEL
 	ret c
+; cap overflow at MAX_LEVEL
 	ld a, MAX_LEVEL
 	ret
 
@@ -1898,40 +1889,5 @@ SetDynamicLevel:
 	pop af
 	ld a, [wTeamMaxLevel]
 	ret
-
-CountBadges:
-; returns a = number of badges (Johto only)
-	ld hl, wJohtoBadges
-	ld b, 1              ; 1 byte needed for Johto alone, 2 for both regions
-	call CountSetBits
-	ld a, [wNumSetBits]
-	ret
-
-GetDynamicMinLevel:
-	push hl
-	call CountBadges   ; a = badge count
-
-	cp 7
-	jr c, .ok
-	ld a, 7            ; clamp max index
-
-.ok
-	ld hl, MinLevelTable
-	ld e, a
-	ld d, 0
-	add hl, de
-	ld c, [hl]
-	pop hl
-	ret
-
-MinLevelTable:
-	db  9 ; 0 badges
-	db 14 ; 1 badge
-	db 19 ; 2 badges
-	db 24 ; 3 badges
-	db 30 ; 4 badges
-	db 34 ; 5 badges
-	db 38 ; 6 badges
-	db 42 ; 7 badges
 
 INCLUDE "data/trainers/scaled_parties.asm"
