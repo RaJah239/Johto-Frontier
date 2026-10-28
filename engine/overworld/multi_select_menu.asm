@@ -1,11 +1,11 @@
-AddRegisteredItem:
+ToggleRegisteredItem:
 	ld a, [wCurItem]
 	push af
 	call ValidateRegisteredItems
 	pop af
 	ld c, a
 	call FindRegisteredItemSlot
-	jr c, .done
+	jr c, .remove
 	call FindEmptyRegisteredItemSlot
 	jr c, .store
 
@@ -19,6 +19,16 @@ AddRegisteredItem:
 	ld hl, wRegisteredItemSlot4
 .store
 	ld [hl], c
+	and a
+	jr .done
+
+.remove
+	xor a
+	ld [hl], a
+	push bc
+	call ValidateRegisteredItems
+	pop bc
+	scf
 .done
 	ld a, c
 	ld [wCurItem], a
