@@ -1,36 +1,39 @@
 ; Level-bracket trainer parties.
-; only 30 to 40 trainers can be added atm
-; A trainer listed here uses a different party depending on the player's
-; highest party level. The trainer's normal party is used only if there is
-; no entry for that trainer (or the bracket list is empty).
+; Each trainer can have 5+ teams depending on player level.
+; Bracket lists may live in any ROMX bank (table stores the bank).
 ;
 ; Table entry:
 ;   db trainer class, trainer ID
-;   dw level bracket list
+;   db bracket list bank
+;   dw bracket list address
 ;
-; Level bracket list (must stay in this bank):
+; Level bracket list:
 ;   db max level
-;   dba party entry
+;   dba party entry  (bank + address)
 ;   ...
 ;   db -1
 ;
 ; "max level" is the highest player level that uses that party, so
 ;   db 5  -> levels 1-5
 ;   db 10 -> levels 6-10
-;   db 15 -> levels 11-15
 ; If the player's level is above every bracket, the last bracket's party is
-; used. Party entries are ordinary trainer entries (name, TRAINERTYPE_*,
-; Pokemon and a terminating db -1), and may live in any bank because dba
-; stores the bank along with the address.
+; used. Party entries may live in any bank because dba stores the bank.
 
+; The table itself is read directly, so it must stay in the same bank as
+; ReadTrainerParty. The bracket lists may live in any bank because each
+; entry stores its own bank.
 ScaledTrainerPartyTable:
 	; Example: Falkner's first fight uses one party per 5-level bracket.
 	db FALKNER, FALKNER1
+	db BANK(Falkner1LevelParties)
 	dw Falkner1LevelParties
 	; Bugsy's first fight gets a bug team that grows every 5 levels.
 	db BUGSY, BUGSY1
+	db BANK(Bugsy1LevelParties)
 	dw Bugsy1LevelParties
 	db -1 ; end of table
+
+SECTION "Scaled Trainer Party Lists", ROMX
 
 Falkner1LevelParties:
 	db 5          ; 1-5

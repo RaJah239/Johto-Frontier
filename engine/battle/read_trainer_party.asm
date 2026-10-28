@@ -89,8 +89,10 @@ ApplyScaledTrainerParty:
 	jr z, .found_trainer
 	inc hl
 	inc hl
+	inc hl
 	jr .find_trainer
 .next_trainer
+	inc hl
 	inc hl
 	inc hl
 	inc hl
@@ -98,48 +100,58 @@ ApplyScaledTrainerParty:
 
 .found_trainer
 	ld a, [hli]
-	ld e, a
-	ld d, [hl]
-	ld h, d
-	ld l, e
-	ld b, 0 ; bank of the last bracket used (0 = none yet)
-.find_bracket
-	ld a, [hli]
-	cp $ff
-	jr z, .use_last_bracket
-	ld c, a
-	ld a, [wTeamMaxLevel]
-	cp c
-	jr c, .select_current
-	jr z, .select_current
-	; Above this bracket: remember it and keep looking.
-	ld a, [hli]
-	ld b, a
-	ld a, [hli]
-	ld e, a
-	ld a, [hli]
-	ld d, a
-	jr .find_bracket
-
-.select_current
-	ld a, [hli]
-	ld [wTrainerGroupBank], a
+	ld d, a ; bracket list bank
 	ld a, [hli]
 	ld e, a
 	ld a, [hl]
 	ld h, a
 	ld l, e
-	pop bc
-	ret
+	ld bc, $0000 ; address of the last bracket passed (0 = none yet)
+.find_bracket
+	ld a, d
+	call GetFarByte
+	cp $ff
+	jr z, .use_last_bracket
+	ld e, a ; highest level for this bracket
+	ld a, [wTeamMaxLevel]
+	cp e
+	jr c, .select_current
+	jr z, .select_current
+	; Above this bracket: remember it and keep looking.
+	ld b, h
+	ld c, l
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	jr .find_bracket
+
+.select_current
+	; hl already points at the chosen bracket entry.
+	jr .read_entry
 
 .use_last_bracket
+	; No bracket matched, so use the last one that passed.
 	ld a, b
-	and a
+	or c
 	jr z, .not_found
+	ld h, b
+	ld l, c
+.read_entry
+	inc hl ; skip the max-level byte; point at the party bank
+	ld a, d
+	call GetFarByte
 	ld [wTrainerGroupBank], a
-	ld h, d
+	inc hl
+	ld a, d
+	call GetFarByte
+	ld e, a
+	inc hl
+	ld a, d
+	call GetFarByte
+	ld h, a
 	ld l, e
-	pop bc
+	pop bc ; discard the saved trainer pointer
 	ret
 
 .not_found
