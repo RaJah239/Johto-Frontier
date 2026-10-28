@@ -1,6 +1,6 @@
 	db DEWGONG ; 175
 
-	db  100,  90,  90,  70,  60,  95 ; 505 BST
+	db  120,  70,  90,  70,  60,  95 ; 505 BST
 	evs   2,   2,   2,   1,   1,   2
 	;    hp  atk  def  spd  sat  sdf
 
