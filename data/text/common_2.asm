@@ -552,8 +552,8 @@ _CantRegisterText::
 	prompt
 
 _AskItemMoveText::
-	text "Where should this"
-	line "be moved to?"
+	text "Move item where?"
+	line "Start: Auto-sort"
 	done
 
 _PackEmptyText::
