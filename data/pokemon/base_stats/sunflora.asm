@@ -1,6 +1,6 @@
 	db SUNFLORA ; 047
 
-	db  80,  75,  55,  30, 125,  85 ; 450 BST
+	db  95,  95,  85,  30, 125,  75 ; 505 BST
 	evs  1,   1,   0,   0,   3,   2
 	;   hp  atk  def  spd  sat  sdf
 

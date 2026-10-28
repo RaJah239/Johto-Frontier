@@ -1,6 +1,6 @@
 	db SUNKERN ; 046
 
-	db  50,  40,  30,  20,  60,  55 ; 255 BST
+	db  60,  40,  80,  40,  60,  45 ; 325 BST
 	evs  0,   0,   0,   0,   1,   0
 	;   hp  atk  def  spd  sat  sdf
 
