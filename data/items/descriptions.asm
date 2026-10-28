@@ -127,7 +127,7 @@ ItemDescriptions:
 	dw RevivalHerbDesc
 	dw HardStoneDesc
 	dw LuckyEggDesc
-	dw AegisGemDesc
+	dw CardKeyDesc
 	dw HeavyBootsDesc
 	dw EggTicketDesc
 	dw TangelaCallDesc
@@ -758,10 +758,6 @@ LuckyEggDesc:
 	db   "Earns extra EXP."
 	next "points.@"
 
-AegisGemDesc:
-	db   "Halves damage from"
-	next "the first hit.@"
-
 ExpertBeltDesc:
 	db   "20<%> boost to"
 	next "SE and EE hits.@"
@@ -1023,6 +1019,7 @@ NomadSigilDesc:
 ScoreCardDesc:
 	db   "Shows your score.@"
 
+CardKeyDesc:
 TeruSama26Desc:
 TeruSama27Desc:
 TeruSama28Desc:
