@@ -31,6 +31,10 @@ ScaledTrainerPartyTable:
 	db BUGSY, BUGSY1
 	db BANK(Bugsy1LevelParties)
 	dw Bugsy1LevelParties
+	; Route 2 Joey gets a new team every 10 levels, capped at 50.
+	db YOUNGSTER, JOEY
+	db BANK(JoeyLevelParties)
+	dw JoeyLevelParties
 	db -1 ; end of table
 
 SECTION "Scaled Trainer Party Lists", ROMX
@@ -69,6 +73,20 @@ Bugsy1LevelParties:
 	dba Bugsy1TeamJ
 	db -1         ; above 50 uses Team J
 
+JoeyLevelParties:
+	db 10         ; 1-10
+	dba Joey1TeamA
+	db 20         ; 11-20
+	dba Joey1TeamB
+	db 30         ; 21-30
+	dba Joey1TeamC
+	db 40         ; 31-40
+	dba Joey1TeamD
+	db 50         ; 41-50
+	dba Joey1TeamE
+	db -1         ; above 50 uses Team E
+
 ; all includes must be down here
 INCLUDE "data/trainers/scaled_teams/falkner1.asm"
 INCLUDE "data/trainers/scaled_teams/bugsy1.asm"
+INCLUDE "data/trainers/scaled_teams/joey1.asm"
