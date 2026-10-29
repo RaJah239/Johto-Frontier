@@ -1141,7 +1141,7 @@ EVO_Draw_border:
 	; print b > back
 	hlcoord 16, 16
 	ld de, .back_page_text
-	call PlaceString
+	call PlaceTileString
 
 	; print up/down arrows
 	hlcoord 19, 0
