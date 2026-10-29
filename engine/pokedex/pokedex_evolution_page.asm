@@ -25,7 +25,7 @@ DisplayDexMonEvos:
 	
 	ld de, .stage1_text
 	hlcoord 6, 1
-	call PlaceString
+	call PlaceTileString
 
 	ld a, [wCurDamage + 2]
 	ld b, a
@@ -109,13 +109,13 @@ ENDC
 	jr z, .normal_line
 	hlcoord 6, 4
 	ld de, .stage3_text
-	call PlaceString
+	call PlaceTileString
 	ld b, 1 ; stage 3
 	jr .cont
 .normal_line
 	hlcoord 6, 4
 	ld de, .stage2_text
-	call PlaceString
+	call PlaceTileString
 	ld b, 0 ; stage 2
 .cont	
 	hlcoord 6, 5
@@ -335,7 +335,7 @@ IF DEF(EVOLVE_HELD)
 
 	ld de, .cont_page_text
 	hlcoord 12, 16
-	call PlaceString
+	call PlaceTileString
 	ret
 .stage1_text:
 	db $6b, $6c, $6d, "1@"
@@ -355,7 +355,7 @@ IF DEF(EVOLVE_HELD)
 
 	ld de, .cont_page_text
 	hlcoord 12, 16
-	call PlaceString
+	call PlaceTileString
 	ret
 
 EVO_sethlcoord:
