@@ -1873,10 +1873,13 @@ FaintYourPokemon:
 
 	; Skip player mon fainted text
 	call CheckIntrosOutros
-	ret nz
+	jr nz, .replay_cry
 
 	ld hl, BattleText_MonFainted
-	jmp StdBattleTextbox
+	call StdBattleTextbox
+
+.replay_cry
+	jmp ReplayEnemyCry
 
 CoreFntString: db "FNT@"
 
@@ -3469,6 +3472,98 @@ ShowSetEnemyMonAndSendOutAnimation:
 	ldh [hBGMapMode], a
 	ret
 
+ReplayEnemyCry:
+; replay the foe's cry when its attack KO'd the player,
+; lowering the music instead of stopping it
+; wPlayerFaintedByEnemy is set by DoPlayerDamage and cleared here
+	ld a, [wPlayerFaintedByEnemy]
+	and a
+	ret z
+	xor a
+	ld [wPlayerFaintedByEnemy], a
+
+	; only trainer battles have a foe to replay the cry for
+	ld a, [wBattleMode]
+	cp TRAINER_BATTLE
+	ret nz
+	ld a, [wLinkMode]
+	and a
+	ret nz
+
+	; the foe must still be standing
+	ld hl, wEnemyMonHP
+	ld a, [hli]
+	or [hl]
+	ret z
+
+	; don't disturb a substitute or a minimized foe
+	ld a, [wEnemySubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
+	ret nz
+	ld a, [wEnemyMinimized]
+	and a
+	ret nz
+
+	; nothing to replay if cries are turned off
+	call CheckMonCries
+	ret nz
+
+	ldh a, [hBattleTurn]
+	push af
+	ld a, [wCurPartySpecies]
+	push af
+	ld a, [wCurSpecies]
+	push af
+
+	; animatefrontpic animates wcurpartyspecies, so point it at the foe
+	ld a, [wEnemyMonSpecies]
+	ld [wCurPartySpecies], a
+
+	call WaitSFX
+
+	farcall CheckBattleScene
+	push af
+	jr c, .skip_frontpic
+	call GetEnemyMonFrontpic
+.skip_frontpic
+
+	; start the cry without waiting. it normally sets wsfxpriority to mute
+	; the music; clear that and lower the volume instead, so the music keeps
+	; playing softly underneath the cry
+	ld a, $f
+	ld [wCryTracks], a
+	ld a, [wEnemyMonSpecies]
+	call PlayStereoCry2
+
+	xor a
+	ld [wSFXPriority], a
+	call LowVolume
+
+	pop af
+	jr c, .finish
+
+	; animate the frontpic with a script that doesn't start another cry
+	hlcoord 12, 0
+	ld d, $0
+	ld e, ANIM_MON_SLOW_NOCRY
+	predef AnimateFrontpic
+
+.finish
+	ld a, $1
+	ldh [hBGMapMode], a ; AnimateFrontpic leaves this cleared
+
+	; wait for the cry to finish, then bring the music back up
+	call WaitSFX
+	call MaxVolume
+
+	pop af
+	ld [wCurSpecies], a
+	pop af
+	ld [wCurPartySpecies], a
+	pop af
+	ldh [hBattleTurn], a
+	ret
+
 NewEnemyMonStatus:
 	xor a
 	ld [wLastPlayerCounterMove], a
@@ -4245,10 +4340,14 @@ PursuitSwitch:
 
 	; Skip player mon fainted text
 	call CheckIntrosOutros
-	jr nz, .skip
+	jr nz, .player_fainted_done
 
 	ld hl, BattleText_MonFainted
-	jr .done_fainted
+	call StdBattleTextbox
+
+.player_fainted_done
+	call ReplayEnemyCry
+	jr .skip
 
 .check_enemy_fainted
 	ld hl, wEnemyMonHP

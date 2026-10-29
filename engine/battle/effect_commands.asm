@@ -3764,6 +3764,8 @@ DoEnemyDamage:
 	jmp RefreshBattleHuds
 
 DoPlayerDamage:
+	xor a
+	ld [wPlayerFaintedByEnemy], a
 	ld hl, wCurDamage
 	ld a, [hli]
 	ld b, a
@@ -3810,6 +3812,19 @@ DoPlayerDamage:
 	ld [hl], a
 
 .no_underflow
+	; remember whether the foe's attack just KO'd the player.
+	; FaintYourPokemon uses this to replay the foe's send-out animation
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .not_koed_by_enemy
+	ld hl, wBattleMonHP
+	ld a, [hli]
+	or [hl]
+	jr nz, .not_koed_by_enemy
+	ld a, 1
+	ld [wPlayerFaintedByEnemy], a
+
+.not_koed_by_enemy
 	ld hl, wBattleMonMaxHP
 	ld a, [hli]
 	ld [wHPBuffer1 + 1], a

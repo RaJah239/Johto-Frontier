@@ -424,7 +424,7 @@ wEnemyProtectCount:: db
 
 wEnemyTauntCount:: db
 wPlayerTauntCount:: db
-	ds 1
+wPlayerFaintedByEnemy:: db ; set when the foe's attack KO'd the player's mon
 
 wPlayerDamageTaken:: dw
 wEnemyDamageTaken::  dw
