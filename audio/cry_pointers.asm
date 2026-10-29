@@ -65,6 +65,7 @@ Cries:
 	dba Cry_Aipom
 	dba Cry_Dunsparce
 	dba Cry_Donphan
+	dba Cry_Krabby
 	dba Cry_Buneary
 	dba Cry_Sneasler
 	dba Cry_Rotom

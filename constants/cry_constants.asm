@@ -68,6 +68,7 @@
 	const CRY_AIPOM
 	const CRY_DUNSPARCE
 	const CRY_DONPHAN
+	const CRY_KRABBY
 
 ; custom
 	const CRY_BUNEARY
