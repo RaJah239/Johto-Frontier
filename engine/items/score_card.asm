@@ -7,6 +7,7 @@
 ;- Rare Egg Hunter - got all odd eggs
 ;- Treasure Hunter - found all hidden items
 ;- Have hints around the world of achievements
+; 100 win streak for each different mode of the battle tower
 ; Defeat all Gym leaders v2
 ; Defeat all foreign leaders
 ; Defeat all former E4 Members: Defeated the Old Guard
