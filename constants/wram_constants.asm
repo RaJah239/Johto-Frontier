@@ -74,6 +74,7 @@ DEF NUM_FRAMES EQU const_value
 	const ZERO_EXP_F            ; 2
 	const MAIN_MENU_BOOT_F      ; 3
 	const REMATCH_NOYES_F       ; 4
+	const KNOCKOUT_FLAIR_F      ; 5
 
 ; wOptions2::
 	const_def
