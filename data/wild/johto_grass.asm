@@ -1729,7 +1729,7 @@ JohtoGrassWildMons:
 	db 37, MUK
 	db 37, TOGEPI
 	; nite
-	db 37, VOLCARONA
+	db 37, IRON_MOTH
 	db 37, HOUNDOOM
 	db 37, WEEZING
 	db 37, MUK
@@ -1746,7 +1746,7 @@ JohtoGrassWildMons:
 	db 37, URSALUNA
 	db 37, GARDEVOIR
 	db 37, GALLADE
-	db 37, MAMOSWINE
+	db 37, AGGRON
 	db 37, CLEFABLE
 	; day
 	db 37, WEAVILE
@@ -1754,7 +1754,7 @@ JohtoGrassWildMons:
 	db 37, URSALUNA
 	db 37, GARDEVOIR
 	db 37, GALLADE
-	db 37, MAMOSWINE
+	db 37, AGGRON
 	db 37, CLEFABLE
 	; nite
 	db 37, WEAVILE
@@ -1762,7 +1762,7 @@ JohtoGrassWildMons:
 	db 37, URSALUNA_B
 	db 37, GARDEVOIR
 	db 37, GALLADE
-	db 37, MAMOSWINE
+	db 37, AGGRON
 	db 37, CLEFABLE
 	end_grass_wildmons
 
@@ -1830,7 +1830,7 @@ JohtoGrassWildMons:
 	db 37, URSALUNA
 	db 37, GARDEVOIR
 	db 37, GALLADE
-	db 37, MAMOSWINE
+	db 37, METAGROSS
 	db 37, CLEFABLE
 	; day
 	db 37, WEAVILE
@@ -1838,7 +1838,7 @@ JohtoGrassWildMons:
 	db 37, URSALUNA
 	db 37, GARDEVOIR
 	db 37, GALLADE
-	db 37, MAMOSWINE
+	db 37, METAGROSS
 	db 37, CLEFABLE
 	; nite
 	db 37, WEAVILE
@@ -1846,7 +1846,7 @@ JohtoGrassWildMons:
 	db 37, URSALUNA_B
 	db 37, GARDEVOIR
 	db 37, GALLADE
-	db 37, MAMOSWINE
+	db 37, METAGROSS
 	db 37, CLEFABLE
 	end_grass_wildmons
 
