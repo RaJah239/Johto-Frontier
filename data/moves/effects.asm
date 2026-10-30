@@ -1946,5 +1946,5 @@ MysticDance:
 KingsShield:
 	usedmovetext
 	doturn
-	kingsshield
+	farcommand
 	endmove

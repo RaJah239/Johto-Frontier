@@ -1,5 +1,5 @@
 BattleCommand_KingsShield:
-    farcall BattleCommand_Protect
+    call BattleCommand_Protect
     ret c
     ldh a, [hBattleTurn]
     and a
@@ -9,7 +9,7 @@ BattleCommand_KingsShield:
 .go
     cp BASE_STAT_LEVEL + 2
     ret nc
-    call BattleCommand_DefenseUp2
-    call BattleCommand_SpecialDefenseUp2
+    farcall BattleCommand_DefenseUp2
+    farcall BattleCommand_SpecialDefenseUp2
     ld hl, DefenseModeText
-    jp StdBattleTextbox
+    jmp StdBattleTextbox

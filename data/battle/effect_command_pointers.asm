@@ -120,5 +120,4 @@ BattleCommandPointers:
 	dw BattleCommand_CheckContact
 	dw BattleCommand_CheckSubstitute
 	dw BattleCommand_HitAndSwitch
-	dw BattleCommand_KingsShield
 	assert_table_length NUM_EFFECT_COMMANDS
