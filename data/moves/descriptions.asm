@@ -965,8 +965,8 @@ StealthRockDescription:
 	line "they switch in.@"
 
 BrickBreakDescription:
-	db	 "Breaks Reflect and"
-	line "Light Screen.@"
+	db	 "Breaks Screens be-"
+	line "fore damaging.@"
 
 CrunchDescription:
 HornAttackDescription:
