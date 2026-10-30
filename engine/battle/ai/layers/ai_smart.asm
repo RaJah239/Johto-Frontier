@@ -120,6 +120,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_TRICK,            AI_Smart_Trick
 	dbw EFFECT_VENOSHOCK,        AI_Smart_Venoshock
 	dbw EFFECT_DRAGON_DANCE,     AI_Smart_DragonDance
+	dbw EFFECT_MYSTIC_DANCE,     AI_Smart_MysticDance
 	dbw EFFECT_CALM_MIND,        AI_Smart_CalmMind
 	dbw EFFECT_QUIVER_DANCE,     AI_Smart_QuiverDance
 	dbw EFFECT_ATTACK_UP_2,      AI_Smart_SwordsDance
@@ -194,10 +195,10 @@ AI_Smart_HitAndSwitch:
 ; do not volt switch into ground-types
 	ld a, [wBattleMonType1]
 	cp GROUND
-	jp z, AIDiscourageMove
+	jmp z, AIDiscourageMove
 	ld a, [wBattleMonType2]
 	cp GROUND
-	jp z, AIDiscourageMove
+	jmp z, AIDiscourageMove
 
 ; do not volt switch into electric-immune ability target
 	ld a, [wBattleMonSpecies]
@@ -1021,30 +1022,37 @@ AI_Smart_CalmMind:
 ; player not boosting much, stop at +2
 	jmp StandardDiscourage
 
+AI_Smart_MysticDance:
+	call IsSpecialAttackMaxed
+	jmp c, StandardDiscourage
+	jr AI_Smart_SetupDance
+
 AI_Smart_DragonDance:
-; discourage if player can ko at current HP
+	call IsAttackMaxed
+	jmp c, StandardDiscourage
+	; fallthrough
+
+AI_Smart_SetupDance:
+; discourage if player can KO at current HP
 	call CanPlayerKO
 	jmp c, StandardDiscourage
 
-	call IsAttackMaxed
-	jmp c, StandardDiscourage
-
-; if we can KO but are slower, and player has no priority move, encourage speed boost
+; if we can KO but are slower, and player has no priority move
 	call CanAIKO
-	jr nc, .no_ko_dd
+	jr nc, .no_ko
 	call DoesAIOutSpeedPlayer
-	jr c, .no_ko_dd
+	jr c, .no_ko
 	ld b, EFFECT_PRIORITY_HIT
 	call PlayerHasMoveEffect
-	jr c, .no_ko_dd
+	jr c, .no_ko
 	jmp StrongEncourage
 
-.no_ko_dd
+.no_ko
 ; should boost
 	call ShouldAIBoost
 	jmp nc, StandardDiscourage
 
-; discourage if enemy is paralyzed
+; discourage if AI is paralyzed
 	ld a, [wEnemyMonStatus]
 	and 1 << PAR
 	jmp nz, StandardDiscourage
@@ -1059,7 +1067,7 @@ AI_Smart_DragonDance:
 	and a
 	jmp nz, StandardDiscourage
 
-; discourage if players level is >10 higher than AI
+; discourage if player's level is >10 higher than AI
 	ld a, [wBattleMonLevel]
 	ld b, a
 	ld a, [wEnemyMonLevel]
@@ -1067,27 +1075,28 @@ AI_Smart_DragonDance:
 	cp b
 	jmp c, StandardDiscourage
 
-; some pokemon have double boost sets with dragondance and bulkup/swordsdance
-; in such cases we want to use dragondance first to get to +1 speed,
-; then only use the other boost
+; prioritize Dragon Dance & Mystic Dance with other boosting moves
 	ld b, EFFECT_GROWTH
 	call AIHasMoveEffect
-	jr c, .use_first_and_not_again
+	jr c, .use_first
+
 	ld b, EFFECT_BULK_UP
 	call AIHasMoveEffect
-	jr c, .use_first_and_not_again
+	jr c, .use_first
+
 	ld b, EFFECT_ATTACK_UP_2
 	call AIHasMoveEffect
-	jr c, .use_first_and_not_again
-	jr .normalEncourage
+	jr c, .use_first
 
-.use_first_and_not_again
+	jr .normal_encourage
+
+.use_first
 	ld a, [wEnemySpdLevel]
 	cp BASE_STAT_LEVEL + 1
 	jmp c, StrongEncourage
 	jmp StandardDiscourage
 
-.normalEncourage
+.normal_encourage
 ; discourage after boost if afflicted with toxic
 	call IsAIToxified
 	jmp c, StandardDiscourage
@@ -1096,10 +1105,10 @@ AI_Smart_DragonDance:
 	ld a, [wPlayerAtkLevel]
 	cp BASE_STAT_LEVEL + 2
 	jmp nc, StandardEncourage
+
 	ld a, [wPlayerSAtkLevel]
 	cp BASE_STAT_LEVEL + 2
 	jmp nc, StandardEncourage
-
 	jmp StandardDiscourage
 
 AI_Smart_Venoshock:
