@@ -3,7 +3,6 @@ BattleAnim_Dummy:
 	anim_ret
 
 ; TODOTEXT remove unused animation and sfx files
-;BattleAnim_BellyDrum:
 ;	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_NOISE
 ;	anim_sound 0, 0, SFX_BELLY_DRUM
 ;	anim_obj BATTLE_ANIM_OBJ_BELLY_DRUM_HAND, 64, 104, $0

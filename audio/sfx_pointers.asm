@@ -121,7 +121,6 @@ SFX:
 	dba Sfx_Snore
 	dba Sfx_SweetKiss
 	dba Sfx_SweetKiss2
-	dba Sfx_BellyDrum
 	dba Sfx_Unknown7F ; toxic
 	dba Sfx_SludgeBomb
 	dba Sfx_Foresight

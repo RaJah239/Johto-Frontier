@@ -2257,22 +2257,6 @@ Sfx_SweetKiss2_Ch5:
 	pitch_sweep 0, 8
 	sound_ret
 
-Sfx_BellyDrum:
-	channel_count 2
-	channel 5, Sfx_BellyDrum_Ch5
-	channel 8, Sfx_BellyDrum_Ch8
-
-Sfx_BellyDrum_Ch5:
-	duty_cycle 2
-	pitch_sweep 10, -4
-	square_note 12, 15, 1, 1443
-	pitch_sweep 0, 8
-	sound_ret
-
-Sfx_BellyDrum_Ch8:
-	noise_note 12, 11, 1, 108
-	sound_ret
-
 Sfx_Unknown7F:
 	channel_count 1
 	channel 5, Sfx_Unknown7F_Ch5
