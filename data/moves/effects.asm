@@ -1942,3 +1942,9 @@ HitAndSwitch:
 	hitandswitch
 	kingsrock
 	endmove
+
+MysticDance:
+	usedmovetext
+	doturn
+	farcommand
+	endmove

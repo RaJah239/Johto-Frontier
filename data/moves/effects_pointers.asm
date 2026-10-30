@@ -161,4 +161,5 @@ MoveEffectsPointers:
 	dw Growth
 	dw SlackOff
 	dw HitAndSwitch
+	dw MysticDance
 	assert_table_length NUM_MOVE_EFFECTS

@@ -17,7 +17,6 @@ MoveDescriptions::
 	dw AvalancheDescription
 	dw BarrierDescription
 	dw BatonPassDescription
-	dw BellyDrumDescription
 	dw BiteDescription
 	dw BlizzardDescription
 	dw BodyPressDescription
@@ -136,6 +135,7 @@ MoveDescriptions::
 	dw MistDescription
 	dw MoonblastDescription
 	dw MudSlapDescription
+	dw MysticDanceDescription
 	dw NastyPlotDescription
 	dw NightShadeDescription
 	dw NightSlashDescription
@@ -717,6 +717,10 @@ KnockOffDescription:
 	db "1.5× power if an"
 	line "item was removed.@"
 
+MysticDanceDescription:
+	db   "Increases Special"
+	line "Attack and Speed.@"
+
 DragonDanceDescription:
 	db   "Increases Attack"
 	line "and Speed.@"
@@ -756,10 +760,6 @@ MachPunchDescription:
 FeintAttackDescription:
 	db   "An attack that"
 	line "never misses.@"
-
-BellyDrumDescription:
-	db   "Reduces own HP to"
-	line "maximize ATTACK.@"
 
 PsyblastDescription:
 PsyshockDescription:

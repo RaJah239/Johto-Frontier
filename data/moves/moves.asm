@@ -30,7 +30,6 @@ Moves:
 	move AVALANCHE,    EFFECT_AVALANCHE,          65, ICE,           PHYSICAL, 100, 15,   0
 	move BARRIER,      EFFECT_BARRIER,             0, PSYCHIC_TYPE,  STATUS,   100, 20,   0
 	move BATON_PASS,   EFFECT_BATON_PASS,          0, NORMAL,        STATUS,   100, 40,   0
-	move BELLY_DRUM,   EFFECT_BELLY_DRUM,          0, NORMAL,        STATUS,   100, 10,   0
 	move BITE,         EFFECT_FLINCH_HIT,         60, DARK,          PHYSICAL, 100, 32,  30
 	move BLIZZARD,     EFFECT_BLIZZARD,          120, ICE,           SPECIAL,   70, 10,  30
 	move BODY_PRESS,   EFFECT_BODY_PRESS,         80, FIGHTING,      PHYSICAL, 100, 10,   0
@@ -149,6 +148,7 @@ Moves:
 	move MIST,         EFFECT_MIST,                0, ICE,           STATUS,   100, 30,   0
 	move MOONBLAST,    EFFECT_SP_ATK_DOWN_HIT,    95, FAIRY,         SPECIAL,  100, 15,  30
 	move MUD_SLAP,     EFFECT_ACCURACY_DOWN_HIT,  40, GROUND,        SPECIAL,  100, 35,  10
+	move MYSTIC_DANCE, EFFECT_MYSTIC_DANCE,        0, FAIRY,         STATUS,   100, 20,   0
 	move NASTY_PLOT,   EFFECT_SP_ATK_UP_2,         0, DARK,          STATUS,   100, 20,   0
 	move NIGHT_SHADE,  EFFECT_SP_DEF_DOWN_HIT,    60, GHOST,         SPECIAL,  100, 20,  20
 	move NIGHT_SLASH,  EFFECT_NORMAL_HIT,         70, DARK,          PHYSICAL, 100, 20,   0

@@ -188,7 +188,6 @@ MoveTable:
 	db SCARY_FACE   ; b8
 	db FEINT_ATTACK ; b9
 	db EARTH_POWER  ; ba
-	db BELLY_DRUM   ; bb
 	db SLUDGE_BOMB  ; bc
 	db MUD_SLAP     ; bd
 	db PSYSHOCK     ; be

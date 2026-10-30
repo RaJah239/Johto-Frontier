@@ -18,7 +18,6 @@ BattleAnimations::
 	dw BattleAnim_Avalanche
 	dw BattleAnim_Barrier
 	dw BattleAnim_BatonPass
-	dw BattleAnim_BellyDrum
 	dw BattleAnim_Bite
 	dw BattleAnim_Blizzard
 	dw BattleAnim_BodyPress
@@ -137,6 +136,7 @@ BattleAnimations::
 	dw BattleAnim_Mist
 	dw BattleAnim_Moonblast
 	dw BattleAnim_MudSlap
+	dw BattleAnim_MysticDance
 	dw BattleAnim_NastyPlot
 	dw BattleAnim_NightShade
 	dw BattleAnim_NightSlash

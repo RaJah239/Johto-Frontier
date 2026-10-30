@@ -22,7 +22,6 @@
 	const AVALANCHE
 	const BARRIER
 	const BATON_PASS
-	const BELLY_DRUM
 	const BITE
 	const BLIZZARD
 	const BODY_PRESS
@@ -141,6 +140,7 @@
 	const MIST
 	const MOONBLAST
 	const MUD_SLAP
+	const MYSTIC_DANCE
 	const NASTY_PLOT
 	const NIGHT_SHADE
 	const NIGHT_SLASH

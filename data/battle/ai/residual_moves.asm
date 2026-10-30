@@ -12,7 +12,6 @@ ResidualMoves:
 	db SPIKES
 	db TOXIC
 	db SPIDER_WEB
-	db BELLY_DRUM
 	db MEAN_LOOK
 	db ATTRACT
 	db -1 ; end

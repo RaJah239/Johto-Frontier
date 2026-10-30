@@ -75,4 +75,5 @@ FarCommand_BattleCommands:
 	dbw EFFECT_SUBSTITUTE,      BattleCommand_Substitute
 	dbw EFFECT_MIST,            BattleCommand_Mist
 	dbw EFFECT_FOCUS_ENERGY,    BattleCommand_FocusEnergy
+	dbw EFFECT_MYSTIC_DANCE,    BattleCommand_MysticDance
 	db -1 ; end
