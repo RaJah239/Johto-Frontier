@@ -1329,12 +1329,6 @@ SunnyDay:
 	farcommand
 	endmove
 
-BellyDrum:
-	usedmovetext
-	doturn
-	farcommand
-	endmove
-
 MirrorCoat:
 	usedmovetext
 	doturn

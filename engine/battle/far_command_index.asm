@@ -59,7 +59,6 @@ FarCommand_BattleCommands:
 	dbw EFFECT_PURSUIT,         BattleCommand_Pursuit
 	dbw EFFECT_RAPID_SPIN,      BattleCommand_ClearHazards
 	dbw EFFECT_HIDDEN_POWER,    BattleCommand_HiddenPower
-	dbw EFFECT_BELLY_DRUM,      BattleCommand_BellyDrum
 	dbw EFFECT_MIRROR_COAT,     BattleCommand_MirrorCoat
 	dbw EFFECT_COUNTER,         BattleCommand_Counter
 	dbw EFFECT_STICKY_WEB,      BattleCommand_StickyWeb

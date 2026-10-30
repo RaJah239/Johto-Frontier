@@ -101,7 +101,6 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_HIDDEN_POWER,     AI_Smart_HiddenPower
 	dbw EFFECT_RAIN_DANCE,       AI_Smart_RainDance
 	dbw EFFECT_SUNNY_DAY,        AI_Smart_SunnyDay
-	dbw EFFECT_BELLY_DRUM,       AI_Smart_BellyDrum
 	dbw EFFECT_MIRROR_COAT,      AI_Smart_MirrorCoat
 	dbw EFFECT_EARTHQUAKE,       AI_Smart_Earthquake
 	dbw EFFECT_GUST,             AI_Smart_Gust
@@ -3759,38 +3758,6 @@ AIGoodWeatherType:
 	ret
 
 INCLUDE "data/battle/ai/sunny_day_moves.asm"
-
-AI_Smart_BellyDrum:
-; don't use if already at +2
-	ld a, [wEnemyAtkLevel]
-	cp BASE_STAT_LEVEL + 2
-	jr nc, .discourage
-
-; don't use if enemy behind a sub
-	ld a, [wPlayerSubStatus4]
-	bit SUBSTATUS_SUBSTITUTE, a	;check for substitute bit
-	jr nz, .discourage
-
-; are we faster
-	call DoesAIOutSpeedPlayer
-	jr nc, .slower
-
-; we are faster
-; if we are full HP and player can't 2HKO then encourage
-	call AICheckEnemyMaxHP
-	jr nc, .slower
-	call CanPlayer2HKO
-	jmp nc, StandardEncourage
-
-.slower
-; if we are above half HP and player can't 3HKO then encourage
-	call AICheckEnemyHalfHP
-	jr nc, .discourage
-	call CanPlayer3HKOMaxHP
-	jmp nc, StandardEncourage
-
-.discourage
-	jmp StandardDiscourage
 
 AI_Smart_MirrorCoat:
 	call BattleRandom
