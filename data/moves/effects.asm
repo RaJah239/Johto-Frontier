@@ -1772,18 +1772,18 @@ AtkDefUpHit:
 BrickBreak:
 	usedmovetext
 	doturn
+	moveanim
+	farcommand
 	critical
 	damagestats
 	damagecalc
 	stab
 	checkhit
 	damagevariation
-	moveanim
 	failuretext
 	applydamage
 	criticaltext
 	supereffectivetext
-	farcommand
 	checkfaint
 	kingsrock
 	endmove
