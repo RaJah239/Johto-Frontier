@@ -807,6 +807,8 @@ ParsePlayerAction:
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
 	cp EFFECT_PROTECT
 	jr z, .continue_protect
+	cp EFFECT_KINGS_SHIELD
+	jr z, .continue_protect
 	xor a
 	ld [wPlayerProtectCount], a
 	jr .continue_protect
@@ -5969,6 +5971,8 @@ ParseEnemyAction:
 	ld [wEnemyCharging], a
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
 	cp EFFECT_PROTECT
+	ret z
+	cp EFFECT_KINGS_SHIELD
 	ret z
 	xor a
 	ld [wEnemyProtectCount], a

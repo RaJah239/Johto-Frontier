@@ -71,7 +71,6 @@ Moves:
 	move DRILL_PECK,   EFFECT_FLINCH_HIT,         85, FLYING,        PHYSICAL, 100, 20,  20
 	move EARTH_POWER,  EFFECT_SP_DEF_DOWN_HIT,    90, GROUND,        SPECIAL,  100, 15,  10
 	move EARTHQUAKE,   EFFECT_EARTHQUAKE,        100, GROUND,        PHYSICAL, 100, 15,   0
-	move EGG_BOMB,     EFFECT_BURN_HIT,          100, NORMAL,        PHYSICAL,  95, 10,  30
 	move EMBER,        EFFECT_BURN_HIT,           40, FIRE,          SPECIAL,  100, 35,  10
 	move ENCORE,       EFFECT_ENCORE,              0, NORMAL,        STATUS,   100,  5,   0
 	move EXPLOSION,    EFFECT_EXPLOSION,         250, NORMAL,        PHYSICAL, 100,  1,   0
@@ -126,6 +125,7 @@ Moves:
 	move IRON_BASH,    EFFECT_BODY_PRESS,         80, STEEL,         PHYSICAL, 100, 10,   0
 	move IRON_HEAD,    EFFECT_FLINCH_HIT,         80, STEEL,         PHYSICAL, 100, 15,  30
 	move KARATE_CHOP,  EFFECT_NORMAL_HIT,         50, FIGHTING,      PHYSICAL, 100, 25,   0
+	move KINGS_SHIELD, EFFECT_KINGS_SHIELD,        0, STEEL,         STATUS,   100, 10,   0
 	move KNOCK_OFF,    EFFECT_KNOCK_OFF,          65, DARK,          PHYSICAL, 100, 20, 100
 	move LEAF_BLADE,   EFFECT_NORMAL_HIT,         70, GRASS,         PHYSICAL, 100, 20,   0
 	move LEECH_LIFE,   EFFECT_LEECH_HIT,          80, BUG,           PHYSICAL, 100, 15,   0

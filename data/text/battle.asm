@@ -10,6 +10,16 @@ BattleText_TargetRegenerates:
 	line "regenerates."
 	done
 
+DefenseModeText:
+    text "<USER> took"
+    line "a Defense stance!"
+    prompt
+
+AttackModeText:
+    text "<USER> took"
+    line "an Attack stance!"
+    prompt
+
 BattleText_BattleFeastText:
 	text "<TARGET>"
 	line "recovered HP from"

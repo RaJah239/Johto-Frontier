@@ -63,7 +63,6 @@
 	const DRILL_PECK
 	const EARTH_POWER
 	const EARTHQUAKE
-	const EGG_BOMB
 	const EMBER
 	const ENCORE
 	const EXPLOSION
@@ -118,6 +117,7 @@
 	const IRON_BASH
 	const IRON_HEAD
 	const KARATE_CHOP
+	const KINGS_SHIELD
 	const KNOCK_OFF
 	const LEAF_BLADE
 	const LEECH_LIFE

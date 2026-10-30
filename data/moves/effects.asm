@@ -1942,3 +1942,9 @@ MysticDance:
 	doturn
 	farcommand
 	endmove
+
+KingsShield:
+	usedmovetext
+	doturn
+	kingsshield
+	endmove

@@ -29,34 +29,13 @@ ProtectChance:
 	bit SUBSTATUS_SUBSTITUTE, a
 	jr nz, .failed
 
-; Halve the chance of a successful Protect for each consecutive use.
-	ld b, $ff
+; Protect always fails if used on consecutive turns.
 	ld a, [de]
-	ld c, a
-.loop
-	ld a, c
 	and a
-	jr z, .done
-	dec c
-
-	srl b
-	ld a, b
-	and a
-	jr nz, .loop
-	jr .failed
-.done
-.rand
-	call BattleRandom
-	and a
-	jr z, .rand
-
-	dec a
-	cp b
-	jr nc, .failed
+	jr nz, .failed
 
 ; Another consecutive Protect use.
-	ld a, [de]
-	inc a
+	ld a, 1
 	ld [de], a
 
 	and a

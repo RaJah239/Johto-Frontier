@@ -61,6 +61,26 @@ BattleAnim_Dummy:
 ;	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 ;	anim_ret
 
+;BattleAnim_EggBomb:
+;	anim_2gfx BATTLE_ANIM_GFX_EGG, BATTLE_ANIM_GFX_EXPLOSION
+;	anim_sound 6, 2, SFX_THROW_BALL
+;	anim_obj BATTLE_ANIM_OBJ_EGG_BOMB, 48, 80, $28
+;	anim_wait 32
+;	anim_clearobjs
+;	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $3
+;	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
+;	anim_sound 0, 1, SFX_EGG_BOMB
+;	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 128, 64, $0
+;	anim_wait 8
+;	anim_sound 0, 1, SFX_EGG_BOMB
+;	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 144, 68, $0
+;	anim_wait 8
+;	anim_sound 0, 1, SFX_EGG_BOMB
+;	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 136, 72, $0
+;	anim_wait 24
+;	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_RED
+;	anim_ret
+
 BattleAnim_BattleFlinch:
     anim_1gfx BATTLE_ANIM_GFX_WATER
     anim_call BattleAnim_TargetObj_2Row
@@ -1937,26 +1957,6 @@ SappingStub:
 	anim_obj BATTLE_ANIM_OBJ_ABSORB, 136, 32, $4
 	anim_wait 1
 	anim_loop 4, .loop
-	anim_ret
-
-BattleAnim_EggBomb:
-	anim_2gfx BATTLE_ANIM_GFX_EGG, BATTLE_ANIM_GFX_EXPLOSION
-	anim_sound 6, 2, SFX_THROW_BALL
-	anim_obj BATTLE_ANIM_OBJ_EGG_BOMB, 48, 80, $28
-	anim_wait 32
-	anim_clearobjs
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $3
-	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
-	anim_sound 0, 1, SFX_EGG_BOMB
-	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 128, 64, $0
-	anim_wait 8
-	anim_sound 0, 1, SFX_EGG_BOMB
-	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 144, 68, $0
-	anim_wait 8
-	anim_sound 0, 1, SFX_EGG_BOMB
-	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 136, 72, $0
-	anim_wait 24
-	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_RED
 	anim_ret
 
 BattleAnim_Softboiled:
@@ -4128,6 +4128,7 @@ BattleAnim_PowderSnow:
 	anim_wait 8
 	anim_ret
 
+BattleAnim_KingsShield:
 BattleAnim_Protect:
 	anim_1gfx BATTLE_ANIM_GFX_OBJECTS
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $2, $0

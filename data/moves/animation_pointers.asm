@@ -59,7 +59,6 @@ BattleAnimations::
 	dw BattleAnim_DrillPeck
 	dw BattleAnim_EarthPower
 	dw BattleAnim_Earthquake
-	dw BattleAnim_EggBomb
 	dw BattleAnim_Ember
 	dw BattleAnim_Encore
 	dw BattleAnim_Explosion
@@ -114,6 +113,7 @@ BattleAnimations::
 	dw BattleAnim_IronBash
 	dw BattleAnim_IronHead
 	dw BattleAnim_KarateChop
+	dw BattleAnim_KingsShield
 	dw BattleAnim_KnockOff
 	dw BattleAnim_LeafBlade
 	dw BattleAnim_LeechLife

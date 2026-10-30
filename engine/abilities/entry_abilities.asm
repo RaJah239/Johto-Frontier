@@ -12,6 +12,7 @@ EntryAbilities1:
 	call HandleSnowWarning
 	call HandleNaturalCure
 	call HandleSeedfall
+	call HandleDefenseMode
 	ret
 
 ; ============================================
@@ -137,6 +138,26 @@ AbilityPopup_DrizzleText:
 	db "Drizzle@"
 
 INCLUDE "data/abilities/drizzle_mons.asm"
+
+HandleDefenseMode:
+	; check if switched in pokemon has defense mode
+	call GetCurrentMon
+	ld hl, DefenseModePokemon
+	call IsInByteArray
+	ret nc
+
+	ShowActivationOrEntryOrKOAbilityPopup DefenseText
+
+    farcall BattleCommand_DefenseUp2
+    farcall BattleCommand_StatUpMessage
+    farcall BattleCommand_SpecialDefenseUp2
+    farcall BattleCommand_StatUpMessage
+
+	ld hl, DefenseModeText
+	jmp StdBattleTextbox
+
+DefenseText: db "Defense!@"
+INCLUDE "data/abilities/defense_mode_mons.asm"
 
 HandleDrought:
 	; check if switched in pokemon has drought

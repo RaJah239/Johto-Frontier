@@ -51,4 +51,5 @@ PerfectAccuracyEffects::
   db EFFECT_TRICK_ROOM
   db EFFECT_FURY_DRIVE
   db EFFECT_SLACK_OFF
+  db EFFECT_KINGS_SHIELD
   db -1 ; end

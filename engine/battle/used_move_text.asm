@@ -122,7 +122,6 @@ MoveTable:
 	db METRONOME    ; 76
 	db BULLDOZE     ; 77
 	db THROAT_CHOP  ; 78
-	db EGG_BOMB     ; 79
 	db LICK         ; 7a
 	db POUNCE       ; 7b
 	db SLUDGE       ; 7c

@@ -153,7 +153,59 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_GROWTH,           AI_Smart_Growth
 	dbw EFFECT_HIT_AND_SWITCH,   AI_Smart_HitAndSwitch
 	dbw EFFECT_LEVEL_DAMAGE,     AI_Smart_StaticDamage
+	dbw EFFECT_KINGS_SHIELD,     AI_Smart_KingsShield
 	db -1 ; end
+
+AI_Smart_KingsShield:
+; discourage if the we already used Protecting move
+	ld a, [wCurEnemyMove]
+	cp PROTECT
+	jr z, .discourage
+    cp KINGS_SHIELD
+	jr z, .discourage
+
+; discourage if already in defense mode
+    ld a, [wEnemyDefLevel]
+    cp BASE_STAT_LEVEL + 2
+    jr nc, .discourage
+
+; if we are here we are in attack stance
+; can we ko the player, if not continue
+    call CanAIKO
+    jr nc, .checkSubstitute
+
+; if we outspeed then just attack
+    call DoesAIOutSpeedPlayer
+    jr c, .discourage
+
+.checkSubstitute
+; if the player has Substitute in their moves then 50% chance to not use kings shield
+    ld b, EFFECT_SUBSTITUTE
+	call PlayerHasMoveEffect
+	jr c, .50PercentDiscourage
+
+.checkAttacking
+; if the players last move was non-damaging, 50% chance to not use kings shield
+    ld a, [wCurPlayerMove]
+	call AIGetPlayerMove
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+    and a
+	jr nz, .massiveEncourage
+
+.50PercentDiscourage
+    call Random
+    cp 50 percent
+    jr c, .discourage
+
+.massiveEncourage
+; this must overcome encouragement from a potential ko
+    jp DoIt
+
+.discourage
+    inc [hl]
+    inc [hl]
+    inc [hl]
+    ret
 
 AI_Smart_StaticDamage:
 ; don't use Seismic Toss on Ghost-types

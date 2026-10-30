@@ -678,6 +678,48 @@ HitConfusion:
 	jmp BattleCommand_RaiseSub
 
 BattleCommand_UsedMoveText:
+; Aegislash attack stance change
+	push hl
+	push bc
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wPlayerMoveStruct + MOVE_POWER
+	ld bc, wPlayerDefLevel
+	ld a, [wBattleMonSpecies]
+	jr z, .checkAegislash
+	ld hl, wEnemyMoveStruct + MOVE_POWER
+	ld bc, wEnemyDefLevel
+	ld a, [wEnemyMonSpecies]
+
+; is this Aegislash
+.checkAegislash
+	cp AEGISLASH
+	jr nz, .noStance
+
+; is defense already at base
+; don't reapply drop if attacking twice
+	ld a, [bc]
+	cp BASE_STAT_LEVEL + 1
+	jr c, .noStance
+
+; is this an attacking move
+	ld a, [hl]
+	and a
+	jr z, .noStance
+
+; lower defenses
+	call BattleCommand_SwitchTurn
+	call BattleCommand_DefenseDown2
+	call BattleCommand_SpecialDefenseDown2
+	call BattleCommand_SwitchTurn
+
+; print text
+	ld hl, AttackModeText
+	call StdBattleTextbox
+.noStance
+	pop bc
+	pop hl
+
 	farjp DisplayUsedMoveText
 
 CheckUserIsCharging:
@@ -7300,3 +7342,5 @@ INCLUDE "engine/battle/move_effects/rollout.asm"
 INCLUDE "engine/battle/move_effects/return.asm"
 INCLUDE "engine/battle/move_effects/baton_pass.asm"
 INCLUDE "engine/battle/move_effects/teleport.asm"
+
+INCLUDE "engine/battle/move_effects/kingsshield.asm"

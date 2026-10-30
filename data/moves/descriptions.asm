@@ -58,7 +58,6 @@ MoveDescriptions::
 	dw DrillPeckDescription
 	dw EarthPowerDescription
 	dw EarthquakeDescription
-	dw EggBombDescription
 	dw EmberDescription
 	dw EncoreDescription
 	dw ExplosionDescription
@@ -113,6 +112,7 @@ MoveDescriptions::
 	dw IronBashDescription
 	dw IronHeadDescription
 	dw KarateChopDescription
+	dw KingsShieldDescription
 	dw KnockOffDescription
 	dw LeafBladeDescription
 	dw LeechLifeDescription
@@ -266,6 +266,10 @@ MoveFFDescription:
 Move00Description:
 	db "?@"
 
+KingsShieldDescription:
+	db   "Defensive stance."
+	next "Fails if repeated.@"
+
 TauntDescription:
 	db   "Provokes enemy"
 	line "into attacking.@"
@@ -391,7 +395,6 @@ DisableDescription:
 DragonRageDescription:
 AcidDescription:
 FirePunchDescription:
-EggBombDescription:
 ScaldDescription:
 SeedBombDescription:
 EmberDescription:
@@ -750,8 +753,8 @@ SpiteDescription:
 	line "foe's last move.@"
 
 ProtectDescription:
-	db   "Foils attack that"
-	line "turn. It may fail.@"
+	db   "Foils attack."
+	line "Fails if repeated.@"
 
 MachPunchDescription:
 	db   "A fast punch that"

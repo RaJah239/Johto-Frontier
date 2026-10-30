@@ -161,4 +161,5 @@ MoveEffectsPointers:
 	dw SlackOff
 	dw HitAndSwitch
 	dw MysticDance
+	dw KingsShield
 	assert_table_length NUM_MOVE_EFFECTS
