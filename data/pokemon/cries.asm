@@ -26,12 +26,16 @@ PokemonCries::
 	mon_cry CRY_BLASTOISE,      0,   256 ; BLASTOISE
 	mon_cry CRY_TOGETIC,     $d00,  $050 ; TURTWIG SourApple
 	mon_cry CRY_MARILL,      $eec,  $180 ; GROTLE SourApple
-	mon_cry CRY_ENTEI,       $eee,  $480 ; TORTERRA SourApple
+	mon_cry CRY_ENTEI,       $eee,  $270 ; TORTERRA SourApple
 	mon_cry CRY_BULBASAUR,    238,   129 ; PIKACHU
 	mon_cry CRY_RAICHU,       238,   136 ; RAICHU
 	mon_cry CRY_VENONAT,      136,   224 ; EEVEE
+	mon_cry CRY_AIPOM,        162,   320 ; ESPEON
+	mon_cry CRY_VENONAT,       16,   160 ; FLAREON
+	mon_cry CRY_VENONAT,       61,   256 ; JOLTEON
+	mon_cry CRY_VENONAT,     $0b0,  $16f ; SYLVEON Polisheddevs
 	mon_cry CRY_VENONAT,     -233,   240 ; UMBREON
-	mon_cry CRY_VENONAT,     $0b0,   $16f; SYLVEON Polisheddevs
+	mon_cry CRY_VENONAT,      170,   383 ; VAPOREON
 	mon_cry CRY_HOOTHOOT,    $0ff,  $0c8 ; TORCHIC Celadonk
 	mon_cry CRY_HOOTHOOT,    $0b9,  $124 ; COMBUSKEN Celadonk
 	mon_cry CRY_TYPHLOSION,  $f43,  $100 ; BLAZIKEN SourApple
@@ -66,6 +70,7 @@ PokemonCries::
 	mon_cry CRY_TEDDIURSA,   1954,   110 ; TEDDIURSA
 	mon_cry CRY_TEDDIURSA,   1600,   216 ; URSARING
 	mon_cry CRY_TEDDIURSA,   $58e,  $0c8 ; URSALUNA
+	mon_cry CRY_TEDDIURSA,   $68c,  $0c8 ; URSALUNA_B
 	mon_cry CRY_SENTRET,       72,   560 ; PHANPY
 	mon_cry CRY_DONPHAN,        0,   416 ; DONPHAN
 	mon_cry CRY_PSYDUCK,       85,   129 ; BELLSPROUT
@@ -74,12 +79,6 @@ PokemonCries::
 	mon_cry CRY_MAREEP,        34,   216 ; MAREEP
 	mon_cry CRY_MAREEP,        -7,   384 ; FLAAFFY
 	mon_cry CRY_AMPHAROS,    -124,   232 ; AMPHAROS
-	mon_cry CRY_NIDORAN_F,      0,   256 ; NIDORAN_F
-	mon_cry CRY_NIDORAN_F,     44,   352 ; NIDORINA
-	mon_cry CRY_NIDOQUEEN,      0,   256 ; NIDOQUEEN
-	mon_cry CRY_NIDORAN_M,      0,   256 ; NIDORAN_M
-	mon_cry CRY_NIDORAN_M,     44,   320 ; NIDORINO
-	mon_cry CRY_RAICHU,         0,   256 ; NIDOKING
 	mon_cry CRY_SPINARAK,    $450,  $1b3 ; WIMPOD
 	mon_cry CRY_VENONAT,     $e0b,  $200 ; GOLISOPOD
 	mon_cry CRY_MARILL,       283,   288 ; MARILL
@@ -133,6 +132,7 @@ PokemonCries::
 	mon_cry CRY_CLEFFA,     -$33e,  $200 ; DRAPION AzureKeys
 	mon_cry CRY_CYNDAQUIL,  -$4c7,  $0f5 ; LARVESTA AzureKeys
 	mon_cry CRY_METAPOD,    -$420,  $1a6 ; VOLCARONA AzureKeys
+	mon_cry CRY_METAPOD,     $fcc,   $81 ; IRON_MOTH
 	mon_cry CRY_TYPHLOSION,  $c00,  $130 ; TROPIUS
 	mon_cry CRY_NIDOQUEEN,    221,   224 ; MANKEY
 	mon_cry CRY_NIDOQUEEN,    175,   192 ; PRIMEAPE
@@ -151,6 +151,7 @@ PokemonCries::
 	mon_cry CRY_DUNSPARCE,      0,   384 ; GRANBULL
 	mon_cry CRY_DROWZEE,      136,   160 ; DROWZEE
 	mon_cry CRY_DROWZEE,      238,   192 ; HYPNO
+	mon_cry CRY_KRABBY,         8,   192 ; MR__MIME
 	mon_cry CRY_CLEFFA,      3904,   384 ; SUDOWOODO
 	mon_cry CRY_GOLEM,        230,   349 ; KOFFING
 	mon_cry CRY_GOLEM,        255,   383 ; WEEZING
@@ -212,19 +213,17 @@ PokemonCries::
 	mon_cry CRY_EKANS,       $101,  $086 ; BRONZOR Ax6
 	mon_cry CRY_EKANS,       $12a,  $170 ; BRONZONG Ax6
 	mon_cry CRY_AMPHAROS,    2217,   384 ; SKARMORY
+	mon_cry CRY_RAICHU,      $100,  $136 ; AGGRON
+	mon_cry CRY_WEEDLE,      $2fe,   $51 ; AEGISLASH
+	mon_cry CRY_RAICHU,         0,   256 ; NIDOKING
 	mon_cry CRY_HOOTHOOT,     304,   232 ; MISDREAVUS
 	mon_cry CRY_HOOTHOOT,    $1b4,  $1e8 ; MISMAGIUS
 	mon_cry CRY_PIDGEOTTO,     10,   320 ; CHANSEY
 	mon_cry CRY_SLOWKING,     659,   320 ; BLISSEY
 	mon_cry CRY_GRIMER,        85,   129 ; SNORLAX
-	mon_cry CRY_RAIKOU,        95,   208 ; LARVITAR
-	mon_cry CRY_SPINARAK,    -475,   336 ; PUPITAR
 	mon_cry CRY_RAIKOU,      -256,   384 ; TYRANITAR
-	mon_cry CRY_NIDORAN_F,   $f26,  $0c0 ; BAGON SourApple
-	mon_cry CRY_NIDORAN_F,   $e15,  $200 ; SHELGON SourApple
 	mon_cry CRY_RAICHU,      $f1f,  $130 ; SALAMENCE SourApple
-	mon_cry CRY_CATERPIE,    $83c,  $0c0 ; AXEW AzureKeys
-	mon_cry CRY_EKANS,       $9c5,  $170 ; FRAXURE AzureKeys
+	mon_cry CRY_METAPOD,     $def,  $25a ; METAGROSS
 	mon_cry CRY_EKANS,       $7d8,  $190 ; HAXORUS AzureKeys
 	mon_cry CRY_WEEPINBELL,   170,   383 ; PORYGON
 	mon_cry CRY_GIRAFARIG,    115,   576 ; PORYGON2
@@ -254,6 +253,7 @@ PokemonCries::
 	mon_cry CRY_HOOTHOOT,     354,  256  ; UNOWN
 	mon_cry CRY_HOOTHOOT,    $172,  $190 ; NOWN
 	mon_cry CRY_AIPOM,       $041,  $0ae ; VICTINI SourApple
+	mon_cry CRY_CATERPIE,     $a2,   $a1 ; JIRACHI
 	mon_cry CRY_ENTEI,        330,  273  ; CELEBI
 	mon_cry CRY_PIDGEY,       255,  383  ; DITTO
 	mon_cry CRY_PARAS,        238,  383  ; MEW

@@ -1,4 +1,4 @@
-	db SPINARAK ; 117
+	db SPINARAK ; 116
 
 	db  45,  60,  45,  60,  45,  45 ; 300 BST
 	evs  0,   1,   0,   1,   0,   0

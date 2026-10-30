@@ -1,4 +1,4 @@
-	db BRELOOM ; 116
+	db BRELOOM ; 115
 
 	db  60, 135,  75,  80,  80,  75 ; 505 BST
 	evs  1,   3,   1,   1,   1,   1

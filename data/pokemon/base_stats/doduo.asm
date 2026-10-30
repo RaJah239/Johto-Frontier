@@ -1,4 +1,4 @@
-	db DODUO ; 109
+	db DODUO ; 108
 
 	;   hp  atk  def  spd  sat  sdf
 	db  45,  75,  40,  85,  35,  35 ; 315 BST

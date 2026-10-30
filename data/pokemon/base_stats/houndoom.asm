@@ -1,4 +1,4 @@
-	db HOUNDOOM ; 099
+	db HOUNDOOM ; 098
 
 	db  75,  90,  50, 100, 110,  80 ; 505 BST
 	evs  1,   2,   0,   2,   2,   1

@@ -24,8 +24,12 @@ FramesPointers:
 	dw PikachuFrames
 	dw RaichuFrames
 	dw EeveeFrames
-	dw UmbreonFrames
+	dw EspeonFrames
+	dw FlareonFrames
+	dw JolteonFrames
 	dw SylveonFrames
+	dw UmbreonFrames
+	dw VaporeonFrames
 	dw TorchicFrames
 	dw CombuskenFrames
 	dw BlazikenFrames
@@ -60,6 +64,7 @@ FramesPointers:
 	dw TeddiursaFrames
 	dw UrsaringFrames
 	dw UrsalunaFrames
+	dw UrsalunaBFrames
 	dw PhanpyFrames
 	dw DonphanFrames
 	dw BellsproutFrames
@@ -68,12 +73,6 @@ FramesPointers:
 	dw MareepFrames
 	dw FlaaffyFrames
 	dw AmpharosFrames
-	dw NidoranFFrames
-	dw NidorinaFrames
-	dw NidoqueenFrames
-	dw NidoranMFrames
-	dw NidorinoFrames
-	dw NidokingFrames
 	dw WimpodFrames
 	dw GolisopodFrames
 	dw MarillFrames
@@ -127,6 +126,7 @@ FramesPointers:
 	dw DrapionFrames
 	dw LarvestaFrames
 	dw VolcaronaFrames
+	dw IronMothFrames
 	dw TropiusFrames
 	dw MankeyFrames
 	dw PrimeapeFrames
@@ -145,6 +145,7 @@ FramesPointers:
 	dw GranbullFrames
 	dw DrowzeeFrames
 	dw HypnoFrames
+	dw MrMimeFrames
 	dw SudowoodoFrames
 	dw KoffingFrames
 	dw WeezingFrames
@@ -206,19 +207,17 @@ FramesPointers:
 	dw BronzorFrames
 	dw BronzongFrames
 	dw SkarmoryFrames
+	dw AggronFrames
+	dw AegislashFrames
+	dw NidokingFrames
 	dw MisdreavusFrames
 	dw MismagiusFrames
 	dw ChanseyFrames
 	dw BlisseyFrames
 	dw SnorlaxFrames
-	dw LarvitarFrames
-	dw PupitarFrames
 	dw TyranitarFrames
-	dw BagonFrames
-	dw ShelgonFrames
 	dw SalamenceFrames
-	dw AxewFrames
-	dw FraxureFrames
+	dw MetagrossFrames
 	dw HaxorusFrames
 	dw PorygonFrames
 	dw Porygon2Frames
@@ -248,6 +247,7 @@ FramesPointers:
 	dw UnownFrames
 	dw NownFrames
 	dw VictiniFrames
+	dw JirachiFrames
 	dw CelebiFrames
 	dw DittoFrames
 	dw MewFrames

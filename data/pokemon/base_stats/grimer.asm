@@ -1,4 +1,4 @@
-	db GRIMER ; 149
+	db GRIMER ; 150
 
 	db  80,  80,  50,  25,  40,  55 ; 330 BST
 	evs  1,   1,   0,   0,   0,   0

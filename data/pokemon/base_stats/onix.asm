@@ -1,4 +1,4 @@
-	db ONIX ; 083
+	db ONIX ; 082
 
 	;   hp  atk  def  spd  sat  sdf ; BST 500
 	db  70,  80, 130,  90,  30, 100

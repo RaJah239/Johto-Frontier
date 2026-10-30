@@ -1,4 +1,4 @@
-	db SUICUNE ; 244
+	db SUICUNE ; 243
 
 	db 100,  75, 125,  85,  90, 125 ; 600 BST
 	evs  2,   1,   3,   1,   2,   3

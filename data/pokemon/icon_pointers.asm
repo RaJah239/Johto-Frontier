@@ -26,8 +26,12 @@ IconPointers:
 	dw PikachuIcon
 	dw RaichuIcon
 	dw EeveeIcon
-	dw UmbreonIcon
+	dw EspeonIcon
+	dw FlareonIcon
+	dw JolteonIcon
 	dw SylveonIcon
+	dw UmbreonIcon
+	dw VaporeonIcon
 	dw TorchicIcon
 	dw CombuskenIcon
 	dw BlazikenIcon
@@ -62,6 +66,7 @@ IconPointers:
 	dw TeddiursaIcon
 	dw UrsaringIcon
 	dw UrsalunaIcon
+	dw UrsalunaBIcon
 	dw PhanpyIcon
 	dw DonphanIcon
 	dw BellsproutIcon
@@ -70,12 +75,6 @@ IconPointers:
 	dw MareepIcon
 	dw FlaaffyIcon
 	dw AmpharosIcon
-	dw NidoranFIcon
-	dw NidorinaIcon
-	dw NidoqueenIcon
-	dw NidoranMIcon
-	dw NidorinoIcon
-	dw NidokingIcon
 	dw WimpodIcon
 	dw GolisopodIcon
 	dw MarillIcon
@@ -129,6 +128,7 @@ IconPointers:
 	dw DrapionIcon
 	dw LarvestaIcon
 	dw VolcaronaIcon
+	dw VolcaronaIcon ; IronMothIcon
 	dw TropiusIcon
 	dw MankeyIcon
 	dw PrimeapeIcon
@@ -147,6 +147,7 @@ IconPointers:
 	dw GranbullIcon
 	dw DrowzeeIcon
 	dw HypnoIcon
+	dw MrMimeIcon
 	dw SudowoodoIcon
 	dw KoffingIcon
 	dw WeezingIcon
@@ -208,19 +209,17 @@ IconPointers:
 	dw BronzorIcon
 	dw BronzongIcon
 	dw SkarmoryIcon
+	dw AggronIcon
+	dw AegislashIcon
+	dw NidokingIcon
 	dw MisdreavusIcon
 	dw MismagiusIcon
 	dw ChanseyIcon
 	dw BlisseyIcon
 	dw SnorlaxIcon
-	dw LarvitarIcon
-	dw PupitarIcon
 	dw TyranitarIcon
-	dw BagonIcon
-	dw ShelgonIcon
 	dw SalamenceIcon
-	dw AxewIcon
-	dw FraxureIcon
+	dw MetagrossIcon
 	dw HaxorusIcon
 	dw PorygonIcon
 	dw Porygon2Icon
@@ -250,6 +249,7 @@ IconPointers:
 	dw UnownIcon
 	dw NownIcon
 	dw VictiniIcon
+	dw JirachiIcon
 	dw CelebiIcon
 	dw DittoIcon
 	dw MewIcon

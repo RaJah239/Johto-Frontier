@@ -90,25 +90,25 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 21, ZUBAT
-	db 21, NIDORAN_M
+	db 21, WOOPER
 	db 21, RHYHORN
-	db 21, NIDORAN_F
+	db 21, ZUBAT
 	db 21, DRILBUR
 	db 21, WOOPER
 	db 5, TEDDIURSA
 	; day
 	db 21, ZUBAT
-	db 21, NIDORAN_M
+	db 21, WOOPER
 	db 21, RHYHORN
-	db 21, NIDORAN_F
+	db 21, ZUBAT
 	db 21, DRILBUR
 	db 21, WOOPER
 	db 5, TEDDIURSA
 	; nite
 	db 21, ZUBAT
-	db 21, NIDORAN_M
+	db 21, WOOPER
 	db 21, RHYHORN
-	db 21, NIDORAN_F
+	db 21, ZUBAT
 	db 21, DRILBUR
 	db 21, WOOPER
 	db 5, TEDDIURSA
@@ -118,25 +118,25 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 25, GOLBAT
-	db 25, NIDORINO
+	db 25, QUAGSIRE
 	db 25, RHYHORN
-	db 25, NIDORINA
+	db 25, GOLBAT
 	db 25, EXCADRILL
 	db 25, QUAGSIRE
 	db 30, URSARING
 	; day
 	db 25, GOLBAT
-	db 25, NIDORINO
+	db 25, QUAGSIRE
 	db 25, RHYHORN
-	db 25, NIDORINA
+	db 25, GOLBAT
 	db 25, EXCADRILL
 	db 25, QUAGSIRE
 	db 30, URSARING
 	; nite
 	db 25, GOLBAT
-	db 25, NIDORINO
+	db 25, QUAGSIRE
 	db 25, RHYHORN
-	db 25, NIDORINA
+	db 25, GOLBAT
 	db 25, EXCADRILL
 	db 25, QUAGSIRE
 	db 30, URSARING
@@ -399,16 +399,16 @@ JohtoGrassWildMons:
 	; morn
 	db 14, DODUO
 	db 14, PONYTA
-	db 14, NIDORAN_M
-	db 14, NIDORAN_F
+	db 14, DODUO
+	db 14, DODUO
 	db 14, SWABLU
 	db 14, MAKUHITA
 	db 14, BUNEARY
 	; day
 	db 14, DODUO
 	db 14, PONYTA
-	db 14, NIDORAN_M
-	db 14, NIDORAN_F
+	db 14, DODUO
+	db 14, DODUO
 	db 14, SWABLU
 	db 14, MAKUHITA
 	db 14, BUNEARY
@@ -417,8 +417,8 @@ JohtoGrassWildMons:
 	db 14, HOUNDOUR
 	db 14, MAKUHITA
 	db 14, ZUBAT
-	db 14, NIDORAN_M
-	db 14, NIDORAN_F
+	db 14, ZUBAT
+	db 14, HOUNDOUR
 	db 14, BUNEARY
 	end_grass_wildmons
 
@@ -566,16 +566,16 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 19, SUNKERN
-	db 19, NIDORAN_M
-	db 19, NIDORAN_F
+	db 19, SUNKERN
+	db 19, MEOWTH
 	db 19, PIDGEOTTO
 	db 19, BEAUTIFLY
 	db 19, DUSTOX
 	db 19, SNUBBULL
 	; day
 	db 19, SUNKERN
-	db 19, NIDORAN_M
-	db 19, NIDORAN_F
+	db 19, SUNKERN
+	db 19, MEOWTH
 	db 19, PIDGEOTTO
 	db 19, BEAUTIFLY
 	db 19, DUSTOX
@@ -1518,28 +1518,28 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 32, GABITE
-	db 32, FRAXURE
+	db 32, HAXORUS
 	db 32, GOLISOPOD
 	db 32, ALTARIA
 	db 32, CROBAT
 	db 32, STEELIX
-	db 5, BAGON
+	db 32, HAXORUS
 	; day
 	db 32, GABITE
-	db 32, FRAXURE
+	db 32, HAXORUS
 	db 32, GOLISOPOD
 	db 32, ALTARIA
 	db 32, CROBAT
 	db 32, STEELIX
-	db 5, BAGON
+	db 32, HAXORUS
 	; nite
 	db 32, GABITE
-	db 32, FRAXURE
+	db 32, HAXORUS
 	db 32, GOLISOPOD
 	db 32, ALTARIA
 	db 32, CROBAT
 	db 32, STEELIX
-	db 5, BAGON
+	db 32, HAXORUS
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_17
@@ -1633,7 +1633,7 @@ JohtoGrassWildMons:
 	db 34, AMPHAROS
 	db 34, DRAPION
 	db 34, GALVANTULA
-	db 34, NIDOQUEEN
+	db 34, MR__MIME
 	db 34, NIDOKING
 	db 34, CHANSEY
 	; day
@@ -1641,7 +1641,7 @@ JohtoGrassWildMons:
 	db 34, AMPHAROS
 	db 34, DRAPION
 	db 34, GALVANTULA
-	db 34, NIDOQUEEN
+	db 34, MR__MIME
 	db 34, NIDOKING
 	db 34, CHANSEY
 	; nite
@@ -1649,7 +1649,7 @@ JohtoGrassWildMons:
 	db 34, HOOTHOOT
 	db 34, DRAPION
 	db 34, GALVANTULA
-	db 34, NIDOQUEEN
+	db 34, AEGISLASH
 	db 34, NIDOKING
 	db 34, CHANSEY
 	end_grass_wildmons
@@ -1691,7 +1691,7 @@ JohtoGrassWildMons:
 	db 35, LUCARIO
 	db 35, BRONZONG
 	db 35, STEELIX
-	db 5, LARVITAR
+	db 35, TYRANITAR
 	; day
 	db 35, FERROTHORN
 	db 35, RHYDON
@@ -1699,7 +1699,7 @@ JohtoGrassWildMons:
 	db 35, LUCARIO
 	db 35, BRONZONG
 	db 35, STEELIX
-	db 5, LARVITAR
+	db 35, TYRANITAR
 	; nite
 	db 35, FERROTHORN
 	db 35, RHYDON
@@ -1707,7 +1707,7 @@ JohtoGrassWildMons:
 	db 35, LUCARIO
 	db 35, BRONZONG
 	db 35, STEELIX
-	db 5, LARVITAR
+	db 35, TYRANITAR
 	end_grass_wildmons
 
 	def_grass_wildmons SILVER_CAVE_OUTSIDE
@@ -1759,7 +1759,7 @@ JohtoGrassWildMons:
 	; nite
 	db 37, WEAVILE
 	db 37, KLEAVOR
-	db 37, URSALUNA
+	db 37, URSALUNA_B
 	db 37, GARDEVOIR
 	db 37, GALLADE
 	db 37, MAMOSWINE
@@ -1787,7 +1787,7 @@ JohtoGrassWildMons:
 	; nite
 	db 37, WEAVILE
 	db 37, KLEAVOR
-	db 37, URSALUNA
+	db 37, URSALUNA_B
 	db 37, GARDEVOIR
 	db 37, GALLADE
 	db 37, MAMOSWINE
@@ -1815,7 +1815,7 @@ JohtoGrassWildMons:
 	; nite
 	db 37, WEAVILE
 	db 37, KLEAVOR
-	db 37, URSALUNA
+	db 37, URSALUNA_B
 	db 37, GARDEVOIR
 	db 37, GALLADE
 	db 37, MAMOSWINE
@@ -1843,7 +1843,7 @@ JohtoGrassWildMons:
 	; nite
 	db 37, WEAVILE
 	db 37, KLEAVOR
-	db 37, URSALUNA
+	db 37, URSALUNA_B
 	db 37, GARDEVOIR
 	db 37, GALLADE
 	db 37, MAMOSWINE

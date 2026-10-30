@@ -1,4 +1,4 @@
-	db STEELIX ; 084
+	db STEELIX ; 083
 
 	;   hp  atk  def  spd  sat  sdf
 	db 100,  85, 200,  30,  25, 65 ; BST 505

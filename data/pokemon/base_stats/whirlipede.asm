@@ -1,4 +1,4 @@
-	db WHIRLIPEDE ; 120
+	db WHIRLIPEDE ; 119
 
 	db  40,  55,  99,  47,  40,  79 ; 360 BST
 	evs  0,   0,   2,   0,   0,   1

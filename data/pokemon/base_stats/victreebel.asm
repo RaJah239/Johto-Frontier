@@ -1,4 +1,4 @@
-	db VICTREEBEL ; 065
+	db VICTREEBEL ; 070
 
 	db  90, 115,  65,  70, 115,  80 ; 535 BST
 	evs  2,   2,   1,   1,   2,   1

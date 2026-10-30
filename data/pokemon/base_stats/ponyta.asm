@@ -1,4 +1,4 @@
-	db PONYTA ; 111
+	db PONYTA ; 110
 
 	db  50,  90,  55,  90,  60,  65 ; 410 BST
 	evs  0,   2,   0,   2,   1,   0

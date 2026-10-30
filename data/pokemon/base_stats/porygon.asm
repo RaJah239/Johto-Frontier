@@ -1,4 +1,4 @@
-	db PORYGON ; 221
+	db PORYGON ; 220
 
 	db  65,  60,  70,  40,  85,  75 ; 395 BST
 	evs  1,   1,   1,   0,   1,   1

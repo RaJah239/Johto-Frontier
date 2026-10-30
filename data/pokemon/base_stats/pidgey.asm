@@ -1,4 +1,4 @@
-	db PIDGEY ; 050
+	db PIDGEY ; 054
 
 	db  40,  35,  40,  56,  45,  34 ; 250 BST
 	evs  0,   0,   0,   1,   0,   0

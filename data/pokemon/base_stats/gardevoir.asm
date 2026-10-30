@@ -1,4 +1,4 @@
-	db GARDEVOIR ; 037
+	db GARDEVOIR ; 041
 
 	db  68,  65,  65,  80, 125, 115 ; 518 BST
 	evs  1,   1,   1,   1,   3,   2

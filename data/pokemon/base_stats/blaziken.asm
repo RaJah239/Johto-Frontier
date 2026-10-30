@@ -1,4 +1,4 @@
-	db BLAZIKEN ; 029
+	db BLAZIKEN ; 033
 
 	db  80, 125,  70,  80, 110,  70 ; 535 BST
 	evs  1,   3,   1,   1,   2,   1

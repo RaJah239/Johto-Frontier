@@ -2,7 +2,5 @@
 ; to recover from any non-volatile status at the end of each turn
 
 TenacityPokemon:
-;    db AXEW
-;    db FRAXURE
 ;    db HAXORUS
     db -1

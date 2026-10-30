@@ -1,4 +1,4 @@
-	db SYLVEON ; 026
+	db SYLVEON ; 028
 
 	db  95,  65,  65,  60, 110, 130 ; 525 BST
 	evs  2,   1,   1,   1,   2,   3

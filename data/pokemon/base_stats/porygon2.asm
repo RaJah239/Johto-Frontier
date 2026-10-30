@@ -1,4 +1,4 @@
-	db PORYGON2 ; 222
+	db PORYGON2 ; 221
 
 	db  85,  80,  90,  60, 105,  95 ; 515 BST
 	evs  1,   1,   2,   1,   2,   2

@@ -1,4 +1,4 @@
-	db GALLADE ; 038
+	db GALLADE ; 042
 
 	db  68, 125,  65,  80,  65, 115 ; 518 BST
 	evs  1,   3,   1,   1,   1,   2

@@ -1,4 +1,4 @@
-	db LARVESTA ; 126
+	db LARVESTA ; 125
 
 	db  55,  85,  55,  60,  50,  55 ; 360 BST
 	evs  0,   1,   0,   1,   3,   0

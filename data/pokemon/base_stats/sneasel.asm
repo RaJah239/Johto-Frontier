@@ -1,4 +1,4 @@
-	db SNEASEL ; 195
+	db SNEASEL ; 196
 
 	db  55,  95,  55, 115,  35,  75 ; 430 BST
 	evs  0,   2,   0,   2,   0,   1

@@ -1,4 +1,4 @@
-	db DECIDUEYE ; 034
+	db DECIDUEYE ; 038
 
 	db   80,  50,  90,  85, 135,  95 ; 535
 	evs   1,   0,   2,   1,   3,   2

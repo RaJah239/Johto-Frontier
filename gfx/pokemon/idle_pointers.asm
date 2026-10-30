@@ -24,8 +24,12 @@ AnimationIdlePointers:
 	dw PikachuAnimationIdle
 	dw RaichuAnimationIdle
 	dw EeveeAnimationIdle
-	dw UmbreonAnimationIdle
+	dw EspeonAnimationIdle
+	dw FlareonAnimationIdle
+	dw JolteonAnimationIdle
 	dw SylveonAnimationIdle
+	dw UmbreonAnimationIdle
+	dw VaporeonAnimationIdle
 	dw TorchicAnimationIdle
 	dw CombuskenAnimationIdle
 	dw BlazikenAnimationIdle
@@ -60,6 +64,7 @@ AnimationIdlePointers:
 	dw TeddiursaAnimationIdle
 	dw UrsaringAnimationIdle
 	dw UrsalunaAnimationIdle
+	dw UrsalunaBAnimationIdle
 	dw PhanpyAnimationIdle
 	dw DonphanAnimationIdle
 	dw BellsproutAnimationIdle
@@ -68,12 +73,6 @@ AnimationIdlePointers:
 	dw MareepAnimationIdle
 	dw FlaaffyAnimationIdle
 	dw AmpharosAnimationIdle
-	dw NidoranFAnimationIdle
-	dw NidorinaAnimationIdle
-	dw NidoqueenAnimationIdle
-	dw NidoranMAnimationIdle
-	dw NidorinoAnimationIdle
-	dw NidokingAnimationIdle
 	dw WimpodAnimationIdle
 	dw GolisopodAnimationIdle
 	dw MarillAnimationIdle
@@ -127,6 +126,7 @@ AnimationIdlePointers:
 	dw DrapionAnimationIdle
 	dw LarvestaAnimationIdle
 	dw VolcaronaAnimationIdle
+	dw IronMothAnimationIdle
 	dw TropiusAnimationIdle
 	dw MankeyAnimationIdle
 	dw PrimeapeAnimationIdle
@@ -145,6 +145,7 @@ AnimationIdlePointers:
 	dw GranbullAnimationIdle
 	dw DrowzeeAnimationIdle
 	dw HypnoAnimationIdle
+	dw MrMimeAnimationIdle
 	dw SudowoodoAnimationIdle
 	dw KoffingAnimationIdle
 	dw WeezingAnimationIdle
@@ -206,19 +207,17 @@ AnimationIdlePointers:
 	dw BronzorAnimationIdle
 	dw BronzongAnimationIdle
 	dw SkarmoryAnimationIdle
+	dw AggronAnimationIdle
+	dw AegislashAnimationIdle
+	dw NidokingAnimationIdle
 	dw MisdreavusAnimationIdle
 	dw MismagiusAnimationIdle
 	dw ChanseyAnimationIdle
 	dw BlisseyAnimationIdle
 	dw SnorlaxAnimationIdle
-	dw LarvitarAnimationIdle
-	dw PupitarAnimationIdle
 	dw TyranitarAnimationIdle
-	dw BagonAnimationIdle
-	dw ShelgonAnimationIdle
 	dw SalamenceAnimationIdle
-	dw AxewAnimationIdle
-	dw FraxureAnimationIdle
+	dw MetagrossAnimationIdle
 	dw HaxorusAnimationIdle
 	dw PorygonAnimationIdle
 	dw Porygon2AnimationIdle
@@ -248,6 +247,7 @@ AnimationIdlePointers:
 	dw UnownAnimationIdle
 	dw NownAnimationIdle
 	dw VictiniAnimationIdle
+	dw JirachiAnimationIdle
 	dw CelebiAnimationIdle
 	dw DittoAnimationIdle
 	dw MewAnimationIdle

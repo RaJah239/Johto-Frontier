@@ -1,4 +1,4 @@
-	db GOLISOPOD ; 076
+	db GOLISOPOD ; 075
 
 	db  75, 125, 140,  40,  60,  90 ; 530 BST
 	evs  2,   3,   3,   0,   1,   2

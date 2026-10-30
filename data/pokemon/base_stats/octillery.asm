@@ -1,4 +1,4 @@
-	db OCTILLERY ; 168
+	db OCTILLERY ; 169
 
 	;   hp  atk  def  spd  sat  sdf ; 505 BST
 	db  80,  80,  80,  70, 115,  80

@@ -1,4 +1,4 @@
-	db DURALUDON ; 231
+	db DURALUDON ; 230
 
 	db  70,  95, 115,  85, 120,  50 ; 535 BST
 	evs  1,   2,   2,   1,   3,   0

@@ -1,4 +1,4 @@
-	db AZUMARILL ; 078
+	db AZUMARILL ; 077
 
 	db 100,  55,  80,  60,  60,  95 ; 450 BST
 	evs  2,   0,   1,   1,   1,   2

@@ -1,4 +1,4 @@
-	db CHINCHOU ; 169
+	db CHINCHOU ; 170
 
 	db  75,  38,  38,  67,  56,  56 ; 330 BST
 	evs  1,   0,   0,   1,   0,   0

@@ -24,8 +24,12 @@ AnimationPointers:
 	dw PikachuAnimation
 	dw RaichuAnimation
 	dw EeveeAnimation
-	dw UmbreonAnimation
+	dw EspeonAnimation
+	dw FlareonAnimation
+	dw JolteonAnimation
 	dw SylveonAnimation
+	dw UmbreonAnimation
+	dw VaporeonAnimation
 	dw TorchicAnimation
 	dw CombuskenAnimation
 	dw BlazikenAnimation
@@ -60,6 +64,7 @@ AnimationPointers:
 	dw TeddiursaAnimation
 	dw UrsaringAnimation
 	dw UrsalunaAnimation
+	dw UrsalunaBAnimation
 	dw PhanpyAnimation
 	dw DonphanAnimation
 	dw BellsproutAnimation
@@ -68,12 +73,6 @@ AnimationPointers:
 	dw MareepAnimation
 	dw FlaaffyAnimation
 	dw AmpharosAnimation
-	dw NidoranFAnimation
-	dw NidorinaAnimation
-	dw NidoqueenAnimation
-	dw NidoranMAnimation
-	dw NidorinoAnimation
-	dw NidokingAnimation
 	dw WimpodAnimation
 	dw GolisopodAnimation
 	dw MarillAnimation
@@ -127,6 +126,7 @@ AnimationPointers:
 	dw DrapionAnimation
 	dw LarvestaAnimation
 	dw VolcaronaAnimation
+	dw IronMothAnimation
 	dw TropiusAnimation
 	dw MankeyAnimation
 	dw PrimeapeAnimation
@@ -145,6 +145,7 @@ AnimationPointers:
 	dw GranbullAnimation
 	dw DrowzeeAnimation
 	dw HypnoAnimation
+	dw MrMimeAnimation
 	dw SudowoodoAnimation
 	dw KoffingAnimation
 	dw WeezingAnimation
@@ -206,19 +207,17 @@ AnimationPointers:
 	dw BronzorAnimation
 	dw BronzongAnimation
 	dw SkarmoryAnimation
+	dw AggronAnimation
+	dw AegislashAnimation
+	dw NidokingAnimation
 	dw MisdreavusAnimation
 	dw MismagiusAnimation
 	dw ChanseyAnimation
 	dw BlisseyAnimation
 	dw SnorlaxAnimation
-	dw LarvitarAnimation
-	dw PupitarAnimation
 	dw TyranitarAnimation
-	dw BagonAnimation
-	dw ShelgonAnimation
 	dw SalamenceAnimation
-	dw AxewAnimation
-	dw FraxureAnimation
+	dw MetagrossAnimation
 	dw HaxorusAnimation
 	dw PorygonAnimation
 	dw Porygon2Animation
@@ -248,6 +247,7 @@ AnimationPointers:
 	dw UnownAnimation
 	dw NownAnimation
 	dw VictiniAnimation
+	dw JirachiAnimation
 	dw CelebiAnimation
 	dw DittoAnimation
 	dw MewAnimation

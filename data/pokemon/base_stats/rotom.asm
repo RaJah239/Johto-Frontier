@@ -1,4 +1,4 @@
-	db ROTOM ; 229
+	db ROTOM ; 228
 
 	;   hp  atk  def  spd  sat  sdf
 	db  60,  65, 107,  91, 110, 107 ; 540 BST

@@ -1,4 +1,4 @@
-	db ARCANINE ; 097
+	db ARCANINE ; 096
 
 	db  90, 110,  80,  95, 100,  80 ; 555 BST
 	evs  2,   2,   1,   2,   2,   1

@@ -51,10 +51,18 @@ PokemonPicPointers::
  	dba RaichuBackpic
  	dba EeveeFrontpic
  	dba EeveeBackpic
- 	dba UmbreonFrontpic
- 	dba UmbreonBackpic
+ 	dba EspeonFrontpic
+ 	dba EspeonBackpic
+  	dba FlareonFrontpic
+ 	dba FlareonBackpic
+  	dba JolteonFrontpic
+ 	dba JolteonBackpic
 	dba SylveonFrontpic
  	dba SylveonBackpic
+ 	dba UmbreonFrontpic
+ 	dba UmbreonBackpic
+ 	dba VaporeonFrontpic
+ 	dba VaporeonBackpic
  	dba TorchicFrontpic
  	dba TorchicBackpic
  	dba CombuskenFrontpic
@@ -123,6 +131,8 @@ PokemonPicPointers::
  	dba UrsaringBackpic
  	dba UrsalunaFrontpic
  	dba UrsalunaBackpic
+ 	dba UrsalunaBFrontpic
+ 	dba UrsalunaBBackpic
  	dba PhanpyFrontpic
  	dba PhanpyBackpic
  	dba DonphanFrontpic
@@ -139,18 +149,6 @@ PokemonPicPointers::
  	dba FlaaffyBackpic
  	dba AmpharosFrontpic
  	dba AmpharosBackpic
- 	dba NidoranFFrontpic
- 	dba NidoranFBackpic
- 	dba NidorinaFrontpic
- 	dba NidorinaBackpic
- 	dba NidoqueenFrontpic
- 	dba NidoqueenBackpic
- 	dba NidoranMFrontpic
- 	dba NidoranMBackpic
- 	dba NidorinoFrontpic
- 	dba NidorinoBackpic
- 	dba NidokingFrontpic
- 	dba NidokingBackpic
  	dba WimpodFrontpic
  	dba WimpodBackpic
  	dba GolisopodFrontpic
@@ -257,6 +255,8 @@ PokemonPicPointers::
  	dba LarvestaBackpic
  	dba VolcaronaFrontpic
  	dba VolcaronaBackpic
+ 	dba IronMothFrontpic
+ 	dba IronMothBackpic
  	dba TropiusFrontpic
  	dba TropiusBackpic
  	dba MankeyFrontpic
@@ -293,6 +293,8 @@ PokemonPicPointers::
  	dba DrowzeeBackpic
  	dba HypnoFrontpic
  	dba HypnoBackpic
+ 	dba MrMimeFrontpic
+ 	dba MrMimeBackpic
  	dba SudowoodoFrontpic
  	dba SudowoodoBackpic
  	dba KoffingFrontpic
@@ -415,6 +417,12 @@ PokemonPicPointers::
  	dba BronzongBackpic
  	dba SkarmoryFrontpic
  	dba SkarmoryBackpic
+ 	dba AggronFrontpic
+ 	dba AggronBackpic
+  	dba AegislashFrontpic
+ 	dba AegislashBackpic
+ 	dba NidokingFrontpic
+ 	dba NidokingBackpic
  	dba MisdreavusFrontpic
  	dba MisdreavusBackpic
  	dba MismagiusFrontpic
@@ -425,22 +433,12 @@ PokemonPicPointers::
  	dba BlisseyBackpic
  	dba SnorlaxFrontpic
  	dba SnorlaxBackpic
- 	dba LarvitarFrontpic
- 	dba LarvitarBackpic
- 	dba PupitarFrontpic
- 	dba PupitarBackpic
- 	dba TyranitarFrontpic
+  	dba TyranitarFrontpic
  	dba TyranitarBackpic
- 	dba BagonFrontpic
- 	dba BagonBackpic
- 	dba ShelgonFrontpic
- 	dba ShelgonBackpic
- 	dba SalamenceFrontpic
+  	dba SalamenceFrontpic
  	dba SalamenceBackpic
- 	dba AxewFrontpic
- 	dba AxewBackpic
- 	dba FraxureFrontpic
- 	dba FraxureBackpic
+  	dba MetagrossFrontpic
+ 	dba MetagrossBackpic
  	dba HaxorusFrontpic
  	dba HaxorusBackpic
  	dba PorygonFrontpic
@@ -502,6 +500,8 @@ PokemonPicPointers::
  	dba NownBackpic
  	dba VictiniFrontpic
  	dba VictiniBackpic
+ 	dba JirachiFrontpic
+ 	dba JirachiBackpic
  	dba CelebiFrontpic
  	dba CelebiBackpic
  	dba DittoFrontpic

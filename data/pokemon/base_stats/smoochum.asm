@@ -1,4 +1,4 @@
-	db SMOOCHUM ; 187
+	db SMOOCHUM ; 188
 
 	db  45,  30,  15,  65,  85,  65 ; 305 BST
 	evs  0,   0,   0,   1,   1,   1

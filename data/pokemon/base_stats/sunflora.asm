@@ -1,4 +1,4 @@
-	db SUNFLORA ; 047
+	db SUNFLORA ; 051
 
 	db  95,  95,  85,  30, 125,  75 ; 505 BST
 	evs  1,   1,   0,   0,   3,   2

@@ -1,4 +1,4 @@
-	db BRONZONG ; 205
+	db BRONZONG ; 206
 
 	db  67,  94, 116,  33,  79, 116 ; 505 BST
 	evs  1,   2,   2,   0,   1,   2

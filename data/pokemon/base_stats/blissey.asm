@@ -1,4 +1,4 @@
-	db BLISSEY ; 210
+	db BLISSEY ; 214
 
 	db 255,  10,  10,  55,  75, 135 ; 540 BST
 	evs  3,   0,   0,   0,   1,   3

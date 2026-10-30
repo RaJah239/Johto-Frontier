@@ -1,4 +1,4 @@
-	db PIDGEOTTO ; 051
+	db PIDGEOTTO ; 055
 
 	db  63,  50,  55,  71,  61,  50 ; 350 BST
 	evs  1,   0,   0,   1,   1,   0

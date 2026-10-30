@@ -1,4 +1,4 @@
-	db CLAYDOL ; 201
+	db CLAYDOL ; 202
 
 	db  65,  70, 105,  75,  70, 120 ; 505 BST
 	evs  1,   1,   2,   1,   1,   3

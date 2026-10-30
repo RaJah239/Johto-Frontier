@@ -1,4 +1,4 @@
-	db URSALUNA ; 060
+	db URSALUNA ; 064
 
 	db 130, 140, 105,  50,  45,  80 ; 550 BST
 	evs  3,   3,   2,   0,   0,   1

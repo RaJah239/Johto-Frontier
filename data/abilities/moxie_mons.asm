@@ -5,7 +5,5 @@ MoxiePokemon:
 ;	db GYARADOS
 ;	db HERACROSS
 ;	db TAUROS
-;	db LARVITAR
-;	db PUPITAR
 ;	db TYRANITAR
 	db -1 ; end

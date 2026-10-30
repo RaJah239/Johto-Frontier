@@ -1,4 +1,4 @@
-	db REGISTEEL ; 236
+	db REGISTEEL ; 235
 
 	db 100,  75, 150,  50,  75, 150
 	evs  2,   1,   3,   0,   1,   3

@@ -1,4 +1,4 @@
-	db PORYGONZ ; 223
+	db PORYGONZ ; 222
 
 	db  85,  70,  80,  90, 135,  75 ; 535 BST
 	evs  1,   1,   1,   2,   3,   1

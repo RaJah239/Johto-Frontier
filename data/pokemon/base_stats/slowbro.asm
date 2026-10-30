@@ -1,4 +1,4 @@
-	db SLOWBRO ; 114
+	db SLOWBRO ; 113
 
 	db  100,  70, 110,  30, 110,  85 ; 505 BST
 	evs   2,   1,   2,   0,   2,   1

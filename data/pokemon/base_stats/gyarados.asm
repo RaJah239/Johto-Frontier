@@ -1,4 +1,4 @@
-	db GYARADOS ; 086
+	db GYARADOS ; 085
 
 	db  95, 125,  79,  81,  60, 100 ; 540 BST
 	evs  2,   3,   1,   1,   1,   2

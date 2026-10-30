@@ -1,4 +1,4 @@
-	db DRAPION ; 125
+	db DRAPION ; 124
 
 	db  70,  95, 110,  95,  60,  75 ; 505 BST
 	evs  1,   2,   2,   2,   1,   1

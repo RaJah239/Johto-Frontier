@@ -1,4 +1,4 @@
-	db VOLTORB ; 156
+	db VOLTORB ; 157
 
 	db  40,  30,  50, 100,  55,  55 ; 330 BST
 	evs  0,   0,   0,   2,   0,   0

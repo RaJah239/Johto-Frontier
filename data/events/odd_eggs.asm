@@ -288,7 +288,7 @@ OddEggs:
 	bigdw 12 ; SAtk
 	bigdw 11 ; SDef
 
-	db LARVITAR
+	db RAIKOU
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 02560 ; OT ID
@@ -309,7 +309,7 @@ OddEggs:
 	bigdw 8 ; SAtk
 	bigdw 8 ; SDef
 
-	db PUPITAR
+	db MR__MIME
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 00256 ; OT ID

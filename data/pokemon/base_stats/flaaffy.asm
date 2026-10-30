@@ -1,4 +1,4 @@
-	db FLAAFFY ; 067
+	db FLAAFFY ; 072
 
 	db  70,  55,  55,  45,  80,  60 ; 365 BST
 	evs  1,   0,   0,   0,   1,   1

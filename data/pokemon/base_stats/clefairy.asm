@@ -1,4 +1,4 @@
-	db CLEFAIRY ; 180
+	db CLEFAIRY ; 181
 
 	db  70,  45,  48,  35,  62,  65 ; 325 BST
 	evs  1,   0,   0,   0,   1,   1

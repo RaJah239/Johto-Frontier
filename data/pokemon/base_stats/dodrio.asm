@@ -1,4 +1,4 @@
-	db DODRIO ; 110
+	db DODRIO ; 109
 
 	;   hp  atk  def  spd  sat  sdf
 	db  80, 120,  77, 118,  50,  60 ; 505 BST

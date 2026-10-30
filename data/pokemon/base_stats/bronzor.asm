@@ -1,4 +1,4 @@
-	db BRONZOR ; 204
+	db BRONZOR ; 205
 
 	db  57,  24,  86,  23,  24,  86 ; 300 BST
 	evs  0,   0,   1,   0,   0,   1

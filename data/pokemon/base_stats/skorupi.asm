@@ -1,4 +1,4 @@
-	db SKORUPI ; 124
+	db SKORUPI ; 123
 
 	db  40,  50,  90,  65,  30,  55 ; 330 BST
 	evs  0,   0,   2,   1,   0,   0

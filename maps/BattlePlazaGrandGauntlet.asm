@@ -641,8 +641,6 @@ PartyKeeperSpeciesList:
 	db PHANPY
 	db BELLSPROUT
 	db MAREEP
-	db NIDORAN_F
-	db NIDORAN_M
 	db WIMPOD
 	db MARILL
 	db RHYHORN
@@ -713,9 +711,6 @@ PartyKeeperSpeciesList:
 	db MISDREAVUS
 	db CHANSEY
 	db SNORLAX
-	db LARVITAR
-	db BAGON
-	db AXEW
 	db PORYGON
 	db OMANYTE
 	db LILEEP

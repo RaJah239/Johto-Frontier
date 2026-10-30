@@ -1,4 +1,4 @@
-	db AMPHAROS ; 068
+	db AMPHAROS ; 073
 
 	db  95,  60,  90,  50, 135, 105 ; 535 BST
 	evs  2,   1,   2,   0,   3,   2

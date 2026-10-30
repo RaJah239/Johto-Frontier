@@ -1,4 +1,4 @@
-	db SWABLU ; 090
+	db SWABLU ; 089
 
 	db  45,  40,  60,  50,  40,  75 ; 310 BST
 	evs  0,   0,   1,   0,   0,   1

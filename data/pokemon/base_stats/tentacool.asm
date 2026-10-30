@@ -1,4 +1,4 @@
-	db TENTACOOL ; 172
+	db TENTACOOL ; 173
 
 	db  40,  40,  35,  70,  50, 100 ; 335 BST
 	evs  0,   0,   0,   1,   0,   2

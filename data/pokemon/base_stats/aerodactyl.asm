@@ -1,4 +1,4 @@
-	db AERODACTYL ; 228
+	db AERODACTYL ; 227
 
 	db  80, 105,  65, 130,  45,  75 ; 500 BST
 	evs  1,   2,   1,   3,   0,   1

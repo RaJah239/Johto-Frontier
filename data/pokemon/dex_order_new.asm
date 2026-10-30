@@ -26,8 +26,12 @@ NewPokedexOrder:
 	db PIKACHU
 	db RAICHU
 	db EEVEE
-	db UMBREON
+	db ESPEON
+	db FLAREON
+	db JOLTEON
 	db SYLVEON
+	db UMBREON
+	db VAPOREON
 	db TORCHIC
 	db COMBUSKEN
 	db BLAZIKEN
@@ -62,6 +66,7 @@ NewPokedexOrder:
 	db TEDDIURSA
 	db URSARING
 	db URSALUNA
+	db URSALUNA_B
 	db PHANPY
 	db DONPHAN
 	db BELLSPROUT
@@ -70,12 +75,6 @@ NewPokedexOrder:
 	db MAREEP
 	db FLAAFFY
 	db AMPHAROS
-	db NIDORAN_F
-	db NIDORINA
-	db NIDOQUEEN
-	db NIDORAN_M
-	db NIDORINO
-	db NIDOKING
 	db WIMPOD
 	db GOLISOPOD
 	db MARILL
@@ -129,6 +128,7 @@ NewPokedexOrder:
 	db DRAPION
 	db LARVESTA
 	db VOLCARONA
+	db IRON_MOTH
 	db TROPIUS
 	db MANKEY
 	db PRIMEAPE
@@ -147,6 +147,7 @@ NewPokedexOrder:
 	db GRANBULL
 	db DROWZEE
 	db HYPNO
+	db MR__MIME
 	db SUDOWOODO
 	db KOFFING
 	db WEEZING
@@ -208,19 +209,17 @@ NewPokedexOrder:
 	db BRONZOR
 	db BRONZONG
 	db SKARMORY
+	db AGGRON
+	db AEGISLASH
+	db NIDOKING
 	db MISDREAVUS
 	db MISMAGIUS
 	db CHANSEY
 	db BLISSEY
 	db SNORLAX
-	db LARVITAR
-	db PUPITAR
 	db TYRANITAR
-	db BAGON
-	db SHELGON
 	db SALAMENCE
-	db AXEW
-	db FRAXURE
+	db METAGROSS
 	db HAXORUS
 	db PORYGON
 	db PORYGON2
@@ -250,6 +249,7 @@ NewPokedexOrder:
 	db UNOWN
 	db NOWN
 	db VICTINI
+	db JIRACHI
 	db CELEBI
 	db DITTO
 	db MEW

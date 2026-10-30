@@ -1,4 +1,4 @@
-	db SKARMORY ; 206
+	db SKARMORY ; 207
 
 	db  65,  80, 140,  70,  40,  70 ; 465 BST
 	evs  1,   1,   3,   1,   0,   1

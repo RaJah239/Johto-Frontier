@@ -26,8 +26,12 @@ EvosAttacksPointers::
 	dw PikachuEvosAttacks
 	dw RaichuEvosAttacks
 	dw EeveeEvosAttacks
-	dw UmbreonEvosAttacks
+	dw EspeonEvosAttacks
+	dw FlareonEvosAttacks
+	dw JolteonEvosAttacks
 	dw SylveonEvosAttacks
+	dw UmbreonEvosAttacks
+	dw VaporeonEvosAttacks
 	dw TorchicEvosAttacks
 	dw CombuskenEvosAttacks
 	dw BlazikenEvosAttacks
@@ -62,6 +66,7 @@ EvosAttacksPointers::
 	dw TeddiursaEvosAttacks
 	dw UrsaringEvosAttacks
 	dw UrsalunaEvosAttacks
+	dw UrsalunaBEvosAttacks
 	dw PhanpyEvosAttacks
 	dw DonphanEvosAttacks
 	dw BellsproutEvosAttacks
@@ -70,12 +75,6 @@ EvosAttacksPointers::
 	dw MareepEvosAttacks
 	dw FlaaffyEvosAttacks
 	dw AmpharosEvosAttacks
-	dw NidoranFEvosAttacks
-	dw NidorinaEvosAttacks
-	dw NidoqueenEvosAttacks
-	dw NidoranMEvosAttacks
-	dw NidorinoEvosAttacks
-	dw NidokingEvosAttacks
 	dw WimpodEvosAttacks
 	dw GolisopodEvosAttacks
 	dw MarillEvosAttacks
@@ -129,6 +128,7 @@ EvosAttacksPointers::
 	dw DrapionEvosAttacks
 	dw LarvestaEvosAttacks
 	dw VolcaronaEvosAttacks
+	dw IronMothEvosAttacks
 	dw TropiusEvosAttacks
 	dw MankeyEvosAttacks
 	dw PrimeapeEvosAttacks
@@ -147,6 +147,7 @@ EvosAttacksPointers::
 	dw GranbullEvosAttacks
 	dw DrowzeeEvosAttacks
 	dw HypnoEvosAttacks
+	dw MrMimeEvosAttacks
 	dw SudowoodoEvosAttacks
 	dw KoffingEvosAttacks
 	dw WeezingEvosAttacks
@@ -208,19 +209,17 @@ EvosAttacksPointers::
 	dw BronzorEvosAttacks
 	dw BronzongEvosAttacks
 	dw SkarmoryEvosAttacks
+	dw AggronEvosAttacks
+	dw AegislashEvosAttacks
+	dw NidokingEvosAttacks
 	dw MisdreavusEvosAttacks
 	dw MismagiusEvosAttacks
 	dw ChanseyEvosAttacks
 	dw BlisseyEvosAttacks
 	dw SnorlaxEvosAttacks
-	dw LarvitarEvosAttacks
-	dw PupitarEvosAttacks
 	dw TyranitarEvosAttacks
-	dw BagonEvosAttacks
-	dw ShelgonEvosAttacks
 	dw SalamenceEvosAttacks
-	dw AxewEvosAttacks
-	dw FraxureEvosAttacks
+	dw MetagrossEvosAttacks
 	dw HaxorusEvosAttacks
 	dw PorygonEvosAttacks
 	dw Porygon2EvosAttacks
@@ -250,6 +249,7 @@ EvosAttacksPointers::
 	dw UnownEvosAttacks
 	dw NownEvosAttacks
 	dw VictiniEvosAttacks
+	dw JirachiEvosAttacks
 	dw CelebiEvosAttacks
 	dw DittoEvosAttacks
 	dw MewEvosAttacks

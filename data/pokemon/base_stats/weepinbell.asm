@@ -1,4 +1,4 @@
-	db WEEPINBELL ; 064
+	db WEEPINBELL ; 069
 
 	db  65,  90,  50,  55,  85,  45
 	evs  1,   2,   0,   0,   1,   0

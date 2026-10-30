@@ -4,16 +4,16 @@ AlphabeticalPokedexOrder:
 	table_width 1, AlphabeticalPokedexOrder
 	db ABOMASNOW
 	db ABSOL
+	db AEGISLASH
 	db AERODACTYL
+	db AGGRON
 	db ALTARIA
 	db AMPHAROS
 	db ANNIHILAPE
 	db ARCANINE
 	db ARIADOS
 	db ARTICUNO
-	db AXEW
 	db AZUMARILL
-	db BAGON
 	db BALTOY
 	db BAYLEEF
 	db BEAUTIFLY
@@ -62,13 +62,14 @@ AlphabeticalPokedexOrder:
 	db ELECTRODE
 	db ELEKID
 	db ENTEI
+	db ESPEON
 	db EXCADRILL
 	db FEEBAS
 	db FERALIGATR
 	db FERROSEED
 	db FERROTHORN
 	db FLAAFFY
-	db FRAXURE
+	db FLAREON
 	db FROSLASS
 	db GABITE
 	db GALLADE
@@ -99,6 +100,9 @@ AlphabeticalPokedexOrder:
 	db HOUNDOOM
 	db HOUNDOUR
 	db HYPNO
+	db IRON_MOTH
+	db JIRACHI
+	db JOLTEON
 	db JOLTIK
 	db JYNX
 	db KATU
@@ -110,7 +114,6 @@ AlphabeticalPokedexOrder:
 	db LANTURN
 	db LAPRAS
 	db LARVESTA
-	db LARVITAR
 	db LILEEP
 	db LITWICK
 	db LOPUNNY
@@ -129,6 +132,7 @@ AlphabeticalPokedexOrder:
 	db MARILL
 	db MEGANIUM
 	db MEOWTH
+	db METAGROSS
 	db MEW
 	db MEWTWO
 	db MILOTIC
@@ -136,14 +140,10 @@ AlphabeticalPokedexOrder:
 	db MISDREAVUS
 	db MISMAGIUS
 	db MOLTRES
+	db MR__MIME
 	db MUK
 	db NATU
 	db NIDOKING
-	db NIDOQUEEN
-	db NIDORAN_F
-	db NIDORAN_M
-	db NIDORINA
-	db NIDORINO
 	db NOCTOWL
 	db NOWN
 	db OCTILLERY
@@ -162,7 +162,6 @@ AlphabeticalPokedexOrder:
 	db PORYGON2
 	db PORYGONZ
 	db PRIMEAPE
-	db PUPITAR
 	db QUAGSIRE
 	db QUILAVA
 	db RAICHU
@@ -185,7 +184,6 @@ AlphabeticalPokedexOrder:
 	db SCYTHER
 	db SEADRA
 	db SEEL
-	db SHELGON
 	db SHROOMISH
 	db SHUCKLE
 	db SILCOON
@@ -234,7 +232,9 @@ AlphabeticalPokedexOrder:
 	db UMBREON
 	db UNOWN
 	db URSALUNA
+	db URSALUNA_B
 	db URSARING
+	db VAPOREON
 	db VENIPEDE
 	db VICTINI
 	db VICTREEBEL

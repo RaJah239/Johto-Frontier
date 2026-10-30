@@ -1,4 +1,4 @@
-	db GOLBAT ; 056
+	db GOLBAT ; 060
 
 	db  75,  80,  70,  90,  65,  75 ; 455 BST
 	evs  1,   1,   1,   2,   1,   1

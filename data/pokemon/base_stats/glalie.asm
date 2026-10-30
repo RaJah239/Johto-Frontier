@@ -1,4 +1,4 @@
-	db GLALIE ; 190
+	db GLALIE ; 191
 
 	db  85,  85,  85,  85,  85,  85 ; 510 BST
 	evs  2,   2,   2,   2,   2,   2

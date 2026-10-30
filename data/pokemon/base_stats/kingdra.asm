@@ -1,4 +1,4 @@
-	db KINGDRA ; 178
+	db KINGDRA ; 179
 
 	db  75,  95,  95,  85,  95,  95 ; 540 BST
 	evs  1,   2,   2,   1,   2,   2

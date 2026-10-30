@@ -1,4 +1,4 @@
-	db NOCTOWL ; 054
+	db NOCTOWL ; 058
 
 	db 100,  60,  60,  70,  94, 121 ; 505 BST
 	evs  2,   1,   1,   1,   2,   3

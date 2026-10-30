@@ -1,4 +1,4 @@
-	db FROSLASS ; 191
+	db FROSLASS ; 192
 
 	db  70,  80,  70, 110, 105,  70 ; 505 BST
 	evs  1,   1,   1,   2,   2,   1

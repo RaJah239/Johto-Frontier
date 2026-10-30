@@ -1,4 +1,4 @@
-	db SCOLIPEDE ; 121
+	db SCOLIPEDE ; 120
 
 	db  60, 100,  89, 112,  75,  69 ; 505 BST
 	evs  1,   2,   1,   3,   1,   1

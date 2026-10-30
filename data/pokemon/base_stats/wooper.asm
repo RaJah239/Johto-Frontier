@@ -1,4 +1,4 @@
-	db WOOPER ; 100
+	db WOOPER ; 099
 
 	db  60,  50,  50,  15,  40,  45 ; 260 BST
 	evs  1,   0,   0,   0,   0,   0

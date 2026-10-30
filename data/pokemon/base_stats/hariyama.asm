@@ -1,4 +1,4 @@
-	db HARIYAMA ; 108
+	db HARIYAMA ; 107
 
 	db 150, 125,  70,  50,  40,  70 ; 505 BST
 	evs  3,   3,   1,   0,   0,   1

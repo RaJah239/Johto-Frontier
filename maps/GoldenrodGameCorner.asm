@@ -1,10 +1,10 @@
 DEF GOLDENRODGAMECORNER_TM_COINS       EQU 9000
 DEF GOLDENRODGAMECORNER_SMEARGLE_COINS EQU 7777
-DEF GOLDENRODGAMECORNER_AXEW_COINS     EQU 8888
+DEF GOLDENRODGAMECORNER_MR__MIME_COINS EQU 8888
 DEF GOLDENRODGAMECORNER_PORYGON_COINS  EQU 9999
 
 EXPORT GOLDENRODGAMECORNER_SMEARGLE_COINS
-EXPORT GOLDENRODGAMECORNER_AXEW_COINS
+EXPORT GOLDENRODGAMECORNER_MR__MIME_COINS
 EXPORT GOLDENRODGAMECORNER_PORYGON_COINS
 
 GoldenrodGameCorner_MapEvents:
@@ -227,21 +227,21 @@ GoldenrodGameCornerPrizeMonVendorScript:
 	sjump .loop
 
 .Axew:
-	checkcoins GOLDENRODGAMECORNER_AXEW_COINS
+	checkcoins GOLDENRODGAMECORNER_MR__MIME_COINS
 	ifequal HAVE_LESS, GoldenrodGameCornerPrizeVendor_NotEnoughCoinsScript
 	readvar VAR_PARTYCOUNT
 	ifequal PARTY_LENGTH, GoldenrodGameCornerPrizeMonVendor_NoRoomForPrizeScript
-	getmonname STRING_BUFFER_3, AXEW
+	getmonname STRING_BUFFER_3, MR__MIME
 	scall GoldenrodGameCornerPrizeVendor_ConfirmPurchaseScript
 	iffalse GoldenrodGameCornerPrizeVendor_CancelPurchaseScript
 	waitsfx
 	playsound SFX_TRANSACTION
 	writetext GoldenrodGameCornerPrizeVendorHereYouGoText
 	waitbutton
-	setval AXEW
+	setval MR__MIME
 	special GameCornerPrizeMonCheckDex
-	givepoke AXEW, 5, SILVER_BERRY
-	takecoins GOLDENRODGAMECORNER_AXEW_COINS
+	givepoke MR__MIME, 5, SILVER_BERRY
+	takecoins GOLDENRODGAMECORNER_MR__MIME_COINS
 	sjump .loop
 
 .Porygon:
@@ -272,7 +272,7 @@ GoldenrodGameCornerPrizeMonVendorScript:
 	db STATICMENU_CURSOR | STATICMENU_WRAP ; flags
 	db 4 ; items
 	db "Smeargle   7777@"
-	db "Axew       8888@"
+	db "Mr.Mime    8888@"
 	db "Porygon    9999@"
 	db "Cancel@"
 

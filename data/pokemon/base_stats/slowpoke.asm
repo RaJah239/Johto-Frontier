@@ -1,4 +1,4 @@
-	db SLOWPOKE ; 113
+	db SLOWPOKE ; 112
 
 	db  90,  40,  60,  15,  60,  50 ; 315 BST
 	evs  2,   0,   1,   0,   1,   0

@@ -1,4 +1,4 @@
-	db OMASTAR ; 225
+	db OMASTAR ; 224
 
 	db  70,  60, 125,  55, 125,  70 ; 505 BST
 	evs  1,   1,   3,   0,   3,   1

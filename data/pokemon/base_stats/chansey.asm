@@ -1,4 +1,4 @@
-	db CHANSEY ; 209
+	db CHANSEY ; 213
 
 	db 250,  05,  05,  50,  35, 105 ; 450 BST
 	evs  3,   0,   0,   0,   0,   2

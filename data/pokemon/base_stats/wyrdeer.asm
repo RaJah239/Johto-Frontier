@@ -1,4 +1,4 @@
-	db WYRDEER ; 185
+	db WYRDEER ; 186
 
 	db 103, 105,  72,  65, 105,  75 ; 525 BST
 	evs  0,   1,   0,   0,   1,   0

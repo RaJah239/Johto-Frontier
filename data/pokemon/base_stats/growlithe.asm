@@ -1,4 +1,4 @@
-	db GROWLITHE ; 096
+	db GROWLITHE ; 095
 
 	db  55,  70,  45,  60,  70,  50 ; 350 BST
 	evs  0,   1,   0,   1,   1,   0

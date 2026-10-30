@@ -120,8 +120,6 @@ RockHeadPokemon_AI:
     db RHYDON
     db AERODACTYL
     db SUDOWOODO
-    db BAGON
-    db SHELGON
     db -1 ; end
 
 ResiliencePokemon_AI:

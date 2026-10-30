@@ -59,6 +59,10 @@ TorterraEvosAttacks:
 PikachuEvosAttacks:
 RaichuEvosAttacks:
 EeveeEvosAttacks:
+EspeonEvosAttacks:
+FlareonEvosAttacks:
+JolteonEvosAttacks:
+VaporeonEvosAttacks:
 SylveonEvosAttacks:
 TorchicEvosAttacks:
 CombuskenEvosAttacks:
@@ -94,6 +98,7 @@ CrobatEvosAttacks:
 TeddiursaEvosAttacks: ; lv 30 evo
 UrsaringEvosAttacks:
 UrsalunaEvosAttacks:
+UrsalunaBEvosAttacks:
 PhanpyEvosAttacks:
 BellsproutEvosAttacks:
 WeepinbellEvosAttacks:
@@ -101,12 +106,6 @@ VictreebelEvosAttacks:
 MareepEvosAttacks:
 FlaaffyEvosAttacks:
 AmpharosEvosAttacks:
-NidoranFEvosAttacks: ; lv 25 evo
-NidorinaEvosAttacks:
-NidoqueenEvosAttacks:
-NidoranMEvosAttacks: ; lv 25 evo
-NidorinoEvosAttacks:
-NidokingEvosAttacks:
 WimpodEvosAttacks:
 GolisopodEvosAttacks:
 MarillEvosAttacks:
@@ -160,6 +159,7 @@ SkorupiEvosAttacks:
 DrapionEvosAttacks:
 LarvestaEvosAttacks:
 VolcaronaEvosAttacks:
+IronMothEvosAttacks:
 TropiusEvosAttacks:
 MankeyEvosAttacks:
 PrimeapeEvosAttacks:
@@ -178,6 +178,7 @@ SnubbullEvosAttacks:
 GranbullEvosAttacks:
 DrowzeeEvosAttacks:
 HypnoEvosAttacks:
+MrMimeEvosAttacks:
 SudowoodoEvosAttacks:
 KoffingEvosAttacks:
 WeezingEvosAttacks:
@@ -239,19 +240,17 @@ LucarioEvosAttacks:
 BronzorEvosAttacks:
 BronzongEvosAttacks:
 SkarmoryEvosAttacks:
+AggronEvosAttacks:
+AegislashEvosAttacks:
+NidokingEvosAttacks:
 MisdreavusEvosAttacks:
 MismagiusEvosAttacks:
 ChanseyEvosAttacks:
 BlisseyEvosAttacks:
 SnorlaxEvosAttacks:
-LarvitarEvosAttacks:
-PupitarEvosAttacks:
 TyranitarEvosAttacks:
-BagonEvosAttacks:
-ShelgonEvosAttacks:
 SalamenceEvosAttacks:
-AxewEvosAttacks:
-FraxureEvosAttacks:
+MetagrossEvosAttacks:
 HaxorusEvosAttacks:
 PorygonEvosAttacks:
 Porygon2EvosAttacks:
@@ -280,6 +279,7 @@ SuicuneEvosAttacks:
 HoOhEvosAttacks:
 UnownEvosAttacks:
 VictiniEvosAttacks:
+JirachiEvosAttacks:
 CelebiEvosAttacks:
 DittoEvosAttacks:
 MewEvosAttacks:

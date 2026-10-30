@@ -1,4 +1,4 @@
-	db LUCARIO ; 203
+	db LUCARIO ; 204
 
 	db  70, 110,  70,  90, 115,  70 ; 525 BST
 	evs  0,   1,   0,   0,   1,   0

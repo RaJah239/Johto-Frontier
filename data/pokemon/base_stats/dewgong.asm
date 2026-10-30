@@ -1,4 +1,4 @@
-	db DEWGONG ; 175
+	db DEWGONG ; 176
 
 	db  120,  70,  90,  70,  60,  95 ; 505 BST
 	evs   2,   2,   2,   1,   1,   2

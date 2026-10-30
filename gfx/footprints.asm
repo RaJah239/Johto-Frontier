@@ -30,8 +30,12 @@ Footprints:
  INCBIN "gfx/footprints/pikachu.1bpp" 
  INCBIN "gfx/footprints/raichu.1bpp"
  INCBIN "gfx/footprints/eevee.1bpp"
- INCBIN "gfx/footprints/umbreon.1bpp"
+ INCBIN "gfx/footprints/espeon.1bpp"
+ INCBIN "gfx/footprints/flareon.1bpp"
+ INCBIN "gfx/footprints/jolteon.1bpp"
  INCBIN "gfx/footprints/sylveon.1bpp"
+ INCBIN "gfx/footprints/umbreon.1bpp"
+ INCBIN "gfx/footprints/vaporeon.1bpp"
  INCBIN "gfx/footprints/torchic.1bpp"
  INCBIN "gfx/footprints/combusken.1bpp"
  INCBIN "gfx/footprints/blaziken.1bpp"
@@ -65,7 +69,8 @@ Footprints:
  INCBIN "gfx/footprints/blank.1bpp" ; CROBAT
  INCBIN "gfx/footprints/teddiursa.1bpp"
  INCBIN "gfx/footprints/ursaring.1bpp" 
- INCBIN "gfx/footprints/ursaluna.1bpp"  
+ INCBIN "gfx/footprints/ursaluna.1bpp" ; URSALUNA
+ INCBIN "gfx/footprints/ursaluna.1bpp" ; URSALUNA_B
  INCBIN "gfx/footprints/phanpy.1bpp"  
  INCBIN "gfx/footprints/donphan.1bpp"  
  INCBIN "gfx/footprints/bellsprout.1bpp"
@@ -74,12 +79,6 @@ Footprints:
  INCBIN "gfx/footprints/mareep.1bpp"  
  INCBIN "gfx/footprints/flaaffy.1bpp"
  INCBIN "gfx/footprints/ampharos.1bpp"
- INCBIN "gfx/footprints/nidoran_f.1bpp"
- INCBIN "gfx/footprints/nidorina.1bpp"
- INCBIN "gfx/footprints/nidoqueen.1bpp"
- INCBIN "gfx/footprints/nidoran_m.1bpp" 
- INCBIN "gfx/footprints/nidorino.1bpp" 
- INCBIN "gfx/footprints/nidoking.1bpp" 
  INCBIN "gfx/footprints/wimpod.1bpp"
  INCBIN "gfx/footprints/golisopod.1bpp"
  INCBIN "gfx/footprints/marill.1bpp"
@@ -133,6 +132,7 @@ Footprints:
  INCBIN "gfx/footprints/skorupi_line.1bpp" ; DRAPION
  INCBIN "gfx/footprints/larvesta.1bpp" 
  INCBIN "gfx/footprints/blank.1bpp" ; VOLCARONA
+  INCBIN "gfx/footprints/blank.1bpp" ; IRON_MOTH
  INCBIN "gfx/footprints/tropius.1bpp"
  INCBIN "gfx/footprints/mankey.1bpp"
  INCBIN "gfx/footprints/primeape.1bpp"
@@ -150,7 +150,8 @@ Footprints:
  INCBIN "gfx/footprints/snubbull.1bpp" 
  INCBIN "gfx/footprints/granbull.1bpp"
  INCBIN "gfx/footprints/drowzee.1bpp"  
- INCBIN "gfx/footprints/hypno.1bpp"  
+ INCBIN "gfx/footprints/hypno.1bpp"
+ INCBIN "gfx/footprints/mr_mime.1bpp" 
  INCBIN "gfx/footprints/sudowoodo.1bpp"  
  INCBIN "gfx/footprints/blank.1bpp" ; KOFFING
  INCBIN "gfx/footprints/blank.1bpp" ; WEEZING
@@ -211,20 +212,18 @@ Footprints:
  INCBIN "gfx/footprints/lucario.1bpp"
  INCBIN "gfx/footprints/blank.1bpp" ; BRONZOR
  INCBIN "gfx/footprints/blank.1bpp" ; BRONZONG
- INCBIN "gfx/footprints/skarmory.1bpp"  
+ INCBIN "gfx/footprints/skarmory.1bpp"
+ INCBIN "gfx/footprints/aggron.1bpp"
+ INCBIN "gfx/footprints/blank.1bpp" ; AEGISLASH
+ INCBIN "gfx/footprints/nidoking.1bpp" 
  INCBIN "gfx/footprints/blank.1bpp" ; MISDREAVUS
  INCBIN "gfx/footprints/blank.1bpp" ; MISMAGIUS
  INCBIN "gfx/footprints/chansey.1bpp"  
  INCBIN "gfx/footprints/blissey.1bpp" 
  INCBIN "gfx/footprints/snorlax.1bpp" 
- INCBIN "gfx/footprints/larvitar.1bpp" 
- INCBIN "gfx/footprints/blank.1bpp" ; PUPITAR
  INCBIN "gfx/footprints/tyranitar.1bpp"
- INCBIN "gfx/footprints/bagon.1bpp"  
- INCBIN "gfx/footprints/shelgon.1bpp"
  INCBIN "gfx/footprints/salamence.1bpp"
- INCBIN "gfx/footprints/axew.1bpp"
- INCBIN "gfx/footprints/fraxure.1bpp"
+ INCBIN "gfx/footprints/metagross.1bpp"
  INCBIN "gfx/footprints/haxorus.1bpp"
  INCBIN "gfx/footprints/porygon.1bpp" 
  INCBIN "gfx/footprints/porygon2.1bpp"
@@ -254,6 +253,7 @@ Footprints:
  INCBIN "gfx/footprints/blank.1bpp" ; UNOWN
  INCBIN "gfx/footprints/blank.1bpp" ; NOWN 
  INCBIN "gfx/footprints/victini.1bpp"
+ INCBIN "gfx/footprints/jirachi.1bpp"
  INCBIN "gfx/footprints/celebi.1bpp"  
  INCBIN "gfx/footprints/blank.1bpp" ; DITTO
  INCBIN "gfx/footprints/mew.1bpp"  

@@ -1,4 +1,4 @@
-	db GLISCOR ; 103
+	db GLISCOR ; 102
 
 	db  75,  95, 125,  95,  45,  75 ; 510 BST
 	evs  1,   2,   3,   2,   0,   1

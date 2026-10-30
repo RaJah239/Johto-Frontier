@@ -1,4 +1,4 @@
-	db HORSEA ; 176
+	db HORSEA ; 177
 
 	db  30,  40,  70,  60,  70,  30 ; 300 BST
 	evs  0,   0,   1,   1,   1,   0

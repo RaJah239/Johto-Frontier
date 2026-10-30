@@ -1,4 +1,4 @@
-	db VENIPEDE ; 119
+	db VENIPEDE ; 118
 
 	db  30,  44,  60,  60,  27,  39 ; 260 BST
 	evs  0,   0,   1,   1,   0,   0

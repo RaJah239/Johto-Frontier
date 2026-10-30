@@ -1,4 +1,4 @@
-	db PILOSWINE ; 193
+	db PILOSWINE ; 194
 
 	db 100, 100,  80,  50,  60,  60 ; 450 BST
 	evs  2,   2,   1,   0,   1,   1

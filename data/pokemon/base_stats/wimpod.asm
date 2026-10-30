@@ -1,4 +1,4 @@
-	db WIMPOD ; 075
+	db WIMPOD ; 074
 
 	db  25,  35,  40,  80,  20,  30 ; 230 BST
 	evs  0,   0,   0,   1,   0,   0

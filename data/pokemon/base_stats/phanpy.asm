@@ -1,4 +1,4 @@
-	db PHANPY ; 061
+	db PHANPY ; 066
 
 	db  80,  65,  60,  40,  40,  45 ; 330 BST
 	evs  1,   1,   1,   0,   0,   0

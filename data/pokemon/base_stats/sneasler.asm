@@ -1,4 +1,4 @@
-	db SNEASLER ; 197
+	db SNEASLER ; 198
 
 	db  80, 130,  60, 120,  40,  80 ; 510 BST
 	evs  1,   3,   1,   3,   0,   1

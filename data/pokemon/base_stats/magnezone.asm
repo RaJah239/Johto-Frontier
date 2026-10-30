@@ -1,4 +1,4 @@
-	db MAGNEZONE ; 162
+	db MAGNEZONE ; 163
 
 	db  70,  70, 115,  60, 130,  90 ; 535 BST
 	evs  1,   1,   2,   1,   3,   2

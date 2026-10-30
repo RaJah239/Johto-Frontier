@@ -1,4 +1,4 @@
-	db SOLROCK ; 182
+	db SOLROCK ; 183
 
 	db  100, 105,  85,  70,  55,  85 ; 500 BST
 	evs   2,   2,   1,   1,   0,   1

@@ -1,4 +1,4 @@
-	db COMBUSKEN ; 028
+	db COMBUSKEN ; 032
 
 	db  60,  85,  60,  55,  85,  60 ; 405 BST
 	evs  1,   1,   1,   0,   1,   1

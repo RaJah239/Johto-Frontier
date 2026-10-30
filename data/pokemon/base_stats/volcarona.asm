@@ -1,7 +1,7 @@
-	db VOLCARONA ; 127
+	db VOLCARONA ; 126
 
-	db  85,  60,  65, 135, 105, 100 ; 550 BST
-	evs  2,   1,   1,   3,   2,   2
+	db  85,  60,  65, 100, 135, 105 ; 550 BST
+	evs  1,   1,   1,   2,   3,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db BUG, FIRE ; type

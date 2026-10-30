@@ -1,4 +1,4 @@
-	db MAGNETON ; 161
+	db MAGNETON ; 162
 
 	db  50,  60,  95,  70, 120,  70 ; 465 BST
 	evs  0,   1,   2,   1,   3,   1

@@ -1,4 +1,4 @@
-	db LITWICK ; 151
+	db LITWICK ; 152
 
 	db  50,  30,  55,  20,  65,  55 ; 275 BST
 	evs  0,   0,   0,   0,   1,   0

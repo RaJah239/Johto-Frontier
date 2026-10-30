@@ -1,4 +1,4 @@
-	db SHROOMISH ; 115
+	db SHROOMISH ; 114
 
 	db  60,  40,  60,  35,  45,  60 ; 300 BST
 	evs  1,   0,   1,   0,   0,   1

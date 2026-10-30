@@ -1,4 +1,4 @@
-	db KIRLIA ; 036
+	db KIRLIA ; 040
 
 	db  38,  35,  35,  50,  65,  55 ; 278 BST
 	evs  0,   0,   0,   0,   1,   0

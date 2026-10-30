@@ -1,4 +1,4 @@
-	db GHOLDENGO ; 232
+	db GHOLDENGO ; 231
 
 	;   hp  atk  def  spd  sat  sdf
 	db  87,  60,  95,  84, 133,  91 ; 550 BST

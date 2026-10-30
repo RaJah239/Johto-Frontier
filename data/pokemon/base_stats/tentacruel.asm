@@ -1,4 +1,4 @@
-	db TENTACRUEL ; 173
+	db TENTACRUEL ; 174
 
 	db  80,  70,  65, 100,  80, 120 ; 515 BST
 	evs  1,   1,   1,   2,   1,   3

@@ -1,4 +1,4 @@
-	db BALTOY ; 200
+	db BALTOY ; 201
 
 	db  40,  40,  55,  55,  40,  70 ; 300 BST
 	evs  0,   0,   0,   0,   0,   1

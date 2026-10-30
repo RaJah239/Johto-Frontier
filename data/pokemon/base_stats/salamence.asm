@@ -13,7 +13,7 @@
 	INCBIN "gfx/pokemon/salamence/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)
 	db GROWTH_SLOW ; growth rate
-	dn EGG_DRAGON, EGG_DRAGON ; egg groups
+	dn EGG_NONE, EGG_NONE ; egg groups
 
 	; tm/hm learnset
 	tmhm

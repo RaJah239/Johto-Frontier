@@ -267,12 +267,6 @@ GetGender:
 ; always female
 	cp MILTANK
 	jr z, .AlwaysFemale
-	cp NIDORAN_F
-	jr z, .AlwaysFemale
-	cp NIDORINA
-	jr z, .AlwaysFemale
-	cp NIDOQUEEN
-	jr z, .AlwaysFemale
 	cp CHANSEY
 	jr z, .AlwaysFemale
 	cp BLISSEY
@@ -280,13 +274,11 @@ GetGender:
 	cp JYNX
 	jr z, .AlwaysFemale
 ; always male
-	cp NIDORAN_M
-	jr z, .AlwaysMale
-	cp NIDORINO
-	jr z, .AlwaysMale
 	cp NIDOKING
 	jr z, .AlwaysMale
 	cp TAUROS
+	jr z, .AlwaysMale
+	cp MR__MIME
 	jr z, .AlwaysMale
 
 ; The Attack DV's top bit picks the gender: clear = male, set = female.

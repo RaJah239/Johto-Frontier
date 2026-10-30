@@ -25,8 +25,12 @@ PokedexDataPointerTable:
  	dba PikachuPokedexEntry
  	dba RaichuPokedexEntry
  	dba EeveePokedexEntry
- 	dba UmbreonPokedexEntry
+ 	dba EspeonPokedexEntry
+  	dba FlareonPokedexEntry
+   	dba JolteonPokedexEntry
  	dba SylveonPokedexEntry
+  	dba UmbreonPokedexEntry
+   	dba VaporeonPokedexEntry
  	dba TorchicPokedexEntry
  	dba CombuskenPokedexEntry
  	dba BlazikenPokedexEntry
@@ -61,6 +65,7 @@ PokedexDataPointerTable:
  	dba TeddiursaPokedexEntry
  	dba UrsaringPokedexEntry
  	dba UrsalunaPokedexEntry
+ 	dba UrsalunaBPokedexEntry
  	dba PhanpyPokedexEntry
  	dba DonphanPokedexEntry
  	dba BellsproutPokedexEntry
@@ -69,12 +74,6 @@ PokedexDataPointerTable:
  	dba MareepPokedexEntry
  	dba FlaaffyPokedexEntry
  	dba AmpharosPokedexEntry
- 	dba NidoranFPokedexEntry
- 	dba NidorinaPokedexEntry
- 	dba NidoqueenPokedexEntry
- 	dba NidoranMPokedexEntry
- 	dba NidorinoPokedexEntry
- 	dba NidokingPokedexEntry
  	dba WimpodPokedexEntry
  	dba GolisopodPokedexEntry
  	dba MarillPokedexEntry
@@ -128,6 +127,7 @@ PokedexDataPointerTable:
  	dba DrapionPokedexEntry
  	dba LarvestaPokedexEntry
  	dba VolcaronaPokedexEntry
+ 	dba IronMothPokedexEntry
  	dba TropiusPokedexEntry
  	dba MankeyPokedexEntry
  	dba PrimeapePokedexEntry
@@ -146,6 +146,7 @@ PokedexDataPointerTable:
  	dba GranbullPokedexEntry
  	dba DrowzeePokedexEntry
  	dba HypnoPokedexEntry
+ 	dba MrMimePokedexEntry
  	dba SudowoodoPokedexEntry
  	dba KoffingPokedexEntry
  	dba WeezingPokedexEntry
@@ -207,20 +208,18 @@ PokedexDataPointerTable:
  	dba BronzorPokedexEntry
  	dba BronzongPokedexEntry
  	dba SkarmoryPokedexEntry
+ 	dba AggronPokedexEntry
+ 	dba AegislashPokedexEntry
+   	dba NidokingPokedexEntry
  	dba MisdreavusPokedexEntry
  	dba MismagiusPokedexEntry
  	dba ChanseyPokedexEntry
  	dba BlisseyPokedexEntry
  	dba SnorlaxPokedexEntry
- 	dba LarvitarPokedexEntry
- 	dba PupitarPokedexEntry
  	dba TyranitarPokedexEntry
- 	dba BagonPokedexEntry
- 	dba ShelgonPokedexEntry
- 	dba SalamencePokedexEntry
- 	dba AxewPokedexEntry
- 	dba FraxurePokedexEntry
- 	dba HaxorusPokedexEntry
+  	dba SalamencePokedexEntry
+  	dba MetagrossPokedexEntry
+  	dba HaxorusPokedexEntry
  	dba PorygonPokedexEntry
  	dba Porygon2PokedexEntry
  	dba PorygonZPokedexEntry
@@ -249,6 +248,7 @@ PokedexDataPointerTable:
  	dba UnownPokedexEntry
  	dba NownPokedexEntry
  	dba VictiniPokedexEntry
+ 	dba JirachiPokedexEntry
  	dba CelebiPokedexEntry
  	dba DittoPokedexEntry
  	dba MewPokedexEntry

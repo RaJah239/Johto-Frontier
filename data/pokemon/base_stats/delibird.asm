@@ -1,4 +1,4 @@
-	db DELIBIRD ; 186
+	db DELIBIRD ; 187
 
 	db  60, 100,  45, 125, 125,  45 ; 500 BST
 	evs  1,   2,   0,   3,   3,   0

@@ -1,4 +1,4 @@
-	db QUAGSIRE ; 101
+	db QUAGSIRE ; 100
 
 	db   105,  95,  95,  40,  75,  95 ; 505 BST
 	evs    2,   2,   2,   0,   1,   2

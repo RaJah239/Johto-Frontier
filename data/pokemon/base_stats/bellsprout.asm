@@ -1,4 +1,4 @@
-	db BELLSPROUT ; 063
+	db BELLSPROUT ; 068
 
 	db  50,  75,  35,  40,  70,  30 ; 300 BST
 	evs  0,   1,   0,   0,   1,   0

@@ -1,4 +1,4 @@
-	db UMBREON ; 025
+	db UMBREON ; 029
 
 	db  95,  65, 110,  65,  60, 130 ; 525 BST
 	evs  2,   1,   2,   1,   1,   3

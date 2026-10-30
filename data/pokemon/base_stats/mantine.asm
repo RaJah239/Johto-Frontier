@@ -1,4 +1,4 @@
-	db MANTINE ; 171
+	db MANTINE ; 172
 
 	db  85,  70,  65, 130, 100,  50 ; 500 BST
 	evs  1,   1,   1,   3,   2,   0

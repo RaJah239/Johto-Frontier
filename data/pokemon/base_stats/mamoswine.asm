@@ -1,4 +1,4 @@
-	db MAMOSWINE ; 194
+	db MAMOSWINE ; 195
 
 	db 110, 130,  80,  75,  60,  80 ; 535 BST
 	evs  2,   3,   1,   1,   1,   1

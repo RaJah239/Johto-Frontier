@@ -1,4 +1,4 @@
-	db OMANYTE ; 224
+	db OMANYTE ; 223
 
 	db  35,  40, 100,  35,  90,  55 ; 355 BST
 	evs  0,   0,   2,   0,   2,   0

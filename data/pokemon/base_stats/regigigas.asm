@@ -1,4 +1,4 @@
-	db REGIGIGAS ; 237
+	db REGIGIGAS ; 236
 
 	db 110, 160, 110, 110,  80, 110 ; 680 BST
 	evs  2,   3,   2,   2,   1,   2

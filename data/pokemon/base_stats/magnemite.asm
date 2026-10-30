@@ -1,4 +1,4 @@
-	db MAGNEMITE ; 160
+	db MAGNEMITE ; 161
 
 	db  25,  35,  70,  45,  95,  55 ; 325 BST
 	evs  0,   0,   1,   0,   2,   0

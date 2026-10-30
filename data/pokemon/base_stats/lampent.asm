@@ -1,4 +1,4 @@
-	db LAMPENT ; 152
+	db LAMPENT ; 153
 
 	db  60,  40,  60,  55,  95,  60 ; 370 BST
 	evs  1,   0,   1,   0,   2,   1

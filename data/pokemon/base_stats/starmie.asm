@@ -1,4 +1,4 @@
-	db STARMIE ; 166
+	db STARMIE ; 167
 
 	db  60,  75,  85, 115, 100,  85 ; 520 BST
 	evs  1,   1,   1,   2,   2,   1

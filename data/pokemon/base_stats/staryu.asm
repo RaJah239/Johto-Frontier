@@ -1,4 +1,4 @@
-	db STARYU ; 165
+	db STARYU ; 166
 
 	db  30,  45,  55,  85,  70,  55 ; 340 BST
 	evs  0,   0,   0,   1,   1,   0

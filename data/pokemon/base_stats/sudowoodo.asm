@@ -1,4 +1,4 @@
-	db SUDOWOODO ; 146
+	db SUDOWOODO ; 147
 
 	;   hp  atk  def  spd  sat  sdf
 	db  75, 115,  78, 112,  60,  65 ; 505 BST

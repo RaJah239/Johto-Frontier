@@ -1,4 +1,4 @@
-	db ARIADOS ; 118
+	db ARIADOS ; 117
 
 	;   hp  atk  def  spd  sat  sdf
 	db  70, 120,  70, 120,  55,  70 ; 505 BST

@@ -10,8 +10,6 @@
 ;   db RHYDON
 ;   db AERODACTYL
 ;   db SUDOWOODO
-;   db BAGON
-;   db SHELGON
 ;   db -1 ; end
 
 RockHeadPokemon:
@@ -21,6 +19,4 @@ RockHeadPokemon:
 ;    db RHYDON
 ;    db AERODACTYL
 ;    db SUDOWOODO
-;    db BAGON
-;    db SHELGON
     db -1 ; end

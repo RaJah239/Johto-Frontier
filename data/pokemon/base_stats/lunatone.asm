@@ -1,4 +1,4 @@
-	db LUNATONE ; 183
+	db LUNATONE ; 184
 
 	db  100, 55,  85,  70, 105,  85 ; 500 BST
 	evs   2,  0,   1,   1,   2,   1

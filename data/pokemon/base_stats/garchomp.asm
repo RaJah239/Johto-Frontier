@@ -1,4 +1,4 @@
-	db GARCHOMP ; 106
+	db GARCHOMP ; 105
 
 	db 108, 130,  95, 102,  80,  85 ; 600 BST
 	evs  2,   3,   2,   2,   1,   1

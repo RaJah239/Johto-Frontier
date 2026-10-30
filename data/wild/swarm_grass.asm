@@ -2,33 +2,33 @@
 ; TODOTEXT adjust these when proper encounters are added
 SwarmGrassWildMons:
 
-; Bagon swarm
+; Bagon swarm TODOTEXT remove this warm
 	map_id DRAGONS_DEN_B1F
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 3, BAGON
-	db 3, BAGON
-	db 2, BAGON
-	db 2, BAGON
-	db 2, BAGON
-	db 4, BAGON
-	db 4, BAGON
+	db 3, HAXORUS
+	db 3, HAXORUS
+	db 2, HAXORUS
+	db 2, HAXORUS
+	db 2, HAXORUS
+	db 4, HAXORUS
+	db 4, HAXORUS
 	; day
-	db 3, BAGON
-	db 3, BAGON
-	db 2, BAGON
-	db 2, BAGON
-	db 2, BAGON
-	db 4, BAGON
-	db 4, BAGON
+	db 3, HAXORUS
+	db 3, HAXORUS
+	db 2, HAXORUS
+	db 2, HAXORUS
+	db 2, HAXORUS
+	db 4, HAXORUS
+	db 4, HAXORUS
 	; nite
-	db 3, BAGON
-	db 3, BAGON
-	db 2, BAGON
-	db 2, BAGON
-	db 2, BAGON
-	db 4, BAGON
-	db 4, BAGON
+	db 3, HAXORUS
+	db 3, HAXORUS
+	db 2, HAXORUS
+	db 2, HAXORUS
+	db 2, HAXORUS
+	db 4, HAXORUS
+	db 4, HAXORUS
 
 ; Bellsprout swarm
 	map_id ROUTE_3
@@ -310,33 +310,33 @@ SwarmGrassWildMons:
 	db 5, HOUNDOUR
 	db 5, HOUNDOUR
 
-; Larvitar swarm
+; Larvitar swarm ; TODOTEXT remove this swarm
 	map_id VICTORY_ROAD
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 5, LARVITAR
-	db 5, LARVITAR
-	db 5, LARVITAR
-	db 5, LARVITAR
-	db 5, LARVITAR
-	db 5, LARVITAR
-	db 5, LARVITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
 	; day
-	db 5, LARVITAR
-	db 5, LARVITAR
-	db 5, LARVITAR
-	db 5, LARVITAR
-	db 5, LARVITAR
-	db 5, LARVITAR
-	db 5, LARVITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
 	; nite
-	db 5, LARVITAR
-	db 5, LARVITAR
-	db 5, LARVITAR
-	db 5, LARVITAR
-	db 5, LARVITAR
-	db 5, LARVITAR
-	db 5, LARVITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
+	db 5, TYRANITAR
 
 ; Meowth swarm
 	map_id ROUTE_6
