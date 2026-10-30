@@ -175,8 +175,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_FORESIGHT           ; a7
 	const BATTLE_ANIM_OBJ_RAPID_SPIN          ; a8
 	const BATTLE_ANIM_OBJ_SWAGGER             ; a9
-	const BATTLE_ANIM_OBJ_BELLY_DRUM_HAND     ; aa
-	const BATTLE_ANIM_OBJ_BELLY_DRUM_NOTE     ; ab
 	const BATTLE_ANIM_OBJ_MEAN_LOOK           ; ac
 	const BATTLE_ANIM_OBJ_SHOOTING_SPARKLE    ; ae
 	const BATTLE_ANIM_OBJ_RAIN                ; af
@@ -209,7 +207,6 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_ROCK_TOMB
 	const BATTLE_ANIM_OBJ_HYDRO_PUMP_SHOT
 	const ANIM_OBJ_POWER_GEM2
-	const BATTLE_ANIM_OBJ_EGG_BOMB
 	const BATTLE_ANIM_OBJ_SHOOTING_HEART
 	const ANIM_OBJ_UNOWN
 	const BATTLE_ANIM_OBJ_STONE_EDGE_STILL
