@@ -13,6 +13,8 @@ Ongoing Open World Johto region only game where you can do whatever you want, wh
 # Pokédex
 <img width="1198" height="684" alt="Johto Frontier&#39;s Dex" src="https://github.com/RaJah239/Johto-Frontier/blob/000-Johto-Frontier/files/Johto%20Frontier%20Dex/Johto%20Frontier's%20Dex.png" />
 
+# [Move Dex](https://github.com/RaJah239/Johto-Frontier/blob/000-Johto-Frontier/files/MOVE_DEX.asm)
+
 # [Battle AI](https://github.com/RaJah239/Johto-Frontier/blob/000-Johto-Frontier/files/BATTLE%20AI.md)
 
 # [Move Animations](https://drive.google.com/drive/folders/1zEIR8OtEq_fpNl1VmUGGD8zOiNRnbk5U?usp=drive_link)
