@@ -1054,6 +1054,16 @@ FindOTMonWithPriorityMove:
 	or [hl]
 	pop bc
 	jr z, .next
+
+	; remember this candidate's species
+	push bc
+	ld hl, wOTPartyMon1
+	ld a, b
+	call GetPartyLocation
+	ld a, [hl]
+	ld [wCurPartySpecies], a
+	pop bc
+
 	push bc
 	ld hl, wOTPartyMon1Moves
 	ld a, b
@@ -1086,6 +1096,37 @@ FindOTMonWithPriorityMove:
 	ret
 
 .not_found
+	; species-specific priority-style moves
+	ld a, [wCurPartySpecies]
+	cp DROWZEE
+	jr z, .zen_priority
+	cp HYPNO
+	jr z, .zen_priority
+	cp BLASTOISE
+	jr z, .iron_priority
+	jr .nf_continue
+
+.zen_priority
+	ld a, c
+	cp ZEN_HEADBUTT
+	jr z, .found_species
+	jr .nf_continue
+
+.iron_priority
+	ld a, c
+	cp IRON_HEAD
+	jr z, .found_species
+	jr .nf_continue
+
+.found_species
+	pop bc
+	pop hl
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
+	scf
+	ret
+
+.nf_continue
 	pop bc
 	pop hl
 	inc hl
@@ -1095,7 +1136,7 @@ FindOTMonWithPriorityMove:
 	ld a, [wEnemySwitchCandidate]
 	inc a
 	ld [wEnemySwitchCandidate], a
-	jr .loop
+	jmp .loop
 
 .none
 	and a
