@@ -2503,12 +2503,26 @@ GetFailureResultText:
 	ret z
 
 	ld hl, wCurDamage
+	; divide wCurDamage by 3
+	xor a
+	ldh [hDividend + 0], a
+	ldh [hDividend + 1], a
+	ld a, [hli]
+	ldh [hDividend + 2], a
+	ld a, [hl]
+	ldh [hDividend + 3], a
+	ld a, 3
+	ldh [hDivisor], a
+	ld b, 4
+	call Divide
+	ldh a, [hQuotient + 2]
+	ld [wCurDamage], a
+	ldh a, [hQuotient + 3]
+	ld [wCurDamage + 1], a
+	; reload
+	ld hl, wCurDamage
 	ld a, [hli]
 	ld b, [hl]
-rept 3
-	srl a
-	rr b
-endr
 	ld [hl], b
 	dec hl
 	ld [hli], a
