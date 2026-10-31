@@ -71,9 +71,9 @@ AI_SwitchOrTryItem:
 	jr nc, .enemy_is_set_up
 
 	; Don't immediately chain-switch: only allow this after the current mon
-	; has been active for at least two turns
+	; has been active for at least one turn
 	ld a, [wEnemyTurnsTaken]
-	cp 2
+	cp 1
 	jr c, .enemy_is_set_up
 
 	; Only switch if the player's last move was a damaging attack.
