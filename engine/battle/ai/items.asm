@@ -43,7 +43,7 @@ AI_SwitchOrTryItem:
 
 	; don't switch while our own mon is boosted (+3 or more in any stat)
 	call CheckEnemyStatAtPlus3
-	jr c, DontSwitch
+	jmp c, DontSwitch
 
 	; Clean Sweep: if the player's active mon has +4 or more in any stat,
 	; switch in a fresh CleanSweep mon, even if one is already out.
@@ -86,13 +86,32 @@ AI_SwitchOrTryItem:
 	ld hl, Moves
 	ld bc, MOVE_LENGTH
 	call AddNTimes
+	; MOVE_TYPE is at offset 1.
 	inc hl
+	ld a, [hl]
+	ld d, a
+	; MOVE_POWER is at offset 2.
 	inc hl
 	ld a, [hl]
 	pop bc
 	pop hl
 	and a
 	jr z, .no_moveset_switch
+
+	; Only switch if that last attack is super-effective against the
+	; current enemy (i.e. the current matchup is unfavourable).
+	push hl
+	push de
+	push bc
+	ld hl, wEnemyMonType
+	callfar CheckTypeMatchup
+	ld a, [wTypeMatchup]
+	pop bc
+	pop de
+	pop hl
+	cp SUPER_EFFECTIVE
+	jr c, .no_moveset_switch
+
 	; ~20% chance to switch (switch only on carry of AI_80_20).
 	call AI_80_20
 	jr nc, .no_moveset_switch
