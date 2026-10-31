@@ -3566,14 +3566,20 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 	jr .CritCap
 
 .regular_crit_damage
-; critcal hits do 100% more damage
-	ldh a, [hQuotient + 3]
-	add a
-	ldh [hQuotient + 3], a
-
+; critical hits do 1.5x damage
+	xor a
+	ldh [hMultiplicand + 0], a
 	ldh a, [hQuotient + 2]
-	rl a
-	ldh [hQuotient + 2], a
+	ldh [hMultiplicand + 1], a
+	ldh a, [hQuotient + 3]
+	ldh [hMultiplicand + 2], a
+	ld a, 15
+	ldh [hMultiplier], a
+	call Multiply
+	ld a, 10
+	ldh [hDivisor], a
+	ld b, 4
+	call Divide
 
 ; Cap at $ffff.
 .CritCap
