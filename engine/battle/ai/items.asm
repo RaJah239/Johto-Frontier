@@ -35,11 +35,11 @@ AI_SwitchOrTryItem:
 
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
-	jr nz, DontSwitch
+	jmp nz, DontSwitch
 
 	ld a, [wEnemyWrapCount]
 	and a
-	jr nz, DontSwitch
+	jmp nz, DontSwitch
 
 	; don't switch while our own mon is boosted (+3 or more in any stat)
 	call CheckEnemyStatAtPlus3
@@ -59,6 +59,51 @@ AI_SwitchOrTryItem:
 	jmp AI_TrySwitch
 
 .no_clean_sweep_switch
+	; If the enemy is not set up (+1 Atk/SpAtk),
+	; 80% of the time switch to a mon that answers the player's moveset
+	; (immune/resists all, super-effective or least damage),
+	; per the moveset-based switch selection
+	ld a, [wEnemyAtkLevel]
+	cp BASE_STAT_LEVEL + 1
+	jr nc, .enemy_is_set_up
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL + 1
+	jr nc, .enemy_is_set_up
+
+	; Don't immediately chain-switch: only allow this after the current mon
+	; has been active for at least two turns
+	ld a, [wEnemyTurnsTaken]
+	cp 2
+	jr c, .enemy_is_set_up
+
+	; Only switch if the player's last move was a damaging attack.
+	ld a, [wLastPlayerMove]
+	and a
+	jr z, .no_moveset_switch
+	push hl
+	push bc
+	dec a
+	ld hl, Moves
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	inc hl
+	inc hl
+	ld a, [hl]
+	pop bc
+	pop hl
+	and a
+	jr z, .no_moveset_switch
+	; ~20% chance to switch (switch only on carry of AI_80_20).
+	call AI_80_20
+	jr nc, .no_moveset_switch
+	callfar FindMonInOTPartyToSwitchIntoBattle
+	inc b
+	ld a, b
+	ld [wEnemySwitchMonIndex], a
+	jmp AI_TrySwitch
+
+.no_moveset_switch
+.enemy_is_set_up
 	; always load the first trainer class in wTrainerClass for Battle Tower trainers
 	ld hl, TrainerClassAttributes + TRNATTR_AI_ITEM_SWITCH
 	ld a, [wInBattleTowerBattle]
