@@ -199,7 +199,7 @@ AI_Smart_KingsShield:
 
 .massiveEncourage
 ; this must overcome encouragement from a potential ko
-    jp DoIt
+    jmp DoIt
 
 .discourage
     inc [hl]
@@ -2188,22 +2188,22 @@ AI_Smart_Paralyze:
 ; never use if player already has a status
 	ld a, [wBattleMonStatus]
 	and a
-	jr nz, .discourage
+	jmp nz, .discourage
 
 ; never use if player has substitute
 	ld a, [wPlayerSubStatus4]
 	bit SUBSTATUS_SUBSTITUTE, a
-	jr nz, .discourage
+	jmp nz, .discourage
 
 ; never use if player has safeguard
 	ld a, [wPlayerScreens]
 	bit SCREENS_SAFEGUARD, a
-	jr nz, .discourage
+	jmp nz, .discourage
 
 ; never use while in trick room
 	ld a, [wTrickRoomCount]
 	and a
-	jr nz, .discourage
+	jmp nz, .discourage
 
 ; never use against Pokemon immune to status
 	ld a, [wBattleMonSpecies]
@@ -2211,7 +2211,7 @@ AI_Smart_Paralyze:
 	ld hl, SerenityPokemon_AI
 	call IsInByteArray
 	pop hl
-	jr c, .discourage
+	jmp c, .discourage
 
 ; never use Thunder Wave against Ground types
 	ld a, [wEnemyMoveStruct + MOVE_ANIM]
@@ -2219,17 +2219,74 @@ AI_Smart_Paralyze:
 	jr nz, .not_thunder_wave
 	ld a, [wBattleMonType1]
 	cp GROUND
-	jr z, .discourage
+	jmp z, .discourage
 	ld a, [wBattleMonType2]
 	cp GROUND
-	jr z, .discourage
+	jmp z, .discourage
 
+	; If this Pokemon has multiple status moves and is slower,
+	; strongly prioritize Thunder Wave over other status moves.
+	push hl
+	push de
+	push bc
+	ld hl, wEnemyMonMoves
+	ld b, NUM_MOVES
+	ld c, 0
+.tw_count_loop
+	ld a, [hli]
+	and a
+	jr z, .tw_count_done
+	push hl
+	push bc
+	dec a
+	ld hl, Moves
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld de, wEnemyMoveStruct
+	ld a, BANK(Moves)
+	call FarCopyBytes
+	pop bc
+	pop hl
+	ld a, [wEnemyMoveStruct + MOVE_POWER]
+	and a
+	jr nz, .tw_not_status
+	inc c
+.tw_not_status
+	dec b
+	jr nz, .tw_count_loop
+.tw_count_done
+	ld a, c
+	pop bc
+	pop de
+	pop hl
+	cp 2
+	jr c, .not_prioritize_tw
+	call DoesAIOutSpeedPlayer
+	jr c, .not_prioritize_tw
+	rept 20
+	dec [hl]
+	endr
+	ret
+
+.not_prioritize_tw
 .not_thunder_wave
 ; encourage if enemy is slower than player.
 ; 50% chance to discourage otherwise
 	call DoesAIOutSpeedPlayer
 	jr c, .AIFaster
 
+; Prioritize Thunder Wave and Stun Spore whenever the enemy is slower
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	cp THUNDER_WAVE
+	jr nz, .not_tw_ss_slower
+	cp STUN_SPORE
+	jr nz, .not_tw_ss_slower
+	rept 20
+	dec [hl]
+	endr
+	ret
+
+.not_tw_ss_slower
 ; 50% to discourage if player knows sub
 	ld b, EFFECT_SUBSTITUTE
 	call PlayerHasMoveEffect
