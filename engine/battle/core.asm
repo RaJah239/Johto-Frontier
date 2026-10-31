@@ -3484,11 +3484,6 @@ ReplayEnemyCry:
 	xor a
 	ld [wPlayerFaintedByEnemy], a
 
-	; knockout flair option
-	ld a, [wTextboxFlags]
-	bit KNOCKOUT_FLAIR_F, a
-	ret z
-
 	; only trainer battles have a foe to replay the cry for
 	ld a, [wBattleMode]
 	cp TRAINER_BATTLE

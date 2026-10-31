@@ -1751,7 +1751,6 @@ wTextboxFlags::
 ;   wOptions2 FAST_BOOT (= In Game); neither bit set = Intro
 ; REMATCH_NOYES_F: "Rematch Prompt" = NoOrYes; clear = the yesorno
 ;   command, set = nooryes (see RematchScript)
-; KNOCKOUT_FLAIR_F: replay the foe's cry when it KOs the player
 	db
 
 wOptions2::
