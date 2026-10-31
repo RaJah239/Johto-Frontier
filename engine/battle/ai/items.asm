@@ -33,6 +33,39 @@ AI_SwitchOrTryItem:
 	farcall CheckEnemyLockedIn
 	ret nz
 
+	; If the enemy is choice-locked into a move that doesn't affect or is
+	; not very effective, always switch
+	ld hl, wEnemySubStatus5
+	bit SUBSTATUS_ENCORED, [hl]
+	jr z, .not_choice_locked_nve
+	ld a, [wEnemyEncoreCount]
+	cp 255
+	jr nz, .not_choice_locked_nve
+	ld a, [wCurEnemyMove]
+	and a
+	jr z, .not_choice_locked_nve
+	push hl
+	ld a, 1
+	ldh [hBattleTurn], a
+	ld a, [wCurEnemyMove]
+	call AIGetEnemyMove
+	callfar BattleCheckTypeMatchup
+	pop hl
+	ld a, [wTypeMatchup]
+	cp EFFECTIVE
+	jr c, .do_choice_switch
+	and a
+	jr z, .do_choice_switch
+	jr .not_choice_locked_nve
+
+.do_choice_switch
+	callfar FindMonInOTPartyToSwitchIntoBattle
+	inc b
+	ld a, b
+	ld [wEnemySwitchMonIndex], a
+	jmp AI_TrySwitch
+
+.not_choice_locked_nve
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
 	jmp nz, DontSwitch
