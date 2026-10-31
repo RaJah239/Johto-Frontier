@@ -4011,10 +4011,6 @@ SpikesDamage:
 	farcall EntryAbilities2NonLink
 
 .linked_battle
-	ld a, [wBattleHasJustStarted]
-	and a
-	ret nz
-
 	call GetCurrentMon
 	ld hl, HazardGuardMons
 	call IsInByteArray
@@ -4056,6 +4052,7 @@ SpikesDamage:
 	ret z
 	inc de
 	ld a, [de]
+	dec de
 	cp FLYING
 	ret z
 
