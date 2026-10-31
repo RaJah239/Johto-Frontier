@@ -66,6 +66,18 @@ AI_SwitchOrTryItem:
 	jmp AI_TrySwitch
 
 .not_choice_locked_nve
+	; if the player is low on HP (< 1/4), prioritize switching to an OT mon
+	; that carries a priority move to finish them off
+	farcall AICheckPlayerQuarterHP
+	jr nc, .not_low_hp_priority
+	call FindOTMonWithPriorityMove
+	jr nc, .not_low_hp_priority
+	inc b
+	ld a, b
+	ld [wEnemySwitchMonIndex], a
+	jmp AI_TrySwitch
+
+.not_low_hp_priority
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
 	jmp nz, DontSwitch
@@ -1009,3 +1021,82 @@ PrintText_UsedItemOn:
 EnemyUsedOnText:
 	text_far _EnemyUsedOnText
 	text_end
+
+PriorityMovesList:
+	db QUICK_ATTACK
+	db EXTREMESPEED
+	db ICE_SHARD
+	db BULLET_PUNCH
+	db MACH_PUNCH
+	db SUCKER_PUNCH
+	db AQUA_JET
+	db -1 ; end
+
+FindOTMonWithPriorityMove:
+; Returns carry and 0-based party index in b if an alive OT mon (not the
+; current one) has a priority move. Otherwise returns nc.
+	xor a
+	ld [wEnemySwitchCandidate], a
+.loop
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
+	ld a, [wOTPartyCount]
+	cp b
+	jr z, .none
+	ld a, [wCurOTMon]
+	cp b
+	jr z, .next
+	push bc
+	ld hl, wOTPartyMon1HP
+	ld a, b
+	call GetPartyLocation
+	ld a, [hli]
+	or [hl]
+	pop bc
+	jr z, .next
+	push bc
+	ld hl, wOTPartyMon1Moves
+	ld a, b
+	call GetPartyLocation
+	pop bc
+	ld d, NUM_MOVES
+.move_loop
+	ld a, [hl]
+	and a
+	jr z, .next
+	push hl
+	push bc
+	ld c, a
+	ld hl, PriorityMovesList
+.list_loop
+	ld a, [hl]
+	cp -1
+	jr z, .not_found
+	cp c
+	jr z, .found
+	inc hl
+	jr .list_loop
+
+.found
+	pop bc
+	pop hl
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
+	scf
+	ret
+
+.not_found
+	pop bc
+	pop hl
+	inc hl
+	dec d
+	jr nz, .move_loop
+.next
+	ld a, [wEnemySwitchCandidate]
+	inc a
+	ld [wEnemySwitchCandidate], a
+	jr .loop
+
+.none
+	and a
+	ret
