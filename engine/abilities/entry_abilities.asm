@@ -146,6 +146,13 @@ HandleDefenseMode:
 	call IsInByteArray
 	ret nc
 
+	; call ClearFailures to be put in home.asm
+	; Clear any stale failure flags so the stat boosts always apply.
+	xor a
+	ld [wFailedMessage], a
+	ld [wEffectFailed], a
+	ld [wAttackMissed], a
+
 	ShowActivationOrEntryOrKOAbilityPopup DefenseText
 
     farcall BattleCommand_DefenseUp2
