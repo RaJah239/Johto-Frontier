@@ -166,6 +166,9 @@ SECTION "Battle Core", ROMX
 INCLUDE "engine/battle/core.asm"
 INCLUDE "data/battle/effect_command_pointers.asm"
 
+SECTION "AI Switch-In", ROMX
+INCLUDE "engine/battle/ai/switch_in.asm"
+
 SECTION "Battle Core 2", ROMX
 INCLUDE "engine/battle/core2.asm"
 
