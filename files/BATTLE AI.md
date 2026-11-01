@@ -1,42 +1,60 @@
 # Battle AI
 
-## General Information
-- The AI *does not* read the player’s input
-- The AI *knows* all of the player’s moves and held items
-- The player can view the enemy’s moves and items via the ‘Info’ tab during trainer battles
+## What the AI knows
+- The AI can see all of your Pokémon's moves and held items
+- The AI does **not** see which move you pick each turn
+- You can view the opponent's moves and items in the 'Info' tab during trainer battles
+- Before deciding, the AI works out:
+  - how many hits it needs to knock you out, and how many you need to knock it out
+  - who is faster (counting paralysis, Trick Room, Choice Scarf and weather speed abilities)
+  - which moves have no effect because of type matchups or abilities like Levitate
 
-## Extensively Improved AI (Credit: Pokémon Ambrosia)
-- The AI constantly evaluates the following:
-  - Whether it can 1HKO, 2HKO or 3HKO the player from both their current and maximum HP
-  - Whether the player can 1HKO, 2HKO or 3HKO the AI from both its current and maximum HP
-  - Whether it can outspeed the player (taking into account, weather boosting abilities)
-  - If the enemy can KO but is slower and player has no priority move; speed boosting moves are encouraged to possibly get the jump on the next Pokémon to be sent out
-  - Which item the player's Pokémon is presently holding
-  - It does not know which move the player has selected for the current turn
+## How the AI picks a move
+- Every move gets a score, and good moves get bonuses. A move the AI really likes can never be ruled out by having "too many" bonuses
+- **Knock-outs:** the AI only counts on a knock-out if even its weakest damage roll would do it. When judging whether *you* can knock *it* out, it assumes your strongest roll
+- **Speed first, then KO:** if it can knock you out but is slower, it uses a speed-boosting move first (Agility, Dragon Dance, Quiver Dance or Flame Charge), so it is also faster than your next Pokémon. It only does this when:
+  - the boost would actually make it faster than you, and
+  - it can survive your attack that turn
+- **Priority KO:** if a priority move like ExtremeSpeed would knock you out for sure, it uses that instead of boosting, even if you could knock it out first
+- **Special priority moves:** Blastoise's Iron Head and Drowzee's and Hypno's Zen Headbutt count as priority moves
+- **Thunderbolt and similar attacks** aren't avoided just because the target can't be paralyzed
+- **Flinch moves** are only favored when the AI is faster and you are paralyzed, or when it has Serene Grace
 
-The AI uses this information to make smarter decisions, as demonstrated by the following examples:
- - Recover
-   - Uses Recover when it would otherwise have only one turn remaining before being defeated by the player
-   - Avoids using Recover when the player cannot 2HKO it from full HP, since healing would be unnecessary in that situation
- - Swords Dance
-   - Uses Swords Dance only when it can survive long enough to land at least one attack afterward
-   - Avoids using Swords Dance if the player can 1HKO it, unless all of the following conditions are met:
-   - The AI outspeeds the player
-   - Its Focus Sash is intact or it has Sturdy
-   - The player does not have a priority move
+## When the AI always switches out
+- **Stuck with a useless move:** it's locked in by a Choice item to a move that does nothing to your Pokémon (including because of an ability like Levitate) or isn't very effective
+- **Hit super effectively:** your attack was super effective, unless it would win the one-on-one anyway (see below)
+- **Clean Sweep:** your Pokémon has +4 or more in any stat, so it brings in a fresh Clean Sweep (Defog) Pokémon
 
-## Switches
-- AI doesn't switch if already set up (+2 or higher in Attack/Special Attack/Defense/Special Defense)
-- Switches if enemy attack or special attack at -2 or lower, unless the other offense is boosted
-- Switches to a fresh Clean Sweep (Defog ability) Pokémon when the player hits +4 in any stat, even if one was already out
-- Switches if enemy is choice locked into a move that is not very effective or a doesn't affect or has zero PP
-- 80+% chance to switch if under a curse, nightmare, in love, confused, leech seed, badly poisoned after 4 turns
-- 80+% chance to switch if Accuracy is below -1
-- 80+% chance to switch if any non-Speed stat (because of Curse) is below -2
-- 40% to switch if Encored or Destiny Bonded
+## "Would it win the one-on-one?"
+After being hit super effectively, the AI plays out the fight before leaving:
+- It counts how many hits each side needs to win, using current HP, stat boosts, Reflect and Light Screen
+- It stays in if it needs fewer hits than you, or the same number and it's faster
+- Healing moves (Recover, Roost, Softboiled, Milk Drink, Slack Off, Healing Light, Rest) are taken into account. A Pokémon that heals more each turn than it loses can only be beaten by a one-hit knock-out
 
-## Reworked forced switches (KO replacement, Baton Pass, U-Turn, Volt Switch) and voluntary AI switches to best answer the player active Pokémon, in priority order:
-- Switches to a fresh Clean Sweep (Defog ability) Pokémon when the player hits +4 in any stat
-- A Pokémon that takes 0x or <=0.5x from every damaging move the player knows
-- A Pokémon with a super-effective move against the player active mon
-- A Pokémon that takes the least damage from the player moves
+## When the AI sometimes switches out
+- About 80% chance: Accuracy at -2 or lower, stuck on a move with no PP left, Nightmare, Curse, in love, confused, Leech Seed, badly poisoned or Encored
+- About 40% chance: under Destiny Bond
+- Likely to switch if Attack, Defense, Sp. Atk or Sp. Def is at -3 or lower; sometimes at -2
+- Otherwise, a 20%, 50% or 80% chance depending on how badly your Pokémon's moves match up against it
+
+## When the AI will NOT switch
+- It's set up: +2 or more in Attack, Sp. Atk or Speed, or +3 in any stat
+- It's below 1/3 of its HP. It stays in and fights
+- Every Pokémon it could send in is weak to the move you just used
+- It's trapped (Mean Look, Wrap, Shadow Tag, Arena Trap, Magnet Pull), unless it has Run Away
+- It has no other Pokémon left
+
+## Which Pokémon it sends in
+**When it chooses to switch** (or uses U-turn, Volt Switch or Baton Pass):
+1. Whichever Pokémon takes the least from the move you just used: immune first, then 1/4 damage, then 1/2 damage
+2. A Pokémon that takes half damage or less from all of your moves
+3. A Pokémon with a super-effective move against you
+4. The Pokémon that takes the least damage from your moves
+
+**After you knock one of its Pokémon out:**
+1. A Clean Sweep (Defog) Pokémon, if it has one left
+2. A Pokémon whose type is strong against yours and that has a super-effective attack (4x is preferred over 2x)
+3. A Pokémon that takes half damage or less from all of your moves
+4. The Pokémon that takes the least damage from your moves
+
+In both cases, it avoids Pokémon that are weak to your last move whenever a safer option is available.
