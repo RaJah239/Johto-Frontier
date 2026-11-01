@@ -1041,10 +1041,15 @@ Battle_EnemyFirst:
 	ld a, [wForcedSwitch]
 	and a
 	ret nz
+	; Apply the enemy's status damage immediately, before scoring KOs.
+	call SetEnemyTurn
+	call ResidualDamage
+	jmp z, HandleEnemyMonFaint
 	call HasPlayerFainted
 	jmp z, HandlePlayerMonFaint
 	call HasEnemyFainted
 	jmp z, HandleEnemyMonFaint
+	jr .after_enemy_residual
 
 .switch_item
 	call SetEnemyTurn
@@ -1052,17 +1057,21 @@ Battle_EnemyFirst:
 	jmp z, HandleEnemyMonFaint
 	call ResidualDamage
 	jmp z, HandleEnemyMonFaint
+
+.after_enemy_residual
 	call RefreshBattleHuds
 	call PlayerTurn_EndOpponentProtectEndureDestinyBond
 	ld a, [wForcedSwitch]
 	and a
 	ret nz
+
+	; Apply the player's status damage immediately, before scoring KOs.
+	call SetPlayerTurn
+	call ResidualDamage
+	jmp z, HandlePlayerMonFaint
 	call HasEnemyFainted
 	jmp z, HandleEnemyMonFaint
 	call HasPlayerFainted
-	jmp z, HandlePlayerMonFaint
-	call SetPlayerTurn
-	call ResidualDamage
 	jmp z, HandlePlayerMonFaint
 	call RefreshBattleHuds
 	xor a ; BATTLEPLAYERACTION_USEMOVE
@@ -1082,14 +1091,16 @@ Battle_PlayerFirst:
 	ld a, [wForcedSwitch]
 	and a
 	ret nz
-	call HasEnemyFainted
-	jmp z, HandleEnemyMonFaint
-	call HasPlayerFainted
-	jmp z, HandlePlayerMonFaint
+
+	; Apply the player's status damage immediately, before scoring KOs.
 	push bc
 	call SetPlayerTurn
 	call ResidualDamage
 	pop bc
+	jmp z, HandlePlayerMonFaint
+	call HasEnemyFainted
+	jmp z, HandleEnemyMonFaint
+	call HasPlayerFainted
 	jmp z, HandlePlayerMonFaint
 	push bc
 	call RefreshBattleHuds
@@ -1102,15 +1113,22 @@ Battle_PlayerFirst:
 	ld a, [wForcedSwitch]
 	and a
 	ret nz
+
+	; Apply the enemy's status damage immediately, before scoring KOs.
+	call SetEnemyTurn
+	call ResidualDamage
+	jmp z, HandleEnemyMonFaint
 	call HasPlayerFainted
 	jmp z, HandlePlayerMonFaint
 	call HasEnemyFainted
 	jmp z, HandleEnemyMonFaint
+	jr .skip_second_residual
 
 .switched_or_used_item
 	call SetEnemyTurn
 	call ResidualDamage
 	jmp z, HandleEnemyMonFaint
+.skip_second_residual
 	call RefreshBattleHuds
 	xor a ; BATTLEPLAYERACTION_USEMOVE
 	ld [wBattlePlayerAction], a
@@ -1271,6 +1289,8 @@ ResidualDamage:
 
 	call GetEighthMaxHP
 	call SubtractHPFromUser
+	call HasUserFainted
+	jr nz, .not_seeded
 	ld a, $1
 	ldh [hBGMapMode], a
 	call RestoreHP
@@ -1279,8 +1299,8 @@ ResidualDamage:
 	jr nz, .not_seeded
 	ld hl, LeechSeedSapsText
 	call StdBattleTextbox
-.not_seeded
 
+.not_seeded
 	call HasUserFainted
 	jmp z, .fainted
 
