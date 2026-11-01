@@ -3555,28 +3555,17 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 	jr c, .sniper_mons_damage
 	jr .regular_crit_damage
 
-; sniper pokemon crits deal 3x base damage
+; sniper pokemon crits deal 2x base damage
 .sniper_mons_damage
-; x3
+; x2
 	xor a
-	ldh [hMultiplicand + 0], a
-	ldh a, [hQuotient + 2]
-	ldh [hMultiplicand + 1], a
 	ldh a, [hQuotient + 3]
-	ldh [hMultiplicand + 2], a
-	ld a, 30
-	ldh [hMultiplier], a
-	call Multiply
-	ld a, 10
-	ldh [hDivisor], a
-	ld b, 4
-	call Divide
-
-	ldh a, [hQuotient + 3]
-	ldh [hProduct + 3], a
+	add a
+	ldh [hQuotient + 3], a
 
 	ldh a, [hQuotient + 2]
-	ldh [hProduct + 2], a
+	rl a
+	ldh [hQuotient + 2], a
 	jr .CritCap
 
 .regular_crit_damage
