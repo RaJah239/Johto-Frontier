@@ -1,8 +1,8 @@
 	db SUDOWOODO ; 147
 
-	;   hp  atk  def  spd  sat  sdf
-	db  75, 115,  78, 112,  60,  65 ; 505 BST
-	evs  1,   2,   1,   2,   1,   1
+	;   hp  atk  def spd  sat  sdf
+	db  85, 115, 100, 75,  60,  65 ; 500 BST
+	evs  1,   2,   2,  1,   1,   1
 
 	db ROCK, FIGHTING ; type
 	db 45 ; catch rate

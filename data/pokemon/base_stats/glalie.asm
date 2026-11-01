@@ -1,7 +1,7 @@
 	db GLALIE ; 191
 
-	db  85,  85,  85,  85,  85,  85 ; 510 BST
-	evs  2,   2,   2,   2,   2,   2
+	db  80, 105,  75, 100, 105,  40 ; 505 BST
+	evs  1,   2,   1,   2,   2,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db ICE, ICE ; type

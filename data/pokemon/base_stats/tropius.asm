@@ -1,8 +1,8 @@
 	db TROPIUS ; 128
 
-	db  99,  68,  93,  51,  92,  97 ; 500 BST
-	evs  2,   1,   2,   0,   2,   2
-	;   hp  atk  def  spd  sat  sdf
+	db  110, 95, 95, 50, 95, 95 ; 540 BST
+	evs   2,  2,  2,  0,  2,  2
+	;    hp atk def spd sat sdf
 
 	db GRASS, FLYING ; type
 	db 75 ; catch rate

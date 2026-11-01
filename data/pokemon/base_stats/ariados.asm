@@ -1,7 +1,7 @@
 	db ARIADOS ; 117
 
 	;   hp  atk  def  spd  sat  sdf
-	db  70, 120,  70, 120,  55,  70 ; 505 BST
+	db  80, 115,  90,  90,  45,  85 ; 505 BST
 	evs  1,   3,   1,   3,   0,   1
 
 	db BUG, DARK ; type

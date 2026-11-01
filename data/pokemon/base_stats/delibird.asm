@@ -1,7 +1,7 @@
 	db DELIBIRD ; 187
 
-	db  60, 100,  45, 125, 125,  45 ; 500 BST
-	evs  1,   2,   0,   3,   3,   0
+	db  70, 90,  45, 125, 125,  45 ; 500 BST
+	evs  1,  2,   0,   3,   3,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db ICE, FAIRY ; type
