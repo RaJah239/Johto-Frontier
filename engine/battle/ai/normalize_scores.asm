@@ -6,6 +6,9 @@ NormalizeAIMoveScores:
 ; score so the lowest becomes 1, keeping the order between moves.
 DEF AI_SCORE_BIAS EQU 32
 
+	; slower but can KO: boost Speed first if that makes us faster
+	farcall AI_UseSpeedBoostBeforeKO
+
 	; find the lowest biased score among the moves the enemy has
 	ld hl, wEnemyAIMoveScores
 	ld de, wEnemyMonMoves
