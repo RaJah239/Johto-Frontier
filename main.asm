@@ -169,6 +169,9 @@ INCLUDE "data/battle/effect_command_pointers.asm"
 SECTION "AI Switch-In", ROMX
 INCLUDE "engine/battle/ai/switch_in.asm"
 
+SECTION "AI Damage Race", ROMX
+INCLUDE "engine/battle/ai/damage_race.asm"
+
 SECTION "Battle Core 2", ROMX
 INCLUDE "engine/battle/core2.asm"
 

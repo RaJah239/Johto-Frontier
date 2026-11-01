@@ -146,11 +146,15 @@ AI_SwitchOrTryItem:
 	ld a, [wEnemyHitSuperEffective]
 	and a
 	jr z, .not_hit_super_effective
-	; ...unless our mon is faster and can KO the player's mon with its
-	; next hit: then stay in and take the KO
+	; ...unless our mon wins the 1-on-1: stay in if it needs fewer hits to
+	; KO the player's mon than the player needs to KO it, or the same
+	; number of hits and it's faster
+	farcall GetDamageRaceHits ; b = our hits to KO, c = player's hits to KO
+	ld a, b
+	cp c
+	jmp c, DontSwitch
+	jr nz, .switch_out_of_super_effective
 	call DoesAIOutSpeedPlayer
-	jr nc, .switch_out_of_super_effective
-	call CanAIKOWithUsableMove
 	jmp c, DontSwitch
 .switch_out_of_super_effective
 	callfar FindMonInOTPartyToSwitchIntoBattle
@@ -564,23 +568,6 @@ CheckPlayerStatAtPlus4:
 .yes
 	scf
 	ret
-
-CanAIKOWithUsableMove:
-; returns carry if the enemy's active mon can KO the player's mon this turn
-; with a move it's able to use: if it's locked into one move (choice item or
-; Encore), only that move counts
-	ld hl, wEnemySubStatus5
-	bit SUBSTATUS_ENCORED, [hl]
-	jmp z, CanAIKO
-	ld a, [wCurEnemyMoveNum]
-	ld e, a
-	ld d, 0
-	ld hl, wEnemyMonMoves
-	add hl, de
-	ld d, h
-	ld e, l
-	ld b, 1 + 1
-	jmp CanAIKO_Moves
 
 CheckEnemyBelowThirdHP:
 ; returns carry if the enemy's active mon has less than 1/3 of its max HP
