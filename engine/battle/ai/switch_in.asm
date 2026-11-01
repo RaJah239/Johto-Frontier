@@ -552,3 +552,67 @@ OTSwitchCandidateMaxDamage:
 	jr nz, .loop
 .done
 	ret
+
+AllSwitchInsWeakToLastMove:
+; Return carry if the player's last move is a damaging move and every alive
+; OT mon other than the active one takes more than 1x from it (type matchup;
+; Levitate counts as immune to Ground). Used to cancel voluntary AI switches.
+; Preserves hBattleTurn and the active mon's data, and reloads both move
+; structs afterwards.
+	ldh a, [hBattleTurn]
+	push af
+	call OTSwitchSaveActiveMon
+	call .check
+	push af
+	call OTSwitchRestoreActiveMon
+	farcall DamageRace_ReloadMoveStructs
+	pop bc ; result flags in c
+	pop af
+	ldh [hBattleTurn], a
+	push bc
+	pop af
+	ret
+
+.check
+	ld a, [wLastPlayerMove]
+	and a
+	ret z ; no last move (carry is clear)
+	dec a
+	ld hl, Moves
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld de, wPlayerMoveStruct
+	ld a, BANK(Moves)
+	call FarCopyBytes
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	ret z ; status move (carry is clear)
+
+	xor a
+	ld [wEnemySwitchCandidate], a
+.loop
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
+	ld a, [wOTPartyCount]
+	cp b
+	jr z, .all_weak
+	ld a, [wCurOTMon]
+	cp b
+	jr z, .next
+	call OTSwitchIsAliveCandidate
+	jr nc, .next
+	call OTSwitchLastMoveMatchup
+	cp EFFECTIVE + 1
+	jr c, .not_all_weak ; this one takes 1x or less
+.next
+	ld hl, wEnemySwitchCandidate
+	inc [hl]
+	jr .loop
+
+.not_all_weak
+	and a
+	ret
+
+.all_weak
+	scf
+	ret

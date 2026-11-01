@@ -426,9 +426,15 @@ AI_TrySwitch:
 
 	ld a, d
 	cp 2
-	jr nc, AI_Switch
+	jr nc, .can_switch
 	; only the active mon is alive: nothing to switch to
 	jmp DontSwitch
+
+.can_switch
+	; don't switch if every mon we could send in is weak to the player's last move
+	farcall AllSwitchInsWeakToLastMove
+	jmp c, DontSwitch
+	; fallthrough
 
 AI_Switch:
 ; if enemy's Perish Count is 1 or
