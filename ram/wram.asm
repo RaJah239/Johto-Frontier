@@ -614,8 +614,9 @@ wLastEnemyMove:: db
 wExpShare:: db
 wExpShareText:: db
 wHalfDamage:: db
+wEnemyHitSuperEffective:: db ; nonzero if the player hit the active enemy mon with a super-effective move
 
-	ds 11
+	ds 10
 
 wTrickRoomCount:: db
 

@@ -131,7 +131,24 @@ AI_SwitchOrTryItem:
 	ld [wEnemySwitchMonIndex], a
 	jmp AI_TrySwitch
 
+	; don't switch while our own mon is set up (+2 or more in Attack,
+	; Special Attack or Speed)
+	call CheckEnemySetUpPlus2
+	jr c, DontSwitch
+
 .no_clean_sweep_switch
+	; If the player hit our active mon with a super-effective move,
+	; the player has a good move against it: always switch.
+	ld a, [wEnemyHitSuperEffective]
+	and a
+	jr z, .not_hit_super_effective
+	callfar FindMonInOTPartyToSwitchIntoBattle
+	inc b
+	ld a, b
+	ld [wEnemySwitchMonIndex], a
+	jmp AI_TrySwitch
+
+.not_hit_super_effective
 	; always load the first trainer class in wTrainerClass for Battle Tower trainers
 	ld hl, TrainerClassAttributes + TRNATTR_AI_ITEM_SWITCH
 	ld a, [wInBattleTowerBattle]
@@ -529,6 +546,25 @@ CheckPlayerStatAtPlus4:
 	jr nc, .yes
 	dec b
 	jr nz, .loop
+	and a
+	ret
+
+.yes
+	scf
+	ret
+
+CheckEnemySetUpPlus2:
+; returns carry if the enemy's active mon is +2 or higher in
+; Attack, Special Attack or Speed
+	ld a, [wEnemyAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .yes
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .yes
+	ld a, [wEnemySpdLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .yes
 	and a
 	ret
 
