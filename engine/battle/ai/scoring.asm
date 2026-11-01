@@ -1104,6 +1104,8 @@ CanPlayer3HKOMaxHP:
 CanAIKO:
 	ld de, wEnemyMonMoves ; load player moves
 	ld b, NUM_MOVES + 1
+CanAIKO_Moves:
+; de = list of AI moves to check, b = number of moves + 1
 .loop_AI_KO_moves
 	dec b ; b is num moves on 1st pass
 	jr z, .done ; if b is 0 return we are done
