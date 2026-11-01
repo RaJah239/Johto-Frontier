@@ -3,10 +3,12 @@ FindMonInOTPartyToSwitchIntoBattle:
 ; Priority:
 ; 0. A mon that takes the least damage from the player's last move, if it
 ;    takes 0x (immune), 1/4x or 1/2x from it (in that order).
-; 1. A mon that has a super-effective move against the player's active mon.
-; 2. A mon that takes 0x or <=0.5x damage from every damaging move the
+; 1. A mon that takes 0x or <=0.5x damage from every damaging move the
 ;    player's active mon knows.
+; 2. A mon that has a super-effective move against the player's active mon.
 ; 3. A mon that takes the least damage from the player's active mon's moves.
+; Mons weak (> 1x) to the player's last move are skipped in every step as
+; long as at least one alive mon isn't (see OTSwitchComputeAvoidMask).
 ; Returns the 0-based party index in b.
 	ldh a, [hBattleTurn]
 	ld [wEnemySwitchSavedTurn], a
@@ -15,6 +17,7 @@ FindMonInOTPartyToSwitchIntoBattle:
 	ld a, [wCurDamage + 1]
 	ld [wEnemySwitchSavedDamage + 1], a
 	call OTSwitchSaveActiveMon
+	call OTSwitchComputeAvoidMask
 	call OTSwitchFindResistsLastMove
 	jr c, .done
 	call OTSwitchFindResistsAll
@@ -24,6 +27,8 @@ FindMonInOTPartyToSwitchIntoBattle:
 	call OTSwitchFindLeastDamage
 
 .done
+	xor a
+	ld [wEnemySwitchAvoidMask], a
 	push bc
 	call OTSwitchRestoreActiveMon
 	pop bc
@@ -311,6 +316,26 @@ OTSwitchIsAliveCandidate:
 	ret
 
 .alive
+	; during FindMonInOTPartyToSwitchIntoBattle, mons weak to the player's
+	; last move count as unavailable (wEnemySwitchAvoidMask)
+	ld a, [wEnemySwitchAvoidMask]
+	and a
+	jr z, .available
+	push bc
+	inc b
+.shift
+	dec b
+	jr z, .test
+	rrca
+	jr .shift
+.test
+	pop bc
+	bit 0, a
+	jr z, .available
+	and a
+	ret
+
+.available
 	scf
 	ret
 
@@ -615,4 +640,75 @@ AllSwitchInsWeakToLastMove:
 
 .all_weak
 	scf
+	ret
+
+OTSwitchComputeAvoidMask:
+; Set wEnemySwitchAvoidMask bit n for every alive OT mon n (other than the
+; active one) that takes more than 1x from the player's last damaging move,
+; but only if at least one alive mon takes 1x or less; otherwise leave it 0
+; so the normal choice still happens. Uses wEnemySwitchCandidate and
+; wEnemySwitchBestIndex as scratch.
+	xor a
+	ld [wEnemySwitchAvoidMask], a
+	ld [wEnemySwitchBestIndex], a ; nonzero once a safe mon is found
+	ld a, [wLastPlayerMove]
+	and a
+	ret z
+	dec a
+	ld hl, Moves
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld de, wPlayerMoveStruct
+	ld a, BANK(Moves)
+	call FarCopyBytes
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	ret z
+
+	xor a
+	ld [wEnemySwitchCandidate], a
+.loop
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
+	ld a, [wOTPartyCount]
+	cp b
+	jr z, .done
+	ld a, [wCurOTMon]
+	cp b
+	jr z, .next
+	call OTSwitchIsAliveCandidate
+	jr nc, .next
+	call OTSwitchLastMoveMatchup
+	cp EFFECTIVE + 1
+	jr nc, .weak
+	ld a, TRUE
+	ld [wEnemySwitchBestIndex], a
+	jr .next
+
+.weak
+	ld a, [wEnemySwitchCandidate]
+	ld c, a
+	inc c
+	ld a, 1
+.bit
+	dec c
+	jr z, .got_bit
+	add a
+	jr .bit
+.got_bit
+	ld hl, wEnemySwitchAvoidMask
+	or [hl]
+	ld [hl], a
+
+.next
+	ld hl, wEnemySwitchCandidate
+	inc [hl]
+	jr .loop
+
+.done
+	ld a, [wEnemySwitchBestIndex]
+	and a
+	ret nz
+	xor a ; every alive mon is weak: avoid none
+	ld [wEnemySwitchAvoidMask], a
 	ret
