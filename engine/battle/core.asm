@@ -886,6 +886,14 @@ CompareMovePriority:
 	cp b
 	ret
 
+GetMovePriority_Far:
+; farcall-friendly GetMovePriority: b = move, c = holder's item.
+; Returns the priority in b (farcall doesn't preserve a).
+	ld a, b
+	call GetMovePriority
+	ld b, a
+	ret
+
 GetMovePriority:
 ; Return the priority (0-3) of move a.
 

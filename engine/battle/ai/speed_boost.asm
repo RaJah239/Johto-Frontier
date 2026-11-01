@@ -5,6 +5,8 @@ AI_UseSpeedBoostBeforeKO:
 ; to outspeed the player's mon, make that move the clear pick. It boosts now
 ; and KOs next turn, and stays faster than whatever the player sends in next.
 ; Speed boosters: Agility (+2), Dragon Dance, Quiver Dance, Flame Charge (+1).
+; Exception: if a priority move (e.g. ExtremeSpeed) KOs right now even at its
+; lowest roll, that move is picked instead.
 
 	; locked into one move (choice item or Encore): nothing to choose
 	ld a, [wEnemySubStatus5]
@@ -17,6 +19,17 @@ AI_UseSpeedBoostBeforeKO:
 	; ...while being slower...
 	farcall DoesAIOutSpeedPlayer
 	ret c
+	; a priority move that KOs right now beats boosting (and beats being hit
+	; first): use it
+	call AI_HasPriorityKO
+	jr nc, .no_priority_ko
+	ld hl, wEnemyAIMoveScores
+	ld b, 0
+	add hl, bc
+	ld [hl], $e0
+	ret
+
+.no_priority_ko
 	; ...and survive the player's hit while boosting
 	farcall CanPlayerKO
 	ret c
@@ -89,6 +102,83 @@ AI_UseSpeedBoostBeforeKO:
 .next
 	inc c
 	jr .loop
+
+AI_HasPriorityKO:
+; Return carry and the move slot in c if the enemy has a usable damaging move
+; with above-normal priority (GetMovePriority, e.g. ExtremeSpeed) that KOs
+; the player's mon even at its lowest damage roll (AI_MinRollKOsPlayer).
+	ld c, 0 ; move slot
+.loop
+	ld a, c
+	cp NUM_MOVES
+	jr z, .no
+	ld hl, wEnemyMonMoves
+	ld b, 0
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .no
+
+	; skip disabled moves and moves with no PP
+	ld b, a
+	ld a, [wEnemyDisabledMove]
+	cp b
+	jr z, .next
+	ld hl, wEnemyMonPP
+	ld a, l
+	add c
+	ld l, a
+	adc h
+	sub l
+	ld h, a
+	ld a, [hl]
+	and PP_MASK
+	jr z, .next
+
+	; priority above normal?
+	push bc
+	ld a, [wEnemyMonItem]
+	ld c, a
+	farcall GetMovePriority_Far
+	ld a, b
+	pop bc
+	cp BASE_PRIORITY + 1
+	jr c, .next
+
+	; does it KO at its lowest roll?
+	push bc
+	ld a, b
+	dec a
+	ld hl, Moves
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld de, wEnemyMoveStruct
+	ld a, BANK(Moves)
+	call FarCopyBytes
+	ld a, [wEnemyMoveStruct + MOVE_POWER]
+	and a
+	jr z, .pop_next
+	ld a, 1
+	ldh [hBattleTurn], a
+	callfar EnemyAttackDamage
+	callfar BattleCommand_DamageCalc
+	callfar BattleCommand_Stab
+	farcall AI_MinRollKOsPlayer
+	jr c, .pop_yes
+.pop_next
+	pop bc
+.next
+	inc c
+	jr .loop
+
+.pop_yes
+	pop bc
+	scf
+	ret
+
+.no
+	and a
+	ret
 
 AI_FasterAfterSpeedBoost:
 ; b = Speed stages the move adds. Return carry if, with those stages, the
