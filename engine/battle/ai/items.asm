@@ -114,6 +114,10 @@ AI_SwitchOrTryItem:
 	and a
 	jr nz, DontSwitch
 
+	; don't switch if under 1/3 max HP: let it die
+	call CheckEnemyBelowThirdHP
+	jmp c, DontSwitch
+
 	; don't switch while our own mon is boosted (+3 or more in any stat)
 	call CheckEnemyStatAtPlus3
 	jr c, DontSwitch
@@ -135,10 +139,6 @@ AI_SwitchOrTryItem:
 	; Special Attack or Speed)
 	call CheckEnemySetUpPlus2
 	jr c, DontSwitch
-
-	; don't switch if under 1/3 max HP: let it die
-	call CheckEnemyBelowThirdHP
-	jmp c, DontSwitch
 
 .no_clean_sweep_switch
 	; If the player hit our active mon with a super-effective move,
