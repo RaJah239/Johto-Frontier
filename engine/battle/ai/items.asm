@@ -51,44 +51,12 @@ AI_SwitchOrTryItem:
 	ld a, [wCurEnemyMove]
 	call AIGetEnemyMove
 
-	; Levitate: Ground moves don't affect the player's mon
+	; Ability immunity (Levitate, Waterproof, Flame Ward, Grounded): the
+	; move doesn't affect the player's mon
 	ld a, [wEnemyMoveStruct + MOVE_TYPE]
 	and TYPE_MASK
-	cp GROUND
-	jr nz, .check_choice_matchup
-	ld a, [wBattleMonSpecies]
-	ld hl, LevitatePokemon
-	call IsInByteArray
-	jr c, .do_choice_switch
-
-	; Waterproof: Water moves don't affect the player's mon
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	and TYPE_MASK
-	cp WATER
-	jr nz, .check_choice_matchup
-	ld a, [wBattleMonSpecies]
-	ld hl, WaterproofPokemon
-	call IsInByteArray
-	jr c, .do_choice_switch
-
-	; Flame Ward: Fire moves don't affect the player's mon
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	and TYPE_MASK
-	cp FIRE
-	jr nz, .check_choice_matchup
-	ld a, [wBattleMonSpecies]
-	ld hl, FlameWardPokemon
-	call IsInByteArray
-	jr c, .do_choice_switch
-
-	; Grounded: Electric moves don't affect the player's mon
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	and TYPE_MASK
-	cp ELECTRIC
-	jr nz, .check_choice_matchup
-	ld a, [wBattleMonSpecies]
-	ld hl, GroundedPokemon
-	call IsInByteArray
+	ld b, a
+	farcall AI_IsPlayerImmuneByAbility
 	jr c, .do_choice_switch
 
 .check_choice_matchup

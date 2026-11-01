@@ -178,6 +178,9 @@ INCLUDE "engine/battle/ai/normalize_scores.asm"
 SECTION "AI Speed Boost", ROMX
 INCLUDE "engine/battle/ai/speed_boost.asm"
 
+SECTION "AI Ability Immunity", ROMX
+INCLUDE "engine/battle/ai/ability_immunity.asm"
+
 SECTION "Battle Core 2", ROMX
 INCLUDE "engine/battle/core2.asm"
 
