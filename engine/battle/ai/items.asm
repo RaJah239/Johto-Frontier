@@ -136,6 +136,10 @@ AI_SwitchOrTryItem:
 	call CheckEnemySetUpPlus2
 	jr c, DontSwitch
 
+	; don't switch if under 1/3 max HP: let it die
+	call CheckEnemyBelowThirdHP
+	jmp c, DontSwitch
+
 .no_clean_sweep_switch
 	; If the player hit our active mon with a super-effective move,
 	; the player has a good move against it: always switch.
@@ -551,6 +555,27 @@ CheckPlayerStatAtPlus4:
 
 .yes
 	scf
+	ret
+
+CheckEnemyBelowThirdHP:
+; returns carry if the enemy's active mon has less than 1/3 of its max HP
+; (3 * HP < max HP)
+	ld hl, wEnemyMonHP
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	ld h, b
+	ld l, c
+	add hl, hl
+	add hl, bc ; hl = 3 * HP
+	ld a, [wEnemyMonMaxHP + 1]
+	ld e, a
+	ld a, l
+	sub e
+	ld a, [wEnemyMonMaxHP]
+	ld e, a
+	ld a, h
+	sbc e
 	ret
 
 CheckEnemySetUpPlus2:
