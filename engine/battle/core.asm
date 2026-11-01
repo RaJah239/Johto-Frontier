@@ -1876,7 +1876,7 @@ FaintYourPokemon:
 	hlcoord 11, 8
 	ld de, CoreFntString
 	call PlaceString
-	call DelayFrame
+	call WaitBGMap
 
 	farcall KOBoost
 
@@ -1917,7 +1917,7 @@ FaintEnemyPokemon:
 	hlcoord 2, 1
 	ld de, CoreFntString
 	call PlaceString
-	call DelayFrame
+	call WaitBGMap
 
 	farcall KOBoost
 
