@@ -2757,7 +2757,7 @@ AI_Smart_Flinch:
 	ld hl, BlessingPokemon_AI
 	call IsInByteArray
 	pop hl
-	ret c
+	ret nc
 .encourage
     dec [hl]
     ret
