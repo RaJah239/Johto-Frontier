@@ -9,6 +9,14 @@ FindMonInOTPartyToSwitchIntoBattle:
 ; 3. A mon that takes the least damage from the player's active mon's moves.
 ; Mons weak (> 1x) to the player's last move are skipped in every step as
 ; long as at least one alive mon isn't (see OTSwitchComputeAvoidMask).
+;
+; Replacing a fainted mon (our active mon is at 0 HP, e.g. the player just
+; KO'd it) uses a different order instead:
+; 1. A mon whose own type is super effective against the player's mon and
+;    that has a damaging move that's super effective against it, preferring
+;    4x over 2x (OTSwitchFindKOReplacementAttacker).
+; 2. A mon that takes 0x or <=0.5x from every damaging move the player knows.
+; 3. A mon that takes the least damage from the player's moves.
 ; Returns the 0-based party index in b.
 	ldh a, [hBattleTurn]
 	ld [wEnemySwitchSavedTurn], a
@@ -18,6 +26,21 @@ FindMonInOTPartyToSwitchIntoBattle:
 	ld [wEnemySwitchSavedDamage + 1], a
 	call OTSwitchSaveActiveMon
 	call OTSwitchComputeAvoidMask
+
+	; replacing a fainted mon (the player KO'd it): go on the attack
+	ld a, [wEnemyMonHP]
+	ld b, a
+	ld a, [wEnemyMonHP + 1]
+	or b
+	jr nz, .voluntary
+	call OTSwitchFindKOReplacementAttacker
+	jr c, .done
+	call OTSwitchFindResistsAll
+	jr c, .done
+	call OTSwitchFindLeastDamage
+	jr .done
+
+.voluntary
 	call OTSwitchFindResistsLastMove
 	jr c, .done
 	call OTSwitchFindResistsAll
@@ -711,4 +734,123 @@ OTSwitchComputeAvoidMask:
 	ret nz
 	xor a ; every alive mon is weak: avoid none
 	ld [wEnemySwitchAvoidMask], a
+	ret
+
+OTSwitchFindKOReplacementAttacker:
+; Find the OT mon whose own type is super effective against the player's mon
+; and that has a damaging move that's super effective against it. Among
+; those, pick the one with the strongest such move (4x beats 2x); ties go
+; to the earlier party slot. Returns carry and the 0-based index in b.
+	xor a
+	ld [wEnemySwitchBestDamage], a ; best move matchup so far
+	ld [wEnemySwitchCandidate], a
+	dec a
+	ld [wEnemySwitchBestIndex], a
+.loop
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
+	ld a, [wOTPartyCount]
+	cp b
+	jr z, .done
+	ld a, [wCurOTMon]
+	cp b
+	jr z, .next
+	call OTSwitchIsAliveCandidate
+	jr nc, .next
+	call OTSwitchTypeIsSuperEffective
+	jr nc, .next
+	call OTSwitchBestMoveMatchup
+	cp EFFECTIVE + 1
+	jr c, .next ; no super-effective damaging move
+	ld c, a
+	ld a, [wEnemySwitchBestDamage]
+	cp c
+	jr nc, .next ; not better than the best so far
+	ld a, c
+	ld [wEnemySwitchBestDamage], a
+	ld a, [wEnemySwitchCandidate]
+	ld [wEnemySwitchBestIndex], a
+.next
+	ld hl, wEnemySwitchCandidate
+	inc [hl]
+	jr .loop
+
+.done
+	ld a, [wEnemySwitchBestIndex]
+	cp -1
+	jr z, .none
+	ld b, a
+	scf
+	ret
+
+.none
+	and a
+	ret
+
+OTSwitchTypeIsSuperEffective:
+; Return carry if either of OT mon wEnemySwitchCandidate's own types is super
+; effective against the player's active mon.
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
+	call OTSwitchLoadCandidateTypes
+	ld a, [wEnemyMonType1]
+	call .check
+	ret c
+	ld a, [wEnemyMonType2]
+.check
+	ld [wEnemyMoveStruct + MOVE_TYPE], a
+	call SetEnemyTurn
+	callfar BattleCheckTypeMatchup
+	ld a, [wTypeMatchup]
+	cp EFFECTIVE + 1
+	ccf
+	ret
+
+OTSwitchBestMoveMatchup:
+; Return in a the best type matchup of OT mon wEnemySwitchCandidate's damaging
+; moves against the player's active mon (0 if the player's ability makes it
+; immune to that move's type).
+	ld a, [wEnemySwitchCandidate]
+	ld hl, wOTPartyMon1Moves
+	call GetPartyLocation
+	ld c, 0 ; best so far
+	ld b, NUM_MOVES
+.loop
+	ld a, [hli]
+	and a
+	jr z, .done
+	push hl
+	push bc
+	dec a
+	ld hl, Moves
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld de, wEnemyMoveStruct
+	ld a, BANK(Moves)
+	call FarCopyBytes
+	ld a, [wEnemyMoveStruct + MOVE_POWER]
+	and a
+	jr z, .skip
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	and TYPE_MASK
+	ld b, a
+	farcall AI_IsPlayerImmuneByAbility
+	jr c, .skip
+	call SetEnemyTurn
+	callfar BattleCheckTypeMatchup
+	ld a, [wTypeMatchup]
+	pop bc
+	cp c
+	jr c, .next
+	ld c, a
+	jr .next
+
+.skip
+	pop bc
+.next
+	pop hl
+	dec b
+	jr nz, .loop
+.done
+	ld a, c
 	ret
