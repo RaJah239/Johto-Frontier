@@ -3117,6 +3117,11 @@ ReplayEnemyCry:
 	pop af
 	jr c, .finish
 
+	; restore the battle palettes and attribute map first: the KO can come
+	; right after a move animation or the faint sequence, and AnimateFrontpic
+	; copies wAttrmap to the screen, so leftovers there tinted the foe (blue)
+	call FinishBattleAnim
+
 	; animate the frontpic with a script that doesn't start another cry
 	hlcoord 12, 0
 	ld d, $0
