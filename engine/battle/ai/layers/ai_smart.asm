@@ -1290,6 +1290,11 @@ AI_Smart_ParalyzeTarget:
 	jmp DoIt
 
 .discourage
+	; damaging moves (Thunderbolt, Thunderpunch...) only paralyze as a side
+	; effect, so don't discourage them when the paralysis can't apply
+	ld a, [wEnemyMoveStruct + MOVE_POWER]
+	and a
+	ret nz
 	inc [hl]
 	ret
 

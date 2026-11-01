@@ -86,7 +86,7 @@ AIChooseMove:
 
 	ld a, c
 	cp 16 ; up to 16 scoring layers
-	jr z, .DecrementScores
+	jr z, .NormalizeScores
 
 	push bc
 	ld d, BANK(TrainerClassAttributes)
@@ -114,6 +114,10 @@ AIChooseMove:
 	call FarCall_hl
 
 	jr .CheckLayer
+
+.NormalizeScores:
+	; heavily encouraged moves can wrap below 0; fix that before counting down
+	farcall NormalizeAIMoveScores
 
 ; Decrement the scores of all moves one by one until one reaches 0.
 .DecrementScores:

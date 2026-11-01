@@ -172,6 +172,9 @@ INCLUDE "engine/battle/ai/switch_in.asm"
 SECTION "AI Damage Race", ROMX
 INCLUDE "engine/battle/ai/damage_race.asm"
 
+SECTION "AI Normalize Scores", ROMX
+INCLUDE "engine/battle/ai/normalize_scores.asm"
+
 SECTION "Battle Core 2", ROMX
 INCLUDE "engine/battle/core2.asm"
 
