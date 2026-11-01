@@ -2896,6 +2896,8 @@ AddBattleParticipant:
 FindMonInOTPartyToSwitchIntoBattle:
 ; Choose which OT mon to send out, evaluating the player's active moveset.
 ; Priority:
+; 0. A mon that takes the least damage from the player's last move, if it
+;    takes 0x (immune), 1/4x or 1/2x from it (in that order).
 ; 1. A mon that has a super-effective move against the player's active mon.
 ; 2. A mon that takes 0x or <=0.5x damage from every damaging move the
 ;    player's active mon knows.
@@ -2908,6 +2910,8 @@ FindMonInOTPartyToSwitchIntoBattle:
 	ld a, [wCurDamage + 1]
 	ld [wEnemySwitchSavedDamage + 1], a
 	call OTSwitchSaveActiveMon
+	call OTSwitchFindResistsLastMove
+	jr c, .done
 	call OTSwitchFindResistsAll
 	jr c, .done
 	call OTSwitchFindSuperEffective
@@ -3011,6 +3015,97 @@ OTSwitchFindSuperEffective:
 
 .none
 	and a
+	ret
+
+OTSwitchFindResistsLastMove:
+; Find the OT mon that takes the least damage from the player's last move:
+; immune (0x) first, then 1/4x, then 1/2x. Ties go to the earlier party slot.
+; Returns carry and the 0-based party index in b, or no carry if no mon
+; takes 1/2x or less (or the player's last move isn't a damaging move).
+	ld a, [wLastPlayerMove]
+	and a
+	jr z, .none
+	dec a
+	ld hl, Moves
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld de, wPlayerMoveStruct
+	ld a, BANK(Moves)
+	call FarCopyBytes
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	jr z, .none
+
+	; best matchup so far; a candidate must beat this (i.e. be <= 1/2x)
+	ld a, NOT_VERY_EFFECTIVE + 1
+	ld [wEnemySwitchBestDamage], a
+	ld a, -1
+	ld [wEnemySwitchBestIndex], a
+	xor a
+	ld [wEnemySwitchCandidate], a
+.loop
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
+	ld a, [wOTPartyCount]
+	cp b
+	jr z, .done
+	ld a, [wCurOTMon]
+	cp b
+	jr z, .next
+	call OTSwitchIsAliveCandidate
+	jr nc, .next
+	call OTSwitchLastMoveMatchup
+	ld c, a
+	ld a, [wEnemySwitchBestDamage]
+	cp c
+	jr c, .next ; worse
+	jr z, .next ; tie: keep the earlier mon
+	ld a, c
+	ld [wEnemySwitchBestDamage], a
+	ld a, [wEnemySwitchCandidate]
+	ld [wEnemySwitchBestIndex], a
+.next
+	ld hl, wEnemySwitchCandidate
+	inc [hl]
+	jr .loop
+
+.done
+	ld a, [wEnemySwitchBestIndex]
+	cp -1
+	jr z, .none
+	ld b, a
+	scf
+	ret
+
+.none
+	and a
+	ret
+
+OTSwitchLastMoveMatchup:
+; Return in a the type matchup of the move in wPlayerMoveStruct
+; against OT party member b (NO_EFFECT if it has Levitate vs a Ground move).
+	ld a, [wPlayerMoveStruct + MOVE_TYPE]
+	and TYPE_MASK
+	cp GROUND
+	jr nz, .type_chart
+	push bc
+	ld hl, wOTPartySpecies
+	ld c, b
+	ld b, 0
+	add hl, bc
+	ld a, [hl]
+	ld hl, LevitatePokemon
+	call IsInByteArray
+	pop bc
+	jr nc, .type_chart
+	xor a ; NO_EFFECT
+	ret
+
+.type_chart
+	call OTSwitchLoadCandidateTypes
+	call SetPlayerTurn
+	callfar BattleCheckTypeMatchup
+	ld a, [wTypeMatchup]
 	ret
 
 OTSwitchFindResistsAll:
