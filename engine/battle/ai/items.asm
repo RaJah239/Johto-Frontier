@@ -33,6 +33,79 @@ AI_SwitchOrTryItem:
 	farcall CheckEnemyLockedIn
 	ret nz
 
+	; If the enemy is choice-locked into a move that doesn't affect or is
+	; not very effective against the player's mon, always switch.
+	; Choice lock sets SUBSTATUS_ENCORED with an encore count of 255, but
+	; HandleEncore decrements that count every turn end, so check for the
+	; held choice item instead of the count.
+	ld hl, wEnemySubStatus5
+	bit SUBSTATUS_ENCORED, [hl]
+	jmp z, .not_choice_locked_nve
+	call DoesEnemyHaveChoiceItem
+	jr nc, .not_choice_locked_nve
+	ld a, [wCurEnemyMove]
+	and a
+	jr z, .not_choice_locked_nve
+	ld a, 1
+	ldh [hBattleTurn], a
+	ld a, [wCurEnemyMove]
+	call AIGetEnemyMove
+
+	; Levitate: Ground moves don't affect the player's mon
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	and TYPE_MASK
+	cp GROUND
+	jr nz, .check_choice_matchup
+	ld a, [wBattleMonSpecies]
+	ld hl, LevitatePokemon
+	call IsInByteArray
+	jr c, .do_choice_switch
+
+	; Waterproof: Water moves don't affect the player's mon
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	and TYPE_MASK
+	cp WATER
+	jr nz, .check_choice_matchup
+	ld a, [wBattleMonSpecies]
+	ld hl, WaterproofPokemon
+	call IsInByteArray
+	jr c, .do_choice_switch
+
+	; Flame Ward: Fire moves don't affect the player's mon
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	and TYPE_MASK
+	cp FIRE
+	jr nz, .check_choice_matchup
+	ld a, [wBattleMonSpecies]
+	ld hl, FlameWardPokemon
+	call IsInByteArray
+	jr c, .do_choice_switch
+
+	; Grounded: Electric moves don't affect the player's mon
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	and TYPE_MASK
+	cp ELECTRIC
+	jr nz, .check_choice_matchup
+	ld a, [wBattleMonSpecies]
+	ld hl, GroundedPokemon
+	call IsInByteArray
+	jr c, .do_choice_switch
+
+.check_choice_matchup
+	; no effect (0x) or not very effective (< 1x)
+	callfar BattleCheckTypeMatchup
+	ld a, [wTypeMatchup]
+	cp EFFECTIVE
+	jr nc, .not_choice_locked_nve
+
+.do_choice_switch
+	callfar FindMonInOTPartyToSwitchIntoBattle
+	inc b
+	ld a, b
+	ld [wEnemySwitchMonIndex], a
+	jmp AI_TrySwitch
+
+.not_choice_locked_nve
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
 	jr nz, DontSwitch
