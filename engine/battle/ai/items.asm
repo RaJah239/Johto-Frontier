@@ -135,12 +135,12 @@ AI_SwitchOrTryItem:
 	ld [wEnemySwitchMonIndex], a
 	jmp AI_TrySwitch
 
+.no_clean_sweep_switch
 	; don't switch while our own mon is set up (+2 or more in Attack,
 	; Special Attack or Speed)
 	call CheckEnemySetUpPlus2
 	jr c, DontSwitch
 
-.no_clean_sweep_switch
 	; If the player hit our active mon with a super-effective move,
 	; the player has a good move against it: always switch.
 	ld a, [wEnemyHitSuperEffective]
@@ -423,7 +423,8 @@ AI_TrySwitch:
 	ld a, d
 	cp 2
 	jr nc, AI_Switch
-	; fallthrough
+	; only the active mon is alive: nothing to switch to
+	jmp DontSwitch
 
 AI_Switch:
 ; if enemy's Perish Count is 1 or
