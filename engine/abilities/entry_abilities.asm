@@ -5,6 +5,13 @@
 ; these abilties work correctly
 ; switch in battle and immediately use its effect
 EntryAbilities1:
+	; call ClearFailures to be put in home.asm
+	; Clear any stale failure flags so the stat boosts always apply.
+	xor a
+	ld [wFailedMessage], a
+	ld [wEffectFailed], a
+	ld [wAttackMissed], a
+
 	call HandleSpinGuard
 	call HandleDrizzle
 	call HandleDrought
@@ -19,6 +26,13 @@ EntryAbilities1:
 ; === Entrance Abilities 2 - Non-Link Mode ===
 ; ============================================
 EntryAbilities2NonLink:
+	; call ClearFailures to be put in home.asm
+	; Clear any stale failure flags so the stat boosts always apply.
+	xor a
+	ld [wFailedMessage], a
+	ld [wEffectFailed], a
+	ld [wAttackMissed], a
+
 	call HandleNonLinkIntimidate
 	ret
 
@@ -31,6 +45,13 @@ EntryAbilities2NonLink:
 ; the foe will get their move off and even ko'd
 ; before this ability triggers
 EntryAbilities2: ; this should be called in "EntryAbilities2NonLink" above to work non linked
+	; call ClearFailures to be put in home.asm
+	; Clear any stale failure flags so the stat boosts always apply.
+	xor a
+	ld [wFailedMessage], a
+	ld [wEffectFailed], a
+	ld [wAttackMissed], a
+
 	call HandleCleanSweep
 	call HandleLightBarrier
 	call HandleIntimidate
@@ -145,13 +166,6 @@ HandleDefenseMode:
 	ld hl, DefenseModePokemon
 	call IsInByteArray
 	ret nc
-
-	; call ClearFailures to be put in home.asm
-	; Clear any stale failure flags so the stat boosts always apply.
-	xor a
-	ld [wFailedMessage], a
-	ld [wEffectFailed], a
-	ld [wAttackMissed], a
 
 	ShowActivationOrEntryOrKOAbilityPopup DefenseText
 
