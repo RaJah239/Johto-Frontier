@@ -853,18 +853,20 @@ CanPlayerKO:
 	callfar PlayerAttackDamage
 	callfar BattleCommand_DamageCalc
 	callfar BattleCommand_Stab
-	ld a, [wCurDamage + 1]
-	ld c, a ; c is curDamage upper
-	ld a, [wCurDamage]
-	ld b, a ; b is curDamage lower
+	; highest roll: the AI respects any hit that could KO it
+	; damage - HP: no borrow means damage >= HP, a KO
 	ld a, [wEnemyMonHP + 1]
-	cp c ; compare upper
+	ld c, a
 	ld a, [wEnemyMonHP]
-	sbc b ; compare lower and set flag
+	ld b, a
+	ld a, [wCurDamage + 1]
+	cp c
+	ld a, [wCurDamage]
+	sbc b
 	pop bc
 	pop de
 	pop hl
-	jr nc, .loop_player_KO_moves
+	jr c, .loop_player_KO_moves
 
 ; skip moves that can't be used on consecutive turns, except hyper beam
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
@@ -1124,14 +1126,8 @@ CanAIKO:
 	callfar EnemyAttackDamage
 	callfar BattleCommand_DamageCalc
 	callfar BattleCommand_Stab
-	ld a, [wCurDamage + 1]
-	ld c, a ; c is curDamage upper
-	ld a, [wCurDamage]
-	ld b, a ; b is curDamage lower
-	ld a, [wBattleMonHP + 1]
-	cp c ; compare upper
-	ld a, [wBattleMonHP]
-	sbc b ; compare lower and set flag
+	; lowest roll: only count KOs that are guaranteed
+	farcall AI_MinRollKOsPlayer
 	pop bc
 	pop de
 	pop hl
