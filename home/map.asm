@@ -550,9 +550,32 @@ GetWarpDestCoords::
 	ret
 
 LoadBlockData::
+; Clear only the part of wOverworldMapBlocks this map uses, (width + 6) *
+; (height + 6) blocks, not all 1300 bytes: this runs on every map connection,
+; where every instruction counts towards the frame the step loses.
+	ld a, [wMapWidth]
+	add 6
+	ld e, a
+	ld d, 0
+	ld a, [wMapHeight]
+	add 6
+	ld hl, 0
+.size_loop
+	add hl, de
+	dec a
+	jr nz, .size_loop
+	; never more than the buffer
+	ld a, l
+	sub LOW(wOverworldMapBlocksEnd - wOverworldMapBlocks)
+	ld a, h
+	sbc HIGH(wOverworldMapBlocksEnd - wOverworldMapBlocks)
+	jr c, .size_ok
+	ld hl, wOverworldMapBlocksEnd - wOverworldMapBlocks
+.size_ok
+	ld b, h
+	ld c, l
 	ld hl, wOverworldMapBlocks
-	ld bc, wOverworldMapBlocksEnd - wOverworldMapBlocks
-	ld a, 0
+	xor a
 	call ByteFill
 	call ChangeMap
 	call FillMapConnections

@@ -382,7 +382,7 @@ LoadWeatherGraphics::
 	ld a, [hli]
 	ld d, a
 	ld c, [hl]
-	ld b, BANK(@)
+	ld b, BANK(RainGFX)
 	ld hl, vTiles0 tile OVERWORLD_WEATHER_TILE
 	ldh a, [rVBK]
 	push af
@@ -407,17 +407,6 @@ WeatherGraphics:
 	weather_gfx SnowGFX, 1
 	weather_gfx SandGFX, 1
 	assert_table_length NUM_OVERWORLD_WEATHER_TYPES - 1
-
-RainGFX: INCBIN "gfx/overworld/rain_splash.2bpp"
-RainGFXEnd:
-	assert RainGFXEnd - RainGFX == 2 tiles
-SnowGFX: INCBIN "gfx/overworld/snow.2bpp"
-SnowGFXEnd:
-	assert SnowGFXEnd - SnowGFX == 1 tiles
-; The source PNG contains a second unused tile; the renderer uses the first.
-SandGFX: INCBIN "gfx/overworld/sand.2bpp", 0, 1 tiles
-SandGFXEnd:
-	assert SandGFXEnd - SandGFX == 1 tiles
 
 GetWeatherObjectPalettePointer:
 ; a: OVERWORLD_WEATHER_*; returns hl
@@ -1073,31 +1062,21 @@ ApplyWeatherTint::
 	ldh [rSVBK], a
 	call GetWeatherTint
 	jp z, .done
-	; de = table row: ((tint - 1) * NUM_DAYTIMES + daytime) * 96
+	; Table rows are 128 bytes (96 used), 128-byte aligned, so a row's address
+	; is d = HIGH(WeatherTintTables) + row / 2, e = (row & 1) * $80, and
+	; any entry in the row is just h = d, l = e | offset (no carry).
 	dec a
 	add a
 	add a ; * NUM_DAYTIMES
 	ld b, a
 	ld a, [wTimeOfDayPal]
 	maskbits NUM_DAYTIMES
-	add b
-	push hl
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	add hl, hl ; * 32
-	ld d, h
-	ld e, l
-	add hl, hl
-	add hl, de ; * 96
-	ld de, WeatherTintTables
-	add hl, de
-	ld d, h
-	ld e, l
-	pop hl
+	add b ; row
+	srl a
+	ld e, 0
+	rr e ; (row & 1) * $80
+	add HIGH(WeatherTintTables)
+	ld d, a
 
 	ld a, BANK(wBGPals1)
 	ldh [rSVBK], a
@@ -1111,11 +1090,14 @@ ApplyWeatherTint::
 	ld a, [hld]
 	ld c, a ; c = high byte: 0bbbbbgg
 	push hl
+	ld h, d
 
 	; red
 	ld a, b
 	and %11111
-	call .Lookup
+	or e
+	ld l, a
+	ld a, [hl]
 	ldh [hProduct], a
 
 	; green
@@ -1124,14 +1106,16 @@ ApplyWeatherTint::
 	add a
 	add a
 	add a
-	ld h, a
+	ld l, a
 	ld a, b
 	swap a
 	rrca
 	and %111
-	or h
+	or l
 	add 32
-	call .Lookup
+	or e
+	ld l, a
+	ld a, [hl]
 	ldh [hProduct + 1], a
 
 	; blue
@@ -1140,7 +1124,9 @@ ApplyWeatherTint::
 	rrca
 	and %11111
 	add 64
-	call .Lookup
+	or e
+	ld l, a
+	ld a, [hl]
 
 	; high byte: 0bbbbbgg
 	add a
@@ -1181,16 +1167,6 @@ ApplyWeatherTint::
 	pop af
 	ret
 
-.Lookup:
-; a = offset into the table row at de; return the byte there
-	add e
-	ld l, a
-	adc d
-	sub l
-	ld h, a
-	ld a, [hl]
-	ret
-
 ; For each weather tint and time of day: three 32-byte tables (red, green,
 ; blue) holding min(31, (channel * multiplier + 8) / 16 + add).
 MACRO tint_channel_table ; multiplier, add
@@ -1208,31 +1184,9 @@ MACRO weather_tint
 	tint_channel_table \1, \2
 	tint_channel_table \3, \4
 	tint_channel_table \5, \6
+	ds 32 ; pad each row to 128 bytes (see ApplyWeatherTint)
 ENDM
 
-WeatherTintTables:
-	table_width 96
-; rain
-	weather_tint 9, 2, 10, 1, 8, 4 ; morn
-	weather_tint 10, 2, 10, 1, 9, 3 ; day
-	weather_tint 10, 1, 10, 1, 9, 1 ; nite
-	weather_tint 8, 2, 11, 0, 9, 3 ; eve
-; snow
-	weather_tint 12, 2, 12, 3, 12, 6 ; morn
-	weather_tint 12, 2, 12, 3, 12, 6 ; day
-	weather_tint 11, 1, 11, 1, 11, 3 ; nite
-	weather_tint 12, 2, 12, 2, 12, 4 ; eve
-; sandstorm
-	weather_tint 11, 7, 10, 5,  8, 1 ; morn
-	weather_tint 11, 7, 10, 5,  8, 1 ; day
-	weather_tint 10, 3, 9, 2, 8, 0 ; nite
-	weather_tint 11, 6, 10, 4,  8, 1 ; eve
-; sun
-	weather_tint 16, 2, 16, 2, 16, 1 ; morn
-	weather_tint 16, 2, 16, 2, 16, 2 ; day
-	weather_tint 16, 1, 16, 1, 16, 1 ; nite
-	weather_tint 16, 2, 16, 1, 16, 0 ; eve
-	assert_table_length (NUM_WEATHER_TINTS - 1) * NUM_DAYTIMES
 
 ; Map connection fade
 
@@ -1610,3 +1564,53 @@ WeatherRandomRange:
 .done
 	pop bc
 	ret
+
+; In their own 16-byte aligned section so LoadWeatherGraphics can load them
+; with GDMA (SafeHDMATransfer) instead of Request2bpp, which stalls the
+; overworld for a frame or two after a map change.
+SECTION "Overworld Weather GFX", ROMX, ALIGN[4]
+
+RainGFX: INCBIN "gfx/overworld/rain_splash.2bpp"
+RainGFXEnd:
+	assert RainGFXEnd - RainGFX == 2 tiles
+SnowGFX: INCBIN "gfx/overworld/snow.2bpp"
+SnowGFXEnd:
+	assert SnowGFXEnd - SnowGFX == 1 tiles
+; The source PNG contains a second unused tile; the renderer uses the first.
+SandGFX: INCBIN "gfx/overworld/sand.2bpp", 0, 1 tiles
+SandGFXEnd:
+	assert SandGFXEnd - SandGFX == 1 tiles
+
+	assert BANK(RainGFX) == BANK(SnowGFX) && BANK(RainGFX) == BANK(SandGFX)
+
+; 128-byte aligned rows let ApplyWeatherTint index them without carries. It
+; reads them from its own bank (the "Overworld Weather" section, bank $7B in
+; layout.link), so this section must be in the same bank.
+SECTION "Weather Tint Tables", ROMX, BANK[$7B], ALIGN[7]
+
+WeatherTintTables:
+	table_width 128
+; rain
+	weather_tint 9, 2, 10, 1, 8, 4 ; morn
+	weather_tint 10, 2, 10, 1, 9, 3 ; day
+	weather_tint 10, 1, 10, 1, 9, 1 ; nite
+	weather_tint 8, 2, 11, 0, 9, 3 ; eve
+; snow
+	weather_tint 12, 2, 12, 3, 12, 6 ; morn
+	weather_tint 12, 2, 12, 3, 12, 6 ; day
+	weather_tint 11, 1, 11, 1, 11, 3 ; nite
+	weather_tint 12, 2, 12, 2, 12, 4 ; eve
+; sandstorm
+	weather_tint 11, 7, 10, 5,  8, 1 ; morn
+	weather_tint 11, 7, 10, 5,  8, 1 ; day
+	weather_tint 10, 3, 9, 2, 8, 0 ; nite
+	weather_tint 11, 6, 10, 4,  8, 1 ; eve
+; sun
+	weather_tint 16, 2, 16, 2, 16, 1 ; morn
+	weather_tint 16, 2, 16, 2, 16, 2 ; day
+	weather_tint 16, 1, 16, 1, 16, 1 ; nite
+	weather_tint 16, 2, 16, 1, 16, 0 ; eve
+	assert_table_length (NUM_WEATHER_TINTS - 1) * NUM_DAYTIMES
+
+	assert BANK(WeatherTintTables) == BANK(ApplyWeatherTint), \
+		"WeatherTintTables must be in ApplyWeatherTint's bank"

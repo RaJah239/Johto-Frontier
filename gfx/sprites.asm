@@ -96,7 +96,9 @@ SuicuneSpriteGFX::             INCBIN "gfx/sprites/suicune.2bpp"
 EnteiSpriteGFX::               INCBIN "gfx/sprites/entei.2bpp"
 RaikouSpriteGFX::              INCBIN "gfx/sprites/raikou.2bpp"
 
-SECTION "Sprites 3", ROMX
+; 16-byte aligned so GetUsedSprite can load these with GDMA (SafeHDMATransfer)
+; instead of Request2bpp, which stalls the overworld ~2 frames per call
+SECTION "Sprites 3", ROMX, ALIGN[4]
 
 ChrisSurfSpriteGFX::           INCBIN "gfx/sprites/chris_surf.2bpp"
 KrisSurfSpriteGFX::            INCBIN "gfx/sprites/kris_surf.2bpp"
