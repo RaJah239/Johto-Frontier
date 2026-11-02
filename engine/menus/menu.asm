@@ -325,10 +325,24 @@ MenuJoypadLoop:
 	push af
 	ld a, $1
 	ldh [hOAMUpdate], a
-; The BG map goes out in thirds over 3 frames, so WaitBGMap's 4th is spare.
+; The BG map goes out in thirds, one per frame, so 3 frames usually do
+; (WaitBGMap waits 4). A frame spent uploading palettes (e.g. an item
+; icon's) skips the BG map, so after 3 frames keep waiting until the
+; last third is out; otherwise part of the screen could stay stale until
+; the next button press.
+	xor a
+	ldh [hBGMapThird], a
+	inc a
 	ldh [hBGMapMode], a
 	ld c, 3
 	call DelayFrames
+.wait_thirds
+	ldh a, [hBGMapThird]
+	and a
+	jr z, .thirds_done
+	call DelayFrame
+	jr .wait_thirds
+.thirds_done
 	pop af
 	ldh [hOAMUpdate], a
 	xor a
