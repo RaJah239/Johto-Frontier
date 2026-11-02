@@ -3,6 +3,8 @@
 
 SECTION "Item Icons 1", ROMX
 
+ItemIconPanelGFX:: INCBIN "gfx/pack/item_icon_panel.2bpp"
+
 AmuletCoinIcon:: INCBIN "gfx/items/amulet_coin.2bpp.lz"
 AntidoteIcon:: INCBIN "gfx/items/antidote.2bpp.lz"
 ApricornIcon:: INCBIN "gfx/items/apricorn.2bpp.lz"

@@ -1480,6 +1480,7 @@ Pack_InitGFX:
 	ld a, BANK(PackMenuGFX)
 	call FarCopyBytes
 	call ReInitBG_PackPocket
+	farcall LoadItemIconPanelGFX
 	jmp DrawPackGFX
 
 ReInitBG_PackPocket: ; needed when switching from TM Pocket
@@ -1551,34 +1552,6 @@ DrawPocketName:
 	dec d
 	jr nz, .loop
 
-	; Draw the box.
-	ld a, [wCurPocket]
-	; * 15
-	ld d, a
-	swap a
-	sub d
-	ld d, 0
-	ld e, a
-	ld hl, .tilemap
-	add hl, de
-	ld d, h
-	ld e, l
-	hlcoord 0, 5
-	ld c, 3
-.row
-	ld b, 5
-.col
-	ld a, [de]
-	inc de
-	ld [hli], a
-	dec b
-	jr nz, .col
-	ld a, c
-	ld c, SCREEN_WIDTH - 5
-	add hl, bc
-	ld c, a
-	dec c
-	jr nz, .row
 	ret
 
 ; needs to be in this order
@@ -1589,19 +1562,6 @@ DrawPocketName:
 	db 13; TMs Pocket
 	db 3 ; Fruits Pocket
 	db 15; Battle Pocket
-
-.tilemap: ; 5x12
-; the 5x3 pieces correspond to *_POCKET constants
-INCBIN "gfx/pack/pack_menu.tilemap"
-; FRUIT_POCKET
-	db $00, $04, $04, $04, $01 ; top border
-	db $45, $46, $47, $48, $49 ; fruit text
-	db $02, $05, $05, $05, $03 ; bottom border
-
-; BATTLE_POCKET
-	db $00, $04, $04, $04, $01 ; top border
-	db $4a, $4b, $4c, $4d, $4e ; battle text
-	db $02, $05, $05, $05, $03 ; bottom border
 
 Pack_GetItemName:
 	ld a, [wCurItem]

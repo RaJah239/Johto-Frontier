@@ -9,7 +9,7 @@ UpdateItemIconAndDescription::
 	farcall UpdateItemDescription
 	ld a, [wMenuSelection]
 	ld e, PACK_ITEM_ICON_PAL
-	jr LoadItemIcon
+	jmp LoadItemIcon
 
 MartUpdateItemIcon::
 ; Buy menu: the icon sits in the top-left corner.
@@ -20,11 +20,66 @@ MartUpdateItemIcon::
 	jr PlaceItemIconTiles
 
 
+DEF ITEM_ICON_PANEL_TILE EQU ITEM_ICON_TILE + 9 ; 9 tiles, $69-$71
+	const_def ITEM_ICON_PANEL_TILE
+	const PANEL_TOP_LEFT
+	const PANEL_TOP
+	const PANEL_TOP_RIGHT
+	const PANEL_LEFT
+	const PANEL_RIGHT
+	const PANEL_BOTTOM_LEFT
+	const PANEL_BOTTOM
+	const PANEL_BOTTOM_RIGHT
+	const PANEL_BACKGROUND ; the Pack's checkered background
+
+LoadItemIconPanelGFX::
+; The white, outlined 5x5 panel the icon sits in (Polished Crystal style).
+	ld de, ItemIconPanelGFX
+	ld hl, vTiles2 tile ITEM_ICON_PANEL_TILE
+	lb bc, BANK(ItemIconPanelGFX), 9
+	jmp Request2bpp
+
 PlacePackItemIconTiles::
-; Under the pocket name, left of the item list (above the TM pocket's
-; taller move box, which starts on row 11).
-	hlcoord 1, 8
-	; fallthrough
+; The icon panel fills the left column below the pack picture (rows 6-10,
+; above the TM pocket's taller move box, which starts on row 11).
+	hlcoord 0, 6
+	call PlaceItemIconPanel
+	hlcoord 1, 7
+	jr PlaceItemIconTiles
+
+PlaceItemIconPanel:
+; Place the 5x5 icon panel at hl.
+	ld de, SCREEN_WIDTH - 5
+	ld a, PANEL_TOP_LEFT
+	ld [hli], a
+	inc a ; PANEL_TOP
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	inc a ; PANEL_TOP_RIGHT
+	ld [hli], a
+	add hl, de
+	ld b, 3
+.side
+	ld a, PANEL_LEFT
+	ld [hli], a
+	inc hl
+	inc hl
+	inc hl
+	inc a ; PANEL_RIGHT
+	ld [hli], a
+	add hl, de
+	dec b
+	jr nz, .side
+	ld a, PANEL_BOTTOM_LEFT
+	ld [hli], a
+	inc a ; PANEL_BOTTOM
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	inc a ; PANEL_BOTTOM_RIGHT
+	ld [hl], a
+	ret
 
 PlaceItemIconTiles::
 ; Place the 3x3 icon tiles at hl.
