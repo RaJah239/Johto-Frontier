@@ -71,7 +71,7 @@ Pack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
-	call WaitBGMap_DrawPackGFX
+	call DrawPackGFX_NoWait
 	jmp Pack_JumptableNext
 
 .ItemsPocketMenu:
@@ -97,9 +97,8 @@ Pack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
-	call WaitBGMap_DrawPackGFX
-	call Pack_JumptableNext
-	ret
+	call DrawPackGFX_NoWait
+	jmp Pack_JumptableNext
 
 .KeyItemsPocketMenu:
 	ld hl, KeyItemsPocketMenuHeader
@@ -157,7 +156,7 @@ Pack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
-	call WaitBGMap_DrawPackGFX
+	call DrawPackGFX_NoWait
 	jmp Pack_JumptableNext
 
 .BallsPocketMenu:
@@ -182,7 +181,7 @@ Pack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
-	call WaitBGMap_DrawPackGFX
+	call DrawPackGFX_NoWait
 	jmp Pack_JumptableNext
 
 .FruitPocketMenu:
@@ -208,7 +207,7 @@ Pack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
-	call WaitBGMap_DrawPackGFX
+	call DrawPackGFX_NoWait
 	jmp Pack_JumptableNext
 
 .BattlePocketMenu:
@@ -635,7 +634,7 @@ BattlePack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
-	call WaitBGMap_DrawPackGFX
+	call DrawPackGFX_NoWait
 	jmp Pack_JumptableNext
 
 .ItemsPocketMenu:
@@ -660,7 +659,7 @@ BattlePack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
-	call WaitBGMap_DrawPackGFX
+	call DrawPackGFX_NoWait
 	jmp Pack_JumptableNext
 
 .KeyItemsPocketMenu:
@@ -706,7 +705,7 @@ BattlePack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
-	call WaitBGMap_DrawPackGFX
+	call DrawPackGFX_NoWait
 	jmp Pack_JumptableNext
 
 .BallsPocketMenu:
@@ -731,7 +730,7 @@ BattlePack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
-	call WaitBGMap_DrawPackGFX
+	call DrawPackGFX_NoWait
 	jmp Pack_JumptableNext
 
 .FruitPocketMenu:
@@ -757,7 +756,7 @@ BattlePack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
-	call WaitBGMap_DrawPackGFX
+	call DrawPackGFX_NoWait
 	jmp Pack_JumptableNext
 
 .BattlePocketMenu:
@@ -1036,7 +1035,7 @@ InitPocket:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
-	jmp WaitBGMap_DrawPackGFX
+	jmp DrawPackGFX_NoWait
 
 DepositSellTutorial_InterpretJoypad:
 	ld hl, wMenuJoypad
@@ -1293,6 +1292,14 @@ Pack_PrintTextNoScroll:
 
 WaitBGMap_DrawPackGFX:
 	call WaitBGMap
+	jr DrawPackGFX
+
+DrawPackGFX_NoWait:
+; For pocket switches. The scrolling menu that follows pushes the whole
+; screen in one go (ApplyTilemap), so skip WaitBGMap's 4 frames and its
+; third-of-the-screen-per-frame redraw: keep VBlank off the BG map until then.
+	xor a
+	ldh [hBGMapMode], a
 DrawPackGFX:
 	ld a, [wCurPocket]
 	maskbits NUM_POCKETS
@@ -1472,7 +1479,11 @@ Pack_InitGFX:
 	ld bc, $60 tiles
 	ld a, BANK(PackMenuGFX)
 	call FarCopyBytes
+	call ReInitBG_PackPocket
+	jmp DrawPackGFX
+
 ReInitBG_PackPocket: ; needed when switching from TM Pocket
+; (the pocket's own init loads its pack picture afterwards)
 ; Background (blue if male, pink if female)
 	hlcoord 0, 1
 	ld bc, 11 * SCREEN_WIDTH
@@ -1489,8 +1500,7 @@ ReInitBG_PackPocket: ; needed when switching from TM Pocket
 	hlcoord 0, SCREEN_HEIGHT - 4 - 2
 	lb bc, 4, SCREEN_WIDTH - 2
 	call Textbox
-	call EnableLCD
-	jmp DrawPackGFX
+	jmp EnableLCD
 
 PlacePackGFX:
 	hlcoord 0, 3
