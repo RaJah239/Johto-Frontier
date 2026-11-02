@@ -20,6 +20,10 @@ AI_IsPlayerImmuneByAbility:
 	ld d, BANK(GroundedPokemon)
 	cp ELECTRIC
 	jr z, .check
+	ld hl, ImmunityPokemon
+	ld d, BANK(ImmunityPokemon)
+	cp POISON
+	jr z, .check
 	and a
 	ret
 
