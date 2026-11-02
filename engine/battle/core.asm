@@ -7926,7 +7926,7 @@ InitEnemyTrainer:
 	callfar ReadTrainerParty
 .ok
 	ld de, vTiles2
-	callfar GetTrainerPic
+	callfar GetBattleTrainerPic
 	xor a
 	ldh [hGraphicStartTile], a
 	dec a
@@ -8469,7 +8469,7 @@ InitBattleDisplay:
 	ld a, $90
 	ldh [hWY], a
 	ldh [rWY], a
-	call WaitBGMap
+	call CopyTilemapAtOnce ; the screen is still black: no need for WaitBGMap's 4 frames
 	xor a
 	ldh [hBGMapMode], a
 	farcall BattleIntroSlidingPics

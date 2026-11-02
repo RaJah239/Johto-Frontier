@@ -1,18 +1,11 @@
 InitBackPic:
 	farcall GetTrainerBackpic
 CopyBackpic:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wDecompressScratch)
-	ldh [rSVBK], a
-	ld hl, vTiles0
-	ld de, vTiles2 tile $31
-	ldh a, [hROMBank]
-	ld b, a
-	ld c, 7 * 7
-	call Get2bpp
-	pop af
-	ldh [rSVBK], a
+; Also load the backpic into vTiles0 for the OAM copy. Loading it from
+; its source again (GDMA) is much faster than copying it out of
+; vTiles2 (VRAM to VRAM goes through Request2bpp, several frames).
+	ld de, vTiles0
+	call GetTrainerBackpicToDE
 	call .LoadTrainerBackpicAsOAM
 	ld a, $31
 	ldh [hGraphicStartTile], a
@@ -80,6 +73,9 @@ ExitBattle:
 
 GetTrainerBackpic:
 ; Load the player character's backpic (6x6) into VRAM starting from vTiles2 tile $31.
+	ld de, vTiles2 tile $31
+GetTrainerBackpicToDE:
+; Same, to de.
 
 ; Special exception for Dude.
 	ld b, BANK(DudeBackpic)
@@ -105,7 +101,6 @@ GetTrainerBackpic:
 	ld hl, ChrisBackpic
 
 .Decompress:
-	ld de, vTiles2 tile $31
 	ld c, 7 * 7
 	predef DecompressGet2bpp
 	ret
