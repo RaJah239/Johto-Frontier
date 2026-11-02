@@ -38,9 +38,9 @@ PrintMoveDamagePreview:
 	call SetPlayerTurn
 
 	hlcoord 1, 8
-	ld [hl], "D"
-	inc hl
-	ld [hl], ":"
+	ld [hl], "<dmg1>"
+	hlcoord 2, 8
+	ld [hl], "<dmg2>"
 
 	call DamagePreview_Compute
 	jr c, .unavailable
