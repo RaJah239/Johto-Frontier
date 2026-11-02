@@ -12,12 +12,10 @@ UpdateItemIconAndDescription::
 	jmp LoadItemIcon
 
 MartUpdateItemIcon::
-; Buy menu: the icon sits in the top-left corner.
+; Buy menu: the icon sits in the left column's panel (see InitMartLeftColumn).
 	ld a, [wMenuSelection]
 	ld e, MART_ITEM_ICON_PAL
-	call LoadItemIcon
-	hlcoord 0, 0
-	jr PlaceItemIconTiles
+	jmp LoadItemIcon
 
 
 DEF ITEM_ICON_PANEL_TILE EQU ITEM_ICON_TILE + 9 ; 9 tiles, $69-$71
@@ -98,8 +96,28 @@ PlaceItemIconTiles::
 	jr nz, .row
 	ret
 
-InitMartItemIconAttrs::
-	hlcoord 0, 0, wAttrmap
+InitMartLeftColumn::
+; Polished Crystal-style buy menu: a checkered column left of the item list
+; (rows 3-11) with the item icon in a panel at its bottom (rows 7-11).
+	call LoadItemIconPanelGFX
+	hlcoord 0, 3
+	ld de, SCREEN_WIDTH - 5
+	ld a, PANEL_BACKGROUND
+	ld b, 4
+.row
+	ld c, 5
+.col
+	ld [hli], a
+	dec c
+	jr nz, .col
+	add hl, de
+	dec b
+	jr nz, .row
+	hlcoord 0, 7
+	call PlaceItemIconPanel
+	hlcoord 1, 8
+	call PlaceItemIconTiles
+	hlcoord 1, 8, wAttrmap
 	lb bc, 3, 3
 	ld a, MART_ITEM_ICON_PAL
 	call FillBoxWithByte

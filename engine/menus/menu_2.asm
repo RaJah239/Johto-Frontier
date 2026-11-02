@@ -80,30 +80,6 @@ ClearItemInBagQuantitysBox:
 
 .BlankString: db "@"
 
-MartPlaceItemInBagQuantity:
-; PlaceItemInBagQuantity for the Mart's buy menu: the box sits right of
-; the item icon (0, 0); its right border shares column 11 with the money box.
-	hlcoord 3, 0
-	lb bc, 1, 7
-	call Textbox
-	hlcoord 4, 1
-	ld de, PlaceItemInBagQuantity.InBagString
-	call PlaceString
-	ld a, [wMenuSelection]
-	cp -1
-	jr z, MartClearItemInBagQuantityBox
-	hlcoord 8, 1
-	ld [hl], "×"
-	inc hl
-	ld de, wMenuSelectionQuantity
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	jmp PrintNum
-
-MartClearItemInBagQuantityBox:
-	hlcoord 3, 0
-	lb bc, 3, 8
-	jmp ClearBox
-
 PlaceMoneyTopRight:
 	ld hl, MoneyTopRightMenuHeader
 	call CopyMenuHeader
