@@ -886,8 +886,8 @@ _PlayersPCNoItemsText::
 	prompt
 
 _CantDepositText::
-	text "Key Items can't"
-	line "be deposited."
+	text "TM/HM or Key Items"
+	line "can't be deposited."
 	prompt
 
 _PlayersPCHowManyDepositText::
