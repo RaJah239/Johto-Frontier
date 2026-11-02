@@ -6,6 +6,7 @@ PrintMoveDamagePreview:
 ;   D:dmg      when there's no random roll (fixed-damage moves, Flail, 0 or 1)
 ;   D:---      status moves, Counter, Mirror Coat
 ; Uses the same battle routines as the real attack (no critical hits).
+; Shows 0 when the opponent's ability makes it immune to the move's type.
 ; Everything those routines touch is saved and restored, including
 ; wCurDamage (Counter reads it) and the move's power and type.
 	ld a, [wCurDamage]
@@ -120,18 +121,19 @@ DamagePreview_Compute:
 .damage_calc
 	callfar BattleCommand_DamageCalc
 	callfar BattleCommand_Stab
-	call DamagePreview_Levitate
+	call DamagePreview_AbilityImmunity
 	call DamagePreview_CapCurDamage
 	jr DamagePreview_LowestRoll
 
 .flail
 	callfar BattleCommand_ConstantDamage
 	callfar BattleCommand_Stab
-	call DamagePreview_Levitate
+	call DamagePreview_AbilityImmunity
 	jr .exact
 
 .constant
 	callfar BattleCommand_ConstantDamage
+	call DamagePreview_AbilityImmunity
 .exact
 	call DamagePreview_CapCurDamage
 	ld a, [wCurDamage]
@@ -145,15 +147,14 @@ DamagePreview_Compute:
 	scf
 	ret
 
-DamagePreview_Levitate:
-; Levitate: Ground moves do nothing to the opponent's mon.
+DamagePreview_AbilityImmunity:
+; The opponent's ability blocks the move's type: Levitate (Ground),
+; Waterproof (Water), Flame Ward (Fire), Grounded (Electric) or
+; Immunity (Poison). Then the move does no damage.
 	ld a, [wPlayerMoveStruct + MOVE_TYPE]
 	and TYPE_MASK
-	cp GROUND
-	ret nz
-	ld a, [wEnemyMonSpecies]
-	ld hl, LevitatePokemon
-	call IsInByteArray
+	ld b, a
+	farcall AI_IsEnemyImmuneByAbility
 	ret nc
 	xor a
 	ld [wCurDamage], a

@@ -1,8 +1,20 @@
 AI_IsPlayerImmuneByAbility:
 ; b = move type. Return carry if the player's active mon's ability makes it
 ; immune to moves of that type: Levitate (Ground), Waterproof (Water),
-; Flame Ward (Fire) or Grounded (Electric). Reads each table from its own
-; bank, so it works from any bank (call with farcall; b and carry survive).
+; Flame Ward (Fire), Grounded (Electric) or Immunity (Poison). Reads each
+; table from its own bank, so it works from any bank (call with farcall;
+; b and carry survive).
+	ld a, [wBattleMonSpecies]
+	jr IsSpeciesImmuneByAbility
+
+AI_IsEnemyImmuneByAbility:
+; Same as AI_IsPlayerImmuneByAbility, for the opponent's active mon.
+	ld a, [wEnemyMonSpecies]
+	; fallthrough
+
+IsSpeciesImmuneByAbility:
+; a = species, b = move type.
+	ld e, a
 	ld a, b
 	ld hl, LevitatePokemon
 	ld d, BANK(LevitatePokemon)
@@ -28,8 +40,6 @@ AI_IsPlayerImmuneByAbility:
 	ret
 
 .check
-	ld a, [wBattleMonSpecies]
-	ld e, a
 .loop
 	ld a, d
 	call GetFarByte
