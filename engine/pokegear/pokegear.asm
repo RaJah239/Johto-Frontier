@@ -730,6 +730,7 @@ PokegearMap_Init:
 	call InitPokegearTilemap
 	ld a, [wPokegearMapPlayerIconLandmark]
 	call PokegearMap_InitPlayerIcon
+	call PokegearMap_InitSwarmIcon
 	ld a, [wPokegearMapCursorLandmark]
 	call PokegearMap_InitCursor
 	ld a, c
@@ -867,6 +868,154 @@ PokegearMap_InitPlayerIcon:
 	ld hl, SPRITEANIMSTRUCT_YCOORD
 	add hl, bc
 	ld [hl], d
+	ret
+
+DEF POKEGEAR_SWARM_ICON_TILE EQU $60
+
+PokegearMap_InitSwarmIcon:
+; While a swarm is in progress, show the swarming species' icon on the
+; town map at the swarm's location (only on the region map it belongs to).
+; The icon is the 4th sprite anim object: mode arrow (4 OAM entries) and
+; player icon (4 OAM entries) come first, so it uses OAM entries 8-11.
+	call GetActiveSwarmSpeciesAndMap
+	ret nc
+	push de ; d = species
+	call GetWorldMapLocation
+	pop de
+	and a ; LANDMARK_SPECIAL
+	ret z
+	ld e, a ; e = landmark
+	ld a, [wJumptableIndex]
+	cp POKEGEARSTATE_KANTOMAPINIT
+	ld a, e
+	jr z, .kanto
+	cp KANTO_LANDMARK
+	ret nc
+	jr .region_ok
+
+.kanto
+	cp KANTO_LANDMARK
+	ret c
+.region_ok
+	push de
+; load the icon graphics
+	ld a, d
+	ld [wCurIcon], a
+	ld de, POKEGEAR_SWARM_ICON_TILE
+	farcall GetIcon_de
+; create the sprite
+	depixel 0, 0
+	ld a, SPRITE_ANIM_OBJ_PARTY_MON
+	call InitSpriteAnimStruct
+	ld hl, SPRITEANIMSTRUCT_TILE_ID
+	add hl, bc
+	ld [hl], POKEGEAR_SWARM_ICON_TILE
+	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
+	add hl, bc
+	ld [hl], SPRITE_ANIM_FUNC_NULL
+	pop de
+	push de
+	push bc
+	farcall GetLandmarkCoords
+	pop bc
+	ld hl, SPRITEANIMSTRUCT_XCOORD
+	add hl, bc
+	ld [hl], e
+	ld hl, SPRITEANIMSTRUCT_YCOORD
+	add hl, bc
+	ld [hl], d
+; set the species' menu icon colour (the icon OAM data keeps attributes)
+	pop de
+	ld a, d
+	dec a
+	ld c, a
+	ld b, 0
+	ld hl, MonMenuIconPals
+	add hl, bc
+	ld a, BANK(MonMenuIconPals)
+	call GetFarByte
+	swap a
+	and $f
+	ld hl, wShadowOAMSprite08Attributes
+	ld c, 4
+	ld de, OBJ_SIZE
+.loop
+	ld [hl], a
+	add hl, de
+	dec c
+	jr nz, .loop
+	ret
+
+GetActiveSwarmSpeciesAndMap:
+; If a swarm is in progress, return carry with d = species and
+; b, c = swarm map group, number. Otherwise return nc.
+	ld a, [wSwarmMapGroup]
+	and a
+	ret z
+	ld hl, wSwarmFlags
+	bit SWARMFLAGS_ALT_SWARM_F, [hl]
+	ld hl, SwarmGrassWildMonsAlt
+	jr nz, .grass
+	ld hl, wDailyFlags1
+	bit DAILYFLAGS1_SWARM_F, [hl]
+	ret z
+	ld hl, SwarmGrassWildMons
+.grass
+	lb de, BANK(SwarmGrassWildMons), 2 + 3 + 1
+	ld bc, GRASS_WILDDATA_LENGTH
+	call .Search
+	ret c
+	ld hl, wDailyFlags1
+	bit DAILYFLAGS1_SWARM_F, [hl]
+	ret z
+	ld hl, SwarmWaterWildMons
+	lb de, BANK(SwarmWaterWildMons), 2 + 1 + 1
+	ld bc, WATER_WILDDATA_LENGTH
+.Search:
+; hl = table, bc = entry length, d = bank, e = species offset
+.loop
+	ld a, d
+	call GetFarByte
+	cp -1
+	jr z, .not_found
+	push bc
+	ld b, a
+	ld a, [wSwarmMapGroup]
+	cp b
+	jr nz, .next_pop
+	inc hl
+	ld a, d
+	call GetFarByte
+	dec hl
+	ld c, a
+	ld a, [wSwarmMapNumber]
+	cp c
+	jr nz, .next_pop
+; found: fetch species
+	pop bc
+	ld a, e
+	add l
+	ld l, a
+	adc h
+	sub l
+	ld h, a
+	ld a, d
+	call GetFarByte
+	ld d, a
+	ld a, [wSwarmMapGroup]
+	ld b, a
+	ld a, [wSwarmMapNumber]
+	ld c, a
+	scf
+	ret
+
+.next_pop
+	pop bc
+	add hl, bc
+	jr .loop
+
+.not_found
+	and a
 	ret
 
 PokegearMap_InitCursor:

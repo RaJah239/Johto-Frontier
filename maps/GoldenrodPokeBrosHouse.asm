@@ -380,6 +380,10 @@ SwarmGrampsScript:
 		
 		para "Me too! I'm old."
 
+		para "Luckily, it's in"
+		line "your #Gear's"
+		cont "map."
+
 		para "What I do remember"
 		line "is there are 26"
 		cont "#mon swarms and"

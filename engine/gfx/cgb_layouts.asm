@@ -257,7 +257,7 @@ _CGB_PokegearPals:
 	call FarCopyWRAM
 	ld hl, PokegearOBPals
 	ld de, wOBPals1
-	ld bc, 2 palettes
+	ld bc, 8 palettes ; all icon colours, for the town map's swarm icon
 	call FarCopyColorWRAM
 	call ApplyPals
 	ld a, TRUE
