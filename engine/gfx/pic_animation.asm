@@ -50,6 +50,7 @@ PokeAnims:
 	dw .Egg1
 	dw .Egg2
 	dw .SlowNoCry
+	dw .NormalNoCry
 
 .Slow:   pokeanim StereoCry, Setup2, Play
 .Normal: pokeanim StereoCry, Setup, Play
@@ -61,6 +62,7 @@ PokeAnims:
 .Egg1:   pokeanim Setup, Play
 .Egg2:   pokeanim Idle, Play
 .SlowNoCry: pokeanim Setup2, Play
+.NormalNoCry: pokeanim Setup, Play
 
 AnimateFrontpic:
 	call AnimateMon_CheckIfPokemon

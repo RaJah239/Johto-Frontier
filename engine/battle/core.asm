@@ -3023,6 +3023,11 @@ ShowSetEnemyMonAndSendOutAnimation:
 	hlcoord 12, 0
 	ld d, $0
 	ld e, ANIM_MON_SLOW
+	; "Pokemon Cries" off: animate without the cry
+	call CheckMonCries
+	jr z, .send_out_anim
+	ld e, ANIM_MON_SLOW_NOCRY
+.send_out_anim
 	predef AnimateFrontpic
 	jr .skip_cry
 
@@ -8527,6 +8532,11 @@ BattleStartMessage:
 	hlcoord 12, 0
 	ld d, $0
 	ld e, ANIM_MON_NORMAL
+	; "Pokemon Cries" off: animate without the cry
+	call CheckMonCries
+	jr z, .appear_anim
+	ld e, ANIM_MON_NORMAL_NOCRY
+.appear_anim
 	predef AnimateFrontpic
 	jr .skip_cry ; cry is played during the animation
 
