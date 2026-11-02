@@ -9,7 +9,10 @@
 ; 2. Drain to win: the enemy would lose the normal 1-on-1 (GetDamageRaceHits),
 ;    but wins it by using the drain move every turn and healing half the
 ;    damage each time -> the drain move is strongly encouraged.
-;    Not used for Dream Eater (the player's mon can wake up).
+; 3. Dream Eater on a sleeping target: it has priority, so it lands before the
+;    sleeping mon's turn every turn, including the turn it wakes up (sleep
+;    counter = remaining hits). If those hits KO, the enemy wins without
+;    taking a hit -> strongly encouraged (see AIDrain_DreamEaterHits).
 
 DEF AI_DRAIN_FASTER_F    EQU 0
 DEF AI_DRAIN_LOW_HP_F    EQU 1
@@ -261,7 +264,7 @@ AIDrain_CheckSlot:
 	; 2. drain to win the 1-on-1 it would otherwise lose
 	ld a, e
 	and a
-	jr nz, .no ; Dream Eater: the player's mon can wake up
+	jr nz, .dream_eater
 	ld a, [wAIDrainFlags]
 	bit AI_DRAIN_RACE_LOST_F, a
 	jr z, .no
@@ -270,6 +273,7 @@ AIDrain_CheckSlot:
 	pop bc
 	jr nc, .no
 
+.encourage
 	; strongly encourage it (without wrapping past -32)
 	ld hl, wEnemyAIMoveScores
 	ld b, 0
@@ -293,6 +297,97 @@ AIDrain_CheckSlot:
 	add hl, bc
 	ld [hl], $e0
 	scf
+	ret
+
+.dream_eater
+	; 3. KOs within the hits that land while the player's mon sleeps
+	push bc
+	call AIDrain_DreamEaterHits
+	call AIDrain_KOsWithinHits
+	pop bc
+	jr c, .encourage
+	and a
+	ret
+
+AIDrain_DreamEaterHits:
+; b = Dream Eater (the player's mon is asleep). Return in a how many Dream
+; Eaters are sure to land before it can act: its sleep counter (it wakes up
+; during its own turn and Dream Eater has priority, so Dream Eater also lands
+; on the waking turn), one fewer if it has a move that goes before Dream
+; Eater on that turn (higher priority like Protect, or the same priority
+; while faster), and 0 if it knows Sleep Talk (it can attack while asleep).
+	xor a
+	ld [wAIDrainSimEnemyHP], a ; 1: one hit fewer (scratch, the race isn't running)
+	ld a, [wEnemyMonItem]
+	ld c, a
+	farcall GetMovePriority_Far
+	ld d, b ; Dream Eater's priority
+	ld hl, wBattleMonMoves
+	ld e, NUM_MOVES
+.loop
+	ld a, [hli]
+	and a
+	jr z, .done
+	cp SLEEP_TALK
+	jr z, .none
+	push hl
+	push de
+	ld b, a
+	ld a, [wBattleMonItem]
+	ld c, a
+	farcall GetMovePriority_Far
+	pop de
+	pop hl
+	ld a, b
+	cp d
+	jr c, .next ; lower priority
+	jr nz, .goes_first ; higher priority
+	ld a, [wAIDrainFlags]
+	bit AI_DRAIN_FASTER_F, a
+	jr nz, .next ; same priority, but the enemy is faster
+.goes_first
+	ld a, 1
+	ld [wAIDrainSimEnemyHP], a
+.next
+	dec e
+	jr nz, .loop
+.done
+	ld a, [wAIDrainSimEnemyHP]
+	ld b, a
+	ld a, [wBattleMonStatus]
+	and SLP_MASK
+	sub b
+	ret nc
+	xor a
+	ret
+
+.none
+	xor a
+	ret
+
+AIDrain_KOsWithinHits:
+; a = hits. Return carry if a * wAIDrainHit >= the player's current HP.
+	and a
+	ret z
+	ld b, a
+	ld a, [wAIDrainHit]
+	ld d, a
+	ld a, [wAIDrainHit + 1]
+	ld e, a
+	ld hl, 0
+.add
+	add hl, de
+	dec b
+	jr nz, .add
+	ld a, [wBattleMonHP + 1]
+	ld e, a
+	ld a, [wBattleMonHP]
+	ld d, a
+	ld a, l
+	sub e
+	ld a, h
+	sbc d
+	ccf
 	ret
 
 AIDrain_MinRoll:
