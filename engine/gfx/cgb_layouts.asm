@@ -849,13 +849,19 @@ _CGB_MapPals:
 	ret
 
 _CGB_PartyMenu:
+	call _CGB_PartyMenuPals
+	jmp ApplyAttrmap
+
+LoadPartyMenuPalsOnly::
+; SCGB_PARTY_MENU without pushing the attrmap, for when the caller
+; is about to push it anyway.
+	call ResetBGPals
+_CGB_PartyMenuPals:
 	ld hl, PalPacket_PartyMenu + 1
 	call CopyFourPalettes
 	call InitPartyMenuBGPal0
 	call InitPartyMenuBGPal7
-	call InitPartyMenuOBPals
-	call ApplyAttrmap
-	ret
+	jmp InitPartyMenuOBPals
 
 _CGB_Evolution:
 	ld de, wBGPals1

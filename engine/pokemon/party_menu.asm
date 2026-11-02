@@ -189,8 +189,13 @@ PlacePartyHPBar:
 	inc b
 	dec c
 	jr nz, .loop
-	ld b, SCGB_PARTY_MENU
-	jmp GetSGBLayout
+; PlacePartyMenuHeldItemIcons pushes the attrmap at the end of
+; WritePartyMenuTilemap, so only the palettes are needed here
+; (GetSGBLayout would push it a second time).
+	ldh a, [hCGB]
+	and a
+	ret z
+	farjp LoadPartyMenuPalsOnly
 
 PlacePartymonHPBar:
 	ld a, b
