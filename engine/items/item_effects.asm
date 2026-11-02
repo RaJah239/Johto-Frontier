@@ -2418,7 +2418,7 @@ MusicPlayerEffect:
 	call GetSGBLayout
 	farcall LoadOW_BGPal7
 	call WaitBGMap2
-	farcall FadeInFromWhite
+	farcall FadeInPalettes
 	jmp EnableSpriteUpdates
 
 OldRodEffect:

@@ -62,3 +62,4 @@ MapSetupCommands:
 	add_mapsetup CancelWeatherFade ; 39
 	add_mapsetup ResumeWeather ; 3a
 	add_mapsetup PrepareWeatherForFullScreen ; 3b
+	add_mapsetup FadeInPalettes ; 3c

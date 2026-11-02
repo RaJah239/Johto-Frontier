@@ -59,7 +59,7 @@ CianwoodPortSailor1Script:
 	pause 30
 	playsound SFX_BOAT
 	earthquake 30
-	special FadeOutToWhite
+	special FadeOutPalettes
 	waitsfx
 	warp OLIVINE_PORT, 7, 23
 	applymovement PLAYER, OlivinePortExitFastShipMovement1
