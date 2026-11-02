@@ -68,10 +68,6 @@ RuinsOfAlphResearchCenterGetUnownDexScript:
 		line "optional #dex"
 		cont "to store Unown"
 		cont "data."
-
-		para "It records them in"
-		line "the sequence that"
-		cont "they were caught."
 		done
 	applymovement RUINSOFALPHRESEARCHCENTER_SCIENTIST3, RuinsOfAlphResearchCenterApproachesPlayerMovement
 	opentext

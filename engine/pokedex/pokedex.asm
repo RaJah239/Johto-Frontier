@@ -1441,6 +1441,7 @@ Pokedex_UpdateSearchResultsScreen:
 
 Pokedex_InitUnownMode:
 	call Pokedex_LoadUnownFont
+	call Pokedex_LoadUnownModeDividers
 	call Pokedex_DrawUnownModeBG
 	xor a
 	ld [wDexCurUnownIndex], a
@@ -1452,6 +1453,12 @@ Pokedex_InitUnownMode:
 	call Pokedex_GetSGBLayout
 	call Pokedex_IncrementDexPointer
 	ret
+
+; wDexCurUnownIndex is an alphabetical index (A = 0), not an index into
+; wUnownDex: the Unown mode grid shows every letter in A-Z order.
+
+Pokedex_IsUnownCaught:
+INCLUDE "engine/pokedex/is_unown_caught.asm"
 
 Pokedex_UpdateUnownMode:
 	ld hl, hJoyPressed
@@ -1488,20 +1495,45 @@ ENDC
 Pokedex_UnownModeHandleDPadInput:
 	ld hl, hJoyLast
 	ld a, [hl]
-	and D_RIGHT
+	bit D_RIGHT_F, a
 	jr nz, .right
-	ld a, [hl]
-	and D_LEFT
+	bit D_LEFT_F, a
 	jr nz, .left
+	bit D_DOWN_F, a
+	jr nz, .down
+	bit D_UP_F, a
+	jr nz, .up
 	ret
 
+; the grid is 5 letters wide (A-E, F-J, ..., U-Y, Z)
+.up
+	ld hl, wDexCurUnownIndex
+	ld a, [hl]
+	push af
+	sub 5
+	jr nc, .apply_cur_unown_index
+	xor a
+	jr .apply_cur_unown_index
+
+.down
+	ld hl, wDexCurUnownIndex
+	ld a, [hl]
+	push af
+	add 5
+	cp NUM_UNOWN - 1
+	jr c, .apply_cur_unown_index
+	ld a, NUM_UNOWN - 1
+
+.apply_cur_unown_index
+	ld [hl], a
+	pop af ; the old index, for erasing the cursor
+	jr .update
+
 .right
-	ld a, [wDexUnownCount]
-	ld e, a
 	ld hl, wDexCurUnownIndex
 	ld a, [hl]
 	inc a
-	cp e
+	cp NUM_UNOWN
 	ret nc
 	ld a, [hl]
 	inc [hl]
@@ -1780,6 +1812,10 @@ String_OWN:
 String_SELECT_OPTION:
 	db $3b, $48, $49, $4a, $44, $45, $46, $47 ; SELECT > OPTION
 	; fallthrough
+String_UNOWN:
+	db "UNOWN", -1
+String_OutOf26:
+	db "/26", -1
 String_START_SEARCH:
 	db $3c, $3b, $41, $42, $43, $4b, $4c, $4d, $3c, $32, -1 ; START > SEARCH
 
@@ -2285,28 +2321,80 @@ Pokedex_PlaceSearchResultsTypeStrings:
 	ret
 
 Pokedex_DrawUnownModeBG:
+; Ported from sour: the picture at the top left, an "UNOWN nn/26" box
+; under it and every letter in a 5-wide A-Z grid on the right ("-" for
+; letters not caught yet). The Unown font covers tiles $40-$5a, so the
+; divider pieces come from Pokedex_LoadUnownModeDividers at $62-$65
+; ($64 top junction, $65 vertical, $62 / $63 side junctions); $5b is
+; the bottom junction.
 	call Pokedex_FillBackgroundColor2
-	hlcoord 2, 1
-	lb bc, 10, 13
+	hlcoord 8, 1
+	lb bc, 11, 10
+	call Pokedex_PlaceBorder
+	hlcoord 0, 1
+	lb bc, 7, 7
 	call Pokedex_PlaceBorder
 	hlcoord 2, 14
 	lb bc, 1, 13
 	call Pokedex_PlaceBorder
+	hlcoord 0, 10
+	lb bc, 2, 7
+	call Pokedex_PlaceBorder
+	hlcoord 8, 2
+	ld b, 7
+	ld a, $65
+	call Pokedex_FillColumn
+	hlcoord 8, 1
+	ld [hl], $64
+	hlcoord 8, 9
+	ld [hl], $62
 	hlcoord 2, 15
 	ld [hl], $3d
 	hlcoord 16, 15
 	ld [hl], $3e
-	hlcoord 6, 5
+	hlcoord 8, 10
+	ld [hl], $63
+	hlcoord 8, 13
+	ld [hl], $5b
+	hlcoord 8, 11
+	ld b, 2
+	ld a, $65
+	call Pokedex_FillColumn
+	hlcoord 1, 11
+	ld de, String_UNOWN
+	call Pokedex_PlaceString
+	hlcoord 5, 12
+	ld de, String_OutOf26
+	call Pokedex_PlaceString
+	call PrintUnownCaught
+	hlcoord 1, 2
 	call PlaceFrontpicAtHL
-	ld de, 0
-	ld b, 0
+; a dash for every letter...
 	ld c, NUM_UNOWN
-.loop
+	ld hl, UnownModeLetterAndCursorCoords
+.loop_dashes
+	push hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld [hl], "-"
+	pop hl
+rept 4
+	inc hl
+endr
+	dec c
+	jr nz, .loop_dashes
+; ...then the caught ones over them
+	lb bc, 0, NUM_UNOWN ; b = count, c = loop bound
 	ld hl, wUnownDex
-	add hl, de
-	ld a, [hl]
+.loop
+	ld a, [hli]
 	and a
 	jr z, .done
+	dec a
+	ld e, a
+	ld d, 0
+	push hl
 	push af
 	ld hl, UnownModeLetterAndCursorCoords
 rept 4
@@ -2316,9 +2404,9 @@ endr
 	ld h, [hl]
 	ld l, a
 	pop af
-	add FIRST_UNOWN_CHAR - 1 ; Unown A
+	add FIRST_UNOWN_CHAR ; Unown A
 	ld [hl], a
-	inc de
+	pop hl
 	inc b
 	dec c
 	jr nz, .loop
@@ -2327,35 +2415,55 @@ endr
 	ld [wDexUnownCount], a
 	ret
 
+PrintUnownCaught:
+; "nn" of "UNOWN nn/26"
+	ld hl, wUnownDex
+	ld b, 0
+.loop
+	ld a, [hli]
+	and a
+	jr z, .print
+	inc b
+	ld a, b
+	cp NUM_UNOWN
+	jr c, .loop
+.print
+	hlcoord 3, 12
+	ld de, wStringBuffer2
+	ld a, b
+	ld [de], a
+	lb bc, 1, 2
+	jmp PrintNum
+
 UnownModeLetterAndCursorCoords:
 ; entries correspond to Unown forms
 ;           letter, cursor
-	dwcoord   4,11,   3,11 ; A
-	dwcoord   4,10,   3,10 ; B
-	dwcoord   4, 9,   3, 9 ; C
-	dwcoord   4, 8,   3, 8 ; D
-	dwcoord   4, 7,   3, 7 ; E
-	dwcoord   4, 6,   3, 6 ; F
-	dwcoord   4, 5,   3, 5 ; G
-	dwcoord   4, 4,   3, 4 ; H
-	dwcoord   4, 3,   3, 2 ; I
-	dwcoord   5, 3,   5, 2 ; J
-	dwcoord   6, 3,   6, 2 ; K
-	dwcoord   7, 3,   7, 2 ; L
-	dwcoord   8, 3,   8, 2 ; M
-	dwcoord   9, 3,   9, 2 ; N
-	dwcoord  10, 3,  10, 2 ; O
-	dwcoord  11, 3,  11, 2 ; P
-	dwcoord  12, 3,  12, 2 ; Q
-	dwcoord  13, 3,  13, 2 ; R
-	dwcoord  14, 3,  15, 2 ; S
-	dwcoord  14, 4,  15, 4 ; T
-	dwcoord  14, 5,  15, 5 ; U
-	dwcoord  14, 6,  15, 6 ; V
-	dwcoord  14, 7,  15, 7 ; W
-	dwcoord  14, 8,  15, 8 ; X
-	dwcoord  14, 9,  15, 9 ; Y
-	dwcoord  14,10,  15,10 ; Z
+	dwcoord  10, 2,   9, 2 ; A
+	dwcoord  12, 2,  11, 2 ; B
+	dwcoord  14, 2,  13, 2 ; C
+	dwcoord  16, 2,  15, 2 ; D
+	dwcoord  18, 2,  17, 2 ; E
+	dwcoord  10, 4,   9, 4 ; F
+	dwcoord  12, 4,  11, 4 ; G
+	dwcoord  14, 4,  13, 4 ; H
+	dwcoord  16, 4,  15, 4 ; I
+	dwcoord  18, 4,  17, 4 ; J
+	dwcoord  10, 6,   9, 6 ; K
+	dwcoord  12, 6,  11, 6 ; L
+	dwcoord  14, 6,  13, 6 ; M
+	dwcoord  16, 6,  15, 6 ; N
+	dwcoord  18, 6,  17, 6 ; O
+	dwcoord  10, 8,   9, 8 ; P
+	dwcoord  12, 8,  11, 8 ; Q
+	dwcoord  14, 8,  13, 8 ; R
+	dwcoord  16, 8,  15, 8 ; S
+	dwcoord  18, 8,  17, 8 ; T
+	dwcoord  10,10,   9,10 ; U
+	dwcoord  12,10,  11,10 ; V
+	dwcoord  14,10,  13,10 ; W
+	dwcoord  16,10,  15,10 ; X
+	dwcoord  18,10,  17,10 ; Y
+	dwcoord  10,12,   9,12 ; Z
 
 Pokedex_FillBackgroundColor2:
 	hlcoord 0, 0
@@ -2735,7 +2843,7 @@ Pokedex_DisplayModeDescription:
 
 .UnownMode:
 	db   "UNOWN are listed"
- 	next "in catching order.@"
+ 	next "by forms.@"
 
 Pokedex_DisplayChangingModesMessage:
 	xor a
@@ -3891,6 +3999,20 @@ Pokedex_CheckSGB:
 	dec a
 	ret
 
+Pokedex_LoadUnownModeDividers:
+; The Unown font (tiles $40-$5a) covers the divider pieces the main
+; screen uses ($53, $54, $59, $5a), so Unown mode gets copies at
+; $62-$65. Leaving Unown mode reloads the Pokedex tiles there.
+	ld de, UnownModeDividerGFX
+	ld hl, vTiles2 tile $62
+	lb bc, BANK(UnownModeDividerGFX), 4
+	jmp Request2bpp
+
+UnownModeDividerGFX:
+; tiles $53-$54 and $59-$5a of the Pokedex sheet (loaded at $31)
+INCBIN "gfx/pokedex/pokedex.2bpp", ($53 - $31) * LEN_2BPP_TILE, 2 * LEN_2BPP_TILE
+INCBIN "gfx/pokedex/pokedex.2bpp", ($59 - $31) * LEN_2BPP_TILE, 2 * LEN_2BPP_TILE
+
 Pokedex_LoadUnownFont:
 	ld a, BANK(sScratch)
 	call OpenSRAM
@@ -3914,17 +4036,21 @@ Pokedex_LoadUnownFrontpicTiles:
 	ld a, [wUnownLetter]
 	push af
 	ld a, [wDexCurUnownIndex]
-	ld e, a
-	ld d, 0
-	ld hl, wUnownDex
-	add hl, de
-	ld a, [hl]
+	ld b, a
+	call Pokedex_IsUnownCaught
+	jr nc, .no_show ; not caught yet: question mark
+	ld a, b
+	inc a
 	ld [wUnownLetter], a
 	ld a, UNOWN
 	ld [wCurPartySpecies], a
 	call GetBaseData
 	ld de, vTiles2 tile $00
 	predef GetMonFrontpic
+	jr .done
+.no_show
+	call Pokedex_LoadSelectedMonTiles.QuestionMark
+.done
 	pop af
 	ld [wUnownLetter], a
 	ret

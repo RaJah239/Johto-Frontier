@@ -761,11 +761,11 @@ _CGB_PokedexUnownMode:
 	call CheckPokedexColor
  	call GetPredefPal
 	call LoadHLPaletteIntoDE
-	ld a, [wCurPartySpecies]
+	ld a, UNOWN
 	call GetMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
 	call WipeAttrmap
-	hlcoord 7, 5, wAttrmap
+	hlcoord 1, 2, wAttrmap ; the picture's spot in the Unown mode grid
 	lb bc, 7, 7
 	ld a, $1 ; mon palette
 	call FillBoxCGB
