@@ -90,6 +90,13 @@ MoveInfoBox:
 	jr c, .skip_type_effectiveness
 
 	call SetPlayerTurn
+	; the foe's ability blocks this type (Levitate, Waterproof, Flame Ward,
+	; Grounded, Immunity): show x0
+	ld a, [wPlayerMoveStruct + MOVE_TYPE]
+	and TYPE_MASK
+	ld b, a
+	farcall AI_IsEnemyImmuneByAbility
+	jr c, .immune
 	farcall BattleCheckTypeMatchup
 	ld a, [wTypeMatchup]
 	and a
