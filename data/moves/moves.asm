@@ -230,7 +230,7 @@ Moves:
 	move SUNNY_DAY,    EFFECT_SUNNY_DAY,           0, FIRE,          STATUS,   100,  5,   0
 	move SUPER_FANG,   EFFECT_SUPER_FANG,          1, NORMAL,        PHYSICAL, 100, 10,   0
 	move SUPERSONIC,   EFFECT_CONFUSE_HIT,        35, NORMAL,        SPECIAL,  100, 20,  50
-	move SURF,         EFFECT_NORMAL_HIT,         95, WATER,         PHYSICAL, 100, 15,   0
+	move SURF,         EFFECT_NORMAL_HIT,         95, WATER,         SPECIAL,  100, 15,   0
 	move SWAGGER,      EFFECT_SWAGGER,             0, NORMAL,        STATUS,    95, 15, 100
 	move SWIFT,        EFFECT_ALWAYS_HIT,         40, STEEL,         SPECIAL,  100, 35,   0
 	move SWORDS_DANCE, EFFECT_ATTACK_UP_2,         0, NORMAL,        STATUS,   100, 20,   0
