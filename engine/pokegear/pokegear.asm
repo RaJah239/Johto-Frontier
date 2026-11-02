@@ -70,8 +70,13 @@ PokeGear:
 	jmp ExitPokegearRadio_HandleMusic
 
 .InitTilemap:
-	call ClearBGPalettes
-	call ClearTilemap
+; The LCD goes off right away, so there's no need to wait for the
+; white palettes and the blank tilemap to be sent first.
+	call ClearPalettes
+	hlcoord 0, 0
+	ld a, " "
+	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	call ByteFill
 	call ClearSprites
 	call DisableLCD
 	xor a
@@ -287,15 +292,13 @@ InitPokegearTilemap:
 	ret
 
 .UpdateBGMap:
+; Send the attrmap and tilemap to [hBGMapAddress] in one frame
+; (newbox's tear-free copy) instead of 3 + 2 frames.
 	ldh a, [hCGB]
 	and a
-	jr z, .dmg
-	ld a, $2
-	ldh [hBGMapMode], a
-	ld c, 3
-	call DelayFrames
-.dmg
-	jmp WaitBGMap
+	jmp z, WaitBGMap
+	ld b, 3 ; keep any pending palette update
+	farjp _SafeCopyTilemapAtOnce
 
 .Jumptable:
 ; entries correspond to POKEGEARCARD_* constants
