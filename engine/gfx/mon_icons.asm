@@ -589,9 +589,9 @@ GetIconBank:
 	ret
 
 GetGFXUnlessMobile:
-	ld a, [wLinkMode]
-	cp LINK_MOBILE
-	jmp nz, Request2bpp
+; Send the icon tiles straight away with H-Blank DMA instead of
+; requesting them for the next VBlank: a party of 6 used to take
+; 6+ frames to load its icons, now it takes a few scanlines.
 	jmp Get2bppViaHDMA
 
 
