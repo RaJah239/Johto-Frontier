@@ -750,7 +750,7 @@ PCItemsJoypad:
 	db SCROLLINGMENU_ITEMS_QUANTITY ; item format
 	dbw 0, wNumPCItems
 	dba PlaceMenuItemName
-	dba PlacePCItemQuantity
+	dba PlaceMenuItemQuantity
 	dba UpdateItemDescription
 
 PC_DisplayText:
