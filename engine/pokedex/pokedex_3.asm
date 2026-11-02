@@ -149,7 +149,8 @@ DrawDexEntryScreenRightEdge:
 	ld b, SCREEN_HEIGHT
 	hlcoord 19, 0, wAttrmap
 	call Pokedex_FillColumn2
-	call WaitBGMap2
+	ld b, 3 ; tiles and attributes at once
+	farcall _SafeCopyTilemapAtOnce
 	pop hl
 	ld a, l
 	ldh [hBGMapAddress], a
@@ -185,7 +186,8 @@ DrawDexEntryScreenRightEdge_Evo:
  	; ld b, SCGB_POKEDEX_EVO
  	; call GetSGBLayout
  
- 	call WaitBGMap2
+ 	ld b, 3 ; tiles and attributes at once
+	farcall _SafeCopyTilemapAtOnce
  	pop hl
  	ld a, l
  	ldh [hBGMapAddress], a
