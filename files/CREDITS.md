@@ -113,6 +113,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - ErikAnpin - View Pokédex entry of selected Pokémon in Menu
 - ShinyDragonHunter - code optimisation
 - aaronjeter - text compression
+- Sour Apple - Unown Pokédex
 
 # Music
 - mmmmmmmmmmmmmmmmm - Cave of Origin, RBY Indigo Plateau themes, Vs. Hoenn Champion
