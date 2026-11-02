@@ -211,11 +211,26 @@ LoadMapNameSignGFX:
 	jr nz, .fade_active
 	jp SetDefaultBGPAndOBP
 .fade_active
-	; The fade owns the BG palettes; just request an upload so the
-	; new text palette takes effect.
+	; The fade owns the BG palettes: it blends the displayed ones
+	; (wBGPals2) from the old map's (wWeatherFadeStartPalettes) towards
+	; wBGPals1, so the new sign colour would only fade in over the next
+	; second. Put it in all three so it shows at once and the fade leaves
+	; it alone (colours that already match aren't blended).
+	ld hl, wBGPals1 palette PAL_BG_TEXT
+	ld de, wBGPals2 palette PAL_BG_TEXT
+	ld bc, 1 palettes
+	call FarCopyColorWRAM
+	ld hl, wBGPals1 palette PAL_BG_TEXT
+	ld de, wWeatherFadeStartBGPals palette PAL_BG_TEXT
+	ld bc, 1 palettes
+	ld a, BANK(wWeatherFadeStartBGPals)
+	call FarCopyWRAM
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	ret
+
+	assert BANK(wWeatherFadeStartBGPals) == BANK(wBGPals1), \
+		"LoadMapNameSignGFX copies between wBGPals1 and wWeatherFadeStartBGPals"
 
 SignPals:
 	table_width 1 palettes, SignPals
