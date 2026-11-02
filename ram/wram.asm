@@ -654,7 +654,6 @@ wAbilityPopupSaved::
 	ds SCREEN_WIDTH * ABILITY_POPUP_HEIGHT ; tiles underneath the box
 wAbilityPopupTopRow:: db ; first row the box covers
 wAbilityPopupRestX:: db ; x position of the box at rest
-wAbilityPopupThird:: db ; hBGMapThird holding those rows
 wAbilityPopupBoxX:: db ; current x position, signed
 wAbilityPopupSlideTbl:: dw ; slide table for the current phase
 

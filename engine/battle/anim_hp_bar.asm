@@ -303,47 +303,23 @@ HPBarAnim_BGMapUpdate:
 	jr z, .load_0
 	dec a
 	jr z, .load_1
+; party menu: mons 1-4 have their HP rows in the top half,
+; mons 5-6 in the bottom half
 	ld a, [wCurPartyMon]
-	cp 3
+	cp 4
 	ld c, 0
-	jr c, .got_third
-
-;bottom_half_of_screen
-	ld c, 1
-.got_third
-	push af
-	cp 2
-	jr z, .skip_delay
-	cp 5
-	jr z, .skip_delay
-	ld a, 2
-	ldh [hBGMapMode], a
-	ld a, c
-	ldh [hBGMapThird], a
-	call DelayFrame
-.skip_delay
-	ld a, 1
-	ldh [hBGMapMode], a
-	ld a, c
-	ldh [hBGMapThird], a
-	call DelayFrame
-	pop af
-	cp 2
-	jr z, .two_frames
-	cp 5
-	ret nz
-
-.two_frames
+	jr c, .got_half
 	inc c
+.got_half
 	ld a, 2
 	ldh [hBGMapMode], a
 	ld a, c
-	ldh [hBGMapThird], a
+	ldh [hBGMapHalf], a
 	call DelayFrame
 	ld a, 1
 	ldh [hBGMapMode], a
 	ld a, c
-	ldh [hBGMapThird], a
+	ldh [hBGMapHalf], a
 	jmp DelayFrame
 
 .load_0
@@ -355,7 +331,7 @@ HPBarAnim_BGMapUpdate:
 .finish
 	call DelayFrame
 	ld a, c
-	ldh [hBGMapThird], a
+	ldh [hBGMapHalf], a
 	jmp DelayFrame
 
 ShortHPBar_CalcPixelFrame:

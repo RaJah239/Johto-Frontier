@@ -174,24 +174,20 @@ ShowAbilityPopup::
 	and a
 	jr nz, .enemy
 
-; player: covers rows 8-11 (BG third 1), resting at x = 8
+; player: covers rows 8-11, resting at x = 8
 	ld a, 8
 	ld [wAbilityPopupTopRow], a
 	ld a, 8
 	ld [wAbilityPopupRestX], a
-	ld a, 1
-	ld [wAbilityPopupThird], a
 	ld hl, AbilityPopupSlideIn_Player
 	jr .got_side
 
 .enemy
-; enemy: covers rows 1-4 (BG third 0), resting at x = 0
+; enemy: covers rows 1-4, resting at x = 0
 	ld a, 1
 	ld [wAbilityPopupTopRow], a
 	ld a, 0
 	ld [wAbilityPopupRestX], a
-	xor a
-	ld [wAbilityPopupThird], a
 	ld hl, AbilityPopupSlideIn_Enemy
 .got_side
 	ld a, l
@@ -242,6 +238,12 @@ ShowAbilityPopup::
 	add hl, de
 	call AbilityPopupSlideFrames
 
+; back to regular BG map updates
+	xor a
+	ldh [hBGMapHalf], a
+	inc a
+	ldh [hBGMapMode], a
+
 ; show the party ball strips again
 	ld hl, wShadowOAMSprite00 + (ABILITY_POPUP_OAM_SPRITES - 1) * SPRITEOAMSTRUCT_LENGTH
 	ld b, ABILITY_POPUP_OAM_SPRITES
@@ -278,15 +280,15 @@ AbilityPopupDrawFrame:
 	add a, b
 	ld [wAbilityPopupBoxX], a
 
-; Edit the tilemap with BG transfers off, then flush exactly the
-; third that holds the box's rows in the same frame.
+; Edit the tilemap with BG transfers off, then flush the half
+; screen starting at the box's top row in the same frame.
 	xor a
 	ldh [hBGMapMode], a
 	call AbilityPopupRestoreRows
 	call AbilityPopupDrawSlice
-	ld a, [wAbilityPopupThird]
-	ldh [hBGMapThird], a
-	ld a, 1
+	ld a, [wAbilityPopupTopRow]
+	ldh [hBGMapHalf], a
+	ld a, 5 ; tiles, from row [hBGMapHalf]
 	ldh [hBGMapMode], a
 	jmp DelayFrame
 
