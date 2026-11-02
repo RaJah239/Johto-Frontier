@@ -116,6 +116,8 @@
 	const SPRITE_SCYTHER_OW
 	const SPRITE_CHEST
 	const SPRITE_CRYSTAL
+	const SPRITE_CHRIS_RUN
+	const SPRITE_KRIS_RUN
 DEF NUM_OVERWORLD_SPRITES EQU const_value - 1
 
 ; SpriteMons indexes (see data/sprites/sprite_mons.asm)
