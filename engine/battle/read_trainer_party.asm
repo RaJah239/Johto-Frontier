@@ -681,9 +681,87 @@ ReadPlayerPartyAsTrainerParty:
 	ld d, h
 	ld e, l
 	call ReadPlayerPartyAsTrainerPartyPieces
+	call ShuffleOTParty
 
 .done
 	jmp ComputeTrainerReward
+
+ShuffleOTParty:
+; Put the OT party in a random order (Fisher-Yates), moving each mon's
+; species, party struct, OT name and nickname together. Used by the Copy
+; Trainer (CAL / CAL_F), whose party is a copy of the player's.
+	ld a, [wOTPartyCount]
+	and a
+	ret z
+.loop
+	dec a
+	ret z ; i = 0: done
+	ld d, a ; d = i
+	inc a
+	push de
+	call RandomRange ; a = j, 0 <= j <= i
+	pop de
+	ld e, a ; e = j
+	cp d
+	call nz, .SwapMons
+	ld a, d
+	jr .loop
+
+.SwapMons:
+; Swap OT party mons d and e.
+	ld hl, wOTPartySpecies
+	ld c, 1
+	call .SwapEntries
+	ld hl, wOTPartyMons
+	ld c, PARTYMON_STRUCT_LENGTH
+	call .SwapEntries
+	ld hl, wOTPartyMonOTs
+	ld c, NAME_LENGTH
+	call .SwapEntries
+	ld hl, wOTPartyMonNicknames
+	ld c, MON_NAME_LENGTH
+	; fallthrough
+
+.SwapEntries:
+; Swap entries d and e (c bytes each) of the array at hl. Preserves de.
+	push de
+	push hl
+	ld b, d
+	call .Multiply
+	add l
+	ld l, a
+	jr nc, .got_first
+	inc h
+.got_first
+	ld b, e
+	call .Multiply
+	pop de ; array start
+	add e
+	ld e, a
+	jr nc, .swap
+	inc d
+.swap
+	ld a, [de]
+	ld b, [hl]
+	ld [hl], a
+	ld a, b
+	ld [de], a
+	inc hl
+	inc de
+	dec c
+	jr nz, .swap
+	pop de
+	ret
+
+.Multiply:
+; a = b * c (fits in a byte: index < PARTY_LENGTH, entry <= $30 bytes)
+	xor a
+	inc b
+.multiply_loop
+	dec b
+	ret z
+	add c
+	jr .multiply_loop
 
 ReadPlayerPartyAsTrainerPartyPieces:
 ; copy de back to hl, why?
