@@ -181,11 +181,17 @@ HandleWeatherItem:
 .loop
 	ld a, [hli]
 	cp -1
-	jr z, .finish
+	jmp z, .finish
 	inc hl
 	inc hl
 	cp b
 	jr nz, .loop
+	; that weather is already up: keep the shard (using it would only reset
+	; the weather to 8 turns, cutting a longer or permanent weather short)
+	call .GetShardWeather
+	ld a, [wBattleWeather]
+	cp c
+	jr z, .finish
 	pop bc
 	ld a, [bc]
 	ld [wNamedObjectIndex], a
@@ -196,9 +202,8 @@ HandleWeatherItem:
 	ld h, [hl]
 	ld l, a
 	xor a
-	ld [hl], a
 	ld [wAttackMissed], a
-	ld a, BANK(BattleCommand_AttackUp)
+	ld a, BANK(StartWeatherItem)
 	rst FarCall
 	pop bc
 	pop de
@@ -258,6 +263,27 @@ HandleWeatherItem:
 	pop bc
 	pop de
 	ret
+
+.GetShardWeather:
+; b = held effect of a weather shard. Return the weather it sets in c.
+	ld c, WEATHER_RAIN
+	ld a, b
+	cp HELD_SET_RAIN
+	ret z
+	ld c, WEATHER_SUN
+	cp HELD_SET_SUN
+	ret z
+	ld c, WEATHER_SANDSTORM
+	cp HELD_SET_SAND
+	ret z
+	ld c, WEATHER_HAIL
+	ret
+
+	assert BANK(StartWeatherItem) == BANK(BattleCommand_ItemRain) && \
+		BANK(StartWeatherItem) == BANK(BattleCommand_ItemSun) && \
+		BANK(StartWeatherItem) == BANK(BattleCommand_ItemSandstorm) && \
+		BANK(StartWeatherItem) == BANK(BattleCommand_ItemHail), \
+		"weather shard routines must share a bank"
 
 BattleItemAnimCommon:
 	ld [wFXAnimID], a
