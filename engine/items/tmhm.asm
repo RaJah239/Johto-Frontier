@@ -1,3 +1,7 @@
+; The TM pocket shows 4 entries (rows 2-9) instead of the other pockets' 5:
+; its move info box starts on row 11, where a 5th entry's quantity would go.
+DEF TMHM_POCKET_ROWS EQU 4
+
 TMHMPocket:
 	ld a, $1
 	ldh [hInMenu], a
@@ -175,10 +179,10 @@ TMHM_PocketLoop:
 	ld [w2DMenuCursorInitX], a
 	ld a, 1
 	ld [w2DMenuNumCols], a
-	ld a, 5
+	ld a, TMHM_POCKET_ROWS
 	sub d
 	inc a
-	cp 6
+	cp TMHM_POCKET_ROWS + 1
 	jr nz, .okay
 	dec a
 .okay
@@ -457,15 +461,14 @@ TMHM_ScrollPocket:
 	jr nz, .scroll_up
 	; On the first row: loop around to the bottom of the list. The list is
 	; the TMs plus a trailing Cancel row, just like every other pocket, so
-	; its last page - five rows with Cancel at the bottom - starts count - 4
-	; in. Landing on count - 5 leaves exactly five TMs on screen, which
-	; means DisplayPocketItems never reaches the Cancel row at all.
+	; its last page - TMHM_POCKET_ROWS rows with Cancel at the bottom -
+	; starts count - (TMHM_POCKET_ROWS - 1) in.
 	call TMHM_CountPocketItems
 	and a
 	jmp z, TMHM_JoypadLoop ; empty pocket: no Cancel row to land on
-	cp 5 ; Cancel included, the whole list already fits on screen
+	cp TMHM_POCKET_ROWS ; Cancel included, the whole list already fits on screen
 	jr c, .wrap_up_cursor ; short list: only the cursor has to move
-	sub 4
+	sub TMHM_POCKET_ROWS - 1
 	ld [wTMHMPocketScrollPosition], a
 .wrap_up_cursor
 	ld a, [w2DMenuNumRows]
@@ -486,10 +489,10 @@ TMHM_ScrollPocket:
 	call TMHM_CountPocketItems
 	and a
 	jmp z, TMHM_JoypadLoop
-	cp 5 ; Cancel included, the whole list fits on screen
+	cp TMHM_POCKET_ROWS ; Cancel included, the whole list fits on screen
 	jr c, .wrap_down
 	call TMHM_GetCurrentPocketPosition
-	ld b, 5
+	ld b, TMHM_POCKET_ROWS
 .loop
 	inc c
 	ld a, c
@@ -543,7 +546,7 @@ TMHM_DisplayPocketItems:
 	ld a, " "
 	call ClearBox
 	call TMHM_GetCurrentPocketPosition
-	ld d, $5
+	ld d, TMHM_POCKET_ROWS
 .loop2
 	inc c
 	ld a, c
@@ -630,7 +633,7 @@ TMHM_DisplayPocketItems:
 TMHMPocket_GetCurrentLineCoord:
 	hlcoord 5, 0
 	ld bc, 2 * SCREEN_WIDTH
-	ld a, 6
+	ld a, TMHM_POCKET_ROWS + 1
 	sub d
 	ld e, a
 	; AddNTimes
