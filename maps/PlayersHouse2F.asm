@@ -55,6 +55,7 @@ if DEF(_DEBUG)
 	loadmem wPartyMon1Moves+3, EXTREMESPEED
 	closetext
 	; tms
+	callasm DebugGiveTenOfEachTM
 
 	; all fly points
 	setflag ENGINE_FLYPOINT_ROUTE_20
@@ -216,6 +217,19 @@ else
 
 .NormalRadio:
 	jumpstd Radio1Script
+endc
+
+if DEF(_DEBUG)
+DebugGiveTenOfEachTM:
+; wTMsHMs is a count per TM/HM, TMs first.
+	ld hl, wTMsHMs
+	ld b, NUM_TMS
+	ld a, 10
+.loop
+	ld [hli], a
+	dec b
+	jr nz, .loop
+	ret
 endc
 
 PlayersHouse2FInitializeRoomCallback:
