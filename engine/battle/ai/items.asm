@@ -40,7 +40,7 @@ AI_SwitchOrTryItem:
 	; held choice item instead of the count.
 	ld hl, wEnemySubStatus5
 	bit SUBSTATUS_ENCORED, [hl]
-	jmp z, .not_choice_locked_nve
+	jr z, .not_choice_locked_nve
 	call DoesEnemyHaveChoiceItem
 	jr nc, .not_choice_locked_nve
 	ld a, [wCurEnemyMove]
@@ -84,7 +84,7 @@ AI_SwitchOrTryItem:
 
 	; don't switch if under 1/3 max HP: let it die
 	call CheckEnemyBelowThirdHP
-	jmp c, DontSwitch
+	jr c, DontSwitch
 
 	; don't switch while our own mon is boosted (+3 or more in any stat)
 	call CheckEnemyStatAtPlus3
@@ -120,10 +120,10 @@ AI_SwitchOrTryItem:
 	farcall GetDamageRaceHits ; b = our hits to KO, c = player's hits to KO
 	ld a, b
 	cp c
-	jmp c, DontSwitch
+	jr c, DontSwitch
 	jr nz, .switch_out_of_super_effective
 	call DoesAIOutSpeedPlayer
-	jmp c, DontSwitch
+	jr c, DontSwitch
 .switch_out_of_super_effective
 	callfar FindMonInOTPartyToSwitchIntoBattle
 	inc b
