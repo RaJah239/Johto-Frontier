@@ -92,8 +92,11 @@ GrandGauntletInfoSignScript:
 
 		para "You start the"
 		line "first floor with"
-		cont "an empty Dungeon"
-		cont "Bag. Anything you"
+		cont "a Dungeon Bag that"
+		cont "holds a Move Dex,"
+		cont "Music Player, Type"
+		cont "Chart and Score"
+		cont "Card. Anything you"
 		cont "find goes in it."
 
 		para "Saving keeps both"
@@ -897,8 +900,9 @@ BattlePlazaGrandGauntletYoungsterText:
 	text "They keep your bag"
 	line "safe during a run."
 
-	para "You start with an"
-	line "empty one and keep"
+	para "Your new one only"
+	line "has a few tools,"
+	cont "and you keep"
 	cont "nothing you find!"
 	done
 

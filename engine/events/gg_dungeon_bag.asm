@@ -2,9 +2,11 @@
 ;
 ; On the first entry to Battle Room 1 the player's whole bag (TMs/HMs and
 ; every pocket, plus the pockets' cursor positions) is moved into
-; wGGBagStash (WRAM bank 2) and the run starts with an empty bag. Whatever
-; is picked up during the run lands in that dungeon bag. Finishing floor
-; 50 or giving up puts the player's own bag back and the dungeon bag is
+; wGGBagStash (WRAM bank 2) and the run starts with a bag that only holds
+; the Key Items in GGDungeonBagKeyItems (Move Dex, Music Player, Type
+; Chart, Score Card), whether or not the player owns them. Whatever is
+; picked up during the run lands in that dungeon bag. Finishing floor 50
+; or giving up puts the player's own bag back and the dungeon bag is
 ; gone. The stash is saved with the game (sGGBagStash), so a run saved
 ; and reloaded still gives the right bag back.
 
@@ -18,7 +20,7 @@ GGDungeonBag_Enter::
 	ldh [rSVBK], a
 	ld a, [wGGBagStashCheck]
 	cp SAVE_CHECK_VALUE_1
-	jr z, .done
+	jmp z, .done
 
 	ld hl, wTMsHMs
 	ld de, wGGBagStashBag
@@ -65,10 +67,29 @@ GGDungeonBag_Enter::
 	xor a
 	call ByteFill
 
+	; the dungeon bag always comes with these Key Items, whether or not
+	; the player owns them (they go when the player's own bag comes back)
+	ld hl, GGDungeonBagKeyItems
+	ld de, wKeyItems
+	ld bc, GGDungeonBagKeyItemsEnd - GGDungeonBagKeyItems
+	call CopyBytes
+	ld a, GGDungeonBagKeyItemsEnd - GGDungeonBagKeyItems - 1
+	ld [wNumKeyItems], a
+
 .done
 	pop af
 	ldh [rSVBK], a
 	ret
+
+GGDungeonBagKeyItems:
+; Key Items every dungeon bag starts with (EDIT: one item per line, -1 last)
+	db MOVE_DEX
+	db MUSIC_PLAYER
+	db SCORE_CARD
+	db TYPE_CHART
+	db -1 ; end
+GGDungeonBagKeyItemsEnd:
+	assert GGDungeonBagKeyItemsEnd - GGDungeonBagKeyItems - 1 <= MAX_KEY_ITEMS
 
 GGDungeonBag_Exit::
 ; Throw away the dungeon bag and give the player's own bag back. Does
