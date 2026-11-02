@@ -325,7 +325,10 @@ MenuJoypadLoop:
 	push af
 	ld a, $1
 	ldh [hOAMUpdate], a
-	call WaitBGMap
+; The BG map goes out in thirds over 3 frames, so WaitBGMap's 4th is spare.
+	ldh [hBGMapMode], a
+	ld c, 3
+	call DelayFrames
 	pop af
 	ldh [hOAMUpdate], a
 	xor a

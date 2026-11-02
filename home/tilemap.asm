@@ -10,6 +10,12 @@ WaitBGMap::
 	ld c, 4
 	jmp DelayFrames
 
+ApplyTilemapInVBlank::
+; Tell VBlank to update the BG map, without waiting for it
+	ld a, 1
+	ldh [hBGMapMode], a
+	ret
+
 WaitBGMap2::
 	ldh a, [hCGB]
 	and a

@@ -635,3 +635,8 @@ INCLUDE "engine/events/gg_dungeon_bag.asm"
 
 SECTION "Text Dictionary", ROMX
 INCLUDE "data/text/text_dictionary.asm"
+
+SECTION "Item Icon Engine", ROMX
+INCLUDE "engine/items/item_icons.asm"
+
+INCLUDE "gfx/item_icons.asm"

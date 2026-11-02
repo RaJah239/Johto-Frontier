@@ -331,6 +331,7 @@ BuyMenu:
 	call FadeToMenu
 	farcall BlankScreen
 	farcall LoadOW_BGPal7
+	farcall InitMartItemIconAttrs
 	call FadePalettes
 	xor a
 	ld [wMenuScrollPositionBackup], a
@@ -594,7 +595,7 @@ MenuHeader_Buy:
 	dbw 0, wCurMartCount
 	dba PlaceMartMenuItemName
 	dba .PrintBCDPrices
-	dba MartPlaceInBagQuantity
+	dba MartPlaceInBagQuantityAndIcon
 
 .PrintBCDPrices:
 	ld a, [wScrollingMenuCursorPosition]
@@ -614,6 +615,10 @@ MenuHeader_Buy:
 	call PrintBCDNumber
 	ret
 
+MartPlaceInBagQuantityAndIcon:
+	call MartPlaceInBagQuantity
+	farjp MartUpdateItemIcon
+
 MartPlaceInBagQuantity:
 	farcall UpdateItemDescription
 	farcall CheckItemPocket
@@ -629,7 +634,7 @@ MartPlaceInBagQuantity:
 	; cp FRUITS
 	ld hl, wNumFruits
 	jr z, .check_bag
-	farjp ClearItemInBagQuantitysBox
+	farjp MartClearItemInBagQuantityBox
 
 .get_tm_pocket
 ; The TM/HM pocket is a bare count array indexed by (id - TM01).
@@ -645,7 +650,7 @@ MartPlaceInBagQuantity:
 	ld a, MAX_ITEM_STACK
 .tm_ok
 	ld [wMenuSelectionQuantity], a
-	farjp PlaceItemInBagQuantity
+	farjp MartPlaceItemInBagQuantity
 
 .get_item_pocket
 	ld hl, wNumItems
@@ -659,7 +664,7 @@ MartPlaceInBagQuantity:
 	ld hl, wNumBattles
 .check_bag
 	call CheckQuantityInBag
-	farjp PlaceItemInBagQuantity
+	farjp MartPlaceItemInBagQuantity
 
 CheckQuantityInBag:
 	ld a, [wCurItem]

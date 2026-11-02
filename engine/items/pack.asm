@@ -1145,7 +1145,7 @@ TutorialPack:
 	dbw 0, wDudeNumItems
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
-	dba UpdateItemDescription
+	dba UpdateItemIconAndDescription
 
 .KeyItems:
 	ld a, KEY_ITEM_POCKET
@@ -1167,7 +1167,7 @@ TutorialPack:
 	dbw 0, wDudeNumKeyItems
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
-	dba UpdateItemDescription
+	dba UpdateItemIconAndDescription
 
 .TMHM:
 	ld a, TM_HM_POCKET
@@ -1198,7 +1198,7 @@ TutorialPack:
 	dbw 0, wDudeNumFruits
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
-	dba UpdateItemDescription
+	dba UpdateItemIconAndDescription
 
 .Battle:
 	ld a, BATTLE_POCKET
@@ -1220,7 +1220,7 @@ TutorialPack:
 	dbw 0, wDudeNumBattle
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
-	dba UpdateItemDescription
+	dba UpdateItemIconAndDescription
 
 .Balls:
 	ld a, BALL_POCKET
@@ -1242,7 +1242,7 @@ TutorialPack:
 	dbw 0, wDudeNumBalls
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
-	dba UpdateItemDescription
+	dba UpdateItemIconAndDescription
 
 .DisplayPocket:
 	push hl
@@ -1291,7 +1291,7 @@ Pack_PrintTextNoScroll:
 	ret
 
 WaitBGMap_DrawPackGFX:
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	jr DrawPackGFX
 
 DrawPackGFX_NoWait:
@@ -1503,7 +1503,8 @@ ReInitBG_PackPocket: ; needed when switching from TM Pocket
 	jmp EnableLCD
 
 PlacePackGFX:
-	hlcoord 0, 3
+	farcall PlacePackItemIconTiles
+	hlcoord 0, 2
 	ld a, $50
 	ld de, SCREEN_WIDTH - 5
 	ld b, 3
@@ -1562,7 +1563,7 @@ DrawPocketName:
 	add hl, de
 	ld d, h
 	ld e, l
-	hlcoord 0, 7
+	hlcoord 0, 5
 	ld c, 3
 .row
 	ld b, 5
@@ -1614,7 +1615,7 @@ ClearPocketList:
 	jmp ClearBox
 
 Pack_InitColors:
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	ld b, SCGB_PACKPALS
 	call GetSGBLayout
 	jmp SetDefaultBGPAndOBP
@@ -1634,7 +1635,7 @@ ItemsPocketMenuHeader:
 	dbw 0, wNumItems
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
-	dba UpdateItemDescription
+	dba UpdateItemIconAndDescription
 
 PC_Mart_ItemsPocketMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -1651,7 +1652,7 @@ PC_Mart_ItemsPocketMenuHeader:
 	dbw 0, wNumItems
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
-	dba UpdateItemDescription
+	dba UpdateItemIconAndDescription
 
 KeyItemsPocketMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -1668,7 +1669,7 @@ KeyItemsPocketMenuHeader:
 	dbw 0, wNumKeyItems
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
-	dba UpdateItemDescription
+	dba UpdateItemIconAndDescription
 
 PC_Mart_KeyItemsPocketMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -1685,7 +1686,7 @@ PC_Mart_KeyItemsPocketMenuHeader:
 	dbw 0, wNumKeyItems
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
-	dba UpdateItemDescription
+	dba UpdateItemIconAndDescription
 
 BallsPocketMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -1702,7 +1703,7 @@ BallsPocketMenuHeader:
 	dbw 0, wNumBalls
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
-	dba UpdateItemDescription
+	dba UpdateItemIconAndDescription
 
 PC_Mart_BallsPocketMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -1719,7 +1720,7 @@ PC_Mart_BallsPocketMenuHeader:
 	dbw 0, wNumBalls
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
-	dba UpdateItemDescription
+	dba UpdateItemIconAndDescription
 
 FruitPocketMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -1736,7 +1737,7 @@ FruitPocketMenuHeader:
 	dbw 0, wNumFruits
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
-	dba UpdateItemDescription
+	dba UpdateItemIconAndDescription
 
 PC_Mart_FruitPocketMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -1753,7 +1754,7 @@ PC_Mart_FruitPocketMenuHeader:
 	dbw 0, wNumFruits
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
-	dba UpdateItemDescription
+	dba UpdateItemIconAndDescription
 
 BattlePocketMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -1770,7 +1771,7 @@ BattlePocketMenuHeader:
 	dbw 0, wNumBattles
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
-	dba UpdateItemDescription
+	dba UpdateItemIconAndDescription
 
 PC_Mart_BattlePocketMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -1787,7 +1788,7 @@ PC_Mart_BattlePocketMenuHeader:
 	dbw 0, wNumBattles
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
-	dba UpdateItemDescription
+	dba UpdateItemIconAndDescription
 
 AskThrowAwayText:
 	text_far _AskThrowAwayText

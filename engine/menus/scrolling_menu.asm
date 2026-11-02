@@ -41,6 +41,7 @@ ScrollingMenu_InitDisplay:
 	push af
 	set NO_TEXT_SCROLL, [hl]
 	call ScrollingMenu_UpdateDisplay
+	call Move2DMenuCursor
 	call ScrollingMenu_PlaceCursor
 	call ScrollingMenu_CheckCallFunction3
 	pop af
