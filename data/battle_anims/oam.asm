@@ -226,7 +226,17 @@ BattleAnimOAMData:
 	battleanimoam $08, 16, .OAMData_e0 ; BATTLE_ANIM_OAMSET_DC
 	battleanimoam $10, 16, .OAMData_e0 ; BATTLE_ANIM_OAMSET_DD
 	battleanimoam $18, 16, .OAMData_e0 ; BATTLE_ANIM_OAMSET_DE
+	battleanimoam $00, 16, .OAMData_Stats ; BATTLE_ANIM_OAMSET_STAT
 	assert_table_length NUM_BATTLE_ANIM_OAMSETS
+
+.OAMData_Stats:
+; a row of 8 chevrons (Polished Crystal)
+for x, -3, 5
+	dbsprite x, -1, 0, 0, $00, $0
+endr
+for x, -3, 5
+	dbsprite x,  0, 0, 0, $01, $0
+endr
 
 .OAMData_cd:
 	dbsprite  -2,  -2, 4, 4, $00, $0

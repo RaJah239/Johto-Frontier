@@ -98,6 +98,7 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_RadialMoveOut_Slow
 	dw BattleAnimFunc_Flamethrower
 	dw BattleAnimFunc_RadialMoveOut_VerySlow
+	dw BattleAnimFunc_RadialMoveOut_Stats
 	assert_table_length NUM_BATTLE_ANIM_FUNCS
 
 BattleAnimFunc_Null:
@@ -3876,6 +3877,21 @@ Step_VerySlow:
 	ld hl, 0.5 ; speed
 	call Set_Rad_Pos
 	cp 40 ; final position
+	jmp nc, DeinitBattleAnimation
+	jr Rad_Move
+
+BattleAnimFunc_RadialMoveOut_Stats:
+; Stat change chevrons (Polished Crystal): 3 pixels per frame, out to 80.
+	call BattleAnim_AnonJumptable
+
+	dw InitRadial
+	dw Step_Stats
+
+Step_Stats:
+	call Get_Rad_Pos
+	ld hl, 3.0 ; speed
+	call Set_Rad_Pos
+	cp 80 ; final position
 	jmp nc, DeinitBattleAnimation
 	jr Rad_Move
 

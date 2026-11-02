@@ -16,81 +16,65 @@ BattleAnim_BattleFlinch:
     anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_StatUp:
-	anim_1gfx BATTLE_ANIM_GFX_SPEED
-	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_BLACK_REPEATING, $0, BG_EFFECT_USER, $40
-	anim_obp0 $e4
-	; Colour the animation based on the stat that changed.
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_ATTACK
-	anim_if_param_equal ATTACK, .statup_palette_done
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_DEFENSE
-	anim_if_param_equal DEFENSE, .statup_palette_done
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_SPEED
-	anim_if_param_equal SPEED, .statup_palette_done
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_SP_ATTACK
-	anim_if_param_equal SP_ATTACK, .statup_palette_done
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_SP_DEFENSE
-	anim_if_param_equal SP_DEFENSE, .statup_palette_done
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_EVASION
-.statup_palette_done
-	anim_sound 0, 0, SFX_STAT_UP
+; Polished Crystal's stat change animation: the user flashes in the
+; stat's colour while a band of chevrons rises, once per stage.
+	anim_call BattleAnimSub_StatChange
 .loop
-	anim_obj BATTLE_ANIM_OBJ_STAT_UP,   5, 4,  13, 6, $6
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_STAT_UP,   4, 4,  13, 6, $6
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_STAT_UP,   6, 4,  13, 6, $8
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_STAT_UP,   3, 4,  13, 6, $8
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_STAT_UP,   7, 4,  13, 6, $6
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_STAT_UP,   2, 4,  13, 6, $8
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_STAT_UP,   8, 4,  13, 6, $8
-	anim_wait 2
-	anim_loop 2, .loop
+	anim_sound 0, 0, SFX_STAT_UP
+	anim_obj BATTLE_ANIM_OBJ_STAT_UP, 44, 107, $30
+	anim_wait 12
+	anim_statloop .loop
 	anim_wait 8
 	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_BLACK_REPEATING
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
-	anim_ret
+	anim_jump BattleAnimSub_StatChangeEnd
 
 BattleAnim_StatDown:
-	anim_1gfx BATTLE_ANIM_GFX_SPEED
-	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_BLACK_REPEATING, $0, BG_EFFECT_USER, $40
-	anim_obp0 $e4
-	; Colour the animation based on the stat that changed.
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_ATTACK
-	anim_if_param_equal ATTACK, .statdown_palette_done
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_DEFENSE
-	anim_if_param_equal DEFENSE, .statdown_palette_done
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_SPEED
-	anim_if_param_equal SPEED, .statdown_palette_done
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_SP_ATTACK
-	anim_if_param_equal SP_ATTACK, .statdown_palette_done
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_SP_DEFENSE
-	anim_if_param_equal SP_DEFENSE, .statdown_palette_done
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_STAT_EVASION
-.statdown_palette_done
-	anim_sound 0, 0, SFX_STAT_DOWN
+	anim_call BattleAnimSub_StatChange
 .loop
-	anim_obj BATTLE_ANIM_OBJ_STAT_DOWN, 5, 4,  7, 6, $6
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_STAT_DOWN, 4, 4,  7, 6, $6
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_STAT_DOWN, 6, 4,  7, 6, $8
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_STAT_DOWN, 3, 4,  7, 6, $8
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_STAT_DOWN, 7, 4,  7, 6, $6
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_STAT_DOWN, 2, 4,  7, 6, $8
-	anim_wait 2
-	anim_obj BATTLE_ANIM_OBJ_STAT_DOWN, 8, 4,  7, 6, $8
-	anim_wait 2
-	anim_loop 2, .loop
+	anim_sound 0, 0, SFX_STAT_DOWN
+	anim_obj BATTLE_ANIM_OBJ_STAT_DOWN, 44, 56, $10
+	anim_wait 12
+	anim_statloop .loop
 	anim_wait 8
 	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MON_TO_BLACK_REPEATING
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	; fallthrough
+
+BattleAnimSub_StatChangeEnd:
+; Give the user its own colours back.
+	anim_setobjpal PAL_BATTLE_BG_USER, PAL_BTLCUSTOM_DEFAULT
+	anim_ret
+
+BattleAnimSub_StatChange:
+	anim_1gfx BATTLE_ANIM_GFX_STATS
+	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_BLACK_REPEATING, $0, BG_EFFECT_USER, $40
+	anim_if_param_equal DEFENSE, .defense
+	anim_if_param_equal SP_ATTACK, .sp_atk
+	anim_if_param_equal SP_DEFENSE, .sp_def
+	anim_if_param_equal SPEED, .speed
+	anim_if_param_equal ACCURACY, .accuracy
+	anim_if_param_equal EVASION, .evasion
+; attack
+	anim_setobjpal PAL_BATTLE_BG_USER, PAL_BTLCUSTOM_STAT_ATTACK
+	anim_jump .continue
+.defense
+	anim_setobjpal PAL_BATTLE_BG_USER, PAL_BTLCUSTOM_STAT_DEFENSE
+	anim_jump .continue
+.sp_atk
+	anim_setobjpal PAL_BATTLE_BG_USER, PAL_BTLCUSTOM_STAT_SP_ATTACK
+	anim_jump .continue
+.sp_def
+	anim_setobjpal PAL_BATTLE_BG_USER, PAL_BTLCUSTOM_STAT_SP_DEFENSE
+	anim_jump .continue
+.speed
+	anim_setobjpal PAL_BATTLE_BG_USER, PAL_BTLCUSTOM_STAT_SPEED
+	anim_jump .continue
+.accuracy
+	anim_setobjpal PAL_BATTLE_BG_USER, PAL_BTLCUSTOM_STAT_ACCURACY
+	anim_jump .continue
+.evasion
+	anim_setobjpal PAL_BATTLE_BG_USER, PAL_BTLCUSTOM_STAT_EVASION
+.continue
+	anim_obp0 $30
 	anim_ret
 
 BattleAnim_AnimBattleMiss:

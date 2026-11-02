@@ -238,3 +238,10 @@ ENDM
 MACRO anim_clearopponenthud
 	db anim_clearopponenthud_command
 ENDM
+
+	const anim_statloop_command
+MACRO anim_statloop
+; Like anim_loop, looping once per stage the stat changed (Polished Crystal).
+	db anim_statloop_command
+	dw \1 ; address
+ENDM

@@ -152,36 +152,41 @@ if !DEF(MONOCHROME)
 	RGB 31, 31, 31
 	RGB 10, 31, 31
 	RGB 16, 17, 29
-; stat attack
+; stat attack (Polished Crystal stat change colours)
 	RGB 31, 31, 31
-	RGB 31, 16, 13
-	RGB 31, 07, 05
-	RGB 00, 00, 00
+	RGB 31, 19, 08
+	RGB 29, 09, 10
+	RGB 21, 00, 07
 ; stat defense
 	RGB 31, 31, 31
-	RGB 13, 25, 31
-	RGB 06, 15, 31
-	RGB 00, 00, 00
+	RGB 20, 28, 04
+	RGB 03, 22, 04
+	RGB 00, 16, 00
 ; stat speed
 	RGB 31, 31, 31
-	RGB 31, 27, 08
-	RGB 31, 16, 03
-	RGB 00, 00, 00
+	RGB 19, 26, 28
+	RGB 00, 19, 29
+	RGB 09, 13, 30
 ; stat sp. attack
 	RGB 31, 31, 31
-	RGB 29, 20, 31
-	RGB 18, 10, 31
-	RGB 00, 00, 00
+	RGB 31, 25, 28
+	RGB 31, 16, 23
+	RGB 27, 00, 22
 ; stat sp. defense
 	RGB 31, 31, 31
-	RGB 13, 31, 20
-	RGB 06, 22, 12
-	RGB 00, 00, 00
+	RGB 31, 29, 00
+	RGB 23, 22, 00
+	RGB 16, 16, 00
+; stat accuracy
+	RGB 31, 31, 31
+	RGB 25, 20, 30
+	RGB 18, 10, 26
+	RGB 14, 06, 23
 ; stat evasion
 	RGB 31, 31, 31
-	RGB 06, 31, 29
-	RGB 03, 18, 17
-	RGB 00, 00, 00
+	RGB 13, 29, 23
+	RGB 03, 23, 16
+	RGB 00, 18, 12
 else
 rept NUM_CUSTOM_BATTLE_PALETTES - 6
 	MONOCHROME_RGB_FOUR

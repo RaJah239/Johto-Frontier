@@ -185,7 +185,17 @@ BattleAnimFrameData:
 	dw .Frameset_Flamethrower_Alt    ; BATTLE_ANIM_FRAMESET_FLAMETHROWER_ALT
 	dw .Frameset_SparkleLong         ; BATTLE_ANIM_FRAMESET_SPARKLE_LONG
 	dw .Frameset_PulsingSparkle      ; BATTLE_ANIM_FRAMESET_PULSING_SPARKLE
+	dw .Frameset_StatUp              ; BATTLE_ANIM_FRAMESET_STAT_UP
+	dw .Frameset_StatDown            ; BATTLE_ANIM_FRAMESET_STAT_DOWN
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
+
+.Frameset_StatUp:
+	oamframe BATTLE_ANIM_OAMSET_STAT, 16
+	oamdelete
+
+.Frameset_StatDown:
+	oamframe BATTLE_ANIM_OAMSET_STAT, 16, OAM_Y_FLIP
+	oamdelete
 
 .Frameset_SeedBomb:
 	oamframe BATTLE_ANIM_OAMSET_69,  40

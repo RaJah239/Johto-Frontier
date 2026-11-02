@@ -356,7 +356,8 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Call
 	dw BattleAnimCmd_Ret
 	dw BattleAnimCmd_ClearOpponentHud
-	assert_table_length 244 - FIRST_BATTLE_ANIM_CMD
+	dw BattleAnimCmd_StatLoop
+	assert_table_length 245 - FIRST_BATTLE_ANIM_CMD
 
 BattleAnimCmd_ClearOpponentHud:
 ; Clear the HUD of the target of the attack
@@ -428,8 +429,17 @@ BattleAnimCmd_Jump:
 	ld [hl], d
 	ret
 
+BattleAnimCmd_StatLoop:
+; Loop count = stages the stat changed: wLoweredStat's high nibble + 1.
+	ld a, [wLoweredStat]
+	swap a
+	and $f
+	inc a
+	jr DoBattleAnimLoop
+
 BattleAnimCmd_Loop:
 	call GetBattleAnimByte
+DoBattleAnimLoop:
 	ld hl, wBattleAnimFlags
 	bit BATTLEANIM_IN_LOOP_F, [hl]
 	jr nz, .continue_loop
