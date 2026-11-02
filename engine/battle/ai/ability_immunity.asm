@@ -7,6 +7,13 @@ AI_IsPlayerImmuneByAbility:
 	ld a, [wBattleMonSpecies]
 	jr IsSpeciesImmuneByAbility
 
+AI_IsTargetImmuneByAbility:
+; Same, for the mon being attacked this turn (hBattleTurn).
+	ldh a, [hBattleTurn]
+	and a
+	jr z, AI_IsEnemyImmuneByAbility
+	jr AI_IsPlayerImmuneByAbility
+
 AI_IsEnemyImmuneByAbility:
 ; Same as AI_IsPlayerImmuneByAbility, for the opponent's active mon.
 	ld a, [wEnemyMonSpecies]

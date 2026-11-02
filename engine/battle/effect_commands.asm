@@ -2430,52 +2430,18 @@ GetFailureResultText:
 	and 1 << SUBSTATUS_UNDERGROUND | 1 << SUBSTATUS_FLYING
 	jr nz, .no_dodge_anim
 
-; get move type
+; the target's ability makes it immune to the move's type: Levitate (Ground),
+; Waterproof (Water), Flame Ward (Fire), Grounded (Electric), Immunity
+; (Poison). Most of these tables are in another bank, so use the far check.
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [wEnemyMoveStruct + MOVE_TYPE]
 	jr nz, .got_move_type
 	ld a, [wPlayerMoveStruct + MOVE_TYPE]
-
 .got_move_type
 	and TYPE_MASK
-
-; get target species
 	ld b, a
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wEnemyMonSpecies]
-	jr z, .got_species
-	ld a, [wBattleMonSpecies]
-
-.got_species
-	ld c, a
-	ld a, b
-
-; find immunity table for this move type
-	cp GROUND
-	ld hl, LevitatePokemon
-	jr z, .check_if_immune
-
-	cp WATER
-	ld hl, WaterproofPokemon
-	jr z, .check_if_immune
-
-	cp FIRE
-	ld hl, FlameWardPokemon
-	jr z, .check_if_immune
-
-	cp ELECTRIC
-	ld hl, GroundedPokemon
-	jr z, .check_if_immune
-
-	cp POISON
-	ld hl, ImmunityPokemon
-	jr nz, .dodge
-
-.check_if_immune
-	ld a, c
-	call IsInByteArray
+	farcall AI_IsTargetImmuneByAbility
 	jr c, .no_dodge_anim
 
 .dodge
