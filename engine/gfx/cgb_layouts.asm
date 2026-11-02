@@ -217,6 +217,11 @@ _CGB_FinishBattleScreenLayout:
 	ld bc, 6 palettes
 	ld a, BANK(wOBPals1)
 	call FarCopyWRAM
+	ld hl, BattleObjectPals
+	ld de, wOBPals2 palette PAL_BATTLE_OB_GRAY
+	ld bc, 6 palettes
+	ld a, BANK(wOBPals2)
+	call FarCopyWRAM
 	call ApplyAttrmap
 	ret
 
