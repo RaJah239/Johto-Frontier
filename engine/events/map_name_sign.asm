@@ -51,6 +51,17 @@ InitMapNameSign::
 ; $47-$0c: Remains visible
 ; $0b-$00: Sliding out
 	ld a, [wLandmarkSignTimer]
+	and a
+	jr nz, .sign_in_progress
+	; No sign should be showing, but the window can still be up: a warp
+	; (door, cave entrance) zeroes the timer without hiding it (events.asm),
+	; and the new map's graphics then load under it. Hide it, or the old
+	; sign shows over the new map, garbled, until the new sign loads.
+	ld a, $90
+	ldh [rWY], a
+	ldh [hWY], a
+	xor a
+.sign_in_progress
 	sub MAPSIGNSTAGE_2_LOADGFX
 	jr nc, .stage_1_sliding_out
 	add MAPSIGNSTAGE_2_LOADGFX
