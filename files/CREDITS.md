@@ -7,6 +7,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 # Features
 - FIQ, Rangi42, vulcandth - Newbox
 - Nayru62 - Nayru62's Super Pokédex
+- vulcandth - overworld weather
 
 # Pokémon Sprites
 - Sour Apple - Aerodactyl, Ampharos, Ariados, Azumarill, Bayleef, Bellsprout, Blissey, Blastoise, Celebi, Chansey, Charizard, Charmeleon, Charmander, Chikorita, Chinchou, Clefable, Clefairy, Corsola, Crobat, Croconaw, Delibird, Dodrio, Doduo, Donphan, Drowzee, Electabuzz, Entei, Eddiursa, Feraligatr, Gastly, Gengar, Gligar, Golbat, Granbull, Grimer front sprite, Gyarados' back sprite, Haunter, Heracross, Ho-Oh's front sprite, Hoothoot, Houndoom, Houndour, Jynx, Kingdra, Koffing, Lanturn, Magnemite, Magikarp, Magneton, Mankey front sprite, Mantine, Mareep, Marill, Meowth, Meganium, Mewtwo, Miltank, Misdreavus, Natu, Nidoking, Omastar's back sprite, Persian, Phanpy, Pidgeot, Pidgeotto, Pidgey, Piloswine, Ponyta, Porygon, Porygon2, Scizor, Scyther, Seadra, Skarmory's back sprite, Slowbro's back sprite, Slowpoke's backs sprite, Smeargle's back sprite, Sneasel's back sprite, Spinark, Squirtle, Starmie, Staryu, Sunflora's sprites, Swinub, Tangela's back sprite, Tencruel's front sprite, Togepi's back sprite, Togetic, Totodile, Tyranitar, Umbreon, Espeon, Flareon, Jolteon, Vaporeon, Mr.Mime, Ursaring, Victreebel, Wartortle, Weepinbell, Weezing, Wooper's front sprite, Xatu, Yanma, Zubat

@@ -3,6 +3,7 @@
 - Nayru62's Super Pokédex: Base stats and info, Move Info (Lvl-Up Moves -> TM -> Move Tutor -> Egg Moves), Detailed area info, Evolution chart, and sprite page showing animated sprites (shiny toggle too!)
 - Dex Nav - in Pokédex, press Start and then "Area Search" to find all Pokémon in the area at that present time
 - 60 fps overworld
+- Overworld weather with particles
 - Can't run past spinning Trainers
 - Smooth fading added throughout the game
 - Unique Pokémon party icons
