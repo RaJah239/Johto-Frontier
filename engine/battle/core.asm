@@ -1285,6 +1285,18 @@ ResidualDamage:
 	bit SUBSTATUS_LEECH_SEED, [hl]
 	jr z, .not_seeded
 
+	; the seed's receiver (the opponent) has fainted: no drain, animation,
+	; healing or text (and never put HP back on a fainted mon)
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wEnemyMonHP
+	jr z, .got_seed_receiver
+	ld hl, wBattleMonHP
+.got_seed_receiver
+	ld a, [hli]
+	or [hl]
+	jr z, .not_seeded
+
 	call SwitchTurnCore
 	xor a
 	ld [wNumHits], a
