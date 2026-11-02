@@ -1055,6 +1055,8 @@ INCLUDE "data/pokemon/palettes.asm"
 INCLUDE "data/trainers/palettes.asm"
 
 LoadMapPals:
+	; new map colors: the sunny shimmer's water copies are stale
+	farcall SunShimmerResetWater
 	farcall LoadSpecialMapPalette
 	jr c, .got_pals
 

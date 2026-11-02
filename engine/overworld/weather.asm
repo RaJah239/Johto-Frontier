@@ -3,6 +3,7 @@
 
 UpdateOverworldWeatherFrame::
 	call DoOverworldWeather
+	call SunShimmerFrame
 	jp WeatherFadeStep
 
 DoOverworldWeather::
@@ -1189,6 +1190,337 @@ ENDM
 
 
 ; Map connection fade
+
+; Sunny overworld shimmer (ported from sour): while the sun is out, the BG
+; palettes (all but the text palette) gently brighten and dim in a
+; 30-frame pulse. Every 3 frames the brightness moves one step:
+; up 1, 2, 3, 4, 5 then down 4, 3, 2, 1, 0. Step n adds SunShimmerDeltas
+; (red, green/blue) to each color, clamped at 31. The displayed palettes
+; (wBGPals2) are rebuilt from the untouched map palettes (wBGPals1), a
+; third of them per frame, so nothing drifts and the work is spread out.
+
+DEF SUN_SHIMMER_STEP_FRAMES EQU 3
+DEF SUN_SHIMMER_STEPS       EQU 10
+DEF SUN_SHIMMER_FRAMES      EQU SUN_SHIMMER_STEP_FRAMES * SUN_SHIMMER_STEPS
+DEF SUN_SHIMMER_SKIPPED_F   EQU 7
+assert SUN_SHIMMER_FRAMES < 1 << SUN_SHIMMER_SKIPPED_F
+assert BANK(wSunShimmerWaterActive) == BANK(wBGPals1)
+assert BANK(wBGPals2) == BANK(wBGPals1)
+
+SunShimmerFrame:
+	ld a, [wFieldWeather]
+	cp WEATHER_SUN
+	jr nz, .off
+	ldh a, [hCGB]
+	and a
+	ret z
+	; leave the palettes alone while they're being faded or a script runs
+	; (a script may have faded the screen out)
+	ld a, [wWeatherFlags]
+	and (1 << WEATHER_PAUSED_F) | (1 << WEATHER_FADE_ACTIVE_F)
+	ret nz
+	ld a, [wScriptRunning]
+	and a
+	ret nz
+
+	; Like the weather particles: if a step will probably start next frame
+	; (the map redraw is expensive), wait a frame. Never twice in a row.
+	ld hl, wSunShimmerTimer
+	bit SUN_SHIMMER_SKIPPED_F, [hl]
+	res SUN_SHIMMER_SKIPPED_F, [hl]
+	jr nz, .run
+	ld a, [wPlayerStepFlags]
+	bit PLAYERSTEP_STOP_F, a
+	jr nz, .skip
+	and a
+	jr nz, .run
+	ldh a, [hJoyDown]
+	and D_PAD
+	jr z, .run
+.skip
+	set SUN_SHIMMER_SKIPPED_F, [hl]
+	ret
+
+.run
+	; step = timer / 3, part = timer % 3
+	ld a, [hl]
+	ld b, 0
+.div
+	cp SUN_SHIMMER_STEP_FRAMES
+	jr c, .got_part
+	sub SUN_SHIMMER_STEP_FRAMES
+	inc b
+	jr .div
+.got_part
+	ld c, a
+	; level = step + 1 for steps 0-4, 9 - step for steps 5-9
+	ld a, b
+	cp SUN_SHIMMER_STEPS / 2
+	jr nc, .going_down
+	inc a
+	jr .got_level
+.going_down
+	ld a, SUN_SHIMMER_STEPS - 1
+	sub b
+.got_level
+	ld d, a
+	call SunShimmerPart
+
+	ld hl, wSunShimmerTimer
+	inc [hl]
+	ld a, [hl]
+	cp SUN_SHIMMER_FRAMES
+	ret c
+	xor a
+	ld [hl], a
+	ret
+
+.off
+	xor a
+	ld [wSunShimmerTimer], a
+	ld a, [wSunShimmerLevel]
+	and a
+	ret z
+	xor a
+	ld [wSunShimmerLevel], a
+	; fallthrough
+
+SunShimmerStopWater::
+; The water animation goes back to the plain map colors.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wSunShimmerWaterActive)
+	ldh [rSVBK], a
+	xor a
+	ld [wSunShimmerWaterActive], a
+	pop af
+	ldh [rSVBK], a
+	ret
+
+SunShimmerResetWater::
+; Called when the map palettes are (re)loaded: the new map may not
+; animate its water, and its colors are different.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wWaterPalColor)
+	ldh [rSVBK], a
+	ld a, -1
+	ld [wWaterPalColor], a
+	xor a
+	ld [wSunShimmerWaterActive], a
+	pop af
+	ldh [rSVBK], a
+	ret
+
+SunShimmerPart:
+; c = part (0-2), d = brightness level (0-5)
+; Part 0 rebuilds BG palettes 0-2, part 1 palettes 3-4 (with the water
+; colors), part 2 palettes 5-6 and then uploads them.
+	ld a, d
+	add a
+	add LOW(SunShimmerDeltas)
+	ld l, a
+	adc HIGH(SunShimmerDeltas)
+	sub l
+	ld h, a
+	ld a, [hli]
+	ld b, a ; red delta
+	ld a, [hl]
+	ld e, a ; green / blue delta
+
+	; the level the water animation and the next part 0 see once this
+	; pass is shown (WRAM bank 1, so before switching banks)
+	ld a, c
+	cp 2
+	jr nz, .not_last_part
+	ld a, d
+	ld [wSunShimmerLevel], a
+.not_last_part
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals1)
+	ldh [rSVBK], a
+
+	ld a, c
+	and a
+	jr z, .part0
+	dec a
+	jr z, .part1
+
+	; part 2: palettes 5-6, then show the result
+	ld a, 5
+	ld c, 2
+	call .Rebuild
+	jr .upload
+
+.part0
+	xor a
+	ld c, 3
+	call .Rebuild
+	jr .done
+
+.part1
+	ld a, 3
+	ld c, 2
+	call .Rebuild
+	call .WaterColors
+	jr .done
+
+.upload
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+.done
+	pop af
+	ldh [rSVBK], a
+	ret
+
+.Rebuild:
+; Copy c palettes starting at palette a from wBGPals1 to wBGPals2 and
+; brighten them by b (red) / e (green and blue).
+	push de
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	add hl, hl ; * PAL_SIZE
+	push hl
+	ld de, wBGPals1
+	add hl, de
+	pop de
+	push hl
+	ld hl, wBGPals2
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	ld a, c
+	add a
+	add a
+	add a
+	push bc
+	ld c, a
+	ld b, 0
+	push de
+	call CopyBytes
+	pop hl ; first rebuilt color in wBGPals2
+	pop bc
+	pop de
+	ld a, c
+	add a
+	add a ; colors
+	ld c, a
+.color
+	call SunShimmerColor
+	dec c
+	jr nz, .color
+	ret
+
+.WaterColors:
+; Shimmered copies of the water palette's colors 0-2 for the water
+; animation, and the color it is currently showing as wBGPals2's color 0.
+	push de
+	ld hl, wBGPals1 palette PAL_BG_WATER
+	ld de, wSunShimmerWaterColors
+	push bc
+	ld bc, 3 * PAL_COLOR_SIZE
+	call CopyBytes
+	pop bc
+	pop de
+	ld hl, wSunShimmerWaterColors
+	ld c, 3
+.water
+	call SunShimmerColor
+	dec c
+	jr nz, .water
+	ld a, TRUE
+	ld [wSunShimmerWaterActive], a
+
+	ld a, [wWaterPalColor]
+	cp 3
+	ret nc ; the water isn't animated
+	add a
+	add LOW(wSunShimmerWaterColors)
+	ld l, a
+	adc HIGH(wSunShimmerWaterColors)
+	sub l
+	ld h, a
+	ld de, wBGPals2 palette PAL_BG_WATER
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ret
+
+SunShimmerColor:
+; Brighten the RGB555 color at hl: red + b, green and blue + e, each
+; capped at 31. hl advances to the next color. Clobbers a, d.
+	; red
+	ld a, [hl]
+	and %00011111
+	add b
+	cp 32
+	jr c, .red_ok
+	ld a, 31
+.red_ok
+	ld d, a
+	; green: %gggRRRRR %0BBBBBGG -> %000GGggg
+	ld a, [hli]
+	and %11100000
+	push bc
+	ld c, a
+	ld a, [hl]
+	and %00000011
+	or c
+	rlca
+	rlca
+	rlca
+	add e
+	cp 32
+	jr c, .green_ok
+	ld a, 31
+.green_ok
+	ld c, a
+	; blue
+	ld a, [hl]
+	and %01111100
+	rrca
+	rrca
+	add e
+	cp 32
+	jr c, .blue_ok
+	ld a, 31
+.blue_ok
+	; high byte %0BBBBBGG
+	rlca
+	rlca
+	ld b, a
+	ld a, c
+	rrca
+	rrca
+	rrca ; %gggxxxGG
+	ld c, a
+	and %00000011
+	or b
+	ld [hld], a
+	; low byte %gggRRRRR
+	ld a, c
+	and %11100000
+	or d
+	ld [hli], a
+	inc hl
+	pop bc
+	ret
+
+SunShimmerDeltas:
+; red, green and blue added at each brightness level
+	db 0, 0
+	db 1, 1
+	db 2, 1
+	db 3, 2
+	db 4, 2
+	db 5, 3
 
 SaveWeatherFadeSource::
 ; Save the displayed palettes before loading the connected map.

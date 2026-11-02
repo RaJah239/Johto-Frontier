@@ -868,30 +868,27 @@ AnimateWaterPalette:
 ; A cycle of 4 colors (0 1 2 1), updating every other tick
 	ld a, l
 	and %110
-	jr z, .color0
+	jr z, .got_color ; color 0
 	cp %100
-	jr z, .color2
+	ld a, 2
+	jr z, .got_color
+	dec a ; color 1
+.got_color
+	; remember it, so the sunny shimmer uploads the same color
+	ld [wWaterPalColor], a
+	add a
+	ld e, a
+	ld d, 0
+	; while the sun shimmers, show the shimmered copy of the color
+	ld hl, wBGPals1 palette PAL_BG_WATER
+	ld a, [wSunShimmerWaterActive]
+	and a
+	jr z, .got_source
+	ld hl, wSunShimmerWaterColors
+.got_source
+	add hl, de
 
 ; Copy one color from hl to rBGPI via rBGPD
-
-; color1
-	ld hl, wBGPals1 palette PAL_BG_WATER color 1
-	ld a, [hli]
-	ldh [rBGPD], a
-	ld a, [hli]
-	ldh [rBGPD], a
-	jr .end
-
-.color0
-	ld hl, wBGPals1 palette PAL_BG_WATER color 0
-	ld a, [hli]
-	ldh [rBGPD], a
-	ld a, [hli]
-	ldh [rBGPD], a
-	jr .end
-
-.color2
-	ld hl, wBGPals1 palette PAL_BG_WATER color 2
 	ld a, [hli]
 	ldh [rBGPD], a
 	ld a, [hli]

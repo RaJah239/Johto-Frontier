@@ -2270,7 +2270,11 @@ wLastMusicMapGroup:: db
 wLastMusicMapNumber:: db
 wMapMusicForGroup:: db
 
-	ds 4
+; Sunny overworld shimmer (see SunShimmerFrame in engine/overworld/weather.asm)
+wSunShimmerTimer:: db ; 0-29 frame of the pulse; bit 7: skipped last frame
+wSunShimmerLevel:: db ; brightness step last applied (0-5)
+
+	ds 2
 
 
 SECTION "More WRAM 1", WRAMX
@@ -3756,3 +3760,12 @@ wGGBagStashPocketCursors:: ds NUM_POCKETS ; wItemsPocketCursor ..
 wGGBagStashScrollPositions:: ds NUM_POCKETS ; wItemsPocketScrollPosition ..
 wGGBagStashEnd::
 assert wGGBagStashEnd - wGGBagStash == GG_BAG_STASH_LENGTH
+
+
+SECTION "Sun Shimmer Water", WRAMX, BANK[5]
+
+; Sunny overworld shimmer: shimmered copies of the water palette's colors
+; 0-2 for AnimateWaterPalette (same WRAM bank as wBGPals1).
+wSunShimmerWaterActive:: db ; nonzero: AnimateWaterPalette reads wSunShimmerWaterColors
+wSunShimmerWaterColors:: ds 3 * PAL_COLOR_SIZE
+wWaterPalColor:: db ; water palette color AnimateWaterPalette last showed (0-2), -1 = none
