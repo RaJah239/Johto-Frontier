@@ -471,6 +471,7 @@ PokegearClock_Joypad:
 
 .clockreset
 	farcall RestartClock
+	call Pokegear_CheckDailyReset ; a new day ends today's swarm etc.
 	call InitPokegearTilemap ; needed incase exit without setting the time
 	jr .done
 
@@ -946,9 +947,16 @@ PokegearMap_InitSwarmIcon:
 	jr nz, .loop
 	ret
 
+Pokegear_CheckDailyReset:
+; Run the daily reset now if the day changed (e.g. the clock was set to
+; another day), instead of waiting for the next overworld step.
+	call UpdateTime
+	farjp CheckDailyResetTimer
+
 GetActiveSwarmSpeciesAndMap:
 ; If a swarm is in progress, return carry with d = species and
 ; b, c = swarm map group, number. Otherwise return nc.
+	call Pokegear_CheckDailyReset
 	ld a, [wSwarmMapGroup]
 	and a
 	ret z
