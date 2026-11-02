@@ -3164,7 +3164,7 @@ wOlivineGym::                                     db
 wCianwoodGym::                                    db
 wMahoganyGym::                                    db
 
-	ds 62
+	ds 153
 
 ; nonzero while the player is on a Grand Gauntlet run
 wGrandGauntletRun:: db
@@ -3211,6 +3211,8 @@ wTempMonStatGainDisplay:: db
 wEventFlags:: flag_array NUM_EVENTS
 
 wCurBox:: db
+
+	ds 128
 
 wCelebiEvent::
 ; bit 2: forest is restless
@@ -3262,12 +3264,16 @@ wDailyResetTimer:: dw
 wDailyFlags1:: ds 2 ; Has 16 right now but only uses 9
 wDailyFlags2:: db
 wSwarmFlags:: db
+	ds 1
 wTimerEventStartDay:: db
 
 wFruitTreeFlags:: flag_array NUM_FRUIT_TREES
 
+	ds 5
+
 wSpecialPhoneCallID:: db
 wBugContestStartTime:: ds 4 ; day, hour, min, sec
+	ds 8
 
 wdc41:: ds 1
 wdc42:: ds 8
@@ -3295,7 +3301,7 @@ wParkBallsRemaining::
 
 wPhoneList:: ds CONTACT_LIST_SIZE + 1
 
-	ds 10
+	ds 29
 
 wRepelType:: db
 
@@ -3319,7 +3325,7 @@ wBackupWarpNumber:: db
 wBackupMapGroup::   db
 wBackupMapNumber::  db
 
-	ds 1
+	ds 3
 
 wLastSpawnMapGroup:: db
 wLastSpawnMapNumber:: db
