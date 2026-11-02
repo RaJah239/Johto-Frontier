@@ -27,6 +27,28 @@ DoOverworldWeather::
 	and 1
 	jr z, .done
 
+	; Starting a step redraws the map, and that plus a weather tick in the
+	; same frame doesn't fit: the walk stutters. When the next frame will
+	; probably start a step (the player just finished one, or is standing
+	; with the d-pad held), skip this frame without advancing the timer so
+	; the tick runs on the next frame instead. Never skip twice in a row,
+	; or the weather would freeze while walking into a wall.
+	bit WEATHER_SKIPPED_FRAME_F, [hl]
+	res WEATHER_SKIPPED_FRAME_F, [hl]
+	jr nz, .no_skip
+	ld a, [wPlayerStepFlags]
+	bit PLAYERSTEP_STOP_F, a
+	jr nz, .skip
+	and a
+	jr nz, .no_skip
+	ldh a, [hJoyDown]
+	and D_PAD
+	jr z, .no_skip
+.skip
+	set WEATHER_SKIPPED_FRAME_F, [hl]
+	jr .skip_frame
+
+.no_skip
 	ld a, [wWeatherPalSlot]
 	cp NUM_OVERWORLD_OBJ_PALETTES
 	jr nc, .no_palette
@@ -71,6 +93,7 @@ DoOverworldWeather::
 .done
 	ld hl, wOverworldWeatherTimer
 	inc [hl]
+.skip_frame
 	pop bc
 	pop de
 	pop hl
@@ -686,6 +709,12 @@ ForEachWeatherSprite:
 	jr z, .loop
 	ld de, wShadowOAM + (OAM_COUNT - 12 - MAX_OVERWORLD_WEATHER_PARTICLES) * OBJ_SIZE
 .loop
+	; skip empty and hidden slots without the full check
+	ld a, [de]
+	and a
+	jr z, .next
+	cp OAM_YCOORD_HIDDEN
+	jr nc, .next
 	push hl
 	push bc
 	ld h, d
@@ -747,7 +776,7 @@ DoRainFall:
 	jr z, .update_splash
 
 	; 5% chance to splash.
-	call Random
+	call WeatherRandom
 	cp 5 percent
 	jr nc, .fall
 	ld [hl], RAINSPLASH_TILE
@@ -815,19 +844,19 @@ DoRainFall:
 SpawnRainDrop:
 ; hl = free OAM entry
 	; Enter from the top or right edge.
-	call Random
+	call WeatherRandom
 	and 1
 	jr z, .from_right
 	ld [hl], 1 ; y (just above the screen)
 	inc l
 	ld a, SCREEN_WIDTH_PX + 7
-	call RandomRange
+	call WeatherRandomRange
 	add TILE_WIDTH
 	ld [hli], a
 	jr .finish
 .from_right
 	ld a, OAM_YCOORD_HIDDEN - 1
-	call RandomRange
+	call WeatherRandomRange
 	inc a
 	ld [hli], a
 	ld [hl], SCREEN_WIDTH_PX + TILE_WIDTH
@@ -853,10 +882,10 @@ DoSnowFall:
 
 .Update:
 	; Occasionally melt.
-	call Random
+	call WeatherRandom
 	cp 1 percent
 	jr nc, .ok
-	call Random
+	call WeatherRandom
 	cp 10 percent
 	jp c, Despawn
 .ok
@@ -877,7 +906,7 @@ DoSnowFall:
 	ld a, [wPlayerStepVectorX]
 	add a
 	ld c, a
-	call Random
+	call WeatherRandom
 	and 1
 	jr nz, .no_wiggle
 	inc c
@@ -896,23 +925,23 @@ DoSnowFall:
 SpawnSnowFlake:
 ; hl = free OAM entry
 	; 40% chance to spawn.
-	call Random
+	call WeatherRandom
 	cp 40 percent
 	ret nc
 	; Enter from the right one-quarter of the time.
-	call Random
+	call WeatherRandom
 	and %11
 	jr z, .from_right
 	ld [hl], 1
 	inc l
 	ld a, SCREEN_WIDTH_PX + 7
-	call RandomRange
+	call WeatherRandomRange
 	add TILE_WIDTH
 	ld [hli], a
 	jr .finish
 .from_right
 	ld a, OAM_YCOORD_HIDDEN - 1
-	call RandomRange
+	call WeatherRandomRange
 	inc a
 	ld [hli], a
 	ld [hl], SCREEN_WIDTH_PX + TILE_WIDTH
@@ -938,7 +967,7 @@ DoSandFall:
 
 .Update:
 	; 5% chance to vanish.
-	call Random
+	call WeatherRandom
 	cp 5 percent
 	jp c, Despawn
 
@@ -985,19 +1014,19 @@ DoSandFall:
 SpawnSandDrop:
 ; hl = free OAM entry
 	; Enter from the bottom or right edge.
-	call Random
+	call WeatherRandom
 	and 1
 	jr z, .from_right
 	ld [hl], SCREEN_HEIGHT_PX + TILE_WIDTH
 	inc l
 	ld a, SCREEN_WIDTH_PX + 7
-	call RandomRange
+	call WeatherRandomRange
 	add TILE_WIDTH
 	ld [hli], a
 	jr .finish
 .from_right
 	ld a, OAM_YCOORD_HIDDEN - 1
-	call RandomRange
+	call WeatherRandomRange
 	inc a
 	ld [hli], a
 	ld [hl], SCREEN_WIDTH_PX + TILE_WIDTH
@@ -1030,6 +1059,9 @@ ApplyMapWeatherPalettes::
 
 ApplyWeatherTint::
 ; hl = first palette, c = number of palettes
+; Tints each color through precomputed per-channel tables (WeatherTintTables):
+; this runs for every color of 15 palettes whenever map palettes are
+; rebuilt (e.g. crossing into a connected map), so it has to be quick.
 	push af
 	push bc
 	push de
@@ -1041,7 +1073,7 @@ ApplyWeatherTint::
 	ldh [rSVBK], a
 	call GetWeatherTint
 	jp z, .done
-	; Six bytes per weather/time row.
+	; de = table row: ((tint - 1) * NUM_DAYTIMES + daytime) * 96
 	dec a
 	add a
 	add a ; * NUM_DAYTIMES
@@ -1049,14 +1081,19 @@ ApplyWeatherTint::
 	ld a, [wTimeOfDayPal]
 	maskbits NUM_DAYTIMES
 	add b
-	ld e, a
-	add a
-	add e ; * 3
-	add a ; * 6
-	ld e, a
-	ld d, 0
 	push hl
-	ld hl, WeatherTints
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl ; * 32
+	ld d, h
+	ld e, l
+	add hl, hl
+	add hl, de ; * 96
+	ld de, WeatherTintTables
 	add hl, de
 	ld d, h
 	ld e, l
@@ -1066,22 +1103,20 @@ ApplyWeatherTint::
 	ldh [rSVBK], a
 	ld a, c
 	add a
-	add a
-	ld c, a
+	add a ; 4 colors per palette
+	ldh [hProduct + 2], a
 .color_loop
-	push bc
-	push de
 	ld a, [hli]
 	ld b, a ; b = low byte: gggrrrrr
-	ld c, [hl] ; c = high byte: 0bbbbbgg
-	dec hl
+	ld a, [hld]
+	ld c, a ; c = high byte: 0bbbbbgg
 	push hl
 
 	; red
 	ld a, b
 	and %11111
-	call TintChannel
-	ld l, a
+	call .Lookup
+	ldh [hProduct], a
 
 	; green
 	ld a, c
@@ -1095,43 +1130,47 @@ ApplyWeatherTint::
 	rrca
 	and %111
 	or h
-	call TintChannel
-	ld h, a
+	add 32
+	call .Lookup
+	ldh [hProduct + 1], a
 
 	; blue
 	ld a, c
 	rrca
 	rrca
 	and %11111
-	call TintChannel
+	add 64
+	call .Lookup
 
-	; Pack the three channels again.
+	; high byte: 0bbbbbgg
 	add a
 	add a
 	ld c, a
-	ld a, h
+	ldh a, [hProduct + 1]
+	ld b, a
 	rrca
 	rrca
 	rrca
 	and %11
 	or c
 	ld c, a
-	ld a, h
+	; low byte: gggrrrrr
+	ld a, b
 	and %111
 	swap a
 	add a
-	or l
 	ld b, a
+	ldh a, [hProduct]
+	or b
 
 	pop hl
-	ld a, b
 	ld [hli], a
 	ld a, c
 	ld [hli], a
-	pop de
-	pop bc
-	dec c
-	jp nz, .color_loop
+	ldh a, [hProduct + 2]
+	dec a
+	ldh [hProduct + 2], a
+	jr nz, .color_loop
 
 .done
 	pop af
@@ -1142,51 +1181,37 @@ ApplyWeatherTint::
 	pop af
 	ret
 
-TintChannel:
-; a = channel, de = multiplier and add
-	push hl
-	push bc
-	ld c, a
-	ld b, 0
-	ld hl, 8 ; round to nearest
-	ld a, [de]
-	inc de
-.multiply
-	and a
-	jr z, .multiplied
-	add hl, bc
-	dec a
-	jr .multiply
-.multiplied
-	; Divide hl by 16.
-	ld a, l
-	srl h
-	rra
-	srl h
-	rra
-	srl h
-	rra
-	srl h
-	rra
-	ld c, a
-	ld a, [de]
-	inc de
-	add c
-	cp 32
-	jr c, .ok
-	ld a, 31
-.ok
-	pop bc
-	pop hl
+.Lookup:
+; a = offset into the table row at de; return the byte there
+	add e
+	ld l, a
+	adc d
+	sub l
+	ld h, a
+	ld a, [hl]
 	ret
+
+; For each weather tint and time of day: three 32-byte tables (red, green,
+; blue) holding min(31, (channel * multiplier + 8) / 16 + add).
+MACRO tint_channel_table ; multiplier, add
+	FOR v, 32
+		DEF tinted = ((v * (\1) + 8) >> 4) + (\2)
+		IF tinted > 31
+			DEF tinted = 31
+		ENDC
+		db tinted
+	ENDR
+ENDM
 
 ; red mult, red add, green mult, green add, blue mult, blue add
 MACRO weather_tint
-	db \1, \2, \3, \4, \5, \6
+	tint_channel_table \1, \2
+	tint_channel_table \3, \4
+	tint_channel_table \5, \6
 ENDM
 
-WeatherTints:
-	table_width 6
+WeatherTintTables:
+	table_width 96
 ; rain
 	weather_tint 9, 2, 10, 1, 8, 4 ; morn
 	weather_tint 10, 2, 10, 1, 9, 3 ; day
@@ -1535,3 +1560,53 @@ LerpChannel:
 	ret
 
 
+
+WeatherRandom:
+; Cheap 16-bit xorshift (7, 9, 8) for weather particles: a few instructions
+; instead of the save-backed Random, which up to 16 particles call several
+; times per weather tick. Returns a. Preserves bc, de and hl.
+	push hl
+	ldh a, [hWeatherRandom]
+	ld l, a
+	ldh a, [hWeatherRandom + 1]
+	ld h, a
+	or l
+	jr nz, .seeded
+	ldh a, [rDIV]
+	or 1
+	ld l, a
+.seeded
+	ld a, h
+	rra
+	ld a, l
+	rra
+	xor h
+	ld h, a
+	ld a, l
+	rra
+	ld a, h
+	rra
+	xor l
+	ld l, a
+	xor h
+	ld h, a
+	ldh [hWeatherRandom + 1], a
+	ld a, l
+	ldh [hWeatherRandom], a
+	xor h
+	pop hl
+	ret
+
+WeatherRandomRange:
+; Return a random number from 0 to a - 1 (a > 0). Preserves bc, de and hl.
+	push bc
+	ld c, a
+	call WeatherRandom
+.mod
+	cp c
+	jr c, .done
+	sub c
+	jr .mod
+.done
+	pop bc
+	ret

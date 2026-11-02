@@ -39,16 +39,42 @@ SwapBytes::
 
 ByteFill::
 ; fill bc bytes with the value of a, starting at hl
+; Writes 8 bytes per loop pass (about twice as fast as one byte per pass:
+; map changes clear ~1800 bytes with this). Preserves de; returns a = value
+; and bc = 0, like before.
+	push de
+	ld d, a
+	ld a, c
+	and %111
+	ld e, a ; leftover bytes
+	; bc /= 8
+	srl b
+	rr c
+	srl b
+	rr c
+	srl b
+	rr c
+	ld a, d
 	inc b ; we bail the moment b hits 0, so include the last run
-	inc c ; same thing; include last byte
+	inc c ; same thing; include last block
 	jr .HandleLoop
-.PutByte:
+.Put8Bytes:
+rept 8
 	ld [hli], a
+endr
 .HandleLoop:
 	dec c
-	jr nz, .PutByte
+	jr nz, .Put8Bytes
 	dec b
+	jr nz, .Put8Bytes
+	inc e
+	jr .HandleLeftover
+.PutByte:
+	ld [hli], a
+.HandleLeftover:
+	dec e
 	jr nz, .PutByte
+	pop de
 	ret
 
 GetFarByte::

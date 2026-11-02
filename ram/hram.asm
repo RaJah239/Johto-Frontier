@@ -185,6 +185,10 @@ hWeatherFadeProgress:: db
 ; decompressed, so map connections never re-decompress an unchanged tileset.
 hDecompressedTileset:: db
 
-	ds 5
+; Overworld weather particle RNG (WeatherRandom in engine/overworld/weather.asm).
+; Kept apart from the save-backed Random so falling rain doesn't use it up.
+hWeatherRandom:: dw
+
+	ds 3
 
 ENDSECTION
