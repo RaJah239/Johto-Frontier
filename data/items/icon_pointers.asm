@@ -174,7 +174,7 @@ ItemIconPointers::
 	dba PolkadotBowIcon ; POLKADOT_BOW
 	dba NoItemIcon ; ITEM_PLACEHOLDER
 	dba UpgradeIcon ; UP_GRADE
-	dba Silphscope2Icon ; BERRY
+	dba OranBerryIcon ; BERRY
 	dba SitrusBerryIcon ; GOLD_BERRY
 	dba SquirtbottleIcon ; SQUIRTBOTTLE
 	dba VitaminIcon ; HYPER_EV_UP
