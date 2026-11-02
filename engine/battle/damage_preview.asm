@@ -47,7 +47,7 @@ PrintMoveDamagePreview:
 	jr .restore
 
 .unavailable
-	hlcoord 3, 8
+	hlcoord 5, 8
 	ld de, DamagePreview_NoDamageString
 	call PlaceString
 
