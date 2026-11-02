@@ -98,12 +98,12 @@ PlaceItemIconTiles::
 
 InitMartLeftColumn::
 ; Polished Crystal-style buy menu: a checkered column left of the item list
-; (rows 3-11) with the item icon in a panel at its bottom (rows 7-11).
+; (rows 3-11) with the item icon's panel centered in it (rows 5-9).
 	call LoadItemIconPanelGFX
 	hlcoord 0, 3
 	ld de, SCREEN_WIDTH - 5
 	ld a, PANEL_BACKGROUND
-	ld b, 4
+	ld b, 9
 .row
 	ld c, 5
 .col
@@ -113,11 +113,11 @@ InitMartLeftColumn::
 	add hl, de
 	dec b
 	jr nz, .row
-	hlcoord 0, 7
+	hlcoord 0, 5
 	call PlaceItemIconPanel
-	hlcoord 1, 8
+	hlcoord 1, 6
 	call PlaceItemIconTiles
-	hlcoord 1, 8, wAttrmap
+	hlcoord 1, 6, wAttrmap
 	lb bc, 3, 3
 	ld a, MART_ITEM_ICON_PAL
 	call FillBoxWithByte
