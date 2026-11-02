@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 32
+DEF NUM_OPTIONS EQU 33
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -101,6 +101,7 @@ OptionsMenu_DrawLabels:
 	dw .RunningShoes
 	dw .AutoBicycle
 	dw .MinimalDialogue
+	dw .WeatherEffects
 	dw .QuickNurse
 	dw .FieldActions
 	dw .PokePics
@@ -135,6 +136,7 @@ OptionsMenu_DrawLabels:
 .RunningShoes:    db "Running Shoes@"
 .AutoBicycle:     db "Auto Bicycle@"
 .MinimalDialogue: db "Dialogue/Text@"
+.WeatherEffects:  db "Weather Effects@"
 .QuickNurse:      db "#mon Center@"
 .FieldActions:    db "Field Actions@"
 .PokePics:        db "#pics@"
@@ -196,6 +198,7 @@ GetOptionPointer:
 	dw Options_RunningShoes
 	dw Options_AutoBicycle
 	dw Options_MinimalDialogue
+	dw Options_WeatherEffects
 	dw Options_QuickNurse
 	dw Options_FieldActions
 	dw Options_Pokepics
@@ -843,6 +846,44 @@ Options_DamageInfo:
 
 .Off: db "Off@"
 .On:  db "On @"
+
+Options_WeatherEffects:
+; Overworld weather particles, tints and sun shimmer (set = Off)
+	ld hl, wTextboxFlags
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit OW_WEATHER_OFF_F, [hl]
+	jr nz, .ToggleOn
+	jr .ToggleOff
+
+.LeftPressed:
+	bit OW_WEATHER_OFF_F, [hl]
+	jr z, .ToggleOff
+	jr .ToggleOn
+
+.NonePressed:
+	bit OW_WEATHER_OFF_F, [hl]
+	jr nz, .ToggleOff
+
+.ToggleOn:
+	res OW_WEATHER_OFF_F, [hl]
+	ld de, .On
+	jr .Display
+
+.ToggleOff:
+	set OW_WEATHER_OFF_F, [hl]
+	ld de, .Off
+.Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.On:  db "On @"
+.Off: db "Off@"
 
 Options_WeatherText:
 	ld hl, wOptions4
@@ -1797,6 +1838,7 @@ OptionsMenu_DrawDescription:
 	dw .DescRunningShoes
 	dw .DescAutoBicycle
 	dw .DescMinimalDialogue
+	dw .DescWeatherEffects
 	dw .DescQuickNurse
 	dw .DescFieldActions
 	dw .DescPokepics
@@ -1833,6 +1875,7 @@ OptionsMenu_DrawDescription:
 .DescScaledExp:       db "Scaled. 8 badges:<LF>Normal or Zero.@"
 .DescQuickNurse:      db "#mon Center<LF>fast or slow heal.@"
 .DescWeatherText:     db "Weather lingers or<LF>ends text.@"
+.DescWeatherEffects:  db "Overworld rain,<LF>snow, sand & sun.@"
 .DescIntrosOutros:    db "Encounter & Battle<LF>intros & outros.@"
 .DescMonCries:        db "Also disables<LF>Knockout Flair.@"
 .DescDamageInfo:      db "Damage range and<LF>foe's HP numbers.@"

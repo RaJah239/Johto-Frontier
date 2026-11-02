@@ -12,6 +12,15 @@ DoOverworldWeather::
 	push de
 	push bc
 
+	; "Weather Effects" Off: nothing falls (the start menu that turned it
+	; off already cleared the particles)
+	ld a, [wTextboxFlags]
+	bit OW_WEATHER_OFF_F, a
+	jr z, .effects_on
+	xor a
+	ld [wOverworldWeatherCooldown], a
+
+.effects_on
 	call GetActiveOverworldWeather
 	ld b, a
 	ld a, [wOverworldWeatherCooldown]
@@ -118,6 +127,9 @@ DoOverworldWeather::
 
 GetActiveOverworldWeather:
 ; Use the previous weather during cooldown.
+	ld a, [wTextboxFlags]
+	bit OW_WEATHER_OFF_F, a
+	jr nz, NoOverworldWeather
 	ld a, [wOverworldWeatherCooldown]
 	and a
 	ld a, [wPreviousFieldWeather]
@@ -125,6 +137,10 @@ GetActiveOverworldWeather:
 	; fallthrough
 
 GetOverworldWeatherType::
+; No particles while "Weather Effects" is Off.
+	ld a, [wTextboxFlags]
+	bit OW_WEATHER_OFF_F, a
+	jr nz, NoOverworldWeather
 	ld a, [wFieldWeather]
 	; fallthrough
 
@@ -155,7 +171,15 @@ TranslateFieldWeatherToOverworld:
 	db OVERWORLD_WEATHER_SNOW      ; WEATHER_HAIL
 	assert_table_length WEATHER_HAIL + 1
 
+NoOverworldWeather:
+	xor a ; OVERWORLD_WEATHER_NONE
+	ret
+
 GetWeatherTint::
+; No palette tint while "Weather Effects" is Off.
+	ld a, [wTextboxFlags]
+	bit OW_WEATHER_OFF_F, a
+	jr nz, .none
 	ld a, [wFieldWeather]
 	cp WEATHER_HAIL + 1
 	jr nc, .none
@@ -1208,6 +1232,9 @@ assert BANK(wSunShimmerWaterActive) == BANK(wBGPals1)
 assert BANK(wBGPals2) == BANK(wBGPals1)
 
 SunShimmerFrame:
+	ld a, [wTextboxFlags]
+	bit OW_WEATHER_OFF_F, a
+	jr nz, .off
 	ld a, [wFieldWeather]
 	cp WEATHER_SUN
 	jr nz, .off

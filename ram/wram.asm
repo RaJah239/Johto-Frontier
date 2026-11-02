@@ -1759,6 +1759,8 @@ wTextboxFlags::
 ;   command, set = nooryes (see RematchScript)
 ; KNOCKOUT_FLAIR_F: replay the foe's cry when it KOs the player
 ; DAMAGE_INFO_F
+; OW_WEATHER_OFF_F: "Weather Effects" Off: no overworld weather particles,
+;   palette tints or sun shimmer (the weather itself still happens)
 	db
 
 wOptions2::

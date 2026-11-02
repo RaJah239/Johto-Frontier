@@ -76,6 +76,7 @@ DEF NUM_FRAMES EQU const_value
 	const REMATCH_NOYES_F       ; 4
 	const KNOCKOUT_FLAIR_F      ; 5
 	const DAMAGE_INFO_F         ; 6
+	const OW_WEATHER_OFF_F      ; 7
 
 ; wOptions2::
 	const_def
