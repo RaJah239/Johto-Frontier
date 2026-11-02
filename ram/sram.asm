@@ -65,7 +65,12 @@ sBackupMonPalOverrideCount:: db
 sBackupMonPalOverrideCheck:: db
 sBackupMonPalOverrideEntries:: ds MAX_MON_PAL_OVERRIDES * MON_PAL_OVERRIDE_SIZE
 
-	ds $186 - (2 + MAX_MON_PAL_OVERRIDES * MON_PAL_OVERRIDE_SIZE)
+; Bag pocket / cursor positions for the backup slot (see sBagCursors).
+sBackupBagCursors::
+sBackupBagCursorCheck:: db
+sBackupBagCursorData:: ds BAG_CURSORS_LENGTH
+
+	ds $186 - (2 + MAX_MON_PAL_OVERRIDES * MON_PAL_OVERRIDE_SIZE) - (1 + BAG_CURSORS_LENGTH)
 
 sBackupChecksum:: dw
 
@@ -100,7 +105,16 @@ sMonPalOverrideCount:: db
 sMonPalOverrideCheck:: db
 sMonPalOverrideEntries:: ds MAX_MON_PAL_OVERRIDES * MON_PAL_OVERRIDE_SIZE
 
-	ds $186 - (2 + MAX_MON_PAL_OVERRIDES * MON_PAL_OVERRIDE_SIZE)
+; Bag pocket / cursor positions (wBagCursors - wBagCursorsEnd, BAG_CURSORS_LENGTH bytes): the last
+; open pocket and each pocket's cursor and scroll position, so the bag
+; reopens where it was left. Written with sBagCursorCheck =
+; SAVE_CHECK_VALUE_1; an older save leaves garbage here, which the check
+; value rejects.
+sBagCursors::
+sBagCursorCheck:: db
+sBagCursorData:: ds BAG_CURSORS_LENGTH
+
+	ds $186 - (2 + MAX_MON_PAL_OVERRIDES * MON_PAL_OVERRIDE_SIZE) - (1 + BAG_CURSORS_LENGTH)
 
 sChecksum:: dw
 

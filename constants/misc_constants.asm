@@ -17,6 +17,7 @@ DEF GS_VERSION EQU 0
 
 ; save file corruption check values
 DEF SAVE_CHECK_VALUE_1 EQU 99
+DEF BAG_CURSORS_LENGTH EQU 17 ; wBagCursorsEnd - wBagCursors (saved as sBagCursorData)
 DEF SAVE_CHECK_VALUE_2 EQU 127
 
 ; RTC halted check value

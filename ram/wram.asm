@@ -2293,6 +2293,10 @@ wCurBattleMon::
 
 wCurMoveNum:: db
 
+; wBagCursors - wBagCursorsEnd is kept in the save file (sBagCursors), so
+; the bag reopens on the same pocket, item and scroll position after a
+; reload. Keep these contiguous.
+wBagCursors::
 wLastPocket:: db
 
 wPCItemsCursor::        db
@@ -2312,6 +2316,8 @@ wBallsPocketScrollPosition::    db
 wTMHMPocketScrollPosition::     db
 wFruitPocketScrollPosition::    db
 wBattlePocketScrollPosition::   db
+wBagCursorsEnd::
+assert wBagCursorsEnd - wBagCursors == BAG_CURSORS_LENGTH
 
 wSwitchMon::
 wSwitchItem::

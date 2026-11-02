@@ -326,7 +326,31 @@ SavePlayerData:
 	ldh a, [hRandomState + 3]
 	ld [sRandomState + 3], a
 	callfar SaveMonPalOverridesToSRAM
+	ld hl, sBagCursors
+	call SaveBagCursors
 	jmp CloseSRAM
+
+SaveBagCursors:
+; Copy the bag's last pocket and per-pocket cursor / scroll positions
+; (wBagCursors) to the save slot at hl: a SAVE_CHECK_VALUE_1 byte, then
+; the data. The slot's SRAM bank must be open.
+	ld a, SAVE_CHECK_VALUE_1
+	ld [hli], a
+	ld d, h
+	ld e, l
+	ld hl, wBagCursors
+	ld bc, wBagCursorsEnd - wBagCursors
+	jmp CopyBytes
+
+LoadBagCursors:
+; Restore wBagCursors from the save slot at hl, unless its check byte is
+; missing (a save from before this was stored: keep the defaults).
+	ld a, [hli]
+	cp SAVE_CHECK_VALUE_1
+	ret nz
+	ld de, wBagCursors
+	ld bc, wBagCursorsEnd - wBagCursors
+	jmp CopyBytes
 
 SavePokemonData:
 	ld a, BANK(sPokemonData)
@@ -389,6 +413,8 @@ SaveBackupPlayerData:
 	ldh a, [hRandomState + 3]
 	ld [sBackupRandomState + 3], a
 	callfar SaveBackupMonPalOverridesToSRAM
+	ld hl, sBackupBagCursors
+	call SaveBagCursors
 	jmp CloseSRAM
 
 SaveBackupPokemonData:
@@ -574,6 +600,8 @@ LoadPlayerData:
 	ld a, [sRandomState + 3]
 	ldh [hRandomState + 3], a
 	callfar LoadMonPalOverridesFromSRAM
+	ld hl, sBagCursors
+	call LoadBagCursors
 	call CloseSRAM
 	ld a, BANK(sBattleTowerChallengeState)
 	call OpenSRAM
@@ -632,6 +660,8 @@ LoadBackupPlayerData:
 	ld a, [sBackupRandomState + 3]
 	ldh [hRandomState + 3], a
 	callfar LoadBackupMonPalOverridesFromSRAM
+	ld hl, sBackupBagCursors
+	call LoadBagCursors
 	jmp CloseSRAM
 
 LoadBackupPokemonData:
