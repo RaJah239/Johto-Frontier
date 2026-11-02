@@ -47,6 +47,10 @@ SetGrandGauntletRun:
 	call GetExpShare
 	ld [wGrandGauntletPrevExpShare], a
 
+	; the run starts with an empty dungeon bag; the player's own bag is
+	; stashed until the run ends
+	farcall GGDungeonBag_Enter
+
 .already_running
 	ld a, 1
 	ld [wGrandGauntletRun], a

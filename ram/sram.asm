@@ -43,6 +43,11 @@ sRTCStatusFlags:: db
 	ds 9
 
 
+SECTION "GG Bag Stash Backup", SRAM
+
+; Grand Gauntlet dungeon bag stash for the backup slot (see sGGBagStash).
+sBackupGGBagStash:: ds GG_BAG_STASH_LENGTH
+
 SECTION "Backup Save", SRAM
 
 sBackupOptions:: ds wOptionsEnd - wOptions
@@ -334,3 +339,10 @@ s7_a001:: db
 sMobileAdapterStatus2:: db ; unused
 
 ENDSECTION
+
+SECTION "GG Bag Stash Save", SRAM
+
+; The player's own bag while a Grand Gauntlet run is on (copy of
+; wGGBagStash, written with the rest of the save). Its first byte is
+; SAVE_CHECK_VALUE_1 only while a bag is stashed.
+sGGBagStash:: ds GG_BAG_STASH_LENGTH

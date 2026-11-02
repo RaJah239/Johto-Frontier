@@ -328,6 +328,10 @@ SavePlayerData:
 	callfar SaveMonPalOverridesToSRAM
 	ld hl, sBagCursors
 	call SaveBagCursors
+	ld a, BANK(sGGBagStash)
+	call OpenSRAM
+	ld de, sGGBagStash
+	farcall GGBagStash_SaveToSRAM
 	jmp CloseSRAM
 
 SaveBagCursors:
@@ -415,6 +419,10 @@ SaveBackupPlayerData:
 	callfar SaveBackupMonPalOverridesToSRAM
 	ld hl, sBackupBagCursors
 	call SaveBagCursors
+	ld a, BANK(sBackupGGBagStash)
+	call OpenSRAM
+	ld de, sBackupGGBagStash
+	farcall GGBagStash_SaveToSRAM
 	jmp CloseSRAM
 
 SaveBackupPokemonData:
@@ -602,6 +610,10 @@ LoadPlayerData:
 	callfar LoadMonPalOverridesFromSRAM
 	ld hl, sBagCursors
 	call LoadBagCursors
+	ld a, BANK(sGGBagStash)
+	call OpenSRAM
+	ld de, sGGBagStash
+	farcall GGBagStash_LoadFromSRAM
 	call CloseSRAM
 	ld a, BANK(sBattleTowerChallengeState)
 	call OpenSRAM
@@ -662,6 +674,10 @@ LoadBackupPlayerData:
 	callfar LoadBackupMonPalOverridesFromSRAM
 	ld hl, sBackupBagCursors
 	call LoadBagCursors
+	ld a, BANK(sBackupGGBagStash)
+	call OpenSRAM
+	ld de, sBackupGGBagStash
+	farcall GGBagStash_LoadFromSRAM
 	jmp CloseSRAM
 
 LoadBackupPokemonData:

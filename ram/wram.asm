@@ -3056,6 +3056,8 @@ wFruits:: ds MAX_FRUITS * 2 + 1
 wNumBattles:: db
 wBattles:: ds MAX_BATTLES * 2 + 1
 
+assert wNumPCItems - wTMsHMs == GG_BAG_LENGTH ; the bag the Grand Gauntlet stashes
+
 wNumPCItems:: db
 wPCItems:: ds MAX_PC_ITEMS * 2 + 1
 
@@ -3739,3 +3741,18 @@ wMonPalOverrideCount:: db
 wMonPalOverrideSlots:: ds NUM_POKEMON + 1
 ; Each entry: species, flags, normal palette (4 bytes), shiny palette (4 bytes).
 wMonPalOverrideEntries:: ds MAX_MON_PAL_OVERRIDES * MON_PAL_OVERRIDE_SIZE
+
+
+SECTION "GG Bag Stash", WRAMX, BANK[2]
+
+; Grand Gauntlet dungeon bag: while a run is on, the player's own bag
+; waits here and the bag in wTMsHMs.. is the run's own (it starts empty).
+; Saved with the game as sGGBagStash / sBackupGGBagStash.
+wGGBagStash::
+wGGBagStashCheck:: db ; SAVE_CHECK_VALUE_1 while the player's own bag is stashed
+wGGBagStashBag:: ds GG_BAG_LENGTH ; copy of wTMsHMs .. wNumPCItems
+wGGBagStashLastPocket:: db
+wGGBagStashPocketCursors:: ds NUM_POCKETS ; wItemsPocketCursor ..
+wGGBagStashScrollPositions:: ds NUM_POCKETS ; wItemsPocketScrollPosition ..
+wGGBagStashEnd::
+assert wGGBagStashEnd - wGGBagStash == GG_BAG_STASH_LENGTH

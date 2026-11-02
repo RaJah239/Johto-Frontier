@@ -47,7 +47,7 @@ GrandGauntletInfoSignScript:
 	closewindow
 	ifequal 1, .Explanation
 	ifequal 2, .Requirements
-	ifequal 3, .BannedItems
+	ifequal 3, .DungeonBag
 	ifequal 4, .ForcedOptions
 	ifequal 5, .Prizes
 	endtext
@@ -85,48 +85,29 @@ GrandGauntletInfoSignScript:
 	waitbutton
 	sjump .ChooseOption
 
-.BannedItems:
+.DungeonBag:
 	writethistext
-		text "Certain items are"
-		line "banned and can't be"
-		cont "entered with."
+		text "We look after your"
+		line "bag during a run."
 
-		para "If in possession,"
-		line "they'll be lost."
+		para "You start the"
+		line "first floor with"
+		cont "an empty Dungeon"
+		cont "Bag. Anything you"
+		cont "find goes in it."
 
-		para "Store them all via"
-		line "your PC."
+		para "Saving keeps both"
+		line "bags safe."
 
-		para "Here's a complete"
-		line "list:"
+		para "Clear floor 50 or"
+		line "give up and you"
+		cont "get your own bag"
+		cont "back, just as you"
+		cont "left it."
 
-		para "All Berries,"
-		line "All TMs,"
-		cont "All Battle Items,"
-
-		para "and specific ones"
-		line "from your Item"
-		cont "Pocket:"
-
-		para "Vitamins:"
-		line "Rare Candy,"
-		cont "PP Max,"
-		cont "PP Up,"
-		cont "Hyper EV Up,"
-		cont "HP Up,"
-		cont "Protein,"
-		cont "Iron,"
-		cont "Calcium,"
-		cont "Zinc and Carbos."
-
-		para "Evolution Items:"
-		line "Fire Stone,"
-		cont "Water Stone,"
-		cont "Leaf Stone,"
-		cont "Thunderstone,"
-		cont "Dragon Scale,"
-		cont "Sun Stone and"
-		cont "Moon Stone."
+		para "The Dungeon Bag"
+		line "and its items are"
+		cont "lost."
 		done
 	setevent EVENT_GRAND_GAUNTLET_WARNING
 	waitbutton
@@ -186,7 +167,7 @@ GrandGauntletInfoSignScript:
 	db 6 ; items
 	db "Explanation@"
 	db "Requirements@"
-	db "Banned Items@"
+	db "Dungeon Bag@"
 	db "Forced Options@"
 	db "Prizes@"
 	db "Cancel@"
@@ -217,9 +198,8 @@ GrandGauntletGiveUpPenalty:
 
 ; Abandoning a run costs the player the team they were loaned and
 ; everything they picked up along the way: the party is replaced by a
-; single level-50 Feebas and the bag is stripped back to key items and
-; balls - items, berries, battle items and TMs/HMs are all wiped.
-; The PC keeps whatever was stored there; only carried pockets go.
+; single level-50 Feebas and the dungeon bag is thrown away. The player
+; gets their own bag back, exactly as it was when the run started.
 	; 1. one level-50 Feebas in slot 1 and nothing else
 	call ResetPartyToEmpty
 	ld a, FEEBAS
@@ -230,228 +210,7 @@ GrandGauntletGiveUpPenalty:
 	ld [wMonType], a ; our party, not an opposing one
 	ld [wBattleMode], a ; no wild item, level-appropriate moves
 	predef TryAddMonToParty
-	; fallthrough
-
-GrandGauntletEntryPenalty:
-	; Preserve the current item selection.
-	ld a, [wCurItem]
-	push af
-
-	; Clear Battle pocket.
-	xor a
-	ld [wNumBattles], a
-	ld a, -1
-	ld [wBattles], a
-
-	; Clear all TM/HM ownership.
-	ld hl, wTMsHMs
-	ld bc, NUM_TMS + NUM_HMS
-.clear_tms
-	xor a
-	ld [hli], a
-	dec bc
-	ld a, b
-	or c
-	jr nz, .clear_tms
-
-	; remove all berries
-	ld a, BERRY
-	ld [wCurItem], a
-	call .RemoveAllMatchingBerries
-
-	ld a, BITTER_BERRY
-	ld [wCurItem], a
-	call .RemoveAllMatchingBerries
-
-	ld a, BURNT_BERRY
-	ld [wCurItem], a
-	call .RemoveAllMatchingBerries
-
-	ld a, GOLD_BERRY
-	ld [wCurItem], a
-	call .RemoveAllMatchingBerries
-
-	ld a, ICE_BERRY
-	ld [wCurItem], a
-	call .RemoveAllMatchingBerries
-
-	ld a, MINT_BERRY
-	ld [wCurItem], a
-	call .RemoveAllMatchingBerries
-
-	ld a, MIRACLEBERRY
-	ld [wCurItem], a
-	call .RemoveAllMatchingBerries
-
-	ld a, MYSTERYBERRY
-	ld [wCurItem], a
-	call .RemoveAllMatchingBerries
-
-	ld a, PRZCUREBERRY
-	ld [wCurItem], a
-	call .RemoveAllMatchingBerries
-
-	ld a, PSNCUREBERRY
-	ld [wCurItem], a
-	call .RemoveAllMatchingBerries
-
-	ld a, SILVER_BERRY
-	ld [wCurItem], a
-	call .RemoveAllMatchingBerries
-
-	; remove these specific items
-	ld a, RARE_CANDY
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	ld a, PP_MAX
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	ld a, PP_UP
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	ld a, HYPER_EV_UP
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	ld a, HP_UP
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	ld a, PROTEIN
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	ld a, IRON
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	ld a, CALCIUM
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	ld a, ZINC
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	ld a, CARBOS
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	ld a, FIRE_STONE
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	ld a, WATER_STONE
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	ld a, LEAF_STONE
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	ld a, THUNDERSTONE
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	ld a, DRAGON_SCALE
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	ld a, SUN_STONE
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	ld a, MOON_STONE
-	ld [wCurItem], a
-	call .RemoveAllMatchingItems
-
-	; Restore the previous item selection.
-	pop af
-	ld [wCurItem], a
-	ret
-
-.RemoveAllMatchingItems:
-.restart
-	ld hl, wItems
-.search
-	ld a, [hli]
-	cp -1
-	ret z
-	ld c, a
-	ld a, [wCurItem]
-	cp c
-	jr z, .found
-	; Skip this item's quantity.
-	inc hl
-	jr .search
-
-.found
-	; HL points to the matching item's quantity.
-	dec hl
-	ld d, h
-	ld e, l
-
-	; Source is the next item pair.
-	inc hl
-	inc hl
-
-	; Shift remaining entries left, including the terminator.
-.copy
-	ld a, [hli]
-	ld [de], a
-	inc de
-	cp -1
-	jr nz, .copy
-
-	; One item entry has been removed.
-	ld hl, wNumItems
-	dec [hl]
-
-	; Restart to remove any additional stacks.
-	jr .restart
-
-.RemoveAllMatchingBerries:
-.restart2
-	ld hl, wFruits
-.search2
-	ld a, [hli]
-	cp -1
-	ret z
-	ld c, a
-	ld a, [wCurItem]
-	cp c
-	jr z, .found2
-	; Skip this item's quantity.
-	inc hl
-	jr .search2
-
-.found2
-	; HL points to the matching item's quantity.
-	dec hl
-	ld d, h
-	ld e, l
-
-	; Source is the next item pair.
-	inc hl
-	inc hl
-
-	; Shift remaining entries left, including the terminator.
-.copy2
-	ld a, [hli]
-	ld [de], a
-	inc de
-	cp -1
-	jr nz, .copy2
-
-	; One item entry has been removed.
-	ld hl, wNumFruits
-	dec [hl]
-
-	; Restart to remove any additional stacks.
-	jr .restart2
+	farjp GGDungeonBag_Exit
 
 BattlePlazaGrandGauntletReceptionistScript:
 	opentext
@@ -461,10 +220,9 @@ BattlePlazaGrandGauntletReceptionistScript:
 		text "The Grand Gauntlet"
 		line "Welcomes you!"
 	
-		para "Store banned items"
-		line "in your PC first,"
-		cont "if you have not"
-		cont "done so already."
+		para "We'll look after"
+		line "your bag until"
+		cont "your run is over."
 
 		para "View the sign to"
 		line "the left if a re-"
@@ -494,8 +252,8 @@ BattlePlazaGrandGauntletReceptionistScript:
 		para "It is of utmost"
 		line "importance to read"
 		cont "it, especially the"
-		cont "section on banned"
-		cont "items."
+		cont "section on the"
+		cont "Dungeon Bag."
 
 		para "Return once you"
 		line "have."
@@ -571,7 +329,6 @@ BattlePlazaGrandGauntletReceptionistScript:
 		para "Enjoy your run!"
 		done
 	waitclosetext
-	callasm GrandGauntletEntryPenalty
 	playsound SFX_WARP_TO
 	special FadeOutPalettes
 	waitsfx
@@ -1137,14 +894,12 @@ ResetGrandGauntletEvents:
 	ret
 
 BattlePlazaGrandGauntletYoungsterText:
-	text "The PC can store"
-	line "up to 150 items."
+	text "They keep your bag"
+	line "safe during a run."
 
-	para "That's enough for"
-	line "my entire invent-"
-	cont "ory that can't be"
-	cont "taken on the"
-	cont "Grand Gauntlet."
+	para "You start with an"
+	line "empty one and keep"
+	cont "nothing you find!"
 	done
 
 FeebasSellerScript:

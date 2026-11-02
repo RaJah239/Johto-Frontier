@@ -60,4 +60,5 @@ GGR50Crystal:
 FinishGrandGauntlet:
 	xor a
 	ld [wGrandGauntletRun], a
-	ret
+	; throw away the dungeon bag and give the player's own bag back
+	farjp GGDungeonBag_Exit

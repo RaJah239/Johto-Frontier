@@ -1131,8 +1131,9 @@ _GrandGauntletGiveUpConfirmText1::
 	text "Give up on this"
 	line "run?"
 
-	para "Your progress and"
-	line "team here will be"
+	para "Your progress, the"
+	line "team and the Dun-"
+	cont "geon Bag will be"
 	cont "lost."
 
 	para "Are you sure?"

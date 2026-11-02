@@ -629,6 +629,9 @@ INCLUDE "engine/items/music_player.asm"
 SECTION "Grand Gauntlet Items", ROMX
 INCLUDE "engine/events/grand_gauntlet_items.asm"
 
+SECTION "GG Dungeon Bag", ROMX
+INCLUDE "engine/events/gg_dungeon_bag.asm"
+
 
 SECTION "Text Dictionary", ROMX
 INCLUDE "data/text/text_dictionary.asm"

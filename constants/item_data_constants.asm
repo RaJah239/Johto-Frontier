@@ -56,6 +56,12 @@ DEF MAX_PC_ITEMS  EQU 150
 DEF MAX_FRUITS    EQU  17
 DEF MAX_BATTLES   EQU  32
 
+; Grand Gauntlet dungeon bag: the player's own bag (wTMsHMs up to
+; wNumPCItems) is stashed during a run (see engine/events/gg_dungeon_bag.asm)
+DEF GG_BAG_LENGTH EQU NUM_TMS + NUM_HMS + (MAX_ITEMS * 2 + 2) + (MAX_KEY_ITEMS + 2) + (MAX_BALLS * 2 + 2) + (MAX_FRUITS * 2 + 2) + (MAX_BATTLES * 2 + 2)
+; check byte + bag + last pocket + each pocket's cursor and scroll position
+DEF GG_BAG_STASH_LENGTH EQU 1 + GG_BAG_LENGTH + 1 + NUM_POCKETS * 2
+
 DEF MAX_ITEM_STACK EQU 99
 
 ; mail

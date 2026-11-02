@@ -364,6 +364,7 @@ SRAM $00
 	"Scratch"
 	org $a600
 	"SRAM Bank 0"
+	"GG Bag Stash Backup"
 	org $b200
 	"Backup Save"
 SRAM $01
@@ -373,6 +374,7 @@ SRAM $01
 	"SRAM Hall of Fame"
 	"SRAM Crystal Data"
 	"SRAM Battle Tower"
+	"GG Bag Stash Save"
 SRAM $02
 	"PokeDB Bank 1"
 SRAM $03
