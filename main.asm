@@ -184,6 +184,9 @@ INCLUDE "engine/battle/ai/ability_immunity.asm"
 SECTION "AI KO Checks", ROMX
 INCLUDE "engine/battle/ai/ko_checks.asm"
 
+SECTION "Move Damage Preview", ROMX
+INCLUDE "engine/battle/damage_preview.asm"
+
 SECTION "Battle Core 2", ROMX
 INCLUDE "engine/battle/core2.asm"
 
