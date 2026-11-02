@@ -50,6 +50,7 @@ After being hit super effectively, the AI plays out the fight before leaving:
 - It's set up: +2 or more in Attack, Sp. Atk or Speed, or +3 in any stat
 - It's below 1/3 of its HP. It stays in and fights
 - Every Pokémon it could send in is weak to the move you just used
+- Every Pokémon it could send in would faint from Spikes / Stealth Rock as it comes in (a Clean Sweep switch still happens)
 - It's trapped (Mean Look, Wrap, Shadow Tag, Arena Trap, Magnet Pull), unless it has Run Away
 - It has no other Pokémon left
 
@@ -66,4 +67,6 @@ After being hit super effectively, the AI plays out the fight before leaving:
 3. A Pokémon that takes half damage or less from all of your moves
 4. The Pokémon that takes the least damage from your moves
 
-In both cases, it avoids Pokémon that are weak to your last move whenever a safer option is available.
+In both cases:
+- It never sends in a Pokémon that Spikes and Stealth Rock on its side would knock out the moment it arrives, unless that's all it has left. The damage is worked out the same way the game deals it: Spikes 1/8 of max HP (not Flying types or Pokémon immune to Spikes), Stealth Rock 1/8, 1/4 if Rock is super effective, 1/16 if it's resisted. Heavy Boots, Hazard Guard and Spin Guard Pokémon take nothing. The Clean Sweep (Defog) Pokémon is the exception: it's still sent in first, even if the hazards would knock it out
+- It avoids Pokémon that are weak to your last move whenever a safer option is available

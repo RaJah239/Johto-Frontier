@@ -829,7 +829,7 @@ IsCleanSweepSpecies:
 
 FindAliveCleanSweepMon:
 ; Find the first alive, non-active OT party mon whose species is in
-; CleanSweepPokemon.
+; CleanSweepPokemon. It's picked even if entry hazards would KO it.
 ; Returns carry and the 0-based party index in b, or no carry if none.
 	xor a
 	ld [wEnemySwitchCandidate], a

@@ -399,6 +399,23 @@ AI_TrySwitch:
 	jmp DontSwitch
 
 .can_switch
+	; don't switch if Spikes / Stealth Rock would KO every mon we could send in
+	; (a Clean Sweep switch still goes ahead)
+	ld a, [wEnemySwitchMonIndex]
+	and a
+	jr z, .check_hazard_kos
+	dec a
+	ld hl, wOTPartySpecies
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld c, [hl]
+	farcall IsCleanSweepSpecies
+	jr c, .hazards_ok
+.check_hazard_kos
+	farcall AllSwitchInsFaintOnEntry
+	jmp c, DontSwitch
+.hazards_ok
 	; don't switch if every mon we could send in is weak to the player's last move
 	farcall AllSwitchInsWeakToLastMove
 	jmp c, DontSwitch

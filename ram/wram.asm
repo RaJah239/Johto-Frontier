@@ -619,8 +619,9 @@ wEnemySwitchAvoidMask:: db ; bit n: OT party mon n is weak to the player's last 
 wAIDrainSimEnemyHP:: dw ; AI_PreferDrainMoves: simulated HP (big-endian)
 wAIDrainSimPlayerHP:: dw
 wAIDrainFlags:: db ; AI_PreferDrainMoves: AI_DRAIN_*_F
-
-	ds 4
+wEnemySwitchHazardMask:: db ; switch-in picker scratch: OT mons entry hazards would KO
+wEnemySwitchHazardSpecies:: db ; OTSwitchCandidateFaintsOnEntry scratch
+wEnemySwitchHazardDamage:: dw ; OTSwitchCandidateFaintsOnEntry: total entry hazard damage (big-endian)
 
 wTrickRoomCount:: db
 

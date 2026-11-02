@@ -7,8 +7,10 @@ FindMonInOTPartyToSwitchIntoBattle:
 ;    player's active mon knows.
 ; 2. A mon that has a super-effective move against the player's active mon.
 ; 3. A mon that takes the least damage from the player's active mon's moves.
-; Mons weak (> 1x) to the player's last move are skipped in every step as
-; long as at least one alive mon isn't (see OTSwitchComputeAvoidMask).
+; Mons that Spikes / Stealth Rock on our side would KO as they come in are
+; skipped in every step as long as at least one alive mon would survive them;
+; on top of that, mons weak (> 1x) to the player's last move are skipped as
+; long as at least one of the remaining mons isn't (OTSwitchComputeAvoidMask).
 ;
 ; Replacing a fainted mon (our active mon is at 0 HP, e.g. the player just
 ; KO'd it) uses a different order instead:
@@ -667,12 +669,18 @@ AllSwitchInsWeakToLastMove:
 
 OTSwitchComputeAvoidMask:
 ; Set wEnemySwitchAvoidMask bit n for every alive OT mon n (other than the
-; active one) that takes more than 1x from the player's last damaging move,
-; but only if at least one alive mon takes 1x or less; otherwise leave it 0
-; so the normal choice still happens. Uses wEnemySwitchCandidate and
-; wEnemySwitchBestIndex as scratch.
+; active one) that:
+; - entry hazards would KO on the way in, if at least one alive mon would
+;   survive them (OTSwitchComputeHazardMask), and then
+; - takes more than 1x from the player's last damaging move, if at least one
+;   of the mons still available takes 1x or less.
+; If no mon passes a filter, that filter is dropped so the normal choice
+; still happens. Uses wEnemySwitchCandidate, wEnemySwitchBestIndex and
+; wEnemySwitchHazardMask as scratch.
+	call OTSwitchComputeHazardMask
+	ld a, [wEnemySwitchAvoidMask]
+	ld [wEnemySwitchHazardMask], a ; fallback if every mon left is weak
 	xor a
-	ld [wEnemySwitchAvoidMask], a
 	ld [wEnemySwitchBestIndex], a ; nonzero once a safe mon is found
 	ld a, [wLastPlayerMove]
 	and a
@@ -709,16 +717,7 @@ OTSwitchComputeAvoidMask:
 	jr .next
 
 .weak
-	ld a, [wEnemySwitchCandidate]
-	ld c, a
-	inc c
-	ld a, 1
-.bit
-	dec c
-	jr z, .got_bit
-	add a
-	jr .bit
-.got_bit
+	call OTSwitchCandidateBit
 	ld hl, wEnemySwitchAvoidMask
 	or [hl]
 	ld [hl], a
@@ -732,8 +731,309 @@ OTSwitchComputeAvoidMask:
 	ld a, [wEnemySwitchBestIndex]
 	and a
 	ret nz
-	xor a ; every alive mon is weak: avoid none
+	; every available mon is weak: only avoid the ones hazards would KO
+	ld a, [wEnemySwitchHazardMask]
 	ld [wEnemySwitchAvoidMask], a
+	ret
+
+OTSwitchCandidateBit:
+; Return a = 1 << [wEnemySwitchCandidate].
+	ld a, [wEnemySwitchCandidate]
+	ld c, a
+	inc c
+	ld a, 1
+.loop
+	dec c
+	ret z
+	add a
+	jr .loop
+
+OTSwitchComputeHazardMask:
+; Set wEnemySwitchAvoidMask bit n for every alive OT mon n (other than the
+; active one) that the entry hazards on our side would KO as it switches in,
+; but only if at least one alive mon would survive them; otherwise leave it
+; 0 (the last mon(s) still get sent in). Uses wEnemySwitchCandidate,
+; wEnemySwitchBestIndex and wEnemySwitchHazardMask as scratch.
+	xor a
+	ld [wEnemySwitchAvoidMask], a
+	ld [wEnemySwitchHazardMask], a
+	ld [wEnemySwitchBestIndex], a ; nonzero once a survivor is found
+	ld [wEnemySwitchCandidate], a
+.loop
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
+	ld a, [wOTPartyCount]
+	cp b
+	jr z, .done
+	ld a, [wCurOTMon]
+	cp b
+	jr z, .next
+	call OTSwitchIsAliveCandidate
+	jr nc, .next
+	call OTSwitchCandidateFaintsOnEntry
+	jr c, .faints
+	ld a, TRUE
+	ld [wEnemySwitchBestIndex], a
+	jr .next
+
+.faints
+	call OTSwitchCandidateBit
+	ld hl, wEnemySwitchHazardMask
+	or [hl]
+	ld [hl], a
+.next
+	ld hl, wEnemySwitchCandidate
+	inc [hl]
+	jr .loop
+
+.done
+	ld a, [wEnemySwitchBestIndex]
+	and a
+	ret z ; nothing survives: avoid none
+	ld a, [wEnemySwitchHazardMask]
+	ld [wEnemySwitchAvoidMask], a
+	ret
+
+AllSwitchInsFaintOnEntry:
+; Return carry if Spikes / Stealth Rock on our side would KO every alive OT
+; mon other than the active one as it switches in. Used to cancel voluntary
+; AI switches. Preserves hBattleTurn and the active mon's data.
+	ld a, [wEnemyScreens]
+	and (1 << SCREENS_SPIKES) | (1 << SCREENS_STEALTH_ROCK)
+	ret z ; no damaging hazards (carry is clear)
+	ldh a, [hBattleTurn]
+	push af
+	call OTSwitchSaveActiveMon
+	call .check
+	push af
+	call OTSwitchRestoreActiveMon
+	pop bc ; result flags in c
+	pop af
+	ldh [hBattleTurn], a
+	push bc
+	pop af
+	ret
+
+.check
+	xor a
+	ld [wEnemySwitchCandidate], a
+.loop
+	ld a, [wEnemySwitchCandidate]
+	ld b, a
+	ld a, [wOTPartyCount]
+	cp b
+	jr z, .all_faint
+	ld a, [wCurOTMon]
+	cp b
+	jr z, .next
+	call OTSwitchIsAliveCandidate
+	jr nc, .next
+	call OTSwitchCandidateFaintsOnEntry
+	jr nc, .survivor
+.next
+	ld hl, wEnemySwitchCandidate
+	inc [hl]
+	jr .loop
+
+.survivor
+	and a
+	ret
+
+.all_faint
+	scf
+	ret
+
+OTSwitchCandidateFaintsOnEntry:
+; b = OT party index. Return carry if the entry hazards on our side would
+; deal at least its current HP as it switches in, using the same rules as
+; SpikesDamage (core.asm):
+; - Hazard Guard mons, Spin Guard mons (they clear hazards first) and
+;   Heavy Boots holders take nothing.
+; - Spikes: 1/8 max HP; not Flying types or SpikesImmunePokemon.
+; - Stealth Rock: 1/8 max HP; 1/4 if Rock is super effective, 1/16 if it's
+;   resisted (or no effect); not MagicGuardPokemon.
+; Toxic Spikes and Sticky Web do no damage. Preserves b; overwrites
+; wEnemyMonType and hBattleTurn.
+	ld a, [wEnemyScreens]
+	and (1 << SCREENS_SPIKES) | (1 << SCREENS_STEALTH_ROCK)
+	ret z ; carry is clear
+	push bc
+	call .check
+	pop bc
+	ret
+
+.check
+	xor a
+	ld [wEnemySwitchHazardDamage], a
+	ld [wEnemySwitchHazardDamage + 1], a
+	ld hl, wOTPartySpecies
+	ld e, b
+	ld d, 0
+	add hl, de
+	ld a, [hl]
+	ld [wEnemySwitchHazardSpecies], a
+
+	; immune to all hazards
+	ld hl, HazardGuardMons
+	ld d, BANK(HazardGuardMons)
+	call OTSwitchIsInFarList
+	jmp c, .survives
+	ld a, [wEnemySwitchHazardSpecies]
+	ld hl, SpinGuardPokemon
+	ld d, BANK(SpinGuardPokemon)
+	call OTSwitchIsInFarList
+	jmp c, .survives
+
+	; Heavy Boots
+	push bc
+	ld hl, wOTPartyMon1Item
+	ld a, b
+	call GetPartyLocation
+	ld a, [hl]
+	pop bc
+	and a
+	jr z, .no_item
+	dec a
+	push bc
+	ld hl, ItemAttributes + ITEMATTR_EFFECT
+	ld bc, ITEMATTR_STRUCT_LENGTH
+	call AddNTimes
+	ld a, BANK(ItemAttributes)
+	call GetFarByte
+	pop bc
+	cp HELD_HEAVY_BOOTS
+	jmp z, .survives
+.no_item
+
+	push bc
+	call OTSwitchLoadCandidateTypes
+	pop bc
+
+	; Spikes: 1/8
+	ld a, [wEnemyScreens]
+	bit SCREENS_SPIKES, a
+	jr z, .stealth_rock
+	ld a, [wEnemyMonType1]
+	cp FLYING
+	jr z, .stealth_rock
+	ld a, [wEnemyMonType2]
+	cp FLYING
+	jr z, .stealth_rock
+	ld a, [wEnemySwitchHazardSpecies]
+	ld hl, SpikesImmunePokemon
+	ld d, BANK(SpikesImmunePokemon)
+	call OTSwitchIsInFarList
+	jr c, .stealth_rock
+	call OTSwitchCandidateQuarterHP
+	srl a
+	call OTSwitchAddHazardDamage
+
+.stealth_rock
+	ld a, [wEnemyScreens]
+	bit SCREENS_STEALTH_ROCK, a
+	jr z, .compare
+	push bc
+	ld a, [wEnemySwitchHazardSpecies]
+	ld hl, MagicGuardPokemon
+	call IsInByteArray
+	pop bc
+	jr c, .compare
+	call SetEnemyTurn
+	callfar CheckStealthRockTypeMatchup
+	ld a, [wTypeMatchup]
+	ld d, a
+	call OTSwitchCandidateQuarterHP ; preserves de
+	ld e, a
+	ld a, d
+	cp EFFECTIVE + 1
+	ld a, e
+	jr nc, .add_stealth_rock ; super effective: 1/4
+	ld a, d
+	cp EFFECTIVE - 1
+	ld a, e
+	jr nc, .eighth ; neutral: 1/8
+	srl a ; resisted: 1/16
+.eighth
+	srl a
+.add_stealth_rock
+	call OTSwitchAddHazardDamage
+
+.compare
+	; carry if damage >= current HP
+	push bc
+	ld hl, wOTPartyMon1HP
+	ld a, b
+	call GetPartyLocation
+	pop bc
+	ld a, [wEnemySwitchHazardDamage]
+	cp [hl]
+	jr c, .survives
+	jr nz, .faints
+	inc hl
+	ld a, [wEnemySwitchHazardDamage + 1]
+	cp [hl]
+	jr c, .survives
+.faints
+	scf
+	ret
+
+.survives
+	and a
+	ret
+
+OTSwitchAddHazardDamage:
+; Add a (at least 1) to wEnemySwitchHazardDamage.
+	and a
+	jr nz, .add
+	inc a
+.add
+	ld hl, wEnemySwitchHazardDamage + 1
+	add [hl]
+	ld [hld], a
+	ret nc
+	inc [hl]
+	ret
+
+OTSwitchCandidateQuarterHP:
+; b = OT party index. Return a = its max HP / 4, at least 1 (like
+; GetQuarterMaxHP). Preserves bc and de.
+	push bc
+	push de
+	ld hl, wOTPartyMon1MaxHP
+	ld a, b
+	call GetPartyLocation
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	srl b
+	rr c
+	srl b
+	rr c
+	ld a, c
+	pop de
+	pop bc
+	and a
+	ret nz
+	inc a
+	ret
+
+OTSwitchIsInFarList:
+; Return carry if species a is in the -1-terminated list at d:hl.
+; Preserves bc.
+	ld e, a
+.loop
+	ld a, d
+	call GetFarByte
+	inc hl
+	cp -1
+	jr z, .no
+	cp e
+	jr nz, .loop
+	scf
+	ret
+
+.no
+	and a
 	ret
 
 OTSwitchFindKOReplacementAttacker:
