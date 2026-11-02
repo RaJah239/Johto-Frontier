@@ -5,6 +5,9 @@ AI_UseSpeedBoostBeforeKO:
 ; to outspeed the player's mon, make that move the clear pick. It boosts now
 ; and KOs next turn, and stays faster than whatever the player sends in next.
 ; Speed boosters: Agility (+2), Dragon Dance, Quiver Dance, Flame Charge (+1).
+; Weather moves count too: Rain Dance / Sunny Day / Sandstorm / Hail when the
+; enemy has Swift Swim / Chlorophyll / Sand Rush / Slush Rush, since those
+; abilities make it move first in their weather (see AI_WeatherMoveHelps).
 ; Exception: if a priority move (e.g. ExtremeSpeed) KOs right now even at its
 ; lowest roll, that move is picked instead.
 
@@ -72,6 +75,9 @@ AI_UseSpeedBoostBeforeKO:
 	ld a, BANK(Moves)
 	call GetFarByte
 	pop bc
+	; a weather move that turns on the enemy's weather speed ability?
+	call AI_WeatherMoveHelps
+	jr c, .pick
 	ld b, 2
 	cp EFFECT_SPEED_UP_2
 	jr z, .speed_move
@@ -91,6 +97,7 @@ AI_UseSpeedBoostBeforeKO:
 	pop bc
 	jr nc, .next
 
+.pick
 	; boost first: the lowest score there is (NormalizeAIMoveScores reads
 	; $e0 as -32)
 	ld hl, wEnemyAIMoveScores
@@ -236,3 +243,120 @@ AI_FasterAfterSpeedBoost:
 	ld a, c
 	rra
 	ret
+
+AI_WeatherMoveHelps:
+; a = move effect. Return carry if it's a weather move whose weather turns on
+; the enemy's weather speed ability (Rain Dance + Swift Swim, Sunny Day +
+; Chlorophyll, Sandstorm + Sand Rush, Hail + Slush Rush), so the enemy moves
+; first from next turn, and it can still KO the player's mon in that weather.
+; Follows the engine's rules for these abilities (DetermineMoveOrder): the
+; weather isn't already up, the player's mon doesn't have the same ability,
+; the enemy isn't paralyzed or at -2 Speed or lower, the player's mon isn't at
+; +2 Speed or higher, and Trick Room isn't active.
+; Uses the real ability lists (data/abilities/*_mons.asm).
+; Preserves a and bc.
+	push bc
+	push af
+	call .check
+	jr c, .yes
+	pop af
+	pop bc
+	and a
+	ret
+
+.yes
+	pop af
+	pop bc
+	scf
+	ret
+
+.check
+	ld b, WEATHER_RAIN
+	ld hl, SwiftSwimPokemon
+	cp EFFECT_RAIN_DANCE
+	jr z, .got_weather
+	ld b, WEATHER_SUN
+	ld hl, ChlorophyllPokemon
+	cp EFFECT_SUNNY_DAY
+	jr z, .got_weather
+	ld b, WEATHER_SANDSTORM
+	ld hl, SandRushPokemon
+	cp EFFECT_SANDSTORM
+	jr z, .got_weather
+	ld b, WEATHER_HAIL
+	ld hl, SlushRushPokemon
+	cp EFFECT_HAIL
+	jr z, .got_weather
+	and a
+	ret
+
+.got_weather
+	ld a, [wBattleWeather]
+	cp b
+	jr z, .no ; already up
+
+	; the enemy has the ability and the player's mon doesn't
+	ld a, [wEnemyMonSpecies]
+	call .InAbilityList
+	jr nc, .no
+	ld a, [wBattleMonSpecies]
+	call .InAbilityList
+	jr c, .no
+
+	ld a, [wEnemyMonStatus]
+	and 1 << PAR
+	jr nz, .no
+	ld a, [wPlayerSpdLevel]
+	cp BASE_STAT_LEVEL + 2
+	jr nc, .no
+	ld a, [wEnemySpdLevel]
+	cp BASE_STAT_LEVEL - 1
+	jr c, .no
+	ld a, [wBattleType]
+	cp BATTLETYPE_TRICK_ROOM
+	jr z, .no
+	ld a, [wTrickRoomCount]
+	and a
+	jr nz, .no
+
+	; still a KO once the weather changes? (rain / sun change damage)
+	ld a, [wBattleWeather]
+	ld c, a
+	ld a, b
+	ld [wBattleWeather], a
+	push bc
+	farcall CanAIKO
+	pop bc ; flags untouched
+	ld a, c
+	ld [wBattleWeather], a
+	ret
+
+.no
+	and a
+	ret
+
+.InAbilityList:
+; a = species, hl = ability list. Return carry if listed. Preserves bc, hl.
+	push hl
+	ld e, a
+.list_loop
+	ld a, BANK(SwiftSwimPokemon)
+	call GetFarByte
+	inc hl
+	cp -1
+	jr z, .not_listed
+	cp e
+	jr nz, .list_loop
+	pop hl
+	scf
+	ret
+
+.not_listed
+	pop hl
+	and a
+	ret
+
+	assert BANK(SwiftSwimPokemon) == BANK(ChlorophyllPokemon) && \
+		BANK(SwiftSwimPokemon) == BANK(SandRushPokemon) && \
+		BANK(SwiftSwimPokemon) == BANK(SlushRushPokemon), \
+		"weather speed ability lists must share a bank"

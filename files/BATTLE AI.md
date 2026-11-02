@@ -12,9 +12,14 @@
 ## How the AI picks a move
 - Every move gets a score, and good moves get bonuses. A move the AI really likes can never be ruled out by having "too many" bonuses
 - **Knock-outs:** the AI only counts on a knock-out if even its weakest damage roll would do it. When judging whether *you* can knock *it* out, it assumes your strongest roll
-- **Speed first, then KO:** if it can knock you out but is slower, it uses a speed-boosting move first (Agility, Dragon Dance, Quiver Dance or Flame Charge), so it is also faster than your next Pokémon. It only does this when:
-  - the boost would actually make it faster than you, and
+- **Speed first, then KO:** if it can knock you out but is slower, it first uses a move that makes it faster, so it is also faster than your next Pokémon. That can be:
+  - a speed-boosting move (Agility, Dragon Dance, Quiver Dance or Flame Charge), or
+  - a weather move that turns on its weather speed ability: Rain Dance with Swift Swim, Sunny Day with Chlorophyll, Sandstorm with Sand Rush, or Hail with Slush Rush (these abilities let it move first in that weather)
+
+  It only does this when:
+  - the move would actually make it faster than you
   - it can survive your attack that turn
+  - for weather moves: that weather isn't already up, your Pokémon doesn't have the same ability, it isn't paralyzed or at -2 Speed or lower, your Pokémon isn't at +2 Speed or higher, Trick Room isn't active, and it can still knock you out in the new weather
 - **Priority KO:** if a priority move like ExtremeSpeed would knock you out for sure, it uses that instead of boosting, even if you could knock it out first
 - **Special priority moves:** Blastoise's Iron Head and Drowzee's and Hypno's Zen Headbutt count as priority moves
 - **Thunderbolt and similar attacks** aren't avoided just because the target can't be paralyzed
