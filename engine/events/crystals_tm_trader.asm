@@ -539,6 +539,15 @@ DrawMoveInfoBox::
 .SpecialString db "/Special @"
 .OtherString db "/Other   @"
 
+BattlePlazaTMSelectionToItem::
+; Script callasm: turn the menu selection in wScriptVar (1-50) into the
+; TM item it shows, for verbosegiveitem ITEM_FROM_MEM.
+	ld a, [wScriptVar]
+	call GetTMs
+	ld a, [hl]
+	ld [wScriptVar], a
+	ret
+
 GetTMs:
 	dec a
 	ld hl, TMMenuItems
@@ -548,56 +557,59 @@ GetTMs:
 	ret
 
 TMMenuItems:
-	db ATTRACT
-	db AURA_SPHERE
-	db AVALANCHE
-	db BODY_PRESS
-	db BULK_UP
-	db CALM_MIND
-	db CURSE
-	db DARK_PULSE
-	db DRAIN_PUNCH
-	db EARTHQUAKE
-	db FACADE
-	db FAIRY_FLASH
-	db FLAMETHROWER
-	db FLASH_CANNON
-	db FOCUS_BLAST
-	db GIGA_DRAIN
-	db GUNK_SHOT
-	db HEX
-	db ICE_BEAM
-	db IRON_HEAD
-	db KNOCK_OFF
-	db LIGHT_SCREEN
-	db NASTY_PLOT
-	db OUTRAGE
-	db PLAY_ROUGH
-	db POWER_GEM
-	db PROTECT
-	db PSYCHIC_M
-	db PSYSHOCK
-	db REFLECT
-	db RETURN
-	db ROCK_SLIDE
-	db ROOST
-	db SCALD
-	db SHADOW_BALL
-	db SIGNAL_BEAM
-	db SLUDGE_BOMB
-	db SOLARBEAM
-	db STEEL_WING
-	db SUBSTITUTE
-	db SWAGGER
-	db SWORDS_DANCE
-	db THUNDER_WAVE
-	db THUNDERBOLT
-	db TOXIC
-	db U_TURN
-	db VENOSHOCK
-	db WILL_O_WISP
-	db X_SCISSOR
-	db ZEN_HEADBUTT
+; TM item ids (not move ids: the menu reads names, stats and bag counts
+; from the item), one per menu row, in the same order as TMPrices and
+; TMUnlockEvents.
+	db TM_ATTRACT
+	db TM_AURA_SPHERE
+	db TM_AVALANCHE
+	db TM_BODY_PRESS
+	db TM_BULK_UP
+	db TM_CALM_MIND
+	db TM_CURSE
+	db TM_DARK_PULSE
+	db TM_DRAIN_PUNCH
+	db TM_EARTHQUAKE
+	db TM_FACADE
+	db TM_FAIRY_FLASH
+	db TM_FLAMETHROWER
+	db TM_FLASH_CANNON
+	db TM_FOCUS_BLAST
+	db TM_GIGA_DRAIN
+	db TM_GUNK_SHOT
+	db TM_HEX
+	db TM_ICE_BEAM
+	db TM_IRON_HEAD
+	db TM_KNOCK_OFF
+	db TM_LIGHT_SCREEN
+	db TM_NASTY_PLOT
+	db TM_OUTRAGE
+	db TM_PLAY_ROUGH
+	db TM_POWER_GEM
+	db TM_PROTECT
+	db TM_PSYCHIC_M
+	db TM_PSYSHOCK
+	db TM_REFLECT
+	db TM_RETURN
+	db TM_ROCK_SLIDE
+	db TM_ROOST
+	db TM_SCALD
+	db TM_SHADOW_BALL
+	db TM_SIGNAL_BEAM
+	db TM_SLUDGE_BOMB
+	db TM_SOLARBEAM
+	db TM_STEEL_WING
+	db TM_SUBSTITUTE
+	db TM_SWAGGER
+	db TM_SWORDS_DANCE
+	db TM_THUNDER_WAVE
+	db TM_THUNDERBOLT
+	db TM_TOXIC
+	db TM_U_TURN
+	db TM_VENOSHOCK
+	db TM_WILL_O_WISP
+	db TM_X_SCISSOR
+	db TM_ZEN_HEADBUTT
 
 TMPrices:
 ; Big-endian coin prices (HI, LO), one per TMMenuItems entry,
