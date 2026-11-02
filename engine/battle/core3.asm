@@ -2,8 +2,15 @@ MoveInfoBox:
 	xor a
 	ldh [hBGMapMode], a
 
-	hlcoord 0, 7 ; upper left corner of the textbox
-	lb bc, 4, 9 ; top row shows the damage preview
+	; Battle Info on: one row taller, the top row shows the damage preview
+	ld a, [wTextboxFlags]
+	bit DAMAGE_INFO_F, a
+	hlcoord 0, 8 ; upper left corner of the textbox
+	lb bc, 3, 9
+	jr z, .got_box
+	hlcoord 0, 7
+	inc b
+.got_box
 	call Textbox
 	call MobileTextBorder
 
@@ -52,7 +59,11 @@ MoveInfoBox:
 	call PrintPP
 
 	farcall UpdateMoveData
+	ld a, [wTextboxFlags]
+	bit DAMAGE_INFO_F, a
+	jr z, .no_damage_preview
 	farcall PrintMoveDamagePreview
+.no_damage_preview
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
 	ld b, a
 	farcall BattleGetMoveCategoryName

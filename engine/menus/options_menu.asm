@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 31
+DEF NUM_OPTIONS EQU 32
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -107,6 +107,7 @@ OptionsMenu_DrawLabels:
 	dw .TrainerScaling
 	dw .IntrosOutros
 	dw .MonCries
+	dw .DamageInfo
 	dw .WeatherText
 	dw .AbilityBanners
 	dw .StatSkipMessages
@@ -140,6 +141,7 @@ OptionsMenu_DrawLabels:
 .TrainerScaling:  db "Trainer Scaling@"
 .IntrosOutros:    db "Intros & Outros@"
 .MonCries:        db "#mon Cries@"
+.DamageInfo:      db "Damage Info@"
 .WeatherText:     db "Weather Text@"
 .AbilityBanners:  db "Ability Banners@"
 .StatSkipMessages:db "Stat Messages@"
@@ -200,6 +202,7 @@ GetOptionPointer:
 	dw Options_TrainerScaling
 	dw Options_IntrosOutros
 	dw Options_MonCries
+	dw Options_DamageInfo
 	dw Options_WeatherText
 	dw Options_AbilityBanners
 	dw Options_StatSkipMessages
@@ -793,6 +796,44 @@ Options_KnockoutFlair:
 
 .ToggleOn:
 	set KNOCKOUT_FLAIR_F, [hl]
+	ld de, .On
+.Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.Off: db "Off@"
+.On:  db "On @"
+
+Options_DamageInfo:
+; Off: normal move info box. On: taller move info box with the damage
+; range of the highlighted move, and the foe's HP numbers under its HP bar.
+	ld hl, wTextboxFlags
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit DAMAGE_INFO_F, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+
+.LeftPressed:
+	bit DAMAGE_INFO_F, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+
+.NonePressed:
+	bit DAMAGE_INFO_F, [hl]
+	jr nz, .ToggleOn
+.ToggleOff:
+	res DAMAGE_INFO_F, [hl]
+	ld de, .Off
+	jr .Display
+
+.ToggleOn:
+	set DAMAGE_INFO_F, [hl]
 	ld de, .On
 .Display:
 	call OptionsMenu_PlaceValue
@@ -1762,6 +1803,7 @@ OptionsMenu_DrawDescription:
 	dw .DescTrainerScaling
 	dw .DescIntrosOutros
 	dw .DescMonCries
+	dw .DescDamageInfo
 	dw .DescWeatherText
 	dw .DescAbilityBanners
 	dw .DescStatSkipMessages
@@ -1793,6 +1835,7 @@ OptionsMenu_DrawDescription:
 .DescWeatherText:     db "Weather lingers or<LF>ends text.@"
 .DescIntrosOutros:    db "Encounter & Battle<LF>intros & outros.@"
 .DescMonCries:        db "Also disables<LF>Knockout Flair.@"
+.DescDamageInfo:      db "Damage range and<LF>foe's HP numbers.@"
 .DescRematchPrompt:   db "Which comes first:<LF>'Yes' or 'No'.@"
 .DescPokepics:        db "Viewing overworld<LF>#pics.@"
 .DescTrainerScaling:  db "Trainers match<LF>your max level.@"

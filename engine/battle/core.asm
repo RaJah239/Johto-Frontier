@@ -4616,7 +4616,21 @@ DrawEnemyHUD:
 	ld [wWhichHPBar], a
 	hlcoord 2, 2
 	ld b, 0
-	jmp DrawBattleHPBar
+	call DrawBattleHPBar
+
+	; Battle Info on: "HP/max HP" under the foe's HP bar
+	ld a, [wTextboxFlags]
+	bit DAMAGE_INFO_F, a
+	ret z
+	hlcoord 4, 3
+	ld de, wEnemyMonHP
+	lb bc, 2, 3
+	call PrintNum
+	ld [hl], "/"
+	inc hl
+	ld de, wEnemyMonMaxHP
+	lb bc, 2, 3
+	jmp PrintNum
 
 UpdateEnemyHPPal:
 	ld hl, wEnemyHPPal

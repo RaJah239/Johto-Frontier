@@ -1754,6 +1754,7 @@ wTextboxFlags::
 ; REMATCH_NOYES_F: "Rematch Prompt" = NoOrYes; clear = the yesorno
 ;   command, set = nooryes (see RematchScript)
 ; KNOCKOUT_FLAIR_F: replay the foe's cry when it KOs the player
+; DAMAGE_INFO_F
 	db
 
 wOptions2::

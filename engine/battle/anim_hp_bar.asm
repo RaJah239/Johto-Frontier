@@ -248,7 +248,15 @@ HPBarAnim_RedrawHPBar:
 HPBarAnim_UpdateHPRemaining:
 	ld a, [wWhichHPBar]
 	and a
+	jr nz, .not_enemy
+	; the foe's HP numbers are only shown with Battle Info on
+	ld a, [wTextboxFlags]
+	bit DAMAGE_INFO_F, a
 	ret z
+	ld de, SCREEN_WIDTH + 2
+	jr .loaded_de
+
+.not_enemy
 	dec a
 	ld de, SCREEN_WIDTH + 2
 	jr nz, .loaded_de
