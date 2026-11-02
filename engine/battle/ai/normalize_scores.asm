@@ -9,6 +9,9 @@ DEF AI_SCORE_BIAS EQU 32
 	; slower but can KO: boost Speed first if that makes us faster
 	farcall AI_UseSpeedBoostBeforeKO
 
+	; low HP and faster: finish with a draining move; or drain to win the 1-on-1
+	farcall AI_PreferDrainMoves
+
 	; find the lowest biased score among the moves the enemy has
 	ld hl, wEnemyAIMoveScores
 	ld de, wEnemyMonMoves

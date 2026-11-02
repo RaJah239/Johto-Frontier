@@ -616,8 +616,11 @@ wExpShareText:: db
 wHalfDamage:: db
 wEnemyHitSuperEffective:: db ; nonzero if the player hit the active enemy mon with a super-effective move
 wEnemySwitchAvoidMask:: db ; bit n: OT party mon n is weak to the player's last move (only set during FindMonInOTPartyToSwitchIntoBattle)
+wAIDrainSimEnemyHP:: dw ; AI_PreferDrainMoves: simulated HP (big-endian)
+wAIDrainSimPlayerHP:: dw
+wAIDrainFlags:: db ; AI_PreferDrainMoves: AI_DRAIN_*_F
 
-	ds 9
+	ds 4
 
 wTrickRoomCount:: db
 

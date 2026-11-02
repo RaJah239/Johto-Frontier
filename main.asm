@@ -181,6 +181,9 @@ INCLUDE "engine/battle/ai/speed_boost.asm"
 SECTION "AI Ability Immunity", ROMX
 INCLUDE "engine/battle/ai/ability_immunity.asm"
 
+SECTION "AI Drain Moves", ROMX
+INCLUDE "engine/battle/ai/drain_moves.asm"
+
 SECTION "AI KO Checks", ROMX
 INCLUDE "engine/battle/ai/ko_checks.asm"
 
