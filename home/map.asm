@@ -1839,6 +1839,17 @@ ReturnToMapWithSpeechTextbox::
 	ret
 
 ReloadTilesetAndPalettes::
+; The sound engine stops while the LCD is off, so a menu click that is still
+; on its first short notes would pause here and finish after the reload,
+; sounding like two clicks. Give it up to 3 frames to reach its last note.
+	ld c, 3
+.wait_sfx
+	call CheckSFX
+	jr nc, .sfx_done
+	call DelayFrame
+	dec c
+	jr nz, .wait_sfx
+.sfx_done
 	call DisableLCD
 	call ClearSprites
 	farcall RefreshSprites
