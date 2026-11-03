@@ -1033,6 +1033,7 @@ DepositSellPack:
 
 InitPocket:
 	ld [wCurPocket], a
+	call ReInitBG_PackPocket
 	call ClearPocketList
 	call DrawPocketName
 	jmp DrawPackGFX_NoWait
