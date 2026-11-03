@@ -5,18 +5,14 @@ DrawKrisPackGFX:
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
-	ld hl, vTiles2 tile $50
-	lb bc, BANK(PackFGFX), 15
-	call Request2bpp
-	ret
+	ld b, BANK(PackFGFX)
+	farjp LoadPackFrameGFX
 
 PackFGFXPointers:
-	dw PackFGFX + (15 tiles) * 1 ; ITEM_POCKET
-	dw PackFGFX + (15 tiles) * 4 ; BALL_POCKET
-	dw PackFGFX + (15 tiles) * 0 ; KEY_ITEM_POCKET
-	dw PackFGFX + (15 tiles) * 3 ; TM_HM_POCKET
-	dw PackFGFX + (15 tiles) * 5 ; FRUIT_POCKET
-	dw PackFGFX + (15 tiles) * 2 ; BATTLE_POCKET
+	dw PackFGFX + (5 * 5 tiles) * 1 ; ITEM_POCKET
+	dw PackFGFX + (5 * 5 tiles) * 4 ; BALL_POCKET
+	dw PackFGFX + (5 * 5 tiles) * 0 ; KEY_ITEM_POCKET
+	dw PackFGFX + (5 * 5 tiles) * 3 ; TM_HM_POCKET
+	dw PackFGFX + (5 * 5 tiles) * 5 ; FRUIT_POCKET
+	dw PackFGFX + (5 * 5 tiles) * 2 ; BATTLE_POCKET
 
-PackFGFX:
-INCBIN "gfx/pack/pack_f.2bpp"

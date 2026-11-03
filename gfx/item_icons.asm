@@ -165,3 +165,11 @@ WideLensIcon:: INCBIN "gfx/items/wide_lens.2bpp.lz"
 WiseGlassesIcon:: INCBIN "gfx/items/wise_glasses.2bpp.lz"
 ZoomLensIcon:: INCBIN "gfx/items/zoom_lens.2bpp.lz"
 TmHmIcon:: INCBIN "gfx/items/tm_hm.2bpp.lz"
+
+
+SECTION "Pack GFX", ROMX
+
+; Pocket frames, 5x5 tiles each (TimKun55's design; "Battle" label for
+; the Battle pocket). Order: Key Items, Items, Battle, TM/HM, Balls, Berries.
+PackGFX::  INCBIN "gfx/pack/pack.2bpp"
+PackFGFX:: INCBIN "gfx/pack/pack_f.2bpp"

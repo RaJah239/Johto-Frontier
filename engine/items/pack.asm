@@ -1318,20 +1318,37 @@ DrawPackGFX:
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
-	ld hl, vTiles2 tile $50
-	lb bc, BANK(PackGFX), 15
-	jmp Request2bpp
+	ld b, BANK(PackGFX)
+	jr LoadPackFrameGFX
 
 .female
 	farjp DrawKrisPackGFX
 
+LoadPackFrameGFX::
+; Load the 5x5 pocket frame at b:de (TimKun55's design: pocket name on
+; top, bag picture below): 15 tiles to $50, 10 tiles to PACK_FRAME_TILE_2.
+	push bc
+	push de
+	ld hl, vTiles2 tile PACK_FRAME_TILE_1
+	ld c, PACK_FRAME_TILES_1
+	call Get2bppViaHDMA
+	pop hl
+	ld de, PACK_FRAME_TILES_1 tiles
+	add hl, de
+	ld d, h
+	ld e, l
+	pop bc
+	ld hl, vTiles2 tile PACK_FRAME_TILE_2
+	ld c, 5 * 5 - PACK_FRAME_TILES_1
+	jmp Get2bppViaHDMA
+
 PackGFXPointers:
-	dw PackGFX + (15 tiles) * 1 ; ITEM_POCKET
-	dw PackGFX + (15 tiles) * 4 ; BALL_POCKET
-	dw PackGFX + (15 tiles) * 0 ; KEY_ITEM_POCKET
-	dw PackGFX + (15 tiles) * 3 ; TM_HM_POCKET
-	dw PackGFX + (15 tiles) * 5 ; FRUIT_POCKET
-	dw PackGFX + (15 tiles) * 2 ; BATTLE_POCKET
+	dw PackGFX + (5 * 5 tiles) * 1 ; ITEM_POCKET
+	dw PackGFX + (5 * 5 tiles) * 4 ; BALL_POCKET
+	dw PackGFX + (5 * 5 tiles) * 0 ; KEY_ITEM_POCKET
+	dw PackGFX + (5 * 5 tiles) * 3 ; TM_HM_POCKET
+	dw PackGFX + (5 * 5 tiles) * 5 ; FRUIT_POCKET
+	dw PackGFX + (5 * 5 tiles) * 2 ; BATTLE_POCKET
 
 Pack_InterpretJoypad:
 	ld hl, wMenuJoypad
@@ -1504,16 +1521,21 @@ ReInitBG_PackPocket: ; needed when switching from TM Pocket
 	jmp EnableLCD
 
 PlacePackGFX:
+; The pocket frame (name + bag picture) fills rows 2-6 of the left column.
 	farcall PlacePackItemIconTiles
 	hlcoord 0, 2
-	ld a, $50
+	ld a, PACK_FRAME_TILE_1
 	ld de, SCREEN_WIDTH - 5
-	ld b, 3
+	ld b, 5
 .row
 	ld c, 5
 .column
 	ld [hli], a
 	inc a
+	cp PACK_FRAME_TILE_1 + PACK_FRAME_TILES_1
+	jr nz, .next
+	ld a, PACK_FRAME_TILE_2
+.next
 	dec c
 	jr nz, .column
 	add hl, de
@@ -1792,5 +1814,3 @@ PackEmptyText:
 
 PackMenuGFX:
 INCBIN "gfx/pack/pack_menu.2bpp"
-PackGFX:
-INCBIN "gfx/pack/pack.2bpp"

@@ -1114,11 +1114,11 @@ _CGB_PackPals:
 ;    lb bc, 3, 5
 ;    ld a, $4
 ;    call FillBoxCGB
-    hlcoord 0, 2, wAttrmap ; bag graphic
-    lb bc, 3, 5
+    hlcoord 0, 2, wAttrmap ; pocket frame (name + bag graphic)
+    lb bc, 5, 5
     ld a, $1
     call FillBoxCGB
-    hlcoord 1, 7, wAttrmap ; item icon
+    hlcoord 1, 8, wAttrmap ; item icon
     lb bc, 3, 3
     ld a, $7
     call FillBoxCGB

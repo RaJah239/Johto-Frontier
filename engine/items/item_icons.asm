@@ -12,71 +12,67 @@ UpdateItemIconAndDescription::
 	jmp LoadItemIcon
 
 MartUpdateItemIcon::
-; Buy menu: the icon sits in the left column's panel (see InitMartLeftColumn).
+; Buy menu: the icon sits in the left column (see InitMartLeftColumn).
 	ld a, [wMenuSelection]
 	ld e, MART_ITEM_ICON_PAL
 	jmp LoadItemIcon
 
 
-DEF ITEM_ICON_PANEL_TILE EQU ITEM_ICON_TILE + 9 ; 9 tiles, $69-$71
-	const_def ITEM_ICON_PANEL_TILE
-	const PANEL_TOP_LEFT
-	const PANEL_TOP
-	const PANEL_TOP_RIGHT
-	const PANEL_LEFT
-	const PANEL_RIGHT
-	const PANEL_BOTTOM_LEFT
-	const PANEL_BOTTOM
-	const PANEL_BOTTOM_RIGHT
-	const PANEL_BACKGROUND ; the Pack's checkered background
+DEF ITEM_ICON_FRAME_TILE EQU ITEM_ICON_TILE + 9 ; 5 tiles, $69-$6d
+	const_def ITEM_ICON_FRAME_TILE
+	const ICON_FRAME_TOP    ; background with its bottom line black
+	const ICON_FRAME_BOTTOM ; background with its top line black
+	const ICON_FRAME_LEFT   ; background with its right column black
+	const ICON_FRAME_RIGHT  ; background with its left column black
+	const ICON_FRAME_BACKGROUND ; the Pack's checkered background
 
 LoadItemIconPanelGFX::
-; The white, outlined 5x5 panel the icon sits in (Polished Crystal style).
+; The tiles of the 1-pixel outline around the icon (TimKun55's design);
+; with the icons' black corner pixels it makes a rounded frame.
 	ld de, ItemIconPanelGFX
-	ld hl, vTiles2 tile ITEM_ICON_PANEL_TILE
-	lb bc, BANK(ItemIconPanelGFX), 9
+	ld hl, vTiles2 tile ITEM_ICON_FRAME_TILE
+	lb bc, BANK(ItemIconPanelGFX), 5
 	jmp Request2bpp
 
 PlacePackItemIconTiles::
-; The icon panel fills the left column below the pack picture (rows 6-10,
-; above the TM pocket's taller move box, which starts on row 11).
-	hlcoord 0, 6
-	call PlaceItemIconPanel
-	hlcoord 1, 7
+; The icon sits at cols 1-3, rows 8-10, below the pocket frame (rows 2-6),
+; its outline on the checkered rows/cols around it. In the TM pocket the
+; move box (from row 11) covers the bottom line.
+	hlcoord 1, 8
+	call PlaceItemIconFrame
 	jr PlaceItemIconTiles
 
-PlaceItemIconPanel:
-; Place the 5x5 icon panel at hl.
-	ld de, SCREEN_WIDTH - 5
-	ld a, PANEL_TOP_LEFT
+PlaceItemIconFrame:
+; Place the outline around a 3x3 icon whose top-left tile is at hl.
+; Preserves hl.
+	push hl
+	ld de, -SCREEN_WIDTH
+	add hl, de
+	ld a, ICON_FRAME_TOP
 	ld [hli], a
-	inc a ; PANEL_TOP
 	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	inc a ; PANEL_TOP_RIGHT
-	ld [hli], a
+	ld [hl], a
+	ld de, SCREEN_WIDTH - 3
 	add hl, de
 	ld b, 3
 .side
-	ld a, PANEL_LEFT
+	ld a, ICON_FRAME_LEFT
 	ld [hli], a
 	inc hl
 	inc hl
 	inc hl
-	inc a ; PANEL_RIGHT
-	ld [hli], a
+	ld a, ICON_FRAME_RIGHT
+	ld [hl], a
+	ld de, SCREEN_WIDTH - 4
 	add hl, de
 	dec b
 	jr nz, .side
-	ld a, PANEL_BOTTOM_LEFT
-	ld [hli], a
-	inc a ; PANEL_BOTTOM
-	ld [hli], a
+	inc hl
+	ld a, ICON_FRAME_BOTTOM
 	ld [hli], a
 	ld [hli], a
-	inc a ; PANEL_BOTTOM_RIGHT
 	ld [hl], a
+	pop hl
 	ret
 
 PlaceItemIconTiles::
@@ -97,12 +93,12 @@ PlaceItemIconTiles::
 	ret
 
 InitMartLeftColumn::
-; Polished Crystal-style buy menu: a checkered column left of the item list
-; (rows 3-11) with the item icon's panel centered in it (rows 5-9).
+; Buy menu: a checkered column left of the item list (rows 3-11) with the
+; item icon in the middle (rows 6-8) in the same outline as in the Pack.
 	call LoadItemIconPanelGFX
 	hlcoord 0, 3
 	ld de, SCREEN_WIDTH - 5
-	ld a, PANEL_BACKGROUND
+	ld a, ICON_FRAME_BACKGROUND
 	ld b, 9
 .row
 	ld c, 5
@@ -113,9 +109,8 @@ InitMartLeftColumn::
 	add hl, de
 	dec b
 	jr nz, .row
-	hlcoord 0, 5
-	call PlaceItemIconPanel
 	hlcoord 1, 6
+	call PlaceItemIconFrame
 	call PlaceItemIconTiles
 	hlcoord 1, 6, wAttrmap
 	lb bc, 3, 3
