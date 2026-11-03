@@ -204,8 +204,14 @@ _CGB_FinishBattleScreenLayout:
 	hlcoord 10, 1, wAttrmap
     ld a, PAL_BATTLE_BG_ENEMY_HP 
     ld [hl], a
-	hlcoord 10, 11, wAttrmap
-	lb bc, 1, 9
+; The enemy HP bar's right tip, so stat animations tinting the
+; enemy's palette don't colour it.
+	hlcoord 10, 2, wAttrmap
+	ld [hl], a
+; The EXP bar starts one tile left of the player's HUD, so its left
+; end doesn't take the player's palette either.
+	hlcoord 9, 11, wAttrmap
+	lb bc, 1, 10
 	ld a, PAL_BATTLE_BG_EXP
 	call FillBoxCGB
 	hlcoord 0, 12, wAttrmap
