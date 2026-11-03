@@ -188,21 +188,13 @@ HandleMapDefaultWeather:
 	ld [wLastMusicMapNumber], a
 
 	call GetMapMusic_MaybeSpecial
-	ld a, [wMapMusic]
+	ld a, e
 	ld [wMapMusicForGroup], a
 
 	xor a
 	ld [wPersistentBattleMusicOverride], a
 	ld [wPersistentBattleMusicOverride + 1], a
-
-	ld a, [wMapMusicForGroup]
-	ld [wMapMusic], a
-	ret
-
 .same_outdoor_map
-; Same outdoor map: restore the tracked map music if needed.
-	ld a, [wMapMusicForGroup]
-	ld [wMapMusic], a
 	ret
 
 HandleAutoBicycle:
