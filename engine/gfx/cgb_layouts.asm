@@ -201,13 +201,13 @@ _CGB_FinishBattleScreenLayout:
 	hlcoord 10, 8, wAttrmap
     ld a, PAL_BATTLE_BG_5
     ld [hl], a
+; Column 10 of the enemy HUD: the end of the level/gender row, the HP
+; bar's right tip and the last digit of the foe's max HP (Damage Info),
+; so stat animations tinting the enemy's palette don't colour them.
 	hlcoord 10, 1, wAttrmap
-    ld a, PAL_BATTLE_BG_ENEMY_HP 
-    ld [hl], a
-; The enemy HP bar's right tip, so stat animations tinting the
-; enemy's palette don't colour it.
-	hlcoord 10, 2, wAttrmap
-	ld [hl], a
+	lb bc, 3, 1
+	ld a, PAL_BATTLE_BG_ENEMY_HP
+	call FillBoxCGB
 ; The EXP bar starts one tile left of the player's HUD, so its left
 ; end doesn't take the player's palette either.
 	hlcoord 9, 11, wAttrmap
