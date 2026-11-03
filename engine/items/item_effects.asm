@@ -3302,9 +3302,9 @@ TypeChartEffect:
 	farjp Pack_InitColors
 
 MembersCardEffect:
-	farcall LoadFontsBattleExtra
 	call FadeToMenu
 	farcall BlankScreen
+	farcall LoadFontsBattleExtra
 	farcall LoadOW_BGPal7
 	call FadePalettes
 	farcall MembersStreakCard
@@ -3316,9 +3316,9 @@ MembersCardEffect:
 	farjp Pack_InitColors
 
 ScoreCardEffect:
-	farcall LoadFontsBattleExtra
 	call FadeToMenu
 	farcall BlankScreen
+	farcall LoadFontsBattleExtra
 	farcall LoadOW_BGPal7
 	call FadePalettes
 	farcall _ScoreCard
@@ -3330,9 +3330,9 @@ ScoreCardEffect:
 	farjp Pack_InitColors
 
 MoveDexEffect:
-	farcall LoadFontsBattleExtra
 	call FadeToMenu
 	farcall BlankScreen
+	farcall LoadFontsBattleExtra
 	farcall LoadOW_BGPal7
 	call FadePalettes
 	farcall OpenAllMovesDetailsScreen
