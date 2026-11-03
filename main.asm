@@ -558,6 +558,10 @@ INCLUDE "engine/pc/bills_pc.asm"
 INCLUDE "engine/pc/bills_pc_ui.asm"
 
 
+SECTION "Newbox Fade", ROMX
+INCLUDE "engine/pc/bills_pc_fade.asm"
+
+
 SECTION "Prism tilemap copy functions", ROMX
 INCLUDE "engine/gfx/copy_tilemap_at_once.asm"
 

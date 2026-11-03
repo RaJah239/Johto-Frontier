@@ -989,6 +989,10 @@ wBillsPC_Blank2bppTiles::
 	ds 4 tiles
 wBillsPC_ItemVWF:: ds 10 tiles
 
+; Smooth fade in/out (engine/pc/bills_pc_fade.asm)
+wBillsPC_FadeLevel:: db
+wBillsPC_FadeBackup:: ds 16 palettes + (wBillsPC_PartyList - wBillsPC_PalList)
+
 
 SECTION UNION "Overworld Map", WRAM0
 

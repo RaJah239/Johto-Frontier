@@ -44,6 +44,9 @@ _BillsPC:
 	ldh [hMapAnims], a
 	ld a, 71
 	ldh [rLYC], a
+	; Fade the current screen out first, instead of clearing it while lit.
+	newfarcall PrepareWeatherForFullScreen
+	farcall FadeOutPalettes
 	call LoadStandardMenuHeader
 	call UseBillsPC
 
@@ -292,6 +295,16 @@ UseBillsPC:
 	lb de, $98, 4 | VRAM_BANK_1
 	call .WriteIconTilemap
 
+	; Display data about current Pokémon pointed to by cursor.
+	; Done before the H-Blank palette code is enabled, while the screen is
+	; still white, so the fade below covers its palette too.
+	call GetCursorMon
+
+	; Keep everything white for now: back up the real palettes (incl. the
+	; H-Blank mon palette list) and whiten them; BillsPC_FadeIn restores them.
+	call BillsPC_ApplyPals
+	farcall BillsPC_FadeStart
+
 	; Update attribute map data
 	ld b, 2
 	call SafeCopyTilemapAtOnce
@@ -307,13 +320,13 @@ UseBillsPC:
 	ld [hFunctionInstruction], a
 	set LCD_STAT, [hl]
 
-	; Display data about current Pokémon pointed to by cursor
-	call GetCursorMon
+	farcall BillsPC_FadeIn
 
 	; Begin storage system interaction
 	call ManageBoxes
 
-	; Finished with storage system. Cleanup
+	; Finished with storage system. Fade out, then cleanup
+	farcall BillsPC_FadeOut
 	call ClearTilemap
 	jmp ClearPalettes
 
