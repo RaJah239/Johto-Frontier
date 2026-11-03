@@ -58,6 +58,18 @@ AskTeachTMHM:
 	ld [wPutativeTMHMMove], a
 	call GetMoveName
 	call CopyName1
+
+; hide the move info box while asking if to teach
+; answering no returns to tmhmpocket, which redraws the move info box
+	hlcoord 0, 11
+	ld bc, 5
+	ld a, $24 ; the Pack's checkered background tile
+	call ByteFill
+	hlcoord 5, 11
+	ld bc, SCREEN_WIDTH - 5
+	ld a, " "
+	call ByteFill
+
 	ld hl, ContainedMoveText
 	call PrintText
 	call YesNoBox
