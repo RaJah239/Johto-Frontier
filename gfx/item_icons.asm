@@ -169,7 +169,6 @@ TmHmIcon:: INCBIN "gfx/items/tm_hm.2bpp.lz"
 
 SECTION "Pack GFX", ROMX
 
-; Pocket frames, 5x5 tiles each (TimKun55's design; "Battle" label for
-; the Battle pocket). Order: Key Items, Items, Battle, TM/HM, Balls, Berries.
+; Pocket frames, 5x4 tiles each (TimKun55's design). Order: Key Items, Items, Battle, TM/HM, Balls, Berries.
 PackGFX::  INCBIN "gfx/pack/pack.2bpp"
 PackFGFX:: INCBIN "gfx/pack/pack_f.2bpp"

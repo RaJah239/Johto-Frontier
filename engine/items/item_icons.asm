@@ -35,10 +35,9 @@ LoadItemIconPanelGFX::
 	jmp Request2bpp
 
 PlacePackItemIconTiles::
-; The icon sits at cols 1-3, rows 8-10, below the pocket frame (rows 2-6),
-; its outline on the checkered rows/cols around it. In the TM pocket the
-; move box (from row 11) covers the bottom line.
-	hlcoord 1, 8
+; The icon sits at cols 1-3, rows 7-9, below the bag box (rows 2-5),
+; its outline on the checkered rows/cols around it (rows 6-10).
+	hlcoord 1, 7
 	call PlaceItemIconFrame
 	jr PlaceItemIconTiles
 
