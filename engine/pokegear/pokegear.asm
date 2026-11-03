@@ -476,6 +476,8 @@ PokegearClock_Joypad:
 	farcall RestartClock
 	call Pokegear_CheckDailyReset ; a new day ends today's swarm etc.
 	call InitPokegearTilemap ; needed incase exit without setting the time
+	ld c, POKEGEARSTATE_CLOCKINIT
+	ld b, POKEGEARCARD_CLOCK
 	jr .done
 
 .no_map_card
