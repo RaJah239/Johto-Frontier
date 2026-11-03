@@ -925,33 +925,20 @@ UltraBallMultiplier:
 	ret
 
 ShinyBallMultiplier:
-; Genderless wild Pokemon
+; Give the wild mon shiny DVs (Speed and Special 15) with a random Hidden
+; Power type, keeping its gender. Hidden Power's type comes from the low
+; two bits of the Attack and Defense DVs: (Atk & 3) << 2 | (Def & 3).
+; Gender comes from the top bit of the Attack DV (clear = male), so males
+; get Attack 4-7 and everyone else Attack 12-15; Defense is always 12-15.
 	farcall GetGender
-	jr c, .ShinyBallGenderlessAndMaleMultiplier
-
-; Male wild Pokemon
-	farcall GetGender
-	jr nz, .ShinyBallGenderlessAndMaleMultiplier
-
-; female wild Pokemon
-.loop_f
+	ld hl, ShinyBallGenderlessTable
+	jr c, .got_table
+	ld hl, ShinyBallFemaleTable
+	jr z, .got_table
+	ld hl, ShinyBallMaleTable
+.got_table
 	call Random
-	and %00001111
-	cp 8
-	jr c, .ok_f
-	jr .loop_f
-.ok_f
-	ld hl, ShinyBallFTable
-	jr .ShinyBallJump
-
-.ShinyBallGenderlessAndMaleMultiplier:
-	call Random
-	and %00001111 ; now gives 0–15
-	ld hl, ShinyBallMnGTable
-	;jr .ShinyBallJump
-	; fallthrough
-
-.ShinyBallJump:
+	and %00001111 ; one of the 16 Hidden Power types
 	ld c, a
 	ld b, 0
 	add hl, bc
@@ -968,35 +955,64 @@ SetShinyDV:
 	ld b, $ff
 	ret
 
-; Female Table - 8 entries
-ShinyBallFTable:
-	db $00 ; fighting
-	db $01 ; flying
-	db $02 ; poison
-	db $03 ; ground
-	db $10 ; rock
-	db $11 ; bug
-	db $12 ; ghost
-	db $13 ; steel
+; Each table is Attack/Defense DVs, one entry per Hidden Power type.
 
-; Male and Genderless Table - 16 entries
-ShinyBallMnGTable:
-	db $20 ; fire
-	db $21 ; water
-	db $22 ; grass
-	db $23 ; electric
-	db $30 ; psychic
-	db $31 ; ice
-	db $32 ; dragon
-	db $33 ; dark
-	db $40 ; fighting
-	db $41 ; flying
-	db $42 ; poison
-	db $43 ; ground
-	db $50 ; rock
-	db $51 ; bug
-	db $52 ; ghost
-	db $53 ; steel
+; Male: Attack 4-7, Defense 12-15
+ShinyBallMaleTable:
+	db $4C ; fighting
+	db $4D ; flying
+	db $4E ; poison
+	db $4F ; ground
+	db $5C ; rock
+	db $5D ; bug
+	db $5E ; ghost
+	db $5F ; steel
+	db $6C ; fire
+	db $6D ; water
+	db $6E ; grass
+	db $6F ; electric
+	db $7C ; psychic
+	db $7D ; ice
+	db $7E ; dragon
+	db $7F ; dark
+
+; Female: Attack 12-15, Defense 12-15
+ShinyBallFemaleTable:
+	db $CC ; fighting
+	db $CD ; flying
+	db $CE ; poison
+	db $CF ; ground
+	db $DC ; rock
+	db $DD ; bug
+	db $DE ; ghost
+	db $DF ; steel
+	db $EC ; fire
+	db $ED ; water
+	db $EE ; grass
+	db $EF ; electric
+	db $FC ; psychic
+	db $FD ; ice
+	db $FE ; dragon
+	db $FF ; dark
+
+; Genderless: Attack 12-15, Defense 12-15
+ShinyBallGenderlessTable:
+	db $CC ; fighting
+	db $CD ; flying
+	db $CE ; poison
+	db $CF ; ground
+	db $DC ; rock
+	db $DD ; bug
+	db $DE ; ghost
+	db $DF ; steel
+	db $EC ; fire
+	db $ED ; water
+	db $EE ; grass
+	db $EF ; electric
+	db $FC ; psychic
+	db $FD ; ice
+	db $FE ; dragon
+	db $FF ; dark
 
 GreatBallMultiplier:
 ParkBallMultiplier:
