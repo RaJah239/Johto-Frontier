@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 33
+DEF NUM_OPTIONS EQU 32
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -105,7 +105,6 @@ OptionsMenu_DrawLabels:
 	dw .QuickNurse
 	dw .FieldActions
 	dw .PokePics
-	dw .TrainerScaling
 	dw .IntrosOutros
 	dw .MonCries
 	dw .DamageInfo
@@ -140,7 +139,6 @@ OptionsMenu_DrawLabels:
 .QuickNurse:      db "#mon Center@"
 .FieldActions:    db "Field Actions@"
 .PokePics:        db "#pics@"
-.TrainerScaling:  db "Trainer Scaling@"
 .IntrosOutros:    db "Intros & Outros@"
 .MonCries:        db "#mon Cries@"
 .DamageInfo:      db "Damage Info@"
@@ -202,7 +200,6 @@ GetOptionPointer:
 	dw Options_QuickNurse
 	dw Options_FieldActions
 	dw Options_Pokepics
-	dw Options_TrainerScaling
 	dw Options_IntrosOutros
 	dw Options_MonCries
 	dw Options_DamageInfo
@@ -698,43 +695,6 @@ Options_Nicknaming:
 
 .On:  db "On @"
 .Off: db "Off@"
-
-Options_TrainerScaling:
-	ld hl, wOptions5
-	ldh a, [hJoyPressed]
-	bit D_LEFT_F, a
-	jr nz, .LeftPressed
-	bit D_RIGHT_F, a
-	jr z, .NonePressed
-	bit TRAINER_SCALING, [hl]
-	jr nz, .ToggleOff
-	jr .ToggleOn
- 
- .LeftPressed:
-	bit TRAINER_SCALING, [hl]
-	jr z, .ToggleOn
-	jr .ToggleOff
- 
- .NonePressed:
-	bit TRAINER_SCALING, [hl]
-	jr nz, .ToggleOn
- 
- .ToggleOff:
-	res TRAINER_SCALING, [hl]
-	ld de, .On
-	jr .Display
- 
- .ToggleOn:
-	set TRAINER_SCALING, [hl]
-	ld de, .Off
- .Display:
-	call OptionsMenu_PlaceValue
-	call PlaceString
-	and a
-	ret
-
-.On:  db "Off@"
-.Off: db "On @"
 
 Options_FieldHazardsText:
 	ld hl, wOptions4
@@ -1842,7 +1802,6 @@ OptionsMenu_DrawDescription:
 	dw .DescQuickNurse
 	dw .DescFieldActions
 	dw .DescPokepics
-	dw .DescTrainerScaling
 	dw .DescIntrosOutros
 	dw .DescMonCries
 	dw .DescDamageInfo
@@ -1881,7 +1840,6 @@ OptionsMenu_DrawDescription:
 .DescDamageInfo:      db "Damage range and<LF>foe's HP numbers.@"
 .DescRematchPrompt:   db "Which comes first:<LF>'Yes' or 'No'.@"
 .DescPokepics:        db "Viewing overworld<LF>#pics.@"
-.DescTrainerScaling:  db "Trainers match<LF>your max level.@"
 .DescFieldActions:    db "Normal or Quick<LF>Field Actions.@"
 .DescStatSkipMessages:db "Stat Up or Down<LF>messages.@"
 .DescEffectiveText:   db "Show Effectiveness<LF>text or not.@"

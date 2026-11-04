@@ -113,7 +113,6 @@ DEF NUM_FRAMES EQU const_value
 
 ; wOptions5::
 	const_def
-	const TRAINER_SCALING ; 0
 
 ; wWalkingDirection::
 	const_def -1

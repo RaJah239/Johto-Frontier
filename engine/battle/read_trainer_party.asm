@@ -1943,12 +1943,6 @@ SetTeamMaxLevel:
 	; fallthrough
 
 SetDynamicLevel:
-	push af
-	ld a, [wOptions5]
-	bit TRAINER_SCALING, a
-	jr nz, .trainer_scaling
-
-	pop af
 	cp MAX_LEVEL + 1
 	ret c
 
@@ -1961,11 +1955,6 @@ SetDynamicLevel:
 	ret c
 ; cap overflow at MAX_LEVEL
 	ld a, MAX_LEVEL
-	ret
-
-.trainer_scaling
-	pop af
-	ld a, [wTeamMaxLevel]
 	ret
 
 INCLUDE "data/trainers/scaled_parties.asm"
