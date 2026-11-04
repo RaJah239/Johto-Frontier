@@ -292,7 +292,6 @@ LeafBladeDescription:
 PsychoCutDescription:
 NightSlashDescription:
 SlashDescription:
-XScissorDescription:
 KarateChopDescription:
 	db   "Has a high criti-"
 	line "cal hit ratio.@"
@@ -339,9 +338,9 @@ HeadbuttDescription:
 	db   "An attack that may"
 	line "cause flinching.@"
 
+XScissorDescription:
 TackleDescription:
-	db   "A full-body charge"
-	line "attack.@"
+	db   "A basic attack.@"
 
 DoubleTeamDescription:
 	db   "Increases evasion"

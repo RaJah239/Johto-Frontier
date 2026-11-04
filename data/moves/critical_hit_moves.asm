@@ -4,7 +4,6 @@ CriticalHitMoves:
 	db SLASH
 	db AEROBLAST
 	db CROSS_CHOP
-	db X_SCISSOR
 	db THROAT_CHOP
 	db NIGHT_SLASH
 	db PSYCHO_CUT
