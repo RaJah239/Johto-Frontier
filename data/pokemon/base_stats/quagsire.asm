@@ -1,7 +1,7 @@
 	db QUAGSIRE ; 100
 
-	db   105,  95,  95,  40,  75,  95 ; 505 BST
-	evs    2,   2,   2,   0,   1,   2
+	db    95,  85,  85,  35,  65,  65 ; 430 BST
+	evs    2,   1,   1,   0,   1,   1
 	;     hp  atk  def  spd  sat  sdf
 
 	db WATER, GROUND ; type
