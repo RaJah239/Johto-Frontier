@@ -193,12 +193,17 @@ MysteryGiftCarrieScript:
 
 ChanseyPokeCenterScript:
 	faceplayer
+	setval CHANSEY
+	special SetMonAsSeen
+	ispokepicsonoroff
+	iftrue .skipthis
 	reanchormap
 	pokepic CHANSEY
 	cry CHANSEY
 	waitsfx
 	closepokepic
 	refreshmap
+.skipthis
 	opentext
 	farwritetext ChanseyCryText
 	pause 20
@@ -395,12 +400,17 @@ TrashCanScript:
 
 PorygonPCScript:
 	faceplayer
+	setval PORYGON
+	special SetMonAsSeen
+	ispokepicsonoroff
+	iftrue .skipthis
 	reanchormap
 	pokepic PORYGON
 	cry PORYGON
 	waitsfx
 	closepokepic
 	refreshmap
+.skipthis
 	; fallthrough
 
 PCScript:
