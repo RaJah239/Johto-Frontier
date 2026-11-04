@@ -1103,6 +1103,8 @@ EVO_Draw_border:
 	ld de, $8c00 
 	ld hl, vTiles2 tile $30 ; + $30
 	call Request1bpp	
+	xor a
+	ldh [rVBK], a
 	farcall DrawDexEntryScreenRightEdge_Evo
 	hlcoord 19, 1
 	lb bc, SCREEN_HEIGHT - 2, 1
