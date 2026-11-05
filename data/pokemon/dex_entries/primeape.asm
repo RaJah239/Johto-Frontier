@@ -1,10 +1,8 @@
 	db "PIG MONKEY@" ; species name
 	dw 303, 710 ; height, weight
-
 	db   "It will beat up"
-	next "anyone who makes"
-	next "it mad, even if it"
-
-	page "has to chase them"
-	next "until the end of"
-	next "the world.@"
+	feed "anyone who makes"
+	feed "it mad, even if it"
+	feed "has to chase them"
+	feed "until the end of"
+	feed "the world.@"

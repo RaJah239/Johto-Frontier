@@ -1,10 +1,8 @@
 	db "GROVE@" ; species name
 	dw 307, 2138 ; height, weight
-
 	db   "It knows where"
-	next "pure water wells"
-	next "up."
-
-	page "It carries fellow"
-	next "#MON there on"
-	next "its back.@"
+	feed "pure water wells"
+	feed "up."
+	feed "It carries fellow"
+	feed "#MON there on"
+	feed "its back.@"

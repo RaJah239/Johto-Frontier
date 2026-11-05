@@ -1,9 +1,7 @@
 	db "Luring@" ; species name
 	dw 303, 756 ; height, weight
-
 	db   "Being consumed in"
-	next "in Chandelure's"
-	next "flame burns up the"
-
-	page "spirit, leaving"
-	next "the body behind.@"
+	feed "in Chandelure's"
+	feed "flame burns up the"
+	feed "spirit, leaving"
+	feed "the body behind.@"

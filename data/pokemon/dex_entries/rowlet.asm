@@ -1,10 +1,8 @@
 	db "GrassQuill@" ; species name
 	dw 100, 33 ; height, weight
-
 	db   "This #mon uses"
-	next "photosynthesis"
-	next "during the day to"
-
-	page "store energy,"
-	next "while becoming"
-	next "active at night.@"
+	feed "photosynthesis"
+	feed "during the day to"
+	feed "store energy,"
+	feed "while becoming"
+	feed "active at night.@"

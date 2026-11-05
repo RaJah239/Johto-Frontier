@@ -1,10 +1,8 @@
 	db "BIG JAW@" ; species name
 	dw 707, 1960 ; height, weight
-
 	db   "Although it has a"
-	next "massive body, its"
-	next "powerful hind legs"
-
-	page "enable it to move"
-	next "quickly, even on"
-	next "the ground.@"
+	feed "massive body, its"
+	feed "powerful hind legs"
+	feed "enable it to move"
+	feed "quickly, even on"
+	feed "the ground.@"

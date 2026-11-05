@@ -1,12 +1,8 @@
 	db "FISH@" ; species name
 	dw 211, 220 ; height, weight
-
 	db   "This weak and"
-	next "pathetic #MON"
-	next "gets easily pushed"
-	next "gets easily pushed"
-
-	page "along rivers when"
-	next "there are strong"
-	next "there are strong"
-	next "currents.@"
+	feed "pathetic #MON"
+	feed "gets easily pushed"
+	feed "along rivers when"
+	feed "there are strong"
+	feed "currents.@"

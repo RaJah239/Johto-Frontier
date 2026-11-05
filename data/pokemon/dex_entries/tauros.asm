@@ -1,10 +1,8 @@
 	db "WILD BULL@" ; species name
 	dw 407, 1950 ; height, weight
-
 	db   "These violent"
-	next "#MON fight"
-	next "with other mem-"
-
-	page "bers of their herd"
-	next "in order to prove"
-	next "their strength.@"
+	feed "#MON fight"
+	feed "with other mem-"
+	feed "bers of their herd"
+	feed "in order to prove"
+	feed "their strength.@"

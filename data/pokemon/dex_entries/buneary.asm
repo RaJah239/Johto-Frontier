@@ -1,10 +1,8 @@
 	db "RABBIT@" ; species name
 	dw 104, 121 ; height, weight
-
 	db   "Its ears are"
-	next "always rolled up."
-	next "They can be force-"
-
-	page "fully extended to"
-	next "shatter even a"
-	next "large boulder.@"
+	feed "always rolled up."
+	feed "They can be force-"
+	feed "fully extended to"
+	feed "shatter even a"
+	feed "large boulder.@"

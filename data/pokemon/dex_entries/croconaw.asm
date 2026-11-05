@@ -1,10 +1,8 @@
 	db "BIG JAW@" ; species name
 	dw 307, 550 ; height, weight
-
 	db   "The tips of its"
-	next "fangs are slanted"
-	next "backward. Once"
-
-	page "those fangs clamp"
-	next "down, the prey has"
-	next "no hope of escape.@"
+	feed "fangs are slanted"
+	feed "backward. Once"
+	feed "those fangs clamp"
+	feed "down, the prey has"
+	feed "no hope of escape.@"

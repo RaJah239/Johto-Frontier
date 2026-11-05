@@ -1,10 +1,8 @@
 	db "Emotion@" ; species name
 	dw 207, 445 ; height, weight
-
 	db   "The cheerful spir-"
-	next "it of its Trainer"
-	next "gives it energy"
-
-	page "for its psychokin-"
-	next "etic power. Likes"
-	next "to spin and dance.@"
+	feed "it of its Trainer"
+	feed "gives it energy"
+	feed "for its psychokin-"
+	feed "etic power. Likes"
+	feed "to spin and dance.@"

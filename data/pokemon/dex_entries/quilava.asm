@@ -1,10 +1,8 @@
 	db "VOLCANO@" ; species name
 	dw 211, 420 ; height, weight
-
 	db   "Before battle, it"
-	next "turns its back on"
-	next "its opponent to"
-
-	page "demonstrate how"
-	next "ferociously its"
-	next "fire blazes.@"
+	feed "turns its back on"
+	feed "its opponent to"
+	feed "demonstrate how"
+	feed "ferociously its"
+	feed "fire blazes.@"

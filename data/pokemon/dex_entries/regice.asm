@@ -1,10 +1,8 @@
 	db "Iceburg@" ; species name
 	dw 511, 3858 ; height, weight
-
 	db   "Its body is made"
-	next "of ice from the"
-	next "ice age. It"
-
-	page "controls frigid"
-	next "air of -328"
-	next "degrees F.@"
+	feed "of ice from the"
+	feed "ice age. It"
+	feed "controls frigid"
+	feed "air of -328"
+	feed "degrees F.@"

@@ -1,10 +1,8 @@
 	db "HAPPINESS@" ; species name
 	dw 200, 70 ; height, weight
-
 	db   "Although it does"
-	next "not flap its wings"
-	next "very much, it can"
-
-	page "stay up in the air"
-	next "as it tags along"
-	next "after its trainer.@"
+	feed "not flap its wings"
+	feed "very much, it can"
+	feed "stay up in the air"
+	feed "as it tags along"
+	feed "after its trainer.@"

@@ -1,9 +1,7 @@
 	db "Disaster@" ; species name
 	dw 311, 1036 ; height, weight
-
 	db   "It has the ability"
-	next "to predict natural"
-	next "disasters. Its"
-
-	page "life span is over"
-	next "a hundred years.@"
+	feed "to predict natural"
+	feed "disasters. Its"
+	feed "life span is over"
+	feed "a hundred years.@"

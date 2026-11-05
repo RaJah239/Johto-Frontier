@@ -1,10 +1,8 @@
 	db "HUMANSHAPE@" ; species name
 	dw 407, 900 ; height, weight
-
 	db   "It has several"
-	next "different cry pat-"
-	next "terns, each of"
-
-	page "which seems to"
-	next "have its own"
-	next "meaning.@"
+	feed "different cry pat-"
+	feed "terns, each of"
+	feed "which seems to"
+	feed "have its own"
+	feed "meaning.@"

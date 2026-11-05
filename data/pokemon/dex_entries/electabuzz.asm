@@ -1,10 +1,8 @@
 	db "ELECTRIC@" ; species name
 	dw 307, 660 ; height, weight
-
 	db   "When two"
-	next "ELECTABUZZ touch,"
-	next "they control the"
-
-	page "electric currents"
-	next "to communicate"
-	next "their feelings.@"
+	feed "ELECTABUZZ touch,"
+	feed "they control the"
+	feed "electric currents"
+	feed "to communicate"
+	feed "their feelings.@"

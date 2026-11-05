@@ -1,10 +1,8 @@
 	db "BIRD@" ; species name
 	dw 411, 870 ; height, weight
-
 	db   "Its outstanding"
-	next "vision allows it"
-	next "to spot splashing"
-
-	page "MAGIKARP, even"
-	next "while flying at"
-	next "3300 feet.@"
+	feed "vision allows it"
+	feed "to spot splashing"
+	feed "MAGIKARP, even"
+	feed "while flying at"
+	feed "3300 feet.@"

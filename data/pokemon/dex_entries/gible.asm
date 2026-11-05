@@ -1,10 +1,8 @@
 	db "Land Shark@" ; species name
 	dw 204, 452 ; height, weight
-
 	db   "It nests in small,"
-	next "horizontal holes"
-	next "in cave walls."
-
-	page "It pounces to"
-	next "catch prey that"
-	next "stray too close.@"
+	feed "horizontal holes"
+	feed "in cave walls."
+	feed "It pounces to"
+	feed "catch prey that"
+	feed "stray too close.@"

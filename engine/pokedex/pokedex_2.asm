@@ -227,11 +227,6 @@ DisplayDexEntry:
 	inc hl
 	inc hl
 	push hl
-	ld a, [wPokedexEntryPageNum]
- 	and a ; check for page 2
- 	jr nz, .page2
-; Page 1
-	call Pokedex_PrintPageNum
 	pop de
 	inc de
 	pop af
@@ -239,29 +234,7 @@ DisplayDexEntry:
 	push af
 	call PlaceFarString
 	pop bc
-	call DexEntry_IncPageNum
  	ret
-; Page 2
-.page2
- 	pop de
- 	inc de
- 	pop af
- 	hlcoord 2, 9
- 	push af
- 	call PlaceFarString
- 	pop bc
-	push bc
-	push de
-	lb bc, 5, SCREEN_WIDTH - 1
-	call Pokedex_PrintPageNum
-	pop de
-	inc de
-	pop af
-	hlcoord 2, 9
-	call PlaceFarString
-	xor a
- 	ld [wPokedexEntryPageNum], a
-	ret
 
 String_pokemon:
 	db " #mon @"
@@ -308,21 +281,8 @@ DisplayAbility:
 	push hl
 	dec hl
 
-; place pokedex page 1
+; the whole entry is one page
 	pop de
-	pop af
-	hlcoord 1, 11
-	push af
-	call PlaceFarString
-
-; clear area
-	push de
-	lb bc, 5, SCREEN_WIDTH - 1
-	hlcoord 1, 11
-	call ClearBox
-	pop de
-
-; place pokedex page 2
 	inc de
 	pop af
 	hlcoord 1, 11
@@ -330,7 +290,7 @@ DisplayAbility:
 
 ; This must stay in this file
 DisplayFoeNameAndAbility:
-	ld a, [wCurSpecies]
+	ld a, [wEnemyMonSpecies]
 	ld b, a
 	call GetDexEntryPointer
 	ld a, b
@@ -364,21 +324,13 @@ DisplayFoeNameAndAbility:
 	push hl
 	dec hl
 
-; place pokedex page 1
+; the whole entry is one page
 	pop de
-	pop af
-	hlcoord 1, 7
-	push af
-	call PlaceFarString
-
-; clear area
 	push de
-	lb bc, 5, SCREEN_WIDTH - 2
 	hlcoord 1, 7
+	lb bc, 6, SCREEN_WIDTH - 2
 	call ClearBox
 	pop de
-
-; place pokedex page 2
 	inc de
 	pop af
 	hlcoord 1, 7

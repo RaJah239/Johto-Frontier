@@ -1,10 +1,8 @@
 	db "MOLD@" ; species name
 	dw 200, 450 ; height, weight
-
 	db   "The fluid secreted"
-	next "by its toes carves"
-	next "holes in rocks for"
-
-	page "nesting and can be"
-	next "mixed with BERRIES"
-	next "to make a drink.@"
+	feed "by its toes carves"
+	feed "holes in rocks for"
+	feed "nesting and can be"
+	feed "mixed with BERRIES"
+	feed "to make a drink.@"

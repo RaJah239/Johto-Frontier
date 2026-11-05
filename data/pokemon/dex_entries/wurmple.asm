@@ -1,10 +1,8 @@
 	db "WORM@" ; species name
 	dw 100, 79 ; height, weight
-
 	db   "Often targeted by"
-	next "bird #MON, it"
-	next "desperately re-"
-
-	page "sists by releasing"
-	next "poison from its"
-	next "tail spikes.@"
+	feed "bird #MON, it"
+	feed "desperately re-"
+	feed "sists by releasing"
+	feed "poison from its"
+	feed "tail spikes.@"

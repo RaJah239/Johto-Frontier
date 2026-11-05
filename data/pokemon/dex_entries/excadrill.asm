@@ -1,10 +1,8 @@
 	db "Subterrene@" ; species name
 	dw 204, 891 ; height, weight
-
 	db   "Forming a drill"
-	next "with its steel"
-	next "claws and head,"
-
-	page "it can bore"
-	next "through a steel"
-	next "plate easily.@"
+	feed "with its steel"
+	feed "claws and head,"
+	feed "it can bore"
+	feed "through a steel"
+	feed "plate easily.@"

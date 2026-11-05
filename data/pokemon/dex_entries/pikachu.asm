@@ -1,10 +1,8 @@
 	db "MOUSE@" ; species name
 	dw 104, 130 ; height, weight
-
 	db   "When it is anger-"
-	next "ed, it immediately"
-	next "discharges the"
-
-	page "energy stored in"
-	next "the pouches in its"
-	next "cheeks.@"
+	feed "ed, it immediately"
+	feed "discharges the"
+	feed "energy stored in"
+	feed "the pouches in its"
+	feed "cheeks.@"

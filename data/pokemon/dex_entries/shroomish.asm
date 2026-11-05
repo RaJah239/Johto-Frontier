@@ -1,10 +1,8 @@
 	db "Mushroom@" ; species name
 	dw 104, 99 ; height, weight
-
 	db   "It prefers damp"
-	next "places. By day it"
-	next "remains still in"
-
-	page "the forest shade."
-	next "Its head releases"
-	next "toxic powders.@"
+	feed "places. By day it"
+	feed "remains still in"
+	feed "the forest shade."
+	feed "Its head releases"
+	feed "toxic powders.@"

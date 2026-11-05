@@ -1,10 +1,8 @@
 	db "FAIRY@" ; species name
 	dw 200, 170 ; height, weight
-
 	db   "Though rarely"
-	next "seen, it becomes"
-	next "easier to spot,"
-
-	page "for some reason,"
-	next "on the night of a "
-	next "full moon.@"
+	feed "seen, it becomes"
+	feed "easier to spot,"
+	feed "for some reason,"
+	feed "on the night of a "
+	feed "full moon.@"

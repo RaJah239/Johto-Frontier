@@ -1,10 +1,8 @@
 	db "CONTINENT@" ; species name
 	dw 703, 6834 ; height, weight
-
 	db   "Some #MON are"
-	next "born on the back"
-	next "of a TORTERRA."
-
-	page "They can even"
-	next "spend their entire"
-	next "life there.@"
+	feed "born on the back"
+	feed "of a TORTERRA."
+	feed "They can even"
+	feed "spend their entire"
+	feed "life there.@"

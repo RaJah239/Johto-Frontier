@@ -1,10 +1,8 @@
 	db "Twin Tusks@" ; species name
 	dw 802, 6415 ; height, weight
-
 	db   "Its impressive"
-	next "tusks are ice. The"
-	next "population thinned"
-
-	page "when it turned"
-	next "warm after the"
-	next "age.@"
+	feed "tusks are ice. The"
+	feed "population thinned"
+	feed "when it turned"
+	feed "warm after the"
+	feed "age.@"

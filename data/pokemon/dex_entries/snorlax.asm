@@ -1,10 +1,8 @@
 	db "SLEEPING@" ; species name
 	dw 611, 10140 ; height, weight
-
 	db   "This #MON's"
-	next "stomach is so"
-	next "strong, even"
-
-	page "eating moldy or"
-	next "rotten food will"
-	next "not affect it.@"
+	feed "stomach is so"
+	feed "strong, even"
+	feed "eating moldy or"
+	feed "rotten food will"
+	feed "not affect it.@"

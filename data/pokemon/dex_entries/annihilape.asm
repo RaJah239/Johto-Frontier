@@ -1,10 +1,8 @@
 	db "RageMonkey@" ; species name
 	dw 311, 1235 ; height, weight
-
 	db   "When its anger"
-	next "rises to a crit-"
-	next "ical point, this"
-
-	page "#mon gained"
-	next "power unfettered"
-	next "by its body.@"
+	feed "rises to a crit-"
+	feed "ical point, this"
+	feed "#mon gained"
+	feed "power unfettered"
+	feed "by its body.@"

@@ -1,10 +1,8 @@
 	db "FLOWER@" ; species name
 	dw 204, 90 ; height, weight
-
 	db   "If it notices"
-	next "anything that"
-	next "moves, it"
-
-	page "immediately flings"
-	next "its vine at the"
-	next "object.@"
+	feed "anything that"
+	feed "moves, it"
+	feed "immediately flings"
+	feed "its vine at the"
+	feed "object.@"

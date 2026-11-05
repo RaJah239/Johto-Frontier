@@ -1,10 +1,8 @@
 	db "Lamp@" ; species name
 	dw 200, 287 ; height, weight
-
 	db   "This ominous"
-	next "#mon is feared."
-	next "Through cities it"
-
-	page "wanders, searching"
-	next "for the spirts of"
-	next "the fallen.@"
+	feed "#mon is feared."
+	feed "Through cities it"
+	feed "wanders, searching"
+	feed "for the spirts of"
+	feed "the fallen.@"

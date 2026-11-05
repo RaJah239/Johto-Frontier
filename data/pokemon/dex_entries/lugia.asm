@@ -1,10 +1,8 @@
 	db "DIVING@" ; species name
 	dw 1701, 4760 ; height, weight
-
 	db   "It has an incred-"
-	next "ible ability to"
-	next "calm raging sto-"
-
-	page "rms. It is said"
-	next "that LUGIA appears"
-	next "when storms start.@"
+	feed "ible ability to"
+	feed "calm raging sto-"
+	feed "rms. It is said"
+	feed "that LUGIA appears"
+	feed "when storms start.@"

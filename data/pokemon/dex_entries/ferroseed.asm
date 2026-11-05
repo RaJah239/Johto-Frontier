@@ -1,10 +1,8 @@
 	db "Thorn Seed@" ; species name
 	dw 200, 414 ; height, weight
-
 	db   "It absorbs the"
-	next "iron it finds in"
-	next "the rock while"
-
-	page "clinging to the"
-	next "ceiling. It shoots"
-	next "spikes in defense.@"
+	feed "iron it finds in"
+	feed "the rock while"
+	feed "clinging to the"
+	feed "ceiling. It shoots"
+	feed "spikes in defense.@"

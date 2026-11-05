@@ -1,10 +1,8 @@
 	db "THUNDER@" ; species name
 	dw 603, 3920 ; height, weight
-
 	db   "This rough #MON"
-	next "stores energy"
-	next "inside its body,"
-
-	page "then sweeps across"
-	next "the land, shooting"
-	next "off electricity.@"
+	feed "stores energy"
+	feed "inside its body,"
+	feed "then sweeps across"
+	feed "the land, shooting"
+	feed "off electricity.@"

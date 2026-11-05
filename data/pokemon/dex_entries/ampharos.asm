@@ -1,10 +1,8 @@
 	db "LIGHT@" ; species name
 	dw 407, 1360 ; height, weight
-
 	db   "When it gets dark,"
-	next "the light from its"
-	next "bright, shiny tail"
-
-	page "can be seen from"
-	next "far away on the"
-	next "ocean's surface.@"
+	feed "the light from its"
+	feed "bright, shiny tail"
+	feed "can be seen from"
+	feed "far away on the"
+	feed "ocean's surface.@"

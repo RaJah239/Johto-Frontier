@@ -1,10 +1,8 @@
 	db "Emanation@" ; species name
 	dw 204, 445 ; height, weight
-
 	db   "The aura that"
-	next "emanates from its"
-	next "body intensifies"
-
-	page "to alert others if"
-	next "it is afraid or"
-	next "sad.@"
+	feed "emanates from its"
+	feed "body intensifies"
+	feed "to alert others if"
+	feed "it is afraid or"
+	feed "sad.@"

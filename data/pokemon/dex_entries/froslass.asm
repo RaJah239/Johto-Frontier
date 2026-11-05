@@ -1,10 +1,8 @@
 	db "Snow Land@" ; species name
 	dw 403, 586 ; height, weight
-
 	db   "Legends in snowy"
-	next "regions say that a"
-	next "woman who was lost"
-
-	page "on an icy mountain"
-	next "was reborn as"
-	next "Froslass.@"
+	feed "regions say that a"
+	feed "woman who was lost"
+	feed "on an icy mountain"
+	feed "was reborn as"
+	feed "Froslass.@"
