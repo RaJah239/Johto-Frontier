@@ -1139,6 +1139,8 @@ OTSwitchSimSave:
 	ld [wEnemySwitchSimParty], a
 	ld a, [wCurPartyLevel]
 	ld [wEnemySwitchSimParty + 1], a
+	ld a, [wCurOTMon]
+	ld [wEnemySwitchSimParty + 2], a
 	ret
 
 OTSwitchSimRestore:
@@ -1165,6 +1167,8 @@ OTSwitchSimRestore:
 	ld [wCurPartyMon], a
 	ld a, [wEnemySwitchSimParty + 1]
 	ld [wCurPartyLevel], a
+	ld a, [wEnemySwitchSimParty + 2]
+	ld [wCurOTMon], a
 	ld a, [wEnemyMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a

@@ -3791,7 +3791,7 @@ wEnemySwitchSimBestIndex:: db
 wEnemySwitchSimBestMatchup:: db
 wEnemySwitchSimLevels:: ds NUM_LEVEL_STATS ; saved wEnemyStatLevels
 wEnemySwitchSimSubStatus5:: db
-wEnemySwitchSimParty:: ds 2 ; saved wCurPartyMon, wCurPartyLevel
+wEnemySwitchSimParty:: ds 3 ; saved wCurPartyMon, wCurPartyLevel, wCurOTMon
 
 SECTION "Enemy Switch Sim Mon", WRAMX
 
