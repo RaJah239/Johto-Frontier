@@ -9,7 +9,7 @@
 | Bug      | Bug Bite     | Physical |   40  | 100% | 30 | Steals the target's held item                                        |
 | Bug      | Bug Buzz     | Special  |   95  | 100% | 15 | 30% chance to drop target's Sp. Def by 1 stage                       |
 | Bug      | Leech Life   | Physical |   80  | 100% | 15 | User recovers 50% of the damage dealt                                |
-| Bug      | Megahorn     | Physical |  120  |  85% | 10 | -                                                                    |
+| Bug      | Megahorn     | Physical |  120  |  85% | 10 | No addional effect                                                   |
 | Bug      | Pounce       | Physical |   60  | 100% | 15 | 100% chance to drop target's Speed by 1 stage                        |
 | Bug      | Quiver Dance | Other    |  ---  | ---  | 20 | Raises user's Sp. Atk, Sp. Def and Speed by 1 stage                  |
 | Bug      | Silver Wind  | Special  |   60  | 100% | 10 | 10% chance to raise all user's stats by 1 stage                      |
@@ -18,7 +18,7 @@
 | Bug      | String Shot  | Other    |  ---  | ---  | 30 | Lowers target's Speed by 2 stages                                    |
 | Bug      | U-Turn       | Physical |   70  | 100% | 20 | User switches out after attacking                                    |
 | Bug      | Signal Beam  | Special  |   80  | 100% | 15 | 20% chance to confuse the target                                     |
-| Bug      | X-Scissor    | Physical |   80  | 100% | 15 | -                                                                    |
+| Bug      | X-Scissor    | Physical |   80  | 100% | 15 | No addional effect                                                   |
 +----------+--------------+----------+-------+------+----+----------------------------------------------------------------------+
 
 +----------+--------------+----------+-------+------+----+----------------------------------------------------------------------+
@@ -40,7 +40,7 @@
 +----------+--------------+----------+-------+------+----+----------------------------------------------------------------------+
 |   Type   |     Name     | Category | Power | Acc  | PP | Description                                                          |
 +----------+--------------+----------+-------+------+----+----------------------------------------------------------------------+
-| Dragon   | Dragon Claw  | Physical |   95  | 100% | 15 | -                                                                    |
+| Dragon   | Dragon Claw  | Physical |   95  | 100% | 15 | No addional effect                                                   |
 | Dragon   | Dragon Dance | Other    |  ---  | ---  | 20 | Raises user's Attack and Speed by 1 stage                            |
 | Dragon   | Dragon Pulse | Special  |   90  | 100% | 15 | 10% chance to raise user's Sp. Atk by 1 stage                        |
 | Dragon   | Dragon Rage  | Special  |   65  | 100% | 15 | 30% chance to burn the target                                        |
@@ -103,7 +103,7 @@
 | Fire     | Flare Blitz  | Physical |  120  | 100% | 15 | User takes recoil damage & 10% chance to burn the target             |
 | Fire     | Flame Charge | Physical |   60  | 100% | 20 | Raises user's Speed by 1 stage                                       |
 | Fire     | Flamethrower | Special  |   95  | 100% | 15 | 10% chance to burn the target                                        |
-| Fire     | Sacred Fire  | Physical |   95  |  95% | 15 | User recovers 50% of the damage dealt & 10% chance to burn the target|                                        |
+| Fire     | Sacred Fire  | Physical |   95  |  95% | 15 | User recovers 50% of the damage dealt & 10% chance to burn the target|
 | Fire     | Sunny Day    | Other    |  ---  | ---  |  5 | Boosts Fire-type moves for 5 turns                                   |
 | Fire     | Will-O-Wisp  | Other    |  ---  |  85% | 15 | Inflicts a burn on the target                                        |
 +----------+--------------+----------+-------+------+----+----------------------------------------------------------------------+
@@ -250,7 +250,7 @@
 | Normal   | Supersonic   | Special  |   35  | 100% | 20 | 50% chance to confuse the target                                     |
 | Normal   | Swagger      | Other    |  ---  |  95% | 15 | Confuses target but raises its Attack by 2 stages                    |
 | Normal   | Swords Dance | Other    |  ---  | ---  | 20 | Sharply raises user's Attack by 2 stages                             |
-| Normal   | Tackle       | Physical |   40  | 100% | 30 | -                                                                    |
+| Normal   | Tackle       | Physical |   40  | 100% | 30 | No addional effect                                                   |
 | Normal   | Thrash       | Physical |  120  | 100% | 15 | User attacks for 2-3 turns, then becomes confused                    |
 | Normal   | Transform    | Other    |  ---  | 100% | 30 | User transforms into the target                                      |
 | Normal   | Whirlwind    | Other    |  ---  | 100% | 20 | Blows away target and ends wild battle or forces switch              |
@@ -303,7 +303,7 @@
 | Rock     | Power Gem    | Special  |   90  | 100% | 15 | 10% chance to drop target's Sp. Def by 1 stage                       |
 | Rock     | Rock Blast   | Physical |   30  |  95% | 10 | Hits 2-5 times in one turn                                           |
 | Rock     | Rock Slide   | Physical |   80  |  95% | 15 | 30% chance to make the target flinch                                 |
-| Rock     | Rock Throw   | Physical |   50  | 100% | 20 | -                                                                    |
+| Rock     | Rock Throw   | Physical |   50  | 100% | 20 | No addional effect                                                   |
 | Rock     | Rock Tomb    | Physical |   60  | 100% | 15 | Drops target's Speed by 1 stage                                      |
 | Rock     | Rollout      | Physical |   30  |  95% | 20 | Power increases with each hit; continues for 5 turns                 |
 | Rock     | Sandstorm    | Other    |  ---  | ---  |  5 | Sandstorm damages non-Rock/Ground/Steel types                        |
@@ -335,7 +335,7 @@
 | Water    | Hydro Pump   | Special  |  120  |  85% | 10 | 10% chance to raise user's Sp. Atk by 1 stage                        |
 | Water    | Rain Dance   | Other    |  ---  | ---  |  5 | Boosts Water-type moves for 5 turns                                  |
 | Water    | Scald        | Special  |   80  | 100% | 15 | 30% chance to burn the target                                        |
-| Water    | Surf         | Special  |   95  | 100% | 15 | -                                                                    |
+| Water    | Surf         | Special  |   95  | 100% | 15 | No addional effect                                                   |
 | Water    | Water Gun    | Special  |   40  | 100% | 30 | 10% chance to raise user's Sp. Atk by 1 stage                        |
 | Water    | Waterfall    | Physical |   85  | 100% | 15 | 20% chance to make the target flinch                                 |
 | Water    | Whirlpool    | Special  |   40  |  95% | 20 | Traps target for 4-5 turns                                           |
@@ -345,7 +345,7 @@
 |   Type   |     Name     | Category | Power | Acc  | PP | Description                                                          |
 +----------+--------------+----------+-------+------+----+----------------------------------------------------------------------+
 | ???      | Curse        | Other    |  ---  | 100% | 10 | Curses target if Ghost-type; otherwise boosts Attack/Defense         |
-| ???      | Hidden Force | Physical |   70  | 100% | 15 | -                                                                    |
-| ???      | Hidden Power | Special  |   70  | 100% | 15 | -                                                                    |
+| ???      | Hidden Force | Physical |   70  | 100% | 15 | The type varies with the Pokémon                                     |
+| ???      | Hidden Power | Special  |   70  | 100% | 15 | The type varies with the Pokémon                                     |
 | ???      | Runic Power  | Special  |  100  | 100% | 10 | 20% chance to raise all stats by 1 stage                             |
 +----------+--------------+----------+-------+------+----+----------------------------------------------------------------------+
