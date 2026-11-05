@@ -1,3 +1,22 @@
+FindForcedReplacementInOTParty:
+; Choose which OT mon to send out when the enemy is forced out (U-turn, or a
+; replacement after a KO). A mon that wins the 1-on-1 (OTSwitchFindWinningReplacement)
+; takes priority; if none does, use FindMonInOTPartyToSwitchIntoBattle.
+; Returns the 0-based party index in b.
+	ld a, [wCurDamage]
+	push af
+	ld a, [wCurDamage + 1]
+	push af
+	call OTSwitchFindWinningReplacement
+	pop af
+	ld [wCurDamage + 1], a
+	pop af
+	ld [wCurDamage], a
+	ld a, b
+	cp -1
+	ret nz
+	jr FindMonInOTPartyToSwitchIntoBattle
+
 FindMonInOTPartyToSwitchIntoBattle:
 ; Choose which OT mon to send out, evaluating the player's active moveset.
 ; Priority:

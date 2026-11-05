@@ -2773,7 +2773,7 @@ SlideBattlePicOut:
 	ret
 
 EnemyUTurnSwitch:
-	farcall FindMonInOTPartyToSwitchIntoBattle
+	farcall FindForcedReplacementInOTParty
 	; 'b' contains the PartyNr of the mon the AI will switch to
 	ld a, b
 	inc a
@@ -2800,7 +2800,7 @@ EnemySwitch:
 	call ResetEnemyBattleVars
 	call CheckWhetherSwitchmonIsPredetermined
 	jr c, .skip
-	farcall FindMonInOTPartyToSwitchIntoBattle
+	farcall FindForcedReplacementInOTParty
 .skip
 	; 'b' contains the PartyNr of the mon the AI will switch to
 	call LoadEnemyMonToSwitchTo
@@ -2830,7 +2830,7 @@ EnemySwitch_SetMode:
 	call ResetEnemyBattleVars
 	call CheckWhetherSwitchmonIsPredetermined
 	jr c, .skip
-	farcall FindMonInOTPartyToSwitchIntoBattle
+	farcall FindForcedReplacementInOTParty
 .skip
 	; 'b' contains the PartyNr of the mon the AI will switch to
 	call LoadEnemyMonToSwitchTo
