@@ -414,7 +414,7 @@ Pokedex_InitDexEntryScreen:
 	ldh [hWX], a
 
 	ld a, [wCurPartySpecies]
-	call PlayMonCry
+	call PlayMonCry2
 	call Pokedex_IncrementDexPointer
 	ret
 
@@ -630,7 +630,7 @@ Pokedex_ReinitDexEntryScreen:
 	ld a, SCGB_POKEDEX
 	call Pokedex_GetSGBLayout
 	ld a, [wCurPartySpecies]
-	call PlayMonCry
+	call PlayMonCry2
 	ld hl, wJumptableIndex
 	dec [hl]
 	ld a, [wLastDexMode]
@@ -4092,7 +4092,7 @@ _NewPokedexEntry:
 	ld a, SCGB_POKEDEX
 	call Pokedex_GetSGBLayout
 	ld a, [wCurPartySpecies]
-	call PlayMonCry
+	call PlayMonCry2
 	ret
 
 Pokedex_SetBGMapMode3:
