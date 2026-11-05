@@ -9,5 +9,4 @@ CriticalHitMoves:
 	db PSYCHO_CUT
 	db STONE_EDGE
 	db CUT
-	db ROCK_THROW
 	db -1

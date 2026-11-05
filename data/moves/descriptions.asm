@@ -283,7 +283,6 @@ UTurnDescription:
 	db   "Attacks, then swap"
 	line "out if possible.@"
 
-RockThrowDescription:
 CutDescription:
 StoneEdgeDescription:
 ThroatChopDescription:
@@ -338,9 +337,14 @@ HeadbuttDescription:
 	db   "An attack that may"
 	line "cause flinching.@"
 
+SurfDescription:
+RockThrowDescription:
+DragonClawDescription:
+MegahornDescription:
 XScissorDescription:
 TackleDescription:
-	db   "A basic attack.@"
+	db   "A basic attack. No"
+	line "additional effect.@"
 
 DoubleTeamDescription:
 	db   "Increases evasion"
@@ -404,15 +408,6 @@ FlamethrowerDescription:
 MistDescription:
 	db   "Priority: Prevent"
 	line "stat reduction.@"
-
-
-DragonClawDescription:
-	db   "A strong attack"
-	line "with claws.@"
-
-SurfDescription:
-	db   "A strong water-"
-	line "type attack.@"
 
 PowderSnowDescription:
 IcePunchDescription:
@@ -877,10 +872,6 @@ PainSplitDescription:
 QuiverDanceDescription:
 	db   "Raises Special"
 	line "stats and Speed.@"
-
-MegahornDescription:
-	db   "A powerful charge"
-	line "attack.@"
 
 WaterGunDescription:
 HydroPumpDescription:
