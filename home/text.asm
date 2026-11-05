@@ -273,7 +273,6 @@ ENDM
 	dict "<CONT>",    ContText
 	dict "<……>",      SixDotsChar
 	dict "<DONE>",    DoneText
-	dict "<DONE30>",  DoneText30
 	dict "<PROMPT>",  PromptText
 	dict "<PKMN>",    PlacePKMN
 	dict "<POKE>",    PlacePOKE
@@ -626,13 +625,6 @@ DoneText::
 	dec de
 	ret
 
-DoneText30::
-	push de
-	ld c, 30
-	call DelayFrames
-	pop de
-	jr DoneText
-
 NullChar::
 	ld a, "?"
 	ld [hli], a
@@ -729,12 +721,6 @@ DoTextUntilTerminator::
 	ret z
 	cp "<DONE>"
 	ret z
-	cp "<DONE30>"
-	jr nz, .not_done30
-	ld c, 30
-	jmp DelayFrames
-
-.not_done30
 	cp "<PROMPT>"
 	ret z
 	call .TextCommand

@@ -14,7 +14,6 @@ DEF page   EQUS "dialog_db \"@\","       ; Start a new Pokédex page.
 DEF para   EQUS "dialog_db \"<PARA>\","  ; Start a new paragraph.
 DEF cont   EQUS "dialog_db \"<CONT>\","  ; Scroll to the next line.
 DEF done   EQUS "db \"<DONE>\""   ; End a text box.
-DEF done30 EQUS "db \"<DONE30>\""  ; End a text box, then wait 30 frames before exiting.
 DEF prompt EQUS "db \"<PROMPT>\"" ; Prompt the player to end a text box (initiating some other event).
 DEF feed   EQUS "db \"<LF>\","    ; Text on next line with no gap.
 DEF roll   EQUS "db \"<SCROLL>\"," ; _ContTextNoPause
