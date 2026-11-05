@@ -27,6 +27,7 @@
 	charmap "<CONT>",    $55
 	charmap "<……>",      $56 ; "……"
 	charmap "<DONE>",    $57
+	charmap "<DONE30>",  $17 ; ends a text box like "<DONE>", then waits 30 frames
 	charmap "<PROMPT>",  $58
 	charmap "<TARGET>",  $59
 	charmap "<USER>",    $5a
