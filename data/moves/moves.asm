@@ -14,7 +14,7 @@ ENDM
 Moves:
 ; entries correspond to move ids (see constants/move_constants.asm)
 	table_width MOVE_LENGTH, Moves
-	move ABSORB,       EFFECT_LEECH_HIT,          40, GRASS,         SPECIAL,  100, 40,   0
+	move ABSORB,       EFFECT_LEECH_HIT,          40, GRASS,         SPECIAL,  100, 30,   0
 	move ACID,         EFFECT_BURN_HIT,           40, POISON,        SPECIAL,  100, 30,  20
 	move ACROBATICS,   EFFECT_ACROBATICS,         55, FLYING,        PHYSICAL, 100, 15,   0
 	move AERIAL_ACE,   EFFECT_PRIORITY_HIT,       40, FLYING,        PHYSICAL, 100, 20,   0
@@ -29,14 +29,14 @@ Moves:
 	move AURORA_BEAM,  EFFECT_ATTACK_DOWN_HIT,    65, ICE,           SPECIAL,  100, 20,  20
 	move AVALANCHE,    EFFECT_AVALANCHE,          65, ICE,           PHYSICAL, 100, 15,   0
 	move BARRIER,      EFFECT_BARRIER,             0, PSYCHIC_TYPE,  STATUS,   100, 20,   0
-	move BATON_PASS,   EFFECT_BATON_PASS,          0, NORMAL,        STATUS,   100, 40,   0
+	move BATON_PASS,   EFFECT_BATON_PASS,          0, NORMAL,        STATUS,   100, 30,   0
 	move BITE,         EFFECT_FLINCH_HIT,         60, DARK,          PHYSICAL, 100, 25,  30
 	move BLIZZARD,     EFFECT_BLIZZARD,          120, ICE,           SPECIAL,   70, 10,  30
 	move BODY_PRESS,   EFFECT_BODY_PRESS,         80, FIGHTING,      PHYSICAL, 100, 10,   0
 	move BODY_SLAM,    EFFECT_PARALYZE_HIT,       85, NORMAL,        PHYSICAL, 100, 15,  30
 	move BRICK_BREAK,  EFFECT_BRICK_BREAK,        75, FIGHTING,      PHYSICAL, 100, 15,   0
 	move BUBBLEBEAM,   EFFECT_SPEED_DOWN_HIT,     65, WATER,         SPECIAL,  100, 20,  20
-	move BUG_BITE,     EFFECT_THIEF,              40, BUG,           PHYSICAL, 100, 35, 100
+	move BUG_BITE,     EFFECT_THIEF,              40, BUG,           PHYSICAL, 100, 30, 100
 	move BUG_BUZZ,     EFFECT_SP_DEF_DOWN_HIT,    95, BUG,           SPECIAL,  100, 15,  30
 	move BULK_UP,      EFFECT_BULK_UP,             0, FIGHTING,      STATUS,   100, 20,   0
 	move BULLDOZE,     EFFECT_SPEED_DOWN_HIT,     60, GROUND,        PHYSICAL, 100, 15, 100
@@ -52,12 +52,12 @@ Moves:
 	move CURSE,        EFFECT_CURSE,               0, CURSE_TYPE,    STATUS,   100, 10,   0
 	move CUT,          EFFECT_NORMAL_HIT,         55, STEEL,         PHYSICAL, 100, 30,   0
 	move DARK_PULSE,   EFFECT_FLINCH_HIT,         90, DARK,          SPECIAL,  100, 15,  20
-	move DEFENSE_CURL, EFFECT_DEFENSE_CURL,        0, NORMAL,        STATUS,   100, 40,   0
+	move DEFENSE_CURL, EFFECT_DEFENSE_CURL,        0, NORMAL,        STATUS,   100, 30,   0
 	move DEFOG,        EFFECT_DEFOG,               0, FLYING,        STATUS,   100, 15,   0
 	move DESTINY_BOND, EFFECT_DESTINY_BOND,        0, GHOST,         STATUS,   100,  5,   0
 	move DIG,          EFFECT_FLY,                90, GROUND,        PHYSICAL, 100, 15,   0
 	move DISABLE,      EFFECT_DISABLE,             0, NORMAL,        STATUS,   100, 20,   0
-	move DISARM_VOICE, EFFECT_ALWAYS_HIT,         40, FAIRY,         SPECIAL,  100, 35,   0
+	move DISARM_VOICE, EFFECT_ALWAYS_HIT,         40, FAIRY,         SPECIAL,  100, 30,   0
 	move DIVE_BOMB,    EFFECT_JUMP_KICK,         100, FLYING,        PHYSICAL,  95, 15,   0
 	move DOUBLE_EDGE,  EFFECT_RECOIL_HIT,        120, NORMAL,        PHYSICAL, 100, 15,   0
 	move DOUBLE_TEAM,  EFFECT_EVASION_UP,          0, NORMAL,        STATUS,   100, 15,   0
@@ -71,13 +71,13 @@ Moves:
 	move DRILL_PECK,   EFFECT_FLINCH_HIT,         85, FLYING,        PHYSICAL, 100, 20,  20
 	move EARTH_POWER,  EFFECT_SP_DEF_DOWN_HIT,    90, GROUND,        SPECIAL,  100, 15,  10
 	move EARTHQUAKE,   EFFECT_EARTHQUAKE,        100, GROUND,        PHYSICAL, 100, 15,   0
-	move EMBER,        EFFECT_BURN_HIT,           40, FIRE,          SPECIAL,  100, 35,  10
+	move EMBER,        EFFECT_BURN_HIT,           40, FIRE,          SPECIAL,  100, 30,  10
 	move ENCORE,       EFFECT_ENCORE,              0, NORMAL,        STATUS,   100,  5,   0
 	move EXPLOSION,    EFFECT_EXPLOSION,         250, NORMAL,        PHYSICAL, 100,  1,   0
 	move EXTREMESPEED, EFFECT_PRIORITY_HIT,       80, NORMAL,        PHYSICAL, 100, 10,   0
 	move FACADE,       EFFECT_FACADE,             70, NORMAL,        PHYSICAL, 100, 20,   0
 	move FAIRY_FLASH,  EFFECT_ATTACK_DOWN_HIT,    80, FAIRY,         SPECIAL,  100, 15,  20
-	move FALSE_SWIPE,  EFFECT_FALSE_SWIPE,        65, NORMAL,        PHYSICAL, 100, 40,   0
+	move FALSE_SWIPE,  EFFECT_FALSE_SWIPE,        65, NORMAL,        PHYSICAL, 100, 30,   0
 	move FEINT_ATTACK, EFFECT_ALWAYS_HIT,         60, DARK,          PHYSICAL, 100, 20,   0
 	move FIRE_BLAST,   EFFECT_BURN_HIT,          120, FIRE,          SPECIAL,   85, 10,  10
 	move FIRE_FANG,    EFFECT_FIRE_FANG,          60, FIRE,          PHYSICAL, 100, 15,  10
@@ -91,16 +91,16 @@ Moves:
 	move FLY,          EFFECT_FLY,                90, FLYING,        PHYSICAL, 100, 15,   0
 	move FOCUS_BLAST,  EFFECT_SP_DEF_DOWN_HIT,   120, FIGHTING,      SPECIAL,  70, 10,  30
 	move FOCUS_ENERGY, EFFECT_FOCUS_ENERGY,        0, NORMAL,        STATUS,   100, 30,   0
-	move FORESIGHT,    EFFECT_FORESIGHT,           0, NORMAL,        STATUS,   100, 40,   0
+	move FORESIGHT,    EFFECT_FORESIGHT,           0, NORMAL,        STATUS,   100, 30,   0
 	move FREEZE_DRY,   EFFECT_FREEZE_HIT,         95, ICE2,          SPECIAL,  100, 20,  10
 	move FURY_DRIVE,   EFFECT_FURY_DRIVE,          0, NORMAL,        STATUS,   100, 15,   0
 	move FURY_STRIKES, EFFECT_MULTI_HIT,          30, NORMAL,        PHYSICAL,  95, 20,   0
 	move GIGA_DRAIN,   EFFECT_LEECH_HIT,          80, GRASS,         SPECIAL,  100, 15,   0
 	move GIGA_IMPACT,  EFFECT_HYPER_BEAM,        140, NORMAL,        PHYSICAL, 100,  5,   0
-	move GROWL,        EFFECT_ATTACK_DOWN,         0, NORMAL,        STATUS,   100, 40,   0
+	move GROWL,        EFFECT_ATTACK_DOWN,         0, NORMAL,        STATUS,   100, 30,   0
 	move GROWTH,       EFFECT_GROWTH,              0, NORMAL,        STATUS,   100, 20,   0
 	move GUNK_SHOT,    EFFECT_POISON_HIT,        120, POISON,        PHYSICAL,  85, 10,  20
-	move GUST,         EFFECT_GUST,               40, FLYING,        SPECIAL,  100, 35,   0
+	move GUST,         EFFECT_GUST,               40, FLYING,        SPECIAL,  100, 30,   0
 	move HAIL,         EFFECT_HAIL,                0, ICE,           STATUS,   100,  5,   0
 	move HARDEN,       EFFECT_DEFENSE_UP,          0, NORMAL,        STATUS,   100, 30,   0
 	move HAZE,         EFFECT_RESET_STATS,         0, ICE,           STATUS,   100, 30,   0
@@ -131,7 +131,7 @@ Moves:
 	move LEECH_LIFE,   EFFECT_LEECH_HIT,          80, BUG,           PHYSICAL, 100, 15,   0
 	move LEECH_SEED,   EFFECT_LEECH_SEED,          0, GRASS,         STATUS,    95, 10,   0
 	move LEER,         EFFECT_DEFENSE_DOWN,        0, NORMAL,        STATUS,   100, 30,   0
-	move LICK,         EFFECT_PARALYZE_HIT,       40, GHOST,         PHYSICAL, 100, 35,  30
+	move LICK,         EFFECT_PARALYZE_HIT,       40, GHOST,         PHYSICAL, 100, 30,  30
 	move LIGHT_SCREEN, EFFECT_LIGHT_SCREEN,        0, PSYCHIC_TYPE,  STATUS,   100, 30,   0
 	move LOVELY_KISS,  EFFECT_SLEEP,               0, NORMAL,        STATUS,   100, 10,   0
 	move LOW_KICK,     EFFECT_FLINCH_HIT,         50, FIGHTING,      PHYSICAL, 100, 20,  10
@@ -139,7 +139,7 @@ Moves:
 	move MEAN_LOOK,    EFFECT_MEAN_LOOK,           0, NORMAL,        STATUS,   100,  5,   0
 	move MEGA_DRAIN,   EFFECT_LEECH_HIT,          60, GRASS,         SPECIAL,  100, 20,   0
 	move MEGAHORN,     EFFECT_NORMAL_HIT,        120, BUG,           PHYSICAL,  85, 10,   0
-	move METAL_CLAW,   EFFECT_ATTACK_UP_HIT,      50, STEEL,         PHYSICAL, 100, 35,  10
+	move METAL_CLAW,   EFFECT_ATTACK_UP_HIT,      50, STEEL,         PHYSICAL, 100, 30,  10
 	move METEOR_MASH,  EFFECT_ATTACK_UP_HIT,     100, STEEL,         PHYSICAL,  90, 10,  20
 	move METRONOME,    EFFECT_METRONOME,           0, NORMAL,        STATUS,   100, 10,   0
 	move MILK_DRINK,   EFFECT_HEAL,                0, NORMAL,        STATUS,   100, 10,   0
@@ -147,22 +147,22 @@ Moves:
 	move MIRROR_SHOT,  EFFECT_ACCURACY_DOWN_HIT,  60, STEEL,         SPECIAL,  100, 20,  10
 	move MIST,         EFFECT_MIST,                0, ICE,           STATUS,   100, 30,   0
 	move MOONBLAST,    EFFECT_SP_ATK_DOWN_HIT,    95, FAIRY,         SPECIAL,  100, 15,  30
-	move MUD_SLAP,     EFFECT_ACCURACY_DOWN_HIT,  40, GROUND,        SPECIAL,  100, 35,  10
+	move MUD_SLAP,     EFFECT_ACCURACY_DOWN_HIT,  40, GROUND,        SPECIAL,  100, 30,  10
 	move MYSTIC_DANCE, EFFECT_MYSTIC_DANCE,        0, FAIRY,         STATUS,   100, 20,   0
 	move NASTY_PLOT,   EFFECT_SP_ATK_UP_2,         0, DARK,          STATUS,   100, 20,   0
 	move NIGHT_SHADE,  EFFECT_SP_DEF_DOWN_HIT,    60, GHOST,         SPECIAL,  100, 20,  20
 	move NIGHT_SLASH,  EFFECT_NORMAL_HIT,         70, DARK,          PHYSICAL, 100, 20,   0
 	move OUTRAGE,      EFFECT_RAMPAGE,           120, DRAGON,        PHYSICAL, 100, 15,   0
 	move PAIN_SPLIT,   EFFECT_PAIN_SPLIT,          0, NORMAL,        STATUS,   100, 20,   0
-	move PECK,         EFFECT_THIEF,              40, FLYING,        PHYSICAL, 100, 35, 100
+	move PECK,         EFFECT_THIEF,              40, FLYING,        PHYSICAL, 100, 30, 100
 	move PERISH_SONG,  EFFECT_PERISH_SONG,         0, NORMAL,        STATUS,   100,  5,   0
 	move PHOTON_BLAST, EFFECT_TRI_ATTACK,         80, NORMAL,        SPECIAL,  100, 15,  30
 	move PLAY_ROUGH,   EFFECT_ATTACK_DOWN_HIT,    90, FAIRY,         PHYSICAL, 100, 15,  20
 	move POISON_JAB,   EFFECT_POISON_HIT,         80, POISON,        PHYSICAL, 100, 15,  30
-	move POISON_STING, EFFECT_POISON_HIT,         40, POISON,        PHYSICAL, 100, 35,  30
+	move POISON_STING, EFFECT_POISON_HIT,         40, POISON,        PHYSICAL, 100, 30,  30
 	move POISONPOWDER, EFFECT_POISON,              0, POISON,        STATUS,    85, 15,   0
 	move POUNCE,       EFFECT_SPEED_DOWN_HIT,     60, BUG,           PHYSICAL, 100, 15, 100
-	move POWDER_SNOW,  EFFECT_FREEZE_HIT,         40, ICE,           SPECIAL,  100, 35,  10
+	move POWDER_SNOW,  EFFECT_FREEZE_HIT,         40, ICE,           SPECIAL,  100, 30,  10
 	move POWER_GEM,    EFFECT_SP_DEF_DOWN_HIT,    90, ROCK,          SPECIAL,  100, 15,  10
 	move PROTECT,      EFFECT_PROTECT,             0, NORMAL,        STATUS,   100, 15,   0
 	move PSYBEAM,      EFFECT_CONFUSE_HIT,        65, PSYCHIC_TYPE,  SPECIAL,  100, 20,  10
@@ -174,7 +174,7 @@ Moves:
 	move QUICK_ATTACK, EFFECT_PRIORITY_HIT,       40, NORMAL,        PHYSICAL, 100, 30,   0
 	move QUIVER_DANCE, EFFECT_QUIVER_DANCE,        0, BUG,           STATUS,   100, 20,   0
 	move RAIN_DANCE,   EFFECT_RAIN_DANCE,          0, WATER,         STATUS,   100,  5,   0
-	move RAPID_SPIN,   EFFECT_RAPID_SPIN,         50, NORMAL,        PHYSICAL, 100, 40, 100
+	move RAPID_SPIN,   EFFECT_RAPID_SPIN,         50, NORMAL,        PHYSICAL, 100, 30, 100
 	move RECOVER,      EFFECT_HEAL,                0, NORMAL,        STATUS,   100, 10,   0
 	move REFLECT,      EFFECT_REFLECT,             0, PSYCHIC_TYPE,  STATUS,   100, 30,   0
 	move REST,         EFFECT_HEAL,                0, PSYCHIC_TYPE,  STATUS,   100, 10,   0
@@ -193,7 +193,7 @@ Moves:
 	move SANDSTORM,    EFFECT_SANDSTORM,           0, ROCK,          STATUS,   100,  5,   0
 	move SCALD,        EFFECT_BURN_HIT,           80, WATER,         SPECIAL,  100, 15,  30
 	move SCARY_FACE,   EFFECT_SPEED_DOWN_2,        0, NORMAL,        STATUS,   100, 10,   0
-	move SCREECH,      EFFECT_DEFENSE_DOWN_2,      0, NORMAL,        STATUS,   100, 40,   0
+	move SCREECH,      EFFECT_DEFENSE_DOWN_2,      0, NORMAL,        STATUS,   100, 30,   0
 	move SEED_BOMB,    EFFECT_BURN_HIT,           95, GRASS,         PHYSICAL, 100, 15,  10
 	move SEISMIC_TOSS, EFFECT_LEVEL_DAMAGE,        1, FIGHTING,      PHYSICAL, 100, 20,   0
 	move SHADOW_BALL,  EFFECT_SP_DEF_DOWN_HIT,    90, GHOST,         SPECIAL,  100, 15,  20
@@ -216,13 +216,13 @@ Moves:
 	move SPIDER_WEB,   EFFECT_MEAN_LOOK,           0, BUG,           STATUS,   100, 10,   0
 	move SPIKES,       EFFECT_SPIKES,              0, GROUND,        STATUS,   100, 20,   0
 	move SPITE,        EFFECT_SPITE,               0, GHOST,         STATUS,   100,  5,   0
-	move SPLASH,       EFFECT_SPLASH,              0, NORMAL,        STATUS,   100, 40,   0
+	move SPLASH,       EFFECT_SPLASH,              0, NORMAL,        STATUS,   100, 30,   0
 	move STEALTH_ROCK, EFFECT_STEALTH_ROCK,        0, ROCK,           STATUS,  100, 20,   0
 	move STEEL_WING,   EFFECT_ATK_DEF_UP_HIT,     80, STEEL,         PHYSICAL, 100, 15,  20
 	move STICKY_WEB,   EFFECT_STICKY_WEB,          0, BUG,           STATUS,   100, 20,   0
 	move STOMP,        EFFECT_FLINCH_HIT,         65, NORMAL,        PHYSICAL, 100, 20,  30
 	move STONE_EDGE,   EFFECT_NORMAL_HIT,        100, ROCK,          PHYSICAL,  90, 10,   0
-	move STRING_SHOT,  EFFECT_SPEED_DOWN_2,        0, BUG,           STATUS,   100, 40,   0
+	move STRING_SHOT,  EFFECT_SPEED_DOWN_2,        0, BUG,           STATUS,   100, 30,   0
 	move STRUGGLE,     EFFECT_RECOIL_HIT,         50, NORMAL,        PHYSICAL, 100,  1,   0
 	move STUN_SPORE,   EFFECT_PARALYZE,            0, GRASS,         STATUS,    85, 15,   0
 	move SUBSTITUTE,   EFFECT_SUBSTITUTE,          0, NORMAL,        STATUS,   100, 10,   0
@@ -232,9 +232,9 @@ Moves:
 	move SUPERSONIC,   EFFECT_CONFUSE_HIT,        35, NORMAL,        SPECIAL,  100, 20,  50
 	move SURF,         EFFECT_NORMAL_HIT,         95, WATER,         SPECIAL,  100, 15,   0
 	move SWAGGER,      EFFECT_SWAGGER,             0, NORMAL,        STATUS,    95, 15, 100
-	move SWIFT,        EFFECT_ALWAYS_HIT,         40, STEEL,         SPECIAL,  100, 35,   0
+	move SWIFT,        EFFECT_ALWAYS_HIT,         40, STEEL,         SPECIAL,  100, 30,   0
 	move SWORDS_DANCE, EFFECT_ATTACK_UP_2,         0, NORMAL,        STATUS,   100, 20,   0
-	move TACKLE,       EFFECT_NORMAL_HIT,         40, NORMAL,        PHYSICAL, 100, 35,   0
+	move TACKLE,       EFFECT_NORMAL_HIT,         40, NORMAL,        PHYSICAL, 100, 30,   0
 	move TAUNT,        EFFECT_TAUNT,               0, DARK,          STATUS,   100, 20,   0
 	move TELEPORT,     EFFECT_TELEPORT,            0, PSYCHIC_TYPE,  STATUS,   100, 20,   0
 	move THRASH,       EFFECT_RAMPAGE,           120, NORMAL,        PHYSICAL, 100, 15,   0
@@ -244,18 +244,18 @@ Moves:
 	move THUNDER,      EFFECT_THUNDER,           120, ELECTRIC,      SPECIAL,   70, 10,  30
 	move THUNDERBOLT,  EFFECT_PARALYZE_HIT,       95, ELECTRIC,      SPECIAL,  100, 15,  10
 	move THUNDERPUNCH, EFFECT_PARALYZE_HIT,       75, ELECTRIC,      PHYSICAL, 100, 15,  20
-	move THUNDERSHOCK, EFFECT_PARALYZE_HIT,       40, ELECTRIC,      SPECIAL,  100, 35,  10
+	move THUNDERSHOCK, EFFECT_PARALYZE_HIT,       40, ELECTRIC,      SPECIAL,  100, 30,  10
 	move TOXIC,        EFFECT_TOXIC,               0, POISON,        STATUS,    90, 10,   0
 	move TOXIC_SPIKES, EFFECT_TOXIC_SPIKES,        0, POISON,        STATUS,   100, 20,   0
-	move TRANSFORM,    EFFECT_TRANSFORM,           0, NORMAL,        STATUS,   100, 40,   0
-	move TREMOR,       EFFECT_EARTHQUAKE,         40, GROUND,        PHYSICAL, 100, 35,   0
+	move TRANSFORM,    EFFECT_TRANSFORM,           0, NORMAL,        STATUS,   100, 30,   0
+	move TREMOR,       EFFECT_EARTHQUAKE,         40, GROUND,        PHYSICAL, 100, 30,   0
 	move TRICK,        EFFECT_TRICK,               0, PSYCHIC_TYPE,  STATUS,   100, 10,   0
 	move TRICK_ROOM,   EFFECT_TRICK_ROOM,          0, PSYCHIC_TYPE,  STATUS,   100,  5,   0
 	move U_TURN,       EFFECT_HIT_AND_SWITCH,     70, BUG,           PHYSICAL, 100, 20,   0
 	move VENOSHOCK,    EFFECT_VENOSHOCK,          65, POISON,        SPECIAL,  100, 10,   0
-	move VINE_WHIP,    EFFECT_DEFENSE_DOWN_HIT,   40, GRASS,         PHYSICAL, 100, 35,  10
+	move VINE_WHIP,    EFFECT_DEFENSE_DOWN_HIT,   40, GRASS,         PHYSICAL, 100, 30,  10
 	move VOLT_SWITCH,  EFFECT_HIT_AND_SWITCH,     70, ELECTRIC,      PHYSICAL, 100, 20,   0
-	move WATER_GUN,    EFFECT_SP_ATK_UP_HIT,      40, WATER,         SPECIAL,  100, 35,  10
+	move WATER_GUN,    EFFECT_SP_ATK_UP_HIT,      40, WATER,         SPECIAL,  100, 30,  10
 	move WATERFALL,    EFFECT_FLINCH_HIT,         85, WATER,         PHYSICAL, 100, 15,  20
 	move WHIRLPOOL,    EFFECT_TRAP_TARGET,        40, WATER,         SPECIAL,   95, 20,   0
 	move WHIRLWIND,    EFFECT_FORCE_SWITCH,        0, NORMAL,        STATUS,   100, 20,   0
