@@ -149,7 +149,12 @@ PokemonActionSubmenu:
 	dbw MONMENUITEM_POKEDEX,    MonMenu_Pokedex
 
 MonMenu_Pokedex:
-	call FadeToMenu
+	newfarcall PrepareWeatherForFullScreen
+	xor a
+	ldh [hBGMapMode], a
+	call LoadStandardMenuHeader
+	call ClearSprites
+	call DisableSpriteUpdates
 	farcall Pokedex_DirectEntry
 	; hide the pokedex tilemap before restoring the normal font tiles
 	; otherwise the inverted pokedex text flashes as normal black text

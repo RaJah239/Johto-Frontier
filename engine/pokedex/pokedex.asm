@@ -399,8 +399,6 @@ Pokedex_InitDexEntryScreen:
 
 	call Pokedex_LoadSelectedMonTiles
 
-	ld a, SCGB_POKEDEX
-	call Pokedex_GetSGBLayout
 	call Pokedex_LoadCurrentFootprint
 	call Pokedex_DrawDexEntryScreenBG
 	call Pokedex_InitArrowCursor
@@ -408,7 +406,10 @@ Pokedex_InitDexEntryScreen:
 	ld [wPrevDexEntry], a
 	call Pokedex_DrawFootprint
 	farcall DisplayDexEntry
-	call WaitBGMap
+	ld b, 3
+	farcall _SafeCopyTilemapAtOnce
+	ld a, SCGB_POKEDEX
+	call Pokedex_GetSGBLayout
 	ld a, $a7
 	ldh [hWX], a
 
@@ -420,6 +421,8 @@ Pokedex_InitDexEntryScreen:
 Pokedex_UpdateDexEntryScreen:
 	ld de, DexEntryScreen_ArrowCursorData
 	call Pokedex_MoveArrowCursor
+	ld a, 1
+	ldh [hBGMapMode], a
 	ld hl, hJoyPressed
 	ld a, [hl]
 	and B_BUTTON
