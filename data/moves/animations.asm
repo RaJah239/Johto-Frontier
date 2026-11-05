@@ -4849,6 +4849,7 @@ BattleAnim_IronHead:
 	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $dc
 	anim_obj BATTLE_ANIM_OBJ_ROCK_SMASH, 128, 64, $90
 	anim_wait 32
+	anim_setobjpal PAL_BATTLE_OB_BROWN, PAL_BTLCUSTOM_BROWN
 	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_MetalClaw:
