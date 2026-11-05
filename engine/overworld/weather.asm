@@ -209,6 +209,26 @@ GetWeatherTint::
 
 ; Map setup
 
+ClearSunAtNight::
+; Sun ends when evening or night arrives, however it was set (map default,
+; map callback, or the time changing while you're on the map).
+	ld a, [wFieldWeather]
+	cp WEATHER_SUN
+	ret nz
+	ld a, [wTimeOfDay]
+	cp NITE_F
+	jr z, .clear
+	cp EVE_F
+	ret nz
+.clear
+	ld a, WEATHER_NONE
+	ld [wFieldWeather], a
+	; the map palettes still have the sun tint; make the palette change
+	; reload them
+	ld a, $ff
+	ld [wTimeOfDayPal], a
+	ret
+
 SetCurrentWeather::
 	ld a, [wPreviousFieldWeather]
 	ld b, a

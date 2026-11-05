@@ -2,6 +2,7 @@ UpdateTimeOfDayPal::
 	call UpdateTime
 	ld a, [wTimeOfDay]
 	ld [wCurTimeOfDay], a
+	farcall ClearSunAtNight
 	call GetTimePalette
 	ld [wTimeOfDayPal], a
 	ret
@@ -23,6 +24,7 @@ _TimeOfDayPals::
 ; if so, the time of day has changed
 	ld a, [wTimeOfDay]
 	ld [wCurTimeOfDay], a
+	farcall ClearSunAtNight
 
 ; get palette id
 	call GetTimePalette
