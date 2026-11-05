@@ -2693,7 +2693,7 @@ wTempWildMonSpecies:: db
 
 wOtherTrainerClass::
 ; class (Youngster, Bug Catcher, etc.) of opposing trainer
-; 0 if opponent is a wild Pokémon, not a trainer
+; 0 if opponent is a wild PokÃ©mon, not a trainer
 	db
 
 ; BATTLETYPE_* values
@@ -3324,7 +3324,7 @@ wDigWarpNumber:: db
 wDigMapGroup::   db
 wDigMapNumber::  db
 
-; used on maps like second floor pokécenter, which are reused, so we know which
+; used on maps like second floor pokÃ©center, which are reused, so we know which
 ; map to return to
 wBackupWarpNumber:: db
 wBackupMapGroup::   db
@@ -3780,3 +3780,19 @@ SECTION "Sun Shimmer Water", WRAMX, BANK[5]
 wSunShimmerWaterActive:: db ; nonzero: AnimateWaterPalette reads wSunShimmerWaterColors
 wSunShimmerWaterColors:: ds 3 * PAL_COLOR_SIZE
 wWaterPalColor:: db ; water palette color AnimateWaterPalette last showed (0-2), -1 = none
+
+SECTION "Enemy Switch Sim", WRAM0
+
+; OTSwitchFindWinningReplacement scratch. wEnemySwitchSimStats and
+; wEnemySwitchSimTypes live in the wEnemySwitchSavedMon* block (see
+; switch_in.asm), which the sim doesn't share with the other switch helpers.
+wEnemySwitchSimCandidate:: db
+wEnemySwitchSimBestIndex:: db
+wEnemySwitchSimBestMatchup:: db
+wEnemySwitchSimLevels:: ds NUM_LEVEL_STATS ; saved wEnemyStatLevels
+wEnemySwitchSimSubStatus5:: db
+wEnemySwitchSimParty:: ds 2 ; saved wCurPartyMon, wCurPartyLevel
+
+SECTION "Enemy Switch Sim Mon", WRAMX
+
+wEnemySwitchSimMon:: ds wEnemyMonEnd - wEnemyMon ; saved wEnemyMon

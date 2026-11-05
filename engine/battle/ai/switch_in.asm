@@ -1036,6 +1036,231 @@ OTSwitchIsInFarList:
 	and a
 	ret
 
+DEF wEnemySwitchSimStats EQUS "wEnemySwitchSavedMonSpecies" ; 11 bytes: wEnemyStats
+DEF wEnemySwitchSimTypes EQUS "wEnemySwitchSavedMonBoostedSpclDef" ; 2 bytes: wEnemyMonType1-2
+
+OTSwitchFindWinningReplacement:
+; Find an alive OT mon other than the active one that wins a 1-on-1 against
+; each candidate is loaded as the active enemy mon
+; (its own stats, healing and boosts, with no stat stages)
+; checked with GetDamageRaceHits
+; among the winners, the one that takes the least damage
+; from the player's last move is picked
+; ties go to the earlier party slot
+; Returns the 0-based party index in b, or -1 if no mon wins.
+	ldh a, [hBattleTurn]
+	push af
+	call OTSwitchSimSave
+	ld a, -1
+	ld [wEnemySwitchSimBestIndex], a
+	ld [wEnemySwitchSimBestMatchup], a ; 255: none yet
+	xor a
+	ld [wEnemySwitchSimCandidate], a
+.loop
+	ld a, [wEnemySwitchSimCandidate]
+	ld b, a
+	ld a, [wOTPartyCount]
+	cp b
+	jr z, .done
+	ld a, [wCurOTMon]
+	cp b
+	jr z, .next
+	call OTSwitchIsAliveCandidate
+	jr nc, .next
+	ld a, [wEnemySwitchSimCandidate]
+	ld b, a
+	call OTSwitchSimLoadCandidate
+	call OTSwitchSimWins
+	jr nc, .next
+	ld a, [wEnemySwitchSimCandidate]
+	ld b, a
+	call OTSwitchSimLastMoveMatchup
+	ld c, a
+	ld a, [wEnemySwitchSimBestMatchup]
+	cp c
+	jr c, .next ; a better matchup is already known
+	jr z, .next ; tie: keep the earlier mon
+	ld a, c
+	ld [wEnemySwitchSimBestMatchup], a
+	ld a, [wEnemySwitchSimCandidate]
+	ld [wEnemySwitchSimBestIndex], a
+.next
+	ld hl, wEnemySwitchSimCandidate
+	inc [hl]
+	jr .loop
+
+.done
+	call OTSwitchSimRestore
+	ld a, [wEnemySwitchSimBestIndex]
+	ld b, a
+	pop af
+	ldh [hBattleTurn], a
+	ret
+
+OTSwitchSimSave:
+; Save the active enemy mon and its stat state before simulating candidates.
+	ld hl, wEnemyMon
+	ld de, wEnemySwitchSimMon
+	call OTSwitchSimCopyMon
+	ld hl, wEnemyStats
+	ld de, wEnemySwitchSimStats
+	ld bc, 11
+	call CopyBytes
+	ld hl, wEnemyStatLevels
+	ld de, wEnemySwitchSimLevels
+	ld bc, NUM_LEVEL_STATS
+	call CopyBytes
+	ld a, [wEnemySubStatus5]
+	ld [wEnemySwitchSimSubStatus5], a
+	ld hl, wEnemyMonType1
+	ld de, wEnemySwitchSimTypes
+	ld bc, 2
+	call CopyBytes
+	ld a, [wCurPartyMon]
+	ld [wEnemySwitchSimParty], a
+	ld a, [wCurPartyLevel]
+	ld [wEnemySwitchSimParty + 1], a
+	ret
+
+OTSwitchSimRestore:
+; Put back the state saved by OTSwitchSimSave. The species variables the
+; candidate loads overwrote are scratch, so they go back to the active species.
+	ld hl, wEnemySwitchSimMon
+	ld de, wEnemyMon
+	call OTSwitchSimRestoreMon
+	ld hl, wEnemySwitchSimStats
+	ld de, wEnemyStats
+	ld bc, 11
+	call CopyBytes
+	ld hl, wEnemySwitchSimLevels
+	ld de, wEnemyStatLevels
+	ld bc, NUM_LEVEL_STATS
+	call CopyBytes
+	ld a, [wEnemySwitchSimSubStatus5]
+	ld [wEnemySubStatus5], a
+	ld hl, wEnemySwitchSimTypes
+	ld de, wEnemyMonType1
+	ld bc, 2
+	call CopyBytes
+	ld a, [wEnemySwitchSimParty]
+	ld [wCurPartyMon], a
+	ld a, [wEnemySwitchSimParty + 1]
+	ld [wCurPartyLevel], a
+	ld a, [wEnemyMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+	ld [wTempEnemyMonSpecies], a
+	jmp GetBaseData ; base data of the active mon again
+
+OTSwitchSimCopyMon:
+; Copy wEnemyMon (in WRAM bank 1) to wEnemySwitchSimMon (another WRAM bank).
+; Each byte goes through a bank switch, since both can't be mapped at once.
+	ldh a, [rSVBK]
+	push af
+	ld c, wEnemyMonEnd - wEnemyMon
+.loop
+	ld a, BANK(wEnemyMon)
+	ldh [rSVBK], a
+	ld a, [hli]
+	push af
+	ld a, BANK(wEnemySwitchSimMon)
+	ldh [rSVBK], a
+	pop af
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .loop
+	pop af
+	ldh [rSVBK], a
+	ret
+
+OTSwitchSimRestoreMon:
+; Copy wEnemySwitchSimMon back to wEnemyMon (see OTSwitchSimCopyMon).
+	ldh a, [rSVBK]
+	push af
+	ld c, wEnemyMonEnd - wEnemyMon
+.loop
+	ld a, BANK(wEnemySwitchSimMon)
+	ldh [rSVBK], a
+	ld a, [hli]
+	push af
+	ld a, BANK(wEnemyMon)
+	ldh [rSVBK], a
+	pop af
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .loop
+	pop af
+	ldh [rSVBK], a
+	ret
+
+OTSwitchSimLoadCandidate:
+; Load OT party member b into wEnemyMon with no stat stages, Encore or
+; choice lock, and work out its battle stats.
+	ld a, b
+	ld [wCurPartyMon], a
+	ld hl, wOTPartyMon1Level
+	call GetPartyLocation
+	ld a, [hl]
+	ld [wCurPartyLevel], a
+	ld hl, wOTPartySpecies
+	ld c, b
+	ld b, 0
+	add hl, bc
+	ld a, [hl]
+	ld [wTempEnemyMonSpecies], a
+	farcall LoadEnemyMon
+	ld a, BASE_STAT_LEVEL
+	ld b, NUM_LEVEL_STATS
+	ld hl, wEnemyStatLevels
+.reset_levels
+	ld [hli], a
+	dec b
+	jr nz, .reset_levels
+	xor a
+	ld [wEnemySubStatus5], a
+	ld a, [wBaseType1]
+	ld [wEnemyMonType1], a
+	ld a, [wBaseType2]
+	ld [wEnemyMonType2], a
+	farjp CalcEnemyStats
+
+OTSwitchSimWins:
+; Return carry if the simulated enemy mon wins the 1-on-1: it needs fewer
+; hits to KO the player's mon, or the same number and it's faster.
+	farcall GetDamageRaceHits ; b = its hits, c = the player's hits
+	ld a, b
+	cp c
+	jr c, .wins
+	ret nz
+	farcall DoesAIOutSpeedPlayer
+	ret
+.wins
+	scf
+	ret
+
+OTSwitchSimLastMoveMatchup:
+; Return in a the type matchup of the player's last move against OT party
+; member b. A last move that isn't damaging counts as neutral (EFFECTIVE).
+	ld a, [wLastPlayerMove]
+	and a
+	jr z, .none
+	dec a
+	ld hl, Moves
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld de, wPlayerMoveStruct
+	ld a, BANK(Moves)
+	call FarCopyBytes
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	jr z, .none
+	jmp OTSwitchLastMoveMatchup
+.none
+	ld a, EFFECTIVE
+	ret
+
 OTSwitchFindKOReplacementAttacker:
 ; Find the OT mon whose own type is super effective against the player's mon
 ; and that has a damaging move that's super effective against it. Among

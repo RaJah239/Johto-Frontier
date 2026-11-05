@@ -124,10 +124,17 @@ AI_SwitchOrTryItem:
 	jr nz, .switch_out_of_super_effective
 	call DoesAIOutSpeedPlayer
 	jr c, DontSwitch
+
 .switch_out_of_super_effective
-	callfar FindMonInOTPartyToSwitchIntoBattle
-	inc b
+	; switch only to a mon that wins the 1-on-1
+	; (healing and boosts included),
+	; preferring the one that takes the least damage from the last move;
+	; if none wins, stay in
+	callfar OTSwitchFindWinningReplacement
 	ld a, b
+	cp -1
+	jr z, DontSwitch
+	inc a
 	ld [wEnemySwitchMonIndex], a
 	jmp AI_TrySwitch
 
