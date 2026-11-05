@@ -7925,6 +7925,7 @@ InitEnemyTrainer:
 
 .notCal
 	callfar ReadTrainerParty
+	farcall ShuffleOTParty
 .ok
 	ld de, vTiles2
 	callfar GetBattleTrainerPic
@@ -7966,7 +7967,7 @@ InitEnemyTrainer:
 InitEnemy:
 	ld a, [wOtherTrainerClass]
 	and a
-	jr nz, InitEnemyTrainer ; trainer
+	jmp nz, InitEnemyTrainer ; trainer
 .InitEnemyWildmon
 	ld a, WILD_BATTLE
 	ld [wBattleMode], a
