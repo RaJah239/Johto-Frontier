@@ -961,6 +961,23 @@ CheckPartyShift:
 	and a
 	ret
 
+BillsPC_BlankItemTiles:
+; Blank the item name tiles (vTiles5 $31-$3a, VRAM bank 1), which are shown in
+; the item rows whenever no item name is loaded.
+	ld hl, wBillsPC_ItemVWF
+	ld bc, 10 tiles
+	xor a
+	call ByteFill
+	ld a, 1
+	ldh [rVBK], a
+	ld hl, vTiles5 tile $31
+	ld de, wBillsPC_ItemVWF
+	ld c, 10
+	call BillsPC_Get2bpp
+	xor a
+	ldh [rVBK], a
+	ret
+
 _GetCursorMon:
 	call BillsPC_UpdateCursorLocation
 
@@ -1001,6 +1018,7 @@ _GetCursorMon:
 	xor a
 	ret
 .reset_item
+	call BillsPC_BlankItemTiles
 	ld a, -1
 	ld [wShadowOAMSprite30], a
 	or 1
