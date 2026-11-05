@@ -3,7 +3,7 @@ NewPokedexEntry:
 	push af
 	xor a
 	ld [wPokedexShinyToggle], a
- 	ld [wPokedexEntryPageNum], a
+	ld [wPokedexEntryPageNum], a
 
 	ldh [hMapAnims], a
 	call LowVolume
@@ -20,10 +20,6 @@ NewPokedexEntry:
 	ldh [hSCY], a
 	ld [wPokedexStatus], a
 	farcall _NewPokedexEntry
-	call WaitPressAorB_BlinkCursor
-	ld a, 1 ; page 2
-	ld [wPokedexStatus], a
-	farcall DisplayDexEntry
 	call WaitPressAorB_BlinkCursor
 	pop af
 	ld [wPokedexStatus], a
