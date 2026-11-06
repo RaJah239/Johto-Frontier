@@ -311,7 +311,7 @@ ReadTrainerPartyPieces:
 ; end?
 	call GetNextTrainerDataByte
 	cp -1
-	ret z
+	jmp z, .shuffle_party
 
 ; level
 	call SetDynamicLevel
@@ -595,6 +595,122 @@ ReadTrainerPartyPieces:
 	ld [wRandomTrainerNumPokemon], a
 	jmp nz, .start_random
 	pop hl
+
+.shuffle_party
+	; Randomize party order if TRAINERTYPE_RANDOM_ORDER is set
+	ld a, [wOtherTrainerType]
+	bit TRAINERTYPE_RANDOM_ORDER_F, a
+	jmp z, .shuffle_done
+
+	ld a, [wOTPartyCount]
+	cp 2
+	jmp c, .shuffle_done
+
+	; Fisher-Yates shuffle
+	ld a, [wOTPartyCount]
+	dec a
+	ld b, a  ; b = i (current position)
+
+.shuffle_outer
+	; pick j in [0, i]
+	push bc
+	ld a, b
+	inc a
+	call RandomRange
+	pop bc
+	ld c, a  ; c = j
+
+	; if i == j, skip swap
+	ld a, b
+	cp c
+	jr z, .shuffle_skip
+
+	; swap party_struct blocks (PARTYMON_STRUCT_LENGTH bytes)
+	push bc
+	ld a, b
+	ld hl, wOTPartyMons
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call AddNTimes
+	push hl  ; save addr of mon i
+	ld a, c
+	ld hl, wOTPartyMons
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call AddNTimes
+	ld d, h
+	ld e, l  ; de = addr of mon j
+	pop hl  ; hl = addr of mon i
+	ld b, PARTYMON_STRUCT_LENGTH
+.swap_struct
+	ld a, [hl]
+	ld [wStringBuffer1], a
+	ld a, [de]
+	ld [hl], a
+	ld a, [wStringBuffer1]
+	ld [de], a
+	inc hl
+	inc de
+	dec b
+	jr nz, .swap_struct
+	pop bc
+
+	; swap nicknames (MON_NAME_LENGTH bytes)
+	push bc
+	ld a, b
+	ld hl, wOTPartyMonNicknames
+	ld bc, MON_NAME_LENGTH
+	call AddNTimes
+	push hl
+	ld a, c
+	ld hl, wOTPartyMonNicknames
+	ld bc, MON_NAME_LENGTH
+	call AddNTimes
+	ld d, h
+	ld e, l
+	pop hl
+	ld b, MON_NAME_LENGTH
+.swap_nickname
+	ld a, [hl]
+	ld [wStringBuffer1], a
+	ld a, [de]
+	ld [hl], a
+	ld a, [wStringBuffer1]
+	ld [de], a
+	inc hl
+	inc de
+	dec b
+	jr nz, .swap_nickname
+	pop bc
+
+	; swap species
+	push bc
+	ld a, b
+	ld hl, wOTPartySpecies
+	add l
+	ld l, a
+	jr nc, .no_carry_i
+	inc h
+.no_carry_i
+	ld a, c
+	ld de, wOTPartySpecies
+	add e
+	ld e, a
+	jr nc, .no_carry_j
+	inc d
+.no_carry_j
+	ld a, [hl]
+	ld [wStringBuffer1], a
+	ld a, [de]
+	ld [hl], a
+	ld a, [wStringBuffer1]
+	ld [de], a
+	pop bc
+
+.shuffle_skip
+	dec b
+	jmp nz, .shuffle_outer
+
+.shuffle_done
+.no_shuffle
 	ret
 
 .TrainerLevelEVValues:
