@@ -2910,17 +2910,26 @@ TryToRunAwayFromBattle:
 	jr nz, .trainer_battle_info
 
 	; can't run from Shiny Pokemon
+	push hl
+	push de
 	call BattleCheckEnemyShininess
+	pop de
+	pop hl
 	jr c, .shiny_cant_escape
 
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
 	jr nz, .cant_escape
-	jr .can_escape
+	newfarcall TryWildFleeBattle
+	jr c, .can_escape
+	and a
+	ret
 
 .cant_escape
 	ld hl, BattleText_CantEscape
 	call StdBattleTextbox
+	ld a, TRUE
+	ld [wFailedToFlee], a
 	call LoadTilemapToTempTilemap
 	and a
 	ret
@@ -4733,6 +4742,8 @@ BattleMenu_Run:
 	ld hl, wBattleMonSpeed
 	ld de, wEnemyMonSpeed
 	call TryToRunAwayFromBattle
+	ld a, FALSE
+	ld [wFailedToFlee], a
 	ret c
 	ld a, [wBattlePlayerAction]
 	and a ; BATTLEPLAYERACTION_USEMOVE?
@@ -7704,6 +7715,7 @@ CleanUpBattleRAM:
 	ld [wAttackMissed], a
 	ld [wTempWildMonSpecies], a
 	ld [wOtherTrainerClass], a
+	ld [wFailedToFlee], a
 	ld [wNumFleeAttempts], a
 	ld [wForcedSwitch], a
 	ld [wPartyMenuCursor], a

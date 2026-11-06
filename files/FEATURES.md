@@ -109,7 +109,6 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Print stat gain on level up
 - Max level of Pokémon is 50
 - All Pokémon obey regardless if traded or not
-- Can 100% run from any wild encounter
 - Can't run from wild Shiny Pokémon
 - Shiny Pokémon, like all other Pokémon can have all hidden power types except Normal and Fairy
 - Shiny Pokémon chance are now 1/256
