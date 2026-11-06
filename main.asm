@@ -202,6 +202,14 @@ SECTION "Battle Move Info", ROMX
 INCLUDE "engine/battle/move_info.asm"
 
 
+SECTION "Battle Move Order", ROMX
+INCLUDE "engine/battle/move_order.asm"
+
+
+SECTION "Battle Link Record", ROMX
+INCLUDE "engine/battle/link_record.asm"
+
+
 SECTION "Turn End Effects", ROMX
 INCLUDE "engine/battle/turn_end_effects.asm"
 
