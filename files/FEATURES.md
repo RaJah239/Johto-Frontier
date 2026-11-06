@@ -167,7 +167,6 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 ## Item Changes
 - Light Ball doubles Pikachu's Attack as well as Special Attack
 - Everstone both prevents evolution and boosts unevolved Pokémon's Defense and Special Defense
-- Repels stops all encounters, regardless of level
 - Friend Ball increases happiness by 150
 - Lure Ball multiply catch rate by 4 if this is a fishing rod battle
 - Fast Ball multiply catch rate by 4 if enemy's base speed more than or equal to 100

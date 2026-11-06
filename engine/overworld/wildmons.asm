@@ -369,7 +369,7 @@ rept 4
 	dec hl
 endr
 
-	ld a, 0
+	ld a, [wCurPartyLevel]
 	cp [hl]
 	jr nc, .encounter
 	and a
