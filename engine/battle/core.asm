@@ -5176,7 +5176,7 @@ MoveSelectionScreen:
 	ld a, [wLinkMode]
 	and a
 	jr nz, .okay
-	ld b, D_DOWN | D_UP | A_BUTTON | B_BUTTON | SELECT
+	ld b, D_DOWN | D_UP | A_BUTTON | B_BUTTON | SELECT | START
 
 .okay
 	ld a, b
@@ -5220,6 +5220,8 @@ MoveSelectionScreen:
 	jmp nz, .pressed_down
 	bit SELECT_F, a
 	jmp nz, .pressed_select
+	bit START_F, a
+	jmp nz, .pressed_start
 	bit B_BUTTON_F, a
 	; A button
 	push af
@@ -5411,6 +5413,84 @@ MoveSelectionScreen:
 	ld a, [wMenuCursorY]
 	ld [wSwappingMove], a
 	jmp MoveSelectionScreen
+
+.pressed_start
+; Show Eff% and move description under the move info box
+	ld a, [wMoveSelectionMenuType]
+	and a
+	jmp nz, .menu_loop
+
+; Preserve cursor so the redraw restores the same move.
+	ld a, [wMenuCursorY]
+	dec a
+	ld [wCurMoveNum], a
+
+; Get hovered move id into wCurSpecies for description/Eff lookups
+; wMenuCursorY is 1-based; wBattleMonMoves index is cursor - 1.
+	ld a, [wMenuCursorY]
+	dec a
+	ld c, a
+	ld b, 0
+	ld hl, wBattleMonMoves
+	add hl, bc
+	ld a, [hl]
+	and a
+	jmp z, .menu_loop
+	ld [wCurSpecies], a
+	ld [wCurPlayerMove], a
+
+	call ClearSprites
+	xor a
+	ldh [hBGMapMode], a
+	hlcoord 0, 12
+	lb bc, 4, 18
+	call Textbox
+
+; Eff: X% (effect chance, fraction as percent)
+	ld de, .eff_label
+	hlcoord 1, 13
+	call PlaceString
+
+	ld a, [wCurSpecies]
+	ld bc, MOVE_LENGTH
+	ld hl, (Moves + MOVE_CHANCE) - MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	cp 1
+	jr c, .no_eff
+	call ConvertPercentages
+	ld [wBuffer1], a
+	ld de, wBuffer1
+	lb bc, 1, 3
+	hlcoord 6, 13
+	call PrintNum
+	ld [hl], "<%>"
+	jr .do_desc
+
+.no_eff
+	ld de, .blank
+	hlcoord 6, 13
+	call PlaceString
+
+.do_desc
+	hlcoord 1, 15
+	predef PrintMoveDescription
+	ld a, $1
+	ldh [hBGMapMode], a
+	call WaitBGMap
+
+.wait_ab
+	call DelayFrame
+	call GetJoypad
+	ldh a, [hJoyPressed]
+	and A_BUTTON | B_BUTTON
+	jr z, .wait_ab
+	call SafeLoadTempTilemapToTilemap
+	jmp MoveSelectionScreen
+
+.eff_label db "Eff: @"
+.blank db "---@"
 
 CheckPlayerHasUsableMoves:
 	ld a, STRUGGLE
