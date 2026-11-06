@@ -189,18 +189,23 @@ endc
 
 .EncounterRate:
 	call GetMapEncounterRate
-	call ApplyCyclingEffectOnEncounterRate
+	call ApplyMovementEffectOnEncounterRate
 	call ApplyMusicEffectOnEncounterRate
 	call ApplyCleanseTagEffectOnEncounterRate
 	call Random
 	cp b
 	ret
 
-ApplyCyclingEffectOnEncounterRate::
-; Cycling doubles encounter rate.
+ApplyMovementEffectOnEncounterRate::
+; Cycling and running double encounter rate.
 	ld a, [wPlayerState]
 	cp PLAYER_BIKE
-	ret nz
+	jr z, .double
+
+	ld a, [wPlayerRunning]
+	and a
+	ret z
+.double
 	sla b
 	ret
 
