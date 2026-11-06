@@ -210,6 +210,10 @@ SECTION "Battle Link Record", ROMX
 INCLUDE "engine/battle/link_record.asm"
 
 
+SECTION "Wild Flee", ROMX
+INCLUDE "engine/battle/wild_flee.asm"
+
+
 SECTION "Turn End Effects", ROMX
 INCLUDE "engine/battle/turn_end_effects.asm"
 

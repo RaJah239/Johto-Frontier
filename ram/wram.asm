@@ -2777,12 +2777,13 @@ wUsePPUp::
 wd265:: ; mobile
 	db
 
+wFailedToFlee:: db
 wNumFleeAttempts:: db
 wMonTriedToEvolve:: db
 
 wTimeOfDay:: db
 
-	ds 3
+	ds 2
 
 
 SECTION "Enemy Party", WRAMX
