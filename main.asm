@@ -198,6 +198,10 @@ SECTION "Battle Core 3", ROMX
 INCLUDE "engine/battle/core3.asm"
 
 
+SECTION "Battle Move Info", ROMX
+INCLUDE "engine/battle/move_info.asm"
+
+
 SECTION "Turn End Effects", ROMX
 INCLUDE "engine/battle/turn_end_effects.asm"
 
