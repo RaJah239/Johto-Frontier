@@ -761,6 +761,51 @@ StatsInfoBox:
 	ld hl, wEnemyMonMaxHP
 	jmp StatsInfoBoxLoop
 
+PlayerInfoPageInfoBox:
+	hlcoord 0, 0
+	ld b, 14
+	ld c, 18
+	call Textbox
+	ld b, 14
+	ld c, 18
+
+	hlcoord 0, 0
+	ld b, 2
+	ld c, 18
+	call Textbox
+
+	farcall DisplayPlayerNameAndAbility
+
+	ld de, .PlayerItemString
+	hlcoord 1, 1
+	call PlaceString
+
+	ld de, .PlayerAbilityString
+	hlcoord 1, 5
+	call PlaceString
+
+	ld de, .NoItem
+	hlcoord 2, 2
+	ld a, [wBattleMonItem]
+	and a
+	jr z, .printItemName
+	ld [wNamedObjectIndex], a
+	call GetItemName
+	hlcoord 2, 2
+	call PlaceString
+	jr .doneItem
+
+.printItemName
+	call PlaceString
+
+.doneItem
+	call WaitBGMap
+	jmp SetDefaultBGPAndOBP
+
+.PlayerItemString db "Your Item:@"
+.NoItem db "None@"
+.PlayerAbilityString db "Ability Info:@"
+
 FoeDetailsPageInfoBox:
 	hlcoord 0, 0
 	ld b, 14
@@ -1396,18 +1441,20 @@ FieldInfoBoxPlaceElement: ; input: bc -> coords, hl -> Field text, de -> Count
 	jmp PlaceString
 
 MainText:
-.page1:         db "◀ Page 1/6 ▶@"
+.page1:         db "◀ Page 1/7 ▶@"
 .page1_content: db " Actual Stats @"
-.page2:         db "◀ Page 2/6 ▶@"
+.page2:         db "◀ Page 2/7 ▶@"
 .page2_content: db " Stat Changes @"
-.page3:         db "◀ Page 3/6 ▶@"
+.page3:         db "◀ Page 3/7 ▶@"
 .page3_content: db "Field/Status 1@"
-.page4:         db "◀ Page 4/6 ▶@"
+.page4:         db "◀ Page 4/7 ▶@"
 .page4_content: db "Field/Status 2@"
-.page5:         db "◀ Page 5/6 ▶@"
-.page5_content: db " Enemy Details@"
-.page6:         db "◀ Page 6/6 ▶@"
-.page6_content: db "   Ability    @"
+.page5:         db "◀ Page 5/7 ▶@"
+.page5_content: db " Player Info  @"
+.page6:         db "◀ Page 6/7 ▶@"
+.page6_content: db " Enemy Details@"
+.page7:         db "◀ Page 7/7 ▶@"
+.page7_content: db "   Ability    @"
 
 .player: db " Player @"
 .enemy:  db " Enemy @"
@@ -1488,7 +1535,7 @@ InfoBoxLeftPress:
 
 	ld a, [wTrainerInfoPage]
 	and a
-	jr z, .jump_to_page_5
+	jr z, .jump_to_page_6
 	cp 1
 	jr z, .jump_to_page_1
 	cp 2
@@ -1498,7 +1545,9 @@ InfoBoxLeftPress:
 	cp 4
 	jr z, .jump_to_page_4
 	cp 5
-	jr z, .jump_to_page_6
+	jr z, .jump_to_page_5
+	cp 6
+	jr z, .jump_to_page_7
 	ret
 .jump_to_page_4
 	call DecreasePage
@@ -1529,12 +1578,17 @@ InfoBoxLeftPress:
 .jump_to_page_5
 	call DecreasePage
 	call UpdatePageText
-	jmp FoeAbilityPageInfoBox
+	jmp PlayerInfoPageInfoBox
+
+.jump_to_page_7
+	call DecreasePage
+	call UpdatePageText
+	jmp FoeDetailsPageInfoBox
 
 .jump_to_page_6
 	call DecreasePage
 	call UpdatePageText
-	jmp FoeDetailsPageInfoBox
+	jmp FoeAbilityPageInfoBox
 
 ; ========================
 ; Right button navigation
@@ -1555,6 +1609,8 @@ InfoBoxRightPress:
 	jr z, .jump_to_page_5
 	cp 4
 	jr z, .jump_to_page_6
+	cp 5
+	jr z, .jump_to_page_7
 .jump_to_page_1
 	call IncreasePage
 	call UpdatePageText
@@ -1584,9 +1640,14 @@ InfoBoxRightPress:
 .jump_to_page_5
 	call IncreasePage
 	call UpdatePageText
-	jmp FoeDetailsPageInfoBox
+	jmp PlayerInfoPageInfoBox
 
 .jump_to_page_6
+	call IncreasePage
+	call UpdatePageText
+	jmp FoeDetailsPageInfoBox
+
+.jump_to_page_7
 	call IncreasePage
 	call UpdatePageText
 	jmp FoeAbilityPageInfoBox
@@ -1597,7 +1658,7 @@ InfoBoxRightPress:
 IncreasePage:
 	ld a, [wTrainerInfoPage]
 	inc a
-	cp 6                     ; Pages 0..5 (inclusive)
+	cp 7                     ; Pages 0..6 (inclusive)
 	jr c, .store
 	xor a                    ; Wrap to page 0
 .store
@@ -1608,7 +1669,7 @@ DecreasePage:
 	ld a, [wTrainerInfoPage]
 	or a
 	jr nz, .dec
-	ld a, 6                  ; Wrap to last page
+	ld a, 7                  ; Wrap to last page
 .dec
 	dec a
 	ld [wTrainerInfoPage], a
@@ -1631,6 +1692,8 @@ UpdatePageText:
 	jr z, .page_5
 	cp 5
 	jr z, .page_6
+	cp 6
+	jr z, .page_7
 
 ; Default: page 0
 	ld de, MainText.page1
@@ -1666,6 +1729,12 @@ UpdatePageText:
 	ld de, MainText.page6
 	call PlaceString
 	ld de, MainText.page6_content
+	jr .done
+
+.page_7
+	ld de, MainText.page7
+	call PlaceString
+	ld de, MainText.page7_content
 .done
 	hlcoord 4, 16
 	jmp PlaceString

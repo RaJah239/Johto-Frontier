@@ -343,6 +343,53 @@ DisplayFoeNameAndAbility:
 	hlcoord 6, 1
 	jmp PlaceFarString
 
+DisplayPlayerNameAndAbility:
+	ld a, [wBattleMonSpecies]
+	ld b, a
+	call GetDexEntryPointer
+	ld a, b
+	push af
+
+; place species
+	hlcoord 1, 11
+	call PlaceFarString
+
+; clear area
+	push de
+	lb bc, 4, SCREEN_WIDTH - 2
+	hlcoord 1, 11
+	call ClearBox
+	pop de
+
+; do stuff?
+	push de
+	pop hl
+	pop bc
+	ld a, [wBattleMonSpecies]
+	ld [wCurSpecies], a
+	ld a, b
+	push af
+	push de
+	pop af
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	push hl
+	dec hl
+
+; the whole entry is one page
+	pop de
+	push de
+	hlcoord 1, 7
+	lb bc, 6, SCREEN_WIDTH - 2
+	call ClearBox
+	pop de
+	inc de
+	pop af
+	hlcoord 1, 7
+	jmp PlaceFarString
+
 GetDexEntryPointer:
 ; return dex entry pointer b:de
 	push hl
