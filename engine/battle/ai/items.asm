@@ -76,19 +76,19 @@ AI_SwitchOrTryItem:
 .not_choice_locked_nve
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
-	jr nz, DontSwitch
+	jmp nz, DontSwitch
 
 	ld a, [wEnemyWrapCount]
 	and a
-	jr nz, DontSwitch
+	jmp nz, DontSwitch
 
 	; don't switch if under 1/3 max HP: let it die
 	call CheckEnemyBelowThirdHP
-	jr c, DontSwitch
+	jmp c, DontSwitch
 
 	; don't switch while our own mon is boosted (+3 or more in any stat)
 	call CheckEnemyStatAtPlus3
-	jr c, DontSwitch
+	jmp c, DontSwitch
 
 	; Clean Sweep: if the player's active mon has +4 or more in any stat,
 	; switch in a fresh CleanSweep mon, even if one is already out.
@@ -109,6 +109,33 @@ AI_SwitchOrTryItem:
 	call CheckEnemySetUpPlus2
 	jr c, DontSwitch
 
+	; Start of the AI's turn: if the active mon can't win the 1v1
+	; battle, switch out 80% of the time.
+	; "Can't win" = it needs more hits to KO the player's mon than
+	; the player needs to KO it (GetDamageRaceHits, b/c), or the
+	; same number of hits but it isn't faster. 255 = can't KO at all.
+	; If no bench mon wins the 1v1 either, stay in and fall through
+	; to the normal switch/item logic below.
+	farcall GetDamageRaceHits ; b = our hits to KO, c = player's hits to KO
+	ld a, b
+	cp c
+	jr c, .can_win_1v1
+	jr nz, .cant_win_1v1
+	call DoesAIOutSpeedPlayer
+	jr c, .can_win_1v1
+.cant_win_1v1
+	call Random
+	cp 80 percent
+	jr nc, .can_win_1v1
+	callfar OTSwitchFindWinningReplacement
+	ld a, b
+	cp -1
+	jr z, .can_win_1v1
+	inc a
+	ld [wEnemySwitchMonIndex], a
+	jmp AI_TrySwitch
+
+.can_win_1v1
 	; If the player hit our active mon with a super-effective move,
 	; the player has a good move against it: always switch.
 	ld a, [wEnemyHitSuperEffective]
