@@ -311,7 +311,7 @@ ReadTrainerPartyPieces:
 ; end?
 	call GetNextTrainerDataByte
 	cp -1
-	ret z
+	jmp z, .shuffle_party
 
 ; level
 	call SetDynamicLevel
@@ -595,7 +595,13 @@ ReadTrainerPartyPieces:
 	ld [wRandomTrainerNumPokemon], a
 	jmp nz, .start_random
 	pop hl
-	ret
+
+.shuffle_party
+; TRAINERTYPE_RANDOM_ORDER: put the party in a random order
+	ld a, [wOtherTrainerType]
+	bit TRAINERTYPE_RANDOM_ORDER_F, a
+	ret z
+	jr ShuffleOTParty
 
 .TrainerLevelEVValues:
 	db  9,  31 ; lv  9-13
@@ -689,7 +695,8 @@ ReadPlayerPartyAsTrainerParty:
 ShuffleOTParty:
 ; Put the OT party in a random order (Fisher-Yates), moving each mon's
 ; species, party struct, OT name and nickname together. Used by the Copy
-; Trainer (CAL / CAL_F), whose party is a copy of the player's.
+; Trainer (CAL / CAL_F), whose party is a copy of the player's, and by
+; trainers with TRAINERTYPE_RANDOM_ORDER.
 	ld a, [wOTPartyCount]
 	and a
 	ret z
