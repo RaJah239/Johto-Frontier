@@ -196,4 +196,5 @@ SFX:
 	dba Sfx_Thunderbolt
 	dba Sfx_StatUp
 	dba Sfx_StatDown
+	dba Sfx_AbilitySlideout
 	assert_table_length NUM_SFX

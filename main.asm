@@ -190,6 +190,9 @@ INCLUDE "engine/battle/ai/ko_checks.asm"
 SECTION "Move Damage Preview", ROMX
 INCLUDE "engine/battle/damage_preview.asm"
 
+SECTION "Ability Popup", ROMX
+INCLUDE "engine/battle/ability_popup.asm"
+
 SECTION "Battle Core 2", ROMX
 INCLUDE "engine/battle/core2.asm"
 

@@ -194,4 +194,5 @@
 	const SFX_THUNDERBOLT
 	const SFX_STAT_UP
 	const SFX_STAT_DOWN
+	const SFX_ABILITY_SLIDEOUT
 DEF NUM_SFX EQU const_value

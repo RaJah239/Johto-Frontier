@@ -99,6 +99,115 @@ PlaceNextVWFChar::
 	or 1
 	ret
 
+PlaceNextVWFCharInverted::
+; Like PlaceNextVWFChar, but clears the character's pixels to color 0 instead
+; of setting them to color 3: white text on a black (color 3) background.
+	inc de
+	cp "@"
+	ret z
+
+	push bc
+	push de
+
+	push hl
+	sub FIRST_VWF_CHAR
+	jr nc, .valid
+	ld a, FAILSAFE_VWF_CHAR - FIRST_VWF_CHAR
+.valid
+	; get VWFWidths + a
+	ld e, a
+	ld d, 0
+	ld hl, VWFWidths
+	add hl, de
+	ld b, [hl] ; b = width in pixels
+	; get VWFCharacterGFX + a * LEN_1BPP_TILE
+	ld h, d
+	ld l, e
+	add hl, hl ; * 2
+	add hl, hl ; * 4
+	add hl, hl ; * 8
+	ld de, VWFCharacterGFX
+	add hl, de
+	ld d, h ; de = 1bpp tile gfx
+	ld e, l
+	pop hl
+
+	push hl
+
+	push bc
+	; one tile is 16 bytes, advance hl by bc>>3 tiles
+	ld b, 0
+	ld a, c
+	and %11111000
+	add a
+	rl b
+	ld c, a
+	add hl, bc
+	pop bc
+
+	push bc
+	ld a, c
+	and %00000111
+	ld c, a
+	ld a, 8
+.insert_loop
+	push af
+	ld a, [de]
+	inc de
+	push de
+	ld d, a
+	ld e, 0
+	push bc
+	inc c
+.shift_loop
+	dec c
+	jr z, .shift_done
+	srl d
+	rr e
+	jr .shift_loop
+.shift_done
+	pop bc
+	inc hl
+	push hl
+	; clear the character's pixels in each bitplane (leave the rest alone)
+	ld a, d
+	cpl
+	ld d, a
+	and [hl]
+	ld [hld], a
+	ld a, d
+	and [hl]
+	ld [hl], a
+	ld a, e
+	cpl
+	ld de, 1 tiles + 1
+	add hl, de
+	ld d, a
+	and [hl]
+	ld [hld], a
+	ld a, d
+	and [hl]
+	ld [hl], a
+	pop hl
+	pop de
+	pop af
+	inc hl
+	dec a
+	jr nz, .insert_loop
+	pop bc
+
+	ld a, b
+	add c
+	ld c, a
+
+	pop hl
+	pop de
+	pop af ; from push bc
+
+	ld b, a
+	or 1
+	ret
+
 _GetNextVWFLength::
 ; Returns length of character a (just read from [de]) in c.
 ; Advances de to the next character.

@@ -106,14 +106,20 @@ DEF SPDSPCDV_SHINY EQU $FF
 	const BATTLETYPE_TRICK_ROOM
 	const BATTLETYPE_TYPELESS
 
-; ability popup (ShowAbilityPopup in engine/battle/misc.asm)
-DEF ABILITY_POPUP_WIDTH EQU 12 ; box width in tiles, borders included
-DEF ABILITY_POPUP_HEIGHT EQU 4 ; box height in tiles, 2 of them text
-DEF ABILITY_POPUP_TEXT_LENGTH EQU 15 ; chars that fit on a line
-DEF ABILITY_POPUP_SLIDE_FRAMES EQU 10
-DEF ABILITY_POPUP_HOLD_FRAMES EQU 60 ; how many frames to have the box appear
-DEF ABILITY_POPUP_OAM_SPRITES EQU 12 ; both party ball strips
-DEF ABILITY_POPUP_OAM_BYTES EQU 48
+; ability popup (ShowAbilityPopup in engine/battle/ability_popup.asm)
+DEF ABILITY_SLIDE_WIDTH EQU 10 ; tiles (the player's HUD starts at column 10)
+DEF ABILITY_SLIDE_HEIGHT EQU 2 ; tiles: user's name, ability name
+DEF ABILITY_SLIDE_TILES EQU ABILITY_SLIDE_WIDTH * ABILITY_SLIDE_HEIGHT
+DEF ABILITY_SLIDE_TILE EQU $d4 ; first tile, VRAM bank 1 (borrowed, restored)
+DEF ABILITY_SLIDE_TEXT_WIDTH EQU (ABILITY_SLIDE_WIDTH - 1) * TILE_WIDTH ; pixels
+DEF ABILITY_SLIDE_TEXT_MAX EQU ABILITY_SLIDE_TEXT_WIDTH - 1 ; widest line, pixels
+DEF ABILITY_SLIDE_OVERLAP EQU 10 ; pixels the two lines may overlap when centered
+DEF ABILITY_SLIDE_PLAYER_X EQU 0 ; over the player's backpic
+DEF ABILITY_SLIDE_PLAYER_Y EQU 8
+DEF ABILITY_SLIDE_ENEMY_X EQU 10 ; over the enemy's frontpic
+DEF ABILITY_SLIDE_ENEMY_Y EQU 3
+DEF ABILITY_POPUP_NAME_LENGTH EQU 16 ; ability name buffer, "@" included
+DEF ABILITY_POPUP_HOLD_FRAMES EQU 60 ; how many frames the popup stays up
 
 	const_def
 	const ABILITY_POPUP_PLAYER

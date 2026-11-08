@@ -645,17 +645,13 @@ wSomeoneIsRampaging:: db
 
 wBattleEnd::
 
-; battle-only ability popup (ShowAbilityPopup in engine/battle/misc.asm);
+; battle-only ability popup (ShowAbilityPopup in engine/battle/ability_popup.asm);
 ; only in use while that routine is on the stack
-wAbilityPopupStaging::
-	ds SCREEN_WIDTH * ABILITY_POPUP_HEIGHT ; the box, built here once
-wAbilityPopupStagingEnd::
-wAbilityPopupSaved::
-	ds SCREEN_WIDTH * ABILITY_POPUP_HEIGHT ; tiles underneath the box
-wAbilityPopupTopRow:: db ; first row the box covers
-wAbilityPopupRestX:: db ; x position of the box at rest
-wAbilityPopupBoxX:: db ; current x position, signed
-wAbilityPopupSlideTbl:: dw ; slide table for the current phase
+wAbilityPopupSavedTiles:: ds ABILITY_SLIDE_TILES ; tilemap under the popup
+wAbilityPopupSavedAttrs:: ds ABILITY_SLIDE_TILES ; attrmap under the popup
+wAbilityPkmn:: ds MON_NAME_LENGTH + 1 ; nickname + "'s"
+wAbilityName:: ds ABILITY_POPUP_NAME_LENGTH
+wAbilityPopupSide:: db ; ABILITY_POPUP_PLAYER or ABILITY_POPUP_ENEMY
 
 
 SECTION UNION "Miscellaneous", WRAM0
@@ -3731,6 +3727,12 @@ wScratchAttrmap:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
 NEXTU
 wDecompressScratch:: ds $100 tiles
 
+NEXTU
+; battle ability popup (engine/battle/ability_popup.asm), past the HDMA
+; staging area at the start of wScratchTilemap; 16-byte aligned for GDMA
+	ds BG_MAP_WIDTH * BG_MAP_HEIGHT * 2
+wAbilityTiles:: ds ABILITY_SLIDE_TILES tiles
+wAbilityTilesBackup:: ds ABILITY_SLIDE_TILES tiles
 NEXTU
 ; unidentified uses
 w6_d000:: ds $1000
