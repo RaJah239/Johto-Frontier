@@ -20,14 +20,14 @@ CheckPlayerMoveTypeMatchups:
 	push hl
 	dec a
 	ld hl, Moves + MOVE_POWER
-	call GetMoveAttr
+	newfarcall GetMoveAttr
 	and a
 	jr z, .next
 
 	inc hl
-	call GetMoveByte
+	newfarcall GetMoveByte
 	ld hl, wEnemyMonType
-	call CheckTypeMatchup
+	newfarcall CheckTypeMatchup
 	ld a, [wTypeMatchup]
 	ld a, [wTypeMatchup]
 	cp EFFECTIVE
@@ -74,7 +74,7 @@ CheckPlayerMoveTypeMatchups:
 	ld a, [wBattleMonType1]
 	ld b, a
 	ld hl, wEnemyMonType1
-	call CheckTypeMatchup
+	newfarcall CheckTypeMatchup
 	ld a, [wTypeMatchup]
 	cp EFFECTIVE
 	jr c, .ok
@@ -87,7 +87,7 @@ CheckPlayerMoveTypeMatchups:
 	ld a, [wBattleMonType2]
 	cp b
 	jr z, .done
-	call CheckTypeMatchup
+	newfarcall CheckTypeMatchup
 	ld a, [wTypeMatchup]
 	cp EFFECTIVE
 	jr z, .done
@@ -228,7 +228,7 @@ CheckAbleToSwitch:
 	; 80+% chance to switch if Nightmared, Cursed, or infatuated
 	ld a, [wEnemySubStatus1]
 	and 1 << SUBSTATUS_NIGHTMARE | 1 << SUBSTATUS_CURSE | 1 << SUBSTATUS_IN_LOVE
-	jr nz, .likely_switch
+	jp nz, .likely_switch
 
 	; 80+% chance to switch if Confused
 	ld a, [wEnemySubStatus3]
@@ -247,7 +247,7 @@ CheckAbleToSwitch:
 
 
 	; 50% chance of skipping SubStatus5 checks
-	call EffectCommands_50_50
+	newfarcall EffectCommands_50_50
 	jr c, .no_status
 
 	; ~40% chance (due to above 50/50) to switch if  destiny bonded
@@ -511,15 +511,15 @@ FindEnemyMonsImmuneToLastCounterMove:
 	ld a, [wLastPlayerCounterMove]
 	dec a
 	ld hl, Moves + MOVE_POWER
-	call GetMoveAttr
+	newfarcall GetMoveAttr
 	and a
 	jr z, .next
 
 	; and the Pokemon is immune to it...
 	inc hl
-	call GetMoveByte
+	newfarcall GetMoveByte
 	ld hl, wBaseType
-	call CheckTypeMatchup
+	newfarcall CheckTypeMatchup
 	ld a, [wTypeMatchup]
 	and a
 	jr nz, .next
@@ -605,15 +605,15 @@ FindEnemyMonsWithASuperEffectiveMove:
 	; if move has no power: continue
 	dec a
 	ld hl, Moves + MOVE_POWER
-	call GetMoveAttr
+	newfarcall GetMoveAttr
 	and a
 	jr z, .nope
 
 	; check type matchups
 	inc hl
-	call GetMoveByte
+	newfarcall GetMoveByte
 	ld hl, wBattleMonType1
-	call CheckTypeMatchup
+	newfarcall CheckTypeMatchup
 
 	; if immune or not very effective: continue
 	ld a, [wTypeMatchup]
@@ -702,18 +702,18 @@ FindEnemyMonsThatResistPlayer:
 
 	dec a
 	ld hl, Moves + MOVE_POWER
-	call GetMoveAttr
+	newfarcall GetMoveAttr
 	and a
 	jr z, .skip_move
 
 	inc hl
-	call GetMoveByte
+	newfarcall GetMoveByte
 	jr .check_type
 
 .skip_move
 	ld a, [wBattleMonType1]
 	ld hl, wBaseType
-	call CheckTypeMatchup
+	newfarcall CheckTypeMatchup
 	ld a, [wTypeMatchup]
 	cp 10 + 1
 	jr nc, .dont_choose_mon
@@ -721,7 +721,7 @@ FindEnemyMonsThatResistPlayer:
 
 .check_type
 	ld hl, wBaseType
-	call CheckTypeMatchup
+	newfarcall CheckTypeMatchup
 	ld a, [wTypeMatchup]
 	cp EFFECTIVE + 1
 	jr nc, .dont_choose_mon
