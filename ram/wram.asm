@@ -647,8 +647,10 @@ wBattleEnd::
 
 ; battle-only ability popup (ShowAbilityPopup in engine/battle/ability_popup.asm);
 ; only in use while that routine is on the stack
-wAbilityPopupSavedTiles:: ds ABILITY_SLIDE_TILES ; tilemap under the popup
-wAbilityPopupSavedAttrs:: ds ABILITY_SLIDE_TILES ; attrmap under the popup
+wAbilityPopupSavedTiles:: ds ABILITY_SLIDE_TILES ; screen tiles under the popup
+wAbilityPopupSavedAttrs:: ds ABILITY_SLIDE_TILES ; screen attributes under the popup
+wAbilityPopupNewTiles:: ds ABILITY_SLIDE_TILES ; what the popup writes there
+wAbilityPopupNewAttrs:: ds ABILITY_SLIDE_TILES
 wAbilityPkmn:: ds MON_NAME_LENGTH + 1 ; nickname + "'s"
 wAbilityName:: ds ABILITY_POPUP_NAME_LENGTH
 wAbilityPopupSide:: db ; ABILITY_POPUP_PLAYER or ABILITY_POPUP_ENEMY

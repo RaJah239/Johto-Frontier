@@ -7,6 +7,10 @@
 ; ABILITY_POPUP_HOLD_FRAMES and is removed before ShowAbilityPopup returns.
 ; It borrows VRAM bank 1 tiles ABILITY_SLIDE_TILE.. (also used by large
 ; animated frontpics) and puts their old contents back afterwards.
+; It works on the screen's BG map directly (only its own 2 x 10 area) and
+; never touches wTilemap / wAttrmap: in battle wAttrmap can be stale (e.g.
+; the move info box's Textbox leaves the text palette in it), so copying
+; it to the screen would recolour the picture and the HUD.
 
 ShowAbilityPopup::
 ; Call it with a plain farcall:
@@ -43,7 +47,8 @@ ShowAbilityPopup::
 	ld a, 1
 	ldh [rVBK], a
 .backup_loop
-	call AbilityPopup_ReadVRAMTile
+	ld c, LEN_2BPP_TILE
+	call AbilityPopup_ReadVRAM
 	dec b
 	jr nz, .backup_loop
 	xor a
@@ -51,8 +56,32 @@ ShowAbilityPopup::
 
 	call AbilityPopup_CopyPicTiles
 	call AbilityPopup_UploadTiles
-	call AbilityPopup_PointRegionAtTiles
-	call AbilityPopup_CopyTilemap
+
+	; point the area at the popup tiles (VRAM bank 1, above sprites),
+	; keeping each tile's palette for now so the picture looks the same
+	ld hl, wAbilityPopupSavedAttrs
+	ld de, wAbilityPopupNewTiles
+	ld b, ABILITY_SLIDE_TILE
+	ld c, ABILITY_SLIDE_TILES
+.new_tiles
+	ld a, b
+	ld [de], a ; tile
+	push de
+	push hl
+	ld a, [hl]
+	or VRAM_BANK_1 | PRIORITY
+	ld hl, ABILITY_SLIDE_TILES
+	add hl, de
+	ld [hl], a ; attribute
+	pop hl
+	pop de
+	inc hl
+	inc de
+	inc b
+	dec c
+	jr nz, .new_tiles
+	ld de, wAbilityPopupNewTiles
+	call AbilityPopup_WriteRegion
 
 	ld de, SFX_ABILITY_SLIDEOUT
 	call WaitPlaySFX
@@ -60,31 +89,28 @@ ShowAbilityPopup::
 	call AbilityPopup_Slide
 
 	; the band is drawn: switch to the text palette (white on black)
-	call AbilityPopup_RegionAttrs
-	ld b, ABILITY_SLIDE_HEIGHT
-.attr_rows
-	ld c, ABILITY_SLIDE_WIDTH
-.attr_loop
-	ld a, [hl]
+	ld hl, wAbilityPopupSavedAttrs
+	ld de, wAbilityPopupNewAttrs
+	ld c, ABILITY_SLIDE_TILES
+.text_pal
+	ld a, [hli]
 	and ~(PALETTE_MASK | X_FLIP | Y_FLIP)
-	or PAL_BATTLE_BG_TEXT
-	ld [hli], a
+	or PAL_BATTLE_BG_TEXT | VRAM_BANK_1 | PRIORITY
+	ld [de], a
+	inc de
 	dec c
-	jr nz, .attr_loop
-	ld de, SCREEN_WIDTH - ABILITY_SLIDE_WIDTH
-	add hl, de
-	dec b
-	jr nz, .attr_rows
-	call AbilityPopup_CopyTilemap
+	jr nz, .text_pal
+	ld de, wAbilityPopupNewTiles
+	call AbilityPopup_WriteRegion
 
 	call AbilityPopup_DrawText
 
 	ld c, ABILITY_POPUP_HOLD_FRAMES
 	call DelayFrames
 
-	; take it away: tilemap first, so nothing shows the borrowed tiles
-	call AbilityPopup_RestoreRegion
-	call AbilityPopup_CopyTilemap
+	; take it away: the area first, so nothing shows the borrowed tiles
+	ld de, wAbilityPopupSavedTiles
+	call AbilityPopup_WriteRegion
 	ld a, 1
 	ldh [rVBK], a
 	ld de, wAbilityTilesBackup
@@ -181,70 +207,154 @@ AbilityPopup_CheckWidth:
 	ccf
 	ret
 
-AbilityPopup_Region:
-; hl = the popup's top-left tile in wTilemap for the popup's side
+assert wAbilityPopupSavedAttrs == wAbilityPopupSavedTiles + ABILITY_SLIDE_TILES
+assert wAbilityPopupNewAttrs == wAbilityPopupNewTiles + ABILITY_SLIDE_TILES
+
+AbilityPopup_RegionVRAM:
+; hl = the popup's top-left entry in the screen's BG map. Clobbers de.
 	ld a, [wAbilityPopupSide]
 	and a
-	hlcoord ABILITY_SLIDE_PLAYER_X, ABILITY_SLIDE_PLAYER_Y
-	ret z
-	hlcoord ABILITY_SLIDE_ENEMY_X, ABILITY_SLIDE_ENEMY_Y
-	ret
-
-AbilityPopup_RegionAttrs:
-; hl = the popup's top-left tile in wAttrmap
-	call AbilityPopup_Region
-	ld de, wAttrmap - wTilemap
+	ld de, ABILITY_SLIDE_PLAYER_Y * BG_MAP_WIDTH + ABILITY_SLIDE_PLAYER_X
+	jr z, .got_offset
+	ld de, ABILITY_SLIDE_ENEMY_Y * BG_MAP_WIDTH + ABILITY_SLIDE_ENEMY_X
+.got_offset
+	ldh a, [hBGMapAddress]
+	ld l, a
+	ldh a, [hBGMapAddress + 1]
+	ld h, a
 	add hl, de
 	ret
 
 AbilityPopup_SaveRegion:
-; Set aside the tiles and attributes the popup covers.
-	call AbilityPopup_Region
+; Read the tiles (wAbilityPopupSavedTiles) and attributes
+; (wAbilityPopupSavedAttrs) the popup covers from the screen.
 	ld de, wAbilityPopupSavedTiles
-	call .copy
-	call AbilityPopup_RegionAttrs
-	ld de, wAbilityPopupSavedAttrs
-.copy
+	xor a
+	call .rows
+	ld a, 1
+.rows
+	ldh [rVBK], a
+	push de
+	call AbilityPopup_RegionVRAM
+	pop de
 	ld b, ABILITY_SLIDE_HEIGHT
 .row
+	push hl
 	ld c, ABILITY_SLIDE_WIDTH
-.col
+	call AbilityPopup_ReadVRAM
+	pop hl
+	push de
+	ld de, BG_MAP_WIDTH
+	add hl, de
+	pop de
+	dec b
+	jr nz, .row
+	xor a
+	ldh [rVBK], a
+	ret
+
+AbilityPopup_WriteRegion:
+; Write the popup area's tiles from de and its attributes from
+; de + ABILITY_SLIDE_TILES to the screen, just below the area so no
+; frame shows half of it.
+	push de
+	call AbilityPopup_WaitBelowRegion
+	pop de
+	push de
+	ld hl, ABILITY_SLIDE_TILES
+	add hl, de
+	ld d, h
+	ld e, l
+	ld a, 1 ; attributes first
+	call .rows
+	pop de
+	xor a
+.rows
+	ldh [rVBK], a
+	push de
+	call AbilityPopup_RegionVRAM
+	pop de
+	ld b, ABILITY_SLIDE_HEIGHT
+.row
+	push hl
+	ld c, ABILITY_SLIDE_WIDTH
+	call AbilityPopup_WriteVRAM
+	pop hl
+	push de
+	ld de, BG_MAP_WIDTH
+	add hl, de
+	pop de
+	dec b
+	jr nz, .row
+	xor a
+	ldh [rVBK], a
+	ret
+
+AbilityPopup_WaitBelowRegion:
+; Wait for the scanline right below the popup area.
+	ldh a, [rLCDC]
+	bit rLCDC_ENABLE, a
+	ret z
+	ld a, [wAbilityPopupSide]
+	and a
+	ld b, (ABILITY_SLIDE_PLAYER_Y + ABILITY_SLIDE_HEIGHT) * TILE_WIDTH
+	jr z, .wait
+	ld b, (ABILITY_SLIDE_ENEMY_Y + ABILITY_SLIDE_HEIGHT) * TILE_WIDTH
+.wait
+	ldh a, [rLY]
+	cp b
+	jr nz, .wait
+	ret
+
+AbilityPopup_WaitHBlank:
+; di, then wait for the start of H-Blank (or V-Blank) so VRAM can be
+; accessed for a few bytes. The caller does ei. No wait with the LCD off.
+	di
+	ldh a, [rLCDC]
+	bit rLCDC_ENABLE, a
+	ret z
+.wait_busy
+	ldh a, [rSTAT]
+	and %10 ; mode 2 or 3
+	jr z, .wait_busy
+.wait_free
+	ldh a, [rSTAT]
+	and %10
+	jr nz, .wait_free
+	ret
+
+AbilityPopup_ReadVRAM:
+; Copy c bytes (an even number) from VRAM at hl to de, two per H-Blank.
+; Advances hl and de. Preserves b.
+.chunk
+	call AbilityPopup_WaitHBlank
 	ld a, [hli]
 	ld [de], a
 	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ei
 	dec c
-	jr nz, .col
-	push de
-	ld de, SCREEN_WIDTH - ABILITY_SLIDE_WIDTH
-	add hl, de
-	pop de
-	dec b
-	jr nz, .row
+	dec c
+	jr nz, .chunk
 	ret
 
-AbilityPopup_RestoreRegion:
-; Put back the tiles and attributes saved by AbilityPopup_SaveRegion.
-	call AbilityPopup_Region
-	ld de, wAbilityPopupSavedTiles
-	call .copy
-	call AbilityPopup_RegionAttrs
-	ld de, wAbilityPopupSavedAttrs
-.copy
-	ld b, ABILITY_SLIDE_HEIGHT
-.row
-	ld c, ABILITY_SLIDE_WIDTH
-.col
+AbilityPopup_WriteVRAM:
+; Copy c bytes (an even number) from de to VRAM at hl, two per H-Blank.
+; Advances hl and de. Preserves b.
+.chunk
+	call AbilityPopup_WaitHBlank
 	ld a, [de]
-	inc de
 	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ei
 	dec c
-	jr nz, .col
-	push de
-	ld de, SCREEN_WIDTH - ABILITY_SLIDE_WIDTH
-	add hl, de
-	pop de
-	dec b
-	jr nz, .row
+	dec c
+	jr nz, .chunk
 	ret
 
 AbilityPopup_CopyPicTiles:
@@ -281,7 +391,8 @@ AbilityPopup_CopyPicTiles:
 	ld a, 1
 .got_bank
 	ldh [rVBK], a
-	call AbilityPopup_ReadVRAMTile
+	ld c, LEN_2BPP_TILE
+	call AbilityPopup_ReadVRAM
 	xor a
 	ldh [rVBK], a
 	pop hl
@@ -289,34 +400,6 @@ AbilityPopup_CopyPicTiles:
 	pop bc
 	dec b
 	jr nz, .loop
-	ret
-
-AbilityPopup_ReadVRAMTile:
-; Copy one tile (16 bytes) from VRAM at hl to de while the LCD is on, four
-; bytes per H-Blank. Advances hl and de. Preserves b.
-	ld c, LEN_2BPP_TILE / 4
-.chunk
-	ldh a, [rLCDC]
-	bit rLCDC_ENABLE, a
-	jr z, .copy ; LCD off: VRAM is always free
-	di
-.wait_busy
-	ldh a, [rSTAT]
-	and %10 ; mode 2 or 3
-	jr z, .wait_busy
-.wait_free
-	ldh a, [rSTAT]
-	and %10
-	jr nz, .wait_free
-.copy
-rept 4
-	ld a, [hli]
-	ld [de], a
-	inc de
-endr
-	ei
-	dec c
-	jr nz, .chunk
 	ret
 
 AbilityPopup_UploadTiles:
@@ -332,49 +415,6 @@ AbilityPopup_UploadTiles:
 	xor a
 	ldh [rVBK], a
 	ret
-
-AbilityPopup_PointRegionAtTiles:
-; Point the popup area at the popup tiles (VRAM bank 1, above sprites),
-; keeping each tile's palette for now so the picture looks the same.
-	call AbilityPopup_Region
-	ld b, ABILITY_SLIDE_TILE
-	ld c, ABILITY_SLIDE_HEIGHT
-.tile_rows
-	ld e, ABILITY_SLIDE_WIDTH
-.tile_loop
-	ld [hl], b
-	inc hl
-	inc b
-	dec e
-	jr nz, .tile_loop
-	push bc
-	ld bc, SCREEN_WIDTH - ABILITY_SLIDE_WIDTH
-	add hl, bc
-	pop bc
-	dec c
-	jr nz, .tile_rows
-
-	call AbilityPopup_RegionAttrs
-	ld c, ABILITY_SLIDE_HEIGHT
-.attr_rows
-	ld e, ABILITY_SLIDE_WIDTH
-.attr_loop
-	ld a, [hl]
-	or VRAM_BANK_1 | PRIORITY
-	ld [hli], a
-	dec e
-	jr nz, .attr_loop
-	push bc
-	ld bc, SCREEN_WIDTH - ABILITY_SLIDE_WIDTH
-	add hl, bc
-	pop bc
-	dec c
-	jr nz, .attr_rows
-	ret
-
-AbilityPopup_CopyTilemap:
-	ld b, 3 ; tiles and attributes
-	farjp _SafeCopyTilemapAtOnce
 
 AbilityPopup_Slide:
 ; Slide the black band in, one tile column per frame, with a slanted front
