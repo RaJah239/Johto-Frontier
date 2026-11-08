@@ -437,10 +437,12 @@
 	const EVENT_TINTED_LENS_FOE
 	const EVENT_ZEN_HEADBUTT_PLAYER
 	const EVENT_ZEN_HEADBUTT_FOE
+	const EVENT_UNAWARE_PLAYER
+	const EVENT_UNAWARE_FOE
 
 	const EVENT_CHEAT_MENU_ACCESSIBLE
 	const EVENT_NEWBARK_CHEATER_KUN_EXITS
-; Unused: next 129 events
+; Unused: next 127 events
 
 	const_next 600
 ; Kurt Apricorn events

@@ -1600,7 +1600,7 @@ BattleCommand_DamageVariation:
 	ret
 
 DEF FIRST_NEW_BATTLE_RESET_EVENT EQU EVENT_TRUE_HORN_PLAYER
-DEF LAST_NEW_BATTLE_RESET_EVENT  EQU EVENT_ZEN_HEADBUTT_FOE
+DEF LAST_NEW_BATTLE_RESET_EVENT  EQU EVENT_UNAWARE_FOE
 
 ResetSureHitEvents:
 	; reset all sure hit event flags
@@ -2760,6 +2760,7 @@ UnevolvedEviolite:
 	ret
 
 BattleCommand_DamageStats:
+	call UnawarePopup
 	ldh a, [hBattleTurn]
 	and a
 	jmp nz, EnemyAttackDamage
@@ -2782,6 +2783,7 @@ PlayerAttackDamage:
 
 ; physical
 	ld hl, wEnemyMonDefense
+	call UnawareDefenseStat
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
@@ -2802,8 +2804,11 @@ PlayerAttackDamage:
 	jr z, .body_press
 
 	ld hl, wBattleMonAttack
+	xor a ; Attack
+	call UnawareAttackStat
 	call CheckDamageStatsCritical
 	jr c, .PolarFangorLightBall
+	ld e, 0 ; crit: unboosted stats, nothing for Unaware to redo
 
 	ld hl, wEnemyDefense
 	ld a, [hli]
@@ -2815,8 +2820,11 @@ PlayerAttackDamage:
 .body_press
 ; Use player's defense instead of attack for Body Press
 	ld hl, wBattleMonDefense
+	ld a, 1 ; Defense
+	call UnawareAttackStat
 	call CheckDamageStatsCritical
 	jr c, .PolarFangorLightBall ; Use boosted stats
+	ld e, 0
 
 	ld hl, wEnemyDefense
 	ld a, [hli]
@@ -2837,6 +2845,7 @@ PlayerAttackDamage:
 .get_special_defense
 	ld hl, wEnemyMonSpclDef
 .psyshock_done
+	call UnawareDefenseStat
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
@@ -2852,8 +2861,11 @@ PlayerAttackDamage:
 
 .specialcrit
 	ld hl, wBattleMonSpclAtk
+	ld a, 3 ; Sp. Atk
+	call UnawareAttackStat
 	call CheckDamageStatsCritical
 	jr c, .lightball
+	ld e, 0
 
 	ld hl, wEnemySpDef
 	ld a, [hli]
@@ -2871,6 +2883,7 @@ PlayerAttackDamage:
 	call PolarFangorLightBallBoost
 
 .done
+	call UnawareRedoStatus
 	push hl
 	call UnevolvedEviolite
 	pop hl
@@ -2969,6 +2982,253 @@ CheckDamageStatsCritical:
 	pop bc
 	pop hl
 	ret
+
+; ========================
+; === Ability: Unaware ===
+; ========================
+; An Unaware Pokemon ignores the other Pokemon's stat stages in damage:
+; - when it attacks: the target's Defense / Sp. Def stages
+; - when it is hit: the attacker's Attack / Sp. Atk stages
+;   (Defense for Body Press)
+; Raised and lowered stages alike. Burn / frostbite still halve the
+; attacker's stat. PlayerAttackDamage / EnemyAttackDamage apply it, so the
+; AI's damage estimates and the move info damage preview see it too; the
+; popup only shows for real attacks (UnawarePopup, from DamageStats).
+
+assert wEnemyMonSpclDef - wEnemyMonAttack == wEnemySpDef - wEnemyAttack
+assert wBattleMonSpclDef - wBattleMonAttack == wPlayerSpDef - wPlayerAttack
+assert wEnemyMonSpclAtk - wEnemyMonAttack == 3 * 2
+assert wEnemySAtkLevel - wEnemyAtkLevel == 3
+assert wPlayerSAtkLevel - wPlayerAtkLevel == 3
+
+DEF UNAWARE_REDO_BURN EQU 1
+DEF UNAWARE_REDO_FROSTBITE EQU 2
+
+IsUnaware:
+; Carry if species a has Unaware. Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld hl, UnawarePokemon
+	call IsInByteArray
+	jmp PopBCDEHL
+
+UnawareDefenseStat:
+; hl = the target's stage-applied defensive stat (wEnemyMonDefense etc.).
+; If the attacker has Unaware, point hl at the target's unboosted stat.
+; Preserves bc, de.
+	push hl
+	call GetCurrentMon
+	pop hl
+	call IsUnaware
+	ret nc
+	push bc
+	ldh a, [hBattleTurn]
+	and a
+	ld bc, wEnemyStats - wEnemyMonAttack ; the player attacks the enemy
+	jr z, .got_offset
+	ld bc, wPlayerStats - wBattleMonAttack
+.got_offset
+	add hl, bc
+	pop bc
+	ret
+
+UnawareAttackStat:
+; a = stat index (0 Attack, 1 Defense, 3 Sp. Atk), hl = the attacker's
+; stage-applied stat (wBattleMonAttack etc.). If the target has Unaware and
+; that stage isn't neutral, point hl at the attacker's unboosted stat and
+; return e = UNAWARE_REDO_* so UnawareRedoStatus can put burn / frostbite
+; back; otherwise e = 0. Preserves bc, d.
+	ld e, a
+	push bc
+	call GetOpposingMon
+	call IsUnaware
+	jr nc, .no
+	push hl
+	ld a, e
+	call UnawareUserStatLevel
+	pop hl
+	cp BASE_STAT_LEVEL
+	jr z, .no
+	ldh a, [hBattleTurn]
+	and a
+	ld bc, wPlayerStats - wBattleMonAttack
+	jr z, .got_offset
+	ld bc, wEnemyStats - wEnemyMonAttack
+.got_offset
+	add hl, bc
+	pop bc
+	ld a, e
+	ld e, UNAWARE_REDO_BURN
+	and a ; Attack
+	ret z
+	ld e, UNAWARE_REDO_FROSTBITE
+	cp 3 ; Sp. Atk
+	ret z
+	ld e, 0 ; Body Press (Defense): no status to redo
+	ret
+
+.no
+	pop bc
+	ld e, 0
+	ret
+
+UnawareRedoStatus:
+; hl = the attacker's stat value, e = UNAWARE_REDO_* from UnawareAttackStat.
+; The unboosted stats don't include burn (Attack) or frostbite (Sp. Atk),
+; so halve hl again like ApplyBrnEffectOnAttack / ApplyFrbEffectOnSpclAttack.
+	ld a, e
+	and a
+	ret z
+	push bc
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wBattleMonStatus]
+	ld c, a
+	ld a, [wBattleMonSpecies]
+	jr z, .got_user
+	ld a, [wEnemyMonStatus]
+	ld c, a
+	ld a, [wEnemyMonSpecies]
+.got_user
+	ld b, a ; species
+	ld a, e
+	cp UNAWARE_REDO_BURN
+	jr nz, .frostbite
+	bit BRN, c
+	jr z, .done
+	ld a, b
+	newfarcall DoesMonHaveResilience
+	jr c, .done
+	ld a, b
+	newfarcall DoesMonHaveGuts
+	jr c, .done
+	jr .halve
+
+.frostbite
+	bit FRZ, c
+	jr z, .done
+.halve
+	srl h
+	rr l
+	ld a, h
+	or l
+	jr nz, .done
+	inc l ; min 1
+.done
+	pop bc
+	ret
+
+UnawareUserStatLevel:
+; a = stat index -> a = the attacker's stage for it. Clobbers bc, hl.
+	ld c, a
+	ld b, 0
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wPlayerAtkLevel
+	jr z, .got_levels
+	ld hl, wEnemyAtkLevel
+.got_levels
+	add hl, bc
+	ld a, [hl]
+	ret
+
+UnawareTargetStatLevel:
+; a = stat index -> a = the target's stage for it. Clobbers bc, hl.
+	ld c, a
+	ld b, 0
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wEnemyAtkLevel
+	jr z, .got_levels
+	ld hl, wPlayerAtkLevel
+.got_levels
+	add hl, bc
+	ld a, [hl]
+	ret
+
+UnawarePopup:
+; Show the Unaware popup (once per battle per side) when it changes the
+; damage of this attack: a damaging move, and the stage it ignores isn't
+; neutral.
+	ld a, BATTLE_VARS_MOVE_POWER
+	call GetBattleVar
+	and a
+	ret z
+
+	; d = the attacker's stat index, e = the target's
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp SPECIAL
+	lb de, 0, 1 ; physical: Attack vs Defense
+	jr c, .got_category
+	lb de, 3, 4 ; special: Sp. Atk vs Sp. Def
+.got_category
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_PSYSHOCK
+	jr nz, .not_psyshock
+	ld e, 1 ; hits Defense
+.not_psyshock
+	cp EFFECT_BODY_PRESS
+	jr nz, .got_stats
+	ld d, 1 ; uses the attacker's Defense
+.got_stats
+
+	; the attacker has Unaware and the target's stage isn't neutral
+	call GetCurrentMon
+	call IsUnaware
+	jr nc, .target
+	ld a, e
+	push de
+	call UnawareTargetStatLevel
+	pop de
+	cp BASE_STAT_LEVEL
+	jr z, .target
+	ldh a, [hBattleTurn]
+	ld c, a
+	jr UnawareShowPopup
+
+.target
+	; the target has Unaware and the attacker's stage isn't neutral
+	call GetOpposingMon
+	call IsUnaware
+	ret nc
+	ld a, d
+	call UnawareUserStatLevel
+	cp BASE_STAT_LEVEL
+	ret z
+	ldh a, [hBattleTurn]
+	xor 1
+	ld c, a
+	; fallthrough
+
+UnawareShowPopup:
+; c = side: ABILITY_POPUP_PLAYER or ABILITY_POPUP_ENEMY
+	ld a, c
+	and a
+	jr nz, .foe
+	CheckEventFlag EVENT_UNAWARE_PLAYER
+	ret nz
+	ld b, BANK(UnawareText)
+	ld c, ABILITY_POPUP_PLAYER
+	ld de, UnawareText
+	farcall ShowAbilityPopup
+	SetEventFlag EVENT_UNAWARE_PLAYER
+	ret
+
+.foe
+	CheckEventFlag EVENT_UNAWARE_FOE
+	ret nz
+	ld b, BANK(UnawareText)
+	ld c, ABILITY_POPUP_ENEMY
+	ld de, UnawareText
+	farcall ShowAbilityPopup
+	SetEventFlag EVENT_UNAWARE_FOE
+	ret
+
+UnawareText: db "Unaware@"
+INCLUDE "data/abilities/unaware_mons.asm"
 
 PolarFangorLightBallBoost:
 ; Return in hl the stat value at hl.
@@ -3091,6 +3351,7 @@ EnemyAttackDamage:
 
 ; physical
 	ld hl, wBattleMonDefense
+	call UnawareDefenseStat
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
@@ -3111,8 +3372,11 @@ EnemyAttackDamage:
 	jr z, .body_press
 
 	ld hl, wEnemyMonAttack
+	xor a ; Attack
+	call UnawareAttackStat
 	call CheckDamageStatsCritical
 	jr c, .PolarFangorLightBall
+	ld e, 0 ; crit: unboosted stats, nothing for Unaware to redo
 
 	ld hl, wPlayerDefense
 	ld a, [hli]
@@ -3124,8 +3388,11 @@ EnemyAttackDamage:
 .body_press
 ; Use enemy's defense instead of attack for Body Press
 	ld hl, wEnemyMonDefense
+	ld a, 1 ; Defense
+	call UnawareAttackStat
 	call CheckDamageStatsCritical
 	jr c, .PolarFangorLightBall ; Use boosted stats
+	ld e, 0
 
 	ld hl, wPlayerDefense
 	ld a, [hli]
@@ -3146,6 +3413,7 @@ EnemyAttackDamage:
 .get_special_defense
 	ld hl, wBattleMonSpclDef
 .psyshock_done
+	call UnawareDefenseStat
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
@@ -3161,8 +3429,11 @@ EnemyAttackDamage:
 
 .specialcrit
 	ld hl, wEnemyMonSpclAtk
+	ld a, 3 ; Sp. Atk
+	call UnawareAttackStat
 	call CheckDamageStatsCritical
 	jr c, .lightball
+	ld e, 0
 	ld hl, wPlayerSpDef
 	ld a, [hli]
 	ld b, a
@@ -3177,6 +3448,7 @@ EnemyAttackDamage:
 	call PolarFangorLightBallBoost
 
 .done
+	call UnawareRedoStatus
 	push hl
 	call UnevolvedEviolite
 	pop hl
