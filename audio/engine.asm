@@ -2345,6 +2345,13 @@ _PlayCry::
 
 	call MusicOff
 
+; Cries never set channel 1's pitch sweep, so one left on by a sound effect
+; this cry cuts off (e.g. Ball Poof, the EXP bar) would bend the whole cry.
+; _PlaySFX clears it when it takes over channel 5; do the same here.
+	xor a
+	ld [wPitchSweep], a
+	ldh [rNR10], a
+
 ; Overload the music id with the cry id
 	ld hl, wMusicID
 	ld [hl], e
