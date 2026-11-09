@@ -2493,19 +2493,42 @@ BattleAnim_Psyshock:
 	anim_jump BattleAnim_ShowMon_1
 
 BattleAnim_FocusBlast:
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_YELLOW
-	anim_3gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_EGG, BATTLE_ANIM_GFX_EXPLOSION
-	anim_call BattleAnim_SubFocusingAnim
-	anim_sound 6, 2, SFX_SLUDGE_BOMB
-	anim_obj BATTLE_ANIM_OBJ_OCTAZOOKA, 64, 92, $4
-	anim_wait 24
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $30, $3, $0
-	anim_sound 0, 1, SFX_EGG_BOMB
-	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_YELLOW 
-	anim_call BattleAnimSub_Explosion2
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GLOW_YELLOW
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_RED
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_GLOW_YELLOW
+	anim_3gfx BATTLE_ANIM_GFX_VORTEX, BATTLE_ANIM_GFX_WIND, BATTLE_ANIM_GFX_SWIRL
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_call BattleAnimSub_AgilityMinor
+	anim_sound 0, 1, SFX_OUTRAGE
+.loop
+	anim_obj BATTLE_ANIM_OBJ_SWIRL_SHORT, 44, 96, $0
+	anim_wait 8
+	anim_loop 4, .loop
+	anim_obj BATTLE_ANIM_OBJ_VORTEX, 44, 96, $0
+	anim_wait 64
+	anim_clearobjs
+	anim_wait 1
+	anim_2gfx BATTLE_ANIM_GFX_BIG_GLOW_CLEAR, BATTLE_ANIM_GFX_FOCUS_BLAST
+	anim_sound 0, 1, SFX_MEGA_PUNCH
+	anim_obj BATTLE_ANIM_OBJ_FOCUS_BLAST, 64, 88, $12
 	anim_wait 32
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $10
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $2, $0
+	anim_sound 0, 1, SFX_EGG_BOMB
+	anim_obj BATTLE_ANIM_OBJ_BIG_GLOW_CLEAR, 136, 48, $0
+	anim_wait 40
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
-	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_RED
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_YELLOW
+	anim_ret
+
+BattleAnimSub_AgilityMinor:
+	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 24, $10
+	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 48, $2
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 56, $c
+	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 80, $4
+	anim_obj BATTLE_ANIM_OBJ_AGILITY, 8, 104, $e
 	anim_ret
 
 BattleAnim_Psyblast:

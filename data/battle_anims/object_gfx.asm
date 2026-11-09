@@ -67,4 +67,6 @@ AnimObjGFX:
 	anim_obj_gfx 32, AnimObjVortexGFX
 	anim_obj_gfx  9, AnimObjSmokePuffGFX
 	anim_obj_gfx  2, AnimObjStatsGFX
+	anim_obj_gfx 18, AnimObjFocusBlastGFX
+	anim_obj_gfx 13, AnimObjBigGlowClearGFX
 	assert_table_length NUM_BATTLE_ANIM_GFX + 1

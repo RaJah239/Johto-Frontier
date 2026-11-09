@@ -385,6 +385,10 @@ INCLUDE "engine/battle_anims/functions.asm"
 INCLUDE "engine/battle_anims/helpers.asm"
 
 
+SECTION "Custom Battle Palettes", ROMX
+INCLUDE "engine/battle_anims/custom_palettes.asm"
+
+
 SECTION "Pic Animations 1", ROMX
 INCLUDE "engine/gfx/pic_animation.asm"
 INCLUDE "gfx/pokemon/anim_pointers.asm"

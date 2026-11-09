@@ -1094,11 +1094,9 @@ SetBattleAnimPal:
 	ld a, l
 	inc l
 	jr z, .SetDefaultPal
-	ld hl, CustomBattlePalettes
-	call AddNTimes
-
-	; Write the palette.
-	call FarCopyColorWRAM
+	; Write the palette (the custom palettes are in their own section).
+	ld b, a
+	farcall CopyCustomBattlePalette
 .done_setpal
 	pop bc
 	pop de
@@ -1108,9 +1106,6 @@ SetBattleAnimPal:
 	ld b, h
 	farcall SetDefaultBattlePalette
 	jr .done_setpal
-
-CustomBattlePalettes:
-INCLUDE "gfx/battle_anims/custom.pal"
 
 BattleAnimCmd_DropSub:
 	ldh a, [rSVBK]
