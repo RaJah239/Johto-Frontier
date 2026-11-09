@@ -22,6 +22,9 @@
 ;   Leech Seed 1/8 (to the other side), Curse 1/4; Magic Guard ignores them;
 ; - end of turn: sandstorm / hail 1/16 while the weather lasts, Leftovers 1/16.
 ;
+; The enemy's mon also gets a second try with "boost once, then attack" when
+; it has a boosting move (MSim_RunBest). The player is assumed to attack.
+;
 ; A benched mon is simulated by loading it into the wEnemyMon battle struct
 ; (stats from its party data, stat stages reset, Sticky Web applied). The real
 ; struct, stats, stat stages and substatus are saved in WRAMX bank 5 and put
@@ -80,7 +83,7 @@ AI_MatchupSwitch:
 
 	; the mon that's out
 	call MSim_SetupActive
-	call MSim_Run
+	call MSim_RunBest
 	jr c, .stay_end ; it wins: stay in
 
 	ld a, 1 << MSIM_MODE_ENTRY_HIT_F
@@ -180,7 +183,7 @@ MSim_TryCandidate:
 	jr c, .loses
 
 .fight
-	call MSim_Run
+	call MSim_RunBest
 	ret nc
 
 	; share of max HP lost = (max HP - HP left) * 255 / max HP
@@ -1728,6 +1731,141 @@ MSim_MultiplyBC:
 	ld c, l
 	ret
 
+
+MSim_RunBest:
+; MSim_Run from the current HP. If that loses and the enemy's mon has a
+; usable boosting move, try again: on the first turn it boosts (and the
+; player gets a free hit), then it attacks with the boosted stats. Carry if
+; either way wins.
+	ld hl, wMSimEnemyHP
+	ld de, wMSimStartHP
+	ld bc, 4
+	call CopyBytes
+	call MSim_Run
+	ret c
+
+	; asleep for more than this turn: it can't boost first
+	ld a, [wEnemyMonStatus]
+	and SLP_MASK
+	cp 2
+	jr nc, .no
+	call MSim_FindBoost
+	jr nc, .no
+
+	; raise its stat stages (up to MAX_STAT_LEVEL) and recalculate
+	ld de, wEnemyStatLevels
+	ld c, NUM_BATTLE_STATS
+.raise
+	ld a, [de]
+	add [hl]
+	cp MAX_STAT_LEVEL + 1
+	jr c, .got_level
+	ld a, MAX_STAT_LEVEL
+.got_level
+	ld [de], a
+	inc de
+	inc hl
+	dec c
+	jr nz, .raise
+	ld a, 1
+	ldh [hBattleTurn], a
+	callfar CalcEnemyStats
+	call MSim_ComputeDamages
+	ld hl, wMSimStartHP
+	ld de, wMSimEnemyHP
+	ld bc, 4
+	call CopyBytes
+
+	; the boost turn: only the player attacks
+	xor a
+	ld [wMSimEnemySleep], a
+	call MSim_ChooseActions
+	call MSim_PlayerActs
+	cp MSIM_PLAYER_WINS
+	jr z, .no
+	call MSim_EnemyResidual
+	cp MSIM_PLAYER_WINS
+	jr z, .no
+	call MSim_EndOfTurn
+	and a
+	jr z, .fight
+	cp MSIM_ENEMY_WINS
+	jr nz, .no
+	scf
+	ret
+.fight
+	jmp MSim_Run
+
+.no
+	and a
+	ret
+
+MSim_FindBoost:
+; Carry and hl = the stat changes (Atk, Def, Spe, SpA, SpD) of the enemy
+; mon's first usable boosting move.
+	ld hl, wEnemyMonMoves
+	ld de, wEnemyMonPP
+	ld b, NUM_MOVES
+.loop
+	ld a, [hli]
+	and a
+	ret z ; (carry clear)
+	ld c, a
+	ld a, [de]
+	inc de
+	and PP_MASK
+	jr z, .next
+	push hl
+	push de
+	push bc
+	ld a, c
+	dec a
+	ld hl, Moves + MOVE_EFFECT
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	ld c, a
+	ld hl, MSim_BoostEffects
+.find
+	ld a, [hli]
+	cp -1
+	jr z, .not_boost
+	cp c
+	jr z, .found
+	ld de, NUM_BATTLE_STATS
+	add hl, de
+	jr .find
+.found
+	pop bc
+	pop de
+	pop de ; (hl stays the table entry)
+	scf
+	ret
+.not_boost
+	pop bc
+	pop de
+	pop hl
+.next
+	dec b
+	jr nz, .loop
+	and a
+	ret
+
+MSim_BoostEffects:
+; effect, then stat stage changes: Attack, Defense, Speed, Sp. Atk, Sp. Def
+	db EFFECT_ATTACK_UP_2,  2, 0, 0, 0, 0 ; Swords Dance
+	db EFFECT_SP_ATK_UP_2,  0, 0, 0, 2, 0 ; Nasty Plot
+	db EFFECT_SPEED_UP_2,   0, 0, 2, 0, 0 ; Agility
+	db EFFECT_SP_DEF_UP_2,  0, 0, 0, 0, 2 ; Amnesia
+	db EFFECT_DRAGON_DANCE, 1, 0, 1, 0, 0
+	db EFFECT_CALM_MIND,    0, 0, 0, 1, 1
+	db EFFECT_BULK_UP,      1, 1, 0, 0, 0
+	db EFFECT_QUIVER_DANCE, 0, 0, 1, 1, 1
+	db EFFECT_GROWTH,       1, 0, 0, 1, 0
+	db EFFECT_MYSTIC_DANCE, 0, 0, 1, 1, 0
+	db EFFECT_FURY_DRIVE,   1, 0, 1, 1, 0
+	db -1
 
 MSim_Begin:
 ; Save what the simulation overwrites.

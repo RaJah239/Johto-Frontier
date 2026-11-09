@@ -3820,6 +3820,7 @@ wMSimPlayerToxic:: db
 wMSimEnemySleep:: db    ; sleep counters
 wMSimPlayerSleep:: db
 wMSimWeatherTurns:: db
+wMSimStartHP:: ds 4     ; wMSimEnemyHP and wMSimPlayerHP before a run
 
 
 SECTION "AI Matchup Save", WRAMX, BANK[5]
