@@ -1996,19 +1996,6 @@ BattleCommand_SuperEffectiveLoopText:
 	; fallthrough
 
 BattleCommand_SuperEffectiveText:
-	; remember when the player's move hits the enemy super effectively,
-	; so the switch AI knows the player has a good move against it
-	ldh a, [hBattleTurn]
-	and a
-	jr nz, .not_player_super_effective
-	ld a, [wTypeModifier]
-	and EFFECTIVENESS_MASK
-	cp EFFECTIVE + 1
-	jr c, .not_player_super_effective
-	ld a, TRUE
-	ld [wEnemyHitSuperEffective], a
-.not_player_super_effective
-
 	; skip effectiveness text if fast battles is on
 	ld a, [wOptions4]
 	bit EFFECTIVE_TEXT, a

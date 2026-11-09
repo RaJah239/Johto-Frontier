@@ -595,17 +595,9 @@ wEnemySwitchCandidate:: db
 wEnemySwitchBestIndex:: db
 wEnemySwitchBestDamage:: dw
 wEnemySwitchMaxDamage:: dw
-wEnemySwitchSavedDamage:: dw
+	ds 2 ; (unused: was switch-in picker scratch)
 wEnemySwitchSavedTurn:: db
-wEnemySwitchSavedMonSpecies:: db
-wEnemySwitchSavedMonItem:: db
-wEnemySwitchSavedMonLevel:: db
-wEnemySwitchSavedMonDefense:: dw
-wEnemySwitchSavedMonSpclDef:: dw
-wEnemySwitchSavedMonType1:: db
-wEnemySwitchSavedMonType2:: db
-wEnemySwitchSavedMonBoostedDefense:: dw
-wEnemySwitchSavedMonBoostedSpclDef:: dw
+	ds 13 ; (unused: was switch-in picker scratch)
 wTempLevel:: db
 wLastPlayerMon:: db
 wLastPlayerMove:: db
@@ -614,14 +606,11 @@ wLastEnemyMove:: db
 wExpShare:: db
 wExpShareText:: db
 wHalfDamage:: db
-wEnemyHitSuperEffective:: db ; nonzero if the player hit the active enemy mon with a super-effective move
-wEnemySwitchAvoidMask:: db ; bit n: OT party mon n is weak to the player's last move (only set during FindMonInOTPartyToSwitchIntoBattle)
+	ds 2 ; (unused: was switch AI state)
 wAIDrainSimEnemyHP:: dw ; AI_PreferDrainMoves: simulated HP (big-endian)
 wAIDrainSimPlayerHP:: dw
 wAIDrainFlags:: db ; AI_PreferDrainMoves: AI_DRAIN_*_F
-wEnemySwitchHazardMask:: db ; switch-in picker scratch: OT mons entry hazards would KO
-wEnemySwitchHazardSpecies:: db ; OTSwitchCandidateFaintsOnEntry scratch
-wEnemySwitchHazardDamage:: dw ; OTSwitchCandidateFaintsOnEntry: total entry hazard damage (big-endian)
+	ds 4 ; (unused: was switch-in picker scratch)
 
 wTrickRoomCount:: db
 
@@ -3794,23 +3783,6 @@ wWaterPalColor:: db ; water palette color AnimateWaterPalette last showed (0-2),
 SECTION "Pokedex Grid WRAM0", WRAM0
 
 wDexGridToEntry:: db ; set by the grid when it opens the dex entry screen
-
-
-SECTION "Enemy Switch Sim", WRAM0
-
-; OTSwitchFindWinningReplacement scratch. wEnemySwitchSimStats and
-; wEnemySwitchSimTypes live in the wEnemySwitchSavedMon* block (see
-; switch_in.asm), which the sim doesn't share with the other switch helpers.
-wEnemySwitchSimCandidate:: db
-wEnemySwitchSimBestIndex:: db
-wEnemySwitchSimBestMatchup:: db
-wEnemySwitchSimLevels:: ds NUM_LEVEL_STATS ; saved wEnemyStatLevels
-wEnemySwitchSimSubStatus5:: db
-wEnemySwitchSimParty:: ds 3 ; saved wCurPartyMon, wCurPartyLevel, wCurOTMon
-
-SECTION "Enemy Switch Sim Mon", WRAMX
-
-wEnemySwitchSimMon:: ds wEnemyMonEnd - wEnemyMon ; saved wEnemyMon
 
 
 SECTION "Pokedex Grid WRAM", WRAMX[$da00], BANK[5]

@@ -1793,12 +1793,10 @@ AI_Smart_Heal:
 	jr nz, .not_rest_heal
 
 .rest_check_toxic
-	; If toxiced, force heal (and cancel switching)
+	; If toxiced, force heal
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_TOXIC, a
 	jr z, .rest_heal
-	xor a
-	ld [wEnemyIsSwitching], a
 	jr .rest_heal           ; Skip IsAIToxified check for Rest
 
 .rest_heal
