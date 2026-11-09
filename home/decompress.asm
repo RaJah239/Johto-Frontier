@@ -277,15 +277,20 @@ DEF LZ_LONG_HI   EQU %00000011
 .fnext
 	ld a, [hli]
 	push bc
-	lb bc, 0, 8
-
-.floop
-	rra
-	rl b
-	dec c
-	jr nz, .floop
-
-	ld a, b
+	; reverse the bits of a
+	; https://github.com/pret/pokecrystal/wiki/Optimizing-assembly-code#reverse-the-bits-of-a
+	ld b, a
+	rlca
+	rlca
+	xor b
+	and $aa
+	xor b
+	ld b, a
+	swap b
+	xor b
+	and $33
+	xor b
+	rrca
 	pop bc
 
 	ld [de], a

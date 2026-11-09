@@ -3811,19 +3811,25 @@ wEnemySwitchSimMon:: ds wEnemyMonEnd - wEnemyMon ; saved wEnemyMon
 SECTION "Pokedex Grid WRAM", WRAMX[$da00], BANK[5]
 
 ; grid Pokedex (engine/pokedex/pokedex_grid.asm); $d800-$d9bf is
-; wSoundEngineBackup. The canvases are 16-byte aligned for GDMA and are
-; drawn and uploaded one after another, so they share space.
+; wSoundEngineBackup. 16-byte aligned for GDMA.
+wDexGridCleanStrips:: ds 3 * 19 tiles ; the number rows without the cursor
+; drawn and uploaded one after another, so they share space
 UNION
 wDexGridHeader:: ds 12 tiles
 wDexGridTopA:: ds 2 * 12 tiles
+NEXTU
 wDexGridTopB:: ds 2 * 12 tiles
 NEXTU
-wDexGridStrip:: ds 19 tiles
-NEXTU
+; prepared by DexGrid_Redraw, copied by DexGrid_CommitGrid
 wDexGridScroll:: ds 9 tiles
-NEXTU
 wDexGridOverlay:: ds 3 * 5 tiles
+wDexGridPatch:: ds 2 * 5 tiles ; the cursor box's tiles in the number rows
 ENDU
+
+
+; (fixed: the linker would otherwise use $d800-$d9bf, which
+; wSoundEngineBackup uses without reserving it)
+SECTION "Pokedex Grid State", WRAMX[$d780], BANK[5]
 
 wDexGridIndex:: db
 wDexGridTopRow:: db
@@ -3833,6 +3839,7 @@ wDexGridReloadIcons:: db
 wDexGridColor:: db
 wDexGridCanvas:: dw
 wDexGridCanvasW:: db
+wDexGridStride:: dw
 wDexGridRowLo:: db
 wDexGridRowHi:: db
 wDexGridRowMask:: db
@@ -3851,3 +3858,13 @@ wDexGridTmp:: ds 2
 wDexGridMapOffset:: dw
 wDexGridName:: ds MON_NAME_LENGTH
 wDexGridPalKeys:: ds 8 ; OBJ palette slot -> icon colour (+ faded bit), -1 = free
+wDexGridCellMon:: ds 15
+wDexGridCellFlags:: ds 15 ; DEXGRID_SEEN_F, DEXGRID_CAUGHT_F
+wDexGridOldCursorRow:: db
+wDexGridOldT0:: db
+wDexGridOldTCount:: db
+wDexGridFullTilemap:: db
+wDexGridTopPending:: db
+wDexGridPushOld:: db
+wDexGridPushNew:: db
+wDexGridPicSource:: dw

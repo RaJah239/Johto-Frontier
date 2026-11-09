@@ -524,7 +524,7 @@ SECTION "Nayru Pokedex", ROMX
 INCLUDE "engine/pokedex/pokedex.asm"
 
 
-SECTION "Pokedex Grid", ROMX
+SECTION "Pokedex Grid", ROMX, ALIGN[8]
 INCLUDE "engine/pokedex/pokedex_grid.asm"
 
 

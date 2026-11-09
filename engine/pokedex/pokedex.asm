@@ -3766,11 +3766,11 @@ Pokedex_Enable_LCD:
 
 Pokedex_LoadGFX:
 IF USE_COMPRESSED_POKEDEX_GFX == FALSE
- 	call Pokedex_Enable_LCD
+	; (Get2bpp copies them at once if the LCD is off, or over the next frames)
  	ld de, PokedexGFX
  	ld hl, vTiles2 tile $31
  	lb bc, BANK(PokedexGFX), $4f
- 	call Request2bpp
+	call Get2bpp
 ELSE
 ; IF USE_COMPRESSED_POKEDEX_GFX == TRUE
  	call DisableLCD
@@ -3787,7 +3787,7 @@ IF USE_COMPRESSED_POKEDEX_GFX == FALSE
  	ld de, PokedexSlowpokeGFX
  	ld hl, vTiles0
  	lb bc, BANK(PokedexSlowpokeGFX), $38
- 	call Request2bpp
+	call Get2bpp
 ELSE
 ; IF USE_COMPRESSED_POKEDEX_GFX == TRUE
  	call DisableLCD
@@ -3800,42 +3800,32 @@ ENDC
  	ret
 
 Pokedex_LoadPageNums:
- ; load pagenum tiles to vram1
- ; lcd needs to be enabled or it will crash !!!
- 	ldh a, [rLCDC]
- 	push af ; preserve the state of lcd for after we're done
- 	bit rLCDC_ENABLE, a
- 	jr nz, .lcdalreadyon
- 	call EnableLCD
- 
- .lcdalreadyon
- 	ld a, $1
- 	ldh [rVBK], a
- 	ld de, Pokedex_PageNumTiles tile 0
- 	ld hl, vTiles2 tile $60
+; load pagenum tiles to vram1
+; (Get2bpp copies them at once if the LCD is off, or over the next frames)
+	ld a, $1
+	ldh [rVBK], a
+	ld de, Pokedex_PageNumTiles tile 0
+	ld hl, vTiles2 tile $60
 	lb bc, BANK(Pokedex_PageNumTiles), 14
- 	call Request2bpp
- ; plain line
- 	ld de, Pokedex_PageNumTiles tile 13
- 	ld hl, vTiles2 tile $4e
- 	lb bc, BANK(Pokedex_PageNumTiles), 1
-	call Request2bpp
- ; single black tile at vram1 $7f
- 	ld de, Pokedex_ExtraTiles tile 31
- 	ld hl, vTiles2 tile $7f
+	call Get2bpp
+; plain line
+	ld de, Pokedex_PageNumTiles tile 13
+	ld hl, vTiles2 tile $4e
+	lb bc, BANK(Pokedex_PageNumTiles), 1
+	call Get2bpp
+; single black tile at vram1 $7f
+	ld de, Pokedex_ExtraTiles tile 31
+	ld hl, vTiles2 tile $7f
 	lb bc, BANK(Pokedex_ExtraTiles), 1
- 	call Request2bpp
- 	ld de, Pokedex_ExtraTiles tile 38
- 	ld hl, vTiles2 tile $70
- 	lb bc, BANK(Pokedex_ExtraTiles), 7
- 	call Request2bpp
- 
- 	ld a, $0
- 	ldh [rVBK], a
- 	pop af
- 	ldh [rLCDC], a
- 	ret
- 
+	call Get2bpp
+	ld de, Pokedex_ExtraTiles tile 38
+	ld hl, vTiles2 tile $70
+	lb bc, BANK(Pokedex_ExtraTiles), 7
+	call Get2bpp
+	xor a
+	ldh [rVBK], a
+	ret
+
  Pokedex_LoadInversedFont:
  	ld a, 1
  	ldh [rVBK], a

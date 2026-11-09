@@ -41,11 +41,34 @@ DEF PAL_DEXGRID_PIC      EQU 1
 DEF PAL_DEXGRID_TYPES    EQU 2 ; white, type 1, type 2, black
 DEF PAL_DEXGRID_BLUE     EQU 3 ; white, light gray, blue, black
 DEF PAL_DEXGRID_REDBLUE  EQU 4 ; white, red, blue, light gray (cursor over blue)
+; DexGrid_Redraw modes
+DEF DEXGRID_REDRAW_CURSOR EQU 0 ; only the cursor moved
+DEF DEXGRID_REDRAW_ALL    EQU 1 ; on entry
+DEF DEXGRID_REDRAW_DOWN   EQU 2 ; scrolled down a row
+DEF DEXGRID_REDRAW_UP     EQU 3 ; scrolled up a row
+
+DEF DEXGRID_SEEN_F       EQU 0 ; wDexGridCellFlags
+DEF DEXGRID_CAUGHT_F     EQU 1
 DEF DEXGRID_FADED_F      EQU 7 ; icon palette key: seen but not caught
 DEF DEXGRID_OBJ_PALS     EQU 8
 
 DEF DEXGRID_THUMB_TOP    EQU 69 ; scrollbar thumb y range (screen)
 DEF DEXGRID_THUMB_RANGE  EQU 55
+
+; Shift tables for DexGrid_PutRow (this section is 256-byte aligned):
+; page s of DexGridShrTable is v >> s, of DexGridShlTable (v << (8 - s)) & $ff.
+DexGridShrTable:
+FOR DEXGRID_S, 8
+	FOR DEXGRID_V, 256
+		db DEXGRID_V >> DEXGRID_S
+	ENDR
+ENDR
+DexGridShlTable:
+FOR DEXGRID_S, 8
+	FOR DEXGRID_V, 256
+		db (DEXGRID_V << (8 - DEXGRID_S)) & $ff
+	ENDR
+ENDR
 
 Pokedex_InitGridScreen::
 	ldh a, [rSVBK]
@@ -82,7 +105,10 @@ Pokedex_InitGridScreen::
 
 	call DexGrid_LoadStaticGFX
 	call DexGrid_SetStaticPalettes
+	call DexGrid_DrawCounts
 	ld a, TRUE
+	ld [wDexGridFullTilemap], a
+	ld a, DEXGRID_REDRAW_ALL
 	call DexGrid_Redraw
 
 	ldh a, [rLCDC]
@@ -107,7 +133,7 @@ Pokedex_UpdateGridScreen::
 	ld hl, hJoyPressed
 	ld a, [hl]
 	and B_BUTTON
-	jr nz, .b
+	jp nz, .b
 	ld a, [hl]
 	and A_BUTTON
 	jr nz, .a
@@ -121,13 +147,30 @@ Pokedex_UpdateGridScreen::
 	ld a, [wDexGridTopRow]
 	ld [wDexGridPrevTopRow], a
 	call DexGrid_HandleDPad
-	ret nc
-	ld a, [wDexGridTopRow]
-	ld hl, wDexGridPrevTopRow
-	cp [hl]
-	ld a, FALSE
+	jr c, .moved
+	; no move this frame: draw the top half if a move left it behind
+	ld a, [wDexGridTopPending]
+	and a
+	ret z
+	jmp DexGrid_DrawTopHalf
+
+.moved
+	ld a, [wDexGridPrevTopRow]
+	ld hl, wDexGridTopRow
+	sub [hl] ; old - new
+	ld a, DEXGRID_REDRAW_CURSOR
 	jr z, .redraw
-	inc a ; TRUE: the visible rows changed, reload the icons
+	ld a, [wDexGridPrevTopRow]
+	inc a
+	cp [hl]
+	ld a, DEXGRID_REDRAW_DOWN
+	jr z, .redraw
+	ld a, [wDexGridPrevTopRow]
+	dec a
+	cp [hl]
+	ld a, DEXGRID_REDRAW_UP
+	jr z, .redraw
+	ld a, DEXGRID_REDRAW_ALL
 .redraw
 	jmp DexGrid_Redraw
 
@@ -446,17 +489,6 @@ DexGrid_CountFlags:
 	ld a, b
 	ret
 
-DexGrid_LoadSelectedMonTiles:
-; The dex's own frontpic loader (selected mon, or the question mark).
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wPokedexSeen)
-	ldh [rSVBK], a
-	newfarcall Pokedex_LoadSelectedMonTiles
-	pop af
-	ldh [rSVBK], a
-	ret
-
 DexGrid_GetName:
 ; a = species -> wDexGridName = its name ("@"-terminated).
 	ld b, a
@@ -559,41 +591,399 @@ DexGrid_SetMonPalettes:
 	ld c, b
 	ld de, wBGPals1 palette PAL_DEXGRID_TYPES + 4
 	newfarcall LoadMonBaseTypePal ; type 2
-	jr .apply
+	ret
 
 .unseen
 	ld hl, DexGridPalUnseen
 	ld de, wBGPals1 palette PAL_DEXGRID_PIC
-	call DexGrid_SetStaticPalettes.copy
-.apply
-	ld a, $e4
-	jmp DmgToCgbBGPals
+	jp DexGrid_SetStaticPalettes.copy
 
 ; ---------------------------------------------------------------------------
 ; Drawing
 ; ---------------------------------------------------------------------------
 
 DexGrid_Redraw:
-; Redraw the screen for wDexGridIndex / wDexGridTopRow.
-; a = TRUE to reload the icons (the visible rows changed).
+; Redraw the screen for wDexGridIndex / wDexGridTopRow; a = DEXGRID_REDRAW_*.
+; The grid is drawn in WRAM, then copied to VRAM in one go just after the next
+; VBlank, before the LCD gets to it. The top half is left to
+; DexGrid_DrawTopHalf on the next frame without a move (so the cursor keeps
+; up with the D-pad), except on entry.
 	ld [wDexGridReloadIcons], a
-	call DexGrid_GetIndexSpecies
-	ld [wDexGridSpecies], a
+	ld a, [wDexGridT0]
+	ld [wDexGridOldT0], a
+	ld a, [wDexGridTCount]
+	ld [wDexGridOldTCount], a
+	ld a, [wDexGridCursorRow]
+	ld [wDexGridOldCursorRow], a
+	call DexGrid_CursorCell
+	call DexGrid_DivMod5
+	ld [wDexGridCellCol], a
+	ld a, c
+	ld [wDexGridCursorRow], a
+	call DexGrid_ComputeT0
 	call DexGrid_SetListingFromIndex
-	call DexGrid_LoadSelectedMonTiles ; frontpic: VRAM bank 0 tiles $00-$30
-	call DexGrid_SetMonPalettes
 
-	call DexGrid_DrawTop
-	call DexGrid_DrawStrips
+	ld a, [wDexGridReloadIcons]
+	and a
+	jr z, .cursor
+	call DexGrid_BuildCellCache
+	call DexGrid_RenderStrips
 	call DexGrid_DrawScrollbar
+	call DexGrid_LoadIcons
+	; the new OAM and icon palettes must go out with the new icon tiles
+	ld a, TRUE
+	ldh [hOAMUpdate], a
+	call DexGrid_UpdateOAM
+.cursor
+	call DexGrid_DrawPatches
+	ld a, [wDexGridFullTilemap]
+	and a
+	jr nz, .entry
 	call DexGrid_BuildTilemap
 	ld a, [wDexGridReloadIcons]
 	and a
-	call nz, DexGrid_LoadIcons
+	jr z, .commit
+	lb de, $e4, $e4
+	call DmgToCgbObjPals
+	xor a
+	ldh [hOAMUpdate], a
+.commit
+	call DelayFrame
+	call DexGrid_CommitGrid
+	ld a, TRUE
+	ld [wDexGridTopPending], a
+	ret
 
-	call DexGrid_UpdateOAM
+.entry
+	xor a
+	ldh [hOAMUpdate], a
+	lb de, $e4, $e4
+	call DmgToCgbObjPals
+	ld a, TRUE
+	call DexGrid_BuildTilemap
+	call DexGrid_CommitGrid
+	call DexGrid_DrawTopHalf
+	xor a
+	ld [wDexGridFullTilemap], a
 	ld b, 3 ; tiles and attributes in one frame
 	farjp _SafeCopyTilemapAtOnce
+
+DexGrid_ComputeT0:
+; The cursor box's tile columns (wDexGridCellCol's cell):
+; t0 = left / 8, count = (left + 30) / 8 - t0 + 1
+	call DexGrid_CellLeft
+	ld b, a
+	srl a
+	srl a
+	srl a
+	ld [wDexGridT0], a
+	ld c, a
+	ld a, b
+	add DEXGRID_CELL_W
+	srl a
+	srl a
+	srl a
+	sub c
+	inc a
+	ld [wDexGridTCount], a
+	ret
+
+DexGrid_DrawTopHalf:
+; The cursor mon's frontpic, palettes, number, name and types. Everything is
+; prepared first, then copied while the LCD draws the lower half of the
+; screen, and the palettes go out at the next VBlank, so the new picture
+; shows up in one frame with its own colours.
+	xor a
+	ld [wDexGridTopPending], a
+	call DexGrid_GetIndexSpecies
+	ld [wDexGridSpecies], a
+	call DexGrid_PrepareFrontpic
+	call DexGrid_SetMonPalettes
+	call DexGrid_DrawTop
+	call DexGrid_WaitLowerScreen
+	ld a, BANK(sScratch)
+	call OpenSRAM
+	ld a, [wDexGridPicSource]
+	ld e, a
+	ld a, [wDexGridPicSource + 1]
+	ld d, a
+	ld hl, vTiles2
+	lb bc, 0, 7 * 7
+	call Get2bpp
+	call CloseSRAM
+	ld de, wDexGridHeader
+	ld hl, vTiles1 tile (DEXGRID_TOP_TILE - $80)
+	ld c, DEXGRID_TOP_W
+	call DexGrid_Upload
+	ld de, wDexGridTopA
+	ld hl, vTiles1 tile (DEXGRID_TOP_TILE - $80 + DEXGRID_TOP_W)
+	ld c, 2 * DEXGRID_TOP_W
+	call DexGrid_Upload
+	ld a, $e4
+	jmp DmgToCgbBGPals
+
+DexGrid_WaitLowerScreen:
+; Wait until the LCD is on lines 64-99 (below the picture, with time to copy
+; it before the next VBlank).
+.loop
+	ldh a, [rLY]
+	cp 8 * 8
+	jr c, .loop
+	cp 100
+	jr nc, .loop
+	ret
+
+DexGrid_PrepareFrontpic:
+; Decompress the cursor mon's frontpic (or the question mark) into SRAM;
+; wDexGridPicSource = where (SRAM bank 0).
+	call DexGrid_IsCursorSeen
+	jr z, .question_mark
+	ld a, [wDexGridSpecies]
+	ld [wCurSpecies], a
+	ld b, a
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wCurPartySpecies)
+	ldh [rSVBK], a
+	ld a, b
+	ld [wCurPartySpecies], a
+	ld a, [wFirstUnownSeen]
+	ld [wUnownLetter], a
+	newfarcall PrepareFrontpic
+	call CloseSRAM
+	pop af
+	ldh [rSVBK], a
+	ld hl, sPaddedEnemyFrontpic
+	jr .done
+
+.question_mark
+	ld a, BANK(sScratch)
+	call OpenSRAM
+	newfarcall LoadQuestionMarkPic
+	call CloseSRAM
+	ld hl, sScratch
+.done
+	ld a, l
+	ld [wDexGridPicSource], a
+	ld a, h
+	ld [wDexGridPicSource + 1], a
+	ret
+
+DexGrid_CommitGrid:
+; Copy the grid's prepared tiles to VRAM: all the number rows, scrollbar and
+; icons if they were redrawn (else just the old cursor's tiles from the clean
+; rows), then the cursor's tiles and the overlay, and the tilemap rows that
+; changed.
+	ld a, [wDexGridReloadIcons]
+	and a
+	jr z, .restore
+	ld de, wDexGridCleanStrips
+	ld hl, vTiles2 tile DEXGRID_NUMROW_TILE
+	ld c, DEXGRID_ROWS * DEXGRID_STRIP_W
+	call DexGrid_Upload
+	ld de, wDexGridScroll
+	ld hl, vTiles1 tile (DEXGRID_SCROLL_TILE - $80)
+	ld c, 9
+	call DexGrid_Upload
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wDexGridIcons)
+	ldh [rSVBK], a
+	ld de, wDexGridIcons
+	ld hl, vTiles0
+	ld c, DEXGRID_CELLS * 4
+	call DexGrid_Upload
+	pop af
+	ldh [rSVBK], a
+	jr .patches
+
+.restore
+	ld a, [wDexGridOldCursorRow]
+	call .restore_row
+	ld a, [wDexGridOldCursorRow]
+	inc a
+	call .restore_row
+
+.patches
+	ld a, [wDexGridCursorRow]
+	ld de, wDexGridPatch
+	call .upload_patch
+	ld a, [wDexGridCursorRow]
+	inc a
+	cp DEXGRID_ROWS
+	jr nc, .overlay
+	ld de, wDexGridPatch + DEXGRID_OVERLAY_W tiles
+	call .upload_patch
+.overlay
+	ld de, wDexGridOverlay
+	ld hl, vTiles2 tile DEXGRID_OVERLAY_TILE
+	ld c, 3 * DEXGRID_OVERLAY_W
+	call DexGrid_Upload
+	ld a, [wDexGridPushOld]
+	cp -1
+	call nz, DexGrid_PushOverlayRows
+	ld a, [wDexGridPushNew]
+	cp -1
+	ret z
+	jp DexGrid_PushOverlayRows
+
+.restore_row
+; number row a's old cursor tiles, from the clean copy
+	cp DEXGRID_ROWS
+	ret nc
+	ld hl, wDexGridOldT0
+	call DexGrid_StripTileIndex ; hl = tile index
+	push hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	ld de, wDexGridCleanStrips
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	call .vram_tile
+	ld a, [wDexGridOldTCount]
+	ld c, a
+	jp DexGrid_Upload
+
+.upload_patch
+; patch tiles at de -> number row a, cursor tiles
+	push de
+	ld hl, wDexGridT0
+	call DexGrid_StripTileIndex
+	call .vram_tile
+	pop de
+	ld a, [wDexGridTCount]
+	ld c, a
+	jp DexGrid_Upload
+
+.vram_tile
+; hl = address of number row tile hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	ld bc, vTiles2 tile DEXGRID_NUMROW_TILE
+	add hl, bc
+	ret
+
+DexGrid_StripTileIndex:
+; a = number row, [hl] = tile column -> hl = row * 19 + column. Preserves de.
+	ld c, [hl]
+	ld b, 0
+	ld hl, 0
+	push bc
+	ld bc, DEXGRID_STRIP_W
+	call AddNTimes
+	pop bc
+	add hl, bc
+	ret
+
+DexGrid_DrawPatches:
+; The cursor box's tiles in the number rows: its number row with the top edge
+; and sides, and the next number row with the bottom edge (the last row's is
+; in the overlay), from the clean rows into wDexGridPatch.
+	call DexGrid_CursorCell
+	call DexGrid_DivMod5
+	ld [wDexGridCellCol], a
+	ld a, 2 ; red
+	ld [wDexGridColor], a
+	ld a, [wDexGridCursorRow]
+	ld de, wDexGridPatch
+	call .copy
+	ld hl, wDexGridPatch
+	call .edges
+	call DexGrid_CursorSides
+	ld a, [wDexGridCursorRow]
+	inc a
+	cp DEXGRID_ROWS
+	ret nc
+	ld de, wDexGridPatch + DEXGRID_OVERLAY_W tiles
+	call .copy
+	ld hl, wDexGridPatch + DEXGRID_OVERLAY_W tiles
+	; fallthrough
+
+.edges
+; two red rows (y 0-1) line to line on the patch at hl; returns d = left line
+	ld a, [wDexGridTCount]
+	call DexGrid_SetCanvas
+	call DexGrid_OverlayLeft
+	ld d, a
+	ld e, 0
+	ld b, DEXGRID_CELL_W + 1
+	call DexGrid_HLine
+	inc e
+	ld b, DEXGRID_CELL_W + 1
+	jp DexGrid_HLine
+
+.copy
+; number row a's cursor tiles from the clean copy to de
+	push de
+	ld hl, wDexGridT0
+	call DexGrid_StripTileIndex
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	ld bc, wDexGridCleanStrips
+	add hl, bc
+	pop de
+	ld a, [wDexGridTCount]
+	swap a ; * 16
+	ld c, a
+	ld b, 0
+	jp CopyBytes
+
+DexGrid_BuildCellCache:
+; wDexGridCellMon / wDexGridCellFlags for the 15 visible cells.
+	xor a
+.loop
+	ld [wDexGridCell], a
+	call DexGrid_GetCellSpecies
+	ld b, a
+	ld c, 0
+	and a
+	jr z, .store
+	call DexGrid_IsSeen
+	jr z, .store
+	set DEXGRID_SEEN_F, c
+	ld a, b
+	call DexGrid_IsCaught
+	jr z, .store
+	set DEXGRID_CAUGHT_F, c
+.store
+	ld a, [wDexGridCell]
+	ld e, a
+	ld d, 0
+	ld hl, wDexGridCellMon
+	add hl, de
+	ld [hl], b
+	ld hl, wDexGridCellFlags
+	add hl, de
+	ld [hl], c
+	ld a, [wDexGridCell]
+	inc a
+	cp DEXGRID_CELLS
+	jr c, .loop
+	ret
+
+DexGrid_CellInfo:
+; a = cell -> a = species (0 if none), c = flags. Preserves b, de, hl.
+	push hl
+	push de
+	ld e, a
+	ld d, 0
+	ld hl, wDexGridCellFlags
+	add hl, de
+	ld c, [hl]
+	ld hl, wDexGridCellMon
+	add hl, de
+	ld a, [hl]
+	pop de
+	pop hl
+	ret
 
 DexGrid_Upload:
 ; Copy c tiles at de (WRAM, 16-byte aligned: GDMA) to VRAM bank 1 at hl.
@@ -608,12 +998,52 @@ DexGrid_Upload:
 
 DexGrid_SetCanvas:
 ; hl = canvas base, a = width in tiles
+	push hl
 	ld [wDexGridCanvasW], a
 	ld a, l
 	ld [wDexGridCanvas], a
 	ld a, h
 	ld [wDexGridCanvas + 1], a
+	; stride (bytes per tile row) = width * 16
+	ld a, [wDexGridCanvasW]
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	ld a, l
+	ld [wDexGridStride], a
+	ld a, h
+	ld [wDexGridStride + 1], a
+	pop hl
 	ret
+
+MACRO dexgrid_apply_row
+; d = shift table page: look up wDexGridRowMask/Lo/Hi there and write them
+; into the 2 bytes at hl (plane 0, plane 1); hl ends at plane 1.
+	ld a, [wDexGridRowMask]
+	ld e, a
+	ld a, [de]
+	cpl
+	ld c, a ; ~mask
+	ld a, [wDexGridRowLo]
+	ld e, a
+	ld a, [de]
+	ld b, a
+	ld a, c
+	and [hl]
+	or b
+	ld [hli], a
+	ld a, [wDexGridRowHi]
+	ld e, a
+	ld a, [de]
+	ld b, a
+	ld a, c
+	and [hl]
+	or b
+	ld [hl], a
+ENDM
 
 DexGrid_PutRow:
 ; Write one 8-pixel row into the current canvas at pixel (d, e): pixels set
@@ -623,121 +1053,68 @@ DexGrid_PutRow:
 	push bc
 	push de
 	push hl
-	; tile index = (y / 8) * width + x / 8
-	ld a, [wDexGridCanvasW]
-	ld b, a
-	ld a, e
-	srl a
-	srl a
-	srl a
-	ld c, a
-	inc c
-	xor a
-.mul
-	dec c
-	jr z, .mul_done
-	add b
-	jr .mul
-.mul_done
-	ld c, a
-	ld a, d
-	srl a
-	srl a
-	srl a
-	add c
+	ld a, [wDexGridCanvas]
 	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	add hl, hl
+	ld a, [wDexGridCanvas + 1]
+	ld h, a
+	; + (x / 8) * 16
+	ld a, d
+	and %11111000
+	ld c, a
+	ld b, 0
+	sla c
+	rl b
+	add hl, bc
+	; + (y % 8) * 2
 	ld a, e
-	and 7
+	and %111
 	add a
 	ld c, a
 	ld b, 0
 	add hl, bc
-	ld a, [wDexGridCanvas]
-	ld c, a
-	ld a, [wDexGridCanvas + 1]
-	ld b, a
-	add hl, bc ; hl = plane 0 byte in the first tile
-	ld a, d
-	and 7
-	ld d, a ; shift
-	; left tile: values >> shift
-	ld a, [wDexGridRowMask]
-	call .shr
-	ld c, a
-	ld a, [wDexGridRowLo]
-	call .shr
-	ld b, a
-	ld a, [wDexGridRowHi]
-	call .shr
+	; + (y / 8) * stride
+	ld a, e
+	and %11111000
+	jr z, .got_row
+	rrca
+	rrca
+	rrca
 	ld e, a
-	call .apply
-	; right tile: values << (8 - shift)
+	ld a, [wDexGridStride]
+	ld c, a
+	ld a, [wDexGridStride + 1]
+	ld b, a
+.row_loop
+	add hl, bc
+	dec e
+	jr nz, .row_loop
+.got_row
+	; left tile: values >> shift
 	ld a, d
+	and %111
+	ld c, a ; shift
+	add HIGH(DexGridShrTable)
+	ld d, a
+	push bc
+	dexgrid_apply_row
+	pop bc
+	; right tile: values << (8 - shift), if any pixel spills
+	ld a, c
+	and a
+	jr z, .done
+	add HIGH(DexGridShlTable)
+	ld d, a
+	ld a, [wDexGridRowMask]
+	ld e, a
+	ld a, [de]
 	and a
 	jr z, .done
 	ld bc, 1 tiles - 1
 	add hl, bc ; (hl was at plane 1)
-	ld a, [wDexGridRowMask]
-	call .shl
-	ld c, a
-	ld a, [wDexGridRowLo]
-	call .shl
-	ld b, a
-	ld a, [wDexGridRowHi]
-	call .shl
-	ld e, a
-	call .apply
+	dexgrid_apply_row
 .done
 	pop hl
 	pop de
-	pop bc
-	ret
-
-.apply
-; c = mask, b = plane 0 bits, e = plane 1 bits; hl = plane 0 (ends at plane 1)
-	ld a, c
-	cpl
-	and [hl]
-	or b
-	ld [hli], a
-	ld a, c
-	cpl
-	and [hl]
-	or e
-	ld [hl], a
-	ret
-
-.shr
-; a >> d
-	push bc
-	ld b, d
-	inc b
-.shr_loop
-	dec b
-	jr z, .shr_done
-	srl a
-	jr .shr_loop
-.shr_done
-	pop bc
-	ret
-
-.shl
-; a << (8 - d)
-	push bc
-	ld c, a
-	ld a, 8
-	sub d
-	ld b, a
-	ld a, c
-.shl_loop
-	add a
-	dec b
-	jr nz, .shl_loop
 	pop bc
 	ret
 
@@ -764,38 +1141,52 @@ DexGrid_SetRowColor:
 	pop bc
 	ret
 
-DexGrid_SetPixel:
-; Set pixel (d, e) of the current canvas to colour wDexGridColor.
-; Preserves bc, de, hl.
-	ld a, $80
-	call DexGrid_SetRowColor
-	jp DexGrid_PutRow
-
 DexGrid_HLine:
-; Colour wDexGridColor from (d, e), b pixels to the right. Preserves de, hl.
+; Colour wDexGridColor from (d, e), b pixels to the right, a tile at a time.
+; Preserves de, hl.
 	push de
+	push hl
 .loop
-	call DexGrid_SetPixel
-	inc d
-	dec b
+	; n = pixels left in this tile, at most b
+	ld a, d
+	and %111
+	ld c, a
+	ld a, 8
+	sub c
+	cp b
+	jr c, .got_n
+	ld a, b
+.got_n
+	ld c, a
+	push bc
+	ld b, 0
+	ld hl, .LeadingOnes
+	add hl, bc
+	ld a, [hl]
+	call DexGrid_SetRowColor
+	call DexGrid_PutRow
+	pop bc
+	ld a, d
+	add c
+	ld d, a
+	ld a, b
+	sub c
+	ld b, a
 	jr nz, .loop
+	pop hl
 	pop de
 	ret
 
-DexGrid_VLine:
-; Colour wDexGridColor from (d, e), b pixels down. Preserves de, hl.
-	push de
-.loop
-	call DexGrid_SetPixel
-	inc e
-	dec b
-	jr nz, .loop
-	pop de
-	ret
+.LeadingOnes:
+	db %00000000, %10000000, %11000000, %11100000, %11110000
+	db %11111000, %11111100, %11111110, %11111111
 
 DexGrid_BlitGlyph:
 ; Draw the 8x8 1bpp glyph in wDexGridGlyph at (d, e) in colour wDexGridColor
 ; (its blank pixels are left alone). Preserves de.
+	ld a, e
+	and %111
+	jr z, .fast
 	push de
 	ld hl, wDexGridGlyph
 	ld b, 8
@@ -809,6 +1200,109 @@ DexGrid_BlitGlyph:
 	inc e
 	dec b
 	jr nz, .loop
+	pop de
+	ret
+
+.fast
+; y is a multiple of 8: the glyph's rows all go in the same tile row, so the
+; address is worked out once.
+	push de
+	ld a, [wDexGridCanvas]
+	ld l, a
+	ld a, [wDexGridCanvas + 1]
+	ld h, a
+	; + (x / 8) * 16
+	ld a, d
+	and %11111000
+	ld c, a
+	ld b, 0
+	sla c
+	rl b
+	add hl, bc
+	; + (y / 8) * stride
+	ld a, e
+	and a
+	jr z, .got_row
+	rrca
+	rrca
+	rrca
+	ld e, a
+	ld a, [wDexGridStride]
+	ld c, a
+	ld a, [wDexGridStride + 1]
+	ld b, a
+.row_loop
+	add hl, bc
+	dec e
+	jr nz, .row_loop
+.got_row
+	ld a, d
+	and %111
+	ld b, a ; shift
+	ld a, [wDexGridColor]
+	ld c, a
+	ld de, wDexGridGlyph
+	ld a, 8
+.fast_row
+	push af
+	ld a, [de]
+	inc de
+	and a
+	jr z, .fast_next
+	push de
+	ld e, a
+	ld a, b
+	add HIGH(DexGridShrTable)
+	ld d, a
+	ld a, [de] ; left tile bits
+	call .apply
+	ld a, b
+	and a
+	jr z, .no_spill
+	add HIGH(DexGridShlTable)
+	ld d, a
+	ld a, [de] ; right tile bits
+	and a
+	jr z, .no_spill
+	push hl
+	push bc
+	ld bc, 1 tiles
+	add hl, bc
+	pop bc
+	call .apply
+	pop hl
+.no_spill
+	pop de
+.fast_next
+	inc hl
+	inc hl
+	pop af
+	dec a
+	jr nz, .fast_row
+	pop de
+	ret
+
+.apply
+; set the bits in a to colour c in the row at hl (plane 0, plane 1).
+; Preserves bc, de, hl.
+	push de
+	ld e, a
+	cpl
+	ld d, a
+	ld a, [hl]
+	and d
+	bit 0, c
+	jr z, .plane0
+	or e
+.plane0
+	ld [hli], a
+	ld a, [hl]
+	and d
+	bit 1, c
+	jr z, .plane1
+	or e
+.plane1
+	ld [hld], a
 	pop de
 	ret
 
@@ -974,10 +1468,6 @@ DexGrid_DrawTop:
 	ld de, wDexGridTopA
 	ld bc, 2 * DEXGRID_TOP_W tiles
 	call CopyBytes
-	ld hl, DexGridTopGFX + 6 * DEXGRID_TOP_W tiles
-	ld de, wDexGridTopB
-	ld bc, 2 * DEXGRID_TOP_W tiles
-	call CopyBytes
 	ld a, 3 ; black
 	ld [wDexGridColor], a
 
@@ -1003,7 +1493,7 @@ DexGrid_DrawTop:
 	ld hl, wDexGridName
 	jr .got_name
 .unseen
-	ld hl, .UnseenName
+	ld hl, DexGrid_UnseenName
 .got_name
 	lb de, 69 - DEXGRID_TOP_X, 16 - 16
 	ld c, MON_NAME_LENGTH - 1
@@ -1011,7 +1501,7 @@ DexGrid_DrawTop:
 
 	; type labels (row 3 = canvas A row 1)
 	call DexGrid_IsCursorSeen
-	jr z, .counts
+	jr z, .upload
 	call DexGrid_GetTypeIndexes
 	push bc
 	ld a, c
@@ -1035,7 +1525,17 @@ DexGrid_DrawTop:
 	dec b
 	jr nz, .border_loop
 
-.counts
+.upload
+	ret ; (DexGrid_DrawTopHalf copies rows 0 and 2-3 to VRAM)
+
+DexGrid_DrawCounts:
+; The Seen/Own counts (rows 6-7); they don't change while the grid is shown.
+	ld hl, DexGridTopGFX + 6 * DEXGRID_TOP_W tiles
+	ld de, wDexGridTopB
+	ld bc, 2 * DEXGRID_TOP_W tiles
+	call CopyBytes
+	ld a, 3 ; black
+	ld [wDexGridColor], a
 	ld hl, wDexGridTopB
 	ld a, DEXGRID_TOP_W
 	call DexGrid_SetCanvas
@@ -1049,16 +1549,6 @@ DexGrid_DrawTop:
 	call DexGrid_CountFlags
 	ld d, 134 - DEXGRID_TOP_X
 	call .count
-
-	; upload rows 0, 2-3, 6-7
-	ld de, wDexGridHeader
-	ld hl, vTiles1 tile (DEXGRID_TOP_TILE - $80)
-	ld c, DEXGRID_TOP_W
-	call DexGrid_Upload
-	ld de, wDexGridTopA
-	ld hl, vTiles1 tile (DEXGRID_TOP_TILE - $80 + DEXGRID_TOP_W)
-	ld c, 2 * DEXGRID_TOP_W
-	call DexGrid_Upload
 	ld de, wDexGridTopB
 	ld hl, vTiles1 tile (DEXGRID_TOP_TILE - $80 + 3 * DEXGRID_TOP_W)
 	ld c, 2 * DEXGRID_TOP_W
@@ -1085,7 +1575,7 @@ DexGrid_DrawTop:
 	ld c, 3
 	jmp DexGrid_DrawFontString
 
-.UnseenName:
+DexGrid_UnseenName:
 	db "?????@"
 
 DexGrid_IsCursorSeen:
@@ -1125,21 +1615,56 @@ DexGrid_CopyTypeLabel:
 	jr nz, .loop
 	ret
 
-DexGrid_DrawStrips:
-; The three number rows: numbers, caught balls and the cursor box's top and
-; bottom edges. Each is drawn in wDexGridStrip and uploaded.
-	call DexGrid_CursorCell
-	call DexGrid_DivMod5
-	ld a, c
-	ld [wDexGridCursorRow], a
+DexGrid_RenderStrips:
+; Draw the three number rows' numbers and caught balls (no cursor) into
+; wDexGridCleanStrips. After a one-row scroll, two of them are just moved.
+	ld a, [wDexGridReloadIcons]
+	cp DEXGRID_REDRAW_DOWN
+	jr z, .down
+	cp DEXGRID_REDRAW_UP
+	jr z, .up
 	xor a
-.row_loop
-	ld [wDexGridStripRow], a
-	ld hl, DexGridNumRowGFX
-	ld de, wDexGridStrip
+.all_loop
+	push af
+	call .row
+	pop af
+	inc a
+	cp DEXGRID_ROWS
+	jr c, .all_loop
+	ret
+
+.down
+	ld hl, wDexGridCleanStrips + DEXGRID_STRIP_W tiles
+	ld de, wDexGridCleanStrips
+	ld bc, 2 * DEXGRID_STRIP_W tiles
+	call CopyBytes
+	ld a, 2
+	jr .row
+
+.up
+	ld hl, wDexGridCleanStrips + DEXGRID_STRIP_W tiles
+	ld de, wDexGridCleanStrips + 2 * DEXGRID_STRIP_W tiles
 	ld bc, DEXGRID_STRIP_W tiles
 	call CopyBytes
-	ld hl, wDexGridStrip
+	ld hl, wDexGridCleanStrips
+	ld de, wDexGridCleanStrips + DEXGRID_STRIP_W tiles
+	ld bc, DEXGRID_STRIP_W tiles
+	call CopyBytes
+	xor a
+	; fallthrough
+
+.row
+	ld [wDexGridStripRow], a
+	ld hl, wDexGridCleanStrips
+	ld bc, DEXGRID_STRIP_W tiles
+	call AddNTimes
+	push hl
+	ld d, h
+	ld e, l
+	ld hl, DexGridNumRowGFX
+	ld bc, DEXGRID_STRIP_W tiles
+	call CopyBytes
+	pop hl
 	ld a, DEXGRID_STRIP_W
 	call DexGrid_SetCanvas
 
@@ -1153,15 +1678,14 @@ DexGrid_DrawStrips:
 	add a
 	add c ; row * 5
 	add b
-	call DexGrid_GetCellSpecies
+	call DexGrid_CellInfo
 	and a
 	jr z, .next_col
 	ld [wDexGridCellSpecies], a
 	ld b, 1 ; gray
-	call DexGrid_IsSeen
+	bit DEXGRID_SEEN_F, c
 	jr z, .got_color
-	ld a, [wDexGridCellSpecies]
-	call DexGrid_IsCaught
+	bit DEXGRID_CAUGHT_F, c
 	jr z, .got_color
 	call DexGrid_CellLeft
 	add 4
@@ -1184,74 +1708,27 @@ DexGrid_DrawStrips:
 	inc a
 	cp DEXGRID_COLS
 	jr c, .col_loop
-
-	; the cursor box: top edge (2 px) and sides in its row, bottom edge
-	; (2 px) in the next row (the last row's is in DexGrid_BuildTilemap)
-	ld a, 2 ; red
-	ld [wDexGridColor], a
-	call DexGrid_CursorCell
-	call DexGrid_DivMod5
-	ld [wDexGridCellCol], a
-	ld a, [wDexGridStripRow]
-	ld b, a
-	ld a, [wDexGridCursorRow]
-	cp b
-	jr nz, .not_cursor_row
-	call DexGrid_CursorHLines
-	call DexGrid_CellLeft
-	ld d, a
-	call DexGrid_CursorSides
-	jr .upload
-.not_cursor_row
-	inc a
-	cp b
-	call z, DexGrid_CursorHLines
-.upload
-	ld a, [wDexGridStripRow]
-	ld hl, vTiles2 tile DEXGRID_NUMROW_TILE
-	ld bc, DEXGRID_STRIP_W tiles
-	call AddNTimes
-	ld de, wDexGridStrip
-	ld c, DEXGRID_STRIP_W
-	call DexGrid_Upload
-	ld a, [wDexGridStripRow]
-	inc a
-	cp DEXGRID_ROWS
-	jp c, .row_loop
 	ret
-
-DexGrid_CursorHLines:
-; Two red rows (y 0 and 1) across the cursor's cell, line to line.
-	call DexGrid_CellLeft
-	ld d, a
-	ld e, 0
-	ld b, DEXGRID_CELL_W + 1
-	call DexGrid_HLine
-	inc e
-	ld b, DEXGRID_CELL_W + 1
-	jmp DexGrid_HLine
 
 DexGrid_CursorSides:
 ; Draw the cursor box's sides (x = d, d + 1, d + 29, d + 30) over y 0-7 of the
 ; current canvas.
-	ld hl, .Offsets
-	ld c, 4
+	ld a, %11000000
+	call DexGrid_SetRowColor
+	ld e, 0
 .loop
+	call DexGrid_PutRow
 	push de
 	ld a, d
-	add [hl]
+	add DEXGRID_CELL_W - 1
 	ld d, a
-	inc hl
-	ld e, 0
-	ld b, 8
-	call DexGrid_VLine
+	call DexGrid_PutRow
 	pop de
-	dec c
+	inc e
+	ld a, e
+	cp 8
 	jr nz, .loop
 	ret
-
-.Offsets:
-	db 0, 1, DEXGRID_CELL_W - 1, DEXGRID_CELL_W
 
 DexGrid_CellLeft:
 ; a = x of the left line of column wDexGridCellCol (1 + 30 * col). Clobbers b.
@@ -1361,15 +1838,16 @@ DexGrid_DrawScrollbar:
 	inc e
 	dec c
 	jr nz, .thumb
-
-	ld de, wDexGridScroll
-	ld hl, vTiles1 tile (DEXGRID_SCROLL_TILE - $80)
-	ld c, 9
-	jmp DexGrid_Upload
+	ret
 
 DexGrid_BuildTilemap:
 ; The static tilemap and attrmap, with the cursor box's sides in the icon
 ; rows (and its bottom edge in the bottom row) drawn on overlay tiles.
+; a = TRUE: build the whole screen (the caller copies it to the BG map);
+; FALSE: put back the old cursor's cells, overlay the new ones, and copy just
+; the rows that changed to the BG map.
+	and a
+	jr z, .partial
 	ld hl, DexGridStaticTilemap
 	decoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
@@ -1378,26 +1856,184 @@ DexGrid_BuildTilemap:
 	decoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	call CopyBytes
+	call .no_push
+	jp DexGrid_ApplyOverlay
 
+.partial
+	call DexGrid_RestoreOverlay
+	call DexGrid_ApplyOverlay
+	call .no_push
+	ld a, [wDexGridOldCursorRow]
+	ld hl, wDexGridCursorRow
+	cp [hl]
+	jr nz, .moved
+	ld a, [wDexGridOldT0]
+	ld hl, wDexGridT0
+	cp [hl]
+	ret z ; same cells: only the overlay tiles' graphics changed
+.moved
+	; DexGrid_CommitGrid copies these rows to the BG map
+	ld a, [wDexGridOldCursorRow]
+	ld [wDexGridPushOld], a
+	ld hl, wDexGridCursorRow
+	cp [hl]
+	ret z
+	ld a, [hl]
+	ld [wDexGridPushNew], a
+	ret
+
+.no_push
+	ld a, -1
+	ld [wDexGridPushOld], a
+	ld [wDexGridPushNew], a
+	ret
+
+DexGrid_RestoreOverlay:
+; Put the static tiles back where the old cursor's overlay was.
+	ld a, [wDexGridOldCursorRow]
+	cp DEXGRID_ROWS
+	ret nc
+	ld b, a
+	add a
+	add b
+	add 9
+	push af
+	call .row
+	pop af
+	inc a
+	call .row
+	ld a, [wDexGridOldCursorRow]
+	cp DEXGRID_ROWS - 1
+	ret nz
+	ld a, SCREEN_HEIGHT - 1
+.row
+; screen row a, columns old t0 to old t0 + old count - 1
+	ld hl, 0
+	ld bc, SCREEN_WIDTH
+	call AddNTimes
+	ld a, [wDexGridOldT0]
+	ld c, a
+	ld b, 0
+	add hl, bc
+	push hl
+	ld bc, DexGridStaticTilemap
+	add hl, bc
+	ld d, h
+	ld e, l
+	pop hl
+	push hl
+	ld bc, wTilemap
+	add hl, bc
+	call .copy
+	pop hl
+	push hl
+	ld bc, DexGridStaticAttrmap
+	add hl, bc
+	ld d, h
+	ld e, l
+	pop hl
+	ld bc, wAttrmap
+	add hl, bc
+.copy
+; copy old count bytes from de to hl
+	ld a, [wDexGridOldTCount]
+	ld c, a
+.copy_loop
+	ld a, [de]
+	inc de
+	ld [hli], a
+	dec c
+	jr nz, .copy_loop
+	ret
+
+DexGrid_PushOverlayRows:
+; Copy the screen rows of cursor row a's overlay to the BG map.
+	ld b, a
+	add a
+	add b
+	add 9
+	push af
+	call DexGrid_PushRow
+	pop af
+	inc a
+	call DexGrid_PushRow
+	ld a, [wDexGridCursorRow]
+	cp DEXGRID_ROWS - 1
+	jr z, .bottom
+	ld a, [wDexGridOldCursorRow]
+	cp DEXGRID_ROWS - 1
+	ret nz
+.bottom
+	ld a, SCREEN_HEIGHT - 1
+	; fallthrough
+
+DexGrid_PushRow:
+; Copy screen row a of wTilemap and wAttrmap to the BG map, in HBlanks.
+	push af
+	ld hl, wTilemap
+	ld bc, SCREEN_WIDTH
+	call AddNTimes
+	pop af
+	push hl
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	ldh a, [hBGMapAddress]
+	ld e, a
+	ldh a, [hBGMapAddress + 1]
+	ld d, a
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	push de
+	push hl
+	xor a
+	ldh [rVBK], a
+	call .copy
+	pop hl
+	ld bc, wAttrmap - wTilemap
+	add hl, bc
+	pop de
+	ld a, 1
+	ldh [rVBK], a
+	call .copy
+	xor a
+	ldh [rVBK], a
+	ret
+
+.copy
+; 20 bytes from hl to de, 10 per HBlank
+	ld c, SCREEN_WIDTH / 10
+.chunk
+.wait_mode3
+	ldh a, [rSTAT]
+	and %11
+	cp 3
+	jr nz, .wait_mode3
+	di
+.wait_hblank
+	ldh a, [rSTAT]
+	and %11
+	jr nz, .wait_hblank
+	REPT 10
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ENDR
+	ei
+	dec c
+	jr nz, .chunk
+	ret
+
+DexGrid_ApplyOverlay:
 	call DexGrid_CursorCell
 	call DexGrid_DivMod5
 	ld [wDexGridCellCol], a
-	; first tile column t0 = left / 8, count = (left + 30) / 8 - t0 + 1
-	call DexGrid_CellLeft
-	ld b, a
-	srl a
-	srl a
-	srl a
-	ld [wDexGridT0], a
-	ld c, a
-	ld a, b
-	add DEXGRID_CELL_W
-	srl a
-	srl a
-	srl a
-	sub c
-	inc a
-	ld [wDexGridTCount], a
 
 	; icon rows: screen rows 9 + 3 * row and 10 + 3 * row
 	ld a, 2
@@ -1459,20 +2095,38 @@ DexGrid_BuildTilemap:
 	dec a
 .got_red
 	ld [wDexGridColor], a
-	ld e, 0
-	call DexGrid_SetPixel
-	inc e
-	call DexGrid_SetPixel
-	inc d
 	pop bc
-	dec b
+	; n = pixels left in this tile, at most b
+	ld a, d
+	and %111
+	ld c, a
+	ld a, 8
+	sub c
+	cp b
+	jr c, .got_n
+	ld a, b
+.got_n
+	ld c, a
+	push bc
+	ld b, c
+	ld e, 0
+	call DexGrid_HLine
+	pop bc
+	push bc
+	ld b, c
+	ld e, 1
+	call DexGrid_HLine
+	pop bc
+	ld a, d
+	add c
+	ld d, a
+	ld a, b
+	sub c
+	ld b, a
 	jr nz, .bottom_loop
 
 .upload
-	ld de, wDexGridOverlay
-	ld hl, vTiles2 tile DEXGRID_OVERLAY_TILE
-	ld c, 3 * DEXGRID_OVERLAY_W
-	jmp DexGrid_Upload
+	ret
 
 DexGrid_OverlayLeft:
 ; a = canvas x of the cursor's left line on the overlay (left - t0 * 8)
@@ -1621,12 +2275,10 @@ DexGrid_LoadIcons:
 	xor a
 .loop
 	ld [wDexGridCell], a
-	call DexGrid_GetCellSpecies
-	and a
+	call DexGrid_CellInfo
+	bit DEXGRID_SEEN_F, c
 	jr z, .next
 	ld [wDexGridCellSpecies], a
-	call DexGrid_IsSeen
-	jr z, .next
 	; source
 	ld a, [wDexGridCellSpecies]
 	ld l, a
@@ -1680,17 +2332,6 @@ DexGrid_LoadIcons:
 	inc a
 	cp DEXGRID_CELLS
 	jr c, .loop
-
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wDexGridIcons)
-	ldh [rSVBK], a
-	ld de, wDexGridIcons
-	ld hl, vTiles0
-	ld c, DEXGRID_CELLS * 4
-	call DexGrid_Upload
-	pop af
-	ldh [rSVBK], a
 	ret
 
 .tile
@@ -1725,14 +2366,12 @@ DexGrid_UpdateOAM:
 	xor a
 .loop
 	ld [wDexGridCell], a
-	push hl
-	call DexGrid_GetCellSpecies
-	pop hl
-	and a
+	call DexGrid_CellInfo
+	bit DEXGRID_SEEN_F, c
 	jr z, .hide
 	ld [wDexGridCellSpecies], a
-	call DexGrid_IsSeen
-	jr z, .hide
+	ld a, c
+	ld [wDexGridTmp + 1], a
 	; palette key: icon colour, + faded if only seen
 	ld a, [wDexGridCellSpecies]
 	dec a
@@ -1746,8 +2385,8 @@ DexGrid_UpdateOAM:
 	swap a ; normal palette in the high nibble
 	and $f
 	ld b, a
-	ld a, [wDexGridCellSpecies]
-	call DexGrid_IsCaught
+	ld a, [wDexGridTmp + 1]
+	bit DEXGRID_CAUGHT_F, a
 	jr nz, .caught
 	set DEXGRID_FADED_F, b
 .caught
@@ -1873,8 +2512,7 @@ DexGrid_LoadIconPals:
 	inc a
 	cp DEXGRID_OBJ_PALS
 	jr c, .loop
-	lb de, $e4, $e4
-	jmp DmgToCgbObjPals
+	ret
 
 DexGrid_FadeColor:
 ; Move the colour at hl halfway to white (each channel c -> (c + 32) / 2);
@@ -1987,6 +2625,7 @@ DexGridPalUnseen:
 
 INCLUDE "gfx/pokedex/grid_layout.asm"
 
+	ds align[4]
 DexGridStaticGFX:
 INCBIN "gfx/pokedex/grid_static.2bpp"
 DexGridTopGFX:
