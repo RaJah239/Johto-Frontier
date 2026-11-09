@@ -77,6 +77,19 @@ DEF MSIM_SAVED_SUBSTATUS_LENGTH EQU 5
 AI_MatchupSwitch:
 ; Start-of-turn switch decision (trainer battles; the caller checked that the
 ; enemy isn't trapped). Return carry and wEnemySwitchMonIndex (1-6) to switch.
+; - A mon it just switched in stays for a turn (no back-and-forth).
+; - It stays if the mon that's out wins the 1-on-1.
+; - It switches to the mon that wins taking the least damage when the
+;   current one loses badly (the player keeps more than 1/4 of its HP) and
+;   that mon wins comfortably (it keeps at least 1/4 of its own).
+; - Otherwise it switches only to a mon that takes at least 1/4 of the
+;   player's max HP more off it than staying would.
+; - Even then, 10% of the time it stays (so it isn't fully predictable).
+	ld hl, wMSimJustSwitched
+	ld a, [hl]
+	ld [hl], 0
+	and a
+	jr nz, .stay
 	farcall FindAliveEnemyMons
 	jr c, .stay ; nobody to switch to
 	call MSim_Begin
@@ -85,16 +98,56 @@ AI_MatchupSwitch:
 	call MSim_SetupActive
 	call MSim_RunBest
 	jr c, .stay_end ; it wins: stay in
+	call MSim_PlayerDealtShare
+	ld [wMSimActiveDealt], a
+	call MSim_PlayerLeftShare
+	ld [wMSimActiveLeft], a
 
 	ld a, 1 << MSIM_MODE_ENTRY_HIT_F
 	ld [wMSimMode], a
 	call MSim_FindBest
+	xor a
+	ld [wMSimMode], a
 	call MSim_End
+
+	; a comfortable winner, and the current mon loses badly?
 	ld a, [wMSimBestIndex]
 	cp $ff
+	jr z, .by_damage
+	ld a, [wMSimBestTaken]
+	cp 3 * 255 / 4 + 1
+	jr nc, .by_damage
+	ld a, [wMSimActiveLeft]
+	cp 255 / 4 + 1
+	jr c, .by_damage
+	ld a, [wMSimBestIndex]
+	jr .switch
+
+.by_damage
+	; a mon that does clearly more damage than staying
+	ld a, [wMSimDealtIndex]
+	cp $ff
 	jr z, .stay
+	ld a, [wMSimActiveDealt]
+	add 255 / 4
+	jr c, .stay
+	ld b, a
+	ld a, [wMSimBestDealt]
+	cp b
+	jr c, .stay
+	ld a, [wMSimDealtIndex]
+
+.switch
+	push af
+	call Random
+	cp 10 percent
+	pop bc
+	jr c, .stay
+	ld a, b
 	inc a
 	ld [wEnemySwitchMonIndex], a
+	ld a, 1
+	ld [wMSimJustSwitched], a
 	scf
 	ret
 
@@ -106,23 +159,34 @@ AI_MatchupSwitch:
 
 AI_MatchupPick:
 ; Switch-in choice for the switch-in picker: the mon that wins the 1-on-1
-; taking the least damage, or $ff in b if none wins. wMSimMode says whether
-; the candidates take an entry hit (cleared afterwards).
+; taking the least damage, else the one that does the most damage, or $ff in
+; b if none can do anything. wMSimMode says whether the candidates take an
+; entry hit (cleared afterwards).
 	call MSim_Begin
 	call MSim_FindBest
 	call MSim_End
 	xor a
 	ld [wMSimMode], a
+	ld [wMSimJustSwitched], a
 	ld a, [wMSimBestIndex]
+	cp $ff
+	jr nz, .got
+	ld a, [wMSimDealtIndex]
+.got
 	ld b, a
 	ret
 
 MSim_FindBest:
-; Simulate every other alive mon in the OT party; wMSimBestIndex = the winner
-; that takes the smallest share of its max HP in damage, or $ff.
+; Simulate every other alive mon in the OT party. wMSimBestIndex = the
+; winner that loses the smallest share of its max HP (wMSimBestTaken), or
+; $ff; wMSimDealtIndex = the mon that takes the biggest share off the
+; player's max HP (wMSimBestDealt), or $ff.
 	ld a, $ff
 	ld [wMSimBestIndex], a
 	ld [wMSimBestTaken], a
+	ld [wMSimDealtIndex], a
+	xor a
+	ld [wMSimBestDealt], a
 	ld b, 0
 .loop
 	ld a, [wOTPartyCount]
@@ -134,8 +198,19 @@ MSim_FindBest:
 	push bc
 	call MSim_TryCandidate
 	pop bc
+	push af
+	ld a, [wMSimLastDealt]
+	ld hl, wMSimBestDealt
+	cp [hl]
+	jr c, .dealt_done
+	jr z, .dealt_done
+	ld [hl], a
+	ld a, b
+	ld [wMSimDealtIndex], a
+.dealt_done
+	pop af
 	jr nc, .next
-	; a = share of max HP lost (0-255): keep the smallest
+	; a = share of max HP lost (0-254): keep the smallest
 	ld hl, wMSimBestTaken
 	cp [hl]
 	jr nc, .next
@@ -148,7 +223,10 @@ MSim_FindBest:
 
 MSim_TryCandidate:
 ; b = OT party index. Return carry if it wins the 1-on-1, with a = the share
-; of its max HP it loses doing so (0-255).
+; of its max HP it loses doing so (0-254). wMSimLastDealt = the share of the
+; player's max HP it takes off either way.
+	xor a
+	ld [wMSimLastDealt], a
 	push bc
 	ld hl, wOTPartyMon1HP
 	ld a, b
@@ -184,6 +262,10 @@ MSim_TryCandidate:
 
 .fight
 	call MSim_RunBest
+	push af
+	call MSim_PlayerDealtShare
+	ld [wMSimLastDealt], a
+	pop af
 	ret nc
 
 	; share of max HP lost = (max HP - HP left) * 255 / max HP
@@ -212,6 +294,35 @@ MSim_TryCandidate:
 .loses
 	and a
 	ret
+
+MSim_PlayerDealtShare:
+; a = the share of the player's max HP the last run took off (0-255).
+	ld a, [wMSimPlayerHP + 1]
+	ld c, a
+	ld a, [wBattleMonHP + 1]
+	sub c
+	ld c, a
+	ld a, [wMSimPlayerHP]
+	ld b, a
+	ld a, [wBattleMonHP]
+	sbc b
+	ld b, a
+	jr MSim_PlayerShare
+
+MSim_PlayerLeftShare:
+; a = the share of its max HP the player's mon has left after the last run.
+	ld a, [wMSimPlayerHP]
+	ld b, a
+	ld a, [wMSimPlayerHP + 1]
+	ld c, a
+	; fallthrough
+
+MSim_PlayerShare:
+	ld a, [wBattleMonMaxHP]
+	ld d, a
+	ld a, [wBattleMonMaxHP + 1]
+	ld e, a
+	; fallthrough
 
 MSim_ShareOf:
 ; a = bc * 255 / de (bc <= de, de > 0), at most 255.

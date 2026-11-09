@@ -597,7 +597,14 @@ wEnemySwitchBestDamage:: dw
 wEnemySwitchMaxDamage:: dw
 	ds 2 ; (unused: was switch-in picker scratch)
 wEnemySwitchSavedTurn:: db
-	ds 13 ; (unused: was switch-in picker scratch)
+; 1-on-1 matchup switching (engine/battle/ai/matchup.asm); share = /255
+wMSimJustSwitched:: db ; the AI just switched this mon in: it stays a turn
+wMSimBestDealt:: db    ; biggest share of the player's max HP a mon takes off
+wMSimDealtIndex:: db   ; that mon's party index, or $ff
+wMSimActiveDealt:: db  ; the share the mon that's out takes off
+wMSimActiveLeft:: db   ; the share of its HP the player keeps against it
+wMSimLastDealt:: db    ; the share the last simulated switch-in takes off
+	ds 7 ; (unused: was switch-in picker scratch)
 wTempLevel:: db
 wLastPlayerMon:: db
 wLastPlayerMove:: db
