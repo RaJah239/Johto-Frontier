@@ -3736,6 +3736,11 @@ NEXTU
 wAbilityTiles:: ds ABILITY_SLIDE_TILES tiles
 wAbilityTilesBackup:: ds ABILITY_SLIDE_TILES tiles
 NEXTU
+; grid Pokedex icon staging (engine/pokedex/pokedex_grid.asm), past the HDMA
+; staging area; 16-byte aligned for GDMA
+	ds BG_MAP_WIDTH * BG_MAP_HEIGHT * 2
+wDexGridIcons:: ds 15 * 4 tiles
+NEXTU
 ; unidentified uses
 w6_d000:: ds $1000
 ENDU
@@ -3801,3 +3806,48 @@ wEnemySwitchSimParty:: ds 3 ; saved wCurPartyMon, wCurPartyLevel, wCurOTMon
 SECTION "Enemy Switch Sim Mon", WRAMX
 
 wEnemySwitchSimMon:: ds wEnemyMonEnd - wEnemyMon ; saved wEnemyMon
+
+
+SECTION "Pokedex Grid WRAM", WRAMX[$da00], BANK[5]
+
+; grid Pokedex (engine/pokedex/pokedex_grid.asm); $d800-$d9bf is
+; wSoundEngineBackup. The canvases are 16-byte aligned for GDMA and are
+; drawn and uploaded one after another, so they share space.
+UNION
+wDexGridHeader:: ds 12 tiles
+wDexGridTopA:: ds 2 * 12 tiles
+wDexGridTopB:: ds 2 * 12 tiles
+NEXTU
+wDexGridStrip:: ds 19 tiles
+NEXTU
+wDexGridScroll:: ds 9 tiles
+NEXTU
+wDexGridOverlay:: ds 3 * 5 tiles
+ENDU
+
+wDexGridIndex:: db
+wDexGridTopRow:: db
+wDexGridPrevTopRow:: db
+wDexGridSpecies:: db
+wDexGridReloadIcons:: db
+wDexGridColor:: db
+wDexGridCanvas:: dw
+wDexGridCanvasW:: db
+wDexGridRowLo:: db
+wDexGridRowHi:: db
+wDexGridRowMask:: db
+wDexGridGlyph:: ds 8
+wDexGridNumBuf:: ds 4
+wDexGridCell:: db
+wDexGridCellCol:: db
+wDexGridCellSpecies:: db
+wDexGridCursorRow:: db
+wDexGridStripRow:: db
+wDexGridT0:: db
+wDexGridTCount:: db
+wDexGridOverlayRow:: db
+wDexGridOverlayPal:: ds 5
+wDexGridTmp:: ds 2
+wDexGridMapOffset:: dw
+wDexGridName:: ds MON_NAME_LENGTH
+wDexGridPalKeys:: ds 8 ; OBJ palette slot -> icon colour (+ faded bit), -1 = free

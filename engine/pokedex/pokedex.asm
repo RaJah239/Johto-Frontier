@@ -274,114 +274,11 @@ Pokedex_Exit:
 	ret
 
 Pokedex_InitMainScreen:
-	xor a
-	ldh [hBGMapMode], a
-	call ClearSprites
-	xor a
-	hlcoord 0, 0, wAttrmap
-	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
-	call ByteFill
-	farcall DrawPokedexListWindow
-	hlcoord 0, 17
-	ld de, String_START_SEARCH
-	call Pokedex_PlaceString
-	ld a, 7
-	ld [wDexListingHeight], a
-	call Pokedex_PrintListing
-	call Pokedex_SetBGMapMode_3ifDMG_4ifCGB
-	call Pokedex_ResetBGMapMode
-	call Pokedex_DrawMainScreenBG
-	ld a, POKEDEX_SCX
-	ldh [hSCX], a
-
-	ld a, [wCurDexMode]
-	cp DEXMODE_OLD
-	ld a, $4a
-	jr z, .okay
-	ld a, $47
-.okay
-	ldh [hWX], a
-	xor a
-	ldh [hWY], a
-	call WaitBGMap
-
-	call Pokedex_ResetBGMapMode
-	ld a, -1
-	ld [wCurPartySpecies], a
-	ld a, SCGB_POKEDEX
-	call Pokedex_GetSGBLayout
-	call Pokedex_UpdateCursorOAM
-	farcall DrawPokedexListWindow
-	hlcoord 0, 17
-	ld de, String_START_SEARCH
-	call Pokedex_PlaceString
-	ld a, 7
-	ld [wDexListingHeight], a
-	call Pokedex_PrintListing
-	call Pokedex_IncrementDexPointer
-	ret
+; Polished Crystal-style grid (engine/pokedex/pokedex_grid.asm)
+	farjp Pokedex_InitGridScreen
 
 Pokedex_UpdateMainScreen:
-	ld hl, hJoyPressed
-	ld a, [hl]
-	and B_BUTTON
-	jr nz, .b
-	ld a, [hl]
-	and A_BUTTON
-	jr nz, .a
-	ld a, [hl]
-	and SELECT
-	jr nz, .select
-	ld a, [hl]
-	and START
-	jr nz, .start
-	call Pokedex_ListingHandleDPadInput
-	ret nc
-	call Pokedex_UpdateCursorOAM
-	xor a
-	ldh [hBGMapMode], a
-	call Pokedex_PrintListing
-	call Pokedex_SetBGMapMode3
-	call Pokedex_ResetBGMapMode
-	ret
-
-.a
-	call Pokedex_GetSelectedMon
-	ld [wCurPartySpecies], a
-	call Pokedex_CheckSeen
-	ret z
-	ld a, DEXSTATE_DEX_ENTRY_SCR
-	ld [wJumptableIndex], a
-	ld a, DEXSTATE_MAIN_SCR
-	ld [wPrevDexEntryJumptableIndex], a
-	ret
-
-.select
-	call Pokedex_BlackOutBG
-	ld a, DEXSTATE_OPTION_SCR
-	ld [wJumptableIndex], a
-	xor a
-	ldh [hSCX], a
-	ld a, $a7
-	ldh [hWX], a
-	call DelayFrame
-	ret
-
-.start
-	call Pokedex_BlackOutBG
-	ld a, DEXSTATE_SEARCH_SCR
-	ld [wJumptableIndex], a
-	xor a
-	ldh [hSCX], a
-	ld a, $a7
-	ldh [hWX], a
-	call DelayFrame
-	ret
-
-.b
-	ld a, DEXSTATE_EXIT
-	ld [wJumptableIndex], a
-	ret
+	farjp Pokedex_UpdateGridScreen
 
 Pokedex_InitDexEntryScreen:
 	call LowVolume

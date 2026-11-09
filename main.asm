@@ -524,6 +524,10 @@ SECTION "Nayru Pokedex", ROMX
 INCLUDE "engine/pokedex/pokedex.asm"
 
 
+SECTION "Pokedex Grid", ROMX
+INCLUDE "engine/pokedex/pokedex_grid.asm"
+
+
 SECTION "Custom GFX", ROMX
 INCLUDE "gfx/rangi_gfx.asm"
 

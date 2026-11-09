@@ -491,6 +491,11 @@ CGB_ApplyPartyMenuHPPals:
 	call FillBoxCGB
 	ret
 
+LoadDexGridMonPalette::
+; Grid Pokedex: the normal palette of species a (white, 2 colours, black) at de.
+	call _GetMonPalettePointer
+	jmp LoadPalette_White_Col1_Col2_Black
+
 InitPartyMenuOBPals:
 	ld hl, PartyMenuOBPals
 	ld de, wOBPals1
