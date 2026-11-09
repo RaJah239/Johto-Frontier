@@ -462,6 +462,9 @@ AI_TryItem:
 	ld a, [hl]
 	cp e
 	jr nc, .yes
+; only the highest-level mon (ties count) uses items
+	and a
+	ret
 
 .yes
 	scf

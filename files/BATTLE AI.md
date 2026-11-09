@@ -203,7 +203,7 @@ After a knock-out, U-turn, Volt Switch, Baton Pass or any of the switches above,
 Roar and Whirlwind bring in a random Pokémon.
 
 ## Items
-Trainers that carry items (never in the Battle Tower) only use them on a turn they don't switch. Each item is used on the Pokémon that's out:
+Trainers that carry items (never in the Battle Tower) only use them on a turn they don't switch, and only while the Pokémon that's out is their highest-level one (or tied for it). Each item is used on that Pokémon:
 - **Potion, Super Potion, Hyper Potion, Max Potion:** used at 1/4 HP or less. Between 1/4 and 1/2 HP, used 20% of the time. Never above half HP.
 - **Full Restore:**
   - heals by the same rule as the potions
