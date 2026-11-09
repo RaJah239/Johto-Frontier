@@ -31,4 +31,7 @@
 
 ## Switching
 - The AI doesn't switch out by itself
-- When it has to send in a Pokémon (after a knock-out, U-turn, Volt Switch or Baton Pass), it sends in the first one in its party that can still fight
+- When it has to send in a Pokémon (after a knock-out, U-turn, Volt Switch or Baton Pass), it picks, skipping Pokémon that are asleep or frozen:
+  1. The first Pokémon in its party with a super-effective move against yours
+  2. Otherwise, the first one that none of your Pokémon's moves hit super effectively
+  3. Otherwise, a random one

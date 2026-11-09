@@ -3785,6 +3785,14 @@ SECTION "Pokedex Grid WRAM0", WRAM0
 wDexGridToEntry:: db ; set by the grid when it opens the dex entry screen
 
 
+SECTION "AI Switch-In Save", WRAM0
+
+; FindForcedReplacementInOTParty keeps the move structs here while the
+; switch-in picker scans the parties
+wSwitchInSavedEnemyMove:: ds MOVE_LENGTH
+wSwitchInSavedPlayerMove:: ds MOVE_LENGTH
+
+
 SECTION "Pokedex Grid WRAM", WRAMX[$da00], BANK[5]
 
 ; grid Pokedex (engine/pokedex/pokedex_grid.asm); $d800-$d9bf is
