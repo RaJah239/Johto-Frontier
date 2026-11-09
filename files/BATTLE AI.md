@@ -151,7 +151,7 @@ These run after everything above and can override it.
 Last of all, the AI plays out every move it was seriously considering: any move whose score is close to its favourite's. It asks: "if I use this move now and then fight on as well as I can, do I win?" It uses the same simulation as [the 1-on-1 check](#the-1-on-1-check).
 - **Attacks** hit with their own damage (weakest roll) and priority on the first turn.
 - **Boosting moves** boost on the first turn, and you get a free hit.
-- **Healing moves** heal on the first turn.
+- **Healing moves** heal on the first turn, but they're only tried when it actually needs to heal: it can't knock you out first, your next hit (two hits, if it's slower) would knock it out, and the heal is bigger than that hit. Otherwise healing early would just waste a turn.
 - **Status moves** inflict their status when it can work, and the rest of the fight plays out with it:
   - sleep (counted at its shortest: one skipped turn)
   - poison and bad poison

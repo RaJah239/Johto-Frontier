@@ -2080,7 +2080,7 @@ MSim_BoostEffects:
 ; would consider (score within 20 of its favourite) is played out: "use this
 ; move now, then play on as in MSim_Run". Damaging moves hit with their own
 ; damage and priority; boosting moves boost (the player gets a free hit);
-; healing moves heal; sleep, poison, bad poison, burn, paralysis and Leech
+; healing moves heal (only when MSim_EnemyShouldHeal would); sleep, poison, bad poison, burn, paralysis and Leech
 ; Seed are inflicted on the player's mon (when they can work). If any move
 ; wins, the winners that keep the most HP (100%-accurate moves first) get
 ; score 1 and every other usable move at least 21. If none wins, the move
@@ -2329,7 +2329,7 @@ MSim_EvalSlot:
 	cp EFFECT_WEATHER_HEAL
 	jr z, .heal
 	call MSim_T1Inflict
-	jr z, .not_simulated
+	jp z, .not_simulated
 	ld [wMSimT1Effect], a
 	ld a, MSIM_T1_STATUS
 	ld [wMSimT1Kind], a
@@ -2380,6 +2380,14 @@ MSim_EvalSlot:
 	jr .result
 
 .heal
+	; only when the healing rule would heal now (it can't KO first, it's in
+	; KO range, and the heal beats the player's hit); otherwise healing
+	; first just wastes a turn, though it would end the fight with more HP
+	ld hl, wMSimEnemyDmg
+	ld de, wMSimEnemyHit
+	call MSim_CopyWord
+	call MSim_EnemyShouldHeal
+	jp nc, .not_simulated
 	ld a, MSIM_T1_HEAL
 	ld [wMSimT1Kind], a
 .run
