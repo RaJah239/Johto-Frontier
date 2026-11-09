@@ -2744,6 +2744,9 @@ BattleAnim_Thrash:
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
+; (the move animation scripts span more than one bank: anim_call / anim_jump / anim_if_param_equal carry the bank)
+SECTION "Move Animations 2", ROMX
+
 BattleAnim_UTurn:
 	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_EXPLOSION
 	anim_bgeffect BATTLE_BG_EFFECT_HIDE_MON, $0, $1, $0

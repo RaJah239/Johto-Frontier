@@ -393,13 +393,18 @@ BattleAnimCmd_Ret:
 	ld [hl], e
 	inc hl
 	ld [hl], d
+	ld a, [wBattleAnimParentBank]
+	ld [wBattleAnimBank], a
 	ret
 
 BattleAnimCmd_Call:
+; address, bank (animation scripts can be in several banks)
 	call GetBattleAnimByte
 	ld e, a
 	call GetBattleAnimByte
 	ld d, a
+	call GetBattleAnimByte
+	push af
 	push de
 	ld hl, wBattleAnimAddress
 	ld e, [hl]
@@ -409,7 +414,11 @@ BattleAnimCmd_Call:
 	ld [hl], e
 	inc hl
 	ld [hl], d
+	ld a, [wBattleAnimBank]
+	ld [wBattleAnimParentBank], a
 	pop de
+	pop af
+	ld [wBattleAnimBank], a
 	ld hl, wBattleAnimAddress
 	ld [hl], e
 	inc hl
@@ -419,10 +428,13 @@ BattleAnimCmd_Call:
 	ret
 
 BattleAnimCmd_Jump:
+; address, bank
 	call GetBattleAnimByte
 	ld e, a
 	call GetBattleAnimByte
 	ld d, a
+	call GetBattleAnimByte
+	ld [wBattleAnimBank], a
 	ld hl, wBattleAnimAddress
 	ld [hl], e
 	inc hl
@@ -523,10 +535,12 @@ BattleAnimCmd_IfParamEqual:
 	cp [hl]
 	jr z, .jump
 
+	; skip the address and bank
 	ld hl, wBattleAnimAddress
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
+	inc de
 	inc de
 	inc de
 	ld [hl], d
@@ -535,15 +549,7 @@ BattleAnimCmd_IfParamEqual:
 	ret
 
 .jump
-	call GetBattleAnimByte
-	ld e, a
-	call GetBattleAnimByte
-	ld d, a
-	ld hl, wBattleAnimAddress
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ret
+	jmp BattleAnimCmd_Jump
 
 BattleAnimCmd_Obj:
 ; index, x, y, param
@@ -1319,7 +1325,8 @@ ClearBattleAnims::
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	ld hl, BattleAnimations
+	ld hl, BattleAnimations ; (3-byte entries: bank, address)
+	add hl, de
 	add hl, de
 	add hl, de
 	call GetBattleAnimPointer

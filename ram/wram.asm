@@ -3798,6 +3798,14 @@ SECTION "Pokedex Grid WRAM0", WRAM0
 wDexGridToEntry:: db ; set by the grid when it opens the dex entry screen
 
 
+SECTION "Battle Anim Banks", WRAM0
+
+; the bank of the battle animation script being run, and of the one that
+; anim_call returns to (scripts can be in several banks)
+wBattleAnimBank:: db
+wBattleAnimParentBank:: db
+
+
 SECTION "AI Switch-In Save", WRAM0
 
 ; FindForcedReplacementInOTParty keeps the move structs here while the

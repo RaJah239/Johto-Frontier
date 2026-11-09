@@ -190,6 +190,7 @@ MACRO anim_if_param_equal
 	db anim_if_param_equal_command
 	db \1 ; value
 	dw \2 ; address
+	db BANK(\2) ; (scripts can be in any bank)
 ENDM
 
 	const anim_setvar_command ; $f9
@@ -214,6 +215,7 @@ ENDM
 MACRO anim_jump
 	db anim_jump_command
 	dw \1 ; address
+	db BANK(\1) ; (scripts can be in any bank)
 ENDM
 
 	const anim_loop_command ; $fd
@@ -227,6 +229,7 @@ ENDM
 MACRO anim_call
 	db anim_call_command
 	dw \1 ; address
+	db BANK(\1) ; (scripts can be in any bank)
 ENDM
 
 	const anim_ret_command ; $ff
