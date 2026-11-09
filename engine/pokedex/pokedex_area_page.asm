@@ -536,7 +536,9 @@ Pokedex_DetailedArea_grass:
 	call Grass_check_any_remaining
 	and a
 	jr z, .reached_end
-	call DexArea_IncWildMonIndex
+	; (Grass_check_any_remaining left the index on the next map with the mon,
+	; as Surf_check_any_remaining does: one more skipped that map, and past
+	; the table's last map the next page read beyond its end)
 	call DexEntry_IncPageNum
 	; page number is currently in a
 	xor a ; to ensure a isnt actually returned at -1. 0 is for normal
