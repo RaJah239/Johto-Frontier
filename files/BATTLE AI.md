@@ -30,7 +30,12 @@
 - **Flinch moves** are only favored when the AI is faster and you are paralyzed, or when it has Serene Grace
 
 ## Switching
-- The AI doesn't switch out by itself
+- At the start of a turn, a trainer's Pokémon may switch out. How much it wants to:
+  - **A lot:** its Perish Song count is about to run out
+  - **Quite a bit:** one of its other Pokémon is immune to the attack you just used and has a super-effective move against you, and your attacks are hurting the one that's out
+  - **A little:** that other Pokémon only has a super-effective move, or (without an immune one) one of its Pokémon resists you, has at least 1/4 of its HP and has a super-effective move, while your moves do well against the one that's out
+- It then switches with a chance of 20%, 50% or 80%, depending on how much it wants to
+- It doesn't switch if it's trapped (Mean Look, Wrap, Shadow Tag, Arena Trap, Magnet Pull; Run Away escapes them), if it's at +2 or more in Attack, Sp. Atk, Defense or Sp. Def, or if it has no other Pokémon left
 - When it has to send in a Pokémon (after a knock-out, U-turn, Volt Switch or Baton Pass), it picks, skipping Pokémon that are asleep or frozen:
   1. The first Pokémon in its party with a super-effective move against yours
   2. Otherwise, the first one that none of your Pokémon's moves hit super effectively
