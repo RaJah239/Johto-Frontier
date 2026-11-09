@@ -2444,7 +2444,8 @@ CheckDamageStatsCritical:
 ; Raised and lowered stages alike. Burn / frostbite still halve the
 ; attacker's stat. PlayerAttackDamage / EnemyAttackDamage apply it, so the
 ; AI's damage estimates and the move info damage preview see it too; the
-; popup only shows for real attacks (UnawarePopup, from DamageStats).
+; popup shows the first time each side's Unaware mon attacks or is hit by a
+; real (damaging) attack in a battle (UnawarePopup, from DamageStats).
 
 assert wEnemyMonSpclDef - wEnemyMonAttack == wEnemySpDef - wEnemyAttack
 assert wBattleMonSpclDef - wBattleMonAttack == wPlayerSpDef - wPlayerAttack
@@ -2594,71 +2595,27 @@ UnawareUserStatLevel:
 	ld a, [hl]
 	ret
 
-UnawareTargetStatLevel:
-; a = stat index -> a = the target's stage for it. Clobbers bc, hl.
-	ld c, a
-	ld b, 0
-	ldh a, [hBattleTurn]
-	and a
-	ld hl, wEnemyAtkLevel
-	jr z, .got_levels
-	ld hl, wPlayerAtkLevel
-.got_levels
-	add hl, bc
-	ld a, [hl]
-	ret
-
 UnawarePopup:
-; Show the Unaware popup (once per battle per side) when it changes the
-; damage of this attack: a damaging move, and the stage it ignores isn't
-; neutral.
+; Show the Unaware popup the first time in each battle that an Unaware
+; Pokemon attacks or is hit by a damaging move (once per side; whether or
+; not any stages are raised or lowered).
 	ld a, BATTLE_VARS_MOVE_POWER
 	call GetBattleVar
 	and a
 	ret z
 
-	; d = the attacker's stat index, e = the target's
-	ld a, BATTLE_VARS_MOVE_TYPE
-	call GetBattleVar
-	cp SPECIAL
-	lb de, 0, 1 ; physical: Attack vs Defense
-	jr c, .got_category
-	lb de, 3, 4 ; special: Sp. Atk vs Sp. Def
-.got_category
-	ld a, BATTLE_VARS_MOVE_EFFECT
-	call GetBattleVar
-	cp EFFECT_PSYSHOCK
-	jr nz, .not_psyshock
-	ld e, 1 ; hits Defense
-.not_psyshock
-	cp EFFECT_BODY_PRESS
-	jr nz, .got_stats
-	ld d, 1 ; uses the attacker's Defense
-.got_stats
-
-	; the attacker has Unaware and the target's stage isn't neutral
+	; the attacker
 	call GetCurrentMon
 	call IsUnaware
 	jr nc, .target
-	ld a, e
-	push de
-	call UnawareTargetStatLevel
-	pop de
-	cp BASE_STAT_LEVEL
-	jr z, .target
 	ldh a, [hBattleTurn]
 	ld c, a
-	jr UnawareShowPopup
+	call UnawareShowPopup
 
 .target
-	; the target has Unaware and the attacker's stage isn't neutral
 	call GetOpposingMon
 	call IsUnaware
 	ret nc
-	ld a, d
-	call UnawareUserStatLevel
-	cp BASE_STAT_LEVEL
-	ret z
 	ldh a, [hBattleTurn]
 	xor 1
 	ld c, a
