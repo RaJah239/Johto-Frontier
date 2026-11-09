@@ -446,6 +446,11 @@ IF USE_GEN3_STYLE_TYPE_GFX == TRUE
 	call FillBoxCGB
 ENDC
 
+	; caught ball next to the number
+	call Pokedex_SetCaughtBallPalette
+	hlcoord 16, 1, wAttrmap
+	ld [hl], PAL_DEXENTRY_BALL
+
 	call InitPartyMenuOBPals
 	ld hl, PokedexCursorPalette
 	ld de, wOBPals1 palette 7 ; green cursor palette
@@ -707,6 +712,20 @@ PokedexLightPalette:
 	RGB  0,  0,  0
 	RGB 26, 10,  6
 	RGB 23, 23, 23
+	RGB 31, 31, 31
+
+DEF PAL_DEXENTRY_BALL EQU 6 ; free on the dex entry screen
+
+Pokedex_SetCaughtBallPalette:
+	ld de, wBGPals1 palette PAL_DEXENTRY_BALL
+	ld hl, PokedexLightBallPalette
+	jmp LoadHLPaletteIntoDE
+
+PokedexLightBallPalette:
+; the caught ball: outline, bottom, top, background
+	RGB  0,  0,  0
+	RGB 23, 23, 23
+	RGB 26, 10,  6
 	RGB 31, 31, 31
 
 PokedexLightBoxPalette:
