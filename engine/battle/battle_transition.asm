@@ -585,9 +585,9 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	jr .enter_loop_midway
 
 .pal_loop
-; set all pals to 7
 	ld a, [hl]
-	or PAL_BG_TEXT
+	and ~PALETTE_MASK
+	or PAL_BG_RED
 	ld [hli], a
 .enter_loop_midway
 	dec c
@@ -613,6 +613,14 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	add a
 	jr nc, .no_load
 	ld [hl], BATTLETRANSITION_SQUARE
+	; Poké Ball tile: PAL_BG_GRAY, VRAM bank 0, no flips or priority
+	push hl
+	push bc
+	ld bc, wAttrmap - wTilemap
+	add hl, bc
+	ld [hl], PAL_BG_GRAY
+	pop bc
+	pop hl
 .no_load
 	inc hl
 	jr .col_loop
@@ -700,6 +708,14 @@ StartTrainerBattle_LoadPokeBallGraphics:
 
 ; todo: verify the following (dyn pal)
 .copypals
+	ld de, wBGPals1 palette PAL_BG_GRAY ; the Poké Ball (doesn't flash)
+	call .copy
+	ld de, wBGPals2 palette PAL_BG_GRAY
+	call .copy
+	ld de, wBGPals1 palette PAL_BG_RED ; the flashing screen
+	call .copy
+	ld de, wBGPals2 palette PAL_BG_RED
+	call .copy
 	ld de, wBGPals1 palette PAL_BG_TEXT
 	call .copy
 	ld de, wBGPals2 palette PAL_BG_TEXT
