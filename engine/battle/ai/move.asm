@@ -118,6 +118,8 @@ AIChooseMove:
 .NormalizeScores:
 	; heavily encouraged moves can wrap below 0; fix that before counting down
 	farcall NormalizeAIMoveScores
+	; never pick a move that can't affect the player while another works
+	farcall AI_DismissImmuneMoves
 
 ; Decrement the scores of all moves one by one until one reaches 0.
 .DecrementScores:

@@ -5190,7 +5190,7 @@ ParseEnemyAction:
 	jmp nz, .skip_load
 	ld a, [wEnemySubStatus3]
 	and 1 << SUBSTATUS_CHARGED | 1 << SUBSTATUS_RAMPAGE
-	jr nz, .skip_load
+	jmp nz, .skip_load
 
 	ld hl, wEnemySubStatus5
 	bit SUBSTATUS_ENCORED, [hl]
@@ -5266,6 +5266,11 @@ ParseEnemyAction:
 	ld a, [hl]
 	and PP_MASK
 	jr z, .loop2
+	; pick again if it can't affect the player and another move can
+	push bc
+	farcall AI_WildRerollImmuneMove
+	pop bc
+	jr c, .loop2
 	ld a, c
 	ld [wCurEnemyMoveNum], a
 	ld a, b

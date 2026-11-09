@@ -27,6 +27,7 @@
   - **Dream Eater while you sleep:** Dream Eater has priority, so it hits before you every turn you're asleep, including the turn you wake up. If those hits are enough to knock you out, it strongly favors Dream Eater, since you can't hit back. It counts one hit fewer if you have a move that would go first on your waking turn (like Protect), and doesn't do this at all if you know Sleep Talk
 - **Special priority moves:** Blastoise's Iron Head and Drowzee's and Hypno's Zen Headbutt count as priority moves
 - **Thunderbolt and similar attacks** aren't avoided just because the target can't be paralyzed
+- **Moves that can't hit you:** it never uses a damaging move you're immune to while another usable move would work. That covers your type (a Normal move into a Ghost, Ground into Flying) and your ability (Levitate, Waterproof, Flame Ward, Grounded, Immunity). After Foresight, Odor Sleuth or Miracle Eye, Normal and Fighting moves can hit Ghosts again, so it uses them; Ghost moves still can't hit Normal types. Wild Pokémon still pick at random, but skip such moves too
 - **Flinch moves** are only favored when the AI is faster and you are paralyzed, or when it has Serene Grace
 
 ## Switching
