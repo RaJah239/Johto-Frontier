@@ -50,7 +50,18 @@ DEF DEXGRID_REDRAW_UP     EQU 3 ; scrolled up a row
 DEF DEXGRID_SEEN_F       EQU 0 ; wDexGridCellFlags
 DEF DEXGRID_CAUGHT_F     EQU 1
 DEF DEXGRID_FADED_F      EQU 7 ; icon palette key: seen but not caught
-DEF DEXGRID_OBJ_PALS     EQU 8
+DEF DEXGRID_OBJ_PALS     EQU 7 ; OBJ palettes for the icons
+DEF DEXGRID_PIC_OBJ_PAL  EQU 7 ; OBJ palette for the picture's left column
+
+; The picture sits where the dex entry screen shows it: 3 px from the left
+; (the entry screen scrolls by POKEDEX_SCX). Its BG tiles (columns 1-7) hold
+; it shifted left by DEXGRID_PIC_SHIFT, and its first 8 px are also drawn by
+; four 8x16 sprites at x = 3, over the frame's left column.
+DEF DEXGRID_PIC_SHIFT    EQU POKEDEX_SCX
+DEF DEXGRID_PIC_OBJ_TILE EQU DEXGRID_CELLS * 4 ; VRAM bank 1, after the icons
+DEF DEXGRID_PIC_OBJ_X    EQU 8 - POKEDEX_SCX
+DEF DEXGRID_PIC_OBJ_Y    EQU 8
+DEF DEXGRID_PIC_SPRITES  EQU 4
 
 DEF DEXGRID_THUMB_TOP    EQU 69 ; scrollbar thumb y range (screen)
 DEF DEXGRID_THUMB_RANGE  EQU 55
@@ -595,12 +606,18 @@ DexGrid_SetMonPalettes:
 	ld c, b
 	ld de, wBGPals1 palette PAL_DEXGRID_TYPES + 4
 	newfarcall LoadMonBaseTypePal ; type 2
-	ret
+	jr .pic_sprites
 
 .unseen
 	ld hl, DexGridPalUnseen
 	ld de, wBGPals1 palette PAL_DEXGRID_PIC
-	jp DexGrid_SetStaticPalettes.copy
+	call DexGrid_SetStaticPalettes.copy
+.pic_sprites
+	; the picture's sprites use the same colours
+	ld hl, wBGPals1 palette PAL_DEXGRID_PIC
+	ld de, wOBPals1 palette DEXGRID_PIC_OBJ_PAL
+	ld bc, 1 palettes
+	jp CopyBytes
 
 ; ---------------------------------------------------------------------------
 ; Drawing
@@ -707,6 +724,7 @@ DexGrid_DrawTopHalf:
 	call DexGrid_GetIndexSpecies
 	ld [wDexGridSpecies], a
 	call DexGrid_PrepareFrontpic
+	call DexGrid_ShiftPic
 	call DexGrid_SetMonPalettes
 	call DexGrid_DrawTop
 	call DexGrid_WaitLowerScreen
@@ -719,6 +737,10 @@ DexGrid_DrawTopHalf:
 	ld hl, vTiles2
 	lb bc, 0, 7 * 7
 	call Get2bpp
+	ld de, sDexGridPicSprite
+	ld hl, vTiles0 tile DEXGRID_PIC_OBJ_TILE
+	ld c, 2 * DEXGRID_PIC_SPRITES
+	call DexGrid_Upload
 	call CloseSRAM
 	ld de, wDexGridHeader
 	ld hl, vTiles1 tile (DEXGRID_TOP_TILE - $80)
@@ -731,8 +753,64 @@ DexGrid_DrawTopHalf:
 	ld a, [wDexGridFullTilemap]
 	and a
 	ret nz ; on entry, DexGrid_Redraw applies the palettes after the tilemap
+	lb de, $e4, $e4
+	call DmgToCgbObjPals
 	ld a, $e4
 	jmp DmgToCgbBGPals
+
+DexGrid_ShiftPic:
+; The picture's first tile column (7 tiles, + a blank one) to
+; sDexGridPicSprite for the sprites, then the picture shifted left by
+; DEXGRID_PIC_SHIFT px in place (tiles are column-major: the next column's
+; tile is 7 tiles on).
+	ld a, BANK(sScratch)
+	call OpenSRAM
+	ld a, [wDexGridPicSource]
+	ld l, a
+	ld a, [wDexGridPicSource + 1]
+	ld h, a
+	push hl
+	ld de, sDexGridPicSprite
+	ld bc, 7 tiles
+	call CopyBytes
+	ld h, d
+	ld l, e
+	ld bc, 1 tiles
+	xor a
+	call ByteFill
+	pop hl
+	; columns 0-5: (byte << shift) | (next column's byte >> (8 - shift))
+	ld bc, 6 * 7 tiles
+.loop
+	push bc
+	ld e, [hl]
+	ld d, HIGH(DexGridShlTable) + 8 - DEXGRID_PIC_SHIFT
+	ld a, [de]
+	ld c, a
+	push hl
+	ld de, 7 tiles
+	add hl, de
+	ld e, [hl]
+	pop hl
+	ld d, HIGH(DexGridShrTable) + 8 - DEXGRID_PIC_SHIFT
+	ld a, [de]
+	or c
+	ld [hli], a
+	pop bc
+	dec bc
+	ld a, b
+	or c
+	jr nz, .loop
+	; column 6: nothing comes in from the right
+	ld b, 7 tiles
+.last
+	ld e, [hl]
+	ld d, HIGH(DexGridShlTable) + 8 - DEXGRID_PIC_SHIFT
+	ld a, [de]
+	ld [hli], a
+	dec b
+	jr nz, .last
+	jp CloseSRAM
 
 DexGrid_WaitLowerScreen:
 ; Wait until the LCD is on lines 64-99 (below the picture, with time to copy
@@ -2460,8 +2538,27 @@ DexGrid_UpdateOAM:
 	inc a
 	cp DEXGRID_CELLS
 	jp c, .loop
+	; the picture's left column
+	ld b, 0
+.pic_sprite
+	ld a, b
+	swap a ; * 16
+	add DEXGRID_PIC_OBJ_Y + 16
+	ld [hli], a
+	ld a, DEXGRID_PIC_OBJ_X + 8
+	ld [hli], a
+	ld a, b
+	add a
+	add DEXGRID_PIC_OBJ_TILE
+	ld [hli], a
+	ld a, DEXGRID_PIC_OBJ_PAL | VRAM_BANK_1
+	ld [hli], a
+	inc b
+	ld a, b
+	cp DEXGRID_PIC_SPRITES
+	jr c, .pic_sprite
 	; hide the other sprites
-	ld b, NUM_SPRITE_OAM_STRUCTS - DEXGRID_CELLS * 2
+	ld b, NUM_SPRITE_OAM_STRUCTS - DEXGRID_CELLS * 2 - DEXGRID_PIC_SPRITES
 	xor a
 .clear
 	ld [hli], a

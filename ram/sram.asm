@@ -7,6 +7,12 @@ NEXTU
 sEnemyFrontpicTileCount:: db
 	ds 15 ; 16-byte aligned, so Get2bpp can copy the pic with GDMA
 sPaddedEnemyFrontpic:: ds 7 * 7 tiles
+
+NEXTU
+; grid Pokedex: the picture's first tile column, for its sprites (past
+; sPaddedEnemyFrontpic and the question mark pic at sScratch; 16-byte aligned)
+	ds $330
+sDexGridPicSprite:: ds 8 tiles
 ENDU
 
 SECTION "SRAM Bank 0", SRAM
