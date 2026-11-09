@@ -56,7 +56,7 @@ _UnownPrinter:
 	call .UpdateUnownFrontpic
 	call WaitBGMap
 
-	ld a, UNOWN
+	ld_species_id UNOWN
 	ld [wCurPartySpecies], a
 	xor a
 	ld [wTempMonDVs], a
@@ -125,7 +125,7 @@ _UnownPrinter:
 	jr z, .vacant
 	inc a
 	ld [wUnownLetter], a
-	ld a, UNOWN
+	ld_species_id UNOWN
 	ld [wCurPartySpecies], a
 	xor a
 	ld [wBoxAlignment], a

@@ -16,7 +16,7 @@ GiveDratini:
 .CheckForDratini:
 ; start at the end of the party and search backwards for a Dratini
 	ld a, [hl]
-	cp MAGIKARP
+	cp_species MAGIKARP
 	jr z, .GiveMoveset
 	ld a, l
 	sub e

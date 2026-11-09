@@ -602,12 +602,12 @@ GetMovePriority:
 .mon_check
 	; check if player is using Blastoise
 	ld a, [wBattleMonSpecies]
-	cp BLASTOISE
+	cp_species BLASTOISE
 	jr z, .priority_2
 
 	; check if foe is using Blastoise
 	ld a, [wEnemyMonSpecies]
-	cp BLASTOISE
+	cp_species BLASTOISE
 	jr z, .priority_2
 
 	; Neither is Blastoise
@@ -630,16 +630,16 @@ GetMovePriority:
 .mon_check3
 	; check if player is using drowzee or hypno
 	ld a, [wBattleMonSpecies]
-	cp DROWZEE
+	cp_species DROWZEE
 	jr z, .priority_2
-	cp HYPNO
+	cp_species HYPNO
 	jr z, .priority_2
 
 	; check if foe is using drowzee or hypno
 	ld a, [wEnemyMonSpecies]
-	cp DROWZEE
+	cp_species DROWZEE
 	jr z, .priority_2
-	cp HYPNO
+	cp_species HYPNO
 	jr z, .priority_2
 
 	; Neither is Snorlax
@@ -2600,7 +2600,7 @@ LoadEnemyMonToSwitchTo:
 	call LoadEnemyMon
 
 	ld a, [wCurPartySpecies]
-	cp UNOWN
+	cp_species UNOWN
 	jr nz, .skip_unown
 	ld a, [wFirstUnownSeen]
 	and a
@@ -3443,16 +3443,16 @@ SpikesDamage:
 ; === Ability: Serenity - Pokemon List
 ; ====================================
 	call GetCurrentMon
-	cp CHIKORITA ; to prevent poisoning from Toxic Spikes
+	cp_species CHIKORITA ; to prevent poisoning from Toxic Spikes
 	jmp z, .pop
-	cp BAYLEEF
+	cp_species BAYLEEF
 	jmp z, .pop
-	cp MEGANIUM ; to prevent poisoning from Toxic Spikes
-	jr z, .pop
-	cp SYLVEON
-	jr z, .pop
-	cp MEW
-	jr z, .pop
+	cp_species MEGANIUM ; to prevent poisoning from Toxic Spikes
+	jmp z, .pop
+	cp_species SYLVEON
+	jmp z, .pop
+	cp_species MEW
+	jmp z, .pop
 
 ; Toxic Spikes can't poison a Pokemon that already has a status condition
 	ld a, BATTLE_VARS_STATUS
@@ -5492,7 +5492,7 @@ LoadEnemyMon:
 
 ; Unown
 	ld a, [wTempEnemyMonSpecies]
-	cp UNOWN
+	cp_species UNOWN
 	jr nz, .Magikarp
 
 ; Get letter based on DVs
@@ -5513,7 +5513,7 @@ LoadEnemyMon:
 ; After the conversion to feet, it is unable to target any,
 ; since the largest possible Magikarp is 5'3", and $0503 = 1283 mm.
 	ld a, [wTempEnemyMonSpecies]
-	cp MAGIKARP
+	cp_species MAGIKARP
 	jr nz, .Happiness
 
 ; Get Magikarp's length
@@ -6493,9 +6493,9 @@ GiveExperiencePoints:
 	; even when Experience Gain is set to Scaled. They are the classic
 	; EXP-training targets, so the level-scaling penalty is skipped.
 	ld a, [wEnemyMonSpecies]
-	cp CHANSEY
+	cp_species CHANSEY
 	jr z, .skip_exp_scaling
-	cp BLISSEY
+	cp_species BLISSEY
 	jr z, .skip_exp_scaling
 
 	; Get player mon's level
@@ -7691,7 +7691,7 @@ InitEnemy:
 	ld hl, wEnemyMonDVs
 	predef GetUnownLetter
 	ld a, [wCurPartySpecies]
-	cp UNOWN
+	cp_species UNOWN
 	jr nz, .skip_unown
 	ld a, [wFirstUnownSeen]
 	and a

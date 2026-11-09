@@ -1382,17 +1382,17 @@ LinkTrade:
 	ld b, 1
 	pop af
 	ld c, a
-	cp MEW
+	cp_species MEW
 	jr z, .send_checkbyte
 	ld a, [wCurPartySpecies]
-	cp MEW
+	cp_species MEW
 	jr z, .send_checkbyte
 	ld b, 2
 	ld a, c
-	cp CELEBI
+	cp_species CELEBI
 	jr z, .send_checkbyte
 	ld a, [wCurPartySpecies]
-	cp CELEBI
+	cp_species CELEBI
 	jr z, .send_checkbyte
 
 ; Send the byte in a loop until the desired byte has been received.

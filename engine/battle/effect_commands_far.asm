@@ -33,7 +33,7 @@ PriorityAbilityPopup:
 	cp IRON_HEAD
 	jr nz, .not_iron_head
 	ld a, b
-	cp BLASTOISE
+	cp_species BLASTOISE
 	ret nz
 	call PriorityBattleText_Call
 	ShowGenericAbilityPopup EVENT_IRON_HEAD_PLAYER, EVENT_IRON_HEAD_FOE, PreemptText
@@ -43,7 +43,7 @@ PriorityAbilityPopup:
 	cp CURSE
 	jr nz, .not_curse
 	ld a, b
-	cp SNORLAX
+	cp_species SNORLAX
 	ret nz
 	call PriorityBattleText_Call
 	ShowGenericAbilityPopup EVENT_CURSE_PLAYER, EVENT_CURSE_FOE, PreemptText
@@ -53,9 +53,9 @@ PriorityAbilityPopup:
 	cp ZEN_HEADBUTT
 	ret nz
 	ld a, b
-	cp DROWZEE
+	cp_species DROWZEE
 	jr z, .popup_zen
-	cp HYPNO
+	cp_species HYPNO
 	ret nz
 
 .popup_zen
@@ -90,7 +90,7 @@ _BattleCommand_Critical:
 .Item:
 	ld c, 0
 
-	cp CHANSEY
+	cp_species CHANSEY
 	jr nz, .Tropius
 	ld a, [hl]
 	cp LUCKY_PUNCH
@@ -101,7 +101,7 @@ _BattleCommand_Critical:
 	jmp .Tally
 
 .Tropius:
-	cp TROPIUS
+	cp_species TROPIUS
 	jr nz, .FocusEnergy
 	ld a, [hl]
 	cp STICK

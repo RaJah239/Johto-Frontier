@@ -8,7 +8,7 @@ CheckMagikarpLength:
 	farcall SelectMonFromParty
 	jr c, .declined
 	ld a, [wCurPartySpecies]
-	cp MAGIKARP
+	cp_species MAGIKARP
 	jr nz, .not_magikarp
 
 	; Now let's compute its length based on its DVs and ID.

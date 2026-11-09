@@ -1795,7 +1795,7 @@ AI_Smart_Heal:
 
 	; If player has Smeargle, just attack it
 	ld a, [wBattleMonSpecies]
-	cp SMEARGLE
+	cp_species SMEARGLE
 	jmp z, .discourage
 
 	; Rest needs special handling
@@ -1839,11 +1839,11 @@ AI_Smart_Heal:
 
 	; --- Legendary-specific logic first (different thresholds) ---
 	ld a, [wEnemyMonSpecies]
-	cp LUGIA
+	cp_species LUGIA
 	jr z, .legendary_heal_check
-	cp HO_OH
+	cp_species HO_OH
 	jr z, .legendary_heal_check
-	cp MEWTWO
+	cp_species MEWTWO
 	jr z, .legendary_heal_check
 
 	; Non-legendary: only consider healing if below 1/2 HP
@@ -1885,11 +1885,11 @@ AI_Smart_Heal:
 .encourage
 	; Legendary: big encourage
 	ld a, [wEnemyMonSpecies]
-	cp LUGIA
+	cp_species LUGIA
 	jr z, .big_encourage
-	cp HO_OH
+	cp_species HO_OH
 	jr z, .big_encourage
-	cp MEWTWO
+	cp_species MEWTWO
 	jr z, .big_encourage
 	jr .normal_encourage
 
@@ -2728,7 +2728,7 @@ AI_Smart_HealBell:
 
 AI_Smart_Flinch:
 	ld a, [wEnemyMonSpecies]
-	cp BLASTOISE
+	cp_species BLASTOISE
 	jr nz, .not_blastoise_or_iron_head
 
 	; check if blastoise has iron head
@@ -2739,9 +2739,9 @@ AI_Smart_Flinch:
 
 .not_blastoise_or_iron_head
 	ld a, [wEnemyMonSpecies]
-	cp DROWZEE
+	cp_species DROWZEE
 	jr z, .not_drowzee_or_hypno_or_zen_headbutt
-	cp HYPNO
+	cp_species HYPNO
 	jr nz, .not_drowzee_or_hypno_or_zen_headbutt
 
 	; check if drowzee or hypno has zen headbutt

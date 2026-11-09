@@ -856,7 +856,7 @@ _CGB_PokedexUnownMode:
 	call CheckPokedexColor
  	call GetPredefPal
 	call LoadHLPaletteIntoDE
-	ld a, UNOWN
+	ld_species_id UNOWN
 	call GetMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
 	call WipeAttrmap

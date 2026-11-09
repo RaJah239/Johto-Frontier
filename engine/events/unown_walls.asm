@@ -1,5 +1,6 @@
 HoOhChamber:
-	ld b, HO_OH ; is Ho-oh in the party?
+	ld_species_id HO_OH ; is Ho-oh in the party?
+	ld b, a
 	farcall _FindPartyMonThatSpecies
 	jr z, .done ; if not, we're done
 	ld de, EVENT_WALL_OPENED_IN_HO_OH_CHAMBER

@@ -275,7 +275,7 @@ PokeBallEffect:
 
 	; check if unown
 	ld a, [wEnemyMonSpecies]
-	cp UNOWN
+	cp_species UNOWN
 	jr nz, .not_unown
 
 	; if shiny ball was used, bounce away and don't consume
@@ -299,57 +299,12 @@ ENDC
 	cp MASTER_BALL
 	jr nz, .not_a_master_ball
 
-	; The Master Ball always fails on Mew, Mewtwo, Lugia and Ho-Oh.
+	; The Master Ball always fails on the species in MasterBallImmunePokemon.
 	; Like a too-strong mon, it bounces off without being consumed.
 	ld a, [wEnemyMonSpecies]
-	cp ROTOM
-	jr z, .master_ball_fails
-	cp ABSOL
-	jr z, .master_ball_fails
-	cp DURALUDON
-	jr z, .master_ball_fails
-	cp GHOLDENGO
-	jr z, .master_ball_fails
-	cp DARKRAI
-	jr z, .master_ball_fails
-	cp REGIROCK
-	jr z, .master_ball_fails
-	cp REGICE
-	jr z, .master_ball_fails
-	cp REGISTEEL
-	jr z, .master_ball_fails
-	cp REGIGIGAS
-	jr z, .master_ball_fails
-	cp ARTICUNO
-	jr z, .master_ball_fails
-	cp ZAPDOS
-	jr z, .master_ball_fails
-	cp MOLTRES
-	jr z, .master_ball_fails
-	cp LUGIA
-	jr z, .master_ball_fails
-	cp RAIKOU
-	jr z, .master_ball_fails
-	cp ENTEI
-	jr z, .master_ball_fails
-	cp SUICUNE
-	jr z, .master_ball_fails
-	cp HO_OH
-	jr z, .master_ball_fails
-	cp UNOWN
-	jr z, .master_ball_fails
-	cp NOWN
-	jr z, .master_ball_fails
-	cp VICTINI
-	jr z, .master_ball_fails
-	cp CELEBI
-	jr z, .master_ball_fails
-	cp DITTO
-	jr z, .master_ball_fails
-	cp MEW
-	jr z, .master_ball_fails
-	cp MEWTWO
-	jr z, .master_ball_fails
+	ld hl, MasterBallImmunePokemon
+	call IsSpeciesInList
+	jr c, .master_ball_fails
 	jmp .catch_without_fail
 
 .master_ball_fails
@@ -3396,3 +3351,30 @@ CheckFieldActionsAsm:
 	and 1 << FIELD_ACTIONS
 	ld [wScriptVar], a
 	ret
+
+MasterBallImmunePokemon:
+	dw ROTOM
+	dw ABSOL
+	dw DURALUDON
+	dw GHOLDENGO
+	dw DARKRAI
+	dw REGIROCK
+	dw REGICE
+	dw REGISTEEL
+	dw REGIGIGAS
+	dw ARTICUNO
+	dw ZAPDOS
+	dw MOLTRES
+	dw LUGIA
+	dw RAIKOU
+	dw ENTEI
+	dw SUICUNE
+	dw HO_OH
+	dw UNOWN
+	dw NOWN
+	dw VICTINI
+	dw CELEBI
+	dw DITTO
+	dw MEW
+	dw MEWTWO
+	dw -1 ; end

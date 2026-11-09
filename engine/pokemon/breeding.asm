@@ -40,16 +40,16 @@ CheckBreedmonCompatibility:
 .genderless
 	ld c, $0
 	ld a, [wBreedMon1Species]
-	cp DITTO
+	cp_species DITTO
 	jr z, .ditto1
 	ld a, [wBreedMon2Species]
-	cp DITTO
+	cp_species DITTO
 	jr nz, .done
 	jr .compute
 
 .ditto1
 	ld a, [wBreedMon2Species]
-	cp DITTO
+	cp_species DITTO
 	jr z, .done
 
 .compute
@@ -101,7 +101,7 @@ CheckBreedmonCompatibility:
 ; Ditto is automatically compatible with everything.
 ; If not Ditto, load the breeding groups into b/c and d/e.
 	ld a, [wBreedMon2Species]
-	cp DITTO
+	cp_species DITTO
 	jr z, .Compatible
 	ld [wCurSpecies], a
 	call GetBaseData
@@ -115,7 +115,7 @@ CheckBreedmonCompatibility:
 	ld c, a
 
 	ld a, [wBreedMon1Species]
-	cp DITTO
+	cp_species DITTO
 	jr z, .Compatible
 	ld [wCurSpecies], a
 	push bc
@@ -158,7 +158,7 @@ CheckBattleEggGroupCompatibility:
 ; If not Ditto, load the breeding groups into b/c and d/e.
 	
 	ld a, [wTempEnemyMonSpecies]
-	cp DITTO
+	cp_species DITTO
 	jr z, .Incompatible
 
 	ld [wCurSpecies], a
@@ -177,7 +177,7 @@ CheckBattleEggGroupCompatibility:
 	ld c, a
 
 	ld a, [wTempBattleMonSpecies]
-	cp DITTO
+	cp_species DITTO
 	jr z, .Incompatible
 
 	ld [wCurSpecies], a
@@ -585,10 +585,10 @@ LoadEggMove:
 GetHeritableMoves:
 	ld hl, wBreedMon2Moves
 	ld a, [wBreedMon1Species]
-	cp DITTO
+	cp_species DITTO
 	jr z, .ditto1
 	ld a, [wBreedMon2Species]
-	cp DITTO
+	cp_species DITTO
 	jr z, .ditto2
 	ld a, [wBreedMotherOrNonDitto]
 	and a
@@ -642,10 +642,10 @@ GetHeritableMoves:
 GetBreedmonMovePointer:
 	ld hl, wBreedMon1Moves
 	ld a, [wBreedMon1Species]
-	cp DITTO
+	cp_species DITTO
 	ret z
 	ld a, [wBreedMon2Species]
-	cp DITTO
+	cp_species DITTO
 	jr z, .ditto
 	ld a, [wBreedMotherOrNonDitto]
 	and a

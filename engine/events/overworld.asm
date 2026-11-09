@@ -578,7 +578,7 @@ GetSurfType:
 	add hl, de
 
 	ld a, [hl]
-	cp PIKACHU
+	cp_species PIKACHU
 	jr nz, .not_pikachu
 
 	; Pikachu is our surfer

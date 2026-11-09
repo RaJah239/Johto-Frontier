@@ -642,11 +642,11 @@ ShouldIgniteFlameOrb:
 	ld c, a
 	ld a, [wBattleMonSpecies]
 .checkDetails
-	cp MEGANIUM
+	cp_species MEGANIUM
 	jr z, .no
-	cp SYLVEON
+	cp_species SYLVEON
 	jr z, .no
-	cp MEW
+	cp_species MEW
 	jr z, .no
 	ld a, b
 	cp FIRE
@@ -729,15 +729,15 @@ ShouldTriggerToxicOrb:
 	ld c, a
 	ld a, [wBattleMonSpecies]
 .checkDetails
-	cp CHIKORITA ; to prevent poisoning
+	cp_species CHIKORITA ; to prevent poisoning
 	jr z, .no
-	cp BAYLEEF ; to prevent poisoning
+	cp_species BAYLEEF ; to prevent poisoning
 	jr z, .no
-	cp MEGANIUM
+	cp_species MEGANIUM
 	jr z, .no
-	cp SYLVEON
+	cp_species SYLVEON
 	jr z, .no
-	cp MEW
+	cp_species MEW
 	jr z, .no
 	ld a, b
 	cp POISON

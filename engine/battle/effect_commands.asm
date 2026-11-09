@@ -693,7 +693,7 @@ BattleCommand_UsedMoveText:
 
 ; is this Aegislash
 .checkAegislash
-	cp AEGISLASH
+	cp_species AEGISLASH
 	jr nz, .noStance
 
 ; is defense already at base
@@ -2660,17 +2660,24 @@ PolarFangorLightBallBoost:
 	ld a, [wTempEnemyMonSpecies]
 .checkpikachu:
 	pop hl
-	cp PIKACHU
+	cp_species PIKACHU
 	jr z, .lightball
-	ld b, DEWGONG
-	ld c, SEEL
+	push hl
+	ld_species_id DEWGONG
+	ld b, a
+	ld_species_id SEEL
+	ld c, a
+	pop hl
 	ld d, POLAR_FANG
 	call SpeciesItemBoost
 	jr .done
 
 .lightball
-	ld b, PIKACHU
-	ld c, PIKACHU
+	push hl
+	ld_species_id PIKACHU
+	pop hl
+	ld b, a
+	ld c, a
 	ld d, LIGHT_BALL
 	call SpeciesItemBoost
 
@@ -2686,8 +2693,11 @@ LightBallBoost:
 ; holding a Light Ball, double it.
 	push bc
 	push de
-	ld b, PIKACHU
-	ld c, PIKACHU
+	push hl
+	ld_species_id PIKACHU
+	pop hl
+	ld b, a
+	ld c, a
 	ld d, LIGHT_BALL
 	call SpeciesItemBoost
 	pop de
@@ -2697,7 +2707,7 @@ LightBallBoost:
 SpeciesItemBoost:
 ; Return in hl the stat value at hl.
 
-; If the attacking monster is species b or c and
+; If the attacking monster is species (ID) b or c and
 ; it's holding item d, double it.
 
 	ld a, [hli]

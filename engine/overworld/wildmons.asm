@@ -323,7 +323,7 @@ ChooseWildEncounter:
 	jr c, .nowildbattle
 
 	ld a, b
-	cp UNOWN
+	cp_species UNOWN
 	jr nz, .done
 
 	ld a, [wUnlockedUnowns]

@@ -197,7 +197,7 @@ MaybeForceChampFinalMewtwo:
 	ld c, BATTLETOWER_ENEMY_PARTY_LENGTH
 .check_team
 	ld a, [hl]
-	cp MEWTWO
+	cp_species MEWTWO
 	jr z, .done
 	ld de, NICKNAMED_MON_STRUCT_LENGTH
 	add hl, de

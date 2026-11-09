@@ -438,7 +438,7 @@ endr
 	and $f
 	jr nz, .done
 	ld a, [wCurPartySpecies]
-	cp UNOWN
+	cp_species UNOWN
 	jr nz, .done
 	ld hl, wPartyMon1DVs
 	ld a, [wPartyCount]
@@ -546,7 +546,7 @@ AddTempmonToParty:
 .egg
 
 	ld a, [wCurPartySpecies]
-	cp UNOWN
+	cp_species UNOWN
 	jr nz, .done
 	ld hl, wPartyMon1DVs
 	ld a, [wPartyCount]
@@ -835,7 +835,7 @@ SendMonIntoBox:
 	ld a, [wCurPartySpecies]
 	call SetSeenAndCaughtMon
 	ld a, [wCurPartySpecies]
-	cp UNOWN
+	cp_species UNOWN
 	jr nz, .not_unown
 	ld hl, wBufferMonDVs
 	predef GetUnownLetter

@@ -125,3 +125,15 @@ MACRO skip_evolutions
 	jr .skip_evolutions\@
 .skipped_evolutions\@
 ENDM
+
+MACRO cp_species ; species constant (16-bit index)
+; z if the species ID in a is this species. Preserves a, bc, de and hl.
+	call _CompareSpeciesIndex
+	dw \1
+ENDM
+
+MACRO ld_species_id ; species constant (16-bit index)
+; a = the species' 8-bit ID (allocating one if it has none). Clobbers hl.
+	ld hl, \1
+	call GetPokemonIDFromIndex
+ENDM

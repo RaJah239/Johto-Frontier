@@ -551,11 +551,11 @@ DayCare_InitBreeding:
 	ld a, TEMPMON
 	ld [wMonType], a
 	ld a, [wBreedMon1Species]
-	cp DITTO
+	cp_species DITTO
 	ld a, $1
 	jr z, .LoadWhichBreedmonIsTheMother
 	ld a, [wBreedMon2Species]
-	cp DITTO
+	cp_species DITTO
 	ld a, $0
 	jr z, .LoadWhichBreedmonIsTheMother
 	farcall GetGender
@@ -628,11 +628,11 @@ DayCare_InitBreeding:
 	ld [wTempMonDVs + 1], a
 	ld de, wBreedMon1DVs
 	ld a, [wBreedMon1Species]
-	cp DITTO
+	cp_species DITTO
 	jr z, .GotDVs
 	ld de, wBreedMon2DVs
 	ld a, [wBreedMon2Species]
-	cp DITTO
+	cp_species DITTO
 	jr z, .GotDVs
 	ld a, TEMPMON
 	ld [wMonType], a

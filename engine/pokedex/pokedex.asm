@@ -4103,7 +4103,7 @@ Pokedex_LoadUnownFrontpicTiles:
 	ld a, b
 	inc a
 	ld [wUnownLetter], a
-	ld a, UNOWN
+	ld_species_id UNOWN
 	ld [wCurPartySpecies], a
 	call GetBaseData
 	ld de, vTiles2 tile $00

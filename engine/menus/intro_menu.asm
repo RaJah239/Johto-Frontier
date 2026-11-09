@@ -15,7 +15,7 @@ AboutSpeech:
 	; prepare for sprite display
 	ld c, 15
 	call FadeToWhite
-	ld a, SMEARGLE ; change this to show a different pokemon
+	ld_species_id SMEARGLE ; change this to show a different pokemon
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	call GetBaseData
@@ -592,7 +592,7 @@ else
 	call FadeToWhite
 	call ClearTilemap
 
-	ld a, WOOPER
+	ld_species_id WOOPER
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	call GetBaseData
@@ -682,7 +682,7 @@ OakText1Min:
 OakText2:
 	text_far _OakText2
 	text_asm
-	ld a, WOOPER
+	ld_species_id WOOPER
 	call PlayMonCry
 	call WaitSFX
 	ld hl, OakText3
@@ -691,7 +691,7 @@ OakText2:
 OakText2Min:
 	text_far _OakText2Min
 	text_asm
-	ld a, WOOPER
+	ld_species_id WOOPER
 	call PlayMonCry
 	call WaitSFX
 	ld hl, OakText3

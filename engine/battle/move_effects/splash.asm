@@ -1,9 +1,9 @@
 BattleCommand_Splash:
 	farcall AnimateCurrentMove
 	call GetCurrentMon
-	cp MAGIKARP
+	cp_species MAGIKARP
 	jr z, .vigor
-	cp FEEBAS
+	cp_species FEEBAS
 	jr z, .vigor
 	farjp PrintNothingHappened
 

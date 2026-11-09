@@ -263,20 +263,20 @@ GetGender:
 ; Certain species are always one gender, regardless of the Attack DV bit.
 	ld a, [wCurPartySpecies]
 ; always female
-	cp MILTANK
+	cp_species MILTANK
 	jr z, .AlwaysFemale
-	cp CHANSEY
+	cp_species CHANSEY
 	jr z, .AlwaysFemale
-	cp BLISSEY
+	cp_species BLISSEY
 	jr z, .AlwaysFemale
-	cp JYNX
+	cp_species JYNX
 	jr z, .AlwaysFemale
 ; always male
-	cp NIDOKING
+	cp_species NIDOKING
 	jr z, .AlwaysMale
-	cp TAUROS
+	cp_species TAUROS
 	jr z, .AlwaysMale
-	cp MR__MIME
+	cp_species MR__MIME
 	jr z, .AlwaysMale
 
 ; The Attack DV's top bit picks the gender: clear = male, set = female.

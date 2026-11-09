@@ -140,3 +140,46 @@ IsSpeciesInFarList::
 	ld a, d
 	rst Bankswitch ; (flags untouched)
 	ret
+
+_CompareSpeciesIndex::
+; (cp_species) z if species ID a is the 16-bit species index in the dw after
+; the call, which is skipped. Preserves a, bc, de and hl; carry is clear.
+	push hl
+	push de
+	push bc
+	push af
+	ld hl, sp + 8 ; the return address
+	ld e, [hl]
+	inc hl
+	ld d, [hl] ; de = the dw
+	inc de
+	inc de
+	ld [hl], d
+	dec hl
+	ld [hl], e ; return past it
+	dec de
+	ld a, [de]
+	ld b, a
+	dec de
+	ld a, [de]
+	ld c, a ; bc = the index to compare with
+	pop af
+	push af
+	call GetPokemonIndexFromID
+	ld a, l
+	xor c
+	ld c, a
+	ld a, h
+	xor b
+	or c
+	ld c, 0
+	jr nz, .got_flags
+	ld c, 1 << 7 ; z
+.got_flags
+	ld hl, sp + 0
+	ld [hl], c ; the pushed f
+	pop af
+	pop bc
+	pop de
+	pop hl
+	ret
