@@ -1341,12 +1341,10 @@ Dex_Check_casino:
 	add hl, de
 	jr .loop
 .check_kanto_casino
-	ld a, [wPokedexEvoStage2]
-	and a
-	jr nz, .notfound
-	inc a
-	ld [wPokedexEvoStage2], a
-	jr .loop_b
+	; CasinoMons only has the Goldenrod list (there is no Kanto game corner):
+	; reading on went into NPCTradeMons_Locations, so some mons got a casino
+	; page with a made-up map and price
+	jr .notfound
 .found
 	xor a
 	ret
@@ -1387,6 +1385,7 @@ Pokedex_DetailedArea_casino:
 	add hl, de
 	jr .johto_loop
 .kanto_loop_setup
+	jr .donedone ; only a Johto list (see Dex_Check_casino)
 	inc hl ; ptr to kanto casino map_id
 	push hl ; ptr to kanto casino map_id
 	inc hl
@@ -1459,7 +1458,7 @@ Print_casinomon:
 	and a
 	jr z, .first_print_coins
 	hlcoord 2, 13
-	jr .print_map_id
+	jr .print_coins
 .first_print_coins
 	hlcoord 2, 11
 .print_coins
