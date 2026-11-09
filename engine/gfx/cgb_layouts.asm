@@ -337,6 +337,7 @@ INCLUDE "gfx/stats/stats.pal"
 
 DEF PAL_DEXENTRY_BALL EQU 6 ; free on the dex entry screen
 DEF PAL_DEXPICS_BALL  EQU 2 ; free on the pictures page
+DEF PAL_DEXEVO_BALL   EQU 7 ; free on the evolution page
 
 _CGB_Pokedex:
 	ld de, wBGPals1
@@ -552,6 +553,20 @@ ENDC
  	hlcoord 1, 16, wAttrmap
  	ld bc, 4
  	call ByteFill				
+
+; caught balls left of each stage (see Pokedex_SetCaughtBallPalette)
+	ld de, wBGPals1 palette PAL_DEXEVO_BALL
+	ld hl, PokedexLightBallPalette
+	call LoadHLPaletteIntoDE
+	ld a, PAL_DEXEVO_BALL | VRAM_BANK_1
+	hlcoord 5, 1, wAttrmap
+	ld [hl], a
+	hlcoord 5, 4, wAttrmap
+	ld [hl], a
+	hlcoord 5, 8, wAttrmap
+	ld [hl], a
+	hlcoord 5, 12, wAttrmap
+	ld [hl], a
  
  	call InitPartyMenuOBPals
  	call ApplyAttrmap
