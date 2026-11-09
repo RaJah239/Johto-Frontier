@@ -277,8 +277,9 @@ AI_Smart_Growth:
 	call CanPlayerKO
 	jmp c, StandardDiscourage
 
+; either attacking stat maxed: it has boosted enough, attack
 	call IsAttackMaxed
-	jr nc, .continue
+	jmp c, StandardDiscourage
 	call IsSpecialAttackMaxed
 	jmp c, StandardDiscourage
 
@@ -301,6 +302,9 @@ AI_Smart_Growth:
 	jmp StrongEncourage
 
 .at_plus_2
+; already 2HKOs: just attack (more boosts only give the player time)
+	call CanAI2HKO
+	jmp c, StandardDiscourage
 ; discourage after boost if afflicted with toxic
 	call IsAIToxified
 	jmp c, StandardDiscourage
@@ -955,6 +959,9 @@ AI_Smart_SwordsDance:
 	jmp c, StandardEncourage
 
 ; at +2 or higher
+; already 2HKOs: just attack (more boosts only give the player time)
+	call CanAI2HKO
+	jmp c, StandardDiscourage
 ; discourage after boost if afflicted with toxic
 	call IsAIToxified
 	jmp c, StandardDiscourage
@@ -974,9 +981,8 @@ AI_Smart_QuiverDance:
 	call CanPlayerKO
 	jmp c, StandardDiscourage
 
+; maxed Sp. Atk: nothing left to gain, attack
 	call IsSpecialAttackMaxed
-	jr nc, .should_boost
-	call IsSpecialDefenseMaxed
 	jmp c, StandardDiscourage
 
 .should_boost
@@ -1015,6 +1021,9 @@ AI_Smart_QuiverDance:
 	jmp c, StandardEncourage
 
 ; at +2 or higher
+; already 2HKOs: just attack (more boosts only give the player time)
+	call CanAI2HKO
+	jmp c, StandardDiscourage
 ; discourage after boost if afflicted with toxic
 	call IsAIToxified
 	jmp c, StandardDiscourage
@@ -1034,9 +1043,8 @@ AI_Smart_CalmMind:
 	call CanPlayerKO
 	jmp c, StandardDiscourage
 
+; maxed Sp. Atk: nothing left to gain, attack (Sp. Def alone won't win it)
 	call IsSpecialAttackMaxed
-	jr nc, .continue
-	call IsSpecialDefenseMaxed
 	jmp c, StandardDiscourage
 
 .continue
@@ -1058,6 +1066,9 @@ AI_Smart_CalmMind:
 	jmp c, StandardEncourage
 
 ; at +2 or higher
+; already 2HKOs: just attack (more boosts only give the player time)
+	call CanAI2HKO
+	jmp c, StandardDiscourage
 ; discourage after boost if afflicted with toxic
 	call IsAIToxified
 	jmp c, StandardDiscourage
@@ -2962,9 +2973,8 @@ AI_Smart_BulkUp:
 	call CanPlayerKO
 	jmp c, StandardDiscourage
 
+; maxed Attack: nothing left to gain, attack
 	call IsAttackMaxed
-	jr nc, .continue
-	call IsDefenseMaxed
 	jmp c, StandardDiscourage
 
 .continue
@@ -2992,6 +3002,9 @@ AI_Smart_BulkUp:
 	jmp StandardEncourage
 
 .at_plus_2
+; already 2HKOs: just attack (more boosts only give the player time)
+	call CanAI2HKO
+	jmp c, StandardDiscourage
 ; discourage after boost if afflicted with toxic
 	call IsAIToxified
 	jmp c, StandardDiscourage
