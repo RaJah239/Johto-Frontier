@@ -16,12 +16,13 @@ How opposing trainers decide what to do each turn: which move to use, when to sw
   - how many hits it needs to knock you out, and how many you need to knock it out
   - who is faster (counting paralysis, Trick Room, Choice Scarf and weather speed abilities)
   - which moves have no effect because of type matchups or abilities like Levitate
+  - how a one-on-one between its Pokémon and yours would play out (see [The 1-on-1 check](#the-1-on-1-check))
 
 ## A turn, step by step
-1. **Pick a move.** Every move is scored (see below). The AI also decides here whether it *should* switch out (see [Smart switching](#smart-switching)).
+1. **Pick a move.** Every move is scored (see below). The AI also decides here whether it *should* switch out because something has gone wrong (see [Smart switching](#smart-switching)).
 2. **Switch or use an item, at the start of the turn.**
-   - If step 1 asked for a switch, it switches (unless it's trapped or set up, see [When it won't switch](#when-it-wont-switch)).
-   - Otherwise it may switch anyway, by chance (see [Switching by chance](#switching-by-chance)).
+   - If step 1 asked for a switch, it switches (unless it's trapped, set up or alone, see [When it won't switch](#when-it-wont-switch)).
+   - Otherwise it plays out the 1-on-1 and switches if it's losing and another Pokémon would do better (see [The 1-on-1 check](#the-1-on-1-check)).
    - If it doesn't switch, it may use an item (see [Items](#items)).
 3. **Attack** with the chosen move if it didn't switch or use an item.
 
@@ -148,8 +149,57 @@ These run after everything above and can override it.
 
 ## Switching
 
+### The 1-on-1 check
+At the start of every turn, unless it's trapped, the AI plays out a one-on-one between the Pokémon that's out and yours, turn by turn, until one of them goes down.
+
+**How a 1-on-1 is played out:**
+- Each side uses its strongest attack every turn. It uses a priority move instead when that move would knock the other out for sure. Blastoise's Iron Head and Drowzee's and Hypno's Zen Headbutt count as priority moves.
+- The AI's attacks use their **weakest** damage roll and yours your **strongest**, so it only counts on what's certain. There are no critical hits and every move hits.
+- Turn order:
+  - the higher priority goes first
+  - otherwise the faster Pokémon (counting paralysis, Trick Room, Choice Scarf and weather speed abilities)
+  - on a speed tie, you go first
+- Abilities count:
+  - immunities (Levitate, Waterproof, Flame Ward, Grounded, Immunity)
+  - Tinted Lens, Solid Rock and Fur Coat
+  - Unaware ignoring stat changes
+- **Healing moves** (Recover and similar 1/2, Slack Off 1/3 with priority, Healing Light by the weather, Rest to full HP plus 2 turns of sleep that also cure its status):
+  - a side heals when it can't knock the other out first, the other's next hit (two hits, if it moves second) would knock it out, and the heal is bigger than that hit
+  - this applies to both sides, so a Pokémon that can out-heal its attacker can't be worn down
+- **Draining moves** give back half the damage they deal. Dream Eater only works on a sleeping target.
+- **Sleep:** a sleeping Pokémon skips its turns until it wakes, using the real sleep counter.
+- **Damage over time:**
+  - after each side moves: poison, burn and frostbite 1/16; bad poison 1/16 more each turn; Leech Seed 1/8, which goes to the other side; Curse 1/4
+  - at the end of each turn: sandstorm and hail 1/16 while they last (not for the immune types); Leftovers heals 1/16
+  - Magic Guard ignores all of this damage
+- **Boosting once:** if its Pokémon has a boosting move (Swords Dance, Nasty Plot, Dragon Dance, Calm Mind, Bulk Up, Quiver Dance, Agility, Amnesia, Growth, Mystic Dance or Fury Drive), the AI also tries boosting on the first turn, taking a free hit from you, then attacking every turn. If either plan wins, that counts as a win. It assumes *you* just attack.
+- A fight that lasts more than 32 turns (for example both sides out-healing each other) doesn't count as a win.
+
+**Its other Pokémon** are played out as if they switched in right now:
+- they take Spikes and Stealth Rock damage exactly as the battle would (not with Heavy Boots, Hazard Guard or Spin Guard; Spikes not on Flying types)
+- Sticky Web lowers their Speed
+- they take your strongest hit as they come in
+- then the 1-on-1 starts, with their stat changes reset
+
+**What it decides:**
+- **Its Pokémon wins:** it stays in.
+- **Its Pokémon loses badly** (you'd keep more than 1/4 of your HP): it switches to the Pokémon that wins **comfortably** (keeps at least 1/4 of its own HP), picking the one that loses the smallest share of its HP.
+- **Otherwise:** it only switches to a Pokémon that would take **at least 1/4 of your max HP more** off you than staying would, even if that one would lose too.
+- **Nothing better:** it stays in.
+
+Two more rules stop it being exploited:
+- A Pokémon it just switched in always stays for at least one turn, so it won't switch back and forth.
+- 10% of the time it stays in anyway, so it's never fully predictable.
+
+**Not played out:**
+- accuracy, critical hits and added effects (paralysis chances, flinching, confusion)
+- you switching or setting up
+- Pursuit
+- Intimidate
+- recoil and other held items, beyond their effect on damage
+
 ### Smart switching
-While picking its move, it decides to switch out at the start of the turn when:
+While picking its move, it also decides to switch out at the start of the turn when:
 - it's locked into a move (Choice item or Encore) that:
   - does nothing to your Pokémon (type or ability)
   - is not very effective
@@ -169,17 +219,7 @@ For the last four:
 - It stays in if it's already set up.
 - Magic Guard Pokémon ignore curse, poison and Leech Seed.
 
-### Switching by chance
-If it didn't decide to switch above, it looks at how its team matches up against you.
-- **It wants to switch a lot** when its Perish Song count is about to run out.
-- **It wants to switch quite a bit** when, while your attacks are hurting the one that's out, one of its other Pokémon:
-  - is immune to the attack you just used, and
-  - has a super-effective move against you
-- **It wants to switch a little** when:
-  - that other Pokémon only has the super-effective move, or
-  - there's no immune Pokémon, but one of its Pokémon resists you, has at least 1/4 of its HP and has a super-effective move, while your moves do well against the one that's out
-
-It then switches with a 20%, 50% or 80% chance, depending on how much it wants to. It won't do this while it's at +2 Attack or Sp. Atk, or at 1/4 of its HP or less (it stays in and takes the hit).
+The Pokémon it switches to is picked as below, counting your hit as it comes in.
 
 ### When it won't switch
 It never switches out when:
@@ -191,14 +231,18 @@ It never switches out when:
   - your Magnet Pull, if it's a Steel type
 
   A Pokémon with Run Away escapes the three abilities, but not the moves.
-- it's at +2 or more in Attack, Sp. Atk, Defense or Sp. Def
 - it has no other Pokémon left
 
+Smart switching also doesn't happen at +2 or more in Attack, Sp. Atk, Defense or Sp. Def. The 1-on-1 check doesn't need this rule: it already counts its boosts.
+
 ### Which Pokémon it sends in
-After a knock-out, U-turn, Volt Switch, Baton Pass or any of the switches above, it picks, skipping Pokémon that are asleep or frozen:
-1. The first Pokémon in its party with a super-effective move against yours
-2. Otherwise, the first one that none of your Pokémon's moves hit super effectively
-3. Otherwise, a random one
+After a knock-out, U-turn, Volt Switch, Baton Pass or a smart switch, it plays out the 1-on-1 for each Pokémon it could send in, after entry hazards. It picks:
+1. the one that wins, losing the smallest share of its HP
+2. otherwise, the one that takes the biggest share of your HP off you
+3. if none of them can do anything to you:
+   - the first Pokémon with a super-effective move against yours
+   - otherwise, the first one that none of your Pokémon's moves hit super effectively
+   - otherwise, a random one (skipping asleep or frozen ones)
 
 Roar and Whirlwind bring in a random Pokémon.
 
