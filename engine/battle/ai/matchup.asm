@@ -1661,7 +1661,7 @@ MSim_\1Acts:
 .drain_heal
 	call MSim_Heal\1
 .residual
-	jmp MSim_\1Residual
+	jr MSim_\1Residual
 ENDM
 
 	msim_acts Enemy, Player, E, MSIM_ENEMY_WINS

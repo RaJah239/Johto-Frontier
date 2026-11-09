@@ -13,11 +13,11 @@ AI_Aggressive:
 	inc b
 	ld a, b
 	cp NUM_MOVES + 1
-	jmp z, .gotstrongestmove
+	jr z, .gotstrongestmove
 
 	ld a, [hli]
 	and a
-	jmp z, .gotstrongestmove
+	jr z, .gotstrongestmove
 
 	push hl
 	push de
@@ -25,7 +25,7 @@ AI_Aggressive:
 	call AIGetEnemyMove
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
-	jmp z, .nodamage
+	jr z, .nodamage
 	call AIDamageCalc
 	pop bc
 	pop de
@@ -49,7 +49,7 @@ AI_Aggressive:
 	pop bc
 	pop de
 	pop hl
-	jmp c, .checkmove
+	jr c, .checkmove
 
 .continue
 ; Update current move if damage is highest so far
@@ -57,20 +57,20 @@ AI_Aggressive:
 	cp e
 	ld a, [wCurDamage]
 	sbc d
-	jmp c, .checkmove
+	jr c, .checkmove
 
 	ld a, [wCurDamage + 1]
 	ld e, a
 	ld a, [wCurDamage]
 	ld d, a
 	ld c, b
-	jmp .checkmove
+	jr .checkmove
 
 .nodamage
 	pop bc
 	pop de
 	pop hl
-	jmp .checkmove
+	jr .checkmove
 
 .gotstrongestmove
 ; Nothing we can do if no attacks did damage.

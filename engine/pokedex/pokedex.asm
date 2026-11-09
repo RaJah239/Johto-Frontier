@@ -819,7 +819,7 @@ Evos_Page:
  	ld hl, hJoyLast
  	ld a, [hl]
  	and D_RIGHT
- 	jmp nz, .right_dpad
+ 	jr nz, .right_dpad
  	ld a, [hl]
  .no_second_page
  	ld hl, hJoyLast
