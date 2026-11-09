@@ -216,6 +216,10 @@ Pokedex_UpdateGridScreen::
 	jmp DelayFrame
 
 .b
+	; go white at once, icons included (they'd otherwise vanish first and
+	; leave the grid up without them while the Pokedex closes)
+	call ClearPalettes
+	call DelayFrame
 	call DexGrid_Leave
 	ld a, DEXSTATE_EXIT
 	ld [wJumptableIndex], a

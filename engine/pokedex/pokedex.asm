@@ -59,9 +59,10 @@ Pokedex:
 	jr .main
 
 .exit
+	; (no WaitSFX: ReloadTilesetAndPalettes gives the click time to reach its
+	; last note, and waiting here kept the screen up for ~16 frames)
 	ld de, SFX_READ_TEXT_2
 	call PlaySFX
-	call WaitSFX
 	call ClearSprites
 	ld a, [wCurDexMode]
 	ld [wLastDexMode], a
