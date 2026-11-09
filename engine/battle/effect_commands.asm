@@ -1865,6 +1865,14 @@ GetFailureResultText:
 	jr z, .got_text
 
 ; protected / underground / flying targets skip the dodge animation
+	; Counter and Mirror Coat fail rather than miss: no dodge either
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_COUNTER
+	jr z, .no_dodge_anim
+	cp EFFECT_MIRROR_COAT
+	jr z, .no_dodge_anim
+
 	; check if protecting
 	ld a, BATTLE_VARS_SUBSTATUS1_OPP
 	call GetBattleVar
