@@ -2290,9 +2290,14 @@ MSim_EvalSlot:
 	call MSim_EnemyMoveDamage
 	ld a, [wMSimT1Kind]
 	cp MSIM_T1_CAPTURE
-	jp nz, .run
-	ld a, MSIM_T1_DAMAGE
-	ld [wMSimT1Kind], a
+	jp z, .not_simulated ; no damage at all (immune, or Dream Eater on an awake target)
+	; a move that does nothing now isn't played out: it would still "win" if
+	; the rest of the fight does (e.g. Dream Eater while the player is awake)
+	ld a, [wMSimT1Dmg]
+	ld b, a
+	ld a, [wMSimT1Dmg + 1]
+	or b
+	jp z, .not_simulated
 	jp .run
 
 .non_damaging
