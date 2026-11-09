@@ -163,6 +163,8 @@ AI_Smart_Switch:
 ; trapping ability (repo A only checks its own trapping species)
 	call IsEnemyTrapped
 	ret c
+	call IsEnemyStayInMon ; Smeargle etc. never switch out by choice
+	ret c
 
     ld a, $1
     ld [wEnemyIsSwitching], a

@@ -47,6 +47,8 @@ AI_SwitchOrTryItem:
 	; that wins (AI_MatchupSwitch, engine/battle/ai/matchup.asm)
 	call IsEnemyTrapped
 	jr c, DontSwitch
+	call IsEnemyStayInMon
+	jr c, DontSwitch
 	farcall AI_MatchupSwitch
 	jp c, AI_Switch
 	; fallthrough
@@ -60,6 +62,8 @@ AI_TrySwitch:
 ; (repo A checks its own trapping species; these are this game's trapping
 ; abilities, which the player's mon can have)
 	call IsEnemyTrapped
+	ret c
+	call IsEnemyStayInMon
 	ret c
 
 	ld a, [wEnemyAtkLevel]
@@ -99,6 +103,18 @@ AI_TrySwitch:
 	jr nc, AI_Switch
 	and a
 	ret
+
+IsEnemyStayInMon:
+; carry if the enemy's mon never switches out by choice: its moveset is what
+; turns the battle (e.g. Smeargle's hazards and Fury Drive), so it stays in
+; and uses it. It's still replaced normally when it faints.
+	ld a, [wEnemyMonSpecies]
+	ld hl, StayInPokemon_AI
+	jmp IsInByteArray
+
+StayInPokemon_AI:
+	db SMEARGLE
+	db -1 ; end
 
 IsEnemyTrapped:
 ; carry if the enemy's mon can't switch out: the player used Mean Look or
