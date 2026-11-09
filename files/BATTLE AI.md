@@ -72,6 +72,7 @@ Each kind of move gets its own check. The main ones:
   - Agility only when it's slower
   - it won't boost while you can force it out (Roar, Whirlwind, Haze, Reset Stats) or when you're behind a Substitute
   - it stops boosting once it's at +2, or when it and you could each knock the other out in two hits
+  - past +2 it only keeps going while you're boosting too, and never once its attacking stat is at +6 (Calm Mind and Quiver Dance stop at +6 Sp. Atk, Bulk Up at +6 Attack) or it can already knock you out in two hits
   - it may set up while you're asleep for long enough
 - **Status moves:**
   - Sleep, paralysis, burn, Toxic and confusion are avoided if you can't get that status or are behind a Substitute or Safeguard
@@ -149,8 +150,8 @@ These run after everything above and can override it.
 
 ### 8. Playing out each move
 Last of all, the AI plays out every move it was seriously considering: any move whose score is close to its favourite's. It asks: "if I use this move now and then fight on as well as I can, do I win?" It uses the same simulation as [the 1-on-1 check](#the-1-on-1-check).
-- **Attacks** hit with their own damage (weakest roll) and priority on the first turn.
-- **Boosting moves** boost on the first turn, and you get a free hit.
+- **Attacks** hit with their own damage (weakest roll) and priority on the first turn. An attack that would do nothing now (Dream Eater while you're awake, or a move you're immune to) isn't played out, so it can't "win".
+- **Boosting moves** boost on the first turn, and you get a free hit. A boost that raises nothing (its stats are all at +6) isn't played out.
 - **Healing moves** heal on the first turn, but they're only tried when it actually needs to heal: it can't knock you out first, your next hit (two hits, if it's slower) would knock it out, and the heal is bigger than that hit. Otherwise healing early would just waste a turn.
 - **Status moves** inflict their status when it can work, and the rest of the fight plays out with it:
   - sleep (counted at its shortest: one skipped turn)
@@ -160,6 +161,8 @@ Last of all, the AI plays out every move it was seriously considering: any move 
   - Leech Seed
 
   A status can't work if you already have one, are behind a Substitute or Safeguard, or your type is immune (Ground vs Thunder Wave, Poison and Steel vs poison, Fire vs burn, Grass vs Leech Seed).
+
+Attacks and healing moves are played out first. **Boosting and status moves are only played out if no attack wins**: when attacking already wins, setting up only gives you time to heal, switch or set up yourself.
 
 Then:
 - **If any of those moves wins**, it uses the winning move that leaves it with the most HP, preferring moves that can't miss. This overrides everything above.
@@ -252,6 +255,7 @@ It never switches out when:
 
   A Pokémon with Run Away escapes the three abilities, but not the moves.
 - it has no other Pokémon left
+- it's Smeargle: its moves (hazards, Fury Drive…) are what turn the battle, so it stays in and uses them. It's still replaced when it faints.
 
 Smart switching also doesn't happen at +2 or more in Attack, Sp. Atk, Defense or Sp. Def. The 1-on-1 check doesn't need this rule: it already counts its boosts.
 
