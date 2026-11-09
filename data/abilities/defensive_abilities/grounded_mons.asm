@@ -10,7 +10,7 @@
 ;	db -1 ; end
 
 GroundedPokemon:
-;	db CHINCHOU
-;	db LANTURN
-;	db RAIKOU
-	db -1 ; end
+;	dw CHINCHOU
+;	dw LANTURN
+;	dw RAIKOU
+	dw -1 ; end

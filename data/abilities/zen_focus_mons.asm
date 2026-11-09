@@ -2,6 +2,6 @@
 ; get boosted by 50 percent when attacking
 
 ZenFocusPokemon:
-;    db HOOTHOOT
-;    db NOCTOWL
-    db -1 ; end
+;    dw HOOTHOOT
+;    dw NOCTOWL
+    dw -1 ; end

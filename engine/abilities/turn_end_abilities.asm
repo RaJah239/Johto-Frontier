@@ -10,13 +10,13 @@ TurnEndAbilities:
 	ret
 
 SolarPowerHPLossPokemon:
-	db SUNKERN
-	db SUNFLORA
-	db TROPIUS
-	db CHARMANDER
-	db CHARMELEON
-	db CHARIZARD
-	db -1 ; end
+	dw SUNKERN
+	dw SUNFLORA
+	dw TROPIUS
+	dw CHARMANDER
+	dw CHARMELEON
+	dw CHARIZARD
+	dw -1 ; end
 
 HandleTenacity:
 	ldh a, [hSerialConnectionStatus]
@@ -39,7 +39,7 @@ HandleTenacity:
 .do_it
 	call GetCurrentMon
 	ld hl, TenacityPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	call Random
@@ -83,7 +83,7 @@ HandleRecovery:
 .do_it
 	call GetCurrentMon
 	ld hl, RecoveryPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
     ld hl, wBattleMonHP
@@ -138,7 +138,7 @@ HandleSpeedBoost:
 .do_it
 	call GetCurrentMon
 	ld hl, SpeedBoostPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 	ld b, SPEED
 	farcall BattleCommand_StatUp
@@ -167,7 +167,7 @@ HandleHydration:
 .do_it
 	call GetCurrentMon
 	ld hl, HydrationPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; if it is raining, if so, activate
@@ -209,7 +209,7 @@ HandlePhotosynthesis:
 .do_it
 	call GetCurrentMon
 	ld hl, PhotosynthesisPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; if it is sunny, if so, activate
@@ -266,7 +266,7 @@ HandleIceBody:
 .do_it
 	call GetCurrentMon
 	ld hl, IceBodyPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; if it is hailing, if so, activate
@@ -323,7 +323,7 @@ HandleRainDish:
 .do_it
 	call GetCurrentMon
 	ld hl, RainDishPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; if it is raining, if so, activate
@@ -381,7 +381,7 @@ HandleSolarPowerHPLoss:
 .do_it
 	call GetCurrentMon
 	ld hl, SolarPowerHPLossPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; check if it is sunny
@@ -420,7 +420,7 @@ HandleSandBody:
 .do_it
 	call GetCurrentMon
 	ld hl, SandBodyPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; if in a sandstorm, if so, activate

@@ -257,7 +257,7 @@ AI_Smart_HitAndSwitch:
 	push de
 	push bc
 	ld hl, GroundedPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -351,7 +351,7 @@ AI_Smart_CloseCombat:
 
 AI_Smart_RecoilHit:
 	ld hl, RockHeadPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	ret c
 
 ; discourage this move if enemy's hp is lower than 50%
@@ -577,7 +577,7 @@ AI_Smart_Burn:
 	ld a, [wBattleMonSpecies]
 	push hl
 	ld hl, SerenityPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .discourage
 
@@ -1220,7 +1220,7 @@ AI_Smart_BurnTarget:
 	ld a, [wBattleMonSpecies]
 	push hl
 	ld hl, SerenityPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .discourage
 
@@ -1231,7 +1231,7 @@ AI_Smart_BurnTarget:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, KindlePokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	ret nc
 
@@ -1273,7 +1273,7 @@ AI_Smart_ParalyzeTarget:
 	ld a, [wBattleMonSpecies]
 	push hl
 	ld hl, SerenityPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .discourage
 
@@ -1281,7 +1281,7 @@ AI_Smart_ParalyzeTarget:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, SureShockPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	ret nc
 
@@ -1415,7 +1415,7 @@ AI_Smart_Sleep:
 	ld a, [wBattleMonSpecies]
 	push hl
 	ld hl, SerenityPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .discourage
 
@@ -1436,7 +1436,7 @@ AI_Smart_Sleep:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, BadDreamsPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .encourage50
 
@@ -1942,7 +1942,7 @@ AI_Smart_Toxic:
 	ld a, [wBattleMonSpecies]
 	push hl
 	ld hl, SerenityPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .discourage
 
@@ -2071,7 +2071,7 @@ AI_Smart_Confuse:
 	ld a, [wBattleMonSpecies]
 	push hl
 	ld hl, SerenityPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .discourage
 
@@ -2223,7 +2223,7 @@ AI_Smart_Paralyze:
 	ld a, [wBattleMonSpecies]
 	push hl
 	ld hl, SerenityPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jmp c, .discourage
 
@@ -2444,7 +2444,7 @@ AI_Smart_Substitute:
 AI_Smart_HyperBeam:
 	ld a, [wEnemyMonSpecies]
 	ld hl, OverdrivePokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	ret c
 
 	call CanAIKO
@@ -2764,7 +2764,7 @@ AI_Smart_Flinch:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, BlessingPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	ret nc
 .encourage
@@ -3291,7 +3291,7 @@ AI_Smart_Sandstorm:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, SandRushPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .encourage
 
@@ -3299,7 +3299,7 @@ AI_Smart_Sandstorm:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, SandBodyPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .encourage
 
@@ -3377,7 +3377,7 @@ AI_Smart_Hail:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, SlushRushPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .encourage
 
@@ -3385,7 +3385,7 @@ AI_Smart_Hail:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, IceBodyPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .encourage
 
@@ -3695,7 +3695,7 @@ AI_Smart_RainDance:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, SwiftSwimPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .encourage
 
@@ -3703,7 +3703,7 @@ AI_Smart_RainDance:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, RainDishPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .encourage
 
@@ -3711,7 +3711,7 @@ AI_Smart_RainDance:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, HydrationPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .encourage
 
@@ -3777,7 +3777,7 @@ AI_Smart_SunnyDay:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, ChlorophyllPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .encourage
 
@@ -3785,7 +3785,7 @@ AI_Smart_SunnyDay:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, SolarPowerPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .encourage
 
@@ -3793,7 +3793,7 @@ AI_Smart_SunnyDay:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, PhotosynthesisPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .encourage
 

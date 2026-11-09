@@ -47,16 +47,8 @@ IsSpeciesImmuneByAbility:
 	ret
 
 .check
-.loop
-	ld a, d
-	call GetFarByte
-	inc hl
-	cp -1
-	jr z, .no
-	cp e
-	jr nz, .loop
-	scf
-	ret
+	ld a, e
+	jmp IsSpeciesInFarList
 
 .no
 	and a

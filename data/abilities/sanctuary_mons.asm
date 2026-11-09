@@ -1,6 +1,6 @@
 ; List of all Pokemon that automatically uses safeguard on turn 1
 
 SanctuaryPokemon:
-;	db LUGIA
-;	db HO_OH
-	db -1, end
+;	dw LUGIA
+;	dw HO_OH
+	dw -1, end

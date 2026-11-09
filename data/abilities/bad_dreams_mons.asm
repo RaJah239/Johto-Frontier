@@ -9,6 +9,6 @@
 ;   db -1 ; end
 
 BadDreamsPokemon:
-;    db JYNX
-;    db DARKRAI
-    db -1 ; end
+;    dw JYNX
+;    dw DARKRAI
+    dw -1 ; end

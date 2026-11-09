@@ -96,3 +96,47 @@ if MOVE_TABLE_LOCKED_ENTRIES
 GetLockedMoveID::
 	___conversion_table_homecall_readlocked wMoveIndexTable
 endc
+
+IsSpeciesInList::
+; a = species ID, hl = a list of 16-bit species indexes (dw, ending with -1):
+; carry if the species is in it. Preserves bc and de.
+	push de
+	push hl
+	call GetPokemonIndexFromID
+	ld d, h
+	ld e, l
+	pop hl
+.loop
+	ld a, [hli]
+	and [hl] ; $ff only at the end (-1)
+	inc a
+	jr z, .done ; (carry clear)
+	dec hl
+	ld a, [hli]
+	cp e
+	jr nz, .next
+	ld a, [hl]
+	cp d
+	jr z, .found
+.next
+	inc hl
+	jr .loop
+.found
+	scf
+.done
+	pop de
+	ret
+
+IsSpeciesInFarList::
+; Like IsSpeciesInList, for a list at d:hl. Clobbers de.
+	ld e, a
+	ldh a, [hROMBank]
+	push af
+	ld a, d
+	rst Bankswitch
+	ld a, e
+	call IsSpeciesInList
+	pop de
+	ld a, d
+	rst Bankswitch ; (flags untouched)
+	ret

@@ -2,6 +2,6 @@
 ; freely use rampage moves - thrash and outrage
 
 FeralMindPokemon:
-;    db TAUROS
-;    db HAXORUS
-    db -1 ; end
+;    dw TAUROS
+;    dw HAXORUS
+    dw -1 ; end

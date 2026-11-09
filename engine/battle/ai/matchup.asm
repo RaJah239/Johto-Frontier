@@ -513,12 +513,12 @@ MSim_HazardImmune:
 	ld a, [wEnemyMonSpecies]
 	ld hl, HazardGuardMons
 	ld d, BANK(HazardGuardMons)
-	call MSim_IsInFarList
+	call IsSpeciesInFarList
 	ret c
 	ld a, [wEnemyMonSpecies]
 	ld hl, SpinGuardPokemon
 	ld d, BANK(SpinGuardPokemon)
-	call MSim_IsInFarList
+	call IsSpeciesInFarList
 	ret c
 	ld a, [wEnemyMonItem]
 	ld b, a
@@ -542,7 +542,7 @@ MSim_Grounded:
 	jr z, .no
 	ld a, [wEnemyMonSpecies]
 	ld hl, LevitatePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ccf
 	ret
 .no
@@ -573,7 +573,7 @@ MSim_HazardDamage:
 	ld a, [wEnemyMonSpecies]
 	ld hl, SpikesImmunePokemon
 	ld d, BANK(SpikesImmunePokemon)
-	call MSim_IsInFarList
+	call IsSpeciesInFarList
 	jr c, .stealth_rock
 	ld a, 3
 	call MSim_MaxHPShare
@@ -587,7 +587,7 @@ MSim_HazardDamage:
 	push bc
 	ld a, [wEnemyMonSpecies]
 	ld hl, MagicGuardPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	ret c
 	push bc
@@ -1028,7 +1028,7 @@ MSim_DefensiveAbilities:
 	ld a, d
 	ld hl, TintedLensPokemon
 	ld d, BANK(TintedLensPokemon)
-	call MSim_IsInFarList
+	call IsSpeciesInFarList
 	pop de
 	jr nc, .solid_rock
 	ld a, [wTypeModifier]
@@ -1041,7 +1041,7 @@ MSim_DefensiveAbilities:
 	ld a, e
 	ld hl, SolidRockPokemon
 	ld d, BANK(SolidRockPokemon)
-	call MSim_IsInFarList
+	call IsSpeciesInFarList
 	pop de
 	jr nc, .fur_coat
 	ld a, [wTypeModifier]
@@ -1060,7 +1060,7 @@ MSim_DefensiveAbilities:
 	ld a, e
 	ld hl, FurCoatPokemon
 	ld d, BANK(FurCoatPokemon)
-	call MSim_IsInFarList
+	call IsSpeciesInFarList
 	ret nc
 	ld a, [wMSimMoveType]
 	cp SPECIAL
@@ -1165,14 +1165,14 @@ MSim_SetupSides:
 .magic_guard
 	ld a, [wEnemyMonSpecies]
 	ld hl, MagicGuardPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr nc, .player_magic_guard
 	ld hl, wMSimFlags2
 	set MSIM_E_MAGIC_GUARD_F, [hl]
 .player_magic_guard
 	ld a, [wBattleMonSpecies]
 	ld hl, MagicGuardPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr nc, .counters
 	ld hl, wMSimFlags2
 	set MSIM_P_MAGIC_GUARD_F, [hl]

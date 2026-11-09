@@ -2,26 +2,26 @@
 
 ; 24 pokemon have a 30% chance to flee
 SometimesFleeMons:
-	db CHARMANDER
-	db CHIKORITA
-	db CLEFAIRY
-	db CYNDAQUIL
-	db DELIBIRD
-	db EEVEE
-	db ELEKID
-	db FEEBAS
-	db HOUNDOUR
-	db MEOWTH
-	db PHANPY
-	db RALTS
-	db RIOLU
-	db ROWLET
-	db SMOOCHUM
-	db SNUBBULL
-	db SQUIRTLE
-	db TEDDIURSA
-	db TOGEPI
-	db TORCHIC
-	db TOTODILE
-	db TURTWIG
-	db -1 ; end
+	dw CHARMANDER
+	dw CHIKORITA
+	dw CLEFAIRY
+	dw CYNDAQUIL
+	dw DELIBIRD
+	dw EEVEE
+	dw ELEKID
+	dw FEEBAS
+	dw HOUNDOUR
+	dw MEOWTH
+	dw PHANPY
+	dw RALTS
+	dw RIOLU
+	dw ROWLET
+	dw SMOOCHUM
+	dw SNUBBULL
+	dw SQUIRTLE
+	dw TEDDIURSA
+	dw TOGEPI
+	dw TORCHIC
+	dw TOTODILE
+	dw TURTWIG
+	dw -1 ; end

@@ -2,8 +2,8 @@
 ; type moves raises by 30% during a sandstorm
 
 SandForcePokemon:
-;    db GARCHOMP
-;    db STEELIX
-;    db DRILBUR
-;    db EXCADRILL
-    db -1 ; end
+;    dw GARCHOMP
+;    dw STEELIX
+;    dw DRILBUR
+;    dw EXCADRILL
+    dw -1 ; end

@@ -13,10 +13,10 @@
 ;   db -1 ; end
 
 RockHeadPokemon:
-;    db ONIX
-;    db STEELIX
-;    db RHYHORN
-;    db RHYDON
-;    db AERODACTYL
-;    db SUDOWOODO
-    db -1 ; end
+;    dw ONIX
+;    dw STEELIX
+;    dw RHYHORN
+;    dw RHYDON
+;    dw AERODACTYL
+;    dw SUDOWOODO
+    dw -1 ; end

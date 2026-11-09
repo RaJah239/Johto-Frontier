@@ -1273,7 +1273,7 @@ MACRO surefire_ability
 	; Check if the TARGET Pokemon has the ability
 	call GetCurrentMon
 	ld hl, \2
-	call IsInByteArray
+	call IsSpeciesInList
 	jr nc, .skip\@
 
 	; Select the correct event flag based on who is the target

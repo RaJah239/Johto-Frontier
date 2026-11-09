@@ -2,5 +2,5 @@
 ; infront it, increase its attack and special attack by 1 stage, max 3 stages
 
 BloodlustPokemon:
-;	db SALAMENCE
-	db -1 ; end
+;	dw SALAMENCE
+	dw -1 ; end

@@ -134,7 +134,7 @@ HandleDrizzle:
 	; check if switched in pokemon has drizzle
 	call GetCurrentMon
 	ld hl, DrizzlePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; if it is raining, don't activate
@@ -164,7 +164,7 @@ HandleDefenseMode:
 	; check if switched in pokemon has defense mode
 	call GetCurrentMon
 	ld hl, DefenseModePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ShowActivationOrEntryOrKOAbilityPopup DefenseText
@@ -184,7 +184,7 @@ HandleDrought:
 	; check if switched in pokemon has drought
 	call GetCurrentMon
 	ld hl, DroughtPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; if sun is up, don't activate
@@ -207,7 +207,7 @@ HandleSandStream:
 	; check if switched in pokemon has sand stream
 	call GetCurrentMon
 	ld hl, SandStreamPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; if sand storm is up, don't activate
@@ -230,7 +230,7 @@ HandleSnowWarning:
 	; check if switched in pokemon has snow warning
 	call GetCurrentMon
 	ld hl, SnowWarningPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; if hail is up, don't activate
@@ -253,7 +253,7 @@ HandleNaturalCure:
 	; check if switched in pokemon has natural cure
 	call GetCurrentMon
 	ld hl, NaturalCurePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	call DoNaturalCure
@@ -310,7 +310,7 @@ HandleReflectBarrier:
 	; check if current pokemon has reflect barrier
 	call GetCurrentMon
 	ld hl, ReflectBarrierPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; select correct screen + counter
@@ -383,7 +383,7 @@ HandleLightBarrier:
 	; check if current pokemon has light barrier
 	call GetCurrentMon
 	ld hl, LightBarrierPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; select correct screen + counter
@@ -457,7 +457,7 @@ HandleNonLinkIntimidate:
 	; check if current pokemon has intimidate
 	call GetCurrentMon
 	ld hl, IntimidatePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ShowActivationOrEntryOrKOAbilityPopup IntimidateText
@@ -508,7 +508,7 @@ HandleBattleStance:
 	; check if switched in pokemon has battle stance
 	call GetCurrentMon
 	ld hl, BattleStancePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld hl, BattleStanceText
@@ -551,7 +551,7 @@ HandleBattleDrive:
 	; check if switched in pokemon has battle drive
 	call GetCurrentMon
 	ld hl, BattleDrivePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld hl, BattleDriveText
@@ -594,7 +594,7 @@ HandleChaoticBoost:
 	; check if switched in pokemon has battle drive
 	call GetCurrentMon
 	ld hl, ChaoticBoostPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld hl, ChaoticBoostText
@@ -673,7 +673,7 @@ HandleTrueSight:
 	; check if current pokemon has true sight
 	call GetCurrentMon
 	ld hl, TrueSightPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, [wOptions]
@@ -724,7 +724,7 @@ HandleFogOfWar:
 	; check if current pokemon has fog of war
 	call GetCurrentMon
 	ld hl, FogOfWarPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; only use if foe's stats is buffed by at least 1 stage
@@ -799,7 +799,7 @@ HandleCleanSweep:
 	; check if current pokemon has clean sweep
 	call GetCurrentMon
 	ld hl, CleanSweepPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
     call AnyFieldEffectPresent
@@ -853,7 +853,7 @@ HandleRockSnare:
 	; check if current pokemon has rock snare
 	call GetCurrentMon
 	ld hl, RockSnarePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld hl, wEnemyScreens
@@ -912,7 +912,7 @@ HandleCaltropper:
 	; check if current pokemon has caltropper
 	call GetCurrentMon
 	ld hl, CaltropperPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld hl, wEnemyScreens
@@ -971,7 +971,7 @@ HandleVenomField:
 	; check if current pokemon has venom field
 	call GetCurrentMon
 	ld hl, VenomFieldPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld hl, wEnemyScreens
@@ -1030,7 +1030,7 @@ HandleSilkSnare:
 	; check if current pokemon has silk snare
 	call GetCurrentMon
 	ld hl, SilkSnarePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld hl, wEnemyScreens
@@ -1089,7 +1089,7 @@ HandleChronoShift:
 	; check if current pokemon has chrono shift
 	call GetCurrentMon
 	ld hl, ChronoShiftPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, [wTrickRoomCount]
@@ -1144,7 +1144,7 @@ HandleFortify:
 	; check if current pokemon has fortify
 	call GetCurrentMon
 	ld hl, FortifyPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; don't play damage effect when animation goes off
@@ -1199,7 +1199,7 @@ HandleImposter:
 	; check if current pokemon has imposter
 	call GetCurrentMon
 	ld hl, ImposterPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, [wOptions]
@@ -1221,7 +1221,7 @@ HandleSpinGuard:
 	; check if current pokemon has spin guard
 	call GetCurrentMon
 	ld hl, SpinGuardPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
     call AnyHazardsPresent
@@ -1246,7 +1246,7 @@ HandleSeedfall:
 	; check if current pokemon has seedfall
 	call GetCurrentMon
 	ld hl, SeedfallPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; skip if foe is already seeded
@@ -1300,7 +1300,7 @@ HandleInfernalHowl:
 	; check if current pokemon has infernal howl
 	call GetCurrentMon
 	ld hl, InfernalHowlPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, [wOptions]
@@ -1352,7 +1352,7 @@ HandleSanctuary:
 	; check if current pokemon has sanctuary
 	call GetCurrentMon
 	ld hl, SanctuaryPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld hl, wPlayerScreens
@@ -1411,7 +1411,7 @@ HandleSiegebreaker:
 	; check if current pokemon has siegebreaker
 	call GetCurrentMon
 	ld hl, SiegebreakerPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	call ReflectOrLightScreenUp
@@ -1465,7 +1465,7 @@ HandleProvocateur:
 	; check if current pokemon has provocateur
 	call GetCurrentMon
 	ld hl, ProvocateurPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 ; are we dealing with foe or player
@@ -1532,7 +1532,7 @@ HandleDisarm:
 	; check if current pokemon has disarm
 	call GetCurrentMon
 	ld hl, DisarmPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 ; ==================
@@ -1630,7 +1630,7 @@ HandleAllure:
 	; check if current pokemon has allure
 	call GetCurrentMon
 	ld hl, AllurePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; exit if same gender

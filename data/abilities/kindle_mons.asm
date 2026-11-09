@@ -7,5 +7,5 @@
 ;	db -1 ; end
 
 KindlePokemon:
-;	db CHANDELURE
-	db -1 ; end
+;	dw CHANDELURE
+	dw -1 ; end

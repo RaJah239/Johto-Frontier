@@ -121,7 +121,7 @@ AI_Basic:
 	push de
 	push bc
 	ld hl, SerenityPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -144,7 +144,7 @@ AI_Basic:
 	push de
 	push bc
 	ld hl, HydrationPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -229,7 +229,7 @@ AI_Basic:
 	push de
 	push bc
 	ld hl, RockHeadPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl

@@ -370,7 +370,7 @@ DoesAIOutSpeedPlayer:
 	push de
 	push bc
 	ld hl, SwiftSwimPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -385,7 +385,7 @@ DoesAIOutSpeedPlayer:
 	push de
 	push bc
 	ld hl, ChlorophyllPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -400,7 +400,7 @@ DoesAIOutSpeedPlayer:
 	push de
 	push bc
 	ld hl, SandRushPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -415,7 +415,7 @@ DoesAIOutSpeedPlayer:
 	push de
 	push bc
 	ld hl, SlushRushPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -438,7 +438,7 @@ DoesAIOutSpeedPlayer:
 	push de
 	push bc
 	ld hl, SwiftSwimPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -453,7 +453,7 @@ DoesAIOutSpeedPlayer:
 	push de
 	push bc
 	ld hl, ChlorophyllPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -468,7 +468,7 @@ DoesAIOutSpeedPlayer:
 	push de
 	push bc
 	ld hl, SandRushPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -483,7 +483,7 @@ DoesAIOutSpeedPlayer:
 	push de
 	push bc
 	ld hl, SlushRushPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -798,7 +798,7 @@ DoesEnemyHaveIntactFocusSashOrSturdy:
 	push hl
 	push de
 	ld hl, SturdyPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop de
 	pop hl
 	pop bc
@@ -935,7 +935,7 @@ CanPlayer2HKO:
 	ld a, [wBattleMonSpecies]
 	push hl
 	ld hl, OverdrivePokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .set_flag
 
@@ -1007,7 +1007,7 @@ CanPlayer2HKOMaxHP:
 	ld a, [wBattleMonSpecies]
 	push hl
 	ld hl, OverdrivePokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .set_flag
 
@@ -1082,7 +1082,7 @@ CanPlayer3HKOMaxHP:
 	ld a, [wBattleMonSpecies]
 	push hl
 	ld hl, OverdrivePokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .set_flag
 
@@ -1198,7 +1198,7 @@ CanAI2HKO:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, OverdrivePokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .set_flag
 
@@ -1270,7 +1270,7 @@ CanAI2HKOMaxHP:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, OverdrivePokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .set_flag
 
@@ -1346,7 +1346,7 @@ CanAI3HKO:
 	ld a, [wEnemyMonSpecies]
 	push hl
 	ld hl, OverdrivePokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	jr c, .set_flag
 
@@ -1390,7 +1390,7 @@ DoesPlayerHaveIntactFocusSashOrSturdy:
 	push hl
 	push de
 	ld hl, SturdyPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop de
 	pop hl
 	pop bc
@@ -1544,7 +1544,7 @@ DoesPokemonHaveUberImmunity:
 	push de
 	push bc
 	ld hl, UberImmunePokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -1561,7 +1561,7 @@ DoesPokemonHaveMagicGuard:
 	push de
 	push bc
 	ld hl, MagicGuardPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -1578,7 +1578,7 @@ DoesPokemonHaveResilience:
 	push de
 	push bc
 	ld hl, ResiliencePokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl

@@ -57,7 +57,7 @@ CheckIfHardModeAndBoost:
 HandleGuts:
 	call GetCurrentMon
 	ld hl, GutsPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, BATTLE_VARS_STATUS
@@ -77,7 +77,7 @@ INCLUDE "data/abilities/guts_mons.asm"
 HandleRivalry:
 	call GetCurrentMon
 	ld hl, RivalryPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	farcall CheckOppositeGender
@@ -116,7 +116,7 @@ HandleSandForce:
 	; boost damage of non stab moves that fit
 	call GetCurrentMon
 	ld hl, SandForcePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, [wBattleWeather]
@@ -143,7 +143,7 @@ INCLUDE "data/abilities/sand_force_mons.asm"
 HandleTechnician:
 	call GetCurrentMon
 	ld hl, TechnicianPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, BATTLE_VARS_MOVE_POWER
@@ -159,7 +159,7 @@ INCLUDE "data/abilities/technician_mons.asm"
 HandleMultiscale:
 	call GetOpposingMon
 	ld hl, MultiscalePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	farcall CheckOpponentFullHP
@@ -173,7 +173,7 @@ INCLUDE "data/abilities/multiscale_mons.asm"
 HandleThickFat:
 	call GetOpposingMon
 	ld hl, ThickFatPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, BATTLE_VARS_MOVE_TYPE
@@ -193,7 +193,7 @@ INCLUDE "data/abilities/thick_fat_mons.asm"
 HandleSolarPowerBoost:
 	call GetCurrentMon
 	ld hl, SolarPowerPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; check if it is sunny
@@ -215,7 +215,7 @@ INCLUDE "data/abilities/solar_power_mons.asm"
 HandleIronArm:
 	call GetCurrentMon
 	ld hl, IronArmPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, BATTLE_VARS_MOVE_TYPE
@@ -232,7 +232,7 @@ INCLUDE "data/abilities/iron_arm_mons.asm"
 HandleZenFocus:
 	call GetCurrentMon
 	ld hl, ZenFocusPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, BATTLE_VARS_MOVE_TYPE
@@ -249,7 +249,7 @@ INCLUDE "data/abilities/zen_focus_mons.asm"
 HandleRainSurge:
 	call GetCurrentMon
 	ld hl, RainSurgePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	; check if it is raining
@@ -271,7 +271,7 @@ INCLUDE "data/abilities/rain_surge_mons.asm"
 HandlePillowFort:
 	call GetOpposingMon
 	ld hl, PillowFortPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, BATTLE_VARS_MOVE_TYPE
@@ -287,7 +287,7 @@ INCLUDE "data/abilities/pillow_fort_mons.asm"
 HandleChrysalisHide:
 	call GetOpposingMon
 	ld hl, ChrysalisHidePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, BATTLE_VARS_MOVE_TYPE
@@ -332,7 +332,7 @@ HandleMoveEnchancingAbilities:
 HandleSharpness:
 	call GetCurrentMon
 	ld hl, SharpnessPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -349,7 +349,7 @@ INCLUDE "data/abilities/sharpness_mons.asm"
 HandleBallistics:
 	call GetCurrentMon
 	ld hl, BallisticsPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -366,7 +366,7 @@ INCLUDE "data/abilities/ballistics_mons.asm"
 HandleIronFist:
 	call GetCurrentMon
 	ld hl, IronFistPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -383,7 +383,7 @@ INCLUDE "data/abilities/iron_fist_mons.asm"
 HandleStrongJaw:
 	call GetCurrentMon
 	ld hl, StrongJawPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -400,7 +400,7 @@ INCLUDE "data/abilities/strong_jaw_mons.asm"
 HandleHugePower:
 	call GetCurrentMon
 	ld hl, HugePowerPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 	ShowGenericAbilityPopup EVENT_HUGE_POWER_PLAYER, EVENT_HUGE_POWER_FOE, HugePowerText
 	jr HundredPercentBoost

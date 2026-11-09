@@ -498,7 +498,7 @@ TryEnemyFlee:
 	push bc
 	ld a, [wTempEnemyMonSpecies]
 	ld hl, SometimesFleeMons
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	jr c, .Flee
 
@@ -884,7 +884,7 @@ ResidualDamage:
 ; magic guard pokemon take no residual damage
     call GetCurrentMon
 	ld hl, MagicGuardPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, .check_fainted
 
 ; Return z if the user fainted before
@@ -1010,7 +1010,7 @@ ResidualDamage:
 ; =============================
 	call GetOpposingMon
 	ld hl, BadDreamsPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .check_if_asleep
 	jr .not_nightmare
 
@@ -1075,7 +1075,7 @@ ResidualDamage:
 ; magic guard pokemon take no residual curse damage
     call GetCurrentMon
 	ld hl, MagicGuardPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .not_cursed
 
 	xor a
@@ -3278,7 +3278,7 @@ SpikesDamage:
 .linked_battle
 	call GetCurrentMon
 	ld hl, HazardGuardMons
-	call IsInByteArray
+	call IsSpeciesInList
 	ret c
 
 	call _GetUserItem
@@ -3326,7 +3326,7 @@ SpikesDamage:
 	push bc
 	call GetCurrentMon
 	ld hl, SpikesImmunePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -3357,7 +3357,7 @@ SpikesDamage:
 	push bc
 	call GetCurrentMon
 	ld hl, MagicGuardPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -3407,7 +3407,7 @@ SpikesDamage:
 	push bc
 	call GetCurrentMon
 	ld hl, LevitatePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -3506,7 +3506,7 @@ SpikesDamage:
 	push bc
 	call GetCurrentMon
 	ld hl, LevitatePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -4103,7 +4103,7 @@ PrintPlayerHUD:
 	; place floaticon
 	ld a, [wCurSpecies]
 	ld hl, LevitatePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr nc, .skip_floaticon
 	hlcoord 19, 8
 	ld [hl], $72
@@ -4221,7 +4221,7 @@ DrawEnemyHUD:
 	; place floaticon
 	ld a, [wCurSpecies]
 	ld hl, LevitatePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr nc, .skip_floaticon
 	hlcoord 10, 1
 	ld [hl], $72
@@ -4619,7 +4619,7 @@ TryPlayerSwitch:
 .check_trapped
 	call GetOpposingMon
 	ld hl, RunAwayPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .try_switch
 
 	ld a, [wPlayerWrapCount]
@@ -5794,8 +5794,7 @@ CheckSleepingTreeMon:
 
 .Check:
 	ld a, [wTempEnemyMonSpecies]
-	ld de, 1 ; length of species id
-	call IsInArray
+	call IsSpeciesInList
 ; If it's a match, the opponent is asleep
 	ret c
 
@@ -6117,7 +6116,7 @@ DoesMonHaveResilience:
 	push de
 	push bc
 	ld hl, Core_ResiliencePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -6130,19 +6129,19 @@ DoesMonHaveResilience:
 	ret
 
 Core_ResiliencePokemon:
-	db TENTACOOL
-	db TENTACRUEL
-	db REGIROCK
-	db REGICE
-	db REGISTEEL
-    db -1 ; end
+	dw TENTACOOL
+	dw TENTACRUEL
+	dw REGIROCK
+	dw REGICE
+	dw REGISTEEL
+    dw -1 ; end
 
 DoesMonHaveGuts:
 	push hl
 	push de
 	push bc
 	ld hl, Core_GutsPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop de
 	pop hl
@@ -6155,13 +6154,13 @@ DoesMonHaveGuts:
 	ret
 
 Core_GutsPokemon:
-    db TEDDIURSA
-    db URSARING
-    db URSALUNA
-    db HERACROSS
-    db MAKUHITA
-    db HARIYAMA
-    db -1 ; end
+    dw TEDDIURSA
+    dw URSARING
+    dw URSALUNA
+    dw HERACROSS
+    dw MAKUHITA
+    dw HARIYAMA
+    dw -1 ; end
 
 ApplyStatLevelMultiplierOnAllStats:
 ; Apply StatLevelMultipliers on all 5 Stats

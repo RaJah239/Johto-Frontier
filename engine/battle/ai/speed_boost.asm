@@ -338,22 +338,11 @@ AI_WeatherMoveHelps:
 .InAbilityList:
 ; a = species, hl = ability list. Return carry if listed. Preserves bc, hl.
 	push hl
-	ld e, a
-.list_loop
-	ld a, BANK(SwiftSwimPokemon)
-	call GetFarByte
-	inc hl
-	cp -1
-	jr z, .not_listed
-	cp e
-	jr nz, .list_loop
+	push de
+	ld d, BANK(SwiftSwimPokemon)
+	call IsSpeciesInFarList
+	pop de
 	pop hl
-	scf
-	ret
-
-.not_listed
-	pop hl
-	and a
 	ret
 
 	assert BANK(SwiftSwimPokemon) == BANK(ChlorophyllPokemon) && \

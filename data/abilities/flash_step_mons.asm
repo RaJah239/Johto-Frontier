@@ -2,6 +2,6 @@
 ; infront it, increase its speed by 1 stage, max 3 stages
 
 FlashStepPokemon:
-;	db DODUO
-;	db DODRIO
-	db -1 ; end
+;	dw DODUO
+;	dw DODRIO
+	dw -1 ; end

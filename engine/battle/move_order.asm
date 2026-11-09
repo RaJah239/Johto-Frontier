@@ -112,13 +112,13 @@ DetermineMoveOrder:
 	; check player Pokémon
 	ld a, [wBattleMonSpecies]
 	ld hl, QuickDrawPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr nc, .quick_draw_mon_not_in_list
 
 	; check enemy Pokémon
 	ld a, [wEnemyMonSpecies]
 	ld hl, QuickDrawPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr nc, .quick_draw_mon_not_in_list
 
 	; if we reach here
@@ -129,13 +129,13 @@ DetermineMoveOrder:
 	; check if player is using a Quick Draw Pokemon
 	ld a, [wBattleMonSpecies]
 	ld hl, QuickDrawPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, .SimulatePlayerQuickDrawDoubleSpeed
 
 	; check if foe is using a Quick Draw Pokemon
 	ld a, [wEnemyMonSpecies]
 	ld hl, QuickDrawPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, .SimulateEnemyQuickDrawDoubleSpeed
 
 ; Weather speed boosting abilities
@@ -148,12 +148,12 @@ DetermineMoveOrder:
 
     ld a, [wEnemyMonSpecies]
 	ld hl, SwiftSwimPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .check_other_player_rain
 
     ld a, [wBattleMonSpecies]
 	ld hl, SwiftSwimPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, .SimulatePlayerDoubleSpeed
 
 .check_sun
@@ -166,12 +166,12 @@ DetermineMoveOrder:
 
     ld a, [wEnemyMonSpecies]
 	ld hl, ChlorophyllPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .check_other_player_sun
 
     ld a, [wBattleMonSpecies]
 	ld hl, ChlorophyllPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, .SimulatePlayerDoubleSpeed
 
 .check_sand
@@ -184,12 +184,12 @@ DetermineMoveOrder:
 
 	ld a, [wEnemyMonSpecies]
 	ld hl, SandRushPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .check_other_player_sand
 
 	ld a, [wBattleMonSpecies]
 	ld hl, SandRushPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, .SimulatePlayerDoubleSpeed
 
 .check_hail
@@ -202,12 +202,12 @@ DetermineMoveOrder:
 
 	ld a, [wEnemyMonSpecies]
 	ld hl, SlushRushPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .check_other_player_hail
 
 	ld a, [wBattleMonSpecies]
 	ld hl, SlushRushPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, .SimulatePlayerDoubleSpeed
 	jmp .continue
 
@@ -217,28 +217,28 @@ DetermineMoveOrder:
 .check_other_player_rain
     ld a, [wBattleMonSpecies]
 	ld hl, SwiftSwimPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, .continue
     jr .SimulateEnemyDoubleSpeed
 
 .check_other_player_sun
     ld a, [wBattleMonSpecies]
 	ld hl, ChlorophyllPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .continue
     jr .SimulateEnemyDoubleSpeed
 
 .check_other_player_sand
 	ld a, [wBattleMonSpecies]
 	ld hl, SandRushPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .continue
 	jr .SimulateEnemyDoubleSpeed
 
 .check_other_player_hail
 	ld a, [wBattleMonSpecies]
 	ld hl, SlushRushPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .continue
 	jr .SimulateEnemyDoubleSpeed
 

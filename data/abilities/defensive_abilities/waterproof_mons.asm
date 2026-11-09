@@ -13,10 +13,10 @@
 ;	db -1 ; end
 
 WaterproofPokemon:
-;	db LAPRAS
-;	db WOOPER
-;	db QUAGSIRE
-;	db MANTINE
-;	db CHINCHOU
-;	db LANTURN
-	db -1 ; end
+;	dw LAPRAS
+;	dw WOOPER
+;	dw QUAGSIRE
+;	dw MANTINE
+;	dw CHINCHOU
+;	dw LANTURN
+	dw -1 ; end

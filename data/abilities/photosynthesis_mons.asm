@@ -7,5 +7,5 @@
 ;   db -1 ; end
 
 PhotosynthesisPokemon:
-;    db TROPIUS
-    db -1 ; end
+;    dw TROPIUS
+    dw -1 ; end

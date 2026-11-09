@@ -984,7 +984,7 @@ BattleCommand_Stab:
 	push de
 	call GetCurrentMon
 	ld hl, TypeSyncPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	pop de
 
 	ld hl, wCurDamage + 1
@@ -1321,7 +1321,7 @@ BattleCommand_Burn:
 ; ================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, Serenity
 
 	ld hl, DidntAffect1Text
@@ -1479,7 +1479,7 @@ BattleCommand_EffectChance:
 	push de
 	push hl
 	ld hl, BlessingPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	pop de
 	pop bc
@@ -1744,7 +1744,7 @@ BattleCommand_ApplyDamage:
 ; =======================
 	call GetOpposingMon
 	ld hl, SturdyPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .focus_sash_effect
 
 	call GetOpponentItem
@@ -2455,7 +2455,7 @@ IsUnaware:
 	push de
 	push bc
 	ld hl, UnawarePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp PopBCDEHL
 
 IsAttackerUnaware:
@@ -3212,7 +3212,7 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 	call GetCurrentMon
 	push bc
 	ld hl, SniperPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	jr c, .sniper_mons_damage
 	jr .regular_crit_damage
@@ -3653,7 +3653,7 @@ BattleCommand_SleepTarget:
 ; ========================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, Serenity
 
 	call CheckForStatusIfAlreadyHasAny
@@ -3727,7 +3727,7 @@ BattleCommand_PoisonTarget:
 ; =========================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, Serenity
 
 	call SafeCheckSafeguard
@@ -3764,7 +3764,7 @@ BattleCommand_Poison:
 ; ==================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, Serenity
 
 	ld hl, DidntAffect1Text
@@ -3982,7 +3982,7 @@ BattleCommand_BurnTarget:
 	; check user species
 	call GetCurrentMon
 	ld hl, KindlePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .burn
 	jr .done
 
@@ -4002,7 +4002,7 @@ BattleCommand_BurnTarget:
 ; =======================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, Serenity
 
 	call SafeCheckSafeguard
@@ -4079,7 +4079,7 @@ BattleCommand_FreezeTarget:
 ; ===========================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, Serenity
 
 	call SafeCheckSafeguard
@@ -4124,7 +4124,7 @@ BattleCommand_ParalyzeTarget:
 	; check user species
 	call GetCurrentMon
 	ld hl, SureShockPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .paralyze
 	jr .done
 
@@ -4144,7 +4144,7 @@ BattleCommand_ParalyzeTarget:
 ; ===========================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, Serenity
 
 	call SafeCheckSafeguard
@@ -4399,7 +4399,7 @@ BattleCommand_StatDown:
 	push hl
 	push bc
 	ld hl, ResiliencePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	pop hl
 	jr c, .resilience
@@ -5067,7 +5067,7 @@ BattleCommand_Rampage:
 	; freely use rapage moves
 	call GetCurrentMon
 	ld hl, FeralMindPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr nc, .feral_mind_done
 
 	ld hl, FeralMindBattleText
@@ -5478,7 +5478,7 @@ BattleCommand_FlinchTarget:
 ; =========================
 	call GetOpposingMon
 	ld hl, UnshakenPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .no_flinch
 	jr FlinchTarget
 
@@ -5731,7 +5731,7 @@ BattleCommand_Recoil:
 	push de
 	push hl
 	ld hl, RockHeadPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	pop hl
 	pop de
 	pop bc
@@ -5821,7 +5821,7 @@ BattleCommand_ConfuseTarget:
 ; ===========================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, Serenity
 
 	call SafeCheckSafeguard
@@ -5840,7 +5840,7 @@ BattleCommand_Confuse:
 ; ===================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, Serenity
 
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
@@ -5923,7 +5923,7 @@ BattleCommand_Paralyze:
 ; =====================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, Serenity
 
 	ld a, [wAttackMissed]
@@ -5967,7 +5967,7 @@ BattleCommand_RechargeNextTurn:
 ; ==========================
 	call GetCurrentMon
 	ld hl, OverdrivePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr nc, .overdrive_done
 
 	ld hl, OverdriveBattleText
@@ -6929,7 +6929,7 @@ TypeSyncPopup:
 .stab
 	ld a, b
 	ld hl, TypeSyncPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld hl, TypeSyncBattleText

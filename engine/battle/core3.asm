@@ -428,7 +428,7 @@ HandleWeather:
 ; magic guard pokemon take no residual damage
 	call GetCurrentMon
 	ld hl, MagicGuardPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret c
 
 	ld a, BATTLE_VARS_SUBSTATUS3

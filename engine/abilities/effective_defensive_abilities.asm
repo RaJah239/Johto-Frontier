@@ -7,7 +7,7 @@ EffectiveDefensiveAbilities:
 HandleTintedLens:
 	call GetCurrentMon
 	ld hl, TintedLensPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, [wTypeModifier]
@@ -23,7 +23,7 @@ INCLUDE "data/abilities/tinted_lens_mons.asm"
 HandleSolidRock:
 	call GetOpposingMon
 	ld hl, SolidRockPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, [wTypeModifier]
@@ -46,7 +46,7 @@ INCLUDE "data/abilities/solid_rock_mons.asm"
 HandleFurCoat:
 	call GetOpposingMon
 	ld hl, FurCoatPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	ld a, BATTLE_VARS_MOVE_TYPE

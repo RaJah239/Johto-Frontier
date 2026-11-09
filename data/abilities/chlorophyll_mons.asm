@@ -15,12 +15,12 @@
 ;   db -1 ; end
 
 ChlorophyllPokemon:
-;    db BELLSPROUT
-;    db WEEPINBELL
-;    db VICTREEBEL
-;    db TANGELA
-;    db TANGROWTH
-;    db SUNKERN
-;    db SUNFLORA
-;    db TROPIUS
-    db -1 ; end
+;    dw BELLSPROUT
+;    dw WEEPINBELL
+;    dw VICTREEBEL
+;    dw TANGELA
+;    dw TANGROWTH
+;    dw SUNKERN
+;    dw SUNFLORA
+;    dw TROPIUS
+    dw -1 ; end

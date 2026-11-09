@@ -21,9 +21,9 @@
 ;   db -1 ; end
 
 ResiliencePokemon:
-;    db TENTACOOL
-;   db TENTACRUEL
-;    db REGIROCK
-;    db REGICE
-;    db REGISTEEL
-    db -1 ; end
+;    dw TENTACOOL
+;   dw TENTACRUEL
+;    dw REGIROCK
+;    dw REGICE
+;    dw REGISTEEL
+    dw -1 ; end

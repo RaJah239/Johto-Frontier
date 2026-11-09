@@ -2,8 +2,8 @@
 ; when attacking or being attacked
 
 UnawarePokemon:
-;    db WOOPER
-;    db QUAGSIRE
-;    db CLEFAIRY
-;    db CLEFABLE
-    db -1
+;    dw WOOPER
+;    dw QUAGSIRE
+;    dw CLEFAIRY
+;    dw CLEFABLE
+    dw -1

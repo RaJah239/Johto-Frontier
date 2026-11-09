@@ -124,8 +124,8 @@ _BattleCommand_Critical:
 .CheckCritical:
 ; Slash Crits and Leaf Blade Crits only apply to a single move each, so
 ; check the animation first and only look the species up once it has
-; picked a list. IsInByteArray wipes every register, so keep the species
-; on the stack for the lookups that follow.
+; picked a list. The lists' lookups wipe a, so keep the species on the stack
+; for the lookups that follow.
 	call GetCurrentMon
 	push af
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -151,11 +151,13 @@ _BattleCommand_Critical:
 
 .AbilityMon:
 	pop af
+	push af ; the species, for Super Luck
 	push bc
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
-	jr c, .AbilityHit
-	push af
+	jr nc, .SuperLuck
+	pop af
+	jr .AbilityHit
 
 ; ===========================
 ; === Ability: Super Luck ===
@@ -164,7 +166,7 @@ _BattleCommand_Critical:
 	pop af
 	push bc
 	ld hl, SuperLuckPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	pop bc
 	jmp nc, .continue
 
@@ -220,7 +222,7 @@ _BattleCommand_Critical:
 .CritGuard:
 	call GetOpposingMon
 	ld hl, CritGuardPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr nc, .crit_guard_checks_done
 
 	showdefensiveability CritGuardText
@@ -537,7 +539,7 @@ _BattleCommand_CheckHit:
 ; ==========================
 	call GetCurrentMon
 	ld hl, KeenEyesMons
-	call IsInByteArray
+	call IsSpeciesInList
 	jr nc, .skip_keen_eyes
 
 	ShowGenericAbilityPopup EVENT_KEEN_EYES_PLAYER, EVENT_KEEN_EYES_FOE, KeenEyesText

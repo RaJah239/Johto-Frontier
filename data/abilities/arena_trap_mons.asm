@@ -8,6 +8,6 @@
 ;   db -1 ; end
 
 ArenaTrapPokemon:
-;   db DRILBUR
-;   db EXCADRILL
-    db -1 ; end
+;   dw DRILBUR
+;   dw EXCADRILL
+    dw -1 ; end

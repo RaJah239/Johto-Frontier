@@ -2,8 +2,8 @@
 ; infront it, increase its attack by 1 stage, max 3 stages
 
 MoxiePokemon:
-;	db GYARADOS
-;	db HERACROSS
-;	db TAUROS
-;	db TYRANITAR
-	db -1 ; end
+;	dw GYARADOS
+;	dw HERACROSS
+;	dw TAUROS
+;	dw TYRANITAR
+	dw -1 ; end

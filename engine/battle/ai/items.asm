@@ -1,23 +1,23 @@
 ShadowTagPokemon_AI:
-	db CHANDELURE
-	db GENGAR
-	db -1 ; end
+	dw CHANDELURE
+	dw GENGAR
+	dw -1 ; end
 
 ArenaTrapPokemon_AI:
-	db DRILBUR
-	db EXCADRILL
-	db -1 ; end
+	dw DRILBUR
+	dw EXCADRILL
+	dw -1 ; end
 
 MagnetPullPokemon_AI:
-	db MAGNEMITE
-	db MAGNETON
-	db MAGNEZONE
-	db -1 ; end
+	dw MAGNEMITE
+	dw MAGNETON
+	dw MAGNEZONE
+	dw -1 ; end
 
 RunAwayPokemon_AI:
-	db DODUO
-	db DODRIO
-	db -1 ; end
+	dw DODUO
+	dw DODRIO
+	dw -1 ; end
 
 AI_SwitchOrTryItem:
 ; At the start of a turn, switch out if the mon that's out loses the 1-on-1
@@ -110,11 +110,11 @@ IsEnemyStayInMon:
 ; and uses it. It's still replaced normally when it faints.
 	ld a, [wEnemyMonSpecies]
 	ld hl, StayInPokemon_AI
-	jmp IsInByteArray
+	jmp IsSpeciesInList
 
 StayInPokemon_AI:
-	db SMEARGLE
-	db -1 ; end
+	dw SMEARGLE
+	dw -1 ; end
 
 IsEnemyTrapped:
 ; carry if the enemy's mon can't switch out: the player used Mean Look or
@@ -137,21 +137,21 @@ IsEnemyTrappedByPlayerAbility:
 ; escapes all of them.
 	ld a, [wEnemyMonSpecies]
 	ld hl, RunAwayPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .not_trapped
 
 	ld a, [wBattleMonSpecies]
 	ld hl, ShadowTagPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	ret c
 
 	ld a, [wBattleMonSpecies]
 	ld hl, ArenaTrapPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	jr nc, .magnet_pull
 	ld a, [wEnemyMonSpecies]
 	ld hl, LevitatePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .magnet_pull
 	ld a, [wEnemyMonType1]
 	cp FLYING
@@ -165,7 +165,7 @@ IsEnemyTrappedByPlayerAbility:
 .magnet_pull
 	ld a, [wBattleMonSpecies]
 	ld hl, MagnetPullPokemon_AI
-	call IsInByteArray
+	call IsSpeciesInList
 	jr nc, .not_trapped
 	ld a, [wEnemyMonType1]
 	cp STEEL

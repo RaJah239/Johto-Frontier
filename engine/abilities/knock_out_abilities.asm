@@ -18,32 +18,32 @@ KOBoost:
 	ld a, b
 	pop bc
 	ld hl, MoxiePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .moxie
 
 	call GetCurrentMon
 	ld hl, IgnisPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, .ignis
 
 	call GetCurrentMon
 	ld hl, FlashStepPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jr c, .flash_step
 
 	call GetCurrentMon
 	ld hl, LifeDrainPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, .life_drain
 
 	call GetCurrentMon
 	ld hl, RenewalPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, .renewal
 
 	call GetCurrentMon
 	ld hl, BloodlustPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	jmp c, .bloodlust
 	ret
 

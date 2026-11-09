@@ -526,7 +526,7 @@ IF USE_GEN3_STYLE_TYPE_GFX == TRUE
 .check_floatmon
 	ld a, [wCurSpecies]
 	ld hl, LevitatePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 	hlcoord 17, 3
 	ld [hl], "<float>"

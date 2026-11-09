@@ -8,6 +8,6 @@
 ;   db -1 ; end
 
 RunAwayPokemon:
-;    db DODUO
-;    db DODRIO
-    db -1
+;    dw DODUO
+;    dw DODRIO
+    dw -1

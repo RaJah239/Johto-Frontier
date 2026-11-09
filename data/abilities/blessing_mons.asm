@@ -12,9 +12,9 @@
 ;   db -1 ; end
 
 BlessingPokemon:
-;    db CHANSEY
-;    db BLISSEY
-;    db TOGEPI
-;    db TOGETIC
-;    db TOGEKISS
-    db -1 ; end
+;    dw CHANSEY
+;    dw BLISSEY
+;    dw TOGEPI
+;    dw TOGETIC
+;    dw TOGEKISS
+    dw -1 ; end

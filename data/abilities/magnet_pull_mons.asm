@@ -9,7 +9,7 @@
 ;   db -1 ; end
 
 MagnetPullPokemon:
-;   db MAGNEMITE
-;   db MAGNETON
-;   db MAGNEZONE
-    db -1 ; end
+;   dw MAGNEMITE
+;   dw MAGNETON
+;   dw MAGNEZONE
+    dw -1 ; end

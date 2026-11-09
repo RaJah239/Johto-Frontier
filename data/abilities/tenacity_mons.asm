@@ -2,5 +2,5 @@
 ; to recover from any non-volatile status at the end of each turn
 
 TenacityPokemon:
-;    db HAXORUS
-    db -1
+;    dw HAXORUS
+    dw -1

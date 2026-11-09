@@ -6,34 +6,34 @@
 
 SpikesImmunePokemon:
 ; 26 levitating pokemon
-	db CHARIZARD
-	db BEAUTIFLY
-	db DUSTOX
-	db MAGNEMITE
-	db MAGNETON
-	db MAGNEZONE
-	db ALTARIA
-	db GASTLY
-	db HAUNTER
-	db GENGAR
-	db LARVESTA
-	db VOLCARONA
-	db KOFFING
-	db WEEZING
-	db SOLROCK
-	db LUNATONE
-	db CLAYDOL
-	db BRONZOR
-	db BRONZONG
-	db MISDREAVUS
-	db MISMAGIUS
-	db UNOWN
-	db NOWN
-	db VICTINI
-	db CELEBI
-	db MEW
+	dw CHARIZARD
+	dw BEAUTIFLY
+	dw DUSTOX
+	dw MAGNEMITE
+	dw MAGNETON
+	dw MAGNEZONE
+	dw ALTARIA
+	dw GASTLY
+	dw HAUNTER
+	dw GENGAR
+	dw LARVESTA
+	dw VOLCARONA
+	dw KOFFING
+	dw WEEZING
+	dw SOLROCK
+	dw LUNATONE
+	dw CLAYDOL
+	dw BRONZOR
+	dw BRONZONG
+	dw MISDREAVUS
+	dw MISMAGIUS
+	dw UNOWN
+	dw NOWN
+	dw VICTINI
+	dw CELEBI
+	dw MEW
 
 ; 2 magic guard pokemon
-	db CLEFAIRY
-	db CLEFABLE
-	db -1 ; end
+	dw CLEFAIRY
+	dw CLEFABLE
+	dw -1 ; end

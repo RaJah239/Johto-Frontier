@@ -2,5 +2,5 @@
 ; infront it, recover HP by 1/8 of its max hp
 
 LifeDrainPokemon:
-;	db MEWTWO
-	db -1 ; end
+;	dw MEWTWO
+	dw -1 ; end

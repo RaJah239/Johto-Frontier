@@ -9,7 +9,7 @@
 ;   db -1 ; end
 
 SandBodyPokemon:
-;    db GIBLE
-;    db GABITE
-;    db GARCHOMP
-    db -1 ; end
+;    dw GIBLE
+;    dw GABITE
+;    dw GARCHOMP
+    dw -1 ; end

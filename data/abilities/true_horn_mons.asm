@@ -1,7 +1,7 @@
 ; List of all Pokemon whose megahorn never misses
 
 TrueHornPokemon:
-;    db HERACROSS
-    db -1 ; end
+;    dw HERACROSS
+    dw -1 ; end
 
 TrueHornText: db "True Horn@"

@@ -15,7 +15,7 @@ HandleWaterproof:
 
 	call GetDefensiveSpecies
 	ld hl, WaterproofPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	showdefensiveability AbilityPopup_WaterproofText
@@ -39,7 +39,7 @@ HandleFlameWard:
 
 	call GetDefensiveSpecies
 	ld hl, FlameWardPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	showdefensiveability AbilityPopup_FlameWardText
@@ -63,7 +63,7 @@ HandleGrounded:
 
 	call GetDefensiveSpecies
 	ld hl, GroundedPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	showdefensiveability AbilityPopup_GroundedText
@@ -87,7 +87,7 @@ HandleImmunity:
 
 	call GetDefensiveSpecies
 	ld hl, ImmunityPokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	showdefensiveability AbilityPopup_ImmunityText
@@ -111,7 +111,7 @@ HandleLevitate:
 
 	call GetDefensiveSpecies
 	ld hl, LevitatePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 
 	showdefensiveability AbilityPopup_LevitateText

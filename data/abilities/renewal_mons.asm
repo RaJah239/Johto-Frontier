@@ -2,5 +2,5 @@
 ; infront it, recovers from status problems
 
 RenewalPokemon:
-;	db HO_OH
-	db -1 ; end
+;	dw HO_OH
+	dw -1 ; end

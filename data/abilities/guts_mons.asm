@@ -13,10 +13,10 @@
 ;   db -1 ; end
 
 GutsPokemon:
-;    db TEDDIURSA
-;    db URSARING
-;    db URSALUNA
-;    db HERACROSS
-;    db MAKUHITA
-;    db HARIYAMA
-    db -1 ; end
+;    dw TEDDIURSA
+;    dw URSARING
+;    dw URSALUNA
+;    dw HERACROSS
+;    dw MAKUHITA
+;    dw HARIYAMA
+    dw -1 ; end

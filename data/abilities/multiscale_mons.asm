@@ -2,6 +2,6 @@
 ; damage taken from attacks is halved
 
 MultiscalePokemon:
-;    db LUGIA
-;    db HO_OH
-    db -1
+;    dw LUGIA
+;    dw HO_OH
+    dw -1

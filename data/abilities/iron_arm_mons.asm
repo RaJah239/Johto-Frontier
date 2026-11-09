@@ -2,6 +2,6 @@
 ; get boosted by 50 percent when attacking
 
 IronArmPokemon:
-;    db MEOWTH
-;    db PERSIAN
-    db -1
+;    dw MEOWTH
+;    dw PERSIAN
+    dw -1

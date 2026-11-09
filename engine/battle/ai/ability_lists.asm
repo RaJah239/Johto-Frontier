@@ -1,172 +1,172 @@
 SwiftSwimPokemon_AI:
-    db FEEBAS
-    db KINGDRA
-    db MAGIKARP
-    db MANTINE
-    db OMANYTE
-    db OMASTAR
-    db -1 ; end
+    dw FEEBAS
+    dw KINGDRA
+    dw MAGIKARP
+    dw MANTINE
+    dw OMANYTE
+    dw OMASTAR
+    dw -1 ; end
 
 HydrationPokemon_AI:
-    db SEEL
-    db DEWGONG
-    db LAPRAS
-    db -1 ; end
+    dw SEEL
+    dw DEWGONG
+    dw LAPRAS
+    dw -1 ; end
 
 RainDishPokemon_AI:
-    db SQUIRTLE
-    db WARTORTLE
-    db BLASTOISE
-    db TENTACOOL
-    db TENTACRUEL
-    db -1 ; end
+    dw SQUIRTLE
+    dw WARTORTLE
+    dw BLASTOISE
+    dw TENTACOOL
+    dw TENTACRUEL
+    dw -1 ; end
 
 ChlorophyllPokemon_AI:
-    db BELLSPROUT
-    db WEEPINBELL
-    db VICTREEBEL
-    db TANGELA
-    db TANGROWTH
-    db SUNKERN
-    db SUNFLORA
-    db TROPIUS
-    db -1 ; end
+    dw BELLSPROUT
+    dw WEEPINBELL
+    dw VICTREEBEL
+    dw TANGELA
+    dw TANGROWTH
+    dw SUNKERN
+    dw SUNFLORA
+    dw TROPIUS
+    dw -1 ; end
 
 SolarPowerPokemon_AI:
-    db SUNKERN
-    db SUNFLORA
-    db TROPIUS
-    db CHARMANDER
-    db CHARMELEON
-    db CHARIZARD
-    db -1 ; end
+    dw SUNKERN
+    dw SUNFLORA
+    dw TROPIUS
+    dw CHARMANDER
+    dw CHARMELEON
+    dw CHARIZARD
+    dw -1 ; end
 
 SandRushPokemon_AI:
-    db DRILBUR
-    db EXCADRILL
-    db KLEAVOR
-    db -1 ; end
+    dw DRILBUR
+    dw EXCADRILL
+    dw KLEAVOR
+    dw -1 ; end
 
 SandBodyPokemon_AI:
-    db GIBLE
-    db GABITE
-    db GARCHOMP
-    db -1 ; end
+    dw GIBLE
+    dw GABITE
+    dw GARCHOMP
+    dw -1 ; end
 
 SlushRushPokemon_AI:
-    db DELIBIRD
-    db -1 ; end
+    dw DELIBIRD
+    dw -1 ; end
 
 IceBodyPokemon_AI:
-    db SNORUNT
-    db GLALIE
-    db REGICE
-    db -1 ; end
+    dw SNORUNT
+    dw GLALIE
+    dw REGICE
+    dw -1 ; end
 
 PhotosynthesisPokemon_AI:
-    db TROPIUS
-    db -1 ; end
+    dw TROPIUS
+    dw -1 ; end
 
 FlameWardPokemon_AI:
-    db CYNDAQUIL
-    db QUILAVA
-    db TYPHLOSION
-    db GROWLITHE
-    db ARCANINE
-    db HOUNDOUR
-    db HOUNDOOM
-    db LITWICK
-    db LAMPENT
-    db CHANDELURE
-    db -1 ; end
+    dw CYNDAQUIL
+    dw QUILAVA
+    dw TYPHLOSION
+    dw GROWLITHE
+    dw ARCANINE
+    dw HOUNDOUR
+    dw HOUNDOOM
+    dw LITWICK
+    dw LAMPENT
+    dw CHANDELURE
+    dw -1 ; end
 
 WaterproofPokemon_AI:
-    db LAPRAS
-    db WOOPER
-    db QUAGSIRE
-    db MANTINE
-    db CHINCHOU
-    db LANTURN
-    db -1 ; end
+    dw LAPRAS
+    dw WOOPER
+    dw QUAGSIRE
+    dw MANTINE
+    dw CHINCHOU
+    dw LANTURN
+    dw -1 ; end
 
 GroundedPokemon_AI:
-    db CHINCHOU
-    db LANTURN
-    db RAIKOU
-    db -1 ; end
+    dw CHINCHOU
+    dw LANTURN
+    dw RAIKOU
+    dw -1 ; end
 
 ImmunityPokemon_AI:
-	db CHIKORITA
-	db BAYLEEF
-	db MEGANIUM
-	db SNORLAX
-	db -1 ; end
+	dw CHIKORITA
+	dw BAYLEEF
+	dw MEGANIUM
+	dw SNORLAX
+	dw -1 ; end
 
 SerenityPokemon_AI:
-    db MEGANIUM
-    db SYLVEON
-    db MEW
-    db -1 ; end
+    dw MEGANIUM
+    dw SYLVEON
+    dw MEW
+    dw -1 ; end
 
 BadDreamsPokemon_AI:
-    db JYNX
-    db DARKRAI
-    db -1 ; end
+    dw JYNX
+    dw DARKRAI
+    dw -1 ; end
 
 RockHeadPokemon_AI:
-    db ONIX
-    db STEELIX
-    db RHYHORN
-    db RHYDON
-    db AERODACTYL
-    db SUDOWOODO
-    db -1 ; end
+    dw ONIX
+    dw STEELIX
+    dw RHYHORN
+    dw RHYDON
+    dw AERODACTYL
+    dw SUDOWOODO
+    dw -1 ; end
 
 ResiliencePokemon_AI:
-    db TENTACOOL
-    db TENTACRUEL
-    db REGIROCK
-    db REGICE
-    db REGISTEEL
-    db -1 ; end
+    dw TENTACOOL
+    dw TENTACRUEL
+    dw REGIROCK
+    dw REGICE
+    dw REGISTEEL
+    dw -1 ; end
 
 SturdyPokemon_AI:
-    db MAGNEMITE
-    db MAGNETON
-    db MAGNEZONE
-    db ONIX
-    db STEELIX
-    db SUDOWOODO
-    db SHUCKLE
-    db SKARMORY
-    db DONPHAN
-    db REGIROCK
-    db -1 ; end
+    dw MAGNEMITE
+    dw MAGNETON
+    dw MAGNEZONE
+    dw ONIX
+    dw STEELIX
+    dw SUDOWOODO
+    dw SHUCKLE
+    dw SKARMORY
+    dw DONPHAN
+    dw REGIROCK
+    dw -1 ; end
 
 BlessingPokemon_AI:
-    db CHANSEY
-    db BLISSEY
-    db TOGEPI
-    db TOGETIC
-    db TOGEKISS
-    db -1 ; end
+    dw CHANSEY
+    dw BLISSEY
+    dw TOGEPI
+    dw TOGETIC
+    dw TOGEKISS
+    dw -1 ; end
 
 OverdrivePokemon_AI:
-    db URSALUNA
-    db PORYGONZ
-    db -1 ; end
+    dw URSALUNA
+    dw PORYGONZ
+    dw -1 ; end
 
 SureShockPokemon_AI:
-    db PIKACHU
-    db MAGNEMITE
-    db MAGNETON
-    db MAGNEZONE
-    db -1  ; end
+    dw PIKACHU
+    dw MAGNEMITE
+    dw MAGNETON
+    dw MAGNEZONE
+    dw -1  ; end
 
 KindlePokemon_AI:
-    db CHANDELURE
-    db -1 ; end
+    dw CHANDELURE
+    dw -1 ; end
 
 ; unused at the moment
 UberImmunePokemon_AI:
-    db -1 ; end
+    dw -1 ; end

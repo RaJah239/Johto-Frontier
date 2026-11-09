@@ -1,8 +1,8 @@
 ; List of all Pokemon whose thunder never misses
 
 StormboundPokemon:
-;    db RAICHU
-    db -1 ; end
+;    dw RAICHU
+    dw -1 ; end
 
 StormboundText:
     db "Stormbound@"

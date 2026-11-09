@@ -401,7 +401,7 @@ StatsScreen_InitUpperHalf:
 	; Place float icon if user levitates
 	ld a, [wCurPartySpecies]
 	ld hl, LevitatePokemon
-	call IsInByteArray
+	call IsSpeciesInList
 	ret nc
 	hlcoord 7, 2
 	ld [hl], "<float>"

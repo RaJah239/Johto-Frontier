@@ -17,14 +17,14 @@
 ;	db -1 ; end
 
 FlameWardPokemon:
-;	db CYNDAQUIL
-;	db QUILAVA
-;	db TYPHLOSION
-;	db GROWLITHE
-;	db ARCANINE
-;	db HOUNDOUR
-;	db HOUNDOOM
-;	db LITWICK
-;	db LAMPENT
-;	db CHANDELURE
-	db -1 ; end
+;	dw CYNDAQUIL
+;	dw QUILAVA
+;	dw TYPHLOSION
+;	dw GROWLITHE
+;	dw ARCANINE
+;	dw HOUNDOUR
+;	dw HOUNDOOM
+;	dw LITWICK
+;	dw LAMPENT
+;	dw CHANDELURE
+	dw -1 ; end

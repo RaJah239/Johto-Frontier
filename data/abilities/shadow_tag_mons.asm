@@ -8,6 +8,6 @@
 ;   db -1 ; end
 
 ShadowTagPokemon:
-;    db CHANDELURE
-;    db GENGAR
-    db -1 ; end
+;    dw CHANDELURE
+;    dw GENGAR
+    dw -1 ; end

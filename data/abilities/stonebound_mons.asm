@@ -1,9 +1,9 @@
 ; List of all Pokemon whose stone edge never misses
 
 StoneboundPokemon:
-;    db TYRANITAR
-;    db SUDOWOODO
-;    db AERODACTYL
-    db -1 ; end
+;    dw TYRANITAR
+;    dw SUDOWOODO
+;    dw AERODACTYL
+    dw -1 ; end
 
 StoneboundText: db "Stonebound@"
