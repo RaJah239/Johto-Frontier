@@ -390,8 +390,6 @@ Print_area_entry:
 	ld a, BANK(MapGroupNum_Names)
 	push bc
 	call PlaceFarString
-	ld c, 4
-	call DelayFrames
 	pop bc ; line counter
 	ret
 
@@ -948,40 +946,10 @@ Dex_Check_Grass:
 	ret
 
 Pokedex_LookCheck_grass:
-	ld bc, 0; up to NUM_GRASSMON ; * 3 ; total mon entries, morn/day/nite, 7 per
-	; push bc ; up to NUM_GRASSMON * 3
-	push af ; bank
-.map_loop
-	pop af
-	push af
-	push bc
-	call GetFarByte ; bkup hl and change to getfarword for pk16?
-	; a is species
-	inc hl ; pointing to next mon lvl
-	inc hl ; pointing to next mon species
-	; a is mon species 
-	ld d, a
-	ld a, [wCurSpecies]
-	pop bc
-	cp d
-	jr z, .found
-	; pop bc ; % and NUM_GRASSMON
-	inc c
-	push bc ; % and NUM_GRASSMON
-	ld a, c
-	cp NUM_GRASSMON * 3
-	jr z, .map_loop_end ; end of wildmon entry, species not found in any time
-	pop bc
-	jr .map_loop
-.map_loop_end
-	pop bc
-	pop af
-	ld a, 1
-	ret
-.found
-	pop af
-	xor a
-	ret
+; a = bank, hl = first species byte: a = 0 if [wCurSpecies] is in this
+; map's NUM_GRASSMON * 3 slots, 1 if not
+	ld c, NUM_GRASSMON * 3
+	jmp FarFindCurSpeciesInSlots
 
 Dex_Check_Surf:
 	; hl is JohtoGrassWildMons, KantoGrassWildMons, or SwarmGrassWildMons
@@ -1022,40 +990,10 @@ Dex_Check_Surf:
 	ret
 
 Pokedex_LookCheck_surf:
-	ld bc, 0; up to NUM_WATERMON ; * 3 ; total mon entries, 1 per day, 3 per
-	; push bc ; up to NUM_WATERMON * 3
-	push af ; bank
-.map_loop
-	pop af
-	push af
-	push bc
-	call GetFarByte ; bkup hl and change to getfarword for pk16?
-	; a is species
-	inc hl ; pointing to next mon lvl
-	inc hl ; pointing to next mon species
-	; a is mon species 
-	ld d, a
-	ld a, [wCurSpecies]
-	pop bc
-	cp d
-	jr z, .found
-	; pop bc ; % and NUM_WATERMON
-	inc c
-	push bc ; % and NUM_WATERMON
-	ld a, c
-	cp NUM_WATERMON ; no time of day considerations
-	jr z, .map_loop_end ; end of wildmon entry, species not found in any time
-	pop bc
-	jr .map_loop
-.map_loop_end
-	pop bc
-	pop af
-	ld a, 1
-	ret
-.found
-	pop af
-	xor a
-	ret
+; a = bank, hl = first species byte: a = 0 if [wCurSpecies] is in this
+; map's NUM_WATERMON slots, 1 if not
+	ld c, NUM_WATERMON
+	jmp FarFindCurSpeciesInSlots
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; BUG CATCHING CONTEST ;;;;;;;;;;;;;;;;;;;;;;;;;;;;

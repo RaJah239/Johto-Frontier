@@ -250,98 +250,31 @@ inc_trees_rocksmash_map_index:
 ;;;;;;;;;;; COMMON TREES ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Dex_Check_commontree_rocksmash_set:
-	xor a
-	ld [wPokedexEvoStage3], a ; encounter % total
+; a = 0 (nz) if [wCurSpecies] is in this set, 1 if not;
+; wPokedexEvoStage3 = its total encounter %
 	; get the ptr from the double ptr in hl
 	ld a, BANK(TreeMons)
 	call GetFarWord
-; TreeMonSet_Rock::
-; 	db 90, KRABBY,     15
-.loop
 	ld a, BANK(TreeMons)
-	call GetFarByte ;; will be -1 at the end, otherwise it's the % chance to encounter
-	cp -1
-	jr z, .done
-	ld b, a ; encounter %
-	; we arent at the end, so increment ptr by 1 and check species, that's all we care about
-	inc hl
-	ld a, BANK(TreeMons)
-	call GetFarByte ;; will be -1 at the end, otherwise it's the % chance to encounter
-	ld c, a ; pokemon species of entry in ContestMons
-	ld a, [wCurSpecies] ; current pokedex entry species
-	cp c
-	call z, .found
-	; species didnt match, inc hl by 3, need to check for -1
-	inc hl
-	inc hl
-	jr .loop
-.found
-	ld a, [wPokedexEvoStage3]
-	add b ; this encounter %
-	ld [wPokedexEvoStage3], a ; encounter % total
-	ret
-.done
-	ld a, [wPokedexEvoStage3]
-	ld b, a
-	xor a
-	cp b
-	ret nz
-	; fallthrough
-; .notfound
-	ld a, 1
-	ret	
+	call FarSumCurSpeciesChances
+	jr Dex_Check_TreeSetResult
 
 ;;;;;;;;;;; RARE TREES ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Dex_Check_raretree_set:
-	xor a
-	ld [wPokedexEvoStage3], a ; encounter % total
-	; get the ptr from the double ptr in hl
+; as above, for the rare set (the list after the common one)
 	ld a, BANK(TreeMons)
 	call GetFarWord
-; 	db 10, AIPOM,      10
-.loop1 ; get past the common table
 	ld a, BANK(TreeMons)
-	call GetFarByte ;; will be -1 at the end, otherwise it's the % chance to encounter
-	cp -1
-	jr z, .loop2setup
-	inc hl
-	inc hl
-	inc hl
-	jr .loop1
-.loop2setup
-	inc hl
-.loop2
+	call FarSumCurSpeciesChances ; (past the common set)
 	ld a, BANK(TreeMons)
-	call GetFarByte ;; will be -1 at the end, otherwise it's the % chance to encounter
-	cp -1
-	jr z, .done
-	ld b, a ; encounter %
-	; we arent at the end, so increment ptr by 1 and check species, that's all we care about
-	inc hl
-	ld a, BANK(TreeMons)
-	call GetFarByte ;; will be -1 at the end, otherwise it's the % chance to encounter
-	ld c, a ; pokemon species of entry in ContestMons
-	ld a, [wCurSpecies] ; current pokedex entry species
-	cp c
-	call z, .found
-	; species didnt match, inc hl by 3, need to check for -1
-	inc hl
-	inc hl
-	jr .loop2
-.found
-	ld a, [wPokedexEvoStage3]
-	add b ; this encounter %
+	call FarSumCurSpeciesChances
+Dex_Check_TreeSetResult:
+	ld a, b
 	ld [wPokedexEvoStage3], a ; encounter % total
-	ret
-.done
-	ld a, [wPokedexEvoStage3]
-	ld b, a
 	xor a
 	cp b
-	ret nz
-	; fallthrough
-; .notfound
+	ret nz ; found: a = 0, nz
 	ld a, 1
 	ret
 
