@@ -63,6 +63,12 @@ DEF DEXGRID_PIC_OBJ_X    EQU 8 - POKEDEX_SCX
 DEF DEXGRID_PIC_OBJ_Y    EQU 8
 DEF DEXGRID_PIC_SPRITES  EQU 4
 
+; the name and type labels sit where the dex entry screen shows them (it
+; scrolls by POKEDEX_SCX: its column 9 starts at x = 72 - POKEDEX_SCX)
+DEF DEXGRID_NAME_X       EQU 9 * 8 - POKEDEX_SCX
+DEF DEXGRID_TYPE1_X      EQU 9 * 8 - POKEDEX_SCX
+DEF DEXGRID_TYPE2_X      EQU 13 * 8 - POKEDEX_SCX
+
 DEF DEXGRID_THUMB_TOP    EQU 69 ; scrollbar thumb y range (screen)
 DEF DEXGRID_THUMB_RANGE  EQU 55
 
@@ -1623,38 +1629,26 @@ DexGrid_DrawTop:
 .unseen
 	ld hl, DexGrid_UnseenName
 .got_name
-	lb de, 69 - DEXGRID_TOP_X, 16 - 16
+	lb de, DEXGRID_NAME_X - DEXGRID_TOP_X, 16 - 16
 	ld c, MON_NAME_LENGTH - 1
 	call DexGrid_DrawFontString
 
 	; type labels (row 3 = canvas A row 1)
 	call DexGrid_IsCursorSeen
-	jr z, .upload
+	ret z
 	call DexGrid_GetTypeIndexes
 	push bc
 	ld a, c
 	ld hl, TypeLightIconGFX
-	ld de, wDexGridTopA + DEXGRID_TOP_W tiles
-	call DexGrid_CopyTypeLabel
+	ld d, DEXGRID_TYPE1_X - DEXGRID_TOP_X
+	call DexGrid_DrawTypeLabel
 	pop bc
 	ld a, b
 	cp c
-	jr z, .border
+	ret z
 	ld hl, TypeDarkIconGFX
-	ld de, wDexGridTopA + (DEXGRID_TOP_W + 4) tiles
-	call DexGrid_CopyTypeLabel
-.border
-	; the first label covers the box's left border: put it back
-	ld hl, wDexGridTopA + DEXGRID_TOP_W tiles
-	ld b, 8 * 2
-.border_loop
-	set 7, [hl]
-	inc hl
-	dec b
-	jr nz, .border_loop
-
-.upload
-	ret ; (DexGrid_DrawTopHalf copies rows 0 and 2-3 to VRAM)
+	ld d, DEXGRID_TYPE2_X - DEXGRID_TOP_X
+	jp DexGrid_DrawTypeLabel ; (DexGrid_DrawTopHalf copies rows 0 and 2-3 to VRAM)
 
 DexGrid_DrawCounts:
 ; The Seen/Own counts (rows 6-7); they don't change while the grid is shown.
@@ -1713,21 +1707,25 @@ DexGrid_IsCursorSeen:
 	ret z
 	jmp DexGrid_IsSeen
 
-DexGrid_CopyTypeLabel:
-; Copy type label a (4 tiles of the gfx at hl, in BANK(TypeLightIconGFX)) to
-; the canvas at de, its text (colour 3) made white (colour 0) for the white,
-; type 1, type 2, black palette.
+DexGrid_DrawTypeLabel:
+; Draw type label a (4 tiles of the gfx at hl, in BANK(TypeLightIconGFX)) on
+; canvas A's second tile row from x = d. Its text (colour 3) is made white
+; (colour 0) for the white, type 1, type 2, black palette, and colour 0 is
+; left out, so the label goes over the box without hiding its border.
 	push de
 	ld bc, 4 tiles
 	call AddNTimes
-	pop de
-	push de
+	push hl
+	ld a, BANK(sDexGridLabel)
+	call OpenSRAM ; (WRAM has no room left that isn't the canvas)
+	pop hl
+	ld de, sDexGridLabel
 	ld bc, 4 tiles
 	ld a, BANK(TypeLightIconGFX)
 	call FarCopyBytes
-	pop hl
+	ld hl, sDexGridLabel
 	ld b, 4 * 8
-.loop
+.remap
 	ld a, [hli] ; plane 0
 	ld c, a
 	ld a, [hld] ; plane 1
@@ -1740,8 +1738,33 @@ DexGrid_CopyTypeLabel:
 	and e
 	ld [hli], a
 	dec b
-	jr nz, .loop
-	ret
+	jr nz, .remap
+	pop de
+	ld hl, sDexGridLabel
+	ld c, 4
+.tile
+	ld e, 8
+	ld b, 8
+.row
+	ld a, [hli]
+	ld [wDexGridRowLo], a
+	ld a, [hli]
+	ld [wDexGridRowHi], a
+	push hl
+	ld hl, wDexGridRowLo
+	or [hl]
+	pop hl
+	ld [wDexGridRowMask], a
+	call DexGrid_PutRow
+	inc e
+	dec b
+	jr nz, .row
+	ld a, d
+	add 8
+	ld d, a
+	dec c
+	jr nz, .tile
+	jp CloseSRAM
 
 DexGrid_RenderStrips:
 ; Draw the three number rows' numbers and caught balls (no cursor) into

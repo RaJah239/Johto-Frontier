@@ -1860,7 +1860,7 @@ Pokedex_DrawDexEntryScreenBG:
  	ld [wCurSpecies], a
  	farcall DisplayDexMonType_CustomGFX
  	call GetPokemonName
- 	hlcoord 9, 3
+	hlcoord 9, 2 ; (where the grid shows it)
  	call PlaceString ; mon species	
  ; .print_dex_num ; Print dex number
  	hlcoord 10, 1
@@ -2636,12 +2636,13 @@ Pokedex_PlaceDefaultStringIfNotSeen:
 	db "-----@"
 
 Pokedex_DrawFootprint:
-	hlcoord 18, 1
+; (rows 3-4: the name is on row 2, like on the grid)
+	hlcoord 18, 3
 	ld a, $6d ; $62
 	ld [hli], a
 	inc a
 	ld [hl], a
-	hlcoord 18, 2
+	hlcoord 18, 4
 	ld a, $6f ; $64
 	ld [hli], a
 	inc a

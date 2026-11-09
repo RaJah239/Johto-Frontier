@@ -337,9 +337,9 @@ INCLUDE "gfx/stats/stats.pal"
 
 _CGB_Pokedex:
 	ld de, wBGPals1
-	; ld a, PREDEFPAL_POKEDEX
- 	call CheckPokedexColor
-	call GetPredefPal
+	; light interface, like the grid (it was black panels in the dex colour:
+	; CheckPokedexColor + GetPredefPal)
+	ld hl, PokedexLightPalette
 	call LoadHLPaletteIntoDE ; dex interface palette
 	ld a, [wCurPartySpecies]
 	cp $ff
@@ -360,10 +360,9 @@ _CGB_Pokedex:
  .not_shiny
 	call LoadPalette_White_Col1_Col2_Black ; mon palette
 
-; black background for Pal 7
- 	ld de, wBGPals1 palette 7 ; First color slot of Pal 7	
- 	call LoadSingleBlackPal ; loads black into slot 1 of pal 7, since it is normally white
- 							; but pokedex has black background
+; white background for Pal 7 (the type labels)
+	ld de, wBGPals1 palette 7
+	call LoadSingleWhitePal
  ; mon type 1	
  	ld a, [wTempSpecies]
  	ld [wCurSpecies], a	
@@ -425,11 +424,14 @@ ENDC
 
 .same_type
 IF USE_GEN3_STYLE_TYPE_GFX == TRUE
- 	ld de, wBGPals1 palette 7 + 4 ; slot 3 of pal 7
- 	call LoadSingleBlackPal	
+	ld de, wBGPals1 palette 7 + 4 ; slot 3 of pal 7
+	call LoadSingleWhitePal
 ENDC
 
 .got_palette
+	; type label text in white, like on the grid
+	ld de, wBGPals1 palette 7 + 6
+	call LoadSingleWhitePal
 	call WipeAttrmap
 	hlcoord 1, 1, wAttrmap
 	lb bc, 7, 7
@@ -438,10 +440,10 @@ ENDC
 
 IF USE_GEN3_STYLE_TYPE_GFX == TRUE
 ; mon base types
- 	hlcoord 9, 4, wAttrmap
- 	lb bc, 1, 8
- 	ld a, 7 | VRAM_BANK_1 ; mon base type pals ; VRAM 1
- 	call FillBoxCGB
+	hlcoord 9, 3, wAttrmap
+	lb bc, 1, 8
+	ld a, 7 | VRAM_BANK_1 ; mon base type pals ; VRAM 1
+	call FillBoxCGB
 ENDC
 
 	call InitPartyMenuOBPals
@@ -471,21 +473,39 @@ ENDC
  	call WipeAttrmap
  
  	ld de, wBGPals1
- 	; ld a, PREDEFPAL_POKEDEX
- 	call CheckPokedexColor
- 	call GetPredefPal
+	ld hl, PokedexLightPalette ; (was the dex colour, CheckPokedexColor)
  	call LoadHLPaletteIntoDE ; dex interface palette
  
  	ld de, wBGPals1 palette 6
  	ld a, PREDEFPAL_POKEDEX
  	call GetPredefPal
  	call LoadHLPaletteIntoDE ; dex interface palette	
+
+; the stages' type label palettes start white (an unused one shows the
+; blank tiles under it)
+	ld de, wBGPals1 palette 1
+	ld c, 4
+.white_pals
+	push bc
+	ld hl, PokedexAllWhitePalette
+	call LoadHLPaletteIntoDE
+	pop bc
+	dec c
+	jr nz, .white_pals
+; icon boxes: white inside
+	ld de, wBGPals1 palette 5
+	ld hl, PokedexLightBoxPalette
+	call LoadHLPaletteIntoDE
  
  ; main screen within border, vram 1
  	hlcoord 1, 1, wAttrmap
  	lb bc, 16, 19
  	ld a, 0 | VRAM_BANK_1 ; VRAM 1
  	call FillBoxCGB
+	hlcoord 1, 1, wAttrmap
+	lb bc, 16, 4
+	ld a, 5 | VRAM_BANK_1 ; icon boxes
+	call FillBoxCGB
 
 IF USE_GEN3_STYLE_TYPE_GFX == TRUE
  ; mon slot 1 types
@@ -513,7 +533,7 @@ ENDC
  ; flip bottom row of sprite icon borders
  	hlcoord 1, 4, wAttrmap
  	ld bc, 4
- 	ld a, 0 | Y_FLIP | VRAM_BANK_1 ; VRAM 1
+ 	ld a, 5 | Y_FLIP | VRAM_BANK_1 ; VRAM 1
  	call ByteFill
  	hlcoord 1, 8, wAttrmap
  	ld bc, 4
@@ -535,9 +555,7 @@ ENDC
 _CGB_Pokedex_PicsPage:
  	call WipeAttrmap
  	ld de, wBGPals1
- 	; ld a, PREDEFPAL_POKEDEX
- 	call CheckPokedexColor
- 	call GetPredefPal
+	ld hl, PokedexLightPalette ; (was the dex colour, CheckPokedexColor)
  	call LoadHLPaletteIntoDE ; dex interface palette
  ; pokemon pals
  	ld a, [wCurPartySpecies]
@@ -557,11 +575,11 @@ _CGB_Pokedex_PicsPage:
  	call GetPredefPal
  	call LoadHLPaletteIntoDE ; dex interface palette	
  	
- 	ld de, wBGPals1 palette 6
- 	call LoadSingleBlackPal
- ; black background
- 	ld de, wBGPals1 palette 7	
- 	call LoadSingleBlackPal
+	ld de, wBGPals1 palette 6
+	call LoadSingleWhitePal
+; white background
+	ld de, wBGPals1 palette 7
+	call LoadSingleWhitePal
  
  ; animated front pic
  	hlcoord 1, 1, wAttrmap
@@ -575,10 +593,13 @@ _CGB_Pokedex_PicsPage:
  	ld a, 1 | VRAM_BANK_1 ; VRAM 1
  	call FillBoxCGB
  
- ; sprite box border
+ ; sprite box border (white inside)
+	ld de, wBGPals1 palette 5
+	ld hl, PokedexLightBoxPalette
+	call LoadHLPaletteIntoDE
  	hlcoord 1, 13, wAttrmap
  	lb bc, 4, 4
- 	ld a, 0 | VRAM_BANK_1 ; VRAM 1
+ 	ld a, 5 | VRAM_BANK_1 ; VRAM 1
  	call FillBoxCGB
  
  ; page/up down arrows
@@ -589,22 +610,22 @@ _CGB_Pokedex_PicsPage:
  
  ; animated icon, upper right corner fix
  	hlcoord 4, 13, wAttrmap
- 	ld [hl], 0 | X_FLIP | VRAM_BANK_1
+ 	ld [hl], 5 | X_FLIP | VRAM_BANK_1
  ; animated icon, lower right corner fix
  	hlcoord 4, 16, wAttrmap
- 	ld [hl], 0 | X_FLIP | Y_FLIP | VRAM_BANK_1
+ 	ld [hl], 5 | X_FLIP | Y_FLIP | VRAM_BANK_1
  ; animated icon, lower left corner fix
  	hlcoord 1, 16, wAttrmap
- 	ld [hl], 0 | Y_FLIP | VRAM_BANK_1		
+ 	ld [hl], 5 | Y_FLIP | VRAM_BANK_1
  ; sprite border right side
  	hlcoord 4, 14, wAttrmap
- 	ld [hl], 0 | X_FLIP | VRAM_BANK_1
+ 	ld [hl], 5 | X_FLIP | VRAM_BANK_1
  	hlcoord 4, 15, wAttrmap
- 	ld [hl], 0 | X_FLIP | VRAM_BANK_1
+ 	ld [hl], 5 | X_FLIP | VRAM_BANK_1
  ; page bottom border row, bottom of sprite border	
  	hlcoord 2, 16, wAttrmap
  	ld bc, 2
- 	ld a, 0 | Y_FLIP | VRAM_BANK_1
+ 	ld a, 5 | Y_FLIP | VRAM_BANK_1
  	call ByteFill
 
 IF USING_INCREASED_SPRITE_ANIMATION == FALSE
@@ -674,6 +695,26 @@ CheckPokedexColor:
 .Red
  	ld a, PREDEFPAL_POKEDEX
  	ret
+
+PokedexLightPalette:
+; the dex entry screen's interface: text, accent, frame, panels
+	RGB  0,  0,  0
+	RGB 26, 10,  6
+	RGB 23, 23, 23
+	RGB 31, 31, 31
+
+PokedexLightBoxPalette:
+; icon boxes on the light dex entry screens: inside, accent, frame, outside
+	RGB 31, 31, 31
+	RGB 26, 10,  6
+	RGB 23, 23, 23
+	RGB 31, 31, 31
+
+PokedexAllWhitePalette:
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 31, 31, 31
 
 PokedexQuestionMarkPalette:
 INCLUDE "gfx/pokedex/question_mark.pal"

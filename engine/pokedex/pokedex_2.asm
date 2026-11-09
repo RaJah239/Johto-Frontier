@@ -469,7 +469,7 @@ IF USE_GEN3_STYLE_TYPE_GFX == TRUE
  	lb bc, BANK(TypeLightIconGFX), 4
  	call Request2bpp
 
-	hlcoord 9, 4
+	hlcoord 9, 3 ; (where the grid shows it)
  	ld [hl], $77
  	inc hl
  	ld [hl], $78
@@ -514,7 +514,7 @@ IF USE_GEN3_STYLE_TYPE_GFX == TRUE
  	ld hl, vTiles2 tile $7b
  	lb bc, BANK(TypeDarkIconGFX), 4
  	call Request2bpp
- 	hlcoord 13, 4
+ 	hlcoord 13, 3
  	ld [hl], $7b
  	inc hl
 	ld [hl], $7c
@@ -529,7 +529,7 @@ IF USE_GEN3_STYLE_TYPE_GFX == TRUE
 	ld hl, LevitatePokemon
 	call IsInByteArray
 	ret nc
-	hlcoord 17, 4
+	hlcoord 17, 3
 	ld [hl], "<float>"
 	ret
 

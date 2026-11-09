@@ -62,6 +62,21 @@ LoadMonBaseTypePal:
  	ld bc, 2
  	jmp FarCopyColorWRAM
  
+LoadSingleWhitePal:
+; Destination address of the colour is passed in 'de'
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals1)
+	ldh [rSVBK], a
+	ld a, LOW(PALRGB_WHITE)
+	ld [de], a
+	inc de
+	ld a, HIGH(PALRGB_WHITE)
+	ld [de], a
+	pop af
+	ldh [rSVBK], a
+	ret
+
  LoadSingleBlackPal:
  	; Destination address of the Palette and Slot is passed in 'de'
  	ldh a, [rSVBK]
@@ -1175,11 +1190,13 @@ LoadDexTypePals:
  	push af
  	ld a, BANK(wBGPals1)
  	ldh [rSVBK], a
- 	xor a
- 	ld [de], a
- 	inc de
- 	ld [de], a
- 	inc de
+	; white (the dex entry screens have white panels)
+	ld a, LOW(PALRGB_WHITE)
+	ld [de], a
+	inc de
+	ld a, HIGH(PALRGB_WHITE)
+	ld [de], a
+	inc de
  	pop af
  	ldh [rSVBK], a	
  
@@ -1215,11 +1232,13 @@ LoadDexTypePals:
  	push af
  	ld a, BANK(wBGPals1)
  	ldh [rSVBK], a
- 	xor a
- 	ld [de], a
- 	inc de
- 	ld [de], a
- 	inc de
+	; white (the dex entry screens have white panels)
+	ld a, LOW(PALRGB_WHITE)
+	ld [de], a
+	inc de
+	ld a, HIGH(PALRGB_WHITE)
+	ld [de], a
+	inc de
  	pop af
  	ldh [rSVBK], a
  	ret

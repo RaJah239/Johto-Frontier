@@ -13,6 +13,7 @@ NEXTU
 ; sPaddedEnemyFrontpic and the question mark pic at sScratch; 16-byte aligned)
 	ds $330
 sDexGridPicSprite:: ds 8 tiles
+sDexGridLabel:: ds 4 tiles ; a type label being drawn on the grid
 ENDU
 
 SECTION "SRAM Bank 0", SRAM
