@@ -82,6 +82,14 @@ ENDC
 	call GetFarByte ; if zero, no evos
 	and a
 	jr nz, .does_evo
+	; the layout's row 6 has the stage 2 icon box (columns 1-4) and type
+	; labels (16-19) in other palettes, which hid "Do" and "ve": the text's
+	; columns get the page's text attributes (palette 0, VRAM 1 font)
+	hlcoord 3, 6, wAttrmap
+	ld bc, 15 ; "Does Not Evolve"
+	ld a, 0 | VRAM_BANK_1
+	call ByteFill
+	farcall ApplyAttrmap
 	hlcoord 3, 6
 	ld de, .doesnt_evo_text
 	call PlaceString
