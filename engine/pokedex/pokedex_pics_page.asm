@@ -54,10 +54,17 @@ Pokedex_PlayMonCry_AnimateFrontpic:
 .loop
 	call .Pokedex_WaitAnim
 	call .PokedexWaitCry
+	; done once the frontpic animation has finished (.finish clears both
+	; flags): nothing in this loop waits a frame without it, so the rest of
+	; the 255 passes played the icon's animation several steps per frame
+	ld a, [wStatsScreenFlags]
+	and 1 << 5 | 1 << 6
+	jr z, .done
 	ld a, [wPokedexEntryType]
 	;bit 7, a
 	cp 255
 	jr nz, .loop
+.done
 	xor a
 	ld [wPokedexEntryType], a
 
