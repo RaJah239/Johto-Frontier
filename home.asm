@@ -61,6 +61,6 @@ INCLUDE "home/extra_functions.asm"
 INCLUDE "data/abilities/defensive_abilities/levitate_mons.asm"
 INCLUDE "home/perfect_accuracy_effects.asm"
 INCLUDE "data/abilities/magic_guard_mons.asm"
-INCLUDE "home/restore_music.asm"
 INCLUDE "home/16bit.asm"
 INCLUDE "home/indirection.asm"
+INCLUDE "home/restore_music.asm" ; (switches to ROMX: keep last)
