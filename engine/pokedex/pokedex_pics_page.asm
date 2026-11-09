@@ -48,6 +48,19 @@ Pokedex_PlaceAnimatedFrontpic:
 	set 6, [hl]
 	ret
 
+Pokedex_PicsAnimStep:
+; One step of the pictures page's frontpic animation (Pics_Page's loop runs
+; it once per frame, so the page takes input while it plays); carry if it
+; is still running.
+	call Pokedex_PlayMonCry_AnimateFrontpic.Pokedex_WaitAnim
+Pokedex_IsPicsAnimRunning:
+; carry while the pictures page's frontpic animation runs
+	ld a, [wStatsScreenFlags]
+	and 1 << 5 | 1 << 6
+	ret z
+	scf
+	ret
+
 Pokedex_PlayMonCry_AnimateFrontpic:
 	xor a
 	ld [wPokedexEntryType], a

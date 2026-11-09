@@ -1013,10 +1013,15 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  	farcall Pokedex_place_Mon_Icon
  	callfar PlaySpriteAnimations
 	call Pokedex_ScreenOn ; the whole page at once (the icon too)
- 	farcall Pokedex_PlayMonCry_AnimateFrontpic
+	; the picture animates (and cries) from the loop below, one step per
+	; frame, so B and up/down work right away
+	xor a
+	ld [wPokedexEntryType], a
  .spritepage_loop
  	callfar PlaySpriteAnimations
  	call JoyTextDelay
+	farcall Pokedex_IsPicsAnimRunning
+	jr c, .check_b ; (shiny and cry wait for the animation, as before)
  	ld hl, hJoyPressed
  	ld a, [hl]
  	and SELECT ; toggle shininess
@@ -1026,6 +1031,8 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  	push hl
  	call nz, .toCry
  	pop hl
+ .check_b
+	ld hl, hJoyPressed
  	ld a, [hl]
  	bit B_BUTTON_F, a
  	jr nz, .sprite_b
@@ -1036,6 +1043,8 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  	ld a, [hl]
  	and D_DOWN
  	jr nz, .up_or_down_pressed
+	farcall Pokedex_PicsAnimStep
+	jr c, .spritepage_loop ; (an animation step takes the frame)
  	call DelayFrame
  	jr .spritepage_loop
  .up_or_down_pressed
