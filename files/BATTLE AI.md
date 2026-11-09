@@ -19,7 +19,7 @@ How opposing trainers decide what to do each turn: which move to use, when to sw
   - how a one-on-one between its Pokémon and yours would play out (see [The 1-on-1 check](#the-1-on-1-check))
 
 ## A turn, step by step
-1. **Pick a move.** Every move is scored (see below). The AI also decides here whether it *should* switch out because something has gone wrong (see [Smart switching](#smart-switching)).
+1. **Pick a move.** Every move is scored (see below), then the most promising moves are played out to see which one actually wins (see [8. Playing out each move](#8-playing-out-each-move)). The AI also decides here whether it *should* switch out because something has gone wrong (see [Smart switching](#smart-switching)).
 2. **Switch or use an item, at the start of the turn.**
    - If step 1 asked for a switch, it switches (unless it's trapped, set up or alone, see [When it won't switch](#when-it-wont-switch)).
    - Otherwise it plays out the 1-on-1 and switches if it's losing and another Pokémon would do better (see [The 1-on-1 check](#the-1-on-1-check)).
@@ -146,6 +146,26 @@ These run after everything above and can override it.
   - It never uses a damaging move you're immune to while another usable move would work. That covers your type (a Normal move into a Ghost, Ground into Flying) and your ability (Levitate, Waterproof, Flame Ward, Grounded, Immunity). Nothing the other parts of the AI favour can override this.
   - After Foresight, Odor Sleuth or Miracle Eye, Normal and Fighting moves can hit Ghosts again, so it uses them. Ghost moves still can't hit Normal types.
   - If every move it can use would fail, it still picks one of them rather than a move that's out of PP or disabled.
+
+### 8. Playing out each move
+Last of all, the AI plays out every move it was seriously considering: any move whose score is close to its favourite's. It asks: "if I use this move now and then fight on as well as I can, do I win?" It uses the same simulation as [the 1-on-1 check](#the-1-on-1-check).
+- **Attacks** hit with their own damage (weakest roll) and priority on the first turn.
+- **Boosting moves** boost on the first turn, and you get a free hit.
+- **Healing moves** heal on the first turn.
+- **Status moves** inflict their status when it can work, and the rest of the fight plays out with it:
+  - sleep (counted at its shortest: one skipped turn)
+  - poison and bad poison
+  - burn (halves your Attack)
+  - paralysis (cuts your Speed)
+  - Leech Seed
+
+  A status can't work if you already have one, are behind a Substitute or Safeguard, or your type is immune (Ground vs Thunder Wave, Poison and Steel vs poison, Fire vs burn, Grass vs Leech Seed).
+
+Then:
+- **If any of those moves wins**, it uses the winning move that leaves it with the most HP, preferring moves that can't miss. This overrides everything above.
+- **If none of them wins**, the earlier scores decide, with a small push toward the move that would take the most HP off you.
+
+So it picks Toxic, Thunder Wave, Swords Dance or Recover because they *win the fight*, not just because a rule favours them.
 
 ## Switching
 
