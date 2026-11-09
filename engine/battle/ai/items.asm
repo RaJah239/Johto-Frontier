@@ -20,9 +20,8 @@ RunAwayPokemon_AI:
 	db -1 ; end
 
 AI_SwitchOrTryItem:
-; From repo A: at the start of a turn, maybe switch out (the trainer class's
-; SWITCH_OFTEN / SWITCH_RARELY / SWITCH_SOMETIMES chance, scored by
-; CheckAbleToSwitch); otherwise maybe use an item.
+; At the start of a turn, switch out if the mon that's out loses the 1-on-1
+; and another one wins it (AI_MatchupSwitch); otherwise maybe use an item.
 	and a
 
 	ld a, [wBattleMode]
@@ -44,159 +43,16 @@ AI_SwitchOrTryItem:
 	and a
 	jr nz, DontSwitch
 
-	; always load the first trainer class in wTrainerClass for Battle Tower trainers
-	ld hl, TrainerClassAttributes + TRNATTR_AI_ITEM_SWITCH
-	ld a, [wInBattleTowerBattle]
-	and a
-	jr nz, .ok
-
-	ld a, [wTrainerClass]
-	dec a
-	ld bc, NUM_TRAINER_ATTRIBUTES
-	call AddNTimes
-
-.ok
-	bit SWITCH_OFTEN_F, [hl]
-	jp nz, SwitchOften
-	bit SWITCH_RARELY_F, [hl]
-	jp nz, SwitchRarely
-	bit SWITCH_SOMETIMES_F, [hl]
-	jp nz, SwitchSometimes
+	; stay in if the mon that's out wins the 1-on-1; otherwise switch to one
+	; that wins (AI_MatchupSwitch, engine/battle/ai/matchup.asm)
+	call IsEnemyTrapped
+	jr c, DontSwitch
+	farcall AI_MatchupSwitch
+	jp c, AI_Switch
 	; fallthrough
 
 DontSwitch:
 	jmp AI_TryItem
-
-; DevNote - switch - this switches with probabilities - 50%, 80%, 96% depending on switch score
-SwitchOften:
-    call CheckSetUp
-    jp c, DontSwitch
-	callfar CheckAbleToSwitch
-	ld a, [wEnemySwitchMonParam]
-	and $f0
-	jp z, DontSwitch
-
-	cp $10
-	jr nz, .not_10
-	call Random
-	cp 50 percent + 1
-	jr c, .switch
-	jp DontSwitch
-.not_10
-
-	cp $20
-	jr nz, .not_20
-	call Random
-	cp 79 percent - 1
-	jr c, .switch
-	jp DontSwitch
-.not_20
-
-	; $30
-	call Random
-	cp 4 percent
-	jp c, DontSwitch
-
-.switch
-	ld a, [wEnemySwitchMonParam]
-	and $f
-	inc a
-	; In register 'a' is the number (1-6) of the mon to switch to
-	ld [wEnemySwitchMonIndex], a
-	jp AI_TrySwitch
-
-; DevNote - switch - this switches with probabilities - 8%, 12%, 80% depending on switch score
-SwitchRarely:
-    call CheckSetUp
-    jp c, DontSwitch
-	callfar CheckAbleToSwitch
-	ld a, [wEnemySwitchMonParam]
-	and $f0
-	jp z, DontSwitch
-
-	cp $10
-	jr nz, .not_10
-	call Random
-	cp 8 percent
-	jr c, .switch
-	jp DontSwitch
-.not_10
-
-	cp $20
-	jr nz, .not_20
-	call Random
-	cp 12 percent
-	jr c, .switch
-	jp DontSwitch
-.not_20
-
-	; $30
-	call Random
-	cp 79 percent - 1
-	jp c, DontSwitch
-
-.switch
-	ld a, [wEnemySwitchMonParam]
-	and $f
-	inc a
-	ld [wEnemySwitchMonIndex], a
-	jp AI_TrySwitch
-
-; DevNote - this switches with probabilities - 20%, 50%, 80% depending on switch score
-SwitchSometimes:
-    call CheckSetUp
-    jp c, DontSwitch
-	callfar CheckAbleToSwitch
-	ld a, [wEnemySwitchMonParam]
-	and $f0
-	jp z, DontSwitch
-
-	cp $10
-	jr nz, .not_10
-	call Random
-	cp 20 percent - 1
-	jr c, .switch
-	jp DontSwitch
-.not_10
-
-	cp $20
-	jr nz, .not_20
-	call Random
-	cp 50 percent + 1
-	jr c, .switch
-	jp DontSwitch
-.not_20
-
-	; $30
-	call Random
-	cp 20 percent - 1
-	jp c, DontSwitch
-
-.switch
-	ld a, [wEnemySwitchMonParam]
-	and $f
-	inc a
-	ld [wEnemySwitchMonIndex], a
-	jp AI_TrySwitch
-
-CheckSetUp:
-; return carry if the enemy mon shouldn't switch by chance:
-; it's at 1/4 HP or less (let it take the hit), or it's set up
-; (+2 Attack or Sp. Atk)
-	farcall AICheckEnemyQuarterHP ; carry if above 1/4 HP
-	jr nc, .stay
-    ld a, [wEnemyAtkLevel]
-	cp BASE_STAT_LEVEL + 2
-	jr nc, .stay
-    ld a, [wEnemySAtkLevel]
-	cp BASE_STAT_LEVEL + 2
-	jr nc, .stay
-	xor a
-	ret
-
-.stay
-	scf
-	ret
 
 AI_TrySwitch:
 ; From repo A: switch to wEnemySwitchMonIndex unless trapped, already set up

@@ -3793,6 +3793,34 @@ wSwitchInSavedEnemyMove:: ds MOVE_LENGTH
 wSwitchInSavedPlayerMove:: ds MOVE_LENGTH
 
 
+SECTION "AI Matchup Sim", WRAM0
+
+; 1-on-1 matchup simulation (engine/battle/ai/matchup.asm); big-endian words
+wMSimEnemyHP:: dw
+wMSimPlayerHP:: dw
+wMSimEnemyDmg:: dw      ; the enemy's best hit (lowest roll)
+wMSimEnemyPrioDmg:: dw  ; its best priority hit
+wMSimPlayerDmg:: dw     ; the player's best hit (highest roll)
+wMSimPlayerPrioDmg:: dw ; its best priority hit
+wMSimEnemyHit:: dw      ; this turn's hits
+wMSimPlayerHit:: dw
+wMSimFlags:: db
+wMSimMode:: db
+wMSimTurns:: db
+wMSimBestIndex:: db
+wMSimBestTaken:: db
+wMSimMoveType:: db
+
+
+SECTION "AI Matchup Save", WRAMX, BANK[5]
+
+; the active enemy mon's battle data while the matchup simulation borrows it
+wMSimSavedStruct:: ds 32 ; wEnemyMonSpecies .. wEnemyMonStructEnd
+wMSimSavedStats:: ds NUM_BATTLE_STATS * 2
+wMSimSavedLevels:: ds 7
+wMSimSavedSubStatus:: ds 5
+
+
 SECTION "Pokedex Grid WRAM", WRAMX[$da00], BANK[5]
 
 ; grid Pokedex (engine/pokedex/pokedex_grid.asm); $d800-$d9bf is

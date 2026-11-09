@@ -1,6 +1,12 @@
 ; Switch-in picker, from repo A (FindMonInOTPartyToSwitchIntoBattle there).
 
 FindForcedReplacementInOTParty:
+	; the mon that wins the 1-on-1 taking the least damage, if any
+	; (AI_MatchupPick, engine/battle/ai/matchup.asm)
+	farcall AI_MatchupPick
+	ld a, b
+	cp $ff
+	ret nz
 ; Which OT mon to send out when the enemy has to replace its active mon (a
 ; KO, U-turn, Baton Pass, Shift mode): FindMonInOTPartyToSwitchIntoBattle,
 ; keeping the battle state it overwrites while it scans (U-turn and Baton

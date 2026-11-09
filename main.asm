@@ -187,6 +187,9 @@ INCLUDE "engine/battle/ai/speed_boost.asm"
 SECTION "AI Ability Immunity", ROMX
 INCLUDE "engine/battle/ai/ability_immunity.asm"
 
+SECTION "AI Matchup", ROMX
+INCLUDE "engine/battle/ai/matchup.asm"
+
 SECTION "AI Immune Moves", ROMX
 INCLUDE "engine/battle/ai/immune_moves.asm"
 

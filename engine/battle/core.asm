@@ -806,6 +806,8 @@ EnemySwitchOrTryItem:
 	; which mon: the switch-in picker (needs another alive mon)
 	farcall FindAliveEnemyMons
 	jr c, .no_switch
+	ld a, 1 ; MSIM_MODE_ENTRY_HIT: switch-ins take the player's hit coming in
+	ld [wMSimMode], a
 	farcall FindForcedReplacementInOTParty
 	inc b
 	ld a, b
