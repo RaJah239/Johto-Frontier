@@ -516,7 +516,6 @@ Pokedex_ReinitDexEntryScreen:
  	ld [wPokedexEntryPageNum], a
  	ld a, DEXENTRY_PICS
  	ld [wPokedexEntryType], a
-	call Pokedex_ScreenOn ; (the area map runs with the LCD on)
  	call Area_Page
  	jr .cont
 .not_area
