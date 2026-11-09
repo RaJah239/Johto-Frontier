@@ -900,6 +900,9 @@ Evos_Page:
  	jmp .nextpage_jump
  
  ; SpriteAnim:
+Pics_Page_BackText:
+	db $67, $68, $69, $6a, "@" ; VRAM 1
+
  Pics_Page:
  	ld a, [wPrevDexEntryJumptableIndex] ; same ram as wStatsScreenFlags
  	ld b, a
@@ -962,6 +965,17 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  	ldh [rVBK], a
  ENDC
 
+	; B > BACK tiles over page numbers $67-$6a, as the evolution page
+	; does (leaving the page reloads the page numbers)
+	ld a, $1
+	ldh [rVBK], a
+	ld de, Pokedex_ExtraTiles tile 5 ; (the evolution page loads tile 0 at $62)
+	ld hl, vTiles2 tile $67
+	lb bc, BANK(Pokedex_ExtraTiles), 4
+	call Request2bpp
+	xor a
+	ldh [rVBK], a
+
  	ld a, [wCurPartySpecies]
  	ld [wCurSpecies], a
  	ld [wTempSpecies], a
@@ -983,6 +997,10 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  	farcall Pokedex_PlaceAnimatedFrontpic
 	farcall Pokedex_PlaceBackPic
  	farcall Dex_Pics_DrawBorder	
+	; B > BACK, as on the evolution page (VRAM 1 page number tiles)
+	hlcoord 15, 16
+	ld de, Pics_Page_BackText
+	call PlaceTileString
  	call WaitBGMap
  	farcall Pokedex_place_Mon_Icon
  	callfar PlaySpriteAnimations

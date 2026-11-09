@@ -608,6 +608,12 @@ _CGB_Pokedex_PicsPage:
 	hlcoord 19, 0, wAttrmap
  	ld [hl], 0 ; remove VRAM 1 bit
  
+; B > BACK (VRAM 1 tiles)
+	hlcoord 15, 16, wAttrmap
+	ld bc, 4
+	ld a, 0 | VRAM_BANK_1
+	call ByteFill
+
  ; animated icon, upper right corner fix
  	hlcoord 4, 13, wAttrmap
  	ld [hl], 5 | X_FLIP | VRAM_BANK_1
