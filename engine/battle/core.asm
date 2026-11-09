@@ -2705,7 +2705,7 @@ ShowSetEnemyMonAndSendOutAnimation:
 
 ReplayEnemyCry:
 ; replay the foe's cry when its attack KO'd the player,
-; lowering the music instead of stopping it
+; with the music still playing
 ; wPlayerFaintedByEnemy is set by DoPlayerDamage and cleared here
 	ld a, [wPlayerFaintedByEnemy]
 	and a
@@ -2764,8 +2764,9 @@ ReplayEnemyCry:
 .skip_frontpic
 
 	; start the cry without waiting. it normally sets wsfxpriority to mute
-	; the music; clear that and lower the volume instead, so the music keeps
-	; playing softly underneath the cry
+	; the music; clear that, so the music keeps playing underneath the cry.
+	; (the master volume isn't lowered: NR50 is shared with the cry, which
+	; came out at half volume)
 	ld a, $f
 	ld [wCryTracks], a
 	ld a, [wEnemyMonSpecies]
@@ -2773,7 +2774,6 @@ ReplayEnemyCry:
 
 	xor a
 	ld [wSFXPriority], a
-	call LowVolume
 
 	pop af
 	jr c, .finish
@@ -2793,9 +2793,8 @@ ReplayEnemyCry:
 	ld a, $1
 	ldh [hBGMapMode], a ; AnimateFrontpic leaves this cleared
 
-	; wait for the cry to finish, then bring the music back up
+	; wait for the cry to finish
 	call WaitSFX
-	call MaxVolume
 
 	pop af
 	ld [wCurSpecies], a
