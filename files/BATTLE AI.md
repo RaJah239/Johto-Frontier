@@ -116,7 +116,7 @@ Each kind of move gets its own check. The main ones:
 - **Special priority moves:** Blastoise's Iron Head and Drowzee's and Hypno's Zen Headbutt count as priority moves
 
 ### 5. Final attack
-When it judges that setting up is safe, it strongly avoids stall moves: Leer, Growl, Disable, Counter, Leech Seed, Growth, Agility, Screech, Harden, Defense Curl, Light Screen, Haze, Reflect, Focus Energy, Amnesia, Transform, Splash and Substitute.
+When you could knock it out this turn (your strongest roll), it strongly avoids stall moves, so it attacks while it still can: Leer, Growl, Disable, Counter, Leech Seed, Growth, Agility, Screech, Harden, Defense Curl, Light Screen, Haze, Reflect, Focus Energy, Amnesia, Transform, Splash and Substitute.
 
 ### 6. Aggressive
 It finds its single most damaging move against you and slightly avoids every other attack, so it usually uses its strongest hit. These moves don't count as its strongest:
