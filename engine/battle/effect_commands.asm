@@ -6860,10 +6860,6 @@ TenPercentBoost:
 	ld b, 4
 	jmp Divide
 
-IncrementC:
-	inc c
-	ret
-
 EffectCommands_50_50:
 	call BattleRandom
 	cp 50 percent + 1

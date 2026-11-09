@@ -447,7 +447,7 @@ _BattleCommand_CheckHit:
 	call SnowCloak
 
 .finish_foe_snow_cloak
-	ld a, [wBattleMonSpecies]
+	ld a, [wEnemyMonSpecies] ; the target (it was the attacker's species)
 	call FadeIn
 
 	ldh a, [hBattleTurn]
@@ -468,7 +468,7 @@ _BattleCommand_CheckHit:
 	call SnowCloak
 
 .finish_player_snow_cloak
-	ld a, [wEnemyMonSpecies]
+	ld a, [wBattleMonSpecies] ; the target (it was the attacker's species)
 	call FadeIn
 
 .got_acc_eva
@@ -594,6 +594,13 @@ INCLUDE "data/abilities/stonebound_mons.asm"
 INCLUDE "data/abilities/hypnotic_aura_mons.asm"
 INCLUDE "data/abilities/lullaby_mastery_mons.asm"
 INCLUDE "data/abilities/meteor_lock_mons.asm"
+
+IncrementC:
+; For FadeIn / SnowCloak (their lists call z, IncrementC):
+; it has to be in this bank
+	inc c
+	ret
+
 INCLUDE "data/abilities/fade_in_mons.asm"
 INCLUDE "data/abilities/snow_cloak_mons.asm"
 INCLUDE "data/abilities/keen_eyes_mons.asm"
