@@ -36,92 +36,16 @@ AI_Aggressive:
 	cp EFFECT_EXPLOSION
 	jr z, .checkmove
 
-; Dismiss ground moves if the player has levitate
-; =========================
-; === Ability: Levitate ===
-; =========================
+; Don't count moves the player's ability makes it immune to (repo A:
+; DoesEnemyMoveTypeTriggerPlayerAbilityImmunity; here the battle's own
+; tables: Levitate, Waterproof, Flame Ward, Grounded, Immunity)
 	ld a, [wEnemyMoveStruct + MOVE_TYPE]
 	and TYPE_MASK
-	cp GROUND
-	jr nz, .check_poison_immune
-	ld a, [wBattleMonSpecies]
 	push hl
 	push de
 	push bc
-	ld hl, LevitatePokemon
-	call IsInByteArray
-	pop bc
-	pop de
-	pop hl
-	jr c, .checkmove
-
-.check_poison_immune
-; Dismiss poison moves if the player has immunity
-; =========================
-; === Ability: Immunity ===
-; =========================
-	cp POISON
-	jr nz, .check_fire_absorb
-	ld a, [wBattleMonSpecies]
-	push hl
-	push de
-	push bc
-	ld hl, ImmunityPokemon_AI
-	call IsInByteArray
-	pop bc
-	pop de
-	pop hl
-	jr c, .checkmove
-
-.check_fire_absorb
-; Dismiss fire moves if the player has fire absorb
-; ============================
-; === Ability: Fire Absorb ===
-; ============================
-	cp FIRE
-	jr nz, .check_water_absorb
-	ld a, [wBattleMonSpecies]
-	push hl
-	push de
-	push bc
-	ld hl, FlameWardPokemon_AI
-	call IsInByteArray
-	pop bc
-	pop de
-	pop hl
-	jr c, .checkmove
-
-.check_water_absorb
-; Dismiss water moves if the player has water absorb
-; ============================
-; === Ability: Water Absorb ==
-; ============================
-	cp WATER
-	jr nz, .check_volt_absorb
-	ld a, [wBattleMonSpecies]
-	push hl
-	push de
-	push bc
-	ld hl, WaterproofPokemon_AI
-	call IsInByteArray
-	pop bc
-	pop de
-	pop hl
-	jr c, .checkmove
-
-.check_volt_absorb
-; Dismiss electric moves if the player has volt absorb
-; ============================
-; === Ability: Volt Absorb ===
-; ============================
-	cp ELECTRIC
-	jr nz, .continue
-	ld a, [wBattleMonSpecies]
-	push hl
-	push de
-	push bc
-	ld hl, GroundedPokemon_AI
-	call IsInByteArray
+	ld b, a
+	farcall AI_IsPlayerImmuneByAbility
 	pop bc
 	pop de
 	pop hl
