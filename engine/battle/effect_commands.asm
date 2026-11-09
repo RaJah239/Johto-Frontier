@@ -2437,6 +2437,10 @@ CheckDamageStatsCritical:
 ; - when it attacks: the target's Defense / Sp. Def stages
 ; - when it is hit: the attacker's Attack / Sp. Atk stages
 ;   (Defense for Body Press)
+; and in accuracy (BattleCommand_CheckHit.StatModifiers, effect_commands_far):
+; - when it attacks: the target's evasion stage
+; - when it is attacked: the attacker's accuracy stage
+;   (Snow Cloak / Fade In still add their evasion: abilities, not stages)
 ; Raised and lowered stages alike. Burn / frostbite still halve the
 ; attacker's stat. PlayerAttackDamage / EnemyAttackDamage apply it, so the
 ; AI's damage estimates and the move info damage preview see it too; the
@@ -2459,6 +2463,16 @@ IsUnaware:
 	ld hl, UnawarePokemon
 	call IsInByteArray
 	jmp PopBCDEHL
+
+IsAttackerUnaware:
+; Carry if the mon whose turn it is (hBattleTurn) has Unaware.
+	call GetCurrentMon
+	jr IsUnaware
+
+IsTargetUnaware:
+; Carry if the mon being attacked has Unaware.
+	call GetOpposingMon
+	jr IsUnaware
 
 UnawareDefenseStat:
 ; hl = the target's stage-applied defensive stat (wEnemyMonDefense etc.).

@@ -438,6 +438,7 @@ _BattleCommand_CheckHit:
 	ld b, a
 	ld a, [wEnemyEvaLevel]
 	ld c, a
+	call .UnawareStages
 
 	ld a, [wBattleWeather]
 	cp WEATHER_HAIL
@@ -458,6 +459,7 @@ _BattleCommand_CheckHit:
 	ld b, a
 	ld a, [wPlayerEvaLevel]
 	ld c, a
+	call .UnawareStages
 
 	ld a, [wBattleWeather]
 	cp WEATHER_HAIL
@@ -555,6 +557,22 @@ _BattleCommand_CheckHit:
 	ret
 
 KeenEyesText: db "Keen Eyes@"
+
+_BattleCommand_CheckHit.UnawareStages:
+; b = the attacker's accuracy stage, c = the target's evasion stage.
+; Unaware: an Unaware attacker ignores the target's evasion stage, and an
+; Unaware target ignores the attacker's accuracy stage. Keeps hl.
+	push hl
+	farcall IsAttackerUnaware ; (keeps bc)
+	jr nc, .attacker_not_unaware
+	ld c, BASE_STAT_LEVEL
+.attacker_not_unaware
+	farcall IsTargetUnaware
+	jr nc, .done
+	ld b, BASE_STAT_LEVEL
+.done
+	pop hl
+	ret
 
 AccuracyCalc:
 	ldh [hMultiplier], a
