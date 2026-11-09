@@ -655,18 +655,23 @@ DexGrid_Redraw:
 	ret
 
 .entry
-	xor a
-	ldh [hOAMUpdate], a
-	lb de, $e4, $e4
-	call DmgToCgbObjPals
+; The previous screen (blacked out, or the dex entry) stays up until the
+; grid's tilemap goes to the BG map: the grid's palettes and OAM wait to go
+; out in the same frame, so the previous screen never shows in the grid's
+; colours (its green background would turn red).
 	ld a, TRUE
 	call DexGrid_BuildTilemap
 	call DexGrid_CommitGrid
-	call DexGrid_DrawTopHalf
+	call DexGrid_DrawTopHalf ; (leaves the palettes to us)
+	ld a, $e4
+	call DmgToCgbBGPals
+	lb de, $e4, $e4
+	call DmgToCgbObjPals
+	ld b, 3 | 1 << 2 ; tiles, attributes, the palettes and OAM in one frame
+	newfarcall _SafeCopyTilemapAtOnce
 	xor a
 	ld [wDexGridFullTilemap], a
-	ld b, 3 ; tiles and attributes in one frame
-	farjp _SafeCopyTilemapAtOnce
+	ret
 
 DexGrid_ComputeT0:
 ; The cursor box's tile columns (wDexGridCellCol's cell):
@@ -719,6 +724,9 @@ DexGrid_DrawTopHalf:
 	ld hl, vTiles1 tile (DEXGRID_TOP_TILE - $80 + DEXGRID_TOP_W)
 	ld c, 2 * DEXGRID_TOP_W
 	call DexGrid_Upload
+	ld a, [wDexGridFullTilemap]
+	and a
+	ret nz ; on entry, DexGrid_Redraw applies the palettes after the tilemap
 	ld a, $e4
 	jmp DmgToCgbBGPals
 
