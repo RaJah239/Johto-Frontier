@@ -3655,11 +3655,11 @@ Pokedex_MoveArrowCursor:
 	ld a, [hl]
 	and D_LEFT | D_UP
 	and b
-	jr nz, .move_left_or_up
+	jr nz, .pressed_left_or_up
 	ld a, [hl]
 	and D_RIGHT | D_DOWN
 	and b
-	jr nz, .move_right_or_down
+	jr nz, .pressed_right_or_down
 	ld a, [hl]
 	and SELECT
 	and b
@@ -3676,6 +3676,34 @@ Pokedex_MoveArrowCursor:
 	and b
 	jr nz, .move_right_or_down
 	jr .no_action
+
+.pressed_left_or_up
+; a new press loops around in left/right menus (the dex entry's tab bar);
+; holding the D-pad still stops at the ends
+	ld a, [wDexArrowCursorPosIndex]
+	and a
+	jr nz, .move_left_or_up
+	ld a, b
+	and D_LEFT
+	jr z, .no_action
+	call Pokedex_GetArrowCursorPos
+	ld [hl], " "
+	ld a, c
+	ld [wDexArrowCursorPosIndex], a
+	jr .update_cursor_pos
+
+.pressed_right_or_down
+	ld a, [wDexArrowCursorPosIndex]
+	cp c
+	jr c, .move_right_or_down
+	ld a, b
+	and D_RIGHT
+	jr z, .no_action
+	call Pokedex_GetArrowCursorPos
+	ld [hl], " "
+	xor a
+	ld [wDexArrowCursorPosIndex], a
+	jr .update_cursor_pos
 
 .move_left_or_up
 	ld a, [wDexArrowCursorPosIndex]
