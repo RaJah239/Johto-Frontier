@@ -80,6 +80,7 @@ DEF MSIM_INF_PAR_F  EQU 5
 
 ; wMSimMode
 DEF MSIM_MODE_ENTRY_HIT_F EQU 0 ; candidates take the player's best hit as they come in
+DEF MSIM_MODE_SETUP_F     EQU 1 ; AI_SimMoveChoice's 2nd pass: boosting and status moves
 
 DEF MSIM_SAVED_STRUCT_LENGTH EQU 32 ; wEnemyMonSpecies .. wEnemyMonStructEnd
 DEF MSIM_SAVED_LEVELS_LENGTH EQU 7  ; wEnemyAtkLevel .. wEnemyEvaLevel
@@ -2094,6 +2095,8 @@ MSim_BoostEffects:
 ; wins, the winners that keep the most HP (100%-accurate moves first) get
 ; score 1 and every other usable move at least 21. If none wins, the move
 ; that takes the most HP off the player gets a small nudge.
+; Boosting and status moves are only played out when no attack (or heal)
+; wins; a boost whose stats are all maxed never is.
 
 AI_MoveChoiceFinal:
 ; Farcalled by AIChooseMove after NormalizeAIMoveScores.
@@ -2145,6 +2148,12 @@ AI_SimMoveChoice:
 	ld [wMSimBestDealt], a
 	dec a
 	ld [wMSimDealtIndex], a
+	; 1st pass: attacks (and heals); 2nd pass, only if none of those wins:
+	; boosting and status moves. Setting up when attacking already wins just
+	; gives the player time (to heal, switch or set up itself).
+	ld hl, wMSimMode
+	res MSIM_MODE_SETUP_F, [hl]
+.pass
 	ld c, 0
 .eval_loop
 	call .slot
@@ -2186,6 +2195,16 @@ AI_SimMoveChoice:
 	cp NUM_MOVES
 	jr nz, .eval_loop
 .evaluated
+	ld hl, wMSimMode
+	bit MSIM_MODE_SETUP_F, [hl]
+	jr nz, .passes_done
+	set MSIM_MODE_SETUP_F, [hl]
+	ld a, [wMSimBestMask]
+	and a
+	jp z, .pass
+.passes_done
+	ld hl, wMSimMode
+	res MSIM_MODE_SETUP_F, [hl]
 	call MSim_End
 
 	ld a, [wMSimBestMask]
@@ -2283,6 +2302,9 @@ MSim_EvalSlot:
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
 	jr z, .non_damaging
+	ld a, [wMSimMode]
+	bit MSIM_MODE_SETUP_F, a
+	jp nz, .not_simulated ; (1st pass)
 
 	; damaging: its own damage and priority on the first turn
 	ld a, MSIM_T1_CAPTURE
@@ -2315,6 +2337,28 @@ MSim_EvalSlot:
 	add hl, de
 	jr .find_boost
 .boost
+	ld a, [wMSimMode]
+	bit MSIM_MODE_SETUP_F, a
+	jp z, .not_simulated ; (2nd pass)
+	; a boost that raises nothing (its stats are all maxed) isn't played out
+	push hl
+	ld de, wEnemyStatLevels
+	ld b, NUM_BATTLE_STATS
+.useful
+	ld a, [hli]
+	and a
+	jr z, .useful_next
+	ld a, [de]
+	cp MAX_STAT_LEVEL
+	jr c, .is_useful
+.useful_next
+	inc de
+	dec b
+	jr nz, .useful
+	pop hl
+	jp .not_simulated
+.is_useful
+	pop hl
 	push hl
 	ld hl, wMSimEnemyHP
 	ld de, wMSimStartHP
@@ -2337,11 +2381,14 @@ MSim_EvalSlot:
 .not_boost
 	ld a, c
 	cp EFFECT_HEAL
-	jr z, .heal
+	jp z, .heal
 	cp EFFECT_SLACK_OFF
-	jr z, .heal
+	jp z, .heal
 	cp EFFECT_WEATHER_HEAL
-	jr z, .heal
+	jp z, .heal
+	ld a, [wMSimMode]
+	bit MSIM_MODE_SETUP_F, a
+	jp z, .not_simulated ; (2nd pass)
 	call MSim_T1Inflict
 	jp z, .not_simulated
 	ld [wMSimT1Effect], a
@@ -2394,6 +2441,9 @@ MSim_EvalSlot:
 	jr .result
 
 .heal
+	ld a, [wMSimMode]
+	bit MSIM_MODE_SETUP_F, a
+	jp nz, .not_simulated ; (1st pass)
 	; only when the healing rule would heal now (it can't KO first, it's in
 	; KO range, and the heal beats the player's hit); otherwise healing
 	; first just wastes a turn, though it would end the fight with more HP
