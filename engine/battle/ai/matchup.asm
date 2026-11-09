@@ -713,9 +713,18 @@ MSim_ComputeDamages:
 	ld de, wBattleMonMoves
 	ld hl, wBattleMonPP
 	ld b, NUM_MOVES
+	; locked into one move: Choice item / Encore, or a rampage (Outrage,
+	; Thrash) or Rollout in progress
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_ENCORED, a
+	jr nz, .player_locked
+	ld a, [wPlayerSubStatus3]
+	bit SUBSTATUS_RAMPAGE, a
+	jr nz, .player_locked
+	ld a, [wPlayerSubStatus1]
+	bit SUBSTATUS_ROLLOUT, a
 	jr z, .player_loop
+.player_locked
 	ld a, [wCurMoveNum]
 	ld c, a
 	ld a, e

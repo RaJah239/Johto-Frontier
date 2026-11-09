@@ -173,7 +173,7 @@ So it picks Toxic, Thunder Wave, Swords Dance or Recover because they *win the f
 At the start of every turn, unless it's trapped, the AI plays out a one-on-one between the Pokémon that's out and yours, turn by turn, until one of them goes down.
 
 **How a 1-on-1 is played out:**
-- Each side uses its strongest attack every turn. It uses a priority move instead when that move would knock the other out for sure. Blastoise's Iron Head and Drowzee's and Hypno's Zen Headbutt count as priority moves.
+- Each side uses its strongest attack every turn. If you're locked into one move (a Choice item, Encore, or the middle of Outrage, Thrash, Petal Dance or Rollout), only that move counts for you, so it will bring in a Pokémon that's immune to it. It uses a priority move instead when that move would knock the other out for sure. Blastoise's Iron Head and Drowzee's and Hypno's Zen Headbutt count as priority moves.
 - The AI's attacks use their **weakest** damage roll and yours your **strongest**, so it only counts on what's certain. There are no critical hits and every move hits.
 - Turn order:
   - the higher priority goes first
