@@ -179,7 +179,7 @@ If it didn't decide to switch above, it looks at how its team matches up against
   - that other Pokémon only has the super-effective move, or
   - there's no immune Pokémon, but one of its Pokémon resists you, has at least 1/4 of its HP and has a super-effective move, while your moves do well against the one that's out
 
-It then switches with a 20%, 50% or 80% chance, depending on how much it wants to. It won't do this while it's at +2 Attack or Sp. Atk.
+It then switches with a 20%, 50% or 80% chance, depending on how much it wants to. It won't do this while it's at +2 Attack or Sp. Atk, or at 1/4 of its HP or less (it stays in and takes the hit).
 
 ### When it won't switch
 It never switches out when:

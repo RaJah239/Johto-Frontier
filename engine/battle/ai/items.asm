@@ -180,24 +180,23 @@ SwitchSometimes:
 	jp AI_TrySwitch
 
 CheckSetUp:
-; return carry if enemy mon has set up
-; don't switch if enemy mon is already set up
-; also dont switch if enemy mon low on health
-	farcall AICheckEnemyQuarterHP
-	jr nc, .dontSwitch
+; return carry if the enemy mon shouldn't switch by chance:
+; it's at 1/4 HP or less (let it take the hit), or it's set up
+; (+2 Attack or Sp. Atk)
+	farcall AICheckEnemyQuarterHP ; carry if above 1/4 HP
+	jr nc, .stay
     ld a, [wEnemyAtkLevel]
 	cp BASE_STAT_LEVEL + 2
-	jr nc, .switch
+	jr nc, .stay
     ld a, [wEnemySAtkLevel]
 	cp BASE_STAT_LEVEL + 2
-	jr nc, .switch
-.dontSwitch
-; not set up
-    xor a
-    ret
-.switch
-    scf
-    ret
+	jr nc, .stay
+	xor a
+	ret
+
+.stay
+	scf
+	ret
 
 AI_TrySwitch:
 ; From repo A: switch to wEnemySwitchMonIndex unless trapped, already set up
