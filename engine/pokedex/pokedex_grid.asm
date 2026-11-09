@@ -618,6 +618,9 @@ DexGrid_SetMonPalettes:
 	ld hl, DexGridPalUnseen
 	ld de, wBGPals1 palette PAL_DEXGRID_PIC
 	call DexGrid_SetStaticPalettes.copy
+	ld hl, DexGridPalTypesBase
+	ld de, wBGPals1 palette PAL_DEXGRID_TYPES
+	call DexGrid_SetStaticPalettes.copy
 .pic_sprites
 	; the picture's sprites use the same colours
 	ld hl, wBGPals1 palette PAL_DEXGRID_PIC
