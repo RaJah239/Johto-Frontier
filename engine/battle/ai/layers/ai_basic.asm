@@ -167,96 +167,20 @@ AI_Basic:
 	jmp c, .discourage ; discourage if sub is up and blocks move - loop back to check move
 
 .check_levitate
-; Dismiss ground moves if the player has levitate
-; =========================
-; === Ability: Levitate ===
-; =========================
+; Dismiss moves the player's ability makes it immune to (repo A:
+; DoesEnemyMoveTypeTriggerPlayerAbilityImmunity; here the battle's own
+; tables: Levitate, Waterproof, Flame Ward, Grounded, Immunity)
 	ld a, [wEnemyMoveStruct + MOVE_TYPE]
 	and TYPE_MASK
-	cp GROUND
-	jr nz, .check_poison_immune
-	ld a, [wBattleMonSpecies]
 	push hl
 	push de
 	push bc
-	ld hl, LevitatePokemon
-	call IsInByteArray
+	ld b, a
+	farcall AI_IsPlayerImmuneByAbility
 	pop bc
 	pop de
 	pop hl
-	jmp c, .discourage ; discourage if levitating pokemon - loop back to check move
-
-.check_poison_immune
-; Dismiss poison moves if the player has immunity
-; =========================
-; === Ability: Immunity ===
-; =========================
-	cp POISON
-	jr nz, .check_fire_absorb
-	ld a, [wBattleMonSpecies]
-	push hl
-	push de
-	push bc
-	ld hl, ImmunityPokemon_AI
-	call IsInByteArray
-	pop bc
-	pop de
-	pop hl
-	jmp c, .discourage ; discourage if poison immune pokemon - loop back to check move
-
-.check_fire_absorb
-; Dismiss fire moves if the player has fire absorb
-; ============================
-; === Ability: Fire Absorb ===
-; ============================
-	cp FIRE
-	jr nz, .check_water_absorb
-	ld a, [wBattleMonSpecies]
-	push hl
-	push de
-	push bc
-	ld hl, FlameWardPokemon_AI
-	call IsInByteArray
-	pop bc
-	pop de
-	pop hl
-	jmp c, .discourage ; discourage if fire absorb pokemon - loop back to check move
-
-.check_water_absorb
-; Dismiss water moves if the player has water absorb
-; ============================
-; === Ability: Water Absorb ==
-; ============================
-	cp WATER
-	jr nz, .check_volt_absorb
-	ld a, [wBattleMonSpecies]
-	push hl
-	push de
-	push bc
-	ld hl, WaterproofPokemon_AI
-	call IsInByteArray
-	pop bc
-	pop de
-	pop hl
-	jmp c, .discourage ; discourage if water absorb pokemon - loop back to check move
-
-.check_volt_absorb
-; Dismiss electric moves if the player has volt absorb
-; ============================
-; === Ability: Volt Absorb ===
-; ============================
-	cp ELECTRIC
-	jr nz, .check_power
-	ld a, [wBattleMonSpecies]
-	push hl
-	push de
-	push bc
-	ld hl, GroundedPokemon_AI
-	call IsInByteArray
-	pop bc
-	pop de
-	pop hl
-	jmp c, .discourage ; discourage if poison immune pokemon - loop back to check move
+	jmp c, .discourage
 
 .check_power
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
@@ -299,7 +223,8 @@ AI_Basic:
 	jr z, .explode_or_heal
 
 ; don't encourage recoil moves as much
-; except for rock head pokemon
+; except for rock head pokemon (repo A: its own species list)
+	ld a, [wEnemyMonSpecies]
 	push hl
 	push de
 	push bc
@@ -323,14 +248,9 @@ AI_Basic:
 	call AIHasMoveEffect
 	jr c, .explode_or_heal
 
-	ld b, EFFECT_SLACK_OFF
+	ld b, EFFECT_SLACK_OFF ; (this repo's other healing move effect)
 	call AIHasMoveEffect
 	jr c, .explode_or_heal
-
-; don't encourage explosion as much
-	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
-	cp EFFECT_EXPLOSION
-	jr z, .explode_or_heal
 
 .check_accuracy
 ; encourage more accurate moves if they can kill
