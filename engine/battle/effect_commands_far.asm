@@ -472,6 +472,7 @@ _BattleCommand_CheckHit:
 	call FadeIn
 
 .got_acc_eva
+	ld a, c
 	cp b
 	jr c, .skip_foresight_check
 
