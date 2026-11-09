@@ -104,3 +104,24 @@ MACRO compare_hl ; 16-bit value
 	cp HIGH(\1)
 .compare_hl\@
 ENDM
+
+MACRO skip_evolutions
+; hl = a species' evolutions in "Evolutions and Attacks" (read with GetFarByte):
+; hl = its learnset. Each evolution is: method, its parameter(s), species (dw).
+; Clobbers a.
+.skip_evolutions\@
+	ld a, BANK("Evolutions and Attacks")
+	call GetFarByte
+	inc hl
+	and a
+	jr z, .skipped_evolutions\@
+	cp EVOLVE_STAT
+	jr nz, .one_parameter\@
+	inc hl
+.one_parameter\@
+	inc hl ; parameter
+	inc hl ; species
+	inc hl
+	jr .skip_evolutions\@
+.skipped_evolutions\@
+ENDM

@@ -1,12 +1,12 @@
 SECTION "Evolutions and Attacks", ROMX
 
 ; Evos+attacks data structure:
-; - Evolution methods:
-;    * db EVOLVE_LEVEL, level, species
-;    * db EVOLVE_ITEM, used item, species
-;    * db EVOLVE_TRADE, held item (or -1 for none), species
-;    * db EVOLVE_HAPPINESS, TR_* constant (ANYTIME, MORNDAY, EVENITE), species
-;    * db EVOLVE_STAT, level, ATK_*_DEF constant (LT, GT, EQ), species
+; - Evolution methods (the species is its 16-bit index, a dw):
+;    * db EVOLVE_LEVEL, level / dw species
+;    * db EVOLVE_ITEM, used item / dw species
+;    * db EVOLVE_TRADE, held item (or -1 for none) / dw species
+;    * db EVOLVE_HAPPINESS, TR_* constant (ANYTIME, MORNDAY, EVENITE) / dw species
+;    * db EVOLVE_STAT, level, ATK_*_DEF constant (LT, GT, EQ) / dw species
 ; - db 0 ; no more evolutions
 ; - Learnset (in increasing level order):
 ;    * db level, move
@@ -18,9 +18,11 @@ INCLUDE "data/pokemon/evos_attacks_pointers.asm"
 EvosAttacks::
 
 CyndaquilEvosAttacks:
-	db EVOLVE_LEVEL, 16, QUILAVA
+	db EVOLVE_LEVEL, 16
+	dw QUILAVA
 QuilavaEvosAttacks:
-	db EVOLVE_LEVEL, 36, TYPHLOSION
+	db EVOLVE_LEVEL, 36
+	dw TYPHLOSION
 TyphlosionEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE

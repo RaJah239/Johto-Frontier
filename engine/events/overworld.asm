@@ -187,7 +187,8 @@ OW_SkipEvolutions:
 	jr nz, .no_extra_skip
 	inc hl
 .no_extra_skip
-	inc hl
+	inc hl ; parameter
+	inc hl ; species (dw)
 	inc hl
 	jr OW_SkipEvolutions
 

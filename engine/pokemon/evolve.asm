@@ -192,7 +192,10 @@ EvolveAfterBattle_MasterLoop:
 
 	push hl
 
-	ld a, [hl]
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetPokemonIDFromIndex
 	ld [wEvolutionNewSpecies], a
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
@@ -226,10 +229,9 @@ EvolveAfterBattle_MasterLoop:
 
 	pop hl
 
-	ld a, [hl]
+	ld a, [wEvolutionNewSpecies]
 	ld [wCurSpecies], a
 	ld [wTempMonSpecies], a
-	ld [wEvolutionNewSpecies], a
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
 
@@ -296,7 +298,8 @@ EvolveAfterBattle_MasterLoop:
 	call SetSeenAndCaughtMon
 
 	ld a, [wTempSpecies]
-	cp UNOWN
+	call GetPokemonIndexFromID
+	compare_hl UNOWN
 	jr nz, .skip_unown
 
 	ld hl, wTempMonDVs
@@ -318,6 +321,7 @@ EvolveAfterBattle_MasterLoop:
 .dont_evolve_2
 	inc hl
 .dont_evolve_3
+	inc hl ; species (dw)
 	inc hl
 	jmp .loop
 
@@ -454,7 +458,15 @@ LearnLevelMoves:
 .skip_evos
 	ld a, [hli]
 	and a
-	jr nz, .skip_evos
+	jr z, .find_move
+	cp EVOLVE_STAT
+	jr nz, .skip_evo_parameter
+	inc hl
+.skip_evo_parameter
+	inc hl ; parameter
+	inc hl ; species (dw)
+	inc hl
+	jr .skip_evos
 
 .find_move
 	ld a, [hli]
@@ -519,8 +531,15 @@ FillMoves:
 .GoToAttacks:
 	ld a, [hli]
 	and a
-	jr nz, .GoToAttacks
-	jr .GetLevel
+	jr z, .GetLevel
+	cp EVOLVE_STAT
+	jr nz, .skip_evo_parameter
+	inc hl
+.skip_evo_parameter
+	inc hl ; parameter
+	inc hl ; species (dw)
+	inc hl
+	jr .GoToAttacks
 
 .NextMove:
 	pop de
@@ -629,10 +648,13 @@ GetPreEvolution:
 ; Return carry and the new species in wCurPartySpecies
 ; if a pre-evolution is found.
 
-	ld c, 0
+	ld a, [wCurPartySpecies]
+	call GetPokemonIndexFromID
+	ld d, h
+	ld e, l ; de = the species' 16-bit index
+	ld bc, 0 ; 16-bit index - 1 of the species being checked
 .loop ; For each Pokemon...
 	ld hl, EvosAttacksPointers
-	ld b, 0
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
@@ -648,25 +670,32 @@ GetPreEvolution:
 
 .not_tyrogue
 	inc hl
-	ld a, [wCurPartySpecies]
-	cp [hl]
-	jr z, .found_preevo
-	inc hl
+	ld a, [hli] ; species (dw)
+	cp e
+	jr nz, .next_evolution
 	ld a, [hl]
-	and a
-	jr nz, .loop2
+	cp d
+	jr z, .found_preevo
+.next_evolution
+	inc hl
+	jr .loop2
 
 .no_evolve
-	inc c
+	inc bc
 	ld a, c
-	cp NUM_POKEMON
-	jr c, .loop
+	cp LOW(NUM_POKEMON)
+	jr nz, .loop
+	ld a, b
+	cp HIGH(NUM_POKEMON)
+	jr nz, .loop
 	and a
 	ret
 
 .found_preevo
-	inc c
-	ld a, c
+	inc bc
+	ld h, b
+	ld l, c
+	call GetPokemonIDFromIndex
 	ld [wCurPartySpecies], a
 	scf
 	ret

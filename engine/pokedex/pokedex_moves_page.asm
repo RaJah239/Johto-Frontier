@@ -89,12 +89,7 @@ Pokedex_Calc_LvlMovesPtr:
 	add hl, bc
 	ld a, BANK(EvosAttacksPointers)
 	call GetFarWord
-.SkipEvoBytes	
-	ld a, BANK("Evolutions and Attacks")
-	call GetFarByte
-	inc hl
-	and a
-	jr nz, .SkipEvoBytes
+	skip_evolutions
 .CalcPageoffset
 	call Pokedex_PrintPageNum ; page num is also returned in a
 	ld c, MAX_NUM_MOVES

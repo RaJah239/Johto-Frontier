@@ -469,20 +469,21 @@ PlacePartyMonEvoStoneCompatibility:
 	and a
 	jr z, .nope
 	cp EVOLVE_STAT
- 	jr nz, .not_four_bytes
- 	inc hl
- .not_four_bytes	
+	jr nz, .one_parameter
 	inc hl
-	inc hl
+.one_parameter
 	cp EVOLVE_ITEM
-	jr nz, .loop2
-	dec hl
-	dec hl
+	jr nz, .next_evolution
 	ld a, [wCurItem]
 	cp [hl]
+	jr z, .able
+.next_evolution
+	inc hl ; parameter
+	inc hl ; species (dw)
 	inc hl
-	inc hl
-	jr nz, .loop2
+	jr .loop2
+
+.able
 	ld de, .string_able
 	ret
 

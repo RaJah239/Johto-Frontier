@@ -148,9 +148,8 @@ ENDC
  .extra_byte_1
 	inc hl
 .no_extra_1
-	inc hl ; species byte
-	ld a, BANK("Evolutions and Attacks")
-	call GetFarByte ; species
+	inc hl ; species (dw)
+	call EVO_GetSpecies
 	ld [wNamedObjectIndex], a
 
 	; will be overwritten if we havent seen mon, and the option is enabled
@@ -232,7 +231,8 @@ IF DEF(EVOLVE_HELD)
  .extra_byte_2
 	inc hl
 .no_extra_2
-	inc hl ; species byte
+	inc hl ; species (dw)
+	inc hl
 	inc hl ; points to next evo manner or 0
 	ld a, BANK(EvosAttacksPointers)
 	call GetFarByte
@@ -283,10 +283,9 @@ IF DEF(EVOLVE_HELD)
 	inc hl
 .no_extra_3
 	inc hl
-	inc hl ; species byte
+	inc hl ; species (dw)
 	ld a, BANK("Evolutions and Attacks")
-	call GetFarByte ; stage 2 species
-	call GetPokemonIndexFromID
+	call GetFarWord ; stage 2 species' 16-bit index
 	ld bc, EvosAttacksPointers - 2
 	add hl, hl
 	add hl, bc
@@ -1012,7 +1011,8 @@ EVO_set_multi_page_ptr:
 	inc hl
 .no_extra_4
 	inc hl
-	inc hl ; species byte
+	inc hl ; species (dw)
+	inc hl
 	inc hl ; next EVO manner byte
 	jr .loop
 .get_stage2:
@@ -1030,15 +1030,24 @@ EVO_set_multi_page_ptr:
 	inc hl
 .no_extra_5
 	inc hl
-	inc hl ; species byte
+	inc hl ; species (dw)
 	ld a, BANK("Evolutions and Attacks")
-	call GetFarByte ; stage 2 species		
-	call GetPokemonIndexFromID
+	call GetFarWord ; stage 2 species' 16-bit index
 	ld bc, EvosAttacksPointers - 2
 	add hl, hl
 	add hl, bc
 	ld a, BANK(EvosAttacksPointers)
 	call GetFarWord	
+	ret
+
+EVO_GetSpecies:
+; hl = a species (dw, 16-bit index) in "Evolutions and Attacks": a = its
+; 8-bit ID. Preserves bc, de, hl.
+	push hl
+	ld a, BANK("Evolutions and Attacks")
+	call GetFarWord
+	call GetPokemonIDFromIndex
+	pop hl
 	ret
 
 EVO_place_CaughtIcon:

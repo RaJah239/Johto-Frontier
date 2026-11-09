@@ -1169,9 +1169,7 @@ MoonBallMultiplier:
 	pop bc
 	ret nz
 
-	inc hl
-	inc hl
-	inc hl
+	inc hl ; the item
 
 	push bc
 	ld a, BANK("Evolutions and Attacks")
