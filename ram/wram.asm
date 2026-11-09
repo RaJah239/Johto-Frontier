@@ -604,7 +604,13 @@ wMSimDealtIndex:: db   ; that mon's party index, or $ff
 wMSimActiveDealt:: db  ; the share the mon that's out takes off
 wMSimActiveLeft:: db   ; the share of its HP the player keeps against it
 wMSimLastDealt:: db    ; the share the last simulated switch-in takes off
-	ds 7 ; (unused: was switch-in picker scratch)
+; move choice by simulation (AI_SimMoveChoice)
+wMSimT1Kind:: db       ; the enemy's forced first-turn move: MSIM_T1_*
+wMSimT1Dmg:: dw        ; its damage (big-endian)
+wMSimT1Effect:: db     ; the MSIM_INF_* status it inflicts
+wMSimInflict:: db      ; MSIM_INF_* statuses inflicted on the player's mon
+wMSimBestKey:: db      ; best winning move's key
+wMSimBestMask:: db     ; the moves with that key (bit = slot)
 wTempLevel:: db
 wLastPlayerMon:: db
 wLastPlayerMove:: db
@@ -3837,6 +3843,7 @@ wMSimSavedStruct:: ds 32 ; wEnemyMonSpecies .. wEnemyMonStructEnd
 wMSimSavedStats:: ds NUM_BATTLE_STATS * 2
 wMSimSavedLevels:: ds 7
 wMSimSavedSubStatus:: ds 5
+wMSimSavedDmg:: ds 9 ; AI_SimMoveChoice: wMSimEnemyDmg .. wMSimPlayerPrioDmg, wMSimFlags
 
 
 SECTION "Pokedex Grid WRAM", WRAMX[$da00], BANK[5]

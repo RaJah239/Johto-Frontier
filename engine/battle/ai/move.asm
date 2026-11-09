@@ -119,7 +119,9 @@ AIChooseMove:
 	; heavily encouraged moves can wrap below 0; fix that before counting down
 	farcall NormalizeAIMoveScores
 	; never pick a move that can't affect the player while another works
-	farcall AI_DismissImmuneMoves
+	; never pick a move that can't hit while another works, then play out
+	; each move with the 1-on-1 simulation (engine/battle/ai/matchup.asm)
+	farcall AI_MoveChoiceFinal
 
 ; Decrement the scores of all moves one by one until one reaches 0.
 .DecrementScores:

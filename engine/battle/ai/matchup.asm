@@ -62,6 +62,22 @@ DEF MSIM_MOVE_DRAINS_F   EQU 4 ; (per move) the move being scored drains
 DEF MSIM_SIDE_ENEMY  EQU 0
 DEF MSIM_SIDE_PLAYER EQU 1
 
+; wMSimT1Kind (AI_SimMoveChoice's forced first-turn move)
+DEF MSIM_T1_DAMAGE  EQU 1
+DEF MSIM_T1_STATUS  EQU 2
+DEF MSIM_T1_HEAL    EQU 3
+DEF MSIM_T1_CAPTURE EQU 4 ; (MSim_EnemyMoveDamage stores into wMSimT1Dmg)
+DEF MSIM_T1_PRIO_F  EQU 7
+
+; wMSimInflict / wMSimT1Effect
+DEF MSIM_INF_PSN_F  EQU 0
+DEF MSIM_INF_TOX_F  EQU 1
+DEF MSIM_INF_BRN_F  EQU 2
+DEF MSIM_INF_SEED_F EQU 3
+DEF MSIM_INF_SLP_F  EQU 4
+DEF MSIM_INF_PAR_F  EQU 5
+
+
 ; wMSimMode
 DEF MSIM_MODE_ENTRY_HIT_F EQU 0 ; candidates take the player's best hit as they come in
 
@@ -396,6 +412,10 @@ MSim_SubtractHP:
 
 MSim_SetupActive:
 ; Simulate the mon that's out, as it is now.
+	call MSim_SetActiveHP
+	jmp MSim_ComputeDamages
+
+MSim_SetActiveHP:
 	ld a, [wEnemyMonHP]
 	ld [wMSimEnemyHP], a
 	ld a, [wEnemyMonHP + 1]
@@ -404,7 +424,7 @@ MSim_SetupActive:
 	ld [wMSimPlayerHP], a
 	ld a, [wBattleMonHP + 1]
 	ld [wMSimPlayerHP + 1], a
-	jmp MSim_ComputeDamages
+	ret
 
 MSim_LoadCandidate:
 ; b = OT party index. Load that mon into the wEnemyMon battle struct (and
@@ -778,10 +798,28 @@ MSim_EnemyMoveDamage:
 	farcall GetMovePriority_Far
 	ld a, BASE_PRIORITY
 	cp b
+	push af
+	ld a, [wMSimT1Kind]
+	cp MSIM_T1_CAPTURE
+	jr z, .capture
+	pop af
 	ld hl, wMSimEnemyDmg
 	ld c, MSIM_E_BEST_DRAIN_F
 	ld b, MSIM_E_BEST_PRIO_F
 	jmp MSim_KeepBest
+.capture
+	; (AI_SimMoveChoice) this move's damage and priority for the first turn
+	pop af
+	ld a, MSIM_T1_DAMAGE
+	jr nc, .no_prio
+	ld a, MSIM_T1_DAMAGE | 1 << MSIM_T1_PRIO_F
+.no_prio
+	ld [wMSimT1Kind], a
+	ld a, [wCurDamage]
+	ld [wMSimT1Dmg], a
+	ld a, [wCurDamage + 1]
+	ld [wMSimT1Dmg + 1], a
+	ret
 .none
 	ret
 
@@ -1323,6 +1361,8 @@ MSim_Run:
 	call MSim_EndOfTurn
 	and a
 	jr nz, .result
+	xor a
+	ld [wMSimT1Kind], a ; (a forced move is only for the first turn)
 	ld hl, wMSimTurns
 	dec [hl]
 	jr nz, .turn
@@ -1347,7 +1387,22 @@ MSim_ChooseActions:
 	ld hl, wMSimFlags3
 	res MSIM_E_HEALS_F, [hl]
 	res MSIM_P_HEALS_F, [hl]
-	; enemy
+	; enemy: a forced first-turn move (AI_SimMoveChoice)?
+	ld a, [wMSimT1Kind]
+	and $7f
+	jr z, .enemy
+	cp MSIM_T1_HEAL
+	jr z, .player
+	ld hl, wMSimT1Dmg ; (status moves: 0)
+	ld de, wMSimEnemyHit
+	call MSim_CopyWord
+	ld a, [wMSimT1Kind]
+	bit MSIM_T1_PRIO_F, a
+	jr z, .player
+	ld hl, wMSimFlags
+	set MSIM_E_PRIO_THIS_F, [hl]
+	jr .player
+.enemy
 	ld hl, wMSimEnemyPrioDmg
 	ld de, wMSimPlayerHP
 	call MSim_PrioKOs
@@ -1387,7 +1442,16 @@ MSim_ChooseActions:
 	set MSIM_P_PRIO_THIS_F, [hl]
 
 .heals
+	ld a, [wMSimT1Kind]
+	and $7f
+	jr z, .heal_check
+	cp MSIM_T1_HEAL
+	jr nz, .player_heal ; a forced attack or status move
+	scf
+	jr .heal_decided
+.heal_check
 	call MSim_EnemyShouldHeal
+.heal_decided
 	jr nc, .player_heal
 	ld hl, wMSimFlags3
 	set MSIM_E_HEALS_F, [hl]
@@ -1573,6 +1637,11 @@ MSim_\1Acts:
 	pop bc
 	ld a, \4
 	ret c
+	IF !STRCMP("\1", "Enemy")
+	push bc
+	call MSim_ApplyInflict
+	pop bc
+	ENDC
 	; its strongest move drains: heal half the damage
 	ld a, [wMSimFlags]
 	bit MSIM_\3_BEST_DRAIN_F, a
@@ -1614,12 +1683,24 @@ MSim_\1Residual:
 	jr nz, .seed
 	ld a, [\4Status]
 	and 1 << PSN | 1 << BRN | 1 << FRZ
+	IF !STRCMP("\1", "Player")
+	jr nz, .has_status
+	ld a, [wMSimInflict]
+	and 1 << MSIM_INF_PSN_F | 1 << MSIM_INF_TOX_F | 1 << MSIM_INF_BRN_F
+	ENDC
 	jr z, .seed
+.has_status
 	ld a, 4
 	call MSim_\1MaxShare
 	ld a, [\55]
 	bit SUBSTATUS_TOXIC, a
+	IF !STRCMP("\1", "Player")
+	jr nz, .toxic
+	ld a, [wMSimInflict]
+	bit MSIM_INF_TOX_F, a
+	ENDC
 	jr z, .status_damage
+.toxic
 	ld hl, wMSim\1Toxic
 	inc [hl]
 	ld a, [hl]
@@ -1630,7 +1711,13 @@ MSim_\1Residual:
 .seed
 	ld a, [\54]
 	bit SUBSTATUS_LEECH_SEED, a
+	IF !STRCMP("\1", "Player")
+	jr nz, .seeded
+	ld a, [wMSimInflict]
+	bit MSIM_INF_SEED_F, a
+	ENDC
 	jr z, .curse
+.seeded
 	ld a, 3
 	call MSim_\1MaxShare
 	push bc
@@ -1862,7 +1949,16 @@ MSim_RunBest:
 	jr nc, .no
 	call MSim_FindBoost
 	jr nc, .no
+	jr MSim_RunBoost
 
+.no
+	and a
+	ret
+
+MSim_RunBoost:
+; hl = stat stage changes (MSim_BoostEffects); wMSimStartHP = the HP to start
+; from. The enemy boosts on the first turn (the player gets a free hit), then
+; MSim_Run. Carry if it wins. Leaves the enemy's stats raised.
 	; raise its stat stages (up to MAX_STAT_LEVEL) and recalculate
 	ld de, wEnemyStatLevels
 	ld c, NUM_BATTLE_STATS
@@ -1978,8 +2074,504 @@ MSim_BoostEffects:
 	db EFFECT_FURY_DRIVE,   1, 0, 1, 1, 0
 	db -1
 
+; ===== Move choice by simulation =====
+;
+; After the scoring layers (and AI_DismissImmuneMoves), every move the AI
+; would consider (score within 20 of its favourite) is played out: "use this
+; move now, then play on as in MSim_Run". Damaging moves hit with their own
+; damage and priority; boosting moves boost (the player gets a free hit);
+; healing moves heal; sleep, poison, bad poison, burn, paralysis and Leech
+; Seed are inflicted on the player's mon (when they can work). If any move
+; wins, the winners that keep the most HP (100%-accurate moves first) get
+; score 1 and every other usable move at least 21. If none wins, the move
+; that takes the most HP off the player gets a small nudge.
+
+AI_MoveChoiceFinal:
+; Farcalled by AIChooseMove after NormalizeAIMoveScores.
+	farcall AI_DismissImmuneMoves
+	; fallthrough
+
+AI_SimMoveChoice:
+	call MSim_Begin
+	call MSim_SetupActive
+	ld hl, wMSimEnemyDmg
+	ld de, wMSimSavedDmg
+	ld c, 8
+	call MSim_ToSaveBank
+	ld hl, wMSimFlags
+	ld de, wMSimSavedDmg + 8
+	ld c, 1
+	call MSim_ToSaveBank
+
+	; d = the lowest score of a usable move
+	ld d, $fe
+	ld c, 0
+.find_min
+	call .slot
+	jr z, .min_done
+	ld a, [hl]
+	cp d
+	jr nc, .next_min
+	ld d, a
+.next_min
+	inc c
+	ld a, c
+	cp NUM_MOVES
+	jr nz, .find_min
+.min_done
+	; d = the cutoff: lowest + 20 (at most $fe)
+	ld a, d
+	add 20
+	jr c, .cap
+	cp $fe
+	jr c, .got_cutoff
+.cap
+	ld a, $fe
+.got_cutoff
+	ld d, a
+
+	xor a
+	ld [wMSimBestKey], a
+	ld [wMSimBestMask], a
+	ld [wMSimBestDealt], a
+	dec a
+	ld [wMSimDealtIndex], a
+	ld c, 0
+.eval_loop
+	call .slot
+	jr z, .evaluated
+	ld a, [hl]
+	cp d
+	jr nc, .eval_next
+	push bc
+	push de
+	call MSim_EvalSlot
+	pop de
+	pop bc
+	jr nc, .loses
+	; a winner: keep the best key (ties share it)
+	ld hl, wMSimBestKey
+	cp [hl]
+	jr c, .eval_next
+	jr z, .add_winner
+	ld [hl], a
+	xor a
+	ld [wMSimBestMask], a
+.add_winner
+	call .slot_bit
+	ld hl, wMSimBestMask
+	or [hl]
+	ld [hl], a
+	jr .eval_next
+.loses
+	ld hl, wMSimBestDealt
+	cp [hl]
+	jr c, .eval_next
+	jr z, .eval_next
+	ld [hl], a
+	ld a, c
+	ld [wMSimDealtIndex], a
+.eval_next
+	inc c
+	ld a, c
+	cp NUM_MOVES
+	jr nz, .eval_loop
+.evaluated
+	call MSim_End
+
+	ld a, [wMSimBestMask]
+	and a
+	jr z, .no_winner
+	ld e, a
+	ld c, 0
+.apply
+	call .slot
+	ret z
+	ld a, [hl]
+	cp $fe
+	jr nc, .apply_next
+	srl e
+	jr nc, .not_best
+	ld [hl], 1
+	jr .apply_next_e
+.not_best
+	cp 21
+	jr nc, .apply_next_e
+	ld [hl], 21
+	jr .apply_next_e
+.apply_next
+	srl e
+.apply_next_e
+	inc c
+	ld a, c
+	cp NUM_MOVES
+	jr nz, .apply
+	ret
+
+.no_winner
+	; nudge the move that does the most damage
+	ld a, [wMSimDealtIndex]
+	cp $ff
+	ret z
+	ld c, a
+	call .slot
+	ld a, [hl]
+	cp 3
+	ret c
+	sub 2
+	ld [hl], a
+	ret
+
+.slot
+; c = slot: hl = its score; z if the slot is empty.
+	ld hl, wEnemyMonMoves
+	ld b, 0
+	add hl, bc
+	ld a, [hl]
+	ld hl, wEnemyAIMoveScores
+	add hl, bc
+	and a
+	ret
+
+.slot_bit
+; a = 1 << c
+	push bc
+	ld a, 1
+	inc c
+.bit_loop
+	dec c
+	jr z, .bit_done
+	add a
+	jr .bit_loop
+.bit_done
+	pop bc
+	ret
+
+MSim_EvalSlot:
+; c = move slot of the enemy's active mon. Play out "use this move now, then
+; play on". Return carry if that wins, with a = key (100%-accurate: 128 +;
+; plus half the share of its HP left); else a = the share of the player's
+; HP it takes off (0 if the move isn't simulated).
+	push bc
+	call MSim_ResetActive
+	pop bc
+	xor a
+	ld [wMSimT1Kind], a
+	ld [wMSimInflict], a
+	ld [wMSimT1Dmg], a
+	ld [wMSimT1Dmg + 1], a
+	ld hl, wEnemyMonMoves
+	ld b, 0
+	add hl, bc
+	ld a, [hl]
+	ld b, a
+	push bc
+	ld de, wEnemyMoveStruct
+	call MSim_LoadMove
+	pop bc
+	ld a, [wEnemyMoveStruct + MOVE_ACC]
+	push af ; accuracy
+	ld a, [wEnemyMoveStruct + MOVE_POWER]
+	and a
+	jr z, .non_damaging
+
+	; damaging: its own damage and priority on the first turn
+	ld a, MSIM_T1_CAPTURE
+	ld [wMSimT1Kind], a
+	call MSim_EnemyMoveDamage
+	ld a, [wMSimT1Kind]
+	cp MSIM_T1_CAPTURE
+	jp nz, .run
+	ld a, MSIM_T1_DAMAGE
+	ld [wMSimT1Kind], a
+	jp .run
+
+.non_damaging
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	ld c, a
+	; boosting move
+	ld hl, MSim_BoostEffects
+.find_boost
+	ld a, [hli]
+	cp -1
+	jr z, .not_boost
+	cp c
+	jr z, .boost
+	ld de, NUM_BATTLE_STATS
+	add hl, de
+	jr .find_boost
+.boost
+	push hl
+	ld hl, wMSimEnemyHP
+	ld de, wMSimStartHP
+	ld bc, 4
+	call CopyBytes
+	pop hl
+	call MSim_RunBoost
+	call MSim_EvalKey
+	push af
+	call MSim_RestoreEnemy
+	pop af
+	ld b, a
+	jp nc, .lost
+	pop af ; accuracy (boosting moves don't miss)
+	ld a, b
+	add 128
+	scf
+	ret
+
+.not_boost
+	ld a, c
+	cp EFFECT_HEAL
+	jr z, .heal
+	cp EFFECT_SLACK_OFF
+	jr z, .heal
+	cp EFFECT_WEATHER_HEAL
+	jr z, .heal
+	call MSim_T1Inflict
+	jr z, .not_simulated
+	ld [wMSimT1Effect], a
+	ld a, MSIM_T1_STATUS
+	ld [wMSimT1Kind], a
+	; paralysis and burn change the player's stats: apply them from the
+	; start, recompute, and put the stats back after the run
+	ld a, [wBattleMonSpeed]
+	ld d, a
+	ld a, [wBattleMonSpeed + 1]
+	ld e, a
+	push de
+	ld a, [wBattleMonAttack]
+	ld d, a
+	ld a, [wBattleMonAttack + 1]
+	ld e, a
+	push de
+	ld a, [wMSimT1Effect]
+	and 1 << MSIM_INF_PAR_F | 1 << MSIM_INF_BRN_F
+	jr z, .status_run
+	ld a, [wMSimT1Effect]
+	bit MSIM_INF_PAR_F, a
+	jr z, .burn
+	ld hl, wBattleMonSpeed
+	call .quarter
+.burn
+	ld a, [wMSimT1Effect]
+	bit MSIM_INF_BRN_F, a
+	jr z, .recompute
+	ld hl, wBattleMonAttack
+	call .half
+.recompute
+	call MSim_ComputeDamages
+.status_run
+	call MSim_Run
+	pop de
+	push af
+	ld a, d
+	ld [wBattleMonAttack], a
+	ld a, e
+	ld [wBattleMonAttack + 1], a
+	pop af
+	pop de
+	push af
+	ld a, d
+	ld [wBattleMonSpeed], a
+	ld a, e
+	ld [wBattleMonSpeed + 1], a
+	pop af
+	jr .result
+
+.heal
+	ld a, MSIM_T1_HEAL
+	ld [wMSimT1Kind], a
+.run
+	call MSim_Run
+.result
+	call MSim_EvalKey
+	ld b, a
+	jr nc, .lost
+	; +128 if 100% accurate
+	pop af ; accuracy
+	cp 100 percent
+	ld a, b
+	jr c, .key
+	add 128
+.key
+	scf
+	ret
+
+.lost
+	pop af
+	ld a, b
+	and a
+	ret
+
+.not_simulated
+	pop af
+	xor a
+	ret
+
+.quarter
+	call .half
+.half
+	srl [hl]
+	inc hl
+	rr [hl]
+	ld a, [hld]
+	or [hl]
+	ret nz
+	inc hl
+	inc [hl] ; at least 1
+	dec hl
+	ret
+
+MSim_T1Inflict:
+; c = a status move's effect (wEnemyMoveStruct loaded). Return the
+; MSIM_INF_* bits it would inflict on the player's mon, or z if it can't
+; (or isn't simulated).
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
+	jr nz, .none
+	ld a, c
+	cp EFFECT_LEECH_SEED
+	jr z, .seed
+	ld b, 1 << MSIM_INF_SLP_F
+	cp EFFECT_SLEEP
+	jr z, .status
+	ld b, 1 << MSIM_INF_PSN_F
+	cp EFFECT_POISON
+	jr z, .poison
+	ld b, 1 << MSIM_INF_TOX_F
+	cp EFFECT_TOXIC
+	jr z, .poison
+	ld b, 1 << MSIM_INF_BRN_F
+	cp EFFECT_BURN
+	jr z, .burn
+	ld b, 1 << MSIM_INF_PAR_F
+	cp EFFECT_PARALYZE
+	jr z, .status
+.none
+	xor a
+	ret
+
+.seed
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_LEECH_SEED, a
+	jr nz, .none
+	ld a, GRASS
+	call .has_type
+	jr z, .none
+	ld a, 1 << MSIM_INF_SEED_F
+	and a
+	ret
+
+.poison
+	ld a, POISON
+	call .has_type
+	jr z, .none
+	ld a, STEEL
+	call .has_type
+	jr z, .none
+	jr .status
+
+.burn
+	ld a, FIRE
+	call .has_type
+	jr z, .none
+	; fallthrough
+
+.status
+	ld a, [wBattleMonStatus]
+	and a
+	jr nz, .none
+	ld a, [wPlayerScreens]
+	bit SCREENS_SAFEGUARD, a
+	jr nz, .none
+	; the move's type has to affect the player's mon
+	push bc
+	ld a, 1
+	ldh [hBattleTurn], a
+	callfar BattleCheckTypeMatchup
+	pop bc
+	ld a, [wTypeMatchup]
+	and a
+	jr z, .none
+	ld a, b
+	and a
+	ret
+
+.has_type
+; z if the player's mon has type a
+	ld hl, wBattleMonType1
+	cp [hl]
+	ret z
+	inc hl
+	cp [hl]
+	ret
+
+MSim_ApplyInflict:
+; The enemy's first-turn status move lands: add its effect.
+	ld a, [wMSimT1Kind]
+	and $7f
+	cp MSIM_T1_STATUS
+	ret nz
+	ld a, [wMSimT1Effect]
+	ld hl, wMSimInflict
+	or [hl]
+	ld [hl], a
+	bit MSIM_INF_TOX_F, a
+	jr z, .sleep
+	xor a
+	ld [wMSimPlayerToxic], a
+	ld a, [hl]
+.sleep
+	bit MSIM_INF_SLP_F, a
+	ret z
+	ld a, [wMSimPlayerSleep]
+	and a
+	ret nz
+	ld a, 2 ; the shortest sleep: one skipped turn
+	ld [wMSimPlayerSleep], a
+	ret
+
+MSim_ResetActive:
+; Back to the start for the mon that's out: HP, the damages AI_SimMoveChoice
+; saved, and the per-side state.
+	call MSim_SetActiveHP
+	ld hl, wMSimSavedDmg
+	ld de, wMSimEnemyDmg
+	ld c, 8
+	call MSim_FromSaveBank
+	ld hl, wMSimSavedDmg + 8
+	ld de, wMSimFlags
+	ld c, 1
+	call MSim_FromSaveBank
+	jmp MSim_SetupSides
+
+MSim_EvalKey:
+; After a run: carry (won) and a = half the share of its HP left, or no carry
+; and a = the share of the player's max HP it took off.
+	jr nc, .lost
+	ld a, [wMSimEnemyHP]
+	ld b, a
+	ld a, [wMSimEnemyHP + 1]
+	ld c, a
+	ld a, [wEnemyMonMaxHP]
+	ld d, a
+	ld a, [wEnemyMonMaxHP + 1]
+	ld e, a
+	call MSim_ShareOf
+	srl a
+	scf
+	ret
+.lost
+	call MSim_PlayerDealtShare
+	and a
+	ret
+
 MSim_Begin:
 ; Save what the simulation overwrites.
+	xor a
+	ld [wMSimT1Kind], a
+	ld [wMSimInflict], a
 	pop hl ; return address
 	ldh a, [hBattleTurn]
 	push af
@@ -2025,6 +2617,11 @@ MSim_Begin:
 
 MSim_End:
 ; Put back what MSim_Begin saved.
+	call MSim_RestoreEnemy
+	jr MSim_EndRest
+
+MSim_RestoreEnemy:
+; Put back the enemy mon's battle struct, stats, stat stages and substatus.
 	ld hl, wMSimSavedStruct
 	ld de, wEnemyMonSpecies
 	ld c, MSIM_SAVED_STRUCT_LENGTH
@@ -2040,7 +2637,9 @@ MSim_End:
 	ld hl, wMSimSavedSubStatus
 	ld de, wEnemySubStatus1
 	ld c, MSIM_SAVED_SUBSTATUS_LENGTH
-	call MSim_FromSaveBank
+	jr MSim_FromSaveBank
+
+MSim_EndRest:
 	ld hl, wSwitchInSavedEnemyMove
 	ld de, wEnemyMoveStruct
 	ld bc, MOVE_LENGTH
