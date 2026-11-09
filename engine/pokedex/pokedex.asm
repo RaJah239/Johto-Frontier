@@ -900,8 +900,10 @@ Evos_Page:
  	jmp .nextpage_jump
  
  ; SpriteAnim:
+DEF PICS_PAGE_BACK_TILE EQU $fa ; VRAM 1, right after the backpic ($d6-$f9)
+
 Pics_Page_BackText:
-	db $67, $68, $69, $6a, "@" ; VRAM 1
+	db PICS_PAGE_BACK_TILE, PICS_PAGE_BACK_TILE + 1, PICS_PAGE_BACK_TILE + 2, PICS_PAGE_BACK_TILE + 3, "@" ; VRAM 1
 
  Pics_Page:
  	ld a, [wPrevDexEntryJumptableIndex] ; same ram as wStatsScreenFlags
@@ -928,6 +930,12 @@ Pics_Page_BackText:
  	hlcoord 0, 0
  	lb bc, SCREEN_HEIGHT, SCREEN_WIDTH
  	call ClearBox	
+	; B > BACK is in the cleared tilemap that goes to the screen now: the
+	; layout gives it VRAM 1 attributes (and the palettes) before the page is
+	; drawn, and VRAM 1's space tile is black in palette 0
+	hlcoord 15, 16
+	ld de, Pics_Page_BackText
+	call PlaceTileString
  	call Pokedex_BlackOutBG
  	farcall HDMATransferTilemapToWRAMBank3	
  	call ClearSprites
@@ -965,16 +973,21 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  	ldh [rVBK], a
  ENDC
 
-	; B > BACK tiles over page numbers $67-$6a, as the evolution page
-	; does (leaving the page reloads the page numbers)
+	; B > BACK tiles (the ones the evolution page shows at $67-$6a). Not
+	; over the page numbers: the animated frontpic's frames go to VRAM 1
+	; $31-$7e, which garbled them for mons with long animations.
 	ld a, $1
 	ldh [rVBK], a
 	ld de, Pokedex_ExtraTiles tile 5 ; (the evolution page loads tile 0 at $62)
-	ld hl, vTiles2 tile $67
+	ld hl, vTiles0 tile PICS_PAGE_BACK_TILE
 	lb bc, BANK(Pokedex_ExtraTiles), 4
 	call Request2bpp
 	xor a
 	ldh [rVBK], a
+	; the layout gives the pictures VRAM 1 attributes while the tilemap is
+	; still cleared: VRAM 1's space was the dex's black tile (black boxes
+	; until the pictures were drawn)
+	farcall Pokedex_LoadTextboxSpaceGFX
 
  	ld a, [wCurPartySpecies]
  	ld [wCurSpecies], a
@@ -1046,11 +1059,11 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  	ld [wPokedexEntryPageNum], a
  	jmp Pics_Page
  .sprite_b
+ 	call ClearSprites ; (the mon icon stayed over the black screen for 2 frames)
  	call Pokedex_BlackOutBG
  	call DelayFrame
  	xor a
  	ldh [hBGMapMode], a
- 	call ClearSprites
  	call Pokedex_LoadCurrentFootprint
  	call Pokedex_DrawFootprint
  	call Pokedex_LoadPageNums
@@ -1064,8 +1077,6 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  	call Pokedex_LoadSelectedMonTiles
  	call Pokedex_GetSelectedMon
  	ld [wCurPartySpecies], a
- 	ld a, SCGB_POKEDEX
- 	call Pokedex_GetSGBLayout
  	pop de
  	pop bc
  	ld a, b
@@ -1076,7 +1087,11 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  	ld [wPokedexEntryPageNum], a
  	ld a, [wLastDexMode]
  	cp -2
- 	jmp z, Pokedex_ReinitDexEntryScreen
+ 	jr nz, .sprite_b_same_mon
+ 	ld a, SCGB_POKEDEX
+ 	call Pokedex_GetSGBLayout
+ 	jmp Pokedex_ReinitDexEntryScreen
+ .sprite_b_same_mon
  	hlcoord 8, 1
  	ld a, [wPokedexShinyToggle]
  	bit 0, a
@@ -1086,7 +1101,30 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  .not_shiny
  	ld [hl], " "
  .shiny_done	
- 	call WaitBGMap
+	; tiles, attributes and palettes in one frame: the entry screen's colours
+	; used to go out while this page's bottom half (name bar, B > BACK) was
+	; still on screen. ApplyAttrmap writes the attributes to the BG map at
+	; hBGMapAddress, so point it at the hidden BG map 1 meanwhile.
+	ldh a, [hBGMapAddress]
+	ld e, a
+	ldh a, [hBGMapAddress + 1]
+	ld d, a
+	push de
+	xor a
+	ldh [hBGMapAddress], a
+	ld a, HIGH(vBGMap1)
+	ldh [hBGMapAddress + 1], a
+ 	ld a, SCGB_POKEDEX
+ 	call Pokedex_GetSGBLayout
+	pop de
+	ld a, e
+	ldh [hBGMapAddress], a
+	ld a, d
+	ldh [hBGMapAddress + 1], a
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a ; (goes out with the tilemap)
+	ld b, 3
+	farcall _SafeCopyTilemapAtOnce
  	ret
  .toggle_shininess:
  	xor a
