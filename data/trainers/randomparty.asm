@@ -15,46 +15,56 @@ SECTION "Random Party Lists", ROMX
 
 RedGroup:
 	; RED (1)
+	next_list_item
 	db "RED1@", TRAINERTYPE_RANDOM | TRAINERTYPE_NICKNAME | TRAINERTYPE_DVS | TRAINERTYPE_EVS | TRAINERTYPE_ITEM | TRAINERTYPE_MOVES, 1, RANDOMLIST_0
 	db -1 ; end
 
 	; RED (1)
+	next_list_item
 	db "RED2@", TRAINERTYPE_RANDOM | TRAINERTYPE_NICKNAME | TRAINERTYPE_DVS | TRAINERTYPE_ITEM | TRAINERTYPE_MOVES, 1, RANDOMLIST_1
 	db -1 ; end
 
+	end_list_items
 MaximaGroup:
 	; Maxima (1)
+	next_list_item
 	db "Maxima@", TRAINERTYPE_RANDOM | TRAINERTYPE_NICKNAME | TRAINERTYPE_DVS | TRAINERTYPE_ITEM | TRAINERTYPE_MOVES, 6, RANDOMLIST_2
 	db -1 ; end
 
+	end_list_items
 RandomPartyLists::
 
-   ; RANDOMLIST_0
+	next_list_item ; RANDOMLIST_0
 	db 2
-	db 1, TORTERRA
+	next_random_mon
+	db 1
+	dw TORTERRA
 			db "DINO@"		; Nickname
 			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
 			ds 6, MAX_EV	; EVs - hp, atk, def, spd, sat, sdf 
 			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-			db SLEEP_POWDER, LEECH_SEED, GIGA_DRAIN, ROCK_SLIDE ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
-	db 1, CHARIZARD
+			dw SLEEP_POWDER, LEECH_SEED, GIGA_DRAIN, ROCK_SLIDE ; Moveset - NO_MOVE is a thing
+	next_random_mon
+	db 1
+	dw CHARIZARD
 			db "ZARD@"		; Nickname
 			db $DD, $DD		; DVs - atk|def dv, spd|spc dv
 			ds 6, MAX_EV	; EVs - hp, atk, def, spd, sat, sdf 
 			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-			db SLEEP_POWDER, LEECH_SEED, GIGA_DRAIN, ROCK_SLIDE ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
+			dw SLEEP_POWDER, LEECH_SEED, GIGA_DRAIN, ROCK_SLIDE ; Moveset - NO_MOVE is a thing
+	end_random_mons
 	db -1 ; end
 
-	; RANDOMLIST_1
+	next_list_item ; RANDOMLIST_1
 	db 1
-	db 35, MAGIKARP
+	next_random_mon
+	db 35
+	dw MAGIKARP
 			db "Lax@"		; Nickname
 			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
 			db NO_ITEM	; ITEM/ NO_ITEM is a thing
-			db SPLASH, NO_MOVE, NO_MOVE, NO_MOVE ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
+			dw SPLASH, NO_MOVE, NO_MOVE, NO_MOVE ; Moveset - NO_MOVE is a thing
+	end_random_mons
 	db -1 ; end
 
 
@@ -62,66 +72,78 @@ RandomPartyLists::
 
 ; commented out team for future tests
 
-	; RANDOMLIST_2
+	next_list_item ; RANDOMLIST_2
 	db 10
-	db 50, RHYDON
+	next_random_mon
+	db 50
+	dw RHYDON
 			db "Don@"		; Nickname
 			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
 			db FOCUS_SASH	; ITEM/ NO_ITEM is a thing
-			db EARTHQUAKE, DRAGON_DANCE, STONE_EDGE, DRAIN_PUNCH ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
-	db 50, MEWTWO
+			dw EARTHQUAKE, DRAGON_DANCE, STONE_EDGE, DRAIN_PUNCH ; Moveset - NO_MOVE is a thing
+	next_random_mon
+	db 50
+	dw MEWTWO
 			db "Mewtwo@"		; Nickname
 			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
 			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-			db CALM_MIND, PSYBLAST, AURA_SPHERE, RECOVER ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
-	db 50, HAXORUS
+			dw CALM_MIND, PSYBLAST, AURA_SPHERE, RECOVER ; Moveset - NO_MOVE is a thing
+	next_random_mon
+	db 50
+	dw HAXORUS
 			db "Dino@"		; Nickname
 			db $EA, $AA		; DVs - atk|def dv, spd|spc dv
 			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-			db DRAGON_DANCE, OUTRAGE, EARTHQUAKE, ROCK_SLIDE ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
-	db 50, HO_OH
+			dw DRAGON_DANCE, OUTRAGE, EARTHQUAKE, ROCK_SLIDE ; Moveset - NO_MOVE is a thing
+	next_random_mon
+	db 50
+	dw HO_OH
 			db "Rainbow@"		; Nickname
 			db $DD, $DD		; DVs - atk|def dv, spd|spc dv
 			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-			db BULK_UP, RECOVER, SACRED_FIRE, SKY_ATTACK ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
-	db 50, CHARIZARD
+			dw BULK_UP, RECOVER, SACRED_FIRE, SKY_ATTACK ; Moveset - NO_MOVE is a thing
+	next_random_mon
+	db 50
+	dw CHARIZARD
 			db "Zard@"		; Nickname
 			db $DD, $DD		; DVs - atk|def dv, spd|spc dv
 			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-			db DRAGON_CLAW, FLARE_BLITZ, DRAGON_DANCE, ROOST ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
-	db 50, MOLTRES
+			dw DRAGON_CLAW, FLARE_BLITZ, DRAGON_DANCE, ROOST ; Moveset - NO_MOVE is a thing
+	next_random_mon
+	db 50
+	dw MOLTRES
 			db "Moltres@"		; Nickname
 			db $DD, $DD		; DVs - atk|def dv, spd|spc dv
 			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-			db FLAMETHROWER, SOLARBEAM, ROOST, SKY_ATTACK ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
-	db 50, SUDOWOODO
+			dw FLAMETHROWER, SOLARBEAM, ROOST, SKY_ATTACK ; Moveset - NO_MOVE is a thing
+	next_random_mon
+	db 50
+	dw SUDOWOODO
 			db "Sudowoodo@"		; Nickname
 			db $DD, $DD		; DVs - atk|def dv, spd|spc dv
 			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-			db STONE_EDGE, DRAIN_PUNCH, EARTHQUAKE, SEED_BOMB ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
-	db 50, LUGIA
+			dw STONE_EDGE, DRAIN_PUNCH, EARTHQUAKE, SEED_BOMB ; Moveset - NO_MOVE is a thing
+	next_random_mon
+	db 50
+	dw LUGIA
 			db "Silver@"	; Nickname
 			db $DD, $DD		; DVs - atk|def dv, spd|spc dv
 			db LEFTOVERS	; ITEM/ NO_ITEM is a thing
-			db CALM_MIND, RECOVER, AEROBLAST, SCALD ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
-	db 50, GARCHOMP
+			dw CALM_MIND, RECOVER, AEROBLAST, SCALD ; Moveset - NO_MOVE is a thing
+	next_random_mon
+	db 50
+	dw GARCHOMP
 			db "Chomp@"		; Nickname
 			db $DD, $DD		; DVs - atk|def dv, spd|spc dv
 			db LIFE_ORB	; ITEM/ NO_ITEM is a thing
-			db IRON_HEAD, OUTRAGE, EARTHQUAKE, FIRE_FANG ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
-	db 50, GARDEVOIR
+			dw IRON_HEAD, OUTRAGE, EARTHQUAKE, FIRE_FANG ; Moveset - NO_MOVE is a thing
+	next_random_mon
+	db 50
+	dw GARDEVOIR
 			db "Tulpa@"		; Nickname
 			db $FF, $FF		; DVs - atk|def dv, spd|spc dv
 			db ZOOM_LENS	; ITEM/ NO_ITEM is a thing
-			db HYPNOSIS, DREAM_EATER, MOONBLAST, AURA_SPHERE ; Moveset - NO_MOVE is a thing
-			db $fe ; End of Pokemon
+			dw HYPNOSIS, DREAM_EATER, MOONBLAST, AURA_SPHERE ; Moveset - NO_MOVE is a thing
+	end_random_mons
 	db -1 ; end
+	end_list_items

@@ -4,6 +4,73 @@ GetNextTrainerDataByte:
 	inc hl
 	ret
 
+GetNextTrainerDataSpecies:
+; a = the 8-bit ID of the species (dw, 16-bit index) at hl; hl += 2.
+; Preserves bc and de.
+	push de
+	call GetNextTrainerDataIndex
+	push hl
+	ld h, d
+	ld l, e
+	call GetPokemonIDFromIndex
+	pop hl
+	pop de
+	ret
+
+GetNextTrainerDataMove:
+; a = the 8-bit ID of the move (dw, 16-bit index) at hl; hl += 2.
+; Preserves bc and de.
+	push de
+	call GetNextTrainerDataIndex
+	push hl
+	ld h, d
+	ld l, e
+	call GetMoveIDFromIndex
+	pop hl
+	pop de
+	ret
+
+GetNextTrainerDataIndex:
+; de = the word at hl; hl += 2
+	call GetNextTrainerDataByte
+	ld e, a
+	call GetNextTrainerDataByte
+	ld d, a
+	ret
+
+GetTrainerPartyPointer:
+; c = trainer class, b = trainer ID: hl = its trainer data (from its name)
+; and [wTrainerGroupBank] = their bank. Every trainer in a group starts with
+; its length (next_list_item), so the ones before it are skipped by length.
+	push bc
+	ld a, c
+	dec a
+	ld c, a
+	ld b, 0
+	ld hl, TrainerGroups
+	add hl, bc
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld [wTrainerGroupBank], a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	pop bc
+.skip_trainer
+	dec b
+	jr z, .got_trainer
+	ld a, [wTrainerGroupBank]
+	call GetFarByte
+	add l
+	ld l, a
+	jr nc, .skip_trainer
+	inc h
+	jr .skip_trainer
+.got_trainer
+	inc hl ; its length
+	ret
+
 ReadTrainerParty:
 	ld a, [wInBattleTowerBattle]
 	bit 0, a
@@ -27,32 +94,10 @@ ReadTrainerParty:
 	call ByteFill
 
 	ld a, [wOtherTrainerClass]
-
-	dec a
 	ld c, a
-	ld b, 0
-	ld hl, TrainerGroups
-	add hl, bc
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld [wTrainerGroupBank], a	
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-
 	ld a, [wOtherTrainerID]
 	ld b, a
-.skip_trainer
-	dec b
-	jr z, .got_trainer
-.loop
-	call GetNextTrainerDataByte
-	inc a
-	jr nz, .loop
-	jr .skip_trainer
-
-.got_trainer
+	call GetTrainerPartyPointer
 	call ApplyScaledTrainerParty
 .skip_trainer_name
 	call GetNextTrainerDataByte
@@ -257,21 +302,12 @@ ReadTrainerPartyPieces:
 	call GetNextTrainerDataByte
 	ld [wRandomTrainerNumPokemon], a
 	call GetNextTrainerDataByte
-	ld b, a ; list number, skip this many $ff after bank switch
+	ld b, a ; list number: skip this many lists (each starts with its length)
 	ld a, BANK(RandomPartyLists)
 	ld [wTrainerGroupBank], a
 	ld hl, RandomPartyLists
-.random_skiploop
-	ld a, b
-	and a
-	jr z, .skipdone
-.random_innerskiploop
-	call GetNextTrainerDataByte
-	cp -1
-	jr nz, .random_innerskiploop
-	dec b
-	jr .random_skiploop
-.skipdone
+	call .skip_b_items
+	inc hl ; the list's length
 	call GetNextTrainerDataByte
 	ld [wRandomTrainerTotalPokemon], a
 	push hl
@@ -294,18 +330,9 @@ ReadTrainerPartyPieces:
 	ld [hl], b
 	pop hl
 	push hl
-	; skip b $fe delimiters
-.random_skiploop2
-	ld a, b
-	and a
-	jr z, .skipdone2
-.random_innerskiploop2
-	call GetNextTrainerDataByte
-	cp $fe
-	jr nz, .random_innerskiploop2
-	dec b
-	jr .random_skiploop2
-.skipdone2
+	; skip b mons (each starts with its length)
+	call .skip_b_items
+	inc hl ; the mon's length
 .not_random
 .loop
 ; end?
@@ -318,7 +345,7 @@ ReadTrainerPartyPieces:
 	ld [wCurPartyLevel], a
 
 ; species
-	call GetNextTrainerDataByte
+	call GetNextTrainerDataSpecies
 	ld [wCurPartySpecies], a
 
 ; add to party
@@ -503,7 +530,7 @@ ReadTrainerPartyPieces:
 
 	ld b, NUM_MOVES
 .copy_moves
-	call GetNextTrainerDataByte
+	call GetNextTrainerDataMove
 	ld [de], a
 	inc de
 	dec b
@@ -603,6 +630,21 @@ ReadTrainerPartyPieces:
 	ret z
 	jr ShuffleOTParty
 
+.skip_b_items:
+; Skip b length-prefixed items (random party lists or their mons) at hl.
+	ld a, b
+	and a
+	ret z
+	ld a, [wTrainerGroupBank]
+	call GetFarByte
+	add l
+	ld l, a
+	jr nc, .next_item
+	inc h
+.next_item
+	dec b
+	jr .skip_b_items
+
 .TrainerLevelEVValues:
 	db  9,  31 ; lv  9-13
 	db 14,  63 ; lv 14-18
@@ -650,29 +692,10 @@ ReadPlayerPartyAsTrainerParty:
 
 ; now get the trainer class and id so we can get the trainer name
 	ld a, [wOtherTrainerClass]
-	dec a
 	ld c, a
-	ld b, 0
-	ld hl, TrainerGroups
-	add hl, bc
-	add hl, bc
-    add hl, bc
-	ld a, [hli]
-	ld [wTrainerGroupBank], a
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
 	ld a, [wOtherTrainerID]
 	ld b, a
-.skip_trainer
-	dec b
-	jr z, .got_trainer
-.loop
-	call GetNextTrainerDataByte
-	cp -1
-	jr nz, .loop
-	jr .skip_trainer
-.got_trainer
+	call GetTrainerPartyPointer
 
 .skip_name
 	call GetNextTrainerDataByte
@@ -1839,29 +1862,8 @@ GetTrainerName::
 	cp RIVAL2
 	jr z, CopyTrainerName
 
-	dec c
-	push bc
-	ld b, 0
-	ld hl, TrainerGroups
-	add hl, bc
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld [wTrainerGroupBank], a
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	pop bc
-
-.loop
-	dec b
-	jr z, CopyTrainerName
-
-.skip
-	call GetNextTrainerDataByte
-	cp -1
-	jr nz, .skip
-	jr .loop
+	call GetTrainerPartyPointer
+	; fallthrough
 
 CopyTrainerName:
 	ld de, wStringBuffer1
@@ -1886,37 +1888,18 @@ SetTrainerBattleLevel:
  	and a
  	ret nz
  
- 	ld a, [wOtherTrainerClass]
- 	dec a
- 	ld c, a
- 	ld b, 0
- 	ld hl, TrainerGroups
- 	add hl, bc
- 	add hl, bc
- 	ld a, [hli]
- 	ld h, [hl]
- 	ld l, a
- 
- 	ld a, [wOtherTrainerID]
- 	ld b, a
- .skip_trainer
- 	dec b
- 	jr z, .got_trainer
- .skip_party
- 	ld a, [hli]
- 	cp $ff
- 	jr nz, .skip_party
- 	jr .skip_trainer
- .got_trainer
- 
- .skip_name
- 	ld a, [hli]
- 	cp "@"
- 	jr nz, .skip_name
- 
- 	inc hl
- 	ld a, [hl]
- 	call SetDynamicLevel
+	ld a, [wOtherTrainerClass]
+	ld c, a
+	ld a, [wOtherTrainerID]
+	ld b, a
+	call GetTrainerPartyPointer
+.skip_name
+	call GetNextTrainerDataByte
+	cp "@"
+	jr nz, .skip_name
+	inc hl ; trainer type
+	call GetNextTrainerDataByte ; the first mon's level
+	call SetDynamicLevel
  	ld [wCurPartyLevel], a
  	ret
 
