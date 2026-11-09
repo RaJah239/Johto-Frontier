@@ -162,7 +162,6 @@ DrawEnemyHUDBorder:
 
 ; Place caught ball icon
 	ld a, [wTempEnemyMonSpecies]
-	dec a
 	call CheckCaughtMon
 	jr z, .CheckIfItemHeld
 	hlcoord 1, 2 ; coordinates of caught ball icon

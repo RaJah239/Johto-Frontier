@@ -1921,7 +1921,6 @@ Pokedex_DrawDexEntryScreenBG:
 	call Pokedex_PlaceFrontpicTopLeftCorner
 ; Check to see if we caught it.  Get out of here if we haven't.
  	ld a, [wTempSpecies]
- 	dec a
  	call CheckCaughtMon
  	ret z
  ; place Caught ball icon
@@ -2706,7 +2705,6 @@ Pokedex_CheckCaught:
 	push de
 	push hl
 	ld a, [wTempSpecies]
-	dec a
 	call CheckCaughtMon
 	pop hl
 	pop de
@@ -2716,7 +2714,6 @@ Pokedex_CheckSeen:
 	push de
 	push hl
 	ld a, [wTempSpecies]
-	dec a
 	call CheckSeenMon
 	; ld a, 1 ; DEBUG, to unlock all unseen mon
  	; and a ; DEBUG, to unlock all unseen mon

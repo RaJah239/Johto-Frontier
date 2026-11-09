@@ -241,7 +241,6 @@ ELSE
  	ld [hl], a
  
  	ld a, [wTempSpecies]
- 	dec a
  	call CheckCaughtMon
  	jr z, .caught_ball_done
  	hlcoord 5, 11

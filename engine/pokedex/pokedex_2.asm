@@ -212,7 +212,6 @@ DisplayDexEntry:
 	ld l, c
 	push de ; dex entry ptr
 	ld a, [wTempSpecies]
-	dec a
 	call CheckCaughtMon
 	pop hl ; dex entry ptr
  	pop bc ; bank?

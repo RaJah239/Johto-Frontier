@@ -621,17 +621,25 @@ ClearBottomLine:
 PokedexShow1:
 	call StartRadioStation
 .loop
+	; a random caught species (de = 16-bit index, from 1)
 	call Random
-	cp NUM_POKEMON
+	ld e, a
+	call Random
+	and MON_INDEX_HIGH_MASK
+	ld d, a
+	inc de
+	ld a, e
+	sub LOW(NUM_POKEMON + 1)
+	ld a, d
+	sbc HIGH(NUM_POKEMON + 1)
 	jr nc, .loop
-	ld c, a
-	push bc
-	ld a, c
-	call CheckCaughtMon
-	pop bc
+	push de
+	ld hl, wPokedexCaught
+	ld b, CHECK_FLAG
+	call PokedexFlagActionByIndex
+	pop hl
 	jr z, .loop
-	inc c
-	ld a, c
+	call GetPokemonIDFromIndex
 	ld [wCurPartySpecies], a
 	ld [wNamedObjectIndex], a
 	call GetPokemonName

@@ -17,11 +17,9 @@ INCLUDE "data/events/special_pointers.asm"
 
 GameCornerPrizeMonCheckDex:
 	ld a, [wScriptVar]
-	dec a
 	call CheckCaughtMon
 	ret nz
 	ld a, [wScriptVar]
-	dec a
 	call SetSeenAndCaughtMon
 	call FadeToMenu
 	ld a, [wScriptVar]
@@ -32,7 +30,6 @@ GameCornerPrizeMonCheckDex:
 
 SetMonAsSeen:
 	ld a, [wScriptVar]
-	dec a
 	jmp SetSeenMon
 
 FindPartyMonThatSpecies:
@@ -428,17 +425,25 @@ SetAllUnownCaught:
 FillPokedex:
 	ld a, UNOWN_A
 	ld [wFirstUnownSeen], a
-	ld a, CYNDAQUIL
-	ld [wScriptVar], a
+	ld de, 1 ; every species, by 16-bit index
 .loop
-	ld a, [wScriptVar]
-	dec a
-	call SetSeenAndCaughtMon
-	ld a, [wScriptVar]
-	inc a
-	cp EGG
-	ret z
-	ld [wScriptVar], a
-	jr .loop
+	push de
+	ld hl, wPokedexCaught
+	ld b, SET_FLAG
+	call PokedexFlagActionByIndex
+	pop de
+	push de
+	ld hl, wPokedexSeen
+	ld b, SET_FLAG
+	call PokedexFlagActionByIndex
+	pop de
+	inc de
+	ld a, e
+	cp LOW(NUM_POKEMON + 1)
+	jr nz, .loop
+	ld a, d
+	cp HIGH(NUM_POKEMON + 1)
+	jr nz, .loop
+	ret
 
 endc

@@ -480,7 +480,6 @@ DexGrid_IsCaught:
 DexGrid_CheckFlag:
 	push de
 	push bc
-	dec a
 	ld c, a
 	ldh a, [rSVBK]
 	ld b, a

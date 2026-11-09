@@ -1047,7 +1047,6 @@ EVO_place_CaughtIcon:
 	push bc
 	push af
 	ld a, [wTempSpecies]
-	dec a
 	call CheckCaughtMon
 	and a
 	jr z, .done
@@ -1219,7 +1218,6 @@ EVO_CheckSeenMon:
  	push de
  	push hl
  	ld a, [wNamedObjectIndex]
- 	dec a
  	call CheckSeenMon
  	pop hl
  	pop de

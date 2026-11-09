@@ -56,3 +56,12 @@ DEF MOVE_TABLE_MINIMUM_RESERVED_INDEX EQU $FF
 ; sized for the final tables, since the identity tables aren't saved
 DEF SAVED_MON_TABLE_LENGTH  EQU 2 + 2 * MON_TABLE_FINAL_ENTRIES
 DEF SAVED_MOVE_TABLE_LENGTH EQU 2 + 2 * MOVE_TABLE_FINAL_ENTRIES
+
+; smallest 2^n - 1 >= HIGH(NUM_POKEMON): masks a random high byte when picking
+; a random 16-bit species index
+DEF MON_INDEX_HIGH_MASK = 0
+for x, 8
+	if HIGH(NUM_POKEMON) >> x
+		DEF MON_INDEX_HIGH_MASK |= 1 << x
+	endc
+endr
