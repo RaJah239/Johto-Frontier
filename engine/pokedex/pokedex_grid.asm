@@ -98,8 +98,7 @@ Pokedex_InitGridScreen::
 	ld a, 7
 	ld [wDexListingHeight], a ; the dex entry screen's up/down uses it
 	xor a
-	ldh [hSCX], a
-	ldh [hSCY], a
+	ldh [hSCY], a ; (hSCX goes to 0 with the grid's tilemap)
 	ld a, $a7
 	ldh [hWX], a
 	ld a, $90
@@ -199,9 +198,10 @@ Pokedex_UpdateGridScreen::
 	ld [wCurPartySpecies], a
 	ld a, BANK(wDexGridIndex)
 	ldh [rSVBK], a
-	call DexGrid_Leave
-	ld a, POKEDEX_SCX
-	ldh [hSCX], a
+	; the grid stays as it is: Pokedex_InitDexEntryScreenFromGrid switches
+	; to the entry screen in one frame
+	ld a, TRUE
+	ld [wDexGridToEntry], a
 	ld a, DEXSTATE_DEX_ENTRY_SCR
 	ld [wJumptableIndex], a
 	ld a, DEXSTATE_MAIN_SCR
@@ -688,7 +688,9 @@ DexGrid_Redraw:
 	call DmgToCgbBGPals
 	lb de, $e4, $e4
 	call DmgToCgbObjPals
-	ld b, 3 | 1 << 2 ; tiles, attributes, the palettes and OAM in one frame
+	xor a
+	ldh [hSCX], a ; (the dex entry screen scrolls by POKEDEX_SCX)
+	ld b, 3 | 1 << 2 ; tiles, attributes, palettes, scroll and OAM in one frame
 	newfarcall _SafeCopyTilemapAtOnce
 	xor a
 	ld [wDexGridFullTilemap], a
@@ -727,6 +729,9 @@ DexGrid_DrawTopHalf:
 	call DexGrid_ShiftPic
 	call DexGrid_SetMonPalettes
 	call DexGrid_DrawTop
+	ld a, [wDexGridFullTilemap]
+	and a
+	call nz, .upload_text ; on entry, the previous screen doesn't show these
 	call DexGrid_WaitLowerScreen
 	ld a, BANK(sScratch)
 	call OpenSRAM
@@ -742,6 +747,16 @@ DexGrid_DrawTopHalf:
 	ld c, 2 * DEXGRID_PIC_SPRITES
 	call DexGrid_Upload
 	call CloseSRAM
+	ld a, [wDexGridFullTilemap]
+	and a
+	ret nz ; on entry, DexGrid_Redraw sends the palettes with the tilemap
+	call .upload_text
+	lb de, $e4, $e4
+	call DmgToCgbObjPals
+	ld a, $e4
+	jmp DmgToCgbBGPals
+
+.upload_text
 	ld de, wDexGridHeader
 	ld hl, vTiles1 tile (DEXGRID_TOP_TILE - $80)
 	ld c, DEXGRID_TOP_W
@@ -749,14 +764,7 @@ DexGrid_DrawTopHalf:
 	ld de, wDexGridTopA
 	ld hl, vTiles1 tile (DEXGRID_TOP_TILE - $80 + DEXGRID_TOP_W)
 	ld c, 2 * DEXGRID_TOP_W
-	call DexGrid_Upload
-	ld a, [wDexGridFullTilemap]
-	and a
-	ret nz ; on entry, DexGrid_Redraw applies the palettes after the tilemap
-	lb de, $e4, $e4
-	call DmgToCgbObjPals
-	ld a, $e4
-	jmp DmgToCgbBGPals
+	jp DexGrid_Upload
 
 DexGrid_ShiftPic:
 ; The picture's first tile column (7 tiles, + a blank one) to
@@ -813,15 +821,45 @@ DexGrid_ShiftPic:
 	jp CloseSRAM
 
 DexGrid_WaitLowerScreen:
-; Wait until the LCD is on lines 64-99 (below the picture, with time to copy
-; it before the next VBlank).
+; Wait until the LCD is on lines 64-79: below the picture, with time to copy
+; it and the text (~32 lines) before the next VBlank, or before LY $70 when
+; _SafeCopyTilemapAtOnce follows (it waits a whole frame after that).
 .loop
 	ldh a, [rLY]
 	cp 8 * 8
 	jr c, .loop
-	cp 100
+	cp 80
 	jr nc, .loop
 	ret
+
+DexGrid_PrepareEntryPic::
+; For Pokedex_InitDexEntryScreenFromGrid: the cursor mon's frontpic (or the
+; question mark), unshifted, in SRAM; de = where.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wDexGridIndex)
+	ldh [rSVBK], a
+	call DexGrid_GetIndexSpecies
+	ld [wDexGridSpecies], a
+	call DexGrid_PrepareFrontpic
+	ld a, [wDexGridPicSource]
+	ld e, a
+	ld a, [wDexGridPicSource + 1]
+	ld d, a
+	pop af
+	ldh [rSVBK], a
+	ret
+
+DexGrid_CommitEntryPic::
+; Copy the picture at de (SRAM) to VRAM bank 0 tiles $00-$30 while the LCD
+; is below the grid's picture (it shows these tiles until the switch).
+	call DexGrid_WaitLowerScreen
+	ld a, BANK(sScratch)
+	call OpenSRAM
+	ld hl, vTiles2
+	lb bc, 0, 7 * 7
+	call Get2bpp
+	jp CloseSRAM
 
 DexGrid_PrepareFrontpic:
 ; Decompress the cursor mon's frontpic (or the question mark) into SRAM;

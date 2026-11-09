@@ -3791,6 +3791,11 @@ wSunShimmerWaterActive:: db ; nonzero: AnimateWaterPalette reads wSunShimmerWate
 wSunShimmerWaterColors:: ds 3 * PAL_COLOR_SIZE
 wWaterPalColor:: db ; water palette color AnimateWaterPalette last showed (0-2), -1 = none
 
+SECTION "Pokedex Grid WRAM0", WRAM0
+
+wDexGridToEntry:: db ; set by the grid when it opens the dex entry screen
+
+
 SECTION "Enemy Switch Sim", WRAM0
 
 ; OTSwitchFindWinningReplacement scratch. wEnemySwitchSimStats and

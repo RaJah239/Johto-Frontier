@@ -282,6 +282,9 @@ Pokedex_UpdateMainScreen:
 	farjp Pokedex_UpdateGridScreen
 
 Pokedex_InitDexEntryScreen:
+	ld a, [wDexGridToEntry]
+	and a
+	jp nz, Pokedex_InitDexEntryScreenFromGrid
 	call LowVolume
 	xor a ; page 1
 	ld [wPokedexStatus], a ; moves machines index
@@ -308,6 +311,78 @@ Pokedex_InitDexEntryScreen:
 	farcall _SafeCopyTilemapAtOnce
 	ld a, SCGB_POKEDEX
 	call Pokedex_GetSGBLayout
+	ld a, $a7
+	ldh [hWX], a
+
+	ld a, [wCurPartySpecies]
+	call PlayMonCry2
+	call Pokedex_IncrementDexPointer
+	ret
+
+Pokedex_InitDexEntryScreenFromGrid:
+; From the grid (engine/pokedex/pokedex_grid.asm): the grid stays up, icons
+; and all, while the entry screen is prepared; then its tiles, attributes,
+; picture, palettes and scroll go out in one frame.
+	xor a
+	ld [wDexGridToEntry], a
+	call LowVolume
+	xor a ; page 1
+	ld [wPokedexStatus], a ; moves machines index
+	ld [wPokedexEntryPageNum], a
+	ld [wPokedexEntryType], a
+	ld [wPokedexEvoStage2], a
+	ld [wPokedexEvoStage3], a
+	ldh [hBGMapMode], a
+	ld a, TRUE
+	ldh [hOAMUpdate], a ; keep the grid's icons up until the switch
+	call ClearSprites
+
+	ld a, [wCurPartySpecies]
+	ld [wPrevDexEntry], a
+	; the picture goes to SRAM for now: the grid shows these VRAM tiles
+	newfarcall DexGrid_PrepareEntryPic ; de = picture
+	push de
+
+	call Pokedex_LoadCurrentFootprint
+	call Pokedex_DrawDexEntryScreenBG
+	call Pokedex_InitArrowCursor
+	call Pokedex_GetSelectedMon
+	ld [wPrevDexEntry], a
+	call Pokedex_DrawFootprint
+	farcall DisplayDexEntry
+
+	; attributes and palettes: ApplyAttrmap copies the attributes to the BG
+	; map at hBGMapAddress, so point it at the hidden BG map 1 meanwhile
+	ldh a, [hBGMapAddress]
+	ld e, a
+	ldh a, [hBGMapAddress + 1]
+	ld d, a
+	push de
+	xor a
+	ldh [hBGMapAddress], a
+	ld a, HIGH(vBGMap1)
+	ldh [hBGMapAddress + 1], a
+	ld a, SCGB_POKEDEX
+	call Pokedex_GetSGBLayout
+	pop de
+	ld a, e
+	ldh [hBGMapAddress], a
+	ld a, d
+	ldh [hBGMapAddress + 1], a
+	xor a
+	ldh [hCGBPalUpdate], a ; (they go out with the tilemap)
+
+	pop de
+	newfarcall DexGrid_CommitEntryPic ; while the LCD is below the picture
+	ld a, POKEDEX_SCX
+	ldh [hSCX], a
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	ld b, 3 | 1 << 2 ; tiles, attributes, palettes, scroll and OAM in one frame
+	farcall _SafeCopyTilemapAtOnce
+	ldh a, [rLCDC]
+	res rLCDC_SPRITE_SIZE, a ; the grid's icons were 8x16
+	ldh [rLCDC], a
 	ld a, $a7
 	ldh [hWX], a
 
