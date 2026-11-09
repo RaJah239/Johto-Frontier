@@ -683,3 +683,6 @@ SECTION "Item Icon Engine", ROMX
 INCLUDE "engine/items/item_icons.asm"
 
 INCLUDE "gfx/item_icons.asm"
+
+SECTION "16-bit Index Tables", ROMX
+INCLUDE "engine/16/table_functions.asm"

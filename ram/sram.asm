@@ -134,6 +134,21 @@ sChecksum:: dw
 sCheckValue2:: db ; loaded with SAVE_CHECK_VALUE_2, used to check save corruption
 
 
+SECTION "Index Tables", SRAM, BANK[0]
+
+; the 16-bit species / move conversion tables (engine/16), so the 8-bit IDs in
+; the saved party, day-care, etc. keep meaning the same species and moves.
+; Part of the main / backup save checksums.
+sPokemonIndexTable::       ds SAVED_MON_TABLE_LENGTH
+sMoveIndexTable::          ds SAVED_MOVE_TABLE_LENGTH
+sBackupMoveIndexTable::    ds SAVED_MOVE_TABLE_LENGTH
+
+
+SECTION "Backup Mon Index Table", SRAM, BANK[0]
+
+sBackupPokemonIndexTable:: ds SAVED_MON_TABLE_LENGTH
+
+
 SECTION "Box Metadata", SRAM
 
 for n, 1, NUM_BOXES + 1

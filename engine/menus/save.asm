@@ -357,6 +357,14 @@ LoadBagCursors:
 	jmp CopyBytes
 
 SavePokemonData:
+if !IDENTITY_INDEX_TABLES
+	; free the conversion table slots nothing uses any more, then save the
+	; tables with the 8-bit IDs they give meaning to
+	farcall ForceGarbageCollection
+	ld hl, sPokemonIndexTable
+	ld de, sMoveIndexTable
+	call SaveIndexTables
+endc
 	ld a, BANK(sPokemonData)
 	call OpenSRAM
 	ld hl, wPokemonData
@@ -371,6 +379,13 @@ SaveChecksum:
 	ld a, BANK(sGameData)
 	call OpenSRAM
 	call Checksum
+if !IDENTITY_INDEX_TABLES
+	ld hl, sPokemonIndexTable
+	ld bc, sMoveIndexTable
+	call ChecksumIndexTables
+	ld a, BANK(sGameData)
+	call OpenSRAM
+endc
 	ld a, e
 	ld [sChecksum + 0], a
 	ld a, d
@@ -426,6 +441,11 @@ SaveBackupPlayerData:
 	jmp CloseSRAM
 
 SaveBackupPokemonData:
+if !IDENTITY_INDEX_TABLES
+	ld hl, sBackupPokemonIndexTable
+	ld de, sBackupMoveIndexTable
+	call SaveIndexTables
+endc
 	ld a, BANK(sBackupPokemonData)
 	call OpenSRAM
 	ld hl, wPokemonData
@@ -440,6 +460,13 @@ SaveBackupChecksum:
 	ld a, BANK(sBackupGameData)
 	call OpenSRAM
 	call Checksum
+if !IDENTITY_INDEX_TABLES
+	ld hl, sBackupPokemonIndexTable
+	ld bc, sBackupMoveIndexTable
+	call ChecksumIndexTables
+	ld a, BANK(sBackupGameData)
+	call OpenSRAM
+endc
 	ld a, e
 	ld [sBackupChecksum + 0], a
 	ld a, d
@@ -626,6 +653,9 @@ LoadPlayerData:
 	jmp CloseSRAM
 
 LoadPokemonData:
+	ld hl, sPokemonIndexTable
+	ld de, sMoveIndexTable
+	call LoadIndexTables
 	ld a, BANK(sPokemonData)
 	call OpenSRAM
 	ld hl, sPokemonData
@@ -640,6 +670,13 @@ VerifyChecksum:
 	ld a, BANK(sGameData)
 	call OpenSRAM
 	call Checksum
+if !IDENTITY_INDEX_TABLES
+	ld hl, sPokemonIndexTable
+	ld bc, sMoveIndexTable
+	call ChecksumIndexTables
+	ld a, BANK(sGameData)
+	call OpenSRAM
+endc
 	ld a, [sChecksum + 0]
 	cp e
 	jr nz, .fail
@@ -681,6 +718,9 @@ LoadBackupPlayerData:
 	jmp CloseSRAM
 
 LoadBackupPokemonData:
+	ld hl, sBackupPokemonIndexTable
+	ld de, sBackupMoveIndexTable
+	call LoadIndexTables
 	ld a, BANK(sBackupPokemonData)
 	call OpenSRAM
 	ld hl, sBackupPokemonData
@@ -695,6 +735,13 @@ VerifyBackupChecksum:
 	ld a, BANK(sBackupGameData)
 	call OpenSRAM
 	call Checksum
+if !IDENTITY_INDEX_TABLES
+	ld hl, sBackupPokemonIndexTable
+	ld bc, sBackupMoveIndexTable
+	call ChecksumIndexTables
+	ld a, BANK(sBackupGameData)
+	call OpenSRAM
+endc
 	ld a, [sBackupChecksum + 0]
 	cp e
 	jr nz, .fail
@@ -725,8 +772,74 @@ _LoadData:
 	call CopyBytes
 	jmp CloseSRAM
 
+SaveIndexTables:
+; Save the 16-bit conversion tables (the part SAVED_*_TABLE_LENGTH covers) to
+; hl (Pokémon) and de (moves) in SRAM bank 0.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPokemonIndexTable)
+	ldh [rSVBK], a
+	ld a, BANK(sPokemonIndexTable)
+	call OpenSRAM
+	push de
+	ld d, h
+	ld e, l
+	ld hl, wPokemonIndexTable
+	ld bc, SAVED_MON_TABLE_LENGTH
+	call CopyBytes
+	pop de
+	ld hl, wMoveIndexTable
+	ld bc, SAVED_MOVE_TABLE_LENGTH
+	call CopyBytes
+	pop af
+	ldh [rSVBK], a
+	jmp CloseSRAM
+
+LoadIndexTables:
+; Load the 16-bit conversion tables saved at hl (Pokémon) and de (moves) in
+; SRAM bank 0. (While IDENTITY_INDEX_TABLES, the identity tables are rebuilt.)
+	push de
+	push hl
+	farcall InitIndexTables
+	pop hl
+	pop de
+if !IDENTITY_INDEX_TABLES
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPokemonIndexTable)
+	ldh [rSVBK], a
+	ld a, BANK(sPokemonIndexTable)
+	call OpenSRAM
+	push de
+	ld de, wPokemonIndexTable
+	ld bc, SAVED_MON_TABLE_LENGTH
+	call CopyBytes
+	pop hl
+	ld de, wMoveIndexTable
+	ld bc, SAVED_MOVE_TABLE_LENGTH
+	call CopyBytes
+	pop af
+	ldh [rSVBK], a
+	jmp CloseSRAM
+else
+	ret
+endc
+
+ChecksumIndexTables:
+; de = checksum so far: add the saved conversion tables at hl (Pokémon) and
+; bc (moves) in SRAM bank 0.
+	push bc
+	ld a, BANK(sPokemonIndexTable)
+	call OpenSRAM
+	ld bc, SAVED_MON_TABLE_LENGTH
+	call ChecksumContinue
+	pop hl
+	ld bc, SAVED_MOVE_TABLE_LENGTH
+	jr ChecksumContinue
+
 Checksum:
 	ld de, 0
+ChecksumContinue:
 .loop
 	ld a, [hli]
 	add e

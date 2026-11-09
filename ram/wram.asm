@@ -3709,17 +3709,17 @@ assert wWeatherFadeStartPalettesEnd - wWeatherFadeStartOBPals == 8 palettes
 assert wWeatherFadeStartPalettesEnd - wWeatherFadeStartPalettes == WEATHER_FADE_BUFFER_SIZE
 
 
-SECTION "Mobile RAM", WRAMX[$da00], BANK [2]
+SECTION "16-bit WRAM tables", WRAMX[$da00], BANK [2]
+; species and move conversion tables (engine/16); each is padded to $200
+; (this was the unused mobile RAM)
+	wram_conversion_table wPokemonIndexTable, MON_TABLE
+	wram_conversion_table wMoveIndexTable, MOVE_TABLE
+	assert wMoveIndexTableEnd - wPokemonIndexTable <= $400, "16-bit tables grew past $400"
 
-w5_d800:: ds $200 ; unused
-w5_da00:: ds $200 ; unused
-w5_dc00:: ds $d ; unused
-w5_dc0d:: ds 4 ; unused
-w5_dc11:: ds 9 ; unused
-w5_MobileOpponentBattleMessages:: ds $c ; unused
-w5_MobileOpponentBattleStartMessage:: ds $c ; unused
-w5_MobileOpponentBattleWinMessage:: ds $c ; unused
-w5_MobileOpponentBattleLossMessage:: ds $c ; unused
+
+SECTION "16-bit WRAM bitmap", WRAMX, BANK [2], ALIGN[5]
+; IDs in use, built by the garbage collector
+wConversionTableBitmap:: ds $20
 
 
 SECTION "Scratch RAM", WRAMX
@@ -3914,3 +3914,8 @@ wDexGridTopPending:: db
 wDexGridPushOld:: db
 wDexGridPushNew:: db
 wDexGridPicSource:: dw
+
+
+SECTION "16-bit GC Counter", WRAM0
+
+wTempLoopCounter:: db ; garbage collector loop counter (engine/16)

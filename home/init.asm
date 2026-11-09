@@ -105,6 +105,7 @@ Init::
 	rst Bankswitch
 
 	call WriteOAMDMACodeToHRAM
+	farcall InitIndexTables ; (16-bit species / move IDs)
 
 	xor a
 	ldh [hMapAnims], a

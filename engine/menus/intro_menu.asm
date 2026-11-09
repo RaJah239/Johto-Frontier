@@ -121,6 +121,8 @@ _ResetWRAM:
 	xor a
 	call ByteFill
 
+	farcall InitIndexTables ; (16-bit species / move IDs)
+
 	ldh a, [rLY]
 	ldh [hUnusedBackup], a
 	call DelayFrame

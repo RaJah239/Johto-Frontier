@@ -19,6 +19,9 @@ INCLUDE "macros/scripts/battle_anims.asm"
 INCLUDE "macros/scripts/oam_anims.asm"
 INCLUDE "macros/scripts/pic_anims.asm"
 
+INCLUDE "macros/wram_16bit.asm"
+INCLUDE "macros/indirection.asm"
+
 INCLUDE "macros/legacy.asm"
 
 INCLUDE "constants/hardware_constants.asm"
@@ -54,6 +57,7 @@ INCLUDE "constants/npc_trade_constants.asm"
 INCLUDE "constants/pc_constants.asm"
 INCLUDE "constants/phone_constants.asm"
 INCLUDE "constants/pokemon_constants.asm"
+INCLUDE "constants/16_bit_translation_constants.asm"
 INCLUDE "constants/pokemon_data_constants.asm"
 INCLUDE "constants/radio_constants.asm"
 INCLUDE "constants/scgb_constants.asm"
