@@ -932,8 +932,8 @@ Pics_Page_BackText:
 	hlcoord 15, 16
 	ld de, Pics_Page_BackText
 	call PlaceTileString
- 	call Pokedex_BlackOutBG
- 	farcall HDMATransferTilemapToWRAMBank3	
+	call ClearSprites
+	call Pokedex_ScreenOff ; (was a black screen while the page was drawn)
  	call ClearSprites
  	call DisableSpriteUpdates
  	callfar ClearSpriteAnims2
@@ -1010,9 +1010,9 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
 	hlcoord 15, 16
 	ld de, Pics_Page_BackText
 	call PlaceTileString
- 	call WaitBGMap
  	farcall Pokedex_place_Mon_Icon
  	callfar PlaySpriteAnimations
+	call Pokedex_ScreenOn ; the whole page at once (the icon too)
  	farcall Pokedex_PlayMonCry_AnimateFrontpic
  .spritepage_loop
  	callfar PlaySpriteAnimations
@@ -1055,9 +1055,8 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  	ld [wPokedexEntryPageNum], a
  	jmp Pics_Page
  .sprite_b
- 	call ClearSprites ; (the mon icon stayed over the black screen for 2 frames)
- 	call Pokedex_BlackOutBG
- 	call DelayFrame
+ 	call ClearSprites
+	call Pokedex_ScreenOff ; (was a black screen while the entry was redrawn)
  	xor a
  	ldh [hBGMapMode], a
  	call Pokedex_LoadCurrentFootprint
@@ -1097,31 +1096,10 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
  .not_shiny
  	ld [hl], " "
  .shiny_done	
-	; tiles, attributes and palettes in one frame: the entry screen's colours
-	; used to go out while this page's bottom half (name bar, B > BACK) was
-	; still on screen. ApplyAttrmap writes the attributes to the BG map at
-	; hBGMapAddress, so point it at the hidden BG map 1 meanwhile.
-	ldh a, [hBGMapAddress]
-	ld e, a
-	ldh a, [hBGMapAddress + 1]
-	ld d, a
-	push de
-	xor a
-	ldh [hBGMapAddress], a
-	ld a, HIGH(vBGMap1)
-	ldh [hBGMapAddress + 1], a
+	; tiles, attributes and palettes at once
  	ld a, SCGB_POKEDEX
  	call Pokedex_GetSGBLayout
-	pop de
-	ld a, e
-	ldh [hBGMapAddress], a
-	ld a, d
-	ldh [hBGMapAddress + 1], a
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a ; (goes out with the tilemap)
-	ld b, 3
-	farcall _SafeCopyTilemapAtOnce
- 	ret
+	jmp Pokedex_ScreenOn
  .toggle_shininess:
  	xor a
  	ldh [hBGMapMode], a
