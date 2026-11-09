@@ -4666,11 +4666,12 @@ BattleAnim_FlareBlitz:
 	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $0, $0
 	anim_wait 1
 	anim_clearobjs
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $0
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_BGPALS_INVERTED, $0, $4, $0
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $30, $2, $0
 	anim_sound 0, 0, SFX_KARATE_CHOP
 	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
 	anim_wait 4
+	anim_setobjpal PAL_BATTLE_BG_TARGET, PAL_BTLCUSTOM_FIRE ; the target burns
 	anim_sound 0, 0, SFX_KARATE_CHOP
 	anim_obj BATTLE_ANIM_OBJ_RADIAL_FLAME, 136, 56, $0
 	anim_obj BATTLE_ANIM_OBJ_RADIAL_FLAME, 136, 56, $28
@@ -4700,6 +4701,7 @@ BattleAnim_FlareBlitz:
 	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_YELLOW
 	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_RED
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_setobjpal PAL_BATTLE_BG_TARGET, PAL_BTLCUSTOM_DEFAULT
 	anim_ret
 
 BattleAnim_FlareBlitz_Stub:
