@@ -6,4 +6,5 @@ UnawarePokemon:
 ;    db QUAGSIRE
 ;    db CLEFAIRY
 ;    db CLEFABLE
+    db PIKACHU
     db -1
