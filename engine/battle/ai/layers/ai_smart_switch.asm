@@ -159,8 +159,9 @@ AI_Smart_Switch:
     ret c
     ; fallthrough
 .switch
-; can't switch if trapped (repo A checks its own trapping species)
-	call IsEnemyTrappedByPlayerAbility
+; can't switch if trapped: Mean Look / Spider Web, a trapping move or a
+; trapping ability (repo A only checks its own trapping species)
+	call IsEnemyTrapped
 	ret c
 
     ld a, $1

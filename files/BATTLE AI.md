@@ -184,12 +184,13 @@ It then switches with a 20%, 50% or 80% chance, depending on how much it wants t
 ### When it won't switch
 It never switches out when:
 - it's trapped:
-  - Mean Look, Block, Wrap and similar moves
+  - Mean Look or Spider Web
+  - Wrap, Fire Spin, Sand Tomb or Whirlpool
   - your Shadow Tag
   - your Arena Trap, unless it's a Flying type or has Levitate
   - your Magnet Pull, if it's a Steel type
 
-  Run Away escapes all of these.
+  A Pokémon with Run Away escapes the three abilities, but not the moves.
 - it's at +2 or more in Attack, Sp. Atk, Defense or Sp. Def
 - it has no other Pokémon left
 

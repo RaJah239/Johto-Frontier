@@ -204,12 +204,8 @@ AI_TrySwitch:
 ; (+2 Attack / Sp. Atk / Defense / Sp. Def) or no other mon is alive.
 ; (repo A checks its own trapping species; these are this game's trapping
 ; abilities, which the player's mon can have)
-	call IsEnemyTrappedByPlayerAbility
+	call IsEnemyTrapped
 	ret c
-
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_CANT_RUN, a
-	ret nz
 
 	ld a, [wEnemyAtkLevel]
 	cp BASE_STAT_LEVEL + 2
@@ -247,6 +243,21 @@ AI_TrySwitch:
 	cp 2
 	jr nc, AI_Switch
 	and a
+	ret
+
+IsEnemyTrapped:
+; carry if the enemy's mon can't switch out: the player used Mean Look or
+; Spider Web (the user's SUBSTATUS_CANT_RUN means "my opponent can't leave"),
+; the enemy is caught by Wrap / Fire Spin / Sand Tomb / Whirlpool, or the
+; player's ability traps it
+	ld a, [wPlayerSubStatus5]
+	bit SUBSTATUS_CANT_RUN, a
+	jr nz, .trapped
+	ld a, [wEnemyWrapCount]
+	and a
+	jr z, IsEnemyTrappedByPlayerAbility
+.trapped
+	scf
 	ret
 
 IsEnemyTrappedByPlayerAbility:
