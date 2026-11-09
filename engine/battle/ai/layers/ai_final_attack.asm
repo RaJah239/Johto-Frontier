@@ -28,6 +28,10 @@ AI_Final_Attack:
 	pop hl
 	jr nc, .checkmove
 
+; (repo A: a strong +4, so the AI attacks instead of stalling)
+	inc [hl]
+	inc [hl]
+	inc [hl]
 	inc [hl]
 	jr .checkmove
 

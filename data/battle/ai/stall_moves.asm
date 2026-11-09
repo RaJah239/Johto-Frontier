@@ -1,21 +1,18 @@
-; AI_OPPORTUNIST discourages these moves
-; when the player's HP is low.
+; AI_FINAL_ATTACK discourages these moves when the player can KO the AI Pokemon
+; (repo A's list). This does not include most stat increasing moves as they
+; are handled in AI_Smart
 
 StallMoves:
-	db SWORDS_DANCE
 	db LEER
 	db GROWL
 	db DISABLE
-	db MIST
 	db COUNTER
 	db LEECH_SEED
 	db GROWTH
-	db STRING_SHOT
 	db AGILITY
 	db SCREECH
 	db HARDEN
 	db DEFENSE_CURL
-	db BARRIER
 	db LIGHT_SCREEN
 	db HAZE
 	db REFLECT
@@ -24,5 +21,4 @@ StallMoves:
 	db TRANSFORM
 	db SPLASH
 	db SUBSTITUTE
-	db QUIVER_DANCE
 	db -1 ; end
