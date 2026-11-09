@@ -1,5 +1,9 @@
 DelayFrame::
 ; Wait for one frame
+; (no VBlank comes while the LCD is off: don't wait forever)
+	ldh a, [rLCDC]
+	bit rLCDC_ENABLE, a
+	ret z
 	ld a, 1
 	ld [wVBlankOccurred], a
 

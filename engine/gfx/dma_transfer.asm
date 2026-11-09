@@ -162,6 +162,15 @@ HDMATransferToWRAMBank3:
 	call _LoadHDMAParameters
 	ld a, $23
 	ldh [hDMATransfer], a
+	; LCD off: no VBlank to start it, so do it now (general DMA)
+	ldh a, [rLCDC]
+	bit rLCDC_ENABLE, a
+	jr nz, WaitDMATransfer
+	xor a
+	ldh [hDMATransfer], a
+	ld a, $23
+	ldh [rHDMA5], a
+	ret
 	; fallthrough
 
 WaitDMATransfer:

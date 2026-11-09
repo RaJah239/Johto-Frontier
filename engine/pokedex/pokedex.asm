@@ -502,7 +502,7 @@ Pokedex_Page:
 
 Pokedex_ReinitDexEntryScreen:
 ; Reinitialize the Pokédex entry screen after changing the selected mon.
-	call Pokedex_BlackOutBG
+	call Pokedex_ScreenOff ; (was a black screen while it was redrawn)
 	call Pokedex_DrawDexEntryScreenBG
 	call Pokedex_LoadCurrentFootprint
 	call Pokedex_GetSelectedMon
@@ -516,6 +516,7 @@ Pokedex_ReinitDexEntryScreen:
  	ld [wPokedexEntryPageNum], a
  	ld a, DEXENTRY_PICS
  	ld [wPokedexEntryType], a
+	call Pokedex_ScreenOn ; (the area map runs with the LCD on)
  	call Area_Page
  	jr .cont
 .not_area
@@ -597,11 +598,11 @@ Pokedex_ReinitDexEntryScreen:
  .not_shiny
  	ld [hl], " "
  .shiny_done
-	call WaitBGMap
 	call Pokedex_GetSelectedMon
 	ld [wCurPartySpecies], a
 	ld a, SCGB_POKEDEX
 	call Pokedex_GetSGBLayout
+	call Pokedex_ScreenOn ; tiles, attributes and palettes at once
 	ld a, [wCurPartySpecies]
 	call PlayMonCry2
 	ld hl, wJumptableIndex
@@ -762,7 +763,7 @@ Evos_Page:
  	ld [wLastDexMode], a
  .skip
  	call LoadTilemapToTempTilemap
- 	call Pokedex_BlackOutBG
+	call Pokedex_ScreenOff ; (was a black screen while the page was drawn)
  	xor a
  	ldh [hBGMapMode], a
  	ld [wCurDamage], a
@@ -770,10 +771,6 @@ Evos_Page:
  	hlcoord 0, 0
  	lb bc, SCREEN_HEIGHT, SCREEN_WIDTH
  	call ClearBox
- 	call WaitBGMap
- 	xor a
- 	ldh [hBGMapMode], a
- 	farcall HDMATransferTilemapToWRAMBank3
  	
  	ld a, $1
  	ldh [rVBK], a
@@ -785,11 +782,11 @@ Evos_Page:
  	call Pokedex_LoadInversedFont
  	ld a, $0
  	ldh [rVBK], a
- 	call DelayFrame
  	
  	ld a, SCGB_POKEDEX_EVO
  	call Pokedex_GetSGBLayout
  .nextpage_jump
+	call Pokedex_ScreenOff ; (already off when entering the page)
  	xor a
  	ldh [hBGMapMode], a
  	call ClearSprites
@@ -797,7 +794,8 @@ Evos_Page:
  	ld [wCurPartySpecies], a
 	push af
 	farcall DisplayDexMonEvos
- 	call WaitBGMap
+	callfar PlaySpriteAnimations ; (the icons' OAM, shown with the page)
+	call Pokedex_ScreenOn
 	pop af
 	ld [wCurPartySpecies], a 
  	ld [wTempSpecies], a
@@ -840,11 +838,10 @@ Evos_Page:
  	ld a, -1
  	ld [wLastDexMode], a
  .evo_exit
- 	call Pokedex_BlackOutBG
- 	call DelayFrame
+ 	call ClearSprites
+	call Pokedex_ScreenOff ; (was a black screen while the entry was redrawn)
  	xor a
  	ldh [hBGMapMode], a
- 	call ClearSprites
  	call Pokedex_LoadCurrentFootprint
  	call Pokedex_DrawFootprint
  	call Pokedex_LoadPageNums
@@ -883,8 +880,7 @@ Evos_Page:
  .not_shiny
  	ld [hl], " "
  .shiny_done	
-	call WaitBGMap
-	ret
+	jmp Pokedex_ScreenOn
  
  .right_dpad
  	ld a, [wCurDamage + 1]
@@ -3790,6 +3786,41 @@ Pokedex_ArrowCursorDelay:
 
 Pokedex_FillBox:
 	jmp FillBoxWithByte
+
+Pokedex_ScreenOff:
+; Switch screens without a black screen: the LCD goes off (blank white on the
+; CGB) at the next VBlank, the new screen is built with no frame waits (tiles
+; are copied at once with the LCD off), and Pokedex_ScreenOn shows it whole.
+	xor a
+	ldh [hBGMapMode], a
+	jmp DisableLCD
+
+Pokedex_ScreenOn:
+; Tiles, attributes, palettes, OAM and scroll straight to the hardware, then
+; the LCD back on (the screen is built in wTilemap, wAttrmap, wBGPals2 etc.).
+	ldh a, [rLCDC]
+	bit rLCDC_ENABLE, a
+	ret nz
+	xor a
+	ldh [hBGMapMode], a
+	ld b, 3 ; tiles and attributes (LCD off: copied at once)
+	farcall _SafeCopyTilemapAtOnce
+	call ForceUpdateCGBPals
+	xor a
+	ldh [hCGBPalUpdate], a
+	ld hl, wShadowOAM
+	ld de, $fe00 ; OAM (writable while the LCD is off)
+	ld bc, 40 * 4
+	call CopyBytes
+	ldh a, [hSCX]
+	ldh [rSCX], a
+	ldh a, [hSCY]
+	ldh [rSCY], a
+	ldh a, [hWX]
+	ldh [rWX], a
+	ldh a, [hWY]
+	ldh [rWY], a
+	jmp EnableLCD
 
 Pokedex_BlackOutBG:
 	ldh a, [rSVBK]

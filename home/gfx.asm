@@ -215,6 +215,9 @@ CheckGDMA:
 
 Request2bpp::
 ; Load 2bpp at b:de to occupy c tiles of hl.
+	ldh a, [rLCDC]
+	bit rLCDC_ENABLE, a
+	jmp z, Copy2bpp ; (VBlank would never serve it)
 	call CheckGDMA
 	jmp c, SafeHDMATransfer
 
@@ -292,6 +295,9 @@ Request2bpp::
 
 Request1bpp::
 ; Load 1bpp at b:de to occupy c tiles of hl.
+	ldh a, [rLCDC]
+	bit rLCDC_ENABLE, a
+	jmp z, Copy1bpp ; (VBlank would never serve it)
 	ldh a, [hBGMapMode]
 	push af
 	xor a

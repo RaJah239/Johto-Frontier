@@ -1,4 +1,7 @@
 _SafeCopyTilemapAtOnce::
+	ldh a, [rLCDC]
+	bit rLCDC_ENABLE, a
+	jr z, CopyTilemapAtOnceLCDOff
 	ldh a, [hBGMapMode]
 	push af
 	ldh a, [hMapAnims]
@@ -69,6 +72,51 @@ _SafeCopyTilemapAtOnce::
 	pop af
 	ldh [hBGMapMode], a
 	ret
+CopyTilemapAtOnceLCDOff:
+; _SafeCopyTilemapAtOnce with the LCD off (it waited for LY $70, which never
+; comes): copy the attributes (unless b bit 3) and tiles straight to the BG map
+; at hBGMapAddress. b & %11 = 2 also sets the default palettes, as above.
+	ld a, b
+	and %11
+	cp 2
+	push bc
+	call z, SetDefaultBGPAndOBP
+	pop bc
+	bit 3, b
+	jr nz, .tiles
+	hlcoord 0, 0, wAttrmap
+	ld a, 1 ; VRAM1
+	call .copy
+.tiles
+	hlcoord 0, 0
+	xor a ; VRAM0
+.copy
+	ldh [rVBK], a
+	ldh a, [hBGMapAddress]
+	ld e, a
+	ldh a, [hBGMapAddress + 1]
+	ld d, a
+	ld b, SCREEN_HEIGHT
+.row
+	ld c, SCREEN_WIDTH
+.col
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .col
+	ld a, BG_MAP_WIDTH - SCREEN_WIDTH
+	add e
+	ld e, a
+	jr nc, .next_row
+	inc d
+.next_row
+	dec b
+	jr nz, .row
+	xor a
+	ldh [rVBK], a
+	ret
+
 _CopyTilemapAtOnce::
 	ldh a, [hBGMapMode]
 	push af
