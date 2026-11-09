@@ -335,6 +335,9 @@ INCLUDE "gfx/stats/pages.pal"
 StatsScreenPals:
 INCLUDE "gfx/stats/stats.pal"
 
+DEF PAL_DEXENTRY_BALL EQU 6 ; free on the dex entry screen
+DEF PAL_DEXPICS_BALL  EQU 2 ; free on the pictures page
+
 _CGB_Pokedex:
 	ld de, wBGPals1
 	; light interface, like the grid (it was black panels in the dex colour:
@@ -613,6 +616,13 @@ _CGB_Pokedex_PicsPage:
 	hlcoord 19, 0, wAttrmap
  	ld [hl], 0 ; remove VRAM 1 bit
  
+; caught ball left of the name (see Pokedex_SetCaughtBallPalette)
+	ld de, wBGPals1 palette PAL_DEXPICS_BALL
+	ld hl, PokedexLightBallPalette
+	call LoadHLPaletteIntoDE
+	hlcoord 5, 11, wAttrmap
+	ld [hl], PAL_DEXPICS_BALL
+
 ; B > BACK (VRAM 1 tiles)
 	hlcoord 15, 16, wAttrmap
 	ld bc, 4
@@ -713,8 +723,6 @@ PokedexLightPalette:
 	RGB 26, 10,  6
 	RGB 23, 23, 23
 	RGB 31, 31, 31
-
-DEF PAL_DEXENTRY_BALL EQU 6 ; free on the dex entry screen
 
 Pokedex_SetCaughtBallPalette:
 	ld de, wBGPals1 palette PAL_DEXENTRY_BALL
