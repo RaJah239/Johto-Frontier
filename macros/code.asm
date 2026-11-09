@@ -94,3 +94,13 @@ if _NARG == 0
 	sine_table 32
 endc
 ENDM
+
+MACRO compare_hl ; 16-bit value
+; z if hl == the value (for 16-bit species / move indexes); clobbers a
+	ld a, l
+	cp LOW(\1)
+	jr nz, .compare_hl\@
+	ld a, h
+	cp HIGH(\1)
+.compare_hl\@
+ENDM

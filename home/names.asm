@@ -111,11 +111,10 @@ GetPokemonName::
 
 ; Each name is ten characters
 	ld a, [wNamedObjectIndex]
-	dec a
-	ld d, 0
-	ld e, a
-	ld h, 0
-	ld l, a
+	call GetPokemonIndexFromID
+	dec hl
+	ld d, h
+	ld e, l
 	add hl, hl
 	add hl, hl
 	add hl, de

@@ -178,14 +178,19 @@ endr
 	ret
 
 GetCryIndex::
+; a = species ID: bc = its cry's index in PokemonCries (16-bit index - 1),
+; or carry if it has none
 	and a
 	jr z, .no
-	cp NUM_POKEMON + 1
+	cp MON_TABLE_MINIMUM_RESERVED_INDEX ; (EGG)
 	jr nc, .no
-
-	dec a
-	ld c, a
-	ld b, 0
+	call GetPokemonIndexFromID
+	ld a, h
+	or l
+	jr z, .no
+	dec hl
+	ld b, h
+	ld c, l
 	and a
 	ret
 
@@ -224,14 +229,38 @@ Print8BitNumLeftAlign::
 	ld b, PRINTNUM_LEFTALIGN | 1
 	jmp PrintNum
 
+GetMonMenuIconPal::
+; a = species ID (or EGG): a = its MonMenuIconPals byte (normal palette in
+; the high nibble, shiny in the low one). Preserves bc and de.
+	cp EGG
+	jr z, .egg
+	call GetPokemonIndexFromID
+	push de
+	ld de, MonMenuIconPals - 1
+	add hl, de
+	pop de
+	jr .got_pointer
+.egg
+	ld hl, EggMenuIconPals
+.got_pointer
+	ld a, BANK(MonMenuIconPals)
+	jmp GetFarByte
+
+GetBaseDataPointer::
+; a = species ID: a:hl = its base data (BaseData is an indirect table)
+	call GetPokemonIndexFromID
+	ld b, h
+	ld c, l
+	ld a, BANK(BaseData)
+	ld hl, BaseData
+	jmp LoadIndirectPointer
+
 GetBaseData::
 	push hl
 	push de
 	push bc
 	ldh a, [hROMBank]
 	push af
-	ld a, BANK(BaseData)
-	rst Bankswitch
 
 ; Egg doesn't have BaseData
 	ld a, [wCurSpecies]
@@ -239,10 +268,8 @@ GetBaseData::
 	jr z, .egg
 
 ; Get BaseData
-	dec a
-	ld bc, BASE_DATA_SIZE
-	ld hl, BaseData
-	call AddNTimes
+	call GetBaseDataPointer
+	rst Bankswitch
 	ld de, wCurBaseData
 	ld bc, BASE_DATA_SIZE
 	call CopyBytes

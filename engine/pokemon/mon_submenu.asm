@@ -314,11 +314,9 @@ CheckLvlUpMoves:
 ; move looking for in a
 	ld d, a
 	ld a, [wCurPartySpecies]
-	dec a
-	ld b, 0
-	ld c, a
-	ld hl, EvosAttacksPointers
-	add hl, bc
+	call GetPokemonIndexFromID
+	ld bc, EvosAttacksPointers - 2
+	add hl, hl
 	add hl, bc
 	ld a, BANK(EvosAttacksPointers)
 	ld b, a

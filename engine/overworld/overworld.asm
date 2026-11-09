@@ -321,13 +321,7 @@ _GetSpritePalette::
 	jr z, .got_species
 	ld a, [wBreedMon2Species]
 .got_species
-	dec a
-	ld h, 0
-	ld l, a
-	ld de, MonMenuIconPals
-	add hl, de
-	ld a, BANK(MonMenuIconPals)
-	call GetFarByte
+	call GetMonMenuIconPal
 	ld d, a
 	ld a, c
 	cp SPRITE_DAY_CARE_MON_1

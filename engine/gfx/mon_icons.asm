@@ -3,15 +3,35 @@ LoadOverworldMonIcon:
 	ld [wCurIcon], a
 	; fallthrough
 _LoadOverworldMonIcon:
-	ld l, a
-	ld h, 0
+	; fallthrough
+
+GetMonIconGFX:
+; a = species ID (or EGG): de = its icon's graphics, b = their bank, c = 8
+	cp EGG
+	jr z, .egg
+	call GetPokemonIndexFromID ; (0 stays 0: no icon)
+	push hl
 	add hl, hl
 	ld de, IconPointers
 	add hl, de
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
-	jmp GetIconBank
+	pop hl
+	; the icons from MANKEY's on are in "Mon Icons 2"
+	ld a, l
+	sub LOW(MANKEY)
+	ld a, h
+	sbc HIGH(MANKEY)
+	lb bc, BANK("Mon Icons 1"), 8
+	ret c
+	ld b, BANK("Mon Icons 2")
+	ret
+
+.egg
+	ld de, EggIcon
+	lb bc, BANK(EggIcon), 8
+	ret
 
 SetMenuMonIconColor:
 	push hl
@@ -129,14 +149,11 @@ _FinishMenuMonIconColor:
 GetMonPalInBCDE:
 ; Sets BCDE to mon icon palette.
 ; Input: c = species, b = shininess (1=true, 0=false)
-	ld hl, MonMenuIconPals
-	dec c
+	ld a, c
+	call GetMonMenuIconPal
 
 	; This sets z if mon is shiny.
 	dec b
-	ld b, 0
-	add hl, bc
-	ld a, [hl]
 	jr z, .shiny
 	swap a
 .shiny
@@ -168,12 +185,8 @@ GetMenuMonIconPalette:
 GetMenuMonIconPalette_PredeterminedShininess:
 	push af
 	ld a, [wCurPartySpecies]
-	dec a
-	ld c, a
-	ld b, 0
-	ld hl, MonMenuIconPals
-	add hl, bc
-	ld e, [hl]
+	call GetMonMenuIconPal
+	ld e, a
 	pop af
 	ld a, e
 	jr c, .shiny
@@ -564,28 +577,11 @@ endr
 
 	ld a, [wCurIcon]
 	push hl
-	ld l, a
-	ld h, 0
-	add hl, hl
-	ld de, IconPointers
-	add hl, de
-	ld a, [hli]
-	ld e, a
-	ld d, [hl]
+	call GetMonIconGFX
 	pop hl
-
-	call GetIconBank
 	call GetGFXUnlessMobile
 
 	pop hl
-	ret
-
-GetIconBank:
-	ld a, [wCurIcon]
-	cp MANKEY ; first species in "Mon Icons 2"
-	lb bc, BANK("Mon Icons 1"), 8
-	ret c
-	ld b, BANK("Mon Icons 2")
 	ret
 
 GetGFXUnlessMobile:

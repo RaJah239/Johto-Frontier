@@ -3,7 +3,8 @@ MACRO icon_pals
 	dn PAL_ICON_\1, PAL_ICON_\2
 ENDM
 
-MonMenuIconPals:
+MonMenuIconPals::
+; indexed by 16-bit species index (see GetMonMenuIconPal)
 	table_width 1, MonMenuIconPals
 	;         normal, shiny
 	
@@ -260,8 +261,9 @@ MonMenuIconPals:
 	icon_pals PINK,   BLUE   ; MEW
 	icon_pals PURPLE, GREEN  ; MEWTWO
 	assert_table_length NUM_POKEMON
+
+EggMenuIconPals::
 	icon_pals RED,    BLUE   ; EGG
-	assert_table_length EGG
 
 MonMenuIconPalToNPCPalTable:
 	db PAL_OW_RED

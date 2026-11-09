@@ -251,11 +251,9 @@ GetGender:
 ; itself is ignored.
 	push hl
 	ld a, [wCurPartySpecies]
-	dec a
-	ld hl, BaseData + BASE_GENDER
-	ld bc, BASE_DATA_SIZE
-	call AddNTimes
-	ld a, BANK(BaseData)
+	call GetBaseDataPointer
+	ld bc, BASE_GENDER
+	add hl, bc
 	call GetFarByte
 	pop hl
 

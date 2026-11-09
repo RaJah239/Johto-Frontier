@@ -42,11 +42,9 @@ EvolveAfterBattle_MasterLoop:
 	jr z, EvolveAfterBattle_MasterLoop
 
 	ld a, [wEvolutionOldSpecies]
-	dec a
-	ld b, 0
-	ld c, a
-	ld hl, EvosAttacksPointers
-	add hl, bc
+	call GetPokemonIndexFromID
+	ld bc, EvosAttacksPointers - 2
+	add hl, hl
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
@@ -342,10 +340,8 @@ EvolveAfterBattle_MasterLoop:
 LearnEvolutionMove:
 	ld a, [wTempSpecies]
 	ld [wCurPartySpecies], a
-	dec a
-	ld c, a
-	ld b, 0
-	ld hl, EvolutionMoves
+	call GetPokemonIndexFromID
+	ld bc, EvolutionMoves - 1
 	add hl, bc
 	ld a, [hl]
 	and a
@@ -448,11 +444,9 @@ EvolvingText:
 LearnLevelMoves:
 	ld a, [wTempSpecies]
 	ld [wCurPartySpecies], a
-	dec a
-	ld b, 0
-	ld c, a
-	ld hl, EvosAttacksPointers
-	add hl, bc
+	call GetPokemonIndexFromID
+	ld bc, EvosAttacksPointers - 2
+	add hl, hl
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
@@ -515,13 +509,10 @@ FillMoves:
 	push hl
 	push de
 	push bc
-	ld hl, EvosAttacksPointers
-	ld b, 0
 	ld a, [wCurPartySpecies]
-	dec a
-	add a
-	rl b
-	ld c, a
+	call GetPokemonIndexFromID
+	ld bc, EvosAttacksPointers - 2
+	add hl, hl
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]

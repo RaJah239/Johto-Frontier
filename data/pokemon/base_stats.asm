@@ -27,7 +27,15 @@ MACRO tmhm
 ENDM
 
 BaseData::
-	table_width BASE_DATA_SIZE, BaseData
+; indexed by 16-bit species index (see GetBaseDataPointer); add an
+; indirect_entries line (and a BaseData2 in another section) when the
+; species outgrow this bank
+	indirect_table BASE_DATA_SIZE, 1
+	indirect_entries NUM_POKEMON, BaseData1
+	indirect_table_end
+
+BaseData1:
+	table_width BASE_DATA_SIZE, BaseData1
 
 INCLUDE "data/pokemon/base_stats/cyndaquil.asm"
 INCLUDE "data/pokemon/base_stats/quilava.asm"

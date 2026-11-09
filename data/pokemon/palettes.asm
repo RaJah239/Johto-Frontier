@@ -1,5 +1,6 @@
 PokemonPalettes:
-; entries correspond to Pokémon species, two apiece
+; entries correspond to Pokémon species (16-bit index; 0 is the "?" palette),
+; two apiece
 
 ; Each front.gbcpal is generated from the corresponding .png, and
 ; only the middle two colors are included, not black or white.
@@ -521,10 +522,12 @@ INCBIN "gfx/pokemon/mewtwo/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/mewtwo/shiny.pal"
 	assert_table_length NUM_POKEMON + 1
 
+ReservedMonPalettes:
+; the 8-bit IDs that aren't species indexes: EGG ($FD), $FE and $FF
+	table_width PAL_COLOR_SIZE * 2 * 2, ReservedMonPalettes
+
 INCBIN "gfx/pokemon/egg/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/egg/shiny.pal"
-
-	assert_table_length EGG + 1
 
 ; 254
 	RGB 30, 26, 11
@@ -540,4 +543,4 @@ INCLUDE "gfx/pokemon/egg/shiny.pal"
 	RGB 23, 23, 23
 	RGB 17, 17, 17
 
-	assert_table_length $100
+	assert_table_length $100 - MON_TABLE_MINIMUM_RESERVED_INDEX

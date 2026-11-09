@@ -2435,15 +2435,19 @@ DexGrid_LoadIcons:
 	ld [wDexGridCellSpecies], a
 	; source
 	ld a, [wDexGridCellSpecies]
-	ld l, a
-	ld h, 0
+	call GetPokemonIndexFromID
+	push hl
 	add hl, hl
 	ld bc, IconPointers
 	add hl, bc
 	ld a, BANK(IconPointers)
 	call GetFarWord ; hl = icon gfx
-	ld a, [wDexGridCellSpecies]
-	cp MANKEY ; first species in "Mon Icons 2"
+	pop bc ; bc = 16-bit species index
+	; the icons from MANKEY's on are in "Mon Icons 2"
+	ld a, c
+	sub LOW(MANKEY)
+	ld a, b
+	sbc HIGH(MANKEY)
 	ld a, BANK("Mon Icons 1")
 	jr c, .got_bank
 	ld a, BANK("Mon Icons 2")
@@ -2528,14 +2532,8 @@ DexGrid_UpdateOAM:
 	ld [wDexGridTmp + 1], a
 	; palette key: icon colour, + faded if only seen
 	ld a, [wDexGridCellSpecies]
-	dec a
-	ld c, a
-	ld b, 0
 	push hl
-	ld hl, MonMenuIconPals
-	add hl, bc
-	ld a, BANK(MonMenuIconPals)
-	call GetFarByte
+	call GetMonMenuIconPal
 	swap a ; normal palette in the high nibble
 	and $f
 	ld b, a

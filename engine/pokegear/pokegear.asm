@@ -933,13 +933,7 @@ PokegearMap_InitSwarmIcon:
 ; set the species' menu icon colour (the icon OAM data keeps attributes)
 	pop de
 	ld a, d
-	dec a
-	ld c, a
-	ld b, 0
-	ld hl, MonMenuIconPals
-	add hl, bc
-	ld a, BANK(MonMenuIconPals)
-	call GetFarByte
+	call GetMonMenuIconPal
 	swap a
 	and $f
 	ld hl, wShadowOAMSprite08Attributes

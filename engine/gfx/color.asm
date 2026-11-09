@@ -608,12 +608,20 @@ _GetMonPalettePointer:
 	; Preserves de. Clobbers bc, hl.
 	ld c, a
 	push de
+	cp MON_TABLE_MINIMUM_RESERVED_INDEX
+	jr c, .species
+	sub MON_TABLE_MINIMUM_RESERVED_INDEX
 	ld l, a
 	ld h, 0
-	add hl, hl
-	add hl, hl
-	add hl, hl
+	ld de, ReservedMonPalettes
+	jr .got_entry
+.species
+	call GetPokemonIndexFromID ; (0 stays 0: the "?" palette)
 	ld de, PokemonPalettes
+.got_entry
+	add hl, hl
+	add hl, hl
+	add hl, hl
 	add hl, de
 	push hl                  ; save the default ROM pointer
 	ldh a, [rSVBK]

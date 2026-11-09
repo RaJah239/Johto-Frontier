@@ -223,11 +223,10 @@ GetRemindableMoves:
 	; table that is located in another bank. This is the
 	; list of evolutions and learnset of every Pokémon.
 	ld a, [wCurPartySpecies]
-	dec a
 	push bc
-	ld c, a
-	ld hl, EvosAttacksPointers
-	add hl, bc
+	call GetPokemonIndexFromID
+	ld bc, EvosAttacksPointers - 2
+	add hl, hl
 	add hl, bc
 	ld a, BANK(EvosAttacksPointers)
 	call GetFarWord

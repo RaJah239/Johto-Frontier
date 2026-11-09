@@ -641,10 +641,10 @@ PokedexShow1:
 
 PokedexShow2:
 	ld a, [wCurPartySpecies]
-	dec a
-	ld hl, PokedexDataPointerTable
-	ld c, a
-	ld b, 0
+	call GetPokemonIndexFromID
+	ld b, h
+	ld c, l
+	ld hl, PokedexDataPointerTable - 3
 	add hl, bc
 	add hl, bc
 	add hl, bc

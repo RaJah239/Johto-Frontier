@@ -393,11 +393,11 @@ DisplayPlayerNameAndAbility:
 GetDexEntryPointer:
 ; return dex entry pointer b:de
 	push hl
-	ld hl, PokedexDataPointerTable
 	ld a, b
-	dec a
-	ld d, 0
-	ld e, a
+	call GetPokemonIndexFromID
+	ld d, h
+	ld e, l
+	ld hl, PokedexDataPointerTable - 3
 	add hl, de
 	add hl, de
 	add hl, de

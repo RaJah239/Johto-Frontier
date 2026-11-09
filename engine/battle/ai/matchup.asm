@@ -467,11 +467,9 @@ MSim_LoadCandidate:
 
 	; types
 	ld a, [wEnemyMonSpecies]
-	dec a
-	ld hl, BaseData + BASE_TYPES
-	ld bc, BASE_DATA_SIZE
-	call AddNTimes
-	ld a, BANK(BaseData)
+	call GetBaseDataPointer
+	ld bc, BASE_TYPES
+	add hl, bc
 	call GetFarWord
 	ld a, l
 	ld [wEnemyMonType1], a

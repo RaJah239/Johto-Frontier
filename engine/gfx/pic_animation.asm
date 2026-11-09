@@ -463,8 +463,12 @@ PokeAnim_StopWaitAnim:
 	ret
 
 PokeAnim_IsUnown:
+; z if the species is Unown (clobbers a)
+	push hl
 	ld a, [wPokeAnimSpecies]
-	cp UNOWN
+	call GetPokemonIndexFromID
+	compare_hl UNOWN
+	pop hl
 	ret
 
 PokeAnim_IsEgg:
@@ -896,27 +900,29 @@ GetMonAnimPointer:
 	jr z, .egg
 
 	ld c, BANK(UnownAnimationPointers) ; aka BANK(UnownAnimationIdlePointers)
-	ld hl, UnownAnimationPointers
-	ld de, UnownAnimationIdlePointers
+	ld hl, UnownAnimationPointers - 2
+	ld de, UnownAnimationIdlePointers - 2
 	call PokeAnim_IsUnown
 	jr z, .unown
 	ld c, BANK(AnimationPointers) ; aka BANK(AnimationIdlePointers)
-	ld hl, AnimationPointers
-	ld de, AnimationIdlePointers
+	ld hl, AnimationPointers - 2
+	ld de, AnimationIdlePointers - 2
 .unown
 
 	ld a, [wPokeAnimIdleFlag]
 	and a
-	jr z, .idles
-	ld h, d
-	ld l, e
-.idles
+	jr nz, .got_pointers ; idle: de
+	ld d, h
+	ld e, l
+.got_pointers
 
+	; the Unown letter, or the species' 16-bit index
+	call PokeAnim_IsUnown
 	ld a, [wPokeAnimSpeciesOrUnown]
-	dec a
-	ld e, a
-	ld d, 0
-	add hl, de
+	ld l, a
+	ld h, 0
+	call nz, GetPokemonIndexFromID
+	add hl, hl
 	add hl, de
 	ld a, c
 	ld [wPokeAnimPointerBank], a
@@ -967,23 +973,29 @@ GetMonFramesPointer:
 	call PokeAnim_IsUnown
 	ld b, BANK(UnownFramesPointers)
 	ld c, BANK(UnownsFrames)
-	ld hl, UnownFramesPointers
+	ld hl, UnownFramesPointers - 2
+	ld a, [wPokeAnimSpeciesOrUnown]
+	ld e, a
+	ld d, 0
 	jr z, .got_frames
+	; de = the species' 16-bit index; the frames from JOHTO_POKEMON's on are
+	; in JohtoFrames' bank
 	ld a, [wPokeAnimSpecies]
-	cp JOHTO_POKEMON
+	call GetPokemonIndexFromID
+	ld d, h
+	ld e, l
+	ld a, e
+	sub LOW(JOHTO_POKEMON)
+	ld a, d
+	sbc HIGH(JOHTO_POKEMON)
 	ld b, BANK(FramesPointers)
 	ld c, BANK(KantoFrames)
-	ld hl, FramesPointers
+	ld hl, FramesPointers - 2
 	jr c, .got_frames
 	ld c, BANK(JohtoFrames)
 .got_frames
 	ld a, c
 	ld [wPokeAnimFramesBank], a
-
-	ld a, [wPokeAnimSpeciesOrUnown]
-	dec a
-	ld e, a
-	ld d, 0
 	add hl, de
 	add hl, de
 	ld a, b
@@ -1011,18 +1023,19 @@ GetMonBitmaskPointer:
 
 	call PokeAnim_IsUnown
 	ld a, BANK(UnownBitmasksPointers)
-	ld hl, UnownBitmasksPointers
+	ld de, UnownBitmasksPointers - 2
 	jr z, .unown
 	ld a, BANK(BitmasksPointers)
-	ld hl, BitmasksPointers
+	ld de, BitmasksPointers - 2
 .unown
 	ld [wPokeAnimBitmaskBank], a
 
+	; the Unown letter, or the species' 16-bit index (z is still IsUnown's)
 	ld a, [wPokeAnimSpeciesOrUnown]
-	dec a
-	ld e, a
-	ld d, 0
-	add hl, de
+	ld l, a
+	ld h, 0
+	call nz, GetPokemonIndexFromID
+	add hl, hl
 	add hl, de
 	ld a, [wPokeAnimBitmaskBank]
 	call GetFarWord

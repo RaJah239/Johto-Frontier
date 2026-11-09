@@ -2156,13 +2156,11 @@ UnevolvedEviolite:
 .got_species
 ; check if the defender has any evolutions
 ; hl := EvosAttacksPointers + (species - 1) * 2
-	dec a
 	push hl
 	push bc
-	ld c, a
-	ld b, 0
-	ld hl, EvosAttacksPointers
-	add hl, bc
+	call GetPokemonIndexFromID
+	ld bc, EvosAttacksPointers - 2
+	add hl, hl
 	add hl, bc
 ; hl := the species' entry from EvosAttacksPointers
 	ld a, BANK(EvosAttacksPointers)

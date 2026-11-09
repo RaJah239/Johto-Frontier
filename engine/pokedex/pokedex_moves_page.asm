@@ -83,11 +83,9 @@ DisplayDexMonMoves::
 
 Pokedex_Calc_LvlMovesPtr:
 	ld a, [wTempSpecies]
-	dec a
-	ld b, 0
-	ld c, a
-	ld hl, EvosAttacksPointers
-	add hl, bc
+	call GetPokemonIndexFromID
+	ld bc, EvosAttacksPointers - 2
+	add hl, hl
 	add hl, bc
 	ld a, BANK(EvosAttacksPointers)
 	call GetFarWord
@@ -367,12 +365,10 @@ Pokedex_Calc_EggMovesPtr:
 	callfar GetPreEvolution ; changes wCurPartyMon
 	callfar GetPreEvolution ; changes wCurPartyMon
 	ld a, [wCurPartySpecies]
-	dec a ; Bulbasaur is No 1 but entry ZERO
-	ld b, 0
-	ld c, a
-	ld hl, EggMovePointers
-	add hl, bc ; trying to add the species number in only 'a' will overflow a
-	add hl, bc ; add twice to double the index, words/PTRs are TWO bytes ea
+	call GetPokemonIndexFromID ; by 16-bit index, from 1
+	ld bc, EggMovePointers - 2
+	add hl, hl ; words/PTRs are TWO bytes each
+	add hl, bc
 	ld a, [wCurSpecies]
 	ld [wCurPartySpecies], a
 	ld [wTempSpecies], a

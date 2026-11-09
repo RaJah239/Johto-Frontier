@@ -1038,10 +1038,10 @@ HeavyBallMultiplier:
 ; else add 30 to catch rate if weight < 409.6 kg
 ; else add 40 to catch rate
 	ld a, [wEnemyMonSpecies]
-	ld hl, PokedexDataPointerTable
-	dec a
-	ld e, a
-	ld d, 0
+	call GetPokemonIndexFromID
+	ld d, h
+	ld e, l
+	ld hl, PokedexDataPointerTable - 3
 	add hl, de
 	add hl, de
 	add hl, de
@@ -1156,11 +1156,9 @@ LureBallMultiplier:
 MoonBallMultiplier:
 	push bc
 	ld a, [wTempEnemyMonSpecies]
-	dec a
-	ld c, a
-	ld b, 0
-	ld hl, EvosAttacksPointers
-	add hl, bc
+	call GetPokemonIndexFromID
+	ld bc, EvosAttacksPointers - 2
+	add hl, hl
 	add hl, bc
 	ld a, BANK(EvosAttacksPointers)
 	call GetFarWord

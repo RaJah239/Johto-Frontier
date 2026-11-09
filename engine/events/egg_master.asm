@@ -126,11 +126,10 @@ GetRemindableEggMoves:
     ld b, 0
     ld de, wd002 + 1
     ld a, [wCurPartySpecies]
-    dec a
     push bc
-    ld c, a
-    ld hl, EggMovePointers
-    add hl, bc
+    call GetPokemonIndexFromID
+    ld bc, EggMovePointers - 2
+    add hl, hl
     add hl, bc
     ld a, BANK(EggMovePointers)
     call GetFarWord

@@ -157,13 +157,11 @@ AreThePlayerMonMovesEffectiveAgainstOTMon:
 	ld b, 0
 	add hl, bc ; increment hl to to current enemy mon in the loop
 	ld a, [hl] ; a is the current enemy mon
-	dec a
-	ld hl, BaseData + BASE_TYPES
-	ld bc, BASE_DATA_SIZE
-	call AddNTimes ; increment hl to the current enemy mon type
+	call GetBaseDataPointer
+	ld bc, BASE_TYPES
+	add hl, bc ; the current enemy mon's types
 	ld de, wEnemyMonType
 	ld bc, BASE_CATCH_RATE - BASE_TYPES
-	ld a, BANK(BaseData)
 	call FarCopyBytes ; at this point wEnemyMonType contains both enemy types in de
 	ld hl, wBattleMonMoves ; load player moves
 	ld e, NUM_MOVES + 1 ; didn't have much choice but to override e

@@ -3877,22 +3877,13 @@ Pokedex_LoadCurrentFootprint:
 	call Pokedex_GetSelectedMon
 
 Pokedex_LoadAnyFootprint:
+	; 4 1bpp tiles (32 bytes) per species, by 16-bit index
 	ld a, [wTempSpecies]
-	dec a
-	and %11111000
-	srl a
-	srl a
-	srl a
-	ld e, 0
-	ld d, a
-	ld a, [wTempSpecies]
-	dec a
-	and %111
-	swap a
-	add a, a
-	ld l, a
-	ld h, 0
-	add hl, de
+	call GetPokemonIndexFromID
+	dec hl
+rept 5
+	add hl, hl
+endr
 	ld de, Footprints
 	add hl, de
 

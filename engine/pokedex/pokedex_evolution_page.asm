@@ -70,11 +70,9 @@ ENDC
 	ld [wStatsScreenFlags], a
 	
 	ld a, [wCurPartySpecies]
-	dec a
-	ld b, 0
-	ld c, a
-	ld hl, EvosAttacksPointers
-	add hl, bc
+	call GetPokemonIndexFromID
+	ld bc, EvosAttacksPointers - 2
+	add hl, hl
 	add hl, bc
 	ld a, BANK(EvosAttacksPointers)
 	call GetFarWord
@@ -266,11 +264,9 @@ IF DEF(EVOLVE_HELD)
 	jmp z, .exit_early_print_cont2
 	push bc ; count and stage
 	ld a, [wCurPartySpecies] ; stage 1 evo
-	dec a
-	ld b, 0
-	ld c, a
-	ld hl, EvosAttacksPointers
-	add hl, bc
+	call GetPokemonIndexFromID
+	ld bc, EvosAttacksPointers - 2
+	add hl, hl
 	add hl, bc
 	ld a, BANK(EvosAttacksPointers)
 	call GetFarWord
@@ -290,11 +286,9 @@ IF DEF(EVOLVE_HELD)
 	inc hl ; species byte
 	ld a, BANK("Evolutions and Attacks")
 	call GetFarByte ; stage 2 species
-	dec a
-	ld b, 0
-	ld c, a
-	ld hl, EvosAttacksPointers
-	add hl, bc
+	call GetPokemonIndexFromID
+	ld bc, EvosAttacksPointers - 2
+	add hl, hl
 	add hl, bc
 	ld a, BANK(EvosAttacksPointers)
 	call GetFarWord
@@ -986,11 +980,9 @@ EVO_set_multi_page_ptr:
 .start
 	push bc
 	ld a, [wCurPartySpecies] ; stage 1 evo
-	dec a
-	ld b, 0
-	ld c, a
-	ld hl, EvosAttacksPointers
-	add hl, bc
+	call GetPokemonIndexFromID
+	ld bc, EvosAttacksPointers - 2
+	add hl, hl
 	add hl, bc
 	ld a, BANK(EvosAttacksPointers)
 	call GetFarWord
@@ -1041,11 +1033,9 @@ EVO_set_multi_page_ptr:
 	inc hl ; species byte
 	ld a, BANK("Evolutions and Attacks")
 	call GetFarByte ; stage 2 species		
-	dec a
-	ld b, 0
-	ld c, a
-	ld hl, EvosAttacksPointers
-	add hl, bc
+	call GetPokemonIndexFromID
+	ld bc, EvosAttacksPointers - 2
+	add hl, hl
 	add hl, bc
 	ld a, BANK(EvosAttacksPointers)
 	call GetFarWord	

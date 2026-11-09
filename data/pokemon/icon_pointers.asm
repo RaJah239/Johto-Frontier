@@ -1,5 +1,6 @@
 IconPointers:
-; entries correspond to ICON_* constants (see constants/icon_constants.asm)
+; indexed by 16-bit species index (0: no icon); EGG's is EggIcon
+; (see GetMonIconGFX)
 	table_width 2, IconPointers
 	dw NullIcon
 	dw CyndaquilIcon
@@ -255,5 +256,3 @@ IconPointers:
 	dw MewIcon
 	dw MewtwoIcon
 	assert_table_length NUM_POKEMON + 1
-	dw EggIcon
-	assert_table_length EGG + 1

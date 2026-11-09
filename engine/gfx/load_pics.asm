@@ -158,21 +158,10 @@ _GetFrontpic:
 	ret
 
 GetFrontpicPointer:
-	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr z, .unown
-	ld hl, PokemonPicPointers
-	ld a, [wCurPartySpecies]
-	ld d, BANK(PokemonPicPointers)
-	jr .ok
-.unown
-	ld hl, UnownPicPointers
 	ld a, [wUnownLetter]
-	ld d, BANK(UnownPicPointers)
-.ok
-	dec a
-	ld bc, 6
-	call AddNTimes
+	ld c, a
+	ld a, [wCurPartySpecies]
+	call GetMonPicPointerEntry
 	ld a, d
 	call GetFarByte
 	push af
@@ -180,6 +169,31 @@ GetFrontpicPointer:
 	ld a, d
 	call GetFarWord
 	pop bc
+	ret
+
+GetMonPicPointerEntry:
+; a = species ID, c = Unown letter: d:hl = its PokemonPicPointers entry (or
+; UnownPicPointers, for Unown): the front pic's dba, then the back pic's
+	call GetPokemonIndexFromID ; (preserves bc)
+	compare_hl UNOWN
+	jr z, .unown
+	ld d, BANK(PokemonPicPointers)
+	ld bc, PokemonPicPointers - 6
+	jr .times_6
+.unown
+	ld l, c
+	ld h, 0
+	ld d, BANK(UnownPicPointers)
+	ld bc, UnownPicPointers - 6
+.times_6
+	push de
+	ld d, h
+	ld e, l
+	add hl, hl
+	add hl, de
+	add hl, hl
+	pop de
+	add hl, bc
 	ret
 
 GetAnimatedEnemyFrontpic:
@@ -283,19 +297,9 @@ GetMonBackpic:
 	ldh [rSVBK], a
 	push de
 
-	ld hl, PokemonPicPointers
 	ld a, b
-	ld d, BANK(PokemonPicPointers)
-	cp UNOWN
-	jr nz, .ok
-	ld hl, UnownPicPointers
-	ld a, c
-	ld d, BANK(UnownPicPointers)
-.ok
-	dec a
-	ld bc, 6
-	call AddNTimes
-	ld bc, 3
+	call GetMonPicPointerEntry
+	ld bc, 3 ; back pic
 	add hl, bc
 	ld a, d
 	call GetFarByte
