@@ -687,7 +687,7 @@ Battle_EnemyFirst:
 	call SetEnemyTurn
 	ld a, $1
 	ld [wEnemyGoesFirst], a
-	callfar AI_SwitchOrTryItem
+	call EnemySwitchOrTryItem
 	jr c, .switch_item
 	call EnemyTurn_EndOpponentProtectEndureDestinyBond
 	ld a, [wForcedSwitch]
@@ -734,7 +734,7 @@ Battle_PlayerFirst:
 	xor a
 	ld [wEnemyGoesFirst], a
 	call SetEnemyTurn
-	callfar AI_SwitchOrTryItem
+	call EnemySwitchOrTryItem
 	push af
 	call EnemySwitchSpikes
 	jr z, .spikes_faint
@@ -789,6 +789,36 @@ Battle_PlayerFirst:
 .spikes_faint
 	pop af ; realign stack, don't care about values
 	jmp HandleEnemyMonFaint
+
+EnemySwitchOrTryItem:
+; From repo A: if AI_Smart_Switch (during AIChooseMove) asked for a switch
+; (wEnemyIsSwitching), try it (AI_TrySwitch: not when trapped, set up or
+; alone; the switch-in picker chooses the mon); otherwise
+; AI_SwitchOrTryItem. Carry if the enemy switched or used an item.
+	ld a, [wEnemyIsSwitching]
+	and a
+	jr z, .no_smart_switch
+	xor a
+	ld [wEnemyIsSwitching], a ; (AI_Switch sets it again if it switches)
+	ld a, [wLinkMode]
+	and a
+	ret nz
+	; which mon: the switch-in picker (needs another alive mon)
+	farcall FindAliveEnemyMons
+	jr c, .no_switch
+	farcall FindForcedReplacementInOTParty
+	inc b
+	ld a, b
+	ld [wEnemySwitchMonIndex], a
+	callfar AI_TrySwitch
+	ret c
+.no_switch
+	and a
+	ret
+
+.no_smart_switch
+	callfar AI_SwitchOrTryItem
+	ret
 
 EnemySwitchSpikes:
 	ld a, [wEnemyIsSwitching]

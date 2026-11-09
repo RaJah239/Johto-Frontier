@@ -35,6 +35,12 @@
   - **Quite a bit:** one of its other Pokémon is immune to the attack you just used and has a super-effective move against you, and your attacks are hurting the one that's out
   - **A little:** that other Pokémon only has a super-effective move, or (without an immune one) one of its Pokémon resists you, has at least 1/4 of its HP and has a super-effective move, while your moves do well against the one that's out
 - It then switches with a chance of 20%, 50% or 80%, depending on how much it wants to
+- It also switches out at the start of a turn (when it has more than 1/4 of its HP, unless noted) when:
+  - it's locked into a move (Choice item or Encore) that does nothing to your Pokémon or isn't very effective, or that has no PP left (even at low HP)
+  - its Accuracy is at -2 or lower
+  - its main attacking stat (Attack for physical attackers, Sp. Atk for special ones) is at -2 or lower and neither is boosted: 80% of the time
+  - it's cursed, badly poisoned for 4+ turns (always below half HP, 50% above), or seeded by Leech Seed (30% each turn), unless it has Magic Guard
+  - for the last three: only when it can't knock you out this turn (or you used Protect / Substitute, or have an intact Focus Sash or Sturdy), and it isn't set up (+2 Attack or Sp. Atk)
 - It doesn't switch if it's trapped (Mean Look, Wrap, Shadow Tag, Arena Trap, Magnet Pull; Run Away escapes them), if it's at +2 or more in Attack, Sp. Atk, Defense or Sp. Def, or if it has no other Pokémon left
 - When it has to send in a Pokémon (after a knock-out, U-turn, Volt Switch or Baton Pass), it picks, skipping Pokémon that are asleep or frozen:
   1. The first Pokémon in its party with a super-effective move against yours
