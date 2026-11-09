@@ -8,8 +8,19 @@
 ;
 ; Damage: the AI's moves at their lowest roll, the player's at their highest
 ; (no crits). Each side uses its strongest move every turn, or a priority move
-; when that move KOs for sure and would otherwise move second. Order: higher
-; priority first, then speed (ties: the player first).
+; when that move KOs for sure. Order: higher priority first, then speed (ties:
+; the player first).
+;
+; Also played out, for both sides:
+; - healing moves (Recover etc. 1/2, Slack Off 1/3 with priority, Healing
+;   Light by weather, Rest: full HP + sleep, cures status), used when the
+;   mon can't KO this turn, the other side's best hit would KO it, and the
+;   heal is bigger than that hit;
+; - draining moves (the best move heals half the damage it deals);
+; - sleep (turns from the status counter, as CheckEnemyTurn counts them);
+; - after each side acts: poison / burn / frostbite 1/16, bad poison n/16,
+;   Leech Seed 1/8 (to the other side), Curse 1/4; Magic Guard ignores them;
+; - end of turn: sandstorm / hail 1/16 while the weather lasts, Leftovers 1/16.
 ;
 ; A benched mon is simulated by loading it into the wEnemyMon battle struct
 ; (stats from its party data, stat stages reset, Sticky Web applied). The real
@@ -25,6 +36,28 @@ DEF MSIM_E_FASTER_F     EQU 2 ; the enemy outspeeds the player
 DEF MSIM_E_PRIO_THIS_F  EQU 3 ; (per turn) the enemy uses priority
 DEF MSIM_P_PRIO_THIS_F  EQU 4 ; (per turn) the player uses priority
 DEF MSIM_DMG_CONSTANT_F EQU 5 ; (per move) fixed damage: no damage roll
+DEF MSIM_E_BEST_DRAIN_F EQU 6 ; the enemy's strongest move drains
+DEF MSIM_P_BEST_DRAIN_F EQU 7 ; the player's strongest move drains
+
+; wMSimFlags2
+DEF MSIM_E_LEFTOVERS_F   EQU 0
+DEF MSIM_P_LEFTOVERS_F   EQU 1
+DEF MSIM_E_MAGIC_GUARD_F EQU 2
+DEF MSIM_P_MAGIC_GUARD_F EQU 3
+DEF MSIM_E_REST_F        EQU 4 ; its heal move is Rest
+DEF MSIM_P_REST_F        EQU 5
+DEF MSIM_E_HEAL_PRIO_F   EQU 6 ; its heal move has priority (Slack Off)
+DEF MSIM_P_HEAL_PRIO_F   EQU 7
+
+; wMSimFlags3
+DEF MSIM_E_CURED_F       EQU 0 ; Rest cured its status
+DEF MSIM_P_CURED_F       EQU 1
+DEF MSIM_E_HEALS_F       EQU 2 ; (per turn) it heals instead of attacking
+DEF MSIM_P_HEALS_F       EQU 3
+DEF MSIM_MOVE_DRAINS_F   EQU 4 ; (per move) the move being scored drains
+
+DEF MSIM_SIDE_ENEMY  EQU 0
+DEF MSIM_SIDE_PLAYER EQU 1
 
 ; wMSimMode
 DEF MSIM_MODE_ENTRY_HIT_F EQU 0 ; candidates take the player's best hit as they come in
@@ -121,14 +154,6 @@ MSim_TryCandidate:
 	ld a, [hli]
 	or [hl]
 	ret z ; fainted (carry clear)
-	push bc
-	ld hl, wOTPartyMon1Status
-	ld a, b
-	call GetPartyLocation
-	pop bc
-	ld a, [hl]
-	and SLP_MASK | 1 << FRZ
-	ret nz ; asleep or frozen: can't fight (carry clear)
 
 	call MSim_LoadCandidate
 
@@ -593,10 +618,11 @@ MSim_ComputeDamages:
 
 .speed
 	farcall DoesAIOutSpeedPlayer
-	ret nc
+	jr nc, .setup
 	ld hl, wMSimFlags
 	set MSIM_E_FASTER_F, [hl]
-	ret
+.setup
+	jmp MSim_SetupSides
 
 MSim_EnemyMoveDamage:
 ; b = move. Work out its damage (lowest roll) and keep the best values.
@@ -606,6 +632,11 @@ MSim_EnemyMoveDamage:
 	call MSim_LoadMove
 	pop bc
 	ret z
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	ld e, a
+	ld a, [wBattleMonStatus]
+	call MSim_CheckDrain
+	ret z ; Dream Eater on an awake target
 	push bc
 	farcall AIDamageCalc ; (hBattleTurn = 1; handles fixed-damage moves)
 	pop bc
@@ -634,6 +665,7 @@ MSim_EnemyMoveDamage:
 	ld a, BASE_PRIORITY
 	cp b
 	ld hl, wMSimEnemyDmg
+	ld c, MSIM_E_BEST_DRAIN_F
 	ld b, MSIM_E_BEST_PRIO_F
 	jmp MSim_KeepBest
 .none
@@ -647,6 +679,11 @@ MSim_PlayerMoveDamage:
 	call MSim_LoadMove
 	pop bc
 	ret z
+	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
+	ld e, a
+	ld a, [wEnemyMonStatus]
+	call MSim_CheckDrain
+	ret z ; Dream Eater on an awake target
 	push bc
 	xor a
 	ldh [hBattleTurn], a
@@ -683,14 +720,18 @@ MSim_PlayerMoveDamage:
 	ld a, BASE_PRIORITY
 	cp b
 	ld hl, wMSimPlayerDmg
+	ld c, MSIM_P_BEST_DRAIN_F
 	ld b, MSIM_P_BEST_PRIO_F
 	; fallthrough
 
 MSim_KeepBest:
 ; wCurDamage is a move's damage; carry if it has priority. hl = the side's
 ; best damage (followed by its best priority damage); b = that side's
-; "best move has priority" flag. Keep the biggest of each.
+; "best move has priority" flag, c = its "best move drains" flag. Keep the
+; biggest of each.
 	push af
+	ld a, c
+	ld [wMSimSide], a
 	ld a, [wCurDamage]
 	ld d, a
 	ld a, [wCurDamage + 1]
@@ -719,6 +760,14 @@ MSim_KeepBest:
 	push hl
 	ld hl, wMSimFlags
 	ld a, b
+	call MSim_SetFlagCarry
+	ld a, [wMSimFlags3]
+	bit MSIM_MOVE_DRAINS_F, a
+	scf
+	jr nz, .drains
+	ccf
+.drains
+	ld a, [wMSimSide]
 	call MSim_SetFlagCarry
 	pop hl
 .check_prio
@@ -905,16 +954,227 @@ MSim_LowestRoll:
 	ld [wCurDamage + 1], a
 	ret
 
+DEF MSIM_ENEMY_WINS  EQU 1
+DEF MSIM_PLAYER_WINS EQU 2
+
+MSim_CheckDrain:
+; e = move effect, a = the target's status. Set MSIM_MOVE_DRAINS_F if the
+; move drains. Return z to skip it (Dream Eater on an awake target).
+	ld d, a
+	ld hl, wMSimFlags3
+	res MSIM_MOVE_DRAINS_F, [hl]
+	ld a, e
+	cp EFFECT_LEECH_HIT
+	jr z, .drains
+	cp EFFECT_SACRED_FIRE
+	jr z, .drains
+	cp EFFECT_DREAM_EATER
+	jr nz, .ok
+	ld a, d
+	and SLP_MASK
+	ret z
+.drains
+	set MSIM_MOVE_DRAINS_F, [hl]
+.ok
+	or 1 ; nz
+	ret
+
+MSim_SetupSides:
+; Per-side setup for MSim_Run: Leftovers, Magic Guard, sleep and bad-poison
+; counters, weather turns, heal moves.
+	xor a
+	ld [wMSimFlags2], a
+	ld [wMSimFlags3], a
+	ld a, [wEnemyMonItem]
+	ld b, a
+	callfar GetItemHeldEffect
+	ld a, b
+	cp HELD_LEFTOVERS
+	jr nz, .player_leftovers
+	ld hl, wMSimFlags2
+	set MSIM_E_LEFTOVERS_F, [hl]
+.player_leftovers
+	ld a, [wBattleMonItem]
+	ld b, a
+	callfar GetItemHeldEffect
+	ld a, b
+	cp HELD_LEFTOVERS
+	jr nz, .magic_guard
+	ld hl, wMSimFlags2
+	set MSIM_P_LEFTOVERS_F, [hl]
+.magic_guard
+	ld a, [wEnemyMonSpecies]
+	ld hl, MagicGuardPokemon
+	call IsInByteArray
+	jr nc, .player_magic_guard
+	ld hl, wMSimFlags2
+	set MSIM_E_MAGIC_GUARD_F, [hl]
+.player_magic_guard
+	ld a, [wBattleMonSpecies]
+	ld hl, MagicGuardPokemon
+	call IsInByteArray
+	jr nc, .counters
+	ld hl, wMSimFlags2
+	set MSIM_P_MAGIC_GUARD_F, [hl]
+.counters
+	ld a, [wEnemyMonStatus]
+	and SLP_MASK
+	ld [wMSimEnemySleep], a
+	ld a, [wBattleMonStatus]
+	and SLP_MASK
+	ld [wMSimPlayerSleep], a
+	ld a, [wEnemyToxicCount]
+	ld [wMSimEnemyToxic], a
+	ld a, [wPlayerToxicCount]
+	ld [wMSimPlayerToxic], a
+	ld a, [wWeatherCount]
+	ld [wMSimWeatherTurns], a
+	ld a, MSIM_SIDE_ENEMY
+	call MSim_FindHeal
+	ld a, MSIM_SIDE_PLAYER
+	; fallthrough
+
+MSim_FindHeal:
+; a = side. Store its usable heal move's HP gain in wMSim*Heal (0 if none)
+; and its Rest / priority flags.
+	ld [wMSimSide], a
+	and a
+	ld hl, wEnemyMonMoves
+	ld de, wEnemyMonPP
+	jr z, .got_moves
+	ld hl, wBattleMonMoves
+	ld de, wBattleMonPP
+.got_moves
+	ld b, NUM_MOVES
+.loop
+	ld a, [hli]
+	and a
+	jr z, .none
+	ld c, a
+	ld a, [de]
+	inc de
+	and PP_MASK
+	jr z, .next
+	push hl
+	push de
+	push bc
+	ld a, c
+	dec a
+	ld hl, Moves + MOVE_EFFECT
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	pop bc
+	pop de
+	pop hl
+	cp EFFECT_HEAL
+	jr z, .heal
+	cp EFFECT_SLACK_OFF
+	jr z, .slack_off
+	cp EFFECT_WEATHER_HEAL
+	jr z, .weather_heal
+.next
+	dec b
+	jr nz, .loop
+.none
+	ld de, 0
+	jr .store
+
+.heal
+	ld a, c
+	cp REST
+	ld a, 1 ; 1/2
+	jr nz, .share
+	ld a, MSIM_E_REST_F
+	call .set_flag
+	xor a ; full
+	jr .share
+
+.slack_off
+	ld a, MSIM_E_HEAL_PRIO_F
+	call .set_flag
+	call .max_hp
+	call MSim_DivDEBy3
+	jr .store
+
+.weather_heal
+	ld a, [wBattleWeather]
+	and a ; WEATHER_NONE
+	ld a, 1 ; 1/2
+	jr z, .share
+	ld a, [wBattleWeather]
+	cp WEATHER_SUN
+	ld a, 0 ; full
+	jr z, .share
+	ld a, 2 ; 1/4
+.share
+	push af
+	call .max_hp
+	pop af
+	and a
+	jr z, .store
+.shift
+	srl d
+	rr e
+	dec a
+	jr nz, .shift
+.store
+	ld a, [wMSimSide]
+	and a
+	ld hl, wMSimEnemyHeal
+	jr z, .store_it
+	ld hl, wMSimPlayerHeal
+.store_it
+	ld [hl], d
+	inc hl
+	ld [hl], e
+	ret
+
+.set_flag
+; set the side's flag a (the enemy's bit; the player's is the next one)
+	ld b, a
+	ld a, [wMSimSide]
+	add b
+	ld hl, wMSimFlags2
+	scf
+	jmp MSim_SetFlagCarry
+
+.max_hp
+	ld a, [wMSimSide]
+	and a
+	ld hl, wEnemyMonMaxHP
+	jr z, .got_max
+	ld hl, wBattleMonMaxHP
+.got_max
+	ld d, [hl]
+	inc hl
+	ld e, [hl]
+	ret
+
+MSim_DivDEBy3:
+	xor a
+	ldh [hDividend + 0], a
+	ldh [hDividend + 1], a
+	ld a, d
+	ldh [hDividend + 2], a
+	ld a, e
+	ldh [hDividend + 3], a
+	ld a, 3
+	ldh [hDivisor], a
+	ld b, 4
+	call Divide
+	ldh a, [hQuotient + 2]
+	ld d, a
+	ldh a, [hQuotient + 3]
+	ld e, a
+	ret
+
 MSim_Run:
 ; Play out the 1-on-1 from wMSimEnemyHP / wMSimPlayerHP. Return carry if the
 ; enemy wins (the player's mon goes down first) within MSIM_MAX_TURNS.
 	ld a, MSIM_MAX_TURNS
 	ld [wMSimTurns], a
-	; neither side can hurt the other, or the enemy can't: no win
-	ld hl, wMSimEnemyDmg
-	ld a, [hli]
-	or [hl]
-	ret z ; (carry clear)
 .turn
 	call MSim_ChooseActions
 	; order: higher priority first, then speed (ties: the player)
@@ -932,20 +1192,31 @@ MSim_Run:
 	jr z, .player_first
 .enemy_first
 	call MSim_EnemyActs
-	jr c, .enemy_wins
+	and a
+	jr nz, .result
 	call MSim_PlayerActs
-	jr c, .player_wins
-	jr .next
+	and a
+	jr nz, .result
+	jr .end_of_turn
 .player_first
 	call MSim_PlayerActs
-	jr c, .player_wins
+	and a
+	jr nz, .result
 	call MSim_EnemyActs
-	jr c, .enemy_wins
-.next
+	and a
+	jr nz, .result
+.end_of_turn
+	call MSim_EndOfTurn
+	and a
+	jr nz, .result
 	ld hl, wMSimTurns
 	dec [hl]
 	jr nz, .turn
-.player_wins
+	; out of turns: no win (a = 0, carry clear)
+	ret
+.result
+	cp MSIM_ENEMY_WINS
+	jr z, .enemy_wins
 	and a
 	ret
 .enemy_wins
@@ -954,11 +1225,14 @@ MSim_Run:
 
 MSim_ChooseActions:
 ; Each side uses its strongest move, or its best priority move when that
-; KOs for sure. Sets wMSimEnemyHit / wMSimPlayerHit and the per-turn
-; priority flags.
+; KOs for sure, or its heal move (MSim_*ShouldHeal). Sets wMSimEnemyHit /
+; wMSimPlayerHit and the per-turn priority and heal flags.
 	ld hl, wMSimFlags
 	res MSIM_E_PRIO_THIS_F, [hl]
 	res MSIM_P_PRIO_THIS_F, [hl]
+	ld hl, wMSimFlags3
+	res MSIM_E_HEALS_F, [hl]
+	res MSIM_P_HEALS_F, [hl]
 	; enemy
 	ld hl, wMSimEnemyPrioDmg
 	ld de, wMSimPlayerHP
@@ -988,13 +1262,36 @@ MSim_ChooseActions:
 	call MSim_CopyWord
 	ld hl, wMSimFlags
 	set MSIM_P_PRIO_THIS_F, [hl]
-	ret
+	jr .heals
 .player_best
 	ld hl, wMSimPlayerDmg
 	ld de, wMSimPlayerHit
 	call MSim_CopyWord
 	ld hl, wMSimFlags
 	bit MSIM_P_BEST_PRIO_F, [hl]
+	jr z, .heals
+	set MSIM_P_PRIO_THIS_F, [hl]
+
+.heals
+	call MSim_EnemyShouldHeal
+	jr nc, .player_heal
+	ld hl, wMSimFlags3
+	set MSIM_E_HEALS_F, [hl]
+	ld hl, wMSimFlags
+	res MSIM_E_PRIO_THIS_F, [hl]
+	ld a, [wMSimFlags2]
+	bit MSIM_E_HEAL_PRIO_F, a
+	jr z, .player_heal
+	set MSIM_E_PRIO_THIS_F, [hl]
+.player_heal
+	call MSim_PlayerShouldHeal
+	ret nc
+	ld hl, wMSimFlags3
+	set MSIM_P_HEALS_F, [hl]
+	ld hl, wMSimFlags
+	res MSIM_P_PRIO_THIS_F, [hl]
+	ld a, [wMSimFlags2]
+	bit MSIM_P_HEAL_PRIO_F, a
 	ret z
 	set MSIM_P_PRIO_THIS_F, [hl]
 	ret
@@ -1028,21 +1325,409 @@ MSim_CopyWord:
 	ld [de], a
 	ret
 
-MSim_EnemyActs:
-; The enemy hits; carry if that KOs the player's mon.
-	ld a, [wMSimEnemyHit]
+MSim_WordGE:
+; Carry if the word at hl >= the word at de (big-endian). Preserves bc.
+	push bc
+	ld a, [hli]
 	ld b, a
-	ld a, [wMSimEnemyHit + 1]
+	ld c, [hl]
+	ld a, [de]
+	ld h, a
+	inc de
+	ld a, [de]
+	ld l, a
+	ld a, c
+	sub l
+	ld a, b
+	sbc h
+	ccf
+	pop bc
+	ret
+
+MACRO msim_should_heal
+; \1 = this side (Enemy / Player), \2 = the other side, \3 = E / P,
+; \4 = the jr condition on MSIM_E_FASTER_F that means this side moves first
+MSim_\1ShouldHeal:
+; Carry if this side heals this turn: it has a heal move, isn't asleep, can't
+; KO now (or would be KO'd first), it's in KO range (the other side's best hit; two of them if it
+; moves second), and the heal is bigger than that hit (Rest: its max HP).
+	ld hl, wMSim\1Heal
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	or c
+	ret z
+	ld a, [wMSim\1Sleep]
+	cp 2
+	jr nc, .no
+	ld hl, wMSim\1Hit
+	ld de, wMSim\2HP
+	call MSim_WordGE
+	jr nc, .no_ko
+	; it can KO: attack, unless it moves second and the other side's hit
+	; KOs it first
+	ld a, [wMSimFlags]
+	bit MSIM_E_FASTER_F, a
+	jr \4, .no
+	ld hl, wMSim\2Dmg
+	ld de, wMSim\1HP
+	call MSim_WordGE
+	jr nc, .no
+.no_ko
+	; KO range: the other side's best hit, doubled if this side moves second
+	ld hl, wMSim\2Dmg
+	ld a, [hli]
+	ld d, a
+	ld e, [hl]
+	ld a, [wMSimFlags2]
+	bit MSIM_\3_HEAL_PRIO_F, a
+	jr nz, .threshold
+	ld a, [wMSimFlags]
+	bit MSIM_E_FASTER_F, a
+	jr \4, .threshold
+	sla e
+	rl d
+	jr nc, .threshold
+	ld de, $ffff
+.threshold
+	ld hl, wMSim\1HP
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	; range - HP: a borrow means it isn't in range yet
+	ld a, e
+	sub l
+	ld a, d
+	sbc h
+	jr c, .no
+	; the other side's best hit < heal
+	ld hl, wMSim\2Dmg
+	ld a, [hli]
+	ld d, a
+	ld e, [hl]
+	ld a, e
+	sub c
+	ld a, d
+	sbc b
+	ret
+.no
+	and a
+	ret
+ENDM
+
+	msim_should_heal Enemy, Player, E, nz
+	msim_should_heal Player, Enemy, P, z
+
+MACRO msim_acts
+; \1 = this side (Enemy / Player), \2 = the other side, \3 = E / P,
+; \4 = this side's win code
+MSim_\1Acts:
+; This side's action and its residual damage. a = 0, or the winner.
+	; asleep: it wakes up (and acts) when the counter runs out
+	ld hl, wMSim\1Sleep
+	ld a, [hl]
+	and a
+	jr z, .awake
+	dec [hl]
+	jr nz, .residual
+.awake
+	ld a, [wMSimFlags3]
+	bit MSIM_\3_HEALS_F, a
+	jr z, .attack
+	ld a, [wMSimFlags2]
+	bit MSIM_\3_REST_F, a
+	jr z, .heal
+	ld a, REST_SLEEP_TURNS
+	ld [wMSim\1Sleep], a
+	ld hl, wMSimFlags3
+	set MSIM_\3_CURED_F, [hl]
+.heal
+	ld hl, wMSim\1Heal
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	call MSim_Heal\1
+	jr .residual
+
+.attack
+	ld a, [wMSim\1Hit]
+	ld b, a
+	ld a, [wMSim\1Hit + 1]
 	ld c, a
+	push bc
+	call MSim_Subtract\2HP
+	pop bc
+	ld a, \4
+	ret c
+	; its strongest move drains: heal half the damage
+	ld a, [wMSimFlags]
+	bit MSIM_\3_BEST_DRAIN_F, a
+	jr z, .residual
+	; (not if it used a priority move that isn't its strongest)
+	and 1 << MSIM_\3_PRIO_THIS_F | 1 << MSIM_\3_BEST_PRIO_F
+	jr z, .drain
+	cp 1 << MSIM_\3_PRIO_THIS_F | 1 << MSIM_\3_BEST_PRIO_F
+	jr nz, .residual
+.drain
+	srl b
+	rr c
+	ld a, b
+	or c
+	jr nz, .drain_heal
+	inc c
+.drain_heal
+	call MSim_Heal\1
+.residual
+	jmp MSim_\1Residual
+ENDM
+
+	msim_acts Enemy, Player, E, MSIM_ENEMY_WINS
+	msim_acts Player, Enemy, P, MSIM_PLAYER_WINS
+
+MACRO msim_residual
+; \1 = this side (Enemy / Player), \2 = E / P, \3 = the other side's win
+; code, \4 = this side's battle mon prefix (wEnemyMon / wBattleMon),
+; \5 = its substatus prefix (wEnemySubStatus / wPlayerSubStatus),
+; \6 = the other side (Enemy / Player)
+MSim_\1Residual:
+; Poison / burn / frostbite, Leech Seed, Curse after this side acts.
+; a = 0, or the other side's win code if this KOs it.
+	ld a, [wMSimFlags2]
+	bit MSIM_\2_MAGIC_GUARD_F, a
+	jr nz, .none
+	ld a, [wMSimFlags3]
+	bit MSIM_\2_CURED_F, a
+	jr nz, .seed
+	ld a, [\4Status]
+	and 1 << PSN | 1 << BRN | 1 << FRZ
+	jr z, .seed
+	ld a, 4
+	call MSim_\1MaxShare
+	ld a, [\55]
+	bit SUBSTATUS_TOXIC, a
+	jr z, .status_damage
+	ld hl, wMSim\1Toxic
+	inc [hl]
+	ld a, [hl]
+	call MSim_MultiplyBC
+.status_damage
+	call MSim_Subtract\1HP
+	jr c, .faints
+.seed
+	ld a, [\54]
+	bit SUBSTATUS_LEECH_SEED, a
+	jr z, .curse
+	ld a, 3
+	call MSim_\1MaxShare
+	push bc
+	call MSim_Subtract\1HP
+	pop bc
+	jr c, .faints
+	call MSim_Heal\6
+.curse
+	ld a, [\51]
+	bit SUBSTATUS_CURSE, a
+	jr z, .none
+	ld a, 2
+	call MSim_\1MaxShare
+	call MSim_Subtract\1HP
+	jr c, .faints
+.none
+	xor a
+	ret
+.faints
+	ld a, \3
+	ret
+ENDM
+
+	msim_residual Enemy, E, MSIM_PLAYER_WINS, wEnemyMon, wEnemySubStatus, Player
+	msim_residual Player, P, MSIM_ENEMY_WINS, wBattleMon, wPlayerSubStatus, Enemy
+
+MSim_EndOfTurn:
+; Sandstorm / hail while it lasts, then Leftovers. a = 0, or the winner
+; (if both go down, the player wins).
+	ld hl, wMSimWeatherTurns
+	ld a, [hl]
+	and a
+	jr z, .leftovers
+	dec [hl]
+	ld a, [wBattleWeather]
+	cp WEATHER_SANDSTORM
+	jr z, .weather
+	cp WEATHER_HAIL
+	jr nz, .leftovers
+.weather
+	call MSim_PlayerWeather
+	jr nc, .enemy_weather
+	call MSim_EnemyWeather
+	ld a, MSIM_PLAYER_WINS
+	ret c
+	ld a, MSIM_ENEMY_WINS
+	ret
+.enemy_weather
+	call MSim_EnemyWeather
+	ld a, MSIM_PLAYER_WINS
+	ret c
+.leftovers
+	ld a, [wMSimFlags2]
+	bit MSIM_E_LEFTOVERS_F, a
+	jr z, .player_leftovers
+	ld a, 4
+	call MSim_EnemyMaxShare
+	call MSim_HealEnemy
+.player_leftovers
+	ld a, [wMSimFlags2]
+	bit MSIM_P_LEFTOVERS_F, a
+	jr z, .done
+	ld a, 4
+	call MSim_PlayerMaxShare
+	call MSim_HealPlayer
+.done
+	xor a
+	ret
+
+MSim_EnemyWeather:
+; Carry if this turn's weather damage KOs the enemy's mon.
+	ld a, [wMSimFlags2]
+	bit MSIM_E_MAGIC_GUARD_F, a
+	jr nz, MSim_WeatherImmune
+	ld hl, wEnemyMonType1
+	call MSim_WeatherImmuneTypes
+	jr c, MSim_WeatherImmune
+	ld a, 4
+	call MSim_EnemyMaxShare
+	jmp MSim_SubtractEnemyHP
+
+MSim_PlayerWeather:
+; Carry if this turn's weather damage KOs the player's mon.
+	ld a, [wMSimFlags2]
+	bit MSIM_P_MAGIC_GUARD_F, a
+	jr nz, MSim_WeatherImmune
+	ld hl, wBattleMonType1
+	call MSim_WeatherImmuneTypes
+	jr c, MSim_WeatherImmune
+	ld a, 4
+	call MSim_PlayerMaxShare
 	jmp MSim_SubtractPlayerHP
 
-MSim_PlayerActs:
-; The player hits; carry if that KOs the enemy's mon.
-	ld a, [wMSimPlayerHit]
-	ld b, a
-	ld a, [wMSimPlayerHit + 1]
+MSim_WeatherImmune:
+	and a
+	ret
+
+MSim_WeatherImmuneTypes:
+; hl = a mon's two types. Carry if they're immune to the weather (sandstorm:
+; Rock, Ground, Steel; hail: Ice).
+	ld a, [wBattleWeather]
+	cp WEATHER_HAIL
+	jr z, .hail
+	ld a, [hli]
+	call .sand
+	ret c
+	ld a, [hl]
+.sand
+	cp ROCK
+	jr z, .yes
+	cp GROUND
+	jr z, .yes
+	cp STEEL
+	jr z, .yes
+	and a
+	ret
+.hail
+	ld a, [hli]
+	cp ICE
+	jr z, .yes
+	ld a, [hl]
+	cp ICE
+	jr z, .yes
+	and a
+	ret
+.yes
+	scf
+	ret
+
+MSim_HealEnemy:
+; HP += bc, up to the max.
+	ld hl, wMSimEnemyHP
+	ld de, wEnemyMonMaxHP
+	jr MSim_HealHP
+
+MSim_HealPlayer:
+	ld hl, wMSimPlayerHP
+	ld de, wBattleMonMaxHP
+	; fallthrough
+
+MSim_HealHP:
+; [hl] += bc, capped at [de] (big-endian words).
+	push hl
+	inc hl
+	ld a, [hl]
+	add c
 	ld c, a
-	jmp MSim_SubtractEnemyHP
+	dec hl
+	ld a, [hl]
+	adc b
+	ld b, a
+	jr c, .cap
+	inc de
+	ld a, [de]
+	sub c
+	dec de
+	ld a, [de]
+	sbc b
+	jr c, .cap
+	pop hl
+	ld [hl], b
+	inc hl
+	ld [hl], c
+	ret
+.cap
+	pop hl
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hl], a
+	ret
+
+MSim_EnemyMaxShare:
+; bc = the enemy mon's max HP >> a (at least 1).
+	ld hl, wEnemyMonMaxHP
+	jr MSim_HLMaxShare
+
+MSim_PlayerMaxShare:
+	ld hl, wBattleMonMaxHP
+	; fallthrough
+
+MSim_HLMaxShare:
+	ld b, [hl]
+	inc hl
+	ld c, [hl]
+.loop
+	srl b
+	rr c
+	dec a
+	jr nz, .loop
+	ld a, b
+	or c
+	ret nz
+	inc c
+	ret
+
+MSim_MultiplyBC:
+; bc *= a (a >= 1).
+	ld h, b
+	ld l, c
+	dec a
+	ret z
+.loop
+	add hl, bc
+	dec a
+	jr nz, .loop
+	ld b, h
+	ld c, l
+	ret
+
 
 MSim_Begin:
 ; Save what the simulation overwrites.

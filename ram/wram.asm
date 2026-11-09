@@ -3810,6 +3810,16 @@ wMSimTurns:: db
 wMSimBestIndex:: db
 wMSimBestTaken:: db
 wMSimMoveType:: db
+wMSimSide:: db
+wMSimFlags2:: db
+wMSimFlags3:: db
+wMSimEnemyHeal:: dw     ; HP its heal move restores (0 = none)
+wMSimPlayerHeal:: dw
+wMSimEnemyToxic:: db    ; bad poison counters
+wMSimPlayerToxic:: db
+wMSimEnemySleep:: db    ; sleep counters
+wMSimPlayerSleep:: db
+wMSimWeatherTurns:: db
 
 
 SECTION "AI Matchup Save", WRAMX, BANK[5]
