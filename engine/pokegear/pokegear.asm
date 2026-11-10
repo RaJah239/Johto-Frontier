@@ -998,7 +998,7 @@ GetActiveSwarmSpeciesAndMap:
 	ld a, [wSwarmMapNumber]
 	cp c
 	jr nz, .next_pop
-; found: fetch species
+; found: fetch species (dw)
 	pop bc
 	ld a, e
 	add l
@@ -1007,7 +1007,8 @@ GetActiveSwarmSpeciesAndMap:
 	sub l
 	ld h, a
 	ld a, d
-	call GetFarByte
+	call GetFarWord
+	call GetPokemonIDFromIndex
 	ld d, a
 	ld a, [wSwarmMapGroup]
 	ld b, a

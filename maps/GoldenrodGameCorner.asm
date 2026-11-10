@@ -220,7 +220,7 @@ GoldenrodGameCornerPrizeMonVendorScript:
 	playsound SFX_TRANSACTION
 	writetext GoldenrodGameCornerPrizeVendorHereYouGoText
 	waitbutton
-	setval SMEARGLE
+	setmonval SMEARGLE
 	special GameCornerPrizeMonCheckDex
 	givepoke SMEARGLE, 5, MIRACLEBERRY
 	takecoins GOLDENRODGAMECORNER_SMEARGLE_COINS
@@ -238,7 +238,7 @@ GoldenrodGameCornerPrizeMonVendorScript:
 	playsound SFX_TRANSACTION
 	writetext GoldenrodGameCornerPrizeVendorHereYouGoText
 	waitbutton
-	setval MR__MIME
+	setmonval MR__MIME
 	special GameCornerPrizeMonCheckDex
 	givepoke MR__MIME, 5, SILVER_BERRY
 	takecoins GOLDENRODGAMECORNER_MR__MIME_COINS
@@ -256,7 +256,7 @@ GoldenrodGameCornerPrizeMonVendorScript:
 	playsound SFX_TRANSACTION
 	writetext GoldenrodGameCornerPrizeVendorHereYouGoText
 	waitbutton
-	setval PORYGON
+	setmonval PORYGON
 	special GameCornerPrizeMonCheckDex
 	givepoke PORYGON, 5, GOLD_BERRY
 	takecoins GOLDENRODGAMECORNER_PORYGON_COINS

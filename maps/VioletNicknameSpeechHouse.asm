@@ -38,7 +38,7 @@ VioletNicknameSpeechHouseTeacherText:
 	done
 
 VioletNicknameSpeechHouseBirdScript:
-	setval PIDGEY
+	setmonval PIDGEY
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis

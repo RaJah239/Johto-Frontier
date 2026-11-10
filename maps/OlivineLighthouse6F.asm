@@ -22,7 +22,7 @@ OlivineLighthouse6F_MapScripts:
 	def_callbacks
 
 OlivineLighthouseAmphy:
-	setval AMPHAROS
+	setmonval AMPHAROS
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis

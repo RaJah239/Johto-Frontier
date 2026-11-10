@@ -286,7 +286,27 @@ ScriptCommandTable:
 	dw Script_showthistextfaceplayer     ;
 	dw Script_faceplayeropentext         ;
 	dw Script_waitclosetext              ;
+	dw Script_setmonval                  ;
 	assert_table_length NUM_EVENT_COMMANDS
+
+GetScriptSpecies:
+; Read a dw 16-bit species index from the script: a = its 8-bit ID (0: the
+; species ID in wScriptVar). Preserves bc and de.
+	call GetScriptByte
+	push af
+	call GetScriptByte
+	ld h, a
+	pop af
+	ld l, a
+	or h
+	ld a, [wScriptVar]
+	ret z
+	jmp GetPokemonIDFromIndex
+
+Script_setmonval:
+	call GetScriptSpecies
+	ld [wScriptVar], a
+	ret
 
 Script_faceplayeropentext:
 	call Script_faceplayer
@@ -629,11 +649,7 @@ Script_closewindow:
 	jmp UpdateSprites
 
 Script_pokepic:
-	call GetScriptByte
-	and a
-	jr nz, .ok
-	ld a, [wScriptVar]
-.ok
+	call GetScriptSpecies
 	ld [wCurPartySpecies], a
 	farjp Pokepic
 
@@ -977,14 +993,7 @@ Script_warpsound:
 	jmp PlaySFX
 
 Script_cry:
-	call GetScriptByte
-	push af
-	call GetScriptByte
-	pop af
-	and a
-	jr nz, .ok
-	ld a, [wScriptVar]
-.ok
+	call GetScriptSpecies
 	jmp PlayMonCry
 
 GetScriptObject:
@@ -1320,7 +1329,7 @@ Script_loadtemptrainer:
 Script_loadwildmon:
 	ld a, (1 << 7)
 	ld [wBattleScriptFlags], a
-	call GetScriptByte
+	call GetScriptSpecies
 	ld [wTempWildMonSpecies], a
 	call GetScriptByte
 	ld [wCurPartyLevel], a
@@ -1744,11 +1753,7 @@ Script_checkver:
 	db GS_VERSION
 
 Script_getmonname:
-	call GetScriptByte
-	and a
-	jr nz, .gotit
-	ld a, [wScriptVar]
-.gotit
+	call GetScriptSpecies
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	ld de, wStringBuffer1
@@ -2030,7 +2035,7 @@ Script_checktime:
 Script_checkpoke:
 	xor a
 	ld [wScriptVar], a
-	call GetScriptByte
+	call GetScriptSpecies
 	ld hl, wPartySpecies
 	call IsInByteArray
 	ret nc
@@ -2041,7 +2046,7 @@ Script_checkpoke:
 Script_checkpokelevel:
 	xor a
 	ld [wScriptVar], a
-	call GetScriptByte
+	call GetScriptSpecies
 	ld c, a ; species
 	call GetScriptByte
 	ld d, a ; min level
@@ -2127,7 +2132,7 @@ Script_checkphonecall:
 	ret
 
 Script_givepoke:
-	call GetScriptByte
+	call GetScriptSpecies
 	ld [wCurPartySpecies], a
 	call GetScriptByte
 	ld [wCurPartyLevel], a
@@ -2157,7 +2162,7 @@ Script_giveegg:
 	xor a ; PARTYMON
 	ld [wScriptVar], a
 	ld [wMonType], a
-	call GetScriptByte
+	call GetScriptSpecies
 	ld [wCurPartySpecies], a
 	call GetScriptByte
 	ld [wCurPartyLevel], a

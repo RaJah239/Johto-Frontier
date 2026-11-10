@@ -72,7 +72,7 @@ MagikarpLengthRaterScript:
 		done
 
 .AskedForMagikarp:
-	setval MAGIKARP
+	setmonval MAGIKARP
 	special FindPartyMonThatSpecies
 	iffalse .RemindPlayerToCatchMagikarps
 	writethistext

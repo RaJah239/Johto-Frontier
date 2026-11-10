@@ -440,7 +440,7 @@ IlexForestScytherScript:
 	ifequal 10, .Position10
 
 .Position1:
-	setval SCYTHER
+	setmonval SCYTHER
 	special SetMonAsSeen
 	faceplayeropentext
 	writethistext

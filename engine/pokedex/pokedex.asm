@@ -3057,14 +3057,18 @@ Pokedex_SearchCurrentAreaMons:
 .grass_loop
 	ld b, NUM_GRASSMON
 .next_grass_mon
-	inc hl
+	inc hl ; level
+	push hl
 	ld a, BANK(JohtoGrassWildMons)
-	call GetFarByte
+	call GetFarWord
+	call GetPokemonIDFromIndex
+	pop hl
 	push hl
 	push bc
 	call Pokedex_AddSearchResult
 	pop bc
 	pop hl
+	inc hl ; species (dw)
 	inc hl
 	dec b
 	jr nz, .next_grass_mon
@@ -3077,14 +3081,18 @@ Pokedex_SearchCurrentAreaMons:
 	add hl, bc
 	ld b, NUM_WATERMON
 .next_surf_mon
-	inc hl
+	inc hl ; level
+	push hl
 	ld a, BANK(JohtoWaterWildMons)
-	call GetFarByte
+	call GetFarWord
+	call GetPokemonIDFromIndex
+	pop hl
 	push hl
 	push bc
 	call Pokedex_AddSearchResult
 	pop bc
 	pop hl
+	inc hl ; species (dw)
 	inc hl
 	dec b
 	jr nz, .next_surf_mon

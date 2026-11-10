@@ -113,12 +113,28 @@ FindNest:
 	jr .FindWater
 
 .SearchMapForMon:
+; a slots (db level / dw species) from hl: carry if one is [wNamedObjectIndex]
 	inc hl
 .ScanMapLoop:
 	push af
+	push de
+	ld a, [hli]
+	ld e, a
+	ld a, [hld]
+	ld d, a ; de = this slot's species (16-bit index)
+	push hl
 	ld a, [wNamedObjectIndex]
-	cp [hl]
+	call GetPokemonIndexFromID
+	ld a, l
+	cp e
+	jr nz, .no_match
+	ld a, h
+	cp d
+.no_match
+	pop hl
+	pop de
 	jr z, .found
+	inc hl
 	inc hl
 	inc hl
 	pop af
@@ -271,7 +287,7 @@ ChooseWildEncounter:
 	inc hl
 	inc hl
 	call GetTimeOfDayNotEve
-	ld bc, NUM_GRASSMON * 2
+	ld bc, NUM_GRASSMON * WILDMON_SLOT_LENGTH
 	call AddNTimes
 	ld de, GrassMonProbTable
 
@@ -317,8 +333,11 @@ ChooseWildEncounter:
 .ok
 	ld a, b
 	ld [wCurPartyLevel], a
-	ld b, [hl]
-	ld a, b
+	ld a, [hli] ; species (dw)
+	ld h, [hl]
+	ld l, a
+	call GetPokemonIDFromIndex
+	ld b, a
 	call ValidateTempWildMonSpecies
 	jr c, .nowildbattle
 
@@ -485,9 +504,9 @@ ValidateTempWildMonSpecies:
 ; Due to a development oversight, this function is called with the wild Pokemon's level, not its species, in a.
 	and a
 	jr z, .nowildmon ; = 0
-	cp NUM_POKEMON + 1 ; 252
-	jr nc, .nowildmon ; >= 252
-	and a ; 1 <= Species <= 251
+	cp MON_TABLE_MINIMUM_RESERVED_INDEX
+	jr nc, .nowildmon ; EGG, -1...
+	and a
 	ret
 
 .nowildmon

@@ -222,7 +222,7 @@ IndigoPlateauPokecenter1FCooltrainerMText:
 	done
 
 NatuScript:
-	setval NATU
+	setmonval NATU
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis

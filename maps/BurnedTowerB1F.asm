@@ -83,11 +83,11 @@ ReleaseTheBeasts:
 	special RestartMapMusic
 	setscene SCENE_BURNEDTOWERB1F_NOOP
 	setevent EVENT_RELEASED_THE_BEASTS
-	setval RAIKOU
+	setmonval RAIKOU
 	special SetMonAsSeen
-	setval ENTEI
+	setmonval ENTEI
 	special SetMonAsSeen
-	setval SUICUNE
+	setmonval SUICUNE
 	special SetMonAsSeen
 	setmapscene CIANWOOD_CITY, SCENE_CIANWOODCITY_SUICUNE_AND_EUSINE
 	clearevent EVENT_SAW_SUICUNE_AT_CIANWOOD_CITY

@@ -305,7 +305,7 @@ DanceTheaterFancyPanel:
 		done
 
 DanceTheaterRhydonScript:
-	setval RHYDON
+	setmonval RHYDON
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis

@@ -1,6 +1,6 @@
 MACRO mon_prob
 ; percent, index
-	db \1, \2 * 2
+	db \1, \2 * WILDMON_SLOT_LENGTH
 ENDM
 
 GrassMonProbTable:

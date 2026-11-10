@@ -42,21 +42,31 @@ AddNTimes::
 	ret
 
 FarFindCurSpeciesInSlots::
-; Is [wCurSpecies] among the c (level, species) slots whose first species
-; byte is at a:hl? a = 0 (z) if found, 1 (nz) if not. Switches banks once
+; Is [wCurSpecies] among the c (db level / dw species) slots whose first
+; species is at a:hl? a = 0 (z) if found, 1 (nz) if not. Switches banks once
 ; for the whole scan (the Pokedex area page used GetFarByte per slot).
+	push de
 	ld b, a
 	ldh a, [hROMBank]
 	push af
 	ld a, b
 	rst Bankswitch
+	push hl
 	ld a, [wCurSpecies]
-	ld b, a
+	call GetPokemonIndexFromID
+	ld d, h
+	ld e, l
+	pop hl
 .loop
 	ld a, [hli]
-	inc hl
-	cp b
+	cp e
+	jr nz, .next
+	ld a, [hl]
+	cp d
 	jr z, .found
+.next
+	inc hl ; next level
+	inc hl ; next species
 	dec c
 	jr nz, .loop
 	ld b, 1
@@ -66,12 +76,13 @@ FarFindCurSpeciesInSlots::
 .done
 	pop af
 	rst Bankswitch
+	pop de
 	ld a, b
 	and a
 	ret
 
 FarSumCurSpeciesChances::
-; a:hl = (chance, species, level) entries ending in -1 (TreeMons sets): b =
+; a:hl = (db chance / dw species / db level) entries ending in -1 (TreeMons sets): b =
 ; the sum of the chances of the entries with [wCurSpecies]; hl = just past
 ; the -1. One bank switch for the whole list. Keeps de.
 	push de
@@ -80,21 +91,30 @@ FarSumCurSpeciesChances::
 	push af
 	ld a, b
 	rst Bankswitch
+	push hl
 	ld a, [wCurSpecies]
-	ld c, a
+	call GetPokemonIndexFromID
+	ld d, h
+	ld e, l ; de = its 16-bit index
+	pop hl
 	ld b, 0
 .loop
 	ld a, [hli]
 	cp -1
 	jr z, .done
-	ld d, a ; chance
-	ld a, [hli]
-	inc hl
-	cp c
-	jr nz, .loop
+	ld c, a ; chance
+	ld a, [hli] ; species (dw)
+	cp e
+	jr nz, .no_match
+	ld a, [hl]
+	cp d
+	jr nz, .no_match
 	ld a, b
-	add d
+	add c
 	ld b, a
+.no_match
+	inc hl
+	inc hl ; level
 	jr .loop
 .done
 	pop af

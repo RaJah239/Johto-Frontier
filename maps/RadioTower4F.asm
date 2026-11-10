@@ -56,7 +56,7 @@ RadioTower4FDJMaryScript:
 		done
 
 RadioTower4FMeowth:
-	setval MEOWTH
+	setmonval MEOWTH
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis

@@ -34,7 +34,7 @@ BlackthornDragonSpeechHouseGrannyText:
 	done
 
 BlackthornDragonSpeechHouseCharmanderScript:
-	setval CHARMANDER
+	setmonval CHARMANDER
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis

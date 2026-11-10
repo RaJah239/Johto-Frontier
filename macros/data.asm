@@ -94,3 +94,35 @@ MACRO sine_table
 		dw sin(x * 0.5 / (\1))
 	endr
 ENDM
+
+; wild Pokémon data (data/wild); species are 16-bit indexes
+
+MACRO wildmon ; level, species
+	db \1
+	dw \2
+ENDM
+
+MACRO fishmon ; chance, species, level
+	db \1
+	dw \2
+	db \3
+ENDM
+
+MACRO timefish ; day species, day level, nite species, nite level
+	dw \1
+	db \2
+	dw \3
+	db \4
+ENDM
+
+MACRO treemon ; chance, species, level
+	db \1
+	dw \2
+	db \3
+ENDM
+
+MACRO contestmon ; chance, species, min level, max level
+	db \1
+	dw \2
+	db \3, \4
+ENDM

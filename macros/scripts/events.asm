@@ -297,13 +297,13 @@ ENDM
 	const checkpoke_command ; $2c
 MACRO checkpoke
 	db checkpoke_command
-	db \1 ; pkmn
+	dw \1 ; pkmn (16-bit index; 0 = the species ID in wScriptVar)
 ENDM
 
 	const checkpokelevel_command ; $31
 MACRO checkpokelevel
 	db checkpokelevel_command
-	db \1 ; pkmn
+	dw \1 ; pkmn (16-bit index)
 	db \2 ; level
 ENDM
 
@@ -317,7 +317,7 @@ MACRO givepoke
 		givepoke \1, \2, \3, TRUE, \4, \5
 	else
 		db givepoke_command
-		db \1 ; pokemon
+		dw \1 ; pokemon (16-bit index; 0 = the species ID in wScriptVar)
 		db \2 ; level
 		db \3 ; item
 		db \4 ; trainer
@@ -331,7 +331,7 @@ ENDM
 	const giveegg_command ; $2e
 MACRO giveegg
 	db giveegg_command
-	db \1 ; pkmn
+	dw \1 ; pkmn (16-bit index)
 	db \2 ; level
 ENDM
 
@@ -460,7 +460,7 @@ ENDM
 	const getmonname_command ; $40
 MACRO getmonname
 	db getmonname_command
-	db \2 ; pokemon
+	dw \2 ; pokemon (16-bit index; 0 = the species ID in wScriptVar)
 	db \1 ; string_buffer
 ENDM
 
@@ -594,7 +594,7 @@ ENDM
 	const pokepic_command ; $56
 MACRO pokepic
 	db pokepic_command
-	db \1 ; pokemon
+	dw \1 ; pokemon (16-bit index; 0 = the species ID in wScriptVar)
 ENDM
 
 	const closepokepic_command ; $57
@@ -630,7 +630,7 @@ ENDM
 	const loadwildmon_command ; $5d
 MACRO loadwildmon
 	db loadwildmon_command
-	db \1 ; pokemon
+	dw \1 ; pokemon (16-bit index)
 	db \2 ; level
 ENDM
 
@@ -867,7 +867,7 @@ ENDM
 	const cry_command ; $84
 MACRO cry
 	db cry_command
-	dw \1 ; cry_id
+	dw \1 ; pokemon (16-bit index; 0 = the species ID in wScriptVar)
 ENDM
 
 	const playsound_command ; $85
@@ -1243,6 +1243,14 @@ ENDM
 	const waitclosetext_command
 MACRO waitclosetext
 	db waitclosetext_command
+ENDM
+
+	const setmonval_command
+MACRO setmonval
+; wScriptVar = the 8-bit species ID of 16-bit species index \1 (setval with a
+; species: for specials that take a species in wScriptVar)
+	db setmonval_command
+	dw \1 ; pokemon (16-bit index)
 ENDM
 
 MACRO showdefensiveability

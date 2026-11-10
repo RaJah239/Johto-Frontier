@@ -105,7 +105,7 @@ CeladonMansionManagersSuiteSign:
 		done
 
 GoldenrodMansion1FGrowlithe:
-	setval GROWLITHE
+	setmonval GROWLITHE
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis
@@ -120,7 +120,7 @@ GoldenrodMansion1FGrowlithe:
 		done
 
 GoldenrodMansion1FClefairy:
-	setval CLEFAIRY
+	setmonval CLEFAIRY
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis

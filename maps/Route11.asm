@@ -244,7 +244,7 @@ Route11TrainerTipsText:
 	done
 
 Route11Miltank:
-	setval MILTANK
+	setmonval MILTANK
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis

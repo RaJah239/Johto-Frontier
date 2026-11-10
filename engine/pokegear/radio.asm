@@ -214,7 +214,7 @@ endr
 	cp EVE_F
 	jr z, .loop2
 
-	ld bc, 2 * NUM_GRASSMON
+	ld bc, WILDMON_SLOT_LENGTH * NUM_GRASSMON
 	call AddNTimes
 .loop3
 	; Choose one of the middle three Pokemon.
@@ -228,9 +228,11 @@ endr
 	ld d, 0
 	add hl, de
 	add hl, de
+	add hl, de ; WILDMON_SLOT_LENGTH
 	inc hl ; skip level
 	ld a, BANK(JohtoGrassWildMons)
-	call GetFarByte
+	call GetFarWord
+	call GetPokemonIDFromIndex
 	ld [wNamedObjectIndex], a
 	ld [wCurPartySpecies], a
 	call GetPokemonName

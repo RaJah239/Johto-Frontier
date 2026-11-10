@@ -155,10 +155,16 @@ GetTreeMon:
 	cp 8
 	jr nc, NoTreeMon
 	jr .skip
-.skip
-	ld a, [hli]
+.skip ; to the rare set: past the common set's -1
+	ld a, [hl]
+	inc hl
 	cp -1
-	jr nz, .skip
+	jr z, .skipped
+	inc hl ; species (dw)
+	inc hl
+	inc hl ; level
+	jr .skip
+.skipped
 	call SelectTreeMon
 	ret
 
@@ -195,8 +201,9 @@ SelectTreeMon:
 	sub [hl]
 	jr c, .ok
 	inc hl
+	inc hl ; species (dw)
 	inc hl
-	inc hl
+	inc hl ; level
 	jr .loop
 
 .ok
@@ -204,10 +211,16 @@ SelectTreeMon:
 	cp -1
 	jr z, NoTreeMon
 
+	ld a, [hli] ; species (dw)
+	ld e, a
 	ld a, [hli]
-	ld [wTempWildMonSpecies], a
+	ld d, a
 	ld a, [hl]
 	ld [wCurPartyLevel], a
+	ld h, d
+	ld l, e
+	call GetPokemonIDFromIndex
+	ld [wTempWildMonSpecies], a
 	scf
 	ret
 

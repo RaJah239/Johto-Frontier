@@ -48,8 +48,9 @@ endr
 	cp [hl]
 	jr z, .ok
 	jr c, .ok
+	inc hl ; species (dw)
 	inc hl
-	inc hl
+	inc hl ; level
 	inc hl
 	jr .loop
 .ok
@@ -57,10 +58,19 @@ endr
 
 	; Species 0 reads from a time-based encounter table.
 	ld a, [hli]
+	ld e, a
+	ld a, [hli]
 	ld d, a
-	and a
+	or e
 	call z, .TimeEncounter
 
+	; de = the species' 16-bit index: d = its 8-bit ID
+	push hl
+	ld h, d
+	ld l, e
+	call GetPokemonIDFromIndex
+	pop hl
+	ld d, a
 	ld e, [hl]
 	ret
 
@@ -70,10 +80,11 @@ endr
 
 .TimeEncounter:
 	; The level byte is repurposed as the index for the new table.
+	; Returns de = the species (16-bit index), hl = its level.
 	ld e, [hl]
 	ld d, 0
 	ld hl, TimeFishGroups
-rept 4
+rept 6 ; dw day species, db level, dw nite species, db level
 	add hl, de
 endr
 
@@ -83,10 +94,13 @@ endr
 	jr c, .time_species
 	inc hl
 	inc hl
+	inc hl
 
 .time_species
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
 	ret
 
 GetFishGroupIndex:

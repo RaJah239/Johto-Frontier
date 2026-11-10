@@ -1302,7 +1302,7 @@ ChooseWildEncounter_BugContest::
 	srl a
 
 	ld hl, ContestMons
-	ld de, 4
+	ld de, 5 ; db chance / dw species / db min, max
 .CheckMon:
 	sub [hl]
 	jr c, .GotMon
@@ -1312,8 +1312,16 @@ ChooseWildEncounter_BugContest::
 .GotMon:
 	inc hl
 
-; Species
+; Species (dw)
 	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	push hl
+	ld h, d
+	ld l, e
+	call GetPokemonIDFromIndex
+	pop hl
 	ld [wTempWildMonSpecies], a
 
 ; Min level

@@ -12,7 +12,7 @@ INCLUDE "data/wild/non_wildmon_locations.asm"
 ; DEF WATER_WILDDATA_LENGTH EQU 2 + 1 + NUM_WATERMON * 2 ; only 1 time of day
 ; DEF FISHGROUP_DATA_LENGTH EQU 1 + 2 * 3
  
-DEF AREA_ENTRY_SIZE_BYTES EQU 2 ; vanilla is 2 bytes, 1 byte for lvl, 1 for species index. pk 16, species is 2 bytes
+DEF AREA_ENTRY_SIZE_BYTES EQU WILDMON_SLOT_LENGTH ; 1 byte for lvl, 2 for the species (16-bit index)
 DEF AREA_ENTRY_SKIP_ENCOUNTER_RATES EQU 6 ; see the wild data: db 2 percent, 2 percent, 2 percent ; encounter rates: morn/day/nite
 DEF AREA_ENTRY_TIMEOFDAY_PRINT_SPACING EQU 6
  
@@ -393,6 +393,31 @@ Print_area_entry:
 	pop bc ; line counter
 	ret
 
+DexArea_IsCurSpecies:
+; a:hl = a species (dw, 16-bit index): z if it's [wCurSpecies]. Compares
+; 16-bit indexes, so nothing gets an 8-bit ID. Preserves bc, de and hl.
+	push hl
+	call GetFarWord
+	call DexArea_IsCurSpeciesIndex
+	pop hl
+	ret
+
+DexArea_IsCurSpeciesIndex:
+; hl = a 16-bit species index: z if it's [wCurSpecies]'s. Preserves bc, de.
+	push de
+	ld d, h
+	ld e, l
+	ld a, [wCurSpecies]
+	call GetPokemonIndexFromID
+	ld a, l
+	cp e
+	jr nz, .done
+	ld a, h
+	cp d
+.done
+	pop de
+	ret
+
 DexArea_IncWildMonIndex:
 	ld a, [wPokedexStatus]
 	inc a
@@ -562,15 +587,12 @@ Pokedex_Parse_grass:
 	push bc ; % and NUM_GRASSMON
 .map_loop
 	ld a, BANK(JohtoGrassWildMons)
-	call GetFarByte ; bkup hl and change to getfarword for pk16?
-	; a is species
-	inc hl ; pointing to next mon lvl
-	inc hl ; pointing to next mon species
-	; a is mon species 
-	ld d, a
-	ld a, [wCurSpecies]
+	call DexArea_IsCurSpecies ; z if this slot's species is [wCurSpecies]
+	; to the next slot's species
+	inc hl
+	inc hl ; next mon lvl
+	inc hl
 	pop bc ; % and NUM_GRASSMON
-	cp d ; mon species 
 	jr nz, .not_match
 	call Add_encounter_percent_grass
 	add b
@@ -800,15 +822,12 @@ Pokedex_Parse_surf:
 	push bc ; % and NUM_WATERMON
 .map_loop
 	ld a, BANK(JohtoWaterWildMons)
-	call GetFarByte ; bkup hl and change to getfarword for pk16?
-	; a is species
-	inc hl ; pointing to next mon lvl
-	inc hl ; pointing to next mon species
-	; a is mon species 
-	ld d, a
-	ld a, [wCurSpecies]
+	call DexArea_IsCurSpecies ; z if this slot's species is [wCurSpecies]
+	; to the next slot's species
+	inc hl
+	inc hl ; next mon lvl
+	inc hl
 	pop bc ; % and NUM_GRASSMON
-	cp d ; mon species 
 	jr nz, .not_match
 	call Add_encounter_percent_water
 	add b ; accumulated encounter total for this species is in b, this slot % is in a
@@ -1015,12 +1034,10 @@ Dex_Check_bugcontest:
 	; we arent at the end, so increment ptr by 1 and check species, that's all we care about
 	inc hl
 	ld a, BANK(ContestMons)
-	call GetFarByte ;; will be -1 at the end, otherwise it's the % chance to encounter
-	ld c, a ; pokemon species of entry in ContestMons
-	ld a, [wCurSpecies] ; current pokedex entry species
-	cp c
+	call DexArea_IsCurSpecies ; the species (dw)
 	jr z, .found
-	; species didnt match, inc hl by 3, need to check for -1
+	; species didnt match: to the next entry (dw species, min, max)
+	inc hl
 	inc hl
 	inc hl
 	inc hl
@@ -1070,13 +1087,11 @@ Pokedex_DetailedArea_bugcontest:
 	; we arent at the end, so increment ptr by 1 and check species, that's all we care about
 	inc hl
 	ld a, BANK(ContestMons)
-	call GetFarByte ;; will be -1 at the end, otherwise it's the % chance to encounter
-	ld c, a ; pokemon species of entry in ContestMons
-	ld a, [wCurSpecies] ; current pokedex entry species
-	cp c
+	call DexArea_IsCurSpecies ; the species (dw)
 	jr z, .found
-	; species didnt match, inc hl by 3, need to check for -1
+	; species didnt match: to the next entry (dw species, min, max)
 .continue
+	inc hl
 	inc hl
 	inc hl
 	inc hl

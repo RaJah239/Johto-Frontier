@@ -371,7 +371,7 @@ RadioTowerBuenaPrizeReceptionistScript:
 		done
 
 RadioTower2FMarillScript:
-	setval MARILL
+	setmonval MARILL
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis

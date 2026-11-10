@@ -79,7 +79,7 @@ CharcoalKilnApprentice:
 		done
 
 CharcoalKilnScyther:
-	setval SCYTHER
+	setmonval SCYTHER
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis

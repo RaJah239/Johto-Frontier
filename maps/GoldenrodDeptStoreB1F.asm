@@ -63,7 +63,7 @@ GoldenrodDeptStoreB1FBlackBelt3Text:
 	done
 
 GoldenrodDeptStoreB1FHariyamaScript:
-	setval HARIYAMA
+	setmonval HARIYAMA
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis

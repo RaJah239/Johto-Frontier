@@ -1,4 +1,4 @@
-DEF time_group EQUS "0," ; use the nth TimeFishGroups entry
+DEF time_group EQUS "0, 0," ; species 0 (dw): use the nth TimeFishGroups entry
 
 MACRO fishgroup
 ; chance, old rod, good rod, super rod
@@ -25,211 +25,211 @@ FishGroups:
 	assert_table_length NUM_FISHGROUPS
 
 .Shore_Old:
-	db  70 percent + 1, MAGIKARP,   10
-	db  85 percent + 1, MAGIKARP,   10
-	db 100 percent,     FEEBAS,     10
+	fishmon 70 percent + 1, MAGIKARP, 10
+	fishmon 85 percent + 1, MAGIKARP, 10
+	fishmon 100 percent, FEEBAS, 10
 .Shore_Good:
-	db  35 percent,     MAGIKARP,   20
-	db  70 percent,     FEEBAS,     20
-	db  90 percent + 1, FEEBAS,     20
+	fishmon 35 percent, MAGIKARP, 20
+	fishmon 70 percent, FEEBAS, 20
+	fishmon 90 percent + 1, FEEBAS, 20
 	db 100 percent,     time_group 0
 .Shore_Super:
-	db  40 percent,     FEEBAS,     40
+	fishmon 40 percent, FEEBAS, 40
 	db  70 percent,     time_group 1
-	db  90 percent + 1, FEEBAS,     40
-	db 100 percent,     MAGIKARP,   40
+	fishmon 90 percent + 1, FEEBAS, 40
+	fishmon 100 percent, MAGIKARP, 40
 
 .Ocean_Old:
-	db  70 percent + 1, MAGIKARP,   10
-	db  85 percent + 1, MAGIKARP,   10
-	db 100 percent,     TENTACOOL,  10
+	fishmon 70 percent + 1, MAGIKARP, 10
+	fishmon 85 percent + 1, MAGIKARP, 10
+	fishmon 100 percent, TENTACOOL, 10
 .Ocean_Good:
-	db  35 percent,     MAGIKARP,   20
-	db  70 percent,     TENTACOOL,  20
-	db  90 percent + 1, CHINCHOU,   20
+	fishmon 35 percent, MAGIKARP, 20
+	fishmon 70 percent, TENTACOOL, 20
+	fishmon 90 percent + 1, CHINCHOU, 20
 	db 100 percent,     time_group 2
 .Ocean_Super:
-	db  40 percent,     CHINCHOU,   40
+	fishmon 40 percent, CHINCHOU, 40
 	db  70 percent,     time_group 3
-	db  90 percent + 1, TENTACRUEL, 40
-	db 100 percent,     LANTURN,    40
+	fishmon 90 percent + 1, TENTACRUEL, 40
+	fishmon 100 percent, LANTURN, 40
 
 .Lake_Old:
-	db  70 percent + 1, MAGIKARP,   10
-	db  85 percent + 1, MAGIKARP,   10
-	db 100 percent,     FEEBAS,    10
+	fishmon 70 percent + 1, MAGIKARP, 10
+	fishmon 85 percent + 1, MAGIKARP, 10
+	fishmon 100 percent, FEEBAS, 10
 .Lake_Good:
-	db  35 percent,     MAGIKARP,   20
-	db  70 percent,     FEEBAS,    20
-	db  90 percent + 1, FEEBAS,    20
+	fishmon 35 percent, MAGIKARP, 20
+	fishmon 70 percent, FEEBAS, 20
+	fishmon 90 percent + 1, FEEBAS, 20
 	db 100 percent,     time_group 4
 .Lake_Super:
-	db  40 percent,     FEEBAS,    40
+	fishmon 40 percent, FEEBAS, 40
 	db  70 percent,     time_group 5
-	db  90 percent + 1, MAGIKARP,   40
-	db 100 percent,     FEEBAS,    40
+	fishmon 90 percent + 1, MAGIKARP, 40
+	fishmon 100 percent, FEEBAS, 40
 
 .Pond_Old:
-	db  70 percent + 1, MAGIKARP,   10
-	db  85 percent + 1, MAGIKARP,   10
-	db 100 percent,     FEEBAS,    10
+	fishmon 70 percent + 1, MAGIKARP, 10
+	fishmon 85 percent + 1, MAGIKARP, 10
+	fishmon 100 percent, FEEBAS, 10
 .Pond_Good:
-	db  35 percent,     MAGIKARP,   20
-	db  70 percent,     FEEBAS,    20
-	db  90 percent + 1, FEEBAS,    20
+	fishmon 35 percent, MAGIKARP, 20
+	fishmon 70 percent, FEEBAS, 20
+	fishmon 90 percent + 1, FEEBAS, 20
 	db 100 percent,     time_group 6
 .Pond_Super:
-	db  40 percent,     FEEBAS,    40
+	fishmon 40 percent, FEEBAS, 40
 	db  70 percent,     time_group 7
-	db  90 percent + 1, MAGIKARP,   40
-	db 100 percent,     FEEBAS,    40
+	fishmon 90 percent + 1, MAGIKARP, 40
+	fishmon 100 percent, FEEBAS, 40
 
 .FEEBAS_Old:
-	db  70 percent + 1, MAGIKARP,   10
-	db  85 percent + 1, MAGIKARP,   10
-	db 100 percent,     MAGIKARP,   10
+	fishmon 70 percent + 1, MAGIKARP, 10
+	fishmon 85 percent + 1, MAGIKARP, 10
+	fishmon 100 percent, MAGIKARP, 10
 .FEEBAS_Good:
-	db  35 percent,     MAGIKARP,   20
-	db  70 percent,     MAGIKARP,   20
-	db  90 percent + 1, MAGIKARP,   20
+	fishmon 35 percent, MAGIKARP, 20
+	fishmon 70 percent, MAGIKARP, 20
+	fishmon 90 percent + 1, MAGIKARP, 20
 	db 100 percent,     time_group 8
 .FEEBAS_Super:
-	db  40 percent,     MAGIKARP,   40
+	fishmon 40 percent, MAGIKARP, 40
 	db  70 percent,     time_group 9
-	db  90 percent + 1, MAGIKARP,   40
-	db 100 percent,     FEEBAS,  40
+	fishmon 90 percent + 1, MAGIKARP, 40
+	fishmon 100 percent, FEEBAS, 40
 
 .FEEBAS_Swarm_Old:
-	db  70 percent + 1, MAGIKARP,   5
-	db  85 percent + 1, MAGIKARP,   5
-	db 100 percent,     FEEBAS,     5
+	fishmon 70 percent + 1, MAGIKARP, 5
+	fishmon 85 percent + 1, MAGIKARP, 5
+	fishmon 100 percent, FEEBAS, 5
 .Feebas_Swarm_Good:
-	db  35 percent,     MAGIKARP,   20
-	db  70 percent,     FEEBAS,     20
-	db  90 percent + 1, FEEBAS,     20
+	fishmon 35 percent, MAGIKARP, 20
+	fishmon 70 percent, FEEBAS, 20
+	fishmon 90 percent + 1, FEEBAS, 20
 	db 100 percent,     time_group 10
 .Feebas_Swarm_Super:
-	db  40 percent,     FEEBAS,     40
+	fishmon 40 percent, FEEBAS, 40
 	db  70 percent,     time_group 11
-	db  90 percent + 1, FEEBAS,     40
-	db 100 percent,     FEEBAS,     40
+	fishmon 90 percent + 1, FEEBAS, 40
+	fishmon 100 percent, FEEBAS, 40
 
 .Remoraid_Swarm_Old:
-	db  70 percent + 1, MAGIKARP,   10
-	db  85 percent + 1, MAGIKARP,   10
-	db 100 percent,     REMORAID,   10
+	fishmon 70 percent + 1, MAGIKARP, 10
+	fishmon 85 percent + 1, MAGIKARP, 10
+	fishmon 100 percent, REMORAID, 10
 .Remoraid_Swarm_Good:
-	db  35 percent,     MAGIKARP,   20
-	db  70 percent,     REMORAID,   20
-	db  90 percent + 1, REMORAID,   20
+	fishmon 35 percent, MAGIKARP, 20
+	fishmon 70 percent, REMORAID, 20
+	fishmon 90 percent + 1, REMORAID, 20
 	db 100 percent,     time_group 12
 .Remoraid_Swarm_Super:
-	db  40 percent,     REMORAID,   40
+	fishmon 40 percent, REMORAID, 40
 	db  70 percent,     time_group 13
-	db  90 percent + 1, REMORAID,   40
-	db 100 percent,     REMORAID,   40
+	fishmon 90 percent + 1, REMORAID, 40
+	fishmon 100 percent, REMORAID, 40
 
 .Gyarados_Old:
-	db  70 percent + 1, MAGIKARP,   10
-	db  85 percent + 1, MAGIKARP,   10
-	db 100 percent,     MAGIKARP,   10
+	fishmon 70 percent + 1, MAGIKARP, 10
+	fishmon 85 percent + 1, MAGIKARP, 10
+	fishmon 100 percent, MAGIKARP, 10
 .Gyarados_Good:
-	db  35 percent,     MAGIKARP,   20
-	db  70 percent,     MAGIKARP,   20
-	db  90 percent + 1, MAGIKARP,   20
+	fishmon 35 percent, MAGIKARP, 20
+	fishmon 70 percent, MAGIKARP, 20
+	fishmon 90 percent + 1, MAGIKARP, 20
 	db 100 percent,     time_group 14
 .Gyarados_Super:
-	db  40 percent,     MAGIKARP,   40
+	fishmon 40 percent, MAGIKARP, 40
 	db  70 percent,     time_group 15
-	db  90 percent + 1, MAGIKARP,   40
-	db 100 percent,     MAGIKARP,   40
+	fishmon 90 percent + 1, MAGIKARP, 40
+	fishmon 100 percent, MAGIKARP, 40
 
 .FEEBAS_2_Old:
-	db  70 percent + 1, MAGIKARP,   10
-	db  85 percent + 1, MAGIKARP,   10
-	db 100 percent,     MAGIKARP,   10
+	fishmon 70 percent + 1, MAGIKARP, 10
+	fishmon 85 percent + 1, MAGIKARP, 10
+	fishmon 100 percent, MAGIKARP, 10
 .FEEBAS_2_Good:
-	db  35 percent,     MAGIKARP,   10
-	db  70 percent,     MAGIKARP,   10
-	db  90 percent + 1, MAGIKARP,   10
+	fishmon 35 percent, MAGIKARP, 10
+	fishmon 70 percent, MAGIKARP, 10
+	fishmon 90 percent + 1, MAGIKARP, 10
 	db 100 percent,     time_group 16
 .FEEBAS_2_Super:
-	db  40 percent,     MAGIKARP,   10
+	fishmon 40 percent, MAGIKARP, 10
 	db  70 percent,     time_group 17
-	db  90 percent + 1, MAGIKARP,   10
-	db 100 percent,     FEEBAS,  10
+	fishmon 90 percent + 1, MAGIKARP, 10
+	fishmon 100 percent, FEEBAS, 10
 
 .WhirlIslands_Old:
-	db  70 percent + 1, MAGIKARP,   10
-	db  85 percent + 1, MAGIKARP,   10
-	db 100 percent,     FEEBAS,     10
+	fishmon 70 percent + 1, MAGIKARP, 10
+	fishmon 85 percent + 1, MAGIKARP, 10
+	fishmon 100 percent, FEEBAS, 10
 .WhirlIslands_Good:
-	db  35 percent,     MAGIKARP,   20
-	db  70 percent,     FEEBAS,     20
-	db  90 percent + 1, FEEBAS,     20
+	fishmon 35 percent, MAGIKARP, 20
+	fishmon 70 percent, FEEBAS, 20
+	fishmon 90 percent + 1, FEEBAS, 20
 	db 100 percent,     time_group 18
 .WhirlIslands_Super:
-	db  40 percent,     FEEBAS,     40
+	fishmon 40 percent, FEEBAS, 40
 	db  70 percent,     time_group 19
-	db  90 percent + 1, MAGIKARP,   40
-	db 100 percent,     SEADRA,     40
+	fishmon 90 percent + 1, MAGIKARP, 40
+	fishmon 100 percent, SEADRA, 40
 
 .FEEBAS_NoSwarm_Old:
-	db  70 percent + 1, MAGIKARP,   10
-	db  85 percent + 1, MAGIKARP,   10
-	db 100 percent,     TENTACOOL,  10
+	fishmon 70 percent + 1, MAGIKARP, 10
+	fishmon 85 percent + 1, MAGIKARP, 10
+	fishmon 100 percent, TENTACOOL, 10
 .Feebas_NoSwarm_Good:
 .Feebas_Good:
-	db  35 percent,     MAGIKARP,   20
-	db  70 percent,     TENTACOOL,  20
-	db  90 percent + 1, TENTACOOL,  20
+	fishmon 35 percent, MAGIKARP, 20
+	fishmon 70 percent, TENTACOOL, 20
+	fishmon 90 percent + 1, TENTACOOL, 20
 	db 100 percent,     time_group 20
 .Feebas_NoSwarm_Super:
 .Feebas_Super:
-	db  40 percent,     TENTACOOL,  40
+	fishmon 40 percent, TENTACOOL, 40
 	db  70 percent,     time_group 21
-	db  90 percent + 1, MAGIKARP,   40
-	db 100 percent,     FEEBAS,     40
+	fishmon 90 percent + 1, MAGIKARP, 40
+	fishmon 100 percent, FEEBAS, 40
 
 .Remoraid_Old:
-	db  70 percent + 1, MAGIKARP,   10
-	db  85 percent + 1, MAGIKARP,   10
-	db 100 percent,     FEEBAS,    10
+	fishmon 70 percent + 1, MAGIKARP, 10
+	fishmon 85 percent + 1, MAGIKARP, 10
+	fishmon 100 percent, FEEBAS, 10
 .Remoraid_Good:
-	db  35 percent,     MAGIKARP,   20
-	db  70 percent,     FEEBAS,    20
-	db  90 percent + 1, FEEBAS,    20
+	fishmon 35 percent, MAGIKARP, 20
+	fishmon 70 percent, FEEBAS, 20
+	fishmon 90 percent + 1, FEEBAS, 20
 	db 100 percent,     time_group 6
 .Remoraid_Super:
-	db  40 percent,     FEEBAS,    40
+	fishmon 40 percent, FEEBAS, 40
 	db  70 percent,     time_group 7
-	db  90 percent + 1, MAGIKARP,   40
-	db 100 percent,     REMORAID,   40
+	fishmon 90 percent + 1, MAGIKARP, 40
+	fishmon 100 percent, REMORAID, 40
 
 TimeFishGroups:
 	;  day              nite
-	db CORSOLA,    20,  STARYU,     20 ; 0
-	db CORSOLA,    40,  STARYU,     40 ; 1
-	db FEEBAS,    20,  FEEBAS,    20 ; 2
-	db FEEBAS,    40,  FEEBAS,    40 ; 3
-	db FEEBAS,    20,  FEEBAS,    20 ; 4
-	db FEEBAS,    40,  FEEBAS,    40 ; 5
-	db FEEBAS,     20,   FEEBAS,    20 ; 6
-	db FEEBAS,     40,   FEEBAS,    40 ; 7
-	db FEEBAS,    20,  FEEBAS,    20 ; 8
-	db FEEBAS,    40,  FEEBAS,    40 ; 9
-	db FEEBAS,     20,  FEEBAS,     20 ; 10
-	db FEEBAS,     40,  FEEBAS,     40 ; 11
-	db REMORAID,   20,  REMORAID,   20 ; 12
-	db REMORAID,   40,  REMORAID,   40 ; 13
-	db GYARADOS,   20,  GYARADOS,   20 ; 14
-	db GYARADOS,   40,  GYARADOS,   40 ; 15
-	db FEEBAS,    10,  FEEBAS,    10 ; 16
-	db FEEBAS,    10,  FEEBAS,    10 ; 17
-	db HORSEA,     20,  HORSEA,     20 ; 18
-	db HORSEA,     40,  HORSEA,     40 ; 19
-	db TENTACOOL,  20,  TENTACOOL,  20 ; 20
-	db TENTACOOL,  40,  TENTACOOL,  40 ; 21
+	timefish CORSOLA, 20, STARYU, 20 ; 0
+	timefish CORSOLA, 40, STARYU, 40 ; 1
+	timefish FEEBAS, 20, FEEBAS, 20 ; 2
+	timefish FEEBAS, 40, FEEBAS, 40 ; 3
+	timefish FEEBAS, 20, FEEBAS, 20 ; 4
+	timefish FEEBAS, 40, FEEBAS, 40 ; 5
+	timefish FEEBAS, 20, FEEBAS, 20 ; 6
+	timefish FEEBAS, 40, FEEBAS, 40 ; 7
+	timefish FEEBAS, 20, FEEBAS, 20 ; 8
+	timefish FEEBAS, 40, FEEBAS, 40 ; 9
+	timefish FEEBAS, 20, FEEBAS, 20 ; 10
+	timefish FEEBAS, 40, FEEBAS, 40 ; 11
+	timefish REMORAID, 20, REMORAID, 20 ; 12
+	timefish REMORAID, 40, REMORAID, 40 ; 13
+	timefish GYARADOS, 20, GYARADOS, 20 ; 14
+	timefish GYARADOS, 40, GYARADOS, 40 ; 15
+	timefish FEEBAS, 10, FEEBAS, 10 ; 16
+	timefish FEEBAS, 10, FEEBAS, 10 ; 17
+	timefish HORSEA, 20, HORSEA, 20 ; 18
+	timefish HORSEA, 40, HORSEA, 40 ; 19
+	timefish TENTACOOL, 20, TENTACOOL, 20 ; 20
+	timefish TENTACOOL, 40, TENTACOOL, 40 ; 21
 
 FishGroups_Names::
  	table_width 2, FishGroups_Names

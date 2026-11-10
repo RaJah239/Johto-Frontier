@@ -169,7 +169,7 @@ NurseJoyTraininCooltrainerFText:
 	done
 
 NurseJoyTrainingBlisseyScript:
-	setval BLISSEY
+	setmonval BLISSEY
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis

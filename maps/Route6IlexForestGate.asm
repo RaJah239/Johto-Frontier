@@ -101,7 +101,7 @@ Route6IlexForestGateLassText:
 	done
 
 Route6IlexForestGateTangelaScript:
-	setval TANGELA
+	setmonval TANGELA
 	special SetMonAsSeen
 	reanchormap
 	pokepic TANGELA

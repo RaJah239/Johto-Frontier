@@ -67,13 +67,13 @@ Route11BarnTwinWereFeedingMoomooText:
 MoomooScript:
 	checkevent EVENT_HEALED_MOOMOO
 	iftrue .HappyCow
-	setval MILTANK
+	setmonval MILTANK
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis1
 	reanchormap
 	pokepic MILTANK
-	setval MILTANK
+	setmonval MILTANK
 	special PlaySlowCry
 	waitbutton
 	closepokepic

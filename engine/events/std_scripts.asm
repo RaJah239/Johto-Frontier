@@ -193,7 +193,7 @@ MysteryGiftCarrieScript:
 
 ChanseyPokeCenterScript:
 	faceplayer
-	setval CHANSEY
+	setmonval CHANSEY
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis
@@ -400,7 +400,7 @@ TrashCanScript:
 
 PorygonPCScript:
 	faceplayer
-	setval PORYGON
+	setmonval PORYGON
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis

@@ -353,7 +353,7 @@ NationalParkTrainerTipsText:
 	done
 
 NationalParkMeowthScript:
-	setval MEOWTH
+	setmonval MEOWTH
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis

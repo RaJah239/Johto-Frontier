@@ -381,47 +381,31 @@ Check_this_rod:
 	ld c, a ; adjusted %
 	
 	inc hl
-	ld a, BANK(FishGroups)
-	call GetFarByte ; successfuly gets the Species in the Rod table
-	ld d, a
-	ld e, a
+	; d = 1 if [wCurSpecies] bites here by day, e = 1 if by night (the species
+	; can be a time group, with a day and a night species)
+	call Dex_FishSlotSpecies
+	ld a, d
 	and a
-	call z, Dex_FishTimeGroupsGet ; if zero, not the species, 
-	; looks at Daytime table to determine the species
-	ld a, [wCurSpecies]
-	; we cannot assume we didnt call the ToD table, which can hold two species,
-	;  so check both d and e
-	cp d
-	jr z, .found
-	cp e
-	jr z, .found
-	; pop af ; dont need this value (diff of entry %), clean stack
+	jr z, .trynite
+	ld a, [wPokedexEvoStage2]
+	add c
+	ld [wPokedexEvoStage2], a
+.trynite
+	ld a, e
+	and a
+	jr z, .resume
+	ld a, [wPokedexEvoStage3]
+	add c
+	ld [wPokedexEvoStage3], a
 .resume
 	ld a, b
 	cp 255 ; this is how we tell if we are looking at the last entry of the table (FF)
 	jr z, .end
 	; we have not reached the end, increment to next entry % loop
-	inc hl ; species
+	inc hl ; species (dw)
+	inc hl
 	inc hl ; encounter level
 	jr .loop
-.found
-	; return true flag for match, plus %
-	; b has adjusted %
-	; a is species rn, use to determine day/nite
-	cp d
-	jr nz, .trynite
-	push af ; species
-	ld a, [wPokedexEvoStage2]
-	add c
-	ld [wPokedexEvoStage2], a
-	pop af ; species
-.trynite
-	cp e
-	jr nz, .resume
-	ld a, [wPokedexEvoStage3]
-	add c
-	ld [wPokedexEvoStage3], a
-	jr .resume
 .end
 	pop hl
 	; call Fishing_Inc_Index
@@ -436,31 +420,57 @@ Check_this_rod:
 	ret
 ;;;;;;;;;;;;;;;;;;;;;;;;; Main 3 Fishing Funcs End;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;; Fishing Utility Funcs ;;;;;;;;;;;;;;;;;;;;;;;
-Dex_FishTimeGroupsGet:
+Dex_FishSlotSpecies:
+; hl = a fishing slot's species (dw) in BANK(FishGroups): d = 1 if it's
+; [wCurSpecies] by day, e = 1 if by night (species 0 is a TimeFishGroups
+; entry: a day and a night species). Preserves bc and hl.
 	push hl
 	push bc
-	push af
-	inc hl
 	ld a, BANK(FishGroups)
-	call GetFarByte ; index
-	; a is the index
-	ld hl, TimeFishGroups
-	ld b, 0
+	call GetFarWord
+	ld a, h
+	or l
+	jr z, .time_group
+	call DexArea_IsCurSpeciesIndex
+	ld de, 0
+	jr nz, .done
+	ld de, $0101
+	jr .done
+
+.time_group
+	pop bc
+	pop hl
+	push hl
+	push bc
+	inc hl
+	inc hl ; the time group
+	ld a, BANK(FishGroups)
+	call GetFarByte
 	ld c, a
+	ld b, 0
+	ld hl, TimeFishGroups
+rept 6 ; dw day species, db level, dw nite species, db level
 	add hl, bc
-	add hl, bc
-	add hl, bc
-	add hl, bc
+endr
+	push hl
 	ld a, BANK(TimeFishGroups)
-	call GetFarByte
-	ld d, a ; species 1
+	call GetFarWord
+	call DexArea_IsCurSpeciesIndex
+	ld d, 0
+	jr nz, .not_day
+	inc d
+.not_day
+	pop hl
 	inc hl
 	inc hl
+	inc hl ; the night species
 	ld a, BANK(TimeFishGroups)
-	call GetFarByte
-	ld e, a ; species 2
-.done	
-	pop af
+	call GetFarWord
+	call DexArea_IsCurSpeciesIndex
+	ld e, 0
+	jr nz, .done
+	inc e
+.done
 	pop bc
 	pop hl
 	ret
