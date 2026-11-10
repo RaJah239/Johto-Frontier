@@ -79,9 +79,19 @@ AskOverwriteSaveFile:
 	jr z, .erase
 	call CompareLoadedAndSavedPlayerID
 	ret z
+
 	ld hl, AnotherSaveFileText
 	call SaveTheGame_yesorno
 	jr z, .refused
+
+	ld hl, AreYouReallyReallySureText
+	call SaveTheGame_yesorno
+	jr z, .refused
+
+	ld hl, ThisCantBeUndoneText
+	call SaveTheGame_yesorno
+	jr z, .refused
+
 .erase
 	call ErasePreviousSave
 	and a
@@ -865,6 +875,14 @@ SavedTheGameText:
 
 AnotherSaveFileText:
 	text_far _AnotherSaveFileText
+	text_end
+
+AreYouReallyReallySureText:
+	text_far _AreYouReallyReallySureText
+	text_end
+
+ThisCantBeUndoneText:
+	text_far _ThisCantBeUndoneText
 	text_end
 
 SaveFileCorruptedText:
