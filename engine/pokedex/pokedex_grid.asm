@@ -447,8 +447,12 @@ DexGrid_GetListSpecies:
 	ld d, 0
 	ld hl, wPokedexOrder
 	add hl, de
-	ld a, [hl]
-	ret
+	ld a, [hl] ; (a species' 16-bit index, below 256)
+	and a
+	ret z
+	ld l, a
+	ld h, 0
+	jmp GetPokemonIDFromIndex
 
 .none
 	xor a

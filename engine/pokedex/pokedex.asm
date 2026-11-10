@@ -178,12 +178,23 @@ Pokedex_CheckUnlockedUnownMode:
 	ret
 
 Pokedex_InitCursorPosition:
-	ld hl, wPokedexOrder
 	ld a, [wPrevDexEntry]
 	and a
+	jr z, .no_entry
+	cp EGG
+	jr nc, .no_entry
+	call GetPokemonIndexFromID ; (the list holds 16-bit indexes' low bytes)
+	ld a, h
+	and a
+	jr nz, .no_entry
+	ld a, l
+	jr .got_entry
+.no_entry
+	xor a
+.got_entry
+	ld hl, wPokedexOrder
+	and a
 	jr z, .done
-	cp NUM_POKEMON + 1
-	jr nc, .done
 
 	ld b, a
 	ld a, [wDexListingEnd]
@@ -2589,6 +2600,7 @@ Pokedex_PrintListing:
 .loop
 	push af
 	ld a, [de]
+	call Pokedex_OrderEntryToID
 	ld [wTempSpecies], a ; also sets wNamedObjectIndex
 	assert wTempSpecies == wNamedObjectIndex
 	push de
@@ -2696,7 +2708,36 @@ Pokedex_GetSelectedMon:
 	ld hl, wPokedexOrder
 	add hl, de
 	ld a, [hl]
+	call Pokedex_OrderEntryToID
 	ld [wTempSpecies], a
+	ret
+
+Pokedex_OrderEntryToID:
+; a = a wPokedexOrder entry (a species' 16-bit index, all below 256; 0: none)
+; -> a = its 8-bit ID (0: none). Preserves bc, de and hl.
+	and a
+	ret z
+	push hl
+	ld l, a
+	ld h, 0
+	call GetPokemonIDFromIndex
+	pop hl
+	ret
+
+Pokedex_CheckSeenIndex:
+; a = a wPokedexOrder entry (16-bit index below 256): nz if seen. Doesn't
+; allocate an 8-bit ID. Preserves bc, de and hl.
+	push bc
+	push de
+	push hl
+	ld e, a
+	ld d, 0
+	ld hl, wPokedexSeen
+	ld b, CHECK_FLAG
+	call PokedexFlagActionByIndex
+	pop hl
+	pop de
+	pop bc
 	ret
 
 Pokedex_CheckCaught:
@@ -2765,8 +2806,7 @@ Pokedex_OrderMonsByMode:
 	ld e, d
 .loopfindend
 	ld a, [hld]
-	ld [wTempSpecies], a
-	call Pokedex_CheckSeen
+	call Pokedex_CheckSeenIndex
 	jr nz, .foundend
 	dec d
 	dec e
@@ -2785,10 +2825,9 @@ Pokedex_ABCMode:
 .loop1abc
 	push bc
 	ld a, [de]
-	ld [wTempSpecies], a
-	call Pokedex_CheckSeen
+	call Pokedex_CheckSeenIndex
 	jr z, .skipabc
-	ld a, [wTempSpecies]
+	ld a, [de]
 	ld [hli], a
 	ld a, [wDexListingEnd]
 	inc a
@@ -2811,6 +2850,9 @@ Pokedex_ABCMode:
 
 .doneabc
 	ret
+
+	; the list holds species indexes in bytes (and its positions are bytes)
+	assert NUM_POKEMON < $100, "the Pokedex lists need 16-bit entries and positions past 255 species"
 
 INCLUDE "data/pokemon/dex_order_alpha.asm"
 
@@ -3059,7 +3101,7 @@ Pokedex_SearchCurrentAreaMons:
 	push hl
 	ld a, BANK(JohtoGrassWildMons)
 	call GetFarWord
-	call GetPokemonIDFromIndex
+	ld a, l ; the list holds indexes (all below 256, see Pokedex_OrderMonsByMode)
 	pop hl
 	push hl
 	push bc
@@ -3083,7 +3125,7 @@ Pokedex_SearchCurrentAreaMons:
 	push hl
 	ld a, BANK(JohtoWaterWildMons)
 	call GetFarWord
-	call GetPokemonIDFromIndex
+	ld a, l ; the list holds indexes (all below 256, see Pokedex_OrderMonsByMode)
 	pop hl
 	push hl
 	push bc
@@ -3315,11 +3357,12 @@ Pokedex_SearchForMons:
 	ld a, [hl]
 	and a
 	jr z, .next_mon
+	call Pokedex_CheckSeenIndex
+	jr z, .next_mon
+	ld a, [hl]
+	call Pokedex_OrderEntryToID
 	ld [wTempSpecies], a
 	ld [wCurSpecies], a
-	; call Pokedex_CheckCaught
- 	call Pokedex_CheckSeen
-	jr z, .next_mon
 	push hl
 	push de
 	call GetBaseData
@@ -3335,7 +3378,7 @@ Pokedex_SearchForMons:
 	jr nz, .next_mon
 
 .match_found
-	ld a, [wTempSpecies]
+	ld a, [hl] ; (its index)
 	ld [de], a
 	inc de
 	ld a, [wDexSearchResultCount]

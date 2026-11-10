@@ -105,7 +105,7 @@ PokemonTableGarbageCollection:
 	___conversion_bitmap_check_values .set_bit, wBillsPC_HeldIcon, wBillsPC_QuickIcon
 	___conversion_bitmap_check_values .set_bit, wEggMonSpecies, wBufferMonSpecies, wTempMonSpecies, wContestMonSpecies, \
 	                                            wBattleMonSpecies, wEnemyMonSpecies, wOddEggSpecies, wBaseDexNo, \
-	                                            wCurPartySpecies, wCurSpecies, wTempSpecies, wScriptVar
+	                                            wCurPartySpecies, wCurSpecies, wTempSpecies, wScriptVar, wPrevDexEntry
 	pop af
 	ldh [rSVBK], a
 	___conversion_bitmap_free_unused wPokemonIndexTable, MON_TABLE
