@@ -4,9 +4,6 @@ SaveMenu:
 	call SpeechTextbox
 	call UpdateSprites
 	farcall SaveMenu_CopyTilemapAtOnce
-	ld hl, WouldYouLikeToSaveTheGameText
-	call SaveTheGame_yesorno
-	jr nz, .refused
 	call AskOverwriteSaveFile
 	jr c, .refused
 	call PauseGameLogic
@@ -84,8 +81,7 @@ AskOverwriteSaveFile:
 	ret z
 	ld hl, AnotherSaveFileText
 	call SaveTheGame_yesorno
-	jr nz, .refused
-
+	jr z, .refused
 .erase
 	call ErasePreviousSave
 	and a
@@ -96,11 +92,11 @@ AskOverwriteSaveFile:
 	ret
 
 SaveTheGame_yesorno:
-	ld b, BANK(WouldYouLikeToSaveTheGameText)
+	ld b, BANK(AnotherSaveFileText)
 	call MapTextbox
 	call LoadMenuTextbox
 	lb bc, 0, 7
-	call PlaceYesNoBox
+	call NoYesBox
 	ld a, [wMenuCursorY]
 	dec a
 	call CloseWindow
@@ -862,10 +858,6 @@ Checksum:
 	or c
 	jr nz, .loop
 	ret
-
-WouldYouLikeToSaveTheGameText:
-	text_far _WouldYouLikeToSaveTheGameText
-	text_end
 
 SavedTheGameText:
 	text_far _SavedTheGameText

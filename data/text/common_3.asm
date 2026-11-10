@@ -80,20 +80,14 @@ _LinkAskTradeForText::
 	text "?"
 	done
 
-_WouldYouLikeToSaveTheGameText::
-	text "Would you like to"
-	line "save the game?"
-	done
-
 _SavedTheGameText::
 	text "<PLAYER> saved"
 	line "the game."
 	done
 
 _AnotherSaveFileText::
-	text "There is another"
-	line "save file. Is it"
-	cont "OK to overwrite?"
+	text "Another save file"
+	line "exists! Overwrite?"
 	done
 
 _SaveFileCorruptedText::
