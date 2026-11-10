@@ -811,13 +811,17 @@ if !IDENTITY_INDEX_TABLES
 	ld a, BANK(sPokemonIndexTable)
 	call OpenSRAM
 	push de
+if !IDENTITY_MON_TABLE ; (an identity table stays as InitIndexTables made it)
 	ld de, wPokemonIndexTable
 	ld bc, SAVED_MON_TABLE_LENGTH
 	call CopyBytes
+endc
 	pop hl
+if !IDENTITY_MOVE_TABLE
 	ld de, wMoveIndexTable
 	ld bc, SAVED_MOVE_TABLE_LENGTH
 	call CopyBytes
+endc
 	pop af
 	ldh [rSVBK], a
 	jmp CloseSRAM

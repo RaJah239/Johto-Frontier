@@ -8,16 +8,21 @@ INCLUDE "engine/16/macros.asm"
 ; WRAM bank 2 with the tables, so .set_bit switches to it.
 
 ForceGarbageCollection::
+; (identity tables are never collected: their IDs are fixed)
 if !IDENTITY_INDEX_TABLES
 	push bc
 	ldh a, [rSVBK]
 	push af
+if !IDENTITY_MON_TABLE
 	ld a, BANK(wPokemonIndexTable)
 	ldh [rSVBK], a
 	call PokemonTableGarbageCollection
+endc
+if !IDENTITY_MOVE_TABLE
 	ld a, BANK(wMoveIndexTable)
 	ldh [rSVBK], a
 	call MoveTableGarbageCollection
+endc
 	pop af
 	ldh [rSVBK], a
 	pop bc
@@ -41,9 +46,8 @@ InitIndexTables::
 	ld bc, wMoveIndexTableEnd - wMoveIndexTable
 	xor a
 	call ByteFill
-if IDENTITY_INDEX_TABLES
+if IDENTITY_MON_TABLE
 	assert MON_TABLE_ENTRIES >= NUM_POKEMON, "identity table too small for NUM_POKEMON"
-	assert MOVE_TABLE_ENTRIES >= NUM_ATTACKS, "identity table too small for NUM_ATTACKS"
 	ld a, BANK(wPokemonIndexTable)
 	ldh [rSVBK], a
 	ld hl, wPokemonIndexTableEntries
@@ -51,6 +55,9 @@ if IDENTITY_INDEX_TABLES
 	call .identity
 	ld a, NUM_POKEMON
 	ld [wPokemonIndexTableUsedSlots], a
+endc
+if IDENTITY_MOVE_TABLE
+	assert MOVE_TABLE_ENTRIES >= NUM_ATTACKS, "identity table too small for NUM_ATTACKS"
 	ld a, BANK(wMoveIndexTable)
 	ldh [rSVBK], a
 	ld hl, wMoveIndexTableEntries
@@ -63,7 +70,7 @@ endc
 	ldh [rSVBK], a
 	ret
 
-if IDENTITY_INDEX_TABLES
+if IDENTITY_MON_TABLE || IDENTITY_MOVE_TABLE
 .identity
 ; hl = entries, c = count: entry n (from 1) = n
 	ld b, 1

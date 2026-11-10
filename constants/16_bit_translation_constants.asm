@@ -15,33 +15,38 @@
 ; _MINIMUM_RESERVED_INDEX: IDs at or above this aren't in the table: they stand
 ;                          for $FF00 + ID (e.g. EGG = $FD = index -3)
 
-; While the port is in progress, the tables hold every index at the same
+; While the port is in progress, a table can hold every index at the same
 ; 8-bit ID (identity mapping, filled in by InitIndexTables), so code that
-; still uses 8-bit constants keeps working. Set to 0 once everything is
-; converted.
-DEF IDENTITY_INDEX_TABLES EQU 1
+; still uses 8-bit constants keeps working. Set to 0 once its code is all
+; converted: species are, moves aren't yet.
+DEF IDENTITY_MON_TABLE  EQU 0
+DEF IDENTITY_MOVE_TABLE EQU 1
+; both: nothing to save or collect
+DEF IDENTITY_INDEX_TABLES EQU IDENTITY_MON_TABLE && IDENTITY_MOVE_TABLE
 
 ; the tables' size once the IDs are allocated freely: how many species / moves
 ; can be in RAM at once (party, battle, day-care, screens...)
 DEF MON_TABLE_FINAL_ENTRIES  EQU 100
 DEF MOVE_TABLE_FINAL_ENTRIES EQU 230
 
-if IDENTITY_INDEX_TABLES
+if IDENTITY_MON_TABLE
 DEF MON_TABLE_ENTRIES                EQU $FC ; = NUM_POKEMON while the IDs are fixed
 DEF MON_TABLE_LOCKED_ENTRIES         EQU   0
 DEF MON_TABLE_CACHE_SIZE             EQU   4
 DEF MON_TABLE_SAVED_RECENT_INDEXES   EQU   2
-
-DEF MOVE_TABLE_ENTRIES               EQU $FD ; = NUM_ATTACKS while the IDs are fixed
-DEF MOVE_TABLE_LOCKED_ENTRIES        EQU   0
-DEF MOVE_TABLE_CACHE_SIZE            EQU   0
-DEF MOVE_TABLE_SAVED_RECENT_INDEXES  EQU   2
 else
 DEF MON_TABLE_ENTRIES                EQU MON_TABLE_FINAL_ENTRIES
 DEF MON_TABLE_LOCKED_ENTRIES         EQU  30
 DEF MON_TABLE_CACHE_SIZE             EQU  16
 DEF MON_TABLE_SAVED_RECENT_INDEXES   EQU   8
+endc
 
+if IDENTITY_MOVE_TABLE
+DEF MOVE_TABLE_ENTRIES               EQU $FD ; = NUM_ATTACKS while the IDs are fixed
+DEF MOVE_TABLE_LOCKED_ENTRIES        EQU   0
+DEF MOVE_TABLE_CACHE_SIZE            EQU   0
+DEF MOVE_TABLE_SAVED_RECENT_INDEXES  EQU   2
+else
 DEF MOVE_TABLE_ENTRIES               EQU MOVE_TABLE_FINAL_ENTRIES
 DEF MOVE_TABLE_LOCKED_ENTRIES        EQU  18
 DEF MOVE_TABLE_CACHE_SIZE            EQU  16
