@@ -1,4 +1,4 @@
-	db CHARMANDER ; 013
+	db 0 ; CHARMANDER 013 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  39,  52,  43,  65,  60,  50 ; 309 BST
 	evs  0,   0,   0,   1,   1,   0

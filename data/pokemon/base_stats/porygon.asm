@@ -1,4 +1,4 @@
-	db PORYGON ; 220
+	db 0 ; PORYGON 220 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65,  60,  70,  40,  85,  75 ; 395 BST
 	evs  1,   1,   1,   0,   1,   1

@@ -1,4 +1,4 @@
-	db MEGANIUM ; 009
+	db 0 ; MEGANIUM 009 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf ; 535 BST
 	db 120, 100, 100,  63,  52, 100

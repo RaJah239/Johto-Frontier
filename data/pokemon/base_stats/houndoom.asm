@@ -1,4 +1,4 @@
-	db HOUNDOOM ; 098
+	db 0 ; HOUNDOOM 098 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  75,  90,  50, 100, 110,  80 ; 505 BST
 	evs  1,   2,   0,   2,   2,   1

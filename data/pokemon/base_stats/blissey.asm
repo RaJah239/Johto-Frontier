@@ -1,4 +1,4 @@
-	db BLISSEY ; 214
+	db 0 ; BLISSEY 214 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db 255,  10,  10,  55,  75, 135 ; 540 BST
 	evs  3,   0,   0,   0,   1,   3

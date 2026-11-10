@@ -1,4 +1,4 @@
-	db BRONZONG ; 206
+	db 0 ; BRONZONG 206 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  67,  94, 116,  33,  79, 116 ; 505 BST
 	evs  1,   2,   2,   0,   1,   2

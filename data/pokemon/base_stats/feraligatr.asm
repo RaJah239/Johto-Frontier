@@ -1,4 +1,4 @@
-	db FERALIGATR ; 006
+	db 0 ; FERALIGATR 006 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf ; 535 BST
 	db  85, 125, 107,  78,  69,  71

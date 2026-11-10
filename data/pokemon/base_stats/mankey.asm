@@ -1,4 +1,4 @@
-	db MANKEY ; 129
+	db 0 ; MANKEY 129 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  40,  80,  35,  70,  35,  45 ; 305 BST
 	evs  0,   1,   0,   1,   0,   0

@@ -1,4 +1,4 @@
-	db DODUO ; 108
+	db 0 ; DODUO 108 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf
 	db  45,  75,  40,  85,  35,  35 ; 315 BST

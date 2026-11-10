@@ -1,4 +1,4 @@
-	db EXCADRILL ; 081
+	db 0 ; EXCADRILL 081 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db 110, 135,  60,  88,  50,  65 ; 508 BST
 	evs  2,   3,   1,   1,   0,   1

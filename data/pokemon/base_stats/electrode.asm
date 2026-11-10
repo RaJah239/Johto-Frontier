@@ -1,4 +1,4 @@
-	db ELECTRODE ; 158
+	db 0 ; ELECTRODE 158 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  50,  60,  70, 150,  95,  80 ; 505 BST
 	evs  1,   0,   1,   3,   2,   1

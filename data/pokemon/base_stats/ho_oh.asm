@@ -1,4 +1,4 @@
-	db HO_OH ; 244
+	db 0 ; HO_OH 244 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf
 	db 106, 130,  90,  90, 110, 154 ; 680 BST

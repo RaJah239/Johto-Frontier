@@ -1,4 +1,4 @@
-	db SCOLIPEDE ; 120
+	db 0 ; SCOLIPEDE 120 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60, 100,  89, 112,  75,  69 ; 505 BST
 	evs  1,   2,   1,   3,   1,   1

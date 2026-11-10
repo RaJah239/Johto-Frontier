@@ -1,4 +1,4 @@
-	db CYNDAQUIL ; 001
+	db 0 ; CYNDAQUIL 001 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf ; 309 BST
 	db  44,  58,  44,  61,  58,  44

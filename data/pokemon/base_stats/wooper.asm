@@ -1,4 +1,4 @@
-	db WOOPER ; 099
+	db 0 ; WOOPER 099 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  50,  50,  15,  40,  45 ; 260 BST
 	evs  1,   0,   0,   0,   0,   0

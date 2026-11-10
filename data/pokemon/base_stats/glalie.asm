@@ -1,4 +1,4 @@
-	db GLALIE ; 191
+	db 0 ; GLALIE 191 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  80, 105,  75, 100, 105,  40 ; 505 BST
 	evs  1,   2,   1,   2,   2,   2

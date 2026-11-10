@@ -1,4 +1,4 @@
-	db SKARMORY ; 207
+	db 0 ; SKARMORY 207 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65,  80, 140,  70,  40,  70 ; 465 BST
 	evs  1,   1,   3,   1,   0,   1

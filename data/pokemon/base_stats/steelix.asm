@@ -1,4 +1,4 @@
-	db STEELIX ; 083
+	db 0 ; STEELIX 083 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf
 	db  75,  85, 200,  30,  55, 65 ; BST 510

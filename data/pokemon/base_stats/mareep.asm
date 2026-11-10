@@ -1,4 +1,4 @@
-	db MAREEP ; 071
+	db 0 ; MAREEP 071 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  55,  40,  40,  35,  65,  45 ; 280 BST
 	evs  0,   0,   0,   0,   1,   0

@@ -46,6 +46,12 @@ _GiveOddEgg:
 	ld de, wOddEgg
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call CopyBytes
+	; species: its 16-bit index (below 256) -> 8-bit ID
+	ld a, [wOddEgg + MON_SPECIES]
+	ld l, a
+	ld h, 0
+	call GetPokemonIDFromIndex
+	ld [wOddEgg + MON_SPECIES], a
 
 	ld a, EGG_TICKET
 	ld [wCurItem], a

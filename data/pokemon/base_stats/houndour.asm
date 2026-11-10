@@ -1,4 +1,4 @@
-	db HOUNDOUR ; 097
+	db 0 ; HOUNDOUR 097 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  45,  60,  30,  65,  80,  50 ; 330 BST
 	evs  0,   1,   0,   1,   1,   0

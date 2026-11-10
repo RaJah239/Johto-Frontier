@@ -1,4 +1,4 @@
-	db RAPIDASH ; 111
+	db 0 ; RAPIDASH 111 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65, 115,  70, 115,  60,  80 ; 505 BST
 	evs  1,   2,   1,   2,   1,   1

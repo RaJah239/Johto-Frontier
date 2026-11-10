@@ -1,4 +1,4 @@
-	db TEDDIURSA ; 062
+	db 0 ; TEDDIURSA 062 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  80,  50,  40,  50,  50 ; 330 BST
 	evs  1,   1,   0,   0,   0,   0

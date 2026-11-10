@@ -1,4 +1,4 @@
-	db LILEEP ; 225
+	db 0 ; LILEEP 225 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  66,  41,  77,  23,  61,  87 ; 355 BST
 	evs  1,   0,   1,   0,   1,   1

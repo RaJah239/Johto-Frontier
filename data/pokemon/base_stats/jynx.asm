@@ -1,4 +1,4 @@
-	db JYNX ; 189
+	db 0 ; JYNX 189 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65,  65,  60,  95, 125,  95 ; 505 BST
 	evs  0,   0,   0,   0,   2,   0

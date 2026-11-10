@@ -1,4 +1,4 @@
-	db MILOTIC ; 035
+	db 0 ; MILOTIC 035 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  95, 60,  79,  81,  100, 125 ; 540 BST
 	evs  2,  1,   1,   1,    2,   3

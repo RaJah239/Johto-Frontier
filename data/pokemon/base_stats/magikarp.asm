@@ -1,4 +1,4 @@
-	db MAGIKARP ; 084
+	db 0 ; MAGIKARP 084 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  20,  10,  55,  80,  15,  20 ; 200 BST
 	evs  0,   0,   0,   1,   0,   0

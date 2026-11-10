@@ -1,4 +1,4 @@
-	db FLAREON ; 026
+	db 0 ; FLAREON 026 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65, 130,  60,  95,  65, 110 ; 525 BST
 	evs  1,   3,   1,   2,   1,   2

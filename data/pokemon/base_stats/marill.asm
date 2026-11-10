@@ -1,4 +1,4 @@
-	db MARILL ; 076
+	db 0 ; MARILL 076 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  70,  30,  50,  40,  20,  55 ; 265 BST
 	evs  1,   0,   0,   0,   0,   0

@@ -1,4 +1,4 @@
-	db NATU ; 091
+	db 0 ; NATU 091 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  40,  50,  45,  70,  70,  45 ; 320 BST
 	evs  0,   0,   0,   1,   1,   0

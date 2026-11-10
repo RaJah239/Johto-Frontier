@@ -1,4 +1,4 @@
-	db ARIADOS ; 117
+	db 0 ; ARIADOS 117 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf
 	db  80, 115,  90,  90,  45,  85 ; 505 BST

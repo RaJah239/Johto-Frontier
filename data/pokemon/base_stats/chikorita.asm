@@ -1,4 +1,4 @@
-	db CHIKORITA ; 007
+	db 0 ; CHIKORITA 007 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf ; 314 BST
 	db  55,  49,  65,  40,  40,  65

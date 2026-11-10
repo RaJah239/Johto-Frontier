@@ -1,4 +1,4 @@
-	db CHARIZARD ; 015
+	db 0 ; CHARIZARD 015 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  78,  84,  78, 101, 109,  85 ; 535 BST
 	evs  1,   1,   1,   2,   2,   1

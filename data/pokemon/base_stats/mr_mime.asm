@@ -1,4 +1,4 @@
-	db MR__MIME ; 146
+	db 0 ; MR__MIME 146 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  65,  65,  90, 100, 120 ; 500 BST
 	evs  1,   1,   1,   2,   2,   3

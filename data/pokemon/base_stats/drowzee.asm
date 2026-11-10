@@ -1,4 +1,4 @@
-	db DROWZEE ; 144
+	db 0 ; DROWZEE 144 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  50,  45,  42,  43,  90 ; 330 BST
 	evs  1,   0,   0,   0,   0,   2

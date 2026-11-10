@@ -1,4 +1,4 @@
-	db RAICHU ; 023
+	db 0 ; RAICHU 023 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  75,  60,  60, 110, 120,  80 ; 505 BST
 	evs  1,   1,   1,   2,   3,   1

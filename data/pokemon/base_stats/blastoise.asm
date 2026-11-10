@@ -1,4 +1,4 @@
-	db BLASTOISE ; 018
+	db 0 ; BLASTOISE 018 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  84,  83, 100,  78,  85, 105 ; 535 BST
 	evs  1,   1,   2,   1,   1,   2

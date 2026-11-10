@@ -1,4 +1,4 @@
-	db WEAVILE ; 197
+	db 0 ; WEAVILE 197 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  70, 120,  65, 125,  45,  85 ; 510 BST
 	evs  1,   3,   1,   3,   0,   1

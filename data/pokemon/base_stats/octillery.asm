@@ -1,4 +1,4 @@
-	db OCTILLERY ; 169
+	db 0 ; OCTILLERY 169 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf ; 505 BST
 	db  80,  80,  80,  70, 115,  80

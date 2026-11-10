@@ -1,4 +1,4 @@
-	db BALTOY ; 201
+	db 0 ; BALTOY 201 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  40,  40,  55,  55,  40,  70 ; 300 BST
 	evs  0,   0,   0,   0,   0,   1

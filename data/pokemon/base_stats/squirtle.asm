@@ -1,4 +1,4 @@
-	db SQUIRTLE ; 016
+	db 0 ; SQUIRTLE 016 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  44,  48,  65,  43,  50,  64 ; 314 BST
 	evs  0,   0,   1,   0,   0,   1

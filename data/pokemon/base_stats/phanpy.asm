@@ -1,4 +1,4 @@
-	db PHANPY ; 066
+	db 0 ; PHANPY 066 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  80,  65,  60,  40,  40,  45 ; 330 BST
 	evs  1,   1,   1,   0,   0,   0

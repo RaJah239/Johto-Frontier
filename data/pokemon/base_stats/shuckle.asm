@@ -1,4 +1,4 @@
-	db SHUCKLE ; 164
+	db 0 ; SHUCKLE 164 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  20,  10, 230,  05,  10, 230 ; 505 BST
 	evs  0,   0,   3,   0,   0,   3

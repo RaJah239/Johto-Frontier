@@ -1,4 +1,4 @@
-	db MISDREAVUS ; 211
+	db 0 ; MISDREAVUS 211 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  50,  60,  85,  85,  85 ; 425 BST
 	evs  1,   0,   1,   1,   1,   1

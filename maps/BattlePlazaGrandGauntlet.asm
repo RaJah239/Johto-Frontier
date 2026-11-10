@@ -205,7 +205,7 @@ GrandGauntletGiveUpPenalty:
 ; gets their own bag back, exactly as it was when the run started.
 	; 1. one level-50 Feebas in slot 1 and nothing else
 	call ResetPartyToEmpty
-	ld a, FEEBAS
+	ld_species_id FEEBAS
 	ld [wCurPartySpecies], a
 	ld a, GG_GIVE_UP_FEEBAS_LEVEL
 	ld [wCurPartyLevel], a
@@ -372,113 +372,113 @@ GrandGauntlet_WalkToQuestGiver:
 ; Party Keeper species pool
 ; -------------------------------------------------------------------------
 ; EDIT THIS LIST to change which #mon the keeper can hand out: one
-; SPECIES constant per line, and the list must finish with db -1.
+; SPECIES constant per line (dw), and the list must finish with dw -1.
 ; He picks six different species out of it at random, all at level 5.
 ; Keep at least six entries, otherwise the last slots may repeat.
 ; =========================================================================
 PartyKeeperSpeciesList:
-	db CYNDAQUIL
-	db TOTODILE
-	db CHIKORITA
-	db TOGEPI
-	db CHARMANDER
-	db SQUIRTLE
-	db TURTWIG
-	db PIKACHU
-	db EEVEE
-	db TORCHIC
-	db FEEBAS
-	db ROWLET
-	db RALTS
-	db WURMPLE
-	db YANMA
-	db SUNKERN
-	db BUNEARY
-	db PIDGEY
-	db HOOTHOOT
-	db ZUBAT
-	db TEDDIURSA
-	db PHANPY
-	db BELLSPROUT
-	db MAREEP
-	db WIMPOD
-	db MARILL
-	db RHYHORN
-	db DRILBUR
-	db ONIX
-	db MAGIKARP
-	db GASTLY
-	db SWABLU
-	db NATU
-	db SMEARGLE
-	db GROWLITHE
-	db HOUNDOUR
-	db WOOPER
-	db GLIGAR
-	db GIBLE
-	db MAKUHITA
-	db DODUO
-	db PONYTA
-	db SLOWPOKE
-	db SHROOMISH
-	db SPINARAK
-	db VENIPEDE
-	db JOLTIK
-	db SKORUPI
-	db LARVESTA
-	db TROPIUS
-	db MANKEY
-	db FERROSEED
-	db SCYTHER
-	db HERACROSS
-	db TANGELA
-	db MEOWTH
-	db SNUBBULL
-	db DROWZEE
-	db SUDOWOODO
-	db KOFFING
-	db GRIMER
-	db LITWICK
-	db MILTANK
-	db TAUROS
-	db VOLTORB
-	db ELEKID
-	db MAGNEMITE
-	db SHUCKLE
-	db CORSOLA
-	db STARYU
-	db REMORAID
-	db CHINCHOU
-	db MANTINE
-	db TENTACOOL
-	db SEEL
-	db HORSEA
-	db LAPRAS
-	db CLEFAIRY
-	db SOLROCK
-	db LUNATONE
-	db STANTLER
-	db DELIBIRD
-	db SMOOCHUM
-	db SNORUNT
-	db SWINUB
-	db SNEASEL
-	db SNOVER
-	db BALTOY
-	db RIOLU
-	db BRONZOR
-	db SKARMORY
-	db MISDREAVUS
-	db CHANSEY
-	db SNORLAX
-	db PORYGON
-	db OMANYTE
-	db LILEEP
-	db AERODACTYL
-	db -1 ; end
+	dw CYNDAQUIL
+	dw TOTODILE
+	dw CHIKORITA
+	dw TOGEPI
+	dw CHARMANDER
+	dw SQUIRTLE
+	dw TURTWIG
+	dw PIKACHU
+	dw EEVEE
+	dw TORCHIC
+	dw FEEBAS
+	dw ROWLET
+	dw RALTS
+	dw WURMPLE
+	dw YANMA
+	dw SUNKERN
+	dw BUNEARY
+	dw PIDGEY
+	dw HOOTHOOT
+	dw ZUBAT
+	dw TEDDIURSA
+	dw PHANPY
+	dw BELLSPROUT
+	dw MAREEP
+	dw WIMPOD
+	dw MARILL
+	dw RHYHORN
+	dw DRILBUR
+	dw ONIX
+	dw MAGIKARP
+	dw GASTLY
+	dw SWABLU
+	dw NATU
+	dw SMEARGLE
+	dw GROWLITHE
+	dw HOUNDOUR
+	dw WOOPER
+	dw GLIGAR
+	dw GIBLE
+	dw MAKUHITA
+	dw DODUO
+	dw PONYTA
+	dw SLOWPOKE
+	dw SHROOMISH
+	dw SPINARAK
+	dw VENIPEDE
+	dw JOLTIK
+	dw SKORUPI
+	dw LARVESTA
+	dw TROPIUS
+	dw MANKEY
+	dw FERROSEED
+	dw SCYTHER
+	dw HERACROSS
+	dw TANGELA
+	dw MEOWTH
+	dw SNUBBULL
+	dw DROWZEE
+	dw SUDOWOODO
+	dw KOFFING
+	dw GRIMER
+	dw LITWICK
+	dw MILTANK
+	dw TAUROS
+	dw VOLTORB
+	dw ELEKID
+	dw MAGNEMITE
+	dw SHUCKLE
+	dw CORSOLA
+	dw STARYU
+	dw REMORAID
+	dw CHINCHOU
+	dw MANTINE
+	dw TENTACOOL
+	dw SEEL
+	dw HORSEA
+	dw LAPRAS
+	dw CLEFAIRY
+	dw SOLROCK
+	dw LUNATONE
+	dw STANTLER
+	dw DELIBIRD
+	dw SMOOCHUM
+	dw SNORUNT
+	dw SWINUB
+	dw SNEASEL
+	dw SNOVER
+	dw BALTOY
+	dw RIOLU
+	dw BRONZOR
+	dw SKARMORY
+	dw MISDREAVUS
+	dw CHANSEY
+	dw SNORLAX
+	dw PORYGON
+	dw OMANYTE
+	dw LILEEP
+	dw AERODACTYL
+	dw -1 ; end
 PartyKeeperSpeciesListEnd:
 
-DEF PARTY_KEEPER_SPECIES_COUNT EQU PartyKeeperSpeciesListEnd - PartyKeeperSpeciesList - 1
+DEF PARTY_KEEPER_SPECIES_COUNT EQU (PartyKeeperSpeciesListEnd - PartyKeeperSpeciesList - 2) / 2
 
 if PARTY_KEEPER_SPECIES_COUNT < 1
 	fail "PartyKeeperSpeciesList has no species in it"
@@ -605,7 +605,12 @@ PickPartyKeeperSpecies:
 	ld hl, PartyKeeperSpeciesList
 	ld b, PARTY_KEEPER_SPECIES_COUNT
 .sweep
-	ld a, [hl]
+	push hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetPokemonIDFromIndex
+	pop hl
 	ld [wCurPartySpecies], a
 	push hl
 	push bc
@@ -613,6 +618,7 @@ PickPartyKeeperSpecies:
 	pop bc
 	pop hl
 	jr nc, .done
+	inc hl
 	inc hl
 	dec b
 	jr nz, .sweep
@@ -630,15 +636,14 @@ PickPartyKeeperSpecies:
 	ld a, PARTY_KEEPER_SPECIES_COUNT
 	call RandomRange
 	ld hl, PartyKeeperSpeciesList
-	and a
-	jr z, .found
-.walk
-	inc hl
-	dec a
-	jr nz, .walk
-.found
-	ld a, [hl]
-	ret
+	ld c, a
+	ld b, 0
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jmp GetPokemonIDFromIndex
 
 .AlreadyInParty
 ; carry set if wCurPartySpecies already has a slot in the party

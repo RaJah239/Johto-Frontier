@@ -1,4 +1,4 @@
-	db HORSEA ; 177
+	db 0 ; HORSEA 177 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  30,  40,  70,  60,  70,  30 ; 300 BST
 	evs  0,   0,   1,   1,   1,   0

@@ -1,4 +1,4 @@
-	db CROBAT ; 061
+	db 0 ; CROBAT 061 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  85,  90,  80, 130,  70,  80 ; 535 BST
 	evs  1,   2,   1,   3,   1,   1

@@ -1,4 +1,4 @@
-	db GALVANTULA ; 122
+	db 0 ; GALVANTULA 122 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  80,  77,  64, 118, 102,  64 ; 505 BST
 	evs  1,   1,   1,   2,   1,   1

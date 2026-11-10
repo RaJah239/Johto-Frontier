@@ -1,4 +1,4 @@
-	db GRIMER ; 150
+	db 0 ; GRIMER 150 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  80,  80,  50,  25,  40,  55 ; 330 BST
 	evs  1,   1,   0,   0,   0,   0

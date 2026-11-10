@@ -1,4 +1,4 @@
-	db MANTINE ; 172
+	db 0 ; MANTINE 172 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  85,  70,  65, 130, 100,  50 ; 500 BST
 	evs  1,   1,   1,   3,   2,   0

@@ -1,4 +1,4 @@
-	db LANTURN ; 171
+	db 0 ; LANTURN 171 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db 130,  58,  73,  67, 101,  76 ; 505 BST
 	evs  3,   0,   1,   1,   2,   1

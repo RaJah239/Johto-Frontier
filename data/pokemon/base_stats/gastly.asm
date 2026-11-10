@@ -1,4 +1,4 @@
-	db GASTLY ; 086
+	db 0 ; GASTLY 086 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  30,  35,  30,  80, 100,  35 ; 310 BST
 	evs  0,   0,   0,   1,   2,   0

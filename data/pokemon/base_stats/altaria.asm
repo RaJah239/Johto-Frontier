@@ -1,4 +1,4 @@
-	db ALTARIA ; 090
+	db 0 ; ALTARIA 090 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  75,  75,  90,  80,  80, 105 ; 505 BST
 	evs  1,   1,   2,   1,   1,   2

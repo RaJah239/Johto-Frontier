@@ -1,4 +1,4 @@
-	db CHANDELURE ; 154
+	db 0 ; CHANDELURE 154 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  55,  90,  80, 145,  90 ; 520 BST
 	evs  1,   0,   2,   1,   3,   2

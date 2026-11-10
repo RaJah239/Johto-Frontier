@@ -1,4 +1,4 @@
-	db TORTERRA ; 021
+	db 0 ; TORTERRA 021 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  95, 109, 105,  56,  75,  95 ; 535 BST
 	evs  0,   2,   1,   0,   0,   0

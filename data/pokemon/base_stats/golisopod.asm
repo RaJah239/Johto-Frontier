@@ -1,4 +1,4 @@
-	db GOLISOPOD ; 075
+	db 0 ; GOLISOPOD 075 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  75, 125, 140,  40,  60,  90 ; 530 BST
 	evs  2,   3,   3,   0,   1,   2

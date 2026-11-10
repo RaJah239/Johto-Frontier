@@ -1,4 +1,4 @@
-	db HAUNTER ; 087
+	db 0 ; HAUNTER 087 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  45,  50,  45,  95, 115,  55 ; 405 BST
 	evs  0,   0,   0,   2,   2,   0

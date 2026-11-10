@@ -1,4 +1,4 @@
-	db ROWLET ; 036
+	db 0 ; ROWLET 036 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  68,  42,  55,  55,  50,  50 ; 320 BST
 	evs  1,   0,   0,   0,   0,   0

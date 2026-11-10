@@ -1,4 +1,4 @@
-	db RAIKOU ; 241
+	db 0 ; RAIKOU 241 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  90,  85,  75, 125, 125, 100 ; 600 BST
 	evs  2,   1,   1,   3,   3,   2

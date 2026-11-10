@@ -1,4 +1,4 @@
-	db BUNEARY ; 052
+	db 0 ; BUNEARY 052 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  55,  66,  44,  85,  44,  56 ; 350 BST
 	evs  0,   1,   0,   1,   0,   0

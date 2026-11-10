@@ -1,8 +1,10 @@
 MACRO npctrade
 ; dialog set, requested mon, offered mon, nickname, dvs, item, OT ID, OT name, gender requested
-	db \1, \2, \3, \4, \5, \6, \7
+	db \1
+	dw \2, \3 ; species (16-bit indexes)
+	db \4, \5, \6, \7
 	dw \8
-	db \9, \<10>, 0
+	db \9, \<10>
 ENDM
 
 NPCTrades:

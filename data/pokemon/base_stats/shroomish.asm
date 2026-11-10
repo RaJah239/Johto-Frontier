@@ -1,4 +1,4 @@
-	db SHROOMISH ; 114
+	db 0 ; SHROOMISH 114 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  40,  60,  35,  45,  60 ; 300 BST
 	evs  1,   0,   1,   0,   0,   1

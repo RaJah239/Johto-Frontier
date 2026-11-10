@@ -1,4 +1,4 @@
-	db YANMA ; 048
+	db 0 ; YANMA 048 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65,  65,  45,  95,  75,  45 ; 390 BST
 	evs  1,   1,   0,   2,   1,   0

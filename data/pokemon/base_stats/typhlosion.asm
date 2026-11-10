@@ -1,4 +1,4 @@
-	db TYPHLOSION ; 003
+	db 0 ; TYPHLOSION 003 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf ; 535 BST
 	db  76, 104,  71, 109, 104,  71

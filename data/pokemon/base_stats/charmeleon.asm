@@ -1,4 +1,4 @@
-	db CHARMELEON ; 014
+	db 0 ; CHARMELEON 014 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  58,  64,  58,  80,  80,  65 ; 405 BST
 	evs  0,   1,   0,   1,   1,   1

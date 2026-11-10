@@ -1,4 +1,4 @@
-	db RALTS ; 039
+	db 0 ; RALTS 039 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  28,  25,  25,  40,  45,  35 ; 198 BST
 	evs  0,   0,   0,   0,   1,   0

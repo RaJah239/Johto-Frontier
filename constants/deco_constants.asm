@@ -1,7 +1,7 @@
 ; decoration attributes
 rsreset
 DEF DECOATTR_TYPE       rb
-DEF DECOATTR_NAME       rb
+DEF DECOATTR_NAME       rw ; deco name, or a 16-bit species index (posters, dolls)
 DEF DECOATTR_ACTION     rb
 DEF DECOATTR_EVENT_FLAG rw
 DEF DECOATTR_SPRITE     rb

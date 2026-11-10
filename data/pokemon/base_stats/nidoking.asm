@@ -1,4 +1,4 @@
-	db NIDOKING ; 210
+	db 0 ; NIDOKING 210 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  73,  73,  73, 121, 127,  73 ; 540 BST
 	evs  1,   1,   1,   3,   3,   1

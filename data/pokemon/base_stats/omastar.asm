@@ -1,4 +1,4 @@
-	db OMASTAR ; 224
+	db 0 ; OMASTAR 224 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  70,  60, 125,  55, 125,  70 ; 505 BST
 	evs  1,   1,   3,   0,   3,   1

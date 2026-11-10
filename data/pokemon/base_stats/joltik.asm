@@ -1,4 +1,4 @@
-	db JOLTIK ; 121
+	db 0 ; JOLTIK 121 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  50,  45,  50,  65,  60,  50 ; 320 BST
 	evs  0,   0,   0,   1,   1,   0

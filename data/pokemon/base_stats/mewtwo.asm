@@ -1,4 +1,4 @@
-	db MEWTWO ; 252
+	db 0 ; MEWTWO 252 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db 106, 110,  90, 130, 154, 154 ; 744 BST
 	evs  2,   2,   2,   3,   3,   3

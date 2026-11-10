@@ -1,4 +1,4 @@
-	db RHYHORN ; 078
+	db 0 ; RHYHORN 078 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  80,  85,  95,  25,  30,  30 ; 345 BST
 	evs  1,   1,   2,   0,   0,   0

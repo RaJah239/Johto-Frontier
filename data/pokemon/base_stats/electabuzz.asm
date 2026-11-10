@@ -1,4 +1,4 @@
-	db ELECTABUZZ ; 160
+	db 0 ; ELECTABUZZ 160 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  75,  55,  75,  95, 125,  80 ; 505 BST
 	evs  1,   0,   1,   2,   3,   2

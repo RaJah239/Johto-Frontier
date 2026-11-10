@@ -402,6 +402,28 @@ DexArea_IsCurSpecies:
 	pop hl
 	ret
 
+DexArea_IsCurSpeciesOrEnd:
+; a:hl = a species (dw, 16-bit index) in a list ending with dw -1: carry if
+; it's the end, else z if it's [wCurSpecies]. Preserves bc, de and hl.
+	push hl
+	call GetFarWord
+	ld a, l
+	and h
+	inc a
+	jr z, .end
+	call DexArea_IsCurSpeciesIndex
+	pop hl
+	jr z, .match
+	or 1 ; nz, nc
+	ret
+.match
+	xor a ; z, nc
+	ret
+.end
+	pop hl
+	scf
+	ret
+
 DexArea_IsCurSpeciesIndex:
 ; hl = a 16-bit species index: z if it's [wCurSpecies]'s. Preserves bc, de.
 	push de
@@ -1344,17 +1366,10 @@ Dex_Check_casino:
 	inc hl ; pointing to casino mon species
 .loop ; for johto casino
 	ld a, BANK(CasinoMons)
-	call GetFarByte
-	cp -1
-	jr z, .check_kanto_casino
-	; we arent at the end yet, so this byte is the species
-	ld c, a ; pokemon species of entry in EventWildMons/GiftMons
-	ld a, [wCurSpecies] ; current pokedex entry species
-	cp c
+	call DexArea_IsCurSpeciesOrEnd
+	jr c, .check_kanto_casino
 	jr z, .found
-	; species didnt match, inc hl by 3, need to check for -1
-.loop_b	
-	ld de, 3 ; size of casinomon entry, 3 bytes
+	ld de, 4 ; size of casinomon entry: dw species, dw coins
 	add hl, de
 	jr .loop
 .check_kanto_casino
@@ -1388,43 +1403,14 @@ Pokedex_DetailedArea_casino:
 	ld hl, CasinoMons + 2 ; ptr to 1st johto casinomon species
 .johto_loop
 	ld a, BANK(CasinoMons)
-	call GetFarByte
-	cp -1
-	jr z, .kanto_loop_setup
-	; we arent at the end yet, so this byte is the species
-	ld c, a ; pokemon species of entry in EventWildMons/GiftMons
-	ld a, [wCurSpecies] ; current pokedex entry species
+	call DexArea_IsCurSpeciesOrEnd
+	jr c, .kanto_loop_setup
 	ld de, CasinoMons ; johto casino map_id
-	cp c
 	call z, Print_casinomon
-	; inc hl by 3, need to check for -1
-	ld de, 3 ; size of casinomon entry, 3 bytes
+	ld de, 4 ; size of casinomon entry: dw species, dw coins
 	add hl, de
 	jr .johto_loop
-.kanto_loop_setup
-	jr .donedone ; only a Johto list (see Dex_Check_casino)
-	inc hl ; ptr to kanto casino map_id
-	push hl ; ptr to kanto casino map_id
-	inc hl
-	inc hl ; first kanto casinomon species
-.kanto_loop
-	ld a, BANK(CasinoMons)
-	call GetFarByte
-	cp -1
-	jr z, .kanto_done
-	; we arent at the end yet, so this byte is the species
-	ld c, a ; pokemon species of entry in EventWildMons/GiftMons
-	ld a, [wCurSpecies] ; current pokedex entry species
-	pop de ; kanto casino map_id ptr
-	push de ; kanto casino map_id ptr
-	cp c
-	call z, Print_casinomon
-	; inc hl by 3, need to check for -1
-	ld de, 3 ; size of casinomon entry, 3 bytes
-	add hl, de
-	jr .kanto_loop
-.kanto_done
-	pop hl ; ptr to kanto casino map_id, clean stack
+.kanto_loop_setup ; only a Johto list (see Dex_Check_casino)
 .donedone
 	ld a, [wPokedexEntryType] ; casino
 	inc a
@@ -1460,7 +1446,8 @@ Print_casinomon:
 	
 	pop hl ; current casinomon species ptr
 	push hl ; current casinomon species ptr
-	inc hl ; pointing to coins ptr
+	inc hl
+	inc hl ; pointing to coins (after the dw species)
 	ld a, BANK(CasinoMons)
 	call GetFarWord ; hl contains coins
 	
@@ -1526,11 +1513,7 @@ Dex_Check_npctrades:
 	jr z, .notfound
 
 	ld a, BANK(NPCTrades)
-	call GetFarByte
-	
-	ld c, a ; pokemon species of entry in EventWildMons/GiftMons
-	ld a, [wCurSpecies] ; current pokedex entry species
-	cp c
+	call DexArea_IsCurSpecies ; z if this trade's mon is [wCurSpecies]
 	jr z, .found
 	
 	; species didnt match, inc hl by NPCTRADE_STRUCT_LENGTH
@@ -1562,7 +1545,7 @@ Pokedex_DetailedArea_npctrades:
 
 ; cannot assume there will be no species repeats
 	ld hl, NPCTrades ; see data\events\npc_trades.asm
-	ld c, NPCTRADE_STRUCT_LENGTH
+	ld bc, NPCTRADE_STRUCT_LENGTH
 	ld a, [wPokedexStatus] ; wildmon index
 	call AddNTimes
 	ld a, [wPokedexStatus] ; wildmon index
@@ -1576,11 +1559,7 @@ Pokedex_DetailedArea_npctrades:
 	jr z, .donedone
 
 	ld a, BANK(NPCTrades)
-	call GetFarByte
-	
-	ld c, a ; pokemon species of entry in EventWildMons/GiftMons
-	ld a, [wCurSpecies] ; current pokedex entry species
-	cp c
+	call DexArea_IsCurSpecies ; z if this trade's mon is [wCurSpecies]
 	jr z, .found
 .return
 	; species didnt match, inc hl by NPCTRADE_STRUCT_LENGTH
@@ -1621,8 +1600,8 @@ Dex_Print_TradeMon_Info:
 	; 'hl': blurb/hint: 	hlcoord 2, 11
 	push bc ; 'b' is current count out of max NUM_NPC_TRADES
 	; 'hl' is currently pointing to Target Trade Mon in NPCTrades
-	dec hl ; 'hl' now pointing to base of NPCTrades entry, Requested Species
-	dec hl
+	ld de, -NPCTRADE_GETMON
+	add hl, de ; 'hl' now pointing to base of NPCTrades entry
 	push hl ; pointing to base of NPCTrades entry, Requested Species
 	
 	; use 'b' to get map from NPCTradeMons_Locations
@@ -1662,7 +1641,8 @@ Dex_Print_TradeMon_Info:
 	ld a, [wTempSpecies]
 	push af ; real current mon species
 	ld a, BANK(NPCTrades)
-	call GetFarByte
+	call GetFarWord
+	call GetPokemonIDFromIndex
 	ld [wCurSpecies], a
 	ld [wTempSpecies], a
 	call GetPokemonName
@@ -1746,6 +1726,8 @@ Dex_Print_TradeMon_Info:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; NPC TRADES END ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; EVENT MONS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+DEF SPECIALENCOUNTER_LENGTH EQU 8 ; dw species, dw event flag, map_id, dw hint
+
 Dex_Check_eventmons:
 ; EventWildMons or GiftMons in 'hl'
 ; return zero in 'a' if found, else 1 in 'a'
@@ -1753,16 +1735,10 @@ Dex_Check_eventmons:
 	; ends with -1
 .loop
 	ld a, BANK(EventWildMons)
-	call GetFarByte ; will be -1 at the end, otherwise it's the % chance to encounter
-	cp -1
-	jr z, .notfound
-	; we arent at the end yet, so this byte is the species
-	ld c, a ; pokemon species of entry in EventWildMons/GiftMons
-	ld a, [wCurSpecies] ; current pokedex entry species
-	cp c
+	call DexArea_IsCurSpeciesOrEnd
+	jr c, .notfound
 	jr z, .found
-	; species didnt match, inc hl by 7, need to check for -1
-	ld de, 7 ; size of specialencounter entry, 7 bytes
+	ld de, SPECIALENCOUNTER_LENGTH
 	add hl, de
 	jr .loop
 .found
@@ -1774,29 +1750,24 @@ Dex_Check_eventmons:
 
 Pokedex_DetailedArea_eventmons:
 	; 'hl' is EventWildMons/GiftMons
-	ld c, 7 ; specialencounter is 7 bytes, need to check for -1
+	ld bc, SPECIALENCOUNTER_LENGTH
 	ld a, [wPokedexStatus] ; wildmon index
 	call AddNTimes
 .loop	
 	ld a, BANK(EventWildMons)
-	call GetFarByte ; will be -1 at the end, otherwise it's the species
-	cp -1
-	jr z, .donedone
-
-	ld c, a ; pokemon species of entry in EventWildMons/GiftMons
-	ld a, [wCurSpecies] ; current pokedex entry species
-	cp c
+	call DexArea_IsCurSpeciesOrEnd
+	jr c, .donedone
 	jr z, .found
 .notfound	
-	; species didnt match, inc hl by 7, need to check for -1
-	ld de, 7 ; size of specialencounter entry, 7 bytes
-	add hl, de ; pointing to next species byte
+	ld de, SPECIALENCOUNTER_LENGTH
+	add hl, de ; pointing to next species
 	call DexArea_IncWildMonIndex
 	jr .loop
 
 .found
 	; check event flag
-	inc hl ; now pointing to event flag
+	inc hl
+	inc hl ; now pointing to event flag (after the dw species)
 	push hl ; pointing to event flag constant
 	ld a, BANK(EventWildMons)
 	call GetFarWord ; event flag constant in 'hl'

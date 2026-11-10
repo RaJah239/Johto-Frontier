@@ -1,4 +1,4 @@
-	db AGGRON ; 208
+	db 0 ; AGGRON 208 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  70, 110, 150,  50,  60,  60 ; 500 BST
 	evs  1,   2,   3,   0,   1,   1

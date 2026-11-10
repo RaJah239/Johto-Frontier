@@ -1,4 +1,4 @@
-	db MEOWTH ; 140
+	db 0 ; MEOWTH 140 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  40,  45,  35,  90,  50,  40 ; 300 BST
 	evs  0,   0,   0,   2,   0,   0

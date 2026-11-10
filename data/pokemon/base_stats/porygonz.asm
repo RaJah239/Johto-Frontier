@@ -1,4 +1,4 @@
-	db PORYGONZ ; 222
+	db 0 ; PORYGONZ 222 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  85,  70,  80,  90, 135,  75 ; 535 BST
 	evs  1,   1,   1,   2,   3,   1

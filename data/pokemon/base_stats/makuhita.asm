@@ -1,4 +1,4 @@
-	db MAKUHITA ; 106
+	db 0 ; MAKUHITA 106 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  72,  60,  33,  25,  20,  40 ; 250 BST
 	evs  1,   1,   0,   0,   0,   0

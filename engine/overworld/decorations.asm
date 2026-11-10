@@ -494,6 +494,8 @@ INCLUDE "data/decorations/names.asm"
 GetDecoName:
 	ld a, [hli] ; DECOATTR_TYPE
 	ld e, [hl] ; DECOATTR_NAME
+	inc hl
+	ld d, [hl] ; (species: 16-bit index)
 	ld bc, wStringBuffer2
 	push bc
 	ld hl, .NameFunctions
@@ -530,13 +532,11 @@ GetDecoName:
 	jr .getdeconame
 
 .poster:
-	ld a, e
 	call .getpokename
 	ld a, _POSTER
 	jr .getdeconame
 
 .doll:
-	ld a, e
 	call .getpokename
 	ld a, _DOLL
 	jr .getdeconame
@@ -546,11 +546,14 @@ GetDecoName:
 	ld a, BIG_
 	call .getdeconame
 	pop de
-	ld a, e
 	jr .getpokename
 
 .getpokename:
+; de = 16-bit species index
 	push bc
+	ld h, d
+	ld l, e
+	call GetPokemonIDFromIndex
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	pop bc

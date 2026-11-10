@@ -1,4 +1,4 @@
-	db VOLCARONA ; 126
+	db 0 ; VOLCARONA 126 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  85,  60,  65, 100, 135, 105 ; 550 BST
 	evs  1,   1,   1,   2,   3,   2

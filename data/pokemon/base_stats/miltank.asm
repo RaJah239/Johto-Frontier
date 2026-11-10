@@ -1,4 +1,4 @@
-	db MILTANK ; 155
+	db 0 ; MILTANK 155 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  95,  90, 105, 100,  40,  70 ; 500 BST
 	evs  2,   2,   2,   2,   0,   1

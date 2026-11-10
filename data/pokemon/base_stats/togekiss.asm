@@ -1,4 +1,4 @@
-	db TOGEKISS ; 012
+	db 0 ; TOGEKISS 012 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  85,  40,  95,  80, 120, 115 ; 535 BST
 	evs  0,   0,   0,   0,   2,   1

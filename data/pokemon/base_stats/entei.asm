@@ -1,4 +1,4 @@
-	db ENTEI ; 242
+	db 0 ; ENTEI 242 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db 125, 125,  85, 100,  90,  75 ; 600 BST
 	evs  3,   3,   1,   2,   2,   1

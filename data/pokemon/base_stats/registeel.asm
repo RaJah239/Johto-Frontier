@@ -1,4 +1,4 @@
-	db REGISTEEL ; 235
+	db 0 ; REGISTEEL 235 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db 100,  75, 150,  50,  75, 150
 	evs  2,   1,   3,   0,   1,   3

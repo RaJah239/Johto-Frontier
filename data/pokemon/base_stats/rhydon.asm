@@ -1,4 +1,4 @@
-	db RHYDON ; 079
+	db 0 ; RHYDON 079 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  105, 130, 120,  40,  45,  45 ; 485 BST
 	evs   2,   3,   3,   0,   0,   0

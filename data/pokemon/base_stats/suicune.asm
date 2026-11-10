@@ -1,4 +1,4 @@
-	db SUICUNE ; 243
+	db 0 ; SUICUNE 243 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db 100,  75, 125,  85,  90, 125 ; 600 BST
 	evs  2,   1,   3,   1,   2,   3

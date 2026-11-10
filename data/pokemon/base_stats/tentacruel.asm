@@ -1,4 +1,4 @@
-	db TENTACRUEL ; 174
+	db 0 ; TENTACRUEL 174 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  80,  70,  65, 100,  80, 120 ; 515 BST
 	evs  1,   1,   1,   2,   1,   3

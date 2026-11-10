@@ -1,4 +1,4 @@
-	db ONIX ; 082
+	db 0 ; ONIX 082 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf ; BST 500
 	db  70,  80, 130,  90,  30, 100

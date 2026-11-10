@@ -1,4 +1,4 @@
-	db REGIGIGAS ; 236
+	db 0 ; REGIGIGAS 236 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db 110, 160, 110, 110,  80, 110 ; 680 BST
 	evs  2,   3,   2,   2,   1,   2

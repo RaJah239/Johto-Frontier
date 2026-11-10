@@ -1,4 +1,4 @@
-	db BRELOOM ; 115
+	db 0 ; BRELOOM 115 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60, 135,  75,  80,  80,  75 ; 505 BST
 	evs  1,   3,   1,   1,   1,   1

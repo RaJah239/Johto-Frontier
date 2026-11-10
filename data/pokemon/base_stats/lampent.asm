@@ -1,4 +1,4 @@
-	db LAMPENT ; 153
+	db 0 ; LAMPENT 153 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  40,  60,  55,  95,  60 ; 370 BST
 	evs  1,   0,   1,   0,   2,   1

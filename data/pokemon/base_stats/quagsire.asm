@@ -1,4 +1,4 @@
-	db QUAGSIRE ; 100
+	db 0 ; QUAGSIRE 100 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db    95,  85,  85,  35,  65,  65 ; 430 BST
 	evs    2,   1,   1,   0,   1,   1

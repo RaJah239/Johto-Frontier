@@ -1,4 +1,4 @@
-	db DRILBUR ; 080
+	db 0 ; DRILBUR 080 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  85,  40,  68,  30,  47 ; 330 BST 
 	evs  1,   1,   0,   1,   0,   0

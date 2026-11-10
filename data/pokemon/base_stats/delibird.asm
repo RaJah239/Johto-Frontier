@@ -1,4 +1,4 @@
-	db DELIBIRD ; 187
+	db 0 ; DELIBIRD 187 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  70, 90,  45, 125, 125,  45 ; 500 BST
 	evs  1,  2,   0,   3,   3,   0

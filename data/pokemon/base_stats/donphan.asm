@@ -1,4 +1,4 @@
-	db DONPHAN ; 067
+	db 0 ; DONPHAN 067 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  90, 120, 100,  45,  50, 100 ; 505 BST
 	evs  2,   3,   2,   0,   0,   2

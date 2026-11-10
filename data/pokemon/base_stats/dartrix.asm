@@ -1,4 +1,4 @@
-	db DARTRIX ; 037
+	db 0 ; DARTRIX 037 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  78,  52,  75,  75,  70,  70 ; 420 BST
 	evs  1,   0,   1,   1,   1,   1

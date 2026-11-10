@@ -1,4 +1,4 @@
-	db LUNATONE ; 184
+	db 0 ; LUNATONE 184 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  100, 55,  85,  70, 105,  85 ; 500 BST
 	evs   2,  0,   1,   1,   2,   1

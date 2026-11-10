@@ -1,4 +1,4 @@
-	db SEEL ; 175
+	db 0 ; SEEL 175 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65,  45,  55,  45,  45,  70 ; 325 BST
 	evs  1,   0,   0,   0,   0,   1

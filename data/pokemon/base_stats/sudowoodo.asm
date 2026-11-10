@@ -1,4 +1,4 @@
-	db SUDOWOODO ; 147
+	db 0 ; SUDOWOODO 147 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def spd  sat  sdf
 	db  85, 115, 100, 75,  60,  65 ; 500 BST

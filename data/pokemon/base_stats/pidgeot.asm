@@ -1,4 +1,4 @@
-	db PIDGEOT ; 056
+	db 0 ; PIDGEOT 056 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  83,  66,  75, 121, 120,  70 ; 535 BST
 	evs  1,   1,   1,   3,   3,   1

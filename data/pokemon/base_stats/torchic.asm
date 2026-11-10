@@ -1,4 +1,4 @@
-	db TORCHIC ; 031
+	db 0 ; TORCHIC 031 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  45,  60,  40,  45,  70,  50 ; 310 BST
 	evs  0,   1,   0,   0,   1,   0

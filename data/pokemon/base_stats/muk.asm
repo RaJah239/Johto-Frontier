@@ -1,4 +1,4 @@
-	db MUK ; 151
+	db 0 ; MUK 151 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db 105, 110,  75,  50,  65, 100 ; 505 BST
 	evs  2,   2,   1,   0,   1,   2

@@ -1,4 +1,4 @@
-	db AEGISLASH ; 209
+	db 0 ; AEGISLASH 209 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60, 150, 60,  20, 150,  60 ; 500 BST
 	evs  1,   3,  1,   0,   3,   1

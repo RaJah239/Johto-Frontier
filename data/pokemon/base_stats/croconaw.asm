@@ -1,4 +1,4 @@
-	db CROCONAW ; 005
+	db 0 ; CROCONAW 005 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf ; 405 BST
 	db  65,  80,  80,  58,  59,  63

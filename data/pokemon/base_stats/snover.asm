@@ -1,4 +1,4 @@
-	db SNOVER ; 199
+	db 0 ; SNOVER 199 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  62,  50,  40,  62,  60 ; 334 BST
 	evs  1,   1,   0,   0,   1,   1

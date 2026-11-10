@@ -1,4 +1,4 @@
-	db GROTLE ; 020
+	db 0 ; GROTLE 020 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  75,  89,  85,  36,  55,  65 ; 405 BST
 	evs  1,   1,   1,   0,   0,   1

@@ -1,4 +1,4 @@
-	db UMBREON ; 029
+	db 0 ; UMBREON 029 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  95,  65, 110,  65,  60, 130 ; 525 BST
 	evs  2,   1,   2,   1,   1,   3

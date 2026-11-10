@@ -1,4 +1,4 @@
-	db KATU ; 092
+	db 0 ; KATU 092 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  65,  60,  85,  85,  65 ; 420 BST
 	evs  1,   1,   1,   1,   1,   1

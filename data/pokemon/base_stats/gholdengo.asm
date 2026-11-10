@@ -1,4 +1,4 @@
-	db GHOLDENGO ; 231
+	db 0 ; GHOLDENGO 231 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf
 	db  87,  60,  95,  84, 133,  91 ; 550 BST

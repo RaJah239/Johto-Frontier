@@ -1,4 +1,4 @@
-	db BEAUTIFLY ; 045
+	db 0 ; BEAUTIFLY 045 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  75,  75,  60,  85,  95,  60 ; 450 BST
 	evs  1,   1,   1,   1,   2,   1

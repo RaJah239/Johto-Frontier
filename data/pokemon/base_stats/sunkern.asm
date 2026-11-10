@@ -1,4 +1,4 @@
-	db SUNKERN ; 050
+	db 0 ; SUNKERN 050 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  40,  80,  40,  60,  45 ; 325 BST
 	evs  0,   0,   0,   0,   1,   0

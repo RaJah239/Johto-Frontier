@@ -1,4 +1,4 @@
-	db CORSOLA ; 165
+	db 0 ; CORSOLA 165 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65,  95, 115,  45,  65, 115 ; 500 BST
 	evs  1,   2,   2,   0,   1,   2

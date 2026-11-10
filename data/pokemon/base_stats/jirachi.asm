@@ -1,4 +1,4 @@
-	db JIRACHI ; 248
+	db 0 ; JIRACHI 248 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  100, 100, 100, 100, 100, 100 ; 600 BST
 	evs   2,   2,   2,   2,   2,   2

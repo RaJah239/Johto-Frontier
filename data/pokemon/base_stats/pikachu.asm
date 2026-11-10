@@ -1,4 +1,4 @@
-	db PIKACHU ; 022
+	db 0 ; PIKACHU 022 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  45,  80,  50, 120,  75,  60 ; 430 BST
 	evs  0,   1,   0,   3,   1,   1

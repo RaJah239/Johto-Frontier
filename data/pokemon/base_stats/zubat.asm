@@ -1,4 +1,4 @@
-	db ZUBAT ; 059
+	db 0 ; ZUBAT 059 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  40,  45,  35,  55,  30,  40 ; 245 BST
 	evs  0,   0,   0,   1,   0,   0

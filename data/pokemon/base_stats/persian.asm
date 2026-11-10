@@ -1,4 +1,4 @@
-	db PERSIAN ; 141
+	db 0 ; PERSIAN 141 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  75,  70,  60, 115, 115,  70 ; 505 BST
 	evs  1,   1,   1,   2,   2,   1

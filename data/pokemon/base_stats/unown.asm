@@ -1,4 +1,4 @@
-	db UNOWN ; 245
+	db 0 ; UNOWN 245 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  72,  72,  72,  72,  72,  72 ; 432 BST
 	evs  1,   1,   1,   1,   1,   1

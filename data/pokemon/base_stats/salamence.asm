@@ -1,4 +1,4 @@
-	db SALAMENCE ; 217
+	db 0 ; SALAMENCE 217 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  100, 120,  80, 100, 120,  80 ; BST 600
 	evs   2,   3,   1,   2,   3,   1

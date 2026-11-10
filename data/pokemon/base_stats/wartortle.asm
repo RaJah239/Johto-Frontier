@@ -1,4 +1,4 @@
-	db WARTORTLE ; 017
+	db 0 ; WARTORTLE 017 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  59,  63,  80,  58,  65,  80 ; 405 BST
 	evs  0,   1,   1,   0,   1,   1

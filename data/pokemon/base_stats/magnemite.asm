@@ -1,4 +1,4 @@
-	db MAGNEMITE ; 161
+	db 0 ; MAGNEMITE 161 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  25,  35,  70,  45,  95,  55 ; 325 BST
 	evs  0,   0,   1,   0,   2,   0

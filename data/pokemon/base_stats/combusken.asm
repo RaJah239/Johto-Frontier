@@ -1,4 +1,4 @@
-	db COMBUSKEN ; 032
+	db 0 ; COMBUSKEN 032 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  85,  60,  55,  85,  60 ; 405 BST
 	evs  1,   1,   1,   0,   1,   1

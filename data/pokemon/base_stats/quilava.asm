@@ -1,4 +1,4 @@
-	db QUILAVA ; 002
+	db 0 ; QUILAVA 002 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf ; 405 BST
 	db  64,  78,  52,  81,  78,  52

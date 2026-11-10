@@ -1,4 +1,4 @@
-	db GLIGAR ; 101
+	db 0 ; GLIGAR 101 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65,  75, 105,  85,  35,  65 ; 430 BST
 	evs  1,   1,   2,   1,   0,   1

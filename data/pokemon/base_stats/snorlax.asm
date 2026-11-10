@@ -1,4 +1,4 @@
-	db SNORLAX ; 215
+	db 0 ; SNORLAX 215 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db 160, 110,  65,  30,  65, 110 ; 540 BST
 	evs  3,   2,   1,   0,   1,   3

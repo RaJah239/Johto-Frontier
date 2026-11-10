@@ -1,4 +1,4 @@
-	db MEW ; 251
+	db 0 ; MEW 251 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db 100, 100, 100, 100, 100, 100 ; 600 BST
 	evs  2,   2,   2,   2,   2,   2

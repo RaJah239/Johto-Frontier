@@ -1,4 +1,4 @@
-	db TOGETIC ; 011
+	db 0 ; TOGETIC 011 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  55,  40,  85,  40,  80, 105 ; 405 BST
 	evs  0,   0,   1,   0,   1,   2

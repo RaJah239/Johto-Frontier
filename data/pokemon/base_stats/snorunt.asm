@@ -1,4 +1,4 @@
-	db SNORUNT ; 189
+	db 0 ; SNORUNT 189 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  40,  50,  50,  50,  50 ; 300 BST
 	evs  1,   0,   0,   0,   0,   0

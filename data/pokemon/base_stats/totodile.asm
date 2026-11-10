@@ -1,4 +1,4 @@
-	db TOTODILE ; 004
+	db 0 ; TOTODILE 004 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf ; 309 BST
 	db  50,  65,  64,  43,  39,  48

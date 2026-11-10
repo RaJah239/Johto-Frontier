@@ -1,4 +1,4 @@
-	db REGIROCK ; 233
+	db 0 ; REGIROCK 233 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db 100, 100, 200,  50,  50, 100 ; 600 BST
 	evs  2,   2,   3,   0,   0,   2

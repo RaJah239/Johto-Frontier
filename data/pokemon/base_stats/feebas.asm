@@ -1,4 +1,4 @@
-	db FEEBAS ; 034
+	db 0 ; FEEBAS 034 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  20, 15,  20,  80,  10,  55 ; 200 BST
 	evs  0,  0,   0,   1,   0,   0

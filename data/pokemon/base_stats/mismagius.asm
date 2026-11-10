@@ -1,4 +1,4 @@
-	db MISMAGIUS ; 212
+	db 0 ; MISMAGIUS 212 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  50,  60, 105, 130, 100 ; 505 BST
 	evs  1,   0,   1,   2,   3,   2

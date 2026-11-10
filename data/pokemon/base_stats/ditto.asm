@@ -1,4 +1,4 @@
-	db DITTO ; 250
+	db 0 ; DITTO 250 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  48,  48,  48,  48,  48 ; 300 BST
 	evs  1,   0,   0,   0,   0,   0

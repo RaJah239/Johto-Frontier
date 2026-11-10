@@ -1,4 +1,4 @@
-	db SNUBBULL ; 142
+	db 0 ; SNUBBULL 142 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  80,  50,  30,  40,  40 ; 300 BST
 	evs  1,   1,   0,   0,   0,   0

@@ -1,4 +1,4 @@
-	db HERACROSS ; 137
+	db 0 ; HERACROSS 137 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  80, 130,  75,  85,  40,  95 ; 505 BST
 	evs  1,   3,   1,   1,   0,   2

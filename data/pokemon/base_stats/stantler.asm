@@ -1,4 +1,4 @@
-	db STANTLER ; 185
+	db 0 ; STANTLER 185 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  73,  95,  62,  85,  85,  65 ; 465 BST
 	evs  1,   2,   1,   1,   1,   1

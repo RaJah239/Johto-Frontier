@@ -1,4 +1,4 @@
-	db REMORAID ; 168
+	db 0 ; REMORAID 168 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  35,  65,  35,  65,  65,  35 ; 300 BST
 	evs  0,   1,   0,   1,   1,   0

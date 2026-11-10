@@ -1,4 +1,4 @@
-	db GRANBULL ; 143
+	db 0 ; GRANBULL 143 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  90, 125,  75,  65,  70,  80 ; 505 BST
 	evs  2,   3,   1,   1,   1,   1

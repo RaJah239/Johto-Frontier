@@ -1,4 +1,4 @@
-	db HOOTHOOT ; 057
+	db 0 ; HOOTHOOT 057 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  60,  30,  48,  50,  46,  66 ; 300 BST
 	evs  1,   0,   0,   0,   0,   1

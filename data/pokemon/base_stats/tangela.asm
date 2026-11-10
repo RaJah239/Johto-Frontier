@@ -1,4 +1,4 @@
-	db TANGELA ; 138
+	db 0 ; TANGELA 138 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65,  55, 115,  60, 100,  40 ; 435 BST
 	evs  1,   0,   2,   1,   2,   0

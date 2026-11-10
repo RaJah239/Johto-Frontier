@@ -1,12 +1,12 @@
 MACRO casinomon
-; species, coins needed
-	db \1
+; species (16-bit index), coins needed
+	dw \1
 	dw \2
 ENDM
 
 MACRO specialencounter
-; requested mon, offered mon, item, OT ID, OT name, gender requested
-	db \1
+; species (16-bit index), event flag, map, hint string
+	dw \1
 	dw \2
 	map_id \3
 	dw \4
@@ -22,7 +22,7 @@ CasinoMons::
 	casinomon SMEARGLE, GOLDENRODGAMECORNER_SMEARGLE_COINS
 	casinomon MR__MIME, GOLDENRODGAMECORNER_MR__MIME_COINS
 	casinomon PORYGON, GOLDENRODGAMECORNER_PORYGON_COINS 
-	db -1
+	dw -1 ; end
 
 NPCTradeMons_Locations::
 ; corresponds to NPCTrades:: in data\events\npc_trades.asm
@@ -50,7 +50,7 @@ EventWildMons::
 	; specialencounter MOLTRES, 	EVENT_CAUGHT_MOLTRES,               VICTORY_ROAD, MoltresEvent_Str ; will not normally be seen by player w/o Dex Splash Page, may need new EVENT constant
 	; specialencounter MEWTWO, 	EVENT_CERULEAN_CAVE_B1F_MEWTWO,         SILVER_CAVE_ROOM_3, MewtwoEvent_Str ; will not normally be seen by player w/o Dex Splash Page, may need new EVENT constant
 	; specialencounter MEW, 	EVENT_ROUTE_24_MEW_CAUGHT,              ROUTE_24, MewEvent_Str ; will not normally be seen by player w/o Dex Splash Page, may need new EVENT constant
-	db -1
+	dw -1 ; end
 
 ; LoadWildMon Dex Hints, max 18 chars per line
 FridayLapras_Str:
@@ -121,7 +121,7 @@ GiftMons::
 	; specialencounter AERODACTYL,EVENT_GAVE_SCIENTIST_OLD_AMBER,             RUINS_OF_ALPH_RESEARCH_CENTER, OldAmberEvent_Str
 	; specialencounter LILEEP, 	EVENT_GAVE_SCIENTIST_ROOT_FOSSIL,             RUINS_OF_ALPH_RESEARCH_CENTER, DomeFossil_Str
 	; specialencounter OMANYTE, 	EVENT_GAVE_SCIENTIST_HELIX_FOSSIL,        RUINS_OF_ALPH_RESEARCH_CENTER, HelixFossil_Str
-	db -1
+	dw -1 ; end
 
 ; GivePoke Dex Hints, max 18 chars per line
 ShuckieEvent_Str:

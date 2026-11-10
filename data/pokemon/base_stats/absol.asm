@@ -1,4 +1,4 @@
-	db ABSOL ; 229
+	db 0 ; ABSOL 229 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65, 154,  60, 151,  75,  60 ; 565 BST
 	evs  1,   3,   1,   3,   1,   1

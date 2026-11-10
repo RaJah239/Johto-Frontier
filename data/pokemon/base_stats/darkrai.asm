@@ -1,4 +1,4 @@
-	db DARKRAI ; 232
+	db 0 ; DARKRAI 232 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  70,  90,  90, 125, 135,  90 ; 600 BST
 	evs  1,   2,   2,   3,   3,   2

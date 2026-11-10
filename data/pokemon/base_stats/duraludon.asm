@@ -1,4 +1,4 @@
-	db DURALUDON ; 230
+	db 0 ; DURALUDON 230 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  70,  95, 115,  85, 120,  50 ; 535 BST
 	evs  1,   2,   2,   1,   3,   0

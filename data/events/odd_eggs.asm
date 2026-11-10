@@ -33,10 +33,17 @@ DEF prob_total = 0
 	assert_table_length NUM_ODD_EGGS
 	assert prob_total == 100, "OddEggProbabilities do not sum to 100%!"
 
+MACRO oddegg_species
+; the egg is copied as a party struct, whose species byte GiveOddEgg turns
+; from this index into an 8-bit ID
+	assert HIGH(\1) == 0, "odd egg species need a 16-bit index below 256"
+	db LOW(\1)
+ENDM
+
 OddEggs:
 	table_width PARTYMON_STRUCT_LENGTH, OddEggs
 
-	db PIKACHU
+	oddegg_species PIKACHU
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 02048 ; OT ID
@@ -57,7 +64,7 @@ OddEggs:
 	bigdw 8 ; SAtk
 	bigdw 8 ; SDef
 
-	db RAIKOU
+	oddegg_species RAIKOU
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 00256 ; OT ID
@@ -78,7 +85,7 @@ OddEggs:
 	bigdw 9 ; SAtk
 	bigdw 9 ; SDef
 
-	db RAICHU
+	oddegg_species RAICHU
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 04096 ; OT ID
@@ -99,7 +106,7 @@ OddEggs:
 	bigdw 9 ; SAtk
 	bigdw 10 ; SDef
 
-	db CHANSEY
+	oddegg_species CHANSEY
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 00768 ; OT ID
@@ -120,7 +127,7 @@ OddEggs:
 	bigdw 10 ; SAtk
 	bigdw 11 ; SDef
 
-	db BLISSEY
+	oddegg_species BLISSEY
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 04096 ; OT ID
@@ -141,7 +148,7 @@ OddEggs:
 	bigdw 9 ; SAtk
 	bigdw 7 ; SDef
 
-	db SNORLAX
+	oddegg_species SNORLAX
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 00768 ; OT ID
@@ -162,7 +169,7 @@ OddEggs:
 	bigdw 10 ; SAtk
 	bigdw 8 ; SDef
 
-	db MEW
+	oddegg_species MEW
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 03584 ; OT ID
@@ -183,7 +190,7 @@ OddEggs:
 	bigdw 13 ; SAtk
 	bigdw 11 ; SDef
 
-	db MEWTWO
+	oddegg_species MEWTWO
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 00512 ; OT ID
@@ -204,7 +211,7 @@ OddEggs:
 	bigdw 14 ; SAtk
 	bigdw 12 ; SDef
 
-	db TENTACOOL
+	oddegg_species TENTACOOL
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 02560 ; OT ID
@@ -225,7 +232,7 @@ OddEggs:
 	bigdw 12 ; SAtk
 	bigdw 10 ; SDef
 
-	db TENTACRUEL
+	oddegg_species TENTACRUEL
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 00512 ; OT ID
@@ -246,7 +253,7 @@ OddEggs:
 	bigdw 13 ; SAtk
 	bigdw 11 ; SDef
 
-	db TEDDIURSA
+	oddegg_species TEDDIURSA
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 03072 ; OT ID
@@ -267,7 +274,7 @@ OddEggs:
 	bigdw 11 ; SAtk
 	bigdw 10 ; SDef
 
-	db LAPRAS
+	oddegg_species LAPRAS
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 00512 ; OT ID
@@ -288,7 +295,7 @@ OddEggs:
 	bigdw 12 ; SAtk
 	bigdw 11 ; SDef
 
-	db RAIKOU
+	oddegg_species RAIKOU
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 02560 ; OT ID
@@ -309,7 +316,7 @@ OddEggs:
 	bigdw 8 ; SAtk
 	bigdw 8 ; SDef
 
-	db MR__MIME
+	oddegg_species MR__MIME
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 00256 ; OT ID

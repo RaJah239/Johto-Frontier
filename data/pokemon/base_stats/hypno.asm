@@ -1,4 +1,4 @@
-	db HYPNO ; 145
+	db 0 ; HYPNO 145 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  85,  90,  80,  67,  68, 115 ; 505 BST
 	evs  1,   2,   1,   1,   1,   2

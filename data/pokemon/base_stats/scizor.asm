@@ -1,4 +1,4 @@
-	db SCIZOR ; 135
+	db 0 ; SCIZOR 135 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  70, 130, 100,  65,  60,  80 ; 505 BST
 	evs  1,   3,   2,   1,   1,   1

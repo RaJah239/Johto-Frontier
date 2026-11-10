@@ -1,4 +1,4 @@
-	db SEADRA ; 178
+	db 0 ; SEADRA 178 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  55,  65,  95,  85,  95,  45 ; 440 BST
 	evs  0,   1,   2,   1,   2,   0

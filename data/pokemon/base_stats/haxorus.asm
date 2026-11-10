@@ -1,4 +1,4 @@
-	db HAXORUS ; 219
+	db 0 ; HAXORUS 219 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  76, 147,  90,  97,  60,  70
 	evs  1,   3,   2,   2,   1,   1

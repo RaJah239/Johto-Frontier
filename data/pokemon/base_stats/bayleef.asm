@@ -1,4 +1,4 @@
-	db BAYLEEF ; 008
+	db 0 ; BAYLEEF 008 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf
 	db  75,  75,  80,  50,  50,  80 ; 410 BST

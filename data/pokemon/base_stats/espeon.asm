@@ -1,4 +1,4 @@
-	db ESPEON ; 025
+	db 0 ; ESPEON 025 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65,  65,  60, 110, 130,  95 ; 525 BST
 	evs  1,   1,   1,   2,   3,   2

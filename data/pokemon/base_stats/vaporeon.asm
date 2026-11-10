@@ -1,4 +1,4 @@
-	db VAPOREON ; 030
+	db 0 ; VAPOREON 030 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  130, 65,  60,  65, 110,  95 ; 525 BST
 	evs   3,  1,   1,   1,   2,   2

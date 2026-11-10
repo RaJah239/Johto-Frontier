@@ -1,4 +1,4 @@
-	db DODRIO ; 109
+	db 0 ; DODRIO 109 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf
 	db  80, 120,  77, 118,  50,  60 ; 505 BST

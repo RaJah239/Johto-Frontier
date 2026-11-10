@@ -1,4 +1,4 @@
-	db FERROTHORN ; 133
+	db 0 ; FERROTHORN 133 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  85,  94, 131,  20,  59, 116 ; 505 BST
 	evs  1,   2,   3,   0,   0,   2

@@ -1,4 +1,4 @@
-	db SNEASEL ; 196
+	db 0 ; SNEASEL 196 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  55,  95,  55, 115,  35,  75 ; 430 BST
 	evs  0,   2,   0,   2,   0,   1

@@ -1,4 +1,4 @@
-	db ROTOM ; 228
+	db 0 ; ROTOM 228 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	;   hp  atk  def  spd  sat  sdf
 	db  60,  65, 107,  91, 110, 107 ; 540 BST

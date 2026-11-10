@@ -1,4 +1,4 @@
-	db STARYU ; 166
+	db 0 ; STARYU 166 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  30,  45,  55,  85,  70,  55 ; 340 BST
 	evs  0,   0,   0,   1,   1,   0

@@ -1,4 +1,4 @@
-	db SCYTHER ; 134
+	db 0 ; SCYTHER 134 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  70, 110,  80, 105,  55,  80 ; 500 BST
 	evs  1,   2,   1,   2,   0,   1

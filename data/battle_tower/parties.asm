@@ -1,7 +1,7 @@
 MACRO bt_mon
-	db \1 ; species
+	dw \1 ; species (16-bit index)
 	db \2 ; item
-	db \3, \4, \5, \6 ; moves
+	dw \3, \4, \5, \6 ; moves (16-bit indexes)
 ENDM
 
 MACRO assert_bt_pool

@@ -1,4 +1,4 @@
-	db RIOLU ; 203
+	db 0 ; RIOLU 203 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  40,  70,  40,  60,  50,  40 ; 300 BST
 	evs  0,   1,   0,   1,   0,   0

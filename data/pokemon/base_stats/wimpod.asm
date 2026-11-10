@@ -1,4 +1,4 @@
-	db WIMPOD ; 074
+	db 0 ; WIMPOD 074 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  25,  35,  40,  80,  20,  30 ; 230 BST
 	evs  0,   0,   0,   1,   0,   0

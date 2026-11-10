@@ -1,4 +1,4 @@
-	db ELEKID ; 159
+	db 0 ; ELEKID 159 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  45,  63,  37,  95,  65,  55 ; 360 BST
 	evs  0,   1,   0,   2,   1,   0

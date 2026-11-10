@@ -1,4 +1,4 @@
-	db MOLTRES ; 239
+	db 0 ; MOLTRES 239 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  90, 100,  90, 110, 125,  85 ; 600 BST
 	evs  2,   2,   2,   2,   3,   1

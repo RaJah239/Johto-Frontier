@@ -1,15 +1,14 @@
 ; npctrade struct members (see data/events/npc_trades.asm)
 rsreset
 DEF NPCTRADE_DIALOG   rb
-DEF NPCTRADE_GIVEMON  rb
-DEF NPCTRADE_GETMON   rb
+DEF NPCTRADE_GIVEMON  rw ; 16-bit species index
+DEF NPCTRADE_GETMON   rw ; 16-bit species index
 DEF NPCTRADE_NICKNAME rb MON_NAME_LENGTH
 DEF NPCTRADE_DVS      rw
 DEF NPCTRADE_ITEM     rb
 DEF NPCTRADE_OT_ID    rw
 DEF NPCTRADE_OT_NAME  rb NAME_LENGTH
 DEF NPCTRADE_GENDER   rb
-                      rb_skip
 DEF NPCTRADE_STRUCT_LENGTH EQU _RS
 
 ; NPCTrades indexes (see data/events/npc_trades.asm)

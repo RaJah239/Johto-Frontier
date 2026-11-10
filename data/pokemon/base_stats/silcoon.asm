@@ -1,4 +1,4 @@
-	db SILCOON ; 044
+	db 0 ; SILCOON 044 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  50,  35,  55,  15,  25,  25 ; 205 BST
 	evs  0,   0,   1,   0,   0,   0

@@ -1,4 +1,4 @@
-	db YANMEGA ; 049
+	db 0 ; YANMEGA 049 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  86,  76,  86, 105, 126,  56 ; 535 BST
 	evs  1,   1,   1,   2,   3,   0

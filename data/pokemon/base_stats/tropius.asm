@@ -1,4 +1,4 @@
-	db TROPIUS ; 128
+	db 0 ; TROPIUS 128 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  110, 95, 95, 50, 95, 95 ; 540 BST
 	evs   2,  2,  2,  0,  2,  2

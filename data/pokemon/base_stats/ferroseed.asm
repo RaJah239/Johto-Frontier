@@ -1,4 +1,4 @@
-	db FERROSEED ; 132
+	db 0 ; FERROSEED 132 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  44,  50,  91,  10,  24,  86 ; 305 BST
 	evs  0,   0,   2,   0,   0,   1

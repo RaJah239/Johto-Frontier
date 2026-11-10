@@ -1,4 +1,4 @@
-	db NOWN ; 246
+	db 0 ; NOWN 246 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db 115,  64, 121,  64, 115, 121 ; 600 BST
 	evs  2,   1,   3,   1,   2,   3

@@ -1,4 +1,4 @@
-	db MAGNEZONE ; 163
+	db 0 ; MAGNEZONE 163 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  70,  70, 115,  60, 130,  90 ; 535 BST
 	evs  1,   1,   2,   1,   3,   2

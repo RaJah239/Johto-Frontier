@@ -1,4 +1,4 @@
-	db TOGEPI ; 010
+	db 0 ; TOGEPI 010 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  35,  20,  65,  20,  40,  65 ; 245 BST
 	evs  0,   0,   0,   0,   0,   1

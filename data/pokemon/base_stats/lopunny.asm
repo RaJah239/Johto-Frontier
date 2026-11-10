@@ -1,4 +1,4 @@
-	db LOPUNNY ; 053
+	db 0 ; LOPUNNY 053 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65,  95,  84, 105,  59,  97 ; 505 BST
 	evs  1,   2,   1,   2,   0,   2

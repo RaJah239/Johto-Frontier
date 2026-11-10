@@ -302,15 +302,17 @@ PickRandomBattleTowerCompactMon:
 	dec hl
 	dec hl ; -> the pool entry
 ; hl = de * BATTLETOWER_MON_STRUCT_LENGTH
+	assert BATTLETOWER_MON_STRUCT_LENGTH == 11
 	push hl
 	ld h, d
 	ld l, e
 	add hl, hl ; x2
+	ld b, h
+	ld c, l
 	add hl, hl ; x4
-	ld b, d
-	ld c, e
-	add hl, bc ; x5
-	add hl, bc ; x6
+	add hl, hl ; x8
+	add hl, bc ; x10
+	add hl, de ; x11
 	pop de ; de -> the pool entry
 ; hl += the pool's base address
 	ld a, [de]
@@ -324,8 +326,12 @@ PickRandomBattleTowerCompactMon:
 	adc h
 	ld h, a
 
+	; a = the species' 8-bit ID (the record starts with its dw index)
 	ld a, b
-	call GetFarByte
+	push hl
+	call GetFarWord
+	call GetPokemonIDFromIndex
+	pop hl
 	pop de
 	ret
 
@@ -432,20 +438,39 @@ ExpandBattleTowerCompactMonToTemp:
 ; Stats are generated in WRAM0 scratch so CalcMonStats can read the
 ; bank-1 base data while writing the Battle Tower mon.
 	ld de, wBT_OTTempMon1
-	ld c, BATTLETOWER_MON_STRUCT_LENGTH
-.copy_compact_mon_loop
+	; species: dw 16-bit index -> 8-bit ID
+	push hl
+	call .GetWord
+	call GetPokemonIDFromIndex
+	pop hl
+	inc hl
+	inc hl
+	ld [de], a
+	inc de
+	; item
 	ld a, b
 	call GetFarByte
 	ld [de], a
+	inc de
 	inc hl
+	; moves: dw 16-bit indexes -> 8-bit IDs
+	ld c, NUM_MOVES
+.copy_moves_loop
+	push hl
+	call .GetWord
+	call GetMoveIDFromIndex
+	pop hl
+	inc hl
+	inc hl
+	ld [de], a
 	inc de
 	dec c
-	jr nz, .copy_compact_mon_loop
+	jr nz, .copy_moves_loop
 
 	ld h, d
 	ld l, e
 	xor a
-	ld bc, PARTYMON_STRUCT_LENGTH - BATTLETOWER_MON_STRUCT_LENGTH
+	ld bc, PARTYMON_STRUCT_LENGTH - (MON_MOVES + NUM_MOVES)
 	call ByteFill
 
 	call GetBattleTowerChallengeLevel
@@ -524,6 +549,11 @@ ExpandBattleTowerCompactMonToTemp:
 	pop af
 	ldh [rSVBK], a
 	ret
+
+.GetWord:
+; hl = the word at b:hl. Preserves bc and de.
+	ld a, b
+	jmp GetFarWord
 
 BattleTower_GenerateRandomPlayerParty:
 ; Random Battle replaces the live WRAM party only; the saved party is

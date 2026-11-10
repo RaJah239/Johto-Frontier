@@ -1,6 +1,8 @@
 MACRO decoration
-	; type, name, action, event flag, tile/sprite
-	db \1, \2, \3
+	; type, name (or species), action, event flag, tile/sprite
+	db \1
+	dw \2
+	db \3
 	dw \4
 	db \5
 ENDM

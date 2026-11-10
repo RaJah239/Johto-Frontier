@@ -1,4 +1,4 @@
-	db GENGAR ; 088
+	db 0 ; GENGAR 088 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65,  60,  60, 110, 135,  75 ; 505 BST
 	evs  1,   1,   1,   2,   3,   1

@@ -1381,7 +1381,9 @@ GetBuenasPassword:
 	assert_table_length NUM_BUENA_FUNCTIONS
 
 .Mon:
-	call .GetTheIndex
+	call .GetTheWord
+	call GetPokemonIDFromIndex
+	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	ret
 
@@ -1391,8 +1393,21 @@ GetBuenasPassword:
 	ret
 
 .Move:
-	call .GetTheIndex
+	call .GetTheWord
+	call GetMoveIDFromIndex
+	ld [wNamedObjectIndex], a
 	call GetMoveName
+	ret
+
+.GetTheWord:
+; hl = word c of the options at de (species / move 16-bit indexes)
+	ld h, 0
+	ld l, c
+	add hl, hl
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
 	ret
 
 .GetTheIndex:

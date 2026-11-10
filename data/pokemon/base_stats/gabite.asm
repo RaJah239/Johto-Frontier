@@ -1,4 +1,4 @@
-	db GABITE ; 104
+	db 0 ; GABITE 104 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  68,  90,  65,  82,  50,  55 ; 410 BST
 	evs  1,   2,   1,   1,   0,   0

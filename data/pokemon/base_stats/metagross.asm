@@ -1,4 +1,4 @@
-	db METAGROSS ; 218
+	db 0 ; METAGROSS 218 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  80, 135, 130,  70,  95,  90 ; 600 BST
 	evs  1,   3,   3,   1,   2,   2

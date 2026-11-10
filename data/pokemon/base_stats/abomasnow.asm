@@ -1,4 +1,4 @@
-	db ABOMASNOW ; 200
+	db 0 ; ABOMASNOW 200 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  101,  92,  75,  60,  92,  85 ; 505 BST
 	evs   2,   2,   1,   1,   2,   1

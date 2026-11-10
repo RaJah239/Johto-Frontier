@@ -1,4 +1,4 @@
-	db VOLTORB ; 157
+	db 0 ; VOLTORB 157 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  40,  30,  50, 100,  55,  55 ; 330 BST
 	evs  0,   0,   0,   2,   0,   0

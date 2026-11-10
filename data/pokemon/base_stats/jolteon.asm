@@ -1,4 +1,4 @@
-	db JOLTEON ; 027
+	db 0 ; JOLTEON 027 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65,  65,  60, 130, 110,  95 ; 525 BST
 	evs  1,   1,   1,   3,   2,   2

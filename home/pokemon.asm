@@ -4,7 +4,7 @@ IsAPokemon::
 	jr z, .NotAPokemon
 	cp EGG
 	jr z, .Pokemon
-	cp NUM_POKEMON + 1
+	cp MON_TABLE_ENTRIES + 1 ; (an 8-bit ID)
 	jr c, .Pokemon
 .NotAPokemon:
 	scf

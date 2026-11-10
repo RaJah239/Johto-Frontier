@@ -1,4 +1,4 @@
-	db CLEFAIRY ; 181
+	db 0 ; CLEFAIRY 181 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  70,  45,  48,  35,  62,  65 ; 325 BST
 	evs  1,   0,   0,   0,   1,   1

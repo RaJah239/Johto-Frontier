@@ -1,4 +1,4 @@
-	db HARIYAMA ; 107
+	db 0 ; HARIYAMA 107 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db 150, 125,  70,  50,  40,  70 ; 505 BST
 	evs  3,   3,   1,   0,   0,   1

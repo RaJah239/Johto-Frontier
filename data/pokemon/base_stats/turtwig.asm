@@ -1,4 +1,4 @@
-	db TURTWIG ; 019
+	db 0 ; TURTWIG 019 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  55,  68,  64,  31,  45,  55 ; 318 BST
 	evs  0,   1,   1,   0,   0,   0

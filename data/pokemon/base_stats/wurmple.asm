@@ -1,4 +1,4 @@
-	db WURMPLE ; 043
+	db 0 ; WURMPLE 043 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  45,  45,  35,  20,  20,  30 ; 195 BST
 	evs  1,   0,   0,   0,   0,   0

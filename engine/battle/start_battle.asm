@@ -60,8 +60,7 @@ PlayBattleMusic:
 	jr nz, .trainermusic
 
 	ld a, [wTempEnemyMonSpecies]
-	ld hl, BattleMusic_Legendaries
-	call .loadfromarray
+	call .legendary
 	jr c, .done
 
 	ld e, MUSIC_JOHTO_WILD_BATTLE
@@ -123,6 +122,34 @@ PlayBattleMusic:
 	ld e, [hl]
 	ld d, 0
 	ret
+
+.legendary
+; a = species ID: carry and de = its music if it's in BattleMusic_Legendaries
+	call GetPokemonIndexFromID
+	ld b, h
+	ld c, l
+	ld hl, BattleMusic_Legendaries
+.legendary_loop
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	and e
+	inc a
+	ret z ; dw -1 (carry clear)
+	ld a, e
+	cp c
+	jr nz, .next_legendary
+	ld a, d
+	cp b
+	jr nz, .next_legendary
+	ld e, [hl]
+	ld d, 0
+	scf
+	ret
+.next_legendary
+	inc hl
+	jr .legendary_loop
 
 INCLUDE "data/battle/music.asm"
 

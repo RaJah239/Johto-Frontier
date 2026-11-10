@@ -1,4 +1,4 @@
-	db EEVEE ; 024
+	db 0 ; EEVEE 024 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65,  75,  70,  75,  65,  85 ; 435 BST
 	evs  1,   1,   1,   1,   1,   1

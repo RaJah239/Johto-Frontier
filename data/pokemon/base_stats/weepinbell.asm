@@ -1,4 +1,4 @@
-	db WEEPINBELL ; 069
+	db 0 ; WEEPINBELL 069 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  65,  90,  50,  55,  85,  45
 	evs  1,   2,   0,   0,   1,   0

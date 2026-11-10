@@ -1,4 +1,4 @@
-	db KLEAVOR ; 136
+	db 0 ; KLEAVOR 136 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  70, 135,  95,  85,  50,  70 ; 505 BST
 	evs  1,   3,   2,   1,   0,   1

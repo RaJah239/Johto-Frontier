@@ -1,4 +1,4 @@
-	db ARTICUNO ; 237
+	db 0 ; ARTICUNO 237 (wBaseDexNo: GetBaseData puts the species ID here)
 
 	db  90,  85, 100, 105,  95, 125 ; 600 BST
 	evs  2,   1,   2,   2,   2,   3
