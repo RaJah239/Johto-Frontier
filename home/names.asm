@@ -112,6 +112,22 @@ GetPokemonName::
 ; Each name is ten characters
 	ld a, [wNamedObjectIndex]
 	call GetPokemonIndexFromID
+	ld a, h
+	inc a
+	jr nz, .got_index
+	; EGG ($FFFD) and the other reserved IDs: the names after the species'
+	; ("EGG", then "?????")
+	ld a, l
+	sub LOW(EGG)
+	jr z, .egg
+	ld a, 1
+.egg
+	ld hl, NUM_POKEMON + 1
+	add l
+	ld l, a
+	jr nc, .got_index
+	inc h
+.got_index
 	dec hl
 	ld d, h
 	ld e, l

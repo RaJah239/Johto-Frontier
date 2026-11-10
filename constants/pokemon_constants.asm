@@ -283,7 +283,10 @@ DEF JOHTO_POKEMON EQU const_value
 	const MEW        ; fb
 	const MEWTWO     ; fc
 DEF NUM_POKEMON EQU const_value - 1
-	const EGG        ; fd
+; EGG is an 8-bit ID, not a species index: MON_TABLE_MINIMUM_RESERVED_INDEX
+; (its index is $FFFD). The tables that have an EGG entry keep it right after
+; the species', at NUM_POKEMON + 1.
+DEF EGG EQU $fd
 
 ; Unown forms
 ; indexes for:

@@ -175,6 +175,21 @@ GetMonPicPointerEntry:
 ; a = species ID, c = Unown letter: d:hl = its PokemonPicPointers entry (or
 ; UnownPicPointers, for Unown): the front pic's dba, then the back pic's
 	call GetPokemonIndexFromID ; (preserves bc)
+	ld a, h
+	inc a
+	jr nz, .got_index
+	; EGG ($FFFD) and the other reserved IDs: the entries after the species'
+	ld a, l
+	sub LOW(EGG)
+	jr z, .egg
+	ld a, 1
+.egg
+	ld hl, NUM_POKEMON + 1
+	add l
+	ld l, a
+	jr nc, .got_index
+	inc h
+.got_index
 	compare_hl UNOWN
 	jr z, .unown
 	ld d, BANK(PokemonPicPointers)

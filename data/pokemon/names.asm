@@ -254,7 +254,7 @@ PokemonNames::
 	db "Mewtwo@@@@"
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
-	assert_table_length EGG
+	assert_table_length NUM_POKEMON + 1 ; (EGG's)
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

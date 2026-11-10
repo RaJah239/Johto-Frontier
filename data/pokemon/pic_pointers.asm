@@ -513,4 +513,4 @@ PokemonPicPointers::
  	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1
-	assert_table_length EGG
+	assert_table_length NUM_POKEMON + 1 ; (EGG's)
