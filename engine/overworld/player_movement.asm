@@ -30,17 +30,16 @@ DoPlayerMovement::
 	ret
 
 .TranslateIntoMovement:
-	if DEF(_DEBUG)
+if DEF(_DEBUG)
 	ld a, [wCurInput]
-	or ~(A_BUTTON | B_BUTTON)
-	inc a
-	jr nz, .regular_move
+	and A_BUTTON
+	jr z, .regular_move
 	call .GetAction
 	ld a, [wWalkingTileCollision]
 	cp -1
 	ld a, STEP_BACK_LEDGE
 	jr z, .hopback
-	ld a, STEP_RUN
+	ld a, STEP_BIKE
 .hopback
 	call .DoStep
 	scf

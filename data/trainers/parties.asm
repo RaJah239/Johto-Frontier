@@ -5170,6 +5170,19 @@ RedGroup:
 
 	end_list_items
 
+if DEF(_DEBUG)
+	db "Red@", TRAINERTYPE_ITEM_MOVES
+	db 5
+	dw PIKACHU
+	dw NO_ITEM
+	dw THUNDERBOLT, NO_MOVE, NO_MOVE, NO_MOVE
+	db 5
+	dw PIKACHU
+	dw NO_ITEM
+	dw DOUBLE_EDGE, NO_MOVE, NO_MOVE, NO_MOVE
+	db -1 ; end
+endc
+
 BlueGroup:
 	next_list_item ; BLUE (1)
 	db "BLUE@", TRAINERTYPE_MOVES

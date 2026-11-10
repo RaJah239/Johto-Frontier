@@ -92,8 +92,8 @@ _CheckTrainerBattle::
 .startbattle
 if DEF(_DEBUG)
 	ldh a, [hJoypadDown]
-	or ~B_BUTTON
-	inc a
+	and A_BUTTON
+	cp A_BUTTON
 	jr z, .next ; ignore trainers
 endc
 	pop de

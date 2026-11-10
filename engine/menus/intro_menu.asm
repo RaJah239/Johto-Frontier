@@ -536,11 +536,17 @@ Continue_DisplayGameTime:
 	jmp PrintNum
 
 OakSpeech:
+if DEF(_DEBUG)
+ 	ld hl, wOptions
+	set BATTLE_SHIFT, [hl] ; SET MODE
+endc
 	farcall InitClock
 	ld c, 31
 	call FadeToBlack
 	call ClearTilemap
 
+if DEF(_DEBUG)
+else
 	ld de, MUSIC_ROUTE_30
 	call PlayMusic
 
@@ -559,7 +565,6 @@ OakSpeech:
 
 	ld hl, OakText1
 	call PrintText
-if !DEF(_DEBUG)
 	ld c, 15
 	call FadeToWhite
 	call ClearTilemap
@@ -602,6 +607,7 @@ if !DEF(_DEBUG)
 
 	ld hl, OakText5
 	call PrintText
+endc
 ;	call RotateThreePalettesRight ; TODO check this
 	call ClearTilemap
 
@@ -612,12 +618,15 @@ if !DEF(_DEBUG)
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
 	call Intro_RotatePalettesLeftFrontpic
-endc
 	ld hl, OakText6
 	call PrintText
 	call NamePlayer
+if DEF(_DEBUG)
+else
 	ld hl, OakText7
-	jmp PrintText
+	call PrintText
+endc
+	ret
 
 OakText1:
 	text_far _OakText1

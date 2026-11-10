@@ -3,6 +3,9 @@
 	const PLAYERSHOUSE2F_DOLL_1
 	const PLAYERSHOUSE2F_DOLL_2
 	const PLAYERSHOUSE2F_BIG_DOLL
+if DEF(_DEBUG)
+	const PLAYERSHOUSE2F_TEST
+endc
 
 PlayersHouse2F_MapScripts:
 	def_scene_scripts
@@ -58,25 +61,31 @@ if DEF(_DEBUG)
 	; pokedex
 	setflag ENGINE_POKEDEX
 	; useful items
-	giveitem RARE_CANDY, 99
-	giveitem MAX_REPEL, 99
-	giveitem MASTER_BALL, 99
+	givemoney YOUR_MONEY, MAX_MONEY
 	giveitem BICYCLE
+	giveitem COIN_CASE
+	givecoins MAX_COINS
+	giveitem OLD_ROD
 	giveitem GOOD_ROD
-	giveitem THUNDERSTONE, 10
-	giveitem FIRE_STONE, 10
-	giveitem WATER_STONE, 10
-	giveitem LEAF_STONE, 10
-	giveitem MOON_STONE, 10
-	giveitem SUN_STONE, 10
-	giveitem BERRY, 10
-	giveitem GOLD_BERRY, 10
-	giveitem MINT_BERRY, 10
-	giveitem MYSTERYBERRY, 10
-	giveitem QUICK_CLAW
-	giveitem KINGS_ROCK
-	giveitem AMULET_COIN
-	giveitem SCOPE_LENS
+	giveitem SUPER_ROD
+	; useful items
+	giveitem MAX_REPEL, MAX_ITEM_STACK
+	giveitem ESCAPE_ROPE, MAX_ITEM_STACK
+	giveitem SACRED_ASH, MAX_ITEM_STACK
+	giveitem RARE_CANDY, MAX_ITEM_STACK
+	; all balls
+	giveitem MASTER_BALL, MAX_ITEM_STACK
+	giveitem POKE_BALL, MAX_ITEM_STACK
+	giveitem GREAT_BALL, MAX_ITEM_STACK
+	giveitem ULTRA_BALL, MAX_ITEM_STACK
+	giveitem HEAVY_BALL, MAX_ITEM_STACK
+	giveitem LURE_BALL, MAX_ITEM_STACK
+	giveitem FAST_BALL, MAX_ITEM_STACK
+	giveitem FRIEND_BALL, MAX_ITEM_STACK
+	giveitem MOON_BALL, MAX_ITEM_STACK
+	giveitem LOVE_BALL, MAX_ITEM_STACK
+	; credits skip
+	setflag ENGINE_CREDITS_SKIP
 	; give player access to the manet train
 	giveitem PASS
 	setevent EVENT_RESTORED_POWER_TO_KANTO
@@ -146,6 +155,13 @@ if DEF(_DEBUG)
 	; hm slaves
 	givepoke MEW, 100, LEFTOVERS
 	givepoke LANTURN, 100, LEFTOVERS
+
+	; mewtwo moveset
+	givepokemove PSYCHIC_M, wPartyMon1, 0
+	givepokemove ICE_BEAM,       wPartyMon1, 1
+	givepokemove THUNDERBOLT,    wPartyMon1, 2
+	givepokemove RECOVER,        wPartyMon1, 3
+
 	givepokemove FLY,        wPartyMon2, 0
 	givepokemove SURF,       wPartyMon2, 1
 	givepokemove STRENGTH,   wPartyMon2, 2
@@ -155,8 +171,6 @@ if DEF(_DEBUG)
 	givepokemove HEADBUTT,   wPartyMon3, 2
 	givepokemove WATERFALL,  wPartyMon3, 3
 	; misc pokemon for testing
-	givepoke AMPHAROS, 50
-	givepoke GENGAR, 50
 	givepoke DITTO, 50
 	; intro events
 	addcellnum PHONE_MOM
@@ -199,7 +213,13 @@ else
 endc
 
 PlayersHouseBookshelfScript:
+if DEF(_DEBUG)
+	special FadeOutToWhite
+	warp CHERRYGROVE_CITY, 29,  4 ; Map, coordinates via Polished Map
+	end
+else
 	jumpstd PictureBookshelfScript
+endc
 
 PlayersHousePCScript:
 	opentext
@@ -231,6 +251,23 @@ PlayersRadioText4:
 	line "#MON CHANNEL…"
 	done
 
+if DEF(_DEBUG)
+TestScript:
+	faceplayer
+	special HealParty
+	winlosstext TestText, TestText
+	loadtrainer RED, RED2
+	startbattle
+	reloadmap
+	special HealParty
+	end
+
+TestText:
+	text "<……>"
+	line "<……>"
+	done
+endc
+
 PlayersHouse2F_MapEvents:
 	db 0, 0 ; filler
 
@@ -250,3 +287,6 @@ PlayersHouse2F_MapEvents:
 	object_event  4,  4, SPRITE_DOLL_1, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseDoll1Script, EVENT_PLAYERS_HOUSE_2F_DOLL_1
 	object_event  5,  4, SPRITE_DOLL_2, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseDoll2Script, EVENT_PLAYERS_HOUSE_2F_DOLL_2
 	object_event  0,  1, SPRITE_BIG_DOLL, SPRITEMOVEDATA_BIGDOLL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouseBigDollScript, EVENT_PLAYERS_HOUSE_2F_BIG_DOLL
+if DEF(_DEBUG)
+	object_event  4,  2, SPRITE_RED, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TestScript, -1
+endc

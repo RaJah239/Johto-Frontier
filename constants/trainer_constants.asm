@@ -685,6 +685,9 @@ DEF KRIS EQU __trainer_class__
 
 	trainerclass RED ; 3f
 	const RED1
+if DEF(_DEBUG)
+	const RED2
+endc
 
 	trainerclass BLUE ; 40
 	const BLUE1
