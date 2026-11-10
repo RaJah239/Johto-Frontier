@@ -55,9 +55,9 @@ RGBGFXFLAGS  ?= -Weverything
 .PRECIOUS:
 .SECONDARY:
 
-all: crystal crystal_debug crystal_vc
+all: crystal d crystal_vc
 crystal:       pokecrystal.gbc
-crystal_debug: pokecrystal_debug.gbc
+d:             pokecrystal_debug.gbc
 crystal_vc:    pokecrystal.patch
 
 clean: tidy
