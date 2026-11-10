@@ -755,3 +755,9 @@ MetagrossFrontpic:   INCBIN "gfx/pokemon/metagross/front.animated.2bpp.lz"
 MetagrossBackpic:    INCBIN "gfx/pokemon/metagross/back.2bpp.lz"
 JirachiFrontpic:     INCBIN "gfx/pokemon/jirachi/front.animated.2bpp.lz"
 JirachiBackpic:      INCBIN "gfx/pokemon/jirachi/back.2bpp.lz"
+
+
+SECTION "Pics Alakazam", ROMX
+
+AlakazamFrontpic:    INCBIN "gfx/pokemon/alakazam/front.animated.2bpp.lz"
+AlakazamBackpic:     INCBIN "gfx/pokemon/alakazam/back.2bpp.lz"

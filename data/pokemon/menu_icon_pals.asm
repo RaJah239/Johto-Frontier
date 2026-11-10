@@ -260,6 +260,7 @@ MonMenuIconPals::
 	icon_pals PURPLE, BLUE   ; DITTO
 	icon_pals PINK,   BLUE   ; MEW
 	icon_pals PURPLE, GREEN  ; MEWTWO
+	icon_pals BROWN, BROWN  ; ALAKAZAM
 	assert_table_length NUM_POKEMON
 
 EggMenuIconPals::

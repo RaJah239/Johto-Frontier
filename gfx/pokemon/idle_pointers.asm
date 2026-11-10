@@ -252,4 +252,5 @@ AnimationIdlePointers:
 	dw DittoAnimationIdle
 	dw MewAnimationIdle
 	dw MewtwoAnimationIdle
+	dw AlakazamAnimationIdle
 	assert_table_length NUM_POKEMON

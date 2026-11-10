@@ -254,5 +254,6 @@ NewPokedexOrder:
 	dw DITTO
 	dw MEW
 	dw MEWTWO
+	dw ALAKAZAM
 	assert_table_length NUM_POKEMON
 NewPokedexOrderEnd:

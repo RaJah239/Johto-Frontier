@@ -252,4 +252,5 @@ EvolutionMoves::
    db NO_MOVE      ; DITTO
    db NO_MOVE      ; MEW
    db NO_MOVE      ; MEWTWO
+   db NO_MOVE      ; ALAKAZAM
 	assert_table_length NUM_POKEMON

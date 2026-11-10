@@ -255,4 +255,5 @@ IconPointers:
 	dw DittoIcon
 	dw MewIcon
 	dw MewtwoIcon
+	dw AlakazamIcon
 	assert_table_length NUM_POKEMON + 1

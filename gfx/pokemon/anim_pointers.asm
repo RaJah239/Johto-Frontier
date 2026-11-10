@@ -252,4 +252,5 @@ AnimationPointers:
 	dw DittoAnimation
 	dw MewAnimation
 	dw MewtwoAnimation
+	dw AlakazamAnimation
 	assert_table_length NUM_POKEMON

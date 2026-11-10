@@ -252,4 +252,5 @@ BitmasksPointers:
 	dw DittoBitmasks
 	dw MewBitmasks
 	dw MewtwoBitmasks
+	dw AlakazamBitmasks
 	assert_table_length NUM_POKEMON

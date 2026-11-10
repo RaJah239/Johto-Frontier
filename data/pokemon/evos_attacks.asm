@@ -290,6 +290,19 @@ MewtwoEvosAttacks:
 	db 1, SPLASH
 	db 0 ; no more level-up moves
 
+AlakazamEvosAttacks:
+	db 0 ; no more evolutions
+	db 1, TELEPORT
+	db 1, CONFUSION
+	db 20, DISABLE
+	db 24, PSYBEAM
+	db 28, REFLECT
+	db 32, PSYCHO_CUT
+	db 36, RECOVER
+	db 40, PSYCHIC_M
+	db 48, CALM_MIND
+	db 0 ; no more level-up moves
+
 ; to redo
 DonphanEvosAttacks:
 	db 0 ; no more evolutions

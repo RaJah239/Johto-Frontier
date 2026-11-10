@@ -254,4 +254,5 @@ EvosAttacksPointers::
 	dw DittoEvosAttacks
 	dw MewEvosAttacks
 	dw MewtwoEvosAttacks
+	dw AlakazamEvosAttacks
 	assert_table_length NUM_POKEMON

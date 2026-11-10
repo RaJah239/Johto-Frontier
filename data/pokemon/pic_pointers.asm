@@ -510,6 +510,8 @@ PokemonPicPointers::
  	dba MewBackpic
  	dba MewtwoFrontpic
  	dba MewtwoBackpic
+	dba AlakazamFrontpic
+	dba AlakazamBackpic
  	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

@@ -289,4 +289,5 @@ INCLUDE "data/pokemon/base_stats/celebi.asm"
 INCLUDE "data/pokemon/base_stats/ditto.asm"
 INCLUDE "data/pokemon/base_stats/mew.asm"
 INCLUDE "data/pokemon/base_stats/mewtwo.asm"
+INCLUDE "data/pokemon/base_stats/alakazam.asm"
 	assert_table_length NUM_POKEMON

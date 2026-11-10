@@ -520,6 +520,9 @@ INCBIN "gfx/pokemon/mew/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/mew/shiny.pal"
 INCBIN "gfx/pokemon/mewtwo/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/mewtwo/shiny.pal"
+
+INCBIN "gfx/pokemon/alakazam/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/alakazam/shiny.pal"
 	assert_table_length NUM_POKEMON + 1
 
 ReservedMonPalettes:
