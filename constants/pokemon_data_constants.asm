@@ -285,3 +285,6 @@ DEF PP_MASK    EQU %00111111
 DEF MAX_EV EQU 252
 
 DEF PARTY_LV EQU 220
+
+; Pokedex search results (wPokedexOrder): at most this many species
+DEF DEX_SEARCH_MAX EQU 128

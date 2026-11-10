@@ -758,11 +758,13 @@ ENDU
 UNION
 ; pokedex
 wPokedexDataStart::
-wPokedexOrder:: ds $100 ; >= NUM_POKEMON
+; the search results: species' 16-bit indexes (the dex modes' lists aren't
+; stored: see Pokedex_GetListIndex)
+wPokedexOrder:: ds 2 * DEX_SEARCH_MAX
 wPokedexOrderEnd::
-wDexListingScrollOffset:: db ; offset of the first displayed entry from the start
+wDexListingScrollOffset:: dw ; offset of the first displayed entry from the start
 wDexListingCursor:: db ; Dex cursor
-wDexListingEnd:: db ; Last mon to display
+wDexListingEnd:: dw ; number of entries in the list
 wDexListingHeight:: db ; number of entries displayed at once in the dex listing
 wCurDexMode:: db ; Pokedex Mode
 wDexSearchMonType1:: db ; first type to search
@@ -776,10 +778,13 @@ wUnlockedUnownMode:: db
 wDexCurUnownIndex:: db
 wDexUnownCount:: db
 wDexConvertedMonType:: db ; mon type converted from dex search mon type
-wDexListingScrollOffsetBackup:: db
+wDexListingScrollOffsetBackup:: dw
 wDexListingCursorBackup:: db
 wBackupDexListingCursor:: db
-wBackupDexListingPage:: db
+wBackupDexListingPage:: dw
+wDexListSource:: db ; 0: the dex mode's order; 1: the search results
+wDexABCCachePos:: dw ; Pokedex_ABCListIndex's last position (-1: none)...
+wDexABCCacheAlpha:: dw ; ...and its AlphabeticalPokedexOrder entry
 wDexCurLocation:: db
 if DEF(_CRYSTAL11)
 wPokedexStatus:: db
@@ -3877,7 +3882,7 @@ ENDU
 ; wSoundEngineBackup uses without reserving it)
 SECTION "Pokedex Grid State", WRAMX[$d780], BANK[5]
 
-wDexGridIndex:: db
+wDexGridIndex:: dw ; list position of the cursor
 wDexGridTopRow:: db
 wDexGridPrevTopRow:: db
 wDexGridSpecies:: db

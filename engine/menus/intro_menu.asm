@@ -537,10 +537,10 @@ if NUM_POKEMON % 8
 else
 	ld b, NUM_POKEMON / 8
 endc
-	call CountSetBits
+	call CountSetBits16
 	pop hl
-	ld de, wNumSetBits
-	lb bc, 1, 3
+	ld de, wSpeciesNumberBuffer
+	lb bc, 2, 3
 	jmp PrintNum
 
 Continue_DisplayGameTime:

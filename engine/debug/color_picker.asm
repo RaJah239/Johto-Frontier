@@ -1,3 +1,9 @@
+if NUM_POKEMON < 255
+DEF DEBUG_COLOR_NUM_MONS EQU NUM_POKEMON
+else
+DEF DEBUG_COLOR_NUM_MONS EQU 255
+endc
+
 	; DebugColor_GFX tile IDs
 	const_def $6a
 	const DEBUGTEST_TICKS_1 ; $6a
@@ -81,10 +87,10 @@ DebugColor_InitMonOrTrainerColor:
 	; fallthrough
 
 DebugColor_InitMonColor:
-	; (wDebugColorCurMon is a species' 16-bit index - 1: all below 256)
-	assert NUM_POKEMON < $100
+	; (wDebugColorCurMon is a species' 16-bit index - 1: the picker shows
+	; the first DEBUG_COLOR_NUM_MONS species; wDebugOriginalColors has 256)
 	ld de, wDebugOriginalColors
-	ld c, NUM_POKEMON + 1
+	ld c, LOW(DEBUG_COLOR_NUM_MONS + 1)
 .loop
 	push bc
 	push hl
@@ -279,7 +285,7 @@ DebugColorMain:
 	and a
 	jr nz, .trainer
 ; mon
-	ld a, NUM_POKEMON ; CELEBI
+	ld a, DEBUG_COLOR_NUM_MONS
 	ret
 .trainer
 	ld a, NUM_TRAINER_CLASSES ; MYSTICALMAN

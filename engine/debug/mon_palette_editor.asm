@@ -100,7 +100,7 @@ MonPalOverrides_Clear:
 	xor a
 	ld [wMonPalOverrideCount], a
 	ld hl, wMonPalOverrideSlots
-	ld bc, NUM_POKEMON + 1
+	ld bc, NUM_POKEMON + 1 ; (wMonPalOverrideSlots, by key)
 	jmp ByteFill
 
 ; Rebuild the species -> entry lookup from the entries. Requires SVBK =
@@ -108,7 +108,7 @@ MonPalOverrides_Clear:
 MonPalOverrides_RebuildSlots:
 	xor a
 	ld hl, wMonPalOverrideSlots
-	ld bc, NUM_POKEMON + 1
+	ld bc, NUM_POKEMON + 1 ; (wMonPalOverrideSlots, by key)
 	call ByteFill
 	ld a, [wMonPalOverrideCount]
 	and a
@@ -118,9 +118,12 @@ MonPalOverrides_RebuildSlots:
 	ld hl, wMonPalOverrideEntries
 .loop
 	push bc
-	ld a, [hl]
+	ld a, [hli]
 	ld e, a
-	ld d, 0
+	ld a, [hld]
+	srl a
+	srl a
+	ld d, a ; de = the key
 	push hl
 	ld hl, wMonPalOverrideSlots
 	add hl, de
@@ -150,8 +153,9 @@ MonPalOverrides_RemoveMarked:
 	ld a, b
 	and a
 	jr z, .done
-	ld a, [hl]
-	and a
+	ld a, [hli]
+	or [hl] ; (key 0 and no flags: marked)
+	dec hl
 	jr z, .drop
 	; keep this entry: copy it down to the write position
 	push bc
@@ -188,21 +192,24 @@ MonPalOverrides_RemoveMarked:
 ; Runtime store access
 ; ----------------------------------------------------------------------
 
-; The store is keyed by species index (16-bit index, below 256: asserted),
-; since 8-bit IDs don't last between sessions. MonPalEdit_Key: a = species ID
-; -> a = its key; carry if it has none (0, EGG...). Preserves bc and de.
-	assert NUM_POKEMON < $100, "palette overrides are keyed by an 8-bit species index"
+; The store is keyed by species index (16-bit), since 8-bit IDs don't last
+; between sessions: an entry is the key's low byte, then flags with the key's
+; high byte in bits 2-7 (MON_PAL_FLAG_* in bits 0-1).
+; MonPalEdit_Key: a = species ID -> de = its key; carry if it has none (0,
+; EGG...). Preserves bc and hl.
+	assert NUM_POKEMON < $4000, "palette override keys keep 6 high bits"
 MonPalEdit_Key:
 	and a
 	jr z, .none
 	cp MON_TABLE_MINIMUM_RESERVED_INDEX
 	jr nc, .none
+	push hl
 	call GetPokemonIndexFromID
-	ld a, h
+	ld d, h
+	ld e, l
+	pop hl
 	and a
-	jr nz, .none
-	ld a, l
-	ret ; (carry clear)
+	ret
 .none
 	scf
 	ret
@@ -215,12 +222,13 @@ MonPalEdit_EntryPtr:
 	ret c
 	; fallthrough
 
-; Input: a = species key.
+; Input: de = species key.
 MonPalEdit_EntryPtrByKey:
-	cp NUM_POKEMON + 1
-	jr nc, .none
-	ld e, a
-	ld d, 0
+	ld a, LOW(NUM_POKEMON)
+	sub e
+	ld a, HIGH(NUM_POKEMON)
+	sbc d
+	jr c, .none
 	ld hl, wMonPalOverrideSlots
 	add hl, de
 	ld a, [hl]
@@ -244,6 +252,23 @@ MonPalEdit_EntryPtrByKey:
 	scf
 	ret
 
+MonPalEdit_IsEditable:
+; a = species ID: nz if it can be recoloured (not an egg, and a species the
+; colour picker can show: index below 256).
+	cp EGG
+	ret z
+	push hl
+	call GetPokemonIndexFromID
+	ld a, h
+	pop hl
+	and a
+	jr nz, .no
+	or 1
+	ret
+.no
+	xor a
+	ret
+
 ; Create an entry for wCurPartySpecies if it does not have one. Returns
 ; carry if the store is full and the species is new.
 MonPalEdit_EnsureEntry:
@@ -252,11 +277,11 @@ MonPalEdit_EnsureEntry:
 	ld a, [wCurPartySpecies]
 	call MonPalEdit_Key
 	jr c, .full ; (no key: can't have an entry)
-	ld b, a
 	ld a, BANK(wMonPalOverrideSlots)
 	ldh [rSVBK], a
-	ld a, b
+	push de
 	call MonPalEdit_EntryPtrByKey
+	pop de
 	jr nc, .done
 	ld a, [wMonPalOverrideCount]
 	cp MAX_MON_PAL_OVERRIDES
@@ -264,6 +289,7 @@ MonPalEdit_EnsureEntry:
 	ld c, a
 	inc a
 	ld [wMonPalOverrideCount], a
+	push de
 	; hl = wMonPalOverrideEntries + c * MON_PAL_OVERRIDE_SIZE
 	ld a, c
 	ld l, a
@@ -276,18 +302,20 @@ MonPalEdit_EnsureEntry:
 	add hl, de
 	ld de, wMonPalOverrideEntries
 	add hl, de
-	; species and flags
-	ld a, b
+	pop de
+	; key low byte; flags (none yet) with the key's high byte in bits 2-7
+	ld a, e
 	ld [hli], a
-	xor a
+	ld a, d
+	add a
+	add a
 	ld [hli], a
 	; start from the default ROM palettes
+	push de
 	ld d, h
 	ld e, l
+	pop hl ; the key: the species' index
 	push bc
-	ld a, b
-	ld l, a
-	ld h, 0
 	add hl, hl
 	add hl, hl
 	add hl, hl
@@ -436,7 +464,7 @@ MonPaletteEditor::
 
 .selected
 	ld a, [wCurPartySpecies]
-	cp EGG
+	call MonPalEdit_IsEditable
 	jr nz, .not_egg
 	; Eggs cannot be recoloured. Put the map and speech textbox back so
 	; the script can explain why.
@@ -513,7 +541,8 @@ MonPaletteEditor::
 ; palette as the starting point.
 MonPalEdit_Begin:
 	ld a, [wCurPartySpecies]
-	call MonPalEdit_Key ; (the picker goes by species index)
+	call MonPalEdit_Key ; (the picker goes by species index: below 256 here)
+	ld a, e
 	dec a
 	ld [wDebugColorCurMon], a
 	xor a
@@ -605,7 +634,7 @@ MonPaletteReset::
 	farcall SelectMonFromParty
 	ret c                      ; carry set = cancelled (wScriptVar stays 0)
 	ld a, [wCurPartySpecies]
-	cp EGG
+	call MonPalEdit_IsEditable
 	jr nz, .not_egg
 	; Eggs have no editable colours to reset.
 	ld a, 3
@@ -625,6 +654,7 @@ MonPaletteReset::
 	jr c, .at_default
 	; Mark the entry for removal and compact the store.
 	xor a
+	ld [hli], a
 	ld [hl], a
 	call MonPalOverrides_RemoveMarked
 	pop af

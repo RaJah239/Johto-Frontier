@@ -1,3 +1,28 @@
+CountSetBits16::
+; Count the set bits in the b bytes at hl (the dex flags: more than 255 can
+; be set): hl = the count, also big-endian in wSpeciesNumberBuffer, for
+; PrintNum. Clobbers af, bc and de.
+	ld de, 0
+.next
+	ld a, [hli]
+	ld c, 8
+.count
+	srl a
+	jr nc, .not_set
+	inc de
+.not_set
+	dec c
+	jr nz, .count
+	dec b
+	jr nz, .next
+	ld a, d
+	ld [wSpeciesNumberBuffer], a
+	ld a, e
+	ld [wSpeciesNumberBuffer + 1], a
+	ld h, d
+	ld l, e
+	ret
+
 CountSetBits::
 ; Count the number of set bits in b bytes starting from hl.
 ; Return in a, c and [wNumSetBits].

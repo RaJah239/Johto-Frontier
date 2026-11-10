@@ -237,10 +237,10 @@ TrainerCard_Page1_PrintDexCaught_GameTime:
 	call PlaceString
 	ld hl, wPokedexCaught
 	ld b, wEndPokedexCaught - wPokedexCaught
-	call CountSetBits
-	ld de, wNumSetBits
+	call CountSetBits16
+	ld de, wSpeciesNumberBuffer
 	hlcoord 15, 10
-	lb bc, 1, 3
+	lb bc, 2, 3
 	call PrintNum
 
 ; Check if Battle Points have been unlocked, else skip

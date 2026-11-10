@@ -113,10 +113,17 @@ Pokedex_InitGridScreen::
 	; the selected index is the listing position (the dex entry screen's
 	; up/down may have moved it)
 	ld a, [wDexListingScrollOffset]
-	ld hl, wDexListingCursor
-	add [hl]
+	ld l, a
+	ld a, [wDexListingScrollOffset + 1]
+	ld h, a
+	ld a, [wDexListingCursor]
+	add l
+	ld l, a
+	adc h
+	sub l
+	ld h, a
 	call DexGrid_ClampIndex
-	ld [wDexGridIndex], a
+	call DexGrid_SetIndex
 	call DexGrid_ScrollToIndex
 
 	call DexGrid_LoadStaticGFX
@@ -257,16 +264,79 @@ DexGrid_Leave:
 ; Cursor and list position
 ; ---------------------------------------------------------------------------
 
-DexGrid_ClampIndex:
-; a = index -> a = index clamped to the list (0 if the list is empty).
-	ld b, a
+DexGrid_GetIndex:
+; hl = [wDexGridIndex]
+	ld a, [wDexGridIndex]
+	ld l, a
+	ld a, [wDexGridIndex + 1]
+	ld h, a
+	ret
+
+DexGrid_SetIndex:
+; [wDexGridIndex] = hl
+	ld a, l
+	ld [wDexGridIndex], a
+	ld a, h
+	ld [wDexGridIndex + 1], a
+	ret
+
+DexGrid_InList:
+; carry if list position hl is in the list. Preserves bc, de and hl.
+	push bc
 	ld a, [wDexListingEnd]
-	and a
-	ret z
-	dec a
-	cp b
-	ret c ; past the end: last entry
-	ld a, b
+	ld c, a
+	ld a, [wDexListingEnd + 1]
+	ld b, a
+	ld a, l
+	sub c
+	ld a, h
+	sbc b
+	pop bc
+	ret
+
+DexGrid_ClampIndex:
+; hl = list position -> hl clamped to the list (0 if the list is empty).
+; Preserves bc and de.
+	push de
+	ld a, [wDexListingEnd]
+	ld e, a
+	ld a, [wDexListingEnd + 1]
+	ld d, a
+	or e
+	jr z, .empty
+	dec de ; the last position
+	ld a, e
+	sub l
+	ld a, d
+	sbc h
+	jr nc, .done
+	ld h, d
+	ld l, e ; past the end: the last one
+.done
+	pop de
+	ret
+
+.empty
+	ld hl, 0
+	pop de
+	ret
+
+DexGrid_IndexRowCol:
+; hl = list position -> c = its row (hl / 5), a = its column (hl % 5).
+; Preserves b, de and hl.
+	push hl
+	ld c, -1
+.loop
+	inc c
+	ld a, l
+	sub DEXGRID_COLS
+	ld l, a
+	jr nc, .loop
+	dec h
+	bit 7, h
+	jr z, .loop
+	add DEXGRID_COLS
+	pop hl
 	ret
 
 DexGrid_DivMod5:
@@ -281,17 +351,21 @@ DexGrid_DivMod5:
 
 DexGrid_NumRows:
 ; a = rows in the list (at least 1). Preserves b, de, hl.
+	push hl
+	push bc
 	ld a, [wDexListingEnd]
-	add DEXGRID_COLS - 1
-	jr c, .big
-	call DexGrid_DivMod5
+	ld l, a
+	ld a, [wDexListingEnd + 1]
+	ld h, a
+	ld bc, DEXGRID_COLS - 1
+	add hl, bc
+	call DexGrid_IndexRowCol
 	ld a, c
+	pop bc
+	pop hl
 	and a
 	ret nz
 	inc a
-	ret
-.big
-	ld a, (255 + DEXGRID_COLS - 1) / DEXGRID_COLS
 	ret
 
 DexGrid_MaxTopRow:
@@ -304,8 +378,8 @@ DexGrid_MaxTopRow:
 
 DexGrid_ScrollToIndex:
 ; Make the row of wDexGridIndex visible, keeping the top row if it already is.
-	ld a, [wDexGridIndex]
-	call DexGrid_DivMod5 ; c = row
+	call DexGrid_GetIndex
+	call DexGrid_IndexRowCol ; c = row
 	ld hl, wDexGridTopRow
 	ld a, c
 	cp [hl]
@@ -329,24 +403,24 @@ DexGrid_ScrollToIndex:
 DexGrid_HandleDPad:
 ; Move the cursor with the D-pad (with key repeat). Carry if it moved.
 	ld a, [wDexListingEnd]
-	and a
+	ld b, a
+	ld a, [wDexListingEnd + 1]
+	or b
 	ret z
-	ld a, [wDexGridIndex]
-	ld d, a
-	call DexGrid_DivMod5
+	call DexGrid_GetIndex
+	call DexGrid_IndexRowCol
 	ld e, a ; column
 	ld b, c ; row
-	ld hl, hJoyLast
-	ld a, [hl]
+	ldh a, [hJoyLast]
 	and D_RIGHT
 	jr nz, .right
-	ld a, [hl]
+	ldh a, [hJoyLast]
 	and D_LEFT
 	jr nz, .left
-	ld a, [hl]
+	ldh a, [hJoyLast]
 	and D_UP
 	jr nz, .up
-	ld a, [hl]
+	ldh a, [hJoyLast]
 	and D_DOWN
 	jr nz, .down
 	and a
@@ -356,10 +430,8 @@ DexGrid_HandleDPad:
 	ld a, e
 	cp DEXGRID_COLS - 1
 	jr nc, .no
-	ld a, d
-	inc a
-	ld hl, wDexListingEnd
-	cp [hl]
+	inc hl
+	call DexGrid_InList
 	jr nc, .no
 	jr .moved
 
@@ -367,14 +439,15 @@ DexGrid_HandleDPad:
 	ld a, e
 	and a
 	jr z, .no
-	ld a, d
-	dec a
+	dec hl
 	jr .moved
 
 .up
-	ld a, d
-	sub DEXGRID_COLS
-	jr c, .no
+	ld a, b
+	and a
+	jr z, .no ; the top row
+	ld de, -DEXGRID_COLS
+	add hl, de
 	jr .moved
 
 .down
@@ -384,13 +457,13 @@ DexGrid_HandleDPad:
 	cp b
 	jr z, .no
 	jr c, .no
-	ld a, d
-	add DEXGRID_COLS
+	ld de, DEXGRID_COLS
+	add hl, de
 	call DexGrid_ClampIndex
 	; fallthrough
 
 .moved
-	ld [wDexGridIndex], a
+	call DexGrid_SetIndex
 	call DexGrid_ScrollToIndex
 	scf
 	ret
@@ -402,73 +475,45 @@ DexGrid_HandleDPad:
 DexGrid_SetListingFromIndex:
 ; Keep wDexListingScrollOffset + wDexListingCursor = wDexGridIndex, in the
 ; form the listing code (and the dex entry screen's up/down) expects.
-	ld a, [wDexListingEnd]
-	ld c, a
-	ld a, [wDexGridIndex]
-	ld b, a
-	ld a, c
-	cp 8
-	jr c, .one_page
-	sub 7 ; highest scroll offset
-	cp b
-	jr c, .near_end
-	ld a, b
-	ld [wDexListingScrollOffset], a
-	xor a
-	ld [wDexListingCursor], a
-	ret
-
-.near_end
-	ld [wDexListingScrollOffset], a
-	ld c, a
-	ld a, b
-	sub c
-	ld [wDexListingCursor], a
-	ret
-
-.one_page
-	xor a
-	ld [wDexListingScrollOffset], a
-	ld a, b
-	ld [wDexListingCursor], a
-	ret
+	call DexGrid_GetIndex
+	ld a, BANK(Pokedex_SetListingPosition)
+	ld de, Pokedex_SetListingPosition
+	jmp FarCall_de
 
 DexGrid_GetIndexSpecies:
 ; a = the species at wDexGridIndex (0 if none).
-	ld a, [wDexGridIndex]
+	call DexGrid_GetIndex
 	; fallthrough
 
 DexGrid_GetListSpecies:
-; a = list index -> a = species there (0 past the end). Preserves bc.
-	ld hl, wDexListingEnd
-	cp [hl]
-	jr nc, .none
-	ld e, a
-	ld d, 0
-	ld hl, wPokedexOrder
-	add hl, de
-	ld a, [hl] ; (a species' 16-bit index, below 256)
-	and a
+; hl = list position -> a = the species' 8-bit ID there (0 past the end).
+; Preserves bc.
+	push de
+	ld a, BANK(Pokedex_GetListIndex)
+	ld de, Pokedex_GetListIndex
+	call FarCall_de
+	pop de
+	ld a, h
+	or l
 	ret z
-	ld l, a
-	ld h, 0
 	jmp GetPokemonIDFromIndex
-
-.none
-	xor a
-	ret
 
 DexGrid_GetCellSpecies:
 ; a = cell (0-14) -> a = species shown there (0 if none). Preserves b.
 	ld c, a
 	ld a, [wDexGridTopRow]
-	ld e, a
-	add a
-	add a
-	add e ; top row * 5
-	add c
-	jr nc, DexGrid_GetListSpecies
-	xor a
+	ld l, a
+	ld h, 0
+	ld d, h
+	ld e, l
+	add hl, hl
+	add hl, hl
+	add hl, de ; top row * 5
+	ld e, c
+	add hl, de
+	push bc
+	call DexGrid_GetListSpecies
+	pop bc
 	ret
 
 DexGrid_IsSeen:
@@ -501,16 +546,14 @@ DexGrid_CheckFlag:
 	ret
 
 DexGrid_CountFlags:
-; a = number of set bits in the b bytes at hl (WRAM bank 1).
+; hl = number of set bits in the b bytes at hl (WRAM bank 1).
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wPokedexSeen)
 	ldh [rSVBK], a
-	call CountSetBits
-	ld b, a
+	call CountSetBits16
 	pop af
 	ldh [rSVBK], a
-	ld a, b
 	ret
 
 DexGrid_GetName:
@@ -1534,6 +1577,51 @@ DexGrid_LoadVWFGlyph:
 	ld a, BANK(VWFWidths)
 	jmp GetFarByte
 
+DexGrid_SpeciesNumberString:
+; a = species ID -> wDexGridNumBuf = its No. (its 16-bit index), as below.
+; Preserves de.
+	push de
+	call GetPokemonIndexFromID
+	call DexGrid_NumberString16
+	pop de
+	ret
+
+DexGrid_NumberString16:
+; hl = number (below 1000) -> wDexGridNumBuf = 3 digits with leading zeros + "@"
+	ld de, wDexGridNumBuf
+	ld c, 100
+	call .digit
+	ld c, 10
+	call .digit
+	ld a, l
+	add "0"
+	ld [de], a
+	inc de
+	ld a, "@"
+	ld [de], a
+	ret
+
+.digit
+	ld b, "0"
+.digit_loop
+	ld a, l
+	sub c
+	ld l, a
+	ld a, h
+	sbc 0
+	jr c, .digit_done
+	ld h, a
+	inc b
+	jr .digit_loop
+.digit_done
+	ld a, l
+	add c
+	ld l, a
+	ld a, b
+	ld [de], a
+	inc de
+	ret
+
 DexGrid_NumberString:
 ; a = number -> wDexGridNumBuf = 3 digits with leading zeros + "@"
 	ld hl, wDexGridNumBuf
@@ -1616,7 +1704,7 @@ DexGrid_DrawTop:
 	ld a, DEXGRID_TOP_W
 	call DexGrid_SetCanvas
 	ld a, [wDexGridSpecies]
-	call DexGrid_NumberString
+	call DexGrid_SpeciesNumberString
 	ld hl, wDexGridNumBuf
 	lb de, 92 - DEXGRID_TOP_X, 0
 	ld c, 3
@@ -1683,9 +1771,9 @@ DexGrid_DrawCounts:
 	jmp DexGrid_Upload
 
 .count
-; a = count, right-aligned in a 3-digit field from x = d
+; hl = count, right-aligned in a 3-digit field from x = d
 	push de
-	call DexGrid_NumberString
+	call DexGrid_NumberString16
 	pop de
 	ld hl, wDexGridNumBuf
 	ld c, 2 ; the last digit always shows
@@ -1854,7 +1942,7 @@ DexGrid_RenderStrips:
 	ld a, b
 	ld [wDexGridColor], a
 	ld a, [wDexGridCellSpecies]
-	call DexGrid_NumberString
+	call DexGrid_SpeciesNumberString
 	call DexGrid_CellLeft
 	add 28
 	ld d, a

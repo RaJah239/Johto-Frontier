@@ -614,17 +614,17 @@ _GetMonPalettePointer:
 	ld l, a
 	ld h, 0
 	ld de, ReservedMonPalettes
-	ld b, 0 ; no override key
+	xor a ; no override key
+	ld [wSpeciesNumberBuffer], a
+	ld [wSpeciesNumberBuffer + 1], a
 	jr .got_entry
 .species
 	call GetPokemonIndexFromID ; (0 stays 0: the "?" palette)
-	; b = the override key: the species' index (0: none, e.g. above 255)
-	ld b, l
+	; the override key: the species' index
+	ld a, l
+	ld [wSpeciesNumberBuffer], a
 	ld a, h
-	and a
-	jr z, .got_key
-	ld b, 0
-.got_key
+	ld [wSpeciesNumberBuffer + 1], a
 	ld de, PokemonPalettes
 .got_entry
 	add hl, hl
@@ -636,15 +636,19 @@ _GetMonPalettePointer:
 	push af
 	ld a, BANK(wMonPalOverrideSlots)
 	ldh [rSVBK], a
-	; The overrides are keyed by species index (b); species without one
+	; The overrides are keyed by species index; species without one
 	; (e.g. EGG) fall back to the ROM palette.
-	ld a, b
-	and a
-	jr z, .no_override
-	cp NUM_POKEMON + 1
-	jr nc, .no_override
+	ld a, [wSpeciesNumberBuffer]
 	ld e, a
-	ld d, 0
+	ld a, [wSpeciesNumberBuffer + 1]
+	ld d, a
+	or e
+	jr z, .no_override
+	ld a, LOW(NUM_POKEMON)
+	sub e
+	ld a, HIGH(NUM_POKEMON)
+	sbc d
+	jr c, .no_override
 	ld hl, wMonPalOverrideSlots
 	add hl, de
 	ld a, [hl]
