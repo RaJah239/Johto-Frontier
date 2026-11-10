@@ -771,6 +771,45 @@ EncodeBufferMon:
 ; Encodes party_struct wBufferMon in-place to savemon_struct wEncodedBufferMon.
 ; Bytes identical to both structs do not need encoding.
 
+	; Storage keeps 16-bit species and move indexes, not 8-bit IDs (which
+	; only mean something while the game is running): the species' low byte
+	; in Species, its high byte in AltSpecies (bit 7: it's an egg), the
+	; moves' low bytes in Moves and their high bytes in the 4 padding bytes
+	; after the EVs.
+	ld a, [wBufferMonSpecies]
+	call GetPokemonIndexFromID
+	ld a, l
+	ld [wBufferMonSpecies], a
+	ld b, h
+	ld a, [wBufferMonAltSpecies]
+	cp EGG
+	ld a, b
+	jr nz, .not_egg
+	or $80
+.not_egg
+	ld [wBufferMonAltSpecies], a
+	ld hl, wBufferMonMoves
+	ld de, wBufferMonPadding
+	ld b, NUM_MOVES
+.move_loop
+	ld a, [hl]
+	and a
+	jr z, .no_move
+	push hl
+	call GetMoveIndexFromID
+	ld a, h
+	ld [de], a
+	ld a, l
+	pop hl
+	jr .got_move
+.no_move
+	ld [de], a
+.got_move
+	ld [hli], a
+	inc de
+	dec b
+	jr nz, .move_loop
+
 	; Convert 4 PP bytes to 1 PP Up byte.
 	ld hl, wBufferMonPP
 	ld b, NUM_MOVES
@@ -979,14 +1018,59 @@ DecodeBufferMon:
 	jr nz, .pp_loop
 
 	pop af
-	jr z, SetTempPartyMonData
+	jr nz, .bad_egg
+	call BufferMonIndexesToIDs
+	jmp SetTempPartyMonData
 
+.bad_egg
 	ld hl, BadEgg
 	ld de, wBufferMon
 	ld bc, BadEggEnd - BadEgg
 	call CopyBytes
+	call BufferMonIndexesToIDs
 	call SetTempPartyMonData
 	scf
+	ret
+
+BufferMonIndexesToIDs:
+; The reverse of the start of EncodeBufferMon: species and move 16-bit
+; indexes (as stored) -> 8-bit IDs.
+	ld a, [wBufferMonAltSpecies]
+	and $7f
+	ld h, a
+	ld a, [wBufferMonSpecies]
+	ld l, a
+	call GetPokemonIDFromIndex
+	ld [wBufferMonSpecies], a
+	ld b, a
+	ld a, [wBufferMonAltSpecies]
+	add a ; carry: egg
+	ld a, b
+	jr nc, .got_alt_species
+	ld a, EGG
+.got_alt_species
+	ld [wBufferMonAltSpecies], a
+	ld hl, wBufferMonMoves
+	ld de, wBufferMonPadding
+	ld b, NUM_MOVES
+.move_loop
+	push de
+	push hl
+	ld a, [de]
+	ld l, [hl]
+	ld h, a
+	or l
+	jr z, .no_move ; (a = 0)
+	call GetMoveIDFromIndex
+.no_move
+	pop hl
+	pop de
+	ld [hli], a
+	xor a
+	ld [de], a ; the padding is 0 again
+	inc de
+	dec b
+	jr nz, .move_loop
 	ret
 
 INCLUDE "data/pc/bad_egg.asm"

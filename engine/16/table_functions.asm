@@ -98,9 +98,14 @@ PokemonTableGarbageCollection:
 	___conversion_bitmap_check_structs wOTPartyMons, PARTYMON_STRUCT_LENGTH, PARTY_LENGTH, .set_bit
 	___conversion_bitmap_check_structs wRoamMon1Species, wRoamMon2 - wRoamMon1, 3, .set_bit
 	___conversion_bitmap_check_structs wBugContestFirstPlaceMon, wBugContestSecondPlaceMon - wBugContestFirstPlaceMon, 3, .set_bit
+	; Bill's PC icons (species IDs of the box and party on screen); outside the
+	; PC this union holds other data, and marking its bytes in use is harmless
+	___conversion_bitmap_check_structs wBillsPC_PartyList, 1, PARTY_LENGTH, .set_bit
+	___conversion_bitmap_check_structs wBillsPC_BoxList, 1, MONS_PER_BOX, .set_bit
+	___conversion_bitmap_check_values .set_bit, wBillsPC_HeldIcon, wBillsPC_QuickIcon
 	___conversion_bitmap_check_values .set_bit, wEggMonSpecies, wBufferMonSpecies, wTempMonSpecies, wContestMonSpecies, \
 	                                            wBattleMonSpecies, wEnemyMonSpecies, wOddEggSpecies, wBaseDexNo, \
-	                                            wCurPartySpecies, wCurSpecies, wTempSpecies
+	                                            wCurPartySpecies, wCurSpecies, wTempSpecies, wScriptVar
 	pop af
 	ldh [rSVBK], a
 	___conversion_bitmap_free_unused wPokemonIndexTable, MON_TABLE
