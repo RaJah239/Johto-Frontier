@@ -3919,3 +3919,4 @@ wDexGridPicSource:: dw
 SECTION "16-bit GC Counter", WRAM0
 
 wTempLoopCounter:: db ; garbage collector loop counter (engine/16)
+wSpeciesNumberBuffer:: dw ; PrintSpeciesNumber: a 16-bit species index, big-endian

@@ -77,8 +77,7 @@ AnimateHallOfFame:
 	ld hl, wHallOfFameTempMon1
 	ld bc, wHallOfFameTempMon1End - wHallOfFameTempMon1
 	call AddNTimes
-	ld a, [hl]
-	cp -1
+	call IsHOFMonEnd
 	jr z, .done
 	push hl
 	call AnimateHOFMonEntrance
@@ -150,6 +149,11 @@ GetHallOfFameParty:
 	ld hl, MON_SPECIES
 	add hl, bc
 	ld a, [hl]
+	call GetPokemonIndexFromID ; (the Hall of Fame keeps 16-bit indexes)
+	ld a, l
+	ld [de], a
+	inc de
+	ld a, h
 	ld [de], a
 	inc de
 
@@ -197,8 +201,29 @@ GetHallOfFameParty:
 	jr .next
 
 .done
-	ld a, -1
+	ld a, -1 ; (dw -1)
 	ld [de], a
+	inc de
+	ld [de], a
+	ret
+
+IsHOFMonEnd:
+; hl = a hof_mon: z if its species is dw -1 (the end of the team). Keeps hl.
+	ld a, [hli]
+	and [hl]
+	dec hl
+	inc a
+	ret
+
+GetHOFMonSpecies:
+; hl = a hof_mon's dw species index: a = its 8-bit ID, hl = past it
+	ld a, [hli]
+	push hl
+	ld h, [hl]
+	ld l, a
+	call GetPokemonIDFromIndex
+	pop hl
+	inc hl
 	ret
 
 AnimateHOFMonEntrance:
@@ -206,7 +231,7 @@ AnimateHOFMonEntrance:
 	call ClearBGPalettes
 	farcall ResetDisplayBetweenHallOfFameMons
 	pop hl
-	ld a, [hli]
+	call GetHOFMonSpecies
 	ld [wTempMonSpecies], a
 	ld [wCurPartySpecies], a
 	inc hl
@@ -331,8 +356,7 @@ _HallOfFamePC:
 	ld hl, wHallOfFameTempMon1
 	ld bc, wHallOfFameTempMon1End - wHallOfFameTempMon1
 	call AddNTimes
-	ld a, [hl]
-	cp -1
+	call IsHOFMonEnd
 	jr nz, .okay
 
 .fail
@@ -414,7 +438,7 @@ LoadHOFTeam:
 DisplayHOFMon:
 	xor a
 	ldh [hBGMapMode], a
-	ld a, [hli]
+	call GetHOFMonSpecies
 	ld [wTempMonSpecies], a
 	ld a, [hli]
 	ld [wTempMonID], a
@@ -443,7 +467,6 @@ DisplayHOFMon:
 	call Textbox
 	ld a, [wTempMonSpecies]
 	ld [wCurPartySpecies], a
-	ld [wTextDecimalByte], a
 	ld hl, wTempMonDVs
 	predef GetUnownLetter
 	xor a
@@ -458,9 +481,8 @@ DisplayHOFMon:
 	ld [hli], a
 	ld [hl], "<DOT>"
 	hlcoord 3, 13
-	ld de, wTextDecimalByte
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
-	call PrintNum
+	ld a, [wCurPartySpecies]
+	call PrintSpeciesNumber
 	call GetBasePokemonName
 	hlcoord 7, 13
 	call PlaceString

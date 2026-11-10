@@ -183,3 +183,21 @@ _CompareSpeciesIndex::
 	pop de
 	pop hl
 	ret
+
+PrintSpeciesNumber::
+; a = species ID, hl = where: print its № (its 16-bit index), three digits with
+; leading zeros. Preserves hl. Clobbers af, bc and de.
+	assert NUM_POKEMON < 1000, "PrintSpeciesNumber prints three digits"
+	push hl
+	call GetPokemonIndexFromID
+	ld a, h
+	ld [wSpeciesNumberBuffer], a
+	ld a, l
+	ld [wSpeciesNumberBuffer + 1], a
+	pop hl
+	push hl
+	ld de, wSpeciesNumberBuffer
+	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
+	call PrintNum
+	pop hl
+	ret

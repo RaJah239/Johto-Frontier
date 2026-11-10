@@ -930,9 +930,12 @@ TrademonStats_WaitBGMap:
 	ret
 
 TrademonStats_PrintSpeciesNumber:
+; de = the species ID
 	hlcoord 10, 0
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
-	call PrintNum
+	ld a, [de]
+	call PrintSpeciesNumber
+	ld bc, 3
+	add hl, bc
 	ld [hl], " "
 	ret
 

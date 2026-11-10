@@ -1906,9 +1906,8 @@ Pokedex_DrawDexEntryScreenBG:
  	ld [hli], a
  	ld a, $e8 ; .
  	ld [hli], a
- 	ld de, wTempSpecies
- 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
- 	call PrintNum
+ 	ld a, [wTempSpecies]
+ 	call PrintSpeciesNumber
  ; up/down arrow indicators
  	hlcoord 19, 0
  	ld [hl], $3f
@@ -2630,9 +2629,8 @@ Pokedex_PrintNumberIfOldMode:
 	push hl
 	ld de, -SCREEN_WIDTH
 	add hl, de
-	ld de, wTempSpecies
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
-	call PrintNum
+	ld a, [wTempSpecies]
+	call PrintSpeciesNumber
 	pop hl
 	ret
 

@@ -367,7 +367,6 @@ StatsScreen_InitUpperHalf:
 	xor a
 	ldh [hBGMapMode], a
 	ld a, [wBaseDexNo]
-	ld [wTextDecimalByte], a
 	ld [wCurSpecies], a
 	hlcoord 8, 0
 	ld [hl], "№"
@@ -375,9 +374,8 @@ StatsScreen_InitUpperHalf:
 	ld [hl], "."
 	inc hl
 	hlcoord 10, 0
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
-	ld de, wTextDecimalByte
-	call PrintNum
+	ld a, [wBaseDexNo]
+	call PrintSpeciesNumber
 	hlcoord 14, 0
 	call PrintLevel
 	ld hl, .NicknamePointers

@@ -272,7 +272,7 @@ MACRO bugcontestwinner
 ENDM
 
 MACRO hof_mon
-\1Species::  db
+\1Species::  dw ; 16-bit index
 \1ID::       dw
 \1DVs::      dw
 \1Level::    db
