@@ -42,3 +42,6 @@ gfx/pokemon/*/*/frames.asm
 *.sn*
 *.sa*
 *.sg1
+
+# bgb configuration file
+*.ini
