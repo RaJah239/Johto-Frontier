@@ -188,10 +188,35 @@ MonPalOverrides_RemoveMarked:
 ; Runtime store access
 ; ----------------------------------------------------------------------
 
-; Input: a = species. Requires SVBK = BANK(wMonPalOverrideSlots).
+; The store is keyed by species index (16-bit index, below 256: asserted),
+; since 8-bit IDs don't last between sessions. MonPalEdit_Key: a = species ID
+; -> a = its key; carry if it has none (0, EGG...). Preserves bc and de.
+	assert NUM_POKEMON < $100, "palette overrides are keyed by an 8-bit species index"
+MonPalEdit_Key:
+	and a
+	jr z, .none
+	cp MON_TABLE_MINIMUM_RESERVED_INDEX
+	jr nc, .none
+	call GetPokemonIndexFromID
+	ld a, h
+	and a
+	jr nz, .none
+	ld a, l
+	ret ; (carry clear)
+.none
+	scf
+	ret
+
+; Input: a = species ID. Requires SVBK = BANK(wMonPalOverrideSlots).
 ; Output: carry set and no valid hl if the species has no entry, else
 ; hl = pointer to its entry.
 MonPalEdit_EntryPtr:
+	call MonPalEdit_Key
+	ret c
+	; fallthrough
+
+; Input: a = species key.
+MonPalEdit_EntryPtrByKey:
 	cp NUM_POKEMON + 1
 	jr nc, .none
 	ld e, a
@@ -225,11 +250,13 @@ MonPalEdit_EnsureEntry:
 	ldh a, [rSVBK]
 	push af
 	ld a, [wCurPartySpecies]
+	call MonPalEdit_Key
+	jr c, .full ; (no key: can't have an entry)
 	ld b, a
 	ld a, BANK(wMonPalOverrideSlots)
 	ldh [rSVBK], a
 	ld a, b
-	call MonPalEdit_EntryPtr
+	call MonPalEdit_EntryPtrByKey
 	jr nc, .done
 	ld a, [wMonPalOverrideCount]
 	cp MAX_MON_PAL_OVERRIDES
@@ -486,6 +513,7 @@ MonPaletteEditor::
 ; palette as the starting point.
 MonPalEdit_Begin:
 	ld a, [wCurPartySpecies]
+	call MonPalEdit_Key ; (the picker goes by species index)
 	dec a
 	ld [wDebugColorCurMon], a
 	xor a

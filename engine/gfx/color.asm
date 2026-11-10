@@ -614,9 +614,17 @@ _GetMonPalettePointer:
 	ld l, a
 	ld h, 0
 	ld de, ReservedMonPalettes
+	ld b, 0 ; no override key
 	jr .got_entry
 .species
 	call GetPokemonIndexFromID ; (0 stays 0: the "?" palette)
+	; b = the override key: the species' index (0: none, e.g. above 255)
+	ld b, l
+	ld a, h
+	and a
+	jr z, .got_key
+	ld b, 0
+.got_key
 	ld de, PokemonPalettes
 .got_entry
 	add hl, hl
@@ -628,12 +636,13 @@ _GetMonPalettePointer:
 	push af
 	ld a, BANK(wMonPalOverrideSlots)
 	ldh [rSVBK], a
-	; Species past the override table (e.g. EGG) have no entry; fall
-	; back to the ROM palette instead of reading out of bounds.
-	ld a, c
+	; The overrides are keyed by species index (b); species without one
+	; (e.g. EGG) fall back to the ROM palette.
+	ld a, b
+	and a
+	jr z, .no_override
 	cp NUM_POKEMON + 1
 	jr nc, .no_override
-	ld a, c
 	ld e, a
 	ld d, 0
 	ld hl, wMonPalOverrideSlots

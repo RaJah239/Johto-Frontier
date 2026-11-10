@@ -81,6 +81,8 @@ DebugColor_InitMonOrTrainerColor:
 	; fallthrough
 
 DebugColor_InitMonColor:
+	; (wDebugColorCurMon is a species' 16-bit index - 1: all below 256)
+	assert NUM_POKEMON < $100
 	ld de, wDebugOriginalColors
 	ld c, NUM_POKEMON + 1
 .loop
@@ -315,8 +317,11 @@ DebugColor_InitScreen:
 	call DebugColor_SetRGBMeter
 	ld a, [wDebugColorCurMon]
 	inc a
+	ld [wTextDecimalByte], a ; (mons: the species' 16-bit index; trainers: the class)
+	ld l, a
+	ld h, 0
+	call GetPokemonIDFromIndex ; (for mons; harmless for trainers)
 	ld [wCurPartySpecies], a
-	ld [wTextDecimalByte], a
 	hlcoord 0, 1
 	ld de, wTextDecimalByte
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
