@@ -72,4 +72,6 @@ AnimObjGFX:
 	anim_obj_gfx 22, AnimObjObjects2GFX
 	anim_obj_gfx  9, AnimObjHit2GFX
 	anim_obj_gfx 28, AnimObjAquaJetGFX
+	anim_obj_gfx 16, AnimObjAuraSphereGFX
+	anim_obj_gfx  4, AnimObjWindBGGFX
 	assert_table_length NUM_BATTLE_ANIM_GFX + 1

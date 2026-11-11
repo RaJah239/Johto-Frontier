@@ -233,6 +233,7 @@ BattleAnimOAMData:
 	battleanimoam $06, 16, .OAMData_AquaJetLarge ; BATTLE_ANIM_OAMSET_AQUA_JET_2
 	battleanimoam $0e, 16, .OAMData_AquaJetLarge ; BATTLE_ANIM_OAMSET_AQUA_JET_3
 	battleanimoam $16, 12, .OAMData_AquaJetSmall ; BATTLE_ANIM_OAMSET_AQUA_JET_4
+	battleanimoam $00,  4, .OAMData_59 ; BATTLE_ANIM_OAMSET_AGILITY_WIND_BG
 	assert_table_length NUM_BATTLE_ANIM_OAMSETS
 
 .OAMData_Stats:
