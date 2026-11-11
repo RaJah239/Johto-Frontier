@@ -1990,11 +1990,46 @@ BattleAnim_InvertScreenColoursSub:
 	anim_ret
 
 BattleAnim_Avalanche:
-	anim_2gfx BATTLE_ANIM_GFX_ROCKS, BATTLE_ANIM_GFX_ICE
-	anim_setobjpal PAL_BATTLE_OB_BROWN, PAL_BTLCUSTOM_ICE
-	anim_call BattleAnim_RockSlideStub
-	anim_call BattleAnimSub_Ice
-	anim_setobjpal PAL_BATTLE_OB_BROWN, PAL_BTLCUSTOM_ICE
+	anim_setobjpal PAL_BATTLE_OB_BROWN, PAL_BTLCUSTOM_SNOW
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_SNOW
+	anim_2gfx BATTLE_ANIM_GFX_ROCKS, ANIM_GFX_SMOKE_PUFF
+	anim_sound 0, 1, SFX_MEGA_PUNCH
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_Y, $c0, $1, $0
+	anim_bgp $90
+	anim_obj BATTLE_ANIM_OBJ_AVALANCHE_SMALL, 134, 250, $10
+	anim_wait 2
+	anim_obj BATTLE_ANIM_OBJ_SNOW_FALL, 110, 20, $12
+	anim_wait 2
+.loop
+	anim_obj BATTLE_ANIM_OBJ_AVALANCHE_SMALL, 122, 250, $12
+	anim_wait 2
+	anim_obj BATTLE_ANIM_OBJ_SNOW_FALL, 142, 20, $0e
+	anim_wait 2
+	anim_sound 0, 1, SFX_TACKLE
+	anim_obj BATTLE_ANIM_OBJ_AVALANCHE_BIG, 144, 250, $0e
+	anim_wait 2
+	anim_obj BATTLE_ANIM_OBJ_SNOW_FALL, 118, 20, $11
+	anim_wait 2
+	anim_sound 0, 1, SFX_TACKLE
+	anim_obj BATTLE_ANIM_OBJ_AVALANCHE_SMALL, 154, 250, $0f
+	anim_wait 2
+	anim_obj BATTLE_ANIM_OBJ_SNOW_FALL, 130, 20, $10
+	anim_wait 2
+	anim_sound 0, 1, SFX_TACKLE
+	anim_obj BATTLE_ANIM_OBJ_AVALANCHE_BIG, 118, 250, $11
+	anim_wait 2
+	anim_obj BATTLE_ANIM_OBJ_SNOW_FALL, 154, 20, $0f
+	anim_wait 2
+	anim_sound 0, 1, SFX_TACKLE
+	anim_obj BATTLE_ANIM_OBJ_AVALANCHE_SMALL, 134, 250, $10
+	anim_wait 2
+	anim_obj BATTLE_ANIM_OBJ_SNOW_FALL, 110, 20, $12
+	anim_wait 2
+	anim_sound 0, 1, SFX_TACKLE
+	anim_loop 4, .loop
+	anim_wait 32
+	anim_setobjpal PAL_BATTLE_OB_BROWN, PAL_BTLCUSTOM_BROWN
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_YELLOW
 	anim_ret
 
 BattleAnim_RockSlide:
