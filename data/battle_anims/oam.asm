@@ -1421,15 +1421,15 @@ endr
 	dbsprite  -2,  -2, 0, 0, $00, $0
 	dbsprite  -1,  -2, 0, 0, $01, $0
 	dbsprite  -2,  -1, 0, 0, $02, $0
-	dbsprite   1,  -2, 0, 0, $01, X_FLIP
-	dbsprite   2,  -2, 0, 0, $00, X_FLIP
-	dbsprite   2,  -1, 0, 0, $02, X_FLIP
-	dbsprite  -2,   1, 0, 0, $02, Y_FLIP
-	dbsprite  -2,   2, 0, 0, $00, Y_FLIP
-	dbsprite  -1,   2, 0, 0, $01, Y_FLIP
-	dbsprite   2,   1, 0, 0, $02, X_FLIP | Y_FLIP
-	dbsprite   1,   2, 0, 0, $01, X_FLIP | Y_FLIP
-	dbsprite   2,   2, 0, 0, $00, X_FLIP | Y_FLIP
+	dbsprite   0,  -2, 0, 0, $01, X_FLIP
+	dbsprite   1,  -2, 0, 0, $00, X_FLIP
+	dbsprite   1,  -1, 0, 0, $02, X_FLIP
+	dbsprite  -2,   0, 0, 0, $02, Y_FLIP
+	dbsprite  -2,   1, 0, 0, $00, Y_FLIP
+	dbsprite  -1,   1, 0, 0, $01, Y_FLIP
+	dbsprite   1,   0, 0, 0, $02, X_FLIP | Y_FLIP
+	dbsprite   0,   1, 0, 0, $01, X_FLIP | Y_FLIP
+	dbsprite   1,   1, 0, 0, $00, X_FLIP | Y_FLIP
 
 .OAMData_IcicleCrash:
 	dbsprite  -1, -1, 0, 0, $00, $0
