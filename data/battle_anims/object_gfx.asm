@@ -82,4 +82,6 @@ AnimObjGFX:
 	anim_obj_gfx 10, AnimObjGlowShadowGFX
 	anim_obj_gfx 14, AnimObjTrickRoomGFX
 	anim_obj_gfx  3, AnimObjObjectsSurprisedGFX
+	anim_obj_gfx  9, AnimObjBugBuzzGFX
+	anim_obj_gfx  9, AnimObjMidGlowClearGFX
 	assert_table_length NUM_BATTLE_ANIM_GFX + 1
