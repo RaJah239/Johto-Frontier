@@ -193,6 +193,9 @@ BattleAnimFrameData:
 	dw .Frameset_BubbleSplash        ; BATTLE_ANIM_FRAMESET_BUBBLE_SPLASH
 	dw .Frameset_ShrinkingGlow       ; BATTLE_ANIM_FRAMESET_SHRINKING_GLOW
 	dw .Frameset_AgilityWindBg       ; BATTLE_ANIM_FRAMESET_AGILITY_WIND_BG
+	dw .Frameset_GunkShot            ; BATTLE_ANIM_FRAMESET_GUNK_SHOT
+	dw .Frameset_InkSplash           ; BATTLE_ANIM_FRAMESET_INK_SPLASH
+	dw .Frameset_MudShot             ; BATTLE_ANIM_FRAMESET_MUD_SHOT
 	dw .Frameset_PoisonJab           ; BATTLE_ANIM_FRAMESET_POISON_JAB
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
@@ -1282,4 +1285,25 @@ BattleAnimFrameData:
 
 .Frameset_AgilityWindBg:
 	oamframe BATTLE_ANIM_OAMSET_AGILITY_WIND_BG,  8
+	oamend
+
+.Frameset_GunkShot:
+	oamwait 20
+	oamframe BATTLE_ANIM_OAMSET_1F, 20
+	oamframe BATTLE_ANIM_OAMSET_EE, 20
+	oamframe BATTLE_ANIM_OAMSET_F3, 10
+	oamwait 4
+	oamframe BATTLE_ANIM_OAMSET_F3, 4
+	oamwait 4
+	oamframe BATTLE_ANIM_OAMSET_F3, 4
+	oamwait 4
+	oamframe BATTLE_ANIM_OAMSET_F3, 4
+	oamdelete
+
+.Frameset_InkSplash:
+	oamframe BATTLE_ANIM_OAMSET_1F, 8
+	oamend
+
+.Frameset_MudShot:
+	oamframe BATTLE_ANIM_OAMSET_EE, 8
 	oamend

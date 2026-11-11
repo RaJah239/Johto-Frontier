@@ -234,6 +234,8 @@ BattleAnimOAMData:
 	battleanimoam $0e, 16, .OAMData_AquaJetLarge ; BATTLE_ANIM_OAMSET_AQUA_JET_3
 	battleanimoam $16, 12, .OAMData_AquaJetSmall ; BATTLE_ANIM_OAMSET_AQUA_JET_4
 	battleanimoam $00,  4, .OAMData_59 ; BATTLE_ANIM_OAMSET_AGILITY_WIND_BG
+	battleanimoam $09,  4, .OAMData_02 ; BATTLE_ANIM_OAMSET_EE
+	battleanimoam $0a,  9, .OAMData_f3 ; BATTLE_ANIM_OAMSET_F3
 	assert_table_length NUM_BATTLE_ANIM_OAMSETS
 
 .OAMData_Stats:
@@ -1280,3 +1282,14 @@ endr
 	dbsprite  -1,   1, 0, 0, $07, $0
 	dbsprite   0,   1, 0, 0, $07, X_FLIP
 	dbsprite   1,   1, 0, 0, $06, X_FLIP
+
+.OAMData_f3:
+	dbsprite  -2, -2, 4, 4, $00, $0
+	dbsprite  -1, -2, 4, 4, $03, $0
+	dbsprite   0, -2, 4, 4, $06, $0
+	dbsprite  -2, -1, 4, 4, $01, $0
+	dbsprite  -1, -1, 4, 4, $04, $0
+	dbsprite   0, -1, 4, 4, $07, $0
+	dbsprite  -2,  0, 4, 4, $02, $0
+	dbsprite  -1,  0, 4, 4, $05, $0
+	dbsprite   0,  0, 4, 4, $08, $0
