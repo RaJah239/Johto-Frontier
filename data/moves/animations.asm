@@ -3452,32 +3452,30 @@ BattleAnim_DiveBomb:
 	anim_ret
 
 BattleAnim_Facade:
-	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_WATER
-	anim_call BattleAnim_TargetObj_1Row
-	anim_bgeffect BATTLE_BG_EFFECT_FLAIL, $0, $1, $0
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, $1, $20
-	anim_wait 8
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_WATER
+	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING, $0, $1, $40
+	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_MISC_2
+	anim_call BattleAnim_TargetObj_2Row
+	anim_bgeffect BATTLE_BG_EFFECT_BOUNCE_DOWN, $0, $1, $0
 	anim_sound 0, 0, SFX_RETURN
-	anim_obj BATTLE_ANIM_OBJ_WATER_GUN, 56, 80, $0
-	anim_wait 14
-	anim_incobj 2
-	anim_clearobjs
-	anim_call BattleAnim_TargetObj_1Row
-	anim_obj BATTLE_ANIM_OBJ_WATER_GUN, 56, 80, $0
-	anim_wait 14
-	anim_incobj 2
-	anim_clearobjs
-	anim_call BattleAnim_TargetObj_1Row
-	anim_obj BATTLE_ANIM_OBJ_WATER_GUN, 56, 80, $0
-	anim_wait 14
-	anim_incobj 2
-	anim_clearobjs
-	anim_call BattleAnim_TargetObj_1Row
-	anim_sound 0, 1, SFX_COMET_PUNCH
-	anim_obj BATTLE_ANIM_OBJ_PUNCH_SHAKE, 136, 48, $0
+	anim_obj BATTLE_ANIM_OBJ_DROPLET_R, 64, 102, $3b
+	anim_obj BATTLE_ANIM_OBJ_DROPLET_L, 44, 102, $24
 	anim_wait 24
-	anim_incbgeffect BATTLE_BG_EFFECT_FLAIL
-	anim_jump BattleAnim_ShowMon_0
+	anim_sound 0, 0, SFX_RETURN
+	anim_obj BATTLE_ANIM_OBJ_DROPLET_R, 64, 82, $3b
+	anim_obj BATTLE_ANIM_OBJ_DROPLET_L, 44, 82, $24
+	anim_wait 24
+	anim_sound 0, 0, SFX_RETURN
+	anim_obj BATTLE_ANIM_OBJ_DROPLET_R, 64, 102, $3b
+	anim_obj BATTLE_ANIM_OBJ_DROPLET_L, 44, 102, $24
+	anim_wait 24
+	anim_incbgeffect BATTLE_BG_EFFECT_BOUNCE_DOWN
+	anim_call BattleAnim_ShowMon_0
+	anim_sound 0, 1, SFX_COMET_PUNCH
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
+	anim_wait 16
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
+	anim_ret
 
 BattleAnim_DefenseCurl:
 	anim_1gfx BATTLE_ANIM_GFX_SHAPES

@@ -78,4 +78,5 @@ AnimObjGFX:
 	anim_obj_gfx 48, AnimObjUTurnGFX
 	anim_obj_gfx 28, AnimObjVoltSwitchGFX
 	anim_obj_gfx 35, AnimObjHit3GFX
+	anim_obj_gfx  5, AnimObjMisc2GFX
 	assert_table_length NUM_BATTLE_ANIM_GFX + 1
