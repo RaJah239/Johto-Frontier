@@ -2946,6 +2946,20 @@ BattleCommand_DamageCalc:
 	ret z
 
 .skip_zero_damage_check
+; don't use dream eater on awake mons
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_DREAM_EATER
+	jr nz, .not_dream_eater
+	ld a, BATTLE_VARS_STATUS_OPP
+	call GetBattleVar
+	and SLP_MASK
+	jr nz, .not_dream_eater
+	ld [wCurDamage], a
+	ld [wCurDamage + 1], a
+	ret
+
+.not_dream_eater
 	xor a ; Not confusion damage
  	ld [wIsConfusionDamage], a
  	; fallthrough
