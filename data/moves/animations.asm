@@ -3663,7 +3663,6 @@ BattleAnim_DefenseCurl:
 
 BattleAnim_SeismicToss:
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GLOBE
-	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BUBBLE
 	anim_1gfx BATTLE_ANIM_GFX_SPEED
 	anim_sound 0, 0, SFX_MENU
 	anim_bgeffect BATTLE_BG_EFFECT_HIDE_MON, $0, BG_EFFECT_USER, $0
@@ -3681,7 +3680,7 @@ BattleAnim_SeismicToss:
 	anim_wait 24
 	anim_clearobjs
 	anim_sound 0, 0, SFX_OUTRAGE
-	anim_obj BATTLE_ANIM_OBJ_SEISMIC_TOSS_UP, 132, 24, $30
+	anim_obj BATTLE_ANIM_OBJ_SEISMIC_TOSS_UP, 132, 48, $30
 	anim_wait 64
 	anim_sound 0, 0, SFX_RAZOR_WIND
 	anim_obj BATTLE_ANIM_OBJ_SEISMIC_TOSS_DOWN, 132, 240, $10
@@ -3693,7 +3692,6 @@ BattleAnim_SeismicToss:
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $4, $10
 	anim_wait 16
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
-	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
 	anim_ret
 
 BattleAnim_ZenHeadbutt:
