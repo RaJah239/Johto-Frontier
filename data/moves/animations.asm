@@ -2079,29 +2079,42 @@ BattleAnim_RockSlideStub:
 
 BattleAnim_IcicleCrash:
 	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_ICE
-	anim_2gfx BATTLE_ANIM_GFX_ICICLECRASH, BATTLE_ANIM_GFX_ICE
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $1, $0
-	anim_sound 0, 1, SFX_STRENGTH
-	anim_obj BATTLE_ANIM_OBJ_ICICLE_CRASH, 120, 64, $40
+	anim_3gfx BATTLE_ANIM_GFX_HIT_2, BATTLE_ANIM_GFX_ICICLECRASH, BATTLE_ANIM_GFX_ICE
+	anim_sound 0, 1, SFX_MEGA_PUNCH
+	anim_obj BATTLE_ANIM_OBJ_ICICLE_CRASH, 128, 250, $10
+	anim_wait 6
+	anim_obj BATTLE_ANIM_OBJ_ICICLE_CRASH, 120, 250, $10
 	anim_wait 2
-	anim_sound 0, 1, SFX_STRENGTH
-	anim_obj BATTLE_ANIM_OBJ_ICICLE_CRASH, 112, 68, $30
-	anim_wait 2
-	anim_sound 0, 1, SFX_STRENGTH
-	anim_obj BATTLE_ANIM_OBJ_ICICLE_CRASH, 142, 68, $30
-	anim_wait 2
-	anim_sound 0, 1, SFX_STRENGTH
-	anim_obj BATTLE_ANIM_OBJ_ICICLE_CRASH, 136, 64, $40
-	anim_wait 2
-	anim_sound 0, 1, SFX_STRENGTH
-	anim_obj BATTLE_ANIM_OBJ_ICICLE_CRASH, 128, 68, $30
-	anim_bgeffect BATTLE_BG_EFFECT_WHITE_HUES, $0, $8, $0
-	anim_wait 40
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 128, 66, $0
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $30, $2, $0
 	anim_obj BATTLE_ANIM_OBJ_ICE_SPLASH, 128, 66, $28
+	anim_obj BATTLE_ANIM_OBJ_ICE_SPLASH, 128, 66, $9c
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_ICICLE_CRASH, 152, 250, $10
+	anim_wait 2
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 120, 66, $0
+	anim_obj BATTLE_ANIM_OBJ_ICE_SPLASH, 120, 66, $28
 	anim_obj BATTLE_ANIM_OBJ_ICE_SPLASH, 120, 66, $9c
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_ICICLE_CRASH, 144, 250, $10
+	anim_wait 2
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 152, 66, $0
 	anim_obj BATTLE_ANIM_OBJ_ICE_SPLASH, 152, 66, $28
 	anim_obj BATTLE_ANIM_OBJ_ICE_SPLASH, 152, 66, $9c
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_ICICLE_CRASH, 136, 250, $10
+	anim_wait 2
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 144, 66, $0
 	anim_obj BATTLE_ANIM_OBJ_ICE_SPLASH, 144, 66, $28
+	anim_obj BATTLE_ANIM_OBJ_ICE_SPLASH, 136, 56, $9c
+	anim_wait 6
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 66, $0
+	anim_obj BATTLE_ANIM_OBJ_ICE_SPLASH, 136, 66, $28
 	anim_obj BATTLE_ANIM_OBJ_ICE_SPLASH, 136, 66, $9c
 	anim_wait 32
 	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
