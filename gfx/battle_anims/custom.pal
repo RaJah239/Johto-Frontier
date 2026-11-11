@@ -207,6 +207,11 @@ if !DEF(MONOCHROME)
 	RGB 19, 28, 28
 	RGB 00, 23, 28
 	RGB 03, 10, 30
+; snow
+	RGB 31, 31, 31
+	RGB 27, 31, 31
+	RGB 20, 27, 31
+	RGB 18, 16, 24
 ; psychoboost2
 	RGB 31, 31, 31
 	RGB 31, 18, 25
