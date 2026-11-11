@@ -47,9 +47,9 @@ PlayersHouseRadioScript:
 if DEF(_DEBUG)
 	opentext
 	; party
-	givepoke PIKACHU, 49, LIGHT_BALL
+	givepoke MAGIKARP, 49, LEFTOVERS
 	; 1st mon moves
-	loadmem wPartyMon1Moves+0, THUNDERBOLT
+	loadmem wPartyMon1Moves+0, ZEN_HEADBUTT
 	loadmem wPartyMon1Moves+1, SPLASH
 	loadmem wPartyMon1Moves+2, LOVELY_KISS
 	loadmem wPartyMon1Moves+3, EXTREMESPEED
