@@ -121,6 +121,7 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_STRING_SHOT         ; 5a
 	const BATTLE_ANIM_OBJ_HAZE                ; 5b
 	const BATTLE_ANIM_OBJ_MIST                ; 5c
+	const BATTLE_ANIM_OBJ_SHOOTING_MIST
 	const BATTLE_ANIM_OBJ_SMOG                ; 5d
 	const BATTLE_ANIM_OBJ_HORN                ; 5f
 	const BATTLE_ANIM_OBJ_NEEDLE              ; 60
