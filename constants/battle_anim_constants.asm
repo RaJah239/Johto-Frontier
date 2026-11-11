@@ -255,6 +255,7 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_DARK_PULSE_SW
 	const BATTLE_ANIM_OBJ_DARK_PULSE_W
 	const BATTLE_ANIM_OBJ_DARK_PULSE_NW
+	const BATTLE_ANIM_OBJ_POISON_JAB
 DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 
 ; DoBattleAnimFrame arguments (see engine/battle_anims/functions.asm)
@@ -345,6 +346,7 @@ DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 	const BATTLE_ANIM_FUNC_RADIAL_MOVE_OUT_VERY_SLOW ; 57
 	const BATTLE_ANIM_FUNC_RADIAL_MOVE_OUT_STATS
 	const BATTLE_ANIM_FUNC_DARK_PULSE
+	const BATTLE_ANIM_FUNC_RADIAL_MOVE_IN
 DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 
 ; BattleAnimFrameData indexes (see data/battle_anims/framesets.asm)

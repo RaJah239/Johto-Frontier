@@ -1410,7 +1410,7 @@ BattleAnim_UpdateOAM_All:
 	ld b, h
 	push hl
 	push de
-	call DoBattleAnimFrame
+	farcall DoBattleAnimFrame
 	call BattleAnimOAMUpdate
 	pop de
 	pop hl

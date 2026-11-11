@@ -381,8 +381,11 @@ INCLUDE "data/moves/animations.asm"
 SECTION "Move Animations", ROMX
 INCLUDE "engine/battle_anims/anim_commands.asm"
 INCLUDE "engine/battle_anims/core.asm"
-INCLUDE "engine/battle_anims/functions.asm"
 INCLUDE "engine/battle_anims/helpers.asm"
+
+
+SECTION "Move Animation Functions", ROMX
+INCLUDE "engine/battle_anims/functions.asm"
 
 
 SECTION "Custom Battle Palettes", ROMX

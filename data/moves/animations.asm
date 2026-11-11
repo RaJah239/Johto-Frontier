@@ -288,25 +288,6 @@ BattleAnim_Confused:
 	anim_wait 96
 	anim_ret
 
-BattleAnim_PoisonJab:
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PURPLE
-	anim_3gfx BATTLE_ANIM_GFX_HORN, BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_POISON
-	anim_obp0 $ef
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $55, $1, $0
-.loop
-	anim_sound 0, 1, SFX_HORN_ATTACK
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 132, 40, $0
-	anim_wait 8
-	anim_sound 0, 1, SFX_HORN_ATTACK
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
-	anim_wait 8
-	anim_sound 0, 1, SFX_HORN_ATTACK
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 126, 50, $0
-	anim_wait 8
-	anim_loop 3, .loop
-	anim_clearobjs
-	anim_obp0 $e4
-	anim_jump BattleAnimSub_Sludge
 
 BattleAnim_Slp:
 BattleAnim_Rest:
@@ -5540,4 +5521,55 @@ BattleAnimSub_SpeedLines:
 	anim_obj BATTLE_ANIM_OBJ_SPEED_LINE, 56, 88, $81
 	anim_obj BATTLE_ANIM_OBJ_SPEED_LINE, 64, 88, $82
 	anim_wait 12
+	anim_ret
+
+BattleAnim_PoisonJab:
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PURPLE
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_PURPLE
+	anim_3gfx BATTLE_ANIM_GFX_OBJECTS_2, BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_POISON
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $2, $0
+.loop1
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_POISON_JAB, 132, 56, $38
+	anim_wait 4
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 140, 44, $0
+	anim_obj BATTLE_ANIM_OBJ_POISON_JAB, 132, 56, $20
+	anim_wait 4
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_POISON_JAB, 132, 56, $8
+	anim_wait 4
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 124, 60, $0
+	anim_obj BATTLE_ANIM_OBJ_POISON_JAB, 132, 56, $10
+	anim_wait 4
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_POISON_JAB, 132, 56, $28
+	anim_wait 4
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 140, 60, $0
+	anim_obj BATTLE_ANIM_OBJ_POISON_JAB, 132, 56, $0
+	anim_wait 4
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_POISON_JAB, 132, 56, $18
+	anim_wait 4
+	anim_sound 0, 1, SFX_KARATE_CHOP
+	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 124, 44, $0
+	anim_obj BATTLE_ANIM_OBJ_POISON_JAB, 132, 56, $30
+	anim_wait 4
+	anim_loop 2, .loop1
+.loop2
+	anim_sound 0, 1, SFX_TOXIC
+	anim_obj BATTLE_ANIM_OBJ_SLUDGE, 132, 72, $0
+	anim_wait 8
+	anim_sound 0, 1, SFX_TOXIC
+	anim_obj BATTLE_ANIM_OBJ_SLUDGE, 116, 72, $0
+	anim_wait 8
+	anim_sound 0, 1, SFX_TOXIC
+	anim_obj BATTLE_ANIM_OBJ_SLUDGE, 148, 72, $0
+	anim_wait 8
+	anim_loop 2, .loop2
+	anim_wait 48
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
 	anim_ret
