@@ -245,6 +245,7 @@ BattleAnimOAMData:
 	battleanimoam $00, 16, .OAMData_VoltSwitch6 ; BATTLE_ANIM_OAMSET_VOLT_SWITCH_6
 	battleanimoam $0f,  1, .OAMData_0f ; BATTLE_ANIM_OAMSET_DISCHARGE_SPARKS_N_1
 	battleanimoam $0e,  1, .OAMData_0f ; BATTLE_ANIM_OAMSET_DISCHARGE_SPARKS_N_2
+	battleanimoam $1f,  4, .OAMData_03 ; BATTLE_ANIM_OAMSET_BULLET_PUNCH
 	assert_table_length NUM_BATTLE_ANIM_OAMSETS
 
 .OAMData_Stats:

@@ -201,6 +201,7 @@ BattleAnimFrameData:
 	dw .Frameset_DischargeSparksN     ; BATTLE_ANIM_FRAMESET_DISCHARGE_SPARKS_N
 	dw .Frameset_EnergyOrbLong       ; BATTLE_ANIM_FRAMESET_ENERGY_ORB_LONG
 	dw .Frameset_LongPunch           ; BATTLE_ANIM_FRAMESET_LONG_PUNCH
+	dw .Frameset_BulletPunch        ; BATTLE_ANIM_FRAMESET_BULLET_PUNCH
 	dw .Frameset_PoisonJab           ; BATTLE_ANIM_FRAMESET_POISON_JAB
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
@@ -1342,3 +1343,14 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_03, 4
 	oamframe BATTLE_ANIM_OAMSET_01, 1
 	oamrestart
+
+.Frameset_BulletPunch:
+	oamframe BATTLE_ANIM_OAMSET_BULLET_PUNCH, 4
+	oamframe BATTLE_ANIM_OAMSET_02, 1
+	oamframe BATTLE_ANIM_OAMSET_BULLET_PUNCH, 4
+	oamframe BATTLE_ANIM_OAMSET_02, 1
+	oamframe BATTLE_ANIM_OAMSET_BULLET_PUNCH, 4
+	oamframe BATTLE_ANIM_OAMSET_02, 1
+	oamframe BATTLE_ANIM_OAMSET_BULLET_PUNCH, 4
+	oamframe BATTLE_ANIM_OAMSET_02, 1
+	oamdelete
