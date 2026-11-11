@@ -249,6 +249,8 @@ BattleAnimOAMData:
 	battleanimoam $02,  2, .OAMData_e0 ; BATTLE_ANIM_OAMSET_E0
 	battleanimoam $00, 12, .OAMData_fb ; BATTLE_ANIM_OAMSET_FB
 	battleanimoam $00,  6, .OAMData_IcicleCrash ; BATTLE_ANIM_OAMSET_ICICLE_CRASH
+	battleanimoam $03,  4, .OAMData_02 ; BATTLE_ANIM_OAMSET_EA
+	battleanimoam $01,  4, .OAMData_02 ; BATTLE_ANIM_OAMSET_EB
 	assert_table_length NUM_BATTLE_ANIM_OAMSETS
 
 .OAMData_Stats:

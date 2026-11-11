@@ -210,6 +210,7 @@ BattleAnimFrameData:
 	dw .Frameset_SlowGrowingGlow     ; BATTLE_ANIM_FRAMESET_SLOW_GROWING_GLOW
 	dw .Frameset_FlashCannonSparks   ; BATTLE_ANIM_FRAMESET_FLASH_CANNON_SPARKS
 	dw .Frameset_IcicleCrash         ; BATTLE_ANIM_FRAMESET_ICICLE_CRASH
+	dw .Frameset_TrickRoom           ; BATTLE_ANIM_FRAMESET_TRICK_ROOM
 	dw .Frameset_PoisonJab           ; BATTLE_ANIM_FRAMESET_POISON_JAB
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
@@ -1417,4 +1418,20 @@ BattleAnimFrameData:
 
 .Frameset_IcicleCrash:
 	oamframe BATTLE_ANIM_OAMSET_ICICLE_CRASH, 32
+	oamdelete
+
+.Frameset_TrickRoom:
+	oamframe BATTLE_ANIM_OAMSET_0F, 1
+	oamframe BATTLE_ANIM_OAMSET_EA, 1
+	oamframe BATTLE_ANIM_OAMSET_0F, 1
+	oamframe BATTLE_ANIM_OAMSET_EA, 1
+	oamframe BATTLE_ANIM_OAMSET_1D, 1
+	oamframe BATTLE_ANIM_OAMSET_EA, 1
+	oamframe BATTLE_ANIM_OAMSET_1D, 1
+	oamframe BATTLE_ANIM_OAMSET_EB, 1
+	oamframe BATTLE_ANIM_OAMSET_1D, 1
+	oamframe BATTLE_ANIM_OAMSET_EB, 1
+	oamframe BATTLE_ANIM_OAMSET_18, 1
+	oamframe BATTLE_ANIM_OAMSET_EB, 1
+	oamframe BATTLE_ANIM_OAMSET_18, 1
 	oamdelete

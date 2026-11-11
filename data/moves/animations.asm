@@ -2386,16 +2386,51 @@ BattleAnim_Amnesia:
 	anim_ret
 
 BattleAnim_TrickRoom:
-	anim_1gfx BATTLE_ANIM_GFX_WIND
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
-	anim_bgeffect BATTLE_BG_EFFECT_ALTERNATE_HUES, $0, $2, $0
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PSYCHO_BOOST_2
+	anim_1gfx BATTLE_ANIM_GFX_TRICK_ROOM
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $6, $0
 	anim_bgeffect BATTLE_BG_EFFECT_PSYCHIC, $0, $0, $0
-	anim_call BattleAnimSub_Agility
 .loop
-	anim_sound 0, 0, SFX_THROW_BALL
-	anim_wait 16
-	anim_loop 4, .loop
+	anim_sound 0, 0, SFX_CHARGE
+	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 80, 72, $0
+	anim_wait 3
+	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 156, 36, $0
+	anim_wait 3
+	anim_sound 0, 0, SFX_CHARGE
+	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 40, 24, $0
+	anim_wait 3
+	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 140, 100, $0
+	anim_wait 3
+	anim_sound 0, 0, SFX_CHARGE
+	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 164, 64, $0
+	anim_wait 3
+	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 48, 66, $0
+	anim_wait 3
+	anim_sound 0, 0, SFX_CHARGE
+	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 102, 86, $0
+	anim_wait 3
+	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 150, 14, $0
+	anim_wait 3
+	anim_sound 0, 0, SFX_CHARGE
+	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 26, 80, $0
+	anim_wait 3
+	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 12, 50, $0
+	anim_wait 3
+	anim_sound 0, 0, SFX_CHARGE
+	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 72, 30, $0
+	anim_wait 3
+	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 110, 62, $0
+	anim_wait 3
+	anim_sound 0, 0, SFX_CHARGE
+	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 170, 94, $0
+	anim_wait 3
+	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 80, 104, $0
+	anim_wait 3
+	anim_loop 2, .loop
+	anim_wait 32
 	anim_incbgeffect BATTLE_BG_EFFECT_PSYCHIC
+	anim_wait 4
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_Splash:
