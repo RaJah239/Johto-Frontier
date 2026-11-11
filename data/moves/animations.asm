@@ -120,25 +120,27 @@ BattleAnim_LeavesStub:
 	anim_ret
 
 BattleAnim_Bulldoze:
+	anim_setobjpal PAL_BATTLE_OB_BROWN, PAL_BTLCUSTOM_SNOW
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_SNOW
 	anim_1gfx BATTLE_ANIM_GFX_HIT
+	anim_sound 0, 1, SFX_MEGA_PUNCH
 	anim_call BattleAnim_TargetObj_2Row
-	anim_bgeffect BATTLE_BG_EFFECT_WITHDRAW, $0, $1, $50
-	anim_wait 4
-	anim_incbgeffect BATTLE_BG_EFFECT_WITHDRAW
-	anim_call BattleAnim_ShowMon_0
-	anim_wait 1
 .loop
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $08, $2, $0
 	anim_sound 0, 1, SFX_SPARK
 	anim_wait 8
 	anim_loop 6, .loop
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $40, $2, $0
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $0, $0
+	anim_clearobjs
+	anim_wait 1
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_Y, $40, $3, $0
 .loop2
 	anim_sound 0, 1, SFX_SPARK
 	anim_wait 4
 	anim_loop 12, .loop2
-	anim_wait 48
-	anim_incbgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X
+	anim_incbgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_Y
+	anim_wait 16
+	anim_setobjpal PAL_BATTLE_OB_BROWN, PAL_BTLCUSTOM_BROWN
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_YELLOW
 	anim_ret
 
 BattleAnim_ThrowPokeBall:
