@@ -567,11 +567,22 @@ BattleAnim_SuperFang:
 	anim_ret
 
 BattleAnim_WillOWisp:
-	anim_2gfx BATTLE_ANIM_GFX_ANGELS, BATTLE_ANIM_GFX_FIRE
-	anim_obj BATTLE_ANIM_OBJ_SPITE, 132, 16, $0
-	anim_sound 0, 1, SFX_SPITE
-	anim_wait 32
-	; fallthrough
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_WILL_O_WISP
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_WILL_O_WISP
+	anim_1gfx BATTLE_ANIM_GFX_FIRE
+	anim_bgp $1b
+	anim_sound 6, 2, SFX_SLUDGE_BOMB
+	anim_obj BATTLE_ANIM_OBJ_DRAGON_RAGE, 64, 92, $0
+	anim_wait 40
+	anim_sound 0, 0, SFX_CURSE
+.loop
+	anim_obj BATTLE_ANIM_OBJ_SACRED_FIRE, 132, 68, $0
+	anim_wait 8
+	anim_loop 4, .loop
+	anim_wait 48
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_RED
+	anim_ret
 
 BattleAnimSub_Fire:
 	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_FIRE
