@@ -1121,13 +1121,13 @@ BattleAnim_DrainPunch:
 .loop
 	anim_sound 6, 3, SFX_WATER_GUN
 	anim_obj BATTLE_ANIM_OBJ_ABSORB_2, 128, 48, $2
-	anim_wait 3
+	anim_wait 2
 	anim_sound 6, 3, SFX_WATER_GUN
 	anim_obj BATTLE_ANIM_OBJ_ABSORB_2, 136, 64, $3
-	anim_wait 4
+	anim_wait 3
 	anim_sound 6, 3, SFX_WATER_GUN
 	anim_obj BATTLE_ANIM_OBJ_ABSORB_2, 136, 32, $4
-	anim_wait 3
+	anim_wait 2
 	anim_loop 6, .loop
 	anim_incobj 1
 	anim_wait 32
