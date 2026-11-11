@@ -1318,27 +1318,24 @@ BattleAnim_Thunder:
 	anim_ret
 
 BattleAnim_AirSlash:
-	anim_2gfx BATTLE_ANIM_GFX_WHIP, BATTLE_ANIM_GFX_HIT
-.loop
-	anim_sound 3, 0, SFX_RAZOR_WIND
-	anim_obj BATTLE_ANIM_OBJ_SONICBOOM_JP, 64, 80, $3
-	anim_wait 8
-	anim_sound 3, 0, SFX_RAZOR_WIND
-	anim_obj BATTLE_ANIM_OBJ_SONICBOOM_JP, 64, 88, $2
-	anim_wait 8
-	anim_sound 3, 0, SFX_RAZOR_WIND
-	anim_obj BATTLE_ANIM_OBJ_SONICBOOM_JP, 64, 96, $4
-	anim_wait 8
-	anim_loop 2, .loop
+	anim_2gfx BATTLE_ANIM_GFX_CUT, BATTLE_ANIM_GFX_WHIP
+	anim_resetobp0
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $0a, $2, $0
+	anim_sound 0, 1, SFX_CUT
+	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 152, 40, $0
+	anim_obj BATTLE_ANIM_OBJ_AIR_SLASH, 144, 40, $28
+	anim_obj BATTLE_ANIM_OBJ_AIR_SLASH, 152, 48, $8
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_AIR_SLASH, 136, 48, $28
+	anim_obj BATTLE_ANIM_OBJ_AIR_SLASH, 144, 56, $8
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_AIR_SLASH, 128, 56, $28
+	anim_obj BATTLE_ANIM_OBJ_AIR_SLASH, 136, 64, $8
+	anim_wait 4
+	anim_obj BATTLE_ANIM_OBJ_AIR_SLASH, 120, 64, $28
+	anim_obj BATTLE_ANIM_OBJ_AIR_SLASH, 128, 72, $8
 	anim_wait 32
-	anim_incobj 1
-	anim_incobj 2
-	anim_incobj 3
-	anim_incobj 4
-	anim_incobj 5
-	anim_incobj 6
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 136, 56, $0
-	anim_wait 16
 	anim_ret
 
 BattleAnim_Gust:

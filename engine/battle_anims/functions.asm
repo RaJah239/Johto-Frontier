@@ -3854,7 +3854,7 @@ BattleAnimFunc_RadialMoveOut_Slow:
 	call BattleAnim_AnonJumptable
 
 	dw InitRadial
-	dw Step_Slow ; for Outrage
+	dw Step_Slow ; for Outrage/Scald steam/Air Slash
 
 InitRadial:
 	ld hl, BATTLEANIMSTRUCT_VAR2
@@ -3876,7 +3876,7 @@ Step_Slow:
 	call Get_Rad_Pos
 	ld hl, 1.5 ; speed
 	call Set_Rad_Pos
-	cp 40 ; final position
+	cp 80 ; final position
 	jp nc, FarDeinitBattleAnimation
 	jr Rad_Move
 
