@@ -71,4 +71,5 @@ AnimObjGFX:
 	anim_obj_gfx 13, AnimObjBigGlowClearGFX
 	anim_obj_gfx 22, AnimObjObjects2GFX
 	anim_obj_gfx  9, AnimObjHit2GFX
+	anim_obj_gfx 28, AnimObjAquaJetGFX
 	assert_table_length NUM_BATTLE_ANIM_GFX + 1

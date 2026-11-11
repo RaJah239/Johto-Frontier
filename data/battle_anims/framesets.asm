@@ -189,6 +189,8 @@ BattleAnimFrameData:
 	dw .Frameset_StatDown            ; BATTLE_ANIM_FRAMESET_STAT_DOWN
 	dw .Frameset_FocusBlast          ; BATTLE_ANIM_FRAMESET_FOCUS_BLAST
 	dw .Frameset_BigGlowClear        ; BATTLE_ANIM_FRAMESET_BIG_GLOW_CLEAR
+	dw .Frameset_AquaJet             ; BATTLE_ANIM_FRAMESET_AQUA_JET
+	dw .Frameset_BubbleSplash        ; BATTLE_ANIM_FRAMESET_BUBBLE_SPLASH
 	dw .Frameset_PoisonJab           ; BATTLE_ANIM_FRAMESET_POISON_JAB
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
@@ -1257,4 +1259,15 @@ BattleAnimFrameData:
 
 .Frameset_PoisonJab:
 	oamframe BATTLE_ANIM_OAMSET_6C, 32
+	oamend
+
+.Frameset_AquaJet:
+	oamframe BATTLE_ANIM_OAMSET_AQUA_JET_1,  1
+	oamframe BATTLE_ANIM_OAMSET_AQUA_JET_2,  1
+	oamframe BATTLE_ANIM_OAMSET_AQUA_JET_3,  1
+	oamframe BATTLE_ANIM_OAMSET_AQUA_JET_4,  1
+	oamdelete
+
+.Frameset_BubbleSplash:
+	oamframe BATTLE_ANIM_OAMSET_20,  8
 	oamend
