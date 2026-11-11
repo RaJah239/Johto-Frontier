@@ -301,6 +301,8 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_POISON_DROPLET
 	const BATTLE_ANIM_OBJ_BUG_BUZZ
 	const BATTLE_ANIM_OBJ_MID_GLOW_SHRINKING
+	const BATTLE_ANIM_OBJ_ICE_SHARD
+	const BATTLE_ANIM_OBJ_ICE_SHARD_MIST
 DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 
 ; DoBattleAnimFrame arguments (see engine/battle_anims/functions.asm)
@@ -394,6 +396,8 @@ DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 	const BATTLE_ANIM_FUNC_RADIAL_MOVE_IN
 	const BATTLE_ANIM_FUNC_PAUSE_THEN_RUSH
 	const BATTLE_ANIM_FUNC_LAST_RESORT
+	const BATTLE_ANIM_FUNC_AIR_CUTTER
+	const BATTLE_ANIM_FUNC_SPIRAL_DESCENT_FAST
 DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 
 ; BattleAnimFrameData indexes (see data/battle_anims/framesets.asm)
@@ -611,6 +615,7 @@ DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 	const BATTLE_ANIM_FRAMESET_POISON_DROPLET
 	const BATTLE_ANIM_FRAMESET_BUG_BUZZ
 	const BATTLE_ANIM_FRAMESET_MID_GLOW_SHRINKING
+	const BATTLE_ANIM_FRAMESET_ICE_LONG
 	const BATTLE_ANIM_FRAMESET_POISON_JAB
 DEF NUM_BATTLE_ANIM_FRAMESETS EQU const_value
 ; framesets from here on get their OAM flip/tile adjusted by BattleAnimVar3 (see core.asm SetDynamicTileData)

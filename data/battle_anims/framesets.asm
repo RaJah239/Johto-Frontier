@@ -214,6 +214,7 @@ BattleAnimFrameData:
 	dw .Frameset_PoisonDroplet       ; BATTLE_ANIM_FRAMESET_POISON_DROPLET
 	dw .Frameset_BugBuzz             ; BATTLE_ANIM_FRAMESET_BUG_BUZZ
 	dw .Frameset_MidGlowShrinking    ; BATTLE_ANIM_FRAMESET_MID_GLOW_SHRINKING
+	dw .Frameset_IceLong             ; BATTLE_ANIM_FRAMESET_ICE_LONG
 	dw .Frameset_PoisonJab           ; BATTLE_ANIM_FRAMESET_POISON_JAB
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
@@ -1453,3 +1454,9 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_F1, 1
 	oamframe BATTLE_ANIM_OAMSET_F2, 1
 	oamdelete
+
+.Frameset_IceLong:
+	oamframe BATTLE_ANIM_OAMSET_10, 3
+	oamframe BATTLE_ANIM_OAMSET_0F, 3
+	oamframe BATTLE_ANIM_OAMSET_12, 1
+	oamend
