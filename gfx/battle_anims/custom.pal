@@ -152,7 +152,7 @@ if !DEF(MONOCHROME)
 	RGB 31, 31, 31
 	RGB 10, 31, 31
 	RGB 16, 17, 29
-; stat attack (Polished Crystal stat change colours)
+; stat attack
 	RGB 31, 31, 31
 	RGB 31, 19, 08
 	RGB 29, 09, 10
@@ -187,11 +187,16 @@ if !DEF(MONOCHROME)
 	RGB 13, 29, 23
 	RGB 03, 23, 16
 	RGB 00, 18, 12
-; glow yellow (Polished Crystal)
+; glow yellow
 	RGB 31, 31, 31
 	RGB 31, 31, 07
 	RGB 31, 24, 02
 	RGB 31, 16, 01
+; signal beam blue
+	RGB 31, 31, 31
+	RGB 18, 30, 31
+	RGB 04, 22, 31
+	RGB 04, 17, 31
 else
 rept NUM_CUSTOM_BATTLE_PALETTES - 6
 	MONOCHROME_RGB_FOUR
