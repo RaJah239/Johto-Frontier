@@ -236,6 +236,7 @@ BattleAnimOAMData:
 	battleanimoam $00,  4, .OAMData_59 ; BATTLE_ANIM_OAMSET_AGILITY_WIND_BG
 	battleanimoam $09,  4, .OAMData_02 ; BATTLE_ANIM_OAMSET_EE
 	battleanimoam $0a,  9, .OAMData_f3 ; BATTLE_ANIM_OAMSET_F3
+	battleanimoam $20, 16, .OAMData_1c ; BATTLE_ANIM_OAMSET_U_TURN_FALL
 	assert_table_length NUM_BATTLE_ANIM_OAMSETS
 
 .OAMData_Stats:

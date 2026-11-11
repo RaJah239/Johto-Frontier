@@ -196,6 +196,7 @@ BattleAnimFrameData:
 	dw .Frameset_GunkShot            ; BATTLE_ANIM_FRAMESET_GUNK_SHOT
 	dw .Frameset_InkSplash           ; BATTLE_ANIM_FRAMESET_INK_SPLASH
 	dw .Frameset_MudShot             ; BATTLE_ANIM_FRAMESET_MUD_SHOT
+	dw .Frameset_UTurnFall           ; BATTLE_ANIM_FRAMESET_U_TURN_FALL
 	dw .Frameset_PoisonJab           ; BATTLE_ANIM_FRAMESET_POISON_JAB
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
@@ -1306,4 +1307,8 @@ BattleAnimFrameData:
 
 .Frameset_MudShot:
 	oamframe BATTLE_ANIM_OAMSET_EE, 8
+	oamend
+
+.Frameset_UTurnFall:
+	oamframe BATTLE_ANIM_OAMSET_U_TURN_FALL, 32
 	oamend
