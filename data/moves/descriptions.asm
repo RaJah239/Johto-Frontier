@@ -323,6 +323,7 @@ StickyWebDescription:
 	db   "Slows foes when"
 	line "they switch in.@"
 
+WaterfallDescription:
 AirSlashDescription:
 RockSlideDescription:
 LowKickDescription:
@@ -624,10 +625,6 @@ SludgeDescription:
 FireBlastDescription:
 	db   "An attack that"
 	line "may cause a burn.@"
-
-WaterfallDescription:
-	db   "An aquatic charge"
-	line "attack.@"
 
 DisarmVoiceDescription:
 AuraSphereDescription:
