@@ -3062,23 +3062,80 @@ BattleAnim_DragonPulse:
 	anim_jump BattleAnim_CannonSub
 
 BattleAnim_FlashCannon:
-	anim_2gfx BATTLE_ANIM_GFX_GLOW, BATTLE_ANIM_GFX_CHARGE
-	anim_bgeffect BATTLE_BG_EFFECT_ALTERNATE_HUES, $0, $2, $0
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $2, $0
-	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_GRAY
-	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_GRAY
-BattleAnim_CannonSub:
-	anim_obj BATTLE_ANIM_OBJ_SMALL_GLOW, 48, 96, $0
-.loop
-	anim_sound 0, 1, SFX_AEROBLAST
-	anim_obj BATTLE_ANIM_OBJ_DRAGON_PULSE, 64, 88, $4
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_BRIGHT
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_BRIGHT
+	anim_4gfx BATTLE_ANIM_GFX_BIG_GLOW_CLEAR, BATTLE_ANIM_GFX_GLOW, BATTLE_ANIM_GFX_CHARGE, BATTLE_ANIM_GFX_SPEED
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $6, $0
+	anim_sound 0, 1, SFX_MEGA_PUNCH
+	anim_obj BATTLE_ANIM_OBJ_BIG_GLOW_CLEAR, 48, 96, $0
+	anim_wait 8
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $2
+	anim_clearobjs
+	anim_wait 1
+	anim_bgeffect BATTLE_BG_EFFECT_ALTERNATE_HUES, $0, $3, $0
+	anim_obj BATTLE_ANIM_OBJ_PULSING_SPARKLE, 64, 80, $0
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_CHARGE, 48, 96, $00
+	anim_wait 6
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_CHARGE, 48, 96, $30
+	anim_obj BATTLE_ANIM_OBJ_PULSING_SPARKLE, 32, 114, $0
+	anim_wait 6
+	anim_sound 0, 0, SFX_CHARGE
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_CHARGE, 48, 96, $0c
+	anim_obj BATTLE_ANIM_OBJ_PULSING_SPARKLE, 64, 114, $0
+	anim_wait 6
+	anim_sound 0, 0, SFX_CHARGE
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_CHARGE, 48, 96, $24
+	anim_obj BATTLE_ANIM_OBJ_PULSING_SPARKLE, 32, 80, $0
+	anim_wait 6
+	anim_sound 0, 0, SFX_CHARGE
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_CHARGE, 48, 96, $18
+	anim_obj BATTLE_ANIM_OBJ_PULSING_SPARKLE, 48, 96, $0
+	anim_wait 6
+	anim_sound 0, 0, SFX_CHARGE
+	anim_wait 6
+	anim_sound 0, 0, SFX_CHARGE
+	anim_wait 32
+	anim_clearobjs
+	anim_wait 1
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_SIGNAL_BEAM_RED
+	anim_sound 0, 0, SFX_GIGA_DRAIN
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON, 48, 96, $4
+	anim_wait 24
+	anim_sound 0, 0, SFX_AEROBLAST
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $14, $2, $0
+	anim_obj BATTLE_ANIM_OBJ_SHRINKING_GLOW, 140, 44, $0
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_SPARKS_WHITE, 136, 48, $0
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_SPARKS_RED, 136, 48, $28
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_SPARKS_WHITE, 136, 48, $30
+	anim_wait 1
+	anim_sound 0, 0, SFX_METRONOME
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_SPARKS_RED, 136, 48, $38
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_SHRINKING_GLOW, 124, 60, $0
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_SPARKS_WHITE, 136, 48, $20
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_SPARKS_RED, 136, 48, $8
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_SPARKS_WHITE, 136, 48, $18
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_SPARKS_RED, 136, 48, $4
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_SHRINKING_GLOW, 140, 60, $0
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_SPARKS_WHITE, 136, 48, $2b
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_SPARKS_RED, 136, 48, $14
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_SPARKS_WHITE, 136, 48, $3b
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_SPARKS_RED, 136, 48, $24
+	anim_wait 1
+	anim_obj BATTLE_ANIM_OBJ_SHRINKING_GLOW, 124, 44, $0
+	anim_obj BATTLE_ANIM_OBJ_FLASH_CANNON_SPARKS_WHITE, 136, 48, $b
 	anim_wait 4
-	anim_loop 16, .loop
-	anim_incobj 1
-	anim_wait 16
-	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
-	anim_wait 4
-	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
+	anim_obj BATTLE_ANIM_OBJ_SHRINKING_GLOW, 132, 52, $0
+	anim_wait 32
 	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_YELLOW
 	anim_ret
 
@@ -5746,4 +5803,19 @@ BattleAnimSub_EnergyOrb:
 	anim_wait 4
 	anim_obj BATTLE_ANIM_OBJ_ENERGY_ORB, 48, 88, $30
 	anim_wait 4
+	anim_ret
+
+BattleAnim_CannonSub:
+	anim_obj BATTLE_ANIM_OBJ_SMALL_GLOW, 48, 96, $0
+.loop
+	anim_sound 0, 1, SFX_AEROBLAST
+	anim_obj BATTLE_ANIM_OBJ_DRAGON_PULSE, 64, 88, $4
+	anim_wait 4
+	anim_loop 16, .loop
+	anim_incobj 1
+	anim_wait 16
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
+	anim_wait 4
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_YELLOW
 	anim_ret

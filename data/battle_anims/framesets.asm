@@ -206,6 +206,9 @@ BattleAnimFrameData:
 	dw .Frameset_DropletL           ; BATTLE_ANIM_FRAMESET_DROPLET_L
 	dw .Frameset_GrowingBall        ; BATTLE_ANIM_FRAMESET_GROWING_BALL
 	dw .Frameset_SmellingSaltSurprised ; BATTLE_ANIM_FRAMESET_SMELLINGSALT_SURPRISED
+	dw .Frameset_FlashCannonChargeOrb ; BATTLE_ANIM_FRAMESET_FLASH_CANNON_CHARGE_ORB
+	dw .Frameset_SlowGrowingGlow     ; BATTLE_ANIM_FRAMESET_SLOW_GROWING_GLOW
+	dw .Frameset_FlashCannonSparks   ; BATTLE_ANIM_FRAMESET_FLASH_CANNON_SPARKS
 	dw .Frameset_PoisonJab           ; BATTLE_ANIM_FRAMESET_POISON_JAB
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
@@ -1390,4 +1393,23 @@ BattleAnimFrameData:
 
 .Frameset_SmellingSaltSurprised:
 	oamframe BATTLE_ANIM_OAMSET_FB, 6
+	oamdelete
+
+.Frameset_FlashCannonChargeOrb:
+	oamwait 24
+	oamframe BATTLE_ANIM_OAMSET_20, 4
+	oamframe BATTLE_ANIM_OAMSET_1F, 4
+	oamframe BATTLE_ANIM_OAMSET_1E, 4
+	oamend
+
+.Frameset_SlowGrowingGlow:
+	oamframe BATTLE_ANIM_OAMSET_55, 24
+	oamframe BATTLE_ANIM_OAMSET_54, 24
+	oamframe BATTLE_ANIM_OAMSET_53, 24
+	oamend
+
+.Frameset_FlashCannonSparks:
+	oamframe BATTLE_ANIM_OAMSET_20, 4
+	oamframe BATTLE_ANIM_OAMSET_1F, 4
+	oamframe BATTLE_ANIM_OAMSET_1E, 8
 	oamdelete
