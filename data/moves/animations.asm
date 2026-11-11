@@ -4180,11 +4180,24 @@ BattleAnim_Venoshock:
 	anim_wait 36
 	anim_sound 0, 1, SFX_THUNDER
 	anim_wait 8
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PSYCHO_BOOST_2
 	anim_bgp $1b
 	anim_obp0 $30
+.loop
 	anim_bgeffect BATTLE_BG_EFFECT_VIBRATE_MON, $0, $0, $0
-	anim_call BattleAnimSub_Sludge
-	anim_jump BattleAnim_ShowMon_1
+	anim_sound 0, 1, SFX_TOXIC
+	anim_obj BATTLE_ANIM_OBJ_SLUDGE, 132, 72, $0
+	anim_wait 8
+	anim_sound 0, 1, SFX_TOXIC
+	anim_obj BATTLE_ANIM_OBJ_SLUDGE, 116, 72, $0
+	anim_wait 8
+	anim_sound 0, 1, SFX_TOXIC
+	anim_obj BATTLE_ANIM_OBJ_SLUDGE, 148, 72, $0
+	anim_wait 8
+	anim_loop 4, .loop
+	anim_wait 24
+	anim_call BattleAnim_ShowMon_1
+	anim_ret
 
 BattleAnim_Spite:
 	anim_1gfx BATTLE_ANIM_GFX_ANGELS
