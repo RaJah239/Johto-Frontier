@@ -4415,7 +4415,7 @@ BattleAnim_Swagger:
 	anim_ret
 
 BattleAnim_Scald:
-	anim_3gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_MISC, ANIM_GFX_SMOKE_PUFF
+	anim_3gfx BATTLE_ANIM_GFX_HIT_2, BATTLE_ANIM_GFX_MISC, ANIM_GFX_SMOKE_PUFF
 	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_WATER
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_WATER
 	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_VERY_BRIGHT
@@ -4451,6 +4451,7 @@ BattleAnim_Scald:
 	anim_wait 1
 	anim_obj ANIM_OBJ_SCALD_STEAM, 144, 34, $30
 	anim_wait 7
+	anim_setobjpal PAL_BATTLE_BG_TARGET, PAL_BTLCUSTOM_FIRE
 	anim_bgeffect BATTLE_BG_EFFECT_FADE_MONS_TO_BLACK_REPEATING, $0, $0, $40
 	anim_sound 0, 1, SFX_POISON_STING
 .loop2
@@ -4464,6 +4465,7 @@ BattleAnim_Scald:
 	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_YELLOW
+	anim_setobjpal PAL_BATTLE_BG_TARGET, PAL_BTLCUSTOM_DEFAULT
 	anim_ret
 
 BattleAnim_WildCharge:

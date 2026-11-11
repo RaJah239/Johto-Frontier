@@ -887,6 +887,7 @@ DEF NUM_BATTLE_BG_EFFECTS EQU const_value - 1
 	const BATTLE_ANIM_GFX_FOCUS_BLAST
 	const BATTLE_ANIM_GFX_BIG_GLOW_CLEAR
 	const BATTLE_ANIM_GFX_OBJECTS_2
+	const BATTLE_ANIM_GFX_HIT_2
 DEF NUM_BATTLE_ANIM_GFX EQU const_value - 1
 
 ; battle_bg_effect struct members (see macros/ram.asm)
