@@ -5409,16 +5409,31 @@ BattleAnim_MirrorCoat:
 
 BattleAnim_NastyPlot:
 	anim_1gfx BATTLE_ANIM_GFX_STATUS
-	anim_call BattleAnim_TargetObj_1Row
-	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING, $0, BG_EFFECT_USER, $20
-	anim_sound 0, 0, SFX_SPITE
-	anim_obj BATTLE_ANIM_OBJ_PSYCH_UP, 44, 88, $0
-	anim_obj BATTLE_ANIM_OBJ_PSYCH_UP, 44, 88, $10
-	anim_obj BATTLE_ANIM_OBJ_PSYCH_UP, 44, 88, $20
-	anim_obj BATTLE_ANIM_OBJ_PSYCH_UP, 44, 88, $30
-	anim_wait 64
-	anim_incbgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING
-	anim_jump BattleAnim_ShowMon_0
+	anim_sound 0, 0, SFX_LICK
+	anim_obj BATTLE_ANIM_OBJ_NASTY_PLOT_1, 64, 88, $2
+	anim_wait 16
+	anim_sound 0, 0, SFX_LICK
+	anim_obj BATTLE_ANIM_OBJ_NASTY_PLOT_1, 68, 88, $1
+	anim_obj BATTLE_ANIM_OBJ_NASTY_PLOT_1, 28, 88, $2
+	anim_wait 16
+	anim_sound 0, 0, SFX_LICK
+	anim_obj BATTLE_ANIM_OBJ_NASTY_PLOT_1, 72, 88, $0
+	anim_obj BATTLE_ANIM_OBJ_NASTY_PLOT_1, 24, 88, $1
+	anim_obj BATTLE_ANIM_OBJ_NASTY_PLOT_2, 46, 80, $2
+	anim_wait 16
+	anim_obj BATTLE_ANIM_OBJ_NASTY_PLOT_1, 20, 88, $0
+	anim_obj BATTLE_ANIM_OBJ_NASTY_PLOT_2, 46, 80, $1
+	anim_wait 16
+	anim_obj BATTLE_ANIM_OBJ_NASTY_PLOT_2, 46, 80, $0
+	anim_wait 32
+	anim_clearobjs
+	anim_wait 1
+	anim_2gfx BATTLE_ANIM_GFX_OBJECTS, BATTLE_ANIM_GFX_MISC
+	anim_obj BATTLE_ANIM_OBJ_NASTY_PLOT_HAND, 48, 72, $0
+	anim_sound 0, 1, SFX_FORESIGHT
+	anim_obj BATTLE_ANIM_OBJ_NASTY_PLOT_SURPRISED, 48, 72, $0
+	anim_wait 24
+	anim_ret
 
 BattleAnim_Extremespeed:
 	anim_1gfx BATTLE_ANIM_GFX_SPEED

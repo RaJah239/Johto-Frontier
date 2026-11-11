@@ -205,6 +205,7 @@ BattleAnimFrameData:
 	dw .Frameset_DropletR           ; BATTLE_ANIM_FRAMESET_DROPLET_R
 	dw .Frameset_DropletL           ; BATTLE_ANIM_FRAMESET_DROPLET_L
 	dw .Frameset_GrowingBall        ; BATTLE_ANIM_FRAMESET_GROWING_BALL
+	dw .Frameset_SmellingSaltSurprised ; BATTLE_ANIM_FRAMESET_SMELLINGSALT_SURPRISED
 	dw .Frameset_PoisonJab           ; BATTLE_ANIM_FRAMESET_POISON_JAB
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
@@ -1385,4 +1386,8 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_55, 2
 	oamframe BATTLE_ANIM_OAMSET_54, 2
 	oamframe BATTLE_ANIM_OAMSET_55, 2
+	oamdelete
+
+.Frameset_SmellingSaltSurprised:
+	oamframe BATTLE_ANIM_OAMSET_FB, 6
 	oamdelete

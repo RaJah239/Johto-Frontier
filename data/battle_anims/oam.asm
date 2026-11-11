@@ -247,6 +247,7 @@ BattleAnimOAMData:
 	battleanimoam $0e,  1, .OAMData_0f ; BATTLE_ANIM_OAMSET_DISCHARGE_SPARKS_N_2
 	battleanimoam $1f,  4, .OAMData_03 ; BATTLE_ANIM_OAMSET_BULLET_PUNCH
 	battleanimoam $02,  2, .OAMData_e0 ; BATTLE_ANIM_OAMSET_E0
+	battleanimoam $00, 12, .OAMData_fb ; BATTLE_ANIM_OAMSET_FB
 	assert_table_length NUM_BATTLE_ANIM_OAMSETS
 
 .OAMData_Stats:
@@ -1412,3 +1413,17 @@ endr
 	dbsprite   2,  -1, 0, 0, $01, X_FLIP | Y_FLIP
 	dbsprite   3,  -1, 0, 0, $00, X_FLIP | Y_FLIP
 
+
+.OAMData_fb:
+	dbsprite  -2,  -2, 0, 0, $00, $0
+	dbsprite  -1,  -2, 0, 0, $01, $0
+	dbsprite  -2,  -1, 0, 0, $02, $0
+	dbsprite   1,  -2, 0, 0, $01, X_FLIP
+	dbsprite   2,  -2, 0, 0, $00, X_FLIP
+	dbsprite   2,  -1, 0, 0, $02, X_FLIP
+	dbsprite  -2,   1, 0, 0, $02, Y_FLIP
+	dbsprite  -2,   2, 0, 0, $00, Y_FLIP
+	dbsprite  -1,   2, 0, 0, $01, Y_FLIP
+	dbsprite   2,   1, 0, 0, $02, X_FLIP | Y_FLIP
+	dbsprite   1,   2, 0, 0, $01, X_FLIP | Y_FLIP
+	dbsprite   2,   2, 0, 0, $00, X_FLIP | Y_FLIP
