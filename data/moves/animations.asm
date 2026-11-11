@@ -1952,28 +1952,23 @@ BattleAnim_SubFocusingAnim:
 	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_DarkPulse:
-	anim_1gfx BATTLE_ANIM_GFX_CHARGE
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_DARK_PULSE
+	anim_1gfx BATTLE_ANIM_GFX_OBJECTS_2
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
 	anim_bgeffect BATTLE_BG_EFFECT_WHIRLPOOL, $0, $0, $0
 	anim_bgp $1b
 	anim_sound 0, 1, SFX_SPITE
-	anim_obj ANIM_OBJ_DARK_PULSE, 44, 88, $0
-	anim_obj ANIM_OBJ_DARK_PULSE, 44, 88, $8
-	anim_obj ANIM_OBJ_DARK_PULSE, 44, 88, $10
-	anim_obj ANIM_OBJ_DARK_PULSE, 44, 88, $18
-	anim_obj ANIM_OBJ_DARK_PULSE, 44, 88, $20
-	anim_obj ANIM_OBJ_DARK_PULSE, 44, 88, $28
-	anim_obj ANIM_OBJ_DARK_PULSE, 44, 88, $30
-	anim_obj ANIM_OBJ_DARK_PULSE, 44, 88, $38
-	anim_incobj 1
-	anim_incobj 2
-	anim_incobj 3
-	anim_incobj 4
-	anim_incobj 5
-	anim_incobj 6
-	anim_incobj 7
-	anim_incobj 8
+	anim_obj BATTLE_ANIM_OBJ_DARK_PULSE_E,  52, 92, $0
+	anim_obj BATTLE_ANIM_OBJ_DARK_PULSE_SE, 48, 96, $8
+	anim_obj BATTLE_ANIM_OBJ_DARK_PULSE_S,  44, 96, $10
+	anim_obj BATTLE_ANIM_OBJ_DARK_PULSE_SW, 40, 96, $18
+	anim_obj BATTLE_ANIM_OBJ_DARK_PULSE_W,  36, 92, $20
+	anim_obj BATTLE_ANIM_OBJ_DARK_PULSE_NW, 40, 88, $28
+	anim_obj BATTLE_ANIM_OBJ_DARK_PULSE_N,  44, 88, $30
+	anim_obj BATTLE_ANIM_OBJ_DARK_PULSE_NE, 48, 88, $38
 	anim_wait 96
 	anim_incbgeffect BATTLE_BG_EFFECT_WHIRLPOOL
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_YELLOW
 	anim_ret
 
 BattleAnim_InvertScreenColoursSub:

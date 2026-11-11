@@ -93,6 +93,10 @@ BattleAnimOAMUpdate:
 	ld [hl], a
 	pop af
 
+	push af
+	call BattleAnim_SetDynamicTileData
+	pop af
+
 	push bc
 	call GetBattleAnimOAMPointer
 	ld a, [wBattleAnimTempTileID]
@@ -197,6 +201,55 @@ BattleAnimOAMUpdate:
 	pop bc
 	scf
 	ret
+
+BattleAnim_SetDynamicTileData:
+; If the frameset ID is dynamic, VAR3 selects one of 8 directions for the XY flip and tile offset.
+	ld hl, BATTLEANIMSTRUCT_FRAMESET_ID
+	add hl, bc
+	ld a, [hl]
+	cp FIRST_DYNAMIC_FRAMESET
+	ret c
+
+	ld hl, BATTLEANIMSTRUCT_VAR3
+	add hl, bc
+	ld a, [hl]
+
+	; bit 3 sets priority
+	bit 3, a
+	push af
+	and $7
+	add a
+	add LOW(.tile_data)
+	ld l, a
+	adc HIGH(.tile_data)
+	sub l
+	ld h, a
+	pop af
+
+	ld a, [hli]
+	jr z, .no_priority
+	or PRIORITY
+.no_priority
+	push hl
+	ld hl, wBattleAnimTempOAMFlags
+	xor [hl]
+	ld [hl], a
+	pop hl
+	ld a, [hl]
+	ld hl, wBattleAnimTempTileID
+	add [hl]
+	ld [hl], a
+	ret
+
+.tile_data
+	db X_FLIP, $00 ; W
+	db X_FLIP, $08 ; NW
+	db Y_FLIP, $04 ; N
+	db 0, $08 ; NE
+	db Y_FLIP, $00 ; E
+	db Y_FLIP, $08 ; SE
+	db X_FLIP, $04 ; S
+	db X_FLIP | Y_FLIP, $08 ; SW
 
 InitBattleAnimBuffer:
 	ld hl, BATTLEANIMSTRUCT_OAMFLAGS

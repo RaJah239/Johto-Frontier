@@ -99,6 +99,7 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_Flamethrower
 	dw BattleAnimFunc_RadialMoveOut_VerySlow
 	dw BattleAnimFunc_RadialMoveOut_Stats
+	dw BattleAnimFunc_DarkPulse
 	assert_table_length NUM_BATTLE_ANIM_FUNCS
 
 BattleAnimFunc_Null:
@@ -3952,6 +3953,60 @@ Set_Rad_Pos:
 	ld [hli], a
 	ld [hl], e
 	ret
+
+BattleAnimFunc_DarkPulse:
+; Expands object out in a ring around position at 1 pixel at a time for 13 frames and then disappears
+; Obj Param: Defines starting position in circle, and sprite rotation
+	ld hl, BATTLEANIMSTRUCT_VAR1
+	add hl, bc
+	ld a, [hl]
+	cp $80
+	jmp nc, DeinitBattleAnimation
+	ld d, a
+	add $2
+	ld [hl], a
+	ld hl, BATTLEANIMSTRUCT_PARAM
+	add hl, bc
+	ld a, [hl]
+
+	; Dark Pulse W ends early.
+	cp $20
+	jr nz, .dark_pulse_w_done
+	ld h, a
+	add a
+	cp d
+	jmp z, DeinitBattleAnimation
+	ld a, h
+
+.dark_pulse_w_done
+	; Set sprite rotation (VAR3, read by BattleAnim_SetDynamicTileData)
+	push af
+	ld hl, BATTLEANIMSTRUCT_VAR3
+	add hl, bc
+	add a
+	swap a
+	xor 4
+	ld [hl], a
+	pop af
+
+	; Dark Pulse NW-NE should appear behind the mon.
+	cp $28
+	jmp c, BattleAnim_StepCircle
+	push af
+
+	; For NE, disable priority once we've reached a certain point.
+	cp $38
+	jr nz, .cont
+	ld a, d
+	cp $40
+	jr nc, .pop_af_no_priority
+
+.cont
+	set 3, [hl] ; Set priority
+
+.pop_af_no_priority
+	pop af
+	jmp BattleAnim_StepCircle
 
 BattleAnimFunc_Hurricane:
 ; Moves object in a ring around position slightly faster. Uses anim_incobj to move to second phase,  where it expands the radius 8 pixels at a time for 13 frames and then disappears

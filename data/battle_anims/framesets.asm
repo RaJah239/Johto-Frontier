@@ -189,6 +189,7 @@ BattleAnimFrameData:
 	dw .Frameset_StatDown            ; BATTLE_ANIM_FRAMESET_STAT_DOWN
 	dw .Frameset_FocusBlast          ; BATTLE_ANIM_FRAMESET_FOCUS_BLAST
 	dw .Frameset_BigGlowClear        ; BATTLE_ANIM_FRAMESET_BIG_GLOW_CLEAR
+	dw .Frameset_PoisonJab           ; BATTLE_ANIM_FRAMESET_POISON_JAB
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
 .Frameset_StatUp:
@@ -1253,3 +1254,7 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_BIG_GLOW_CLEAR_2, 1
 	oamframe BATTLE_ANIM_OAMSET_BIG_GLOW_CLEAR_1, 1
 	oamrestart
+
+.Frameset_PoisonJab:
+	oamframe BATTLE_ANIM_OAMSET_6C, 32
+	oamend
