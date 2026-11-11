@@ -3603,19 +3603,37 @@ BattleAnim_DefenseCurl:
 	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_SeismicToss:
-	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_GLOBE
-	anim_2gfx BATTLE_ANIM_GFX_GLOBE, BATTLE_ANIM_GFX_HIT
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_Y, $10, $1, $20
-	anim_sound 0, 0, SFX_STRENGTH
-	anim_obj BATTLE_ANIM_OBJ_SEISMIC_TOSS, 64, 104, $1
-	anim_wait 128
-	anim_incobj 1
-	anim_wait 20
-	anim_sound 0, 1, SFX_MEGA_PUNCH
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_BROWN 
-	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 132, 40, $0
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GLOBE
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BUBBLE
+	anim_1gfx BATTLE_ANIM_GFX_SPEED
+	anim_sound 0, 0, SFX_MENU
+	anim_bgeffect BATTLE_BG_EFFECT_HIDE_MON, $0, BG_EFFECT_USER, $0
+	anim_call BattleAnimSub_SpeedLines
+	anim_wait 12
+	anim_1gfx BATTLE_ANIM_GFX_U_TURN
+	anim_obj BATTLE_ANIM_OBJ_BLUR_DIAGONAL, 64, 92, $18
+	anim_wait 8
+	anim_clearobjs
+	anim_wait 1
+	anim_1gfx BATTLE_ANIM_GFX_GLOBE
+	anim_bgeffect BATTLE_BG_EFFECT_HIDE_MON, $0, BG_EFFECT_TARGET, $0
+	anim_sound 0, 1, SFX_BONE_CLUB
+	anim_obj BATTLE_ANIM_OBJ_SEISMIC_TOSS_2, 132, 48, $0
+	anim_wait 24
+	anim_clearobjs
+	anim_sound 0, 0, SFX_OUTRAGE
+	anim_obj BATTLE_ANIM_OBJ_SEISMIC_TOSS_UP, 132, 24, $30
+	anim_wait 64
+	anim_sound 0, 0, SFX_RAZOR_WIND
+	anim_obj BATTLE_ANIM_OBJ_SEISMIC_TOSS_DOWN, 132, 240, $10
 	anim_wait 16
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BATTLE_OB_GRAY
+	anim_clearobjs
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, BG_EFFECT_TARGET, $0
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, BG_EFFECT_USER, $0
+	anim_sound 0, 0, SFX_EGG_BOMB
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $4, $10
+	anim_wait 16
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
 	anim_ret
 
