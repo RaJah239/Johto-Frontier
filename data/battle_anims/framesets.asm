@@ -200,11 +200,11 @@ BattleAnimFrameData:
 	dw .Frameset_VoltSwitch           ; BATTLE_ANIM_FRAMESET_VOLT_SWITCH
 	dw .Frameset_DischargeSparksN     ; BATTLE_ANIM_FRAMESET_DISCHARGE_SPARKS_N
 	dw .Frameset_EnergyOrbLong       ; BATTLE_ANIM_FRAMESET_ENERGY_ORB_LONG
+	dw .Frameset_GrowingBall         ; BATTLE_ANIM_FRAMESET_GROWING_BALL
 	dw .Frameset_LongPunch           ; BATTLE_ANIM_FRAMESET_LONG_PUNCH
 	dw .Frameset_BulletPunch        ; BATTLE_ANIM_FRAMESET_BULLET_PUNCH
 	dw .Frameset_DropletR           ; BATTLE_ANIM_FRAMESET_DROPLET_R
 	dw .Frameset_DropletL           ; BATTLE_ANIM_FRAMESET_DROPLET_L
-	dw .Frameset_GrowingBall        ; BATTLE_ANIM_FRAMESET_GROWING_BALL
 	dw .Frameset_SmellingSaltSurprised ; BATTLE_ANIM_FRAMESET_SMELLINGSALT_SURPRISED
 	dw .Frameset_FlashCannonChargeOrb ; BATTLE_ANIM_FRAMESET_FLASH_CANNON_CHARGE_ORB
 	dw .Frameset_SlowGrowingGlow     ; BATTLE_ANIM_FRAMESET_SLOW_GROWING_GLOW
