@@ -2898,6 +2898,9 @@ BattleAnimFunc_Shiny:
 	ld hl, BATTLEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld [hl], a
+	ld hl, BATTLEANIMSTRUCT_VAR2
+	add hl, bc
+	ld [hl], $f
 	ret
 
 BattleAnimFunc_SkyAttack:
