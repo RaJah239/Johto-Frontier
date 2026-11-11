@@ -197,6 +197,9 @@ BattleAnimFrameData:
 	dw .Frameset_InkSplash           ; BATTLE_ANIM_FRAMESET_INK_SPLASH
 	dw .Frameset_MudShot             ; BATTLE_ANIM_FRAMESET_MUD_SHOT
 	dw .Frameset_UTurnFall           ; BATTLE_ANIM_FRAMESET_U_TURN_FALL
+	dw .Frameset_VoltSwitch           ; BATTLE_ANIM_FRAMESET_VOLT_SWITCH
+	dw .Frameset_DischargeSparksN     ; BATTLE_ANIM_FRAMESET_DISCHARGE_SPARKS_N
+	dw .Frameset_EnergyOrbLong       ; BATTLE_ANIM_FRAMESET_ENERGY_ORB_LONG
 	dw .Frameset_PoisonJab           ; BATTLE_ANIM_FRAMESET_POISON_JAB
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
@@ -1312,3 +1315,24 @@ BattleAnimFrameData:
 .Frameset_UTurnFall:
 	oamframe BATTLE_ANIM_OAMSET_U_TURN_FALL, 32
 	oamend
+
+.Frameset_VoltSwitch:
+	oamframe BATTLE_ANIM_OAMSET_VOLT_SWITCH_1, 1
+	oamframe BATTLE_ANIM_OAMSET_VOLT_SWITCH_2, 1
+	oamframe BATTLE_ANIM_OAMSET_VOLT_SWITCH_3, 1
+	oamframe BATTLE_ANIM_OAMSET_VOLT_SWITCH_4, 1
+	oamframe BATTLE_ANIM_OAMSET_VOLT_SWITCH_5, 1
+	oamframe BATTLE_ANIM_OAMSET_VOLT_SWITCH_6, 1
+	oamrestart
+
+.Frameset_DischargeSparksN:
+	oamframe BATTLE_ANIM_OAMSET_DISCHARGE_SPARKS_N_1, 2, OAM_X_FLIP, OAM_Y_FLIP
+	oamframe BATTLE_ANIM_OAMSET_DISCHARGE_SPARKS_N_2, 2, OAM_X_FLIP
+	oamframe BATTLE_ANIM_OAMSET_82, 2
+	oamend
+
+.Frameset_EnergyOrbLong:
+	oamframe BATTLE_ANIM_OAMSET_1E, 4
+	oamframe BATTLE_ANIM_OAMSET_55, 8
+	oamframe BATTLE_ANIM_OAMSET_54, 20
+	oamdelete

@@ -237,6 +237,14 @@ BattleAnimOAMData:
 	battleanimoam $09,  4, .OAMData_02 ; BATTLE_ANIM_OAMSET_EE
 	battleanimoam $0a,  9, .OAMData_f3 ; BATTLE_ANIM_OAMSET_F3
 	battleanimoam $20, 16, .OAMData_1c ; BATTLE_ANIM_OAMSET_U_TURN_FALL
+	battleanimoam $00, 16, .OAMData_VoltSwitch1 ; BATTLE_ANIM_OAMSET_VOLT_SWITCH_1
+	battleanimoam $00, 16, .OAMData_VoltSwitch2 ; BATTLE_ANIM_OAMSET_VOLT_SWITCH_2
+	battleanimoam $00, 16, .OAMData_VoltSwitch3 ; BATTLE_ANIM_OAMSET_VOLT_SWITCH_3
+	battleanimoam $00, 16, .OAMData_VoltSwitch4 ; BATTLE_ANIM_OAMSET_VOLT_SWITCH_4
+	battleanimoam $00, 16, .OAMData_VoltSwitch5 ; BATTLE_ANIM_OAMSET_VOLT_SWITCH_5
+	battleanimoam $00, 16, .OAMData_VoltSwitch6 ; BATTLE_ANIM_OAMSET_VOLT_SWITCH_6
+	battleanimoam $0f,  1, .OAMData_0f ; BATTLE_ANIM_OAMSET_DISCHARGE_SPARKS_N_1
+	battleanimoam $0e,  1, .OAMData_0f ; BATTLE_ANIM_OAMSET_DISCHARGE_SPARKS_N_2
 	assert_table_length NUM_BATTLE_ANIM_OAMSETS
 
 .OAMData_Stats:
@@ -1294,3 +1302,111 @@ endr
 	dbsprite  -2,  0, 4, 4, $02, $0
 	dbsprite  -1,  0, 4, 4, $05, $0
 	dbsprite   0,  0, 4, 4, $08, $0
+.OAMData_VoltSwitch1:
+	dbsprite  -4,  -2, 0, 0, $00, $0
+	dbsprite  -3,  -2, 0, 0, $01, $0
+	dbsprite  -2,  -2, 0, 0, $02, $0
+	dbsprite  -1,  -2, 0, 0, $03, $0
+	dbsprite   0,  -2, 0, 0, $04, $0
+	dbsprite   1,  -2, 0, 0, $05, $0
+	dbsprite   2,  -2, 0, 0, $06, $0
+	dbsprite   3,  -2, 0, 0, $00, X_FLIP
+	dbsprite  -4,  -1, 0, 0, $00, Y_FLIP
+	dbsprite  -3,  -1, 0, 0, $01, Y_FLIP
+	dbsprite  -2,  -1, 0, 0, $02, Y_FLIP
+	dbsprite  -1,  -1, 0, 0, $03, Y_FLIP
+	dbsprite   0,  -1, 0, 0, $03, X_FLIP | Y_FLIP
+	dbsprite   1,  -1, 0, 0, $02, X_FLIP | Y_FLIP
+	dbsprite   2,  -1, 0, 0, $01, X_FLIP | Y_FLIP
+	dbsprite   3,  -1, 0, 0, $00, X_FLIP | Y_FLIP
+
+.OAMData_VoltSwitch2:
+	dbsprite  -4,  -2, 0, 0, $00, $0
+	dbsprite  -3,  -2, 0, 0, $01, $0
+	dbsprite  -2,  -2, 0, 0, $02, $0
+	dbsprite  -1,  -2, 0, 0, $03, $0
+	dbsprite   0,  -2, 0, 0, $03, X_FLIP
+	dbsprite   1,  -2, 0, 0, $02, X_FLIP
+	dbsprite   2,  -2, 0, 0, $07, $0
+	dbsprite   3,  -2, 0, 0, $08, $0
+	dbsprite  -4,  -1, 0, 0, $00, Y_FLIP
+	dbsprite  -3,  -1, 0, 0, $01, Y_FLIP
+	dbsprite  -2,  -1, 0, 0, $02, Y_FLIP
+	dbsprite  -1,  -1, 0, 0, $03, Y_FLIP
+	dbsprite   0,  -1, 0, 0, $03, X_FLIP | Y_FLIP
+	dbsprite   1,  -1, 0, 0, $09, $0
+	dbsprite   2,  -1, 0, 0, $0a, $0
+	dbsprite   3,  -1, 0, 0, $0b, $0
+
+.OAMData_VoltSwitch3:
+	dbsprite  -4,  -2, 0, 0, $00, $0
+	dbsprite  -3,  -2, 0, 0, $01, $0
+	dbsprite  -2,  -2, 0, 0, $02, $0
+	dbsprite  -1,  -2, 0, 0, $03, $0
+	dbsprite   0,  -2, 0, 0, $03, X_FLIP
+	dbsprite   1,  -2, 0, 0, $02, X_FLIP
+	dbsprite   2,  -2, 0, 0, $01, X_FLIP
+	dbsprite   3,  -2, 0, 0, $00, X_FLIP
+	dbsprite  -4,  -1, 0, 0, $00, Y_FLIP
+	dbsprite  -3,  -1, 0, 0, $01, Y_FLIP
+	dbsprite  -2,  -1, 0, 0, $02, Y_FLIP
+	dbsprite  -1,  -1, 0, 0, $03, Y_FLIP
+	dbsprite   0,  -1, 0, 0, $0c, $0
+	dbsprite   1,  -1, 0, 0, $0d, $0
+	dbsprite   2,  -1, 0, 0, $0e, $0
+	dbsprite   3,  -1, 0, 0, $00, X_FLIP | Y_FLIP
+
+.OAMData_VoltSwitch4:
+	dbsprite  -4,  -2, 0, 0, $00, $0
+	dbsprite  -3,  -2, 0, 0, $01, $0
+	dbsprite  -2,  -2, 0, 0, $02, $0
+	dbsprite  -1,  -2, 0, 0, $03, $0
+	dbsprite   0,  -2, 0, 0, $03, X_FLIP
+	dbsprite   1,  -2, 0, 0, $02, X_FLIP
+	dbsprite   2,  -2, 0, 0, $01, X_FLIP
+	dbsprite   3,  -2, 0, 0, $00, X_FLIP
+	dbsprite  -4,  -1, 0, 0, $00, Y_FLIP
+	dbsprite  -3,  -1, 0, 0, $0f, $0
+	dbsprite  -2,  -1, 0, 0, $10, $0
+	dbsprite  -1,  -1, 0, 0, $11, $0
+	dbsprite   0,  -1, 0, 0, $12, $0
+	dbsprite   1,  -1, 0, 0, $02, X_FLIP | Y_FLIP
+	dbsprite   2,  -1, 0, 0, $01, X_FLIP | Y_FLIP
+	dbsprite   3,  -1, 0, 0, $00, X_FLIP | Y_FLIP
+
+.OAMData_VoltSwitch5:
+	dbsprite  -4,  -2, 0, 0, $13, $0
+	dbsprite  -3,  -2, 0, 0, $14, $0
+	dbsprite  -2,  -2, 0, 0, $02, $0
+	dbsprite  -1,  -2, 0, 0, $03, $0
+	dbsprite   0,  -2, 0, 0, $03, X_FLIP
+	dbsprite   1,  -2, 0, 0, $02, X_FLIP
+	dbsprite   2,  -2, 0, 0, $01, X_FLIP
+	dbsprite   3,  -2, 0, 0, $00, X_FLIP
+	dbsprite  -4,  -1, 0, 0, $15, $0
+	dbsprite  -3,  -1, 0, 0, $16, $0
+	dbsprite  -2,  -1, 0, 0, $17, $0
+	dbsprite  -1,  -1, 0, 0, $03, Y_FLIP
+	dbsprite   0,  -1, 0, 0, $03, X_FLIP | Y_FLIP
+	dbsprite   1,  -1, 0, 0, $02, X_FLIP | Y_FLIP
+	dbsprite   2,  -1, 0, 0, $01, X_FLIP | Y_FLIP
+	dbsprite   3,  -1, 0, 0, $00, X_FLIP | Y_FLIP
+
+.OAMData_VoltSwitch6:
+	dbsprite  -4,  -2, 0, 0, $00, $0
+	dbsprite  -3,  -2, 0, 0, $18, $0
+	dbsprite  -2,  -2, 0, 0, $19, $0
+	dbsprite  -1,  -2, 0, 0, $1a, $0
+	dbsprite   0,  -2, 0, 0, $1b, $0
+	dbsprite   1,  -2, 0, 0, $02, X_FLIP
+	dbsprite   2,  -2, 0, 0, $01, X_FLIP
+	dbsprite   3,  -2, 0, 0, $00, X_FLIP
+	dbsprite  -4,  -1, 0, 0, $00, Y_FLIP
+	dbsprite  -3,  -1, 0, 0, $01, Y_FLIP
+	dbsprite  -2,  -1, 0, 0, $02, Y_FLIP
+	dbsprite  -1,  -1, 0, 0, $03, Y_FLIP
+	dbsprite   0,  -1, 0, 0, $03, X_FLIP | Y_FLIP
+	dbsprite   1,  -1, 0, 0, $02, X_FLIP | Y_FLIP
+	dbsprite   2,  -1, 0, 0, $01, X_FLIP | Y_FLIP
+	dbsprite   3,  -1, 0, 0, $00, X_FLIP | Y_FLIP
+
