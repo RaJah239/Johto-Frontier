@@ -1635,3 +1635,35 @@ AIGetMoveAttributes:
 	pop de
 	pop hl
 	ret
+
+AI_EnemyHasSureShock:
+; Return carry if the enemy's species is in SureShockPokemon.
+	ld hl, SureShockPokemon
+	ld d, BANK(SureShockPokemon)
+	jr AI_IsEnemyInFarList
+
+AI_EnemyHasKindle:
+; Return carry if the enemy's species is in KindlePokemon.
+	ld hl, KindlePokemon
+	ld d, BANK(KindlePokemon)
+	; fallthrough
+
+AI_IsEnemyInFarList:
+; hl = species list in bank d, ending in -1. Return carry if the enemy's
+; species is in it. Clobbers de and hl.
+	ld a, [wEnemyMonSpecies]
+	ld e, a
+.loop
+	ld a, d
+	call GetFarByte
+	inc hl
+	cp -1
+	jr z, .no
+	cp e
+	jr nz, .loop
+	scf
+	ret
+
+.no
+	and a
+	ret

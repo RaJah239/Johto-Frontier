@@ -156,17 +156,6 @@ OverdrivePokemon_AI:
     db PORYGONZ
     db -1 ; end
 
-SureShockPokemon_AI:
-    db PIKACHU
-    db MAGNEMITE
-    db MAGNETON
-    db MAGNEZONE
-    db -1  ; end
-
-KindlePokemon_AI:
-    db CHANDELURE
-    db -1 ; end
-
 ; unused at the moment
 UberImmunePokemon_AI:
     db -1 ; end

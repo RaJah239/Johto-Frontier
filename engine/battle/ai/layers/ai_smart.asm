@@ -1228,10 +1228,8 @@ AI_Smart_BurnTarget:
 	; with Kindle Pokémon if target is physical
 
 	; check species
-	ld a, [wEnemyMonSpecies]
 	push hl
-	ld hl, KindlePokemon_AI
-	call IsInByteArray
+	call AI_EnemyHasKindle
 	pop hl
 	ret nc
 
@@ -1278,10 +1276,8 @@ AI_Smart_ParalyzeTarget:
 	jr c, .discourage
 
 	; check specie
-	ld a, [wEnemyMonSpecies]
 	push hl
-	ld hl, SureShockPokemon_AI
-	call IsInByteArray
+	call AI_EnemyHasSureShock
 	pop hl
 	ret nc
 
