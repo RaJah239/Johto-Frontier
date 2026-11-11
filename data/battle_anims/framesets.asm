@@ -211,6 +211,7 @@ BattleAnimFrameData:
 	dw .Frameset_FlashCannonSparks   ; BATTLE_ANIM_FRAMESET_FLASH_CANNON_SPARKS
 	dw .Frameset_IcicleCrash         ; BATTLE_ANIM_FRAMESET_ICICLE_CRASH
 	dw .Frameset_TrickRoom           ; BATTLE_ANIM_FRAMESET_TRICK_ROOM
+	dw .Frameset_PoisonDroplet       ; BATTLE_ANIM_FRAMESET_POISON_DROPLET
 	dw .Frameset_PoisonJab           ; BATTLE_ANIM_FRAMESET_POISON_JAB
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
@@ -1434,4 +1435,8 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_18, 1
 	oamframe BATTLE_ANIM_OAMSET_EB, 1
 	oamframe BATTLE_ANIM_OAMSET_18, 1
+	oamdelete
+
+.Frameset_PoisonDroplet:
+	oamframe BATTLE_ANIM_OAMSET_17, 24
 	oamdelete
