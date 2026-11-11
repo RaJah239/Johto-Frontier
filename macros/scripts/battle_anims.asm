@@ -9,15 +9,19 @@ ENDM
 
 	const anim_obj_command ; $d0
 MACRO anim_obj
-	db anim_obj_command
+	if HIGH(\1)
+		db anim_hiobj_command ; objects with an ID of $100 or more
+	else
+		db anim_obj_command
+	endc
 	if _NARG <= 4
-		db \1 ; object
+		db LOW(\1) ; object
 		db \2 ; x
 		db \3 ; y
 		db \4 ; param
 	else
 	; LEGACY: Support the tile+offset format
-		db \1 ; object
+		db LOW(\1) ; object
 		db (\2) * TILE_WIDTH + (\3) ; x_tile, x
 		db (\4) * TILE_WIDTH + (\5) ; y_tile, y
 		db \6 ; param
@@ -248,3 +252,7 @@ MACRO anim_statloop
 	db anim_statloop_command
 	dw \1 ; address
 ENDM
+
+; Objects with an ID of $100 or more can't be stored in a single byte,
+; so they use their own command (the ID is split into a high byte and a low byte).
+	const anim_hiobj_command

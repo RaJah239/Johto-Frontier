@@ -338,7 +338,8 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Ret
 	dw BattleAnimCmd_ClearOpponentHud
 	dw BattleAnimCmd_StatLoop
-	assert_table_length 245 - FIRST_BATTLE_ANIM_CMD
+	dw BattleAnimCmd_HiObj
+	assert_table_length 246 - FIRST_BATTLE_ANIM_CMD
 
 BattleAnimCmd_ClearOpponentHud:
 ; Clear the HUD of the target of the attack
@@ -534,6 +535,12 @@ BattleAnimCmd_IfParamEqual:
 
 BattleAnimCmd_Obj:
 ; index, x, y, param
+	ld d, 0 ; high byte of the object ID
+	jr BattleAnimCmd_ReadObj
+BattleAnimCmd_HiObj:
+; index, x, y, param (object ID of $100 or more)
+	ld d, 1 ; high byte of the object ID
+BattleAnimCmd_ReadObj:
 	call GetBattleAnimByte
 	ld [wBattleObjectTempID], a
 	call GetBattleAnimByte

@@ -423,6 +423,7 @@ BattleBGEffect_BattlerObj_1Row:
 	ld [wBattleObjectTempYCoord], a
 	xor a
 	ld [wBattleObjectTempParam], a
+	ld d, 0 ; high byte of the object ID
 	call _QueueBattleAnimation
 	pop bc
 	ret
@@ -488,6 +489,7 @@ BattleBGEffect_BattlerObj_2Row:
 	ld [wBattleObjectTempYCoord], a
 	xor a
 	ld [wBattleObjectTempParam], a
+	ld d, 0 ; high byte of the object ID
 	call _QueueBattleAnimation
 	pop bc
 	ret

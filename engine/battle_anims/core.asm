@@ -23,7 +23,7 @@ QueueBattleAnimation:
 InitBattleAnimation:
 	ld a, [wBattleObjectTempID]
 	ld e, a
-	ld d, 0
+	; d is the high byte of the object ID (0 or 1), set by the object command
 	ld hl, BattleAnimObjects
 rept BATTLEANIMOBJ_LENGTH
 	add hl, de
