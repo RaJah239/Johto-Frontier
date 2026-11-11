@@ -354,6 +354,7 @@ DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 	const BATTLE_ANIM_FUNC_RADIAL_MOVE_OUT_STATS
 	const BATTLE_ANIM_FUNC_DARK_PULSE
 	const BATTLE_ANIM_FUNC_RADIAL_MOVE_IN
+	const BATTLE_ANIM_FUNC_PAUSE_THEN_RUSH
 DEF NUM_BATTLE_ANIM_FUNCS EQU const_value
 
 ; BattleAnimFrameData indexes (see data/battle_anims/framesets.asm)
