@@ -864,8 +864,8 @@ WiseGlassesDesc:
 	next "special moves.@"
 
 TrickStickDesc:
-	db   "Gives priority to"
-	next "Trick Room.@"
+	db   "First: Trick Room."
+	next "Quarters speed.@"
 
 AmbrosiaDesc:
 SacredAshDesc:

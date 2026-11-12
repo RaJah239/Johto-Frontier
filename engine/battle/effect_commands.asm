@@ -4923,6 +4923,8 @@ CalcPlayerStats:
 
 	ld hl, ApplyChoiceScarfEffectOnSpeed
 	call CallBattleCore
+	ld hl, ApplyTrickStickEffectOnSpeed
+	call CallBattleCore
 
 	jmp BattleCommand_SwitchTurn
 
@@ -4946,6 +4948,8 @@ CalcEnemyStats:
 	call CallBattleCore
 
 	ld hl, ApplyChoiceScarfEffectOnSpeed
+	call CallBattleCore
+	ld hl, ApplyTrickStickEffectOnSpeed
 	call CallBattleCore
 
 	jmp BattleCommand_SwitchTurn

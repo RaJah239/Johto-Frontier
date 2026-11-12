@@ -5922,6 +5922,7 @@ ApplyStatusEffectOnStats:
 	call ApplyPrzEffectOnSpeed
 	call ApplyFrbEffectOnSpclAttack
 	call ApplyChoiceScarfEffectOnSpeed
+	call ApplyTrickStickEffectOnSpeed
 	jmp ApplyBrnEffectOnAttack
 
 ApplyFrbEffectOnSpclAttack:
@@ -6052,6 +6053,41 @@ ApplyChoiceScarfEffectOnSpeed:
 	ld a, d
 	adc b
 	ld [hl], a ; high byte
+	ret
+
+ApplyTrickStickEffectOnSpeed:
+; quarter the holder's Speed while it holds a Trick Stick
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .enemy
+
+	ld a, [wBattleMonItem]
+	cp TRICK_STICK
+	ret nz
+	ld hl, wBattleMonSpeed + 1
+	jr .quarter
+
+.enemy
+	ld a, [wEnemyMonItem]
+	cp TRICK_STICK
+	ret nz
+	ld hl, wEnemyMonSpeed + 1
+
+.quarter
+	ld a, [hld]
+	ld b, a
+	ld a, [hl]
+	srl a
+	rr b
+	srl a
+	rr b
+	ld [hli], a
+	or b
+	jr nz, .ok
+	ld b, $1
+
+.ok
+	ld [hl], b
 	ret
 
 ApplyBrnEffectOnAttack:
