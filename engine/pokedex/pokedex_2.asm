@@ -216,7 +216,7 @@ DisplayDexEntry:
 	call CheckCaughtMon
 	pop hl ; dex entry ptr
  	pop bc ; bank?
-	jmp z, UncaughtMon_Info_Erase_PageNum ; ret z ; leave if we havent caught
+;	jmp z, UncaughtMon_Info_Erase_PageNum ; ret z ; leave if we havent caught
 ; Get the height of the Pokemon.
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
@@ -679,15 +679,15 @@ Pokedex_Clearbox:
 	pop bc
  	ret
 
-UncaughtMon_Info_Erase_PageNum:
+;UncaughtMon_Info_Erase_PageNum:
  ; overwrite the A button with plain line
  ; erase page num
- 	hlcoord 18, 5
- 	ld bc, 2
- 	ld a, $4e ; category box border
- 	call ByteFill
- 	hlcoord 18, 7
- 	ld bc, 2
- 	ld a, " " ; category box border
- 	call ByteFill	
- 	ret
+ ;	hlcoord 18, 5
+ ;	ld bc, 2
+ ;	ld a, $4e ; category box border
+ ;	call ByteFill
+ ;	hlcoord 18, 7
+ ;	ld bc, 2
+ ;	ld a, " " ; category box border
+ ;	call ByteFill	
+ ;	ret
