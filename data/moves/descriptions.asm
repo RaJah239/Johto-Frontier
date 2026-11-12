@@ -155,7 +155,6 @@ MoveDescriptions::
 	dw PsybeamDescription
 	dw PsyblastDescription
 	dw PsychicMDescription
-	dw PsychoCutDescription
 	dw PsyshockDescription
 	dw PursuitDescription
 	dw QuickAttackDescription
@@ -204,6 +203,7 @@ MoveDescriptions::
 	dw SpikesDescription
 	dw SpiteDescription
 	dw SplashDescription
+	dw SporeDescription
 	dw StealthRockDescription
 	dw SteelWingDescription
 	dw StickyWebDescription
@@ -288,12 +288,15 @@ StoneEdgeDescription:
 ThroatChopDescription:
 CrossChopDescription:
 LeafBladeDescription:
-PsychoCutDescription:
 NightSlashDescription:
 SlashDescription:
 KarateChopDescription:
 	db   "Has a high criti-"
 	line "cal hit ratio.@"
+
+SporeDescription:
+	db   "A move that"
+	line "induces sleep.@"
 
 AvalancheDescription:
 	db   "Damage doubles if"

@@ -148,6 +148,7 @@
 | Grass    | Leaf Blade   | Physical |   70  | 100% | 20 | High critical hit ratio                                              |
 | Grass    | Leech Seed   | Other    |  ---  |  95% | 10 | Steals HP from target every turn                                     |
 | Grass    | Mega Drain   | Special  |   60  | 100% | 20 | User recovers 50% of the damage dealt                                |
+| Grass    | Spore        | Other    |  ---  | 100% | 15 | Puts the target to sleep                                             |
 | Grass    | Seed Bomb    | Physical |   95  | 100% | 15 | 10% chance to burn the target                                        |
 | Grass    | Sleep Powder | Other    |  ---  |  85% | 15 | Puts the target to sleep                                             |
 | Grass    | Solarbeam    | Special  |  140  | 100% | 10 | Requires a turn to charge unless sunny                               |
@@ -219,7 +220,7 @@
 | Normal   | Horn Attack  | Physical |   65  | 100% | 25 | 20% chance to drop target's Defense by 1 stage                       |
 | Normal   | Hyper Beam   | Special  |  140  | 100% |  5 | User must recharge next turn, if not KO foe                          |
 | Normal   | Leer         | Other    |  ---  | 100% | 30 | Lowers target's Defense by 1 stage                                   |
-| Normal   | Lovely Kiss  | Other    |  ---  | 100% | 10 | Puts the target to sleep                                             |
+| Normal   | Lovely Kiss  | Other    |  ---  |  80% | 10 | Puts the target to sleep                                             |
 | Normal   | Mean Look    | Other    |  ---  | ---  |  5 | Prevents target from switching out                                   |
 | Normal   | Metronome    | Other    |  ---  | ---  | 10 | Randomly uses any move                                               |
 | Normal   | Milk Drink   | Other    |  ---  | ---  | 10 | Restores 50% of user's max HP                                        |
@@ -284,7 +285,6 @@
 | Psychic  | Light Screen | Other    |  ---  | ---  | 30 | Reduces special damage for 5 turns                                   |
 | Psychic  | Psychic      | Special  |   90  | 100% | 15 | 10% chance to drop target's Sp. Def by 1 stage                       |
 | Psychic  | Mirror Coat  | Special  |   --- | 100% | 20 | Returns double the damage taken from a special attack                |
-| Psychic  | Psycho Cut   | Physical |   90  | 100% | 15 | High critical hit ratio                                              |
 | Psychic  | Psyshock     | Special  |   80  | 100% | 10 | A move that does physical damage                                     |
 | Psychic  | Psybeam      | Special  |   65  | 100% | 20 | 10% chance to confuse the target                                     |
 | Psychic  | Psyblast     | Special  |  100  | 100% | 15 | A move that does physical damage                                     |

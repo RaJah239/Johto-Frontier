@@ -92,7 +92,7 @@ MoveTable:
 	db THUNDER      ; 57
 	db ROCK_BLAST   ; 58
 	db EARTHQUAKE   ; 59
-	db PSYCHO_CUT   ; 5a
+	db SPORE        ; 5a
 	db DIG          ; 5b
 	db TOXIC        ; 5c
 	db CONFUSION    ; 5d

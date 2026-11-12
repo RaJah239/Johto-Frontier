@@ -6,7 +6,6 @@ CriticalHitMoves:
 	db CROSS_CHOP
 	db THROAT_CHOP
 	db NIGHT_SLASH
-	db PSYCHO_CUT
 	db STONE_EDGE
 	db CUT
 	db -1

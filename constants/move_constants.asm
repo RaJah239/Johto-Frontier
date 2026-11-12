@@ -160,7 +160,6 @@
 	const PSYBEAM
 	const PSYBLAST
 	const PSYCHIC_M
-	const PSYCHO_CUT
 	const PSYSHOCK
 	const PURSUIT
 	const QUICK_ATTACK
@@ -209,6 +208,7 @@
 	const SPIKES
 	const SPITE
 	const SPLASH
+	const SPORE
 	const STEALTH_ROCK
 	const STEEL_WING
 	const STICKY_WEB

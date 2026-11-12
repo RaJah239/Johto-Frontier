@@ -133,7 +133,7 @@ Moves:
 	move LEER,         EFFECT_DEFENSE_DOWN,        0, NORMAL,        STATUS,   100, 30,   0
 	move LICK,         EFFECT_PARALYZE_HIT,       40, GHOST,         PHYSICAL, 100, 30,  30
 	move LIGHT_SCREEN, EFFECT_LIGHT_SCREEN,        0, PSYCHIC_TYPE,  STATUS,   100, 30,   0
-	move LOVELY_KISS,  EFFECT_SLEEP,               0, NORMAL,        STATUS,   100, 10,   0
+	move LOVELY_KISS,  EFFECT_SLEEP,               0, NORMAL,        STATUS,    80, 10,   0
 	move LOW_KICK,     EFFECT_FLINCH_HIT,         50, FIGHTING,      PHYSICAL, 100, 20,  10
 	move MACH_PUNCH,   EFFECT_PRIORITY_HIT,       40, FIGHTING,      PHYSICAL, 100, 20,   0
 	move MEAN_LOOK,    EFFECT_MEAN_LOOK,           0, NORMAL,        STATUS,   100,  5,   0
@@ -168,7 +168,6 @@ Moves:
 	move PSYBEAM,      EFFECT_CONFUSE_HIT,        65, PSYCHIC_TYPE,  SPECIAL,  100, 20,  10
 	move PSYBLAST,     EFFECT_PSYSHOCK,          100, PSYCHIC_TYPE,  SPECIAL,  100, 15,   0
 	move PSYCHIC_M,    EFFECT_SP_DEF_DOWN_HIT,    90, PSYCHIC_TYPE,  SPECIAL,  100, 15,  10
-	move PSYCHO_CUT,   EFFECT_NORMAL_HIT,         90, PSYCHIC_TYPE,  PHYSICAL, 100, 15,   0
 	move PSYSHOCK,     EFFECT_PSYSHOCK,           80, PSYCHIC_TYPE,  SPECIAL,  100, 10,   0
 	move PURSUIT,      EFFECT_PURSUIT,            50, DARK,          PHYSICAL, 100, 20,   0
 	move QUICK_ATTACK, EFFECT_PRIORITY_HIT,       40, NORMAL,        PHYSICAL, 100, 30,   0
@@ -217,6 +216,7 @@ Moves:
 	move SPIKES,       EFFECT_SPIKES,              0, GROUND,        STATUS,   100, 20,   0
 	move SPITE,        EFFECT_SPITE,               0, GHOST,         STATUS,   100,  5,   0
 	move SPLASH,       EFFECT_SPLASH,              0, NORMAL,        STATUS,   100, 30,   0
+	move SPORE,        EFFECT_SLEEP,               0, GRASS,         STATUS,   100, 15,   0
 	move STEALTH_ROCK, EFFECT_STEALTH_ROCK,        0, ROCK,           STATUS,  100, 20,   0
 	move STEEL_WING,   EFFECT_ATK_DEF_UP_HIT,     80, STEEL,         PHYSICAL, 100, 15,  20
 	move STICKY_WEB,   EFFECT_STICKY_WEB,          0, BUG,           STATUS,   100, 20,   0

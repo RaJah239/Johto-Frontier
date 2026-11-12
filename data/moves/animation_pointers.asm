@@ -156,7 +156,6 @@ BattleAnimations::
 	dba BattleAnim_Psybeam
 	dba BattleAnim_Psyblast
 	dba BattleAnim_PsychicM
-	dba BattleAnim_PsychoCut
 	dba BattleAnim_Psyshock
 	dba BattleAnim_Pursuit
 	dba BattleAnim_QuickAttack
@@ -205,6 +204,7 @@ BattleAnimations::
 	dba BattleAnim_Spikes
 	dba BattleAnim_Spite
 	dba BattleAnim_Splash
+	dba BattleAnim_Spore
 	dba BattleAnim_StealthRock
 	dba BattleAnim_SteelWing
 	dba BattleAnim_StickyWeb
