@@ -47,7 +47,7 @@ PlayersHouseRadioScript:
 if DEF(_DEBUG)
 	opentext
 	; party
-	givepoke MAGIKARP, 49, LEFTOVERS
+	givepoke MAGIKARP, 49
 	; 1st mon moves
 	loadmem wPartyMon1Moves+0, ZEN_HEADBUTT
 	loadmem wPartyMon1Moves+1, SPLASH
