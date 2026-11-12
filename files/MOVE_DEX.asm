@@ -150,9 +150,9 @@
 | Grass    | Mega Drain   | Special  |   60  | 100% | 20 | User recovers 50% of the damage dealt                                |
 | Grass    | Spore        | Other    |  ---  | 100% | 15 | Puts the target to sleep                                             |
 | Grass    | Seed Bomb    | Physical |   95  | 100% | 15 | 10% chance to burn the target                                        |
-| Grass    | Sleep Powder | Other    |  ---  |  85% | 15 | Puts the target to sleep                                             |
+| Grass    | Sleep Powder | Other    |  ---  |  80% | 15 | Puts the target to sleep                                             |
 | Grass    | Solarbeam    | Special  |  140  | 100% | 10 | Requires a turn to charge unless sunny                               |
-| Grass    | Stun Spore   | Other    |  ---  |  85% | 15 | Paralyzes the target                                                 |
+| Grass    | Stun Spore   | Other    |  ---  | 100% | 15 | Paralyzes the target                                                 |
 | Grass    | Vine Whip    | Physical |   40  | 100% | 30 | 10% chance to drop target's Defense by 1 stage                       |
 | Grass    | Wood Bash    | Physical |  140  | 100% | 15 | User takes recoil; 10% chance to lower target's Defense by 1 stage   |
 +----------+--------------+----------+-------+------+----+----------------------------------------------------------------------+
@@ -265,7 +265,7 @@
 | Poison   | Gunk Shot    | Physical |  120  |  85% | 10 | 20% chance to poison the target                                      |
 | Poison   | Poison Jab   | Physical |   80  | 100% | 15 | 30% chance to poison the target                                      |
 | Poison   | Poison Sting | Physical |   40  | 100% | 30 | 30% chance to poison the target                                      |
-| Poison   | PoisonPowder | Other    |  ---  |  85% | 15 | Poisons the target                                                   |
+| Poison   | PoisonPowder | Other    |  ---  | 100% | 15 | Poisons the target                                                   |
 | Poison   | Sludge       | Special  |   65  | 100% | 20 | 30% chance to poison the target                                      |
 | Poison   | Sludge Bomb  | Special  |   95  | 100% | 15 | 30% chance to poison the target                                      |
 | Poison   | Toxic        | Other    |  ---  |  90% | 10 | Badly poisons the target                                             |

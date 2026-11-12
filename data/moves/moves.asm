@@ -160,7 +160,7 @@ Moves:
 	move PLAY_ROUGH,   EFFECT_ATTACK_DOWN_HIT,    90, FAIRY,         PHYSICAL, 100, 15,  20
 	move POISON_JAB,   EFFECT_POISON_HIT,         80, POISON,        PHYSICAL, 100, 15,  30
 	move POISON_STING, EFFECT_POISON_HIT,         40, POISON,        PHYSICAL, 100, 30,  30
-	move POISONPOWDER, EFFECT_POISON,              0, POISON,        STATUS,    85, 15,   0
+	move POISONPOWDER, EFFECT_POISON,              0, POISON,        STATUS,   100, 15,   0
 	move POUNCE,       EFFECT_SPEED_DOWN_HIT,     60, BUG,           PHYSICAL, 100, 15, 100
 	move POWDER_SNOW,  EFFECT_FREEZE_HIT,         40, ICE,           SPECIAL,  100, 30,  10
 	move POWER_GEM,    EFFECT_SP_DEF_DOWN_HIT,    90, ROCK,          SPECIAL,  100, 15,  10
@@ -204,7 +204,7 @@ Moves:
 	move SKY_ATTACK,   EFFECT_RECOIL_HIT,        120, FLYING,        PHYSICAL, 100, 15,   0
 	move SLACK_OFF,    EFFECT_SLACK_OFF,           0, NORMAL,        STATUS,   100,  5,   0
 	move SLASH,        EFFECT_NORMAL_HIT,         70, NORMAL,        PHYSICAL, 100, 20,   0
-	move SLEEP_POWDER, EFFECT_SLEEP,               0, GRASS,         STATUS,    85, 15,   0
+	move SLEEP_POWDER, EFFECT_SLEEP,               0, GRASS,         STATUS,    80, 15,   0
 	move SLEEP_TALK,   EFFECT_SLEEP_TALK,          0, NORMAL,        STATUS,   100, 15,   0
 	move SLUDGE,       EFFECT_POISON_HIT,         65, POISON,        SPECIAL,  100, 20,  30
 	move SLUDGE_BOMB,  EFFECT_POISON_HIT,         95, POISON,        SPECIAL,  100, 15,  30
@@ -224,7 +224,7 @@ Moves:
 	move STONE_EDGE,   EFFECT_NORMAL_HIT,        100, ROCK,          PHYSICAL,  90, 10,   0
 	move STRING_SHOT,  EFFECT_SPEED_DOWN_2,        0, BUG,           STATUS,   100, 30,   0
 	move STRUGGLE,     EFFECT_RECOIL_HIT,         50, NORMAL,        PHYSICAL, 100,  1,   0
-	move STUN_SPORE,   EFFECT_PARALYZE,            0, GRASS,         STATUS,    85, 15,   0
+	move STUN_SPORE,   EFFECT_PARALYZE,            0, GRASS,         STATUS,   100, 15,   0
 	move SUBSTITUTE,   EFFECT_SUBSTITUTE,          0, NORMAL,        STATUS,   100, 10,   0
 	move SUCKER_PUNCH, EFFECT_SUCKER_PUNCH,       70, DARK,          PHYSICAL, 100, 10,   0
 	move SUNNY_DAY,    EFFECT_SUNNY_DAY,           0, FIRE,          STATUS,   100,  5,   0
