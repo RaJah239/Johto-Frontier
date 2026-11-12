@@ -1902,6 +1902,12 @@ BikeFunction:
 	ld de, Script_GetOnBike_Register
 	call .CheckIfRegistered
 	call QueueScript
+
+	; turn off bike music with an option
+	ld a, [wOptions5]
+	bit SKIP_BICYCLE_MUSIC, a
+	jr nz, .skip_bike_music
+
 	xor a
 	ld [wMusicFade], a
 	ld e, MUSIC_NONE
@@ -1912,6 +1918,7 @@ BikeFunction:
 	ld a, e
 	ld [wMapMusic], a
 	call PlayMusic
+.skip_bike_music
 	ld a, $1
 	ret
 

@@ -345,7 +345,12 @@ PlayMapMusicBike::
 	ld e, MUSIC_BICYCLE
 	ld a, [wPlayerState]
 	cp PLAYER_BIKE
+	jr nz, .not_bike
+	; The Bicycle music can be turned off from the options menu.
+	ld a, [wOptions5]
+	bit SKIP_BICYCLE_MUSIC, a
 	jr z, .play
+.not_bike
 	call GetMapMusic_MaybeSpecial
 .play
 	push de

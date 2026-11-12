@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 32
+DEF NUM_OPTIONS EQU 33
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -100,6 +100,7 @@ OptionsMenu_DrawLabels:
 	dw .Sound
 	dw .RunningShoes
 	dw .AutoBicycle
+	dw .BicycleMusic
 	dw .MinimalDialogue
 	dw .WeatherEffects
 	dw .QuickNurse
@@ -129,38 +130,39 @@ OptionsMenu_DrawLabels:
 	dw .Done
 	assert_table_length NUM_OPTIONS
 
-.TextSpeed:       db "Text Speed@"
-.BattleScene:     db "Battle Scene@"
-.Sound:           db "Audio Mode@"
-.RunningShoes:    db "Running Shoes@"
-.AutoBicycle:     db "Auto Bicycle@"
-.MinimalDialogue: db "Dialogue/Text@"
-.WeatherEffects:  db "Weather Effects@"
-.QuickNurse:      db "#mon Center@"
-.FieldActions:    db "Field Actions@"
-.PokePics:        db "#pics@"
-.IntrosOutros:    db "Intros & Outros@"
-.MonCries:        db "#mon Cries@"
-.DamageInfo:      db "Damage Info@"
-.WeatherText:     db "Weather Text@"
-.AbilityBanners:  db "Ability Banners@"
-.StatSkipMessages:db "Stat Messages@"
-.EffectiveText:   db "Effective Text@"
-.StatusText:      db "Status Text@"
-.FieldHazardsText:db "Field Hazards@"
-.KnockoutFlair:   db "Knockout Flair@"
-.ScaledExp:       db "Experience Gain@"
-.ExpShare:        db "Exp.Share@"
-.ExpNLvUp:        db "Exp & Level Up@"
-.Nicknaming:      db "Nicknaming@"
-.RematchPrompt:   db "Rematch Prompt@"
-.HardMode:        db "Hard Mode@"
-.TurboAButton:    db "Turbo A Button@"
-.TurboBButton:    db "Turbo B Button@"
-.QuickSave:       db "Quick Save@"
-.FastBoot:        db "Booting Options@"
-.Frame:           db "Frame   :Type@"
-.Done:            db "Done@"
+.TextSpeed:        db "Text Speed@"
+.BattleScene:      db "Battle Scene@"
+.Sound:            db "Audio Mode@"
+.RunningShoes:     db "Running Shoes@"
+.AutoBicycle:      db "Auto Bicycle@"
+.BicycleMusic:     db "Bicycle Music@"
+.MinimalDialogue:  db "Dialogue/Text@"
+.WeatherEffects:   db "Weather Effects@"
+.QuickNurse:       db "#mon Center@"
+.FieldActions:     db "Field Actions@"
+.PokePics:         db "#pics@"
+.IntrosOutros:     db "Intros & Outros@"
+.MonCries:         db "#mon Cries@"
+.DamageInfo:       db "Damage Info@"
+.WeatherText:      db "Weather Text@"
+.AbilityBanners:   db "Ability Banners@"
+.StatSkipMessages: db "Stat Messages@"
+.EffectiveText:    db "Effective Text@"
+.StatusText:       db "Status Text@"
+.FieldHazardsText: db "Field Hazards@"
+.KnockoutFlair:    db "Knockout Flair@"
+.ScaledExp:        db "Experience Gain@"
+.ExpShare:         db "Exp.Share@"
+.ExpNLvUp:         db "Exp & Level Up@"
+.Nicknaming:       db "Nicknaming@"
+.RematchPrompt:    db "Rematch Prompt@"
+.HardMode:         db "Hard Mode@"
+.TurboAButton:     db "Turbo A Button@"
+.TurboBButton:     db "Turbo B Button@"
+.QuickSave:        db "Quick Save@"
+.FastBoot:         db "Booting Options@"
+.Frame:            db "Frame   :Type@"
+.Done:             db "Done@"
 
 OptionsMenu_LoadOptions:
 	ld a, [wJumptableIndex]
@@ -195,6 +197,7 @@ GetOptionPointer:
 	dw Options_Sound
 	dw Options_RunningShoes
 	dw Options_AutoBicycle
+	dw Options_BicycleMusic
 	dw Options_MinimalDialogue
 	dw Options_WeatherEffects
 	dw Options_QuickNurse
@@ -1589,6 +1592,53 @@ Options_AutoBicycle:
 .On:  db "On @"
 .Off: db "Off@"
 
+
+Options_BicycleMusic:
+	ld hl, wOptions5
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit SKIP_BICYCLE_MUSIC, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+
+.LeftPressed:
+	bit SKIP_BICYCLE_MUSIC, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+
+.NonePressed:
+	bit SKIP_BICYCLE_MUSIC, [hl]
+	jr nz, .ToggleOn
+.ToggleOff:
+	res SKIP_BICYCLE_MUSIC, [hl]
+	ld de, .Off
+	jr .Display
+
+.ToggleOn:
+	set SKIP_BICYCLE_MUSIC, [hl]
+	ld de, .On
+.Display:
+	; If the option was just toggled while riding the Bicycle, switch
+	; between the map music and the Bicycle music right away.
+	ldh a, [hJoyPressed]
+	and D_LEFT | D_RIGHT
+	jr z, .display_value
+	ld a, [wPlayerState]
+	cp PLAYER_BIKE
+	jr nz, .display_value
+	call PlayMapMusicBike
+
+.display_value
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.On:  db "Off@"
+.Off: db "On @"
 Options_Frame:
 	ld hl, wTextboxFrame
 	ldh a, [hJoyPressed]
@@ -1797,6 +1847,7 @@ OptionsMenu_DrawDescription:
 	dw .DescSound
 	dw .DescRunningShoes
 	dw .DescAutoBicycle
+	dw .DescBicycleMusic
 	dw .DescMinimalDialogue
 	dw .DescWeatherEffects
 	dw .DescQuickNurse
@@ -1831,6 +1882,7 @@ OptionsMenu_DrawDescription:
 .DescSound:           db "Music/BGB Audio:<LF>Mono, Stereo, Off.@"
 .DescRunningShoes:    db "Set default to<LF>run or walk.@"
 .DescAutoBicycle:     db "Automount Bicycle<LF>when outdoors.@"
+.DescBicycleMusic:    db "Skip Bicycle Music<LF>when riding.@"
 .DescScaledExp:       db "Scaled. 8 badges:<LF>Normal or Zero.@"
 .DescQuickNurse:      db "#mon Center<LF>fast or slow heal.@"
 .DescWeatherText:     db "Weather lingers or<LF>ends text.@"

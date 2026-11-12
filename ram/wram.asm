@@ -1800,7 +1800,7 @@ wOptions4::
 	db
 
 wOptions5::
-; bit 0: trainer scaling
+; bit 0: skip bicycle music
 
 wOptionsEnd::
 
