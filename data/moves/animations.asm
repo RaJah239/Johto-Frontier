@@ -3414,18 +3414,6 @@ BattleAnim_LeechLife:
 	anim_setobjpal PAL_BATTLE_OB_GREEN, PAL_BTLCUSTOM_GREEN
 	anim_ret
 
-BattleAnimSub_Drain:
-	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $0
-	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $8
-	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $10
-	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $18
-	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $20
-	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $28
-	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $30
-	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $38
-	anim_wait 176
-	anim_ret
-
 BattleAnim_Harden:
 	anim_1gfx BATTLE_ANIM_GFX_REFLECT
 	anim_obp0 $0
@@ -4702,7 +4690,15 @@ BattleAnim_GigaDrain:
 	anim_call BattleAnim_TargetObj_1Row
 	anim_bgeffect BATTLE_BG_EFFECT_FADE_MONS_TO_BLACK_REPEATING, $0, BG_EFFECT_TARGET, $10
 	anim_sound 6, 3, SFX_GIGA_DRAIN
-	anim_call BattleAnimSub_Drain
+	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $0
+	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $8
+	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $10
+	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $18
+	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $20
+	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $28
+	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $30
+	anim_obj BATTLE_ANIM_OBJ_DRAIN, 132, 44, $38
+	anim_wait 176
 	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MONS_TO_BLACK_REPEATING
 	anim_call BattleAnim_ShowMon_0
 	anim_wait 1
