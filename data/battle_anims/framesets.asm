@@ -197,11 +197,12 @@ BattleAnimFrameData:
 	dw .Frameset_InkSplash           ; BATTLE_ANIM_FRAMESET_INK_SPLASH
 	dw .Frameset_MudShot             ; BATTLE_ANIM_FRAMESET_MUD_SHOT
 	dw .Frameset_UTurnFall           ; BATTLE_ANIM_FRAMESET_U_TURN_FALL
-	dw .Frameset_VoltSwitch           ; BATTLE_ANIM_FRAMESET_VOLT_SWITCH
-	dw .Frameset_DischargeSparksN     ; BATTLE_ANIM_FRAMESET_DISCHARGE_SPARKS_N
+	dw .Frameset_VoltSwitch          ; BATTLE_ANIM_FRAMESET_VOLT_SWITCH
+	dw .Frameset_DischargeSparksN    ; BATTLE_ANIM_FRAMESET_DISCHARGE_SPARKS_N
 	dw .Frameset_EnergyOrbLong       ; BATTLE_ANIM_FRAMESET_ENERGY_ORB_LONG
+	dw .Frameset_GrowingBall         ; BATTLE_ANIM_FRAMESET_GROWING_BALL
 	dw .Frameset_LongPunch           ; BATTLE_ANIM_FRAMESET_LONG_PUNCH
-	dw .Frameset_BulletPunch        ; BATTLE_ANIM_FRAMESET_BULLET_PUNCH
+	dw .Frameset_BulletPunch         ; BATTLE_ANIM_FRAMESET_BULLET_PUNCH
 	dw .Frameset_PoisonJab           ; BATTLE_ANIM_FRAMESET_POISON_JAB
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
@@ -1353,4 +1354,25 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_02, 1
 	oamframe BATTLE_ANIM_OAMSET_BULLET_PUNCH, 4
 	oamframe BATTLE_ANIM_OAMSET_02, 1
+	oamdelete
+
+.Frameset_GrowingBall:
+	oamframe BATTLE_ANIM_OAMSET_1F, 2
+	oamframe BATTLE_ANIM_OAMSET_1E, 2
+	oamframe BATTLE_ANIM_OAMSET_1F, 2
+	oamframe BATTLE_ANIM_OAMSET_1E, 2
+	oamframe BATTLE_ANIM_OAMSET_1F, 2
+	oamframe BATTLE_ANIM_OAMSET_1E, 2
+	oamframe BATTLE_ANIM_OAMSET_54, 2
+	oamframe BATTLE_ANIM_OAMSET_1E, 2
+	oamframe BATTLE_ANIM_OAMSET_54, 2
+	oamframe BATTLE_ANIM_OAMSET_1E, 2
+	oamframe BATTLE_ANIM_OAMSET_54, 2
+	oamframe BATTLE_ANIM_OAMSET_55, 2
+	oamframe BATTLE_ANIM_OAMSET_54, 2
+	oamframe BATTLE_ANIM_OAMSET_1E, 2
+	oamframe BATTLE_ANIM_OAMSET_54, 2
+	oamframe BATTLE_ANIM_OAMSET_55, 2
+	oamframe BATTLE_ANIM_OAMSET_54, 2
+	oamframe BATTLE_ANIM_OAMSET_55, 2
 	oamdelete
