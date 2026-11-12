@@ -308,6 +308,7 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_MUSHROOM
 	const BATTLE_ANIM_OBJ_POWDER_SHOOT
 	const BATTLE_ANIM_OBJ_BALL_POOF_YFIX
+	const BATTLE_ANIM_OBJ_BUBBLE_SOUR
 DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 
 ; DoBattleAnimFrame arguments (see engine/battle_anims/functions.asm)
@@ -1017,6 +1018,7 @@ DEF NUM_BATTLE_BG_EFFECTS EQU const_value - 1
 	const BATTLE_ANIM_GFX_BUG_BUZZ
 	const BATTLE_ANIM_GFX_MID_GLOW_CLEAR
 	const BATTLE_ANIM_GFX_MUSHROOM
+	const BATTLE_ANIM_GFX_BUBBLE_SOUR
 DEF NUM_BATTLE_ANIM_GFX EQU const_value - 1
 
 ; battle_bg_effect struct members (see macros/ram.asm)

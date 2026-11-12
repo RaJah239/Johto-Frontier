@@ -919,16 +919,16 @@ BattleAnim_Blizzard:
 
 BattleAnim_Bubblebeam:
 	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BUBBLE
-	anim_1gfx BATTLE_ANIM_GFX_BUBBLE
+	anim_1gfx BATTLE_ANIM_GFX_BUBBLE_SOUR
 .loop
 	anim_sound 16, 2, SFX_BUBBLEBEAM
-	anim_obj BATTLE_ANIM_OBJ_BUBBLE, 64, 92, $92
+	anim_obj BATTLE_ANIM_OBJ_BUBBLE_SOUR, 64, 92, $92
 	anim_wait 6
 	anim_sound 16, 2, SFX_BUBBLEBEAM
-	anim_obj BATTLE_ANIM_OBJ_BUBBLE, 64, 92, $b3
+	anim_obj BATTLE_ANIM_OBJ_BUBBLE_SOUR, 64, 92, $b3
 	anim_wait 6
 	anim_sound 16, 2, SFX_BUBBLEBEAM
-	anim_obj BATTLE_ANIM_OBJ_BUBBLE, 64, 92, $f4
+	anim_obj BATTLE_ANIM_OBJ_BUBBLE_SOUR, 64, 92, $f4
 	anim_wait 8
 	anim_loop 3, .loop
 	anim_wait 64
