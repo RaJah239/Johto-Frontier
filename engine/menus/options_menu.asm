@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 34
+DEF NUM_OPTIONS EQU 35
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -127,6 +127,7 @@ OptionsMenu_DrawLabels:
 	dw .FastBoot
 	dw .AutoBicycle
 	dw .BicycleMusic
+	dw .SurfMusic
 	dw .Frame
 	dw .Done
 	assert_table_length NUM_OPTIONS
@@ -163,6 +164,7 @@ OptionsMenu_DrawLabels:
 .FastBoot:         db "Booting Options@"
 .AutoBicycle:      db "Auto Bicycle@"
 .BicycleMusic:     db "Bicycle Music@"
+.SurfMusic:        db "Surf Music@"
 .Frame:            db "Frame   :Type@"
 .Done:             db "Done@"
 
@@ -226,6 +228,7 @@ GetOptionPointer:
 	dw Options_FastBoot
 	dw Options_AutoBicycle
 	dw Options_BicycleMusic
+	dw Options_SurfMusic
 	dw Options_Frame
 	dw Options_Done
 	assert_table_length NUM_OPTIONS
@@ -463,6 +466,56 @@ Options_RecoilText:
 
 .On:  db "On @"
 .Off: db "Off@"
+
+Options_SurfMusic:
+	ld hl, wOptions5
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit SKIP_SURF_MUSIC, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+
+.LeftPressed:
+	bit SKIP_SURF_MUSIC, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+
+.NonePressed:
+	bit SKIP_SURF_MUSIC, [hl]
+	jr nz, .ToggleOn
+.ToggleOff:
+	res SKIP_SURF_MUSIC, [hl]
+	ld de, .Off
+	jr .Display
+
+.ToggleOn:
+	set SKIP_SURF_MUSIC, [hl]
+	ld de, .On
+.Display:
+	; If the option was just toggled while surfing, switch between the
+	; map music and the Surfing music right away.
+	ldh a, [hJoyPressed]
+	and D_LEFT | D_RIGHT
+	jr z, .display_value
+	ld a, [wPlayerState]
+	cp PLAYER_SURF
+	jr z, .update_music
+	cp PLAYER_SURF_PIKA
+	jr nz, .display_value
+.update_music
+	call PlayMapMusic
+
+.display_value
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.On:  db "Off@"
+.Off: db "On @"
 
 Options_HardMode:
 	ld hl, wOptions2
@@ -1916,6 +1969,7 @@ OptionsMenu_DrawDescription:
 	dw .DescFastBoot
 	dw .DescAutoBicycle
 	dw .DescBicycleMusic
+	dw .DescSurfMusic
 	dw .DescFrame
 	dw .DescDone
 	assert_table_length NUM_OPTIONS
@@ -1952,5 +2006,6 @@ OptionsMenu_DrawDescription:
 .DescHardMode:        db "20<%> trainer boost<LF>Sp/Atk & Sp/Def.@"
 .DescAutoBicycle:     db "Automount Bicycle<LF>when outdoors.@"
 .DescBicycleMusic:    db "Skip Bicycle Music<LF>when riding.@"
+.DescSurfMusic:       db "Skip Surfing Music<LF>when surfing.@"
 .DescFrame:           db "Select your border<LF>of textboxes.@"
 .DescDone:            db "Save and Exit.<LF>@"

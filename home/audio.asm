@@ -395,6 +395,11 @@ RestartMapMusic::
 	jmp PopAFBCDEHL
 
 SpecialMapMusic::
+	; skip surfing music
+	ld a, [wOptions5]
+	bit SKIP_SURF_MUSIC, a
+	ret nz
+
 	ld a, [wPlayerState]
 	cp PLAYER_SURF
 	jr z, .surf
