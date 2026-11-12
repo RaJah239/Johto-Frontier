@@ -342,15 +342,17 @@ PlayMapMusicBike::
 
 	xor a
 	ld [wDontPlayMapMusicOnReload], a
-	ld e, MUSIC_BICYCLE
 	ld a, [wPlayerState]
 	cp PLAYER_BIKE
-	jr nz, .not_bike
+	jr nz, .map_music
 	; The Bicycle music can be turned off from the options menu.
 	ld a, [wOptions5]
 	bit SKIP_BICYCLE_MUSIC, a
-	jr z, .play
-.not_bike
+	jr nz, .map_music
+	ld e, MUSIC_BICYCLE
+	jr .play
+
+.map_music
 	call GetMapMusic_MaybeSpecial
 .play
 	push de
@@ -395,33 +397,34 @@ RestartMapMusic::
 	jmp PopAFBCDEHL
 
 SpecialMapMusic::
-	; skip surfing music
-	ld a, [wOptions5]
-	bit SKIP_SURF_MUSIC, a
-	ret nz
-
 	ld a, [wPlayerState]
 	cp PLAYER_SURF
 	jr z, .surf
 	cp PLAYER_SURF_PIKA
 	jr z, .surf_pika
-
-	ld a, [wStatusFlags2]
-	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, a
-	jr nz, .contest
-
-.no
-	and a
-	ret
+	jr .check_contest
 
 .surf_pika
 	ld e, MUSIC_SURFING_PIKACHU
-	scf
-	ret
+	jr .check_surf_music
 
 .surf
 	ld e, MUSIC_SURF
+.check_surf_music
+	; The Surfing music can be turned off from the options menu
+	; Carry must always be set on return when e holds a special track and clear otherwise
+	ld a, [wOptions5]
+	bit SKIP_SURF_MUSIC, a
+	jr nz, .check_contest
 	scf
+	ret
+
+.check_contest
+	ld a, [wStatusFlags2]
+	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, a
+	jr nz, .contest
+.no
+	and a
 	ret
 
 .contest
