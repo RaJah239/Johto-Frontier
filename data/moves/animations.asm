@@ -4272,34 +4272,42 @@ BattleAnim_Flail:
 	anim_jump BattleAnim_ShowMon_0
 
 BattleAnim_Hex:
-	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_PURPLE
 	anim_2gfx BATTLE_ANIM_GFX_FIRE, BATTLE_ANIM_GFX_SPEED
+	anim_battlergfx_2row
 	anim_bgp $f8
+	anim_bgeffect BATTLE_BG_EFFECT_BATTLEROBJ_1ROW, $0, BG_EFFECT_USER, $0
 	anim_wait 8
 	anim_sound 6, 2, SFX_SLUDGE_BOMB
+	anim_bgeffect BATTLE_BG_EFFECT_VIBRATE_MON, $0, $0, $0
 	anim_wait 40
 	anim_bgp $1b
-	anim_sound 0, 0, SFX_CURSE
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_PURPLE
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_WILL_O_WISP
+	anim_sound 0, 0, SFX_SPITE
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, BG_EFFECT_USER, $0
+	anim_obj BATTLE_ANIM_OBJ_BURNED, 116, 52, $10
+	anim_obj BATTLE_ANIM_OBJ_BURNED, 148, 52, $90
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $55, $1, $0
 .loop
-	anim_obj ANIM_OBJ_HEX, 136, 72, $6
+	anim_obj BATTLE_ANIM_OBJ_FOCUS, 136, 72, $6
 	anim_wait 2
-	anim_obj ANIM_OBJ_HEX, 128, 72, $6
+	anim_obj BATTLE_ANIM_OBJ_FOCUS, 128, 72, $6
 	anim_wait 2
-	anim_obj ANIM_OBJ_BLUE_FLAME, 128, 54, $10
-	anim_obj ANIM_OBJ_HEX, 144, 72, $8
+	anim_obj BATTLE_ANIM_OBJ_FOCUS, 144, 72, $8
 	anim_wait 2
-	anim_obj ANIM_OBJ_HEX, 120, 72, $8
+	anim_obj BATTLE_ANIM_OBJ_FOCUS, 120, 72, $8
 	anim_wait 2
-	anim_obj ANIM_OBJ_HEX, 152, 72, $6
+	anim_obj BATTLE_ANIM_OBJ_FOCUS, 152, 72, $6
 	anim_wait 2
-	anim_obj ANIM_OBJ_BLUE_FLAME, 144, 38, $90
-	anim_obj ANIM_OBJ_HEX, 112, 72, $8
+	anim_obj BATTLE_ANIM_OBJ_FOCUS, 112, 72, $8
 	anim_wait 2
-	anim_obj ANIM_OBJ_HEX, 160, 72, $8
+	anim_obj BATTLE_ANIM_OBJ_FOCUS, 160, 72, $8
 	anim_wait 2
 	anim_loop 3, .loop
-	anim_wait 48
-	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
+	anim_wait 8
+	anim_wait 16
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_YELLOW
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_RED
 	anim_ret
 
 BattleAnim_Aeroblast:
