@@ -339,7 +339,8 @@ BattleAnimCommands::
 	dw BattleAnimCmd_ClearOpponentHud
 	dw BattleAnimCmd_StatLoop
 	dw BattleAnimCmd_HiObj
-	assert_table_length 246 - FIRST_BATTLE_ANIM_CMD
+	dw BattleAnimCmd_SetBgPal
+	assert_table_length 247 - FIRST_BATTLE_ANIM_CMD
 
 BattleAnimCmd_ClearOpponentHud:
 ; Clear the HUD of the target of the attack
@@ -1008,6 +1009,10 @@ CopyMinimizePic:
 
 MinimizePic:
 INCBIN "gfx/battle/minimize.2bpp"
+
+BattleAnimCmd_SetBgPal:
+	xor a
+	jr SetBattleAnimPal
 
 BattleAnimCmd_SetObjPal:
 	ld a, 1

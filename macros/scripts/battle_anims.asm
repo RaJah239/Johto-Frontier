@@ -256,3 +256,11 @@ ENDM
 ; Objects with an ID of $100 or more can't be stored in a single byte,
 ; so they use their own command (the ID is split into a high byte and a low byte).
 	const anim_hiobj_command
+
+; Set one of the background palettes to a custom battle palette.
+	const anim_setbgpal_command
+MACRO anim_setbgpal
+	db anim_setbgpal_command
+	db \1 ; palette index to set (0-7)
+	db \2 ; battle palette
+ENDM
