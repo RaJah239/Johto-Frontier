@@ -63,12 +63,12 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_HEAL,             AI_Smart_Heal
 	dbw EFFECT_SLACK_OFF,        AI_Smart_SlackOff
 	dbw EFFECT_TOXIC,            AI_Smart_Toxic
-	dbw EFFECT_LIGHT_SCREEN,     AI_Smart_Screens
+	dbw EFFECT_LIGHT_SCREEN,     AI_Smart_LightScreen
 	dbw EFFECT_SUPER_FANG,       AI_Smart_SuperFang
 	dbw EFFECT_TRAP_TARGET,      AI_Smart_TrapTarget
 	dbw EFFECT_CONFUSE,          AI_Smart_Confuse
 	dbw EFFECT_SP_DEF_UP_2,      AI_Smart_SpDefenseUp2
-	dbw EFFECT_REFLECT,          AI_Smart_Screens
+	dbw EFFECT_REFLECT,          AI_Smart_Reflect
 	dbw EFFECT_PARALYZE,         AI_Smart_Paralyze
 	dbw EFFECT_SPEED_DOWN_HIT,   AI_Smart_SpeedDownHit
 	dbw EFFECT_SUBSTITUTE,       AI_Smart_Substitute
@@ -2008,7 +2008,22 @@ endr
 	inc [hl]
 	ret
 
-AI_Smart_Screens:
+AI_Smart_LightScreen:
+	call ShouldAIBoost
+	jmp nc, StandardDiscourage
+
+	; Light Clay extends screens and gives them priority
+	ld a, [wEnemyMonItem]
+	cp LIGHT_CLAY
+	jr nz, .no_clay
+	call DoesAIOutSpeedPlayer
+	jmp nc, StandardEncourage   ; slower: priority matters most
+.no_clay
+	call IsPlayerPhysicalOrSpecial
+	jmp c, StandardEncourage
+	jmp StandardDiscourage
+
+AI_Smart_Reflect:
 	call ShouldAIBoost
 	jmp nc, StandardDiscourage
 
