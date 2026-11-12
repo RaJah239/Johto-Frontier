@@ -197,4 +197,5 @@ SFX:
 	dba Sfx_StatUp
 	dba Sfx_StatDown
 	dba Sfx_AbilitySlideout
+	dba Sfx_SweetScent2
 	assert_table_length NUM_SFX

@@ -195,4 +195,5 @@
 	const SFX_STAT_UP
 	const SFX_STAT_DOWN
 	const SFX_ABILITY_SLIDEOUT
+	const SFX_SWEET_SCENT_2
 DEF NUM_SFX EQU const_value

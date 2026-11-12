@@ -255,6 +255,9 @@ BattleAnimOAMData:
 	battleanimoam $f8,  5, .OAMData_BugBuzz2 ; BATTLE_ANIM_OAMSET_BUG_BUZZ2
 	battleanimoam $00, 20, .OAMData_f1 ; BATTLE_ANIM_OAMSET_F1
 	battleanimoam $05, 16, .OAMData_f2 ; BATTLE_ANIM_OAMSET_F2
+	battleanimoam $00,  9, .OAMData_Mushroom1 ; BATTLE_ANIM_OAMSET_MUSHROOM_1
+	battleanimoam $06,  9, .OAMData_Mushroom1 ; BATTLE_ANIM_OAMSET_MUSHROOM_2
+	battleanimoam $0c,  9, .OAMData_Mushroom1 ; BATTLE_ANIM_OAMSET_MUSHROOM_3
 	assert_table_length NUM_BATTLE_ANIM_OAMSETS
 
 .OAMData_Stats:
@@ -1494,3 +1497,14 @@ endr
 	dbsprite   0,   0, 0, 7, $01, X_FLIP | Y_FLIP
 	dbsprite   1,  -1, 0, 7, $02, X_FLIP | Y_FLIP
 	dbsprite   0,  -1, 0, 7, $03, X_FLIP | Y_FLIP
+
+.OAMData_Mushroom1:
+	dbsprite  -2,  -2, 4, 4, $00, $0
+	dbsprite  -1,  -2, 4, 4, $01, $0
+	dbsprite   0,  -2, 4, 4, $00, X_FLIP
+	dbsprite  -2,  -1, 4, 4, $02, $0
+	dbsprite  -1,  -1, 4, 4, $03, $0
+	dbsprite   0,  -1, 4, 4, $02, X_FLIP
+	dbsprite  -2,   0, 4, 4, $04, $0
+	dbsprite  -1,   0, 4, 4, $05, $0
+	dbsprite   0,   0, 4, 4, $04, X_FLIP

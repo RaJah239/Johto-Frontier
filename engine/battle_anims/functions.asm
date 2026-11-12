@@ -111,6 +111,7 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_LastResort
 	dw BattleAnimFunc_AirCutter
 	dw BattleAnimFunc_SpiralDescentFast
+	dw BattleAnimFunc_RadialMoveOutSpore
 	assert_table_length NUM_BATTLE_ANIM_FUNCS
 
 BattleAnimFunc_Null:
@@ -3907,6 +3908,21 @@ Step_Stats:
 	ld hl, 3.0 ; speed
 	call Set_Rad_Pos
 	cp 80 ; final position
+	jmp nc, FarDeinitBattleAnimation
+	jr Rad_Move
+
+BattleAnimFunc_RadialMoveOutSpore:
+; Spore puffs (Polished Crystal): 1.5 pixels per frame, out to 40.
+	call BattleAnim_AnonJumptable
+
+	dw InitRadial
+	dw Step_Spore
+
+Step_Spore:
+	call Get_Rad_Pos
+	ld hl, 1.5 ; speed
+	call Set_Rad_Pos
+	cp 40 ; final position
 	jmp nc, FarDeinitBattleAnimation
 	jr Rad_Move
 

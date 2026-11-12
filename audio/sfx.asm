@@ -2619,6 +2619,34 @@ Sfx_SweetScent_Ch5:
 	pitch_sweep 0, 8
 	sound_ret
 
+Sfx_SweetScent2:
+	channel_count 2
+	channel 5, Sfx_SweetScent2_Ch5
+	channel 8, Sfx_SweetScent2_Ch8
+
+Sfx_SweetScent2_Ch5:
+	pitch_sweep 10, -7
+	duty_cycle 1
+	square_note 6, 15, 8, 1520
+	square_note 2, 15, 1, 1568
+	square_note 16, 15, 1, 1616
+	pitch_sweep 0, 8
+	sound_ret
+
+Sfx_SweetScent2_Ch8:
+	noise_note 2, 14, 8, 34
+	noise_note 17, 10, -2, 0
+.loop1
+	noise_note 4, 13, -1, 16
+	noise_note 8, 9, 1, 0
+	noise_note 2, 6, 1, 7
+	sound_loop 5, .loop1
+	noise_note 4, 9, -1, 0
+	noise_note 10, 6, 1, 0
+	noise_note 6, 5, -1, 0
+	noise_note 2, 2, 1, 7
+	sound_ret
+
 Sfx_BatonPass:
 	channel_count 2
 	channel 5, Sfx_BatonPass_Ch5

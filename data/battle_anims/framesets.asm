@@ -216,6 +216,7 @@ BattleAnimFrameData:
 	dw .Frameset_MidGlowShrinking    ; BATTLE_ANIM_FRAMESET_MID_GLOW_SHRINKING
 	dw .Frameset_IceLong             ; BATTLE_ANIM_FRAMESET_ICE_LONG
 	dw .Frameset_HeartShort          ; BATTLE_ANIM_FRAMESET_HEART_SHORT
+	dw .Frameset_BouncingMushroom   ; BATTLE_ANIM_FRAMESET_BOUNCING_MUSHROOM
 	dw .Frameset_PoisonJab           ; BATTLE_ANIM_FRAMESET_POISON_JAB
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
@@ -1465,3 +1466,11 @@ BattleAnimFrameData:
 .Frameset_HeartShort:
 	oamframe BATTLE_ANIM_OAMSET_86, 60
 	oamdelete
+
+.Frameset_BouncingMushroom:
+	oamframe BATTLE_ANIM_OAMSET_MUSHROOM_2, 16
+	oamframe BATTLE_ANIM_OAMSET_MUSHROOM_3, 16
+	oamframe BATTLE_ANIM_OAMSET_MUSHROOM_2, 4
+	oamframe BATTLE_ANIM_OAMSET_MUSHROOM_1, 2
+	oamframe BATTLE_ANIM_OAMSET_MUSHROOM_2, 32
+	oamend

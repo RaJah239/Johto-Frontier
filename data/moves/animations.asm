@@ -1605,6 +1605,26 @@ BattleAnim_StunSpore:
 	anim_wait 96
 	anim_ret
 
+BattleAnim_Spore:
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_DRAGON_BREATH
+	anim_3gfx BATTLE_ANIM_GFX_MUSHROOM, BATTLE_ANIM_GFX_POWDER, BATTLE_ANIM_GFX_SMOKE
+	anim_sound 0, 1, SFX_JUMP_OVER_LEDGE
+	anim_obj BATTLE_ANIM_OBJ_BALL_POOF_YFIX, 48, 88, $0
+	anim_wait 12
+	anim_obj BATTLE_ANIM_OBJ_MUSHROOM, 48, 88, $0
+	anim_wait 32
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_SPORE
+	anim_sound 0, 1, SFX_SWEET_SCENT_2
+	anim_obj BATTLE_ANIM_OBJ_POWDER_SHOOT, 48, 88, $35
+	anim_obj BATTLE_ANIM_OBJ_POWDER_SHOOT, 48, 88, $2b
+	anim_obj BATTLE_ANIM_OBJ_POWDER_SHOOT, 48, 88, $39
+	anim_obj BATTLE_ANIM_OBJ_POWDER_SHOOT, 48, 88, $27
+	anim_bgeffect BATTLE_BG_EFFECT_ALTERNATE_HUES, $0, $2, $0
+	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_wait 16
+	anim_setobjpal PAL_BATTLE_OB_RED, PAL_BTLCUSTOM_RED
+	anim_jump BattleAnim_StunSpore.loop
+
 BattleAnim_HyperBeam:
 	anim_1gfx BATTLE_ANIM_GFX_BEAM
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $30, $4, $10
