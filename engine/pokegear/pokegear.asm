@@ -475,6 +475,26 @@ PokegearClock_Joypad:
 .clockreset
 	farcall RestartClock
 	call Pokegear_CheckDailyReset ; a new day ends today's swarm etc.
+
+	; If the radio is on Buena's Password, reset it so the new
+	; day's password is generated and played.
+	ld a, [wPokegearRadioChannelBank]
+	and a
+	jr z, .no_buena_radio_reset
+	ld a, [wCurRadioLine]
+	cp BUENAS_PASSWORD
+	jr z, .reset_buena_radio
+	cp BUENAS_PASSWORD_2
+	jr c, .no_buena_radio_reset
+	cp BUENAS_PASSWORD_21 + 1
+	jr nc, .no_buena_radio_reset
+.reset_buena_radio
+	ld a, BUENAS_PASSWORD
+	ld [wCurRadioLine], a
+	xor a
+	ld [wNumRadioLinesPrinted], a
+
+.no_buena_radio_reset
 	call InitPokegearTilemap ; needed incase exit without setting the time
 	ld c, POKEGEARSTATE_CLOCKINIT
 	ld b, POKEGEARCARD_CLOCK
