@@ -1127,7 +1127,7 @@ BattleAnim_MeteorMash:
 
 BattleAnim_DrainPunch:
 	anim_setobjpal PAL_BATTLE_OB_GREEN, PAL_BTLCUSTOM_PEACH
-	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_CHARGE
+	anim_3gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_CHARGE, BATTLE_ANIM_GFX_SHINE
 	anim_sound 0, 1, SFX_MEGA_PUNCH
 	anim_obj BATTLE_ANIM_OBJ_LONG_PUNCH, 136, 52, $0
 	anim_wait 16
@@ -1144,14 +1144,20 @@ BattleAnim_DrainPunch:
 	anim_loop 6, .loop
 	anim_incobj 1
 	anim_wait 32
+	anim_call BattleAnimSub_Glimmer
 	anim_setobjpal PAL_BATTLE_OB_GREEN, PAL_BTLCUSTOM_GREEN
 	anim_ret
 
 BattleAnim_Absorb:
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GREEN
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_GREEN
 	anim_2gfx BATTLE_ANIM_GFX_CHARGE, BATTLE_ANIM_GFX_SHINE
 	anim_call SappingStub
 	anim_wait 36
-	anim_jump BattleAnimSub_Glimmer
+	anim_call BattleAnimSub_Glimmer
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_ret
 
 BattleAnim_ShadowPunch:
 	anim_1gfx BATTLE_ANIM_GFX_HIT
@@ -1893,6 +1899,8 @@ BattleAnimSub_Glimmer2:
 	anim_ret
 
 BattleAnim_MegaDrain:
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GREEN
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_GREEN
 	anim_2gfx BATTLE_ANIM_GFX_CHARGE, BATTLE_ANIM_GFX_SHINE
 	anim_call BattleAnim_TargetObj_1Row
 	anim_bgeffect BATTLE_BG_EFFECT_FADE_MONS_TO_BLACK_REPEATING, $0, BG_EFFECT_TARGET, $10
@@ -1901,7 +1909,10 @@ BattleAnim_MegaDrain:
 	anim_wait 120
 	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MONS_TO_BLACK_REPEATING
 	anim_call BattleAnim_ShowMon_0
-	anim_jump BattleAnimSub_Glimmer
+	anim_call BattleAnimSub_Glimmer
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_ret
 
 SappingStub:
 .loop
@@ -2423,37 +2434,37 @@ BattleAnim_TrickRoom:
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $6, $0
 	anim_bgeffect BATTLE_BG_EFFECT_PSYCHIC, $0, $0, $0
 .loop
-	anim_sound 0, 0, SFX_CHARGE
+	anim_sound 0, 0, SFX_WARP_TO
 	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 80, 72, $0
 	anim_wait 3
 	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 156, 36, $0
 	anim_wait 3
-	anim_sound 0, 0, SFX_CHARGE
+	anim_sound 0, 0, SFX_WARP_TO
 	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 40, 24, $0
 	anim_wait 3
 	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 140, 100, $0
 	anim_wait 3
-	anim_sound 0, 0, SFX_CHARGE
+	anim_sound 0, 0, SFX_WARP_TO
 	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 164, 64, $0
 	anim_wait 3
 	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 48, 66, $0
 	anim_wait 3
-	anim_sound 0, 0, SFX_CHARGE
+	anim_sound 0, 0, SFX_WARP_TO
 	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 102, 86, $0
 	anim_wait 3
 	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 150, 14, $0
 	anim_wait 3
-	anim_sound 0, 0, SFX_CHARGE
+	anim_sound 0, 0, SFX_WARP_TO
 	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 26, 80, $0
 	anim_wait 3
 	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 12, 50, $0
 	anim_wait 3
-	anim_sound 0, 0, SFX_CHARGE
+	anim_sound 0, 0, SFX_WARP_TO
 	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 72, 30, $0
 	anim_wait 3
 	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 110, 62, $0
 	anim_wait 3
-	anim_sound 0, 0, SFX_CHARGE
+	anim_sound 0, 0, SFX_WARP_TO
 	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 170, 94, $0
 	anim_wait 3
 	anim_obj BATTLE_ANIM_OBJ_TRICK_ROOM, 80, 104, $0
@@ -3372,7 +3383,7 @@ BattleAnim_Psybeam:
 
 BattleAnim_DreamEater:
 	anim_setobjpal PAL_BATTLE_OB_GREEN, PAL_BTLCUSTOM_PINK
-	anim_1gfx BATTLE_ANIM_GFX_CHARGE
+	anim_2gfx BATTLE_ANIM_GFX_CHARGE, BATTLE_ANIM_GFX_SHINE
 	anim_bgp $1b
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $6, $0
 .loop
@@ -3387,6 +3398,7 @@ BattleAnim_DreamEater:
 	anim_wait 3
 	anim_loop 7, .loop
 	anim_wait 32
+	anim_call BattleAnimSub_Glimmer
 	anim_setobjpal PAL_BATTLE_OB_GREEN, PAL_BTLCUSTOM_GREEN
 	anim_ret
 
@@ -5330,8 +5342,6 @@ BattleAnimSub_Glimmer:
 	anim_wait 5
 	anim_obj BATTLE_ANIM_OBJ_GLIMMER, 40, 84, $0
 	anim_wait 37
-	anim_setobjpal PAL_BATTLE_OB_GREEN, PAL_BTLCUSTOM_GREEN
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_InSandstorm:
