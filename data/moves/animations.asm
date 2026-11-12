@@ -645,6 +645,7 @@ BattleAnim_FireSpin:
 	anim_ret
 
 BattleAnim_DragonRage:
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_DRAGON_RAGE
 	anim_1gfx BATTLE_ANIM_GFX_FIRE
 .loop
 	anim_sound 6, 2, SFX_EMBER
@@ -652,6 +653,7 @@ BattleAnim_DragonRage:
 	anim_wait 3
 	anim_loop 16, .loop
 	anim_wait 64
+	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
 	anim_ret
 
 BattleAnim_Flamethrower:
