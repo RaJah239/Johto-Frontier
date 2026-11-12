@@ -3432,6 +3432,10 @@ BattleAnim_LeechLife:
 	anim_wait 2
 	anim_loop 5, .loop
 	anim_wait 28
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_YELLOW
+	anim_1gfx BATTLE_ANIM_GFX_SHINE
+	anim_call BattleAnimSub_Glimmer2
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_setobjpal PAL_BATTLE_OB_GREEN, PAL_BTLCUSTOM_GREEN
 	anim_ret
 
