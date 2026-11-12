@@ -99,8 +99,6 @@ OptionsMenu_DrawLabels:
 	dw .BattleScene
 	dw .Sound
 	dw .RunningShoes
-	dw .AutoBicycle
-	dw .BicycleMusic
 	dw .MinimalDialogue
 	dw .WeatherEffects
 	dw .QuickNurse
@@ -126,6 +124,8 @@ OptionsMenu_DrawLabels:
 	dw .TurboBButton
 	dw .QuickSave
 	dw .FastBoot
+	dw .AutoBicycle
+	dw .BicycleMusic
 	dw .Frame
 	dw .Done
 	assert_table_length NUM_OPTIONS
@@ -134,8 +134,6 @@ OptionsMenu_DrawLabels:
 .BattleScene:      db "Battle Scene@"
 .Sound:            db "Audio Mode@"
 .RunningShoes:     db "Running Shoes@"
-.AutoBicycle:      db "Auto Bicycle@"
-.BicycleMusic:     db "Bicycle Music@"
 .MinimalDialogue:  db "Dialogue/Text@"
 .WeatherEffects:   db "Weather Effects@"
 .QuickNurse:       db "#mon Center@"
@@ -161,6 +159,8 @@ OptionsMenu_DrawLabels:
 .TurboBButton:     db "Turbo B Button@"
 .QuickSave:        db "Quick Save@"
 .FastBoot:         db "Booting Options@"
+.AutoBicycle:      db "Auto Bicycle@"
+.BicycleMusic:     db "Bicycle Music@"
 .Frame:            db "Frame   :Type@"
 .Done:             db "Done@"
 
@@ -196,8 +196,6 @@ GetOptionPointer:
 	dw Options_BattleScene
 	dw Options_Sound
 	dw Options_RunningShoes
-	dw Options_AutoBicycle
-	dw Options_BicycleMusic
 	dw Options_MinimalDialogue
 	dw Options_WeatherEffects
 	dw Options_QuickNurse
@@ -223,6 +221,8 @@ GetOptionPointer:
 	dw Options_TurboBButton
 	dw Options_QuickSave
 	dw Options_FastBoot
+	dw Options_AutoBicycle
+	dw Options_BicycleMusic
 	dw Options_Frame
 	dw Options_Done
 	assert_table_length NUM_OPTIONS
@@ -1846,8 +1846,6 @@ OptionsMenu_DrawDescription:
 	dw .DescBattleScene
 	dw .DescSound
 	dw .DescRunningShoes
-	dw .DescAutoBicycle
-	dw .DescBicycleMusic
 	dw .DescMinimalDialogue
 	dw .DescWeatherEffects
 	dw .DescQuickNurse
@@ -1873,6 +1871,8 @@ OptionsMenu_DrawDescription:
 	dw .DescTurboBButton
 	dw .DescQuickSave
 	dw .DescFastBoot
+	dw .DescAutoBicycle
+	dw .DescBicycleMusic
 	dw .DescFrame
 	dw .DescDone
 	assert_table_length NUM_OPTIONS
@@ -1881,8 +1881,6 @@ OptionsMenu_DrawDescription:
 .DescBattleScene:     db "Turn On or Off<LF>Battle Animations.@"
 .DescSound:           db "Music/BGB Audio:<LF>Mono, Stereo, Off.@"
 .DescRunningShoes:    db "Set default to<LF>run or walk.@"
-.DescAutoBicycle:     db "Automount Bicycle<LF>when outdoors.@"
-.DescBicycleMusic:    db "Skip Bicycle Music<LF>when riding.@"
 .DescScaledExp:       db "Scaled. 8 badges:<LF>Normal or Zero.@"
 .DescQuickNurse:      db "#mon Center<LF>fast or slow heal.@"
 .DescWeatherText:     db "Weather lingers or<LF>ends text.@"
@@ -1908,5 +1906,7 @@ OptionsMenu_DrawDescription:
 .DescQuickSave:       db "Long press 'Start'<LF>to save the game.@"
 .DescFastBoot:        db "Intro, Main Menu,<LF>or In Game.@"
 .DescHardMode:        db "20<%> trainer boost<LF>Sp/Atk & Sp/Def.@"
+.DescAutoBicycle:     db "Automount Bicycle<LF>when outdoors.@"
+.DescBicycleMusic:    db "Skip Bicycle Music<LF>when riding.@"
 .DescFrame:           db "Select your border<LF>of textboxes.@"
 .DescDone:            db "Save and Exit.<LF>@"
