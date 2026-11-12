@@ -2515,24 +2515,31 @@ BattleAnim_Dig:
 	anim_ret
 
 BattleAnim_DrainKiss:
-	anim_3gfx BATTLE_ANIM_GFX_OBJECTS, BATTLE_ANIM_GFX_CHARGE, BATTLE_ANIM_GFX_SHINE
+	anim_3gfx BATTLE_ANIM_GFX_OBJECTS, BATTLE_ANIM_GFX_ANGELS, BATTLE_ANIM_GFX_CHARGE
+	anim_obj BATTLE_ANIM_OBJ_SWEET_KISS, 96, 40, $0
 	anim_sound 0, 1, SFX_SWEET_KISS
+	anim_wait 32
+	anim_clearobjs
 	anim_obj BATTLE_ANIM_OBJ_HEART_SHORT, 120, 40, $0
 	anim_wait 8
 .loop
 	anim_sound 0, 1, SFX_SWEET_KISS_2
 	anim_obj BATTLE_ANIM_OBJ_ABSORB_2, 128, 48, $2
-	anim_wait 5
+	anim_wait 2
 	anim_sound 0, 1, SFX_SWEET_KISS_2
 	anim_obj BATTLE_ANIM_OBJ_ABSORB_2, 136, 64, $3
-	anim_wait 5
+	anim_wait 3
 	anim_sound 0, 1, SFX_SWEET_KISS_2
 	anim_obj BATTLE_ANIM_OBJ_ABSORB_2, 136, 32, $4
-	anim_wait 5
+	anim_wait 2
 	anim_loop 5, .loop
 	anim_wait 32
 	anim_bgeffect BATTLE_BG_EFFECT_CYCLE_MID_OBPALS_GRAY_AND_YELLOW, $0, $0, $0
-	anim_jump BattleAnimSub_Glimmer2
+	anim_1gfx BATTLE_ANIM_GFX_SHINE
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PINK
+	anim_call BattleAnimSub_Glimmer2
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_ret
 
 BattleAnim_StringShot:
 	anim_1gfx BATTLE_ANIM_GFX_WEB
