@@ -1141,11 +1141,13 @@ BattleAnim_DrainPunch:
 	anim_sound 6, 3, SFX_WATER_GUN
 	anim_obj BATTLE_ANIM_OBJ_ABSORB_2, 136, 32, $4
 	anim_wait 2
-	anim_loop 6, .loop
+	anim_loop 5, .loop
 	anim_incobj 1
 	anim_wait 32
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_PEACH
 	anim_call BattleAnimSub_Glimmer
 	anim_setobjpal PAL_BATTLE_OB_GREEN, PAL_BTLCUSTOM_GREEN
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 
 BattleAnim_Absorb:
@@ -3428,7 +3430,7 @@ BattleAnim_LeechLife:
 	anim_sound 6, 3, SFX_WATER_GUN
 	anim_obj BATTLE_ANIM_OBJ_ABSORB, 136, 32, $4
 	anim_wait 2
-	anim_loop 6, .loop
+	anim_loop 5, .loop
 	anim_wait 28
 	anim_setobjpal PAL_BATTLE_OB_GREEN, PAL_BTLCUSTOM_GREEN
 	anim_ret
