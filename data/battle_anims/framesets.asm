@@ -203,8 +203,6 @@ BattleAnimFrameData:
 	dw .Frameset_GrowingBall         ; BATTLE_ANIM_FRAMESET_GROWING_BALL
 	dw .Frameset_LongPunch           ; BATTLE_ANIM_FRAMESET_LONG_PUNCH
 	dw .Frameset_BulletPunch        ; BATTLE_ANIM_FRAMESET_BULLET_PUNCH
-	dw .Frameset_DropletR           ; BATTLE_ANIM_FRAMESET_DROPLET_R
-	dw .Frameset_DropletL           ; BATTLE_ANIM_FRAMESET_DROPLET_L
 	dw .Frameset_SmellingSaltSurprised ; BATTLE_ANIM_FRAMESET_SMELLINGSALT_SURPRISED
 	dw .Frameset_FlashCannonChargeOrb ; BATTLE_ANIM_FRAMESET_FLASH_CANNON_CHARGE_ORB
 	dw .Frameset_SlowGrowingGlow     ; BATTLE_ANIM_FRAMESET_SLOW_GROWING_GLOW
@@ -212,8 +210,6 @@ BattleAnimFrameData:
 	dw .Frameset_IcicleCrash         ; BATTLE_ANIM_FRAMESET_ICICLE_CRASH
 	dw .Frameset_TrickRoom           ; BATTLE_ANIM_FRAMESET_TRICK_ROOM
 	dw .Frameset_PoisonDroplet       ; BATTLE_ANIM_FRAMESET_POISON_DROPLET
-	dw .Frameset_BugBuzz             ; BATTLE_ANIM_FRAMESET_BUG_BUZZ
-	dw .Frameset_MidGlowShrinking    ; BATTLE_ANIM_FRAMESET_MID_GLOW_SHRINKING
 	dw .Frameset_IceLong             ; BATTLE_ANIM_FRAMESET_ICE_LONG
 	dw .Frameset_HeartShort          ; BATTLE_ANIM_FRAMESET_HEART_SHORT
 	dw .Frameset_BouncingMushroom   ; BATTLE_ANIM_FRAMESET_BOUNCING_MUSHROOM
@@ -1370,14 +1366,6 @@ BattleAnimFrameData:
 	oamframe BATTLE_ANIM_OAMSET_02, 1
 	oamdelete
 
-.Frameset_DropletR:
-	oamframe BATTLE_ANIM_OAMSET_E0, 16
-	oamdelete
-
-.Frameset_DropletL:
-	oamframe BATTLE_ANIM_OAMSET_E0, 16, OAM_X_FLIP
-	oamdelete
-
 .Frameset_GrowingBall:
 	oamframe BATTLE_ANIM_OAMSET_1F, 2
 	oamframe BATTLE_ANIM_OAMSET_1E, 2
@@ -1444,17 +1432,6 @@ BattleAnimFrameData:
 
 .Frameset_PoisonDroplet:
 	oamframe BATTLE_ANIM_OAMSET_17, 24
-	oamdelete
-
-.Frameset_BugBuzz:
-	oamframe BATTLE_ANIM_OAMSET_14, 4, OAM_Y_FLIP
-	oamframe BATTLE_ANIM_OAMSET_BUG_BUZZ1, 4, OAM_Y_FLIP
-	oamframe BATTLE_ANIM_OAMSET_BUG_BUZZ2, 4, OAM_Y_FLIP
-	oamdelete
-
-.Frameset_MidGlowShrinking:
-	oamframe BATTLE_ANIM_OAMSET_F1, 1
-	oamframe BATTLE_ANIM_OAMSET_F2, 1
 	oamdelete
 
 .Frameset_IceLong:

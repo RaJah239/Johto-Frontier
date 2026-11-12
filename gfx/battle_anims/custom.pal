@@ -237,11 +237,6 @@ if !DEF(MONOCHROME)
 	RGB 31, 22, 25
 	RGB 29, 11, 11
 	RGB 00, 00, 00
-; pale_lime
-	RGB 31, 31, 31
-	RGB 29, 31, 31
-	RGB 17, 28, 31
-	RGB 03, 03, 06
 ; dragon_rage
 	RGB 31, 31, 31
 	RGB 18, 30, 31

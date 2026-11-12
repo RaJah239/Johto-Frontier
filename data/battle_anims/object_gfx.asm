@@ -78,12 +78,9 @@ AnimObjGFX:
 	anim_obj_gfx 48, AnimObjUTurnGFX
 	anim_obj_gfx 28, AnimObjVoltSwitchGFX
 	anim_obj_gfx 35, AnimObjHit3GFX
-	anim_obj_gfx  5, AnimObjMisc2GFX
 	anim_obj_gfx 10, AnimObjGlowShadowGFX
 	anim_obj_gfx 14, AnimObjTrickRoomGFX
 	anim_obj_gfx  3, AnimObjObjectsSurprisedGFX
-	anim_obj_gfx  9, AnimObjBugBuzzGFX
-	anim_obj_gfx  9, AnimObjMidGlowClearGFX
 	anim_obj_gfx 18, AnimObjMushroomGFX
 	anim_obj_gfx 14, AnimObjBubbleSourGFX
 	assert_table_length NUM_BATTLE_ANIM_GFX + 1
