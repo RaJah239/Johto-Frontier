@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 35
+DEF NUM_OPTIONS EQU 36
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -126,6 +126,7 @@ OptionsMenu_DrawLabels:
 	dw .QuickSave
 	dw .FastBoot
 	dw .AutoBicycle
+	dw .BikeTurning
 	dw .BicycleMusic
 	dw .SurfMusic
 	dw .Frame
@@ -163,6 +164,7 @@ OptionsMenu_DrawLabels:
 .QuickSave:        db "Quick Save@"
 .FastBoot:         db "Booting Options@"
 .AutoBicycle:      db "Auto Bicycle@"
+.BikeTurning:      db "Bike Turning@"
 .BicycleMusic:     db "Bicycle Music@"
 .SurfMusic:        db "Surf Music@"
 .Frame:            db "Frame   :Type@"
@@ -227,6 +229,7 @@ GetOptionPointer:
 	dw Options_QuickSave
 	dw Options_FastBoot
 	dw Options_AutoBicycle
+	dw Options_BikeTurning
 	dw Options_BicycleMusic
 	dw Options_SurfMusic
 	dw Options_Frame
@@ -1688,6 +1691,42 @@ Options_AutoBicycle:
 .Off: db "Off@"
 
 
+Options_BikeTurning:
+	ld hl, wOptions5
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit SLOW_BICYCLE_TURN, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
+
+.LeftPressed:
+	bit SLOW_BICYCLE_TURN, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+
+.NonePressed:
+	bit SLOW_BICYCLE_TURN, [hl]
+	jr nz, .ToggleOn
+.ToggleOff:
+	res SLOW_BICYCLE_TURN, [hl]
+	ld de, .Normal
+	jr .Display
+
+.ToggleOn:
+	set SLOW_BICYCLE_TURN, [hl]
+	ld de, .Slow
+.Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.Slow:   db "Slow  @"
+.Normal: db "Normal@"
+
 Options_BicycleMusic:
 	ld hl, wOptions5
 	ldh a, [hJoyPressed]
@@ -1968,6 +2007,7 @@ OptionsMenu_DrawDescription:
 	dw .DescQuickSave
 	dw .DescFastBoot
 	dw .DescAutoBicycle
+	dw .DescBikeTurning
 	dw .DescBicycleMusic
 	dw .DescSurfMusic
 	dw .DescFrame
@@ -2005,6 +2045,7 @@ OptionsMenu_DrawDescription:
 .DescFastBoot:        db "Intro, Main Menu,<LF>or In Game.@"
 .DescHardMode:        db "20<%> trainer boost<LF>Sp/Atk & Sp/Def.@"
 .DescAutoBicycle:     db "Automount Bicycle<LF>when outdoors.@"
+.DescBikeTurning:     db "Slow Bicycle<LF>turning speed.@"
 .DescBicycleMusic:    db "Skip Bicycle Music<LF>when riding.@"
 .DescSurfMusic:       db "Skip Surfing Music<LF>when surfing.@"
 .DescFrame:           db "Select your border<LF>of textboxes.@"

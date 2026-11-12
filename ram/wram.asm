@@ -1802,6 +1802,8 @@ wOptions4::
 wOptions5::
 ; bit 0: skip bicycle music
 ; bit 1: skip recoil text
+; bit 2: skip surf music
+; bit 3: bike turn speed
 
 wOptionsEnd::
 

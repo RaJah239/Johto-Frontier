@@ -1591,7 +1591,8 @@ StepFunction_Turn:
 	ld [hl], 4
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
-	ld [hl], 4
+	call .GetTurningSpeed
+	ld [hl], a
 	call ObjectStep_IncAnonJumptableIndex
 .step1
 	ld hl, OBJECT_STEP_DURATION
@@ -1608,7 +1609,8 @@ StepFunction_Turn:
 	ld [hl], a
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
-	ld [hl], 4
+	call .GetTurningSpeed
+	ld [hl], a
 	call ObjectStep_IncAnonJumptableIndex
 .step2
 	ld hl, OBJECT_STEP_DURATION
@@ -1618,6 +1620,24 @@ StepFunction_Turn:
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_FROM_MOVEMENT
+	ret
+
+.GetTurningSpeed:
+; 8 frames instead of 4 when turning with the bike
+	ldh a, [hMapObjectIndex]
+	and a
+	jr nz, .normal
+	ld a, [wPlayerState]
+	cp PLAYER_BIKE
+	jr nz, .normal
+	ld a, [wOptions5]
+	bit SLOW_BICYCLE_TURN, a
+	jr z, .normal
+	ld a, 8
+	ret
+
+.normal
+	ld a, 4
 	ret
 
 StepFunction_StrengthBoulder:
