@@ -1766,10 +1766,10 @@ UpdateRadioStation:
 RadioChannels:
 ; entries correspond to constants/radio_constants.asm
 ; frequency value given here = 4 × ingame_frequency − 2
+	dbw 0,  .BuenasPassword         ; 00.5
 	dbw 16, .PKMNTalkAndPokedexShow ; 04.5
 	dbw 28, .PokemonMusic           ; 07.5
 	dbw 32, .LuckyChannel           ; 08.5
-	dbw 40, .BuenasPassword         ; 10.5
 	dbw 52, .RuinsOfAlphRadio       ; 13.5
 	dbw 58, .NationalPark           ; 15.0
 	dbw 64, .PlacesAndPeople        ; 16.5
