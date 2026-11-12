@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 33
+DEF NUM_OPTIONS EQU 34
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -113,6 +113,7 @@ OptionsMenu_DrawLabels:
 	dw .EffectiveText
 	dw .StatusText
 	dw .FieldHazardsText
+	dw .RecoilText
 	dw .KnockoutFlair
 	dw .ScaledExp
 	dw .ExpShare
@@ -148,6 +149,7 @@ OptionsMenu_DrawLabels:
 .EffectiveText:    db "Effective Text@"
 .StatusText:       db "Status Text@"
 .FieldHazardsText: db "Field Hazards@"
+.RecoilText:       db "Recoil Text@"
 .KnockoutFlair:    db "Knockout Flair@"
 .ScaledExp:        db "Experience Gain@"
 .ExpShare:         db "Exp.Share@"
@@ -210,6 +212,7 @@ GetOptionPointer:
 	dw Options_EffectiveText
 	dw Options_StatusText
 	dw Options_FieldHazardsText
+	dw Options_RecoilText
 	dw Options_KnockoutFlair
 	dw Options_Scaled_Exp
 	dw Options_ExpShare
@@ -421,6 +424,45 @@ Options_RunningShoes:
 
 .Off: db "Off@"
 .On:  db "On @"
+
+Options_RecoilText:
+	ld hl, wOptions5
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	bit SKIP_RECOIL_TEXT, [hl]
+	jr nz, .ToggleOn
+	jr .ToggleOff
+
+.LeftPressed:
+	bit SKIP_RECOIL_TEXT, [hl]
+	jr z, .ToggleOff
+	jr .ToggleOn
+
+.NonePressed:
+	bit SKIP_RECOIL_TEXT, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
+
+.ToggleOn:
+	res SKIP_RECOIL_TEXT, [hl]
+	ld de, .On
+	jr .Display
+
+.ToggleOff:
+	set SKIP_RECOIL_TEXT, [hl]
+	ld de, .Off
+
+.Display:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.On:  db "On @"
+.Off: db "Off@"
 
 Options_HardMode:
 	ld hl, wOptions2
@@ -1860,6 +1902,7 @@ OptionsMenu_DrawDescription:
 	dw .DescEffectiveText
 	dw .DescStatusText
 	dw .DescFieldHazardsText
+	dw .DescRecoilText
 	dw .DescKnockoutFlair
 	dw .DescScaledExp
 	dw .DescExpShare
@@ -1895,6 +1938,7 @@ OptionsMenu_DrawDescription:
 .DescEffectiveText:   db "Show Effectiveness<LF>text or not.@"
 .DescStatusText:      db "Status text in<LF>battles.@"
 .DescFieldHazardsText:db "S.Rock, Spikes and<LF>T.Spikes text.@"
+.DescRecoilText:      db "Set battle recoil<LF>text On or Off.@"
 .DescKnockoutFlair:   db "Foe's animate<LF>after knockout.@"
 .DescAbilityBanners:  db "Display ability<LF>activation banner.@"
 .DescExpShare:        db "Share Experience<LF>with the party.@"

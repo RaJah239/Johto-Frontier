@@ -114,6 +114,7 @@ DEF NUM_FRAMES EQU const_value
 ; wOptions5::
 	const_def
 	const SKIP_BICYCLE_MUSIC ; 0
+	const SKIP_RECOIL_TEXT
 
 ; wWalkingDirection::
 	const_def -1

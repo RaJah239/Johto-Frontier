@@ -1801,6 +1801,7 @@ wOptions4::
 
 wOptions5::
 ; bit 0: skip bicycle music
+; bit 1: skip recoil text
 
 wOptionsEnd::
 

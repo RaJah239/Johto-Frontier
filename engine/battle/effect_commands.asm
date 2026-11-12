@@ -5820,6 +5820,12 @@ BattleCommand_Recoil:
 	ld [wWhichHPBar], a
 	predef AnimateHPBar
 	call RefreshBattleHuds
+
+	; skip recoil text
+	ld a, [wOptions5]
+	bit SKIP_RECOIL_TEXT, a
+	ret nz
+
 	ld hl, RecoilText
 	jmp StdBattleTextbox
 
