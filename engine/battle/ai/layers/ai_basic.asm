@@ -235,9 +235,9 @@ AI_Basic:
 	pop hl
 	jr c, .skip_recoil_check
 
-	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
-	cp EFFECT_RECOIL_HIT
-	jr z, .recoil
+;	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+;	cp EFFECT_RECOIL_HIT
+;	jr z, .recoil
 
 .skip_recoil_check
 ; if we are below 1/4 hp and have a healing move
@@ -281,7 +281,7 @@ AI_Basic:
 ; explode attack = 3
 	dec [hl]
 	dec [hl]
-.recoil
+;.recoil
 	dec [hl]
 	dec [hl]
 .not_accurate
