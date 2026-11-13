@@ -140,10 +140,14 @@ HandleSpeedBoost:
 	ld hl, SpeedBoostPokemon
 	call IsInByteArray
 	ret nc
+	
+	ShowActivationOrEntryOrKOAbilityPopup SpeedBoostText
+
 	ld b, SPEED
 	farcall BattleCommand_StatUp
 	farjp BattleCommand_StatUpMessage
 
+SpeedBoostText: db "Speed Boost@"
 INCLUDE "data/abilities/speed_boost_mons.asm"
 
 HandleHydration:
