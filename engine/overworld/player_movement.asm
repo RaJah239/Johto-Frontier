@@ -465,7 +465,12 @@ endc
 
 	ld de, SFX_JUMP_OVER_LEDGE
 	call PlaySFX
+	ld a, [wPlayerState]
+	cp PLAYER_BIKE
+	ld a, STEP_BIKE_LEDGE
+	jr z, .bike_ledge
 	ld a, STEP_LEDGE
+.bike_ledge
 	call .DoStep
 	ld a, PLAYERMOVEMENT_JUMP
 	scf
@@ -567,6 +572,7 @@ endc
 	dw .TurningStep
 	dw .BackJumpStep
 	dw .FinishFacing
+	dw .FastJumpStep
 	assert_table_length NUM_STEPS
 
 .SlowStep:
@@ -609,6 +615,11 @@ endc
 	turn_step UP
 	turn_step LEFT
 	turn_step RIGHT
+.FastJumpStep:
+	fast_jump_step_down
+	fast_jump_step_up
+	fast_jump_step_left
+	fast_jump_step_right
 .FinishFacing:
 	db $80 | DOWN
 	db $80 | UP
