@@ -1,7 +1,7 @@
 	db CLAYDOL ; 202
 
-	db  65,  70, 105,  75,  70, 120 ; 505 BST
-	evs  1,   1,   2,   1,   1,   3
+	db  80,  50,  50, 105,  95, 135 ; 515 BST
+	evs  1,   0,   0,   2,   2,   3
 	;   hp  atk  def  spd  sat  sdf
 
 	db GROUND, PSYCHIC_TYPE ; type
