@@ -2349,10 +2349,10 @@ BillsPC_MoveItem:
 	call BillsPC_CursorPick1
 	pop bc
 
-	ld a, 1
-	ldh [rVBK], a
-	dec a
+	xor a
 	ldh [hBGMapMode], a
+	inc a ; 1
+	ldh [rVBK], a
 
 	; Load held item icon
 	ld hl, wShadowOAMSprite31
