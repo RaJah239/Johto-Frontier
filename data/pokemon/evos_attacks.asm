@@ -38,6 +38,12 @@ TyphlosionEvosAttacks:
 	db 36, DOUBLE_EDGE
 	db 0 ; no more level-up moves
 
+PorygonEvosAttacks:
+	db EVOLVE_TRADE, UP_GRADE, PORYGON2
+Porygon2EvosAttacks:
+	db EVOLVE_HAPPINESS, TR_ANYTIME, PORYGONZ
+PorygonZEvosAttacks:
+
 TotodileEvosAttacks:
 CroconawEvosAttacks:
 FeraligatrEvosAttacks:
@@ -252,9 +258,6 @@ TyranitarEvosAttacks:
 SalamenceEvosAttacks:
 MetagrossEvosAttacks:
 HaxorusEvosAttacks:
-PorygonEvosAttacks:
-Porygon2EvosAttacks:
-PorygonZEvosAttacks:
 OmanyteEvosAttacks:
 OmastarEvosAttacks:
 LileepEvosAttacks:
