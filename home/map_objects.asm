@@ -494,10 +494,6 @@ _GetMovementIndex::
 	ret
 
 UpdateSprites::
-	ld a, [wStateFlags]
-	bit SPRITE_UPDATES_DISABLED_F, a
-	ret z
-
 	farcall UpdateAllObjectsFrozen
 	farjp _UpdateSprites
 
