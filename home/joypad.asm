@@ -518,10 +518,6 @@ BlinkCursor::
 	ld [hl], a
 	ld a, -1
 	ldh [hMapObjectIndex], a
-	ld a, 6
-	ldh [hObjectStructIndex], a
-	ret
-
 .place_arrow
 	ldh a, [hMapObjectIndex]
 	and a
@@ -540,3 +536,15 @@ BlinkCursor::
 	ld a, "▼"
 	ld [hl], a
 	ret
+
+WaitButtonRelease::
+; wait until A and B are released
+; prevents turbo/autofire input from bleeding into the following menu
+; (e.g. the Surf yes/no prompt)
+.loop
+	call GetJoypad
+	ldh a, [hJoyDown]
+	and A_BUTTON | B_BUTTON
+	jr nz, .loop
+	ld c, 4
+	jmp DelayFrames

@@ -697,10 +697,12 @@ AskSurfScript:
 	checkevent EVENT_PIKA_SURF
 	iftrue .AskPikaSurf
 	writetext AskSurfText
+	callasm WaitButtonRelease
 	sjump .YesOrNoSurf
 
 .AskPikaSurf:
 	writetext AskPikaSurfText
+	callasm WaitButtonRelease
 .YesOrNoSurf:
 	yesorno
 	iftrue UsedSurfScript
