@@ -1,7 +1,7 @@
 	db PONYTA ; 110
 
-	db  50,  90,  55,  90,  60,  65 ; 410 BST
-	evs  0,   2,   0,   2,   1,   0
+	db  70,  90,  45,  50,  15,  45 ; 315 BST
+	evs  1,   2,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
 	db FIRE, FAIRY ; type
