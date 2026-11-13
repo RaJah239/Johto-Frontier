@@ -626,8 +626,19 @@ ShouldIgniteFlameOrb:
 	and a
 	jr nz, .no
 
+	; don't ignite on the turn a Pokemon is switched in
 	ldh a, [hBattleTurn]
 	and a
+	jr z, .player_switch_check
+	ld a, [wEnemyIsSwitching]
+	and a
+	jr nz, .no
+	jr .types
+.player_switch_check
+	ld a, [wPlayerIsSwitching]
+	and a
+	jr nz, .no
+.types
 	jr z, .playerTurn
 	ld a, [wEnemyMonType1]
 	ld b, a
@@ -727,6 +738,19 @@ ShouldTriggerToxicOrb:
 	and a
 	jr nz, .no
 
+	; don't activate on the turn a Pokemon is switched in
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .player_switch_check
+	ld a, [wEnemyIsSwitching]
+	and a
+	jr nz, .no
+	jr .types
+.player_switch_check
+	ld a, [wPlayerIsSwitching]
+	and a
+	jr nz, .no
+.types
 	ldh a, [hBattleTurn]
 	and a
 	jr z, .playerTurn
