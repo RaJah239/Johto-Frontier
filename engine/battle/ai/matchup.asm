@@ -2462,6 +2462,15 @@ MSim_EvalSlot:
 	jr nc, .lost
 	; +128 if 100% accurate
 	pop af ; accuracy
+	ld c, a
+	ld a, [wBattleMonStatus]
+	and SLP_MASK
+	jr z, .not_asleep_acc
+	ld a, 100 percent
+	jr .check_acc
+.not_asleep_acc
+	ld a, c
+.check_acc
 	cp 100 percent
 	ld a, b
 	jr c, .key

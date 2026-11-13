@@ -254,10 +254,26 @@ AI_Basic:
 
 .check_accuracy
 ; encourage more accurate moves if they can kill
+; all moves hit a sleeping foe, so treat them as 100% accurate
+	ld a, [wBattleMonStatus]
+	and SLP_MASK
+	jr nz, .accurate_move
 	ld a, [wEnemyMoveStruct + MOVE_ACC]
 	cp 100 percent
 	jr c, .not_accurate
 
+.accurate_move
+; if the player is asleep, prefer strong moves
+	ld a, [wBattleMonStatus]
+	and SLP_MASK
+	jr z, .no_strong_sleep_bonus
+	ld a, [wEnemyMoveStruct + MOVE_POWER]
+	cp 80
+	jr c, .no_strong_sleep_bonus
+	dec [hl]
+	dec [hl]
+
+.no_strong_sleep_bonus
 ; encouragements to KO enemy
 ; standard attack = 9
 ; recoil attack = 7
