@@ -1,8 +1,8 @@
 	db RAPIDASH ; 111
 
-	db  65, 115,  70, 115,  60,  80 ; 505 BST
-	evs  1,   2,   1,   2,   1,   1
-	;   hp  atk  def  spd  sat  sdf
+	db  105, 140,  55,  95,  30,  55 ; 485 BST
+	evs   2,   3,   0,   2,   0,   0
+	;    hp  atk  def  spd  sat  sdf
 
 	db FIRE, FAIRY ; type
 	db 60 ; catch rate
