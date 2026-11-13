@@ -159,8 +159,8 @@ FlameOrbText:
 
 ToxicOrbText:
  	text "<USER>'s"
-    line "Toxic Orb poisoned"
-    cont "itself!"
+    line "Toxic Orb badly"
+    cont "poisoned itself!"
     prompt
 
 HookedPokemonAttackedText:

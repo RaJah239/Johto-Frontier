@@ -701,6 +701,20 @@ HandleToxicOrb:
 	ld a, BATTLE_VARS_STATUS
 	call GetBattleVarAddr
 	set PSN, [hl]
+
+	ld a, BATTLE_VARS_SUBSTATUS5
+	call GetBattleVarAddr
+	set SUBSTATUS_TOXIC, [hl]
+
+	ldh a, [hBattleTurn]
+	and a
+	ld de, wPlayerToxicCount
+	jr z, .toxic_count
+	ld de, wEnemyToxicCount
+.toxic_count
+	xor a
+	ld [de], a
+
 	call UpdateUserInParty
 	farcall BattleCommand_SwitchTurn
 	ld de, ANIM_PSN
