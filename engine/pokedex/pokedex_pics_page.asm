@@ -42,7 +42,7 @@ Pokedex_PlaceAnimatedFrontpic:
 	predef GetAnimatedFrontpic
 	hlcoord 1, 1
 	ld d, $0
-	ld e, ANIM_MON_MENU
+	ld e, ANIM_MON_DEX_PICS ; ends on VRAM 1 (VRAM 0 $00-$27 is the backpic and B > BACK)
 	predef LoadMonAnimation
 	ld hl, wStatsScreenFlags
 	set 6, [hl]

@@ -51,6 +51,7 @@ PokeAnims:
 	dw .Egg2
 	dw .SlowNoCry
 	dw .NormalNoCry
+	dw .DexPics
 
 .Slow:   pokeanim StereoCry, Setup2, Play
 .Normal: pokeanim StereoCry, Setup, Play
@@ -63,6 +64,18 @@ PokeAnims:
 .Egg2:   pokeanim Idle, Play
 .SlowNoCry: pokeanim Setup2, Play
 .NormalNoCry: pokeanim Setup, Play
+; .Menu, but the pic stays on VRAM 1 at the end: the dex pictures page keeps
+; the backpic and B > BACK in VRAM 0 $00-$27, over the VRAM 0 copy of the
+; frontpic that PokeAnim_Finish would switch to
+.DexPics:
+	db (PokeAnim_CryNoWait_SetupCommand - PokeAnim_SetupCommands) / 2
+	db (PokeAnim_Setup_SetupCommand - PokeAnim_SetupCommands) / 2
+	db (PokeAnim_Play_SetupCommand - PokeAnim_SetupCommands) / 2
+	db (PokeAnim_SetWait_SetupCommand - PokeAnim_SetupCommands) / 2
+	db (PokeAnim_Wait_SetupCommand - PokeAnim_SetupCommands) / 2
+	db (PokeAnim_Idle_SetupCommand - PokeAnim_SetupCommands) / 2
+	db (PokeAnim_Play_SetupCommand - PokeAnim_SetupCommands) / 2
+	db (PokeAnim_FinishVBank1_SetupCommand - PokeAnim_SetupCommands) / 2
 
 AnimateFrontpic:
 	call AnimateMon_CheckIfPokemon
@@ -134,6 +147,7 @@ PokeAnim_SetupCommands:
 	add_setup_command PokeAnim_Cry
 	add_setup_command PokeAnim_CryNoWait
 	add_setup_command PokeAnim_StereoCry
+	add_setup_command PokeAnim_FinishVBank1
 
 PokeAnim_SetWait:
 	ld a, 18
@@ -211,6 +225,21 @@ PokeAnim_BasePic:
 
 PokeAnim_Finish:
 	call PokeAnim_DeinitFrames
+	ld hl, wPokeAnimSceneIndex
+	set 7, [hl]
+	ret
+
+PokeAnim_FinishVBank1:
+; PokeAnim_Finish, but the pic keeps its VRAM 1 attributes (VRAM 1 $00-$30
+; holds the same base pic as VRAM 0)
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPokeAnimCoord)
+	ldh [rSVBK], a
+	call PokeAnim_PlaceGraphic
+	farcall HDMATransferTilemapToWRAMBank3
+	pop af
+	ldh [rSVBK], a
 	ld hl, wPokeAnimSceneIndex
 	set 7, [hl]
 	ret
