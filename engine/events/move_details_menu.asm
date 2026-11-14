@@ -223,6 +223,8 @@ MoveDetailsMenu_FixCancelBorder:
 	inc hl
 	ret
 
+DEF MOVE_DETAILS_ICON_PAL EQU 6 ; the screen only uses palette 7
+
 MoveDetailsMenu_PrintMoveDetails:
 	hlcoord 0, 10
 	lb bc, 6, 18
@@ -244,8 +246,9 @@ MoveDetailsMenu_PrintMoveDetails:
 
 	ld a, [wCurSpecies]
 	ld b, a
-	hlcoord 10, 11
-	predef PrintMoveType
+	ld c, MOVE_DETAILS_ICON_PAL
+	lb de, 11, 10
+	farcall MoveIcons_Show
 
 	hlcoord 0, 9
 	ld de, MoveDetailsMenuTypeTopString
@@ -261,13 +264,6 @@ MoveDetailsMenu_PrintMoveDetails:
 	call PlaceString
 	hlcoord 1, 11
 	ld de, MoveDetailsMenuAccuracyString
-	call PlaceString
-
-	ld a, [wCurSpecies]
-	ld b, a
-	farcall GetMoveCategoryName
-	hlcoord 10, 12
-	ld de, wStringBuffer1
 	call PlaceString
 
 	ld a, [wMenuSelection]
