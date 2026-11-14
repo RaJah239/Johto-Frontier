@@ -254,10 +254,15 @@ AI_Basic:
 
 .check_accuracy
 ; encourage more accurate moves if they can kill
-; all moves hit a sleeping foe, so treat them as 100% accurate
+; all moves hit a sleeping foe, and with No Guard on either side, so treat
+; them as 100% accurate
 	ld a, [wBattleMonStatus]
 	and SLP_MASK
 	jr nz, .accurate_move
+	push hl
+	farcall NoGuardCheck
+	pop hl
+	jr c, .accurate_move
 	ld a, [wEnemyMoveStruct + MOVE_ACC]
 	cp 100 percent
 	jr c, .not_accurate

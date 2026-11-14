@@ -642,6 +642,9 @@ SECTION "Trapping Abilities", ROMX
 INCLUDE "engine/abilities/trapping_abilities.asm"
 
 
+SECTION "No Guard", ROMX
+INCLUDE "engine/abilities/no_guard.asm"
+
 SECTION "Regenerator", ROMX
 INCLUDE "engine/abilities/regenerator.asm"
 

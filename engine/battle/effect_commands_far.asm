@@ -259,6 +259,14 @@ _BattleCommand_CheckHit:
 	farcall DrainSub
 	jmp z, .Miss
 
+; ========================
+; === Ability: No Guard ===
+; ========================
+	; the user or the target has No Guard: it hits (even in the air or
+	; underground)
+	farcall NoGuardCheck
+	ret c
+
 	farcall FlyDigMovesMiss
 	jmp nz, .Miss
 

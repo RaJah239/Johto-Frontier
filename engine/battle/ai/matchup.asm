@@ -2465,11 +2465,13 @@ MSim_EvalSlot:
 	ld c, a
 	ld a, [wBattleMonStatus]
 	and SLP_MASK
-	jr z, .not_asleep_acc
-	ld a, 100 percent
-	jr .check_acc
-.not_asleep_acc
+	jr nz, .sure_hit
+	farcall NoGuardCheck ; (b and c survive)
+	jr c, .sure_hit
 	ld a, c
+	jr .check_acc
+.sure_hit
+	ld a, 100 percent
 .check_acc
 	cp 100 percent
 	ld a, b
