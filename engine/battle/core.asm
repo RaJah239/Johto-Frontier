@@ -2589,6 +2589,8 @@ LoadEnemyMonToSwitchTo:
 	; 'b' contains the PartyNr of the mon the AI will switch to
 	push bc
 	farcall EnemyRegenerator ; the mon that's switching out
+	ld hl, wNoGuardShown
+	res 1, [hl] ; the incoming mon shows No Guard on its first attack
 	pop bc
 	ld a, b
 	ld [wCurPartyMon], a
@@ -3020,6 +3022,8 @@ TryToRunAwayFromBattle:
 
 InitBattleMon:
 	farcall PlayerRegenerator ; the mon that's switching out
+	ld hl, wNoGuardShown
+	res 0, [hl] ; the incoming mon shows No Guard on its first attack
 	ld a, [wCurPartyMon]
 	ld [wBattleMonPartySlot], a
 	ld a, MON_SPECIES
