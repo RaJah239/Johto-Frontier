@@ -970,6 +970,11 @@ BattleCommand_Stab:
 	pop hl
 
 	ld a, [wCurType]
+	; Freeze-Dry's ICE2 is Ice for STAB
+	cp ICE2
+	jr nz, .got_stab_type
+	ld a, ICE
+.got_stab_type
 	cp b
 	jr z, .stab
 	cp c
@@ -6929,6 +6934,10 @@ TypeSyncPopup:
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar
 	and TYPE_MASK
+	cp ICE2 ; Freeze-Dry: Ice for STAB (see BattleCommand_Stab)
+	jr nz, .got_type
+	ld a, ICE
+.got_type
 	ld c, a ; c = move type
 
 	ldh a, [hBattleTurn]
