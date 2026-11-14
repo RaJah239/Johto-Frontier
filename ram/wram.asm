@@ -619,7 +619,8 @@ wLastEnemyMove:: db
 wExpShare:: db
 wExpShareText:: db
 wHalfDamage:: db
-	ds 2 ; (unused: was switch AI state)
+wPlayerTurnStartMon:: db ; wCurBattleMon at the start of the turn
+wEnemyTurnStartMon:: db  ; wCurOTMon at the start of the turn
 wAIDrainSimEnemyHP:: dw ; AI_PreferDrainMoves: simulated HP (big-endian)
 wAIDrainSimPlayerHP:: dw
 wAIDrainFlags:: db ; AI_PreferDrainMoves: AI_DRAIN_*_F

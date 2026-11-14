@@ -121,6 +121,11 @@ BattleTurn:
 	ld [wBattleHasJustStarted], a
 	ld [wCurDamage], a
 	ld [wCurDamage + 1], a
+	; mons that come in from here on are "sent out this turn" (SentOutThisTurn)
+	ld a, [wCurBattleMon]
+	ld [wPlayerTurnStartMon], a
+	ld a, [wCurOTMon]
+	ld [wEnemyTurnStartMon], a
 
 	; check if in a link battle
     ld a, [wLinkMode]
@@ -183,7 +188,7 @@ BattleTurn:
 	ld a, [wBattleEnded]
 	and a
 	ret nz
-	jr .loop
+	jmp .loop
 
 WildFled_EnemyFled_LinkBattleCanceled:
 	call SafeLoadTempTilemapToTilemap

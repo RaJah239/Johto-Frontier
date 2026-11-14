@@ -77,28 +77,65 @@ HandleTrickRoom:
 	ld hl, TrickRoomEndedText
 	jmp StdBattleTextbox
 
-HandleStatBoostingHeldItems:
-; The effects handled here are not used in-game.
+TurnEndForBothSides:
+; Call hl once for each side, with hBattleTurn set to it: the player's side
+; first, unless this is the external-clock side of a link battle.
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
-	jr z, .player_1
-	call .DoPlayer
-	jr .DoEnemy
-
-.player_1
-	call .DoEnemy
-	jr .DoPlayer
-
-.DoPlayer:
-	farcall GetPartymonItem
-	ld a, $0
-	jr .HandleItem
-
-.DoEnemy:
-	farcall GetOTPartymonItem
-	ld a, $1
-.HandleItem:
+	ld a, 0 ; player first
+	jr nz, .got_first
+	inc a ; enemy first
+.got_first
+	push hl
+	push af
+	call .side
+	pop af
+	pop hl
+	xor 1
+.side
 	ldh [hBattleTurn], a
+	jp hl
+
+SentOutThisTurn:
+; Return nz if the current side's (hBattleTurn) mon was sent out this turn
+; (switched in, replaced a fainted mon, U-turn, Baton Pass...): its held
+; items don't activate until the end of its next turn.
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wCurBattleMon]
+	ld hl, wPlayerTurnStartMon
+	jr z, .got_side
+	ld a, [wCurOTMon]
+	ld hl, wEnemyTurnStartMon
+.got_side
+	cp [hl]
+	ret
+
+GetSideHeldItem:
+; Return the current side's (hBattleTurn) held item at bc and its party
+; struct's copy at hl, unless its mon was sent out this turn (then nz).
+	call SentOutThisTurn
+	ret nz
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .enemy
+	farcall GetPartymonItem
+	xor a
+	ret
+.enemy
+	farcall GetOTPartymonItem
+	xor a
+	ret
+
+HandleStatBoostingHeldItems:
+; The effects handled here are not used in-game.
+	ld hl, .Side
+	jr TurnEndForBothSides
+
+.Side:
+	call GetSideHeldItem
+	ret nz
+.HandleItem:
 	ld d, h
 	ld e, l
 	push de
@@ -150,26 +187,13 @@ HandleStatBoostingHeldItems:
 INCLUDE "data/battle/held_stat_up.asm"
 
 HandleWeatherItem:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .player_1
-	call .DoPlayer
-	jr .DoEnemy
+	ld hl, .Side
+	jmp TurnEndForBothSides
 
-.player_1
-	call .DoEnemy
-	jr .DoPlayer
-
-.DoPlayer:
-	farcall GetPartymonItem
-	ld a, $0
-	jr .HandleItem
-
-.DoEnemy:
-	farcall GetOTPartymonItem
-	ld a, $1
+.Side:
+	call GetSideHeldItem
+	ret nz
 .HandleItem:
-	ldh [hBattleTurn], a
 	ld d, h
 	ld e, l
 	push de
@@ -293,20 +317,12 @@ BattleItemAnimCommon:
 	predef_jump PlayBattleAnim
 
 HandleMysteryberry:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .DoEnemyFirst
-	call SetPlayerTurn
-	call .do_it
-	call SetEnemyTurn
-	jr .do_it
-
-.DoEnemyFirst:
-	call SetEnemyTurn
-	call .do_it
-	call SetPlayerTurn
+	ld hl, .do_it
+	jmp TurnEndForBothSides
 
 .do_it
+	call SentOutThisTurn
+	ret nz
 	callfar GetUserItem
 	ld a, b
 	cp HELD_RESTORE_PP
@@ -431,105 +447,83 @@ HandleMysteryberry:
 	jmp StdBattleTextbox
 
 HandleSafeguard:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .player1
-	call .CheckPlayer
-	jr .CheckEnemy
+	ld hl, .Side
+	jmp TurnEndForBothSides
 
-.player1
-	call .CheckEnemy
-.CheckPlayer:
-	ld a, [wPlayerScreens]
-	bit SCREENS_SAFEGUARD, a
-	ret z
-	ld hl, wPlayerSafeguardCount
-	dec [hl]
-	ret nz
-	res SCREENS_SAFEGUARD, a
-	ld [wPlayerScreens], a
-	xor a
-	jr .print
-
-.CheckEnemy:
-	ld a, [wEnemyScreens]
-	bit SCREENS_SAFEGUARD, a
-	ret z
-	ld hl, wEnemySafeguardCount
-	dec [hl]
-	ret nz
-	res SCREENS_SAFEGUARD, a
-	ld [wEnemyScreens], a
-	ld a, $1
-
-.print
-	ldh [hBattleTurn], a
+.Side:
+	ld a, 1 << SCREENS_SAFEGUARD
+	ld de, wPlayerSafeguardCount
 	ld hl, BattleText_SafeguardFaded
-	jmp StdBattleTextbox
+	jr TickSideTimer
 
 HandleMist:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .player1
-	call .CheckPlayer
-	jr .CheckEnemy
+	ld hl, .Side
+	jmp TurnEndForBothSides
 
-.player1
-	call .CheckEnemy
-.CheckPlayer:
-	ld a, [wPlayerScreens]
-	bit SCREENS_MIST, a
-	ret z
-	ld hl, wPlayerMistCount
-	dec [hl]
-	ret nz
-	res SCREENS_MIST, a
-	ld [wPlayerScreens], a
-	xor a
-	jr .print
-
-.CheckEnemy:
-	ld a, [wEnemyScreens]
-	bit SCREENS_MIST, a
-	ret z
-	ld hl, wEnemyMistCount
-	dec [hl]
-	ret nz
-	res SCREENS_MIST, a
-	ld [wEnemyScreens], a
-	ld a, $1
-
-.print
-	ldh [hBattleTurn], a
+.Side:
+	ld a, 1 << SCREENS_MIST
+	ld de, wPlayerMistCount
 	ld hl, BattleText_MistFaded
+	; fallthrough
+
+TickSideTimer:
+; Count down the current side's (hBattleTurn) timer for the SCREENS_* mask a;
+; de = the player's counter (the enemy's is the same distance further as
+; wEnemySafeguardCount is from wPlayerSafeguardCount). When it runs out,
+; clear the mask and print text hl.
+	assert wEnemyMistCount - wPlayerMistCount == wEnemySafeguardCount - wPlayerSafeguardCount
+	push hl
+	ld c, a
+	ld hl, wPlayerScreens
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_side
+	ld a, wEnemySafeguardCount - wPlayerSafeguardCount
+	add e
+	ld e, a
+	adc d
+	sub e
+	ld d, a
+	ld hl, wEnemyScreens
+.got_side
+	ld a, [hl]
+	and c
+	jr z, .done
+	ld a, [de]
+	dec a
+	ld [de], a
+	jr nz, .done
+	ld a, c
+	cpl
+	and [hl]
+	ld [hl], a
+	pop hl
 	jmp StdBattleTextbox
 
+.done
+	pop hl
+	ret
+
 HandleScreens:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .Both
-	call .CheckPlayer
-	jr .CheckEnemy
+	ld hl, .Side
+	jmp TurnEndForBothSides
 
-.Both:
-	call .CheckEnemy
-
-.CheckPlayer:
-	call SetPlayerTurn
+.Side:
+	ldh a, [hBattleTurn]
+	and a
 	ld de, .Your
-	call .Copy
 	ld hl, wPlayerScreens
-	ld de, wPlayerLightScreenCount
-	jr .TickScreens
-
-.CheckEnemy:
-	call SetEnemyTurn
+	ld bc, wPlayerLightScreenCount
+	jr z, .got_side
 	ld de, .Enemy
-	call .Copy
 	ld hl, wEnemyScreens
-	ld de, wEnemyLightScreenCount
-
-.TickScreens:
+	ld bc, wEnemyLightScreenCount
+.got_side
+	push hl
+	push bc
+	call .Copy
+	pop de
+	pop hl
 	bit SCREENS_LIGHT_SCREEN, [hl]
 	call nz, .LightScreenTick
 	bit SCREENS_REFLECT, [hl]
@@ -572,44 +566,30 @@ HandleScreens:
 	jmp StdBattleTextbox
 
 HandleFlameOrb:
-	; ClearFailures
-	xor a
-	ld [wFailedMessage], a
-	ld [wEffectFailed], a
-	ld [wAttackMissed], a
+	call TurnEnd_ClearFailures
+	ld hl, .Side
+	jmp TurnEndForBothSides
 
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .DoEnemyFirst
-	call SetPlayerTurn
-	call .do_it
-	call SetEnemyTurn
-	jr .do_it
-
-.DoEnemyFirst:
-	call SetEnemyTurn
-	call .do_it
-	call SetPlayerTurn
-.do_it
-	; fallthrough
-
-;FlameOrb:
+.Side:
 	callfar GetUserItem
 	ld a, b
 	cp HELD_FLAME_ORB
 	ret nz
-	call ShouldIgniteFlameOrb
+	call GetOrbTarget
 	ret nc
-	call ClearSprites
-
-	call CheckStatusText
-	jr nz, .skip
-
+	cp MEGANIUM
+	ret z
+	cp SYLVEON
+	ret z
+	cp MEW
+	ret z
+	ld a, FIRE
+	cp b
+	ret z
+	cp c
+	ret z
 	ld hl, FlameOrbText
-	call StdBattleTextbox
-.skip
-	ld a, BATTLE_VARS_STATUS
-	call GetBattleVarAddr
+	call OrbStatusText
 	set BRN, [hl]
 	call UpdateUserInParty
 	farcall BattleCommand_SwitchTurn
@@ -617,179 +597,103 @@ HandleFlameOrb:
 	ld a, BANK("Battle Core")
 	rst FarCall
 	ld de, ANIM_BRN
-	farcall PlayOpponentBattleAnim
-	farjp BattleCommand_SwitchTurn
-
-ShouldIgniteFlameOrb:
-	ld a, BATTLE_VARS_STATUS
-	call GetBattleVarAddr
-	and a
-	jr nz, .no
-
-	; don't ignite on the turn a Pokemon is switched in
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .player_switch_check
-	ld a, [wEnemyIsSwitching]
-	and a
-	jr nz, .no
-	jr .types
-.player_switch_check
-	ld a, [wPlayerIsSwitching]
-	and a
-	jr nz, .no
-.types
-	jr z, .playerTurn
-	ld a, [wEnemyMonType1]
-	ld b, a
-	ld a, [wEnemyMonType2]
-	ld c, a
-	ld a, [wEnemyMonSpecies]
-	jr .checkDetails
-.playerTurn
-	ld a, [wBattleMonType1]
-	ld b, a
-	ld a, [wBattleMonType2]
-	ld c, a
-	ld a, [wBattleMonSpecies]
-.checkDetails
-	cp MEGANIUM
-	jr z, .no
-	cp SYLVEON
-	jr z, .no
-	cp MEW
-	jr z, .no
-	ld a, b
-	cp FIRE
-	jr z, .no
-	ld a, c
-	cp FIRE
-	jr z, .no
-.yes
-	scf
-	ret
-.no
-	xor a
-	ret
+	jr OrbAnim
 
 HandleToxicOrb:
-	; ClearFailures
-	xor a
-	ld [wFailedMessage], a
-	ld [wEffectFailed], a
-	ld [wAttackMissed], a
+	call TurnEnd_ClearFailures
+	ld hl, .Side
+	jmp TurnEndForBothSides
 
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .DoEnemyFirst
-	call SetPlayerTurn
-	call .do_it
-	call SetEnemyTurn
-	jr .do_it
-
-.DoEnemyFirst:
-	call SetEnemyTurn
-	call .do_it
-	call SetPlayerTurn
-.do_it
-	; fallthrough
-
-;ToxicOrb:
+.Side:
 	callfar GetUserItem
 	ld a, b
 	cp HELD_TOXIC_ORB
 	ret nz
-	call ShouldTriggerToxicOrb
+	call GetOrbTarget
 	ret nc
-	call ClearSprites
-
-	call CheckStatusText
-	jr nz, .skip
-
+	cp CHIKORITA ; to prevent poisoning
+	ret z
+	cp BAYLEEF ; to prevent poisoning
+	ret z
+	cp MEGANIUM
+	ret z
+	cp SYLVEON
+	ret z
+	cp MEW
+	ret z
+	ld a, POISON
+	cp b
+	ret z
+	cp c
+	ret z
+	ld a, STEEL
+	cp b
+	ret z
+	cp c
+	ret z
 	ld hl, ToxicOrbText
-	call StdBattleTextbox
-.skip
-	ld a, BATTLE_VARS_STATUS
-	call GetBattleVarAddr
+	call OrbStatusText
 	set PSN, [hl]
-
 	ld a, BATTLE_VARS_SUBSTATUS5
 	call GetBattleVarAddr
 	set SUBSTATUS_TOXIC, [hl]
-
 	ldh a, [hBattleTurn]
 	and a
-	ld de, wPlayerToxicCount
-	jr z, .toxic_count
-	ld de, wEnemyToxicCount
-.toxic_count
-	xor a
-	ld [de], a
-
+	ld hl, wPlayerToxicCount
+	jr z, .got_toxic_count
+	ld hl, wEnemyToxicCount
+.got_toxic_count
+	ld [hl], 0
 	call UpdateUserInParty
 	farcall BattleCommand_SwitchTurn
 	ld de, ANIM_PSN
+	; fallthrough
+
+OrbAnim:
 	farcall PlayOpponentBattleAnim
 	farjp BattleCommand_SwitchTurn
 
-ShouldTriggerToxicOrb:
-	ld a, BATTLE_VARS_STATUS
-	call GetBattleVarAddr
-	and a
-	jr nz, .no
+TurnEnd_ClearFailures:
+	xor a
+	ld [wFailedMessage], a
+	ld [wEffectFailed], a
+	ld [wAttackMissed], a
+	ret
 
-	; don't activate on the turn a Pokemon is switched in
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .player_switch_check
-	ld a, [wEnemyIsSwitching]
-	and a
-	jr nz, .no
-	jr .types
-.player_switch_check
-	ld a, [wPlayerIsSwitching]
+GetOrbTarget:
+; Carry if the current side's (hBattleTurn) mon has no status and wasn't
+; sent out this turn, with its types in b and c and its species in a.
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVar
 	and a
 	jr nz, .no
-.types
+	call SentOutThisTurn
+	jr nz, .no
 	ldh a, [hBattleTurn]
 	and a
-	jr z, .playerTurn
-	ld a, [wEnemyMonType1]
-	ld b, a
-	ld a, [wEnemyMonType2]
-	ld c, a
-	ld a, [wEnemyMonSpecies]
-	jr .checkDetails
-.playerTurn
-	ld a, [wBattleMonType1]
-	ld b, a
-	ld a, [wBattleMonType2]
-	ld c, a
+	ld hl, wBattleMonType1
 	ld a, [wBattleMonSpecies]
-.checkDetails
-	cp CHIKORITA ; to prevent poisoning
-	jr z, .no
-	cp BAYLEEF ; to prevent poisoning
-	jr z, .no
-	cp MEGANIUM
-	jr z, .no
-	cp SYLVEON
-	jr z, .no
-	cp MEW
-	jr z, .no
-	ld a, b
-	cp POISON
-	jr z, .no
-	cp STEEL
-	jr z, .no
-	ld a, c
-	cp POISON
-	jr z, .no
-	cp STEEL
-	jr z, .no
-.yes
+	jr z, .got_side
+	ld hl, wEnemyMonType1
+	ld a, [wEnemyMonSpecies]
+.got_side
+	ld b, [hl]
+	inc hl
+	ld c, [hl]
 	scf
 	ret
+
 .no
-	xor a
+	and a
 	ret
+
+OrbStatusText:
+; Print text hl (unless status texts are off) and return the current side's
+; status at hl.
+	push hl
+	call ClearSprites
+	pop hl
+	call CheckStatusText
+	call z, StdBattleTextbox
+	ld a, BATTLE_VARS_STATUS
+	jmp GetBattleVarAddr
