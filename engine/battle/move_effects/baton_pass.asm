@@ -13,8 +13,7 @@ BattleCommand_BatonPass:
 	ld c, 50
 	call DelayFrames
 
-	ld hl, RegeneratorShowPlayer
-	call CallBattleCore
+	farcall RegeneratorShowPlayer
 
 ; Transition into switchmon menu
 	call LoadStandardMenuHeader
@@ -52,8 +51,7 @@ BattleCommand_BatonPass:
 
 	call UpdateEnemyMonInParty
 	call AnimateCurrentMove
-	ld hl, RegeneratorShowEnemy
-	call CallBattleCore
+	farcall RegeneratorShowEnemy
 	call BatonPass_LinkEnemySwitch
 
 ; Passed enemy PartyMon entrance

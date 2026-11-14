@@ -642,6 +642,9 @@ SECTION "Trapping Abilities", ROMX
 INCLUDE "engine/abilities/trapping_abilities.asm"
 
 
+SECTION "Regenerator", ROMX
+INCLUDE "engine/abilities/regenerator.asm"
+
 SECTION "Turn End Abilities", ROMX
 INCLUDE "engine/abilities/turn_end_abilities.asm"
 
