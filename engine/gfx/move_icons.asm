@@ -1,17 +1,24 @@
 ; Type and category icons for moves (from Polished Crystal), shown in the
-; battle move menu.
+; battle move menu and the party Pokémon move screen.
 
 DEF MOVE_ICON_TILES EQU 6 ; 2 category tiles, then 4 type tiles
 
-; In battle the icons use BG tiles $79-$7e (free in battle) and the unused
-; BG palette PAL_BATTLE_BG_6. The icon cells only take that palette while
-; the move menu is open, so the player's back sprite under the move info
-; box keeps its own colours when the menu closes.
-DEF BATTLE_MOVE_ICON_TILE EQU $79
+; The icons use BG tiles $79-$7e (VRAM bank 0), free on the screens that
+; show them.
+DEF MOVE_ICON_TILE EQU $79
+
+; In battle they use the unused BG palette PAL_BATTLE_BG_6. The icon cells
+; only take that palette while the move menu is open, so the player's back
+; sprite under the move info box keeps its own colours when it closes.
 DEF BATTLE_MOVE_ICON_X EQU 1
 DEF BATTLE_MOVE_ICON_Y EQU 9
-; first scanline below the move info box
-DEF BATTLE_MOVE_BOX_END_LY EQU 12 * TILE_WIDTH
+
+; scratch while drawing
+DEF hMoveIconPalette  EQUS "hMathBuffer"
+DEF hMoveIconRow      EQUS "hMathBuffer + 1"
+DEF hMoveIconCol      EQUS "hMathBuffer + 2"
+DEF hMoveIconType     EQUS "hMathBuffer + 3"
+DEF hMoveIconCategory EQUS "hMathBuffer + 4"
 
 GetMoveIconIndices:
 ; b = move. Returns c = type icon index, e = category icon index.
@@ -155,41 +162,73 @@ GetTypeIconGFX:
 
 BattleMoveIcons_Draw::
 ; Show the type and category icons of move b in the battle move info box.
-	call GetMoveIconIndices
-	push bc
-	push de
+	ld c, PAL_BATTLE_BG_6
+	lb de, BATTLE_MOVE_ICON_Y, BATTLE_MOVE_ICON_X
+	; fallthrough
 
-	hlcoord BATTLE_MOVE_ICON_X, BATTLE_MOVE_ICON_Y
-	ld a, BATTLE_MOVE_ICON_TILE
-	ld b, MOVE_ICON_TILES
+MoveIcons_Show::
+; Show the type and category icons of move b in the six cells starting at
+; row d, column e of the screen, using BG palette c.
+; The tiles, the palette and those cells are written straight to VRAM in
+; H-Blanks while the screen is drawn below the cells, so this costs no
+; frames and no frame shows a mix of the old and new icons.
+	ld a, c
+	ldh [hMoveIconPalette], a
+	ld a, d
+	ldh [hMoveIconRow], a
+	ld a, e
+	ldh [hMoveIconCol], a
+	call GetMoveIconIndices
+	ld a, c
+	ldh [hMoveIconType], a
+	ld a, e
+	ldh [hMoveIconCategory], a
+
+; the cells in wTilemap and wAttrmap
+	call MoveIcons_TilemapAddress
+	push hl
+	ld a, MOVE_ICON_TILE
+	ld c, MOVE_ICON_TILES
 .place
 	ld [hli], a
 	inc a
-	dec b
+	dec c
 	jr nz, .place
-	hlcoord BATTLE_MOVE_ICON_X, BATTLE_MOVE_ICON_Y, wAttrmap
-	ld a, PAL_BATTLE_BG_6
+	pop hl
+	ld bc, wAttrmap - wTilemap
+	add hl, bc
+	ldh a, [hMoveIconPalette]
 	ld bc, MOVE_ICON_TILES
 	call ByteFill
 
-; Change everything while the screen is drawn below the box, so no frame
-; shows a mix of the old and new icons, tiles or colours.
-	call MoveIcons_WaitBelowBattleBox
-	pop de
-	pop bc
-	push bc
-	push de
-	ld hl, wBGPals1 palette PAL_BATTLE_BG_6
-	call LoadMoveIconPalette
+	call MoveIcons_WaitBelowRow
 
-; Write the palette straight to the hardware too: H-Blank time is enough,
-; and the next V-Blank doesn't have to send all of them.
+; the palette, in wBGPals1/wBGPals2 and straight to the hardware
+	ldh a, [hMoveIconPalette]
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	add hl, hl ; * 1 palettes
+	ld bc, wBGPals1
+	add hl, bc
+	push hl
+	ldh a, [hMoveIconType]
+	ld c, a
+	ldh a, [hMoveIconCategory]
+	ld e, a
+	call LoadMoveIconPalette
+	pop hl
+	ldh a, [hMoveIconPalette]
+	add a
+	add a
+	add a ; * 1 palettes
+	or 1 << rBGPI_AUTO_INCREMENT
+	ld b, a
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wBGPals1)
 	ldh [rSVBK], a
-	ld hl, wBGPals1 palette PAL_BATTLE_BG_6
-	ld b, (1 << rBGPI_AUTO_INCREMENT) | (PAL_BATTLE_BG_6 palettes)
 	ld c, 1 palettes
 .palette
 	call MoveIcons_WaitHBlank
@@ -208,9 +247,11 @@ BattleMoveIcons_Draw::
 	pop af
 	ldh [rSVBK], a
 
-	pop de
+; the tiles
+	ldh a, [hMoveIconCategory]
+	ld e, a
 	call GetCategoryIconGFX
-	ld hl, vTiles2 tile BATTLE_MOVE_ICON_TILE
+	ld hl, vTiles2 tile MOVE_ICON_TILE
 	ld c, 2 * LEN_2BPP_TILE
 .category
 	call MoveIcons_WaitHBlank
@@ -225,8 +266,9 @@ BattleMoveIcons_Draw::
 	dec c
 	jr nz, .category
 
-	pop bc
 	push hl
+	ldh a, [hMoveIconType]
+	ld c, a
 	call GetTypeIconGFX
 	pop hl
 	ld c, 4 * LEN_1BPP_TILE
@@ -241,16 +283,27 @@ BattleMoveIcons_Draw::
 	jr nz, .type
 	; fallthrough
 
-BattleMoveIcons_WriteMap:
-; Copy the icon cells' tiles and attributes from wTilemap/wAttrmap to the
-; BG map. Interrupts may come in between, so this restores rVBK itself.
+MoveIcons_WriteMap:
+; Copy the tiles and attributes of the six cells at hMoveIconRow/Col from
+; wTilemap/wAttrmap to the BG map.
+	call MoveIcons_TilemapAddress
+	ld d, h
+	ld e, l
+	ldh a, [hMoveIconRow]
+	ld l, a
+	ld h, 0
+rept 5
+	add hl, hl
+endr ; * BG_MAP_WIDTH
+	ldh a, [hMoveIconCol]
+	add l
+	ld l, a
 	ldh a, [hBGMapAddress]
-	add LOW(BATTLE_MOVE_ICON_Y * BG_MAP_WIDTH + BATTLE_MOVE_ICON_X)
+	add l
 	ld l, a
 	ldh a, [hBGMapAddress + 1]
-	adc HIGH(BATTLE_MOVE_ICON_Y * BG_MAP_WIDTH + BATTLE_MOVE_ICON_X)
+	adc h
 	ld h, a
-	decoord BATTLE_MOVE_ICON_X, BATTLE_MOVE_ICON_Y
 	ld bc, wAttrmap - wTilemap
 	ld a, MOVE_ICON_TILES
 .loop
@@ -289,16 +342,38 @@ BattleMoveIcons_Restore::
 	ld a, PAL_BATTLE_BG_PLAYER
 	ld bc, MOVE_ICON_TILES
 	call ByteFill
-	call MoveIcons_WaitBelowBattleBox
-	jr BattleMoveIcons_WriteMap
+	ld a, BATTLE_MOVE_ICON_Y
+	ldh [hMoveIconRow], a
+	ld a, BATTLE_MOVE_ICON_X
+	ldh [hMoveIconCol], a
+	call MoveIcons_WaitBelowRow
+	jr MoveIcons_WriteMap
 
-MoveIcons_WaitBelowBattleBox:
+MoveIcons_TilemapAddress:
+; hl = the wTilemap address of the cell at hMoveIconRow/Col
+	ldh a, [hMoveIconCol]
+	ld l, a
+	ld h, 0
+	ld bc, wTilemap
+	add hl, bc
+	ld bc, SCREEN_WIDTH
+	ldh a, [hMoveIconRow]
+	jmp AddNTimes
+
+MoveIcons_WaitBelowRow:
+; Wait for the first scanline below row hMoveIconRow.
 	ldh a, [rLCDC]
 	bit rLCDC_ENABLE, a
 	ret z
+	ldh a, [hMoveIconRow]
+	inc a
+	add a
+	add a
+	add a ; * TILE_WIDTH
+	ld b, a
 .wait
 	ldh a, [rLY]
-	cp BATTLE_MOVE_BOX_END_LY
+	cp b
 	jr nz, .wait
 	ret
 

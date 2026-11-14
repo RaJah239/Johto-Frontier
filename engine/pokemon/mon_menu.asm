@@ -1282,6 +1282,8 @@ PrepareToPlaceMoveData:
 	lb bc, 5, 18
 	jmp ClearBox
 
+DEF MOVE_SCREEN_ICON_PAL EQU 2 ; unused on this screen
+
 PlaceMoveData:
 	xor a
 	ldh [hBGMapMode], a
@@ -1302,54 +1304,6 @@ PlaceMoveData:
 	hlcoord 1, 13
 	ld de, String_MoveEff
 	call PlaceString
-
-; Print move category
-
-; Verify if it has power
-	ld a, [wCurSpecies]
-	dec a
-	ld hl, Moves + MOVE_POWER
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-	ld a, BANK(Moves)
-	call GetFarByte
-	hlcoord 16, 12
-	cp 2
-	jr c, .status_move
-	
-; Verifify if physical or special
-	ld a, [wCurSpecies]
-	dec a
-	ld bc, MOVE_LENGTH
-	ld hl, Moves
-	call AddNTimes
-	ld de, wStringBuffer1
-	ld a, BANK(Moves)
-	call FarCopyBytes
-	ld a, [wStringBuffer1 + MOVE_TYPE]
-	cp SPECIAL
-	jr nc, .special_category
-
-; IF PHYSICAL
-	hlcoord 10, 13
-	ld de, String_MovePhy
-	call PlaceString
-	jr .printed_effect_chance
-
-; IF SPECIAL
-.special_category
-	hlcoord 10, 13
-	ld de, String_MoveSpe
-	call PlaceString
-	jr .printed_effect_chance
-
-; IF STATUS
-.status_move
-	hlcoord 10, 13
-	ld de, String_MoveSta
-	call PlaceString
-
-.printed_effect_chance
 
 ; Print move effect chance
 	ld a, [wCurSpecies]
@@ -1414,11 +1368,12 @@ PlaceMoveData:
 	hlcoord 7, 8
 
 .done_accuracy:
-; Print move type
+; Show the move's category and type icons
 	ld a, [wCurSpecies]
 	ld b, a
-	hlcoord 10, 12
-	predef PrintMoveType
+	ld c, MOVE_SCREEN_ICON_PAL
+	lb de, 12, 10
+	farcall MoveIcons_Show
 
 ; Print move power
 	ld a, [wCurSpecies]
@@ -1456,9 +1411,6 @@ String_MoveAtk: db "Pow/@"
 String_MoveAcc: db "Hit/@"
 String_MoveEff: db "Eff/@"
 String_MoveBlank: db "---@"
-String_MovePhy: db "/Physical@"
-String_MoveSpe: db "/Special @"
-String_MoveSta: db "/Other   @"
 
 PlaceMoveScreenArrows:
 	call PlaceMoveScreenLeftArrow
