@@ -221,6 +221,15 @@ Two more rules stop it being exploited:
 - Intimidate
 - recoil and other held items, beyond their effect on damage
 
+### Pivoting instead of switching
+Whenever it decides to switch (the 1-on-1 check above or [Smart switching](#smart-switching)), it first checks whether it can hit on the way out:
+- it's faster than your Pokémon (counting paralysis, Trick Room and weather speed abilities; not on a speed tie)
+- it knows U-turn or Volt Switch with PP left, and it isn't Disabled
+- it isn't locked into another move (Encore or a Choice item)
+- the move can hit you: never Volt Switch into a Ground type or a Pokémon with Grounded, nor a move your ability makes you immune to
+
+If so, it uses that move instead of switching. With both, it uses the one that does more damage. The Pokémon that comes in afterwards is picked the same way as after any U-turn.
+
 ### Smart switching
 While picking its move, it also decides to switch out at the start of the turn when:
 - it's locked into a move (Choice item or Encore) that:

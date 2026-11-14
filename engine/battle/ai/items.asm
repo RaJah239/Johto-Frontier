@@ -50,8 +50,11 @@ AI_SwitchOrTryItem:
 	call IsEnemyStayInMon
 	jr c, DontSwitch
 	farcall AI_MatchupSwitch
-	jp c, AI_Switch
-	; fallthrough
+	jr nc, DontSwitch
+	call AI_PivotInsteadOfSwitch
+	jp nc, AI_Switch
+	and a ; it attacks with the pivot move instead
+	ret
 
 DontSwitch:
 	jmp AI_TryItem
@@ -100,7 +103,126 @@ AI_TrySwitch:
 
 	ld a, d
 	cp 2
-	jr nc, AI_Switch
+	jr c, .stay
+	call AI_PivotInsteadOfSwitch
+	jp nc, AI_Switch
+.stay
+	and a
+	ret
+
+AI_PivotInsteadOfSwitch:
+; The enemy is about to switch out. If it's faster than the player's mon and
+; can use U-turn or Volt Switch (EFFECT_HIT_AND_SWITCH), it hits and switches
+; with that instead: make it the enemy's move this turn and return carry.
+; With both, the one that does more damage; never one the player's mon is
+; immune to (Volt Switch into a Ground type or Grounded).
+	ld a, [wEnemySubStatus5]
+	bit SUBSTATUS_ENCORED, a ; Encore or a Choice item: locked into its move
+	jp nz, .no
+	call DoesAIOutSpeedPlayer
+	ret nc
+	ld hl, wCurDamage
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	push hl ; (the AI's damage calcs overwrite it)
+	ld bc, $ff ; b = slot, c = the best slot so far ($ff: none)
+	ld de, 0 ; its damage
+.loop
+	ld hl, wEnemyMonMoves
+	ld a, b
+	add l
+	ld l, a
+	adc h
+	sub l
+	ld h, a
+	ld a, [hl]
+	and a
+	jr z, .next
+	ld hl, wEnemyDisabledMove
+	cp [hl]
+	jr z, .next
+	push af
+	ld hl, wEnemyMonPP
+	ld a, b
+	add l
+	ld l, a
+	adc h
+	sub l
+	ld h, a
+	ld a, [hl]
+	and PP_MASK
+	jr z, .next_pop
+	pop af
+	push af
+	call AIGetEnemyMove
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	cp EFFECT_HIT_AND_SWITCH
+	jr nz, .next_pop
+	push bc
+	push de
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	and TYPE_MASK
+	ld b, a
+	farcall AI_IsPlayerImmuneByAbility
+	jr c, .immune
+	call AIDamageCalc
+	and a
+.immune
+	pop de
+	pop bc
+	jr c, .next_pop
+	; damage 0: the player's type is immune (Electric into Ground)
+	ld a, [wCurDamage]
+	ld h, a
+	ld a, [wCurDamage + 1]
+	ld l, a
+	or h
+	jr z, .next_pop
+	; more than the best so far (de)?
+	ld a, e
+	sub l
+	ld a, d
+	sbc h
+	jr nc, .next_pop
+	ld d, h
+	ld e, l
+	ld c, b
+.next_pop
+	pop af
+.next
+	inc b
+	ld a, b
+	cp NUM_MOVES
+	jr nz, .loop
+
+	pop hl
+	ld a, h
+	ld [wCurDamage], a
+	ld a, l
+	ld [wCurDamage + 1], a
+	ld a, c
+	cp $ff
+	jr z, .no
+	; use it this turn (as ParseEnemyAction does for the AI's move)
+	ld [wCurEnemyMoveNum], a
+	ld hl, wEnemyMonMoves
+	add l
+	ld l, a
+	adc h
+	sub l
+	ld h, a
+	ld a, [hl]
+	ld [wCurEnemyMove], a
+	call SetEnemyTurn
+	callfar UpdateMoveData
+	xor a
+	ld [wEnemyCharging], a
+	ld [wEnemyProtectCount], a
+	scf
+	ret
+
+.no
 	and a
 	ret
 
