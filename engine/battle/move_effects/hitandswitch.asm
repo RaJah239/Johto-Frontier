@@ -19,6 +19,9 @@ BattleCommand_HitAndSwitch:
 	ld c, 20
 	call DelayFrames
 
+	ld hl, RegeneratorShowPlayer
+	call CallBattleCore
+
 ; Transition into switchmon menu
 	call SwitchMoveTransitionIntoMenu
 
@@ -40,6 +43,9 @@ BattleCommand_HitAndSwitch:
 	ret z
 
 	call UpdateEnemyMonInParty
+
+	ld hl, RegeneratorShowEnemy
+	call CallBattleCore
 
 ; Passed enemy PartyMon entrance
 	farcall EnemyUTurnSwitch

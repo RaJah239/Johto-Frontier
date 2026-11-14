@@ -5190,6 +5190,8 @@ BattleCommand_ForceSwitch:
 	call AnimateCurrentMove
 	ld c, $14
 	call DelayFrames
+	ld hl, RegeneratorShowEnemy
+	call CallBattleCore
 	hlcoord 1, 0
 	lb bc, 4, 10
 	call ClearBox
@@ -5291,6 +5293,8 @@ BattleCommand_ForceSwitch:
 	call AnimateCurrentMove
 	ld c, 20
 	call DelayFrames
+	ld hl, RegeneratorShowPlayer
+	call CallBattleCore
 	hlcoord 9, 7
 	lb bc, 5, 11
 	call ClearBox

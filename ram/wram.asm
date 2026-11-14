@@ -624,7 +624,9 @@ wEnemyTurnStartMon:: db  ; wCurOTMon at the start of the turn
 wAIDrainSimEnemyHP:: dw ; AI_PreferDrainMoves: simulated HP (big-endian)
 wAIDrainSimPlayerHP:: dw
 wAIDrainFlags:: db ; AI_PreferDrainMoves: AI_DRAIN_*_F
-	ds 4 ; (unused: was switch-in picker scratch)
+wBattleMonPartySlot:: db ; the party slot wBattleMon was loaded from (Regenerator)
+wRegeneratorShown:: db ; bit 0/1: the player's/enemy's Regenerator already healed on screen
+	ds 2 ; (unused: was switch-in picker scratch)
 
 wTrickRoomCount:: db
 

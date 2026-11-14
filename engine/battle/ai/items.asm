@@ -329,6 +329,7 @@ AI_Switch:
 	jr c, .skiptext
 	ld hl, EnemyWithdrewText
 	call PrintText
+	farcall RegeneratorShowEnemy
 
 .skiptext
 	ld a, 1
