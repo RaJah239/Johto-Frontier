@@ -2925,7 +2925,6 @@ BattleCommand_DamageCalc:
 
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
-	and TYPE_MASK
 
 ; Explosion halves defense
 	cp EFFECT_EXPLOSION
@@ -3051,6 +3050,7 @@ ConfusionDamageCalc:
 	ld b, a
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar
+	and TYPE_MASK
 	cp b
 	jr nz, .DoneItem
 
