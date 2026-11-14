@@ -895,7 +895,7 @@ Evos_Page:
  	jmp .nextpage_jump
  
  ; SpriteAnim:
-DEF PICS_PAGE_BACK_TILE EQU $fa ; VRAM 1, right after the backpic ($d6-$f9)
+DEF PICS_PAGE_BACK_TILE EQU $fa ; VRAM 1
 
 Pics_Page_BackText:
 	db PICS_PAGE_BACK_TILE, PICS_PAGE_BACK_TILE + 1, PICS_PAGE_BACK_TILE + 2, PICS_PAGE_BACK_TILE + 3, "@" ; VRAM 1

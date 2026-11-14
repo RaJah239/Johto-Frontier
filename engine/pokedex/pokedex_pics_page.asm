@@ -109,7 +109,11 @@ Pokedex_PlayMonCry_AnimateFrontpic:
 	farjp HDMATransferTilemapToWRAMBank3
 
 Pokedex_PlaceBackPic:
-	ld a, $1
+; VRAM 0 $00-$23, over the frontpic copy GetAnimatedFrontpic leaves there
+; (the page shows the frontpic from VRAM 1). Not VRAM 1: the animated
+; frontpic's frames fill VRAM 1 $31-$7e and $80 up (Excadrill's up to $fd),
+; so the backpic at $d6-$f9 replaced some of their tiles.
+	xor a
 	ldh [rVBK], a
 	ld a, [wCurSpecies]
 	ld [wCurPartySpecies], a
@@ -118,16 +122,13 @@ Pokedex_PlaceBackPic:
 	call GetBaseData
 	ld hl, wTempMonDVs
 	predef GetUnownLetter
-	ld de, vTiles0 tile $d6
+	ld de, vTiles2 tile $00
 	predef GetMonBackpic
-	ld a, $d6
+	xor a
 	ldh [hGraphicStartTile], a
 	lb bc, 6, 6
 	hlcoord 11, 2
 	predef PlaceGraphic
-
-	ld a, $0
-	ldh [rVBK], a
 	ret
 
 Pokedex_place_Mon_Icon:

@@ -610,10 +610,10 @@ _CGB_Pokedex_PicsPage:
  	ld a, 1 | VRAM_BANK_1 ; VRAM 1
  	call FillBoxCGB
  
- ; ; back pic
+ ; back pic (VRAM 0, see Pokedex_PlaceBackPic)
  	hlcoord 11, 2, wAttrmap
  	lb bc, 6, 6
- 	ld a, 1 | VRAM_BANK_1 ; VRAM 1
+ 	ld a, 1
  	call FillBoxCGB
  
  ; sprite box border (white inside)
