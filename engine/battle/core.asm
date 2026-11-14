@@ -436,6 +436,7 @@ ParsePlayerAction:
 	call MoveSelectionScreen
 	push af
 	call SafeLoadTempTilemapToTilemap
+	farcall BattleMoveIcons_Restore
 	call UpdateBattleHuds
 	ld a, [wCurPlayerMove]
 	cp STRUGGLE

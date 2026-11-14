@@ -66,15 +66,7 @@ MoveInfoBox:
 .no_damage_preview
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
 	ld b, a
-	farcall BattleGetMoveCategoryName
-	hlcoord 1, 9 ; Category coordinates
-	ld de, wStringBuffer1
-	call PlaceString
-
-	ld a, [wPlayerMoveStruct + MOVE_ANIM]
-	ld b, a
-	hlcoord 5, 9
-	predef PrintMoveTypeShort
+	farcall BattleMoveIcons_Draw
 
 ; print "PP:"
 	ld de, .pp_string ; "PP"
