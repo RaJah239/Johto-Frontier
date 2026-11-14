@@ -37,6 +37,9 @@ HandleTenacity:
 	ld a, [wBattleMonSpecies]
 
 .do_it
+	; not the turn its mon was sent out (switched in, replacing a fainted mon...)
+	farcall SentOutThisTurn
+	ret nz
 	call GetCurrentMon
 	ld hl, TenacityPokemon
 	call IsInByteArray
@@ -81,6 +84,9 @@ HandleRecovery:
 	ld a, [wBattleMonSpecies]
 
 .do_it
+	; not the turn its mon was sent out (switched in, replacing a fainted mon...)
+	farcall SentOutThisTurn
+	ret nz
 	call GetCurrentMon
 	ld hl, RecoveryPokemon
 	call IsInByteArray
@@ -136,6 +142,9 @@ HandleSpeedBoost:
 	ld a, [wBattleMonSpecies]
 
 .do_it
+	; not the turn its mon was sent out (switched in, replacing a fainted mon...)
+	farcall SentOutThisTurn
+	ret nz
 	call GetCurrentMon
 	ld hl, SpeedBoostPokemon
 	call IsInByteArray
@@ -169,6 +178,9 @@ HandleHydration:
 	ld a, [wBattleMonSpecies]
 
 .do_it
+	; not the turn its mon was sent out (switched in, replacing a fainted mon...)
+	farcall SentOutThisTurn
+	ret nz
 	call GetCurrentMon
 	ld hl, HydrationPokemon
 	call IsInByteArray
@@ -211,6 +223,9 @@ HandlePhotosynthesis:
 	ld a, [wBattleMonSpecies]
 
 .do_it
+	; not the turn its mon was sent out (switched in, replacing a fainted mon...)
+	farcall SentOutThisTurn
+	ret nz
 	call GetCurrentMon
 	ld hl, PhotosynthesisPokemon
 	call IsInByteArray
@@ -268,6 +283,9 @@ HandleIceBody:
 	ld a, [wBattleMonSpecies]
 
 .do_it
+	; not the turn its mon was sent out (switched in, replacing a fainted mon...)
+	farcall SentOutThisTurn
+	ret nz
 	call GetCurrentMon
 	ld hl, IceBodyPokemon
 	call IsInByteArray
@@ -325,6 +343,9 @@ HandleRainDish:
 	ld a, [wBattleMonSpecies]
 
 .do_it
+	; not the turn its mon was sent out (switched in, replacing a fainted mon...)
+	farcall SentOutThisTurn
+	ret nz
 	call GetCurrentMon
 	ld hl, RainDishPokemon
 	call IsInByteArray
@@ -422,6 +443,9 @@ HandleSandBody:
 	ld a, [wBattleMonSpecies]
 
 .do_it
+	; not the turn its mon was sent out (switched in, replacing a fainted mon...)
+	farcall SentOutThisTurn
+	ret nz
 	call GetCurrentMon
 	ld hl, SandBodyPokemon
 	call IsInByteArray
