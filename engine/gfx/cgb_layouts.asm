@@ -638,11 +638,7 @@ _CGB_Pokedex_PicsPage:
 	hlcoord 5, 11, wAttrmap
 	ld [hl], PAL_DEXPICS_BALL
 
-; B > BACK (VRAM 1 tiles)
-	hlcoord 15, 16, wAttrmap
-	ld bc, 4
-	ld a, 0 | VRAM_BANK_1
-	call ByteFill
+; B > BACK: VRAM 0 tiles, palette 0 (the WipeAttrmap default)
 
  ; animated icon, upper right corner fix
  	hlcoord 4, 13, wAttrmap
