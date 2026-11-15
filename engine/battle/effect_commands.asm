@@ -1432,33 +1432,6 @@ BattleCommand_DamageVariation:
 	ld [hl], a
 	ret
 
-DEF FIRST_NEW_BATTLE_RESET_EVENT EQU EVENT_TRUE_HORN_PLAYER
-DEF LAST_NEW_BATTLE_RESET_EVENT  EQU EVENT_UNAWARE_FOE
-
-ResetSureHitEvents:
-	; reset all sure hit event flags
-    ld de, FIRST_NEW_BATTLE_RESET_EVENT
-    ld bc, LAST_NEW_BATTLE_RESET_EVENT - FIRST_NEW_BATTLE_RESET_EVENT + 1
-; ResetEventRange
-; Input:
-;	DE = first event constant
-;	BC = number of events to reset
-; Destroys: AF
-.loop
-	push bc
-	push de
-	ld b, RESET_FLAG
-	call EventFlagAction
-	pop de
-	pop bc
-
-	inc de
-	dec bc
-	ld a, b
-	or c
-	jr nz, .loop
-	ret
-
 BattleCommand_CheckHit:
 	farjp _BattleCommand_CheckHit ; engine/battle/effect_commands_far.asm
 
@@ -2597,9 +2570,9 @@ UnawareUserStatLevel:
 	ret
 
 UnawarePopup:
-; Show the Unaware popup the first time in each battle that an Unaware
-; Pokemon attacks or is hit by a damaging move (once per side; whether or
-; not any stages are raised or lowered).
+; Show the Unaware popup the first time an Unaware Pokemon attacks or is
+; hit by a damaging move, once each time it's sent out (whether or not any
+; stages are raised or lowered).
 	ld a, BATTLE_VARS_MOVE_POWER
 	call GetBattleVar
 	and a
@@ -2625,25 +2598,7 @@ UnawarePopup:
 UnawareShowPopup:
 ; c = side: ABILITY_POPUP_PLAYER or ABILITY_POPUP_ENEMY
 	ld a, c
-	and a
-	jr nz, .foe
-	CheckEventFlag EVENT_UNAWARE_PLAYER
-	ret nz
-	ld b, BANK(UnawareText)
-	ld c, ABILITY_POPUP_PLAYER
-	ld de, UnawareText
-	farcall ShowAbilityPopup
-	SetEventFlag EVENT_UNAWARE_PLAYER
-	ret
-
-.foe
-	CheckEventFlag EVENT_UNAWARE_FOE
-	ret nz
-	ld b, BANK(UnawareText)
-	ld c, ABILITY_POPUP_ENEMY
-	ld de, UnawareText
-	farcall ShowAbilityPopup
-	SetEventFlag EVENT_UNAWARE_FOE
+	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_UNAWARE, UnawareText
 	ret
 
 UnawareText: db "Unaware@"

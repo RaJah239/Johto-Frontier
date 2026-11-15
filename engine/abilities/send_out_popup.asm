@@ -9,6 +9,9 @@
 ;
 ; In code that already knows the ability applies:
 ;	ShowOncePerSendOutPopup SEND_OUT_POPUP_<NAME>, <NameText>
+; or, when the ability belongs to the mon that isn't acting, with that
+; side's ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY in a:
+;	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_<NAME>, <NameText>
 ; For an ability that only needs its species checked when a move is used
 ; (like No Guard and Prankster), call a routine from MoveUseAbilityPopups
 ; that returns when the move doesn't apply, and otherwise does
@@ -40,16 +43,21 @@ SendOutAbilityPopup:
 _ShowOncePerSendOutPopup::
 ; Show popup c (SEND_OUT_POPUP_*) with name b:de over the acting side's
 ; HUD, unless it's already been shown since that side's mon came in.
+	ldh a, [hBattleTurn]
+	; fallthrough
+
+_ShowOncePerSendOutPopupOnSide::
+; The same over side a's HUD (ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY):
+; for an ability of the mon that isn't the one acting.
+	push af
+	ld l, a
 	ld a, c
 	rrca
 	rrca
 	rrca
 	and %00011111 ; byte
-	ld l, a
-	ldh a, [hBattleTurn]
-	and a
-	ld a, l
-	jr z, .got_side
+	dec l
+	jr nz, .got_side ; player
 	add SEND_OUT_POPUP_BYTES
 .got_side
 	ld hl, wSendOutPopupsShown
@@ -70,13 +78,17 @@ _ShowOncePerSendOutPopup::
 	jr nz, .bit
 	ld c, a ; mask
 	and [hl]
-	ret nz ; already shown
+	jr nz, .shown
 	ld a, c
 	or [hl]
 	ld [hl], a
-	ldh a, [hBattleTurn]
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	pop af
+	ld c, a
 	farcall ShowAbilityPopup
+	ret
+
+.shown
+	pop af
 	ret
 
 ResetPlayerSendOutPopups::

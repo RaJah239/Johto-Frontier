@@ -1254,14 +1254,14 @@ ENDM
 ; ==========================================================================
 ; === Macro: surefire_ability                                        ===
 ; ==========================================================================
-; Checks if a specific move was used and if the TARGET Pokemon has the ability,
-; then shows the ability popup and sets the event flag (separate for player/enemy).
+; If the move used is \1 and the user has the ability, the move hits (this
+; returns from _BattleCommand_CheckHit), showing the ability popup once
+; each time the user is sent out.
 ; Parameters:
 ;   \1 - Move animation constant (e.g., MEGAHORN)
 ;   \2 - Pokemon list (e.g., TrueHornPokemon)
-;   \3 - Event flag for PLAYER (when player's Pokemon has the ability as target)
-;   \4 - Event flag for ENEMY (when enemy's Pokemon has the ability as target)
-;   \5 - Ability popup text label (e.g., TrueHornText)
+;   \3 - SEND_OUT_POPUP_* constant (e.g., SEND_OUT_POPUP_TRUE_HORN)
+;   \4 - Ability popup text label (e.g., TrueHornText)
 ; ==========================================================================
 MACRO surefire_ability
 	; Check if the specific move was used
@@ -1270,45 +1270,14 @@ MACRO surefire_ability
 	cp \1
 	jr nz, .skip\@
 
-	; Check if the TARGET Pokemon has the ability
+	; Check if the user has the ability
 	call GetCurrentMon
 	ld hl, \2
 	call IsInByteArray
 	jr nc, .skip\@
 
-	; Select the correct event flag based on who is the target
-	; hBattleTurn = 0: player attacking → enemy is target → use enemy event (\4)
-	; hBattleTurn = 1: enemy attacking → player is target → use player event (\3)
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .check_enemy_event\@
-	; Enemy's turn, player is target
-	CheckEventFlag \3
-	ret nz
-	jr .show_popup\@
-
-.check_enemy_event\@
-	; Player's turn, enemy is target
-	CheckEventFlag \4
-	ret nz
-
-.show_popup\@
-	; Slide the ability popup over the TARGET's HUD
-	ld b, BANK(\5)
-	ldh a, [hBattleTurn]
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY (target's side)
-	ld de, \5
-	farcall ShowAbilityPopup
-
-	; Set the correct event flag
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .set_enemy_event\@
-	SetEventFlag \3
-	ret
-
-.set_enemy_event\@
-	SetEventFlag \4
+	; It hits: slide the popup over the user's HUD, once per send-out
+	ShowOncePerSendOutPopup \3, \4
 	ret
 
 .skip\@
@@ -1351,6 +1320,15 @@ MACRO ShowOncePerSendOutPopup
 	ld b, BANK(\2)
 	ld de, \2
 	farcall _ShowOncePerSendOutPopup
+ENDM
+
+; As ShowOncePerSendOutPopup, over the HUD of side a
+; (ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY) instead of the acting side's.
+MACRO ShowOncePerSendOutPopupOnSide
+	ld c, \1
+	ld b, BANK(\2)
+	ld de, \2
+	newfarcall _ShowOncePerSendOutPopupOnSide
 ENDM
 
 ; Macro for Grand Gauntlet silent trainers

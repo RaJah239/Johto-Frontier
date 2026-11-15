@@ -1,7 +1,6 @@
 ; Core components of the battle engine.
 
 DoBattle:
-	farcall ResetSureHitEvents
 	farcall ResetAllSendOutPopups
 	xor a
 	ld [wBattleParticipantsNotFainted], a
@@ -1043,38 +1042,11 @@ ResidualDamage:
 	jr z, .not_nightmare
 
 .nightmare
-	; Check if this side has already displayed Bad Dreams
+	; Bad Dreams belongs to the other side's mon: its popup, once each time
+	; that mon is sent out
 	ldh a, [hBattleTurn]
-	and a
-	jr nz, .BadDreamsFoe
-
-	; Player
-	CheckEventFlag EVENT_BAD_DREAMS_PLAYER
-	jr nz, .in_night_mare
-
-	; Show popup
-	ld b, BANK(BadDreamsText)
-	ld c, ABILITY_POPUP_ENEMY
-	ld de, BadDreamsText
-	farcall ShowAbilityPopup
-
-	; Mark player popup as shown
-	SetEventFlag EVENT_BAD_DREAMS_PLAYER
-	jr .in_night_mare
-
-.BadDreamsFoe:
-	; Foe
-	CheckEventFlag EVENT_BAD_DREAMS_FOE
-	jr nz, .in_night_mare
-
-	; Show popup
-	ld b, BANK(BadDreamsText)
-	ld c, ABILITY_POPUP_PLAYER
-	ld de, BadDreamsText
-	farcall ShowAbilityPopup
-
-	; Mark foe popup as shown
-	SetEventFlag EVENT_BAD_DREAMS_FOE
+	xor 1
+	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_BAD_DREAMS, BadDreamsText
 .in_night_mare
 	xor a
 	ld [wNumHits], a
