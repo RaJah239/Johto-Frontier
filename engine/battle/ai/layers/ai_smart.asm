@@ -2373,6 +2373,11 @@ endr
 AI_Smart_SpeedDownHit:
 ; icy wind, bulldoze, pounce, rock tomb
 
+; the guaranteed Speed drop would raise a Contrary mon's Speed instead
+	ld a, [wBattleMonSpecies]
+	newfarcall IsContrarySpecies
+	jmp c, StandardDiscourage
+
 	call DoesAIOutSpeedPlayer
 	ret c
 

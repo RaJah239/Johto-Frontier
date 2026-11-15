@@ -89,11 +89,33 @@ AI_Basic:
 	jr nz, .discourageNonDamagingMoves
 	ld a, [wEnemyMonItem]
 	cp ASSAULT_VEST
-	jr nz, .check_status_immunity
+	jr nz, .check_contrary
 .discourageNonDamagingMoves
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
 	jmp z, .discourage
+
+.check_contrary
+; ========================
+; === Ability: Contrary ===
+; ========================
+; Never use a stat-lowering status move (or Sticky Web) on a Contrary
+; player mon, since it would raise the stat instead.
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	cp EFFECT_STICKY_WEB
+	jr z, .stat_lowering
+	cp EFFECT_ATTACK_DOWN
+	jr c, .check_status_immunity
+	cp EFFECT_EVASION_DOWN + 1
+	jr c, .stat_lowering
+	cp EFFECT_ATTACK_DOWN_2
+	jr c, .check_status_immunity
+	cp EFFECT_EVASION_DOWN_2 + 1
+	jr nc, .check_status_immunity
+.stat_lowering
+	ld a, [wBattleMonSpecies]
+	newfarcall IsContrarySpecies
+	jmp c, .discourage
 
 .check_status_immunity
 ; Dismiss status-only moves if the player can't be statused.
