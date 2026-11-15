@@ -1909,6 +1909,10 @@ BikeFunction:
 	ld a, [wOptions5]
 	bit SKIP_BICYCLE_MUSIC, a
 	jr nz, .skip_bike_music
+	; keep playing a track saved from the Music Player
+	ld a, [wOverworldMusicOverride]
+	and a
+	jr nz, .skip_bike_music
 
 	xor a
 	ld [wMusicFade], a

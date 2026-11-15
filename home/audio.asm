@@ -342,6 +342,10 @@ PlayMapMusicBike::
 
 	xor a
 	ld [wDontPlayMapMusicOnReload], a
+	; a track saved from the Music Player replaces the bike music too
+	ld a, [wOverworldMusicOverride]
+	and a
+	jr nz, .map_music
 	ld a, [wPlayerState]
 	cp PLAYER_BIKE
 	jr nz, .map_music
@@ -443,6 +447,15 @@ SpecialMapMusic::
 	ret
 
 GetMapMusic_MaybeSpecial::
+	; a track saved from the Music Player replaces all map music
+	ld a, [wOverworldMusicOverride]
+	and a
+	jr z, .no_override
+	ld e, a
+	ld d, 0
+	ret
+
+.no_override
 	call SpecialMapMusic
 	ret c
 	call GetMapMusic

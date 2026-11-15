@@ -3120,7 +3120,10 @@ wNomadSigil:: db
 
 wRegisteredItemSlot3:: db
 wRegisteredItemSlot4:: db
-	ds 6
+; Song ID saved from the Music Player that replaces every map's music
+; (0 = each map's own music). Saved with the game.
+wOverworldMusicOverride:: db
+	ds 5
 
 ; map scene ids
 wPokecenter2FSceneID::                            db
