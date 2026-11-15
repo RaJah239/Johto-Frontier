@@ -1567,9 +1567,7 @@ StopDangerSound:
 	ret
 
 FaintYourPokemon:
-	hlcoord 11, 8
-	ld de, CoreFntString
-	call PlaceString
+	farcall LoadPlayerFaintIcon
 	call WaitBGMap
 
 	farcall KOBoost
@@ -1605,12 +1603,8 @@ FaintYourPokemon:
 .replay_cry
 	jmp ReplayEnemyCry
 
-CoreFntString: db "FNT@"
-
 FaintEnemyPokemon:
-	hlcoord 2, 1
-	ld de, CoreFntString
-	call PlaceString
+	farcall LoadEnemyFaintIcon
 	call WaitBGMap
 
 	farcall KOBoost

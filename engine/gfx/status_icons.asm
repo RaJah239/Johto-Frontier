@@ -72,18 +72,30 @@ GetEnemyStatusIconIndex:
 	ld hl, wEnemySubStatus5
 	jr GetStatusIconIndex
 
+LoadPlayerFaintIcon::
+; The player's mon fainted: FNT in its HUD.
+	ld a, STATUS_ICON_FNT
+	jr LoadPlayerStatusIcon.got_icon
+
 LoadPlayerStatusIcon::
 ; Draw the player's status icon in its HUD (row 8, columns 11-12).
 	call GetPlayerStatusIconIndex
+.got_icon
 	ld de, StatusIconGFX
 	ld b, BATTLE_STATUS_ICON_PLAYER_TILE
 	ld c, 1 ; color
 	hlcoord 11, 8
 	jr LoadBattleStatusIcon
 
+LoadEnemyFaintIcon::
+; The foe fainted: FNT in its HUD.
+	ld a, STATUS_ICON_FNT
+	jr LoadEnemyStatusIcon.got_icon
+
 LoadEnemyStatusIcon::
 ; Draw the foe's status icon in its HUD (row 1, columns 2-3).
 	call GetEnemyStatusIconIndex
+.got_icon
 	ld de, EnemyStatusIconGFX
 	ld b, BATTLE_STATUS_ICON_ENEMY_TILE
 	ld c, 2 ; color
