@@ -99,6 +99,19 @@ FindMonInOTPartyToSwitchIntoBattle:
 	pop bc
 	jr nz, .discourage ; don't switch to a sleeping or frozen mon
 
+	; nor to a stat-lowering entry ability that the player's Contrary mon
+	; would profit from (unless every mon left is like that)
+	ld hl, wOTPartySpecies
+	ld a, l
+	add b
+	ld l, a
+	adc h
+	sub l
+	ld h, a
+	ld a, [hl]
+	newfarcall IsBadEntryVsContrary
+	jr c, .discourage
+
 	call LookUpTheEffectivenessOfEveryEnemyMove ; does this mon have a SE move on the player?
 	call AreThePlayerMonMovesEffectiveAgainstOTMon ; does the player have a SE move on this mon?
 	jr .loop

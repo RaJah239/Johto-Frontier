@@ -212,6 +212,18 @@ MSim_FindBest:
 	ld a, [wCurOTMon]
 	cp b
 	jr z, .next
+	; don't bring in a stat-lowering entry ability that a Contrary
+	; player mon would profit from
+	ld hl, wOTPartySpecies
+	ld a, l
+	add b
+	ld l, a
+	adc h
+	sub l
+	ld h, a
+	ld a, [hl]
+	newfarcall IsBadEntryVsContrary
+	jr c, .next
 	push bc
 	call MSim_TryCandidate
 	pop bc

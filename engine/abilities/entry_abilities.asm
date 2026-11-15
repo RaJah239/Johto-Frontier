@@ -739,6 +739,53 @@ HandleIntimidate:
 
 IntimidatePopupText: db "Intimidate@"
 
+IsBadEntryVsContrary::
+; For the AI's switch-in choice: carry if OT species a has an entry ability
+; that lowers a stat which the player's Contrary mon would then raise to its
+; benefit: Stifling Aura (Speed) always, Intimidate (Attack) if the player's
+; mon is physical, Infernal Howl (Sp. Atk) if it is special.
+; Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	push af
+	ld a, [wBattleMonSpecies]
+	newfarcall IsContrarySpecies
+	jr nc, .no
+	pop af
+	push af
+	ld hl, StiflingAuraPokemon
+	call IsInByteArray
+	jr c, .yes
+	pop af
+	push af
+	ld hl, IntimidatePokemon
+	call IsInByteArray
+	jr c, .intimidate
+	pop af
+	push af
+	ld hl, InfernalHowlPokemon
+	call IsInByteArray
+	jr nc, .no
+	; Sp. Atk drop: only bad for a special attacker
+	farcall IsPlayerPhysicalOrSpecial
+	jr nc, .yes
+	jr .no
+
+.intimidate
+	; Attack drop: only bad for a physical attacker
+	farcall IsPlayerPhysicalOrSpecial
+	jr c, .yes
+.no
+	pop af
+	and a
+	jmp PopBCDEHL
+
+.yes
+	pop af
+	scf
+	jmp PopBCDEHL
+
 HandleSheerForce:
 ; just its popup when it comes in (engine/abilities/sheer_force.asm)
 	newfarcall AttackerHasSheerForce
