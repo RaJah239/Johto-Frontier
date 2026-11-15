@@ -108,6 +108,8 @@ Pokedex_DirectEntry::
 
 	xor a
 	ldh [hMapAnims], a
+	call ClearPalettes
+	call DelayFrame
 	call InitPokedex
 
 	ld a, POKEDEX_SCX
