@@ -3921,3 +3921,16 @@ wDexGridTopPending:: db
 wDexGridPushOld:: db
 wDexGridPushNew:: db
 wDexGridPicSource:: dw
+
+
+SECTION "Move Icons Borrowed Palette", WRAM0
+
+; the BG palette the Battle Plaza move menus borrowed for the move icons,
+; + $80; 0 if none
+wMoveIconBorrowedPalette:: db
+
+
+SECTION "Move Icons Saved Palette", WRAMX, BANK[5]
+
+; the map's own colors of that palette (same WRAM bank as wBGPals1)
+wMoveIconSavedPalette:: ds 1 palettes

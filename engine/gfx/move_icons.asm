@@ -14,7 +14,8 @@ DEF BATTLE_MOVE_ICON_Y EQU 9
 
 ; The Battle Plaza's TM and tutor menus draw over the map, so they borrow
 ; a map palette that no cell left on screen uses (never the water one,
-; which the tileset animates), and give it back when the menu closes.
+; which the tileset animates), keep it in wMoveIconSavedPalette and give
+; it back when the box is cleared or the menu closes.
 DEF PLAZA_MOVE_ICON_X EQU 10
 DEF PLAZA_MOVE_ICON_Y EQU 12
 
@@ -33,10 +34,6 @@ DEF hMoveIconRow      EQUS "hMathBuffer + 1"
 DEF hMoveIconCol      EQUS "hMathBuffer + 2"
 DEF hMoveIconType     EQUS "hMathBuffer + 3"
 DEF hMoveIconCategory EQUS "hMathBuffer + 4"
-
-; hMoveIconPalette bit: only write wBGPals2, so the palette in wBGPals1
-; stays the one to give back afterwards
-DEF MOVE_ICON_BORROWED_PAL_F EQU 7
 
 GetMoveIconIndices:
 ; b = move. Returns c = type icon index, e = category icon index.
@@ -259,8 +256,7 @@ MoveIcons_Show::
 
 	call MoveIcons_WaitBelowRow
 
-; the palette: in wBGPals2 (and wBGPals1 unless it is borrowed), and
-; straight to the hardware
+; the palette: in wBGPals1 and wBGPals2, and straight to the hardware
 	ldh a, [hMoveIconPalette]
 	and PALETTE_MASK
 	ld l, a
@@ -278,9 +274,6 @@ MoveIcons_Show::
 	call LoadMoveIconPalette
 	pop hl
 	push hl
-	ldh a, [hMoveIconPalette]
-	bit MOVE_ICON_BORROWED_PAL_F, a
-	jr nz, .send_palette
 	ld d, h
 	ld e, l
 	ld bc, wBGPals1 - wBGPals2
@@ -299,7 +292,6 @@ MoveIcons_Show::
 	call CopyBytes
 	pop af
 	ldh [rSVBK], a
-.send_palette
 	pop hl
 	ldh a, [hMoveIconPalette]
 	and PALETTE_MASK
@@ -386,28 +378,24 @@ PlazaMoveIcons_Show::
 ; Show the icons of move [wCurSpecies] in the Battle Plaza TM counter's
 ; and Move Tutor's move info box.
 	call PlazaMoveIcons_SetCoords
+	ld a, [wMoveIconBorrowedPalette]
+	and a
+	jr nz, .got_palette
+
 ; Free the icon cells first, so they don't count as using a palette.
 	hlcoord PLAZA_MOVE_ICON_X, PLAZA_MOVE_ICON_Y, wAttrmap
 	ld a, PAL_BG_TEXT
 	ld bc, MOVE_ICON_TILES
 	call ByteFill
 
-; Mark the palettes the visible cells use...
+; Mark the palettes the cells on screen use...
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld d, 0
 .scan
 	ld a, [hli]
 	and PALETTE_MASK
-	ld e, a
-	ld a, 1
-	inc e
-.bit
-	dec e
-	jr z, .got_bit
-	add a
-	jr .bit
-.got_bit
+	call .Bit
 	or d
 	ld d, a
 	dec bc
@@ -422,26 +410,60 @@ PlazaMoveIcons_Show::
 	cp -1
 	jr z, .fallback
 	ld c, a
-	ld e, a
-	ld a, 1
-	inc e
-.bit2
-	dec e
-	jr z, .got_bit2
-	add a
-	jr .bit2
-.got_bit2
+	call .Bit
 	and d
 	jr nz, .find
-	jr .got_palette
+	ld a, c
+	jr .borrow
 .fallback
-	ld c, PAL_BG_ROOF
+	ld a, PAL_BG_ROOF
+.borrow
+; keep the map's own colors to give back
+	or $80
+	ld [wMoveIconBorrowedPalette], a
+	call .PaletteAddress
+	ld de, wMoveIconSavedPalette
+	ld bc, 1 palettes
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals1)
+	ldh [rSVBK], a
+	call CopyBytes
+	pop af
+	ldh [rSVBK], a
+
 .got_palette
-	set MOVE_ICON_BORROWED_PAL_F, c
+	ld a, [wMoveIconBorrowedPalette]
+	and PALETTE_MASK
+	ld c, a
 	ld a, [wCurSpecies]
 	ld b, a
 	lb de, PLAZA_MOVE_ICON_Y, PLAZA_MOVE_ICON_X
 	jmp MoveIcons_Show
+
+.Bit:
+; a = 1 << a
+	ld e, a
+	ld a, 1
+	inc e
+.bit_loop
+	dec e
+	ret z
+	add a
+	jr .bit_loop
+
+.PaletteAddress:
+; hl = palette [wMoveIconBorrowedPalette] in wBGPals1
+	ld a, [wMoveIconBorrowedPalette]
+	and PALETTE_MASK
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	add hl, hl ; * 1 palettes
+	ld bc, wBGPals1
+	add hl, bc
+	ret
 
 .Preference:
 	db PAL_BG_ROOF, PAL_BG_BROWN, PAL_BG_YELLOW, PAL_BG_GREEN, PAL_BG_RED, PAL_BG_GRAY, -1
@@ -461,16 +483,32 @@ PlazaMoveIcons_Hide::
 	call MoveIcons_WaitBelowRow
 	call MoveIcons_WriteMap
 
+	ld a, [wMoveIconBorrowedPalette]
+	and a
+	ret z
+	call PlazaMoveIcons_Show.PaletteAddress
+	ld d, h
+	ld e, l
+	ld hl, wMoveIconSavedPalette
+	ld bc, 1 palettes
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wBGPals1)
 	ldh [rSVBK], a
-	ld hl, wBGPals1
-	ld de, wBGPals2
-	ld bc, PAL_BG_TEXT palettes
-	call CopyBytes
+	push de
+	call CopyBytes ; wBGPals1
+	pop hl
+	ld de, wBGPals2 - wBGPals1
+	add hl, de
+	ld d, h
+	ld e, l
+	ld hl, wMoveIconSavedPalette
+	ld bc, 1 palettes
+	call CopyBytes ; wBGPals2
 	pop af
 	ldh [rSVBK], a
+	xor a
+	ld [wMoveIconBorrowedPalette], a
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	ret

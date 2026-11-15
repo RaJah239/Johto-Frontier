@@ -9,6 +9,9 @@ DEF NUMBER_OF_TMS EQU 50
 BattlePlazaTMCoinTrader:
 	call LoadStandardMenuHeader
 	call SelectTM
+	push bc
+	farcall PlazaMoveIcons_Hide
+	pop bc
 	ld a, c
 	ld [wScriptVar], a
 	and a
@@ -369,6 +372,7 @@ endr
 ; Nothing to count on Cancel: redraw the description box empty so the
 ; last TM's stats do not linger, and keep the Bag box's frame open
 ; instead of blanking the area white.
+	farcall PlazaMoveIcons_Hide
 	hlcoord 0, 11
 	ld b, 5
 	ld c, SCREEN_WIDTH - 2
@@ -409,45 +413,8 @@ DrawMoveInfoBox::
 	ld de, .EffString
 	call PlaceString
 
-; ...and the category under the type on the right. Status moves
-; print /Other; the rest split physical/special by type, the same
-; way the TM pocket does.
-	ld a, [wCurSpecies]
-	dec a
-	ld hl, Moves + MOVE_POWER
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-	ld a, BANK(Moves)
-	call GetFarByte
-	cp 2
-	jr c, .status_move
-	ld a, [wCurSpecies]
-	dec a
-	ld bc, MOVE_LENGTH
-	ld hl, Moves
-	call AddNTimes
-	ld de, wStringBuffer1
-	ld a, BANK(Moves)
-	call FarCopyBytes
-	ld a, [wStringBuffer1 + MOVE_TYPE]
-	cp SPECIAL
-	jr nc, .special_category
-	ld de, .PhysicalString
-	jr .place_category
-.special_category
-	ld de, .SpecialString
-	jr .place_category
-.status_move
-	ld de, .OtherString
-.place_category
-	hlcoord 10, 13
-	call PlaceString
-
-; The move's type...
-	ld a, [wCurSpecies]
-	ld b, a
-	hlcoord 10, 12
-	predef PrintMoveType
+; ...the move's category and type icons on the right...
+	farcall PlazaMoveIcons_Show
 
 ; ...its effect chance...
 	ld a, [wCurSpecies]
@@ -535,9 +502,6 @@ DrawMoveInfoBox::
 .HitString db "Hit/@"
 .EffString db "Eff/@"
 .BlankString db "---@"
-.PhysicalString db "/Physical@"
-.SpecialString db "/Special @"
-.OtherString db "/Other   @"
 
 BattlePlazaTMSelectionToItem::
 ; Script callasm: turn the menu selection in wScriptVar (1-50) into the
