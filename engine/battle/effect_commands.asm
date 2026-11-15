@@ -5128,6 +5128,13 @@ BattleCommand_ForceSwitch:
 	jmp z, .fail
 	cp BATTLETYPE_SUICUNE
 	jmp z, .fail
+	; Suction Cups holds on (if the move hit)
+	ld a, [wAttackMissed]
+	and a
+	jr nz, .no_suction_cups
+	newfarcall SuctionCupsBlocksForceSwitch
+	jmp c, .fail
+.no_suction_cups
 	ldh a, [hBattleTurn]
 	and a
 	jmp nz, .force_player_switch

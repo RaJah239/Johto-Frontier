@@ -1740,6 +1740,11 @@ AI_Smart_ResetStats:
 AI_Smart_ForceSwitch:
 ; Whirlwind, Roar.
 
+; never use on a Suction Cups mon
+	ld a, [wBattleMonSpecies]
+	newfarcall IsSuctionCupsSpecies
+	jmp c, AIDiscourageMove
+
 ; don't use if player has only one pokemon left
 	push hl
 	call AICheckLastPlayerMon
