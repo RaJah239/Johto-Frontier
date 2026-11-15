@@ -158,11 +158,15 @@ CurMonInList:
 	jmp IsInByteArray
 
 ShowEntryAbilityPopup:
-; Slide in ability name de (in this bank) over the user's HUD. Preserves hl.
+; Clear the text box (of the previous ability's text), then slide in ability
+; name de (in this bank) over the user's HUD. Preserves hl.
+	push hl
+	push de
+	farcall EmptyBattleTextbox
+	pop de
 	ld b, BANK(@)
 	ldh a, [hBattleTurn]
 	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
-	push hl
 	farcall ShowAbilityPopup
 	pop hl
 	ret
