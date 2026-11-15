@@ -624,17 +624,10 @@ GetMovePriority:
 	ret
 
 .mon_check
-	; check if player is using Blastoise
-	ld a, [wBattleMonSpecies]
+	; Iron Head gets priority when Blastoise uses it
+	ld a, d
 	cp BLASTOISE
 	jr z, .priority_2
-
-	; check if foe is using Blastoise
-	ld a, [wEnemyMonSpecies]
-	cp BLASTOISE
-	jr z, .priority_2
-
-	; Neither is Blastoise
 	jr .regular_priority
 
 ;.mon_check2

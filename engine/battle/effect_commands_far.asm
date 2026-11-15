@@ -35,6 +35,10 @@ PriorityAbilityPopup:
 	ld a, b
 	cp BLASTOISE
 	ret nz
+	; the text and popup, once per send-out
+	ld c, SEND_OUT_POPUP_IRON_HEAD
+	newfarcall CheckSendOutPopupShown
+	ret nz
 	call PriorityBattleText_Call
 	ShowOncePerSendOutPopup SEND_OUT_POPUP_IRON_HEAD, PreemptText
 	ret
