@@ -1,4 +1,37 @@
 MoveInfoBox:
+; Draw the move info box and set up its type and category icon sprites,
+; then put the box on screen in one go. The ordinary V-Blank doesn't send
+; the sprites meanwhile: the copy's own V-Blank does, so the box and its
+; icons appear in the same frame.
+	ldh a, [hOAMUpdate]
+	push af
+	ld a, 1
+	ldh [hOAMUpdate], a
+	call .draw
+	pop af
+	ldh [hOAMUpdate], a
+	ret
+
+.draw
+	call _MoveInfoBox
+	ld a, [wPlayerDisableCount]
+	and a
+	jr z, .not_disabled
+	swap a
+	and $f
+	ld b, a
+	ld a, [wMenuCursorY]
+	cp b
+	jr nz, .not_disabled
+	jmp ApplyTilemap ; "Disabled!": no icons
+
+.not_disabled
+	ld a, [wPlayerMoveStruct + MOVE_ANIM]
+	ld b, a
+	farcall BattleMoveIcons_Draw
+	jmp ApplyTilemap
+
+_MoveInfoBox:
 	xor a
 	ldh [hBGMapMode], a
 
@@ -65,9 +98,6 @@ MoveInfoBox:
 	jr z, .no_damage_preview
 	farcall PrintMoveDamagePreview
 .no_damage_preview
-	ld a, [wPlayerMoveStruct + MOVE_ANIM]
-	ld b, a
-	farcall BattleMoveIcons_Draw
 
 ; print "PP:"
 	ld de, .pp_string ; "PP"
