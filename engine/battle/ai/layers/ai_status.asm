@@ -54,6 +54,10 @@ AI_Status:
 	jr .typeimmunity
 
 .poisonimmunity
+	; Poison Heal would heal from it
+	ld a, [wBattleMonSpecies]
+	newfarcall IsPoisonHealSpecies
+	jr c, .immune
 	ld a, [wBattleMonType1]
 	cp POISON
 	jr z, .immune
@@ -87,7 +91,7 @@ AI_Status:
 
 	ld a, [wTypeMatchup]
 	and a
-	jr nz, .checkmove
+	jp nz, .checkmove
 
 .immune
 	call AIDiscourageMove

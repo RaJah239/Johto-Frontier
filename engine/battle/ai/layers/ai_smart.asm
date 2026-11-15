@@ -3504,6 +3504,15 @@ AI_Smart_Trick:
 	bit SUBSTATUS_SUBSTITUTE, a
 	jmp nz, StandardDiscourage
 
+; never give a Toxic Orb to a Poison Heal mon: it would heal from it
+	ld a, [wEnemyMonItem]
+	cp TOXIC_ORB
+	jr nz, .not_toxic_orb_to_poison_heal
+	ld a, [wBattleMonSpecies]
+	newfarcall IsPoisonHealSpecies
+	jmp c, AIDiscourageMove
+
+.not_toxic_orb_to_poison_heal
 ; encourage using the move when the enemy has any of these items held
 	ld a, [wEnemyMonItem]
 	cp CHOICE_BAND

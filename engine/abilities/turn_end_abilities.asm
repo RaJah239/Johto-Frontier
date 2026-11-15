@@ -239,6 +239,15 @@ PoisonHeal::
 	scf
 	ret
 
+IsPoisonHealSpecies::
+; Carry if species a has Poison Heal (for the AI). Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld hl, PoisonHealPokemon
+	call IsInByteArray
+	jmp PopBCDEHL
+
 PoisonHealText: db "Poison Heal@"
 
 RecoveryText: db "Recovery@"
