@@ -223,8 +223,8 @@ _CGB_FinishBattleScreenLayout:
 	ld bc, 6 * SCREEN_WIDTH
 	ld a, PAL_BATTLE_BG_TEXT
 	call ByteFill
-; the status icons (their tiles are in VRAM bank 1)
-	ld a, PAL_BATTLE_BG_STATUS | VRAM_BANK_1
+; the status icons
+	ld a, PAL_BATTLE_BG_STATUS
 	hlcoord 11, 8, wAttrmap
 	ld [hli], a
 	ld [hl], a

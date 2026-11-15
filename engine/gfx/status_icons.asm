@@ -14,15 +14,18 @@ DEF NUM_STATUS_ICONS EQU const_value
 
 ; Each icon is two tiles. StatusIconGFX draws it in color 1, and
 ; EnemyStatusIconGFX in color 2, so one palette can hold two of them.
-; The tiles go in VRAM bank 1 at BG tiles $e0-$ef, free in battle and in
-; the party menu (the ability popup borrows $d4-$e7, but only in battle).
-
 ; In battle, both HUDs use BG palette PAL_BATTLE_BG_STATUS: color 1 for
-; the player's status, color 2 for the foe's.
-DEF BATTLE_STATUS_ICON_PLAYER_TILE EQU $ec
-DEF BATTLE_STATUS_ICON_ENEMY_TILE  EQU $ee
+; the player's status, color 2 for the foe's. The tiles are BG tiles
+; $79-$7c in VRAM bank 0, free in battle. (Not bank 1: the Info pages are
+; drawn over the battle screen without changing its attributes, so their
+; text in these cells must still come from bank 0. The palette has white
+; and black like the text's, so that text looks the same.)
+DEF BATTLE_STATUS_ICON_PLAYER_TILE EQU $79
+DEF BATTLE_STATUS_ICON_ENEMY_TILE  EQU $7b
 
-; The party menu gives each party slot its own two tiles from $e0, and
+; The party menu gives each party slot its own two tiles from $e0 in VRAM
+; bank 1 (free there; the ability popup borrows $d4-$e7, but only in
+; battle), and
 ; uses BG palettes 4-6 (free there), two status colours in each: see
 ; PartyStatusIconPalettes.
 DEF PARTY_STATUS_ICON_TILE EQU $e0
@@ -114,6 +117,7 @@ LoadBattleStatusIcon:
 	push bc
 	call GetStatusIconGFX
 	ld a, b
+	ld b, BANK(vTiles2)
 	call StatusIcons_SendTiles
 	pop bc
 	pop af
@@ -283,6 +287,7 @@ PlacePartyMonStatusIcon::
 	ld a, c
 	add a
 	add PARTY_STATUS_ICON_TILE
+	ld b, BANK(vTiles4)
 	jr StatusIcons_SendTiles
 
 .healthy
@@ -372,19 +377,23 @@ GetStatusIconGFX:
 	ret
 
 StatusIcons_SendTiles:
-; Write the 2 tiles at de to BG tile a (VRAM bank 1) during H-Blanks.
-	sub $80
+; Write the 2 tiles at de to BG tile a in VRAM bank b during H-Blanks.
 	ld l, a
 	ld h, 0
 rept 4
 	add hl, hl
 endr
-	ld bc, vTiles4
-	add hl, bc
+	cp $80
+	ld a, HIGH(vTiles2)
+	jr c, .got_base
+	ld a, HIGH(vTiles0) ; tiles $80-$ff: vTiles1 = vTiles0 + $80 tiles
+.got_base
+	add h
+	ld h, a
 	ld c, 2 * LEN_2BPP_TILE / 2
 .loop
 	call StatusIcons_WaitHBlank
-	ld a, 1
+	ld a, b
 	ldh [rVBK], a
 	ld a, [de]
 	ld [hli], a
