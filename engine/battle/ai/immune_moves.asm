@@ -113,6 +113,15 @@ EnemyMoveSlotHasNoEffect:
 	call FarCopyBytes
 	pop bc
 
+; powder moves don't affect an Overcoat player mon
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	newfarcall IsOvercoatBlockedMove
+	jr nc, .not_overcoat
+	ld a, [wBattleMonSpecies]
+	newfarcall IsOvercoatSpecies
+	ret c
+
+.not_overcoat
 ; status moves aren't stopped by type (like AI_Types)
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a

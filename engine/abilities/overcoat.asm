@@ -2,7 +2,8 @@
 ; === Ability: Overcoat ===
 ; =========================
 ; Immune to powder moves (Spore, Sleep Powder, Stun Spore, Poison Powder)
-; and to Sandstorm and Hail damage. No popup.
+; and to Sandstorm and Hail damage. Its popup only slides in when it
+; blocks a powder move.
 ; BattleCommand_CheckPowder (effect_commands.asm) and HandleWeather
 ; (core3.asm) check it; the AI avoids powder moves against it and knows it
 ; takes no weather damage.
@@ -37,6 +38,22 @@ IsOvercoatBlockedMove::
 	ld hl, OvercoatBlockedMoves
 	call IsInByteArray
 	jmp PopBCDEHL
+
+ShowOvercoatPopupOnTarget::
+; Slide in Overcoat's popup over the target's (not hBattleTurn's) HUD.
+; Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ldh a, [hBattleTurn]
+	xor 1
+	ld c, a
+	ld b, BANK(@)
+	ld de, OvercoatText
+	farcall ShowAbilityPopup
+	jmp PopBCDEHL
+
+OvercoatText: db "Overcoat@"
 
 OvercoatBlockedMoves:
 	db SPORE

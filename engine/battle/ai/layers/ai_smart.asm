@@ -3290,6 +3290,14 @@ AI_Smart_Sandstorm:
 	cp WEATHER_SANDSTORM
 	jr z, .discourage
 
+; Overcoat takes no Sandstorm damage: only use it if we benefit
+	ld a, [wBattleMonSpecies]
+	newfarcall IsOvercoatSpecies
+	jr nc, .no_overcoat
+	call .EnemyBenefits
+	jmp nc, AIDiscourageMove
+
+.no_overcoat
 ; don't use if choice locked
 	call DoesEnemyHaveChoiceItem
 	jr c, .discourage
@@ -3364,6 +3372,27 @@ AI_Smart_Sandstorm:
 	dec [hl]
 	ret
 
+.EnemyBenefits:
+; Carry if the enemy's mon gains from Sandstorm (Sand Rush, Sand Body,
+; Weather Rock). Preserves hl.
+	push hl
+	ld a, [wEnemyMonSpecies]
+	ld hl, SandRushPokemon_AI
+	call IsInByteArray
+	jr c, .benefits_done
+	ld a, [wEnemyMonSpecies]
+	ld hl, SandBodyPokemon_AI
+	call IsInByteArray
+	jr c, .benefits_done
+	ld a, [wEnemyMonItem]
+	cp WEATHER_ROCK
+	scf
+	jr z, .benefits_done
+	and a
+.benefits_done
+	pop hl
+	ret
+
 .SandstormImmuneTypes:
 	db ROCK
 	db GROUND
@@ -3376,6 +3405,14 @@ AI_Smart_Hail:
 	cp WEATHER_HAIL
 	jr z, .discourage
 
+; Overcoat takes no Hail damage: only use it if we benefit
+	ld a, [wBattleMonSpecies]
+	newfarcall IsOvercoatSpecies
+	jr nc, .no_overcoat
+	call .EnemyBenefits
+	jmp nc, AIDiscourageMove
+
+.no_overcoat
 ; don't use if choice locked
 	call DoesEnemyHaveChoiceItem
 	jr c, .discourage
@@ -3446,6 +3483,30 @@ AI_Smart_Hail:
 	inc [hl]
 .discourage
 	inc [hl]
+	ret
+
+.EnemyBenefits:
+; Carry if the enemy's mon gains from Hail (Slush Rush, Ice Body, Weather
+; Rock, Blizzard never missing). Preserves hl.
+	push hl
+	ld a, [wEnemyMonSpecies]
+	ld hl, SlushRushPokemon_AI
+	call IsInByteArray
+	jr c, .benefits_done
+	ld a, [wEnemyMonSpecies]
+	ld hl, IceBodyPokemon_AI
+	call IsInByteArray
+	jr c, .benefits_done
+	ld hl, .GoodHailMoves
+	call AIHasMoveInArray
+	jr c, .benefits_done
+	ld a, [wEnemyMonItem]
+	cp WEATHER_ROCK
+	scf
+	jr z, .benefits_done
+	and a
+.benefits_done
+	pop hl
 	ret
 
 .GoodHailMoves

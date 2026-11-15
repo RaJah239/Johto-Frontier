@@ -6881,7 +6881,9 @@ BattleCommand_CheckPowder:
 	newfarcall IsOvercoatBlockedMove
 	jr nc, .not_overcoat_move
 	newfarcall TargetHasOvercoat
-	jr c, .Immune
+	jr nc, .not_overcoat_move
+	newfarcall ShowOvercoatPopupOnTarget
+	jr .Immune
 .not_overcoat_move
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
