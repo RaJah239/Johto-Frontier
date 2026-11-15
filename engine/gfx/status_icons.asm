@@ -292,12 +292,12 @@ PartyStatusIconPalettes:
 	db 5 | PARTY_STATUS_ICON_DRAWN_IN_COLOR_2 ; BRN
 	db 6     ; FRB
 	db 4     ; TOX (the PSN colour)
-	db 6 | PARTY_STATUS_ICON_DRAWN_IN_COLOR_2 ; FNT
+	db 6     ; FNT (white on black: only colors 0 and 3)
 	assert_table_length NUM_STATUS_ICONS
 
 LoadPartyStatusIconPals::
 ; Fill BG palettes 4-6 in wBGPals1 for the party menu's status icons:
-; white, PSN/SLP/FRB, PAR/BRN/FNT, black.
+; white, PSN/SLP/FRB, PAR/BRN/(unused), black.
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wBGPals1)
@@ -346,7 +346,7 @@ LoadPartyStatusIconPals::
 .Icons:
 	db STATUS_ICON_PSN, STATUS_ICON_PAR
 	db STATUS_ICON_SLP, STATUS_ICON_BRN
-	db STATUS_ICON_FRB, STATUS_ICON_FNT
+	db STATUS_ICON_FRB, STATUS_ICON_FNT ; FNT is black, so color 2 is spare
 
 GetStatusIconGFX:
 ; de += icon a * 2 tiles

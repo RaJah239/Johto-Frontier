@@ -12,5 +12,5 @@
 	RGB 09, 18, 31
 ; TOX
 	RGB 27, 06, 28
-; FNT
-	RGB 25, 00, 00
+; FNT (black: the icon has no status colour)
+	RGB 00, 00, 00
