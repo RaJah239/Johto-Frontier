@@ -260,6 +260,13 @@ AftermathBattleText:
 	cont "Aftermath!"
 	prompt
 
+HarvestBattleText:
+	text "Harvested"
+	line "@"
+	text_ram wStringBuffer1
+	text "!"
+	prompt
+
 PoisonHealBattleText:
 	text "<USER>"
 	line "heals HP via its"

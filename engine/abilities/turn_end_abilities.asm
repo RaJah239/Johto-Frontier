@@ -17,6 +17,7 @@ TurnEndAbilities:
 	turn_end_ability SandBodyPokemon,       WEATHER_SANDSTORM, SandBody_Activate
 	turn_end_ability TenacityPokemon,       ANY_WEATHER,       Tenacity_Activate
 	turn_end_ability PhotosynthesisPokemon, WEATHER_SUN,       Photosynthesis_Activate
+	turn_end_ability HarvestPokemon,        ANY_WEATHER,       Harvest_Activate
 	ret
 
 ; handle boosted attack in engine/abilities/boosting_abilities.asm
@@ -174,6 +175,97 @@ SpeedBoost_Activate:
 	farcall BattleCommand_StatUp
 	farjp BattleCommand_StatUpMessage
 
+; ========================
+; === Ability: Harvest ===
+; ========================
+RecordHarvestBerry::
+; Item a, a Berry or not, was just used up by the other side's mon (not
+; hBattleTurn's: see ConsumeHeldItem). Remember it if it's a Berry.
+; Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld hl, HarvestBerries
+	call IsInByteArray
+	jr nc, .done
+	ld b, a
+	ld hl, wHarvestBerries
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .got_side ; the enemy's turn: the player's mon used it
+	inc hl
+.got_side
+	ld [hl], b
+.done
+	jmp PopBCDEHL
+
+HarvestBerries:
+	db BERRY
+	db GOLD_BERRY
+	db SILVER_BERRY
+	db MYSTERYBERRY
+	db MIRACLEBERRY
+	db PSNCUREBERRY
+	db PRZCUREBERRY
+	db BURNT_BERRY
+	db ICE_BERRY
+	db BITTER_BERRY
+	db MINT_BERRY
+	db -1 ; end
+
+Harvest_Activate:
+; If the mon used a Berry and holds nothing now, regrow it: 50%, or always
+; in the sun.
+	ld hl, wHarvestBerries
+	ld de, wBattleMonItem
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_side
+	inc hl
+	ld de, wEnemyMonItem
+.got_side
+	ld a, [hl]
+	and a
+	ret z ; no Berry used
+	ld a, [de]
+	and a
+	ret nz ; holding something
+	ld a, [wBattleWeather]
+	cp WEATHER_SUN
+	jr z, .regrow
+	call BattleRandom ; (link battles stay in sync)
+	cp 50 percent
+	ret nc
+
+.regrow
+	ld a, [hl]
+	ld [de], a
+	ld [hl], 0
+	ld [wNamedObjectIndex], a
+	ld b, a
+	; and in the party (not a wild mon's)
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wPartyMon1Item
+	ld a, [wCurBattleMon]
+	jr z, .got_party
+	ld a, [wBattleMode]
+	dec a
+	jr z, .regrown ; wild
+	ld hl, wOTPartyMon1Item
+	ld a, [wCurOTMon]
+.got_party
+	push bc
+	call GetPartyLocation
+	pop bc
+	ld [hl], b
+.regrown
+	call GetItemName
+	ShowActivationOrEntryOrKOAbilityPopup HarvestText
+	farcall RefreshBattleHuds
+	ld hl, HarvestBattleText
+	jmp StdBattleTextbox
+
 SolarPowerHPLoss_Activate:
 	ShowOncePerSendOutPopup SEND_OUT_POPUP_SOLAR_POWER_HP_LOSS, SolarPowerHPLossText
 	; subtract 1/8 max hp end of each turn
@@ -252,6 +344,7 @@ PoisonHealText: db "Poison Heal@"
 
 RecoveryText: db "Recovery@"
 SpeedBoostText: db "Speed Boost@"
+HarvestText:    db "Harvest@"
 TenacityText: db "Tenacity@"
 SolarPowerHPLossText: db "SolarPower@"
 
@@ -273,3 +366,4 @@ INCLUDE "data/abilities/sand_body_mons.asm"
 INCLUDE "data/abilities/tenacity_mons.asm"
 INCLUDE "data/abilities/photosynthesis_mons.asm"
 INCLUDE "data/abilities/poison_heal_mons.asm"
+INCLUDE "data/abilities/harvest_mons.asm"

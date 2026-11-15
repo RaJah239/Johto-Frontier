@@ -30,6 +30,9 @@ ConsumeHeldItem:
 	jmp PopBCDEHL
 
 .ok
+	; remember a used Berry for Harvest
+	ld a, [de]
+	newfarcall RecordHarvestBerry
 	xor a
 	ld [de], a
 	pop af

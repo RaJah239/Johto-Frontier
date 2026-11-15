@@ -108,6 +108,8 @@ ResetPlayerSendOutPopups::
 	; weather shard it's about to use: PrintPlayerHUD)
 	ld hl, wEntryAbilitiesPending
 	set ENTRY_ITEM_PLAYER_F, [hl]
+	xor a
+	ld [wHarvestBerries], a ; no Berry used yet
 	ld hl, wSendOutPopupsShown
 	jr ResetSendOutPopups
 
@@ -115,6 +117,8 @@ ResetEnemySendOutPopups::
 ; The foe sent out a mon.
 	ld hl, wEntryAbilitiesPending
 	set ENTRY_ITEM_ENEMY_F, [hl]
+	xor a
+	ld [wHarvestBerries + 1], a
 	ld hl, wSendOutPopupsShown + SEND_OUT_POPUP_BYTES
 ResetSendOutPopups:
 	xor a

@@ -3944,3 +3944,10 @@ SECTION "Send-Out Ability Popups", WRAM0
 ; per side, a flag for each SEND_OUT_POPUP_*: set once that popup has shown
 ; since the side's mon came in (engine/abilities/send_out_popup.asm)
 wSendOutPopupsShown:: ds 2 * SEND_OUT_POPUP_BYTES
+
+
+SECTION "Harvest Berries", WRAMX, BANK[1]
+
+; per side (player, enemy), the Berry its mon used since it came in, for
+; Harvest (engine/abilities/turn_end_abilities.asm); 0 if none
+wHarvestBerries:: ds 2
