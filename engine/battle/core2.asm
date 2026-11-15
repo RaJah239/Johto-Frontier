@@ -752,6 +752,9 @@ StatsInfoBox:
 	call PlaceString
 	ld hl, wBattleMonMaxHP
 	ld a, [wBattleMonSpecies]
+	ld d, a
+	ld a, [wBattleMonItem]
+	ld e, a
 	call .CopyStats
 	ld de, StatTexts
 	ld b, 1
@@ -763,6 +766,9 @@ StatsInfoBox:
 	call PlaceString
 	ld hl, wEnemyMonMaxHP
 	ld a, [wEnemyMonSpecies]
+	ld d, a
+	ld a, [wEnemyMonItem]
+	ld e, a
 	call .CopyStats
 	ld de, StatTexts
 	ld b, 11
@@ -770,24 +776,93 @@ StatsInfoBox:
 	jmp StatsInfoBoxLoop
 
 .CopyStats:
-; Copy the max HP and stats at hl to wStringBuffer1, doubling Attack for
-; Huge Power (species a). Return hl = the copy.
-	push af
+; Copy the max HP and stats at hl to wStringBuffer1, with the boosts the
+; mon's ability and item give them: Huge Power doubles Attack (species d);
+; Choice Band (x1.5) and Muscle Band (x1.1) Attack, Choice Specs (x1.5) and
+; Wise Glasses (x1.1) Sp. Atk, and Everstone (the Eviolite effect, x1.5)
+; Defense and Sp. Def if the mon can still evolve (item e).
+; Return hl = the copy.
+	push de
 	ld de, wStringBuffer1
 	ld bc, 2 * (1 + NUM_BATTLE_STATS)
 	call CopyBytes
-	pop af
-	ld hl, wStringBuffer1
+	pop de
+
+	ld a, d
 	newfarcall IsHugePowerSpecies
-	ret nc
-	inc hl
-	inc hl
-	inc hl ; Attack, low byte
+	jr nc, .no_huge_power
+	ld hl, wStringBuffer1 + 3 ; Attack, low byte
 	sla [hl]
 	dec hl
 	rl [hl]
-	dec hl
-	dec hl
+.no_huge_power
+
+	ld a, e
+	ld hl, wStringBuffer1 + 2 ; Attack
+	ld c, 15
+	cp CHOICE_BAND
+	jr z, .one_stat
+	ld c, 11
+	cp MUSCLE_BAND
+	jr z, .one_stat
+	ld hl, wStringBuffer1 + 8 ; Sp. Atk
+	ld c, 15
+	cp CHOICE_SPECS
+	jr z, .one_stat
+	ld c, 11
+	cp WISE_GLASSES
+	jr z, .one_stat
+	cp EVERSTONE
+	jr nz, .done
+	call .CanEvolve
+	jr z, .done
+	ld c, 15
+	ld hl, wStringBuffer1 + 4 ; Defense
+	call .ScaleStat
+	ld hl, wStringBuffer1 + 10 ; Sp. Def
+.one_stat
+	call .ScaleStat
+.done
+	ld hl, wStringBuffer1
+	ret
+
+.ScaleStat:
+; Multiply the big-endian stat at hl by c / 10.
+	push hl
+	xor a
+	ldh [hMultiplicand], a
+	ld a, [hli]
+	ldh [hMultiplicand + 1], a
+	ld a, [hl]
+	ldh [hMultiplicand + 2], a
+	ld a, c
+	ldh [hMultiplier], a
+	call Multiply
+	ld a, 10
+	ldh [hDivisor], a
+	ld b, 4
+	call Divide
+	pop hl
+	ldh a, [hQuotient + 2]
+	ld [hli], a
+	ldh a, [hQuotient + 3]
+	ld [hld], a
+	ret
+
+.CanEvolve:
+; nz if species d has an evolution (like UnevolvedEviolite).
+	ld a, d
+	dec a
+	ld c, a
+	ld b, 0
+	ld hl, EvosAttacksPointers
+	add hl, bc
+	add hl, bc
+	ld a, BANK(EvosAttacksPointers)
+	call GetFarWord
+	ld a, BANK("Evolutions and Attacks")
+	call GetFarByte
+	and a
 	ret
 
 PlayerInfoPageInfoBox:
