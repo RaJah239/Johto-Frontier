@@ -144,9 +144,7 @@ AI_HasPriorityKO:
 
 	; priority above normal?
 	push bc
-	ld a, [wEnemyMonItem]
-	ld c, a
-	farcall GetMovePriority_Far
+	farcall GetEnemyMovePriority_Far
 	ld a, b
 	pop bc
 	cp BASE_PRIORITY + 1

@@ -539,16 +539,31 @@ CompareMovePriority:
 	ld c, a
 	farjp PranksterPriority
 
+GetEnemyMovePriority_Far:
+; farcall-friendly GetMovePriority for move b used by the enemy's mon.
+; Returns the priority in b (farcall doesn't preserve a). Preserves de.
+	push de
+	ld a, [wEnemyMonItem]
+	ld c, a
+	ld a, [wEnemyMonSpecies]
+	jr GetMovePriority_Far
+
+GetPlayerMovePriority_Far:
+; The same for move b used by the player's mon.
+	push de
+	ld a, [wBattleMonItem]
+	ld c, a
+	ld a, [wBattleMonSpecies]
 GetMovePriority_Far:
-; farcall-friendly GetMovePriority: b = move, c = holder's item.
-; Returns the priority in b (farcall doesn't preserve a).
+	ld d, a
 	ld a, b
 	call GetMovePriority
 	ld b, a
+	pop de
 	ret
 
 GetMovePriority:
-; Return the priority (0-3) of move a.
+; Return the priority (0-3) of move a used by species d holding item c.
 
 	ld b, a
 
@@ -637,21 +652,12 @@ GetMovePriority:
 ;	jr .regular_priority
 
 .mon_check3
-	; check if player is using drowzee or hypno
-	ld a, [wBattleMonSpecies]
+	; Zen Headbutt gets priority when Drowzee or Hypno uses it
+	ld a, d
 	cp DROWZEE
 	jr z, .priority_2
 	cp HYPNO
 	jr z, .priority_2
-
-	; check if foe is using drowzee or hypno
-	ld a, [wEnemyMonSpecies]
-	cp DROWZEE
-	jr z, .priority_2
-	cp HYPNO
-	jr z, .priority_2
-
-	; Neither is Snorlax
 	jr .regular_priority
 
 .check_trick_stick

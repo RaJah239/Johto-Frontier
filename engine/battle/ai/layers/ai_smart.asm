@@ -2751,10 +2751,11 @@ AI_Smart_Flinch:
 .not_blastoise_or_iron_head
 	ld a, [wEnemyMonSpecies]
 	cp DROWZEE
-	jr z, .not_drowzee_or_hypno_or_zen_headbutt
+	jr z, .drowzee_or_hypno
 	cp HYPNO
 	jr nz, .not_drowzee_or_hypno_or_zen_headbutt
 
+.drowzee_or_hypno
 	; check if drowzee or hypno has zen headbutt
 	ld a, [wEnemyMoveStruct + MOVE_ANIM]
 	cp ZEN_HEADBUTT

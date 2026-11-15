@@ -252,9 +252,7 @@ AIDrain_CheckSlot:
 	jr nz, .pick
 	; slower, but a priority drain move still moves first
 	push bc
-	ld a, [wEnemyMonItem]
-	ld c, a
-	farcall GetMovePriority_Far
+	farcall GetEnemyMovePriority_Far
 	ld a, b
 	pop bc
 	cp BASE_PRIORITY + 1
@@ -318,9 +316,7 @@ AIDrain_DreamEaterHits:
 ; while faster), and 0 if it knows Sleep Talk (it can attack while asleep).
 	xor a
 	ld [wAIDrainSimEnemyHP], a ; 1: one hit fewer (scratch, the race isn't running)
-	ld a, [wEnemyMonItem]
-	ld c, a
-	farcall GetMovePriority_Far
+	farcall GetEnemyMovePriority_Far
 	ld d, b ; Dream Eater's priority
 	ld hl, wBattleMonMoves
 	ld e, NUM_MOVES
@@ -333,9 +329,7 @@ AIDrain_DreamEaterHits:
 	push hl
 	push de
 	ld b, a
-	ld a, [wBattleMonItem]
-	ld c, a
-	farcall GetMovePriority_Far
+	farcall GetPlayerMovePriority_Far
 	pop de
 	pop hl
 	ld a, b

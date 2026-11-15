@@ -7,9 +7,9 @@
 ; === Ability: Priority ===
 ; =============================
 PriorityAbilityPopup:
-; Show the ability popup the first time a mon uses one of the priority
-; moves with its matching species, once each time it's sent out (see
-; ShowOncePerSendOutPopup).
+; Show the ability popup and the priority text the first time a mon uses
+; one of the priority moves with its matching species, once each time it's
+; sent out (see ShowOncePerSendOutPopup).
 ; The priority boost itself comes from GetMovePriority in core.asm.
 	ldh a, [hBattleTurn]
 	and a
@@ -59,13 +59,20 @@ PriorityAbilityPopup:
 	ret nz
 
 .popup_zen
+	; the text and popup, once per send-out
+	ld c, SEND_OUT_POPUP_ZEN_HEADBUTT
+	newfarcall CheckSendOutPopupShown
+	ret nz
 	call PriorityBattleText_Call
 	ShowOncePerSendOutPopup SEND_OUT_POPUP_ZEN_HEADBUTT, PreemptText
 	ret
 
 PriorityBattleText_Call:
 	ld hl, PriorityBattleText
-	jmp StdBattleTextbox
+	call StdBattleTextbox
+	; the text has no prompt, and hBGMapMode is off here: put it on screen
+	; so it shows together with the popup
+	jmp WaitBGMap
 
 PreemptText: db "Preempt@"
 

@@ -803,9 +803,7 @@ MSim_EnemyMoveDamage:
 	call z, MSim_LowestRoll
 	pop bc
 	; priority? (carry if above normal)
-	ld a, [wEnemyMonItem]
-	ld c, a
-	farcall GetMovePriority_Far
+	farcall GetEnemyMovePriority_Far
 	ld a, BASE_PRIORITY
 	cp b
 	push af
@@ -876,9 +874,7 @@ MSim_PlayerMoveDamage:
 	ld a, [wPlayerMoveStruct + MOVE_TYPE]
 	call MSim_DefensiveAbilities
 	pop bc
-	ld a, [wBattleMonItem]
-	ld c, a
-	farcall GetMovePriority_Far
+	farcall GetPlayerMovePriority_Far
 	ld a, BASE_PRIORITY
 	cp b
 	ld hl, wMSimPlayerDmg

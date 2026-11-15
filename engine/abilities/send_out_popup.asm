@@ -50,6 +50,28 @@ _ShowOncePerSendOutPopupOnSide::
 ; The same over side a's HUD (ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY):
 ; for an ability of the mon that isn't the one acting.
 	push af
+	call GetSendOutPopupFlag
+	jr nz, .shown
+	ld a, c
+	or [hl]
+	ld [hl], a
+	pop af
+	ld c, a
+	farcall ShowAbilityPopup
+	ret
+
+.shown
+	pop af
+	ret
+
+CheckSendOutPopupShown::
+; Return nz if popup c (SEND_OUT_POPUP_*) has already been shown over the
+; acting side's HUD since its mon came in. Use with newfarcall.
+	ldh a, [hBattleTurn]
+	; fallthrough
+
+GetSendOutPopupFlag:
+; hl = side a's flag byte for popup c, c = its mask; nz if it's set.
 	ld l, a
 	ld a, c
 	rrca
@@ -78,17 +100,6 @@ _ShowOncePerSendOutPopupOnSide::
 	jr nz, .bit
 	ld c, a ; mask
 	and [hl]
-	jr nz, .shown
-	ld a, c
-	or [hl]
-	ld [hl], a
-	pop af
-	ld c, a
-	farcall ShowAbilityPopup
-	ret
-
-.shown
-	pop af
 	ret
 
 ResetPlayerSendOutPopups::
