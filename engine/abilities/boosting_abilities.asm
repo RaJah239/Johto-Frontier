@@ -4,6 +4,7 @@ CheckBoostingAbilities:
 	call HandleSandForce
 	call HandleTechnician
 	call HandleSheerForceBoost
+	call HandleAnalytic
 	call HandleHugePower
 	call HandleMultiscale
 	call HandleThickFat
@@ -156,6 +157,24 @@ HandleTechnician:
 
 TechnicianText: db "Technician@"
 INCLUDE "data/abilities/technician_mons.asm"
+
+HandleAnalytic:
+; attacks do 1.3x when the user moves after the foe this turn
+	call GetCurrentMon
+	ld hl, AnalyticPokemon
+	call IsInByteArray
+	ret nc
+
+	ld a, [wEnemyGoesFirst] ; 0 if the player went first
+	ld b, a
+	ldh a, [hBattleTurn] ; 0 on the player's turn
+	xor b
+	ret z ; the user went first
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_ANALYTIC, AnalyticText
+	jmp ThirtyPercentBoost
+
+AnalyticText: db "Analytic@"
+INCLUDE "data/abilities/analytic_mons.asm"
 
 HandleSheerForceBoost:
 ; moves with a secondary effect do 1.3x (engine/abilities/sheer_force.asm)
