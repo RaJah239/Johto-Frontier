@@ -575,8 +575,6 @@ GetMovePriority:
 	; check move
 	cp IRON_HEAD
 	jr z, .mon_check
-;	cp CURSE
-;	jr z, .mon_check2
 	cp ZEN_HEADBUTT
 	jr z, .mon_check3
 
@@ -629,20 +627,6 @@ GetMovePriority:
 	cp BLASTOISE
 	jr z, .priority_2
 	jr .regular_priority
-
-;.mon_check2
-	; check if player is using snorlax
-;	ld a, [wBattleMonSpecies]
-;	cp SNORLAX
-;	jr z, .priority_2
-
-	; check if foe is using Snorlax
-;	ld a, [wEnemyMonSpecies]
-;	cp SNORLAX
-;	jr z, .priority_2
-
-	; Neither is Snorlax
-;	jr .regular_priority
 
 .mon_check3
 	; Zen Headbutt gets priority when Drowzee or Hypno uses it

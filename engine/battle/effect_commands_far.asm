@@ -44,16 +44,6 @@ PriorityAbilityPopup:
 	ret
 
 .not_iron_head
-	cp CURSE
-	jr nz, .not_curse
-	ld a, b
-	cp SNORLAX
-	ret nz
-	call PriorityBattleText_Call
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_CURSE, PreemptText
-	ret
-
-.not_curse
 	cp ZEN_HEADBUTT
 	ret nz
 	ld a, b

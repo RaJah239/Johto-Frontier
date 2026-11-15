@@ -3044,19 +3044,6 @@ AI_Smart_Curse:
 	call IsDefenseMaxed
 	jr c, .discourage
 
-; =======================================
-; === Ability: Snorlax Priority Curse ===
-; =======================================
-;	ld a, [wEnemyMonSpecies]
-;	cp SNORLAX
-;	jr z, .not_snorlax_or_slower
-;
-	; if slower
-;	call AICompareSpeed
-;	jr c, .not_snorlax_or_slower
-;	jr AI_Smart_BulkUp
-;
-;.not_snorlax_or_slower
 .continue
 ; if player is asleep and is physical we should boost
 	ld a, [wBattleMonStatus]
