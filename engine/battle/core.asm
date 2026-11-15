@@ -3410,7 +3410,7 @@ SpikesDamage:
 	push de
 
 ; Toxic Spikes can't poison a Safeguarded target
-	farcall SafeCheckSafeguard
+	farcall CheckSafeguardIgnoreAbilities
 	jmp nz, .pop
 
 ; ====================================

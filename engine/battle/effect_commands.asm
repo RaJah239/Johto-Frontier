@@ -1816,9 +1816,7 @@ BattleCommand_ApplyDamage:
 	jmp StdBattleTextbox
 
 .update_damage_taken
-	ld a, BATTLE_VARS_SUBSTATUS4_OPP
-	call GetBattleVar
-	bit SUBSTATUS_SUBSTITUTE, a
+	call CheckSubstituteOpp
 	ret nz
 
 	ld de, wPlayerDamageTaken + 1
@@ -2230,6 +2228,7 @@ PlayerAttackDamage:
 
 	ld a, [wEnemyScreens]
 	bit SCREENS_REFLECT, a
+	call nz, InfiltratorIgnoresBarrier
 	jr z, .physicalcrit
 	sla c
 	rl b
@@ -2293,6 +2292,7 @@ PlayerAttackDamage:
 
 	ld a, [wEnemyScreens]
 	bit SCREENS_LIGHT_SCREEN, a
+	call nz, InfiltratorIgnoresBarrier
 	jr z, .specialcrit
 	sla c
 	rl b
@@ -2769,6 +2769,7 @@ EnemyAttackDamage:
 
 	ld a, [wPlayerScreens]
 	bit SCREENS_REFLECT, a
+	call nz, InfiltratorIgnoresBarrier
 	jr z, .physicalcrit
 	sla c
 	rl b
@@ -2832,6 +2833,7 @@ EnemyAttackDamage:
 
 	ld a, [wPlayerScreens]
 	bit SCREENS_LIGHT_SCREEN, a
+	call nz, InfiltratorIgnoresBarrier
 	jr z, .specialcrit
 	sla c
 	rl b
@@ -3441,6 +3443,7 @@ DoEnemyDamage:
 	jr nz, .ignore_substitute
 	ld a, [wEnemySubStatus4]
 	bit SUBSTATUS_SUBSTITUTE, a
+	call nz, InfiltratorIgnoresBarrier
 	jmp nz, DoSubstituteDamage
 
 .ignore_substitute
@@ -3503,6 +3506,7 @@ DoPlayerDamage:
 	jr nz, .ignore_substitute
 	ld a, [wPlayerSubStatus4]
 	bit SUBSTATUS_SUBSTITUTE, a
+	call nz, InfiltratorIgnoresBarrier
 	jr nz, DoSubstituteDamage
 
 .ignore_substitute
@@ -4585,7 +4589,8 @@ CheckMist:
 .got_turn
 	bit SCREENS_MIST, [hl]
 	pop hl
-	ret
+	ret z
+	jmp InfiltratorIgnoresBarrier
 
 BattleCommand_StatDownMessage:
 	ld a, [wFailedMessage]
@@ -5799,9 +5804,7 @@ BattleCommand_TrapTarget:
 	ld a, [hl]
 	and a
 	ret nz
-	ld a, BATTLE_VARS_SUBSTATUS4_OPP
-	call GetBattleVar
-	bit SUBSTATUS_SUBSTITUTE, a
+	call CheckSubstituteOpp
 	ret nz
 
 	; here we check for Grip Claw 
@@ -6427,9 +6430,23 @@ PrintParalyze:
 	jmp StdBattleTextbox
 
 CheckSubstituteOpp:
+; nz if the target's Substitute is up (and the user doesn't have Infiltrator)
 	ld a, BATTLE_VARS_SUBSTATUS4_OPP
 	call GetBattleVar
 	bit SUBSTATUS_SUBSTITUTE, a
+	ret z
+	; fallthrough
+
+InfiltratorIgnoresBarrier:
+; Called with nz when the target's barrier is up: z instead if the user's
+; Infiltrator gets past it.
+	newfarcall InfiltratorBypass
+	jr c, .bypass
+	or 1 ; nz
+	ret
+
+.bypass
+	xor a ; z
 	ret
 
 INCLUDE "engine/battle/move_effects/metronome.asm"
@@ -6524,6 +6541,13 @@ BattleCommand_FarCommand:
 	farjp Find_Command
 
 SafeCheckSafeguard:
+; nz if the target's Safeguard is up (and the user doesn't have Infiltrator)
+	call CheckSafeguardIgnoreAbilities
+	ret z
+	jmp InfiltratorIgnoresBarrier
+
+CheckSafeguardIgnoreAbilities:
+; nz if the target's (hBattleTurn's foe's) Safeguard is up
 	push hl
 	ld hl, wEnemyScreens
 	ldh a, [hBattleTurn]
@@ -6537,13 +6561,7 @@ SafeCheckSafeguard:
 	ret
 
 BattleCommand_CheckSafeguard:
-	ld hl, wEnemyScreens
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .got_turn
-	ld hl, wPlayerScreens
-.got_turn
-	bit SCREENS_SAFEGUARD, [hl]
+	call SafeCheckSafeguard
 	ret z
 	ld a, 1
 	ld [wAttackMissed], a
