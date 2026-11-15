@@ -1448,6 +1448,9 @@ BattleCommand_EffectChance:
 	ld [wEffectFailed], a
 	call CheckSubstituteOpp
 	jr nz, .failed
+	; Sheer Force removes secondary effects
+	newfarcall SheerForceApplies
+	jr c, .failed
 
 	push hl
 	ld hl, wPlayerMoveStruct + MOVE_CHANCE

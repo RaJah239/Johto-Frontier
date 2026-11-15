@@ -3,6 +3,7 @@ CheckBoostingAbilities:
 	call HandleRivalry
 	call HandleSandForce
 	call HandleTechnician
+	call HandleSheerForceBoost
 	call HandleHugePower
 	call HandleMultiscale
 	call HandleThickFat
@@ -155,6 +156,12 @@ HandleTechnician:
 
 TechnicianText: db "Technician@"
 INCLUDE "data/abilities/technician_mons.asm"
+
+HandleSheerForceBoost:
+; moves with a secondary effect do 1.3x (engine/abilities/sheer_force.asm)
+	newfarcall SheerForceApplies
+	ret nc
+	jmp ThirtyPercentBoost
 
 HandleMultiscale:
 	call GetOpposingMon
