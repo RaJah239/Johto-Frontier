@@ -234,6 +234,7 @@ EntryAbilityHandlers:
 	dw HandleInfernalHowl
 	dw HandleBattleStance
 	dw HandleBattleDrive
+	dw HandleDownload
 	dw HandleTrueSight
 	dw HandleFogOfWar
 	dw HandleChaoticBoost
@@ -446,6 +447,45 @@ HandleBattleDrive:
 
 BattleDrivePopupText: db "Battle Drive@"
 INCLUDE "data/abilities/battle_drive_mons.asm"
+
+HandleDownload:
+; Raise Attack if the foe's Defense is lower than its Sp. Def,
+; otherwise Sp. Atk.
+	ld hl, DownloadPokemon
+	call CurMonInList
+	ret nc
+	ld de, DownloadPopupText
+	call ShowEntryAbilityPopup
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wEnemyMonDefense
+	ld de, wEnemyMonSpclDef
+	jr z, .got_foe
+	ld hl, wBattleMonDefense
+	ld de, wBattleMonSpclDef
+.got_foe
+	; carry if Defense < Sp. Def
+	inc hl
+	inc de
+	ld a, [de]
+	ld c, a
+	ld a, [hld]
+	sub c
+	dec de
+	ld a, [de]
+	ld c, a
+	ld a, [hl]
+	sbc c
+	jr c, .attack
+	farcall BattleCommand_SpecialAttackUp
+	farjp BattleCommand_StatUpMessage
+
+.attack
+	farcall BattleCommand_AttackUp
+	farjp BattleCommand_StatUpMessage
+
+DownloadPopupText: db "Download@"
+INCLUDE "data/abilities/download_mons.asm"
 
 HandleChaoticBoost:
 	ld hl, ChaoticBoostPokemon
