@@ -1046,12 +1046,10 @@ BattleCommand_Stab:
 	cp -1
 	jr z, .end
 
-	; foresight
+	; foresight / Scrappy
 	cp -2
 	jr nz, .SkipForesightCheck
-	ld a, BATTLE_VARS_SUBSTATUS1_OPP
-	call GetBattleVar
-	bit SUBSTATUS_IDENTIFIED, a
+	call CheckIgnoreGhostImmunity
 	jr nz, .end
 	jr .TypesLoop
 
@@ -1196,6 +1194,18 @@ CheckStealthRockTypeMatchup:
 	ld a, ROCK
 	jr CheckTypeMatchup
 
+CheckIgnoreGhostImmunity:
+; Return nz if the target's Ghost immunities (the matchups after -2 in
+; TypeMatchups) don't apply: Foresight identified it, or the attacker has
+; Scrappy. Preserves bc, de, hl.
+	ld a, BATTLE_VARS_SUBSTATUS1_OPP
+	call GetBattleVar
+	bit SUBSTATUS_IDENTIFIED, a
+	ret nz
+	newfarcall AttackerHasScrappy
+	sbc a ; nz if Scrappy
+	ret
+
 BattleCheckTypeMatchup:
 	ld hl, wEnemyMonType1
 	ldh a, [hBattleTurn]
@@ -1240,9 +1250,7 @@ CheckTypeMatchup:
 	jr z, .End
 	cp -2
 	jr nz, .Next
-	ld a, BATTLE_VARS_SUBSTATUS1_OPP
-	call GetBattleVar
-	bit SUBSTATUS_IDENTIFIED, a
+	call CheckIgnoreGhostImmunity
 	jr nz, .End
 	jr .TypesLoop
 

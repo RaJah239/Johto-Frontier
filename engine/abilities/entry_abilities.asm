@@ -123,6 +123,7 @@ EntryAbilityHandlers:
 	dw HandleNaturalCure
 	dw HandleSeedfall
 	dw HandleDefenseMode
+	dw HandleScrappy
 	dw HandleIntimidate
 	dw HandleStiflingAura
 	dw HandleCleanSweep
@@ -627,12 +628,30 @@ HandleIntimidate:
 	ret nc
 	ld de, IntimidatePopupText
 	call ShowEntryAbilityPopup
+	; Scrappy isn't affected: its popup shows over the target instead
+	newfarcall TargetHasScrappy
+	jr c, .scrappy
 	ld de, LEER
 	call PlayEntryAbilityAnim
 	farcall BattleCommand_AttackDown
 	farjp BattleCommand_StatDownMessage
 
+.scrappy
+	ldh a, [hBattleTurn]
+	xor 1
+	newfarcall ShowScrappyPopupOnSide
+	ret
+
 IntimidatePopupText: db "Intimidate@"
+
+HandleScrappy:
+; just its popup when it comes in (engine/abilities/scrappy.asm)
+	newfarcall AttackerHasScrappy
+	ret nc
+	ldh a, [hBattleTurn]
+	newfarcall ShowScrappyPopupOnSide
+	ret
+
 INCLUDE "data/abilities/intimidate_mons.asm"
 
 HandleStiflingAura:

@@ -213,6 +213,11 @@ AI_Smart_StaticDamage:
 	cp SEISMIC_TOSS
 	ret nz
 
+	; unless it has Scrappy
+	ld a, [wEnemyMonSpecies]
+	newfarcall IsScrappySpecies
+	ret c
+
 	ld a, [wBattleMonType1]
 	cp GHOST
 	jr z, .discourage
@@ -1452,7 +1457,10 @@ endr
 
 AI_Smart_Explosion:
 ; explosion
-; never use against ghost types
+; never use against ghost types (unless it has Scrappy)
+	ld a, [wEnemyMonSpecies]
+	newfarcall IsScrappySpecies
+	jr c, .not_ghost
 	ld a, [wBattleMonType1]
 	cp GHOST
 	jr z, .discourage
@@ -1460,6 +1468,7 @@ AI_Smart_Explosion:
 	cp GHOST
 	jr z, .discourage
 
+.not_ghost
 ; unless this is the enemy's last Pokemon...
 	push hl
 	farcall FindAliveEnemyMons
