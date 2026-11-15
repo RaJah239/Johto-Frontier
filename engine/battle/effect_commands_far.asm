@@ -246,6 +246,9 @@ INCLUDE "data/abilities/super_luck_mons.asm"
 INCLUDE "data/battle/critical_hit_chances.asm"
 
 _BattleCommand_CheckHit:
+; Pressure: the move is used on the target (engine/abilities/pressure.asm)
+	farcall PressureDeductPP
+
 ; ================================================================================
 ; === Defensive Abilities: Flame War, Grounded, Immunity, Levitate, Waterproof ===
 ; ================================================================================

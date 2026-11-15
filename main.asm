@@ -649,6 +649,7 @@ INCLUDE "engine/abilities/mold_breaker.asm"
 INCLUDE "engine/abilities/scrappy.asm"
 INCLUDE "engine/abilities/sheer_force.asm"
 INCLUDE "engine/abilities/suction_cups.asm"
+INCLUDE "engine/abilities/pressure.asm"
 
 SECTION "Regenerator", ROMX
 INCLUDE "engine/abilities/regenerator.asm"
