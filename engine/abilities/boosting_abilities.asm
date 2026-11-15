@@ -164,6 +164,8 @@ HandleMultiscale:
 
 	farcall CheckOpponentFullHP
 	ret nz
+	newfarcall MoldBreakerBypass
+	ret c
 	ShowOncePerSendOutPopup SEND_OUT_POPUP_MULTISCALE, MultiscaleText
 	jmp FiftyPercentNerf
 
@@ -180,9 +182,12 @@ HandleThickFat:
 	call GetBattleVar
 	and TYPE_MASK
 	cp FIRE
-	jmp z, FiftyPercentNerf
+	jr z, .nerf
 	cp ICE
 	ret nz
+.nerf
+	newfarcall MoldBreakerBypass
+	ret c
 	ShowOncePerSendOutPopup SEND_OUT_POPUP_THICK_FAT, ThickFatText
 	jmp FiftyPercentNerf
 
@@ -278,6 +283,8 @@ HandlePillowFort:
 	call GetBattleVar
 	cp SPECIAL
 	ret nc
+	newfarcall MoldBreakerBypass
+	ret c
 	ShowOncePerSendOutPopup SEND_OUT_POPUP_PILLOW_FORT, PillowFortText
 	jmp TwentyFivePercentNerf
 
@@ -293,6 +300,8 @@ HandleChrysalisHide:
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar
 	cp SPECIAL
+	ret c
+	newfarcall MoldBreakerBypass
 	ret c
 	jmp FiftyPercentNerf
 

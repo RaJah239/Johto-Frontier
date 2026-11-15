@@ -17,6 +17,8 @@ HandleWaterproof:
 	ld hl, WaterproofPokemon
 	call IsInByteArray
 	ret nc
+	newfarcall MoldBreakerBypass
+	ret c
 
 	showdefensiveability AbilityPopup_WaterproofText
 	ld hl, WaterAbsorbText
@@ -41,6 +43,8 @@ HandleFlameWard:
 	ld hl, FlameWardPokemon
 	call IsInByteArray
 	ret nc
+	newfarcall MoldBreakerBypass
+	ret c
 
 	showdefensiveability AbilityPopup_FlameWardText
 	ld hl, FlameWardText
@@ -65,11 +69,13 @@ HandleGrounded:
 	ld hl, GroundedPokemon
 	call IsInByteArray
 	ret nc
+	newfarcall MoldBreakerBypass
+	ret c
 
 	showdefensiveability AbilityPopup_GroundedText
 	ld hl, GroundedText
 	call StdBattleTextbox
-	jr AttackedMissed
+	jmp AttackedMissed
 
 AbilityPopup_GroundedText:
 	db "Grounded@"
@@ -89,6 +95,8 @@ HandleImmunity:
 	ld hl, ImmunityPokemon
 	call IsInByteArray
 	ret nc
+	newfarcall MoldBreakerBypass
+	ret c
 
 	showdefensiveability AbilityPopup_ImmunityText
 	ld hl, ImmunityText
@@ -113,6 +121,8 @@ HandleLevitate:
 	ld hl, LevitatePokemon
 	call IsInByteArray
 	ret nc
+	newfarcall MoldBreakerBypass
+	ret c
 
 	showdefensiveability AbilityPopup_LevitateText
 	ld hl, LevitateText

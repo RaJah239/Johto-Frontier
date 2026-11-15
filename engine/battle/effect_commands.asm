@@ -1724,7 +1724,10 @@ BattleCommand_ApplyDamage:
 	call GetOpposingMon
 	ld hl, SturdyPokemon
 	call IsInByteArray
-	jr c, .focus_sash_effect
+	jr nc, .no_sturdy
+	newfarcall MoldBreakerIgnoresSturdy
+	jr nc, .focus_sash_effect
+.no_sturdy
 
 	call GetOpponentItem
 	ld a, [hl]
@@ -2445,9 +2448,14 @@ IsAttackerUnaware:
 	jr IsUnaware
 
 IsTargetUnaware:
-; Carry if the mon being attacked has Unaware.
+; Carry if the mon being attacked has Unaware, unless the attacker has
+; Mold Breaker. Preserves bc, de, hl.
 	call GetOpposingMon
-	jr IsUnaware
+	call IsUnaware
+	ret nc
+	newfarcall AttackerHasMoldBreaker
+	ccf
+	ret
 
 UnawareDefenseStat:
 ; hl = the target's stage-applied defensive stat (wEnemyMonDefense etc.).
@@ -2477,8 +2485,7 @@ UnawareAttackStat:
 ; back; otherwise e = 0. Preserves bc, d.
 	ld e, a
 	push bc
-	call GetOpposingMon
-	call IsUnaware
+	call IsTargetUnaware
 	jr nc, .no
 	push hl
 	ld a, e
@@ -2590,6 +2597,8 @@ UnawarePopup:
 	call GetOpposingMon
 	call IsUnaware
 	ret nc
+	newfarcall MoldBreakerBypass
+	ret c ; ignored: Mold Breaker's popup shows instead
 	ldh a, [hBattleTurn]
 	xor 1
 	ld c, a
