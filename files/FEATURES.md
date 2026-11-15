@@ -84,10 +84,26 @@
 - Press A to use Flash in dark caves
 - Press Start to skip Credits
 
-## Anti Save-Scumming RNG (save-tied PRNG)
-How it works: Random numbers no longer come from the console's hardware divider (which is different every boot — that's why resetting used to reroll everything). Instead, everything runs off a deterministic 32-bit xorshift PRNG whose 4-byte state is written into your save file — main slot and backup slot both — every time you save, and restored when you load. Loading a save resumes the exact random sequence you were on when you saved, so the same actions after loading always produce the same results. Real-world randomness only enters once: a single seed at New Game (or on the first load of a save made before this feature), taken from the divider, scanline and frame counter.
+## Randomness (RNG)
+Everything random in a battle comes from one random number generator that is saved with your game: damage rolls, critical hits, accuracy, extra effects, the AI's tie-breaks, its 10% "don't pivot" chance, which Pokémon Roar sends in, wild encounters, shinies and so on. Link battles are the exception: they use a separate generator shared by both Game Boys so the two stay in sync. Weather particles (falling rain, snow and so on) also have their own, but they're only for looks.
 
-What it affects: All single-player rolls — wild encounters (species, level, slot), shiny rolls, DV generation, wild held items, Pokérus, critical hits, damage variance, accuracy, escape odds, trainer AI decisions, Odd Egg, Voltorb Flip, Game Corner, phone calls, NPC movement, and so on. Link battles are unaffected (they use their own synced PRNG). Odds themselves are unchanged; only rerolling is.
+**What it means for you: resetting doesn't reroll anything.**
+- Think of the generator as a long, fixed list of random numbers. Each time the game needs one, it takes the next number off the list.
+- When you save, the game also saves *where you are in the list*.
+- When you load that save, you're back at the same spot. Do exactly the same things and you get exactly the same results: the same damage, the same crits, the same AI choices, the same shiny (or not).
+- So "save, try, reset, try again" gives the same outcome every time.
+
+**How to get a different result**
+Use up different numbers before the moment that matters. Anything that asks for a random number moves you along the list, so doing things in a different order changes what comes next:
+- choose different moves, or switch at a different time
+- walk around first (wandering NPCs and encounter checks use numbers)
+- or keep playing and save somewhere else
+
+**What doesn't change**
+The odds are the same as before. A 10% chance is still 10%; only rerolling by resetting is gone.
+
+**Where the first number comes from**
+A new game picks its starting point from the console's timing, so every playthrough gets its own list.
 
 Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs rolled when the encounter starts, so it's part of this sequence.
 
