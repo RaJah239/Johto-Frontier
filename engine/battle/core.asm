@@ -4146,13 +4146,7 @@ PrintPlayerHUD:
 .got_gender_char
 	hlcoord 17, 8 ;  where the player's mon gender is printed
 	ld [hl], a
-	hlcoord 11, 8  ;  where the player's mon status is printed
-
-	ld bc, wPlayerSubStatus5 ; To check for Toxic
-	ld de, wBattleMonStatus
-	predef PlaceNonFaintStatus ; loads player's mon status
-	ld a, c
-	and a 
+	farcall LoadPlayerStatusIcon
 
 	hlcoord 14, 8 ; where the player mon's lvl is printed
 	ld a, [wBattleMonLevel]
@@ -4221,13 +4215,7 @@ DrawEnemyHUD:
 .got_gender
 	hlcoord 8, 1 ;  where the enemy's mons gender is printed
 	ld [hl], a
-	hlcoord 2, 1  ;  where the enemy's mons status is printed
-
-	ld bc, wEnemySubStatus5 ; To check for Toxic
-	ld de, wEnemyMonStatus
-	predef PlaceNonFaintStatus ; loads enemy's mon status
-	ld a, c
-	and a 
+	farcall LoadEnemyStatusIcon
 
 	hlcoord 5, 1 ; where the enemy mon's lvl is printed
 	ld a, [wEnemyMonLevel]

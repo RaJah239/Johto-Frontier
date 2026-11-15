@@ -1024,7 +1024,7 @@ DEF NUM_BG_EFFECTS EQU 5 ; see wActiveBGEffects
 	const PAL_BATTLE_BG_PLAYER_HP ; 3
 	const PAL_BATTLE_BG_EXP       ; 4
 	const PAL_BATTLE_BG_5         ; 5
-	const PAL_BATTLE_BG_6         ; 6
+	const PAL_BATTLE_BG_STATUS    ; 6
 	const PAL_BATTLE_BG_TEXT      ; 7
 ; sentinel palette indices that denote "user" or "target" for battle pics
 ; (anim_setbgpal applies them to the relevant obj palettes too)

@@ -99,8 +99,8 @@ SetDefaultBattlePalette:
 	jr z, SetBattlePal_Exp
 	dec a ; PAL_BATTLE_BG_5 (unused)
 	jr z, SetBattlePal_Player
-	dec a ; PAL_BATTLE_BG_6 (unused)
-	jr z, SetBattlePal_Player
+	dec a ; PAL_BATTLE_BG_STATUS
+	jr z, SetBattlePal_Status
 	dec a ; PAL_BATTLE_BG_TEXT
 	jr z, SetBattlePal_Text
 	dec a ; PAL_BATTLE_OB_ENEMY
@@ -149,6 +149,10 @@ SetBattlePal_Icons:
     ld hl, BattleIconsPalette
 	jmp LoadPalette_White_Col1_Col2_Black
 
+SetBattlePal_Status:
+	farcall LoadBattleStatusIconPals
+	ret
+
 SetBattlePal_Text:
 	ld hl, PartyMenuBGPalette
 	ld bc, 1 palettes
@@ -163,6 +167,7 @@ _CGB_BattleColors:
 	call SetBattlePal_PlayerHP
 	call SetBattlePal_Exp
 	call SetBattlePal_Icons
+	call SetBattlePal_Status
 	ld de, wOBPals1
 	call SetBattlePal_Enemy
 	call SetBattlePal_Player
@@ -218,6 +223,14 @@ _CGB_FinishBattleScreenLayout:
 	ld bc, 6 * SCREEN_WIDTH
 	ld a, PAL_BATTLE_BG_TEXT
 	call ByteFill
+; the status icons (their tiles are in VRAM bank 1)
+	ld a, PAL_BATTLE_BG_STATUS | VRAM_BANK_1
+	hlcoord 11, 8, wAttrmap
+	ld [hli], a
+	ld [hl], a
+	hlcoord 2, 1, wAttrmap
+	ld [hli], a
+	ld [hl], a
 	ld hl, BattleObjectPals
 	ld de, wOBPals1 palette PAL_BATTLE_OB_GRAY
 	ld bc, 6 palettes

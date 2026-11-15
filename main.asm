@@ -695,3 +695,7 @@ INCLUDE "gfx/item_icons.asm"
 
 SECTION "Move Icons", ROMX
 INCLUDE "engine/gfx/move_icons.asm"
+
+
+SECTION "Status Icons", ROMX
+INCLUDE "engine/gfx/status_icons.asm"
