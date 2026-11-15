@@ -83,4 +83,5 @@ AnimObjGFX:
 	anim_obj_gfx  3, AnimObjObjectsSurprisedGFX
 	anim_obj_gfx 18, AnimObjMushroomGFX
 	anim_obj_gfx 14, AnimObjBubbleSourGFX
+	anim_obj_gfx  5, AnimObjMisc2GFX
 	assert_table_length NUM_BATTLE_ANIM_GFX + 1

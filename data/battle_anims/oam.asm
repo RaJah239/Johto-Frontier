@@ -253,6 +253,7 @@ BattleAnimOAMData:
 	battleanimoam $00,  9, .OAMData_Mushroom1 ; BATTLE_ANIM_OAMSET_MUSHROOM_1
 	battleanimoam $06,  9, .OAMData_Mushroom1 ; BATTLE_ANIM_OAMSET_MUSHROOM_2
 	battleanimoam $0c,  9, .OAMData_Mushroom1 ; BATTLE_ANIM_OAMSET_MUSHROOM_3
+	battleanimoam $02,  2, .OAMData_Droplet ; BATTLE_ANIM_OAMSET_DROPLET
 	assert_table_length NUM_BATTLE_ANIM_OAMSETS
 
 .OAMData_Stats:
@@ -1440,6 +1441,11 @@ endr
 	dbsprite   0,  0, 0, 0, $03, $0
 	dbsprite  -1,  1, 0, 0, $04, $0
 	dbsprite   0,  1, 0, 0, $05, $0
+
+.OAMData_Droplet:
+; Polished Crystal's water droplet (gfx/battle_anims/misc2.png)
+	dbsprite  -1,  -1, 4, 4, $00, $0
+	dbsprite   0,   0, 2, 2, $00, $0
 
 .OAMData_Mushroom1:
 	dbsprite  -2,  -2, 4, 4, $00, $0
