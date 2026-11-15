@@ -32,26 +32,9 @@ NoGuardPopup:
 	call GetBattleVar
 	and a
 	ret z ; not a damaging move
-	ldh a, [hBattleTurn]
-	and a
-	ld b, 1 << 0
-	jr z, .got_bit
-	ld b, 1 << 1
-.got_bit
-	ld a, [wNoGuardShown]
-	and b
-	ret nz ; already shown since it came in
-	push bc
-	call GetCurrentMon ; a = species
 	ld hl, NoGuardPokemon
-	call IsInByteArray
-	pop bc
-	ret nc
-	ld a, [wNoGuardShown]
-	or b
-	ld [wNoGuardShown], a
-	ShowActivationOrEntryOrKOAbilityPopup NoGuardText
-	ret
+	ld de, NoGuardText
+	jr SendOutAbilityPopup
 
 NoGuardText: db "No Guard@"
 

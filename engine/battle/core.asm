@@ -524,17 +524,32 @@ CompareMovePriority:
 
 	ld a, [wBattleMonItem]
 	ld c, a
+	ld a, [wBattleMonSpecies]
+	ld d, a
 	ld a, [wCurPlayerMove]
-	call GetMovePriority
-	ld b, a
+	call .Get
 	push bc
 	ld a, [wEnemyMonItem]
 	ld c, a
+	ld a, [wEnemyMonSpecies]
+	ld d, a
 	ld a, [wCurEnemyMove]
-	call GetMovePriority
+	call .Get
+	ld a, b
 	pop bc
 	cp b
 	ret
+
+.Get:
+; b = the priority of move a used by species d holding item c
+	push af
+	push de
+	call GetMovePriority
+	pop de
+	ld b, a
+	pop af
+	ld c, a
+	farjp PranksterPriority
 
 GetMovePriority_Far:
 ; farcall-friendly GetMovePriority: b = move, c = holder's item.
@@ -2584,8 +2599,8 @@ LoadEnemyMonToSwitchTo:
 	; 'b' contains the PartyNr of the mon the AI will switch to
 	push bc
 	farcall EnemyRegenerator ; the mon that's switching out
-	ld hl, wNoGuardShown
-	res 1, [hl] ; the incoming mon shows No Guard on its first attack
+	ld hl, wAbilityShownSinceSentOut
+	res 1, [hl] ; the incoming mon can show its ability popup again
 	pop bc
 	ld a, b
 	ld [wCurPartyMon], a
@@ -3017,8 +3032,8 @@ TryToRunAwayFromBattle:
 
 InitBattleMon:
 	farcall PlayerRegenerator ; the mon that's switching out
-	ld hl, wNoGuardShown
-	res 0, [hl] ; the incoming mon shows No Guard on its first attack
+	ld hl, wAbilityShownSinceSentOut
+	res 0, [hl] ; the incoming mon can show its ability popup again
 	ld a, [wCurPartyMon]
 	ld [wBattleMonPartySlot], a
 	ld a, MON_SPECIES

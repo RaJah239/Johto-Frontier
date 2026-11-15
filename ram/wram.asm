@@ -626,7 +626,7 @@ wAIDrainSimPlayerHP:: dw
 wAIDrainFlags:: db ; AI_PreferDrainMoves: AI_DRAIN_*_F
 wBattleMonPartySlot:: db ; the party slot wBattleMon was loaded from (Regenerator)
 wRegeneratorShown:: db ; bit 0/1: the player's/enemy's Regenerator already healed on screen
-wNoGuardShown:: db ; bit 0/1: the player's/enemy's mon already showed No Guard since it came in
+wAbilityShownSinceSentOut:: db ; bit 0/1: the player's/enemy's mon already showed its once-per-send-out ability popup (engine/abilities/send_out_popup.asm)
 	ds 1 ; (unused: was switch-in picker scratch)
 
 wTrickRoomCount:: db

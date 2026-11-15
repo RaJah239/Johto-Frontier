@@ -38,7 +38,7 @@ DoTurn:
 ; ==========================================
 	newfarcall PriorityAbilityPopup ; engine/battle/effect_commands_far.asm
 	call TypeSyncPopup
-	farcall NoGuardPopup ; engine/abilities/no_guard.asm
+	farcall MoveUseAbilityPopups ; engine/abilities/send_out_popup.asm
 	; fallthrough
 
 DoMove:
