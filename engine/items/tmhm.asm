@@ -6,6 +6,9 @@ TMHMPocket:
 	ld a, $1
 	ldh [hInMenu], a
 	call TMHM_PocketLoop
+	push af
+	farcall TMHMMoveIcons_Hide
+	pop af
 	ld a, $0
 	ldh [hInMenu], a
 	ret nc
@@ -262,54 +265,6 @@ TMHM_ShowTMMoveDescription:
 	ld de, MoveEff
 	call PlaceString
 
-; Print move category
-
-; Verify if it has power
-	ld a, [wCurSpecies]
-	dec a
-	ld hl, Moves + MOVE_POWER
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-	ld a, BANK(Moves)
-	call GetFarByte
-	hlcoord 16, 12
-	cp 2
-	jr c, .status_move
-	
-; Verifify if physical or special
-	ld a, [wCurSpecies]
-	dec a
-	ld bc, MOVE_LENGTH
-	ld hl, Moves
-	call AddNTimes
-	ld de, wStringBuffer1
-	ld a, BANK(Moves)
-	call FarCopyBytes
-	ld a, [wStringBuffer1 + MOVE_TYPE]
-	cp SPECIAL
-	jr nc, .special_category
-
-; IF PHYSICAL
-	hlcoord 10, 13
-	ld de, PhyCat
-	call PlaceString
-	jr .printed_effect_chance
-
-; IF SPECIAL
-.special_category
-	hlcoord 10, 13
-	ld de, SpeCat
-	call PlaceString
-	jr .printed_effect_chance
-
-; IF STATUS
-.status_move
-	hlcoord 10, 13
-	ld de, OtherCat
-	call PlaceString
-
-.printed_effect_chance
-
 ; Print move effect chance
 	ld a, [wCurSpecies]
 	ld bc, MOVE_LENGTH
@@ -372,11 +327,8 @@ TMHM_ShowTMMoveDescription:
 	hlcoord 7, 8
 
 .done_accuracy:
-; Print move type
-	ld a, [wCurSpecies]
-	ld b, a
-	hlcoord 10, 12
-	predef PrintMoveType
+; Show the move's category and type icons
+	farcall TMHMMoveIcons_Show
 
 ; Print move power
 	ld a, [wCurSpecies]
@@ -407,6 +359,7 @@ TMHM_ShowTMMoveDescription:
 	jmp TMHM_JoypadLoop
 
 .cancel
+	farcall TMHMMoveIcons_Hide
 	farcall ClearTMHMIcon
 	jmp TMHM_JoypadLoop
 
@@ -415,9 +368,6 @@ PowString: db "Pow/@"
 MoveAcc:   db "Hit/@"
 MoveEff:   db "Eff/@"
 EmptyStr:  db "---@"
-PhyCat:    db "/Physical@"
-SpeCat:    db "/Special @"
-OtherCat:  db "/Other   @"
 
 TMHM_ChooseTMorHM:
 	call TMHM_PlaySFX_ReadText2

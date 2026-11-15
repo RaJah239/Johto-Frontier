@@ -1,10 +1,9 @@
-; Type and category icons for moves (from Polished Crystal), shown in the
-; battle move menu and the party Pokémon move screen.
+; Type and category icons for moves (from Polished Crystal).
 
 DEF MOVE_ICON_TILES EQU 6 ; 2 category tiles, then 4 type tiles
 
-; The icons use BG tiles $79-$7e (VRAM bank 0), free on the screens that
-; show them.
+; As BG tiles, the icons use tiles $79-$7e (VRAM bank 0), free on every
+; screen that shows them.
 DEF MOVE_ICON_TILE EQU $79
 
 ; In battle they use the unused BG palette PAL_BATTLE_BG_6. The icon cells
@@ -13,12 +12,31 @@ DEF MOVE_ICON_TILE EQU $79
 DEF BATTLE_MOVE_ICON_X EQU 1
 DEF BATTLE_MOVE_ICON_Y EQU 9
 
+; The Battle Plaza's TM and tutor menus draw over the map, so they borrow
+; a map palette that no cell left on screen uses (never the water one,
+; which the tileset animates), and give it back when the menu closes.
+DEF PLAZA_MOVE_ICON_X EQU 10
+DEF PLAZA_MOVE_ICON_Y EQU 12
+
+; The pack's BG palettes are all in use, so in the TM pocket the icons
+; are sprites: OBJ tiles $7a-$7f in VRAM bank 1, OBJ palette 7 and the
+; last six OAM entries. Leaving the pack reloads all of those.
+DEF MOVE_ICON_OBJ_TILE EQU $7a
+DEF MOVE_ICON_OBJ_PAL  EQU 7
+DEF MOVE_ICON_FIRST_OAM EQU NUM_SPRITE_OAM_STRUCTS - MOVE_ICON_TILES
+DEF TMHM_MOVE_ICON_X EQU 10
+DEF TMHM_MOVE_ICON_Y EQU 12
+
 ; scratch while drawing
 DEF hMoveIconPalette  EQUS "hMathBuffer"
 DEF hMoveIconRow      EQUS "hMathBuffer + 1"
 DEF hMoveIconCol      EQUS "hMathBuffer + 2"
 DEF hMoveIconType     EQUS "hMathBuffer + 3"
 DEF hMoveIconCategory EQUS "hMathBuffer + 4"
+
+; hMoveIconPalette bit: only write wBGPals2, so the palette in wBGPals1
+; stays the one to give back afterwards
+DEF MOVE_ICON_BORROWED_PAL_F EQU 7
 
 GetMoveIconIndices:
 ; b = move. Returns c = type icon index, e = category icon index.
@@ -73,21 +91,18 @@ GetMoveIconIndices:
 	ret
 
 LoadMoveIconPalette:
-; Fill palette hl (in wBGPals1) for type icon c and category icon e:
-; color 0 from palette 0, colors 1-2 the category, color 3 the type.
-; Also copies it to the same palette in wBGPals2. The caller has it sent
-; to the hardware.
+; Fill the palette at hl (WRAM bank 5) for type icon c and category icon
+; e: color 0 the text palette's background, colors 1-2 the category,
+; color 3 the type.
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wBGPals1)
 	ldh [rSVBK], a
-	push hl
-	ld a, [wBGPals1]
+	ld a, [wBGPals1 palette 7]
 	ld [hli], a
-	ld a, [wBGPals1 + 1]
+	ld a, [wBGPals1 palette 7 + 1]
 	ld [hli], a
 	push hl
-
 	ld hl, MoveCategoryIconPals
 	ld a, e
 	add a
@@ -103,7 +118,6 @@ rept 4
 	ld [de], a
 	inc de
 endr
-
 	ld hl, MoveTypeIconPals
 	ld a, c
 	add a
@@ -117,47 +131,92 @@ endr
 	inc de
 	ld a, [hl]
 	ld [de], a
-
-	pop hl ; palette in wBGPals1
-	ld de, wBGPals2 - wBGPals1
-	add hl, de
-	ld d, h
-	ld e, l
-	ld bc, -(wBGPals2 - wBGPals1)
-	add hl, bc
-	ld bc, 1 palettes
-	call CopyBytes
-
 	pop af
 	ldh [rSVBK], a
 	ret
 
-GetCategoryIconGFX:
-; de = category icon e's graphics
-	ld hl, MoveCategoryIconGFX
-	ld a, e
-	swap a ; * 2 tiles = * 32
-	add a
-	ld e, a
-	ld d, 0
-	add hl, de
-	ld d, h
-	ld e, l
+MoveIcons_SendPalette:
+; Send the palette at hl (WRAM bank 5) to the hardware in H-Blanks:
+; c = LOW(rBGPI) or LOW(rOBPI), b = its palette * 1 palettes.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals1)
+	ldh [rSVBK], a
+	set rBGPI_AUTO_INCREMENT, b
+	ld e, 1 palettes / 2
+.loop
+	call MoveIcons_WaitHBlank
+	ld a, b
+	ldh [c], a
+	inc c ; data port
+	ld a, [hli]
+	ldh [c], a
+	ld a, [hli]
+	ldh [c], a
+	dec c ; index port
+	ei
+	inc b
+	inc b
+	dec e
+	jr nz, .loop
+	pop af
+	ldh [rSVBK], a
 	ret
 
-GetTypeIconGFX:
-; de = type icon c's graphics
-	ld l, c
-	ld h, 0
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	add hl, hl ; * 4 tiles * LEN_1BPP_TILE
-	ld de, MoveTypeIconGFX
-	add hl, de
-	ld d, h
-	ld e, l
+MoveIcons_SendTiles:
+; Write the category and type icon tiles to hl in VRAM bank b during
+; H-Blanks.
+	push hl
+	ldh a, [hMoveIconCategory]
+	ld e, a
+	call GetCategoryIconGFX
+	pop hl
+	ld c, 2 * LEN_2BPP_TILE
+.category
+	call MoveIcons_WaitHBlank
+	ld a, b
+	ldh [rVBK], a
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hli], a
+	inc de
+	xor a
+	ldh [rVBK], a
+	ei
+	dec c
+	dec c
+	jr nz, .category
+
+	push hl
+	ldh a, [hMoveIconType]
+	ld c, a
+	call GetTypeIconGFX
+	pop hl
+	ld c, 4 * LEN_1BPP_TILE
+.type
+	call MoveIcons_WaitHBlank
+	ld a, b
+	ldh [rVBK], a
+	ld a, [de]
+	ld [hli], a
+	ld [hli], a
+	inc de
+	xor a
+	ldh [rVBK], a
+	ei
+	dec c
+	jr nz, .type
+	ret
+
+MoveIcons_GetIndices:
+; b = move: hMoveIconType and hMoveIconCategory
+	call GetMoveIconIndices
+	ld a, c
+	ldh [hMoveIconType], a
+	ld a, e
+	ldh [hMoveIconCategory], a
 	ret
 
 BattleMoveIcons_Draw::
@@ -178,11 +237,7 @@ MoveIcons_Show::
 	ldh [hMoveIconRow], a
 	ld a, e
 	ldh [hMoveIconCol], a
-	call GetMoveIconIndices
-	ld a, c
-	ldh [hMoveIconType], a
-	ld a, e
-	ldh [hMoveIconCategory], a
+	call MoveIcons_GetIndices
 
 ; the cells in wTilemap and wAttrmap
 	call MoveIcons_TilemapAddress
@@ -198,19 +253,22 @@ MoveIcons_Show::
 	ld bc, wAttrmap - wTilemap
 	add hl, bc
 	ldh a, [hMoveIconPalette]
+	and PALETTE_MASK
 	ld bc, MOVE_ICON_TILES
 	call ByteFill
 
 	call MoveIcons_WaitBelowRow
 
-; the palette, in wBGPals1/wBGPals2 and straight to the hardware
+; the palette: in wBGPals2 (and wBGPals1 unless it is borrowed), and
+; straight to the hardware
 	ldh a, [hMoveIconPalette]
+	and PALETTE_MASK
 	ld l, a
 	ld h, 0
 	add hl, hl
 	add hl, hl
 	add hl, hl ; * 1 palettes
-	ld bc, wBGPals1
+	ld bc, wBGPals2
 	add hl, bc
 	push hl
 	ldh a, [hMoveIconType]
@@ -219,68 +277,43 @@ MoveIcons_Show::
 	ld e, a
 	call LoadMoveIconPalette
 	pop hl
+	push hl
 	ldh a, [hMoveIconPalette]
-	add a
-	add a
-	add a ; * 1 palettes
-	or 1 << rBGPI_AUTO_INCREMENT
-	ld b, a
+	bit MOVE_ICON_BORROWED_PAL_F, a
+	jr nz, .send_palette
+	ld d, h
+	ld e, l
+	ld bc, wBGPals1 - wBGPals2
+	add hl, bc
+	ld b, d
+	ld c, e
+	ld d, h
+	ld e, l
+	ld h, b
+	ld l, c
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wBGPals1)
 	ldh [rSVBK], a
-	ld c, 1 palettes
-.palette
-	call MoveIcons_WaitHBlank
-	ld a, b
-	ldh [rBGPI], a
-	ld a, [hli]
-	ldh [rBGPD], a
-	ld a, [hli]
-	ldh [rBGPD], a
-	ei
-	inc b
-	inc b
-	dec c
-	dec c
-	jr nz, .palette
+	ld bc, 1 palettes
+	call CopyBytes
 	pop af
 	ldh [rSVBK], a
+.send_palette
+	pop hl
+	ldh a, [hMoveIconPalette]
+	and PALETTE_MASK
+	add a
+	add a
+	add a ; * 1 palettes
+	ld b, a
+	ld c, LOW(rBGPI)
+	call MoveIcons_SendPalette
 
 ; the tiles
-	ldh a, [hMoveIconCategory]
-	ld e, a
-	call GetCategoryIconGFX
 	ld hl, vTiles2 tile MOVE_ICON_TILE
-	ld c, 2 * LEN_2BPP_TILE
-.category
-	call MoveIcons_WaitHBlank
-	ld a, [de]
-	ld [hli], a
-	inc de
-	ld a, [de]
-	ld [hli], a
-	inc de
-	ei
-	dec c
-	dec c
-	jr nz, .category
-
-	push hl
-	ldh a, [hMoveIconType]
-	ld c, a
-	call GetTypeIconGFX
-	pop hl
-	ld c, 4 * LEN_1BPP_TILE
-.type
-	call MoveIcons_WaitHBlank
-	ld a, [de]
-	ld [hli], a
-	ld [hli], a
-	inc de
-	ei
-	dec c
-	jr nz, .type
+	ld b, BANK(vTiles2)
+	call MoveIcons_SendTiles
 	; fallthrough
 
 MoveIcons_WriteMap:
@@ -347,7 +380,171 @@ BattleMoveIcons_Restore::
 	ld a, BATTLE_MOVE_ICON_X
 	ldh [hMoveIconCol], a
 	call MoveIcons_WaitBelowRow
-	jr MoveIcons_WriteMap
+	jmp MoveIcons_WriteMap
+
+PlazaMoveIcons_Show::
+; Show the icons of move [wCurSpecies] in the Battle Plaza TM counter's
+; and Move Tutor's move info box.
+	call PlazaMoveIcons_SetCoords
+; Free the icon cells first, so they don't count as using a palette.
+	hlcoord PLAZA_MOVE_ICON_X, PLAZA_MOVE_ICON_Y, wAttrmap
+	ld a, PAL_BG_TEXT
+	ld bc, MOVE_ICON_TILES
+	call ByteFill
+
+; Mark the palettes the visible cells use...
+	hlcoord 0, 0, wAttrmap
+	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld d, 0
+.scan
+	ld a, [hli]
+	and PALETTE_MASK
+	ld e, a
+	ld a, 1
+	inc e
+.bit
+	dec e
+	jr z, .got_bit
+	add a
+	jr .bit
+.got_bit
+	or d
+	ld d, a
+	dec bc
+	ld a, b
+	or c
+	jr nz, .scan
+
+; ...and take the first free one in .Preference.
+	ld hl, .Preference
+.find
+	ld a, [hli]
+	cp -1
+	jr z, .fallback
+	ld c, a
+	ld e, a
+	ld a, 1
+	inc e
+.bit2
+	dec e
+	jr z, .got_bit2
+	add a
+	jr .bit2
+.got_bit2
+	and d
+	jr nz, .find
+	jr .got_palette
+.fallback
+	ld c, PAL_BG_ROOF
+.got_palette
+	set MOVE_ICON_BORROWED_PAL_F, c
+	ld a, [wCurSpecies]
+	ld b, a
+	lb de, PLAZA_MOVE_ICON_Y, PLAZA_MOVE_ICON_X
+	jmp MoveIcons_Show
+
+.Preference:
+	db PAL_BG_ROOF, PAL_BG_BROWN, PAL_BG_YELLOW, PAL_BG_GREEN, PAL_BG_RED, PAL_BG_GRAY, -1
+
+PlazaMoveIcons_Hide::
+; Blank the icon cells and give the borrowed palette back to the map,
+; when the box is cleared or the menu closes.
+	call PlazaMoveIcons_SetCoords
+	hlcoord PLAZA_MOVE_ICON_X, PLAZA_MOVE_ICON_Y
+	ld a, " "
+	ld bc, MOVE_ICON_TILES
+	call ByteFill
+	hlcoord PLAZA_MOVE_ICON_X, PLAZA_MOVE_ICON_Y, wAttrmap
+	ld a, PAL_BG_TEXT
+	ld bc, MOVE_ICON_TILES
+	call ByteFill
+	call MoveIcons_WaitBelowRow
+	call MoveIcons_WriteMap
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals1)
+	ldh [rSVBK], a
+	ld hl, wBGPals1
+	ld de, wBGPals2
+	ld bc, PAL_BG_TEXT palettes
+	call CopyBytes
+	pop af
+	ldh [rSVBK], a
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	ret
+
+PlazaMoveIcons_SetCoords:
+	ld a, PLAZA_MOVE_ICON_Y
+	ldh [hMoveIconRow], a
+	ld a, PLAZA_MOVE_ICON_X
+	ldh [hMoveIconCol], a
+	ret
+
+TMHMMoveIcons_Show::
+; Show the icons of move [wCurSpecies] as sprites in the TM pocket's move
+; info box.
+	ld a, [wCurSpecies]
+	ld b, a
+	call MoveIcons_GetIndices
+	ld a, TMHM_MOVE_ICON_Y
+	ldh [hMoveIconRow], a
+	call MoveIcons_WaitBelowRow
+
+	ld hl, wOBPals2 palette MOVE_ICON_OBJ_PAL
+	push hl
+	ldh a, [hMoveIconType]
+	ld c, a
+	ldh a, [hMoveIconCategory]
+	ld e, a
+	call LoadMoveIconPalette
+	pop hl
+	lb bc, MOVE_ICON_OBJ_PAL palettes, LOW(rOBPI)
+	call MoveIcons_SendPalette
+
+	ld hl, vTiles3 tile MOVE_ICON_OBJ_TILE
+	ld b, BANK(vTiles3)
+	call MoveIcons_SendTiles
+
+	ld hl, wShadowOAMSprite00 + MOVE_ICON_FIRST_OAM * OBJ_SIZE
+	lb bc, (TMHM_MOVE_ICON_X + 1) * TILE_WIDTH, MOVE_ICON_OBJ_TILE
+	ld e, MOVE_ICON_TILES
+.oam
+	ld a, (TMHM_MOVE_ICON_Y + 2) * TILE_WIDTH
+	ld [hli], a ; y
+	ld a, b
+	ld [hli], a ; x
+	add TILE_WIDTH
+	ld b, a
+	ld a, c
+	ld [hli], a ; tile
+	inc c
+	ld a, MOVE_ICON_OBJ_PAL | VRAM_BANK_1
+	ld [hli], a
+	dec e
+	jr nz, .oam
+	ret
+
+TMHMMoveIcons_Hide::
+; Take the TM pocket's icon sprites away and give OBJ palette 7 back.
+	ld hl, wShadowOAMSprite00 + MOVE_ICON_FIRST_OAM * OBJ_SIZE
+	ld bc, MOVE_ICON_TILES * OBJ_SIZE
+	xor a
+	call ByteFill
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wOBPals1)
+	ldh [rSVBK], a
+	ld hl, wOBPals1 palette MOVE_ICON_OBJ_PAL
+	ld de, wOBPals2 palette MOVE_ICON_OBJ_PAL
+	ld bc, 1 palettes
+	call CopyBytes
+	pop af
+	ldh [rSVBK], a
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	ret
 
 MoveIcons_TilemapAddress:
 ; hl = the wTilemap address of the cell at hMoveIconRow/Col
@@ -375,6 +572,34 @@ MoveIcons_WaitBelowRow:
 	ldh a, [rLY]
 	cp b
 	jr nz, .wait
+	ret
+
+GetCategoryIconGFX:
+; de = category icon e's graphics
+	ld hl, MoveCategoryIconGFX
+	ld a, e
+	swap a ; * 2 tiles = * 32
+	add a
+	ld e, a
+	ld d, 0
+	add hl, de
+	ld d, h
+	ld e, l
+	ret
+
+GetTypeIconGFX:
+; de = type icon c's graphics
+	ld l, c
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl ; * 4 tiles * LEN_1BPP_TILE
+	ld de, MoveTypeIconGFX
+	add hl, de
+	ld d, h
+	ld e, l
 	ret
 
 MoveIcons_WaitHBlank:
