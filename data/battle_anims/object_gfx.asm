@@ -84,4 +84,6 @@ AnimObjGFX:
 	anim_obj_gfx 18, AnimObjMushroomGFX
 	anim_obj_gfx 14, AnimObjBubbleSourGFX
 	anim_obj_gfx  5, AnimObjMisc2GFX
+	anim_obj_gfx  9, AnimObjBugBuzzGFX
+	anim_obj_gfx  9, AnimObjMidGlowClearGFX
 	assert_table_length NUM_BATTLE_ANIM_GFX + 1

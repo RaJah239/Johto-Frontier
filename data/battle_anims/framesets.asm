@@ -215,7 +215,9 @@ BattleAnimFrameData:
 	dw .Frameset_BouncingMushroom   ; BATTLE_ANIM_FRAMESET_BOUNCING_MUSHROOM
 	dw .Frameset_DropletR            ; BATTLE_ANIM_FRAMESET_DROPLET_R
 	dw .Frameset_DropletL            ; BATTLE_ANIM_FRAMESET_DROPLET_L
+	dw .Frameset_MidGlowShrinking    ; BATTLE_ANIM_FRAMESET_MID_GLOW_SHRINKING
 	dw .Frameset_PoisonJab           ; BATTLE_ANIM_FRAMESET_POISON_JAB
+	dw .Frameset_BugBuzz             ; BATTLE_ANIM_FRAMESET_BUG_BUZZ
 	assert_table_length NUM_BATTLE_ANIM_FRAMESETS
 
 .Frameset_StatUp:
@@ -1452,6 +1454,17 @@ BattleAnimFrameData:
 
 .Frameset_DropletL:
 	oamframe BATTLE_ANIM_OAMSET_DROPLET, 16, OAM_X_FLIP
+	oamdelete
+
+.Frameset_BugBuzz:
+	oamframe BATTLE_ANIM_OAMSET_14,         4, OAM_Y_FLIP
+	oamframe BATTLE_ANIM_OAMSET_BUG_BUZZ_1, 4, OAM_Y_FLIP
+	oamframe BATTLE_ANIM_OAMSET_BUG_BUZZ_2, 4, OAM_Y_FLIP
+	oamdelete
+
+.Frameset_MidGlowShrinking:
+	oamframe BATTLE_ANIM_OAMSET_MID_GLOW_1, 1
+	oamframe BATTLE_ANIM_OAMSET_MID_GLOW_2, 1
 	oamdelete
 
 .Frameset_BouncingMushroom:

@@ -3050,33 +3050,35 @@ BattleAnim_NightSlash:
 	anim_ret
 
 BattleAnim_BugBuzz:
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GREEN
-	anim_2gfx BATTLE_ANIM_GFX_NOISE, BATTLE_ANIM_GFX_PSYCHIC
+; Polished Crystal's Bug Buzz
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_PALE_LIME
+	anim_2gfx BATTLE_ANIM_GFX_MID_GLOW_CLEAR, BATTLE_ANIM_GFX_BUG_BUZZ
+	anim_battlergfx_2row
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $4a, BG_EFFECT_USER, $0
 .loop
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_Y, $14, $2, $0
-	anim_sound 0, 0, SFX_OUTRAGE
-	anim_wait 8
-	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_Y, $14, $2, $0
-	anim_sound 0, 0, SFX_SNORE
-	anim_call BattleAnimSub_Sound
-	anim_obj BATTLE_ANIM_OBJ_WAVE,  7, 0, 11, 0, $2
-	anim_obj BATTLE_ANIM_OBJ_WAVE,  9, 0, 11, 0, $2
-	anim_wait 4
-	anim_obj BATTLE_ANIM_OBJ_WAVE,  8, 0, 11, 0, $2
-	anim_wait 4
-	anim_sound 0, 0, SFX_SNORE
-	anim_call BattleAnimSub_Sound
-	anim_obj BATTLE_ANIM_OBJ_WAVE,  7, 4, 11, 0, $2
-	anim_obj BATTLE_ANIM_OBJ_WAVE,  8, 4, 11, 0, $2
-	anim_wait 4
-	anim_obj BATTLE_ANIM_OBJ_WAVE,  8, 0, 11, 0, $2
-	anim_wait 4
-	anim_obj BATTLE_ANIM_OBJ_WAVE,  7, 6, 11, 0, $2
-	anim_obj BATTLE_ANIM_OBJ_WAVE,  8, 2, 11, 0, $2
-	anim_wait 4
-	anim_obj BATTLE_ANIM_OBJ_WAVE,  8, 0, 11, 0, $2
-	anim_wait 24
-	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_obj BATTLE_ANIM_OBJ_MID_GLOW_SHRINKING, 48, 96, $0
+	anim_sound 6, 2, SFX_BIND
+	anim_obj BATTLE_ANIM_OBJ_BUG_BUZZ, 32, 84, $28
+	anim_obj BATTLE_ANIM_OBJ_BUG_BUZZ, 64, 84, $38
+	anim_wait 2
+	anim_sound 6, 2, SFX_BIND
+	anim_wait 2
+	anim_sound 6, 2, SFX_BIND
+	anim_obj BATTLE_ANIM_OBJ_BUG_BUZZ, 32, 84, $28
+	anim_obj BATTLE_ANIM_OBJ_BUG_BUZZ, 64, 84, $38
+	anim_wait 2
+	anim_sound 6, 2, SFX_BIND
+	anim_wait 2
+	anim_loop 6, .loop
+	anim_wait 2
+	anim_sound 6, 2, SFX_SUPERSONIC
+	anim_wait 6
+	anim_bgeffect BATTLE_BG_EFFECT_BATTLEROBJ_1ROW, $0, BG_EFFECT_USER, $0
+	anim_wait 1
+	anim_bgeffect BATTLE_BG_EFFECT_VIBRATE_MON, $0, $0, $0
+	anim_wait 64
+	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, BG_EFFECT_USER, $0
+	anim_setobjpal PAL_BATTLE_OB_YELLOW, PAL_BTLCUSTOM_YELLOW
 	anim_ret
 
 BattleAnim_Peck:
@@ -3641,7 +3643,6 @@ BattleAnim_DiveBomb:
 	anim_ret
 
 BattleAnim_Facade:
-; Polished Crystal's Facade
 	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_WATER
 	anim_bgeffect BATTLE_BG_EFFECT_FADE_MON_TO_LIGHT_REPEATING, $0, BG_EFFECT_USER, $40
 	anim_2gfx BATTLE_ANIM_GFX_HIT, BATTLE_ANIM_GFX_MISC_2

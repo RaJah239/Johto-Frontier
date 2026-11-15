@@ -254,6 +254,10 @@ BattleAnimOAMData:
 	battleanimoam $06,  9, .OAMData_Mushroom1 ; BATTLE_ANIM_OAMSET_MUSHROOM_2
 	battleanimoam $0c,  9, .OAMData_Mushroom1 ; BATTLE_ANIM_OAMSET_MUSHROOM_3
 	battleanimoam $02,  2, .OAMData_Droplet ; BATTLE_ANIM_OAMSET_DROPLET
+	battleanimoam $fc,  3, .OAMData_BugBuzz1 ; BATTLE_ANIM_OAMSET_BUG_BUZZ_1
+	battleanimoam $f8,  5, .OAMData_BugBuzz2 ; BATTLE_ANIM_OAMSET_BUG_BUZZ_2
+	battleanimoam $00, 20, .OAMData_MidGlow1 ; BATTLE_ANIM_OAMSET_MID_GLOW_1
+	battleanimoam $05, 16, .OAMData_MidGlow2 ; BATTLE_ANIM_OAMSET_MID_GLOW_2
 	assert_table_length NUM_BATTLE_ANIM_OAMSETS
 
 .OAMData_Stats:
@@ -1446,6 +1450,60 @@ endr
 ; Polished Crystal's water droplet (gfx/battle_anims/misc2.png)
 	dbsprite  -1,  -1, 4, 4, $00, $0
 	dbsprite   0,   0, 2, 2, $00, $0
+
+.OAMData_BugBuzz1:
+; Polished Crystal's Bug Buzz (gfx/battle_anims/bugbuzz.png)
+	dbsprite  -1,  -1, 0, 0, $00, $0
+	dbsprite   0,  -1, 0, 0, $01, $0
+	dbsprite  -1,   0, 0, 0, $03, $0
+
+.OAMData_BugBuzz2:
+	dbsprite  -2,  -2, 4, 4, $00, $0
+	dbsprite  -1,  -2, 4, 4, $01, $0
+	dbsprite   0,  -2, 4, 4, $02, $0
+	dbsprite  -2,  -1, 4, 4, $03, $0
+	dbsprite  -2,   0, 4, 4, $06, $0
+
+.OAMData_MidGlow1:
+; Polished Crystal's shrinking glow (gfx/battle_anims/midglowclear.png)
+	dbsprite  -2,  -3, 0, 7, $00, $0
+	dbsprite  -1,  -3, 0, 7, $01, $0
+	dbsprite  -3,  -2, 0, 7, $02, $0
+	dbsprite  -2,  -2, 0, 7, $03, $0
+	dbsprite  -1,  -2, 0, 7, $04, $0
+	dbsprite   1,  -3, 0, 7, $00, X_FLIP
+	dbsprite   0,  -3, 0, 7, $01, X_FLIP
+	dbsprite   2,  -2, 0, 7, $02, X_FLIP
+	dbsprite   1,  -2, 0, 7, $03, X_FLIP
+	dbsprite   0,  -2, 0, 7, $04, X_FLIP
+	dbsprite  -2,   0, 0, 7, $00, Y_FLIP
+	dbsprite  -1,   0, 0, 7, $01, Y_FLIP
+	dbsprite  -3,  -1, 0, 7, $02, Y_FLIP
+	dbsprite  -2,  -1, 0, 7, $03, Y_FLIP
+	dbsprite  -1,  -1, 0, 7, $04, Y_FLIP
+	dbsprite   1,   0, 0, 7, $00, X_FLIP | Y_FLIP
+	dbsprite   0,   0, 0, 7, $01, X_FLIP | Y_FLIP
+	dbsprite   2,  -1, 0, 7, $02, X_FLIP | Y_FLIP
+	dbsprite   1,  -1, 0, 7, $03, X_FLIP | Y_FLIP
+	dbsprite   0,  -1, 0, 7, $04, X_FLIP | Y_FLIP
+
+.OAMData_MidGlow2:
+	dbsprite  -2,  -3, 0, 7, $00, $0
+	dbsprite  -1,  -3, 0, 7, $01, $0
+	dbsprite  -2,  -2, 0, 7, $02, $0
+	dbsprite  -1,  -2, 0, 7, $03, $0
+	dbsprite   1,  -3, 0, 7, $00, X_FLIP
+	dbsprite   0,  -3, 0, 7, $01, X_FLIP
+	dbsprite   1,  -2, 0, 7, $02, X_FLIP
+	dbsprite   0,  -2, 0, 7, $03, X_FLIP
+	dbsprite  -2,   0, 0, 7, $00, Y_FLIP
+	dbsprite  -1,   0, 0, 7, $01, Y_FLIP
+	dbsprite  -2,  -1, 0, 7, $02, Y_FLIP
+	dbsprite  -1,  -1, 0, 7, $03, Y_FLIP
+	dbsprite   1,   0, 0, 7, $00, X_FLIP | Y_FLIP
+	dbsprite   0,   0, 0, 7, $01, X_FLIP | Y_FLIP
+	dbsprite   1,  -1, 0, 7, $02, X_FLIP | Y_FLIP
+	dbsprite   0,  -1, 0, 7, $03, X_FLIP | Y_FLIP
 
 .OAMData_Mushroom1:
 	dbsprite  -2,  -2, 4, 4, $00, $0
