@@ -25,6 +25,7 @@ MoveInfoBox:
 	cp b
 	jr nz, .not_disabled
 
+	farcall BattleMoveIcons_Hide
 	hlcoord 1, 10
 	ld de, .Disabled
 	jmp PlaceString

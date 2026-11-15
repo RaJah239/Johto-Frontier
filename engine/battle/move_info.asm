@@ -3,6 +3,10 @@ ShowBattleMoveInfo:
 ; then clear the overlay. Called via farcall from MoveSelectionScreen
 ; in Battle Core (wCurSpecies/wCurPlayerMove already hold the move).
 	call ClearSprites
+	; ClearSprites took the type and category icons too
+	ld a, [wCurPlayerMove]
+	ld b, a
+	farcall BattleMoveIcons_Draw
 	xor a
 	ldh [hBGMapMode], a
 	hlcoord 0, 12

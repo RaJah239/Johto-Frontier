@@ -6,9 +6,10 @@ DEF MOVE_ICON_TILES EQU 6 ; 2 category tiles, then 4 type tiles
 ; screen that shows them.
 DEF MOVE_ICON_TILE EQU $79
 
-; In battle they use the unused BG palette PAL_BATTLE_BG_6. The icon cells
-; only take that palette while the move menu is open, so the player's back
-; sprite under the move info box keeps its own colours when it closes.
+; In battle the icons are sprites over the move info box (see below), so
+; no BG palette is needed and the cells under them keep their colors. They
+; borrow OBJ palette PAL_BATTLE_OB_GRAY, which nothing on screen uses while
+; the move menu is open.
 DEF BATTLE_MOVE_ICON_X EQU 1
 DEF BATTLE_MOVE_ICON_Y EQU 9
 
@@ -19,12 +20,14 @@ DEF BATTLE_MOVE_ICON_Y EQU 9
 DEF PLAZA_MOVE_ICON_X EQU 10
 DEF PLAZA_MOVE_ICON_Y EQU 12
 
-; The pack's BG palettes are all in use, so in the TM pocket the icons
-; are sprites: OBJ tiles $7a-$7f in VRAM bank 1, OBJ palette 7 and the
-; last six OAM entries. Leaving the pack reloads all of those.
+; The pack's BG palettes are all in use too, so in the TM pocket the
+; icons are sprites as well, with OBJ palette 7.
+; Sprite icons use OBJ tiles $7a-$7f in VRAM bank 1 and the last six OAM
+; entries, all free on those screens. The borrowed OBJ palette is only
+; written to wOBPals2, so wOBPals1 still has the one to give back.
 DEF MOVE_ICON_OBJ_TILE EQU $7a
-DEF MOVE_ICON_OBJ_PAL  EQU 7
 DEF MOVE_ICON_FIRST_OAM EQU NUM_SPRITE_OAM_STRUCTS - MOVE_ICON_TILES
+DEF TMHM_MOVE_ICON_OBJ_PAL EQU 7
 DEF TMHM_MOVE_ICON_X EQU 10
 DEF TMHM_MOVE_ICON_Y EQU 12
 
@@ -216,12 +219,6 @@ MoveIcons_GetIndices:
 	ldh [hMoveIconCategory], a
 	ret
 
-BattleMoveIcons_Draw::
-; Show the type and category icons of move b in the battle move info box.
-	ld c, PAL_BATTLE_BG_6
-	lb de, BATTLE_MOVE_ICON_Y, BATTLE_MOVE_ICON_X
-	; fallthrough
-
 MoveIcons_Show::
 ; Show the type and category icons of move b in the six cells starting at
 ; row d, column e of the screen, using BG palette c.
@@ -356,23 +353,6 @@ endr ; * BG_MAP_WIDTH
 	dec a
 	jr nz, .loop
 	ret
-
-BattleMoveIcons_Restore::
-; Give the icon cells back the player's palette once the move menu has
-; closed and wTilemap holds the battle scene again.
-	ld a, [wAttrmap + BATTLE_MOVE_ICON_Y * SCREEN_WIDTH + BATTLE_MOVE_ICON_X]
-	cp PAL_BATTLE_BG_6
-	ret nz
-	hlcoord BATTLE_MOVE_ICON_X, BATTLE_MOVE_ICON_Y, wAttrmap
-	ld a, PAL_BATTLE_BG_PLAYER
-	ld bc, MOVE_ICON_TILES
-	call ByteFill
-	ld a, BATTLE_MOVE_ICON_Y
-	ldh [hMoveIconRow], a
-	ld a, BATTLE_MOVE_ICON_X
-	ldh [hMoveIconCol], a
-	call MoveIcons_WaitBelowRow
-	jmp MoveIcons_WriteMap
 
 PlazaMoveIcons_Show::
 ; Show the icons of move [wCurSpecies] in the Battle Plaza TM counter's
@@ -520,17 +500,45 @@ PlazaMoveIcons_SetCoords:
 	ldh [hMoveIconCol], a
 	ret
 
+BattleMoveIcons_Draw::
+; Show the type and category icons of move b in the battle move info box.
+	ld c, PAL_BATTLE_OB_GRAY
+	lb de, BATTLE_MOVE_ICON_Y, BATTLE_MOVE_ICON_X
+	jr MoveIcons_ShowSprites
+
+BattleMoveIcons_Hide::
+; when the move menu closes, or its box shows "Disabled!"
+	ld c, PAL_BATTLE_OB_GRAY
+	jr MoveIcons_HideSprites
+
 TMHMMoveIcons_Show::
-; Show the icons of move [wCurSpecies] as sprites in the TM pocket's move
-; info box.
+; Show the icons of move [wCurSpecies] in the TM pocket's move info box.
 	ld a, [wCurSpecies]
 	ld b, a
-	call MoveIcons_GetIndices
-	ld a, TMHM_MOVE_ICON_Y
+	ld c, TMHM_MOVE_ICON_OBJ_PAL
+	lb de, TMHM_MOVE_ICON_Y, TMHM_MOVE_ICON_X
+	; fallthrough
+
+MoveIcons_ShowSprites:
+; Show the type and category icons of move b as six sprites over the
+; cells starting at row d, column e, with OBJ palette c.
+	ld a, c
+	ldh [hMoveIconPalette], a
+	ld a, d
 	ldh [hMoveIconRow], a
+	ld a, e
+	ldh [hMoveIconCol], a
+	call MoveIcons_GetIndices
 	call MoveIcons_WaitBelowRow
 
-	ld hl, wOBPals2 palette MOVE_ICON_OBJ_PAL
+	ldh a, [hMoveIconPalette]
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	add hl, hl ; * 1 palettes
+	ld bc, wOBPals2
+	add hl, bc
 	push hl
 	ldh a, [hMoveIconType]
 	ld c, a
@@ -538,18 +546,37 @@ TMHMMoveIcons_Show::
 	ld e, a
 	call LoadMoveIconPalette
 	pop hl
-	lb bc, MOVE_ICON_OBJ_PAL palettes, LOW(rOBPI)
+	ldh a, [hMoveIconPalette]
+	add a
+	add a
+	add a ; * 1 palettes
+	ld b, a
+	ld c, LOW(rOBPI)
 	call MoveIcons_SendPalette
 
 	ld hl, vTiles3 tile MOVE_ICON_OBJ_TILE
 	ld b, BANK(vTiles3)
 	call MoveIcons_SendTiles
 
+	ldh a, [hMoveIconCol]
+	inc a
+	add a
+	add a
+	add a ; (col + 1) * TILE_WIDTH
+	ld b, a
+	ldh a, [hMoveIconRow]
+	add 2
+	add a
+	add a
+	add a ; (row + 2) * TILE_WIDTH
+	ld d, a
+	ldh a, [hMoveIconPalette]
+	or VRAM_BANK_1
+	ld e, a
+	ld c, MOVE_ICON_OBJ_TILE
 	ld hl, wShadowOAMSprite00 + MOVE_ICON_FIRST_OAM * OBJ_SIZE
-	lb bc, (TMHM_MOVE_ICON_X + 1) * TILE_WIDTH, MOVE_ICON_OBJ_TILE
-	ld e, MOVE_ICON_TILES
 .oam
-	ld a, (TMHM_MOVE_ICON_Y + 2) * TILE_WIDTH
+	ld a, d
 	ld [hli], a ; y
 	ld a, b
 	ld [hli], a ; x
@@ -558,24 +585,45 @@ TMHMMoveIcons_Show::
 	ld a, c
 	ld [hli], a ; tile
 	inc c
-	ld a, MOVE_ICON_OBJ_PAL | VRAM_BANK_1
-	ld [hli], a
-	dec e
+	ld a, e
+	ld [hli], a ; attributes
+	ld a, c
+	cp MOVE_ICON_OBJ_TILE + MOVE_ICON_TILES
 	jr nz, .oam
 	ret
 
 TMHMMoveIcons_Hide::
 ; Take the TM pocket's icon sprites away and give OBJ palette 7 back.
+	ld c, TMHM_MOVE_ICON_OBJ_PAL
+	; fallthrough
+
+MoveIcons_HideSprites:
+; Take the icon sprites away and give OBJ palette c back.
 	ld hl, wShadowOAMSprite00 + MOVE_ICON_FIRST_OAM * OBJ_SIZE
+	push bc
 	ld bc, MOVE_ICON_TILES * OBJ_SIZE
 	xor a
 	call ByteFill
+	pop bc
+	ld l, c
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	add hl, hl ; * 1 palettes
+	ld bc, wOBPals1
+	add hl, bc
+	ld de, wOBPals2 - wOBPals1
+	ld b, h
+	ld c, l
+	add hl, de
+	ld d, h
+	ld e, l
+	ld h, b
+	ld l, c
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wOBPals1)
 	ldh [rSVBK], a
-	ld hl, wOBPals1 palette MOVE_ICON_OBJ_PAL
-	ld de, wOBPals2 palette MOVE_ICON_OBJ_PAL
 	ld bc, 1 palettes
 	call CopyBytes
 	pop af
