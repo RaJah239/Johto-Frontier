@@ -766,6 +766,9 @@ HandleIntimidate:
 	; Scrappy isn't affected: its popup shows over the target instead
 	newfarcall TargetHasScrappy
 	jr c, .scrappy
+	; nor is Oblivious: its popup shows over the target
+	newfarcall ObliviousBlocks
+	ret c
 	ld de, LEER
 	call PlayEntryAbilityAnim
 	farcall BattleCommand_AttackDown

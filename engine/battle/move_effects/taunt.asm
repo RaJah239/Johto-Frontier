@@ -3,6 +3,9 @@ BattleCommand_Taunt:
 	ld a, [wEffectFailed] ; fail if uber enemy
 	and a
 	jr nz, .failed
+	; Oblivious can't be taunted
+	newfarcall ObliviousBlocks
+	jr c, .failed
 
 ; are we dealing with enemy or player
     ldh a, [hBattleTurn]

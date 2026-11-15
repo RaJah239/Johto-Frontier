@@ -10,6 +10,9 @@ BattleCommand_Attract:
 	call GetBattleVarAddr
 	bit SUBSTATUS_IN_LOVE, [hl]
 	jr nz, .failed
+	; Oblivious can't be infatuated
+	newfarcall ObliviousBlocks
+	jr c, .failed
 
 	set SUBSTATUS_IN_LOVE, [hl]
 	farcall AnimateCurrentMove

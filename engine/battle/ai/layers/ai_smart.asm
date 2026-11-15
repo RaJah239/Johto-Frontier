@@ -459,6 +459,11 @@ AI_Smart_Taunt:
 	and a
 	jmp nz, .discourage
 
+; Oblivious can't be taunted
+	ld a, [wBattleMonSpecies]
+	newfarcall IsObliviousSpecies
+	jmp c, AIDiscourageMove
+
 ; never use if player has safeguard
 	ld a, [wPlayerScreens]
 	bit SCREENS_SAFEGUARD, a
@@ -3606,6 +3611,11 @@ AI_Smart_Trick:
 AI_Smart_Attract:
 ; 90% chance to encourage this move during the first turn of player's Pokemon.
 ; otherwise discourage
+
+; Oblivious can't be infatuated
+	ld a, [wBattleMonSpecies]
+	newfarcall IsObliviousSpecies
+	jmp c, AIDiscourageMove
 
 	ld a, [wPlayerTurnsTaken]
 	and a
