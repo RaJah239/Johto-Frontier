@@ -4236,6 +4236,30 @@ BattleCommand_StatUp:
 	; fallthrough
 
 RaiseStat:
+; Raise the user's stat b, or lower it if it has Contrary.
+	xor a
+	ld [wContraryInverted], a
+	ld a, [wAttackMissed]
+	ld c, a
+	ld a, [wEffectFailed]
+	or c
+	jr nz, RaiseStat_NoContrary ; it fails anyway
+	call GetCurrentMon
+	newfarcall IsContrarySpecies
+	jr nc, RaiseStat_NoContrary
+	ldh a, [hBattleTurn]
+	newfarcall ShowContraryPopupOnSide
+	ld a, b
+	call LowerStat_NoContrary
+	; can't go lower: "won't drop anymore" (BattleCommand_StatDownFailText)
+	ld a, [wFailedMessage]
+	cp 2
+	ret nz
+	inc a
+	ld [wFailedMessage], a
+	ret
+
+RaiseStat_NoContrary:
 	ld a, b
 	ld [wLoweredStat], a
 	ld hl, wPlayerStatLevels
@@ -4390,6 +4414,33 @@ BattleCommand_EvasionDown2:
 BattleCommand_StatDown:
 	ld [wLoweredStat], a
 
+; Lower the target's stat, or raise it if it has Contrary (unless the move
+; fails on it anyway).
+	xor a
+	ld [wContraryInverted], a
+	call CheckSubstituteOpp
+	jr nz, .not_contrary
+	ld a, [wAttackMissed]
+	and a
+	jr nz, .not_contrary
+	ld a, [wEffectFailed]
+	and a
+	jr nz, .not_contrary
+	call CheckHiddenOpponent
+	jr nz, .not_contrary
+	call GetOpposingMon
+	newfarcall IsContrarySpecies
+	jr nc, .not_contrary
+	ldh a, [hBattleTurn]
+	xor 1
+	newfarcall ShowContraryPopupOnSide
+	call BattleCommand_SwitchTurn
+	ld a, [wLoweredStat]
+	ld b, a
+	call RaiseStat_NoContrary
+	jmp BattleCommand_SwitchTurn
+
+.not_contrary
 	call CheckMist
 	jr nz, .Mist
 
@@ -4537,6 +4588,17 @@ BattleCommand_StatDownMessage:
 	ld a, [wFailedMessage]
 	and a
 	ret nz
+	; Contrary raised the target's stat instead
+	ld a, [wContraryInverted]
+	and a
+	jr z, .not_inverted
+	xor a
+	ld [wContraryInverted], a
+	call BattleCommand_SwitchTurn
+	call BattleCommand_StatUpMessage
+	jmp BattleCommand_SwitchTurn
+
+.not_inverted
 
 	ld a, [wOptions]
 	bit BATTLE_SCENE, a
@@ -4630,6 +4692,17 @@ BattleCommand_StatUpFailText:
 	ld a, [wFailedMessage]
 	and a
 	ret z
+	ld a, [wContraryInverted]
+	and a
+	jr z, .not_inverted
+	xor a
+	ld [wContraryInverted], a
+	call BattleCommand_SwitchTurn
+	call BattleCommand_StatDownFailText
+	jmp BattleCommand_SwitchTurn
+
+.not_inverted
+	ld a, [wFailedMessage]
 	push af
 	call BattleCommand_MoveDelay
 	pop af
@@ -4647,6 +4720,17 @@ BattleCommand_StatDownFailText:
 	ld a, [wFailedMessage]
 	and a
 	ret z
+	ld a, [wContraryInverted]
+	and a
+	jr z, .not_inverted
+	xor a
+	ld [wContraryInverted], a
+	call BattleCommand_SwitchTurn
+	call BattleCommand_StatUpFailText
+	jmp BattleCommand_SwitchTurn
+
+.not_inverted
+	ld a, [wFailedMessage]
 	push af
 	call BattleCommand_MoveDelay
 	pop af
@@ -4714,6 +4798,17 @@ BattleCommand_StatUpMessage:
 	ld a, [wFailedMessage]
 	and a
 	ret nz
+	; Contrary lowered the user's stat instead
+	ld a, [wContraryInverted]
+	and a
+	jr z, .not_inverted
+	xor a
+	ld [wContraryInverted], a
+	call BattleCommand_SwitchTurn
+	call BattleCommand_StatDownMessage
+	jmp BattleCommand_SwitchTurn
+
+.not_inverted
 
 	ld a, [wOptions]
 	bit BATTLE_SCENE, a
@@ -4771,6 +4866,27 @@ ResetMiss:
 LowerStatFar:
 	ld a, [wLoweredStat]
 LowerStat:
+; Lower the user's own stat a (Close Combat...), or raise it if it has
+; Contrary.
+	ld [wLoweredStat], a
+	xor a
+	ld [wContraryInverted], a
+	call GetCurrentMon
+	newfarcall IsContrarySpecies
+	jr nc, .not_contrary
+	ldh a, [hBattleTurn]
+	newfarcall ShowContraryPopupOnSide
+	; like LowerStat, regardless of the move's effect chance / miss flags
+	xor a
+	ld [wEffectFailed], a
+	ld [wAttackMissed], a
+	ld a, [wLoweredStat]
+	ld b, a
+	jmp RaiseStat_NoContrary
+
+.not_contrary
+	ld a, [wLoweredStat]
+LowerStat_NoContrary:
 	ld [wLoweredStat], a
 
 	ld hl, wPlayerStatLevels

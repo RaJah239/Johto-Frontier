@@ -2437,7 +2437,7 @@ wCurPartyLevel:: db
 
 wScrollingMenuListSize:: db
 
-	ds 1
+wContraryInverted:: db ; the last stat change was turned around by Contrary (engine/abilities/contrary.asm)
 
 ; used when following a map warp
 wNextWarp:: db
