@@ -106,6 +106,7 @@ DoBattle:
 	call SpikesDamage
 
 .skipEffects
+	farcall StartBattleEntryAbilities
 	farcall FieldWeather
 	farcall GetTimeOfDayImage
 	; fallthrough
@@ -127,19 +128,6 @@ BattleTurn:
 	ld a, [wCurOTMon]
 	ld [wEnemyTurnStartMon], a
 
-	; check if in a link battle
-    ld a, [wLinkMode]
-    and a
-    jr z, .unlinked_battle
-
-; ========================================
-; === Entrance Abilities 2 - Link Mode ===
-; ========================================
-	; activate these abilities in non-link battles only
-	call ClearSprites
-	farcall EntryAbilities2
-
-.unlinked_battle
 ; ======================
 ; === Trap Abilities ===
 ; ======================
@@ -188,7 +176,7 @@ BattleTurn:
 	ld a, [wBattleEnded]
 	and a
 	ret nz
-	jmp .loop
+	jr .loop
 
 WildFled_EnemyFled_LinkBattleCanceled:
 	call SafeLoadTempTilemapToTilemap
@@ -2842,8 +2830,6 @@ endr
 	ret
 
 ResetEnemyStatLevels:
-	farcall ResetVolatileAbilityFoe
-
 	ld a, BASE_STAT_LEVEL
 	ld b, NUM_LEVEL_STATS
 	ld hl, wEnemyStatLevels
@@ -3080,8 +3066,6 @@ GetEnemyMonDVs:
 	jmp GetPartyLocation
 
 ResetPlayerStatLevels:
-	farcall ResetVolatileAbilityPlayer
-
 	ld a, BASE_STAT_LEVEL
 	ld b, NUM_LEVEL_STATS
 	ld hl, wPlayerStatLevels
@@ -3254,24 +3238,10 @@ BreakAttraction:
 	ret
 
 SpikesDamage:
-; ============================
-; === Entrance Abilities 1 ===
-; ============================
-	farcall EntryAbilities1
+	; the hBattleTurn side sent out a mon: its entry abilities go off
+	; once both sides have a mon out (engine/abilities/entry_abilities.asm)
+	farcall QueueEntryAbilities
 
-	; check if in a link battle
-    ld a, [wLinkMode]
-    and a
-    jr nz, .linked_battle
-
-; ==============================================
-; === Entrance Abilities 2 - Non-Linked Mode ===
-; ==============================================
-	; activate these abilities in link battles only
-	call ClearSprites
-	farcall EntryAbilities2NonLink
-
-.linked_battle
 	call GetCurrentMon
 	ld hl, HazardGuardMons
 	call IsInByteArray

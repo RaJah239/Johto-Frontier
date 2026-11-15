@@ -2755,7 +2755,7 @@ wCurDamage:: dw
 
 wTilesetDataAddress:: dw
 
-	ds 1
+wEntryAbilitiesPending:: db ; bit 0/1: the player's/enemy's mon's entry abilities haven't gone off yet
 
 wMornEncounterRate::  db
 wDayEncounterRate::   db

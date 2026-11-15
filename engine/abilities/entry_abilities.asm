@@ -1,605 +1,350 @@
-; ==============
-; === Note 1 ===
-; ==============
+; Entry abilities: abilities that activate when their mon comes onto the field.
+;
+; Each side has a "pending" bit in wEntryAbilitiesPending. A side's bit is set
+; whenever it sends out a mon (SpikesDamage calls QueueEntryAbilities). The
+; abilities of the pending sides only run once BOTH sides have a mon on the
+; field: e.g. after a double KO the player sends out first, and its mon waits
+; until the foe's mon is out, so Intimidate never hits an empty field.
+;
+; When both sides are pending (battle start, double KO) they run in the same
+; order on both Game Boys in a link battle: the internal clock player's mon
+; first (that's "player" on its Game Boy and "enemy" on the other one), the
+; same order the link battle code uses for everything else.
 
-; these abilties work correctly
-; switch in battle and immediately use its effect
-EntryAbilities1:
-	; call ClearFailures to be put in home.asm
-	; Clear any stale failure flags so the stat boosts always apply.
+DEF ENTRY_ABILITIES_PLAYER_F EQU 0
+DEF ENTRY_ABILITIES_ENEMY_F  EQU 1
+
+DEF HAZARDS_MASK EQU 1 << SCREENS_SPIKES | 1 << SCREENS_STEALTH_ROCK | 1 << SCREENS_TOXIC_SPIKES | 1 << SCREENS_STICKY_WEB
+
+StartBattleEntryAbilities::
+; Both sides' first mons are out: run their entry abilities.
+	ld a, (1 << ENTRY_ABILITIES_PLAYER_F) | (1 << ENTRY_ABILITIES_ENEMY_F)
+	ld [wEntryAbilitiesPending], a
+	jr RunPendingEntryAbilities
+
+QueueEntryAbilities::
+; The hBattleTurn side has just sent out a mon.
+	ld hl, wEntryAbilitiesPending
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .enemy
+	set ENTRY_ABILITIES_PLAYER_F, [hl]
+	jr .queued
+.enemy
+	set ENTRY_ABILITIES_ENEMY_F, [hl]
+.queued
+	; at the start of a battle, wait until DoBattle has sent out both mons
+	ld a, [wBattleHasJustStarted]
+	and a
+	ret nz
+	; fallthrough
+
+RunPendingEntryAbilities:
+	ld a, [wEntryAbilitiesPending]
+	and a
+	ret z
+	; both sides need a mon on the field
+	ld hl, wBattleMonHP
+	ld a, [hli]
+	or [hl]
+	ret z
+	ld hl, wEnemyMonHP
+	ld a, [hli]
+	or [hl]
+	ret z
+
+	ldh a, [hBattleTurn]
+	push af
+	call ClearSprites
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .enemy_first
+	call .player
+	call .enemy
+	jr .done
+
+.enemy_first
+	call .enemy
+	call .player
+.done
+	pop af
+	ldh [hBattleTurn], a
+	ret
+
+.player
+	ld hl, wEntryAbilitiesPending
+	bit ENTRY_ABILITIES_PLAYER_F, [hl]
+	ret z
+	res ENTRY_ABILITIES_PLAYER_F, [hl]
+	xor a ; player's turn
+	jr RunEntryAbilities
+
+.enemy
+	ld hl, wEntryAbilitiesPending
+	bit ENTRY_ABILITIES_ENEMY_F, [hl]
+	ret z
+	res ENTRY_ABILITIES_ENEMY_F, [hl]
+	ld a, 1 ; enemy's turn
+	; fallthrough
+
+RunEntryAbilities:
+; Run every entry ability handler for side a.
+	ld hl, EntryAbilityHandlers
+.loop
+	push af
+	ldh [hBattleTurn], a
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	or e
+	jr z, .done
+	push hl
+	; clear any stale failure flags so the stat changes always apply
 	xor a
 	ld [wFailedMessage], a
 	ld [wEffectFailed], a
 	ld [wAttackMissed], a
+	call _de_
+	pop hl
+	pop af
+	jr .loop
 
-	call HandleSpinGuard
-	call HandleDrizzle
-	call HandleDrought
-	call HandleSandStream
-	call HandleSnowWarning
-	call HandleNaturalCure
-	call HandleSeedfall
-	call HandleDefenseMode
+.done
+	pop af
 	ret
 
-; ============================================
-; === Entrance Abilities 2 - Non-Link Mode ===
-; ============================================
-EntryAbilities2NonLink:
-	; call ClearFailures to be put in home.asm
-	; Clear any stale failure flags so the stat boosts always apply.
-	xor a
-	ld [wFailedMessage], a
-	ld [wEffectFailed], a
-	ld [wAttackMissed], a
+EntryAbilityHandlers:
+	dw HandleSpinGuard
+	dw HandleDrizzle
+	dw HandleDrought
+	dw HandleSandStream
+	dw HandleSnowWarning
+	dw HandleNaturalCure
+	dw HandleSeedfall
+	dw HandleDefenseMode
+	dw HandleIntimidate
+	dw HandleCleanSweep
+	dw HandleLightBarrier
+	dw HandleRockSnare
+	dw HandleCaltropper
+	dw HandleVenomField
+	dw HandleSilkSnare
+	dw HandleChronoShift
+	dw HandleFortify
+	dw HandleImposter
+	dw HandleReflectBarrier
+	dw HandleInfernalHowl
+	dw HandleBattleStance
+	dw HandleBattleDrive
+	dw HandleTrueSight
+	dw HandleFogOfWar
+	dw HandleChaoticBoost
+	dw HandleSanctuary
+	dw HandleSiegebreaker
+	dw HandleProvocateur
+	dw HandleDisarm
+	dw HandleAllure
+	dw 0 ; end
 
-	call HandleNonLinkIntimidate
-	ret
+; ===============
+; === Helpers ===
+; ===============
 
-; ==============
-; === Note 2 ===
-; ==============
-
-; these abilities work at the start of turn 1
-; so if a mon was switched in mid-battle,
-; the foe will get their move off and even ko'd
-; before this ability triggers
-EntryAbilities2: ; this should be called in "EntryAbilities2NonLink" above to work non linked
-	; call ClearFailures to be put in home.asm
-	; Clear any stale failure flags so the stat boosts always apply.
-	xor a
-	ld [wFailedMessage], a
-	ld [wEffectFailed], a
-	ld [wAttackMissed], a
-
-	call HandleCleanSweep
-	call HandleLightBarrier
-	call HandleIntimidate
-	call HandleRockSnare
-	call HandleCaltropper
-	call HandleVenomField
-	call HandleSilkSnare
-	call HandleChronoShift
-	call HandleFortify
-	call HandleImposter
-	call HandleReflectBarrier
-	call HandleInfernalHowl
-	call HandleBattleStance
-	call HandleBattleDrive
-	call HandleTrueSight
-	call HandleFogOfWar
-	call HandleChaoticBoost
-	call HandleSanctuary
-	call HandleSiegebreaker
-	call HandleProvocateur
-	call HandleDisarm
-	call HandleAllure
-	ret
-
-ResetVolatileAbilityPlayer:
-	ResetEventFlag EVENT_REFLECT_BARRIER_PLAYER
-	ResetEventFlag EVENT_LIGHT_BARRIER_PLAYER
-	ResetEventFlag EVENT_INTIMIDATE_PLAYER
-	ResetEventFlag EVENT_ROCK_SNARE_PLAYER
-	ResetEventFlag EVENT_CALTROPPER_PLAYER
-	ResetEventFlag EVENT_VENOM_FIELD_PLAYER
-	ResetEventFlag EVENT_SILK_SNARE_PLAYER
-	ResetEventFlag EVENT_CHRONO_SHIFT_PLAYER
-	ResetEventFlag EVENT_FORTIFY_PLAYER
-	ResetEventFlag EVENT_IMPOSTER_PLAYER
-	ResetEventFlag EVENT_INFERNAL_HOWL_PLAYER
-	ResetEventFlag EVENT_BATTLE_STANCE_PLAYER
-	ResetEventFlag EVENT_BATTLE_DRIVE_PLAYER
-	ResetEventFlag EVENT_TRUE_SIGHT_PLAYER
-	ResetEventFlag EVENT_FOG_OF_WAR_PLAYER
-	ResetEventFlag EVENT_DEFOG_PLAYER
-	ResetEventFlag EVENT_CHAOTIC_BOOST_PLAYER
-	ResetEventFlag EVENT_SANCTUARY_PLAYER
-	ResetEventFlag EVENT_SIEGEBREAKER_PLAYER
-	ResetEventFlag EVENT_PROVOCATEUR_PLAYER
-	ResetEventFlag EVENT_DISARM_PLAYER
-	ResetEventFlag EVENT_ALLURE_PLAYER
-	ret
-
-ResetVolatileAbilityFoe:
-	ResetEventFlag EVENT_REFLECT_BARRIER_FOE
-	ResetEventFlag EVENT_LIGHT_BARRIER_FOE
-	ResetEventFlag EVENT_INTIMIDATE_FOE
-	ResetEventFlag EVENT_ROCK_SNARE_FOE
-	ResetEventFlag EVENT_CALTROPPER_FOE
-	ResetEventFlag EVENT_VENOM_FIELD_FOE
-	ResetEventFlag EVENT_SILK_SNARE_FOE
-	ResetEventFlag EVENT_CHRONO_SHIFT_FOE
-	ResetEventFlag EVENT_FORTIFY_FOE
-	ResetEventFlag EVENT_IMPOSTER_FOE
-	ResetEventFlag EVENT_INFERNAL_HOWL_FOE
-	ResetEventFlag EVENT_BATTLE_STANCE_FOE
-	ResetEventFlag EVENT_BATTLE_DRIVE_FOE
-	ResetEventFlag EVENT_TRUE_SIGHT_FOE
-	ResetEventFlag EVENT_FOG_OF_WAR_FOE
-	ResetEventFlag EVENT_DEFOG_FOE
-	ResetEventFlag EVENT_CHAOTIC_BOOST_FOE
-	ResetEventFlag EVENT_SANCTUARY_FOE
-	ResetEventFlag EVENT_SIEGEBREAKER_FOE
-	ResetEventFlag EVENT_PROVOCATEUR_FOE
-	ResetEventFlag EVENT_DISARM_FOE
-	ResetEventFlag EVENT_ALLURE_FOE
-	ret
-
-; ========================
-; === EntryAbilities 1 ===
-; ========================
-
-HandleDrizzle:
-	; check if switched in pokemon has drizzle
+CurMonInList:
+; Return carry if the hBattleTurn side's mon is in species list hl.
+	push hl
 	call GetCurrentMon
-	ld hl, DrizzlePokemon
-	call IsInByteArray
-	ret nc
+	pop hl
+	jmp IsInByteArray
 
-	; if it is raining, don't activate
-    ld a, [wBattleWeather]
-    cp WEATHER_RAIN
-    ret z
+PlayEntryAbilityAnim:
+; Play animation de unless battle animations are off. Preserves hl.
+	ld a, [wOptions]
+	bit BATTLE_SCENE, a
+	ret nz
+	push hl
+	farcall Call_PlayBattleAnim
+	pop hl
+	ret
 
-    ; Set up rain for 255 turns
-	ld a, WEATHER_RAIN
-	ld [wBattleWeather], a
+PlayEntryAnimAndText:
+; Play animation de, then print text hl.
+	call PlayEntryAbilityAnim
+	jmp StdBattleTextbox
+
+GetUserScreens:
+; hl = the hBattleTurn side's wPlayerScreens/wEnemyScreens
+	ld hl, wPlayerScreens
+	ldh a, [hBattleTurn]
+	and a
+	ret z
+	ld hl, wEnemyScreens
+	ret
+
+GetTargetScreens:
+	ld hl, wEnemyScreens
+	ldh a, [hBattleTurn]
+	and a
+	ret z
+	ld hl, wPlayerScreens
+	ret
+
+EitherSideScreens:
+; Return nz if either side has any of the screens in mask b up.
+	ld a, [wPlayerScreens]
+	ld c, a
+	ld a, [wEnemyScreens]
+	or c
+	and b
+	ret
+
+; ===============
+; === Weather ===
+; ===============
+
+SetEntryWeather:
+; Set weather a for 255 turns. Return z if that weather was already up.
+	ld hl, wBattleWeather
+	cp [hl]
+	ret z
+	ld [hl], a
 	ld a, 255
 	ld [wWeatherCount], a
+	ret ; nz
 
-	; slide the ability popup over the acting side's HUD
-	ld b, BANK(AbilityPopup_DrizzleText)
-	ldh a, [hBattleTurn]
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
-	ld de, AbilityPopup_DrizzleText
-	farjp ShowAbilityPopup
+HandleDrizzle:
+	ld hl, DrizzlePokemon
+	call CurMonInList
+	ret nc
+	ld a, WEATHER_RAIN
+	call SetEntryWeather
+	ret z
+	ShowActivationOrEntryOrKOAbilityPopup AbilityPopup_DrizzleText
+	ret
 
 AbilityPopup_DrizzleText:
 	db "Drizzle@"
 
 INCLUDE "data/abilities/drizzle_mons.asm"
 
-HandleDefenseMode:
-	; check if switched in pokemon has defense mode
-	call GetCurrentMon
-	ld hl, DefenseModePokemon
-	call IsInByteArray
-	ret nc
-
-	ShowActivationOrEntryOrKOAbilityPopup DefenseText
-
-    farcall BattleCommand_DefenseUp2
-    farcall BattleCommand_StatUpMessage
-    farcall BattleCommand_SpecialDefenseUp2
-    farcall BattleCommand_StatUpMessage
-
-	ld hl, DefenseModeText
-	jmp StdBattleTextbox
-
-DefenseText: db "Defense!@"
-INCLUDE "data/abilities/defense_mode_mons.asm"
-
 HandleDrought:
-	; check if switched in pokemon has drought
-	call GetCurrentMon
 	ld hl, DroughtPokemon
-	call IsInByteArray
+	call CurMonInList
 	ret nc
-
-	; if sun is up, don't activate
-    ld a, [wBattleWeather]
-    cp WEATHER_SUN
-    ret z
-
-    ; Set up sun for 255 turns
 	ld a, WEATHER_SUN
-	ld [wBattleWeather], a
-	ld a, 255
-	ld [wWeatherCount], a
-
+	call SetEntryWeather
+	ret z
 	ld hl, BattleText_DroughtText
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/drought_mons.asm"
 
 HandleSandStream:
-	; check if switched in pokemon has sand stream
-	call GetCurrentMon
 	ld hl, SandStreamPokemon
-	call IsInByteArray
+	call CurMonInList
 	ret nc
-
-	; if sand storm is up, don't activate
-    ld a, [wBattleWeather]
-    cp WEATHER_SANDSTORM
-    ret z
-
-    ; Set up sand for 255 turns
 	ld a, WEATHER_SANDSTORM
-	ld [wBattleWeather], a
-	ld a, 255
-	ld [wWeatherCount], a
-
+	call SetEntryWeather
+	ret z
 	ld hl, BattleText_SandStreamText
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/sand_stream_mons.asm"
 
 HandleSnowWarning:
-	; check if switched in pokemon has snow warning
-	call GetCurrentMon
 	ld hl, SnowWarningPokemon
-	call IsInByteArray
+	call CurMonInList
 	ret nc
-
-	; if hail is up, don't activate
-    ld a, [wBattleWeather]
-    cp WEATHER_HAIL
-    ret z
-
-    ; Set up hail for 255 turns
 	ld a, WEATHER_HAIL
-	ld [wBattleWeather], a
-	ld a, 255
-	ld [wWeatherCount], a
-
+	call SetEntryWeather
+	ret z
 	ld hl, BattleText_SnowWarningText
 	jmp StdBattleTextbox
 
 INCLUDE "data/abilities/snow_warning_mons.asm"
 
-HandleNaturalCure:
-	; check if switched in pokemon has natural cure
-	call GetCurrentMon
-	ld hl, NaturalCurePokemon
-	call IsInByteArray
+; ===================
+; === Own effects ===
+; ===================
+
+HandleSpinGuard:
+	ld hl, SpinGuardPokemon
+	call CurMonInList
 	ret nc
+	ld b, HAZARDS_MASK
+	call EitherSideScreens
+	ret z
+	callfar BattleCommand_ClearHazards
+	ld de, ANIM_SPIN_GUARD
+	ld hl, BlewSpikesText
+	jmp PlayEntryAnimAndText
 
-	call DoNaturalCure
-	farjp CalcPokemonStats
+INCLUDE "data/abilities/spin_guard_mons.asm"
 
-DoNaturalCure:
+HandleNaturalCure:
+	ld hl, NaturalCurePokemon
+	call CurMonInList
+	ret nc
 	ld a, BATTLE_VARS_STATUS
 	call GetBattleVarAddr
 	and a
-	ret z
-	xor a
-	ld [hl], a
+	jr z, .done
+	ld [hl], 0
 	farcall SwitchTurnCore
 	farcall ItemRecoveryAnim
 	farcall SwitchTurnCore
 	ld hl, BecameHealthyText
-	jmp StdBattleTextbox
+	call StdBattleTextbox
+.done
+	farjp CalcPokemonStats
 
 INCLUDE "data/abilities/natural_cure_mons.asm"
 
-; ========================
-; === EntryAbilities 2 ===
-; ========================
-
-HandleReflectBarrier:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_REFLECT_BARRIER_PLAYER
-	ret nz
-	SetEventFlag EVENT_REFLECT_BARRIER_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_REFLECT_BARRIER_FOE
-	ret nz
-	SetEventFlag EVENT_REFLECT_BARRIER_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has reflect barrier
-	call GetCurrentMon
-	ld hl, ReflectBarrierPokemon
-	call IsInByteArray
+HandleDefenseMode:
+	ld hl, DefenseModePokemon
+	call CurMonInList
 	ret nc
-
-	; select correct screen + counter
-	ld hl, wPlayerScreens
-	ld bc, wPlayerReflectCount
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .got_pointers
-	ld hl, wEnemyScreens
-	ld bc, wEnemyReflectCount
-
-.got_pointers
-	; don't reapply if Reflect already up
-	bit SCREENS_REFLECT, [hl]
-	ret nz
-
-	; set Reflect for 5 turns
-	set SCREENS_REFLECT, [hl]
-	ld a, 5
-	ld [bc], a
-
-	; don't play damage effect when animation goes off
-	xor a
-	ld [wNumHits], a
-	farcall Call_PlayBattleAnim_OnlyIfVisible
-
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play reflect animation
-	ld de, REFLECT
-	farcall Call_PlayBattleAnim
-
-.skip_anim
-	ld hl, ReflectBarrierText
+	ShowActivationOrEntryOrKOAbilityPopup DefenseText
+	farcall BattleCommand_DefenseUp2
+	farcall BattleCommand_StatUpMessage
+	farcall BattleCommand_SpecialDefenseUp2
+	farcall BattleCommand_StatUpMessage
+	ld hl, DefenseModeText
 	jmp StdBattleTextbox
 
-INCLUDE "data/abilities/reflect_barrier_mons.asm"
+DefenseText: db "Defense!@"
 
-HandleLightBarrier:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_LIGHT_BARRIER_PLAYER
-	ret nz
-	SetEventFlag EVENT_LIGHT_BARRIER_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_LIGHT_BARRIER_FOE
-	ret nz
-	SetEventFlag EVENT_LIGHT_BARRIER_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has light barrier
-	call GetCurrentMon
-	ld hl, LightBarrierPokemon
-	call IsInByteArray
-	ret nc
-
-	; select correct screen + counter
-	ld hl, wPlayerScreens
-	ld bc, wPlayerLightScreenCount
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .got_pointers
-	ld hl, wEnemyScreens
-	ld bc, wEnemyLightScreenCount
-
-.got_pointers
-	; don't reapply if light screen already up
-	bit SCREENS_LIGHT_SCREEN, [hl]
-	ret nz
-
-	; set Light Screen for 5 turns
-	set SCREENS_LIGHT_SCREEN, [hl]
-	ld a, 5
-	ld [bc], a
-
-	; don't play damage effect when animation goes off
-	xor a
-	ld [wNumHits], a
-	farcall Call_PlayBattleAnim_OnlyIfVisible
-
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play light screen animation
-	ld de, LIGHT_SCREEN
-	farcall Call_PlayBattleAnim
-
-.skip_anim
-	ld hl, LightBarrierText
-	jmp StdBattleTextbox
-
-INCLUDE "data/abilities/light_barrier_mons.asm"
-
-HandleIntimidate:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_INTIMIDATE_PLAYER
-	ret nz
-	SetEventFlag EVENT_INTIMIDATE_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_INTIMIDATE_FOE
-	ret nz
-	SetEventFlag EVENT_INTIMIDATE_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-HandleNonLinkIntimidate:
-	; check if current pokemon has intimidate
-	call GetCurrentMon
-	ld hl, IntimidatePokemon
-	call IsInByteArray
-	ret nc
-
-	ShowActivationOrEntryOrKOAbilityPopup IntimidateText
-
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play leer animation
-	ld de, LEER
-	farcall Call_PlayBattleAnim
-.skip_anim
-	farcall BattleCommand_AttackDown
-	farjp BattleCommand_StatDownMessage
-
-IntimidateText: db "Intimidate@"
-INCLUDE "data/abilities/intimidate_mons.asm"
+INCLUDE "data/abilities/defense_mode_mons.asm"
 
 HandleBattleStance:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_BATTLE_STANCE_PLAYER
-	ret nz
-	SetEventFlag EVENT_BATTLE_STANCE_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_BATTLE_STANCE_FOE
-	ret nz
-	SetEventFlag EVENT_BATTLE_STANCE_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if switched in pokemon has battle stance
-	call GetCurrentMon
 	ld hl, BattleStancePokemon
-	call IsInByteArray
+	call CurMonInList
 	ret nc
-
 	ld hl, BattleStanceText
 	call StdBattleTextbox
-
 	farcall BattleCommand_DefenseUp
 	farjp BattleCommand_StatUpMessage
 
 INCLUDE "data/abilities/battle_stance_mons.asm"
 
 HandleBattleDrive:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_BATTLE_DRIVE_PLAYER
-	ret nz
-	SetEventFlag EVENT_BATTLE_DRIVE_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_BATTLE_DRIVE_FOE
-	ret nz
-	SetEventFlag EVENT_BATTLE_DRIVE_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if switched in pokemon has battle drive
-	call GetCurrentMon
 	ld hl, BattleDrivePokemon
-	call IsInByteArray
+	call CurMonInList
 	ret nc
-
 	ld hl, BattleDriveText
 	call StdBattleTextbox
-
 	farcall BattleCommand_AttackUp
 	farjp BattleCommand_StatUpMessage
 
 INCLUDE "data/abilities/battle_drive_mons.asm"
 
 HandleChaoticBoost:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_CHAOTIC_BOOST_PLAYER
-	ret nz
-	SetEventFlag EVENT_CHAOTIC_BOOST_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_CHAOTIC_BOOST_FOE
-	ret nz
-	SetEventFlag EVENT_CHAOTIC_BOOST_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if switched in pokemon has battle drive
-	call GetCurrentMon
 	ld hl, ChaoticBoostPokemon
-	call IsInByteArray
+	call CurMonInList
 	ret nc
-
 	ld hl, ChaoticBoostText
 	call StdBattleTextbox
-
 	call BattleRandom
 	cp 43
 	jr c, .AtkUp
@@ -611,9 +356,8 @@ HandleChaoticBoost:
 	jr c, .SpDefUp
 	cp 215
 	jr c, .SpdUp
-	cp 255
-	jr c, .EvasionUp
-	ret
+	farcall BattleCommand_EvasionUp
+	farjp BattleCommand_StatUpMessage
 
 .AtkUp
 	farcall BattleCommand_AttackUp
@@ -635,1117 +379,358 @@ HandleChaoticBoost:
 	farcall BattleCommand_SpeedUp
 	farjp BattleCommand_StatUpMessage
 
-.EvasionUp
-	farcall BattleCommand_EvasionUp
-	farjp BattleCommand_StatUpMessage
-
 INCLUDE "data/abilities/chaotic_boost_mons.asm"
 
-HandleTrueSight:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_TRUE_SIGHT_PLAYER
-	ret nz
-	SetEventFlag EVENT_TRUE_SIGHT_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_TRUE_SIGHT_FOE
-	ret nz
-	SetEventFlag EVENT_TRUE_SIGHT_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has true sight
-	call GetCurrentMon
-	ld hl, TrueSightPokemon
-	call IsInByteArray
-	ret nc
-
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play foresight animation
-	ld de, FORESIGHT
-	farcall Call_PlayBattleAnim
-
-.skip_anim
-	ld hl, TrueSightText
-	call StdBattleTextbox
-
-	farjp BattleCommand_Foresight
-
-INCLUDE "data/abilities/true_sight_mons.asm"
-
-HandleFogOfWar:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_FOG_OF_WAR_PLAYER
-	ret nz
-	SetEventFlag EVENT_FOG_OF_WAR_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_FOG_OF_WAR_FOE
-	ret nz
-	SetEventFlag EVENT_FOG_OF_WAR_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has fog of war
-	call GetCurrentMon
-	ld hl, FogOfWarPokemon
-	call IsInByteArray
-	ret nc
-
-	; only use if foe's stats is buffed by at least 1 stage
-	ld a, [wEnemyAtkLevel]
-	cp BASE_STAT_LEVEL + 1
-	jr nc, .stat_buffed_so_activate_fog_of_war
-	ld a, [wEnemyDefLevel]
-	cp BASE_STAT_LEVEL + 1
-	jr nc, .stat_buffed_so_activate_fog_of_war
-	ld a, [wEnemySAtkLevel]
-	cp BASE_STAT_LEVEL + 1
-	jr nc, .stat_buffed_so_activate_fog_of_war
-	ld a, [wEnemySDefLevel]
-	cp BASE_STAT_LEVEL + 1
-	jr nc, .stat_buffed_so_activate_fog_of_war
-	ld a, [wEnemySpdLevel]
-	cp BASE_STAT_LEVEL + 1
-	jr nc, .stat_buffed_so_activate_fog_of_war
-	ld a, [wEnemyAccLevel]
-	cp BASE_STAT_LEVEL + 1
-	jr nc, .stat_buffed_so_activate_fog_of_war
-	ld a, [wEnemyEvaLevel]
-	cp BASE_STAT_LEVEL + 1
-	ret c
-
-.stat_buffed_so_activate_fog_of_war
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play haze animation
-	ld de, HAZE
-	farcall Call_PlayBattleAnim
-
-.skip_anim
-	ld hl, FogOfWarText
-	call StdBattleTextbox
-
-	farjp BattleCommand_ResetStats
-
-INCLUDE "data/abilities/fog_of_war_mons.asm"
-
-HandleCleanSweep:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_DEFOG_PLAYER
-	ret nz
-	SetEventFlag EVENT_DEFOG_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_DEFOG_FOE
-	ret nz
-	SetEventFlag EVENT_DEFOG_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has clean sweep
-	call GetCurrentMon
-	ld hl, CleanSweepPokemon
-	call IsInByteArray
-	ret nc
-
-    call AnyFieldEffectPresent
-    ret nc
-
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play defog animation
-	ld de, DEFOG
-	farcall Call_PlayBattleAnim
-
-.skip_anim
-	ld hl, CleanSweepText
-	call StdBattleTextbox
-
-	farjp BattleCommand_Defog
-
-INCLUDE "data/abilities/clean_sweep_mons.asm"
-
-HandleRockSnare:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_ROCK_SNARE_PLAYER
-	ret nz
-	SetEventFlag EVENT_ROCK_SNARE_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_ROCK_SNARE_FOE
-	ret nz
-	SetEventFlag EVENT_ROCK_SNARE_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has rock snare
-	call GetCurrentMon
-	ld hl, RockSnarePokemon
-	call IsInByteArray
-	ret nc
-
-	ld hl, wEnemyScreens
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .got_screens
-	ld hl, wPlayerScreens
-.got_screens
-    bit SCREENS_STEALTH_ROCK, [hl]
-    ret nz
-	set SCREENS_STEALTH_ROCK, [hl]
-
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play stealth rock animation
-	ld de, STEALTH_ROCK
-	farcall Call_PlayBattleAnim
-
-.skip_anim
-	ld hl, RockSnareText
-	jmp StdBattleTextbox
-
-INCLUDE "data/abilities/rock_snare_mons.asm"
-
-HandleCaltropper:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_CALTROPPER_PLAYER
-	ret nz
-	SetEventFlag EVENT_CALTROPPER_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_CALTROPPER_FOE
-	ret nz
-	SetEventFlag EVENT_CALTROPPER_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has caltropper
-	call GetCurrentMon
-	ld hl, CaltropperPokemon
-	call IsInByteArray
-	ret nc
-
-	ld hl, wEnemyScreens
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .got_screens
-	ld hl, wPlayerScreens
-.got_screens
-    bit SCREENS_SPIKES, [hl]
-    ret nz
-	set SCREENS_SPIKES, [hl]
-
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play spikes animation
-	ld de, SPIKES
-	farcall Call_PlayBattleAnim
-
-.skip_anim
-	ld hl, CaltropperText
-	jmp StdBattleTextbox
-
-INCLUDE "data/abilities/caltropper_mons.asm"
-
-HandleVenomField:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_VENOM_FIELD_PLAYER
-	ret nz
-	SetEventFlag EVENT_VENOM_FIELD_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_VENOM_FIELD_FOE
-	ret nz
-	SetEventFlag EVENT_VENOM_FIELD_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has venom field
-	call GetCurrentMon
-	ld hl, VenomFieldPokemon
-	call IsInByteArray
-	ret nc
-
-	ld hl, wEnemyScreens
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .got_screens
-	ld hl, wPlayerScreens
-.got_screens
-    bit SCREENS_TOXIC_SPIKES, [hl]
-    ret nz
-	set SCREENS_TOXIC_SPIKES, [hl]
-
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play toxic spikes animation
-	ld de, TOXIC_SPIKES
-	farcall Call_PlayBattleAnim
-
-.skip_anim
-	ld hl, VenomFieldText
-	jmp StdBattleTextbox
-
-INCLUDE "data/abilities/venom_field_mons.asm"
-
-HandleSilkSnare:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_SILK_SNARE_PLAYER
-	ret nz
-	SetEventFlag EVENT_SILK_SNARE_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_SILK_SNARE_FOE
-	ret nz
-	SetEventFlag EVENT_SILK_SNARE_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has silk snare
-	call GetCurrentMon
-	ld hl, SilkSnarePokemon
-	call IsInByteArray
-	ret nc
-
-	ld hl, wEnemyScreens
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .got_screens
-	ld hl, wPlayerScreens
-.got_screens
-    bit SCREENS_STICKY_WEB, [hl]
-    ret nz
-	set SCREENS_STICKY_WEB, [hl]
-
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play sticky web animation
-	ld de, STICKY_WEB
-	farcall Call_PlayBattleAnim
-
-.skip_anim
-	ld hl, SilkSnareText
-	jmp StdBattleTextbox
-
-INCLUDE "data/abilities/silk_snare_mons.asm"
-
-HandleChronoShift:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_CHRONO_SHIFT_PLAYER
-	ret nz
-	SetEventFlag EVENT_CHRONO_SHIFT_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_CHRONO_SHIFT_FOE
-	ret nz
-	SetEventFlag EVENT_CHRONO_SHIFT_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has chrono shift
-	call GetCurrentMon
-	ld hl, ChronoShiftPokemon
-	call IsInByteArray
-	ret nc
-
-	ld a, [wTrickRoomCount]
-	and a
-	ret nz
-	ld a, 5
-	ld [wTrickRoomCount], a
-
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play sticky web animation
-	ld de, TRICK_ROOM
-	farcall Call_PlayBattleAnim
-
-.skip_anim
-	ld hl, ChronoShiftText
-	jmp StdBattleTextbox
-
-INCLUDE "data/abilities/chrono_shift_mons.asm"
-
 HandleFortify:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_FORTIFY_PLAYER
-	ret nz
-	SetEventFlag EVENT_FORTIFY_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_FORTIFY_FOE
-	ret nz
-	SetEventFlag EVENT_FORTIFY_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has fortify
-	call GetCurrentMon
 	ld hl, FortifyPokemon
-	call IsInByteArray
+	call CurMonInList
 	ret nc
-
-	; don't play damage effect when animation goes off
-	xor a
-	ld [wNumHits], a
-	farcall Call_PlayBattleAnim_OnlyIfVisible
-
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play barrier animation
 	ld de, BARRIER
-	farcall Call_PlayBattleAnim
-
-.skip_anim
 	ld hl, FortifyText
-	call StdBattleTextbox
+	call PlayEntryAnimAndText
 	farjp BattleCommand_Barrier
 
 INCLUDE "data/abilities/fortify_mons.asm"
 
 HandleImposter:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_IMPOSTER_PLAYER
-	ret nz
-	SetEventFlag EVENT_IMPOSTER_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_IMPOSTER_FOE
-	ret nz
-	SetEventFlag EVENT_IMPOSTER_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has imposter
-	call GetCurrentMon
 	ld hl, ImposterPokemon
-	call IsInByteArray
+	call CurMonInList
 	ret nc
-
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play transform animation
 	ld de, TRANSFORM
-	farcall Call_PlayBattleAnim
-
-.skip_anim
 	ld hl, ImposterText
-	call StdBattleTextbox
+	call PlayEntryAnimAndText
 	farjp BattleCommand_Transform
 
 INCLUDE "data/abilities/imposter_mons.asm"
 
-HandleSpinGuard:
-	; check if current pokemon has spin guard
-	call GetCurrentMon
-	ld hl, SpinGuardPokemon
-	call IsInByteArray
+; ===============
+; === Screens ===
+; ===============
+
+HandleReflectBarrier:
+	ld hl, ReflectBarrierPokemon
+	call CurMonInList
 	ret nc
+	ld a, 1 << SCREENS_REFLECT
+	ld bc, wPlayerReflectCount
+	ld de, wEnemyReflectCount
+	call SetEntryScreen
+	ret z
+	ld de, REFLECT
+	ld hl, ReflectBarrierText
+	jmp PlayEntryAnimAndText
 
-    call AnyHazardsPresent
-    ret nc
-    callfar BattleCommand_ClearHazards
+INCLUDE "data/abilities/reflect_barrier_mons.asm"
 
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play spin guard animation
-	ld de, ANIM_SPIN_GUARD
-	farcall Call_PlayBattleAnim
-
-.skip_anim
-	ld hl, BlewSpikesText
-	jmp StdBattleTextbox
-
-INCLUDE "data/abilities/spin_guard_mons.asm"
-
-HandleSeedfall:
-	; check if current pokemon has seedfall
-	call GetCurrentMon
-	ld hl, SeedfallPokemon
-	call IsInByteArray
+HandleLightBarrier:
+	ld hl, LightBarrierPokemon
+	call CurMonInList
 	ret nc
+	ld a, 1 << SCREENS_LIGHT_SCREEN
+	ld bc, wPlayerLightScreenCount
+	ld de, wEnemyLightScreenCount
+	call SetEntryScreen
+	ret z
+	ld de, LIGHT_SCREEN
+	ld hl, LightBarrierText
+	jmp PlayEntryAnimAndText
 
-	; skip if foe is already seeded
-	ld a, BATTLE_VARS_SUBSTATUS4_OPP
-	call GetBattleVarAddr
-	bit SUBSTATUS_LEECH_SEED, [hl]
+INCLUDE "data/abilities/light_barrier_mons.asm"
+
+SetEntryScreen:
+; Put up screen mask a on the user's side for 5 turns.
+; bc = the player's turn counter, de = the enemy's. Return z if already up.
+	push af
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_counter
+	ld b, d
+	ld c, e
+.got_counter
+	call GetUserScreens
+	pop de ; d = mask
+	ld a, [hl]
+	and d
+	jr nz, .already_up
+	ld a, [hl]
+	or d
+	ld [hl], a
+	ld a, 5
+	ld [bc], a
+	ret ; nz
+
+.already_up
+	xor a
+	ret
+
+HandleSanctuary:
+	ld hl, SanctuaryPokemon
+	call CurMonInList
+	ret nc
+	call GetUserScreens
+	bit SCREENS_SAFEGUARD, [hl]
 	ret nz
+	ld de, SAFEGUARD
+	call PlayEntryAbilityAnim
+	farjp BattleCommand_Safeguard ; prints its own text
 
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
+INCLUDE "data/abilities/sanctuary_mons.asm"
 
-	; play leech seed animation
-	ld de, LEECH_SEED
-	farcall Call_PlayBattleAnim
+HandleSiegebreaker:
+	ld hl, SiegebreakerPokemon
+	call CurMonInList
+	ret nc
+	ld b, 1 << SCREENS_REFLECT | 1 << SCREENS_LIGHT_SCREEN
+	call EitherSideScreens
+	ret z
+	ld de, BRICK_BREAK
+	ld hl, SiegebreakerText
+	call PlayEntryAnimAndText
+	farjp BattleCommand_BreakScreens
 
-.skip_anim
-    farjp BattleCommand_LeechSeed
+INCLUDE "data/abilities/siegebreaker_mons.asm"
 
-INCLUDE "data/abilities/seedfall_mons.asm"
+HandleCleanSweep:
+	ld hl, CleanSweepPokemon
+	call CurMonInList
+	ret nc
+	; any weather or any screen/hazard on either side
+	ld a, [wFieldWeather]
+	ld b, a
+	ld a, [wBattleWeather]
+	or b ; WEATHER_NONE
+	jr nz, .sweep
+	ld b, $ff ; every SCREENS_* bit
+	call EitherSideScreens
+	ret z
+.sweep
+	ld de, DEFOG
+	ld hl, CleanSweepText
+	call PlayEntryAnimAndText
+	farjp BattleCommand_Defog
+
+INCLUDE "data/abilities/clean_sweep_mons.asm"
+
+; ===============
+; === Hazards ===
+; ===============
+
+HandleRockSnare:
+	ld hl, RockSnarePokemon
+	call CurMonInList
+	ret nc
+	ld b, 1 << SCREENS_STEALTH_ROCK
+	ld de, STEALTH_ROCK
+	ld hl, RockSnareText
+	jr SetEntryHazard
+
+INCLUDE "data/abilities/rock_snare_mons.asm"
+
+HandleCaltropper:
+	ld hl, CaltropperPokemon
+	call CurMonInList
+	ret nc
+	ld b, 1 << SCREENS_SPIKES
+	ld de, SPIKES
+	ld hl, CaltropperText
+	jr SetEntryHazard
+
+INCLUDE "data/abilities/caltropper_mons.asm"
+
+HandleVenomField:
+	ld hl, VenomFieldPokemon
+	call CurMonInList
+	ret nc
+	ld b, 1 << SCREENS_TOXIC_SPIKES
+	ld de, TOXIC_SPIKES
+	ld hl, VenomFieldText
+	jr SetEntryHazard
+
+INCLUDE "data/abilities/venom_field_mons.asm"
+
+HandleSilkSnare:
+	ld hl, SilkSnarePokemon
+	call CurMonInList
+	ret nc
+	ld b, 1 << SCREENS_STICKY_WEB
+	ld de, STICKY_WEB
+	ld hl, SilkSnareText
+	; fallthrough
+
+SetEntryHazard:
+; Lay hazard b on the target's side, then play animation de and print text hl.
+	push hl
+	call GetTargetScreens
+	ld a, [hl]
+	and b
+	jr nz, .already_up
+	ld a, [hl]
+	or b
+	ld [hl], a
+	pop hl
+	jmp PlayEntryAnimAndText
+
+.already_up
+	pop hl
+	ret
+
+INCLUDE "data/abilities/silk_snare_mons.asm"
+
+; =========================
+; === Effects on target ===
+; =========================
+
+HandleIntimidate:
+	ld hl, IntimidatePokemon
+	call CurMonInList
+	ret nc
+	ShowActivationOrEntryOrKOAbilityPopup IntimidateText
+	ld de, LEER
+	call PlayEntryAbilityAnim
+	farcall BattleCommand_AttackDown
+	farjp BattleCommand_StatDownMessage
+
+IntimidateText: db "Intimidate@"
+
+INCLUDE "data/abilities/intimidate_mons.asm"
 
 HandleInfernalHowl:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_INFERNAL_HOWL_PLAYER
-	ret nz
-	SetEventFlag EVENT_INFERNAL_HOWL_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_INFERNAL_HOWL_FOE
-	ret nz
-	SetEventFlag EVENT_INFERNAL_HOWL_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has infernal howl
-	call GetCurrentMon
 	ld hl, InfernalHowlPokemon
-	call IsInByteArray
+	call CurMonInList
 	ret nc
-
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play growl animation
 	ld de, GROWL
-	farcall Call_PlayBattleAnim
-
-.skip_anim
 	ld hl, InfernalHowlText
-	call StdBattleTextbox
-
+	call PlayEntryAnimAndText
 	farcall BattleCommand_SpecialAttackDown
 	farjp BattleCommand_StatDownMessage
 
 INCLUDE "data/abilities/infernal_howl_mons.asm"
 
-HandleSanctuary:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_SANCTUARY_PLAYER
-	ret nz
-	SetEventFlag EVENT_SANCTUARY_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_SANCTUARY_FOE
-	ret nz
-	SetEventFlag EVENT_SANCTUARY_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has sanctuary
-	call GetCurrentMon
-	ld hl, SanctuaryPokemon
-	call IsInByteArray
+HandleSeedfall:
+	ld hl, SeedfallPokemon
+	call CurMonInList
 	ret nc
+	; skip if the target is already seeded
+	ld a, BATTLE_VARS_SUBSTATUS4_OPP
+	call GetBattleVarAddr
+	bit SUBSTATUS_LEECH_SEED, [hl]
+	ret nz
+	ld de, LEECH_SEED
+	call PlayEntryAbilityAnim
+	farjp BattleCommand_LeechSeed
 
-	ld hl, wPlayerScreens
-	ld de, wPlayerSafeguardCount
+INCLUDE "data/abilities/seedfall_mons.asm"
+
+HandleTrueSight:
+	ld hl, TrueSightPokemon
+	call CurMonInList
+	ret nc
+	ld de, FORESIGHT
+	ld hl, TrueSightText
+	call PlayEntryAnimAndText
+	farjp BattleCommand_Foresight
+
+INCLUDE "data/abilities/true_sight_mons.asm"
+
+HandleFogOfWar:
+	ld hl, FogOfWarPokemon
+	call CurMonInList
+	ret nc
+	; only if one of the target's stats is raised
+	ld hl, wEnemyStatLevels
 	ldh a, [hBattleTurn]
 	and a
-	jr z, .ok
-	ld hl, wEnemyScreens
-	ld de, wEnemySafeguardCount
-.ok
-	bit SCREENS_SAFEGUARD, [hl]
-	ret nz
+	jr z, .got_levels
+	ld hl, wPlayerStatLevels
+.got_levels
+	ld b, NUM_LEVEL_STATS
+.loop
+	ld a, [hli]
+	cp BASE_STAT_LEVEL + 1
+	jr nc, .raised
+	dec b
+	jr nz, .loop
+	ret
 
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
+.raised
+	ld de, HAZE
+	ld hl, FogOfWarText
+	call PlayEntryAnimAndText
+	farjp BattleCommand_ResetStats
 
-	; play safeguard animation
-	ld de, SAFEGUARD
-    farcall Call_PlayBattleAnim
+INCLUDE "data/abilities/fog_of_war_mons.asm"
 
-.skip_anim
-	farjp BattleCommand_Safeguard
-
-INCLUDE "data/abilities/sanctuary_mons.asm"
-
-HandleSiegebreaker:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_SIEGEBREAKER_PLAYER
-	ret nz
-	SetEventFlag EVENT_SIEGEBREAKER_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_SIEGEBREAKER_FOE
-	ret nz
-	SetEventFlag EVENT_SIEGEBREAKER_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has siegebreaker
-	call GetCurrentMon
-	ld hl, SiegebreakerPokemon
-	call IsInByteArray
+HandleChronoShift:
+	ld hl, ChronoShiftPokemon
+	call CurMonInList
 	ret nc
+	ld hl, wTrickRoomCount
+	ld a, [hl]
+	and a
+	ret nz
+	ld [hl], 5
+	ld de, TRICK_ROOM
+	ld hl, ChronoShiftText
+	jmp PlayEntryAnimAndText
 
-	call ReflectOrLightScreenUp
-	ret nc
-
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play brick break animation
-	ld de, BRICK_BREAK
-    farcall Call_PlayBattleAnim
-
-.skip_anim
-	ld hl, SiegebreakerText
-	call StdBattleTextbox
-
-	farjp BattleCommand_BreakScreens
-
-INCLUDE "data/abilities/siegebreaker_mons.asm"
+INCLUDE "data/abilities/chrono_shift_mons.asm"
 
 HandleProvocateur:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_PROVOCATEUR_PLAYER
-	ret nz
-	SetEventFlag EVENT_PROVOCATEUR_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_PROVOCATEUR_FOE
-	ret nz
-	SetEventFlag EVENT_PROVOCATEUR_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has provocateur
-	call GetCurrentMon
 	ld hl, ProvocateurPokemon
-	call IsInByteArray
+	call CurMonInList
 	ret nc
-
-; are we dealing with foe or player
-; end if the respecitve is already under taunt
-    ldh a, [hBattleTurn]
-	and a
-	jr z, .foe
-
-	ld a, [wPlayerTauntCount]
-	and a
-	ret nz
-	jr .taunt
-.foe
+	; not if the target is already taunted
 	ld a, [wEnemyTauntCount]
+	ld b, a
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_taunt
+	ld a, [wPlayerTauntCount]
+	ld b, a
+.got_taunt
+	ld a, b
 	and a
 	ret nz
-
-.taunt
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play taunt animation
 	ld de, TAUNT
-    farcall Call_PlayBattleAnim
-
-.skip_anim
 	ld hl, ProvocateurText
-	call StdBattleTextbox
-
+	call PlayEntryAnimAndText
 	farjp BattleCommand_Taunt
 
 INCLUDE "data/abilities/provocateur_mons.asm"
 
 HandleDisarm:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_DISARM_PLAYER
-	ret nz
-	SetEventFlag EVENT_DISARM_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_DISARM_FOE
-	ret nz
-	SetEventFlag EVENT_DISARM_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has disarm
-	call GetCurrentMon
 	ld hl, DisarmPokemon
-	call IsInByteArray
+	call CurMonInList
 	ret nc
-
-; ==================
-; === Check Turn ===
-; ==================
+	; the target must hold an item
+	ld a, [wEnemyMonItem]
+	ld b, a
 	ldh a, [hBattleTurn]
 	and a
-	jr nz, .enemy_turn
-
-; =====================
-; === Player's Turn ===
-; =====================
-; enemy must have an item
-	call CheckIfEnemyHasAnItem
-	ld a, [hl]
+	jr z, .got_item
+	ld a, [wBattleMonItem]
+	ld b, a
+.got_item
+	ld a, b
 	and a
 	ret z
-	jr .continue
-
-.enemy_turn
-; ====================
-; === Enemy's Turn ===
-; ====================
-; player must have an item
-	call CheckIfPlayerHasAnItem
-	ld a, [hl]
-	and a
-	ret z
-
-.continue
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play knock off animation
 	ld de, KNOCK_OFF
-	farcall Call_PlayBattleAnim
-
-.skip_anim
 	ld hl, DisarmText
-	call StdBattleTextbox
-
+	call PlayEntryAnimAndText
 	farjp BattleCommand_KnockOff
-
-; ===============
-; === HELPERS ===
-; ===============
-CheckIfPlayerHasAnItem:
-	ld a, MON_ITEM
-	call BattlePartyAttr
-	ld d, h
-	ld e, l
-	ld hl, wBattleMonItem
-	ret
-
-CheckIfEnemyHasAnItem:
-	ld a, MON_ITEM
-	call OTPartyAttr
-	ld d, h
-	ld e, l
-	ld hl, wEnemyMonItem
-	ret
 
 INCLUDE "data/abilities/disarm_mons.asm"
 
 HandleAllure:
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .reverse
-
-	call .player
-	jr .enemy
-
-.reverse
-	call .enemy
-	; fallthrough
-
-.player
-	CheckEventFlag EVENT_ALLURE_PLAYER
-	ret nz
-	SetEventFlag EVENT_ALLURE_PLAYER
-
-	call SetPlayerTurn
-	jr .do_check
-
-.enemy
-	CheckEventFlag EVENT_ALLURE_FOE
-	ret nz
-	SetEventFlag EVENT_ALLURE_FOE
-
-	call SetEnemyTurn
-	; fallthrough
-
-.do_check
-	; check if current pokemon has allure
-	call GetCurrentMon
 	ld hl, AllurePokemon
-	call IsInByteArray
+	call CurMonInList
 	ret nc
-
-	; exit if same gender
+	; only on the opposite gender
 	farcall CheckOppositeGender
 	ret c
-
-	ld a, [wOptions]
-	bit BATTLE_SCENE, a
-	jr nz, .skip_anim
-
-	; play attract animation
 	ld de, ATTRACT
-	farcall Call_PlayBattleAnim
-
-.skip_anim
 	ld hl, AllureText
-	call StdBattleTextbox
-
+	call PlayEntryAnimAndText
 	farjp BattleCommand_Attract
 
 INCLUDE "data/abilities/allure_mons.asm"
-
-AnyHazardsPresent:
-	ld a, [wPlayerScreens]
-	call AnyHazardsUp
-	jr c, .yes
-	ld a, [wEnemyScreens]
-	call AnyHazardsUp
-	jr c, .yes
-	xor a
-	ret
-.yes
-	scf
-	ret
-
-AnyHazardsUp:
-	bit SCREENS_SPIKES, a
-	jr nz, .yes
-	bit SCREENS_STEALTH_ROCK, a
-	jr nz, .yes
-	bit SCREENS_TOXIC_SPIKES, a
-	jr nz, .yes
-	bit SCREENS_STICKY_WEB, a
-	xor a
-	ret
-.yes
-    scf
-    ret
-
-AnyFieldEffectPresent:
-	ld a, [wFieldWeather]
-	cp WEATHER_NONE
-	jr nz, .yes
-	ld a, [wBattleWeather]
-	cp WEATHER_NONE
-	jr nz, .yes
-	ld a, [wPlayerScreens]
-	call AnyScreensUp
-	jr c, .yes
-	ld a, [wEnemyScreens]
-	call AnyScreensUp
-	jr c, .yes
-	xor a
-	ret
-
-.yes
-	scf
-	ret
-
-AnyScreensUp:
-	bit SCREENS_MIST, a
-	jr nz, .yes
-	bit SCREENS_SAFEGUARD, a
-	jr nz, .yes
-	bit SCREENS_LIGHT_SCREEN, a
-	jr nz, .yes
-	bit SCREENS_REFLECT, a
-	jr nz, .yes
-	bit SCREENS_SPIKES, a
-	jr nz, .yes
-	bit SCREENS_STEALTH_ROCK, a
-	jr nz, .yes
-	bit SCREENS_TOXIC_SPIKES, a
-	jr nz, .yes
-	bit SCREENS_STICKY_WEB, a
-	jr nz, .yes
-	xor a
-	ret
-
-.yes
-	scf
-	ret
-
-ReflectOrLightScreenUp:
-	ld a, [wPlayerScreens]
-	call EitherRelfectOrLightScreensUp
-	jr c, .yes
-	ld a, [wEnemyScreens]
-	call EitherRelfectOrLightScreensUp
-	jr c, .yes
-	xor a
-	ret
-
-.yes
-	scf
-	ret
-
-EitherRelfectOrLightScreensUp:
-	bit SCREENS_LIGHT_SCREEN, a
-	jr nz, .yes
-	bit SCREENS_REFLECT, a
-	jr nz, .yes
-	xor a
-	ret
-
-.yes
-	scf
-	ret

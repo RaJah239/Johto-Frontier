@@ -1,15 +1,4 @@
 BattleCommand_ClearHazards:
-
-    ; prevent reactivation of hazards by ability mons
-    SetEventFlag EVENT_ROCK_SNARE_PLAYER
-    SetEventFlag EVENT_CALTROPPER_PLAYER
-    SetEventFlag EVENT_VENOM_FIELD_PLAYER
-    SetEventFlag EVENT_SILK_SNARE_PLAYER
-    SetEventFlag EVENT_ROCK_SNARE_FOE
-    SetEventFlag EVENT_CALTROPPER_FOE
-    SetEventFlag EVENT_VENOM_FIELD_FOE
-    SetEventFlag EVENT_SILK_SNARE_FOE
-
 ; clear all hazards
     ld hl, wPlayerScreens
     res SCREENS_SPIKES, [hl]
