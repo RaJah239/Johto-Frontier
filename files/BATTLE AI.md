@@ -222,7 +222,7 @@ Two more rules stop it being exploited:
 - recoil and other held items, beyond their effect on damage
 
 ### Pivoting instead of switching
-Whenever it decides to switch (the 1-on-1 check above or [Smart switching](#smart-switching)), it first checks whether it can hit on the way out:
+90% of the time, whenever it decides to switch (the 1-on-1 check above or [Smart switching](#smart-switching)), it first checks whether it can hit on the way out:
 - it's faster than your Pokémon (counting paralysis, Trick Room and weather speed abilities; not on a speed tie)
 - it knows U-turn or Volt Switch with PP left, and it isn't Disabled
 - it isn't locked into another move (Encore or a Choice item)
