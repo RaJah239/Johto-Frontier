@@ -182,6 +182,65 @@ SolarPowerHPLoss_Activate:
 	ld hl, SolarPowerBattleText
 	jmp StdBattleTextbox
 
+; =============================
+; === Ability: Poison Heal ===
+; =============================
+PoisonHeal::
+; Called by ResidualDamage for a poisoned mon (hBattleTurn). If it has Poison
+; Heal, it heals instead of losing HP: 1/8 of its max HP, or with Toxic the
+; amount it would have lost (Toxic's counter still goes up). Return carry
+; then, so no poison damage is done.
+	call GetCurrentMon
+	ld hl, PoisonHealPokemon
+	call IsInByteArray
+	ret nc
+
+	ld a, BATTLE_VARS_SUBSTATUS5
+	call GetBattleVar
+	bit SUBSTATUS_TOXIC, a
+	jr nz, .toxic
+	farcall GetEighthMaxHP
+	jr .got_amount
+
+.toxic
+	ld hl, wPlayerToxicCount
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_count
+	ld hl, wEnemyToxicCount
+.got_count
+	inc [hl]
+	push hl
+	farcall GetSixteenthMaxHP
+	pop hl
+	ld a, [hl]
+	ld hl, 0
+.add
+	add hl, bc
+	dec a
+	jr nz, .add
+	ld b, h
+	ld c, l
+.got_amount
+	push bc
+	call TurnEndAbility_AtMaxHP
+	pop bc
+	jr z, .done ; nothing to heal, but no damage either
+	push bc
+	farcall EmptyBattleTextbox ; clear the last move's text first
+	ShowActivationOrEntryOrKOAbilityPopup PoisonHealText
+	farcall SwitchTurnCore
+	pop bc
+	farcall RestoreHP ; heals the other side's (hBattleTurn's original) mon
+	farcall SwitchTurnCore
+	ld hl, PoisonHealBattleText
+	call StdBattleTextbox
+.done
+	scf
+	ret
+
+PoisonHealText: db "Poison Heal@"
+
 RecoveryText: db "Recovery@"
 SpeedBoostText: db "Speed Boost@"
 TenacityText: db "Tenacity@"
@@ -204,3 +263,4 @@ INCLUDE "data/abilities/rain_dish_mons.asm"
 INCLUDE "data/abilities/sand_body_mons.asm"
 INCLUDE "data/abilities/tenacity_mons.asm"
 INCLUDE "data/abilities/photosynthesis_mons.asm"
+INCLUDE "data/abilities/poison_heal_mons.asm"

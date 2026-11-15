@@ -254,6 +254,12 @@ SandBodyText:
 	cont "Sand Body!"
 	prompt
 
+PoisonHealBattleText:
+	text "<USER>"
+	line "heals HP via its"
+	cont "Poison Heal!"
+	prompt
+
 RainDishText:
 	text "<TARGET>"
 	line "heals HP via its"

@@ -891,6 +891,15 @@ ResidualDamage:
 	and 1 << PSN | 1 << BRN | 1 << FRZ
 	jr z, .did_psn_brn
 
+	; Poison Heal: heals instead (engine/abilities/turn_end_abilities.asm)
+	bit PSN, a
+	jr z, .no_poison_heal
+	farcall PoisonHeal
+	jr c, .did_psn_brn
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVar
+
+.no_poison_heal
 	ld hl, HurtByPoisonText
 	ld de, ANIM_PSN
 	bit PSN, a
