@@ -158,6 +158,16 @@ CurMonInList:
 	pop hl
 	jmp IsInByteArray
 
+ShowEntryAbilityPopup:
+; Slide in ability name de (in this bank) over the user's HUD. Preserves hl.
+	ld b, BANK(@)
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	push hl
+	farcall ShowAbilityPopup
+	pop hl
+	ret
+
 PlayEntryAbilityAnim:
 ; Play animation de unless battle animations are off. Preserves hl.
 	ld a, [wOptions]
@@ -220,11 +230,10 @@ HandleDrizzle:
 	ld a, WEATHER_RAIN
 	call SetEntryWeather
 	ret z
-	ShowActivationOrEntryOrKOAbilityPopup AbilityPopup_DrizzleText
-	ret
+	ld de, DrizzlePopupText
+	jr ShowEntryAbilityPopup
 
-AbilityPopup_DrizzleText:
-	db "Drizzle@"
+DrizzlePopupText: db "Drizzle@"
 
 INCLUDE "data/abilities/drizzle_mons.asm"
 
@@ -235,6 +244,8 @@ HandleDrought:
 	ld a, WEATHER_SUN
 	call SetEntryWeather
 	ret z
+	ld de, DroughtPopupText
+	call ShowEntryAbilityPopup
 	ld hl, BattleText_DroughtText
 	jmp StdBattleTextbox
 
@@ -247,6 +258,8 @@ HandleSandStream:
 	ld a, WEATHER_SANDSTORM
 	call SetEntryWeather
 	ret z
+	ld de, SandStreamPopupText
+	call ShowEntryAbilityPopup
 	ld hl, BattleText_SandStreamText
 	jmp StdBattleTextbox
 
@@ -259,6 +272,8 @@ HandleSnowWarning:
 	ld a, WEATHER_HAIL
 	call SetEntryWeather
 	ret z
+	ld de, SnowWarningPopupText
+	call ShowEntryAbilityPopup
 	ld hl, BattleText_SnowWarningText
 	jmp StdBattleTextbox
 
@@ -275,6 +290,8 @@ HandleSpinGuard:
 	ld b, HAZARDS_MASK
 	call EitherSideScreens
 	ret z
+	ld de, SpinGuardPopupText
+	call ShowEntryAbilityPopup
 	callfar BattleCommand_ClearHazards
 	ld de, ANIM_SPIN_GUARD
 	ld hl, BlewSpikesText
@@ -290,6 +307,8 @@ HandleNaturalCure:
 	call GetBattleVarAddr
 	and a
 	jr z, .done
+	ld de, NaturalCurePopupText
+	call ShowEntryAbilityPopup
 	ld [hl], 0
 	farcall SwitchTurnCore
 	farcall ItemRecoveryAnim
@@ -305,7 +324,8 @@ HandleDefenseMode:
 	ld hl, DefenseModePokemon
 	call CurMonInList
 	ret nc
-	ShowActivationOrEntryOrKOAbilityPopup DefenseText
+	ld de, DefenseModePopupText
+	call ShowEntryAbilityPopup
 	farcall BattleCommand_DefenseUp2
 	farcall BattleCommand_StatUpMessage
 	farcall BattleCommand_SpecialDefenseUp2
@@ -313,7 +333,7 @@ HandleDefenseMode:
 	ld hl, DefenseModeText
 	jmp StdBattleTextbox
 
-DefenseText: db "Defense!@"
+DefenseModePopupText: db "Defense!@"
 
 INCLUDE "data/abilities/defense_mode_mons.asm"
 
@@ -321,6 +341,8 @@ HandleBattleStance:
 	ld hl, BattleStancePokemon
 	call CurMonInList
 	ret nc
+	ld de, BattleStancePopupText
+	call ShowEntryAbilityPopup
 	ld hl, BattleStanceText
 	call StdBattleTextbox
 	farcall BattleCommand_DefenseUp
@@ -332,6 +354,8 @@ HandleBattleDrive:
 	ld hl, BattleDrivePokemon
 	call CurMonInList
 	ret nc
+	ld de, BattleDrivePopupText
+	call ShowEntryAbilityPopup
 	ld hl, BattleDriveText
 	call StdBattleTextbox
 	farcall BattleCommand_AttackUp
@@ -343,6 +367,8 @@ HandleChaoticBoost:
 	ld hl, ChaoticBoostPokemon
 	call CurMonInList
 	ret nc
+	ld de, ChaoticBoostPopupText
+	call ShowEntryAbilityPopup
 	ld hl, ChaoticBoostText
 	call StdBattleTextbox
 	call BattleRandom
@@ -385,6 +411,8 @@ HandleFortify:
 	ld hl, FortifyPokemon
 	call CurMonInList
 	ret nc
+	ld de, FortifyPopupText
+	call ShowEntryAbilityPopup
 	ld de, BARRIER
 	ld hl, FortifyText
 	call PlayEntryAnimAndText
@@ -396,6 +424,8 @@ HandleImposter:
 	ld hl, ImposterPokemon
 	call CurMonInList
 	ret nc
+	ld de, ImposterPopupText
+	call ShowEntryAbilityPopup
 	ld de, TRANSFORM
 	ld hl, ImposterText
 	call PlayEntryAnimAndText
@@ -416,6 +446,8 @@ HandleReflectBarrier:
 	ld de, wEnemyReflectCount
 	call SetEntryScreen
 	ret z
+	ld de, ReflectBarrierPopupText
+	call ShowEntryAbilityPopup
 	ld de, REFLECT
 	ld hl, ReflectBarrierText
 	jmp PlayEntryAnimAndText
@@ -431,6 +463,8 @@ HandleLightBarrier:
 	ld de, wEnemyLightScreenCount
 	call SetEntryScreen
 	ret z
+	ld de, LightBarrierPopupText
+	call ShowEntryAbilityPopup
 	ld de, LIGHT_SCREEN
 	ld hl, LightBarrierText
 	jmp PlayEntryAnimAndText
@@ -470,6 +504,8 @@ HandleSanctuary:
 	call GetUserScreens
 	bit SCREENS_SAFEGUARD, [hl]
 	ret nz
+	ld de, SanctuaryPopupText
+	call ShowEntryAbilityPopup
 	ld de, SAFEGUARD
 	call PlayEntryAbilityAnim
 	farjp BattleCommand_Safeguard ; prints its own text
@@ -483,6 +519,8 @@ HandleSiegebreaker:
 	ld b, 1 << SCREENS_REFLECT | 1 << SCREENS_LIGHT_SCREEN
 	call EitherSideScreens
 	ret z
+	ld de, SiegebreakerPopupText
+	call ShowEntryAbilityPopup
 	ld de, BRICK_BREAK
 	ld hl, SiegebreakerText
 	call PlayEntryAnimAndText
@@ -504,6 +542,8 @@ HandleCleanSweep:
 	call EitherSideScreens
 	ret z
 .sweep
+	ld de, CleanSweepPopupText
+	call ShowEntryAbilityPopup
 	ld de, DEFOG
 	ld hl, CleanSweepText
 	call PlayEntryAnimAndText
@@ -520,9 +560,13 @@ HandleRockSnare:
 	call CurMonInList
 	ret nc
 	ld b, 1 << SCREENS_STEALTH_ROCK
+	call SetEntryHazard
+	ret z
+	ld de, RockSnarePopupText
+	call ShowEntryAbilityPopup
 	ld de, STEALTH_ROCK
 	ld hl, RockSnareText
-	jr SetEntryHazard
+	jmp PlayEntryAnimAndText
 
 INCLUDE "data/abilities/rock_snare_mons.asm"
 
@@ -531,9 +575,13 @@ HandleCaltropper:
 	call CurMonInList
 	ret nc
 	ld b, 1 << SCREENS_SPIKES
+	call SetEntryHazard
+	ret z
+	ld de, CaltropperPopupText
+	call ShowEntryAbilityPopup
 	ld de, SPIKES
 	ld hl, CaltropperText
-	jr SetEntryHazard
+	jmp PlayEntryAnimAndText
 
 INCLUDE "data/abilities/caltropper_mons.asm"
 
@@ -542,9 +590,13 @@ HandleVenomField:
 	call CurMonInList
 	ret nc
 	ld b, 1 << SCREENS_TOXIC_SPIKES
+	call SetEntryHazard
+	ret z
+	ld de, VenomFieldPopupText
+	call ShowEntryAbilityPopup
 	ld de, TOXIC_SPIKES
 	ld hl, VenomFieldText
-	jr SetEntryHazard
+	jmp PlayEntryAnimAndText
 
 INCLUDE "data/abilities/venom_field_mons.asm"
 
@@ -553,13 +605,18 @@ HandleSilkSnare:
 	call CurMonInList
 	ret nc
 	ld b, 1 << SCREENS_STICKY_WEB
+	call SetEntryHazard
+	ret z
+	ld de, SilkSnarePopupText
+	call ShowEntryAbilityPopup
 	ld de, STICKY_WEB
 	ld hl, SilkSnareText
-	; fallthrough
+	jmp PlayEntryAnimAndText
+
+INCLUDE "data/abilities/silk_snare_mons.asm"
 
 SetEntryHazard:
-; Lay hazard b on the target's side, then play animation de and print text hl.
-	push hl
+; Lay hazard mask b on the target's side. Return z if it was already there.
 	call GetTargetScreens
 	ld a, [hl]
 	and b
@@ -567,14 +624,11 @@ SetEntryHazard:
 	ld a, [hl]
 	or b
 	ld [hl], a
-	pop hl
-	jmp PlayEntryAnimAndText
+	ret ; nz
 
 .already_up
-	pop hl
+	xor a
 	ret
-
-INCLUDE "data/abilities/silk_snare_mons.asm"
 
 ; =========================
 ; === Effects on target ===
@@ -584,13 +638,14 @@ HandleIntimidate:
 	ld hl, IntimidatePokemon
 	call CurMonInList
 	ret nc
-	ShowActivationOrEntryOrKOAbilityPopup IntimidateText
+	ld de, IntimidatePopupText
+	call ShowEntryAbilityPopup
 	ld de, LEER
 	call PlayEntryAbilityAnim
 	farcall BattleCommand_AttackDown
 	farjp BattleCommand_StatDownMessage
 
-IntimidateText: db "Intimidate@"
+IntimidatePopupText: db "Intimidate@"
 
 INCLUDE "data/abilities/intimidate_mons.asm"
 
@@ -598,6 +653,8 @@ HandleInfernalHowl:
 	ld hl, InfernalHowlPokemon
 	call CurMonInList
 	ret nc
+	ld de, InfernalHowlPopupText
+	call ShowEntryAbilityPopup
 	ld de, GROWL
 	ld hl, InfernalHowlText
 	call PlayEntryAnimAndText
@@ -615,6 +672,8 @@ HandleSeedfall:
 	call GetBattleVarAddr
 	bit SUBSTATUS_LEECH_SEED, [hl]
 	ret nz
+	ld de, SeedfallPopupText
+	call ShowEntryAbilityPopup
 	ld de, LEECH_SEED
 	call PlayEntryAbilityAnim
 	farjp BattleCommand_LeechSeed
@@ -625,6 +684,8 @@ HandleTrueSight:
 	ld hl, TrueSightPokemon
 	call CurMonInList
 	ret nc
+	ld de, TrueSightPopupText
+	call ShowEntryAbilityPopup
 	ld de, FORESIGHT
 	ld hl, TrueSightText
 	call PlayEntryAnimAndText
@@ -653,6 +714,8 @@ HandleFogOfWar:
 	ret
 
 .raised
+	ld de, FogOfWarPopupText
+	call ShowEntryAbilityPopup
 	ld de, HAZE
 	ld hl, FogOfWarText
 	call PlayEntryAnimAndText
@@ -669,6 +732,8 @@ HandleChronoShift:
 	and a
 	ret nz
 	ld [hl], 5
+	ld de, ChronoShiftPopupText
+	call ShowEntryAbilityPopup
 	ld de, TRICK_ROOM
 	ld hl, ChronoShiftText
 	jmp PlayEntryAnimAndText
@@ -691,6 +756,8 @@ HandleProvocateur:
 	ld a, b
 	and a
 	ret nz
+	ld de, ProvocateurPopupText
+	call ShowEntryAbilityPopup
 	ld de, TAUNT
 	ld hl, ProvocateurText
 	call PlayEntryAnimAndText
@@ -714,6 +781,8 @@ HandleDisarm:
 	ld a, b
 	and a
 	ret z
+	ld de, DisarmPopupText
+	call ShowEntryAbilityPopup
 	ld de, KNOCK_OFF
 	ld hl, DisarmText
 	call PlayEntryAnimAndText
@@ -728,9 +797,40 @@ HandleAllure:
 	; only on the opposite gender
 	farcall CheckOppositeGender
 	ret c
+	ld de, AllurePopupText
+	call ShowEntryAbilityPopup
 	ld de, ATTRACT
 	ld hl, AllureText
 	call PlayEntryAnimAndText
 	farjp BattleCommand_Attract
 
 INCLUDE "data/abilities/allure_mons.asm"
+
+; ability names for the popups (ShowEntryAbilityPopup)
+DroughtPopupText: db "Drought@"
+SandStreamPopupText: db "Sand Stream@"
+SnowWarningPopupText: db "Snow Warning@"
+SpinGuardPopupText: db "Spin Guard@"
+NaturalCurePopupText: db "Natural Cure@"
+BattleStancePopupText: db "Battle Stance@"
+BattleDrivePopupText: db "Battle Drive@"
+ChaoticBoostPopupText: db "Chaotic Boost@"
+FortifyPopupText: db "Fortify@"
+ImposterPopupText: db "Imposter@"
+ReflectBarrierPopupText: db "Reflect Barrier@"
+LightBarrierPopupText: db "Light Barrier@"
+SanctuaryPopupText: db "Sanctuary@"
+SiegebreakerPopupText: db "Siegebreaker@"
+InfernalHowlPopupText: db "Infernal Howl@"
+SeedfallPopupText: db "Seedfall@"
+TrueSightPopupText: db "True Sight@"
+FogOfWarPopupText: db "Fog of War@"
+ChronoShiftPopupText: db "Chrono Shift@"
+ProvocateurPopupText: db "Provocateur@"
+DisarmPopupText: db "Disarm@"
+AllurePopupText: db "Allure@"
+CleanSweepPopupText: db "Clean Sweep@"
+RockSnarePopupText: db "Rock Snare@"
+CaltropperPopupText: db "Caltropper@"
+VenomFieldPopupText: db "Venom Field@"
+SilkSnarePopupText: db "Silk Snare@"
