@@ -113,6 +113,18 @@ EnemyMoveSlotHasNoEffect:
 	call FarCopyBytes
 	pop bc
 
+; Attract and Taunt don't affect an Oblivious player mon
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	cp EFFECT_ATTRACT
+	jr z, .check_oblivious
+	cp EFFECT_TAUNT
+	jr nz, .not_oblivious
+.check_oblivious
+	ld a, [wBattleMonSpecies]
+	newfarcall IsObliviousSpecies
+	ret c
+
+.not_oblivious
 ; powder moves don't affect an Overcoat player mon
 	ld a, [wEnemyMoveStruct + MOVE_ANIM]
 	newfarcall IsOvercoatBlockedMove
