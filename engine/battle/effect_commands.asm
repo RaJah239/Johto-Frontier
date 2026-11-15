@@ -6904,7 +6904,7 @@ BattleCommand_ItemHail:
 
 StartWeatherItem:
 	ld [wBattleWeather], a
-	ld a, 8
+	ld a, 4
 	ld [wWeatherCount], a
 	ret
 
