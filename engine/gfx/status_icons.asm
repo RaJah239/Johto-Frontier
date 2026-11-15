@@ -182,6 +182,16 @@ LoadBattleStatusIconPals::
 ; Fill the palette at de (WRAM bank 5) with white, the player's status
 ; colour, the foe's and black, and advance de past it, like the other
 ; SetBattlePal_* routines in _CGB_BattleColors.
+; Both statuses are read before switching to the palettes' WRAM bank:
+; wEnemyMonStatus is in another one.
+	push de
+	call GetEnemyStatusIconIndex
+	push af
+	call GetPlayerStatusIconIndex
+	ld b, a
+	pop af
+	ld c, a
+	pop de
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wBGPals1)
@@ -192,13 +202,9 @@ LoadBattleStatusIconPals::
 	ld a, HIGH(PALRGB_WHITE)
 	ld [de], a
 	inc de
-	push de
-	call GetPlayerStatusIconIndex
-	pop de
+	ld a, b
 	call .color
-	push de
-	call GetEnemyStatusIconIndex
-	pop de
+	ld a, c
 	call .color
 	xor a
 	ld [de], a
