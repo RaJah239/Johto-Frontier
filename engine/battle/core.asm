@@ -5879,6 +5879,11 @@ ApplyFrbEffectOnSpclAttack:
 	ldh a, [hBattleTurn]
 	and a
 	jr z, .enemy
+
+	ld a, [wBattleMonSpecies]
+	call DoesMonHaveResilience
+	ret c
+
 	ld a, [wBattleMonStatus]
 	and 1 << FRZ
 	ret z
@@ -5886,6 +5891,10 @@ ApplyFrbEffectOnSpclAttack:
 	jr .proceed
 
 .enemy
+	ld a, [wEnemyMonSpecies]
+	call DoesMonHaveResilience
+	ret c
+
 	ld a, [wEnemyMonStatus]
 	and 1 << FRZ
 	ret z
