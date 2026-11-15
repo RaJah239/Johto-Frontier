@@ -116,9 +116,13 @@ AI_PivotInsteadOfSwitch:
 ; with that instead: make it the enemy's move this turn and return carry.
 ; With both, the one that does more damage; never one the player's mon is
 ; immune to (Volt Switch into a Ground type or Grounded).
+; 10% of the time it just switches, so the pivot isn't a sure thing.
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_ENCORED, a ; Encore or a Choice item: locked into its move
 	jp nz, .no
+	call Random
+	cp 10 percent
+	jp c, .no
 	call DoesAIOutSpeedPlayer
 	ret nc
 	ld hl, wCurDamage
