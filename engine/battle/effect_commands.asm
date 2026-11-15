@@ -2107,6 +2107,9 @@ BattleCommand_CheckFaint:
 	jr .finish
 
 .no_dbond
+	; the target's Aftermath hurts the user that knocked it out
+	farcall AftermathOnKO
+
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
 	cp EFFECT_MULTI_HIT

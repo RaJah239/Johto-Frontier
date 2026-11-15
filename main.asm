@@ -651,6 +651,7 @@ INCLUDE "engine/abilities/sheer_force.asm"
 INCLUDE "engine/abilities/suction_cups.asm"
 INCLUDE "engine/abilities/pressure.asm"
 INCLUDE "engine/abilities/contrary.asm"
+INCLUDE "engine/abilities/aftermath.asm"
 
 SECTION "Regenerator", ROMX
 INCLUDE "engine/abilities/regenerator.asm"

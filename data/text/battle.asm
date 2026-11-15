@@ -254,6 +254,12 @@ SandBodyText:
 	cont "Sand Body!"
 	prompt
 
+AftermathBattleText:
+	text "<USER>"
+	line "was hurt by the"
+	cont "Aftermath!"
+	prompt
+
 PoisonHealBattleText:
 	text "<USER>"
 	line "heals HP via its"
