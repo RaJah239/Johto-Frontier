@@ -124,6 +124,7 @@ EntryAbilityHandlers:
 	dw HandleSeedfall
 	dw HandleDefenseMode
 	dw HandleIntimidate
+	dw HandleStiflingAura
 	dw HandleCleanSweep
 	dw HandleLightBarrier
 	dw HandleRockSnare
@@ -633,6 +634,20 @@ HandleIntimidate:
 
 IntimidatePopupText: db "Intimidate@"
 INCLUDE "data/abilities/intimidate_mons.asm"
+
+HandleStiflingAura:
+	ld hl, StiflingAuraPokemon
+	call CurMonInList
+	ret nc
+	ld de, StiflingAuraPopupText
+	call ShowEntryAbilityPopup
+	ld de, SCARY_FACE
+	call PlayEntryAbilityAnim
+	farcall BattleCommand_SpeedDown
+	farjp BattleCommand_StatDownMessage
+
+StiflingAuraPopupText: db "Stifling Aura@"
+INCLUDE "data/abilities/stifling_aura_mons.asm"
 
 HandleInfernalHowl:
 	ld hl, InfernalHowlPokemon
