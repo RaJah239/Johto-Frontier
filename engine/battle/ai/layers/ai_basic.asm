@@ -90,6 +90,18 @@ AI_Basic:
 	ld a, [wEnemyMonItem]
 	cp ASSAULT_VEST
 	jr nz, .check_contrary
+; ========================
+; === Ability: Overcoat ===
+; ========================
+; Powder moves don't affect an Overcoat player mon.
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	newfarcall IsOvercoatBlockedMove
+	jr nc, .not_overcoat
+	ld a, [wBattleMonSpecies]
+	newfarcall IsOvercoatSpecies
+	jmp c, .discourage
+.not_overcoat
+
 .discourageNonDamagingMoves
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a

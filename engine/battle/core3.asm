@@ -453,6 +453,9 @@ HandleWeather:
 	ld hl, MagicGuardPokemon
 	call IsInByteArray
 	ret c
+	; nor do Overcoat pokemon
+	newfarcall UserHasOvercoat
+	ret c
 
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVar
@@ -508,6 +511,10 @@ HandleWeather:
 	call SetPlayerTurn
 	
 .HailDamage:
+	; Overcoat pokemon take no hail damage
+	newfarcall UserHasOvercoat
+	ret c
+
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVar
 	bit SUBSTATUS_UNDERGROUND, a

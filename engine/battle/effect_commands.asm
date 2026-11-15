@@ -6875,6 +6875,14 @@ _CheckBattleScene:
 BattleCommand_CheckPowder:
 ; Checks if the move is powder/spore-based and 
 ; if the opponent is Grass-type
+; Overcoat blocks every powder move (Spore included)
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	newfarcall IsOvercoatBlockedMove
+	jr nc, .not_overcoat_move
+	newfarcall TargetHasOvercoat
+	jr c, .Immune
+.not_overcoat_move
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	ld hl, PowderMoves_EffectCommands ; ensure `PowderMoves_AIStatus` matches

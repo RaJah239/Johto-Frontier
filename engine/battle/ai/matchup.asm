@@ -1810,6 +1810,9 @@ MSim_EnemyWeather:
 	ld a, [wMSimFlags2]
 	bit MSIM_E_MAGIC_GUARD_F, a
 	jr nz, MSim_WeatherImmune
+	ld a, [wEnemyMonSpecies]
+	newfarcall IsOvercoatSpecies
+	jr c, MSim_WeatherImmune
 	ld hl, wEnemyMonType1
 	call MSim_WeatherImmuneTypes
 	jr c, MSim_WeatherImmune
@@ -1822,6 +1825,9 @@ MSim_PlayerWeather:
 	ld a, [wMSimFlags2]
 	bit MSIM_P_MAGIC_GUARD_F, a
 	jr nz, MSim_WeatherImmune
+	ld a, [wBattleMonSpecies]
+	newfarcall IsOvercoatSpecies
+	jr c, MSim_WeatherImmune
 	ld hl, wBattleMonType1
 	call MSim_WeatherImmuneTypes
 	jr c, MSim_WeatherImmune
