@@ -504,7 +504,7 @@ PlacePartyMonGender:
 	ret z
 	ld c, a
 	ld b, 0
-	hlcoord 7, 2 ; directly to the left of the level
+	hlcoord 6, 2 ; the shiny icon goes between it and the level
 .loop
 	push bc
 	push hl
@@ -524,7 +524,18 @@ PlacePartyMonGender:
 	ld a, "♀" ; female
 .got_gender
 	pop hl
-	ld [hl], a
+	ld [hli], a
+	push hl
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMon1DVs
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call AddNTimes
+	ld b, h
+	ld c, l
+	farcall CheckShininess
+	pop hl
+	jr nc, .next
+	ld [hl], "<⁂>"
 .next
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
