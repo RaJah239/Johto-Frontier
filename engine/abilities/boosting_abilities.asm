@@ -68,7 +68,7 @@ HandleGuts:
 	call GetBattleVar
 	cp SPECIAL
 	ret nc
-	ShowGenericAbilityPopup EVENT_GUTS_PLAYER, EVENT_GUTS_FOE, GutsText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_GUTS, GutsText
 	jmp FiftyPercentBoost
 
 GutsText: db "Guts@"
@@ -83,7 +83,7 @@ HandleRivalry:
 	farcall CheckOppositeGender
 	ret c
 	jmp z, TwentyFivePercentBoost
-	ShowGenericAbilityPopup EVENT_RIVALRY_PLAYER, EVENT_RIVALRY_FOE, RivalryText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_RIVALRY, RivalryText
 	jmp TwentyFivePercentNerf
 
 RivalryText: db "Rivalry@"
@@ -134,7 +134,7 @@ HandleSandForce:
 	ret nz
 
 .SandForceBoost:
-	ShowGenericAbilityPopup EVENT_SAND_FORCE_PLAYER, EVENT_SAND_FORCE_FOE, SandForceText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_SAND_FORCE, SandForceText
 	jmp ThirtyPercentBoost
 
 SandForceText: db "Sand Force@"
@@ -150,7 +150,7 @@ HandleTechnician:
 	call GetBattleVar
 	cp 61            ; power < 61 → boost
 	ret nc           ; power >= 61, no boost
-	ShowGenericAbilityPopup EVENT_TECHNICIAN_PLAYER, EVENT_TECHNICIAN_FOE, TechnicianText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_TECHNICIAN, TechnicianText
 	jmp FiftyPercentBoost
 
 TechnicianText: db "Technician@"
@@ -164,7 +164,7 @@ HandleMultiscale:
 
 	farcall CheckOpponentFullHP
 	ret nz
-	ShowGenericAbilityPopup EVENT_MULTISCALE_PLAYER, EVENT_MULTISCALE_FOE, MultiscaleText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_MULTISCALE, MultiscaleText
 	jmp FiftyPercentNerf
 
 MultiscaleText: db "Multiscale@"
@@ -183,7 +183,7 @@ HandleThickFat:
 	jmp z, FiftyPercentNerf
 	cp ICE
 	ret nz
-	ShowGenericAbilityPopup EVENT_THICK_FAT_PLAYER, EVENT_THICK_FAT_FOE, ThickFatText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_THICK_FAT, ThickFatText
 	jmp FiftyPercentNerf
 
 ThickFatText: db "Thick Fat@"
@@ -206,7 +206,7 @@ HandleSolarPowerBoost:
 	call GetBattleVar
 	cp SPECIAL
 	ret c
-	ShowGenericAbilityPopup EVENT_SOLAR_POWER_PLAYER, EVENT_SOLAR_POWER_FOE, SolarPowerText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_SOLAR_POWER, SolarPowerText
 	jmp FiftyPercentBoost
 
 SolarPowerText: db "SolarPower@"
@@ -223,7 +223,7 @@ HandleIronArm:
 	and TYPE_MASK
 	cp STEEL
 	ret nz
-	ShowGenericAbilityPopup EVENT_IRON_ARM_PLAYER, EVENT_IRON_ARM_FOE, IronArmText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_IRON_ARM, IronArmText
 	jmp FiftyPercentBoost
 
 IronArmText: db "Iron Arm@"
@@ -240,7 +240,7 @@ HandleZenFocus:
 	and TYPE_MASK
 	cp PSYCHIC_TYPE
 	ret nz
-	ShowGenericAbilityPopup EVENT_ZEN_FOCUS_PLAYER, EVENT_ZEN_FOCUS_FOE, ZenFocusText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_ZEN_FOCUS, ZenFocusText
 	jmp FiftyPercentBoost
 
 ZenFocusText: db "Zen Focus@"
@@ -262,7 +262,7 @@ HandleRainSurge:
 	call GetBattleVar
 	cp SPECIAL
 	ret c
-	ShowGenericAbilityPopup EVENT_RAIN_SURGE_PLAYER, EVENT_RAIN_SURGE_FOE, RainSurgeText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_RAIN_SURGE, RainSurgeText
 	jmp FiftyPercentBoost
 
 RainSurgeText: db "Rain Surge@"
@@ -278,7 +278,7 @@ HandlePillowFort:
 	call GetBattleVar
 	cp SPECIAL
 	ret nc
-	ShowGenericAbilityPopup EVENT_PILLOW_FORT_PLAYER, EVENT_PILLOW_FORT_FOE, PillowFortText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_PILLOW_FORT, PillowFortText
 	jmp TwentyFivePercentNerf
 
 PillowFortText: db "PillowFort@"
@@ -340,7 +340,7 @@ HandleSharpness:
 	ld hl, SharpMoves
 	call IsInByteArray
 	ret nc
-	ShowGenericAbilityPopup EVENT_SHARPNESS_PLAYER, EVENT_SHARPNESS_FOE, SharpnessText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_SHARPNESS, SharpnessText
 	jmp FiftyPercentBoost
 
 SharpnessText: db "Sharpness@"
@@ -357,7 +357,7 @@ HandleBallistics:
 	ld hl, BallisticsMoves
 	call IsInByteArray
 	ret nc
-	ShowGenericAbilityPopup EVENT_BALLISTICS_PLAYER, EVENT_BALLISTICS_FOE, BallisticsText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_BALLISTICS, BallisticsText
 	jmp FiftyPercentBoost
 
 BallisticsText: db "Ballistics@"
@@ -374,7 +374,7 @@ HandleIronFist:
 	ld hl, PunchingMoves
 	call IsInByteArray
 	ret nc
-	ShowGenericAbilityPopup EVENT_IRON_FIST_PLAYER, EVENT_IRON_FIST_FOE, IronFistText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_IRON_FIST, IronFistText
 	jmp TwentyPercentBoost
 
 IronFistText: db "Iron Fist@"
@@ -391,7 +391,7 @@ HandleStrongJaw:
 	ld hl, StrongJawMoves
 	call IsInByteArray
 	ret nc
-	ShowGenericAbilityPopup EVENT_STRONG_JAW_PLAYER, EVENT_STRONG_JAW_FOE, StrongJawText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_STRONG_JAW, StrongJawText
 	jmp FiftyPercentBoost
 
 StrongJawText: db "Strong Jaw@"
@@ -402,7 +402,7 @@ HandleHugePower:
 	ld hl, HugePowerPokemon
 	call IsInByteArray
 	ret nc
-	ShowGenericAbilityPopup EVENT_HUGE_POWER_PLAYER, EVENT_HUGE_POWER_FOE, HugePowerText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_HUGE_POWER, HugePowerText
 	jr HundredPercentBoost
 
 HugePowerText: db "Huge Power@"

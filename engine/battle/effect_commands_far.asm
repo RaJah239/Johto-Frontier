@@ -7,9 +7,9 @@
 ; === Ability: Priority ===
 ; =============================
 PriorityAbilityPopup:
-; Show the ability popup the first time each side uses one of the priority
-; moves with its matching species this battle. Every move has its own pair
-; of popup flags, reset by ResetSureHitEvents at the start of every battle.
+; Show the ability popup the first time a mon uses one of the priority
+; moves with its matching species, once each time it's sent out (see
+; ShowOncePerSendOutPopup).
 ; The priority boost itself comes from GetMovePriority in core.asm.
 	ldh a, [hBattleTurn]
 	and a
@@ -36,7 +36,7 @@ PriorityAbilityPopup:
 	cp BLASTOISE
 	ret nz
 	call PriorityBattleText_Call
-	ShowGenericAbilityPopup EVENT_IRON_HEAD_PLAYER, EVENT_IRON_HEAD_FOE, PreemptText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_IRON_HEAD, PreemptText
 	ret
 
 .not_iron_head
@@ -46,7 +46,7 @@ PriorityAbilityPopup:
 	cp SNORLAX
 	ret nz
 	call PriorityBattleText_Call
-	ShowGenericAbilityPopup EVENT_CURSE_PLAYER, EVENT_CURSE_FOE, PreemptText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_CURSE, PreemptText
 	ret
 
 .not_curse
@@ -60,7 +60,7 @@ PriorityAbilityPopup:
 
 .popup_zen
 	call PriorityBattleText_Call
-	ShowGenericAbilityPopup EVENT_ZEN_HEADBUTT_PLAYER, EVENT_ZEN_HEADBUTT_FOE, PreemptText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_ZEN_HEADBUTT, PreemptText
 	ret
 
 PriorityBattleText_Call:
@@ -171,7 +171,7 @@ _BattleCommand_Critical:
 ; super luck mons have an innate +2 critical hit level
 	inc c
 	inc c
-	ShowGenericAbilityPopup EVENT_SUPER_LUCK_PLAYER, EVENT_SUPER_LUCK_FOE, SuperLuckText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_SUPER_LUCK, SuperLuckText
 	jr .continue
 
 ; The move always lands a critical hit, unless the target has Crit Guard.
@@ -179,7 +179,7 @@ _BattleCommand_Critical:
 ; ==========================
 ; === Ability: Crit Lock ===
 ; ==========================
-	ShowGenericAbilityPopup EVENT_CRIT_LOCK_PLAYER, EVENT_CRIT_LOCK_FOE, CritlockText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_CRIT_LOCK, CritlockText
 	jr .CritGuard
 
 .continue
@@ -548,7 +548,7 @@ _BattleCommand_CheckHit:
 	call IsInByteArray
 	jr nc, .skip_keen_eyes
 
-	ShowGenericAbilityPopup EVENT_KEEN_EYES_PLAYER, EVENT_KEEN_EYES_FOE, KeenEyesText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_KEEN_EYES, KeenEyesText
 	ld a, 130
 	call AccuracyCalc
 

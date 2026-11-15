@@ -1,17 +1,20 @@
 ; ======================================
 ; === Once-per-send-out ability popup ===
 ; ======================================
-; Abilities like No Guard and Prankster show their popup the first time
-; their mon uses a move that the ability affects, once each time it is
-; sent out. A mon has only one ability, so a single bit per side is
-; enough for all of them: wAbilityShownSinceSentOut bit 0 is the
-; player's mon, bit 1 the foe's. It's cleared when a new mon comes in.
+; Many abilities slide in their popup the first time they do something,
+; once each time their mon is sent out. Every such popup has a
+; SEND_OUT_POPUP_* number (constants/battle_constants.asm) and a flag per
+; side in wSendOutPopupsShown: the player's SEND_OUT_POPUP_BYTES bytes,
+; then the foe's. A side's flags are cleared when it sends out a new mon.
 ;
-; To add another ability: give it a species list and a name (in this
-; section), and from MoveUseAbilityPopups call a routine that returns
-; when the move doesn't apply, and otherwise does
+; In code that already knows the ability applies:
+;	ShowOncePerSendOutPopup SEND_OUT_POPUP_<NAME>, <NameText>
+; For an ability that only needs its species checked when a move is used
+; (like No Guard and Prankster), call a routine from MoveUseAbilityPopups
+; that returns when the move doesn't apply, and otherwise does
 ;	ld hl, <SpeciesList>
-;	ld de, <NameText>
+;	ld de, <NameText> ; in this section
+;	ld c, SEND_OUT_POPUP_<NAME>
 ;	jr SendOutAbilityPopup
 
 MoveUseAbilityPopups::
@@ -20,17 +23,8 @@ MoveUseAbilityPopups::
 	jmp PranksterPopup
 
 SendOutAbilityPopup:
-; If the user's species is in list hl and it hasn't shown its ability
-; since it came in, show the popup with name de (in this bank).
-	ldh a, [hBattleTurn]
-	and a
-	ld b, 1 << 0
-	jr z, .got_bit
-	ld b, 1 << 1
-.got_bit
-	ld a, [wAbilityShownSinceSentOut]
-	and b
-	ret nz
+; If the user's species is in list hl, show popup c with name de (in this
+; bank) once per send-out.
 	push bc
 	push de
 	push hl
@@ -40,11 +34,67 @@ SendOutAbilityPopup:
 	pop de
 	pop bc
 	ret nc
-	ld a, [wAbilityShownSinceSentOut]
-	or b
-	ld [wAbilityShownSinceSentOut], a
 	ld b, BANK(@)
+	; fallthrough
+
+_ShowOncePerSendOutPopup::
+; Show popup c (SEND_OUT_POPUP_*) with name b:de over the acting side's
+; HUD, unless it's already been shown since that side's mon came in.
+	ld a, c
+	rrca
+	rrca
+	rrca
+	and %00011111 ; byte
+	ld l, a
+	ldh a, [hBattleTurn]
+	and a
+	ld a, l
+	jr z, .got_side
+	add SEND_OUT_POPUP_BYTES
+.got_side
+	ld hl, wSendOutPopupsShown
+	add l
+	ld l, a
+	adc h
+	sub l
+	ld h, a
+	ld a, c
+	and 7
+	inc a
+	ld c, a
+	xor a
+	scf
+.bit
+	rla
+	dec c
+	jr nz, .bit
+	ld c, a ; mask
+	and [hl]
+	ret nz ; already shown
+	ld a, c
+	or [hl]
+	ld [hl], a
 	ldh a, [hBattleTurn]
 	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
 	farcall ShowAbilityPopup
 	ret
+
+ResetPlayerSendOutPopups::
+; The player sent out a mon: its popups can show again.
+	ld hl, wSendOutPopupsShown
+	jr ResetSendOutPopups
+
+ResetEnemySendOutPopups::
+; The foe sent out a mon.
+	ld hl, wSendOutPopupsShown + SEND_OUT_POPUP_BYTES
+ResetSendOutPopups:
+	xor a
+rept SEND_OUT_POPUP_BYTES
+	ld [hli], a
+endr
+	ret
+
+ResetAllSendOutPopups::
+; at the start of a battle
+	call ResetPlayerSendOutPopups
+	jr ResetEnemySendOutPopups

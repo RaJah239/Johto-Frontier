@@ -1335,47 +1335,22 @@ MACRO ShowActivationOrEntryOrKOAbilityPopup
 ENDM
 
 ; ==========================================================================
-; === Macro: ShowGenericAbilityPopup                                      ===
+; === Macro: ShowOncePerSendOutPopup                                      ===
 ; ==========================================================================
-; Shows an ability popup once per side.
+; Slides in the ability popup over the acting side's (hBattleTurn) HUD,
+; once each time that side sends out a mon.
 ; Parameters:
-;   \1 - Player event flag
-;   \2 - Foe event flag
-;   \3 - Ability popup text label
+;   \1 - SEND_OUT_POPUP_* constant (see constants/battle_constants.asm)
+;   \2 - Ability popup text label
 ;
 ; Example:
-;   ShowGenericAbilityPopup EVENT_SURE_SHOCK_PLAYER, EVENT_SURE_SHOCK_FOE, AbilitySlideIn_SureShockText
+;   ShowOncePerSendOutPopup SEND_OUT_POPUP_SURE_SHOCK, SureShockText
 ;
-MACRO ShowGenericAbilityPopup
-	ldh a, [hBattleTurn]
-	and a
-	jr nz, .\@Foe
-
-	; Player
-	CheckEventFlag \1
-	jr nz, .\@Done
-
-	ld b, BANK(\3)
-	ld c, ABILITY_POPUP_PLAYER
-	ld de, \3
-	farcall ShowAbilityPopup
-
-	SetEventFlag \1
-	jr .\@Done
-
-.\@Foe:
-	; Foe
-	CheckEventFlag \2
-	jr nz, .\@Done
-
-	ld b, BANK(\3)
-	ld c, ABILITY_POPUP_ENEMY
-	ld de, \3
-	farcall ShowAbilityPopup
-
-	SetEventFlag \2
-
-.\@Done:
+MACRO ShowOncePerSendOutPopup
+	ld c, \1
+	ld b, BANK(\2)
+	ld de, \2
+	farcall _ShowOncePerSendOutPopup
 ENDM
 
 ; Macro for Grand Gauntlet silent trainers

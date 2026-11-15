@@ -175,7 +175,7 @@ SpeedBoost_Activate:
 	farjp BattleCommand_StatUpMessage
 
 SolarPowerHPLoss_Activate:
-	ShowGenericAbilityPopup EVENT_SOLAR_POWER_PLAYER_HP_LOSS, EVENT_SOLAR_POWER_FOE_HP_LOSS, SolarPowerHPLossText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_SOLAR_POWER_HP_LOSS, SolarPowerHPLossText
 	; subtract 1/8 max hp end of each turn
 	farcall GetEighthMaxHP
 	farcall SubtractHPFromUser

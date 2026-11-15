@@ -14,7 +14,7 @@ HandleTintedLens:
 	and EFFECTIVENESS_MASK
 	cp NOT_VERY_EFFECTIVE
 	ret nz
-	ShowGenericAbilityPopup EVENT_TINTED_LENS_PLAYER, EVENT_TINTED_LENS_FOE, TintedLensText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_TINTED_LENS, TintedLensText
 	jr Hundred_PercentBoost
 
 TintedLensText: db "TintedLens@"

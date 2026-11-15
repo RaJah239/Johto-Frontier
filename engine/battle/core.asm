@@ -2,6 +2,7 @@
 
 DoBattle:
 	farcall ResetSureHitEvents
+	farcall ResetAllSendOutPopups
 	xor a
 	ld [wBattleParticipantsNotFainted], a
 	ld [wBattleParticipantsIncludingFainted], a
@@ -2599,8 +2600,7 @@ LoadEnemyMonToSwitchTo:
 	; 'b' contains the PartyNr of the mon the AI will switch to
 	push bc
 	farcall EnemyRegenerator ; the mon that's switching out
-	ld hl, wAbilityShownSinceSentOut
-	res 1, [hl] ; the incoming mon can show its ability popup again
+	farcall ResetEnemySendOutPopups ; the incoming mon's popups can show again
 	pop bc
 	ld a, b
 	ld [wCurPartyMon], a
@@ -3032,8 +3032,7 @@ TryToRunAwayFromBattle:
 
 InitBattleMon:
 	farcall PlayerRegenerator ; the mon that's switching out
-	ld hl, wAbilityShownSinceSentOut
-	res 0, [hl] ; the incoming mon can show its ability popup again
+	farcall ResetPlayerSendOutPopups ; the incoming mon's popups can show again
 	ld a, [wCurPartyMon]
 	ld [wBattleMonPartySlot], a
 	ld a, MON_SPECIES

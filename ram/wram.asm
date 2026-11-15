@@ -626,7 +626,7 @@ wAIDrainSimPlayerHP:: dw
 wAIDrainFlags:: db ; AI_PreferDrainMoves: AI_DRAIN_*_F
 wBattleMonPartySlot:: db ; the party slot wBattleMon was loaded from (Regenerator)
 wRegeneratorShown:: db ; bit 0/1: the player's/enemy's Regenerator already healed on screen
-wAbilityShownSinceSentOut:: db ; bit 0/1: the player's/enemy's mon already showed its once-per-send-out ability popup (engine/abilities/send_out_popup.asm)
+	ds 1
 	ds 1 ; (unused: was switch-in picker scratch)
 
 wTrickRoomCount:: db
@@ -3934,3 +3934,10 @@ SECTION "Move Icons Saved Palette", WRAMX, BANK[5]
 
 ; the map's own colors of that palette (same WRAM bank as wBGPals1)
 wMoveIconSavedPalette:: ds 1 palettes
+
+
+SECTION "Send-Out Ability Popups", WRAM0
+
+; per side, a flag for each SEND_OUT_POPUP_*: set once that popup has shown
+; since the side's mon came in (engine/abilities/send_out_popup.asm)
+wSendOutPopupsShown:: ds 2 * SEND_OUT_POPUP_BYTES

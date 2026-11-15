@@ -147,7 +147,6 @@ ClearBattleRAM:
 	ld [wPlayerTurnsTaken], a
 	ld [wEnemyTurnsTaken], a
 	ld [wRegeneratorShown], a
-	ld [wAbilityShownSinceSentOut], a
 	ld [wEvolvableFlags], a
 
 	ld hl, wPlayerHPPal

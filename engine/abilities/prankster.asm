@@ -51,6 +51,7 @@ PranksterPopup:
 	ret nz
 	ld hl, PranksterPokemon
 	ld de, PranksterText
+	ld c, SEND_OUT_POPUP_PRANKSTER
 	jmp SendOutAbilityPopup
 
 PranksterText: db "Prankster@"

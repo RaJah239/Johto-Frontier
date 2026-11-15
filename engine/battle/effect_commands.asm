@@ -1495,7 +1495,7 @@ BattleCommand_EffectChance:
 	; double effect chance
 .blessing
 	push hl
-	ShowGenericAbilityPopup EVENT_BLESSING_PLAYER, EVENT_BLESSING_FOE, BlessingText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_BLESSING, BlessingText
 	pop hl
 
 	sla [hl] ; 2x effect chance
@@ -4010,7 +4010,7 @@ BattleCommand_BurnTarget:
 
 	; 100% burn foe
 .burn
-	ShowGenericAbilityPopup EVENT_KINDLE_PLAYER, EVENT_KINDLE_FOE, KindleText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_KINDLE, KindleText
 	xor a
 	ld [wEffectFailed], a
 
@@ -4152,7 +4152,7 @@ BattleCommand_ParalyzeTarget:
 
 	; 100% paralyze foe
 .paralyze
-	ShowGenericAbilityPopup EVENT_SURE_SHOCK_PLAYER, EVENT_SURE_SHOCK_FOE, SureShockText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_SURE_SHOCK, SureShockText
 	xor a
 	ld [wEffectFailed], a
 
@@ -5098,7 +5098,7 @@ BattleCommand_Rampage:
 
 	ld hl, FeralMindBattleText
 	call StdBattleTextbox
-	ShowGenericAbilityPopup EVENT_FERAL_MIND_PLAYER, EVENT_FERAL_MIND_FOE, FeralMindText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_FERAL_MIND, FeralMindText
 	ret
 
 .feral_mind_done
@@ -5769,7 +5769,7 @@ BattleCommand_Recoil:
 .rock_head
 	ld hl, RockHeadBattleText
 	call StdBattleTextbox
-	ShowGenericAbilityPopup EVENT_ROCK_HEAD_PLAYER, EVENT_ROCK_HEAD_FOE, RockHeadText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_ROCK_HEAD, RockHeadText
 	ret
 
 .finish_rock_head
@@ -6006,7 +6006,7 @@ BattleCommand_RechargeNextTurn:
 
 	ld hl, OverdriveBattleText
 	call StdBattleTextbox
-	ShowGenericAbilityPopup EVENT_OVERDRIVE_PLAYER, EVENT_OVERDRIVE_FOE, OverdriveText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_OVERDRIVE, OverdriveText
 	ret
 
 .overdrive_done
@@ -6919,9 +6919,8 @@ StartWeatherItem:
 ; === Ability: Type Sync ===
 ; ===========================
 TypeSyncPopup:
-; Show the ability popup the first time each side uses a damaging STAB
-; move with a Type Sync pokemon this battle. The popup flags are reset by
-; ResetSureHitEvents at the start of every battle.
+; Show the ability popup the first time a Type Sync pokemon uses a damaging
+; STAB move, once each time it's sent out (see ShowOncePerSendOutPopup).
 ; The 2x STAB itself is applied by BattleCommand_Stab, which the AI also
 ; calls while scoring, so the popup check lives here (move use only).
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -6972,7 +6971,7 @@ TypeSyncPopup:
 
 	ld hl, TypeSyncBattleText
 	call StdBattleTextbox
-	ShowGenericAbilityPopup EVENT_TYPE_SYNC_PLAYER, EVENT_TYPE_SYNC_FOE, TypeSyncText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_TYPE_SYNC, TypeSyncText
 	ret
 
 TypeSyncText: db "Type Sync@"

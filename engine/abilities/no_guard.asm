@@ -34,7 +34,8 @@ NoGuardPopup:
 	ret z ; not a damaging move
 	ld hl, NoGuardPokemon
 	ld de, NoGuardText
-	jr SendOutAbilityPopup
+	ld c, SEND_OUT_POPUP_NO_GUARD
+	jmp SendOutAbilityPopup
 
 NoGuardText: db "No Guard@"
 
