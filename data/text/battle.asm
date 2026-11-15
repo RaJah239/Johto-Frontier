@@ -74,11 +74,6 @@ SturdyBattleText:
 	line "knocked out!"
 	prompt
 
-AllureText:
-	text "<USER>'s"
-	line "Allure activated!"
-	prompt
-
 UnshakenBattleText:
 	text "<TARGET>"
 	line "can't flinch!"
@@ -98,11 +93,6 @@ FeralMindBattleText:
 	text "<USER> can"
 	line "freely act!"
 	done
-
-BecameHealthyText:
-	text "<USER>"
-	line "became healthy!"
-	prompt
 
 LevitateText:
 	text "But <TARGET>"
@@ -1015,158 +1005,9 @@ LightScreenEffectText:
 	line "Spcl.Def rose!"
 	prompt
 
-LightBarrierText:
-	text "<USER>'s"
-	line "Light Barrier"
-	cont "activated!"
-
-	para "<USER>'s"
-	line "Spcl.Def rose!"
-	prompt
-
 ReflectEffectText:
 	text "<USER>'s"
 	line "Defense rose!"
-	prompt
-
-ReflectBarrierText:
-	text "<USER>'s"
-	line "Reflect Barrier"
-	cont "activated!"
-
-	para "<USER>'s"
-	line "Defense rose!"
-	prompt
-
-DisarmText:
-	text "<USER>'s"
-	line "Disarm"
-	cont "activated!"
-	prompt
-
-BattleStanceText:
-	text "<USER>'s"
-	line "Battle Stance"
-	cont "activated!"
-	prompt
-
-TrueSightText:
-	text "<USER>'s"
-	line "True Sight"
-	cont "activated!"
-	prompt
-
-FogOfWarText:
-	text "<USER>'s"
-	line "Fog of War"
-	cont "activated!"
-	prompt
-
-CleanSweepText:
-	text "<USER>'s"
-	line "Clean Sweep"
-	cont "activated!"
-	prompt
-
-ChaoticBoostText:
-	text "<USER>'s"
-	line "Chaotic Boost"
-	cont "activated!"
-	prompt
-
-SiegebreakerText:
-	text "<USER>'s"
-	line "Siegebreaker"
-	cont "activated!"
-	prompt
-
-ProvocateurText:
-	text "<USER>'s"
-	line "Provocateur"
-	cont "activated!"
-	prompt
-
-BattleDriveText:
-	text "<USER>'s"
-	line "Battle Drive"
-	cont "activated!"
-	prompt
-
-InfernalHowlText:
-	text "<USER>'s"
-	line "Infernal Howl"
-	cont "activated!"
-	prompt
-
-RockSnareText:
-	text "<USER>'s"
-	line "Rock Snare"
-	cont "activated!"
-
-	para "Pointed stones"
-	line "float all around"
-	cont "<TARGET>!"
-	prompt
-
-CaltropperText:
-	text "<USER>'s"
-	line "Caltropper"
-	cont "activated!"
-
-	para "Spikes scattered"
-	line "all around"
-	cont "<TARGET>!"
-	prompt
-
-VenomFieldText:
-	text "<USER>'s"
-	line "Venom Field"
-	cont "activated!"
-
-	para "Toxic Spikes scat-"
-	line "tered all around"
-	cont "<TARGET>!"
-	prompt
-
-SilkSnareText:
-	text "<USER>'s"
-	line "Silk Snare"
-	cont "activated!"
-
-	para "A Sticky Web has"
-	line "been laid beneath"
-	cont "<TARGET>!"
-	prompt
-
-ChronoShiftText:
-	text "<USER>'s"
-	line "Chrono Shift"
-	cont "activated!"
-
-	para "The dimensions"
-	line "were twisted!"
-	prompt
-
-FortifyText:
-	text "<USER>'s"
-	line "Fortify"
-	cont "activated!"
-	prompt
-
-ImposterText:
-	text "<USER>'s"
-	line "Imposter"
-	cont "activated!"
-	prompt
-
-BattleText_Aftermath:
-	text "<TARGET>'s"
-	line "Aftermath"
-	cont "activated!"
-
-	para "Unleashed a final"
-	line "desperate attack"
-	cont "on <USER>!"
 	prompt
 
 VigorousSplashText:
@@ -1375,23 +1216,6 @@ HydrationText:
 	cont "itself healthy!"
 	prompt
 
-BattleText_DroughtText:
-	text "<USER>'s"
-	line "Drought activated!"
-	
-	para "The sun's rays"
-	line "intensified!"
-	prompt
-
-BattleText_SandStreamText:
-	text "<USER>'s"
-	line "Sand Stream"
-	cont "activated!"
-	
-	para "A sandstorm"
-	line "brewed!"
-	prompt
-
 TenacityHealingText:
 	text "<USER>"
 	line "healed its status!"
@@ -1404,15 +1228,6 @@ HydrationHealingText:
 
 	para "<USER>"
 	line "healed its status!"
-	prompt
-
-BattleText_SnowWarningText:
-	text "<USER>'s"
-	line "Snow Warning"
-	cont "activated!"
-	
-	para "It started to"
-	line "Hail!"
 	prompt
 
 SunsRaysIntensifiedText:
