@@ -10,6 +10,10 @@ BattleCommand_Trick:
 	farcall CheckSubstituteOpp
 	jr nz, .failed
 
+	; Sticky Hold keeps the target's item
+	newfarcall StickyHoldBlocks
+	jr c, .failed
+
 	ld hl, wBattleMonItem
 	ld de, wEnemyMonItem
 

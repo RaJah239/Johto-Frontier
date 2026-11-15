@@ -28,6 +28,10 @@ BattleCommand_Thief:
 	and a
 	ret nz
 
+	; Sticky Hold keeps it
+	newfarcall StickyHoldBlocks
+	ret c
+
 	ld a, [wLinkMode]
 	and a
 	jr z, .stealenemyitem
@@ -74,6 +78,10 @@ BattleCommand_Thief:
 	ld a, [wEffectFailed]
 	and a
 	ret nz
+
+	; Sticky Hold keeps it
+	newfarcall StickyHoldBlocks
+	ret c
 
 ; If the enemy steals your item,
 ; it's gone for good if you don't get it back.

@@ -29,6 +29,10 @@ BattleCommand_KnockOff:
 	and a
 	ret nz
 
+	; Sticky Hold keeps it
+	newfarcall StickyHoldBlocks
+	ret c
+
 ; Remove enemy item
 	call .enemyitem
 	xor a
@@ -55,6 +59,10 @@ BattleCommand_KnockOff:
 	ld a, [wEffectFailed]
 	and a
 	ret nz
+
+	; Sticky Hold keeps it
+	newfarcall StickyHoldBlocks
+	ret c
 
 ; Remove player item
 	call .playeritem

@@ -654,6 +654,7 @@ INCLUDE "engine/abilities/contrary.asm"
 INCLUDE "engine/abilities/aftermath.asm"
 INCLUDE "engine/abilities/overcoat.asm"
 INCLUDE "engine/abilities/infiltrator.asm"
+INCLUDE "engine/abilities/sticky_hold.asm"
 
 SECTION "Regenerator", ROMX
 INCLUDE "engine/abilities/regenerator.asm"

@@ -3575,6 +3575,11 @@ AI_Smart_Trick:
 	bit SUBSTATUS_SUBSTITUTE, a
 	jmp nz, StandardDiscourage
 
+; Trick fails against Sticky Hold
+	ld a, [wBattleMonSpecies]
+	newfarcall IsStickyHoldSpecies
+	jmp c, AIDiscourageMove
+
 ; never give a Toxic Orb to a Poison Heal mon: it would heal from it
 	ld a, [wEnemyMonItem]
 	cp TOXIC_ORB
