@@ -44,6 +44,10 @@ Porygon2EvosAttacks:
 	db EVOLVE_HAPPINESS, TR_ANYTIME, PORYGONZ
 PorygonZEvosAttacks:
 
+ChanseyEvosAttacks:
+	db EVOLVE_HAPPINESS, TR_ANYTIME, PORYGONZ
+BlisseyEvosAttacks:
+
 TotodileEvosAttacks:
 CroconawEvosAttacks:
 FeraligatrEvosAttacks:
@@ -251,8 +255,6 @@ AegislashEvosAttacks:
 NidokingEvosAttacks:
 MisdreavusEvosAttacks:
 MismagiusEvosAttacks:
-ChanseyEvosAttacks:
-BlisseyEvosAttacks:
 SnorlaxEvosAttacks:
 TyranitarEvosAttacks:
 SalamenceEvosAttacks:
