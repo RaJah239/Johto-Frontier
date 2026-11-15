@@ -186,6 +186,18 @@ HandleStatBoostingHeldItems:
 
 INCLUDE "data/battle/held_stat_up.asm"
 
+UseHeldWeatherShard::
+; The current side's (hBattleTurn) mon was just sent out: use its weather
+; shard now (RunEntryItems in engine/abilities/entry_abilities.asm).
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .enemy
+	farcall GetPartymonItem
+	jr HandleWeatherItem.HandleItem
+.enemy
+	farcall GetOTPartymonItem
+	jr HandleWeatherItem.HandleItem
+
 HandleWeatherItem:
 	ld hl, .Side
 	jmp TurnEndForBothSides
@@ -235,6 +247,9 @@ HandleWeatherItem:
 	ld [bc], a
 	ld [de], a
 	call GetItemName
+	; take the used shard off the HUD before the item animation, so the
+	; HUD it puts back afterwards doesn't show it
+	call RefreshBattleHuds
 	farcall SwitchTurnCore
 	farcall ItemRecoveryAnim
 	farcall SwitchTurnCore

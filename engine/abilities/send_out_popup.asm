@@ -104,11 +104,17 @@ GetSendOutPopupFlag:
 
 ResetPlayerSendOutPopups::
 ; The player sent out a mon: its popups can show again.
+	; and its entry item is pending from now on (so its HUD doesn't show a
+	; weather shard it's about to use: PrintPlayerHUD)
+	ld hl, wEntryAbilitiesPending
+	set ENTRY_ITEM_PLAYER_F, [hl]
 	ld hl, wSendOutPopupsShown
 	jr ResetSendOutPopups
 
 ResetEnemySendOutPopups::
 ; The foe sent out a mon.
+	ld hl, wEntryAbilitiesPending
+	set ENTRY_ITEM_ENEMY_F, [hl]
 	ld hl, wSendOutPopupsShown + SEND_OUT_POPUP_BYTES
 ResetSendOutPopups:
 	xor a

@@ -11,28 +11,34 @@
 ; first (that's "player" on its Game Boy and "enemy" on the other one), the
 ; same order the link battle code uses for everything else.
 
-DEF ENTRY_ABILITIES_PLAYER_F EQU 0
-DEF ENTRY_ABILITIES_ENEMY_F  EQU 1
+; The same goes for held items that activate on entry (weather shards): their
+; own pending bits are run by RunPendingEntryItems at the end of SpikesDamage,
+; so after the mon took its hazard damage and every entry ability went off.
+
+; (ENTRY_ABILITIES_*_F and ENTRY_ITEM_*_F are in constants/battle_constants.asm)
 
 DEF HAZARDS_MASK EQU 1 << SCREENS_SPIKES | 1 << SCREENS_STEALTH_ROCK | 1 << SCREENS_TOXIC_SPIKES | 1 << SCREENS_STICKY_WEB
 
 StartBattleEntryAbilities::
-; Both sides' first mons are out: run their entry abilities.
-	ld a, (1 << ENTRY_ABILITIES_PLAYER_F) | (1 << ENTRY_ABILITIES_ENEMY_F)
+; Both sides' first mons are out: run their entry abilities, then their
+; entry items.
+	ld a, (1 << ENTRY_ABILITIES_PLAYER_F) | (1 << ENTRY_ABILITIES_ENEMY_F) \
+	    | (1 << ENTRY_ITEM_PLAYER_F) | (1 << ENTRY_ITEM_ENEMY_F)
 	ld [wEntryAbilitiesPending], a
-	jr RunPendingEntryAbilities
+	call RunPendingEntryAbilities
+	jmp RunPendingEntryItems.run
 
 QueueEntryAbilities::
 ; The hBattleTurn side has just sent out a mon.
 	ld hl, wEntryAbilitiesPending
 	ldh a, [hBattleTurn]
 	and a
-	jr nz, .enemy
-	set ENTRY_ABILITIES_PLAYER_F, [hl]
-	jr .queued
-.enemy
-	set ENTRY_ABILITIES_ENEMY_F, [hl]
-.queued
+	ld a, (1 << ENTRY_ABILITIES_PLAYER_F) | (1 << ENTRY_ITEM_PLAYER_F)
+	jr z, .got_bits
+	ld a, (1 << ENTRY_ABILITIES_ENEMY_F) | (1 << ENTRY_ITEM_ENEMY_F)
+.got_bits
+	or [hl]
+	ld [hl], a
 	; at the start of a battle, wait until DoBattle has sent out both mons
 	ld a, [wBattleHasJustStarted]
 	and a
@@ -40,8 +46,16 @@ QueueEntryAbilities::
 	; fallthrough
 
 RunPendingEntryAbilities:
-	ld a, [wEntryAbilitiesPending]
-	and a
+	lb bc, ENTRY_ABILITIES_PLAYER_F, ENTRY_ABILITIES_ENEMY_F
+	ld de, RunEntryAbilities
+	; fallthrough
+
+RunPendingEntrySides:
+; Run de for each side whose pending bit (b: player's, c: enemy's) is set,
+; once both sides have a mon out, in link battle order, with a = the side.
+	ld hl, wEntryAbilitiesPending
+	ld a, [hl]
+	call .BitMask
 	ret z
 	; both sides need a mon on the field
 	ld hl, wBattleMonHP
@@ -55,7 +69,11 @@ RunPendingEntryAbilities:
 
 	ldh a, [hBattleTurn]
 	push af
+	push bc
+	push de
 	call ClearSprites
+	pop de
+	pop bc
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
 	jr z, .enemy_first
@@ -72,20 +90,96 @@ RunPendingEntryAbilities:
 	ret
 
 .player
-	ld hl, wEntryAbilitiesPending
-	bit ENTRY_ABILITIES_PLAYER_F, [hl]
-	ret z
-	res ENTRY_ABILITIES_PLAYER_F, [hl]
-	xor a ; player's turn
-	jr RunEntryAbilities
+	push bc
+	push de
+	ld a, b
+	call .TestAndReset
+	ld a, 0 ; player's turn
+	jr .run_side
 
 .enemy
-	ld hl, wEntryAbilitiesPending
-	bit ENTRY_ABILITIES_ENEMY_F, [hl]
-	ret z
-	res ENTRY_ABILITIES_ENEMY_F, [hl]
+	push bc
+	push de
+	ld a, c
+	call .TestAndReset
 	ld a, 1 ; enemy's turn
-	; fallthrough
+.run_side
+	pop hl ; de
+	pop bc
+	ret z
+	push bc
+	push hl
+	call _hl_
+	pop de
+	pop bc
+	ret
+
+.TestAndReset:
+; Reset pending bit a; return nz if it was set.
+	call .Mask
+	ld hl, wEntryAbilitiesPending
+	and [hl]
+	ret z
+	xor [hl]
+	ld [hl], a
+	or 1 ; nz
+	ret
+
+.BitMask:
+; Return a & (1 << b | 1 << c), z if neither is set. Preserves de.
+	push de
+	ld e, a
+	ld a, b
+	call .Mask
+	ld d, a
+	ld a, c
+	call .Mask
+	or d
+	and e
+	pop de
+	ret
+
+.Mask:
+; a = 1 << a
+	push bc
+	ld b, a
+	ld a, 1
+	inc b
+.shift
+	dec b
+	jr z, .got_mask
+	add a
+	jr .shift
+.got_mask
+	pop bc
+	ret
+
+RunPendingEntryItems::
+; At the end of SpikesDamage: use the entry items of the sides that sent out
+; a mon (after its hazard damage and entry abilities).
+	ld a, [wBattleHasJustStarted]
+	and a
+	ret nz ; DoBattle runs them once both mons are out
+.run
+	lb bc, ENTRY_ITEM_PLAYER_F, ENTRY_ITEM_ENEMY_F
+	ld de, RunEntryItems
+	jmp RunPendingEntrySides
+
+RunEntryItems:
+; Side a's mon just came in: use its weather shard
+; (engine/battle/turn_end_effects.asm).
+	ldh [hBattleTurn], a
+	xor a
+	ld [wFailedMessage], a
+	ld [wEffectFailed], a
+	ld [wAttackMissed], a
+	farcall UseHeldWeatherShard
+	; the player's HUD hid its shard until now (PrintPlayerHUD): show it
+	; if it kept it
+	ldh a, [hBattleTurn]
+	and a
+	ret nz
+	farjp UpdatePlayerHUD
 
 RunEntryAbilities:
 ; Run every entry ability handler for side a.

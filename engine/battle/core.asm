@@ -3245,7 +3245,11 @@ SpikesDamage:
 	; the hBattleTurn side sent out a mon: its entry abilities go off
 	; once both sides have a mon out (engine/abilities/entry_abilities.asm)
 	farcall QueueEntryAbilities
+	call .Hazards
+	; then its entry items (weather shards), after any hazard damage
+	farjp RunPendingEntryItems
 
+.Hazards:
 	call GetCurrentMon
 	ld hl, HazardGuardMons
 	call IsInByteArray
@@ -4083,6 +4087,21 @@ PrintPlayerHUD:
 	cp NO_ITEM
 	jr z, .NoItemHeld
 
+	; not a weather shard it's about to use as it comes in (RunEntryItems)
+	ld b, a
+	ld a, [wEntryAbilitiesPending]
+	bit ENTRY_ITEM_PLAYER_F, a
+	ld a, b
+	jr z, .draw_item
+	cp FROST_SHARD
+	jr z, .NoItemHeld
+	cp RAIN_SHARD
+	jr z, .NoItemHeld
+	cp SUN_SHARD
+	jr z, .NoItemHeld
+	cp SAND_SHARD
+	jr z, .NoItemHeld
+.draw_item
 	; Draw the held item icon
 	hlcoord 10, 8 ; coordinates of held item
 	ld [hl], $70 ; caught held icon
