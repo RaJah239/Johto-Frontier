@@ -585,9 +585,7 @@ ForfeitMatchText:
 	done
 
 ForfeitQuestionFunction:
-	ld hl, ForfeitMatchText
-	call PrintText
-	call NoYesBox
+	call AskForfeitBattle
 	jr c, .return_to_battle
 
 	xor a
@@ -612,6 +610,12 @@ ForfeitQuestionFunction:
 .return_to_battle
 	xor a
 	ret
+
+AskForfeitBattle:
+; Return carry if the player chose not to forfeit.
+	ld hl, ForfeitMatchText
+	call PrintText
+	jmp NoYesBox
 
 TrainerBattleInfo:
 	push hl

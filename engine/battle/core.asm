@@ -192,7 +192,7 @@ WildFled_EnemyFled_LinkBattleCanceled:
 	ld a, [wBattleResult]
 	and BATTLERESULT_BITMASK
 	ld [wBattleResult], a ; WIN
-	ld hl, BattleText_EnemyFled
+	ld hl, BattleText_EnemyForfeited
 
 .print_text
 	call StdBattleTextbox
@@ -2944,37 +2944,8 @@ TryToRunAwayFromBattle:
 	farjp TrainerBattleInfo
 
 .can_escape
-	ld a, [wLinkMode]
-	and a
 	ld a, DRAW
-	jr z, .fled
-	call LoadTilemapToTempTilemap
-	xor a ; BATTLEPLAYERACTION_USEMOVE
-	ld [wBattlePlayerAction], a
-	ld a, BATTLEACTION_FORFEIT
-	ld [wCurMoveNum], a
-	xor a
-	ld [wCurPlayerMove], a
-	call LinkBattleSendReceiveAction
-	call SafeLoadTempTilemapToTilemap
-
-	; Got away safely
-	ld a, [wBattleAction]
-	cp BATTLEACTION_FORFEIT
-	ld a, DRAW
-	jr z, .fled
-	dec a ; LOSE
-.fled
-	ld b, a
-	ld a, [wBattleResult]
-	and BATTLERESULT_BITMASK
-	add b
-	ld [wBattleResult], a
-	call StopDangerSound
-	push de
-	ld de, SFX_RUN
-	call WaitPlaySFX
-	pop de
+	call SetBattleResultAndPlayRunSFX
 
 	; Skip GotAwaySafely text
 	call CheckIntrosOutros
@@ -2986,6 +2957,47 @@ TryToRunAwayFromBattle:
 .skip
 	call LoadTilemapToTempTilemap
 	scf
+	ret
+
+LinkBattleForfeit:
+; The player forfeits a link battle: tell the other Game Boy, which ends
+; the battle there too (EnemyTriesToFlee). Return carry (battle over).
+	call LoadTilemapToTempTilemap
+	xor a ; BATTLEPLAYERACTION_USEMOVE
+	ld [wBattlePlayerAction], a
+	ld [wCurPlayerMove], a
+	ld a, BATTLEACTION_FORFEIT
+	ld [wCurMoveNum], a
+	call LinkBattleSendReceiveAction
+	call SafeLoadTempTilemapToTilemap
+
+	; a loss, or a draw if both players forfeited at the same time
+	ld a, [wBattleAction]
+	cp BATTLEACTION_FORFEIT
+	ld a, DRAW
+	jr z, .got_result
+	dec a ; LOSE
+.got_result
+	call SetBattleResultAndPlayRunSFX
+	ld hl, BattleText_YouForfeited
+	call StdBattleTextbox
+	call WaitSFX
+	call LoadTilemapToTempTilemap
+	scf
+	ret
+
+SetBattleResultAndPlayRunSFX:
+; a = WIN/LOSE/DRAW
+	ld b, a
+	ld a, [wBattleResult]
+	and BATTLERESULT_BITMASK
+	add b
+	ld [wBattleResult], a
+	call StopDangerSound
+	push de
+	ld de, SFX_RUN
+	call WaitPlaySFX
+	pop de
 	ret
 
 InitBattleMon:
@@ -4411,9 +4423,9 @@ BattleMenu_Pack:
 	and a
 	jr z, .not_linked
 
-	ld hl, BattleText_NoForfeitingMatchText
-	call StdBattleTextbox
-	jmp BattleMenu
+	farcall AskForfeitBattle
+	jmp c, BattleMenu ; no
+	jmp LinkBattleForfeit
 
 .not_linked
 	farcall ForfeitQuestionFunction

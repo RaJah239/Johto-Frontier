@@ -201,13 +201,6 @@ BattleText_WildFled:
 	line "fled!"
 	prompt
 
-BattleText_EnemyFled:
-	text "Foe @"
-	text_ram wEnemyMonNickname
-	text_start
-	line "fled!"
-	prompt
-
 HurtByPoisonText:
 	text "<USER>"
 	line "is hurt by poison!"
@@ -490,9 +483,15 @@ BattleText_MonIsAlreadyOut:
 	line "is already out."
 	prompt
 
-BattleText_NoForfeitingMatchText:
-	text "You cannot forfeit"
-	line "a linked battle."
+BattleText_YouForfeited:
+	text "You forfeited"
+	line "the battle."
+	prompt
+
+BattleText_EnemyForfeited:
+	text_ram wOTPlayerName
+	text_start
+	line "forfeited!"
 	prompt
 
 BattleText_MonCantBeRecalled:
