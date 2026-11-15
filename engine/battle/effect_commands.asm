@@ -2658,6 +2658,18 @@ PolarFangorLightBallBoost:
 	call SpeciesItemBoost
 
 .done
+; Huge Power doubles the Attack stat (not the Defense used by Body Press)
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_BODY_PRESS
+	jr z, .no_huge_power
+	push hl
+	call GetCurrentMon
+	pop hl
+	newfarcall IsHugePowerSpecies
+	jr nc, .no_huge_power
+	add hl, hl
+.no_huge_power
 	pop de
 	pop bc
 	ret

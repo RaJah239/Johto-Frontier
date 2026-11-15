@@ -408,18 +408,43 @@ HandleStrongJaw:
 	call IsInByteArray
 	ret nc
 	ShowOncePerSendOutPopup SEND_OUT_POPUP_STRONG_JAW, StrongJawText
-	jr FiftyPercentBoost
+	jmp FiftyPercentBoost
 
 StrongJawText: db "Strong Jaw@"
 INCLUDE "data/abilities/strong_jaw_mons.asm"
 
+; ===========================
+; === Ability: Huge Power ===
+; ===========================
+; A Huge Power mon's Attack stat is doubled: in its damage
+; (PolarFangorLightBallBoost in effect_commands.asm, so the AI's damage
+; estimates and the move info preview see it too) and in the battle Info
+; tab (StatsInfoBox). Not Defense for Body Press, nor special moves.
 HandleHugePower:
+; Its popup, the first time it uses a physical move after being sent out.
 	call GetCurrentMon
 	ld hl, HugePowerPokemon
 	call IsInByteArray
 	ret nc
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp SPECIAL
+	ret nc
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_BODY_PRESS
+	ret z
 	ShowOncePerSendOutPopup SEND_OUT_POPUP_HUGE_POWER, HugePowerText
-	jr HundredPercentBoost
+	ret
+
+IsHugePowerSpecies::
+; Carry if species a has Huge Power. Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld hl, HugePowerPokemon
+	call IsInByteArray
+	jmp PopBCDEHL
 
 HugePowerText: db "Huge Power@"
 INCLUDE "data/abilities/huge_power_mons.asm"

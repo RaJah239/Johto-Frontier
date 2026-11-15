@@ -750,20 +750,45 @@ StatsInfoBox:
 	hlcoord 1, 0
 	ld de, MainText.player
 	call PlaceString
+	ld hl, wBattleMonMaxHP
+	ld a, [wBattleMonSpecies]
+	call .CopyStats
 	ld de, StatTexts
 	ld b, 1
 	ld c, 2
-	ld hl, wBattleMonMaxHP
 	call StatsInfoBoxLoop
 	
 	hlcoord 11, 0
 	ld de, MainText.enemy
 	call PlaceString
+	ld hl, wEnemyMonMaxHP
+	ld a, [wEnemyMonSpecies]
+	call .CopyStats
 	ld de, StatTexts
 	ld b, 11
 	ld c, 2
-	ld hl, wEnemyMonMaxHP
 	jmp StatsInfoBoxLoop
+
+.CopyStats:
+; Copy the max HP and stats at hl to wStringBuffer1, doubling Attack for
+; Huge Power (species a). Return hl = the copy.
+	push af
+	ld de, wStringBuffer1
+	ld bc, 2 * (1 + NUM_BATTLE_STATS)
+	call CopyBytes
+	pop af
+	ld hl, wStringBuffer1
+	newfarcall IsHugePowerSpecies
+	ret nc
+	inc hl
+	inc hl
+	inc hl ; Attack, low byte
+	sla [hl]
+	dec hl
+	rl [hl]
+	dec hl
+	dec hl
+	ret
 
 PlayerInfoPageInfoBox:
 	hlcoord 0, 0
