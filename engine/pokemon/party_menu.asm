@@ -313,15 +313,16 @@ PlacePartyMonStatus:
 	push hl
 	call PartyMenuCheckEgg
 	jr z, .next
-	push hl
 	ld a, b
+	push af
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1Status
 	call AddNTimes
 	ld e, l
 	ld d, h
-	pop hl
-	call PlaceStatusString
+	pop af
+	ld c, a
+	farcall PlacePartyMonStatusIcon
 .next
 	pop hl
 	ld de, SCREEN_WIDTH * 2

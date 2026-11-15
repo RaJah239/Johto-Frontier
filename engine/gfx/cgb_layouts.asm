@@ -965,6 +965,7 @@ _CGB_PartyMenuPals:
 	call CopyFourPalettes
 	call InitPartyMenuBGPal0
 	call InitPartyMenuBGPal7
+	farcall LoadPartyStatusIconPals
 	jmp InitPartyMenuOBPals
 
 _CGB_Evolution:

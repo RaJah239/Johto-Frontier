@@ -1,5 +1,5 @@
-; Status condition icons (from Polished Crystal, with FRB for frostbite):
-; in the battle HUDs and the party menu.
+; Status condition icons (from Polished Crystal, with FRB for frostbite
+; and FNT): in the battle HUDs and the party menu.
 
 	const_def
 	const STATUS_ICON_OK  ; 0 (blank)
@@ -21,6 +21,14 @@ DEF NUM_STATUS_ICONS EQU const_value
 ; the player's status, color 2 for the foe's.
 DEF BATTLE_STATUS_ICON_PLAYER_TILE EQU $ec
 DEF BATTLE_STATUS_ICON_ENEMY_TILE  EQU $ee
+
+; The party menu gives each party slot its own two tiles from $e0, and
+; uses BG palettes 4-6 (free there), two status colours in each: see
+; PartyStatusIconPalettes.
+DEF PARTY_STATUS_ICON_TILE EQU $e0
+DEF PARTY_STATUS_ICON_X EQU 4
+DEF PARTY_STATUS_ICON_Y EQU 2
+DEF PARTY_STATUS_ICON_DRAWN_IN_COLOR_2 EQU $80
 
 GetStatusIconIndex:
 ; de = status, hl = substatus 5 (for Toxic) or 0. Returns the icon in a.
@@ -200,6 +208,145 @@ LoadBattleStatusIconPals::
 	ld [de], a
 	inc de
 	ret
+
+PlacePartyMonStatusIcon::
+; Draw the status icon of party mon c, whose status is at de, in its
+; party menu row. Nothing for a healthy mon.
+	ld h, d
+	ld l, e
+	inc hl
+	inc hl
+	assert MON_STATUS + 2 == MON_HP
+	ld a, [hli]
+	or [hl]
+	ld a, STATUS_ICON_FNT
+	jr z, .got_icon
+	ld hl, 0 ; no Toxic outside battle
+	call GetStatusIconIndex
+.got_icon
+	ld b, a
+
+; the two cells
+	ld a, c
+	add a ; 2 rows per mon
+	add PARTY_STATUS_ICON_Y
+	ld hl, wTilemap + PARTY_STATUS_ICON_X
+	push bc
+	ld bc, SCREEN_WIDTH
+	call AddNTimes
+	pop bc
+	ld a, b
+	and a
+	jr z, .healthy
+	ld a, c
+	add a
+	add PARTY_STATUS_ICON_TILE
+	ld [hli], a
+	inc a
+	ld [hld], a
+	ld de, wAttrmap - wTilemap
+	add hl, de
+	ld e, b
+	ld d, 0
+	push hl
+	ld hl, PartyStatusIconPalettes
+	add hl, de
+	ld a, [hl]
+	pop hl
+	push af
+	and PALETTE_MASK
+	or VRAM_BANK_1
+	ld [hli], a
+	ld [hl], a
+
+; the tiles
+	pop af
+	ld de, StatusIconGFX
+	bit 7, a ; PARTY_STATUS_ICON_DRAWN_IN_COLOR_2
+	jr z, .got_gfx
+	ld de, EnemyStatusIconGFX
+.got_gfx
+	ld a, b
+	call GetStatusIconGFX
+	ld a, c
+	add a
+	add PARTY_STATUS_ICON_TILE
+	jr StatusIcons_SendTiles
+
+.healthy
+	ld de, wAttrmap - wTilemap
+	add hl, de
+	xor a
+	ld [hli], a
+	ld [hl], a
+	ret
+
+PartyStatusIconPalettes:
+; BG palette for each icon in the party menu; PARTY_STATUS_ICON_DRAWN_IN_COLOR_2
+; if it takes its palette's color 2 (and is drawn from EnemyStatusIconGFX)
+	table_width 1, PartyStatusIconPalettes
+	db 0     ; OK (unused)
+	db 4     ; PSN
+	db 4 | PARTY_STATUS_ICON_DRAWN_IN_COLOR_2 ; PAR
+	db 5     ; SLP
+	db 5 | PARTY_STATUS_ICON_DRAWN_IN_COLOR_2 ; BRN
+	db 6     ; FRB
+	db 4     ; TOX (the PSN colour)
+	db 6 | PARTY_STATUS_ICON_DRAWN_IN_COLOR_2 ; FNT
+	assert_table_length NUM_STATUS_ICONS
+
+LoadPartyStatusIconPals::
+; Fill BG palettes 4-6 in wBGPals1 for the party menu's status icons:
+; white, PSN/SLP/FRB, PAR/BRN/FNT, black.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals1)
+	ldh [rSVBK], a
+	ld de, wBGPals1 palette 4
+	ld hl, .Icons
+	ld b, 3
+.palette
+	ld a, LOW(PALRGB_WHITE)
+	ld [de], a
+	inc de
+	ld a, HIGH(PALRGB_WHITE)
+	ld [de], a
+	inc de
+	ld c, 2
+.color
+	ld a, [hli]
+	push hl
+	ld hl, StatusIconPals
+	add a
+	add l
+	ld l, a
+	adc h
+	sub l
+	ld h, a
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	inc de
+	pop hl
+	dec c
+	jr nz, .color
+	xor a
+	ld [de], a
+	inc de
+	ld [de], a
+	inc de
+	dec b
+	jr nz, .palette
+	pop af
+	ldh [rSVBK], a
+	ret
+
+.Icons:
+	db STATUS_ICON_PSN, STATUS_ICON_PAR
+	db STATUS_ICON_SLP, STATUS_ICON_BRN
+	db STATUS_ICON_FRB, STATUS_ICON_FNT
 
 GetStatusIconGFX:
 ; de += icon a * 2 tiles
