@@ -392,7 +392,7 @@ HandleStrongJaw:
 	call IsInByteArray
 	ret nc
 	ShowOncePerSendOutPopup SEND_OUT_POPUP_STRONG_JAW, StrongJawText
-	jmp FiftyPercentBoost
+	jr FiftyPercentBoost
 
 StrongJawText: db "Strong Jaw@"
 INCLUDE "data/abilities/strong_jaw_mons.asm"

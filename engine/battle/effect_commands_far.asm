@@ -109,7 +109,7 @@ _BattleCommand_Critical:
 
 ; +2 critical level
 	ld c, 2
-	jmp .Tally
+	jr .Tally
 
 .FocusEnergy:
 	ld a, BATTLE_VARS_SUBSTATUS4
@@ -166,7 +166,7 @@ _BattleCommand_Critical:
 	ld hl, SuperLuckPokemon
 	call IsInByteArray
 	pop bc
-	jmp nc, .continue
+	jr nc, .continue
 
 ; super luck mons have an innate +2 critical hit level
 	inc c
