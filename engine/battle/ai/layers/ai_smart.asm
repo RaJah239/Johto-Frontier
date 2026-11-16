@@ -3537,6 +3537,10 @@ AI_Smart_Protect:
 	bit SUBSTATUS_CURSE, a
 	jr nz, .encourage
 
+; Speed Boost: protect for a free Speed boost that makes it outspeed
+	call AI_SpeedBoostProtects
+	jr c, .use
+
 ; discourage if at full HP
 	call AICheckEnemyMaxHP
 	jr c, .discourage
@@ -3566,6 +3570,24 @@ AI_Smart_Protect:
 
 	inc [hl]
 	inc [hl]
+	ret
+
+AI_SpeedBoostProtects:
+; Carry if the enemy's mon has Speed Boost, is slower than the player's now,
+; and one boost (at the end of this turn) makes it faster. Preserves hl.
+	ld a, [wEnemyMonSpecies]
+	newfarcall IsSpeedBoostSpecies ; engine/abilities/turn_end_abilities.asm
+	ret nc
+	push hl
+	farcall DoesAIOutSpeedPlayer
+	jr c, .no
+	ld b, 1
+	farcall AI_FasterAfterSpeedBoost ; engine/battle/ai/speed_boost.asm
+	pop hl
+	ret
+.no
+	pop hl
+	and a
 	ret
 
 AI_Smart_Foresight:

@@ -362,6 +362,16 @@ IsPoisonHealSpecies::
 	call IsInAbilityList
 	jmp PopBCDEHL
 
+IsSpeedBoostSpecies::
+; Carry if species a has Speed Boost (and Neutralizing Gas doesn't suppress
+; it; for the AI). Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld hl, SpeedBoostPokemon
+	call IsInAbilityList
+	jmp PopBCDEHL
+
 PoisonHealText: db "Poison Heal@"
 
 RecoveryText: db "Recovery@"

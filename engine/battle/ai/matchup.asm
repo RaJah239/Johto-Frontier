@@ -76,6 +76,9 @@ DEF MSIM_P_TE_SOLAR_F     EQU 7
 ; wMSimFlags5
 DEF MSIM_E_POISON_HEAL_F  EQU 0 ; poison heals it instead
 DEF MSIM_P_POISON_HEAL_F  EQU 1
+DEF MSIM_E_SPEED_BOOST_F  EQU 2 ; +1 Speed at the end of each turn
+DEF MSIM_P_SPEED_BOOST_F  EQU 3
+DEF MSIM_E_SB_SKIP_F      EQU 4 ; not this turn: it just came in
 
 DEF MSIM_SIDE_ENEMY  EQU 0
 DEF MSIM_SIDE_PLAYER EQU 1
@@ -304,6 +307,12 @@ MSim_TryCandidate:
 	jr c, .loses
 
 	call MSim_ComputeDamages
+	; Speed Boost doesn't go off the turn it comes in
+	ld hl, wMSimFlags5
+	bit MSIM_E_SPEED_BOOST_F, [hl]
+	jr z, .no_skip
+	set MSIM_E_SB_SKIP_F, [hl]
+.no_skip
 	ld a, [wBattleMonHP]
 	ld [wMSimPlayerHP], a
 	ld a, [wBattleMonHP + 1]
@@ -2210,6 +2219,7 @@ MSim_EndOfTurn:
 	call MSim_TurnEndAbilities
 	and a
 	ret nz
+	call MSim_SpeedBoostTurn
 	ld a, [wMSimFlags2]
 	bit MSIM_E_LEFTOVERS_F, a
 	jr z, .player_leftovers
@@ -2304,6 +2314,101 @@ MSim_TurnEndAbilities:
 	xor a
 	ret
 
+MSim_SpeedBoostTurn:
+; Speed Boost: +1 Speed stage for each side that has it (not the turn it came
+; in), then who's faster is worked out again with the new stages.
+	ld hl, wMSimFlags5
+	ld a, [hl]
+	and 1 << MSIM_E_SPEED_BOOST_F | 1 << MSIM_P_SPEED_BOOST_F
+	ret z
+	bit MSIM_E_SB_SKIP_F, [hl]
+	res MSIM_E_SB_SKIP_F, [hl]
+	jr nz, .player
+	bit MSIM_E_SPEED_BOOST_F, [hl]
+	jr z, .player
+	ld a, [wMSimSpeedSteps]
+	and $0f
+	ld b, a
+	ld a, [wEnemySpdLevel]
+	add b
+	cp MAX_STAT_LEVEL
+	jr nc, .player
+	ld a, [wMSimSpeedSteps]
+	inc a
+	ld [wMSimSpeedSteps], a
+.player
+	ld hl, wMSimFlags5
+	bit MSIM_P_SPEED_BOOST_F, [hl]
+	jr z, .speeds
+	ld a, [wMSimSpeedSteps]
+	swap a
+	and $0f
+	ld b, a
+	ld a, [wPlayerSpdLevel]
+	add b
+	cp MAX_STAT_LEVEL
+	jr nc, .speeds
+	ld a, [wMSimSpeedSteps]
+	add $10
+	ld [wMSimSpeedSteps], a
+.speeds
+	; the stats with the gained stages, who's faster, then put them back
+	ld a, [wMSimSpeedSteps]
+	and a
+	ret z
+	ld de, wMSimSavedSBStats
+	ld hl, wEnemyMonAttack
+	ld c, NUM_BATTLE_STATS * 2
+	call MSim_ToSaveBank
+	ld hl, wBattleMonAttack
+	ld c, NUM_BATTLE_STATS * 2
+	call MSim_ToSaveBank
+	ld a, [wEnemySpdLevel]
+	push af
+	ld a, [wPlayerSpdLevel]
+	push af
+	ld a, [wMSimSpeedSteps]
+	and $0f
+	ld hl, wEnemySpdLevel
+	call .add_steps
+	ld a, [wMSimSpeedSteps]
+	swap a
+	and $0f
+	ld hl, wPlayerSpdLevel
+	call .add_steps
+	ld a, 1
+	ldh [hBattleTurn], a
+	callfar CalcEnemyStats
+	xor a
+	ldh [hBattleTurn], a
+	callfar CalcPlayerStats
+	farcall DoesAIOutSpeedPlayer
+	ld hl, wMSimFlags
+	res MSIM_E_FASTER_F, [hl]
+	jr nc, .restore
+	set MSIM_E_FASTER_F, [hl]
+.restore
+	pop af
+	ld [wPlayerSpdLevel], a
+	pop af
+	ld [wEnemySpdLevel], a
+	ld hl, wMSimSavedSBStats
+	ld de, wEnemyMonAttack
+	ld c, NUM_BATTLE_STATS * 2
+	call MSim_FromSaveBank
+	ld de, wBattleMonAttack
+	ld c, NUM_BATTLE_STATS * 2
+	jmp MSim_FromSaveBank
+
+.add_steps
+	add [hl]
+	cp MAX_STAT_LEVEL + 1
+	jr c, .level_ok
+	ld a, MAX_STAT_LEVEL
+.level_ok
+	ld [hl], a
+	ret
+
 MSim_SetupTurnEnd:
 ; wMSimFlags4 / wMSimFlags5 for both mons' turn-end abilities (by the
 ; weather now; not while Neutralizing Gas suppresses them).
@@ -2336,8 +2441,21 @@ MSim_SetupTurnEnd:
 	ld d, BANK(PoisonHealPokemon)
 	call MSim_IsInFarAbilityList
 	pop hl
-	ret nc
+	jr nc, .speed_boost
 	set MSIM_P_POISON_HEAL_F, [hl]
+.speed_boost
+	; Speed Boost
+	xor a
+	ld [wMSimSpeedSteps], a
+	ld a, [wEnemyMonSpecies]
+	newfarcall IsSpeedBoostSpecies
+	jr nc, .player_speed_boost
+	set MSIM_E_SPEED_BOOST_F, [hl]
+.player_speed_boost
+	ld a, [wBattleMonSpecies]
+	newfarcall IsSpeedBoostSpecies
+	ret nc
+	set MSIM_P_SPEED_BOOST_F, [hl]
 	ret
 
 .bits

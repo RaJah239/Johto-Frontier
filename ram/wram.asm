@@ -3900,6 +3900,8 @@ wMSimSavedField:: ds 7 + NUM_BATTLE_STATS * 2 + 13 + 4 + 1 + 1 + 1
 ; a candidate's and the player's stat stages and stats before it tries Haze /
 ; Roar (MSim_TryCandidate)
 wMSimSavedPreReset:: ds 2 * (7 + NUM_BATTLE_STATS * 2)
+; both mons' stats while Speed Boost's stages are tried (MSim_SpeedBoostTurn)
+wMSimSavedSBStats:: ds 2 * NUM_BATTLE_STATS * 2
 
 
 SECTION "Pokedex Grid WRAM", WRAMX[$da00], BANK[5]
