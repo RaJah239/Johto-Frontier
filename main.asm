@@ -158,6 +158,9 @@ SECTION "Enemy Trainers", ROMX
 INCLUDE "engine/battle/ai/items.asm"
 INCLUDE "engine/battle/ai/scoring.asm"
 INCLUDE "engine/battle/read_trainer_attributes.asm"
+
+
+SECTION "Trainer Parties", ROMX
 INCLUDE "engine/battle/read_trainer_party.asm"
 
 ;SECTION "Enemy Trainer Parties 1", ROMX
