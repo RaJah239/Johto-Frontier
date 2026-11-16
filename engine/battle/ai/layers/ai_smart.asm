@@ -21,6 +21,9 @@ AI_Smart:
 	pop hl
 	push hl
 	call AI_Smart_GaleWings
+	pop hl
+	push hl
+	call AI_Smart_MagicBounceSecondary
 
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
 	ld hl, AI_Smart_EffectHandlers
@@ -1206,6 +1209,11 @@ AI_Smart_Acrobatics:
 	ret
 
 AI_Smart_BurnTarget:
+; against Magic Bounce the status can't land on the player (it may bounce
+; back: AI_Smart_MagicBounceSecondary scores that)
+	newfarcall AI_PlayerHasMagicBounce ; engine/abilities/magic_bounce.asm
+	ret c
+
 ; if enemy is already statused - discourage
 	ld a, [wBattleMonStatus]
 	and a
@@ -1268,6 +1276,11 @@ AI_Smart_BurnTarget:
 	ret
 
 AI_Smart_ParalyzeTarget:
+; against Magic Bounce the status can't land on the player (it may bounce
+; back: AI_Smart_MagicBounceSecondary scores that)
+	newfarcall AI_PlayerHasMagicBounce ; engine/abilities/magic_bounce.asm
+	ret c
+
 ; if enemy is already statused - discourage
 	ld a, [wBattleMonStatus]
 	and a
@@ -2956,6 +2969,192 @@ AI_HasStatusMove:
 	db EFFECT_PARALYZE
 	db EFFECT_BURN
 	db -1
+
+AI_Smart_MagicBounceSecondary:
+; hl = the move's score. Against a Magic Bounce player mon (when the
+; enemy's mon doesn't have Mold Breaker), a damaging move's side-effect
+; status bounces back at the enemy's mon whenever it would have landed
+; (engine/abilities/magic_bounce.asm). Discourage the move by 1 if the
+; enemy's mon would get the status, by 3 if that's sure to happen (Kindle
+; Flamethrower, Sure Shock Thunderbolt). Its damage is still scored as usual.
+	ld a, [wEnemyMoveStruct + MOVE_POWER]
+	and a
+	ret z
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	push hl
+	ld hl, AI_SecondaryStatusEffects
+	ld de, 2
+	call IsInArray
+	jr nc, .pop_done
+	inc hl
+	ld e, [hl] ; the statuses it can give
+	pop hl
+	newfarcall AI_PlayerHasMagicBounce ; engine/abilities/magic_bounce.asm
+	ret nc
+	; would one land on the player (and so bounce onto the enemy's mon)?
+	ld d, 1
+.loop
+	ld a, e
+	and d
+	jr z, .next
+	ld a, d
+	ld b, 0 ; player
+	call AI_SideCanGetStatus
+	jr nc, .next
+	ld a, d
+	ld b, 1 ; enemy
+	call AI_SideCanGetStatus
+	jr c, .bounces
+.next
+	sla d
+	jr nz, .loop
+	ret
+
+.bounces
+	inc [hl]
+	call AI_SecondaryStatusIsSure
+	ret nc
+	inc [hl]
+	inc [hl]
+	ret
+
+.pop_done
+	pop hl
+	ret
+
+AI_SecondaryStatusEffects:
+; damaging moves' side-effect statuses
+	db EFFECT_POISON_HIT,       1 << PSN
+	db EFFECT_POISON_MULTI_HIT, 1 << PSN
+	db EFFECT_BURN_HIT,         1 << BRN
+	db EFFECT_SACRED_FIRE,      1 << BRN
+	db EFFECT_SOLARBEAM,        1 << BRN
+	db EFFECT_FLARE_BLITZ,      1 << BRN
+	db EFFECT_FIRE_FANG,        1 << BRN
+	db EFFECT_FREEZE_HIT,       1 << FRZ
+	db EFFECT_BLIZZARD,         1 << FRZ
+	db EFFECT_ICE_FANG,         1 << FRZ
+	db EFFECT_PARALYZE_HIT,     1 << PAR
+	db EFFECT_THUNDER,          1 << PAR
+	db EFFECT_RECOIL_PARA_HIT,  1 << PAR
+	db EFFECT_THUNDER_FANG,     1 << PAR
+	db EFFECT_TRI_ATTACK,       1 << BRN | 1 << FRZ | 1 << PAR
+	db -1
+
+AI_SideCanGetStatus:
+; a = a status (1 << PSN / BRN / FRZ / PAR), b = side (0 = player, 1 =
+; enemy). Carry if that side's mon could be given it by a side effect right
+; now: no status yet, no Substitute or Safeguard, not immune by type (Poison /
+; Steel: poison, Fire: burn, Ice or the sun: frostbite), no Serenity, no
+; Leaf Guard in the sun. Preserves bc, de and hl.
+	push hl
+	push de
+	push bc
+	ld c, a
+	ld a, b
+	and a
+	jr nz, .enemy
+	ld a, [wBattleMonStatus]
+	and a
+	jr nz, .no
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
+	jr nz, .no
+	ld a, [wPlayerScreens]
+	bit SCREENS_SAFEGUARD, a
+	jr nz, .no
+	ld hl, wBattleMonType1
+	ld a, [wBattleMonSpecies]
+	jr .check
+.enemy
+	ld a, [wEnemyMonStatus]
+	and a
+	jr nz, .no
+	ld a, [wEnemySubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
+	jr nz, .no
+	ld a, [wEnemyScreens]
+	bit SCREENS_SAFEGUARD, a
+	jr nz, .no
+	ld hl, wEnemyMonType1
+	ld a, [wEnemyMonSpecies]
+.check
+	ld b, a ; species
+	ld d, [hl]
+	inc hl
+	ld e, [hl] ; types
+	ld a, c
+	cp 1 << PSN
+	jr nz, .not_poison
+	ld a, POISON
+	call .has_type
+	jr z, .no
+	ld a, STEEL
+	call .has_type
+	jr z, .no
+	jr .abilities
+.not_poison
+	cp 1 << BRN
+	jr nz, .not_burn
+	ld a, FIRE
+	call .has_type
+	jr z, .no
+	jr .abilities
+.not_burn
+	cp 1 << FRZ
+	jr nz, .abilities
+	ld a, [wBattleWeather]
+	cp WEATHER_SUN
+	jr z, .no
+	ld a, ICE
+	call .has_type
+	jr z, .no
+.abilities
+	push bc
+	ld a, b
+	ld hl, SerenityPokemon_AI
+	call IsInAbilityList
+	pop bc
+	jr c, .no
+	ld a, b
+	newfarcall LeafGuardActive_Far ; engine/abilities/leaf_guard.asm
+	jr c, .no
+	scf
+	jr .done
+.no
+	and a
+.done
+	pop bc
+	pop de
+	pop hl
+	ret
+
+.has_type
+	cp d
+	ret z
+	cp e
+	ret
+
+AI_SecondaryStatusIsSure:
+; Carry if the enemy's move is sure to give its status: Flamethrower from a
+; Kindle mon, Thunderbolt from a Sure Shock mon. Preserves hl.
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	cp FLAMETHROWER
+	jr nz, .not_flamethrower
+	push hl
+	call AI_EnemyHasKindle
+	pop hl
+	ret
+.not_flamethrower
+	cp THUNDERBOLT
+	jr nz, .no
+	push hl
+	call AI_EnemyHasSureShock
+	pop hl
+	ret
+.no
+	and a
+	ret
 
 AI_Smart_DreamEater:
 ; The AI_Basic layer will make sure that
