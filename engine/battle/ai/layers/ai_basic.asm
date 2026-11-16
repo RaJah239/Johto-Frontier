@@ -161,6 +161,13 @@ AI_Basic:
 	pop hl
 	jmp c, .discourage ; discourage if serenity pokemon - loop back to check move
 
+; ===========================
+; === Ability: Leaf Guard ===
+; ===========================
+; no status in the sun (unless we have Mold Breaker)
+	newfarcall AI_PlayerHasLeafGuard ; engine/abilities/leaf_guard.asm
+	jmp c, .discourage
+
 ; don't use if enemy is hydration mon and it is raining
 ; since they heal status at the end of each turn
 ; ==========================

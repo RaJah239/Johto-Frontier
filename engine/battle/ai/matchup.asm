@@ -13,6 +13,7 @@
 ;
 ; Also played out, for both sides:
 ; - Gale Wings: a Flying hit has priority on the turns its mon is at full HP;
+; - Leaf Guard: in the sun, no status for its mon and no Rest;
 ; - healing moves (Recover etc. 1/2, Slack Off 1/3 with priority, Healing
 ;   Light by weather, Rest: full HP + sleep, cures status), used when the
 ;   mon can't KO this turn, the other side's best hit would KO it, and the
@@ -1364,6 +1365,9 @@ MSim_FindHeal:
 	cp REST
 	ld a, 1 ; 1/2
 	jr nz, .share
+	; Leaf Guard: Rest fails in the sun, so it isn't a heal move
+	call MSim_SideLeafGuard
+	jr c, .next
 	ld a, MSIM_E_REST_F
 	call .set_flag
 	xor a ; full
@@ -1428,6 +1432,18 @@ MSim_FindHeal:
 	ld d, [hl]
 	inc hl
 	ld e, [hl]
+	ret
+
+MSim_SideLeafGuard:
+; Carry if wMSimSide's mon has Leaf Guard and the sun is out.
+; Preserves bc, de and hl.
+	ld a, [wMSimSide]
+	and a ; MSIM_SIDE_ENEMY
+	ld a, [wEnemyMonSpecies]
+	jr z, .got_species
+	ld a, [wBattleMonSpecies]
+.got_species
+	newfarcall LeafGuardActive_Far ; engine/abilities/leaf_guard.asm
 	ret
 
 MSim_DivDEBy3:
@@ -2732,6 +2748,9 @@ MSim_T1Inflict:
 	ld a, [wPlayerScreens]
 	bit SCREENS_SAFEGUARD, a
 	jr nz, .none
+	; Leaf Guard in the sun
+	newfarcall AI_PlayerHasLeafGuard ; engine/abilities/leaf_guard.asm
+	jr c, .none
 	; the move's type has to affect the player's mon
 	push bc
 	ld a, 1

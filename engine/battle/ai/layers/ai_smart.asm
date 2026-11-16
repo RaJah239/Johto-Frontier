@@ -593,6 +593,9 @@ AI_Smart_Burn:
 	call IsInAbilityList
 	pop hl
 	jr c, .discourage
+; or Leaf Guard pokemon in the sun
+	newfarcall AI_PlayerHasLeafGuard ; engine/abilities/leaf_guard.asm
+	jr c, .discourage
 
 ; strongly encourage if enemy is physical
 	call IsPlayerPhysicalOrSpecial
@@ -1233,6 +1236,9 @@ AI_Smart_BurnTarget:
 	call IsInAbilityList
 	pop hl
 	jr c, .discourage
+; or Leaf Guard pokemon in the sun
+	newfarcall AI_PlayerHasLeafGuard ; engine/abilities/leaf_guard.asm
+	jr c, .discourage
 
 	; encourage Flamethrower burns
 	; with Kindle Pokémon if target is physical
@@ -1283,6 +1289,9 @@ AI_Smart_ParalyzeTarget:
 	ld hl, SerenityPokemon_AI
 	call IsInAbilityList
 	pop hl
+	jr c, .discourage
+; or Leaf Guard pokemon in the sun
+	newfarcall AI_PlayerHasLeafGuard ; engine/abilities/leaf_guard.asm
 	jr c, .discourage
 
 	; check specie
@@ -1423,6 +1432,9 @@ AI_Smart_Sleep:
 	ld hl, SerenityPokemon_AI
 	call IsInAbilityList
 	pop hl
+	jr c, .discourage
+; or Leaf Guard pokemon in the sun
+	newfarcall AI_PlayerHasLeafGuard ; engine/abilities/leaf_guard.asm
 	jr c, .discourage
 
 ; check if the move is Lovely Kiss
@@ -1964,6 +1976,9 @@ AI_Smart_Toxic:
 	call IsInAbilityList
 	pop hl
 	jr c, .discourage
+; or Leaf Guard pokemon in the sun
+	newfarcall AI_PlayerHasLeafGuard ; engine/abilities/leaf_guard.asm
+	jr c, .discourage
 
 ; never use against Pokemon with magic guard
 	ld a, [wBattleMonSpecies]
@@ -2259,6 +2274,9 @@ AI_Smart_Paralyze:
 	ld hl, SerenityPokemon_AI
 	call IsInAbilityList
 	pop hl
+	jmp c, .discourage
+; or Leaf Guard pokemon in the sun
+	newfarcall AI_PlayerHasLeafGuard ; engine/abilities/leaf_guard.asm
 	jmp c, .discourage
 
 ; never use Thunder Wave against Ground types
@@ -2788,7 +2806,7 @@ AI_Smart_Flinch:
 	ld a, [wEnemyMoveStruct + MOVE_ANIM]
 	cp ZEN_HEADBUTT
 	jr nz, .not_drowzee_or_hypno_or_zen_headbutt
-	jr AI_Smart_PriorityHit
+	jmp AI_Smart_PriorityHit
 
 .not_drowzee_or_hypno_or_zen_headbutt
 ; do nothing if slower than player
@@ -2838,7 +2856,7 @@ AI_Smart_GaleWings:
 	ld a, b
 	and a
 	ret z
-	jr AI_Smart_PriorityHit
+	jmp AI_Smart_PriorityHit
 
 AI_Smart_GaleWingsHeal:
 ; Carry if healing gives a Gale Wings mon's Flying attacks priority back when
@@ -2876,6 +2894,68 @@ AI_Smart_GaleWingsHeal:
 .no
 	and a
 	ret
+
+AI_LeafGuardWantsSun:
+; Carry if the enemy's mon has Leaf Guard and no status yet, and the player
+; has a status move: in the sun it would fail.
+	ld a, [wEnemyMonStatus]
+	and a
+	ret nz
+	ld a, [wEnemyMonSpecies]
+	newfarcall LeafGuardSpecies_Far ; engine/abilities/leaf_guard.asm
+	ret nc
+	push hl
+	ld hl, PlayerHasMoveEffect
+	call AI_HasStatusMove
+	pop hl
+	ret
+
+AI_LeafGuardBlocksOurStatus:
+; Carry if the sun gives the player's mon Leaf Guard's status immunity, it
+; has no status yet, and the enemy has a status move that would work
+; without the sun.
+	ld a, [wBattleMonStatus]
+	and a
+	ret nz
+	newfarcall AI_PlayerHasLeafGuard ; engine/abilities/leaf_guard.asm
+	ret nc
+	push hl
+	ld hl, AIHasMoveEffect
+	call AI_HasStatusMove
+	pop hl
+	ret
+
+AI_HasStatusMove:
+; Carry if hl (PlayerHasMoveEffect or AIHasMoveEffect) finds a move that
+; gives a status. Preserves de.
+	push de
+	ld de, .Effects
+.loop
+	ld a, [de]
+	inc de
+	cp -1
+	jr z, .no
+	ld b, a
+	push hl
+	push de
+	call _hl_
+	pop de
+	pop hl
+	jr nc, .loop
+	jr .done
+.no
+	and a
+.done
+	pop de
+	ret
+
+.Effects:
+	db EFFECT_SLEEP
+	db EFFECT_POISON
+	db EFFECT_TOXIC
+	db EFFECT_PARALYZE
+	db EFFECT_BURN
+	db -1
 
 AI_Smart_DreamEater:
 ; The AI_Basic layer will make sure that
@@ -3387,6 +3467,11 @@ AI_Smart_Sandstorm:
 	jr nc, .discourage
 
 .skipKOCheck
+; encourage if the sun gives the player's mon Leaf Guard and we have status
+; moves: ending the sun makes them work again
+	call AI_LeafGuardBlocksOurStatus
+	jr c, .encourage
+
 ; encourage if enemy has sand rush ability pokemon
 	ld a, [wEnemyMonSpecies]
 	push hl
@@ -3502,6 +3587,11 @@ AI_Smart_Hail:
 	jr nc, .discourage
 
 .skipKOCheck
+; encourage if the sun gives the player's mon Leaf Guard and we have status
+; moves: ending the sun makes them work again
+	call AI_LeafGuardBlocksOurStatus
+	jr c, .encourage
+
 ; encourage if enemy has slush rush ability pokemon
 	ld a, [wEnemyMonSpecies]
 	push hl
@@ -3863,6 +3953,11 @@ AI_Smart_RainDance:
 	jr nc, .discourage
 
 .skipKOCheck
+; encourage if the sun gives the player's mon Leaf Guard and we have status
+; moves: ending the sun makes them work again
+	call AI_LeafGuardBlocksOurStatus
+	jr c, .encourage
+
 ; encourage if enemy has swift swim ability pokemon
 	ld a, [wEnemyMonSpecies]
 	push hl
@@ -3967,6 +4062,11 @@ AI_Smart_SunnyDay:
 	ld hl, PhotosynthesisPokemon_AI
 	call IsInAbilityList
 	pop hl
+	jr c, .encourage
+
+; encourage if enemy has leaf guard and the player has status moves: in the
+; sun they fail
+	call AI_LeafGuardWantsSun
 	jr c, .encourage
 
 ; encourage using the move when the weather rock is held

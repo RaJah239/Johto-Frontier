@@ -186,6 +186,14 @@ AI_Redundant:
 	ret
 
 .Heal:
+	; Leaf Guard: Rest fails in the sun
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	cp REST
+	jr nz, .heal_not_rest
+	ld a, [wEnemyMonSpecies]
+	newfarcall LeafGuardActive_Far ; engine/abilities/leaf_guard.asm
+	jr c, .Redundant
+.heal_not_rest
 	farcall AICheckEnemyMaxHP
 	jr nc, .NotRedundant
 
