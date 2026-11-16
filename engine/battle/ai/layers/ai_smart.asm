@@ -336,6 +336,18 @@ AI_Smart_KnockOff:
 ; don't knock off the item of an Unburden mon: it gets faster
 	call AI_PlayerUnburdenItem
 	jr c, AI_UnburdenDiscourage
+; knock a Harvest mon's Berry off before it eats it: Harvest only regrows a
+; Berry it ate
+	ld a, [wBattleMonItem]
+	and a
+	jr z, .no_harvest
+	xor a ; the player
+	newfarcall HarvestHasBerry
+	jr nc, .no_harvest
+	dec [hl]
+	dec [hl]
+	ret
+.no_harvest
 ; 80% chance to encourage this move if the player is holding a battle item
 ; Otherwise, dismiss this move.
 	ld a, [wBattleMonItem]
@@ -3560,7 +3572,7 @@ AI_Smart_Protect:
 	jr nz, .encourage
 
 ; Speed Boost: protect for a free Speed boost that makes it outspeed
-	call AI_SpeedBoostProtects
+	newfarcall AI_SpeedBoostProtects ; engine/battle/ai/speed_boost.asm
 	jr c, .use
 
 ; discourage if at full HP
@@ -3592,24 +3604,6 @@ AI_Smart_Protect:
 
 	inc [hl]
 	inc [hl]
-	ret
-
-AI_SpeedBoostProtects:
-; Carry if the enemy's mon has Speed Boost, is slower than the player's now,
-; and one boost (at the end of this turn) makes it faster. Preserves hl.
-	ld a, [wEnemyMonSpecies]
-	newfarcall IsSpeedBoostSpecies ; engine/abilities/turn_end_abilities.asm
-	ret nc
-	push hl
-	farcall DoesAIOutSpeedPlayer
-	jr c, .no
-	ld b, 1
-	farcall AI_FasterAfterSpeedBoost ; engine/battle/ai/speed_boost.asm
-	pop hl
-	ret
-.no
-	pop hl
-	and a
 	ret
 
 AI_Smart_Foresight:
@@ -4212,6 +4206,9 @@ AI_PlayerLikesSun:
 	ld hl, PhotosynthesisPokemon_AI
 	call AI_PlayerInAbilityList
 	jr c, AI_PlayerLikes_Done
+	xor a ; the player
+	newfarcall HarvestHasBerry ; (the sun regrows its Berry every turn)
+	jr c, AI_PlayerLikes_Done
 	ld hl, ChlorophyllPokemon_AI
 	jr AI_PlayerLikes_Last
 
@@ -4383,6 +4380,11 @@ AI_Smart_SunnyDay:
 	ld hl, PhotosynthesisPokemon_AI
 	call IsInAbilityList
 	pop hl
+	jr c, .encourage
+
+; encourage if enemy has Harvest and a Berry: the sun regrows it every turn
+	ld a, 1 ; the enemy
+	newfarcall HarvestHasBerry ; engine/abilities/turn_end_abilities.asm
 	jr c, .encourage
 
 ; encourage if enemy has leaf guard and the player has status moves: in the

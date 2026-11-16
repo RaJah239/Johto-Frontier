@@ -362,3 +362,21 @@ AI_WeatherMoveHelps:
 		BANK(SwiftSwimPokemon) == BANK(SandRushPokemon) && \
 		BANK(SwiftSwimPokemon) == BANK(SlushRushPokemon), \
 		"weather speed ability lists must share a bank"
+
+AI_SpeedBoostProtects:
+; Carry if the enemy's mon has Speed Boost, is slower than the player's now,
+; and one boost (at the end of this turn) makes it faster. Preserves hl.
+	ld a, [wEnemyMonSpecies]
+	newfarcall IsSpeedBoostSpecies ; engine/abilities/turn_end_abilities.asm
+	ret nc
+	push hl
+	farcall DoesAIOutSpeedPlayer
+	jr c, .no
+	ld b, 1
+	call AI_FasterAfterSpeedBoost
+	pop hl
+	ret
+.no
+	pop hl
+	and a
+	ret

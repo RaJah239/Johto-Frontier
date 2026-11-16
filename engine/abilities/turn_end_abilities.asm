@@ -372,6 +372,45 @@ IsHarvestSpecies::
 	call IsInAbilityList
 	jmp PopBCDEHL
 
+HarvestHasBerry::
+; For the AI: carry if side a's mon (0: player, 1: enemy) has Harvest (not
+; suppressed) and a Berry for it: one it holds, or one it used up.
+; Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld c, a
+	and a
+	ld a, [wBattleMonSpecies]
+	jr z, .got_species
+	ld a, [wEnemyMonSpecies]
+.got_species
+	ld hl, HarvestPokemon
+	push bc
+	call IsInAbilityList
+	pop bc
+	jr nc, .done
+	ld hl, wHarvestBerries
+	ld a, c
+	and a
+	ld a, [wBattleMonItem]
+	jr z, .got_item
+	inc hl
+	ld a, [wEnemyMonItem]
+.got_item
+	and a
+	jr z, .used
+	ld hl, HarvestBerries
+	call IsInByteArray
+	jr .done
+.used
+	ld a, [hl]
+	and a
+	jr z, .done ; (no carry)
+	scf
+.done
+	jmp PopBCDEHL
+
 IsSpeedBoostSpecies::
 ; Carry if species a has Speed Boost (and Neutralizing Gas doesn't suppress
 ; it; for the AI). Preserves bc, de, hl.
