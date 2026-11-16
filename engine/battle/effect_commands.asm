@@ -928,10 +928,6 @@ CheckMimicUsed:
 BattleCommand_Critical:
 	farjp _BattleCommand_Critical ; engine/battle/effect_commands_far.asm
 
-GetNextTypeMatchupsByte:
-   ld a, BANK(TypeMatchups)
-   jmp GetFarByte
-
 BattleCommand_Stab:
 ; STAB = Same Type Attack Bonus
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -1031,114 +1027,9 @@ BattleCommand_Stab:
 	call GetBattleVar
 	and TYPE_MASK
 	ld b, a
-	ld a, [wBattleType]
-	cp BATTLETYPE_TYPELESS
-	jr z, .typeless
-	cp BATTLETYPE_INVERSE
-	jr z, .inverse
-	ld hl, TypeMatchups
-	jr .TypesLoop
+	call GetTypeChart
+	newfarcall StabTypeScan ; engine/battle/type_chart_scan.asm (sets wTypeMatchup too)
 
-.inverse
-	ld hl, InverseTypeMatchups
-	jr .TypesLoop
-
-.typeless
-	ld hl, NoTypeMatchups
-
-.TypesLoop:
-	call GetNextTypeMatchupsByte
-	inc hl
-
-	cp -1
-	jr z, .end
-
-	; foresight / Scrappy
-	cp -2
-	jr nz, .SkipForesightCheck
-	call CheckIgnoreGhostImmunity
-	jr nz, .end
-	jr .TypesLoop
-
-.SkipForesightCheck:
-	cp b
-	jr nz, .SkipType
-	call GetNextTypeMatchupsByte
-	cp d
-	jr z, .GotMatchup
-	cp e
-	jr z, .GotMatchup
-	jr .SkipType
-
-.GotMatchup:
-	push hl
-	push bc
-	inc hl
-	ld a, [wTypeModifier]
-	and STAB_DAMAGE
-	ld b, a
-; If the target is immune to the move, treat it as a miss and calculate the damage as 0
-	call GetNextTypeMatchupsByte
-	and a
-	jr nz, .NotImmune
-	inc a
-	ld [wAttackMissed], a
-	xor a
-
-.NotImmune:
-	ldh [hMultiplier], a
-	add b
-	ld [wTypeModifier], a
-
-	xor a
-	ldh [hMultiplicand + 0], a
-
-	ld hl, wCurDamage
-	ld a, [hli]
-	ldh [hMultiplicand + 1], a
-	ld a, [hld]
-	ldh [hMultiplicand + 2], a
-
-	call Multiply
-
-	ldh a, [hProduct + 1]
-	ld b, a
-	ldh a, [hProduct + 2]
-	or b
-	ld b, a
-	ldh a, [hProduct + 3]
-	or b
-	jr z, .ok ; This is a very convoluted way to get back that we've essentially dealt no damage.
-
-; Take the product and divide it by 10.
-	ld a, 10
-	ldh [hDivisor], a
-	ld b, 4
-	call Divide
-	ldh a, [hQuotient + 2]
-	ld b, a
-	ldh a, [hQuotient + 3]
-	or b
-	jr nz, .ok
-
-	ld a, 1
-	ldh [hMultiplicand + 2], a
-
-.ok
-	ldh a, [hMultiplicand + 1]
-	ld [hli], a
-	ldh a, [hMultiplicand + 2]
-	ld [hl], a
-	pop bc
-	pop hl
-
-.SkipType:
-	inc hl
-	inc hl
-	jr .TypesLoop
-
-.end
-	call BattleCheckTypeMatchup
 	ld a, [wTypeMatchup]
 	ld b, a
 	ld a, [wTypeModifier]
@@ -1221,11 +1112,13 @@ BattleCheckTypeMatchup:
 	ld hl, wBattleMonType1
 .get_type
 	ld a, BATTLE_VARS_MOVE_TYPE
-	call GetBattleVar ; preserves hl, de, and bc	
+	call GetBattleVar ; preserves hl, de, and bc
 	and TYPE_MASK
 	; fallthrough
 
 CheckTypeMatchup:
+; wTypeMatchup = the effectiveness of type a against the types at hl.
+; Preserves bc, de, hl.
 	push hl
 	push de
 	push bc
@@ -1233,76 +1126,31 @@ CheckTypeMatchup:
 	ld b, [hl]
 	inc hl
 	ld c, [hl]
-	ld a, EFFECTIVE
-	ld [wTypeMatchup], a
-	ld a, [wBattleType]
-	cp BATTLETYPE_TYPELESS
-	jr z, .typeless
-	cp BATTLETYPE_INVERSE
-	jr z, .inverse
-	ld hl, TypeMatchups
-	jr .TypesLoop
-
-.inverse
-	ld hl, InverseTypeMatchups
-	jr .TypesLoop
-
-.typeless
-	ld hl, NoTypeMatchups
-
-.TypesLoop:
-	call GetNextTypeMatchupsByte
-	inc hl
-	cp -1
-	jr z, .End
-	cp -2
-	jr nz, .Next
-	call CheckIgnoreGhostImmunity
-	jr nz, .End
-	jr .TypesLoop
-
-.Next:
-	cp d
-	jr nz, .Nope
-	call GetNextTypeMatchupsByte
-	inc hl
-	cp b
-	jr z, .Yup
-	cp c
-	jr z, .Yup
-	jr .Nope2
-
-.Nope:
-	inc hl
-.Nope2:
-	inc hl
-	jr .TypesLoop
-
-.Yup:
-	xor a
-	ldh [hDividend + 0], a
-	ldh [hMultiplicand + 0], a
-	ldh [hMultiplicand + 1], a
-	call GetNextTypeMatchupsByte
-	inc hl
-	ldh [hMultiplicand + 2], a
-	ld a, [wTypeMatchup]
-	ldh [hMultiplier], a
-	call Multiply
-	ld a, 10
-	ldh [hDivisor], a
 	push bc
-	ld b, 4
-	call Divide
+	call GetTypeChart
+	ld e, c
 	pop bc
-	ldh a, [hQuotient + 3]
-	ld [wTypeMatchup], a
-	and a
-	jr z, .End
-	jr .TypesLoop
-
-.End:
+	newfarcall TypeMatchupScan ; engine/battle/type_chart_scan.asm
 	jmp PopBCDEHL
+
+GetTypeChart:
+; hl = the type chart for this battle (normal, inverse or typeless); c = nz
+; if the target's Ghost immunities (the matchups after -2) don't apply.
+; Preserves b, d, e.
+	call CheckIgnoreGhostImmunity
+	ld c, 0
+	jr z, .got_ghost
+	inc c
+.got_ghost
+	ld a, [wBattleType]
+	ld hl, NoTypeMatchups
+	cp BATTLETYPE_TYPELESS
+	ret z
+	ld hl, InverseTypeMatchups
+	cp BATTLETYPE_INVERSE
+	ret z
+	ld hl, TypeMatchups
+	ret
 
 BattleCommand_ResetTypeMatchup:
 ; Reset the type matchup multiplier to 1.0, if the type matchup is not 0.
