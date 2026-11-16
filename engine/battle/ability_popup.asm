@@ -53,6 +53,16 @@ ShowAbilityPopupCore:
 	call AbilityPopup_CopyAbilityName
 	call AbilityPopup_BuildPkmnName
 
+	; a screen update still under way (e.g. the move menu and its move info
+	; box just closed: the turn's first move can start with a popup) has to
+	; finish first, or what it hadn't copied yet would stay on screen
+	ldh a, [hBGMapMode]
+	and a
+	jr z, .screen_ready
+	push bc
+	call WaitBGMapInMode ; (the same mode: wait for both halves)
+	pop bc
+.screen_ready
 	ldh a, [hBGMapMode]
 	push af
 	xor a
