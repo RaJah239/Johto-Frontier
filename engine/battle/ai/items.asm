@@ -439,6 +439,17 @@ AI_Switch:
 ; Switch the enemy's active mon out (wEnemySwitchMonIndex, or the switch-in
 ; picker's choice). Used by link battles (EnemyMonEntrance); the AI itself
 ; doesn't switch out by itself.
+
+; A trainer's switch (not a link opponent's) starts with "Foe is thinking…".
+	ld a, [wLinkMode]
+	and a
+	jr nz, .no_thinking_text
+	ld hl, BattleText_FoeIsThinking
+	call StdBattleTextbox
+	ld c, 10
+	call DelayFrames
+
+.no_thinking_text
 	ld a, $1
 	ld [wEnemyIsSwitching], a
 	ld [wEnemyGoesFirst], a
