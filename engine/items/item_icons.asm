@@ -261,8 +261,7 @@ ShowItemIcon::
 	ret nc
 	push af
 	call GetItemIconGFX
-	ld de, vTiles0 tile TEXTBOX_ICON_TILE
-	call DecompressRequest2bpp
+	call DecompressTextboxItemIcon
 	pop af
 	call GetItemIconColors
 	jr .got_colors
@@ -271,8 +270,7 @@ ShowItemIcon::
 	farcall GetTMHMItemMove ; wTempTMHM = its move
 	ld hl, TmHmIcon
 	lb bc, BANK(TmHmIcon), 9
-	ld de, vTiles0 tile TEXTBOX_ICON_TILE
-	call DecompressRequest2bpp
+	call DecompressTextboxItemIcon
 	ld a, [wTempTMHM]
 	call GetMoveTypeIconColors
 .got_colors
@@ -281,6 +279,44 @@ ShowItemIcon::
 	ld a, TEXTBOX_ICON_TILE
 	call PlaceIconTilesFromA
 	jmp WaitBGMap
+
+DecompressTextboxItemIcon:
+; Like DecompressRequest2bpp to the textbox icon tiles, but without the icon's
+; black corner pixels: in the Pack they round off the outline around the
+; icon, which the textbox doesn't have.
+	ld a, BANK(sScratch)
+	call OpenSRAM
+	push bc
+	ld de, sScratch
+	ld a, b
+	call FarDecompress
+	ld hl, sScratch + 0 * LEN_2BPP_TILE ; top left: row 0, leftmost pixel
+	ld a, %01111111
+	call .clear
+	ld hl, sScratch + 2 * LEN_2BPP_TILE ; top right: row 0, rightmost pixel
+	ld a, %11111110
+	call .clear
+	ld hl, sScratch + 6 * LEN_2BPP_TILE + 7 * 2 ; bottom left: row 7
+	ld a, %01111111
+	call .clear
+	ld hl, sScratch + 8 * LEN_2BPP_TILE + 7 * 2 ; bottom right: row 7
+	ld a, %11111110
+	call .clear
+	pop bc
+	ld hl, vTiles0 tile TEXTBOX_ICON_TILE
+	ld de, sScratch
+	call Request2bpp
+	jmp CloseSRAM
+
+.clear
+; clear the pixel a doesn't keep in both bit planes of the row at hl
+	ld b, a
+	and [hl]
+	ld [hli], a
+	ld a, b
+	and [hl]
+	ld [hl], a
+	ret
 
 PlaceIconTilesFromA:
 ; Place the 3x3 tiles a, a+1, ... a+8 at hl.
