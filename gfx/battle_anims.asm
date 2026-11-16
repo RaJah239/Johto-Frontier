@@ -1,5 +1,4 @@
 AnimObj00GFX:
-AnimObjHitGFX:       INCBIN "gfx/battle_anims/hit.2bpp.lz"
 AnimObjCutGFX:       INCBIN "gfx/battle_anims/cut.2bpp.lz"
 AnimObjFireGFX:      INCBIN "gfx/battle_anims/fire.2bpp.lz"
 AnimObjWaterGFX:     INCBIN "gfx/battle_anims/water.2bpp.lz"
@@ -65,6 +64,7 @@ AnimObjWindBGGFX:     INCBIN "gfx/battle_anims/wind_bg.2bpp.lz"
 AnimObjPoison2GFX:    INCBIN "gfx/battle_anims/poison2.2bpp.lz"
 AnimObjUTurnGFX:      INCBIN "gfx/battle_anims/uturn.2bpp.lz"
 AnimObjVoltSwitchGFX: INCBIN "gfx/battle_anims/voltswitch.2bpp.lz"
+AnimObjHitGFX:
 AnimObjHit3GFX:       INCBIN "gfx/battle_anims/hit3.2bpp.lz"
 AnimObjGlowShadowGFX: INCBIN "gfx/battle_anims/glow_shadow.2bpp.lz"
 AnimObjTrickRoomGFX:  INCBIN "gfx/battle_anims/trickroom.2bpp.lz"
