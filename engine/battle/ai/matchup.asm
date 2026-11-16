@@ -60,6 +60,8 @@ DEF MSIM_P_CURED_F       EQU 1
 DEF MSIM_E_HEALS_F       EQU 2 ; (per turn) it heals instead of attacking
 DEF MSIM_P_HEALS_F       EQU 3
 DEF MSIM_MOVE_DRAINS_F   EQU 4 ; (per move) the move being scored drains
+DEF MSIM_E_ENDURES_F     EQU 5 ; at full HP it lives a KO with 1 HP (Sturdy, Focus Sash)
+DEF MSIM_P_ENDURES_F     EQU 6
 
 DEF MSIM_SIDE_ENEMY  EQU 0
 DEF MSIM_SIDE_PLAYER EQU 1
@@ -301,6 +303,7 @@ MSim_TryCandidate:
 	ld b, a
 	ld a, [wMSimPlayerDmg + 1]
 	ld c, a
+	call MSim_EnemyEndures
 	call MSim_SubtractEnemyHP
 	jr c, .loses
 
@@ -1278,8 +1281,8 @@ MSim_CheckDrain:
 	ret
 
 MSim_SetupSides:
-; Per-side setup for MSim_Run: Leftovers, Magic Guard, sleep and bad-poison
-; counters, weather turns, heal moves.
+; Per-side setup for MSim_Run: Leftovers, Magic Guard, Sturdy / Focus Sash,
+; sleep and bad-poison counters, weather turns, heal moves.
 	xor a
 	ld [wMSimFlags2], a
 	ld [wMSimFlags3], a
@@ -1311,9 +1314,50 @@ MSim_SetupSides:
 	ld a, [wBattleMonSpecies]
 	ld hl, MagicGuardPokemon
 	call IsInAbilityList
-	jr nc, .counters
+	jr nc, .endures
 	ld hl, wMSimFlags2
 	set MSIM_P_MAGIC_GUARD_F, [hl]
+.endures
+	; Sturdy / Focus Sash (Mold Breaker gets through Sturdy)
+	ld a, [wEnemyMonItem]
+	ld b, a
+	callfar GetItemHeldEffect
+	ld a, b
+	cp HELD_FOCUS_SASH
+	jr z, .enemy_endures
+	ld a, [wEnemyMonSpecies]
+	ld hl, SturdyPokemon_AI
+	ld d, BANK(SturdyPokemon_AI)
+	call MSim_IsInFarAbilityList
+	jr nc, .player_endures
+	ld a, [wBattleMonSpecies]
+	ld hl, MoldBreakerPokemon
+	ld d, BANK(MoldBreakerPokemon)
+	call MSim_IsInFarAbilityList
+	jr c, .player_endures
+.enemy_endures
+	ld hl, wMSimFlags3
+	set MSIM_E_ENDURES_F, [hl]
+.player_endures
+	ld a, [wBattleMonItem]
+	ld b, a
+	callfar GetItemHeldEffect
+	ld a, b
+	cp HELD_FOCUS_SASH
+	jr z, .player_does
+	ld a, [wBattleMonSpecies]
+	ld hl, SturdyPokemon_AI
+	ld d, BANK(SturdyPokemon_AI)
+	call MSim_IsInFarAbilityList
+	jr nc, .counters
+	ld a, [wEnemyMonSpecies]
+	ld hl, MoldBreakerPokemon
+	ld d, BANK(MoldBreakerPokemon)
+	call MSim_IsInFarAbilityList
+	jr c, .counters
+.player_does
+	ld hl, wMSimFlags3
+	set MSIM_P_ENDURES_F, [hl]
 .counters
 	ld a, [wEnemyMonStatus]
 	and SLP_MASK
@@ -1831,6 +1875,7 @@ MSim_\1Acts:
 	ld b, a
 	ld a, [wMSim\1Hit + 1]
 	ld c, a
+	call MSim_\2Endures
 	push bc
 	call MSim_Subtract\2HP
 	pop bc
@@ -1860,11 +1905,53 @@ MSim_\1Acts:
 .drain_heal
 	call MSim_Heal\1
 .residual
-	jr MSim_\1Residual
+	jmp MSim_\1Residual
 ENDM
 
 	msim_acts Enemy, Player, E, MSIM_ENEMY_WINS
 	msim_acts Player, Enemy, P, MSIM_PLAYER_WINS
+
+MSim_EnemyEndures:
+; bc = a hit on the enemy's mon. If Sturdy or a Focus Sash would save it
+; (it's at full HP and the hit would KO it), the hit leaves it at 1 HP.
+	ld a, [wMSimFlags3]
+	bit MSIM_E_ENDURES_F, a
+	ret z
+	ld hl, wMSimEnemyHP
+	ld de, wEnemyMonMaxHP
+	jr MSim_Endures
+
+MSim_PlayerEndures:
+; The same for a hit on the player's mon.
+	ld a, [wMSimFlags3]
+	bit MSIM_P_ENDURES_F, a
+	ret z
+	ld hl, wMSimPlayerHP
+	ld de, wBattleMonMaxHP
+	; fallthrough
+
+MSim_Endures:
+; hl = HP, de = max HP (big-endian), bc = the hit.
+	ld a, [de]
+	cp [hl]
+	ret nz
+	inc de
+	inc hl
+	ld a, [de]
+	cp [hl]
+	ret nz
+	; at full HP: does the hit KO?
+	ld a, c
+	sub [hl]
+	dec hl
+	ld a, b
+	sbc [hl]
+	ret c
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	dec bc
+	ret
 
 MACRO msim_residual
 ; \1 = this side (Enemy / Player), \2 = E / P, \3 = the other side's win
