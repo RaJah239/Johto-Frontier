@@ -3159,6 +3159,12 @@ SendOutPlayerMon:
 	hlcoord 1, 5
 	lb bc, 7, 8
 	call ClearBox
+
+	; Clear the old HUD together with the old Pokemon first
+	hlcoord 9, 7
+	lb bc, 5, 11
+	call ClearBox
+
 	call WaitBGMap
 	xor a
 	ldh [hBGMapMode], a
