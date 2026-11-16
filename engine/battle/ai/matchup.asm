@@ -2143,7 +2143,7 @@ MSim_\1Residual:
 ; a = 0, or the other side's win code if this KOs it.
 	ld a, [wMSimFlags2]
 	bit MSIM_\2_MAGIC_GUARD_F, a
-	jmp nz, .none
+	jp nz, .none ; (jr reaches in one expansion only)
 	ld a, [wMSimFlags3]
 	bit MSIM_\2_CURED_F, a
 	jr nz, .seed

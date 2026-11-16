@@ -23,7 +23,8 @@
 ;   the player's raised stats);
 ; - Clean Sweep (weather and screens gone), Light / Reflect Barrier,
 ;   Siegebreaker (the player's screens gone), Chrono Shift (Trick Room);
-; - True Sight (Foresight), Disarm (the player's item knocked off).
+; - True Sight (Foresight), Disarm (the player's item knocked off: +1 Speed
+;   for an Unburden mon).
 ; Not simulated: hazard layers (they don't matter in a 1-on-1), Sanctuary,
 ; Provocateur, Allure, Chaotic Boost (random), Imposter.
 
@@ -247,8 +248,20 @@ MSim_EntryEffects::
 	ld hl, DisarmPokemon
 	call .has
 	jr nc, .no_disarm
+	ld a, [wBattleMonItem]
+	and a
+	jr z, .no_disarm
 	xor a
 	ld [wBattleMonItem], a
+	; Unburden: losing it makes the player's mon faster
+	ld a, [wBattleMonSpecies]
+	newfarcall IsUnburdenSpecies
+	jr nc, .no_disarm
+	ld hl, wPlayerStatLevels
+	lb bc, MSIM_SPD, 1
+	call MSim_RaiseLevel
+	ld a, 1
+	ld [wMSimEntryPlayerStats], a
 .no_disarm
 
 	; the player's stats with their new stages

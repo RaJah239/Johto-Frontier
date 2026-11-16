@@ -333,6 +333,9 @@ AI_Smart_Growth:
 	jmp StandardDiscourage
 
 AI_Smart_KnockOff:
+; don't knock off the item of an Unburden mon: it gets faster
+	call AI_PlayerUnburdenItem
+	jr c, AI_UnburdenDiscourage
 ; 80% chance to encourage this move if the player is holding a battle item
 ; Otherwise, dismiss this move.
 	ld a, [wBattleMonItem]
@@ -348,6 +351,22 @@ AI_Smart_KnockOff:
 	ret
 
 .discourage
+	inc [hl]
+	ret
+
+AI_PlayerUnburdenItem:
+; Carry if the player's mon has Unburden and holds an item (so losing it
+; would raise its Speed). Preserves hl.
+	ld a, [wBattleMonItem]
+	and a
+	ret z
+	ld a, [wBattleMonSpecies]
+	newfarcall IsUnburdenSpecies ; engine/abilities/unburden.asm
+	ret
+
+AI_UnburdenDiscourage:
+	inc [hl]
+	inc [hl]
 	inc [hl]
 	ret
 
@@ -1199,6 +1218,9 @@ AI_Smart_Venoshock:
 	ret
 
 AI_Smart_Thief:
+; don't take the item of an Unburden mon: it gets faster
+	call AI_PlayerUnburdenItem
+	jmp c, AI_UnburdenDiscourage
 AI_Smart_Acrobatics:
 ; Greatly encourage this move if the user does not have an item.
 	ld a, [wEnemyMonItem]
@@ -3982,6 +4004,18 @@ AI_Smart_Trick:
 	jmp c, AIDiscourageMove
 
 .not_toxic_orb_to_poison_heal
+; Unburden on the AI's own mon: Trick against an empty-handed player leaves
+; it with no item, a free Speed boost (and the player gets the AI's item)
+	ld a, [wBattleMonItem]
+	and a
+	jr nz, .not_unburden
+	ld a, [wEnemyMonItem]
+	and a
+	jr z, .not_unburden
+	ld a, [wEnemyMonSpecies]
+	newfarcall IsUnburdenSpecies
+	jmp c, DoIt
+.not_unburden
 ; encourage using the move when the enemy has any of these items held
 	ld a, [wEnemyMonItem]
 	cp CHOICE_BAND

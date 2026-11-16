@@ -123,3 +123,13 @@ UnburdenGetBits:
 
 UnburdenText: db "Unburden@"
 INCLUDE "data/abilities/unburden_mons.asm"
+
+IsUnburdenSpecies::
+; Carry if species a has Unburden (not suppressed by Neutralizing Gas; for
+; the AI). Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld hl, UnburdenPokemon
+	call IsInAbilityList
+	jmp PopBCDEHL
