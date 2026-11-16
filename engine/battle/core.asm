@@ -5912,6 +5912,7 @@ ApplyStatusEffectOnStats:
 	call ApplyFrbEffectOnSpclAttack
 	call ApplyChoiceScarfEffectOnSpeed
 	call ApplyTrickStickEffectOnSpeed
+	call ApplyStallEffectOnSpeed
 	jmp ApplyBrnEffectOnAttack
 
 ApplyFrbEffectOnSpclAttack:
@@ -6052,6 +6053,32 @@ ApplyChoiceScarfEffectOnSpeed:
 	adc b
 	ld [hl], a ; high byte
 	ret
+
+; =======================
+; === Ability: Stall ====
+; =======================
+ApplyStallEffectOnSpeed:
+; A Stall mon's Speed is 0 in battle (hBattleTurn: nonzero for the player's
+; mon, like ApplyPrzEffectOnSpeed). Run after every other Speed change.
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wEnemyMonSpeed
+	ld a, [wEnemyMonSpecies]
+	jr z, .got_mon
+	ld hl, wBattleMonSpeed
+	ld a, [wBattleMonSpecies]
+.got_mon
+	push hl
+	ld hl, StallPokemon
+	call IsInAbilityList
+	pop hl
+	ret nc
+	xor a
+	ld [hli], a
+	ld [hl], a
+	ret
+
+INCLUDE "data/abilities/stall_mons.asm"
 
 ApplyTrickStickEffectOnSpeed:
 ; quarter the holder's Speed while it holds a Trick Stick

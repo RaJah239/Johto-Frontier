@@ -4186,6 +4186,8 @@ BattleCommand_ParalyzeTarget:
 	call UpdateOpponentInParty
 	ld hl, ApplyPrzEffectOnSpeed
 	call CallBattleCore
+	ld hl, ApplyStallEffectOnSpeed ; (paralysis leaves a Speed of 0 at 1)
+	call CallBattleCore
 	ld de, ANIM_PAR
 	call PlayOpponentBattleAnim
 	call RefreshBattleHuds
@@ -5057,6 +5059,8 @@ CalcPlayerStats:
 	call CallBattleCore
 	ld hl, ApplyTrickStickEffectOnSpeed
 	call CallBattleCore
+	ld hl, ApplyStallEffectOnSpeed
+	call CallBattleCore
 
 	jmp BattleCommand_SwitchTurn
 
@@ -5082,6 +5086,8 @@ CalcEnemyStats:
 	ld hl, ApplyChoiceScarfEffectOnSpeed
 	call CallBattleCore
 	ld hl, ApplyTrickStickEffectOnSpeed
+	call CallBattleCore
+	ld hl, ApplyStallEffectOnSpeed
 	call CallBattleCore
 
 	jmp BattleCommand_SwitchTurn
@@ -6112,6 +6118,8 @@ BattleCommand_Paralyze:
 	set PAR, [hl]
 	call UpdateOpponentInParty
 	ld hl, ApplyPrzEffectOnSpeed
+	call CallBattleCore
+	ld hl, ApplyStallEffectOnSpeed ; (paralysis leaves a Speed of 0 at 1)
 	call CallBattleCore
 	call UpdateBattleHuds
 	call PrintParalyze
