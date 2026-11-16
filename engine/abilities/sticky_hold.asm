@@ -11,6 +11,15 @@ IsStickyHoldSpecies::
 	push de
 	push bc
 	ld hl, StickyHoldPokemon
+	call IsInAbilityList
+	jmp PopBCDEHL
+
+IsStickyHoldSpeciesRaw:
+; The same, even when suppressed by Neutralizing Gas. Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld hl, StickyHoldPokemon
 	call IsInByteArray
 	jmp PopBCDEHL
 
@@ -18,7 +27,7 @@ StickyHoldBlocks::
 ; Carry if the target (not hBattleTurn's mon) has Sticky Hold; its popup
 ; then slides in over the target's HUD. Preserves bc, de, hl.
 	call GetOpposingMon
-	call IsStickyHoldSpecies
+	call IsStickyHoldSpeciesRaw
 	ret nc
 	push hl
 	push de
@@ -32,7 +41,7 @@ StickyHoldBlocks::
 	pop bc
 	pop de
 	pop hl
-	scf
+	ccf ; (not if suppressed by Neutralizing Gas: its popup showed)
 	ret
 
 StickyHoldText: db "Sticky Hold@"

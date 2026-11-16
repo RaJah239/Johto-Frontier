@@ -187,12 +187,14 @@ KOBoost:
 ; =====================
 .enemy_turn_renewal
 	ld a, BATTLE_VARS_STATUS
-	call GetBattleVarAddr
+	call GetBattleVar
 	and a
 	ret z
+	ShowActivationOrEntryOrKOAbilityPopup RenewalText
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
 	xor a
 	ld [hl], a
-	ShowActivationOrEntryOrKOAbilityPopup RenewalText
 	farjp CalcPokemonStats
 
 FlashStepText: db "Flash Step@"

@@ -451,7 +451,7 @@ HandleWeather:
 ; magic guard pokemon take no residual damage
 	call GetCurrentMon
 	ld hl, MagicGuardPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	ret c
 	; nor do Overcoat pokemon
 	newfarcall UserHasOvercoat

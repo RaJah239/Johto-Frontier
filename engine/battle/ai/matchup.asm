@@ -527,12 +527,12 @@ MSim_HazardImmune:
 	ld a, [wEnemyMonSpecies]
 	ld hl, HazardGuardMons
 	ld d, BANK(HazardGuardMons)
-	call MSim_IsInFarList
+	call MSim_IsInFarAbilityList
 	ret c
 	ld a, [wEnemyMonSpecies]
 	ld hl, SpinGuardPokemon
 	ld d, BANK(SpinGuardPokemon)
-	call MSim_IsInFarList
+	call MSim_IsInFarAbilityList
 	ret c
 	ld a, [wEnemyMonItem]
 	ld b, a
@@ -556,7 +556,7 @@ MSim_Grounded:
 	jr z, .no
 	ld a, [wEnemyMonSpecies]
 	ld hl, LevitatePokemon
-	call IsInByteArray
+	call IsInAbilityList
 	ccf
 	ret
 .no
@@ -601,7 +601,7 @@ MSim_HazardDamage:
 	push bc
 	ld a, [wEnemyMonSpecies]
 	ld hl, MagicGuardPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	pop bc
 	ret c
 	push bc
@@ -646,6 +646,14 @@ MSim_MaxHPShare:
 	ret nz
 	inc e
 	ret
+
+MSim_IsInFarAbilityList:
+; MSim_IsInFarList for a species list of an ability: never while Neutralizing
+; Gas suppresses that mon's ability. Preserves d.
+	call IsSpeciesSuppressed
+	ccf
+	ret nc
+	; fallthrough
 
 MSim_IsInFarList:
 ; Carry if a is in the $ff-terminated list at d:hl. Preserves d.
@@ -1038,7 +1046,7 @@ MSim_DefensiveAbilities:
 	ld a, d
 	ld hl, TintedLensPokemon
 	ld d, BANK(TintedLensPokemon)
-	call MSim_IsInFarList
+	call MSim_IsInFarAbilityList
 	pop de
 	jr nc, .solid_rock
 	ld a, [wTypeModifier]
@@ -1051,7 +1059,7 @@ MSim_DefensiveAbilities:
 	ld a, e
 	ld hl, SolidRockPokemon
 	ld d, BANK(SolidRockPokemon)
-	call MSim_IsInFarList
+	call MSim_IsInFarAbilityList
 	pop de
 	jr nc, .fur_coat
 	ld a, [wTypeModifier]
@@ -1070,7 +1078,7 @@ MSim_DefensiveAbilities:
 	ld a, e
 	ld hl, FurCoatPokemon
 	ld d, BANK(FurCoatPokemon)
-	call MSim_IsInFarList
+	call MSim_IsInFarAbilityList
 	ret nc
 	ld a, [wMSimMoveType]
 	cp SPECIAL
@@ -1175,14 +1183,14 @@ MSim_SetupSides:
 .magic_guard
 	ld a, [wEnemyMonSpecies]
 	ld hl, MagicGuardPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr nc, .player_magic_guard
 	ld hl, wMSimFlags2
 	set MSIM_E_MAGIC_GUARD_F, [hl]
 .player_magic_guard
 	ld a, [wBattleMonSpecies]
 	ld hl, MagicGuardPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr nc, .counters
 	ld hl, wMSimFlags2
 	set MSIM_P_MAGIC_GUARD_F, [hl]

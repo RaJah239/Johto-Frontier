@@ -22,6 +22,8 @@ DEF HAZARDS_MASK EQU 1 << SCREENS_SPIKES | 1 << SCREENS_STEALTH_ROCK | 1 << SCRE
 StartBattleEntryAbilities::
 ; Both sides' first mons are out: run their entry abilities, then their
 ; entry items.
+	xor a
+	ld [wNeutralizingGas], a
 	ld a, (1 << ENTRY_ABILITIES_PLAYER_F) | (1 << ENTRY_ABILITIES_ENEMY_F) \
 	    | (1 << ENTRY_ITEM_PLAYER_F) | (1 << ENTRY_ITEM_ENEMY_F)
 	ld [wEntryAbilitiesPending], a
@@ -46,6 +48,10 @@ QueueEntryAbilities::
 	; fallthrough
 
 RunPendingEntryAbilities:
+	; Neutralizing Gas: who's suppressed now (a side freed from it gets its
+	; entry abilities queued), and its own popup before the other abilities
+	farcall UpdateNeutralizingGas
+	farcall AnnounceNeutralizingGas
 	lb bc, ENTRY_ABILITIES_PLAYER_F, ENTRY_ABILITIES_ENEMY_F
 	ld de, RunEntryAbilities
 	; fallthrough
@@ -267,6 +273,11 @@ ShowEntryAbilityPopup:
 	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
 	farcall ShowAbilityPopup
 	pop hl
+	ret nc
+	; suppressed by Neutralizing Gas (its popup showed instead): return
+	; from the handler too, skipping the ability's effect
+	inc sp
+	inc sp
 	ret
 
 PlayEntryAbilityAnim:
@@ -308,11 +319,44 @@ EitherSideScreens:
 ; ===============
 ; === Weather ===
 ; ===============
+EntryNGCancel:
+; Called right before an entry ability puts up its effect: if Neutralizing
+; Gas suppresses the user's ability, show its popup and return carry (the
+; ability does nothing). Preserves bc, de, hl.
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	ret nc
+	push hl
+	push de
+	push bc
+	farcall EmptyBattleTextbox
+	ld b, BANK(@)
+	ld de, NeutralizingGasEntryText ; (replaced by the Neutralizing Gas popup)
+	ldh a, [hBattleTurn]
+	ld c, a
+	farcall ShowAbilityPopup
+	pop bc
+	pop de
+	pop hl
+	scf
+	ret
+
+NeutralizingGasEntryText: db "@"
+
 SetEntryWeather:
-; Set weather a for 255 turns. Return z if that weather was already up.
+; Set weather a for 255 turns. Return z if that weather was already up (or
+; Neutralizing Gas suppresses the ability).
 	ld hl, wBattleWeather
 	cp [hl]
 	ret z
+	push af
+	call EntryNGCancel
+	jr nc, .set
+	pop af
+	xor a ; z
+	ret
+.set
+	pop af
 	ld [hl], a
 	ld a, 255
 	ld [wWeatherCount], a
@@ -326,7 +370,7 @@ HandleDrizzle:
 	call SetEntryWeather
 	ret z
 	ld de, DrizzlePopupText
-	jr ShowEntryAbilityPopup
+	jmp ShowEntryAbilityPopup
 
 DrizzlePopupText: db "Drizzle@"
 INCLUDE "data/abilities/drizzle_mons.asm"
@@ -339,7 +383,7 @@ HandleDrought:
 	call SetEntryWeather
 	ret z
 	ld de, DroughtPopupText
-	jr ShowEntryAbilityPopup
+	jmp ShowEntryAbilityPopup
 
 DroughtPopupText: db "Drought@"
 INCLUDE "data/abilities/drought_mons.asm"
@@ -609,6 +653,8 @@ SetEntryScreen:
 	ld a, [hl]
 	and d
 	jr nz, .already_up
+	call EntryNGCancel
+	jr c, .already_up
 	ld a, [hl]
 	or d
 	ld [hl], a
@@ -745,6 +791,8 @@ SetEntryHazard:
 	ld a, [hl]
 	and b
 	jr nz, .already_up
+	call EntryNGCancel
+	jr c, .already_up
 	ld a, [hl]
 	or b
 	ld [hl], a
@@ -778,7 +826,12 @@ HandleIntimidate:
 	ldh a, [hBattleTurn]
 	xor 1
 	newfarcall ShowScrappyPopupOnSide
-	ret
+	ret nc
+	; Scrappy is suppressed by Neutralizing Gas: Intimidate works
+	ld de, LEER
+	call PlayEntryAbilityAnim
+	farcall BattleCommand_AttackDown
+	farjp BattleCommand_StatDownMessage
 
 IntimidatePopupText: db "Intimidate@"
 
@@ -798,17 +851,17 @@ IsBadEntryVsContrary::
 	pop af
 	push af
 	ld hl, StiflingAuraPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr c, .yes
 	pop af
 	push af
 	ld hl, IntimidatePokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr c, .intimidate
 	pop af
 	push af
 	ld hl, InfernalHowlPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr nc, .no
 	; Sp. Atk drop: only bad for a special attacker
 	farcall IsPlayerPhysicalOrSpecial
@@ -837,7 +890,7 @@ HandleSheerForce:
 
 HandleScrappy:
 ; just its popup when it comes in (engine/abilities/scrappy.asm)
-	newfarcall AttackerHasScrappy
+	newfarcall AttackerHasScrappyRaw
 	ret nc
 	ldh a, [hBattleTurn]
 	newfarcall ShowScrappyPopupOnSide
@@ -942,6 +995,8 @@ HandleChronoShift:
 	ld a, [hl]
 	and a
 	ret nz
+	call EntryNGCancel
+	ret c
 	ld [hl], 5
 	ld de, ChronoShiftPopupText
 	call ShowEntryAbilityPopup

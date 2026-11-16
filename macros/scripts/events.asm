@@ -1249,6 +1249,9 @@ MACRO showdefensiveability
 	ld b, BANK(\1)
 	ld de, \1
 	call ShowDefensiveAbilityBanner
+	IF _NARG < 2
+	ret c ; suppressed by Neutralizing Gas
+	ENDC
 ENDM
 
 ; ==========================================================================
@@ -1277,7 +1280,9 @@ MACRO surefire_ability
 	jr nc, .skip\@
 
 	; It hits: slide the popup over the user's HUD, once per send-out
-	ShowOncePerSendOutPopup \3, \4
+	; (unless Neutralizing Gas suppresses it)
+	ShowOncePerSendOutPopup \3, \4, KEEP
+	jr c, .skip\@
 	ret
 
 .skip\@
@@ -1301,6 +1306,9 @@ MACRO ShowActivationOrEntryOrKOAbilityPopup
 	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
 	ld de, \1
 	farcall ShowAbilityPopup
+	IF _NARG < 2
+	ret c ; suppressed by Neutralizing Gas
+	ENDC
 ENDM
 
 ; ==========================================================================
@@ -1320,6 +1328,9 @@ MACRO ShowOncePerSendOutPopup
 	ld b, BANK(\2)
 	ld de, \2
 	farcall _ShowOncePerSendOutPopup
+	IF _NARG < 3
+	ret c ; suppressed by Neutralizing Gas
+	ENDC
 ENDM
 
 ; As ShowOncePerSendOutPopup, over the HUD of side a
@@ -1329,6 +1340,9 @@ MACRO ShowOncePerSendOutPopupOnSide
 	ld b, BANK(\2)
 	ld de, \2
 	newfarcall _ShowOncePerSendOutPopupOnSide
+	IF _NARG < 3
+	ret c ; suppressed by Neutralizing Gas
+	ENDC
 ENDM
 
 ; Macro for Grand Gauntlet silent trainers

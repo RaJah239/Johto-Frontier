@@ -17,7 +17,7 @@ AttackerHasMoldBreaker::
 	push bc
 	call GetCurrentMon
 	ld hl, MoldBreakerPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jmp PopBCDEHL
 
 MoldBreakerBypass::

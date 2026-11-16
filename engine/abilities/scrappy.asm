@@ -16,8 +16,18 @@ IsScrappySpecies::
 	jmp PopBCDEHL
 
 AttackerHasScrappy::
-; Carry if the mon whose turn it is (hBattleTurn) has Scrappy.
-; Preserves bc, de, hl.
+; Carry if the mon whose turn it is (hBattleTurn) has Scrappy (and it isn't
+; suppressed by Neutralizing Gas). Preserves bc, de, hl.
+	push hl
+	call GetCurrentMon
+	call IsSpeciesSuppressed
+	pop hl
+	ccf
+	ret nc
+	jr IsScrappySpecies
+
+AttackerHasScrappyRaw::
+; The same, even when suppressed (for its popup: Neutralizing Gas's shows).
 	push hl
 	call GetCurrentMon
 	pop hl
@@ -38,7 +48,7 @@ ShowScrappyPopupOnSide::
 	ld c, a
 	ld b, BANK(@)
 	ld de, ScrappyText
-	farcall ShowAbilityPopup
+	farcall ShowAbilityPopup ; (carry if suppressed by Neutralizing Gas)
 	jmp PopBCDEHL
 
 ScrappyText:: db "Scrappy@"

@@ -39,13 +39,15 @@ PressureDeductPP::
 	ld a, [hl]
 	and PP_MASK
 	ret z
-	dec [hl]
-
+	push hl
 	push bc
 	ldh a, [hBattleTurn]
 	xor 1 ; the Pressure mon's side
-	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_PRESSURE, PressureText
+	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_PRESSURE, PressureText, KEEP
 	pop bc
+	pop hl
+	ret c ; suppressed by Neutralizing Gas
+	dec [hl]
 
 	; ...and in the party, like the PP the move used (not when transformed,
 	; for a wild mon, or for a move learned by Mimic)

@@ -162,7 +162,7 @@ Regenerator:
 	push hl
 	push de
 	ld hl, RegeneratorPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	pop de
 	pop hl
 	ret nc

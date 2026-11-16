@@ -11,6 +11,15 @@ IsObliviousSpecies::
 	push de
 	push bc
 	ld hl, ObliviousPokemon
+	call IsInAbilityList
+	jmp PopBCDEHL
+
+IsObliviousSpeciesRaw:
+; The same, even when suppressed by Neutralizing Gas. Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld hl, ObliviousPokemon
 	call IsInByteArray
 	jmp PopBCDEHL
 
@@ -18,7 +27,7 @@ ObliviousBlocks::
 ; Carry if the target (not hBattleTurn's mon) has Oblivious; its popup then
 ; slides in over the target's HUD. Preserves bc, de, hl.
 	call GetOpposingMon
-	call IsObliviousSpecies
+	call IsObliviousSpeciesRaw
 	ret nc
 	push hl
 	push de
@@ -32,7 +41,7 @@ ObliviousBlocks::
 	pop bc
 	pop de
 	pop hl
-	scf
+	ccf ; (not if suppressed by Neutralizing Gas: its popup showed)
 	ret
 
 ObliviousText: db "Oblivious@"

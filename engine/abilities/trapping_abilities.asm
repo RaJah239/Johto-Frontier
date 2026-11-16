@@ -6,7 +6,7 @@ TrapAbilities:
 ShadowTag:
 	ld a, [wEnemyMonSpecies]
 	ld hl, ShadowTagPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	ret nc
 	jr TrappedByOpponent
 
@@ -17,13 +17,13 @@ ArenaTrap:
 	; can't trap levitating pokemon
 	ld a, [wBattleMonSpecies]
 	ld hl, LevitatePokemon
-	call IsInByteArray
+	call IsInAbilityList
 	ret c
 
 	; check if enemy has an arena trap pokemon
 	ld a, [wEnemyMonSpecies]
 	ld hl, ArenaTrapPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	ret nc
 
 	; check type
@@ -44,7 +44,7 @@ INCLUDE "data/abilities/arena_trap_mons.asm"
 MagnetPull:
 	ld a, [wEnemyMonSpecies]
 	ld hl, MagnetPullPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	ret nc
 
 	; check type

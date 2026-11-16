@@ -15,7 +15,18 @@ IsContrarySpecies::
 	push de
 	push bc
 	ld hl, ContraryPokemon
-	call IsInByteArray
+	call IsInAbilityList
+	jmp PopBCDEHL
+
+ContraryApplies::
+; Carry if species a has Contrary and it isn't suppressed by Neutralizing Gas
+; (whose popup then shows): for a stat change about to happen.
+; Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld hl, ContraryPokemon
+	call IsInAbilityListNG
 	jmp PopBCDEHL
 
 ShowContraryPopupOnSide::

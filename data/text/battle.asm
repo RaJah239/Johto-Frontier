@@ -267,6 +267,11 @@ HarvestBattleText:
 	text "!"
 	prompt
 
+NeutralizingGasBattleText:
+	text "Neutralizing gas"
+	line "filled the area!"
+	prompt
+
 PoisonHealBattleText:
 	text "<USER>"
 	line "heals HP via its"

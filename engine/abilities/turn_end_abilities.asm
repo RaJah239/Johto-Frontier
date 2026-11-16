@@ -1,22 +1,30 @@
 MACRO turn_end_ability
 ; \1 = species list, \2 = WEATHER_* it needs (or ANY_WEATHER), \3 = activation
+; \4 = SILENT for an ability without a popup: Neutralizing Gas simply turns it
+; off (the others show its popup instead of theirs, in the activation)
 	ld hl, \1
+	IF _NARG > 3
+	lb bc, TRUE | TURN_END_SILENT, \2 ; not the turn its mon was sent out
+	ELSE
 	lb bc, TRUE, \2 ; not the turn its mon was sent out
+	ENDC
 	ld de, \3
 	call TurnEndAbilityBothSides
 ENDM
+
+DEF TURN_END_SILENT EQU %10
 
 DEF ANY_WEATHER EQU -1
 
 TurnEndAbilities:
 	turn_end_ability RecoveryPokemon,       ANY_WEATHER,       Recovery_Activate
 	turn_end_ability SpeedBoostPokemon,     ANY_WEATHER,       SpeedBoost_Activate
-	turn_end_ability HydrationPokemon,      WEATHER_RAIN,      Hydration_Activate
-	turn_end_ability IceBodyPokemon,        WEATHER_HAIL,      IceBody_Activate
-	turn_end_ability RainDishPokemon,       WEATHER_RAIN,      RainDish_Activate
-	turn_end_ability SandBodyPokemon,       WEATHER_SANDSTORM, SandBody_Activate
+	turn_end_ability HydrationPokemon,      WEATHER_RAIN,      Hydration_Activate, SILENT
+	turn_end_ability IceBodyPokemon,        WEATHER_HAIL,      IceBody_Activate, SILENT
+	turn_end_ability RainDishPokemon,       WEATHER_RAIN,      RainDish_Activate, SILENT
+	turn_end_ability SandBodyPokemon,       WEATHER_SANDSTORM, SandBody_Activate, SILENT
 	turn_end_ability TenacityPokemon,       ANY_WEATHER,       Tenacity_Activate
-	turn_end_ability PhotosynthesisPokemon, WEATHER_SUN,       Photosynthesis_Activate
+	turn_end_ability PhotosynthesisPokemon, WEATHER_SUN,       Photosynthesis_Activate, SILENT
 	turn_end_ability HarvestPokemon,        ANY_WEATHER,       Harvest_Activate
 	ret
 
@@ -64,15 +72,22 @@ TurnEndAbilityBothSides:
 .weather_ok
 	push de
 	push hl
-	ld a, b
-	and a
+	bit 0, b
 	jr z, .species
+	push bc
 	farcall SentOutThisTurn
+	pop bc
 	jr nz, .no
 .species
 	call GetCurrentMon
 	pop hl
+	bit 1, b ; TURN_END_SILENT
+	jr z, .raw
+	call IsInAbilityList
+	jr .listed
+.raw
 	call IsInByteArray
+.listed
 	pop hl ; activation
 	ret nc
 	jp hl
@@ -85,9 +100,9 @@ TurnEndAbilityBothSides:
 Recovery_Activate:
 	call TurnEndAbility_AtMaxHP
 	ret z
+	ShowActivationOrEntryOrKOAbilityPopup RecoveryText
 	ld hl, BattleText_TargetRegenerates
 	call StdBattleTextbox
-	ShowActivationOrEntryOrKOAbilityPopup RecoveryText
 	; fallthrough
 
 TurnEndAbility_HealSixteenth:
@@ -162,12 +177,14 @@ Tenacity_Activate:
 	call Random
 	cp 33 percent + 1
 	ret nc ; 1/3 chance
-	call TurnEndAbility_CureStatus
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVar
+	and a
 	ret z
-	ld hl, TenacityHealingText
-	call StdBattleTextbox
 	ShowActivationOrEntryOrKOAbilityPopup TenacityText
-	ret
+	call TurnEndAbility_CureStatus
+	ld hl, TenacityHealingText
+	jmp StdBattleTextbox
 
 SpeedBoost_Activate:
 	ShowActivationOrEntryOrKOAbilityPopup SpeedBoostText
@@ -238,6 +255,12 @@ Harvest_Activate:
 	ret nc
 
 .regrow
+	push hl
+	push de
+	ShowActivationOrEntryOrKOAbilityPopup HarvestText, KEEP
+	pop de
+	pop hl
+	ret c ; suppressed by Neutralizing Gas
 	ld a, [hl]
 	ld [de], a
 	ld [hl], 0
@@ -261,7 +284,6 @@ Harvest_Activate:
 	ld [hl], b
 .regrown
 	call GetItemName
-	ShowActivationOrEntryOrKOAbilityPopup HarvestText
 	farcall RefreshBattleHuds
 	ld hl, HarvestBattleText
 	jmp StdBattleTextbox
@@ -284,7 +306,7 @@ PoisonHeal::
 ; then, so no poison damage is done.
 	call GetCurrentMon
 	ld hl, PoisonHealPokemon
-	call IsInByteArray
+	call IsInAbilityListNG
 	ret nc
 
 	ld a, BATTLE_VARS_SUBSTATUS5
@@ -337,7 +359,7 @@ IsPoisonHealSpecies::
 	push de
 	push bc
 	ld hl, PoisonHealPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jmp PopBCDEHL
 
 PoisonHealText: db "Poison Heal@"

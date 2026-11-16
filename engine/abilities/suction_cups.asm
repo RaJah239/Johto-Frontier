@@ -11,6 +11,15 @@ IsSuctionCupsSpecies::
 	push de
 	push bc
 	ld hl, SuctionCupsPokemon
+	call IsInAbilityList
+	jmp PopBCDEHL
+
+IsSuctionCupsSpeciesRaw:
+; The same, even when suppressed by Neutralizing Gas. Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld hl, SuctionCupsPokemon
 	call IsInByteArray
 	jmp PopBCDEHL
 
@@ -18,7 +27,7 @@ SuctionCupsBlocksForceSwitch::
 ; Carry if the target (not hBattleTurn's mon) has Suction Cups: then show
 ; its popup over the target's HUD.
 	call GetOpposingMon
-	call IsSuctionCupsSpecies
+	call IsSuctionCupsSpeciesRaw
 	ret nc
 	ld b, BANK(@)
 	ldh a, [hBattleTurn]
@@ -26,7 +35,7 @@ SuctionCupsBlocksForceSwitch::
 	ld c, a ; the target's side
 	ld de, SuctionCupsText
 	farcall ShowAbilityPopup
-	scf
+	ccf ; (not if suppressed by Neutralizing Gas: its popup showed)
 	ret
 
 SuctionCupsText: db "Suction Cups@"

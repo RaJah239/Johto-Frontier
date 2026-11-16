@@ -39,9 +39,8 @@ PriorityAbilityPopup:
 	ld c, SEND_OUT_POPUP_IRON_HEAD
 	newfarcall CheckSendOutPopupShown
 	ret nz
-	call PriorityBattleText_Call
 	ShowOncePerSendOutPopup SEND_OUT_POPUP_IRON_HEAD, PreemptText
-	ret
+	jr PriorityBattleText_Call
 
 .not_iron_head
 	cp ZEN_HEADBUTT
@@ -57,9 +56,8 @@ PriorityAbilityPopup:
 	ld c, SEND_OUT_POPUP_ZEN_HEADBUTT
 	newfarcall CheckSendOutPopupShown
 	ret nz
-	call PriorityBattleText_Call
 	ShowOncePerSendOutPopup SEND_OUT_POPUP_ZEN_HEADBUTT, PreemptText
-	ret
+	; fallthrough
 
 PriorityBattleText_Call:
 	ld hl, PriorityBattleText
@@ -170,9 +168,12 @@ _BattleCommand_Critical:
 	jr nc, .continue
 
 ; super luck mons have an innate +2 critical hit level
+	push bc
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_SUPER_LUCK, SuperLuckText, KEEP
+	pop bc
+	jr c, .continue ; suppressed by Neutralizing Gas
 	inc c
 	inc c
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_SUPER_LUCK, SuperLuckText
 	jr .continue
 
 ; The move always lands a critical hit, unless the target has Crit Guard.
@@ -180,7 +181,10 @@ _BattleCommand_Critical:
 ; ==========================
 ; === Ability: Crit Lock ===
 ; ==========================
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_CRIT_LOCK, CritlockText
+	push bc
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_CRIT_LOCK, CritlockText, KEEP
+	pop bc
+	jr c, .continue ; suppressed by Neutralizing Gas
 	jr .CritGuard
 
 .continue
@@ -221,7 +225,7 @@ _BattleCommand_Critical:
 .CritGuard:
 	call GetOpposingMon
 	ld hl, CritGuardPokemon
-	call IsInByteArray
+	call IsInAbilityListNG
 	jr nc, .crit_guard_checks_done
 
 	showdefensiveability CritGuardText
@@ -456,11 +460,13 @@ _BattleCommand_CheckHit:
 	cp WEATHER_HAIL
 	jr nz, .finish_foe_snow_cloak
 	ld a, [wEnemyMonSpecies]
-	call SnowCloak
+	call IsSpeciesSuppressed ; (Neutralizing Gas)
+	call nc, SnowCloak
 
 .finish_foe_snow_cloak
 	ld a, [wEnemyMonSpecies] ; the target (it was the attacker's species)
-	call FadeIn
+	call IsSpeciesSuppressed ; (Neutralizing Gas)
+	call nc, FadeIn
 
 	ldh a, [hBattleTurn]
 	and a
@@ -477,11 +483,13 @@ _BattleCommand_CheckHit:
 	cp WEATHER_HAIL
 	jr nz, .finish_player_snow_cloak
 	ld a, [wBattleMonSpecies]
-	call SnowCloak
+	call IsSpeciesSuppressed ; (Neutralizing Gas)
+	call nc, SnowCloak
 
 .finish_player_snow_cloak
 	ld a, [wBattleMonSpecies] ; the target (it was the attacker's species)
-	call FadeIn
+	call IsSpeciesSuppressed ; (Neutralizing Gas)
+	call nc, FadeIn
 
 .got_acc_eva
 	ld a, c
@@ -552,7 +560,8 @@ _BattleCommand_CheckHit:
 	call IsInByteArray
 	jr nc, .skip_keen_eyes
 
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_KEEN_EYES, KeenEyesText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_KEEN_EYES, KeenEyesText, KEEP
+	jr c, .skip_keen_eyes ; suppressed by Neutralizing Gas
 	ld a, 130
 	call AccuracyCalc
 

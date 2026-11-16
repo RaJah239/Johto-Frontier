@@ -101,17 +101,122 @@ StackJumpTable::
 	jp hl
 
 ShowDefensiveAbilityBanner::
-	ld a, [wOptions4]
-	bit ABILITY_BANNERS, a
-	jr nz, .skip
-
+; Popup b:de over the target's HUD. Carry if Neutralizing Gas suppresses
+; the ability (its popup shows instead).
 	ldh a, [hBattleTurn]
 	xor 1
 	ld c, a
 	; b = bank of text
 	; de = text pointer
-	farjp ShowAbilityPopup
-
-.skip
+	farcall ShowAbilityPopup
+	ret c
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	ret z ; (nc)
 	ld c, 30
-	jmp DelayFrames
+	call DelayFrames
+	and a
+	ret
+
+; =================================
+; === Ability: Neutralizing Gas ===
+; =================================
+; (engine/abilities/neutralizing_gas.asm)
+
+IsSideSuppressed::
+; Carry if side a's (0: player, 1: enemy) mon has its ability suppressed by
+; the other mon's Neutralizing Gas (while that mon is still standing).
+; Preserves a, bc, de, hl.
+	push hl
+	push bc
+	ld c, a
+	ld a, [wBattleMode]
+	and a
+	jr z, .no
+	ld a, [wNeutralizingGas]
+	ld b, a
+	ld a, c
+	and a
+	jr nz, .enemy
+	bit 0, b
+	jr z, .no
+	ld hl, wEnemyMonHP
+	jr .check_hp
+.enemy
+	bit 1, b
+	jr z, .no
+	ld hl, wBattleMonHP
+.check_hp
+	ld a, [hli]
+	or [hl]
+	jr z, .no
+	ld a, c
+	scf
+	jr .done
+.no
+	ld a, c
+	and a
+.done
+	pop bc
+	pop hl
+	ret
+
+IsSpeciesSuppressed::
+; Carry if species a is the mon out on a side whose ability is suppressed by
+; Neutralizing Gas. Preserves a, bc, de, hl.
+	push bc
+	ld c, a
+	ld a, [wBattleMonSpecies]
+	cp c
+	ld a, 0
+	jr z, .side
+	ld a, [wEnemyMonSpecies]
+	cp c
+	jr nz, .no
+	ld a, 1
+.side
+	call IsSideSuppressed
+	ld a, c
+	pop bc
+	ret
+.no
+	ld a, c
+	and a
+	pop bc
+	ret
+
+IsInAbilityList::
+; IsInByteArray for an ability's species list: no match for a mon whose
+; ability Neutralizing Gas suppresses.
+	call IsSpeciesSuppressed
+	jmp nc, IsInByteArray
+	and a
+	ret
+
+IsInAbilityListNG::
+; IsInAbilityList where the ability would act right now: if it's in list hl
+; but suppressed, Neutralizing Gas's popup shows (over the other side).
+	call IsSpeciesSuppressed
+	jmp nc, IsInByteArray
+	push hl
+	push de
+	push bc
+	call IsInByteArray
+	jr nc, .done
+	; the suppressed mon's side: its popup is swapped for Neutralizing Gas's
+	ld c, a
+	ld a, [wBattleMonSpecies]
+	cp c
+	ld c, 0
+	jr z, .got_side
+	inc c
+.got_side
+	ld b, BANK(NeutralizingGasPopupText)
+	ld de, NeutralizingGasPopupText
+	farcall ShowAbilityPopup
+.done
+	pop bc
+	pop de
+	pop hl
+	and a
+	ret

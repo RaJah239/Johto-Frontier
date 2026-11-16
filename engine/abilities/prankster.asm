@@ -14,7 +14,7 @@ PranksterPriority::
 	push bc
 	ld a, d
 	ld hl, PranksterPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	pop bc
 	ret nc
 	ld a, c

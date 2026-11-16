@@ -329,7 +329,7 @@ INCLUDE "data/abilities/pillow_fort_mons.asm"
 HandleChrysalisHide:
 	call GetOpposingMon
 	ld hl, ChrysalisHidePokemon
-	call IsInByteArray
+	call IsInAbilityList
 	ret nc
 
 	ld a, BATTLE_VARS_MOVE_TYPE
@@ -471,7 +471,7 @@ IsHugePowerSpecies::
 	push de
 	push bc
 	ld hl, HugePowerPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jmp PopBCDEHL
 
 HugePowerText: db "Huge Power@"

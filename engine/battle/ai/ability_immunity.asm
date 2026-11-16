@@ -63,6 +63,10 @@ IsSpeciesImmuneByAbility:
 	ret
 
 .check
+	; no ability while Neutralizing Gas suppresses it
+	ld a, e
+	call IsSpeciesSuppressed
+	jr c, .no
 .loop
 	ld a, d
 	call GetFarByte

@@ -15,7 +15,7 @@ SheerForceApplies::
 	push bc
 	call GetCurrentMon
 	ld hl, SheerForcePokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr nc, .done
 	ld hl, wPlayerMoveStruct
 	ldh a, [hBattleTurn]

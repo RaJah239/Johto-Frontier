@@ -32,7 +32,7 @@ AftermathOnKO::
 	; Magic Guard: no indirect damage
 	call GetCurrentMon
 	ld hl, MagicGuardPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	ret c
 
 	ldh a, [hBattleTurn]
@@ -41,6 +41,7 @@ AftermathOnKO::
 	ld b, BANK(@)
 	ld de, AftermathText
 	farcall ShowAbilityPopup
+	ret c ; suppressed by Neutralizing Gas
 
 	farcall GetQuarterMaxHP
 	farcall SubtractHPFromUser

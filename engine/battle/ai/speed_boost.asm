@@ -334,7 +334,11 @@ AI_WeatherMoveHelps:
 	ret
 
 .InAbilityList:
-; a = species, hl = ability list. Return carry if listed. Preserves bc, hl.
+; a = species, hl = ability list. Return carry if listed (and not suppressed
+; by Neutralizing Gas). Preserves bc, hl.
+	call IsSpeciesSuppressed
+	ccf
+	ret nc
 	push hl
 	ld e, a
 .list_loop

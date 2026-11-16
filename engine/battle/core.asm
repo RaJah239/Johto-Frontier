@@ -624,6 +624,8 @@ GetMovePriority:
 .mon_check
 	; Iron Head gets priority when Blastoise uses it
 	ld a, d
+	call IsSpeciesSuppressed ; (Neutralizing Gas)
+	jr c, .regular_priority
 	cp BLASTOISE
 	jr z, .priority_2
 	jr .regular_priority
@@ -631,6 +633,8 @@ GetMovePriority:
 .mon_check3
 	; Zen Headbutt gets priority when Drowzee or Hypno uses it
 	ld a, d
+	call IsSpeciesSuppressed ; (Neutralizing Gas)
+	jr c, .regular_priority
 	cp DROWZEE
 	jr z, .priority_2
 	cp HYPNO
@@ -876,7 +880,7 @@ ResidualDamage:
 ; magic guard pokemon take no residual damage
     call GetCurrentMon
 	ld hl, MagicGuardPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jmp c, .check_fainted
 
 ; Return z if the user fainted before
@@ -1021,12 +1025,13 @@ ResidualDamage:
 	and SLP_MASK
 	jr z, .not_nightmare
 
-.nightmare
 	; Bad Dreams belongs to the other side's mon: its popup, once each time
-	; that mon is sent out
+	; that mon is sent out (none of it if Neutralizing Gas suppresses it)
 	ldh a, [hBattleTurn]
 	xor 1
-	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_BAD_DREAMS, BadDreamsText
+	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_BAD_DREAMS, BadDreamsText, KEEP
+	jr c, .not_nightmare
+.nightmare
 .in_night_mare
 	xor a
 	ld [wNumHits], a
@@ -1049,7 +1054,7 @@ ResidualDamage:
 ; magic guard pokemon take no residual curse damage
     call GetCurrentMon
 	ld hl, MagicGuardPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr c, .not_cursed
 
 	xor a
@@ -3252,7 +3257,7 @@ SpikesDamage:
 .Hazards:
 	call GetCurrentMon
 	ld hl, HazardGuardMons
-	call IsInByteArray
+	call IsInAbilityList
 	ret c
 
 	call _GetUserItem
@@ -3331,7 +3336,7 @@ SpikesDamage:
 	push bc
 	call GetCurrentMon
 	ld hl, MagicGuardPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	pop bc
 	pop de
 	pop hl
@@ -3381,7 +3386,7 @@ SpikesDamage:
 	push bc
 	call GetCurrentMon
 	ld hl, LevitatePokemon
-	call IsInByteArray
+	call IsInAbilityList
 	pop bc
 	pop de
 	pop hl
@@ -3480,7 +3485,7 @@ SpikesDamage:
 	push bc
 	call GetCurrentMon
 	ld hl, LevitatePokemon
-	call IsInByteArray
+	call IsInAbilityList
 	pop bc
 	pop de
 	pop hl
@@ -4077,7 +4082,7 @@ PrintPlayerHUD:
 	; place floaticon
 	ld a, [wCurSpecies]
 	ld hl, LevitatePokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr nc, .skip_floaticon
 	hlcoord 19, 8
 	ld [hl], $72
@@ -4198,7 +4203,7 @@ DrawEnemyHUD:
 	; place floaticon
 	ld a, [wCurSpecies]
 	ld hl, LevitatePokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr nc, .skip_floaticon
 	hlcoord 10, 1
 	ld [hl], $72
@@ -4596,7 +4601,7 @@ TryPlayerSwitch:
 .check_trapped
 	call GetOpposingMon
 	ld hl, RunAwayPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr c, .try_switch
 
 	ld a, [wPlayerWrapCount]

@@ -18,8 +18,8 @@ InfiltratorBypass::
 	call IsInByteArray
 	jr nc, .done
 	ldh a, [hBattleTurn]
-	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_INFILTRATOR, InfiltratorText
-	scf
+	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_INFILTRATOR, InfiltratorText, KEEP
+	ccf ; (no bypass if suppressed by Neutralizing Gas)
 .done
 	jmp PopBCDEHL
 

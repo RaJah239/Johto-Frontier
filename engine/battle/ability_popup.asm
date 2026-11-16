@@ -18,6 +18,28 @@ ShowAbilityPopup::
 ;   c = side: ABILITY_POPUP_PLAYER or ABILITY_POPUP_ENEMY
 ;   de = ability name, terminated with "@" (or $00)
 ; No-op outside of battle (wBattleMode = 0) or with ability banners off.
+; If that side's ability is suppressed by Neutralizing Gas, the other side's
+; Neutralizing Gas popup shows instead and this returns carry: the caller
+; must then skip the ability's effect.
+	ld a, c
+	call IsSideSuppressed
+	jr c, .suppressed
+	call ShowAbilityPopupCore
+	and a
+	ret
+
+.suppressed
+	xor 1
+	ld c, a
+	ld b, BANK(NeutralizingGasPopupText)
+	ld de, NeutralizingGasPopupText
+	call ShowAbilityPopupCore
+	scf
+	ret
+
+NeutralizingGasPopupText:: db "NeutralizingGas@"
+
+ShowAbilityPopupCore:
 	ld a, [wBattleMode]
 	and a
 	ret z

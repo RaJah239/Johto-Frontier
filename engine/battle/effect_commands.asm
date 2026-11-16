@@ -990,7 +990,7 @@ BattleCommand_Stab:
 	push de
 	call GetCurrentMon
 	ld hl, TypeSyncPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	pop de
 
 	ld hl, wCurDamage + 1
@@ -1335,7 +1335,7 @@ BattleCommand_Burn:
 ; ================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsInAbilityListNG
 	jmp c, Serenity
 
 	ld hl, DidntAffect1Text
@@ -1479,8 +1479,9 @@ BattleCommand_EffectChance:
 	; double effect chance
 .blessing
 	push hl
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_BLESSING, BlessingText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_BLESSING, BlessingText, KEEP
 	pop hl
+	jr c, .finish_blessing ; suppressed by Neutralizing Gas
 
 	sla [hl] ; 2x effect chance
 
@@ -1736,6 +1737,8 @@ BattleCommand_ApplyDamage:
 	ld hl, SturdyPokemon
 	call IsInByteArray
 	jr nc, .no_sturdy
+	newfarcall NGIgnoresSturdy ; (Neutralizing Gas)
+	jr c, .no_sturdy
 	newfarcall MoldBreakerIgnoresSturdy
 	jr nc, .focus_sash_effect
 .no_sturdy
@@ -2448,7 +2451,17 @@ DEF UNAWARE_REDO_BURN EQU 1
 DEF UNAWARE_REDO_FROSTBITE EQU 2
 
 IsUnaware:
-; Carry if species a has Unaware. Preserves bc, de, hl.
+; Carry if species a has Unaware (not suppressed by Neutralizing Gas).
+; Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld hl, UnawarePokemon
+	call IsInAbilityList
+	jmp PopBCDEHL
+
+IsUnawareRaw:
+; The same, even when suppressed (for its popup: Neutralizing Gas's shows).
 	push hl
 	push de
 	push bc
@@ -2601,7 +2614,7 @@ UnawarePopup:
 
 	; the attacker
 	call GetCurrentMon
-	call IsUnaware
+	call IsUnawareRaw
 	jr nc, .target
 	ldh a, [hBattleTurn]
 	ld c, a
@@ -2609,7 +2622,7 @@ UnawarePopup:
 
 .target
 	call GetOpposingMon
-	call IsUnaware
+	call IsUnawareRaw
 	ret nc
 	newfarcall MoldBreakerBypass
 	ret c ; ignored: Mold Breaker's popup shows instead
@@ -3226,7 +3239,7 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 	call GetCurrentMon
 	push bc
 	ld hl, SniperPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	pop bc
 	jr c, .sniper_mons_damage
 	jr .regular_crit_damage
@@ -3669,7 +3682,7 @@ BattleCommand_SleepTarget:
 ; ========================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsInAbilityListNG
 	jr c, Serenity
 
 	call CheckForStatusIfAlreadyHasAny
@@ -3743,7 +3756,7 @@ BattleCommand_PoisonTarget:
 ; =========================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsInAbilityListNG
 	jr c, Serenity
 
 	call SafeCheckSafeguard
@@ -3780,7 +3793,7 @@ BattleCommand_Poison:
 ; ==================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsInAbilityListNG
 	jmp c, Serenity
 
 	ld hl, DidntAffect1Text
@@ -4004,7 +4017,8 @@ BattleCommand_BurnTarget:
 
 	; 100% burn foe
 .burn
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_KINDLE, KindleText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_KINDLE, KindleText, KEEP
+	jr c, .done ; suppressed by Neutralizing Gas
 	xor a
 	ld [wEffectFailed], a
 
@@ -4018,7 +4032,7 @@ BattleCommand_BurnTarget:
 ; =======================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsInAbilityListNG
 	jmp c, Serenity
 
 	call SafeCheckSafeguard
@@ -4095,7 +4109,7 @@ BattleCommand_FreezeTarget:
 ; ===========================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsInAbilityListNG
 	jmp c, Serenity
 
 	call SafeCheckSafeguard
@@ -4146,7 +4160,8 @@ BattleCommand_ParalyzeTarget:
 
 	; 100% paralyze foe
 .paralyze
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_SURE_SHOCK, SureShockText
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_SURE_SHOCK, SureShockText, KEEP
+	jr c, .done ; suppressed by Neutralizing Gas
 	xor a
 	ld [wEffectFailed], a
 
@@ -4160,7 +4175,7 @@ BattleCommand_ParalyzeTarget:
 ; ===========================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsInAbilityListNG
 	jmp c, Serenity
 
 	call SafeCheckSafeguard
@@ -4252,7 +4267,7 @@ RaiseStat:
 	or c
 	jr nz, RaiseStat_NoContrary ; it fails anyway
 	call GetCurrentMon
-	newfarcall IsContrarySpecies
+	newfarcall ContraryApplies
 	jr nc, RaiseStat_NoContrary
 	ldh a, [hBattleTurn]
 	newfarcall ShowContraryPopupOnSide
@@ -4436,7 +4451,7 @@ BattleCommand_StatDown:
 	call CheckHiddenOpponent
 	jr nz, .not_contrary
 	call GetOpposingMon
-	newfarcall IsContrarySpecies
+	newfarcall ContraryApplies
 	jr nc, .not_contrary
 	ldh a, [hBattleTurn]
 	xor 1
@@ -4466,7 +4481,7 @@ BattleCommand_StatDown:
 	push hl
 	push bc
 	ld hl, ResiliencePokemon
-	call IsInByteArray
+	call IsInAbilityListNG
 	pop bc
 	pop hl
 	jr c, .resilience
@@ -4880,7 +4895,7 @@ LowerStat:
 	xor a
 	ld [wContraryInverted], a
 	call GetCurrentMon
-	newfarcall IsContrarySpecies
+	newfarcall ContraryApplies
 	jr nc, .not_contrary
 	ldh a, [hBattleTurn]
 	newfarcall ShowContraryPopupOnSide
@@ -5207,10 +5222,10 @@ BattleCommand_Rampage:
 	call IsInByteArray
 	jr nc, .feral_mind_done
 
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_FERAL_MIND, FeralMindText, KEEP
+	jr c, .feral_mind_done ; suppressed by Neutralizing Gas
 	ld hl, FeralMindBattleText
-	call StdBattleTextbox
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_FERAL_MIND, FeralMindText
-	ret
+	jmp StdBattleTextbox
 
 .feral_mind_done
 	ld de, wPlayerRolloutCount
@@ -5624,7 +5639,7 @@ BattleCommand_FlinchTarget:
 ; =========================
 	call GetOpposingMon
 	ld hl, UnshakenPokemon
-	call IsInByteArray
+	call IsInAbilityListNG
 	jr c, .no_flinch
 	jr FlinchTarget
 
@@ -5883,10 +5898,16 @@ BattleCommand_Recoil:
 	jr .finish_rock_head
 
 .rock_head
+	push hl
+	push bc
+	push de
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_ROCK_HEAD, RockHeadText, KEEP
+	pop de
+	pop bc
+	pop hl
+	jr c, .finish_rock_head ; suppressed by Neutralizing Gas
 	ld hl, RockHeadBattleText
-	call StdBattleTextbox
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_ROCK_HEAD, RockHeadText
-	ret
+	jmp StdBattleTextbox
 
 .finish_rock_head
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -5971,7 +5992,7 @@ BattleCommand_ConfuseTarget:
 ; ===========================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsInAbilityListNG
 	jmp c, Serenity
 
 	call SafeCheckSafeguard
@@ -5990,7 +6011,7 @@ BattleCommand_Confuse:
 ; ===================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsInAbilityListNG
 	jmp c, Serenity
 
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
@@ -6073,7 +6094,7 @@ BattleCommand_Paralyze:
 ; =====================================
 	call GetOpposingMon
 	ld hl, SerenityPokemon
-	call IsInByteArray
+	call IsInAbilityListNG
 	jmp c, Serenity
 
 	ld a, [wAttackMissed]
@@ -6120,10 +6141,10 @@ BattleCommand_RechargeNextTurn:
 	call IsInByteArray
 	jr nc, .overdrive_done
 
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_OVERDRIVE, OverdriveText, KEEP
+	jr c, .overdrive_done ; suppressed by Neutralizing Gas
 	ld hl, OverdriveBattleText
-	call StdBattleTextbox
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_OVERDRIVE, OverdriveText
-	ret
+	jmp StdBattleTextbox
 
 .overdrive_done
 	ld a, BATTLE_VARS_SUBSTATUS4
@@ -6901,7 +6922,7 @@ BattleCommand_CheckPowder:
 	newfarcall TargetHasOvercoat
 	jr nc, .not_overcoat_move
 	newfarcall ShowOvercoatPopupOnTarget
-	jr .Immune
+	jr nc, .Immune
 .not_overcoat_move
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
@@ -7110,10 +7131,9 @@ TypeSyncPopup:
 	call IsInByteArray
 	ret nc
 
-	ld hl, TypeSyncBattleText
-	call StdBattleTextbox
 	ShowOncePerSendOutPopup SEND_OUT_POPUP_TYPE_SYNC, TypeSyncText
-	ret
+	ld hl, TypeSyncBattleText
+	jmp StdBattleTextbox
 
 TypeSyncText: db "Type Sync@"
 

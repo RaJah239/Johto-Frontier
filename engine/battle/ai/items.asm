@@ -263,21 +263,21 @@ IsEnemyTrappedByPlayerAbility:
 ; escapes all of them.
 	ld a, [wEnemyMonSpecies]
 	ld hl, RunAwayPokemon_AI
-	call IsInByteArray
+	call IsInAbilityList
 	jr c, .not_trapped
 
 	ld a, [wBattleMonSpecies]
 	ld hl, ShadowTagPokemon_AI
-	call IsInByteArray
+	call IsInAbilityList
 	ret c
 
 	ld a, [wBattleMonSpecies]
 	ld hl, ArenaTrapPokemon_AI
-	call IsInByteArray
+	call IsInAbilityList
 	jr nc, .magnet_pull
 	ld a, [wEnemyMonSpecies]
 	ld hl, LevitatePokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr c, .magnet_pull
 	ld a, [wEnemyMonType1]
 	cp FLYING
@@ -291,7 +291,7 @@ IsEnemyTrappedByPlayerAbility:
 .magnet_pull
 	ld a, [wBattleMonSpecies]
 	ld hl, MagnetPullPokemon_AI
-	call IsInByteArray
+	call IsInAbilityList
 	jr nc, .not_trapped
 	ld a, [wEnemyMonType1]
 	cp STEEL

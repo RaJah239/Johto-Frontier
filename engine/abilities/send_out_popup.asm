@@ -49,6 +49,9 @@ _ShowOncePerSendOutPopup::
 _ShowOncePerSendOutPopupOnSide::
 ; The same over side a's HUD (ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY):
 ; for an ability of the mon that isn't the one acting.
+; Returns carry if Neutralizing Gas suppresses the ability (every time, so
+; the caller skips its effect): its popup shows instead, as often.
+	call IsSideSuppressed
 	push af
 	call GetSendOutPopupFlag
 	jr nz, .shown
@@ -57,11 +60,10 @@ _ShowOncePerSendOutPopupOnSide::
 	ld [hl], a
 	pop af
 	ld c, a
-	farcall ShowAbilityPopup
-	ret
+	farjp ShowAbilityPopup ; (carry if suppressed)
 
 .shown
-	pop af
+	pop af ; (carry if suppressed)
 	ret
 
 CheckSendOutPopupShown::
@@ -129,5 +131,7 @@ endr
 
 ResetAllSendOutPopups::
 ; at the start of a battle
+	xor a
+	ld [wNeutralizingGas], a ; nothing is suppressed until the mons are out
 	call ResetPlayerSendOutPopups
 	jr ResetEnemySendOutPopups

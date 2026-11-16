@@ -112,13 +112,13 @@ DetermineMoveOrder:
 	; check player Pokémon
 	ld a, [wBattleMonSpecies]
 	ld hl, QuickDrawPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr nc, .quick_draw_mon_not_in_list
 
 	; check enemy Pokémon
 	ld a, [wEnemyMonSpecies]
 	ld hl, QuickDrawPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr nc, .quick_draw_mon_not_in_list
 
 	; if we reach here
@@ -148,12 +148,12 @@ DetermineMoveOrder:
 
     ld a, [wEnemyMonSpecies]
 	ld hl, SwiftSwimPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr c, .check_other_player_rain
 
     ld a, [wBattleMonSpecies]
 	ld hl, SwiftSwimPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jmp c, .SimulatePlayerDoubleSpeed
 
 .check_sun
@@ -166,12 +166,12 @@ DetermineMoveOrder:
 
     ld a, [wEnemyMonSpecies]
 	ld hl, ChlorophyllPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr c, .check_other_player_sun
 
     ld a, [wBattleMonSpecies]
 	ld hl, ChlorophyllPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jmp c, .SimulatePlayerDoubleSpeed
 
 .check_sand
@@ -184,12 +184,12 @@ DetermineMoveOrder:
 
 	ld a, [wEnemyMonSpecies]
 	ld hl, SandRushPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr c, .check_other_player_sand
 
 	ld a, [wBattleMonSpecies]
 	ld hl, SandRushPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jmp c, .SimulatePlayerDoubleSpeed
 
 .check_hail
@@ -202,12 +202,12 @@ DetermineMoveOrder:
 
 	ld a, [wEnemyMonSpecies]
 	ld hl, SlushRushPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr c, .check_other_player_hail
 
 	ld a, [wBattleMonSpecies]
 	ld hl, SlushRushPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jmp c, .SimulatePlayerDoubleSpeed
 	jmp .continue
 
@@ -217,28 +217,28 @@ DetermineMoveOrder:
 .check_other_player_rain
     ld a, [wBattleMonSpecies]
 	ld hl, SwiftSwimPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jmp c, .continue
     jr .SimulateEnemyDoubleSpeed
 
 .check_other_player_sun
     ld a, [wBattleMonSpecies]
 	ld hl, ChlorophyllPokemon
-	call IsInByteArray
-	jr c, .continue
+	call IsInAbilityList
+	jmp c, .continue
     jr .SimulateEnemyDoubleSpeed
 
 .check_other_player_sand
 	ld a, [wBattleMonSpecies]
 	ld hl, SandRushPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr c, .continue
 	jr .SimulateEnemyDoubleSpeed
 
 .check_other_player_hail
 	ld a, [wBattleMonSpecies]
 	ld hl, SlushRushPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr c, .continue
 	jr .SimulateEnemyDoubleSpeed
 
@@ -253,13 +253,14 @@ DetermineMoveOrder:
 	cp 33 percent + 1
 	jr c, .continue ; 1/3 chance
 
-	ld hl, BattleText_QuickDraw
-	call StdBattleTextbox
-
 	ld b, BANK(QuickDrawAbilityText)
 	ld c, ABILITY_POPUP_ENEMY
 	ld de, QuickDrawAbilityText
 	farcall ShowAbilityPopup
+	jr c, .continue ; suppressed by Neutralizing Gas
+
+	ld hl, BattleText_QuickDraw
+	call StdBattleTextbox
 
 .SimulateEnemyDoubleSpeed
 	ld a, [wEnemyMonStatus]
@@ -282,13 +283,14 @@ DetermineMoveOrder:
 	cp 33 percent + 1
 	jr c, .continue ; 1/3 chance
 
-	ld hl, BattleText_QuickDraw
-	call StdBattleTextbox
-
 	ld b, BANK(QuickDrawAbilityText)
 	ld c, ABILITY_POPUP_PLAYER
 	ld de, QuickDrawAbilityText
 	farcall ShowAbilityPopup
+	jr c, .continue ; suppressed by Neutralizing Gas
+
+	ld hl, BattleText_QuickDraw
+	call StdBattleTextbox
 
 .SimulatePlayerDoubleSpeed
 	ld a, [wBattleMonStatus]

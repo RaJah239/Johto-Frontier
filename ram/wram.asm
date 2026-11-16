@@ -3947,7 +3947,5 @@ wSendOutPopupsShown:: ds 2 * SEND_OUT_POPUP_BYTES
 
 
 SECTION "Harvest Berries", WRAMX, BANK[1]
-
-; per side (player, enemy), the Berry its mon used since it came in, for
-; Harvest (engine/abilities/turn_end_abilities.asm); 0 if none
 wHarvestBerries:: ds 2
+wNeutralizingGas:: db

@@ -9,7 +9,17 @@
 ; takes no weather damage.
 
 IsOvercoatSpecies::
-; Carry if species a has Overcoat. Preserves bc, de, hl.
+; Carry if species a has Overcoat (not suppressed by Neutralizing Gas).
+; Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld hl, OvercoatPokemon
+	call IsInAbilityList
+	jmp PopBCDEHL
+
+IsOvercoatSpeciesRaw:
+; The same, even when suppressed. Preserves bc, de, hl.
 	push hl
 	push de
 	push bc
@@ -25,10 +35,10 @@ UserHasOvercoat::
 	jr IsOvercoatSpecies
 
 TargetHasOvercoat::
-; Carry if the other mon (not hBattleTurn's) has Overcoat.
-; Preserves bc, de, hl.
+; Carry if the other mon (not hBattleTurn's) has Overcoat, even when
+; suppressed (ShowOvercoatPopupOnTarget then says so). Preserves bc, de, hl.
 	call GetOpposingMon
-	jr IsOvercoatSpecies
+	jr IsOvercoatSpeciesRaw
 
 IsOvercoatBlockedMove::
 ; Carry if move a is a powder move Overcoat blocks. Preserves bc, de, hl.
@@ -41,6 +51,7 @@ IsOvercoatBlockedMove::
 
 ShowOvercoatPopupOnTarget::
 ; Slide in Overcoat's popup over the target's (not hBattleTurn's) HUD.
+; Carry if suppressed by Neutralizing Gas (whose popup shows instead).
 ; Preserves bc, de, hl.
 	push hl
 	push de

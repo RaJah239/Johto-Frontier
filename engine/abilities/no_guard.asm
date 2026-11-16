@@ -14,11 +14,11 @@ NoGuardCheck::
 	push bc
 	ld a, [wBattleMonSpecies]
 	ld hl, NoGuardPokemon
-	call IsInByteArray
+	call IsInAbilityList
 	jr c, .done
 	ld a, [wEnemyMonSpecies]
 	ld hl, NoGuardPokemon
-	call IsInByteArray
+	call IsInAbilityList
 .done
 	pop bc
 	pop de
