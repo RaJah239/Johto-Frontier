@@ -1630,97 +1630,97 @@ Intro_PerspectiveScrollBG:
 	ret
 
 IntroSuicuneRunGFX:
-INCBIN "gfx/intro/suicune_run.2bpp.lz"
+INCBIN "gfx/intro/suicune_run.2bpp.lzp"
 
 IntroPichuWooperGFX:
-INCBIN "gfx/intro/pichu_wooper.2bpp.lz"
+INCBIN "gfx/intro/pichu_wooper.2bpp.lzp"
 
 IntroBackgroundGFX:
-INCBIN "gfx/intro/background.2bpp.lz"
+INCBIN "gfx/intro/background.2bpp.lzp"
 
 IntroBackgroundTilemap:
-INCBIN "gfx/intro/background.tilemap.lz"
+INCBIN "gfx/intro/background.tilemap.lzp"
 
 IntroBackgroundAttrmap:
-INCBIN "gfx/intro/background.attrmap.lz"
+INCBIN "gfx/intro/background.attrmap.lzp"
 
 IntroBackgroundPalette:
 INCLUDE "gfx/intro/background.pal"
 
 IntroUnownsGFX:
-INCBIN "gfx/intro/unowns.2bpp.lz"
+INCBIN "gfx/intro/unowns.2bpp.lzp"
 
 IntroPulseGFX:
-INCBIN "gfx/intro/pulse.2bpp.lz"
+INCBIN "gfx/intro/pulse.2bpp.lzp"
 
 IntroUnownATilemap:
-INCBIN "gfx/intro/unown_a.tilemap.lz"
+INCBIN "gfx/intro/unown_a.tilemap.lzp"
 
 IntroUnownAAttrmap:
-INCBIN "gfx/intro/unown_a.attrmap.lz"
+INCBIN "gfx/intro/unown_a.attrmap.lzp"
 
 IntroUnownHITilemap:
-INCBIN "gfx/intro/unown_hi.tilemap.lz"
+INCBIN "gfx/intro/unown_hi.tilemap.lzp"
 
 IntroUnownHIAttrmap:
-INCBIN "gfx/intro/unown_hi.attrmap.lz"
+INCBIN "gfx/intro/unown_hi.attrmap.lzp"
 
 IntroUnownsTilemap:
-INCBIN "gfx/intro/unowns.tilemap.lz"
+INCBIN "gfx/intro/unowns.tilemap.lzp"
 
 IntroUnownsAttrmap:
-INCBIN "gfx/intro/unowns.attrmap.lz"
+INCBIN "gfx/intro/unowns.attrmap.lzp"
 
 IntroUnownsPalette:
 INCLUDE "gfx/intro/unowns.pal"
 
 IntroCrystalUnownsGFX:
-INCBIN "gfx/intro/crystal_unowns.2bpp.lz"
+INCBIN "gfx/intro/crystal_unowns.2bpp.lzp"
 
 IntroCrystalUnownsTilemap:
-INCBIN "gfx/intro/crystal_unowns.tilemap.lz"
+INCBIN "gfx/intro/crystal_unowns.tilemap.lzp"
 
 IntroCrystalUnownsAttrmap:
-INCBIN "gfx/intro/crystal_unowns.attrmap.lz"
+INCBIN "gfx/intro/crystal_unowns.attrmap.lzp"
 
 IntroCrystalUnownsPalette:
 INCLUDE "gfx/intro/crystal_unowns.pal"
 
 IntroSuicuneCloseGFX:
-INCBIN "gfx/intro/suicune_close.2bpp.lz"
+INCBIN "gfx/intro/suicune_close.2bpp.lzp"
 
 IntroSuicuneCloseTilemap:
-INCBIN "gfx/intro/suicune_close.tilemap.lz"
+INCBIN "gfx/intro/suicune_close.tilemap.lzp"
 
 IntroSuicuneCloseAttrmap:
-INCBIN "gfx/intro/suicune_close.attrmap.lz"
+INCBIN "gfx/intro/suicune_close.attrmap.lzp"
 
 IntroSuicuneClosePalette:
 INCLUDE "gfx/intro/suicune_close.pal"
 
 IntroSuicuneJumpGFX:
-INCBIN "gfx/intro/suicune_jump.2bpp.lz"
+INCBIN "gfx/intro/suicune_jump.2bpp.lzp"
 
 IntroSuicuneBackGFX:
-INCBIN "gfx/intro/suicune_back.2bpp.lz"
+INCBIN "gfx/intro/suicune_back.2bpp.lzp"
 
 IntroSuicuneJumpTilemap:
-INCBIN "gfx/intro/suicune_jump.tilemap.lz"
+INCBIN "gfx/intro/suicune_jump.tilemap.lzp"
 
 IntroSuicuneJumpAttrmap:
-INCBIN "gfx/intro/suicune_jump.attrmap.lz"
+INCBIN "gfx/intro/suicune_jump.attrmap.lzp"
 
 IntroSuicuneBackTilemap:
-INCBIN "gfx/intro/suicune_back.tilemap.lz"
+INCBIN "gfx/intro/suicune_back.tilemap.lzp"
 
 IntroSuicuneBackAttrmap:
-INCBIN "gfx/intro/suicune_back.attrmap.lz"
+INCBIN "gfx/intro/suicune_back.attrmap.lzp"
 
 IntroSuicunePalette:
 INCLUDE "gfx/intro/suicune.pal"
 
 IntroUnownBackGFX:
-INCBIN "gfx/intro/unown_back.2bpp.lz"
+INCBIN "gfx/intro/unown_back.2bpp.lzp"
 
 IntroGrass1GFX:
 INCBIN "gfx/intro/grass1.2bpp"

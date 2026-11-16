@@ -126,4 +126,4 @@ CrashString:
 	next "Github/Discord.@"
 
 GBCOnlyGFX:
-INCBIN "gfx/sgb/gbc_only.2bpp.lz"
+INCBIN "gfx/sgb/gbc_only.2bpp.lzp"

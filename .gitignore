@@ -6,6 +6,7 @@
 *.2bpp
 *.2bpp.vram*
 *.lz
+*.lzp
 *.gbcpal
 *.dimensions
 *.animated.tilemap

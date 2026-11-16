@@ -50,7 +50,7 @@ PlaceDiplomaOnScreen:
 	db   "@"
 
 DiplomaGFX:
-INCBIN "gfx/diploma/diploma.2bpp.lz"
+INCBIN "gfx/diploma/diploma.2bpp.lzp"
 
 DiplomaPage1Tilemap:
 INCBIN "gfx/diploma/page1.tilemap"

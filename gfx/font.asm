@@ -40,7 +40,7 @@ ExpBarGFX:
 INCBIN "gfx/battle/expbar.2bpp"
 
 TownMapGFX:
-INCBIN "gfx/pokegear/town_map.2bpp.lz"
+INCBIN "gfx/pokegear/town_map.2bpp.lzp"
 
 TextboxSpaceGFX:
 ; StatsScreen_LoadTextboxSpaceGFX reads 2bpp; LoadFrame reads first half as 1bpp
