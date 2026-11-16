@@ -5,6 +5,7 @@ HiddenItemScript::
 	callasm .append_tmhm_move_name
 	writetext .PlayerFoundItemText
 	giveitem ITEM_FROM_MEM
+	special ShowItemIcon
 	iffalse .bag_full
 	callasm SetMemEvent
 	specialsound

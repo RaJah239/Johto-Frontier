@@ -3908,6 +3908,14 @@ wMSimSavedPreReset:: ds 2 * (7 + NUM_BATTLE_STATS * 2)
 wMSimSavedSBStats:: ds 2 * NUM_BATTLE_STATS * 2
 
 
+SECTION "Textbox Item Icon", WRAMX, BANK[5]
+
+; PAL_BG_TEXT colors 1 and 2 (wBGPals1, then wBGPals2) while ShowItemIcon
+; uses them; CloseText restores them (RestoreTextboxItemIconPal)
+wTextboxIconSavedPals:: ds 2 * 2 * 2
+wTextboxIconPalsSaved:: db
+
+
 SECTION "Pokedex Grid WRAM", WRAMX[$da00], BANK[5]
 
 ; grid Pokedex (engine/pokedex/pokedex_grid.asm); $d800-$d9bf is

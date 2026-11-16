@@ -19,6 +19,7 @@ FruitTreeScript::
 	iffalse .packisfull
 	promptbutton
 	writetext ObtainedFruitText
+	special ShowItemIcon
 	callasm PickedFruitTree
 	specialsound
 	itemnotify

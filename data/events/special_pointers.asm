@@ -151,6 +151,7 @@ SpecialsPointers::
 	add_special LoadPokemonData
 	add_special OverridePlayerParty
 	add_special PartyKeeperShowTeam
+	add_special ShowItemIcon
 
 if DEF(_DEBUG)
 	add_special SetAllUnownCaught

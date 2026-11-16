@@ -136,7 +136,7 @@ _ObjectEventText::
 	done
 
 _ReceivedItemText::
-	text "<PLAYER> received"
+	text "<PLAYER> got"
 	line "@"
 	text_ram wStringBuffer4
 	text "."

@@ -682,6 +682,7 @@ Script_verbosegiveitem:
 
 GiveItemScript:
 	writetext .ReceivedItemText
+	special ShowItemIcon
 	iffalse .Full
 	waitsfx
 	specialsound

@@ -1,4 +1,5 @@
-; Item icons in the Pack (each pocket, incl. TMs/HMs) and the Mart buy menu.
+; Item icons in the Pack (each pocket, incl. TMs/HMs), the Mart buy menu
+; and the overworld textbox when an item is found or received.
 ; Ported from TimKun55's pokecrystal; most icons are from Polished Crystal.
 
 DEF ITEM_ICON_TILE      EQU $60 ; 9 tiles, $60-$68 (free in the Pack and Mart screens)
@@ -77,19 +78,7 @@ PlaceItemIconFrame:
 PlaceItemIconTiles::
 ; Place the 3x3 icon tiles at hl.
 	ld a, ITEM_ICON_TILE
-	ld de, SCREEN_WIDTH - 3
-	ld b, 3
-.row
-	ld c, 3
-.col
-	ld [hli], a
-	inc a
-	dec c
-	jr nz, .col
-	add hl, de
-	dec b
-	jr nz, .row
-	ret
+	jmp PlaceIconTilesFromA
 
 InitMartLeftColumn::
 ; Buy menu: a checkered column left of the item list (rows 3-11) with the
@@ -124,23 +113,7 @@ LoadTMHMIcon::
 	ld de, vTiles2 tile ITEM_ICON_TILE
 	call DecompressRequest2bpp
 	ld a, [wCurSpecies]
-	dec a
-	ld hl, Moves + MOVE_TYPE
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-	ld a, BANK(Moves)
-	call GetFarByte
-	and TYPE_MASK
-	cp TYPES_END
-	jr c, .got_type
-	xor a ; NORMAL
-.got_type
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
-	ld bc, TMHMTypeIconPalettes
-	add hl, bc
+	call GetMoveTypeIconColors
 	ld e, PACK_ITEM_ICON_PAL
 	jr LoadItemIconPalette
 
@@ -159,29 +132,11 @@ LoadItemIcon:
 .got_item
 	push de
 	push af
-	ld l, a
-	ld h, 0
-	ld b, h
-	ld c, l
-	add hl, hl
-	add hl, bc
-	ld bc, ItemIconPointers
-	add hl, bc
-	ld a, [hli]
-	ld b, a
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld c, 9
+	call GetItemIconGFX
 	ld de, vTiles2 tile ITEM_ICON_TILE
 	call DecompressRequest2bpp
 	pop af
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
-	ld bc, ItemIconPalettes
-	add hl, bc
+	call GetItemIconColors
 	pop de
 	; fallthrough
 
@@ -232,6 +187,177 @@ LoadItemIconPalette:
 	ld [hli], a
 	ld [hl], a
 	pop de
+	ret
+
+GetItemIconGFX:
+; a = item id; returns hl = its icon, b = the icon's bank, c = 9 tiles.
+	ld l, a
+	ld h, 0
+	ld b, h
+	ld c, l
+	add hl, hl
+	add hl, bc
+	ld bc, ItemIconPointers
+	add hl, bc
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld c, 9
+	ret
+
+GetItemIconColors:
+; a = item id; returns hl = its icon colors 1 and 2.
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	ld bc, ItemIconPalettes
+	add hl, bc
+	ret
+
+GetMoveTypeIconColors:
+; a = move; returns hl = the TM/HM disc colors of its type.
+	dec a
+	ld hl, Moves + MOVE_TYPE
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	and TYPE_MASK
+	cp TYPES_END
+	jr c, .got_type
+	xor a ; NORMAL
+.got_type
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	ld bc, TMHMTypeIconPalettes
+	add hl, bc
+	ret
+
+
+; The item icon in the overworld textbox (from Polished Crystal): when an
+; item or TM/HM is found or received, its icon sits at the right end of the
+; textbox's first line (cols 16-18, rows 13-15). "special ShowItemIcon"
+; right after the "found"/"got" text shows it for wCurItem.
+; The icon borrows 9 font tiles that overworld text never uses (the battle
+; symbols "<half>" to "<dmg2>"); CloseText reloads the font over them.
+; While a textbox is open the font and the frame only use colors 0 and 3 of
+; PAL_BG_TEXT, so the icon's colors go in colors 1 and 2, and CloseText puts
+; the old ones back (RestoreTextboxItemIconPal).
+
+DEF TEXTBOX_ICON_TILE EQU "<half>" ; 9 tiles, "<half>" to "<dmg2>"
+	assert "<dmg2>" == TEXTBOX_ICON_TILE + 8
+	assert BANK(wTextboxIconSavedPals) == BANK(wBGPals1)
+
+ShowItemIcon::
+	ld a, [wCurItem]
+	cp TM01
+	jr nc, .tmhm
+	cp NUM_ITEMS + 1
+	ret nc
+	push af
+	call GetItemIconGFX
+	ld de, vTiles0 tile TEXTBOX_ICON_TILE
+	call DecompressRequest2bpp
+	pop af
+	call GetItemIconColors
+	jr .got_colors
+
+.tmhm
+	farcall GetTMHMItemMove ; wTempTMHM = its move
+	ld hl, TmHmIcon
+	lb bc, BANK(TmHmIcon), 9
+	ld de, vTiles0 tile TEXTBOX_ICON_TILE
+	call DecompressRequest2bpp
+	ld a, [wTempTMHM]
+	call GetMoveTypeIconColors
+.got_colors
+	call SetTextboxIconColors
+	hlcoord 16, 13
+	ld a, TEXTBOX_ICON_TILE
+	call PlaceIconTilesFromA
+	jmp WaitBGMap
+
+PlaceIconTilesFromA:
+; Place the 3x3 tiles a, a+1, ... a+8 at hl.
+	ld de, SCREEN_WIDTH - 3
+	ld b, 3
+.row
+	ld c, 3
+.col
+	ld [hli], a
+	inc a
+	dec c
+	jr nz, .col
+	add hl, de
+	dec b
+	jr nz, .row
+	ret
+
+SetTextboxIconColors:
+; hl = icon colors 1 and 2 (in this bank): write them to colors 1 and 2 of
+; PAL_BG_TEXT in both palette buffers, saving the old ones the first time.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals1)
+	ldh [rSVBK], a
+	ld a, [wTextboxIconPalsSaved]
+	and a
+	jr nz, .saved
+	push hl
+	ld hl, wBGPals1 palette PAL_BG_TEXT color 1
+	ld de, wTextboxIconSavedPals
+	ld bc, 2 * 2
+	call CopyBytes
+	ld hl, wBGPals2 palette PAL_BG_TEXT color 1
+	ld bc, 2 * 2
+	call CopyBytes
+	ld a, TRUE
+	ld [wTextboxIconPalsSaved], a
+	pop hl
+.saved
+	push hl
+	ld de, wBGPals1 palette PAL_BG_TEXT color 1
+	ld bc, 2 * 2
+	call CopyBytes
+	pop hl
+	ld de, wBGPals2 palette PAL_BG_TEXT color 1
+	ld bc, 2 * 2
+	call CopyBytes
+	pop af
+	ldh [rSVBK], a
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	ret
+
+RestoreTextboxItemIconPal::
+; CloseText: put back the PAL_BG_TEXT colors ShowItemIcon replaced.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTextboxIconPalsSaved)
+	ldh [rSVBK], a
+	ld hl, wTextboxIconPalsSaved
+	ld a, [hl]
+	and a
+	jr z, .done
+	xor a
+	ld [hl], a
+	ld hl, wTextboxIconSavedPals
+	ld de, wBGPals1 palette PAL_BG_TEXT color 1
+	ld bc, 2 * 2
+	call CopyBytes
+	ld de, wBGPals2 palette PAL_BG_TEXT color 1
+	ld bc, 2 * 2
+	call CopyBytes
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+.done
+	pop af
+	ldh [rSVBK], a
 	ret
 
 INCLUDE "data/items/icon_pointers.asm"

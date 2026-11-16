@@ -44,6 +44,7 @@ CloseText::
 	ld a, $90
 	ldh [hWY], a
 	call UpdatePlayerSprite
+	farcall RestoreTextboxItemIconPal
 	farcall InitMapNameSign
 	farjp LoadOverworldFont
 
