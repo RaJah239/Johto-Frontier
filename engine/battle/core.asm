@@ -243,6 +243,7 @@ HandleBetweenTurnEffects:
 	farcall FarTurnEndEffects
 	farcall TurnEndAbilities
 	call HandleHealingItems
+	farcall CheckUnburden ; engine/abilities/unburden.asm
 	call UpdateBattleMonInParty
 	jmp LoadTilemapToTempTilemap
 
@@ -847,6 +848,7 @@ PlayerTurn_EndOpponentProtectEndureDestinyBond:
 	call SetPlayerTurn
 	call EndUserDestinyBond
 	callfar DoPlayerTurn
+	farcall CheckUnburden ; engine/abilities/unburden.asm
 	; fallthrough
 
 EndOpponentProtectEndureDestinyBond:
@@ -862,6 +864,7 @@ EnemyTurn_EndOpponentProtectEndureDestinyBond:
 	call SetEnemyTurn
 	call EndUserDestinyBond
 	callfar DoEnemyTurn
+	farcall CheckUnburden ; engine/abilities/unburden.asm
 	jr EndOpponentProtectEndureDestinyBond
 
 EndUserDestinyBond:

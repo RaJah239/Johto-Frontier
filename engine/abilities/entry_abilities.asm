@@ -27,11 +27,19 @@ StartBattleEntryAbilities::
 	ld a, (1 << ENTRY_ABILITIES_PLAYER_F) | (1 << ENTRY_ABILITIES_ENEMY_F) \
 	    | (1 << ENTRY_ITEM_PLAYER_F) | (1 << ENTRY_ITEM_ENEMY_F)
 	ld [wEntryAbilitiesPending], a
+	; Unburden: which mons hold an item
+	xor a
+	ldh [hBattleTurn], a
+	newfarcall UnburdenRecordSide ; engine/abilities/unburden.asm
+	ld a, 1
+	ldh [hBattleTurn], a
+	newfarcall UnburdenRecordSide
 	call RunPendingEntryAbilities
 	jmp RunPendingEntryItems.run
 
 QueueEntryAbilities::
 ; The hBattleTurn side has just sent out a mon.
+	newfarcall UnburdenRecordSide ; engine/abilities/unburden.asm
 	ld hl, wEntryAbilitiesPending
 	ldh a, [hBattleTurn]
 	and a
@@ -180,6 +188,9 @@ RunEntryItems:
 	ld [wEffectFailed], a
 	ld [wAttackMissed], a
 	farcall UseHeldWeatherShard
+	; Unburden, if it used its shard
+	ldh a, [hBattleTurn]
+	newfarcall CheckUnburdenSide ; engine/abilities/unburden.asm
 	; the player's HUD hid its shard until now (PrintPlayerHUD): show it
 	; if it kept it
 	ldh a, [hBattleTurn]
