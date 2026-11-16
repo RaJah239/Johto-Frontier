@@ -53,14 +53,47 @@ MultiplyTypeMatchup:
 	ld a, [wTypeMatchup]
 	ldh [hMultiplier], a
 	call Multiply
-	ld a, 10
-	ldh [hDivisor], a
-	push bc
-	ld b, 4
-	call Divide
-	pop bc
+	call DivideProductBy10
 	ldh a, [hQuotient + 3]
 	ld [wTypeMatchup], a
+	ret
+
+DivideProductBy10:
+; hQuotient = hProduct / 10, hRemainder = the remainder, as Divide would
+; (hProduct must be below $1000000). A shift-and-subtract loop instead of
+; the generic Divide: several times faster. Preserves bc, de, hl.
+	push hl
+	push bc
+	ldh a, [hProduct + 1]
+	ld c, a
+	ldh a, [hProduct + 2]
+	ld h, a
+	ldh a, [hProduct + 3]
+	ld l, a
+	xor a ; remainder
+	ld b, 24
+.loop
+	add hl, hl
+	rl c
+	rla
+	cp 10
+	jr c, .next
+	sub 10
+	inc l ; (the bit the shift freed)
+.next
+	dec b
+	jr nz, .loop
+	ldh [hRemainder], a
+	xor a
+	ldh [hQuotient + 0], a
+	ld a, c
+	ldh [hQuotient + 1], a
+	ld a, h
+	ldh [hQuotient + 2], a
+	ld a, l
+	ldh [hQuotient + 3], a
+	pop bc
+	pop hl
 	ret
 
 StabTypeScan::
@@ -137,10 +170,7 @@ StabTypeScan::
 	jr z, .store ; no damage
 
 	; / 10 (at least 1)
-	ld a, 10
-	ldh [hDivisor], a
-	ld b, 4
-	call Divide
+	call DivideProductBy10
 	ldh a, [hQuotient + 2]
 	ld b, a
 	ldh a, [hQuotient + 3]
