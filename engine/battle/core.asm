@@ -4723,6 +4723,39 @@ BattleMonEntrance:
 
 	ld a, [wCurPartyMon]
 	ld [wCurBattleMon], a
+TeleportUserTrapped::
+; Carry if the mon whose turn it is (hBattleTurn) can't leave the battle,
+; like the battle menu's switch check: the other mon trapped it (Mean Look,
+; Spider Web, a trapping ability: its SUBSTATUS_CANT_RUN) or it's bound
+; (Wrap, Fire Spin...). Run Away escapes both. Use with newfarcall;
+; preserves bc, de and hl.
+	push hl
+	push de
+	push bc
+	call GetCurrentMon
+	ld hl, RunAwayPokemon
+	call IsInAbilityList
+	jr c, .free
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wPlayerWrapCount]
+	ld hl, wEnemySubStatus5
+	jr z, .got_side
+	ld a, [wEnemyWrapCount]
+	ld hl, wPlayerSubStatus5
+.got_side
+	and a
+	jr nz, .trapped
+	bit SUBSTATUS_CANT_RUN, [hl]
+	jr nz, .trapped
+.free
+	and a
+	jr .done
+.trapped
+	scf
+.done
+	jmp PopBCDEHL
+
 	call AddBattleParticipant
 	call InitBattleMon_Etc
 	call SetPlayerTurn

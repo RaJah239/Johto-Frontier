@@ -1,4 +1,11 @@
 BattleCommand_Teleport:
+; Wild battles: the user escapes (the wild mon flees, or the player runs
+; away). Only when both mons are the same level it's a 50% chance.
+; Trainer battles: the user switches out, like a switch (the player picks the
+; mon, the AI picks its best one). Teleport's priority is 0, so it goes last.
+; It fails in scripted battles, when the user is trapped (Mean Look, Spider
+; Web, a trapping ability, bound by Wrap...; Run Away escapes those), and
+; with no other mon to switch to.
 	ld a, [wBattleType]
 	cp BATTLETYPE_FORCESHINY
 	jr z, .failed
@@ -9,72 +16,41 @@ BattleCommand_Teleport:
 	cp BATTLETYPE_SUICUNE
 	jr z, .failed
 
-	ld a, BATTLE_VARS_SUBSTATUS5_OPP
-	call GetBattleVar
-	bit SUBSTATUS_CANT_RUN, a
-	jr nz, .failed
-	ldh a, [hBattleTurn]
-	and a
-	jr nz, .enemy_turn
+	newfarcall TeleportUserTrapped ; engine/battle/core.asm
+	jr c, .failed
 
-	; Can't teleport from a trainer battle
 	ld a, [wBattleMode]
 	dec a
-	jr nz, .failed
-	; b = player level
-	ld a, [wCurPartyLevel]
+	jr nz, .switch
+
+	; wild battle: same level, 50% chance; otherwise it always works
+	ld a, [wCurPartyLevel] ; the wild mon's level
 	ld b, a
-	; If player level >= enemy level, Teleport will succeed
 	ld a, [wBattleMonLevel]
 	cp b
-	jr nc, .run_away
-	; c = player level + enemy level + 1
-	add b
-	ld c, a
-	inc c
-	; Generate a number less than c
-.loop_player
+	jr nz, .run_away
 	call BattleRandom
-	cp c
-	jr nc, .loop_player
-	; b = enemy level / 4
-	srl b
-	srl b
-	; If the random number >= enemy level / 4, Teleport will succeed
-	cp b
-	jr nc, .run_away
+	cp 50 percent
+	jr c, .run_away
 
 .failed
 	call AnimateFailedMove
 	jmp PrintButItFailed
 
-.enemy_turn
-	; Can't teleport from a trainer battle
-	ld a, [wBattleMode]
-	dec a
-	jr nz, .failed
-	; b = enemy level
-	ld a, [wBattleMonLevel]
-	ld b, a
-	; If enemy level >= player level, Teleport will succeed
-	ld a, [wCurPartyLevel]
-	cp b
-	jr nc, .run_away
-	; c = enemy level + player level + 1
-	add b
-	ld c, a
-	inc c
-	; Generate a number less than c
-.loop_enemy
-; If a random number >= player level / 4, Teleport will succeed
-	call BattleRandom
-	cp c
-	jr nc, .loop_enemy
-	; b = player level / 4
-	srl b
-	srl b
-	cp b
-	jr c, .failed
+.switch
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .enemy_switch
+	call CheckAnyOtherAlivePartyMons
+	jr z, .failed
+	call AnimateCurrentMove
+	jmp SwitchOutPlayerMon ; engine/battle/move_effects/hitandswitch.asm
+
+.enemy_switch
+	call CheckAnyOtherAliveEnemyMons
+	jr z, .failed
+	call AnimateCurrentMove
+	jmp SwitchOutEnemyMon
 
 .run_away
 	call UpdateBattleMonInParty

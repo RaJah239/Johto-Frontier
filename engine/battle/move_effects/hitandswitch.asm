@@ -13,7 +13,31 @@ BattleCommand_HitAndSwitch:
 ; Need something to switch to
 	call CheckAnyOtherAlivePartyMons
 	ret z
+	jr SwitchOutPlayerMon
 
+.Enemy:
+; Wildmons don't have anything to switch to
+	ld a, [wBattleMode]
+	cp WILD_BATTLE
+	ret z
+
+	call CheckAnyOtherAliveEnemyMons
+	ret z
+	; fallthrough
+
+SwitchOutEnemyMon:
+; The enemy's mon switches out (U-turn, Teleport): the AI picks the mon.
+	call UpdateEnemyMonInParty
+
+	farcall RegeneratorShowEnemy
+
+; Passed enemy PartyMon entrance
+	farcall EnemyUTurnSwitch
+	ld hl, SpikesDamage
+	jmp CallBattleCore
+
+SwitchOutPlayerMon:
+; The player's mon switches out (U-turn, Teleport): the player picks the mon.
 	call UpdateBattleMonInParty
 
 	ld c, 20
@@ -29,24 +53,6 @@ BattleCommand_HitAndSwitch:
 
 	ld hl, SwitchPlayerMon
 	call CallBattleCore
-	ld hl, SpikesDamage
-	jmp CallBattleCore
-
-.Enemy:
-; Wildmons don't have anything to switch to
-	ld a, [wBattleMode]
-	cp WILD_BATTLE
-	ret z
-
-	call CheckAnyOtherAliveEnemyMons
-	ret z
-
-	call UpdateEnemyMonInParty
-
-	farcall RegeneratorShowEnemy
-
-; Passed enemy PartyMon entrance
-	farcall EnemyUTurnSwitch
 	ld hl, SpikesDamage
 	jmp CallBattleCore
 
