@@ -105,7 +105,7 @@ GetBattleAnimOAMPointer:
 LoadBattleAnimGFX:
 	push hl
 	cp BATTLE_ANIM_GFX_POKE_BALL
-	call z, .LoadBallPalette
+	jr z, .ball
 	ld l, a
 	ld h, 0
 	add hl, hl
@@ -119,68 +119,79 @@ LoadBattleAnimGFX:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+	jr .load
+
+.ball
+	call LoadBattleBall
+.load
 	pop de
 	push bc
 	call DecompressRequest2bpp
 	pop bc
 	ret
 
-.LoadBallPalette:
-	; save the current WRAM bank
-	ld a, [rSVBK]
+DEF BATTLE_BALL_TILES EQU 10
+
+LoadBattleBall:
+; The thrown ball looks like the ball item's icon in the Bag: its own graphics
+; (BattleBallGFX) in its icon colors (colors 1-2 of PAL_BATTLE_OB_RED), on a
+; white background object (PAL_BATTLE_OB_GREEN). Returns hl = graphics,
+; b = their bank, c = their tiles.
+	ldh a, [rSVBK]
 	push af
-	; switch to the WRAM bank of wCurItem so we can read it
 	ld a, BANK(wCurItem)
-	ld [rSVBK], a
-	; store the current item in b
+	ldh [rSVBK], a
 	ld a, [wCurItem]
 	ld b, a
-	; seek for the BallColors entry matching the current item
-	ld hl, BallColors
+.find
+	ld hl, BattleBallGFX
 .loop
 	ld a, [hli]
-	cp b ; did we find the current ball?
-	jr z, .done
-	cp -1 ; did we reach the end of the list?
-	jr z, .done
-rept PAL_COLOR_SIZE * 2
-	inc hl ; skip over the two RGB colors to the next entry
-endr
+	cp b
+	jr z, .found
+	inc a ; end of the list?
+	jr z, .not_a_ball
+	inc hl
+	inc hl
+	inc hl
 	jr .loop
-.done
-	; switch to the WRAM bank of wOBPals2 so we can write to it
+.not_a_ball
+	ld b, POKE_BALL
+	jr .find
+
+.found
+	push hl
+	; the icon colors of item b
+	ld l, b
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	ld de, ItemIconPalettes
+	add hl, de
 	ld a, BANK(wOBPals2)
-	ld [rSVBK], a
-	; load the RGB colors into the middle two colors of PAL_BATTLE_OB_RED
+	ldh [rSVBK], a
 	ld de, wOBPals2 palette PAL_BATTLE_OB_RED color 1
-rept PAL_COLOR_SIZE * 2 - 1
-	ld a, [hli]
-	ld [de], a
-	inc de
-endr
-	ld a, [hl]
-	ld [de], a
-	; load white background in PAL_BATTLE_OG_GREEN
+	ld bc, PAL_COLOR_SIZE * 2
+	ld a, BANK(ItemIconPalettes)
+	call FarCopyBytes
 	ld hl, WhitePalette
 	ld de, wOBPals2 palette PAL_BATTLE_OB_GREEN color 1
-rept PAL_COLOR_SIZE - 1
-	ld a, [hli]
-	ld [de], a
-	inc de
-endr
-	ld a, [hl]
-	ld [de], a
-	; apply the updated colors to the palette RAM
-	ld a, $1
+	ld bc, PAL_COLOR_SIZE
+	call CopyBytes
+	ld a, TRUE
 	ldh [hCGBPalUpdate], a
-	; restore the previous WRAM bank
+	pop hl
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld c, BATTLE_BALL_TILES
 	pop af
-	ld [rSVBK], a
-	; restore the graphics index to be loaded
-	ld a, BATTLE_ANIM_GFX_POKE_BALL
+	ldh [rSVBK], a
 	ret
 
-INCLUDE "data/battle_anims/ball_colors.asm"
+INCLUDE "data/battle_anims/ball_gfx.asm"
 
 INCLUDE "data/battle_anims/framesets.asm"
 

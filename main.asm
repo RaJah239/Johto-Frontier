@@ -324,6 +324,10 @@ INCLUDE "gfx/battle_anims.asm"
 INCLUDE "engine/events/halloffame.asm"
 
 
+SECTION "Battle Ball GFX", ROMX
+INCLUDE "gfx/battle_balls.asm"
+
+
 SECTION "Crystal Features 2", ROMX
 INCLUDE "engine/events/kurt.asm"
 INCLUDE "engine/gfx/player_gfx.asm"
