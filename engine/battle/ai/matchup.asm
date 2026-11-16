@@ -89,7 +89,7 @@ DEF MSIM_E_HARVEST_F      EQU 2 ; Harvest regrows it
 DEF MSIM_P_HARVEST_F      EQU 3
 DEF MSIM_E_UNBURDEN_F     EQU 4 ; Unburden: +1 Speed each time it loses its item
 DEF MSIM_P_UNBURDEN_F     EQU 5
-DEF MSIM_E_SASH_F         EQU 6 ; it holds a Focus Sash
+DEF MSIM_E_SASH_F         EQU 6 ; it holds a Focus Sash (never used up)
 DEF MSIM_P_SASH_F         EQU 7
 
 DEF MSIM_SIDE_ENEMY  EQU 0
@@ -2132,9 +2132,8 @@ ENDM
 
 MSim_EnemyEndures:
 ; bc = a hit on the enemy's mon. If Sturdy or a Focus Sash would save it
-; (it's at full HP and the hit would KO it), the hit leaves it at 1 HP; a
-; Focus Sash is used up then (Sturdy goes first if it has both).
-; Preserves bc otherwise.
+; (it's at full HP and the hit would KO it), the hit leaves it at 1 HP.
+; (In this game a Focus Sash isn't used up: no Unburden from it.)
 	ld a, [wMSimFlags3]
 	and 1 << MSIM_E_ENDURES_F
 	ld a, [wMSimFlags6]
@@ -2144,15 +2143,7 @@ MSim_EnemyEndures:
 .check
 	ld hl, wMSimEnemyHP
 	ld de, wEnemyMonMaxHP
-	call MSim_Endures
-	ret nc
-	ld a, [wMSimFlags3]
-	bit MSIM_E_ENDURES_F, a
-	ret nz ; Sturdy
-	ld hl, wMSimFlags6
-	res MSIM_E_SASH_F, [hl]
-	xor a ; the enemy
-	jr MSim_LostItem
+	jr MSim_Endures
 
 MSim_PlayerEndures:
 ; The same for a hit on the player's mon.
@@ -2165,15 +2156,7 @@ MSim_PlayerEndures:
 .check
 	ld hl, wMSimPlayerHP
 	ld de, wBattleMonMaxHP
-	call MSim_Endures
-	ret nc
-	ld a, [wMSimFlags3]
-	bit MSIM_P_ENDURES_F, a
-	ret nz
-	ld hl, wMSimFlags6
-	res MSIM_P_SASH_F, [hl]
-	ld a, 1 ; the player
-	jr MSim_LostItem
+	jr MSim_Endures
 
 MSim_Endures:
 ; hl = HP, de = max HP (big-endian), bc = the hit. Carry (and bc = HP - 1)
@@ -2204,8 +2187,8 @@ MSim_Endures:
 	ret
 
 MSim_LostItem:
-; Side a (0: enemy, 1: player) has just lost its held item (a Berry or a
-; Focus Sash used up): Unburden raises its Speed. Preserves bc.
+; Side a (0: enemy, 1: player) has just lost its held item (a Berry eaten):
+; Unburden raises its Speed. Preserves bc.
 	push bc
 	ld b, 1 << MSIM_E_UNBURDEN_F
 	and a
