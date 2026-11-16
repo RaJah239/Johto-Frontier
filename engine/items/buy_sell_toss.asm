@@ -35,6 +35,81 @@ CalculateMaximumQuantity:
 	ld [wItemQuantity], a
 	ret
 
+CalculateMaximumSellQuantity:
+; Like CalculateMaximumQuantity for buying: limit [wItemQuantity] (the stack)
+; to what can be sold before the money would pass MAX_MONEY. Selling q pays
+; half of price * q (rounded down), so q fits while
+; price * q <= 2 * (MAX_MONEY - Money) + 1. At least 1 (with the money
+; already full, one can still be sold).
+	; hDividend + 1..3 = 2 * (MAX_MONEY - Money) + 1 (big-endian)
+	ld a, [wMoney + 2]
+	ld b, a
+	ld a, LOW(MAX_MONEY)
+	sub b
+	ldh [hDividend + 3], a
+	ld a, [wMoney + 1]
+	ld b, a
+	ld a, HIGH(MAX_MONEY)
+	sbc b
+	ldh [hDividend + 2], a
+	ld a, [wMoney + 0]
+	ld b, a
+	ld a, HIGH(MAX_MONEY >> 8)
+	sbc b
+	ldh [hDividend + 1], a
+	jr nc, .got_room
+	xor a ; (more money than MAX_MONEY: no room)
+	ldh [hDividend + 1], a
+	ldh [hDividend + 2], a
+	ldh [hDividend + 3], a
+.got_room
+	ld hl, hDividend + 3
+	sla [hl]
+	set 0, [hl]
+	dec hl
+	rl [hl]
+	dec hl
+	rl [hl]
+
+	; count how many fit: hMoneyTemp = price * b
+	xor a
+	ldh [hMoneyTemp + 0], a
+	ldh [hMoneyTemp + 1], a
+	ldh [hMoneyTemp + 2], a
+	ld b, a
+.loop
+	ld a, [wItemQuantity]
+	cp b
+	jr z, .done ; the whole stack fits
+	ldh a, [hMoneyTemp + 2]
+	ld hl, wBuySellItemPrice + 1
+	add [hl]
+	ldh [hMoneyTemp + 2], a
+	ldh a, [hMoneyTemp + 1]
+	dec hl
+	adc [hl]
+	ldh [hMoneyTemp + 1], a
+	ldh a, [hMoneyTemp + 0]
+	adc 0
+	ldh [hMoneyTemp + 0], a
+	push bc
+	ld bc, hMoneyTemp
+	ld de, hDividend + 1
+	farcall CompareMoney ; (carry if price * (b + 1) is over the limit)
+	pop bc
+	jr c, .done
+	inc b
+	jr .loop
+
+.done
+	ld a, b
+	and a
+	jr nz, .got_max
+	inc a ; at least 1
+.got_max
+	ld [wItemQuantity], a
+	ret
+
 SelectQuantityToToss:
 	ld hl, TossItem_MenuHeader
 	call LoadMenuHeader
@@ -60,6 +135,7 @@ SelectQuantityToSell:
 	ld [wBuySellItemPrice + 0], a
 	ld a, e
 	ld [wBuySellItemPrice + 1], a
+	call CalculateMaximumSellQuantity
 	ld hl, SellItem_MenuHeader
 	call LoadMenuHeader
 	call Toss_Sell_Loop
