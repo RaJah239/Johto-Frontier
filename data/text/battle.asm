@@ -84,6 +84,11 @@ SerenityText:
 	line "Immune to status!"
 	prompt
 
+LeafGuardBattleText:
+	text "<TARGET> is"
+	line "shielded by sun!"
+	prompt
+
 OverdriveBattleText:
 	text "<TARGET>"
 	line "skips recharge!"

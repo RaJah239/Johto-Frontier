@@ -598,6 +598,8 @@ HandleFlameOrb:
 	ret z
 	cp MEW
 	ret z
+	newfarcall UserHasLeafGuardInSun ; Leaf Guard: not in the sun
+	ret c
 	ld a, FIRE
 	cp b
 	ret z
@@ -636,6 +638,8 @@ HandleToxicOrb:
 	ret z
 	cp MEW
 	ret z
+	newfarcall UserHasLeafGuardInSun ; Leaf Guard: not in the sun
+	ret c
 	ld a, POISON
 	cp b
 	ret z

@@ -3436,6 +3436,10 @@ SpikesDamage:
 	farcall CheckSafeguardIgnoreAbilities
 	jmp nz, .pop
 
+; Leaf Guard: no Toxic Spikes poisoning in the sun
+	newfarcall UserHasLeafGuardInSun ; engine/abilities/leaf_guard.asm
+	jmp c, .pop
+
 ; ====================================
 ; === Ability: Serenity - Pokemon List
 ; ====================================

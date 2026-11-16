@@ -1338,6 +1338,10 @@ BattleCommand_Burn:
 	call IsInAbilityListNG
 	jmp c, Serenity
 
+	; Leaf Guard in the sun (popup)
+	newfarcall LeafGuardStatusMove ; engine/abilities/leaf_guard.asm
+	jmp c, LeafGuard
+
 	ld hl, DidntAffect1Text
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVar
@@ -3685,6 +3689,10 @@ BattleCommand_SleepTarget:
 	call IsInAbilityListNG
 	jr c, Serenity
 
+	; Leaf Guard in the sun (popup)
+	newfarcall LeafGuardStatusMove ; engine/abilities/leaf_guard.asm
+	jr c, LeafGuard
+
 	call CheckForStatusIfAlreadyHasAny
 	jr nz, .fail
 
@@ -3730,6 +3738,11 @@ Serenity:
 
 AbilitySlideIn_SerenityText: db "Serenity@"
 
+LeafGuard:
+; (its popup has shown: LeafGuardStatusMove)
+	ld hl, LeafGuardBattleText
+	jmp StdBattleTextbox
+
 BattleCommand_PoisonTarget:
 	call CheckSubstituteOpp
 	ret nz
@@ -3761,6 +3774,9 @@ BattleCommand_PoisonTarget:
 
 	call SafeCheckSafeguard
 	ret nz
+	; Leaf Guard in the sun (silently)
+	newfarcall LeafGuardBlocksSecondary ; engine/abilities/leaf_guard.asm
+	ret c
 
 	call PoisonOpponent
 	ld de, ANIM_PSN
@@ -3795,6 +3811,10 @@ BattleCommand_Poison:
 	ld hl, SerenityPokemon
 	call IsInAbilityListNG
 	jmp c, Serenity
+
+	; Leaf Guard in the sun (popup)
+	newfarcall LeafGuardStatusMove ; engine/abilities/leaf_guard.asm
+	jmp c, LeafGuard
 
 	ld hl, DidntAffect1Text
 	ld a, BATTLE_VARS_STATUS_OPP
@@ -4037,6 +4057,9 @@ BattleCommand_BurnTarget:
 
 	call SafeCheckSafeguard
 	ret nz
+	; Leaf Guard in the sun (silently)
+	newfarcall LeafGuardBlocksSecondary ; engine/abilities/leaf_guard.asm
+	ret c
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVarAddr
 	set BRN, [hl]
@@ -4114,6 +4137,9 @@ BattleCommand_FreezeTarget:
 
 	call SafeCheckSafeguard
 	ret nz
+	; Leaf Guard in the sun (silently)
+	newfarcall LeafGuardBlocksSecondary ; engine/abilities/leaf_guard.asm
+	ret c
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVarAddr
 	set FRZ, [hl]
@@ -4180,6 +4206,9 @@ BattleCommand_ParalyzeTarget:
 
 	call SafeCheckSafeguard
 	ret nz
+	; Leaf Guard in the sun (silently)
+	newfarcall LeafGuardBlocksSecondary ; engine/abilities/leaf_guard.asm
+	ret c
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVarAddr
 	set PAR, [hl]
@@ -6103,6 +6132,10 @@ BattleCommand_Paralyze:
 	call IsInAbilityListNG
 	jmp c, Serenity
 
+	; Leaf Guard in the sun (popup)
+	newfarcall LeafGuardStatusMove ; engine/abilities/leaf_guard.asm
+	jmp c, LeafGuard
+
 	ld a, [wAttackMissed]
 	and a
 	jr nz, .failed
@@ -6253,6 +6286,12 @@ BattleCommand_Heal:
 	ld a, b
 	cp REST
 	jr nz, .not_rest
+
+	; Leaf Guard: no Rest in the sun (popup)
+	newfarcall LeafGuardRest ; engine/abilities/leaf_guard.asm
+	jr c, BattleEffect_ButItFailed
+	ld a, b
+	cp REST ; (z for .not_rest below)
 
 	push hl
 	push de
