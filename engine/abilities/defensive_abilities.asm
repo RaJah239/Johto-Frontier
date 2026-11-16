@@ -106,6 +106,18 @@ HandleImmunity:
 AbilityPopup_ImmunityText:
 	db "Immunity@"
 
+UserHasImmunity::
+; Carry if the mon whose turn it is (hBattleTurn) has Immunity: Toxic Spikes
+; and Toxic Orb can't poison it (silently). Neutralizing Gas: no.
+; Use with newfarcall; preserves bc, de and hl.
+	push hl
+	push de
+	push bc
+	call GetCurrentMon
+	ld hl, ImmunityPokemon
+	call IsInAbilityList
+	jmp PopBCDEHL
+
 INCLUDE "data/abilities/defensive_abilities/immunity_mons.asm"
 
 

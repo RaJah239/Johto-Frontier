@@ -592,12 +592,8 @@ HandleFlameOrb:
 	ret nz
 	call GetOrbTarget
 	ret nc
-	cp MEGANIUM
-	ret z
-	cp SYLVEON
-	ret z
-	cp MEW
-	ret z
+	newfarcall UserHasSerenity ; engine/battle/effect_commands.asm
+	ret c
 	newfarcall UserHasLeafGuardInSun ; Leaf Guard: not in the sun
 	ret c
 	ld a, FIRE
@@ -628,16 +624,10 @@ HandleToxicOrb:
 	ret nz
 	call GetOrbTarget
 	ret nc
-	cp CHIKORITA ; to prevent poisoning
-	ret z
-	cp BAYLEEF ; to prevent poisoning
-	ret z
-	cp MEGANIUM
-	ret z
-	cp SYLVEON
-	ret z
-	cp MEW
-	ret z
+	newfarcall UserHasSerenity ; engine/battle/effect_commands.asm
+	ret c
+	newfarcall UserHasImmunity ; engine/abilities/defensive_abilities.asm
+	ret c
 	newfarcall UserHasLeafGuardInSun ; Leaf Guard: not in the sun
 	ret c
 	ld a, POISON

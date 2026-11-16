@@ -3,49 +3,11 @@
 ; poison (including toxic spikes & toxic orb),
 ; sleep (not including rest) and confusion (no including hurricane or swagger)
 
-; Note: This list must match engine/battle/core.asm
+; Toxic Spikes (engine/battle/core.asm) and Flame / Toxic Orb
+; (engine/battle/turn_end_effects.asm) use this list too, through
+; UserHasSerenity (engine/battle/effect_commands.asm).
 
-; ====================================
-; === Ability: Serenity - Pokemon List
-; ====================================
-;   call GetCurrentMon
-;   cp MEGANIUM
-;   jr z, .pop
-;   cp SYLVEON
-;   jr z, .pop
-;   cp MEW
-;   jr z, .pop
-
-; and engine/battle/turn_end_effects.asm `ShouldIgniteFlameOrb:`
-;.checkDetails
-;   cp MEGANIUM
-;   jr z, .no
-;   cp SYLVEON
-;   jr z, .no
-;   cp MEW
-;   jr z, .no
-
-; and engine/battle/turn_end_effects.asm `ShouldTriggerToxicOrb`
-;.checkDetails
-;   cp CHIKORITA ; to prevent poisoning
-;   jr z, .no
-;   cp BAYLEEF ; to prevent poisoning
-;   jr z, .no
-;   cp MEGANIUM
-;   jr z, .no
-;   cp SYLVEON
-;   jr z, .no
-;   cp MEW
-;   jr z, .no
-
-; and engine/battle/ai/ability_lists.asm `SerenityPokemon_AI:`
-;SerenityPokemon_AI:
-;   db MEGANIUM
-;   db SYLVEON
-;   db MEW
-;   db -1
-
-; it couldn't be worked around afaik
+; Note: This list must match engine/battle/ai/ability_lists.asm `SerenityPokemon_AI:`
 
 SerenityPokemon:
 ;    db MEGANIUM

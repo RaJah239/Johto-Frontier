@@ -3440,20 +3440,11 @@ SpikesDamage:
 	newfarcall UserHasLeafGuardInSun ; engine/abilities/leaf_guard.asm
 	jmp c, .pop
 
-; ====================================
-; === Ability: Serenity - Pokemon List
-; ====================================
-	call GetCurrentMon
-	cp CHIKORITA ; to prevent poisoning from Toxic Spikes
-	jmp z, .pop
-	cp BAYLEEF
-	jmp z, .pop
-	cp MEGANIUM ; to prevent poisoning from Toxic Spikes
-	jr z, .pop
-	cp SYLVEON
-	jr z, .pop
-	cp MEW
-	jr z, .pop
+; Serenity and Immunity: no Toxic Spikes poisoning
+	newfarcall UserHasSerenity ; engine/battle/effect_commands.asm
+	jr c, .pop
+	newfarcall UserHasImmunity ; engine/abilities/defensive_abilities.asm
+	jr c, .pop
 
 ; Toxic Spikes can't poison a Pokemon that already has a status condition
 	ld a, BATTLE_VARS_STATUS

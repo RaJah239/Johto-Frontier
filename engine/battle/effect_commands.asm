@@ -3738,6 +3738,18 @@ Serenity:
 
 AbilitySlideIn_SerenityText: db "Serenity@"
 
+UserHasSerenity::
+; Carry if the mon whose turn it is (hBattleTurn) has Serenity: Toxic Spikes
+; and Flame / Toxic Orb can't give it a status (silently). Neutralizing Gas:
+; no. Use with newfarcall; preserves bc, de and hl.
+	push hl
+	push de
+	push bc
+	call GetCurrentMon
+	ld hl, SerenityPokemon
+	call IsInAbilityList
+	jmp PopBCDEHL
+
 LeafGuard:
 ; (its popup has shown: LeafGuardStatusMove)
 	ld hl, LeafGuardBattleText
