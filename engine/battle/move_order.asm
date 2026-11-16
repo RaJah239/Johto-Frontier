@@ -351,7 +351,11 @@ INCLUDE "data/abilities/quick_draw_mons.asm"
 
 QuickDrawAbilityText: db "Quick Draw@"
 
+SwiftSwimPokemon:
 INCLUDE "data/abilities/swift_swim_mons.asm"
+ChlorophyllPokemon:
 INCLUDE "data/abilities/chlorophyll_mons.asm"
+SandRushPokemon:
 INCLUDE "data/abilities/sand_rush_mons.asm"
+SlushRushPokemon:
 INCLUDE "data/abilities/slush_rush_mons.asm"

@@ -10,6 +10,7 @@ ShadowTag:
 	ret nc
 	jr TrappedByOpponent
 
+ShadowTagPokemon:
 INCLUDE "data/abilities/shadow_tag_mons.asm"
 
 ArenaTrap:
@@ -39,6 +40,7 @@ ArenaTrap:
 	ret z
 	jr TrappedByOpponent
 
+ArenaTrapPokemon:
 INCLUDE "data/abilities/arena_trap_mons.asm"
 
 MagnetPull:
@@ -67,4 +69,5 @@ TrappedByOpponent:
 	set SUBSTATUS_CANT_RUN, [hl]
 	ret
 
+MagnetPullPokemon:
 INCLUDE "data/abilities/magnet_pull_mons.asm"

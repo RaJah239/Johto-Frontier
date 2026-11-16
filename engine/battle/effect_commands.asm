@@ -1514,6 +1514,7 @@ BattleCommand_EffectChance:
 
 BlessingText: db "Blessing@"
 
+BlessingPokemon:
 INCLUDE "data/abilities/blessing_mons.asm"
 
 BattleCommand_LowerSub:
@@ -1860,6 +1861,7 @@ BattleCommand_ApplyDamage:
 
 SturdyText: db "Sturdy@"
 
+SturdyPokemon:
 INCLUDE "data/abilities/sturdy_mons.asm"
 
 GetFailureResultText:
@@ -4270,6 +4272,7 @@ BattleCommand_ParalyzeTarget:
 SureShockText: db "Sure Shock@"
 
 INCLUDE "data/abilities/sure_shock_mons.asm"
+SerenityPokemon:
 INCLUDE "data/abilities/serenity_mons.asm"
 
 BattleCommand_AttackUp:
@@ -4646,6 +4649,7 @@ Eff_Comands_AttackedMissed:
 
 ResilienceText: db "Resilience@"
 
+ResiliencePokemon:
 INCLUDE "data/abilities/resilience_mons.asm"
 
 CheckMist:
@@ -6058,6 +6062,7 @@ BattleCommand_Recoil:
 
 RockHeadText: db "Rock Head@"
 
+RockHeadPokemon:
 INCLUDE "data/abilities/rock_head_mons.asm"
 
 BattleCommand_ConfuseTarget:
@@ -6238,6 +6243,7 @@ BattleCommand_RechargeNextTurn:
 
 OverdriveText: db "Overdrive@"
 
+OverdrivePokemon:
 INCLUDE "data/abilities/overdrive_mons.asm"
 
 EndRechargeOpp:

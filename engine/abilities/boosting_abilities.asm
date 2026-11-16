@@ -74,6 +74,7 @@ HandleGuts:
 	jmp FiftyPercentBoost
 
 GutsText: db "Guts@"
+GutsPokemon:
 INCLUDE "data/abilities/guts_mons.asm"
 
 HandleRivalry:
@@ -247,6 +248,7 @@ HandleSolarPowerBoost:
 	jmp FiftyPercentBoost
 
 SolarPowerText: db "SolarPower@"
+SolarPowerPokemon:
 INCLUDE "data/abilities/solar_power_mons.asm"
 
 HandleIronArm:

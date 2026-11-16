@@ -1,23 +1,14 @@
 ShadowTagPokemon_AI:
-	db CHANDELURE
-	db GENGAR
-	db -1 ; end
+INCLUDE "data/abilities/shadow_tag_mons.asm" ; (the battle's list)
 
 ArenaTrapPokemon_AI:
-	db DRILBUR
-	db EXCADRILL
-	db -1 ; end
+INCLUDE "data/abilities/arena_trap_mons.asm" ; (the battle's list)
 
 MagnetPullPokemon_AI:
-	db MAGNEMITE
-	db MAGNETON
-	db MAGNEZONE
-	db -1 ; end
+INCLUDE "data/abilities/magnet_pull_mons.asm" ; (the battle's list)
 
 RunAwayPokemon_AI:
-	db DODUO
-	db DODRIO
-	db -1 ; end
+INCLUDE "data/abilities/run_away_mons.asm" ; (the battle's list)
 
 AI_SwitchOrTryItem:
 ; At the start of a turn, switch out if the mon that's out loses the 1-on-1

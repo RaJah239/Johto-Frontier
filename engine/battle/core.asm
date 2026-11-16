@@ -1121,6 +1121,7 @@ ResidualDamage:
 
 BadDreamsText: db "Bad Dreams@"
 
+BadDreamsPokemon:
 INCLUDE "data/abilities/bad_dreams_mons.asm"
 
 SwitchCoreItemRecoveryAnim:
@@ -4721,6 +4722,7 @@ PlayerSwitch:
 	and a
 	ret
 
+RunAwayPokemon:
 INCLUDE "data/abilities/run_away_mons.asm"
 
 TeleportUserTrapped::
@@ -6280,13 +6282,7 @@ DoesMonHaveGuts:
 	ret
 
 Core_GutsPokemon:
-    db TEDDIURSA
-    db URSARING
-    db URSALUNA
-    db HERACROSS
-    db MAKUHITA
-    db HARIYAMA
-    db -1 ; end
+INCLUDE "data/abilities/guts_mons.asm" ; (the battle's list)
 
 ApplyStatLevelMultiplierOnAllStats:
 ; Apply StatLevelMultipliers on all 5 Stats

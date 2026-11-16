@@ -2,17 +2,6 @@
 ; gain 50% boost to special attacks
 ; but loose 1/8 max hp at the end of each turn
 
-; Note: This list must match engine/battle/ai/ability_lists.asm `SolarPowerPokemon_AI:`
-
-;SolarPowerPokemon_AI:
-;   db SUNKERN
-;   db SUNFLORA
-;   db TROPIUS
-;   db CHARMANDER
-;   db CHARMELEON
-;   db CHARIZARD
-;   db -1 ; end
-
 ; and engine/abilities/turn_end_abilities.asm `SolarPowerHPLossPokemon:`
 
 ;SolarPowerHPLossPokemon:
@@ -24,11 +13,12 @@
 ;    db CHARIZARD
 ;    db -1 ; end
 
-SolarPowerPokemon:
-;    db SUNKERN
-;    db SUNFLORA
-;    db TROPIUS
-;    db CHARMANDER
-;    db CHARMELEON
-;    db CHARIZARD
+; (one list for both the battle and the AI: engine/abilities/boosting_abilities.asm includes it
+; as SolarPowerPokemon, engine/battle/ai/ability_lists.asm as SolarPowerPokemon_AI)
+	db SUNKERN
+	db SUNFLORA
+	db TROPIUS
+	db CHARMANDER
+	db CHARMELEON
+	db CHARIZARD
     db -1 ; end

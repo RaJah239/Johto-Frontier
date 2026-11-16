@@ -1,7 +1,5 @@
 ; List of all Pokemon whose stats can't be dropped by the opponent
 
-; Note: This list must match engine/battle/core.asm `Core_ResiliencePokemon:`
-
 ;Core_ResiliencePokemon:
 ;   db TENTACOOL
 ;   db TENTACRUEL
@@ -12,18 +10,11 @@
 
 ; and engine/battle/ai/ability_lists.asm `ResiliencePokemon_AI:`
 
-;ResiliencePokemon_AI:
-;   db TENTACOOL
-;   db TENTACRUEL
-;   db REGIROCK
-;   db REGICE
-;   db REGISTEEL
-;   db -1 ; end
-
-ResiliencePokemon:
-;    db TENTACOOL
-;   db TENTACRUEL
-;    db REGIROCK
-;    db REGICE
-;    db REGISTEEL
+; (one list for both the battle and the AI: engine/battle/effect_commands.asm includes it
+; as ResiliencePokemon, engine/battle/ai/ability_lists.asm as ResiliencePokemon_AI)
+	db TENTACOOL
+	db TENTACRUEL
+	db REGIROCK
+	db REGICE
+	db REGISTEEL
     db -1 ; end

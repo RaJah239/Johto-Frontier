@@ -7,10 +7,9 @@
 ; (engine/battle/turn_end_effects.asm) use this list too, through
 ; UserHasSerenity (engine/battle/effect_commands.asm).
 
-; Note: This list must match engine/battle/ai/ability_lists.asm `SerenityPokemon_AI:`
-
-SerenityPokemon:
-;    db MEGANIUM
-;    db SYLVEON
-;    db MEW
+; (one list for both the battle and the AI: engine/battle/effect_commands.asm includes it
+; as SerenityPokemon, engine/battle/ai/ability_lists.asm as SerenityPokemon_AI)
+	db MEGANIUM
+	db SYLVEON
+	db MEW
     db -1 ; end

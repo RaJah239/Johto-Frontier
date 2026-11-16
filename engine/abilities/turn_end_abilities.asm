@@ -381,11 +381,16 @@ SolarPowerHPLossPokemon:
 
 INCLUDE "data/abilities/recovery_mons.asm"
 INCLUDE "data/abilities/speed_boost_mons.asm"
+HydrationPokemon:
 INCLUDE "data/abilities/hydration_mons.asm"
+IceBodyPokemon:
 INCLUDE "data/abilities/ice_body_mons.asm"
+RainDishPokemon:
 INCLUDE "data/abilities/rain_dish_mons.asm"
+SandBodyPokemon:
 INCLUDE "data/abilities/sand_body_mons.asm"
 INCLUDE "data/abilities/tenacity_mons.asm"
+PhotosynthesisPokemon:
 INCLUDE "data/abilities/photosynthesis_mons.asm"
 INCLUDE "data/abilities/poison_heal_mons.asm"
 INCLUDE "data/abilities/harvest_mons.asm"

@@ -28,6 +28,7 @@ HandleWaterproof:
 AbilityPopup_WaterproofText:
 	db "Waterproof@"
 
+WaterproofPokemon:
 INCLUDE "data/abilities/defensive_abilities/waterproof_mons.asm"
 
 
@@ -54,6 +55,7 @@ HandleFlameWard:
 AbilityPopup_FlameWardText:
 	db "Flame Ward@"
 
+FlameWardPokemon:
 INCLUDE "data/abilities/defensive_abilities/flame_ward_mons.asm"
 
 
@@ -80,6 +82,7 @@ HandleGrounded:
 AbilityPopup_GroundedText:
 	db "Grounded@"
 
+GroundedPokemon:
 INCLUDE "data/abilities/defensive_abilities/grounded_mons.asm"
 
 
@@ -118,6 +121,7 @@ UserHasImmunity::
 	call IsInAbilityList
 	jmp PopBCDEHL
 
+ImmunityPokemon:
 INCLUDE "data/abilities/defensive_abilities/immunity_mons.asm"
 
 

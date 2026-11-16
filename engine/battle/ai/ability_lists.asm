@@ -1,160 +1,65 @@
 SwiftSwimPokemon_AI:
-    db FEEBAS
-    db KINGDRA
-    db MAGIKARP
-    db MANTINE
-    db OMANYTE
-    db OMASTAR
-    db -1 ; end
+INCLUDE "data/abilities/swift_swim_mons.asm" ; (the battle's list)
 
 HydrationPokemon_AI:
-    db SEEL
-    db DEWGONG
-    db LAPRAS
-    db -1 ; end
+INCLUDE "data/abilities/hydration_mons.asm" ; (the battle's list)
 
 RainDishPokemon_AI:
-    db SQUIRTLE
-    db WARTORTLE
-    db BLASTOISE
-    db TENTACOOL
-    db TENTACRUEL
-    db -1 ; end
+INCLUDE "data/abilities/rain_dish_mons.asm" ; (the battle's list)
 
 ChlorophyllPokemon_AI:
-    db BELLSPROUT
-    db WEEPINBELL
-    db VICTREEBEL
-    db TANGELA
-    db TANGROWTH
-    db SUNKERN
-    db SUNFLORA
-    db TROPIUS
-    db -1 ; end
+INCLUDE "data/abilities/chlorophyll_mons.asm" ; (the battle's list)
 
 SolarPowerPokemon_AI:
-    db SUNKERN
-    db SUNFLORA
-    db TROPIUS
-    db CHARMANDER
-    db CHARMELEON
-    db CHARIZARD
-    db -1 ; end
+INCLUDE "data/abilities/solar_power_mons.asm" ; (the battle's list)
 
 SandRushPokemon_AI:
-    db DRILBUR
-    db EXCADRILL
-    db KLEAVOR
-    db -1 ; end
+INCLUDE "data/abilities/sand_rush_mons.asm" ; (the battle's list)
 
 SandBodyPokemon_AI:
-    db GIBLE
-    db GABITE
-    db GARCHOMP
-    db -1 ; end
+INCLUDE "data/abilities/sand_body_mons.asm" ; (the battle's list)
 
 SlushRushPokemon_AI:
-    db DELIBIRD
-    db -1 ; end
+INCLUDE "data/abilities/slush_rush_mons.asm" ; (the battle's list)
 
 IceBodyPokemon_AI:
-    db SNORUNT
-    db GLALIE
-    db REGICE
-    db -1 ; end
+INCLUDE "data/abilities/ice_body_mons.asm" ; (the battle's list)
 
 PhotosynthesisPokemon_AI:
-    db TROPIUS
-    db -1 ; end
+INCLUDE "data/abilities/photosynthesis_mons.asm" ; (the battle's list)
 
 FlameWardPokemon_AI:
-    db CYNDAQUIL
-    db QUILAVA
-    db TYPHLOSION
-    db GROWLITHE
-    db ARCANINE
-    db HOUNDOUR
-    db HOUNDOOM
-    db LITWICK
-    db LAMPENT
-    db CHANDELURE
-    db -1 ; end
+INCLUDE "data/abilities/defensive_abilities/flame_ward_mons.asm" ; (the battle's list)
 
 WaterproofPokemon_AI:
-    db LAPRAS
-    db WOOPER
-    db QUAGSIRE
-    db MANTINE
-    db CHINCHOU
-    db LANTURN
-    db -1 ; end
+INCLUDE "data/abilities/defensive_abilities/waterproof_mons.asm" ; (the battle's list)
 
 GroundedPokemon_AI:
-    db CHINCHOU
-    db LANTURN
-    db RAIKOU
-    db -1 ; end
+INCLUDE "data/abilities/defensive_abilities/grounded_mons.asm" ; (the battle's list)
 
 ImmunityPokemon_AI:
-	db CHIKORITA
-	db BAYLEEF
-	db MEGANIUM
-	db SNORLAX
-	db -1 ; end
+INCLUDE "data/abilities/defensive_abilities/immunity_mons.asm" ; (the battle's list)
 
 SerenityPokemon_AI:
-    db MEGANIUM
-    db SYLVEON
-    db MEW
-    db -1 ; end
+INCLUDE "data/abilities/serenity_mons.asm" ; (the battle's list)
 
 BadDreamsPokemon_AI:
-    db JYNX
-    db DARKRAI
-    db -1 ; end
+INCLUDE "data/abilities/bad_dreams_mons.asm" ; (the battle's list)
 
 RockHeadPokemon_AI:
-    db ONIX
-    db STEELIX
-    db RHYHORN
-    db RHYDON
-    db AERODACTYL
-    db SUDOWOODO
-    db -1 ; end
+INCLUDE "data/abilities/rock_head_mons.asm" ; (the battle's list)
 
 ResiliencePokemon_AI:
-    db TENTACOOL
-    db TENTACRUEL
-    db REGIROCK
-    db REGICE
-    db REGISTEEL
-    db -1 ; end
+INCLUDE "data/abilities/resilience_mons.asm" ; (the battle's list)
 
 SturdyPokemon_AI:
-    db MAGNEMITE
-    db MAGNETON
-    db MAGNEZONE
-    db ONIX
-    db STEELIX
-    db SUDOWOODO
-    db SHUCKLE
-    db SKARMORY
-    db DONPHAN
-    db REGIROCK
-    db -1 ; end
+INCLUDE "data/abilities/sturdy_mons.asm" ; (the battle's list)
 
 BlessingPokemon_AI:
-    db CHANSEY
-    db BLISSEY
-    db TOGEPI
-    db TOGETIC
-    db TOGEKISS
-    db -1 ; end
+INCLUDE "data/abilities/blessing_mons.asm" ; (the battle's list)
 
 OverdrivePokemon_AI:
-    db URSALUNA
-    db PORYGONZ
-    db -1 ; end
+INCLUDE "data/abilities/overdrive_mons.asm" ; (the battle's list)
 
 ; unused at the moment
 UberImmunePokemon_AI:
