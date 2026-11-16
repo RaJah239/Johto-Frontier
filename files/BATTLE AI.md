@@ -166,7 +166,7 @@ These run after everything above and can override it.
   - **Dream Eater while you sleep:** Dream Eater has priority, so it hits before you every turn you're asleep, including the turn you wake up. If those hits are enough to knock you out, it strongly favors Dream Eater, since you can't hit back. It counts one hit fewer if you have a move that would go first on your waking turn (like Protect), and doesn't do this at all if you know Sleep Talk
 - <a id="moves-that-cant-hit-you"></a>**Moves that can't hit you:**
   - It never uses a move that can't affect you while another usable move would work. That covers your type (a Normal move into a Ghost, Ground into Flying), your ability (Levitate, Waterproof, Flame Ward, Grounded, Immunity, Oblivious, Overcoat for powder moves) and Magic Bounce for status moves. Nothing the other parts of the AI favour can override this.
-  - After Foresight, Odor Sleuth or Miracle Eye (or with Scrappy), Normal and Fighting moves can hit Ghosts again, so it uses them. Ghost moves still can't hit Normal types.
+  - After Foresight (or with Scrappy), Normal and Fighting moves can hit Ghosts again, so it uses them. Ghost moves still can't hit Normal types.
   - If every move it can use would fail, it still picks one of them rather than a move that's out of PP or disabled.
 
 ### 8. Playing out each move
@@ -199,7 +199,7 @@ So it picks Toxic, Thunder Wave, Swords Dance, Recover or Haze because they *win
 At the start of every turn, unless it's trapped, the AI plays out a one-on-one between the Pokémon that's out and yours, turn by turn, until one of them goes down.
 
 **How a 1-on-1 is played out:**
-- Each side uses its strongest attack every turn. If you're locked into one move (a Choice item, Encore, or the middle of Outrage, Thrash, Petal Dance or Rollout), only that move counts for you, so it will bring in a Pokémon that's immune to it. It uses a priority move instead when that move would knock the other out for sure. Blastoise's Iron Head, Drowzee's and Hypno's Zen Headbutt, and Gale Wings Flying moves at full HP count as priority moves.
+- Each side uses its strongest attack every turn. If you're locked into one move (a Choice item, Encore, or the middle of Outrage, Thrash or Rollout), only that move counts for you, so it will bring in a Pokémon that's immune to it. It uses a priority move instead when that move would knock the other out for sure. Blastoise's Iron Head, Drowzee's and Hypno's Zen Headbutt, and Gale Wings Flying moves at full HP count as priority moves.
 - The AI's attacks use their **weakest** damage roll and yours your **strongest**, so it only counts on what's certain. There are no critical hits and every move hits.
 - Turn order:
   - the higher priority goes first
