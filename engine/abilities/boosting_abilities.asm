@@ -192,7 +192,10 @@ HandleMultiscale:
 	ret nz
 	newfarcall MoldBreakerBypass
 	ret c
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_MULTISCALE, MultiscaleText
+	; the target's ability: its popup over the target's HUD
+	ldh a, [hBattleTurn]
+	xor 1
+	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_MULTISCALE, MultiscaleText
 	jmp FiftyPercentNerf
 
 MultiscaleText: db "Multiscale@"
@@ -214,7 +217,10 @@ HandleThickFat:
 .nerf
 	newfarcall MoldBreakerBypass
 	ret c
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_THICK_FAT, ThickFatText
+	; the target's ability: its popup over the target's HUD
+	ldh a, [hBattleTurn]
+	xor 1
+	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_THICK_FAT, ThickFatText
 	jmp FiftyPercentNerf
 
 ThickFatText: db "Thick Fat@"
@@ -311,7 +317,10 @@ HandlePillowFort:
 	ret nc
 	newfarcall MoldBreakerBypass
 	ret c
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_PILLOW_FORT, PillowFortText
+	; the target's ability: its popup over the target's HUD
+	ldh a, [hBattleTurn]
+	xor 1
+	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_PILLOW_FORT, PillowFortText
 	jmp TwentyFivePercentNerf
 
 PillowFortText: db "PillowFort@"
