@@ -81,6 +81,13 @@ AI_Basic:
 	pop hl
 	jmp nz, .discourage ; discourage if AI_Redundant - loop back to check move
 
+; ============================
+; === Ability: Magic Bounce ===
+; ============================
+; never aim a status move at a Magic Bounce player mon: it bounces back
+	newfarcall AI_MagicBounceBlocksMove ; engine/abilities/magic_bounce.asm
+	jmp c, .discourage
+
 ; Taunt
 ; Check enemy is taunted or holding assault vest
 ; and discourage 0 power moves

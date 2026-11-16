@@ -2693,6 +2693,9 @@ MSim_T1Inflict:
 	ld a, [wPlayerSubStatus4]
 	bit SUBSTATUS_SUBSTITUTE, a
 	jr nz, .none
+	; Magic Bounce sends it back
+	newfarcall AI_MagicBounceBlocksMove ; engine/abilities/magic_bounce.asm
+	jr c, .none
 	ld a, c
 	cp EFFECT_LEECH_SEED
 	jr z, .seed

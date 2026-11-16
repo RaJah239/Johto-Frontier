@@ -1,7 +1,8 @@
 ; The enemy never uses a damaging move that can't affect the player: one the
 ; player's types are immune to (Foresight, Odor Sleuth and Miracle Eye lift
 ; those immunities, as in battle) or its ability makes it immune to. It uses
-; one only when no usable move would do anything.
+; one only when no usable move would do anything. The same goes for a status
+; move aimed at a Magic Bounce player mon.
 
 AI_DismissImmuneMoves:
 ; Called by AIChooseMove after every scoring layer and NormalizeAIMoveScores.
@@ -112,6 +113,10 @@ EnemyMoveSlotHasNoEffect:
 	ld a, BANK(Moves)
 	call FarCopyBytes
 	pop bc
+
+; status moves aimed at a Magic Bounce player mon bounce back
+	newfarcall AI_MagicBounceBlocksMove ; engine/abilities/magic_bounce.asm
+	ret c
 
 ; Attract and Taunt don't affect an Oblivious player mon
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
