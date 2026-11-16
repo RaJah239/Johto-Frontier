@@ -518,6 +518,9 @@ MSim_LoadCandidate:
 	ld bc, MSIM_SAVED_SUBSTATUS_LENGTH
 	call ByteFill
 
+	; its entry ability (first: Neutralizing Gas can switch off Hazard Guard)
+	newfarcall MSim_EntryEffects ; engine/abilities/entry_sim.asm
+
 	; Sticky Web: -1 Speed (as for Spikes: not if it's immune to hazards)
 	ld a, [wEnemyScreens]
 	bit SCREENS_STICKY_WEB, a
@@ -529,7 +532,6 @@ MSim_LoadCandidate:
 	ld a, BASE_STAT_LEVEL - 1
 	ld [wEnemySpdLevel], a
 .stats
-	newfarcall MSim_EntryEffects ; engine/abilities/entry_sim.asm
 	ld a, 1
 	ldh [hBattleTurn], a
 	callfar CalcEnemyStats

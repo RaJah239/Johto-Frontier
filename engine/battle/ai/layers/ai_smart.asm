@@ -222,7 +222,7 @@ AI_Smart_StaticDamage:
 
 	; unless it has Scrappy
 	ld a, [wEnemyMonSpecies]
-	newfarcall IsScrappySpecies
+	newfarcall IsScrappyActiveSpecies
 	ret c
 
 	ld a, [wBattleMonType1]
@@ -1489,7 +1489,7 @@ AI_Smart_Explosion:
 ; explosion
 ; never use against ghost types (unless it has Scrappy)
 	ld a, [wEnemyMonSpecies]
-	newfarcall IsScrappySpecies
+	newfarcall IsScrappyActiveSpecies
 	jr c, .not_ghost
 	ld a, [wBattleMonType1]
 	cp GHOST

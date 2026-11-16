@@ -26,6 +26,14 @@ AttackerHasScrappy::
 	ret nc
 	jr IsScrappySpecies
 
+IsScrappyActiveSpecies::
+; Carry if species a has Scrappy and Neutralizing Gas doesn't suppress it
+; (for the AI's checks). Preserves bc, de, hl.
+	call IsSpeciesSuppressed
+	ccf
+	ret nc
+	jr IsScrappySpecies
+
 AttackerHasScrappyRaw::
 ; The same, even when suppressed (for its popup: Neutralizing Gas's shows).
 	push hl
