@@ -3882,6 +3882,10 @@ wMSimFlags4:: db ; MSIM_*_TE_*: end-of-turn healing / Hydration / Solar Power
 wMSimFlags5:: db ; Poison Heal, Speed Boost
 wMSimSpeedSteps:: db ; Speed Boost stages gained so far: enemy (low nibble), player (high)
 
+SECTION "AI Matchup Items", WRAM0
+
+wMSimFlags6:: db ; the matchup sim's held items: Berry, Harvest, Unburden, Focus Sash
+
 SECTION "AI Teleport Plan", WRAM0
 
 wAITeleportPlan:: db ; AI_TELEPORT_PLAN_*: this turn's switch decision

@@ -79,6 +79,18 @@ DEF MSIM_P_POISON_HEAL_F  EQU 1
 DEF MSIM_E_SPEED_BOOST_F  EQU 2 ; +1 Speed at the end of each turn
 DEF MSIM_P_SPEED_BOOST_F  EQU 3
 DEF MSIM_E_SB_SKIP_F      EQU 4 ; not this turn: it just came in
+DEF MSIM_E_TENACITY_F     EQU 5 ; Tenacity: counted as curing its status on the 3rd turn
+DEF MSIM_P_TENACITY_F     EQU 6
+
+; wMSimFlags6
+DEF MSIM_E_BERRY_F        EQU 0 ; it holds its Berry (MSim_BerryItem)
+DEF MSIM_P_BERRY_F        EQU 1
+DEF MSIM_E_HARVEST_F      EQU 2 ; Harvest regrows it
+DEF MSIM_P_HARVEST_F      EQU 3
+DEF MSIM_E_UNBURDEN_F     EQU 4 ; Unburden: +1 Speed each time it loses its item
+DEF MSIM_P_UNBURDEN_F     EQU 5
+DEF MSIM_E_SASH_F         EQU 6 ; it holds a Focus Sash
+DEF MSIM_P_SASH_F         EQU 7
 
 DEF MSIM_SIDE_ENEMY  EQU 0
 DEF MSIM_SIDE_PLAYER EQU 1
@@ -1527,13 +1539,8 @@ MSim_SetupSides:
 	set MSIM_P_MAGIC_GUARD_F, [hl]
 .endures
 	call MSim_SetupTurnEnd
-	; Sturdy / Focus Sash (Mold Breaker gets through Sturdy)
-	ld a, [wEnemyMonItem]
-	ld b, a
-	callfar GetItemHeldEffect
-	ld a, b
-	cp HELD_FOCUS_SASH
-	jr z, .enemy_endures
+	call MSim_SetupItems
+	; Sturdy (Mold Breaker gets through it); Focus Sash: MSim_SetupItems
 	ld a, [wEnemyMonSpecies]
 	ld hl, SturdyPokemon_AI
 	ld d, BANK(SturdyPokemon_AI)
@@ -1544,16 +1551,9 @@ MSim_SetupSides:
 	ld d, BANK(MoldBreakerPokemon)
 	call MSim_IsInFarAbilityList
 	jr c, .player_endures
-.enemy_endures
 	ld hl, wMSimFlags3
 	set MSIM_E_ENDURES_F, [hl]
 .player_endures
-	ld a, [wBattleMonItem]
-	ld b, a
-	callfar GetItemHeldEffect
-	ld a, b
-	cp HELD_FOCUS_SASH
-	jr z, .player_does
 	ld a, [wBattleMonSpecies]
 	ld hl, SturdyPokemon_AI
 	ld d, BANK(SturdyPokemon_AI)
@@ -1564,7 +1564,6 @@ MSim_SetupSides:
 	ld d, BANK(MoldBreakerPokemon)
 	call MSim_IsInFarAbilityList
 	jr c, .counters
-.player_does
 	ld hl, wMSimFlags3
 	set MSIM_P_ENDURES_F, [hl]
 .counters
@@ -2133,44 +2132,124 @@ ENDM
 
 MSim_EnemyEndures:
 ; bc = a hit on the enemy's mon. If Sturdy or a Focus Sash would save it
-; (it's at full HP and the hit would KO it), the hit leaves it at 1 HP.
+; (it's at full HP and the hit would KO it), the hit leaves it at 1 HP; a
+; Focus Sash is used up then (Sturdy goes first if it has both).
+; Preserves bc otherwise.
 	ld a, [wMSimFlags3]
-	bit MSIM_E_ENDURES_F, a
+	and 1 << MSIM_E_ENDURES_F
+	ld a, [wMSimFlags6]
+	jr nz, .check
+	bit MSIM_E_SASH_F, a
 	ret z
+.check
 	ld hl, wMSimEnemyHP
 	ld de, wEnemyMonMaxHP
-	jr MSim_Endures
+	call MSim_Endures
+	ret nc
+	ld a, [wMSimFlags3]
+	bit MSIM_E_ENDURES_F, a
+	ret nz ; Sturdy
+	ld hl, wMSimFlags6
+	res MSIM_E_SASH_F, [hl]
+	xor a ; the enemy
+	jr MSim_LostItem
 
 MSim_PlayerEndures:
 ; The same for a hit on the player's mon.
 	ld a, [wMSimFlags3]
-	bit MSIM_P_ENDURES_F, a
+	and 1 << MSIM_P_ENDURES_F
+	ld a, [wMSimFlags6]
+	jr nz, .check
+	bit MSIM_P_SASH_F, a
 	ret z
+.check
 	ld hl, wMSimPlayerHP
 	ld de, wBattleMonMaxHP
-	; fallthrough
+	call MSim_Endures
+	ret nc
+	ld a, [wMSimFlags3]
+	bit MSIM_P_ENDURES_F, a
+	ret nz
+	ld hl, wMSimFlags6
+	res MSIM_P_SASH_F, [hl]
+	ld a, 1 ; the player
+	jr MSim_LostItem
 
 MSim_Endures:
-; hl = HP, de = max HP (big-endian), bc = the hit.
+; hl = HP, de = max HP (big-endian), bc = the hit. Carry (and bc = HP - 1)
+; if it's at full HP and the hit would KO it.
 	ld a, [de]
 	cp [hl]
-	ret nz
+	jr nz, .no
 	inc de
 	inc hl
 	ld a, [de]
 	cp [hl]
-	ret nz
+	jr nz, .no
 	; at full HP: does the hit KO?
 	ld a, c
 	sub [hl]
 	dec hl
 	ld a, b
 	sbc [hl]
-	ret c
+	jr c, .no
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
 	dec bc
+	scf
+	ret
+.no
+	and a
+	ret
+
+MSim_LostItem:
+; Side a (0: enemy, 1: player) has just lost its held item (a Berry or a
+; Focus Sash used up): Unburden raises its Speed. Preserves bc.
+	push bc
+	ld b, 1 << MSIM_E_UNBURDEN_F
+	and a
+	jr z, .got_bit
+	ld b, 1 << MSIM_P_UNBURDEN_F
+.got_bit
+	ld c, a
+	ld a, [wMSimFlags6]
+	and b
+	jr z, .done
+	ld a, c
+	call MSim_AddSpeedStep
+	call MSim_RecheckSpeed
+.done
+	pop bc
+	ret
+
+MSim_AddSpeedStep:
+; One more Speed stage for side a (0: enemy, 1: player) in wMSimSpeedSteps
+; (not past +6).
+	and a
+	jr nz, .player
+	ld a, [wMSimSpeedSteps]
+	and $0f
+	ld b, a
+	ld a, [wEnemySpdLevel]
+	add b
+	cp MAX_STAT_LEVEL
+	ret nc
+	ld hl, wMSimSpeedSteps
+	inc [hl]
+	ret
+.player
+	ld a, [wMSimSpeedSteps]
+	swap a
+	and $0f
+	ld b, a
+	ld a, [wPlayerSpdLevel]
+	add b
+	cp MAX_STAT_LEVEL
+	ret nc
+	ld a, [wMSimSpeedSteps]
+	add $10
+	ld [wMSimSpeedSteps], a
 	ret
 
 MACRO msim_residual
@@ -2316,6 +2395,7 @@ MSim_EndOfTurn:
 	and a
 	ret nz
 	call MSim_SpeedBoostTurn
+	call MSim_TurnEndItems
 	ld a, [wMSimFlags2]
 	bit MSIM_E_LEFTOVERS_F, a
 	jr z, .player_leftovers
@@ -2422,33 +2502,19 @@ MSim_SpeedBoostTurn:
 	jr nz, .player
 	bit MSIM_E_SPEED_BOOST_F, [hl]
 	jr z, .player
-	ld a, [wMSimSpeedSteps]
-	and $0f
-	ld b, a
-	ld a, [wEnemySpdLevel]
-	add b
-	cp MAX_STAT_LEVEL
-	jr nc, .player
-	ld a, [wMSimSpeedSteps]
-	inc a
-	ld [wMSimSpeedSteps], a
+	xor a
+	call MSim_AddSpeedStep
 .player
 	ld hl, wMSimFlags5
 	bit MSIM_P_SPEED_BOOST_F, [hl]
-	jr z, .speeds
-	ld a, [wMSimSpeedSteps]
-	swap a
-	and $0f
-	ld b, a
-	ld a, [wPlayerSpdLevel]
-	add b
-	cp MAX_STAT_LEVEL
-	jr nc, .speeds
-	ld a, [wMSimSpeedSteps]
-	add $10
-	ld [wMSimSpeedSteps], a
-.speeds
-	; the stats with the gained stages, who's faster, then put them back
+	jr z, MSim_RecheckSpeed
+	ld a, 1
+	call MSim_AddSpeedStep
+	; fallthrough
+
+MSim_RecheckSpeed:
+; Who's faster, with the Speed stages gained in the sim (wMSimSpeedSteps):
+; the stats with them, DoesAIOutSpeedPlayer, then the stats put back.
 	ld a, [wMSimSpeedSteps]
 	and a
 	ret z
@@ -2503,6 +2569,416 @@ MSim_SpeedBoostTurn:
 	ld a, MAX_STAT_LEVEL
 .level_ok
 	ld [hl], a
+	ret
+
+MSim_SetupItems:
+; wMSimFlags6 (Berries, Harvest, Unburden, Focus Sash) and Tenacity, for both
+; mons (abilities: not while Neutralizing Gas suppresses them).
+	xor a
+	ld [wMSimFlags6], a
+	ld c, 0
+	call .side
+	ld c, 1
+	; fallthrough
+.side
+; c = side (0: enemy, 1: player)
+	ld a, c
+	call MSim_SideSpecies
+	ld e, a
+	push de
+	; Tenacity
+	ld hl, TenacityPokemon
+	ld d, BANK(TenacityPokemon)
+	push bc
+	call MSim_IsInFarAbilityList
+	pop bc
+	jr nc, .no_tenacity
+	ld a, 1 << MSIM_E_TENACITY_F
+	call .shift
+	ld hl, wMSimFlags5
+	or [hl]
+	ld [hl], a
+.no_tenacity
+	pop de
+	ld b, 0 ; its wMSimFlags6 bits (the enemy's positions)
+	; held item: Focus Sash, a Berry
+	push de
+	ld a, c
+	call MSim_SideItem
+	pop de
+	and a
+	jr z, .no_item
+	push bc
+	push de
+	ld b, a
+	callfar GetItemHeldEffect
+	ld a, b
+	pop de
+	pop bc
+	cp HELD_FOCUS_SASH
+	jr nz, .not_sash
+	set MSIM_E_SASH_F, b
+.not_sash
+	call MSim_IsBerryEffect
+	jr nc, .not_berry
+	set MSIM_E_BERRY_F, b
+.not_berry
+	; Unburden (it holds something to lose)
+	ld a, e
+	push bc
+	newfarcall IsUnburdenSpecies
+	pop bc
+	jr nc, .no_item
+	set MSIM_E_UNBURDEN_F, b
+.no_item
+	; Harvest, with a Berry to regrow
+	ld a, e
+	push bc
+	newfarcall IsHarvestSpecies
+	pop bc
+	jr nc, .store
+	ld a, c
+	push bc
+	call MSim_BerryItem
+	pop bc
+	and a
+	jr z, .store
+	set MSIM_E_HARVEST_F, b
+.store
+	ld a, b
+	call .shift
+	ld hl, wMSimFlags6
+	or [hl]
+	ld [hl], a
+	ret
+
+.shift
+; a <<= c (the player's bits are one up)
+	dec c
+	inc c
+	ret z
+	add a
+	ret
+
+MSim_SideSpecies:
+; a = side (0: enemy, 1: player): a = its species. Preserves bc, de, hl.
+	and a
+	ld a, [wEnemyMonSpecies]
+	ret z
+	ld a, [wBattleMonSpecies]
+	ret
+
+MSim_SideItem:
+; a = side: a = its held item. Preserves bc, de, hl.
+	and a
+	ld a, [wEnemyMonItem]
+	ret z
+	ld a, [wBattleMonItem]
+	ret
+
+MSim_BerryItem:
+; a = side: a = the Berry it holds, or the one it used up and Harvest can
+; regrow (wHarvestBerries), or 0. Preserves bc, de, hl.
+	push hl
+	ld l, a
+	call MSim_SideItem
+	and a
+	jr nz, .held
+	ld a, l
+	and a
+	ld a, [wHarvestBerries + 1] ; the enemy's
+	jr z, .done
+	ld a, [wHarvestBerries] ; the player's
+	jr .done
+.held
+	; a held item counts only if it's a Berry
+	push bc
+	push de
+	ld b, a
+	push bc
+	callfar GetItemHeldEffect
+	ld a, b
+	pop bc
+	call MSim_IsBerryEffect
+	ld a, b
+	pop de
+	pop bc
+	jr c, .done
+	xor a
+.done
+	pop hl
+	ret
+
+MSim_IsBerryEffect:
+; Carry if held item effect a is a Berry's (HP or status). Preserves bc, de, hl.
+	cp HELD_BERRY
+	jr z, .yes
+	cp HELD_BERRY_4TH
+	jr z, .yes
+	cp HELD_BERRY_3RD
+	jr z, .yes
+	cp HELD_HEAL_POISON
+	jr c, .no
+	cp HELD_HEAL_STATUS + 1
+	ret c
+.no
+	and a
+	ret
+.yes
+	scf
+	ret
+
+MSim_TurnEndItems:
+; After the turn-end abilities: Harvest regrows a used Berry (always in the
+; sun, else every other turn: it's 50%), a Berry is eaten (HP ones below half
+; HP, status ones when the mon has that status) and Unburden goes off;
+; Tenacity cures on the 3rd turn (it's 1/3 a turn).
+	ld c, 0
+	call .side
+	ld c, 1
+.side
+	; Tenacity
+	ld a, 1 << MSIM_E_TENACITY_F
+	call MSim_SetupItems.shift
+	ld hl, wMSimFlags5
+	and [hl]
+	jr z, .harvest
+	ld a, [wMSimTurns]
+	cp MSIM_MAX_TURNS - 2 ; (the 3rd end of turn)
+	jr nz, .harvest
+	call .cure
+.harvest
+	ld a, [wMSimFlags6]
+	ld b, a
+	ld a, 1 << MSIM_E_HARVEST_F
+	call MSim_SetupItems.shift
+	and b
+	jr z, .eat
+	ld a, 1 << MSIM_E_BERRY_F
+	call MSim_SetupItems.shift
+	and b
+	jr nz, .eat ; still has it
+	ld a, [wMSimWeatherTurns]
+	and a
+	jr z, .no_sun
+	ld a, [wBattleWeather]
+	cp WEATHER_SUN
+	jr z, .regrow
+.no_sun
+	ld a, [wMSimTurns]
+	and 1
+	jr z, .eat
+.regrow
+	ld a, 1 << MSIM_E_BERRY_F
+	call MSim_SetupItems.shift
+	ld hl, wMSimFlags6
+	or [hl]
+	ld [hl], a
+.eat
+	ld a, [wMSimFlags6]
+	ld b, a
+	ld a, 1 << MSIM_E_BERRY_F
+	call MSim_SetupItems.shift
+	and b
+	ret z
+	ld a, c
+	call MSim_BerryItem
+	and a
+	ret z
+	push bc
+	ld b, a
+	callfar GetItemHeldEffect ; b = effect, c = its value
+	ld a, b
+	ld e, c
+	pop bc
+	cp HELD_BERRY
+	jr z, .hp_berry
+	cp HELD_BERRY_4TH
+	jr z, .hp_berry
+	cp HELD_BERRY_3RD
+	jr z, .hp_berry
+	; a status Berry: cures its status (MSim_TurnEndStatusMask)
+	push bc
+	ld b, a
+	ld hl, HeldStatusHealingEffects
+	ld d, BANK(HeldStatusHealingEffects)
+.find
+	ld a, d
+	push de
+	call GetFarByte
+	pop de
+	inc hl
+	cp -1
+	jr z, .pop_none
+	cp b
+	jr z, .found
+	inc hl
+	jr .find
+.found
+	ld a, d
+	call GetFarByte
+	pop bc
+	ld b, a
+	call MSim_SideStatus
+	and b
+	ret z
+	call .cure
+	jr .eaten
+.pop_none
+	pop bc
+	ret
+
+.hp_berry
+	; below half its max HP?
+	push bc
+	ld d, a
+	ld a, c
+	and a
+	ld hl, wMSimEnemyHP
+	ld bc, wEnemyMonMaxHP
+	jr z, .got_hp
+	ld hl, wMSimPlayerHP
+	ld bc, wBattleMonMaxHP
+.got_hp
+	push de
+	ld a, [hli]
+	ld d, a
+	ld e, [hl] ; de = HP
+	sla e
+	rl d ; * 2
+	ld a, [bc]
+	ld h, a
+	inc bc
+	ld a, [bc]
+	ld l, a ; hl = max HP
+	ld a, e
+	sub l
+	ld a, d
+	sbc h
+	pop de
+	pop bc
+	ret nc ; not below half
+	; the amount
+	push bc
+	ld a, c
+	and a
+	ld a, d
+	ld hl, wEnemyMonMaxHP
+	jr z, .got_max
+	ld hl, wBattleMonMaxHP
+.got_max
+	cp HELD_BERRY
+	jr z, .fixed
+	ld b, [hl]
+	inc hl
+	ld c, [hl]
+	cp HELD_BERRY_4TH
+	jr z, .quarter
+	; a third
+	ld h, b
+	ld l, c
+	ld bc, 0
+.third
+	ld a, l
+	sub 3
+	ld l, a
+	ld a, h
+	sbc 0
+	ld h, a
+	jr c, .got_amount
+	inc bc
+	jr .third
+.quarter
+	srl b
+	rr c
+	srl b
+	rr c
+	jr .got_amount
+.fixed
+	ld b, 0
+	ld c, e
+.got_amount
+	ld a, b
+	or c
+	jr nz, .heal
+	inc c
+.heal
+	pop de ; e = side
+	push de
+	ld a, e
+	and a
+	jr nz, .heal_player
+	call MSim_HealEnemy
+	jr .healed
+.heal_player
+	call MSim_HealPlayer
+.healed
+	pop bc
+.eaten
+	ld a, 1 << MSIM_E_BERRY_F
+	call MSim_SetupItems.shift
+	cpl
+	ld hl, wMSimFlags6
+	and [hl]
+	ld [hl], a
+	ld a, c
+	jmp MSim_LostItem
+
+.cure
+; side c: its status counts as cured (and it wakes up)
+	ld a, 1 << MSIM_E_CURED_F
+	call MSim_SetupItems.shift
+	ld hl, wMSimFlags3
+	or [hl]
+	ld [hl], a
+	xor a
+	dec c
+	inc c
+	jr nz, .player_awake
+	ld [wMSimEnemySleep], a
+	ret
+.player_awake
+	ld [wMSimPlayerSleep], a
+	ret
+
+MSim_SideStatus:
+; c = side: a = its status as the sim sees it (0 once cured). Preserves bc.
+	ld a, 1 << MSIM_E_CURED_F
+	call MSim_SetupItems.shift
+	ld hl, wMSimFlags3
+	and [hl]
+	ld a, 0
+	ret nz
+	dec c
+	inc c
+	ld a, [wEnemyMonStatus]
+	ret z
+	ld a, [wBattleMonStatus]
+	and a
+	ret nz
+	; a status inflicted in the sim
+	push bc
+	ld a, [wMSimInflict]
+	ld c, a
+	ld b, 0
+	and 1 << MSIM_INF_PSN_F | 1 << MSIM_INF_TOX_F
+	jr z, .not_psn
+	set PSN, b
+.not_psn
+	bit MSIM_INF_BRN_F, c
+	jr z, .not_brn
+	set BRN, b
+.not_brn
+	bit MSIM_INF_PAR_F, c
+	jr z, .not_par
+	set PAR, b
+.not_par
+	bit MSIM_INF_SLP_F, c
+	jr z, .not_slp
+	inc b ; (a sleep count)
+.not_slp
+	ld a, b
+	pop bc
 	ret
 
 MSim_SetupTurnEnd:
