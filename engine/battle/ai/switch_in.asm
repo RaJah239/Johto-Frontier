@@ -56,7 +56,7 @@ FindForcedReplacementInOTParty:
 	ret
 
 FindMonInOTPartyToSwitchIntoBattle:
-; Score each alive OT mon (not the active one, not asleep or frozen): does it
+; Score each alive OT mon (not the active one, not asleep): does it
 ; have a super-effective move against the player's mon, and is it weak to one
 ; of the player's mon's moves? ScoreMonTypeMatchups then picks one.
 ; Returns the 0-based party index in b.
@@ -95,9 +95,9 @@ FindMonInOTPartyToSwitchIntoBattle:
 	ld a, b
 	call GetPartyLocation
 	ld a, [hl]
-	and 1 << FRZ | SLP_MASK
+	and SLP_MASK
 	pop bc
-	jr nz, .discourage ; don't switch to a sleeping or frozen mon
+	jr nz, .discourage ; don't switch to a sleeping mon
 
 	; nor to a stat-lowering entry ability that the player's Contrary mon
 	; would profit from (unless every mon left is like that)
