@@ -308,7 +308,10 @@ MSim_TryCandidate:
 	jr c, .loses
 
 .fight
+	call MSim_TryResetFirst
+	jr c, .won
 	call MSim_RunBest
+.won
 	push af
 	call MSim_PlayerDealtShare
 	ld [wMSimLastDealt], a
@@ -340,6 +343,102 @@ MSim_TryCandidate:
 
 .loses
 	and a
+	ret
+
+MSim_TryResetFirst:
+; A candidate that knows Haze / Roar / Whirlwind, against a boosted player:
+; play out "it uses that first" (MSim_RunReset). Carry if that wins (the
+; run's HP stay); otherwise everything is put back for MSim_RunBest.
+	call MSim_FindResetMove
+	ret nc
+	call MSim_ResetUseful
+	ret nc
+	push bc
+	ld hl, wMSimEnemyHP
+	ld de, wMSimStartHP
+	ld bc, 4
+	call CopyBytes
+	call .stages
+	pop bc
+	call MSim_RunReset
+	ret c
+	; lost: back to where it was
+	ld hl, wMSimSavedPreReset
+	ld de, wEnemyStatLevels
+	ld c, MSIM_SAVED_LEVELS_LENGTH
+	call MSim_FromSaveBank
+	ld de, wEnemyMonAttack
+	ld c, NUM_BATTLE_STATS * 2
+	call MSim_FromSaveBank
+	ld de, wPlayerStatLevels
+	ld c, MSIM_SAVED_LEVELS_LENGTH
+	call MSim_FromSaveBank
+	ld de, wBattleMonAttack
+	ld c, NUM_BATTLE_STATS * 2
+	call MSim_FromSaveBank
+	call MSim_ComputeDamages
+	ld hl, wMSimStartHP
+	ld de, wMSimEnemyHP
+	ld bc, 4
+	call CopyBytes
+	and a
+	ret
+
+.stages
+	ld de, wMSimSavedPreReset
+	ld hl, wEnemyStatLevels
+	ld c, MSIM_SAVED_LEVELS_LENGTH
+	call MSim_ToSaveBank
+	ld hl, wEnemyMonAttack
+	ld c, NUM_BATTLE_STATS * 2
+	call MSim_ToSaveBank
+	ld hl, wPlayerStatLevels
+	ld c, MSIM_SAVED_LEVELS_LENGTH
+	call MSim_ToSaveBank
+	ld hl, wBattleMonAttack
+	ld c, NUM_BATTLE_STATS * 2
+	jmp MSim_ToSaveBank
+
+MSim_FindResetMove:
+; Carry and b = the effect if the loaded enemy mon has a usable Haze, Roar
+; or Whirlwind.
+	ld hl, wEnemyMonMoves
+	ld de, wEnemyMonPP
+	ld c, NUM_MOVES
+.loop
+	ld a, [hli]
+	and a
+	ret z ; (no carry)
+	ld b, a
+	ld a, [de]
+	inc de
+	and PP_MASK
+	jr z, .next
+	push hl
+	push de
+	push bc
+	ld a, b
+	dec a
+	ld hl, Moves + MOVE_EFFECT
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	pop bc
+	pop de
+	pop hl
+	ld b, a
+	cp EFFECT_RESET_STATS
+	jr z, .found
+	cp EFFECT_FORCE_SWITCH
+	jr z, .found
+.next
+	dec c
+	jr nz, .loop
+	and a
+	ret
+.found
+	scf
 	ret
 
 MSim_PlayerDealtShare:
