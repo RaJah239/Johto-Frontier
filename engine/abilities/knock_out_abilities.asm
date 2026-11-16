@@ -211,6 +211,94 @@ INCLUDE "data/abilities/bloodlust_mons.asm"
 INCLUDE "data/abilities/life_drain_mons.asm"
 INCLUDE "data/abilities/renewal_mons.asm"
 
+KOAbilityGain_Far::
+; For the AI: carry if species a, the mon out on side c (0: player, 1:
+; enemy), has a knock-out ability that would do something if it KO'd now:
+; Moxie / Ignis / Flash Step / Blood Lust below +3, Life Drain (the
+; player's: not at full HP), Renewal with a status. Not while Neutralizing
+; Gas suppresses it. Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld b, a
+	ld hl, MoxiePokemon
+	call .listed
+	ld de, wEnemyAtkLevel - wEnemyStatLevels
+	jr c, .stage
+	ld hl, IgnisPokemon
+	call .listed
+	ld de, wEnemySAtkLevel - wEnemyStatLevels
+	jr c, .stage
+	ld hl, FlashStepPokemon
+	call .listed
+	ld de, wEnemySpdLevel - wEnemyStatLevels
+	jr c, .stage
+	ld hl, BloodlustPokemon
+	call .listed
+	jr nc, .life_drain
+	ld de, wEnemyAtkLevel - wEnemyStatLevels
+	call .low_stage
+	jr c, .yes
+	ld de, wEnemySAtkLevel - wEnemyStatLevels
+.stage
+	call .low_stage
+	jr .done
+.life_drain
+	ld hl, LifeDrainPokemon
+	call .listed
+	jr nc, .renewal
+	ld a, c
+	and a
+	jr nz, .yes ; (the AI's mon: it will have taken damage by then)
+	ld hl, wBattleMonHP
+	ld a, [wBattleMonMaxHP]
+	cp [hl]
+	jr nz, .yes
+	inc hl
+	ld a, [wBattleMonMaxHP + 1]
+	cp [hl]
+	jr nz, .yes
+	jr .no
+.renewal
+	ld hl, RenewalPokemon
+	call .listed
+	jr nc, .done
+	ld a, c
+	and a
+	ld a, [wBattleMonStatus]
+	jr z, .got_status
+	ld a, [wEnemyMonStatus]
+.got_status
+	and a
+	jr nz, .yes
+.no
+	and a
+	jr .done
+.yes
+	scf
+.done
+	jmp PopBCDEHL
+
+.listed
+	ld a, b
+	push bc
+	call IsInAbilityList
+	pop bc
+	ret
+
+.low_stage
+; carry if side c's stat level at offset de is below +3
+	ld hl, wEnemyStatLevels
+	ld a, c
+	and a
+	jr nz, .got_levels
+	ld hl, wPlayerStatLevels
+.got_levels
+	add hl, de
+	ld a, [hl]
+	cp BASE_STAT_LEVEL + 3
+	ret
+
 ; fail-safe should anything go awry
 ; and prevent stat ups when a pokemon has zero hp
 ClearFailures:

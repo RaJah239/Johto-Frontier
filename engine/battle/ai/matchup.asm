@@ -165,12 +165,16 @@ AI_MatchupSwitch:
 	ld a, [wMSimBestIndex]
 	cp $ff
 	jr z, .by_damage
+	; (or any winner, when staying in to lose costs extra: MSim_EagerSwitch)
+	call MSim_EagerSwitch
+	jr c, .take_best
 	ld a, [wMSimBestTaken]
 	cp 3 * 255 / 4 + 1
 	jr nc, .by_damage
 	ld a, [wMSimActiveLeft]
 	cp 255 / 4 + 1
 	jr c, .by_damage
+.take_best
 	ld a, [wMSimBestIndex]
 	jr .switch
 
@@ -206,6 +210,16 @@ AI_MatchupSwitch:
 	call MSim_End
 .stay
 	and a
+	ret
+
+MSim_EagerSwitch:
+; (the mon that's out loses the 1-on-1, and another one wins it) Carry if
+; the AI should switch to that winner even when it isn't a comfortable win:
+; - the player's mon has a knock-out ability that would go off (Moxie and
+;   the like): don't hand it the KO.
+	ld a, [wBattleMonSpecies]
+	ld c, 0
+	newfarcall KOAbilityGain_Far ; engine/abilities/knock_out_abilities.asm
 	ret
 
 AI_MatchupPick:
@@ -361,6 +375,17 @@ MSim_TryCandidate:
 	jr nz, .got_share
 	dec a
 .got_share
+	; its knock-out ability goes off when it wins: worth 1/8 of its HP
+	ld b, a
+	ld a, [wEnemyMonSpecies]
+	ld c, 1
+	newfarcall KOAbilityGain_Far
+	ld a, b
+	jr nc, .no_ko_bonus
+	sub 255 / 8
+	jr nc, .no_ko_bonus
+	xor a
+.no_ko_bonus
 	scf
 	ret
 
