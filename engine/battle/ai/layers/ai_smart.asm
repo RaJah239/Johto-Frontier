@@ -3658,6 +3658,10 @@ AI_Smart_Sandstorm:
 ; even if we benefit from weather, don't use if we will be koed
 	call DoesEnemyHaveIntactFocusSashOrSturdy
 	jr c, .skipKOCheck
+; not when the weather would help the player's mon (Sand Body, Sand Rush)
+	call AI_PlayerLikesSand
+	jr c, .discourage
+
 	call CanPlayerKO
 	jr c, .discourage
 
@@ -3778,6 +3782,10 @@ AI_Smart_Hail:
 ; even if we benefit from weather, don't use if we will be koed
 	call DoesEnemyHaveIntactFocusSashOrSturdy
 	jr c, .skipKOCheck
+; not when the weather would help the player's mon (Ice Body, Slush Rush)
+	call AI_PlayerLikesHail
+	jr c, .discourage
+
 	call CanPlayerKO
 	jr c, .discourage
 
@@ -4131,6 +4139,56 @@ AI_Smart_HiddenPower:
 	inc [hl]
 	ret
 
+AI_PlayerLikesRain:
+; Carry if the player's mon has an ability that rain helps. Preserves hl.
+	push hl
+	ld hl, RainDishPokemon_AI
+	call AI_PlayerInAbilityList
+	jr c, AI_PlayerLikes_Done
+	ld hl, HydrationPokemon_AI
+	call AI_PlayerInAbilityList
+	jr c, AI_PlayerLikes_Done
+	ld hl, SwiftSwimPokemon_AI
+	jr AI_PlayerLikes_Last
+
+AI_PlayerLikesSun:
+	push hl
+	ld hl, PhotosynthesisPokemon_AI
+	call AI_PlayerInAbilityList
+	jr c, AI_PlayerLikes_Done
+	ld hl, ChlorophyllPokemon_AI
+	jr AI_PlayerLikes_Last
+
+AI_PlayerLikesSand:
+	push hl
+	ld hl, SandBodyPokemon_AI
+	call AI_PlayerInAbilityList
+	jr c, AI_PlayerLikes_Done
+	ld hl, SandRushPokemon_AI
+	jr AI_PlayerLikes_Last
+
+AI_PlayerLikesHail:
+	push hl
+	ld hl, IceBodyPokemon_AI
+	call AI_PlayerInAbilityList
+	jr c, AI_PlayerLikes_Done
+	ld hl, SlushRushPokemon_AI
+AI_PlayerLikes_Last:
+	call AI_PlayerInAbilityList
+AI_PlayerLikes_Done:
+	pop hl
+	ret
+
+AI_PlayerInAbilityList:
+; Carry if the player's mon is in ability list hl (not suppressed).
+	push de
+	push bc
+	ld a, [wBattleMonSpecies]
+	call IsInAbilityList
+	pop bc
+	pop de
+	ret
+
 AI_Smart_RainDance:
 ; don't use if already raining
 	ld a, [wBattleWeather]
@@ -4144,6 +4202,10 @@ AI_Smart_RainDance:
 ; even if we benefit from weather, don't use if we will be koed
 	call DoesEnemyHaveIntactFocusSashOrSturdy
 	jr c, .skipKOCheck
+; not when the weather would help the player's mon (Rain Dish, Hydration, Swift Swim)
+	call AI_PlayerLikesRain
+	jr c, .discourage
+
 	call CanPlayerKO
 	jr c, .discourage
 
@@ -4231,6 +4293,10 @@ AI_Smart_SunnyDay:
 ; even if we benefit from weather, don't use if we will be koed
 	call DoesEnemyHaveIntactFocusSashOrSturdy
 	jr c, .skipKOCheck
+; not when the weather would help the player's mon (Photosynthesis, Chlorophyll)
+	call AI_PlayerLikesSun
+	jr c, .discourage
+
 	call CanPlayerKO
 	jr c, .discourage
 

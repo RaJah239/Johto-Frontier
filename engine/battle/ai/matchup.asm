@@ -63,6 +63,20 @@ DEF MSIM_MOVE_DRAINS_F   EQU 4 ; (per move) the move being scored drains
 DEF MSIM_E_ENDURES_F     EQU 5 ; at full HP it lives a KO with 1 HP (Sturdy, Focus Sash)
 DEF MSIM_P_ENDURES_F     EQU 6
 
+; wMSimFlags4 (the player's bit is always the enemy's + 1)
+DEF MSIM_E_TE_HEAL_F      EQU 0 ; heals 1/16 at the end of each turn
+DEF MSIM_P_TE_HEAL_F      EQU 1
+DEF MSIM_E_TE_WEATHER_F   EQU 2 ; (its turn-end ability needs the weather to last)
+DEF MSIM_P_TE_WEATHER_F   EQU 3
+DEF MSIM_E_TE_HYDRATION_F EQU 4 ; rain cures its status at the end of the turn
+DEF MSIM_P_TE_HYDRATION_F EQU 5
+DEF MSIM_E_TE_SOLAR_F     EQU 6 ; Solar Power: loses 1/8 at the end of each turn
+DEF MSIM_P_TE_SOLAR_F     EQU 7
+
+; wMSimFlags5
+DEF MSIM_E_POISON_HEAL_F  EQU 0 ; poison heals it instead
+DEF MSIM_P_POISON_HEAL_F  EQU 1
+
 DEF MSIM_SIDE_ENEMY  EQU 0
 DEF MSIM_SIDE_PLAYER EQU 1
 
@@ -1380,8 +1394,9 @@ MSim_CheckDrain:
 	ret
 
 MSim_SetupSides:
-; Per-side setup for MSim_Run: Leftovers, Magic Guard, Sturdy / Focus Sash,
-; sleep and bad-poison counters, weather turns, heal moves.
+; Per-side setup for MSim_Run: Leftovers, Magic Guard, turn-end abilities,
+; Sturdy / Focus Sash, sleep and bad-poison counters, weather turns, heal
+; moves.
 	xor a
 	ld [wMSimFlags2], a
 	ld [wMSimFlags3], a
@@ -1417,6 +1432,7 @@ MSim_SetupSides:
 	ld hl, wMSimFlags2
 	set MSIM_P_MAGIC_GUARD_F, [hl]
 .endures
+	call MSim_SetupTurnEnd
 	; Sturdy / Focus Sash (Mold Breaker gets through Sturdy)
 	ld a, [wEnemyMonItem]
 	ld b, a
@@ -2062,7 +2078,7 @@ MSim_\1Residual:
 ; a = 0, or the other side's win code if this KOs it.
 	ld a, [wMSimFlags2]
 	bit MSIM_\2_MAGIC_GUARD_F, a
-	jr nz, .none
+	jmp nz, .none
 	ld a, [wMSimFlags3]
 	bit MSIM_\2_CURED_F, a
 	jr nz, .seed
@@ -2075,6 +2091,7 @@ MSim_\1Residual:
 	ENDC
 	jr z, .seed
 .has_status
+	call MSim_\1PoisonHeals
 	ld a, 4
 	call MSim_\1MaxShare
 	ld a, [\55]
@@ -2090,7 +2107,21 @@ MSim_\1Residual:
 	inc [hl]
 	ld a, [hl]
 	call MSim_MultiplyBC
+	jr .poison_heal_toxic
 .status_damage
+	; Poison Heal: 1/8 instead of 1/16 damage (Toxic: the same amount)
+	ld a, [wMSimFlags5]
+	bit MSIM_\2_POISON_HEAL_F, a
+	jr z, .take_damage
+	ld a, 3
+	call MSim_\1MaxShare
+.poison_heal_toxic
+	ld a, [wMSimFlags5]
+	bit MSIM_\2_POISON_HEAL_F, a
+	jr z, .take_damage
+	call MSim_Heal\1
+	jr .seed
+.take_damage
 	call MSim_Subtract\1HP
 	jr c, .faints
 .seed
@@ -2129,6 +2160,27 @@ ENDM
 	msim_residual Enemy, E, MSIM_PLAYER_WINS, wEnemyMon, wEnemySubStatus, Player
 	msim_residual Player, P, MSIM_ENEMY_WINS, wBattleMon, wPlayerSubStatus, Enemy
 
+MSim_EnemyPoisonHeals:
+; Poison Heal only works on poison: clear its flag if the enemy's status
+; isn't poison (a burn still hurts).
+	ld a, [wEnemyMonStatus]
+	and 1 << PSN
+	ret nz
+	ld hl, wMSimFlags5
+	res MSIM_E_POISON_HEAL_F, [hl]
+	ret
+
+MSim_PlayerPoisonHeals:
+	ld a, [wBattleMonStatus]
+	and 1 << PSN
+	ret nz
+	ld a, [wMSimInflict]
+	and 1 << MSIM_INF_PSN_F | 1 << MSIM_INF_TOX_F
+	ret nz
+	ld hl, wMSimFlags5
+	res MSIM_P_POISON_HEAL_F, [hl]
+	ret
+
 MSim_EndOfTurn:
 ; Sandstorm / hail while it lasts, then Leftovers. a = 0, or the winner
 ; (if both go down, the player wins).
@@ -2155,6 +2207,9 @@ MSim_EndOfTurn:
 	ld a, MSIM_PLAYER_WINS
 	ret c
 .leftovers
+	call MSim_TurnEndAbilities
+	and a
+	ret nz
 	ld a, [wMSimFlags2]
 	bit MSIM_E_LEFTOVERS_F, a
 	jr z, .player_leftovers
@@ -2170,6 +2225,179 @@ MSim_EndOfTurn:
 	call MSim_HealPlayer
 .done
 	xor a
+	ret
+
+MSim_TurnEndAbilities:
+; Solar Power's HP loss, then healing abilities (Recovery, Rain Dish, Ice
+; Body, Sand Body, Photosynthesis: 1/16) and Hydration. The weather ones only
+; while the weather lasts. a = 0, or the winner.
+	ld a, [wMSimFlags4]
+	and a
+	ret z
+	ld b, a
+	ld a, [wMSimWeatherTurns]
+	and a
+	jr nz, .weather_on
+	; the weather is over: abilities that need it stop
+	bit MSIM_E_TE_WEATHER_F, b
+	jr z, .enemy_keeps
+	ld a, b
+	and %10101010
+	ld b, a
+.enemy_keeps
+	bit MSIM_P_TE_WEATHER_F, b
+	jr z, .weather_on
+	ld a, b
+	and %01010101
+	ld b, a
+.weather_on
+	; Solar Power (the player's first: if both go down, the player wins)
+	bit MSIM_P_TE_SOLAR_F, b
+	jr z, .enemy_solar
+	push bc
+	ld a, 3
+	call MSim_PlayerMaxShare
+	call MSim_SubtractPlayerHP
+	pop bc
+	ld a, MSIM_ENEMY_WINS
+	ret c
+.enemy_solar
+	bit MSIM_E_TE_SOLAR_F, b
+	jr z, .heals
+	push bc
+	ld a, 3
+	call MSim_EnemyMaxShare
+	call MSim_SubtractEnemyHP
+	pop bc
+	ld a, MSIM_PLAYER_WINS
+	ret c
+.heals
+	bit MSIM_E_TE_HEAL_F, b
+	jr z, .player_heal
+	push bc
+	ld a, 4
+	call MSim_EnemyMaxShare
+	call MSim_HealEnemy
+	pop bc
+.player_heal
+	bit MSIM_P_TE_HEAL_F, b
+	jr z, .hydration
+	push bc
+	ld a, 4
+	call MSim_PlayerMaxShare
+	call MSim_HealPlayer
+	pop bc
+.hydration
+	ld hl, wMSimFlags3
+	bit MSIM_E_TE_HYDRATION_F, b
+	jr z, .player_hydration
+	set MSIM_E_CURED_F, [hl]
+	xor a
+	ld [wMSimEnemySleep], a
+.player_hydration
+	bit MSIM_P_TE_HYDRATION_F, b
+	jr z, .done
+	set MSIM_P_CURED_F, [hl]
+	xor a
+	ld [wMSimPlayerSleep], a
+.done
+	xor a
+	ret
+
+MSim_SetupTurnEnd:
+; wMSimFlags4 / wMSimFlags5 for both mons' turn-end abilities (by the
+; weather now; not while Neutralizing Gas suppresses them).
+	ld a, [wEnemyMonSpecies]
+	ld c, a
+	call .bits
+	ld a, b
+	ld [wMSimFlags4], a
+	ld a, [wBattleMonSpecies]
+	ld c, a
+	call .bits
+	sla b
+	ld a, [wMSimFlags4]
+	or b
+	ld [wMSimFlags4], a
+	; Poison Heal
+	ld hl, wMSimFlags5
+	ld a, [wEnemyMonSpecies]
+	push hl
+	ld hl, PoisonHealPokemon
+	ld d, BANK(PoisonHealPokemon)
+	call MSim_IsInFarAbilityList
+	pop hl
+	jr nc, .player_poison_heal
+	set MSIM_E_POISON_HEAL_F, [hl]
+.player_poison_heal
+	ld a, [wBattleMonSpecies]
+	push hl
+	ld hl, PoisonHealPokemon
+	ld d, BANK(PoisonHealPokemon)
+	call MSim_IsInFarAbilityList
+	pop hl
+	ret nc
+	set MSIM_P_POISON_HEAL_F, [hl]
+	ret
+
+.bits
+; c = species: b = its bits (in the enemy's positions).
+	ld b, 0
+	ld a, c
+	ld hl, RecoveryPokemon
+	ld d, BANK(RecoveryPokemon)
+	call MSim_IsInFarAbilityList
+	jr c, .heal
+	ld a, [wBattleWeather]
+	cp WEATHER_RAIN
+	jr z, .rain
+	cp WEATHER_HAIL
+	jr z, .hail
+	cp WEATHER_SANDSTORM
+	jr z, .sand
+	cp WEATHER_SUN
+	ret nz
+	ld a, c
+	ld hl, SolarPowerHPLossPokemon
+	ld d, BANK(SolarPowerHPLossPokemon)
+	call MSim_IsInFarAbilityList
+	jr c, .solar
+	ld a, c
+	ld hl, PhotosynthesisPokemon
+	ld d, BANK(PhotosynthesisPokemon)
+	jr .weather_heal
+.rain
+	ld a, c
+	ld hl, HydrationPokemon
+	ld d, BANK(HydrationPokemon)
+	call MSim_IsInFarAbilityList
+	jr c, .hydration
+	ld a, c
+	ld hl, RainDishPokemon
+	ld d, BANK(RainDishPokemon)
+	jr .weather_heal
+.hail
+	ld a, c
+	ld hl, IceBodyPokemon
+	ld d, BANK(IceBodyPokemon)
+	jr .weather_heal
+.sand
+	ld a, c
+	ld hl, SandBodyPokemon
+	ld d, BANK(SandBodyPokemon)
+.weather_heal
+	call MSim_IsInFarAbilityList
+	ret nc
+	ld b, 1 << MSIM_E_TE_HEAL_F | 1 << MSIM_E_TE_WEATHER_F
+	ret
+.heal
+	ld b, 1 << MSIM_E_TE_HEAL_F
+	ret
+.hydration
+	ld b, 1 << MSIM_E_TE_HYDRATION_F | 1 << MSIM_E_TE_WEATHER_F
+	ret
+.solar
+	ld b, 1 << MSIM_E_TE_SOLAR_F | 1 << MSIM_E_TE_WEATHER_F
 	ret
 
 MSim_EnemyWeather:
@@ -3205,6 +3433,14 @@ MSim_T1Inflict:
 	ret
 
 .poison
+	; Poison Heal would heal it
+	push bc
+	ld a, [wBattleMonSpecies]
+	ld hl, PoisonHealPokemon
+	ld d, BANK(PoisonHealPokemon)
+	call MSim_IsInFarAbilityList
+	pop bc
+	jr c, .none
 	ld a, POISON
 	call .has_type
 	jr z, .none

@@ -3875,6 +3875,13 @@ wMSimEntryPlayerStats:: db
 ; none): AI_MatchupSwitch then keeps the mon in to use it
 wMSimMoveWinsVs:: db
 
+SECTION "AI Matchup Turn End", WRAM0
+
+; the matchup sim's per-side ability flags (MSim_SetupSides)
+wMSimFlags4:: db ; MSIM_*_TE_*: end-of-turn healing / Hydration / Solar Power
+wMSimFlags5:: db ; Poison Heal, Speed Boost
+wMSimSpeedSteps:: db ; Speed Boost stages gained so far: enemy (low nibble), player (high)
+
 SECTION "AI Teleport Plan", WRAM0
 
 wAITeleportPlan:: db ; AI_TELEPORT_PLAN_*: this turn's switch decision
