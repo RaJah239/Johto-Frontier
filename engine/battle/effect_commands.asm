@@ -3796,6 +3796,10 @@ BattleCommand_PoisonTarget:
 	; Leaf Guard in the sun (silently)
 	newfarcall LeafGuardBlocksSecondary ; engine/abilities/leaf_guard.asm
 	ret c
+	; Magic Bounce: the status bounces back at the user (if it can take it)
+	ld hl, BattleCommand_PoisonTarget
+	newfarcall MagicBounceSecondary ; engine/abilities/magic_bounce.asm
+	ret c
 
 	call PoisonOpponent
 	ld de, ANIM_PSN
@@ -4029,7 +4033,7 @@ BattleCommand_BurnTarget:
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVarAddr
 	and a
-	jr nz, Defrost
+	jmp nz, Defrost
 	ld a, [wTypeModifier]
 	and EFFECTIVENESS_MASK
 	ret z
@@ -4041,6 +4045,10 @@ BattleCommand_BurnTarget:
 ; === Ability: Kindle ===
 ; =======================
 ; certain Pokemon always burn with flamethrower
+	; (not for a side effect Magic Bounce sends back: it already happened)
+	ld a, [wEntryAbilitiesPending]
+	bit MAGIC_BOUNCE_ACTIVE_F, a
+	jr nz, .done
 	; check move
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
@@ -4078,6 +4086,10 @@ BattleCommand_BurnTarget:
 	ret nz
 	; Leaf Guard in the sun (silently)
 	newfarcall LeafGuardBlocksSecondary ; engine/abilities/leaf_guard.asm
+	ret c
+	; Magic Bounce: the status bounces back at the user (if it can take it)
+	ld hl, BattleCommand_BurnTarget
+	newfarcall MagicBounceSecondary ; engine/abilities/magic_bounce.asm
 	ret c
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVarAddr
@@ -4159,6 +4171,10 @@ BattleCommand_FreezeTarget:
 	; Leaf Guard in the sun (silently)
 	newfarcall LeafGuardBlocksSecondary ; engine/abilities/leaf_guard.asm
 	ret c
+	; Magic Bounce: the status bounces back at the user (if it can take it)
+	ld hl, BattleCommand_FreezeTarget
+	newfarcall MagicBounceSecondary ; engine/abilities/magic_bounce.asm
+	ret c
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVarAddr
 	set FRZ, [hl]
@@ -4190,6 +4206,10 @@ BattleCommand_ParalyzeTarget:
 ; === Ability: Sure Shock ===
 ; ===========================
 ; certain Pokemon always paralyze with T-bolt
+	; (not for a side effect Magic Bounce sends back: it already happened)
+	ld a, [wEntryAbilitiesPending]
+	bit MAGIC_BOUNCE_ACTIVE_F, a
+	jr nz, .done
 	; check move
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
@@ -4227,6 +4247,10 @@ BattleCommand_ParalyzeTarget:
 	ret nz
 	; Leaf Guard in the sun (silently)
 	newfarcall LeafGuardBlocksSecondary ; engine/abilities/leaf_guard.asm
+	ret c
+	; Magic Bounce: the status bounces back at the user (if it can take it)
+	ld hl, BattleCommand_ParalyzeTarget
+	newfarcall MagicBounceSecondary ; engine/abilities/magic_bounce.asm
 	ret c
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVarAddr

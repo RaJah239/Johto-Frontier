@@ -14,6 +14,15 @@
 ;
 ; Roar / Whirlwind bounced back drag the user out (it has acted this turn).
 ;
+; Side effects too: when a damaging move's side effect (poison, burn,
+; frostbite, paralysis: Flamethrower, Thunderbolt, Ice Beam, Tri Attack...)
+; would give the Magic Bounce mon a status, it doesn't get it, and the user
+; gets it instead if it can (not a Fire-type for a burn, a Poison- or
+; Steel-type for poison, an Ice-type or in the sun for frostbite, nor
+; already statused, behind a Substitute, Safeguarded, Serenity, Leaf Guard
+; in the sun). The popup only slides in when the user does get it. The
+; move's damage is dealt as usual. (MagicBounceSecondary)
+;
 ; How: BattleCommand_DoTurn (once the user has paid the move's PP) calls
 ; MagicBounceCheck. To bounce, the target's current move becomes this move
 ; and the turn switches to it, so the rest of the move's script runs as the
@@ -118,6 +127,83 @@ MagicBounceEnd::
 	farcall UpdateMoveData
 .switch
 	farjp BattleCommand_SwitchTurn
+
+MagicBounceSecondary::
+; A damaging move's side effect is about to give the target (hBattleTurn's
+; foe) a status; hl = that BattleCommand_*Target (effect commands bank).
+; Carry if it doesn't land (the caller returns). Use with newfarcall.
+; A Magic Bounce target doesn't get it: the side effect runs again from the
+; Magic Bounce mon at the user, so the user gets it if it can (that run does
+; all the checks: no status yet, Substitute, types, Safeguard, Leaf
+; Guard...), and only then does the popup slide in (just below).
+	ld a, [wEntryAbilitiesPending]
+	bit MAGIC_BOUNCE_ACTIVE_F, a
+	jr nz, .landing_on_user
+	push hl
+	call GetOpposingMon
+	ld hl, MagicBouncePokemon
+	call IsInAbilityListNG
+	pop hl
+	ret nc ; no Magic Bounce: it lands
+	call MoldBreakerBypass
+	ccf
+	ret nc ; Mold Breaker: it lands
+	; the user must have no status (a Fire move would thaw it instead) and no
+	; Serenity (that run would show Serenity's popup)
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVar
+	and a
+	jr nz, .blocked
+	newfarcall UserHasSerenity ; engine/battle/effect_commands.asm
+	jr c, .blocked
+	push hl
+	ld hl, wEntryAbilitiesPending
+	set MAGIC_BOUNCE_ACTIVE_F, [hl]
+	farcall BattleCommand_SwitchTurn
+	pop hl
+	ld a, BANK(BattleCommand_PoisonTarget) ; (all four are there)
+	call FarCall_hl
+	farcall BattleCommand_SwitchTurn
+	ld hl, wEntryAbilitiesPending
+	res MAGIC_BOUNCE_ACTIVE_F, [hl]
+.blocked
+	scf
+	ret
+
+.landing_on_user
+	; (the run from the Magic Bounce mon: hBattleTurn is it) it's about to
+	; give the user the status: the popup slides in over the Magic Bounce mon
+	ld b, BANK(@)
+	ld de, MagicBounceText
+	ldh a, [hBattleTurn]
+	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
+	farcall ShowAbilityPopup
+	ld a, [wOptions4]
+	bit ABILITY_BANNERS, a
+	jr z, .shown
+	ld c, 30
+	call DelayFrames
+.shown
+	and a
+	ret
+
+AI_PlayerHasMagicBounce::
+; Carry if the player's mon has Magic Bounce and the enemy's mon doesn't have
+; Mold Breaker (a side effect would bounce back). Use with newfarcall;
+; preserves bc, de and hl.
+	push hl
+	push de
+	push bc
+	ld a, [wBattleMonSpecies]
+	ld hl, MagicBouncePokemon
+	call IsInAbilityList
+	jr nc, .done
+	ld a, [wEnemyMonSpecies]
+	ld hl, MoldBreakerPokemon
+	call IsInAbilityList
+	ccf
+.done
+	jmp PopBCDEHL
 
 MagicBounceIsReflectable:
 ; Carry if the user's move (hBattleTurn) is a status move Magic Bounce
