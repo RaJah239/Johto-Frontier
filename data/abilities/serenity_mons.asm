@@ -9,7 +9,8 @@
 
 ; (one list for both the battle and the AI: engine/battle/effect_commands.asm includes it
 ; as SerenityPokemon, engine/battle/ai/ability_lists.asm as SerenityPokemon_AI)
-	db MEGANIUM
-	db SYLVEON
-	db MEW
+
+;	db MEGANIUM
+;	db SYLVEON
+;	db MEW
     db -1 ; end

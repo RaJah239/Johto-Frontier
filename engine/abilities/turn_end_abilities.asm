@@ -371,13 +371,7 @@ TenacityText: db "Tenacity@"
 SolarPowerHPLossText: db "SolarPower@"
 
 SolarPowerHPLossPokemon:
-	db SUNKERN
-	db SUNFLORA
-	db TROPIUS
-	db CHARMANDER
-	db CHARMELEON
-	db CHARIZARD
-	db -1 ; end
+INCLUDE "data/abilities/solar_power_mons.asm" ; (the battle's list)
 
 INCLUDE "data/abilities/recovery_mons.asm"
 INCLUDE "data/abilities/speed_boost_mons.asm"

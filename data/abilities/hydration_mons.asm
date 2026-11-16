@@ -3,7 +3,8 @@
 
 ; (one list for both the battle and the AI: engine/abilities/turn_end_abilities.asm includes it
 ; as HydrationPokemon, engine/battle/ai/ability_lists.asm as HydrationPokemon_AI)
-	db SEEL
-	db DEWGONG
-	db LAPRAS
+
+;	db SEEL
+;	db DEWGONG
+;	db LAPRAS
     db -1 ; end
