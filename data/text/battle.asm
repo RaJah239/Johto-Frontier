@@ -1306,7 +1306,3 @@ BattleText_WildItemDropFull:
 
 	para "The item was lost."
 	prompt
-
-BattleText_FoeIsThinking:
-	text "Foe is thinking…"
-	done
