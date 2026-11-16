@@ -2588,6 +2588,11 @@ MSim_PlayerBoostThreat:
 MSim_FindBoost:
 ; Carry and hl = the stat changes (Atk, Def, Spe, SpA, SpD) of the enemy
 ; mon's first usable boosting move.
+; (none with Contrary: they would lower its stats)
+	ld a, [wEnemyMonSpecies]
+	newfarcall IsContrarySpecies
+	ccf
+	ret nc
 	ld hl, wEnemyMonMoves
 	ld de, wEnemyMonPP
 	ld b, NUM_MOVES
@@ -2929,6 +2934,10 @@ MSim_EvalSlot:
 	ld a, [wMSimMode]
 	bit MSIM_MODE_SETUP_F, a
 	jp z, .not_simulated ; (2nd pass)
+	; with Contrary it would lower them instead
+	ld a, [wEnemyMonSpecies]
+	newfarcall IsContrarySpecies
+	jp c, .not_simulated
 	; a boost that raises nothing (its stats are all maxed) isn't played out
 	push hl
 	ld de, wEnemyStatLevels

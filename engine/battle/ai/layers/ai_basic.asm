@@ -118,6 +118,15 @@ AI_Basic:
 ; ========================
 ; === Ability: Contrary ===
 ; ========================
+; Never raise its own stats with a status move while it has Contrary: they
+; would go down instead.
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	call AI_IsSelfBoostEffect
+	jr nc, .not_self_boost
+	ld a, [wEnemyMonSpecies]
+	newfarcall IsContrarySpecies
+	jmp c, .discourage
+.not_self_boost
 ; Never use a stat-lowering status move (or Sticky Web) on a Contrary
 ; player mon, since it would raise the stat instead.
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
@@ -349,3 +358,36 @@ AI_Basic:
 .discourage
 	call AIDiscourageMove
 	jmp .checkmove
+
+AI_IsSelfBoostEffect:
+; Carry if move effect a only raises the user's stats. Preserves bc, de, hl.
+	cp EFFECT_ATTACK_UP
+	jr c, .no
+	cp EFFECT_EVASION_UP + 1
+	ret c
+	cp EFFECT_ATTACK_UP_2
+	jr c, .no
+	cp EFFECT_EVASION_UP_2 + 1
+	ret c
+	cp EFFECT_BULK_UP
+	jr z, .yes
+	cp EFFECT_CALM_MIND
+	jr z, .yes
+	cp EFFECT_DRAGON_DANCE
+	jr z, .yes
+	cp EFFECT_QUIVER_DANCE
+	jr z, .yes
+	cp EFFECT_BARRIER
+	jr z, .yes
+	cp EFFECT_FURY_DRIVE
+	jr z, .yes
+	cp EFFECT_GROWTH
+	jr z, .yes
+	cp EFFECT_MYSTIC_DANCE
+	jr z, .yes
+.no
+	and a
+	ret
+.yes
+	scf
+	ret
