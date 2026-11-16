@@ -25,7 +25,6 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_MoveFromUserToTargetAndDisappear
 	dw BattleAnimFunc_MoveInCircle
 	dw BattleAnimFunc_MoveWaveToTarget
-	dw BattleAnimFunc_ThrowFromUserToTarget
 	dw BattleAnimFunc_ThrowFromUserToTargetAndDisappear
 	dw BattleAnimFunc_Drop
 	dw BattleAnimFunc_MoveFromUserToTargetSpinAround
@@ -46,7 +45,6 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_Clamp_Encore
 	dw BattleAnimFunc_Bite
 	dw BattleAnimFunc_Gust
-	dw BattleAnimFunc_RazorWind
 	dw BattleAnimFunc_Kick
 	dw BattleAnimFunc_Absorb
 	dw BattleAnimFunc_Egg
@@ -67,11 +65,9 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_Needle
 	dw BattleAnimFunc_AbsorbCircle
 	dw BattleAnimFunc_Shiny
-	dw BattleAnimFunc_SkyAttack
 	dw BattleAnimFunc_GrowthSwordsDance
 	dw BattleAnimFunc_SmokeFlameWheel
 	dw BattleAnimFunc_PresentSmokescreen
-	dw BattleAnimFunc_StrengthSeismicToss
 	dw BattleAnimFunc_SpeedLine
 	dw BattleAnimFunc_Sludge
 	dw BattleAnimFunc_MetronomeHand
@@ -89,15 +85,11 @@ DoBattleAnimFrame:
 	dw BattleAnimFunc_PerishSong
 	dw BattleAnimFunc_RapidSpin
 	dw BattleAnimFunc_RainSandstorm
-	dw BattleAnimFunc_PsychUp
 	dw BattleAnimFunc_AncientPower
 	dw BattleAnimFunc_RockSmash
-	dw BattleAnimFunc_Cotton
 	dw BattleAnimFunction_PowerGem
 	dw BattleAnimFunc_IceSplash
 	dw BattleAnimFunc_RockTomb
-	dw BattleAnimFunction_55
-	dw BattleAnimFunc_StraightDescent
 	dw BattleAnimFunc_RadialMoveOut
 	dw BattleAnimFunc_FallAndStop
 	dw BattleAnimFunc_Hurricane
@@ -1860,16 +1852,6 @@ BattleAnimFunc_Spikes:
 	jr nc, BattleAnim_StepThrownToTarget
 	jmp BattleAnim_IncAnonJumptableIndex
 
-BattleAnimFunc_RazorWind:
-	call BattleAnimFunc_MoveInCircle
-	; Causes object to skip ahead the circular motion every frame
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hl]
-	add $f
-	ld [hl], a
-	ret
-
 BattleAnimFunc_Kick:
 ; Uses anim_setobj for different kick types
 	call BattleAnim_AnonJumptable
@@ -2907,82 +2889,6 @@ BattleAnimFunc_Shiny:
 	ld [hl], $f
 	ret
 
-BattleAnimFunc_SkyAttack:
-; Uses anim_incobj to move to next step
-	call BattleAnim_AnonJumptable
-
-	dw .zero
-	dw .SkyAttack_CyclePalette
-	dw .two
-	dw .three
-
-.zero
-	call BattleAnim_IncAnonJumptableIndex
-	ldh a, [hBattleTurn]
-	and a
-	ld a, $cc
-	jr nz, .got_var1
-	ld a, $f0
-.got_var1
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], a
-	ret
-
-.two
-; Moves towards target and stops at x coord $84
-	call .SkyAttack_CyclePalette
-	ld hl, BATTLEANIMSTRUCT_XCOORD
-	add hl, bc
-	ld a, [hl]
-	cp $84
-	ret nc
-	ld a, $4
-	jmp BattleAnim_StepToTarget
-
-.three
-; Moves towards target and disappears at x coord $d0
-	call .SkyAttack_CyclePalette
-	ld hl, BATTLEANIMSTRUCT_XCOORD
-	add hl, bc
-	ld a, [hl]
-	cp $d0
-	jmp nc, FarDeinitBattleAnimation
-	ld a, $4
-	jmp BattleAnim_StepToTarget
-
-.SkyAttack_CyclePalette:
-; Cycles wOBP0 pallete
-	ld hl, BATTLEANIMSTRUCT_VAR2
-	add hl, bc
-	ld a, [hl]
-	and $7
-	inc [hl]
-	srl a
-	ld e, a
-	ld d, 0
-	ldh a, [hSGB]
-	and a
-	jr nz, .sgb
-	ld hl, .GBCPals
-	jr .got_pals
-
-.sgb
-	ld hl, .SGBPals
-.got_pals
-	add hl, de
-	ld a, [hl]
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	and [hl]
-	ld [wOBP0], a
-	ret
-
-.GBCPals:
-	db $ff, $aa, $55, $aa
-.SGBPals:
-	db $ff, $ff, $00, $00
-
 BattleAnimFunc_GrowthSwordsDance:
 ; Moves object in a circle where the height is 1/8 the width, while also moving upward 2 pixels per frame
 ; Obj Param: Defines where the object starts in the circle
@@ -3014,76 +2920,6 @@ BattleAnimFunc_GrowthSwordsDance:
 	dec [hl]
 	dec [hl]
 	ret
-
-BattleAnimFunc_StrengthSeismicToss:
-; Moves object up for $e0 frames, then shakes it vertically and throws it at the target. Uses anim_incobj to move to final phase
-; Obj Param: Defined but not used
-	call BattleAnim_AnonJumptable
-
-	dw .zero
-	dw .one
-	dw .two
-
-.zero
-	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld a, [hl]
-	cp $e0
-	jr nz, .move_up
-	call BattleAnim_IncAnonJumptableIndex
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], $2
-	ret
-
-.move_up
-	ld d, a
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld e, [hl]
-	ld hl, -$80
-	add hl, de
-	ld e, l
-	ld d, h
-	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], d
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], e
-	ret
-
-.one
-	ld hl, BATTLEANIMSTRUCT_VAR2
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr z, .switch_position
-	dec [hl]
-	ret
-
-.switch_position
-	ld [hl], $4
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hl]
-	cpl
-	inc a
-	ld [hl], a
-	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	add [hl]
-	ld [hl], a
-	ret
-
-.two
-	ld hl, BATTLEANIMSTRUCT_XCOORD
-	add hl, bc
-	ld a, [hl]
-	cp $84
-	jmp nc, FarDeinitBattleAnimation
-	ld a, $4
-	jmp BattleAnim_StepToTarget
 
 BattleAnimFunc_SpeedLine:
 ; Used in moves where the user disappears for a speed-based attack such as Quick Attack, Mach Punch and Extremespeed
@@ -3547,30 +3383,6 @@ BattleAnimFunc_RainSandstorm:
 	ld [hl], a
 	ret
 
-BattleAnimFunc_PsychUp:
-; Object moves in a circle
-; Obj Param: Defines starting position in the circle
-	ld d, $18
-	ld hl, BATTLEANIMSTRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	inc [hl]
-	jr BattleAnim_StepCircle
-
-BattleAnimFunc_Cotton:
-; Object moves in a circle slowly
-; Obj Param: Defines starting position in the circle
-	ld d, $18
-	ld hl, BATTLEANIMSTRUCT_VAR2
-	add hl, bc
-	ld a, [hl]
-	inc [hl]
-	srl a
-	ld hl, BATTLEANIMSTRUCT_PARAM
-	add hl, bc
-	add [hl]
-	; fallthrough
-
 BattleAnim_StepCircle:
 ; Inches object in a circular movement where its height is 1/4 the width
 	push af
@@ -3766,57 +3578,6 @@ BattleAnimFunc_RockTomb:
 	ld a, [hl]
 	and $3f
 	jmp z, BattleAnim_IncAnonJumptableIndex
-	ret
-
-BattleAnimFunction_55:
-	call BattleAnim_AnonJumptable
-
-	dw .zero
-	dw .one
-	dw .two
-
-.zero
-	ld d, 24
-	ld hl, BATTLEANIMSTRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	inc [hl]
-	jmp BattleAnim_StepCircle
-
-.one
-	call BattleAnim_IncAnonJumptableIndex
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], 24
-.two
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hl]
-	cp 160
-	jmp nc, FarDeinitBattleAnimation
-	ld d, a
-	add 3
-	ld [hl], a
-	ld hl, BATTLEANIMSTRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	jmp BattleAnim_StepCircle
-
-BattleAnimFunc_StraightDescent:
-; Reverse 1E
-	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld a, [hl]
-	cp $28
-	jmp nc, FarDeinitBattleAnimation
-	ld hl, BATTLEANIMSTRUCT_PARAM
-	add hl, bc
-	ld d, [hl]
-	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld a, [hl]
-	add d
-	ld [hl], a
 	ret
 
 BattleAnimFunc_FallAndStop:

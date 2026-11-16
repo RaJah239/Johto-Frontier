@@ -81,7 +81,6 @@ BattleBGEffects:
 ; entries correspond to BATTLE_BG_EFFECT_* constants
 	dw BattleBGEffect_End
 	dw BattleBGEffect_FlashInverted
-	dw BattleBGEffect_FlashWhite
 	dw BattleBGEffect_WhiteHues
 	dw BattleBGEffect_BlackHues
 	dw BattleBGEffect_AlternateHues
@@ -99,7 +98,6 @@ BattleBGEffects:
 	dw BattleBGEffect_BattlerObj_1Row
 	dw BattleBGEffect_BattlerObj_2Row
 	dw BattleBGEffect_FadeMonToLight
-	dw BattleBGEffect_FadeMonToBlack
 	dw BattleBGEffect_FadeMonToLightRepeating
 	dw BattleBGEffect_FadeMonToBlackRepeating
 	dw BattleBGEffect_CycleMonLightDarkRepeating
@@ -122,7 +120,6 @@ BattleBGEffects:
 	dw BattleBGEffect_Water
 	dw BattleBGEffect_EndWater
 	dw BattleBGEffect_VibrateMon
-	dw BattleBGEffect_WobblePlayer
 	dw BattleBGEffect_DoubleTeam
 
 BattleBGEffect_End:
@@ -1770,14 +1767,6 @@ BattleBGEffect_FadeMonToLight:
 .Pals:
 	db $e4, $90, $40, $ff
 
-BattleBGEffect_FadeMonToBlack:
-; BG_EFFECT_STRUCT_BATTLE_TURN = BG_EFFECT_TARGET or BG_EFFECT_USER
-	ld de, .Pals
-	jmp BGEffect_RapidCyclePals
-
-.Pals:
-	db $e4, $f8, $fc, $ff
-
 BattleBGEffect_FadeMonToLightRepeating:
 ; BG_EFFECT_STRUCT_BATTLE_TURN = BG_EFFECT_TARGET or BG_EFFECT_USER
 	ld de, .Pals
@@ -1854,49 +1843,6 @@ BattleBGEffect_VibrateMon:
 	jmp BGEffect_FillLYOverridesBackup
 
 .finish
-	jmp BattleAnim_ResetLCDStatCustom
-
-BattleBGEffect_WobblePlayer:
-; Always affects the player
-	call BattleBGEffects_AnonJumptable
-.anon_dw
-	dw .zero
-	dw .one
-	dw .two
-
-.zero
-	call BattleBGEffects_IncAnonJumptableIndex
-	call BattleBGEffects_ClearLYOverrides
-	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
-	ld a, LOW(rSCX)
-	ldh [hLCDCPointer], a
-	xor a
-	ldh [hLYOverrideStart], a
-	ld a, $37
-	ldh [hLYOverrideEnd], a
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld [hl], $0
-	ret
-
-.one
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	cp $40
-	jr nc, .two
-	ld d, $6
-	call BattleBGEffects_Sine
-	call BGEffect_FillLYOverridesBackup
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	add $2
-	ld [hl], a
-	ret
-
-.two
 	jmp BattleAnim_ResetLCDStatCustom
 
 BattleBGEffect_DoubleTeam:

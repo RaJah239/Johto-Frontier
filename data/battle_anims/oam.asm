@@ -109,7 +109,6 @@ BattleAnimOAMData:
 	battleanimoam $00,  4, .OAMData_65 ; BATTLE_ANIM_OAMSET_65
 	battleanimoam $00,  7, .OAMData_65 ; BATTLE_ANIM_OAMSET_66
 	battleanimoam $00,  9, .OAMData_65 ; BATTLE_ANIM_OAMSET_67
-	battleanimoam $09,  9, .OAMData_65 ; BATTLE_ANIM_OAMSET_68
 	battleanimoam $04,  1, .OAMData_69 ; BATTLE_ANIM_OAMSET_69
 	battleanimoam $05,  2, .OAMData_6a ; BATTLE_ANIM_OAMSET_6A
 	battleanimoam $06,  4, .OAMData_03 ; BATTLE_ANIM_OAMSET_6B
@@ -190,7 +189,6 @@ BattleAnimOAMData:
 	battleanimoam $16,  9, .OAMData_01 ; BATTLE_ANIM_OAMSET_C0
 	battleanimoam $10, 16, .OAMData_c1 ; BATTLE_ANIM_OAMSET_C1
 	battleanimoam $09,  6, .OAMData_c2 ; BATTLE_ANIM_OAMSET_C2
-	battleanimoam $11,  9, .OAMData_c3 ; BATTLE_ANIM_OAMSET_C3
 	battleanimoam $0e,  4, .OAMData_03 ; BATTLE_ANIM_OAMSET_C4
 	battleanimoam $0b,  4, .OAMData_30 ; BATTLE_ANIM_OAMSET_C5
 	battleanimoam $1c,  6, .OAMData_02 ; BATTLE_ANIM_OAMSET_C6
@@ -212,7 +210,6 @@ BattleAnimOAMData:
 	battleanimoam $00, 14, .OAMData_d6 ; BATTLE_ANIM_OAMSET_D6
 	battleanimoam $00, 12, .OAMData_d7 ; BATTLE_ANIM_OAMSET_D7
 	battleanimoam $00, 13, .OAMData_Hail ; BATTLEANIMOAMSET_HAIL
-	battleanimoam $00,  6, .OAMData_Icicle ; BATTLE_ANIM_OAMSET_ICICLE
 	battleanimoam $02,  2, .OAMData_StoneEdge ; BATTLE_ANIM_OAMSET_STONE_EDGE
 	battleanimoam $00, 18, .OAMData_Hurricane ; BATTLE_ANIM_OAMSET_HURRICANE
 	battleanimoam $00, 18, .OAMData_BulkUp  ; BATTLE_ANIM_OAMSET_BULK_UP1
@@ -300,16 +297,9 @@ endr
 	dbsprite  -1,   0, 0, 0, $00, Y_FLIP
 	dbsprite   0,   0, 0, 0, $00, X_FLIP | Y_FLIP
 
-.OAMData_c3:
+; BATTLE_ANIM_OAMSET_C6 reads 6 sprites from .OAMData_02: its 4 and these 2
 	dbsprite  -2,  -2, 4, 4, $00, $0
 	dbsprite  -1,  -2, 4, 4, $01, $0
-	dbsprite   0,  -2, 4, 4, $02, $0
-	dbsprite  -2,  -1, 4, 4, $03, $0
-	dbsprite  -1,  -1, 4, 4, $04, $0
-	dbsprite   0,  -1, 4, 4, $05, $0
-	dbsprite  -2,   0, 4, 4, $06, $0
-	dbsprite  -1,   0, 4, 4, $07, $0
-	dbsprite   0,   0, 4, 4, $08, $0
 
 .OAMData_01:
 	dbsprite  -2,  -2, 4, 4, $00, $0
@@ -986,12 +976,6 @@ endr
 	dbsprite  -1,   0, 4, 0, $04, $0
 	dbsprite   0,   0, 4, 0, $05, $0
 
-.OAMData_99:
-	dbsprite  -1,  -1, 0, 0, $00, $0
-	dbsprite   0,  -1, 0, 0, $05, $0
-	dbsprite  -1,   0, 0, 0, $01, $0
-	dbsprite   0,   0, 0, 0, $05, $0
-
 .OAMData_9b:
 	dbsprite   1,  -4, 0, 4, $00, $0
 	dbsprite   2,  -4, 0, 4, $01, $0
@@ -1153,14 +1137,6 @@ endr
 	dbsprite   6,  -2, 4, 0, $04, $0
 	dbsprite   8,  -4, 4, 0, $04, $0
 	dbsprite  10,  -2, 4, 0, $04, $0
-
-.OAMData_Icicle:
-	dbsprite  -1, -1, 4, 0, $00, $0
-	dbsprite   0, -1, 4, 0, $01, $0
-	dbsprite  -1,  0, 4, 0, $02, $0
-	dbsprite   0,  0, 4, 0, $03, $0
-	dbsprite  -1,  1, 4, 0, $04, $0
-	dbsprite   0,  1, 4, 0, $05, $0
 
 .OAMData_StoneEdge:
 	dbsprite  -1,  -1, 4, 0, $0f, $0
