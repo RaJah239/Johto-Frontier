@@ -9,9 +9,14 @@ ItemNameOrder:
 
 
 
-; Item Pocket - 60 total
+; Item Pocket - 65 total
 ; Vitamins
 	db RARE_CANDY
+	db EXP_CANDY_XS
+	db EXP_CANDY_S
+	db EXP_CANDY_M
+	db EXP_CANDY_L
+	db EXP_CANDY_XL
 	db PP_MAX
 	db PP_UP
 	db HYPER_EV_UP
@@ -279,13 +284,8 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 8 total
+; Unused Items - 3 total
 	db EGG_TICKET
- 	db ITEM_E3
- 	db ITEM_E4
- 	db ITEM_E5
- 	db ITEM_E6
- 	db ITEM_E7
  	db ITEM_E8
  	db ITEM_E9
 
@@ -300,11 +300,6 @@ ItemAlphaOrder:
 ; data/items/names.asm (case- and accent-insensitive; ties break on item id).
 ; NO_ITEM leads so it sorts to the top, like ItemNameOrder.
 	db NO_ITEM
-	db ITEM_E3
-	db ITEM_E4
-	db ITEM_E5
-	db ITEM_E6
-	db ITEM_E7
 	db ITEM_E8
 	db ITEM_E9
 	db AMBROSIA
@@ -351,6 +346,11 @@ ItemAlphaOrder:
 	db ESCAPE_ROPE
 	db ETHER
 	db EVERSTONE
+	db EXP_CANDY_L
+	db EXP_CANDY_M
+	db EXP_CANDY_S
+	db EXP_CANDY_XL
+	db EXP_CANDY_XS
 	db EXPERT_BELT
 	db FAST_BALL
 	db FIRE_STONE

@@ -190,11 +190,11 @@ ItemIconPointers::
 	dba ScoreCardIcon ; SCORE_CARD
 	dba MusicPlayerIcon ; MUSIC_PLAYER
 	dba ScarfIcon ; CHOICE_SCARF
-	dba NoItemIcon ; ITEM_E3
-	dba NoItemIcon ; ITEM_E4
-	dba NoItemIcon ; ITEM_E5
-	dba NoItemIcon ; ITEM_E6
-	dba NoItemIcon ; ITEM_E7
+	dba ExpCandyXSIcon ; EXP_CANDY_XS
+	dba ExpCandySIcon ; EXP_CANDY_S
+	dba ExpCandyMIcon ; EXP_CANDY_M
+	dba ExpCandyLIcon ; EXP_CANDY_L
+	dba ExpCandyXLIcon ; EXP_CANDY_XL
 	dba NoItemIcon ; ITEM_E8
 	dba NoItemIcon ; ITEM_E9
 	dba MailIcon ; SURF_MAIL

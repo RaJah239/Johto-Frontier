@@ -194,11 +194,11 @@
  	const SCORE_CARD
  	const MUSIC_PLAYER
  	const CHOICE_SCARF
- 	const ITEM_E3
- 	const ITEM_E4
- 	const ITEM_E5
- 	const ITEM_E6
- 	const ITEM_E7
+ 	const EXP_CANDY_XS
+ 	const EXP_CANDY_S
+ 	const EXP_CANDY_M
+ 	const EXP_CANDY_L
+ 	const EXP_CANDY_XL
  	const ITEM_E8
  	const ITEM_E9
 ; mail

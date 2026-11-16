@@ -202,11 +202,11 @@ ItemEffects:
 	dw ScoreCardEffect     ; SCORE_CARD
 	dw MusicPlayerEffect   ; MUSIC_PLAYER
 	dw NoEffect            ; CHOICE_SCARF
-	dw NoEffect            ; ITEM_E3
-	dw NoEffect            ; ITEM_E4
-	dw NoEffect            ; ITEM_E5
-	dw NoEffect            ; ITEM_E6
-	dw NoEffect            ; ITEM_E7
+	dw ExpCandyEffect      ; EXP_CANDY_XS
+	dw ExpCandyEffect      ; EXP_CANDY_S
+	dw ExpCandyEffect      ; EXP_CANDY_M
+	dw ExpCandyEffect      ; EXP_CANDY_L
+	dw ExpCandyEffect      ; EXP_CANDY_XL
 	dw NoEffect            ; ITEM_E8
 	dw NoEffect            ; ITEM_E9
 	assert_table_length ITEM_E9
@@ -1604,6 +1604,189 @@ RareCandyEffect:
 	farcall EvolvePokemon
 
 	jmp UseDisposableItem
+
+ExpCandyEffect:
+; Exp. Candy XS / S / M / L / XL: give the mon a fixed amount of Exp. (not
+; past what level MAX_LEVEL needs), then level it up as Rare Candy does, for
+; every level gained (moves learned at each level, then evolution).
+	ld b, PARTYMENUACTION_HEALING_ITEM
+	call UseItem_SelectMon
+	jmp c, RareCandy_StatBooster_ExitMenu
+
+	call RareCandy_StatBooster_GetParameters ; nickname in wStringBuffer1
+	ld a, MON_LEVEL
+	call GetPartyParamLocation
+	ld a, [hl]
+	cp MAX_LEVEL
+	jmp nc, NoEffectMessage
+
+	; wStringBuffer2 = this candy's Exp. (big-endian), for the text too
+	ld a, [wCurItem]
+	sub EXP_CANDY_XS
+	add a
+	ld c, a
+	ld b, 0
+	ld hl, ExpCandyAmounts
+	add hl, bc
+	ld a, [hli]
+	ld [wStringBuffer2], a
+	ld a, [hl]
+	ld [wStringBuffer2 + 1], a
+
+	; wStringBuffer2 + 2 = the Exp. at MAX_LEVEL
+	ld d, MAX_LEVEL
+	farcall CalcExpAtLevel
+	ldh a, [hProduct + 1]
+	ld [wStringBuffer2 + 2], a
+	ldh a, [hProduct + 2]
+	ld [wStringBuffer2 + 3], a
+	ldh a, [hProduct + 3]
+	ld [wStringBuffer2 + 4], a
+
+	; its Exp. += the candy's
+	ld a, MON_EXP + 2
+	call GetPartyParamLocation
+	ld a, [wStringBuffer2 + 1]
+	add [hl]
+	ld [hld], a
+	ld a, [wStringBuffer2]
+	adc [hl]
+	ld [hld], a
+	ld a, 0
+	adc [hl]
+	ld [hl], a
+	; capped at the Exp. at MAX_LEVEL
+	push hl
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hl]
+	ld hl, wStringBuffer2 + 4
+	sub [hl]
+	dec hl
+	ld a, c
+	sbc [hl]
+	dec hl
+	ld a, b
+	sbc [hl]
+	pop hl
+	jr c, .got_exp
+	ld a, [wStringBuffer2 + 2]
+	ld [hli], a
+	ld a, [wStringBuffer2 + 3]
+	ld [hli], a
+	ld a, [wStringBuffer2 + 4]
+	ld [hl], a
+.got_exp
+	ld hl, ExpCandyGainedText
+	call PrintText
+
+	; its new level
+	xor a ; PARTYMON
+	ld [wMonType], a
+	predef CopyMonToTempMon
+	farcall CalcLevel
+	ld a, MON_LEVEL
+	call GetPartyParamLocation
+	ld a, [hl]
+	cp d
+	jr nz, .level_up
+	; no level gained
+	call UseDisposableItem
+	jmp ClearPalettes
+
+.level_up
+	ld b, a ; the old level
+	ld [hl], d
+	ld a, d
+	ld [wCurPartyLevel], a
+	push bc
+
+	; stats, and the max HP it gains as HP too (as Rare Candy)
+	ld a, MON_MAXHP
+	call GetPartyParamLocation
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	push bc
+	call UpdateStatsAfterItem
+	ld a, MON_MAXHP + 1
+	call GetPartyParamLocation
+	pop bc
+	ld a, [hld]
+	sub c
+	ld c, a
+	ld a, [hl]
+	sbc b
+	ld b, a
+	dec hl
+	ld a, [hl]
+	add c
+	ld [hld], a
+	ld a, [hl]
+	adc b
+	ld [hl], a
+	farcall LevelUpHappinessMod
+
+	ld a, PARTYMENUTEXT_LEVEL_UP
+	call ItemActionText
+
+	xor a ; PARTYMON
+	ld [wMonType], a
+	predef CopyMonToTempMon
+
+	hlcoord 9, 0
+	lb bc, 10, 9
+	call Textbox
+
+	hlcoord 11, 1
+	ld bc, 4
+	predef PrintTempMonStats
+
+	call WaitPressAorB_BlinkCursor
+
+	; the moves of every level it gained
+	pop bc ; b = the old level
+	ld a, [wCurPartyLevel]
+	ld c, a
+.learn_loop
+	inc b
+	ld a, b
+	ld [wCurPartyLevel], a
+	push bc
+	xor a ; PARTYMON
+	ld [wMonType], a
+	ld a, [wCurPartySpecies]
+	ld [wTempSpecies], a
+	predef LearnLevelMoves
+	pop bc
+	ld a, b
+	cp c
+	jr nz, .learn_loop
+
+	xor a
+	ld [wForceEvolution], a
+	farcall EvolvePokemon
+
+	jmp UseDisposableItem
+
+ExpCandyAmounts:
+	table_width 2
+	bigdw 100   ; EXP_CANDY_XS
+	bigdw 800   ; EXP_CANDY_S
+	bigdw 3000  ; EXP_CANDY_M
+	bigdw 10000 ; EXP_CANDY_L
+	bigdw 30000 ; EXP_CANDY_XL
+	assert_table_length EXP_CANDY_XL - EXP_CANDY_XS + 1
+
+ExpCandyGainedText:
+	text_ram wStringBuffer1
+	text " gained"
+	line "@"
+	text_decimal wStringBuffer2, 2, 5
+	text " Exp. Points!"
+	prompt
 
 HealPowderEffect:
 	ld b, PARTYMENUACTION_HEALING_ITEM
