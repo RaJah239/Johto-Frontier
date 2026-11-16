@@ -547,8 +547,8 @@ QuickAttackDescription:
 	line "in the first hit.@"
 
 TeleportDescription:
-	db   "A move for fleeing"
-	line "from battle.@"
+	db   "Wild: Flee."
+	line "Trainer: Switch.@"
 
 IceFangDescription:
 	db   "May frostbite or"

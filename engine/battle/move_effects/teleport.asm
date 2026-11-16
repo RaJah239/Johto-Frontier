@@ -1,6 +1,7 @@
 BattleCommand_Teleport:
 ; Wild battles: the user escapes (the wild mon flees, or the player runs
-; away). Only when both mons are the same level it's a 50% chance.
+; away) from a higher-level foe, always; against a lower-level foe it always
+; fails; at the same level it's a 50% chance.
 ; Trainer battles: the user switches out, like a switch (the player picks the
 ; mon, the AI picks its best one). Teleport's priority is 0, so it goes last.
 ; It fails in scripted battles, when the user is trapped (Mean Look, Spider
@@ -23,13 +24,23 @@ BattleCommand_Teleport:
 	dec a
 	jr nz, .switch
 
-	; wild battle: same level, 50% chance; otherwise it always works
-	ld a, [wCurPartyLevel] ; the wild mon's level
-	ld b, a
+	; wild battle: b = the user's level, c = the foe's
 	ld a, [wBattleMonLevel]
-	cp b
-	jr nz, .run_away
-	call BattleRandom
+	ld b, a
+	ld a, [wCurPartyLevel] ; the wild mon's level
+	ld c, a
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_levels
+	ld a, b ; the wild mon uses it
+	ld b, c
+	ld c, a
+.got_levels
+	ld a, b
+	cp c
+	jr c, .run_away ; the foe is higher level: it escapes
+	jr nz, .failed ; the user is higher level: it fails
+	call BattleRandom ; same level: 50%
 	cp 50 percent
 	jr c, .run_away
 
