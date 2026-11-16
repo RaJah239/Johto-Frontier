@@ -157,6 +157,9 @@ BattleTurn:
 	call EnemyTriesToFlee
 	ret c
 
+	; the AI's switch decision, before the turn order: it may Teleport out
+	farcall AI_PlanTeleport ; engine/battle/ai/items.asm
+
 	farcall DetermineMoveOrder
 	jr c, .false
 	call Battle_EnemyFirst
@@ -804,6 +807,24 @@ EnemySwitchOrTryItem:
 ; (wEnemyIsSwitching), try it (AI_TrySwitch: not when trapped, set up or
 ; alone; the switch-in picker chooses the mon); otherwise
 ; AI_SwitchOrTryItem. Carry if the enemy switched or used an item.
+; If AI_PlanTeleport already decided (an enemy that knows Teleport), do that.
+	ld a, [wAITeleportPlan]
+	and a ; AI_TELEPORT_PLAN_NONE
+	jr z, .no_plan
+	cp AI_TELEPORT_PLAN_MOVE
+	jr z, .use_move
+	cp AI_TELEPORT_PLAN_SWITCH
+	jr nz, .stay
+	callfar AI_Switch
+	ret
+.stay
+	callfar AI_TryItem
+	ret
+.use_move
+	and a
+	ret
+
+.no_plan
 	ld a, [wEnemyIsSwitching]
 	and a
 	jr z, .no_smart_switch
@@ -4702,27 +4723,6 @@ PlayerSwitch:
 
 INCLUDE "data/abilities/run_away_mons.asm"
 
-EnemyMonEntrance:
-	callfar AI_Switch
-	call SetEnemyTurn
-	jmp SpikesDamage
-
-BattleMonEntrance:
-	call WithdrawMonText
-
-	call SetEnemyTurn
-	call PursuitSwitch
-	jr c, .ok
-	farcall RegeneratorShowPlayer
-	call RecallPlayerMon
-.ok
-
-	hlcoord 9, 7
-	lb bc, 5, 11
-	call ClearBox
-
-	ld a, [wCurPartyMon]
-	ld [wCurBattleMon], a
 TeleportUserTrapped::
 ; Carry if the mon whose turn it is (hBattleTurn) can't leave the battle,
 ; like the battle menu's switch check: the other mon trapped it (Mean Look,
@@ -4756,6 +4756,27 @@ TeleportUserTrapped::
 .done
 	jmp PopBCDEHL
 
+EnemyMonEntrance:
+	callfar AI_Switch
+	call SetEnemyTurn
+	jmp SpikesDamage
+
+BattleMonEntrance:
+	call WithdrawMonText
+
+	call SetEnemyTurn
+	call PursuitSwitch
+	jr c, .ok
+	farcall RegeneratorShowPlayer
+	call RecallPlayerMon
+.ok
+
+	hlcoord 9, 7
+	lb bc, 5, 11
+	call ClearBox
+
+	ld a, [wCurPartyMon]
+	ld [wCurBattleMon], a
 	call AddBattleParticipant
 	call InitBattleMon_Etc
 	call SetPlayerTurn

@@ -110,6 +110,143 @@ AI_TrySwitch:
 	and a
 	ret
 
+AI_PlanTeleport::
+; Before the turn order is worked out (BattleTurn). If the enemy's mon knows
+; Teleport, decide now whether it switches out this turn, since Teleport
+; (priority 0, goes last) has to be its move before the order is set:
+; - it would switch (AI_Smart_Switch asked for it, or AI_MatchupSwitch
+;   finds a mon that does better): a faster U-turn / Volt Switch still hits
+;   and switches first (AI_PivotInsteadOfSwitch); otherwise 90% of the time
+;   it uses Teleport, and 10% it switches as usual, so it isn't predictable;
+; - otherwise it stays in (and may use an item).
+; The decision is kept in wAITeleportPlan for EnemySwitchOrTryItem. Without
+; Teleport (and in wild or link battles) nothing changes.
+	xor a ; AI_TELEPORT_PLAN_NONE
+	ld [wAITeleportPlan], a
+	ld a, [wBattleMode]
+	dec a
+	ret z
+	ld a, [wLinkMode]
+	and a
+	ret nz
+	call AI_FindTeleportSlot
+	ret nc
+	ld a, [wEnemyIsSwitching]
+	and a
+	jr nz, .smart_switch
+
+	; the start-of-turn switch, as AI_SwitchOrTryItem decides it
+	farcall CheckEnemyLockedIn
+	jr nz, .use_move ; locked into its move
+	ld a, [wPlayerSubStatus5]
+	bit SUBSTATUS_CANT_RUN, a
+	jr nz, .stay
+	ld a, [wEnemyWrapCount]
+	and a
+	jr nz, .stay
+	call IsEnemyTrapped
+	jr c, .stay
+	call IsEnemyStayInMon
+	jr c, .stay
+	farcall AI_MatchupSwitch
+	jr nc, .stay
+	call AI_PivotInsteadOfSwitch
+	jr c, .use_move ; it hits and switches with its pivot move
+	call Random
+	cp 10 percent
+	jr c, .switch
+	call .teleport
+.use_move
+	ld a, AI_TELEPORT_PLAN_MOVE
+	ld [wAITeleportPlan], a
+	ret
+
+.switch
+	ld a, AI_TELEPORT_PLAN_SWITCH
+	ld [wAITeleportPlan], a
+	ret
+
+.stay
+	ld a, AI_TELEPORT_PLAN_STAY
+	ld [wAITeleportPlan], a
+	ret
+
+.smart_switch
+	; AI_Smart_Switch asked for a switch: only where AI_TrySwitch would make
+	; it (not trapped, not set up)
+	call IsEnemyTrapped
+	ret c
+	call IsEnemyStayInMon
+	ret c
+	ld a, [wEnemyAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	ret nc
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL + 2
+	ret nc
+	ld a, [wEnemyDefLevel]
+	cp BASE_STAT_LEVEL + 2
+	ret nc
+	ld a, [wEnemySDefLevel]
+	cp BASE_STAT_LEVEL + 2
+	ret nc
+	call Random
+	cp 10 percent
+	ret c ; (no plan) it switches as usual
+	xor a
+	ld [wEnemyIsSwitching], a
+	call .teleport
+	jr .use_move
+
+.teleport
+	; Teleport is its move this turn (find its slot again: the checks above
+	; use bc)
+	call AI_FindTeleportSlot
+	ld a, c
+	ld [wCurEnemyMoveNum], a
+	ld a, TELEPORT
+	ld [wCurEnemyMove], a
+	ret
+
+AI_FindTeleportSlot:
+; Carry and c = the slot (0-3) if the enemy's mon can use Teleport now: it
+; knows it with PP left, it isn't disabled or locked into another move
+; (Encore, a Choice item), and another of its mons can come in.
+	ld a, [wEnemySubStatus5]
+	bit SUBSTATUS_ENCORED, a
+	jr nz, .no
+	ld c, 0
+.loop
+	ld hl, wEnemyMonMoves
+	ld b, 0
+	add hl, bc
+	ld a, [hl]
+	cp TELEPORT
+	jr z, .found
+	inc c
+	ld a, c
+	cp NUM_MOVES
+	jr nz, .loop
+.no
+	and a
+	ret
+
+.found
+	ld a, [wEnemyDisabledMove]
+	cp TELEPORT
+	jr z, .no
+	ld hl, wEnemyMonPP
+	add hl, bc
+	ld a, [hl]
+	and PP_MASK
+	jr z, .no
+	push bc
+	farcall FindAliveEnemyMons
+	pop bc
+	jr c, .no ; nobody to switch to
+	scf
+	ret
+
 AI_PivotInsteadOfSwitch:
 ; The enemy is about to switch out. If it's faster than the player's mon and
 ; can use U-turn or Volt Switch (EFFECT_HIT_AND_SWITCH), it hits and switches
