@@ -25,8 +25,12 @@
 ;   Siegebreaker (the player's screens gone), Chrono Shift (Trick Room);
 ; - True Sight (Foresight), Disarm (the player's item knocked off: +1 Speed
 ;   for an Unburden mon).
-; Not simulated: hazard layers (they don't matter in a 1-on-1), Sanctuary,
-; Provocateur, Allure, Chaotic Boost (random), Imposter.
+; - Provocateur (Taunt: the player's heal moves don't count), Allure
+;   (infatuated: the player's hits count half), Imposter (a copy of the
+;   player's mon: species, moves, types, stats and stat stages).
+; Chaotic Boost's stat is random: MSim_TryCandidate counts it as a small
+; bonus instead (IsChaoticBoostActive_Far).
+; Not simulated: hazard layers (they don't matter in a 1-on-1), Sanctuary.
 
 DEF MSIM_ATK EQU 0 ; (wPlayerStatLevels / wEnemyStatLevels offsets)
 DEF MSIM_DEF EQU 1
@@ -264,6 +268,26 @@ MSim_EntryEffects::
 	ld [wMSimEntryPlayerStats], a
 .no_disarm
 
+	; Provocateur: Taunt (the player's mon can't use its heal moves)
+	ld hl, ProvocateurPokemon
+	call .has
+	jr nc, .no_provocateur
+	ld a, [wPlayerTauntCount]
+	and a
+	jr nz, .no_provocateur
+	ld a, 3
+	ld [wPlayerTauntCount], a
+.no_provocateur
+	; Allure: infatuates a mon of the opposite gender (not Oblivious)
+	ld hl, AllurePokemon
+	call .has
+	call c, .allure
+	; Imposter: it becomes a copy of the player's mon (last: from here on
+	; its species is the player's)
+	ld hl, ImposterPokemon
+	call .has
+	call c, .imposter
+
 	; the player's stats with their new stages
 	ld a, [wMSimEntryPlayerStats]
 	and a
@@ -272,6 +296,60 @@ MSim_EntryEffects::
 	ldh [hBattleTurn], a
 	callfar CalcPlayerStats
 	ret
+
+.allure
+	ld a, [wBattleMonSpecies]
+	newfarcall IsObliviousSpecies
+	ret c
+	; CheckOppositeGender compares the player's mon with wTempEnemyMonSpecies
+	; and wEnemyMonDVs: the candidate's for a moment
+	ld a, [wTempEnemyMonSpecies]
+	push af
+	ld a, [wEnemyMonSpecies]
+	ld [wTempEnemyMonSpecies], a
+	xor a
+	ldh [hBattleTurn], a
+	farcall CheckOppositeGender
+	pop bc
+	ld a, b
+	ld [wTempEnemyMonSpecies], a
+	ret c
+	ld hl, wPlayerSubStatus1
+	set SUBSTATUS_IN_LOVE, [hl]
+	ret
+
+.imposter
+	; species, moves (with PP), DVs, types, stats and stat stages
+	ld a, [wBattleMonSpecies]
+	ld [wEnemyMonSpecies], a
+	ld hl, wBattleMonMoves
+	ld de, wEnemyMonMoves
+	ld bc, NUM_MOVES
+	call CopyBytes
+	ld hl, wEnemyMonPP
+	ld a, 5
+	ld bc, NUM_MOVES
+	call ByteFill
+	ld a, [wBattleMonDVs]
+	ld [wEnemyMonDVs], a
+	ld a, [wBattleMonDVs + 1]
+	ld [wEnemyMonDVs + 1], a
+	ld a, [wBattleMonType1]
+	ld [wEnemyMonType1], a
+	ld a, [wBattleMonType2]
+	ld [wEnemyMonType2], a
+	ld hl, wPlayerStats
+	ld de, wEnemyStats
+	ld bc, NUM_BATTLE_STATS * 2
+	call CopyBytes
+	ld hl, wPlayerStatLevels
+	ld de, wEnemyStatLevels
+	ld bc, wPlayerEvaLevel - wPlayerAtkLevel + 1
+	call CopyBytes
+	ld hl, wEnemySubStatus5
+	set SUBSTATUS_TRANSFORMED, [hl]
+	ret
+
 
 .has
 ; Carry if the candidate is in ability list hl.
@@ -371,3 +449,13 @@ MSim_FarAbilityList:
 	jr nz, .loop
 	scf
 	ret
+
+IsChaoticBoostActive_Far::
+; Carry if species a has Chaotic Boost and Neutralizing Gas doesn't suppress
+; it (for the AI: a random +1 as it comes in). Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld hl, ChaoticBoostPokemon
+	call IsInAbilityList
+	jmp PopBCDEHL

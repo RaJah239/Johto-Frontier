@@ -3896,7 +3896,7 @@ wMSimSavedSubStatus:: ds 5
 wMSimSavedDmg:: ds 9 ; AI_SimMoveChoice: wMSimEnemyDmg .. wMSimPlayerPrioDmg, wMSimFlags
 wMSimSavedGWDmg:: ds 4 ; and wMSimEnemyGWDmg, wMSimPlayerGWDmg
 ; the real field while candidates' entry abilities change it (MSim_SaveField)
-wMSimSavedField:: ds 7 + NUM_BATTLE_STATS * 2 + 13 + 4 + 1 + 1 + 1
+wMSimSavedField:: ds 7 + NUM_BATTLE_STATS * 2 + 13 + 4 + 1 + 1 + 1 + 2
 ; a candidate's and the player's stat stages and stats before it tries Haze /
 ; Roar (MSim_TryCandidate)
 wMSimSavedPreReset:: ds 2 * (7 + NUM_BATTLE_STATS * 2)

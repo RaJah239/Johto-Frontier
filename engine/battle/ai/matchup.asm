@@ -349,7 +349,7 @@ MSim_TryCandidate:
 	; hazards on the way in
 	call MSim_HazardDamage
 	call MSim_SubtractEnemyHP
-	jr c, .loses
+	jmp c, .loses
 
 	call MSim_ComputeDamages
 	; Speed Boost doesn't go off the turn it comes in
@@ -417,6 +417,16 @@ MSim_TryCandidate:
 	jr nc, .no_ko_bonus
 	xor a
 .no_ko_bonus
+	; Chaotic Boost: a random +1 as it comes in, worth a little
+	ld b, a
+	ld a, [wEnemyMonSpecies]
+	newfarcall IsChaoticBoostActive_Far ; engine/abilities/entry_sim.asm
+	ld a, b
+	jr nc, .no_chaotic_bonus
+	sub 255 / 16
+	jr nc, .no_chaotic_bonus
+	xor a
+.no_chaotic_bonus
 	scf
 	ret
 
@@ -992,7 +1002,26 @@ MSim_ComputeDamages:
 	ld hl, wMSimFlags
 	set MSIM_E_FASTER_F, [hl]
 .setup
+	; infatuated: it only gets to attack half the time
+	ld a, [wPlayerSubStatus1]
+	bit SUBSTATUS_IN_LOVE, a
+	ld hl, wMSimPlayerDmg
+	call nz, MSim_HalveHits
+	ld a, [wEnemySubStatus1]
+	bit SUBSTATUS_IN_LOVE, a
+	ld hl, wMSimEnemyDmg
+	call nz, MSim_HalveHits
 	jmp MSim_SetupSides
+
+MSim_HalveHits:
+; Halve the side's best hit and best priority hit at hl.
+	call .word
+.word
+	srl [hl]
+	inc hl
+	rr [hl]
+	inc hl
+	ret
 
 MSim_EnemyMoveDamage:
 ; b = move. Work out its damage (lowest roll) and keep the best values.
@@ -1558,8 +1587,19 @@ MSim_SetupSides:
 
 MSim_FindHeal:
 ; a = side. Store its usable heal move's HP gain in wMSim*Heal (0 if none)
-; and its Rest / priority flags.
+; and its Rest / priority flags. (None while it's Taunted.)
 	ld [wMSimSide], a
+	and a
+	ld a, [wEnemyTauntCount]
+	jr z, .got_taunt
+	ld a, [wPlayerTauntCount]
+.got_taunt
+	and a
+	jr z, .not_taunted
+	ld de, 0
+	jmp .store
+.not_taunted
+	ld a, [wMSimSide]
 	and a
 	ld hl, wEnemyMonMoves
 	ld de, wEnemyMonPP
@@ -3787,6 +3827,7 @@ DEF MSIM_FIELD_SCREENS_LENGTH EQU 13
 	assert wWeatherCount - wPlayerScreens + 1 == MSIM_FIELD_SCREENS_LENGTH
 	assert wPlayerEvaLevel - wPlayerAtkLevel + 1 == MSIM_SAVED_LEVELS_LENGTH
 	assert wPlayerSubStatus4 - wPlayerSubStatus1 == 3
+	assert wPlayerTauntCount == wEnemyTauntCount + 1
 
 MSim_SaveField:
 	ld de, wMSimSavedField
@@ -3810,6 +3851,9 @@ MSim_SaveField:
 	call MSim_ToSaveBank
 	ld hl, wBattleMonItem
 	ld c, 1
+	call MSim_ToSaveBank
+	ld hl, wEnemyTauntCount
+	ld c, 2
 	jmp MSim_ToSaveBank
 
 MSim_RestoreField:
@@ -3834,6 +3878,9 @@ MSim_RestoreField:
 	call MSim_FromSaveBank
 	ld de, wBattleMonItem
 	ld c, 1
+	call MSim_FromSaveBank
+	ld de, wEnemyTauntCount
+	ld c, 2
 	jr MSim_FromSaveBank
 
 MSim_RestoreEnemy:
