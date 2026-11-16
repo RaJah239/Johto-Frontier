@@ -125,6 +125,16 @@ RegeneratorThird:
 	ld c, e
 	ret
 
+IsRegeneratorSpecies::
+; Carry if species a has Regenerator (not suppressed by Neutralizing Gas;
+; for the AI). Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld hl, RegeneratorPokemon
+	call IsInAbilityList
+	jmp PopBCDEHL
+
 RegeneratorText: db "Regenerator@"
 
 PlayerRegenerator:

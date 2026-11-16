@@ -139,7 +139,7 @@ AI_MatchupSwitch:
 	jr z, .no_winning_move
 	ld hl, wBattleMonSpecies
 	cp [hl]
-	jr z, .stay
+	jmp z, .stay
 .no_winning_move
 	farcall FindAliveEnemyMons
 	jr c, .stay ; nobody to switch to
@@ -183,9 +183,14 @@ AI_MatchupSwitch:
 	ld a, [wMSimDealtIndex]
 	cp $ff
 	jr z, .stay
+	; (a hurt Regenerator mon only needs one that does as much: going out
+	; heals it a third, and it comes back later)
+	call MSim_ActiveRegenerates
 	ld a, [wMSimActiveDealt]
+	jr c, .regenerator
 	add 255 / 4
 	jr c, .stay
+.regenerator
 	ld b, a
 	ld a, [wMSimBestDealt]
 	cp b
@@ -216,10 +221,36 @@ MSim_EagerSwitch:
 ; (the mon that's out loses the 1-on-1, and another one wins it) Carry if
 ; the AI should switch to that winner even when it isn't a comfortable win:
 ; - the player's mon has a knock-out ability that would go off (Moxie and
-;   the like): don't hand it the KO.
+;   the like): don't hand it the KO;
+; - the mon that's out has Regenerator and is at 2/3 HP or less: switching
+;   out heals it.
 	ld a, [wBattleMonSpecies]
 	ld c, 0
 	newfarcall KOAbilityGain_Far ; engine/abilities/knock_out_abilities.asm
+	ret c
+	; fallthrough
+
+MSim_ActiveRegenerates:
+; Carry if the enemy's mon that's out has Regenerator and HP <= 2/3 of its
+; max HP (so going out heals it fully a third).
+	ld a, [wEnemyMonSpecies]
+	newfarcall IsRegeneratorSpecies ; engine/abilities/regenerator.asm
+	ret nc
+	; HP * 3/2 <= max HP?
+	ld hl, wEnemyMonHP
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	ld h, b
+	ld l, c
+	srl b
+	rr c
+	add hl, bc
+	ld a, [wEnemyMonMaxHP + 1]
+	sub l
+	ld a, [wEnemyMonMaxHP]
+	sbc h
+	ccf
 	ret
 
 AI_MatchupPick:
