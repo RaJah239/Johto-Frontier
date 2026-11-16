@@ -922,7 +922,7 @@ MSim_PlayerMoveDamage:
 	ld hl, wMSimPlayerDmg
 	ld c, MSIM_P_BEST_DRAIN_F
 	ld b, MSIM_P_BEST_PRIO_F
-	; fallthrough
+	jr MSim_KeepBest
 
 MSim_GaleWingsHit:
 ; b = the priority of move c used by species d on side e; hl = that side's
