@@ -3860,6 +3860,12 @@ wMSimEnemyGWDmg:: dw
 wMSimPlayerGWDmg:: dw
 
 
+; (a section of its own: WRAM0 is nearly full, so it fits in a gap)
+SECTION "Magic Bounce", WRAM0
+
+; the Magic Bounce mon's own move while it uses a bounced one
+wMagicBounceSavedMove:: db
+
 SECTION "AI Matchup Save", WRAMX, BANK[5]
 
 ; the active enemy mon's battle data while the matchup simulation borrows it

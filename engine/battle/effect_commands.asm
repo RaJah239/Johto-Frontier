@@ -39,7 +39,9 @@ DoTurn:
 	newfarcall PriorityAbilityPopup ; engine/battle/effect_commands_far.asm
 	call TypeSyncPopup
 	farcall MoveUseAbilityPopups ; engine/abilities/send_out_popup.asm
-	; fallthrough
+	call DoMove
+	; Magic Bounce: the bouncing mon gets its own move back
+	farjp MagicBounceEnd ; engine/abilities/magic_bounce.asm
 
 DoMove:
 ; Get the user's move effect.
@@ -734,6 +736,11 @@ CheckUserIsCharging:
 	ret
 
 BattleCommand_DoTurn:
+	call DoTurn_PayForMove
+	; Magic Bounce: a status move aimed at it bounces back at the user
+	farjp MagicBounceCheck ; engine/abilities/magic_bounce.asm
+
+DoTurn_PayForMove:
 ; DevNote - lock into choice item move here
 	call GetUserItem
 	ld a, b

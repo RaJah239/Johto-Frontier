@@ -168,6 +168,9 @@ DEF ENTRY_ITEM_ENEMY_F       EQU 3
 ; Unburden (engine/abilities/unburden.asm): the side's mon held an item
 DEF UNBURDEN_ITEM_PLAYER_F   EQU 4
 DEF UNBURDEN_ITEM_ENEMY_F    EQU 5
+; Magic Bounce (engine/abilities/magic_bounce.asm): a move is being bounced
+DEF MAGIC_BOUNCE_ACTIVE_F    EQU 6
+DEF MAGIC_BOUNCE_GOES_FIRST_F EQU 7 ; wEnemyGoesFirst, saved while it bounces a move
 DEF SEND_OUT_POPUP_BYTES EQU (NUM_SEND_OUT_POPUPS + 7) / 8 ; per side
 
 DEF ABILITY_SLIDE_WIDTH EQU 10 ; tiles (the player's HUD starts at column 10)
