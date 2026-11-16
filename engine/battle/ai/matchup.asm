@@ -97,6 +97,8 @@ AI_MatchupSwitch:
 ; Start-of-turn switch decision (trainer battles; the caller checked that the
 ; enemy isn't trapped). Return carry and wEnemySwitchMonIndex (1-6) to switch.
 ; - A mon it just switched in stays for a turn (no back-and-forth).
+; - It stays if the move choice found a move that wins (AI_SimMoveChoice:
+;   a status move, Haze / Roar against a boosted player, ...).
 ; - It stays if the mon that's out wins the 1-on-1.
 ; - It switches to the mon that wins taking the least damage when the
 ;   current one loses badly (the player keeps more than 1/4 of its HP) and
@@ -108,7 +110,18 @@ AI_MatchupSwitch:
 	ld a, [hl]
 	ld [hl], 0
 	and a
-	jr nz, .stay
+	jmp nz, .stay
+	; the move choice found a move that wins (a status move, Haze...):
+	; stay in and use it (if the player's mon is still the same one)
+	ld hl, wMSimMoveWinsVs
+	ld a, [hl]
+	ld [hl], 0
+	and a
+	jr z, .no_winning_move
+	ld hl, wBattleMonSpecies
+	cp [hl]
+	jr z, .stay
+.no_winning_move
 	farcall FindAliveEnemyMons
 	jr c, .stay ; nobody to switch to
 	call MSim_Begin
@@ -2577,6 +2590,14 @@ AI_SimMoveChoice:
 	ld hl, wMSimMode
 	res MSIM_MODE_SETUP_F, [hl]
 	call MSim_End
+
+	; a winning move: tell the start-of-turn switch check (AI_MatchupSwitch)
+	ld a, [wMSimBestMask]
+	and a
+	jr z, .no_win_noted
+	ld a, [wBattleMonSpecies]
+.no_win_noted
+	ld [wMSimMoveWinsVs], a
 
 	ld a, [wMSimBestMask]
 	and a

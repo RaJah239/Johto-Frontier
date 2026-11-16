@@ -3871,6 +3871,9 @@ SECTION "AI Matchup Entry Sim", WRAM0
 
 ; MSim_EntryEffects: the player's stat stages changed (recompute its stats)
 wMSimEntryPlayerStats:: db
+; AI_SimMoveChoice found a move that wins against this player species (0:
+; none): AI_MatchupSwitch then keeps the mon in to use it
+wMSimMoveWinsVs:: db
 
 SECTION "AI Teleport Plan", WRAM0
 
