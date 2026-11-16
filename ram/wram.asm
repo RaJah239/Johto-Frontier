@@ -3867,6 +3867,11 @@ SECTION "Magic Bounce", WRAM0
 wMagicBounceSavedMove:: db
 
 ; (a section of its own: WRAM0 is nearly full, so it fits in a gap)
+SECTION "AI Matchup Entry Sim", WRAM0
+
+; MSim_EntryEffects: the player's stat stages changed (recompute its stats)
+wMSimEntryPlayerStats:: db
+
 SECTION "AI Teleport Plan", WRAM0
 
 wAITeleportPlan:: db ; AI_TELEPORT_PLAN_*: this turn's switch decision
@@ -3880,6 +3885,8 @@ wMSimSavedLevels:: ds 7
 wMSimSavedSubStatus:: ds 5
 wMSimSavedDmg:: ds 9 ; AI_SimMoveChoice: wMSimEnemyDmg .. wMSimPlayerPrioDmg, wMSimFlags
 wMSimSavedGWDmg:: ds 4 ; and wMSimEnemyGWDmg, wMSimPlayerGWDmg
+; the real field while candidates' entry abilities change it (MSim_SaveField)
+wMSimSavedField:: ds 7 + NUM_BATTLE_STATS * 2 + 13 + 4 + 1 + 1 + 1
 
 
 SECTION "Pokedex Grid WRAM", WRAMX[$da00], BANK[5]

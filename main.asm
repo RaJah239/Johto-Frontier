@@ -636,6 +636,7 @@ INCLUDE "gfx/timeofday_images.asm"
 
 SECTION "Entry Abilities", ROMX
 INCLUDE "engine/abilities/entry_abilities.asm"
+INCLUDE "engine/abilities/entry_sim.asm"
 
 
 SECTION "Trapping Abilities", ROMX

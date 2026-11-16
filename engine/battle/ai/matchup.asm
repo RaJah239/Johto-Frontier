@@ -443,8 +443,11 @@ MSim_SetActiveHP:
 
 MSim_LoadCandidate:
 ; b = OT party index. Load that mon into the wEnemyMon battle struct (and
-; wEnemyStats) as it would be right after switching in, and set
-; wMSimEnemyHP to its HP.
+; wEnemyStats) as it would be right after switching in, its entry ability
+; included (MSim_EntryEffects), and set wMSimEnemyHP to its HP.
+	push bc
+	call MSim_RestoreField ; (the last candidate's entry ability is gone)
+	pop bc
 	ld a, b
 	ld hl, wOTPartyMon1Species
 	call GetPartyLocation
@@ -513,6 +516,7 @@ MSim_LoadCandidate:
 	ld a, BASE_STAT_LEVEL - 1
 	ld [wEnemySpdLevel], a
 .stats
+	newfarcall MSim_EntryEffects ; engine/abilities/entry_sim.asm
 	ld a, 1
 	ldh [hBattleTurn], a
 	callfar CalcEnemyStats
@@ -2883,15 +2887,73 @@ MSim_Begin:
 	ld de, wMSimSavedLevels
 	ld c, MSIM_SAVED_LEVELS_LENGTH
 	call MSim_ToSaveBank
+	call MSim_SaveField
 	ld hl, wEnemySubStatus1
 	ld de, wMSimSavedSubStatus
 	ld c, MSIM_SAVED_SUBSTATUS_LENGTH
-	jr MSim_ToSaveBank
+	jmp MSim_ToSaveBank
 
 MSim_End:
 ; Put back what MSim_Begin saved.
 	call MSim_RestoreEnemy
-	jr MSim_EndRest
+	call MSim_RestoreField
+	jmp MSim_EndRest
+
+; The parts of the field a candidate's entry ability can change in the sim
+; (MSim_EntryEffects, engine/abilities/entry_sim.asm), saved in this order.
+; (wPlayerScreens .. wWeatherCount: screens, their counters, weather)
+DEF MSIM_FIELD_SCREENS_LENGTH EQU 13
+	assert wWeatherCount - wPlayerScreens + 1 == MSIM_FIELD_SCREENS_LENGTH
+	assert wPlayerEvaLevel - wPlayerAtkLevel + 1 == MSIM_SAVED_LEVELS_LENGTH
+	assert wPlayerSubStatus4 - wPlayerSubStatus1 == 3
+
+MSim_SaveField:
+	ld de, wMSimSavedField
+	ld hl, wPlayerAtkLevel
+	ld c, MSIM_SAVED_LEVELS_LENGTH
+	call MSim_ToSaveBank
+	ld hl, wBattleMonAttack
+	ld c, NUM_BATTLE_STATS * 2
+	call MSim_ToSaveBank
+	ld hl, wPlayerScreens
+	ld c, MSIM_FIELD_SCREENS_LENGTH
+	call MSim_ToSaveBank
+	ld hl, wPlayerSubStatus1
+	ld c, 4
+	call MSim_ToSaveBank
+	ld hl, wTrickRoomCount
+	ld c, 1
+	call MSim_ToSaveBank
+	ld hl, wNeutralizingGas
+	ld c, 1
+	call MSim_ToSaveBank
+	ld hl, wBattleMonItem
+	ld c, 1
+	jmp MSim_ToSaveBank
+
+MSim_RestoreField:
+	ld hl, wMSimSavedField
+	ld de, wPlayerAtkLevel
+	ld c, MSIM_SAVED_LEVELS_LENGTH
+	call MSim_FromSaveBank
+	ld de, wBattleMonAttack
+	ld c, NUM_BATTLE_STATS * 2
+	call MSim_FromSaveBank
+	ld de, wPlayerScreens
+	ld c, MSIM_FIELD_SCREENS_LENGTH
+	call MSim_FromSaveBank
+	ld de, wPlayerSubStatus1
+	ld c, 4
+	call MSim_FromSaveBank
+	ld de, wTrickRoomCount
+	ld c, 1
+	call MSim_FromSaveBank
+	ld de, wNeutralizingGas
+	ld c, 1
+	call MSim_FromSaveBank
+	ld de, wBattleMonItem
+	ld c, 1
+	jr MSim_FromSaveBank
 
 MSim_RestoreEnemy:
 ; Put back the enemy mon's battle struct, stats, stat stages and substatus.
