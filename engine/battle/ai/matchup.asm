@@ -12,6 +12,7 @@
 ; the player first).
 ;
 ; Also played out, for both sides:
+; - Gale Wings: a Flying hit has priority on the turns its mon is at full HP;
 ; - healing moves (Recover etc. 1/2, Slack Off 1/3 with priority, Healing
 ;   Light by weather, Rest: full HP + sleep, cures status), used when the
 ;   mon can't KO this turn, the other side's best hit would KO it, and the
@@ -683,6 +684,10 @@ MSim_ComputeDamages:
 	ld hl, wMSimEnemyDmg
 	ld bc, 8
 	call ByteFill
+	xor a
+	ld hl, wMSimEnemyGWDmg
+	ld bc, 4
+	call ByteFill
 	ld hl, wMSimFlags
 	res MSIM_E_BEST_PRIO_F, [hl]
 	res MSIM_P_BEST_PRIO_F, [hl]
@@ -824,20 +829,28 @@ MSim_EnemyMoveDamage:
 	pop bc
 	; priority? (carry if above normal)
 	farcall GetEnemyMovePriority_Far
-	ld a, BASE_PRIORITY
-	cp b
-	push af
 	ld a, [wMSimT1Kind]
 	cp MSIM_T1_CAPTURE
 	jr z, .capture
-	pop af
+	; Gale Wings only works at full HP: MSim_ChooseActions adds it per turn
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	ld c, a
+	ld a, [wEnemyMonSpecies]
+	ld d, a
+	ld e, 1 ; enemy
+	ld hl, wMSimEnemyGWDmg
+	call MSim_GaleWingsHit
+	ld a, BASE_PRIORITY
+	cp b
 	ld hl, wMSimEnemyDmg
 	ld c, MSIM_E_BEST_DRAIN_F
 	ld b, MSIM_E_BEST_PRIO_F
 	jmp MSim_KeepBest
 .capture
 	; (AI_SimMoveChoice) this move's damage and priority for the first turn
-	pop af
+	; (Gale Wings included: that's the mon's HP now)
+	ld a, BASE_PRIORITY
+	cp b
 	ld a, MSIM_T1_DAMAGE
 	jr nc, .no_prio
 	ld a, MSIM_T1_DAMAGE | 1 << MSIM_T1_PRIO_F
@@ -895,12 +908,99 @@ MSim_PlayerMoveDamage:
 	call MSim_DefensiveAbilities
 	pop bc
 	farcall GetPlayerMovePriority_Far
+	; Gale Wings only works at full HP: MSim_ChooseActions adds it per turn
+	ld a, [wPlayerMoveStruct + MOVE_ANIM]
+	ld c, a
+	ld a, [wBattleMonSpecies]
+	ld d, a
+	ld e, 0 ; player
+	ld hl, wMSimPlayerGWDmg
+	call MSim_GaleWingsHit
 	ld a, BASE_PRIORITY
 	cp b
 	ld hl, wMSimPlayerDmg
 	ld c, MSIM_P_BEST_DRAIN_F
 	ld b, MSIM_P_BEST_PRIO_F
 	; fallthrough
+
+MSim_GaleWingsHit:
+; b = the priority of move c used by species d on side e; hl = that side's
+; Gale Wings hit. If Gale Wings gives the move priority at full HP, take its
+; +1 back out of b (the mon's HP changes during a run) and keep the biggest
+; such hit (wCurDamage) at hl.
+	push bc
+	newfarcall GaleWingsSimCheck_Far ; engine/abilities/gale_wings.asm
+	pop bc
+	ret nc
+	; a = 1 if b counted it (the mon is at full HP now)
+	ld c, a
+	ld a, b
+	sub c
+	ld b, a
+	ld a, [wCurDamage]
+	cp [hl]
+	ret c
+	jr nz, .bigger
+	inc hl
+	ld a, [wCurDamage + 1]
+	cp [hl]
+	dec hl
+	ret c
+.bigger
+	ld a, [wCurDamage]
+	ld [hli], a
+	ld a, [wCurDamage + 1]
+	ld [hl], a
+	ret
+
+MSim_EnemyGaleWingsTurn:
+; Carry if the enemy's mon has a Gale Wings hit and is at full HP this turn.
+; Preserves bc, de and hl.
+	push hl
+	push de
+	push bc
+	ld hl, wMSimEnemyGWDmg
+	ld de, wMSimEnemyHP
+	ld bc, wEnemyMonMaxHP
+	jr MSim_GaleWingsTurn
+
+MSim_PlayerGaleWingsTurn:
+; The same for the player's mon.
+	push hl
+	push de
+	push bc
+	ld hl, wMSimPlayerGWDmg
+	ld de, wMSimPlayerHP
+	ld bc, wBattleMonMaxHP
+	; fallthrough
+
+MSim_GaleWingsTurn:
+; (with hl, de and bc pushed) Carry if the word at hl isn't 0 and the HP at
+; de equals the max HP at bc.
+	ld a, [hli]
+	or [hl]
+	jr z, .done ; (no carry)
+	ld a, [de]
+	ld h, a
+	ld a, [bc]
+	cp h
+	jr nz, .no
+	inc de
+	inc bc
+	ld a, [de]
+	ld h, a
+	ld a, [bc]
+	cp h
+	jr nz, .no
+	scf
+	jr .done
+.no
+	and a
+.done
+	pop bc
+	pop de
+	pop hl
+	ret
 
 MSim_KeepBest:
 ; wCurDamage is a move's damage; carry if it has priority. hl = the side's
@@ -1429,11 +1529,22 @@ MSim_ChooseActions:
 	set MSIM_E_PRIO_THIS_F, [hl]
 	jr .player
 .enemy
+	; its best priority hit (at full HP, Gale Wings's Flying hit counts too)
 	ld hl, wMSimEnemyPrioDmg
+	call MSim_EnemyGaleWingsTurn
+	jr nc, .enemy_prio
+	ld hl, wMSimEnemyGWDmg
+	ld de, wMSimEnemyPrioDmg
+	call MSim_WordGE
+	ld hl, wMSimEnemyGWDmg
+	jr c, .enemy_prio
+	ld hl, wMSimEnemyPrioDmg
+.enemy_prio
+	push hl
 	ld de, wMSimPlayerHP
 	call MSim_PrioKOs
+	pop hl
 	jr nc, .enemy_best
-	ld hl, wMSimEnemyPrioDmg
 	ld de, wMSimEnemyHit
 	call MSim_CopyWord
 	ld hl, wMSimFlags
@@ -1445,14 +1556,33 @@ MSim_ChooseActions:
 	call MSim_CopyWord
 	ld hl, wMSimFlags
 	bit MSIM_E_BEST_PRIO_F, [hl]
-	jr z, .player
+	jr nz, .enemy_best_prio
+	; at full HP its best hit may be a Gale Wings Flying move
+	call MSim_EnemyGaleWingsTurn
+	jr nc, .player
+	ld hl, wMSimEnemyGWDmg
+	ld de, wMSimEnemyDmg
+	call MSim_WordGE
+	jr nc, .player
+	ld hl, wMSimFlags
+.enemy_best_prio
 	set MSIM_E_PRIO_THIS_F, [hl]
 .player
 	ld hl, wMSimPlayerPrioDmg
+	call MSim_PlayerGaleWingsTurn
+	jr nc, .player_prio
+	ld hl, wMSimPlayerGWDmg
+	ld de, wMSimPlayerPrioDmg
+	call MSim_WordGE
+	ld hl, wMSimPlayerGWDmg
+	jr c, .player_prio
+	ld hl, wMSimPlayerPrioDmg
+.player_prio
+	push hl
 	ld de, wMSimEnemyHP
 	call MSim_PrioKOs
+	pop hl
 	jr nc, .player_best
-	ld hl, wMSimPlayerPrioDmg
 	ld de, wMSimPlayerHit
 	call MSim_CopyWord
 	ld hl, wMSimFlags
@@ -1464,7 +1594,15 @@ MSim_ChooseActions:
 	call MSim_CopyWord
 	ld hl, wMSimFlags
 	bit MSIM_P_BEST_PRIO_F, [hl]
-	jr z, .heals
+	jr nz, .player_best_prio
+	call MSim_PlayerGaleWingsTurn
+	jr nc, .heals
+	ld hl, wMSimPlayerGWDmg
+	ld de, wMSimPlayerDmg
+	call MSim_WordGE
+	jr nc, .heals
+	ld hl, wMSimFlags
+.player_best_prio
 	set MSIM_P_PRIO_THIS_F, [hl]
 
 .heals
@@ -2136,6 +2274,10 @@ AI_SimMoveChoice:
 	ld de, wMSimSavedDmg + 8
 	ld c, 1
 	call MSim_ToSaveBank
+	ld hl, wMSimEnemyGWDmg
+	ld de, wMSimSavedGWDmg
+	ld c, 4
+	call MSim_ToSaveBank
 
 	; d = the lowest score of a usable move
 	ld d, $fe
@@ -2648,6 +2790,10 @@ MSim_ResetActive:
 	ld hl, wMSimSavedDmg + 8
 	ld de, wMSimFlags
 	ld c, 1
+	call MSim_FromSaveBank
+	ld hl, wMSimSavedGWDmg
+	ld de, wMSimEnemyGWDmg
+	ld c, 4
 	call MSim_FromSaveBank
 	jmp MSim_SetupSides
 

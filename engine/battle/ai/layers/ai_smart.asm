@@ -18,6 +18,10 @@ AI_Smart:
 	push hl
 	call AIGetEnemyMove
 
+	pop hl
+	push hl
+	call AI_Smart_GaleWings
+
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
 	ld hl, AI_Smart_EffectHandlers
 	ld de, 3
@@ -399,8 +403,7 @@ AI_Smart_FuryDrive:
 ; discourage if player can 2HKO and either has priority move or is >= +2 speed
 	call CanPlayer2HKO
 	jr nc, .checkSash
-	ld b, EFFECT_PRIORITY_HIT
-	call PlayerHasMoveEffect
+	call PlayerHasPriorityMove
 	jmp c, StandardDiscourage
 	ld a, [wPlayerSpdLevel]
 	cp BASE_STAT_LEVEL + 2
@@ -753,8 +756,7 @@ AI_Smart_Agility:
 	jr nc, .no_ko
 	call DoesAIOutSpeedPlayer
 	jr c, .no_ko
-	ld b, EFFECT_PRIORITY_HIT
-	call PlayerHasMoveEffect
+	call PlayerHasPriorityMove
 	jr c, .no_ko
 	jmp StrongEncourage
 
@@ -1001,8 +1003,7 @@ AI_Smart_QuiverDance:
 	jr nc, .no_ko_qd
 	call DoesAIOutSpeedPlayer
 	jr c, .no_ko_qd
-	ld b, EFFECT_PRIORITY_HIT
-	call PlayerHasMoveEffect
+	call PlayerHasPriorityMove
 	jr c, .no_ko_qd
 	jmp StrongEncourage
 
@@ -1114,8 +1115,7 @@ AI_Smart_SetupDance:
 	jr nc, .no_ko
 	call DoesAIOutSpeedPlayer
 	jr c, .no_ko
-	ld b, EFFECT_PRIORITY_HIT
-	call PlayerHasMoveEffect
+	call PlayerHasPriorityMove
 	jr c, .no_ko
 	jmp StrongEncourage
 
@@ -1851,6 +1851,10 @@ AI_Smart_Heal:
 	; Don't heal if player can 2HKO from max HP (no point)
 	call CanPlayer2HKOMaxHP
 	jr c, .discourage
+
+	; Gale Wings: back to full HP, its Flying attacks have priority again
+	call AI_Smart_GaleWingsHeal
+	jr c, .encourage
 
 	; --- Legendary-specific logic first (different thresholds) ---
 	ld a, [wEnemyMonSpecies]
@@ -2770,7 +2774,7 @@ AI_Smart_Flinch:
 	ld a, [wEnemyMoveStruct + MOVE_ANIM]
 	cp IRON_HEAD
 	jr nz, .not_blastoise_or_iron_head
-	jr AI_Smart_PriorityHit
+	jmp AI_Smart_PriorityHit
 
 .not_blastoise_or_iron_head
 	ld a, [wEnemyMonSpecies]
@@ -2806,6 +2810,72 @@ AI_Smart_Flinch:
 .encourage
     dec [hl]
     ret
+
+AI_Smart_GaleWings:
+; hl = the move's score. A Flying attack that Gale Wings gives priority right
+; now (full HP) is also scored like Quick Attack: snipe a KO, or hit first
+; when slower and about to be KOd. (Moves with the priority effect, like
+; Aerial Ace, are scored that way by their own handler.)
+	ld a, [wEnemyMoveStruct + MOVE_POWER]
+	and a
+	ret z
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	cp EFFECT_PRIORITY_HIT
+	ret z
+	; (Gust can hit a flying target: leave that to the other layers)
+	ld a, [wPlayerSubStatus3]
+	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
+	ret nz
+	push hl
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	ld c, a
+	ld a, [wEnemyMonSpecies]
+	ld d, a
+	ld e, 1 ; enemy
+	ld b, 0
+	newfarcall GaleWingsPriority_Far ; engine/abilities/gale_wings.asm
+	pop hl
+	ld a, b
+	and a
+	ret z
+	jr AI_Smart_PriorityHit
+
+AI_Smart_GaleWingsHeal:
+; Carry if healing gives a Gale Wings mon's Flying attacks priority back when
+; that matters: Recover or Roost from above 1/2 HP fills it up, it's slower
+; than the player, neither side can KO this turn (if it can, it attacks) and
+; it can 2HKO the player (a close race, where moving first wins it).
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	cp REST
+	jr z, .no
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	cp EFFECT_HEAL
+	jr nz, .no
+	newfarcall GaleWingsEnemyHasFlyingAttack_Far ; engine/abilities/gale_wings.asm
+	jr nc, .no
+	call AICheckEnemyHalfHP
+	jr nc, .no
+	push hl
+	call DoesAIOutSpeedPlayer
+	pop hl
+	jr c, .no
+	push hl
+	call CanPlayerKO
+	pop hl
+	jr c, .no
+	push hl
+	call CanAIKO
+	pop hl
+	jr c, .no
+	push hl
+	call CanAI2HKO
+	pop hl
+	jr nc, .no
+	scf
+	ret
+.no
+	and a
+	ret
 
 AI_Smart_DreamEater:
 ; The AI_Basic layer will make sure that
@@ -2863,8 +2933,7 @@ AI_Smart_PriorityHit:
 .noKO
 ; does player have priority move and are we low on hp
 ; if so skip speed check so we might use priority even if we are faster
-	ld b, EFFECT_PRIORITY_HIT
-	call PlayerHasMoveEffect
+	call PlayerHasPriorityMove
 	jr nc, .speedCheck
 
 	call AICheckEnemyQuarterHP

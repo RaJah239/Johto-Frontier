@@ -296,6 +296,16 @@ PlayerHasMoveEffect:
 	scf
 	ret
 
+PlayerHasPriorityMove:
+; Return carry if the player has a priority attack: a Quick Attack-like move,
+; or a Flying move Gale Wings gives priority (it's at full HP). Like
+; PlayerHasMoveEffect, clobbers a, b and c.
+	ld b, EFFECT_PRIORITY_HIT
+	call PlayerHasMoveEffect
+	ret c
+	newfarcall GaleWingsPlayerHasPriority_Far ; engine/abilities/gale_wings.asm
+	ret
+
 AIHasMoveInArray:
 ; Return carry if the enemy has a move in array hl.
 
@@ -622,8 +632,7 @@ ShouldAIBoost:
 ; or sturdy it can boost, unless player has priority move
 
 ; does player have priority move
-	ld b, EFFECT_PRIORITY_HIT
-	call PlayerHasMoveEffect
+	call PlayerHasPriorityMove
 	jr c, .skip_sturdy_sash_check
 
 	call DoesEnemyHaveIntactFocusSashOrSturdy

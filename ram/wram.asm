@@ -3854,6 +3854,12 @@ wMSimWeatherTurns:: db
 wMSimStartHP:: ds 4     ; wMSimEnemyHP and wMSimPlayerHP before a run
 
 
+SECTION "AI Matchup Sim Gale Wings", WRAM0
+; each side's best Gale Wings hit (big-endian): priority on turns at full HP
+wMSimEnemyGWDmg:: dw
+wMSimPlayerGWDmg:: dw
+
+
 SECTION "AI Matchup Save", WRAMX, BANK[5]
 
 ; the active enemy mon's battle data while the matchup simulation borrows it
@@ -3862,6 +3868,7 @@ wMSimSavedStats:: ds NUM_BATTLE_STATS * 2
 wMSimSavedLevels:: ds 7
 wMSimSavedSubStatus:: ds 5
 wMSimSavedDmg:: ds 9 ; AI_SimMoveChoice: wMSimEnemyDmg .. wMSimPlayerPrioDmg, wMSimFlags
+wMSimSavedGWDmg:: ds 4 ; and wMSimEnemyGWDmg, wMSimPlayerGWDmg
 
 
 SECTION "Pokedex Grid WRAM", WRAMX[$da00], BANK[5]
