@@ -62,7 +62,7 @@ SolarPowerBattleText:
 PriorityBattleText:
 	text "This move gets"
 	line "priority!"
-	done
+	prompt
 
 TypeSyncBattleText:
 	text "This move deals"
