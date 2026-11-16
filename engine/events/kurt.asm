@@ -160,12 +160,12 @@ Kurt_SelectQuantity:
 
 PlaceApricornQuantity:
 	call MenuBoxCoord2Tile
-	ld de, 2 * SCREEN_WIDTH + 10
+	ld de, 2 * SCREEN_WIDTH + 9 ; (×255)
 	add hl, de
 	ld [hl], "×"
 	inc hl
 	ld de, wItemQuantityChange
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	jmp PrintNum
 
 Kurt_GetQuantityOfApricorn:
@@ -189,9 +189,9 @@ Kurt_GetQuantityOfApricorn:
 
 .done
 	ld a, b
-	sub 99
+	cp MAX_ITEM_STACK
 	jr c, .done2
-	ld b, 99
+	ld b, MAX_ITEM_STACK
 
 .done2
 	ld a, b

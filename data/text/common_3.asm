@@ -359,7 +359,7 @@ _MartHowManyText::
 	done
 
 _MartFinalPriceText::
-	text_decimal wItemQuantityChange, 1, 2
+	text_decimal wItemQuantityChange, 1, 3 ; (up to 255: MAX_ITEM_STACK)
 	text " @"
 	text_ram wStringBuffer2
 	text "(S)"
@@ -388,7 +388,7 @@ _HerbalLadyHowManyText::
 	done
 
 _HerbalLadyFinalPriceText::
-	text_decimal wItemQuantityChange, 1, 2
+	text_decimal wItemQuantityChange, 1, 3 ; (up to 255: MAX_ITEM_STACK)
 	text " @"
 	text_ram wStringBuffer2
 	text "(S)"
@@ -471,7 +471,7 @@ _PharmacyHowManyText::
 	done
 
 _PharmacyFinalPriceText::
-	text_decimal wItemQuantityChange, 1, 2
+	text_decimal wItemQuantityChange, 1, 3 ; (up to 255: MAX_ITEM_STACK)
 	text " @"
 	text_ram wStringBuffer2
 	text "(S)"

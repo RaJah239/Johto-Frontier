@@ -62,7 +62,7 @@ DEF GG_BAG_LENGTH EQU NUM_TMS + NUM_HMS + (MAX_ITEMS * 2 + 2) + (MAX_KEY_ITEMS +
 ; check byte + bag + last pocket + each pocket's cursor and scroll position
 DEF GG_BAG_STASH_LENGTH EQU 1 + GG_BAG_LENGTH + 1 + NUM_POCKETS * 2
 
-DEF MAX_ITEM_STACK EQU 99
+DEF MAX_ITEM_STACK EQU 255 ; (a quantity is one byte: 255 at most)
 
 ; mail
 DEF MAIL_LINE_LENGTH      EQU $10

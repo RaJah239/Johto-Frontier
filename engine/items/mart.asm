@@ -645,7 +645,7 @@ MartPlaceInBagQuantity:
 	ld hl, wTMsHMs
 	add hl, bc
 	ld a, [hl]
-	cp MAX_ITEM_STACK + 1
+	cp MAX_ITEM_STACK
 	jr c, .tm_ok
 	ld a, MAX_ITEM_STACK
 .tm_ok
@@ -685,9 +685,9 @@ CheckQuantityInBag:
 
 .done
 	ld a, b
-	sub 99
+	cp MAX_ITEM_STACK
 	jr c, .done2
-	ld b, 99
+	ld b, MAX_ITEM_STACK
 
 .done2
 	ld a, b
@@ -715,7 +715,7 @@ CrystalCountInBag:
 	ld [hl], "×"
 	inc hl
 	ld de, wMenuSelectionQuantity
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	jmp PrintNum
 
 CrystalString:
@@ -741,7 +741,7 @@ NuggetCountInBag:
 	ld [hl], "×"
 	inc hl
 	ld de, wMenuSelectionQuantity
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	call PrintNum
 	ret
 

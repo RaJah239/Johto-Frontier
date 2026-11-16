@@ -35,12 +35,12 @@ PlaceMenuItemQuantity:
 	pop hl
 	and a
 	ret nz
-	ld de, $15
+	ld de, $14 ; (×255: one column left of where ×99 started)
 	add hl, de
 	ld [hl], "×"
 	inc hl
 	ld de, wMenuSelectionQuantity
-	lb bc, 1, 2
+	lb bc, 1, 3
 	jmp PrintNum
 
 PlaceItemInBagQuantity:
@@ -57,11 +57,11 @@ PlaceItemInBagQuantity:
 	cp -1
 	jr z, .no_selection
 
-	hlcoord 5, 1
+	hlcoord 4, 1 ; "Bag×255"
 	ld [hl], "×"
 	inc hl
 	ld de, wMenuSelectionQuantity
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	jmp PrintNum
 
 .no_selection

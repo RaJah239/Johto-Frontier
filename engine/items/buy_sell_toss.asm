@@ -1,6 +1,6 @@
 CalculateMaximumQuantity:
 ; limit [wItemQuantity] so that de * [wItemQuantity] <= Money
-; 1 <= [wItemQuantity] <= 99
+; 1 <= [wItemQuantity] <= MAX_ITEM_STACK
 
 	xor a
 	ld [hMoneyTemp + 0], a
@@ -9,7 +9,7 @@ CalculateMaximumQuantity:
 	ld b, -1
 	jr .start
 .loop
-	cp 99
+	cp MAX_ITEM_STACK
 	jr nc, .done
 .start
 	ld a, [hMoneyTemp + 2]
@@ -122,9 +122,11 @@ BuySellToss_InterpretJoypad:
 .up
 	ld hl, wItemQuantityChange
 	inc [hl]
+	jr z, .wrap_up ; past 255
 	ld a, [wItemQuantity]
 	cp [hl]
 	jr nc, .finish_up
+.wrap_up
 	ld [hl], 1
 
 .finish_up
@@ -151,8 +153,10 @@ BuySellToss_InterpretJoypad:
 	add 10
 	ld b, a
 	ld a, [wItemQuantity]
+	jr c, .max_right ; past 255
 	cp b
 	jr nc, .finish_right
+.max_right
 	ld b, a
 
 .finish_right
@@ -169,7 +173,7 @@ BuySellToss_UpdateQuantityDisplay:
 	ld [hl], "×"
 	inc hl
 	ld de, wItemQuantityChange
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	call PrintNum
 	ld a, [wMenuDataPointer]
 	ld e, a
@@ -232,6 +236,19 @@ BuySell_DisplaySubtotal:
 	ld [hli], a
 	ldh a, [hProduct + 3]
 	ld [hl], a
+	; 255 of an item can be worth more than the 6 digits show (selling it:
+	; money stops at MAX_MONEY anyway): show at most MAX_MONEY
+	ld bc, hMoneyTemp
+	ld de, MaxMoney ; (in CompareMoney's bank: engine/events/money.asm)
+	farcall CompareMoney ; (carry if hMoneyTemp > MAX_MONEY)
+	jr nc, .shown_ok
+	ld hl, hMoneyTemp
+	ld a, HIGH(MAX_MONEY >> 8)
+	ld [hli], a
+	ld a, HIGH(MAX_MONEY)
+	ld [hli], a
+	ld [hl], LOW(MAX_MONEY)
+.shown_ok
 	pop hl
 	inc hl
 	ld de, hMoneyTemp
@@ -242,18 +259,18 @@ BuySell_DisplaySubtotal:
 
 TossItem_MenuHeader:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 15, 9, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
+	menu_coords 14, 9, SCREEN_WIDTH - 1, TEXTBOX_Y - 1 ; (×255)
 	dw NoPriceToDisplay
 	db 0 ; default option
 
 BuyItem_MenuHeader:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 7, 15, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1
+	menu_coords 6, 15, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 ; (×255 ¥999999)
 	dw DisplayPurchasePrice
 	db -1 ; default option
 
 SellItem_MenuHeader:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 7, 15, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1
+	menu_coords 6, 15, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 ; (×255 ¥999999)
 	dw DisplaySellingPrice
 	db 0 ; default option
