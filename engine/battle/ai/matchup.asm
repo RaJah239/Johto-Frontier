@@ -2197,6 +2197,193 @@ MSim_RunBoost:
 	and a
 	ret
 
+MSim_RunReset:
+; b = the move's effect: EFFECT_RESET_STATS (Haze: both sides' stat stages
+; back to normal) or EFFECT_FORCE_SWITCH (Roar / Whirlwind: the mon it drags
+; in is taken as this one without its boosts). wMSimStartHP = the HP to start
+; from. On the first turn the player still attacks: with its boosts if it
+; goes first (always against Roar / Whirlwind, which go last), else without.
+; Then MSim_Run. Carry if the enemy wins; else a = 1 if it lived to use the
+; move, 0 if the player's first hit KO'd it.
+	push bc
+	ld hl, wMSimStartHP
+	ld de, wMSimEnemyHP
+	ld bc, 4
+	call CopyBytes
+	call MSim_ChooseActions
+	pop bc
+	ld a, b
+	cp EFFECT_FORCE_SWITCH
+	jr z, .player_first
+	; Haze has priority: the player only goes first with priority and speed
+	ld a, [wMSimFlags]
+	bit MSIM_P_PRIO_THIS_F, a
+	jr z, .reset_first
+	bit MSIM_E_FASTER_F, a
+	jr nz, .reset_first
+.player_first
+	push bc
+	call MSim_PlayerActs
+	pop bc
+	cp MSIM_PLAYER_WINS
+	jr z, .fainted
+	call .reset
+	jr .end_of_turn
+
+.reset_first
+	call .reset
+	call MSim_ChooseActions
+	call MSim_PlayerActs
+	cp MSIM_PLAYER_WINS
+	jr z, .lost
+.end_of_turn
+	call MSim_EnemyResidual
+	cp MSIM_PLAYER_WINS
+	jr z, .lost
+	call MSim_EndOfTurn
+	and a
+	jr z, .fight
+	cp MSIM_ENEMY_WINS
+	jr nz, .lost
+	scf
+	ret
+
+.fight
+	xor a
+	ld [wMSimT1Kind], a
+	call MSim_Run
+	ret c
+.lost
+	ld a, 1
+	and a
+	ret
+
+.fainted
+	xor a
+	ret
+
+.reset
+; (b = the effect) Stat stages back to normal, stats and damages again.
+	push bc
+	ld hl, wPlayerStatLevels
+	call .normal_levels
+	xor a
+	ldh [hBattleTurn], a
+	callfar CalcPlayerStats
+	pop bc
+	ld a, b
+	cp EFFECT_RESET_STATS
+	jr nz, .damages
+	ld hl, wEnemyStatLevels
+	call .normal_levels
+	ld a, 1
+	ldh [hBattleTurn], a
+	callfar CalcEnemyStats
+.damages
+	jmp MSim_ComputeDamages
+
+.normal_levels
+	ld a, BASE_STAT_LEVEL
+	ld c, MSIM_SAVED_LEVELS_LENGTH
+.level_loop
+	ld [hli], a
+	dec c
+	jr nz, .level_loop
+	ret
+
+MSim_ResetUseful:
+; b = EFFECT_RESET_STATS or EFFECT_FORCE_SWITCH. Carry if using it now
+; would undo something: the player's raised stat stages (Haze: or the
+; enemy's lowered ones). Roar / Whirlwind need another mon for the player
+; to switch to, and fail on Suction Cups. Not while the enemy's mon is asleep
+; for more than this turn. Preserves b.
+	ld a, [wEnemyMonStatus]
+	and SLP_MASK
+	cp 2
+	jr nc, .no
+	ld a, b
+	cp EFFECT_FORCE_SWITCH
+	jr nz, .levels
+	ld a, [wBattleMonSpecies]
+	newfarcall IsSuctionCupsSpecies
+	jr c, .no
+	call MSim_PlayerHasBench
+	jr nc, .no
+.levels
+	ld hl, wPlayerStatLevels
+	ld c, MSIM_SAVED_LEVELS_LENGTH
+.player
+	ld a, [hli]
+	cp BASE_STAT_LEVEL + 1
+	jr nc, .yes
+	dec c
+	jr nz, .player
+	ld a, b
+	cp EFFECT_RESET_STATS
+	jr nz, .no
+	ld hl, wEnemyStatLevels
+	ld c, MSIM_SAVED_LEVELS_LENGTH
+.enemy
+	ld a, [hli]
+	cp BASE_STAT_LEVEL
+	ret c ; lowered
+	dec c
+	jr nz, .enemy
+.no
+	and a
+	ret
+.yes
+	scf
+	ret
+
+MSim_PlayerHasBench:
+; Carry if the player has another mon that can still fight. Preserves b.
+	ld a, [wPartyCount]
+	ld c, a
+	ld e, 0
+	ld hl, wPartyMon1HP
+.loop
+	ld a, [wCurBattleMon]
+	cp e
+	jr z, .next
+	ld a, [hli]
+	or [hl]
+	dec hl
+	jr z, .next
+	scf
+	ret
+.next
+	push bc
+	ld bc, PARTYMON_STRUCT_LENGTH
+	add hl, bc
+	pop bc
+	inc e
+	dec c
+	jr nz, .loop
+	and a
+	ret
+
+MSim_PlayerBoostThreat:
+; a = 255 if the player's mon is set up to sweep (Attack, Sp. Atk, Speed or
+; evasion at +2 or more), else 0. Preserves bc.
+	ld hl, wPlayerAtkLevel
+	call .high
+	ld hl, wPlayerSAtkLevel
+	call .high
+	ld hl, wPlayerSpdLevel
+	call .high
+	ld hl, wPlayerEvaLevel
+	call .high
+	xor a
+	ret
+.high
+	ld a, [hl]
+	cp BASE_STAT_LEVEL + 2
+	ret c
+	pop hl ; (out of the caller)
+	ld a, 255
+	ret
+
 MSim_FindBoost:
 ; Carry and hl = the stat changes (Atk, Def, Spe, SpA, SpD) of the enemy
 ; mon's first usable boosting move.
@@ -2427,11 +2614,20 @@ AI_SimMoveChoice:
 	ret z
 	ld c, a
 	call .slot
+	ld a, [wMSimBestDealt]
+	inc a
+	jr z, .take_it ; 255: it KOs as it goes down, or it resets a sweeper's boosts
 	ld a, [hl]
 	cp 3
 	ret c
 	sub 2
 	ld [hl], a
+	ret
+.take_it
+	ld a, [hl]
+	cp $fe
+	ret nc
+	ld [hl], 1
 	ret
 
 .slot
@@ -2564,6 +2760,10 @@ MSim_EvalSlot:
 
 .not_boost
 	ld a, c
+	cp EFFECT_RESET_STATS
+	jr z, .reset_stats
+	cp EFFECT_FORCE_SWITCH
+	jr z, .reset_stats
 	cp EFFECT_HEAL
 	jp z, .heal
 	cp EFFECT_SLACK_OFF
@@ -2623,6 +2823,59 @@ MSim_EvalSlot:
 	ld [wBattleMonSpeed + 1], a
 	pop af
 	jr .result
+
+.reset_stats
+	; Haze, Roar, Whirlwind (2nd pass): when they'd undo the player's boosts
+	ld a, [wMSimMode]
+	bit MSIM_MODE_SETUP_F, a
+	jp z, .not_simulated
+	ld b, c
+	call MSim_ResetUseful
+	jp nc, .not_simulated
+	call MSim_PlayerBoostThreat
+	push af ; 255: the player is set up to sweep
+	push bc
+	ld hl, wMSimEnemyHP
+	ld de, wMSimStartHP
+	ld bc, 4
+	call CopyBytes
+	pop bc
+	call MSim_RunReset
+	jr c, .reset_won
+	push af ; 1 if it lived to use it
+	and a ; (no carry)
+	call MSim_EvalKey
+	push af ; the share of the player's HP it took off
+	call MSim_RestoreEnemy
+	call MSim_RestoreField
+	pop bc
+	pop af
+	ld c, a
+	pop af
+	; it loses, but if it got the player's boosts off a sweeper, that's
+	; worth more than any losing attack: the next mon gets a fair fight
+	dec c
+	jr nz, .reset_share
+	and a
+	jr nz, .reset_lost
+.reset_share
+	ld a, b
+.reset_lost
+	ld b, a
+	jp .lost
+
+.reset_won
+	call MSim_EvalKey
+	push af
+	call MSim_RestoreEnemy
+	call MSim_RestoreField
+	pop bc
+	pop af ; (threat)
+	pop af ; accuracy (Haze, Roar and Whirlwind don't miss)
+	ld a, b
+	add 128
+	scf
+	ret
 
 .heal
 	ld a, [wMSimMode]
