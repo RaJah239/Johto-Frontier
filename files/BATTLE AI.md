@@ -330,9 +330,9 @@ After a knock-out, U-turn, Volt Switch, Teleport, Baton Pass or a smart switch, 
 1. the one that wins, losing the smallest share of its HP (with the knock-out ability and Chaotic Boost bonuses above)
 2. otherwise, the one that takes the biggest share of your HP off you
 3. if none of them can do anything to you:
-   - the first Pokémon with a super-effective move against yours
-   - otherwise, the first one that none of your Pokémon's moves hit super effectively
-   - otherwise, a random one (skipping asleep or frozen ones)
+   - the first Pokémon with a super-effective move against yours (skipping asleep ones)
+   - otherwise, the first one that none of your Pokémon's moves hit super effectively (also skipping asleep ones)
+   - otherwise, a random one
 
 It won't send in a Pokémon whose entry ability would lower a stat your Contrary Pokémon would then raise to its benefit. Roar and Whirlwind bring in a random Pokémon.
 
