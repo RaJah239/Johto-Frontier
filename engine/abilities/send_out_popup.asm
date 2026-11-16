@@ -23,7 +23,8 @@
 MoveUseAbilityPopups::
 ; Called when the user (hBattleTurn) uses a move, before it takes effect.
 	call NoGuardPopup
-	jmp PranksterPopup
+	call PranksterPopup
+	jmp GaleWingsPopup
 
 SendOutAbilityPopup:
 ; If the user's species is in list hl, show popup c with name de (in this

@@ -645,6 +645,7 @@ SECTION "Once Per Send-Out Abilities", ROMX
 INCLUDE "engine/abilities/send_out_popup.asm"
 INCLUDE "engine/abilities/no_guard.asm"
 INCLUDE "engine/abilities/prankster.asm"
+INCLUDE "engine/abilities/gale_wings.asm"
 INCLUDE "engine/abilities/mold_breaker.asm"
 INCLUDE "engine/abilities/scrappy.asm"
 INCLUDE "engine/abilities/sheer_force.asm"

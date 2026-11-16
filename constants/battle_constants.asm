@@ -157,6 +157,7 @@ DEF SPDSPCDV_SHINY EQU $FF
 	const SEND_OUT_POPUP_UNAWARE
 	const SEND_OUT_POPUP_INFILTRATOR
 	const SEND_OUT_POPUP_ANALYTIC
+	const SEND_OUT_POPUP_GALE_WINGS
 DEF NUM_SEND_OUT_POPUPS EQU const_value
 
 ; wEntryAbilitiesPending bits (engine/abilities/entry_abilities.asm)

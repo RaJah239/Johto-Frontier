@@ -514,6 +514,7 @@ CompareMovePriority:
 	ld c, a
 	ld a, [wBattleMonSpecies]
 	ld d, a
+	ld e, 0 ; player
 	ld a, [wCurPlayerMove]
 	call .Get
 	push bc
@@ -521,6 +522,7 @@ CompareMovePriority:
 	ld c, a
 	ld a, [wEnemyMonSpecies]
 	ld d, a
+	ld e, 1 ; enemy
 	ld a, [wCurEnemyMove]
 	call .Get
 	ld a, b
@@ -529,7 +531,8 @@ CompareMovePriority:
 	ret
 
 .Get:
-; b = the priority of move a used by species d holding item c
+; b = the priority of move a used by species d holding item c, on side e
+; (0 = player, 1 = enemy): abilities like Prankster and Gale Wings included
 	push af
 	push de
 	call GetMovePriority
@@ -537,12 +540,13 @@ CompareMovePriority:
 	ld b, a
 	pop af
 	ld c, a
-	farjp PranksterPriority
+	farjp MovePriorityAbilities ; engine/abilities/gale_wings.asm
 
 GetEnemyMovePriority_Far:
 ; farcall-friendly GetMovePriority for move b used by the enemy's mon.
 ; Returns the priority in b (farcall doesn't preserve a). Preserves de.
 	push de
+	ld e, 1 ; enemy
 	ld a, [wEnemyMonItem]
 	ld c, a
 	ld a, [wEnemyMonSpecies]
@@ -551,14 +555,22 @@ GetEnemyMovePriority_Far:
 GetPlayerMovePriority_Far:
 ; The same for move b used by the player's mon.
 	push de
+	ld e, 0 ; player
 	ld a, [wBattleMonItem]
 	ld c, a
 	ld a, [wBattleMonSpecies]
 GetMovePriority_Far:
 	ld d, a
 	ld a, b
+	push af
+	push de
 	call GetMovePriority
+	pop de
 	ld b, a
+	pop af
+	ld c, a
+	; Gale Wings (the AI didn't count Prankster before, so it still doesn't)
+	newfarcall GaleWingsPriority_Far
 	pop de
 	ret
 
