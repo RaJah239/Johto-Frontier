@@ -9,78 +9,68 @@
 	const POKEMON_MUSIC          ; 02
 	const CASINO_BEATS           ; 03
 	const BUENAS_PASSWORD        ; 04
-	const PLACES_AND_PEOPLE      ; 05
-	const LETS_ALL_SING          ; 06
-	const ROCKET_RADIO           ; 07
-	const POKE_FLUTE_RADIO       ; 08
-	const UNOWN_RADIO            ; 09
-	const EVOLUTION_RADIO        ; 0a
-	const NATIONAL_PARK_RADIO    ; 0b
+	const ROCKET_RADIO           ; 05
+	const UNOWN_RADIO            ; 06
+	const EVOLUTION_RADIO        ; 07
+	const NATIONAL_PARK_RADIO    ; 08
 DEF NUM_RADIO_CHANNELS EQU const_value
 ; internal indexes for channel segments
-	const OAKS_POKEMON_TALK_2    ; 0b
-	const OAKS_POKEMON_TALK_3    ; 0c
-	const OAKS_POKEMON_TALK_4    ; 0d
-	const OAKS_POKEMON_TALK_5    ; 0e
-	const OAKS_POKEMON_TALK_6    ; 0f
-	const OAKS_POKEMON_TALK_7    ; 10
-	const OAKS_POKEMON_TALK_8    ; 11
-	const OAKS_POKEMON_TALK_9    ; 12
-	const POKEDEX_SHOW_2         ; 13
-	const POKEDEX_SHOW_3         ; 14
-	const POKEDEX_SHOW_4         ; 15
-	const POKEDEX_SHOW_5         ; 16
-	const POKEMON_MUSIC_2        ; 17
-	const POKEMON_MUSIC_3        ; 18
-	const POKEMON_MUSIC_4        ; 19
-	const POKEMON_MUSIC_5        ; 1a
-	const POKEMON_MUSIC_6        ; 1b
-	const POKEMON_MUSIC_7        ; 1c
-	const LETS_ALL_SING_2        ; 1d
-	const PLACES_AND_PEOPLE_2    ; 2c
-	const PLACES_AND_PEOPLE_3    ; 2d
-	const PLACES_AND_PEOPLE_4    ; 2e
-	const PLACES_AND_PEOPLE_5    ; 2f
-	const PLACES_AND_PEOPLE_6    ; 30
-	const PLACES_AND_PEOPLE_7    ; 31
-	const ROCKET_RADIO_2         ; 32
-	const ROCKET_RADIO_3         ; 33
-	const ROCKET_RADIO_4         ; 34
-	const ROCKET_RADIO_5         ; 35
-	const ROCKET_RADIO_6         ; 36
-	const ROCKET_RADIO_7         ; 37
-	const ROCKET_RADIO_8         ; 38
-	const ROCKET_RADIO_9         ; 39
-	const ROCKET_RADIO_10        ; 3a
-	const OAKS_POKEMON_TALK_10   ; 3b
-	const OAKS_POKEMON_TALK_11   ; 3c
-	const OAKS_POKEMON_TALK_12   ; 3d
-	const OAKS_POKEMON_TALK_13   ; 3e
-	const OAKS_POKEMON_TALK_14   ; 3f
-	const BUENAS_PASSWORD_2      ; 40
-	const BUENAS_PASSWORD_3      ; 41
-	const BUENAS_PASSWORD_4      ; 42
-	const BUENAS_PASSWORD_5      ; 43
-	const BUENAS_PASSWORD_6      ; 44
-	const BUENAS_PASSWORD_7      ; 45
-	const BUENAS_PASSWORD_8      ; 46
-	const BUENAS_PASSWORD_9      ; 47
-	const BUENAS_PASSWORD_10     ; 48
-	const BUENAS_PASSWORD_11     ; 49
-	const BUENAS_PASSWORD_12     ; 4a
-	const BUENAS_PASSWORD_13     ; 4b
-	const BUENAS_PASSWORD_14     ; 4c
-	const BUENAS_PASSWORD_15     ; 4d
-	const BUENAS_PASSWORD_16     ; 4e
-	const BUENAS_PASSWORD_17     ; 4f
-	const BUENAS_PASSWORD_18     ; 50
-	const BUENAS_PASSWORD_19     ; 51
-	const BUENAS_PASSWORD_20     ; 52
-	const BUENAS_PASSWORD_21     ; 53
-	const RADIO_SCROLL           ; 54
-	const POKEDEX_SHOW_6         ; 55
-	const POKEDEX_SHOW_7         ; 56
-	const POKEDEX_SHOW_8         ; 57
+	const OAKS_POKEMON_TALK_2    ; 09
+	const OAKS_POKEMON_TALK_3    ; 0a
+	const OAKS_POKEMON_TALK_4    ; 0b
+	const OAKS_POKEMON_TALK_5    ; 0c
+	const OAKS_POKEMON_TALK_6    ; 0d
+	const OAKS_POKEMON_TALK_7    ; 0e
+	const OAKS_POKEMON_TALK_8    ; 0f
+	const OAKS_POKEMON_TALK_9    ; 10
+	const POKEDEX_SHOW_2         ; 11
+	const POKEDEX_SHOW_3         ; 12
+	const POKEDEX_SHOW_4         ; 13
+	const POKEDEX_SHOW_5         ; 14
+	const POKEMON_MUSIC_2        ; 15
+	const POKEMON_MUSIC_3        ; 16
+	const POKEMON_MUSIC_4        ; 17
+	const POKEMON_MUSIC_5        ; 18
+	const POKEMON_MUSIC_6        ; 19
+	const POKEMON_MUSIC_7        ; 1a
+	const ROCKET_RADIO_2         ; 1b
+	const ROCKET_RADIO_3         ; 1c
+	const ROCKET_RADIO_4         ; 1d
+	const ROCKET_RADIO_5         ; 1e
+	const ROCKET_RADIO_6         ; 1f
+	const ROCKET_RADIO_7         ; 20
+	const ROCKET_RADIO_8         ; 21
+	const ROCKET_RADIO_9         ; 22
+	const ROCKET_RADIO_10        ; 23
+	const OAKS_POKEMON_TALK_10   ; 24
+	const OAKS_POKEMON_TALK_11   ; 25
+	const OAKS_POKEMON_TALK_12   ; 26
+	const OAKS_POKEMON_TALK_13   ; 27
+	const OAKS_POKEMON_TALK_14   ; 28
+	const BUENAS_PASSWORD_2      ; 29
+	const BUENAS_PASSWORD_3      ; 2a
+	const BUENAS_PASSWORD_4      ; 2b
+	const BUENAS_PASSWORD_5      ; 2c
+	const BUENAS_PASSWORD_6      ; 2d
+	const BUENAS_PASSWORD_7      ; 2e
+	const BUENAS_PASSWORD_8      ; 2f
+	const BUENAS_PASSWORD_9      ; 30
+	const BUENAS_PASSWORD_10     ; 31
+	const BUENAS_PASSWORD_11     ; 32
+	const BUENAS_PASSWORD_12     ; 33
+	const BUENAS_PASSWORD_13     ; 34
+	const BUENAS_PASSWORD_14     ; 35
+	const BUENAS_PASSWORD_15     ; 36
+	const BUENAS_PASSWORD_16     ; 37
+	const BUENAS_PASSWORD_17     ; 38
+	const BUENAS_PASSWORD_18     ; 39
+	const BUENAS_PASSWORD_19     ; 3a
+	const BUENAS_PASSWORD_20     ; 3b
+	const BUENAS_PASSWORD_21     ; 3c
+	const RADIO_SCROLL           ; 3d
+	const POKEDEX_SHOW_6         ; 3e
+	const POKEDEX_SHOW_7         ; 3f
+	const POKEDEX_SHOW_8         ; 40
 DEF NUM_RADIO_SEGMENTS EQU const_value
 
 ; PlayRadioStationPointers indexes (see engine/pokegear/pokegear.asm)
@@ -91,8 +81,6 @@ DEF NUM_RADIO_SEGMENTS EQU const_value
 	const MAPRADIO_POKEMON_MUSIC
 	const MAPRADIO_CASINO_BEATS
 	const MAPRADIO_UNOWN
-	const MAPRADIO_PLACES_PEOPLE
-	const MAPRADIO_LETS_ALL_SING
 	const MAPRADIO_ROCKET
 DEF NUM_MAP_RADIO_STATIONS EQU const_value
 
@@ -100,8 +88,6 @@ DEF NUM_MAP_RADIO_STATIONS EQU const_value
 ; so there's no need for a rejection sampling loop
 DEF NUM_OAKS_POKEMON_TALK_ADVERBS    EQU 16 ; OaksPKMNTalk8.Adverbs
 DEF NUM_OAKS_POKEMON_TALK_ADJECTIVES EQU 16 ; OaksPKMNTalk9.Adjectives
-DEF NUM_PNP_PEOPLE_ADJECTIVES        EQU 16 ; PeoplePlaces5.Adjectives
-DEF NUM_PNP_PLACES_ADJECTIVES        EQU 16 ; PeoplePlaces7.Adjectives
 
 ; BuenasPasswordTable sizes (see data/radio/buenas_passwords.asm)
 DEF NUM_PASSWORD_CATEGORIES    EQU 11

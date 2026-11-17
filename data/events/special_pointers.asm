@@ -89,7 +89,6 @@ SpecialsPointers::
 	add_special CheckFirstMonIsEgg
 	add_special LoadUsedSpritesGFX
 	add_special PlaySlowCry
-	add_special SnorlaxAwake
 	add_special OlderHaircutBrother
 	add_special YoungerHaircutBrother
 	add_special DaisysGrooming

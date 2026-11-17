@@ -591,16 +591,6 @@ _BenIntroText3::
 	line "It's me, DJ Ben!"
 	done
 
-_FernIntroText1::
-	text_start
-	line "Fern: #Music!"
-	done
-
-_FernIntroText2::
-	text_start
-	line "With DJ Fern!"
-	done
-
 _BenFernText1::
 	text_start
 	line "Today's @"
@@ -627,117 +617,6 @@ _BenFernText3B::
 	text_start
 	line "#mon Lullaby!"
 	done
-
-; Places and People
-
-_PnP_Text1::
-	text_start
-	line "Places And People!"
-	done
-
-_PnP_Text2::
-	text_start
-	line "Brought to you by"
-	done
-
-_PnP_Text3::
-	text_start
-	line "me, DJ Lily!"
-	done
-
-_PnP_Text4::
-	text_start
-	line "@"
-	text_ram wStringBuffer2
-	text " @"
-	text_ram wStringBuffer1
-	text_end
-
-_PnP_CuteText::
-	text_start
-	line "is cute."
-	done
-
-_PnP_LazyText::
-	text_start
-	line "is sort of lazy."
-	done
-
-_PnP_HappyText::
-	text_start
-	line "is always happy."
-	done
-
-_PnP_NoisyText::
-	text_start
-	line "is quite noisy."
-	done
-
-_PnP_PrecociousText::
-	text_start
-	line "is precocious."
-	done
-
-_PnP_BoldText::
-	text_start
-	line "is somewhat bold."
-	done
-
-_PnP_PickyText::
-	text_start
-	line "is too picky!"
-	done
-
-_PnP_SortOfOKText::
-	text_start
-	line "is sort of OK."
-	done
-
-_PnP_SoSoText::
-	text_start
-	line "is just so-so."
-	done
-
-_PnP_GreatText::
-	text_start
-	line "is actually great."
-	done
-
-_PnP_MyTypeText::
-	text_start
-	line "is just my type."
-	done
-
-_PnP_CoolText::
-	text_start
-	line "is so cool, no?"
-	done
-
-_PnP_InspiringText::
-	text_start
-	line "is inspiring!"
-	done
-
-_PnP_WeirdText::
-	text_start
-	line "is kind of weird."
-	done
-
-_PnP_RightForMeText::
-	text_start
-	line "is right for me?"
-	done
-
-_PnP_OddText::
-	text_start
-	line "is definitely odd!"
-	done
-
-_PnP_Text5::
-	text_start
-	line "@"
-	text_ram wStringBuffer1
-	text_end
 
 _RocketRadioText1::
 	text_start

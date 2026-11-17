@@ -11,7 +11,7 @@ HallOfFame::
 	ld a, SPAWN_LANCE
 	ld [wSpawnAfterChampion], a
 
-	; Enable the Pokégear map to cycle through all of Kanto
+	; The player is now Champion
 	ld hl, wStatusFlags
 	set STATUSFLAGS_HALL_OF_FAME_F, [hl]
 

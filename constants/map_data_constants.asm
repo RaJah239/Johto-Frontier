@@ -89,9 +89,6 @@ DEF NUM_FISHGROUPS EQU const_value - 1
 	const_def
 	const SPAWN_HOME
 	const SPAWN_DEBUG
-; kanto
-
-; johto
 	const SPAWN_NEW_BARK
 	const SPAWN_CHERRYGROVE
 	const SPAWN_VIOLET
@@ -116,8 +113,6 @@ DEF SPAWN_N_A EQU -1
 
 ; Flypoints indexes (see data/maps/flypoints.asm)
 	const_def
-; johto
-DEF JOHTO_FLYPOINT EQU const_value
 	const FLY_NEW_BARK
 	const FLY_CHERRYGROVE
 	const FLY_VIOLET
@@ -136,6 +131,4 @@ DEF JOHTO_FLYPOINT EQU const_value
 	const FLY_BLACKTHORN
 	const FLY_ROUTE_20
 	const FLY_INDIGO
-; kanto
-DEF KANTO_FLYPOINT EQU const_value
 DEF NUM_FLYPOINTS EQU const_value

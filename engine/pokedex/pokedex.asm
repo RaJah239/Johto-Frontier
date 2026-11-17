@@ -3139,13 +3139,7 @@ Pokedex_SearchCurrentArea_GetGrassPointer:
 	call Pokedex_SearchCurrentArea_CheckGrassSwarm
 	ret c
 
-	call IsInJohto
-	and a
-	ld hl, KantoGrassWildMons
-	jr nz, .table_ready
 	ld hl, JohtoGrassWildMons
-
-.table_ready
 	call Pokedex_SearchCurrentArea_CopyCurrMapDE
 	jp Pokedex_SearchCurrentArea_LookUpGrassWildmonsForMapDE
 
@@ -3153,13 +3147,7 @@ Pokedex_SearchCurrentArea_GetSurfPointer:
 	call Pokedex_SearchCurrentArea_CheckWaterSwarm
 	ret c
 
-	call IsInJohto
-	and a
-	ld hl, KantoWaterWildMons
-	jr nz, .table_ready
 	ld hl, JohtoWaterWildMons
-
-.table_ready
 	call Pokedex_SearchCurrentArea_CopyCurrMapDE
 	jp Pokedex_SearchCurrentArea_LookUpWaterWildmonsForMapDE
 

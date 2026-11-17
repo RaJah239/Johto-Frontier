@@ -294,7 +294,7 @@ DEF NUM_BADGES       EQU NUM_JOHTO_BADGES + NUM_KANTO_BADGES
 	const POKEGEAR_MAP_CARD_F   ; 0
 	const POKEGEAR_RADIO_CARD_F ; 1
 	const POKEGEAR_PHONE_CARD_F ; 2
-	const POKEGEAR_EXPN_CARD_F  ; 3
+	const_skip                  ; 3 (was the EXPN card, for the Kanto radio channels)
 	const ENGINE_START_MENU_WARP_F
 	const POKEGEAR_OBTAINED_F   ; 7
 

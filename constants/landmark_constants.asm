@@ -55,19 +55,11 @@
 	const LANDMARK_ROUTE_21          ; 33
 	const LANDMARK_INDIGO_PLATEAU    ; 34
 	const LANDMARK_BATTLE_PLAZA      ; 35
-DEF KANTO_LANDMARK EQU const_value
-	const LANDMARK_PALLET_TOWN       ; 36
-	const LANDMARK_UNDERGROUND_PATH  ; 37
-	const LANDMARK_FAST_SHIP         ; 38
+DEF NUM_MAP_LANDMARKS EQU const_value ; the ones on the town map
+	const LANDMARK_FAST_SHIP         ; 36
 DEF NUM_LANDMARKS EQU const_value
 
 ; used in CaughtData
 	const_def $7f, -1
 	const LANDMARK_EVENT             ; $7f
 	const LANDMARK_GIFT              ; $7e
-
-; Regions
-	const_def
-	const JOHTO_REGION ; 0
-	const KANTO_REGION ; 1
-DEF NUM_REGIONS EQU const_value

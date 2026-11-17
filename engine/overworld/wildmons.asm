@@ -43,27 +43,15 @@ GetTimeOfDayNotEve:
 
 FindNest:
 ; Parameters:
-; e: 0 = Johto, 1 = Kanto
 ; wNamedObjectIndex: species
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	xor a
 	call ByteFill
-	ld a, e
-	and a
-	jr nz, .kanto
 	decoord 0, 0
 	ld hl, JohtoGrassWildMons
 	call .FindGrass
 	ld hl, JohtoWaterWildMons
-	call .FindWater
-	ret
-
-.kanto
-	decoord 0, 0
-	ld hl, KantoGrassWildMons
-	call .FindGrass
-	ld hl, KantoWaterWildMons
 	jr .FindWater
 
 .FindGrass:
@@ -400,8 +388,6 @@ _GrassWildmonLookup:
 	ret c
 .no_swarm
 	ld hl, JohtoGrassWildMons
-	ld de, KantoGrassWildMons
-	call _JohtoWildmonCheck
 	ld bc, GRASS_WILDDATA_LENGTH
 	jr _NormalWildmonOK
 
@@ -411,18 +397,8 @@ _WaterWildmonLookup:
 	call _SwarmWildmonCheck
 	ret c
 	ld hl, JohtoWaterWildMons
-	ld de, KantoWaterWildMons
-	call _JohtoWildmonCheck
 	ld bc, WATER_WILDDATA_LENGTH
 	jr _NormalWildmonOK
-
-_JohtoWildmonCheck:
-	call IsInJohto
-	and a
-	ret z
-	ld h, d
-	ld l, e
-	ret
 
 _SwarmWildmonCheck:
 	call CopyCurrMapDE
@@ -591,8 +567,6 @@ ValidateTempWildMonSpecies:
 
 INCLUDE "data/wild/johto_grass.asm"
 INCLUDE "data/wild/johto_water.asm"
-INCLUDE "data/wild/kanto_grass.asm"
-INCLUDE "data/wild/kanto_water.asm"
 INCLUDE "data/wild/swarm_grass.asm"
 INCLUDE "data/wild/swarm_grass_alt.asm"
 INCLUDE "data/wild/swarm_water.asm"

@@ -29,8 +29,6 @@ DEF MAX_LINES_PRINTED_PER_PAGE EQU MAX_ENTRIES_PER_PAGE * 2 ; 6
 
 String_johto_text:
 	db "Johto:     @"
-String_kanto_text:
-	db "Kanto:     @"
 String_swarm_text:
 	db "Swarm:     @"
 
@@ -55,18 +53,12 @@ Pokedex_DetailedArea:
 	ld hl, JohtoGrassWildMons
 	cp DEXENTRY_AREA_GRASS_JOHTO
 	jmp z, .grass ; _johto
-	ld hl, KantoGrassWildMons
-	cp DEXENTRY_AREA_GRASS_KANTO
-	jmp z, .grass ; _kanto
 	ld hl, SwarmGrassWildMons
 	cp DEXENTRY_AREA_GRASS_SWARM
 	jr z, .grass ; _swarm
 	
 	ld hl,JohtoWaterWildMons
 	cp DEXENTRY_AREA_SURF_JOHTO
-	jr z, .surf
-	ld hl, KantoWaterWildMons
-	cp DEXENTRY_AREA_SURF_KANTO
 	jr z, .surf
 	ld hl, SwarmWaterWildMons
 	cp DEXENTRY_AREA_SURF_SWARM
@@ -142,7 +134,7 @@ Pokedex_DetailedArea:
 	ret
 
 .grass
-	; hl contains the table we are looking at, JohtoGrassWildMons, KantoGrassWildMons, or SwarmGrassWildMons  	
+	; hl contains the table we are looking at, JohtoGrassWildMons or SwarmGrassWildMons  	
 	call Pokedex_DetailedArea_grass
 	jr .skip_empty_area_check
 .surf
@@ -192,11 +184,6 @@ Dex_FindFirstList:
 	call Dex_Check_Grass
 	and a
 	jmp z, .grass_johto
-	ld hl, KantoGrassWildMons
-	ld a, BANK(KantoGrassWildMons)
-	call Dex_Check_Grass
-	and a
-	jr z, .grass_kanto
 	ld hl, SwarmGrassWildMons
 	ld a, BANK(SwarmGrassWildMons)
 	call Dex_Check_Grass
@@ -209,11 +196,6 @@ Dex_FindFirstList:
 	and a
 	jr z, .surf_johto
 
-	ld hl, KantoWaterWildMons
-	ld a, BANK(KantoWaterWildMons)
-	call Dex_Check_Surf
-	and a
-	jr z, .surf_kanto
 	
 	ld hl, SwarmWaterWildMons
 	ld a, BANK(SwarmWaterWildMons)
@@ -272,17 +254,11 @@ Dex_FindFirstList:
 .grass_johto
 	ld a, DEXENTRY_AREA_GRASS_JOHTO
 	ret
-.grass_kanto
-	ld a, DEXENTRY_AREA_GRASS_KANTO
-	ret
 .grass_swarm
 	ld a, DEXENTRY_AREA_GRASS_SWARM
 	ret
 .surf_johto
 	ld a, DEXENTRY_AREA_SURF_JOHTO
-	ret
-.surf_kanto
-	ld a, DEXENTRY_AREA_SURF_KANTO
 	ret
 .surf_swarm
 	ld a, DEXENTRY_AREA_SURF_SWARM
@@ -403,14 +379,14 @@ Pokedex_Skip_Empty_Area_Category:
 	xor a
 	ld [wPokedexStatus], a ; wildmon entry index
 	ld [wPokedexEntryPageNum], a ; page num
-	ld a, [wPokedexEntryType] ; johto, kanto, swarm
+	ld a, [wPokedexEntryType] ; johto, swarm
 	inc a
 	call DexEntry_NextCategory
 	ld a, -1 ; will signify 
 	ret
 
 Pokedex_DetailedArea_grass:
-	push hl ; JohtoGrassWildMons, KantoGrassWildMons, or SwarmGrassWildMons. still need this push because the function probably clobbers hl
+	push hl ; JohtoGrassWildMons or SwarmGrassWildMons. still need this push because the function probably clobbers hl
 	; need to preserve Wildmon Index
 	ld a, [wPokedexStatus]; wildmon entry index
 	push af ; wildmon index
@@ -424,16 +400,11 @@ Pokedex_DetailedArea_grass:
 	and a
 	jr nz, Pokedex_Skip_Empty_Area_Category
 
-	push hl ; JohtoGrassWildMons, KantoGrassWildMons, or SwarmGrassWildMons
+	push hl ; JohtoGrassWildMons or SwarmGrassWildMons
 	ld a, [wPokedexEntryType]
 	cp DEXENTRY_AREA_GRASS_JOHTO
-	jr nz, .chk_kanto
-	ld de, String_johto_text
-	jr .title_done
-.chk_kanto
-	cp DEXENTRY_AREA_GRASS_KANTO
 	jr nz, .swarm
-	ld de, String_kanto_text
+	ld de, String_johto_text
 	jr .title_done
 .swarm
 	ld de, String_swarm_text
@@ -455,7 +426,7 @@ Pokedex_DetailedArea_grass:
 	ldh a, [hProduct + 3]
 	ld c, a ; result of simple multiply in a
 	; ld hl, JohtoGrassWildMons
-	pop hl ; JohtoGrassWildMons, KantoGrassWildMons, or SwarmGrassWildMons
+	pop hl ; JohtoGrassWildMons or SwarmGrassWildMons
 	add hl, bc; pointing to map group and num?
 	ld bc, 0 ; printed line count
 	push bc ; printed line count
@@ -527,7 +498,7 @@ Pokedex_DetailedArea_grass:
 	xor a
 	ld [wPokedexStatus], a ; wildmon entry index
 	ld [wPokedexEntryPageNum], a ; page num
-	ld a, [wPokedexEntryType] ; johto, kanto, swarm
+	ld a, [wPokedexEntryType] ; johto, swarm
 	inc a
 	call DexEntry_NextCategory
 	xor a ; to ensure a isnt actually returned at -1. 0 is for normal
@@ -670,7 +641,7 @@ Add_encounter_percent_grass:
 
 ;;;;;;;;;;;;;;;;;;;;;;; SURF ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 Pokedex_DetailedArea_surf:
-	push hl ; JohtoWaterWildMons, KantoWaterWildMons, or SwarmWaterWildMons. still need this push because the function probably clobbers hl
+	push hl ; JohtoWaterWildMons or SwarmWaterWildMons. still need this push because the function probably clobbers hl
 	; need to preserve Wildmon Index
 	ld a, [wPokedexStatus]; wildmon entry index
 	push af ; wildmon index
@@ -684,16 +655,11 @@ Pokedex_DetailedArea_surf:
 	and a
 	jmp nz, Pokedex_Skip_Empty_Area_Category
 
-	push hl ; JohtoWaterWildMons, KantoWaterWildMons, or SwarmWaterWildMons
+	push hl ; JohtoWaterWildMons or SwarmWaterWildMons
 	ld a, [wPokedexEntryType]
 	cp DEXENTRY_AREA_SURF_JOHTO
-	jr nz, .chk_kanto
-	ld de, String_johto_text
-	jr .title_done
-.chk_kanto
-	cp DEXENTRY_AREA_SURF_KANTO
 	jr nz, .swarm
-	ld de, String_kanto_text
+	ld de, String_johto_text
 	jr .title_done
 .swarm
 	ld de, String_swarm_text
@@ -715,7 +681,7 @@ Pokedex_DetailedArea_surf:
 	ldh a, [hProduct + 3]
 	ld c, a ; result of simple multiply in a
 	; ld hl, JohtoWaterWildMons
-	pop hl ; JohtoWaterWildMons, KantoWaterWildMons, or SwarmWaterWildMons
+	pop hl ; JohtoWaterWildMons or SwarmWaterWildMons
 	add hl, bc; pointing to map group and num?
 	ld bc, 0 ; printed line count
 	push bc ; printed line count
@@ -774,7 +740,7 @@ Pokedex_DetailedArea_surf:
 	xor a
 	ld [wPokedexStatus], a ; wildmon entry index
 	ld [wPokedexEntryPageNum], a ; page num
-	ld a, [wPokedexEntryType] ; johto, kanto, swarm
+	ld a, [wPokedexEntryType] ; johto, swarm
 	inc a
 	call DexEntry_NextCategory
 	xor a ; to ensure a isnt actually returned at -1. 0 is for normal
@@ -830,7 +796,7 @@ Pokedex_Parse_surf:
 
 Surf_check_any_remaining:
 	; once we have printed max number of entries per page
-	; need to determine if there's anymore in this category (johto/kanto/swarm) before switching to next category
+	; need to determine if there's anymore in this category (johto/swarm) before switching to next category
 	push hl
 	push de
 	push bc
@@ -914,7 +880,7 @@ Add_encounter_percent_water:
 ;;;;;;;; First Pass Checking ;;;;;;;;;;;;;;
 
 Dex_Check_Grass:
-	; hl is JohtoGrassWildMons, KantoGrassWildMons, or SwarmGrassWildMons
+	; hl is JohtoGrassWildMons or SwarmGrassWildMons
 	call GetFarByte
 	cp -1 ; swarm water table will be empty, just -1
 	ret z
@@ -940,7 +906,7 @@ Dex_Check_Grass:
 	call GetFarByte ; hl is preserved
 	cp -1
 	ret z
-	; push hl ; hl is JohtoGrassWildMons, KantoGrassWildMons, or SwarmGrassWildMons
+	; push hl ; hl is JohtoGrassWildMons or SwarmGrassWildMons
 	jr .landmark_loop
 .found
 	pop hl
@@ -954,7 +920,7 @@ Pokedex_LookCheck_grass:
 	jmp FarFindCurSpeciesInSlots
 
 Dex_Check_Surf:
-	; hl is JohtoGrassWildMons, KantoGrassWildMons, or SwarmGrassWildMons
+	; hl is JohtoGrassWildMons or SwarmGrassWildMons
 	call GetFarByte
 	cp -1 ; swarm water table will be empty, just -1
 	ret z
@@ -969,7 +935,6 @@ Dex_Check_Surf:
 	inc hl ; now pointing to species
 	inc hl
 	ld a, BANK(JohtoWaterWildMons)
-	; ld a, BANK(KantoWaterWildMons)
 	call Pokedex_LookCheck_surf
 	and a
 	jr z, .found
@@ -984,7 +949,7 @@ Dex_Check_Surf:
 	cp -1
 	;jr z, .reached_end
 	ret z
-	; push hl ; hl is JohtoGrassWildMons, KantoGrassWildMons, or SwarmGrassWildMons
+	; push hl ; hl is JohtoGrassWildMons or SwarmGrassWildMons
 	jr .landmark_loop
 .found
 	pop hl
@@ -1331,7 +1296,7 @@ Dex_Check_casino:
 	ld a, BANK(CasinoMons)
 	call GetFarByte
 	cp -1
-	jr z, .check_kanto_casino
+	jr z, .notfound
 	; we arent at the end yet, so this byte is the species
 	ld c, a ; pokemon species of entry in EventWildMons/GiftMons
 	ld a, [wCurSpecies] ; current pokedex entry species
@@ -1342,11 +1307,6 @@ Dex_Check_casino:
 	ld de, 3 ; size of casinomon entry, 3 bytes
 	add hl, de
 	jr .loop
-.check_kanto_casino
-	; CasinoMons only has the Goldenrod list (there is no Kanto game corner):
-	; reading on went into NPCTradeMons_Locations, so some mons got a casino
-	; page with a made-up map and price
-	jr .notfound
 .found
 	xor a
 	ret
@@ -1375,7 +1335,7 @@ Pokedex_DetailedArea_casino:
 	ld a, BANK(CasinoMons)
 	call GetFarByte
 	cp -1
-	jr z, .kanto_loop_setup
+	jr z, .donedone
 	; we arent at the end yet, so this byte is the species
 	ld c, a ; pokemon species of entry in EventWildMons/GiftMons
 	ld a, [wCurSpecies] ; current pokedex entry species
@@ -1386,30 +1346,6 @@ Pokedex_DetailedArea_casino:
 	ld de, 3 ; size of casinomon entry, 3 bytes
 	add hl, de
 	jr .johto_loop
-.kanto_loop_setup
-	jr .donedone ; only a Johto list (see Dex_Check_casino)
-	inc hl ; ptr to kanto casino map_id
-	push hl ; ptr to kanto casino map_id
-	inc hl
-	inc hl ; first kanto casinomon species
-.kanto_loop
-	ld a, BANK(CasinoMons)
-	call GetFarByte
-	cp -1
-	jr z, .kanto_done
-	; we arent at the end yet, so this byte is the species
-	ld c, a ; pokemon species of entry in EventWildMons/GiftMons
-	ld a, [wCurSpecies] ; current pokedex entry species
-	pop de ; kanto casino map_id ptr
-	push de ; kanto casino map_id ptr
-	cp c
-	call z, Print_casinomon
-	; inc hl by 3, need to check for -1
-	ld de, 3 ; size of casinomon entry, 3 bytes
-	add hl, de
-	jr .kanto_loop
-.kanto_done
-	pop hl ; ptr to kanto casino map_id, clean stack
 .donedone
 	ld a, [wPokedexEntryType] ; casino
 	inc a

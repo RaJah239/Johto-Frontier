@@ -1,16 +1,12 @@
 PlayRadioShow:
 ; If we're already in the radio program proper, we don't need to be here.
 	ld a, [wCurRadioLine]
-	cp POKE_FLUTE_RADIO
+	cp UNOWN_RADIO
 	jr nc, .ok
 ; If Team Rocket is not occupying the radio tower, we don't need to be here.
 	ld a, [wStatusFlags2]
 	bit STATUSFLAGS2_ROCKETS_IN_RADIO_TOWER_F, a
 	jr z, .ok
-; If we're in Kanto, we don't need to be here.
-	call IsInJohto
-	and a
-	jr nz, .ok
 ; Team Rocket broadcasts on all stations.
 	ld a, ROCKET_RADIO
 	ld [wCurRadioLine], a
@@ -26,84 +22,73 @@ RadioJumptable:
 	dw BenMonMusic1      ; $02
 	dw CasinoBeats       ; $03
 	dw BuenasPassword1   ; $04
-	dw PeoplePlaces1     ; $05
-	dw FernMonMusic1     ; $06
-	dw RocketRadio1      ; $07
-	dw PokeFluteRadio    ; $08
-	dw UnownRadio        ; $09
-	dw EvolutionRadio    ; $0a
-	dw NationalPark      ; $0b
+	dw RocketRadio1      ; $05
+	dw UnownRadio        ; $06
+	dw EvolutionRadio    ; $07
+	dw NationalPark      ; $08
 	assert_table_length NUM_RADIO_CHANNELS
 ; OaksPKMNTalk
-	dw OaksPKMNTalk2     ; $0b
-	dw OaksPKMNTalk3     ; $0c
-	dw OaksPKMNTalk4     ; $0d
-	dw OaksPKMNTalk5     ; $0e
-	dw OaksPKMNTalk6     ; $0f
-	dw OaksPKMNTalk7     ; $10
-	dw OaksPKMNTalk8     ; $11
-	dw OaksPKMNTalk9     ; $12
-	dw PokedexShow2      ; $13
-	dw PokedexShow3      ; $14
-	dw PokedexShow4      ; $15
-	dw PokedexShow5      ; $16
+	dw OaksPKMNTalk2     ; $09
+	dw OaksPKMNTalk3     ; $0a
+	dw OaksPKMNTalk4     ; $0b
+	dw OaksPKMNTalk5     ; $0c
+	dw OaksPKMNTalk6     ; $0d
+	dw OaksPKMNTalk7     ; $0e
+	dw OaksPKMNTalk8     ; $0f
+	dw OaksPKMNTalk9     ; $10
+	dw PokedexShow2      ; $11
+	dw PokedexShow3      ; $12
+	dw PokedexShow4      ; $13
+	dw PokedexShow5      ; $14
 ; Ben Music
-	dw BenMonMusic2      ; $17
-	dw BenMonMusic3      ; $18
-	dw BenFernMusic4     ; $19
-	dw BenFernMusic5     ; $1a
-	dw BenFernMusic6     ; $1b
-	dw BenFernMusic7     ; $1c
-	dw FernMonMusic2     ; $1d
-; People & Places
-	dw PeoplePlaces2     ; $2c
-	dw PeoplePlaces3     ; $2d
-	dw PeoplePlaces4     ; $2e
-	dw PeoplePlaces5     ; $2f
-	dw PeoplePlaces6     ; $30
-	dw PeoplePlaces7     ; $31
+	dw BenMonMusic2      ; $15
+	dw BenMonMusic3      ; $16
+	dw BenFernMusic4     ; $17
+	dw BenFernMusic5     ; $18
+	dw BenFernMusic6     ; $19
+	dw BenFernMusic7     ; $1a
 ; Rocket Radio
-	dw RocketRadio2      ; $32
-	dw RocketRadio3      ; $33
-	dw RocketRadio4      ; $34
-	dw RocketRadio5      ; $35
-	dw RocketRadio6      ; $36
-	dw RocketRadio7      ; $37
-	dw RocketRadio8      ; $38
-	dw RocketRadio9      ; $39
-	dw RocketRadio10     ; $3a
+	dw RocketRadio2      ; $1b
+	dw RocketRadio3      ; $1c
+	dw RocketRadio4      ; $1d
+	dw RocketRadio5      ; $1e
+	dw RocketRadio6      ; $1f
+	dw RocketRadio7      ; $20
+	dw RocketRadio8      ; $21
+	dw RocketRadio9      ; $22
+	dw RocketRadio10     ; $23
 ; More Pokemon Channel stuff
-	dw OaksPKMNTalk10    ; $3b
-	dw OaksPKMNTalk11    ; $3c
-	dw OaksPKMNTalk12    ; $3d
-	dw OaksPKMNTalk13    ; $3e
-	dw OaksPKMNTalk14    ; $3f
+	dw OaksPKMNTalk10    ; $24
+	dw OaksPKMNTalk11    ; $25
+	dw OaksPKMNTalk12    ; $26
+	dw OaksPKMNTalk13    ; $27
+	dw OaksPKMNTalk14    ; $28
 ; Buenas Password
-	dw BuenasPassword2   ; $40
-	dw BuenasPassword3   ; $41
-	dw BuenasPassword4   ; $42
-	dw BuenasPassword5   ; $43
-	dw BuenasPassword6   ; $44
-	dw BuenasPassword7   ; $45
-	dw BuenasPassword8   ; $46
-	dw BuenasPassword9   ; $47
-	dw BuenasPassword10  ; $48
-	dw BuenasPassword11  ; $49
-	dw BuenasPassword12  ; $4a
-	dw BuenasPassword13  ; $4b
-	dw BuenasPassword14  ; $4c
-	dw BuenasPassword15  ; $4d
-	dw BuenasPassword16  ; $4e
-	dw BuenasPassword17  ; $4f
-	dw BuenasPassword18  ; $50
-	dw BuenasPassword19  ; $51
-	dw BuenasPassword20  ; $52
-	dw BuenasPassword21  ; $53
-	dw RadioScroll       ; $54
+	dw BuenasPassword2   ; $29
+	dw BuenasPassword3   ; $2a
+	dw BuenasPassword4   ; $2b
+	dw BuenasPassword5   ; $2c
+	dw BuenasPassword6   ; $2d
+	dw BuenasPassword7   ; $2e
+	dw BuenasPassword8   ; $2f
+	dw BuenasPassword9   ; $30
+	dw BuenasPassword10  ; $31
+	dw BuenasPassword11  ; $32
+	dw BuenasPassword12  ; $33
+	dw BuenasPassword13  ; $34
+	dw BuenasPassword14  ; $35
+	dw BuenasPassword15  ; $36
+	dw BuenasPassword16  ; $37
+	dw BuenasPassword17  ; $38
+	dw BuenasPassword18  ; $39
+	dw BuenasPassword19  ; $3a
+	dw BuenasPassword20  ; $3b
+	dw BuenasPassword21  ; $3c
+	dw RadioScroll       ; $3d
 ; More Pokemon Channel stuff
-	dw PokedexShow6      ; $55
-	dw PokedexShow7      ; $56
-	dw PokedexShow8      ; $57
+	dw PokedexShow6      ; $3e
+	dw PokedexShow7      ; $3f
+	dw PokedexShow8      ; $40
 	assert_table_length NUM_RADIO_SEGMENTS
 
 PrintRadioLine:
@@ -785,17 +770,6 @@ BenMonMusic3:
 	ld a, POKEMON_MUSIC_4
 	jmp NextRadioLine
 
-FernMonMusic1:
-	call StartPokemonMusicChannel
-	ld hl, FernIntroText1
-	ld a, LETS_ALL_SING_2
-	jmp NextRadioLine
-
-FernMonMusic2:
-	ld hl, FernIntroText2
-	ld a, POKEMON_MUSIC_4
-	jmp NextRadioLine
-
 BenFernMusic4:
 	ld hl, BenFernText1
 	ld a, POKEMON_MUSIC_5
@@ -847,14 +821,6 @@ BenIntroText3:
 	text_far _BenIntroText3
 	text_end
 
-FernIntroText1:
-	text_far _FernIntroText1
-	text_end
-
-FernIntroText2:
-	text_far _FernIntroText2
-	text_end
-
 BenFernText1:
 	text_far _BenFernText1
 	text_end
@@ -880,262 +846,6 @@ CasinoBeats:
 	ld a, 1
 	ld [wNumRadioLinesPrinted], a
 	ret
-
-PeoplePlaces1:
-	call StartRadioStation
-	ld hl, PnP_Text1
-	ld a, PLACES_AND_PEOPLE_2
-	jmp NextRadioLine
-
-PeoplePlaces2:
-	ld hl, PnP_Text2
-	ld a, PLACES_AND_PEOPLE_3
-	jmp NextRadioLine
-
-PeoplePlaces3:
-	ld hl, PnP_Text3
-	call Random
-	cp 49 percent - 1
-	ld a, PLACES_AND_PEOPLE_4 ; People
-	jr c, .ok
-	ld a, PLACES_AND_PEOPLE_6 ; Places
-.ok
-	jmp NextRadioLine
-
-PnP_Text1:
-	text_far _PnP_Text1
-	text_end
-
-PnP_Text2:
-	text_far _PnP_Text2
-	text_end
-
-PnP_Text3:
-	text_far _PnP_Text3
-	text_end
-
-PeoplePlaces4: ; People
-	call Random
-	maskbits NUM_TRAINER_CLASSES
-	inc a
-	cp NUM_TRAINER_CLASSES ; exclude MYSTICALMAN
-	jr nc, PeoplePlaces4
-	push af
-	ld hl, PnP_HiddenPeople
-	ld a, [wStatusFlags]
-	bit STATUSFLAGS_HALL_OF_FAME_F, a
-	jr z, .ok
-	ld hl, PnP_HiddenPeople_BeatE4
-	ld a, [wKantoBadges]
-	cp %11111111 ; all badges
-	jr nz, .ok
-	ld hl, PnP_HiddenPeople_BeatKanto
-.ok
-	pop af
-	ld c, a
-	ld de, 1
-	push bc
-	call IsInArray
-	pop bc
-	jr c, PeoplePlaces4
-	push bc
-	callfar GetTrainerClassName
-	ld de, wStringBuffer1
-	call CopyName1
-	pop bc
-	ld b, 1
-	callfar GetTrainerName
-	ld hl, PnP_Text4
-	ld a, PLACES_AND_PEOPLE_5
-	jmp NextRadioLine
-
-INCLUDE "data/radio/pnp_hidden_people.asm"
-
-PnP_Text4:
-	text_far _PnP_Text4
-	text_end
-
-PeoplePlaces5:
-	; 0-15 are all valid indexes into .Adjectives,
-	; so no need for a retry loop
-	call Random
-	maskbits NUM_PNP_PEOPLE_ADJECTIVES
-	assert_power_of_2 NUM_PNP_PEOPLE_ADJECTIVES
-	ld e, a
-	ld d, 0
-	ld hl, .Adjectives
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call Random
-	cp 4 percent
-	ld a, PLACES_AND_PEOPLE
-	jr c, .ok
-	call Random
-	cp 49 percent - 1
-	ld a, PLACES_AND_PEOPLE_4 ; People
-	jr c, .ok
-	ld a, PLACES_AND_PEOPLE_6 ; Places
-.ok
-	jmp NextRadioLine
-
-.Adjectives:
-	table_width 2, PeoplePlaces5.Adjectives
-	dw PnP_CuteText
-	dw PnP_LazyText
-	dw PnP_HappyText
-	dw PnP_NoisyText
-	dw PnP_PrecociousText
-	dw PnP_BoldText
-	dw PnP_PickyText
-	dw PnP_SortOfOKText
-	dw PnP_SoSoText
-	dw PnP_GreatText
-	dw PnP_MyTypeText
-	dw PnP_CoolText
-	dw PnP_InspiringText
-	dw PnP_WeirdText
-	dw PnP_RightForMeText
-	dw PnP_OddText
-	assert_table_length NUM_PNP_PEOPLE_ADJECTIVES
-
-PnP_CuteText:
-	text_far _PnP_CuteText
-	text_end
-
-PnP_LazyText:
-	text_far _PnP_LazyText
-	text_end
-
-PnP_HappyText:
-	text_far _PnP_HappyText
-	text_end
-
-PnP_NoisyText:
-	text_far _PnP_NoisyText
-	text_end
-
-PnP_PrecociousText:
-	text_far _PnP_PrecociousText
-	text_end
-
-PnP_BoldText:
-	text_far _PnP_BoldText
-	text_end
-
-PnP_PickyText:
-	text_far _PnP_PickyText
-	text_end
-
-PnP_SortOfOKText:
-	text_far _PnP_SortOfOKText
-	text_end
-
-PnP_SoSoText:
-	text_far _PnP_SoSoText
-	text_end
-
-PnP_GreatText:
-	text_far _PnP_GreatText
-	text_end
-
-PnP_MyTypeText:
-	text_far _PnP_MyTypeText
-	text_end
-
-PnP_CoolText:
-	text_far _PnP_CoolText
-	text_end
-
-PnP_InspiringText:
-	text_far _PnP_InspiringText
-	text_end
-
-PnP_WeirdText:
-	text_far _PnP_WeirdText
-	text_end
-
-PnP_RightForMeText:
-	text_far _PnP_RightForMeText
-	text_end
-
-PnP_OddText:
-	text_far _PnP_OddText
-	text_end
-
-PeoplePlaces6: ; Places
-	call Random
-	cp (PnP_Places.End - PnP_Places) / 2
-	jr nc, PeoplePlaces6
-	ld hl, PnP_Places
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
-	ld b, [hl]
-	inc hl
-	ld c, [hl]
-	call GetWorldMapLocation
-	ld e, a
-	farcall GetLandmarkName
-	ld hl, PnP_Text5
-	ld a, PLACES_AND_PEOPLE_7
-	jmp NextRadioLine
-
-INCLUDE "data/radio/pnp_places.asm"
-
-PnP_Text5:
-	text_far _PnP_Text5
-	text_end
-
-PeoplePlaces7:
-	; 0-15 are all valid indexes into .Adjectives,
-	; so no need for a retry loop
-	call Random
-	maskbits NUM_PNP_PLACES_ADJECTIVES
-	assert_power_of_2 NUM_PNP_PLACES_ADJECTIVES
-	ld e, a
-	ld d, 0
-	ld hl, .Adjectives
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call CopyRadioTextToRAM
-	call Random
-	cp 4 percent
-	ld a, PLACES_AND_PEOPLE
-	jr c, .ok
-	call Random
-	cp 49 percent - 1
-	ld a, PLACES_AND_PEOPLE_4 ; People
-	jr c, .ok
-	ld a, PLACES_AND_PEOPLE_6 ; Places
-.ok
-	jmp PrintRadioLine
-
-.Adjectives:
-	table_width 2, PeoplePlaces7.Adjectives
-	dw PnP_CuteText
-	dw PnP_LazyText
-	dw PnP_HappyText
-	dw PnP_NoisyText
-	dw PnP_PrecociousText
-	dw PnP_BoldText
-	dw PnP_PickyText
-	dw PnP_SortOfOKText
-	dw PnP_SoSoText
-	dw PnP_GreatText
-	dw PnP_MyTypeText
-	dw PnP_CoolText
-	dw PnP_InspiringText
-	dw PnP_WeirdText
-	dw PnP_RightForMeText
-	dw PnP_OddText
-	assert_table_length NUM_PNP_PLACES_ADJECTIVES
 
 RocketRadio1:
 	call StartRadioStation
@@ -1227,12 +937,6 @@ RocketRadioText9:
 RocketRadioText10:
 	text_far _RocketRadioText10
 	text_end
-
-PokeFluteRadio:
-	call StartRadioStation
-	ld a, 1
-	ld [wNumRadioLinesPrinted], a
-	ret
 
 UnownRadio:
 	call StartRadioStation

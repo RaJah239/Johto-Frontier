@@ -3081,7 +3081,7 @@ wPokegearFlags::
 ; bit 0: map
 ; bit 1: radio
 ; bit 2: phone
-; bit 3: expn
+; bit 3: unused (was the EXPN card)
 ; bit 7: on/off
 	db
 wRadioTuningKnob:: db

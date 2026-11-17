@@ -1,6 +1,5 @@
 Flypoints:
 ; entries correspond to FLY_* constants
-; Johto
 	; landmark, spawn point
 	db LANDMARK_NEW_BARK_TOWN,    SPAWN_NEW_BARK
 	db LANDMARK_CHERRYGROVE_CITY, SPAWN_CHERRYGROVE
@@ -20,6 +19,4 @@ Flypoints:
 	db LANDMARK_BLACKTHORN_CITY,  SPAWN_BLACKTHORN
 	db LANDMARK_ROUTE_20,         SPAWN_ROUTE_20
 	db LANDMARK_INDIGO_PLATEAU,   SPAWN_INDIGO
-
-; Kanto
 	db -1 ; end

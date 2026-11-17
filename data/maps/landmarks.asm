@@ -61,9 +61,7 @@ Landmarks:
 	landmark 148,  44, Route21Name
 	landmark 148,  36, IndigoPlateauName	
 	landmark 160, 160, BattlePlazaName
-	assert_table_length KANTO_LANDMARK
-	landmark  52, 108, PalletTownName
-	landmark 108,  76, UndergroundName
+	assert_table_length NUM_MAP_LANDMARKS
 	landmark 140, 116, FastShipName
 	assert_table_length NUM_LANDMARKS
 
@@ -91,7 +89,6 @@ WhirlIslandsName:    db "Whirl<BSP>Islands@"
 MtMortarName:        db "Mt.Mortar@"
 DragonsDenName:      db "Dragon's<BSP>Den@"
 IcePathName:         db "Ice Path@"
-PalletTownName:      db "Pallet Town@"
 IndigoPlateauName:   db "Indigo<BSP>Plateau@"
 VictoryRoadName:     db "Victory<BSP>Road@"
 Route21Name:         db "Route 21@"
@@ -120,7 +117,6 @@ IlexForestName:      db "Ilex<BSP>Forest@"
 BurnedTowerName:     db "Burned<BSP>Tower@"
 FastShipName:        db "Fast Ship@"
 TohjoFallsName:      db "Tohjo Falls@"
-UndergroundName:     db "Underground@"
 PowerPlantName:      db "Power Plant@"
 BattlePlazaName:     db "Battle<BSP>Plaza@"
 SpecialMapName:      db "Special@"
