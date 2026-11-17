@@ -64,17 +64,17 @@ VoltorbFlipPaletteBlank:
 	
 VoltorbFlip::;this is where the magic happens
 	ld a, $d
-	ld [$ffff], a
+	ld [rIE], a
 	call VFLoadGFX
 	call VFLoadPalette
 	call VFInitRAM
 	call VFInitMap
-	ld hl, $ff40
+	ld hl, rLCDC
 	set 7, [hl]
 	xor a
 	ld [hBGMapMode], a
 	ld a, 1
-	ld [$ffd8], a ;disable sprite update
+	ld [hOAMUpdate], a ;disable sprite update
 	ld [$c41a], a
 	call VFInitLevel
 	jmp VFMainLoop
@@ -257,7 +257,7 @@ VFInitLevel:
 	ld hl, $c450
 	dec b
 	jr nz, .voltcolstart
-	ld hl, $ff41
+	ld hl, rSTAT
 	ld a, 1
 .wait
 	ld a, [hl]
@@ -267,7 +267,7 @@ VFInitLevel:
 	dec hl
 	res 7, [hl]
 	call VFInitMap
-	ld hl, $ff40
+	ld hl, rLCDC
 	set 7, [hl]
 	ret
 
@@ -276,7 +276,7 @@ VFMainLoop:
 	call VFInput
 	jr VFMainLoop
 	ld a, $f
-	ld [$ffff], a
+	ld [rIE], a
 	ret
 
 VFInput:
@@ -305,14 +305,14 @@ VFInput:
 	add c
 	add b
 	ld e, a
-	ld a, [$ffa4]
+	ld a, [hJoypadDown]
 	bit 1, a
 	jmp nz, .bbutton
 	; B let go: a single direction still waiting toggles its mark now
 	ld a, [VF_ARMED_MARK_DIR]
 	and a
 	jmp nz, .apply_armed_mark
-	ld a, [$ffa3]
+	ld a, [hJoypadPressed]
 	and a
 	ret z
 	bit 0, a
@@ -459,7 +459,7 @@ VFInput:
 .bbutton
 	and $f0
 	ld b, a ; directions held
-	ld a, [$ffa3]
+	ld a, [hJoypadPressed]
 	and $f0
 	ld c, a ; directions pressed now
 	jr z, .no_new_direction
@@ -585,7 +585,7 @@ VFInput:
 	jr .nocolwrap
 
 VFLoadGFX:
-	ld hl, $ff41
+	ld hl, rSTAT
 	ld a, 1
 .wait
 	ld a, [hl]
@@ -627,18 +627,18 @@ VFInitRAM:
 	ret
 
 VFInitMap:
-	ld hl,$c4a0 ;blank the screen
+	ld hl,wTilemap ;blank the screen
 	ld bc, $0168
 	ld a, 17
 	call ByteFill
-	ld hl,$cdd9 ;blank the screen
+	ld hl,wAttrmap ;blank the screen
 	ld bc, $0168
 	ld a, 0
 	call ByteFill
 	ld b, 10
 	di
 	xor a
-	ld [$ff4f], a
+	ld [rVBK], a
 	hlcoord 0, 15
 	call .redcounter
 	hlcoord 3, 15
@@ -680,20 +680,20 @@ VFInitMap:
 	call VFRefreshMap
 	di
 	xor a
-	ld [$ff4f], a
+	ld [rVBK], a
 	ld a, 41
-	ld [$c503], a
+	ld [wTilemap + $63], a
 	inc a
-	ld [$c517], a
+	ld [wTilemap + $77], a
 	inc a
-	ld [$c52b], a
+	ld [wTilemap + $8b], a
 	inc a
-	ld [$c53f], a
+	ld [wTilemap + $9f], a
 	inc a
-	ld [$c553], a
+	ld [wTilemap + $b3], a
 	ld a, [$c41a]
 	add 102
-	ld [$c57b], a
+	ld [wTilemap + $db], a
 	ld b, 0
 .loopa
 	ld c, 0
@@ -717,7 +717,7 @@ VFInitMap:
 .drawcounter
 	push bc
 	push hl
-	ld bc, $0939
+	ld bc, wAttrmap - wTilemap
 	add hl,bc
 	ldi [hl], a
 	ldi [hl], a
@@ -784,7 +784,7 @@ VFInitMap:
 	ld a, 2
 	push bc
 	push hl
-	ld bc, $0939
+	ld bc, wAttrmap - wTilemap
 	add hl,bc
 	ldi [hl], a
 	ldi [hl], a
@@ -844,7 +844,7 @@ VFInitMap:
 VFRefreshMap:
 	ld de, $c400 ;start of card properties
 	ld bc, $0505 ;5x5 board
-	ld hl, $c4a0 ;tiles on screen
+	ld hl, wTilemap ;tiles on screen
 .g1x1
 	push bc
 	ld a, [$c41b]
@@ -875,7 +875,7 @@ VFRefreshMap:
 .g2x1
 	push bc
 	push hl
-	ld bc, $0938
+	ld bc, wAttrmap - wTilemap - 1
 	add hl,bc
 	xor a
 	ldi [hl], a
@@ -1021,7 +1021,7 @@ VFRefreshMap:
 	ldi [hl], a
 	push bc
 	push hl
-	ld bc, $0938
+	ld bc, wAttrmap - wTilemap - 1
 	add hl,bc
 	ldi [hl], a
 	ldi [hl], a
@@ -1093,7 +1093,7 @@ VFRefreshMap:
 	dec a
 	push bc
 	push hl
-	ld bc, $0938
+	ld bc, wAttrmap - wTilemap - 1
 	add hl,bc
 	ldi [hl], a
 	ldi [hl], a
@@ -1159,7 +1159,7 @@ VFRefreshScreen: ;bc is the coordinates to refresh (3x3 tiles)
 	pop bc
 	push bc
 	push hl
-	ld de, $c4a0
+	ld de, wTilemap
 	add hl, de
 	push hl
 	ld de, $9800
@@ -1179,7 +1179,7 @@ VFRefreshScreen: ;bc is the coordinates to refresh (3x3 tiles)
 	add hl, de
 	push hl
 	pop de
-	ld hl, $ff41
+	ld hl, rSTAT
 	ld a, 1
 .wait
 	ld a, [hl]
@@ -1213,10 +1213,10 @@ VFRefreshScreen: ;bc is the coordinates to refresh (3x3 tiles)
 	jr nz, .loopa
 	pop de
 	pop hl
-	ld bc, $cdd9
+	ld bc, wAttrmap
 	add hl, bc
 	ld a, 1
-	ld [$ff4f], a
+	ld [rVBK], a
 	ld b, 3
 .loopc
 	ld c, 3
@@ -1241,7 +1241,7 @@ VFRefreshScreen: ;bc is the coordinates to refresh (3x3 tiles)
 	dec b
 	jr nz, .loopc
 	xor a
-	ld [$ff4f], a
+	ld [rVBK], a
 	pop bc
 	ret
 	
@@ -1263,7 +1263,7 @@ VFRefreshScreen1: ;bc is the coordinates to refresh (3x3 tiles)
 	pop bc
 	push bc
 	push hl
-	ld de, $c4a0
+	ld de, wTilemap
 	add hl, de
 	push hl
 	ld de, $9800
@@ -1310,10 +1310,10 @@ VFRefreshScreen1: ;bc is the coordinates to refresh (3x3 tiles)
 	jr nz, .loopa
 	pop de
 	pop hl
-	ld bc, $cdd9
+	ld bc, wAttrmap
 	add hl, bc
 	ld a, 1
-	ld [$ff4f], a
+	ld [rVBK], a
 	ld b, 3
 .loopc
 	ld c, 3
@@ -1338,7 +1338,7 @@ VFRefreshScreen1: ;bc is the coordinates to refresh (3x3 tiles)
 	dec b
 	jr nz, .loopc
 	xor a
-	ld [$ff4f], a
+	ld [rVBK], a
 	pop bc
 	ret
 
@@ -1365,7 +1365,7 @@ VFFlipAnimation:
 	ld a, b
 	add a
 	add a, b
-	ld bc, $c4a0
+	ld bc, wTilemap
 	add hl, bc
 	ld b, 0
 	ld c, a
@@ -1382,7 +1382,7 @@ VFFlipAnimation:
 	push bc
 	push af
 	push hl
-	ld bc, $0938
+	ld bc, wAttrmap - wTilemap - 1
 	add hl,bc
 	ld a, 1
 	ldi [hl], a
@@ -1612,8 +1612,8 @@ VFExit:
 	ld a, 1
 	ld [hBGMapMode], a
 	ld a, $f
-	ld [$ffff], a
+	ld [rIE], a
 	xor a
-	ld [$ffd8], a ;enable sprite update
+	ld [hOAMUpdate], a ;enable sprite update
 	pop af
 	ret
