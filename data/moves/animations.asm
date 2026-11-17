@@ -5305,7 +5305,9 @@ BattleAnim_HealingLight:
 	anim_loop 5, .loop
 	anim_wait 32
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GREEN
-	anim_jump BattleAnimSub_Glimmer
+	anim_call BattleAnimSub_Glimmer
+	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
+	anim_ret
 
 ; Moonlight's animation during the evening and night
 BattleAnim_Moonlight:
