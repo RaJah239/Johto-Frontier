@@ -28,7 +28,7 @@ BurnedTower1FNoop2Scene:
 BurnedTower1FHoleAndLadderCallback:
 	checkevent EVENT_HOLE_IN_BURNED_TOWER
 	iftrue .KeepHoleOpen
-	changeblock 10, 8, $32 ; floor
+	changeblock 10, 8, $2d ; floor
 .KeepHoleOpen:
 	checkevent EVENT_RELEASED_THE_BEASTS
 	iftrue .HideBasement
@@ -104,7 +104,7 @@ BurnedTowerRivalBattleScript:
 	showemote EMOTE_SHOCK, PLAYER, 15
 	playsound SFX_ENTER_DOOR
 	waitsfx
-	changeblock 10, 8, $25 ; hole
+	changeblock 10, 8, $23 ; hole
 	refreshmap
 	pause 15
 	applymovement PLAYER, BurnedTower1FMovement_PlayerStartsToFall

@@ -30,7 +30,7 @@ MahoganyMart1FStaircaseCallback:
 ;	changeblock 6, 2, $1e ; stairs
 ;	refreshmap
 .ShowStairs:
-	changeblock 6, 2, $1e ; stairs
+	changeblock 6, 2, $17 ; stairs
 	endcallback
 
 MahoganyMart1FGrannyScript:

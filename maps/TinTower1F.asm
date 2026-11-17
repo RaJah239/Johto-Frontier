@@ -219,7 +219,7 @@ TinTower1FSage5Script:
 	earthquake 72
 	waitsfx
 	playsound SFX_STRENGTH
-	changeblock 10, 2, $20 ; stairs
+	changeblock 10, 2, $1e ; stairs
 	refreshmap
 	setevent EVENT_GOT_RAINBOW_WING
 	closetext

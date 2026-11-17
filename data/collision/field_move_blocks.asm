@@ -11,10 +11,10 @@ CutTreeBlockPointers:
 .johto:
 ; facing block, replacement block, animation
 	db $03, $02, 1 ; grass
-	db $5b, $3c, 0 ; tree
-	db $5f, $3d, 0 ; tree
-	db $63, $3f, 0 ; tree
-	db $67, $3e, 0 ; tree
+	db $59, $3b, 0 ; tree
+	db $5d, $3c, 0 ; tree
+	db $61, $3e, 0 ; tree
+	db $65, $3d, 0 ; tree
 	db -1 ; end
 
 .johto_modern:
@@ -24,18 +24,18 @@ CutTreeBlockPointers:
 
 .kanto:
 ; facing block, replacement block, animation
-	db $0b, $0a, 1 ; grass
-	db $32, $6d, 0 ; tree
-	db $33, $6c, 0 ; tree
-	db $34, $6f, 0 ; tree
-	db $35, $4c, 0 ; tree
-	db $60, $6e, 0 ; tree
+	db $08, $07, 1 ; grass
+	db $19, $39, 0 ; tree
+	db $1a, $38, 0 ; tree
+	db $1b, $3b, 0 ; tree
+	db $1c, $25, 0 ; tree
+	db $32, $3a, 0 ; tree
 	db -1 ; end
 
 .park:
 ; facing block, replacement block, animation
-	db $13, $03, 1 ; grass
-	db $03, $04, 1 ; grass
+	db $10, $02, 1 ; grass
+	db $02, $03, 1 ; grass
 	db -1 ; end
 
 .forest:
@@ -51,5 +51,5 @@ WhirlpoolBlockPointers:
 
 .johto:
 ; facing block, replacement block, animation
-	db $07, $36, 0
+	db $07, $35, 0
 	db -1 ; end

@@ -40,7 +40,7 @@ RuinsOfAlphHoOhChamberNoopScene:
 RuinsOfAlphHoOhChamberHiddenDoorsCallback:
 	checkevent EVENT_WALL_OPENED_IN_HO_OH_CHAMBER
 	iftrue .WallOpen
-	changeblock 4, 0, $2e ; closed wall
+	changeblock 4, 0, $24 ; closed wall
 .WallOpen:
 	checkevent EVENT_SOLVED_HO_OH_PUZZLE
 	iffalse .FloorClosed
@@ -57,7 +57,7 @@ RuinsOfAlphHoOhChamberWallOpenScript:
 	showemote EMOTE_SHOCK, PLAYER, 20
 	pause 30
 	playsound SFX_STRENGTH
-	changeblock 4, 0, $30 ; open wall
+	changeblock 4, 0, $25 ; open wall
 	refreshmap
 	earthquake 50
 	setscene SCENE_RUINSOFALPHHOOHCHAMBER_NOOP
@@ -78,8 +78,8 @@ RuinsOfAlphHoOhChamberPuzzle:
 	setmapscene RUINS_OF_ALPH_INNER_CHAMBER, SCENE_RUINSOFALPHINNERCHAMBER_STRANGE_PRESENCE
 	earthquake 30
 	showemote EMOTE_SHOCK, PLAYER, 15
-	changeblock 2, 2, $18 ; left hole
-	changeblock 4, 2, $19 ; right hole
+	changeblock 2, 2, $14 ; left hole
+	changeblock 4, 2, $15 ; right hole
 	refreshmap
 	playsound SFX_STRENGTH
 	earthquake 80
