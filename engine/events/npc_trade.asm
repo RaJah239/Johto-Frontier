@@ -161,6 +161,12 @@ DoNPCTrade:
 	ld a, c
 	ld [wPlayerTrademonCaughtData], a
 
+	ld hl, wPartyMon1CaughtBall
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call Trade_GetAttributeOfCurrentPartymon
+	ld a, [hl]
+	ld [wPlayerTrademonCaughtBall], a
+
 	ld e, NPCTRADE_DIALOG
 	call GetTradeAttr
 	ld a, [hl]
@@ -251,6 +257,7 @@ DoNPCTrade:
 	pop hl
 	ld a, [hl]
 	ld [de], a
+	ld [wOTTrademonCaughtBall], a
 
 	ld e, NPCTRADE_ITEM
 	call GetTradeAttr

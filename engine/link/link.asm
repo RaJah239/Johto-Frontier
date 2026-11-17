@@ -1249,6 +1249,12 @@ LinkTrade:
 	ld [wPlayerTrademonDVs], a
 	ld a, [hl]
 	ld [wPlayerTrademonDVs + 1], a
+; caught ball
+	ld hl, wPartyMon1CaughtBall
+	ld a, [wCurTradePartyMon]
+	call GetPartyLocation
+	ld a, [hl]
+	ld [wPlayerTrademonCaughtBall], a
 ; caught data
 	ld a, [wCurTradePartyMon]
 	ld hl, wPartyMon1Species
@@ -1296,6 +1302,12 @@ LinkTrade:
 	ld [wOTTrademonDVs], a
 	ld a, [hl]
 	ld [wOTTrademonDVs + 1], a
+; caught ball
+	ld hl, wOTPartyMon1CaughtBall
+	ld a, [wCurOTTradePartyMon]
+	call GetPartyLocation
+	ld a, [hl]
+	ld [wOTTrademonCaughtBall], a
 ; caught data
 	ld a, [wCurOTTradePartyMon]
 	ld hl, wOTPartyMon1Species

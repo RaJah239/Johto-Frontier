@@ -77,7 +77,15 @@ TradeWithTradebackKid:
 	ld [wOTTrademonDVs], a
 	ld a, [hl]
 	ld [wPlayerTrademonDVs + 1], a
-	ld [wOTTrademonDVs + 1], a 
+	ld [wOTTrademonDVs + 1], a
+
+; and its ball
+	ld hl, wPartyMon1CaughtBall
+	ld a, [wCurPartyMon]
+	call GetPartyLocation
+	ld a, [hl]
+	ld [wPlayerTrademonCaughtBall], a
+	ld [wOTTrademonCaughtBall], a
 
 ; Establish Pokémon's OT's name
 	ld a, [wCurPartyMon]

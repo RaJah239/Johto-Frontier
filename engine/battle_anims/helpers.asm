@@ -143,23 +143,7 @@ LoadBattleBall:
 	ldh [rSVBK], a
 	ld a, [wCurItem]
 	ld b, a
-.find
-	ld hl, BattleBallGFX
-.loop
-	ld a, [hli]
-	cp b
-	jr z, .found
-	inc a ; end of the list?
-	jr z, .not_a_ball
-	inc hl
-	inc hl
-	inc hl
-	jr .loop
-.not_a_ball
-	ld b, POKE_BALL
-	jr .find
-
-.found
+	call FindBallGFX
 	push hl
 	; the icon colors of item b
 	ld l, b
@@ -190,6 +174,70 @@ LoadBattleBall:
 	pop af
 	ldh [rSVBK], a
 	ret
+
+FindBallGFX:
+; b = ball item. Returns hl = its graphics' address in BattleBallGFX (bank,
+; then address), and b = the item (POKE_BALL if b isn't a ball).
+.find
+	ld hl, BattleBallGFX
+.loop
+	ld a, [hli]
+	cp b
+	ret z
+	inc a ; end of the list?
+	jr z, .not_a_ball
+	inc hl
+	inc hl
+	inc hl
+	jr .loop
+.not_a_ball
+	ld b, POKE_BALL
+	jr .find
+
+DEF TRADE_BALL_TILES EQU 6
+
+LoadTradeBall::
+; a = ball item, de = VRAM tile (newfarcall). The trade animation's ball as
+; that ball: its thrown-ball graphics, whose first 6 tiles (the closed ball's
+; left half, then its 2x2 wobble frame) are laid out like gfx/trade/ball.png,
+; in its Bag icon colors (colors 1-2 of OBJ palette 0).
+	ld b, a
+	push de
+	call FindBallGFX
+	push hl
+	ld l, b
+	ld h, 0
+	add hl, hl
+	add hl, hl ; 2 colors per item
+	ld de, ItemIconPalettes
+	add hl, de
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wOBPals1)
+	ldh [rSVBK], a
+	push hl
+	ld de, wOBPals1 palette 0 color 1
+	ld bc, PAL_COLOR_SIZE * 2
+	ld a, BANK(ItemIconPalettes)
+	call FarCopyBytes
+	pop hl
+	ld de, wOBPals2 palette 0 color 1
+	ld bc, PAL_COLOR_SIZE * 2
+	ld a, BANK(ItemIconPalettes)
+	call FarCopyBytes
+	pop af
+	ldh [rSVBK], a
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	pop hl
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld c, TRADE_BALL_TILES
+	pop de
+	jmp DecompressRequest2bpp
 
 INCLUDE "data/battle_anims/ball_gfx.asm"
 

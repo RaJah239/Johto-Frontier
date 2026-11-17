@@ -1065,6 +1065,9 @@ TrademonStats_PrintTrademonID:
 	ret
 
 TradeAnim_RockingBall:
+; the ball the player's mon was caught in
+	ld a, [wPlayerTrademonCaughtBall]
+	call TradeAnim_LoadBall
 	depixel 10, 11, 4, 0
 	ld a, SPRITE_ANIM_OBJ_TRADE_POKE_BALL
 	call InitSpriteAnimStruct
@@ -1074,6 +1077,9 @@ TradeAnim_RockingBall:
 	ret
 
 TradeAnim_DropBall:
+; the ball the OT's mon was caught in
+	ld a, [wOTTrademonCaughtBall]
+	call TradeAnim_LoadBall
 	depixel 10, 11, 4, 0
 	ld a, SPRITE_ANIM_OBJ_TRADE_POKE_BALL
 	call InitSpriteAnimStruct
@@ -1086,6 +1092,13 @@ TradeAnim_DropBall:
 	call TradeAnim_AdvanceScriptPointer
 	ld a, 56
 	ld [wFrameCounter], a
+	ret
+
+TradeAnim_LoadBall:
+; a = ball item: its graphics as the trade ball's tiles and its Bag icon
+; colors in OBJ palette 0 (anything that isn't a ball: a Poke Ball)
+	ld de, vTiles0 tile $62
+	newfarcall LoadTradeBall
 	ret
 
 TradeAnim_Poof:
