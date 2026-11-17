@@ -316,3 +316,5 @@ DEF NUM_SPRITE_ANIM_OAMSETS EQU const_value
 
 assert NUM_SPRITE_ANIM_OAMSETS <= FIRST_OAM_CMD, \
 	"SPRITE_ANIM_OAMSET_* constants overlap oam*_command constants"
+
+DEF TRADE_TUBE_DROP_X EQU 11 * 8

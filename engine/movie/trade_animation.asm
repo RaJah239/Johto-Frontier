@@ -47,6 +47,8 @@ TradeAnimation:
 	tradeanim TradeAnim_GetTrademonSFX
 	tradeanim TradeAnim_TubeToPlayer1
 	tradeanim TradeAnim_EnterLinkTube1
+	tradeanim TradeAnim_BulgeFromTube
+	tradeanim TradeAnim_WaitAnim
 	tradeanim TradeAnim_DropBall
 	tradeanim TradeAnim_ExitLinkTube
 	tradeanim TradeAnim_WaitAnim
@@ -81,6 +83,8 @@ TradeAnimationPlayer2:
 	tradeanim TradeAnim_GetTrademonSFX
 	tradeanim TradeAnim_TubeToOT1
 	tradeanim TradeAnim_EnterLinkTube1
+	tradeanim TradeAnim_BulgeFromTube
+	tradeanim TradeAnim_WaitAnim
 	tradeanim TradeAnim_DropBall
 	tradeanim TradeAnim_ExitLinkTube
 	tradeanim TradeAnim_WaitAnim
@@ -279,6 +283,7 @@ DoTradeAnimation:
 	add_tradeanim TradeAnim_Wait96               ; 2d
 	add_tradeanim TradeAnim_Wait80IfOTEgg        ; 2e
 	add_tradeanim TradeAnim_Wait180IfOTEgg       ; 2f
+	add_tradeanim TradeAnim_BulgeFromTube        ; 30
 
 TradeAnim_IncrementJumptableIndex:
 	ld hl, wJumptableIndex
@@ -1082,7 +1087,31 @@ TradeAnim_Poof:
 .PoofPal
 	RGB 31,31,31, 27,27,27, 16,16,16, 00,00,00
 
+TradeAnim_BulgeFromTube:
+	call TradeAnim_LoadBulgePal
+	depixel 5, 0
+	ld a, SPRITE_ANIM_OBJ_TRADE_TUBE_BULGE
+	call InitSpriteAnimStruct
+	ld hl, SPRITEANIMSTRUCT_VAR1
+	add hl, bc
+	ld [hl], TRUE ; moving right
+	call TradeAnim_AdvanceScriptPointer
+	ld a, TRADE_TUBE_DROP_X / 2 ; 2 pixels a frame
+	ld [wFrameCounter], a
+	ret
+
 TradeAnim_BulgeThroughTube:
+; The sent ball goes in at the cable's right end and runs off to the left.
+	call TradeAnim_LoadBulgePal
+	depixel 5, 11
+	ld a, SPRITE_ANIM_OBJ_TRADE_TUBE_BULGE
+	call InitSpriteAnimStruct
+	call TradeAnim_AdvanceScriptPointer
+	ld a, 64
+	ld [wFrameCounter], a
+	ret
+
+TradeAnim_LoadBulgePal:
 ; "poof" and tube bulge shouldn't appear at the same exact time
 	ld hl, TradeAnim_EnterLinkTube1.TubePal
 	ld de, wOBPals2 palette 7
@@ -1091,14 +1120,7 @@ TradeAnim_BulgeThroughTube:
 	call FarCopyWRAM
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
-	call DelayFrame
-	depixel 5, 11
-	ld a, SPRITE_ANIM_OBJ_TRADE_TUBE_BULGE
-	call InitSpriteAnimStruct
-	call TradeAnim_AdvanceScriptPointer
-	ld a, 64
-	ld [wFrameCounter], a
-	ret
+	jmp DelayFrame
 
 TradeAnim_AnimateTrademonInTube:
 	ld hl, SPRITEANIMSTRUCT_JUMPTABLE_INDEX

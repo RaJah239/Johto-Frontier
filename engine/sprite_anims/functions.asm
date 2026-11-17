@@ -520,13 +520,26 @@ SpriteAnimFunc_TradePokeBall:
 	jmp DeinitializeSprite
 
 SpriteAnimFunc_TradeTubeBulge:
+	ld hl, SPRITEANIMSTRUCT_VAR1
+	add hl, bc
+	ld a, [hl]
+	and a
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
+	jr nz, .right
 	dec [hl]
 	dec [hl]
-	cp 8 + 2 ; (the tube now runs right to left) gone past the left edge
+	cp 8 + 2 ; gone past the left edge
 	jr c, .delete
+	jr .sfx
+
+.right
+	inc [hl]
+	inc [hl]
+	cp TRADE_TUBE_DROP_X - 2 ; over where the ball drops
+	jr nc, .delete
+.sfx
 	and $3
 	ret nz
 	ld de, SFX_POKEBALLS_PLACED_ON_TABLE
