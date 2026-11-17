@@ -414,7 +414,7 @@ EVO_level:
 	inc hl
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
 	call PrintNum ; lvl evolved at
-	jmp EVO_inchlcoord	
+	jr EVO_inchlcoord	
 
 EVO_item:
 	ld a, BANK("Evolutions and Attacks")
@@ -430,7 +430,7 @@ EVO_item:
 
 	call EVO_inchlcoord
 	call PlaceString
-	jmp EVO_inchlcoord
+	jr EVO_inchlcoord
 .item_text:
 	db "Item@"
 

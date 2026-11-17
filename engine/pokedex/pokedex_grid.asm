@@ -584,7 +584,7 @@ DexGrid_SetStaticPalettes:
 	call .copy
 	ld hl, DexGridPalRedOnBlue
 	ld de, wBGPals1 palette PAL_DEXGRID_REDBLUE
-	jmp .copy
+	jr .copy
 
 .copy
 	ld bc, 1 palettes

@@ -113,7 +113,7 @@ CalculateMaximumSellQuantity:
 SelectQuantityToToss:
 	ld hl, TossItem_MenuHeader
 	call LoadMenuHeader
-	jmp Toss_Sell_Loop
+	jr Toss_Sell_Loop
 
 SelectQuantityToBuy:
 	farcall GetItemPrice
@@ -125,7 +125,7 @@ RooftopSale_SelectQuantityToBuy:
 	call CalculateMaximumQuantity
 	ld hl, BuyItem_MenuHeader
 	call LoadMenuHeader
-	jmp Toss_Sell_Loop
+	jr Toss_Sell_Loop
 
 SelectQuantityToSell:
 	farcall GetItemPrice
@@ -136,7 +136,7 @@ SelectQuantityToSell:
 	call CalculateMaximumSellQuantity
 	ld hl, SellItem_MenuHeader
 	call LoadMenuHeader
-	jmp Toss_Sell_Loop
+	jr Toss_Sell_Loop
 
 Toss_Sell_Loop:
 	ld a, 1
@@ -261,12 +261,12 @@ NoPriceToDisplay:
 
 DisplayPurchasePrice:
 	call BuySell_MultiplyPrice
-	jmp BuySell_DisplaySubtotal
+	jr BuySell_DisplaySubtotal
 
 DisplaySellingPrice:
 	call BuySell_MultiplyPrice
 	call Sell_HalvePrice
-	jmp BuySell_DisplaySubtotal
+	jr BuySell_DisplaySubtotal
 
 BuySell_MultiplyPrice:
 	xor a

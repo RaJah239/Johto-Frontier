@@ -317,7 +317,7 @@ Pokedex_InitDexEntryScreen:
 
 	ld a, [wCurPartySpecies]
 	call PlayMonCry2
-	jmp Pokedex_IncrementDexPointer
+	jr Pokedex_IncrementDexPointer
 
 Pokedex_InitDexEntryScreenFromGrid:
 ; From the grid (engine/pokedex/pokedex_grid.asm): the grid stays up, icons
@@ -452,7 +452,7 @@ Pokedex_Page:
  .shinyicon_set
  	ld [hl], " "
  .done	
- 	jmp Pokedex_toggle_shininess2
+ 	jr Pokedex_toggle_shininess2
  
  Pokedex_toggle_shininess_Pics:
  	call Pokedex_toggle_shininess1
@@ -470,7 +470,7 @@ Pokedex_Page:
  .shinyicon_set
  	ld [hl], " "
  .done	
- 	jmp Pokedex_toggle_shininess2
+ 	jr Pokedex_toggle_shininess2
  
  Pokedex_toggle_shininess1:
  ; toggle the current shininess setting
@@ -1460,7 +1460,7 @@ Pokedex_UpdateUnownMode:
 	ld a, [hl]
 	and A_BUTTON | B_BUTTON
 	jr nz, .a_b
-	jmp Pokedex_UnownModeHandleDPadInput
+	jr Pokedex_UnownModeHandleDPadInput
 
 .a_b
 	call Pokedex_BlackOutBG
@@ -2715,7 +2715,7 @@ Pokedex_OrderMonsByMode:
 	ld [hli], a
 	dec c
 	jr nz, .loopnew
-	jmp .FindLastSeen
+	jr .FindLastSeen
 
 .OldMode:
 	ld hl, wPokedexOrder
@@ -2726,7 +2726,7 @@ Pokedex_OrderMonsByMode:
 	inc a
 	dec c
 	jr nz, .loopold
-	jmp .FindLastSeen
+	jr .FindLastSeen
 
 .FindLastSeen:
 	ld hl, wPokedexOrder + NUM_POKEMON - 1
@@ -3460,7 +3460,7 @@ Pokedex_UpdateSearchResultsCursorOAM:
 	cp DEXMODE_OLD
 	jmp z, Pokedex_PutOldModeCursorOAM
 	ld hl, .CursorOAM
-	jmp Pokedex_LoadCursorOAM
+	jr Pokedex_LoadCursorOAM
 
 .CursorOAM:
 	dbsprite  9,  3, -1,  3, $30, 7
@@ -3873,7 +3873,7 @@ Pokedex_LoadAllGFX:
  	ld de, vTiles0 tile 15
  	lb bc, BANK(vTiles0), 1 ; tile
  	call Get2bpp
- 	jmp Pokedex_Enable_LCD
+ 	jr Pokedex_Enable_LCD
 
 Pokedex_Enable_LCD:
 	ld a, 6

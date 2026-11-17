@@ -357,7 +357,7 @@ MemoryGame_CheckMatch:
 	hlcoord 0, 0
 	add hl, de
 	call MemoryGame_PlaceCard
-	jmp .RewardMatch
+	jr .RewardMatch
 
 .no_match
 	ld de, SFX_WRONG

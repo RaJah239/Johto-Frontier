@@ -644,7 +644,7 @@ Slots_InitReelTiles:
 	ld hl, REEL_X_COORD
 	add hl, bc
 	ld [hl], 14 * TILE_WIDTH
-	jmp .OAM
+	jr .OAM
 
 .OAM:
 	ld hl, REEL_ACTION
@@ -656,7 +656,7 @@ Slots_InitReelTiles:
 	ld hl, REEL_SPIN_DISTANCE
 	add hl, bc
 	ld [hl], REEL_ACTION_DO_NOTHING
-	jmp Slots_UpdateReelPositionAndOAM
+	jr Slots_UpdateReelPositionAndOAM
 
 Slots_SpinReels:
 	ld bc, wReel1
@@ -664,7 +664,7 @@ Slots_SpinReels:
 	ld bc, wReel2
 	call .SpinReel
 	ld bc, wReel3
-	jmp .SpinReel
+	jr .SpinReel
 
 .SpinReel:
 	ld hl, REEL_SPIN_DISTANCE
@@ -891,7 +891,7 @@ ReelAction_StopReel1:
 	call .CheckForBias
 	ret nz
 .NoBias:
-	jmp Slots_StopReel
+	jr Slots_StopReel
 
 .CheckForBias:
 	call Slots_GetCurrentReelState
@@ -932,7 +932,7 @@ ReelAction_StopReel2:
 	ret
 
 .NoBias:
-	jmp Slots_StopReel
+	jr Slots_StopReel
 
 ReelAction_StopReel3:
 ; Manipulate the reel up to wReel3ManipCounter (i.e. 4) slots,

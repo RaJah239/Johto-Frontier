@@ -446,7 +446,7 @@ TryGiveItemToPartymon:
 	call GiveItemToPokemon
 	ld hl, PokemonHoldItemText
 	call MenuTextboxBackup
-	jmp GivePartyItem
+	jr GivePartyItem
 
 .please_remove_mail
 	ld hl, PokemonRemoveMailText
@@ -473,7 +473,7 @@ TryGiveItemToPartymon:
 	call MenuTextboxBackup
 	ld a, [wNamedObjectIndex]
 	ld [wCurItem], a
-	jmp GivePartyItem
+	jr GivePartyItem
 
 .bag_full
 	ld a, [wNamedObjectIndex]
@@ -1406,7 +1406,7 @@ String_MoveBlank: db "---@"
 
 PlaceMoveScreenArrows:
 	call PlaceMoveScreenLeftArrow
-	jmp PlaceMoveScreenRightArrow
+	jr PlaceMoveScreenRightArrow
 
 PlaceMoveScreenLeftArrow:
 	ld a, [wCurPartyMon]

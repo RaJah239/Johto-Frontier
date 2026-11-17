@@ -23,7 +23,7 @@ Elevator::
 	ld [wElevatorPointer], a
 	ld a, d
 	ld [wElevatorPointer + 1], a
-	jmp .LoadFloors
+	jr .LoadFloors
 
 .LoadFloors:
 	ld de, wCurElevatorCount
@@ -170,7 +170,7 @@ Elevator_GetCurrentFloorString:
 	add hl, de
 	ld a, [hl]
 	pop de
-	jmp GetFloorString
+	jr GetFloorString
 
 Elevator_MenuHeader:
 	db MENU_BACKUP_TILES ; flags

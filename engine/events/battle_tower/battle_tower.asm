@@ -6,7 +6,7 @@ BattleTowerRoomMenu:
 BattleTowerBattle:
 	xor a ; FALSE
 	ld [wBattleTowerBattleEnded], a
-	jmp _BattleTowerBattle
+	jr _BattleTowerBattle
 
 InitBattleTowerChallengeRAM:
 	xor a

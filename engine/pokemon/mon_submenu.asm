@@ -159,14 +159,14 @@ GetMonSubmenuItems:
 	call AddMonMenuItem
 
 .ok2
-	jmp TerminateMonSubmenu
+	jr TerminateMonSubmenu
 
 .egg
 	ld a, MONMENUITEM_SWITCH
 	call AddMonMenuItem
 	ld a, MONMENUITEM_CANCEL
 	call AddMonMenuItem
-	jmp TerminateMonSubmenu
+	jr TerminateMonSubmenu
 
 IsFieldMove:
 	ld b, a

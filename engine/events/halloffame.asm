@@ -250,7 +250,7 @@ AnimateHOFMonEntrance:
 	xor a
 	ldh [hBGMapMode], a
 	ldh [hSCY], a
-	jmp HOF_SlideFrontpic
+	jr HOF_SlideFrontpic
 
 HOF_SlideBackpic:
 .backpicloop

@@ -586,7 +586,7 @@ GetTrainerPalettePointer:
 	ret
 
 GetMonPalettePointer:
-	jmp _GetMonPalettePointer
+	jr _GetMonPalettePointer
 
 BattleObjectPals:
 INCLUDE "gfx/battle_anims/battle_anims.pal"

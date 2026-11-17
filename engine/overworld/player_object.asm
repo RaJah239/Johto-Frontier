@@ -82,7 +82,7 @@ PlayerSpawn_ConvertCoords:
 	add 4
 	ld e, a
 	pop bc
-	jmp CopyDECoordsToMapObject
+	jr CopyDECoordsToMapObject
 
 WriteObjectXY::
 	ld a, b
@@ -696,7 +696,7 @@ GetRelativeFacing::
 	cp NUM_OBJECT_STRUCTS
 	jr nc, .carry
 	ld e, a
-	jmp .GetFacing_e_relativeto_d
+	jr .GetFacing_e_relativeto_d
 
 .carry
 	scf

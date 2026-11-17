@@ -110,7 +110,7 @@ CheckWarpTile::
 WarpCheck::
 	call GetDestinationWarpNumber
 	ret nc
-	jmp CopyWarpData
+	jr CopyWarpData
 
 GetDestinationWarpNumber::
 	farcall CheckWarpCollision
@@ -247,21 +247,21 @@ LoadMapAttributes::
 	call SwitchToMapScriptsBank
 	call ReadMapScripts
 	xor a ; do not skip object events
-	jmp ReadMapEvents
+	jr ReadMapEvents
 
 LoadMapAttributes_SkipObjects::
 	call CopyMapPartialAndAttributes
 	call SwitchToMapScriptsBank
 	call ReadMapScripts
 	ld a, TRUE ; skip object events
-	jmp ReadMapEvents
+	jr ReadMapEvents
 
 CopyMapPartialAndAttributes::
 	call CopyMapPartial
 	call SwitchToMapAttributesBank
 	call GetMapAttributesPointer
 	call CopyMapAttributes
-	jmp GetMapConnections
+	jr GetMapConnections
 
 ReadMapEvents::
 	push af
@@ -285,7 +285,7 @@ ReadMapScripts::
 	ld h, [hl]
 	ld l, a
 	call ReadMapSceneScripts
-	jmp ReadMapCallbacks
+	jr ReadMapCallbacks
 
 CopyMapAttributes::
 	ld de, wMapAttributes
@@ -1352,7 +1352,7 @@ GetMovementPermissions::
 	dec e
 	call GetCoordTileCollision
 	ld [wTileUp], a
-	jmp .Up
+	jr .Up
 
 .LeftRight:
 	ld a, [wPlayerMapX]
@@ -1370,7 +1370,7 @@ GetMovementPermissions::
 	inc d
 	call GetCoordTileCollision
 	ld [wTileRight], a
-	jmp .Right
+	jr .Right
 
 .Down:
 	call .CheckHiNybble

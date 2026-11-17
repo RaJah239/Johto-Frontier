@@ -80,7 +80,7 @@ StartClock::
 	call RecordRTCStatus ; set flag on sRTCStatusFlags
 
 .skip_set
-	jmp StartRTC
+	jr StartRTC
 
 _FixDays:
 	ld hl, hRTCDayHi

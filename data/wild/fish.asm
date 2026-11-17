@@ -300,7 +300,7 @@ FishGroups_Names::
  	; ld a, [hl] ; fishing group
  	cp FISHGROUP_NONE
  	jr z, .fishgroup_none
- 	jmp GetFishGroupName
+ 	jr GetFishGroupName
  	; ptr to fishgroup name is in de
  .fishgroup_none
  	xor a

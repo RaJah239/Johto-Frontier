@@ -633,7 +633,7 @@ ConvertLoadedPuzzlePieces:
 	pop bc
 	dec b
 	jr nz, .loop
-	jmp UnownPuzzle_AddPuzzlePieceBorders
+	jr UnownPuzzle_AddPuzzlePieceBorders
 
 .EnlargePuzzlePieceTiles:
 ; double size

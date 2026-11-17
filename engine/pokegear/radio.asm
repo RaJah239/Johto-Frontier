@@ -684,7 +684,7 @@ CopyDexEntry:
 	call CopyRadioTextToRAM
 	pop hl
 	pop af
-	jmp CopyDexEntryPart2
+	jr CopyDexEntryPart2
 
 CopyDexEntryPart1:
 	ld de, wPokedexShowPointerBank

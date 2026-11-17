@@ -92,7 +92,7 @@ _CardFlip:
 	call YesNoBox
 	jr c, .SaidNo
 	call CardFlip_ShuffleDeck
-	jmp .Increment
+	jr .Increment
 
 .SaidNo:
 	ld a, 7
@@ -135,7 +135,7 @@ _CardFlip:
 	ld a, $1
 	ldh [hBGMapMode], a
 	call WaitSFX
-	jmp .Increment
+	jr .Increment
 
 .CardFlipNotEnoughCoinsText:
 	text_far _CardFlipNotEnoughCoinsText
@@ -466,7 +466,7 @@ CardFlip_UpdateCoinBalanceDisplay:
 	call Textbox
 	pop hl
 	call PrintTextboxText
-	jmp CardFlip_PrintCoinBalance
+	jr CardFlip_PrintCoinBalance
 
 CardFlip_PrintCoinBalance:
 	hlcoord 9, 15

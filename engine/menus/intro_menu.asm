@@ -100,7 +100,7 @@ PlayerProfileSetup:
 ResetWRAM:
 	xor a
 	ldh [hBGMapMode], a
-	jmp _ResetWRAM
+	jr _ResetWRAM
 
 _ResetWRAM:
 	ld hl, wShadowOAM
@@ -398,11 +398,11 @@ DisplaySaveInfoOnContinue:
 	and %10000000
 	jr z, .clock_ok
 	lb de, 4, 8
-	jmp DisplayContinueDataWithRTCError
+	jr DisplayContinueDataWithRTCError
 
 .clock_ok
 	lb de, 4, 8
-	jmp DisplayNormalContinueData
+	jr DisplayNormalContinueData
 
 DisplaySaveInfoOnSave:
 	lb de, 4, 0
@@ -490,7 +490,7 @@ Continue_DisplayBadgesDexPlayerName:
 Continue_PrintGameTime:
 	decoord 9, 8, 0
 	add hl, de
-	jmp Continue_DisplayGameTime
+	jr Continue_DisplayGameTime
 
 Continue_UnknownGameTime:
 	decoord 9, 8, 0

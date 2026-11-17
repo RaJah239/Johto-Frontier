@@ -32,7 +32,7 @@ PokeSeer:
 	jr c, .no_mon
 
 	call ReadCaughtData
-	jmp SeerAction
+	jr SeerAction
 
 .cancel
 	ld a, SEER_CANCEL

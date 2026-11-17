@@ -118,7 +118,7 @@ SlotMachine:
 	ret c
 	ld a, BANK(_SlotMachine)
 	ld hl, _SlotMachine
-	jmp StartGameCornerGame
+	jr StartGameCornerGame
 
 _VoltorbFlip:
 	call CheckCoinsAndCoinCase
@@ -132,7 +132,7 @@ CardFlip:
 	ret c
 	ld a, BANK(_CardFlip)
 	ld hl, _CardFlip
-	jmp StartGameCornerGame
+	jr StartGameCornerGame
 
 GetPartyCountWithoutEggs::
 	push hl
@@ -177,7 +177,7 @@ MemoryGame:
 	ret c
 	ld a, BANK(_MemoryGame)
 	ld hl, _MemoryGame
-	jmp StartGameCornerGame
+	jr StartGameCornerGame
 
 StartGameCornerGame:
 	call FarQueueScript

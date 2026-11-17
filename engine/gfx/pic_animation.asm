@@ -3,27 +3,27 @@
 AnimateMon_Menu:
 	ld e, ANIM_MON_MENU
 	ld d, $0
-	jmp AnimateFrontpic
+	jr AnimateFrontpic
 
 AnimateMon_Trade:
 	ld e, ANIM_MON_TRADE
 	ld d, $0
-	jmp AnimateFrontpic
+	jr AnimateFrontpic
 
 AnimateMon_Evolve:
 	ld e, ANIM_MON_EVOLVE
 	ld d, $0
-	jmp AnimateFrontpic
+	jr AnimateFrontpic
 
 AnimateMon_Hatch:
 	ld e, ANIM_MON_HATCH
 	ld d, $0
-	jmp AnimateFrontpic
+	jr AnimateFrontpic
 
 AnimateMon_HOF:
 	ld e, ANIM_MON_HOF
 	ld d, $0
-	jmp AnimateFrontpic
+	jr AnimateFrontpic
 
 MACRO pokeanim
 	rept _NARG
@@ -419,7 +419,7 @@ PokeAnim_DoAnimScript:
 	dec a
 	ld [wPokeAnimWaitCounter], a
 	ret nz
-	jmp PokeAnim_StopWaitAnim
+	jr PokeAnim_StopWaitAnim
 
 .SetRepeat:
 	ld a, [wPokeAnimParameter]
