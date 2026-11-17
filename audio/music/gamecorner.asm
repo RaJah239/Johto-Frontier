@@ -672,25 +672,11 @@ Music_GameCorner_Ch4:
 .mainloop:
 	sound_call .sub1
 .loop1:
-	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
-	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
+	sound_call Music_GameCorner_Ch4_ditty2
 	sound_loop 6, .loop1
 	sound_call .sub2
 .loop2:
-	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
-	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
+	sound_call Music_GameCorner_Ch4_ditty2
 	sound_loop 3, .loop2
 	rest 12
 	drum_note 3, 1
@@ -698,25 +684,11 @@ Music_GameCorner_Ch4:
 	drum_note 7, 2
 	sound_call .sub1
 .loop3:
-	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
-	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
+	sound_call Music_GameCorner_Ch4_ditty2
 	sound_loop 6, .loop3
 	sound_call .sub2
 .loop4:
-	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
-	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
+	sound_call Music_GameCorner_Ch4_ditty2
 	sound_loop 3, .loop4
 	drum_note 11, 2
 	drum_note 7, 2
@@ -729,47 +701,14 @@ Music_GameCorner_Ch4:
 	drum_note 3, 1
 	drum_note 3, 1
 .loop5:
-	drum_note 11, 2
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 3, 1
-	drum_note 4, 1
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 4, 1
-	drum_note 3, 1
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 3, 2
+	sound_call Music_GameCorner_Ch4_ditty1
 	drum_note 7, 2
 	sound_loop 3, .loop5
-	drum_note 11, 2
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 3, 1
-	drum_note 4, 1
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 4, 1
-	drum_note 3, 1
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 3, 2
+	sound_call Music_GameCorner_Ch4_ditty1
 	drum_note 3, 1
 	drum_note 3, 1
 .loop6:
-	drum_note 11, 2
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 3, 1
-	drum_note 4, 1
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 4, 1
-	drum_note 3, 1
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 3, 2
+	sound_call Music_GameCorner_Ch4_ditty1
 	drum_note 7, 2
 	sound_loop 3, .loop6
 	drum_note 3, 1
@@ -803,5 +742,31 @@ Music_GameCorner_Ch4:
 	drum_note 7, 2
 	drum_note 3, 1
 	drum_note 3, 1
+	drum_note 7, 2
+	sound_ret
+
+Music_GameCorner_Ch4_ditty1:
+	drum_note 11, 2
+	drum_note 7, 1
+	drum_note 4, 1
+	drum_note 3, 1
+	drum_note 4, 1
+	drum_note 7, 1
+	drum_note 4, 1
+	drum_note 4, 1
+	drum_note 3, 1
+	drum_note 7, 1
+	drum_note 4, 1
+	drum_note 3, 2
+	sound_ret
+
+Music_GameCorner_Ch4_ditty2:
+	drum_note 11, 2
+	drum_note 7, 2
+	drum_note 3, 2
+	drum_note 7, 2
+	drum_note 11, 2
+	drum_note 7, 2
+	drum_note 3, 2
 	drum_note 7, 2
 	sound_ret

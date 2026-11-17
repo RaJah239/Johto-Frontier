@@ -95,27 +95,9 @@ Music_RocketBattle_Ch1:
 	note E_, 2
 	note E_, 2
 	note A_, 2
-	note E_, 2
-	note D_, 2
-	note E_, 2
-	note F_, 2
-	note E_, 2
-	note F_, 2
-	volume_envelope 11, 5
-	note G_, 4
-	volume_envelope 11, 3
-	note G_, 2
-	note F_, 2
+	sound_call Music_RocketBattle_Ch1_ditty1
 	note D#, 2
-	note D_, 2
-	note C#, 2
-	note D_, 2
-	volume_envelope 11, 5
-	note D#, 4
-	volume_envelope 11, 3
-	note D#, 2
-	note D_, 2
-	note F_, 2
+	sound_call Music_RocketBattle_Ch1_ditty2
 .mainloop:
 	octave 4
 	note E_, 2
@@ -140,17 +122,7 @@ Music_RocketBattle_Ch1:
 	octave 4
 	note D_, 2
 	octave 3
-	note E_, 2
-	note D_, 2
-	note E_, 2
-	note F_, 2
-	note E_, 2
-	note F_, 2
-	volume_envelope 11, 5
-	note G_, 4
-	volume_envelope 11, 3
-	note G_, 2
-	note F_, 2
+	sound_call Music_RocketBattle_Ch1_ditty1
 	octave 4
 	note C_, 2
 	note D_, 2
@@ -379,15 +351,7 @@ Music_RocketBattle_Ch1:
 	octave 2
 	note A#, 2
 	octave 3
-	note D_, 2
-	note C#, 2
-	note D_, 2
-	volume_envelope 11, 5
-	note D#, 4
-	volume_envelope 11, 3
-	note D#, 2
-	note D_, 2
-	note F_, 2
+	sound_call Music_RocketBattle_Ch1_ditty2
 	sound_loop 0, .mainloop
 
 Music_RocketBattle_Ch2:
@@ -402,36 +366,16 @@ Music_RocketBattle_Ch2:
 	octave 5
 	note C_, 1
 	volume_envelope 8, 2
-	octave 4
-	note G#, 1
-	note A_, 1
-	note G#, 1
-	volume_envelope 12, 2
-	octave 5
+	sound_call Music_RocketBattle_Ch2_ditty1
 	note C#, 1
 	volume_envelope 9, 2
-	octave 4
-	note G#, 1
-	note A_, 1
-	note G#, 1
-	volume_envelope 12, 2
-	octave 5
+	sound_call Music_RocketBattle_Ch2_ditty1
 	note D_, 1
 	volume_envelope 10, 2
-	octave 4
-	note G#, 1
-	note A_, 1
-	note G#, 1
-	volume_envelope 12, 2
-	octave 5
+	sound_call Music_RocketBattle_Ch2_ditty1
 	note D#, 1
 	volume_envelope 11, 2
-	octave 4
-	note G#, 1
-	note A_, 1
-	note G#, 1
-	volume_envelope 12, 2
-	octave 5
+	sound_call Music_RocketBattle_Ch2_ditty1
 	note E_, 1
 	octave 4
 	note G#, 1
@@ -788,14 +732,7 @@ Music_RocketBattle_Ch3:
 	octave 3
 	note A#, 2
 	sound_call .sub5
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Ch3_ditty1
 	octave 2
 	note A_, 2
 	octave 3
@@ -907,22 +844,8 @@ Music_RocketBattle_Ch3:
 	sound_call .sub6
 	octave 3
 	note A_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Ch3_ditty1
+	sound_call Music_RocketBattle_Ch3_ditty1
 	sound_call .sub2
 	sound_call .sub3
 	octave 3
@@ -1028,4 +951,50 @@ Music_RocketBattle_Ch3:
 	note A_, 2
 	octave 2
 	note A_, 2
+	sound_ret
+
+Music_RocketBattle_Ch1_ditty1:
+	note E_, 2
+	note D_, 2
+	note E_, 2
+	note F_, 2
+	note E_, 2
+	note F_, 2
+	volume_envelope 11, 5
+	note G_, 4
+	volume_envelope 11, 3
+	note G_, 2
+	note F_, 2
+	sound_ret
+
+Music_RocketBattle_Ch1_ditty2:
+	note D_, 2
+	note C#, 2
+	note D_, 2
+	volume_envelope 11, 5
+	note D#, 4
+	volume_envelope 11, 3
+	note D#, 2
+	note D_, 2
+	note F_, 2
+	sound_ret
+
+Music_RocketBattle_Ch2_ditty1:
+	octave 4
+	note G#, 1
+	note A_, 1
+	note G#, 1
+	volume_envelope 12, 2
+	octave 5
+	sound_ret
+
+Music_RocketBattle_Ch3_ditty1:
+	octave 2
+	note A_, 2
+	octave 3
+	note E_, 2
+	octave 2
+	note A_, 2
+	octave 3
+	note E_, 2
 	sound_ret
