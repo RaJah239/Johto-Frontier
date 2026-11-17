@@ -1,8 +1,9 @@
-	db "DRILL@" ; species name
+	db "Drill@" ; species name
 	dw 407, 1370 ; height, weight
-	db   "It uses its thick"
-	feed "arms, legs and"
-	feed "tail to attack"
-	feed "forcefully. Melee"
-	feed "combat is its"
-	feed "specialty.@"
+
+	db   "Entry:"
+	feed "Sets Toxic Spikes."
+	feed ""
+	feed "Moves with extra"
+	feed "effects deal 1.3×"
+	feed "damage, no effect.@"
