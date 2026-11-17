@@ -1,8 +1,8 @@
-	db "ARMOR@" ; species name
+	db "Armor@" ; species name
 	dw 607, 4450 ; height, weight
-	db   "In just one of its"
-	feed "mighty hands, it"
-	feed "has the power to"
-	feed "make the ground"
-	feed "shake and moun-"
-	feed "tains crumble.@"
+
+	db   "Entry:"
+	feed "Summons sandstorm."
+	feed ""
+	feed "Moves never miss."
+	feed "Always gets hit.@"

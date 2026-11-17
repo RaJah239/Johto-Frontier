@@ -2,4 +2,5 @@
 
 NoGuardPokemon:
 ;	db MACHAMP
+	db TYRANITAR
 	db -1 ; end

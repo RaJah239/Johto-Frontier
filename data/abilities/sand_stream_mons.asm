@@ -2,5 +2,5 @@
 
 SandStreamPokemon:
 ;    db CLAYDOL
-;    db TYRANITAR
+    db TYRANITAR
     db -1
