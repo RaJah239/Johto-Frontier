@@ -3,4 +3,5 @@
 ; Pillow Fort and Chrysalis Hide (engine/abilities/mold_breaker.asm)
 
 MoldBreakerPokemon:
+    db HAXORUS
     db -1 ; end
