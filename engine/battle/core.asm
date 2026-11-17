@@ -2223,6 +2223,7 @@ PickPartyMonInBattle:
 
 .check_moves
 	farcall ManagePokemonMoves
+	farcall ReloadBattleStatusIconTiles
 	jr BattleMenuPKMN_ReturnFromStats_Forced.setup
 
 SwitchMonAlreadyOut:
@@ -4571,6 +4572,7 @@ BattleMenuPKMN_Loop:
 	cp EGG
 	jr z, .Cancel
 	farcall ManagePokemonMoves
+	farcall ReloadBattleStatusIconTiles
 	jr BattleMenuPKMN_ReturnFromStats
 
 .Cancel:

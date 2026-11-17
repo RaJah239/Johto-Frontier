@@ -178,6 +178,36 @@ SetStatusIconColor:
 	ei
 	ret
 
+ReloadBattleStatusIconTiles::
+; Put both HUDs' status icon tiles back without touching the tilemap. The
+; moves screen (MOVES in the battle party menu) draws its move icons over
+; tiles $79-$7e, so otherwise the foe's HUD would show part of a type
+; label where its status goes until the HUD is redrawn.
+	ld hl, wBattleMonHP
+	ld a, [hli]
+	or [hl]
+	ld a, STATUS_ICON_FNT
+	jr z, .player
+	call GetPlayerStatusIconIndex
+.player
+	ld de, StatusIconGFX
+	call GetStatusIconGFX
+	ld a, BATTLE_STATUS_ICON_PLAYER_TILE
+	ld b, BANK(vTiles2)
+	call StatusIcons_SendTiles
+	ld hl, wEnemyMonHP
+	ld a, [hli]
+	or [hl]
+	ld a, STATUS_ICON_FNT
+	jr z, .enemy
+	call GetEnemyStatusIconIndex
+.enemy
+	ld de, EnemyStatusIconGFX
+	call GetStatusIconGFX
+	ld a, BATTLE_STATUS_ICON_ENEMY_TILE
+	ld b, BANK(vTiles2)
+	jmp StatusIcons_SendTiles
+
 LoadBattleStatusIconPals::
 ; Fill the palette at de (WRAM bank 5) with white, the player's status
 ; colour, the foe's and black, and advance de past it, like the other
