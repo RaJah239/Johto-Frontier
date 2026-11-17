@@ -2,5 +2,5 @@
 ; user
 
 MagicBouncePokemon:
-;	db ESPEON
+	db ESPEON
 	db -1 ; end
