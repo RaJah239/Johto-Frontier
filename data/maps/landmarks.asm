@@ -61,8 +61,6 @@ Landmarks:
 	landmark 148,  44, Route21Name
 	landmark 148,  36, IndigoPlateauName	
 	landmark 160, 160, BattlePlazaName
-	assert_table_length NUM_MAP_LANDMARKS
-	landmark 140, 116, FastShipName
 	assert_table_length NUM_LANDMARKS
 
 NewBarkTownName:     db "New Bark<BSP>Town@"
@@ -115,7 +113,6 @@ Route18Name:         db "Route 18@"
 DarkCaveName:        db "Dark Cave@"
 IlexForestName:      db "Ilex<BSP>Forest@"
 BurnedTowerName:     db "Burned<BSP>Tower@"
-FastShipName:        db "Fast Ship@"
 TohjoFallsName:      db "Tohjo Falls@"
 PowerPlantName:      db "Power Plant@"
 BattlePlazaName:     db "Battle<BSP>Plaza@"

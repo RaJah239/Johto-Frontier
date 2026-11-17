@@ -131,8 +131,6 @@ Pokegear_LoadGFX:
 	ld a, [wMapNumber]
 	ld c, a
 	call GetWorldMapLocation
-	cp LANDMARK_FAST_SHIP
-	jr z, .ssaqua
 	cp LANDMARK_BATTLE_PLAZA
 	jr z, .ssaqua
 	farcall GetPlayerIcon
@@ -210,8 +208,6 @@ TownMap_InitCursorAndPlayerIconPositions:
 	ld a, [wMapNumber]
 	ld c, a
 	call GetWorldMapLocation
-	cp LANDMARK_FAST_SHIP
-	jr z, .FastShip
 	cp LANDMARK_SPECIAL
 	jr nz, .LoadLandmark
 	ld a, [wBackupMapGroup]
@@ -221,12 +217,6 @@ TownMap_InitCursorAndPlayerIconPositions:
 	call GetWorldMapLocation
 .LoadLandmark:
 	ld [wPokegearMapPlayerIconLandmark], a
-	ld [wPokegearMapCursorLandmark], a
-	ret
-
-.FastShip:
-	ld [wPokegearMapPlayerIconLandmark], a
-	ld a, LANDMARK_NEW_BARK_TOWN
 	ld [wPokegearMapCursorLandmark], a
 	ret
 
@@ -880,8 +870,6 @@ PokegearMap_InitSwarmIcon:
 	pop de
 	and a ; LANDMARK_SPECIAL
 	ret z
-	cp NUM_MAP_LANDMARKS ; not on the map (the Fast Ship)
-	ret nc
 	ld e, a ; e = landmark
 	push de
 ; load the icon graphics
@@ -2007,7 +1995,7 @@ _TownMap:
 	call DelayFrame
 
 .dmg
-	ld d, NUM_MAP_LANDMARKS - 1
+	ld d, NUM_LANDMARKS - 1
 	ld e, 1
 	call .loop
 
@@ -2462,7 +2450,7 @@ Pokedex_GetArea:
 	ld hl, vTiles0 tile $7f
 	lb bc, BANK(PokedexNestIconGFX), 1
 	call Request2bpp
-	call .GetPlayerOrFastShipIcon
+	call .GetPlayerIcon
 	ld hl, vTiles0 tile $78
 	ld c, 4
 	call Request2bpp
@@ -2644,16 +2632,8 @@ Pokedex_GetArea:
  	db  0 * 8,  0 * 8, 3 ; bottom right
 	db $80 ; terminator
 
-.GetPlayerOrFastShipIcon:
-	ld a, [wTownMapPlayerIconLandmark]
-	cp LANDMARK_FAST_SHIP
-	jr z, .FastShip
+.GetPlayerIcon:
 	farjp GetPlayerIcon
-
-.FastShip:
-	ld de, FastShipGFX
-	ld b, BANK(FastShipGFX)
-	ret
 
 TownMapBGUpdate:
 ; Update BG Map tiles and attributes

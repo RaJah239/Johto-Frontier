@@ -55,8 +55,6 @@
 	const LANDMARK_ROUTE_21          ; 33
 	const LANDMARK_INDIGO_PLATEAU    ; 34
 	const LANDMARK_BATTLE_PLAZA      ; 35
-DEF NUM_MAP_LANDMARKS EQU const_value ; the ones on the town map
-	const LANDMARK_FAST_SHIP         ; 36
 DEF NUM_LANDMARKS EQU const_value
 
 ; used in CaughtData
