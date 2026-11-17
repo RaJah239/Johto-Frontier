@@ -1266,6 +1266,10 @@ _CGB_PackPals:
     lb bc, 3, 3
     ld a, $7
     call FillBoxCGB
+    hlcoord 5, 2, wAttrmap ; "REG" icons of registered key items (white, blue)
+    lb bc, 10, 2
+    ld a, $4
+    call FillBoxCGB
     call ApplyAttrmap
     call ApplyPals
     ld a, TRUE

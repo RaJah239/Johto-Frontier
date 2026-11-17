@@ -96,6 +96,7 @@ Pack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
+	call LoadRegisteredIconGFX
 	call DrawPackGFX_NoWait
 	jmp Pack_JumptableNext
 
@@ -658,6 +659,7 @@ BattlePack:
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
+	call LoadRegisteredIconGFX
 	call DrawPackGFX_NoWait
 	jmp Pack_JumptableNext
 
@@ -1591,6 +1593,77 @@ Pack_GetItemName:
 	call GetItemName
 	jmp CopyName1
 
+; "REG" icon left of the cursor column (cols 5-6) for registered key items.
+; BG palette 4 (the Key Item tab's: white and blue) colours those cells, see
+; _CGB_PackPals; tiles $73-$74 are free in the Pack.
+DEF REGISTERED_ICON_TILE EQU $73
+DEF REGISTERED_ICON_X    EQU 5
+DEF PACK_LIST_TOP_Y      EQU 2
+
+LoadRegisteredIconGFX:
+	ld de, RegisteredIconGFX
+	ld hl, vTiles2 tile REGISTERED_ICON_TILE
+	lb bc, BANK(RegisteredIconGFX), 2
+	jmp Get2bpp
+
+PlaceKeyItemName:
+; The Key Items pocket's row function: the item's name at de, plus the
+; "REG" icon if the item is registered.
+	ld h, d
+	ld l, e
+	ld bc, REGISTERED_ICON_X - 8 ; the names start at column 8
+	add hl, bc
+	; The first row clears the icon column: scrolling moves the items, and
+	; it's outside the menu box the scrolling menu clears.
+	push hl
+	ld bc, -(PACK_LIST_TOP_Y * SCREEN_WIDTH + REGISTERED_ICON_X + wTilemap) & $ffff
+	add hl, bc
+	ld a, h
+	or l
+	pop hl
+	call z, .ClearIcons
+	ld a, [wMenuSelection]
+	push hl
+	ld hl, wRegisteredItemSlot1
+	cp [hl]
+	jr z, .checked
+	inc hl ; wRegisteredItemSlot2
+	cp [hl]
+	jr z, .checked
+	ld hl, wRegisteredItemSlot3
+	cp [hl]
+	jr z, .checked
+	inc hl ; wRegisteredItemSlot4
+	cp [hl]
+.checked
+	pop hl
+	jr nz, .name
+	ld a, REGISTERED_ICON_TILE
+	ld [hli], a
+	inc a
+	ld [hl], a
+.name
+	farjp PlaceMenuItemName
+
+.ClearIcons:
+	push hl
+	push de
+	ld de, SCREEN_WIDTH - 1
+	ld b, 10 ; rows 2-11
+.clear
+	ld a, " "
+	ld [hli], a
+	ld [hl], a
+	add hl, de
+	dec b
+	jr nz, .clear
+	pop de
+	pop hl
+	ret
+
+RegisteredIconGFX:
+INCBIN "gfx/pack/registered_icon.2bpp"
+
 ClearPocketList:
 	hlcoord 5, 2
 	lb bc, 10, SCREEN_WIDTH - 5
@@ -1649,7 +1722,7 @@ KeyItemsPocketMenuHeader:
 	db 5, 8 ; rows, columns
 	db SCROLLINGMENU_ITEMS_NORMAL ; item format
 	dbw 0, wNumKeyItems
-	dba PlaceMenuItemName
+	dba PlaceKeyItemName
 	dba PlaceMenuItemQuantity
 	dba UpdateItemIconAndDescription
 
