@@ -2,4 +2,5 @@
 
 TypeSyncPokemon:
     db PORYGONZ
+    db VAPOREON
     db -1

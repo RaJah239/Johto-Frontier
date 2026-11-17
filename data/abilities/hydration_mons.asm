@@ -7,4 +7,5 @@
 ;	db SEEL
 ;	db DEWGONG
 ;	db LAPRAS
+    db VAPOREON
     db -1 ; end
