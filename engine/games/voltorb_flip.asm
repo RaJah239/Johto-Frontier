@@ -42,6 +42,9 @@ DEF VF_ARMED_MARK_DIR EQU $c421 ; a direction pressed alone while B is held
 DEF VF_YES_NO_CURSOR EQU $c422 ; 0 YES, 1 NO
 DEF VF_BOX_TOP EQU 7 ; the YES/NO box and the question cover rows 7-17
 DEF VF_BOX_BYTES EQU (SCREEN_HEIGHT - VF_BOX_TOP) * SCREEN_WIDTH
+; The boxes borrow palette 4 (white, black text): it only colours the blue
+; counters, and the boxes cover both of them, so nothing else shows it.
+DEF VF_BOX_PAL EQU 4
 
 VoltorbFlipGFX:
 INCBIN "gfx/voltorb_flip.2bpp"
@@ -1647,11 +1650,11 @@ VFAskYesNo:
 	call TextboxBorder
 	hlcoord 14, VF_BOX_TOP, wAttrmap
 	lb bc, 5, 6
-	xor a ; palette 0: black on yellow, like the COINS panel
+	ld a, VF_BOX_PAL
 	call FillBoxWithByte
 	hlcoord 0, 12, wAttrmap
 	lb bc, 6, SCREEN_WIDTH
-	xor a
+	ld a, VF_BOX_PAL
 	call FillBoxWithByte
 	pop de
 	hlcoord 1, 14
@@ -1669,7 +1672,16 @@ VFAskYesNo:
 	ldh [hBGMapAddress], a
 	ld a, HIGH(vBGMap0)
 	ldh [hBGMapAddress + 1], a
-	call WaitBGMap2 ; leaves hBGMapMode on, so the cursor keeps updating
+	; tiles first: once the boxes cover the blue counters, palette 4 can
+	; turn white without anything else changing colour
+	ld a, 1
+	call WaitBGMapInMode
+	ld hl, VFBoxPalette
+	call VFSetBoxPalette
+	ld a, 2
+	call WaitBGMapInMode
+	ld a, 1 ; keep copying tiles, so the cursor moves on screen
+	ldh [hBGMapMode], a
 	call GetJoypad ; forget the press that opened the box
 .loop
 	call DelayFrame
@@ -1704,7 +1716,12 @@ VFAskYesNo:
 	ld de, SFX_READ_TEXT
 	call PlaySFX
 	call VFRestoreBoxArea
-	call WaitBGMap2
+	ld a, 2
+	call WaitBGMapInMode
+	ld hl, VoltorbFlipPalette palette VF_BOX_PAL
+	call VFSetBoxPalette
+	ld a, 1
+	call WaitBGMapInMode
 	xor a
 	ldh [hBGMapMode], a ; Voltorb Flip copies its own tiles again
 	jmp DelayFrame ; so the A press isn't read as flipping a card
@@ -1726,6 +1743,22 @@ VFAskYesNo:
 	db "Yes@"
 .no
 	db "No@"
+
+VFSetBoxPalette:
+; Copies the palette at hl into palette VF_BOX_PAL; VBlank applies it.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals2)
+	ldh [rSVBK], a
+	ld de, wBGPals2 palette VF_BOX_PAL
+	ld bc, 1 palettes
+	call CopyBytes
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	jr VFRestoreWRAMBank
+
+VFBoxPalette:
+	dw $7fff, $7fff, $0000, $0000 ; white, black text and frame
 
 VFBackupBoxArea:
 	ldh a, [rSVBK]
