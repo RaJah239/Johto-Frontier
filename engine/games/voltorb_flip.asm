@@ -9,6 +9,7 @@
 ;c41f cards flipped this game
 ;c420 2 and 3 cards left (for the "are you sure?" jingle)
 ;c421 the mark a held B + one direction will toggle (VF_ARMED_MARK_DIR)
+;c422 cursor in the YES/NO box: 0 YES, 1 NO (VF_YES_NO_CURSOR)
 ;c440-c449 total numbers for row/col
 ;c450-c459 total voltorb for row/col
 ;c498 coins collected this game
@@ -38,6 +39,9 @@
 ;91 boom!
 
 DEF VF_ARMED_MARK_DIR EQU $c421 ; a direction pressed alone while B is held
+DEF VF_YES_NO_CURSOR EQU $c422 ; 0 YES, 1 NO
+DEF VF_BOX_TOP EQU 7 ; the YES/NO box and the question cover rows 7-17
+DEF VF_BOX_BYTES EQU (SCREEN_HEIGHT - VF_BOX_TOP) * SCREEN_WIDTH
 
 VoltorbFlipGFX:
 INCBIN "gfx/voltorb_flip.2bpp"
@@ -66,6 +70,8 @@ VoltorbFlip::;this is where the magic happens
 	ld a, $d
 	ld [rIE], a
 	call VFLoadGFX
+	call LoadStandardFont ; letters for the YES/NO questions
+	call LoadFontsExtra ; textbox frame
 	call VFLoadPalette
 	call VFInitRAM
 	call VFInitMap
@@ -318,9 +324,9 @@ VFInput:
 	bit 0, a
 	jr nz, .abutton
 	bit 2, a
-	jmp nz, VFKeepCoins
+	jmp nz, VFAskExit
 	bit 3, a
-	jmp nz, VFExit
+	jmp nz, VFAskRestart
 	push af
 	ld a, [$c41b]
 	ld [$c41d], a
@@ -1606,6 +1612,153 @@ VFKeepCoins:
 .fixlevel
 	inc a
 	jr .setlevel
+
+VFAskExit:
+; Select: "Want to exit the game?" YES leaves (keeping this board's coins).
+	ld de, .text
+	call VFAskYesNo
+	ret nc
+	jmp VFExit
+
+.text
+	db "Want to exit<NEXT>the game?@"
+
+VFAskRestart:
+; Start: "Want to restart this game?" YES deals a new board (keeping this
+; board's coins, as quitting a round always has).
+	ld de, .text
+	call VFAskYesNo
+	ret nc
+	jr VFKeepCoins
+
+.text
+	db "Want to restart<NEXT>this game?@"
+
+VFAskYesNo:
+; Asks the question at de in a textbox with a YES/NO box above it.
+; Returns carry for YES. The board under the boxes comes back afterwards.
+	push de
+	call VFBackupBoxArea
+	hlcoord 14, VF_BOX_TOP
+	lb bc, 3, 4
+	call TextboxBorder
+	hlcoord 0, 12
+	lb bc, 4, 18
+	call TextboxBorder
+	hlcoord 14, VF_BOX_TOP, wAttrmap
+	lb bc, 5, 6
+	xor a ; palette 0: black on yellow, like the COINS panel
+	call FillBoxWithByte
+	hlcoord 0, 12, wAttrmap
+	lb bc, 6, SCREEN_WIDTH
+	xor a
+	call FillBoxWithByte
+	pop de
+	hlcoord 1, 14
+	call PlaceString
+	hlcoord 16, VF_BOX_TOP + 1
+	ld de, .yes
+	call PlaceString
+	hlcoord 16, VF_BOX_TOP + 3
+	ld de, .no
+	call PlaceString
+	ld a, 1 ; start on NO, so a stray press doesn't end the game
+	ld [VF_YES_NO_CURSOR], a
+	call .cursor
+	xor a
+	ldh [hBGMapAddress], a
+	ld a, HIGH(vBGMap0)
+	ldh [hBGMapAddress + 1], a
+	call WaitBGMap2 ; leaves hBGMapMode on, so the cursor keeps updating
+	call GetJoypad ; forget the press that opened the box
+.loop
+	call DelayFrame
+	call GetJoypad
+	ldh a, [hJoyPressed]
+	bit A_BUTTON_F, a
+	jr nz, .choose
+	bit B_BUTTON_F, a
+	jr nz, .no_chosen
+	and D_UP | D_DOWN
+	jr z, .loop
+	ld a, [VF_YES_NO_CURSOR]
+	xor 1
+	ld [VF_YES_NO_CURSOR], a
+	call .cursor
+	jr .loop
+
+.choose
+	ld a, [VF_YES_NO_CURSOR]
+	and a
+	jr nz, .no_chosen
+	call .close
+	scf
+	ret
+
+.no_chosen
+	call .close
+	and a
+	ret
+
+.close
+	ld de, SFX_READ_TEXT
+	call PlaySFX
+	call VFRestoreBoxArea
+	call WaitBGMap2
+	xor a
+	ldh [hBGMapMode], a ; Voltorb Flip copies its own tiles again
+	jmp DelayFrame ; so the A press isn't read as flipping a card
+
+.cursor
+	ld a, " "
+	ldcoord_a 15, VF_BOX_TOP + 1
+	ldcoord_a 15, VF_BOX_TOP + 3
+	ld a, [VF_YES_NO_CURSOR]
+	and a
+	hlcoord 15, VF_BOX_TOP + 1
+	jr z, .got_cursor
+	hlcoord 15, VF_BOX_TOP + 3
+.got_cursor
+	ld [hl], "▶"
+	ret
+
+.yes
+	db "Yes@"
+.no
+	db "No@"
+
+VFBackupBoxArea:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wScratchTilemap)
+	ldh [rSVBK], a
+	hlcoord 0, VF_BOX_TOP
+	ld de, wScratchTilemap
+	ld bc, VF_BOX_BYTES
+	call CopyBytes
+	hlcoord 0, VF_BOX_TOP, wAttrmap
+	ld de, wScratchAttrmap
+	ld bc, VF_BOX_BYTES
+	call CopyBytes
+	jr VFRestoreWRAMBank
+
+VFRestoreBoxArea:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wScratchTilemap)
+	ldh [rSVBK], a
+	ld hl, wScratchTilemap
+	decoord 0, VF_BOX_TOP
+	ld bc, VF_BOX_BYTES
+	call CopyBytes
+	ld hl, wScratchAttrmap
+	decoord 0, VF_BOX_TOP, wAttrmap
+	ld bc, VF_BOX_BYTES
+	call CopyBytes
+VFRestoreWRAMBank:
+	pop af
+	ldh [rSVBK], a
+	ret
 
 VFExit:
 	call VFKeepCoins
