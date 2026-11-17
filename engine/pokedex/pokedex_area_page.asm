@@ -52,7 +52,7 @@ Pokedex_DetailedArea:
 
 	ld hl, JohtoGrassWildMons
 	cp DEXENTRY_AREA_GRASS_JOHTO
-	jmp z, .grass ; _johto
+	jr z, .grass ; _johto
 	ld hl, SwarmGrassWildMons
 	cp DEXENTRY_AREA_GRASS_SWARM
 	jr z, .grass ; _swarm
@@ -183,7 +183,7 @@ Dex_FindFirstList:
 	ld a, BANK(JohtoGrassWildMons)
 	call Dex_Check_Grass
 	and a
-	jmp z, .grass_johto
+	jr z, .grass_johto
 	ld hl, SwarmGrassWildMons
 	ld a, BANK(SwarmGrassWildMons)
 	call Dex_Check_Grass

@@ -187,7 +187,11 @@ MonStatsJoypad:
 	call StatsScreen_GetJoypad
 	jr nc, .next
 	ld h, 0
-	jmp StatsScreen_SetJumptableIndex
+if DEF(_DEBUG)
+	jmp StatsScreen_SetJumptableIndex ; out of jr range with the debug code
+else
+	jr StatsScreen_SetJumptableIndex
+endc
 
 .next
 	and D_DOWN | D_UP | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON | SELECT

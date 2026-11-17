@@ -1691,7 +1691,7 @@ UpdateRadioStation:
 .loop
 	ld a, [hli]
 	cp -1
-	jmp z, NoRadioStation
+	jr z, NoRadioStation
 	cp d
 	jr z, .foundstation
 	inc hl
@@ -1735,14 +1735,14 @@ RadioChannels:
 ; Oak's Pokémon Talk in the afternoon and evening
 	ld a, [wTimeOfDay]
 	and a
-	jmp z, LoadStation_PokedexShow
-	jmp LoadStation_OaksPokemonTalk
+	jr z, LoadStation_PokedexShow
+	jr LoadStation_OaksPokemonTalk
 
 .PokemonMusic:
-	jmp LoadStation_PokemonMusic
+	jr LoadStation_PokemonMusic
 
 .LuckyChannel:
-	jmp LoadStation_LuckyChannel
+	jr LoadStation_LuckyChannel
 
 .BuenasPassword:
 	jmp LoadStation_BuenasPassword
