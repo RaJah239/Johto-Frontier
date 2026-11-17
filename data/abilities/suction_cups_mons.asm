@@ -2,4 +2,5 @@
 ; Whirlwind (engine/abilities/suction_cups.asm)
 
 SuctionCupsPokemon:
+    db CRADILY
     db -1 ; end

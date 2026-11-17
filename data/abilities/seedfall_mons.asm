@@ -3,4 +3,5 @@
 SeedfallPokemon:
 ;	db SUNKERN
 ;	db SUNFLORA
+	db CRADILY
 	db -1, end
