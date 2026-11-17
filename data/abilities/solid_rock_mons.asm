@@ -7,4 +7,5 @@ SolidRockPokemon:
 ;	db TORTERRA
 ;	db OMANYTE
 ;	db OMASTAR
+	db AGGRON
 	db -1 ; end

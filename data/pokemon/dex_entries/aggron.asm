@@ -1,8 +1,8 @@
-	db "BAT@" ; species name
-	dw 207, 170 ; height, weight
-	db   "During the day, it"
-	feed "gathers with"
-	feed "others and hangs"
-	feed "from the ceilings"
-	feed "of old buildings"
-	feed "and caves.@"
+	db "Iron Armor@" ; species name
+	dw 611, 7937 ; height, weight
+
+	db   "Takes only neutral"
+	feed "damage."
+	feed ""
+	feed "Unaffected by"
+	feed "hazards.@"
