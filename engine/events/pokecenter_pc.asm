@@ -288,7 +288,12 @@ _PlayersPC:
 	call UpdateTimePals
 	call DoNthMenu
 	jr c, .turn_off
+	; Remember the main menu cursor across submenus.
+	ld a, [wMenuCursorPosition]
+	ld [wMenuCursorPositionBackup], a
 	call MenuJumptable
+	ld a, [wMenuCursorPositionBackup]
+	ld [wMenuCursorPosition], a
 	jr nc, .loop
 	jr .done
 
@@ -367,18 +372,68 @@ ClearPCItemScreen:
 	ldh [hBGMapMode], a
 	call ClearBGPalettes
 	call ClearSprites
+	call ClearTilemap
+	call DisableLCD
+
+	ld hl, PCItemUITiles
+	ld de, vTiles2 tile $30
+	ld bc, 36 tiles
+	ld a, BANK(PCItemUITiles)
+	call FarCopyBytes
+
+	; the top row
 	hlcoord 0, 0
-	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
-	ld a, " "
+	ld a, $30
+	ld bc, SCREEN_WIDTH
 	call ByteFill
-	hlcoord 0, 0
-	lb bc, 10, 18
-	call Textbox
+
+	; the 5-wide left column (11 rows) from (0, 1)
+	hlcoord 0, 1
+	ld de, .PCItemTilemapString
+	ld bc, SCREEN_WIDTH - 5
+.loop
+	ld a, [de]
+	and a
+	jr nz, .continue
+	add hl, bc
+	jr .next
+.continue
+	cp -1
+	jr z, .done
+	ld [hli], a
+.next
+	inc de
+	jr .loop
+.done
+
+	call EnableLCD
+	call WaitBGMap
+
+	ld b, SCGB_PC_ITEM_STORAGE
+	call GetSGBLayout
+	call SetDefaultBGPAndOBP
+
+	; the description box
 	hlcoord 0, 12
 	lb bc, 4, 18
 	call Textbox
-	call WaitBGMap2
-	jmp SetDefaultBGPAndOBP ; load regular palettes?
+	jmp DelayFrame
+
+.PCItemTilemapString:
+	db $31, $31, $31, $31, $31, 0 ; background, line at the bottom
+	db $36, $37, $38, $39, $3a, 0 ; "Withdraw Item" picture, row 1
+	db $3b, $3c, $3d, $3e, $3f, 0 ; row 2
+	db $40, $41, $42, $43, $44, 0 ; row 3
+	db $40, $45, $46, $47, $44, 0 ; row 4
+	db $40, $48, $49, $4a, $44, 0 ; row 5
+	db $32, $33, $33, $33, $32, 0 ; background, lines
+	db $34, $4b, $4c, $4d, $35, 0 ; item icon
+	db $34, $4e, $4f, $50, $35, 0 ; item icon
+	db $34, $51, $52, $53, $35, 0 ; item icon
+	db $30, $32, $32, $32, $30, -1 ; background, line at the top
+
+PCItemUITiles:
+INCBIN "gfx/pc/pc_item_ui.2bpp"
 
 PlayersPCAskWhatDoText:
 	text_far _PlayersPCAskWhatDoText
@@ -394,6 +449,7 @@ PlayerWithdrawItemMenu:
 	jr .loop
 
 .quit
+	call WaitSFX
 	call CloseSubmenu
 	xor a
 	ret
@@ -469,6 +525,7 @@ PlayerTossItemMenu:
 	jr .loop
 
 .quit
+	call WaitSFX
 	call CloseSubmenu
 	xor a
 	ret
@@ -502,6 +559,7 @@ PlayerDepositItemMenu:
 	jr .loop
 
 .close
+	call WaitSFX
 	call CloseSubmenu
 
 .nope
@@ -646,10 +704,6 @@ PCItemsJoypad:
 	ld [wSpriteUpdatesEnabled], a
 	ld hl, .PCItemsMenuData
 	call CopyMenuHeader
-	hlcoord 0, 0
-	ld b, 10
-	ld c, 18
-	call Textbox
 	ld a, [wPCItemsCursor]
 	ld [wMenuCursorPosition], a
 	ld a, [wPCItemsScrollPosition]
@@ -713,7 +767,7 @@ PCItemsJoypad:
 
 .PCItemsMenuData:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 4, 1, 18, 10
+	menu_coords 6, 1, 19, 11
 	dw .MenuData
 	db 1 ; default option
 
@@ -724,12 +778,12 @@ PCItemsJoypad:
 ; wrap from the first item down to Cancel and back); the PC declares no
 ; ENABLE_LEFT/ENABLE_RIGHT pair, so it stays out of the left/right handling.
 	db SCROLLINGMENU_ENABLE_SELECT | SCROLLINGMENU_ENABLE_FUNCTION3 | SCROLLINGMENU_DISPLAY_ARROWS | SCROLLINGMENU_ENABLE_START ; flags
-	db 4, 8 ; rows, columns
+	db 5, 8 ; rows, columns
 	db SCROLLINGMENU_ITEMS_QUANTITY ; item format
 	dbw 0, wNumPCItems
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
-	dba UpdateItemDescription
+	dba UpdatePCItemIconAndDescription
 
 PC_DisplayText:
 	call MenuTextbox

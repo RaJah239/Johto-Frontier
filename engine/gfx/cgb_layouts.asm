@@ -58,6 +58,7 @@ CGBLayoutJumptable:
 	dw _CGB_TrainerOrMonFrontpicPals
 	dw _CGB_Plain
 	dw _CGB_MusicPlayer
+	dw _CGB_PCItemStorage
 	assert_table_length NUM_SCGB_LAYOUTS
 
 _CGB_BattleGrayscale:
@@ -342,6 +343,45 @@ _CGB_StatsScreenHPPals:
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	ret
+
+_CGB_PCItemStorage:
+	ld hl, PCItemUIPals
+	ld de, wBGPals1
+	ld bc, 4 palettes
+	ld a, BANK(wBGPals1)
+	call FarCopyWRAM
+
+	call WipeAttrmap
+
+	; 5x5 "Withdraw Item" picture
+	hlcoord 0, 2, wAttrmap
+	lb bc, 5, 5
+	ld a, 1
+	call FillBoxWithByte
+
+	; where "Item" and the ball overlap
+	hlcoord 1, 4, wAttrmap
+	lb bc, 1, 3
+	ld a, 2
+	call FillBoxWithByte
+
+	; the ball
+	hlcoord 1, 5, wAttrmap
+	lb bc, 2, 3
+	ld a, 3
+	call FillBoxWithByte
+
+	; the item icon (UpdatePCItemIconAndDescription)
+	hlcoord 1, 8, wAttrmap
+	lb bc, 3, 3
+	ld a, 7
+	call FillBoxWithByte
+
+	call ApplyAttrmap
+	jmp ApplyPals
+
+PCItemUIPals:
+INCLUDE "gfx/pc/pc_item_ui.pal"
 
 StatsScreenPagePals:
 INCLUDE "gfx/stats/pages.pal"

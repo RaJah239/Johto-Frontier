@@ -12,6 +12,25 @@ UpdateItemIconAndDescription::
 	ld e, PACK_ITEM_ICON_PAL
 	jmp LoadItemIcon
 
+UpdatePCItemIconAndDescription::
+	farcall UpdateItemDescription
+	ld a, [wMenuSelection]
+	cp NUM_ITEMS + 1
+	jr c, .got_item
+	xor a ; NO_ITEM (Cancel)
+.got_item
+	push af
+	call GetItemIconGFX
+	ld de, vTiles2 tile PC_ITEM_ICON_TILE
+	call DecompressRequest2bpp
+	pop af
+	call GetItemIconColors
+	ld e, PC_ITEM_ICON_PAL
+	jmp LoadItemIconPalette
+
+DEF PC_ITEM_ICON_TILE EQU $4b ; 9 tiles, $4b-$53, in the PC item screen's tiles
+DEF PC_ITEM_ICON_PAL  EQU 7   ; see _CGB_PCItemStorage
+
 MartUpdateItemIcon::
 ; Buy menu: the icon sits in the left column (see InitMartLeftColumn).
 	ld a, [wMenuSelection]
