@@ -150,8 +150,7 @@ SetBattlePal_Icons:
 	jmp LoadPalette_White_Col1_Col2_Black
 
 SetBattlePal_Status:
-	farcall LoadBattleStatusIconPals
-	ret
+	farjp LoadBattleStatusIconPals
 
 SetBattlePal_Text:
 	ld hl, PartyMenuBGPalette

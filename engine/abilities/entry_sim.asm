@@ -294,8 +294,7 @@ MSim_EntryEffects::
 	ret z
 	xor a
 	ldh [hBattleTurn], a
-	callfar CalcPlayerStats
-	ret
+	farjp CalcPlayerStats
 
 .allure
 	ld a, [wBattleMonSpecies]

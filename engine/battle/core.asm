@@ -815,11 +815,9 @@ EnemySwitchOrTryItem:
 	jr z, .use_move
 	cp AI_TELEPORT_PLAN_SWITCH
 	jr nz, .stay
-	callfar AI_Switch
-	ret
+	farjp AI_Switch
 .stay
-	callfar AI_TryItem
-	ret
+	farjp AI_TryItem
 .use_move
 	and a
 	ret
@@ -849,8 +847,7 @@ EnemySwitchOrTryItem:
 	ret
 
 .no_smart_switch
-	callfar AI_SwitchOrTryItem
-	ret
+	farjp AI_SwitchOrTryItem
 
 EnemySwitchSpikes:
 	ld a, [wEnemyIsSwitching]
