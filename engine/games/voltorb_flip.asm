@@ -1668,20 +1668,19 @@ VFAskYesNo:
 	ld a, 1 ; start on NO, so a stray press doesn't end the game
 	ld [VF_YES_NO_CURSOR], a
 	call .cursor
+	; Build the boxed screen on the hidden vBGMap1 while vBGMap0 (the
+	; board) is still shown, then switch to it in one VBlank.
 	xor a
 	ldh [hBGMapAddress], a
-	ld a, HIGH(vBGMap0)
+	ld a, HIGH(vBGMap1)
 	ldh [hBGMapAddress + 1], a
-	; tiles first: once the boxes cover the blue counters, palette 4 can
-	; turn white without anything else changing colour
-	ld a, 1
-	call WaitBGMapInMode
-	ld hl, VFBoxPalette
-	call VFSetBoxPalette
 	ld a, 2
 	call WaitBGMapInMode
-	ld a, 1 ; keep copying tiles, so the cursor moves on screen
-	ldh [hBGMapMode], a
+	ld a, 1
+	call WaitBGMapInMode ; leaves tile copying on, so the cursor moves
+	ld hl, VFBoxPalette
+	scf
+	call VFSwitchScreen
 	call GetJoypad ; forget the press that opened the box
 .loop
 	call DelayFrame
@@ -1715,15 +1714,17 @@ VFAskYesNo:
 .close
 	ld de, SFX_READ_TEXT
 	call PlaySFX
-	call VFRestoreBoxArea
-	ld a, 2
-	call WaitBGMapInMode
-	ld hl, VoltorbFlipPalette palette VF_BOX_PAL
-	call VFSetBoxPalette
-	ld a, 1
-	call WaitBGMapInMode
 	xor a
 	ldh [hBGMapMode], a ; Voltorb Flip copies its own tiles again
+	; vBGMap0 still holds the board as it was: switch straight back to it
+	ld hl, VoltorbFlipPalette palette VF_BOX_PAL
+	and a
+	call VFSwitchScreen
+	call VFRestoreBoxArea ; and the tilemap buffers to match it
+	xor a
+	ldh [hBGMapAddress], a
+	ld a, HIGH(vBGMap0)
+	ldh [hBGMapAddress + 1], a
 	jmp DelayFrame ; so the A press isn't read as flipping a card
 
 .cursor
@@ -1744,8 +1745,40 @@ VFAskYesNo:
 .no
 	db "No@"
 
+VFSwitchScreen:
+; Shows vBGMap1 (carry) or vBGMap0 (no carry) and makes palette VF_BOX_PAL
+; the one at hl, both at the start of the same VBlank, so the boxes appear
+; and disappear all at once.
+	push af
+	push hl
+	call VFSetBoxPalette
+	pop hl
+	pop af
+	di
+	push af
+.wait_vblank
+	ldh a, [rLY]
+	cp LY_VBLANK
+	jr nz, .wait_vblank
+	pop af
+	ldh a, [rLCDC]
+	res rLCDC_BG_TILEMAP, a
+	jr nc, .got_map
+	set rLCDC_BG_TILEMAP, a
+.got_map
+	ldh [rLCDC], a
+	ld a, (1 << rBGPI_AUTO_INCREMENT) | (VF_BOX_PAL palettes)
+	ldh [rBGPI], a
+	ld c, LOW(rBGPD)
+rept PALETTE_SIZE
+	ld a, [hli]
+	ldh [c], a
+endr
+	reti
+
 VFSetBoxPalette:
-; Copies the palette at hl into palette VF_BOX_PAL; VBlank applies it.
+; Copies the palette at hl into wBGPals2's palette VF_BOX_PAL, so later
+; palette updates keep it (VFSwitchScreen puts it on screen).
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wBGPals2)
@@ -1753,8 +1786,6 @@ VFSetBoxPalette:
 	ld de, wBGPals2 palette VF_BOX_PAL
 	ld bc, 1 palettes
 	call CopyBytes
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
 	jr VFRestoreWRAMBank
 
 VFBoxPalette:
