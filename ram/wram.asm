@@ -3220,8 +3220,8 @@ wBattlePoints:: db
 
 wAbilityPageMode:: db
 
-wTempMonLevelUpStatGain:: ds NUM_BATTLE_STATS
-wTempMonStatGainDisplay:: db
+; low bytes of a mon's stats before a level-up (SaveLevelUpOldStats)
+wLevelUpOldStats:: ds NUM_STATS
 
 wEventFlags:: flag_array NUM_EVENTS
 

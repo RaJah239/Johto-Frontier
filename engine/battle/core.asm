@@ -6862,8 +6862,8 @@ GiveExperiencePoints:
 	push hl
 	ld hl, 0
 	add hl, de
-	ld a, BANK(WriteDownOldStatsForGainCalculation)
-	ld de, WriteDownOldStatsForGainCalculation
+	ld a, BANK(SaveLevelUpOldStats)
+	ld de, SaveLevelUpOldStats
 	call FarCall_de
 	pop hl
 	pop de
@@ -6956,13 +6956,7 @@ GiveExperiencePoints:
 	bit EXP_N_LV_UP, a
 	jr nz, .skip
 
-	hlcoord 9, 0
-	lb bc, 10, 9
-	call Textbox
-	hlcoord 11, 1
-	ld bc, 4
 	predef PrintTempMonLevelUpStats
-	call WaitPressAorB_BlinkCursor
 .skip
 	call SafeLoadTempTilemapToTilemap
 	xor a ; PARTYMON

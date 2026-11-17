@@ -1561,6 +1561,7 @@ RareCandyEffect:
 
 	ld a, MON_MAXHP
 	call GetPartyParamLocation
+	newfarcall SaveLevelUpOldStats
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
@@ -1593,15 +1594,7 @@ RareCandyEffect:
 	ld [wMonType], a
 	predef CopyMonToTempMon
 
-	hlcoord 9, 0
-	lb bc, 10, 9
-	call Textbox
-
-	hlcoord 11, 1
-	ld bc, 4
-	predef PrintTempMonStats
-
-	call WaitPressAorB_BlinkCursor
+	predef PrintTempMonLevelUpStats
 
 	xor a ; PARTYMON
 	ld [wMonType], a
@@ -1716,6 +1709,7 @@ ExpCandyEffect:
 	; stats, and the max HP it gains as HP too (as Rare Candy)
 	ld a, MON_MAXHP
 	call GetPartyParamLocation
+	newfarcall SaveLevelUpOldStats
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
@@ -1746,15 +1740,7 @@ ExpCandyEffect:
 	ld [wMonType], a
 	predef CopyMonToTempMon
 
-	hlcoord 9, 0
-	lb bc, 10, 9
-	call Textbox
-
-	hlcoord 11, 1
-	ld bc, 4
-	predef PrintTempMonStats
-
-	call WaitPressAorB_BlinkCursor
+	predef PrintTempMonLevelUpStats
 
 	; the moves of every level it gained
 	pop bc ; b = the old level
