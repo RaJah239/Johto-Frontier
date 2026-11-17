@@ -647,7 +647,7 @@ ENDC
 .not_celebi
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
-	jr z, .SendToPC
+	jmp z, .SendToPC
 
 	xor a ; PARTYMON
 	ld [wMonType], a
@@ -656,6 +656,14 @@ ENDC
 	predef TryAddMonToParty
 
 	farcall SetCaughtData
+
+	; the ball it was caught in (the status screen shows it)
+	ld a, [wPartyCount]
+	dec a
+	ld hl, wPartyMon1CaughtBall
+	call GetPartyLocation
+	ld a, [wCurItem]
+	ld [hl], a
 
 	ld a, [wCurItem]
 	cp FRIEND_BALL
@@ -716,6 +724,8 @@ ENDC
 
 	predef SendMonIntoBox
 
+	ld a, [wCurItem]
+	ld [wBufferMonCaughtBall], a
 	farcall SetBoxMonCaughtData
 
 	newfarcall NewStorageBoxPointer

@@ -396,6 +396,82 @@ RestoreTextboxItemIconPal::
 	ldh [rSVBK], a
 	ret
 
+; The ball a Pokémon was caught in (MON_CAUGHTBALL)
+; the ball as it's thrown in battle (gfx/battle_anims), 2x2 tiles, in the
+; ball's Bag icon colors
+
+DEF STATS_BALL_TILE EQU $50 ; 4 tiles, $50-$53, free on the status screen
+DEF STATS_BALL_PAL  EQU 7   ; see _CGB_StatsScreenHPPals
+	assert wPartyMon1CaughtBall - wPartyMon1 == MON_CAUGHTBALL
+
+LoadStatsScreenCaughtBall::
+	ld a, [wTempMonCaughtBall]
+	ld hl, CaughtBallTiles
+.loop
+	ld b, [hl]
+	inc b ; -1: end of the list
+	jr z, .not_a_ball
+	cp [hl]
+	inc hl
+	jr z, .found
+	inc hl
+	jr .loop
+
+.not_a_ball
+	ld a, POKE_BALL
+	ld hl, CaughtBallTiles + 1
+.found
+	push af
+	ld l, [hl]
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl ; * 4 tiles
+	ld de, CaughtBallsGFX
+	add hl, de
+	ld d, h
+	ld e, l
+	ld hl, vTiles2 tile STATS_BALL_TILE
+	lb bc, BANK(CaughtBallsGFX), 4
+	call Request2bpp
+	hlcoord 8, 5
+	ld a, STATS_BALL_TILE
+	ld [hli], a
+	inc a
+	ld [hl], a
+	hlcoord 8, 6
+	inc a
+	ld [hli], a
+	inc a
+	ld [hl], a
+	pop af
+	call GetItemIconColors
+	ld e, STATS_BALL_PAL
+	jmp LoadItemIconPalette
+
+CaughtBallTiles:
+; ball item, ball (4 tiles each) in CaughtBallsGFX
+	db POKE_BALL,   0
+	db GREAT_BALL,  1
+	db ULTRA_BALL,  2
+	db MASTER_BALL, 3
+	db LEVEL_BALL,  4
+	db LURE_BALL,   5
+	db MOON_BALL,   6
+	db FRIEND_BALL, 7
+	db FAST_BALL,   8
+	db HEAVY_BALL,  9
+	db LOVE_BALL,  10
+	db PARK_BALL,  11
+	db SHINY_BALL, 12
+	db -1 ; end
+
+CaughtBallsGFX:
+INCBIN "gfx/stats/caught_balls.2bpp"
+
 INCLUDE "data/items/icon_pointers.asm"
 
 ItemIconPalettes:

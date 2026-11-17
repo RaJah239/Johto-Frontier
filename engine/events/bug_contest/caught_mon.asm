@@ -11,6 +11,8 @@ BugContest_SetCaughtContestMon:
 
 .firstcatch
 	call .generatestats
+	ld a, [wCurItem] ; the ball it was caught in
+	ld [wContestMonCaughtBall], a
 	ld a, [wTempEnemyMonSpecies]
 	ld [wNamedObjectIndex], a
 	call GetPokemonName

@@ -89,7 +89,8 @@ DEF MON_DEF_EV             rb
 DEF MON_SPD_EV             rb
 DEF MON_SAT_EV             rb
 DEF MON_SDF_EV             rb
-                           rb_skip 4
+DEF MON_CAUGHTBALL         rb
+                           rb_skip 3
 DEF MON_DVS                rw
 DEF MON_PP                 rb NUM_MOVES
 DEF MON_HAPPINESS          rb
@@ -131,6 +132,7 @@ DEF SAVEMON_DEF_EXP            rw
 DEF SAVEMON_SPD_EXP            rw
 DEF SAVEMON_SPC_EXP            rw
 DEF SAVEMON_DVS                rw
+DEF SAVEMON_CAUGHTBALL EQU MON_CAUGHTBALL ; inside SAVEMON_STAT_EXP
 ; savemon_struct is identical to party_struct before this point
 DEF SAVEMON_PP_UPS             rb
 ; savemon_struct is shifted from party_struct beyond this point

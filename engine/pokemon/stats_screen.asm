@@ -401,6 +401,7 @@ StatsScreen_InitUpperHalf:
 	call StatsScreen_PlaceHorizontalDivider
 	call StatsScreen_PlacePageSwitchArrows
 	call StatsScreen_PlaceShinyIcon
+	farcall LoadStatsScreenCaughtBall
 
 	; Place float icon if user levitates
 	ld a, [wCurPartySpecies]

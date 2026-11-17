@@ -336,6 +336,11 @@ _CGB_StatsScreenHPPals:
 	ld a, $6 ; orange page palette
 	call FillBoxCGB
 
+	hlcoord 8, 5, wAttrmap
+	lb bc, 2, 2
+	ld a, $7 ; caught ball palette (LoadStatsScreenCaughtBall)
+	call FillBoxCGB
+
 	call ApplyAttrmap
 	call ApplyPals
 	ld a, TRUE
