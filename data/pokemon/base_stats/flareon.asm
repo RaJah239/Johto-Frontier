@@ -1,7 +1,7 @@
 	db FLAREON ; 026
 
-	db  65, 130,  60,  95,  65, 110 ; 525 BST
-	evs  1,   3,   1,   2,   1,   2
+	db  65,  65,  60,  95, 130, 110 ; 525 BST
+	evs  1,   1,   1,   2,   3,   2
 	;   hp  atk  def  spd  sat  sdf
 
 	db FIRE, FIRE ; type

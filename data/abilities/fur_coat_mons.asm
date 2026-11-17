@@ -6,4 +6,5 @@ FurCoatPokemon:
 ;    db AMPHAROS
 ;    db MEOWTH
 ;    db PERSIAN
+    db FLAREON
     db -1
