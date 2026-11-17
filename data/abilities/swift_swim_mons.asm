@@ -9,5 +9,6 @@
 ;	db MAGIKARP
 ;	db MANTINE
 ;	db OMANYTE
-;	db OMASTAR
+
+    db OMASTAR
     db -1 ; end

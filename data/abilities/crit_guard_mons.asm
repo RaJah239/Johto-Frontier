@@ -8,5 +8,6 @@ CritGuardPokemon:
 ;    db DRAPION
 ;    db LAPRAS
 ;    db OMANYTE
-;    db OMASTAR
+
+    db OMASTAR
     db -1 ; end
