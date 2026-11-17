@@ -7,6 +7,7 @@
 ;	db STEELIX
 ;	db RHYHORN
 ;	db RHYDON
-;	db AERODACTYL
 ;	db SUDOWOODO
+
+    db AERODACTYL
     db -1 ; end
