@@ -7,15 +7,21 @@
 ;c41d last x
 ;c41e last y
 ;c41f cards flipped this game
+;c420 2 and 3 cards left (for the "are you sure?" jingle)
+;c421 the mark a held B + one direction will toggle (VF_ARMED_MARK_DIR)
 ;c440-c449 total numbers for row/col
 ;c450-c459 total voltorb for row/col
 ;c498 coins collected this game
 
 ;Card Properties (Bits):
-;7-marked 0
+;7-marked 0 (Voltorb)
 ;6-marked 1
 ;5-marked 2
 ;4-marked 3
+;Marks: hold B and press a direction. A diagonal toggles the mark in that
+;corner (up-left 0, up-right 1, down-left 2, down-right 3) as soon as its
+;second direction is pressed; a single direction toggles, when it's let go
+;(or B is), the mark it stands for: down 0, left 1, up 2, right 3.
 ;3-highlighted
 ;2-Card Flipped
 ;1,0-Card number
@@ -30,6 +36,8 @@
 ;148 level clear
 ;34 coin
 ;91 boom!
+
+DEF VF_ARMED_MARK_DIR EQU $c421 ; a direction pressed alone while B is held
 
 VoltorbFlipGFX:
 INCBIN "gfx/voltorb_flip.2bpp"
@@ -300,6 +308,10 @@ VFInput:
 	ld a, [$ffa4]
 	bit 1, a
 	jmp nz, .bbutton
+	; B let go: a single direction still waiting toggles its mark now
+	ld a, [VF_ARMED_MARK_DIR]
+	and a
+	jmp nz, .apply_armed_mark
 	ld a, [$ffa3]
 	and a
 	ret z
@@ -446,46 +458,78 @@ VFInput:
 
 .bbutton
 	and $f0
-	ret z
-	ld b, a
+	ld b, a ; directions held
 	ld a, [$ffa3]
-	ld c, a
-	ld a, [de]
-	bit 7, b
-	call nz, .bdown
-	bit 6, b
-	call nz, .bup
-	bit 5, b
-	jr nz, .bleft
-	bit 4, b
+	and $f0
+	ld c, a ; directions pressed now
+	jr z, .no_new_direction
+	; one direction alone: wait for it to be let go (it may become a diagonal)
+	ld a, c
+	cp b
+	jr nz, .diagonal ; another direction is already held
+	dec a
+	and c
+	jr nz, .diagonal ; two pressed at once
+	ld a, c
+	ld [VF_ARMED_MARK_DIR], a
+	ret
+
+.no_new_direction
+	; the single direction let go (B still held): toggle its mark
+	ld a, [VF_ARMED_MARK_DIR]
+	and a
 	ret z
-.bright
+	and b
+	ret nz ; still held
+	ld a, [VF_ARMED_MARK_DIR]
+	; fallthrough
+
+.apply_armed_mark
+; a = the direction: down 0 (Voltorb), left 1, up 2, right 3
+	ld c, a
+	xor a
+	ld [VF_ARMED_MARK_DIR], a
+	ld a, [de]
 	bit 7, c
-	jr nz, .toggle3
-	bit 6, c
-	jr nz, .toggle1
-	ret
-
-.bleft
-	bit 7, c
-	jr nz, .toggle2
-	bit 6, c
 	jr nz, .toggle0
-	ret
-
-.bup
 	bit 5, c
-	jr nz, .toggle0
-	bit 4, c
 	jr nz, .toggle1
-	ret
-
-.bdown
-	bit 5, c
+	bit 6, c
 	jr nz, .toggle2
-	bit 4, c
-	jr nz, .toggle3
-	ret
+	jr .toggle3
+
+.diagonal
+; The corner of the newly pressed direction and the one held with it (the
+; new press decides its own axis), toggled once.
+	xor a
+	ld [VF_ARMED_MARK_DIR], a
+	ld a, c
+	and $c0 ; up / down pressed now?
+	jr nz, .got_vertical
+	ld a, b
+	and $c0 ; else held
+	ret z
+.got_vertical
+	ld h, a
+	ld a, c
+	and $30 ; left / right pressed now?
+	jr nz, .got_horizontal
+	ld a, b
+	and $30 ; else held
+	ret z
+.got_horizontal
+	ld l, a
+	ld a, [de]
+	bit 6, h ; up
+	jr nz, .up_corner
+	bit 5, l ; left
+	jr nz, .toggle2 ; down-left
+	jr .toggle3 ; down-right
+
+.up_corner
+	bit 5, l ; left
+	jr nz, .toggle0 ; up-left
+	jr .toggle1 ; up-right
 
 .toggle0
 	xor $80
