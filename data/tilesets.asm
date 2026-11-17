@@ -31,7 +31,6 @@ Tilesets::
 	tileset TilesetChampionsRoom
 	tileset TilesetLighthouse
 	tileset TilesetPlayersRoom
-	tileset TilesetPokeComCenter
 	tileset TilesetBattleTowerInside
 	tileset TilesetTower
 	tileset TilesetCave
@@ -42,7 +41,6 @@ Tilesets::
 	tileset TilesetIcePath
 	tileset TilesetDarkCave
 	tileset TilesetForest
-	tileset TilesetBetaWordRoom
 	tileset TilesetHoOhWordRoom
 	tileset TilesetLileepWordRoom
 	tileset TilesetOmanyteWordRoom

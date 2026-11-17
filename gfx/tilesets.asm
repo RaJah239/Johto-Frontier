@@ -185,14 +185,6 @@ INCBIN "gfx/tilesets/dark_cave.2bpp.lzp"
 
 SECTION "Tileset Data 5", ROMX
 
-TilesetPokeComCenterGFX::
-INCBIN "gfx/tilesets/pokecom_center.2bpp.lzp"
-
-TilesetPokeComCenterMeta::
-INCBIN "data/tilesets/pokecom_center_metatiles.bin.lzp"
-
-TilesetPokeComCenterColl::
-INCLUDE "data/tilesets/pokecom_center_collision.asm"
 
 TilesetBattleTowerInsideGFX::
 INCBIN "gfx/tilesets/battle_tower_inside.2bpp.lzp"
@@ -279,21 +271,16 @@ INCBIN "data/tilesets/battle_tower_outside_metatiles.bin.lzp"
 TilesetBattleTowerOutsideColl::
 INCLUDE "data/tilesets/battle_tower_outside_collision.asm"
 
-TilesetBetaWordRoomMeta::
-INCBIN "data/tilesets/beta_word_room_metatiles.bin.lzp"
-
-TilesetBetaWordRoomColl::
 TilesetHoOhWordRoomColl::
 TilesetLileepWordRoomColl::
 TilesetOmanyteWordRoomColl::
 TilesetAerodactylWordRoomColl::
-INCLUDE "data/tilesets/beta_word_room_collision.asm"
+INCLUDE "data/tilesets/word_room_collision.asm"
 
 
 SECTION "Tileset Data 7", ROMX
 
 TilesetRuinsOfAlphGFX::
-TilesetBetaWordRoomGFX::
 TilesetHoOhWordRoomGFX::
 TilesetLileepWordRoomGFX::
 TilesetOmanyteWordRoomGFX::
@@ -402,8 +389,6 @@ INCBIN "data/tilesets/lighthouse_attributes.bin.lzp"
 TilesetPlayersRoomAttr::
 INCBIN "data/tilesets/players_room_attributes.bin.lzp"
 
-TilesetPokeComCenterAttr::
-INCBIN "data/tilesets/pokecom_center_attributes.bin.lzp"
 
 TilesetBattleTowerInsideAttr::
 INCBIN "data/tilesets/battle_tower_inside_attributes.bin.lzp"
@@ -436,8 +421,6 @@ INCBIN "data/tilesets/ice_path_attributes.bin.lzp"
 TilesetForestAttr::
 INCBIN "data/tilesets/forest_attributes.bin.lzp"
 
-TilesetBetaWordRoomAttr::
-INCBIN "data/tilesets/beta_word_room_attributes.bin.lzp"
 
 TilesetHoOhWordRoomAttr::
 INCBIN "data/tilesets/ho_oh_word_room_attributes.bin.lzp"

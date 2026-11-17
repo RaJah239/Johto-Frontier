@@ -192,12 +192,10 @@ TilesetTrainStationAnim:
 TilesetChampionsRoomAnim:
 TilesetLighthouseAnim:
 TilesetPlayersRoomAnim:
-TilesetPokeComCenterAnim:
 TilesetBattleTowerInsideAnim:
 TilesetRuinsOfAlphAnim:
 TilesetRadioTowerAnim:
 TilesetUndergroundAnim:
-TilesetBetaWordRoomAnim:
 TilesetHoOhWordRoomAnim:
 TilesetLileepWordRoomAnim:
 TilesetOmanyteWordRoomAnim:
