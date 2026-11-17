@@ -594,7 +594,7 @@ VFLoadGFX:
 	jr nz, .wait
 	dec hl
 	res 7, [hl]
-	ld bc, $7f80 ;load the gfx
+	lb bc, BANK(VoltorbFlipGFX), $80 ; load the gfx (128 tiles)
 	ld de, VoltorbFlipGFX
 	ld hl, $9000
 	jmp Copy2bpp
@@ -964,7 +964,7 @@ VFRefreshMap:
 	push de
 	push hl
 	ld b, 3
-	ld de, $90f
+	ld de, wAttrmap - wTilemap - 2 * SCREEN_WIDTH - 2
 	add hl, de
 	ld de, $11
 .highlightloopa
