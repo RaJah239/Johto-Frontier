@@ -291,6 +291,27 @@ ShowEntryAbilityPopup:
 	inc sp
 	ret
 
+EntryAbilityMoveEffect:
+; Run move effect a:hl for an entry ability whose animation already played.
+; Many effects (Barrier, Safeguard, Taunt...) animate the user's current
+; move themselves, which would replay the last move it used, so the user's
+; move animation is cleared while the effect runs and put back after.
+	push af
+	push hl
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVarAddr
+	ld b, [hl]
+	ld [hl], 0
+	pop hl
+	pop af
+	push bc
+	rst FarCall
+	pop bc
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVarAddr
+	ld [hl], b
+	ret
+
 PlayEntryAbilityAnim:
 ; Play animation de unless battle animations are off. Preserves hl.
 	ld a, [wOptions]
@@ -593,7 +614,9 @@ HandleFortify:
 	call ShowEntryAbilityPopup
 	ld de, BARRIER
 	call PlayEntryAbilityAnim
-	farjp BattleCommand_Barrier
+	ld a, BANK(BattleCommand_Barrier)
+	ld hl, BattleCommand_Barrier
+	jmp EntryAbilityMoveEffect
 
 FortifyPopupText: db "Fortify@"
 INCLUDE "data/abilities/fortify_mons.asm"
@@ -606,7 +629,9 @@ HandleImposter:
 	call ShowEntryAbilityPopup
 	ld de, TRANSFORM
 	call PlayEntryAbilityAnim
-	farjp BattleCommand_Transform
+	ld a, BANK(BattleCommand_Transform)
+	ld hl, BattleCommand_Transform
+	jmp EntryAbilityMoveEffect
 
 ImposterPopupText: db "Imposter@"
 INCLUDE "data/abilities/imposter_mons.asm"
@@ -688,7 +713,9 @@ HandleSanctuary:
 	call ShowEntryAbilityPopup
 	ld de, SAFEGUARD
 	call PlayEntryAbilityAnim
-	farjp BattleCommand_Safeguard ; prints its own text
+	ld a, BANK(BattleCommand_Safeguard)
+	ld hl, BattleCommand_Safeguard ; prints its own text
+	jmp EntryAbilityMoveEffect
 
 SanctuaryPopupText: db "Sanctuary@"
 INCLUDE "data/abilities/sanctuary_mons.asm"
@@ -727,7 +754,9 @@ HandleCleanSweep:
 	call ShowEntryAbilityPopup
 	ld de, DEFOG
 	call PlayEntryAbilityAnim
-	farjp BattleCommand_Defog
+	ld a, BANK(BattleCommand_Defog)
+	ld hl, BattleCommand_Defog
+	jmp EntryAbilityMoveEffect
 
 CleanSweepPopupText: db "Clean Sweep@"
 INCLUDE "data/abilities/clean_sweep_mons.asm"
@@ -950,7 +979,9 @@ HandleSeedfall:
 	call ShowEntryAbilityPopup
 	ld de, LEECH_SEED
 	call PlayEntryAbilityAnim
-	farjp BattleCommand_LeechSeed
+	ld a, BANK(BattleCommand_LeechSeed)
+	ld hl, BattleCommand_LeechSeed
+	jmp EntryAbilityMoveEffect
 
 SeedfallPopupText: db "Seedfall@"
 INCLUDE "data/abilities/seedfall_mons.asm"
@@ -963,7 +994,9 @@ HandleTrueSight:
 	call ShowEntryAbilityPopup
 	ld de, FORESIGHT
 	call PlayEntryAbilityAnim
-	farjp BattleCommand_Foresight
+	ld a, BANK(BattleCommand_Foresight)
+	ld hl, BattleCommand_Foresight
+	jmp EntryAbilityMoveEffect
 
 TrueSightPopupText: db "True Sight@"
 INCLUDE "data/abilities/true_sight_mons.asm"
@@ -993,7 +1026,9 @@ HandleFogOfWar:
 	call ShowEntryAbilityPopup
 	ld de, HAZE
 	call PlayEntryAbilityAnim
-	farjp BattleCommand_ResetStats
+	ld a, BANK(BattleCommand_ResetStats)
+	ld hl, BattleCommand_ResetStats
+	jmp EntryAbilityMoveEffect
 
 FogOfWarPopupText: db "Fog of War@"
 INCLUDE "data/abilities/fog_of_war_mons.asm"
@@ -1037,7 +1072,9 @@ HandleProvocateur:
 	call ShowEntryAbilityPopup
 	ld de, TAUNT
 	call PlayEntryAbilityAnim
-	farjp BattleCommand_Taunt
+	ld a, BANK(BattleCommand_Taunt)
+	ld hl, BattleCommand_Taunt
+	jmp EntryAbilityMoveEffect
 
 ProvocateurPopupText: db "Provocateur@"
 INCLUDE "data/abilities/provocateur_mons.asm"
@@ -1078,7 +1115,9 @@ HandleAllure:
 	call ShowEntryAbilityPopup
 	ld de, ATTRACT
 	call PlayEntryAbilityAnim
-	farjp BattleCommand_Attract
+	ld a, BANK(BattleCommand_Attract)
+	ld hl, BattleCommand_Attract
+	jmp EntryAbilityMoveEffect
 
 AllurePopupText: db "Allure@"
 INCLUDE "data/abilities/allure_mons.asm"
