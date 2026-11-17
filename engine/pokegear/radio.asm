@@ -1,16 +1,4 @@
 PlayRadioShow:
-; If we're already in the radio program proper, we don't need to be here.
-	ld a, [wCurRadioLine]
-	cp UNOWN_RADIO
-	jr nc, .ok
-; If Team Rocket is not occupying the radio tower, we don't need to be here.
-	ld a, [wStatusFlags2]
-	bit STATUSFLAGS2_ROCKETS_IN_RADIO_TOWER_F, a
-	jr z, .ok
-; Team Rocket broadcasts on all stations.
-	ld a, ROCKET_RADIO
-	ld [wCurRadioLine], a
-.ok
 ; Jump to the currently loaded station.  The index to which we need to jump is in wCurRadioLine.
 	jumptable RadioJumptable, wCurRadioLine
 
@@ -22,73 +10,62 @@ RadioJumptable:
 	dw BenMonMusic1      ; $02
 	dw CasinoBeats       ; $03
 	dw BuenasPassword1   ; $04
-	dw RocketRadio1      ; $05
-	dw UnownRadio        ; $06
-	dw EvolutionRadio    ; $07
-	dw NationalPark      ; $08
+	dw UnownRadio        ; $05
+	dw EvolutionRadio    ; $06
+	dw NationalPark      ; $07
 	assert_table_length NUM_RADIO_CHANNELS
 ; OaksPKMNTalk
-	dw OaksPKMNTalk2     ; $09
-	dw OaksPKMNTalk3     ; $0a
-	dw OaksPKMNTalk4     ; $0b
-	dw OaksPKMNTalk5     ; $0c
-	dw OaksPKMNTalk6     ; $0d
-	dw OaksPKMNTalk7     ; $0e
-	dw OaksPKMNTalk8     ; $0f
-	dw OaksPKMNTalk9     ; $10
-	dw PokedexShow2      ; $11
-	dw PokedexShow3      ; $12
-	dw PokedexShow4      ; $13
-	dw PokedexShow5      ; $14
+	dw OaksPKMNTalk2     ; $08
+	dw OaksPKMNTalk3     ; $09
+	dw OaksPKMNTalk4     ; $0a
+	dw OaksPKMNTalk5     ; $0b
+	dw OaksPKMNTalk6     ; $0c
+	dw OaksPKMNTalk7     ; $0d
+	dw OaksPKMNTalk8     ; $0e
+	dw OaksPKMNTalk9     ; $0f
+	dw PokedexShow2      ; $10
+	dw PokedexShow3      ; $11
+	dw PokedexShow4      ; $12
+	dw PokedexShow5      ; $13
 ; Ben Music
-	dw BenMonMusic2      ; $15
-	dw BenMonMusic3      ; $16
-	dw BenFernMusic4     ; $17
-	dw BenFernMusic5     ; $18
-	dw BenFernMusic6     ; $19
-	dw BenFernMusic7     ; $1a
-; Rocket Radio
-	dw RocketRadio2      ; $1b
-	dw RocketRadio3      ; $1c
-	dw RocketRadio4      ; $1d
-	dw RocketRadio5      ; $1e
-	dw RocketRadio6      ; $1f
-	dw RocketRadio7      ; $20
-	dw RocketRadio8      ; $21
-	dw RocketRadio9      ; $22
-	dw RocketRadio10     ; $23
+	dw BenMonMusic2      ; $14
+	dw BenMonMusic3      ; $15
+	dw BenFernMusic4     ; $16
+	dw BenFernMusic5     ; $17
+	dw BenFernMusic6     ; $18
+	dw BenFernMusic7     ; $19
 ; More Pokemon Channel stuff
-	dw OaksPKMNTalk10    ; $24
-	dw OaksPKMNTalk11    ; $25
-	dw OaksPKMNTalk12    ; $26
-	dw OaksPKMNTalk13    ; $27
-	dw OaksPKMNTalk14    ; $28
+	dw OaksPKMNTalk10    ; $1a
+	dw OaksPKMNTalk11    ; $1b
+	dw OaksPKMNTalk12    ; $1c
+	dw OaksPKMNTalk13    ; $1d
+	dw OaksPKMNTalk14    ; $1e
 ; Buenas Password
-	dw BuenasPassword2   ; $29
-	dw BuenasPassword3   ; $2a
-	dw BuenasPassword4   ; $2b
-	dw BuenasPassword5   ; $2c
-	dw BuenasPassword6   ; $2d
-	dw BuenasPassword7   ; $2e
-	dw BuenasPassword8   ; $2f
-	dw BuenasPassword9   ; $30
-	dw BuenasPassword10  ; $31
-	dw BuenasPassword11  ; $32
-	dw BuenasPassword12  ; $33
-	dw BuenasPassword13  ; $34
-	dw BuenasPassword14  ; $35
-	dw BuenasPassword15  ; $36
-	dw BuenasPassword16  ; $37
-	dw BuenasPassword17  ; $38
-	dw BuenasPassword18  ; $39
-	dw BuenasPassword19  ; $3a
-	dw BuenasPassword20  ; $3b
-	dw BuenasPassword21  ; $3c
-	dw RadioScroll       ; $3d
+	dw BuenasPassword2   ; $1f
+	dw BuenasPassword3   ; $20
+	dw BuenasPassword4   ; $21
+	dw BuenasPassword5   ; $22
+	dw BuenasPassword6   ; $23
+	dw BuenasPassword7   ; $24
+	dw BuenasPassword8   ; $25
+	dw BuenasPassword9   ; $26
+	dw BuenasPassword10  ; $27
+	dw BuenasPassword11  ; $28
+	dw BuenasPassword12  ; $29
+	dw BuenasPassword13  ; $2a
+	dw BuenasPassword14  ; $2b
+	dw BuenasPassword15  ; $2c
+	dw BuenasPassword16  ; $2d
+	dw BuenasPassword17  ; $2e
+	dw BuenasPassword18  ; $2f
+	dw BuenasPassword19  ; $30
+	dw BuenasPassword20  ; $31
+	dw BuenasPassword21  ; $32
+	dw RadioScroll       ; $33
 ; More Pokemon Channel stuff
-	dw PokedexShow6      ; $3e
-	dw PokedexShow7      ; $3f
-	dw PokedexShow8      ; $40
+	dw PokedexShow6      ; $34
+	dw PokedexShow7      ; $35
+	dw PokedexShow8      ; $36
 	assert_table_length NUM_RADIO_SEGMENTS
 
 PrintRadioLine:
@@ -846,97 +823,6 @@ CasinoBeats:
 	ld a, 1
 	ld [wNumRadioLinesPrinted], a
 	ret
-
-RocketRadio1:
-	call StartRadioStation
-	ld hl, RocketRadioText1
-	ld a, ROCKET_RADIO_2
-	jmp NextRadioLine
-
-RocketRadio2:
-	ld hl, RocketRadioText2
-	ld a, ROCKET_RADIO_3
-	jmp NextRadioLine
-
-RocketRadio3:
-	ld hl, RocketRadioText3
-	ld a, ROCKET_RADIO_4
-	jmp NextRadioLine
-
-RocketRadio4:
-	ld hl, RocketRadioText4
-	ld a, ROCKET_RADIO_5
-	jmp NextRadioLine
-
-RocketRadio5:
-	ld hl, RocketRadioText5
-	ld a, ROCKET_RADIO_6
-	jmp NextRadioLine
-
-RocketRadio6:
-	ld hl, RocketRadioText6
-	ld a, ROCKET_RADIO_7
-	jmp NextRadioLine
-
-RocketRadio7:
-	ld hl, RocketRadioText7
-	ld a, ROCKET_RADIO_8
-	jmp NextRadioLine
-
-RocketRadio8:
-	ld hl, RocketRadioText8
-	ld a, ROCKET_RADIO_9
-	jmp NextRadioLine
-
-RocketRadio9:
-	ld hl, RocketRadioText9
-	ld a, ROCKET_RADIO_10
-	jmp NextRadioLine
-
-RocketRadio10:
-	ld hl, RocketRadioText10
-	ld a, ROCKET_RADIO
-	jmp NextRadioLine
-
-RocketRadioText1:
-	text_far _RocketRadioText1
-	text_end
-
-RocketRadioText2:
-	text_far _RocketRadioText2
-	text_end
-
-RocketRadioText3:
-	text_far _RocketRadioText3
-	text_end
-
-RocketRadioText4:
-	text_far _RocketRadioText4
-	text_end
-
-RocketRadioText5:
-	text_far _RocketRadioText5
-	text_end
-
-RocketRadioText6:
-	text_far _RocketRadioText6
-	text_end
-
-RocketRadioText7:
-	text_far _RocketRadioText7
-	text_end
-
-RocketRadioText8:
-	text_far _RocketRadioText8
-	text_end
-
-RocketRadioText9:
-	text_far _RocketRadioText9
-	text_end
-
-RocketRadioText10:
-	text_far _RocketRadioText10
-	text_end
 
 UnownRadio:
 	call StartRadioStation

@@ -1866,17 +1866,6 @@ LoadStation_NationalPark:
 	ld de, NationalParkRadioName
 	ret
 
-LoadStation_RocketRadio:
-	ld a, ROCKET_RADIO
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
-	call Radio_BackUpFarCallParams
-	ld de, LetsAllSingName
-	ret
-
 LoadStation_EvolutionRadio:
 	ld a, EVOLUTION_RADIO
 	ld [wCurRadioLine], a
@@ -1941,8 +1930,6 @@ PokemonMusicName:     db "#mon Music@"
 CasinoBeatslName:     db "Casino Beats@"
 UnownStationName:     db "?????@"
 NationalParkRadioName: db "National Park@"
-; the Rocket takeover shows this name (as in Crystal)
-LetsAllSingName:      db "Let's All Sing!@"
 
 _TownMap:
 	ld hl, wOptions
@@ -2160,7 +2147,6 @@ PlayRadioStationPointers:
 	dw LoadStation_PokemonMusic
 	dw LoadStation_LuckyChannel
 	dw LoadStation_UnownRadio
-	dw LoadStation_RocketRadio
 	assert_table_length NUM_MAP_RADIO_STATIONS
 
 LoadStation_PokemonChannel:

@@ -618,64 +618,6 @@ _BenFernText3B::
 	line "#mon Lullaby!"
 	done
 
-_RocketRadioText1::
-	text_start
-	line "… …Ahem, we are"
-	done
-
-_RocketRadioText2::
-	text_start
-	line "Team Rocket!"
-	done
-
-_RocketRadioText3::
-	text_start
-	line "After three years"
-	done
-
-_RocketRadioText4::
-	text_start
-	line "of preparation, we"
-	done
-
-_RocketRadioText5::
-	text_start
-	line "have risen again"
-	done
-
-_RocketRadioText6::
-	text_start
-	line "from the ashes!"
-	done
-
-_RocketRadioText7::
-	text_start
-	line "Giovanni! @"
-	text_pause
-	text "Can you"
-	done
-
-_RocketRadioText8::
-	text_start
-	line "hear?@"
-	text_pause
-	text " We did it!"
-	done
-
-_RocketRadioText9::
-	text_start
-	line "@"
-	text_pause
-	text "Where is our boss?"
-	done
-
-_RocketRadioText10::
-	text_start
-	line "@"
-	text_pause
-	text "Is he listening?"
-	done
-
 _BuenaRadioText1::
 	text_start
 	line "Buena: Buena here!"
