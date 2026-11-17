@@ -4,4 +4,5 @@ IronFistPokemon:
 ;    db MANKEY
 ;    db PRIMEAPE
 ;    db ANNIHILAPE
+    db METAGROSS
     db -1 ; end
