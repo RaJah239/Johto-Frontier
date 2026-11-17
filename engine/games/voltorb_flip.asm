@@ -20,7 +20,7 @@
 ;5-marked 2
 ;4-marked 3
 ;Marks: hold B and press a direction. A diagonal toggles the mark in that
-;corner (up-left 0, up-right 1, down-left 2, down-right 3) as soon as its
+;corner (up-left 2, up-right 1, down-left 0, down-right 3) as soon as its
 ;second direction is pressed; a single direction toggles, when it's let go
 ;(or B is), the mark it stands for: down 0, left 1, up 2, right 3.
 ;3-highlighted
@@ -532,12 +532,12 @@ VFInput:
 	bit 6, h ; up
 	jr nz, .up_corner
 	bit 5, l ; left
-	jr nz, .toggle2 ; down-left
+	jr nz, .toggle0 ; down-left: Voltorb
 	jr .toggle3 ; down-right
 
 .up_corner
 	bit 5, l ; left
-	jr nz, .toggle0 ; up-left
+	jr nz, .toggle2 ; up-left: 2
 	jr .toggle1 ; up-right
 
 .toggle0
@@ -877,8 +877,8 @@ VFRefreshMap:
 	ld [de], a
 	bit 2, a ;is the card flipped
 	jmp nz, .flipped
-	bit 7, a ;is 0 marked?
-	jmp nz, .marked0
+	bit 5, a ;is 2 marked? (up: shown at the top)
+	jmp nz, .marked2_top
 	ld a, 0 ;upper left corner blank
 	ldi [hl], a
 .g2x1
@@ -941,8 +941,8 @@ VFRefreshMap:
 	add hl, de
 	pop de
 	ld a, [de]
-	bit 5, a ;is 2 marked?
-	jmp nz, .marked2
+	bit 7, a ;is 0 marked? (down: shown at the bottom)
+	jmp nz, .marked0_bottom
 	ld a, 32 ;lower left corner blank
 	ldi [hl], a
 .g2x3
@@ -1079,16 +1079,16 @@ VFRefreshMap:
 	ld [hl], a
 	jmp .carddone
 
-.marked0
-	ld a, 6 ;upper left corner marked
+.marked2_top
+	ld a, 118 ;upper left corner, 2 marked
 	ldi [hl], a
 	jmp .g2x1
 .marked1
 	ld a, 8 ;upper right corner marked
 	ld [hl], a
 	jmp .g1x2
-.marked2
-	ld a, 22 ;lower left corner marked
+.marked0_bottom
+	ld a, 119 ;lower left corner, Voltorb marked
 	ldi [hl], a
 	jmp .g2x3
 .marked3
