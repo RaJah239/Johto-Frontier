@@ -1,28 +1,45 @@
 _BugContestJudging:
 	call ContestScore
 	call BugContest_JudgeContestants
-	ld a, [wBugContestThirdPlaceWinnerID]
+	ld hl, wBugContestThirdPlaceWinnerID
+	ld de, ContestJudging_ThirdPlaceText
+	call BugContest_AnnouncePlace
+	ld hl, wBugContestSecondPlaceWinnerID
+	ld de, ContestJudging_SecondPlaceText
+	call BugContest_AnnouncePlace
+	ld hl, wBugContestFirstPlaceWinnerID
+	ld de, ContestJudging_FirstPlaceText
+	call BugContest_AnnouncePlace
+	; fallthrough
+
+BugContest_GetPlayersResult:
+; b = the player's place (1 = 1st, 2 = 2nd, 3 = 3rd), or 0 if it didn't place
+	ld hl, wBugContestThirdPlaceWinnerID
+	ld de, -BUG_CONTESTANT_SIZE
+	ld b, 3 ; 3rd, 2nd, or 1st
+.loop
+	ld a, [hl]
+	cp BUG_CONTEST_PLAYER
+	ret z
+	add hl, de
+	dec b
+	jr nz, .loop
+	ret
+
+BugContest_AnnouncePlace:
+; hl = a place's winner (ID, then its Pokemon), de = its text
+	push de
+	ld a, [hli]
+	push hl
 	call LoadContestantName
-	ld a, [wBugContestThirdPlaceMon]
+	pop hl
+	ld a, [hl]
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
-	ld hl, ContestJudging_ThirdPlaceText
-	call PrintText
-	ld a, [wBugContestSecondPlaceWinnerID]
-	call LoadContestantName
-	ld a, [wBugContestSecondPlaceMon]
-	ld [wNamedObjectIndex], a
-	call GetPokemonName
-	ld hl, ContestJudging_SecondPlaceText
-	call PrintText
-	ld a, [wBugContestFirstPlaceWinnerID]
-	call LoadContestantName
-	ld a, [wBugContestFirstPlaceMon]
-	ld [wNamedObjectIndex], a
-	call GetPokemonName
-	ld hl, ContestJudging_FirstPlaceText
-	call PrintText
-	jmp BugContest_GetPlayersResult
+	pop hl
+	jmp PrintText
+
+	assert wBugContestThirdPlaceMon == wBugContestThirdPlaceWinnerID + 1
 
 ContestJudging_FirstPlaceText:
 	text_far _ContestJudging_FirstPlaceText
@@ -124,19 +141,14 @@ LoadContestantName:
 
 INCLUDE "data/events/bug_contest_winners.asm"
 
-BugContest_GetPlayersResult:
-	ld hl, wBugContestThirdPlaceWinnerID
-	ld de, -BUG_CONTESTANT_SIZE
-	ld b, 3 ; 3rd, 2nd, or 1st
+ClearContestResults:
+	ld hl, wBugContestResults
+	ld b, wBugContestWinnersEnd - wBugContestResults
+	xor a
 .loop
-	ld a, [hl]
-	cp BUG_CONTEST_PLAYER
-	jr z, .done
-	add hl, de
+	ld [hli], a
 	dec b
 	jr nz, .loop
-
-.done
 	ret
 
 BugContest_JudgeContestants:
@@ -151,23 +163,12 @@ BugContest_JudgeContestants:
 	ld [hli], a
 	ldh a, [hProduct + 1]
 	ld [hl], a
-	jr DetermineContestWinners
-
-ClearContestResults:
-	ld hl, wBugContestResults
-	ld b, wBugContestWinnersEnd - wBugContestResults
-	xor a
-.loop
-	ld [hli], a
-	dec b
-	jr nz, .loop
-	ret
+	; fallthrough
 
 DetermineContestWinners:
-	ld de, wBugContestTempScore
+; Place wBugContestTemp among the three winners (ties go to the newcomer).
 	ld hl, wBugContestFirstPlaceScore
-	ld c, 2
-	call CompareBytes
+	call CompareTempContestantScore
 	jr c, .not_first_place
 	ld hl, wBugContestSecondPlaceWinnerID
 	ld de, wBugContestThirdPlaceWinnerID
@@ -178,37 +179,28 @@ DetermineContestWinners:
 	ld bc, BUG_CONTESTANT_SIZE
 	call CopyBytes
 	ld hl, wBugContestFirstPlaceWinnerID
-	call CopyTempContestant
-	jr .done
+	jr CopyTempContestant
 
 .not_first_place
-	ld de, wBugContestTempScore
 	ld hl, wBugContestSecondPlaceScore
-	ld c, 2
-	call CompareBytes
+	call CompareTempContestantScore
 	jr c, .not_second_place
 	ld hl, wBugContestSecondPlaceWinnerID
 	ld de, wBugContestThirdPlaceWinnerID
 	ld bc, BUG_CONTESTANT_SIZE
 	call CopyBytes
 	ld hl, wBugContestSecondPlaceWinnerID
-	call CopyTempContestant
-	jr .done
+	jr CopyTempContestant
 
 .not_second_place
-	ld de, wBugContestTempScore
 	ld hl, wBugContestThirdPlaceScore
-	ld c, 2
-	call CompareBytes
-	jr c, .done
+	call CompareTempContestantScore
+	ret c
 	ld hl, wBugContestThirdPlaceWinnerID
-	call CopyTempContestant
-
-.done
-	ret
+	; fallthrough
 
 CopyTempContestant:
-; Could've just called CopyBytes.
+; hl = the place wBugContestTemp takes (unrolled CopyBytes)
 	ld de, wBugContestTempWinnerID
 rept BUG_CONTESTANT_SIZE - 1
 	ld a, [de]
@@ -216,9 +208,14 @@ rept BUG_CONTESTANT_SIZE - 1
 	ld [hli], a
 endr
 	ld a, [de]
-	inc de
 	ld [hl], a
 	ret
+
+CompareTempContestantScore:
+; Compare wBugContestTemp's score with the one at hl: carry if it's lower.
+	ld de, wBugContestTempScore
+	ld c, 2
+	jmp CompareBytes
 
 ComputeAIContestantScores:
 	ld e, 0
@@ -288,18 +285,19 @@ ContestScore:
 
 	ld a, [wContestMonSpecies] ; Species
 	and a
-	jmp z, .done
+	ret z
 
 	; Tally the following:
 
-	; Max HP * 4
+	; Max HP * 4 (its low byte)
 	ld a, [wContestMonMaxHP + 1]
+	ld b, a
 	call .AddContestStat
-	ld a, [wContestMonMaxHP + 1]
+	ld a, b
 	call .AddContestStat
-	ld a, [wContestMonMaxHP + 1]
+	ld a, b
 	call .AddContestStat
-	ld a, [wContestMonMaxHP + 1]
+	ld a, b
 	call .AddContestStat
 
 	; Stats
@@ -363,15 +361,12 @@ ContestScore:
 	; Whether it's holding an item
 	ld a, [wContestMonItem]
 	and a
-	jr z, .done
-
+	ret z
 	ld a, 1
-	call .AddContestStat
-
-.done
-	ret
+	; fallthrough
 
 .AddContestStat:
+; a = points (preserves b)
 	ld hl, hMultiplicand
 	add [hl]
 	ld [hl], a
