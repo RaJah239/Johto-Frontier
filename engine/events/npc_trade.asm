@@ -244,6 +244,16 @@ DoNPCTrade:
 	ld hl, wOTTrademonID
 	call Trade_CopyTwoBytes
 
+	ld e, NPCTRADE_BALL
+	call GetTradeAttr
+	push hl
+	ld hl, wPartyMon1CaughtBall
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call Trade_GetAttributeOfLastPartymon
+	pop hl
+	ld a, [hl]
+	ld [de], a
+
 	ld e, NPCTRADE_ITEM
 	call GetTradeAttr
 	push hl

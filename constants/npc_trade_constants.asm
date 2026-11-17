@@ -9,8 +9,9 @@ DEF NPCTRADE_ITEM     rb
 DEF NPCTRADE_OT_ID    rw
 DEF NPCTRADE_OT_NAME  rb NAME_LENGTH
 DEF NPCTRADE_GENDER   rb
-                      rb_skip
+DEF NPCTRADE_BALL     rb
 DEF NPCTRADE_STRUCT_LENGTH EQU _RS
+	assert NPCTRADE_STRUCT_LENGTH == 32 ; GetTradeAttr multiplies by 32
 
 ; NPCTrades indexes (see data/events/npc_trades.asm)
 	const_def
