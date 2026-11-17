@@ -3679,7 +3679,7 @@ AI_SimMoveChoice:
 	set MSIM_MODE_SETUP_F, [hl]
 	ld a, [wMSimBestMask]
 	and a
-	jp z, .pass
+	jr z, .pass
 .passes_done
 	ld hl, wMSimMode
 	res MSIM_MODE_SETUP_F, [hl]
@@ -3799,7 +3799,7 @@ MSim_EvalSlot:
 	jr z, .non_damaging
 	ld a, [wMSimMode]
 	bit MSIM_MODE_SETUP_F, a
-	jp nz, .not_simulated ; (1st pass)
+	jmp nz, .not_simulated ; (1st pass)
 
 	; damaging: its own damage and priority on the first turn
 	ld a, MSIM_T1_CAPTURE
@@ -3807,15 +3807,15 @@ MSim_EvalSlot:
 	call MSim_EnemyMoveDamage
 	ld a, [wMSimT1Kind]
 	cp MSIM_T1_CAPTURE
-	jp z, .not_simulated ; no damage at all (immune, or Dream Eater on an awake target)
+	jmp z, .not_simulated ; no damage at all (immune, or Dream Eater on an awake target)
 	; a move that does nothing now isn't played out: it would still "win" if
 	; the rest of the fight does (e.g. Dream Eater while the player is awake)
 	ld a, [wMSimT1Dmg]
 	ld b, a
 	ld a, [wMSimT1Dmg + 1]
 	or b
-	jp z, .not_simulated
-	jp .run
+	jmp z, .not_simulated
+	jmp .run
 
 .non_damaging
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
@@ -3834,11 +3834,11 @@ MSim_EvalSlot:
 .boost
 	ld a, [wMSimMode]
 	bit MSIM_MODE_SETUP_F, a
-	jp z, .not_simulated ; (2nd pass)
+	jmp z, .not_simulated ; (2nd pass)
 	; with Contrary it would lower them instead
 	ld a, [wEnemyMonSpecies]
 	newfarcall IsContrarySpecies
-	jp c, .not_simulated
+	jmp c, .not_simulated
 	; a boost that raises nothing (its stats are all maxed) isn't played out
 	push hl
 	ld de, wEnemyStatLevels
@@ -3855,7 +3855,7 @@ MSim_EvalSlot:
 	dec b
 	jr nz, .useful
 	pop hl
-	jp .not_simulated
+	jmp .not_simulated
 .is_useful
 	pop hl
 	push hl
@@ -3870,7 +3870,7 @@ MSim_EvalSlot:
 	call MSim_RestoreEnemy
 	pop af
 	ld b, a
-	jp nc, .lost
+	jmp nc, .lost
 	pop af ; accuracy (boosting moves don't miss)
 	ld a, b
 	add 128
@@ -3884,16 +3884,16 @@ MSim_EvalSlot:
 	cp EFFECT_FORCE_SWITCH
 	jr z, .reset_stats
 	cp EFFECT_HEAL
-	jp z, .heal
+	jmp z, .heal
 	cp EFFECT_SLACK_OFF
-	jp z, .heal
+	jmp z, .heal
 	cp EFFECT_WEATHER_HEAL
-	jp z, .heal
+	jmp z, .heal
 	ld a, [wMSimMode]
 	bit MSIM_MODE_SETUP_F, a
-	jp z, .not_simulated ; (2nd pass)
+	jmp z, .not_simulated ; (2nd pass)
 	call MSim_T1Inflict
-	jp z, .not_simulated
+	jmp z, .not_simulated
 	ld [wMSimT1Effect], a
 	ld a, MSIM_T1_STATUS
 	ld [wMSimT1Kind], a
@@ -3947,10 +3947,10 @@ MSim_EvalSlot:
 	; Haze, Roar, Whirlwind (2nd pass): when they'd undo the player's boosts
 	ld a, [wMSimMode]
 	bit MSIM_MODE_SETUP_F, a
-	jp z, .not_simulated
+	jmp z, .not_simulated
 	ld b, c
 	call MSim_ResetUseful
-	jp nc, .not_simulated
+	jmp nc, .not_simulated
 	call MSim_PlayerBoostThreat
 	push af ; 255: the player is set up to sweep
 	push bc
@@ -3981,7 +3981,7 @@ MSim_EvalSlot:
 	ld a, b
 .reset_lost
 	ld b, a
-	jp .lost
+	jr .lost
 
 .reset_won
 	call MSim_EvalKey
@@ -3999,7 +3999,7 @@ MSim_EvalSlot:
 .heal
 	ld a, [wMSimMode]
 	bit MSIM_MODE_SETUP_F, a
-	jp nz, .not_simulated ; (1st pass)
+	jr nz, .not_simulated ; (1st pass)
 	; only when the healing rule would heal now (it can't KO first, it's in
 	; KO range, and the heal beats the player's hit); otherwise healing
 	; first just wastes a turn, though it would end the fight with more HP
@@ -4007,7 +4007,7 @@ MSim_EvalSlot:
 	ld de, wMSimEnemyHit
 	call MSim_CopyWord
 	call MSim_EnemyShouldHeal
-	jp nc, .not_simulated
+	jr nc, .not_simulated
 	ld a, MSIM_T1_HEAL
 	ld [wMSimT1Kind], a
 .run

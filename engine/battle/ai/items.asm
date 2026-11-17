@@ -43,7 +43,7 @@ AI_SwitchOrTryItem:
 	farcall AI_MatchupSwitch
 	jr nc, DontSwitch
 	call AI_PivotInsteadOfSwitch
-	jp nc, AI_Switch
+	jmp nc, AI_Switch
 	and a ; it attacks with the pivot move instead
 	ret
 
@@ -96,7 +96,7 @@ AI_TrySwitch:
 	cp 2
 	jr c, .stay
 	call AI_PivotInsteadOfSwitch
-	jp nc, AI_Switch
+	jmp nc, AI_Switch
 .stay
 	and a
 	ret
@@ -247,10 +247,10 @@ AI_PivotInsteadOfSwitch:
 ; 10% of the time it just switches, so the pivot isn't a sure thing.
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_ENCORED, a ; Encore or a Choice item: locked into its move
-	jp nz, .no
+	jmp nz, .no
 	call Random
 	cp 10 percent
-	jp c, .no
+	jmp c, .no
 	call DoesAIOutSpeedPlayer
 	ret nc
 	ld hl, wCurDamage

@@ -4,7 +4,7 @@
 UpdateOverworldWeatherFrame::
 	call DoOverworldWeather
 	call SunShimmerFrame
-	jp WeatherFadeStep
+	jmp WeatherFadeStep
 
 DoOverworldWeather::
 ; Preserves bc, de, and hl
@@ -133,7 +133,7 @@ GetActiveOverworldWeather:
 	ld a, [wOverworldWeatherCooldown]
 	and a
 	ld a, [wPreviousFieldWeather]
-	jp nz, TranslateFieldWeatherToOverworld
+	jr nz, TranslateFieldWeatherToOverworld
 	; fallthrough
 
 GetOverworldWeatherType::
@@ -249,7 +249,7 @@ SetCurrentWeather::
 	xor a
 	ld [wOverworldWeatherCooldown], a
 	call LoadWeatherGraphics
-	jp EnsureWeatherObjectPalette
+	jmp EnsureWeatherObjectPalette
 
 ClearWeather::
 	call GetActiveOverworldWeather
@@ -397,7 +397,7 @@ PauseWeather::
 	ld hl, wWeatherFlags
 	set WEATHER_PAUSED_F, [hl]
 	call ClearWeatherSprites
-	jp CancelWeatherFade
+	jmp CancelWeatherFade
 
 ResumeWeather::
 	ld hl, wWeatherFlags
@@ -406,7 +406,7 @@ ResumeWeather::
 
 PrepareWeatherForFullScreen::
 	call ClearWeatherSprites
-	jp CancelWeatherFade
+	jmp CancelWeatherFade
 
 LoadWeatherGraphics::
 ; Load the active particle tiles into VRAM bank 0.
@@ -792,7 +792,7 @@ DoRainFall:
 	and %1110
 	ret nz
 	ld hl, .HideSplash
-	jp ForEachWeatherSprite
+	jr ForEachWeatherSprite
 
 .HideSplash:
 	ld hl, SPRITEOAMSTRUCT_TILE_ID
@@ -800,7 +800,7 @@ DoRainFall:
 	ld a, [hl]
 	cp RAINSPLASH_TILE
 	ret nz
-	jp Despawn
+	jr Despawn
 
 .Update:
 	ld hl, SPRITEOAMSTRUCT_TILE_ID
@@ -830,7 +830,7 @@ DoRainFall:
 	add c
 	add 8 ; minimum fall speed
 	cp OAM_YCOORD_HIDDEN
-	jp nc, Despawn
+	jmp nc, Despawn
 	ld [de], a
 
 	ld a, [wPlayerStepVectorX]
@@ -848,9 +848,9 @@ DoRainFall:
 	ld b, a
 	ld a, c
 	sub b
-	jp c, Despawn
+	jmp c, Despawn
 	sub 4 ; minimum leftward drift
-	jp c, Despawn
+	jmp c, Despawn
 	ld [hl], a
 	ret
 
@@ -862,7 +862,7 @@ DoRainFall:
 	ld a, [de]
 	sub c
 	cp OAM_YCOORD_HIDDEN
-	jp nc, Despawn
+	jmp nc, Despawn
 	ld [de], a
 	ld a, [wPlayerStepVectorX]
 	add a
@@ -897,7 +897,7 @@ SpawnRainDrop:
 	inc l
 .finish
 	ld a, RAINDROP_TILE
-	jp SetWeatherParticle
+	jmp SetWeatherParticle
 
 ; Snow
 
@@ -912,7 +912,7 @@ endr
 	; fallthrough
 DoSnowFall:
 	ld hl, .Update
-	jp ForEachWeatherSprite
+	jmp ForEachWeatherSprite
 
 .Update:
 	; Occasionally melt.
@@ -921,7 +921,7 @@ DoSnowFall:
 	jr nc, .ok
 	call WeatherRandom
 	cp 10 percent
-	jp c, Despawn
+	jmp c, Despawn
 .ok
 	call GetPlayerStepY
 	add a
@@ -933,7 +933,7 @@ DoSnowFall:
 	add c
 	add 2 ; minimum fall speed
 	cp OAM_YCOORD_HIDDEN
-	jp nc, Despawn
+	jmp nc, Despawn
 	ld [de], a
 
 	; Wiggle left half the time.
@@ -950,9 +950,9 @@ DoSnowFall:
 	inc l
 	ld a, [hl]
 	sub c ; c is negative while walking left, so ignore the carry
-	jp z, Despawn ; reached the left edge
+	jmp z, Despawn ; reached the left edge
 	cp SCREEN_WIDTH_PX + 2 * TILE_WIDTH
-	jp nc, Despawn ; off the right edge, or wrapped past the left edge
+	jmp nc, Despawn ; off the right edge, or wrapped past the left edge
 	ld [hl], a
 	ret
 
@@ -982,7 +982,7 @@ SpawnSnowFlake:
 	inc l
 .finish
 	ld a, SNOWFLAKE_TILE
-	jp SetWeatherParticle
+	jmp SetWeatherParticle
 
 ; Sandstorm
 
@@ -997,13 +997,13 @@ endr
 	; fallthrough
 DoSandFall:
 	ld hl, .Update
-	jp ForEachWeatherSprite
+	jmp ForEachWeatherSprite
 
 .Update:
 	; 5% chance to vanish.
 	call WeatherRandom
 	cp 5 percent
-	jp c, Despawn
+	jmp c, Despawn
 
 	; Blow up and left.
 	call GetPlayerStepY
@@ -1017,11 +1017,11 @@ DoSandFall:
 	add a
 	add c
 	sub 4 ; minimum rise speed
-	jp c, Despawn
+	jmp c, Despawn
 	cp OAM_YCOORD_HIDDEN
-	jp nc, Despawn
+	jmp nc, Despawn
 	and a
-	jp z, Despawn
+	jmp z, Despawn
 	ld [de], a
 
 	ld a, [wPlayerStepVectorX]
@@ -1039,9 +1039,9 @@ DoSandFall:
 	ld b, a
 	ld a, c
 	sub b
-	jp c, Despawn
+	jmp c, Despawn
 	sub 12 ; minimum leftward speed
-	jp c, Despawn
+	jmp c, Despawn
 	ld [hl], a
 	ret
 
@@ -1067,7 +1067,7 @@ SpawnSandDrop:
 	inc l
 .finish
 	ld a, SANDSTORM_TILE
-	jp SetWeatherParticle
+	jmp SetWeatherParticle
 
 ; Weather tint
 ; Each channel becomes min(31, (channel * multiplier + 8) / 16 + add).
@@ -1106,7 +1106,7 @@ ApplyWeatherTint::
 	ld a, BANK(wFieldWeather)
 	ldh [rSVBK], a
 	call GetWeatherTint
-	jp z, .done
+	jr z, .done
 	; Table rows are 128 bytes (96 used), 128-byte aligned, so a row's address
 	; is d = HIGH(WeatherTintTables) + row / 2, e = (row & 1) * $80, and
 	; any entry in the row is just h = d, l = e | offset (no carry).
@@ -1655,7 +1655,7 @@ WeatherFadeStep::
 	ret z
 	ld a, [wWeatherFadeSteps]
 	and a
-	jp z, .cancel
+	jmp z, .cancel
 	push hl
 	push de
 	push bc
@@ -1687,11 +1687,11 @@ WeatherFadeStep::
 
 	ld a, c
 	cp 2 ; OBJ quarters are applied instantly, not faded
-	jp nc, .stepped
+	jmp nc, .stepped
 
 	ld a, b
 	dec a
-	jp z, .last_step
+	jmp z, .last_step
 	push hl
 	ld a, WEATHER_FADE_STEPS
 	sub b
@@ -1723,7 +1723,7 @@ WeatherFadeStep::
 	jr nz, .lerp
 	ld a, b
 	cp d
-	jp z, .store
+	jr z, .store
 .lerp
 
 	; red
@@ -1803,7 +1803,7 @@ WeatherFadeStep::
 	ld [hli], a
 	pop bc
 	dec c
-	jp nz, .color_loop
+	jr nz, .color_loop
 	jr .stepped
 
 .last_step

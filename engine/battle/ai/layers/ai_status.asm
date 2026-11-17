@@ -91,7 +91,7 @@ AI_Status:
 
 	ld a, [wTypeMatchup]
 	and a
-	jp nz, .checkmove
+	jmp nz, .checkmove
 
 .immune
 	call AIDiscourageMove

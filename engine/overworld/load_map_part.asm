@@ -66,12 +66,12 @@ MACRO function_macro
 .Function\1:
 	ld a, b
 	and a
-	jp z, .BlockY0BlockX0\@
+	jmp z, .BlockY0BlockX0\@
 	dec a
-	jp z, .BlockY0BlockX1\@
+	jmp z, .BlockY0BlockX1\@
 	coord hl, 0, 0, \2
 	dec a
-	jp z, .BlockY1BlockX0\@
+	jmp z, .BlockY1BlockX0\@
 ; block y1, block x1
 
 .BlockY1BlockX1\@:

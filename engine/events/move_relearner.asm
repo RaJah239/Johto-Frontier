@@ -97,7 +97,7 @@ MoveRelearner:
 ; This ends the dialogue.
 .cancel
 	ld hl, MoveReminderCancelText
-	jp PrintText
+	jmp PrintText
 
 ; Loads and prints the "MoveReminderEggText" text and then waits for
 ; the player to press a button for the text to progress. Then
@@ -127,7 +127,7 @@ MoveRelearner:
 ; This will end the dialogue.
 .not_enough_money
 	ld hl, MoveReminderNotEnoughMoneyText
-	jp PrintText
+	jmp PrintText
 
 ; Exits the menu and goes back to the map with a
 ; speech text box open and then loads and prints

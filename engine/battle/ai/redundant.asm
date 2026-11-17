@@ -47,7 +47,7 @@ AI_Redundant:
 .Trick:
 	ld a, [wEnemyMonItem]
 	and a
-	jp nz, .NotRedundant
+	jmp nz, .NotRedundant
 	ld a, [wBattleMonItem]
 	and a
 	jmp z, .Redundant

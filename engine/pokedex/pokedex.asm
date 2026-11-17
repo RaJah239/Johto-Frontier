@@ -285,7 +285,7 @@ Pokedex_UpdateMainScreen:
 Pokedex_InitDexEntryScreen:
 	ld a, [wDexGridToEntry]
 	and a
-	jp nz, Pokedex_InitDexEntryScreenFromGrid
+	jr nz, Pokedex_InitDexEntryScreenFromGrid
 	call LowVolume
 	xor a ; page 1
 	ld [wPokedexStatus], a ; moves machines index

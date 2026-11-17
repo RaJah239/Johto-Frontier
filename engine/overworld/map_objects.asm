@@ -1,5 +1,4 @@
 INCLUDE "data/sprites/facings.asm"
-
 INCLUDE "data/sprites/map_objects.asm"
 
 DeleteMapObject::
@@ -1746,7 +1745,7 @@ StepFunction_ScreenShake:
 .ok:
 	ld hl, wWeatherFlags
 	res WEATHER_IGNORE_PLAYER_Y_F, [hl]
-	jp DeleteMapObject
+	jmp DeleteMapObject
 
 .GetSign:
 	ld hl, OBJECT_1E

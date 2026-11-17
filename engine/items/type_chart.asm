@@ -88,7 +88,7 @@ _TypeChart:
 	pop af
 	ldh [hInMenu], a
 
-	jp ClearBGPalettes
+	jmp ClearBGPalettes
 
 TypeChartPalettes:
 INCLUDE "gfx/type_chart/type_chart.pal"

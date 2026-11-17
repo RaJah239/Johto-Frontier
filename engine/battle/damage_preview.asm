@@ -232,7 +232,7 @@ DamagePreview_Print:
 	hlcoord 3, 8
 	ld de, wCurDamage
 	lb bc, PRINTNUM_LEFTALIGN | 2, 3
-	jp PrintNum
+	jmp PrintNum
 
 .range
 	push bc ; highest
@@ -253,7 +253,6 @@ DamagePreview_Print:
 	ld [wCurDamage + 1], a
 	ld de, wCurDamage
 	lb bc, PRINTNUM_LEFTALIGN | 2, 3
-	jp PrintNum
+	jmp PrintNum
 
-DamagePreview_NoDamageString:
-	db "---@"
+DamagePreview_NoDamageString: db "---@"

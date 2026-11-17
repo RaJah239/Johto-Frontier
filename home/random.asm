@@ -33,7 +33,7 @@ Random::
 	ld b, a
 	ld a, [hRandomState + 3]
 	or b
-	jp z, .reseed
+	jmp z, .reseed
 
 .step
 	; xorshift32: x ^= x << 13; x ^= x >> 17; x ^= x << 5
@@ -218,10 +218,10 @@ Random::
 	; never leave the state zero (0 is a fixed point of xorshift)
 	ld a, [hRandomState]
 	and a
-	jp nz, .step
+	jmp nz, .step
 	ld a, 1
 	ld [hRandomState], a
-	jp .step
+	jmp .step
 
 BattleRandom::
 ; _BattleRandom lives in another bank.

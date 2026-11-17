@@ -3652,7 +3652,7 @@ Step_Slow:
 	ld hl, 1.5 ; speed
 	call Set_Rad_Pos
 	cp 80 ; final position
-	jp nc, FarDeinitBattleAnimation
+	jmp nc, FarDeinitBattleAnimation
 	jr Rad_Move
 
 Step_VerySlow:
@@ -3814,7 +3814,7 @@ BattleAnimFunc_Flamethrower:
 	add hl, bc
 	ld a, [hl]
 	cp $84
-	jp nc, FarDeinitBattleAnimation
+	jmp nc, FarDeinitBattleAnimation
 	add 4
 	ld [hl], a
 

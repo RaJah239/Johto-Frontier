@@ -149,7 +149,7 @@ Pokedex_UpdateGridScreen::
 	ld hl, hJoyPressed
 	ld a, [hl]
 	and B_BUTTON
-	jp nz, .b
+	jmp nz, .b
 	ld a, [hl]
 	and A_BUTTON
 	jr nz, .a
@@ -625,7 +625,7 @@ DexGrid_SetMonPalettes:
 	ld hl, wBGPals1 palette PAL_DEXGRID_PIC
 	ld de, wOBPals1 palette DEXGRID_PIC_OBJ_PAL
 	ld bc, 1 palettes
-	jp CopyBytes
+	jmp CopyBytes
 
 ; ---------------------------------------------------------------------------
 ; Drawing
@@ -772,7 +772,7 @@ DexGrid_DrawTopHalf:
 	ld de, wDexGridTopA
 	ld hl, vTiles1 tile (DEXGRID_TOP_TILE - $80 + DEXGRID_TOP_W)
 	ld c, 2 * DEXGRID_TOP_W
-	jp DexGrid_Upload
+	jmp DexGrid_Upload
 
 DexGrid_ShiftPic:
 ; The picture's first tile column (7 tiles, + a blank one) to
@@ -826,7 +826,7 @@ DexGrid_ShiftPic:
 	ld [hli], a
 	dec b
 	jr nz, .last
-	jp CloseSRAM
+	jmp CloseSRAM
 
 DexGrid_WaitLowerScreen:
 ; Wait until the LCD is on lines 64-79: below the picture, with time to copy
@@ -867,7 +867,7 @@ DexGrid_CommitEntryPic::
 	ld hl, vTiles2
 	lb bc, 0, 7 * 7
 	call Get2bpp
-	jp CloseSRAM
+	jmp CloseSRAM
 
 DexGrid_PrepareFrontpic:
 ; Decompress the cursor mon's frontpic (or the question mark) into SRAM;
@@ -961,7 +961,7 @@ DexGrid_CommitGrid:
 	ld a, [wDexGridPushNew]
 	cp -1
 	ret z
-	jp DexGrid_PushOverlayRows
+	jmp DexGrid_PushOverlayRows
 
 .restore_row
 ; number row a's old cursor tiles, from the clean copy
@@ -982,7 +982,7 @@ DexGrid_CommitGrid:
 	call .vram_tile
 	ld a, [wDexGridOldTCount]
 	ld c, a
-	jp DexGrid_Upload
+	jmp DexGrid_Upload
 
 .upload_patch
 ; patch tiles at de -> number row a, cursor tiles
@@ -993,7 +993,7 @@ DexGrid_CommitGrid:
 	pop de
 	ld a, [wDexGridTCount]
 	ld c, a
-	jp DexGrid_Upload
+	jmp DexGrid_Upload
 
 .vram_tile
 ; hl = address of number row tile hl
@@ -1052,7 +1052,7 @@ DexGrid_DrawPatches:
 	call DexGrid_HLine
 	inc e
 	ld b, DEXGRID_CELL_W + 1
-	jp DexGrid_HLine
+	jmp DexGrid_HLine
 
 .copy
 ; number row a's cursor tiles from the clean copy to de
@@ -1070,7 +1070,7 @@ DexGrid_DrawPatches:
 	swap a ; * 16
 	ld c, a
 	ld b, 0
-	jp CopyBytes
+	jmp CopyBytes
 
 DexGrid_BuildCellCache:
 ; wDexGridCellMon / wDexGridCellFlags for the 15 visible cells.
@@ -1650,7 +1650,7 @@ DexGrid_DrawTop:
 	ret z
 	ld hl, TypeDarkIconGFX
 	ld d, DEXGRID_TYPE2_X - DEXGRID_TOP_X
-	jp DexGrid_DrawTypeLabel ; (DexGrid_DrawTopHalf copies rows 0 and 2-3 to VRAM)
+	jr DexGrid_DrawTypeLabel ; (DexGrid_DrawTopHalf copies rows 0 and 2-3 to VRAM)
 
 DexGrid_DrawCounts:
 ; The Seen/Own counts (rows 6-7); they don't change while the grid is shown.
@@ -1766,7 +1766,7 @@ DexGrid_DrawTypeLabel:
 	ld d, a
 	dec c
 	jr nz, .tile
-	jp CloseSRAM
+	jmp CloseSRAM
 
 DexGrid_RenderStrips:
 ; Draw the three number rows' numbers and caught balls (no cursor) into
@@ -2010,7 +2010,7 @@ DexGrid_BuildTilemap:
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	call CopyBytes
 	call .no_push
-	jp DexGrid_ApplyOverlay
+	jmp DexGrid_ApplyOverlay
 
 .partial
 	call DexGrid_RestoreOverlay
@@ -2402,7 +2402,7 @@ DexGrid_CopyOverlayRow:
 	ld [wDexGridTmp], a
 	ld hl, wDexGridTCount
 	cp [hl]
-	jp c, .loop
+	jmp c, .loop
 	ret
 
 .MapOffset:
@@ -2600,7 +2600,7 @@ DexGrid_UpdateOAM:
 	ld a, [wDexGridCell]
 	inc a
 	cp DEXGRID_CELLS
-	jp c, .loop
+	jmp c, .loop
 	; the picture's left column
 	ld b, 0
 .pic_sprite

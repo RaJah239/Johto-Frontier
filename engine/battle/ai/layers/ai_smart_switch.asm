@@ -12,11 +12,6 @@ AI_Smart_Switch:
 ; toxic only influences switching once the counter has ramped past 3 turns
 ; 50% chance to switch if enemy afflicted with leech seed
 
-; possibly switch if enemy is setup bait
-;	ld a, [wEnemyMonStatus]
-;	and 1 << FRZ
-;	jp nz, .checkSetupAndSwitchIfPlayerSetsUp
-
 ; switch if choice locked into a resisted or immune move
 	ld hl, wEnemySubStatus5
 	bit SUBSTATUS_ENCORED, [hl]
@@ -31,15 +26,15 @@ AI_Smart_Switch:
 	and TYPE_MASK
 	ld b, a
 	farcall AI_IsPlayerImmuneByAbility
-	jp c, .switch
+	jmp c, .switch
 	push hl
 	callfar BattleCheckTypeMatchup
 	pop hl
 	ld a, [wTypeMatchup]
 	cp EFFECTIVE
-	jp c, .switch
+	jmp c, .switch
 	and a
-	jp z, .switch
+	jmp z, .switch
 
 ; switch if locked into a move with 0 pp
 	ld hl, wEnemyMonPP
@@ -49,7 +44,7 @@ AI_Smart_Switch:
 	add hl, bc
 	ld a, [hl]
 	and PP_MASK
-	jp z, .switch
+	jmp z, .switch
 .not_encored
 
 ; don't switch if enemy is weakened, just let it die
@@ -59,7 +54,7 @@ AI_Smart_Switch:
 ; switch if enemy accuracy at -2 or lower
     ld a, [wEnemyAccLevel]
 	cp BASE_STAT_LEVEL - 1
-	jp c, .switch
+	jmp c, .switch
 
 ; switch if the enemy's role-appropriate offense is at -2 or lower
 ; don't do this if either offense is currently boosted or the mon is mixed

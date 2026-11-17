@@ -276,7 +276,7 @@ endr
 	ld [wJumptableIndex], a
 	; Reward 99 coins
 	ld c, 99
-	jp MemoryGame_CheckMatch.Payout
+	jmp MemoryGame_CheckMatch.Payout
 
 .RevealAll:
 	xor a
