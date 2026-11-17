@@ -7,4 +7,5 @@
 ;	db CHINCHOU
 ;	db LANTURN
 ;	db RAIKOU
+	db JOLTEON
 	db -1 ; end

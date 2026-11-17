@@ -1,8 +1,8 @@
-	db "LIGHTNING@" ; species name
+	db "Lightning@" ; species name
 	dw 207, 540 ; height, weight
-	db   "The negatively"
-	feed "charged ions"
-	feed "generated in its"
-	feed "fur create a"
-	feed "constant sparking"
-	feed "noise.@"
+
+	db   "STAB moves deal"
+	feed "200<%> damage."
+	feed ""
+	feed "Unaffected by"
+	feed "electric moves.@"
