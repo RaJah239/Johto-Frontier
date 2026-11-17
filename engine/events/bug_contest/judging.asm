@@ -288,7 +288,7 @@ ContestScore:
 
 	ld a, [wContestMonSpecies] ; Species
 	and a
-	jr z, .done
+	jmp z, .done
 
 	; Tally the following:
 
@@ -352,6 +352,14 @@ ContestScore:
 	srl a
 	call .AddContestStat
 
+	; A shiny bonus
+	ld bc, wContestMonDVs
+	farcall CheckShininess
+	jr nc, .not_shiny
+	ld a, BUG_CONTEST_SHINY_BONUS
+	call .AddContestStat
+
+.not_shiny
 	; Whether it's holding an item
 	ld a, [wContestMonItem]
 	and a
