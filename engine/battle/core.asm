@@ -4111,7 +4111,7 @@ PrintPlayerHUD:
 	farcall CheckShininess
 	jr nc, .not_shiny
 	ld a, "<⁂>"
-	hlcoord 18, 8
+	hlcoord 17, 8
 	ld [hl], a
 
 .not_shiny
@@ -4120,7 +4120,7 @@ PrintPlayerHUD:
 	ld hl, LevitatePokemon
 	call IsInAbilityList
 	jr nc, .skip_floaticon
-	hlcoord 19, 8
+	hlcoord 18, 8
 	ld [hl], $72
 .skip_floaticon
 
@@ -4158,11 +4158,11 @@ PrintPlayerHUD:
 	ld a, "♀"
 
 .got_gender_char
-	hlcoord 17, 8 ;  where the player's mon gender is printed
+	hlcoord 16, 8 ;  where the player's mon gender is printed
 	ld [hl], a
 	farcall LoadPlayerStatusIcon
 
-	hlcoord 14, 8 ; where the player mon's lvl is printed
+	hlcoord 13, 8 ; where the player mon's lvl is printed
 	ld a, [wBattleMonLevel]
 	ld [wTempMonLevel], a
 	jmp PrintLevel
@@ -4213,7 +4213,7 @@ DrawEnemyHUD:
 	farcall CheckShininess
 	jr nc, .not_shiny
 	ld a, "<⁂>"
-	hlcoord 9, 1
+	hlcoord 8, 1
 	ld [hl], a
 
 .not_shiny
@@ -4227,11 +4227,11 @@ DrawEnemyHUD:
 	ld a, "♀"
 
 .got_gender
-	hlcoord 8, 1 ;  where the enemy's mons gender is printed
+	hlcoord 7, 1 ;  where the enemy's mons gender is printed
 	ld [hl], a
 	farcall LoadEnemyStatusIcon
 
-	hlcoord 5, 1 ; where the enemy mon's lvl is printed
+	hlcoord 4, 1 ; where the enemy mon's lvl is printed
 	ld a, [wEnemyMonLevel]
 	ld [wTempMonLevel], a
 	call PrintLevel
@@ -4241,7 +4241,7 @@ DrawEnemyHUD:
 	ld hl, LevitatePokemon
 	call IsInAbilityList
 	jr nc, .skip_floaticon
-	hlcoord 10, 1
+	hlcoord 9, 1
 	ld [hl], $72
 .skip_floaticon
 

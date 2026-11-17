@@ -206,7 +206,7 @@ _CGB_FinishBattleScreenLayout:
 	hlcoord 10, 8, wAttrmap
     ld a, PAL_BATTLE_BG_5
     ld [hl], a
-; Column 10 of the enemy HUD: the end of the level/gender row, the HP
+; Column 10 of the enemy HUD: the end of the level row, the HP
 ; bar's right tip and the last digit of the foe's max HP (Damage Info),
 ; so stat animations tinting the enemy's palette don't colour them.
 	hlcoord 10, 1, wAttrmap
