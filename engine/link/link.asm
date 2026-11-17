@@ -349,8 +349,7 @@ LinkTimeout:
 	call ClearScreen
 	ld b, SCGB_DIPLOMA
 	call GetSGBLayout
-	call WaitBGMap2
-	ret
+	jmp WaitBGMap2
 
 .LinkTimeoutText:
 	text_far _LinkTimeoutText
@@ -1455,8 +1454,7 @@ LoadTradeScreenBorderGFX:
 
 SetTradeRoomBGPals:
 	farcall LoadTradeRoomBGPals ; just a nested farcall; so wasteful
-	call SetDefaultBGPAndOBP
-	ret
+	jmp SetDefaultBGPAndOBP
 
 INCLUDE "engine/movie/trade_animation.asm"
 

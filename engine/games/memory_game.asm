@@ -48,8 +48,7 @@ _MemoryGame:
 	ld a, $e4
 	call DmgToCgbBGPals
 	ld a, $e0
-	call DmgToCgbObjPal0
-	ret
+	jmp DmgToCgbObjPal0
 
 .JumptableLoop:
 	ld a, [wJumptableIndex]
@@ -161,8 +160,7 @@ endr
 	call MemoryGame_Card2Coord
 	xor a
 	ld [wMemoryGameLastCardPicked], a
-	call MemoryGame_PlaceCard
-	ret
+	jmp MemoryGame_PlaceCard
 
 .spawn_object
 	depixel 6, 3, 4, 4
@@ -359,8 +357,7 @@ MemoryGame_CheckMatch:
 	hlcoord 0, 0
 	add hl, de
 	call MemoryGame_PlaceCard
-	call .RewardMatch
-	ret
+	jmp .RewardMatch
 
 .no_match
 	ld de, SFX_WRONG
@@ -379,8 +376,7 @@ MemoryGame_CheckMatch:
 
 	ld a, [wMemoryGameCard2Location]
 	call MemoryGame_Card2Coord
-	call MemoryGame_PlaceCard
-	ret
+	jmp MemoryGame_PlaceCard
 
 ; Take action based on what was matched
 .RewardMatch
@@ -395,8 +391,7 @@ MemoryGame_CheckMatch:
 	ld de, SFX_2ND_PLACE
 	call PlaySFX
 	call WaitSFX
-	call WaitPressAorB_BlinkCursor
-	ret
+	jmp WaitPressAorB_BlinkCursor
 
 .not_medkit
 	cp 2 ; "Candy"
@@ -464,8 +459,7 @@ MemoryGame_CheckMatch:
 	pop bc
 	dec c
 	jr nz, .loop
-	call WaitPressAorB_BlinkCursor
-	ret
+	jmp WaitPressAorB_BlinkCursor
 
 .AddCoinPlaySFX:
 	ld a, [wCoins]
@@ -478,8 +472,7 @@ MemoryGame_CheckMatch:
 	ld a, l
 	ld [wCoins + 1], a
 	ld de, SFX_PAY_DAY
-	call PlaySFX
-	ret
+	jmp PlaySFX
 
 .IsCoinCaseFull:
 	ld a, [wCoins]
@@ -643,8 +636,7 @@ MemoryGame_PlaceCard:
 	inc a
 	ld [hl], a
 	ld c, 3
-	call DelayFrames
-	ret
+	jmp DelayFrames
 
 MemoryGame_DeleteCard:
 	ld a, $1
@@ -655,15 +647,13 @@ MemoryGame_DeleteCard:
 	ld [hli], a
 	ld [hl], a
 	ld c, 3
-	call DelayFrames
-	ret
+	jmp DelayFrames
 
 MemoryGame_InitStrings:
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, $1
-	call ByteFill
-	ret
+	jmp ByteFill
 
 CardFlipChooseACardText:
 	text_far _CardFlipChooseACardText
@@ -679,8 +669,7 @@ MemoryGame_PrintTries:
 	hlcoord 17, 16
 	ld de, wMemoryGameNumberTriesRemaining
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
-	ret
+	jmp PrintNum
 
 .tries_text:
 	db "Tries@"
@@ -810,8 +799,7 @@ MemoryGame_InterpretJoypad_AnimateCursor:
 
 .play_movement_sound
 	ld de, SFX_POKEBALLS_PLACED_ON_TABLE
-	call PlaySFX
-	ret
+	jmp PlaySFX
 
 MemoryGameLZ:
 INCBIN "gfx/memory_game/memory_game.2bpp.lzp"

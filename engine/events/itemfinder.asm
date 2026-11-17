@@ -48,8 +48,7 @@ ItemFinder:
 	dec c
 	jr nz, .sfx_loop
 
-	call WaitSFX
-	ret
+	jmp WaitSFX
 
 .Script_FoundSomething:
 	refreshmap

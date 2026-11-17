@@ -94,8 +94,7 @@ StartMenu::
 	call ExitMenu
 .ReturnEnd2:
 	call CloseText
-	call UpdateTimePals
-	ret
+	jmp UpdateTimePals
 
 .GetInput:
 ; Return carry on exit, and no-carry on selection.
@@ -223,8 +222,7 @@ StartMenu::
 	ld d, [hl]
 	ld e, a
 	pop hl
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .MenuDesc:
 	push de
@@ -239,8 +237,7 @@ endr
 	ld d, [hl]
 	ld e, a
 	pop hl
-	call PlaceString
-	ret
+	jmp PlaceString
 .none
 	pop de
 	ret
@@ -770,8 +767,7 @@ Fast_Travel_Warp:
 	; play warping sound effect
     call WaitSFX
     ld de, SFX_WARP_TO
-    call PlaySFX
-	ret
+    jmp PlaySFX
 
 .WhereToText
 	text "Where would you"

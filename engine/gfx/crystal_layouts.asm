@@ -20,8 +20,7 @@ LoadOW_BGPal7::
 	ld de, wBGPals1 palette PAL_BG_TEXT
 	ld bc, 1 palettes
 	ld a, BANK(wBGPals1)
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 Palette_TextBG7:
 INCLUDE "gfx/font/bg_text.pal"
@@ -76,8 +75,7 @@ _InitMG_Mobile_LinkTradePalMap:
 	hlcoord 2, 17, wAttrmap
 	ld a, $3
 	ld bc, 6
-	call ByteFill
-	ret
+	jmp ByteFill
 
 _LoadTradeRoomBGPals:
 	ld hl, TradeRoomPalette
@@ -91,5 +89,4 @@ TradeRoomPalette:
 INCLUDE "gfx/trade/border.pal"
 
 InitMG_Mobile_LinkTradePalMap:
-	call _InitMG_Mobile_LinkTradePalMap
-	ret
+	jmp _InitMG_Mobile_LinkTradePalMap

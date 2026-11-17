@@ -86,8 +86,7 @@ AnimateDexSearchSlowpoke: ; unreferenced
 	ld [wDexSearchSlowpokeFrame], a
 	call DoDexSearchSlowpokeFrame
 	ld c, 32
-	call DelayFrames
-	ret
+	jmp DelayFrames
 
 .FrameIDs:
 	; frame ID, duration
@@ -595,8 +594,7 @@ INCLUDE "engine/pokedex/pokedex_area_page.asm"
 Pokedex_Clearbox:
  	lb bc, 7, SCREEN_WIDTH - 1
  	hlcoord 1, 9
- 	call ClearBox
- 	ret
+ 	jmp ClearBox
  
  DexEntry_adjusthlcoord:
  	; given: current printed lines in c

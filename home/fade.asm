@@ -17,8 +17,7 @@ SetWhitePals::
 DoSetPals:
 	ld hl, wBGPals1
 	ld bc, 16 palettes
-	call ByteFill
-	ret
+	jmp ByteFill
 
 FadeToWhite::
 	push bc

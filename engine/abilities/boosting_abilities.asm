@@ -372,8 +372,7 @@ HandleMoveEnchancingAbilities:
 	call HandleSharpness
 	call HandleBallistics
 	call HandleIronFist
-	call HandleStrongJaw
-	ret
+	jmp HandleStrongJaw
 
 HandleSharpness:
 	call GetCurrentMon

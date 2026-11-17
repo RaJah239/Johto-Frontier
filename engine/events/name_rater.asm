@@ -73,8 +73,7 @@ _NameRater:
 	jmp .loop_party_menu
 
 .done
-	call PrintText
-	ret
+	jmp PrintText
 
 IsNewNameEmpty:
 ; Checks to see if the nickname loaded in wStringBuffer2 is empty.  If so, return carry.

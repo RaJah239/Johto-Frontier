@@ -6,8 +6,7 @@ BattleTowerRoomMenu:
 BattleTowerBattle:
 	xor a ; FALSE
 	ld [wBattleTowerBattleEnded], a
-	call _BattleTowerBattle
-	ret
+	jmp _BattleTowerBattle
 
 InitBattleTowerChallengeRAM:
 	xor a
@@ -269,9 +268,8 @@ ResetBattleTowerTrainersSRAM:
 	xor a
 	ld [sNrOfBeatenBattleTowerTrainers], a
 
-	call CloseSRAM
+	jmp CloseSRAM
 
-	ret
 
 BattleTower_GiveReward:
 	ld a, BANK(sBattleTowerReward)
@@ -307,16 +305,14 @@ BattleTowerAction_1C:
 	call OpenSRAM
 	ld a, BATTLETOWER_WON_CHALLENGE
 	ld [sBattleTowerChallengeState], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 BattleTowerAction_1D:
 	ld a, BANK(sBattleTowerChallengeState)
 	call OpenSRAM
 	ld a, BATTLETOWER_RECEIVED_REWARD
 	ld [sBattleTowerChallengeState], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 BattleTower_SaveOptions:
 	farjp SaveOptions
@@ -339,8 +335,7 @@ BattleTower_RandomlyChooseReward:
 	call OpenSRAM
 	pop af
 	ld [sBattleTowerReward], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 BattleTowerAction_CheckExplanationRead:
 	call BattleTower_CheckSaveFileExistsAndIsYours
@@ -353,8 +348,7 @@ BattleTowerAction_CheckExplanationRead:
 	ld a, [sBattleTowerSaveFileFlags]
 	and 2
 	ld [wScriptVar], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 BattleTowerAction_GetChallengeState:
 	ld hl, sBattleTowerChallengeState
@@ -362,8 +356,7 @@ BattleTowerAction_GetChallengeState:
 	call OpenSRAM
 	ld a, [hl]
 	ld [wScriptVar], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 BattleTowerAction_SetExplanationRead:
 	ld a, BANK(sBattleTowerSaveFileFlags)
@@ -371,8 +364,7 @@ BattleTowerAction_SetExplanationRead:
 	ld a, [sBattleTowerSaveFileFlags]
 	or 2
 	ld [sBattleTowerSaveFileFlags], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 BattleTowerAction_SetByteToQuickSaveChallenge:
 	ld c, BATTLETOWER_SAVED_AND_LEFT
@@ -385,8 +377,7 @@ SetBattleTowerChallengeState:
 	call OpenSRAM
 	ld a, c
 	ld [sBattleTowerChallengeState], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 SaveBattleTowerLevelGroup:
 	ld a, BANK(sBTChoiceOfLevelGroup)
@@ -399,8 +390,7 @@ SaveBattleTowerLevelGroup:
 	ld [sBTChoiceOfLevelGroup], a
 	pop af
 	ldh [rSVBK], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 LoadBattleTowerLevelGroup: ; Load level group choice
 	ld a, BANK(sBTChoiceOfLevelGroup)
@@ -413,8 +403,7 @@ LoadBattleTowerLevelGroup: ; Load level group choice
 	ld [wBTChoiceOfLvlGroup], a
 	pop af
 	ldh [rSVBK], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 BattleTower_CheckSaveFileExistsAndIsYours:
 	ld a, [wSaveFileExists]
@@ -435,16 +424,14 @@ BattleTower_CheckSaveFileExistsAndIsYours:
 BattleTowerAction_0A:
 	xor a
 	ld [wMusicFade], a
-	call MaxVolume
-	ret
+	jmp MaxVolume
 
 BattleTowerAction_GSBall:
 	ld a, BANK(sGSBallFlag)
 	call OpenSRAM
 	ld a, [sGSBallFlag]
 	ld [wScriptVar], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 BattleTowerAction_EggTicket:
 	xor a ; FALSE
@@ -538,8 +525,7 @@ BattleTowerAction_14:
 	ld a, [sBattleTowerSaveFileFlags]
 	and 1
 	ld [wScriptVar], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 BattleTowerAction_15:
 	ld a, BANK(sBattleTowerSaveFileFlags)
@@ -547,8 +533,7 @@ BattleTowerAction_15:
 	ld a, [sBattleTowerSaveFileFlags]
 	or 1
 	ld [sBattleTowerSaveFileFlags], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM
 
 LoadOpponentTrainerAndPokemonWithOTSprite:
 	farcall LoadOpponentTrainerAndPokemon

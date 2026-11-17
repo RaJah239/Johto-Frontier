@@ -546,10 +546,9 @@ Rods_check_any_remaining:
 .check_rods
 	; hl was already set properly to beginning of Fish group when this func is called
 	dec hl ; Dex_Check_Fishing assumed you havent already accounted for Fishing Group's bite rate bit
-	call Dex_Check_Fishing ; 0 means found
+	jmp Dex_Check_Fishing ; 0 means found
 	; and a
 	; jr z, .found
-	ret
 .found
 	xor a
 	ret

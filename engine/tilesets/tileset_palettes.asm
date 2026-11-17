@@ -66,8 +66,7 @@ LoadBattleTowerInsidePalette:
 	ld de, wBGPals1
 	ld hl, BattleTowerInsidePalette
 	ld bc, 8 palettes
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 BattleTowerInsidePalette:
 INCLUDE "gfx/tilesets/battle_tower_inside.pal"
@@ -77,8 +76,7 @@ LoadIcePathPalette:
 	ld de, wBGPals1
 	ld hl, IcePathPalette
 	ld bc, 8 palettes
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 IcePathPalette:
 INCLUDE "gfx/tilesets/ice_path.pal"
@@ -88,8 +86,7 @@ LoadHousePalette:
 	ld de, wBGPals1
 	ld hl, HousePalette
 	ld bc, 8 palettes
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 HousePalette:
 INCLUDE "gfx/tilesets/house.pal"
@@ -99,8 +96,7 @@ LoadRadioTowerPalette:
 	ld de, wBGPals1
 	ld hl, RadioTowerPalette
 	ld bc, 8 palettes
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 RadioTowerPalette:
 INCLUDE "gfx/tilesets/radio_tower.pal"

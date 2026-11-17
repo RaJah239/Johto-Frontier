@@ -159,8 +159,7 @@ GetTreeMon:
 	ld a, [hli]
 	cp -1
 	jr nz, .skip
-	call SelectTreeMon
-	ret
+	jmp SelectTreeMon
 
 GetRockMons:
  ; Return the address of TreeMon table a in hl.

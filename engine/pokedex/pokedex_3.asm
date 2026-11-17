@@ -1,15 +1,13 @@
 LoadSGBPokedexGFX:
 	ld hl, SGBPokedexGFX_LZ
 	ld de, vTiles2 tile $31
-	call Decompress
-	ret
+	jmp Decompress
 
 LoadSGBPokedexGFX2:
 	ld hl, SGBPokedexGFX_LZ
 	ld de, vTiles2 tile $31
 	lb bc, BANK(SGBPokedexGFX_LZ), 58
-	call DecompressRequest2bpp
-	ret
+	jmp DecompressRequest2bpp
 
 SGBPokedexGFX_LZ:
 INCBIN "gfx/pokedex/pokedex_sgb.2bpp.lzp"
@@ -17,8 +15,7 @@ INCBIN "gfx/pokedex/pokedex_sgb.2bpp.lzp"
 LoadQuestionMarkPic:
 	ld hl, .QuestionMarkLZ
 	ld de, sScratch
-	call Decompress
-	ret
+	jmp Decompress
 
 .QuestionMarkLZ:
 INCBIN "gfx/pokedex/question_mark.2bpp.lzp"
@@ -116,8 +113,7 @@ DrawPokedexSearchResultsWindow:
 	call PlaceString
 	ld de, .FoundSuffix
 	hlcoord 0, 16
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .ResultsSuffix
 	db "esults@"

@@ -23,12 +23,10 @@ TradebackKid::
 	; yes we did trade so take a Silver Leaf
 	ld de, EVENT_COMPLETED_TRADE_WITH_TRADE_BACK_KID
 	ld b, SET_FLAG
-	call EventFlagAction
-	ret
+	jmp EventFlagAction
 
 .done
-	call PrintText
-	ret
+	jmp PrintText
 
 ; Loads the appropriate data to perform the trade animation.
 TradeWithTradebackKid:

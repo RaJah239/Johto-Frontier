@@ -47,8 +47,7 @@ CelebiShrineEvent:
 .done
 	pop af
 	ld [wStateFlags], a
-	call CelebiEvent_SetBattleType
-	ret
+	jmp CelebiEvent_SetBattleType
 
 LoadCelebiGFX:
 	farcall ClearSpriteAnims
@@ -182,8 +181,7 @@ UpdateCelebiPosition:
 	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
 	add hl, bc
 	ld a, SPRITE_ANIM_FRAMESET_CELEBI_LEFT
-	call ReinitSpriteAnimFrame
-	ret
+	jmp ReinitSpriteAnimFrame
 
 CelebiEvent_Cosine:
 ; a = d * cos(a * pi/32)

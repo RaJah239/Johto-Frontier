@@ -1153,13 +1153,11 @@ INCBIN "gfx/naming_screen/mail.2bpp"
 	ld [hl], a
 	jr nz, .switch_to_lowercase
 	ld de, MailEntry_Uppercase
-	call .PlaceMailCharset
-	ret
+	jmp .PlaceMailCharset
 
 .switch_to_lowercase
 	ld de, MailEntry_Lowercase
-	call .PlaceMailCharset
-	ret
+	jmp .PlaceMailCharset
 
 ; called from engine/sprite_anims/functions.asm
 

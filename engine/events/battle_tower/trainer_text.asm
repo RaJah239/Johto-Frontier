@@ -81,8 +81,7 @@ endc
 	bccoord 1, 14
 	pop af
 	ldh [rSVBK], a
-	call PrintTextboxTextAt
-	ret
+	jmp PrintTextboxTextAt
 
 INCLUDE "data/trainers/genders.asm"
 

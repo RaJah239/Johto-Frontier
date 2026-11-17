@@ -59,8 +59,7 @@ Pokedex_DetailedArea_Trees:
 .donedone
 	ld a, [wPokedexEntryType] ; rocksmash
 	inc a
-	call DexEntry_NextCategory	
-	ret
+	jmp DexEntry_NextCategory	
 .print_tree
 	call Print_Trees_Rocksmash ; map info in de, encounter % in wPokedexEvoStage3
 	call inc_trees_rocksmash_map_index
@@ -77,8 +76,7 @@ Pokedex_DetailedArea_Trees:
 	call AnyRemaining_trees
 	and a
 	jr nz, .donedone
-	call DexEntry_IncPageNum
-	ret
+	jmp DexEntry_IncPageNum
 
 ; these two are called in pokedex_area_page.asm
 Dex_Check_Trees_firstcommon:
@@ -219,8 +217,7 @@ Print_Trees_Rocksmash:
 	ld c, a		
 	call DexEntry_adjusthlcoord ; current print line needs to be in c
 	lb bc, 1, 3
-	call PrintNum
-	ret
+	jmp PrintNum
 
 Print_TreeTitle:
 	ld a, [wPokedexEntryType]
@@ -232,8 +229,7 @@ Print_TreeTitle:
 	ld de, .headbutt_tree_common_text
 .print	
 	ld hl, .trees_text
-	call Print_Category_text
-	ret
+	jmp Print_Category_text
 .headbutt_tree_common_text:
 	db "COMMON     @"
 .headbutt_tree_rare_text:
@@ -334,8 +330,7 @@ Pokedex_DetailedArea_rocksmash:
 .donedone
 	ld a, [wPokedexEntryType] ; rocksmash
 	inc a
-	call DexEntry_NextCategory	
-	ret
+	jmp DexEntry_NextCategory	
 .print_rocksmash
 	call Print_Trees_Rocksmash ; map info in de, encounter % in wPokedexEvoStage3
 	call inc_trees_rocksmash_map_index
@@ -353,8 +348,7 @@ Pokedex_DetailedArea_rocksmash:
 	call AnyRemaining_RockSmash
 	and a
 	jr nz, .donedone
-	call DexEntry_IncPageNum
-	ret
+	jmp DexEntry_IncPageNum
 .rocksmash_text1:
  	db "ROCK      @"
  .rocksmash_text2:	

@@ -703,8 +703,7 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	call BattleStart_CopyTilemapAtOnce
 
 .nextscene
-	call StartTrainerBattle_NextScene
-	ret
+	jmp StartTrainerBattle_NextScene
 
 ; todo: verify the following (dyn pal)
 .copypals

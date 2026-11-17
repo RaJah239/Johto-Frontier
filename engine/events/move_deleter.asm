@@ -54,8 +54,7 @@ MoveDeletion:
 
 .declined
 	ld hl, .DeleterNoComeAgainText
-	call PrintText
-	ret
+	jmp PrintText
 
 .onlyonemove
 	ld hl, .MoveKnowsOneText

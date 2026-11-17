@@ -1,7 +1,6 @@
 _Diploma:
 	call PlaceDiplomaOnScreen
-	call WaitPressAorB_BlinkCursor
-	ret
+	jmp WaitPressAorB_BlinkCursor
 
 PlaceDiplomaOnScreen:
 	call ClearBGPalettes
@@ -32,8 +31,7 @@ PlaceDiplomaOnScreen:
 	ld b, SCGB_DIPLOMA
 	call GetSGBLayout
 	call SetDefaultBGPAndOBP
-	call DelayFrame
-	ret
+	jmp DelayFrame
 
 .Player:
 	db "PLAYER@"

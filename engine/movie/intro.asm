@@ -161,8 +161,7 @@ IntroScene2:
 .nosound
 	ld [wIntroSceneTimer], a
 	xor a
-	call CrystalIntro_UnownFade
-	ret
+	jmp CrystalIntro_UnownFade
 .endscene
 	jmp NextIntroScene
 

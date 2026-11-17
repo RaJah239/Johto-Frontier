@@ -343,8 +343,7 @@ IF DEF(EVOLVE_HELD)
 
 	ld de, .cont_page_text
 	hlcoord 12, 16
-	call PlaceTileString
-	ret
+	jmp PlaceTileString
 .stage1_text:
 	db $6b, $6c, $6d, "1@"
 .stage2_text:
@@ -363,8 +362,7 @@ IF DEF(EVOLVE_HELD)
 
 	ld de, .cont_page_text
 	hlcoord 12, 16
-	call PlaceTileString
-	ret
+	jmp PlaceTileString
 
 EVO_sethlcoord:
 	push af
@@ -416,8 +414,7 @@ EVO_level:
 	inc hl
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
 	call PrintNum ; lvl evolved at
-	call EVO_inchlcoord	
-	ret
+	jmp EVO_inchlcoord	
 
 EVO_item:
 	ld a, BANK("Evolutions and Attacks")
@@ -433,8 +430,7 @@ EVO_item:
 
 	call EVO_inchlcoord
 	call PlaceString
-	call EVO_inchlcoord
-	ret
+	jmp EVO_inchlcoord
 .item_text:
 	db "Item@"
 
@@ -463,8 +459,7 @@ EVO_trade:
 	call EVO_inchlcoord
 	call PlaceString
 .done
-	call EVO_inchlcoord
-	ret
+	jmp EVO_inchlcoord
 .trade_text:
 	db "Trade@"
 .hold_text:
@@ -486,8 +481,7 @@ EVO_happiness:
 .done
 	call EVO_inchlcoord
 	call PlaceString
-	call EVO_inchlcoord
-	ret
+	jmp EVO_inchlcoord
 .happiness_text:
 	db $6e, "@"; "Happiness@"
 .anytime_text:
@@ -533,8 +527,7 @@ EVO_stats:
 .done
 	call EVO_inchlcoord
 	call PlaceString
-	call EVO_inchlcoord
-	ret
+	jmp EVO_inchlcoord
 
 .atk_eq_def_text:
 	db "Atk = Def@"
@@ -559,8 +552,7 @@ IF DEF(EVOLVE_HELD)
  	call EVO_inchlcoord
  	call PlaceString
  .done
- 	call EVO_inchlcoord
- 	ret
+ 	jmp EVO_inchlcoord
  .hold_text:
  	db "Hold@"
  ENDC
@@ -595,8 +587,7 @@ IF DEF(EVOLVE_HELD)
  	call EVO_inchlcoord
  	call PlaceString	
  .done
- 	call EVO_inchlcoord
- 	ret
+ 	jmp EVO_inchlcoord
  .hold_text:
  	db "<DEX_LV_VRAM1>   + Hold@"
  ENDC
@@ -1048,8 +1039,7 @@ EVO_set_multi_page_ptr:
 	add hl, bc
 	add hl, bc
 	ld a, BANK(EvosAttacksPointers)
-	call GetFarWord	
-	ret
+	jmp GetFarWord	
 
 EVO_place_CaughtIcon:
 	push hl
@@ -1159,8 +1149,7 @@ EVO_Draw_border:
 	hlcoord 19, 17
 	ld [hl], $40
 
-	call WaitBGMap
-	ret
+	jmp WaitBGMap
 .back_page_text:
 	db $67, $68, $69, $6a, "@" ; VRAM1
  

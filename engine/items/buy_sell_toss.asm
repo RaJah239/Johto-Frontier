@@ -113,8 +113,7 @@ CalculateMaximumSellQuantity:
 SelectQuantityToToss:
 	ld hl, TossItem_MenuHeader
 	call LoadMenuHeader
-	call Toss_Sell_Loop
-	ret
+	jmp Toss_Sell_Loop
 
 SelectQuantityToBuy:
 	farcall GetItemPrice
@@ -126,8 +125,7 @@ RooftopSale_SelectQuantityToBuy:
 	call CalculateMaximumQuantity
 	ld hl, BuyItem_MenuHeader
 	call LoadMenuHeader
-	call Toss_Sell_Loop
-	ret
+	jmp Toss_Sell_Loop
 
 SelectQuantityToSell:
 	farcall GetItemPrice
@@ -138,8 +136,7 @@ SelectQuantityToSell:
 	call CalculateMaximumSellQuantity
 	ld hl, SellItem_MenuHeader
 	call LoadMenuHeader
-	call Toss_Sell_Loop
-	ret
+	jmp Toss_Sell_Loop
 
 Toss_Sell_Loop:
 	ld a, 1
@@ -256,8 +253,7 @@ BuySellToss_UpdateQuantityDisplay:
 	ld a, [wMenuDataPointer + 1]
 	ld d, a
 	ld a, [wMenuDataBank]
-	call FarCall_de
-	ret
+	jmp FarCall_de
 
 NoPriceToDisplay:
 ; Does nothing.
@@ -265,14 +261,12 @@ NoPriceToDisplay:
 
 DisplayPurchasePrice:
 	call BuySell_MultiplyPrice
-	call BuySell_DisplaySubtotal
-	ret
+	jmp BuySell_DisplaySubtotal
 
 DisplaySellingPrice:
 	call BuySell_MultiplyPrice
 	call Sell_HalvePrice
-	call BuySell_DisplaySubtotal
-	ret
+	jmp BuySell_DisplaySubtotal
 
 BuySell_MultiplyPrice:
 	xor a
@@ -330,8 +324,7 @@ BuySell_DisplaySubtotal:
 	ld de, hMoneyTemp
 	lb bc, PRINTNUM_MONEY | 3, 6
 	call PrintNum
-	call WaitBGMap
-	ret
+	jmp WaitBGMap
 
 TossItem_MenuHeader:
 	db MENU_BACKUP_TILES ; flags

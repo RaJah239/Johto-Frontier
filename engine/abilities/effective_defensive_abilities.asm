@@ -1,8 +1,7 @@
 EffectiveDefensiveAbilities:
 	call HandleTintedLens
 	call HandleSolidRock
-	call HandleFurCoat
-	ret
+	jmp HandleFurCoat
 
 HandleTintedLens:
 	call GetCurrentMon
@@ -33,8 +32,7 @@ HandleSolidRock:
 	cp SUPER_EFFECTIVE
 	ret nz
 	showdefensiveability SolidRockText
-	call Half_Damage
-	ret
+	jmp Half_Damage
 .nerf_damage
 	showdefensiveability SolidRockText
 	call Half_Damage

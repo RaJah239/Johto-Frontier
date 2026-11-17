@@ -182,8 +182,7 @@ ClearVRAM::
 	ld hl, STARTOF(VRAM)
 	ld bc, SIZEOF(VRAM)
 	xor a
-	call ByteFill
-	ret
+	jmp ByteFill
 
 ClearWRAM::
 ; Wipe swappable WRAM banks (1-7)

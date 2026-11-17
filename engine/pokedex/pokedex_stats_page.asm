@@ -108,8 +108,7 @@ Pokedex_GBS_Stats:
 	hlcoord 15, 11
 	ld de, wBaseSpecialDefense
 	lb bc, 1, 3 ; 1 byte, 3 digits
-	call PrintNum
-	ret
+	jmp PrintNum
 
 .String_abbrv_BS_text1:
 	db "  HP      SPE     @"
@@ -238,8 +237,7 @@ ELSE ; using EVs
  ENDC
 	lb bc, PRINTNUM_LEFTALIGN | 1, 3
 	ld de, wBaseCatchRate
-	call PrintNum
-	ret
+	jmp PrintNum
 ;Catch Rate
 .BS_Catchrate:
 	db "Catch Rate: @"
@@ -259,8 +257,7 @@ IF DEF(MON_STAT_EXP) ; vanilla
  ENDC
 	ld de, wBaseExp
 	lb bc, 1, 3 ; 1 byte, 3 possible digits
-	call PrintNum
-	ret
+	jmp PrintNum
 .Exp_text:
 	db "EXP Yield:@"
 
@@ -293,8 +290,7 @@ IF DEF(MON_STAT_EXP) ; vanilla
 ELSE ; using EVs
  	hlcoord 2, 11
  ENDC	
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .growth_Medfast:
 	db "Med. Fast Growth@"
@@ -471,8 +467,7 @@ Pokedex_Get_GenderRatio::
 	ld de, DexEntry_NONE_text
 .GR_print
 	hlcoord 4, 15
-	call PlaceString
-	ret
+	jmp PlaceString
 
 .GR_Text
 	db "Gender Ratio: @"
@@ -497,8 +492,7 @@ Pokedex_PrintHatchSteps:
 	hlcoord 13, 9
 	ld de, wBaseEggSteps
 	lb bc, 1, 3 ; 1 byte, 3 digits
-	call PrintNum
-	ret
+	jmp PrintNum
 .HatchSteps_text:
 	db "Egg Cycles:@"
 

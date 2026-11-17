@@ -316,8 +316,7 @@ InitPokegearTilemap:
 	hlcoord 19, 2
 	ld [hl], $17
 	ld a, [wPokegearMapCursorLandmark]
-	call PokegearMap_UpdateLandmarkName
-	ret
+	jmp PokegearMap_UpdateLandmarkName
 
 .Radio:
 	ld de, RadioTilemapRLE
@@ -1886,8 +1885,7 @@ RadioMusicRestartDE:
 	pop de
 	ld a, e
 	ld [wMapMusic], a
-	call PlayMusic
-	ret
+	jmp PlayMusic
 
 RadioMusicRestartPokemonChannel:
 	push de
@@ -2106,8 +2104,7 @@ PlayRadio:
 .stop
 	pop af
 	ld [wOptions], a
-	call ExitPokegearRadio_HandleMusic
-	ret
+	jmp ExitPokegearRadio_HandleMusic
 
 .PlayStation:
 	ld a, ENTER_MAP_MUSIC
@@ -2486,8 +2483,7 @@ Pokedex_GetArea:
 	ld a, e
 	and $10
 	jr nz, .copy_sprites
-	call ClearSprites
-	ret
+	jmp ClearSprites
 
 .copy_sprites
 	hlcoord 0, 0

@@ -116,7 +116,7 @@ Pokedex_DetailedArea:
  	hlcoord 18, 5
  	ld bc, 2
 	ld a, $4e ; category box border
-	call ByteFill
+	jmp ByteFill
 ; ; corners, lateral sides
  ; 	hlcoord 19, 5
  ; 	ld [hl], $6f
@@ -124,14 +124,12 @@ Pokedex_DetailedArea:
  ; 	ld [hl], $6e
  ; 	hlcoord 19, 7
  ; 	ld [hl], $6e	
-	ret
 .found
 	ld [wPokedexEntryType], a
 	xor a
 	ld [wPokedexStatus], a ; wildmon entry index
 	ld [wPokedexEntryPageNum], a ; page num
-	call Pokedex_DetailedArea
-	ret
+	jmp Pokedex_DetailedArea
 
 .grass
 	; hl contains the table we are looking at, JohtoGrassWildMons or SwarmGrassWildMons  	
@@ -1061,8 +1059,7 @@ Pokedex_DetailedArea_bugcontest:
 .donedone
 	ld a, [wPokedexEntryType] ; bug
 	inc a
-	call DexEntry_NextCategory
-	ret
+	jmp DexEntry_NextCategory
 .bugcontest_text:
 	db "Bug       @" ; CATCH CONTEST@"
 .contest_text:
@@ -1101,8 +1098,7 @@ BugContest_Print:
 	hlcoord 9, 14
 	call PrintNum
 	hlcoord 3, 14
-	call PrintNum
-	ret
+	jmp PrintNum
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; CONTEST END ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ROAMING ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; wRoamMon1:: roam_struct wRoamMon1
@@ -1177,8 +1173,7 @@ Pokedex_DetailedArea_roaming:
 .donedone
 	ld a, [wPokedexEntryType] ; roaming
 	inc a
-	call DexEntry_NextCategory
-	ret
+	jmp DexEntry_NextCategory
 .roaming_text:
 	db "Roaming   @"
 
@@ -1349,8 +1344,7 @@ Pokedex_DetailedArea_casino:
 .donedone
 	ld a, [wPokedexEntryType] ; casino
 	inc a
-	call DexEntry_NextCategory
-	ret
+	jmp DexEntry_NextCategory
 .casino_text:
 	db "Casino    @"
 .prize_text:
@@ -1513,8 +1507,7 @@ Pokedex_DetailedArea_npctrades:
 .donedone
 	ld a, [wPokedexEntryType] ; NPC trade
 	inc a
-	call DexEntry_NextCategory
-	ret
+	jmp DexEntry_NextCategory
 .inc_page
 	call DexArea_IncWildMonIndex
 	call DexEntry_IncPageNum
@@ -1761,8 +1754,7 @@ Pokedex_DetailedArea_eventmons:
 .donedone
 	ld a, [wPokedexEntryType] ; event mon
 	inc a
-	call DexEntry_NextCategory
-	ret
+	jmp DexEntry_NextCategory
 .inc_page
 	call DexArea_IncWildMonIndex
 	call DexEntry_IncPageNum
@@ -1784,8 +1776,7 @@ Dex_Print_EventMon_Info:
 	pop de ; blurb/hint str ptr
 	hlcoord 2 , 11
 	ld a, BANK(EventWildMons)
-	call PlaceFarString	
-	ret
+	jmp PlaceFarString	
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; EVENT WILD MONS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 Pokedex_DetailedArea_eventwildmons:

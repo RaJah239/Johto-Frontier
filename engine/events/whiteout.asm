@@ -62,8 +62,7 @@ OverworldBGMap:
 BattleBGMap:
 	ld b, SCGB_BATTLE_GRAYSCALE
 	call GetSGBLayout
-	call SetDefaultBGPAndOBP
-	ret
+	jmp SetDefaultBGPAndOBP
 
 LoseWhiteOutMoney:
 	; check if nomad sigil is turned on

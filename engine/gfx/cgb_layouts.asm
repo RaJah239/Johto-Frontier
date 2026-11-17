@@ -240,24 +240,21 @@ _CGB_FinishBattleScreenLayout:
 	ld bc, 6 palettes
 	ld a, BANK(wOBPals2)
 	call FarCopyWRAM
-	call ApplyAttrmap
-	ret
+	jmp ApplyAttrmap
 
 InitPartyMenuBGPal7:
 	ld hl, PartyMenuBGPalette
 	ld de, wBGPals1 palette 7
 	ld bc, 1 palettes
 	ld a, BANK(wBGPals1)
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 InitPartyMenuBGPal0:
 	ld hl, PartyMenuBGPalette
 	ld de, wBGPals1 palette 0
 	ld bc, 1 palettes
 	ld a, BANK(wBGPals1)
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 _CGB_PokegearPals:
 	ld a, [wPlayerGender]
@@ -947,8 +944,7 @@ _CGB_Diploma:
 	ld hl, PalPacket_Diploma + 1
 	call CopyFourPalettes
 	call WipeAttrmap
-	call ApplyAttrmap
-	ret
+	jmp ApplyAttrmap
 
 _CGB_MapPals:
 	call LoadMapPals
@@ -1025,8 +1021,7 @@ _CGB_UnownPuzzle:
 	pop af
 	ldh [rSVBK], a
 	call WipeAttrmap
-	call ApplyAttrmap
-	ret
+	jmp ApplyAttrmap
 
 _CGB_TrainerCard:
 	ld de, wBGPals1
@@ -1274,8 +1269,7 @@ _CGB_Pokepic:
 	ld c, a
 	ld a, PAL_BG_GRAY
 	call FillBoxCGB
-	call ApplyAttrmap
-	ret
+	jmp ApplyAttrmap
 
 _CGB_MagnetTrain: ; unused
 	ret
@@ -1290,8 +1284,7 @@ _CGB_GamefreakLogo:
 	call LoadHLPaletteIntoDE
 	ld hl, .GamefreakDittoPalette
 	ld de, wOBPals1 palette 1
-	call LoadHLPaletteIntoDE
-	ret
+	jmp LoadHLPaletteIntoDE
 
 .GamefreakDittoPalette:
 INCLUDE "gfx/splash/ditto.pal"
@@ -1304,8 +1297,7 @@ _CGB_PlayerOrMonFrontpicPals:
 	call LoadPalette_White_Col1_Col2_Black
 	call WipeAttrmap
 	call ApplyAttrmap
-	call ApplyPals
-	ret
+	jmp ApplyPals
 
 _CGB_TradeTube:
 	ld hl, PalPacket_TradeTube + 1
@@ -1319,8 +1311,7 @@ _CGB_TradeTube:
 	ld a, PREDEFPAL_TRADE_TUBE
 	call GetPredefPal
 	call LoadHLPaletteIntoDE
-	call WipeAttrmap
-	ret
+	jmp WipeAttrmap
 
 _CGB_TrainerOrMonFrontpicPals:
 	ld de, wBGPals1
@@ -1330,8 +1321,7 @@ _CGB_TrainerOrMonFrontpicPals:
 	call LoadPalette_White_Col1_Col2_Black
 	call WipeAttrmap
 	call ApplyAttrmap
-	call ApplyPals
-	ret
+	jmp ApplyPals
 
 _CGB_Plain:
 	ld b, 8

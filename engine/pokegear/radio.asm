@@ -684,8 +684,7 @@ CopyDexEntry:
 	call CopyRadioTextToRAM
 	pop hl
 	pop af
-	call CopyDexEntryPart2
-	ret
+	jmp CopyDexEntryPart2
 
 CopyDexEntryPart1:
 	ld de, wPokedexShowPointerBank
@@ -962,18 +961,15 @@ GetBuenasPassword:
 
 .Mon:
 	call .GetTheIndex
-	call GetPokemonName
-	ret
+	jmp GetPokemonName
 
 .Item:
 	call .GetTheIndex
-	call GetItemName
-	ret
+	jmp GetItemName
 
 .Move:
 	call .GetTheIndex
-	call GetMoveName
-	ret
+	jmp GetMoveName
 
 .GetTheIndex:
 	ld h, 0

@@ -442,8 +442,7 @@ PrintMoveRelearnerText:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call PrintText
-	ret
+	jmp PrintText
 .TextPointers
 	dw .Intro
 	dw .WhichMon

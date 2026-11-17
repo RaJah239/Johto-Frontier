@@ -872,8 +872,7 @@ DebugColor_BackupSpriteColors:
 	ld d, h
 	ld hl, wDebugMiddleColors
 	ld bc, 4
-	call CopyBytes
-	ret
+	jmp CopyBytes
 
 DebugColor_LoadPalettes_White_Col1_Col2_Black:
 .loop

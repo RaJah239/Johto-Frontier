@@ -151,8 +151,7 @@ BugContest_JudgeContestants:
 	ld [hli], a
 	ldh a, [hProduct + 1]
 	ld [hl], a
-	call DetermineContestWinners
-	ret
+	jmp DetermineContestWinners
 
 ClearContestResults:
 	ld hl, wBugContestResults

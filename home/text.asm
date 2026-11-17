@@ -159,8 +159,7 @@ BuenaPrintText::
 
 PrintTextboxText::
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	call PrintTextboxTextAt
-	ret
+	jmp PrintTextboxTextAt
 
 SetUpTextbox::
 	push hl
@@ -660,8 +659,7 @@ TextScroll::
 	ld bc, TEXTBOX_INNERW
 	call ByteFill
 	ld c, 5
-	call DelayFrames
-	ret
+	jmp DelayFrames
 
 Text_WaitBGMap::
 	push bc

@@ -90,8 +90,7 @@ EggMaster:
     call PlaySFX
     call WaitSFX
     ld hl, EggReminderPaymentReceivedText
-    call PrintText
-    ret
+    jmp PrintText
 
     call CalculateCostAgainstPlayerMoney
     jr c, .not_enough_money

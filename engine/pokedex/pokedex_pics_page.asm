@@ -11,8 +11,7 @@ Pokedex_PlaceAnimatedFrontpic:
 	ld bc, wTempSpecies
 	call SetDefaultBGPAndOBP
 	call .AnimateMon
-	call SetDefaultBGPAndOBP
-	ret
+	jmp SetDefaultBGPAndOBP
 
 .AnimateMon:
 	ld hl, wStatsScreenFlags
@@ -81,8 +80,7 @@ Pokedex_PlayMonCry_AnimateFrontpic:
 	xor a
 	ld [wPokedexEntryType], a
 
-	call WaitBGMap
-	ret
+	jmp WaitBGMap
 
 .PokedexWaitCry:
 	ld a, [wPokedexEntryType]
@@ -291,8 +289,7 @@ ELSE
 	hlcoord 0, 12
 	ld bc, SCREEN_WIDTH
 	ld a, $34
-	call ByteFill
-	ret
+	jmp ByteFill
 
 IF USING_INCREASED_SPRITE_ANIMATION == TRUE
  cry_text:

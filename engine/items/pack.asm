@@ -89,8 +89,7 @@ Pack:
 	lb bc, PACKSTATE_INITBATTLEPOCKET, PACKSTATE_INITFRUITPOCKET ; left then right
 	call Pack_InterpretJoypad
 	ret c
-	call .ItemBallsKey_LoadSubmenu
-	ret
+	jmp .ItemBallsKey_LoadSubmenu
 
 .InitKeyItemsPocket:
 	ld a, KEY_ITEM_POCKET

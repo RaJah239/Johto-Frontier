@@ -110,8 +110,7 @@ CheckWarpTile::
 WarpCheck::
 	call GetDestinationWarpNumber
 	ret nc
-	call CopyWarpData
-	ret
+	jmp CopyWarpData
 
 GetDestinationWarpNumber::
 	farcall CheckWarpCollision
@@ -248,24 +247,21 @@ LoadMapAttributes::
 	call SwitchToMapScriptsBank
 	call ReadMapScripts
 	xor a ; do not skip object events
-	call ReadMapEvents
-	ret
+	jmp ReadMapEvents
 
 LoadMapAttributes_SkipObjects::
 	call CopyMapPartialAndAttributes
 	call SwitchToMapScriptsBank
 	call ReadMapScripts
 	ld a, TRUE ; skip object events
-	call ReadMapEvents
-	ret
+	jmp ReadMapEvents
 
 CopyMapPartialAndAttributes::
 	call CopyMapPartial
 	call SwitchToMapAttributesBank
 	call GetMapAttributesPointer
 	call CopyMapAttributes
-	call GetMapConnections
-	ret
+	jmp GetMapConnections
 
 ReadMapEvents::
 	push af
@@ -281,8 +277,7 @@ ReadMapEvents::
 	and a ; skip object events?
 	ret nz
 
-	call ReadObjectEvents
-	ret
+	jmp ReadObjectEvents
 
 ReadMapScripts::
 	ld hl, wMapScriptsPointer
@@ -290,8 +285,7 @@ ReadMapScripts::
 	ld h, [hl]
 	ld l, a
 	call ReadMapSceneScripts
-	call ReadMapCallbacks
-	ret
+	jmp ReadMapCallbacks
 
 CopyMapAttributes::
 	ld de, wMapAttributes
@@ -364,8 +358,7 @@ ReadMapSceneScripts::
 	ret z
 
 	ld bc, SCENE_SCRIPT_SIZE
-	call AddNTimes
-	ret
+	jmp AddNTimes
 
 ReadMapCallbacks::
 	ld a, [hli]
@@ -380,8 +373,7 @@ ReadMapCallbacks::
 	ret z
 
 	ld bc, CALLBACK_SIZE
-	call AddNTimes
-	ret
+	jmp AddNTimes
 
 ReadWarpEvents::
 	ld a, [hli]
@@ -395,8 +387,7 @@ ReadWarpEvents::
 	and a
 	ret z
 	ld bc, WARP_EVENT_SIZE
-	call AddNTimes
-	ret
+	jmp AddNTimes
 
 ReadCoordEvents::
 	ld a, [hli]
@@ -412,8 +403,7 @@ ReadCoordEvents::
 	ret z
 
 	ld bc, COORD_EVENT_SIZE
-	call AddNTimes
-	ret
+	jmp AddNTimes
 
 ReadBGEvents::
 	ld a, [hli]
@@ -429,8 +419,7 @@ ReadBGEvents::
 	ret z
 
 	ld bc, BG_EVENT_SIZE
-	call AddNTimes
-	ret
+	jmp AddNTimes
 
 ReadObjectEvents::
 	push hl
@@ -580,8 +569,7 @@ LoadBlockData::
 	call ChangeMap
 	call FillMapConnections
 	ld a, MAPCALLBACK_TILES
-	call RunMapCallback
-	ret
+	jmp RunMapCallback
 
 ChangeMap::
 ; Decompress the map's blocks (wMapBlocksBank:wMapBlocksPointer) into
@@ -1364,8 +1352,7 @@ GetMovementPermissions::
 	dec e
 	call GetCoordTileCollision
 	ld [wTileUp], a
-	call .Up
-	ret
+	jmp .Up
 
 .LeftRight:
 	ld a, [wPlayerMapX]
@@ -1383,8 +1370,7 @@ GetMovementPermissions::
 	inc d
 	call GetCoordTileCollision
 	ld [wTileRight], a
-	call .Right
-	ret
+	jmp .Right
 
 .Down:
 	call .CheckHiNybble
@@ -1536,8 +1522,7 @@ GetCoordTileCollision::
 
 .nocarry2
 	ld a, [wTilesetCollisionBank]
-	call GetFarByte
-	ret
+	jmp GetFarByte
 
 .nope
 	ld a, -1
@@ -1715,8 +1700,7 @@ FadeToMenu::
 	call LoadStandardMenuHeader
 	farcall FadeOutPalettes
 	call ClearSprites
-	call DisableSpriteUpdates
-	ret
+	jmp DisableSpriteUpdates
 
 CloseSubmenu::
 	farcall ClearSavedObjPals
@@ -1807,8 +1791,7 @@ ReloadTilesetAndPalettes::
 	pop af
 	rst Bankswitch
 
-	call EnableLCD
-	ret
+	jmp EnableLCD
 
 GetMapPointer::
 	ld a, [wMapGroup]
@@ -1843,8 +1826,7 @@ GetAnyMapPointer::
 	dec c
 	ld b, 0
 	ld a, MAP_LENGTH
-	call AddNTimes
-	ret
+	jmp AddNTimes
 
 GetMapField::
 ; Extract data from the current map's group entry.

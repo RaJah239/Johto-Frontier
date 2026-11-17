@@ -97,8 +97,7 @@ InitPartyMenuPalettes:
 	ld hl, PalPacket_PartyMenu + 1
 	call CopyFourPalettes
 	call InitPartyMenuOBPals
-	call WipeAttrmap
-	ret
+	jmp WipeAttrmap
 
 ; SGB layout for SCGB_PARTY_MENU_HP_BARS
 SGB_ApplyPartyMenuHPPals:
@@ -153,8 +152,7 @@ LoadNthMiddleBGPal:
 	ld e, l
 	ld d, h
 	pop hl
-	call LoadPalette_White_Col1_Col2_Black
-	ret
+	jmp LoadPalette_White_Col1_Col2_Black
 
 ApplyMonOrTrainerPals:
 	call CheckCGB
@@ -175,8 +173,7 @@ ApplyMonOrTrainerPals:
 	call LoadPalette_White_Col1_Col2_Black
 	call WipeAttrmap
 	call ApplyAttrmap
-	call ApplyPals
-	ret
+	jmp ApplyPals
 
 ApplyHPBarPals:
 	ld a, [wWhichHPBar]
@@ -225,8 +222,7 @@ ApplyHPBarPals:
 .done
 	lb bc, 2, 8
 	ld a, e
-	call FillBoxCGB
-	ret
+	jmp FillBoxCGB
 
 LoadStatsScreenPals:
 	call CheckCGB
@@ -280,8 +276,7 @@ LoadMailPalettes:
 	ld hl, wSGBPals
 	call PushSGBPals
 	ld hl, BlkPacket_AllPal0
-	call PushSGBPals
-	ret
+	jmp PushSGBPals
 
 .cgb
 	ld de, wBGPals1
@@ -290,8 +285,7 @@ LoadMailPalettes:
 	call FarCopyWRAM
 	call ApplyPals
 	call WipeAttrmap
-	call ApplyAttrmap
-	ret
+	jmp ApplyAttrmap
 
 .MailPals:
 INCLUDE "gfx/mail/mail.pal"
@@ -430,16 +424,14 @@ WipeAttrmap:
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	xor a
-	call ByteFill
-	ret
+	jmp ByteFill
 
 ApplyPals:
 	ld hl, wBGPals1
 	ld de, wBGPals2
 	ld bc, 16 palettes
 	ld a, BANK(wGBCPalettes)
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 ApplyAttrmap:
 	ldh a, [rLCDC]
@@ -503,8 +495,7 @@ CGB_ApplyPartyMenuHPPals:
 .done
 	lb bc, 2, 8
 	ld a, e
-	call FillBoxCGB
-	ret
+	jmp FillBoxCGB
 
 LoadDexGridMonPalette::
 ; Grid Pokedex: the normal palette of species a (white, 2 colours, black) at de.
@@ -516,8 +507,7 @@ InitPartyMenuOBPals:
 	ld de, wOBPals1
 	ld bc, 8 palettes
 	ld a, BANK(wOBPals1)
-	call FarCopyWRAM
-	ret
+	jmp FarCopyWRAM
 
 SetFirstOBJPalette::
 ; input: e must contain the offset of the selected palette from PartyMenuOBPals
@@ -596,8 +586,7 @@ GetTrainerPalettePointer:
 	ret
 
 GetMonPalettePointer:
-	call _GetMonPalettePointer
-	ret
+	jmp _GetMonPalettePointer
 
 BattleObjectPals:
 INCLUDE "gfx/battle_anims/battle_anims.pal"
@@ -844,8 +833,7 @@ PushSGBBorder:
 	push de
 	call SGBBorder_YetMorePalPushing
 	pop hl
-	call SGBBorder_MorePalPushing
-	ret
+	jmp SGBBorder_MorePalPushing
 
 .LoadSGBBorderPointers:
 	ld hl, SGBBorderGFX
@@ -856,8 +844,7 @@ SGB_ClearVRAM:
 	ld hl, STARTOF(VRAM)
 	ld bc, SIZEOF(VRAM)
 	xor a
-	call ByteFill
-	ret
+	jmp ByteFill
 
 PushSGBBorderPalsAndWait:
 	ld hl, MltReq2Packet

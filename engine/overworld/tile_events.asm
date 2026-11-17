@@ -38,8 +38,7 @@ CheckWarpFacingDown:
 	ld de, 1
 	ld hl, .blocks
 	ld a, [wPlayerTileCollision]
-	call IsInArray
-	ret
+	jmp IsInArray
 
 .blocks
 	db COLL_DOOR

@@ -2,8 +2,7 @@ FieldMoveJumptableReset:
 	xor a
 	ld hl, wFieldMoveData
 	ld bc, wFieldMoveDataEnd - wFieldMoveData
-	call ByteFill
-	ret
+	jmp ByteFill
 
 FieldMoveJumptable:
 	ld a, [wFieldMoveJumptableIndex]
@@ -30,8 +29,7 @@ GetPartyNickname:
 ; copy text from wStringBuffer2 to wStringBuffer3
 	ld de, wStringBuffer2
 	ld hl, wStringBuffer3
-	call CopyName2
-	ret
+	jmp CopyName2
 
 CheckEngineFlag:
 ; Check engine flag de
@@ -211,8 +209,7 @@ FieldMovePokepicScript:
 
 FieldMoveFailed:
 	ld hl, .CantUseItemText
-	call MenuTextboxBackup
-	ret
+	jmp MenuTextboxBackup
 
 .CantUseItemText:
 	text_far _CantUseItemText
@@ -335,8 +332,7 @@ CutDownTreeOrGrass:
 	call GetMovementPermissions
 	call UpdateSprites
 	call DelayFrame
-	call LoadStandardFont
-	ret
+	jmp LoadStandardFont
 
 CheckOverworldTileArrays:
 	; Input: c contains the tile you're facing
@@ -1163,8 +1159,7 @@ PrepareOverworldMove:
 	add hl, de
 	ld a, [hl]
 	ld [wOverworldMoveSpecies], a
-	call GetPartyNickname
-	ret
+	jmp GetPartyNickname
 
 Script_StrengthFromMenu:
 	refreshmap
@@ -1872,8 +1867,7 @@ PutTheRodAway:
 	ld a, $1
 	ld [wPlayerAction], a
 	call UpdateSprites
-	call UpdatePlayerSprite
-	ret
+	jmp UpdatePlayerSprite
 
 RodBiteText:
 	text_far _RodBiteText

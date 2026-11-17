@@ -3,5 +3,4 @@ _SetTime:
 	call OpenSRAM
 	ld a, $80
 	ld [sRTCStatusFlags], a
-	call CloseSRAM
-	ret
+	jmp CloseSRAM

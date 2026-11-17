@@ -5,8 +5,7 @@ ProfOaksPC:
 	jr c, .shutdown
 	call ProfOaksPCBoot ; player chose "yes"?
 .shutdown
-	call ExitMenu
-	ret
+	jmp ExitMenu
 
 ProfOaksPCBoot:
 	ld hl, OakPCText2
@@ -14,8 +13,7 @@ ProfOaksPCBoot:
 	call Rate
 	call PlaySFX ; sfx loaded by previous Rate function call
 	call JoyWaitAorB
-	call WaitSFX
-	ret
+	jmp WaitSFX
 
 ProfOaksPCRating:
 	call Rate
@@ -25,8 +23,7 @@ ProfOaksPCRating:
 	pop de
 	call PlaySFX
 	call JoyWaitAorB
-	call WaitSFX
-	ret
+	jmp WaitSFX
 
 Rate:
 ; calculate Seen/Owned
@@ -58,8 +55,7 @@ Rate:
 	call .UpdateRatingBuffer
 	ld hl, wStringBuffer4
 	ld de, wTempPokedexCaughtCount
-	call .UpdateRatingBuffer
-	ret
+	jmp .UpdateRatingBuffer
 
 .UpdateRatingBuffer:
 	push hl
@@ -68,8 +64,7 @@ Rate:
 	call ByteFill
 	pop hl
 	lb bc, PRINTNUM_LEFTALIGN | 1, 3
-	call PrintNum
-	ret
+	jmp PrintNum
 
 FindOakRating:
 ; return sound effect in de

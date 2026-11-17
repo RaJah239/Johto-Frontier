@@ -27,8 +27,7 @@ GameCornerPrizeMonCheckDex:
 	ld a, [wScriptVar]
 	ld [wNamedObjectIndex], a
 	farcall NewPokedexEntry
-	call ExitAllMenus
-	ret
+	jmp ExitAllMenus
 
 SetMonAsSeen:
 	ld a, [wScriptVar]
@@ -65,8 +64,7 @@ NameRival:
 	farcall _NamingScreen
 	ld hl, wRivalName
 	ld de, .DefaultName
-	call InitName
-	ret
+	jmp InitName
 
 .DefaultName:
 	db "Silver@"
@@ -77,8 +75,7 @@ NameRater:
 OverworldTownMap:
 	call FadeToMenu
 	farcall _TownMap
-	call ExitAllMenus
-	ret
+	jmp ExitAllMenus
 
 UnownPrinter:
 	call FadeToMenu
@@ -88,8 +85,7 @@ UnownPrinter:
 DisplayLinkRecord:
 	call FadeToMenu
 	farcall _DisplayLinkRecord
-	call ExitAllMenus
-	ret
+	jmp ExitAllMenus
 
 PlayersHousePC:
 	xor a
@@ -115,16 +111,14 @@ UnownPuzzle:
 	farcall _UnownPuzzle
 	ld a, [wSolvedUnownPuzzle]
 	ld [wScriptVar], a
-	call ExitAllMenus
-	ret
+	jmp ExitAllMenus
 
 SlotMachine:
 	call CheckCoinsAndCoinCase
 	ret c
 	ld a, BANK(_SlotMachine)
 	ld hl, _SlotMachine
-	call StartGameCornerGame
-	ret
+	jmp StartGameCornerGame
 
 _VoltorbFlip:
 	call CheckCoinsAndCoinCase
@@ -138,8 +132,7 @@ CardFlip:
 	ret c
 	ld a, BANK(_CardFlip)
 	ld hl, _CardFlip
-	call StartGameCornerGame
-	ret
+	jmp StartGameCornerGame
 
 GetPartyCountWithoutEggs::
 	push hl
@@ -184,8 +177,7 @@ MemoryGame:
 	ret c
 	ld a, BANK(_MemoryGame)
 	ld hl, _MemoryGame
-	call StartGameCornerGame
-	ret
+	jmp StartGameCornerGame
 
 StartGameCornerGame:
 	call FarQueueScript
@@ -198,8 +190,7 @@ StartGameCornerGame:
 	ld l, a
 	pop af
 	rst FarCall
-	call ExitAllMenus
-	ret
+	jmp ExitAllMenus
 
 CheckCoinsAndCoinCase:
 	ld hl, wCoins
@@ -297,8 +288,7 @@ FadeOutMusic:
 Diploma:
 	call FadeToMenu
 	farcall _Diploma
-	call ExitAllMenus
-	ret
+	jmp ExitAllMenus
 
 PartyKeeperShowTeam:
 ; open the party menu to look over team

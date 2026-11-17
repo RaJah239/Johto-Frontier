@@ -235,8 +235,7 @@ PC_PlayBootSound:
 PC_PlayShutdownSound:
 	ld de, SFX_SHUT_DOWN_PC
 	call PC_WaitPlaySFX
-	call WaitSFX
-	ret
+	jmp WaitSFX
 
 PC_PlayChoosePCSound:
 	ld de, SFX_CHOOSE_PC_OPTION
@@ -251,8 +250,7 @@ PC_WaitPlaySFX:
 	push de
 	call WaitSFX
 	pop de
-	call PlaySFX
-	ret
+	jmp PlaySFX
 
 _PlayersHousePC:
 	call PC_PlayBootSound
@@ -278,8 +276,7 @@ _PlayersPC:
 	ld hl, PlayersPCAskWhatDoText
 	call PC_DisplayTextWaitMenu
 	call .PlayersPC
-	call ExitMenu
-	ret
+	jmp ExitMenu
 
 .PlayersPC:
 	xor a
@@ -299,8 +296,7 @@ _PlayersPC:
 	xor a
 
 .done
-	call ExitMenu
-	ret
+	jmp ExitMenu
 
 PlayersPCMenuData:
 	db MENU_BACKUP_TILES ; flags
@@ -382,8 +378,7 @@ ClearPCItemScreen:
 	lb bc, 4, 18
 	call Textbox
 	call WaitBGMap2
-	call SetDefaultBGPAndOBP ; load regular palettes?
-	ret
+	jmp SetDefaultBGPAndOBP ; load regular palettes?
 
 PlayersPCAskWhatDoText:
 	text_far _PlayersPCAskWhatDoText
@@ -442,13 +437,11 @@ PlayerWithdrawItemMenu:
 	call MenuTextbox
 	xor a
 	ldh [hBGMapMode], a
-	call ExitMenu
-	ret
+	jmp ExitMenu
 
 .PackFull:
 	ld hl, .PlayersPCNoRoomWithdrawText
-	call MenuTextboxBackup
-	ret
+	jmp MenuTextboxBackup
 
 .done
 	ret
@@ -550,8 +543,7 @@ PlayerDepositItemMenu:
 
 .CantDeposit
 	ld hl, .CantDepositText
-	call MenuTextboxBackup ; push text to queue
-	ret
+	jmp MenuTextboxBackup ; push text to queue
 
 .CantDepositText
 	text_far _CantDepositText
@@ -617,13 +609,11 @@ PlayerDepositItemMenu:
 	call TossItem
 	predef PartyMonItemName
 	ld hl, .PlayersPCDepositItemsText
-	call PrintText
-	ret
+	jmp PrintText
 
 .NoRoomInPC:
 	ld hl, .PlayersPCNoRoomDepositText
-	call PrintText
-	ret
+	jmp PrintText
 
 .DeclinedToDeposit:
 	and a
@@ -743,8 +733,7 @@ PCItemsJoypad:
 
 PC_DisplayText:
 	call MenuTextbox
-	call ExitMenu
-	ret
+	jmp ExitMenu
 
 PokecenterPCWhoseText:
 	text_far _PokecenterPCWhoseText

@@ -213,8 +213,7 @@ LoadMenuMonIcon:
 Unused_GetPartyMenuMonIcon:
 	call InitPartyMenuIcon
 	call .GetPartyMonItemGFX
-	call SetPartyMonIconAnimSpeed
-	ret
+	jmp SetPartyMonIconAnimSpeed
 
 .GetPartyMonItemGFX:
 	push bc
@@ -288,8 +287,7 @@ Mobile_InitPartyMenuBGPal71:
 
 PartyMenu_InitAnimatedMonIcon:
 	call InitPartyMenuIcon
-	call SetPartyMonIconAnimSpeed
-	ret
+	jmp SetPartyMonIconAnimSpeed
 
 SetPartyMonHeldItemFrameset:
 	push bc
@@ -485,8 +483,7 @@ Trade_LoadMonIconGFX:
 	farcall SetSecondOBJPalette
 	ld a, $62
 	ld [wCurIconTile], a
-	call GetMemIconGFX
-	ret
+	jmp GetMemIconGFX
 
 GetSpeciesIcon:
 ; Load species icon into VRAM at tile a
@@ -498,8 +495,7 @@ GetSpeciesIcon:
 	ld [wCurIcon], a
 	pop de
 	ld a, e
-	call GetIconGFX
-	ret
+	jmp GetIconGFX
 
 FlyFunction_GetMonIcon:
 	push de

@@ -121,26 +121,22 @@ UpdateOverworldMap:
 .step_down
 	call .ScrollOverworldMapDown
 	call LoadOverworldTilemap
-	call ScrollMapDown
-	ret
+	jmp ScrollMapDown
 
 .step_up
 	call .ScrollOverworldMapUp
 	call LoadOverworldTilemap
-	call ScrollMapUp
-	ret
+	jmp ScrollMapUp
 
 .step_left
 	call .ScrollOverworldMapLeft
 	call LoadOverworldTilemap
-	call ScrollMapLeft
-	ret
+	jmp ScrollMapLeft
 
 .step_right
 	call .ScrollOverworldMapRight
 	call LoadOverworldTilemap
-	call ScrollMapRight
-	ret
+	jmp ScrollMapRight
 
 .ScrollOverworldMapDown:
 	ld a, [wBGMapAnchor]

@@ -15,8 +15,7 @@ MonSubmenu:
 	call MonMenuLoop
 	ld [wMenuSelection], a
 
-	call ExitMenu
-	ret
+	jmp ExitMenu
 
 .MenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -34,8 +33,7 @@ MonSubmenu:
 	sub b
 	inc a
 	ld [wMenuBorderTopCoord], a
-	call MenuBox
-	ret
+	jmp MenuBox
 
 MonMenuLoop:
 .loop
@@ -101,8 +99,7 @@ GetMonMenuString:
 	inc hl
 	ld a, [hl]
 	ld [wNamedObjectIndex], a
-	call GetMoveName
-	ret
+	jmp GetMoveName
 
 .NotMove:
 	inc hl
@@ -162,16 +159,14 @@ GetMonSubmenuItems:
 	call AddMonMenuItem
 
 .ok2
-	call TerminateMonSubmenu
-	ret
+	jmp TerminateMonSubmenu
 
 .egg
 	ld a, MONMENUITEM_SWITCH
 	call AddMonMenuItem
 	ld a, MONMENUITEM_CANCEL
 	call AddMonMenuItem
-	call TerminateMonSubmenu
-	ret
+	jmp TerminateMonSubmenu
 
 IsFieldMove:
 	ld b, a
@@ -198,8 +193,7 @@ ResetMonSubmenu:
 	ld [wMonSubmenuCount], a
 	ld hl, wMonSubmenuItems
 	ld bc, NUM_MONMENU_ITEMS + 1
-	call ByteFill
-	ret
+	jmp ByteFill
 
 TerminateMonSubmenu:
 	ld a, [wMonSubmenuCount]
@@ -423,8 +417,7 @@ MonSubMenu_GetNextEvoAttackByte:
 	ret c ; fail
 .yes
 	ld a, MONMENUITEM_DIG
-	call AddMonMenuItem
-	ret
+	jmp AddMonMenuItem
 	
 	CanUseTeleport:
 	; Unavailable during a Grand Gauntlet run.
@@ -455,8 +448,7 @@ MonSubMenu_GetNextEvoAttackByte:
 	ret c ; fail
 .yes
 	ld a, MONMENUITEM_TELEPORT
-	call AddMonMenuItem	
-	ret
+	jmp AddMonMenuItem	
 	
 	CanUseSoftboiled:
 	ld a, SOFTBOILED
@@ -464,8 +456,7 @@ MonSubMenu_GetNextEvoAttackByte:
 	and a
 	ret nz
 	ld a, MONMENUITEM_SOFTBOILED
-	call AddMonMenuItem
-	ret
+	jmp AddMonMenuItem
 	
 	CanUseMilkDrink:
 	ld a, MILK_DRINK
@@ -474,5 +465,4 @@ MonSubMenu_GetNextEvoAttackByte:
 	ret nz
 
 	ld a, MONMENUITEM_MILK_DRINK
-	call AddMonMenuItem
-	ret
+	jmp AddMonMenuItem
