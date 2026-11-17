@@ -3578,7 +3578,11 @@ ENDU
 
 SECTION "Sound Engine Backup", WRAMX[$d800], BANK [5]
 
-wSoundEngineBackup::
+; SaveMusic/RestoreMusic copy wMusicPlaying .. wMapMusic here (the music
+; playing before a battle, resumed after it). Reserved, so the linker keeps
+; other bank 5 data out of it (see the assert in home/restore_music.asm).
+wSoundEngineBackup:: ds $1c0
+wSoundEngineBackupEnd::
 
 
 SECTION "Attributes", WRAMX
@@ -3900,6 +3904,10 @@ wMSimSavedLevels:: ds 7
 wMSimSavedSubStatus:: ds 5
 wMSimSavedDmg:: ds 9 ; AI_SimMoveChoice: wMSimEnemyDmg .. wMSimPlayerPrioDmg, wMSimFlags
 wMSimSavedGWDmg:: ds 4 ; and wMSimEnemyGWDmg, wMSimPlayerGWDmg
+
+
+SECTION "AI Matchup Save 2", WRAMX, BANK[5]
+
 ; the real field while candidates' entry abilities change it (MSim_SaveField)
 wMSimSavedField:: ds 7 + NUM_BATTLE_STATS * 2 + 13 + 4 + 1 + 1 + 1 + 2
 ; a candidate's and the player's stat stages and stats before it tries Haze /

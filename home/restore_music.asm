@@ -4,6 +4,9 @@
 
 SECTION "restore_music", ROMX
 
+ASSERT wSoundEngineBackupEnd - wSoundEngineBackup >= wMapMusic - wMusicPlaying, \
+	"wSoundEngineBackup is smaller than the sound engine state it saves"
+
 SaveMusic::
 	; back up old music state
 	push hl
