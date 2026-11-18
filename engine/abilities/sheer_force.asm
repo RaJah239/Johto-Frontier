@@ -2,10 +2,9 @@
 ; === Ability: Sheer Force ===
 ; ============================
 ; A Sheer Force mon's moves with a secondary effect (an effect chance, like
-; Bite's flinch or Flamethrower's burn) do 1.3x damage (HandleSheerForce in
+; Bite's flinch or Flamethrower's burn) do 1.3x damage (HandleSheerForceBoost in
 ; boosting_abilities.asm), and the effect never happens
-; (BattleCommand_EffectChance). Its popup shows when it's sent out
-; (HandleSheerForce in entry_abilities.asm).
+; (BattleCommand_EffectChance).
 
 SheerForceApplies::
 ; Carry if the mon whose turn it is (hBattleTurn) has Sheer Force and is
@@ -50,21 +49,5 @@ SheerForceApplies::
 	and a
 .done
 	jmp PopBCDEHL
-
-ShowSheerForcePopup::
-; Slide in Sheer Force's popup over the acting side's HUD.
-	ld b, BANK(@)
-	ldh a, [hBattleTurn]
-	ld c, a ; ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY
-	ld de, SheerForceText
-	farjp ShowAbilityPopup
-
-AttackerHasSheerForce::
-; Carry if the mon whose turn it is (hBattleTurn) has Sheer Force.
-	call GetCurrentMon
-	ld hl, SheerForcePokemon
-	jmp IsInByteArray
-
-SheerForceText: db "Sheer Force@"
 
 INCLUDE "data/abilities/sheer_force_mons.asm"

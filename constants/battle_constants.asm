@@ -106,9 +106,8 @@ DEF SPDSPCDV_SHINY EQU $FF
 	const BATTLETYPE_TRICK_ROOM
 	const BATTLETYPE_TYPELESS
 
-; ability popup (ShowAbilityPopup in engine/battle/ability_popup.asm)
-; Ability popups shown once each time a mon is sent out (each side has its
-; own flags: see ShowOncePerSendOutPopup in engine/abilities/send_out_popup.asm)
+; Ability popups and one-time ability messages shown once each time a mon is
+; sent out (each side has its own flags: see send_out_popup.asm).
 	const_def
 	const SEND_OUT_POPUP_GUTS
 	const SEND_OUT_POPUP_RIVALRY
@@ -134,13 +133,12 @@ DEF SPDSPCDV_SHINY EQU $FF
 	const SEND_OUT_POPUP_FERAL_MIND
 	const SEND_OUT_POPUP_ROCK_HEAD
 	const SEND_OUT_POPUP_OVERDRIVE
-	const SEND_OUT_POPUP_TYPE_SYNC
+	const SEND_OUT_POPUP_TYPE_SYNC ; tracks its one-time damage message
 	const SEND_OUT_POPUP_IRON_HEAD
 	const SEND_OUT_POPUP_ZEN_HEADBUTT
 	const SEND_OUT_POPUP_SUPER_LUCK
 	const SEND_OUT_POPUP_CRIT_LOCK
 	const SEND_OUT_POPUP_KEEN_EYES
-	const SEND_OUT_POPUP_NO_GUARD
 	const SEND_OUT_POPUP_PRANKSTER
 	const SEND_OUT_POPUP_PRESSURE
 	const SEND_OUT_POPUP_TRUE_HORN

@@ -235,7 +235,6 @@ EntryAbilityHandlers:
 	dw HandleSeedfall
 	dw HandleDefenseMode
 	dw HandleScrappy
-	dw HandleSheerForce
 	dw HandleIntimidate
 	dw HandleStiflingAura
 	dw HandleCleanSweep
@@ -933,12 +932,6 @@ IsBadEntryVsContrary::
 	pop af
 	scf
 	jmp PopBCDEHL
-
-HandleSheerForce:
-; just its popup when it comes in (engine/abilities/sheer_force.asm)
-	newfarcall AttackerHasSheerForce
-	ret nc
-	farjp ShowSheerForcePopup
 
 HandleScrappy:
 ; just its popup when it comes in (engine/abilities/scrappy.asm)

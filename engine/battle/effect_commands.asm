@@ -37,7 +37,7 @@ DoTurn:
 ; === Ability popups when a move is used ===
 ; ==========================================
 	newfarcall PriorityAbilityPopup ; engine/battle/effect_commands_far.asm
-	call TypeSyncPopup
+	call TypeSyncMessage
 	farcall MoveUseAbilityPopups ; engine/abilities/send_out_popup.asm
 	call DoMove
 	; Magic Bounce: the bouncing mon gets its own move back
@@ -7024,11 +7024,10 @@ StartWeatherItem:
 ; ===========================
 ; === Ability: Type Sync ===
 ; ===========================
-TypeSyncPopup:
-; Show the ability popup the first time a Type Sync pokemon uses a damaging
-; STAB move, once each time it's sent out (see ShowOncePerSendOutPopup).
+TypeSyncMessage:
+; Show the 2x STAB message once per send-out, without an ability popup.
 ; The 2x STAB itself is applied by BattleCommand_Stab, which the AI also
-; calls while scoring, so the popup check lives here (move use only).
+; calls while scoring, so the message check lives here (move use only).
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	cp STRUGGLE
@@ -7075,11 +7074,17 @@ TypeSyncPopup:
 	call IsInByteArray
 	ret nc
 
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_TYPE_SYNC, TypeSyncText
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	ret c
+	ld c, SEND_OUT_POPUP_TYPE_SYNC
+	newfarcall CheckSendOutPopupShown
+	ret nz
+	ld a, c
+	or [hl]
+	ld [hl], a
 	ld hl, TypeSyncBattleText
 	jmp StdBattleTextbox
-
-TypeSyncText: db "Type Sync@"
 
 INCLUDE "engine/battle/move_effects/hitandswitch.asm"
 INCLUDE "engine/battle/move_effects/rollout.asm"

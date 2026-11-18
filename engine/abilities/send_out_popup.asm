@@ -13,7 +13,7 @@
 ; side's ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY in a:
 ;	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_<NAME>, <NameText>
 ; For an ability that only needs its species checked when a move is used
-; (like No Guard and Prankster), call a routine from MoveUseAbilityPopups
+; (like Prankster), call a routine from MoveUseAbilityPopups
 ; that returns when the move doesn't apply, and otherwise does
 ;	ld hl, <SpeciesList>
 ;	ld de, <NameText> ; in this section
@@ -22,7 +22,6 @@
 
 MoveUseAbilityPopups::
 ; Called when the user (hBattleTurn) uses a move, before it takes effect.
-	call NoGuardPopup
 	call PranksterPopup
 	jmp GaleWingsPopup
 

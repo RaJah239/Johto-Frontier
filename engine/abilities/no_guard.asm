@@ -25,18 +25,4 @@ NoGuardCheck::
 	pop hl
 	ret
 
-NoGuardPopup:
-; The first damaging move a No Guard mon uses after it comes out (each time
-; it's sent out) shows the ability popup. hBattleTurn = the user.
-	ld a, BATTLE_VARS_MOVE_POWER
-	call GetBattleVar
-	and a
-	ret z ; not a damaging move
-	ld hl, NoGuardPokemon
-	ld de, NoGuardText
-	ld c, SEND_OUT_POPUP_NO_GUARD
-	jmp SendOutAbilityPopup
-
-NoGuardText: db "No Guard@"
-
 INCLUDE "data/abilities/no_guard_mons.asm"
