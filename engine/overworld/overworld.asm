@@ -230,11 +230,20 @@ GetMonSprite:
 	jr .Mon
 
 .BreedMon1
+	ld hl, wBreedMon1DVs
 	ld a, [wBreedMon1Species]
-	jr .Mon
+	jr .BreedMon
 
 .BreedMon2
+	ld hl, wBreedMon2DVs
 	ld a, [wBreedMon2Species]
+
+.BreedMon:
+	cp UNOWN
+	jr nz, .Mon
+	ld [wCurIcon], a
+	newfarcall GetUnownIcon
+	jr .LoadedMon
 
 .Mon:
 	ld e, a
@@ -243,6 +252,7 @@ GetMonSprite:
 
 	farcall LoadOverworldMonIcon
 
+.LoadedMon:
 	ld l, WALKING_SPRITE
 	ld h, 0
 	scf
@@ -443,6 +453,11 @@ endr
 	jr nz, .done
 
 	ldh a, [hUsedSpriteIndex]
+	; Day Care sprites bounce using the two frames in the first copy.
+	cp SPRITE_DAY_CARE_MON_1
+	jr z, .done
+	cp SPRITE_DAY_CARE_MON_2
+	jr z, .done
 	call _DoesSpriteHaveFacings
 	jr c, .done
 

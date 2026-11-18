@@ -260,7 +260,7 @@ MewtwoIcon::     INCBIN "gfx/icons/mewtwo.2bpp"
 EggIcon::        INCBIN "gfx/icons/egg.2bpp"
 
 
-SECTION "Unown Icons", ROMX
+SECTION "Unown Icons", ROMX, ALIGN[4]
 
 UnownAIcon::     INCBIN "gfx/icons/unown_a.2bpp"
 UnownBIcon::     INCBIN "gfx/icons/unown_b.2bpp"
