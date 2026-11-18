@@ -49,29 +49,33 @@ GetMapSceneID::
 
 	ld hl, MapScenes
 	ld de, 4
-	jr .handleLoop
-.loop
-	pop hl
+	jr .loop
+.different_number
+	dec hl
+.next
 	add hl, de
-.handleLoop
-	push hl
-	ld a, [hli] ; map group, or terminator
+.loop
+	ld a, [hl] ; map group, or terminator
 	cp -1
 	jr z, .end ; the current map is not in the scene_var table
 	cp b
-	jr nz, .loop ; map group did not match
-	ld a, [hli] ; map number
+	jr nz, .next
+	inc hl
+	ld a, [hl] ; map number
 	cp c
-	jr nz, .loop ; map number did not match
+	jr nz, .different_number
+	inc hl
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
+	dec hl
+	dec hl
+	dec hl
 	jr .done
 
 .end
 	scf
 .done
-	pop hl
 	pop bc
 	ld a, b
 	rst Bankswitch
@@ -937,28 +941,6 @@ UnmaskObject::
 	add hl, de
 	ld [hl], 0 ; unmasked
 	ret
-
-if DEF(_DEBUG)
-ComputeROMXChecksum::
-	ldh a, [hROMBank]
-	push af
-	ld a, c
-	rst Bankswitch
-	ld hl, $4000 ; ROMX start
-.loop
-	ld a, [hli]
-	add e
-	ld e, a
-	ld a, d
-	adc 0
-	ld d, a
-	ld a, h
-	cp $80 ; HIGH(ROMX end)
-	jr c, .loop
-	pop af
-	rst Bankswitch
-	ret
-endc
 
 ScrollMapUp::
 	hlcoord 0, 0
