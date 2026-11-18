@@ -402,7 +402,8 @@ HandleDrizzle:
 	call SetEntryWeather
 	ret z
 	ld de, DrizzlePopupText
-	jmp ShowEntryAbilityPopup
+	call ShowEntryAbilityPopup
+	jr PlayEntryWeatherOnSwitch
 
 DrizzlePopupText: db "Drizzle@"
 INCLUDE "data/abilities/drizzle_mons.asm"
@@ -415,7 +416,8 @@ HandleDrought:
 	call SetEntryWeather
 	ret z
 	ld de, DroughtPopupText
-	jmp ShowEntryAbilityPopup
+	call ShowEntryAbilityPopup
+	jr PlayEntryWeatherOnSwitch
 
 DroughtPopupText: db "Drought@"
 INCLUDE "data/abilities/drought_mons.asm"
@@ -428,7 +430,8 @@ HandleSandStream:
 	call SetEntryWeather
 	ret z
 	ld de, SandStreamPopupText
-	jmp ShowEntryAbilityPopup
+	call ShowEntryAbilityPopup
+	jr PlayEntryWeatherOnSwitch
 
 SandStreamPopupText: db "Sand Stream@"
 INCLUDE "data/abilities/sand_stream_mons.asm"
@@ -441,10 +444,19 @@ HandleSnowWarning:
 	call SetEntryWeather
 	ret z
 	ld de, SnowWarningPopupText
-	jmp ShowEntryAbilityPopup
+	call ShowEntryAbilityPopup
+	jr PlayEntryWeatherOnSwitch
 
 SnowWarningPopupText: db "Snow Warning@"
 INCLUDE "data/abilities/snow_warning_mons.asm"
+
+PlayEntryWeatherOnSwitch:
+; At battle start, FieldWeather runs after all entry abilities and displays
+; the final weather once. On later switch-ins, show the weather set here.
+	ld a, [wBattleHasJustStarted]
+	and a
+	ret nz
+	farjp FieldWeather
 
 ; ===================
 ; === Own effects ===
