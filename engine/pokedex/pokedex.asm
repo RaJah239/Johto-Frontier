@@ -1467,24 +1467,14 @@ Pokedex_UpdateUnownMode:
 	ld a, DEXSTATE_OPTION_SCR
 	ld [wJumptableIndex], a
 	call DelayFrame
-	call Pokedex_CheckSGB
 IF USE_COMPRESSED_POKEDEX_GFX == TRUE
- 	jr nz, .decompress
+	ld hl, PokedexLZ
+	ld de, vTiles2 tile $31
+	lb bc, BANK(PokedexLZ), 58
+	jmp DecompressRequest2bpp
 ELSE
-	jmp nz, Pokedex_LoadGFX
+	jmp Pokedex_LoadGFX
 ENDC
-	farcall LoadSGBPokedexGFX2
-IF USE_COMPRESSED_POKEDEX_GFX == TRUE
- 	jr .done
- 
-.decompress
- 	ld hl, PokedexLZ
- 	ld de, vTiles2 tile $31
- 	lb bc, BANK(PokedexLZ), 58
- 	call DecompressRequest2bpp
-.done
-ENDC
-	ret
 
 Pokedex_UnownModeHandleDPadInput:
 	ld hl, hJoyLast
@@ -3763,8 +3753,7 @@ Pokedex_BlackOutBG:
 	call ByteFill
 	pop af
 	ldh [rSVBK], a
-
-Pokedex_ApplyPrintPals:
+	; fallthrough to apply the black palette
 	ld a, $ff
 	call DmgToCgbBGPals
 	jmp DelayFrame
@@ -3857,14 +3846,7 @@ Pokedex_LoadAllGFX:
 	ld bc, $20 tiles
 	call Pokedex_InvertTiles
 
-	call Pokedex_CheckSGB
- 	jr nz, .LoadCGBPokedex
- 	farcall LoadSGBPokedexGFX
-	call Pokedex_Enable_LCD
- 	jr .LoadSlowpokePokedex
- .LoadCGBPokedex
- 	call Pokedex_LoadGFX
- .LoadSlowpokePokedex
+	call Pokedex_LoadGFX
  	call Pokedex_LoadSlowpokeGFX
 
 ; copy cursor from Slowpoke GFX
@@ -4000,14 +3982,6 @@ Pokedex_InvertTiles:
  	ld de, Pokedex_Imperial_Tiles
  	ld a, BANK(Pokedex_Imperial_Tiles)
  	jmp Get1bpp
-
-Pokedex_CheckSGB:
-	ldh a, [hCGB]
-	or a
-	ret nz
-	ldh a, [hSGB]
-	dec a
-	ret
 
 Pokedex_LoadUnownModeDividers:
 ; The Unown font (tiles $40-$5a) covers the divider pieces the main
