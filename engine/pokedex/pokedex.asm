@@ -4077,6 +4077,13 @@ _NewPokedexEntry:
 	ld a, [wTempSpecies]
 	ld [wCurPartySpecies], a
 	call Pokedex_DrawDexEntryScreenBG
+
+	; Restore the border corners instead of showing page arrows
+	hlcoord 19, 0
+	ld [hl], $34
+	hlcoord 19, 16
+	ld [hl], $39
+
 	call Pokedex_DrawFootprint
 	hlcoord 0, 17
 	ld [hl], $3b
