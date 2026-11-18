@@ -1,7 +1,7 @@
 DEF UNOWNSTAMP_BOLD_A EQU "♂" ; $ef
 DEF UNOWNSTAMP_BOLD_B EQU "♀" ; $f5
 
-_UnownPrinter:
+_ViewUnown:
 	ld a, [wUnownDex]
 	and a
 	ret z
@@ -131,33 +131,11 @@ _UnownPrinter:
 	ld [wBoxAlignment], a
 	ld de, vTiles2
 	predef GetMonFrontpic
-	call .Load2bppToSRAM
 	hlcoord 1, 6
 	xor a
 	ldh [hGraphicStartTile], a
 	lb bc, 7, 7
 	predef PlaceGraphic
-	ld de, vTiles2 tile $31
-	ret
-
-.Load2bppToSRAM:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wDecompressScratch)
-	ldh [rSVBK], a
-
-	ld a, BANK(sScratch)
-	call OpenSRAM
-	ld de, wDecompressScratch
-	ld hl, sScratch
-	ldh a, [hROMBank]
-	ld b, a
-	ld c, $31
-	call Get2bpp
-	call CloseSRAM
-
-	pop af
-	ldh [rSVBK], a
 	ret
 
 .vacant
@@ -167,19 +145,6 @@ _UnownPrinter:
 	hlcoord 1, 9
 	ld de, UnownDexVacantString
 	call PlaceString
-	xor a ; sScratch
-	call OpenSRAM
-	ld hl, sScratch
-	ld bc, $31 tiles
-	xor a
-	call ByteFill
-	ld hl, vTiles2 tile $31
-	ld de, sScratch
-	ld c, $31
-	ldh a, [hROMBank]
-	ld b, a
-	call Get2bpp
-	call CloseSRAM
 	ld c, 20
 	jmp DelayFrames
 
@@ -199,17 +164,6 @@ UnownDexMenuString:
 UnownDexVacantString: db "Vacant@"
 
 UnownDexATile:
-INCBIN "gfx/printer/bold_a.1bpp"
+INCBIN "gfx/font/unown_viewer_a.1bpp"
 UnownDexBTile:
-INCBIN "gfx/printer/bold_b.1bpp"
-
-PlaceUnownPrinterFrontpic:
-	hlcoord 0, 0
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	ld a, " "
-	call ByteFill
-	hlcoord 7, 11
-	ld a, $31
-	ldh [hGraphicStartTile], a
-	lb bc, 7, 7
-	predef_jump PlaceGraphic
+INCBIN "gfx/font/unown_viewer_b.1bpp"

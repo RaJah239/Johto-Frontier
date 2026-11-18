@@ -280,7 +280,7 @@ DebugOptions:
 	ifequal 1, .AllBadges
 	ifequal 2, .FillPokedex
 	ifequal 3, .DebugPaletteEditor
-	ifequal 4, .UnownPrinter
+	ifequal 4, .UnownViewer
 	sjump .finish
 
 .MoveMenuHeader:
@@ -295,7 +295,7 @@ DebugOptions:
 	db "All Badges@"
 	db "#dex Completed@"
 	db "Palette Editor@"
-	db "Unown Printer@"
+	db "View Unown@"
 	db "Cancel@"
 
 .AllBadges
@@ -328,9 +328,9 @@ DebugOptions:
 	waitsfx
 	sjump .finish
 
-.UnownPrinter
+.UnownViewer
 	special SetAllUnownCaught
-	special UnownPrinter
+	special ViewUnown
 .finish
 	endtext
 

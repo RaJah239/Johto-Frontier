@@ -8,7 +8,7 @@ RuinsOfAlphResearchCenter_MapEvents:
 	def_bg_events
 	bg_event  6,  5, BGEVENT_JUMPTEXT, RuinsOfAlphResearchCenterAcademicBooksText
 	bg_event  3,  4, BGEVENT_READ, RuinsOfAlphResearchCenterComputer
-	bg_event  7,  1, BGEVENT_READ, RuinsOfAlphResearchCenterPrinter
+	bg_event  7,  1, BGEVENT_READ, RuinsOfAlphResearchCenterUnownViewer
 
 	def_object_events
 	object_event  4,  5, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RuinsOfAlphResearchCenterScientist1Script, -1
@@ -104,13 +104,13 @@ RuinsOfAlphResearchCenterScientist3Script:
 	faceplayer
 	opentext
 	readvar VAR_UNOWNCOUNT
-	ifequal NUM_UNOWN, .PrinterAvailable
+	ifequal NUM_UNOWN, .AllUnownCaught
 	writetext RuinsOfAlphResearchCenterScientist3Text
 	waitbutton
 	closetext
 	end
 
-.PrinterAvailable:
+.AllUnownCaught:
 	setevent EVENT_CAUGHT_ALL_UNOWN
 	jumpthisopenedtext
 		text "You caught all the"
@@ -120,8 +120,7 @@ RuinsOfAlphResearchCenterScientist3Script:
 		line "achievement!"
 
 		para "I've set up the"
-		line "printer here for"
-		cont "handling Unown."
+		line "Unown viewer here."
 
 		para "Feel free to use"
 		line "it anytime."
@@ -257,25 +256,25 @@ RuinsOfAlphResearchCenterComputer:
 		line "kinds found."
 		done
 
-RuinsOfAlphResearchCenterPrinter:
+RuinsOfAlphResearchCenterUnownViewer:
 	opentext
 	checkevent EVENT_RUINS_OF_ALPH_RESEARCH_CENTER_SCIENTIST
 	iftrue .SkipChecking
 	readvar VAR_UNOWNCOUNT
-	ifequal NUM_UNOWN, .PrinterAvailable
+	ifequal NUM_UNOWN, .ViewerAvailable
 .SkipChecking:
 	jumpthisopenedtext
 		text "This doesn't seem"
 		line "to work yet."
 		done
 
-.PrinterAvailable:
+.ViewerAvailable:
 	writethistext
 		text "You may view"
 		line "all Unown."
 		done
 	waitbutton
-	special UnownPrinter
+	special ViewUnown
 	endtext
 
 FossilScientist:

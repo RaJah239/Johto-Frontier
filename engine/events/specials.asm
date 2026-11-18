@@ -77,9 +77,9 @@ OverworldTownMap:
 	farcall _TownMap
 	jmp ExitAllMenus
 
-UnownPrinter:
+ViewUnown:
 	call FadeToMenu
-	farcall _UnownPrinter
+	farcall _ViewUnown
 	jmp ExitAllMenus
 
 DisplayLinkRecord:
