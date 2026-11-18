@@ -1,17 +1,3 @@
-LoadSGBPokedexGFX:
-	ld hl, SGBPokedexGFX_LZ
-	ld de, vTiles2 tile $31
-	jmp Decompress
-
-LoadSGBPokedexGFX2:
-	ld hl, SGBPokedexGFX_LZ
-	ld de, vTiles2 tile $31
-	lb bc, BANK(SGBPokedexGFX_LZ), 58
-	jmp DecompressRequest2bpp
-
-SGBPokedexGFX_LZ:
-INCBIN "gfx/pokedex/pokedex_sgb.2bpp.lzp"
-
 LoadQuestionMarkPic:
 	ld hl, .QuestionMarkLZ
 	ld de, sScratch
@@ -19,51 +5,6 @@ LoadQuestionMarkPic:
 
 .QuestionMarkLZ:
 INCBIN "gfx/pokedex/question_mark.2bpp.lzp"
-
-DrawPokedexListWindow:
-	ld a, $32
-	hlcoord 0, 17
-	ld bc, 12
-	call ByteFill
-	hlcoord 0, 1
-	lb bc, 15, 11
-	call ClearBox
-	ld a, $34
-	hlcoord 0, 0
-	ld bc, 11
-	call ByteFill
-	ld a, $39
-	hlcoord 0, 16
-	ld bc, 11
-	call ByteFill
-	hlcoord 5, 0
-	ld [hl], $3f
-	hlcoord 5, 16
-	ld [hl], $40
-	ld a, [wCurDexMode]
-	cp DEXMODE_OLD
-	jr z, .OldMode
-; scroll bar
-	hlcoord 11, 0
-	ld [hl], $50
-	ld a, $51
-	hlcoord 11, 1
-	ld b, SCREEN_HEIGHT - 3
-	call Pokedex_FillColumn2
-	ld [hl], $52
-	jr .Done
-
-.OldMode:
-; no scroll bar
-	hlcoord 11, 0
-	ld [hl], $66
-	ld a, $67
-	hlcoord 11, 1
-	ld b, SCREEN_HEIGHT - 3
-	call Pokedex_FillColumn2
-	ld [hl], $68
-.Done:
-	ret
 
 DrawPokedexSearchResultsWindow:
 	ld a, $34
