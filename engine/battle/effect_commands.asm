@@ -5836,8 +5836,7 @@ BattleCommand_Recoil:
 	pop bc
 	pop hl
 	jr c, .finish_rock_head ; suppressed by Neutralizing Gas
-	ld hl, RockHeadBattleText
-	jmp StdBattleTextbox
+	ret
 
 .finish_rock_head
 	ld a, BATTLE_VARS_MOVE_ANIM

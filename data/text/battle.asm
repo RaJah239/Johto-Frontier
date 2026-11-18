@@ -942,11 +942,6 @@ MistText:
 	line "shrouded in Mist!"
 	prompt
 
-RockHeadBattleText:
-	text "Does not take"
-	line "recoil damage!"
-	done
-
 StatsCantDropText:
 	text "<TARGET>'s"
 	line "stats can't be"
