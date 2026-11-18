@@ -617,7 +617,7 @@ StatChangesInfoBox:
 	hlcoord 1, 0
 	ld de, MainText.player
 	call PlaceString
-	ld de, StatTexts.attack
+	ld de, StatChangeTexts
 	ld b, 1
 	ld c, 2
 	ld hl, wPlayerStatLevels
@@ -626,7 +626,7 @@ StatChangesInfoBox:
 	hlcoord 11, 0
 	ld de, MainText.enemy
 	call PlaceString
-	ld de, StatTexts.attack
+	ld de, StatChangeTexts
 	ld b, 11
 	ld c, 2
 	ld hl, wEnemyStatLevels
@@ -646,7 +646,25 @@ StatChangesInfoBoxLoop:
 	ld b, a
 	pop hl
 	call PrintStatChangeValue
-	inc hl				; hl = StatLevel + 1
+	inc hl				; advance to the next stat level
+	ld a, c
+	cp 4 ; after Defense, skip Speed for Sp. Atk
+	jr nz, .not_speed_row
+	inc hl
+.not_speed_row
+	ld a, c
+	cp 8 ; after Sp. Def, move back to Speed
+	jr nz, .next_stat
+	dec hl
+	dec hl
+	dec hl
+.next_stat
+	ld a, c
+	cp 10 ; after Speed, skip Sp. Atk and Sp. Def for Accuracy
+	jr nz, .next_stat_done
+	inc hl
+	inc hl
+.next_stat_done
 	inc de				; de gets increased to the end of the string in PlaceString, so increase it 1 more for the next string
 	ld a, b
 	sub 6
@@ -1091,6 +1109,22 @@ StatsInfoBoxLoop:
 	pop de
 	inc hl
 	inc hl
+	ld a, c
+	cp 6 ; after Defense, skip Speed for Sp. Atk
+	jr nz, .not_speed_row
+	inc hl
+	inc hl
+.not_speed_row
+	ld a, c
+	cp 10 ; after Sp. Def, wrap around to Speed
+	jr nz, .next_stat
+	dec hl
+	dec hl
+	dec hl
+	dec hl
+	dec hl
+	dec hl
+.next_stat
 	inc de				; de gets increased to the end of the string in PlaceString, so increase it 1 more for the next string
 	ld a, b
 	sub 4
@@ -1543,9 +1577,16 @@ StatTexts:
 .health:      db "HP:  @"
 .attack:      db "Atk: @"
 .defense:     db "Def: @"
-.speed:       db "Spe: @"
 .sattack:     db "SAtk:@"
 .sdefense:    db "SDef:@"
+.speed:       db "Spe: @"
+
+StatChangeTexts:
+.attack:      db "Atk: @"
+.defense:     db "Def: @"
+.sattack:     db "SAtk:@"
+.sdefense:    db "SDef:@"
+.speed:       db "Spe: @"
 .accuracy:    db "Acc: @"
 .evasiveness: db "Eva:@"
 
