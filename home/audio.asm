@@ -220,33 +220,6 @@ WaitSFX::
 	pop hl
 	ret
 
-IsSFXPlaying::
-; Return carry if no sound effect is playing.
-; The inverse of CheckSFX.
-	push hl
-
-	ld hl, wChannel5Flags1
-	bit 0, [hl]
-	jr nz, .playing
-	ld hl, wChannel6Flags1
-	bit 0, [hl]
-	jr nz, .playing
-	ld hl, wChannel7Flags1
-	bit 0, [hl]
-	jr nz, .playing
-	ld hl, wChannel8Flags1
-	bit 0, [hl]
-	jr nz, .playing
-
-	pop hl
-	scf
-	ret
-
-.playing
-	pop hl
-	and a
-	ret
-
 MaxVolume::
 	ld a, MAX_VOLUME
 	ld [wVolume], a
