@@ -22,6 +22,12 @@ ClearJoypad::
 	ldh [hBHoldFrames], a
 	ret
 
+UpdateJoypad_Disabled:
+; Input is off, so forget how long A has been held.
+	xor a
+	ldh [hAHoldFrames], a
+	ret
+
 UpdateJoypad::
 ; This is called automatically every frame in VBlank.
 ; Read the joypad register and translate it to something more
@@ -37,21 +43,13 @@ UpdateJoypad::
 ; Any of these three bits can be used to disable input.
 	ld a, [wJoypadDisable]
 	and (1 << JOYPAD_DISABLE_MON_FAINT_F) | (1 << JOYPAD_DISABLE_RESET_F) | (1 << 4)
-	jr nz, .disabled
+	jr nz, UpdateJoypad_Disabled
 
 ; If we're saving, input is disabled.
 	ld a, [wGameLogicPaused]
 	and a
-	jr nz, .disabled
-	jr .read
+	jr nz, UpdateJoypad_Disabled
 
-.disabled
-; Input is off, so forget how long A has been held.
-	xor a
-	ldh [hAHoldFrames], a
-	ret
-
-.read
 ; We can only get four inputs at a time.
 ; We take d-pad first for no particular reason.
 	ld a, R_DPAD
