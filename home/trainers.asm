@@ -13,6 +13,10 @@ CheckTrainerBattle::
 _CheckTrainerBattle::
 ; Check if any trainer on the map sees the player and wants to battle.
 
+	ld a, [wNomadSigil]
+	and a
+	jr nz, .no_battle
+
 ; Skip the player object.
 	ld a, 1
 	ld de, wMap1Object
@@ -21,13 +25,6 @@ _CheckTrainerBattle::
 
 ; Start a battle if the object:
 	push af
-	push de
-
-	; check if nomad sigil
-	; prevent generic trainer challenge 
-	ld a, [wNomadSigil]
-	and a
-	jr nz, .next
 
 ; Has a sprite
 	ld hl, MAPOBJECT_SPRITE
@@ -86,7 +83,6 @@ _CheckTrainerBattle::
 	jr z, .startbattle
 
 .next
-	pop de
 	ld hl, MAPOBJECT_LENGTH
 	add hl, de
 	ld d, h
@@ -96,6 +92,7 @@ _CheckTrainerBattle::
 	inc a
 	cp NUM_OBJECTS
 	jr nz, .loop
+.no_battle
 	xor a
 	ret
 
@@ -106,7 +103,6 @@ if DEF(_DEBUG)
 	cp A_BUTTON
 	jr z, .next ; ignore trainers
 endc
-	pop de
 	pop af
 	ldh [hLastTalked], a
 	ld a, b
@@ -252,16 +248,6 @@ FacingPlayerDistance::
 	ret
 
 PrintWinLossText::
-	ld a, [wBattleType]
-	cp BATTLETYPE_CANLOSE
-	; code was probably dummied out here
-	jr .canlose
-
-; unused
-	ld hl, wWinTextPointer
-	jr .ok
-
-.canlose
 	ld a, [wBattleResult]
 	ld hl, wWinTextPointer
 	and $f ; WIN?
