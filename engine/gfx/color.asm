@@ -615,15 +615,6 @@ InitCGBPals::
 	call CheckCGB
 	ret z
 
-; CGB only
-	ld a, BANK(vTiles3)
-	ldh [rVBK], a
-	ld hl, vTiles3
-	ld bc, $200 tiles
-	xor a
-	call ByteFill
-	ld a, BANK(vTiles0)
-	ldh [rVBK], a
 	ld a, 1 << rBGPI_AUTO_INCREMENT
 	ldh [rBGPI], a
 	ld c, 4 * TILE_WIDTH
