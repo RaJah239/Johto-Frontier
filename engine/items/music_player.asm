@@ -12,9 +12,23 @@
 	const MUSICPLAYER_OVERWORLD ; 2
 DEF NUM_MUSICPLAYER_ROWS EQU const_value
 
+MusicPlayerFromMainMenu::
+	farcall BlankScreen
+	call LoadStandardFont
+	farjp _MusicPlayerFromMainMenu
+
 _MusicPlayer:
 	xor a
 	ld [wUnusedScriptByte], a
+	jr MusicPlayer_Init
+
+_MusicPlayerFromMainMenu:
+	ld a, 1
+	ld [wUnusedScriptByte], a
+	; fallthrough
+
+MusicPlayer_Init:
+	xor a
 	ld [wMenuCursorY], a ; MUSICPLAYER_CURRENT
 	ld a, 1
 	ld [wTempByteValue], a
@@ -110,6 +124,9 @@ _MusicPlayer:
 .exit
 	pop af
 	ld b, a
+	ld a, [wUnusedScriptByte]
+	and a
+	jr nz, .exit_to_main_menu
 	ld a, [wOverworldMusicOverride]
 	cp b
 	call nz, PlayMapMusicBike
@@ -117,6 +134,12 @@ _MusicPlayer:
 	call WaitBGMap
 	ld hl, .ExitScript
 	jmp QueueScript
+
+.exit_to_main_menu
+	xor a
+	ld [wUnusedScriptByte], a
+	call UpdateSprites
+	jmp WaitBGMap
 
 .ChangeTrack:
 ; Move the picked row's track by c (+1/-1) through the song list; the
@@ -242,8 +265,6 @@ _MusicPlayer:
 .play_song
 	ld e, a
 	ld d, 0
-	ld a, 1
-	ld [wUnusedScriptByte], a
 	jmp PlayMusic2
 
 .GetSongCount:

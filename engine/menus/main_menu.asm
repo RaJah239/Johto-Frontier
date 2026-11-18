@@ -9,7 +9,8 @@
 	const MAINMENUITEM_NEW_GAME			; 1
 	const MAINMENUITEM_SET_TIME			; 2
 	const MAINMENUITEM_OPTIONS			; 3
-	const MAINMENUITEM_ABOUT			; 4
+	const MAINMENUITEM_MUSIC_PLAYER		; 4
+	const MAINMENUITEM_ABOUT			; 5
 
 MainMenu:
 	farcall DeleteSavedMusic
@@ -56,6 +57,7 @@ MainMenu:
 	db "New Game@"
 	db "Set Time@"
 	db "Options@"
+	db "Music Player@"
 	db "About@"
 
 .Jumptable:
@@ -64,6 +66,7 @@ MainMenu:
 	dw MainMenu_NewGame
 	dw MainMenu_SetTime
 	dw MainMenu_Options
+	dw MainMenu_MusicPlayer
 	dw MainMenu_About
 
 MainMenuItems:
@@ -77,11 +80,12 @@ MainMenuItems:
 	db -1
 
 	; MAINMENU_CONTINUE
-	db 5
+	db 6
 	db MAINMENUITEM_CONTINUE
 	db MAINMENUITEM_NEW_GAME
 	db MAINMENUITEM_SET_TIME
 	db MAINMENUITEM_OPTIONS
+	db MAINMENUITEM_MUSIC_PLAYER
 	db MAINMENUITEM_ABOUT
 	db -1
 
@@ -266,15 +270,13 @@ ClearTilemapEtc:
 
 MainMenu_NewGame:
 	farjp NewGame
-
 MainMenu_Options:
 	farjp Option
-
+MainMenu_MusicPlayer:
+	farjp MusicPlayerFromMainMenu
 MainMenu_Continue:
 	farjp Continue
-
 MainMenu_SetTime:
 	farjp _SetTime
-
 MainMenu_About:
 	farjp AboutSpeech
