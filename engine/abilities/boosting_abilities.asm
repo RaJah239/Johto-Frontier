@@ -419,10 +419,11 @@ HandleIronFist:
 	ld hl, PunchingMoves
 	call IsInByteArray
 	ret nc
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_IRON_FIST, IronFistText
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	ret c
 	jmp TwentyPercentBoost
 
-IronFistText: db "Iron Fist@"
 INCLUDE "data/abilities/iron_fist_mons.asm"
 
 HandleStrongJaw:
