@@ -2,6 +2,7 @@
 	const_def
 	const MAINMENU_NEW_GAME               ; 0
 	const MAINMENU_CONTINUE               ; 1
+	const MAINMENU_CONTINUE_NO_MUSIC_PLAYER ; 2
 
 	; MainMenu.Strings and MainMenu.Jumptable indexes
 	const_def
@@ -89,6 +90,15 @@ MainMenuItems:
 	db MAINMENUITEM_ABOUT
 	db -1
 
+	; MAINMENU_CONTINUE_NO_MUSIC_PLAYER
+	db 5
+	db MAINMENUITEM_CONTINUE
+	db MAINMENUITEM_NEW_GAME
+	db MAINMENUITEM_SET_TIME
+	db MAINMENUITEM_OPTIONS
+	db MAINMENUITEM_ABOUT
+	db -1
+
 MainMenu_GetWhichMenu:
 	ld a, [wSaveFileExists]
 	and a
@@ -99,7 +109,16 @@ MainMenu_GetWhichMenu:
 .next
 	ldh a, [hCGB]
 	cp TRUE
+	ld a, MUSIC_PLAYER
+	ld [wCurItem], a
+	ld a, 1
+	ld [wItemQuantityChange], a
+	ld hl, wNumItems
+	call CheckItem
 	ld a, MAINMENU_CONTINUE
+	jr c, .done
+	ld a, MAINMENU_CONTINUE_NO_MUSIC_PLAYER
+.done
 	ret
 
 MainMenuJoypadLoop:
