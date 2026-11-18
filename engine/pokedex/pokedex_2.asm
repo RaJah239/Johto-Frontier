@@ -335,7 +335,7 @@ DisplayFoeNameAndAbility:
 	ld a, [wCurSpecies]
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
-	hlcoord 6, 1
+	hlcoord 6, 2
 	jmp PlaceFarString
 
 DisplayPlayerNameAndAbility:

@@ -1028,7 +1028,7 @@ FoeAbilityPageInfoBox:
 	farcall DisplayFoeNameAndAbility
 
 	ld de, .FoeString
-	hlcoord 1, 1
+	hlcoord 1, 2
 	call PlaceString
 
 	ld de, .AbilitiesString
@@ -1036,7 +1036,7 @@ FoeAbilityPageInfoBox:
 	call PlaceString
 
 	ld de, .RemainingString
-	hlcoord 1, 2
+	hlcoord 1, 1
 	call PlaceString
 
 	call CountFoeMonsRemaining   ; A = 1–6
@@ -1053,7 +1053,7 @@ FoeAbilityPageInfoBox:
 	ld a, [hl]
 	ld d, a
 
-	hlcoord 12, 2                ; SAFE here
+	hlcoord 12, 1                ; SAFE here
 	jmp PlaceString
 
 .RemainingStringTable:
