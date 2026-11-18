@@ -614,6 +614,7 @@ wTempLevel:: db
 wLastPlayerMon:: db
 wLastPlayerMove:: db
 wLastEnemyMove:: db
+wBattleLastEnemyMove:: db
 
 wExpShare:: db
 wExpShareText:: db

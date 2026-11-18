@@ -129,6 +129,7 @@ ClearBattleRAM:
 	xor a
 	ld [wBattlePlayerAction], a
 	ld [wBattleResult], a
+	ld [wBattleLastEnemyMove], a
 
 	ld hl, wPartyMenuCursor
 	ld [hli], a

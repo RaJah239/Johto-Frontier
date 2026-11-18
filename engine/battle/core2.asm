@@ -949,12 +949,31 @@ FoeDetailsPageInfoBox:
 	ld de, wListMoves_MoveIndicesBuffer
 	ld bc, NUM_MOVES
 	call CopyBytes
-	ld a, SCREEN_WIDTH * 2
+	ld a, SCREEN_WIDTH
 	ld [wListMovesLineSpacing], a
 	hlcoord 2, 7
 	predef ListMoves
 	hlcoord 15, 7
 	call .ListCurrentMovePP
+
+	ld de, .FoeLastMoveString
+	hlcoord 1, 12
+	call PlaceString
+	ld a, [wBattleLastEnemyMove]
+	and a
+	jr z, .noLastMove
+	ld [wNamedObjectIndex], a
+	call GetMoveName
+	hlcoord 2, 13
+	call PlaceString
+	jr .doneLastMove
+
+.noLastMove
+	ld de, .NoItem
+	hlcoord 2, 13
+	call PlaceString
+
+.doneLastMove
 	call WaitBGMap
 	jmp SetDefaultBGPAndOBP
 
@@ -981,7 +1000,7 @@ FoeDetailsPageInfoBox:
 
 	inc de
 	push bc
-	ld bc, SCREEN_WIDTH * 2
+	ld bc, SCREEN_WIDTH
 	add hl, bc
 	pop bc
 	dec b
@@ -991,6 +1010,7 @@ FoeDetailsPageInfoBox:
 .FoeItemString db "Foe's Item:@"
 .NoItem db "None@"
 .FoeMovesString db "Foe's Moves:@"
+.FoeLastMoveString db "Last Move used:@"
 
 FoeAbilityPageInfoBox:
 	hlcoord 0, 0

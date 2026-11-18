@@ -318,6 +318,12 @@ UsedMoveText:
 	ld [de], a
 
 .ok
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .player_move
+	ld a, [wTempByteValue]
+	ld [wBattleLastEnemyMove], a
+.player_move
 	ld hl, UsedMoveInsteadText
 	ret
 
