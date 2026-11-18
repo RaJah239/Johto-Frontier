@@ -486,6 +486,7 @@ CaughtBallTiles:
 	db LOVE_BALL,  10
 	db PARK_BALL,  11
 	db SHINY_BALL, 12
+	db PREMIER_BALL, 13
 	db -1 ; end
 
 CaughtBallsGFX:

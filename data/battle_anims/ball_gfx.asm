@@ -25,6 +25,8 @@ BattleBallGFX:
 	dba AnimObjMoonBallGFX
 	db LOVE_BALL
 	dba AnimObjLoveBallGFX
+	db PREMIER_BALL
+	dba AnimObjPremierBallGFX
 	db PARK_BALL
 	dba AnimObjParkBallGFX
 	db SHINY_BALL

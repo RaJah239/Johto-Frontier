@@ -101,9 +101,10 @@ ItemNameOrder:
 	db SURF_MAIL
 
 ; NEXT POCKET
-; Ball Pocket - 13 total
+; Ball Pocket - 14 total
 ; Generic Pokéballs
 	db POKE_BALL
+	db PREMIER_BALL
 	db GREAT_BALL
 	db ULTRA_BALL
 	db SHINY_BALL
@@ -284,9 +285,8 @@ ItemNameOrder:
 
 
 ; UNUSED ITEMS
-; Unused Items - 3 total
+; Unused Items - 2 total
 	db EGG_TICKET
- 	db ITEM_E8
  	db ITEM_E9
 
 
@@ -300,7 +300,6 @@ ItemAlphaOrder:
 ; data/items/names.asm (case- and accent-insensitive; ties break on item id).
 ; NO_ITEM leads so it sorts to the top, like ItemNameOrder.
 	db NO_ITEM
-	db ITEM_E8
 	db ITEM_E9
 	db AMBROSIA
 	db AMULET_COIN
@@ -445,6 +444,7 @@ ItemAlphaOrder:
 	db POTION
 	db PP_MAX
 	db PP_UP
+	db PREMIER_BALL
 	db PROTEIN
 	db PRZCUREBERRY
 	db PSNCUREBERRY

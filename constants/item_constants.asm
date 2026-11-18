@@ -199,7 +199,7 @@
  	const EXP_CANDY_M
  	const EXP_CANDY_L
  	const EXP_CANDY_XL
- 	const ITEM_E8
+	const PREMIER_BALL
  	const ITEM_E9
 ; mail
  	const SURF_MAIL

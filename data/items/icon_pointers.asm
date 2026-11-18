@@ -195,7 +195,7 @@ ItemIconPointers::
 	dba ExpCandyMIcon ; EXP_CANDY_M
 	dba ExpCandyLIcon ; EXP_CANDY_L
 	dba ExpCandyXLIcon ; EXP_CANDY_XL
-	dba NoItemIcon ; ITEM_E8
+	dba PremierBallIcon ; PREMIER_BALL
 	dba NoItemIcon ; ITEM_E9
 	dba MailIcon ; SURF_MAIL
 	dba MailIcon ; LITEBLUEMAIL

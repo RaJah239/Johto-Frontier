@@ -527,6 +527,12 @@ _MartThanksText::
 	line "Thank you!"
 	done
 
+_MartPremierBallText::
+	text "You also get a"
+	line "Premier Ball as"
+	cont "an added bonus."
+	done
+
 _MartNoMoneyText::
 	text "You don't have"
 	line "enough money."

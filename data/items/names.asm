@@ -193,7 +193,7 @@ ItemNames::
 	li "Exp.Candy M"
 	li "Exp.Candy L"
 	li "Exp.Candy XL"
-	li "?"
+	li "Premier Ball"
 	li "?"
 	li "Surf Mail"
 	li "LiteBlueMail"

@@ -207,7 +207,7 @@ ItemEffects:
 	dw ExpCandyEffect      ; EXP_CANDY_M
 	dw ExpCandyEffect      ; EXP_CANDY_L
 	dw ExpCandyEffect      ; EXP_CANDY_XL
-	dw NoEffect            ; ITEM_E8
+	dw PokeBallEffect      ; PREMIER_BALL
 	dw NoEffect            ; ITEM_E9
 	assert_table_length ITEM_E9
 

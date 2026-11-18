@@ -464,6 +464,31 @@ BuyMenuLoop:
 	call LoadBuyMenuText
 	call JoyWaitAorB
 
+	; premier ball mart bonus
+	ld a, [wMartItemID]
+	ld e, a
+	ld d, 0
+	ld hl, wCurMartItems
+	add hl, de
+	ld a, [hl]
+	cp POKE_BALL
+	jr nz, .cancel
+	ld a, [wItemQuantityChange]
+	cp 10
+	jr c, .cancel
+	ld c, 10
+	call SimpleDivide
+	ld a, b
+	ld [wItemQuantityChange], a
+	ld a, PREMIER_BALL
+	ld [wCurItem], a
+	ld hl, wNumItems
+	call ReceiveItem
+	jr nc, .cancel
+	ld hl, .PremierBallText
+	call PrintText
+	call JoyWaitAorB
+
 .cancel
 	call SpeechTextbox
 	and a
@@ -486,6 +511,10 @@ BuyMenuLoop:
 	call JoyWaitAorB
 	and a
 	ret
+
+.PremierBallText
+	text_far _MartPremierBallText
+	text_end
 
 StandardMartAskPurchaseQuantity:
 	ld a, MARTTEXT_HOW_MANY

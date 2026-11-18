@@ -194,7 +194,7 @@ ItemDescriptions:
 	dw ExpCandyMDesc
 	dw ExpCandyLDesc
 	dw ExpCandyXLDesc
-	dw TeruSama27Desc
+	dw PremierBallDesc
 	dw TeruSama27Desc
 	dw SurfMailDesc
 	dw LiteBlueMailDesc
@@ -974,6 +974,10 @@ HyperEVUpDesc:
 ParkBallDesc:
 	db   "The Bug-Catching"
 	next "Contest BALL.@"
+
+PremierBallDesc:
+	db   "A rare, commemor-"
+	next "ative Ball.@"
 
 RainbowWingDesc:
 	db   "A mystical feather"

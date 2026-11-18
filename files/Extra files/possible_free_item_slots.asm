@@ -22,7 +22,6 @@
 	const ITEM_PLACEHOLDER ; ab
 	const SQUIRTBOTTLE ; af
 	const RAINBOW_WING ; b2
-	const ITEM_E8
  	const ITEM_E9
 
 

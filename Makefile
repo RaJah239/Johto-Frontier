@@ -220,6 +220,7 @@ gfx/battle_anims/balls/friend_ball.2bpp: tools/gfx += --remove-xflip --keep-whit
 gfx/battle_anims/balls/fast_ball.2bpp: tools/gfx += --remove-xflip --keep-whitespace
 gfx/battle_anims/balls/heavy_ball.2bpp: tools/gfx += --remove-xflip --keep-whitespace
 gfx/battle_anims/balls/love_ball.2bpp: tools/gfx += --remove-xflip --keep-whitespace
+gfx/battle_anims/balls/premier_ball.2bpp: tools/gfx += --remove-xflip --keep-whitespace
 gfx/battle_anims/balls/park_ball.2bpp: tools/gfx += --remove-xflip --keep-whitespace
 gfx/battle_anims/balls/shiny_ball.2bpp: tools/gfx += --remove-xflip --keep-whitespace
 gfx/battle_anims/reflect.2bpp: tools/gfx += --remove-whitespace
