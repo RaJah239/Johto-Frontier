@@ -36,7 +36,7 @@ DEF NUM_BATTLETOWER_CHALLENGES EQU _RS - 1
 	const BATTLETOWERACTION_CHECKSAVEFILEISYOURS
 	const BATTLETOWERACTION_0A
 	const BATTLETOWERACTION_GSBALL
-	const BATTLETOWERACTION_EGGTICKET
+	const_skip ; reserved action
 	const BATTLETOWERACTION_0F ; check w3_d090
 	const BATTLETOWERACTION_14 ; if save file is yours: bit 0, [sBattleTowerSaveFileFlags]
 	const BATTLETOWERACTION_15 ; set 0, [sBattleTowerSaveFileFlags]

@@ -3,7 +3,6 @@
 	const LINK_NULL        ; 0
 	const LINK_TRADECENTER ; 1
 	const LINK_COLOSSEUM   ; 2
-	const LINK_MOBILE      ; 4
 
 ; wChosenCableClubRoom
 	const_def

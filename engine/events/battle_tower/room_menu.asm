@@ -1,20 +1,15 @@
 _BattleTowerRoomMenu:
-	xor a
-	ld [wcd38], a
 	call BattleTowerRoomMenu_InitRAM
 	ld a, $3
 	ld [wcd33], a
 	ld a, $d
 	ld [wcd34], a
-	ld a, $4
-	ld [wc3f0], a
 	ldh a, [rSVBK]
 	push af
 	ld a, $3
 	ldh [rSVBK], a
 .loop
 	call JoyTextDelay
-	call Function118473
 	ld a, [wBattleTowerRoomMenuJumptableIndex]
 	cp $f
 	jr c, .skip
@@ -28,8 +23,6 @@ _BattleTowerRoomMenu:
 	ld hl, wcd33
 	cp [hl]
 	jr nz, .loop
-	xor a
-	ld [w3_d000], a
 	pop af
 	ldh [rSVBK], a
 	call BattleTowerRoomMenu_Cleanup
@@ -44,39 +37,20 @@ BattleTowerRoomMenu_InitRAM:
 	call DoubleSpeed
 	xor a
 	ldh [rIF], a
-	ld [wMobileErrorCodeBuffer], a
-	ld [wMobileErrorCodeBuffer + 1], a
-	ld [wMobileErrorCodeBuffer + 2], a
-	ld [wcd80], a
-	ld [wcd65], a
-	ld [wcd66], a
-	ld [wcd67], a
-	ld [wcd68], a
+	ld [wBattleTowerRoomMenuResult], a
 	ld [wc31a], a
-	ld [wcd89], a
-	ld [wcd8a], a
-	ld [wcd8b], a
-	ld [wc3ec], a
-	ld [wc3ed], a
-	ld [wc3ee], a
-	ld [wc3ef], a
 	ld hl, wStateFlags
 	ld a, [hl]
 	ld [wcd7f], a
 	set LAST_12_SPRITE_OAM_STRUCTS_RESERVED_F, [hl]
 	ld a, (1 << SERIAL) | (1 << TIMER) | (1 << LCD_STAT) | (1 << VBLANK)
 	ldh [rIE], a
-	ld a, $1
-	ldh [hMobileReceive], a
-	ldh [hMobile], a
 	ei
 	jmp CloseSRAM
 
 BattleTowerRoomMenu_Cleanup:
 	di
 	xor a
-	ldh [hMobileReceive], a
-	ldh [hMobile], a
 	ldh [hVBlank], a
 	call DoubleSpeed
 	xor a
@@ -86,38 +60,8 @@ BattleTowerRoomMenu_Cleanup:
 	ei
 	ld a, [wcd7f]
 	ld [wStateFlags], a
-	ld a, [wMobileErrorCodeBuffer]
+	ld a, [wBattleTowerRoomMenuResult]
 	ld [wScriptVar], a
-	ret
-
-Function118473:
-	ld a, [wcd65]
-	and a
-	ret z
-	ld a, [wcd66]
-	inc a
-	ld [wcd66], a
-	cp 60
-	ret nz
-	xor a
-	ld [wcd66], a
-	ld a, [wcd67]
-	inc a
-	ld [wcd67], a
-	cp 60
-	ret nz
-	ld a, [wcd68]
-	inc a
-	ld [wcd68], a
-	cp 99
-	jr z, .ninety_nine
-	xor a
-	ld [wcd67], a
-	ret
-
-.ninety_nine
-	xor a
-	ld [wcd65], a
 	ret
 
 BattleTowerRoomMenu_Jumptable:
@@ -254,10 +198,6 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 	ld hl, wcd4a
 	cp [hl]
 	jr z, .asm_118a3c
-	dec a
-	and $fe
-	srl a
-	ld [wcf65], a
 	ldh a, [rSVBK]
 	push af
 	ld a, $1
@@ -282,8 +222,6 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 	ldh [rSVBK], a
 	ld a, $7
 	ld [wBattleTowerRoomMenuJumptableIndex], a
-	ld a, $0
-	ld [wMobileInactivityTimerFrames], a
 	ret
 
 Text_CancelBattleRoomChallenge:
@@ -306,7 +244,7 @@ BattleTowerRoomMenu_UpdateYesNoMenu:
 	; Only ever called when [wBattleTowerRoomMenu2JumptableIndex] is $10
 	call BattleTowerRoomMenu2
 	ret c
-	ld a, [wMobileInactivityTimerFrames]
+	xor a
 	ld [wBattleTowerRoomMenuJumptableIndex], a
 	ret
 
@@ -396,7 +334,7 @@ BattleTowerRoomMenu2_PlaceYesNoMenu:
 	ld a, $ed
 	ld [hl], a
 	xor a
-	ld [wMobileInactivityTimerMinutes], a
+	ld [wBattleTowerRoomMenuCancelCursor], a
 	jmp BattleTowerRoomMenu2_IncrementJumptable
 
 MenuHeader_11a2de:
@@ -428,14 +366,11 @@ BattleTowerRoomMenu2_UpdateYesNoMenu:
 	ret
 
 .d_up
-	xor a
-	ld [wcd8a], a
-	ld [wcd8b], a
-	ld a, [wMobileInactivityTimerMinutes]
+	ld a, [wBattleTowerRoomMenuCancelCursor]
 	and a
 	jr z, .asm_11a24c
 	xor a
-	ld [wMobileInactivityTimerMinutes], a
+	ld [wBattleTowerRoomMenuCancelCursor], a
 	hlcoord 15, 8
 	ld a, $ed
 	ld [hl], a
@@ -445,14 +380,11 @@ BattleTowerRoomMenu2_UpdateYesNoMenu:
 	jr .asm_11a24c
 
 .d_down
-	xor a
-	ld [wcd8a], a
-	ld [wcd8b], a
-	ld a, [wMobileInactivityTimerMinutes]
+	ld a, [wBattleTowerRoomMenuCancelCursor]
 	and a
 	jr nz, .asm_11a24c
 	inc a
-	ld [wMobileInactivityTimerMinutes], a
+	ld [wBattleTowerRoomMenuCancelCursor], a
 	hlcoord 15, 8
 	ld a, $7f
 	ld [hl], a
@@ -462,27 +394,16 @@ BattleTowerRoomMenu2_UpdateYesNoMenu:
 	jr .asm_11a24c
 
 .a_button
-	xor a
-	ld [wcd8a], a
-	ld [wcd8b], a
 	call PlayClickSFX
-	ld a, [wMobileInactivityTimerMinutes]
+	ld a, [wBattleTowerRoomMenuCancelCursor]
 	and a
 	jr nz, .exit_no_carry
 	call ExitMenu
 	farcall HDMATransferTilemapAndAttrmap_Overworld
-	ld a, [wMobileInactivityTimerFrames]
-	cp $0
-	jr z, .asm_11a2b4
-	ld a, [wcd47]
-	jr .exit_carry
-
-.asm_11a2b4
 	ld a, [wcd33]
-.exit_carry
-	ld [wcf66], a
+	ld [wBattleTowerRoomMenuJumptableIndex], a
 	ld a, $a
-	ld [wMobileErrorCodeBuffer], a
+	ld [wBattleTowerRoomMenuResult], a
 	scf
 	ret
 
@@ -628,107 +549,6 @@ Function11a9f0:
 	ld a, $1
 	and a
 	ret
-
-AddMobileMonToParty: ; used by `_GiveOddEgg:`
-	ld hl, wPartyCount
-	ld a, [hl]
-	ld e, a
-	inc [hl]
-
-	ld a, [wMobileMonSpeciesPointer]
-	ld l, a
-	ld a, [wMobileMonSpeciesPointer + 1]
-	ld h, a
-	inc hl
-	ld bc, wPartySpecies
-	ld d, e
-.loop1
-	inc bc
-	dec d
-	jr nz, .loop1
-	ld a, e
-	ld [wCurPartyMon], a
-	ld a, [hl]
-	ld [bc], a
-	inc bc
-	ld a, -1
-	ld [bc], a
-
-	ld hl, wPartyMon1Species
-	ld bc, PARTYMON_STRUCT_LENGTH
-	ld a, e
-	ld [wMobileMonIndex], a
-.loop2
-	add hl, bc
-	dec a
-	and a
-	jr nz, .loop2
-	ld e, l
-	ld d, h
-	ld a, [wMobileMonStructPointer]
-	ld l, a
-	ld a, [wMobileMonStructPointer + 1]
-	ld h, a
-	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyBytes
-
-	ld hl, wPartyMonOTs
-	ld bc, NAME_LENGTH
-	ld a, [wMobileMonIndex]
-.loop3
-	add hl, bc
-	dec a
-	and a
-	jr nz, .loop3
-	ld e, l
-	ld d, h
-	ld a, [wMobileMonOTPointer]
-	ld l, a
-	ld a, [wMobileMonOTPointer + 1]
-	ld h, a
-	ld bc, MON_NAME_LENGTH - 1
-	call CopyBytes
-	ld a, "@"
-	ld [de], a
-
-	ld hl, wPartyMonNicknames
-	ld bc, MON_NAME_LENGTH
-	ld a, [wMobileMonIndex]
-.loop4
-	add hl, bc
-	dec a
-	and a
-	jr nz, .loop4
-	ld e, l
-	ld d, h
-	ld a, [wMobileMonNicknamePointer]
-	ld l, a
-	ld a, [wMobileMonNicknamePointer + 1]
-	ld h, a
-	ld bc, MON_NAME_LENGTH - 1
-	call CopyBytes
-	ld a, "@"
-	ld [de], a
-
-	ld hl, sPartyMail
-	ld bc, MAIL_STRUCT_LENGTH
-	ld a, [wMobileMonIndex]
-.loop5
-	add hl, bc
-	dec a
-	and a
-	jr nz, .loop5
-	ld a, BANK(sPartyMail)
-	call OpenSRAM
-	ld e, l
-	ld d, h
-	ld a, [wMobileMonMailPointer]
-	ld l, a
-	ld a, [wMobileMonMailPointer + 1]
-	ld h, a
-	ld bc, MAIL_STRUCT_LENGTH
-	call CopyBytes
-	jmp CloseSRAM
 
 ;+=========================================+
 ;| Parameter: [wScriptVar] = 0..1          |

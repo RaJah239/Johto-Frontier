@@ -95,9 +95,6 @@ CreditsStringsPointers:
 	dw .ExecutiveProducer
 	dw .PokemonAnimation
 	dw .PokedexText
-	dw .MobilePrjLeader
-	dw .MobileSystemAd
-	dw .MobileStadiumDir
 	dw .Coordination
 	dw .Copyright
 	dw .UsVersionStaff
@@ -204,9 +201,6 @@ CreditsStringsPointers:
 .ExecutiveProducer:   db " EXECUTIVE PRODUCER@"       ; "エグゼクティブ　プロデューサー@"
 .PokemonAnimation:    db " #MON ANIMATION@"           ; "#　アニメーション@"
 .PokedexText:         db "    #DEX TEXT@"             ; "ずかん　テキスト@"
-.MobilePrjLeader:     db " MOBILE PRJ. LEADER@"       ; "モバイルプロジェクト　りーダー@"
-.MobileSystemAd:      db " MOBILE SYSTEM AD.@"        ; "モバイル　システムアドバイザー@"
-.MobileStadiumDir:    db "MOBILE STADIUM DIR.@"       ; "モバイルスタジアム　ディレクター@"
 .Coordination:        db "    COORDINATION@"          ; "コーディネーター@"
 .UsVersionStaff:      db "  US VERSION STAFF@"
 .UsCoordination:      db "  US COORDINATION@"

@@ -88,11 +88,9 @@ SpriteAnimOAMData:
 	spriteanimoam $04, .OAMData_Tree                     ; SPRITE_ANIM_OAMSET_HEADBUTT_TREE_2
 	spriteanimoam $00, .OAMData_BlueWalk                 ; SPRITE_ANIM_OAMSET_BLUE_WALK_1
 	spriteanimoam $04, .OAMData_BlueWalk                 ; SPRITE_ANIM_OAMSET_BLUE_WALK_2
-	spriteanimoam $20, .OAMData_MobileTradeCableBulge    ; SPRITE_ANIM_OAMSET_MOBILE_TRADE_CABLE_BULGE_1
-	spriteanimoam $21, .OAMData_MobileTradeCableBulge    ; SPRITE_ANIM_OAMSET_MOBILE_TRADE_CABLE_BULGE_2
-	spriteanimoam $22, .OAMData_MobileTradePing1         ; SPRITE_ANIM_OAMSET_MOBILE_TRADE_PING_1
-	spriteanimoam $23, .OAMData_MobileTradePing2         ; SPRITE_ANIM_OAMSET_MOBILE_TRADE_PING_2
-	spriteanimoam $27, .OAMData_MobileTradePing3         ; SPRITE_ANIM_OAMSET_MOBILE_TRADE_PING_3
+	rept 5 ; reserved OAM IDs
+		spriteanimoam $00, .OAMData_1x1_Palette0
+	endr
 	spriteanimoam $00, .OAMData_IntroSuicune1            ; SPRITE_ANIM_OAMSET_INTRO_SUICUNE_1
 	spriteanimoam $08, .OAMData_IntroSuicune2            ; SPRITE_ANIM_OAMSET_INTRO_SUICUNE_2
 	spriteanimoam $60, .OAMData_IntroSuicune3            ; SPRITE_ANIM_OAMSET_INTRO_SUICUNE_3
@@ -627,43 +625,6 @@ SpriteAnimOAMData:
 	dbsprite  0, -1,  0,  0, $01, PAL_OW_BLUE
 	dbsprite -1,  0,  0,  0, $02, PAL_OW_BLUE
 	dbsprite  0,  0,  0,  0, $03, PAL_OW_BLUE
-
-.OAMData_MobileTradeCableBulge:
-	db 1
-	dbsprite -1, -1,  4,  4, $00, 2
-
-.OAMData_MobileTradePing1:
-	db 4
-	dbsprite -1, -1,  0,  0, $00, 1
-	dbsprite  0, -1,  0,  0, $00, 1 | X_FLIP
-	dbsprite -1,  0,  0,  0, $00, 1 | Y_FLIP
-	dbsprite  0,  0,  0,  0, $00, 1 | X_FLIP | Y_FLIP
-
-.OAMData_MobileTradePing2:
-	db 8
-	dbsprite -2, -2,  4,  4, $00, 1
-	dbsprite -1, -2,  4,  4, $01, 1
-	dbsprite  0, -2,  4,  4, $00, 1 | X_FLIP
-	dbsprite -2, -1,  4,  4, $02, 1
-	dbsprite  0, -1,  4,  4, $02, 1 | X_FLIP
-	dbsprite -2,  0,  4,  4, $00, 1 | Y_FLIP
-	dbsprite -1,  0,  4,  4, $01, 1 | Y_FLIP
-	dbsprite  0,  0,  4,  4, $00, 1 | X_FLIP | Y_FLIP
-
-.OAMData_MobileTradePing3:
-	db 12
-	dbsprite -2, -2,  0,  0, $00, 1
-	dbsprite -1, -2,  0,  0, $01, 1
-	dbsprite -2, -1,  0,  0, $02, 1
-	dbsprite  0, -2,  0,  0, $01, 1 | X_FLIP
-	dbsprite  1, -2,  0,  0, $00, 1 | X_FLIP
-	dbsprite  1, -1,  0,  0, $02, 1 | X_FLIP
-	dbsprite -2,  0,  0,  0, $02, 1 | Y_FLIP
-	dbsprite -2,  1,  0,  0, $00, 1 | Y_FLIP
-	dbsprite -1,  1,  0,  0, $01, 1 | Y_FLIP
-	dbsprite  1,  0,  0,  0, $02, 1 | X_FLIP | Y_FLIP
-	dbsprite  0,  1,  0,  0, $01, 1 | X_FLIP | Y_FLIP
-	dbsprite  1,  1,  0,  0, $00, 1 | X_FLIP | Y_FLIP
 
 .OAMData_IntroSuicune1:
 	db 36

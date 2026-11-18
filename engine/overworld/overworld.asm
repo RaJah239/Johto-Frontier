@@ -16,28 +16,6 @@ _UpdatePlayerSprite::
 	ld [wSpriteFlags], a
 	jmp GetUsedSprite
 
-_RefreshSprites: ; mobile
-	ld hl, wSpriteFlags
-	ld a, [hl]
-	push af
-	res 7, [hl]
-	set 6, [hl]
-	call LoadUsedSpritesGFX
-	pop af
-	ld [wSpriteFlags], a
-	ret
-
-_ClearSprites: ; mobile
-	ld hl, wSpriteFlags
-	ld a, [hl]
-	push af
-	set 7, [hl]
-	res 6, [hl]
-	call LoadUsedSpritesGFX
-	pop af
-	ld [wSpriteFlags], a
-	ret
-
 RefreshSprites::
 	push hl
 	push de
@@ -155,10 +133,6 @@ LoadUsedSpritesGFX:
 	jr LoadMiscTiles
 
 LoadMiscTiles:
-	ld a, [wSpriteFlags]
-	bit 6, a
-	ret nz
-
 	ld c, EMOTE_SHADOW
 	farcall LoadEmote
 	call GetMapEnvironment
@@ -384,42 +358,6 @@ GetSpriteLength:
 	ld a, 4
 	ret
 
-GetUsedSprites:
-	ld hl, wUsedSprites
-	ld c, SPRITE_GFX_LIST_CAPACITY
-
-.loop
-	ld a, [wSpriteFlags]
-	res 5, a
-	ld [wSpriteFlags], a
-
-	ld a, [hli]
-	and a
-	jr z, .done
-	ldh [hUsedSpriteIndex], a
-
-	ld a, [hli]
-	ldh [hUsedSpriteTile], a
-
-	bit 7, a
-	jr z, .dont_set
-
-	ld a, [wSpriteFlags]
-	set 5, a ; load VBank0
-	ld [wSpriteFlags], a
-
-.dont_set
-	push bc
-	push hl
-	call GetUsedSprite
-	pop hl
-	pop bc
-	dec c
-	jr nz, .loop
-
-.done
-	ret
-
 GetUsedSprite::
 	ldh a, [hUsedSpriteIndex]
 	call SafeGetSprite
@@ -428,12 +366,7 @@ GetUsedSprite::
 	push hl
 	push de
 	push bc
-	ld a, [wSpriteFlags]
-	bit 7, a
-	jr nz, .skip
 	call .CopyToVram
-
-.skip
 	pop bc
 	ld l, c
 	ld h, $0
@@ -448,8 +381,6 @@ endr
 
 	ld a, [wSpriteFlags]
 	bit 5, a
-	jr nz, .done
-	bit 6, a
 	jr nz, .done
 
 	ldh a, [hUsedSpriteIndex]

@@ -1,11 +1,11 @@
 Music_PokemonCenter:
 	channel_count 4
-	channel 1, Music_MobileCenter_Ch1
-	channel 2, Music_MobileCenter_Ch2
-	channel 3, Music_MobileCenter_Ch3
-	channel 4, Music_MobileCenter_Ch4
+	channel 1, Music_PokemonCenter_Ch1
+	channel 2, Music_PokemonCenter_Ch2
+	channel 3, Music_PokemonCenter_Ch3
+	channel 4, Music_PokemonCenter_Ch4
 
-Music_MobileCenter_Ch1:
+Music_PokemonCenter_Ch1:
 	tempo 160
 	volume 7, 7
 	duty_cycle 1
@@ -157,7 +157,7 @@ Music_MobileCenter_Ch1:
 	note F_, 2
 	sound_loop 0, .mainloop
 
-Music_MobileCenter_Ch2:
+Music_PokemonCenter_Ch2:
 	note_type 12, 12, 2
 	duty_cycle 3
 	rest 10
@@ -325,7 +325,7 @@ Music_MobileCenter_Ch2:
 	note D_, 2
 	sound_loop 0, .mainloop
 
-Music_MobileCenter_Ch3:
+Music_PokemonCenter_Ch3:
 	note_type 12, 2, 4
 	vibrato 16, 3, 4
 	octave 4
@@ -451,7 +451,7 @@ Music_MobileCenter_Ch3:
 	vibrato 16, 3, 4
 	sound_loop 0, .mainloop
 
-Music_MobileCenter_Ch4:
+Music_PokemonCenter_Ch4:
 	toggle_noise 3
 	stereo_panning FALSE, TRUE
 	drum_speed 12

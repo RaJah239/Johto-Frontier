@@ -738,7 +738,7 @@ LinkTradeOTPartymonMenuLoop:
 	jmp LinkTradeOTPartymonMenuCheckCancel
 
 LinkTrade_PlayerPartyMenu:
-	farcall InitMG_Mobile_LinkTradePalMap
+	farcall InitCableTradePalMap
 	xor a
 	ld [wMonType], a
 	ld a, A_BUTTON | D_UP | D_DOWN

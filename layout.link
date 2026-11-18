@@ -351,7 +351,6 @@ WRAMX 5
 	org $d700
 	"Weather Fade Start Palettes"
 	org $d800
-; "Mobile RAM" unused
 WRAMX 6
 	"Scratch RAM"
 WRAMX 7
@@ -379,14 +378,6 @@ SRAM $02
 	"PokeDB Bank 1"
 SRAM $03
 	"PokeDB Bank 2"
-SRAM $04
-	"SRAM Bank 4"
-SRAM $05
-	"SRAM Mobile 2" ; to go and be "SRAM Trainer Rankings"
-SRAM $06
-	"SRAM Mobile 3"
-SRAM $07
-	"SRAM Mobile 4"
 HRAM
 	"OAM DMA"
 	"HRAM"

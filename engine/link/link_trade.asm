@@ -7,17 +7,11 @@ __LoadTradeScreenBorderGFX:
 	lb bc, BANK(LinkCommsBorderGFX), 70
 	jmp Get2bpp
 
-LoadMobileTradeBorderTilemap:
-	ld hl, MobileTradeBorderTilemap
-	decoord 0, 0
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	jmp CopyBytes
-
-MobileTradeBorderTilemap:
-INCBIN "gfx/trade/border_mobile.tilemap"
-
 CableTradeBorderTopTilemap:
 INCBIN "gfx/trade/border_cable_top.tilemap"
+
+CableTradeBorderMiddleTilemap:
+INCBIN "gfx/trade/border_cable_middle.tilemap"
 
 CableTradeBorderBottomTilemap:
 INCBIN "gfx/trade/border_cable_bottom.tilemap"
@@ -95,7 +89,7 @@ _LinkTextbox:
 InitTradeSpeciesList:
 	call _LoadTradeScreenBorderGFX
 	call LoadCableTradeBorderTilemap
-	farcall InitMG_Mobile_LinkTradePalMap
+	farcall InitCableTradePalMap
 	farcall PlaceTradePartnerNamesAndParty
 	hlcoord 10, 17
 	ld de, .CancelString
@@ -117,10 +111,13 @@ LoadTradeRoomBGPals:
 	farjp _LoadTradeRoomBGPals
 
 LoadCableTradeBorderTilemap:
-	call LoadMobileTradeBorderTilemap
 	ld hl, CableTradeBorderTopTilemap
 	decoord 0, 0
 	ld bc, 2 * SCREEN_WIDTH
+	call CopyBytes
+	ld hl, CableTradeBorderMiddleTilemap
+	decoord 0, 2
+	ld bc, 14 * SCREEN_WIDTH
 	call CopyBytes
 	ld hl, CableTradeBorderBottomTilemap
 	decoord 0, 16

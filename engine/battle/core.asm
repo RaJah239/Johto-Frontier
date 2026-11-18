@@ -7946,7 +7946,6 @@ InitBattleDisplay:
 	hlcoord 0, 12
 	lb bc, 4, 18
 	call Textbox
-	farcall MobileTextBorder
 	hlcoord 1, 5
 	lb bc, 3, 7
 	call ClearBox

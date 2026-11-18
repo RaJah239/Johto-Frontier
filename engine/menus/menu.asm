@@ -19,7 +19,6 @@ _InterpretBattleMenu::
 
 .display
 	call Draw2DMenu
-	farcall MobileTextBorder
 	call UpdateSprites
 	call ApplyTilemap
 	call Get2DMenuSelection
@@ -365,7 +364,6 @@ ShowBattleTypeChart:
 	call GetMemSGBLayout
 	call SetDefaultBGPAndOBP
 	call Draw2DMenu
-	call MobileTextBorder
 	call UpdateSprites
 	jmp ApplyTilemap
 

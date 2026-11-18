@@ -27,7 +27,7 @@ INCLUDE "gfx/font/bg_text.pal"
 
 INCLUDE "engine/tilesets/tileset_palettes.asm"
 
-_InitMG_Mobile_LinkTradePalMap:
+InitCableTradePalMap:
 	hlcoord 0, 0, wAttrmap
 	lb bc, 16, 2
 	ld a, $4
@@ -87,6 +87,3 @@ _LoadTradeRoomBGPals:
 
 TradeRoomPalette:
 INCLUDE "gfx/trade/border.pal"
-
-InitMG_Mobile_LinkTradePalMap:
-	jmp _InitMG_Mobile_LinkTradePalMap

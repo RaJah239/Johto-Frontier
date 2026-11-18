@@ -536,8 +536,6 @@ Paragraph::
 	ld a, [wLinkMode]
 	cp LINK_COLOSSEUM
 	jr z, .linkbattle
-	cp LINK_MOBILE
-	jr z, .linkbattle
 	call LoadBlinkingCursor
 
 .linkbattle
@@ -873,8 +871,6 @@ TextCommand_PROMPT_BUTTON::
 ; wait for button press; show arrow
 	ld a, [wLinkMode]
 	cp LINK_COLOSSEUM
-	jmp z, TextCommand_WAIT_BUTTON
-	cp LINK_MOBILE
 	jmp z, TextCommand_WAIT_BUTTON
 
 	push hl

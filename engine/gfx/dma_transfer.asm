@@ -33,7 +33,7 @@ HDMATransferTilemapToWRAMBank3::
 
 HDMATransferAttrmapToWRAMBank3:
 	ld hl, .Function
-	jmp CallInSafeGFXMode
+	jr CallInSafeGFXMode
 
 .Function:
 	decoord 0, 0, wAttrmap
@@ -46,7 +46,7 @@ HDMATransferAttrmapToWRAMBank3:
 
 HDMATransferTilemapAndAttrmap_Overworld::
 	ld hl, .Function
-	jmp CallInSafeGFXMode
+	jr CallInSafeGFXMode
 
 .Function:
 	decoord 0, 0, wAttrmap
@@ -102,31 +102,6 @@ _HDMATransferTilemapAndAttrmap_Menu::
 	pop af
 	ldh [rVBK], a
 	reti
-
-Mobile_HDMATransferTilemapAndAttrmap_Menu:
-	ld hl, .Function
-	jr CallInSafeGFXMode
-
-.Function:
-	; Transfer wAttrmap and Tilemap to BGMap
-	; Fill vBGAttrs with $00
-	; Fill vBGTiles with $ff
-	decoord 0, 0, wAttrmap
-	ld hl, wScratchAttrmap
-	call PadAttrmapForHDMATransfer
-	ld c, $ff
-	decoord 0, 0
-	ld hl, wScratchTilemap
-	call PadMapForHDMATransfer
-
-	ld a, $1
-	ldh [rVBK], a
-	ld hl, wScratchAttrmap
-	call HDMATransfer_WaitForScanline128_toBGMap
-	ld a, $0
-	ldh [rVBK], a
-	ld hl, wScratchTilemap
-	jr HDMATransfer_WaitForScanline128_toBGMap
 
 CallInSafeGFXMode:
 	ldh a, [hBGMapMode]

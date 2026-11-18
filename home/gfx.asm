@@ -1,7 +1,6 @@
 ; The game runs in double speed, so VBlank has room for twice vanilla's
 ; 8 tiles (Serve2bppRequest only starts within the first 2 lines of VBlank).
 DEF TILES_PER_CYCLE EQU 16
-DEF MOBILE_TILES_PER_CYCLE EQU 6
 
 Get2bppViaHDMA::
 	ldh a, [rLCDC]
@@ -236,16 +235,6 @@ Request2bpp::
 	ld a, TILES_PER_CYCLE
 	ldh [hTilesPerCycle], a
 
-	ld a, [wLinkMode]
-	cp LINK_MOBILE
-	jr nz, .NotMobile
-	ldh a, [hMobile]
-	and a
-	jr nz, .NotMobile
-	ld a, MOBILE_TILES_PER_CYCLE
-	ldh [hTilesPerCycle], a
-
-.NotMobile:
 	ld a, e
 	ld [wRequested2bppSource], a
 	ld a, d
@@ -297,7 +286,7 @@ Request1bpp::
 ; Load 1bpp at b:de to occupy c tiles of hl.
 	ldh a, [rLCDC]
 	bit rLCDC_ENABLE, a
-	jmp z, Copy1bpp ; (VBlank would never serve it)
+	jr z, Copy1bpp ; (VBlank would never serve it)
 	ldh a, [hBGMapMode]
 	push af
 	xor a
@@ -313,16 +302,6 @@ Request1bpp::
 	ld a, TILES_PER_CYCLE
 	ldh [hTilesPerCycle], a
 
-	ld a, [wLinkMode]
-	cp LINK_MOBILE
-	jr nz, .NotMobile
-	ldh a, [hMobile]
-	and a
-	jr nz, .NotMobile
-	ld a, MOBILE_TILES_PER_CYCLE
-	ldh [hTilesPerCycle], a
-
-.NotMobile:
 	ld a, e
 	ld [wRequested1bppSource], a
 	ld a, d

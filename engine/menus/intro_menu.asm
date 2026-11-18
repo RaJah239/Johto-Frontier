@@ -325,7 +325,7 @@ FinishContinueFunction:
 	ld [wLinkMode], a
 	ld hl, wGameTimerPaused
 	set GAME_TIMER_COUNTING_F, [hl]
-	res GAME_TIMER_MOBILE_F, [hl]
+	res GAME_TIMER_UNUSED_7_F, [hl]
 	ld hl, wEnteredMapFromContinue
 	set 1, [hl]
 	farcall OverworldLoop

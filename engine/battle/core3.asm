@@ -45,7 +45,6 @@ _MoveInfoBox:
 	inc b
 .got_box
 	call Textbox
-	call MobileTextBorder
 
 	ld a, [wPlayerDisableCount]
 	and a

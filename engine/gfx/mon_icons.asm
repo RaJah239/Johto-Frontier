@@ -206,122 +206,11 @@ LoadMenuMonIcon:
 	dw NamingScreen_InitAnimatedMonIcon ; MONICON_NAMINGSCREEN
 	dw MoveList_InitAnimatedMonIcon     ; MONICON_MOVES
 	dw Trade_LoadMonIconGFX             ; MONICON_TRADE
-	dw Mobile_InitAnimatedMonIcon       ; MONICON_MOBILE1
-	dw Mobile_InitPartyMenuBGPal71      ; MONICON_MOBILE2
 	dw Pokedex_InitAnimatedMonIcon      ; MONICON_UNUSED
-
-Unused_GetPartyMenuMonIcon:
-	call InitPartyMenuIcon
-	call .GetPartyMonItemGFX
-	jmp SetPartyMonIconAnimSpeed
-
-.GetPartyMonItemGFX:
-	push bc
-	ldh a, [hObjectStructIndex]
-	ld hl, wPartyMon1Item
-	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
-	pop bc
-	ld a, [hl]
-	and a
-	jr z, .no_item
-	push hl
-	push bc
-	ld d, a
-	callfar ItemIsMail
-	pop bc
-	pop hl
-	jr c, .not_mail
-	ld a, $06
-	jr .got_tile
-.not_mail
-	ld a, $05
-	; fallthrough
-
-.no_item
-	ld a, $04
-.got_tile
-	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
-	add hl, bc
-	ld [hl], a
-	ret
-
-Mobile_InitAnimatedMonIcon:
-	call InitPartyMenuIcon
-	call SetPartyMonHeldItemFrameset
-	call SetPartyMonIconAnimSpeed
-	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
-	add hl, bc
-	ld a, SPRITE_ANIM_FUNC_NULL
-	ld [hl], a
-	ld hl, SPRITEANIMSTRUCT_XCOORD
-	add hl, bc
-	ld a, 9 * TILE_WIDTH
-	ld [hl], a
-	ld hl, SPRITEANIMSTRUCT_YCOORD
-	add hl, bc
-	ld a, 9 * TILE_WIDTH
-	ld [hl], a
-	ret
-
-Mobile_InitPartyMenuBGPal71:
-	call InitPartyMenuIcon
-	call SetPartyMonIconAnimSpeed
-	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
-	add hl, bc
-	ld a, SPRITE_ANIM_FUNC_NULL
-	ld [hl], a
-	ld hl, SPRITEANIMSTRUCT_XCOORD
-	add hl, bc
-	ld a, 3 * TILE_WIDTH
-	ld [hl], a
-	ld hl, SPRITEANIMSTRUCT_YCOORD
-	add hl, bc
-	ld a, 12 * TILE_WIDTH
-	ld [hl], a
-	ld a, c
-	ld [wc608], a
-	ld a, b
-	ld [wc608 + 1], a
-	ret
 
 PartyMenu_InitAnimatedMonIcon:
 	call InitPartyMenuIcon
 	jr SetPartyMonIconAnimSpeed
-
-SetPartyMonHeldItemFrameset:
-	push bc
-	ldh a, [hObjectStructIndex]
-	ld hl, wPartyMon1Item
-	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
-	pop bc
-	ld a, [hl]
-	and a
-	ret z
-	push hl
-	push bc
-	ld d, a
-	callfar ItemIsMail
-	pop bc
-	pop hl
-	jr c, .mail
-	ld a, SPRITE_ANIM_FRAMESET_PARTY_MON_WITH_ITEM
-	jr .okay
-
-.mail
-	ld a, SPRITE_ANIM_FRAMESET_PARTY_MON_WITH_MAIL
-.okay
-	; The mobile layout still embeds the marker in the bottom-left
-	; quadrant, so give that OAM object the marker palette explicitly.
-	ldh a, [hObjectStructIndex]
-	swap a ; four OAM objects per party icon
-	ld e, a
-	ld d, 0
-	ld hl, wShadowOAMSprite00Attributes + 2 * OBJ_SIZE
-	add hl, de
-	ld [hl], PAL_OW_RED
-	ret
 
 InitPartyMenuIcon:
 	call LoadPartyMenuMonIconColors
@@ -563,7 +452,7 @@ LoadIconHeldItemGFX:
 	add hl, de
 	ld de, HeldItemIcons
 	lb bc, BANK(HeldItemIcons), 2
-	call GetGFXUnlessMobile
+	call CopyMenuIconTiles
 	ld a, [wCurIconTile]
 	add 10
 	ld [wCurIconTile], a
@@ -594,7 +483,7 @@ GetIcon:
 
 CopyIconGFX:
 	push hl
-	call GetGFXUnlessMobile
+	call CopyMenuIconTiles
 	pop hl
 	ret
 
@@ -617,7 +506,7 @@ GetIconBank:
 	ld b, BANK("Mon Icons 2")
 	ret
 
-GetGFXUnlessMobile:
+CopyMenuIconTiles:
 ; Send the icon tiles straight away with H-Blank DMA instead of
 ; requesting them for the next VBlank: a party of 6 used to take
 ; 6+ frames to load its icons, now it takes a few scanlines.

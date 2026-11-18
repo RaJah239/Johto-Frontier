@@ -106,7 +106,6 @@ hLCDCPointer::     db
 hLYOverrideStart:: db
 hLYOverrideEnd::   db
 
-hMobileReceive::             db
 hSerialReceivedNewData::     db
 hSerialConnectionStatus::    db
 hSerialIgnoringInitialData:: db
@@ -151,7 +150,6 @@ hCGB::          db
 hSGB::          db
 
 hDMATransfer:: db
-hMobile:: db
 hSystemBooted:: db
 
 hFarCallSavedA:: db

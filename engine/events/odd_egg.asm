@@ -56,47 +56,49 @@ _GiveOddEgg:
 	ld hl, wNumItems
 	call TossItem
 
-	; load species in wMobileMonSpecies
+	ld hl, wPartyCount
+	ld a, [hl]
+	ld [wCurPartyMon], a
+	inc [hl]
+	ld c, a
+	ld b, 0
+	ld hl, wPartySpecies
+	add hl, bc
+	ld [hl], EGG
+	inc hl
+	ld [hl], -1
+
+	ld hl, wPartyMon1Species
+	call GetPartyLocation
+	ld d, h
+	ld e, l
+	ld hl, wOddEgg
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call CopyBytes
+
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMonOTs
+	call SkipNames
+	ld d, h
+	ld e, l
+	ld hl, .Odd
+	ld bc, NAME_LENGTH
+	call CopyBytes
+
 	ld a, EGG
-	ld [wMobileMonMiscSpecies], a
-	; Use species name set to "EGG"
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMonNicknames
+	call SkipNames
+	ld d, h
+	ld e, l
 	ld hl, wStringBuffer1
-	ld de, wOddEggName
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
-
-	; load pointer to (wMobileMonSpecies - 1) in wMobileMonSpeciesPointer
-	ld a, LOW(wMobileMonMiscSpecies - 1)
-	ld [wMobileMonSpeciesPointer], a
-	ld a, HIGH(wMobileMonMiscSpecies - 1)
-	ld [wMobileMonSpeciesPointer + 1], a
-	; load pointer to wOddEgg in wMobileMonStructPointer
-	ld a, LOW(wOddEgg)
-	ld [wMobileMonStructPointer], a
-	ld a, HIGH(wOddEgg)
-	ld [wMobileMonStructPointer + 1], a
-
-	; load Odd Egg Name in wTempOddEggNickname
-	ld hl, .Odd
-	ld de, wTempOddEggNickname
-	ld bc, MON_NAME_LENGTH
-	call CopyBytes
-
-	; load pointer to wTempOddEggNickname in wMobileMonOTPointer
-	ld a, LOW(wTempOddEggNickname)
-	ld [wMobileMonOTPointer], a
-	ld a, HIGH(wTempOddEggNickname)
-	ld [wMobileMonOTPointer + 1], a
-	; load pointer to wOddEggName in wMobileMonNicknamePointer
-	ld a, LOW(wOddEggName)
-	ld [wMobileMonNicknamePointer], a
-	ld a, HIGH(wOddEggName)
-	ld [wMobileMonNicknamePointer + 1], a
-	farjp AddMobileMonToParty
+	jmp CopyBytes
 
 .Odd:
 	db "ODD@@@@@@@@@"
+
 
 INCLUDE "data/events/odd_eggs.asm"
