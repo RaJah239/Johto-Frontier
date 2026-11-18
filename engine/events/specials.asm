@@ -251,23 +251,6 @@ SetSwarmFlag:
 	set DAILYFLAGS1_SWARM_F, [hl]
 	ret
 
-CheckSwarmFlag::
-	ld hl, wDailyFlags1
-	bit DAILYFLAGS1_SWARM_F, [hl]
-	jr z, .clear_swarm
-	xor a
-	ld [wScriptVar], a
-	ret
-
-.clear_swarm
-	ld a, 1
-	ld [wScriptVar], a
-	xor a
-	ld [wFishingSwarmFlag], a
-	ld [wSwarmMapGroup], a
-	ld [wSwarmMapNumber], a
-	ret
-
 CheckPokerus:
 ; Check if a monster in your party has Pokerus
 	farcall _CheckPokerus
