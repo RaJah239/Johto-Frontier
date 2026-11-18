@@ -50,65 +50,33 @@ if DEF(_DEBUG)
 	ret
 .regular_move
 endc
+	call .CheckForced
+	call .GetAction
+	call .CheckTile
+	ret c
+	call .CheckTurning
+	ret c
 	ld a, [wPlayerState]
-	cp PLAYER_NORMAL
-	jr z, .Normal
 	cp PLAYER_SURF
 	jr z, .Surf
 	cp PLAYER_SURF_PIKA
 	jr z, .Surf
-	cp PLAYER_BIKE
-	jr z, .Normal
-	cp PLAYER_SKATE
-	jr z, .Ice
 
-.Normal:
-	call .CheckForced
-	call .GetAction
-	call .CheckTile
-	ret c
-	call .CheckTurning
-	ret c
 	call .TryStep
 	ret c
 	call .TryJump
 	ret c
 	call .CheckWarp
 	ret c
+	ld a, [wPlayerState]
+	cp PLAYER_SKATE
+	jr z, .IceStopped
 	jr .NotMoving
 
 .Surf:
-	call .CheckForced
-	call .GetAction
-	call .CheckTile
-	ret c
-	call .CheckTurning
-	ret c
 	call .TrySurf
 	ret c
-	jr .NotMoving
-
-.Ice:
-	call .CheckForced
-	call .GetAction
-	call .CheckTile
-	ret c
-	call .CheckTurning
-	ret c
-	call .TryStep
-	ret c
-	call .TryJump
-	ret c
-	call .CheckWarp
-	ret c
-	ld a, [wWalkingDirection]
-	cp STANDING
-	jr z, .HitWall
-	call .BumpSound
-.HitWall:
-	call .StandInPlace
-	xor a
-	ret
+	; fallthrough
 
 .NotMoving:
 	ld a, [wWalkingDirection]
@@ -127,6 +95,12 @@ endc
 	call ._WalkInPlace
 	xor a
 	ret
+
+.IceStopped:
+	ld a, [wWalkingDirection]
+	cp STANDING
+	call nz, .BumpSound
+	; fallthrough
 
 .Standing:
 	call .StandInPlace
@@ -277,13 +251,6 @@ endc
 	ret
 
 .TryStep:
-; Surfing actually calls .TrySurf directly instead of passing through here.
-	ld a, [wPlayerState]
-	cp PLAYER_SURF
-	jr z, .TrySurf
-	cp PLAYER_SURF_PIKA
-	jr z, .TrySurf
-
 	call .CheckLandPerms
 	jr c, .bump
 
@@ -1037,21 +1004,17 @@ CheckTrainerRun:
 	add hl, de
 	ld a, [hl]
 	call GetObjectStruct
+	push bc
 	call AnyFacingPlayerDistance_bc
 	ld hl, MAPOBJECT_SIGHT_RANGE
 	add hl, de
 	ld a, [hl]
 	cp c
+	ld a, b
+	pop bc
 	jr c, .next
 
 ; Get them to face you
-	ld a, b
-	push af
-	ld hl, MAPOBJECT_OBJECT_STRUCT_ID
-	add hl, de
-	ld a, [hl]
-	call GetObjectStruct
-	pop af
 	call SetSpriteDirection
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
