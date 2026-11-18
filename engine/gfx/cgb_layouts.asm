@@ -1,5 +1,3 @@
-; Replaces the functionality of sgb.asm to work with CGB hardware.
-
 CheckCGB:
 	ldh a, [hCGB]
 	and a
@@ -62,15 +60,15 @@ CGBLayoutJumptable:
 	assert_table_length NUM_SCGB_LAYOUTS
 
 _CGB_BattleGrayscale:
-	ld hl, PalPacket_BattleGrayscale + 1
+	ld hl, BattleGrayscalePredefPals
 	ld de, wBGPals1
 	ld c, 4
 	call CopyPalettes
-	ld hl, PalPacket_BattleGrayscale + 1
+	ld hl, BattleGrayscalePredefPals
 	ld de, wBGPals1 palette PAL_BATTLE_BG_EXP
 	ld c, 4
 	call CopyPalettes
-	ld hl, PalPacket_BattleGrayscale + 1
+	ld hl, BattleGrayscalePredefPals
 	ld de, wOBPals1
 	ld c, 2
 	call CopyPalettes
@@ -981,7 +979,7 @@ _CGB_Diploma:
 	ld a, BANK(wBGPals1)
 	call FarCopyWRAM
 
-	ld hl, PalPacket_Diploma + 1
+	ld hl, DiplomaPredefPals
 	call CopyFourPalettes
 	call WipeAttrmap
 	jmp ApplyAttrmap
@@ -1001,7 +999,7 @@ LoadPartyMenuPalsOnly::
 ; is about to push it anyway.
 	call ResetBGPals
 _CGB_PartyMenuPals:
-	ld hl, PalPacket_PartyMenu + 1
+	ld hl, PartyMenuPredefPals
 	call CopyFourPalettes
 	call InitPartyMenuBGPal0
 	call InitPartyMenuBGPal7
@@ -1043,7 +1041,7 @@ _CGB_Evolution:
 	ret
 
 _CGB_UnownPuzzle:
-	ld hl, PalPacket_UnownPuzzle + 1
+	ld hl, UnownPuzzlePredefPals
 	call CopyFourPalettes
 	ld de, wOBPals1
 	ld a, PREDEFPAL_UNOWN_PUZZLE
@@ -1344,7 +1342,7 @@ _CGB_PlayerOrMonFrontpicPals:
 	jmp ApplyPals
 
 _CGB_TradeTube:
-	ld hl, PalPacket_TradeTube + 1
+	ld hl, TradeTubePredefPals
 	call CopyFourPalettes
 	ld hl, PartyMenuOBPals
 	ld de, wOBPals1

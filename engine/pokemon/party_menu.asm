@@ -152,7 +152,7 @@ PlacePartyNicknames:
 
 PlacePartyHPBar:
 	xor a
-	ld [wSGBPals], a
+	ld [wPartyHPBarIndex], a
 	ld a, [wPartyCount]
 	and a
 	ret z
@@ -171,7 +171,7 @@ PlacePartyHPBar:
 	ld b, $0
 	call DrawBattleHPBar
 	ld hl, wHPPals
-	ld a, [wSGBPals]
+	ld a, [wPartyHPBarIndex]
 	ld c, a
 	ld b, 0
 	add hl, bc
@@ -179,7 +179,7 @@ PlacePartyHPBar:
 	ld b, SCGB_PARTY_MENU_HP_BARS
 	call GetSGBLayout
 .skip
-	ld hl, wSGBPals
+	ld hl, wPartyHPBarIndex
 	inc [hl]
 	pop hl
 	ld de, 2 * SCREEN_WIDTH

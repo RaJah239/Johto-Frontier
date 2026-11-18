@@ -52,7 +52,7 @@ PredefPointers::
 	add_predef PrintMonTypes
 	add_predef GetUnownLetter
 	add_predef LoadPoisonBGPals
-	add_predef InitSGBBorder
+	dab DoNothing ; former SGB border initializer
 	add_predef LoadSGBLayout
 	add_predef Pokedex_GetArea
 	add_predef DoBattleTransition

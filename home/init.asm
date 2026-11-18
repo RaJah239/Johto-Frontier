@@ -11,7 +11,7 @@ Reset::
 	ei
 
 	ld hl, wJoypadDisable
-	set JOYPAD_DISABLE_SGB_TRANSFER_F, [hl]
+	set JOYPAD_DISABLE_RESET_F, [hl]
 	jr Init
 
 _Start::
@@ -161,8 +161,6 @@ Init::
 	ei
 
 	call DelayFrame
-
-	predef InitSGBBorder
 
 	call InitSound
 	xor a

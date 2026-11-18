@@ -56,8 +56,7 @@ clean: tidy
 	     \( -name "*.[12]bpp" \
 	        -o -name "*.lz" \
 	        -o -name "*.lzp" \
-	        -o -name "*.gbcpal" \
-	        -o -name "*.sgb.tilemap" \) \
+	        -o -name "*.gbcpal" \) \
 	     -delete
 	find gfx/pokemon -mindepth 1 \
 	     ! -path "gfx/pokemon/unown/*" \
@@ -171,7 +170,6 @@ gfx/mail/flower_mail_border.1bpp: tools/gfx += --remove-whitespace
 gfx/mail/litebluemail_border.1bpp: tools/gfx += --remove-whitespace
 
 gfx/pokedex/pokedex.2bpp: tools/gfx += --trim-whitespace
-gfx/pokedex/pokedex_sgb.2bpp: tools/gfx += --trim-whitespace
 gfx/pokedex/question_mark.2bpp: rgbgfx += -Z
 gfx/pokedex/slowpoke.2bpp: tools/gfx += --trim-whitespace
 
@@ -247,10 +245,6 @@ gfx/battle/dude.2bpp: rgbgfx += -Z
 gfx/type_chart/bg.2bpp: tools/gfx += --remove-duplicates --remove-xflip --remove-yflip
 gfx/type_chart/bg0.2bpp: gfx/type_chart/bg.2bpp.vram1p gfx/type_chart/bg.2bpp.vram0p ; cat $^ > $@
 gfx/type_chart/ob.2bpp: tools/gfx += --interleave --png=$<
-
-gfx/sgb/sgb_border.2bpp: tools/gfx += --trim-whitespace
-gfx/sgb/sgb_border.sgb.tilemap: gfx/sgb/sgb_border.bin ; tr < $< -d '\000' > $@
-
 
 ### Catch-all graphics rules
 

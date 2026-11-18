@@ -1041,7 +1041,8 @@ wCurHPPal:: db
 
 	ds 7
 
-wSGBPals:: ds 48
+wPartyHPBarIndex:: db
+	ds 47 ; reserved
 
 wAttrmap::
 ; 20x18 grid of bg tile attributes for 8x8 tiles
@@ -1208,7 +1209,6 @@ wHallOfFameMonCounter::
 wTradeDialog::
 	db
 wFrameCounter2::
-wUnusedSGB1eColorOffset::
 	db
 wUnusedTradeAnimPlayEvolutionMusic:: db
 
@@ -1334,7 +1334,7 @@ wJoypadDisable::
 ; bits 4, 6, or 7 can be used to disable joypad input
 ; bit 4
 ; bit 6: ongoing mon faint animation
-; bit 7: ongoing sgb data transfer
+; bit 7: soft reset in progress
 	db
 
 	ds 1
