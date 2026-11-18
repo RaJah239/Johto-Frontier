@@ -321,22 +321,13 @@ endc
 	ret
 
 .walk
+; Holding B: the opposite of the Running Shoes option.
 	ld a, [wOptions2]
 	bit RUNNING_SHOES, a
-	jr nz, .runningshoesareinactive
-	ld a, STEP_RUN
-	jr .runinstead
-.runningshoesareinactive:
 	ld a, STEP_WALK
-.runinstead:
-	call .DoStep
-	push af
-	ld a, [wWalkingDirection]
-	cp STANDING
-	call nz, CheckTrainerRun
-	pop af
-	scf
-	ret
+	jr nz, .foot_step
+	ld a, STEP_RUN
+	jr .foot_step
 
 .ice
 	ld a, STEP_ICE
@@ -351,12 +342,24 @@ endc
 
 	ld a, [wOptions2]
 	bit RUNNING_SHOES, a
-	jr nz, .runningshoesareactive
-	ld a, STEP_WALK
-	jr .walkinstead
-.runningshoesareactive:
 	ld a, STEP_RUN
-.walkinstead
+	jr nz, .foot_step
+	ld a, STEP_WALK
+.foot_step
+; Only running (on foot) makes spinning trainers turn to face the player:
+; walking, biking and surfing can still slip past them.
+	cp STEP_RUN
+	jr nz, .foot_walk
+	call .DoStep
+	push af
+	ld a, [wWalkingDirection]
+	cp STANDING
+	call nz, CheckTrainerRun
+	pop af
+	scf
+	ret
+
+.foot_walk
 	call .DoStep
 	scf
 	ret
@@ -1001,9 +1004,12 @@ CheckTrainerRun:
 	ld hl, MAPOBJECT_TYPE
 	add hl, de
 	ld a, [hl]
-	and $f
-	cp $2
+	and MAPOBJECT_TYPE_MASK
+	cp OBJECTTYPE_TRAINER
+	jr z, .is_trainer
+	cp OBJECTTYPE_GENERICTRAINER
 	jr nz, .next
+.is_trainer
 ; Is visible on the map
 	ld hl, MAPOBJECT_OBJECT_STRUCT_ID
 	add hl, de
@@ -1047,16 +1053,19 @@ CheckTrainerRun:
 	call GetObjectStruct
 	pop af
 	call SetSpriteDirection
+	ld hl, OBJECT_STEP_TYPE
+	add hl, bc
+	ld [hl], STEP_TYPE_SLEEP
+	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld a, [hl]
 	cp $40
 	jr nc, .next
-	ld a, $40
-	ld [hl], a
+	ld [hl], $40
 
 .next
 	pop de
-	ld hl, OBJECT_LENGTH
+	ld hl, MAPOBJECT_LENGTH
 	add hl, de
 	ld d, h
 	ld e, l
@@ -1086,16 +1095,15 @@ AnyFacingPlayerDistance_bc::
 	add hl, bc
 	ld e, [hl]
 
-	ld a, [hJoypadDown]
-	bit 7, a
-	jr nz, .down
-	bit 6, a
-	jr nz, .up
-	bit 5, a
-	jr nz, .left
-	bit 4, a
-	jr nz, .right
-.down
+; Use the square the player is stepping onto.
+	ld a, [wWalkingDirection]
+	cp UP
+	jr z, .up
+	cp LEFT
+	jr z, .left
+	cp RIGHT
+	jr z, .right
+; down
 	lb bc, 1, 0
 	jr .got_vector
 .up
