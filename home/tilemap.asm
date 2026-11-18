@@ -222,17 +222,10 @@ GetMemSGBLayout::
 	; fallthrough
 
 GetSGBLayout::
-; load sgb packets unless dmg
-
+; Apply the CGB palette layout selected in b.
 	ldh a, [hCGB]
 	and a
-	jr nz, .sgb
-
-	ldh a, [hSGB]
-	and a
 	ret z
-
-.sgb
 	predef_jump LoadSGBLayout
 
 SetHPPal::
