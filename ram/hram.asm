@@ -147,7 +147,7 @@ hBattleTurn::
 
 hCGBPalUpdate:: db
 hCGB::          db
-hSGB::          db
+	db ; reserved
 
 hDMATransfer:: db
 hSystemBooted:: db
