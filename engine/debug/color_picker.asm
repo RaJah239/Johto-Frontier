@@ -36,11 +36,7 @@ DebugColourPicker:
 ; A debug menu to test monster and trainer palettes at runtime.
 	ldh a, [hCGB]
 	and a
-	jr nz, .cgb
-	ldh a, [hSGB]
-	and a
 	ret z
-.cgb
 	ldh a, [hInMenu]
 	push af
 	ld a, TRUE
@@ -433,16 +429,11 @@ DebugColor_SetRGBMeter:
 	jmp DebugColor_CalculateRGB
 
 DebugColor_UpdateScreen:
-	ldh a, [hCGB]
-	and a
-	jr z, .sgb
-
 	ld a, 2
 	ldh [hBGMapMode], a
 	call DelayFrame
 	call DelayFrame
 	call DelayFrame
-.sgb
 	call WaitBGMap
 
 	ld a, DEBUGCOLORMAIN_UPDATEPALETTES
@@ -450,11 +441,6 @@ DebugColor_UpdateScreen:
 	ret
 
 DebugColor_UpdatePalettes:
-	ldh a, [hCGB]
-	and a
-	jr z, .sgb
-
-; cgb
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wBGPals2)
@@ -480,41 +466,6 @@ DebugColor_UpdatePalettes:
 
 	pop af
 	ldh [rSVBK], a
-	ret
-
-.sgb
-	ld hl, wSGBPals
-	ld a, 1
-	ld [hli], a
-	ld a, LOW(PALRGB_WHITE)
-	ld [hli], a
-	ld a, HIGH(PALRGB_WHITE)
-	ld [hli], a
-	ld a, [wDebugLightColor + 0]
-	ld [hli], a
-	ld a, [wDebugLightColor + 1]
-	ld [hli], a
-	ld a, [wDebugDarkColor + 0]
-	ld [hli], a
-	ld a, [wDebugDarkColor + 1]
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
-
-	ld hl, wSGBPals
-	call DebugColor_PushSGBPals
-
-	hlcoord 10, 2
-	ld de, wDebugLightColor
-	call DebugColor_PrintHexColor
-	hlcoord 15, 2
-	ld de, wDebugDarkColor
-	call DebugColor_PrintHexColor
-
-	ld a, DEBUGCOLORMAIN_JOYPAD
-	ld [wJumptableIndex], a
 	ret
 
 DebugColor_PrintHexColor:
@@ -908,65 +859,6 @@ DebugColor_FillBoxWithByte:
 	dec b
 	jr nz, .row
 	ret
-
-DebugColor_PushSGBPals:
-	ld a, [wJoypadDisable]
-	push af
-	set JOYPAD_DISABLE_SGB_TRANSFER_F, a
-	ld [wJoypadDisable], a
-	call _DebugColor_PushSGBPals
-	pop af
-	ld [wJoypadDisable], a
-	ret
-
-_DebugColor_PushSGBPals:
-	ld a, [hl]
-	and $7
-	ret z
-	ld b, a
-.loop
-	push bc
-	xor a
-	ldh [rJOYP], a
-	ld a, $30
-	ldh [rJOYP], a
-	ld b, $10
-.loop2
-	ld e, $8
-	ld a, [hli]
-	ld d, a
-.loop3
-	bit 0, d
-	ld a, $10
-	jr nz, .okay
-	ld a, $20
-.okay
-	ldh [rJOYP], a
-	ld a, $30
-	ldh [rJOYP], a
-	rr d
-	dec e
-	jr nz, .loop3
-	dec b
-	jr nz, .loop2
-	ld a, $20
-	ldh [rJOYP], a
-	ld a, $30
-	ldh [rJOYP], a
-	ld de, 7000
-.wait
-	nop
-	nop
-	nop
-	dec de
-	ld a, d
-	or e
-	jr nz, .wait
-	pop bc
-	dec b
-	jr nz, .loop
-	ret
-
 DebugColor_PlaceCursor:
 	ld a, DEBUGTEST_BLACK
 	hlcoord 10, 0
