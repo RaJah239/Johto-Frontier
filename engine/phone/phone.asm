@@ -638,27 +638,6 @@ Phone_GetTrainerClassName:
 	pop hl
 	ret
 
-GetCallerLocation:
-	ld a, [wCurCaller]
-	call GetCallerTrainerClass
-	ld d, c
-	ld e, b
-	push de
-	ld a, [wCurCaller]
-	ld hl, PhoneContacts + PHONE_CONTACT_MAP_GROUP
-	ld bc, PHONE_CONTACT_SIZE
-	call AddNTimes
-	ld b, [hl]
-	inc hl
-	ld c, [hl]
-	push bc
-	call GetWorldMapLocation
-	ld e, a
-	farcall GetLandmarkName
-	pop bc
-	pop de
-	ret
-
 INCLUDE "data/phone/phone_contacts.asm"
 
 INCLUDE "data/phone/special_calls.asm"
