@@ -913,7 +913,7 @@ FoeDetailsPageInfoBox:
 	ld c, 18
 
 	hlcoord 0, 0
-	ld b, 3
+	ld b, 2
 	ld c, 18
 	call Textbox
 
@@ -936,7 +936,7 @@ FoeDetailsPageInfoBox:
 	call GetItemName
 
 .printItemName
-	hlcoord 2, 3
+	hlcoord 2, 2
 	call PlaceString
 
 	ld de, .FoeMovesString
