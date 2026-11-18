@@ -361,7 +361,7 @@ endr
 	ld hl, wTMsHMs
 	add hl, bc
 	ld a, [hl]
-	cp MAX_ITEM_STACK
+	cp MAX_ITEM_STACK + 1
 	jr c, .stacked_ok
 	ld a, MAX_ITEM_STACK
 .stacked_ok

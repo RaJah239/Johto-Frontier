@@ -219,9 +219,6 @@ PutItemInPocket:
 	ld a, MAX_ITEM_STACK
 	sub [hl]
 	add b
-	jr nc, .room
-	ld a, $ff ; (room for any quantity: it's at most 255)
-.room
 	ld b, a
 	ld a, [wItemQuantityChange]
 	cp b
@@ -256,17 +253,12 @@ PutItemInPocket:
 	jr nz, .loop2
 	ld a, [wItemQuantity]
 	add [hl]
-	jr c, .newstack ; over 255
-	cp MAX_ITEM_STACK
-	jr z, .fits
+	cp MAX_ITEM_STACK + 1
 	jr nc, .newstack
-.fits
 	ld [hl], a
 	jr .done
 
 .newstack
-	; fill this stack; the rest (the sum - MAX_ITEM_STACK, which fits in a
-	; byte even when the sum didn't) goes on
 	ld [hl], MAX_ITEM_STACK
 	sub MAX_ITEM_STACK
 	ld [wItemQuantity], a
@@ -471,11 +463,8 @@ ReceiveTMHM:
 	add hl, bc
 	ld a, [wItemQuantityChange]
 	add [hl]
-	jr c, .toomany ; over 255
-	cp MAX_ITEM_STACK
-	jr z, .fits
+	cp MAX_ITEM_STACK + 1
 	jr nc, .toomany
-.fits
 	ld [hl], a
 	scf
 	ret

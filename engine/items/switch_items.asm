@@ -120,12 +120,9 @@ SwitchItemsInBag:
 	ld a, [hl]
 	pop hl
 	add [hl]
-	jr c, .over_stack ; over 255
-	cp MAX_ITEM_STACK
-	jr z, .merge_stacks
+	cp MAX_ITEM_STACK + 1
 	jr c, .merge_stacks
-.over_stack
-	sub MAX_ITEM_STACK ; (the rest fits in a byte)
+	sub MAX_ITEM_STACK
 	push af
 	ld a, [wScrollingMenuCursorPosition]
 	call ItemSwitch_GetNthItem

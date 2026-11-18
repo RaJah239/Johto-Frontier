@@ -508,7 +508,7 @@ _AskThrowAwayText::
 
 _AskQuantityThrowAwayText::
 	text "Throw away @"
-	text_decimal wItemQuantityChange, 1, 3 ; (up to 255: MAX_ITEM_STACK)
+	text_decimal wItemQuantityChange, 1, 2
 	text_start
 	line "@"
 	text_ram wStringBuffer2
@@ -869,7 +869,7 @@ _PlayersPCHowManyWithdrawText::
 
 _PlayersPCWithdrewItemsText::
 	text "Withdrew @"
-	text_decimal wItemQuantityChange, 1, 3 ; (up to 255: MAX_ITEM_STACK)
+	text_decimal wItemQuantityChange, 1, 2
 	text_start
 	line "@"
 	text_ram wStringBuffer2
@@ -897,7 +897,7 @@ _PlayersPCHowManyDepositText::
 
 _PlayersPCDepositItemsText::
 	text "Deposited @"
-	text_decimal wItemQuantityChange, 1, 3 ; (up to 255: MAX_ITEM_STACK)
+	text_decimal wItemQuantityChange, 1, 2
 	text_start
 	line "@"
 	text_ram wStringBuffer2
@@ -1153,7 +1153,7 @@ _ItemsTossOutHowManyText::
 
 _ItemsThrowAwayText::
 	text "Throw away @"
-	text_decimal wItemQuantityChange, 1, 3 ; (up to 255: MAX_ITEM_STACK)
+	text_decimal wItemQuantityChange, 1, 2
 	text_start
 	line "@"
 	text_ram wStringBuffer2

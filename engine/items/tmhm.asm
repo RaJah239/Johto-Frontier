@@ -560,7 +560,7 @@ TMHM_DisplayPocketItems:
 	push bc
 	cp NUM_TMS + 1
 	jr nc, .hm2
-	ld bc, SCREEN_WIDTH + 8 ; (×255: one column left of where ×99 started)
+	ld bc, SCREEN_WIDTH + 9
 	add hl, bc
 	ld [hl], "×"
 	inc hl
@@ -570,7 +570,7 @@ TMHM_DisplayPocketItems:
 	ld a, b
 	ld [wTempTMHM], a
 	ld de, wTempTMHM
-	lb bc, 1, 3
+	lb bc, 1, 2
 	call PrintNum
 .hm2
 	pop bc
