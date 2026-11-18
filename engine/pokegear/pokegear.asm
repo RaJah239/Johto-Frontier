@@ -808,6 +808,7 @@ PokegearMap_JohtoMap:
 .done_dpad
 	ld a, [wPokegearMapCursorLandmark]
 	call PokegearMap_UpdateLandmarkName
+	call ApplyTilemap
 	ld a, [wPokegearMapCursorObjectPointer]
 	ld c, a
 	ld a, [wPokegearMapCursorObjectPointer + 1]
