@@ -334,7 +334,10 @@ InitPartyMenuIcon:
 	add hl, de
 	ld a, [hl]
 	ld [wCurIcon], a
-	call GetMemIconGFX
+	ld a, MON_DVS
+	call GetPartyParamLocation
+	ld a, [wCurIconTile]
+	call GetIconGFXWithDVs
 	ldh a, [hObjectStructIndex]
 ; y coord
 	add a
@@ -392,7 +395,7 @@ NamingScreen_InitAnimatedMonIcon:
 	ld a, [wTempIconSpecies]
 	ld [wCurIcon], a
 	xor a
-	call GetIconGFX
+	call GetIconGFXWithDVs
 	depixel 4, 4, 4, 0
 	ld a, SPRITE_ANIM_OBJ_PARTY_MON
 	call _InitSpriteAnimStruct
@@ -408,7 +411,7 @@ MoveList_InitAnimatedMonIcon:
 	ld a, [wTempIconSpecies]
 	ld [wCurIcon], a
 	xor a
-	call GetIconGFX
+	call GetIconGFXWithDVs
 	ld d, 3 * TILE_WIDTH + 2 ; depixel 3, 4, 2, 4
 	ld e, 4 * TILE_WIDTH + 4
 	ld a, SPRITE_ANIM_OBJ_PARTY_MON
@@ -475,15 +478,17 @@ Trade_LoadMonIconGFX:
 	ld a, [wTempIconSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurIcon], a
+	push hl
 	call GetMenuMonIconPalette
 	add a
 	add a
 	add a
 	ld e, a
 	farcall SetSecondOBJPalette
+	pop hl
 	ld a, $62
 	ld [wCurIconTile], a
-	jr GetMemIconGFX
+	jr GetIconGFXWithDVs
 
 GetSpeciesIcon:
 ; Load species icon into VRAM at tile a
@@ -517,10 +522,43 @@ SetOWFlyMonColor:
 	ld e, a
 	farjp SetFirstOBJPalette
 
+GetIconGFXWithDVs:
+; a = destination tile, hl = DVs for the Pokémon in wCurIcon.
+	ld e, a
+	ld a, [wCurIcon]
+	cp UNOWN
+	ld a, e
+	jr nz, GetIconGFX
+	push af
+	call GetUnownIcon
+	pop af
+	ld l, a
+	ld h, 0
+	call GetIconVRAMAddress
+	call CopyIconGFX
+	jr LoadIconHeldItemGFX
+
+GetUnownIcon:
+; hl = Unown's DVs. Return the graphics in b:de and the tile count in c.
+	predef GetUnownLetter
+	ld a, [wUnownLetter]
+	dec a
+	ld l, a
+	ld h, 0
+	add hl, hl
+	ld de, UnownIconPointers
+	add hl, de
+	ld a, [hli]
+	ld e, a
+	ld d, [hl]
+	lb bc, BANK("Unown Icons"), 8
+	ret
+
 GetMemIconGFX:
 	ld a, [wCurIconTile]
 GetIconGFX:
 	call GetIcon_a
+LoadIconHeldItemGFX:
 	ld de, 8 tiles
 	add hl, de
 	ld de, HeldItemIcons
@@ -548,32 +586,27 @@ GetIcon_a:
 
 GetIcon:
 ; Load icon graphics into VRAM starting from tile hl.
+	call GetIconVRAMAddress
+	push hl
+	ld a, [wCurIcon]
+	call _LoadOverworldMonIcon
+	pop hl
 
+CopyIconGFX:
+	push hl
+	call GetGFXUnlessMobile
+	pop hl
+	ret
+
+GetIconVRAMAddress:
 ; One tile is 16 bytes long.
 rept 4
 	add hl, hl
 endr
-
-	ld de, vTiles0
-	add hl, de
-	push hl
-
-	ld a, [wCurIcon]
-	push hl
-	ld l, a
-	ld h, 0
-	add hl, hl
-	ld de, IconPointers
-	add hl, de
-	ld a, [hli]
-	ld e, a
-	ld d, [hl]
-	pop hl
-
-	call GetIconBank
-	call GetGFXUnlessMobile
-
-	pop hl
+	assert LOW(vTiles0) == 0
+	ld a, h
+	add HIGH(vTiles0)
+	ld h, a
 	ret
 
 GetIconBank:
@@ -697,3 +730,5 @@ HoldSwitchmonIcon:
 INCLUDE "data/pokemon/menu_icon_pals.asm"
 
 INCLUDE "data/pokemon/icon_pointers.asm"
+
+INCLUDE "data/pokemon/unown_icon_pointers.asm"
