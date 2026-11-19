@@ -117,8 +117,7 @@ _BattleCommand_Critical:
 ; === Ability: Crit Lock ===
 ; ==========================
 	push bc
-	ldh a, [hBattleTurn]
-	call IsSideSuppressed
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_CRIT_LOCK, CritlockText, KEEP
 	pop bc
 	jr nc, .CritGuard ; Crit Lock is active
 
@@ -172,6 +171,7 @@ CriticialHitLoaded:
 	ld [wCriticalHit], a
 	ret
 
+CritlockText: db "Crit Lock@"
 CritGuardText: db "Crit Guard@"
 
 INCLUDE "data/moves/critical_hit_moves.asm"
