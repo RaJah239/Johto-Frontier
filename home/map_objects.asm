@@ -115,18 +115,11 @@ CheckGrassTile::
 	cp HI_NYBBLE_TALL_GRASS
 	jr z, .grass
 	cp HI_NYBBLE_WATER
-	jr z, .water
+	jr z, .grass
 	scf
 	ret
 
 .grass
-	ld a, d
-	and LO_NYBBLE_GRASS
-	ret z
-	scf
-	ret
-; For some reason, the above code is duplicated down here.
-.water
 	ld a, d
 	and LO_NYBBLE_GRASS
 	ret z
@@ -198,11 +191,26 @@ CheckStandingOnEntrance::
 
 GetMapObject::
 ; Return the location of map object a in bc.
-	ld hl, wMapObjects
-	ld bc, MAPOBJECT_LENGTH
-	call AddNTimes
+	assert MAPOBJECT_LENGTH == 16
+	assert wMapObjects + $ff * MAPOBJECT_LENGTH <= $ffff
+	ld bc, wMapObjects
+	and a
+	jr z, .player
+	ld l, a
+	ld h, 0
+rept 4
+	add hl, hl
+endr
+	add hl, bc
+	ld a, 1
+	dec a ; match AddNTimes's return flags
 	ld b, h
 	ld c, l
+	ret
+
+.player
+	ld h, b
+	ld l, c
 	ret
 
 CheckObjectVisibility::
@@ -504,8 +512,9 @@ GetObjectStruct::
 	ret
 
 DoesObjectHaveASprite::
-	ld hl, OBJECT_SPRITE
-	add hl, bc
+	assert OBJECT_SPRITE == 0
+	ld h, b
+	ld l, c
 	ld a, [hl]
 	and a
 	ret
