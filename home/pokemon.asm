@@ -211,13 +211,6 @@ _PrintLevel::
 	inc c
 	jr Print8BitNumLeftAlign
 
-PrintLevel_Force3Digits::
-; Print :L and all 3 digits
-	ld [hl], "<LV>"
-	inc hl
-	ld c, 3
-	; fallthrough
-
 Print8BitNumLeftAlign::
 	ld [wTextDecimalByte], a
 	ld de, wTextDecimalByte
