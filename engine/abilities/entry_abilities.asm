@@ -838,12 +838,24 @@ INCLUDE "data/abilities/silk_snare_mons.asm"
 
 SetEntryHazard:
 ; Lay hazard mask b on the target's side. Return z if it was already there.
+; Skip it for this SpikesDamage call if that side's mon just switched in.
 	call GetTargetScreens
 	ld a, [hl]
 	and b
 	jr nz, .already_up
 	call EntryNGCancel
 	jr c, .already_up
+	push hl
+	ldh a, [hBattleTurn]
+	xor 1
+	ld hl, wEntryHazardSwitchTurn
+	cp [hl]
+	jr nz, .not_current_switch_in
+	ld a, [wEntryHazardSkipMask]
+	or b
+	ld [wEntryHazardSkipMask], a
+.not_current_switch_in
+	pop hl
 	ld a, [hl]
 	or b
 	ld [hl], a

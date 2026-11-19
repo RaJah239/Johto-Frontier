@@ -3263,6 +3263,13 @@ BreakAttraction:
 	ret
 
 SpikesDamage:
+	; Entry abilities run before hazard damage. Don't let a hazard they lay
+	; against this same switch-in affect the newly arrived Pokemon immediately.
+	ldh a, [hBattleTurn]
+	ld [wEntryHazardSwitchTurn], a
+	xor a
+	ld [wEntryHazardSkipMask], a
+
 	; the hBattleTurn side sent out a mon: its entry abilities go off
 	; once both sides have a mon out (engine/abilities/entry_abilities.asm)
 	farcall QueueEntryAbilities
@@ -3303,6 +3310,9 @@ SpikesDamage:
 	jmp .StickyWeb
 
 .Spikes:
+	ld a, [wEntryHazardSkipMask]
+	bit SCREENS_SPIKES, a
+	ret nz
 	bit SCREENS_SPIKES, [hl]
 	ret z
 
@@ -3344,6 +3354,9 @@ SpikesDamage:
 	jmp .pop
 
 .StealthRock:
+	ld a, [wEntryHazardSkipMask]
+	bit SCREENS_STEALTH_ROCK, a
+	ret nz
 	bit SCREENS_STEALTH_ROCK, [hl]
 	ret z
 
@@ -3394,6 +3407,9 @@ SpikesDamage:
 .ToxicSpikes:
 
 ; End if there aren't Toxic Spikes down.
+	ld a, [wEntryHazardSkipMask]
+	bit SCREENS_TOXIC_SPIKES, a
+	ret nz
 	bit SCREENS_TOXIC_SPIKES, [hl]
 	ret z
 
@@ -3440,7 +3456,7 @@ SpikesDamage:
 
 ; Serenity and Immunity: no Toxic Spikes poisoning
 	newfarcall UserHasSerenity ; engine/battle/effect_commands.asm
-	jr c, .pop
+	jmp c, .pop
 	newfarcall UserHasImmunity ; engine/abilities/defensive_abilities.asm
 	jr c, .pop
 
@@ -3487,6 +3503,9 @@ SpikesDamage:
 .StickyWeb:
 
 ; End if there isn't a Sticky Web down.
+	ld a, [wEntryHazardSkipMask]
+	bit SCREENS_STICKY_WEB, a
+	ret nz
 	bit SCREENS_STICKY_WEB, [hl]
 	ret z
 

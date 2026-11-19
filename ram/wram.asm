@@ -1854,7 +1854,9 @@ wMapMusicForGroup:: db
 wSunShimmerTimer:: db ; 0-29 frame of the pulse; bit 7: skipped last frame
 wSunShimmerLevel:: db ; brightness step last applied (0-5)
 
-	ds 2
+; Scratch state used to defer entry-set hazards for the current switch-in.
+wEntryHazardSwitchTurn:: db
+wEntryHazardSkipMask:: db
 
 
 SECTION "More WRAM 1", WRAMX
