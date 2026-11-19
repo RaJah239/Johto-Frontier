@@ -415,10 +415,6 @@ Script_SpecialBillCall::
 	ld e, PHONE_BILL
 	jr LoadCallerScript
 
-.LoadElmScript:
-	ld e, PHONE_ELM
-	jr LoadCallerScript
-
 RingTwice_StartCall:
 	call .Ring
 	; fallthrough
