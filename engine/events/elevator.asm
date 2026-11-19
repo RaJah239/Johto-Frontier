@@ -23,7 +23,7 @@ Elevator::
 	ld [wElevatorPointer], a
 	ld a, d
 	ld [wElevatorPointer + 1], a
-	jr .LoadFloors
+	; fallthrough
 
 .LoadFloors:
 	ld de, wCurElevatorCount
@@ -146,8 +146,7 @@ Elevator_GetCurrentFloorText:
 	push af
 	set NO_TEXT_SCROLL, [hl]
 	hlcoord 0, 0
-	ld b, 4
-	ld c, 8
+	lb bc, 4, 8
 	call Textbox
 	hlcoord 1, 2
 	ld de, Elevator_CurrentFloorText
