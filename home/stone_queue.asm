@@ -41,8 +41,8 @@ HandleStoneQueue::
 	ld hl, OBJECT_MAP_X
 	add hl, de
 	ld a, [hl]
-	ld hl, OBJECT_MAP_Y
-	add hl, de
+	assert OBJECT_MAP_Y == OBJECT_MAP_X + 1
+	inc hl
 	ld e, [hl]
 
 	sub 4
@@ -72,8 +72,7 @@ HandleStoneQueue::
 	inc hl
 	ld a, [hld]
 	cp d
-	jr nz, .not_on_warp
-	jr .found_warp
+	jr z, .found_warp
 
 .not_on_warp
 	ld a, WARP_EVENT_SIZE
@@ -116,7 +115,8 @@ HandleStoneQueue::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jr .yes
+	scf
+	ret
 
 .next_inc3
 	inc hl
@@ -128,8 +128,4 @@ HandleStoneQueue::
 
 .nope3
 	and a
-	ret
-
-.yes
-	scf
 	ret
