@@ -182,9 +182,9 @@ Pokedex_InitCursorPosition:
 	ld hl, wPokedexOrder
 	ld a, [wPrevDexEntry]
 	and a
-	jr z, .done
+	ret z
 	cp NUM_POKEMON + 1
-	jr nc, .done
+	ret nc
 
 	ld b, a
 	ld a, [wDexListingEnd]
@@ -196,7 +196,7 @@ Pokedex_InitCursorPosition:
 .loop1
 	ld a, b
 	cp [hl]
-	jr z, .done
+	ret z
 	inc hl
 	ld a, [wDexListingScrollOffset]
 	inc a
@@ -209,7 +209,7 @@ Pokedex_InitCursorPosition:
 .loop2
 	ld a, b
 	cp [hl]
-	jr z, .done
+	ret z
 	inc hl
 	ld a, [wDexListingCursor]
 	inc a
@@ -448,11 +448,11 @@ Pokedex_Page:
  	cp "<DEX_⁂>"
  	jr z, .shinyicon_set
  	ld [hl], "<DEX_⁂>"
- 	jr .done
+	jr Pokedex_toggle_shininess2
  .shinyicon_set
  	ld [hl], " "
  .done	
- 	jr Pokedex_toggle_shininess2
+	jr Pokedex_toggle_shininess2
  
  Pokedex_toggle_shininess_Pics:
  	call Pokedex_toggle_shininess1
@@ -466,11 +466,11 @@ Pokedex_Page:
  	cp "<DEX_⁂>"
  	jr z, .shinyicon_set
  	ld [hl], "<DEX_⁂>"
- 	jr .done
+	jr Pokedex_toggle_shininess2
  .shinyicon_set
  	ld [hl], " "
  .done	
- 	jr Pokedex_toggle_shininess2
+	jr Pokedex_toggle_shininess2
  
  Pokedex_toggle_shininess1:
  ; toggle the current shininess setting
@@ -603,8 +603,7 @@ Pokedex_ReinitDexEntryScreen:
 	dec [hl]
 	ld a, [wLastDexMode]
  	cp -2
- 	jr z, Pokedex_Handle_Reinit_Evo
- 	ret
+	ret nz
  
  Pokedex_Handle_Reinit_Evo:
  	ld a, [wCurDexMode]
@@ -633,7 +632,7 @@ Handle_Button_Banner:
  	hlcoord 2, 0
  	ld a, [hl]
  	cp $41 ; first tile of START > MAP button banner
- 	ret nz
+	ret nz
 ; overwrite the button banner
  	ld a, $48 ; SELECT 1
  	ld [hli], a
@@ -1148,8 +1147,7 @@ Pokedex_UpdateOptionScreen:
 	jr nz, .return_to_main_screen
 	ld a, [hl]
 	and A_BUTTON
-	jr nz, .do_menu_action
-	ret
+	ret z
 
 .do_menu_action
 	ld a, [wDexArrowCursorPosIndex]
@@ -1256,8 +1254,7 @@ Pokedex_UpdateSearchScreen:
 	jr nz, .cancel
 	ld a, [hl]
 	and A_BUTTON
-	jr nz, .do_menu_action
-	ret
+	ret z
 
 .do_menu_action
 	ld a, [wDexArrowCursorPosIndex]
@@ -1459,8 +1456,7 @@ Pokedex_UpdateUnownMode:
 	ld hl, hJoyPressed
 	ld a, [hl]
 	and A_BUTTON | B_BUTTON
-	jr nz, .a_b
-	jr Pokedex_UnownModeHandleDPadInput
+	jr z, Pokedex_UnownModeHandleDPadInput
 
 .a_b
 	call Pokedex_BlackOutBG
@@ -1486,8 +1482,7 @@ Pokedex_UnownModeHandleDPadInput:
 	bit D_DOWN_F, a
 	jr nz, .down
 	bit D_UP_F, a
-	jr nz, .up
-	ret
+	ret z
 
 ; the grid is 5 letters wide (A-E, F-J, ..., U-Y, Z)
 .up
@@ -1602,8 +1597,7 @@ Pokedex_NextOrPreviousDexEntry:
 	jr nc, .nope
 	call Pokedex_GetSelectedMon
 	call Pokedex_CheckSeen
-	jr nz, .yep
-	jr .down
+	jr z, .down
 
 .yep
 	scf
@@ -2222,9 +2216,9 @@ Pokedex_PlaceSearchResultsTypeStrings:
 	ld b, a
 	ld a, [wDexSearchMonType2]
 	and a
-	jr z, .done
+	ret z
 	cp b
-	jr z, .done
+	ret z
 	hlcoord 2, 15
 	call Pokedex_PlaceTypeString
 	hlcoord 1, 15
@@ -2514,8 +2508,7 @@ Pokedex_PrintListing:
 Pokedex_PrintNumberIfOldMode:
 	ld a, [wCurDexMode]
 	cp DEXMODE_OLD
-	jr z, .printnum
-	ret
+	ret nz
 
 .printnum
 	push hl
@@ -2696,7 +2689,7 @@ Pokedex_ABCMode:
 	ld c, 0
 .loop2abc
 	cp NUM_POKEMON
-	jr z, .doneabc
+	ret z
 	ld [hl], c
 	inc hl
 	inc a
@@ -2918,6 +2911,84 @@ Pokedex_PrepSearchResultsWindowText:
 .ResultsSuffix
 	db "esults@"
 
+Pokedex_SearchForMons:
+	ld a, [wDexSearchMonType2]
+	and a
+	call nz, .Search
+	ld a, [wDexSearchMonType1]
+	and a
+	ret z
+	; fallthrough
+
+.Search:
+	dec a
+	ld e, a
+	ld d, 0
+	ld hl, PokedexTypeSearchConversionTable
+	add hl, de
+	ld a, [hl]
+	ld [wDexConvertedMonType], a
+	ld hl, wPokedexOrder
+	ld de, wPokedexOrder
+	ld c, NUM_POKEMON
+	xor a
+	ld [wDexSearchResultCount], a
+.loop
+	push bc
+	ld a, [hl]
+	and a
+	jr z, .next_mon
+	ld [wTempSpecies], a
+	ld [wCurSpecies], a
+	; call Pokedex_CheckCaught
+	call Pokedex_CheckSeen
+	jr z, .next_mon
+	push hl
+	push de
+	call GetBaseData
+	pop de
+	pop hl
+	ld a, [wDexConvertedMonType]
+	ld b, a
+	ld a, [wBaseType1]
+	cp b
+	jr z, .match_found
+	ld a, [wBaseType2]
+	cp b
+	jr nz, .next_mon
+
+.match_found
+	ld a, [wTempSpecies]
+	ld [de], a
+	inc de
+	ld a, [wDexSearchResultCount]
+	inc a
+	ld [wDexSearchResultCount], a
+
+.next_mon
+	inc hl
+	pop bc
+	dec c
+	jr nz, .loop
+
+	; fallthrough
+
+Pokedex_ClearRemainingSearchResults:
+	ld a, [wDexSearchResultCount]
+	ld e, a
+	ld d, 0
+	ld hl, wPokedexOrder
+	add hl, de
+	ld c, 0
+
+.zero_remaining_mons
+	cp NUM_POKEMON
+	ret z
+	ld [hl], c
+	inc hl
+	inc a
+	jr .zero_remaining_mons
+
 Pokedex_SearchCurrentAreaMons:
 	xor a
 	ld [wDexSearchResultCount], a
@@ -2927,7 +2998,7 @@ Pokedex_SearchCurrentAreaMons:
 	call Pokedex_SearchCurrentArea_GetSectionFlags
 	bit 1, a
 	call nz, .AddSurfMons
-	jp Pokedex_ClearRemainingSearchResults
+	jr Pokedex_ClearRemainingSearchResults
 
 .AddGrassMons
 	call Pokedex_SearchCurrentArea_GetGrassPointer
@@ -3016,7 +3087,7 @@ Pokedex_SearchCurrentArea_GetSectionFlags:
 	call Pokedex_SearchCurrentArea_GetSurfPointer
 	pop bc
 	ld a, b
-	jr nc, .no_surf
+	ret nc
 	or 2
 .no_surf
 	ret
@@ -3027,22 +3098,6 @@ Pokedex_SearchCurrentArea_GetGrassTimeOfDayIndex:
 	ret nz
 	ld a, DAY_F
 	ret
-
-Pokedex_SearchCurrentArea_GetGrassPointer:
-	call Pokedex_SearchCurrentArea_CheckGrassSwarm
-	ret c
-
-	ld hl, JohtoGrassWildMons
-	call Pokedex_SearchCurrentArea_CopyCurrMapDE
-	jp Pokedex_SearchCurrentArea_LookUpGrassWildmonsForMapDE
-
-Pokedex_SearchCurrentArea_GetSurfPointer:
-	call Pokedex_SearchCurrentArea_CheckWaterSwarm
-	ret c
-
-	ld hl, JohtoWaterWildMons
-	call Pokedex_SearchCurrentArea_CopyCurrMapDE
-	jp Pokedex_SearchCurrentArea_LookUpWaterWildmonsForMapDE
 
 Pokedex_SearchCurrentArea_CheckGrassSwarm:
 	ld hl, wSwarmFlags
@@ -3063,8 +3118,7 @@ Pokedex_SearchCurrentArea_CheckGrassSwarm:
 	jr nz, .not_found
 	ld a, [wSwarmMapNumber]
 	cp e
-	jr nz, .not_found
-	jp Pokedex_SearchCurrentArea_LookUpGrassWildmonsForMapDE
+	jr z, Pokedex_SearchCurrentArea_LookUpGrassWildmonsForMapDE
 
 .not_found
 	and a
@@ -3078,8 +3132,7 @@ Pokedex_SearchCurrentArea_CheckWaterSwarm:
 	jr nz, .not_found
 	ld a, [wSwarmMapNumber]
 	cp e
-	jr nz, .not_found
-	jp Pokedex_SearchCurrentArea_LookUpWaterWildmonsForMapDE
+	jr z, Pokedex_SearchCurrentArea_LookUpWaterWildmonsForMapDE
 
 .not_found
 	and a
@@ -3091,6 +3144,14 @@ Pokedex_SearchCurrentArea_CopyCurrMapDE:
 	ld a, [wMapNumber]
 	ld e, a
 	ret
+
+Pokedex_SearchCurrentArea_GetGrassPointer:
+	call Pokedex_SearchCurrentArea_CheckGrassSwarm
+	ret c
+
+	ld hl, JohtoGrassWildMons
+	call Pokedex_SearchCurrentArea_CopyCurrMapDE
+	; fallthrough
 
 Pokedex_SearchCurrentArea_LookUpGrassWildmonsForMapDE:
 	ld bc, GRASS_WILDDATA_LENGTH
@@ -3126,6 +3187,14 @@ Pokedex_SearchCurrentArea_LookUpGrassWildmonsForMapDE:
 	scf
 	ret
 
+Pokedex_SearchCurrentArea_GetSurfPointer:
+	call Pokedex_SearchCurrentArea_CheckWaterSwarm
+	ret c
+
+	ld hl, JohtoWaterWildMons
+	call Pokedex_SearchCurrentArea_CopyCurrMapDE
+	; fallthrough
+
 Pokedex_SearchCurrentArea_LookUpWaterWildmonsForMapDE:
 	ld bc, WATER_WILDDATA_LENGTH
 
@@ -3157,89 +3226,6 @@ Pokedex_SearchCurrentArea_LookUpWaterWildmonsForMapDE:
 .found
 	pop hl
 	scf
-	ret
-
-Pokedex_SearchForMons:
-	ld a, [wDexSearchMonType2]
-	and a
-	call nz, .Search
-	ld a, [wDexSearchMonType1]
-	and a
-	call nz, .Search
-	ret
-
-.Search:
-	dec a
-	ld e, a
-	ld d, 0
-	ld hl, PokedexTypeSearchConversionTable
-	add hl, de
-	ld a, [hl]
-	ld [wDexConvertedMonType], a
-	ld hl, wPokedexOrder
-	ld de, wPokedexOrder
-	ld c, NUM_POKEMON
-	xor a
-	ld [wDexSearchResultCount], a
-.loop
-	push bc
-	ld a, [hl]
-	and a
-	jr z, .next_mon
-	ld [wTempSpecies], a
-	ld [wCurSpecies], a
-	; call Pokedex_CheckCaught
- 	call Pokedex_CheckSeen
-	jr z, .next_mon
-	push hl
-	push de
-	call GetBaseData
-	pop de
-	pop hl
-	ld a, [wDexConvertedMonType]
-	ld b, a
-	ld a, [wBaseType1]
-	cp b
-	jr z, .match_found
-	ld a, [wBaseType2]
-	cp b
-	jr nz, .next_mon
-
-.match_found
-	ld a, [wTempSpecies]
-	ld [de], a
-	inc de
-	ld a, [wDexSearchResultCount]
-	inc a
-	ld [wDexSearchResultCount], a
-
-.next_mon
-	inc hl
-	pop bc
-	dec c
-	jr nz, .loop
-
-	call Pokedex_ClearRemainingSearchResults
-.done
-	ret
-
-Pokedex_ClearRemainingSearchResults:
-	ld a, [wDexSearchResultCount]
-	ld e, a
-	ld d, 0
-	ld hl, wPokedexOrder
-	add hl, de
-	ld c, 0
-
-.zero_remaining_mons
-	cp NUM_POKEMON
-	jr z, .done
-	ld [hl], c
-	inc hl
-	inc a
-	jr .zero_remaining_mons
-
-.done
 	ret
 
 INCLUDE "data/types/search_types.asm"
