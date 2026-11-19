@@ -230,8 +230,7 @@ ScrollTileRightLeft:
 	and %1111
 	ld [wTileAnimationTimer], a
 	and %1000
-	jr nz, ScrollTileLeft
-	jr ScrollTileRight
+	jr z, ScrollTileRight
 
 ScrollTileLeft:
 	ld h, d
