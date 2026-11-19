@@ -182,6 +182,12 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Life Orb still reduces HP with Pokémon that has Magic Guard ability
 - Amulet Coin doubles earnings regardless of Pokémon equipping it
 
+## Modern Critical hits
+- Critical hits now have a 1.5× damage multiplier, or 2.25× with Sniper.
+- Critical-hit odds are 1/24 at stage +0, 1/8 at +1, 1/2 at +2, and guaranteed at +3. Focus Energy, Scope Lens, Super Luck, and high-critical-hit moves stack toward that cap.
+- A critical hit ignores the attacker’s negative stat stages and the defender’s positive stat stages. It also bypasses Reflect and Light Screen.
+- Positive offensive stages, negative defensive stages, and other applicable effects—including burn, frostbite, weather, items, and abilities—still apply.
+
 ## Item Changes
 - Light Ball doubles Pikachu's Attack as well as Special Attack
 - Everstone both prevents evolution and boosts unevolved Pokémon's Defense and Special Defense
