@@ -1,3 +1,5 @@
+assert (wTilemapEnd - wTilemap) % 8 == 0
+
 LoadTilemapToTempTilemap::
 ; Load wTilemap into wTempTilemap
 	ldh a, [rSVBK]
@@ -7,7 +9,7 @@ LoadTilemapToTempTilemap::
 	hlcoord 0, 0
 	decoord 0, 0, wTempTilemap
 	ld bc, wTilemapEnd - wTilemap
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -29,7 +31,7 @@ LoadTempTilemapToTilemap::
 	hlcoord 0, 0, wTempTilemap
 	decoord 0, 0
 	ld bc, wTilemapEnd - wTilemap
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	pop af
 	ldh [rSVBK], a
 	ret
