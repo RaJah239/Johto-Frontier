@@ -265,7 +265,7 @@ _BattleCommand_CheckHit:
 ; ==========================
 ; === Ability: True Horn ===
 ; ==========================
-	surefire_ability MEGAHORN, TrueHornPokemon
+	surefire_ability MEGAHORN, TrueHornPokemon, SEND_OUT_POPUP_TRUE_HORN, TrueHornText
 
 ; ===========================
 ; === Ability: Stormbound ===

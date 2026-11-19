@@ -3,3 +3,5 @@
 TrueHornPokemon:
 ;    db HERACROSS
     db -1 ; end
+
+TrueHornText: db "True Horn@"
