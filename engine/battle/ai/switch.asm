@@ -64,8 +64,7 @@ CheckPlayerMoveTypeMatchups:
 	call .IncreaseScore
 	ld a, e
 	and a
-	jr nz, .done
-	call .IncreaseScore
+	call z, .IncreaseScore
 
 .done
  	jmp PopBCDEHL
