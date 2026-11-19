@@ -314,7 +314,7 @@ wBattleMon:: battle_struct wBattleMon
 	ds 2
 
 wWildMon:: db
-	ds 1
+	ds 6
 
 wEnemyTrainerBaseReward:: db
 wOTClassName:: ds TRAINER_CLASS_NAME_LENGTH
@@ -438,7 +438,7 @@ wPlayerSubstituteHP:: db
 wEnemySubstituteHP::  db
 
 
-	ds 2
+	ds 3
 wCurPlayerMove:: db
 wCurEnemyMove::  db
 
@@ -2219,7 +2219,7 @@ wRegisteredPhoneNumbers::
 wListMovesLineSpacing:: db
 wSwitchMonTo:: db
 wSwitchMonFrom:: db
-	ds 4
+	ds 5
 
 NEXTU
 ; miscellaneous words
