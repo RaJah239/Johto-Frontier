@@ -358,31 +358,6 @@ PlaceDictWord:
 	ld a, b
 	jr PlaceLiteralChar
 
-MACRO print_name
-	push de
-	ld de, \1
-	jp PlaceCommandCharacter
-ENDM
-
-PrintMomsName:   print_name wMomsName
-PrintPlayerName: print_name wPlayerName
-PrintRivalName:  print_name wRivalName
-PrintRedsName:   print_name wRedsName
-PrintGreensName: print_name wGreensName
-
-TrainerChar:  print_name TrainerCharText
-TMChar:       print_name TMCharText
-PCChar:       print_name PCCharText
-RocketChar:   print_name RocketCharText
-PlacePOKe:    print_name PlacePOKeText
-PlaceKougeki: print_name KougekiText
-SixDotsChar:  print_name SixDotsCharText
-PlacePKMN:    print_name PlacePKMNText
-PlacePOKE:    print_name PlacePOKEText
-PlaceJPRoute: print_name PlaceJPRouteText
-PlaceWatashi: print_name PlaceWatashiText
-PlaceKokoWa:  print_name PlaceKokoWaText
-
 PlaceMoveTargetsName::
 	ldh a, [hBattleTurn]
 	xor 1
@@ -450,6 +425,31 @@ PlaceCommandCharacter::
 	ld l, c
 	pop de
 	jmp NextChar
+
+MACRO print_name
+	push de
+	ld de, \1
+	jr PlaceCommandCharacter
+ENDM
+
+PrintMomsName:   print_name wMomsName
+PrintPlayerName: print_name wPlayerName
+PrintRivalName:  print_name wRivalName
+PrintRedsName:   print_name wRedsName
+PrintGreensName: print_name wGreensName
+
+TrainerChar:  print_name TrainerCharText
+TMChar:       print_name TMCharText
+PCChar:       print_name PCCharText
+RocketChar:   print_name RocketCharText
+PlacePOKe:    print_name PlacePOKeText
+PlaceKougeki: print_name KougekiText
+SixDotsChar:  print_name SixDotsCharText
+PlacePKMN:    print_name PlacePKMNText
+PlacePOKE:    print_name PlacePOKEText
+PlaceJPRoute: print_name PlaceJPRouteText
+PlaceWatashi: print_name PlaceWatashiText
+PlaceKokoWa:  print_name PlaceKokoWaText
 
 TMCharText::      db "TM@"
 TrainerCharText:: db "TRAINER@"
@@ -535,8 +535,7 @@ Paragraph::
 
 	ld a, [wLinkMode]
 	cp LINK_COLOSSEUM
-	jr z, .linkbattle
-	call LoadBlinkingCursor
+	call nz, LoadBlinkingCursor
 
 .linkbattle
 	call Text_WaitBGMap
@@ -554,8 +553,7 @@ Paragraph::
 _ContText::
 	ld a, [wLinkMode]
 	or a
-	jr nz, .communication
-	call LoadBlinkingCursor
+	call z, LoadBlinkingCursor
 
 .communication
 	call Text_WaitBGMap
