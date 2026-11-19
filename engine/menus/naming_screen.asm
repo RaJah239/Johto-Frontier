@@ -570,8 +570,7 @@ NamingScreen_AnimateCursor:
 	jr nz, .left
 	ld a, [hl]
 	and D_RIGHT
-	jr nz, .right
-	ret
+	ret z
 
 .right
 	call NamingScreen_GetCursorPosition
@@ -1214,8 +1213,7 @@ ComposeMail_AnimateCursor:
 	jr nz, .left
 	ld a, [hl]
 	and D_RIGHT
-	jr nz, .right
-	ret
+	ret z
 
 .right
 	call ComposeMail_GetCursorPosition
