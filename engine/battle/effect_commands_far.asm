@@ -3,6 +3,71 @@
 ; them in that bank) and farjp here; calls back into that bank use newfarcall /
 ; farjp, which pass a, bc, de, hl and flags through both ways.
 
+; =============================
+; === Ability: Priority ===
+; =============================
+PriorityAbilityPopup:
+; Show the ability popup and the priority text the first time a mon uses
+; one of the priority moves with its matching species, once each time it's
+; sent out (see ShowOncePerSendOutPopup).
+; The priority boost itself comes from GetMovePriority in core.asm.
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .foe
+
+	; player
+	ld a, [wCurPlayerMove]
+	ld c, a
+	ld a, [wBattleMonSpecies]
+	jr .got_user
+
+.foe
+	ld a, [wCurEnemyMove]
+	ld c, a
+	ld a, [wEnemyMonSpecies]
+
+.got_user
+	; a = user's species, c = move being used
+	ld b, a
+	ld a, c
+	cp IRON_HEAD
+	jr nz, .not_iron_head
+	ld a, b
+	cp BLASTOISE
+	ret nz
+	; the text and popup, once per send-out
+	ld c, SEND_OUT_POPUP_IRON_HEAD
+	newfarcall CheckSendOutPopupShown
+	ret nz
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_IRON_HEAD, PreemptText
+	jr PriorityBattleText_Call
+
+.not_iron_head
+	cp ZEN_HEADBUTT
+	ret nz
+	ld a, b
+	cp DROWZEE
+	jr z, .popup_zen
+	cp HYPNO
+	ret nz
+
+.popup_zen
+	; the text and popup, once per send-out
+	ld c, SEND_OUT_POPUP_ZEN_HEADBUTT
+	newfarcall CheckSendOutPopupShown
+	ret nz
+	ShowOncePerSendOutPopup SEND_OUT_POPUP_ZEN_HEADBUTT, PreemptText
+	; fallthrough
+
+PriorityBattleText_Call:
+	ld hl, PriorityBattleText
+	call StdBattleTextbox
+	; the text has no prompt, and hBGMapMode is off here: put it on screen
+	; so it shows together with the popup
+	jmp WaitBGMap
+
+PreemptText: db "Preempt@"
+
 _BattleCommand_Critical:
 ; Determine whether this attack's hit will be critical.
 	xor a

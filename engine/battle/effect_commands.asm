@@ -36,6 +36,7 @@ DoTurn:
 ; ==========================================
 ; === Ability popups when a move is used ===
 ; ==========================================
+	newfarcall PriorityAbilityPopup ; engine/battle/effect_commands_far.asm
 	call TypeSyncMessage
 	farcall MoveUseAbilityPopups ; engine/abilities/send_out_popup.asm
 	call DoMove

@@ -59,6 +59,11 @@ SolarPowerBattleText:
 	cont "Solar Power!"
 	prompt
 
+PriorityBattleText:
+	text "This move gets"
+	line "priority!"
+	prompt
+
 TypeSyncBattleText:
 	text "This move deals"
 	line "200<%> damage!"
