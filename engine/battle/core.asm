@@ -2946,6 +2946,14 @@ CheckIfCurPartyMonIsFitToFight:
 	ld hl, BattleText_TheresNoWillToBattle
 
 .print_textbox
+	; Replace the sixth mon's status/HP row and its attributes together.
+	; Applying attributes first briefly exposes font glyphs and wrong HP colors.
+	push hl
+	xor a
+	ldh [hBGMapMode], a
+	call SpeechTextbox
+	farcall ApplyPartyMenuTilemap
+	pop hl
 	call StdBattleTextbox
 
 .finish_fail

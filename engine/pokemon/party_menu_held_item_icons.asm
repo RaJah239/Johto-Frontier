@@ -59,8 +59,4 @@ PlacePartyMenuHeldItemIcons:
 	inc b
 	dec c
 	jr nz, .loop
-
-	ldh a, [hCGB]
-	and a
-	ret z
-	farjp ApplyAttrmap
+	farjp ApplyPartyMenuTilemap

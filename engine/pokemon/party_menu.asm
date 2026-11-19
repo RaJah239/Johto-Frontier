@@ -119,6 +119,15 @@ WritePartyMenuTilemap:
 	dw PlacePartyMonEvoStoneCompatibility
 	dw PlacePartyMonGender
 
+ApplyPartyMenuTilemap::
+; Keep tiles and attributes in the same visible frame when covering/restoring
+; status icons. A separate attribute copy exposes the other VRAM bank's tiles.
+	ldh a, [hCGB]
+	and a
+	jmp z, WaitBGMap
+	ld b, 3 ; copy both maps, retaining the pending palette update
+	farjp _SafeCopyTilemapAtOnce
+
 PlacePartyNicknames:
 	hlcoord 3, 1
 	ld a, [wPartyCount]
@@ -188,7 +197,7 @@ PlacePartyHPBar:
 	inc b
 	dec c
 	jr nz, .loop
-; PlacePartyMenuHeldItemIcons pushes the attrmap at the end of
+; PlacePartyMenuHeldItemIcons pushes both maps at the end of
 ; WritePartyMenuTilemap, so only the palettes are needed here
 ; (GetSGBLayout would push it a second time).
 	ldh a, [hCGB]
