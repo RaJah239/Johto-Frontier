@@ -49,7 +49,7 @@ BillsPC_FadeBackupPals:
 	ld hl, wBGPals1 ; wBGPals1 and wOBPals1 are consecutive
 	ld de, wBillsPC_FadeBackup
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	ld hl, wBillsPC_PalList
 	ld bc, wBillsPC_PartyList - wBillsPC_PalList
 	call CopyBytes
