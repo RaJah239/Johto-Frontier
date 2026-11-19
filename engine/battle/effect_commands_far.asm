@@ -270,7 +270,7 @@ _BattleCommand_CheckHit:
 ; ===========================
 ; === Ability: Stormbound ===
 ; ===========================
-	surefire_ability THUNDER, StormboundPokemon
+	surefire_ability THUNDER, StormboundPokemon, SEND_OUT_POPUP_STORMBOUND, StormboundText
 
 ; ===========================
 ; === Ability: True Flame ===
