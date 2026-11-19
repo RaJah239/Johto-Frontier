@@ -33,11 +33,6 @@ EnableEvents::
 	ld [wEnabledPlayerEvents], a
 	ret
 
-CheckEnabledMapEventsBit5:
-	ld hl, wEnabledPlayerEvents
-	bit 5, [hl]
-	ret
-
 EnableWildEncounters:
 	ld hl, wEnabledPlayerEvents
 	set 4, [hl]
@@ -66,7 +61,6 @@ CheckWildEncountersEnabled:
 StartMap:
 	xor a
 	ld [wScriptVar], a
-	xor a
 	ld [wScriptRunning], a
 	ld hl, wMapStatus
 	ld bc, wMapStatusEnd - wMapStatus
@@ -189,7 +183,6 @@ CheckPlayerState:
 	ret
 
 PlayerEvents:
-	xor a
 ; If there's already a player event, don't interrupt it.
 	ld a, [wScriptRunning]
 	and a
