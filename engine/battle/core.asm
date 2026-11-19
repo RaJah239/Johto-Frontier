@@ -158,7 +158,7 @@ BattleTurn:
 	ret c
 
 	; the AI's switch decision, before the turn order: it may Teleport out
-	farcall AI_PlanTeleport ; engine/battle/ai/items.asm
+	farcall AI_PlanTeleport
 
 	farcall DetermineMoveOrder
 	jr c, .false
@@ -698,8 +698,8 @@ Battle_EnemyFirst:
 	call SetEnemyTurn
 	ld a, $1
 	ld [wEnemyGoesFirst], a
-	call EnemySwitchOrTryItem
-	jr c, .switch_item
+	call TryEnemySwitch
+	jr c, .switched
 	call EnemyTurn_EndOpponentProtectEndureDestinyBond
 	ld a, [wForcedSwitch]
 	and a
@@ -714,7 +714,7 @@ Battle_EnemyFirst:
 	jmp z, HandleEnemyMonFaint
 	jr .after_enemy_residual
 
-.switch_item
+.switched
 	call SetEnemyTurn
 	call EnemySwitchSpikes
 	jmp z, HandleEnemyMonFaint
@@ -745,7 +745,7 @@ Battle_PlayerFirst:
 	xor a
 	ld [wEnemyGoesFirst], a
 	call SetEnemyTurn
-	call EnemySwitchOrTryItem
+	call TryEnemySwitch
 	push af
 	call EnemySwitchSpikes
 	jr z, .spikes_faint
@@ -768,7 +768,7 @@ Battle_PlayerFirst:
 	push bc
 	call RefreshBattleHuds
 	pop af
-	jr c, .switched_or_used_item
+	jr c, .switched
 	call LoadTilemapToTempTilemap
 	call TryEnemyFlee
 	jmp c, WildFled_EnemyFled_LinkBattleCanceled
@@ -787,7 +787,7 @@ Battle_PlayerFirst:
 	jmp z, HandleEnemyMonFaint
 	jr .skip_second_residual
 
-.switched_or_used_item
+.switched
 	call SetEnemyTurn
 	call ResidualDamage
 	jmp z, HandleEnemyMonFaint
@@ -801,25 +801,18 @@ Battle_PlayerFirst:
 	pop af ; realign stack, don't care about values
 	jmp HandleEnemyMonFaint
 
-EnemySwitchOrTryItem:
+TryEnemySwitch:
 ; From repo A: if AI_Smart_Switch (during AIChooseMove) asked for a switch
 ; (wEnemyIsSwitching), try it (AI_TrySwitch: not when trapped, set up or
 ; alone; the switch-in picker chooses the mon); otherwise
-; AI_SwitchOrTryItem. Carry if the enemy switched or used an item.
+; use AI_TryMatchupSwitch. Return carry if the enemy switched.
 ; If AI_PlanTeleport already decided (an enemy that knows Teleport), do that.
 	ld a, [wAITeleportPlan]
 	and a ; AI_TELEPORT_PLAN_NONE
 	jr z, .no_plan
-	cp AI_TELEPORT_PLAN_MOVE
-	jr z, .use_move
 	cp AI_TELEPORT_PLAN_SWITCH
-	jr nz, .stay
+	jr nz, .no_switch
 	farjp AI_Switch
-.stay
-	farjp AI_TryItem
-.use_move
-	and a
-	ret
 
 .no_plan
 	ld a, [wEnemyIsSwitching]
@@ -846,7 +839,7 @@ EnemySwitchOrTryItem:
 	ret
 
 .no_smart_switch
-	farjp AI_SwitchOrTryItem
+	farjp AI_TryMatchupSwitch
 
 EnemySwitchSpikes:
 	ld a, [wEnemyIsSwitching]
@@ -2533,9 +2526,6 @@ ResetEnemyBattleVars:
 	ld [wLastEnemyCounterMove], a
 	ld [wLastEnemyMove], a
 	ld [wCurEnemyMove], a
-	dec a
-	ld [wEnemyItemState], a
-	xor a
 	ld [wPlayerWrapCount], a
 	hlcoord 18, 0
 	ld a, 8
@@ -7702,8 +7692,6 @@ InitEnemyTrainer:
 	callfar GetBattleTrainerPic
 	xor a
 	ldh [hGraphicStartTile], a
-	dec a
-	ld [wEnemyItemState], a
 	hlcoord 12, 0
 	lb bc, 7, 7
 	predef PlaceGraphic

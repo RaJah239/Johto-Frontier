@@ -715,16 +715,6 @@ _EnemyWithdrewText::
 	line "withdrawn!"
 	done
 
-_EnemyUsedOnText::
-	text "<ENEMY>"
-	line "used @"
-	text_ram wMonOrItemNameBuffer
-	text_start
-	cont "on @"
-	text_ram wEnemyMonNickname
-	text "!"
-	prompt
-
 _AskFloorElevatorText::
 	text "Which floor?"
 	done

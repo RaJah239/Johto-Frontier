@@ -169,12 +169,12 @@ DEF UNBURDEN_ITEM_ENEMY_F    EQU 5
 DEF MAGIC_BOUNCE_ACTIVE_F    EQU 6
 DEF MAGIC_BOUNCE_GOES_FIRST_F EQU 7 ; wEnemyGoesFirst, saved while it bounces a move
 
-; wAITeleportPlan (AI_PlanTeleport, engine/battle/ai/items.asm)
+; wAITeleportPlan (see AI_PlanTeleport)
 	const_def
-	const AI_TELEPORT_PLAN_NONE   ; no plan: EnemySwitchOrTryItem decides as usual
+	const AI_TELEPORT_PLAN_NONE   ; no plan: TryEnemySwitch checks for a switch
 	const AI_TELEPORT_PLAN_MOVE   ; use its move (Teleport, a pivot move, or a locked-in move)
 	const AI_TELEPORT_PLAN_SWITCH ; switch out (to wEnemySwitchMonIndex)
-	const AI_TELEPORT_PLAN_STAY   ; stay in (maybe use an item)
+	const AI_TELEPORT_PLAN_STAY   ; stay in and use the selected move
 DEF SEND_OUT_POPUP_BYTES EQU (NUM_SEND_OUT_POPUPS + 7) / 8 ; per side
 
 DEF ABILITY_SLIDE_WIDTH EQU 10 ; tiles (the player's HUD starts at column 10)

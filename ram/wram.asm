@@ -316,10 +316,7 @@ wBattleMon:: battle_struct wBattleMon
 wWildMon:: db
 	ds 1
 
-wEnemyTrainerItem1:: db
-wEnemyTrainerItem2:: db
 wEnemyTrainerBaseReward:: db
-wEnemyTrainerAIFlags:: ds 3
 wOTClassName:: ds TRAINER_CLASS_NAME_LENGTH
 
 wCurOTMon:: db
@@ -449,7 +446,6 @@ wLinkBattleRNCount::
 ; how far through the prng stream
 	db
 
-wEnemyItemState:: db
 wTrainerInfoPage:: db
 wTypeChartInBattle:: db
 wCurEnemyMoveNum:: db
@@ -2224,7 +2220,6 @@ wListMovesLineSpacing:: db
 wSwitchMonTo:: db
 wSwitchMonFrom:: db
 	ds 4
-wCurEnemyItem:: db
 
 NEXTU
 ; miscellaneous words

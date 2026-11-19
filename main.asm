@@ -154,7 +154,7 @@ INCLUDE "data/types/type_matchups.asm"
 INCLUDE "engine/battle/type_chart_scan.asm"
 
 SECTION "Enemy Trainers", ROMX
-INCLUDE "engine/battle/ai/items.asm"
+INCLUDE "engine/battle/ai/switching.asm"
 INCLUDE "engine/battle/ai/scoring.asm"
 INCLUDE "engine/battle/read_trainer_attributes.asm"
 

@@ -46,15 +46,9 @@ GetTrainerAttributes:
 	call GetOTName
 	ld a, [wTrainerClass]
 	dec a
-	ld hl, TrainerClassAttributes + TRNATTR_ITEM1
+	ld hl, TrainerClassAttributes + TRNATTR_BASEMONEY
 	ld bc, NUM_TRAINER_ATTRIBUTES
 	call AddNTimes
-	ld de, wEnemyTrainerItem1
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
 	ld a, [hl]
 	ld [wEnemyTrainerBaseReward], a
 	ret
