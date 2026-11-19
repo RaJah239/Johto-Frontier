@@ -1,6 +1,6 @@
 BattleCommand_Acrobatics:
 ; acrobatics
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ld hl, wBattleMonItem
 	jr z, .got_item
