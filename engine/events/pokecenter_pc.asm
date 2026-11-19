@@ -472,7 +472,7 @@ PlayerWithdrawItemMenu:
 	farcall SelectQuantityToToss
 	call ExitMenu
 	call ExitMenu
-	jr c, .done
+	ret c
 
 .withdraw
 	ld a, [wItemQuantityChange]
@@ -727,7 +727,7 @@ PCItemsJoypad:
 	jr z, .select_1
 	cp START
 	jr z, .sort
-	jr .next
+	jr .loop
 
 .moving_stuff_around
 	ld a, [wMenuJoypad]
@@ -737,12 +737,12 @@ PCItemsJoypad:
 	jr z, .a_select_2
 	cp SELECT
 	jr z, .a_select_2
-	jr .next
+	jr .loop
 
 .b_2
 	xor a
 	ld [wSwitchItem], a
-	jr .next
+	jr .loop
 
 .a_select_2
 	call PC_PlaySwapItemsSound
@@ -763,7 +763,7 @@ PCItemsJoypad:
 
 .sort
 	farcall Pack_SortMenu
-	jr .next
+	jr .loop
 
 .PCItemsMenuData:
 	db MENU_BACKUP_TILES ; flags
