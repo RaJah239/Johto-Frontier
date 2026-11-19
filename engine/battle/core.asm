@@ -1300,20 +1300,6 @@ GetMaxHP:
 	ld c, a
 	ret
 
-CheckUserHasEnoughHP:
-	ld hl, wBattleMonHP + 1
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .ok
-	ld hl, wEnemyMonHP + 1
-.ok
-	ld a, c
-	sub [hl]
-	dec hl
-	ld a, b
-	sbc [hl]
-	ret
-
 RestoreHP:
 	ld hl, wEnemyMonMaxHP
 	ldh a, [hBattleTurn]
@@ -2253,15 +2239,6 @@ ForcePickPartyMonInBattle:
 	call WaitSFX
 	jr .pick
 
-PickSwitchMonInBattle:
-.pick
-	call PickPartyMonInBattle
-	ret c
-	call SwitchMonAlreadyOut
-	jr c, .pick
-	xor a
-	ret
-
 ForcePickSwitchMonInBattle:
 ; Can't back out.
 
@@ -2712,8 +2689,7 @@ ShowSetEnemyMonAndSendOutAnimation:
 	jr c, .cry_no_anim
 
 	hlcoord 12, 0
-	ld d, $0
-	ld e, ANIM_MON_SLOW
+	lb de, $0, ANIM_MON_SLOW
 	; "Pokemon Cries" off: animate without the cry
 	call CheckMonCries
 	jr z, .send_out_anim
@@ -2820,8 +2796,7 @@ ReplayEnemyCry:
 
 	; animate the frontpic with a script that doesn't start another cry
 	hlcoord 12, 0
-	ld d, $0
-	ld e, ANIM_MON_SLOW_NOCRY
+	lb de, $0, ANIM_MON_SLOW_NOCRY
 	predef AnimateFrontpic
 
 .finish
@@ -3711,7 +3686,7 @@ HandleHPHealingItem:
 	ret
 
 .third
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	push bc
 	jr z, .third_enemy
@@ -3727,7 +3702,7 @@ HandleHPHealingItem:
 	jr .finish
 
 .quarter
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	push bc
 	jr z, .quarter_enemy
@@ -7030,22 +7005,12 @@ CheckOpponentFullHP:
 ; check if the opponent has full HP
 ; z: yes, nz: no
 	ld hl, wEnemyMonHP
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, DoCheckFullHP
 	ld hl, wBattleMonHP
 	jr DoCheckFullHP
 	
-CheckFullHP:
-; check if the user has full HP
-; z: yes, nz: no
-	ld hl, wBattleMonHP
-	ld a, [hBattleTurn]
-	and a
-	jr z, DoCheckFullHP
-	ld hl, wEnemyMonHP
-	; fallthrough
-
 DoCheckFullHP:
 	ld a, [hli]
 	ld b, a
@@ -8045,8 +8010,7 @@ BattleStartMessage:
 	jr c, .cry_no_anim
 
 	hlcoord 12, 0
-	ld d, $0
-	ld e, ANIM_MON_NORMAL
+	lb de, $0, ANIM_MON_NORMAL
 	; "Pokemon Cries" off: animate without the cry
 	call CheckMonCries
 	jr z, .appear_anim
