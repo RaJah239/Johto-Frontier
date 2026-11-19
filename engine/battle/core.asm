@@ -3449,11 +3449,7 @@ SpikesDamage:
 	call StdBattleTextbox
 
 .skip_stealth_rock_text
-    pop de
-    ld h, d
-	ld l, e
 	callfar CheckStealthRockTypeMatchup
-	push de
 	ld a, [wTypeMatchup]
 	cp EFFECTIVE + 1
 	jr nc, .doubleDamage
