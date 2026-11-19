@@ -8,10 +8,6 @@ HappinessData_YoungerHaircutBrother:
 	db 30 percent,     3, HAPPINESS_YOUNGCUT2 ; 30% chance
 	db -1,             4, HAPPINESS_YOUNGCUT3 ; 10% chance
 
-HappinessData_DaisysGrooming:
-	db 50 percent,     2, HAPPINESS_GROOMING ; 50% chance
- 	db -1,             2, HAPPINESS_GROOMING ; 50% chance
-
 HappinessData_CianwoodPhotograph:
 	db 50 percent,     2, HAPPINESS_GROOMING ; 50% chance
 	db -1,             2, HAPPINESS_GROOMING ; 50% chance
