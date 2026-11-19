@@ -341,7 +341,7 @@ HandleMysteryberry:
 	callfar GetUserItem
 	ld a, b
 	cp HELD_RESTORE_PP
-	jr nz, .quit
+	ret nz
 	ld hl, wPartyMon1PP
 	ld a, [wCurBattleMon]
 	call GetPartyLocation
@@ -372,7 +372,7 @@ HandleMysteryberry:
 .loop
 	ld a, [hl]
 	and a
-	jr z, .quit
+	ret z
 	ld a, [de]
 	and PP_MASK
 	jr z, .restore
@@ -542,8 +542,19 @@ HandleScreens:
 	bit SCREENS_LIGHT_SCREEN, [hl]
 	call nz, .LightScreenTick
 	bit SCREENS_REFLECT, [hl]
-	call nz, .ReflectTick
-	ret
+	ret z
+	; fallthrough
+
+.ReflectTick:
+	inc de
+	ld a, [de]
+	dec a
+	ld [de], a
+	ret nz
+	res SCREENS_REFLECT, [hl]
+	farcall SwitchTurnCore
+	ld hl, BattleText_MonsReflectFaded
+	jmp StdBattleTextbox
 
 .Copy:
 	ld hl, wStringBuffer1
@@ -568,17 +579,6 @@ HandleScreens:
 	pop de
 	pop hl
 	ret
-
-.ReflectTick:
-	inc de
-	ld a, [de]
-	dec a
-	ld [de], a
-	ret nz
-	res SCREENS_REFLECT, [hl]
-	farcall SwitchTurnCore
-	ld hl, BattleText_MonsReflectFaded
-	jmp StdBattleTextbox
 
 HandleFlameOrb:
 	call TurnEnd_ClearFailures
