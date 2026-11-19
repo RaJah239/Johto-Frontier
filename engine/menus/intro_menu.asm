@@ -302,9 +302,6 @@ Continue:
 	ldh [hMapEntryMethod], a
 	jr FinishContinueFunction
 
-.FailToLoad:
-	ret
-
 .SpawnAfterE4:
 	ld a, SPAWN_HOME
 	ld [wDefaultSpawnpoint], a
@@ -351,9 +348,6 @@ ConfirmContinue:
 	bit B_BUTTON_F, [hl]
 	jr z, .loop
 	scf
-	ret
-
-.PressA:
 	ret
 
 CheckVBA:
@@ -931,7 +925,6 @@ Intro_PlacePlayerSprite:
 	const TITLESCREENOPTION_DELETE_SAVE_DATA
 	const TITLESCREENOPTION_RESTART
 	const TITLESCREENOPTION_UNUSED
-	const TITLESCREENOPTION_RESET_CLOCK
 DEF NUM_TITLESCREENOPTIONS EQU const_value
 
 IntroSequence:
@@ -995,7 +988,6 @@ StartTitleScreen:
 	dw DeleteSaveData
 	dw IntroSequence
 	dw IntroSequence
-	dw ResetClock
 
 .TitleScreen:
 	farjp _TitleScreen
@@ -1152,15 +1144,6 @@ TitleScreenMain:
 	inc [hl]
 	ret
 
-.reset_clock
-	ld a, TITLESCREENOPTION_RESET_CLOCK
-	ld [wTitleScreenSelectedOption], a
-
-; Return to the intro sequence.
-	ld hl, wJumptableIndex
-	set 7, [hl]
-	ret
-
 TitleScreenEnd:
 ; Wait until the music is done fading.
 
@@ -1181,10 +1164,6 @@ TitleScreenEnd:
 
 DeleteSaveData:
 	farcall _DeleteSaveData
-	jmp Init
-
-ResetClock:
-	farcall _SetTime
 	jmp Init
 
 Copyright:
