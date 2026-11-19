@@ -23,7 +23,7 @@ Random::
 	push hl
 
 	; if the state is zero, seed it first
-	ld a, [hRandomState]
+	ldh a, [hRandomState]
 	ld b, a
 	ld a, [hRandomState + 1]
 	or b
@@ -38,7 +38,7 @@ Random::
 .step
 	; xorshift32: x ^= x << 13; x ^= x >> 17; x ^= x << 5
 	; (Marsaglia's triple; full period, zero is a fixed point)
-	ld a, [hRandomState]
+	ldh a, [hRandomState]
 	ld b, a
 	ld a, [hRandomState + 1]
 	ld c, a
@@ -182,7 +182,7 @@ Random::
 
 	; write the state back
 	ld a, b
-	ld [hRandomState], a
+	ldh [hRandomState], a
 	ld a, c
 	ld [hRandomState + 1], a
 	ld a, d
@@ -203,7 +203,7 @@ Random::
 
 .reseed
 	ldh a, [rDIV]
-	ld [hRandomState], a
+	ldh [hRandomState], a
 	ldh a, [rLY]
 	ld [hRandomState + 1], a
 	ldh a, [hVBlankCounter]
@@ -216,11 +216,11 @@ Random::
 	ldh a, [rDIV]
 	ld [hRandomState + 3], a
 	; never leave the state zero (0 is a fixed point of xorshift)
-	ld a, [hRandomState]
+	ldh a, [hRandomState]
 	and a
 	jmp nz, .step
 	ld a, 1
-	ld [hRandomState], a
+	ldh [hRandomState], a
 	jmp .step
 
 BattleRandom::
