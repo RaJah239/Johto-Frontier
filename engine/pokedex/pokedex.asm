@@ -2695,9 +2695,6 @@ Pokedex_ABCMode:
 	inc a
 	jr .loop2abc
 
-.doneabc
-	ret
-
 INCLUDE "data/pokemon/dex_order_alpha.asm"
 
 INCLUDE "data/pokemon/dex_order_new.asm"
