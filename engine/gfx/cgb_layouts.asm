@@ -879,23 +879,6 @@ BillsPC_PreviewTheme:
 .apply_pals
 	farjp BillsPC_SetPals
 
-.GetMonPalette:
-	ld bc, wTempMonDVs
-	call GetPlayerOrMonPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
-.GotPalette:
-	call WipeAttrmap
-	hlcoord 1, 4, wAttrmap
-	lb bc, 7, 7
-	ld a, $1 ; mon palette
-	call FillBoxCGB
-	call InitPartyMenuOBPals
-	call ApplyAttrmap
-	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
-
 _CGB_PokedexUnownMode:
 	ld de, wBGPals1
 	call CheckPokedexColor
