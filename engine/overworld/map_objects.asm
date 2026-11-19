@@ -65,8 +65,7 @@ CheckObjectStillVisible:
 	sub e
 	jr c, .ok
 	cp MAPOBJECT_SCREEN_HEIGHT
-	jr nc, .ok
-	jr .yes
+	jr c, .yes
 
 .ok
 	ld hl, OBJECT_FLAGS2
@@ -541,20 +540,77 @@ MovementFunction_RandomWalkY:
 	call Random
 	ldh a, [hRandomAdd]
 	and %00000001
-	jmp _RandomWalkContinue
+	jr _RandomWalkContinue
 
 MovementFunction_RandomWalkX:
 	call Random
 	ldh a, [hRandomAdd]
 	and %00000001
 	or  %00000010
-	jmp _RandomWalkContinue
+	jr _RandomWalkContinue
 
 MovementFunction_RandomWalkXY:
 	call Random
 	ldh a, [hRandomAdd]
 	and %00000011
-	jmp _RandomWalkContinue
+	; fallthrough
+
+_RandomWalkContinue:
+	call InitStep
+	call CanObjectMoveInDirection
+	jr c, .new_duration
+	call UpdateTallGrassFlags
+	ld hl, OBJECT_ACTION
+	add hl, bc
+	ld [hl], OBJECT_ACTION_STEP
+	ld hl, wCenteredObject
+	ldh a, [hMapObjectIndex]
+	cp [hl]
+	jr z, .centered
+	ld hl, OBJECT_STEP_TYPE
+	add hl, bc
+	ld [hl], STEP_TYPE_CONTINUE_WALK
+	ret
+
+.centered
+	ld hl, OBJECT_STEP_TYPE
+	add hl, bc
+	ld [hl], STEP_TYPE_PLAYER_WALK
+	ret
+
+.new_duration:
+	call EndSpriteMovement
+	call CopyLastCoordsToCoords
+	; fallthrough
+
+RandomStepDuration_Slow:
+	call Random
+	ldh a, [hRandomAdd]
+	and %11111110
+	jr z, RandomStepDuration_Slow
+	jr _SetRandomStepDuration
+
+RandomStepDuration_Fast:
+	call Random
+	ldh a, [hRandomAdd]
+	and %00111110
+	jr z, RandomStepDuration_Fast
+	; fallthrough
+
+_SetRandomStepDuration:
+	ld hl, OBJECT_STEP_DURATION
+	add hl, bc
+	ld [hl], a
+	ld hl, OBJECT_WALKING
+	add hl, bc
+	ld [hl], STANDING
+	ld hl, OBJECT_ACTION
+	add hl, bc
+	ld [hl], OBJECT_ACTION_STAND
+	ld hl, OBJECT_STEP_TYPE
+	add hl, bc
+	ld [hl], STEP_TYPE_SLEEP
+	ret
 
 MovementFunction_RandomSpinSlow:
 	call Random
@@ -563,7 +619,7 @@ MovementFunction_RandomSpinSlow:
 	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld [hl], a
-	jmp RandomStepDuration_Slow
+	jr RandomStepDuration_Slow
 
 MovementFunction_RandomSpinFast:
 	ld hl, OBJECT_DIRECTION
@@ -579,7 +635,7 @@ MovementFunction_RandomSpinFast:
 	xor %00001100
 .keep
 	ld [hl], a
-	jmp RandomStepDuration_Fast
+	jr RandomStepDuration_Fast
 
 MovementFunction_Standing:
 	call CopyLastCoordsToCoords
@@ -593,41 +649,52 @@ MovementFunction_Standing:
 MovementFunction_Null:
 	ret
 
+MovementFunction_0d:
 MovementFunction_ObeyDPad:
 	ld hl, GetPlayerNextMovementIndex
-	jmp HandleMovementData
+	jr HandleMovementData
 
 MovementFunction_Indexed1:
 	ld hl, GetIndexedMovementIndex1
-	jmp HandleMovementData
+	jr HandleMovementData
 
 MovementFunction_Indexed2:
 	ld hl, GetIndexedMovementIndex2
-	jmp HandleMovementData
-
-MovementFunction_0a:
-	jmp _GetMovementObject
-
-MovementFunction_0b:
-	jmp _GetMovementObject
-
-MovementFunction_0c:
-	jmp _GetMovementObject
-
-MovementFunction_0d:
-	ld hl, GetPlayerNextMovementIndex
-	jmp HandleMovementData
-
-MovementFunction_0e:
-	jmp _GetMovementObject
+	jr HandleMovementData
 
 MovementFunction_Follow:
 	ld hl, GetFollowerNextMovementIndex
-	jmp HandleMovementData
+	jr HandleMovementData
 
 MovementFunction_Script:
 	ld hl, GetMovementIndex
-	jmp HandleMovementData
+	jr HandleMovementData
+
+MovementFunction_0a:
+MovementFunction_0b:
+MovementFunction_0c:
+MovementFunction_0e:
+	ld hl, GetMovementObject
+	; fallthrough
+
+HandleMovementData:
+	call .StorePointer
+.loop
+	xor a
+	ld [wContinueReadingMovement], a
+	call JumpMovementPointer
+	call DoMovementFunction
+	ld a, [wContinueReadingMovement]
+	and a
+	jr nz, .loop
+	ret
+
+.StorePointer:
+	ld a, l
+	ld [wMovementPointer], a
+	ld a, h
+	ld [wMovementPointer + 1], a
+	ret
 
 MovementFunction_Strength:
 	call ObjectMovement_AnonJumptable
@@ -1009,63 +1076,6 @@ MovementFunction_ScreenShake:
 	ret z
 	add a
 	jr .loop
-
-_RandomWalkContinue:
-	call InitStep
-	call CanObjectMoveInDirection
-	jr c, .new_duration
-	call UpdateTallGrassFlags
-	ld hl, OBJECT_ACTION
-	add hl, bc
-	ld [hl], OBJECT_ACTION_STEP
-	ld hl, wCenteredObject
-	ldh a, [hMapObjectIndex]
-	cp [hl]
-	jr z, .centered
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_CONTINUE_WALK
-	ret
-
-.centered
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_PLAYER_WALK
-	ret
-
-.new_duration:
-	call EndSpriteMovement
-	call CopyLastCoordsToCoords
-	; fallthrough
-
-RandomStepDuration_Slow:
-	call Random
-	ldh a, [hRandomAdd]
-	and %11111110
-	jr z, RandomStepDuration_Slow
-	jr _SetRandomStepDuration
-
-RandomStepDuration_Fast:
-	call Random
-	ldh a, [hRandomAdd]
-	and %00111110
-	jr z, RandomStepDuration_Fast
-	; fallthrough
-
-_SetRandomStepDuration:
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	ld [hl], a
-	ld hl, OBJECT_WALKING
-	add hl, bc
-	ld [hl], STANDING
-	ld hl, OBJECT_ACTION
-	add hl, bc
-	ld [hl], OBJECT_ACTION_STAND
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_SLEEP
-	ret
 
 StepTypesJumptable:
 ; entries correspond to STEP_TYPE_* constants (see constants/map_object_constants.asm)
@@ -1866,29 +1876,6 @@ GetIndexedMovementIndex2:
 	ld a, [hl]
 	ret
 
-_GetMovementObject:
-	ld hl, GetMovementObject
-	; fallthrough
-
-HandleMovementData:
-	call .StorePointer
-.loop
-	xor a
-	ld [wContinueReadingMovement], a
-	call JumpMovementPointer
-	call DoMovementFunction
-	ld a, [wContinueReadingMovement]
-	and a
-	jr nz, .loop
-	ret
-
-.StorePointer:
-	ld a, l
-	ld [wMovementPointer], a
-	ld a, h
-	ld [wMovementPointer + 1], a
-	ret
-
 GetMovementObject:
 	ld a, [wMovementObject]
 	ret
@@ -2147,8 +2134,7 @@ UpdateAllObjectsFrozen::
 .loop
 	ldh [hMapObjectIndex], a
 	call DoesObjectHaveASprite
-	jr z, .ok
-	call UpdateObjectFrozen
+	call nz, UpdateObjectFrozen
 .ok
 	ld hl, OBJECT_LENGTH
 	add hl, bc
@@ -2170,8 +2156,7 @@ RespawnPlayerAndOpponent:
 	jr z, .skip_opponent
 	ldh a, [hLastTalked]
 	and a
-	jr z, .skip_opponent
-	call RespawnObject
+	call nz, RespawnObject
 .skip_opponent
 	jmp _UpdateSprites
 
