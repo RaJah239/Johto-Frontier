@@ -55,7 +55,7 @@ Rate:
 	call .UpdateRatingBuffer
 	ld hl, wStringBuffer4
 	ld de, wTempPokedexCaughtCount
-	jr .UpdateRatingBuffer
+	; fallthrough
 
 .UpdateRatingBuffer:
 	push hl
