@@ -58,83 +58,6 @@
  DEF NUM_FIELD_MOVES EQU 14 
  DEF MOVESPAGES_CONT_MASK EQU %00000011
 
-AnimateDexSearchSlowpoke: ; unreferenced
-	ld hl, .FrameIDs
-	ld b, 25
-.loop
-	ld a, [hli]
-
-	; Wrap around
-	cp $fe
-	jr nz, .ok
-	ld hl, .FrameIDs
-	ld a, [hli]
-.ok
-
-	ld [wDexSearchSlowpokeFrame], a
-	ld a, [hli]
-	ld c, a
-	push bc
-	push hl
-	call DoDexSearchSlowpokeFrame
-	pop hl
-	pop bc
-	call DelayFrames
-	dec b
-	jr nz, .loop
-	xor a
-	ld [wDexSearchSlowpokeFrame], a
-	call DoDexSearchSlowpokeFrame
-	ld c, 32
-	jmp DelayFrames
-
-.FrameIDs:
-	; frame ID, duration
-	db 0, 7
-	db 1, 7
-	db 2, 7
-	db 3, 7
-	db 4, 7
-	db -2
-
-DoDexSearchSlowpokeFrame:
-	ld a, [wDexSearchSlowpokeFrame]
-	ld hl, .SlowpokeSpriteData
-	ld de, wShadowOAMSprite00
-.loop
-	ld a, [hli]
-	cp -1
-	ret z
-	ld [de], a ; y
-	inc de
-	ld a, [hli]
-	ld [de], a ; x
-	inc de
-	ld a, [wDexSearchSlowpokeFrame]
-	ld b, a
-	add a
-	add b
-	add [hl]
-	inc hl
-	ld [de], a ; tile id
-	inc de
-	ld a, [hli]
-	ld [de], a ; attributes
-	inc de
-	jr .loop
-
-.SlowpokeSpriteData:
-	dbsprite  9, 11, 0, 0, $00, 0
-	dbsprite 10, 11, 0, 0, $01, 0
-	dbsprite 11, 11, 0, 0, $02, 0
-	dbsprite  9, 12, 0, 0, $10, 0
-	dbsprite 10, 12, 0, 0, $11, 0
-	dbsprite 11, 12, 0, 0, $12, 0
-	dbsprite  9, 13, 0, 0, $20, 0
-	dbsprite 10, 13, 0, 0, $21, 0
-	dbsprite 11, 13, 0, 0, $22, 0
-	db -1
-
 HandlePageNumReset:
  	ld b, a
  	ld a, [wPokedexEntryType]
@@ -403,40 +326,6 @@ GetDexEntryPointer:
  	ld a, [hli]
  	ld e, a
  	ld d, [hl]
-	pop hl
-	ret
-
-GetDexEntryPagePointer:
-	call GetDexEntryPointer
-	push hl
-	ld h, d
-	ld l, e
-; skip species name
-.loop1
-	ld a, b
-	call GetFarByte
-	inc hl
-	cp "@"
-	jr nz, .loop1
-; skip height and weight
-rept 4
-	inc hl
-endr
-; if c != 1: skip entry
-	dec c
-	and c
-	jr z, .done
-; skip entry
-.loop2
-	ld a, b
-	call GetFarByte
-	inc hl
-	cp "@"
-	jr nz, .loop2
-
-.done
-	ld d, h
-	ld e, l
 	pop hl
 	ret
 
