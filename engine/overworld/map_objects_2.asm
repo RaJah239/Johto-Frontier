@@ -8,8 +8,7 @@ LoadObjectMasks:
 	push de
 	call CheckObjectTime
 	ld a, -1
-	jr c, .next
-	call CheckObjectFlag
+	call nc, CheckObjectFlag
 .next
 	pop de
 	ld [de], a
