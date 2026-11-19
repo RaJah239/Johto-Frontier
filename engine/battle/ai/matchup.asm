@@ -389,8 +389,7 @@ MSim_TryCandidate:
 
 .fight
 	call MSim_TryResetFirst
-	jr c, .won
-	call MSim_RunBest
+	call nc, MSim_RunBest
 .won
 	push af
 	call MSim_PlayerDealtShare
@@ -1057,7 +1056,7 @@ MSim_EnemyMoveDamage:
 	ld b, a
 	farcall AI_IsPlayerImmuneByAbility
 	pop bc
-	jr c, .none
+	ret c
 	push bc
 	ld a, [wEnemyMonSpecies]
 	ld d, a
@@ -2242,7 +2241,11 @@ MSim_\1Residual:
 ; a = 0, or the other side's win code if this KOs it.
 	ld a, [wMSimFlags2]
 	bit MSIM_\2_MAGIC_GUARD_F, a
-	jp nz, .none ; (jr reaches in one expansion only)
+	IF !STRCMP("\1", "Enemy")
+	jr nz, .none
+	ELSE
+	jmp nz, .none
+	ENDC
 	ld a, [wMSimFlags3]
 	bit MSIM_\2_CURED_F, a
 	jr nz, .seed
@@ -2725,8 +2728,7 @@ MSim_TurnEndItems:
 	jr z, .harvest
 	ld a, [wMSimTurns]
 	cp MSIM_MAX_TURNS - 2 ; (the 3rd end of turn)
-	jr nz, .harvest
-	call .cure
+	call z, .cure
 .harvest
 	ld a, [wMSimFlags6]
 	ld b, a
@@ -3237,8 +3239,7 @@ MSim_RunBest:
 	cp 2
 	jr nc, .no
 	call MSim_FindBoost
-	jr nc, .no
-	jr MSim_RunBoost
+	jr c, MSim_RunBoost
 
 .no
 	and a
