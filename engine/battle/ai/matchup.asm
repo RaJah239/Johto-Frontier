@@ -1085,8 +1085,7 @@ MSim_EnemyMoveDamage:
 	ld a, BASE_PRIORITY
 	cp b
 	ld hl, wMSimEnemyDmg
-	ld c, MSIM_E_BEST_DRAIN_F
-	ld b, MSIM_E_BEST_PRIO_F
+	lb bc, MSIM_E_BEST_PRIO_F, MSIM_E_BEST_DRAIN_F
 	jmp MSim_KeepBest
 .capture
 	; (AI_SimMoveChoice) this move's damage and priority for the first turn
@@ -1161,8 +1160,7 @@ MSim_PlayerMoveDamage:
 	ld a, BASE_PRIORITY
 	cp b
 	ld hl, wMSimPlayerDmg
-	ld c, MSIM_P_BEST_DRAIN_F
-	ld b, MSIM_P_BEST_PRIO_F
+	lb bc, MSIM_P_BEST_PRIO_F, MSIM_P_BEST_DRAIN_F
 	jr MSim_KeepBest
 
 MSim_GaleWingsHit:
@@ -1725,8 +1723,7 @@ MSim_SideLeafGuard:
 	jr z, .got_species
 	ld a, [wBattleMonSpecies]
 .got_species
-	newfarcall LeafGuardActive_Far ; engine/abilities/leaf_guard.asm
-	ret
+	farjp LeafGuardActive_Far ; engine/abilities/leaf_guard.asm
 
 MSim_DivDEBy3:
 	xor a
@@ -2156,7 +2153,7 @@ MSim_PlayerEndures:
 .check
 	ld hl, wMSimPlayerHP
 	ld de, wBattleMonMaxHP
-	jr MSim_Endures
+	; fallthrough
 
 MSim_Endures:
 ; hl = HP, de = max HP (big-endian), bc = the hit. Carry (and bc = HP - 1)
