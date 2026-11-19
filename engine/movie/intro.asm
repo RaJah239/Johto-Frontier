@@ -291,8 +291,7 @@ IntroScene6:
 	cp $40
 	jr nc, .StopUnown
 	cp $20
-	jr z, .FirstUnown
-	jr .NoUnown
+	jr nz, .NoUnown
 
 .FirstUnown:
 	push af
@@ -1441,8 +1440,7 @@ Intro_Scene16_AnimateSuicune:
 	and $3
 	jr z, Intro_ColoredSuicuneFrameSwap
 	cp $3
-	jr z, .PrepareForSuicuneSwap
-	ret
+	ret nz
 
 .PrepareForSuicuneSwap:
 	xor a
