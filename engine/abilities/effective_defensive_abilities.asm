@@ -71,16 +71,6 @@ Finish_Boost:
 	ld b, 4
 	jmp Divide
 
-TwentyFive_PercentNerf:
-	ld a, 75
-	ldh [hMultiplier], a
-	call Multiply
-
-	ld a, 100
-	ldh [hDivisor], a
-	ld b, 4
-	jmp Divide
-
 Fifty_PercentNerf:
 	ld a, 50
 	ldh [hMultiplier], a
