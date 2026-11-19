@@ -94,8 +94,7 @@ _ViewUnown:
 	jr nz, .press_right
 	ldh a, [hJoyLast]
 	and D_LEFT
-	jr nz, .press_left
-	ret
+	ret z
 
 .press_left
 	ld hl, wJumptableIndex
