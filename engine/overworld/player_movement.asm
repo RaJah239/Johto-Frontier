@@ -89,8 +89,7 @@ endc
 ; Walking into an edge warp won't bump.
 	ld a, [wWalkingIntoEdgeWarp]
 	and a
-	jr nz, .CantMove
-	call .BumpSound
+	call z, .BumpSound
 .CantMove:
 	call ._WalkInPlace
 	xor a
