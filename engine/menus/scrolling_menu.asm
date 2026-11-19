@@ -547,7 +547,6 @@ ScrollingMenu_GetListItemCoordAndFunctionArgs:
 	cp SCROLLINGMENU_ITEMS_NORMAL
 	jr z, .got_spacing
 	cp SCROLLINGMENU_ITEMS_QUANTITY
-	jr z, .pointless_jump
 .pointless_jump
 	add hl, de
 .got_spacing
