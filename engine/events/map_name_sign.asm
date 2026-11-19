@@ -214,13 +214,11 @@ LoadMapNameSignGFX:
 	; snap them here, or the transition flashes.
 	ldh a, [hCGB]
 	and a
-	jr nz, .check_fade
-	jmp SetDefaultBGPAndOBP
+	jmp z, SetDefaultBGPAndOBP
 .check_fade
 	ld a, [wWeatherFlags]
 	bit WEATHER_FADE_ACTIVE_F, a
-	jr nz, .fade_active
-	jmp SetDefaultBGPAndOBP
+	jmp z, SetDefaultBGPAndOBP
 .fade_active
 	; The fade owns the BG palettes: it blends the displayed ones
 	; (wBGPals2) from the old map's (wWeatherFadeStartPalettes) towards
