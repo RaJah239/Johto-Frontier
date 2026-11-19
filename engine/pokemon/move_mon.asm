@@ -596,7 +596,6 @@ RetrieveMonFromDayCareLady:
 	ld [wCurPartyLevel], a
 	ld a, PC_DEPOSIT
 	ld [wPokemonWithdrawDepositParameter], a
-	jr RetrieveBreedmon ; pointless
 
 RetrieveBreedmon:
 	ld hl, wPartyCount
@@ -1038,7 +1037,7 @@ RemoveMonFromPartyPartial:
 	ld a, [wCurPartyMon]
 	cp [hl]
 	ret z
-	jr z, .close_sram
+	ret z
 	; Shift our mail messages up.
 	ld hl, sPartyMail
 	ld bc, MAIL_STRUCT_LENGTH
@@ -1462,8 +1461,7 @@ GivePoke::
 .set_caught_data
 	farcall GiveANickname_YesNo
 	pop de
-	jr c, .skip_nickname
-	call InitNickname
+	call nc, InitNickname
 
 .skip_nickname
 	pop bc
