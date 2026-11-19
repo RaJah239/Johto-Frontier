@@ -51,7 +51,7 @@ Pokedex_PicsAnimStep:
 ; One step of the pictures page's frontpic animation (Pics_Page's loop runs
 ; it once per frame, so the page takes input while it plays); carry if it
 ; is still running.
-	call Pokedex_PlayMonCry_AnimateFrontpic.Pokedex_WaitAnim
+	call Pokedex_PicsWaitAnim
 Pokedex_IsPicsAnimRunning:
 ; carry while the pictures page's frontpic animation runs
 	ld a, [wStatsScreenFlags]
@@ -60,35 +60,7 @@ Pokedex_IsPicsAnimRunning:
 	scf
 	ret
 
-Pokedex_PlayMonCry_AnimateFrontpic:
-	xor a
-	ld [wPokedexEntryType], a
-.loop
-	call .Pokedex_WaitAnim
-	call .PokedexWaitCry
-	; done once the frontpic animation has finished (.finish clears both
-	; flags): nothing in this loop waits a frame without it, so the rest of
-	; the 255 passes played the icon's animation several steps per frame
-	ld a, [wStatsScreenFlags]
-	and 1 << 5 | 1 << 6
-	jr z, .done
-	ld a, [wPokedexEntryType]
-	;bit 7, a
-	cp 255
-	jr nz, .loop
-.done
-	xor a
-	ld [wPokedexEntryType], a
-
-	jmp WaitBGMap
-
-.PokedexWaitCry:
-	ld a, [wPokedexEntryType]
-	inc a
-	ld [wPokedexEntryType], a
-	farjp PlaySpriteAnimations
-
-.Pokedex_WaitAnim:
+Pokedex_PicsWaitAnim:
 	ld hl, wStatsScreenFlags
 	bit 6, [hl]
 	jr nz, .try_anim
