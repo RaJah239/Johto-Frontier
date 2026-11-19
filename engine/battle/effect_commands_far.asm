@@ -310,7 +310,7 @@ _BattleCommand_CheckHit:
 ; ===========================
 ; === Ability: Astral Aim ===
 ; ===========================
-	surefire_ability METEOR_MASH, AstralAimPokemon
+	surefire_ability METEOR_MASH, AstralAimPokemon, SEND_OUT_POPUP_ASTRAL_AIM, AstralAimText
 
 	call .StatModifiers
 
