@@ -172,6 +172,7 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Electric types can't be paralyzed
 - Display TOX instead of PSN if badly poisoned
 - Trapping moves do 1/8 damage each turn
+- Confusion self-hit chance set to 33% (no longer 50%)
 - Grass type Pokémon are immune to Powder/Spore based moves
 - Sandstorm raises the Special Defense of Rock type Pokémon by 50%
 - Hail raises the Defense of Ice type Pokémon by 50%
