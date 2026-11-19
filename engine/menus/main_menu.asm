@@ -116,7 +116,7 @@ MainMenu_GetWhichMenu:
 	ld hl, wNumItems
 	call CheckItem
 	ld a, MAINMENU_CONTINUE
-	jr c, .done
+	ret c
 	ld a, MAINMENU_CONTINUE_NO_MUSIC_PLAYER
 .done
 	ret
@@ -133,8 +133,7 @@ MainMenuJoypadLoop:
 	cp B_BUTTON
 	jr z, .b_button
 	cp A_BUTTON
-	jr z, .a_button
-	jr .loop
+	jr nz, .loop
 
 .a_button
 	call PlayClickSFX
