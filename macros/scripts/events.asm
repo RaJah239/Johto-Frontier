@@ -1324,8 +1324,7 @@ ENDM
 ;   ShowOncePerSendOutPopup SEND_OUT_POPUP_SURE_SHOCK, SureShockText
 ;
 MACRO ShowOncePerSendOutPopup
-	ld c, \1
-	ld b, BANK(\2)
+	lb bc, BANK(\2), \1
 	ld de, \2
 	farcall _ShowOncePerSendOutPopup
 	IF _NARG < 3
@@ -1336,8 +1335,7 @@ ENDM
 ; As ShowOncePerSendOutPopup, over the HUD of side a
 ; (ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY) instead of the acting side's.
 MACRO ShowOncePerSendOutPopupOnSide
-	ld c, \1
-	ld b, BANK(\2)
+	lb bc, BANK(\2), \1
 	ld de, \2
 	newfarcall _ShowOncePerSendOutPopupOnSide
 	IF _NARG < 3
