@@ -290,7 +290,7 @@ _BattleCommand_CheckHit:
 ; ============================
 ; === Ability: Stonefall =====
 ; ============================
-	surefire_ability ROCK_SLIDE, StonefallPokemon
+	surefire_ability ROCK_SLIDE, StonefallPokemon, SEND_OUT_POPUP_STONE_FALL, Stone_FallText
 
 ; ============================
 ; === Ability: Stonebound =====
