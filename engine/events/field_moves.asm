@@ -116,7 +116,7 @@ OWCutAnimation:
 .loop
 	ld a, [wJumptableIndex]
 	bit 7, a
-	jr nz, .finish
+	ret nz
 	ld a, 36 * SPRITEOAMSTRUCT_LENGTH
 	ld [wCurSpriteOAMAddr], a
 	callfar DoNextFrameForAllSprites
