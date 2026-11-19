@@ -145,22 +145,22 @@ MainMenuJoypadLoop:
 	ret
 
 MainMenu_PrintCurrentVersion:
-	lb bc, 1, 4
+	lb bc, 2, 3
 	ld a, [wSaveFileExists]
 	and a
 	jr nz, .has_save_file
 
 	; no save file
-	hlcoord 14, 15
+	hlcoord 15, 14
 	call Textbox
-	hlcoord 15, 16
+	hlcoord 16, 15
 	jr .no_save_file
 
 .time_unset_version_number
-	; shift version number box for unset time
-	hlcoord 14, 9
+	; Keep the two-line version box above the unset-time textbox.
+	hlcoord 15, 8
 	call Textbox
-	hlcoord 15, 10
+	hlcoord 16, 9
 	jr .no_save_file
 
 .has_save_file
@@ -169,17 +169,17 @@ MainMenu_PrintCurrentVersion:
 	and $80
 	jr nz, .time_unset_version_number
 
-	; continue normally for set time
-	hlcoord 14, 11
+	; Keep the two-line version box above the time textbox.
+	hlcoord 15, 10
 	call Textbox
-	hlcoord 15, 12
+	hlcoord 16, 11
 .no_save_file
 	ld de, .VersionString
 	jmp PlaceString
 
 .VersionString
-	db "v0.1"	; Version number goes here
-	db "@"
+	db   "ver"
+	feed "0.1@"
 
 MainMenu_PrintCurrentTimeAndDay:
 	ld a, [wSaveFileExists]
