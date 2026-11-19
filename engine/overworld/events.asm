@@ -534,10 +534,6 @@ ObjectEventTypeArray:
 	scf
 	ret
 
-.three
-	xor a
-	ret
-
 .command
 	ld hl, MAPOBJECT_SIGHT_RANGE
 	add hl, bc
