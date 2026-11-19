@@ -1650,7 +1650,7 @@ HasRockSmash:
 	jr .done
 .yes
 	xor a
-	jr .done
+	; fallthrough
 .done
 	ld [wScriptVar], a
 	ret
