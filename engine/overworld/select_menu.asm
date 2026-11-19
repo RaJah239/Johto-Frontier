@@ -79,8 +79,7 @@ UseRegisteredItem:
 ._cantuse
 	ld a, [wUsingHMItem]
 	and a
-	jr nz, .skip_neither_time_nor_place
-	call CantUseItem
+	call z, CantUseItem
 .skip_neither_time_nor_place
 	call CloseText
 	and a
