@@ -152,8 +152,7 @@ Pokedex_Print_NextLvlMoves:
 	ld a, BANK("Evolutions and Attacks")
 	call GetFarByte
 	and a
-	jr z, .FoundEnd
-	jmp DexEntry_IncPageNum
+	jmp nz, DexEntry_IncPageNum
 
 .FoundEnd
 	ld a, DEXENTRY_TMS
