@@ -122,6 +122,7 @@ DEF SPDSPCDV_SHINY EQU $FF
 	const SEND_OUT_POPUP_TRUE_HORN
 	const SEND_OUT_POPUP_STORMBOUND
 	const SEND_OUT_POPUP_TRUE_FLAME
+	const SEND_OUT_POPUP_FROST_LOCK
 DEF NUM_SEND_OUT_POPUPS EQU const_value
 
 ; wEntryAbilitiesPending bits (engine/abilities/entry_abilities.asm)

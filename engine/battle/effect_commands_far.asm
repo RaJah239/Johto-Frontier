@@ -280,7 +280,7 @@ _BattleCommand_CheckHit:
 ; ===========================
 ; === Ability: Frost Lock ===
 ; ===========================
-	surefire_ability BLIZZARD, FrostLockPokemon
+	surefire_ability BLIZZARD, FrostLockPokemon, SEND_OUT_POPUP_FROST_LOCK, FrostLockText
 
 ; ==========================
 ; === Ability: Hydro Aim ===

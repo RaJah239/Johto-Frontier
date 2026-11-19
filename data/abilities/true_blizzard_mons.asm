@@ -3,3 +3,5 @@
 FrostLockPokemon:
 ;    db ARTICUNO
     db -1 ; end
+
+FrostLockText: db "Frost Lock@"
