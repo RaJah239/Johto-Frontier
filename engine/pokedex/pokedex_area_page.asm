@@ -548,8 +548,7 @@ Pokedex_Parse_grass:
 	push bc ; % and NUM_GRASSMON
 	ld a, c
 	cp NUM_GRASSMON
-	jr z, .map_loop_end ; end of day group
-	jr .map_loop
+	jr nz, .map_loop ; more encounters in this time group
 
 .map_loop_end ; reach end of day group
 	pop bc ; % and NUM_GRASSMON
@@ -780,8 +779,7 @@ Pokedex_Parse_surf:
 	push bc ; % and NUM_WATERMON
 	ld a, c
 	cp NUM_WATERMON
-	jr z, .map_loop_end ; end of day group
-	jr .map_loop
+	jr nz, .map_loop ; more encounters in this time group
 
 .map_loop_end ; reach end of day group
 	pop bc ; % and NUM_WATERMON
@@ -859,12 +857,12 @@ Add_encounter_percent_water:
 	and a
 	jr nz, .slot2
 	ld a, 34
-	jr .done
+	ret
 .slot2
 	cp 1
 	jr nz, .slot3
 	ld a, 33
-	jr .done
+	ret
 .slot3
 	ld a, 33
 .done
@@ -1048,8 +1046,7 @@ Pokedex_DetailedArea_bugcontest:
 	; if 'e' is above zero, print
 	xor a
 	cp e
-	jr z, .donedone
-	call BugContest_Print
+	call nz, BugContest_Print
 .donedone
 	ld a, [wPokedexEntryType] ; bug
 	inc a
