@@ -39,13 +39,6 @@ FindPartyMonThatSpecies:
 	ld b, a
 	farcall _FindPartyMonThatSpecies
 	jr z, FoundNone
-	jr FoundOne
-
-FindPartyMonThatSpeciesYourTrainerID:
-	ld a, [wScriptVar]
-	ld b, a
-	farcall _FindPartyMonThatSpeciesYourTrainerID
-	jr z, FoundNone
 	; fallthrough
 
 FoundOne:
@@ -57,17 +50,6 @@ FoundNone:
 	xor a
 	ld [wScriptVar], a
 	ret
-
-NameRival:
-	ld b, NAME_RIVAL
-	ld de, wRivalName
-	farcall _NamingScreen
-	ld hl, wRivalName
-	ld de, .DefaultName
-	jmp InitName
-
-.DefaultName:
-	db "Silver@"
 
 NameRater:
 	farjp _NameRater
@@ -235,18 +217,11 @@ ScriptReturnCarry:
 	ld [wScriptVar], a
 	ret
 
-ActivateFishingSwarm:
-	ld a, [wScriptVar]
-	ld [wFishingSwarmFlag], a
-	jr SetSwarmFlag
-
 StoreSwarmMapIndices::
 	ld a, d
 	ld [wSwarmMapGroup], a
 	ld a, e
 	ld [wSwarmMapNumber], a
-
-SetSwarmFlag:
 	ld hl, wDailyFlags1
 	set DAILYFLAGS1_SWARM_F, [hl]
 	ret
