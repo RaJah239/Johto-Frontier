@@ -111,8 +111,7 @@ StartMenu::
 	cp B_BUTTON
 	jr z, .b
 	cp A_BUTTON
-	jr z, .a
-	jr .loop
+	jr nz, .loop
 .a
 	call PlayClickSFX
 	and a
@@ -487,8 +486,7 @@ endr
 .DrawBugContestStatus:
 	ld hl, wStatusFlags2
 	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, [hl]
-	jr nz, .contest
-	ret
+	ret z
 .contest
 	farjp StartMenu_PrintBugContestStatus
 
@@ -789,7 +787,7 @@ Fast_Travel_LocationMenu:
 	jr nz, .input_loop ; D_LEFT/D_RIGHT handed back by the menu: keep browsing
 	ld a, [wMenuSelection]
 	cp -1
-	jr nz, .done
+	ret nz
 
 .cancel
 	xor a
