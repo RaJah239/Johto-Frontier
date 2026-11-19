@@ -2,12 +2,6 @@ DEF FIELDMOVE_GRASS EQU $80
 DEF FIELDMOVE_TREE  EQU $84
 DEF FIELDMOVE_FLY   EQU $84
 
-PlayWhirlpoolSound:
-	call WaitSFX
-	ld de, SFX_SURF
-	call PlaySFX
-	jmp WaitSFX
-
 BlindingFlash:
 	farcall FadeOutPalettes
 	ld hl, wStatusFlags
@@ -362,7 +356,7 @@ FlyToAnim:
 .exit
 	pop af
 	ld [wStateFlags], a
-	jr .RestorePlayerSprite_DespawnLeaves
+	; fallthrough
 
 .RestorePlayerSprite_DespawnLeaves:
 	ld hl, wShadowOAMSprite00TileID
