@@ -13,10 +13,11 @@ HandleTintedLens:
 	and EFFECTIVENESS_MASK
 	cp NOT_VERY_EFFECTIVE
 	ret nz
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_TINTED_LENS, TintedLensText
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	ret c
 	jr Hundred_PercentBoost
 
-TintedLensText: db "TintedLens@"
 INCLUDE "data/abilities/tinted_lens_mons.asm"
 
 HandleSolidRock:
@@ -31,14 +32,11 @@ HandleSolidRock:
 	jr z, .nerf_damage
 	cp SUPER_EFFECTIVE
 	ret nz
-	showdefensiveability SolidRockText
 	jr Half_Damage
 .nerf_damage
-	showdefensiveability SolidRockText
 	call Half_Damage
 	jr Half_Damage
 
-SolidRockText: db "Solid Rock@"
 INCLUDE "data/abilities/solid_rock_mons.asm"
 
 HandleFurCoat:
@@ -51,10 +49,8 @@ HandleFurCoat:
 	call GetBattleVar
 	cp SPECIAL
 	ret nc
-	showdefensiveability FurCoatText
 	jr Fifty_PercentNerf
 
-FurCoatText: db "Fur Coat@"
 INCLUDE "data/abilities/fur_coat_mons.asm"
 
 Hundred_PercentBoost:

@@ -3,5 +3,3 @@
 TrueFlamePokemon:
 ;    db MOLTRES
     db -1 ; end
-
-TrueFlameText: db "True Flame@"

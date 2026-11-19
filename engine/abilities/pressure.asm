@@ -3,9 +3,8 @@
 ; =========================
 ; A move used on a Pressure mon loses one more PP. "On it" means the move
 ; targets it: it goes through checkhit (moves that only affect the user
-; don't), so _BattleCommand_CheckHit calls PressureDeductPP. Its popup
-; shows over the Pressure mon's HUD the first time that happens after
-; it's sent out.
+; don't), so _BattleCommand_CheckHit calls PressureDeductPP. Passive: no
+; popup.
 
 PressureDeductPP::
 	call GetOpposingMon
@@ -43,7 +42,7 @@ PressureDeductPP::
 	push bc
 	ldh a, [hBattleTurn]
 	xor 1 ; the Pressure mon's side
-	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_PRESSURE, PressureText, KEEP
+	call IsSideSuppressed
 	pop bc
 	pop hl
 	ret c ; suppressed by Neutralizing Gas
@@ -82,6 +81,5 @@ PressureDeductPP::
 	dec [hl]
 	ret
 
-PressureText: db "Pressure@"
 
 INCLUDE "data/abilities/pressure_mons.asm"

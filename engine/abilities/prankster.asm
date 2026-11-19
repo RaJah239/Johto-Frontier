@@ -37,23 +37,4 @@ PranksterIsStatusMove:
 	cp STATUS
 	ret
 
-PranksterPopup:
-; hBattleTurn = the user. Only for status moves.
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wCurPlayerMove]
-	jr z, .got_move
-	ld a, [wCurEnemyMove]
-.got_move
-	and a
-	ret z
-	call PranksterIsStatusMove
-	ret nz
-	ld hl, PranksterPokemon
-	ld de, PranksterText
-	ld c, SEND_OUT_POPUP_PRANKSTER
-	jmp SendOutAbilityPopup
-
-PranksterText: db "Prankster@"
-
 INCLUDE "data/abilities/prankster_mons.asm"

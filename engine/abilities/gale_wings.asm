@@ -180,29 +180,4 @@ GaleWingsHasFlyingAttack:
 	pop hl
 	ret
 
-GaleWingsPopup:
-; hBattleTurn = the user. Only for Flying moves used at full HP.
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wCurPlayerMove]
-	ld hl, wBattleMonHP
-	jr z, .got_move
-	ld a, [wCurEnemyMove]
-	ld hl, wEnemyMonHP
-.got_move
-	and a
-	ret z
-	push hl
-	call GaleWingsIsFlyingMove
-	pop hl
-	ret nz
-	call GaleWingsIsFullHP
-	ret nz
-	ld hl, GaleWingsPokemon
-	ld de, GaleWingsText
-	ld c, SEND_OUT_POPUP_GALE_WINGS
-	jmp SendOutAbilityPopup
-
-GaleWingsText: db "Gale Wings@"
-
 INCLUDE "data/abilities/gale_wings_mons.asm"

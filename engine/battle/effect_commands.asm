@@ -36,9 +36,7 @@ DoTurn:
 ; ==========================================
 ; === Ability popups when a move is used ===
 ; ==========================================
-	newfarcall PriorityAbilityPopup ; engine/battle/effect_commands_far.asm
 	call TypeSyncMessage
-	farcall MoveUseAbilityPopups ; engine/abilities/send_out_popup.asm
 	call DoMove
 	; Magic Bounce: the bouncing mon gets its own move back
 	farjp MagicBounceEnd ; engine/abilities/magic_bounce.asm
@@ -1336,7 +1334,8 @@ BattleCommand_EffectChance:
 	; double effect chance
 .blessing
 	push hl
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_BLESSING, BlessingText, KEEP
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
 	pop hl
 	jr c, .finish_blessing ; suppressed by Neutralizing Gas
 
@@ -1358,7 +1357,6 @@ BattleCommand_EffectChance:
 	and a
 	ret
 
-BlessingText: db "Blessing@"
 
 BlessingPokemon:
 INCLUDE "data/abilities/blessing_mons.asm"
@@ -2055,7 +2053,6 @@ UnevolvedEviolite:
 	ret
 
 BattleCommand_DamageStats:
-	call UnawarePopup
 	ldh a, [hBattleTurn]
 	and a
 	jmp nz, EnemyAttackDamage
@@ -2293,9 +2290,8 @@ CheckDamageStatsCritical:
 ;   (Snow Cloak / Fade In still add their evasion: abilities, not stages)
 ; Raised and lowered stages alike. Burn / frostbite still halve the
 ; attacker's stat. PlayerAttackDamage / EnemyAttackDamage apply it, so the
-; AI's damage estimates and the move info damage preview see it too; the
-; popup shows the first time each side's Unaware mon attacks or is hit by a
-; real (damaging) attack in a battle (UnawarePopup, from DamageStats).
+; AI's damage estimates and the move info damage preview see it too.
+; Passive: no popup.
 
 assert wEnemyMonSpclDef - wEnemyMonAttack == wEnemySpDef - wEnemyAttack
 assert wBattleMonSpclDef - wBattleMonAttack == wPlayerSpDef - wPlayerAttack
@@ -2459,41 +2455,6 @@ UnawareUserStatLevel:
 	ld a, [hl]
 	ret
 
-UnawarePopup:
-; Show the Unaware popup the first time an Unaware Pokemon attacks or is
-; hit by a damaging move, once each time it's sent out (whether or not any
-; stages are raised or lowered).
-	ld a, BATTLE_VARS_MOVE_POWER
-	call GetBattleVar
-	and a
-	ret z
-
-	; the attacker
-	call GetCurrentMon
-	call IsUnawareRaw
-	jr nc, .target
-	ldh a, [hBattleTurn]
-	ld c, a
-	call UnawareShowPopup
-
-.target
-	call GetOpposingMon
-	call IsUnawareRaw
-	ret nc
-	newfarcall MoldBreakerBypass
-	ret c ; ignored: Mold Breaker's popup shows instead
-	ldh a, [hBattleTurn]
-	xor 1
-	ld c, a
-	; fallthrough
-
-UnawareShowPopup:
-; c = side: ABILITY_POPUP_PLAYER or ABILITY_POPUP_ENEMY
-	ld a, c
-	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_UNAWARE, UnawareText
-	ret
-
-UnawareText: db "Unaware@"
 INCLUDE "data/abilities/unaware_mons.asm"
 
 PolarFangorLightBallBoost:
@@ -5817,7 +5778,8 @@ BattleCommand_Recoil:
 	push hl
 	push bc
 	push de
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_ROCK_HEAD, RockHeadText, KEEP
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
 	pop de
 	pop bc
 	pop hl
@@ -5892,7 +5854,6 @@ BattleCommand_Recoil:
 	ld hl, RecoilText
 	jmp StdBattleTextbox
 
-RockHeadText: db "Rock Head@"
 
 RockHeadPokemon:
 INCLUDE "data/abilities/rock_head_mons.asm"

@@ -5,7 +5,6 @@ CheckBoostingAbilities:
 	call HandleTechnician
 	call HandleSheerForceBoost
 	call HandleAnalytic
-	call HandleHugePower
 	call HandleMultiscale
 	call HandleThickFat
 	call HandleSolarPowerBoost
@@ -60,10 +59,11 @@ HandleGuts:
 	call GetBattleVar
 	cp SPECIAL
 	ret nc
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_GUTS, GutsText
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	ret c
 	jmp FiftyPercentBoost
 
-GutsText: db "Guts@"
 GutsPokemon:
 INCLUDE "data/abilities/guts_mons.asm"
 
@@ -76,10 +76,11 @@ HandleRivalry:
 	farcall CheckOppositeGender
 	ret c
 	jmp z, TwentyFivePercentBoost
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_RIVALRY, RivalryText
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	ret c
 	jmp TwentyFivePercentNerf
 
-RivalryText: db "Rivalry@"
 INCLUDE "data/abilities/rivalry_mons.asm"
 
 HandleSandForce:
@@ -127,10 +128,11 @@ HandleSandForce:
 	ret nz
 
 .SandForceBoost:
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_SAND_FORCE, SandForceText
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	ret c
 	jmp ThirtyPercentBoost
 
-SandForceText: db "Sand Force@"
 INCLUDE "data/abilities/sand_force_mons.asm"
 
 HandleTechnician:
@@ -143,10 +145,11 @@ HandleTechnician:
 	call GetBattleVar
 	cp 61            ; power < 61 → boost
 	ret nc           ; power >= 61, no boost
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_TECHNICIAN, TechnicianText
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	ret c
 	jmp FiftyPercentBoost
 
-TechnicianText: db "Technician@"
 INCLUDE "data/abilities/technician_mons.asm"
 
 HandleAnalytic:
@@ -161,10 +164,11 @@ HandleAnalytic:
 	ldh a, [hBattleTurn] ; 0 on the player's turn
 	xor b
 	ret z ; the user went first
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_ANALYTIC, AnalyticText
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	ret c
 	jmp ThirtyPercentBoost
 
-AnalyticText: db "Analytic@"
 INCLUDE "data/abilities/analytic_mons.asm"
 
 HandleSheerForceBoost:
@@ -181,15 +185,15 @@ HandleMultiscale:
 
 	farcall CheckOpponentFullHP
 	ret nz
-	newfarcall MoldBreakerBypass
+	newfarcall AttackerHasMoldBreaker ; (no popup)
 	ret c
-	; the target's ability: its popup over the target's HUD
+	; the target's ability (unless Neutralizing Gas suppresses it)
 	ldh a, [hBattleTurn]
 	xor 1
-	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_MULTISCALE, MultiscaleText
+	call IsSideSuppressed
+	ret c
 	jmp FiftyPercentNerf
 
-MultiscaleText: db "Multiscale@"
 INCLUDE "data/abilities/multiscale_mons.asm"
 
 HandleThickFat:
@@ -206,15 +210,15 @@ HandleThickFat:
 	cp ICE
 	ret nz
 .nerf
-	newfarcall MoldBreakerBypass
+	newfarcall AttackerHasMoldBreaker ; (no popup)
 	ret c
-	; the target's ability: its popup over the target's HUD
+	; the target's ability (unless Neutralizing Gas suppresses it)
 	ldh a, [hBattleTurn]
 	xor 1
-	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_THICK_FAT, ThickFatText
+	call IsSideSuppressed
+	ret c
 	jmp FiftyPercentNerf
 
-ThickFatText: db "Thick Fat@"
 INCLUDE "data/abilities/thick_fat_mons.asm"
 
 ; handle the HP loss in engine/abilities/turn_end_abilities.asm 
@@ -234,10 +238,11 @@ HandleSolarPowerBoost:
 	call GetBattleVar
 	cp SPECIAL
 	ret c
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_SOLAR_POWER, SolarPowerText
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	ret c
 	jmp FiftyPercentBoost
 
-SolarPowerText: db "SolarPower@"
 SolarPowerPokemon:
 INCLUDE "data/abilities/solar_power_mons.asm"
 
@@ -252,10 +257,11 @@ HandleIronArm:
 	and TYPE_MASK
 	cp STEEL
 	ret nz
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_IRON_ARM, IronArmText
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	ret c
 	jmp FiftyPercentBoost
 
-IronArmText: db "Iron Arm@"
 INCLUDE "data/abilities/iron_arm_mons.asm"
 
 HandleZenFocus:
@@ -269,10 +275,11 @@ HandleZenFocus:
 	and TYPE_MASK
 	cp PSYCHIC_TYPE
 	ret nz
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_ZEN_FOCUS, ZenFocusText
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	ret c
 	jmp FiftyPercentBoost
 
-ZenFocusText: db "Zen Focus@"
 INCLUDE "data/abilities/zen_focus_mons.asm"
 
 HandleRainSurge:
@@ -291,10 +298,11 @@ HandleRainSurge:
 	call GetBattleVar
 	cp SPECIAL
 	ret c
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_RAIN_SURGE, RainSurgeText
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	ret c
 	jmp FiftyPercentBoost
 
-RainSurgeText: db "Rain Surge@"
 INCLUDE "data/abilities/rain_surge_mons.asm"
 
 HandlePillowFort:
@@ -307,15 +315,15 @@ HandlePillowFort:
 	call GetBattleVar
 	cp SPECIAL
 	ret nc
-	newfarcall MoldBreakerBypass
+	newfarcall AttackerHasMoldBreaker ; (no popup)
 	ret c
-	; the target's ability: its popup over the target's HUD
+	; the target's ability (unless Neutralizing Gas suppresses it)
 	ldh a, [hBattleTurn]
 	xor 1
-	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_PILLOW_FORT, PillowFortText
+	call IsSideSuppressed
+	ret c
 	jmp TwentyFivePercentNerf
 
-PillowFortText: db "PillowFort@"
 INCLUDE "data/abilities/pillow_fort_mons.asm"
 
 HandleChrysalisHide:
@@ -328,7 +336,7 @@ HandleChrysalisHide:
 	call GetBattleVar
 	cp SPECIAL
 	ret c
-	newfarcall MoldBreakerBypass
+	newfarcall AttackerHasMoldBreaker ; (no popup)
 	ret c
 	jmp FiftyPercentNerf
 
@@ -362,7 +370,7 @@ HandleMoveEnchancingAbilities:
 	call HandleSharpness
 	call HandleBallistics
 	call HandleIronFist
-	jmp HandleStrongJaw
+	jr HandleStrongJaw
 
 HandleSharpness:
 	call GetCurrentMon
@@ -375,10 +383,11 @@ HandleSharpness:
 	ld hl, SharpMoves
 	call IsInByteArray
 	ret nc
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_SHARPNESS, SharpnessText
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	ret c
 	jmp FiftyPercentBoost
 
-SharpnessText: db "Sharpness@"
 INCLUDE "data/abilities/sharpness_mons.asm"
 
 HandleBallistics:
@@ -392,10 +401,11 @@ HandleBallistics:
 	ld hl, BallisticsMoves
 	call IsInByteArray
 	ret nc
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_BALLISTICS, BallisticsText
-	jmp FiftyPercentBoost
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	ret c
+	jr FiftyPercentBoost
 
-BallisticsText: db "Ballistics@"
 INCLUDE "data/abilities/ballistics_mons.asm"
 
 HandleIronFist:
@@ -412,7 +422,7 @@ HandleIronFist:
 	ldh a, [hBattleTurn]
 	call IsSideSuppressed
 	ret c
-	jmp TwentyPercentBoost
+	jr TwentyPercentBoost
 
 INCLUDE "data/abilities/iron_fist_mons.asm"
 
@@ -427,10 +437,11 @@ HandleStrongJaw:
 	ld hl, StrongJawMoves
 	call IsInByteArray
 	ret nc
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_STRONG_JAW, StrongJawText
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	ret c
 	jr FiftyPercentBoost
 
-StrongJawText: db "Strong Jaw@"
 INCLUDE "data/abilities/strong_jaw_mons.asm"
 
 ; ===========================
@@ -440,22 +451,7 @@ INCLUDE "data/abilities/strong_jaw_mons.asm"
 ; (PolarFangorLightBallBoost in effect_commands.asm, so the AI's damage
 ; estimates and the move info preview see it too) and in the battle Info
 ; tab (StatsInfoBox). Not Defense for Body Press, nor special moves.
-HandleHugePower:
-; Its popup, the first time it uses a physical move after being sent out.
-	call GetCurrentMon
-	ld hl, HugePowerPokemon
-	call IsInByteArray
-	ret nc
-	ld a, BATTLE_VARS_MOVE_TYPE
-	call GetBattleVar
-	cp SPECIAL
-	ret nc
-	ld a, BATTLE_VARS_MOVE_EFFECT
-	call GetBattleVar
-	cp EFFECT_BODY_PRESS
-	ret z
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_HUGE_POWER, HugePowerText
-	ret
+; Passive: no popup.
 
 IsHugePowerSpecies::
 ; Carry if species a has Huge Power. Preserves bc, de, hl.
@@ -466,7 +462,6 @@ IsHugePowerSpecies::
 	call IsInAbilityList
 	jmp PopBCDEHL
 
-HugePowerText: db "Huge Power@"
 INCLUDE "data/abilities/huge_power_mons.asm"
 
 TwentyPercentNerf:

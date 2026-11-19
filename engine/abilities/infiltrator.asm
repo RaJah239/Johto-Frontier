@@ -3,13 +3,11 @@
 ; ============================
 ; The user's moves ignore the foe's Substitute, Reflect, Light Screen,
 ; Safeguard and Mist. Each place in effect_commands.asm that one of these
-; would stop calls InfiltratorBypass only once it's up, so the popup shows
-; over the user's HUD the first time it actually gets past one after it's
-; sent out.
+; would stop calls InfiltratorBypass once it's up. Passive: no popup.
 
 InfiltratorBypass::
-; Carry if hBattleTurn's mon has Infiltrator; its popup then shows (once
-; per send-out). Preserves bc, de, hl.
+; Carry if hBattleTurn's mon has Infiltrator (and Neutralizing Gas doesn't
+; suppress it). Preserves bc, de, hl.
 	push hl
 	push de
 	push bc
@@ -18,11 +16,10 @@ InfiltratorBypass::
 	call IsInByteArray
 	jr nc, .done
 	ldh a, [hBattleTurn]
-	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_INFILTRATOR, InfiltratorText, KEEP
+	call IsSideSuppressed
 	ccf ; (no bypass if suppressed by Neutralizing Gas)
 .done
 	jmp PopBCDEHL
 
-InfiltratorText: db "Infiltrator@"
 
 INCLUDE "data/abilities/infiltrator_mons.asm"

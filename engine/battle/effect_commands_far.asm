@@ -3,71 +3,6 @@
 ; them in that bank) and farjp here; calls back into that bank use newfarcall /
 ; farjp, which pass a, bc, de, hl and flags through both ways.
 
-; =============================
-; === Ability: Priority ===
-; =============================
-PriorityAbilityPopup:
-; Show the ability popup and the priority text the first time a mon uses
-; one of the priority moves with its matching species, once each time it's
-; sent out (see ShowOncePerSendOutPopup).
-; The priority boost itself comes from GetMovePriority in core.asm.
-	ldh a, [hBattleTurn]
-	and a
-	jr nz, .foe
-
-	; player
-	ld a, [wCurPlayerMove]
-	ld c, a
-	ld a, [wBattleMonSpecies]
-	jr .got_user
-
-.foe
-	ld a, [wCurEnemyMove]
-	ld c, a
-	ld a, [wEnemyMonSpecies]
-
-.got_user
-	; a = user's species, c = move being used
-	ld b, a
-	ld a, c
-	cp IRON_HEAD
-	jr nz, .not_iron_head
-	ld a, b
-	cp BLASTOISE
-	ret nz
-	; the text and popup, once per send-out
-	ld c, SEND_OUT_POPUP_IRON_HEAD
-	newfarcall CheckSendOutPopupShown
-	ret nz
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_IRON_HEAD, PreemptText
-	jr PriorityBattleText_Call
-
-.not_iron_head
-	cp ZEN_HEADBUTT
-	ret nz
-	ld a, b
-	cp DROWZEE
-	jr z, .popup_zen
-	cp HYPNO
-	ret nz
-
-.popup_zen
-	; the text and popup, once per send-out
-	ld c, SEND_OUT_POPUP_ZEN_HEADBUTT
-	newfarcall CheckSendOutPopupShown
-	ret nz
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_ZEN_HEADBUTT, PreemptText
-	; fallthrough
-
-PriorityBattleText_Call:
-	ld hl, PriorityBattleText
-	call StdBattleTextbox
-	; the text has no prompt, and hBGMapMode is off here: put it on screen
-	; so it shows together with the popup
-	jmp WaitBGMap
-
-PreemptText: db "Preempt@"
-
 _BattleCommand_Critical:
 ; Determine whether this attack's hit will be critical.
 	xor a
@@ -97,7 +32,7 @@ _BattleCommand_Critical:
 
 ; +2 critical level
 	ld c, 2
-	jmp .Tally
+	jr .Tally
 
 .Tropius:
 	cp TROPIUS
@@ -168,7 +103,8 @@ _BattleCommand_Critical:
 
 ; super luck mons have an innate +2 critical hit level
 	push bc
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_SUPER_LUCK, SuperLuckText, KEEP
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
 	pop bc
 	jr c, .continue ; suppressed by Neutralizing Gas
 	inc c
@@ -181,7 +117,8 @@ _BattleCommand_Critical:
 ; === Ability: Crit Lock ===
 ; ==========================
 	push bc
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_CRIT_LOCK, CritlockText, KEEP
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
 	pop bc
 	jr nc, .CritGuard ; Crit Lock is active
 
@@ -235,8 +172,6 @@ CriticialHitLoaded:
 	ld [wCriticalHit], a
 	ret
 
-SuperLuckText: db "Super Luck@"
-CritlockText: db "Crit Lock@"
 CritGuardText: db "Crit Guard@"
 
 INCLUDE "data/moves/critical_hit_moves.asm"
@@ -330,52 +265,52 @@ _BattleCommand_CheckHit:
 ; ==========================
 ; === Ability: True Horn ===
 ; ==========================
-	surefire_ability MEGAHORN, TrueHornPokemon, SEND_OUT_POPUP_TRUE_HORN, TrueHornText
+	surefire_ability MEGAHORN, TrueHornPokemon
 
 ; ===========================
 ; === Ability: Stormbound ===
 ; ===========================
-	surefire_ability THUNDER, StormboundPokemon, SEND_OUT_POPUP_STORMBOUND, StormboundText
+	surefire_ability THUNDER, StormboundPokemon
 
 ; ===========================
 ; === Ability: True Flame ===
 ; ===========================
-	surefire_ability FIRE_BLAST, TrueFlamePokemon, SEND_OUT_POPUP_TRUE_FLAME, TrueFlameText
+	surefire_ability FIRE_BLAST, TrueFlamePokemon
 
 ; ===========================
 ; === Ability: Frost Lock ===
 ; ===========================
-	surefire_ability BLIZZARD, FrostLockPokemon, SEND_OUT_POPUP_FROST_LOCK, FrostLockText
+	surefire_ability BLIZZARD, FrostLockPokemon
 
 ; ==========================
 ; === Ability: Hydro Aim ===
 ; ==========================
-	surefire_ability HYDRO_PUMP, HydroAimPokemon, SEND_OUT_POPUP_HYDRO_AIM, HydroAimText
+	surefire_ability HYDRO_PUMP, HydroAimPokemon
 
 ; ============================
 ; === Ability: Stonefall =====
 ; ============================
-	surefire_ability ROCK_SLIDE, StonefallPokemon, SEND_OUT_POPUP_STONE_FALL, Stone_FallText
+	surefire_ability ROCK_SLIDE, StonefallPokemon
 
 ; ============================
 ; === Ability: Stonebound =====
 ; ============================
-	surefire_ability STONE_EDGE, StoneboundPokemon, SEND_OUT_POPUP_STONEBOUND, StoneboundText
+	surefire_ability STONE_EDGE, StoneboundPokemon
 
 ; ===========================
 ; === Ability: Dream Gaze ===
 ; ===========================
-	surefire_ability HYPNOSIS, DreamGazePokemon, SEND_OUT_POPUP_DREAM_GAZE, DreamGazeText
+	surefire_ability HYPNOSIS, DreamGazePokemon
 
 ; ===========================
 ; === Ability: Dream Song ===
 ; ===========================
-	surefire_ability SING, DreamSongPokemon, SEND_OUT_POPUP_DREAM_SONG, DreamSongText
+	surefire_ability SING, DreamSongPokemon
 
 ; ===========================
 ; === Ability: Astral Aim ===
 ; ===========================
-	surefire_ability METEOR_MASH, AstralAimPokemon, SEND_OUT_POPUP_ASTRAL_AIM, AstralAimText
+	surefire_ability METEOR_MASH, AstralAimPokemon
 
 	call .StatModifiers
 
@@ -557,7 +492,8 @@ _BattleCommand_CheckHit:
 	call IsInByteArray
 	jr nc, .skip_keen_eyes
 
-	ShowOncePerSendOutPopup SEND_OUT_POPUP_KEEN_EYES, KeenEyesText, KEEP
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
 	jr c, .skip_keen_eyes ; suppressed by Neutralizing Gas
 	ld a, 130
 	call AccuracyCalc
@@ -575,7 +511,6 @@ _BattleCommand_CheckHit:
 	ld [hl], a
 	ret
 
-KeenEyesText: db "Keen Eyes@"
 
 _BattleCommand_CheckHit.UnawareStages:
 ; b = the attacker's accuracy stage, c = the target's evasion stage.

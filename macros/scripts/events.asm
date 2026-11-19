@@ -1258,13 +1258,10 @@ ENDM
 ; === Macro: surefire_ability                                        ===
 ; ==========================================================================
 ; If the move used is \1 and the user has the ability, the move hits (this
-; returns from _BattleCommand_CheckHit), showing the ability popup once
-; each time the user is sent out.
+; returns from _BattleCommand_CheckHit). Passive: no popup.
 ; Parameters:
 ;   \1 - Move animation constant (e.g., MEGAHORN)
 ;   \2 - Pokemon list (e.g., TrueHornPokemon)
-;   \3 - SEND_OUT_POPUP_* constant (e.g., SEND_OUT_POPUP_TRUE_HORN)
-;   \4 - Ability popup text label (e.g., TrueHornText)
 ; ==========================================================================
 MACRO surefire_ability
 	; Check if the specific move was used
@@ -1279,9 +1276,9 @@ MACRO surefire_ability
 	call IsInByteArray
 	jr nc, .skip\@
 
-	; It hits: slide the popup over the user's HUD, once per send-out
-	; (unless Neutralizing Gas suppresses it)
-	ShowOncePerSendOutPopup \3, \4, KEEP
+	; It hits (unless Neutralizing Gas suppresses the ability)
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
 	jr c, .skip\@
 	ret
 
