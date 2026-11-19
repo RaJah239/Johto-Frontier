@@ -335,10 +335,6 @@ endr
 	and a
 	jr nz, .bug_contest_or_fast_travel_not_obtained
 
-	ld a, [wLinkMode]
-	and a
-	jr nz, .bug_contest_or_fast_travel_not_obtained
-
 	; check if end game fast travel has been obtained
 	ld hl, wPokegearFlags
 	bit ENGINE_START_MENU_WARP_F, [hl]
