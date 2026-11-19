@@ -1,28 +1,23 @@
 ; Pic animation arrangement.
 
 AnimateMon_Menu:
-	ld e, ANIM_MON_MENU
-	ld d, $0
+	lb de, $0, ANIM_MON_MENU
 	jr AnimateFrontpic
 
 AnimateMon_Trade:
-	ld e, ANIM_MON_TRADE
-	ld d, $0
+	lb de, $0, ANIM_MON_TRADE
 	jr AnimateFrontpic
 
 AnimateMon_Evolve:
-	ld e, ANIM_MON_EVOLVE
-	ld d, $0
+	lb de, $0, ANIM_MON_EVOLVE
 	jr AnimateFrontpic
 
 AnimateMon_Hatch:
-	ld e, ANIM_MON_HATCH
-	ld d, $0
+	lb de, $0, ANIM_MON_HATCH
 	jr AnimateFrontpic
 
 AnimateMon_HOF:
-	ld e, ANIM_MON_HOF
-	ld d, $0
+	lb de, $0, ANIM_MON_HOF
 	jr AnimateFrontpic
 
 MACRO pokeanim
@@ -160,8 +155,7 @@ PokeAnim_Wait:
 	ret
 
 PokeAnim_Setup:
-	ld c, FALSE
-	ld b, 0
+	lb bc, 0, FALSE
 	call PokeAnim_InitAnim
 	call PokeAnim_SetVBank1
 	ld a, [wPokeAnimSceneIndex]
@@ -170,8 +164,7 @@ PokeAnim_Setup:
 	ret
 
 PokeAnim_Setup2:
-	ld c, FALSE
-	ld b, 4
+	lb bc, 4, FALSE
 	call PokeAnim_InitAnim
 	call PokeAnim_SetVBank1
 	ld a, [wPokeAnimSceneIndex]
@@ -180,8 +173,7 @@ PokeAnim_Setup2:
 	ret
 
 PokeAnim_Idle:
-	ld c, TRUE
-	ld b, 0
+	lb bc, 0, TRUE
 	call PokeAnim_InitAnim
 	call PokeAnim_SetVBank1
 	ld a, [wPokeAnimSceneIndex]
@@ -816,8 +808,7 @@ PokeAnim_PlaceGraphic:
 	ld h, [hl]
 	ld l, a
 	add hl, bc
-	ld c, 7
-	ld b, 7
+	lb bc, 7, 7
 	ld a, [wPokeAnimGraphicStartTile]
 .loop
 	push bc
@@ -984,14 +975,12 @@ GetMonFramesPointer:
 	jr z, .egg
 
 	call PokeAnim_IsUnown
-	ld b, BANK(UnownFramesPointers)
-	ld c, BANK(UnownsFrames)
+	lb bc, BANK(UnownFramesPointers), BANK(UnownsFrames)
 	ld hl, UnownFramesPointers
 	jr z, .got_frames
 	ld a, [wPokeAnimSpecies]
 	cp JOHTO_POKEMON
-	ld b, BANK(FramesPointers)
-	ld c, BANK(KantoFrames)
+	lb bc, BANK(FramesPointers), BANK(KantoFrames)
 	ld hl, FramesPointers
 	jr c, .got_frames
 	ld c, BANK(JohtoFrames)
