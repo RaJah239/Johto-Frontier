@@ -119,11 +119,10 @@ DetermineMoveOrder:
 	ld a, [wEnemyMonSpecies]
 	ld hl, QuickDrawPokemon
 	call IsInAbilityList
-	jr nc, .quick_draw_mon_not_in_list
+	jmp c, .continue
 
 	; if we reach here
 	; both player and foe are Quick Draw Pokemon
-	jmp .continue
 
 .quick_draw_mon_not_in_list
 	; check if player is using a Quick Draw Pokemon
@@ -225,7 +224,7 @@ DetermineMoveOrder:
     ld a, [wBattleMonSpecies]
 	ld hl, ChlorophyllPokemon
 	call IsInAbilityList
-	jmp c, .continue
+	jr c, .continue
     jr .SimulateEnemyDoubleSpeed
 
 .check_other_player_sand
@@ -299,8 +298,7 @@ DetermineMoveOrder:
 	jr nc, .continue
 	ld a, [wPlayerSpdLevel]
 	cp BASE_STAT_LEVEL - 1
-	jr c, .continue
-	jr .player_first
+	jr nc, .player_first
 
 .continue
 	ld de, wBattleMonSpeed
