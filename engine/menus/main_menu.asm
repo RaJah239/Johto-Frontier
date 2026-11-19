@@ -122,9 +122,9 @@ MainMenu_GetWhichMenu:
 	ret
 
 MainMenuJoypadLoop:
-	call SetUpMenu
 .loop
 	call MainMenu_PrintCurrentTimeAndDay
+	call SetUpMenu
 	ld a, [w2DMenuFlags1]
 	set 5, a
 	ld [w2DMenuFlags1], a
