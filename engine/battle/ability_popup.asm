@@ -93,8 +93,7 @@ ShowAbilityPopupCore:
 	; keeping each tile's palette for now so the picture looks the same
 	ld hl, wAbilityPopupSavedAttrs
 	ld de, wAbilityPopupNewTiles
-	ld b, ABILITY_SLIDE_TILE
-	ld c, ABILITY_SLIDE_TILES
+	lb bc, ABILITY_SLIDE_TILE, ABILITY_SLIDE_TILES
 .new_tiles
 	ld a, b
 	ld [de], a ; tile
