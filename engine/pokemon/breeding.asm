@@ -264,7 +264,7 @@ HatchEggs:
 	ld a, [de]
 	inc de
 	cp -1
-	jmp z, .done
+	ret z
 	push de
 	push hl
 	cp EGG
@@ -442,7 +442,7 @@ InitEggMoves:
 .loop
 	ld a, [de]
 	and a
-	jr z, .done
+	ret z
 	ld hl, wEggMonMoves
 	ld c, NUM_MOVES
 .next
@@ -453,8 +453,7 @@ InitEggMoves:
 	dec c
 	jr nz, .next
 	call GetEggMove
-	jr nc, .skip
-	call LoadEggMove
+	call c, LoadEggMove
 
 .skip
 	inc de
@@ -950,16 +949,16 @@ DayCareMonCompatibilityText:
 	ld a, [wBreedingCompatibility]
 	ld hl, .BreedNoInterestText
 	cp -1
-	jr z, .done
+	ret z
 	ld hl, .BreedNoInterestText
 	and a
-	jr z, .done
+	ret z
 	ld hl, .BreedShowsInterestText
 	cp 230
-	jr nc, .done
+	ret nc
 	cp 70
 	ld hl, .BreedShowsInterestText
-	jr nc, .done
+	ret nc
 	ld hl, .BreedShowsInterestText
 
 .done
