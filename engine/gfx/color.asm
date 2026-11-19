@@ -77,55 +77,11 @@ LoadSingleWhitePal:
 	ldh [rSVBK], a
 	ret
 
- LoadSingleBlackPal:
- 	; Destination address of the Palette and Slot is passed in 'de'
- 	ldh a, [rSVBK]
- 	push af
- 	ld a, BANK(wBGPals1)
- 	ldh [rSVBK], a
- 	xor a ; the color black is $0000
- 	ld [de], a
- 	inc de
- 	ld [de], a
- 	inc de
- 
- 	pop af
- 	ldh [rSVBK], a
- 	ret
-
 InitPartyMenuPalettes:
 	ld hl, PartyMenuPredefPals
 	call CopyFourPalettes
 	call InitPartyMenuOBPals
 	jmp WipeAttrmap
-
-LoadMonPaletteAsNthBGPal:
-	ld a, [wCurPartySpecies]
-	call _GetMonPalettePointer
-	ld a, e
-	bit 7, a
-	jr z, LoadNthMiddleBGPal
-	and $7f
-	inc hl
-	inc hl
-	inc hl
-	inc hl
-LoadNthMiddleBGPal:
-	push hl
-	ld hl, wBGPals1
-	ld de, 1 palettes
-.loop
-	and a
-	jr z, .got_addr
-	add hl, de
-	dec a
-	jr .loop
-
-.got_addr
-	ld e, l
-	ld d, h
-	pop hl
-	jmp LoadPalette_White_Col1_Col2_Black
 
 ApplyMonOrTrainerPals:
 	call CheckCGB
