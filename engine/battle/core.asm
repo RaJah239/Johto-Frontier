@@ -2621,9 +2621,6 @@ MaybePlayFinalPokemonMusic:
 	ld a, [wLinkMode]
 	and a
 	jr nz, .done
-	ld a, [wInBattleTowerBattle]
-	bit 0, a
-	jr nz, .done
 	ld a, [wOptions3]
 	bit NO_MUSIC, a
 	jr nz, .done
@@ -2634,11 +2631,15 @@ MaybePlayFinalPokemonMusic:
 	or b
 	jr nz, .done
 
+	; Every Battle Tower opponent is eligible, regardless of trainer class.
+	ld a, [wInBattleTowerBattle]
+	bit 0, a
+	jr nz, .eligible
 	; IsGymLeader includes both Johto and Kanto. Other bosses keep their music.
 	call IsGymLeader
 	jr c, .eligible
 	ld a, [wOtherTrainerClass]
-	ld hl, .EliteFour
+	ld hl, .AdditionalTrainerClasses
 	call IsInByteArray
 	jr nc, .done
 .eligible
@@ -2661,7 +2662,8 @@ MaybePlayFinalPokemonMusic:
 .done
 	jmp PopAFBCDEHL
 
-.EliteFour:
+.AdditionalTrainerClasses:
+	; Add trainer class constants before -1 to enable their final Pokemon music.
 	db WILL, KOGA, BRUNO, KAREN, LORELEI, AGATHA
 	db -1
 
