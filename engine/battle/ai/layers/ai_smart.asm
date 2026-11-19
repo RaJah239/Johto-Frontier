@@ -171,11 +171,31 @@ AI_Smart_KingsShield:
     cp KINGS_SHIELD
 	jr z, .discourage
 
-; discourage if already in defense mode
+; In defense mode, still protect an existing Substitute or gain recovery.
     ld a, [wEnemyDefLevel]
     cp BASE_STAT_LEVEL + 2
-    jr nc, .discourage
+    jr c, .checkSetup
+	ld a, [wEnemySubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
+	jr nz, .checkSetup
+	call AI_ProtectGetsRecovery
+	jr nc, .discourage
 
+.checkSetup
+; set up Substitute first when it is safe and protection is not healing us
+	call AI_ShouldSetSubBeforeProtect
+	jr c, .discourage
+; protect our Substitute from the player's last damaging move
+    ld a, [wEnemySubStatus4]
+    bit SUBSTATUS_SUBSTITUTE, a
+    jr z, .checkKO
+    ld a, [wCurPlayerMove]
+	call AIGetPlayerMove
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	jr nz, .massiveEncourage
+
+.checkKO
 ; if we are here we are in attack stance
 ; can we ko the player, if not continue
     call CanAIKO
@@ -213,6 +233,143 @@ AI_Smart_KingsShield:
     inc [hl]
     inc [hl]
     ret
+
+AI_ShouldSetSubBeforeProtect:
+; Carry if a usable Substitute should take priority over protection.
+	ld a, [wEnemySubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
+	jr nz, .no
+	ld a, [wEnemyTauntCount]
+	and a
+	jr nz, .no
+	call AICheckEnemyQuarterHP
+	jr nc, .no
+	call DoesEnemyHaveChoiceItem
+	jr c, .no
+	ld a, SUBSTITUTE
+	call AI_HasUsableMove
+	jr nc, .no
+	call AI_ProtectGetsRecovery
+	jr c, .no
+	call DoesAIOutSpeedPlayer
+	jr c, .yes
+	call CanPlayerKO
+	jr c, .no
+.yes
+	scf
+	ret
+
+.no
+	and a
+	ret
+
+AI_HasUsableMove:
+; a = move; carry if the enemy knows it and has PP. Preserve bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld b, a
+	ld hl, wEnemyMonMoves
+	ld de, wEnemyMonPP
+	ld c, NUM_MOVES
+.loop
+	ld a, [hli]
+	cp b
+	jr nz, .next
+	ld a, [wEnemyDisabledMove]
+	cp b
+	jr z, .next
+	ld a, [de]
+	and PP_MASK
+	jr nz, .yes
+.next
+	inc de
+	dec c
+	jr nz, .loop
+	and a
+	jr .done
+.yes
+	scf
+.done
+	pop bc
+	pop de
+	pop hl
+	ret
+
+AI_ProtectGetsRecovery:
+; Carry if protecting will gain HP at the end of this turn.
+	call AICheckEnemyMaxHP
+	jr c, .no
+	push hl
+	push de
+	push bc
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_LEECH_SEED, a
+	jr nz, .yes
+	ld a, [wEnemyMonStatus]
+	bit PSN, a
+	jr z, .turn_end
+	ld hl, PoisonHealPokemon
+	ld d, BANK(PoisonHealPokemon)
+	call AI_IsEnemyInFarList
+	jr c, .yes
+.turn_end
+; Held items and turn-end abilities wait until the turn after entry.
+	ld a, [wCurOTMon]
+	ld b, a
+	ld a, [wEnemyTurnStartMon]
+	cp b
+	jr nz, .not_healing
+	ld a, [wEnemyMonItem]
+	ld b, a
+	callfar GetItemHeldEffect
+	ld a, b
+	cp HELD_LEFTOVERS
+	jr z, .yes
+	ld hl, RecoveryPokemon
+	ld d, BANK(RecoveryPokemon)
+	call AI_IsEnemyInFarList
+	jr c, .yes
+	ld a, [wBattleWeather]
+	cp WEATHER_RAIN
+	jr z, .rain
+	cp WEATHER_HAIL
+	jr z, .hail
+	cp WEATHER_SANDSTORM
+	jr z, .sand
+	cp WEATHER_SUN
+	jr nz, .not_healing
+	ld hl, PhotosynthesisPokemon
+	ld d, BANK(PhotosynthesisPokemon)
+	jr .weather_ability
+.rain
+	ld hl, RainDishPokemon
+	ld d, BANK(RainDishPokemon)
+	jr .weather_ability
+.hail
+	ld hl, IceBodyPokemon
+	ld d, BANK(IceBodyPokemon)
+	jr .weather_ability
+.sand
+	ld hl, SandBodyPokemon
+	ld d, BANK(SandBodyPokemon)
+.weather_ability
+	call AI_IsEnemyInFarList
+	jr c, .yes
+.not_healing
+	and a
+	jr .done
+
+.yes
+	scf
+.done
+	pop bc
+	pop de
+	pop hl
+	ret
+.no
+	and a
+	ret
 
 AI_Smart_StaticDamage:
 ; don't use Seismic Toss on Ghost-types
@@ -2447,8 +2604,20 @@ AI_Smart_SpeedDownHit:
 AI_Smart_Substitute:
 ; don't sub if choice locked
 	call DoesEnemyHaveChoiceItem
-	jr c, .discourage
+	jmp c, .discourage
 
+; Set up the Substitute before protecting when the combo is usable.
+	ld a, PROTECT
+	call AI_HasUsableMove
+	jr c, .try_combo
+	ld a, KINGS_SHIELD
+	call AI_HasUsableMove
+	jr nc, .usual_checks
+.try_combo
+	call AI_ShouldSetSubBeforeProtect
+	jr c, .encourage
+
+.usual_checks
 ; discourage if player will move first
 	call DoesAIOutSpeedPlayer
 	jr nc, .discourage
@@ -3114,7 +3283,8 @@ AI_SideCanGetStatus:
 	ld a, FIRE
 	call .has_type
 	jr z, .no
-	jp .abilities
+	jr .abilities
+
 .not_burn
 	cp 1 << PAR
 	jr nz, .not_paralyze
@@ -3536,11 +3706,28 @@ AI_Smart_Curse:
 	ret
 
 AI_Smart_Protect:
-; greatly discourage this move if the enemy already used protect
+; consecutive Protect or King's Shield would fail
 	ld a, [wCurEnemyMove]
 	cp PROTECT
 	jr z, .greatly_discourage
+	cp KINGS_SHIELD
+	jr z, .greatly_discourage
 
+; set up Substitute first when it is safe and protection is not healing us
+	call AI_ShouldSetSubBeforeProtect
+	jr c, .greatly_discourage
+
+; protect our Substitute from the player's last damaging move
+	ld a, [wEnemySubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
+	jr z, .check_charged
+	ld a, [wCurPlayerMove]
+	call AIGetPlayerMove
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	jr nz, .use
+
+.check_charged
 ; encourage this move if the player has charged a two-turn move
 	ld a, [wPlayerSubStatus3]
 	bit SUBSTATUS_CHARGED, a

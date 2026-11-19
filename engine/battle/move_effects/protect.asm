@@ -22,13 +22,6 @@ ProtectChance:
 	farcall CheckOpponentWentFirst
 	jr nz, .failed
 
-; Can't have a substitute.
-
-	ld a, BATTLE_VARS_SUBSTATUS4
-	call GetBattleVar
-	bit SUBSTATUS_SUBSTITUTE, a
-	jr nz, .failed
-
 ; Protect always fails if used on consecutive turns.
 	ld a, [de]
 	and a
