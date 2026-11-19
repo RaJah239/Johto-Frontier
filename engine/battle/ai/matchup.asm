@@ -3249,6 +3249,16 @@ MSim_RunBoost:
 ; hl = stat stage changes (MSim_BoostEffects); wMSimStartHP = the HP to start
 ; from. The enemy boosts on the first turn (the player gets a free hit), then
 ; MSim_Run. Carry if it wins. Leaves the enemy's stats raised.
+	; Growth raises both attacking stats by two stages in sunlight.
+	dec hl
+	ld a, [hli] ; the effect before the stat changes
+	cp EFFECT_GROWTH
+	jr nz, .raise_stats
+	ld a, [wBattleWeather]
+	cp WEATHER_SUN
+	jr nz, .raise_stats
+	ld hl, .sun_growth
+.raise_stats
 	; raise its stat stages (up to MAX_STAT_LEVEL) and recalculate
 	ld de, wEnemyStatLevels
 	ld c, NUM_BATTLE_STATS
@@ -3296,6 +3306,9 @@ MSim_RunBoost:
 .no
 	and a
 	ret
+
+.sun_growth
+	db 2, 0, 0, 2, 0 ; Attack, Defense, Speed, Sp. Atk, Sp. Def
 
 MSim_RunReset:
 ; b = the move's effect: EFFECT_RESET_STATS (Haze: both sides' stat stages
