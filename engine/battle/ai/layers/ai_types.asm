@@ -71,8 +71,7 @@ AI_Types:
 	jr z, .checkmove2
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
-	jr nz, .damaging
-	jr .checkmove2
+	jr z, .checkmove2
 
 .damaging
 	ld c, a
