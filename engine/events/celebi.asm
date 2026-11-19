@@ -165,14 +165,13 @@ UpdateCelebiPosition:
 	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
 	add hl, bc
 	ld a, SPRITE_ANIM_FRAMESET_CELEBI_RIGHT
-	call ReinitSpriteAnimFrame
-	jr .done
+	jmp ReinitSpriteAnimFrame
 
 .left
 	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
 	add hl, bc
 	ld a, SPRITE_ANIM_FRAMESET_CELEBI_LEFT
-	call ReinitSpriteAnimFrame
+	jmp ReinitSpriteAnimFrame
 .done
 	ret
 
@@ -261,7 +260,7 @@ CheckCaughtCelebi:
 	jr z, .false
 	ld a, TRUE
 	ld [wScriptVar], a
-	jr .done
+	ret
 
 .false
 	xor a ; FALSE
