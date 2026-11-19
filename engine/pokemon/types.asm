@@ -24,7 +24,7 @@ PrintMonTypes:
 
 .Print:
 	ld b, a
-	jmp PrintType
+	jr PrintType
 
 .hide_type_2
 	; Erase any type name that was here before.
@@ -66,7 +66,7 @@ PrintEnemyMonTypes:
 
 .Print:
 	ld b, a
-	jmp PrintType
+	jr PrintType
 
 GetHiddenPowerType:
 	ld hl, wPartyMon1DVs
@@ -80,14 +80,6 @@ GetHiddenPowerTypeInB:
 	call GetHiddenPowerType
 	ld b, a
 	ret
-
-GetHiddenPowerBattleType:
-	ld hl, wBattleMonDVs
-	ldh a, [hBattleTurn]
-	and a
-	jr z, HiddenPowerType
-	ld hl, wEnemyMonDVs
-	; fallthrough
 
 HiddenPowerType:
     ; Def & 3
@@ -116,60 +108,6 @@ HiddenPowerType:
     ret c
     add UNUSED_TYPES_END - UNUSED_TYPES
     ret
-
-PrintBattleMoveType:
-; Print the type of move b at hl.
-    push hl
-    ld a, b
-    cp HIDDEN_POWER
-    jr z, .print_hidden_power
-    dec a
-    ld bc, MOVE_LENGTH
-    ld hl, Moves
-    call AddNTimes
-    ld de, wStringBuffer1
-    ld a, BANK(Moves)
-    call FarCopyBytes
-    ld a, [wStringBuffer1 + MOVE_TYPE]
-    pop hl
-
-    ld b, a
-    jr PrintType
-
-.print_hidden_power
-    call GetHiddenPowerBattleType
-    pop hl
-    ld b, a
-    jr PrintType
-
-PrintMoveType:
-; Print the type of move b at hl.
-
-	push hl
-	ld a, b
-	cp HIDDEN_POWER
-	jr z, .print_hidden_power
-	cp HIDDEN_FORCE
-	jr z, .print_hidden_power
-	dec a
-	ld bc, MOVE_LENGTH
-	ld hl, Moves
-	call AddNTimes
-	ld de, wStringBuffer1
-	ld a, BANK(Moves)
-	call FarCopyBytes
-	ld a, [wStringBuffer1 + MOVE_TYPE]
-	and TYPE_MASK
-	pop hl
-
-	ld b, a
-	jr PrintType
-
-.print_hidden_power
-	call GetHiddenPowerType
-	pop hl
-	ld b, a
-	; fallthrough
 
 PrintType:
 ; Print type b at hl.
