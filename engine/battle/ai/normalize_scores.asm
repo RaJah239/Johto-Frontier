@@ -15,8 +15,7 @@ DEF AI_SCORE_BIAS EQU 32
 	; find the lowest biased score among the moves the enemy has
 	ld hl, wEnemyAIMoveScores
 	ld de, wEnemyMonMoves
-	ld b, NUM_MOVES
-	ld c, $ff
+	lb bc, NUM_MOVES, $ff
 .find_lowest
 	ld a, [de]
 	inc de
