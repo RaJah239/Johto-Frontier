@@ -55,8 +55,7 @@ AI_Types:
 	and TYPE_MASK
 	ld d, a
 	ld hl, wEnemyMonMoves
-	ld b, NUM_MOVES + 1
-	ld c, 0
+	lb bc, NUM_MOVES + 1, 0
 .checkmove2
 	dec b
 	jr z, .movesdone
