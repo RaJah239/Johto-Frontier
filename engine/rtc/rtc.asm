@@ -78,8 +78,6 @@ StartClock::
 	; bit 5: Day count exceeds 139
 	; bit 6: Day count exceeds 255
 	call RecordRTCStatus ; set flag on sRTCStatusFlags
-
-.skip_set
 	jr StartRTC
 
 _FixDays:

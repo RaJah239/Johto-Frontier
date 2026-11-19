@@ -61,9 +61,6 @@ DoNextFrameForAllSprites:
 	ld [hli], a
 	jr .loop2
 
-.done
-	ret
-
 DoNextFrameForFirst16Sprites:
 	ld hl, wSpriteAnimationStructs
 	ld e, NUM_SPRITE_ANIM_STRUCTS
@@ -99,9 +96,6 @@ DoNextFrameForFirst16Sprites:
 	xor a
 	ld [hli], a
 	jr .loop2
-
-.done
-	ret
 
 _InitSpriteAnimStruct::
 ; Initialize animation a at pixel x=e, y=d

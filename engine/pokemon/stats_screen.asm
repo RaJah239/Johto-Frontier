@@ -802,12 +802,9 @@ LoadOrangePage:
 	hlcoord 11, 8
 	jmp PlaceString
 
-AbilityText:
-    db "Ability:@"
-SelectSwapToAbilitiesPageText:
-	db "<se><le><ct>▶Back@"
-SelectSwapToPreviousPageText:
-	db "<se><le><ct>▶Next@"
+AbilityText: db "Ability:@"
+SelectSwapToAbilitiesPageText: db "<se><le><ct>▶Back@"
+SelectSwapToPreviousPageText: db "<se><le><ct>▶Next@"
 
 StatsScreen_Print_HiddenPow_Info:
 	ld de, HiddenPowerTypeString
@@ -850,8 +847,7 @@ StatsScreen_Print_HiddenPow_Info:
 	hlcoord 2, 17
 	jmp PlaceString
 
-HiddenPowerTypeString:
-	db "Core Trait:@"
+HiddenPowerTypeString: db "Core Trait:@"
 
 StatsScreen_PrintEVs:
 	hlcoord 1, 11

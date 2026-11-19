@@ -52,8 +52,6 @@ MonMenuLoop:
 	jr nz, .select
 	bit B_BUTTON_F, a
 	jr z, .loop
-
-.cancel
 	ld a, MONMENUITEM_CANCEL
 	ret
 
@@ -156,8 +154,6 @@ GetMonSubmenuItems:
 	jr z, TerminateMonSubmenu
 	ld a, MONMENUITEM_CANCEL
 	call AddMonMenuItem
-
-.ok2
 	jr TerminateMonSubmenu
 
 .egg

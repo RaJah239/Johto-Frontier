@@ -12,9 +12,7 @@ _SwitchPartyMons:
 	ld a, [wSwitchMonFrom]
 	call .ClearSprite
 	ld a, [wSwitchMonTo]
-	call .ClearSprite
-.skip
-	ret
+	; fallthrough
 
 .ClearSprite:
 	push af

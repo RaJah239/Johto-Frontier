@@ -47,7 +47,6 @@ PrintBCDNumber::
 	ld [hl], "0"
 	call PrintLetterDelay
 	inc hl
-.done
 	ret
 
 PrintBCDDigit::

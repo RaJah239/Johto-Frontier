@@ -387,8 +387,6 @@ MailboxPC:
 	dec a
 	ld hl, .Jumptable
 	rst JumpTable
-
-.subexit
 	ret
 
 .Jumptable:

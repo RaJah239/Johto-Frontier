@@ -480,10 +480,7 @@ TryGiveItemToPartymon:
 	ld [wCurItem], a
 	call ReceiveItemFromPokemon
 	ld hl, ItemStorageFullText
-	call MenuTextboxBackup
-
-.abort
-	ret
+	jmp MenuTextboxBackup
 
 GivePartyItem:
 	call GetPartyItemLocation
@@ -492,8 +489,6 @@ GivePartyItem:
 	ld d, a
 	farcall ItemIsMail
 	call c, ComposeMailMessage
-
-.done
 	ret
 
 TakePartyItem:
@@ -523,9 +518,6 @@ TakePartyItem:
 .item_storage_full
 	ld hl, ItemStorageFullText
 	jmp MenuTextboxBackup
-
-.done
-	ret
 
 GiveTakeItemMenuData:
 	db MENU_SPRITE_ANIMS | MENU_BACKUP_TILES ; flags

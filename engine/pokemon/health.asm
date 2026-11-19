@@ -19,9 +19,6 @@ HealParty:
 	ld [wCurPartyMon], a
 	jr .loop
 
-.done
-	ret
-
 HealPartyMon:
 	ld a, MON_SPECIES
 	call GetPartyParamLocation

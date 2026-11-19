@@ -511,8 +511,6 @@ ListMovePP:
 	ld a, b
 	cp NUM_MOVES
 	jr nz, .loop
-
-.done
 	ret
 
 .load_loop
@@ -650,8 +648,6 @@ ListMoves:
 	inc a
 	cp NUM_MOVES
 	jr nz, .nonmove_loop
-
-.done
 	ret
 
 GetMonTypeIndex:

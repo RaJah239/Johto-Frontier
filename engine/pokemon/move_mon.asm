@@ -1062,7 +1062,6 @@ RemoveMonFromPartyPartial:
 	ld a, [wPartyCount]
 	cp b
 	jr nz, .loop2
-.close_sram
 	ret
 
 AdoptMonFromParty:
