@@ -1180,9 +1180,6 @@ TradeAnim_AnimateTrademonInTube:
 	jr nc, .JumptableNext
 	inc [hl]
 	ret
-.done_move_down
-	jr .JumptableNext
-
 .MoveRight:
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
@@ -1190,16 +1187,6 @@ TradeAnim_AnimateTrademonInTube:
 	cp $56
 	jr nc, .JumptableNext
 	inc [hl]
-	ret
-
-.done_move_right
-	jr .JumptableNext
-
-.InitTimer:
-	call .JumptableNext
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], $80
 	ret
 
 .MoveUp:
