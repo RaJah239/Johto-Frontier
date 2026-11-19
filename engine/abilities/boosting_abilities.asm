@@ -40,20 +40,10 @@ CheckIfHardModeAndBoost:
 	bit HARD_MODE, a
 	ret z
 
-	; hard mode is enabled
-	; so boost offense and defense by 20%
-	; decide offense vs defense by turn
+	; Reduce the player's attack or boost the enemy's attack by 20%.
 	ldh a, [hBattleTurn]
 	and a
-	jr nz, .boost_attack              ; player turn -> return
-
-	; this only applies when it's the player's turn
-	; reduce the player's attack by 20%
-	jmp TwentyPercentNerf
-
-.boost_attack
-	; this only applies when it's the enemy's turn
-	; boost the enemy's attack by 20%
+	jmp z, TwentyPercentNerf
 	jmp TwentyPercentBoost
 
 HandleGuts:
