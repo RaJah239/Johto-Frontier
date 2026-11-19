@@ -300,7 +300,6 @@ GetTextSpeed:
 	cp TEXT_DELAY_FAST
 	jr z, .fast
 	cp TEXT_DELAY_NONE
-	jr z, .none
 .none
 	ld c, OPT_TEXT_SPEED_NONE
 	lb de, TEXT_DELAY_FAST, TEXT_DELAY_FAST
@@ -329,8 +328,7 @@ Options_BattleScene:
 
 .NonePressed:
 	bit BATTLE_SCENE, [hl]
-	jr z, .ToggleOn
-	jr .ToggleOff
+	jr nz, .ToggleOff
 
 .ToggleOn:
 	res BATTLE_SCENE, [hl]
@@ -449,8 +447,7 @@ Options_RecoilText:
 
 .NonePressed:
 	bit SKIP_RECOIL_TEXT, [hl]
-	jr z, .ToggleOn
-	jr .ToggleOff
+	jr nz, .ToggleOff
 
 .ToggleOn:
 	res SKIP_RECOIL_TEXT, [hl]
@@ -1762,8 +1759,7 @@ Options_BicycleMusic:
 	jr z, .display_value
 	ld a, [wPlayerState]
 	cp PLAYER_BIKE
-	jr nz, .display_value
-	call PlayMapMusicBike
+	call z, PlayMapMusicBike
 
 .display_value
 	call OptionsMenu_PlaceValue
@@ -1779,8 +1775,7 @@ Options_Frame:
 	bit D_LEFT_F, a
 	jr nz, .LeftPressed
 	bit D_RIGHT_F, a
-	jr nz, .RightPressed
-	jr UpdateFrame
+	jr z, UpdateFrame
 
 .RightPressed:
 	ld a, [hl]
