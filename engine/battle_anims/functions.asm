@@ -389,7 +389,7 @@ BattleAnimFunc_PokeBall:
 	and $1f
 	jmp z, FarDeinitBattleAnimation
 	and $f
-	call z, BattleAnim_IncAnonJumptableIndex
+	jmp z, BattleAnim_IncAnonJumptableIndex
 	ret
 
 BattleAnimFunc_PokeBallBlocked:
