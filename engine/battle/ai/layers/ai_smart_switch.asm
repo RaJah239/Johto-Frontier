@@ -75,8 +75,7 @@ AI_Smart_Switch:
 .checkLoweredAttack
     ld a, [wEnemyAtkLevel]
 	cp BASE_STAT_LEVEL - 1
-	jr c, .switchForLoweredOffense
-	jr .magicGuard
+	jr nc, .magicGuard
 
 .switchForLoweredOffense
 	call AI_80_20
@@ -106,8 +105,7 @@ AI_Smart_Switch:
 	call AICheckEnemyHalfHP
 	jr nc, .checkSetupAndSwitchIfWeCantKO
 	call AI_50_50
-	jr c, .checkLeechSeed
-	jr .checkSetupAndSwitchIfWeCantKO
+	jr nc, .checkSetupAndSwitchIfWeCantKO
 
 .checkLeechSeed
 ; 30% chance to switch per turn if enemy afflicted with leech seed
