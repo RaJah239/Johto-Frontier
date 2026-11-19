@@ -606,11 +606,9 @@ TrainerBattleInfo:
 	
 StatChangesInfoBox:
 	hlcoord 0, 0
-	ld b, 14
-	ld c, 8
+	lb bc, 14, 8
 	call Textbox
-	ld b, 14
-	ld c, 8
+	lb bc, 14, 8
 	hlcoord 10, 0
 	call Textbox
 	
@@ -618,8 +616,7 @@ StatChangesInfoBox:
 	ld de, MainText.player
 	call PlaceString
 	ld de, StatChangeTexts
-	ld b, 1
-	ld c, 2
+	lb bc, 1, 2
 	ld hl, wPlayerStatLevels
 	call StatChangesInfoBoxLoop
 	
@@ -627,8 +624,7 @@ StatChangesInfoBox:
 	ld de, MainText.enemy
 	call PlaceString
 	ld de, StatChangeTexts
-	ld b, 11
-	ld c, 2
+	lb bc, 11, 2
 	ld hl, wEnemyStatLevels
 	; fallthrough
 	
@@ -733,11 +729,9 @@ PrintStatChangeValue: ; Input is hl (either wPlayerStatX or wEnemyStatX) and bc 
 
 StatsInfoBox:
 	hlcoord 0, 0
-	ld b, 14
-	ld c, 8
+	lb bc, 14, 8
 	call Textbox
-	ld b, 14
-	ld c, 8
+	lb bc, 14, 8
 	hlcoord 10, 0
 	call Textbox
 
@@ -751,8 +745,7 @@ StatsInfoBox:
 	ld e, a
 	call .CopyStats
 	ld de, StatTexts
-	ld b, 1
-	ld c, 2
+	lb bc, 1, 2
 	call StatsInfoBoxLoop
 	
 	hlcoord 11, 0
@@ -765,8 +758,7 @@ StatsInfoBox:
 	ld e, a
 	call .CopyStats
 	ld de, StatTexts
-	ld b, 11
-	ld c, 2
+	lb bc, 11, 2
 	jmp StatsInfoBoxLoop
 
 .CopyStats:
@@ -861,15 +853,12 @@ StatsInfoBox:
 
 PlayerInfoPageInfoBox:
 	hlcoord 0, 0
-	ld b, 14
-	ld c, 18
+	lb bc, 14, 18
 	call Textbox
-	ld b, 14
-	ld c, 18
+	lb bc, 14, 18
 
 	hlcoord 0, 0
-	ld b, 2
-	ld c, 18
+	lb bc, 2, 18
 	call Textbox
 
 	farcall DisplayPlayerNameAndAbility
@@ -906,15 +895,12 @@ PlayerInfoPageInfoBox:
 
 FoeDetailsPageInfoBox:
 	hlcoord 0, 0
-	ld b, 14
-	ld c, 18
+	lb bc, 14, 18
 	call Textbox
-	ld b, 14
-	ld c, 18
+	lb bc, 14, 18
 
 	hlcoord 0, 0
-	ld b, 2
-	ld c, 18
+	lb bc, 2, 18
 	call Textbox
 
 	ld de, .FoeItemString
@@ -1014,15 +1000,12 @@ FoeDetailsPageInfoBox:
 
 FoeAbilityPageInfoBox:
 	hlcoord 0, 0
-	ld b, 14
-	ld c, 18
+	lb bc, 14, 18
 	call Textbox
-	ld b, 14
-	ld c, 18
+	lb bc, 14, 18
 
 	hlcoord 0, 0
-	ld b, 2
-	ld c, 18
+	lb bc, 2, 18
 	call Textbox
 
 	farcall DisplayFoeNameAndAbility
@@ -1159,15 +1142,12 @@ StatsInfoBoxLoop:
 
 FieldStatusPagesLayout:
 	hlcoord 0, 0
-	ld b, 2
-	ld c, 18
+	lb bc, 2, 18
 	call Textbox
-	ld b, 10
-	ld c, 8
+	lb bc, 10, 8
 	hlcoord 0, 4
 	call Textbox
-	ld b, 10
-	ld c, 8
+	lb bc, 10, 8
 	hlcoord 10, 4
 	call Textbox
 .weather
