@@ -101,4 +101,5 @@ Music:
 	dba Music_SurfingPikachu
 	dba Music_HoennChampionBattle
 	dba Music_ZinniaBattle
+	dba Music_FinalPokemonBW
 	assert_table_length NUM_MUSIC_SONGS

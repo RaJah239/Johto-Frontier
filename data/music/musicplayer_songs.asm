@@ -104,6 +104,7 @@ MusicPlayerSongs::
 	db MUSIC_TRAINER_VICTORY
 	db MUSIC_JOHTO_GYM_LEADER_BATTLE
 	db MUSIC_KANTO_GYM_LEADER_BATTLE
+	db MUSIC_FINAL_POKEMON_BW
 	db MUSIC_GYM_VICTORY
 	db MUSIC_CHAMPION_BATTLE
 	db MUSIC_KANTO_WILD_BATTLE
@@ -257,6 +258,7 @@ MusicPlayerSongNamePointers::
 	dba .SurfingPikachu     ; MUSIC_SURFING_PIKACHU
 	dba .ScarletFinale      ; MUSIC_SCARLET_FINAL_THEME
 	dba .ZinniaBattle       ; MUSIC_ZINNIA_BATTLE_THEME
+	dba .FinalPokemonBW     ; MUSIC_FINAL_POKEMON_BW
 
 	assert_table_length NUM_MUSIC_SONGS
 
@@ -357,3 +359,4 @@ MusicPlayerSongNamePointers::
 .SurfingPikachu:      db " Surfing Pikachu@"
 .ScarletFinale:       db "  Scarlet Finale@"
 .ZinniaBattle:        db "  Zinnia Battle@"
+.FinalPokemonBW:      db " B/W Final #mon@"

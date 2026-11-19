@@ -147,6 +147,10 @@ INCLUDE "audio/music/surfingpikachu.asm"
 INCLUDE "audio/music/hoennchampionbattle.asm"
 INCLUDE "audio/music/zinnia_battle_final.asm"
 
+SECTION "B/W Final Pokemon Music", ROMX
+
+INCLUDE "audio/music/finalpokemon_bw.asm"
+
 SECTION "Sound Effects", ROMX
 
 INCLUDE "audio/sfx.asm"

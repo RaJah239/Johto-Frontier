@@ -2588,6 +2588,7 @@ LoadEnemyMonToSwitchTo:
 	ld [wTempEnemyMonSpecies], a
 	ld [wCurPartySpecies], a
 	call LoadEnemyMon
+	call MaybePlayFinalPokemonMusic
 
 	ld a, [wCurPartySpecies]
 	cp UNOWN
@@ -2607,6 +2608,62 @@ LoadEnemyMonToSwitchTo:
 	ld a, [hl]
 	ld [wEnemyHPAtTimeOfPlayerSwitch + 1], a
 	ret
+
+MaybePlayFinalPokemonMusic:
+	push hl
+	push de
+	push bc
+	push af
+
+	ld a, [wBattleMode]
+	cp TRAINER_BATTLE
+	jr nz, .done
+	ld a, [wLinkMode]
+	and a
+	jr nz, .done
+	ld a, [wInBattleTowerBattle]
+	bit 0, a
+	jr nz, .done
+	ld a, [wOptions3]
+	bit NO_MUSIC, a
+	jr nz, .done
+	; Keep the Music Player's chosen battle theme.
+	ld a, [wPersistentBattleMusicOverride]
+	ld b, a
+	ld a, [wPersistentBattleMusicOverride + 1]
+	or b
+	jr nz, .done
+
+	; IsGymLeader includes both Johto and Kanto. Other bosses keep their music.
+	call IsGymLeader
+	jr c, .eligible
+	ld a, [wOtherTrainerClass]
+	ld hl, .EliteFour
+	call IsInByteArray
+	jr nc, .done
+.eligible
+	ld hl, wEnemyMonHP
+	ld a, [hli]
+	or [hl]
+	jr z, .done
+	; Check the whole party: the last survivor need not occupy the last slot.
+	farcall CheckAnyOtherAliveEnemyMons
+	jr nz, .done
+	; SFX and cries overwrite wMusicID, so use the music channel's ID.
+	ld a, [wChannel1MusicID]
+	cp MUSIC_FINAL_POKEMON_BW
+	jr z, .done
+	ld e, MUSIC_NONE
+	call PlayMusic
+	call DelayFrame
+	ld e, MUSIC_FINAL_POKEMON_BW
+	call PlayMusic
+.done
+	jmp PopAFBCDEHL
+
+.EliteFour:
+	db WILL, KOGA, BRUNO, KAREN, LORELEI, AGATHA
+	db -1
 
 CheckWhetherToAskSwitch:
 	ld a, [wBattleHasJustStarted]
