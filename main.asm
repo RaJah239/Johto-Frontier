@@ -485,6 +485,12 @@ INCLUDE "engine/events/battle_tower/trainer_text.asm" ; can be in another bank
 INCLUDE "engine/events/battle_tower/battle_tower.asm" ; can be in another bank
 INCLUDE "engine/events/battle_tower/room_menu.asm" ; can be in another bank
 
+SECTION "Battle Factory", ROMX
+INCLUDE "engine/events/battle_tower/factory.asm"
+
+SECTION "Battle Factory Menu", ROMX
+INCLUDE "engine/events/battle_tower/factory_menu.asm"
+
 SECTION "bank5B", ROMX
 INCLUDE "engine/link/link_trade.asm"
 

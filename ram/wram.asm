@@ -2653,6 +2653,7 @@ wMooMooBerries:: db
 wUndergroundSwitchPositions:: db
 wScytherPosition:: db
 wExpShareToggle:: db
+wBattleFactoryMode::
 wCopyEnemyParty:: db
 
 wFieldWeather::

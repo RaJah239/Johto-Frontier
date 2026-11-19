@@ -70,17 +70,20 @@ Script_ChooseChallenge:
 	_2dmenu
 	closewindow
 	ifequal 1, .normal
-	ifequal 2, .mirror
+	ifequal 2, .factory
 	ifequal 3, .info
 	ifequal 4, .cancel
 	sjump .ChooseAnOption
 
-.mirror
+.factory
 	setval 1
 	writemem wCopyEnemyParty
-	; fallthrough
+	sjump .choose_pool
 
 .normal
+	setval 0
+	writemem wCopyEnemyParty
+.choose_pool
 	setscene SCENE_BATTLETOWER1F_NOOP
 	setval BATTLETOWERACTION_SET_EXPLANATION_READ ; set 1, [sBattleTowerSaveFileFlags]
 	special BattleTowerAction
@@ -102,7 +105,7 @@ Script_ChooseChallenge:
 
 .MirrorMenuHeader:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 0, 15, 9
+	menu_coords 0, 0, 16, 9
 	dw .MirrorMenuData
 	db 1 ; default option
 
@@ -115,7 +118,7 @@ Script_ChooseChallenge:
 
 .MirrorText:
 	db "Normal Battle@"
-	db "Random Battle@"
+	db "Battle Factory@"
 	db "Info@"
 	db "Cancel@"
 
@@ -123,10 +126,18 @@ MirrorBattlesText:
 	text "Normal Battle: use"
 	line "your own team."
 
-	para "Random Battle: use"
-	line "a random team in"
-	cont "each round against"
-	cont "them."
+	para "Battle Factory:"
+	line "rent six #mon"
+	cont "for three battles."
+
+	para "Before entering,"
+	line "exchange up to two"
+	cont "for fresh rentals."
+
+	para "Between battles,"
+	line "exchange up to two"
+	cont "for your defeated"
+	cont "opponent's team."
 	done
 
 Script_ResumeBattleTowerChallenge:

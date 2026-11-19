@@ -526,9 +526,9 @@ ExpandBattleTowerCompactMonToTemp:
 	ret
 
 BattleTower_GenerateRandomPlayerParty:
-; Random Battle replaces the live WRAM party only; the saved party is
-; restored by LoadPokemonData after the battle, before script control
-; resumes. Uses the same challenge pools as the enemy team.
+; Factory team/entry-offer generator. Replaces only the live WRAM party;
+; the Factory stores templates separately and restores the player's save.
+; Uses the same challenge pools as the enemy team.
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wPartyCount)

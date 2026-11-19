@@ -18,6 +18,9 @@ BattleTowerBattleRoomNoopScene:
 
 Script_BattleRoom:
 	applymovement PLAYER, MovementData_BattleTowerBattleRoomPlayerWalksIn
+	readmem wBattleFactoryMode
+	iffalse Script_BattleRoomLoop
+	callasm BattleFactory_Start
 ; beat all 3 opponents in a row
 Script_BattleRoomLoop:
 	setval BATTLETOWERBATTLEROOM_YOUNGSTER
@@ -50,6 +53,8 @@ Script_BattleRoomLoop:
 	applymovement BATTLETOWERBATTLEROOM_YOUNGSTER, MovementData_BattleTowerBattleRoomOpponentWalksOut
 	warpsound
 	disappear BATTLETOWERBATTLEROOM_YOUNGSTER
+	readmem wBattleFactoryMode
+	iftrue .factory_exchange
 	applymovement BATTLETOWERBATTLEROOM_RECEPTIONIST, MovementData_BattleTowerBattleRoomReceptionistWalksToPlayer
 	applymovement PLAYER, MovementData_BattleTowerBattleRoomPlayerTurnsToFaceReceptionist
 	opentext
@@ -67,8 +72,22 @@ Script_BattleRoomLoop:
 	writetext Text_NextUpOpponentNo
 	yesorno
 	iffalse Script_DontBattleNextOpponent
+	sjump Script_ContinueAndBattleNextOpponent
+
+.factory_exchange
+	applymovement BATTLETOWERBATTLEROOM_RECEPTIONIST, MovementData_BattleTowerBattleRoomReceptionistWalksToPlayer
+	applymovement PLAYER, MovementData_BattleTowerBattleRoomPlayerTurnsToFaceReceptionist
+	opentext
+	writetext Text_BattleFactoryAdjustParty
+	yesorno
+	iffalse Script_ContinueAndBattleNextOpponent
+	closetext
+	callasm BattleFactory_ExchangeDefeatedTeam
+	sjump Script_BattleRoomNextOpponent
+
 Script_ContinueAndBattleNextOpponent:
 	closetext
+Script_BattleRoomNextOpponent:
 	applymovement PLAYER, MovementData_BattleTowerBattleRoomPlayerTurnsToFaceNextOpponent
 	applymovement BATTLETOWERBATTLEROOM_RECEPTIONIST, MovementData_BattleTowerBattleRoomReceptionistWalksAway
 	sjump Script_BattleRoomLoop
@@ -247,6 +266,11 @@ Script_BeatenAllTrainers2:
 	opentext
 	writetext Text_CongratulationsYouveBeatenAllTheTrainers
 	sjump Script_GivePlayerPointsThenPrize
+
+Text_BattleFactoryAdjustParty:
+	text "Adjust your party"
+	line "before continuing?"
+	done
 
 BattleTowerBattleRoom_MapEvents:
 	def_warp_events

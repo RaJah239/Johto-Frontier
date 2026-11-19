@@ -364,6 +364,7 @@ SRAM $00
 	org $a600
 	"SRAM Bank 0"
 	"GG Bag Stash Backup"
+	"Battle Factory Rentals"
 	org $b200
 	"Backup Save"
 SRAM $01

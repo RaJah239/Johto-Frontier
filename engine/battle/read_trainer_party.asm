@@ -165,7 +165,7 @@ MaximizeOTPartyPP:
 
 MaximizePlayerPartyPP:
 ; same as above, but for the player's own party; used for copied teams
-; (e.g. the Battle Tower Random Battle team), so they fight with max pp
+; (e.g. the Battle Factory rental team), so they fight with max pp
 ; like the opponent they were copied from
 	ld a, [wPartyCount]
 	ld hl, wPartyMon1Moves

@@ -56,6 +56,25 @@ SECTION "GG Bag Stash Backup", SRAM
 ; Grand Gauntlet dungeon bag stash for the backup slot (see sGGBagStash).
 sBackupGGBagStash:: ds GG_BAG_STASH_LENGTH
 
+SECTION "Battle Factory Rentals", SRAM
+
+; Outside both save/checksum regions: the player's own saved party stays intact.
+; Rental templates retain HP, PP, moves, DVs, nicknames and held items.
+sBattleFactoryTeam:: ds BATTLE_FACTORY_PARTY_DATA_LENGTH
+sBattleFactoryOffers:: ds BATTLE_FACTORY_PARTY_DATA_LENGTH
+sBattleFactoryCheck:: db
+sFactoryPhase:: db
+sFactoryCursor:: db
+sFactoryOutCount:: db
+sFactoryInCount:: db
+sFactoryOutSlots:: ds BATTLE_FACTORY_MAX_EXCHANGES
+sFactoryInSlots:: ds BATTLE_FACTORY_MAX_EXCHANGES
+sFactoryOfferKind:: db ; 0: fresh entry offers; 1: defeated opponent
+sFactoryMessage:: db
+sFactoryMoveSlot:: db ; zero-based rental to move; -1 when not rearranging
+
+assert BATTLE_FACTORY_PARTY_DATA_LENGTH == wPartyMonNicknamesEnd - wPartyCount
+
 SECTION "Backup Save", SRAM
 
 sBackupOptions:: ds wOptionsEnd - wOptions

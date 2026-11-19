@@ -45,12 +45,12 @@ RunBattleTowerTrainer:
 	xor a
 	ld [wLinkMode], a
 	farcall HealParty
-	; Random Battle: replace the player's party with a pool-generated team
-	; for this battle; LoadPokemonData restores the saved party afterwards.
+	; Factory rentals persist across rounds; never generate a new team here.
+	; LoadPokemonData restores the player's own party after every battle.
 	ld a, [wCopyEnemyParty]
 	and a
 	jr z, .skip_random_team
-	farcall BattleTower_GenerateRandomPlayerParty
+	farcall BattleFactory_LoadBattleParty
 .skip_random_team
 	call ReadBTTrainerParty
 

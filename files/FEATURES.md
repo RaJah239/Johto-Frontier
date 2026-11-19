@@ -184,6 +184,14 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Life Orb still reduces HP with Pokémon that has Magic Guard ability
 - Amulet Coin doubles earnings regardless of Pokémon equipping it
 
+
+## - Battle Factory
+-  Mode in the Battle Tower for both Elite and Champ selection: keep six level-50 rentals for three battles, optionally exchange up to two before entering and after each of the first two wins, and inspect summaries with Start.
+- Entry offers are one fresh set of six; later offers come from the just-defeated team.
+- Between battles, the attendant asks whether to adjust your party.
+- After exchanging, review the final team before continuing.
+- Select marks a rental to reorder; move to another rental and press Select or A to swap their positions, or B to cancel.
+
 ## Modern Critical hits
 - Critical hits now have a 1.5× damage multiplier, or 2.25× with Sniper.
 - Critical-hit odds are 1/24 at stage +0, 1/8 at +1, 1/2 at +2, and guaranteed at +3. Focus Energy, Scope Lens, Super Luck, and high-critical-hit moves stack toward that cap.
