@@ -59,19 +59,9 @@ VoltorbFlipPalette:
 	dw $001f, $7fff, $3B69, $0000
 	dw $001f, $11ff, $3B69, $0000
 
-VoltorbFlipPaletteBlank:
-	dw $7fff, $7fff, $7fff, $7fff
-	dw $7fff, $7fff, $7fff, $7fff
-	dw $7fff, $7fff, $7fff, $7fff
-	dw $7fff, $7fff, $7fff, $7fff
-	dw $7fff, $7fff, $7fff, $7fff
-	dw $7fff, $7fff, $7fff, $7fff
-	dw $7fff, $7fff, $7fff, $7fff
-	dw $7fff, $7fff, $7fff, $7fff
-	
 VoltorbFlip::;this is where the magic happens
 	ld a, $d
-	ld [rIE], a
+	ldh [rIE], a
 	call VFLoadGFX
 	call LoadStandardFont ; letters for the YES/NO questions
 	call LoadFontsExtra ; textbox frame
@@ -81,9 +71,9 @@ VoltorbFlip::;this is where the magic happens
 	ld hl, rLCDC
 	set 7, [hl]
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld a, 1
-	ld [hOAMUpdate], a ;disable sprite update
+	ldh [hOAMUpdate], a ;disable sprite update
 	ld [$c41a], a
 	call VFInitLevel
 	jmp VFMainLoop
@@ -122,7 +112,7 @@ VFInitLevel:
 	ld b, 25 ; because there are 25 cars
 .loop23
 	call Random
-	ld a, [hRandomSub]
+	ldh a, [hRandomSub]
 	xor $f
 	jr z, .generate2
 	dec a
@@ -170,7 +160,7 @@ VFInitLevel:
 	ld b, 25 ; because there are 25 cars
 .loopv
 	call Random
-	ld a, [hRandomSub]
+	ldh a, [hRandomSub]
 	xor $f
 	jr z, .generatev
 	dec a
@@ -284,9 +274,6 @@ VFMainLoop:
 	call VFRefreshMap
 	call VFInput
 	jr VFMainLoop
-	ld a, $f
-	ld [rIE], a
-	ret
 
 VFInput:
 	ld hl, $c41b
@@ -314,14 +301,14 @@ VFInput:
 	add c
 	add b
 	ld e, a
-	ld a, [hJoypadDown]
+	ldh a, [hJoypadDown]
 	bit 1, a
 	jmp nz, .bbutton
 	; B let go: a single direction still waiting toggles its mark now
 	ld a, [VF_ARMED_MARK_DIR]
 	and a
 	jmp nz, .apply_armed_mark
-	ld a, [hJoypadPressed]
+	ldh a, [hJoypadPressed]
 	and a
 	ret z
 	bit 0, a
@@ -363,7 +350,7 @@ VFInput:
 	cp 1
 	jr nz, .skipintense
 	call Random
-	ld a, [hRandomSub]
+	ldh a, [hRandomSub]
 	and 3
 	jr nz, .skipintense
 	push de
@@ -468,7 +455,7 @@ VFInput:
 .bbutton
 	and $f0
 	ld b, a ; directions held
-	ld a, [hJoypadPressed]
+	ldh a, [hJoypadPressed]
 	and $f0
 	ld c, a ; directions pressed now
 	jr z, .no_new_direction
@@ -609,16 +596,16 @@ VFLoadGFX:
 	jmp Copy2bpp
 	
 VFLoadPalette:	
-	ld a, [rSVBK] ; $ff00+$70
+	ldh a, [rSVBK] ; $ff00+$70
 	push af
 	ld a, 5
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ld bc, $e408
 	ld hl, wBGPals2
 	ld de, VoltorbFlipPalette
 	call CopyPals
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	jmp ForceUpdateCGBPals
 
 VFInitRAM:
@@ -647,7 +634,7 @@ VFInitMap:
 	ld b, 10
 	di
 	xor a
-	ld [rVBK], a
+	ldh [rVBK], a
 	hlcoord 0, 15
 	call .redcounter
 	hlcoord 3, 15
@@ -689,7 +676,7 @@ VFInitMap:
 	call VFRefreshMap
 	di
 	xor a
-	ld [rVBK], a
+	ldh [rVBK], a
 	ld a, 41
 	ld [wTilemap + $63], a
 	inc a
@@ -1225,7 +1212,7 @@ VFRefreshScreen: ;bc is the coordinates to refresh (3x3 tiles)
 	ld bc, wAttrmap
 	add hl, bc
 	ld a, 1
-	ld [rVBK], a
+	ldh [rVBK], a
 	ld b, 3
 .loopc
 	ld c, 3
@@ -1250,7 +1237,7 @@ VFRefreshScreen: ;bc is the coordinates to refresh (3x3 tiles)
 	dec b
 	jr nz, .loopc
 	xor a
-	ld [rVBK], a
+	ldh [rVBK], a
 	pop bc
 	ret
 	
@@ -1322,7 +1309,7 @@ VFRefreshScreen1: ;bc is the coordinates to refresh (3x3 tiles)
 	ld bc, wAttrmap
 	add hl, bc
 	ld a, 1
-	ld [rVBK], a
+	ldh [rVBK], a
 	ld b, 3
 .loopc
 	ld c, 3
@@ -1347,7 +1334,7 @@ VFRefreshScreen1: ;bc is the coordinates to refresh (3x3 tiles)
 	dec b
 	jr nz, .loopc
 	xor a
-	ld [rVBK], a
+	ldh [rVBK], a
 	pop bc
 	ret
 
@@ -1827,10 +1814,10 @@ VFRestoreWRAMBank:
 VFExit:
 	call VFKeepCoins
 	ld a, 1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld a, $f
-	ld [rIE], a
+	ldh [rIE], a
 	xor a
-	ld [hOAMUpdate], a ;enable sprite update
+	ldh [hOAMUpdate], a ;enable sprite update
 	pop af
 	ret
