@@ -576,7 +576,7 @@ TMHM_DisplayPocketItems:
 	pop hl
 	dec d
 	jr nz, .loop2
-	jr .done
+	ret
 
 .NotTMHM:
 	call TMHMPocket_GetCurrentLineCoord
