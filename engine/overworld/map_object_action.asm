@@ -22,10 +22,35 @@ ObjectActionPairPointers:
 	dw SetFacingRunAction,             SetFacingCurrent
 	assert_table_length NUM_OBJECT_ACTIONS
 
+SetFacingCounterclockwiseSpin2:
+	call CounterclockwiseSpinAction
+	; fallthrough
+
 SetFacingStanding:
 	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], STANDING
+	ret
+
+SetFacingRunAction:
+	ld hl, OBJECT_FLAGS1
+	add hl, bc
+	bit SLIDING_F, [hl]
+	jr nz, SetFacingCurrent
+
+	ld hl, OBJECT_STEP_FRAME
+	add hl, bc
+	inc [hl]
+	ld a, [hl]
+	rrca
+	rrca
+	and %11
+	ld d, a
+	call GetSpriteDirection
+	or d
+	ld hl, OBJECT_FACING
+	add hl, bc
+	ld [hl], a
 	ret
 
 SetFacingCurrent:
@@ -41,8 +66,7 @@ SetFacingStandAction:
 	add hl, bc
 	ld a, [hl]
 	and 1
-	jr nz, SetFacingStepAction
-	jr SetFacingCurrent
+	jr z, SetFacingCurrent
 
 SetFacingStepAction:
 	ld hl, OBJECT_FLAGS1
@@ -127,10 +151,6 @@ SetFacingCounterclockwiseSpin:
 	add hl, bc
 	ld [hl], a
 	ret
-
-SetFacingCounterclockwiseSpin2:
-	call CounterclockwiseSpinAction
-	jmp SetFacingStanding
 
 CounterclockwiseSpinAction:
 ; Here, OBJECT_STEP_FRAME consists of two components,
@@ -290,26 +310,5 @@ SetFacingGrassShake:
 	inc a ; FACING_GRASS_2
 
 .ok
-	ld [hl], a
-	ret
-
-SetFacingRunAction:
-	ld hl, OBJECT_FLAGS1
-	add hl, bc
-	bit SLIDING_F, [hl]
-	jmp nz, SetFacingCurrent
-
-	ld hl, OBJECT_STEP_FRAME
-	add hl, bc
-	inc [hl]
-	ld a, [hl]
-	rrca
-	rrca
-	and %11
-	ld d, a
-	call GetSpriteDirection
-	or d
-	ld hl, OBJECT_FACING
-	add hl, bc
 	ld [hl], a
 	ret
