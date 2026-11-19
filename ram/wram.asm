@@ -1444,10 +1444,7 @@ wUsingHMItem:: db
 SECTION "WRAM 1", WRAMX
 
 wGBCOnlyDecompressBuffer:: ; a $540-byte buffer that continues past this SECTION
-
-wBetaTitleSequenceOpeningType::
-; This selected the title screen animation (fire/notes) in pokegold-spaceworld.
-	db
+	ds 1 ; preserve the WRAM 1 layout
 
 wDefaultSpawnpoint:: db
 
