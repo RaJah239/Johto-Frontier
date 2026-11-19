@@ -22,7 +22,7 @@ RefreshSprites::
 	push bc
 	call GetPlayerSprite
 	xor a
-	ld [hUsedSpriteIndex], a
+	ldh [hUsedSpriteIndex], a
 	call ReloadSpriteIndex
 	call LoadMiscTiles
 	pop bc
@@ -36,11 +36,11 @@ ReloadSpriteIndex::
 	ld hl, wObjectStructs
 	ld de, OBJECT_LENGTH
 	push bc
-	ld a, [hUsedSpriteIndex]
+	ldh a, [hUsedSpriteIndex]
 	ld b, a
 	xor a
 .loop
-	ld [hObjectStructIndex], a
+	ldh [hObjectStructIndex], a
 	ld a, [hl]
 	and a
 	jr z, .done
@@ -59,7 +59,7 @@ ReloadSpriteIndex::
 	pop hl
 .done
 	add hl, de
-	ld a, [hObjectStructIndex]
+	ldh a, [hObjectStructIndex]
 	inc a
 	cp NUM_OBJECT_STRUCTS
 	jr nz, .loop
@@ -128,9 +128,9 @@ LoadUsedSpritesGFX:
 	ld a, MAPCALLBACK_SPRITES
 	call RunMapCallback
 	xor a
-	ld [hUsedSpriteIndex], a
+	ldh [hUsedSpriteIndex], a
 	call ReloadSpriteIndex
-	jr LoadMiscTiles
+	; fallthrough
 
 LoadMiscTiles:
 	ld c, EMOTE_SHADOW
@@ -227,8 +227,7 @@ GetMonSprite:
 	farcall LoadOverworldMonIcon
 
 .LoadedMon:
-	ld l, WALKING_SPRITE
-	ld h, 0
+	lb hl, 0, WALKING_SPRITE
 	scf
 	ret
 
@@ -244,8 +243,7 @@ GetMonSprite:
 
 .NoBreedmon:
 	ld a, WALKING_SPRITE
-	ld l, WALKING_SPRITE
-	ld h, 0
+	lb hl, 0, WALKING_SPRITE
 	and a
 	ret
 
