@@ -378,8 +378,7 @@ SpecialMapMusic::
 	cp PLAYER_SURF
 	jr z, .surf
 	cp PLAYER_SURF_PIKA
-	jr z, .surf_pika
-	jr .check_contest
+	jr nz, .check_contest
 
 .surf_pika
 	ld e, MUSIC_SURFING_PIKACHU
