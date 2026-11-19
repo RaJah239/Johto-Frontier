@@ -1026,6 +1026,13 @@ BattleCommand_Stab:
 	call GetBattleVar
 	and TYPE_MASK
 	ld b, a
+	ld a, BATTLE_VARS_MOVE
+	call GetBattleVar
+	cp FALSE_SWIPE
+	ld c, 0
+	jr nz, .get_type_chart
+	inc c
+.get_type_chart
 	call GetTypeChart
 	newfarcall StabTypeScan ; engine/battle/type_chart_scan.asm (sets wTypeMatchup too)
 
@@ -1094,7 +1101,10 @@ CheckStealthRockTypeMatchup:
 CheckIgnoreGhostImmunity:
 ; Return nz if the target's Ghost immunities (the matchups after -2 in
 ; TypeMatchups) don't apply: Foresight identified it, or the attacker has
-; Scrappy. Preserves bc, de, hl.
+; Scrappy, or a caller marked a move-specific bypass in c. Preserves bc, de, hl.
+	ld a, c
+	and a
+	ret nz
 	ld a, BATTLE_VARS_SUBSTATUS1_OPP
 	call GetBattleVar
 	bit SUBSTATUS_IDENTIFIED, a
@@ -1113,11 +1123,27 @@ BattleCheckTypeMatchup:
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar ; preserves hl, de, and bc
 	and TYPE_MASK
-	; fallthrough
+	push de
+	push af
+	ld a, BATTLE_VARS_MOVE
+	call GetBattleVar
+	cp FALSE_SWIPE
+	ld e, 0
+	jr nz, .move_checked
+	inc e
+.move_checked
+	pop af
+	call CheckTypeMatchupWithGhostBypass
+	pop de
+	ret
 
 CheckTypeMatchup:
 ; wTypeMatchup = the effectiveness of type a against the types at hl.
 ; Preserves bc, de, hl.
+	ld e, 0
+	; fallthrough
+
+CheckTypeMatchupWithGhostBypass:
 	push hl
 	push de
 	push bc
@@ -1126,6 +1152,7 @@ CheckTypeMatchup:
 	inc hl
 	ld c, [hl]
 	push bc
+	ld c, e
 	call GetTypeChart
 	ld e, c
 	pop bc

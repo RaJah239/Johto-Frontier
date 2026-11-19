@@ -825,8 +825,8 @@ RolloutDescription:
 	line "with rising power.@"
 
 FalseSwipeDescription:
-	db   "Leaves the foe"
-	line "with at least 1HP.@"
+	db   "Cannot KO the foe."
+	line "Hits Ghost-types.@"
 
 SwaggerDescription:
 	db   "Causes confusion"
