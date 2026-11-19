@@ -312,7 +312,7 @@ ChooseWildEncounter:
 
 	ld a, b
 	cp UNOWN
-	jr nz, .done
+	jr nz, .loadwildmon
 
 	ld a, [wUnlockedUnowns]
 	and a
