@@ -100,7 +100,7 @@ PlayerProfileSetup:
 ResetWRAM:
 	xor a
 	ldh [hBGMapMode], a
-	jr _ResetWRAM
+	; fallthrough
 
 _ResetWRAM:
 	ld hl, wShadowOAM
@@ -406,7 +406,7 @@ DisplaySaveInfoOnContinue:
 
 DisplaySaveInfoOnSave:
 	lb de, 4, 0
-	jr DisplayNormalContinueData
+	; fallthrough
 
 DisplayNormalContinueData:
 	call Continue_LoadMenuHeader
@@ -971,7 +971,7 @@ StartTitleScreen:
 	call ClearScreen
 	call WaitBGMap2
 	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	xor a
 	ldh [hLCDCPointer], a
 	ldh [hSCX], a
@@ -1075,7 +1075,7 @@ TitleScreenEntrance:
 	ld hl, wJumptableIndex
 	inc [hl]
 	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	xor a
 	ldh [hLCDCPointer], a
 
