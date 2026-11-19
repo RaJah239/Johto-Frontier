@@ -1,8 +1,4 @@
 LoadObjectMasks:
-	ld hl, wObjectMasks
-	xor a
-	ld bc, NUM_OBJECTS
-	call ByteFill
 	ld bc, wMapObjects
 	ld de, wObjectMasks
 	xor a
@@ -10,7 +6,8 @@ LoadObjectMasks:
 	push af
 	push bc
 	push de
-	call GetObjectTimeMask
+	call CheckObjectTime
+	ld a, -1
 	jr c, .next
 	call CheckObjectFlag
 .next
@@ -59,11 +56,4 @@ CheckObjectFlag:
 .masked
 	ld a, -1
 	scf
-	ret
-
-GetObjectTimeMask:
-	call CheckObjectTime
-	ld a, -1
-	ret c
-	xor a
 	ret
