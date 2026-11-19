@@ -1631,7 +1631,7 @@ MapConnWeatherFade::
 	ld hl, wOBPals1
 	ld de, wOBPals2
 	ld bc, 8 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	pop af
 	ldh [rSVBK], a
 	ld a, TRUE
@@ -1813,7 +1813,7 @@ WeatherFadeStep::
 	ld bc, wBGPals1 - wBGPals2
 	add hl, bc
 	ld bc, 4 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 
 .stepped
 	pop af
