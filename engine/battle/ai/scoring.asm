@@ -303,8 +303,7 @@ PlayerHasPriorityMove:
 	ld b, EFFECT_PRIORITY_HIT
 	call PlayerHasMoveEffect
 	ret c
-	newfarcall GaleWingsPlayerHasPriority_Far ; engine/abilities/gale_wings.asm
-	ret
+	farjp GaleWingsPlayerHasPriority_Far ; engine/abilities/gale_wings.asm
 
 AIHasMoveInArray:
 ; Return carry if the enemy has a move in array hl.
@@ -1290,82 +1289,6 @@ CanAI2HKOMaxHP:
 	jr z, .loop_moves
 	cp EFFECT_SOLARBEAM
 	jr z, .loop_moves
-
-.set_flag
-	scf
-	ret
-
-.done
-	xor a ; clear carry flag
-	ret
-
-; return carry if the AI has a move that can 3HKO the player Pokemon from current HP
-CanAI3HKO:
-	ld de, wEnemyMonMoves ; load AI moves
-	ld b, NUM_MOVES + 1
-.loop_AI_3HKO_moves
-	dec b ; b is num moves on 1st pass
-	jr z, .done ; if b is 0 return we are done
-	ld a, [de] ; load the move
-	and a
-	jr z, .done ; return if no move
-	inc de ; increment to next move
-	call AIGetEnemyMove
-	ld a, [wEnemyMoveStruct + MOVE_POWER]
-	and a
-	jr z, .loop_AI_3HKO_moves ; skip moves with 0 power
-
-	ld a, 1
-	ldh [hBattleTurn], a
-	push hl
-	push de
-	push bc
-	callfar EnemyAttackDamage
-	callfar BattleCommand_DamageCalc
-	callfar BattleCommand_Stab
-; triple current damage
-	ld hl, wCurDamage + 1
-	ld a, [hld]
-	ld h, [hl]
-	ld l, a
-	ld b, h
-	ld c, l
-	add hl, hl
-	add hl, bc
-	ld a, h
-	ld [wCurDamage], a
-	ld a, l
-	ld [wCurDamage + 1], a
-; continue
-	ld a, [wCurDamage + 1]
-	ld c, a ; c is curDamage upper
-	ld a, [wCurDamage]
-	ld b, a ; b is curDamage lower
-	ld a, [wBattleMonHP + 1]
-	cp c ; compare upper
-	ld a, [wBattleMonHP]
-	sbc b ; compare lower and set flag
-	pop bc
-	pop de
-	pop hl
-	jr nc, .loop_AI_3HKO_moves
-
-; skip moves that can't be used on consecutive turns, except hyper beam
-; skip moves that can't be used on consecutive turns, except hyper beam
-	ld a, [wEnemyMonSpecies]
-	push hl
-	ld hl, OverdrivePokemon_AI
-	call IsInAbilityList
-	pop hl
-	jr c, .set_flag
-
-	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
-	cp EFFECT_EXPLOSION
-	jr z, .loop_AI_3HKO_moves
-	cp EFFECT_HYPER_BEAM
-	jr z, .loop_AI_3HKO_moves
-	cp EFFECT_SOLARBEAM
-	jr z, .loop_AI_3HKO_moves
 
 .set_flag
 	scf
