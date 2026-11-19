@@ -337,9 +337,6 @@ MagnetTrain_Jumptable:
 	dec [hl]
 	ret
 
-.DoneWaiting:
-	jr .Next
-
 .MoveTrain2:
 	ld hl, wMagnetTrainFinalPosition
 	ld a, [wMagnetTrainPosition]
@@ -362,11 +359,6 @@ MagnetTrain_Jumptable:
 	add d
 	ld [hl], a
 	ret
-
-	ret
-
-.PrepareToFinishAnim:
-	jr .Next
 
 .TrainArrived:
 	ld hl, wPalFlags
