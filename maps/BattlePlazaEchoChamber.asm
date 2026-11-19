@@ -103,13 +103,6 @@ EchoChamberReceptionistScript:
 	clearevent EVENT_DID_NOT_GET_ECHO_CHAMBER_PRIZE
 	endtext
 
-.Cancel:
-	writetext BattlePlazasPleaseComeAgainText
-	waitbutton
-	closetext
-	turnobject PLAYER, DOWN
-	end
-
 EchoChamberPackFull:
 	setevent EVENT_DID_NOT_GET_ECHO_CHAMBER_PRIZE
 	writetext BattlePlazasFullPackText
