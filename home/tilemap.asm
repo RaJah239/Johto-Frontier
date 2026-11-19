@@ -71,9 +71,6 @@ ApplyTilemap::
 	ldh [hBGMapMode], a
 	jr CopyTilemapAtOnce
 
-.dmg
-	jr WaitBGMap
-
 CGBOnly_CopyTilemapAtOnce::
 	ldh a, [hCGB]
 	and a
