@@ -130,10 +130,10 @@ LookUpTheEffectivenessOfEveryEnemyMove:
 	ld e, NUM_MOVES + 1
 .loop
 	dec e
-	jr z, .done ; done when we are out of moves
+	ret z ; done when we are out of moves
 	ld a, [hli] ; a is the current move
 	and a
-	jr z, .done
+	ret z
 	push hl
 	push de
 	push bc
@@ -202,8 +202,7 @@ AreThePlayerMonMovesEffectiveAgainstOTMon:
 	pop hl
 	ld a, [wTypeMatchup]
 	cp EFFECTIVE + 1
-	jr nc, .super_effective
-	jr .checkmove
+	jr c, .checkmove
 
 .super_effective ; here the current enemy mon is discouraged due to being weak to player type
 	pop bc
@@ -249,7 +248,7 @@ ScoreMonTypeMatchups:
 	inc b
 	sla c
 	jr nc, .loop3
-	jr .quit
+	ret
 
 .okay2
 	ld b, -1
@@ -259,7 +258,7 @@ ScoreMonTypeMatchups:
 	inc b
 	sla c
 	jr c, .loop4
-	jr .quit
+	ret
 
 .loop5
 	call FindRandomMonForSwitch
