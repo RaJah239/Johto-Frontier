@@ -1731,76 +1731,10 @@ Pokedex_FillColumn:
 	pop de
 	ret
 
-Pokedex_DrawMainScreenBG:
-; Draws the left sidebar and the bottom bar on the main screen.
-	hlcoord 0, 17
-	ld de, String_START_SEARCH
-	call Pokedex_PlaceString
-	ld a, $32
-	hlcoord 0, 0
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call ByteFill
-	hlcoord 0, 0
-	lb bc, 7, 7
-	call Pokedex_PlaceBorder
-	hlcoord 0, 9
-	lb bc, 6, 7
-	call Pokedex_PlaceBorder
-	hlcoord 1, 11
-	ld de, String_SEEN
-	call Pokedex_PlaceString
-	ld hl, wPokedexSeen
-	ld b, wEndPokedexSeen - wPokedexSeen
-	call CountSetBits
-	ld de, wNumSetBits
-	hlcoord 5, 12
-	lb bc, 1, 3
-	call PrintNum
-	hlcoord 1, 14
-	ld de, String_OWN
-	call Pokedex_PlaceString
-	ld hl, wPokedexCaught
-	ld b, wEndPokedexCaught - wPokedexCaught
-	call CountSetBits
-	ld de, wNumSetBits
-	hlcoord 5, 15
-	lb bc, 1, 3
-	call PrintNum
-	hlcoord 1, 17
-	ld de, String_SELECT_OPTION
-	call Pokedex_PlaceString
-	hlcoord 8, 1
-	ld b, 7
-	ld a, $5a
-	call Pokedex_FillColumn
-	hlcoord 8, 10
-	ld b, 6
-	ld a, $5a
-	call Pokedex_FillColumn
-	hlcoord 8, 0
-	ld [hl], $59
-	hlcoord 8, 8
-	ld [hl], $53
-	hlcoord 8, 9
-	ld [hl], $54
-	hlcoord 8, 16
-	ld [hl], $5b
-	jmp Pokedex_PlaceFrontpicTopLeftCorner
-
-String_SEEN:
-	db "Seen", -1
-String_OWN:
-	db "Own", -1
-String_SELECT_OPTION:
-	db $3b, $48, $49, $4a, $44, $45, $46, $47 ; SELECT > OPTION
-	; fallthrough
 String_UNOWN:
 	db "UNOWN", -1
 String_OutOf26:
 	db "/26", -1
-String_START_SEARCH:
-	db $3c, $3b, $41, $42, $43, $4b, $4c, $4d, $3c, $32, -1 ; START > SEARCH
-
 Pokedex_DrawDexEntryScreenBG:
 	hlcoord 0, 0
 	lb bc, 15, 18
@@ -2126,7 +2060,7 @@ Pokedex_UpdateColorOption:
  	
 .MenuAction_Gray
  	ld b, DEXCOLOR_GRAY
- 	jr .ChangeColor	
+	; fallthrough
  
   ; .MenuAction_Mewtwo
  ; 	ld b, DEXCOLOR_MEWTWO
@@ -2716,7 +2650,7 @@ Pokedex_OrderMonsByMode:
 	inc a
 	dec c
 	jr nz, .loopold
-	jr .FindLastSeen
+	; fallthrough
 
 .FindLastSeen:
 	ld hl, wPokedexOrder + NUM_POKEMON - 1
@@ -3175,7 +3109,7 @@ Pokedex_SearchCurrentArea_LookUpGrassWildmonsForMapDE:
 	call GetFarByte
 	cp e
 	jr z, .found
-	jr .next
+	; fallthrough
 
 .next
 	pop hl
@@ -3346,13 +3280,6 @@ Pokedex_DisplayCurrentAreaNotFoundMessage:
 	db   "No wild encounters"
 	next "are here now.@"
 
-Pokedex_UpdateCursorOAM:
-	ld a, [wCurDexMode]
-	cp DEXMODE_OLD
-	jr z, Pokedex_PutOldModeCursorOAM
-	call Pokedex_PutNewModeABCModeCursorOAM
-	jmp Pokedex_PutScrollbarOAM
-
 Pokedex_PutOldModeCursorOAM:
 	ld hl, .CursorOAM
 	ld a, [wDexListingCursor]
@@ -3418,33 +3345,6 @@ Pokedex_PutOldModeCursorOAM:
 	dbsprite 20,  4, -2,  0, $30, 7 | X_FLIP | Y_FLIP
 	db -1
 
-Pokedex_PutNewModeABCModeCursorOAM:
-	ld hl, .CursorOAM
-	jmp Pokedex_LoadCursorOAM
-
-.CursorOAM:
-	dbsprite  9,  3, -1,  3, $30, 7
-	dbsprite  9,  2, -1,  3, $31, 7
-	dbsprite 10,  2, -1,  3, $32, 7
-	dbsprite 11,  2, -1,  3, $32, 7
-	dbsprite 12,  2, -1,  3, $33, 7
-	dbsprite 16,  2,  0,  3, $33, 7 | X_FLIP
-	dbsprite 17,  2,  0,  3, $32, 7 | X_FLIP
-	dbsprite 18,  2,  0,  3, $32, 7 | X_FLIP
-	dbsprite 19,  2,  0,  3, $31, 7 | X_FLIP
-	dbsprite 19,  3,  0,  3, $30, 7 | X_FLIP
-	dbsprite  9,  4, -1,  3, $30, 7 | Y_FLIP
-	dbsprite  9,  5, -1,  3, $31, 7 | Y_FLIP
-	dbsprite 10,  5, -1,  3, $32, 7 | Y_FLIP
-	dbsprite 11,  5, -1,  3, $32, 7 | Y_FLIP
-	dbsprite 12,  5, -1,  3, $33, 7 | Y_FLIP
-	dbsprite 16,  5,  0,  3, $33, 7 | X_FLIP | Y_FLIP
-	dbsprite 17,  5,  0,  3, $32, 7 | X_FLIP | Y_FLIP
-	dbsprite 18,  5,  0,  3, $32, 7 | X_FLIP | Y_FLIP
-	dbsprite 19,  5,  0,  3, $31, 7 | X_FLIP | Y_FLIP
-	dbsprite 19,  4,  0,  3, $30, 7 | X_FLIP | Y_FLIP
-	db -1
-
 Pokedex_UpdateSearchResultsCursorOAM:
 	ld a, [wCurDexMode]
 	cp DEXMODE_OLD
@@ -3502,52 +3402,6 @@ Pokedex_LoadCursorOAM:
 	ld [de], a
 	inc de
 	jr .loop
-
-Pokedex_PutScrollbarOAM:
-; Writes the OAM data for the scrollbar in the new mode and ABC mode.
-	push de
-	ld a, [wDexListingEnd]
-	dec a
-	ld e, a
-	ld a, [wDexListingCursor]
-	ld hl, wDexListingScrollOffset
-	add [hl]
-	cp e
-	jr z, .max
-	ld hl, 0
-	ld bc, 121 ; max y - min y
-	call AddNTimes
-	ld e, l
-	ld d, h
-	ld b, 0
-	ld a, d
-	or e
-	jr z, .done
-	ld a, [wDexListingEnd]
-	ld c, a
-.loop
-	ld a, e
-	sub c
-	ld e, a
-	ld a, d
-	sbc 0
-	ld d, a
-	jr c, .done
-	inc b
-	jr .loop
-.max
-	ld b, 121 ; max y - min y
-.done
-	ld a, 20 ; min y
-	add b
-	pop hl
-	ld [hli], a
-	ld a, 161 ; x
-	ld [hli], a
-	ld a, $3f ; $0f ; tile id
-	ld [hli], a
-	ld [hl], 0 ; attributes
-	ret
 
 Pokedex_InitArrowCursor:
 	xor a
@@ -3855,7 +3709,7 @@ Pokedex_LoadAllGFX:
  	ld de, vTiles0 tile 15
  	lb bc, BANK(vTiles0), 1 ; tile
  	call Get2bpp
- 	jr Pokedex_Enable_LCD
+	; fallthrough
 
 Pokedex_Enable_LCD:
 	ld a, 6
