@@ -972,8 +972,7 @@ TrademonStats_Egg:
 	ld a, HIGH(vBGMap1)
 	ldh [hBGMapAddress + 1], a
 	hlcoord 3, 0
-	ld b, 6
-	ld c, 13
+	lb bc, 6, 13
 	call Textbox
 	hlcoord 4, 2
 	ld de, .EggData
@@ -1063,8 +1062,7 @@ TradeAnim_LoadBall:
 ; a = ball item: its graphics as the trade ball's tiles and its Bag icon
 ; colors in OBJ palette 0 (anything that isn't a ball: a Poke Ball)
 	ld de, vTiles0 tile $62
-	newfarcall LoadTradeBall
-	ret
+	farjp LoadTradeBall
 
 TradeAnim_Poof:
 	depixel 10, 11, 4, 0
@@ -1082,8 +1080,7 @@ TradeAnim_Poof:
 	call FarCopyWRAM
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
-	call DelayFrame
-	ret
+	jmp DelayFrame
 .PoofPal
 	RGB 31,31,31, 27,27,27, 16,16,16, 00,00,00
 
@@ -1526,7 +1523,6 @@ TradeAnim_WaitAnim2:
 	dec [hl]
 	ret
 
-TradeGameBoyTilemap:  INCBIN "gfx/trade/game_boy.tilemap" ; 6x8
 TradeLinkTubeTilemap: INCBIN "gfx/trade/link_cable.tilemap" ; 12x3
 TradeArrowRightGFX:   INCBIN "gfx/trade/arrow_right.2bpp"
 TradeArrowLeftGFX:    INCBIN "gfx/trade/arrow_left.2bpp"
