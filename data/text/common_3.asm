@@ -157,7 +157,7 @@ _PocketIsFullText::
 	text_ram wStringBuffer3
 	text_start
 	line "is full…"
-	prompt
+	done
 
 _SeerSeeAllText::
 	text "I see all."

@@ -89,10 +89,7 @@ GoldenrodVendingMachineScript:
 	sjump .Start
 
 .NotEnoughSpace:
-	writethistext
-		text "There's no more"
-		line "room for stuff."
-		done
+	pocketisfull
 	waitbutton
 	sjump .Start
 

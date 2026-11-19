@@ -331,10 +331,7 @@ RadioTower2FBuenaThanksForComingText:
 	done
 
 Script_YourPackIsStuffedFullTrainer:
-	writethistext
-		text "Oops, your pocket"
-		line "is full."
-		done
+	pocketisfull
 	waitclosetext
 	turnobject RADIOTOWER2F_BUENA, RIGHT
 	end

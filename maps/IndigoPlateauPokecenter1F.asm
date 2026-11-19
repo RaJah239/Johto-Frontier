@@ -123,10 +123,8 @@ VioletScript:
 	waitendtext
 
 .NoRoom:
-	jumpthisopenedtext
-		text "Make space to con-"
-		line "clude our trade…"
-		done
+	pocketisfull
+	waitendtext
 
 .ConcludeTransaction:
 	writethistext

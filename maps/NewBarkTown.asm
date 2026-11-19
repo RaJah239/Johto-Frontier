@@ -221,10 +221,8 @@ CheatingScript:
 	endtext
 
 .NotEnoughSpace:
-	jumpthisopenedtext
-		text "There's no more"
-		line "room in your bag…"
-		done
+	pocketisfull
+	waitendtext
 
 NewbarkTownCheaterKunTeleportAway:
 	teleport_from

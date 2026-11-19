@@ -105,10 +105,8 @@ NuggetSellerScript:
 		done
 
 .NoRoom:
-	jumpthisopenedtext
-		text "Your pack's pocket"
-		line "is full…"
-		done
+	pocketisfull
+	waitendtext
 
 .MoveMenuHeader:
 	db MENU_BACKUP_TILES ; flags

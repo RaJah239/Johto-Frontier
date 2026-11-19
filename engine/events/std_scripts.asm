@@ -52,7 +52,7 @@ GrandGauntletItemsScript:
 	endtext
 
 ItemPocketIsFullScript:
-	farwritetext _ItemPocketIsFullText
+	pocketisfull
 	waitendtext
 
 RaffleManNPCScript:

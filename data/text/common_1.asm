@@ -17,16 +17,6 @@ _ObtainedFruitText::
 	text "!"
 	done
 
-_FruitPackIsFullText::
-	text "But the Bag is"
-	line "full…"
-	done
-
-_ItemPocketIsFullText::
-	text "The Item Pocket"
-	line "is full…"
-	done
-
 _NothingHereText::
 	text "There's nothing"
 	line "here…"
@@ -749,11 +739,6 @@ _PlayerFoundItemText::
 	line "@"
 	text_ram wStringBuffer3
 	text "!"
-	done
-
-_ButNoSpaceText::
-	text "But <PLAYER> has"
-	line "no space left…"
 	done
 
 _SavingRecordText::

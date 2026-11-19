@@ -23,17 +23,13 @@ FindItemInBallScript::
 	opentext
 	writetext .FoundItemText
 	waitbutton
-	writetext .CantCarryItemText
+	pocketisfull
 	waitbutton
 	closetext
 	end
 
 .FoundItemText:
 	text_far _FoundItemText
-	text_end
-
-.CantCarryItemText:
-	text_far _CantCarryItemText
 	text_end
 
 .TryReceiveItem:

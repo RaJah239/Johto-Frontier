@@ -407,12 +407,6 @@ _FoundItemText::
 	text "!"
 	done
 
-_CantCarryItemText::
-	text "But <PLAYER> can't"
-	line "carry any more"
-	cont "items."
-	done
-
 _WhitedOutText::
 	text "<PLAYER> is out of"
 	line "useable #mon!"

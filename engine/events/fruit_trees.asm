@@ -27,7 +27,7 @@ FruitTreeScript::
 
 .packisfull
 	promptbutton
-	writetext FruitPackIsFullText
+	pocketisfull
 	waitbutton
 
 .end
@@ -106,10 +106,6 @@ HeyItsFruitText:
 
 ObtainedFruitText:
 	text_far _ObtainedFruitText
-	text_end
-
-FruitPackIsFullText:
-	text_far _FruitPackIsFullText
 	text_end
 
 NothingHereText:

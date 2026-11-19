@@ -340,7 +340,7 @@ Script_GivePlayerPrize:
 	end
 
 Script_YourPackIsStuffedFull:
-	writetext Text_YourPackIsStuffedFull
+	pocketisfull
 	waitbutton
 	closetext
 	end
@@ -534,14 +534,6 @@ Text_PlayerGotThree:
 	sound_item
 	text_promptbutton
 	text_end
-
-Text_YourPackIsStuffedFull:
-	text "Oops, your Items"
-	line "pocket is full."
-
-	para "Please make room"
-	line "and come back."
-	done
 
 Text_WeHopeToServeYouAgain:
 	text "We hope to serve"

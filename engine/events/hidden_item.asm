@@ -14,7 +14,7 @@ HiddenItemScript::
 
 .bag_full
 	promptbutton
-	writetext .ButNoSpaceText
+	pocketisfull
 	waitbutton
 
 .finish
@@ -27,10 +27,6 @@ HiddenItemScript::
 
 .PlayerFoundItemText:
 	text_far _PlayerFoundItemText
-	text_end
-
-.ButNoSpaceText:
-	text_far _ButNoSpaceText
 	text_end
 
 SetMemEvent:

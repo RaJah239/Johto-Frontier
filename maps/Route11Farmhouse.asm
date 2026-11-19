@@ -89,10 +89,8 @@ FarmerMScript_NoMoney:
 		done
 
 FarmerMScript_NoRoom:
-	jumpthisopenedtext
-		text "I reckon yer"
-		line "Bag's full."
-		done
+	pocketisfull
+	waitendtext
 
 FarmerMScript_NoSale:
 	jumpthisopenedtext

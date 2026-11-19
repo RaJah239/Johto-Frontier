@@ -114,7 +114,7 @@ GoldenrodGameCornerTMVendor_LoopScript:
 	scall GoldenrodGameCornerPrizeVendor_ConfirmPurchaseScript
 	iffalse GoldenrodGameCornerPrizeVendor_CancelPurchaseScript
 	giveitem TM_THUNDERBOLT
-	iffalse GoldenrodGameCornerPrizeMonVendor_NoRoomForPrizeScript
+	iffalse GoldenrodGameCornerTMVendor_NoRoomForPrizeScript
 	takecoins GOLDENRODGAMECORNER_TM_COINS
 	sjump GoldenrodGameCornerTMVendor_FinishScript
 
@@ -125,7 +125,7 @@ GoldenrodGameCornerTMVendor_LoopScript:
 	scall GoldenrodGameCornerPrizeVendor_ConfirmPurchaseScript
 	iffalse GoldenrodGameCornerPrizeVendor_CancelPurchaseScript
 	giveitem TM_ICE_BEAM
-	iffalse GoldenrodGameCornerPrizeMonVendor_NoRoomForPrizeScript
+	iffalse GoldenrodGameCornerTMVendor_NoRoomForPrizeScript
 	takecoins GOLDENRODGAMECORNER_TM_COINS
 	sjump GoldenrodGameCornerTMVendor_FinishScript
 
@@ -136,7 +136,7 @@ GoldenrodGameCornerTMVendor_LoopScript:
 	scall GoldenrodGameCornerPrizeVendor_ConfirmPurchaseScript
 	iffalse GoldenrodGameCornerPrizeVendor_CancelPurchaseScript
 	giveitem TM_FLAMETHROWER
-	iffalse GoldenrodGameCornerPrizeMonVendor_NoRoomForPrizeScript
+	iffalse GoldenrodGameCornerTMVendor_NoRoomForPrizeScript
 	takecoins GOLDENRODGAMECORNER_TM_COINS
 	sjump GoldenrodGameCornerTMVendor_FinishScript
 
@@ -152,6 +152,10 @@ GoldenrodGameCornerPrizeVendor_NotEnoughCoinsScript:
 		text "Sorry! You need"
 		line "more coins."
 		done
+
+GoldenrodGameCornerTMVendor_NoRoomForPrizeScript:
+	pocketisfull
+	waitendtext
 
 GoldenrodGameCornerPrizeMonVendor_NoRoomForPrizeScript:
 	jumpthisopenedtext

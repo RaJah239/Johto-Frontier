@@ -953,15 +953,11 @@ IlexForestNoRoomInBagForMushroom:
 	getitemname STRING_BUFFER_3, TINYMUSHROOM
 	writetext IlexForestFoundMushroomText
 	promptbutton
-	writetext IlexForestNoRoomForMushroomText
+	pocketisfull
 	waitendtext
 
 IlexForestFoundMushroomText:
 	text_far _PlayerFoundItemText
-	text_end
-
-IlexForestNoRoomForMushroomText:
-	text_far _CantCarryItemText
 	text_end
 
 IlexForestLassText:
