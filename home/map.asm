@@ -575,40 +575,30 @@ LoadBlockData::
 	jmp RunMapCallback
 
 ChangeMap::
-; Decompress the map's blocks (wMapBlocksBank:wMapBlocksPointer) into
-; wDecompressScratch and copy them into wOverworldMapBlocks, inside the
-; 3-block border.
+	ldh a, [hROMBank]
+	push af
+
+	ld hl, wOverworldMapBlocks
 	ld a, [wMapWidth]
 	ldh [hConnectedMapWidth], a
-	add 6
+	add $6
 	ldh [hConnectionStripLength], a
-	ld a, [wMapHeight]
 	ld c, a
-	ld a, [wMapBlocksPointer]
-	ld l, a
-	ld a, [wMapBlocksPointer + 1]
-	ld h, a
+	ld b, 0
+	add hl, bc
+	add hl, bc
+	add hl, bc
+	ld c, 3
+	add hl, bc
 	ld a, [wMapBlocksBank]
-	ld b, a
-	ldh a, [rSVBK]
-	push af
-	push bc
-	ld a, BANK(wDecompressScratch)
-	ldh [rSVBK], a
-	ld a, b
-	ld de, wDecompressScratch
-	call FarDecompress
-	pop bc
-	ld b, c ; map height
+	rst Bankswitch
 
-	ld hl, wOverworldMapBlocks + 3
-	ldh a, [hConnectionStripLength]
+	ld a, [wMapBlocksPointer]
 	ld e, a
-	ld d, 0
-	add hl, de
-	add hl, de
-	add hl, de
-	ld de, wDecompressScratch
+	ld a, [wMapBlocksPointer + 1]
+	ld d, a
+	ld a, [wMapHeight]
+	ld b, a
 .row
 	push hl
 	ldh a, [hConnectedMapWidth]
@@ -630,101 +620,174 @@ ChangeMap::
 	jr nz, .row
 
 	pop af
-	ldh [rSVBK], a
+	rst Bankswitch
 	ret
 
 FillMapConnections::
-; Each connected map's blocks are decompressed into wDecompressScratch in
-; turn; the connection strip pointers point there.
-	ld hl, wNorthMapConnection
-	ld a, 3
-	call FillMapConnection
-	ld hl, wSouthMapConnection
-	ld a, 3
-	call FillMapConnection
-	ld hl, wWestMapConnection
-	xor a
-	call FillMapConnection
-	ld hl, wEastMapConnection
-	xor a
-	; fallthrough
-
-FillMapConnection:
-; hl = a map_connection_struct; a = 3 for north and south (3 rows of the
-; strip length), 0 for west and east (strip length rows of 3 blocks).
-	ldh [hConnectionStripLength], a
-	ld a, [hli]
+; North
+	ld a, [wNorthConnectedMapGroup]
 	cp $ff
-	ret z
+	jr z, .South
+	ld b, a
+	ld a, [wNorthConnectedMapNumber]
+	ld c, a
+	call GetAnyMapBlocksBank
+
+	ld a, [wNorthConnectionStripPointer]
+	ld l, a
+	ld a, [wNorthConnectionStripPointer + 1]
+	ld h, a
+	ld a, [wNorthConnectionStripLocation]
+	ld e, a
+	ld a, [wNorthConnectionStripLocation + 1]
 	ld d, a
-	ld a, [hli]
-	ld e, a ; de = the connected map
-	ld a, [hli]
-	ld c, a
-	ld a, [hli]
-	ld b, a
-	push bc ; strip pointer
-	ld a, [hli]
-	ld c, a
-	ld a, [hli]
-	ld b, a
-	push bc ; strip location
-	ld a, [hli]
-	ld b, a ; strip length
-	ld a, [hl]
+	ld a, [wNorthConnectionStripLength]
+	ldh [hConnectionStripLength], a
+	ld a, [wNorthConnectedMapWidth]
 	ldh [hConnectedMapWidth], a
-	ld a, [wMapWidth]
-	add 6
-	ld c, a ; destination row width
-	ldh a, [hConnectionStripLength]
-	and a
-	jr nz, .north_south
-	ld a, 3
-	jr .got_size
-.north_south
-	ld a, b
-	ld b, 3
-.got_size
-	ldh [hConnectionStripLength], a ; blocks per row (b = rows)
-	push bc
-	ld b, d
-	ld c, e
-	call DecompressConnectedMapBlocks
-	pop bc
-	pop de
-	pop hl
-	push af
-.row
-	push bc
+	call FillNorthConnectionStrip
+
+.South:
+	ld a, [wSouthConnectedMapGroup]
+	cp $ff
+	jr z, .West
+	ld b, a
+	ld a, [wSouthConnectedMapNumber]
+	ld c, a
+	call GetAnyMapBlocksBank
+
+	ld a, [wSouthConnectionStripPointer]
+	ld l, a
+	ld a, [wSouthConnectionStripPointer + 1]
+	ld h, a
+	ld a, [wSouthConnectionStripLocation]
+	ld e, a
+	ld a, [wSouthConnectionStripLocation + 1]
+	ld d, a
+	ld a, [wSouthConnectionStripLength]
+	ldh [hConnectionStripLength], a
+	ld a, [wSouthConnectedMapWidth]
+	ldh [hConnectedMapWidth], a
+	call FillSouthConnectionStrip
+
+.West:
+	ld a, [wWestConnectedMapGroup]
+	cp $ff
+	jr z, .East
+	ld b, a
+	ld a, [wWestConnectedMapNumber]
+	ld c, a
+	call GetAnyMapBlocksBank
+
+	ld a, [wWestConnectionStripPointer]
+	ld l, a
+	ld a, [wWestConnectionStripPointer + 1]
+	ld h, a
+	ld a, [wWestConnectionStripLocation]
+	ld e, a
+	ld a, [wWestConnectionStripLocation + 1]
+	ld d, a
+	ld a, [wWestConnectionStripLength]
+	ld b, a
+	ld a, [wWestConnectedMapWidth]
+	ldh [hConnectionStripLength], a
+	call FillWestConnectionStrip
+
+.East:
+	ld a, [wEastConnectedMapGroup]
+	cp $ff
+	jr z, .Done
+	ld b, a
+	ld a, [wEastConnectedMapNumber]
+	ld c, a
+	call GetAnyMapBlocksBank
+
+	ld a, [wEastConnectionStripPointer]
+	ld l, a
+	ld a, [wEastConnectionStripPointer + 1]
+	ld h, a
+	ld a, [wEastConnectionStripLocation]
+	ld e, a
+	ld a, [wEastConnectionStripLocation + 1]
+	ld d, a
+	ld a, [wEastConnectionStripLength]
+	ld b, a
+	ld a, [wEastConnectedMapWidth]
+	ldh [hConnectionStripLength], a
+	call FillEastConnectionStrip
+
+.Done:
+	ret
+
+FillNorthConnectionStrip::
+FillSouthConnectionStrip::
+	ld c, 3
+.y
 	push de
+
 	push hl
 	ldh a, [hConnectionStripLength]
 	ld b, a
-.col
+.x
 	ld a, [hli]
 	ld [de], a
 	inc de
 	dec b
-	jr nz, .col
+	jr nz, .x
 	pop hl
+
 	ldh a, [hConnectedMapWidth]
-	add l
-	ld l, a
-	jr nc, .src_ok
-	inc h
-.src_ok
+	ld e, a
+	ld d, 0
+	add hl, de
 	pop de
-	pop bc
-	ld a, c
+
+	ld a, [wMapWidth]
+	add 6
 	add e
 	ld e, a
-	jr nc, .dest_ok
+	jr nc, .okay
 	inc d
-.dest_ok
+.okay
+	dec c
+	jr nz, .y
+	ret
+
+FillWestConnectionStrip::
+FillEastConnectionStrip::
+.loop
+	ld a, [wMapWidth]
+	add 6
+	ldh [hConnectedMapWidth], a
+
+	push de
+
+	push hl
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	pop hl
+
+	ldh a, [hConnectionStripLength]
+	ld e, a
+	ld d, 0
+	add hl, de
+	pop de
+
+	ldh a, [hConnectedMapWidth]
+	add e
+	ld e, a
+	jr nc, .okay
+	inc d
+.okay
 	dec b
-	jr nz, .row
-	pop af
-	ldh [rSVBK], a
+	jr nz, .loop
 	ret
 
 LoadMapStatus::
@@ -1888,39 +1951,31 @@ GetMapScriptsBank::
 	ld a, [wMapScriptsBank]
 	ret
 
-DecompressConnectedMapBlocks:
-; Decompress the blocks of map group b, number c into wDecompressScratch.
-; Returns a = the old rSVBK, with rSVBK left on BANK(wDecompressScratch).
+GetAnyMapBlocksBank::
+; Return the blockdata bank for group b map c.
+	push hl
+	push de
+	push bc
+
 	push bc
 	ld de, MAP_MAPATTRIBUTES
 	call GetAnyMapField
 	ld l, c
 	ld h, b
 	pop bc
+
 	push hl
 	ld de, MAP_MAPATTRIBUTES_BANK
 	call GetAnyMapField
 	pop hl
-	ld de, MAP_MAPATTRIBUTES ; offset of the blocks' bank in the attributes
+
+	ld de, MAP_MAPATTRIBUTES ; blockdata bank
 	add hl, de
 	ld a, c
-	ld b, a
 	call GetFarByte
-	ld e, a ; the blocks' bank
-	inc hl
-	ld a, b
-	call GetFarWord ; hl = the blocks
-	ldh a, [rSVBK]
-	ld d, a
-	ld a, BANK(wDecompressScratch)
-	ldh [rSVBK], a
-	push de
-	ld a, e
-	ld de, wDecompressScratch
-	call FarDecompress
-	pop de
-	ld a, d
-	ret
+	rst Bankswitch
+
+	jmp PopBCDEHL
 
 GetMapAttributesPointer::
 ; returns the current map's data pointer in hl.
