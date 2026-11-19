@@ -800,8 +800,7 @@ EggHatch_AnimationSequence:
 	ld a, [wJumptableIndex]
 	ld [wCurPartySpecies], a
 	hlcoord 6, 3
-	ld d, $0
-	ld e, ANIM_MON_HATCH
+	lb de, $0, ANIM_MON_HATCH
 	predef AnimateFrontpic
 	pop af
 	ld [wCurSpecies], a
@@ -809,8 +808,7 @@ EggHatch_AnimationSequence:
 
 Hatch_LoadFrontpicPal:
 	ld [wPlayerHPPal], a
-	ld b, SCGB_EVOLUTION
-	ld c, $0
+	lb bc, SCGB_EVOLUTION, $0
 	jmp GetSGBLayout
 
 EggHatch_CrackShell:
