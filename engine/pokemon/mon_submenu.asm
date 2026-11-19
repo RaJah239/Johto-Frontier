@@ -168,26 +168,6 @@ GetMonSubmenuItems:
 	call AddMonMenuItem
 	jr TerminateMonSubmenu
 
-IsFieldMove:
-	ld b, a
-	ld hl, MonMenuOptions
-.next
-	ld a, [hli]
-	cp -1
-	jr z, .nope
-	cp MONMENU_MENUOPTION
-	jr z, .nope
-	ld d, [hl]
-	inc hl
-	ld a, [hli]
-	cp b
-	jr nz, .next
-	ld a, d
-	scf
-
-.nope
-	ret
-
 ResetMonSubmenu:
 	xor a
 	ld [wMonSubmenuCount], a
