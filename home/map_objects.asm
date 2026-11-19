@@ -15,11 +15,11 @@ GetSpriteVTile::
 	push hl
 	push de
 	push bc
-	ld [hUsedSpriteIndex], a
+	ldh [hUsedSpriteIndex], a
 	farcall GetSprite
 	ld hl, wSpriteFlags
 	res 5, [hl]
-	ld a, [hObjectStructIndex]
+	ldh a, [hObjectStructIndex]
 	cp FIRST_VRAM1_OBJECT_STRUCT
 	jr c, .continue
 	set 5, [hl]
@@ -30,7 +30,7 @@ GetSpriteVTile::
 	ld b, a
 	add a, b
 	add a, b
-	ld [hUsedSpriteTile], a
+	ldh [hUsedSpriteTile], a
 	push af
 	farcall GetUsedSprite
 	pop af
