@@ -33,10 +33,6 @@ CopyMonToTempMon:
 .done
 	ret
 
-CalcBufferMonStats:
-	ld bc, wBufferMon
-	jr _TempMonStatsCalculation
-
 CalcTempmonStats:
 	ld bc, wTempMon
 _TempMonStatsCalculation:
