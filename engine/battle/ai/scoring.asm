@@ -586,8 +586,7 @@ ShouldAIBoost:
 	jr c, .maybe_dont_boost
 	ld b, EFFECT_RESET_STATS
 	call PlayerHasMoveEffect
-	jr c, .maybe_dont_boost
-	jr .no_force_switch
+	jr nc, .no_force_switch
 
 .maybe_dont_boost
 	call Random
@@ -602,8 +601,7 @@ ShouldAIBoost:
 ; should attack earlier for more damage
 	ld a, [wEnemyAtkLevel]
 	cp BASE_STAT_LEVEL + 1
-	jr c, .check_special_attack
-	jr .check_mutual_2HKO
+	jr nc, .check_mutual_2HKO
 
 .check_special_attack
 	ld a, [wEnemySAtkLevel]
@@ -655,8 +653,7 @@ ShouldAIBoost:
 
 ; if player moves first consider if they can 2HKO
 	call CanPlayer2HKO
-	jr c, .decide_not_to_boost
-	jmp .boost
+	jmp nc, .boost
 
 .decide_not_to_boost
 ; if player is asleep and we get more than one turn before they wake up,
@@ -676,8 +673,7 @@ ShouldAIBoost:
 	ld a, [wBattleMonStatus]
 	and SLP_MASK
 	cp b
-	jr z, .keep_going
-	jr .boost
+	jr nz, .boost
 
 .keep_going
 ; is the player behind a sub, if so don't boost, just attack
@@ -731,8 +727,7 @@ ShouldAIBoost:
 	pop bc
 	pop de
 	pop hl
-	jr c, .check_2HKO
-	jr .dont_boost
+	jr nc, .dont_boost
 
 .check_2HKO
 	call CanAI2HKO
