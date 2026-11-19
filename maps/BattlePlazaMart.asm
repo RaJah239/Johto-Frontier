@@ -375,8 +375,7 @@ BattlePlazaMartTutorScript:
 ; not linger once Cancel is highlighted.
     farcall PlazaMoveIcons_Hide
     hlcoord 0, 11
-    ld b, 5
-    ld c, SCREEN_WIDTH - 2
+	lb bc, 5, SCREEN_WIDTH - 2
     jmp Textbox
 
 .CrystalText: db "Cost×@"
