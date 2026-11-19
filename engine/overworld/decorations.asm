@@ -547,7 +547,7 @@ GetDecoName:
 	call .getdeconame
 	pop de
 	ld a, e
-	jr .getpokename
+	; fallthrough
 
 .getpokename:
 	push bc
