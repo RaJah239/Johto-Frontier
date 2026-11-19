@@ -88,8 +88,6 @@ SpecialsPointers::
 	add_special ProfOaksPCBoot
 	add_special FadeOutMusic
 	add_special Diploma
-
-; Crystal only
 	add_special BattleTowerRoomMenu
 	add_special BattleTowerBattle
 	add_special LoadOpponentTrainerAndPokemonWithOTSprite
@@ -112,11 +110,8 @@ SpecialsPointers::
 	add_special RefreshSprites
 	add_special AskRememberPassword
 	add_special LoadMapPalettes
-
 	add_special InitialSetDSTFlag
 	add_special InitialClearDSTFlag
-
-; New specials starts here
 	add_special MonPaletteEditor
 	add_special MonPaletteReset
 	add_special _VoltorbFlip
@@ -141,6 +136,7 @@ SpecialsPointers::
 	add_special OverridePlayerParty
 	add_special PartyKeeperShowTeam
 	add_special ShowItemIcon
+	add_special BillsGrandfather
 
 if DEF(_DEBUG)
 	add_special SetAllUnownCaught
