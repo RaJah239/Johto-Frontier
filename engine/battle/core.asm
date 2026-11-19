@@ -6965,11 +6965,7 @@ GiveExperiencePoints:
 	jr nz, .level_loop
 	pop af
 	ld [wCurPartyLevel], a
-	ld hl, wEvolvableFlags
-	ld a, [wCurPartyMon]
-	ld c, a
-	ld b, SET_FLAG
-	predef SmallFarFlagAction
+	farcall EvolveDuringBattle
 	pop af
 	ld [wCurPartyLevel], a
 

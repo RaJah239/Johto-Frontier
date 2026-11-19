@@ -3128,6 +3128,13 @@ SECTION "Sound Engine Backup", WRAMX[$d800], BANK [5]
 wSoundEngineBackup:: ds $1c0
 wSoundEngineBackupEnd::
 
+SECTION "Battle Evolution Backup", WRAMX, BANK[2]
+
+; Evolution and move learning both reuse wTempTilemap. Keep the battle's
+; screen and current music separately; wSoundEngineBackup holds map music.
+wBattleEvolutionTilemap:: ds SCREEN_WIDTH * SCREEN_HEIGHT
+wBattleEvolutionMusic:: ds wMapMusic - wMusicPlaying
+
 
 SECTION "Attributes", WRAMX
 

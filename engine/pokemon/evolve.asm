@@ -27,7 +27,7 @@ EvolveAfterBattle_MasterLoop:
 	inc hl
 	ld a, [hl]
 	cp $ff
-	jmp z, .ReturnToMap
+	jr z, EvolveAfterBattle_ReturnToMap
 
 	ld [wEvolutionOldSpecies], a
 
@@ -41,6 +41,30 @@ EvolveAfterBattle_MasterLoop:
 	and a
 	jr z, EvolveAfterBattle_MasterLoop
 
+	call CheckHowToEvolve
+	jr z, EvolveAfterBattle_MasterLoop
+	call TryToEvolve
+	call c, CancelEvolution
+	jr EvolveAfterBattle_MasterLoop
+
+EvolveAfterBattle_ReturnToMap:
+	pop de
+	pop bc
+	pop hl
+	ld a, [wLinkMode]
+	and a
+	ret nz
+	ld a, [wBattleMode]
+	and a
+	ret nz
+	ld a, [wMonTriedToEvolve]
+	and a
+	jmp nz, RestartMapMusic
+	ret
+
+CheckHowToEvolve:
+; wCurPartyMon / wEvolutionOldSpecies identify the mon. Return z if it
+; cannot evolve; otherwise hl points to its evolution's target species.
 	ld a, [wEvolutionOldSpecies]
 	dec a
 	ld b, 0
@@ -61,7 +85,7 @@ EvolveAfterBattle_MasterLoop:
 .loop
 	ld a, [hli]
 	and a
-	jr z, EvolveAfterBattle_MasterLoop
+	ret z
 
 	ld b, a
 
@@ -74,7 +98,7 @@ EvolveAfterBattle_MasterLoop:
 
 	ld a, b
 	cp EVOLVE_ITEM
-	jmp z, .item
+	jr z, .item
 
 	ld a, [wForceEvolution]
 	and a
@@ -110,7 +134,7 @@ EvolveAfterBattle_MasterLoop:
 
 	inc hl
 	cp [hl]
-	jmp nz, .dont_evolve_2
+	jr nz, .dont_evolve_2
 
 	inc hl
 	jr .proceed
@@ -118,10 +142,10 @@ EvolveAfterBattle_MasterLoop:
 .happiness
 	ld a, [wTempMonHappiness]
 	cp HAPPINESS_TO_EVOLVE
-	jmp c, .dont_evolve_2
+	jr c, .dont_evolve_2
 
 	call IsMonHoldingEverstone
-	jmp z, .dont_evolve_2
+	jr z, .dont_evolve_2
 
 	ld a, [hli]
 	cp TR_ANYTIME
@@ -132,22 +156,22 @@ EvolveAfterBattle_MasterLoop:
 ; TR_EVENITE
 	ld a, [wTimeOfDay]
 	cp NITE_F
-	jmp nz, .dont_evolve_3 ; MORN_F or DAY_F < NITE_F
+	jr nz, .dont_evolve_3 ; MORN_F or DAY_F < NITE_F
 	jr .proceed
 
 .happiness_daylight
 	ld a, [wTimeOfDay]
 	cp NITE_F
-	jmp z, .dont_evolve_3 ; NITE_F or EVE_F >= NITE_F
+	jr z, .dont_evolve_3 ; NITE_F or EVE_F >= NITE_F
 	jr .proceed
 
 .trade
 	ld a, [wLinkMode]
 	and a
-	jmp z, .dont_evolve_2
+	jr z, .dont_evolve_2
 
 	call IsMonHoldingEverstone
-	jmp z, .dont_evolve_2
+	jr z, .dont_evolve_2
 
 	ld a, [hli]
 	ld b, a
@@ -156,7 +180,7 @@ EvolveAfterBattle_MasterLoop:
 
 	ld a, [wTempMonItem]
 	cp b
-	jmp nz, .dont_evolve_3
+	jr nz, .dont_evolve_3
 
 	xor a
 	ld [wTempMonItem], a
@@ -167,14 +191,14 @@ EvolveAfterBattle_MasterLoop:
 	ld b, a
 	ld a, [wCurItem]
 	cp b
-	jmp nz, .dont_evolve_3
+	jr nz, .dont_evolve_3
 
 	ld a, [wForceEvolution]
 	and a
-	jmp z, .dont_evolve_3
+	jr z, .dont_evolve_3
 	ld a, [wLinkMode]
 	and a
-	jmp nz, .dont_evolve_3
+	jr nz, .dont_evolve_3
 	jr .proceed
 
 .level
@@ -182,11 +206,25 @@ EvolveAfterBattle_MasterLoop:
 	ld b, a
 	ld a, [wTempMonLevel]
 	cp b
-	jmp c, .dont_evolve_3
+	jr c, .dont_evolve_3
 	call IsMonHoldingEverstone
-	jmp z, .dont_evolve_3
+	jr z, .dont_evolve_3
 
 .proceed
+	ld a, [hl]
+	and a
+	ret
+
+.dont_evolve_1
+	inc hl
+.dont_evolve_2
+	inc hl
+.dont_evolve_3
+	inc hl
+	jmp .loop
+
+TryToEvolve:
+; CheckHowToEvolve prepared wTempMon and hl. Return carry if cancelled.
 	ld a, [wTempMonLevel]
 	ld [wCurPartyLevel], a
 	ld a, $1
@@ -221,7 +259,12 @@ EvolveAfterBattle_MasterLoop:
 	push af
 	call ClearSprites
 	pop af
-	jmp c, CancelEvolution
+	jr nc, .evolved
+	pop hl ; the evolution target pointer
+	scf
+	ret
+
+.evolved
 
 	ld hl, CongratulationsYourPokemonText
 	call PrintText
@@ -307,36 +350,15 @@ EvolveAfterBattle_MasterLoop:
 	callfar UpdateUnownDex
 
 .skip_unown
-	pop de
 	pop hl
-	ld a, [wTempMonSpecies]
+	ld a, [wCurPartyMon]
+	ld e, a
+	ld d, 0
+	ld hl, wPartySpecies
+	add hl, de
+	ld a, [wEvolutionNewSpecies]
 	ld [hl], a
-	push hl
-	ld l, e
-	ld h, d
-	jmp EvolveAfterBattle_MasterLoop
-
-.dont_evolve_1
-	inc hl
-.dont_evolve_2
-	inc hl
-.dont_evolve_3
-	inc hl
-	jmp .loop
-
-.ReturnToMap:
-	pop de
-	pop bc
-	pop hl
-	ld a, [wLinkMode]
 	and a
-	ret nz
-	ld a, [wBattleMode]
-	and a
-	ret nz
-	ld a, [wMonTriedToEvolve]
-	and a
-	jmp nz, RestartMapMusic
 	ret
 
 LearnEvolutionMove:
@@ -414,9 +436,7 @@ UpdateSpeciesNameIfNotNicknamed:
 CancelEvolution:
 	ld hl, StoppedEvolvingText
 	call PrintText
-	call ClearTilemap
-	pop hl
-	jmp EvolveAfterBattle_MasterLoop
+	jmp ClearTilemap
 
 IsMonHoldingEverstone:
 	push hl

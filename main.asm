@@ -215,6 +215,9 @@ INCLUDE "engine/battle/core2.asm"
 SECTION "Battle Core 3", ROMX
 INCLUDE "engine/battle/core3.asm"
 
+SECTION "Battle Evolution", ROMX
+INCLUDE "engine/battle/evolve_battle.asm"
+
 
 SECTION "Battle Move Info", ROMX
 INCLUDE "engine/battle/move_info.asm"
