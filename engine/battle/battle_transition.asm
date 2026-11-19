@@ -312,8 +312,7 @@ StartTrainerBattle_SetUpForWavyOutro:
 StartTrainerBattle_SineWave:
 	ld a, [wBattleTransitionCounter]
 	cp $60
-	jr nc, .end
-	jr .DoSineWave
+	jr c, .DoSineWave
 
 .end
 	ld a, BATTLETRANSITION_FINISH
@@ -562,7 +561,7 @@ StartTrainerBattle_SpeckleToBlack:
 StartTrainerBattle_LoadPokeBallGraphics:
 	ld a, [wOtherTrainerClass]
 	and a
-	jmp z, .nextscene ; don't need to be here if wild
+	jmp z, StartTrainerBattle_NextScene ; don't need to be here if wild
 
 	xor a
 	ldh [hBGMapMode], a
