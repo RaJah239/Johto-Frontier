@@ -290,7 +290,6 @@ AI_Basic:
 	pop bc
 	pop de
 	pop hl
-	jr c, .skip_recoil_check
 
 ;	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
 ;	cp EFFECT_RECOIL_HIT
