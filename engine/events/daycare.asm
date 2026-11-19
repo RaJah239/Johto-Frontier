@@ -390,7 +390,7 @@ DayCareManOutside:
 	res DAYCAREMAN_HAS_EGG_F, [hl]
 	call DayCare_InitBreeding
 	ld hl, .IllKeepItThanksText
-	jr .Load0
+	; fallthrough
 
 .Load0:
 	call PrintText
