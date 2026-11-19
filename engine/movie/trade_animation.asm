@@ -1177,7 +1177,7 @@ TradeAnim_AnimateTrademonInTube:
 	add hl, bc
 	ld a, [hl]
 	cp $64
-	jr nc, .done_move_down
+	jr nc, .JumptableNext
 	inc [hl]
 	ret
 .done_move_down
@@ -1188,7 +1188,7 @@ TradeAnim_AnimateTrademonInTube:
 	add hl, bc
 	ld a, [hl]
 	cp $56
-	jr nc, .done_move_right
+	jr nc, .JumptableNext
 	inc [hl]
 	ret
 
