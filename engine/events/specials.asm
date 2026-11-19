@@ -177,7 +177,7 @@ MemoryGame:
 	ret c
 	ld a, BANK(_MemoryGame)
 	ld hl, _MemoryGame
-	jr StartGameCornerGame
+	; fallthrough
 
 StartGameCornerGame:
 	call FarQueueScript
