@@ -132,8 +132,7 @@ _BattleCommand_Critical:
 	cp SLASH
 	jr z, .SlashCrits
 	cp LEAF_BLADE
-	jr z, .LeafBladeCrits
-	jr .SuperLuck
+	jr nz, .SuperLuck
 
 ; =================================
 ; === Ability: Leaf Blade Crits ===
@@ -184,8 +183,7 @@ _BattleCommand_Critical:
 	push bc
 	ShowOncePerSendOutPopup SEND_OUT_POPUP_CRIT_LOCK, CritlockText, KEEP
 	pop bc
-	jr c, .continue ; suppressed by Neutralizing Gas
-	jr .CritGuard
+	jr nc, .CritGuard ; Crit Lock is active
 
 .continue
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -411,7 +409,7 @@ _BattleCommand_CheckHit:
 .skip_brightpowder
 	ld a, b
 	cp -1
-	jr z, .Hit
+	ret z
 
 	call BattleRandom
 	cp b
@@ -424,8 +422,7 @@ _BattleCommand_CheckHit:
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
 	cp EFFECT_JUMP_KICK
-	jr z, .Missed
-	call ResetDamage
+	call nz, ResetDamage
 
 .Missed:
 	farjp Eff_Comands_AttackedMissed
