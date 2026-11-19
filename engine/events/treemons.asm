@@ -43,9 +43,8 @@ RockMonEncounter:
 	jr nc, .no_battle
 
 	call SelectTreeMon
-	jr nc, .no_battle
+	ret c
 
-	ret
 
 .no_battle
 	xor a
