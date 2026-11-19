@@ -2432,7 +2432,9 @@ HandleNPCStep::
 	xor a
 .loop
 	ldh [hMapObjectIndex], a
-	call DoesObjectHaveASprite
+	assert OBJECT_SPRITE == 0
+	ld a, [bc]
+	and a
 	call nz, HandleObjectStep
 	ld hl, OBJECT_LENGTH
 	add hl, bc
