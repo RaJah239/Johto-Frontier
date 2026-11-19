@@ -136,7 +136,7 @@ SelectQuantityToSell:
 	call CalculateMaximumSellQuantity
 	ld hl, SellItem_MenuHeader
 	call LoadMenuHeader
-	jr Toss_Sell_Loop
+	; fallthrough
 
 Toss_Sell_Loop:
 	ld a, 1
