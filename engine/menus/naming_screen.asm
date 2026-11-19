@@ -1339,26 +1339,4 @@ MailComposition_TryAddLastCharacter:
 	ld a, [wNamingScreenLastCharacter]
 	jmp MailComposition_TryAddCharacter
 
-.one_back
-	push hl
-	ld hl, wNamingScreenCurNameLength
-	dec [hl]
-
-.continue
-	call NamingScreen_GetTextCursorPosition
-	ld c, [hl]
-	pop hl
-.loop
-	ld a, [hli]
-	cp -1 ; end?
-	jmp z, NamingScreen_AdvanceCursor_CheckEndOfString
-	cp c
-	jr z, .done
-	inc hl
-	jr .loop
-
-.done
-	ld a, [hl]
-	jmp NamingScreen_LoadNextCharacter
-
 INCLUDE "data/text/mail_input_chars.asm"
