@@ -199,4 +199,5 @@ SFX:
 	dba Sfx_AbilitySlideout
 	dba Sfx_SweetScent2
 	dba Sfx_CriticalCapture
+	dba Sfx_Thunder_OW
 	assert_table_length NUM_SFX

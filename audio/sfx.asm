@@ -4835,3 +4835,18 @@ Sfx_CriticalCapture:
 	pitch_sweep 0, 0
 	square_note 5, 14, 8, 2016
 	sound_ret
+
+Sfx_Thunder_OW:
+; Polished Crystal's overworld thunder.
+	channel_count 1
+	channel 8, .Ch8
+
+.Ch8:
+	noise_note 10, 8, -7, 80
+	noise_note 15, 8, -7, 81
+	noise_note 8, 8, 2, 81
+	noise_note 6, 8, -7, 82
+	noise_note 6, 8, -7, 83
+	noise_note 8, 8, -7, 84
+	noise_note 15, 8, 2, 84
+	sound_ret

@@ -20,6 +20,12 @@ DEF WEATHER_PAUSED_F          EQU 0
 DEF WEATHER_IGNORE_PLAYER_Y_F EQU 1
 DEF WEATHER_FADE_ACTIVE_F     EQU 2
 DEF WEATHER_SKIPPED_FRAME_F   EQU 3 ; skipped last frame to make room for a step
+DEF WEATHER_LIGHTNING_FADE_F  EQU 4 ; lightning fades BG and OBJ palettes
+DEF WEATHER_LIGHTNING_HOLD_F  EQU 5 ; display the white flash for one frame
+
+; One 25% lightning check each time the 60 fps weather timer wraps.
+DEF RAIN_LIGHTNING_CHECK_FRAME EQU $ff ; about once every 4.3 seconds
+DEF RAIN_LIGHTNING_CHANCE EQU 64 ; 64 / 256 = 25%
 
 ; Reserved in VRAM bank 0
 DEF OVERWORLD_WEATHER_TILE      EQU $6d

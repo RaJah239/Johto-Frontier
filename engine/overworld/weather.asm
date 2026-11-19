@@ -252,6 +252,7 @@ SetCurrentWeather::
 	jmp EnsureWeatherObjectPalette
 
 ClearWeather::
+	call CancelWeatherFade
 	call GetActiveOverworldWeather
 	call nz, ClearWeatherSprites
 .no_particles
@@ -774,6 +775,7 @@ ForEachWeatherSprite:
 ; Rain
 
 DoOverworldRain:
+	call TryRainLightning
 rept 3
 	call ScanForEmptyOAM
 	jr c, .done_spawning
@@ -1250,6 +1252,88 @@ assert SUN_SHIMMER_FRAMES < 1 << SUN_SHIMMER_SKIPPED_F
 assert BANK(wSunShimmerWaterActive) == BANK(wBGPals1)
 assert BANK(wBGPals2) == BANK(wBGPals1)
 
+TryRainLightning:
+; Occasional checks during any rain: 25%, about once every 4.3 seconds.
+	ld a, [wOverworldWeatherTimer]
+	cp RAIN_LIGHTNING_CHECK_FRAME
+	ret nz
+	ld a, [wFieldWeather]
+	cp WEATHER_RAIN
+	ret nz
+	ldh a, [hCGB]
+	and a
+	ret z
+	ld a, [wTextboxFlags]
+	bit OW_WEATHER_OFF_F, a
+	ret nz
+	ld a, [wWeatherFlags]
+	and (1 << WEATHER_PAUSED_F) | (1 << WEATHER_FADE_ACTIVE_F) | (1 << WEATHER_IGNORE_PLAYER_Y_F)
+	ret nz
+	ld a, [wOverworldWeatherCooldown]
+	and a
+	ret nz
+	ld a, [wScriptRunning]
+	and a
+	ret nz
+	call WeatherRandom
+	cp RAIN_LIGHTNING_CHANCE
+	ret nc
+	; fallthrough
+
+RainLightning:
+; Polished Crystal's white flash and thunder, using the existing weather
+; fade. Keep the map's original palettes in wBGPals1/wOBPals1 and only
+; whiten the displayed palettes; no map or sprite palette reload is needed.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals2)
+	ldh [rSVBK], a
+	ld a, $ff
+	ld hl, wBGPals2
+	ld bc, WEATHER_FADE_BUFFER_SIZE
+	call ByteFill
+	ld a, $ff
+	ld hl, wWeatherFadeStartPalettes
+	ld bc, WEATHER_FADE_BUFFER_SIZE
+	call ByteFill
+	pop af
+	ldh [rSVBK], a
+	ld a, WEATHER_FADE_STEPS
+	ld [wWeatherFadeSteps], a
+	xor a
+	ld [wWeatherFadeFrame], a
+	ld hl, wWeatherFlags
+	set WEATHER_FADE_ACTIVE_F, [hl]
+	set WEATHER_LIGHTNING_FADE_F, [hl]
+	set WEATHER_LIGHTNING_HOLD_F, [hl]
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	ld de, SFX_THUNDER_OW
+	jmp PlaySFX
+
+CancelRainLightning:
+; Opening a menu/textbox or changing maps must never leave a white screen.
+	ld hl, wWeatherFlags
+	bit WEATHER_LIGHTNING_FADE_F, [hl]
+	ret z
+	push bc
+	push de
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals1)
+	ldh [rSVBK], a
+	ld hl, wBGPals1
+	ld de, wBGPals2
+	ld bc, WEATHER_FADE_BUFFER_SIZE
+	call CopyBytesInBlocksOfEight
+	pop af
+	ldh [rSVBK], a
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	pop de
+	pop bc
+	ret
+
 SunShimmerFrame:
 	ld a, [wTextboxFlags]
 	bit OW_WEATHER_OFF_F, a
@@ -1574,6 +1658,7 @@ SaveWeatherFadeSource::
 	push bc
 	push de
 	push hl
+	call CancelWeatherFade
 	call GetWeatherTint
 	ld [wPrevPalTintWeather], a
 	ld [wPalTintWeather], a
@@ -1619,6 +1704,8 @@ MapConnWeatherFade::
 	xor a
 	ld [wWeatherFadeFrame], a
 	ld hl, wWeatherFlags
+	res WEATHER_LIGHTNING_FADE_F, [hl]
+	res WEATHER_LIGHTNING_HOLD_F, [hl]
 	set WEATHER_FADE_ACTIVE_F, [hl]
 	; Apply the connected map's OBJ palettes immediately so map sprites
 	; load at once instead of fading in. Only the BG palettes are lerped;
@@ -1638,11 +1725,14 @@ MapConnWeatherFade::
 	ret
 
 CancelWeatherFade::
+	call CancelRainLightning
 	xor a
 	ld [wWeatherFadeSteps], a
 	ld [wWeatherFadeFrame], a
 	ld hl, wWeatherFlags
 	res WEATHER_FADE_ACTIVE_F, [hl]
+	res WEATHER_LIGHTNING_FADE_F, [hl]
+	res WEATHER_LIGHTNING_HOLD_F, [hl]
 	ret
 
 WeatherFadeStep::
@@ -1652,6 +1742,14 @@ WeatherFadeStep::
 	ret nz
 	bit WEATHER_FADE_ACTIVE_F, a
 	ret z
+	bit WEATHER_LIGHTNING_HOLD_F, a
+	jr z, .fade
+	push hl
+	ld hl, wWeatherFlags
+	res WEATHER_LIGHTNING_HOLD_F, [hl]
+	pop hl
+	ret
+.fade
 	ld a, [wWeatherFadeSteps]
 	and a
 	jmp z, .cancel
@@ -1679,6 +1777,9 @@ WeatherFadeStep::
 	ld a, c
 	cp %11 ; last quarter of the step?
 	push af
+	ld a, [wWeatherFlags]
+	and 1 << WEATHER_LIGHTNING_FADE_F
+	ld d, a ; keep the flag across the WRAM bank switch
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wBGPals2)
@@ -1686,7 +1787,11 @@ WeatherFadeStep::
 
 	ld a, c
 	cp 2 ; OBJ quarters are applied instantly, not faded
-	jmp nc, .stepped
+	jr c, .fade_quarter
+	ld a, d
+	and a
+	jmp z, .stepped
+.fade_quarter
 
 	ld a, b
 	dec a
@@ -1826,6 +1931,7 @@ WeatherFadeStep::
 	jr nz, .done
 	ld hl, wWeatherFlags
 	res WEATHER_FADE_ACTIVE_F, [hl]
+	res WEATHER_LIGHTNING_FADE_F, [hl]
 .done
 	pop bc
 	pop de
@@ -1836,6 +1942,8 @@ WeatherFadeStep::
 	push hl
 	ld hl, wWeatherFlags
 	res WEATHER_FADE_ACTIVE_F, [hl]
+	res WEATHER_LIGHTNING_FADE_F, [hl]
+	res WEATHER_LIGHTNING_HOLD_F, [hl]
 	pop hl
 	ret
 
