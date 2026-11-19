@@ -4374,6 +4374,8 @@ DrawEnemyHUD:
 	ld a, [wTextboxFlags]
 	bit DAMAGE_INFO_F, a
 	ret z
+	; SetHPPal's caller still needs e = the bar's pixel length.
+	push de
 	hlcoord 4, 3
 	ld de, wEnemyMonHP
 	lb bc, 2, 3
@@ -4382,7 +4384,9 @@ DrawEnemyHUD:
 	inc hl
 	ld de, wEnemyMonMaxHP
 	lb bc, 2, 3
-	jmp PrintNum
+	call PrintNum
+	pop de
+	ret
 
 UpdateEnemyHPPal:
 	ld hl, wEnemyHPPal
