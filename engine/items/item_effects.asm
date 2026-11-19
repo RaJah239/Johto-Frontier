@@ -290,7 +290,7 @@ IF DEF(_DEBUG)
 	; Hold B after selecting any Pokeball in the white screen
 	; to catch without fail in Debug Mode
 	call GetJoypad
-	ld a, [hJoyDown]
+	ldh a, [hJoyDown]
 	and B_BUTTON
 	cp B_BUTTON
 	jmp z, .catch_without_fail
