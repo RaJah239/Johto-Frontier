@@ -512,8 +512,20 @@ endr
 GetStorageIcon:
 	push hl
 	ld a, [wCurIcon]
+	cp UNOWN
+	jr z, .unown
 	call _LoadOverworldMonIcon
 	ld c, 4
+	jr .not_unown
+
+.unown
+	; storage icons use the Unown form encoded in its DVs
+	; PC only needs one frame of the icon animation
+	ld hl, wBufferMonDVs
+	call GetUnownIcon
+	ld c, 4
+
+.not_unown
 	pop hl
 	farjp BillsPC_SafeGet2bpp
 
