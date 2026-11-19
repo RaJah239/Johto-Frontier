@@ -278,9 +278,6 @@ InitializeVisibleSprites:
 	jr nz, .loop
 	ret
 
-.ret
-	ret
-
 CheckObjectEnteringVisibleRange::
 	ld a, [wPlayerStepDirection]
 	cp STANDING
