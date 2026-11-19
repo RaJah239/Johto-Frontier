@@ -382,7 +382,7 @@ MailboxPC:
 	call LoadMenuHeader
 	call VerticalMenu
 	call ExitMenu
-	jr c, .subexit
+	ret c
 	ld a, [wMenuCursorY]
 	dec a
 	ld hl, .Jumptable
