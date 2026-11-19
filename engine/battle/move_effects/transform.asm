@@ -5,8 +5,7 @@ BattleCommand_Transform:
 	bit SUBSTATUS_TRANSFORMED, [hl]
 	jr nz, .failed
 	farcall CheckHiddenOpponent
-	jr nz, .failed
-	jr .mimic
+	jr z, .mimic
 .failed
 	farjp BattleEffect_ButItFailed
 
