@@ -58,7 +58,7 @@ MomTriesToBuySomething::
 CheckBalance_MomItem2:
 	ld a, [wWhichMomItem]
 	cp NUM_MOM_ITEMS_2
-	jr nc, .nope
+	jr nc, .check_have_2300
 	call GetItemFromMom
 	ld a, [hli]
 	ldh [hMoneyTemp], a
