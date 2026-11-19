@@ -245,13 +245,13 @@ DisplayFoeNameAndAbility:
 ; the whole entry is one page
 	pop de
 	push de
-	hlcoord 1, 7
+	hlcoord 1, 6
 	lb bc, 6, SCREEN_WIDTH - 2
 	call ClearBox
 	pop de
 	inc de
 	pop af
-	hlcoord 1, 7
+	hlcoord 1, 6
 	call PlaceFarString
 
 ; print mon species	

@@ -1053,9 +1053,26 @@ FoeAbilityPageInfoBox:
 	call PlaceString
 
 	ld de, .AbilitiesString
-	hlcoord 1, 5
+	hlcoord 1, 4
 	call PlaceString
 
+	ld de, .TurnCountString
+	hlcoord 1, 13
+	call PlaceString
+	ld a, [wBattleTurnCountOver9999]
+	and a
+	jr nz, .print_max_turn_count
+	ld de, wBattleTurnCount
+	hlcoord 13, 13
+	lb bc, 2, 4
+	call PrintNum
+	jr .turn_count_printed
+
+.print_max_turn_count
+	ld de, .MaxTurnCountString
+	hlcoord 13, 13
+	call PlaceString
+.turn_count_printed
 	ld de, .RemainingString
 	hlcoord 1, 1
 	call PlaceString
@@ -1085,13 +1102,11 @@ FoeAbilityPageInfoBox:
 	dw .5RemainsString
 	dw .6RemainsString
 
-.FoeString:
-	db "Foe:@"
-.RemainingString:
-	db "Foe Count:@"
-.AbilitiesString:
-	db "Ability Info:@"
-
+.FoeString: db "Foe:@"
+.RemainingString: db "Foe Count:@"
+.AbilitiesString: db "Ability Info:@"
+.TurnCountString: db "Turn Count: @"
+.MaxTurnCountString: db "9999<+>@"
 .1RemainsString: db "1@"
 .2RemainsString: db "2@"
 .3RemainsString: db "3@"

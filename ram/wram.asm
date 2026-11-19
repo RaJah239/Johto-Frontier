@@ -430,6 +430,8 @@ wEnemyEvaLevel::  db
 
 wTeamMaxLevel:: db
 
+wBattleTurnCount:: dw ; current battle round, capped at 9999
+wBattleTurnCountOver9999:: db ; display "9999+" once the count exceeds 9999
 wEnemyTurnsTaken::  db
 wPlayerTurnsTaken:: db
 	ds 1

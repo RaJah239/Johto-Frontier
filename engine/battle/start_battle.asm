@@ -146,6 +146,9 @@ ClearBattleRAM:
 	ld [wTimeOfDayPal], a
 	ld [wPlayerTurnsTaken], a
 	ld [wEnemyTurnsTaken], a
+	ld [wBattleTurnCount], a
+	ld [wBattleTurnCount + 1], a
+	ld [wBattleTurnCountOver9999], a
 	ld [wRegeneratorShown], a
 	ld [wEvolvableFlags], a
 

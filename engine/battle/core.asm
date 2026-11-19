@@ -116,6 +116,24 @@ BattleTurn:
 	call CheckContestBattleOver
 	ret c
 
+	ld a, [wBattleTurnCount]
+	cp HIGH(9999)
+	jr c, .increment_turn_count
+	jr nz, .over_9999
+	ld a, [wBattleTurnCount + 1]
+	cp LOW(9999)
+	jr nc, .over_9999
+.increment_turn_count
+	ld hl, wBattleTurnCount + 1
+	inc [hl]
+	jr nz, .counted_turn
+	dec hl
+	inc [hl]
+	jr .counted_turn
+.over_9999
+	ld a, 1
+	ld [wBattleTurnCountOver9999], a
+.counted_turn
 	xor a
 	ld [wPlayerIsSwitching], a
 	ld [wEnemyIsSwitching], a
@@ -179,7 +197,7 @@ BattleTurn:
 	ld a, [wBattleEnded]
 	and a
 	ret nz
-	jr .loop
+	jmp .loop
 
 WildFled_EnemyFled_LinkBattleCanceled:
 	call SafeLoadTempTilemapToTilemap
