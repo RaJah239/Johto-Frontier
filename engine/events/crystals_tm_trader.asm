@@ -374,12 +374,10 @@ endr
 ; instead of blanking the area white.
 	farcall PlazaMoveIcons_Hide
 	hlcoord 0, 11
-	ld b, 5
-	ld c, SCREEN_WIDTH - 2
+	lb bc, 5, SCREEN_WIDTH - 2
 	call Textbox
 	hlcoord 0, 0
-	ld b, 1
-	ld c, 7
+	lb bc, 1, 7
 	call Textbox
 	hlcoord 1, 1
 	ld de, .BagString
@@ -398,8 +396,7 @@ DrawMoveInfoBox::
 ; bottom border; its five interior rows run down to the screen edge,
 ; exactly the bag TM pocket's box.
 	hlcoord 0, 11
-	ld b, 5
-	ld c, SCREEN_WIDTH - 2
+	lb bc, 5, SCREEN_WIDTH - 2
 	call Textbox
 
 ; Labels down the left...
