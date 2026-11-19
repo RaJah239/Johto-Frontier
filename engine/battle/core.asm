@@ -257,7 +257,7 @@ HandleLeftovers:
 	call SetPlayerTurn
 	call .do_it
 	call SetEnemyTurn
-	jp .do_it
+	jr .do_it
 
 .DoEnemyFirst:
 	call SetEnemyTurn
@@ -432,8 +432,7 @@ ParsePlayerAction:
 	call UpdateBattleHuds
 	ld a, [wCurPlayerMove]
 	cp STRUGGLE
-	jr z, .struggle
-	call PlayClickSFX
+	call nz, PlayClickSFX
 
 .struggle
 	ld a, $1
@@ -1049,8 +1048,7 @@ ResidualDamage:
 	call GetOpposingMon
 	ld hl, BadDreamsPokemon
 	call IsInByteArray
-	jr c, .check_if_asleep
-	jr .not_nightmare
+	jr nc, .not_nightmare
 
 .check_if_asleep
 	ld a, BATTLE_VARS_STATUS
@@ -1480,8 +1478,7 @@ UpdateBattleStateAndExperienceAfterEnemyFaint:
 	call BreakAttraction
 	ld a, [wBattleMode]
 	dec a
-	jr z, .wild2
-	jr .trainer
+	jr nz, .trainer
 
 .wild2
 	call StopDangerSound
@@ -1495,8 +1492,7 @@ UpdateBattleStateAndExperienceAfterEnemyFaint:
 	jr nz, .player_mon_did_not_faint
 	ld a, [wWhichMonFaintedFirst]
 	and a
-	jr nz, .player_mon_did_not_faint
-	call UpdateFaintedPlayerMon
+	call z, UpdateFaintedPlayerMon
 
 .player_mon_did_not_faint
 	call CheckPlayerPartyForFitMon
@@ -1742,8 +1738,7 @@ WinTrainerBattle:
 	cp BATTLETYPE_INVERSE
 	jr z, .do_heal
 	cp BATTLETYPE_TRICK_ROOM
-	jr z, .do_heal
-	jr .skip_heal
+	jr nz, .skip_heal
 
 .do_heal
 	predef HealParty
@@ -2462,9 +2457,8 @@ EnemySwitch:
 
 	; Skip ShowBattleTextEnemySentOut text
 	call CheckIntrosOutros
-	jr nz, .skip2
+	call z, ShowSetEnemyMonAndSendOutAnimation
 
-	call ShowSetEnemyMonAndSendOutAnimation
 .skip2
 	pop af
 	ret c
@@ -2493,9 +2487,8 @@ EnemySwitch_SetMode:
 
 	; Skip ShowBattleTextEnemySentOut text
 	call CheckIntrosOutros
-	jr nz, .send_out_animation
+	call z, ShowBattleTextEnemySentOut
 
-	call ShowBattleTextEnemySentOut
 .send_out_animation
 	jmp ShowSetEnemyMonAndSendOutAnimation
 
@@ -2770,8 +2763,7 @@ ReplayEnemyCry:
 
 	farcall CheckBattleScene
 	push af
-	jr c, .skip_frontpic
-	call GetEnemyMonFrontpic
+	call nc, GetEnemyMonFrontpic
 .skip_frontpic
 
 	; start the cry without waiting. it normally sets wsfxpriority to mute
@@ -4466,8 +4458,7 @@ BattleMenu_Pack:
 	callfar CheckItemPocket
 	ld a, [wItemAttributeValue]
 	cp BALL
-	jr z, .ball
-	call ClearBGPalettes
+	call nz, ClearBGPalettes
 
 .ball
 	xor a
@@ -4476,8 +4467,7 @@ BattleMenu_Pack:
 	call ClearSprites
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
-	jr z, .tutorial2
-	call GetBattleMonBackpic
+	call nz, GetBattleMonBackpic
 
 .tutorial2
 	call GetEnemyMonFrontpic
@@ -4678,8 +4668,7 @@ PlayerSwitch:
 	cp BATTLEACTION_SWITCH1
 	jr c, .switch
 	cp BATTLEACTION_FORFEIT
-	jr nz, .dont_run
-	jmp WildFled_EnemyFled_LinkBattleCanceled
+	jmp z, WildFled_EnemyFled_LinkBattleCanceled
 
 .dont_run
 	ldh a, [hSerialConnectionStatus]
@@ -7009,7 +6998,6 @@ CheckOpponentFullHP:
 	and a
 	jr z, DoCheckFullHP
 	ld hl, wBattleMonHP
-	jr DoCheckFullHP
 	
 DoCheckFullHP:
 	ld a, [hli]
