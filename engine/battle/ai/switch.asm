@@ -118,8 +118,7 @@ FindAliveEnemyMons:
 
 	ld d, a
 	ld e, 0
-	ld b, 1 << (PARTY_LENGTH - 1)
-	ld c, 0
+	lb bc, 1 << (PARTY_LENGTH - 1), 0
 	ld hl, wOTPartyMon1HP
 
 .loop
