@@ -149,21 +149,6 @@ BattleBGEffects_IncAnonJumptableIndex:
 
 BattleBGEffect_FlashInverted:
 	ld de, .inverted
-	jr BattleBGEffect_FlashContinue
-
-.inverted
-	dc 3, 2, 1, 0
-	dc 0, 1, 2, 3
-
-BattleBGEffect_FlashWhite:
-	ld de, .white
-	jr BattleBGEffect_FlashContinue
-
-.white
-	dc 3, 2, 1, 0
-	dc 0, 0, 0, 0
-
-BattleBGEffect_FlashContinue:
 ; current timer, flash duration, number of flashes
 	ld a, $1
 	ld [wBattleBGEffectTempID], a ; unused?
@@ -197,6 +182,10 @@ BattleBGEffect_FlashContinue:
 	ld a, [hl]
 	ld [wBGP], a
 	ret
+
+.inverted:
+	dc 3, 2, 1, 0
+	dc 0, 1, 2, 3
 
 BattleBGEffect_WhiteHues:
 	ld de, .Pals
