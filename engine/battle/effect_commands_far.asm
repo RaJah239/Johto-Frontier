@@ -285,7 +285,7 @@ _BattleCommand_CheckHit:
 ; ==========================
 ; === Ability: Hydro Aim ===
 ; ==========================
-	surefire_ability HYDRO_PUMP, HydroAimPokemon
+	surefire_ability HYDRO_PUMP, HydroAimPokemon, SEND_OUT_POPUP_HYDRO_AIM, HydroAimText
 
 ; ============================
 ; === Ability: Stonefall =====

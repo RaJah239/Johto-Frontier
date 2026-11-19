@@ -7,3 +7,5 @@ HydroAimPokemon:
 ;    db MILOTIC
 ;    db GYARADOS
     db -1 ; end
+
+HydroAimText: db "Hydro Aim@"
