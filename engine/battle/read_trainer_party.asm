@@ -1196,19 +1196,6 @@ endr
 .incrementDone
     ret
 
-IncrementMovesToCurrentMon:
-    ld a, b
-.incrementLoop
-    dec a
-    jr z, .incrementDone
-    inc hl
-    inc hl
-    inc hl
-    inc hl
-    jr .incrementLoop
-.incrementDone
-    ret
-
 OverridePlayerParty:
 	call ReadTrainerParty
 	; fallthrough
