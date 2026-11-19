@@ -26,7 +26,6 @@ MainMenu:
 	res GAME_TIMER_COUNTING_F, [hl]
 	call MainMenu_GetWhichMenu
 	ld [wWhichIndexSet], a
-	call MainMenu_PrintCurrentVersion
 	call MainMenu_PrintCurrentTimeAndDay
 	ld hl, .MenuHeader
 	call LoadMenuHeader
@@ -125,6 +124,7 @@ MainMenuJoypadLoop:
 .loop
 	call MainMenu_PrintCurrentTimeAndDay
 	call SetUpMenu
+	call MainMenu_PrintCurrentVersion
 	ld a, [w2DMenuFlags1]
 	set 5, a
 	ld [w2DMenuFlags1], a
