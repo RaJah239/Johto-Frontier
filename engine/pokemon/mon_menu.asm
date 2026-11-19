@@ -795,19 +795,6 @@ MonMenu_Teleport:
 	ld a, $3
 	ret
 
-MonMenu_Surf:
-	farcall SurfFunction
-	ld a, [wFieldMoveSucceeded]
-	and a
-	jr z, .Fail
-	ld b, $4
-	ld a, $2
-	ret
-
-.Fail:
-	ld a, $3
-	ret
-
 MonMenu_Dig:
 	farcall DigFunction
 	ld a, [wFieldMoveSucceeded]
