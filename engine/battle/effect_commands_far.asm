@@ -300,7 +300,7 @@ _BattleCommand_CheckHit:
 ; ===========================
 ; === Ability: Dream Gaze ===
 ; ===========================
-	surefire_ability HYPNOSIS, DreamGazePokemon
+	surefire_ability HYPNOSIS, DreamGazePokemon, SEND_OUT_POPUP_DREAM_GAZE, DreamGazeText
 
 ; ===========================
 ; === Ability: Dream Song ===
