@@ -187,8 +187,7 @@ ReloadBattleStatusIconTiles::
 	ld a, [hli]
 	or [hl]
 	ld a, STATUS_ICON_FNT
-	jr z, .player
-	call GetPlayerStatusIconIndex
+	call nz, GetPlayerStatusIconIndex
 .player
 	ld de, StatusIconGFX
 	call GetStatusIconGFX
@@ -199,8 +198,7 @@ ReloadBattleStatusIconTiles::
 	ld a, [hli]
 	or [hl]
 	ld a, STATUS_ICON_FNT
-	jr z, .enemy
-	call GetEnemyStatusIconIndex
+	call nz, GetEnemyStatusIconIndex
 .enemy
 	ld de, EnemyStatusIconGFX
 	call GetStatusIconGFX
