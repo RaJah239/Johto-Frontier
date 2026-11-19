@@ -531,9 +531,6 @@ MonPalEdit_Joypad:
 	ld h, [hl]
 	ld l, a
 	jp hl
-.toggle
-	jr MonPalEdit_ToggleShiny
-
 .PointerTable:
 	dw DebugColor_SelectColorBox
 	dw DebugColor_ChangeRedValue
