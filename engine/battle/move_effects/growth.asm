@@ -2,7 +2,7 @@ BattleCommand_Growth:
 ; growth
 
 	ld bc, wPlayerStatLevels
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, .go
 	ld bc, wEnemyStatLevels
