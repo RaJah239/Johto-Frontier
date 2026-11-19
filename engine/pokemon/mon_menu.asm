@@ -457,7 +457,7 @@ TryGiveItemToPartymon:
 	call GetItemName
 	ld hl, PokemonAskSwapItemText
 	call StartMenuYesNo
-	jr c, .abort
+	ret c
 
 	call GiveItemToPokemon
 	ld a, [wNamedObjectIndex]
@@ -491,8 +491,7 @@ GivePartyItem:
 	ld [hl], a
 	ld d, a
 	farcall ItemIsMail
-	jr nc, .done
-	call ComposeMailMessage
+	call c, ComposeMailMessage
 
 .done
 	ret
@@ -515,17 +514,15 @@ TakePartyItem:
 	ld [hl], NO_ITEM
 	call GetItemName
 	ld hl, PokemonTookItemText
-	call MenuTextboxBackup
-	jr .done
+	jmp MenuTextboxBackup
 
 .not_holding_item
 	ld hl, PokemonNotHoldingText
-	call MenuTextboxBackup
-	jr .done
+	jmp MenuTextboxBackup
 
 .item_storage_full
 	ld hl, ItemStorageFullText
-	call MenuTextboxBackup
+	jmp MenuTextboxBackup
 
 .done
 	ret
