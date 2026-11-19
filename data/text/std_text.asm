@@ -149,20 +149,6 @@ MagazineBookshelfText:
 	line "#mon Graph…"
 	done
 
-TeamRocketOathText:
-	text "Team Rocket Oath"
-
-	para "Steal #mon for"
-	line "profit!"
-
-	para "Exploit #mon"
-	line "for profit!"
-
-	para "All #mon exist"
-	line "for the glory of"
-	cont "Team Rocket!"
-	done
-
 IncenseBurnerText:
 	text "What is this?"
 
@@ -357,20 +343,6 @@ HappinessText1:
 
 	para "If you aren't"
 	line "nice, it'll pout."
-	done
-
-RegisteredNumber1Text:
-	text "<PLAYER> registered"
-	line "@"
-	text_ram wStringBuffer3
-	text "'s number."
-	done
-
-RegisteredNumber2Text:
-	text "<PLAYER> registered"
-	line "@"
-	text_ram wStringBuffer3
-	text "'s number."
 	done
 
 ChanseyCryText:
