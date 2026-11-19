@@ -302,10 +302,6 @@ CopyMenuHeader::
 	ld [wMenuDataBank], a
 	ret
 
-StoreMenuCursorPosition::
-	ld [wMenuCursorPosition], a
-	ret
-
 MenuTextbox::
 	push hl
 	call LoadMenuTextbox
