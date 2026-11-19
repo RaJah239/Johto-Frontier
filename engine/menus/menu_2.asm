@@ -54,7 +54,7 @@ PlaceItemInBagQuantity:
 
 	ld a, [wMenuSelection]
 	cp -1
-	jr z, .no_selection
+	jr z, ClearItemInBagQuantitysBox
 
 	hlcoord 5, 1
 	ld [hl], "×"
