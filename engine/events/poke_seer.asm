@@ -29,7 +29,7 @@ PokeSeer:
 	jr z, .egg
 
 	call IsAPokemon
-	jr c, .no_mon
+	ret c
 
 	call ReadCaughtData
 	jr SeerAction
