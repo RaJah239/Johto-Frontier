@@ -442,7 +442,7 @@ PlaceGenderedPlayerName::
 	ld de, KunSuffixText
 	jr z, PlaceCommandCharacter
 	ld de, ChanSuffixText
-	jr PlaceCommandCharacter
+	; fallthrough
 
 PlaceCommandCharacter::
 	call PlaceString
