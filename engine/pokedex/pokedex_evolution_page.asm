@@ -388,8 +388,7 @@ EVO_inchlcoord:
 	ld a, [wPokedexEvoStage3]
 	ld l, a
 	push hl
-	ld b, 0
-	ld c, SCREEN_WIDTH
+	lb bc, 0, SCREEN_WIDTH
 	add hl, bc
 	ld a, h
 	ld [wPokedexEvoStage2], a
@@ -849,8 +848,7 @@ EVO_type2_gethlcoord:
 	call EVO_gethlcoord
 	lb bc, 0, 11
 	add hl, bc
-	ld b, 0
-	ld c, SCREEN_WIDTH
+	lb bc, 0, SCREEN_WIDTH
 	add hl, bc
 	dec hl
 	pop af
