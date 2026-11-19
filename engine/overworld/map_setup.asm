@@ -165,8 +165,7 @@ HandleMapDefaultWeather:
 	cp ROUTE
 	jr z, .outdoor_music
 	cp TOWN
-	jr z, .outdoor_music
-	ret
+	ret nz
 
 .outdoor_music
 ; Check if this is a different outdoor map than last time.
@@ -177,7 +176,7 @@ HandleMapDefaultWeather:
 	ld a, [wMapNumber]
 	ld hl, wLastMusicMapNumber
 	cp [hl]
-	jr z, .same_outdoor_map
+	ret z
 
 .new_outdoor_map
 ; New outdoor map: update tracking, get its default music,
@@ -305,8 +304,7 @@ CheckUpdatePlayerSprite:
 	cp ENVIRONMENT_5
 	jr z, .no_biking
 	cp DUNGEON
-	jr z, .no_biking
-	jr .nope
+	jr nz, .nope
 .no_biking
 	ld a, [wPlayerState]
 	cp PLAYER_BIKE
