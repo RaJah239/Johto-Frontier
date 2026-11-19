@@ -326,7 +326,7 @@ Pokedex_EggG_SetUp:
 	pop bc
 	ld a, b
 	cp c
-	jr z, .EggGroups_DONE
+	ret z
 ;;; Print second egg group
 	hlcoord 2, 11
 	ld de, .BS_Egg_text2
@@ -350,59 +350,59 @@ Pokedex_Get_EggGroup:
 	ld a, b
 	ld de, .EggG_Monster_text
 	cp EGG_MONSTER
-	jr z, .Eggret
+	ret z
 	ld a, b
 	ld de, .EggG_Amphibian_text
 	cp EGG_WATER_1
-	jr z, .Eggret
+	ret z
 	ld a, b
 	ld de, .EggG_Bug_text
 	cp EGG_BUG
-	jr z, .Eggret
+	ret z
 	ld a, b
 	ld de, .EggG_Flying_text
 	cp EGG_FLYING
-	jr z, .Eggret
+	ret z
 	ld a, b
 	ld de, .EggG_Field_text
 	cp EGG_GROUND
-	jr z, .Eggret
+	ret z
 	ld a, b
 	ld de, .EggG_Fairy_text
 	cp EGG_FAIRY
-	jr z, .Eggret
+	ret z
 	ld a, b
 	ld de, .EggG_Grass_text
 	cp EGG_PLANT
-	jr z, .Eggret
+	ret z
 	ld a, b
 	ld de, .EggG_HumanLike_text
 	cp EGG_HUMANSHAPE
-	jr z, .Eggret
+	ret z
 	ld a, b
 	ld de, .EggG_Invertebrate_text
 	cp EGG_WATER_3
-	jr z, .Eggret
+	ret z
 	ld a, b
 	ld de, .EggG_Mineral_text
 	cp EGG_MINERAL
-	jr z, .Eggret
+	ret z
 	ld a, b
 	ld de, .EggG_Amorphous_text
 	cp EGG_INDETERMINATE
-	jr z, .Eggret
+	ret z
 	ld a, b
 	ld de, .EggG_Fish_text
 	cp EGG_WATER_2
-	jr z, .Eggret
+	ret z
 	ld a, b
 	ld de, .EggG_Dragon_text
 	cp EGG_DRAGON
-	jr z, .Eggret
+	ret z
 	ld a, b
 	ld de, .EggG_Ditto_text
 	cp EGG_DITTO
-	jr z, .Eggret
+	ret z
 	ld de, DexEntry_NONE_text
 .Eggret
 	ret
