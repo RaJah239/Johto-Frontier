@@ -121,10 +121,18 @@ MainMenu_GetWhichMenu:
 	ret
 
 MainMenuJoypadLoop:
-.loop
-	call MainMenu_PrintCurrentTimeAndDay
 	call SetUpMenu
 	call MainMenu_PrintCurrentVersion
+.loop
+	ld a, [wSaveFileExists]
+	and a
+	jr z, .get_joypad
+	call CheckRTCStatus
+	and $80
+	jr nz, .get_joypad
+	call MainMenu_PrintCurrentTimeAndDay
+
+.get_joypad
 	ld a, [w2DMenuFlags1]
 	set 5, a
 	ld [w2DMenuFlags1], a
