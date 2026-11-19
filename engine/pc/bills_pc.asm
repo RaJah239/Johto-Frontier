@@ -1202,12 +1202,6 @@ SetBoxTheme:
 	ld [hl], a
 	jmp CloseSRAM
 
-GetCurBoxName:
-; Writes name of current box to string buffer 1.
-	ld a, [wCurBox]
-	inc a
-	ld b, a
-	; fallthrough
 GetBoxName:
 ; Writes name of box b to string buffer 1.
 	ld c, 0
