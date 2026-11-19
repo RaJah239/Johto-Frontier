@@ -37,6 +37,7 @@ DoTurn:
 ; === Ability popups when a move is used ===
 ; ==========================================
 	call TypeSyncMessage
+	farcall MoveUseAbilityPopups ; engine/abilities/send_out_popup.asm
 	call DoMove
 	; Magic Bounce: the bouncing mon gets its own move back
 	farjp MagicBounceEnd ; engine/abilities/magic_bounce.asm

@@ -2,7 +2,7 @@
 ; === Once-per-send-out ability popup ===
 ; ======================================
 ; Some abilities slide in their popup the first time they do something,
-; once each time their mon is sent out (passive abilities, which only
+; once each time their mon is sent out (most passive abilities, which only
 ; change numbers, show none). Every such popup has a
 ; SEND_OUT_POPUP_* number (constants/battle_constants.asm) and a flag per
 ; side in wSendOutPopupsShown: the player's SEND_OUT_POPUP_BYTES bytes,
@@ -13,6 +13,32 @@
 ; or, when the ability belongs to the mon that isn't acting, with that
 ; side's ABILITY_POPUP_PLAYER / ABILITY_POPUP_ENEMY in a:
 ;	ShowOncePerSendOutPopupOnSide SEND_OUT_POPUP_<NAME>, <NameText>
+; For an ability that only needs its species checked when a move is used
+; (like Prankster), call a routine from MoveUseAbilityPopups
+; that returns when the move doesn't apply, and otherwise does
+;	ld hl, <SpeciesList>
+;	ld de, <NameText> ; in this section
+;	ld c, SEND_OUT_POPUP_<NAME>
+;	jr SendOutAbilityPopup
+
+MoveUseAbilityPopups::
+; Called when the user (hBattleTurn) uses a move, before it takes effect.
+	jmp PranksterPopup
+
+SendOutAbilityPopup:
+; If the user's species is in list hl, show popup c with name de (in this
+; bank) once per send-out.
+	push bc
+	push de
+	push hl
+	call GetCurrentMon ; a = species
+	pop hl
+	call IsInByteArray
+	pop de
+	pop bc
+	ret nc
+	ld b, BANK(@)
+	; fallthrough
 
 _ShowOncePerSendOutPopup::
 ; Show popup c (SEND_OUT_POPUP_*) with name b:de over the acting side's
