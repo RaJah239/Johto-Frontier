@@ -519,7 +519,7 @@ MonPalEdit_Joypad:
 	jr nz, MonPalEditMain.exit
 	ldh a, [hJoyLast]
 	and A_BUTTON
-	jr nz, .toggle
+	jr nz, MonPalEdit_ToggleShiny
 	ld a, [wDebugColorRGBJumptableIndex]
 	maskbits 4
 	ld e, a
