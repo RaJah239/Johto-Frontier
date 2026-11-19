@@ -51,8 +51,7 @@ MonMenuLoop:
 	bit A_BUTTON_F, a
 	jr nz, .select
 	bit B_BUTTON_F, a
-	jr nz, .cancel
-	jr .loop
+	jr z, .loop
 
 .cancel
 	ld a, MONMENUITEM_CANCEL
@@ -154,7 +153,7 @@ GetMonSubmenuItems:
 .skip2
 	ld a, [wMonSubmenuCount]
 	cp NUM_MONMENU_ITEMS
-	jr z, .ok2
+	jr z, TerminateMonSubmenu
 	ld a, MONMENUITEM_CANCEL
 	call AddMonMenuItem
 
@@ -310,8 +309,7 @@ CheckLvlUpMoves:
 	jr z, .notfound ; end of mon's lvl up learnset
 	call MonSubMenu_GetNextEvoAttackByte
 	cp d ;MAKE SURE NOT CLOBBERED
-	jr z, .found
-	jr .find_move
+	jr nz, .find_move
 .found
 	xor a
 	ret z ; move is in lvl up learnset
