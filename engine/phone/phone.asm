@@ -90,19 +90,6 @@ GetRemainingSpaceInPhoneList:
 
 INCLUDE "data/phone/permanent_numbers.asm"
 
-BrokenPlaceFarString:
-; This routine is not in bank 0 and will fail or crash if called.
-	ldh a, [hROMBank]
-	push af
-	ld a, b
-	rst Bankswitch
-
-	call PlaceString
-
-	pop af
-	rst Bankswitch
-	ret
-
 CheckPhoneCall::
 ; Check if the phone is ringing in the overworld.
 
@@ -553,8 +540,7 @@ Phone_TextboxWithName:
 
 Phone_CallerTextbox:
 	hlcoord 0, 0
-	ld b, 2
-	ld c, SCREEN_WIDTH - 2
+	lb bc, 2, SCREEN_WIDTH - 2
 	jmp Textbox
 
 GetCallerClassAndName:
