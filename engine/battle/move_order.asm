@@ -253,8 +253,7 @@ DetermineMoveOrder:
 	cp 33 percent + 1
 	jr c, .continue ; 1/3 chance
 
-	ld b, BANK(QuickDrawAbilityText)
-	ld c, ABILITY_POPUP_ENEMY
+	lb bc, BANK(QuickDrawAbilityText), ABILITY_POPUP_ENEMY
 	ld de, QuickDrawAbilityText
 	farcall ShowAbilityPopup
 	jr c, .continue ; suppressed by Neutralizing Gas
@@ -283,8 +282,7 @@ DetermineMoveOrder:
 	cp 33 percent + 1
 	jr c, .continue ; 1/3 chance
 
-	ld b, BANK(QuickDrawAbilityText)
-	ld c, ABILITY_POPUP_PLAYER
+	lb bc, BANK(QuickDrawAbilityText), ABILITY_POPUP_PLAYER
 	ld de, QuickDrawAbilityText
 	farcall ShowAbilityPopup
 	jr c, .continue ; suppressed by Neutralizing Gas
