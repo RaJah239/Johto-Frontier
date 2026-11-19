@@ -21,7 +21,6 @@ StdScripts::
 	add_stdscript StrengthBoulderScript
 	add_stdscript ElevatorButtonScript
 	add_stdscript TrashCanScript
-	add_stdscript TeamRocketOathScript
 	add_stdscript IncenseBurnerScript
 	add_stdscript MerchandiseShelfScript
 	add_stdscript TownMapScript
@@ -30,21 +29,6 @@ StdScripts::
 	add_stdscript DayToTextScript
 	add_stdscript BugContestResultsWarpScript
 	add_stdscript BugContestResultsScript
-	add_stdscript AskNumberMScript
-	add_stdscript RegisteredNumberMScript
-	add_stdscript NumberAcceptedMScript
-	add_stdscript NumberDeclinedMScript
-	add_stdscript RematchMScript
-	add_stdscript GiftMScript
-	add_stdscript PackFullMScript
-	add_stdscript AskNumberFScript
-	add_stdscript RegisteredNumberFScript
-	add_stdscript NumberAcceptedFScript
-	add_stdscript NumberDeclinedFScript
-	add_stdscript RematchFScript
-	add_stdscript GiftFScript
-	add_stdscript PackFullFScript
-	add_stdscript RematchGiftFScript
 	add_stdscript GymStatue1Script
 	add_stdscript GymStatue2Script
 	add_stdscript ReceiveItemScript
@@ -354,9 +338,6 @@ PictureBookshelfScript:
 MagazineBookshelfScript:
 	farjumptext MagazineBookshelfText
 
-TeamRocketOathScript:
-	farjumptext TeamRocketOathText
-
 IncenseBurnerScript:
 	farjumptext IncenseBurnerText
 
@@ -650,72 +631,6 @@ BugContestResults_CopyContestantsToResults:
 	iftrue .skip10
 	clearevent EVENT_BUG_CATCHING_CONTESTANT_10B
 .skip10
-	end
-
-AskNumberMScript:
-	readvar VAR_CALLERID
-	end
-
-RegisteredNumberMScript:
-	farwritetext RegisteredNumber1Text
-	playsound SFX_REGISTER_PHONE_NUMBER
-	waitsfx
-	promptbutton
-	end
-
-NumberAcceptedMScript:
-	readvar VAR_CALLERID
-	end
-
-NumberDeclinedMScript:
-	readvar VAR_CALLERID
-	end
-
-RematchMScript:
-	readvar VAR_CALLERID
-	end
-
-GiftMScript:
-	readvar VAR_CALLERID
-	end
-
-PackFullMScript:
-	readvar VAR_CALLERID
-	end
-
-AskNumberFScript:
-	readvar VAR_CALLERID
-	end
-
-RegisteredNumberFScript:
-	farwritetext RegisteredNumber2Text
-	playsound SFX_REGISTER_PHONE_NUMBER
-	waitsfx
-	promptbutton
-	end
-
-NumberAcceptedFScript:
-	readvar VAR_CALLERID
-	end
-
-NumberDeclinedFScript:
-	readvar VAR_CALLERID
-	end
-
-RematchFScript:
-	readvar VAR_CALLERID
-	end
-
-GiftFScript:
-	readvar VAR_CALLERID
-	end
-
-PackFullFScript:
-	readvar VAR_CALLERID
-	end
-
-RematchGiftFScript:
-	readvar VAR_CALLERID
 	end
 
 GymStatue1Script:
