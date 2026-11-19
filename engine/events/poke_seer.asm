@@ -38,9 +38,6 @@ PokeSeer:
 	ld a, SEER_CANCEL
 	jmp PrintSeerText
 
-.no_mon
-	ret
-
 .egg
 	ld a, SEER_EGG
 	jmp PrintSeerText
