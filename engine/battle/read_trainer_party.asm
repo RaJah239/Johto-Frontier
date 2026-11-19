@@ -126,10 +126,6 @@ ApplyScaledTrainerParty:
 	inc hl
 	jr .find_bracket
 
-.select_current
-	; hl already points at the chosen bracket entry.
-	jr .read_entry
-
 .use_last_bracket
 	; No bracket matched, so use the last one that passed.
 	ld a, b
@@ -1191,9 +1187,6 @@ rept 48
     inc hl
 endr
     jr .incrementLoop
-.incrementDone
-    ret
-
 OverridePlayerParty:
 	call ReadTrainerParty
 	; fallthrough
