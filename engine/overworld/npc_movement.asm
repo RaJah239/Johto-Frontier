@@ -269,8 +269,8 @@ WillObjectBumpIntoSomeoneElse:
 	ld hl, OBJECT_MAP_X
 	add hl, bc
 	ld d, [hl]
-	ld hl, OBJECT_MAP_Y
-	add hl, bc
+	assert OBJECT_MAP_Y == OBJECT_MAP_X + 1
+	inc hl
 	ld e, [hl]
 	; fallthrough
 
@@ -279,7 +279,9 @@ IsNPCAtCoord:
 	xor a
 .loop
 	ldh [hObjectStructIndex], a
-	call DoesObjectHaveASprite
+	assert OBJECT_SPRITE == 0
+	ld a, [bc]
+	and a
 	jr z, .next
 
 	ld hl, OBJECT_FLAGS1
@@ -301,8 +303,7 @@ IsNPCAtCoord:
 	ld a, [hl]
 	cp d
 	jr nz, .check_current_coords
-	ld hl, OBJECT_MAP_Y
-	add hl, bc
+	inc hl ; OBJECT_MAP_Y
 	ld a, [hl]
 	cp e
 	jr nz, .check_current_coords
@@ -320,8 +321,8 @@ IsNPCAtCoord:
 	ld a, [hl]
 	cp d
 	jr nz, .next
-	ld hl, OBJECT_LAST_MAP_Y
-	add hl, bc
+	assert OBJECT_LAST_MAP_Y == OBJECT_LAST_MAP_X + 1
+	inc hl
 	ld a, [hl]
 	cp e
 	jr nz, .next
