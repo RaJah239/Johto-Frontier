@@ -67,6 +67,43 @@ ResetDamage::
 	ld [wCurDamage + 1], a
 	ret
 
+GetDrainHealingAmount::
+; a = move, bc = damage dealt. Return bc = healing, rounded down (at least
+; 1 HP): Drain Kiss heals 3/4, other draining moves heal 1/2. Preserves de, hl.
+	cp DRAIN_KISS
+	jr z, .three_quarters
+	srl b
+	rr c
+	jr .at_least_one
+
+.three_quarters
+; floor(3 * damage / 4) = damage - ceil(damage / 4), without overflow.
+	push de
+	ld d, b
+	ld e, c
+	srl b
+	rr c
+	srl b
+	rr c
+	ld a, e
+	and 3
+	jr z, .subtract_quarter
+	inc bc
+.subtract_quarter
+	ld a, e
+	sub c
+	ld c, a
+	ld a, d
+	sbc b
+	ld b, a
+	pop de
+.at_least_one
+	ld a, b
+	or c
+	ret nz
+	inc c
+	ret
+
 SetPlayerTurn::
 	xor a
 	ldh [hBattleTurn], a

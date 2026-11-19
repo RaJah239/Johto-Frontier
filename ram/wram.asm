@@ -560,7 +560,7 @@ wMSimLastDealt:: db    ; the share the last simulated switch-in takes off
 ; move choice by simulation (AI_SimMoveChoice)
 wMSimT1Kind:: db       ; the enemy's forced first-turn move: MSIM_T1_*
 wMSimT1Dmg:: dw        ; its damage (big-endian)
-wMSimT1Effect:: db     ; the MSIM_INF_* status it inflicts
+wMSimT1Effect:: db     ; MSIM_INF_* status, or a forced attack's draining move (0: none)
 wMSimInflict:: db      ; MSIM_INF_* statuses inflicted on the player's mon
 wMSimBestKey:: db      ; best winning move's key
 wMSimBestMask:: db     ; the moves with that key (bit = slot)
@@ -3422,6 +3422,10 @@ SECTION "AI Matchup Items", WRAM0
 
 wMSimFlags6:: db ; the matchup sim's held items: Berry, Harvest, Unburden, Focus Sash
 
+SECTION "AI Matchup Drain", WRAM0
+
+wMSimDrainRates:: db ; MSIM_*_DRAIN_KISS_F: best hits' 3/4 healing rates
+
 SECTION "AI Teleport Plan", WRAM0
 
 wAITeleportPlan:: db ; AI_TELEPORT_PLAN_*: this turn's switch decision
@@ -3433,7 +3437,7 @@ wMSimSavedStruct:: ds 32 ; wEnemyMonSpecies .. wEnemyMonStructEnd
 wMSimSavedStats:: ds NUM_BATTLE_STATS * 2
 wMSimSavedLevels:: ds 7
 wMSimSavedSubStatus:: ds 5
-wMSimSavedDmg:: ds 9 ; AI_SimMoveChoice: wMSimEnemyDmg .. wMSimPlayerPrioDmg, wMSimFlags
+wMSimSavedDmg:: ds 10 ; AI_SimMoveChoice: wMSimEnemyDmg .. wMSimPlayerPrioDmg, wMSimFlags, wMSimDrainRates
 wMSimSavedGWDmg:: ds 4 ; and wMSimEnemyGWDmg, wMSimPlayerGWDmg
 
 

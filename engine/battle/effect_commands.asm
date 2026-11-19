@@ -3780,20 +3780,18 @@ BattleCommand_EatDream:
 	jmp StdBattleTextbox
 
 SapHealth:
-	; Divide damage by 2, store it in hDividend
+	; Calculate this move's drain recovery, store it in hDividend.
 	ld hl, wCurDamage
 	ld a, [hli]
-	srl a
-	ldh [hDividend], a
 	ld b, a
-	ld a, [hl]
-	rr a
+	ld c, [hl]
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	call GetDrainHealingAmount
+	ld a, b
+	ldh [hDividend], a
+	ld a, c
 	ldh [hDividend + 1], a
-	or b
-	jr nz, .at_least_one
-	ld a, 1
-	ldh [hDividend + 1], a
-.at_least_one
 
 	ld hl, wBattleMonHP
 	ld de, wBattleMonMaxHP

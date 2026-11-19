@@ -795,9 +795,12 @@ FreezeDryDescription:
 	db   "Strong vs Water."
 	line "May frostbite foe.@"
 
+DrainKissDescription:
+	db   "Steals 3/4 of the"
+	line "damage inflicted.@"
+
 DrainPunchDescription:
 LeechLifeDescription:
-DrainKissDescription:
 AbsorbDescription:
 MegaDrainDescription:
 GigaDrainDescription:

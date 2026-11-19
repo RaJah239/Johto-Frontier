@@ -18,7 +18,7 @@
 ;   Light by weather, Rest: full HP + sleep, cures status), used when the
 ;   mon can't KO this turn, the other side's best hit would KO it, and the
 ;   heal is bigger than that hit;
-; - draining moves (the best move heals half the damage it deals);
+; - draining moves (the best move heals half its damage, Drain Kiss: 3/4);
 ; - sleep (turns from the status counter, as CheckEnemyTurn counts them);
 ; - after each side acts: poison / burn / frostbite 1/16, bad poison n/16,
 ;   Leech Seed 1/8 (to the other side), Curse 1/4; Magic Guard ignores them;
@@ -91,6 +91,10 @@ DEF MSIM_E_UNBURDEN_F     EQU 4 ; Unburden: +1 Speed each time it loses its item
 DEF MSIM_P_UNBURDEN_F     EQU 5
 DEF MSIM_E_SASH_F         EQU 6 ; it holds a Focus Sash (never used up)
 DEF MSIM_P_SASH_F         EQU 7
+
+; wMSimDrainRates: each side's best move heals 3/4 rather than 1/2.
+DEF MSIM_E_DRAIN_KISS_F   EQU MSIM_E_BEST_DRAIN_F
+DEF MSIM_P_DRAIN_KISS_F   EQU MSIM_P_BEST_DRAIN_F
 
 DEF MSIM_SIDE_ENEMY  EQU 0
 DEF MSIM_SIDE_PLAYER EQU 1
@@ -914,6 +918,10 @@ MSim_ComputeDamages:
 	res MSIM_E_BEST_PRIO_F, [hl]
 	res MSIM_P_BEST_PRIO_F, [hl]
 	res MSIM_E_FASTER_F, [hl]
+	res MSIM_E_BEST_DRAIN_F, [hl]
+	res MSIM_P_BEST_DRAIN_F, [hl]
+	xor a
+	ld [wMSimDrainRates], a
 
 	; enemy moves
 	ld de, wEnemyMonMoves
@@ -1100,6 +1108,14 @@ MSim_EnemyMoveDamage:
 	ld [wMSimT1Dmg], a
 	ld a, [wCurDamage + 1]
 	ld [wMSimT1Dmg + 1], a
+	; A forced drain move may differ from the side's strongest move.
+	ld a, [wMSimFlags3]
+	bit MSIM_MOVE_DRAINS_F, a
+	ld a, NO_MOVE
+	jr z, .save_drain_move
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+.save_drain_move
+	ld [wMSimT1Effect], a
 	ret
 .none
 	ret
@@ -1284,6 +1300,21 @@ MSim_KeepBest:
 	jr nz, .drains
 	ccf
 .drains
+	ld a, [wMSimSide]
+	call MSim_SetFlagCarry
+	; Keep Drain Kiss's 3/4 rate with the chosen best hit on either side.
+	ld a, [wMSimSide]
+	cp MSIM_E_BEST_DRAIN_F
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	jr z, .got_drain_move
+	ld a, [wPlayerMoveStruct + MOVE_ANIM]
+.got_drain_move
+	cp DRAIN_KISS
+	scf
+	jr z, .set_drain_rate
+	ccf
+.set_drain_rate
+	ld hl, wMSimDrainRates
 	ld a, [wMSimSide]
 	call MSim_SetFlagCarry
 	pop hl
@@ -2101,7 +2132,20 @@ MSim_\1Acts:
 	call MSim_ApplyInflict
 	pop bc
 	ENDC
-	; its strongest move drains: heal half the damage
+	IF !STRCMP("\1", "Enemy")
+	; A forced first-turn attack uses that move's drain rate.
+	ld a, [wMSimT1Kind]
+	and $7f
+	jr z, .best_drain
+	cp MSIM_T1_DAMAGE
+	jr nz, .residual
+	ld a, [wMSimT1Effect]
+	and a
+	jr z, .residual
+	jr .drain_amount
+.best_drain
+	ENDC
+	; its strongest move drains: heal the move's share of the damage
 	ld a, [wMSimFlags]
 	bit MSIM_\3_BEST_DRAIN_F, a
 	jr z, .residual
@@ -2111,13 +2155,13 @@ MSim_\1Acts:
 	cp 1 << MSIM_\3_PRIO_THIS_F | 1 << MSIM_\3_BEST_PRIO_F
 	jr nz, .residual
 .drain
-	srl b
-	rr c
-	ld a, b
-	or c
-	jr nz, .drain_heal
-	inc c
-.drain_heal
+	ld a, [wMSimDrainRates]
+	bit MSIM_\3_DRAIN_KISS_F, a
+	ld a, NO_MOVE
+	jr z, .drain_amount
+	ld a, DRAIN_KISS
+.drain_amount
+	call GetDrainHealingAmount
 	call MSim_Heal\1
 .residual
 	jmp MSim_\1Residual
@@ -3599,6 +3643,10 @@ AI_SimMoveChoice:
 	ld de, wMSimSavedDmg + 8
 	ld c, 1
 	call MSim_ToSaveBank
+	ld hl, wMSimDrainRates
+	ld de, wMSimSavedDmg + 9
+	ld c, 1
+	call MSim_ToSaveBank
 	ld hl, wMSimEnemyGWDmg
 	ld de, wMSimSavedGWDmg
 	ld c, 4
@@ -4213,6 +4261,10 @@ MSim_ResetActive:
 	call MSim_FromSaveBank
 	ld hl, wMSimSavedDmg + 8
 	ld de, wMSimFlags
+	ld c, 1
+	call MSim_FromSaveBank
+	ld hl, wMSimSavedDmg + 9
+	ld de, wMSimDrainRates
 	ld c, 1
 	call MSim_FromSaveBank
 	ld hl, wMSimSavedGWDmg

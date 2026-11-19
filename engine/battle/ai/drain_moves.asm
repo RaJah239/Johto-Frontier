@@ -1,14 +1,15 @@
 ; Draining moves (Absorb, Mega Drain, Giga Drain, Drain Punch, Drain Kiss,
 ; Leech Life, Aeroblast, Sacred Fire; Dream Eater while the player's mon is
-; asleep) give back half the damage they deal. AI_PreferDrainMoves makes
+; asleep) give back half the damage they deal (Drain Kiss: 3/4).
+; AI_PreferDrainMoves makes
 ; the AI use them when that helps it:
 ; 1. Finish with a drain move: the enemy is at half HP or less, moves first
 ;    (faster, or the drain move has priority) and the drain move KOs the
 ;    player's mon even at its lowest roll -> that move becomes the clear pick
 ;    (it gets HP back on the way out).
 ; 2. Drain to win: the enemy would lose the normal 1-on-1 (GetDamageRaceHits),
-;    but wins it by using the drain move every turn and healing half the
-;    damage each time -> the drain move is strongly encouraged.
+;    but wins it by using the drain move every turn and healing its share
+;    of the damage each time -> the drain move is strongly encouraged.
 ; 3. Dream Eater on a sleeping target: it has priority, so it lands before the
 ;    sleeping mon's turn every turn, including the turn it wakes up (sleep
 ;    counter = remaining hits). If those hits KO, the enemy wins without
@@ -421,7 +422,7 @@ AIDrain_KOs:
 
 AIDrain_WinsRace:
 ; Play out the 1-on-1 with the enemy using its drain move (wAIDrainHit,
-; lowest roll) every turn and healing half the damage dealt, against the
+; lowest roll) every turn and healing its share of the damage, against the
 ; player's best hit (wAIDrainPlayerHit, highest roll). Turn order from
 ; AI_DRAIN_FASTER_F. Return carry if the enemy wins.
 	ld a, [wEnemyMonHP]
@@ -478,8 +479,8 @@ AIDrain_WinsRace:
 	jr .subtract
 
 .enemy_hits
-; Return carry if the player's mon faints; otherwise heal the enemy by half
-; the damage (at least 1, up to its max HP).
+; Return carry if the player's mon faints; otherwise heal the enemy by the
+; move's share of the damage (at least 1, up to its max HP).
 	ld a, [wAIDrainHit]
 	ld b, a
 	ld a, [wAIDrainHit + 1]
@@ -487,13 +488,8 @@ AIDrain_WinsRace:
 	ld hl, wAIDrainSimPlayerHP
 	call .subtract
 	ret c
-	srl b
-	rr c
-	ld a, b
-	or c
-	jr nz, .heal
-	inc c
-.heal
+	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+	call GetDrainHealingAmount
 	ld hl, wAIDrainSimEnemyHP + 1
 	ld a, [hld]
 	add c
