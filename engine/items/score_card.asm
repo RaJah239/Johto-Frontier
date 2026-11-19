@@ -289,8 +289,7 @@ PrintScoreWithCommas:
 .next_digit
 	pop hl
 	ld a, c
-	ld [hl], a
-	inc hl
+	ld [hli], a
 	pop bc
 	dec b
 	jr nz, .split_loop
