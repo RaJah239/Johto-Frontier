@@ -124,9 +124,6 @@ OWCutAnimation:
 	call DelayFrame
 	jr .loop
 
-.finish
-	ret
-
 .LoadCutGFX:
 	callfar ClearSpriteAnims ; pointless to farcall
 	ld de, CutGrassGFX
