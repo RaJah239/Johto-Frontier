@@ -28,8 +28,7 @@ BattleCommand_HealBell:
 
 	ldh a, [hBattleTurn]
 	and a
-	jr z, .player
-	jr .enemy
+	jr nz, .enemy
 
 .player:
 	farjp CalcPlayerStats
