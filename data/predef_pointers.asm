@@ -15,22 +15,15 @@ PredefPointers::
 	add_predef TryAddMonToParty
 	add_predef AddTempmonToParty
 	add_predef SendMonIntoBox
-	add_predef GiveEgg
 	add_predef AnimateHPBar
 	add_predef CalcMonStats
-	add_predef CalcMonStatC
 	add_predef CanLearnTMHMMove
 	add_predef GetTMHMMove
 	add_predef LinkTextboxAtHL
 	add_predef PrintMoveDescription
-	add_predef UpdatePlayerHUD
 	add_predef PlaceGraphic
-	add_predef CheckPlayerPartyForFitMon
-	add_predef UpdateEnemyHUD
 	add_predef StartBattle
 	add_predef FillInExpBar
-	add_predef GetBattleMonBackpic
-	add_predef GetEnemyMonFrontpic
 	add_predef LearnLevelMoves
 	add_predef FillMoves
 	add_predef EvolveAfterBattle
@@ -38,17 +31,11 @@ PredefPointers::
 	add_predef TradeAnimation
 	add_predef CopyMonToTempMon
 	add_predef ListMoves
-	add_predef PlaceNonFaintStatus
 	add_predef ListMovePP
 	add_predef GetGender
 	add_predef StatsScreenInit
 	add_predef DrawPlayerHP
-	add_predef DrawEnemyHP
 	add_predef PrintTempMonStats
-	add_predef GetTypeName
-	add_predef PrintMoveType
-	add_predef PrintBattleMoveType
-	add_predef PrintType
 	add_predef PrintMonTypes
 	add_predef GetUnownLetter
 	add_predef LoadPoisonBGPals
@@ -61,7 +48,6 @@ PredefPointers::
 	add_predef GetMonFrontpic
 	add_predef GetMonBackpic
 	add_predef GetAnimatedFrontpic
-	add_predef GetTrainerPic
 	add_predef DecompressGet2bpp
 	add_predef CheckTypeMatchup
 
