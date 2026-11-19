@@ -982,9 +982,8 @@ BattleCommand_Stab:
 	cp b
 	jr z, .stab
 	cp c
-	jr z, .stab
+	jr nz, .SkipStab
 
-	jr .SkipStab
 
 .stab
 ; ==========================
@@ -1332,8 +1331,7 @@ BattleCommand_EffectChance:
 	pop hl
 	pop de
 	pop bc
-	jr c, .blessing
-	jr .finish_blessing
+	jr nc, .finish_blessing
 
 	; double effect chance
 .blessing
@@ -1412,8 +1410,7 @@ BattleCommand_LowerSub:
 	cp EFFECT_ROLLOUT
 	jr z, .rollout_rampage
 	cp EFFECT_RAMPAGE
-	jr z, .rollout_rampage
-	jmp AEqualsOne
+	jmp nz, AEqualsOne
 
 .rollout_rampage
 	ld a, [wSomeoneIsRampaging]
@@ -1574,8 +1571,7 @@ BattleCommand_FailureText:
 	cp EFFECT_DOUBLE_HIT
 	jr z, .multihit
 	cp EFFECT_POISON_MULTI_HIT
-	jr z, .multihit
-	jmp EndMoveEffect
+	jmp nz, EndMoveEffect
 
 .multihit
 	call BattleCommand_RaiseSub
@@ -1966,7 +1962,7 @@ BattleCommand_CheckFaint:
 	ld a, DESTINY_BOND
 	call LoadAnim
 	call BattleCommand_SwitchTurn
-	jr .finish
+	jr EndMoveEffect
 
 .no_dbond
 	; the target's Aftermath hurts the user that knocked it out
@@ -1979,7 +1975,6 @@ BattleCommand_CheckFaint:
 	cp EFFECT_DOUBLE_HIT
 	jr z, .multiple_hit_raise_sub
 	cp EFFECT_POISON_MULTI_HIT
-	jr z, .multiple_hit_raise_sub
 
 .multiple_hit_raise_sub
 	call BattleCommand_RaiseSub
@@ -2998,8 +2993,7 @@ ConfusionDamageCalc:
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar
 	cp SPECIAL
-	jr c, .continue
-	call TenPercentBoost
+	call nc, TenPercentBoost
 
 .continue
 ; Critical hits
@@ -3099,8 +3093,7 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 	ld hl, SniperPokemon
 	call IsInAbilityList
 	pop bc
-	jr c, .sniper_mons_damage
-	jr .regular_crit_damage
+	jr nc, .regular_crit_damage
 
 ; Sniper: critical hits do 2.25x damage
 .sniper_mons_damage
@@ -3906,8 +3899,7 @@ BattleCommand_BurnTarget:
 	call GetCurrentMon
 	ld hl, KindlePokemon
 	call IsInByteArray
-	jr c, .burn
-	jr .done
+	jr nc, .done
 
 	; 100% burn foe
 .burn
@@ -4067,8 +4059,7 @@ BattleCommand_ParalyzeTarget:
 	call GetCurrentMon
 	ld hl, SureShockPokemon
 	call IsInByteArray
-	jr c, .paralyze
-	jr .done
+	jr nc, .done
 
 	; 100% paralyze foe
 .paralyze
@@ -5345,7 +5336,7 @@ BattleCommand_ForceSwitch:
 
 	ld a, [wEnemyGoesFirst]
 	cp $1
-	jr z, .switch_fail
+	jr z, .fail
 
 	call UpdateBattleMonInParty
 	ld a, $1
@@ -5567,8 +5558,7 @@ BattleCommand_FlinchTarget:
 	call GetOpposingMon
 	ld hl, UnshakenPokemon
 	call IsInAbilityListNG
-	jr c, .no_flinch
-	jr FlinchTarget
+	jr nc, FlinchTarget
 
 .no_flinch
 	ld hl, UnshakenBattleText
@@ -5821,8 +5811,7 @@ BattleCommand_Recoil:
 	pop hl
 	pop de
 	pop bc
-	jr c, .rock_head
-	jr .finish_rock_head
+	jr nc, .finish_rock_head
 
 .rock_head
 	push hl
@@ -5832,8 +5821,7 @@ BattleCommand_Recoil:
 	pop de
 	pop bc
 	pop hl
-	jr c, .finish_rock_head ; suppressed by Neutralizing Gas
-	ret
+	ret nc ; Rock Head blocked recoil
 
 .finish_rock_head
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -5980,8 +5968,7 @@ BattleCommand_FinishConfusingTarget:
 	cp EFFECT_SWAGGER
 	jr z, .got_effect
     cp EFFECT_HURRICANE
-    jr z, .got_effect
-	call AnimateCurrentMove
+    call nz, AnimateCurrentMove
 
 .got_effect
 	ld de, ANIM_CONFUSED
