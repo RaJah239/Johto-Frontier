@@ -275,7 +275,7 @@ _BattleCommand_CheckHit:
 ; ===========================
 ; === Ability: True Flame ===
 ; ===========================
-	surefire_ability FIRE_BLAST, TrueFlamePokemon
+	surefire_ability FIRE_BLAST, TrueFlamePokemon, SEND_OUT_POPUP_TRUE_FLAME, TrueFlameText
 
 ; ===========================
 ; === Ability: Frost Lock ===
