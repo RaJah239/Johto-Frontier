@@ -264,3 +264,10 @@ MACRO anim_setbgpal
 	db \1 ; palette index to set (0-7)
 	db \2 ; battle palette
 ENDM
+
+	const anim_checkcriticalcapture_command
+MACRO anim_checkcriticalcapture
+	db anim_checkcriticalcapture_command
+ENDM
+
+DEF NUM_BATTLE_ANIM_COMMANDS EQU const_value - FIRST_BATTLE_ANIM_CMD

@@ -12,6 +12,8 @@ GetPokeBallWobble:
 	ldh [rSVBK], a
 
 	ld a, [wThrownBallWobbleCount]
+	bit CRITICAL_CAPTURE_F, a
+	jr nz, .critical
 	inc a
 	ld [wThrownBallWobbleCount], a
 
@@ -41,6 +43,14 @@ GetPokeBallWobble:
 	ld c, 0 ; next
 	jr c, .done
 	ld c, 2 ; escaped
+	jr .done
+
+.critical
+; Skip the first two ordinary shakes. Show one shake, then use the
+; existing predetermined outcome on the next check. Clear the flag here.
+	ld a, 3
+	ld [wThrownBallWobbleCount], a
+	ld c, 0 ; next
 	jr .done
 
 .finished

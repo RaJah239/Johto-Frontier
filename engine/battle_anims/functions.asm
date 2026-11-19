@@ -281,6 +281,10 @@ BattleAnimFunction_PokeBall_BG:
 	dw DoNothing
 	dw BattleAnimFunc_PokeBall.ten
 	dw FarDeinitBattleAnimation
+	dw BattleAnimFunc_PokeBall.twelve
+	dw DoNothing
+	dw BattleAnimFunc_PokeBall.fourteen
+	dw DoNothing
 .zero
 	call GetBallAnimBGPal
 	jmp BattleAnim_IncAnonJumptableIndex
@@ -300,6 +304,10 @@ BattleAnimFunc_PokeBall:
 	dw DoNothing
 	dw .ten
 	dw FarDeinitBattleAnimation
+	dw .twelve
+	dw DoNothing
+	dw .fourteen
+	dw DoNothing
 
 .zero ; init
 	call GetBallAnimPal
@@ -391,6 +399,41 @@ BattleAnimFunc_PokeBall:
 	and $f
 	jmp z, BattleAnim_IncAnonJumptableIndex
 	ret
+
+.twelve
+; Polished Crystal's midair critical-capture shake, on both ball layers.
+	ld a, BATTLE_ANIM_FRAMESET_POKE_BALL_4
+	call FarReinitBattleAnimFrameset
+	ld hl, BATTLEANIMSTRUCT_VAR3
+	add hl, bc
+	ld [hl], $10
+	jmp BattleAnim_IncAnonJumptableIndex
+
+.fourteen
+	ld hl, BATTLEANIMSTRUCT_VAR3
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .critical_done
+	dec [hl]
+	cpl
+	add $10 + 1
+	add a
+	add a
+	ld d, 2
+	call BattleAnim_Sine
+	ld hl, BATTLEANIMSTRUCT_XOFFSET
+	add hl, bc
+	ld [hl], a
+	ret
+
+.critical_done
+	ld hl, BATTLEANIMSTRUCT_XOFFSET
+	add hl, bc
+	ld [hl], 0
+	ld a, BATTLE_ANIM_FRAMESET_POKE_BALL_1
+	call FarReinitBattleAnimFrameset
+	jmp BattleAnim_IncAnonJumptableIndex
 
 BattleAnimFunc_PokeBallBlocked:
 	call BattleAnim_AnonJumptable

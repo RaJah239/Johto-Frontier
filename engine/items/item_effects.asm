@@ -239,6 +239,7 @@ PokeBallEffect:
 .room_in_party
 	xor a
 	ld [wWildMon], a
+	ld [wThrownBallWobbleCount], a
 	ld a, [wBattleType]
  	cp BATTLETYPE_CONTEST
 	call nz, ReturnToBattle_UseBall
@@ -482,8 +483,19 @@ ENDC
 	ld a, $ff
 .max_2
 
-	ld b, a
 	ld [wFinalCatchRate], a
+	farcall CheckCriticalCapture
+	jr nc, .normal_capture
+	ld a, CRITICAL_CAPTURE
+	ld [wThrownBallWobbleCount], a
+	farcall CriticalCaptureRoll
+	ld a, 0
+	jr c, .catch_without_fail
+	jr .fail_to_catch
+
+.normal_capture
+	ld a, [wFinalCatchRate]
+	ld b, a
 	call Random
 
 	cp b
@@ -496,7 +508,7 @@ ENDC
 
 .fail_to_catch
 	ld [wWildMon], a
-	xor a ; normal throw: wobble count starts at 0
+	ld a, [wThrownBallWobbleCount]
 	call .ThrowBallAnim
 
 	ld a, [wWildMon]
@@ -870,6 +882,7 @@ ENDC
 ; Play the ball throw animation.
 ; a = 0 for the normal wobble sequence; 3 makes the first wobble check
 ; report "escaped", so the ball bursts open as soon as it lands.
+; CRITICAL_CAPTURE selects the critical throw and single ground shake.
 	push af
 	ld c, 10
 	call DelayFrames

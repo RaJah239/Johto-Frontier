@@ -1,3 +1,7 @@
+; wThrownBallWobbleCount: critical flag and low nibble shake count.
+DEF CRITICAL_CAPTURE_F EQU 4
+DEF CRITICAL_CAPTURE EQU 1 << CRITICAL_CAPTURE_F
+
 ; battle_anim_struct members (see macros/ram.asm)
 rsreset
 DEF BATTLEANIMSTRUCT_INDEX           rb ; 00

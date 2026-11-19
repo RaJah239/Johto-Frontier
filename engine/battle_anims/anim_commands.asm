@@ -340,7 +340,8 @@ BattleAnimCommands::
 	dw BattleAnimCmd_StatLoop
 	dw BattleAnimCmd_HiObj
 	dw BattleAnimCmd_SetBgPal
-	assert_table_length 247 - FIRST_BATTLE_ANIM_CMD
+	dw BattleAnimCmd_CheckCriticalCapture
+	assert_table_length NUM_BATTLE_ANIM_COMMANDS
 
 BattleAnimCmd_ClearOpponentHud:
 ; Clear the HUD of the target of the attack
@@ -816,6 +817,14 @@ BattleAnimCmd_BattlerGFX_2Row:
 BattleAnimCmd_CheckPokeball:
 	callfar GetPokeBallWobble
 	ld a, c
+	ld [wBattleAnimVar], a
+	ret
+
+BattleAnimCmd_CheckCriticalCapture:
+	ld hl, wThrownBallWobbleCount
+	ld a, BANK(wThrownBallWobbleCount)
+	call GetFarWRAMByte
+	and CRITICAL_CAPTURE
 	ld [wBattleAnimVar], a
 	ret
 

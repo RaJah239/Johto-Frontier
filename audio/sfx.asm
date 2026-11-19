@@ -4822,3 +4822,16 @@ Sfx_AbilitySlideout:
 	square_note 23, 14, 8, 2016
 	pitch_sweep 0, 8
 	sound_ret
+
+Sfx_CriticalCapture:
+; Polished Crystal's critical-capture throw sound.
+	channel_count 1
+	channel 5, .Ch5
+
+.Ch5:
+	duty_cycle 1
+	pitch_sweep 14, 7
+	square_note 5, 14, 8, 2000
+	pitch_sweep 0, 0
+	square_note 5, 14, 8, 2016
+	sound_ret
