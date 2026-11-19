@@ -263,7 +263,7 @@ DEF NUM_DECODESCS EQU const_value
 	const SWARM_DUNSPARCE ; 0
 	const SWARM_YANMA     ; 1
 
-; ActivateFishingSwarm setval arguments
+; Fishing swarm values in wFishingSwarmFlag
 	const_def
 	const FISHSWARM_NONE     ; 0
 	const FISHSWARM_QWILFISH ; 1
