@@ -1172,7 +1172,7 @@ Options_Scaled_Exp:
 ; was already on Scaled still reads as Scaled. Both bits set cannot
 ; come from the menu; .Strings has a fourth entry so the index stays
 ; in bounds, and it shows Zero, which is what the battle code does
-; with that value too.
+; with that value too. Normal unlocks when the Champion event is set.
 
 ; Locked to Scaled during a Grand Gauntlet run: still draw it, but
 ; ignore left/right so it can only be changed outside.
@@ -1181,76 +1181,60 @@ Options_Scaled_Exp:
 	jr z, .NotLocked
 	ld c, 1 ; Scaled
 	jr .ShowCurrent
+
 .NotLocked:
-	call .GetCurrent
-
-	; Check if all 8 Johto badges are obtained
-	; If not, Normal (0) is unavailable - skip over it
-	ld a, [wJohtoBadges]
-	cp $ff
-	jr z, .AllBadges
-
-	; Not all badges: remap modes so 0=Scaled, 1=Zero
-	; Current c: 0=Normal, 1=Scaled, 2=Zero
-	; Remapped:  0->1, 1->1 (stay), 2->2
+	ld de, EVENT_PLAYER_IS_THE_POKEMON_LEAGUE_CHAMPION
+	ld b, CHECK_FLAG
+	call EventFlagAction
 	ld a, c
 	and a
-	jr z, .ForceScaled ; if Normal, force to Scaled
-	cp 1
-	jr z, .CheckInput  ; Scaled is fine
-	; c == 2 (Zero) is fine
-	jr .CheckInput
+	jr nz, .AfterChampion
 
-.ForceScaled:
-	ld c, 1 ; force to Scaled
+	call .GetCurrent
+	ld a, c
+	and a
+	jr nz, .BeforeChampionInput
+	ld c, 1 ; Normal is locked before becoming Champion
+	ld a, c
+	jr .Save
 
-.CheckInput:
+.BeforeChampionInput:
+	ldh a, [hJoyPressed]
+	bit D_RIGHT_F, a
+	jr nz, .ToggleBeforeChampion
+	bit D_LEFT_F, a
+	jr z, .ShowCurrent
+.ToggleBeforeChampion:
+	ld a, c
+	cp 2
+	jr z, .SetScaledBeforeChampion
+	ld a, 2 ; Scaled -> Zero
+	jr .Save
+
+.SetScaledBeforeChampion:
+	ld a, 1 ; Zero -> Scaled
+	jr .Save
+
+.AfterChampion:
+	call .GetCurrent
+
 	ldh a, [hJoyPressed]
 	bit D_RIGHT_F, a
 	jr nz, .RightPressed
 	bit D_LEFT_F, a
 	jr z, .ShowCurrent
-; Left (no badges): Scaled -> Zero -> Scaled
-	ld a, c
-	cp 2
-	jr nz, .LeftToZero
-	ld c, 1
-	jr .Save
-
-.LeftToZero:
-	ld c, 2
-	jr .Save
-
-.RightPressed:
-; Right (no badges): Scaled -> Zero -> Scaled
-	ld a, c
-	cp 2
-	jr nz, .RightToZero
-	ld c, 1
-	jr .Save
-
-.RightToZero:
-	ld c, 2
-	jr .Save
-
-.AllBadges:
-	ldh a, [hJoyPressed]
-	bit D_RIGHT_F, a
-	jr nz, .RightPressedAll
-	bit D_LEFT_F, a
-	jr z, .ShowCurrent
 ; Left: Normal -> Zero -> Scaled -> Normal
 	ld a, c
 	and a
-	jr nz, .Decrease
+	jr nz, .LeftDecrement
 	ld a, 2
 	jr .Save
 
-.Decrease:
+.LeftDecrement:
 	dec a
 	jr .Save
 
-.RightPressedAll:
+.RightPressed:
 ; Right: Normal -> Scaled -> Zero -> Normal
 	ld a, c
 	cp 2
@@ -2013,7 +1997,7 @@ OptionsMenu_DrawDescription:
 .DescBattleScene:     db "Turn On or Off<LF>Battle Animations.@"
 .DescSound:           db "Music/BGB Audio:<LF>Mono, Stereo, Off.@"
 .DescRunningShoes:    db "Set default to<LF>run or walk.@"
-.DescScaledExp:       db "Scaled. 8 badges:<LF>Normal or Zero.@"
+.DescScaledExp:       db "Scaled or Zero;<LF>Normal post-Champ.@"
 .DescQuickNurse:      db "#mon Center<LF>fast or slow heal.@"
 .DescWeatherText:     db "Weather lingers or<LF>ends text.@"
 .DescWeatherEffects:  db "Overworld rain,<LF>snow, sand & sun.@"
