@@ -274,8 +274,7 @@ _CardFlip:
 	ld hl, .CardFlipPlayAgainText
 	call CardFlip_UpdateCoinBalanceDisplay
 	call YesNoBox
-	jr nc, .Continue
-	jmp .Increment
+	jmp c, .Increment
 
 .Continue:
 	ld a, [wCardFlipNumCardsPlayed]
@@ -356,7 +355,7 @@ GetCoordsOfChosenCard:
 	jr nz, .BottomCard
 	hlcoord 2, 0
 	bcpixel 2, 3
-	jr .done
+	ret
 
 .BottomCard:
 	hlcoord 2, 6
@@ -832,8 +831,7 @@ CardFlip_CheckWinCondition:
 .PoliOddish:
 	ld a, [wCardFlipFaceUpCard]
 	and $2
-	jr nz, .WinSix
-	jmp .Lose
+	jmp z, .Lose
 
 .WinSix:
 	ld c, $6
@@ -857,8 +855,7 @@ CardFlip_CheckWinCondition:
 	ld a, [wCardFlipFaceUpCard]
 	and $18
 	cp $10
-	jr z, .WinNine
-	jmp .Lose
+	jmp nz, .Lose
 
 .WinNine:
 	ld c, $9
@@ -889,8 +886,7 @@ CardFlip_CheckWinCondition:
 	ld a, [wCardFlipFaceUpCard]
 	and $3
 	cp $3
-	jr z, .WinTwelve
-	jmp .Lose
+	jmp nz, .Lose
 
 .WinTwelve:
 	ld c, $c
@@ -935,8 +931,7 @@ CardFlip_CheckWinCondition:
 	ld a, [wCardFlipFaceUpCard]
 	and $1c
 	cp $14
-	jr z, .WinEighteen
-	jr .Lose
+	jr nz, .Lose
 
 .WinEighteen:
 	ld c, $12
@@ -1065,8 +1060,7 @@ CardFlip_CheckWinCondition:
 .loop
 	push bc
 	call .IsCoinCaseFull
-	jr c, .full
-	call .AddCoinPlaySFX
+	call nc, .AddCoinPlaySFX
 
 .full
 	call CardFlip_PrintCoinBalance
@@ -1102,8 +1096,7 @@ CardFlip_CheckWinCondition:
 	ld a, [wCoins]
 	cp HIGH(MAX_COINS)
 	jr c, .less
-	jr z, .check_low
-	jr .more
+	jr nz, .more
 
 .check_low
 	ld a, [wCoins + 1]
