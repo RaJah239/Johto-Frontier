@@ -223,7 +223,7 @@ FarReadMart:
 	ld a, [de]
 	inc de
 	cp -1
-	jr z, .done
+	ret z
 	push de
 	call GetMartItemPrice
 	pop de
@@ -435,7 +435,6 @@ BuyMenuLoop:
 	cp B_BUTTON
 	jr z, .set_carry
 	cp A_BUTTON
-	jr z, .useless_pointer
 
 .useless_pointer
 	call MartAskPurchaseQuantity
