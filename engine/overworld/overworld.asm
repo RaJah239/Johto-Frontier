@@ -124,14 +124,6 @@ GetPlayerSprite:
 
 INCLUDE "data/sprites/player_sprites.asm"
 
-LoadUsedSpritesGFX:
-	ld a, MAPCALLBACK_SPRITES
-	call RunMapCallback
-	xor a
-	ldh [hUsedSpriteIndex], a
-	call ReloadSpriteIndex
-	; fallthrough
-
 LoadMiscTiles:
 	ld c, EMOTE_SHADOW
 	farcall LoadEmote
