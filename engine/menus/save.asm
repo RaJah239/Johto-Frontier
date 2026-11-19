@@ -519,6 +519,10 @@ TryLoadSaveData:
 	ld de, wStatusFlags
 	ld a, [hl]
 	ld [de], a
+	ld hl, sPlayerData + wNumKeyItems - wPlayerData
+	ld de, wNumKeyItems
+	ld bc, wNumBalls - wNumKeyItems
+	call CopyBytes
 	jmp CloseSRAM
 
 .backup
@@ -537,6 +541,10 @@ TryLoadSaveData:
 	ld de, wStatusFlags
 	ld a, [hl]
 	ld [de], a
+	ld hl, sBackupPlayerData + wNumKeyItems - wPlayerData
+	ld de, wNumKeyItems
+	ld bc, wNumBalls - wNumKeyItems
+	call CopyBytes
 	jmp CloseSRAM
 
 .corrupt
