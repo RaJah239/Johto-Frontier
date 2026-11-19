@@ -696,8 +696,7 @@ _ExitMenu::
 	call GetWindowStackTop
 	ld a, h
 	or l
-	jr z, .done
-	call PopWindow
+	call nz, PopWindow
 
 .done
 	pop af
