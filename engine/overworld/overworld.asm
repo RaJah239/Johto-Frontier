@@ -337,27 +337,6 @@ _GetSpritePalette::
 	ld c, a
 	ret
 
-GetSpriteLength:
-; Return the length of sprite type a in tiles.
-
-	cp WALKING_SPRITE
-	jr z, .AnyDirection
-	cp STANDING_SPRITE
-	jr z, .AnyDirection
-	cp STILL_SPRITE
-	jr z, .OneDirection
-
-	ld a, 12
-	ret
-
-.AnyDirection:
-	ld a, 12
-	ret
-
-.OneDirection:
-	ld a, 4
-	ret
-
 GetUsedSprite::
 	ldh a, [hUsedSpriteIndex]
 	call SafeGetSprite
