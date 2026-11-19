@@ -147,12 +147,6 @@ BattleBGEffects_IncAnonJumptableIndex:
 	inc [hl]
 	ret
 
-EndBattleBGEffect:
-	ld hl, BG_EFFECT_STRUCT_FUNCTION
-	add hl, bc
-	ld [hl], 0
-	ret
-
 BattleBGEffect_FlashInverted:
 	ld de, .inverted
 	jr BattleBGEffect_FlashContinue
@@ -283,6 +277,12 @@ BattleBGEffect_CycleBGPals_Inverted:
 	dc 2, 0, 1, 3
 	db -2
 
+EndBattleBGEffect:
+	ld hl, BG_EFFECT_STRUCT_FUNCTION
+	add hl, bc
+	ld [hl], 0
+	ret
+
 BattleBGEffect_HideMon:
 	call BattleBGEffects_AnonJumptable
 .anon_dw
@@ -316,12 +316,11 @@ BattleBGEffect_HideMon:
 .four
 	xor a
 	ldh [hBGMapMode], a
-	jmp EndBattleBGEffect
+	jr EndBattleBGEffect
 
 BattleBGEffect_ShowMon:
 	call BGEffect_CheckFlyDigStatus
-	jr z, .not_flying
-	jmp EndBattleBGEffect
+	jr nz, EndBattleBGEffect
 
 .not_flying
 	call BGEffect_CheckBattleTurn
@@ -360,7 +359,7 @@ BattleBGEffect_BattlerObj_1Row:
 	jr z, .not_flying_digging
 	ld hl, wLastAnimObjectIndex
 	inc [hl]
-	jmp EndBattleBGEffect
+	jr EndBattleBGEffect
 
 .not_flying_digging
 	call BattleBGEffects_IncAnonJumptableIndex
@@ -668,8 +667,7 @@ BattleBGEffect_RunPicResizeScript:
 	cp -2
 	jr z, .clear
 	cp -3
-	jr z, .skip
-	call .PlaceGraphic
+	call nz, .PlaceGraphic
 .skip
 	call BattleBGEffects_IncAnonJumptableIndex
 	ld a, $1
@@ -1285,8 +1283,7 @@ Tackle_ReturnMove:
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .move_back
-	call BattleBGEffects_IncAnonJumptableIndex
+	call z, BattleBGEffects_IncAnonJumptableIndex
 .move_back
 	call Rollout_FillLYOverridesBackup
 	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
@@ -2015,8 +2012,7 @@ BGEffect_RapidCyclePals:
 	or [hl]
 	ld [hl], a
 	call BattleBGEffect_GetFirstDMGPal
-	jr c, .okay_2_dmg
-	jmp BGEffect_FillLYOverridesBackup
+	jmp nc, BGEffect_FillLYOverridesBackup
 
 .okay_2_dmg
 	ld hl, BG_EFFECT_STRUCT_PARAM
@@ -2075,8 +2071,7 @@ BGEffect_RapidCyclePals:
 	or [hl]
 	ld [hl], a
 	call BattleBGEffect_GetFirstDMGPal
-	jr c, .okay_2_cgb
-	jr BGEffects_LoadPlayerPals
+	jr nc, BGEffects_LoadPlayerPals
 
 .okay_2_cgb
 	ld hl, BG_EFFECT_STRUCT_PARAM
@@ -2104,8 +2099,7 @@ BGEffect_RapidCyclePals:
 	or [hl]
 	ld [hl], a
 	call BattleBGEffect_GetFirstDMGPal
-	jr c, .okay_4_cgb
-	jr BGEffects_LoadEnemyPals
+	jr nc, BGEffects_LoadEnemyPals
 
 .okay_4_cgb
 	ld hl, BG_EFFECT_STRUCT_PARAM
