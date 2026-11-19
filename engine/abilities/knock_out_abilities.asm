@@ -99,7 +99,7 @@ KOBoost:
 	farjp BattleCommand_StatUpMessage
 
 .bloodlust
-	; don't boost if attack is at level 3 or higher
+	; Don't activate if both boosts are already at level 3.
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [wPlayerAtkLevel]
@@ -107,27 +107,49 @@ KOBoost:
 	ld a, [wEnemyAtkLevel]
 .got_atk_level
 	cp BASE_STAT_LEVEL + 3
-	jr nc, .sp_atk_boost
+	jr c, .show_bloodlust
 
-	call ClearFailures
-	ld [wNumHits], a
-	ShowActivationOrEntryOrKOAbilityPopup BloodLustText
-	farcall BattleCommand_AttackUp
-	farcall BattleCommand_StatUpMessage
-.sp_atk_boost
-	; don't boost if special attack is at level 3 or higher
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [wPlayerSAtkLevel]
-	jr z, .got_sp_atk_level
+	jr z, .got_sp_atk_level_for_popup
 	ld a, [wEnemySAtkLevel]
-.got_sp_atk_level
+.got_sp_atk_level_for_popup
+	cp BASE_STAT_LEVEL + 3
+	ret nc
+
+.show_bloodlust
+	call ClearFailures
+	ld [wNumHits], a
+	ShowActivationOrEntryOrKOAbilityPopup BloodLustText
+
+	; Apply each eligible boost after the single activation popup.
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wPlayerAtkLevel]
+	jr z, .got_atk_level_for_boost
+	ld a, [wEnemyAtkLevel]
+.got_atk_level_for_boost
+	cp BASE_STAT_LEVEL + 3
+	jr nc, .bloodlust_sp_atk_boost
+
+	call ClearFailures
+	ld [wNumHits], a
+	farcall BattleCommand_AttackUp
+	farcall BattleCommand_StatUpMessage
+
+.bloodlust_sp_atk_boost
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wPlayerSAtkLevel]
+	jr z, .got_sp_atk_level_for_boost
+	ld a, [wEnemySAtkLevel]
+.got_sp_atk_level_for_boost
 	cp BASE_STAT_LEVEL + 3
 	ret nc
 
 	call ClearFailures
 	ld [wNumHits], a
-	ShowActivationOrEntryOrKOAbilityPopup BloodLustText
 	farcall BattleCommand_SpecialAttackUp
 	farjp BattleCommand_StatUpMessage
 
