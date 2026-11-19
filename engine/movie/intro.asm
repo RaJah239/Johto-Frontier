@@ -122,11 +122,11 @@ IntroScene1:
 	ld hl, IntroUnownsPalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	ld hl, IntroUnownsPalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -192,11 +192,11 @@ IntroScene3:
 	ld hl, IntroBackgroundPalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	ld hl, IntroBackgroundPalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -231,7 +231,7 @@ IntroScene5:
 	call ClearSprites
 	call Intro_ClearTilemap
 	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	xor a
 	ldh [hBGMapMode], a
 	ldh [hLCDCPointer], a
@@ -258,11 +258,11 @@ IntroScene5:
 	ld hl, IntroUnownsPalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	ld hl, IntroUnownsPalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -361,12 +361,12 @@ IntroScene7:
 	ld hl, IntroBackgroundPalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 
 	ld hl, IntroBackgroundPalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 
 	pop af
 	ldh [rSVBK], a
@@ -421,7 +421,7 @@ IntroScene8:
 IntroScene9:
 ; Set up the next scene (same bg).
 	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	xor a
 	ldh [hLCDCPointer], a
 	call ClearSprites
@@ -490,7 +490,7 @@ IntroScene11:
 	call ClearSprites
 	call Intro_ClearTilemap
 	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	xor a
 	ldh [hBGMapMode], a
 	ldh [hLCDCPointer], a
@@ -514,11 +514,11 @@ IntroScene11:
 	ld hl, IntroUnownsPalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	ld hl, IntroUnownsPalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -635,11 +635,11 @@ IntroScene13:
 	ld hl, IntroBackgroundPalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	ld hl, IntroBackgroundPalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -742,11 +742,11 @@ IntroScene15:
 	ld hl, IntroSuicunePalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	ld hl, IntroSuicunePalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -815,11 +815,11 @@ IntroScene17:
 	ld hl, IntroSuicuneClosePalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	ld hl, IntroSuicuneClosePalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -888,11 +888,11 @@ IntroScene19:
 	ld hl, IntroSuicunePalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	ld hl, IntroSuicunePalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -1037,11 +1037,11 @@ IntroScene26:
 	ld hl, IntroCrystalUnownsPalette
 	ld de, wBGPals1
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	ld hl, IntroCrystalUnownsPalette
 	ld de, wBGPals2
 	ld bc, 16 palettes
-	call CopyBytes
+	call CopyBytesInBlocksOfEight
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -1592,7 +1592,7 @@ Intro_ResetLYOverrides:
 	pop af
 	ldh [rSVBK], a
 	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	ld a, LOW(rSCX)
 	ldh [hLCDCPointer], a
 	ret
