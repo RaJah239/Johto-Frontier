@@ -671,8 +671,7 @@ Slots_SpinReels:
 	add hl, bc
 	ld a, [hl]
 	and $f
-	jr nz, .skip
-	call ReelActionJumptable
+	call z, ReelActionJumptable
 .skip
 	ld hl, REEL_SPIN_RATE
 	add hl, bc
@@ -881,12 +880,12 @@ ReelAction_StopReel1:
 
 	ld a, [wSlotBias]
 	cp SLOTS_NO_BIAS
-	jr z, .NoBias
+	jr z, Slots_StopReel
 	ld hl, REEL_MANIP_COUNTER
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .NoBias
+	jr z, Slots_StopReel
 	dec [hl]
 	call .CheckForBias
 	ret nz
@@ -918,16 +917,16 @@ ReelAction_StopReel2:
 	ld a, [wSlotBuildingMatch]
 	ld hl, wSlotBias
 	cp [hl]
-	jr z, .NoBias
+	jr z, Slots_StopReel
 .nope
 	ld a, [wSlotBias]
 	cp SLOTS_NO_BIAS
-	jr z, .NoBias
+	jr z, Slots_StopReel
 	ld hl, REEL_MANIP_COUNTER
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .NoBias
+	jr z, Slots_StopReel
 	dec [hl]
 	ret
 
@@ -943,7 +942,7 @@ ReelAction_StopReel3:
 	jr nc, .NoMatch
 	ld hl, wSlotBias
 	cp [hl]
-	jr z, .NoBias
+	jr z, Slots_StopReel
 	ld hl, REEL_MANIP_COUNTER
 	add hl, bc
 	ld a, [hl]
@@ -977,8 +976,7 @@ ReelAction_SetUpReel2SkipTo7:
 	jr nc, .no_match
 	ld a, [wFirstTwoReelsMatchingSevens]
 	and a
-	jr z, .no_match
-	jmp Slots_StopReel
+	jmp nz, Slots_StopReel
 
 .no_match
 	ld a, SFX_STOP_SLOT
@@ -1308,7 +1306,7 @@ Slots_CheckMatchedFirstTwoReels:
 	call .CheckTopRow
 
 .one
-	call .CheckMiddleRow
+	jr .CheckMiddleRow
 
 .zero
 	ret
@@ -1317,36 +1315,36 @@ Slots_CheckMatchedFirstTwoReels:
 	ld hl, wCurReelStopped
 	ld a, [wReel1Stopped]
 	cp [hl]
-	call z, .StoreResult
+	jr z, .StoreResult
 	ret
 
 .CheckUpwardsDiag:
 	ld hl, wCurReelStopped + 1
 	ld a, [wReel1Stopped]
 	cp [hl]
-	call z, .StoreResult
+	jr z, .StoreResult
 	ret
 
 .CheckMiddleRow:
 	ld hl, wCurReelStopped + 1
 	ld a, [wReel1Stopped + 1]
 	cp [hl]
-	call z, .StoreResult
+	jr z, .StoreResult
 	ret
 
 .CheckDownwardsDiag:
 	ld hl, wCurReelStopped + 1
 	ld a, [wReel1Stopped + 2]
 	cp [hl]
-	call z, .StoreResult
+	jr z, .StoreResult
 	ret
 
 .CheckTopRow:
 	ld hl, wCurReelStopped + 2
 	ld a, [wReel1Stopped + 2]
 	cp [hl]
-	call z, .StoreResult
-	ret
+	ret nz
+	; fallthrough
 
 .StoreResult:
 	ld [wSlotBuildingMatch], a
@@ -1405,7 +1403,7 @@ Slots_CheckMatchedAllThreeReels:
 	call .CheckTopRow
 
 .one
-	call .CheckMiddleRow
+	jr .CheckMiddleRow
 
 .zero
 	ret
@@ -1417,7 +1415,7 @@ Slots_CheckMatchedAllThreeReels:
 	ret nz
 	ld hl, wReel2Stopped
 	cp [hl]
-	call z, .StoreResult
+	jr z, .StoreResult
 	ret
 
 .CheckUpwardsDiag:
@@ -1427,7 +1425,7 @@ Slots_CheckMatchedAllThreeReels:
 	ret nz
 	ld hl, wReel2Stopped + 1
 	cp [hl]
-	call z, .StoreResult
+	jr z, .StoreResult
 	ret
 
 .CheckMiddleRow:
@@ -1437,7 +1435,7 @@ Slots_CheckMatchedAllThreeReels:
 	ret nz
 	ld hl, wReel2Stopped + 1
 	cp [hl]
-	call z, .StoreResult
+	jr z, .StoreResult
 	ret
 
 .CheckDownwardsDiag:
@@ -1447,7 +1445,7 @@ Slots_CheckMatchedAllThreeReels:
 	ret nz
 	ld hl, wReel2Stopped + 1
 	cp [hl]
-	call z, .StoreResult
+	jr z, .StoreResult
 	ret
 
 .CheckTopRow:
@@ -1457,8 +1455,8 @@ Slots_CheckMatchedAllThreeReels:
 	ret nz
 	ld hl, wReel2Stopped + 2
 	cp [hl]
-	call z, .StoreResult
-	ret
+	ret nz
+	; fallthrough
 
 .StoreResult:
 	ld [wSlotMatched], a
