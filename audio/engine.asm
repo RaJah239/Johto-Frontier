@@ -2782,22 +2782,6 @@ ChannelPointers:
 	dw wChannel8
 	assert_table_length NUM_CHANNELS
 
-ClearChannels::
-; runs ClearChannel for all 4 channels
-	ld hl, rNR50
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld a, $80
-	ld [hli], a
-	ld hl, rNR10
-	ld e, NUM_MUSIC_CHANS
-.loop
-	call ClearChannel
-	dec e
-	jr nz, .loop
-	ret
-
 ClearChannel:
 ; input: hl = beginning hw sound register (rNR10, rNR20, rNR30, rNR40)
 ; output: 00 00 80 00 80
