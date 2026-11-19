@@ -14,6 +14,30 @@ CopyBytes::
 	jr nz, .CopyByte
 	ret
 
+CopyBytesInBlocksOfEight::
+; Same register and flag results as CopyBytes. The length in bc must be a multiple of eight.
+	push af
+rept 3
+	srl b
+	rr c
+endr
+	pop af
+	inc b
+	inc c
+	jr .HandleLoop
+.CopyBlock:
+rept 8
+	ld a, [hli]
+	ld [de], a
+	inc de
+endr
+.HandleLoop:
+	dec c
+	jr nz, .CopyBlock
+	dec b
+	jr nz, .CopyBlock
+	ret
+
 ByteFill::
 ; fill bc bytes with the value of a, starting at hl
 ; Writes 8 bytes per loop pass (about twice as fast as one byte per pass:
