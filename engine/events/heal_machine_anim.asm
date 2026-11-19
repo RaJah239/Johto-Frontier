@@ -52,9 +52,6 @@ HealMachineAnim:
 	rst JumpTable
 	jr .jumptable_loop
 
-.finish
-	ret
-
 .Pointers:
 ; entries correspond to HEALMACHINE_* constants
 	dw .Pokecenter
