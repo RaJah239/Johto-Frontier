@@ -406,9 +406,9 @@ endr
 	call .DrawDayTimeBox
 	bccoord 1, 15
 	call TextCommand_DAY
-	ld a, [hHours]
+	ldh a, [hHours]
 	ld b, a
-	ld a, [hMinutes]
+	ldh a, [hMinutes]
 	ld c, a
 	decoord 1, 14
 	farcall PrintHoursMins
