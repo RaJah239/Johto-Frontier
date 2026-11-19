@@ -22,8 +22,7 @@ MoveInfoBox:
 	ld b, a
 	ld a, [wMenuCursorY]
 	cp b
-	jr nz, .not_disabled
-	jmp ApplyTilemap ; "Disabled!": no icons
+	jmp z, ApplyTilemap ; "Disabled!": no icons
 
 .not_disabled
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
