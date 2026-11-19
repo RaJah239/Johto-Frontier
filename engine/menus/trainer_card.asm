@@ -164,16 +164,6 @@ TrainerCard_Page2_Joypad:
 	ld [wJumptableIndex], a
 	ret
 
-.left
-	ld a, TRAINERCARDSTATE_PAGE2_LOADGFX
-	ld [wJumptableIndex], a
-	ret
-
-.right
-	ld a, TRAINERCARDSTATE_PAGE1_LOADGFX
-	ld [wJumptableIndex], a
-	ret
-
 TrainerCard_PrintTopHalfOfCard:
 	hlcoord 0, 0
 	ld d, 5
