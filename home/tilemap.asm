@@ -54,7 +54,7 @@ IsCGB::
 ApplyTilemap::
 	ldh a, [hCGB]
 	and a
-	jr z, .dmg
+	jr z, WaitBGMap
 
 	; if we're in doublespeed, use newbox applytilemap
 	; (as in Polished Crystal, also when sprite updates are disabled,
