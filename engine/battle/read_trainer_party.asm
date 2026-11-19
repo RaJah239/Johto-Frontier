@@ -115,8 +115,8 @@ ApplyScaledTrainerParty:
 	ld e, a ; highest level for this bracket
 	ld a, [wTeamMaxLevel]
 	cp e
-	jr c, .select_current
-	jr z, .select_current
+	jr c, .read_entry
+	jr z, .read_entry
 	; Above this bracket: remember it and keep looking.
 	ld b, h
 	ld c, l
@@ -441,8 +441,7 @@ ReadTrainerPartyPieces:
 	cp $ff
 	jr z, .got_level_ev_last
 	cp c
-	jr c, .next_level_ev
-	jr .got_level_ev
+	jr nc, .got_level_ev
 .next_level_ev
 	inc hl
 	jr .loop_level_ev
@@ -586,8 +585,7 @@ ReadTrainerPartyPieces:
 
 	ld a, [wOtherTrainerType]
 	bit TRAINERTYPE_RANDOM_F, a
-	jr nz, .random_loop
-	jmp .loop
+	jmp z, .loop
 
 .random_loop
 	ld a, [wRandomTrainerNumPokemon]
@@ -1188,7 +1186,7 @@ IncrementToCurrentMon:
     ld a, b
 .incrementLoop
     dec a
-    jr z, .incrementDone
+    ret z
 rept 48
     inc hl
 endr
