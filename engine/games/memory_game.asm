@@ -449,8 +449,7 @@ MemoryGame_CheckMatch:
 .loop
 	push bc
 	call .IsCoinCaseFull
-	jr c, .full
-	call .AddCoinPlaySFX
+	call nc, .AddCoinPlaySFX
 
 .full
 	call CardFlip_PrintCoinBalance
@@ -478,8 +477,7 @@ MemoryGame_CheckMatch:
 	ld a, [wCoins]
 	cp HIGH(MAX_COINS)
 	jr c, .less
-	jr z, .check_low
-	jr .more
+	jr nz, .more
 
 .check_low
 	ld a, [wCoins + 1]
