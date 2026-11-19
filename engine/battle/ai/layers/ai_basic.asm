@@ -158,6 +158,17 @@ AI_Basic:
 	pop hl
 	jr nc, .check_sub ; if not skip following
 
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	cp EFFECT_PARALYZE
+	jr nz, .not_paralyze
+	ld a, [wBattleMonType1]
+	cp ELECTRIC
+	jmp z, .discourage
+	ld a, [wBattleMonType2]
+	cp ELECTRIC
+	jmp z, .discourage
+
+.not_paralyze
 	ld a, [wBattleMonStatus]
 	and a
 	jmp nz, .discourage ; discourage if the player is already statused - loop back to check move

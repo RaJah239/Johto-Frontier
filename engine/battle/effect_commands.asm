@@ -4030,6 +4030,10 @@ BattleCommand_ParalyzeTarget:
 	ld a, [wTypeModifier]
 	and EFFECTIVENESS_MASK
 	ret z
+; Electric types can't be paralyzed.
+	ld a, ELECTRIC
+	call CheckIfTargetIsGivenType
+	ret z
 
 ; ===========================
 ; === Ability: Sure Shock ===
@@ -5991,6 +5995,10 @@ BattleCommand_Paralyze:
 	jr nz, .paralyzed
 	ld a, [wTypeModifier]
 	and EFFECTIVENESS_MASK
+	jr z, .didnt_affect
+; Electric types can't be paralyzed.
+	ld a, ELECTRIC
+	call CheckIfTargetIsGivenType
 	jr z, .didnt_affect
 
 ; =====================================

@@ -1329,6 +1329,12 @@ AI_Smart_ParalyzeTarget:
 ; or Leaf Guard pokemon in the sun
 	newfarcall AI_PlayerHasLeafGuard ; engine/abilities/leaf_guard.asm
 	jr c, .discourage
+	ld a, [wBattleMonType1]
+	cp ELECTRIC
+	jr z, .discourage
+	ld a, [wBattleMonType2]
+	cp ELECTRIC
+	jr z, .discourage
 
 	; check specie
 	push hl
@@ -2285,6 +2291,14 @@ AI_Smart_Paralyze:
 	and a
 	jmp nz, .discourage
 
+; Electric types can't be paralyzed
+	ld a, [wBattleMonType1]
+	cp ELECTRIC
+	jmp z, .discourage
+	ld a, [wBattleMonType2]
+	cp ELECTRIC
+	jmp z, .discourage
+
 ; never use against Pokemon immune to status
 	ld a, [wBattleMonSpecies]
 	push hl
@@ -3046,8 +3060,8 @@ AI_SideCanGetStatus:
 ; a = a status (1 << PSN / BRN / FRZ / PAR), b = side (0 = player, 1 =
 ; enemy). Carry if that side's mon could be given it by a side effect right
 ; now: no status yet, no Substitute or Safeguard, not immune by type (Poison /
-; Steel: poison, Fire: burn, Ice or the sun: frostbite), no Serenity, no
-; Leaf Guard in the sun. Preserves bc, de and hl.
+; Steel: poison, Electric: paralysis, Fire: burn, Ice or the sun: frostbite),
+; no Serenity, no Leaf Guard in the sun. Preserves bc, de and hl.
 	push hl
 	push de
 	push bc
@@ -3057,10 +3071,10 @@ AI_SideCanGetStatus:
 	jr nz, .enemy
 	ld a, [wBattleMonStatus]
 	and a
-	jr nz, .no
+	jmp nz, .no
 	ld a, [wPlayerSubStatus4]
 	bit SUBSTATUS_SUBSTITUTE, a
-	jr nz, .no
+	jmp nz, .no
 	ld a, [wPlayerScreens]
 	bit SCREENS_SAFEGUARD, a
 	jr nz, .no
@@ -3100,8 +3114,15 @@ AI_SideCanGetStatus:
 	ld a, FIRE
 	call .has_type
 	jr z, .no
-	jr .abilities
+	jp .abilities
 .not_burn
+	cp 1 << PAR
+	jr nz, .not_paralyze
+	ld a, ELECTRIC
+	call .has_type
+	jr z, .no
+	jr .abilities
+.not_paralyze
 	cp 1 << FRZ
 	jr nz, .abilities
 	ld a, [wBattleWeather]

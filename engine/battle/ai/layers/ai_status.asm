@@ -45,7 +45,7 @@ AI_Status:
 	cp EFFECT_LEECH_SEED
 	jr z, .leechseedimmunity
 	cp EFFECT_PARALYZE
-	jr z, .typeimmunity
+	jr z, .paralyzeimmunity
 
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
@@ -76,6 +76,15 @@ AI_Status:
 	jr z, .immune
 	ld a, [wBattleMonType2]
 	cp GRASS
+	jr z, .immune
+	jr .typeimmunity
+
+.paralyzeimmunity
+	ld a, [wBattleMonType1]
+	cp ELECTRIC
+	jr z, .immune
+	ld a, [wBattleMonType2]
+	cp ELECTRIC
 	jr z, .immune
 
 .typeimmunity

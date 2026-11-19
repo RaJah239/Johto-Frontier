@@ -4127,6 +4127,13 @@ MSim_T1Inflict:
 	; fallthrough
 
 .status
+	ld a, b
+	cp 1 << MSIM_INF_PAR_F
+	jr nz, .not_paralyze
+	ld a, ELECTRIC
+	call .has_type
+	jr z, .none
+.not_paralyze
 	ld a, [wBattleMonStatus]
 	and a
 	jr nz, .none
