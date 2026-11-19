@@ -61,7 +61,7 @@ MagnetTrain:
 	ldh [hVBlank], a
 	call ClearBGPalettes
 	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	xor a
 	ldh [hLCDCPointer], a
 	ldh [hLYOverrideStart], a
@@ -190,7 +190,7 @@ DrawMagnetTrain:
 	hlbgcoord 0, 9
 	ld de, MagnetTrainTilemap + (SCREEN_WIDTH * 3)
 	ld c, SCREEN_WIDTH
-	jr .FillLine
+	; fallthrough
 
 .FillLine:
 	ld a, [de]
@@ -236,7 +236,7 @@ MagnetTrain_InitLYOverrides:
 	ld a, [wMagnetTrainInitPosition]
 	call ByteFill
 	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	ld a, LOW(rSCX)
 	ldh [hLCDCPointer], a
 	ret
