@@ -536,8 +536,7 @@ CheckBTMonMovesForErrors:
 	jr c, .next
 .loop3
 	xor a
-	ld [hl], a
-	inc hl
+	ld [hli], a
 	dec b
 	jr nz, .loop3
 	jr .done
