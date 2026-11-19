@@ -261,32 +261,6 @@ endr
 	jr nz, .loop
 	ret
 
-ScrollTileUp:
-	ld h, d
-	ld l, e
-	ld d, [hl]
-	inc hl
-	ld e, [hl]
-	ld bc, LEN_2BPP_TILE - 2
-	add hl, bc
-	ld a, LEN_2BPP_TILE / 4
-.loop
-	ld c, [hl]
-	ld [hl], e
-	dec hl
-	ld b, [hl]
-	ld [hl], d
-	dec hl
-	ld e, [hl]
-	ld [hl], c
-	dec hl
-	ld d, [hl]
-	ld [hl], b
-	dec hl
-	dec a
-	jr nz, .loop
-	ret
-
 ScrollTileDown:
 	ld h, d
 	ld l, e
