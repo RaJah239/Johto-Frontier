@@ -125,11 +125,11 @@ MapEvents:
 NextOverworldFrame:
 	; If we haven't already performed a delay outside DelayFrame as a result
 	; of a busy LY overflow, perform that now.
-	ld a, [hDelayFrameLY]
+	ldh a, [hDelayFrameLY]
 	inc a
 	jmp nz, DelayFrame
 	xor a
-	ld [hDelayFrameLY], a
+	ldh [hDelayFrameLY], a
 	ret
 
 HandleMapTimeAndJoypad:
@@ -1243,7 +1243,7 @@ RandomEncounter::
 .ok_bug_contest
 	ld a, BANK(BugCatchingContestBattleScript)
 	ld hl, BugCatchingContestBattleScript
-	jr .done
+	; fallthrough
 
 .done
 	call CallScript
