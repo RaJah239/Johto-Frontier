@@ -306,8 +306,8 @@ PokecenterNurseScript:
 	turnobject LAST_TALKED, DOWN
 	pause 10
 
-	waitbutton
-	closetext
+	waitclosetext
+	turnobject PLAYER, DOWN
 	end
 
 .pokerus
