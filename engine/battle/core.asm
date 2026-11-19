@@ -3521,7 +3521,7 @@ SpikesDamage:
 	newfarcall UserHasSerenity ; engine/battle/effect_commands.asm
 	jmp c, .pop
 	newfarcall UserHasImmunity ; engine/abilities/defensive_abilities.asm
-	jr c, .pop
+	jmp c, .pop
 
 ; Toxic Spikes can't poison a Pokemon that already has a status condition
 	ld a, BATTLE_VARS_STATUS
@@ -3606,6 +3606,9 @@ SpikesDamage:
 	call Call_PlayBattleAnim
 	call SwitchTurnCore
 	farcall BattleCommand_SpeedDown
+	ld a, [wOptions3]
+	bit STAT_MESSAGES, a
+	jr nz, .pop
 	ld hl, TargetsSpeedFellText
 	call StdBattleTextbox
 	; fallthrough
