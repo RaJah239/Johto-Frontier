@@ -268,7 +268,7 @@ InitializeWorld:
 
 Continue:
 	farcall TryLoadSaveFile
-	jr c, .FailToLoad
+	ret c
 	farcall _LoadData
 	call LoadStandardMenuHeader
 	call DisplaySaveInfoOnContinue
@@ -277,18 +277,11 @@ Continue:
 	ld c, 20
 	call DelayFrames
 	call ConfirmContinue
-	jr nc, .Check1Pass
-	call CloseWindow
-	jr .FailToLoad
-
-.Check1Pass:
+	jmp c, CloseWindow
 	call CheckVBA
 	call Continue_CheckRTC_RestartClock
-	jr nc, .Check2Pass
-	call CloseWindow
-	jr .FailToLoad
+	jmp c, CloseWindow
 
-.Check2Pass:
 	ld a, $8
 	ld [wMusicFade], a
 	xor a ; MUSIC_NONE
@@ -331,8 +324,7 @@ FinishContinueFunction:
 	farcall OverworldLoop
 	ld a, [wSpawnAfterChampion]
 	cp SPAWN_RED
-	jr z, .AfterRed
-	jmp Reset
+	jmp nz, Reset
 
 .AfterRed:
 	call SpawnAfterRed
@@ -355,7 +347,7 @@ ConfirmContinue:
 	call GetJoypad
 	ld hl, hJoyPressed
 	bit A_BUTTON_F, [hl]
-	jr nz, .PressA
+	ret nz
 	bit B_BUTTON_F, [hl]
 	jr z, .loop
 	scf
@@ -1127,8 +1119,7 @@ TitleScreenMain:
 .check_start
 	ld a, [hl]
 	and START | A_BUTTON
-	jr nz, .incave
-	ret
+	ret z
 
 .incave
 	ld a, TITLESCREENOPTION_MAIN_MENU
