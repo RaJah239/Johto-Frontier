@@ -1460,7 +1460,7 @@ HeadbuttScript:
 	; fallthrough
 
 AutoHeadbuttScript:
-	reanchormap
+	closetext
 	callasm ShakeHeadbuttTree
 
 	callasm TreeMonEncounter
