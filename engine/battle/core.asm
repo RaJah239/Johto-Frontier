@@ -5635,13 +5635,6 @@ LoadEnemyMon:
 	ld a, [wBattleType]
 	jr .Moves
 
-.InitRoamHP:
-; HP only uses the lo byte in the RoamMon struct since
-; Raikou and Entei will have < 256 hp at level 40
-	ld a, [wEnemyMonHP + 1]
-	ld [hl], a
-	jr .Moves
-
 .OpponentParty:
 ; Get HP from the party struct
 	ld hl, (wOTPartyMon1HP + 1)
