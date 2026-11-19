@@ -295,7 +295,7 @@ _BattleCommand_CheckHit:
 ; ============================
 ; === Ability: Stonebound =====
 ; ============================
-	surefire_ability STONE_EDGE, StoneboundPokemon
+	surefire_ability STONE_EDGE, StoneboundPokemon, SEND_OUT_POPUP_STONEBOUND, StoneboundText
 
 ; ===========================
 ; === Ability: Dream Gaze ===
