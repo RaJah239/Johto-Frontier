@@ -77,8 +77,7 @@ EnterMap:
 
 	ldh a, [hMapEntryMethod]
 	cp MAPSETUP_CONNECTION
-	jr nz, .dont_enable
-	call EnableEvents
+	call z, EnableEvents
 .dont_enable
 
 	ldh a, [hMapEntryMethod]
@@ -1227,8 +1226,7 @@ RandomEncounter::
 
 .bug_contest
 	call _TryWildEncounter_BugContest
-	jr nc, .nope
-	jr .ok_bug_contest
+	jr c, .ok_bug_contest
 
 .nope
 	ld a, 1
