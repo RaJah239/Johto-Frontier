@@ -358,16 +358,16 @@ endr
 
 	ld a, [wSpriteFlags]
 	bit 5, a
-	jr nz, .done
+	ret nz
 
 	ldh a, [hUsedSpriteIndex]
 	; Day Care sprites bounce using the two frames in the first copy.
 	cp SPRITE_DAY_CARE_MON_1
-	jr z, .done
+	ret z
 	cp SPRITE_DAY_CARE_MON_2
-	jr z, .done
+	ret z
 	call _DoesSpriteHaveFacings
-	jr c, .done
+	ret c
 
 	ld a, h
 	add HIGH(vTiles1 - vTiles0)
