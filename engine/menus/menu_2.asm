@@ -63,9 +63,6 @@ PlaceItemInBagQuantity:
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	jmp PrintNum
 
-.no_selection
-	jr ClearItemInBagQuantitysBox
-
 .InBagString: db "Bag@"
 
 ClearItemInBagQuantitysBox:
