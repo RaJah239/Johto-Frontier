@@ -181,8 +181,7 @@ MusicPlayer_Init:
 	call .GetSongCount
 .store_saved
 	and a
-	jr z, .store_saved_id
-	call .GetSongIDAtIndex
+	call nz, .GetSongIDAtIndex
 .store_saved_id
 	jr .SetSavedRowSong
 
@@ -403,7 +402,7 @@ MusicPlayer_Init:
 	jr nz, .done_repeat
 	ldh a, [hJoyPressed]
 	and D_PAD
-	jr nz, .done
+	ret nz
 	jr .wait
 
 .done_repeat
