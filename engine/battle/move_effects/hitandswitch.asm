@@ -64,11 +64,19 @@ SwitchMoveTransitionIntoMenu:
 SwitchMoveReturnToBattleScene:
 	call ClearPalettes
 	farcall LoadBattleFontsHPBar
-	call CloseWindow
+	call ExitMenu
 	call ClearSprites
-	hlcoord 1, 0
-	lb bc, 4, 10
+	; The outgoing mon has left. Remove it before showing the restored
+	; battle screen, and leave the opponent's HUD intact.
+	xor a
+	ldh [hBGMapMode], a
+	hlcoord 1, 5
+	lb bc, 7, 8
 	call ClearBox
+	hlcoord 9, 7
+	lb bc, 5, 11
+	call ClearBox
+	call WaitBGMap
 	ld b, SCGB_BATTLE_COLORS
 	call GetSGBLayout
 	jmp SetDefaultBGPAndOBP
