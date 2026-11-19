@@ -1752,11 +1752,6 @@ StepFunction_ScreenShake:
 	ld [wPlayerStepVectorY], a
 	ret
 
-.ok:
-	ld hl, wWeatherFlags
-	res WEATHER_IGNORE_PLAYER_Y_F, [hl]
-	jmp DeleteMapObject
-
 .GetSign:
 	ld hl, OBJECT_1E
 	add hl, bc
