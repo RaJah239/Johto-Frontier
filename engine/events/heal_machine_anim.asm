@@ -47,7 +47,7 @@ HealMachineAnim:
 	add hl, de
 	ld a, [hl]
 	cp HEALMACHINESTATE_FINISH
-	jr z, .finish
+	ret z
 	ld hl, .Jumptable
 	rst JumpTable
 	jr .jumptable_loop
