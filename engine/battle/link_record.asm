@@ -142,8 +142,7 @@ AddLastLinkBattleToLinkRecord:
 	push hl
 	inc hl
 	inc hl
-	ld a, [hl]
-	dec hl
+	ld a, [hld]
 	dec hl
 	and a
 	jr z, .copy
@@ -203,8 +202,7 @@ AddLastLinkBattleToLinkRecord:
 
 .CheckOverflow:
 	dec hl
-	ld a, [hl]
-	inc hl
+	ld a, [hli]
 	cp HIGH(MAX_LINK_RECORD)
 	ret c
 	ld a, [hl]
@@ -236,8 +234,7 @@ AddLastLinkBattleToLinkRecord:
 	pop bc
 	dec b
 	jr nz, .loop3
-	ld b, $0
-	ld c, $1
+	lb bc, $0, $1
 .loop4
 	ld a, b
 	add b
