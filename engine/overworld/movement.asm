@@ -475,25 +475,6 @@ Movement_bike_step_right:
 	ld a, STEP_BIKE << 2 | RIGHT
 	jr Movement_do_step
 
-Movement_step_down:
-	ld a, STEP_WALK << 2 | DOWN
-	jr Movement_do_step
-
-Movement_step_up:
-	ld a, STEP_WALK << 2 | UP
-	jr Movement_do_step
-
-Movement_step_left:
-	ld a, STEP_WALK << 2 | LEFT
-	jr Movement_do_step
-
-Movement_step_right:
-	ld a, STEP_WALK << 2 | RIGHT
-Movement_do_step:
-	ld d, OBJECT_ACTION_STEP
-Movement_normal_step:
-	jmp NormalStep
-
 Movement_big_step_down:
 	ld a, STEP_RUN << 2 | DOWN
 	jr Movement_do_run
@@ -510,151 +491,275 @@ Movement_big_step_right:
 	ld a, STEP_RUN << 2 | RIGHT
 Movement_do_run:
 	ld d, OBJECT_ACTION_RUN
-	jr Movement_normal_step
+	jr NormalStep
+
+Movement_step_down:
+	ld a, STEP_WALK << 2 | DOWN
+	jr Movement_do_step
+
+Movement_step_up:
+	ld a, STEP_WALK << 2 | UP
+	jr Movement_do_step
+
+Movement_step_left:
+	ld a, STEP_WALK << 2 | LEFT
+	jr Movement_do_step
+
+Movement_step_right:
+	ld a, STEP_WALK << 2 | RIGHT
+Movement_do_step:
+	ld d, OBJECT_ACTION_STEP
+	; fallthrough
+
+NormalStep:
+	push de
+	call InitStep
+	call UpdateTallGrassFlags
+	ld hl, OBJECT_ACTION
+	add hl, bc
+	pop de
+	ld [hl], d
+
+	ld hl, OBJECT_TILE_COLLISION
+	add hl, bc
+	ld a, [hl]
+	call CheckSuperTallGrassTile
+	jr z, .shake_grass
+
+	call CheckGrassTile
+	jr c, .skip_grass
+
+.shake_grass
+	call ShakeGrass
+
+.skip_grass
+	ld hl, wCenteredObject
+	ldh a, [hMapObjectIndex]
+	cp [hl]
+	ld hl, OBJECT_STEP_TYPE
+	add hl, bc
+	jr z, .player
+	ld [hl], STEP_TYPE_NPC_WALK
+	ret
+
+.player
+	ld [hl], STEP_TYPE_PLAYER_WALK
+	ret
 
 Movement_turn_away_down:
 	ld a, STEP_SLOW << 2 | DOWN
-	jmp TurningStep
+	jr TurningStep
 
 Movement_turn_away_up:
 	ld a, STEP_SLOW << 2 | UP
-	jmp TurningStep
+	jr TurningStep
 
 Movement_turn_away_left:
 	ld a, STEP_SLOW << 2 | LEFT
-	jmp TurningStep
+	jr TurningStep
 
 Movement_turn_away_right:
 	ld a, STEP_SLOW << 2 | RIGHT
-	jmp TurningStep
+	jr TurningStep
 
 Movement_turn_in_down:
 	ld a, STEP_WALK << 2 | DOWN
-	jmp TurningStep
+	jr TurningStep
 
 Movement_turn_in_up:
 	ld a, STEP_WALK << 2 | UP
-	jmp TurningStep
+	jr TurningStep
 
 Movement_turn_in_left:
 	ld a, STEP_WALK << 2 | LEFT
-	jmp TurningStep
+	jr TurningStep
 
 Movement_turn_in_right:
 	ld a, STEP_WALK << 2 | RIGHT
-	jmp TurningStep
+	; fallthrough
+
+TurningStep:
+	call InitStep
+	call UpdateTallGrassFlags
+
+	ld hl, OBJECT_ACTION
+	add hl, bc
+	ld [hl], OBJECT_ACTION_SPIN
+
+	ld hl, wCenteredObject
+	ldh a, [hMapObjectIndex]
+	cp [hl]
+	ld hl, OBJECT_STEP_TYPE
+	add hl, bc
+	jr z, .player
+	ld [hl], STEP_TYPE_NPC_WALK
+	ret
+
+.player
+	ld [hl], STEP_TYPE_PLAYER_WALK
+	ret
 
 Movement_turn_waterfall_down:
 	ld a, STEP_RUN << 2 | DOWN
-	jmp SlideStep
+	jr SlideStep
 
 Movement_turn_waterfall_up:
 	ld a, STEP_RUN << 2 | UP
-	jmp SlideStep
+	jr SlideStep
 
 Movement_turn_waterfall_left:
 	ld a, STEP_RUN << 2 | LEFT
-	jmp SlideStep
+	jr SlideStep
 
 Movement_turn_waterfall_right:
 	ld a, STEP_RUN << 2 | RIGHT
-	jmp SlideStep
+	jr SlideStep
 
 Movement_slow_slide_step_down:
 	ld a, STEP_SLOW << 2 | DOWN
-	jmp SlideStep
+	jr SlideStep
 
 Movement_slow_slide_step_up:
 	ld a, STEP_SLOW << 2 | UP
-	jmp SlideStep
+	jr SlideStep
 
 Movement_slow_slide_step_left:
 	ld a, STEP_SLOW << 2 | LEFT
-	jmp SlideStep
+	jr SlideStep
 
 Movement_slow_slide_step_right:
 	ld a, STEP_SLOW << 2 | RIGHT
-	jmp SlideStep
+	jr SlideStep
 
 Movement_slide_step_down:
 	ld a, STEP_WALK << 2 | DOWN
-	jmp SlideStep
+	jr SlideStep
 
 Movement_slide_step_up:
 	ld a, STEP_WALK << 2 | UP
-	jmp SlideStep
+	jr SlideStep
 
 Movement_slide_step_left:
 	ld a, STEP_WALK << 2 | LEFT
-	jmp SlideStep
+	jr SlideStep
 
 Movement_slide_step_right:
 	ld a, STEP_WALK << 2 | RIGHT
-	jmp SlideStep
+	jr SlideStep
 
 Movement_fast_slide_step_down:
 	ld a, STEP_RUN << 2 | DOWN
-	jmp SlideStep
+	jr SlideStep
 
 Movement_fast_slide_step_up:
 	ld a, STEP_RUN << 2 | UP
-	jmp SlideStep
+	jr SlideStep
 
 Movement_fast_slide_step_left:
 	ld a, STEP_RUN << 2 | LEFT
-	jmp SlideStep
+	jr SlideStep
 
 Movement_fast_slide_step_right:
 	ld a, STEP_RUN << 2 | RIGHT
-	jmp SlideStep
+	; fallthrough
+
+SlideStep:
+	call InitStep
+	call UpdateTallGrassFlags
+
+	ld hl, OBJECT_ACTION
+	add hl, bc
+	ld [hl], OBJECT_ACTION_STAND
+
+	ld hl, wCenteredObject
+	ldh a, [hMapObjectIndex]
+	cp [hl]
+	ld hl, OBJECT_STEP_TYPE
+	add hl, bc
+	jr z, .player
+	ld [hl], STEP_TYPE_NPC_WALK
+	ret
+
+.player
+	ld [hl], STEP_TYPE_PLAYER_WALK
+	ret
 
 Movement_slow_jump_step_down:
 	ld a, STEP_SLOW << 2 | DOWN
-	jmp JumpStep
+	jr JumpStep
 
 Movement_slow_jump_step_up:
 	ld a, STEP_SLOW << 2 | UP
-	jmp JumpStep
+	jr JumpStep
 
 Movement_slow_jump_step_left:
 	ld a, STEP_SLOW << 2 | LEFT
-	jmp JumpStep
+	jr JumpStep
 
 Movement_slow_jump_step_right:
 	ld a, STEP_SLOW << 2 | RIGHT
-	jmp JumpStep
+	jr JumpStep
 
 Movement_jump_step_down:
 	ld a, STEP_WALK << 2 | DOWN
-	jmp JumpStep
+	jr JumpStep
 
 Movement_jump_step_up:
 	ld a, STEP_WALK << 2 | UP
-	jmp JumpStep
+	jr JumpStep
 
 Movement_jump_step_left:
 	ld a, STEP_WALK << 2 | LEFT
-	jmp JumpStep
+	jr JumpStep
 
 Movement_jump_step_right:
 	ld a, STEP_WALK << 2 | RIGHT
-	jmp JumpStep
+	jr JumpStep
 
 Movement_fast_jump_step_down:
 	ld a, STEP_RUN << 2 | DOWN
-	jmp JumpStep
+	jr JumpStep
 
 Movement_fast_jump_step_up:
 	ld a, STEP_RUN << 2 | UP
-	jmp JumpStep
+	jr JumpStep
 
 Movement_fast_jump_step_left:
 	ld a, STEP_RUN << 2 | LEFT
-	jmp JumpStep
+	jr JumpStep
 
 Movement_fast_jump_step_right:
 	ld a, STEP_RUN << 2 | RIGHT
-	jmp JumpStep
+	; fallthrough
+
+JumpStep:
+	call InitStep
+	ld hl, OBJECT_JUMP_HEIGHT
+	add hl, bc
+	ld [hl], $0
+
+	ld hl, OBJECT_FLAGS2
+	add hl, bc
+	res OVERHEAD_F, [hl]
+
+	ld hl, OBJECT_ACTION
+	add hl, bc
+	ld [hl], OBJECT_ACTION_STEP
+
+	call SpawnShadow
+
+	ld hl, wCenteredObject
+	ldh a, [hMapObjectIndex]
+	cp [hl]
+	ld hl, OBJECT_STEP_TYPE
+	add hl, bc
+	jr z, .player
+	ld [hl], STEP_TYPE_NPC_JUMP
+	ret
+
+.player
+	ld [hl], STEP_TYPE_PLAYER_JUMP
+	ret
 
 Movement_turn_step_down:
 	ld a, OW_DOWN
@@ -684,122 +789,4 @@ TurnStep:
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_TURN
-	ret
-
-NormalStep:
-	push de
-	call InitStep
-	call UpdateTallGrassFlags
-	ld hl, OBJECT_ACTION
-	add hl, bc
-	pop de
-	ld [hl], d
-
-	ld hl, OBJECT_TILE_COLLISION
-	add hl, bc
-	ld a, [hl]
-	call CheckSuperTallGrassTile
-	jr z, .shake_grass
-
-	call CheckGrassTile
-	jr c, .skip_grass
-
-.shake_grass
-	call ShakeGrass
-
-.skip_grass
-	ld hl, wCenteredObject
-	ldh a, [hMapObjectIndex]
-	cp [hl]
-	jr z, .player
-
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_NPC_WALK
-	ret
-
-.player
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_PLAYER_WALK
-	ret
-
-TurningStep:
-	call InitStep
-	call UpdateTallGrassFlags
-
-	ld hl, OBJECT_ACTION
-	add hl, bc
-	ld [hl], OBJECT_ACTION_SPIN
-
-	ld hl, wCenteredObject
-	ldh a, [hMapObjectIndex]
-	cp [hl]
-	jr z, .player
-
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_NPC_WALK
-	ret
-
-.player
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_PLAYER_WALK
-	ret
-
-SlideStep:
-	call InitStep
-	call UpdateTallGrassFlags
-
-	ld hl, OBJECT_ACTION
-	add hl, bc
-	ld [hl], OBJECT_ACTION_STAND
-
-	ld hl, wCenteredObject
-	ldh a, [hMapObjectIndex]
-	cp [hl]
-	jr z, .player
-
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_NPC_WALK
-	ret
-
-.player
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_PLAYER_WALK
-	ret
-
-JumpStep:
-	call InitStep
-	ld hl, OBJECT_JUMP_HEIGHT
-	add hl, bc
-	ld [hl], $0
-
-	ld hl, OBJECT_FLAGS2
-	add hl, bc
-	res OVERHEAD_F, [hl]
-
-	ld hl, OBJECT_ACTION
-	add hl, bc
-	ld [hl], OBJECT_ACTION_STEP
-
-	call SpawnShadow
-
-	ld hl, wCenteredObject
-	ldh a, [hMapObjectIndex]
-	cp [hl]
-	jr z, .player
-
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_NPC_JUMP
-	ret
-
-.player
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_PLAYER_JUMP
 	ret
