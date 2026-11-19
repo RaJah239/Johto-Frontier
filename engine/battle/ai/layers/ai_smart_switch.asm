@@ -54,7 +54,7 @@ AI_Smart_Switch:
 ; switch if enemy accuracy at -2 or lower
     ld a, [wEnemyAccLevel]
 	cp BASE_STAT_LEVEL - 1
-	jmp c, .switch
+	jr c, .switch
 
 ; switch if the enemy's role-appropriate offense is at -2 or lower
 ; don't do this if either offense is currently boosted or the mon is mixed
@@ -115,25 +115,7 @@ AI_Smart_Switch:
 	call Random
 	cp 70 percent + 1
 	ret c
-	jr .checkSetupAndSwitchIfWeCantKO
-
-.checkSetupAndSwitchIfPlayerSetsUp
-; don't switch if enemy mon is already set up
-    call IsAISetup
-    ret c
-; switch if player attempts to set up
-	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
-    push hl
-    push de
-	push bc
-	ld hl, BoostingMoveEffects
-	ld de, 1
-	call IsInArray
-	pop bc
-	pop de
-	pop hl
-	jr c, .switch
-	ret
+	; fallthrough
 
 .checkSetupAndSwitchIfWeCantKO
     ld a, [wCurPlayerMove]
