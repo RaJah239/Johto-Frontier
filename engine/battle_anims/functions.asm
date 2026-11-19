@@ -1153,7 +1153,7 @@ BattleAnimFunc_Surf:
 .zero
 	call BattleAnim_IncAnonJumptableIndex
 	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	ld a, LOW(rSCY)
 	ldh [hLCDCPointer], a
 	ld a, $58
@@ -1212,7 +1212,7 @@ BattleAnimFunc_Surf:
 	cp $70
 	jr c, .move_down
 	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	xor a
 	ldh [hLCDCPointer], a
 	ldh [hLYOverrideStart], a
