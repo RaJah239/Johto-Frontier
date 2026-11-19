@@ -602,6 +602,12 @@ AccuracyCalc:
 	ld b, 4
 	jmp Divide
 
+IncrementC:
+; For FadeIn / SnowCloak (their lists call z, IncrementC):
+; it has to be in this bank
+	inc c
+	ret
+
 INCLUDE "data/abilities/true_horn_mons.asm"
 INCLUDE "data/abilities/stormbound_mons.asm"
 INCLUDE "data/abilities/true_flame_mons.asm"
