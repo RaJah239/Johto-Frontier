@@ -1,17 +1,3 @@
-BillsGrandfather:
-	farcall SelectMonFromParty
-	jr c, .cancel
-	ld a, [wCurPartySpecies]
-	ld [wScriptVar], a
-	ld [wNamedObjectIndex], a
-	call GetPokemonName
-	jr CopyPokemonName_Buffer1_Buffer3
-
-.cancel
-	xor a
-	ld [wScriptVar], a
-	ret
-
 OlderHaircutBrother:
 	ld hl, HappinessData_OlderHaircutBrother
 	jr HaircutOrGrooming
@@ -22,10 +8,6 @@ YoungerHaircutBrother:
 
 CianwoodPhotograph:
 	ld hl, HappinessData_CianwoodPhotograph
-	jr HaircutOrGrooming
-
-DaisysGrooming:
-	ld hl, HappinessData_DaisysGrooming
 	; fallthrough
 
 HaircutOrGrooming:
