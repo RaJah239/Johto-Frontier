@@ -711,9 +711,6 @@ AI_Smart_LesserStatChange:
 	jmp nz, StandardDiscourage
 	ret
 
-.ret
-	ret
-
 .discourage
 	inc [hl]
 	inc [hl]
@@ -1604,13 +1601,6 @@ AI_Smart_EvasionUp:
 ; Player is seeded.
 ; 50% chance to encourage this move.
 ; This would partly counter any previous discouragement.
-.maybe_encourage
-	call AI_50_50
-	ret c
-
-	dec [hl]
-	ret
-
 AI_Smart_AlwaysHit:
 ; 80% chance to greatly encourage this move if either...
 
