@@ -474,8 +474,7 @@ Pokedex_DetailedArea_grass:
 	push hl
 .done
 	pop hl ; points to map group/num
-	ld b, 0
-	ld c, GRASS_WILDDATA_LENGTH
+	lb bc, 0, GRASS_WILDDATA_LENGTH
 	add hl, bc
 	; check to see if there is a next entry
 	ld a, BANK(JohtoGrassWildMons)
@@ -716,8 +715,7 @@ Pokedex_DetailedArea_surf:
 	push hl
 .done
 	pop hl ; points to map group/num
-	ld b, 0
-	ld c, WATER_WILDDATA_LENGTH
+	lb bc, 0, WATER_WILDDATA_LENGTH
 	add hl, bc
 	; check to see if there is a next entry
 	ld a, BANK(JohtoWaterWildMons)
@@ -799,8 +797,7 @@ Surf_check_any_remaining:
 	push de
 	push bc
 
-	ld b, 0
-	ld c, WATER_WILDDATA_LENGTH
+	lb bc, 0, WATER_WILDDATA_LENGTH
 	add hl, bc
 	ld bc, 0 ; fake print line counter
 	push bc
@@ -826,8 +823,7 @@ Surf_check_any_remaining:
 	pop hl ; points to map group/num
 	pop bc ; line counter in c
 	push bc ; line counter in c
-	ld b, 0
-	ld c, WATER_WILDDATA_LENGTH
+	lb bc, 0, WATER_WILDDATA_LENGTH
 	add hl, bc
 	pop bc ; print counter
 	; check to see if there is a next entry
@@ -896,8 +892,7 @@ Dex_Check_Grass:
 	jr z, .found
 	pop hl ; points to map group/num
 	call DexArea_IncWildMonIndex
-	ld b, 0
-	ld c, GRASS_WILDDATA_LENGTH
+	lb bc, 0, GRASS_WILDDATA_LENGTH
 	add hl, bc
 	; check to see if there is a next entry
 	ld a, BANK(JohtoGrassWildMons)
@@ -938,8 +933,7 @@ Dex_Check_Surf:
 	jr z, .found
 	pop hl ; points to map group/num
 	call DexArea_IncWildMonIndex
-	ld b, 0
-	ld c, WATER_WILDDATA_LENGTH
+	lb bc, 0, WATER_WILDDATA_LENGTH
 	add hl, bc
 	; check to see if there is a next entry
 	ld a, BANK(JohtoWaterWildMons)
