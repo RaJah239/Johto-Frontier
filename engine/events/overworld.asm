@@ -167,8 +167,7 @@ OW_CheckLvlUpMoves:
 	jr z, .notfound ; end of mon's lvl up learnset
 	call OW_GetNextEvoAttackByte
 	cp d
-	jr z, .found
-	jr .find_move
+	jr nz, .find_move
 .found
 	xor a
 	ret ; move is in lvl up learnset
@@ -731,8 +730,7 @@ FlyFunction:
 .TryFly:
 	call GetMapEnvironment
 	call CheckOutdoorMap
-	jr z, .outdoors
-	jr .indoors
+	jr nz, .indoors
 
 .outdoors
 	xor a
@@ -1960,8 +1958,7 @@ BikeFunction:
 	cp CAVE
 	jr z, .ok
 	cp GATE
-	jr z, .ok
-	jr .nope
+	jr nz, .nope
 
 .ok
 	call GetPlayerTilePermission
