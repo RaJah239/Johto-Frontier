@@ -216,8 +216,7 @@ StatsScreen_JoypadAction:
 	bit D_DOWN_F, a
 	jr nz, .d_down
 	bit SELECT_F, a
-	jr nz, .select
-	ret
+	ret z
 
 .select
 	ld a, c
@@ -791,7 +790,7 @@ LoadOrangePage:
 	call EventFlagAction
 	ld a, c
 	and a
-	call nz, StatsScreen_PrintEVs
+	jr nz, StatsScreen_PrintEVs
 	ret
 
 .print_default_screen:
