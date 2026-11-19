@@ -930,9 +930,6 @@ ReelAction_StopReel2:
 	dec [hl]
 	ret
 
-.NoBias:
-	jr Slots_StopReel
-
 ReelAction_StopReel3:
 ; Manipulate the reel up to wReel3ManipCounter (i.e. 4) slots,
 ; stopping early if the bias symbol is lined up for a win.
