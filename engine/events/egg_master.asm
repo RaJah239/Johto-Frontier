@@ -164,50 +164,6 @@ GetRemindableEggMoves:
     and a
     ret
 
-CheckAlreadyInMoveList:
-    push hl
-    ld hl, wd002 + 1
-
-.loop
-    ld a, [hli]
-    inc a
-    jr z, .nope
-    dec a
-    cp c
-    jr nz, .loop
-    pop hl
-    scf
-    ret
-
-.nope
-    pop hl
-    and a
-    ret
-
-CheckPokemonAlreadyKnowsEggMove:
-    push hl
-    push bc
-    ld a, MON_MOVES
-    call GetPartyParamLocation
-    ld b, 4
-
-.loop
-    ld a, [hli]
-    cp c
-    jr z, .yes
-    dec b
-    jr nz, .loop
-    pop bc
-    pop hl
-    and a
-    ret
-
-.yes
-    pop bc
-    pop hl
-    scf
-    ret
-
 ; This is the text that displays if the player
 ; does not have enough money to learn a move.
 EggReminderNotEnoughMoneyText:
