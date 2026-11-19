@@ -1,9 +1,6 @@
 DrawPlayerHP:
 	ld a, $1
-	jr DrawHP
-
-DrawEnemyHP:
-	ld a, $2
+	; fallthrough
 
 DrawHP:
 	ld [wWhichHPBar], a
