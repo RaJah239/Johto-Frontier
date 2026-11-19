@@ -23,103 +23,12 @@
 	const DEBUGTEST_E       ; $7e
 	const DEBUGTEST_F       ; $7f
 
-	; DebugColorMain.Jumptable indexes
+	; Palette editor state indexes
 	const_def
 	const DEBUGCOLORMAIN_INITSCREEN     ; 0
 	const DEBUGCOLORMAIN_UPDATESCREEN   ; 1
 	const DEBUGCOLORMAIN_UPDATEPALETTES ; 2
 	const DEBUGCOLORMAIN_JOYPAD         ; 3
-	const DEBUGCOLORMAIN_INITTMHM       ; 4
-	const DEBUGCOLORMAIN_TMHMJOYPAD     ; 5
-
-DebugColourPicker:
-; A debug menu to test monster and trainer palettes at runtime.
-	ldh a, [hCGB]
-	and a
-	ret z
-	ldh a, [hInMenu]
-	push af
-	ld a, TRUE
-	ldh [hInMenu], a
-
-	call DisableLCD
-	call DebugColor_InitVRAM
-	call DebugColor_LoadGFX
-	call DebugColor_InitPalettes
-	call DebugColor_InitMonOrTrainerColor
-	call EnableLCD
-	ld e, MUSIC_NONE
-	call PlayMusic
-
-	xor a ; DEBUGCOLORMAIN_INITSCREEN
-	ld [wJumptableIndex], a
-	ld [wDebugColorCurMon], a
-	ld [wDebugColorIsShiny], a
-.loop
-	ld a, [wJumptableIndex]
-	bit 7, a
-	jr nz, .exit
-	call DebugColorMain
-	call DebugColor_PlaceCursor
-	call DelayFrame
-	jr .loop
-
-.exit
-	pop af
-	ldh [hInMenu], a
-	ret
-
-DebugColor_InitMonOrTrainerColor:
-	ld a, [wDebugColorIsTrainer]
-	and a
-	jr nz, DebugColor_InitTrainerColor
-	ld hl, PokemonPalettes
-	; fallthrough
-
-DebugColor_InitMonColor:
-	ld de, wDebugOriginalColors
-	ld c, NUM_POKEMON + 1
-.loop
-	push bc
-	push hl
-	call DebugColor_InitColor
-	pop hl
-	ld bc, 8
-	add hl, bc
-	pop bc
-	dec c
-	jr nz, .loop
-	ret
-
-DebugColor_InitTrainerColor:
-	ld hl, TrainerPalettes
-	ld de, wDebugOriginalColors
-	ld c, NUM_TRAINER_CLASSES + 1
-.loop
-	push bc
-	push hl
-	call DebugColor_InitColor
-	pop hl
-	ld bc, 4
-	add hl, bc
-	pop bc
-	dec c
-	jr nz, .loop
-	ret
-
-DebugColor_InitColor:
-rept 3
-	ld a, BANK(PokemonPalettes) ; aka BANK(TrainerPalettes)
-	call GetFarByte
-	ld [de], a
-	inc de
-	inc hl
-endr
-	ld a, BANK(PokemonPalettes) ; aka BANK(TrainerPalettes)
-	call GetFarByte
-	ld [de], a
-	inc de
-	ret
 
 DebugColor_InitVRAM:
 	ld a, $1
@@ -226,67 +135,6 @@ INCLUDE "gfx/debug/bg.pal"
 
 Palette_DebugOB:
 INCLUDE "gfx/debug/ob.pal"
-
-DebugColorMain:
-	call JoyTextDelay
-	ld a, [wJumptableIndex]
-	cp DEBUGCOLORMAIN_INITTMHM
-	jr nc, .no_start_select
-	ld hl, hJoyLast
-	ld a, [hl]
-	and SELECT
-	jr nz, .NextMon
-	ld a, [hl]
-	and START
-	jr nz, .PreviousMon
-.no_start_select
-	jumptable .Jumptable, wJumptableIndex
-
-.NextMon:
-	call DebugColor_BackupSpriteColors
-	call .SetMaxNum
-	ld e, a
-	ld a, [wDebugColorCurMon]
-	inc a
-	cp e
-	jr c, .SwitchMon
-	xor a
-	jr .SwitchMon
-
-.PreviousMon:
-	call DebugColor_BackupSpriteColors
-	ld a, [wDebugColorCurMon]
-	dec a
-	cp -1
-	jr nz, .SwitchMon
-	call .SetMaxNum
-	dec a
-.SwitchMon:
-	ld [wDebugColorCurMon], a
-	ld a, DEBUGCOLORMAIN_INITSCREEN
-	ld [wJumptableIndex], a
-	ret
-
-.SetMaxNum:
-; Looping back around the pic set.
-	ld a, [wDebugColorIsTrainer]
-	and a
-	jr nz, .trainer
-; mon
-	ld a, NUM_POKEMON ; CELEBI
-	ret
-.trainer
-	ld a, NUM_TRAINER_CLASSES ; MYSTICALMAN
-	ret
-
-.Jumptable:
-; entries correspond to DEBUGCOLORMAIN_* constants
-	dw DebugColor_InitScreen
-	dw DebugColor_UpdateScreen
-	dw DebugColor_UpdatePalettes
-	dw DebugColor_Joypad
-	dw DebugColor_InitTMHM
-	dw DebugColor_TMHMJoypad
 
 DebugColor_InitScreen:
 	xor a
@@ -488,57 +336,6 @@ DebugColor_PrintHexColor:
 	ld [hld], a
 	ret
 
-DebugColor_Joypad:
-	ldh a, [hJoyLast]
-	and B_BUTTON
-	jr nz, .tmhm
-	ldh a, [hJoyLast]
-	and A_BUTTON
-	jr nz, .toggle_shiny
-
-	ld a, [wDebugColorRGBJumptableIndex]
-	maskbits 4 ; .PointerTable length
-	ld e, a
-	ld d, 0
-	ld hl, .PointerTable
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
-
-.tmhm
-; Enter the TM/HM checker.
-	ld a, DEBUGCOLORMAIN_INITTMHM
-	ld [wJumptableIndex], a
-	ret
-
-.toggle_shiny
-; Toggle between the normal and shiny mon colors.
-	ld a, [wDebugColorIsTrainer]
-	and a
-	ret nz
-
-	ld a, [wDebugColorIsShiny]
-	xor %00000100
-	ld [wDebugColorIsShiny], a
-	ld c, a
-	ld b, 0
-	ld hl, PokemonPalettes
-	add hl, bc
-	call DebugColor_InitMonColor
-
-	ld a, DEBUGCOLORMAIN_INITSCREEN
-	ld [wJumptableIndex], a
-	ret
-
-.PointerTable:
-	dw DebugColor_SelectColorBox
-	dw DebugColor_ChangeRedValue
-	dw DebugColor_ChangeGreenValue
-	dw DebugColor_ChangeBlueValue
-
 DebugColor_SelectColorBox:
 	ld hl, hJoyLast
 	ld a, [hl]
@@ -632,121 +429,6 @@ DebugColor_NextRGBColor:
 	inc [hl]
 	ret
 
-DebugColor_InitTMHM:
-	hlcoord 0, 10
-	ld bc, SCREEN_WIDTH * 8
-	ld a, DEBUGTEST_BLACK
-	call ByteFill
-	hlcoord 2, 12
-	ld de, DebugColor_AreYouFinishedString
-	call PlaceString
-	xor a
-	ld [wDebugColorCurTMHM], a
-	call DebugColor_PrintTMHMMove
-	ld a, DEBUGCOLORMAIN_TMHMJOYPAD
-	ld [wJumptableIndex], a
-	ret
-
-DebugColor_TMHMJoypad:
-	ld hl, hJoyPressed
-	ld a, [hl]
-	and B_BUTTON
-	jr z, .scroll
-
-.cancel
-	ld a, DEBUGCOLORMAIN_INITSCREEN
-	ld [wJumptableIndex], a
-	ret
-
-.scroll:
-	ld hl, hJoyLast
-	ld a, [hl]
-	and D_UP
-	jr nz, .up
-	ld a, [hl]
-	and D_DOWN
-	jr nz, .down
-	ret
-
-.up
-	ld a, [wDebugColorCurTMHM]
-	cp NUM_TM_HM_TUTOR - 1
-	jr z, .wrap_down
-	inc a
-	jr .done
-
-.wrap_down
-	xor a
-	jr .done
-
-.down
-	ld a, [wDebugColorCurTMHM]
-	and a
-	jr z, .wrap_up
-	dec a
-	jr .done
-
-.wrap_up
-	ld a, NUM_TM_HM_TUTOR - 1
-
-.done
-	ld [wDebugColorCurTMHM], a
-	; fallthrough
-
-DebugColor_PrintTMHMMove:
-	hlcoord 10, 11
-	call .ClearRow
-	hlcoord 10, 12
-	call .ClearRow
-	hlcoord 10, 13
-	call .ClearRow
-	hlcoord 10, 14
-	call .ClearRow
-
-	ld a, [wDebugColorCurTMHM]
-	inc a
-	ld [wTempTMHM], a
-	predef GetTMHMMove
-	ld a, [wTempTMHM]
-	ld [wPutativeTMHMMove], a
-	call GetMoveName
-	hlcoord 10, 12
-	call PlaceString
-
-	ld a, [wDebugColorCurTMHM]
-	call .GetNumberedTMHM
-	ld [wCurItem], a
-	predef CanLearnTMHMMove
-	ld a, c
-	and a
-	ld de, .AbleText
-	jr nz, .place_string
-	ld de, .NotAbleText
-.place_string
-	hlcoord 10, 14
-	jmp PlaceString
-
-.AbleText:
-	db "Learns@" ; Learnable
-
-.NotAbleText:
-	db "Nope@" ; Not learnable
-
-.GetNumberedTMHM:
-	cp NUM_TMS
-	jr c, .tm
-; hm - skip two gap items
-	inc a
-	inc a
-.tm
-	add TM01
-	ret
-
-.ClearRow:
-	ld bc, 10
-	ld a, DEBUGTEST_BLACK
-	jmp ByteFill
-
 DebugColor_CalculatePalette:
 	ld a, [wDebugRedChannel]
 	and %00011111
@@ -808,21 +490,6 @@ DebugColor_CalculateRGB:
 	srl a
 	ld [wDebugBlueChannel], a
 	ret
-
-DebugColor_BackupSpriteColors:
-	ld a, [wDebugColorCurMon]
-	inc a
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
-	ld de, wDebugOriginalColors
-	add hl, de
-	ld e, l
-	ld d, h
-	ld hl, wDebugMiddleColors
-	ld bc, 4
-	jmp CopyBytes
 
 DebugColor_LoadPalettes_White_Col1_Col2_Black:
 .loop
@@ -923,12 +590,6 @@ DebugColor_PlaceCursor:
 	ld b, a
 	inc c
 	ret
-
-DebugColor_AreYouFinishedString:
-	db   "Done?"                        ; Are you finished?
-	next "Y<DOT><DOT><DOT>", DEBUGTEST_A ; YES...(A)
-	next "N<DOT><DOT>", DEBUGTEST_B     ; NO..(B)
-	db   "@"
 
 DebugColor_UpArrowGFX:
 INCBIN "gfx/debug/up_arrow.2bpp"
