@@ -294,8 +294,7 @@ HPBarAnim_PaletteUpdate:
 HPBarAnim_BGMapUpdate:
 	ldh a, [hCGB]
 	and a
-	jr nz, .cgb
-	ret
+	ret z
 
 .cgb
 	ld a, [wWhichHPBar]
