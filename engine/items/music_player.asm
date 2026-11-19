@@ -355,8 +355,7 @@ MusicPlayer_Init:
 .GetSongName:
 	; Read the far pointer for the selected song name from the packed pointer table.
 	ld hl, MusicPlayerSongNamePointers
-	ld c, 3
-	ld b, 0
+	lb bc, 0, 3
 	call AddNTimes
 	ld a, BANK(MusicPlayerSongNamePointers)
 	call GetFarByte
