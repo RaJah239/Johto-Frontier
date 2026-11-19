@@ -5,12 +5,12 @@ BattleIntroSlidingPics:
 	ldh [rSVBK], a
 	call .subfunction1
 	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	ld a, LOW(rSCX)
 	ldh [hLCDCPointer], a
 	call .subfunction2
 	ld a, RETI_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	xor a
 	ldh [hLCDCPointer], a
 	pop af
@@ -27,8 +27,7 @@ BattleIntroSlidingPics:
 	jmp DmgToCgbObjPals
 
 .subfunction2
-	ld d, $90
-	ld e, $72
+	lb de, $90, $72
 	ld a, $48
 	inc a
 .loop1
