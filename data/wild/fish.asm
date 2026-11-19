@@ -299,8 +299,7 @@ FishGroups_Names::
  	call GetFarByte
  	; ld a, [hl] ; fishing group
  	cp FISHGROUP_NONE
- 	jr z, .fishgroup_none
- 	jr GetFishGroupName
+	jr nz, GetFishGroupName
  	; ptr to fishgroup name is in de
  .fishgroup_none
  	xor a
