@@ -8,8 +8,6 @@ String_MOVES_text:
 	db " Moves     @"
 String_TECH_text:
 	db "Technical  @"
-String_HIDDEN_text:
-	db "Hidden     @"
 String_MACHINES_text:
 	db " Machines  @"
 String_MOVE_text:
