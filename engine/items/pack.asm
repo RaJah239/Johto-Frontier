@@ -1374,7 +1374,7 @@ Pack_InterpretJoypad:
 	jr nz, .select
 	ld a, [hl]
 	and START
-	jr nz, .start
+	jr nz, Pack_SortMenu
 	scf
 	ret
 
