@@ -243,8 +243,7 @@ TMHM_ShowTMMoveDescription:
 	call TMHM_CheckHoveringOverCancel
 	jmp nc, TMHM_ExitPocket
 	hlcoord 0, 11
-	ld b, 5
-	ld c, SCREEN_WIDTH - 2
+	lb bc, 5, SCREEN_WIDTH - 2
 	call Textbox
 	ld a, [wCurItem]
 	cp NUM_TMS + NUM_HMS + 1
@@ -485,8 +484,7 @@ TMHM_ScrollPocket:
 ; Returns in a how many TMs/HMs the player actually owns.
 TMHM_CountPocketItems:
 	ld hl, wTMsHMs
-	ld c, NUM_TMS + NUM_HMS
-	ld b, 0
+	lb bc, 0, NUM_TMS + NUM_HMS
 .loop
 	ld a, [hli]
 	and a
@@ -662,8 +660,7 @@ ConsumeTM:
 	ret
 
 CountTMsHMs:
-	ld b, 0
-	ld c, NUM_TMS + NUM_HMS
+	lb bc, 0, NUM_TMS + NUM_HMS
 	ld hl, wTMsHMs
 .loop
 	ld a, [hli]
