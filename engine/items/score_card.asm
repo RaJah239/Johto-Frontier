@@ -172,8 +172,7 @@ ScoreCardRedraw:
 	call UpdateScoreCardPageText
 	ld a, [wScoreCardPage]
 	and a
-	jr z, ScoreCardPage1
-	jr ScoreCardEmptyPage
+	jr nz, ScoreCardEmptyPage
 
 ; ========================
 ; Page 1: the score
