@@ -466,7 +466,7 @@ ListMovePP:
 .loop
 	ld a, [hli]
 	and a
-	jr z, .done
+	ret z
 	push bc
 	push hl
 	push de
@@ -634,7 +634,7 @@ ListMoves:
 	pop de
 	ld a, b
 	cp NUM_MOVES
-	jr z, .done
+	ret z
 	jr .moves_loop
 
 .no_more_moves
