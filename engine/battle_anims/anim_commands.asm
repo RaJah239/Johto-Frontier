@@ -410,20 +410,6 @@ BattleAnimCmd_Call:
 	set BATTLEANIM_IN_SUBROUTINE_F, [hl]
 	ret
 
-BattleAnimCmd_Jump:
-; address, bank
-	call GetBattleAnimByte
-	ld e, a
-	call GetBattleAnimByte
-	ld d, a
-	call GetBattleAnimByte
-	ld [wBattleAnimBank], a
-	ld hl, wBattleAnimAddress
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ret
-
 BattleAnimCmd_StatLoop:
 ; Loop count = stages the stat changed: wLoweredStat's high nibble + 1.
 	ld a, [wLoweredStat]
@@ -516,7 +502,7 @@ BattleAnimCmd_IfParamEqual:
 	call GetBattleAnimByte
 	ld hl, wBattleAnimParam
 	cp [hl]
-	jr z, .jump
+	jr z, BattleAnimCmd_Jump
 
 	; skip the address and bank
 	ld hl, wBattleAnimAddress
@@ -531,8 +517,19 @@ BattleAnimCmd_IfParamEqual:
 	ld [hl], e
 	ret
 
-.jump
-	jmp BattleAnimCmd_Jump
+BattleAnimCmd_Jump:
+; address, bank
+	call GetBattleAnimByte
+	ld e, a
+	call GetBattleAnimByte
+	ld d, a
+	call GetBattleAnimByte
+	ld [wBattleAnimBank], a
+	ld hl, wBattleAnimAddress
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ret
 
 BattleAnimCmd_Obj:
 ; index, x, y, param
