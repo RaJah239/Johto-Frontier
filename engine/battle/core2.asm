@@ -379,7 +379,7 @@ SetUpSelfDVs:
 	cp CAL
 	jr z, .self
 	cp CAL_F
-	jr nz, .notSelf
+	ret nz
 .self
 	ld a, [wCurPartyMon]
 	ld hl, wOTPartyMon1DVs
