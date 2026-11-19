@@ -333,7 +333,7 @@ MagnetTrain_Jumptable:
 	ld hl, wMagnetTrainWaitCounter
 	ld a, [hl]
 	and a
-	jr z, .DoneWaiting
+	jr z, .Next
 	dec [hl]
 	ret
 
@@ -344,7 +344,7 @@ MagnetTrain_Jumptable:
 	ld hl, wMagnetTrainFinalPosition
 	ld a, [wMagnetTrainPosition]
 	cp [hl]
-	jr z, .PrepareToFinishAnim
+	jr z, .Next
 	ld e, a
 	ld a, [wMagnetTrainDirection]
 	cpl
