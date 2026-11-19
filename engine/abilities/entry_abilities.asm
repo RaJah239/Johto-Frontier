@@ -938,8 +938,7 @@ HandleScrappy:
 	newfarcall AttackerHasScrappyRaw
 	ret nc
 	ldh a, [hBattleTurn]
-	newfarcall ShowScrappyPopupOnSide
-	ret
+	farjp ShowScrappyPopupOnSide
 
 INCLUDE "data/abilities/intimidate_mons.asm"
 
