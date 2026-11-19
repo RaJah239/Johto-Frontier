@@ -58,12 +58,6 @@ QueueBGEffect:
 	ld [hl], a
 	ret
 
-EndBattleBGEffect:
-	ld hl, BG_EFFECT_STRUCT_FUNCTION
-	add hl, bc
-	ld [hl], 0
-	ret
-
 DoBattleBGEffectFunction:
 	ld hl, BG_EFFECT_STRUCT_FUNCTION
 	add hl, bc
@@ -79,7 +73,7 @@ DoBattleBGEffectFunction:
 
 BattleBGEffects:
 ; entries correspond to BATTLE_BG_EFFECT_* constants
-	dw BattleBGEffect_End
+	dw EndBattleBGEffect
 	dw BattleBGEffect_FlashInverted
 	dw BattleBGEffect_WhiteHues
 	dw BattleBGEffect_BlackHues
@@ -122,9 +116,6 @@ BattleBGEffects:
 	dw BattleBGEffect_VibrateMon
 	dw BattleBGEffect_DoubleTeam
 
-BattleBGEffect_End:
-	jr EndBattleBGEffect
-
 BatttleBGEffects_GetNamedJumptablePointer:
 	ld hl, BG_EFFECT_STRUCT_JT_INDEX
 	add hl, bc
@@ -154,6 +145,12 @@ BattleBGEffects_IncAnonJumptableIndex:
 	ld hl, BG_EFFECT_STRUCT_JT_INDEX
 	add hl, bc
 	inc [hl]
+	ret
+
+EndBattleBGEffect:
+	ld hl, BG_EFFECT_STRUCT_FUNCTION
+	add hl, bc
+	ld [hl], 0
 	ret
 
 BattleBGEffect_FlashInverted:
@@ -195,10 +192,8 @@ BattleBGEffect_FlashContinue:
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .apply_pal
-	jmp EndBattleBGEffect
+	jr z, EndBattleBGEffect
 
-.apply_pal
 	dec a
 	ld [hl], a
 	and 1
@@ -212,12 +207,9 @@ BattleBGEffect_FlashContinue:
 BattleBGEffect_WhiteHues:
 	ld de, .Pals
 	call BattleBGEffect_GetNthDMGPal
-	jr c, .quit
+	jr c, EndBattleBGEffect
 	ld [wBGP], a
 	ret
-
-.quit
-	jmp EndBattleBGEffect
 
 .Pals:
 	dc 3, 2, 1, 0
@@ -228,12 +220,9 @@ BattleBGEffect_WhiteHues:
 BattleBGEffect_BlackHues:
 	ld de, .Pals
 	call BattleBGEffect_GetNthDMGPal
-	jr c, .quit
+	jr c, EndBattleBGEffect
 	ld [wBGP], a
 	ret
-
-.quit
-	jmp EndBattleBGEffect
 
 .Pals:
 	dc 3, 2, 1, 0
@@ -244,13 +233,10 @@ BattleBGEffect_BlackHues:
 BattleBGEffect_AlternateHues:
 	ld de, .Pals
 	call BattleBGEffect_GetNthDMGPal
-	jr c, .quit
+	jr c, EndBattleBGEffect
 	ld [wBGP], a
 	ld [wOBP1], a
 	ret
-
-.quit
-	jmp EndBattleBGEffect
 
 .Pals:
 	dc 3, 2, 1, 0
