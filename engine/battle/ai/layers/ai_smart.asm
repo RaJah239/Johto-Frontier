@@ -299,8 +299,7 @@ AI_Smart_Growth:
 ; if player is asleep and is physical we should boost
 	ld a, [wBattleMonStatus]
 	and SLP_MASK
-	jr z, .not_asleep
-	jmp StandardEncourage
+	jmp nz, StandardEncourage
 
 .not_asleep
 ; don't use if we are at risk of being KO'd, just attack them
@@ -310,8 +309,7 @@ AI_Smart_Growth:
 ; encourage to +2 - strong encourage if player is physical
 	ld a, [wEnemyAtkLevel]
 	cp BASE_STAT_LEVEL + 2
-	jr nc, .at_plus_2
-	jmp StrongEncourage
+	jmp c, StrongEncourage
 
 .at_plus_2
 ; already 2HKOs: just attack (more boosts only give the player time)
@@ -688,10 +686,10 @@ AI_Smart_LesserStatChange:
 .check_defense
 	ld a, [wEnemyDefLevel]
 	cp BASE_STAT_LEVEL + 2
-	jr c, .ret
+	ret c
 	ld a, [wPlayerDefLevel]
 	cp BASE_STAT_LEVEL + 2
-	jr nc, .ret
+	ret nc
 	jmp StandardDiscourage
 
 .check_focus_energy
@@ -793,8 +791,7 @@ AI_Smart_Agility:
 	call DoesAIOutSpeedPlayer
 	jr c, .no_ko
 	call PlayerHasPriorityMove
-	jr c, .no_ko
-	jmp StrongEncourage
+	jmp nc, StrongEncourage
 
 .no_ko
 ; discourage if speed already at +2
@@ -835,8 +832,7 @@ AI_Smart_Barrier:
 	jr c, .encourage
 	ld a, [wPlayerDefLevel]
 	cp BASE_STAT_LEVEL + 2
-	jr nc, .encourage
-	jr .discourage
+	jr c, .discourage
 
 ; encourage enough to overcome encouragement to score a ko
 .encourage
@@ -1040,8 +1036,7 @@ AI_Smart_QuiverDance:
 	call DoesAIOutSpeedPlayer
 	jr c, .no_ko_qd
 	call PlayerHasPriorityMove
-	jr c, .no_ko_qd
-	jmp StrongEncourage
+	jmp nc, StrongEncourage
 
 .no_ko_qd
 	call ShouldAIBoost
@@ -1152,8 +1147,7 @@ AI_Smart_SetupDance:
 	call DoesAIOutSpeedPlayer
 	jr c, .no_ko
 	call PlayerHasPriorityMove
-	jr c, .no_ko
-	jmp StrongEncourage
+	jmp nc, StrongEncourage
 
 .no_ko
 ; should boost
@@ -1194,9 +1188,8 @@ AI_Smart_SetupDance:
 
 	ld b, EFFECT_ATTACK_UP_2
 	call AIHasMoveEffect
-	jr c, .use_first
+	jr nc, .normal_encourage
 
-	jr .normal_encourage
 
 .use_first
 	ld a, [wEnemySpdLevel]
@@ -1379,8 +1372,8 @@ AI_Smart_BrickBreak:
 	cp LIGHT_SCREEN
 	call z, .encourage
 	cp REFLECT
-	call z, .encourage
-	ret ; If neither LIGHT_SCREEN nor REFLECT is active, skip the encouragement
+	ret nz
+	; fallthrough
 
 .encourage
 	call AI_90_10
@@ -1406,16 +1399,16 @@ AI_Smart_Avalanche:
 ; a damaging move last.
 	ld a, [wLastPlayerCounterMove]
 	and a
-	jr z, .done
+	ret z
 
 	call AIGetEnemyMove
 
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
-	jr z, .done
+	ret z
 
 	call AI_80_20
-	jr c, .done
+	ret c
 	dec [hl]
 	dec [hl]
 	ret
@@ -1486,8 +1479,7 @@ AI_Smart_Sleep:
 ; check if the move is Lovely Kiss
 	ld a, [wEnemyMoveStruct + MOVE_ANIM]
 	cp LOVELY_KISS
-	jr nz, .notLovelyKiss
-	jr .useMove
+	jr z, .useMove
 
 .notLovelyKiss
 ; greatly encourage sleep inducing moves
@@ -1848,7 +1840,6 @@ AI_Smart_ForceSwitch:
 
 AI_Smart_SlackOff:
 	call AICompareSpeed
-	jr c, AI_Smart_Heal
 	; fallthrough
 
 ; ============================================================================
@@ -1876,14 +1867,6 @@ AI_Smart_Heal:
 	cp REST
 	jr nz, .not_rest_heal
 
-.rest_check_toxic
-	; If toxiced, force heal
-	ld a, [wEnemySubStatus5]
-	bit SUBSTATUS_TOXIC, a
-	jr z, .rest_heal
-	jr .rest_heal           ; Skip IsAIToxified check for Rest
-
-.rest_heal
 	; Don't Rest if player can 3HKO from max HP
 	; With Sleep Talk: only discourage if player can 1HKO (safer with Sleep Talk)
 	ld b, EFFECT_SLEEP_TALK
@@ -1967,8 +1950,7 @@ AI_Smart_Heal:
 	cp HO_OH
 	jr z, .big_encourage
 	cp MEWTWO
-	jr z, .big_encourage
-	jr .normal_encourage
+	jr nz, .normal_encourage
 
 .big_encourage
 rept 8
@@ -2230,8 +2212,7 @@ AI_Smart_SpDefenseUp2:
 	jr c, .continue
 	ld a, [wPlayerSDefLevel]
 	cp BASE_STAT_LEVEL + 2
-	jr nc, .continue
-	jr .discourage
+	jr c, .discourage
 
 .continue
 ; greatly encourage this move if
@@ -2836,8 +2817,7 @@ AI_Smart_Flinch:
 	; check if blastoise has iron head
 	ld a, [wEnemyMoveStruct + MOVE_ANIM]
 	cp IRON_HEAD
-	jr nz, .not_blastoise_or_iron_head
-	jmp AI_Smart_PriorityHit
+	jmp z, AI_Smart_PriorityHit
 
 .not_blastoise_or_iron_head
 	ld a, [wEnemyMonSpecies]
@@ -2850,8 +2830,7 @@ AI_Smart_Flinch:
 	; check if drowzee or hypno has zen headbutt
 	ld a, [wEnemyMoveStruct + MOVE_ANIM]
 	cp ZEN_HEADBUTT
-	jr nz, .not_drowzee_or_hypno_or_zen_headbutt
-	jmp AI_Smart_PriorityHit
+	jmp z, AI_Smart_PriorityHit
 
 .not_drowzee_or_hypno_or_zen_headbutt
 ; do nothing if slower than player
@@ -3411,8 +3390,7 @@ AI_Smart_BulkUp:
 	cp BASE_STAT_LEVEL + 2
 	jr nc, .at_plus_2
 	call IsPlayerPhysicalOrSpecial
-	jr nc, .special
-	jmp StrongEncourage
+	jmp c, StrongEncourage
 
 .special
 	jmp StandardEncourage
@@ -3466,8 +3444,7 @@ AI_Smart_Curse:
 	cp BASE_STAT_LEVEL + 2
     jr nc, .atPlus2
 	call IsPlayerPhysicalOrSpecial
-	jr nc, .special
-	jr .strongEncourage
+	jr c, .strongEncourage
 .special
 	jr .encourage
 
@@ -4033,8 +4010,7 @@ AI_Smart_Attract:
 
 	ld a, [wPlayerTurnsTaken]
 	and a
-	jr z, .first_turn
-	jmp StandardDiscourage
+	jmp nz, StandardDiscourage
 
 .first_turn
 	call AI_90_10
@@ -4087,8 +4063,7 @@ AI_Smart_BatonPass:
 	jr nc, .encourage
 	ld a, [wEnemySpdLevel]
 	cp BASE_STAT_LEVEL + 2
-	jr nc, .encourage
-	jr .discourage
+	jr c, .discourage
 
 .encourage
 	dec [hl]
