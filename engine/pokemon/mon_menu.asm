@@ -286,9 +286,6 @@ GiveTakePartyMonItem:
 	ret z
 	jmp TryGiveItemToPartymon
 
-.quit
-	ret
-
 GetItemToGive:
 ; Returns nz if we got an item to give.
 	farcall DepositSellInitPackBuffers
@@ -488,8 +485,36 @@ GivePartyItem:
 	ld [hl], a
 	ld d, a
 	farcall ItemIsMail
-	call c, ComposeMailMessage
-	ret
+	ret nc
+	; fallthrough
+
+ComposeMailMessage:
+	ld de, wTempMailMessage
+	farcall _ComposeMailMessage
+	ld hl, wPlayerName
+	ld de, wTempMailAuthor
+	ld bc, NAME_LENGTH - 1
+	call CopyBytes
+	ld hl, wPlayerID
+	ld bc, 2
+	call CopyBytes
+	ld a, [wCurPartySpecies]
+	ld [de], a
+	inc de
+	ld a, [wCurItem]
+	ld [de], a
+	ld a, [wCurPartyMon]
+	ld hl, sPartyMail
+	ld bc, MAIL_STRUCT_LENGTH
+	call AddNTimes
+	ld d, h
+	ld e, l
+	ld hl, wTempMail
+	ld bc, MAIL_STRUCT_LENGTH
+	ld a, BANK(sPartyMail)
+	call OpenSRAM
+	call CopyBytes
+	jmp CloseSRAM
 
 TakePartyItem:
 	call SpeechTextbox
@@ -596,34 +621,6 @@ StartMenuNoYes:
 	call MenuTextbox
 	call NoYesBox
 	jmp ExitMenu
-
-ComposeMailMessage:
-	ld de, wTempMailMessage
-	farcall _ComposeMailMessage
-	ld hl, wPlayerName
-	ld de, wTempMailAuthor
-	ld bc, NAME_LENGTH - 1
-	call CopyBytes
-	ld hl, wPlayerID
-	ld bc, 2
-	call CopyBytes
-	ld a, [wCurPartySpecies]
-	ld [de], a
-	inc de
-	ld a, [wCurItem]
-	ld [de], a
-	ld a, [wCurPartyMon]
-	ld hl, sPartyMail
-	ld bc, MAIL_STRUCT_LENGTH
-	call AddNTimes
-	ld d, h
-	ld e, l
-	ld hl, wTempMail
-	ld bc, MAIL_STRUCT_LENGTH
-	ld a, BANK(sPartyMail)
-	call OpenSRAM
-	call CopyBytes
-	jmp CloseSRAM
 
 MonMailAction:
 ; If in the trade center,
