@@ -260,8 +260,8 @@ BattleCommand_CheckTurn:
 	ld de, ANIM_CONFUSED
 	call FarPlayBattleAnimation
 
-	; 50% chance of hitting itself
-	call EffectCommands_50_50
+	; 33% chance of hitting itself
+	call EffectCommands_33_67
 	jr nc, .not_confused
 
 	; clear confusion-dependent substatus
@@ -514,8 +514,8 @@ CheckEnemyTurn:
 	ld de, ANIM_CONFUSED
 	call FarPlayBattleAnimation
 
-	; 50% chance of hitting itself
-	call EffectCommands_50_50
+	; 33% chance of hitting itself
+	call EffectCommands_33_67
 	jr nc, .not_confused
 
 	; clear confusion-dependent substatus
@@ -6959,6 +6959,11 @@ TenPercentBoost:
 EffectCommands_50_50:
 	call BattleRandom
 	cp 50 percent + 1
+	ret
+
+EffectCommands_33_67:
+	call BattleRandom
+	cp 33 percent + 1
 	ret
 
 BattleCommand_ItemSun:
