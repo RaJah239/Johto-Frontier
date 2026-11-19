@@ -1,7 +1,7 @@
 HoOhChamber:
 	ld b, HO_OH ; is Ho-oh in the party?
 	farcall _FindPartyMonThatSpecies
-	jr z, .done ; if not, we're done
+	ret z ; if not, we're done
 	ld de, EVENT_WALL_OPENED_IN_HO_OH_CHAMBER
 	ld b, SET_FLAG
 	call EventFlagAction
@@ -14,7 +14,7 @@ OmanyteChamber:
 	call EventFlagAction
 	ld a, c
 	and a
-	jr nz, .nope
+	ret nz
 
 	ld a, WATER_STONE
 	ld [wCurItem], a
@@ -27,7 +27,7 @@ OmanyteChamber:
 	inc b
 .loop
 	dec b
-	jr z, .nope
+	ret z
 	ld a, b
 	dec a
 	ld [wCurPartyMon], a
