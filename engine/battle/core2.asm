@@ -743,6 +743,7 @@ StatsInfoBox:
 	ld d, a
 	ld a, [wBattleMonItem]
 	ld e, a
+	ld a, 1 ; player stats
 	call .CopyStats
 	ld de, StatTexts
 	lb bc, 1, 2
@@ -756,6 +757,7 @@ StatsInfoBox:
 	ld d, a
 	ld a, [wEnemyMonItem]
 	ld e, a
+	xor a ; enemy stats
 	call .CopyStats
 	ld de, StatTexts
 	lb bc, 11, 2
@@ -766,8 +768,10 @@ StatsInfoBox:
 ; mon's ability and item give them: Huge Power doubles Attack (species d);
 ; Choice Band (x1.5) and Muscle Band (x1.1) Attack, Choice Specs (x1.5) and
 ; Wise Glasses (x1.1) Sp. Atk, and Everstone (the Eviolite effect, x1.5)
-; Defense and Sp. Def if the mon can still evolve (item e).
+; Defense and Sp. Def if the mon can still evolve (item e). a is nonzero for
+; the player; active weather boosts are applied to the matching type and stat.
 ; Return hl = the copy.
+	push af
 	push de
 	ld de, wStringBuffer1
 	ld bc, 2 * (1 + NUM_BATTLE_STATS)
@@ -809,6 +813,40 @@ StatsInfoBox:
 .one_stat
 	call .ScaleStat
 .done
+	pop af
+	and a
+	ld hl, wEnemyMonType1
+	jr z, .got_types
+	ld hl, wBattleMonType1
+.got_types
+	ld a, [wBattleWeather]
+	cp WEATHER_SANDSTORM
+	jr z, .sandstorm
+	cp WEATHER_HAIL
+	jr nz, .finished
+	ld a, [hli]
+	cp ICE
+	jr z, .hail_defense
+	ld a, [hl]
+	cp ICE
+	jr nz, .finished
+.hail_defense
+	ld hl, wStringBuffer1 + 4 ; Defense
+	jr .scale_weather_stat
+
+.sandstorm
+	ld a, [hli]
+	cp ROCK
+	jr z, .sand_sp_defense
+	ld a, [hl]
+	cp ROCK
+	jr nz, .finished
+.sand_sp_defense
+	ld hl, wStringBuffer1 + 10 ; Sp. Def
+.scale_weather_stat
+	ld c, 15
+	call .ScaleStat
+.finished
 	ld hl, wStringBuffer1
 	ret
 
