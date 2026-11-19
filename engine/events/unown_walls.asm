@@ -101,8 +101,7 @@ DisplayUnownWords:
 	and a
 	jr z, .load
 
-	ld d, $0
-	ld e, $5
+	lb de, $0, $5
 .loop
 	add hl, de
 	dec a
