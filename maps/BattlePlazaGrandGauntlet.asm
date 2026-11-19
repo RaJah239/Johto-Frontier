@@ -684,8 +684,7 @@ PickPartyKeeperHeldItem:
 	ld hl, ItemAttributes + ITEMATTR_POCKET
 	ld a, BANK(ItemAttributes)
 	ld d, a ; the table's bank
-	ld b, NUM_ITEMS
-	ld c, 0
+	lb bc, NUM_ITEMS, 0
 .count
 	ld a, NUM_ITEMS
 	sub b
