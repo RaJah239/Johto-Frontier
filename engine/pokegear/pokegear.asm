@@ -484,8 +484,7 @@ PokegearClock_Joypad:
  	; if have radio card, load that, else, load phone
  	ld a, [wPokegearFlags]
  	bit POKEGEAR_RADIO_CARD_F, a
- 	jr nz, .radio_card
- 	jr .no_map_card
+	jr z, .no_map_card
 
  .radio_card
 	lb bc, POKEGEARCARD_RADIO, POKEGEARSTATE_RADIOINIT
@@ -2466,8 +2465,7 @@ Pokedex_GetArea:
 	ret nz
 	ld a, e
 	and $10
-	jr nz, .copy_sprites
-	jmp ClearSprites
+	jmp z, ClearSprites
 
 .copy_sprites
 	hlcoord 0, 0
