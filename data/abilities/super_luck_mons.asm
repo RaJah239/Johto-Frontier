@@ -1,4 +1,4 @@
-; List of all Pokemon who has an innate +2 critical hit level
+; List of all Pokemon with an innate +1 critical hit stage
 
 SuperLuckPokemon:
 ;    db ABSOL

@@ -2105,12 +2105,18 @@ PlayerAttackDamage:
 ; physical
 	ld hl, wEnemyMonDefense
 	call UnawareDefenseStat
+	ld a, [wEnemyDefLevel]
+	ld bc, wEnemyDefense
+	call CriticalDefenseStat
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
 
 	call HailDefenseBoost
 
+	ld a, [wCriticalHit]
+	and a
+	jr nz, .physicalcrit
 	ld a, [wEnemyScreens]
 	bit SCREENS_REFLECT, a
 	call nz, InfiltratorIgnoresBarrier
@@ -2128,15 +2134,10 @@ PlayerAttackDamage:
 	ld hl, wBattleMonAttack
 	xor a ; Attack
 	call UnawareAttackStat
-	call CheckDamageStatsCritical
-	jr c, .PolarFangorLightBall
-	ld e, 0 ; crit: unboosted stats, nothing for Unaware to redo
-
-	ld hl, wEnemyDefense
-	ld a, [hli]
-	ld b, a
-	ld c, [hl]
-	ld hl, wPlayerAttack
+	xor a ; Attack
+	call CriticalAttackStat
+	jr nc, .PolarFangorLightBall
+	ld e, UNAWARE_REDO_BURN
 	jr .PolarFangorLightBall
 
 .body_press
@@ -2144,15 +2145,9 @@ PlayerAttackDamage:
 	ld hl, wBattleMonDefense
 	ld a, 1 ; Defense
 	call UnawareAttackStat
-	call CheckDamageStatsCritical
-	jr c, .PolarFangorLightBall ; Use boosted stats
-	ld e, 0
-
-	ld hl, wEnemyDefense
-	ld a, [hli]
-	ld b, a
-	ld c, [hl]
-	ld hl, wPlayerDefense
+	ld a, 1 ; Defense
+	call CriticalAttackStat
+	ld e, UNAWARE_REDO_BURN ; Body Press is physical, so burn still reduces it
 	jr .PolarFangorLightBall
 
 .special
@@ -2162,12 +2157,19 @@ PlayerAttackDamage:
 	cp EFFECT_PSYSHOCK
 	jr nz, .get_special_defense
 	ld hl, wEnemyMonDefense
+	ld bc, wEnemyDefense
+	ld a, [wEnemyDefLevel]
 	jr .psyshock_done
 
 .get_special_defense
 	ld hl, wEnemyMonSpclDef
+	ld bc, wEnemySpDef
+	ld a, [wEnemySDefLevel]
 .psyshock_done
+	push af
 	call UnawareDefenseStat
+	pop af
+	call CriticalDefenseStat
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
@@ -2175,6 +2177,9 @@ PlayerAttackDamage:
 	call AssaultVestSpDefBoost
 	call SandstormSpDefBoost
 
+	ld a, [wCriticalHit]
+	and a
+	jr nz, .specialcrit
 	ld a, [wEnemyScreens]
 	bit SCREENS_LIGHT_SCREEN, a
 	call nz, InfiltratorIgnoresBarrier
@@ -2186,15 +2191,10 @@ PlayerAttackDamage:
 	ld hl, wBattleMonSpclAtk
 	ld a, 3 ; Sp. Atk
 	call UnawareAttackStat
-	call CheckDamageStatsCritical
-	jr c, .lightball
-	ld e, 0
-
-	ld hl, wEnemySpDef
-	ld a, [hli]
-	ld b, a
-	ld c, [hl]
-	ld hl, wPlayerSpAtk
+	ld a, 3 ; Sp. Atk
+	call CriticalAttackStat
+	jr nc, .lightball
+	ld e, UNAWARE_REDO_FROSTBITE
 
 .lightball
 ; Note: Returns player special attack at hl in hl.
@@ -2260,50 +2260,56 @@ TruncateHL_BC:
 	ld b, l
 	ret
 
-CheckDamageStatsCritical:
-; Return carry if boosted stats should be used in damage calculations.
-; Unboosted stats should be used if the attack is a critical hit,
-;  and the stage of the opponent's defense is higher than the user's attack.
-
+CriticalDefenseStat:
+; a = defender's stage, bc = unboosted stat, hl = stat selected by Unaware.
+; A critical hit ignores only positive defensive stages.
+	cp BASE_STAT_LEVEL + 1
+	ret c
 	ld a, [wCriticalHit]
 	and a
-	scf
 	ret z
+	ld h, b
+	ld l, c
+	ret
 
-	push hl
+CriticalAttackStat:
+; a = attacking stat index (Attack, Defense for Body Press, or Sp. Atk).
+; Keep positive stages; on a critical hit, select the unboosted stat for
+; negative stages. Carry if the unboosted stat was selected.
 	push bc
+	push de
+	push hl
+	push af
+	ld a, [wCriticalHit]
+	and a
+	jr z, .unchanged
+	pop af
+	push af
+	call UnawareUserStatLevel
+	cp BASE_STAT_LEVEL
+	jr nc, .unchanged
+	pop af
+	pop hl
+	pop de
+	ld c, a
+	ld b, 0
 	ldh a, [hBattleTurn]
 	and a
-	jr nz, .enemy
-	ld a, [wPlayerMoveStructType]
-	cp SPECIAL
-; special
-	ld a, [wPlayerSAtkLevel]
-	ld b, a
-	ld a, [wEnemySDefLevel]
-	jr nc, .end
-; physical
-	ld a, [wPlayerAtkLevel]
-	ld b, a
-	ld a, [wEnemyDefLevel]
-	jr .end
-
-.enemy
-	ld a, [wEnemyMoveStructType]
-	cp SPECIAL
-; special
-	ld a, [wEnemySAtkLevel]
-	ld b, a
-	ld a, [wPlayerSDefLevel]
-	jr nc, .end
-; physical
-	ld a, [wEnemyAtkLevel]
-	ld b, a
-	ld a, [wPlayerDefLevel]
-.end
-	cp b
+	ld hl, wPlayerAttack
+	jr z, .got_base
+	ld hl, wEnemyAttack
+.got_base
+	add hl, bc
+	add hl, bc
 	pop bc
+	scf
+	ret
+.unchanged
+	pop af
 	pop hl
+	pop de
+	pop bc
+	and a
 	ret
 
 ; ========================
@@ -2416,7 +2422,7 @@ UnawareAttackStat:
 	ld e, UNAWARE_REDO_FROSTBITE
 	cp 3 ; Sp. Atk
 	ret z
-	ld e, 0 ; Body Press (Defense): no status to redo
+	ld e, 0 ; Body Press (Defense): the caller handles burn
 	ret
 
 .no
@@ -2425,9 +2431,9 @@ UnawareAttackStat:
 	ret
 
 UnawareRedoStatus:
-; hl = the attacker's stat value, e = UNAWARE_REDO_* from UnawareAttackStat.
-; The unboosted stats don't include burn (Attack) or frostbite (Sp. Atk),
-; so halve hl again like ApplyBrnEffectOnAttack / ApplyFrbEffectOnSpclAttack.
+; hl = the attacker's stat value, e = UNAWARE_REDO_* from stat selection.
+; Reapply burn or frostbite when an unboosted stat was selected, and apply
+; burn to Body Press, which uses Defense instead of the burn-adjusted Attack.
 	ld a, e
 	and a
 	ret z
@@ -2617,12 +2623,18 @@ EnemyAttackDamage:
 ; physical
 	ld hl, wBattleMonDefense
 	call UnawareDefenseStat
+	ld a, [wPlayerDefLevel]
+	ld bc, wPlayerDefense
+	call CriticalDefenseStat
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
 
 	call HailDefenseBoost
 
+	ld a, [wCriticalHit]
+	and a
+	jr nz, .physicalcrit
 	ld a, [wPlayerScreens]
 	bit SCREENS_REFLECT, a
 	call nz, InfiltratorIgnoresBarrier
@@ -2640,15 +2652,10 @@ EnemyAttackDamage:
 	ld hl, wEnemyMonAttack
 	xor a ; Attack
 	call UnawareAttackStat
-	call CheckDamageStatsCritical
-	jr c, .PolarFangorLightBall
-	ld e, 0 ; crit: unboosted stats, nothing for Unaware to redo
-
-	ld hl, wPlayerDefense
-	ld a, [hli]
-	ld b, a
-	ld c, [hl]
-	ld hl, wEnemyAttack
+	xor a ; Attack
+	call CriticalAttackStat
+	jr nc, .PolarFangorLightBall
+	ld e, UNAWARE_REDO_BURN
 	jr .PolarFangorLightBall
 
 .body_press
@@ -2656,15 +2663,9 @@ EnemyAttackDamage:
 	ld hl, wEnemyMonDefense
 	ld a, 1 ; Defense
 	call UnawareAttackStat
-	call CheckDamageStatsCritical
-	jr c, .PolarFangorLightBall ; Use boosted stats
-	ld e, 0
-
-	ld hl, wPlayerDefense
-	ld a, [hli]
-	ld b, a
-	ld c, [hl]
-	ld hl, wEnemyDefense
+	ld a, 1 ; Defense
+	call CriticalAttackStat
+	ld e, UNAWARE_REDO_BURN ; Body Press is physical, so burn still reduces it
 	jr .PolarFangorLightBall
 
 .special
@@ -2674,12 +2675,19 @@ EnemyAttackDamage:
 	cp EFFECT_PSYSHOCK
 	jr nz, .get_special_defense
 	ld hl, wBattleMonDefense
+	ld bc, wPlayerDefense
+	ld a, [wPlayerDefLevel]
 	jr .psyshock_done
 
 .get_special_defense
 	ld hl, wBattleMonSpclDef
+	ld bc, wPlayerSpDef
+	ld a, [wPlayerSDefLevel]
 .psyshock_done
+	push af
 	call UnawareDefenseStat
+	pop af
+	call CriticalDefenseStat
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
@@ -2687,6 +2695,9 @@ EnemyAttackDamage:
 	call AssaultVestSpDefBoost
 	call SandstormSpDefBoost
 
+	ld a, [wCriticalHit]
+	and a
+	jr nz, .specialcrit
 	ld a, [wPlayerScreens]
 	bit SCREENS_LIGHT_SCREEN, a
 	call nz, InfiltratorIgnoresBarrier
@@ -2698,14 +2709,10 @@ EnemyAttackDamage:
 	ld hl, wEnemyMonSpclAtk
 	ld a, 3 ; Sp. Atk
 	call UnawareAttackStat
-	call CheckDamageStatsCritical
-	jr c, .lightball
-	ld e, 0
-	ld hl, wPlayerSpDef
-	ld a, [hli]
-	ld b, a
-	ld c, [hl]
-	ld hl, wEnemySpAtk
+	ld a, 3 ; Sp. Atk
+	call CriticalAttackStat
+	jr nc, .lightball
+	ld e, UNAWARE_REDO_FROSTBITE
 
 .lightball
 	call LightBallBoost
@@ -2986,9 +2993,6 @@ ConfusionDamageCalc:
 	call nc, TenPercentBoost
 
 .continue
-; Critical hits
-	call .CriticalMultiplier
-
 ; Update wCurDamage. Max 999 (capped at 997, then add 2).
 DEF MAX_DAMAGE EQU 999
 DEF MIN_DAMAGE EQU 2
@@ -3066,6 +3070,7 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 	jr nc, .dont_floor
 	inc [hl]
 .dont_floor
+	call .CriticalMultiplier
 
 ; Returns nz and nc.
 	jmp AEqualsOne
@@ -3096,14 +3101,15 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 	ld a, 3
 	ld c, 2
 .crit_multiply
-; damage (hQuotient + 2..3) *= a / c
+; Multiply the completed base damage, including its fixed +2.
+	ld hl, wCurDamage
 	push bc
 	push af
 	xor a
 	ldh [hMultiplicand + 0], a
-	ldh a, [hQuotient + 2]
+	ld a, [hli]
 	ldh [hMultiplicand + 1], a
-	ldh a, [hQuotient + 3]
+	ld a, [hl]
 	ldh [hMultiplicand + 2], a
 	pop af
 	ldh [hMultiplier], a
@@ -3113,14 +3119,25 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 	ldh [hDivisor], a
 	ld b, 4
 	call Divide
-
-; Cap at $ffff.
-.CritCap
-	ret nc
-
-	ld a, $ff
-	ldh [hQuotient + 2], a
-	ldh [hQuotient + 3], a
+	ld hl, wCurDamage
+	ldh a, [hQuotient + 2]
+	cp HIGH(MAX_DAMAGE)
+	jr c, .store_damage
+	jr nz, .cap_damage
+	ldh a, [hQuotient + 3]
+	cp LOW(MAX_DAMAGE) + 1
+	jr nc, .cap_damage
+.store_damage
+	ldh a, [hQuotient + 2]
+	ld [hli], a
+	ldh a, [hQuotient + 3]
+	ld [hl], a
+	ret
+.cap_damage
+	ld a, HIGH(MAX_DAMAGE)
+	ld [hli], a
+	ld a, LOW(MAX_DAMAGE)
+	ld [hl], a
 	ret
 
 INCLUDE "data/abilities/sniper_mons.asm"

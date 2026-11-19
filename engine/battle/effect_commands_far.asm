@@ -97,7 +97,7 @@ _BattleCommand_Critical:
 
 ; +2 critical level
 	ld c, 2
-	jr .Tally
+	jr .FocusEnergy
 
 .Tropius:
 	cp TROPIUS
@@ -108,7 +108,7 @@ _BattleCommand_Critical:
 
 ; +2 critical level
 	ld c, 2
-	jr .Tally
+	jr .FocusEnergy
 
 .FocusEnergy:
 	ld a, BATTLE_VARS_SUBSTATUS4
@@ -166,13 +166,12 @@ _BattleCommand_Critical:
 	pop bc
 	jr nc, .continue
 
-; super luck mons have an innate +2 critical hit level
+; Super Luck adds one critical stage.
 	push bc
 	ldh a, [hBattleTurn]
 	call IsSideSuppressed
 	pop bc
 	jr c, .continue ; suppressed by Neutralizing Gas
-	inc c
 	inc c
 	jr .continue
 
@@ -195,8 +194,7 @@ _BattleCommand_Critical:
 	pop bc
 	jr nc, .ScopeLens
 
-; +2 critical level
-	inc c
+; High-critical-hit moves add one stage.
 	inc c
 
 .ScopeLens:
@@ -211,12 +209,30 @@ _BattleCommand_Critical:
 	inc c
 
 .Tally:
-	ld hl, CriticalHitChances
-	ld b, 0
-	add hl, bc
+	ld a, c
+	cp 3
+	jr nc, .CritGuard ; +3 or more always crits
+	and a
+	jr z, .base_chance
 	call BattleRandom
-	cp [hl]
-	ret nc
+	dec c
+	jr z, .stage_one
+	bit 7, a ; +2: 1/2
+	ret nz
+	jr .CritGuard
+.stage_one
+	and 7 ; +1: 1/8
+	ret nz
+	jr .CritGuard
+.base_chance
+; Reject 240..255 so the remaining 240 values divide evenly by 24.
+	call BattleRandom
+	cp 240
+	jr nc, .base_chance
+	ld c, 24
+	call SimpleDivide
+	and a
+	ret nz
 
 ; ===========================
 ; === Ability: Crit Guard ===
@@ -245,7 +261,6 @@ INCLUDE "data/abilities/slash_crits_mons.asm"
 INCLUDE "data/abilities/leaf_blade_crits_mons.asm"
 INCLUDE "data/abilities/super_luck_mons.asm"
 
-INCLUDE "data/battle/critical_hit_chances.asm"
 
 _BattleCommand_CheckHit:
 ; Pressure: the move is used on the target (engine/abilities/pressure.asm)
