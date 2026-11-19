@@ -253,8 +253,7 @@ SetCurrentWeather::
 
 ClearWeather::
 	call GetActiveOverworldWeather
-	jr z, .no_particles
-	call ClearWeatherSprites
+	call nz, ClearWeatherSprites
 .no_particles
 	xor a
 	ld [wWeatherFlags], a
