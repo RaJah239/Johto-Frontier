@@ -36,6 +36,7 @@
 - View present weather on map change
 - Default outdoor maps have 35% chance of rain and 35% chance of sun unless it is night with exceptions
 - PC usage sped up
+- Buena's Password now operates in the evening
 - Animate tiles even when textboxes are open
 - Survive overworld poisoning with 1 HP
 - Fruits and mushrooms respawn every 1,000 steps taken
