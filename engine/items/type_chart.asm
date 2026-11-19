@@ -94,19 +94,19 @@ TypeChartPalettes:
 INCLUDE "gfx/type_chart/type_chart.pal"
 
 TypeChartBG0GFX:
-INCBIN "gfx/type_chart/bg0.2bpp.lzp"
+INCBIN "gfx/type_chart/bg0.2bpp.lz"
 
 TypeChartBG1GFX:
-INCBIN "gfx/type_chart/bg.2bpp.vram2p.lzp"
+INCBIN "gfx/type_chart/bg.2bpp.vram2p.lz"
 
 TypeChartOBGFX:
-INCBIN "gfx/type_chart/ob.2bpp.lzp"
+INCBIN "gfx/type_chart/ob.2bpp.lz"
 
 TypeChartTilemap:
-INCBIN "gfx/type_chart/type_chart.tilemap.lzp"
+INCBIN "gfx/type_chart/type_chart.tilemap.lz"
 
 TypeChartAttrmap:
-INCBIN "gfx/type_chart/type_chart.attrmap.lzp"
+INCBIN "gfx/type_chart/type_chart.attrmap.lz"
 
 TypeChartOAMData:
 MACRO oamdata

@@ -1,12 +1,11 @@
 .PHONY: all clean
 
 CC := gcc
-CXX := g++
 CFLAGS := -O3 -flto -std=c11 -Wall -Wextra -pedantic
 
 tools := \
 	bpp2png \
-	lzpcompress \
+	lzcomp \
 	gfx \
 	png_dimensions \
 	pokemon_animation \
@@ -18,7 +17,7 @@ all: $(tools)
 	@:
 
 clean:
-	$(RM) $(tools) lzcomp
+	$(RM) $(tools)
 
 gfx: common.h
 png_dimensions: common.h
@@ -30,8 +29,9 @@ stadium: common.h
 bpp2png: bpp2png.c lodepng/lodepng.c common.h lodepng/lodepng.h
 	$(CC) $(CFLAGS) -o $@ bpp2png.c lodepng/lodepng.c
 
-lzpcompress: lzpcompress.cpp
-	$(CXX) -O3 -std=c++20 -Wall -Wextra -o $@ $<
+lzcomp: CFLAGS += -Wno-strict-overflow -Wno-sign-compare
+lzcomp: $(wildcard lz/*.c) $(wildcard lz/*.h)
+	$(CC) $(CFLAGS) -o $@ lz/*.c
 
 %: %.c
 	$(CC) $(CFLAGS) -o $@ $<

@@ -4,7 +4,7 @@ LoadQuestionMarkPic:
 	jmp Decompress
 
 .QuestionMarkLZ:
-INCBIN "gfx/pokedex/question_mark.2bpp.lzp"
+INCBIN "gfx/pokedex/question_mark.2bpp.lz"
 
 DrawPokedexSearchResultsWindow:
 	ld a, $34

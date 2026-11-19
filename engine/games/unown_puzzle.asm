@@ -815,16 +815,16 @@ UnownPuzzleCursorGFX:
 INCBIN "gfx/unown_puzzle/cursor.2bpp"
 
 UnownPuzzleStartCancelLZ:
-INCBIN "gfx/unown_puzzle/start_cancel.2bpp.lzp"
+INCBIN "gfx/unown_puzzle/start_cancel.2bpp.lz"
 
 HoOhPuzzleLZ:
-INCBIN "gfx/unown_puzzle/hooh.2bpp.lzp"
+INCBIN "gfx/unown_puzzle/hooh.2bpp.lz"
 
 AerodactylPuzzleLZ:
-INCBIN "gfx/unown_puzzle/aerodactyl.2bpp.lzp"
+INCBIN "gfx/unown_puzzle/aerodactyl.2bpp.lz"
 
 LileepPuzzleLZ:
-INCBIN "gfx/unown_puzzle/lileep.2bpp.lzp"
+INCBIN "gfx/unown_puzzle/lileep.2bpp.lz"
 
 OmanytePuzzleLZ:
-INCBIN "gfx/unown_puzzle/omanyte.2bpp.lzp"
+INCBIN "gfx/unown_puzzle/omanyte.2bpp.lz"

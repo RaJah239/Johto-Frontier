@@ -1616,7 +1616,7 @@ PokegearAskDeleteText:
 	text_end
 
 PokegearSpritesGFX:
-INCBIN "gfx/pokegear/pokegear_sprites.2bpp.lzp"
+INCBIN "gfx/pokegear/pokegear_sprites.2bpp.lz"
 
 RadioTilemapRLE:
 INCBIN "gfx/pokegear/radio.tilemap.rle"

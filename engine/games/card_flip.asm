@@ -1562,7 +1562,7 @@ CardFlip_InitAttrPals:
 INCLUDE "gfx/card_flip/card_flip.pal"
 
 CardFlipLZ03:
-INCBIN "gfx/card_flip/card_flip_3.2bpp.lzp"
+INCBIN "gfx/card_flip/card_flip_3.2bpp.lz"
 
 CardFlipOffButtonGFX:
 INCBIN "gfx/card_flip/off.2bpp"
@@ -1571,10 +1571,10 @@ CardFlipOnButtonGFX:
 INCBIN "gfx/card_flip/on.2bpp"
 
 CardFlipLZ01:
-INCBIN "gfx/card_flip/card_flip_1.2bpp.lzp"
+INCBIN "gfx/card_flip/card_flip_1.2bpp.lz"
 
 CardFlipLZ02:
-INCBIN "gfx/card_flip/card_flip_2.2bpp.lzp"
+INCBIN "gfx/card_flip/card_flip_2.2bpp.lz"
 
 CardFlipTilemap:
 INCBIN "gfx/card_flip/card_flip.tilemap"

@@ -518,7 +518,7 @@ TradeAnim_InitTubeAnim:
 	RGB 09, 13, 30
 
 .NewTradeBgGFX:
-INCBIN "gfx/trade/trade_bg.2bpp.lzp"
+INCBIN "gfx/trade/trade_bg.2bpp.lz"
 
 .CopyMapStuffs:
 	lb bc, 32, 20
@@ -1515,6 +1515,6 @@ TradeArrowRightGFX:   INCBIN "gfx/trade/arrow_right.2bpp"
 TradeArrowLeftGFX:    INCBIN "gfx/trade/arrow_left.2bpp"
 TradeCableGFX:        INCBIN "gfx/trade/cable.2bpp"
 TradeBubbleGFX:       INCBIN "gfx/trade/bubble.2bpp"
-TradeGameBoyLZ:       INCBIN "gfx/trade/game_boy_cable.2bpp.lzp"
+TradeGameBoyLZ:       INCBIN "gfx/trade/game_boy_cable.2bpp.lz"
 TradeBallGFX:         INCBIN "gfx/trade/ball.2bpp"
 TradePoofGFX:         INCBIN "gfx/trade/poof.2bpp"

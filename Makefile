@@ -55,7 +55,6 @@ clean: tidy
 	find gfx \
 	     \( -name "*.[12]bpp" \
 	        -o -name "*.lz" \
-	        -o -name "*.lzp" \
 	        -o -name "*.gbcpal" \) \
 	     -delete
 	find gfx/pokemon -mindepth 1 \
@@ -136,8 +135,8 @@ johtofrontier_debug_opt   = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x1
 
 ### LZ compression rules
 
-%.lzp: %
-	tools/lzpcompress -- $< $@
+%.lz: %
+	tools/lzcomp $(LZFLAGS) -- $< $@
 
 
 ### Pokemon pic animation rules

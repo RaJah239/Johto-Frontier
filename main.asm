@@ -573,9 +573,9 @@ INCLUDE "engine/games/voltorb_flip.asm"
 SECTION "DEX GFX 2", ROMX
 IF USE_COMPRESSED_POKEDEX_GFX == TRUE
 PokedexLZ:
-INCBIN "gfx/pokedex/pokedex.2bpp.lzp"
+INCBIN "gfx/pokedex/pokedex.2bpp.lz"
 PokedexSlowpokeLZ:
-INCBIN "gfx/pokedex/slowpoke.2bpp.lzp"
+INCBIN "gfx/pokedex/slowpoke.2bpp.lz"
 ELSE
 ; IF USE_COMPRESSED_POKEDEX_GFX == FALSE
 PokedexGFX:

@@ -359,13 +359,13 @@ endr
 	ret
 
 TitleSuicuneGFX:
-INCBIN "gfx/title/suicune.2bpp.lzp"
+INCBIN "gfx/title/suicune.2bpp.lz"
 
 TitleLogoGFX:
-INCBIN "gfx/title/logo.2bpp.lzp"
+INCBIN "gfx/title/logo.2bpp.lz"
 
 TitleCrystalGFX:
-INCBIN "gfx/title/crystal.2bpp.lzp"
+INCBIN "gfx/title/crystal.2bpp.lz"
 
 TitleScreenPalettes:
 INCLUDE "gfx/title/title.pal"

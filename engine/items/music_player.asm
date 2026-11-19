@@ -441,6 +441,6 @@ MusicPlayer_Init:
 MusicPlayerPalettes:
 INCLUDE "gfx/music_player/music_player.pal"
 MusicPlayerGFX:
-INCBIN "gfx/music_player/music_player.2bpp.lzp"
+INCBIN "gfx/music_player/music_player.2bpp.lz"
 MusicPlayerTilemap:
 INCBIN "gfx/music_player/music_player.tilemap"

@@ -8,30 +8,30 @@ SECTION "Tileset Data 1", ROMX
 
 Tileset0GFX::
 TilesetJohtoGFX::
-INCBIN "gfx/tilesets/johto.2bpp.lzp"
+INCBIN "gfx/tilesets/johto.2bpp.lz"
 
 Tileset0Meta::
 TilesetJohtoMeta::
-INCBIN "data/tilesets/johto_metatiles.bin.lzp"
+INCBIN "data/tilesets/johto_metatiles.bin.lz"
 
 Tileset0Coll::
 TilesetJohtoColl::
 INCLUDE "data/tilesets/johto_collision.asm"
 
 TilesetIcePathGFX::
-INCBIN "gfx/tilesets/ice_path.2bpp.lzp"
+INCBIN "gfx/tilesets/ice_path.2bpp.lz"
 
 TilesetIcePathMeta::
-INCBIN "data/tilesets/ice_path_metatiles.bin.lzp"
+INCBIN "data/tilesets/ice_path_metatiles.bin.lz"
 
 TilesetIcePathColl::
 INCLUDE "data/tilesets/ice_path_collision.asm"
 
 TilesetPlayersRoomGFX::
-INCBIN "gfx/tilesets/players_room.2bpp.lzp"
+INCBIN "gfx/tilesets/players_room.2bpp.lz"
 
 TilesetPlayersRoomMeta::
-INCBIN "data/tilesets/players_room_metatiles.bin.lzp"
+INCBIN "data/tilesets/players_room_metatiles.bin.lz"
 
 TilesetPlayersRoomColl::
 INCLUDE "data/tilesets/players_room_collision.asm"
@@ -40,52 +40,52 @@ INCLUDE "data/tilesets/players_room_collision.asm"
 SECTION "Tileset Data 2", ROMX
 
 TilesetPokecenterGFX::
-INCBIN "gfx/tilesets/pokecenter.2bpp.lzp"
+INCBIN "gfx/tilesets/pokecenter.2bpp.lz"
 
 TilesetPokecenterMeta::
-INCBIN "data/tilesets/pokecenter_metatiles.bin.lzp"
+INCBIN "data/tilesets/pokecenter_metatiles.bin.lz"
 
 TilesetPokecenterColl::
 INCLUDE "data/tilesets/pokecenter_collision.asm"
 
 TilesetPortGFX::
-INCBIN "gfx/tilesets/port.2bpp.lzp"
+INCBIN "gfx/tilesets/port.2bpp.lz"
 
 TilesetPortMeta::
-INCBIN "data/tilesets/port_metatiles.bin.lzp"
+INCBIN "data/tilesets/port_metatiles.bin.lz"
 
 TilesetPortColl::
 INCLUDE "data/tilesets/port_collision.asm"
 
 TilesetPlayersHouseGFX::
-INCBIN "gfx/tilesets/players_house.2bpp.lzp"
+INCBIN "gfx/tilesets/players_house.2bpp.lz"
 
 TilesetPlayersHouseMeta::
-INCBIN "data/tilesets/players_house_metatiles.bin.lzp"
+INCBIN "data/tilesets/players_house_metatiles.bin.lz"
 
 TilesetPlayersHouseColl::
 INCLUDE "data/tilesets/players_house_collision.asm"
 
 TilesetMansionGFX::
-INCBIN "gfx/tilesets/mansion.2bpp.lzp"
+INCBIN "gfx/tilesets/mansion.2bpp.lz"
 
 TilesetMansionMeta::
-INCBIN "data/tilesets/mansion_metatiles.bin.lzp"
+INCBIN "data/tilesets/mansion_metatiles.bin.lz"
 
 TilesetMansionColl::
 INCLUDE "data/tilesets/mansion_collision.asm"
 
 TilesetCaveGFX::
-INCBIN "gfx/tilesets/cave.2bpp.lzp"
+INCBIN "gfx/tilesets/cave.2bpp.lz"
 
 TilesetCaveMeta::
-INCBIN "data/tilesets/cave_metatiles.bin.lzp"
+INCBIN "data/tilesets/cave_metatiles.bin.lz"
 
 TilesetCaveColl::
 INCLUDE "data/tilesets/cave_collision.asm"
 
 TilesetDarkCaveMeta::
-INCBIN "data/tilesets/dark_cave_metatiles.bin.lzp"
+INCBIN "data/tilesets/dark_cave_metatiles.bin.lz"
 
 TilesetDarkCaveColl::
 INCLUDE "data/tilesets/dark_cave_collision.asm"
@@ -93,129 +93,129 @@ INCLUDE "data/tilesets/dark_cave_collision.asm"
 SECTION "Tileset Data 3", ROMX
 
 TilesetTowerGFX::
-INCBIN "gfx/tilesets/tower.2bpp.lzp"
+INCBIN "gfx/tilesets/tower.2bpp.lz"
 
 TilesetTowerMeta::
-INCBIN "data/tilesets/tower_metatiles.bin.lzp"
+INCBIN "data/tilesets/tower_metatiles.bin.lz"
 
 TilesetTowerColl::
 INCLUDE "data/tilesets/tower_collision.asm"
 
 TilesetLabGFX::
-INCBIN "gfx/tilesets/lab.2bpp.lzp"
+INCBIN "gfx/tilesets/lab.2bpp.lz"
 
 TilesetLabMeta::
-INCBIN "data/tilesets/lab_metatiles.bin.lzp"
+INCBIN "data/tilesets/lab_metatiles.bin.lz"
 
 TilesetLabColl::
 INCLUDE "data/tilesets/lab_collision.asm"
 
 TilesetMartGFX::
-INCBIN "gfx/tilesets/mart.2bpp.lzp"
+INCBIN "gfx/tilesets/mart.2bpp.lz"
 
 TilesetMartMeta::
-INCBIN "data/tilesets/mart_metatiles.bin.lzp"
+INCBIN "data/tilesets/mart_metatiles.bin.lz"
 
 TilesetMartColl::
 INCLUDE "data/tilesets/mart_collision.asm"
 
 TilesetGameCornerGFX::
-INCBIN "gfx/tilesets/game_corner.2bpp.lzp"
+INCBIN "gfx/tilesets/game_corner.2bpp.lz"
 
 TilesetGameCornerMeta::
-INCBIN "data/tilesets/game_corner_metatiles.bin.lzp"
+INCBIN "data/tilesets/game_corner_metatiles.bin.lz"
 
 TilesetGameCornerColl::
 INCLUDE "data/tilesets/game_corner_collision.asm"
 
 TilesetTrainStationGFX::
-INCBIN "gfx/tilesets/train_station.2bpp.lzp"
+INCBIN "gfx/tilesets/train_station.2bpp.lz"
 
 TilesetTrainStationMeta::
-INCBIN "data/tilesets/train_station_metatiles.bin.lzp"
+INCBIN "data/tilesets/train_station_metatiles.bin.lz"
 
 TilesetTrainStationColl::
 INCLUDE "data/tilesets/train_station_collision.asm"
 
 TilesetForestMeta::
-INCBIN "data/tilesets/forest_metatiles.bin.lzp"
+INCBIN "data/tilesets/forest_metatiles.bin.lz"
 
 
 SECTION "Tileset Data 4", ROMX
 
 TilesetEliteFourRoomGFX::
-INCBIN "gfx/tilesets/elite_four_room.2bpp.lzp"
+INCBIN "gfx/tilesets/elite_four_room.2bpp.lz"
 
 TilesetEliteFourRoomMeta::
-INCBIN "data/tilesets/elite_four_room_metatiles.bin.lzp"
+INCBIN "data/tilesets/elite_four_room_metatiles.bin.lz"
 
 TilesetEliteFourRoomColl::
 INCLUDE "data/tilesets/elite_four_room_collision.asm"
 
 TilesetParkGFX::
-INCBIN "gfx/tilesets/park.2bpp.lzp"
+INCBIN "gfx/tilesets/park.2bpp.lz"
 
 TilesetParkMeta::
-INCBIN "data/tilesets/park_metatiles.bin.lzp"
+INCBIN "data/tilesets/park_metatiles.bin.lz"
 
 TilesetParkColl::
 INCLUDE "data/tilesets/park_collision.asm"
 
 TilesetRadioTowerGFX::
-INCBIN "gfx/tilesets/radio_tower.2bpp.lzp"
+INCBIN "gfx/tilesets/radio_tower.2bpp.lz"
 
 TilesetRadioTowerMeta::
-INCBIN "data/tilesets/radio_tower_metatiles.bin.lzp"
+INCBIN "data/tilesets/radio_tower_metatiles.bin.lz"
 
 TilesetRadioTowerColl::
 INCLUDE "data/tilesets/radio_tower_collision.asm"
 
 TilesetUndergroundGFX::
-INCBIN "gfx/tilesets/underground.2bpp.lzp"
+INCBIN "gfx/tilesets/underground.2bpp.lz"
 
 TilesetUndergroundMeta::
-INCBIN "data/tilesets/underground_metatiles.bin.lzp"
+INCBIN "data/tilesets/underground_metatiles.bin.lz"
 
 TilesetUndergroundColl::
 INCLUDE "data/tilesets/underground_collision.asm"
 
 TilesetDarkCaveGFX::
-INCBIN "gfx/tilesets/dark_cave.2bpp.lzp"
+INCBIN "gfx/tilesets/dark_cave.2bpp.lz"
 
 
 SECTION "Tileset Data 5", ROMX
 
 
 TilesetBattleTowerInsideGFX::
-INCBIN "gfx/tilesets/battle_tower_inside.2bpp.lzp"
+INCBIN "gfx/tilesets/battle_tower_inside.2bpp.lz"
 
 TilesetBattleTowerInsideMeta::
-INCBIN "data/tilesets/battle_tower_inside_metatiles.bin.lzp"
+INCBIN "data/tilesets/battle_tower_inside_metatiles.bin.lz"
 
 TilesetBattleTowerInsideColl::
 INCLUDE "data/tilesets/battle_tower_inside_collision.asm"
 
 TilesetGateGFX::
-INCBIN "gfx/tilesets/gate.2bpp.lzp"
+INCBIN "gfx/tilesets/gate.2bpp.lz"
 
 TilesetGateMeta::
-INCBIN "data/tilesets/gate_metatiles.bin.lzp"
+INCBIN "data/tilesets/gate_metatiles.bin.lz"
 
 TilesetGateColl::
 INCLUDE "data/tilesets/gate_collision.asm"
 
 TilesetJohtoModernGFX::
 TilesetBattleTowerOutsideGFX::
-INCBIN "gfx/tilesets/johto_modern.2bpp.lzp"
+INCBIN "gfx/tilesets/johto_modern.2bpp.lz"
 
 TilesetJohtoModernMeta::
-INCBIN "data/tilesets/johto_modern_metatiles.bin.lzp"
+INCBIN "data/tilesets/johto_modern_metatiles.bin.lz"
 
 TilesetJohtoModernColl::
 INCLUDE "data/tilesets/johto_modern_collision.asm"
 
 TilesetTraditionalHouseMeta::
-INCBIN "data/tilesets/traditional_house_metatiles.bin.lzp"
+INCBIN "data/tilesets/traditional_house_metatiles.bin.lz"
 
 TilesetTraditionalHouseColl::
 INCLUDE "data/tilesets/traditional_house_collision.asm"
@@ -224,31 +224,31 @@ INCLUDE "data/tilesets/traditional_house_collision.asm"
 SECTION "Tileset Data 6", ROMX
 
 TilesetForestGFX::
-INCBIN "gfx/tilesets/forest.2bpp.lzp"
+INCBIN "gfx/tilesets/forest.2bpp.lz"
 
 TilesetChampionsRoomGFX::
-INCBIN "gfx/tilesets/champions_room.2bpp.lzp"
+INCBIN "gfx/tilesets/champions_room.2bpp.lz"
 
 TilesetChampionsRoomMeta::
-INCBIN "data/tilesets/champions_room_metatiles.bin.lzp"
+INCBIN "data/tilesets/champions_room_metatiles.bin.lz"
 
 TilesetChampionsRoomColl::
 INCLUDE "data/tilesets/champions_room_collision.asm"
 
 TilesetHouseGFX::
-INCBIN "gfx/tilesets/house.2bpp.lzp"
+INCBIN "gfx/tilesets/house.2bpp.lz"
 
 TilesetHouseMeta::
-INCBIN "data/tilesets/house_metatiles.bin.lzp"
+INCBIN "data/tilesets/house_metatiles.bin.lz"
 
 TilesetHouseColl::
 INCLUDE "data/tilesets/house_collision.asm"
 
 TilesetLighthouseGFX::
-INCBIN "gfx/tilesets/lighthouse.2bpp.lzp"
+INCBIN "gfx/tilesets/lighthouse.2bpp.lz"
 
 TilesetLighthouseMeta::
-INCBIN "data/tilesets/lighthouse_metatiles.bin.lzp"
+INCBIN "data/tilesets/lighthouse_metatiles.bin.lz"
 
 TilesetLighthouseColl::
 INCLUDE "data/tilesets/lighthouse_collision.asm"
@@ -257,16 +257,16 @@ TilesetForestColl::
 INCLUDE "data/tilesets/forest_collision.asm"
 
 TilesetFacilityGFX::
-INCBIN "gfx/tilesets/facility.2bpp.lzp"
+INCBIN "gfx/tilesets/facility.2bpp.lz"
 
 TilesetFacilityMeta::
-INCBIN "data/tilesets/facility_metatiles.bin.lzp"
+INCBIN "data/tilesets/facility_metatiles.bin.lz"
 
 TilesetFacilityColl::
 INCLUDE "data/tilesets/facility_collision.asm"
 
 TilesetBattleTowerOutsideMeta::
-INCBIN "data/tilesets/battle_tower_outside_metatiles.bin.lzp"
+INCBIN "data/tilesets/battle_tower_outside_metatiles.bin.lz"
 
 TilesetBattleTowerOutsideColl::
 INCLUDE "data/tilesets/battle_tower_outside_collision.asm"
@@ -285,10 +285,10 @@ TilesetHoOhWordRoomGFX::
 TilesetLileepWordRoomGFX::
 TilesetOmanyteWordRoomGFX::
 TilesetAerodactylWordRoomGFX::
-INCBIN "gfx/tilesets/ruins_of_alph.2bpp.lzp"
+INCBIN "gfx/tilesets/ruins_of_alph.2bpp.lz"
 
 TilesetRuinsOfAlphMeta::
-INCBIN "data/tilesets/ruins_of_alph_metatiles.bin.lzp"
+INCBIN "data/tilesets/ruins_of_alph_metatiles.bin.lz"
 
 TilesetRuinsOfAlphColl::
 INCLUDE "data/tilesets/ruins_of_alph_collision.asm"
@@ -297,28 +297,28 @@ INCLUDE "data/tilesets/ruins_of_alph_collision.asm"
 SECTION "Tileset Data 8", ROMX
 
 TilesetHoOhWordRoomMeta::
-INCBIN "data/tilesets/ho_oh_word_room_metatiles.bin.lzp"
+INCBIN "data/tilesets/ho_oh_word_room_metatiles.bin.lz"
 
 TilesetLileepWordRoomMeta::
-INCBIN "data/tilesets/lileep_word_room_metatiles.bin.lzp"
+INCBIN "data/tilesets/lileep_word_room_metatiles.bin.lz"
 
 TilesetOmanyteWordRoomMeta::
-INCBIN "data/tilesets/omanyte_word_room_metatiles.bin.lzp"
+INCBIN "data/tilesets/omanyte_word_room_metatiles.bin.lz"
 
 TilesetAerodactylWordRoomMeta::
-INCBIN "data/tilesets/aerodactyl_word_room_metatiles.bin.lzp"
+INCBIN "data/tilesets/aerodactyl_word_room_metatiles.bin.lz"
 
 TilesetTraditionalHouseGFX::
-INCBIN "gfx/tilesets/traditional_house.2bpp.lzp"
+INCBIN "gfx/tilesets/traditional_house.2bpp.lz"
 
 
 SECTION "Tileset Data 9", ROMX
 
 TilesetKantoGFX::
-INCBIN "gfx/tilesets/kanto.2bpp.lzp"
+INCBIN "gfx/tilesets/kanto.2bpp.lz"
 
 TilesetKantoMeta::
-INCBIN "data/tilesets/kanto_metatiles.bin.lzp"
+INCBIN "data/tilesets/kanto_metatiles.bin.lz"
 
 TilesetKantoColl::
 INCLUDE "data/tilesets/kanto_collision.asm"
@@ -327,109 +327,109 @@ SECTION "Tileset Data 10", ROMX
 
 Tileset0Attr::
 TilesetJohtoAttr::
-INCBIN "data/tilesets/johto_attributes.bin.lzp"
+INCBIN "data/tilesets/johto_attributes.bin.lz"
 
 TilesetJohtoModernAttr::
-INCBIN "data/tilesets/johto_modern_attributes.bin.lzp"
+INCBIN "data/tilesets/johto_modern_attributes.bin.lz"
 
 TilesetKantoAttr::
-INCBIN "data/tilesets/kanto_attributes.bin.lzp"
+INCBIN "data/tilesets/kanto_attributes.bin.lz"
 
 TilesetBattleTowerOutsideAttr::
-INCBIN "data/tilesets/battle_tower_outside_attributes.bin.lzp"
+INCBIN "data/tilesets/battle_tower_outside_attributes.bin.lz"
 
 TilesetHouseAttr::
-INCBIN "data/tilesets/house_attributes.bin.lzp"
+INCBIN "data/tilesets/house_attributes.bin.lz"
 
 TilesetPlayersHouseAttr::
-INCBIN "data/tilesets/players_house_attributes.bin.lzp"
+INCBIN "data/tilesets/players_house_attributes.bin.lz"
 
 TilesetPokecenterAttr::
-INCBIN "data/tilesets/pokecenter_attributes.bin.lzp"
+INCBIN "data/tilesets/pokecenter_attributes.bin.lz"
 
 TilesetGateAttr::
-INCBIN "data/tilesets/gate_attributes.bin.lzp"
+INCBIN "data/tilesets/gate_attributes.bin.lz"
 
 TilesetPortAttr::
-INCBIN "data/tilesets/port_attributes.bin.lzp"
+INCBIN "data/tilesets/port_attributes.bin.lz"
 
 TilesetLabAttr::
-INCBIN "data/tilesets/lab_attributes.bin.lzp"
+INCBIN "data/tilesets/lab_attributes.bin.lz"
 
 
 SECTION "Tileset Data 11", ROMX
 
 TilesetFacilityAttr::
-INCBIN "data/tilesets/facility_attributes.bin.lzp"
+INCBIN "data/tilesets/facility_attributes.bin.lz"
 
 TilesetMartAttr::
-INCBIN "data/tilesets/mart_attributes.bin.lzp"
+INCBIN "data/tilesets/mart_attributes.bin.lz"
 
 TilesetMansionAttr::
-INCBIN "data/tilesets/mansion_attributes.bin.lzp"
+INCBIN "data/tilesets/mansion_attributes.bin.lz"
 
 TilesetGameCornerAttr::
-INCBIN "data/tilesets/game_corner_attributes.bin.lzp"
+INCBIN "data/tilesets/game_corner_attributes.bin.lz"
 
 TilesetEliteFourRoomAttr::
-INCBIN "data/tilesets/elite_four_room_attributes.bin.lzp"
+INCBIN "data/tilesets/elite_four_room_attributes.bin.lz"
 
 TilesetTraditionalHouseAttr::
-INCBIN "data/tilesets/traditional_house_attributes.bin.lzp"
+INCBIN "data/tilesets/traditional_house_attributes.bin.lz"
 
 TilesetTrainStationAttr::
-INCBIN "data/tilesets/train_station_attributes.bin.lzp"
+INCBIN "data/tilesets/train_station_attributes.bin.lz"
 
 TilesetChampionsRoomAttr::
-INCBIN "data/tilesets/champions_room_attributes.bin.lzp"
+INCBIN "data/tilesets/champions_room_attributes.bin.lz"
 
 TilesetLighthouseAttr::
-INCBIN "data/tilesets/lighthouse_attributes.bin.lzp"
+INCBIN "data/tilesets/lighthouse_attributes.bin.lz"
 
 TilesetPlayersRoomAttr::
-INCBIN "data/tilesets/players_room_attributes.bin.lzp"
+INCBIN "data/tilesets/players_room_attributes.bin.lz"
 
 
 TilesetBattleTowerInsideAttr::
-INCBIN "data/tilesets/battle_tower_inside_attributes.bin.lzp"
+INCBIN "data/tilesets/battle_tower_inside_attributes.bin.lz"
 
 TilesetTowerAttr::
-INCBIN "data/tilesets/tower_attributes.bin.lzp"
+INCBIN "data/tilesets/tower_attributes.bin.lz"
 
 
 SECTION "Tileset Data 12", ROMX
 
 TilesetCaveAttr::
 TilesetDarkCaveAttr::
-INCBIN "data/tilesets/cave_attributes.bin.lzp"
+INCBIN "data/tilesets/cave_attributes.bin.lz"
 
 TilesetParkAttr::
-INCBIN "data/tilesets/park_attributes.bin.lzp"
+INCBIN "data/tilesets/park_attributes.bin.lz"
 
 TilesetRuinsOfAlphAttr::
-INCBIN "data/tilesets/ruins_of_alph_attributes.bin.lzp"
+INCBIN "data/tilesets/ruins_of_alph_attributes.bin.lz"
 
 TilesetRadioTowerAttr::
-INCBIN "data/tilesets/radio_tower_attributes.bin.lzp"
+INCBIN "data/tilesets/radio_tower_attributes.bin.lz"
 
 TilesetUndergroundAttr::
-INCBIN "data/tilesets/underground_attributes.bin.lzp"
+INCBIN "data/tilesets/underground_attributes.bin.lz"
 
 TilesetIcePathAttr::
-INCBIN "data/tilesets/ice_path_attributes.bin.lzp"
+INCBIN "data/tilesets/ice_path_attributes.bin.lz"
 
 TilesetForestAttr::
-INCBIN "data/tilesets/forest_attributes.bin.lzp"
+INCBIN "data/tilesets/forest_attributes.bin.lz"
 
 
 TilesetHoOhWordRoomAttr::
-INCBIN "data/tilesets/ho_oh_word_room_attributes.bin.lzp"
+INCBIN "data/tilesets/ho_oh_word_room_attributes.bin.lz"
 
 TilesetLileepWordRoomAttr::
-INCBIN "data/tilesets/lileep_word_room_attributes.bin.lzp"
+INCBIN "data/tilesets/lileep_word_room_attributes.bin.lz"
 
 TilesetOmanyteWordRoomAttr::
-INCBIN "data/tilesets/omanyte_word_room_attributes.bin.lzp"
+INCBIN "data/tilesets/omanyte_word_room_attributes.bin.lz"
 
 TilesetAerodactylWordRoomAttr::
-INCBIN "data/tilesets/aerodactyl_word_room_attributes.bin.lzp"
+INCBIN "data/tilesets/aerodactyl_word_room_attributes.bin.lz"

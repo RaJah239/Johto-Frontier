@@ -2097,10 +2097,10 @@ SlotsTilemap:
 INCBIN "gfx/slots/slots.tilemap"
 
 Slots1LZ:
-INCBIN "gfx/slots/slots_1.2bpp.lzp"
+INCBIN "gfx/slots/slots_1.2bpp.lz"
 
 Slots2LZ:
-INCBIN "gfx/slots/slots_2.2bpp.lzp"
+INCBIN "gfx/slots/slots_2.2bpp.lz"
 
 Slots3LZ:
-INCBIN "gfx/slots/slots_3.2bpp.lzp"
+INCBIN "gfx/slots/slots_3.2bpp.lz"

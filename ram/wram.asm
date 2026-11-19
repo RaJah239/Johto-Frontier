@@ -111,9 +111,10 @@ wDontPlayMapMusicOnReload:: db
 
 SECTION "WRAM", WRAM0
 
+wLZAddress:: dw
 wLZBank::    db
 
-	ds 3
+	ds 1
 
 wBoxAlignment:: db
 
