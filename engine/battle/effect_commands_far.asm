@@ -293,7 +293,7 @@ _BattleCommand_CheckHit:
 	farcall XAccuracy
 	ret nz
 
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr nz, .enemy_target
 
