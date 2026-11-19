@@ -69,8 +69,7 @@ Pokedex_DetailedArea_Trees:
 	ld [wPokedexEvoStage2], a ; lines printed
 	; check if we are at max printed, 3
 	cp 6
-	jr z, .thispagedone
-	jr .map_loop
+	jr nz, .map_loop
 .thispagedone
 	; check if any remaining entries
 	call AnyRemaining_trees
@@ -340,8 +339,7 @@ Pokedex_DetailedArea_rocksmash:
 	ld [wPokedexEvoStage2], a ; lines printed
 	; check if we are at max printed, 3
 	cp 6
-	jr z, .thispagedone
-	jr .map_loop
+	jr nz, .map_loop
 .thispagedone
 
 	; check if any remaining entries
