@@ -4,3 +4,5 @@ DreamSongPokemon:
 ;   db CLEFAIRY
 ;   db CLEFABLE
     db -1 ; end
+
+DreamSongText: db "Dream Song@"

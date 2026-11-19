@@ -305,7 +305,7 @@ _BattleCommand_CheckHit:
 ; ===========================
 ; === Ability: Dream Song ===
 ; ===========================
-	surefire_ability SING, DreamSongPokemon
+	surefire_ability SING, DreamSongPokemon, SEND_OUT_POPUP_DREAM_SONG, DreamSongText
 
 ; ===========================
 ; === Ability: Astral Aim ===
