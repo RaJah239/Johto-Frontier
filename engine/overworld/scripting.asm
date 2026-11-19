@@ -1117,8 +1117,7 @@ ApplyObjectFacing:
 	call SetSpriteDirection
 	ld hl, wStateFlags
 	bit TEXT_STATE_F, [hl]
-	jr nz, .text_state
-	call .DisableTextTiles
+	call z, .DisableTextTiles
 .text_state
 	jmp UpdateSprites
 
