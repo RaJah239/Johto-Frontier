@@ -209,7 +209,6 @@ _PrintLevel::
 ; 3-digit numbers overwrite the :L.
 	dec hl
 	inc c
-	jr Print8BitNumLeftAlign
 
 Print8BitNumLeftAlign::
 	ld [wTextDecimalByte], a
