@@ -175,6 +175,7 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Grass type Pokémon are immune to Powder/Spore based moves
 - Sandstorm raises the Special Defense of Rock type Pokémon by 50%
 - Hail raises the Defense of Ice type Pokémon by 50%
+- Can use Protect or King's Shield behind Substitute
 - Music resumes where it left off after a battle
 - While Pokemon are asleep, all moves can't miss
 - Reduced happiness required for Pokémon that evolve via happiness
