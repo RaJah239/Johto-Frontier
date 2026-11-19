@@ -140,7 +140,6 @@ KOBoost:
 ; ==================
 	ldh a, [hBattleTurn]
 	and a
-	jr nz, .enemy_turn_life_drain
 
 ; =====================
 ; === Player's Turn ===
@@ -180,7 +179,6 @@ KOBoost:
 ; ==================
 	ldh a, [hBattleTurn]
 	and a
-	jr nz, .enemy_turn_renewal
 
 ; =====================
 ; === Player's Turn ===
