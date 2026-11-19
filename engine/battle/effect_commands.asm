@@ -2513,7 +2513,7 @@ PolarFangorLightBallBoost:
 	push hl
 	ld a, MON_SPECIES
 	call BattlePartyAttr
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ld a, [hl]
 	jr z, .checkpikachu
@@ -2522,15 +2522,13 @@ PolarFangorLightBallBoost:
 	pop hl
 	cp PIKACHU
 	jr z, .lightball
-	ld b, DEWGONG
-	ld c, SEEL
+	lb bc, DEWGONG, SEEL
 	ld d, POLAR_FANG
 	call SpeciesItemBoost
 	jr .done
 
 .lightball
-	ld b, PIKACHU
-	ld c, PIKACHU
+	lb bc, PIKACHU, PIKACHU
 	ld d, LIGHT_BALL
 	call SpeciesItemBoost
 
@@ -2558,8 +2556,7 @@ LightBallBoost:
 ; holding a Light Ball, double it.
 	push bc
 	push de
-	ld b, PIKACHU
-	ld c, PIKACHU
+	lb bc, PIKACHU, PIKACHU
 	ld d, LIGHT_BALL
 	call SpeciesItemBoost
 	pop de
@@ -6328,7 +6325,7 @@ BattleCommand_Screen:
 .good
 ; check for Light Clay
 	push hl
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ld hl, wBattleMonItem
 	jr z, .got_item
@@ -6704,19 +6701,6 @@ GetItemHeldEffect:
 	pop hl
 	ret
 
-AnimateCurrentMoveEitherSide:
-	push hl
-	push de
-	push bc
-	ld a, [wBattleAnimParam]
-	push af
-	call BattleCommand_LowerSub
-	pop af
-	ld [wBattleAnimParam], a
-	call PlayDamageAnim
-	call BattleCommand_RaiseSub
-	jmp PopBCDEHL
-
 AnimateCurrentMove:
 	push hl
 	push de
@@ -6729,28 +6713,6 @@ AnimateCurrentMove:
 	call LoadMoveAnim
 	call BattleCommand_RaiseSub
 	jmp PopBCDEHL
-
-PlayDamageAnim:
-	xor a
-	ld [wFXAnimID + 1], a
-
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	and a
-	ret z
-
-	ld [wFXAnimID], a
-
-	ldh a, [hBattleTurn]
-	and a
-	ld a, BATTLEANIM_ENEMY_DAMAGE
-	jr z, .player
-	ld a, BATTLEANIM_PLAYER_DAMAGE
-
-.player
-	ld [wNumHits], a
-
-	jr PlayUserBattleAnim
 
 LoadMoveAnim:
 	xor a
