@@ -2219,7 +2219,7 @@ DexGrid_ApplyOverlay:
 	; the bottom edge on the bottom row if the cursor is in the last row
 	ld a, [wDexGridCursorRow]
 	cp DEXGRID_ROWS - 1
-	jr nz, .upload
+	ret nz
 	ld a, 2
 	ld [wDexGridOverlayRow], a
 	ld a, SCREEN_HEIGHT - 1
