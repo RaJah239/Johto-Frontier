@@ -329,7 +329,6 @@ IF DEF(EVOLVE_HELD)
 	jr nz, .done_multi
 	ld a, [wStatsScreenFlags]
 	cp 1
-	jr nz, .not_single
 .not_single
 	xor a
 	ld [wStatsScreenFlags], a
@@ -443,7 +442,7 @@ EVO_trade:
 	
 	pop af ; item index
 	cp -1
-	jr z, .done
+	jr z, EVO_inchlcoord
 	push af ; trade item index
 	
 	call EVO_inchlcoord
