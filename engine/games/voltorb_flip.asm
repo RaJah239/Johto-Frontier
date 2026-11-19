@@ -445,8 +445,7 @@ VFInput:
 	jr nz, .capcoins
 	ld a, e
 	cp $f
-	jr nc, .capcoins
-	jr .totalcoins
+	jr c, .totalcoins
 
 .capcoins
 	ld de, $270f
@@ -1592,8 +1591,7 @@ VFKeepCoins:
 	jr nz, .capcoins
 	ld a, e
 	cp $f
-	jr nc, .capcoins
-	jr .totalcoins
+	jr c, .totalcoins
 
 .capcoins
 	ld de, $270f
