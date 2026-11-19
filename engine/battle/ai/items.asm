@@ -673,10 +673,10 @@ AI_Items:
 	bit UNKNOWN_USE_F, a
 	jr nz, .CheckQuarterHP
 	callfar AICheckEnemyQuarterHP
-	jr nc, .UseHealItem
+	jr nc, .Use
 	call Random
 	cp 50 percent + 1
-	jr c, .UseHealItem
+	jr c, .Use
 	jr .DontUse
 
 .CheckQuarterHP:
@@ -685,13 +685,13 @@ AI_Items:
 	call Random
 	cp 20 percent - 1
 	jr c, .DontUse
-	jr .UseHealItem
+	jr .Use
 
 .CheckHalfOrQuarterHP:
 	callfar AICheckEnemyHalfHP
 	jr c, .DontUse
 	callfar AICheckEnemyQuarterHP
-	jr nc, .UseHealItem
+	jr nc, .Use
 	call Random
 	cp 20 percent - 1
 	jr nc, .DontUse
