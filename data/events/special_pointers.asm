@@ -41,7 +41,6 @@ SpecialsPointers::
 	add_special MoveDeletion
 	add_special BankOfMom
 	add_special MagnetTrain
-	add_special NameRival ; unused
 	add_special SetDayOfWeek
 	add_special OverworldTownMap
 	add_special ViewUnown
@@ -50,10 +49,8 @@ SpecialsPointers::
 	add_special SlotMachine
 	add_special CardFlip
 	add_special MemoryGame
-	add_special FadeOutToWhite
 	add_special BattleTowerFade
 	add_special FadeOutToBlack
-	add_special FadeInFromWhite
 	add_special FadeInFromBlack
 	add_special ReloadSpritesNoPalettes ; bank 0
 	add_special ClearBGPalettes ; bank 0
@@ -68,16 +65,13 @@ SpecialsPointers::
 	add_special HealMachineAnim
 	add_special SurfStartStep
 	add_special FindPartyMonThatSpecies
-	add_special FindPartyMonThatSpeciesYourTrainerID
 	add_special DayCareMon1
 	add_special DayCareMon2
 	add_special SelectRandomBugContestContestants
-	add_special ActivateFishingSwarm
 	add_special ToggleMaptileDecorations
 	add_special ToggleDecorationsVisibility
 	add_special GiveShuckle
 	add_special ReturnShuckie
-	add_special BillsGrandfather ; useful, rename for future use
 	add_special CheckPokerus
 	add_special DisplayCoinCaseBalance
 	add_special DisplayMoneyAndCoinBalance
@@ -87,11 +81,9 @@ SpecialsPointers::
 	add_special DisplayLinkRecord
 	add_special GetFirstPokemonHappiness
 	add_special CheckFirstMonIsEgg
-	add_special LoadUsedSpritesGFX
 	add_special PlaySlowCry
 	add_special OlderHaircutBrother
 	add_special YoungerHaircutBrother
-	add_special DaisysGrooming
 	add_special PlayCurMonCry
 	add_special ProfOaksPCBoot
 	add_special FadeOutMusic
@@ -125,7 +117,6 @@ SpecialsPointers::
 	add_special InitialClearDSTFlag
 
 ; New specials starts here
-	add_special DebugColourPicker
 	add_special MonPaletteEditor
 	add_special MonPaletteReset
 	add_special _VoltorbFlip
@@ -146,7 +137,6 @@ SpecialsPointers::
 	add_special CrystalCountInBag
 	add_special NuggetCountInBag
 	add_special Menu_BattleTowerSettings
-	add_special GetPartyCountWithoutEggs
 	add_special LoadPokemonData
 	add_special OverridePlayerParty
 	add_special PartyKeeperShowTeam
