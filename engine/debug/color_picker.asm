@@ -651,8 +651,7 @@ DebugColor_TMHMJoypad:
 	ld hl, hJoyPressed
 	ld a, [hl]
 	and B_BUTTON
-	jr nz, .cancel
-	jr .scroll
+	jr z, .scroll
 
 .cancel
 	ld a, DEBUGCOLORMAIN_INITSCREEN
