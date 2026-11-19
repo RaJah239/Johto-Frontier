@@ -1417,9 +1417,6 @@ Pack_InterpretJoypad:
 	scf
 	ret
 
-.start
-	jr Pack_SortMenu
-
 .switching_item
 	ld a, [hl]
 	and A_BUTTON | SELECT
