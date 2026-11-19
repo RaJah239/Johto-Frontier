@@ -349,8 +349,7 @@ ENDC
 	cp MEW
 	jr z, .master_ball_fails
 	cp MEWTWO
-	jr z, .master_ball_fails
-	jmp .catch_without_fail
+	jmp nz, .catch_without_fail
 
 .master_ball_fails
 	ld hl, BallWontWorkText
@@ -1388,9 +1387,8 @@ EvoStoneEffect:
 
 	ld a, [wMonTriedToEvolve]
 	and a
-	jr z, .NoEffect
+	jmp nz, UseDisposableItem
 
-	jmp UseDisposableItem
 
 .NoEffect:
 	call WontHaveAnyEffectMessage
@@ -1799,8 +1797,7 @@ HealPowderEffect:
 
 	; Skip LooksBitter text if field actions is set to quick
 	call CheckFieldActions
-	jr nz, .skip
-	call LooksBitterMessage
+	call z, LooksBitterMessage
 
 .skip:
 	ld a, $0
@@ -1931,15 +1928,14 @@ RevivalHerbEffect:
 
 	call RevivePokemon
 	cp FALSE
-	jr nz, .not_used
+	jr nz, StatusHealer_Jumptable
 
 	ld c, HAPPINESS_REVIVALHERB
 	farcall ChangeHappiness
 
 	; Skip LooksBitter text if field actions is set to quick
 	call CheckFieldActions
-	jr nz, .skip
-	call LooksBitterMessage
+	call z, LooksBitterMessage
 
 .skip:
 	ld a, $0
@@ -2010,9 +2006,8 @@ FullRestoreEffect:
 	jmp z, StatusHealer_NoEffect
 
 	call IsMonAtFullHealth
-	jr c, .NotAtFullHealth
+	jmp nc, FullyHealStatus
 
-	jmp FullyHealStatus
 
 .NotAtFullHealth:
 	call .FullRestore
@@ -2110,8 +2105,7 @@ EnergypowderEnergyRootCommon:
 
 	; Skip LooksBitter text if field actions is set to quick
 	call CheckFieldActions
-	jr nz, .skip
-	call LooksBitterMessage
+	call z, LooksBitterMessage
 
 .skip:
 	ld a, 0
@@ -2309,7 +2303,7 @@ RestoreHealth:
 	ld a, [hl]
 	adc d
 	ld [hl], a
-	jr c, .full_hp
+	jr c, ReviveFullHP
 	call LoadCurHPIntoBuffer3
 	ld a, MON_HP + 1
 	call GetPartyParamLocation
@@ -2336,7 +2330,7 @@ RemoveHP:
 	ld a, [hl]
 	sbc d
 	ld [hl], a
-	jr nc, .okay
+	jr nc, LoadCurHPIntoBuffer3
 	xor a
 	ld [hld], a
 	ld [hl], a
@@ -2527,7 +2521,7 @@ EscapeRopeEffect:
 
 	ld a, [wItemEffectSucceeded]
 	cp 1
-	call z, UseDisposableItem
+	jmp z, UseDisposableItem
 	ret
 
 SuperRepelEffect:
@@ -2760,8 +2754,7 @@ BattleRestorePP:
 	jr nz, .not_in_battle
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_TRANSFORMED, a
-	jr nz, .not_in_battle
-	call .UpdateBattleMonPP
+	call z, .UpdateBattleMonPP
 
 .not_in_battle
 	call Play_SFX_FULL_HEAL
