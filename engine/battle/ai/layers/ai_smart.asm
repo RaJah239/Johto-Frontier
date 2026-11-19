@@ -274,7 +274,7 @@ AI_Smart_HitAndSwitch:
 	pop de
 	pop hl
 	jmp c, AIDiscourageMove
-	jr .check_damage_race
+	; fallthrough
 
 .check_damage_race
 	call CanPlayer2HKO
@@ -373,8 +373,7 @@ AI_PlayerUnburdenItem:
 	and a
 	ret z
 	ld a, [wBattleMonSpecies]
-	newfarcall IsUnburdenSpecies ; engine/abilities/unburden.asm
-	ret
+	farjp IsUnburdenSpecies ; engine/abilities/unburden.asm
 
 AI_UnburdenDiscourage:
 	inc [hl]
@@ -2343,8 +2342,7 @@ AI_Smart_Paralyze:
 	push de
 	push bc
 	ld hl, wEnemyMonMoves
-	ld b, NUM_MOVES
-	ld c, 0
+	lb bc, NUM_MOVES, 0
 .tw_count_loop
 	ld a, [hli]
 	and a
