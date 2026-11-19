@@ -176,17 +176,17 @@ StartMenu::
 
 .Items:
 ; entries correspond to STARTMENUITEM_* constants
-	dw StartMenu_Pokedex,  .PokedexString,  .EmptyDesc
-	dw StartMenu_Pokemon,  .PartyString,    .EmptyDesc
-	dw StartMenu_Pack,     .PackString,     .EmptyDesc
-	dw StartMenu_Status,   .StatusString,   .EmptyDesc
-	dw StartMenu_Save,     .SaveString,     .EmptyDesc
-	dw StartMenu_Option,   .OptionString,   .EmptyDesc
-	dw StartMenu_Exit,     .ExitString,     .EmptyDesc
-	dw StartMenu_Pokegear, .PokegearString, .EmptyDesc
-	dw StartMenu_Quit,     .QuitString,     .EmptyDesc
-	dw StartMenu_Warp,     .WarpString,     .EmptyDesc
-	dw StartMenu_GiveUp,   .GiveUpString,   .EmptyDesc
+	dw StartMenu_Pokedex,  .PokedexString
+	dw StartMenu_Pokemon,  .PartyString
+	dw StartMenu_Pack,     .PackString
+	dw StartMenu_Status,   .StatusString
+	dw StartMenu_Save,     .SaveString
+	dw StartMenu_Option,   .OptionString
+	dw StartMenu_Exit,     .ExitString
+	dw StartMenu_Pokegear, .PokegearString
+	dw StartMenu_Quit,     .QuitString
+	dw StartMenu_Warp,     .WarpString
+	dw StartMenu_GiveUp,   .GiveUpString
 
 .PokedexString:  db "#dex@"
 .PartyString:    db "#mon@"
@@ -200,12 +200,9 @@ StartMenu::
 .WarpString:     db "Warp@"
 .GiveUpString:   db "Give Up@"
 
-.EmptyDesc:
-	db   "@"
-
 .OpenMenu:
 	ld a, [wMenuSelection]
-	call .GetMenuEmptyTextPointer
+	call .GetMenuItemEntry
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -214,7 +211,7 @@ StartMenu::
 .MenuString:
 	push de
 	ld a, [wMenuSelection]
-	call .GetMenuEmptyTextPointer
+	call .GetMenuItemEntry
 	inc hl
 	inc hl
 	ld a, [hli]
@@ -223,32 +220,14 @@ StartMenu::
 	pop hl
 	jmp PlaceString
 
-.MenuDesc:
-	push de
-	ld a, [wMenuSelection]
-	cp $ff
-	jr z, .none
-	call .GetMenuEmptyTextPointer
-rept 4
-	inc hl
-endr
-	ld a, [hli]
-	ld d, [hl]
-	ld e, a
-	pop hl
-	jmp PlaceString
-.none
-	pop de
-	ret
-
-.GetMenuEmptyTextPointer:
+.GetMenuItemEntry:
 	ld e, a
 	ld d, 0
 	ld hl, wMenuDataPointerTableAddr
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-rept 6
+rept 4 ; two pointers per menu item
 	add hl, de
 endr
 	ret
