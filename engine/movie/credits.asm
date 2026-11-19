@@ -239,7 +239,7 @@ Credits_LYOverride:
 ParseCredits:
 	ld hl, wJumptableIndex
 	bit 7, [hl]
-	jmp nz, .done
+	jr nz, Credits_Next
 
 ; Wait until the timer has run out to parse the next command.
 	ld hl, wCreditsTimer
@@ -249,7 +249,7 @@ ParseCredits:
 
 ; One tick has passed.
 	dec [hl]
-	jmp .done
+	jr Credits_Next
 
 .parse
 ; First, let's clear the current text display,
