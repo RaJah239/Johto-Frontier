@@ -23,19 +23,6 @@ SetMenuMonIconColor:
 	ld [wCurPartySpecies], a
 	call GetMenuMonIconPalette
 	ld hl, wShadowOAMSprite00Attributes
-	jmp _ApplyMenuMonIconColor
-
-SetMenuMonIconColor_NoShiny:
-	push hl
-	push de
-	push bc
-	push af
-
-	ld a, [wTempIconSpecies]
-	ld [wCurPartySpecies], a
-	and a
-	call GetMenuMonIconPalette_PredeterminedShininess
-	ld hl, wShadowOAMSprite00Attributes
 	jr _ApplyMenuMonIconColor
 
 SetDexMonIconColor_NoShiny:
@@ -326,8 +313,7 @@ Pokedex_InitAnimatedMonIcon:
  	jr nz, .evo_page
  	ld a, -1
  	ld [wStatsScreenFlags], a
- 	ld d, $88
- 	ld e, $20
+	lb de, $88, $20
  	jr .setxdone
 
 .evo_page
