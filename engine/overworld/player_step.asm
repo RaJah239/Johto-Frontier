@@ -51,30 +51,11 @@ HandlePlayerStep:
 	and a
 	ret z
 	dec [hl]
+	jmp z, GetMovementPermissions
 	ld a, [hl]
-	ld hl, .Jumptable
-	rst JumpTable
-	ret
-
-.Jumptable:
-	dw GetMovementPermissions
-	dw BufferScreen
-	dw .fail1
-	dw .fail2
-; The rest are never used.  Ever.
-	dw .fail1
-	dw .fail1
-	dw .fail1
-	dw .fail1
-	dw .fail1
-	dw .fail1
-	dw .fail1
-
-.fail1
-	ret
-
-.fail2
-	ret
+	dec a
+	ret nz
+	jmp BufferScreen
 
 UpdatePlayerCoords:
 	ld a, [wPlayerStepDirection]
@@ -152,11 +133,9 @@ UpdateOverworldMap:
 	inc [hl]
 	ld a, [hl]
 	cp 2 ; was 1
-	jr nz, .done_down
+	ret nz
 	ld [hl], 0
-	call .ScrollMapDataDown
-.done_down
-	ret
+	; fallthrough
 
 .ScrollMapDataDown:
 	ld hl, wOverworldMapAnchor
@@ -183,11 +162,9 @@ UpdateOverworldMap:
 	dec [hl]
 	ld a, [hl]
 	cp -1 ; was 0
-	jr nz, .done_up
+	ret nz
 	ld [hl], $1
-	call .ScrollMapDataUp
-.done_up
-	ret
+	; fallthrough
 
 .ScrollMapDataUp:
 	ld hl, wOverworldMapAnchor
@@ -215,11 +192,9 @@ UpdateOverworldMap:
 	dec [hl]
 	ld a, [hl]
 	cp -1
-	jr nz, .done_left
+	ret nz
 	ld [hl], 1
-	call .ScrollMapDataLeft
-.done_left
-	ret
+	; fallthrough
 
 .ScrollMapDataLeft:
 	ld hl, wOverworldMapAnchor
@@ -244,11 +219,9 @@ UpdateOverworldMap:
 	inc [hl]
 	ld a, [hl]
 	cp 2
-	jr nz, .done_right
+	ret nz
 	ld [hl], 0
-	call .ScrollMapDataRight
-.done_right
-	ret
+	; fallthrough
 
 .ScrollMapDataRight:
 	ld hl, wOverworldMapAnchor
