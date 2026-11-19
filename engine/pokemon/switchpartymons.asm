@@ -7,7 +7,7 @@ _SwitchPartyMons:
 	dec a
 	ld [wSwitchMonTo], a
 	cp b
-	jr z, .skip
+	ret z
 	call .SwapMonAndMail
 	ld a, [wSwitchMonFrom]
 	call .ClearSprite
