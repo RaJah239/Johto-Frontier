@@ -48,6 +48,10 @@ ChanseyEvosAttacks:
 	db EVOLVE_HAPPINESS, TR_ANYTIME, PORYGONZ
 BlisseyEvosAttacks:
 
+MagikarpEvosAttacks:
+	db EVOLVE_LEVEL, 20, GYARADOS
+GyaradosEvosAttacks:
+
 TotodileEvosAttacks:
 CroconawEvosAttacks:
 FeraligatrEvosAttacks:
@@ -126,8 +130,6 @@ DrilburEvosAttacks: ; lv 25 evo
 ExcadrillEvosAttacks:
 OnixEvosAttacks:
 SteelixEvosAttacks:
-MagikarpEvosAttacks:
-GyaradosEvosAttacks:
 GastlyEvosAttacks:
 HaunterEvosAttacks:
 GengarEvosAttacks:
