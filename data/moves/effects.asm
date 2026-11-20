@@ -744,6 +744,32 @@ MultiHit:
 	kingsrock
 	endmove
 
+MultiFlinchHit:
+	usedmovetext
+	doturn
+	startloop
+	lowersub
+	checkhit
+	effectchance
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	clearmissdamage
+	moveanimnosub
+	failuretext
+	applydamage
+	criticaltext
+	cleartext
+	supereffectivelooptext
+	checkfaint
+	endloop
+	raisesub
+	kingsrock
+	flinchtarget
+	endmove
+
 PoisonMultiHit:
 	usedmovetext
 	doturn
