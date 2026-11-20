@@ -100,7 +100,7 @@ PlayBattleMusic:
 	ld c, a
 	call GetWorldMapLocation
 	cp LANDMARK_BATTLE_PLAZA
-	ld e, MUSIC_UNOVA_ELITE_FOUR_BATTLE
+	ld e, MUSIC_GYM_LEADER_BATTLE_PRISM
 	jr z, .done
 
 

@@ -81,7 +81,7 @@
 	const MUSIC_BUG_CATCHING_CONTEST         ; 59
 	const MUSIC_LAKE_OF_RAGE_ROCKET_RADIO    ; 5a to remove
 	const MUSIC_POST_CREDITS                 ; 5c
-; new to Crystal
+
 	const MUSIC_CLAIR                        ; 5d
 	const MUSIC_BUENAS_PASSWORD              ; 60
 	const MUSIC_MYSTICALMAN_ENCOUNTER        ; 61 maybe remove
@@ -100,6 +100,7 @@
 	const MUSIC_SCARLET_FINAL_THEME
 	const MUSIC_ZINNIA_BATTLE_THEME
 	const MUSIC_FINAL_POKEMON_BW
+	const MUSIC_GYM_LEADER_BATTLE_PRISM
 DEF NUM_MUSIC_SONGS EQU const_value
 
 ; GetMapMusic picks music for these values (see home/map.asm)

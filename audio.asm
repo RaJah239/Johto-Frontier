@@ -148,8 +148,12 @@ INCLUDE "audio/music/hoennchampionbattle.asm"
 INCLUDE "audio/music/zinnia_battle_final.asm"
 
 SECTION "B/W Final Pokemon Music", ROMX
-
 INCLUDE "audio/music/finalpokemon_bw.asm"
+
+
+SECTION "Prism Music", ROMX
+INCLUDE "audio/music/prism/gymleaderbattle.asm"
+
 
 SECTION "Sound Effects", ROMX
 

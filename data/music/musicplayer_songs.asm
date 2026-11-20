@@ -137,6 +137,7 @@ MusicPlayerSongs::
 	db MUSIC_SURFING_PIKACHU
 	db MUSIC_SCARLET_FINAL_THEME
 	db MUSIC_ZINNIA_BATTLE_THEME
+	db MUSIC_GYM_LEADER_BATTLE_PRISM
 .SongsEnd
 	db -1  ; end
 
@@ -259,6 +260,7 @@ MusicPlayerSongNamePointers::
 	dba .ScarletFinale      ; MUSIC_SCARLET_FINAL_THEME
 	dba .ZinniaBattle       ; MUSIC_ZINNIA_BATTLE_THEME
 	dba .FinalPokemonBW     ; MUSIC_FINAL_POKEMON_BW
+	dba .GymLeaderBattlePrism ; MUSIC_GYM_LEADER_BATTLE_PRISM
 
 	assert_table_length NUM_MUSIC_SONGS
 
@@ -360,3 +362,4 @@ MusicPlayerSongNamePointers::
 .ScarletFinale:       db "  Scarlet Finale@"
 .ZinniaBattle:        db "  Zinnia Battle@"
 .FinalPokemonBW:      db " B/W Final #mon@"
+.GymLeaderBattlePrism: db " Gym Leader Prism@"

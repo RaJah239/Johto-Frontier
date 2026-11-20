@@ -119,6 +119,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 # Music
 - mmmmmmmmmmmmmmmmm - Cave of Origin, RBY Indigo Plateau themes, Vs. Hoenn Champion, Pokémon B/W - Final Pokémon
 - TriteHexagon: Zinnia Battle
+- Prism Team - Gym Leader Battle Prism
 
 # Acknowledgments
 - Pret Team: https://pret.github.io/pokecrystal

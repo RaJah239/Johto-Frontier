@@ -90,7 +90,6 @@ Music:
 	dba Music_BattleTowerTheme
 	dba Music_SuicuneBattle
 	dba Music_BattleTowerLobby
-; new
 	dba Music_FinalBattle
 	dba Music_MaxieArchieBattle
 	dba Music_GymLeaderBattle
@@ -102,4 +101,5 @@ Music:
 	dba Music_HoennChampionBattle
 	dba Music_ZinniaBattle
 	dba Music_FinalPokemonBW
+	dba Music_GymLeaderBattlePrism
 	assert_table_length NUM_MUSIC_SONGS
