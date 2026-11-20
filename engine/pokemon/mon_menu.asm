@@ -1365,7 +1365,7 @@ PlaceMoveData:
 	hlcoord 1, 15
 	predef PrintMoveDescription
 	; Show the icons, values, description and move list in the same frame.
-	jp ApplyTilemap
+	farjp MoveIcons_CommitPage
 
 ; UI elements
 String_MoveType_Top: db "┌───────┐@"

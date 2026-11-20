@@ -232,6 +232,8 @@ MoveDetailsMenu_FixCancelBorder:
 DEF MOVE_DETAILS_ICON_PAL EQU 6 ; the screen only uses palette 7
 
 MoveDetailsMenu_PrintMoveDetails:
+	xor a
+	ldh [hBGMapMode], a
 	hlcoord 0, 10
 	lb bc, 6, 18
 	call TextboxBorder
@@ -240,7 +242,8 @@ MoveDetailsMenu_PrintMoveDetails:
 	cp -1
 	jr nz, .move
 	farcall MoveStatBadges_Hide
-	jp MoveDetailsMenu_FixCancelBorder
+	call MoveDetailsMenu_FixCancelBorder
+	farjp MoveIcons_CommitPage
 .move
 
 	push de
@@ -257,7 +260,7 @@ MoveDetailsMenu_PrintMoveDetails:
 	ld b, a
 	ld c, MOVE_DETAILS_ICON_PAL
 	lb de, 11, 10
-	farcall MoveIcons_Show
+	farcall MoveIcons_Stage
 
 	hlcoord 0, 9
 	ld de, MoveDetailsMenuTypeTopString
@@ -268,7 +271,7 @@ MoveDetailsMenu_PrintMoveDetails:
 	ld d, 10
 	ld e, 1
 	ld c, 5 ; palette 5 is free on this screen
-	farcall MoveStatBadges_Show
+	farcall MoveStatBadges_Stage
 
 	ld a, [wMenuSelection]
 	ld bc, MOVE_LENGTH
@@ -339,13 +342,16 @@ MoveDetailsMenu_PrintMoveDetails:
 	ld de, wBuffer1
 	lb bc, 1, 3
 	hlcoord 5, 10
-	jmp PrintNum
+	call PrintNum
+	jr .commit
 
 .print_null_power
 	hlcoord 5, 10
 	ld de, MoveDetailsMenuNullValueString
 	ld bc, 3
-	jmp PlaceString
+	call PlaceString
+.commit
+	farjp MoveIcons_CommitPage
 
 MoveDetailsMenuTypeTopString: db "┌───────┐@"
 MoveDetailsMenuTypeBottomString: db "│       └──────────┐@"

@@ -360,7 +360,7 @@ TMHM_ShowTMMoveDescription:
 	farcall TMHMMoveIcons_Hide
 	farcall ClearTMHMIcon
 .commit
-	call ApplyTilemap
+	farcall MoveIcons_CommitPage
 	pop af
 	ldh [hOAMUpdate], a
 	jmp TMHM_JoypadLoop

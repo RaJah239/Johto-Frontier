@@ -211,17 +211,9 @@ MoveIcons_GetIndices:
 	ldh [hMoveIconCategory], a
 	ret
 
-MoveIcons_Show::
-; Immediate version for callers that update only the icon cells.
-	call MoveIcons_PrepareBG
-	call MoveIcons_WaitBelowRow
-	call MoveIcons_SendBGPalette
-	call MoveIcons_LoadBGTiles
-	jp MoveIcons_WriteMap
-
 MoveIcons_Stage::
 ; Prepare icons while the caller builds a page with hBGMapMode = 0.
-; The caller commits the complete page once with ApplyTilemap.
+; The caller commits the complete page once with MoveIcons_CommitPage.
 	call MoveIcons_PrepareBG
 	call MoveIcons_LoadBGTiles
 	ld a, TRUE
@@ -301,102 +293,24 @@ MoveIcons_PrepareBG:
 	pop hl
 	ret
 
-MoveIcons_SendBGPalette:
-	ldh a, [hMoveIconPalette]
-	and PALETTE_MASK
-	add a
-	add a
-	add a
-	ld b, a
-	ld c, LOW(rBGPI)
-	jp MoveIcons_SendPalette
-
 MoveIcons_LoadBGTiles:
 	ld hl, vTiles2 tile MOVE_ICON_TILE
 	ld b, BANK(vTiles2)
 	jp MoveIcons_SendTiles
 
-MoveIcons_WriteMap:
-; Copy the tiles and attributes of the six cells at hMoveIconRow/Col from
-; wTilemap/wAttrmap to the BG map.
-	ld a, MOVE_ICON_TILES
-MoveIcons_WriteCells:
-; a = number of cells. Used by the stat word icons too.
-	push af
-	call MoveIcons_TilemapAddress
-	ld d, h
-	ld e, l
-	ldh a, [hMoveIconRow]
-	ld l, a
-	ld h, 0
-rept 5
-	add hl, hl
-endr ; * BG_MAP_WIDTH
-	ldh a, [hMoveIconCol]
-	add l
-	ld l, a
-	ldh a, [hBGMapAddress]
-	add l
-	ld l, a
-	ldh a, [hBGMapAddress + 1]
-	adc h
-	ld h, a
-	ld bc, wAttrmap - wTilemap
-	pop af
-.loop
-	push af
-	call MoveIcons_WaitHBlank
-	ld a, [de] ; tile
-	ld [hl], a
-	push de
-	ld a, e
-	add c
-	ld e, a
-	ld a, d
-	adc b
-	ld d, a
-	ld a, 1
-	ldh [rVBK], a
-	ld a, [de] ; attribute
-	ld [hli], a
-	xor a
-	ldh [rVBK], a
-	pop de
-	inc de
-	ei
-	pop af
-	dec a
-	jr nz, .loop
-	ret
-
-MoveStatBadges_Show::
-; Draw the POW, ACC, and EFF word icons, each three tiles wide.
-; d = top row, e = column, c = a free BG palette.
-	xor a ; write the cells immediately
-	jr MoveStatBadges_Begin
-
 MoveStatBadges_Stage::
-; Same inputs as Show; leave the cells for the caller's page commit.
-	ld a, TRUE
-
-MoveStatBadges_Begin:
-	ld b, 3 ; three rows
-	ldh [hMoveIconType], a
+; Stage POW, ACC and EFF: d = top row, e = column, c = free BG palette.
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wMoveStatBadgeTileIds)
 	ldh [rSVBK], a
-	ld a, b
-	ldh [hMoveIconCategory], a
 	ld a, d
 	ld [wMoveStatRow], a
 	ld a, e
 	ld [wMoveStatCol], a
 	ld a, c
 	ld [wMoveStatPalette], a
-	ld a, [hMoveIconType]
-	ld [wMoveStatStaging], a
-	ld a, [hMoveIconCategory]
+	ld a, 3
 	ld [wMoveStatRows], a
 
 	ld a, [wMoveStatBadgeActive]
@@ -759,19 +673,6 @@ MoveStatBadges_WriteTilemap:
 	jr nc, .no_attr_carry
 	inc d
 .no_attr_carry
-	ld a, [wMoveStatStaging]
-	and a
-	jr nz, .next_row
-	push hl
-	push de
-	ld a, MOVE_STAT_BADGE_WIDTH
-	call MoveIcons_WriteCells
-	ldh a, [hMoveIconRow]
-	inc a
-	ldh [hMoveIconRow], a
-	pop de
-	pop hl
-.next_row
 	pop bc
 	ld a, [wMoveStatRowsLeft]
 	dec a
@@ -826,19 +727,6 @@ MoveStatBadges_Hide::
 	jr nc, .no_clear_attr_carry
 	inc d
 .no_clear_attr_carry
-	ld a, [wMoveStatStaging]
-	and a
-	jr nz, .next_clear_row
-	push hl
-	push de
-	ld a, MOVE_STAT_BADGE_WIDTH
-	call MoveIcons_WriteCells
-	ldh a, [hMoveIconRow]
-	inc a
-	ldh [hMoveIconRow], a
-	pop de
-	pop hl
-.next_clear_row
 	ld a, [wMoveStatRowsLeft]
 	dec a
 	ld [wMoveStatRowsLeft], a
