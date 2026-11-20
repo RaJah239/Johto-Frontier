@@ -1104,7 +1104,7 @@ FoeAbilityPageInfoBox:
 
 .FoeString: db "Foe:@"
 .RemainingString: db "Foe Count:@"
-.AbilitiesString: db "Ability Info:@"
+.AbilitiesString: db "Foe's Abilities:@"
 .TurnCountString: db "Turn Count: @"
 .MaxTurnCountString: db "9999<+>@"
 .1RemainsString: db "1@"
