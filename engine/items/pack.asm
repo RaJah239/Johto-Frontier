@@ -124,7 +124,7 @@ Pack:
 	call DrawPocketName
 	xor a
 	ldh [hBGMapMode], a
-	call WaitBGMap_DrawPackGFX
+	call DrawPackGFX_NoWait
 	jmp Pack_JumptableNext
 
 .TMHMPocketMenu:
@@ -687,7 +687,7 @@ BattlePack:
 	call DrawPocketName
 	xor a
 	ldh [hBGMapMode], a
-	call WaitBGMap_DrawPackGFX
+	call DrawPackGFX_NoWait
 	ld hl, PackEmptyText
 	call Pack_PrintTextNoScroll
 	jmp Pack_JumptableNext
@@ -978,7 +978,7 @@ DepositSellPack:
 .TMHMPocket:
 	ld a, TM_HM_POCKET
 	call InitPocket
-	call WaitBGMap_DrawPackGFX
+	call DrawPackGFX_NoWait
 	farcall TMHMPocket
 	ld a, [wCurItem]
 	ld [wCurItem], a
@@ -1174,7 +1174,7 @@ TutorialPack:
 .TMHM:
 	ld a, TM_HM_POCKET
 	call InitPocket
-	call WaitBGMap_DrawPackGFX
+	call DrawPackGFX_NoWait
 	farcall TMHMPocket
 	ld a, [wCurItem]
 	ld [wCurItem], a

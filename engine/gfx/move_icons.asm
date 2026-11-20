@@ -1051,6 +1051,7 @@ BattleMoveIcons_Draw::
 ; Show the type and category icons of move b in the battle move info box.
 	ld c, PAL_BATTLE_OB_GRAY
 	lb de, BATTLE_MOVE_ICON_Y, BATTLE_MOVE_ICON_X
+	scf ; battle updates the visible icon cells immediately
 	jr MoveIcons_ShowSprites
 
 BattleMoveIcons_Hide::
@@ -1064,11 +1065,14 @@ TMHMMoveIcons_Show::
 	ld b, a
 	ld c, TMHM_MOVE_ICON_OBJ_PAL
 	lb de, TMHM_MOVE_ICON_Y, TMHM_MOVE_ICON_X
+	and a ; the TM pocket commits the icons and page together
 	; fallthrough
 
 MoveIcons_ShowSprites:
 ; Show the type and category icons of move b as six sprites over the
 ; cells starting at row d, column e, with OBJ palette c.
+; Carry: wait below the icon row before changing visible graphics.
+	push af
 	ld a, c
 	ldh [hMoveIconPalette], a
 	ld a, d
@@ -1076,7 +1080,8 @@ MoveIcons_ShowSprites:
 	ld a, e
 	ldh [hMoveIconCol], a
 	call MoveIcons_GetIndices
-	call MoveIcons_WaitBelowRow
+	pop af
+	call c, MoveIcons_WaitBelowRow
 
 	ldh a, [hMoveIconPalette]
 	ld l, a
@@ -1209,7 +1214,6 @@ TMHM_MoveStatBadges_ClearText:
 	ld hl, wAttrmap + 14 * SCREEN_WIDTH + 1
 	ld bc, MOVE_STAT_BADGE_WIDTH
 	call ByteFill
-	call ApplyTilemapInVBlank
 	ret
 
 TMHM_MoveStatBadges_DrawSprites:

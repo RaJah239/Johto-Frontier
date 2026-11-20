@@ -243,6 +243,13 @@ TMHM_JoypadLoop:
 TMHM_ShowTMMoveDescription:
 	call TMHM_CheckHoveringOverCancel
 	jmp nc, TMHM_ExitPocket
+	; Keep icon sprites and the BG page hidden until the move box is ready.
+	ldh a, [hOAMUpdate]
+	push af
+	ld a, TRUE
+	ldh [hOAMUpdate], a
+	xor a
+	ldh [hBGMapMode], a
 	hlcoord 0, 11
 	lb bc, 5, SCREEN_WIDTH - 2
 	call Textbox
@@ -346,12 +353,16 @@ TMHM_ShowTMMoveDescription:
 	hlcoord 1, 15
 	predef PrintMoveDescription
 	farcall LoadTMHMIcon
-	jmp TMHM_JoypadLoop
+	jr .commit
 
 .cancel
 	farcall TMHM_MoveStatBadges_Hide
 	farcall TMHMMoveIcons_Hide
 	farcall ClearTMHMIcon
+.commit
+	call ApplyTilemap
+	pop af
+	ldh [hOAMUpdate], a
 	jmp TMHM_JoypadLoop
 
 ; UI elements
