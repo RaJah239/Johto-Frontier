@@ -114,6 +114,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - ShinyDragonHunter - code optimisation
 - aaronjeter - text compression
 - Sour Apple - Unown Pokédex
+- Prism Team - VS battle graphic & code
 
 # Music
 - mmmmmmmmmmmmmmmmm - Cave of Origin, RBY Indigo Plateau themes, Vs. Hoenn Champion

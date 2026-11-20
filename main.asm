@@ -491,6 +491,9 @@ INCLUDE "engine/events/battle_tower/factory.asm"
 SECTION "Battle Factory Menu", ROMX
 INCLUDE "engine/events/battle_tower/factory_menu.asm"
 
+SECTION "Battle VS Intro", ROMX
+INCLUDE "engine/battle/vs_intro.asm"
+
 SECTION "bank5B", ROMX
 INCLUDE "engine/link/link_trade.asm"
 

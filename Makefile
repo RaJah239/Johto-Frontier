@@ -240,6 +240,9 @@ gfx/sprites/big_onix.2bpp: tools/gfx += --remove-whitespace --remove-xflip
 
 gfx/battle/dude.2bpp: rgbgfx += -Z
 
+gfx/battle/vs.2bpp: rgbgfx += -c '\#ffffff,\#aaaaaa,\#555555,\#000000'
+gfx/battle/vs.2bpp: tools/gfx += --interleave --png=$<
+
 gfx/type_chart/bg.2bpp: tools/gfx += --remove-duplicates --remove-xflip --remove-yflip
 gfx/type_chart/bg0.2bpp: gfx/type_chart/bg.2bpp.vram1p gfx/type_chart/bg.2bpp.vram0p ; cat $^ > $@
 gfx/type_chart/ob.2bpp: tools/gfx += --interleave --png=$<
