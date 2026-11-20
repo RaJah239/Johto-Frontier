@@ -126,7 +126,19 @@ InitMartLeftColumn::
 	farjp ApplyAttrmap
 
 LoadTMHMIconGFX::
-; The TM pocket loads the constant disc shape once, not on every hover.
+; Keep the disc cached between moves, but reload after Cancel has replaced
+; its tiles. The move-icon cache is zero on entry and while on Cancel.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTMHMDisplayedMove)
+	ldh [rSVBK], a
+	ld a, [wTMHMDisplayedMove]
+	ld b, a
+	pop af
+	ldh [rSVBK], a
+	ld a, b
+	and a
+	ret nz
 	ld hl, TmHmIcon
 	lb bc, BANK(TmHmIcon), 9
 	ld de, vTiles2 tile ITEM_ICON_TILE

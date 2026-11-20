@@ -1,6 +1,6 @@
-; Show four TM/HM entries (rows 2-9), with move details in the normal
+; Show five TM/HM entries (rows 2-11), with move details in the normal
 ; pack description box starting on row 12.
-DEF TMHM_POCKET_ROWS EQU 4
+DEF TMHM_POCKET_ROWS EQU 5
 
 TMHMPocket:
 	ld a, $1
@@ -176,11 +176,6 @@ TMHMNotCompatibleText:
 TMHM_PocketLoop:
 	xor a
 	ldh [hBGMapMode], a
-	call TMHM_CountPocketItems
-	and a
-	jr z, .list
-	farcall LoadTMHMIconGFX ; the disc shape is constant while this pocket is open
-.list
 	call TMHM_DisplayPocketItems
 	ld a, 2
 	ld [w2DMenuCursorInitY], a
@@ -336,6 +331,8 @@ TMHM_ShowTMMoveDescription:
 	hlcoord 7, 8
 
 .done_accuracy:
+; Cancel replaces the disc artwork. Restore it before caching this move.
+	farcall LoadTMHMIconGFX
 ; Show the move's category and type icons
 	farcall TMHMMoveIcons_Show
 	farcall TMHM_MoveStatBadges_Show
@@ -524,7 +521,7 @@ TMHM_DisplayPocketItems:
 	jmp z, Tutorial_TMHMPocket
 
 	hlcoord 5, 2
-	lb bc, 9, 15
+	lb bc, 10, 15
 	ld a, " "
 	call ClearBox
 	call TMHM_CountPocketItems
