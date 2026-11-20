@@ -979,6 +979,18 @@ PlazaMoveIcons_Stage::
 .Preference:
 	db PAL_BG_ROOF, PAL_BG_BROWN, PAL_BG_YELLOW, PAL_BG_GREEN, PAL_BG_RED, PAL_BG_GRAY, -1
 
+PlazaMoveIcons_Close::
+; Release the visible BG references before restoring either borrowed palette.
+	call MoveStatBadges_DetachBG
+	ld a, [wMoveIconBorrowedPalette]
+	and a
+	jr z, .detached
+	lb de, PLAZA_MOVE_ICON_Y, PLAZA_MOVE_ICON_X
+	ld b, MOVE_ICON_TILES
+	call MoveIcons_ClearVisibleCells
+.detached
+	jp PlazaMoveIcons_Hide
+
 PlazaMoveIcons_Hide::
 ; Blank the icon cells and give the borrowed palette back to the map,
 ; when the box is cleared or the menu closes.

@@ -10,7 +10,7 @@ BattlePlazaTMCoinTrader:
 	call LoadStandardMenuHeader
 	call SelectTM
 	push bc
-	farcall PlazaMoveIcons_Hide
+	farcall PlazaMoveIcons_Close
 	pop bc
 	ld a, c
 	ld [wScriptVar], a
@@ -373,7 +373,7 @@ endr
 ; Nothing to count on Cancel: redraw the description box empty so the
 ; last TM's stats do not linger, and keep the Bag box's frame open
 ; instead of blanking the area white.
-	farcall PlazaMoveIcons_Hide
+	farcall PlazaMoveIcons_Close
 	hlcoord 0, 11
 	lb bc, 5, SCREEN_WIDTH - 2
 	call Textbox
