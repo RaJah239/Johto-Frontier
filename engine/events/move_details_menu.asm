@@ -65,10 +65,16 @@ MoveDetailsMenu_Run:
 	ld a, [wMenuSelection]
 	ld [wPutativeTMHMMove], a
 	and a
+	push af
+	farcall MoveStatBadges_Hide
+	pop af
 	ret
 
 .carry
 	scf
+	push af
+	farcall MoveStatBadges_Hide
+	pop af
 	ret
 
 .page_down
@@ -133,7 +139,7 @@ MoveDetailsMenu_Run:
 	add a, b
 .store_up
 	ld [wMenuScrollPosition], a
-	jr .input_loop
+	jp .input_loop
 
 MoveDetailsMenuPartyMonHeader:
 	db MENU_BACKUP_TILES
@@ -232,7 +238,10 @@ MoveDetailsMenu_PrintMoveDetails:
 
 	ld a, [wMenuSelection]
 	cp -1
-	jr z, MoveDetailsMenu_FixCancelBorder
+	jr nz, .move
+	farcall MoveStatBadges_Hide
+	jp MoveDetailsMenu_FixCancelBorder
+.move
 
 	push de
 	ld a, [wMenuSelection]
@@ -256,15 +265,10 @@ MoveDetailsMenu_PrintMoveDetails:
 	hlcoord 0, 10
 	ld de, MoveDetailsMenuTypeBottomString
 	call PlaceString
-	hlcoord 1, 10
-	ld de, MoveDetailsMenuAttackString
-	call PlaceString
-	hlcoord 1, 12
-	ld de, MoveDetailsMenuChanceString
-	call PlaceString
-	hlcoord 1, 11
-	ld de, MoveDetailsMenuAccuracyString
-	call PlaceString
+	ld d, 10
+	ld e, 1
+	ld c, 5 ; palette 5 is free on this screen
+	farcall MoveStatBadges_Show
 
 	ld a, [wMenuSelection]
 	ld bc, MOVE_LENGTH
@@ -345,7 +349,4 @@ MoveDetailsMenu_PrintMoveDetails:
 
 MoveDetailsMenuTypeTopString: db "┌───────┐@"
 MoveDetailsMenuTypeBottomString: db "│       └──────────┐@"
-MoveDetailsMenuAttackString: db "Pow/@"
 MoveDetailsMenuNullValueString: db "---@"
-MoveDetailsMenuAccuracyString: db "Hit/@"
-MoveDetailsMenuChanceString: db "Eff/@"

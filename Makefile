@@ -240,6 +240,9 @@ gfx/sprites/big_onix.2bpp: tools/gfx += --remove-whitespace --remove-xflip
 
 gfx/battle/dude.2bpp: rgbgfx += -Z
 
+# Preserve each stat icon's fill color index in their shared palette.
+gfx/battle/move_stat_badges.2bpp: rgbgfx += -c embedded
+
 gfx/battle/vs.2bpp: rgbgfx += -c '\#ffffff,\#aaaaaa,\#555555,\#000000'
 gfx/battle/vs.2bpp: tools/gfx += --interleave --png=$<
 

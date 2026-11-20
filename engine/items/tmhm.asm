@@ -8,6 +8,7 @@ TMHMPocket:
 	call TMHM_PocketLoop
 	push af
 	farcall TMHMMoveIcons_Hide
+	farcall TMHM_MoveStatBadges_Hide
 	pop af
 	ld a, $0
 	ldh [hInMenu], a
@@ -253,17 +254,6 @@ TMHM_ShowTMMoveDescription:
 	ld a, [wTempTMHM]
 	ld [wCurSpecies], a
 
-; Print UI elements
-	hlcoord 1, 12
-	ld de, PowString
-	call PlaceString
-	hlcoord 1, 13
-	ld de, MoveAcc
-	call PlaceString
-	hlcoord 1, 14
-	ld de, MoveEff
-	call PlaceString
-
 ; Print move effect chance
 	ld a, [wCurSpecies]
 	ld bc, MOVE_LENGTH
@@ -328,6 +318,7 @@ TMHM_ShowTMMoveDescription:
 .done_accuracy:
 ; Show the move's category and type icons
 	farcall TMHMMoveIcons_Show
+	farcall TMHM_MoveStatBadges_Show
 
 ; Print move power
 	ld a, [wCurSpecies]
@@ -358,14 +349,12 @@ TMHM_ShowTMMoveDescription:
 	jmp TMHM_JoypadLoop
 
 .cancel
+	farcall TMHM_MoveStatBadges_Hide
 	farcall TMHMMoveIcons_Hide
 	farcall ClearTMHMIcon
 	jmp TMHM_JoypadLoop
 
 ; UI elements
-PowString: db "Pow/@"
-MoveAcc:   db "Hit/@"
-MoveEff:   db "Eff/@"
 EmptyStr:  db "---@"
 
 TMHM_ChooseTMorHM:

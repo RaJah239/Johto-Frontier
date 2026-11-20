@@ -31,6 +31,18 @@ DEF TMHM_MOVE_ICON_OBJ_PAL EQU 7
 DEF TMHM_MOVE_ICON_X EQU 10
 DEF TMHM_MOVE_ICON_Y EQU 12
 
+; POW/ACC/EFF are three-tile word icons, with the same 8px height as types.
+; They borrow tile IDs absent from the current tilemap and restore them
+; when the menu closes, so map graphics remain intact.
+DEF MOVE_STAT_BADGE_WIDTH EQU 3
+DEF MOVE_STAT_BADGE_TILES EQU MOVE_STAT_BADGE_WIDTH * 3
+
+; The TM pocket has no free BG palette, so its badges use OBJ palette 6
+; and nine OAM entries immediately before the move icons' last six.
+DEF MOVE_STAT_OBJ_TILE EQU $80
+DEF MOVE_STAT_OBJ_PAL EQU 6
+DEF MOVE_STAT_FIRST_OAM EQU MOVE_ICON_FIRST_OAM - MOVE_STAT_BADGE_TILES
+
 ; scratch while drawing
 DEF hMoveIconPalette  EQUS "hMathBuffer"
 DEF hMoveIconRow      EQUS "hMathBuffer + 1"
@@ -308,6 +320,10 @@ MoveIcons_Show::
 MoveIcons_WriteMap:
 ; Copy the tiles and attributes of the six cells at hMoveIconRow/Col from
 ; wTilemap/wAttrmap to the BG map.
+	ld a, MOVE_ICON_TILES
+MoveIcons_WriteCells:
+; a = number of cells. Used by the stat word icons too.
+	push af
 	call MoveIcons_TilemapAddress
 	ld d, h
 	ld e, l
@@ -327,7 +343,7 @@ endr ; * BG_MAP_WIDTH
 	adc h
 	ld h, a
 	ld bc, wAttrmap - wTilemap
-	ld a, MOVE_ICON_TILES
+	pop af
 .loop
 	push af
 	call MoveIcons_WaitHBlank
@@ -352,6 +368,570 @@ endr ; * BG_MAP_WIDTH
 	pop af
 	dec a
 	jr nz, .loop
+	ret
+
+MoveStatBadges_Show::
+; Draw the POW, ACC, and EFF word icons, each three tiles wide.
+; d = top row, e = column, c = a free BG palette.
+	xor a ; POW starts at badge tile 0
+	ld b, 3 ; three rows
+	jr MoveStatBadges_Begin
+
+MoveStatEffBadge_Show::
+; Draw only the EFF badge in the battle move info overlay.
+	ld a, MOVE_STAT_BADGE_WIDTH * 2 ; EFF's first tile
+	ld b, 1
+
+MoveStatBadges_Begin:
+	ldh [hMoveIconType], a
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wMoveStatBadgeTileIds)
+	ldh [rSVBK], a
+	ld a, b
+	ldh [hMoveIconCategory], a
+	ld a, d
+	ld [wMoveStatRow], a
+	ld a, e
+	ld [wMoveStatCol], a
+	ld a, c
+	ld [wMoveStatPalette], a
+	ld a, [hMoveIconType]
+	ld [wMoveStatOffset], a
+	ld a, [hMoveIconCategory]
+	ld [wMoveStatRows], a
+
+	ld a, [wMoveStatBadgeActive]
+	and a
+	jr nz, .ready
+	call MoveStatBadges_AllocateTiles
+	jr c, .done
+	call MoveStatBadges_SaveTiles
+	call MoveStatBadges_LoadTiles
+	call MoveStatBadges_SavePalette
+	ld a, TRUE
+	ld [wMoveStatBadgeActive], a
+.ready
+	call MoveStatBadges_LoadPalette
+	call MoveStatBadges_WriteTilemap
+.done
+	pop af
+	ldh [rSVBK], a
+	ret
+
+PlazaMoveStatBadges_Show::
+; Borrow a free palette just like the Battle Plaza's move icons do.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wMoveStatBadgeTileIds)
+	ldh [rSVBK], a
+	ld a, [wMoveStatBadgeActive]
+	and a
+	jr nz, .reuse_palette
+	call MoveStatBadges_FindFreePalette
+	jr nc, .have_palette
+	ld a, PAL_BG_ROOF ; same fallback used by PlazaMoveIcons_Show
+	ld c, a
+	jr .show
+.have_palette
+	ld c, a
+	jr .show
+.reuse_palette
+	ld a, [wMoveStatPalette]
+	ld c, a
+.show
+	ld d, PLAZA_MOVE_ICON_Y
+	ld e, 1
+	pop af
+	ldh [rSVBK], a
+	jp MoveStatBadges_Show
+
+BattleMoveStatEffBadge_Show::
+	call MoveStatBadges_FindFreePalette
+	jr nc, .have_palette
+	ld a, PAL_BG_TEXT
+	ld c, a
+	jr .show
+.have_palette
+	ld c, a
+.show
+	ld d, 13
+	ld e, 1
+	jp MoveStatEffBadge_Show
+
+MoveStatBadges_FindFreePalette:
+; Return c = a BG palette not used by any visible cell, or carry if none.
+; Water animations update their palette even under a map menu.
+	xor a
+	ldh [hMoveIconType], a
+.candidate
+	ldh a, [hMoveIconType]
+	cp 8
+	jr nc, .none
+	cp PAL_BG_WATER
+	jr z, .used
+	ld c, a
+	ld hl, wAttrmap
+	ld de, SCREEN_WIDTH * SCREEN_HEIGHT
+.scan
+	ld a, [hli]
+	and PALETTE_MASK
+	cp c
+	jr z, .used
+	dec de
+	ld a, d
+	or e
+	jr nz, .scan
+	ldh a, [hMoveIconType]
+	ld c, a
+	and a
+	ret
+.used
+	ldh a, [hMoveIconType]
+	inc a
+	ldh [hMoveIconType], a
+	jr .candidate
+.none
+	scf
+	ret
+
+MoveStatBadges_AllocateTiles:
+; Reserve tile IDs for all three word icons, absent from the current screen.
+	xor a
+	ldh [hMoveIconType], a ; candidate tile ID
+	xor a
+	ldh [hMoveIconCategory], a ; number of tiles found
+.candidate
+	ldh a, [hMoveIconType]
+	cp $7f ; tile $7f is the textbox space graphic
+	jr nc, .failed
+	ld c, a
+	ld hl, wTilemap
+	ld de, SCREEN_WIDTH * SCREEN_HEIGHT
+.scan
+	ld a, [hli]
+	cp c
+	jr z, .next_candidate
+	dec de
+	ld a, d
+	or e
+	jr nz, .scan
+	ldh a, [hMoveIconCategory]
+	ld l, a
+	ld h, 0
+	ld bc, wMoveStatBadgeTileIds
+	add hl, bc
+	ldh a, [hMoveIconType]
+	ld [hl], a
+	ldh a, [hMoveIconCategory]
+	inc a
+	ldh [hMoveIconCategory], a
+	cp MOVE_STAT_BADGE_TILES
+	jr z, .allocated
+.next_candidate
+	ldh a, [hMoveIconType]
+	inc a
+	ldh [hMoveIconType], a
+	jr .candidate
+.allocated
+	and a
+	ret
+.failed
+	scf
+	ret
+
+MoveStatBadges_SaveTiles:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wMoveStatTileBackup)
+	ldh [rSVBK], a
+	xor a
+	ldh [rVBK], a
+	ld hl, wMoveStatTileBackup
+	ld de, wMoveStatBadgeTileIds
+	ld a, MOVE_STAT_BADGE_TILES
+	ld [wMoveStatWorkCount], a
+.tile
+	ld a, [de]
+	inc de
+	push de
+	push hl
+	ld l, a
+	ld h, 0
+rept 4
+	add hl, hl
+endr
+	ld bc, vTiles2
+	add hl, bc
+	ld d, h
+	ld e, l ; source tile
+	pop hl ; backup destination
+	ld c, LEN_2BPP_TILE
+.byte
+	call MoveIcons_WaitHBlank
+	ld a, [de]
+	inc de
+	ld [hli], a
+	ei
+	dec c
+	jr nz, .byte
+	pop de
+	ld a, [wMoveStatWorkCount]
+	dec a
+	ld [wMoveStatWorkCount], a
+	jr nz, .tile
+	pop af
+	ldh [rSVBK], a
+	ret
+
+MoveStatBadges_LoadTiles:
+	xor a
+	ldh [rVBK], a
+	ld hl, MoveStatBadgeGFX
+	ld de, wMoveStatBadgeTileIds
+	ld a, MOVE_STAT_BADGE_TILES
+	ld [wMoveStatWorkCount], a
+.tile
+	ld a, [de]
+	inc de
+	push de
+	push hl
+	ld l, a
+	ld h, 0
+rept 4
+	add hl, hl
+endr
+	ld bc, vTiles2
+	add hl, bc
+	ld d, h
+	ld e, l ; destination tile
+	pop hl ; graphics source
+	ld c, LEN_2BPP_TILE
+.byte
+	call MoveIcons_WaitHBlank
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ei
+	dec c
+	jr nz, .byte
+	pop de
+	ld a, [wMoveStatWorkCount]
+	dec a
+	ld [wMoveStatWorkCount], a
+	jr nz, .tile
+	ret
+
+MoveStatBadges_SavePalette:
+	ld a, [wMoveStatPalette]
+	ldh [hMoveIconPalette], a
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals1)
+	ldh [rSVBK], a
+	ldh a, [hMoveIconPalette]
+	add a
+	add a
+	add a
+	ld l, a
+	ld h, 0
+	ld bc, wBGPals1
+	add hl, bc
+	ld de, wMoveStatSavedPalette
+	ld bc, 1 palettes
+	call CopyBytes
+	pop af
+	ldh [rSVBK], a
+	ret
+
+MoveStatBadges_LoadPalette:
+	ld a, [wMoveStatPalette]
+	ldh [hMoveIconPalette], a
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals1)
+	ldh [rSVBK], a
+	ldh a, [hMoveIconPalette]
+	add a
+	add a
+	add a
+	ld l, a
+	ld h, 0
+	ld bc, wBGPals1
+	add hl, bc
+	ld d, h
+	ld e, l
+	ld hl, MoveStatBadgePals
+	ld bc, 1 palettes
+	call CopyBytes
+
+	ldh a, [hMoveIconPalette]
+	add a
+	add a
+	add a
+	ld l, a
+	ld h, 0
+	ld bc, wBGPals1
+	add hl, bc
+	push hl
+	ld de, wBGPals2 - wBGPals1
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	ld bc, 1 palettes
+	call CopyBytes
+	ldh a, [hMoveIconPalette]
+	add a
+	add a
+	add a
+	ld b, a
+	ld c, LOW(rBGPI)
+	ldh a, [hMoveIconPalette]
+	add a
+	add a
+	add a
+	ld l, a
+	ld h, 0
+	ld de, wBGPals1
+	add hl, de
+	call MoveIcons_SendPalette
+	pop af
+	ldh [rSVBK], a
+	ret
+
+MoveStatBadges_WriteTilemap:
+	ld a, [wMoveStatRow]
+	ldh [hMoveIconRow], a
+	ld a, [wMoveStatCol]
+	ldh [hMoveIconCol], a
+	call MoveIcons_TilemapAddress
+	push hl
+	ld bc, wAttrmap - wTilemap
+	add hl, bc
+	ld d, h
+	ld e, l ; attributes
+	pop hl ; tile map
+	push hl
+	ld a, [wMoveStatOffset]
+	ld l, a
+	ld h, 0
+	ld bc, wMoveStatBadgeTileIds
+	add hl, bc
+	ld b, h
+	ld c, l ; tile ID pointer
+	pop hl ; keep the screen destination separate from the tile ID pointer
+	ld a, [wMoveStatRows]
+	ld [wMoveStatRowsLeft], a
+.row
+	ld a, [bc]
+	inc bc
+	ld [hli], a
+	ld a, [bc]
+	inc bc
+	ld [hli], a
+	ld a, [bc]
+	inc bc
+	ld [hli], a
+	push bc
+	ld a, [wMoveStatPalette]
+	ld [de], a
+	inc de
+	ld [de], a
+	inc de
+	ld [de], a
+	inc de
+	ld a, SCREEN_WIDTH - 3
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld a, e
+	add c
+	ld e, a
+	jr nc, .no_attr_carry
+	inc d
+.no_attr_carry
+	push hl
+	push de
+	ld a, MOVE_STAT_BADGE_WIDTH
+	call MoveIcons_WriteCells
+	ldh a, [hMoveIconRow]
+	inc a
+	ldh [hMoveIconRow], a
+	pop de
+	pop hl
+	pop bc
+	ld a, [wMoveStatRowsLeft]
+	dec a
+	ld [wMoveStatRowsLeft], a
+	jr nz, .row
+	ret
+
+MoveStatBadges_Hide::
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wMoveStatBadgeTileIds)
+	ldh [rSVBK], a
+	ld a, [wMoveStatBadgeActive]
+	and a
+	jr nz, .active
+	pop af
+	ldh [rSVBK], a
+	ret
+.active
+	ld a, [wMoveStatRow]
+	ldh [hMoveIconRow], a
+	ld a, [wMoveStatCol]
+	ldh [hMoveIconCol], a
+	call MoveIcons_TilemapAddress
+	push hl
+	ld bc, wAttrmap - wTilemap
+	add hl, bc
+	ld d, h
+	ld e, l
+	pop hl
+	ld a, [wMoveStatRows]
+	ld [wMoveStatRowsLeft], a
+.clear_row
+	ld a, " "
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld a, PAL_BG_TEXT
+	ld [de], a
+	inc de
+	ld [de], a
+	inc de
+	ld [de], a
+	inc de
+	ld a, SCREEN_WIDTH - 3
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld a, e
+	add c
+	ld e, a
+	jr nc, .no_clear_attr_carry
+	inc d
+.no_clear_attr_carry
+	push hl
+	push de
+	ld a, MOVE_STAT_BADGE_WIDTH
+	call MoveIcons_WriteCells
+	ldh a, [hMoveIconRow]
+	inc a
+	ldh [hMoveIconRow], a
+	pop de
+	pop hl
+	ld a, [wMoveStatRowsLeft]
+	dec a
+	ld [wMoveStatRowsLeft], a
+	jr nz, .clear_row
+	call MoveStatBadges_RestoreTiles
+	call MoveStatBadges_RestorePalette
+	xor a
+	ld [wMoveStatBadgeActive], a
+	pop af
+	ldh [rSVBK], a
+	ret
+
+MoveStatBadges_RestoreTiles:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wMoveStatTileBackup)
+	ldh [rSVBK], a
+	xor a
+	ldh [rVBK], a
+	ld hl, wMoveStatTileBackup
+	ld de, wMoveStatBadgeTileIds
+	ld a, MOVE_STAT_BADGE_TILES
+	ld [wMoveStatWorkCount], a
+.tile
+	ld a, [de]
+	inc de
+	push de
+	push hl
+	ld l, a
+	ld h, 0
+rept 4
+	add hl, hl
+endr
+	ld bc, vTiles2
+	add hl, bc
+	ld d, h
+	ld e, l
+	pop hl ; backup source
+	ld c, LEN_2BPP_TILE
+.byte
+	call MoveIcons_WaitHBlank
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ei
+	dec c
+	jr nz, .byte
+	pop de
+	ld a, [wMoveStatWorkCount]
+	dec a
+	ld [wMoveStatWorkCount], a
+	jr nz, .tile
+	pop af
+	ldh [rSVBK], a
+	ret
+
+MoveStatBadges_RestorePalette:
+	ld a, [wMoveStatPalette]
+	ldh [hMoveIconPalette], a
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals1)
+	ldh [rSVBK], a
+	ldh a, [hMoveIconPalette]
+	add a
+	add a
+	add a
+	ld l, a
+	ld h, 0
+	ld bc, wBGPals1
+	add hl, bc
+	ld d, h
+	ld e, l
+	ld hl, wMoveStatSavedPalette
+	ld bc, 1 palettes
+	call CopyBytes
+
+	ldh a, [hMoveIconPalette]
+	add a
+	add a
+	add a
+	ld l, a
+	ld h, 0
+	ld bc, wBGPals1
+	add hl, bc
+	ld de, wBGPals2 - wBGPals1
+	add hl, de
+	ld d, h
+	ld e, l
+	ld hl, wMoveStatSavedPalette
+	ld bc, 1 palettes
+	call CopyBytes
+	ldh a, [hMoveIconPalette]
+	add a
+	add a
+	add a
+	ld b, a
+	ld c, LOW(rBGPI)
+	ldh a, [hMoveIconPalette]
+	add a
+	add a
+	add a
+	ld l, a
+	ld h, 0
+	ld de, wBGPals1
+	add hl, de
+	call MoveIcons_SendPalette
+	pop af
+	ldh [rSVBK], a
 	ret
 
 PlazaMoveIcons_Show::
@@ -451,6 +1031,7 @@ PlazaMoveIcons_Show::
 PlazaMoveIcons_Hide::
 ; Blank the icon cells and give the borrowed palette back to the map,
 ; when the box is cleared or the menu closes.
+	call MoveStatBadges_Hide
 	call PlazaMoveIcons_SetCoords
 	hlcoord PLAZA_MOVE_ICON_X, PLAZA_MOVE_ICON_Y
 	ld a, " "
@@ -509,7 +1090,7 @@ BattleMoveIcons_Draw::
 BattleMoveIcons_Hide::
 ; when the move menu closes, or its box shows "Disabled!"
 	ld c, PAL_BATTLE_OB_GRAY
-	jr MoveIcons_HideSprites
+	jp MoveIcons_HideSprites
 
 TMHMMoveIcons_Show::
 ; Show the icons of move [wCurSpecies] in the TM pocket's move info box.
@@ -590,6 +1171,215 @@ MoveIcons_ShowSprites:
 	ld a, c
 	cp MOVE_ICON_OBJ_TILE + MOVE_ICON_TILES
 	jr nz, .oam
+	ret
+
+TMHM_MoveStatBadges_Show::
+; Draw three 24px word icons beside the TM pocket's move stats.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wMoveStatBadgeTileIds)
+	ldh [rSVBK], a
+	ld a, [wMoveStatObjBadgesActive]
+	and a
+	jr nz, .loaded
+	call TMHM_MoveStatBadges_SaveTiles
+	call TMHM_MoveStatBadges_LoadTiles
+	ld a, TRUE
+	ld [wMoveStatObjBadgesActive], a
+.loaded
+	call TMHM_MoveStatBadges_LoadPalette
+	call TMHM_MoveStatBadges_ClearText
+	call TMHM_MoveStatBadges_DrawSprites
+	pop af
+	ldh [rSVBK], a
+	ret
+
+TMHM_MoveStatBadges_Hide::
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wMoveStatBadgeTileIds)
+	ldh [rSVBK], a
+	ld a, [wMoveStatObjBadgesActive]
+	and a
+	jr nz, .active
+	pop af
+	ldh [rSVBK], a
+	ret
+.active
+	ld hl, wShadowOAMSprite00 + MOVE_STAT_FIRST_OAM * OBJ_SIZE
+	ld bc, MOVE_STAT_BADGE_TILES * OBJ_SIZE
+	xor a
+	call ByteFill
+	call TMHM_MoveStatBadges_RestoreTiles
+	call TMHM_MoveStatBadges_RestorePalette
+	xor a
+	ld [wMoveStatObjBadgesActive], a
+	pop af
+	ldh [rSVBK], a
+	ret
+
+TMHM_MoveStatBadges_ClearText:
+	ld a, " "
+	ld bc, 3
+	ld hl, wTilemap + 12 * SCREEN_WIDTH + 1
+	call ByteFill
+	ld hl, wTilemap + 13 * SCREEN_WIDTH + 1
+	ld bc, MOVE_STAT_BADGE_WIDTH
+	call ByteFill
+	ld hl, wTilemap + 14 * SCREEN_WIDTH + 1
+	ld bc, MOVE_STAT_BADGE_WIDTH
+	call ByteFill
+	ld a, PAL_BG_TEXT
+	ld bc, 3
+	ld hl, wAttrmap + 12 * SCREEN_WIDTH + 1
+	call ByteFill
+	ld hl, wAttrmap + 13 * SCREEN_WIDTH + 1
+	ld bc, MOVE_STAT_BADGE_WIDTH
+	call ByteFill
+	ld hl, wAttrmap + 14 * SCREEN_WIDTH + 1
+	ld bc, MOVE_STAT_BADGE_WIDTH
+	call ByteFill
+	call ApplyTilemapInVBlank
+	ret
+
+TMHM_MoveStatBadges_DrawSprites:
+	ld hl, wShadowOAMSprite00 + MOVE_STAT_FIRST_OAM * OBJ_SIZE
+	ld a, (TMHM_MOVE_ICON_Y + 2) * TILE_WIDTH
+	ld d, a ; first badge's y position
+	ld a, (1 + 1) * TILE_WIDTH
+	ld b, a ; badges start at column 1
+	ld a, MOVE_STAT_OBJ_PAL | VRAM_BANK_1
+	ld e, a
+	ld c, MOVE_STAT_OBJ_TILE
+	ld a, 3
+	ld [wMoveStatWorkCount], a
+.row
+	push bc
+rept MOVE_STAT_BADGE_WIDTH
+	ld a, d
+	ld [hli], a
+	ld a, b
+	ld [hli], a
+	add TILE_WIDTH
+	ld b, a
+	ld a, c
+	ld [hli], a
+	inc c
+	ld a, e
+	ld [hli], a
+endr
+	ld a, c
+	pop bc
+	ld c, a
+	ld a, d
+	add TILE_WIDTH
+	ld d, a
+	ld a, [wMoveStatWorkCount]
+	dec a
+	ld [wMoveStatWorkCount], a
+	jr nz, .row
+	ret
+
+TMHM_MoveStatBadges_SaveTiles:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wMoveStatObjTileBackup)
+	ldh [rSVBK], a
+	ld a, BANK(vTiles3)
+	ldh [rVBK], a
+	ld hl, vTiles3 tile MOVE_STAT_OBJ_TILE
+	ld de, wMoveStatObjTileBackup
+	ld c, MOVE_STAT_BADGE_TILES * LEN_2BPP_TILE
+.copy
+	call MoveIcons_WaitHBlank
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ei
+	dec c
+	jr nz, .copy
+	pop af
+	ldh [rSVBK], a
+	xor a
+	ldh [rVBK], a
+	ret
+
+TMHM_MoveStatBadges_LoadTiles:
+	ld a, BANK(vTiles3)
+	ldh [rVBK], a
+	ld hl, MoveStatBadgeGFX
+	ld de, vTiles3 tile MOVE_STAT_OBJ_TILE
+	ld c, MOVE_STAT_BADGE_TILES * LEN_2BPP_TILE
+.copy
+	call MoveIcons_WaitHBlank
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ei
+	dec c
+	jr nz, .copy
+	xor a
+	ldh [rVBK], a
+	ret
+
+TMHM_MoveStatBadges_LoadPalette:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wOBPals2)
+	ldh [rSVBK], a
+	ld hl, MoveStatBadgePals
+	ld de, wOBPals2 palette MOVE_STAT_OBJ_PAL
+	ld bc, 1 palettes
+	call CopyBytes
+	ld hl, wOBPals2 palette MOVE_STAT_OBJ_PAL
+	ld b, MOVE_STAT_OBJ_PAL * 1 palettes
+	ld c, LOW(rOBPI)
+	call MoveIcons_SendPalette
+	pop af
+	ldh [rSVBK], a
+	ret
+
+TMHM_MoveStatBadges_RestorePalette:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wOBPals1)
+	ldh [rSVBK], a
+	ld hl, wOBPals1 palette MOVE_STAT_OBJ_PAL
+	ld de, wOBPals2 palette MOVE_STAT_OBJ_PAL
+	ld bc, 1 palettes
+	call CopyBytes
+	ld hl, wOBPals2 palette MOVE_STAT_OBJ_PAL
+	ld b, MOVE_STAT_OBJ_PAL * 1 palettes
+	ld c, LOW(rOBPI)
+	call MoveIcons_SendPalette
+	pop af
+	ldh [rSVBK], a
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	ret
+
+TMHM_MoveStatBadges_RestoreTiles:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wMoveStatObjTileBackup)
+	ldh [rSVBK], a
+	ld a, BANK(vTiles3)
+	ldh [rVBK], a
+	ld hl, wMoveStatObjTileBackup
+	ld de, vTiles3 tile MOVE_STAT_OBJ_TILE
+	ld c, MOVE_STAT_BADGE_TILES * LEN_2BPP_TILE
+.copy
+	call MoveIcons_WaitHBlank
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ei
+	dec c
+	jr nz, .copy
+	pop af
+	ldh [rSVBK], a
+	xor a
+	ldh [rVBK], a
 	ret
 
 TMHMMoveIcons_Hide::
@@ -744,3 +1534,12 @@ INCBIN "gfx/battle/categories.2bpp"
 
 MoveTypeIconGFX:
 INCBIN "gfx/battle/types.1bpp"
+
+MoveStatBadgePals:
+	RGB 31, 31, 31 ; white lettering
+	RGB 20, 04, 10 ; POW: wine
+	RGB 00, 20, 15 ; ACC: teal
+	RGB 11, 10, 22 ; EFF: indigo
+
+MoveStatBadgeGFX:
+INCBIN "gfx/battle/move_stat_badges.2bpp"

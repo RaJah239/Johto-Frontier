@@ -399,19 +399,9 @@ DrawMoveInfoBox::
 	lb bc, 5, SCREEN_WIDTH - 2
 	call Textbox
 
-; Labels down the left...
-	hlcoord 1, 12
-	ld de, .PowString
-	call PlaceString
-	hlcoord 1, 13
-	ld de, .HitString
-	call PlaceString
-	hlcoord 1, 14
-	ld de, .EffString
-	call PlaceString
-
 ; ...the move's category and type icons on the right...
 	farcall PlazaMoveIcons_Show
+	farcall PlazaMoveStatBadges_Show
 
 ; ...its effect chance...
 	ld a, [wCurSpecies]
@@ -495,9 +485,6 @@ DrawMoveInfoBox::
 	hlcoord 1, 15
 	predef_jump PrintMoveDescription
 
-.PowString db "Pow/@"
-.HitString db "Hit/@"
-.EffString db "Eff/@"
 .BlankString db "---@"
 
 BattlePlazaTMSelectionToItem::

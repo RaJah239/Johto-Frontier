@@ -910,6 +910,7 @@ ChooseMoveToDelete:
 	ld [wSwitchMon], a
 	ld hl, w2DMenuFlags1
 	res 6, [hl]
+	farcall MoveStatBadges_Hide
 	call ClearSprites
 	call ClearTilemap
 	pop af
@@ -962,7 +963,7 @@ MoveScreenLoop:
 	bit 4, a
 	jr nz, .d_right
 	bit 5, a
-	jr nz, .d_left
+	jp nz, .d_left
 
 .skip_joy
 	call PrepareToPlaceMoveData
@@ -973,6 +974,7 @@ MoveScreenLoop:
 	jr .joy_loop
 
 .moving_move
+	farcall MoveStatBadges_Hide
 	ld a, " "
 	hlcoord 1, 11
 	ld bc, 5
@@ -1018,6 +1020,7 @@ MoveScreenLoop:
 	jmp z, .joy_loop
 	ld de, SFX_SWITCH_POCKETS
 	call PlaySFX
+	farcall MoveStatBadges_Hide
 	jmp MoveScreenLoop
 
 .d_left
@@ -1034,6 +1037,7 @@ MoveScreenLoop:
 	jmp z, .joy_loop
 	ld de, SFX_SWITCH_POCKETS
 	call PlaySFX
+	farcall MoveStatBadges_Hide
 	jmp MoveScreenLoop
 
 .cycle_right
@@ -1148,6 +1152,7 @@ MoveScreenLoop:
 	ld [wSwappingMove], a
 	ld hl, w2DMenuFlags1
 	res 6, [hl]
+	farcall MoveStatBadges_Hide
 	call ClearSprites
 	jmp ClearTilemap
 
@@ -1260,15 +1265,6 @@ PlaceMoveData:
 	hlcoord 0, 11
 	ld de, String_MoveType_Bottom
 	call PlaceString
-	hlcoord 1, 11
-	ld de, String_MoveAtk
-	call PlaceString
-	hlcoord 1, 12
-	ld de, String_MoveAcc
-	call PlaceString
-	hlcoord 1, 13
-	ld de, String_MoveEff
-	call PlaceString
 
 ; Print move effect chance
 	ld a, [wCurSpecies]
@@ -1339,6 +1335,10 @@ PlaceMoveData:
 	ld c, MOVE_SCREEN_ICON_PAL
 	lb de, 12, 10
 	farcall MoveIcons_Show
+	ld d, 11
+	ld e, 1
+	ld c, 3 ; palette 3 is unused on the move list screen
+	farcall MoveStatBadges_Show
 
 ; Print move power
 	ld a, [wCurSpecies]
@@ -1372,9 +1372,6 @@ PlaceMoveData:
 ; UI elements
 String_MoveType_Top: db "┌───────┐@"
 String_MoveType_Bottom: db "│       └@"
-String_MoveAtk: db "Pow/@"
-String_MoveAcc: db "Hit/@"
-String_MoveEff: db "Eff/@"
 String_MoveBlank: db "---@"
 
 PlaceMoveScreenArrows:

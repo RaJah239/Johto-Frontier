@@ -3545,11 +3545,29 @@ SECTION "Move Icons Borrowed Palette", WRAM0
 ; + $80; 0 if none
 wMoveIconBorrowedPalette:: db
 
-
 SECTION "Move Icons Saved Palette", WRAMX, BANK[5]
 
 ; the map's own colors of that palette (same WRAM bank as wBGPals1)
 wMoveIconSavedPalette:: ds 1 palettes
+
+wMoveStatSavedPalette:: ds 1 palettes
+
+
+SECTION "Move Stat Badge Tile Backups", WRAMX, BANK[2]
+
+; Badge state and saved graphics stay outside WRAM0, which is nearly full.
+wMoveStatBadgeTileIds:: ds 9
+wMoveStatBadgeActive:: db
+wMoveStatPalette:: db
+wMoveStatRow:: db
+wMoveStatCol:: db
+wMoveStatRows:: db
+wMoveStatRowsLeft:: db
+wMoveStatOffset:: db
+wMoveStatWorkCount:: db
+wMoveStatObjBadgesActive:: db
+wMoveStatTileBackup:: ds 9 tiles
+wMoveStatObjTileBackup:: ds 9 tiles
 
 
 SECTION "Send-Out Ability Popups", WRAM0

@@ -13,10 +13,7 @@ ShowBattleMoveInfo:
 	lb bc, 4, 18
 	call Textbox
 
-; Eff: X% (effect chance, fraction as percent)
-	ld de, .eff_label
-	hlcoord 1, 13
-	call PlaceString
+	farcall BattleMoveStatEffBadge_Show
 
 	ld a, [wCurSpecies]
 	ld bc, MOVE_LENGTH
@@ -53,7 +50,7 @@ ShowBattleMoveInfo:
 	ldh a, [hJoyPressed]
 	and A_BUTTON | B_BUTTON
 	jr z, .wait_ab
+	farcall MoveStatBadges_Hide
 	jmp SafeLoadTempTilemapToTilemap
 
-.eff_label db "Eff: @"
 .blank db "---@"
