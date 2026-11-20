@@ -318,10 +318,10 @@ MusicPlayer_Init:
 
 .RefreshSongNames:
 	call .PlaceCurrentSongName
-	hlcoord 1, 7
+	hlcoord 1, 8
 	ld a, [wPersistentBattleMusicOverride]
 	call .PlaceSavedSongName
-	hlcoord 1, 9
+	hlcoord 1, 10
 	ld a, [wOverworldMusicOverride]
 	call .PlaceSavedSongName
 	jmp ApplyTilemap
@@ -329,7 +329,7 @@ MusicPlayer_Init:
 .PlaceCursor:
 ; ▶ before the picked row's label, blank before the others
 	hlcoord 1, 4
-	ld de, SCREEN_WIDTH * 2
+	ld de, SCREEN_WIDTH * 3 ; extra blank line after Current Track
 	ld a, [wMenuCursorY]
 	ld c, a
 	ld b, 0
@@ -342,6 +342,7 @@ MusicPlayer_Init:
 .place_cursor
 	ld [hl], a
 	add hl, de
+	ld de, SCREEN_WIDTH * 2
 	inc b
 	ld a, b
 	cp NUM_MUSICPLAYER_ROWS
@@ -376,10 +377,10 @@ MusicPlayer_Init:
 	hlcoord 2, 4
 	ld de, .CurrentLabel
 	call PlaceString
-	hlcoord 2, 6
+	hlcoord 2, 7
 	ld de, .BattleLabel
 	call PlaceString
-	hlcoord 2, 8
+	hlcoord 2, 9
 	ld de, .OverworldLabel
 	call PlaceString
 	call .PlaceCursor
