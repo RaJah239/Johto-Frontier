@@ -1501,6 +1501,12 @@ Pack_InitGFX:
 
 ReInitBG_PackPocket: ; needed when switching from TM Pocket
 ; (the pocket's own init loads its pack picture afterwards)
+; The TM box starts one row above the normal description box. Restore
+; the blue/pink panel's palette where that extra border used text colors.
+	hlcoord 0, 11, wAttrmap
+	ld bc, 5
+	xor a
+	call ByteFill
 ; Background (blue if male, pink if female)
 	hlcoord 0, 1
 	ld bc, 11 * SCREEN_WIDTH

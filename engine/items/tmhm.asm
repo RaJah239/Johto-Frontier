@@ -7,8 +7,7 @@ TMHMPocket:
 	ldh [hInMenu], a
 	call TMHM_PocketLoop
 	push af
-	farcall TMHMMoveIcons_Hide
-	farcall TMHM_MoveStatBadges_Hide
+	farcall TMHMMoveIcons_Close
 	pop af
 	ld a, $0
 	ldh [hInMenu], a
@@ -356,8 +355,7 @@ TMHM_ShowTMMoveDescription:
 	jr .commit
 
 .cancel
-	farcall TMHM_MoveStatBadges_Hide
-	farcall TMHMMoveIcons_Hide
+	farcall TMHMMoveIcons_Close
 	farcall ClearTMHMIcon
 .commit
 	farcall MoveIcons_CommitPage

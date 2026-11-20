@@ -1164,7 +1164,41 @@ MoveStatBadges_PrepareSprites:
 .loaded
 	jp TMHM_MoveStatBadges_LoadPalette
 
+TMHMMoveIcons_Close::
+; Remove all fifteen TM icon sprites from hardware before changing their
+; graphics or either OBJ palette, even when normal OAM updates are paused.
+	xor a
+	ldh [hBGMapMode], a
+	ld hl, wShadowOAMSprite00 + MOVE_STAT_FIRST_OAM * OBJ_SIZE
+	ld bc, (MOVE_STAT_BADGE_TILES + MOVE_ICON_TILES) * OBJ_SIZE
+	call ByteFill
+	call MoveIcons_FlushOAM
+	call TMHMMoveIcons_Hide
+	jp TMHM_MoveStatBadges_Hide
+
+MoveIcons_FlushOAM:
+; Use a complete OAM DMA in a safe VBlank interval. The transfer also
+; works with the LCD off and does not depend on hOAMUpdate being enabled.
+.wait
+	di
+	ldh a, [rLCDC]
+	bit rLCDC_ENABLE, a
+	jr z, .copy
+	ldh a, [rLY]
+	cp LY_VBLANK
+	jr c, .next
+	cp LY_VBLANK + 7
+	jr c, .copy
+.next
+	ei
+	jr .wait
+.copy
+	call hTransferShadowOAM
+	ei
+	ret
+
 TMHM_MoveStatBadges_Hide::
+; Caller has removed the hardware OAM references before restoring graphics.
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wMoveStatBadgeTileIds)
