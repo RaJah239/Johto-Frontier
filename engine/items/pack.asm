@@ -151,7 +151,6 @@ Pack:
 	jmp Pack_InitColors
 
 .InitBallsPocket:
-	call ReInitBG_PackPocket ; needed when switching from TM Pocket
 	ld a, BALL_POCKET
 	ld [wCurPocket], a
 	call ClearPocketList
@@ -202,7 +201,6 @@ Pack:
 	jr .ItemBallsKey_LoadSubmenu
 	
 .InitBattlePocket:
-	call ReInitBG_PackPocket ; needed when switching from TM Pocket
 	ld a, BATTLE_POCKET
 	ld [wCurPocket], a
 	call ClearPocketList
@@ -701,7 +699,6 @@ BattlePack:
 	jmp TMHMSubmenu
 
 .InitBallsPocket:
-	call ReInitBG_PackPocket ; needed when switching from TM Pocket
 	ld a, BALL_POCKET
 	ld [wCurPocket], a
 	call ClearPocketList
@@ -752,7 +749,6 @@ BattlePack:
 	jr ItemSubmenu
 
 .InitBattlePocket:
-	call ReInitBG_PackPocket ; needed when switching from TM Pocket
 	ld a, BATTLE_POCKET
 	ld [wCurPocket], a
 	call ClearPocketList
@@ -1490,6 +1486,7 @@ Pack_InitGFX:
 	call ClearTilemap
 	call ClearSprites
 	call DisableLCD
+	farcall TMHM_MoveIcons_Init ; reserve the fixed badge artwork once per pack
 	ld hl, PackMenuGFX
 	ld de, vTiles2
 	ld bc, $60 tiles
@@ -1499,30 +1496,9 @@ Pack_InitGFX:
 	farcall LoadItemIconPanelGFX
 	jmp DrawPackGFX
 
-ReInitBG_PackPocket: ; needed when switching from TM Pocket
-; (the pocket's own init loads its pack picture afterwards)
-; The TM box starts one row above the normal description box. Restore
-; the blue/pink panel's palette where that extra border used text colors.
-	hlcoord 0, 11, wAttrmap
-	ld bc, 5
-	xor a
-	call ByteFill
-; Publish this attribute strip too: the next scrolling menu can copy only
-; tile IDs when overworld sprite updates are disabled, leaving the TM
-; textbox palette visible under the restored blue/pink background tiles.
-	ld a, 1
-	ldh [rVBK], a
-	ld hl, 11 * BG_MAP_WIDTH
-	ldh a, [hBGMapAddress]
-	ld e, a
-	ldh a, [hBGMapAddress + 1]
-	ld d, a
-	add hl, de
-	ld de, wAttrmap + 11 * SCREEN_WIDTH
-	lb bc, BANK(ReInitBG_PackPocket), 1
-	call Get2bppViaHDMA ; one aligned 16-byte strip in the attribute map
-	xor a
-	ldh [rVBK], a
+ReInitBG_PackPocket:
+; The TM pocket shares the normal row-12 description box, so switching
+; pockets no longer needs to repair an extra border or upload its colors.
 ; Background (blue if male, pink if female)
 	hlcoord 0, 1
 	ld bc, 11 * SCREEN_WIDTH

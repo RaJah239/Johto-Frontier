@@ -125,12 +125,15 @@ InitMartLeftColumn::
 	call FillBoxWithByte
 	farjp ApplyAttrmap
 
-LoadTMHMIcon::
-; wCurSpecies = the TM/HM's move: the disc icon in the move type's colors.
+LoadTMHMIconGFX::
+; The TM pocket loads the constant disc shape once, not on every hover.
 	ld hl, TmHmIcon
 	lb bc, BANK(TmHmIcon), 9
 	ld de, vTiles2 tile ITEM_ICON_TILE
-	call DecompressRequest2bpp
+	jp DecompressRequest2bpp
+
+LoadTMHMIconPalette::
+; wCurSpecies = the hovered move; only its disc colors need updating.
 	ld a, [wCurSpecies]
 	call GetMoveTypeIconColors
 	ld e, PACK_ITEM_ICON_PAL

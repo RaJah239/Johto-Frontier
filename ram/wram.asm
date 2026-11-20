@@ -3565,6 +3565,7 @@ wMoveStatRows:: db
 wMoveStatRowsLeft:: db
 wMoveStatWorkCount:: db
 wMoveStatObjBadgesActive:: db
+wTMHMDisplayedMove:: db ; cached TM Type/Category graphics; 0 after leaving
 align 4
 wMoveStatTileBackup:: ds 9 tiles
 wMoveStatObjTileBackup:: ds 9 tiles

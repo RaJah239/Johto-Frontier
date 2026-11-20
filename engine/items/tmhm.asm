@@ -1,5 +1,5 @@
-; The TM pocket shows 4 entries (rows 2-9) instead of the other pockets' 5:
-; its move info box starts on row 11, where a 5th entry's quantity would go.
+; Show four TM/HM entries (rows 2-9), with move details in the normal
+; pack description box starting on row 12.
 DEF TMHM_POCKET_ROWS EQU 4
 
 TMHMPocket:
@@ -13,7 +13,6 @@ TMHMPocket:
 	ldh [hInMenu], a
 	ret nc
 	call PlaceHollowCursor
-	call WaitBGMap
 	ld a, [wCurItem]
 	dec a
 	ld [wCurItemQuantity], a
@@ -62,17 +61,7 @@ AskTeachTMHM:
 	call GetMoveName
 	call CopyName1
 
-; hide the move info box while asking if to teach
-; answering no returns to tmhmpocket, which redraws the move info box
-	hlcoord 0, 11
-	ld bc, 5
-	ld a, $24 ; the Pack's checkered background tile
-	call ByteFill
-	hlcoord 5, 11
-	ld bc, SCREEN_WIDTH - 5
-	ld a, " "
-	call ByteFill
-
+; The standard speech box replaces the move details directly.
 	ld hl, ContainedMoveText
 	call PrintText
 	call YesNoBox
@@ -187,6 +176,11 @@ TMHMNotCompatibleText:
 TMHM_PocketLoop:
 	xor a
 	ldh [hBGMapMode], a
+	call TMHM_CountPocketItems
+	and a
+	jr z, .list
+	farcall LoadTMHMIconGFX ; the disc shape is constant while this pocket is open
+.list
 	call TMHM_DisplayPocketItems
 	ld a, 2
 	ld [w2DMenuCursorInitY], a
@@ -212,15 +206,35 @@ TMHM_PocketLoop:
 	ld [wMenuJoypadFilter], a
 	ld a, [wTMHMPocketCursor]
 	inc a
+	ld b, a
+	ld a, [w2DMenuNumRows]
+	cp b
+	ld a, b
+	jr nc, .cursor
+	ld a, 1
+.cursor
 	ld [wMenuCursorY], a
 	ld a, $1
 	ld [wMenuCursorX], a
 	jr TMHM_ShowTMMoveDescription
 
 TMHM_JoypadLoop:
-	call TMHM_DisplayPocketItems
-	call StaticMenuJoypad
+; The page and cursor are already committed. Poll once each frame instead
+; of redrawing the list and waiting for two BG-map halves before input.
+	ld hl, w2DMenuFlags2
+	res 7, [hl]
+.wait
+	call DelayFrame
+	call UpdateTimeAndPals
+	call JoyTextDelay
+	call GetMenuJoypad
 	ld b, a
+	ld a, [wMenuJoypadFilter]
+	and b
+	jr z, .wait
+	push bc
+	farcall _2DMenuInterpretJoypad
+	pop bc
 	ld a, [wMenuCursorY]
 	dec a
 	ld [wTMHMPocketCursor], a
@@ -249,9 +263,9 @@ TMHM_ShowTMMoveDescription:
 	ldh [hOAMUpdate], a
 	xor a
 	ldh [hBGMapMode], a
-	hlcoord 0, 11
-	lb bc, 5, SCREEN_WIDTH - 2
-	call Textbox
+	hlcoord 0, 12
+	lb bc, 4, SCREEN_WIDTH - 2
+	call TextboxBorder ; preserve the normal pack attribute map
 	ld a, [wCurItem]
 	cp NUM_TMS + NUM_HMS + 1
 	jmp nc, .cancel
@@ -273,7 +287,7 @@ TMHM_ShowTMMoveDescription:
 	ld [wBuffer1], a
 	ld de, wBuffer1
 	lb bc, 1, 3
-	hlcoord 5, 14
+	hlcoord 14, 14
 	call PrintNum
 	ld [hl], "<%>" ; displays percent symbol
 	hlcoord 8, 8
@@ -282,7 +296,7 @@ TMHM_ShowTMMoveDescription:
 .if_null_chance
 	ld de, EmptyStr
 	ld bc, 3
-	hlcoord 5, 14
+	hlcoord 14, 14
 	call PlaceString
 
 .skip_null_chance
@@ -300,7 +314,7 @@ TMHM_ShowTMMoveDescription:
 
 	ld de, EmptyStr
 	ld bc, 3
-	hlcoord 5, 13
+	hlcoord 5, 14
 	call PlaceString
 	jr .done_accuracy
 
@@ -316,7 +330,7 @@ TMHM_ShowTMMoveDescription:
 	ld [wBuffer1], a
 	ld de, wBuffer1
 	lb bc, 1, 3
-	hlcoord 5, 13
+	hlcoord 5, 14
 	call PrintNum
 	ld [hl], "<%>" ; displays percent symbol
 	hlcoord 7, 8
@@ -334,7 +348,7 @@ TMHM_ShowTMMoveDescription:
 	call AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
-	hlcoord 5, 12
+	hlcoord 5, 13
 	cp 2
 	jr c, .no_power
 	ld [wTextDecimalByte], a
@@ -351,14 +365,16 @@ TMHM_ShowTMMoveDescription:
 .description
 	hlcoord 1, 15
 	predef PrintMoveDescription
-	farcall LoadTMHMIcon
+	farcall LoadTMHMIconPalette
 	jr .commit
 
 .cancel
 	farcall TMHMMoveIcons_Close
 	farcall ClearTMHMIcon
 .commit
-	farcall MoveIcons_CommitPage
+	farcall Move2DMenuCursor
+	ld b, 1 << 3 | 3 ; normal tile-only pack commit, including sprites/palettes
+	farcall SafeCopyTilemapAtOnce
 	pop af
 	ldh [hOAMUpdate], a
 	jmp TMHM_JoypadLoop
@@ -379,6 +395,14 @@ TMHM_ChooseTMorHM:
 	cp b
 	jr z, _TMHM_ExitPack ; our cursor was hovering over CANCEL
 TMHM_CheckHoveringOverCancel:
+	call TMHM_CountPocketItems
+	and a
+	jr nz, .owned
+	ld a, NUM_TMS + NUM_HMS + 1
+	ld [wCurItem], a
+	scf
+	ret
+.owned
 	call TMHM_GetCurrentPocketPosition
 	ld a, [wMenuCursorY]
 	ld b, a
@@ -503,6 +527,10 @@ TMHM_DisplayPocketItems:
 	lb bc, 9, 15
 	ld a, " "
 	call ClearBox
+	call TMHM_CountPocketItems
+	and a
+	ld d, TMHM_POCKET_ROWS
+	jmp z, .NotTMHM
 	call TMHM_GetCurrentPocketPosition
 	ld d, TMHM_POCKET_ROWS
 .loop2

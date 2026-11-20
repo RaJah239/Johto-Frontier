@@ -23,13 +23,13 @@ DEF PLAZA_MOVE_ICON_Y EQU 12
 ; The pack's BG palettes are all in use too, so in the TM pocket the
 ; icons are sprites as well, with OBJ palette 7.
 ; Sprite icons use OBJ tiles $7a-$7f in VRAM bank 1 and the last six OAM
-; entries, all free on those screens. The borrowed OBJ palette is only
-; written to wOBPals2, so wOBPals1 still has the one to give back.
+; entries. These slots and OBJ palettes 6-7 stay reserved while the pack
+; is open; switching pockets only clears their shadow OAM entries.
 DEF MOVE_ICON_OBJ_TILE EQU $7a
 DEF MOVE_ICON_FIRST_OAM EQU NUM_SPRITE_OAM_STRUCTS - MOVE_ICON_TILES
 DEF TMHM_MOVE_ICON_OBJ_PAL EQU 7
 DEF TMHM_MOVE_ICON_X EQU 10
-DEF TMHM_MOVE_ICON_Y EQU 12
+DEF TMHM_MOVE_ICON_Y EQU 13
 
 ; POW/ACC/EFF are three-tile word icons, with the same 8px height as types.
 ; They borrow tile IDs absent from the current tilemap and restore them
@@ -1055,13 +1055,28 @@ BattleMoveIcons_Hide::
 	jp MoveIcons_HideSprites
 
 TMHMMoveIcons_Show::
-; Show the icons of move [wCurSpecies] in the TM pocket's move info box.
+; Reuse the current icons unless the hovered move changed.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTMHMDisplayedMove)
+	ldh [rSVBK], a
 	ld a, [wCurSpecies]
 	ld b, a
+	ld a, [wTMHMDisplayedMove]
+	cp b
+	jr z, .unchanged
+	ld a, b
+	ld [wTMHMDisplayedMove], a
+	pop af
+	ldh [rSVBK], a
 	ld c, TMHM_MOVE_ICON_OBJ_PAL
 	lb de, TMHM_MOVE_ICON_Y, TMHM_MOVE_ICON_X
 	and a ; the TM pocket commits the icons and page together
-	; fallthrough
+	jr MoveIcons_ShowSprites
+.unchanged
+	pop af
+	ldh [rSVBK], a
+	ret
 
 MoveIcons_ShowSprites:
 ; Show the type and category icons of move b as six sprites over the
@@ -1076,6 +1091,7 @@ MoveIcons_ShowSprites:
 	ldh [hMoveIconCol], a
 	call MoveIcons_GetIndices
 	pop af
+	push af
 	call c, MoveIcons_WaitBelowRow
 
 	ldh a, [hMoveIconPalette]
@@ -1093,6 +1109,8 @@ MoveIcons_ShowSprites:
 	ld e, a
 	call LoadMoveIconPalette
 	pop hl
+	pop af
+	jr nc, .staged_palette
 	ldh a, [hMoveIconPalette]
 	add a
 	add a
@@ -1100,7 +1118,11 @@ MoveIcons_ShowSprites:
 	ld b, a
 	ld c, LOW(rOBPI)
 	call MoveIcons_SendPalette
-
+	jr .tiles
+.staged_palette
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+.tiles
 	ld hl, vTiles3 tile MOVE_ICON_OBJ_TILE
 	ld b, BANK(vTiles3)
 	call MoveIcons_SendTiles
@@ -1139,18 +1161,33 @@ MoveIcons_ShowSprites:
 	jr nz, .oam
 	ret
 
-TMHM_MoveStatBadges_Show::
-; Draw three 24px word icons beside the TM pocket's move stats.
+TMHM_MoveIcons_Init::
+; These OBJ slots are reserved for the pack. Load fixed badges while its
+; LCD is off, with no per-pocket VRAM reads, backups or restoration waits.
+	call TMHM_MoveStatBadges_LoadTiles
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK(wMoveStatBadgeTileIds)
+	ld a, BANK(wOBPals1)
 	ldh [rSVBK], a
-	call MoveStatBadges_PrepareSprites
-	call TMHM_MoveStatBadges_ClearText
-	call TMHM_MoveStatBadges_DrawSprites
+	ld hl, MoveStatBadgePals
+	ld de, wOBPals1 palette MOVE_STAT_OBJ_PAL
+	ld bc, 1 palettes
+	call CopyBytes
+	ld hl, MoveStatBadgePals
+	ld de, wOBPals2 palette MOVE_STAT_OBJ_PAL
+	ld bc, 1 palettes
+	call CopyBytes
+	ld a, BANK(wTMHMDisplayedMove)
+	ldh [rSVBK], a
+	xor a
+	ld [wTMHMDisplayedMove], a
 	pop af
 	ldh [rSVBK], a
 	ret
+
+TMHM_MoveStatBadges_Show::
+; Fixed graphics/palette were loaded with the pack; just place nine sprites.
+	jp TMHM_MoveStatBadges_DrawSprites
 
 MoveStatBadges_PrepareSprites:
 ; Caller selected the badge state/backup WRAM bank.
@@ -1165,16 +1202,22 @@ MoveStatBadges_PrepareSprites:
 	jp TMHM_MoveStatBadges_LoadPalette
 
 TMHMMoveIcons_Close::
-; Remove all fifteen TM icon sprites from hardware before changing their
-; graphics or either OBJ palette, even when normal OAM updates are paused.
+; The slots stay reserved until the pack closes. Stage their removal with
+; the next pocket page, without waiting for OAM or rewriting live tiles.
 	xor a
 	ldh [hBGMapMode], a
 	ld hl, wShadowOAMSprite00 + MOVE_STAT_FIRST_OAM * OBJ_SIZE
 	ld bc, (MOVE_STAT_BADGE_TILES + MOVE_ICON_TILES) * OBJ_SIZE
 	call ByteFill
-	call MoveIcons_FlushOAM
-	call TMHMMoveIcons_Hide
-	jp TMHM_MoveStatBadges_Hide
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTMHMDisplayedMove)
+	ldh [rSVBK], a
+	xor a
+	ld [wTMHMDisplayedMove], a
+	pop af
+	ldh [rSVBK], a
+	ret
 
 BattleMoveStatEffBadge_Close::
 ; Keep the battle's type/category sprites, but remove EFF from hardware
@@ -1233,66 +1276,25 @@ TMHM_MoveStatBadges_Hide::
 	ldh [rSVBK], a
 	ret
 
-TMHM_MoveStatBadges_ClearText:
-	ld a, " "
-	ld bc, 3
-	ld hl, wTilemap + 12 * SCREEN_WIDTH + 1
-	call ByteFill
-	ld hl, wTilemap + 13 * SCREEN_WIDTH + 1
-	ld bc, MOVE_STAT_BADGE_WIDTH
-	call ByteFill
-	ld hl, wTilemap + 14 * SCREEN_WIDTH + 1
-	ld bc, MOVE_STAT_BADGE_WIDTH
-	call ByteFill
-	ld a, PAL_BG_TEXT
-	ld bc, 3
-	ld hl, wAttrmap + 12 * SCREEN_WIDTH + 1
-	call ByteFill
-	ld hl, wAttrmap + 13 * SCREEN_WIDTH + 1
-	ld bc, MOVE_STAT_BADGE_WIDTH
-	call ByteFill
-	ld hl, wAttrmap + 14 * SCREEN_WIDTH + 1
-	ld bc, MOVE_STAT_BADGE_WIDTH
-	call ByteFill
-	ret
-
 TMHM_MoveStatBadges_DrawSprites:
-	ld hl, wShadowOAMSprite00 + MOVE_STAT_FIRST_OAM * OBJ_SIZE
-	ld a, (TMHM_MOVE_ICON_Y + 2) * TILE_WIDTH
-	ld d, a ; first badge's y position
-	ld a, (1 + 1) * TILE_WIDTH
-	ld b, a ; badges start at column 1
-	ld a, MOVE_STAT_OBJ_PAL | VRAM_BANK_1
-	ld e, a
-	ld c, MOVE_STAT_OBJ_TILE
-	ld a, 3
-	ld [wMoveStatWorkCount], a
-.row
-	push bc
-rept MOVE_STAT_BADGE_WIDTH
-	ld a, d
-	ld [hli], a
-	ld a, b
-	ld [hli], a
-	add TILE_WIDTH
-	ld b, a
-	ld a, c
-	ld [hli], a
-	inc c
-	ld a, e
-	ld [hli], a
+	ld hl, .oam
+	ld de, wShadowOAMSprite00 + MOVE_STAT_FIRST_OAM * OBJ_SIZE
+	ld bc, MOVE_STAT_BADGE_TILES * OBJ_SIZE
+	jp CopyBytes
+.oam
+for badge, 3
+for piece, MOVE_STAT_BADGE_WIDTH
+	if badge == 0
+		db (13 + 2) * TILE_WIDTH, (1 + 1 + piece) * TILE_WIDTH ; POW
+	elif badge == 1
+		db (14 + 2) * TILE_WIDTH, (1 + 1 + piece) * TILE_WIDTH ; ACC
+	else
+		db (14 + 2) * TILE_WIDTH, (TMHM_MOVE_ICON_X + 1 + piece) * TILE_WIDTH ; EFF
+	endc
+	db MOVE_STAT_OBJ_TILE + badge * MOVE_STAT_BADGE_WIDTH + piece
+	db MOVE_STAT_OBJ_PAL | VRAM_BANK_1
 endr
-	ld a, c
-	pop bc
-	ld c, a
-	ld a, d
-	add TILE_WIDTH
-	ld d, a
-	ld a, [wMoveStatWorkCount]
-	dec a
-	ld [wMoveStatWorkCount], a
-	jr nz, .row
-	ret
+endr
 
 TMHM_MoveStatBadges_SaveTiles:
 	ldh a, [rSVBK]
@@ -1375,11 +1377,6 @@ TMHM_MoveStatBadges_RestorePalette:
 TMHM_MoveStatBadges_RestoreTiles:
 	ld de, wMoveStatObjTileBackup
 	jp TMHM_MoveStatBadges_CopyTiles
-
-TMHMMoveIcons_Hide::
-; Take the TM pocket's icon sprites away and give OBJ palette 7 back.
-	ld c, TMHM_MOVE_ICON_OBJ_PAL
-	; fallthrough
 
 MoveIcons_HideSprites:
 ; Take the icon sprites away and give OBJ palette c back.
