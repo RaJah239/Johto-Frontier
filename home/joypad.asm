@@ -126,6 +126,17 @@ endr
 ; same timing as turbo A: the first 4 frames of the hold are normal,
 ; and after that B is toggled on for 4 frames and off for 4 frames.
 ; This is only active while the Turbo B Button option is on.
+; Keep B from autorepeating on the main wild/trainer battle menu.
+	ld a, [wBattleMode]
+	cp WILD_BATTLE
+	jr z, .battle_menu
+	cp TRAINER_BATTLE
+	jr nz, .check_turbo_b
+.battle_menu
+	ld a, [wCurrentBattleWindow]
+	and a
+	jr z, .b_disabled
+.check_turbo_b
 	ld a, [wOptions3]
 	bit TURBO_B_BUTTON, a
 	jr z, .b_disabled
