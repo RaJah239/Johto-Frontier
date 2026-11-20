@@ -255,7 +255,7 @@ MoveDetailsMenu_PrintMoveDetails:
 	lb de, 13, 10
 	farcall MoveIcons_Stage
 
-	ld d, $80 | 13 ; same compact stat rows as the TM pocket
+	ld d, 13
 	ld e, 1
 	ld c, 5 ; palette 5 is free on this screen
 	farcall MoveStatBadges_Stage

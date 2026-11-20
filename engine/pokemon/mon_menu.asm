@@ -1324,7 +1324,7 @@ PlaceMoveData:
 	ld c, MOVE_SCREEN_ICON_PAL
 	lb de, 13, 10
 	farcall MoveIcons_Stage
-	ld d, $80 | 13 ; compact POW/ACC/EFF arrangement
+	ld d, 13
 	ld e, 1
 	ld c, 3 ; palette 3 is unused on the move list screen
 	farcall MoveStatBadges_Stage

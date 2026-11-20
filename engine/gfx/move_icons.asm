@@ -18,7 +18,7 @@ DEF BATTLE_MOVE_ICON_Y EQU 9
 ; which the tileset animates), keep it in wMoveIconSavedPalette and give
 ; it back when the box is cleared or the menu closes.
 DEF PLAZA_MOVE_ICON_X EQU 10
-DEF PLAZA_MOVE_ICON_Y EQU 12
+DEF PLAZA_MOVE_ICON_Y EQU 13
 
 ; The pack's BG palettes are all in use too, so in the TM pocket the
 ; icons are sprites as well, with OBJ palette 7.
@@ -299,7 +299,7 @@ MoveIcons_LoadBGTiles:
 	jp MoveIcons_SendTiles
 
 MoveStatBadges_Stage::
-; d = top row (bit 7: compact layout), e = column, c = free BG palette.
+; Compact POW/ACC/EFF: d = top row, e = column, c = free BG palette.
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wMoveStatBadgeTileIds)
@@ -677,9 +677,6 @@ MoveStatBadges_GetCoords:
 	ld d, a
 	ld a, [wMoveStatCol]
 	ld e, a
-	bit 7, d
-	jr z, .row
-	res 7, d
 	ld a, b
 	cp 2
 	jr c, .row

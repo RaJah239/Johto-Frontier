@@ -374,8 +374,8 @@ endr
 ; last TM's stats do not linger, and keep the Bag box's frame open
 ; instead of blanking the area white.
 	farcall PlazaMoveIcons_Close
-	hlcoord 0, 11
-	lb bc, 5, SCREEN_WIDTH - 2
+	hlcoord 0, 12
+	lb bc, 4, SCREEN_WIDTH - 2
 	call Textbox
 	hlcoord 0, 0
 	lb bc, 1, 7
@@ -388,19 +388,13 @@ endr
 .BagString: db "Bag@"
 
 DrawMoveInfoBox::
-; Draw the move info box below a scrolling menu for the move in
-; wCurSpecies: the bag TM/HM pocket's box and rows unchanged (see
-; TMHM_ShowTMMoveDescription), so it reads exactly like the pocket.
-; The Battle Plaza TM counter and the crystal Move Tutor both use it,
-; so the two menus' bottom boxes match.
-;
-; The box's top border sits on row 11, closing over the list box's
-; bottom border; its five interior rows run down to the screen edge,
-; exactly the bag TM pocket's box. The callback commits the whole page.
+; Both Battle Plaza shops use the TM pocket's compact row-12 box for
+; wCurSpecies: POW/Category/Type, ACC/EFF, then the two-line description.
+; The callback commits the complete page.
 	xor a
 	ldh [hBGMapMode], a
-	hlcoord 0, 11
-	lb bc, 5, SCREEN_WIDTH - 2
+	hlcoord 0, 12
+	lb bc, 4, SCREEN_WIDTH - 2
 	call Textbox
 
 ; ...the move's category and type icons on the right...
@@ -420,14 +414,14 @@ DrawMoveInfoBox::
 	ld [wBuffer1], a
 	ld de, wBuffer1
 	lb bc, 1, 3
-	hlcoord 5, 14
+	hlcoord 14, 14
 	call PrintNum
 	ld [hl], "<%>" ; displays percent symbol
 	jr .printed_chance
 .null_chance
 	ld de, .BlankString
 	ld bc, 3
-	hlcoord 5, 14
+	hlcoord 14, 14
 	call PlaceString
 .printed_chance
 
@@ -443,7 +437,7 @@ DrawMoveInfoBox::
 	jr nc, .imperfect
 	ld de, .BlankString
 	ld bc, 3
-	hlcoord 5, 13
+	hlcoord 5, 14
 	call PlaceString
 	jr .printed_accuracy
 
@@ -458,7 +452,7 @@ DrawMoveInfoBox::
 	ld [wBuffer1], a
 	ld de, wBuffer1
 	lb bc, 1, 3
-	hlcoord 5, 13
+	hlcoord 5, 14
 	call PrintNum
 	ld [hl], "<%>" ; displays percent symbol
 
@@ -471,7 +465,7 @@ DrawMoveInfoBox::
 	call AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
-	hlcoord 5, 12
+	hlcoord 5, 13
 	cp 2
 	jr c, .no_power
 	ld [wTextDecimalByte], a
