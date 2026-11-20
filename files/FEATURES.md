@@ -198,13 +198,15 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - A critical hit ignores the attacker’s negative stat stages and the defender’s positive stat stages. It also bypasses Reflect and Light Screen.
 - Positive offensive stages, negative defensive stages, and other applicable effects—including burn, frostbite, weather, items, and abilities—still apply.
 
-## Item Changes
-- Light Ball doubles Pikachu's Attack as well as Special Attack
-- Everstone both prevents evolution and boosts unevolved Pokémon's Defense and Special Defense
-- Friend Ball increases happiness by 150
-- Lure Ball multiply catch rate by 4 if this is a fishing rod battle
-- Fast Ball multiply catch rate by 4 if enemy's base speed more than or equal to 100
-- Love and Heavy Ball works as intended
+## Critical Capture
+- It triggers randomly when you throw a ball
+- You need at least 31 different species registered as caught in your Pokédex. Seen Pokémon and duplicate catches don’t increase that count
+- Your chance improves as your caught count reaches 31, 101, 151, 201, and 251 species. Lower HP, status conditions, and better ball bonuses also improve the chance
+-  Any Pokémon can be your active Pokémon. Giving that active Pokémon a Catch Charm doubles the critical-capture trigger chance. Keeping the charm in your bag doesn’t count
+- No special ball is required. Poké Balls, Great Balls, Ultra Balls, and other balls using the normal catch calculation can trigger it. Master Balls bypass the critical-capture check
+- What you hear: a short, high-pitched electronic chirp replaces the normal throwing sound
+- What you see: after the Pokémon enters the ball, the ball briefly shakes sideways in midair, then lands and shakes once, instead of the usual three ground shakes
+- It can still fail. A critical capture gives improved capture odds through a single success check; it does not guarantee a catch. There’s no separate “Critical capture!” message
 
 ## Move Changes
 - Note: Many moves have been altered, these are just some
