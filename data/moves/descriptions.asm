@@ -4,7 +4,6 @@ MoveDescriptions::
 	dw AbsorbDescription
 	dw AcidDescription
 	dw AcrobaticsDescription
-	dw AerialAceDescription
 	dw AeroblastDescription
 	dw AgilityDescription
 	dw AirSlashDescription
@@ -21,6 +20,7 @@ MoveDescriptions::
 	dw BlizzardDescription
 	dw BodyPressDescription
 	dw BodySlamDescription
+	dw BoomburstDescription
 	dw BrickBreakDescription
 	dw BubblebeamDescription
 	dw BugBiteDescription
@@ -341,6 +341,7 @@ HeadbuttDescription:
 	db   "An attack that may"
 	line "cause flinching.@"
 
+BoomburstDescription:
 SurfDescription:
 RockThrowDescription:
 DragonClawDescription:
@@ -539,7 +540,6 @@ AgilityDescription:
 	line "the user's SPEED.@"
 
 IceShardDescription:
-AerialAceDescription:
 BulletPunchDescription:
 AquaJetDescription:
 QuickAttackDescription:

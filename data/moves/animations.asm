@@ -4077,22 +4077,23 @@ BattleAnim_Sketch:
 	anim_incbgeffect BATTLE_BG_EFFECT_CYCLE_MON_LIGHT_DARK_REPEATING
 	anim_jump BattleAnim_ShowMon_0
 
-BattleAnim_AerialAce:
-	anim_2gfx BATTLE_ANIM_GFX_SPEED, BATTLE_ANIM_GFX_CUT
-	anim_sound 0, 0, SFX_MENU
-	anim_bgeffect BATTLE_BG_EFFECT_HIDE_MON, $0, $1, $0
-	anim_call BattleAnimSub_SpeedLines
-	anim_wait 12
-	anim_sound 0, 1, SFX_WING_ATTACK
+BattleAnim_Boomburst:
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_FIRE
-	anim_obj BATTLE_ANIM_OBJ_CUT_LONG_DOWN_LEFT, 160, 40, $0
-	anim_wait 24
-	anim_sound 0, 1, SFX_CUT
-	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $2
-	anim_obj BATTLE_ANIM_OBJ_CUT_UP_RIGHT, 120, 68, $0
+	anim_2gfx BATTLE_ANIM_GFX_NOISE, BATTLE_ANIM_GFX_PSYCHIC
+.loop
+	anim_cry $0
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $4, $2
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $30, $2, $0
+	anim_call BattleAnimSub_Sound
+	anim_obj BATTLE_ANIM_OBJ_WAVE,  7, 0, 11, 0, $2
+	anim_obj BATTLE_ANIM_OBJ_WAVE,  7, 0, 13, 0, $2
+	anim_obj BATTLE_ANIM_OBJ_WAVE,  9, 0, 11, 0, $2
+	anim_obj BATTLE_ANIM_OBJ_WAVE,  9, 0, 13, 0, $2
+	anim_wait 28
+	anim_call BattleAnimSub_Sound
+	anim_wait 28
+	anim_loop 2, .loop
 	anim_wait 8
-	anim_bgeffect BATTLE_BG_EFFECT_SHOW_MON, $0, $1, $0
-	anim_wait 24
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
 	anim_ret
 

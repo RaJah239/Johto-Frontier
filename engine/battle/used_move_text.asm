@@ -167,7 +167,7 @@ MoveTable:
 	db SUBSTITUTE   ; a4
 	db STRUGGLE     ; a5
 	db SKETCH       ; a6
-	db AERIAL_ACE   ; a7
+	db BOOMBURST    ; a7
 	db KNOCK_OFF    ; a8
 	db SPIDER_WEB   ; a9
 	db DRAGON_DANCE ; aa

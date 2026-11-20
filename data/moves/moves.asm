@@ -17,7 +17,6 @@ Moves:
 	move ABSORB,       EFFECT_LEECH_HIT,          40, GRASS,         SPECIAL,  100, 30,   0
 	move ACID,         EFFECT_BURN_HIT,           40, POISON,        SPECIAL,  100, 30,  20
 	move ACROBATICS,   EFFECT_ACROBATICS,         55, FLYING,        PHYSICAL, 100, 15,   0
-	move AERIAL_ACE,   EFFECT_PRIORITY_HIT,       40, FLYING,        PHYSICAL, 100, 20,   0
 	move AEROBLAST,    EFFECT_LEECH_HIT,          95, FLYING,        SPECIAL,   95, 15,   0
 	move AGILITY,      EFFECT_SPEED_UP_2,          0, NORMAL,        STATUS,   100, 30,   0
 	move AIR_SLASH,    EFFECT_FLINCH_HIT,         80, FLYING,        SPECIAL,  100, 15,  30
@@ -34,6 +33,7 @@ Moves:
 	move BLIZZARD,     EFFECT_BLIZZARD,          120, ICE,           SPECIAL,   70, 10,  30
 	move BODY_PRESS,   EFFECT_BODY_PRESS,         80, FIGHTING,      PHYSICAL, 100, 10,   0
 	move BODY_SLAM,    EFFECT_PARALYZE_HIT,       85, NORMAL,        PHYSICAL, 100, 15,  30
+	move BOOMBURST,    EFFECT_NORMAL_HIT,        140, NORMAL,        SPECIAL,  100, 10,   0
 	move BRICK_BREAK,  EFFECT_BRICK_BREAK,        75, FIGHTING,      PHYSICAL, 100, 15,   0
 	move BUBBLEBEAM,   EFFECT_SPEED_DOWN_HIT,     65, WATER,         SPECIAL,  100, 20,  20
 	move BUG_BITE,     EFFECT_THIEF,              40, BUG,           PHYSICAL, 100, 30, 100

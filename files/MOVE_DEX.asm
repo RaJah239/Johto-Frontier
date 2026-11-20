@@ -112,7 +112,6 @@
 |   Type   |     Name     | Category | Power | Acc  | PP | Description                                                          |
 +----------+--------------+----------+-------+------+----+----------------------------------------------------------------------+
 | Flying   | Acrobatics   | Physical |   55  | 100% | 15 | Damage doubles if user has no item equipped                          |
-| Flying   | Aerial Ace   | Physical |   40  | 100% | 20 | Priority attack - usually goes first                                 |
 | Flying   | Aeroblast    | Special  |   95  |  95% | 15 | High critical hit ratio & user recovers 50% of the damage dealt      |
 | Flying   | Air Slash    | Special  |   80  | 100% | 15 | 30% chance to make the target flinch                                 |
 | Flying   | Defog        | Other    |  ---  | 100% | 15 | Clears entry hazards and screens                                     |
@@ -196,6 +195,7 @@
 | Normal   | Attract      | Other    |  ---  | ---  | 15 | Opposite gender gets infatuated                                      |
 | Normal   | Baton Pass   | Other    |  ---  | ---  | 30 | Switches user, passing stat changes to replacement                   |
 | Normal   | Body Slam    | Physical |   85  | 100% | 15 | 30% chance to paralyze the target                                    |
+| Normal   | Boomburst    | Special  |  140  | 100% | 10 | No addional effect                                                   |
 | Normal   | Defense Curl | Other    |  ---  | 100% | 30 | Raises user's Defense by 1 stage, doubles Rollout power              |
 | Normal   | Disable      | Other    |  ---  | 100% | 20 | Disables target's last used move                                     |
 | Normal   | Double-Edge  | Physical |  120  | 100% | 15 | User takes recoil damage                                             |

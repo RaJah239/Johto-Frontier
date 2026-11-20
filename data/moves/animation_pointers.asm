@@ -5,7 +5,6 @@ BattleAnimations::
 	dba BattleAnim_Absorb
 	dba BattleAnim_Acid
 	dba BattleAnim_Acrobatics
-	dba BattleAnim_AerialAce
 	dba BattleAnim_Aeroblast
 	dba BattleAnim_Agility
 	dba BattleAnim_AirSlash
@@ -22,6 +21,7 @@ BattleAnimations::
 	dba BattleAnim_Blizzard
 	dba BattleAnim_BodyPress
 	dba BattleAnim_BodySlam
+	dba BattleAnim_Boomburst
 	dba BattleAnim_BrickBreak
 	dba BattleAnim_Bubblebeam
 	dba BattleAnim_BugBite

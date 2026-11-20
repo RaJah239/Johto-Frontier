@@ -9,7 +9,6 @@
 	const ABSORB
 	const ACID
 	const ACROBATICS
-	const AERIAL_ACE
 	const AEROBLAST
 	const AGILITY
 	const AIR_SLASH
@@ -26,6 +25,7 @@
 	const BLIZZARD
 	const BODY_PRESS
 	const BODY_SLAM
+	const BOOMBURST
 	const BRICK_BREAK
 	const BUBBLEBEAM
 	const BUG_BITE
