@@ -870,6 +870,21 @@ MoveStatBadges_RestorePalette:
 	ldh [rSVBK], a
 	ret
 
+PlazaMoveIcons_PrepareMenu::
+; The list and move box cover rows 3-17. Clear the exposed header before
+; drawing its counters, so leftover map colors cannot exhaust the two BG
+; palettes needed by Type/Category and POW/ACC/EFF. The caller has already
+; backed up the map for exit; no extra visible redraw is needed here.
+	xor a
+	ldh [hBGMapMode], a
+	hlcoord 0, 0
+	lb bc, 3, SCREEN_WIDTH
+	call ClearBox
+	hlcoord 0, 0, wAttrmap
+	ld a, PAL_BG_TEXT
+	ld bc, 3 * SCREEN_WIDTH
+	jp ByteFill
+
 PlazaMoveIcons_Stage::
 ; Show the icons of move [wCurSpecies] in the Battle Plaza TM counter's
 ; and Move Tutor's move info box.

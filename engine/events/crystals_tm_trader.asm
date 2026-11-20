@@ -102,8 +102,7 @@ BattlePlazaTMCoinTrader:
 SelectTM:
 	ld hl, .MenuHeader
 	call CopyMenuHeader
-	xor a
-	ldh [hBGMapMode], a
+	farcall PlazaMoveIcons_PrepareMenu
 	call InitScrollingMenu
 	; The menu's top border sits on row 2; redraw the coin box so its
 	; bottom border closes over it, like the mart's money box.

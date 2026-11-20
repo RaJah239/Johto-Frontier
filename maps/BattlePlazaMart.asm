@@ -218,7 +218,7 @@ BattlePlazaMartTutorScript:
     xor a
     ld [wMenuCursorPosition], a
     ld [wMenuScrollPosition], a
-    ldh [hBGMapMode], a
+    farcall PlazaMoveIcons_PrepareMenu
     call InitScrollingMenu
 .input_loop
     call ScrollingMenu
