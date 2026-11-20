@@ -53,6 +53,19 @@ PlayBattleMusic:
 	or d
 	jr nz, .done
 
+; Tower and Factory battles use their facility themes,
+; regardless of the sampled trainer class
+	ld a, [wInBattleTowerBattle]
+	bit 0, a
+	jr z, .standard_music
+	ld a, [wBattleFactoryMode]
+	and a
+	ld e, MUSIC_TETRIS
+	jr nz, .done
+	ld e, MUSIC_GYM_LEADER_BATTLE_PRISM
+	jr .done
+
+.standard_music
 	; Are we fighting a trainer?
 	ld a, [wOtherTrainerClass]
 	and a
