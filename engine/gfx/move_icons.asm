@@ -375,12 +375,6 @@ MoveStatBadges_Show::
 ; d = top row, e = column, c = a free BG palette.
 	xor a ; POW starts at badge tile 0
 	ld b, 3 ; three rows
-	jr MoveStatBadges_Begin
-
-MoveStatEffBadge_Show::
-; Draw only the EFF badge in the battle move info overlay.
-	ld a, MOVE_STAT_BADGE_WIDTH * 2 ; EFF's first tile
-	ld b, 1
 
 MoveStatBadges_Begin:
 	ldh [hMoveIconType], a
@@ -447,17 +441,27 @@ PlazaMoveStatBadges_Show::
 	jp MoveStatBadges_Show
 
 BattleMoveStatEffBadge_Show::
-	call MoveStatBadges_FindFreePalette
-	jr nc, .have_palette
-	ld a, PAL_BG_TEXT
-	ld c, a
-	jr .show
-.have_palette
-	ld c, a
-.show
-	ld d, 13
-	ld e, 1
-	jp MoveStatEffBadge_Show
+; Every battle BG palette can be in use. Keep EFF on sprites so the
+; textbox, description and HUD palettes are never borrowed or recolored.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wMoveStatBadgeTileIds)
+	ldh [rSVBK], a
+	call MoveStatBadges_PrepareSprites
+	ld hl, wShadowOAMSprite00 + MOVE_STAT_FIRST_OAM * OBJ_SIZE
+for badge_tile, MOVE_STAT_BADGE_WIDTH
+	ld a, (13 + 2) * TILE_WIDTH
+	ld [hli], a
+	ld a, (1 + 1 + badge_tile) * TILE_WIDTH
+	ld [hli], a
+	ld a, MOVE_STAT_OBJ_TILE + MOVE_STAT_BADGE_WIDTH * 2 + badge_tile
+	ld [hli], a
+	ld a, MOVE_STAT_OBJ_PAL | VRAM_BANK_1
+	ld [hli], a
+endr
+	pop af
+	ldh [rSVBK], a
+	ret
 
 MoveStatBadges_FindFreePalette:
 ; Return c = a BG palette not used by any visible cell, or carry if none.
@@ -1179,6 +1183,15 @@ TMHM_MoveStatBadges_Show::
 	push af
 	ld a, BANK(wMoveStatBadgeTileIds)
 	ldh [rSVBK], a
+	call MoveStatBadges_PrepareSprites
+	call TMHM_MoveStatBadges_ClearText
+	call TMHM_MoveStatBadges_DrawSprites
+	pop af
+	ldh [rSVBK], a
+	ret
+
+MoveStatBadges_PrepareSprites:
+; Caller selected the badge state/backup WRAM bank.
 	ld a, [wMoveStatObjBadgesActive]
 	and a
 	jr nz, .loaded
@@ -1187,12 +1200,7 @@ TMHM_MoveStatBadges_Show::
 	ld a, TRUE
 	ld [wMoveStatObjBadgesActive], a
 .loaded
-	call TMHM_MoveStatBadges_LoadPalette
-	call TMHM_MoveStatBadges_ClearText
-	call TMHM_MoveStatBadges_DrawSprites
-	pop af
-	ldh [rSVBK], a
-	ret
+	jp TMHM_MoveStatBadges_LoadPalette
 
 TMHM_MoveStatBadges_Hide::
 	ldh a, [rSVBK]

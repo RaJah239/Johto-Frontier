@@ -50,7 +50,7 @@ ShowBattleMoveInfo:
 	ldh a, [hJoyPressed]
 	and A_BUTTON | B_BUTTON
 	jr z, .wait_ab
-	farcall MoveStatBadges_Hide
+	farcall TMHM_MoveStatBadges_Hide
 	jmp SafeLoadTempTilemapToTilemap
 
 .blank db "---@"
