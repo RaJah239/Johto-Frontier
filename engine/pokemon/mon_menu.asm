@@ -975,16 +975,9 @@ MoveScreenLoop:
 
 .moving_move
 	farcall PartyMoveIcons_Close
-	ld a, " "
-	hlcoord 1, 11
-	ld bc, 5
-	call ByteFill
-	hlcoord 1, 11
-	lb bc, 5, 7
-	call ClearBox
-	hlcoord 1, 12
+	hlcoord 0, 11
 	lb bc, 5, SCREEN_WIDTH - 2
-	call ClearBox
+	call Textbox
 	hlcoord 2, 13
 	ld de, String_MoveWhere
 	call PlaceString
@@ -1017,7 +1010,7 @@ MoveScreenLoop:
 	pop bc
 	ld a, [wCurPartyMon]
 	cp b
-	jmp z, .joy_loop
+	jr z, .joy_loop
 	ld de, SFX_SWITCH_POCKETS
 	call PlaySFX
 	farcall PartyMoveIcons_Close
@@ -1257,13 +1250,11 @@ PlaceMoveData:
 	xor a
 	ldh [hBGMapMode], a
 
-; Print UI elements
-	hlcoord 0, 10
-	ld de, String_MoveType_Top
-	call PlaceString
+; One rectangular box: top border on row 11, stats on rows 12-14,
+; and the two-line description on rows 15-16.
 	hlcoord 0, 11
-	ld de, String_MoveType_Bottom
-	call PlaceString
+	lb bc, 5, SCREEN_WIDTH - 2
+	call Textbox
 
 ; Print move effect chance
 	ld a, [wCurSpecies]
@@ -1278,7 +1269,7 @@ PlaceMoveData:
 	ld [wBuffer1], a
 	ld de, wBuffer1
 	lb bc, 1, 3
-	hlcoord 5, 13
+	hlcoord 5, 14
 	call PrintNum
 	ld [hl], "<%>" ; displays percent symbol
 	hlcoord 8, 8
@@ -1287,7 +1278,7 @@ PlaceMoveData:
 .if_null_chance
 	ld de, String_MoveBlank
 	ld bc, 3
-	hlcoord 5, 13
+	hlcoord 5, 14
 	call PlaceString
 
 .skip_null_chance
@@ -1306,7 +1297,7 @@ PlaceMoveData:
 
 	ld de, String_MoveBlank
 	ld bc, 3
-	hlcoord 5, 12
+	hlcoord 5, 13
 	call PlaceString
 	jr .done_accuracy
 
@@ -1322,7 +1313,7 @@ PlaceMoveData:
 	ld [wBuffer1], a
 	ld de, wBuffer1
 	lb bc, 1, 3
-	hlcoord 5, 12
+	hlcoord 5, 13
 	call PrintNum
 	ld [hl], "<%>" ; displays percent symbol
 	hlcoord 7, 8
@@ -1334,7 +1325,7 @@ PlaceMoveData:
 	ld c, MOVE_SCREEN_ICON_PAL
 	lb de, 12, 10
 	farcall MoveIcons_Stage
-	ld d, 11
+	ld d, 12
 	ld e, 1
 	ld c, 3 ; palette 3 is unused on the move list screen
 	farcall MoveStatBadges_Stage
@@ -1347,7 +1338,7 @@ PlaceMoveData:
 	call AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
-	hlcoord 5, 11
+	hlcoord 5, 12
 	cp 2
 	jr c, .no_power
 	ld [wTextDecimalByte], a
@@ -1368,8 +1359,6 @@ PlaceMoveData:
 	farjp MoveIcons_CommitPage
 
 ; UI elements
-String_MoveType_Top: db "┌───────┐@"
-String_MoveType_Bottom: db "│       └@"
 String_MoveBlank: db "---@"
 
 PlaceMoveScreenArrows:
