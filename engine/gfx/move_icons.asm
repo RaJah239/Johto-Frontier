@@ -212,11 +212,23 @@ MoveIcons_GetIndices:
 	ret
 
 MoveIcons_Show::
-; Show the type and category icons of move b in the six cells starting at
-; row d, column e of the screen, using BG palette c.
-; The tiles, the palette and those cells are written straight to VRAM in
-; H-Blanks while the screen is drawn below the cells, so this costs no
-; frames and no frame shows a mix of the old and new icons.
+; Immediate version for callers that update only the icon cells.
+	call MoveIcons_PrepareBG
+	call MoveIcons_WaitBelowRow
+	call MoveIcons_SendBGPalette
+	call MoveIcons_LoadBGTiles
+	jp MoveIcons_WriteMap
+
+MoveIcons_Stage::
+; Prepare icons while the caller builds a page with hBGMapMode = 0.
+; The caller commits the complete page once with ApplyTilemap.
+	call MoveIcons_PrepareBG
+	call MoveIcons_LoadBGTiles
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	ret
+
+MoveIcons_PrepareBG:
 	ld a, c
 	ldh [hMoveIconPalette], a
 	ld a, d
@@ -243,7 +255,6 @@ MoveIcons_Show::
 	ld bc, MOVE_ICON_TILES
 	call ByteFill
 
-	call MoveIcons_WaitBelowRow
 
 ; the palette: in wBGPals1 and wBGPals2, and straight to the hardware
 	ldh a, [hMoveIconPalette]
@@ -282,20 +293,22 @@ MoveIcons_Show::
 	pop af
 	ldh [rSVBK], a
 	pop hl
+	ret
+
+MoveIcons_SendBGPalette:
 	ldh a, [hMoveIconPalette]
 	and PALETTE_MASK
 	add a
 	add a
-	add a ; * 1 palettes
+	add a
 	ld b, a
 	ld c, LOW(rBGPI)
-	call MoveIcons_SendPalette
+	jp MoveIcons_SendPalette
 
-; the tiles
+MoveIcons_LoadBGTiles:
 	ld hl, vTiles2 tile MOVE_ICON_TILE
 	ld b, BANK(vTiles2)
-	call MoveIcons_SendTiles
-	; fallthrough
+	jp MoveIcons_SendTiles
 
 MoveIcons_WriteMap:
 ; Copy the tiles and attributes of the six cells at hMoveIconRow/Col from
@@ -353,10 +366,15 @@ endr ; * BG_MAP_WIDTH
 MoveStatBadges_Show::
 ; Draw the POW, ACC, and EFF word icons, each three tiles wide.
 ; d = top row, e = column, c = a free BG palette.
-	xor a ; POW starts at badge tile 0
-	ld b, 3 ; three rows
+	xor a ; write the cells immediately
+	jr MoveStatBadges_Begin
+
+MoveStatBadges_Stage::
+; Same inputs as Show; leave the cells for the caller's page commit.
+	ld a, TRUE
 
 MoveStatBadges_Begin:
+	ld b, 3 ; three rows
 	ldh [hMoveIconType], a
 	ldh a, [rSVBK]
 	push af
@@ -371,7 +389,7 @@ MoveStatBadges_Begin:
 	ld a, c
 	ld [wMoveStatPalette], a
 	ld a, [hMoveIconType]
-	ld [wMoveStatOffset], a
+	ld [wMoveStatStaging], a
 	ld a, [hMoveIconCategory]
 	ld [wMoveStatRows], a
 
@@ -704,15 +722,7 @@ MoveStatBadges_WriteTilemap:
 	ld d, h
 	ld e, l ; attributes
 	pop hl ; tile map
-	push hl
-	ld a, [wMoveStatOffset]
-	ld l, a
-	ld h, 0
 	ld bc, wMoveStatBadgeTileIds
-	add hl, bc
-	ld b, h
-	ld c, l ; tile ID pointer
-	pop hl ; keep the screen destination separate from the tile ID pointer
 	ld a, [wMoveStatRows]
 	ld [wMoveStatRowsLeft], a
 .row
@@ -743,6 +753,9 @@ MoveStatBadges_WriteTilemap:
 	jr nc, .no_attr_carry
 	inc d
 .no_attr_carry
+	ld a, [wMoveStatStaging]
+	and a
+	jr nz, .next_row
 	push hl
 	push de
 	ld a, MOVE_STAT_BADGE_WIDTH
@@ -752,6 +765,7 @@ MoveStatBadges_WriteTilemap:
 	ldh [hMoveIconRow], a
 	pop de
 	pop hl
+.next_row
 	pop bc
 	ld a, [wMoveStatRowsLeft]
 	dec a

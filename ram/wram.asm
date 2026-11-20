@@ -3563,7 +3563,7 @@ wMoveStatRow:: db
 wMoveStatCol:: db
 wMoveStatRows:: db
 wMoveStatRowsLeft:: db
-wMoveStatOffset:: db
+wMoveStatStaging:: db
 wMoveStatWorkCount:: db
 wMoveStatObjBadgesActive:: db
 align 4

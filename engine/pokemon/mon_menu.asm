@@ -1227,7 +1227,6 @@ SetUpMoveList:
 	predef ListMoves
 	hlcoord 10, 4
 	predef ListMovePP
-	call WaitBGMap
 	call SetDefaultBGPAndOBP
 	ld a, [wNumMoves]
 	inc a
@@ -1334,11 +1333,11 @@ PlaceMoveData:
 	ld b, a
 	ld c, MOVE_SCREEN_ICON_PAL
 	lb de, 12, 10
-	farcall MoveIcons_Show
+	farcall MoveIcons_Stage
 	ld d, 11
 	ld e, 1
 	ld c, 3 ; palette 3 is unused on the move list screen
-	farcall MoveStatBadges_Show
+	farcall MoveStatBadges_Stage
 
 ; Print move power
 	ld a, [wCurSpecies]
@@ -1365,9 +1364,8 @@ PlaceMoveData:
 .description
 	hlcoord 1, 15
 	predef PrintMoveDescription
-	ld a, $1
-	ldh [hBGMapMode], a
-	ret
+	; Show the icons, values, description and move list in the same frame.
+	jp ApplyTilemap
 
 ; UI elements
 String_MoveType_Top: db "┌───────┐@"
