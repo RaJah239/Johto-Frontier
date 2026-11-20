@@ -196,7 +196,7 @@ BattleTransitionJumptable:
 	dw StartTrainerBattle_NextScene ; 25
 	dw StartTrainerBattle_SetUpForTrainerPortrait ; 26
 	dw StartTrainerBattle_LoadTrainerPortrait ; 27
-	dw StartTrainerBattle_FadeToWhite ; 28
+	dw StartTrainerBattle_FadeToBlack ; 28
 
 	; BATTLETRANSITION_FINISH
 	dw StartTrainerBattle_Finish ; 29
@@ -209,8 +209,8 @@ StartTrainerBattle_LoadTrainerPortrait:
 	farcall BattleVSIntro.LoadTrainerPortrait
 	jr StartTrainerBattle_NextScene
 
-StartTrainerBattle_FadeToWhite:
-	farjp BattleVSIntro.FadeToWhite
+StartTrainerBattle_FadeToBlack:
+	farjp BattleVSIntro.FadeToBlack
 
 ; transition animations
 	const_def

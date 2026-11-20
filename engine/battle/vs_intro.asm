@@ -5,7 +5,7 @@
 
 DEF VS_INTRO_LOGO_X EQU 25
 DEF VS_INTRO_LOGO_Y EQU 56
-DEF VS_INTRO_TIME EQU 255
+DEF VS_INTRO_TIME EQU 180
 DEF VS_INTRO_SHAKE_RADIUS_INIT EQU 20
 DEF VS_INTRO_SHAKE_RADIUS EQU 3
 DEF VS_INTRO_SHAKE_RATE EQU 2
@@ -317,7 +317,7 @@ endr
 	ei
 	ret
 
-.FadeToWhite
+.FadeToBlack
 	ld a, [wBattleTransitionCounter]
 	cp VS_INTRO_TIME
 	jr z, .first_frame
@@ -397,14 +397,14 @@ endr
 	ldh [hLYOverrideEnd], a
 	ldh [hSCX], a
 	ldh [rSCX], a
-	ld c, 15
+	ld c, 8
 	call DelayFrames
 	ld a, BATTLETRANSITION_FINISH
 	ld [wJumptableIndex], a
 	ret
 
 .FadeStep
-	; Prism raises each RGB component once every two frames, alternating
+	; Lower each RGB component once every two frames, alternating
 	; background and sprite palettes over the last 64 frames.
 	rra
 	ld hl, wBGPals2
@@ -417,9 +417,8 @@ endr
 .fade_color
 	ld a, [hl]
 	and $1f
-	cp $1f
 	jr z, .red_ready
-	inc a
+	dec a
 .red_ready
 	ld c, a
 	inc hl
@@ -428,21 +427,23 @@ endr
 	ld b, a
 	ld a, [hl]
 	and $e0
-	or b
-	cp $e3
+	jr z, .green_borrow
+	sub $20
+	jr .green_done
+.green_borrow
+	ld a, b
+	and a
 	jr z, .green_ready
-	and $e0
-	add $20
-	jr nc, .green_ready
-	inc b
+	dec b
+	ld a, $c0
+.green_done
 .green_ready
 	or c
 	ld [hli], a
 	ld a, [hl]
 	and $7c
-	cp $7c
 	jr z, .blue_ready
-	add 4
+	sub 4
 .blue_ready
 	or b
 	ld [hli], a
