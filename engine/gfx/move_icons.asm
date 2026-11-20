@@ -176,50 +176,30 @@ MoveIcons_SendPalette:
 	ret
 
 MoveIcons_SendTiles:
-; Write the category and type icon tiles to hl in VRAM bank b during
-; H-Blanks.
+; Stage the category and type graphics for GDMA instead of spending
+; one H-Blank on each pair of bytes. hl = destination, b = VRAM bank.
+	ld a, b
+	ldh [rVBK], a
 	push hl
 	ldh a, [hMoveIconCategory]
 	ld e, a
 	call GetCategoryIconGFX
 	pop hl
-	ld c, 2 * LEN_2BPP_TILE
-.category
-	call MoveIcons_WaitHBlank
-	ld a, b
-	ldh [rVBK], a
-	ld a, [de]
-	ld [hli], a
-	inc de
-	ld a, [de]
-	ld [hli], a
-	inc de
-	xor a
-	ldh [rVBK], a
-	ei
-	dec c
-	dec c
-	jr nz, .category
-
+	push hl
+	lb bc, BANK(MoveCategoryIconGFX), 2
+	call Get2bppViaHDMA
+	pop hl
+	ld bc, 2 tiles
+	add hl, bc
 	push hl
 	ldh a, [hMoveIconType]
 	ld c, a
 	call GetTypeIconGFX
 	pop hl
-	ld c, 4 * LEN_1BPP_TILE
-.type
-	call MoveIcons_WaitHBlank
-	ld a, b
-	ldh [rVBK], a
-	ld a, [de]
-	ld [hli], a
-	ld [hli], a
-	inc de
+	lb bc, BANK(MoveTypeIconGFX), 4
+	call Get1bppViaHDMA
 	xor a
 	ldh [rVBK], a
-	ei
-	dec c
-	jr nz, .type
 	ret
 
 MoveIcons_GetIndices:
@@ -500,48 +480,54 @@ MoveStatBadges_FindFreePalette:
 	ret
 
 MoveStatBadges_AllocateTiles:
-; Reserve tile IDs for all three word icons, absent from the current screen.
+; Mark tile usage in one screen pass. The backup is not live yet, so its
+; first 128 bytes can be scratch until SaveTiles fills the real backup.
 	xor a
-	ldh [hMoveIconType], a ; candidate tile ID
-	xor a
-	ldh [hMoveIconCategory], a ; number of tiles found
-.candidate
-	ldh a, [hMoveIconType]
-	cp $7f ; tile $7f is the textbox space graphic
-	jr nc, .failed
-	ld c, a
+	ld hl, wMoveStatTileBackup
+	ld bc, $80
+	call ByteFill
 	ld hl, wTilemap
-	ld de, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 .scan
 	ld a, [hli]
-	cp c
-	jr z, .next_candidate
-	dec de
-	ld a, d
-	or e
-	jr nz, .scan
-	ldh a, [hMoveIconCategory]
+	cp $7f ; never borrow the textbox space tile
+	jr nc, .next_cell
+	push hl
+	add LOW(wMoveStatTileBackup)
 	ld l, a
-	ld h, 0
-	ld bc, wMoveStatBadgeTileIds
-	add hl, bc
-	ldh a, [hMoveIconType]
-	ld [hl], a
-	ldh a, [hMoveIconCategory]
-	inc a
-	ldh [hMoveIconCategory], a
-	cp MOVE_STAT_BADGE_TILES
+	adc HIGH(wMoveStatTileBackup)
+	sub l
+	ld h, a
+	ld [hl], 1
+	pop hl
+.next_cell
+	dec bc
+	ld a, b
+	or c
+	jr nz, .scan
+
+	ld hl, wMoveStatTileBackup
+	ld de, wMoveStatBadgeTileIds
+	ld b, MOVE_STAT_BADGE_TILES
+	ld c, 0
+.candidate
+	ld a, [hli]
+	and a
+	jr nz, .next_candidate
+	ld a, c
+	ld [de], a
+	inc de
+	dec b
 	jr z, .allocated
 .next_candidate
-	ldh a, [hMoveIconType]
-	inc a
-	ldh [hMoveIconType], a
-	jr .candidate
+	inc c
+	ld a, c
+	cp $7f
+	jr c, .candidate
+	scf
+	ret
 .allocated
 	and a
-	ret
-.failed
-	scf
 	ret
 
 MoveStatBadges_SaveTiles:
@@ -576,7 +562,11 @@ endr
 	ld a, [de]
 	inc de
 	ld [hli], a
+	ld a, [de]
+	inc de
+	ld [hli], a
 	ei
+	dec c
 	dec c
 	jr nz, .byte
 	pop de
@@ -589,17 +579,20 @@ endr
 	ret
 
 MoveStatBadges_LoadTiles:
+	ld de, MoveStatBadgeGFX
+	jr MoveStatBadges_CopyTiles
+
+MoveStatBadges_CopyTiles:
+; de = aligned source in this ROM bank or the selected WRAM bank.
 	xor a
 	ldh [rVBK], a
-	ld hl, MoveStatBadgeGFX
-	ld de, wMoveStatBadgeTileIds
+	ld hl, wMoveStatBadgeTileIds
 	ld a, MOVE_STAT_BADGE_TILES
 	ld [wMoveStatWorkCount], a
 .tile
-	ld a, [de]
-	inc de
-	push de
+	ld a, [hli]
 	push hl
+	push de
 	ld l, a
 	ld h, 0
 rept 4
@@ -607,19 +600,14 @@ rept 4
 endr
 	ld bc, vTiles2
 	add hl, bc
+	lb bc, BANK(MoveStatBadgeGFX), 1
+	call SafeHDMATransfer
+	pop hl
+	ld bc, LEN_2BPP_TILE
+	add hl, bc
 	ld d, h
-	ld e, l ; destination tile
-	pop hl ; graphics source
-	ld c, LEN_2BPP_TILE
-.byte
-	call MoveIcons_WaitHBlank
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ei
-	dec c
-	jr nz, .byte
-	pop de
+	ld e, l
+	pop hl
 	ld a, [wMoveStatWorkCount]
 	dec a
 	ld [wMoveStatWorkCount], a
@@ -840,48 +828,8 @@ MoveStatBadges_Hide::
 	ret
 
 MoveStatBadges_RestoreTiles:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wMoveStatTileBackup)
-	ldh [rSVBK], a
-	xor a
-	ldh [rVBK], a
-	ld hl, wMoveStatTileBackup
-	ld de, wMoveStatBadgeTileIds
-	ld a, MOVE_STAT_BADGE_TILES
-	ld [wMoveStatWorkCount], a
-.tile
-	ld a, [de]
-	inc de
-	push de
-	push hl
-	ld l, a
-	ld h, 0
-rept 4
-	add hl, hl
-endr
-	ld bc, vTiles2
-	add hl, bc
-	ld d, h
-	ld e, l
-	pop hl ; backup source
-	ld c, LEN_2BPP_TILE
-.byte
-	call MoveIcons_WaitHBlank
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ei
-	dec c
-	jr nz, .byte
-	pop de
-	ld a, [wMoveStatWorkCount]
-	dec a
-	ld [wMoveStatWorkCount], a
-	jr nz, .tile
-	pop af
-	ldh [rSVBK], a
-	ret
+	ld de, wMoveStatTileBackup
+	jp MoveStatBadges_CopyTiles
 
 MoveStatBadges_RestorePalette:
 	ld a, [wMoveStatPalette]
@@ -1303,7 +1251,11 @@ TMHM_MoveStatBadges_SaveTiles:
 	ld a, [hli]
 	ld [de], a
 	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
 	ei
+	dec c
 	dec c
 	jr nz, .copy
 	pop af
@@ -1313,19 +1265,15 @@ TMHM_MoveStatBadges_SaveTiles:
 	ret
 
 TMHM_MoveStatBadges_LoadTiles:
+	ld de, MoveStatBadgeGFX
+	jr TMHM_MoveStatBadges_CopyTiles
+
+TMHM_MoveStatBadges_CopyTiles:
 	ld a, BANK(vTiles3)
 	ldh [rVBK], a
-	ld hl, MoveStatBadgeGFX
-	ld de, vTiles3 tile MOVE_STAT_OBJ_TILE
-	ld c, MOVE_STAT_BADGE_TILES * LEN_2BPP_TILE
-.copy
-	call MoveIcons_WaitHBlank
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ei
-	dec c
-	jr nz, .copy
+	ld hl, vTiles3 tile MOVE_STAT_OBJ_TILE
+	lb bc, BANK(MoveStatBadgeGFX), MOVE_STAT_BADGE_TILES
+	call SafeHDMATransfer
 	xor a
 	ldh [rVBK], a
 	ret
@@ -1367,28 +1315,8 @@ TMHM_MoveStatBadges_RestorePalette:
 	ret
 
 TMHM_MoveStatBadges_RestoreTiles:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wMoveStatObjTileBackup)
-	ldh [rSVBK], a
-	ld a, BANK(vTiles3)
-	ldh [rVBK], a
-	ld hl, wMoveStatObjTileBackup
-	ld de, vTiles3 tile MOVE_STAT_OBJ_TILE
-	ld c, MOVE_STAT_BADGE_TILES * LEN_2BPP_TILE
-.copy
-	call MoveIcons_WaitHBlank
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ei
-	dec c
-	jr nz, .copy
-	pop af
-	ldh [rSVBK], a
-	xor a
-	ldh [rVBK], a
-	ret
+	ld de, wMoveStatObjTileBackup
+	jp TMHM_MoveStatBadges_CopyTiles
 
 TMHMMoveIcons_Hide::
 ; Take the TM pocket's icon sprites away and give OBJ palette 7 back.
@@ -1549,5 +1477,6 @@ MoveStatBadgePals:
 	RGB 00, 20, 15 ; ACC: teal
 	RGB 11, 10, 22 ; EFF: indigo
 
+align 4
 MoveStatBadgeGFX:
 INCBIN "gfx/battle/move_stat_badges.2bpp"

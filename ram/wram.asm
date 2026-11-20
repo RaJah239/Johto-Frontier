@@ -3566,6 +3566,7 @@ wMoveStatRowsLeft:: db
 wMoveStatOffset:: db
 wMoveStatWorkCount:: db
 wMoveStatObjBadgesActive:: db
+align 4
 wMoveStatTileBackup:: ds 9 tiles
 wMoveStatObjTileBackup:: ds 9 tiles
 
