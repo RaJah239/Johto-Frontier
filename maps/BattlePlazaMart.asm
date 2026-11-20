@@ -155,7 +155,7 @@ BattlePlazaMartTutorScript:
         done
     callasm .SetupMovesMenu
     callasm .LoadMovesMenu
-    callasm PlazaMoveIcons_Hide
+    callasm PlazaMoveIcons_Close
     writetext BattlePlazaMartTutorMoveText
     ifequal 2, .NotEnough
     ifequal 3, .LockedMove
@@ -374,7 +374,7 @@ BattlePlazaMartTutorScript:
 .clear_move_info
 ; Nothing hovered: redraw the box empty so the last move's stats do
 ; not linger once Cancel is highlighted.
-    farcall PlazaMoveIcons_Hide
+    farcall PlazaMoveIcons_Close
     hlcoord 0, 11
 	lb bc, 5, SCREEN_WIDTH - 2
     call Textbox
