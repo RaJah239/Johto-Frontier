@@ -368,7 +368,8 @@ BattlePlazaMartTutorScript:
     cp -1 ; CANCEL
     jr z, .clear_move_info
     ld [wCurSpecies], a
-    farjp DrawMoveInfoBox
+    farcall DrawMoveInfoBox
+    farjp MoveIcons_CommitPage
 
 .clear_move_info
 ; Nothing hovered: redraw the box empty so the last move's stats do
@@ -376,7 +377,8 @@ BattlePlazaMartTutorScript:
     farcall PlazaMoveIcons_Hide
     hlcoord 0, 11
 	lb bc, 5, SCREEN_WIDTH - 2
-    jmp Textbox
+    call Textbox
+    farjp MoveIcons_CommitPage
 
 .CrystalText: db "Cost×@"
 .ExitString: db "@"

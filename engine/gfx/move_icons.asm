@@ -228,6 +228,12 @@ MoveIcons_Stage::
 	ldh [hCGBPalUpdate], a
 	ret
 
+MoveIcons_CommitPage::
+; These pages change BG attributes too, even when map sprite updates are
+; disabled. Force both maps into the same VBlank7 commit, plus palettes.
+	ld b, 3
+	farjp SafeCopyTilemapAtOnce
+
 MoveIcons_PrepareBG:
 	ld a, c
 	ldh [hMoveIconPalette], a
@@ -411,7 +417,7 @@ MoveStatBadges_Begin:
 	ldh [rSVBK], a
 	ret
 
-PlazaMoveStatBadges_Show::
+PlazaMoveStatBadges_Stage::
 ; Borrow a free palette just like the Battle Plaza's move icons do.
 	ldh a, [rSVBK]
 	push af
@@ -422,7 +428,7 @@ PlazaMoveStatBadges_Show::
 	jr nz, .reuse_palette
 	call MoveStatBadges_FindFreePalette
 	jr nc, .have_palette
-	ld a, PAL_BG_ROOF ; same fallback used by PlazaMoveIcons_Show
+	ld a, PAL_BG_ROOF ; same fallback used by PlazaMoveIcons_Stage
 	ld c, a
 	jr .show
 .have_palette
@@ -436,7 +442,7 @@ PlazaMoveStatBadges_Show::
 	ld e, 1
 	pop af
 	ldh [rSVBK], a
-	jp MoveStatBadges_Show
+	jp MoveStatBadges_Stage
 
 BattleMoveStatEffBadge_Show::
 ; Every battle BG palette can be in use. Keep EFF on sprites so the
@@ -820,6 +826,9 @@ MoveStatBadges_Hide::
 	jr nc, .no_clear_attr_carry
 	inc d
 .no_clear_attr_carry
+	ld a, [wMoveStatStaging]
+	and a
+	jr nz, .next_clear_row
 	push hl
 	push de
 	ld a, MOVE_STAT_BADGE_WIDTH
@@ -829,6 +838,7 @@ MoveStatBadges_Hide::
 	ldh [hMoveIconRow], a
 	pop de
 	pop hl
+.next_clear_row
 	ld a, [wMoveStatRowsLeft]
 	dec a
 	ld [wMoveStatRowsLeft], a
@@ -900,7 +910,7 @@ MoveStatBadges_RestorePalette:
 	ldh [rSVBK], a
 	ret
 
-PlazaMoveIcons_Show::
+PlazaMoveIcons_Stage::
 ; Show the icons of move [wCurSpecies] in the Battle Plaza TM counter's
 ; and Move Tutor's move info box.
 	call PlazaMoveIcons_SetCoords
@@ -965,7 +975,7 @@ PlazaMoveIcons_Show::
 	ld a, [wCurSpecies]
 	ld b, a
 	lb de, PLAZA_MOVE_ICON_Y, PLAZA_MOVE_ICON_X
-	jmp MoveIcons_Show
+	jmp MoveIcons_Stage
 
 .Bit:
 ; a = 1 << a
@@ -1007,13 +1017,11 @@ PlazaMoveIcons_Hide::
 	ld a, PAL_BG_TEXT
 	ld bc, MOVE_ICON_TILES
 	call ByteFill
-	call MoveIcons_WaitBelowRow
-	call MoveIcons_WriteMap
 
 	ld a, [wMoveIconBorrowedPalette]
 	and a
 	ret z
-	call PlazaMoveIcons_Show.PaletteAddress
+	call PlazaMoveIcons_Stage.PaletteAddress
 	ld d, h
 	ld e, l
 	ld hl, wMoveIconSavedPalette

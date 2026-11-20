@@ -366,7 +366,8 @@ endr
 	ld a, MAX_ITEM_STACK
 .stacked_ok
 	ld [wMenuSelectionQuantity], a
-	farjp PlaceItemInBagQuantity
+	farcall PlaceItemInBagQuantity
+	farjp MoveIcons_CommitPage
 
 .cancel_row
 ; Nothing to count on Cancel: redraw the description box empty so the
@@ -381,7 +382,8 @@ endr
 	call Textbox
 	hlcoord 1, 1
 	ld de, .BagString
-	jmp PlaceString
+	call PlaceString
+	farjp MoveIcons_CommitPage
 
 .BagString: db "Bag@"
 
@@ -394,14 +396,16 @@ DrawMoveInfoBox::
 ;
 ; The box's top border sits on row 11, closing over the list box's
 ; bottom border; its five interior rows run down to the screen edge,
-; exactly the bag TM pocket's box.
+; exactly the bag TM pocket's box. The callback commits the whole page.
+	xor a
+	ldh [hBGMapMode], a
 	hlcoord 0, 11
 	lb bc, 5, SCREEN_WIDTH - 2
 	call Textbox
 
 ; ...the move's category and type icons on the right...
-	farcall PlazaMoveIcons_Show
-	farcall PlazaMoveStatBadges_Show
+	farcall PlazaMoveIcons_Stage
+	farcall PlazaMoveStatBadges_Stage
 
 ; ...its effect chance...
 	ld a, [wCurSpecies]
