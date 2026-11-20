@@ -1176,6 +1176,17 @@ TMHMMoveIcons_Close::
 	call TMHMMoveIcons_Hide
 	jp TMHM_MoveStatBadges_Hide
 
+BattleMoveStatEffBadge_Close::
+; Keep the battle's type/category sprites, but remove EFF from hardware
+; OAM before its tile data and OBJ palette are restored.
+	xor a
+	ldh [hBGMapMode], a
+	ld hl, wShadowOAMSprite00 + MOVE_STAT_FIRST_OAM * OBJ_SIZE
+	ld bc, MOVE_STAT_BADGE_TILES * OBJ_SIZE
+	call ByteFill
+	call MoveIcons_FlushOAM
+	jp TMHM_MoveStatBadges_Hide
+
 MoveIcons_FlushOAM:
 ; Use a complete OAM DMA in a safe VBlank interval. The transfer also
 ; works with the LCD off and does not depend on hOAMUpdate being enabled.
