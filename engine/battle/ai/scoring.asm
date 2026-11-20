@@ -1,17 +1,14 @@
 AIScoring: ; used only for BANK(AIScoring)
 
 INCLUDE "engine/battle/ai/layers/ai_basic.asm"
-
 INCLUDE "engine/battle/ai/layers/ai_types.asm"
 INCLUDE "engine/battle/ai/layers/ai_smart.asm"
 INCLUDE "engine/battle/ai/layers/ai_aggressive.asm"
 INCLUDE "engine/battle/ai/layers/ai_final_attack.asm"
 INCLUDE "engine/battle/ai/layers/ai_smart_switch.asm"
-
 INCLUDE "engine/battle/ai/layers/ai_none.asm"
 
 ; unused layers
-INCLUDE "engine/battle/ai/layers/ai_cautious.asm"
 INCLUDE "engine/battle/ai/layers/ai_status.asm"
 INCLUDE "engine/battle/ai/layers/ai_risky.asm"
 INCLUDE "engine/battle/ai/layers/ai_offensive.asm"
