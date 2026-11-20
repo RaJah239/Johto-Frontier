@@ -935,6 +935,8 @@ ManagePokemonMoves:
 	pop af
 	ld [wOptions], a
 	call ClearBGPalettes
+	ld a, 3 ; reload party graphics; the move screen already hid its palettes
+	ret
 
 .egg
 	ld a, $0
@@ -984,10 +986,10 @@ MoveScreenLoop:
 	jr .joy_loop
 .b_button
 	call PlayClickSFX
-	call WaitSFX
 	ld a, [wSwappingMove]
 	and a
 	jmp z, .exit
+	call WaitSFX
 
 	ld a, [wSwappingMove]
 	ld [wMenuCursorY], a
@@ -1146,8 +1148,7 @@ MoveScreenLoop:
 	ld hl, w2DMenuFlags1
 	res 6, [hl]
 	farcall PartyMoveIcons_Close
-	call ClearSprites
-	jmp ClearTilemap
+	jmp ClearSprites
 
 MoveScreen2DMenuData:
 	db 3, 1 ; cursor start y, x
