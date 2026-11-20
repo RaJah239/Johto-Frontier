@@ -117,7 +117,7 @@ If you see an error or missing credit in this file, please let me know on [Disco
 - Prism Team - VS battle graphic & code
 
 # Music
-- mmmmmmmmmmmmmmmmm - Cave of Origin, RBY Indigo Plateau themes, Vs. Hoenn Champion
+- mmmmmmmmmmmmmmmmm - Cave of Origin, RBY Indigo Plateau themes, Vs. Hoenn Champion, Pokémon B/W - Final Pokémon
 - TriteHexagon: Zinnia Battle
 
 # Acknowledgments
