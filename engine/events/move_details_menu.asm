@@ -66,14 +66,14 @@ MoveDetailsMenu_Run:
 	ld [wPutativeTMHMMove], a
 	and a
 	push af
-	farcall MoveStatBadges_Hide
+	farcall MoveDetailsIcons_Close
 	pop af
 	ret
 
 .carry
 	scf
 	push af
-	farcall MoveStatBadges_Hide
+	farcall MoveDetailsIcons_Close
 	pop af
 	ret
 
@@ -241,7 +241,7 @@ MoveDetailsMenu_PrintMoveDetails:
 	ld a, [wMenuSelection]
 	cp -1
 	jr nz, .move
-	farcall MoveStatBadges_Hide
+	farcall MoveDetailsIcons_Close
 	call MoveDetailsMenu_FixCancelBorder
 	farjp MoveIcons_CommitPage
 .move

@@ -688,6 +688,14 @@ PartyMoveIcons_Close::
 	call MoveIcons_ClearVisibleCells
 	jp MoveStatBadges_Hide
 
+MoveDetailsIcons_Close::
+; The tutor/reminder list places its type/category icons one row higher.
+	call MoveStatBadges_DetachBG
+	lb de, 11, 10
+	ld b, MOVE_ICON_TILES
+	call MoveIcons_ClearVisibleCells
+	jp MoveStatBadges_Hide
+
 MoveStatBadges_DetachBG:
 ; The visible map must stop using the borrowed tile IDs before RestoreTiles.
 	ldh a, [rSVBK]
