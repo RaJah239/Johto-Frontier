@@ -36,9 +36,7 @@ AI_Aggressive:
 	cp EFFECT_EXPLOSION
 	jr z, .checkmove
 
-; Don't count moves the player's ability makes it immune to (repo A:
-; DoesEnemyMoveTypeTriggerPlayerAbilityImmunity; here the battle's own
-; tables: Levitate, Waterproof, Flame Ward, Grounded, Immunity)
+; Don't count moves the player's ability makes it immune to
 	ld a, [wEnemyMoveStruct + MOVE_TYPE]
 	and TYPE_MASK
 	push hl

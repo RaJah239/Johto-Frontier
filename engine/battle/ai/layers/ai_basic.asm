@@ -235,9 +235,7 @@ AI_Basic:
 	jmp c, .discourage ; discourage if sub is up and blocks move - loop back to check move
 
 .check_levitate
-; Dismiss moves the player's ability makes it immune to (repo A:
-; DoesEnemyMoveTypeTriggerPlayerAbilityImmunity; here the battle's own
-; tables: Levitate, Waterproof, Flame Ward, Grounded, Immunity)
+; Dismiss moves the player's ability makes it immune to
 	ld a, [wEnemyMoveStruct + MOVE_TYPE]
 	and TYPE_MASK
 	push hl
@@ -291,7 +289,7 @@ AI_Basic:
 	jr z, .explode_or_heal
 
 ; don't encourage recoil moves as much
-; except for rock head pokemon (repo A: its own species list)
+; except for rock head pokemon
 	ld a, [wEnemyMonSpecies]
 	push hl
 	push de

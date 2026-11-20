@@ -1,4 +1,4 @@
-; Switch-in picker, from repo A (FindMonInOTPartyToSwitchIntoBattle there).
+; Switch-in picker
 
 FindForcedReplacementInOTParty:
 	; the mon that wins the 1-on-1 taking the least damage, if any

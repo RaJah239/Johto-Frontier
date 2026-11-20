@@ -1,5 +1,5 @@
 AI_Smart_Switch:
-; From repo A. Sets wEnemyIsSwitching to ask for a switch at the start of the
+; Sets wEnemyIsSwitching to ask for a switch at the start of the
 ; turn (Battle_EnemyFirst / Battle_PlayerFirst then call AI_TrySwitch).
 ; Enemies can switch intelligently under certain conditions
 ; switch if unboosted enemy is FRZ and player sets up
@@ -21,7 +21,6 @@ AI_Smart_Switch:
 	ld a, [wCurEnemyMove]
 	call AIGetEnemyMove
 	; the move doesn't affect the player's mon because of its ability
-	; (repo A: DoesEnemyMoveTypeTriggerPlayerAbilityImmunity)
 	ld a, [wEnemyMoveStruct + MOVE_TYPE]
 	and TYPE_MASK
 	ld b, a
@@ -135,7 +134,7 @@ AI_Smart_Switch:
     ; fallthrough
 .switch
 ; can't switch if trapped: Mean Look / Spider Web, a trapping move or a
-; trapping ability (repo A only checks its own trapping species)
+; trapping ability
 	call IsEnemyTrapped
 	ret c
 	call IsEnemyStayInMon ; Smeargle etc. never switch out by choice

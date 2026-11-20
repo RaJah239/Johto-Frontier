@@ -820,7 +820,7 @@ Battle_PlayerFirst:
 	jmp HandleEnemyMonFaint
 
 TryEnemySwitch:
-; From repo A: if AI_Smart_Switch (during AIChooseMove) asked for a switch
+; if AI_Smart_Switch (during AIChooseMove) asked for a switch
 ; (wEnemyIsSwitching), try it (AI_TrySwitch: not when trapped, set up or
 ; alone; the switch-in picker chooses the mon); otherwise
 ; use AI_TryMatchupSwitch. Return carry if the enemy switched.

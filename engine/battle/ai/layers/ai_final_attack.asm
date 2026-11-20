@@ -1,8 +1,6 @@
 ; this discourages most 0 power moves if the player can KO the AI
 AI_Final_Attack:
 ; Discourage stall moves if the player can KO us
-; (repo A used `call ShouldAIBoost / ret nc`, which is carry when boosting
-; is safe: the opposite of this layer's purpose)
 	call CanPlayerKO
 	ret nc
 
@@ -30,7 +28,7 @@ AI_Final_Attack:
 	pop hl
 	jr nc, .checkmove
 
-; (repo A: a strong +4, so the AI attacks instead of stalling)
+; a strong +4, so the AI attacks instead of stalling
 	inc [hl]
 	inc [hl]
 	inc [hl]

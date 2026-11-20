@@ -48,10 +48,8 @@ AI_TryMatchupSwitch:
 	ret
 
 AI_TrySwitch:
-; From repo A: switch to wEnemySwitchMonIndex unless trapped, already set up
+; switch to wEnemySwitchMonIndex unless trapped, already set up
 ; (+2 Attack / Sp. Atk / Defense / Sp. Def) or no other mon is alive.
-; (repo A checks its own trapping species; these are this game's trapping
-; abilities, which the player's mon can have)
 	call IsEnemyTrapped
 	ret c
 	call IsEnemyStayInMon
