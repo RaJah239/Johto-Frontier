@@ -102,4 +102,5 @@ Music:
 	dba Music_ZinniaBattle
 	dba Music_FinalPokemonBW
 	dba Music_GymLeaderBattlePrism
+	dba Music_Tetris
 	assert_table_length NUM_MUSIC_SONGS

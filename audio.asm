@@ -155,6 +155,10 @@ SECTION "Prism Music", ROMX
 INCLUDE "audio/music/prism/gymleaderbattle.asm"
 
 
+SECTION "Tetris Music", ROMX
+INCLUDE "audio/music/tetris.asm"
+
+
 SECTION "Sound Effects", ROMX
 
 INCLUDE "audio/sfx.asm"

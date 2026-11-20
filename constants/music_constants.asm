@@ -101,6 +101,7 @@
 	const MUSIC_ZINNIA_BATTLE_THEME
 	const MUSIC_FINAL_POKEMON_BW
 	const MUSIC_GYM_LEADER_BATTLE_PRISM
+	const MUSIC_TETRIS
 DEF NUM_MUSIC_SONGS EQU const_value
 
 ; GetMapMusic picks music for these values (see home/map.asm)

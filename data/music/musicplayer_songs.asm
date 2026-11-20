@@ -138,6 +138,7 @@ MusicPlayerSongs::
 	db MUSIC_SCARLET_FINAL_THEME
 	db MUSIC_ZINNIA_BATTLE_THEME
 	db MUSIC_GYM_LEADER_BATTLE_PRISM
+	db MUSIC_TETRIS
 .SongsEnd
 	db -1  ; end
 
@@ -256,11 +257,12 @@ MusicPlayerSongNamePointers::
 	dba .UnovaEliteFourBattle ; MUSIC_UNOVA_ELITE_FOUR_BATTLE
 	dba .CaveOfOrigin       ; MUSIC_CAVE_OF_ORIGIN
 	dba .Scarlet            ; MUSIC_SCARLET
-	dba .SurfingPikachu     ; MUSIC_SURFING_PIKACHU
-	dba .ScarletFinale      ; MUSIC_SCARLET_FINAL_THEME
-	dba .ZinniaBattle       ; MUSIC_ZINNIA_BATTLE_THEME
-	dba .FinalPokemonBW     ; MUSIC_FINAL_POKEMON_BW
+	dba .SurfingPikachu       ; MUSIC_SURFING_PIKACHU
+	dba .ScarletFinale        ; MUSIC_SCARLET_FINAL_THEME
+	dba .ZinniaBattle         ; MUSIC_ZINNIA_BATTLE_THEME
+	dba .FinalPokemonBW       ; MUSIC_FINAL_POKEMON_BW
 	dba .GymLeaderBattlePrism ; MUSIC_GYM_LEADER_BATTLE_PRISM
+	dba .Tetris               ; MUSIC_TETRIS
 
 	assert_table_length NUM_MUSIC_SONGS
 
@@ -363,3 +365,4 @@ MusicPlayerSongNamePointers::
 .ZinniaBattle:        db "  Zinnia Battle@"
 .FinalPokemonBW:      db " B/W Final #mon@"
 .GymLeaderBattlePrism: db " Gym Leader Prism@"
+.Tetris:               db "  Battle Tetris!@"
