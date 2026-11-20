@@ -14,7 +14,6 @@ DEF NUM_TRAINER_ATTRIBUTES EQU _RS
 	shift_const AI_SMART
 	shift_const AI_FINAL_ATTACK
 	shift_const AI_AGGRESSIVE
-	shift_const AI_RISKY
 DEF NO_AI EQU 0
 
 ; TrainerTypes bits (see engine/battle/read_trainer_party.asm)

@@ -214,7 +214,7 @@ AIScoringPointers:
 	dw AI_Smart
 	dw AI_Final_Attack
 	dw AI_Aggressive
-	dw AI_Risky
+	dw AI_None
 	dw AI_None
 	dw AI_None
 	dw AI_None
