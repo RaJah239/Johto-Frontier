@@ -299,7 +299,7 @@ MoveIcons_LoadBGTiles:
 	jp MoveIcons_SendTiles
 
 MoveStatBadges_Stage::
-; Stage POW, ACC and EFF: d = top row, e = column, c = free BG palette.
+; d = top row (bit 7: compact layout), e = column, c = free BG palette.
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wMoveStatBadgeTileIds)
@@ -631,21 +631,19 @@ MoveStatBadges_LoadPalette:
 	ret
 
 MoveStatBadges_WriteTilemap:
-	ld a, [wMoveStatRow]
-	ldh [hMoveIconRow], a
-	ld a, [wMoveStatCol]
-	ldh [hMoveIconCol], a
-	call MoveIcons_TilemapAddress
+	ld a, [wMoveStatRows]
+	ld [wMoveStatRowsLeft], a
+	ld bc, wMoveStatBadgeTileIds
+.row
+	push bc
+	call MoveStatBadges_TilemapAddress
 	push hl
 	ld bc, wAttrmap - wTilemap
 	add hl, bc
 	ld d, h
 	ld e, l ; attributes
 	pop hl ; tile map
-	ld bc, wMoveStatBadgeTileIds
-	ld a, [wMoveStatRows]
-	ld [wMoveStatRowsLeft], a
-.row
+	pop bc
 	ld a, [bc]
 	inc bc
 	ld [hli], a
@@ -655,7 +653,6 @@ MoveStatBadges_WriteTilemap:
 	ld a, [bc]
 	inc bc
 	ld [hli], a
-	push bc
 	ld a, [wMoveStatPalette]
 	ld [de], a
 	inc de
@@ -663,27 +660,51 @@ MoveStatBadges_WriteTilemap:
 	inc de
 	ld [de], a
 	inc de
-	ld a, SCREEN_WIDTH - 3
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, e
-	add c
-	ld e, a
-	jr nc, .no_attr_carry
-	inc d
-.no_attr_carry
-	pop bc
 	ld a, [wMoveStatRowsLeft]
 	dec a
 	ld [wMoveStatRowsLeft], a
 	jr nz, .row
 	ret
 
+MoveStatBadges_GetCoords:
+; Use the same coordinates for drawing, visible detachment and cleanup.
+	ld a, [wMoveStatRowsLeft]
+	ld b, a
+	ld a, [wMoveStatRows]
+	sub b
+	ld b, a
+	ld a, [wMoveStatRow]
+	ld d, a
+	ld a, [wMoveStatCol]
+	ld e, a
+	bit 7, d
+	jr z, .row
+	res 7, d
+	ld a, b
+	cp 2
+	jr c, .row
+	ld b, 1 ; EFF shares ACC's row, below Category
+	ld a, e
+	add 9
+	ld e, a
+.row
+	ld a, d
+	add b
+	ld d, a
+	ret
+
+MoveStatBadges_TilemapAddress:
+	call MoveStatBadges_GetCoords
+	ld a, d
+	ldh [hMoveIconRow], a
+	ld a, e
+	ldh [hMoveIconCol], a
+	jp MoveIcons_TilemapAddress
+
 PartyMoveIcons_Close::
 ; Detach both kinds of BG icons before returning borrowed graphics.
 	call MoveStatBadges_DetachBG
-	lb de, 12, 10
+	lb de, 13, 10
 	ld b, MOVE_ICON_TILES
 	call MoveIcons_ClearVisibleCells
 	jp MoveStatBadges_Hide
@@ -705,20 +726,12 @@ MoveStatBadges_DetachBG:
 	ld a, [wMoveStatBadgeActive]
 	and a
 	jr z, .done
-	ld a, [wMoveStatRow]
-	ldh [hMoveIconRow], a
 	ld a, [wMoveStatRows]
 	ld [wMoveStatRowsLeft], a
 .row
-	ldh a, [hMoveIconRow]
-	ld d, a
-	ld a, [wMoveStatCol]
-	ld e, a
+	call MoveStatBadges_GetCoords
 	ld b, MOVE_STAT_BADGE_WIDTH
 	call MoveIcons_ClearVisibleCells
-	ldh a, [hMoveIconRow]
-	inc a
-	ldh [hMoveIconRow], a
 	ld a, [wMoveStatRowsLeft]
 	dec a
 	ld [wMoveStatRowsLeft], a
@@ -779,41 +792,20 @@ MoveStatBadges_Hide::
 	ldh [rSVBK], a
 	ret
 .active
-	ld a, [wMoveStatRow]
-	ldh [hMoveIconRow], a
-	ld a, [wMoveStatCol]
-	ldh [hMoveIconCol], a
-	call MoveIcons_TilemapAddress
-	push hl
-	ld bc, wAttrmap - wTilemap
-	add hl, bc
-	ld d, h
-	ld e, l
-	pop hl
 	ld a, [wMoveStatRows]
 	ld [wMoveStatRowsLeft], a
 .clear_row
+	call MoveStatBadges_TilemapAddress
+	push hl
 	ld a, " "
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld a, PAL_BG_TEXT
-	ld [de], a
-	inc de
-	ld [de], a
-	inc de
-	ld [de], a
-	inc de
-	ld a, SCREEN_WIDTH - 3
-	ld c, a
-	ld b, 0
+	ld bc, MOVE_STAT_BADGE_WIDTH
+	call ByteFill
+	pop hl
+	ld bc, wAttrmap - wTilemap
 	add hl, bc
-	ld a, e
-	add c
-	ld e, a
-	jr nc, .no_clear_attr_carry
-	inc d
-.no_clear_attr_carry
+	ld a, PAL_BG_TEXT
+	ld bc, MOVE_STAT_BADGE_WIDTH
+	call ByteFill
 	ld a, [wMoveStatRowsLeft]
 	dec a
 	ld [wMoveStatRowsLeft], a

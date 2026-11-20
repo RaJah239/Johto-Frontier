@@ -975,10 +975,10 @@ MoveScreenLoop:
 
 .moving_move
 	farcall PartyMoveIcons_Close
-	hlcoord 0, 11
-	lb bc, 5, SCREEN_WIDTH - 2
+	hlcoord 0, 12
+	lb bc, 4, SCREEN_WIDTH - 2
 	call Textbox
-	hlcoord 2, 13
+	hlcoord 2, 14
 	ld de, String_MoveWhere
 	call PlaceString
 	jr .joy_loop
@@ -1177,10 +1177,10 @@ SetUpMoveScreenBG:
 	ld e, MONICON_MOVES
 	farcall LoadMenuMonIcon
 	hlcoord 0, 1
-	lb bc, 9, 18
+	lb bc, 10, 18
 	call Textbox
-	hlcoord 0, 11
-	lb bc, 5, 18
+	hlcoord 0, 12
+	lb bc, 4, 18
 	call Textbox
 	hlcoord 2, 0
 	lb bc, 2, 3
@@ -1224,8 +1224,8 @@ SetUpMoveList:
 	ld a, [wNumMoves]
 	inc a
 	ld [w2DMenuNumRows], a
-	hlcoord 0, 11
-	lb bc, 5, 18
+	hlcoord 0, 12
+	lb bc, 4, 18
 	jmp Textbox
 
 PrepareToPlaceMoveData:
@@ -1240,8 +1240,8 @@ PrepareToPlaceMoveData:
 	add hl, bc
 	ld a, [hl]
 	ld [wCurSpecies], a
-	hlcoord 1, 12
-	lb bc, 5, 18
+	hlcoord 1, 13
+	lb bc, 4, 18
 	jmp ClearBox
 
 DEF MOVE_SCREEN_ICON_PAL EQU 2 ; unused on this screen
@@ -1250,10 +1250,9 @@ PlaceMoveData:
 	xor a
 	ldh [hBGMapMode], a
 
-; One rectangular box: top border on row 11, stats on rows 12-14,
-; and the two-line description on rows 15-16.
-	hlcoord 0, 11
-	lb bc, 5, SCREEN_WIDTH - 2
+; Match the TM pocket: POW/Category/Type, then ACC/EFF, then description.
+	hlcoord 0, 12
+	lb bc, 4, SCREEN_WIDTH - 2
 	call Textbox
 
 ; Print move effect chance
@@ -1269,7 +1268,7 @@ PlaceMoveData:
 	ld [wBuffer1], a
 	ld de, wBuffer1
 	lb bc, 1, 3
-	hlcoord 5, 14
+	hlcoord 14, 14
 	call PrintNum
 	ld [hl], "<%>" ; displays percent symbol
 	hlcoord 8, 8
@@ -1278,7 +1277,7 @@ PlaceMoveData:
 .if_null_chance
 	ld de, String_MoveBlank
 	ld bc, 3
-	hlcoord 5, 14
+	hlcoord 14, 14
 	call PlaceString
 
 .skip_null_chance
@@ -1297,7 +1296,7 @@ PlaceMoveData:
 
 	ld de, String_MoveBlank
 	ld bc, 3
-	hlcoord 5, 13
+	hlcoord 5, 14
 	call PlaceString
 	jr .done_accuracy
 
@@ -1313,7 +1312,7 @@ PlaceMoveData:
 	ld [wBuffer1], a
 	ld de, wBuffer1
 	lb bc, 1, 3
-	hlcoord 5, 13
+	hlcoord 5, 14
 	call PrintNum
 	ld [hl], "<%>" ; displays percent symbol
 	hlcoord 7, 8
@@ -1323,9 +1322,9 @@ PlaceMoveData:
 	ld a, [wCurSpecies]
 	ld b, a
 	ld c, MOVE_SCREEN_ICON_PAL
-	lb de, 12, 10
+	lb de, 13, 10
 	farcall MoveIcons_Stage
-	ld d, 12
+	ld d, $80 | 13 ; compact POW/ACC/EFF arrangement
 	ld e, 1
 	ld c, 3 ; palette 3 is unused on the move list screen
 	farcall MoveStatBadges_Stage
@@ -1338,7 +1337,7 @@ PlaceMoveData:
 	call AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
-	hlcoord 5, 12
+	hlcoord 5, 13
 	cp 2
 	jr c, .no_power
 	ld [wTextDecimalByte], a
