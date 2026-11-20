@@ -373,8 +373,8 @@ BattlePlazaMartTutorScript:
 
 .clear_move_info
 ; Nothing hovered: redraw the box empty so the last move's stats do
-; not linger once Cancel is highlighted.
-    farcall PlazaMoveIcons_Close
+; not linger once Cancel is highlighted. Keep the icon resources until
+; the shop closes, so returning to a move retains its palette ownership.
     hlcoord 0, 12
 	lb bc, 4, SCREEN_WIDTH - 2
     call Textbox

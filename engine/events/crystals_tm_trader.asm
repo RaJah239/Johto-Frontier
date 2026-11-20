@@ -371,8 +371,8 @@ endr
 .cancel_row
 ; Nothing to count on Cancel: redraw the description box empty so the
 ; last TM's stats do not linger, and keep the Bag box's frame open
-; instead of blanking the area white.
-	farcall PlazaMoveIcons_Close
+; instead of blanking the area white. Keep icon graphics and palettes
+; reserved until the shop closes; Textbox clears their visible cells.
 	hlcoord 0, 12
 	lb bc, 4, SCREEN_WIDTH - 2
 	call Textbox

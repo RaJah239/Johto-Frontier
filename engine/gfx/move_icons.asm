@@ -1477,6 +1477,9 @@ MoveIcons_WaitHBlank:
 	bit rLCDC_ENABLE, a
 	ret z
 .wait_busy
+	ldh a, [rLY]
+	cp LY_VBLANK
+	ret nc ; do not hold a pending VBlank interrupt until the next frame
 	ldh a, [rSTAT]
 	and %10 ; mode 2 or 3
 	jr z, .wait_busy
