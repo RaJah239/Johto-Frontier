@@ -680,7 +680,86 @@ MoveStatBadges_WriteTilemap:
 	jr nz, .row
 	ret
 
+PartyMoveIcons_Close::
+; Detach both kinds of BG icons before returning borrowed graphics.
+	call MoveStatBadges_DetachBG
+	lb de, 12, 10
+	ld b, MOVE_ICON_TILES
+	call MoveIcons_ClearVisibleCells
+	jp MoveStatBadges_Hide
+
+MoveStatBadges_DetachBG:
+; The visible map must stop using the borrowed tile IDs before RestoreTiles.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wMoveStatBadgeActive)
+	ldh [rSVBK], a
+	ld a, [wMoveStatBadgeActive]
+	and a
+	jr z, .done
+	ld a, [wMoveStatRow]
+	ldh [hMoveIconRow], a
+	ld a, [wMoveStatRows]
+	ld [wMoveStatRowsLeft], a
+.row
+	ldh a, [hMoveIconRow]
+	ld d, a
+	ld a, [wMoveStatCol]
+	ld e, a
+	ld b, MOVE_STAT_BADGE_WIDTH
+	call MoveIcons_ClearVisibleCells
+	ldh a, [hMoveIconRow]
+	inc a
+	ldh [hMoveIconRow], a
+	ld a, [wMoveStatRowsLeft]
+	dec a
+	ld [wMoveStatRowsLeft], a
+	jr nz, .row
+.done
+	pop af
+	ldh [rSVBK], a
+	ret
+
+MoveIcons_ClearVisibleCells:
+; Blank b visible BG cells at row d, column e, with the text palette.
+; Stop automatic copies so VBlank cannot put stale icon IDs back afterwards.
+	xor a
+	ldh [hBGMapMode], a
+	ld l, d
+	ld h, 0
+rept 5
+	add hl, hl
+endr
+	ld a, e
+	add l
+	ld l, a
+	adc h
+	sub l
+	ld h, a
+	ldh a, [hBGMapAddress]
+	ld e, a
+	ldh a, [hBGMapAddress + 1]
+	ld d, a
+	add hl, de
+.cell
+	call MoveIcons_WaitHBlank
+	xor a
+	ldh [rVBK], a
+	ld a, " "
+	ld [hl], a
+	ld a, 1
+	ldh [rVBK], a
+	ld a, PAL_BG_TEXT
+	ld [hli], a
+	xor a
+	ldh [rVBK], a
+	ei
+	dec b
+	jr nz, .cell
+	ret
+
 MoveStatBadges_Hide::
+; Caller has detached the visible cells; now restore the borrowed resources.
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wMoveStatBadgeTileIds)

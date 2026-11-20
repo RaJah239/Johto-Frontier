@@ -910,7 +910,7 @@ ChooseMoveToDelete:
 	ld [wSwitchMon], a
 	ld hl, w2DMenuFlags1
 	res 6, [hl]
-	farcall MoveStatBadges_Hide
+	farcall PartyMoveIcons_Close
 	call ClearSprites
 	call ClearTilemap
 	pop af
@@ -974,7 +974,7 @@ MoveScreenLoop:
 	jr .joy_loop
 
 .moving_move
-	farcall MoveStatBadges_Hide
+	farcall PartyMoveIcons_Close
 	ld a, " "
 	hlcoord 1, 11
 	ld bc, 5
@@ -1020,7 +1020,7 @@ MoveScreenLoop:
 	jmp z, .joy_loop
 	ld de, SFX_SWITCH_POCKETS
 	call PlaySFX
-	farcall MoveStatBadges_Hide
+	farcall PartyMoveIcons_Close
 	jmp MoveScreenLoop
 
 .d_left
@@ -1037,7 +1037,7 @@ MoveScreenLoop:
 	jmp z, .joy_loop
 	ld de, SFX_SWITCH_POCKETS
 	call PlaySFX
-	farcall MoveStatBadges_Hide
+	farcall PartyMoveIcons_Close
 	jmp MoveScreenLoop
 
 .cycle_right
@@ -1152,7 +1152,7 @@ MoveScreenLoop:
 	ld [wSwappingMove], a
 	ld hl, w2DMenuFlags1
 	res 6, [hl]
-	farcall MoveStatBadges_Hide
+	farcall PartyMoveIcons_Close
 	call ClearSprites
 	jmp ClearTilemap
 
