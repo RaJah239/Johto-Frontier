@@ -710,12 +710,8 @@ PartyMoveIcons_Close::
 	jp MoveStatBadges_Hide
 
 MoveDetailsIcons_Close::
-; The tutor/reminder list places its type/category icons one row higher.
-	call MoveStatBadges_DetachBG
-	lb de, 11, 10
-	ld b, MOVE_ICON_TILES
-	call MoveIcons_ClearVisibleCells
-	jp MoveStatBadges_Hide
+; The party, tutor and reminder screens now share the same coordinates.
+	jp PartyMoveIcons_Close
 
 MoveStatBadges_DetachBG:
 ; The visible map must stop using the borrowed tile IDs before RestoreTiles.

@@ -6,7 +6,7 @@ MoveDetailsMenu_SetupScreen:
 
 	; build the list frame and reserve space for the title row
 	hlcoord 0, 0
-	lb bc, 9, 18
+	lb bc, 11, 18
 	call TextboxBorder
 	hlcoord 2, 0
 	lb bc, 1, 16
@@ -223,26 +223,19 @@ MoveDetailsMenu_PrintPP:
 	ld [hl], a
 	ret
 
-MoveDetailsMenu_FixCancelBorder:
-	hlcoord 0, 9
-	ld [hl], "│"
-	inc hl
-	ret
-
 DEF MOVE_DETAILS_ICON_PAL EQU 6 ; the screen only uses palette 7
 
 MoveDetailsMenu_PrintMoveDetails:
 	xor a
 	ldh [hBGMapMode], a
-	hlcoord 0, 10
-	lb bc, 6, 18
+	hlcoord 0, 12
+	lb bc, 4, 18
 	call TextboxBorder
 
 	ld a, [wMenuSelection]
 	cp -1
 	jr nz, .move
 	farcall MoveDetailsIcons_Close
-	call MoveDetailsMenu_FixCancelBorder
 	farjp MoveIcons_CommitPage
 .move
 
@@ -253,22 +246,16 @@ MoveDetailsMenu_PrintMoveDetails:
 	ret z
 	dec a
 	ld [wCurSpecies], a
-	hlcoord 1, 14
+	hlcoord 1, 15
 	predef PrintMoveDescription
 
 	ld a, [wCurSpecies]
 	ld b, a
 	ld c, MOVE_DETAILS_ICON_PAL
-	lb de, 11, 10
+	lb de, 13, 10
 	farcall MoveIcons_Stage
 
-	hlcoord 0, 9
-	ld de, MoveDetailsMenuTypeTopString
-	call PlaceString
-	hlcoord 0, 10
-	ld de, MoveDetailsMenuTypeBottomString
-	call PlaceString
-	ld d, 10
+	ld d, $80 | 13 ; same compact stat rows as the TM pocket
 	ld e, 1
 	ld c, 5 ; palette 5 is free on this screen
 	farcall MoveStatBadges_Stage
@@ -285,7 +272,7 @@ MoveDetailsMenu_PrintMoveDetails:
 	ld [wBuffer1], a
 	ld de, wBuffer1
 	lb bc, 1, 3
-	hlcoord 5, 12
+	hlcoord 14, 14
 	call PrintNum
 	ld [hl], "<%>"
 	jr .print_accuracy
@@ -293,7 +280,7 @@ MoveDetailsMenu_PrintMoveDetails:
 .print_null_chance
 	ld de, MoveDetailsMenuNullValueString
 	ld bc, 3
-	hlcoord 5, 12
+	hlcoord 14, 14
 	call PlaceString
 
 .print_accuracy
@@ -318,7 +305,7 @@ MoveDetailsMenu_PrintMoveDetails:
 	ld [wBuffer1], a
 	ld de, wBuffer1
 	lb bc, 1, 3
-	hlcoord 5, 11
+	hlcoord 5, 14
 	call PrintNum
 	ld [hl], "<%>"
 	jr .print_power
@@ -326,7 +313,7 @@ MoveDetailsMenu_PrintMoveDetails:
 .print_null_accuracy
 	ld de, MoveDetailsMenuNullValueString
 	ld bc, 3
-	hlcoord 5, 11
+	hlcoord 5, 14
 	call PlaceString
 
 .print_power
@@ -341,18 +328,16 @@ MoveDetailsMenu_PrintMoveDetails:
 	ld [wBuffer1], a
 	ld de, wBuffer1
 	lb bc, 1, 3
-	hlcoord 5, 10
+	hlcoord 5, 13
 	call PrintNum
 	jr .commit
 
 .print_null_power
-	hlcoord 5, 10
+	hlcoord 5, 13
 	ld de, MoveDetailsMenuNullValueString
 	ld bc, 3
 	call PlaceString
 .commit
 	farjp MoveIcons_CommitPage
 
-MoveDetailsMenuTypeTopString: db "┌───────┐@"
-MoveDetailsMenuTypeBottomString: db "│       └──────────┐@"
 MoveDetailsMenuNullValueString: db "---@"
