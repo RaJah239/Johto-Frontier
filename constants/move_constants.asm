@@ -61,6 +61,7 @@
 	const DRAIN_PUNCH
 	const DREAM_EATER
 	const DRILL_PECK
+	const DYNAMICPUNCH
 	const EARTH_POWER
 	const EARTHQUAKE
 	const EMBER
@@ -70,7 +71,6 @@
 	const FACADE
 	const FAIRY_FLASH
 	const FALSE_SWIPE
-	const FEINT_ATTACK
 	const FIRE_BLAST
 	const FIRE_FANG
 	const FIRE_PUNCH

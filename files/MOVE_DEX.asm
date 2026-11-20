@@ -27,7 +27,6 @@
 | Dark     | Bite         | Physical |   60  | 100% | 25 | 30% chance to make the target flinch                                 |
 | Dark     | Crunch       | Physical |   80  | 100% | 15 | 20% chance to drop target's Defense by 1 stage                       |
 | Dark     | Dark Pulse   | Special  |   90  | 100% | 15 | 20% chance to make the target flinch                                 |
-| Dark     | Feint Attack | Physical |   60  | 100% | 20 | This move does not check accuracy                                    |
 | Dark     | Knock Off    | Physical |   65  | 100% | 20 | Removes the target's held item, 1.5× power if the item was removed   |
 | Dark     | Nasty Plot   | Other    |  ---  | ---  | 20 | Sharply raises user's Sp. Atk by 2 stages                            |
 | Dark     | Night Slash  | Physical |   70  | 100% | 20 | High critical hit ratio                                              |
@@ -83,6 +82,7 @@
 | Fighting | Close Combat | Physical |  120  | 100% |  5 | Lowers user's Defense and Sp. Def by 1 stage                         |
 | Fighting | Counter      | Physical |  ---  | 100% | 20 | Returns double the damage taken from a physical attack               |
 | Fighting | Cross Chop   | Physical |   80  | 100% | 15 | High critical hit ratio                                              |
+| Fighting | Dynamic Punch| Physical |  100  |  50% |  5 | An attack that always confuses                                       |
 | Fighting | Drain Punch  | Physical |   75  | 100% | 15 | User recovers 50% of the damage dealt                                |
 | Fighting | Focus Blast  | Special  |  120  |  70% | 10 | 30% chance to drop target's Sp. Def by 1 stage                       |
 | Fighting | Hi-Jump Kick | Physical |  120  |  95% | 10 | User takes damage if it misses                                       |

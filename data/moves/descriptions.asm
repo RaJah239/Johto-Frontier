@@ -56,6 +56,7 @@ MoveDescriptions::
 	dw DrainPunchDescription
 	dw DreamEaterDescription
 	dw DrillPeckDescription
+	dw DynamicPunchDescription
 	dw EarthPowerDescription
 	dw EarthquakeDescription
 	dw EmberDescription
@@ -65,7 +66,6 @@ MoveDescriptions::
 	dw FacadeDescription
 	dw FairyFlashDescription
 	dw FalseSwipeDescription
-	dw FeintAttackDescription
 	dw FireBlastDescription
 	dw FireFangDescription
 	dw FirePunchDescription
@@ -754,9 +754,9 @@ MachPunchDescription:
 	db   "A fast punch that"
 	line "lands first.@"
 
-FeintAttackDescription:
+DynamicPunchDescription:
 	db   "An attack that"
-	line "never misses.@"
+	line "always confuses.@"
 
 PsyblastDescription:
 PsyshockDescription:

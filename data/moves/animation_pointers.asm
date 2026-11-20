@@ -57,6 +57,7 @@ BattleAnimations::
 	dba BattleAnim_DrainPunch
 	dba BattleAnim_DreamEater
 	dba BattleAnim_DrillPeck
+	dba BattleAnim_Dynamicpunch
 	dba BattleAnim_EarthPower
 	dba BattleAnim_Earthquake
 	dba BattleAnim_Ember
@@ -66,7 +67,6 @@ BattleAnimations::
 	dba BattleAnim_Facade
 	dba BattleAnim_FairyFlash
 	dba BattleAnim_FalseSwipe
-	dba BattleAnim_FeintAttack
 	dba BattleAnim_FireBlast
 	dba BattleAnim_FireFang
 	dba BattleAnim_FirePunch

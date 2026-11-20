@@ -185,7 +185,7 @@ MoveTable:
 	db PROTECT      ; b6
 	db MACH_PUNCH   ; b7
 	db SCARY_FACE   ; b8
-	db FEINT_ATTACK ; b9
+	db DYNAMICPUNCH ; b9
 	db EARTH_POWER  ; ba
 	db SLUDGE_BOMB  ; bc
 	db MUD_SLAP     ; bd
