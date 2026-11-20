@@ -201,6 +201,8 @@ _MoveInfoBox:
 
 ; print move's accuracy
 .place_accuracy
+	farcall NoGuardCheck
+	jr c, .perfect_accuracy
 	ld a, [wCurSpecies]
 	ld bc, MOVE_LENGTH
 
@@ -213,6 +215,7 @@ _MoveInfoBox:
 	call IsInByteArray
 	jr nc, .imperfect
 
+.perfect_accuracy
 	ld de, .nopower_string
 	ld bc, 3
 	hlcoord 6, 10
