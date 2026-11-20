@@ -29,7 +29,20 @@ FindItemInBallScript::
 	end
 
 .FoundItemText:
+	text_asm
+	ld hl, .SingleItemText
+	ld a, [wItemBallQuantity]
+	cp 2
+	ret c
+	ld hl, .MultipleItemsText
+	ret
+
+.SingleItemText:
 	text_far _FoundItemText
+	text_end
+
+.MultipleItemsText:
+	text_far _FoundMultipleItemsText
 	text_end
 
 .TryReceiveItem:

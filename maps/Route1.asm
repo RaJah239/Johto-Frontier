@@ -223,7 +223,7 @@ Route1Sign2Text:
 	done
 
 Route1Potion:
-	itemball POTION
+	itemball POTION, 3
 
 Route1PinkApricornTree:
 	setval PNK_APRICORN

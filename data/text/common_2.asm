@@ -407,6 +407,15 @@ _FoundItemText::
 	text "!"
 	done
 
+_FoundMultipleItemsText::
+	text "<PLAYER> found"
+	line "@"
+	text_decimal wItemBallQuantity, 1, 3
+	text "× @"
+	text_ram wStringBuffer3
+	text "!"
+	done
+
 _WhitedOutText::
 	text "<PLAYER> is out of"
 	line "useable #mon!"
