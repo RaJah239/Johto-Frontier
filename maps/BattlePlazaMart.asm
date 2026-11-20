@@ -375,8 +375,8 @@ BattlePlazaMartTutorScript:
 ; Nothing hovered: redraw the box empty so the last move's stats do
 ; not linger once Cancel is highlighted.
     farcall PlazaMoveIcons_Close
-    hlcoord 0, 11
-	lb bc, 5, SCREEN_WIDTH - 2
+    hlcoord 0, 12
+	lb bc, 4, SCREEN_WIDTH - 2
     call Textbox
     farjp MoveIcons_CommitPage
 
