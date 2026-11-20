@@ -8,11 +8,7 @@ INCLUDE "engine/battle/ai/layers/ai_final_attack.asm"
 INCLUDE "engine/battle/ai/layers/ai_smart_switch.asm"
 INCLUDE "engine/battle/ai/layers/ai_none.asm"
 
-; unused layers
-INCLUDE "engine/battle/ai/layers/ai_offensive.asm"
-
 INCLUDE "engine/battle/ai/ability_lists.asm"
-
 INCLUDE "data/battle/ai/status_only_effects.asm"
 
 BoostingMoveEffects:
