@@ -3,7 +3,6 @@ CriticalHitMoves:
 	db LEAF_BLADE
 	db SLASH
 	db AEROBLAST
-	db CROSS_CHOP
 	db THROAT_CHOP
 	db NIGHT_SLASH
 	db STONE_EDGE

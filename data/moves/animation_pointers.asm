@@ -35,7 +35,6 @@ BattleAnimations::
 	dba BattleAnim_ConfuseRay
 	dba BattleAnim_Confusion
 	dba BattleAnim_Counter
-	dba BattleAnim_CrossChop
 	dba BattleAnim_Crunch
 	dba BattleAnim_Curse
 	dba BattleAnim_Cut
@@ -111,6 +110,7 @@ BattleAnimations::
 	dba BattleAnim_IcicleCrash
 	dba BattleAnim_IcyWind
 	dba BattleAnim_IronBash
+	dba BattleAnim_IronDukes
 	dba BattleAnim_IronHead
 	dba BattleAnim_KarateChop
 	dba BattleAnim_KingsShield

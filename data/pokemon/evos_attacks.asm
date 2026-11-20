@@ -302,7 +302,6 @@ DonphanEvosAttacks:
 	db 1, BODY_PRESS
 	db 1, BULK_UP
 	db 1, COUNTER
-	db 1, CROSS_CHOP
 	db 1, CLOSE_COMBAT
 	db 0 ; no more level-up moves
 

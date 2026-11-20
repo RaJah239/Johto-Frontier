@@ -532,7 +532,6 @@ PunchingMoves:
 	db -1 ; end
 
 SharpMoves:
-	db CROSS_CHOP
 	db CUT
 	db DRAGON_CLAW
 	db LEAF_BLADE

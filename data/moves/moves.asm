@@ -47,7 +47,6 @@ Moves:
 	move CONFUSE_RAY,  EFFECT_CONFUSE,             0, GHOST,         STATUS,   100, 10,   0
 	move CONFUSION,    EFFECT_CONFUSE_HIT,        50, PSYCHIC_TYPE,  SPECIAL,  100, 20,  10
 	move COUNTER,      EFFECT_COUNTER,             1, FIGHTING,      PHYSICAL, 100, 20,   0
-	move CROSS_CHOP,   EFFECT_NORMAL_HIT,         80, FIGHTING,      PHYSICAL, 100, 15,   0
 	move CRUNCH,       EFFECT_DEFENSE_DOWN_HIT,   80, DARK,          PHYSICAL, 100, 15,  20
 	move CURSE,        EFFECT_CURSE,               0, CURSE_TYPE,    STATUS,   100, 10,   0
 	move CUT,          EFFECT_NORMAL_HIT,         55, STEEL,         PHYSICAL, 100, 30,   0
@@ -123,6 +122,7 @@ Moves:
 	move ICICLE_CRASH, EFFECT_FLINCH_HIT,         90, ICE,           PHYSICAL, 100, 10,  30
 	move ICY_WIND,     EFFECT_SPEED_DOWN_HIT,     60, ICE,           SPECIAL,  100, 15, 100
 	move IRON_BASH,    EFFECT_BODY_PRESS,         80, STEEL,         PHYSICAL, 100, 10,   0
+	move IRON_DUKES,   EFFECT_DOUBLE_HIT,         60, STEEL,         PHYSICAL, 100, 10,   0
 	move IRON_HEAD,    EFFECT_FLINCH_HIT,         80, STEEL,         PHYSICAL, 100, 15,  30
 	move KARATE_CHOP,  EFFECT_NORMAL_HIT,         50, FIGHTING,      PHYSICAL, 100, 25,   0
 	move KINGS_SHIELD, EFFECT_KINGS_SHIELD,        0, STEEL,         STATUS,   100, 15,   0

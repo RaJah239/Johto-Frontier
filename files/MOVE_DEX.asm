@@ -81,7 +81,6 @@
 | Fighting | Bulk Up      | Other    |  ---  | ---  | 20 | Raises user's Attack and Defense by 1 stage                          |
 | Fighting | Close Combat | Physical |  120  | 100% |  5 | Lowers user's Defense and Sp. Def by 1 stage                         |
 | Fighting | Counter      | Physical |  ---  | 100% | 20 | Returns double the damage taken from a physical attack               |
-| Fighting | Cross Chop   | Physical |   80  | 100% | 15 | High critical hit ratio                                              |
 | Fighting | Dynamic Punch| Physical |  100  |  50% |  5 | An attack that always confuses                                       |
 | Fighting | Drain Punch  | Physical |   75  | 100% | 15 | User recovers 50% of the damage dealt                                |
 | Fighting | Focus Blast  | Special  |  120  |  70% | 10 | 30% chance to drop target's Sp. Def by 1 stage                       |
@@ -318,6 +317,7 @@
 | Steel    | Cut          | Physical |   55  | 100% | 30 | High critical hit ratio                                              |
 | Steel    | Flash Cannon | Special  |   90  | 100% | 15 | 20% chance to drop target's Sp. Def by 1 stage                       |
 | Steel    | Iron Bash    | Physical |   80  | 100% | 10 | Deals damage based on user's Defense instead of Attack stat          |
+| Steel    | Iron Dukes   | Physical |   60  | 100% | 10 | Hits twice and may flinch the target                                 |
 | Steel    | Iron Head    | Physical |   80  | 100% | 15 | 30% chance to make the target flinch                                 |
 | Steel    | King's Shield| Other    |  ---  | ---  | 15 | Sharply lowers attacker's Attack if it makes contact                 |
 | Steel    | Metal Claw   | Physical |   50  | 100% | 30 | 10% chance to raise user's Attack by 1 stage                         |

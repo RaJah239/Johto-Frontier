@@ -237,7 +237,7 @@ MoveTable:
 	db HAIL         ; eb
 	db X_SCISSOR    ; ec
 	db HIDDEN_POWER ; ed
-	db CROSS_CHOP   ; ee
+	db IRON_DUKES   ; ee
 	db DRAGON_CLAW  ; ef
 	db RAIN_DANCE   ; f0
 	db SUNNY_DAY    ; f1

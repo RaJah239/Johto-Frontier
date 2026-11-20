@@ -34,7 +34,6 @@ MoveDescriptions::
 	dw ConfuseRayDescription
 	dw ConfusionDescription
 	dw CounterDescription
-	dw CrossChopDescription
 	dw CrunchDescription
 	dw CurseDescription
 	dw CutDescription
@@ -110,6 +109,7 @@ MoveDescriptions::
 	dw IcicleCrashDescription
 	dw IcyWindDescription
 	dw IronBashDescription
+	dw IronDukesDescription
 	dw IronHeadDescription
 	dw KarateChopDescription
 	dw KingsShieldDescription
@@ -283,10 +283,13 @@ UTurnDescription:
 	db   "Attacks, then swap"
 	line "out if possible.@"
 
+IronDukesDescription:
+	db   "Hits twice and may"
+	line "flinch target.@"
+
 CutDescription:
 StoneEdgeDescription:
 ThroatChopDescription:
-CrossChopDescription:
 LeafBladeDescription:
 NightSlashDescription:
 SlashDescription:

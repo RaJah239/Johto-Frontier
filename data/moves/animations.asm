@@ -1403,9 +1403,6 @@ BattleAnim_Gust:
 
 BattleAnim_ThroatChop:
 	anim_call BattleAnim_InvertScreenColoursSub
-	; fallthrough
-
-BattleAnim_CrossChop:
 	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_GRAY
 	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_FIRE
 	anim_3gfx BATTLE_ANIM_GFX_CUT, BATTLE_ANIM_GFX_CHOP, BATTLE_ANIM_GFX_HIT
@@ -1429,6 +1426,21 @@ BattleAnim_CrossChop:
  	anim_wait 32
  	anim_setobjpal PAL_BATTLE_OB_GRAY, PAL_BTLCUSTOM_GRAY
  	anim_setobjpal PAL_BATTLE_OB_BLUE, PAL_BTLCUSTOM_BLUE
+	anim_ret
+
+BattleAnim_IronDukes:
+	anim_1gfx BATTLE_ANIM_GFX_HIT
+	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $40, $2, $0
+	anim_wait 48
+	anim_bgeffect BATTLE_BG_EFFECT_FLASH_INVERTED, $0, $8, $3
+.loop
+	anim_sound 0, 1, SFX_MEGA_PUNCH
+	anim_obj BATTLE_ANIM_OBJ_PUNCH, 136, 56, $0
+	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 56, $0
+	anim_wait 6
+	anim_obj BATTLE_ANIM_OBJ_PUNCH, 136, 56, $0
+	anim_wait 6
+	anim_loop 3, .loop
 	anim_ret
 
 BattleAnim_Explosion:

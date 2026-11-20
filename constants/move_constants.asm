@@ -39,7 +39,6 @@
 	const CONFUSE_RAY
 	const CONFUSION
 	const COUNTER
-	const CROSS_CHOP
 	const CRUNCH
 	const CURSE
 	const CUT
@@ -115,6 +114,7 @@
 	const ICICLE_CRASH
 	const ICY_WIND
 	const IRON_BASH
+	const IRON_DUKES
 	const IRON_HEAD
 	const KARATE_CHOP
 	const KINGS_SHIELD
