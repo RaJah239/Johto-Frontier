@@ -1507,6 +1507,22 @@ ReInitBG_PackPocket: ; needed when switching from TM Pocket
 	ld bc, 5
 	xor a
 	call ByteFill
+; Publish this attribute strip too: the next scrolling menu can copy only
+; tile IDs when overworld sprite updates are disabled, leaving the TM
+; textbox palette visible under the restored blue/pink background tiles.
+	ld a, 1
+	ldh [rVBK], a
+	ld hl, 11 * BG_MAP_WIDTH
+	ldh a, [hBGMapAddress]
+	ld e, a
+	ldh a, [hBGMapAddress + 1]
+	ld d, a
+	add hl, de
+	ld de, wAttrmap + 11 * SCREEN_WIDTH
+	lb bc, BANK(ReInitBG_PackPocket), 1
+	call Get2bppViaHDMA ; one aligned 16-byte strip in the attribute map
+	xor a
+	ldh [rVBK], a
 ; Background (blue if male, pink if female)
 	hlcoord 0, 1
 	ld bc, 11 * SCREEN_WIDTH
