@@ -3140,10 +3140,13 @@ wBattleEvolutionMusic:: ds wMapMusic - wMusicPlaying
 
 SECTION "Attributes", WRAMX
 
-; The current tileset's metatile attribute table (up to 128 blocks),
+; The current tileset's metatile attribute table (up to 137 blocks),
 ; decompressed by the DecompressMetatiles mapsetup command.
 ; Placed at $d200 in bank 2 by layout.link, after "Pic Animations".
-wDecompressedAttributes:: ds 128 * 16
+; Johto and Johto Modern each have 137 blocks. Reserving only 128 let
+; their final nine blocks overwrite the move-icon state and tile backups.
+wDecompressedAttributes:: ds 137 * 16
+wDecompressedAttributesEnd::
 
 
 SECTION "GBC Video", WRAMX, ALIGN[8]
