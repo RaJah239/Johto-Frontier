@@ -302,7 +302,30 @@ SaveOptions:
 	ld a, [wOptions]
 	and ~(1 << NO_TEXT_SCROLL)
 	ld [sOptions], a
+	ld hl, sOptions5
+	call SaveOptions5
 	jmp CloseSRAM
+
+SaveOptions5:
+; Write wOptions5 and a check byte (the value xor OPTIONS5_CHECK) to the
+; save slot at hl. The slot's SRAM bank must be open.
+	ld a, [wOptions5]
+	ld [hli], a
+	xor OPTIONS5_CHECK
+	ld [hl], a
+	ret
+
+LoadOptions5:
+; Restore wOptions5 from the save slot at hl, unless the check byte is
+; wrong (a save from before this was stored: keep the default, all off).
+	ld a, [hli]
+	ld b, a
+	xor OPTIONS5_CHECK
+	cp [hl]
+	ret nz
+	ld a, b
+	ld [wOptions5], a
+	ret
 
 SavePlayerData:
 	ld a, BANK(sPlayerData)
@@ -392,6 +415,8 @@ SaveBackupOptions:
 	ld de, sBackupOptions
 	ld bc, wOptionsEnd - wOptions
 	call CopyBytes
+	ld hl, sBackupOptions5
+	call SaveOptions5
 	jmp CloseSRAM
 
 SaveBackupPlayerData:
@@ -552,6 +577,8 @@ TryLoadSaveData:
 	ld de, wOptions
 	ld bc, wOptionsEnd - wOptions
 	call CopyBytes
+	xor a
+	ld [wOptions5], a
 	jmp ClearClock
 
 INCLUDE "data/default_options.asm"
@@ -569,6 +596,8 @@ CheckPrimarySaveFile:
 	ld de, wOptions
 	ld bc, wOptionsEnd - wOptions
 	call CopyBytes
+	ld hl, sOptions5
+	call LoadOptions5
 	call CloseSRAM
 	ld a, TRUE
 	ld [wSaveFileExists], a
@@ -588,6 +617,8 @@ CheckBackupSaveFile:
 	ld de, wOptions
 	ld bc, wOptionsEnd - wOptions
 	call CopyBytes
+	ld hl, sBackupOptions5
+	call LoadOptions5
 	ld a, $2
 	ld [wSaveFileExists], a
 .nope

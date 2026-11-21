@@ -1423,13 +1423,14 @@ wOptions4::
 ; bit 7: nicknaming
 	db
 
+wOptionsEnd::
+
 wOptions5::
 ; bit 0: skip bicycle music
 ; bit 1: skip recoil text
 ; bit 2: skip surf music
 ; bit 3: bike turn speed
-
-wOptionsEnd::
+	db
 
 ; Time buffer, for counting the amount of time since
 ; an event began.

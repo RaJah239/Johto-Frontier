@@ -102,7 +102,10 @@ sBackupBagCursors::
 sBackupBagCursorCheck:: db
 sBackupBagCursorData:: ds BAG_CURSORS_LENGTH
 
-	ds $186 - (2 + MAX_MON_PAL_OVERRIDES * MON_PAL_OVERRIDE_SIZE) - (1 + BAG_CURSORS_LENGTH)
+; wOptions5 and its check byte (see SaveOptions5).
+sBackupOptions5:: ds 2
+
+	ds $186 - (2 + MAX_MON_PAL_OVERRIDES * MON_PAL_OVERRIDE_SIZE) - (1 + BAG_CURSORS_LENGTH) - 2
 
 sBackupChecksum:: dw
 
@@ -146,7 +149,10 @@ sBagCursors::
 sBagCursorCheck:: db
 sBagCursorData:: ds BAG_CURSORS_LENGTH
 
-	ds $186 - (2 + MAX_MON_PAL_OVERRIDES * MON_PAL_OVERRIDE_SIZE) - (1 + BAG_CURSORS_LENGTH)
+; wOptions5 and its check byte (see SaveOptions5).
+sOptions5:: ds 2
+
+	ds $186 - (2 + MAX_MON_PAL_OVERRIDES * MON_PAL_OVERRIDE_SIZE) - (1 + BAG_CURSORS_LENGTH) - 2
 
 sChecksum:: dw
 
