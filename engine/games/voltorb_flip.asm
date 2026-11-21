@@ -10,6 +10,7 @@
 ;c420 2 and 3 cards left (for the "are you sure?" jingle)
 ;c421 the mark a held B + one direction will toggle (VF_ARMED_MARK_DIR)
 ;c422 cursor in the YES/NO box: 0 YES, 1 NO (VF_YES_NO_CURSOR)
+;c423 wOptions3 as it was on entry (VF_SAVED_OPTIONS3)
 ;c440-c449 total numbers for row/col
 ;c450-c459 total voltorb for row/col
 ;c498 coins collected this game
@@ -40,6 +41,7 @@
 
 DEF VF_ARMED_MARK_DIR EQU $c421 ; a direction pressed alone while B is held
 DEF VF_YES_NO_CURSOR EQU $c422 ; 0 YES, 1 NO
+DEF VF_SAVED_OPTIONS3 EQU $c423 ; wOptions3 on entry: Turbo B is off in here
 DEF VF_BOX_TOP EQU 7 ; the YES/NO box and the question cover rows 7-17
 DEF VF_BOX_BYTES EQU (SCREEN_HEIGHT - VF_BOX_TOP) * SCREEN_WIDTH
 ; The boxes borrow palette 4 (white, black text): it only colours the blue
@@ -67,6 +69,15 @@ VoltorbFlip::;this is where the magic happens
 	call LoadFontsExtra ; textbox frame
 	call VFLoadPalette
 	call VFInitRAM
+
+	; Turbo B would let go of a held B every other 4 frames, and a direction
+	; pressed then moves the cursor instead of placing a mark: switch it
+	; off while playing (VFExit puts the option back).
+	ld a, [wOptions3]
+	ld [VF_SAVED_OPTIONS3], a
+	res TURBO_B_BUTTON, a
+	ld [wOptions3], a
+
 	call VFInitMap
 	ld hl, rLCDC
 	set 7, [hl]
@@ -1817,5 +1828,7 @@ VFExit:
 	ldh [rIE], a
 	xor a
 	ldh [hOAMUpdate], a ;enable sprite update
+	ld a, [VF_SAVED_OPTIONS3]
+	ld [wOptions3], a
 	pop af
 	ret
