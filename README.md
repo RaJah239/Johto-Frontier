@@ -21,6 +21,3 @@ Ongoing Open World Johto region only game where you can do whatever you want, wh
 
 
 # [Credits](https://github.com/RaJah239/Johto-Frontier/blob/000-Johto-Frontier/files/CREDITS.md)
-
-# Known Bugs
-- Autofire A next to water when trying to Surf can cause the player to immediately exit the text. (60 fps bug)
