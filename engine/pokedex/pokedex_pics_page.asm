@@ -233,7 +233,10 @@ ELSE
  	ld bc, SCREEN_WIDTH - 1
 	call ByteFill
 	
-; up/down arrows	
+; up/down arrows (none when opened from the party menu)
+	ldh a, [hDexDirectEntry]
+	and a
+	jr nz, .no_updown_arrows
 	hlcoord 19, 0
 	ld [hl], $3f
 	; inc hl
@@ -241,6 +244,7 @@ ELSE
 	hlcoord 19, 17
 	ld [hl], $40
 
+.no_updown_arrows
 ; ribbons for name/caught/shiny
 	; above species name
 	hlcoord 0, 10

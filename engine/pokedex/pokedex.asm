@@ -46,6 +46,7 @@ Pokedex:
 
 	xor a
 	ldh [hMapAnims], a
+	ldh [hDexDirectEntry], a
 	call InitPokedex
 	call DelayFrame
 
@@ -69,6 +70,7 @@ Pokedex:
 
 	xor a
  	ld [wPokedexShinyToggle], a
+	ldh [hDexDirectEntry], a
 
 	pop af
 	ldh [hInMenu], a
@@ -128,6 +130,8 @@ Pokedex_DirectEntry::
 	ld [wPrevDexEntry], a
 	call Pokedex_InitCursorPosition
 
+	ld a, TRUE
+	ldh [hDexDirectEntry], a
 	call DelayFrame
 	jmp Pokedex.main
 
@@ -1562,6 +1566,9 @@ endr
 	ret
 
 Pokedex_NextOrPreviousDexEntry:
+	ldh a, [hDexDirectEntry]
+	and a
+	ret nz ; (nc) opened from the party menu: stay on this entry
 	ld a, [wDexListingCursor]
 	ld [wBackupDexListingCursor], a
 	ld a, [wDexListingScrollOffset]
@@ -1800,11 +1807,16 @@ Pokedex_DrawDexEntryScreenBG:
  	ld de, wTempSpecies
  	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
  	call PrintNum
- ; up/down arrow indicators
+ ; up/down arrow indicators (none when opened from the party menu)
+ 	ldh a, [hDexDirectEntry]
+ 	and a
+ 	jr nz, .no_updown_arrows
  	hlcoord 19, 0
  	ld [hl], $3f
  	hlcoord 19, 16
  	ld [hl], $40
+ 
+.no_updown_arrows
  ; place bottom row menu
 	hlcoord 0, 17
 	ld de, .MenuItems

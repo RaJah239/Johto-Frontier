@@ -187,6 +187,8 @@ hDecompressedTileset:: db
 ; Kept apart from the save-backed Random so falling rain doesn't use it up.
 hWeatherRandom:: dw
 
-	ds 3
+hDexDirectEntry:: db
+
+	ds 2
 
 ENDSECTION
