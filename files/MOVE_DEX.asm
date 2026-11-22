@@ -319,7 +319,7 @@
 | Steel    | Iron Bash    | Physical |   80  | 100% | 10 | Deals damage based on user's Defense instead of Attack stat          |
 | Steel    | Iron Dukes   | Physical |   60  | 100% | 10 | Hits twice and may flinch the target                                 |
 | Steel    | Iron Head    | Physical |   80  | 100% | 15 | 30% chance to make the target flinch                                 |
-| Steel    | King's Shield| Other    |  ---  | ---  | 15 | Sharply lowers attacker's Attack if it makes contact                 |
+| Steel    | King's Shield| Other    |  ---  | ---  | 15 | Protect's effect plus raising Def and Sp.Def by 2 es                 |
 | Steel    | Metal Claw   | Physical |   50  | 100% | 30 | 10% chance to raise user's Attack by 1 stage                         |
 | Steel    | Meteor Mash  | Physical |  100  |  90% | 10 | 20% chance to raise user's Attack by 1 stage                         |
 | Steel    | Mirror Shot  | Special  |   60  | 100% | 20 | 10% chance to lower target's Accuracy                                |
