@@ -93,7 +93,14 @@ GGDungeonBagKeyItemsEnd:
 
 GGDungeonBag_Exit::
 ; Throw away the dungeon bag and give the player's own bag back. Does
-; nothing if no bag is stashed (e.g. a run saved before this existed).
+; nothing if no bag is stashed (e.g. a run saved before this existed)
+
+;	put the Music Player's overworld and battle music back to default
+	xor a
+	ld [wPersistentBattleMusicOverride], a
+	ld [wPersistentBattleMusicOverride + 1], a
+	ld [wOverworldMusicOverride], a
+
 	ldh a, [rSVBK]
 	push af
 
