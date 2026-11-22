@@ -25,7 +25,6 @@ TypeMatchups:
 	db ELECTRIC,     FLYING,       SUPER_EFFECTIVE
 	db ELECTRIC,     DRAGON,       NOT_VERY_EFFECTIVE
 	db GRASS,        FIRE,         NOT_VERY_EFFECTIVE
-	db GRASS,        ICE,          NOT_VERY_EFFECTIVE
 	db GRASS,        WATER,        SUPER_EFFECTIVE
 	db GRASS,        GRASS,        NOT_VERY_EFFECTIVE
 	db GRASS,        POISON,       NOT_VERY_EFFECTIVE
