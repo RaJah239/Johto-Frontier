@@ -43,6 +43,13 @@ ChooseMoveToLearn::
 OpenAllMovesDetailsScreen::
 	ld hl, MoveDetailsMenuAllMovesHeader
 	call MoveDetailsMenu_SetupScreen
+
+	; no title on this screen: close the gap SetupScreen left in the top border
+	hlcoord 2, 0
+	ld bc, 16
+	ld a, "─"
+	call ByteFill
+
 	ld a, HP_GREEN
 	ld [wPlayerHPPal], a
 	; fallthrough
