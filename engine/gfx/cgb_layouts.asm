@@ -727,6 +727,12 @@ ENDC
 	ldh [hCGBPalUpdate], a
 	ret
 
+PokedexGrayPalette:
+	RGB 31, 31, 31
+	RGB 27, 27, 27
+	RGB 23, 23, 23 ; DexGridPalGrid's line gray (the screen background)
+	RGB  0,  0,  0
+
 PokedexLightPalette:
 ; the dex entry screen's interface: text, accent, frame, panels
 	RGB  0,  0,  0
@@ -1123,8 +1129,7 @@ _CGB_MoveList:
 
 _CGB_PokedexSearchOption:
 	ld de, wBGPals1
-	ld a, PREDEFPAL_POKEDEX
-	call GetPredefPal
+	ld hl, PokedexGrayPalette
 	call LoadHLPaletteIntoDE
 	call WipeAttrmap
 	call ApplyAttrmap
