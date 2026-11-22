@@ -854,6 +854,12 @@ INCLUDE "gfx/overworld/rocket_battle.pal"
 	ret z
 	cp GREEN
 	ret z
+
+	; nurse
+	ld de, NurseTransition
+	cp NURSE
+	ret z
+
 	ld de, PokeBallTransition
 	ret
 
@@ -1274,6 +1280,27 @@ opt b.X ; . = 0, X = 1
 	bigdw %XX............XX
 	bigdw %XXXXXXXXXXXXXXXX
 	bigdw %XXXXXXXXXXXXXXXX
+	bigdw %................
+	bigdw %................
+popo
+
+NurseTransition:
+pusho
+opt b.X ; . = 0, X = 1
+	bigdw %................
+	bigdw %................
+	bigdw %......XXXX......
+	bigdw %......XXXX......
+	bigdw %......XXXX......
+	bigdw %..XXXXXXXXXXXX..
+	bigdw %..XXXXXXXXXXXX..
+	bigdw %..XXXXXXXXXXXX..
+	bigdw %..XXXXXXXXXXXX..
+	bigdw %..XXXXXXXXXXXX..
+	bigdw %..XXXXXXXXXXXX..
+	bigdw %......XXXX......
+	bigdw %......XXXX......
+	bigdw %......XXXX......
 	bigdw %................
 	bigdw %................
 popo
