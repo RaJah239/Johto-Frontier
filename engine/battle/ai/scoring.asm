@@ -90,7 +90,29 @@ AIDamageCalc:
 .notconstant
 	callfar EnemyAttackDamage
 	callfar BattleCommand_DamageCalc
-	farjp BattleCommand_Stab
+	callfar BattleCommand_Stab
+	; fallthrough
+
+AI_ApplyDoubleHit:
+; Double the enemy's estimated damage for two-hit moves (Iron Dukes).
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	cp EFFECT_DOUBLE_FLINCH_HIT
+	ret nz
+	push hl
+	ld hl, wCurDamage + 1
+	ld a, [hl]
+	add a
+	ld [hld], a
+	ld a, [hl]
+	adc a
+	ld [hl], a
+	jr nc, .done
+	ld a, $ff
+	ld [hli], a
+	ld [hl], a
+.done
+	pop hl
+	ret
 
 INCLUDE "data/battle/ai/constant_damage_effects.asm"
 

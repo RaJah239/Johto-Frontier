@@ -139,6 +139,7 @@ AI_Smart_EffectHandlers:
     dbw EFFECT_TOXIC_SPIKES,     AI_Smart_ToxicSpikes
     dbw EFFECT_STICKY_WEB,       AI_Smart_StickyWeb
     dbw EFFECT_FLINCH_HIT,       AI_Smart_Flinch
+    dbw EFFECT_DOUBLE_FLINCH_HIT, AI_Smart_Flinch
     dbw EFFECT_DEFENSE_UP,       AI_Smart_LesserStatChange
     dbw EFFECT_FOCUS_ENERGY,     AI_Smart_LesserStatChange
     dbw EFFECT_SAFEGUARD,        AI_Smart_LesserStatChange
@@ -3384,6 +3385,7 @@ AI_Smart_PriorityHit:
 	callfar EnemyAttackDamage
 	callfar BattleCommand_DamageCalc
 	callfar BattleCommand_Stab
+	callfar AI_ApplyDoubleHit
 	pop hl
 	ld a, [wCurDamage + 1]
 	ld c, a

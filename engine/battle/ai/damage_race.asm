@@ -79,6 +79,7 @@ DamageRace_EnemyMaxDamage:
 	callfar EnemyAttackDamage
 	callfar BattleCommand_DamageCalc
 	callfar BattleCommand_Stab
+	callfar AI_ApplyDoubleHit
 	call DamageRace_KeepMax
 .next
 	pop bc
