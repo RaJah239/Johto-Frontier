@@ -1693,6 +1693,8 @@ ExpCandyEffect:
 	ld a, [wStringBuffer2 + 4]
 	ld [hl], a
 .got_exp
+	call Play_SFX_FULL_HEAL
+	
 	ld hl, ExpCandyGainedText
 	call PrintText
 
