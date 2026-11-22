@@ -16,10 +16,6 @@ FindFirstAliveMonAndStartBattle:
 	ldh [hMapAnims], a
 	call DelayFrame
 	predef DoBattleTransition
-; The screen is black from here until InitBattleDisplay slides the pics in,
-; so skip anything it redoes anyway: it reloads the battle fonts, and it
-; blanks the whole BG map in VRAM, so wTilemap only needs clearing (no
-; WaitBGMap).
 	call ClearSprites
 	hlcoord 0, 0
 	ld a, " "
