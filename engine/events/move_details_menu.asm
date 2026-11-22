@@ -91,7 +91,8 @@ MoveDetailsMenu_Run:
 .page_up
 	ld b, -1
 .page
-	ld c, 4
+	ld a, [wMenuData_ScrollingMenuHeight] ; a page is as many moves as the list shows
+	ld c, a
 	ld a, [wMenuScrollPosition]
 	bit 7, b
 	jr nz, .page_up_do
@@ -165,13 +166,13 @@ MoveDetailsMenuPartyMonData:
 
 MoveDetailsMenuAllMovesHeader:
 	db MENU_BACKUP_TILES
-	menu_coords 1, 1, SCREEN_WIDTH - 2, 9
+	menu_coords 1, 1, SCREEN_WIDTH - 2, 11 ; 5 moves, 2 rows each (the box has room down to row 11)
 	dw MoveDetailsMenuAllMovesData
 	db 1
 
 MoveDetailsMenuAllMovesData:
 	db SCROLLINGMENU_DISPLAY_ARROWS | SCROLLINGMENU_ENABLE_LEFT | SCROLLINGMENU_ENABLE_RIGHT | SCROLLINGMENU_ENABLE_FUNCTION3
-	db 4, SCREEN_WIDTH + 2
+	db 5, SCREEN_WIDTH + 2
 	db SCROLLINGMENU_ITEMS_NORMAL
 	dba MoveDetailsMenuAllMovesList
 	dba MoveDetailsMenu_PrintMoveName
