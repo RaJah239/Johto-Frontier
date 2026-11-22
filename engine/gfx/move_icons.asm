@@ -298,6 +298,33 @@ MoveIcons_LoadBGTiles:
 	ld b, BANK(vTiles2)
 	jmp MoveIcons_SendTiles
 
+PlazaMoveStatBadges_Stage::
+; Borrow a free palette just like the Battle Plaza's move icons do.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wMoveStatBadgeTileIds)
+	ldh [rSVBK], a
+	ld a, [wMoveStatBadgeActive]
+	and a
+	jr nz, .reuse_palette
+	call MoveStatBadges_FindFreePalette
+	jr nc, .have_palette
+	ld a, PAL_BG_ROOF ; same fallback used by PlazaMoveIcons_Stage
+	ld c, a
+	jr .show
+.have_palette
+	ld c, a
+	jr .show
+.reuse_palette
+	ld a, [wMoveStatPalette]
+	ld c, a
+.show
+	ld d, PLAZA_MOVE_ICON_Y
+	ld e, 1
+	pop af
+	ldh [rSVBK], a
+	; fallthrough
+
 MoveStatBadges_Stage::
 ; Compact POW/ACC/EFF: d = top row, e = column, c = free BG palette.
 	ldh a, [rSVBK]
@@ -330,33 +357,6 @@ MoveStatBadges_Stage::
 	pop af
 	ldh [rSVBK], a
 	ret
-
-PlazaMoveStatBadges_Stage::
-; Borrow a free palette just like the Battle Plaza's move icons do.
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wMoveStatBadgeTileIds)
-	ldh [rSVBK], a
-	ld a, [wMoveStatBadgeActive]
-	and a
-	jr nz, .reuse_palette
-	call MoveStatBadges_FindFreePalette
-	jr nc, .have_palette
-	ld a, PAL_BG_ROOF ; same fallback used by PlazaMoveIcons_Stage
-	ld c, a
-	jr .show
-.have_palette
-	ld c, a
-	jr .show
-.reuse_palette
-	ld a, [wMoveStatPalette]
-	ld c, a
-.show
-	ld d, PLAZA_MOVE_ICON_Y
-	ld e, 1
-	pop af
-	ldh [rSVBK], a
-	jmp MoveStatBadges_Stage
 
 BattleMoveStatEffBadge_Show::
 ; Every battle BG palette can be in use. Keep EFF on sprites so the
@@ -698,18 +698,6 @@ MoveStatBadges_TilemapAddress:
 	ldh [hMoveIconCol], a
 	jmp MoveIcons_TilemapAddress
 
-PartyMoveIcons_Close::
-; Detach both kinds of BG icons before returning borrowed graphics.
-	call MoveStatBadges_DetachBG
-	lb de, 13, 10
-	ld b, MOVE_ICON_TILES
-	call MoveIcons_ClearVisibleCells
-	jr MoveStatBadges_Hide
-
-MoveDetailsIcons_Close::
-; The party, tutor and reminder screens now share the same coordinates.
-	jmp PartyMoveIcons_Close
-
 MoveStatBadges_DetachBG:
 ; The visible map must stop using the borrowed tile IDs before RestoreTiles.
 	ldh a, [rSVBK]
@@ -771,6 +759,14 @@ endr
 	dec b
 	jr nz, .cell
 	ret
+
+PartyMoveIcons_Close::
+; Detach both kinds of BG icons before returning borrowed graphics.
+	call MoveStatBadges_DetachBG
+	lb de, 13, 10
+	ld b, MOVE_ICON_TILES
+	call MoveIcons_ClearVisibleCells
+	; fallthrough
 
 MoveStatBadges_Hide::
 ; Caller has detached the visible cells; now restore the borrowed resources.
@@ -1326,7 +1322,7 @@ TMHM_MoveStatBadges_SaveTiles:
 
 TMHM_MoveStatBadges_LoadTiles:
 	ld de, MoveStatBadgeGFX
-	jr TMHM_MoveStatBadges_CopyTiles
+	; fallthrough
 
 TMHM_MoveStatBadges_CopyTiles:
 	ld a, BANK(vTiles3)
@@ -1376,7 +1372,7 @@ TMHM_MoveStatBadges_RestorePalette:
 
 TMHM_MoveStatBadges_RestoreTiles:
 	ld de, wMoveStatObjTileBackup
-	jmp TMHM_MoveStatBadges_CopyTiles
+	jr TMHM_MoveStatBadges_CopyTiles
 
 MoveIcons_HideSprites:
 ; Take the icon sprites away and give OBJ palette c back.

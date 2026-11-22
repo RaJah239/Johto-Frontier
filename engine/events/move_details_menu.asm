@@ -66,14 +66,14 @@ MoveDetailsMenu_Run:
 	ld [wPutativeTMHMMove], a
 	and a
 	push af
-	farcall MoveDetailsIcons_Close
+	farcall PartyMoveIcons_Close
 	pop af
 	ret
 
 .carry
 	scf
 	push af
-	farcall MoveDetailsIcons_Close
+	farcall PartyMoveIcons_Close
 	pop af
 	ret
 
@@ -235,7 +235,7 @@ MoveDetailsMenu_PrintMoveDetails:
 	ld a, [wMenuSelection]
 	cp -1
 	jr nz, .move
-	farcall MoveDetailsIcons_Close
+	farcall PartyMoveIcons_Close
 	farjp MoveIcons_CommitPage
 .move
 
