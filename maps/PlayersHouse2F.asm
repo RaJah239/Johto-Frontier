@@ -281,6 +281,7 @@ DebugOptions:
 	ifequal 2, .FillPokedex
 	ifequal 3, .DebugPaletteEditor
 	ifequal 4, .UnownViewer
+	ifequal 5, .ViewAnimations
 	sjump .finish
 
 .MoveMenuHeader:
@@ -296,7 +297,7 @@ DebugOptions:
 	db "#dex Completed@"
 	db "Palette Editor@"
 	db "View Unown@"
-	db "Cancel@"
+	db "View Animations@"
 
 .AllBadges
 	writethistext
@@ -333,6 +334,21 @@ DebugOptions:
 	special ViewUnown
 .finish
 	endtext
+
+.ViewAnimations
+	writethistext
+		text "Use any move to"
+		line "see every move's"
+		cont "animation, A-Z."
+		done
+	yesorno
+	iffalse_endtext
+	closetext
+	special SetDebugAnimationBattle
+	loadwildmon HOOTHOOT, 5
+	startbattle
+	reloadmap
+	end
 
 .DebugPaletteEditor
 	writethistext

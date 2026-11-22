@@ -141,4 +141,5 @@ SpecialsPointers::
 if DEF(_DEBUG)
 	add_special SetAllUnownCaught
 	add_special FillPokedex
+	add_special SetDebugAnimationBattle
 endc

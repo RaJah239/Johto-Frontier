@@ -1,279 +1,339 @@
 ; ====================================
 ; === Debug Move Animation Testing ===
 ; ====================================
-IF DEF(_DEBUG) ; for testing animations
-MoveTable:
-	db ZEN_HEADBUTT ; 01
-	db KARATE_CHOP  ; 02
-	db BUG_BITE     ; 03
-	db STONE_EDGE   ; 04
-	db MOONBLAST    ; 05
-	db PLAY_ROUGH   ; 06
-	db FIRE_PUNCH   ; 07
-	db ICE_PUNCH    ; 08
-	db THUNDERPUNCH ; 09
-	db AQUA_JET     ; 0a
-	db BULK_UP      ; 0b
-	db FLASH_CANNON ; 0c
-	db AIR_SLASH    ; 0d
-	db SWORDS_DANCE ; 0e
-	db CUT          ; 0f
-	db GUST         ; 10
-	db WING_ATTACK  ; 11
-	db WHIRLWIND    ; 12
-	db FLY          ; 13
-	db ICICLE_CRASH ; 14
-	db POWER_GEM    ; 15
-	db VINE_WHIP    ; 16
-	db STOMP        ; 17
-	db ROOST        ; 18
-	db FOCUS_BLAST  ; 19
-	db STICKY_WEB   ; 1a
-	db SEED_BOMB    ; 1b
-	db DRAIN_KISS   ; 1c
-	db HEADBUTT     ; 1d
-	db HORN_ATTACK  ; 1e
-	db GIGA_IMPACT  ; 1f
-	db ROCK_TOMB    ; 20
-	db TACKLE       ; 21
-	db BODY_SLAM    ; 22
-	db WRAP         ; 23
-	db PSYBLAST     ; 24
-	db SUCKER_PUNCH ; 25
-	db DOUBLE_EDGE  ; 26
-	db DRAIN_PUNCH  ; 27
-	db POISON_STING ; 28
-	db MILK_DRINK   ; 29
-	db THRASH       ; 2a
-	db LEER         ; 2b
-	db BITE         ; 2c
-	db GROWL        ; 2d
-	db ROAR         ; 2e
-	db SING         ; 2f
-	db SUPERSONIC   ; 30
-	db NASTY_PLOT   ; 31
-	db DISABLE      ; 32
-	db ACID         ; 33
-	db EMBER        ; 34
-	db FLAMETHROWER ; 35
-	db MIST         ; 36
-	db WATER_GUN    ; 37
-	db HYDRO_PUMP   ; 38
-	db SURF         ; 39
-	db ICE_BEAM     ; 3a
-	db BLIZZARD     ; 3b
-	db PSYBEAM      ; 3c
-	db BUBBLEBEAM   ; 3d
-	db AURORA_BEAM  ; 3e
-	db HYPER_BEAM   ; 3f
-	db PECK         ; 40
-	db DRILL_PECK   ; 41
-	db CLOSE_COMBAT ; 42
-	db LOW_KICK     ; 43
-	db COUNTER      ; 44
-	db SEISMIC_TOSS ; 45
-	db ROCK_THROW   ; 46
-	db ABSORB       ; 47
-	db MEGA_DRAIN   ; 48
-	db LEECH_SEED   ; 49
-	db GROWTH       ; 4a
-	db LEAF_BLADE   ; 4b
-	db SOLARBEAM    ; 4c
-	db POISONPOWDER ; 4d
-	db STUN_SPORE   ; 4e
-	db SLEEP_POWDER ; 4f
-	db AVALANCHE    ; 50
-	db STRING_SHOT  ; 51
-	db DRAGON_RAGE  ; 52
-	db FIRE_SPIN    ; 53
-	db THUNDERSHOCK ; 54
-	db THUNDERBOLT  ; 55
-	db THUNDER_WAVE ; 56
-	db THUNDER      ; 57
-	db ROCK_BLAST   ; 58
-	db EARTHQUAKE   ; 59
-	db SPORE        ; 5a
-	db DIG          ; 5b
-	db TOXIC        ; 5c
-	db CONFUSION    ; 5d
-	db PSYCHIC_M    ; 5e
-	db HYPNOSIS     ; 5f
-	db DIVE_BOMB    ; 60
-	db AGILITY      ; 61
-	db QUICK_ATTACK ; 62
-	db IRON_HEAD    ; 63
-	db TELEPORT     ; 64
-	db NIGHT_SHADE  ; 65
-	db SCREECH      ; 67
-	db GUNK_SHOT    ; 68
-	db RECOVER      ; 69
-	db HARDEN       ; 6a
-	db THUNDER_FANG ; 6b
-	db SMOKESCREEN  ; 6c
-	db CONFUSE_RAY  ; 6d
-	db WILD_CHARGE  ; 6e
-	db DEFENSE_CURL ; 6f
-	db BARRIER      ; 70
-	db LIGHT_SCREEN ; 71
-	db HAZE         ; 72
-	db REFLECT      ; 73
-	db FOCUS_ENERGY ; 74
-	db DARK_PULSE   ; 75
-	db METRONOME    ; 76
-	db BULLDOZE     ; 77
-	db THROAT_CHOP  ; 78
-	db LICK         ; 7a
-	db POUNCE       ; 7b
-	db SLUDGE       ; 7c
-	db DISARM_VOICE ; 7d
-	db FIRE_BLAST   ; 7e
-	db WATERFALL    ; 7f
-	db BULLET_PUNCH ; 80
-	db SWIFT        ; 81
-	db NIGHT_SLASH  ; 82
-	db U_TURN       ; 83
-	db FURY_DRIVE   ; 84
-	db AMNESIA      ; 85
-	db BUG_BUZZ     ; 86
-	db SOFTBOILED   ; 87
-	db HI_JUMP_KICK ; 88
-	db ICE_SHARD    ; 89
-	db DREAM_EATER  ; 8a
-	db TAUNT        ; 8b
-	db TREMOR       ; 8c
-	db LEECH_LIFE   ; 8d
-	db LOVELY_KISS  ; 8e
-	db SKY_ATTACK   ; 8f
-	db TRANSFORM    ; 90
-	db CALM_MIND    ; 91
-	db VOLT_SWITCH  ; 92
-	db ACROBATICS   ; 93
-	db MIRROR_SHOT  ; 94
-	db SIGNAL_BEAM  ; 95
-	db SPLASH       ; 96
-	db TRICK_ROOM   ; 97
-	db FAIRY_FLASH  ; 98
-	db EXPLOSION    ; 99
-	db FURY_STRIKES ; 9a
-	db HIDDEN_FORCE ; 9b
-	db REST         ; 9c
-	db ROCK_SLIDE   ; 9d
-	db RUNIC_POWER  ; 9e
-	db FACADE       ; 9f
-	db HEX          ; a0
-	db PHOTON_BLAST ; a1
-	db SUPER_FANG   ; a2
-	db SLASH        ; a3
-	db SUBSTITUTE   ; a4
-	db STRUGGLE     ; a5
-	db SKETCH       ; a6
-	db BOOMBURST    ; a7
-	db KNOCK_OFF    ; a8
-	db SPIDER_WEB   ; a9
-	db DRAGON_DANCE ; aa
-	db TRICK        ; ab
-	db FLAME_CHARGE ; ac
-	db SLACK_OFF    ; ad
-	db CURSE        ; ae
-	db FLAIL        ; af
-	db HURRICANE    ; b0
-	db AEROBLAST    ; b1
-	db VENOSHOCK    ; b2
-	db IRON_BASH    ; b3
-	db SPITE        ; b4
-	db POWDER_SNOW  ; b5
-	db PROTECT      ; b6
-	db MACH_PUNCH   ; b7
-	db SCARY_FACE   ; b8
-	db DYNAMICPUNCH ; b9
-	db EARTH_POWER  ; ba
-	db SLUDGE_BOMB  ; bc
-	db MUD_SLAP     ; bd
-	db PSYSHOCK     ; be
-	db SPIKES       ; bf
-	db ICE_FANG     ; c0
-	db FORESIGHT    ; c1
-	db DESTINY_BOND ; c2
-	db PERISH_SONG  ; c3
-	db ICY_WIND     ; c4
-	db SAND_TOMB    ; c5
-	db DOUBLE_TEAM  ; c6
-	db FREEZE_DRY   ; c7
-	db OUTRAGE      ; c8
-	db SANDSTORM    ; c9
-	db GIGA_DRAIN   ; ca
-	db FIRE_FANG    ; cb
-	db CHARM        ; cc
-	db ROLLOUT      ; cd
-	db FALSE_SWIPE  ; ce
-	db SWAGGER      ; cf
-	db SCALD        ; d0
-	db SPARK        ; d1
-	db SHADOW_PUNCH ; d2
-	db STEEL_WING   ; d3
-	db MEAN_LOOK    ; d4
-	db ATTRACT      ; d5
-	db SLEEP_TALK   ; d6
-	db HEAL_BELL    ; d7
-	db RETURN       ; d8
-	db DEFOG        ; d9
-	db AURA_SPHERE  ; da
-	db SAFEGUARD    ; db
-	db PAIN_SPLIT   ; dc
-	db SACRED_FIRE  ; dd
-	db QUIVER_DANCE ; de
-	db METEOR_MASH  ; df
-	db MEGAHORN     ; e0
-	db DRAGON_PULSE ; e1
-	db BATON_PASS   ; e2
-	db ENCORE       ; e3
-	db PURSUIT      ; e4
-	db RAPID_SPIN   ; e5
-	db WILL_O_WISP  ; e6
-	db SILVER_WIND  ; e7
-	db METAL_CLAW   ; e8
-	db BODY_PRESS   ; e9
-	db HEALING_LIGHT; ea
-	db HAIL         ; eb
-	db X_SCISSOR    ; ec
-	db HIDDEN_POWER ; ed
-	db IRON_DUKES   ; ee
-	db DRAGON_CLAW  ; ef
-	db RAIN_DANCE   ; f0
-	db SUNNY_DAY    ; f1
-	db CRUNCH       ; f2
-	db MIRROR_COAT  ; f3
-	db TOXIC_SPIKES ; f4
-	db EXTREMESPEED ; f5
-	db ANCIENTPOWER ; f6
-	db SHADOW_BALL  ; f7
-	db STEALTH_ROCK ; f8
-	db BRICK_BREAK  ; f9
-	db WHIRLPOOL    ; fa
-	db FLARE_BLITZ  ; fb
-	db POISON_JAB   ; fc
-	db WOOD_BASH    ; fd
+; "View Animations" in the debug book (maps/PlayersHouse2F.asm) starts a wild
+; battle with wBattleType = BATTLETYPE_DEBUG. The first move used in it plays
+; every move's animation, in alphabetical order: each move first with the
+; player as the user (player -> enemy), then with the enemy as the user
+; (enemy -> player). Then the battle goes on as normal.
+IF DEF(_DEBUG)
+SetDebugAnimationBattle:
+	ld a, BATTLETYPE_DEBUG
+	ld [wBattleType], a
+	ret
+
+MoveTable: ; every move, alphabetically by name
+	db ABSORB        ; Absorb
+	db ACID          ; Acid
+	db ACROBATICS    ; Acrobatics
+	db AEROBLAST     ; Aeroblast
+	db AGILITY       ; Agility
+	db AIR_SLASH     ; Air Slash
+	db AMNESIA       ; Amnesia
+	db ANCIENTPOWER  ; AncientPower
+	db AQUA_JET      ; Aqua Jet
+	db ATTRACT       ; Attract
+	db AURA_SPHERE   ; Aura Sphere
+	db AURORA_BEAM   ; Aurora Beam
+	db AVALANCHE     ; Avalanche
+	db BARRIER       ; Barrier
+	db BATON_PASS    ; Baton Pass
+	db BITE          ; Bite
+	db BLIZZARD      ; Blizzard
+	db BODY_PRESS    ; Body Press
+	db BODY_SLAM     ; Body Slam
+	db BOOMBURST     ; Boomburst
+	db BRICK_BREAK   ; Brick Break
+	db BUBBLEBEAM    ; Bubblebeam
+	db BUG_BITE      ; Bug Bite
+	db BUG_BUZZ      ; Bug Buzz
+	db BULK_UP       ; Bulk Up
+	db BULLDOZE      ; Bulldoze
+	db BULLET_PUNCH  ; Bullet Punch
+	db CALM_MIND     ; Calm Mind
+	db CHARM         ; Charm
+	db CLOSE_COMBAT  ; Close Combat
+	db CONFUSE_RAY   ; Confuse Ray
+	db CONFUSION     ; Confusion
+	db COUNTER       ; Counter
+	db CRUNCH        ; Crunch
+	db CURSE         ; Curse
+	db CUT           ; Cut
+	db DARK_PULSE    ; Dark Pulse
+	db DEFENSE_CURL  ; Defense Curl
+	db DEFOG         ; Defog
+	db DESTINY_BOND  ; Destiny Bond
+	db DIG           ; Dig
+	db DISABLE       ; Disable
+	db DISARM_VOICE  ; Disarm Voice
+	db DIVE_BOMB     ; Dive Bomb
+	db DOUBLE_TEAM   ; Double Team
+	db DOUBLE_EDGE   ; Double-Edge
+	db DRAGON_CLAW   ; Dragon Claw
+	db DRAGON_DANCE  ; Dragon Dance
+	db DRAGON_PULSE  ; Dragon Pulse
+	db DRAGON_RAGE   ; Dragon Rage
+	db DRAIN_KISS    ; Drain Kiss
+	db DRAIN_PUNCH   ; Drain Punch
+	db DREAM_EATER   ; Dream Eater
+	db DRILL_PECK    ; Drill Peck
+	db DYNAMICPUNCH  ; DynamicPunch
+	db EARTH_POWER   ; Earth Power
+	db EARTHQUAKE    ; Earthquake
+	db EMBER         ; Ember
+	db ENCORE        ; Encore
+	db EXPLOSION     ; Explosion
+	db EXTREMESPEED  ; ExtremeSpeed
+	db FACADE        ; Facade
+	db FAIRY_FLASH   ; Fairy Flash
+	db FALSE_SWIPE   ; False Swipe
+	db FIRE_BLAST    ; Fire Blast
+	db FIRE_FANG     ; Fire Fang
+	db FIRE_PUNCH    ; Fire Punch
+	db FIRE_SPIN     ; Fire Spin
+	db FLAIL         ; Flail
+	db FLAME_CHARGE  ; Flame Charge
+	db FLAMETHROWER  ; Flamethrower
+	db FLARE_BLITZ   ; Flare Blitz
+	db FLASH_CANNON  ; Flash Cannon
+	db FLY           ; Fly
+	db FOCUS_BLAST   ; Focus Blast
+	db FOCUS_ENERGY  ; Focus Energy
+	db FORESIGHT     ; Foresight
+	db FREEZE_DRY    ; Freeze-Dry
+	db FURY_DRIVE    ; Fury Drive
+	db FURY_STRIKES  ; Fury Strikes
+	db GIGA_DRAIN    ; Giga Drain
+	db GIGA_IMPACT   ; Giga Impact
+	db GROWL         ; Growl
+	db GROWTH        ; Growth
+	db GUNK_SHOT     ; Gunk Shot
+	db GUST          ; Gust
+	db HAIL          ; Hail
+	db HARDEN        ; Harden
+	db HAZE          ; Haze
+	db HEADBUTT      ; Headbutt
+	db HEAL_BELL     ; Heal Bell
+	db HEALING_LIGHT ; HealingLight
+	db HEX           ; Hex
+	db HI_JUMP_KICK  ; Hi-Jump Kick
+	db HIDDEN_FORCE  ; Hidden Force
+	db HIDDEN_POWER  ; Hidden Power
+	db HORN_ATTACK   ; Horn Attack
+	db HURRICANE     ; Hurricane
+	db HYDRO_PUMP    ; Hydro Pump
+	db HYPER_BEAM    ; Hyper Beam
+	db HYPNOSIS      ; Hypnosis
+	db ICE_BEAM      ; Ice Beam
+	db ICE_FANG      ; Ice Fang
+	db ICE_PUNCH     ; Ice Punch
+	db ICE_SHARD     ; Ice Shard
+	db ICICLE_CRASH  ; Icicle Crash
+	db ICY_WIND      ; Icy Wind
+	db IRON_BASH     ; Iron Bash
+	db IRON_DUKES    ; Iron Dukes
+	db IRON_HEAD     ; Iron Head
+	db KARATE_CHOP   ; Karate Chop
+	db KINGS_SHIELD  ; King's Shield
+	db KNOCK_OFF     ; Knock Off
+	db LEAF_BLADE    ; Leaf Blade
+	db LEECH_LIFE    ; Leech Life
+	db LEECH_SEED    ; Leech Seed
+	db LEER          ; Leer
+	db LICK          ; Lick
+	db LIGHT_SCREEN  ; Light Screen
+	db LOVELY_KISS   ; Lovely Kiss
+	db LOW_KICK      ; Low Kick
+	db MACH_PUNCH    ; Mach Punch
+	db MEAN_LOOK     ; Mean Look
+	db MEGA_DRAIN    ; Mega Drain
+	db MEGAHORN      ; Megahorn
+	db METAL_CLAW    ; Metal Claw
+	db METEOR_MASH   ; Meteor Mash
+	db METRONOME     ; Metronome
+	db MILK_DRINK    ; Milk Drink
+	db MIRROR_COAT   ; Mirror Coat
+	db MIRROR_SHOT   ; Mirror Shot
+	db MIST          ; Mist
+	db MOONBLAST     ; Moonblast
+	db MUD_SLAP      ; Mud-Slap
+	db MYSTIC_DANCE  ; Mystic Dance
+	db NASTY_PLOT    ; Nasty Plot
+	db NIGHT_SHADE   ; Night Shade
+	db NIGHT_SLASH   ; Night Slash
+	db OUTRAGE       ; Outrage
+	db PAIN_SPLIT    ; Pain Split
+	db PECK          ; Peck
+	db PERISH_SONG   ; Perish Song
+	db PHOTON_BLAST  ; Photon Blast
+	db PLAY_ROUGH    ; Play Rough
+	db POISON_JAB    ; Poison Jab
+	db POISON_STING  ; Poison Sting
+	db POISONPOWDER  ; PoisonPowder
+	db POUNCE        ; Pounce
+	db POWDER_SNOW   ; Powder Snow
+	db POWER_GEM     ; Power Gem
+	db PROTECT       ; Protect
+	db PSYBEAM       ; Psybeam
+	db PSYBLAST      ; Psyblast
+	db PSYCHIC_M     ; Psychic
+	db PSYSHOCK      ; Psyshock
+	db PURSUIT       ; Pursuit
+	db QUICK_ATTACK  ; Quick Attack
+	db QUIVER_DANCE  ; Quiver Dance
+	db RAIN_DANCE    ; Rain Dance
+	db RAPID_SPIN    ; Rapid Spin
+	db RECOVER       ; Recover
+	db REFLECT       ; Reflect
+	db REST          ; Rest
+	db RETURN        ; Return
+	db ROAR          ; Roar
+	db ROCK_BLAST    ; Rock Blast
+	db ROCK_SLIDE    ; Rock Slide
+	db ROCK_THROW    ; Rock Throw
+	db ROCK_TOMB     ; Rock Tomb
+	db ROLLOUT       ; Rollout
+	db ROOST         ; Roost
+	db RUNIC_POWER   ; Runic Power
+	db SACRED_FIRE   ; Sacred Fire
+	db SAFEGUARD     ; Safeguard
+	db SAND_TOMB     ; Sand Tomb
+	db SANDSTORM     ; Sandstorm
+	db SCALD         ; Scald
+	db SCARY_FACE    ; Scary Face
+	db SCREECH       ; Screech
+	db SEED_BOMB     ; Seed Bomb
+	db SEISMIC_TOSS  ; Seismic Toss
+	db SHADOW_BALL   ; Shadow Ball
+	db SHADOW_PUNCH  ; Shadow Punch
+	db SILVER_WIND   ; Silver Wind
+	db SING          ; Sing
+	db SIGNAL_BEAM   ; Singal Beam
+	db SKETCH        ; Sketch
+	db SKY_ATTACK    ; Sky Attack
+	db SLACK_OFF     ; Slack Off
+	db SLASH         ; Slash
+	db SLEEP_POWDER  ; Sleep Powder
+	db SLEEP_TALK    ; Sleep Talk
+	db SLUDGE        ; Sludge
+	db SLUDGE_BOMB   ; Sludge Bomb
+	db SMOKESCREEN   ; Smokescreen
+	db SOFTBOILED    ; Softboiled
+	db SOLARBEAM     ; Solarbeam
+	db SPARK         ; Spark
+	db SPIDER_WEB    ; Spider Web
+	db SPIKES        ; Spikes
+	db SPITE         ; Spite
+	db SPLASH        ; Splash
+	db SPORE         ; Spore
+	db STEALTH_ROCK  ; Stealth Rock
+	db STEEL_WING    ; Steel Wing
+	db STICKY_WEB    ; Sticky Web
+	db STOMP         ; Stomp
+	db STONE_EDGE    ; Stone Edge
+	db STRING_SHOT   ; String Shot
+	db STRUGGLE      ; Struggle
+	db STUN_SPORE    ; Stun Spore
+	db SUBSTITUTE    ; Substitute
+	db SUCKER_PUNCH  ; Sucker Punch
+	db SUNNY_DAY     ; Sunny Day
+	db SUPER_FANG    ; Super Fang
+	db SUPERSONIC    ; Supersonic
+	db SURF          ; Surf
+	db SWAGGER       ; Swagger
+	db SWIFT         ; Swift
+	db SWORDS_DANCE  ; Swords Dance
+	db TACKLE        ; Tackle
+	db TAUNT         ; Taunt
+	db TELEPORT      ; Teleport
+	db THRASH        ; Thrash
+	db THROAT_CHOP   ; Throat Chop
+	db THUNDER       ; Thunder
+	db THUNDER_FANG  ; Thunder Fang
+	db THUNDER_WAVE  ; Thunder Wave
+	db THUNDERBOLT   ; Thunderbolt
+	db THUNDERPUNCH  ; ThunderPunch
+	db THUNDERSHOCK  ; Thundershock
+	db TOXIC         ; Toxic
+	db TOXIC_SPIKES  ; Toxic Spikes
+	db TRANSFORM     ; Transform
+	db TREMOR        ; Tremor
+	db TRICK         ; Trick
+	db TRICK_ROOM    ; Trick Room
+	db U_TURN        ; U-Turn
+	db VENOSHOCK     ; Venoshock
+	db VINE_WHIP     ; Vine Whip
+	db VOLT_SWITCH   ; Volt Switch
+	db WATER_GUN     ; Water Gun
+	db WATERFALL     ; Waterfall
+	db WHIRLPOOL     ; Whirlpool
+	db WHIRLWIND     ; Whirlwind
+	db WILD_CHARGE   ; Wild Charge
+	db WILL_O_WISP   ; Will-O-Wisp
+	db WING_ATTACK   ; Wing Attack
+	db WOOD_BASH     ; Wood Bash
+	db WRAP          ; Wrap
+	db X_SCISSOR     ; X-Scissor
+	db ZEN_HEADBUTT  ; Zen Headbutt
 	db 0
 
 DisplayUsedMoveText:
-	jr .do_it ; comment this out for testing all move animations
-	ld a, BATTLE_VARS_MOVE
-	call GetBattleVarAddr
+	ld a, [wBattleType]
+	cp BATTLETYPE_DEBUG
+	jr nz, .do_it
+	; play the animations once, then back to a normal battle
+	xor a ; BATTLETYPE_NORMAL
+	ld [wBattleType], a
+	ldh a, [hBattleTurn]
+	push af
 	ld de, MoveTable
 .loop
 	ld a, [de]
 	inc de
 	and a
-	ret z
-	ld [hl], a
-	push hl
+	jr z, .done
+	ld b, a
 	push de
+	xor a ; the player uses it
+	call .play
+	ld a, 1 ; the enemy uses it
+	call .play
+	pop de
+	jr .loop
+
+.done
+	pop af
+	ldh [hBattleTurn], a
+	jr .do_it
+
+.play
+; a = whose turn (0 player, 1 enemy), b = move
+	ldh [hBattleTurn], a
+	push bc
+	ld a, BATTLE_VARS_MOVE
+	call GetBattleVarAddr
+	pop bc
+	ld [hl], b
+	push bc
 	farcall UpdateMoveData
 	call .do_it
 	farcall AnimateCurrentMove
-	pop de
-	pop hl
-	jr .loop
+	call .reset_mons
+	pop bc
+	ret
+
+.reset_mons
+; Put both mons back to normal for the next move: Transform swaps the two
+; pictures, Substitute replaces the user's, and some moves (Teleport) make it
+; vanish.
+	farcall DropPlayerSub ; the player's back pic
+	farcall DropEnemySub ; the enemy's front pic
+	; put both pictures back on screen (Teleport and others hide the user)
+	ldh a, [hBattleTurn]
+	push af
+	xor a
+	ldh [hBattleTurn], a
+	farcall AppearUser
+	ld a, 1
+	ldh [hBattleTurn], a
+	farcall AppearUser
+	pop af
+	ldh [hBattleTurn], a
+	ld b, SCGB_BATTLE_COLORS
+	call GetSGBLayout
+	call SetDefaultBGPAndOBP
+	call DelayFrame
+	jmp WaitBGMap
 
 .do_it
 ELSE
