@@ -33,8 +33,9 @@ PriorityAbilityPopup:
 	cp IRON_HEAD
 	jr nz, .not_iron_head
 	ld a, b
-	cp BLASTOISE
-	ret nz
+	ld hl, PreemptIronHeadPokemon_Popup
+	call IsInByteArray
+	ret nc
 	; the text and popup, once per send-out
 	ld c, SEND_OUT_POPUP_IRON_HEAD
 	newfarcall CheckSendOutPopupShown
@@ -46,12 +47,10 @@ PriorityAbilityPopup:
 	cp ZEN_HEADBUTT
 	ret nz
 	ld a, b
-	cp DROWZEE
-	jr z, .popup_zen
-	cp HYPNO
-	ret nz
+	ld hl, PreemptZenHeadbuttPokemon_Popup
+	call IsInByteArray
+	ret nc
 
-.popup_zen
 	; the text and popup, once per send-out
 	ld c, SEND_OUT_POPUP_ZEN_HEADBUTT
 	newfarcall CheckSendOutPopupShown
@@ -67,6 +66,12 @@ PriorityBattleText_Call:
 	jmp WaitBGMap
 
 PreemptText: db "Preempt@"
+
+PreemptIronHeadPokemon_Popup:
+INCLUDE "data/abilities/preempt_iron_head_mons.asm"
+
+PreemptZenHeadbuttPokemon_Popup:
+INCLUDE "data/abilities/preempt_zen_headbutt_mons.asm"
 
 _BattleCommand_Critical:
 ; Determine whether this attack's hit will be critical.

@@ -58,6 +58,12 @@ INCLUDE "data/abilities/sturdy_mons.asm" ; (the battle's list)
 BlessingPokemon_AI:
 INCLUDE "data/abilities/blessing_mons.asm" ; (the battle's list)
 
+PreemptIronHeadPokemon_AI:
+INCLUDE "data/abilities/preempt_iron_head_mons.asm" ; (the battle's list)
+
+PreemptZenHeadbuttPokemon_AI:
+INCLUDE "data/abilities/preempt_zen_headbutt_mons.asm" ; (the battle's list)
+
 OverdrivePokemon_AI:
 INCLUDE "data/abilities/overdrive_mons.asm" ; (the battle's list)
 

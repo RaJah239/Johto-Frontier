@@ -2984,29 +2984,30 @@ AI_Smart_HealBell:
 	ret
 
 AI_Smart_Flinch:
-	ld a, [wEnemyMonSpecies]
-	cp BLASTOISE
-	jr nz, .not_blastoise_or_iron_head
-
-	; check if blastoise has iron head
+; Preempt: Iron Head (Blastoise) and Zen Headbutt (Drowzee, Hypno) get
+; priority, so score them like any other priority hit.
 	ld a, [wEnemyMoveStruct + MOVE_ANIM]
 	cp IRON_HEAD
-	jmp z, AI_Smart_PriorityHit
-
-.not_blastoise_or_iron_head
+	jr nz, .not_iron_head
 	ld a, [wEnemyMonSpecies]
-	cp DROWZEE
-	jr z, .drowzee_or_hypno
-	cp HYPNO
-	jr nz, .not_drowzee_or_hypno_or_zen_headbutt
+	push hl
+	ld hl, PreemptIronHeadPokemon_AI
+	call IsInAbilityList
+	pop hl
+	jmp c, AI_Smart_PriorityHit
+	jr .not_preempt_move
 
-.drowzee_or_hypno
-	; check if drowzee or hypno has zen headbutt
-	ld a, [wEnemyMoveStruct + MOVE_ANIM]
+.not_iron_head
 	cp ZEN_HEADBUTT
-	jmp z, AI_Smart_PriorityHit
+	jr nz, .not_preempt_move
+	ld a, [wEnemyMonSpecies]
+	push hl
+	ld hl, PreemptZenHeadbuttPokemon_AI
+	call IsInAbilityList
+	pop hl
+	jmp c, AI_Smart_PriorityHit
 
-.not_drowzee_or_hypno_or_zen_headbutt
+.not_preempt_move
 ; do nothing if slower than player
 	call DoesAIOutSpeedPlayer
 	ret nc

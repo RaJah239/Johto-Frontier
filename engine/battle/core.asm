@@ -657,21 +657,21 @@ GetMovePriority:
 .mon_check
 	; Iron Head gets priority when Blastoise uses it
 	ld a, d
-	call IsSpeciesSuppressed ; (Neutralizing Gas)
-	jr c, .regular_priority
-	cp BLASTOISE
-	jr z, .priority_2
+	ld hl, PreemptIronHeadPokemon
+	push bc
+	call IsInAbilityList ; (not for a mon Neutralizing Gas suppresses)
+	pop bc
+	jr c, .priority_2
 	jr .regular_priority
 
 .mon_check3
 	; Zen Headbutt gets priority when Drowzee or Hypno uses it
 	ld a, d
-	call IsSpeciesSuppressed ; (Neutralizing Gas)
-	jr c, .regular_priority
-	cp DROWZEE
-	jr z, .priority_2
-	cp HYPNO
-	jr z, .priority_2
+	ld hl, PreemptZenHeadbuttPokemon
+	push bc
+	call IsInAbilityList ; (not for a mon Neutralizing Gas suppresses)
+	pop bc
+	jr c, .priority_2
 	jr .regular_priority
 
 .check_trick_stick
@@ -697,6 +697,12 @@ GetMovePriority:
 	ret
 
 INCLUDE "data/moves/effects_priorities.asm"
+
+PreemptIronHeadPokemon:
+INCLUDE "data/abilities/preempt_iron_head_mons.asm"
+
+PreemptZenHeadbuttPokemon:
+INCLUDE "data/abilities/preempt_zen_headbutt_mons.asm"
 
 GetMoveEffect:
 	ld a, b
