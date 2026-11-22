@@ -139,7 +139,7 @@ MoveDetailsMenu_Run:
 	add a, b
 .store_up
 	ld [wMenuScrollPosition], a
-	jp .input_loop
+	jmp .input_loop
 
 MoveDetailsMenuPartyMonHeader:
 	db MENU_BACKUP_TILES

@@ -142,7 +142,7 @@ LoadTMHMIconGFX::
 	ld hl, TmHmIcon
 	lb bc, BANK(TmHmIcon), 9
 	ld de, vTiles2 tile ITEM_ICON_TILE
-	jp DecompressRequest2bpp
+	jmp DecompressRequest2bpp
 
 LoadTMHMIconPalette::
 ; wCurSpecies = the hovered move; only its disc colors need updating.

@@ -296,7 +296,7 @@ MoveIcons_PrepareBG:
 MoveIcons_LoadBGTiles:
 	ld hl, vTiles2 tile MOVE_ICON_TILE
 	ld b, BANK(vTiles2)
-	jp MoveIcons_SendTiles
+	jmp MoveIcons_SendTiles
 
 MoveStatBadges_Stage::
 ; Compact POW/ACC/EFF: d = top row, e = column, c = free BG palette.
@@ -356,7 +356,7 @@ PlazaMoveStatBadges_Stage::
 	ld e, 1
 	pop af
 	ldh [rSVBK], a
-	jp MoveStatBadges_Stage
+	jmp MoveStatBadges_Stage
 
 BattleMoveStatEffBadge_Show::
 ; Every battle BG palette can be in use. Keep EFF on sprites so the
@@ -696,7 +696,7 @@ MoveStatBadges_TilemapAddress:
 	ldh [hMoveIconRow], a
 	ld a, e
 	ldh [hMoveIconCol], a
-	jp MoveIcons_TilemapAddress
+	jmp MoveIcons_TilemapAddress
 
 PartyMoveIcons_Close::
 ; Detach both kinds of BG icons before returning borrowed graphics.
@@ -704,11 +704,11 @@ PartyMoveIcons_Close::
 	lb de, 13, 10
 	ld b, MOVE_ICON_TILES
 	call MoveIcons_ClearVisibleCells
-	jp MoveStatBadges_Hide
+	jr MoveStatBadges_Hide
 
 MoveDetailsIcons_Close::
 ; The party, tutor and reminder screens now share the same coordinates.
-	jp PartyMoveIcons_Close
+	jmp PartyMoveIcons_Close
 
 MoveStatBadges_DetachBG:
 ; The visible map must stop using the borrowed tile IDs before RestoreTiles.
@@ -813,7 +813,7 @@ MoveStatBadges_Hide::
 
 MoveStatBadges_RestoreTiles:
 	ld de, wMoveStatTileBackup
-	jp MoveStatBadges_CopyTiles
+	jmp MoveStatBadges_CopyTiles
 
 MoveStatBadges_RestorePalette:
 	ld a, [wMoveStatPalette]
@@ -883,7 +883,7 @@ PlazaMoveIcons_PrepareMenu::
 	hlcoord 0, 0, wAttrmap
 	ld a, PAL_BG_TEXT
 	ld bc, 3 * SCREEN_WIDTH
-	jp ByteFill
+	jmp ByteFill
 
 PlazaMoveIcons_Stage::
 ; Show the icons of move [wCurSpecies] in the Battle Plaza TM counter's
@@ -989,7 +989,7 @@ PlazaMoveIcons_Close::
 	ld b, MOVE_ICON_TILES
 	call MoveIcons_ClearVisibleCells
 .detached
-	jp PlazaMoveIcons_Hide
+	; fallthrough
 
 PlazaMoveIcons_Hide::
 ; Blank the icon cells and give the borrowed palette back to the map,
@@ -1052,7 +1052,7 @@ BattleMoveIcons_Draw::
 BattleMoveIcons_Hide::
 ; when the move menu closes, or its box shows "Disabled!"
 	ld c, PAL_BATTLE_OB_GRAY
-	jp MoveIcons_HideSprites
+	jmp MoveIcons_HideSprites
 
 TMHMMoveIcons_Show::
 ; Reuse the current icons unless the hovered move changed.
@@ -1187,7 +1187,7 @@ TMHM_MoveIcons_Init::
 
 TMHM_MoveStatBadges_Show::
 ; Fixed graphics/palette were loaded with the pack; just place nine sprites.
-	jp TMHM_MoveStatBadges_DrawSprites
+	jmp TMHM_MoveStatBadges_DrawSprites
 
 MoveStatBadges_PrepareSprites:
 ; Caller selected the badge state/backup WRAM bank.
@@ -1199,7 +1199,7 @@ MoveStatBadges_PrepareSprites:
 	ld a, TRUE
 	ld [wMoveStatObjBadgesActive], a
 .loaded
-	jp TMHM_MoveStatBadges_LoadPalette
+	jmp TMHM_MoveStatBadges_LoadPalette
 
 TMHMMoveIcons_Close::
 ; The slots stay reserved until the pack closes. Stage their removal with
@@ -1228,7 +1228,7 @@ BattleMoveStatEffBadge_Close::
 	ld bc, MOVE_STAT_BADGE_TILES * OBJ_SIZE
 	call ByteFill
 	call MoveIcons_FlushOAM
-	jp TMHM_MoveStatBadges_Hide
+	jr TMHM_MoveStatBadges_Hide
 
 MoveIcons_FlushOAM:
 ; Use a complete OAM DMA in a safe VBlank interval. The transfer also
@@ -1280,7 +1280,7 @@ TMHM_MoveStatBadges_DrawSprites:
 	ld hl, .oam
 	ld de, wShadowOAMSprite00 + MOVE_STAT_FIRST_OAM * OBJ_SIZE
 	ld bc, MOVE_STAT_BADGE_TILES * OBJ_SIZE
-	jp CopyBytes
+	jmp CopyBytes
 .oam
 for badge, 3
 for piece, MOVE_STAT_BADGE_WIDTH
@@ -1376,7 +1376,7 @@ TMHM_MoveStatBadges_RestorePalette:
 
 TMHM_MoveStatBadges_RestoreTiles:
 	ld de, wMoveStatObjTileBackup
-	jp TMHM_MoveStatBadges_CopyTiles
+	jmp TMHM_MoveStatBadges_CopyTiles
 
 MoveIcons_HideSprites:
 ; Take the icon sprites away and give OBJ palette c back.
