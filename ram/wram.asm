@@ -2640,7 +2640,7 @@ wPokegearFlags::
 	db
 wRadioTuningKnob:: db
 wLastDexMode:: db
-wCurPokedexColor:: db ; current dex color
+	db ; unused (was the Pokedex color option)
 wRegisteredItemSlot1::
 wWhichRegisteredItem:: db
 wRegisteredItemSlot2::

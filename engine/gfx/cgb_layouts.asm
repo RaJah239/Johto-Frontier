@@ -727,59 +727,6 @@ ENDC
 	ldh [hCGBPalUpdate], a
 	ret
 
-CheckPokedexColor:
- 	ld a, [wCurPokedexColor]
- 	cp DEXCOLOR_BLUE
- 	jr nz, .Purple
- 	ld a, PREDEFPAL_TRADE_TUBE
- 	ret
- 
-.Purple
- 	cp DEXCOLOR_PURPLE
- 	jr nz, .Brown
- 	ld a, PREDEFPAL_RB_PURPLEMON
- 	ret
- 
-.Brown
- 	cp DEXCOLOR_BROWN
- 	jr nz, .Green
- 	ld a, PREDEFPAL_RB_BROWNMON
- 	ret
- 
-.Green
- 	cp DEXCOLOR_GREEN
- 	jr nz, .Pink
- 	ld a, PREDEFPAL_RB_GREENMON
- 	ret
- 
-.Pink
- 	cp DEXCOLOR_PINK
- 	jr nz, .Yellow
- 	ld a, PREDEFPAL_RB_PINKMON
- 	ret
- 
-.Yellow
- 	cp DEXCOLOR_YELLOW
- 	jr nz, .Cyan
- 	ld a, PREDEFPAL_RB_YELLOWMON
- 	ret
- 
-.Cyan
- 	cp DEXCOLOR_CYAN
- 	jr nz, .Gray
- 	ld a, PREDEFPAL_RB_CYANMON
- 	ret
- 
-.Gray
- 	cp DEXCOLOR_GRAY
- 	jr nz, .Red
- 	ld a, PREDEFPAL_CGB_BADGE
- 	ret
- 
-.Red
- 	ld a, PREDEFPAL_POKEDEX
- 	ret
-
 PokedexLightPalette:
 ; the dex entry screen's interface: text, accent, frame, panels
 	RGB  0,  0,  0
@@ -881,7 +828,7 @@ BillsPC_PreviewTheme:
 
 _CGB_PokedexUnownMode:
 	ld de, wBGPals1
-	call CheckPokedexColor
+	ld a, PREDEFPAL_POKEDEX
  	call GetPredefPal
 	call LoadHLPaletteIntoDE
 	ld a, UNOWN
@@ -1176,7 +1123,7 @@ _CGB_MoveList:
 
 _CGB_PokedexSearchOption:
 	ld de, wBGPals1
-	call CheckPokedexColor
+	ld a, PREDEFPAL_POKEDEX
 	call GetPredefPal
 	call LoadHLPaletteIntoDE
 	call WipeAttrmap
