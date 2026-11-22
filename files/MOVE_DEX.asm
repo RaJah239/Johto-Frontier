@@ -215,7 +215,7 @@
 | Normal   | Harden       | Other    |  ---  | 100% | 30 | Raises user's Defense by 1 stage                                     |
 | Normal   | Headbutt     | Physical |   70  | 100% | 15 | 30% chance to make the target flinch                                 |
 | Normal   | Heal Bell    | Other    |  ---  | ---  |  5 | Cures all party members of status conditions                         |
-| Normal   | HealingLight | Other    |  ---  | ---  | 10 | Heals HP depending on weather                                        |
+| Normal   | HealingLight | Other    |  ---  | ---  | 10 | Recovers 1/2 Max HP, 2/3 HP in sun but 1/3 Max HP other weathers     |
 | Normal   | Horn Attack  | Physical |   65  | 100% | 25 | 20% chance to drop target's Defense by 1 stage                       |
 | Normal   | Hyper Beam   | Special  |  140  | 100% |  5 | User must recharge next turn, if not KO foe                          |
 | Normal   | Leer         | Other    |  ---  | 100% | 30 | Lowers target's Defense by 1 stage                                   |
