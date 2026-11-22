@@ -16,7 +16,7 @@
 - Time, day and weather added to Start Menu
 - Evening added as the fourth time of day (morning: 5am, day: 10am, evening: 5pm, night: 8pm)
 - Evening's wild encounters are 60% of the day's 40% of the night's on each encounter
-- All overworld encounters are set to 4% per tile stepped on, this doubles to 8% when on the bicycle
+- All overworld encounters are set to 4% per tile stepped on, this doubles to 8% when running or on the bicycle
 - Sped up saving significantly
 - Press Up and Start on Suicune running screen to bring up the option to delete save file
 - Select + B resets the game
@@ -25,7 +25,7 @@
 - Display seconds in PokéGear and Main Menu
 - All Bag pockets loop when scrolling: Up on the first item jumps to the bottom of the list and Down on the last row jumps back to the top
 - Fruit and Battle pockets added + colored Bag Tabs for easier navigation
-- Press Start to sort items (Custom or Alphabetical) in Pack pockets (Item, Ball, Fruit, Key and Battle) in and out of battles and the PC (with TMs being grouped together by number)
+- Press Start to sort items (Custom or Alphabetical) in Pack pockets (Item, Ball, Fruit, Key and Battle) in and out of battles and the PC (TMs can't be sorted but are always in alphabetical order)
 - Cheat NPC to New Bark Town
 - Colored trainer card badges and added gym leader's names to their pictures
 - Exp.Share added to Option Menu - 100% Exp to all participants and 50% to non-participants until the player has entered the Hall of Fame, then the entire party receives 100% experience points
@@ -43,9 +43,9 @@
 - Mart inventory changes with badge count
 - Show quantity already in Pack at Marts, (TMs don't show quantity)
 - Press Down when buying items to get the maximum affordable quantity
+- Pessing Down when selling items, max amount that will max money with a minimum of 1
 - Link trade Pokémon from the start of the game. Can't trade with vanilla Pokémon Crystal
 - Gender corrected Link Battle/Trade Rooms
-- Can release HM users and overwrite HMs when learning moves
 - Prompt to automatically reuse Repel when one runs out
 - Generation 1 fossils added and a NPC to revive them
 - Stats option always displayed before field moves
@@ -63,7 +63,6 @@
 - Egg get laid always after 255 steps
 - Daycare man still gives eggs if refused (he didn't in vanilla)
 - Eggs are not displayed in the healing machine animaton
-- Nidorina and Nidoqueen now have Egg groups and can breed either Nidoran♀ or Nidoran♀. Nidorino and Nidoking can also breed either Nidoran
 - Hatch Room was added to the Day Care out back. Only accessible via Bicycle. The old man appears there if your Pokémon laid any eggs and there’s a Porygon PC as well
 - Day care exp gain has been multiplied by 2 to 13, scales with Pokémon level - high level Pokémon is now a viable option
 - Daycare owners now say how many levels a Pokémon grew by and what level it is presently
@@ -78,11 +77,11 @@
 - "Call" items added that have the same effect as vanilla Crystal's HMs and surfing Pikachu still has a unique sprite
 - Moves Tutors, Move Relearner and Egg Tutor
 - Trade Back NPC added in Mahogany Town to evolve all Pokémon that require it
-- TMs are not infinite use by design choice but all can be obtained infinitely via the Battle Plaza's mart
+- TMs are not infinite use by design choice but all can be obtained infinitely via the Battle Plaza's mart when the original is found/obtained in the Johto
 - Cianwood City daily photographer - raises happiness
 - All status conditions boost catch rate of all Pokémon
 - Can Teleport to the last visited Pokémon Centre from anywhere
-- Press A to use Flash in dark caves
+- Press A to use Flash in dark caves after obtaining the Mareep Call
 - Press Start to skip Credits
 
 ## Randomness (RNG)
@@ -140,7 +139,7 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Removed vanilla Crystal's the 25% failure chance for AI status moves
 - Removed vanilla Crystal's the Gym badges boosts
 - Stat screen Condition added to display levels of happiness
-- Fourth stat page with caught time, level, location, effort values per stat, core trait (hidden power type) and Press Select to view Abilities
+- Fourth stat page added with Abilities and Press Select to view caught time, level, location, effort values per stat, core trait (hidden power type)
 - Move Pokémon in party menu with Select button (only outside battles)
 - Can swap held items of Pokémon outside of battles
 - Battle HUD Update
@@ -155,7 +154,7 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Short beeping noise for low HP
 - Pokémon asleep last 1-3 turns
 - Pokéball's pocket set to default in wild encounters
-- Use unique colours for each thrown Pokéball
+- Use unique Pokéball graphics in addition to caught ball icon in each Pokémon's status menu
 - Gain experience from catching Pokémon
 - Effort Values replace Stat Experience, but can max all stats
 - Can max out Effort Values on all stats either by battle or item usage alone
@@ -207,16 +206,6 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - What you hear: a short, high-pitched electronic chirp replaces the normal throwing sound
 - What you see: after the Pokémon enters the ball, the ball briefly shakes sideways in midair, then lands and shakes once, instead of the usual three ground shakes
 - It can still fail. A critical capture gives improved capture odds through a single success check; it does not guarantee a catch. There’s no separate “Critical capture!” message
-
-## Move Changes
-- Note: Many moves have been altered, these are just some
-- Focus Energy now adds a +2 critical level instead of +1
-- Spite to always lower PP by 5
-- Healing Light recovers 1/2 Max HP regularly and 2/3 Max HP in harsh sunlight but 1/3 Max HP in any other weather
-- Roar, Whirlwind, and Struggle are unaffected by accuracy or evasion, like Swift
-- Only HM is Fly
-- Explosion no longer halves defense before dealing damage
-- Multi-hit probabilities Updated: 50% for 3 hits, 25% for 4 hits and 12.5% for either 2 or 5 hits
 
 ## Bug Fixes
 - All known vanilla Bugs and Glitches Fixes
