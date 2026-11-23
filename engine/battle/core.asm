@@ -1545,12 +1545,12 @@ ApplyExperienceAfterEnemyCaught:
 
 ; Note: Exp Share
 ; gives 1/2 exp to all non-participating Pokemon
-; until all league is beaten
+; until all 8 Johto badges are obtained
 ; then gives full exp to all
 
-	ld a, [wHallOfFameCount]
-	and a
-	jr nz, .continue
+	ld a, [wJohtoBadges]
+	inc a ; all 8 badges = $ff
+	jr z, .continue
 
 	; havling experience points in done here
 	srl [hl]
