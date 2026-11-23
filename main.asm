@@ -314,14 +314,12 @@ INCLUDE "engine/events/squirtbottle.asm"
 INCLUDE "engine/events/sacred_ash.asm"
 
 
-
 SECTION "bank20", ROMX
 INCLUDE "engine/overworld/player_movement.asm"
 INCLUDE "engine/events/engine_flags.asm"
 INCLUDE "engine/overworld/variables.asm"
 INCLUDE "data/text/battle.asm"
-INCLUDE "engine/debug/color_picker.asm"
-INCLUDE "engine/debug/mon_palette_editor.asm"
+INCLUDE "engine/events/mon_palette_editor.asm"
 
 
 SECTION "bank21", ROMX
