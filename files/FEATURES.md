@@ -164,7 +164,7 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Trainer's Effort Values scale based on their own levels
 - Levitating (up arrow) icon added in Status Screen, Pokédex and Battle
 - Upon learning a 5th move, can press Down to view the move's details 
-- Can rematch any overworld trainer infinitely
+- Can rematch any overworld trainer infinitely but they then give 1/4 experience and money, until getting 8 badges
 - Lose money proportional to number of badges and lead level Pokémon on whiteout
 - Quick Claw now has an activation text
 - Prevent burning fire types and frostbite on ice types
