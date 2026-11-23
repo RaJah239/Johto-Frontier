@@ -1,6 +1,5 @@
 DEF SPECIALCELEBIEVENT_CELEBI EQU $84
 CelebiShrineEvent:
-;	call DelayFrame
 	ld a, [wStateFlags]
 	push af
 	xor a
@@ -172,8 +171,6 @@ UpdateCelebiPosition:
 	add hl, bc
 	ld a, SPRITE_ANIM_FRAMESET_CELEBI_LEFT
 	jmp ReinitSpriteAnimFrame
-.done
-	ret
 
 .FreezeCelebiPosition:
 	pop af
@@ -265,6 +262,4 @@ CheckCaughtCelebi:
 .false
 	xor a ; FALSE
 	ld [wScriptVar], a
-
-.done
 	ret
