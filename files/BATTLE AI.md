@@ -256,10 +256,15 @@ Two more rules stop it being exploited:
 - Pursuit
 - recoil and held items other than Leftovers, Berries and Focus Sash, beyond their effect on damage
 
-### Entry abilities
-When the AI plays out bringing a Pokémon in (switching, or picking one after a knock-out), that Pokémon's entry ability happens first, so it brings in the right Pokémon for the job:
+### Entry abilities and weather shards
+When the AI plays out bringing a Pokémon in (switching, or picking one after a knock-out), that Pokémon's entry ability happens first, then its held weather shard, so it brings in the right Pokémon for the job:
 - **Neutralizing Gas:** worked out for that pair (it switches off your ability, or yours switches off theirs)
 - **Weather:** Drizzle, Drought, Sand Stream, Snow Warning
+- **Weather shards:** a Rain, Sun, Sand or Frost Shard in the Pokémon's hands sets its weather as it comes in, so the AI counts the extra damage (a Fire move in sun, a Water move in rain), the damage your own moves lose, and the abilities that need the weather (Swift Swim, Chlorophyll, Solar Power, Rain Dish and so on). It works like the real thing:
+  - it lasts 4 turns, and the shard is used up (an Unburden Pokémon gets +1 Speed, unless your Neutralizing Gas switches the ability off)
+  - the shard goes after the entry ability, so it replaces the weather an ability just set
+  - if that weather is already up, the shard is kept and nothing changes
+  - Neutralizing Gas doesn't stop a shard
 - **Its own stats:** Download, Defense Mode, Fortify, Battle Stance, Battle Drive
 - **Your stats:** Intimidate, Stifling Aura and Infernal Howl lower them (not through a Substitute, Resilience, Scrappy or Oblivious; Contrary raises them instead). Fog of War resets your raised stats, so it sends that Pokémon in against a set-up sweeper.
 - **The field:** Light Barrier and Reflect Barrier put up screens, Siegebreaker breaks yours, Clean Sweep clears weather and screens, Chrono Shift sets up Trick Room
