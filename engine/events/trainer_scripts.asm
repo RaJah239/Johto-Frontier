@@ -65,7 +65,7 @@ RematchScript:
 	nooryes
 .GotChoice:
 	iffalse .refused
-	loadmem wTrainerRematchReduced, TRUE
+	callasm SetRematchReduced
     loadtemptrainer
 	encountermusic
 	sjump RematchStartBattleWithMapTrainerScript
@@ -93,4 +93,15 @@ RematchPromptOrder:
 	inc a
 .store
 	ld [wScriptVar], a
+	ret
+
+SetRematchReduced:
+; Rematches give 1/4 EXP and money, until all 8 Johto badges are obtained.
+	ld a, [wJohtoBadges]
+	inc a ; all 8 badges = $ff
+	ld a, FALSE
+	jr z, .store
+	inc a ; TRUE
+.store
+	ld [wTrainerRematchReduced], a
 	ret
