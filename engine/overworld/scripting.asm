@@ -671,7 +671,6 @@ Script_battletowertext:
 
 Script_verbosegiveitem:
 	call Script_giveitem
-.show
 	call CurItemName
 	ld de, wStringBuffer1
 	ld a, STRING_BUFFER_4
@@ -703,7 +702,30 @@ Script_verbosegiveuptothreeitems:
 	xor a
 .given
 	ld [wScriptVar], a
-	jr Script_verbosegiveitem.show
+	call CurItemName
+	ld de, wStringBuffer1
+	ld a, STRING_BUFFER_4
+	call CopyConvertedText
+	ld de, wStringBuffer4 + STRLEN("TM##")
+	call AppendTMHMMoveName
+	ld b, BANK(GiveItemsScript)
+	ld de, GiveItemsScript
+	jmp ScriptCall
+
+GiveItemsScript:
+; "<PLAYER> got / 3× ITEM." (wItemQuantityChange)
+	writetext .ReceivedItemsText
+	special ShowItemIcon
+	iffalse GiveItemScript.Full
+	waitsfx
+	specialsound
+	waitbutton
+	itemnotify
+	end
+
+.ReceivedItemsText:
+	text_far _ReceivedItemsText
+	text_end
 
 GiveItemScript:
 	writetext .ReceivedItemText

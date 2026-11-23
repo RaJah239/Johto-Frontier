@@ -135,6 +135,15 @@ _ObjectEventText::
 	text "Object event"
 	done
 
+_ReceivedItemsText::
+	text "<PLAYER> got"
+	line "@"
+	text_decimal wItemQuantityChange, 1, 2
+	text "× @"
+	text_ram wStringBuffer4
+	text "."
+	done
+
 _ReceivedItemText::
 	text "<PLAYER> got"
 	line "@"
