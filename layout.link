@@ -301,7 +301,7 @@ ROMX $78
 ROMX $79
 "Extra Songs 2"
 ROMX $7a
-	"Unused Egg Pic"
+;	"Unused Egg Pic" <= used to be used
 ROMX $7b
 	"Battle Tower Text"
 	"Overworld Weather"
