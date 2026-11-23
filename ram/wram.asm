@@ -3558,6 +3558,9 @@ wMoveIconSavedPalette:: ds 1 palettes
 
 wMoveStatSavedPalette:: ds 1 palettes
 
+wStartMenuSavedTextPalette:: ds 1 palettes
+wStartMenuTextPaletteSaved:: db
+
 
 SECTION "Move Stat Badge Tile Backups", WRAMX, BANK[2]
 

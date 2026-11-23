@@ -35,6 +35,11 @@ StartMenu::
 	call z, AEqualsTwo
 	ld [wMenuCursorPosition], a
 	call .DrawDayTimeBox
+
+	; Load the icons and draw the time now
+	call .PrepareIcons
+	call .PrintDayTime
+
 	call DrawVariableLengthMenuBox
 	call .DrawBugContestStatusBox
 	call SafeUpdateSprites
@@ -91,7 +96,7 @@ StartMenu::
 	pop af
 	ldh [hOAMUpdate], a
 .ReturnEnd:
-	call ExitMenu
+	call .ExitMenuRestore
 .ReturnEnd2:
 	call CloseText
 	jmp UpdateTimePals
@@ -101,6 +106,12 @@ StartMenu::
 	xor a
 	ldh [hBGMapMode], a
 	call .DrawDayTimeBox
+
+	call .PrepareIcons
+	; Draw the time before SetUpMenu, which commits the tilemap: otherwise the
+	; box is committed once without the time and it blinks in a frame later
+	call .PrintDayTime
+
 	call SetUpMenu
 	ld a, $ff
 	ld [wMenuSelection], a
@@ -121,19 +132,19 @@ StartMenu::
 	ret
 
 .ExitMenuRunScript:
-	call ExitMenu
+	call .ExitMenuRestore
 	ld a, HMENURETURN_SCRIPT
 	ldh [hMenuReturn], a
 	ret
 
 .ExitMenuRunScriptCloseText:
-	call ExitMenu
+	call .ExitMenuRestore
 	ld a, HMENURETURN_SCRIPT
 	ldh [hMenuReturn], a
 	jr .ReturnEnd2
 
 .ExitMenuCallFuncCloseText:
-	call ExitMenu
+	call .ExitMenuRestore
 	ld hl, wQueuedScriptAddr
 	ld a, [hli]
 	ld h, [hl]
@@ -143,6 +154,7 @@ StartMenu::
 	jr .ReturnEnd2
 
 .ReturnRedraw:
+	call .RestoreIconPalettes
 	farcall ClearSavedObjPals
 	farcall DisableDynPalUpdates
 	call ClearBGPalettes
@@ -348,13 +360,13 @@ endr
 
 .DrawDayTimeBox:
 	; place white box
-	hlcoord 0, 13
-	lb bc, 5, 11
+	hlcoord 0, 14
+	lb bc, 4, 10
 	call ClearBox
 
-	; text box
-	hlcoord 0, 13
-	lb bc, 3, 9
+	; text box: the day and weather on top, the time below
+	hlcoord 0, 14
+	lb bc, 2, 8
 	call Textbox
 
 	ld de, ENGINE_BUG_CONTEST_TIMER
@@ -378,57 +390,21 @@ endr
 
 .PrintDayTime:
 	call .DrawDayTimeBox
-	bccoord 1, 15
-	call TextCommand_DAY
 	ldh a, [hHours]
 	ld b, a
 	ldh a, [hMinutes]
 	ld c, a
-	decoord 1, 14
+	decoord 1, 16
 	farcall PrintHoursMins
-
-	ld a, [wFieldWeather]
-	cp WEATHER_RAIN
-	jr z, .PrintRaining
-
-	cp WEATHER_SUN
-	jr z, .PrintSunny
-
-	cp WEATHER_SANDSTORM
-	jr z, .PrintSandstorm
-
-	cp WEATHER_HAIL
-	jr z, .PrintHailing
-	jr .PrintClearSkies
-
-.PrintRaining:
-	hlcoord 1, 16
-	ld de, .RainingStr
-	call PlaceString
-	jr .done
-
-.PrintSunny:
-	hlcoord 1, 16
-	ld de, .SunnyStr
-	call PlaceString
-	jr .done
-
-.PrintSandstorm:
-	hlcoord 1, 16
-	ld de, .SandstormStr
-	call PlaceString
-	jr .done
-
-.PrintHailing:
-	hlcoord 1, 16
-	ld de, .HailingStr
-	call PlaceString
-	jr .done
-
-.PrintClearSkies:
-	hlcoord 1, 16
-	ld de, .ClearStr
-	call PlaceString
+	hlcoord 7, 16
+	ld a, [hli]
+	ld b, [hl]
+	hlcoord 6, 16
+	ld [hli], a
+	ld [hl], b
+	hlcoord 8, 16
+	ld [hl], " "
+	call .PlaceIcons
 .done:
 	ld a, [wOptions2]
 	bit HARD_MODE, a
@@ -443,18 +419,175 @@ endr
 	ld de, .HardModeString
 	jmp PlaceString
 
-.RainingStr:
- 	db "Raining@"
-.SunnyStr:
- 	db "Sunny@"
-.HailingStr:
- 	db "Hailing@"
-.SandstormStr:
- 	db "Sandstorm@"
-.ClearStr:
-	db "Clear@"
 .HardModeString:
 	db "Hard Mode@"
+
+; Day and weather icons: 24x8 badges (3 tiles), the day on the left
+; weather on the right of the box's first line (the box is 8 tiles wide inside)
+; They use the free tiles $79-$7e, like the move icons, and two BG
+; palettes that no cell on screen uses (the same borrowing the Battle Plaza
+; menus do; the palettes come back with UpdateTimePals when the menu closes).
+DEF START_MENU_ICON_TILE EQU $79
+DEF START_MENU_ICON_WIDTH EQU 3
+
+.PlaceIcons:
+	hlcoord 1, 15
+	ld a, START_MENU_ICON_TILE
+	ld [hli], a
+	inc a
+	ld [hli], a
+	inc a
+	ld [hl], a
+	hlcoord 6, 15
+	ld a, START_MENU_ICON_TILE + START_MENU_ICON_WIDTH
+	ld [hli], a
+	inc a
+	ld [hli], a
+	inc a
+	ld [hl], a
+	ret
+
+.PrepareIcons:
+; Load the badges for today's day and weather. They are drawn in the text
+; palette, whose two spare colors are set to the day's and the weather's color,
+; so no map palette is touched. The text palette is given back on exit.
+	call .RestoreIconPalettes
+	call .SaveTextPalette
+	call .WeatherBadgeIndex
+	push af
+	ld de, WeatherBadgeGFX
+	ld hl, vTiles2 tile (START_MENU_ICON_TILE + START_MENU_ICON_WIDTH)
+	call .LoadBadgeTiles
+	call GetWeekday
+	push af
+	ld de, DayBadgeGFX
+	ld hl, vTiles2 tile START_MENU_ICON_TILE
+	call .LoadBadgeTiles
+	pop af
+	ld hl, DayColors
+	ld de, wBGPals1 palette PAL_BG_TEXT color 1
+	call .SetColor
+	pop af
+	ld hl, WeatherColors
+	ld de, wBGPals1 palette PAL_BG_TEXT color 2
+	call .SetColor
+	call .PlaceIcons
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	ret
+
+.SetColor:
+; Write color a of the table at hl to de in wBGPals1 and wBGPals2.
+	ld c, a
+	ld b, 0
+	add hl, bc
+	add hl, bc
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals1)
+	ldh [rSVBK], a
+	ld a, [hli]
+	ld c, a
+	ld b, [hl]
+	ld a, c
+	ld [de], a
+	inc de
+	ld a, b
+	ld [de], a
+	dec de
+	ld hl, wBGPals2 - wBGPals1
+	add hl, de
+	ld a, c
+	ld [hli], a
+	ld [hl], b
+	pop af
+	ldh [rSVBK], a
+	ret
+
+.ExitMenuRestore:
+	call .RestoreIconPalettes
+	jmp ExitMenu
+
+.SaveTextPalette:
+; Remember the text palette's own colors (the icons change two of them).
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals1)
+	ldh [rSVBK], a
+	ld a, TRUE
+	ld [wStartMenuTextPaletteSaved], a
+	ld hl, wBGPals1 palette PAL_BG_TEXT
+	ld de, wStartMenuSavedTextPalette
+	ld bc, 1 palettes
+	call CopyBytes
+	pop af
+	ldh [rSVBK], a
+	ret
+
+.RestoreIconPalettes:
+; Give the text palette its colors back.
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals1)
+	ldh [rSVBK], a
+	ld a, [wStartMenuTextPaletteSaved]
+	and a
+	jr z, .nothing_saved
+	xor a
+	ld [wStartMenuTextPaletteSaved], a
+	ld hl, wStartMenuSavedTextPalette
+	ld de, wBGPals1 palette PAL_BG_TEXT
+	ld bc, 1 palettes
+	call CopyBytes
+	ld hl, wStartMenuSavedTextPalette
+	ld de, wBGPals2 palette PAL_BG_TEXT
+	ld bc, 1 palettes
+	call CopyBytes
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+.nothing_saved
+	pop af
+	ldh [rSVBK], a
+	ret
+
+.WeatherBadgeIndex:
+; a = 0 rain, 1 sun, 2 sandstorm, 3 hail, 4 clear
+	ld a, [wFieldWeather]
+	ld c, 0
+	cp WEATHER_RAIN
+	jr z, .got_weather
+	inc c
+	cp WEATHER_SUN
+	jr z, .got_weather
+	inc c
+	cp WEATHER_SANDSTORM
+	jr z, .got_weather
+	inc c
+	cp WEATHER_HAIL
+	jr z, .got_weather
+	inc c
+.got_weather
+	ld a, c
+	ret
+
+.LoadBadgeTiles:
+; Copy 3 tiles of badge a from the table at de to VRAM at hl.
+	push hl
+	ld l, a
+	ld h, 0
+	ld b, h
+	ld c, l
+	add hl, hl
+	add hl, bc
+rept 4
+	add hl, hl
+endr
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	lb bc, BANK(DayBadgeGFX), START_MENU_ICON_WIDTH
+	jmp Get2bppViaHDMA
 
 .DrawBugContestStatusBox:
 	ld hl, wStatusFlags2
@@ -825,3 +958,26 @@ Fast_Travel_GetName:
 	ld e, a
 	ld d, [hl]
 	ret
+
+DayBadgeGFX:
+INCBIN "gfx/start_menu/day_badges.2bpp"
+
+WeatherBadgeGFX:
+INCBIN "gfx/start_menu/weather_badges.2bpp"
+
+DayColors:
+	RGB 28, 06, 06 ; Sunday
+	RGB 29, 15, 03 ; Monday
+	RGB 23, 19, 00 ; Tuesday
+	RGB 06, 21, 09 ; Wednesday
+	RGB 08, 14, 28 ; Thursday
+	RGB 18, 09, 26 ; Friday
+	RGB 28, 10, 20 ; Saturday
+
+WeatherColors:
+; the dominant colour of each battle weather icon (gfx/battle/weather)
+	RGB 03, 05, 21 ; rain      (battle dark blue)
+	RGB 31, 16, 01 ; sun       (battle orange)
+	RGB 20, 15, 03 ; sandstorm (battle brown)
+	RGB 01, 04, 31 ; hail      (battle blue)
+	RGB 08, 12, 31 ; clear     (battle sky blue)
