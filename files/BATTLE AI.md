@@ -248,7 +248,7 @@ When comparing Pokémon that win, one whose knock-out ability would go off count
 
 Two more rules stop it being exploited:
 - A Pokémon it just switched in always stays for at least one turn, so it won't switch back and forth.
-- 10% of the time it stays in anyway, so it's never fully predictable.
+- It stays in anyway some of the time, so it's never fully predictable: 10% for boss trainers, 50% for everyone else (see [Boss and regular trainers](#boss-and-regular-trainers)).
 
 **Not played out:**
 - accuracy, critical hits and added effects (paralysis chances, flinching, confusion)
@@ -322,8 +322,22 @@ It never switches out when:
   A Pokémon with Run Away escapes the three abilities, but not the moves.
 - it has no other Pokémon left
 - it's Smeargle: its moves (hazards, Fury Drive…) are what turn the battle, so it stays in and uses them. It's still replaced when it faints.
+- it's a regular (non-boss) trainer who has already switched once this battle (see [Boss and regular trainers](#boss-and-regular-trainers)).
 
 Smart switching also doesn't happen at +2 or more in Attack, Sp. Atk, Defense or Sp. Def. The 1-on-1 check doesn't need this rule: it already counts its boosts.
+
+### Boss and regular trainers
+Switching is weaker for regular trainers than for bosses. Bosses are the trainer classes marked `AI_BOSS_SWITCH` in `data/trainers/attributes.asm`. The Battle Tower also counts as a boss.
+
+| | Boss | Regular trainer |
+|---|---|---|
+| Stays in anyway instead of a switch the 1-on-1 check wanted | 10% | 50% |
+| Voluntary switches per battle | no limit | 1 |
+
+- The limit covers every switch the AI chooses (the 1-on-1 check, smart switching, and the 10% Teleport switch). After it, a regular trainer stays in and fights, and also won't use a pivot move or Teleport to leave.
+- Pivot moves (U-turn, Volt Switch) and Teleport don't count toward the limit.
+- Replacing a Pokémon that fainted is never limited.
+- The chances and the limit are the constants `AI_BOSS_STAY_CHANCE`, `AI_NONBOSS_STAY_CHANCE` and `AI_NONBOSS_SWITCH_CAP` in `constants/battle_constants.asm`. To make a trainer class a boss, add `| AI_BOSS_SWITCH` to its line in `data/trainers/attributes.asm`.
 
 ### Which Pokémon it sends in
 After a knock-out, U-turn, Volt Switch, Teleport, Baton Pass or a smart switch, it plays out the 1-on-1 for each Pokémon it could send in, after entry hazards and its entry ability. It picks:
