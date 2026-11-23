@@ -22,9 +22,19 @@ MoveDetailsMenu_SetupScreen:
 	farjp LoadStatsScreenPageTilesGFX
 
 ChooseMoveToLearn::
+	ld hl, MoveDetailsMenuPartyMonHeader
+	jr MoveDetailsMenu_ChooseMove
+
+ChooseMoveToReplace::
+; Forgetting a move: the four known moves and the one being learned, all at once.
+	ld hl, MoveDetailsMenuReplaceHeader
+	; fallthrough
+
+MoveDetailsMenu_ChooseMove:
+	push hl
 	farcall FadeOutToWhite
 	farcall BlankScreen
-	ld hl, MoveDetailsMenuPartyMonHeader
+	pop hl
 	call MoveDetailsMenu_SetupScreen
 
 	xor a
@@ -158,6 +168,21 @@ MoveDetailsMenuPartyMonHeader:
 MoveDetailsMenuPartyMonData:
 	db SCROLLINGMENU_DISPLAY_ARROWS | SCROLLINGMENU_ENABLE_FUNCTION3
 	db 4, SCREEN_WIDTH + 2
+	db SCROLLINGMENU_ITEMS_NORMAL
+	dba wd002
+	dba MoveDetailsMenu_PrintMoveName
+	dba MoveDetailsMenu_PrintPP
+	dba MoveDetailsMenu_PrintMoveDetails
+
+MoveDetailsMenuReplaceHeader:
+	db MENU_BACKUP_TILES
+	menu_coords 1, 1, SCREEN_WIDTH - 2, 11 ; 5 moves, 2 rows each: nothing to scroll
+	dw MoveDetailsMenuReplaceData
+	db 1
+
+MoveDetailsMenuReplaceData:
+	db SCROLLINGMENU_ENABLE_FUNCTION3
+	db 5, SCREEN_WIDTH + 2
 	db SCROLLINGMENU_ITEMS_NORMAL
 	dba wd002
 	dba MoveDetailsMenu_PrintMoveName

@@ -1,11 +1,3 @@
-; Modes for the shared move screen, used when picking a move to forget.
-	const_def
-	const MOVESCREEN_NORMAL
-	const MOVESCREEN_NEWMOVE
-
-DEF MOVESCREEN_LIST_LENGTH EQU NUM_MOVES + 1 ; the move being learned is listed too
-DEF MAX_LIST_OFFSET EQU MOVESCREEN_LIST_LENGTH - NUM_MOVES ; four slots, five moves
-
 LearnMove:
 	call LoadTilemapToTempTilemap
 	ld a, [wCurPartyMon]
@@ -170,7 +162,7 @@ ChooseMoveToForget:
 	ld a, [wCurItem]
 	push af
 	call .BuildMoveList
-	farcall ChooseMoveToLearn
+	farcall ChooseMoveToReplace
 	pop af
 	ld [wCurItem], a
 	pop af
