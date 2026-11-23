@@ -166,7 +166,7 @@ ItemNames::
 	li "Friend Ball"
 	li "Moon Ball"
 	li "Love Ball"
-	li "Normal Box"
+	li "Gallade Call"
 	li "Gorgeous Box"
 	li "Sun Stone"
 	li "Polkadot Bow"

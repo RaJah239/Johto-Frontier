@@ -168,7 +168,7 @@ ItemIconPointers::
 	dba FriendBallIcon ; FRIEND_BALL
 	dba MoonBallIcon ; MOON_BALL
 	dba LoveBallIcon ; LOVE_BALL
-	dba GiftBoxIcon ; NORMAL_BOX
+	dba PokeCallIcon ; GALLADE_CALL
 	dba GiftBoxIcon ; GORGEOUS_BOX
 	dba SunStoneIcon ; SUN_STONE
 	dba PolkadotBowIcon ; POLKADOT_BOW

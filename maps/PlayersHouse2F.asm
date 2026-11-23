@@ -106,6 +106,7 @@ if DEF(_DEBUG)
 	; overworld calls
 	giveitem TANGELA_CALL
 	giveitem TAUROS_CALL
+	giveitem GALLADE_CALL
 	giveitem MAREEP_CALL
 	giveitem SCYTHER_CALL
 	giveitem DONPHAN_CALL

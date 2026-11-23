@@ -342,6 +342,12 @@ _UseTaurosHeadbuttText::
 	line "Headbutt!"
 	prompt
 
+_UseGalladeBrickBreakText::
+	text "Gallade appeared"
+	line "and used Brick"
+	cont "Break!"
+	prompt
+
 _MaySmashText::
 	text "Maybe a #mon"
 	line "can break this."

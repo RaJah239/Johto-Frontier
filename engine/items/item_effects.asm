@@ -180,7 +180,7 @@ ItemEffects:
 	dw PokeBallEffect      ; FRIEND_BALL
 	dw PokeBallEffect      ; MOON_BALL
 	dw PokeBallEffect      ; LOVE_BALL
-	dw NormalBoxEffect     ; NORMAL_BOX
+	dw GalladeCallEffect   ; GALLADE_CALL
 	dw GorgeousBoxEffect   ; GORGEOUS_BOX
 	dw EvoStoneEffect      ; SUN_STONE
 	dw NoEffect            ; POLKADOT_BOW
@@ -2918,10 +2918,6 @@ SacredAshEffect:
 	farcall _SacredAsh
 	jr UseDisposableItem
 
-NormalBoxEffect:
-	ld c, DECOFLAG_SILVER_TROPHY_DOLL
-	jr OpenBox
-
 GorgeousBoxEffect:
 	ld c, DECOFLAG_GOLD_TROPHY_DOLL
 OpenBox:
@@ -3308,6 +3304,11 @@ TaurosCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
 	farjp TaurosCallFunction
+
+GalladeCallEffect:
+	ld a, 1
+	ld [wUsingHMItem], a
+	farjp GalladeCallFunction
 
 HyperEVUpEffect:
 	ld b, PARTYMENUACTION_HEALING_ITEM

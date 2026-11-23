@@ -85,7 +85,6 @@ ItemNameOrder:
 	db REVIVAL_HERB
 
 ; Boxes
-	db NORMAL_BOX
 	db GORGEOUS_BOX
 
 ; Mail
@@ -269,6 +268,7 @@ ItemNameOrder:
 	db TANGELA_CALL
 	db LANTURN_CALL
 	db DONPHAN_CALL
+	db GALLADE_CALL
 	db KINGDRA_CALL
 	db MILOTIC_CALL
 
@@ -361,6 +361,7 @@ ItemAlphaOrder:
 	db FROST_SHARD
 	db FULL_HEAL
 	db FULL_RESTORE
+	db GALLADE_CALL
 	db GOLD_BERRY
 	db GOLD_LEAF
 	db GOOD_ROD
@@ -424,7 +425,6 @@ ItemAlphaOrder:
 	db MYSTIC_WATER
 	db NEVERMELTICE
 	db NOMAD_SIGIL
-	db NORMAL_BOX
 	db NUGGET
 	db OLD_AMBER
 	db OLD_ROD

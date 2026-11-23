@@ -1601,6 +1601,29 @@ TryRockSmashFromMenu:
 	ld a, $80
 	ret
 
+GalladeCallFunction:
+	call .TryGalladeCall
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+
+.TryGalladeCall:
+	call GetFacingObject
+	jr c, .no_rock
+	ld a, d
+	cp SPRITEMOVEDATA_SMASHABLE_ROCK
+	jr nz, .no_rock
+
+	ld hl, GalladeRockSmashFromMenuScript
+	call QueueScript
+	ld a, $81
+	ret
+
+.no_rock
+	call FieldMoveFailed
+	ld a, $80
+	ret
+
 GetFacingObject:
 	farcall CheckFacingObject
 	jr nc, .fail
@@ -1656,6 +1679,28 @@ AutoRockSmashScript:
 .no_item
 	end
 
+GalladeRockSmashFromMenuScript:
+	refreshmap
+	special UpdateTimePals
+	; fallthrough
+
+GalladeRockSmashScript:
+	ispokepicsonoroff
+	iftrue AutoRockSmashScript
+	writetext UseGalladeBrickBreakText
+	refreshmap
+	pokepic GALLADE
+	cry GALLADE
+	waitsfx
+	closepokepic
+	refreshmap
+	closetext
+	sjump AutoRockSmashScript
+
+UseGalladeBrickBreakText:
+	text_far _UseGalladeBrickBreakText
+	text_end
+
 MovementData_RockSmash:
 	rock_smash 10
 	step_end
@@ -1663,6 +1708,7 @@ MovementData_RockSmash:
 AskRockSmashScript:
 	callasm HasRockSmash
 	ifequal 1, .no
+	ifequal 2, .gallade
 
 	ispokepicsonoroff
 	iftrue AutoRockSmashScript
@@ -1670,6 +1716,15 @@ AskRockSmashScript:
 	writetext AskRockSmashText
 	yesorno
 	iftrue RockSmashScript
+	endtext
+
+.gallade
+	ispokepicsonoroff
+	iftrue AutoRockSmashScript
+	opentext
+	writetext AskRockSmashText
+	yesorno
+	iftrue GalladeRockSmashScript
 	endtext
 
 .no
@@ -1689,18 +1744,21 @@ HasRockSmash:
 	call CheckPartyMove
 	jr nc, .yes
 
-; Step 2
-;	ld a, TM_BRICK_BREAK TODOTEXT
-;	ld [wCurItem], a
-;	ld hl, wNumItems
-;	call CheckItem
-;	jr z, .no
-
 ; Step 3
 	ld d, BRICK_BREAK
 	call CheckPartyCanLearnMove
-       and a
+	and a
 	jr z, .yes
+
+; Step 4: the Gallade Call lets Gallade do it (script var 2)
+	ld a, GALLADE_CALL
+	ld [wCurItem], a
+	ld hl, wNumItems
+	call CheckItem
+	jr nc, .no
+	ld a, 2
+	jr .done
+
 .no
 	ld a, 1
 	jr .done
