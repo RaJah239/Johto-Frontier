@@ -174,6 +174,11 @@ Scroll to the next line.
 End a text box.
 
 
+## `$17`: `text_delay30` (`done30`)
+
+Wait exactly 30 frames (A and B don't skip it, unlike `text_pause`). `done30` is `done` with this wait in front: it ends the text string with `"@"`, waits, then ends the text box. Use it where `done` would go, right after a `text` / `line` / `cont` / `para` string.
+
+
 ## `$58`, `"<PROMPT>"`: `prompt`
 
 Prompt the player to end a text box (initiating some other event).

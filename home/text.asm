@@ -761,6 +761,7 @@ TextCommands::
 	dw TextCommand_STRINGBUFFER  ; TX_STRINGBUFFER
 	dw TextCommand_DAY           ; TX_DAY
 	dw TextCommand_FAR           ; TX_FAR
+	dw TextCommand_DELAY_30      ; TX_DELAY_30
 	assert_table_length NUM_TEXT_CMDS
 
 TextCommand_START::
@@ -920,6 +921,16 @@ TextCommand_DECIMAL::
 	call PrintNum
 	ld b, h
 	ld c, l
+	pop hl
+	ret
+
+TextCommand_DELAY_30::
+; wait 30 frames (done30)
+	push hl
+	push bc
+	ld c, 30
+	call DelayFrames
+	pop bc
 	pop hl
 	ret
 

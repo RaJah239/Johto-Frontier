@@ -148,6 +148,19 @@ MACRO text_far
 	db BANK(\1)
 ENDM
 
+	const TX_DELAY_30 ; $17
+MACRO text_delay30
+	db TX_DELAY_30
+ENDM
+
+; done30: like done, but waits 30 frames first. Use it where done goes,
+; right after a text / line / cont / para string (the "@" ends that string).
+MACRO done30
+	db "@"
+	text_delay30
+	done
+ENDM
+
 DEF NUM_TEXT_CMDS EQU const_value
 
 	const_next $50
