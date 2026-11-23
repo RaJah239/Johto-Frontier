@@ -75,10 +75,12 @@ BattlePlazaMartTMCoinTraderScript:
     sjump .WantToBuyADifferentTM
 
 .Unavailable:
-    jumpthisopenedtext
+    writethistext
         text "This TM is not"
         line "available yet."
         done
+    waitbutton
+    sjump .WantToBuyADifferentTM
 
 .ConcludeTransaction:
     waitsfx
@@ -149,6 +151,8 @@ BattlePlazaMartTutorScript:
 .TeachAnotherMove:
     yesorno
     iffalse .Refused
+    callasm .ResetMovesCursor
+.ChooseMove:
     writethistext
         text "Which move shall"
         line "I teach?"
@@ -208,14 +212,19 @@ BattlePlazaMartTutorScript:
     ld [wMenuScrollPosition], a
     jr .input_loop
 
+.ResetMovesCursor:
+; a fresh conversation starts on the first move; going back to the list after
+; an unavailable move keeps the cursor where it was
+    xor a
+    ld [wMenuCursorPosition], a
+    ld [wMenuScrollPosition], a
+    ret
+
 .LoadMovesMenu:
     call ClearSprites
     call LoadStandardMenuHeader
     ld hl, .MovesMenu
     call LoadMenuHeader
-    xor a
-    ld [wMenuCursorPosition], a
-    ld [wMenuScrollPosition], a
     farcall PlazaMoveIcons_PrepareMenu
     call InitScrollingMenu
 .input_loop
@@ -518,10 +527,12 @@ BattlePlazaMartTutorScript:
 
 
 .LockedMove:
-    jumpthisopenedtext
+    writethistext
         text "This move is not"
         line "available yet."
         done
+    waitbutton
+    sjump .ChooseMove
 
 .NotEnough:
     writethistext
