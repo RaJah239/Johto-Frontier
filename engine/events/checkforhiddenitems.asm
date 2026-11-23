@@ -42,13 +42,12 @@ CheckForHiddenItems:
 	jr c, .next
 	cp SCREEN_WIDTH / 2
 	jr nc, .next
-; Is this BG event a hidden item?  If not, go to the next BG event.
+; Is this BG event a hidden item (BGEVENT_ITEM + item)?  If not, go to the next BG event.
 	call .GetFarByte
 	cp BGEVENT_ITEM
-	jr nz, .next
+	jr c, .next
 ; Has this item already been found?  If not, set off the Itemfinder.
-	ld a, [wCurMapScriptBank]
-	call GetFarWord
+; The event's word is the flag that is set once it's picked up.
 	push de ; We save the items coords.
 	ld a, [wCurMapScriptBank]
 	call GetFarWord
