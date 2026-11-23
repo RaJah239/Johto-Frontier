@@ -28,7 +28,7 @@
 - Press Start to sort items (Custom or Alphabetical) in Pack pockets (Item, Ball, Fruit, Key and Battle) in and out of battles and the PC (TMs can't be sorted but are always in alphabetical order)
 - Cheat NPC to New Bark Town
 - Colored trainer card badges and added gym leader's names to their pictures
-- Exp.Share added to Option Menu - 100% Exp to all participants and 50% to non-participants until the player has entered the Hall of Fame, then the entire party receives 100% experience points
+- Exp.Share added to Option Menu - 100% Exp to all participants and 50% to non-participants until the player has gotten all 8 gym badges, then the entire party receives 100% experience points
 - Color coded starter Pokéballs
 - Displays colored Pokémon pictures in over world
 - Overworld Porygons added throughout the game for PC access
@@ -161,7 +161,7 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Can max out Effort Values on all stats either by battle or item usage alone
 - Earned Effort Values are applied to stats after each battle
 - Don't gain experience at max level but still get Effort Values
-- Trainer's Effort Values scale based on owned badges
+- Trainer's Effort Values scale based on their own levels
 - Levitating (up arrow) icon added in Status Screen, Pokédex and Battle
 - Upon learning a 5th move, can press Down to view the move's details 
 - Can rematch any overworld trainer infinitely
