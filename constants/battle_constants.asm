@@ -33,6 +33,9 @@ DEF STAB_DAMAGE_F EQU 6
 
 ; enemy AI behavior
 DEF BASE_AI_SWITCH_SCORE EQU 10
+DEF AI_BOSS_STAY_CHANCE EQU 10 percent ; AI_MatchupSwitch: chance it stays in anyway
+DEF AI_NONBOSS_STAY_CHANCE EQU 50 percent ; (trainers without AI_BOSS_SWITCH)
+DEF AI_NONBOSS_SWITCH_CAP EQU 1 ; voluntary switches per battle for them
 
 ; wPlayerStatLevels and wEnemyStatLevels indexes (see wram.asm)
 ; GetStatName arguments (see data/battle/stat_names.asm)

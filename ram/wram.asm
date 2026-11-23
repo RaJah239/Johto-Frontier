@@ -3449,6 +3449,10 @@ SECTION "AI Teleport Plan", WRAM0
 
 wAITeleportPlan:: db ; AI_TELEPORT_PLAN_*: this turn's switch decision
 
+SECTION "AI Switch Count", WRAM0
+
+wAISwitchCount:: db ; voluntary switches the enemy made this battle (AI_Switch)
+
 SECTION "AI Matchup Save", WRAMX, BANK[5]
 
 ; the active enemy mon's battle data while the matchup simulation borrows it

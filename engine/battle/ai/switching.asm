@@ -357,9 +357,48 @@ IsEnemyStayInMon:
 ; carry if the enemy's mon never switches out by choice: its moveset is what
 ; turns the battle (e.g. Smeargle's hazards and Fury Drive), so it stays in
 ; and uses it. It's still replaced normally when it faints.
+; Also carry for a trainer without AI_BOSS_SWITCH that has already switched
+; AI_NONBOSS_SWITCH_CAP times this battle (wAISwitchCount, counted in
+; AI_Switch; pivot moves and Teleport don't count).
+	ld a, [wAISwitchCount]
+	cp AI_NONBOSS_SWITCH_CAP
+	jr c, .not_capped
+	call AI_IsBossTrainer
+	jr c, .not_capped ; a boss: no cap
+	scf ; capped: stays in
+	ret
+.not_capped
 	ld a, [wEnemyMonSpecies]
 	ld hl, StayInPokemon_AI
 	jmp IsInByteArray
+
+AI_IsBossTrainer::
+; Carry if the trainer's class has AI_BOSS_SWITCH (data/trainers/attributes.asm;
+; the Battle Tower uses the first class's attributes, as AIChooseMove does).
+	ld hl, TrainerClassAttributes + TRNATTR_AI_MOVE_WEIGHTS
+	ld a, [wInBattleTowerBattle]
+	bit 0, a
+	jr nz, .got_attributes
+	ld a, [wTrainerClass]
+	dec a
+	ld bc, NUM_TRAINER_ATTRIBUTES
+	call AddNTimes
+.got_attributes
+	ld a, BANK(TrainerClassAttributes)
+	call GetFarByte
+	and AI_BOSS_SWITCH
+	ret z ; (carry clear)
+	scf
+	ret
+
+AI_SwitchStayChance::
+; a = the chance AI_MatchupSwitch stays in anyway: AI_BOSS_STAY_CHANCE for a
+; boss, AI_NONBOSS_STAY_CHANCE for other trainers.
+	call AI_IsBossTrainer
+	ld a, AI_BOSS_STAY_CHANCE
+	ret c
+	ld a, AI_NONBOSS_STAY_CHANCE
+	ret
 
 StayInPokemon_AI:
 	db SMEARGLE
@@ -434,6 +473,12 @@ AI_Switch:
 ; Switch the enemy's active mon out (wEnemySwitchMonIndex, or the switch-in
 ; picker's choice). Used by link battles (EnemyMonEntrance); the AI itself
 ; doesn't switch out by itself.
+	ld hl, wAISwitchCount ; (the cap for non-boss trainers: IsEnemyStayInMon)
+	inc [hl]
+	jr nz, .counted_switch
+	dec [hl]
+
+.counted_switch
 	ld a, $1
 	ld [wEnemyIsSwitching], a
 	ld [wEnemyGoesFirst], a

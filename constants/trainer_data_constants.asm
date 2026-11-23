@@ -13,6 +13,7 @@ DEF NUM_TRAINER_ATTRIBUTES EQU _RS
 	shift_const AI_AGGRESSIVE
 	shift_const AI_FINAL_ATTACK
 	shift_const AI_SMART_SWITCH
+	shift_const AI_BOSS_SWITCH ; boss: full switching (no stay chance / switch cap)
 DEF NO_AI EQU 0
 
 ; TrainerTypes bits (see engine/battle/read_trainer_party.asm)

@@ -140,7 +140,8 @@ AI_MatchupSwitch:
 ;   that mon wins comfortably (it keeps at least 1/4 of its own).
 ; - Otherwise it switches only to a mon that takes at least 1/4 of the
 ;   player's max HP more off it than staying would.
-; - Even then, 10% of the time it stays (so it isn't fully predictable).
+; - Even then, 10% of the time it stays (so it isn't fully predictable;
+;   50% for trainers without AI_BOSS_SWITCH, see AI_SwitchStayChance).
 	ld hl, wMSimJustSwitched
 	ld a, [hl]
 	ld [hl], 0
@@ -215,9 +216,12 @@ AI_MatchupSwitch:
 
 .switch
 	push af
+	newfarcall AI_SwitchStayChance ; a = the chance it stays in (bosses less)
+	push af
 	call Random
-	cp 10 percent
-	pop bc
+	pop bc ; b = chance
+	cp b
+	pop bc ; b = the mon to switch to
 	jr c, .stay
 	ld a, b
 	inc a
