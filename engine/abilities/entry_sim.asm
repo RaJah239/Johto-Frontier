@@ -14,6 +14,11 @@
 ; - Neutralizing Gas: worked out for the pair (it can also switch off the
 ;   candidate's own ability, or the player's);
 ; - weather (Drizzle, Drought, Sand Stream, Snow Warning) for good;
+; - a weather shard (Rain / Sun / Sand / Frost Shard) it holds: it sets its
+;   weather for 4 turns unless that weather is already up, as the real entry
+;   items do after every entry ability (even one Neutralizing Gas switches
+;   off); it's used up (an Unburden mon gets +1 Speed). So the AI values a
+;   switch-in for the weather it brings;
 ; - Natural Cure: no status;
 ; - Seedfall: Leech Seed on the player's mon;
 ; - stat stages: Defense Mode, Fortify, Battle Stance, Battle Drive,
@@ -40,6 +45,55 @@ DEF MSIM_SDF EQU 4
 
 MSim_EntryEffects::
 ; (before MSim_LoadCandidate works out the candidate's stats)
+; The candidate's entry ability, then its held weather shard (in the game
+; the entry items run after every entry ability).
+	call MSim_EntryAbilities
+	; fallthrough
+
+MSim_EntryShard:
+; If the candidate holds a weather shard and its weather isn't up yet: set it
+; (4 turns, as StartWeatherItem), use the shard up and give an Unburden mon
+; +1 Speed. Neutralizing Gas doesn't affect items, only Unburden.
+	ld a, [wEnemyMonItem]
+	and a
+	ret z
+	ld b, a
+	callfar GetItemHeldEffect
+	ld a, b
+	ld c, WEATHER_RAIN
+	cp HELD_SET_RAIN
+	jr z, .got_weather
+	ld c, WEATHER_SUN
+	cp HELD_SET_SUN
+	jr z, .got_weather
+	ld c, WEATHER_SANDSTORM
+	cp HELD_SET_SAND
+	jr z, .got_weather
+	ld c, WEATHER_HAIL
+	cp HELD_SET_HAIL
+	ret nz
+.got_weather
+	ld a, [wBattleWeather]
+	cp c
+	ret z ; already up: it keeps the shard
+	ld a, c
+	ld [wBattleWeather], a
+	ld a, 4
+	ld [wWeatherCount], a
+	xor a
+	ld [wEnemyMonItem], a
+	; Unburden (switched off by the player's Neutralizing Gas)
+	ld a, [wNeutralizingGas]
+	and %10
+	ret nz
+	ld a, [wEnemyMonSpecies]
+	newfarcall IsUnburdenSpecies
+	ret nc
+	ld hl, wEnemyStatLevels
+	lb bc, MSIM_SPD, 1
+	jmp MSim_RaiseLevel
+
+MSim_EntryAbilities:
 	; Neutralizing Gas for this pair (as UpdateNeutralizingGas)
 	ld a, [wBattleMonSpecies]
 	newfarcall IsNeutralizingGasSpecies
