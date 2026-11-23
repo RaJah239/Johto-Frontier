@@ -1245,6 +1245,12 @@ MACRO waitclosetext
 	db waitclosetext_command
 ENDM
 
+	const verbosegiveuptothreeitems_command
+MACRO verbosegiveuptothreeitems
+	db verbosegiveuptothreeitems_command
+	db \1 ; item (or ITEM_FROM_MEM)
+ENDM
+
 MACRO showdefensiveability
 	ld b, BANK(\1)
 	ld de, \1

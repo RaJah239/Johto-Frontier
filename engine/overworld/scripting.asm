@@ -286,6 +286,7 @@ ScriptCommandTable:
 	dw Script_showthistextfaceplayer     ;
 	dw Script_faceplayeropentext         ;
 	dw Script_waitclosetext              ;
+	dw Script_verbosegiveuptothreeitems  ;
 	assert_table_length NUM_EVENT_COMMANDS
 
 Script_faceplayeropentext:
@@ -670,6 +671,7 @@ Script_battletowertext:
 
 Script_verbosegiveitem:
 	call Script_giveitem
+.show
 	call CurItemName
 	ld de, wStringBuffer1
 	ld a, STRING_BUFFER_4
@@ -679,6 +681,29 @@ Script_verbosegiveitem:
 	ld b, BANK(GiveItemScript)
 	ld de, GiveItemScript
 	jmp ScriptCall
+
+Script_verbosegiveuptothreeitems:
+; Like verbosegiveitem, but gives a random 1 to 3 of the item
+; (ITEM_FROM_MEM: the item in wScriptVar).
+	call GetScriptByte
+	cp ITEM_FROM_MEM
+	jr nz, .ok
+	ld a, [wScriptVar]
+.ok
+	ld [wCurItem], a
+.retry
+	call Random
+	and %11
+	jr z, .retry ; 1, 2 or 3
+	ld [wItemQuantityChange], a
+	ld hl, wNumItems
+	call ReceiveItem
+	ld a, TRUE
+	jr c, .given
+	xor a
+.given
+	ld [wScriptVar], a
+	jr Script_verbosegiveitem.show
 
 GiveItemScript:
 	writetext .ReceivedItemText
