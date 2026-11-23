@@ -53,6 +53,7 @@
 - Show move names for TMs and HMs when receiving or buying
 - Name Rater can change traded Pokémon names
 - Name Rater and Move Deleter's menu loops to party after use
+- With a Suction Cups Pokémon in the party, every fishing rod gets 100% bites
 - Allow fishing while surfing
 - Headbutting trees, smashing rocks and fishing may yield items if a Pokémon is encountered or not
 - Slot Machines payout adjusted
