@@ -208,10 +208,10 @@ ItemEffects:
 	dw ExpCandyEffect      ; EXP_CANDY_L
 	dw ExpCandyEffect      ; EXP_CANDY_XL
 	dw PokeBallEffect      ; PREMIER_BALL
-	dw NoEffect            ; ITEM_E9
-	assert_table_length ITEM_E9
+	dw TaurosCallEffect    ; TAUROS_CALL
+	assert_table_length TAUROS_CALL
 
-; The items past ITEM_E9 do not have effect entries:
+; The items past TAUROS_CALL do not have effect entries:
 ;	SURF_MAIL
 ;	LITEBLUEMAIL
 ;	PORTRAITMAIL
@@ -3303,6 +3303,11 @@ TangelaCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
 	farjp SweetScentFromMenu
+
+TaurosCallEffect:
+	ld a, 1
+	ld [wUsingHMItem], a
+	farjp TaurosCallFunction
 
 HyperEVUpEffect:
 	ld b, PARTYMENUACTION_HEALING_ITEM

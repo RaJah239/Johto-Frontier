@@ -264,6 +264,7 @@ ItemNameOrder:
 
 ; HM items
 	db MAREEP_CALL
+	db TAUROS_CALL
 	db SCYTHER_CALL
 	db TANGELA_CALL
 	db LANTURN_CALL
@@ -287,7 +288,6 @@ ItemNameOrder:
 ; UNUSED ITEMS
 ; Unused Items - 2 total
 	db EGG_TICKET
- 	db ITEM_E9
 
 
 	assert_table_length NUM_ITEMS + 1
@@ -300,7 +300,6 @@ ItemAlphaOrder:
 ; data/items/names.asm (case- and accent-insensitive; ties break on item id).
 ; NO_ITEM leads so it sorts to the top, like ItemNameOrder.
 	db NO_ITEM
-	db ITEM_E9
 	db AMBROSIA
 	db AMULET_COIN
 	db ANTIDOTE
@@ -486,6 +485,7 @@ ItemAlphaOrder:
 	db SUPER_ROD
 	db SURF_MAIL
 	db TANGELA_CALL
+	db TAUROS_CALL
 	db THUNDERSTONE
 	db TINYMUSHROOM
 	db TOXIC_ORB

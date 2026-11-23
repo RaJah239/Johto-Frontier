@@ -195,7 +195,7 @@ ItemDescriptions:
 	dw ExpCandyLDesc
 	dw ExpCandyXLDesc
 	dw PremierBallDesc
-	dw TeruSama27Desc
+	dw TaurosCallDesc
 	dw SurfMailDesc
 	dw LiteBlueMailDesc
 	dw PortraitMailDesc
@@ -483,6 +483,10 @@ FrostShardDesc:
 DonphanCallDesc:
 	db   "Calls a DONPHAN to"
 	next "move boulders.@"
+
+TaurosCallDesc:
+	db   "Calls a Tauros to"
+	next "headbutt trees.@"
 
 HasteHerbDesc:
 	db   "Raises Speed at"

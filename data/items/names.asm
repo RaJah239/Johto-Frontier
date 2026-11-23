@@ -194,7 +194,7 @@ ItemNames::
 	li "Exp.Candy L"
 	li "Exp.Candy XL"
 	li "Premier Ball"
-	li "?"
+	li "Tauros Call"
 	li "Surf Mail"
 	li "LiteBlueMail"
 	li "PortraitMail"

@@ -337,6 +337,11 @@ _UseRockSmashText::
 	line "Brick Break!"
 	prompt
 
+_UseTaurosHeadbuttText::
+	text "Tauros did a"
+	line "Headbutt!"
+	prompt
+
 _MaySmashText::
 	text "Maybe a #mon"
 	line "can break this."

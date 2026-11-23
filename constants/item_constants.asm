@@ -200,7 +200,7 @@
  	const EXP_CANDY_L
  	const EXP_CANDY_XL
 	const PREMIER_BALL
- 	const ITEM_E9
+ 	const TAUROS_CALL
 ; mail
  	const SURF_MAIL
 	const LITEBLUEMAIL

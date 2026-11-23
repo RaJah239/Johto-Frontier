@@ -1478,27 +1478,85 @@ AutoHeadbuttScript:
 .no_item
 	end
 
+TaurosCallFunction:
+; Tauros Call: Headbutt from the pack, without a party Pokemon.
+	call .TryTaurosCall
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+
+.TryTaurosCall:
+	call GetFacingTileCoord
+	call CheckHeadbuttTreeTile
+	jr nz, .no_tree
+
+	ld hl, TaurosHeadbuttFromMenuScript
+	call QueueScript
+	ld a, $81
+	ret
+
+.no_tree
+	call FieldMoveFailed
+	ld a, $80
+	ret
+
+TaurosHeadbuttFromMenuScript:
+	refreshmap
+	special UpdateTimePals
+	; fallthrough
+
+TaurosHeadbuttScript:
+	ispokepicsonoroff
+	iftrue AutoHeadbuttScript
+	writetext UseTaurosHeadbuttText
+	reanchormap
+	pokepic TAUROS
+	cry TAUROS
+	waitsfx
+	closepokepic
+	refreshmap
+	sjump AutoHeadbuttScript
+
+UseTaurosHeadbuttText:
+	text_far _UseTaurosHeadbuttText
+	text_end
+
+AskTaurosHeadbuttScript:
+	ispokepicsonoroff
+	iftrue AutoHeadbuttScript
+	opentext
+	writetext AskHeadbuttText
+	yesorno
+	iftrue TaurosHeadbuttScript
+	endtext
+
 TryHeadbuttOW::
 ; Step 1
 	ld d, HEADBUTT
 	call CheckPartyMove
 	jr nc, .can_use
 
-; Step 2 ; TODOTEXT
-;	ld a, TM_HEADBUTT
-;	ld [wCurItem], a
-;	ld hl, wNumItems
-;	call CheckItem
-;	jr z, .no
-
-; Step 3
+; Step 2
 	ld d, HEADBUTT
 	call CheckPartyCanLearnMove
     and a
 	jr z, .can_use ; cannot learn headbutt
+
+; Step 3
+	ld a, TAUROS_CALL
+	ld [wCurItem], a
+	ld hl, wNumItems
+	call CheckItem
+	jr nc, .no
+	ld a, BANK(AskTaurosHeadbuttScript)
+	ld hl, AskTaurosHeadbuttScript
+	call CallScript
+	scf
+	ret
 .no
 	xor a
 	ret
+
 .can_use
 	ld a, BANK(AskHeadbuttScript)
 	ld hl, AskHeadbuttScript

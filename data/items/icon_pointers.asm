@@ -196,7 +196,7 @@ ItemIconPointers::
 	dba ExpCandyLIcon ; EXP_CANDY_L
 	dba ExpCandyXLIcon ; EXP_CANDY_XL
 	dba PremierBallIcon ; PREMIER_BALL
-	dba NoItemIcon ; ITEM_E9
+	dba PokeCallIcon ; TAUROS_CALL
 	dba MailIcon ; SURF_MAIL
 	dba MailIcon ; LITEBLUEMAIL
 	dba PortraitmailIcon ; PORTRAITMAIL
