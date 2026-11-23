@@ -158,10 +158,9 @@ BattlePlazaMartTutorScript:
     writetext BattlePlazaMartTutorMoveText
     ifequal 2, .NotEnough
     ifequal 3, .LockedMove
-    iffalse .CloseTutor
+    iffalse .Refused
     special MoveTutor2
     iffalse .TeachMove
-.CloseTutor
     sjump .Refused
 
 ; Left/Right jump a whole window (page) at a time. The scroll position is
@@ -240,18 +239,15 @@ BattlePlazaMartTutorScript:
     jr z, .cancel_selection
 ; selection confirmed
     assert wMenuSelectionQuantity == wMenuSelection + 1
-    ld hl, wMenuSelection
-    ld a, [hli]
-    ld [wNamedObjectIndex], a
+    ld a, [wMenuSelection]
     ; Check if this move is unlocked
     ld c, a  ; c = move ID
     ld hl, .FullMoveList
     inc hl  ; skip count byte
     ld b, 0  ; index counter
+; (the move is always in the list: CANCEL was handled above)
 .find_move_index:
     ld a, [hl]
-    cp -1
-    jr z, .move_not_found
     cp c
     jr z, .move_found
     inc hl
@@ -262,7 +258,6 @@ BattlePlazaMartTutorScript:
     ; b = index, look up event flag
     ld c, b
     ld b, 0
-    push hl
     ld hl, TutorUnlockEvents
     add hl, bc
     add hl, bc
@@ -272,7 +267,6 @@ BattlePlazaMartTutorScript:
     ld d, a
     ld b, CHECK_FLAG
     call EventFlagAction
-    pop hl
     jr nz, .move_unlocked
     ; locked: return 3
     ld a, 3
@@ -285,21 +279,6 @@ BattlePlazaMartTutorScript:
     ld [wNamedObjectIndex], a
     ld a, [hl]
     ld [wBattlePlazaCrystalMoveTutor], a ; not used for menus anymore at this point
-    ld b, a
-    call .GetAmountOfCrystals
-    cp b
-    jr c, .not_enough_crystals
-    ld a, TRUE
-    ld [wScriptVar], a
-    ret
-
-.move_not_found:
-    ld a, [wMenuSelection]
-    ld [wNamedObjectIndex], a
-    ld hl, wMenuSelection
-    ld a, [hli]
-    ld a, [hl]
-    ld [wBattlePlazaCrystalMoveTutor], a
     ld b, a
     call .GetAmountOfCrystals
     cp b
@@ -397,8 +376,6 @@ BattlePlazaMartTutorScript:
     ld b, 0  ; index counter
 .find_index:
     ld a, [hl]
-    cp -1  ; terminator
-    jr z, .not_found
     cp c
     jr z, .found
     inc hl  ; skip move ID
@@ -406,7 +383,7 @@ BattlePlazaMartTutorScript:
     inc b
     jr .find_index
 .found:
-    ; b = index (0-13), save it
+    ; b = index, save it
     push bc
     ld c, b
     ld b, 0
@@ -422,11 +399,9 @@ BattlePlazaMartTutorScript:
     pop bc  ; restore index (b)
     jr nz, .show_name  ; unlocked
     ; locked: show "Unavailable XX" where XX = index + 1
-    ; Save index
-    push bc
     ; Calculate tens and ones digits
-    ld a, b  ; a = index (0-13)
-    inc a  ; 1-14 (move number)
+    ld a, b  ; a = index (0-29)
+    inc a  ; 1-30 (move number)
     ld b, 0  ; tens counter
 .tens_loop:
     cp 10
@@ -463,18 +438,10 @@ BattlePlazaMartTutorScript:
     ld [de], a
     ; Set de to point to the string
     ld de, wStringBuffer4
-    pop bc  ; restore index (not needed, but balance stack)
     pop hl  ; hl = destination (from initial push de)
     jmp PlaceString
 
 .show_name:
-    ld a, [wMenuSelection]
-    ld [wNamedObjectIndex], a
-    call GetMoveName
-    pop hl
-    jmp PlaceString
-
-.not_found:
     ld a, [wMenuSelection]
     ld [wNamedObjectIndex], a
     call GetMoveName
