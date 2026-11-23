@@ -213,6 +213,7 @@ GrandGauntletGiveUpPenalty:
 	ld [wMonType], a ; our party, not an opposing one
 	ld [wBattleMode], a ; no wild item, level-appropriate moves
 	predef TryAddMonToParty
+	call SetLastPartyMonGauntletBall
 	farjp GGDungeonBag_Exit
 
 BattlePlazaGrandGauntletReceptionistScript:
@@ -547,9 +548,20 @@ RerollPartyKeeperTeam:
 	ld [wMonType], a ; our party, not an opposing one
 	ld [wBattleMode], a ; no wild item, level-appropriate moves
 	predef TryAddMonToParty
+	call SetLastPartyMonGauntletBall
 	pop bc
 	dec b
 	jr nz, .fill
+	ret
+
+SetLastPartyMonGauntletBall:
+; Everything the Grand Gauntlet hands out is caught in its own ball, a
+; keepsake of the trial. Applies to the Pokemon just added to the party.
+	ld a, [wPartyCount]
+	dec a
+	ld hl, wPartyMon1CaughtBall
+	call GetPartyLocation
+	ld [hl], GAUNTLET_BALL
 	ret
 
 ResetPartyToEmpty:
@@ -928,6 +940,7 @@ FeebasSellerScript:
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	givepoke FEEBAS, 50
+	callasm SetLastPartyMonGauntletBall
 	endtext
 
 .NoRoom:
