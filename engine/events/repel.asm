@@ -1,9 +1,7 @@
 RepelWoreOffScript::
 	opentext
 	writetext .RepelWoreOffText
-	waitbutton
-	closetext
-	end
+	waitendtext
 
 .RepelWoreOffText:
 	text_far _RepelWoreOffText
@@ -15,11 +13,9 @@ UseAnotherRepelScript::
 	getitemname STRING_BUFFER_3, USE_SCRIPT_VAR
 	writetext .text
 	yesorno
-	iffalse .done
+	iffalse_endtext
 	callasm DoItemEffect
-.done
-	closetext
-	end
+	endtext
 
 .text:
 	text_far _UseAnotherRepelText
