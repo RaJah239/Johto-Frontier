@@ -9,9 +9,6 @@ DoubleSpeed::
 	ld hl, rKEY1
 	bit 7, [hl]
 	ret nz
-	; fallthrough
-
-SwitchSpeed::
 	set 0, [hl]
 	xor a
 	ldh [rIF], a
