@@ -2913,8 +2913,16 @@ ConfusionDamageCalc:
 	call GetBattleVar
 	and TYPE_MASK
 	cp b
+	jr z, .item_type_match
+
+	; Never-Melt Ice also boosts Freeze-Dry's ICE2 type
+	cp ICE2
+	jr nz, .DoneItem
+	ld a, b
+	cp ICE
 	jr nz, .DoneItem
 
+.item_type_match
 ; * 100 + item effect amount
 	ld a, c
 	add 100
