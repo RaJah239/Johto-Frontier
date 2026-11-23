@@ -314,6 +314,59 @@ ShowItemIcon::
 	call PlaceIconTilesFromA
 	jmp WaitBGMap
 
+SetReceivedEggName::
+; "special SetReceivedEggName": wStringBuffer4 = "Egg", or "Shiny Egg" if the
+; Egg just added to the party is shiny (for ReceivedItemText).
+	call CheckLastPartyMonShiny
+	ld hl, .Egg
+	jr nc, .got_name
+	ld hl, .ShinyEgg
+.got_name
+	ld de, wStringBuffer4
+	ld bc, STRING_BUFFER_LENGTH
+	jmp CopyBytes
+
+.Egg:
+	db "Egg@"
+.ShinyEgg:
+	db "Shiny Egg@"
+
+ShowEggIcon::
+; "special ShowEggIcon" after the "received the Egg" text: the Egg icon in the
+; textbox, in gold if the Egg just added to the party is shiny.
+	ld hl, EggTextboxIcon
+	lb bc, BANK(EggTextboxIcon), 9
+	call DecompressTextboxItemIcon
+	call CheckLastPartyMonShiny
+	ld hl, EggIconColors
+	jr nc, .got_colors
+	ld hl, ShinyEggIconColors
+.got_colors
+	call SetTextboxIconColors
+	hlcoord 16, 13
+	ld a, TEXTBOX_ICON_TILE
+	call PlaceIconTilesFromA
+	jmp WaitBGMap
+
+CheckLastPartyMonShiny:
+; Return carry if the last party Pokémon is shiny.
+	ld a, [wPartyCount]
+	dec a
+	ld hl, wPartyMon1DVs
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call AddNTimes
+	ld b, h
+	ld c, l
+	newfarcall CheckShininess
+	ret
+
+EggIconColors:
+	RGB 31, 29, 22
+	RGB 26, 10, 10
+ShinyEggIconColors:
+	RGB 31, 27, 08
+	RGB 31, 14, 02
+
 DecompressTextboxItemIcon:
 ; Like DecompressRequest2bpp to the textbox icon tiles, but without the icon's
 ; black corner pixels: in the Pack they round off the outline around the

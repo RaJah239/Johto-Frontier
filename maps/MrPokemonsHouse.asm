@@ -52,7 +52,6 @@ MrPokemonsHouse_MrPokemonScript:
 	readvar VAR_PARTYCOUNT
 	ifequal PARTY_LENGTH, .PartyFull
 	giveegg TOGEPI, EGG_LEVEL
-	getstring STRING_BUFFER_4, .eggname
 	callstd ReceiveTogepiEggScript
 	setevent EVENT_MR_POKEMON_TOGEPI_EGG
 .LifeIsDelightful:
@@ -69,9 +68,6 @@ MrPokemonsHouse_MrPokemonScript:
 		text "Thanks! Swing by"
 		line "any time!"
 		done
-
-.eggname:
-	db "Egg@"
 
 .PartyFull:
 		jumpthisopenedtext

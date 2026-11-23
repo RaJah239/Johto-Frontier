@@ -136,6 +136,8 @@ SpecialsPointers::
 	add_special OverridePlayerParty
 	add_special PartyKeeperShowTeam
 	add_special ShowItemIcon
+	add_special SetReceivedEggName
+	add_special ShowEggIcon
 	add_special BillsGrandfather
 
 if DEF(_DEBUG)

@@ -376,8 +376,10 @@ DayCareManOutside:
 	ld hl, wDayCareMan
 	res DAYCAREMAN_HAS_EGG_F, [hl]
 	call DayCare_InitBreeding
+	farcall SetReceivedEggName
 	ld hl, .ReceivedEggText
 	call PrintText
+	farcall ShowEggIcon
 	ld de, SFX_GET_EGG
 	call PlaySFX
 	ld c, 120

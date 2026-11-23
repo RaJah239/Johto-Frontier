@@ -1179,7 +1179,9 @@ _FoundAnEggText::
 
 _ReceivedEggText::
 	text "<PLAYER> received"
-	line "the Egg!"
+	line "the @"
+	text_ram wStringBuffer4
+	text "!"
 	done
 
 _TakeGoodCareOfEggText::

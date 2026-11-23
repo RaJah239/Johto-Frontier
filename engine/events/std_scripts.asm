@@ -659,8 +659,10 @@ ReceiveItemScript:
 	end
 
 ReceiveTogepiEggScript:
+	special SetReceivedEggName
 	waitsfx
 	farwritetext ReceivedItemText
+	special ShowEggIcon
 	playsound SFX_GET_EGG
 	waitsfx
 	end
