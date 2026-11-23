@@ -636,6 +636,17 @@ PCIconLoop:
 	jr z, .blank
 	ld a, [wBufferMonAltSpecies]
 	ld [wCurIcon], a
+
+	push hl
+	push de
+	ld de, wBillsPC_PartyForms - wBillsPC_PartyList
+	add hl, de
+	ld a, [wBufferMonUnownForm]
+	ld [hl], a
+	pop de
+	pop hl
+	ld a, [wCurIcon]
+
 	ld [hli], a
 	ld a, e
 	push hl
@@ -1655,6 +1666,10 @@ BillsPC_MoveIconData:
 	ld a, 1
 	call .Copy
 
+	; Keep the form with the displayed icon while slots are swapped or shifted.
+	ld a, 3
+	call .Copy
+
 	; Set new icon data unless we're only blanking.
 	ld a, d
 	and e
@@ -1664,6 +1679,14 @@ BillsPC_MoveIconData:
 	push bc
 	ld b, d
 	ld c, e
+
+	ld a, [wBufferMonUnownForm]
+	push af
+	ld a, 3
+	call .GetAddr
+	ld a, [hl]
+
+	ld [wBufferMonUnownForm], a
 	ld a, 1
 	call .GetAddr
 	push hl
@@ -1671,6 +1694,8 @@ BillsPC_MoveIconData:
 	call .GetAddr
 	pop de
 	call BillsPC_SetIcon
+	pop af
+	ld [wBufferMonUnownForm], a
 	pop bc
 
 .blank_old
@@ -1679,6 +1704,10 @@ BillsPC_MoveIconData:
 	call .GetAddr
 	xor a
 	ld [hli], a
+	ld a, 3
+	call .GetAddr
+	xor a
+	ld [hl], a
 	ld a, 2
 	call .GetAddr
 
@@ -1747,6 +1776,8 @@ BillsPC_MoveIconData:
 	jr z, .party
 
 	; Box
+	cp 3
+	jr z, .box_form
 	and a
 	jr z, .box_party_pal
 	dec a
@@ -1760,7 +1791,13 @@ BillsPC_MoveIconData:
 	ld hl, wBillsPC_BoxList
 	jr .get_ext_addr
 
+.box_form
+	ld hl, wBillsPC_BoxForms
+	jr .get_ext_addr
+
 .party
+	cp 3
+	jr z, .party_form
 	and a
 	jr z, .box_party_pal
 	dec a
@@ -1791,7 +1828,13 @@ BillsPC_MoveIconData:
 	call AddNTimes
 	jr .got_addr
 
+.party_form
+	ld hl, wBillsPC_PartyForms
+	jr .get_ext_addr
+
 .held
+	cp 3
+	jr z, .held_form
 	and a
 	jr z, .held_pal
 	dec a
@@ -1816,7 +1859,13 @@ BillsPC_MoveIconData:
 	dec c
 	jr z, .got_addr
 	ld hl, wBillsPC_HeldIcon
-	; fallthrough
+	jr .got_addr
+
+.held_form
+	ld hl, wBillsPC_QuickForm
+	dec c
+	jr z, .got_addr
+	ld hl, wBillsPC_HeldForm
 .got_addr
 	pop af
 	pop bc

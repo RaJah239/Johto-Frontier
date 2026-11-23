@@ -835,6 +835,12 @@ wBillsPC_BoxList:: ds 20
 wBillsPC_HeldIcon:: db
 wBillsPC_QuickIcon:: db
 
+; Unown forms follow the displayed icons during PC move animations.
+wBillsPC_PartyForms:: ds PARTY_LENGTH
+wBillsPC_BoxForms:: ds MONS_PER_BOX
+wBillsPC_HeldForm:: db
+wBillsPC_QuickForm:: db
+
 ; Cursor data
 wBillsPC_CursorItem:: db ; what item is selected.
 wBillsPC_CursorPos:: db ; 0-3 * 4*row, row 0 is title. Bit 7 means in party.
