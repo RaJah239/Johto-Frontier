@@ -114,7 +114,7 @@ SECTION "WRAM", WRAM0
 wLZAddress:: dw
 wLZBank::    db
 
-	ds 1
+wTrainerRematchReduced:: db
 
 wBoxAlignment:: db
 

@@ -65,6 +65,7 @@ RematchScript:
 	nooryes
 .GotChoice:
 	iffalse .refused
+	loadmem wTrainerRematchReduced, TRUE
     loadtemptrainer
 	encountermusic
 	sjump RematchStartBattleWithMapTrainerScript

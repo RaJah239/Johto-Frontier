@@ -1796,6 +1796,24 @@ WinTrainerBattle:
 	jmp ClearBGPalettes
 
 .give_money
+; Rematch trainers give 1/4 of the money
+	ld a, [wTrainerRematchReduced]
+	and a
+	jr z, .full_reward
+	ld hl, wBattleReward
+	srl [hl]
+	inc hl
+	rr [hl]
+	inc hl
+	rr [hl]
+	ld hl, wBattleReward
+	srl [hl]
+	inc hl
+	rr [hl]
+	inc hl
+	rr [hl]
+
+.full_reward
 	ld a, [wAmuletCoin]
 	and a
 	call nz, .DoubleReward
@@ -6780,6 +6798,10 @@ GiveExperiencePoints:
 	ld a, [hl]
 	cp LUCKY_EGG
 	call z, BoostExp
+
+; Rematch trainers give 1/4 of the EXP
+	call QuarterRematchExp
+
 	ldh a, [hQuotient + 3]
 	ld [wStringBuffer2 + 1], a
 	ldh a, [hQuotient + 2]
@@ -7062,6 +7084,26 @@ GiveExperiencePoints:
 
 .done
 	jmp ResetBattleParticipants
+
+QuarterRematchExp:
+; Quarter the experience (at least 1) during a trainer rematch.
+	ld a, [wTrainerRematchReduced]
+	and a
+	ret z
+	ld hl, hQuotient + 2
+	srl [hl]
+	inc hl
+	rr [hl]
+	dec hl
+	srl [hl]
+	inc hl
+	rr [hl]
+	ld a, [hld]
+	or [hl]
+	ret nz
+	inc hl
+	ld [hl], 1
+	ret
 
 BoostExp:
 ; Multiply experience by 1.5x

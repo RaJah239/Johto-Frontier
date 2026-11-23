@@ -49,6 +49,8 @@ CopyBackpic:
 	ret
 
 ExitBattle:
+	xor a
+	ld [wTrainerRematchReduced], a
 	farcall UpdatePartyStats
 	call .HandleEndOfBattle
 	farjp CleanUpBattleRAM
