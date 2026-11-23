@@ -255,16 +255,9 @@ wGlobalAnimXOffset:: db
 
 wSpriteAnimDataEnd::
 
-	ds 11
+wBattlePlazaCrystalMoveTutor:: db
 
-; needed since I don't want to have multiple copies
-; of the same thing :skull:
-wBattlePlazaCrystalMoveTutor:: ds \
-	(20 * 2) + \ ; total items
-	1 + \ ; cancel button
-	1 ; number of items
-	ds 3
-
+	ds 55
 
 SECTION "Sprites", WRAM0
 

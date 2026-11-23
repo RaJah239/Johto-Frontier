@@ -153,7 +153,6 @@ BattlePlazaMartTutorScript:
         text "Which move shall"
         line "I teach?"
         done
-    callasm .SetupMovesMenu
     callasm .LoadMovesMenu
     callasm PlazaMoveIcons_Close
     writetext BattlePlazaMartTutorMoveText
@@ -246,7 +245,7 @@ BattlePlazaMartTutorScript:
     ld [wNamedObjectIndex], a
     ; Check if this move is unlocked
     ld c, a  ; c = move ID
-    ld hl, wBattlePlazaCrystalMoveTutor
+    ld hl, .FullMoveList
     inc hl  ; skip count byte
     ld b, 0  ; index counter
 .find_move_index:
@@ -334,7 +333,7 @@ BattlePlazaMartTutorScript:
     db 3 ; height
     db 1 ; width ("1" triggers Function 2 to run)
     db SCROLLINGMENU_ITEMS_QUANTITY ; item format
-    dba wBattlePlazaCrystalMoveTutor
+    dba .FullMoveList
     dba .DisplayMoveName
     dba .DisplayAmountOkNotReally
     dba .UpdateNeededCrystalIndicator
@@ -393,7 +392,7 @@ BattlePlazaMartTutorScript:
     ld a, [wMenuSelection]
     ; Find the index of this move in the move list
     ld c, a  ; c = move ID to find
-    ld hl, wBattlePlazaCrystalMoveTutor
+    ld hl, .FullMoveList
     inc hl  ; skip count byte
     ld b, 0  ; index counter
 .find_index:
@@ -484,21 +483,6 @@ BattlePlazaMartTutorScript:
 
 .UnavailablePrefix: db "Unavailable @"
 
-.SetupMovesMenu:
-; copy the whole move list
-    ld hl, .FullMoveList
-    ld de, wBattlePlazaCrystalMoveTutor
-    ld bc, .FullMoveListEnd - .FullMoveList
-    call CopyBytes
-
-; move the CANCEL indicator
-    add a ; a *= 2, because quantity is factored in
-    add l
-    ld l, a
-    ld a, -1
-    ld [hl], a
-    ret
-
 .GetAmountOfCrystals:
 ; returns: a = qty. of Crystals
     ld hl, wItems ; pocket of CRYSTAL, see attributes.asm
@@ -523,23 +507,46 @@ BattlePlazaMartTutorScript:
     ret
 
 .FullMoveList:
-    db 14 ; list length
-; list items
-    db TELEPORT, 1
-    db SEISMIC_TOSS, 6
-    db BUBBLEBEAM, 6
-    db REFLECT, 4
-    db BODY_SLAM, 12
-    db THUNDER_WAVE, 12
-    db PHOTON_BLAST, 18
-    db MEGA_DRAIN, 17
-    db SUBSTITUTE, 20
-    db METRONOME, 15
-    db ROCK_SLIDE, 25
-    db SWORDS_DANCE, 23
+; Read straight from ROM by the scrolling menu (the entry after the
+; last move, -1, is the CANCEL row). Entry N is unlocked by the Nth
+; event of TutorUnlockEvents.
+    db (.FullMoveListEnd - .FullMoveList - 2) / 2 ; list length
+; list items: move, cost in Crystals
+; All 30 tutor moves (MT01-MT30 in constants/item_constants.asm), in that
+; order, still unavailable: each waits for a placeholder event
+; (TutorUnlockEvents: EVENT_ROUTE_17_BERRY_3, which nothing in the game ever
+; sets) and costs a placeholder 10 Crystals (Double-Edge keeps its old 24).
+    db FIRE_BLAST, 10
+    db THUNDER, 10
+    db BLIZZARD, 10
+    db REST, 10
+    db SLEEP_TALK, 10
+    db THUNDERPUNCH, 10
+    db FIRE_PUNCH, 10
+    db ICE_PUNCH, 10
+    db THUNDER_FANG, 10
+    db ICE_FANG, 10
+    db FIRE_FANG, 10
+    db SURF, 10
+    db ICY_WIND, 10
+    db SKY_ATTACK, 10
     db DOUBLE_EDGE, 24
-    db EXPLOSION, 23
-    db -1 ; terminator
+    db FLARE_BLITZ, 10
+    db WILD_CHARGE, 10
+    db GIGA_IMPACT, 10
+    db HYPER_BEAM, 10
+    db SWIFT, 10
+    db HIDDEN_FORCE, 10
+    db HIDDEN_POWER, 10
+    db SUNNY_DAY, 10
+    db RAIN_DANCE, 10
+    db SANDSTORM, 10
+    db HAIL, 10
+    db FALSE_SWIPE, 10
+    db BULLDOZE, 10
+    db ROCK_TOMB, 10
+    db POUNCE, 10
+    db -1 ; end
 .FullMoveListEnd:
 
 
@@ -593,17 +600,37 @@ BattlePlazaMartTutorMoveText:
     done
 
 TutorUnlockEvents:
-    dw EVENT_BEAT_FALKNER ; Move 1
-    dw EVENT_BEAT_BUGSY ; Move 2
-    dw EVENT_BEAT_WHITNEY ; Move 3
-    dw EVENT_BEAT_MORTY ; Move 4
-    dw EVENT_BEAT_JASMINE ; Move 5
-    dw EVENT_BEAT_CHUCK ; Move 6
-    dw EVENT_BEAT_PRYCE ; Move 7
-    dw EVENT_BEAT_CLAIR ; Move 8
-    dw EVENT_BEAT_ELITE_4_WILL ; Move 9
-    dw EVENT_BEAT_ELITE_4_KOGA ; Move 10
-    dw EVENT_BEAT_ELITE_4_BRUNO ; Move 11
-    dw EVENT_BEAT_ELITE_4_KAREN ; Move 12
-    dw EVENT_BEAT_CHAMPION_LANCE ; Move 13
-    dw EVENT_BEAT_ELITE_FOUR ; Move 14
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 1 (MT01, FIRE_BLAST)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 2 (MT02, THUNDER)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 3 (MT03, BLIZZARD)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 4 (MT04, REST)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 5 (MT05, SLEEP_TALK)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 6 (MT06, THUNDERPUNCH)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 7 (MT07, FIRE_PUNCH)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 8 (MT08, ICE_PUNCH)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 9 (MT09, THUNDER_FANG)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 10 (MT10, ICE_FANG)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 11 (MT11, FIRE_FANG)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 12 (MT12, SURF)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 13 (MT13, ICY_WIND)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 14 (MT14, SKY_ATTACK)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 15 (MT15, DOUBLE_EDGE)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 16 (MT16, FLARE_BLITZ)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 17 (MT17, WILD_CHARGE)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 18 (MT18, GIGA_IMPACT)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 19 (MT19, HYPER_BEAM)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 20 (MT20, SWIFT)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 21 (MT21, HIDDEN_FORCE)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 22 (MT22, HIDDEN_POWER)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 23 (MT23, SUNNY_DAY)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 24 (MT24, RAIN_DANCE)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 25 (MT25, SANDSTORM)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 26 (MT26, HAIL)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 27 (MT27, FALSE_SWIPE)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 28 (MT28, BULLDOZE)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 29 (MT29, ROCK_TOMB)
+    dw EVENT_ROUTE_17_BERRY_3 ; Move 30 (MT30, POUNCE)
+TutorUnlockEventsEnd:
+
+    assert (TutorUnlockEventsEnd - TutorUnlockEvents) / 2 == 30, \
+        "TutorUnlockEvents needs one event per move of the Battle Plaza tutor's list"
