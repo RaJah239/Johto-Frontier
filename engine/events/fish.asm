@@ -25,10 +25,17 @@ endr
 ; Fish for monsters with rod b from encounter data in FishGroup at hl.
 ; Return monster d at level e.
 
+	; a Suction Cups mon in the party: every rod bites
+	push hl
+	farcall PartyHasSuctionCups
+	pop hl
+	jr c, .bite
+
 	call Random
 	cp [hl]
 	jr nc, .no_bite
 
+.bite
 	; Get encounter data by rod:
 	; 0: Old
 	; 1: Good

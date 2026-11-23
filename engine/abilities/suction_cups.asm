@@ -4,6 +4,8 @@
 ; A Suction Cups mon can't be forced out by Roar or Whirlwind (in a wild
 ; battle too: it doesn't flee or run). Its popup slides in over its HUD
 ; when one of them is used on it (BattleCommand_ForceSwitch).
+; Also: with a Suction Cups mon in the party, every fishing rod bites
+; (engine/events/fish.asm).
 
 IsSuctionCupsSpecies::
 ; Carry if species a has Suction Cups. Preserves bc, de, hl.
@@ -21,6 +23,31 @@ IsSuctionCupsSpeciesRaw:
 	push bc
 	ld hl, SuctionCupsPokemon
 	call IsInByteArray
+	jmp PopBCDEHL
+
+PartyHasSuctionCups::
+; Carry if any mon in the party has Suction Cups. Preserves bc, de, hl.
+	push hl
+	push de
+	push bc
+	ld a, [wPartyCount]
+	and a
+	jr z, .done ; (no carry)
+	ld c, a
+	ld hl, wPartySpecies
+.loop
+	ld a, [hli]
+	push hl
+	push bc
+	ld hl, SuctionCupsPokemon
+	call IsInByteArray
+	pop bc
+	pop hl
+	jr c, .done
+	dec c
+	jr nz, .loop
+	and a
+.done
 	jmp PopBCDEHL
 
 SuctionCupsBlocksForceSwitch::
