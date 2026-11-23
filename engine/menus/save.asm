@@ -65,29 +65,46 @@ PauseGameLogic:
 	ret
 
 AddHallOfFameEntry:
+; Only the first and the latest team are kept:
+; slot 1 holds the very first, slot 0 the latest one.
 	ld a, BANK(sHallOfFame)
 	call OpenSRAM
-	ld hl, sHallOfFame + HOF_LENGTH * (NUM_HOF_TEAMS - 1) - 1
-	ld de, sHallOfFame + HOF_LENGTH * NUM_HOF_TEAMS - 1
-	ld bc, HOF_LENGTH * (NUM_HOF_TEAMS - 1)
-.loop
-	ld a, [hld]
-	ld [de], a
-	dec de
-	dec bc
-	ld a, c
-	or b
-	jr nz, .loop
+
+	; Find the oldest stored team (slot 0 if there is at most one).
+	ld b, NUM_HOF_TEAMS - 1
+	ld hl, sHallOfFame + HOF_LENGTH * (NUM_HOF_TEAMS - 1)
+	ld de, -HOF_LENGTH
+.find
+	ld a, [hl]
+	and a
+	jr nz, .found
+	add hl, de
+	dec b
+	jr nz, .find
+.found
+	ld a, [hl]
+	and a
+	jr z, .write ; no team stored yet
+
+	; Move it to slot 1, then free every slot after that.
+	ld de, sHallOfFame + HOF_LENGTH
+	ld bc, HOF_LENGTH
+	call CopyBytes
+	ld hl, sHallOfFame + HOF_LENGTH * 2
+	ld de, HOF_LENGTH
+	ld b, NUM_HOF_TEAMS - 2
+.clear
+	ld [hl], 0
+	add hl, de
+	dec b
+	jr nz, .clear
+
+.write
 	ld hl, wHallOfFamePokemonList
 	ld de, sHallOfFame
 	ld bc, wHallOfFamePokemonListEnd - wHallOfFamePokemonList + 1
 	call CopyBytes
 	jmp CloseSRAM
-; This vc_hook causes the Virtual Console to set [sGSBallFlag] and [sGSBallFlagBackup]
-; to GS_BALL_AVAILABLE, which enables you to get the GS Ball, take it to Kurt, and
-; encounter Celebi. It assumes that sGSBallFlag and sGSBallFlagBackup are at their
-; original addresses.
-
 
 AskOverwriteSaveFile:
 	ld a, [wSaveFileExists]
