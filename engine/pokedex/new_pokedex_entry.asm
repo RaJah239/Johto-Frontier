@@ -41,6 +41,9 @@ NewPokedexEntry:
 	farcall Pokedex_PlaceFrontpicTopLeftCorner
 	call WaitBGMap2
 	farcall GetEnemyMonDVs
+	dec hl
+	ld a, [hli]
+	ld [wTempMonUnownForm], a
 	ld a, [hli]
 	ld [wTempMonDVs], a
 	ld a, [hl]

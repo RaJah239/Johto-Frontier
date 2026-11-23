@@ -69,9 +69,12 @@ TradeWithTradebackKid:
 	ld [wOTTrademonID + 1], a
 
 ; Correctly display Pokémon shiny status on the trade screen.
-	ld hl, wPartyMon1DVs
+	ld hl, wPartyMon1UnownForm
 	ld a, [wCurPartyMon]
 	call GetPartyLocation
+	ld a, [hli]
+	ld [wPlayerTrademonUnownForm], a
+	ld [wOTTrademonUnownForm], a
 	ld a, [hli]
 	ld [wPlayerTrademonDVs], a
 	ld [wOTTrademonDVs], a

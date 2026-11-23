@@ -801,6 +801,8 @@ TradeAnim_ShowGivemonData:
 	call ShowPlayerTrademonStats
 	ld a, [wPlayerTrademonSpecies]
 	ld [wCurPartySpecies], a
+	ld a, [wPlayerTrademonUnownForm]
+	ld [wTempMonUnownForm], a
 	ld a, [wPlayerTrademonDVs]
 	ld [wTempMonDVs], a
 	ld a, [wPlayerTrademonDVs + 1]
@@ -825,6 +827,8 @@ TradeAnim_ShowGetmonData:
 	call ShowOTTrademonStats
 	ld a, [wOTTrademonSpecies]
 	ld [wCurPartySpecies], a
+	ld a, [wOTTrademonUnownForm]
+	ld [wTempMonUnownForm], a
 	ld a, [wOTTrademonDVs]
 	ld [wTempMonDVs], a
 	ld a, [wOTTrademonDVs + 1]

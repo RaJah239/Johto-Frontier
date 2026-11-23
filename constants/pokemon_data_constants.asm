@@ -88,7 +88,8 @@ DEF MON_SPD_EV             rb
 DEF MON_SAT_EV             rb
 DEF MON_SDF_EV             rb
 DEF MON_CAUGHTBALL         rb
-                           rb_skip 3
+                           rb_skip 2
+DEF MON_UNOWN_FORM         rb ; Unown letter - 1 (0-25), independent of the DVs
 DEF MON_DVS                rw
 DEF MON_PP                 rb NUM_MOVES
 DEF MON_HAPPINESS          rb
@@ -131,6 +132,7 @@ DEF SAVEMON_SPD_EXP            rw
 DEF SAVEMON_SPC_EXP            rw
 DEF SAVEMON_DVS                rw
 DEF SAVEMON_CAUGHTBALL EQU MON_CAUGHTBALL ; inside SAVEMON_STAT_EXP
+DEF SAVEMON_UNOWN_FORM EQU MON_UNOWN_FORM ; inside SAVEMON_STAT_EXP, just before the DVs
 ; savemon_struct is identical to party_struct before this point
 DEF SAVEMON_PP_UPS             rb
 ; savemon_struct is shifted from party_struct beyond this point
@@ -180,10 +182,10 @@ DEF MIN_MONDB_SLACK EQU 10
 DEF NUM_BOXES       EQU (MONDB_ENTRIES * 2 - MIN_MONDB_SLACK) / MONS_PER_BOX ; 16
 
 ; hall of fame
-; hof_mon: species, id, dvs, level, nicknames
-DEF HOF_MON_LENGTH EQU 1 + 2 + 2 + 1 + (MON_NAME_LENGTH - 1) ; $10
+; hof_mon: species, id, unown form, dvs, level, nicknames
+DEF HOF_MON_LENGTH EQU 1 + 2 + 1 + 2 + 1 + (MON_NAME_LENGTH - 1) ; $11
 ; hall_of_fame: win count, party, terminator
-DEF HOF_LENGTH EQU 1 + HOF_MON_LENGTH * PARTY_LENGTH + 1 ; $62
+DEF HOF_LENGTH EQU 1 + HOF_MON_LENGTH * PARTY_LENGTH + 1 ; $68
 DEF NUM_HOF_TEAMS EQU 30
 
 ; evolution types (used in data/pokemon/evos_attacks.asm)

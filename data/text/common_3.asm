@@ -941,11 +941,6 @@ _ItemWontHaveEffectText::
 	line "effect."
 	prompt
 
-_UseShinyBallInUnownBattleText::
-	text "Shiny Ball fails"
-	line "against Unown!"
-	prompt
-
 _CurBoxFullText::
 	text "@"
 	text_ram wStringBuffer1

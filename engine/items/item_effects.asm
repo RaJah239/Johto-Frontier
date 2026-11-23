@@ -274,19 +274,6 @@ PokeBallEffect:
 .not_too_strong
 	pop bc
 
-	; check if unown
-	ld a, [wEnemyMonSpecies]
-	cp UNOWN
-	jr nz, .not_unown
-
-	; if shiny ball was used, bounce away and don't consume
-	; since shiny ball changes a pokemon's dvs
-	; which will change an unown's letter
-	ld a, [wCurItem]
-	cp SHINY_BALL
-	jmp z, UseShinyBallInUnownBattle
-
-.not_unown
 IF DEF(_DEBUG)
 	; Hold B after selecting any Pokeball in the white screen
 	; to catch without fail in Debug Mode
@@ -550,11 +537,10 @@ ENDC
 	jr nz, .load_data
 
 .ditto
-	ld hl, wEnemyBackupDVs
-	ld a, [wEnemyMonDVs]
-	ld [hli], a
-	ld a, [wEnemyMonDVs + 1]
-	ld [hl], a
+	ld hl, wEnemyMonUnownForm
+	ld de, wEnemyBackupUnownForm
+	ld bc, 3 ; Unown form and DVs
+	call CopyBytes
 
 .load_data
 	ld a, [wTempEnemyMonSpecies]
@@ -2982,21 +2968,6 @@ UseDisposableItem:
 	ld [wItemQuantityChange], a
 	jmp TossItem
 
-UseShinyBallInUnownBattle:
-	call ReturnToBattle_UseBall
-	ld de, ANIM_THROW_POKE_BALL
-	ld a, e
-	ld [wFXAnimID], a
-	ld a, d
-	ld [wFXAnimID + 1], a
-	xor a
-	ld [wBattleAnimParam], a
-	ldh [hBattleTurn], a
-	ld [wNumHits], a
-	predef PlayBattleAnim
-	ld hl, UseShinyBallInUnownBattleText
-	jmp PrintText
-
 WontHaveAnyEffect_NotUsedMessage:
 	ld hl, ItemWontHaveEffectText
 	call PrintText
@@ -3055,10 +3026,6 @@ ItemOakWarningText:
 
 ItemWontHaveEffectText:
 	text_far _ItemWontHaveEffectText
-	text_end
-
-UseShinyBallInUnownBattleText:
-	text_far _UseShinyBallInUnownBattleText
 	text_end
 
 StorageFullText:

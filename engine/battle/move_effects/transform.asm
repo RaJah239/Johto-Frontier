@@ -51,19 +51,22 @@ BattleCommand_Transform:
 	and a
 	jr z, .mimic_enemy_backup
 	ld a, [de]
+	ld [wEnemyBackupUnownForm], a
+	inc de
+	ld a, [de]
 	ld [wEnemyBackupDVs], a
 	inc de
 	ld a, [de]
 	ld [wEnemyBackupDVs + 1], a
 	dec de
+	dec de
 .mimic_enemy_backup
-; copy DVs
+; copy Unown form and DVs
+rept 3
 	ld a, [hli]
 	ld [de], a
 	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
+endr
 ; move pointer to stats
 	ld bc, wBattleMonStats - wBattleMonPP
 	add hl, bc

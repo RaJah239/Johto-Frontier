@@ -146,6 +146,12 @@ DoNPCTrade:
 	ld de, wPlayerTrademonID
 	call Trade_CopyTwoBytes
 
+	ld hl, wPartyMon1UnownForm
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call Trade_GetAttributeOfCurrentPartymon
+	ld a, [hl]
+	ld [wPlayerTrademonUnownForm], a
+
 	ld hl, wPartyMon1DVs
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call Trade_GetAttributeOfCurrentPartymon
@@ -236,6 +242,14 @@ DoNPCTrade:
 	call Trade_GetAttributeOfLastPartymon
 	ld hl, wOTTrademonDVs
 	call Trade_CopyTwoBytes
+
+; NPC trade Pokemon are never Unown with another letter than A
+	ld hl, wPartyMon1UnownForm
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call Trade_GetAttributeOfLastPartymon
+	xor a
+	ld [de], a
+	ld [wOTTrademonUnownForm], a
 
 	ld e, NPCTRADE_OT_ID
 	call GetTradeAttr

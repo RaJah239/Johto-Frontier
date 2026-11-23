@@ -89,17 +89,14 @@ NamingScreen:
 	; Is it a PartyMon or a BoxMon?
 	ld a, [wMonType]
 	and a
-	ld hl, wBufferMonDVs
+	ld hl, wBufferMonUnownForm
 	jr nz, .start
-	ld a, MON_DVS
+	ld a, MON_UNOWN_FORM
 	call GetPartyParamLocation
 .start
-	ld de, wTempMonDVs
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	ld de, wTempMonUnownForm
+	ld bc, 3 ; Unown form and DVs
+	call CopyBytes
 
 	ld hl, LoadMenuMonIcon
 	ld a, BANK(LoadMenuMonIcon)

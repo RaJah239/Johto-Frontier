@@ -129,6 +129,7 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Can't run from wild Shiny Pokémon
 - Shiny Pokémon, like all other Pokémon can have all hidden power types except Normal and Fairy
 - Shiny Pokémon chance are now 1/256
+- An Unown's letter is stored on its own (in unused bytes of the Pokémon data), not in its DVs, so shiny Unown can be any letter and the Shiny Ball works on Unown without changing its letter
 - Shiny icon added for both player and enemy's Pokémon in battle
 - Shiny icon added to naming screen
 - Wild Pokémon drop held items after battle (no need to steal/trick/capture)

@@ -119,7 +119,7 @@ DEF MSIM_INF_PAR_F  EQU 5
 DEF MSIM_MODE_ENTRY_HIT_F EQU 0 ; candidates take the player's best hit as they come in
 DEF MSIM_MODE_SETUP_F     EQU 1 ; AI_SimMoveChoice's 2nd pass: boosting and status moves
 
-DEF MSIM_SAVED_STRUCT_LENGTH EQU 32 ; wEnemyMonSpecies .. wEnemyMonStructEnd
+DEF MSIM_SAVED_STRUCT_LENGTH EQU 33 ; wEnemyMonSpecies .. wEnemyMonStructEnd
 DEF MSIM_SAVED_LEVELS_LENGTH EQU 7  ; wEnemyAtkLevel .. wEnemyEvaLevel
 DEF MSIM_SAVED_SUBSTATUS_LENGTH EQU 5
 

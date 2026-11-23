@@ -18,7 +18,8 @@ MACRO box_struct
 \1SpclAtkEV::      db
 \1SpclDefEV::      db
 \1CaughtBall::     db ; MON_CAUGHTBALL
-\1Padding::        ds 3
+\1Padding::        ds 2
+\1UnownForm::      db ; MON_UNOWN_FORM
 \1DVs::            dw
 \1PP::             ds NUM_MOVES
 \1Happiness::      db
@@ -94,6 +95,7 @@ MACRO battle_struct
 \1Species::   db
 \1Item::      db
 \1Moves::     ds NUM_MOVES
+\1UnownForm:: db
 \1DVs::       dw
 \1PP::        ds NUM_MOVES
 \1Happiness:: db
@@ -233,6 +235,7 @@ ENDM
 MACRO hof_mon
 \1Species::  db
 \1ID::       dw
+\1UnownForm:: db
 \1DVs::      dw
 \1Level::    db
 \1Nickname:: ds MON_NAME_LENGTH - 1
@@ -263,6 +266,7 @@ MACRO trademon
 \1Nickname::    ds MON_NAME_LENGTH
 \1SenderName::  ds NAME_LENGTH
 \1OTName::      ds NAME_LENGTH
+\1UnownForm::   db
 \1DVs::         dw
 \1ID::          dw
 \1CaughtData::  db

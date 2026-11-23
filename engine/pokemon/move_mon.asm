@@ -258,7 +258,7 @@ endr
 
 	; Initialize stat experience.
 	xor a
-	ld b, MON_DVS - MON_EVS
+	ld b, MON_UNOWN_FORM - MON_EVS
 .loop
 	ld [de], a
 	inc de
@@ -274,6 +274,9 @@ endr
 	push hl
 	farcall GetTrainerDVs
 	pop hl
+	xor a ; trainer Pokemon: Unown letter A
+	ld [de], a
+	inc de
 	jr .initializeDVs
 
 .registerpokedex
@@ -297,6 +300,11 @@ endr
 	ld b, a
 	call Random
 	ld c, a
+	push bc
+	call GenerateUnownForm
+	ld [de], a
+	inc de
+	pop bc
 .initializeDVs
 	ld a, b
 	ld [de], a
@@ -362,6 +370,9 @@ endr
 	jr .initstats
 
 .copywildmonDVs
+	ld a, [wEnemyMonUnownForm]
+	ld [de], a
+	inc de
 	ld a, [wEnemyMonDVs]
 	ld [de], a
 	inc de
@@ -804,17 +815,18 @@ SendMonIntoBox:
 	ld [de], a
 	inc de
 
-	; Set all 5 Experience Values to 0
+	; Clear the stat experience, caught ball and padding; the
+	; Unown form follows from the enemy mon below
 	xor a
-	ld b, 2 * NUM_EXP_STATS
+	ld b, MON_UNOWN_FORM - MON_EVS
 .loop2
 	ld [de], a
 	inc de
 	dec b
 	jr nz, .loop2
 
-	ld hl, wEnemyMonDVs
-	ld b, 2 + NUM_MOVES ; DVs and PP ; wEnemyMonHappiness - wEnemyMonDVs
+	ld hl, wEnemyMonUnownForm
+	ld b, 1 + 2 + NUM_MOVES ; Unown form, DVs and PP
 .loop3
 	ld a, [hli]
 	ld [de], a
@@ -1071,6 +1083,26 @@ AdoptMonFromParty:
 	ld b, SET_FLAG
 	call EventFlagAction
 	jmp CloseSRAM
+
+GenerateUnownForm:
+; Roll the Unown letter (0-25) of a Pokemon given to the player; 0 if it
+; isn't an Unown. Returns it in a. Preserves bc, de and hl.
+	ld a, [wCurPartySpecies]
+	cp UNOWN
+	ld a, 0
+	ret nz
+	push hl
+	push de
+	push bc
+.letter
+	call Random
+	and %00011111
+	cp NUM_UNOWN
+	jr nc, .letter
+	pop bc
+	pop de
+	pop hl
+	ret
 
 ComputeNPCTrademonStats:
 	ld a, MON_LEVEL

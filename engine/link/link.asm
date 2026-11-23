@@ -1242,9 +1242,11 @@ LinkTrade:
 	ld a, [hl]
 	ld [wPlayerTrademonID + 1], a
 ; DVs
-	ld hl, wPartyMon1DVs
+	ld hl, wPartyMon1UnownForm
 	ld a, [wCurTradePartyMon]
 	call GetPartyLocation
+	ld a, [hli]
+	ld [wPlayerTrademonUnownForm], a
 	ld a, [hli]
 	ld [wPlayerTrademonDVs], a
 	ld a, [hl]
@@ -1295,9 +1297,11 @@ LinkTrade:
 	ld a, [hl]
 	ld [wOTTrademonID + 1], a
 ; DVs
-	ld hl, wOTPartyMon1DVs
+	ld hl, wOTPartyMon1UnownForm
 	ld a, [wCurOTTradePartyMon]
 	call GetPartyLocation
+	ld a, [hli]
+	ld [wOTTrademonUnownForm], a
 	ld a, [hli]
 	ld [wOTTrademonDVs], a
 	ld a, [hl]

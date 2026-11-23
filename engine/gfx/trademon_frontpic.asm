@@ -20,6 +20,8 @@ AnimateTrademonFrontpic:
 	farcall ShowOTTrademonStats
 	ld a, [wOTTrademonSpecies]
 	ld [wCurPartySpecies], a
+	ld a, [wOTTrademonUnownForm]
+	ld [wTempMonUnownForm], a
 	ld a, [wOTTrademonDVs]
 	ld [wTempMonDVs], a
 	ld a, [wOTTrademonDVs + 1]

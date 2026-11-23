@@ -461,7 +461,8 @@ wEnemyTypeDisplayActive:: db
 ; 1 - yes
 
 	ds 1
-wEnemyBackupDVs:: dw ; used when enemy is transformed
+wEnemyBackupUnownForm:: db ; used when enemy is transformed
+wEnemyBackupDVs:: dw ; must follow wEnemyBackupUnownForm
 
 wDisabledMove:: db
 wEnemyDisabledMove:: db

@@ -161,8 +161,11 @@ GetHallOfFameParty:
 	ld [de], a
 	inc de
 
-	ld hl, MON_DVS
+	ld hl, MON_UNOWN_FORM
 	add hl, bc
+	ld a, [hli]
+	ld [de], a
+	inc de
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -210,6 +213,8 @@ AnimateHOFMonEntrance:
 	ld [wCurPartySpecies], a
 	inc hl
 	inc hl
+	ld a, [hli]
+	ld [wTempMonUnownForm], a
 	ld a, [hli]
 	ld [wTempMonDVs], a
 	ld a, [hli]
@@ -418,6 +423,8 @@ DisplayHOFMon:
 	ld [wTempMonID], a
 	ld a, [hli]
 	ld [wTempMonID + 1], a
+	ld a, [hli]
+	ld [wTempMonUnownForm], a
 	ld a, [hli]
 	ld [wTempMonDVs], a
 	ld a, [hli]

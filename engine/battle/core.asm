@@ -3110,10 +3110,10 @@ InitBattleMon:
 	ld de, wBattleMonSpecies
 	ld bc, MON_ID
 	call CopyBytes
-	ld bc, MON_DVS - MON_ID
+	ld bc, MON_UNOWN_FORM - MON_ID
 	add hl, bc
-	ld de, wBattleMonDVs
-	ld bc, MON_POKERUS - MON_DVS
+	ld de, wBattleMonUnownForm
+	ld bc, MON_POKERUS - MON_UNOWN_FORM ; Unown form, DVs, PP, happiness
 	call CopyBytes
 	inc hl
 	inc hl
@@ -3194,10 +3194,10 @@ InitEnemyMon:
 	ld de, wEnemyMonSpecies
 	ld bc, MON_ID
 	call CopyBytes
-	ld bc, MON_DVS - MON_ID
+	ld bc, MON_UNOWN_FORM - MON_ID
 	add hl, bc
-	ld de, wEnemyMonDVs
-	ld bc, MON_POKERUS - MON_DVS
+	ld de, wEnemyMonUnownForm
+	ld bc, MON_POKERUS - MON_UNOWN_FORM ; Unown form, DVs, PP, happiness
 	call CopyBytes
 	inc hl
 	inc hl
@@ -5532,11 +5532,13 @@ LoadEnemyMon:
 	jr z, .InitDVs
 
 ; Unknown
-	ld hl, wEnemyBackupDVs
-	ld de, wEnemyMonDVs
+	ld hl, wEnemyBackupUnownForm
+	ld de, wEnemyMonUnownForm
+rept 2
 	ld a, [hli]
 	ld [de], a
 	inc de
+endr
 	ld a, [hl]
 	ld [de], a
 	jmp .Happiness
@@ -5552,10 +5554,26 @@ LoadEnemyMon:
 	dec a
 	jr z, .WildDVs
 
-; Trainer DVs
+; Trainer DVs and Unown form
 	ld a, [wCurPartyMon]
-	ld hl, wOTPartyMon1DVs
+	ld hl, wOTPartyMon1UnownForm
 	call GetPartyLocation
+	ld a, [wBattleMode]
+	and a
+	jr z, .GiftUnownForm
+	ld a, [hli]
+	ld [wEnemyMonUnownForm], a
+	jr .GotUnownForm
+
+.GiftUnownForm:
+; Not in a battle: a Pokemon given to the player that goes to a box
+	inc hl
+	push hl
+	farcall GenerateUnownForm
+	ld [wEnemyMonUnownForm], a
+	pop hl
+
+.GotUnownForm:
 	ld b, [hl]
 	inc hl
 	ld c, [hl]
@@ -5636,13 +5654,19 @@ LoadEnemyMon:
 	cp UNOWN
 	jr nz, .Magikarp
 
-; Get letter based on DVs
+; The letter is rolled on its own (it isn't part of the DVs), so a shiny
+; Unown can be any letter.
+.UnownLetter:
+	call BattleRandom
+	and %00011111
+	cp NUM_UNOWN
+	jr nc, .UnownLetter
+	ld [wEnemyMonUnownForm], a
 	ld hl, wEnemyMonDVs
 	predef GetUnownLetter
 ; Can't use any letters that haven't been unlocked
-; If combined with forced shiny battletype, causes an infinite loop
 	call CheckUnownLetter
-	jr c, .GenerateDVs ; try again
+	jr c, .UnownLetter ; try again
 
 .Magikarp:
 ; These filters are untranslated.
@@ -5674,7 +5698,7 @@ LoadEnemyMon:
 ; Try again if length >= 1616 mm (i.e. if LOW(length) >= 4 inches)
 	ld a, [wMagikarpLength + 1]
 	cp 4
-	jr nc, .GenerateDVs
+	jmp nc, .GenerateDVs
 
 ; 20% chance of skipping this check
 	call Random
