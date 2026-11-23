@@ -81,6 +81,9 @@ CheckForHiddenItems:
 	ret
 
 .itemnearby
+	; Which way is it? (kept in b until the distance is saved)
+	call .GetDirection
+	ld b, a
 	; Measure the distance to the item.
 	ld a, [wXCoord]
 	sub d
@@ -102,12 +105,18 @@ CheckForHiddenItems:
 .y_is_positive
 	add d ; We add both X and Y distances...
 	ld d, a ; ...then save the result into D.
+	; wItemFinderDistance holds the distance in its low nibble and the
+	; direction of that item in its high nibble.
 	ld a, [wItemFinderDistance] ; Default value is -1 which means 255.
+	and $0f
 	cp d ; D is always positive, and has a max value of 9.
 	jr c, .min_distance_saved
 
-	ld a, d
+	ld a, b
+	swap a
+	or d
 	ld [wItemFinderDistance], a
+	ld a, d
 .min_distance_saved
 	; If the distance is > 1, then we look for a closer item.
 	cp 2
@@ -122,6 +131,46 @@ CheckForHiddenItems:
 	ld a, [wCurMapScriptBank]
 	call GetFarByte
 	inc hl
+	ret
+
+.GetDirection:
+; de = the item's x, y. Return a = where it is from the player:
+; 0 down, 1 up, 2 left, 3 right, 4 on the player's tile. Uses b, c, h.
+	ld a, [wXCoord]
+	sub d
+	ld b, a
+	ld a, [wYCoord]
+	sub e
+	ld c, a
+	or b
+	ld a, 4
+	ret z
+	ld a, b
+	bit 7, a
+	jr z, .x_is_positive_dir
+	cpl
+	inc a
+.x_is_positive_dir
+	ld h, a ; |x distance|
+	ld a, c
+	bit 7, a
+	jr z, .y_is_positive_dir
+	cpl
+	inc a
+.y_is_positive_dir
+	cp h
+	jr nc, .vertical ; as far or farther vertically
+	bit 7, b
+	ld a, 3 ; right
+	ret nz
+	ld a, 2 ; left
+	ret
+
+.vertical
+	bit 7, c
+	ld a, 0 ; down
+	ret nz
+	ld a, 1 ; up
 	ret
 
 RockItemEncounter:

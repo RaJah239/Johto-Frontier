@@ -13,6 +13,20 @@ ItemFinder:
 	ld [wItemEffectSucceeded], a
 	ret
 
+.ItemfinderFacing:
+; wItemFinderDistance = distance (low nibble) + direction (high nibble), see
+; CheckForHiddenItems. Leave the distance in it and the direction in
+; wScriptVar: 0 down, 1 up, 2 left, 3 right, 4 standing on the item.
+	ld a, [wItemFinderDistance]
+	ld b, a
+	and $0f
+	ld [wItemFinderDistance], a
+	ld a, b
+	swap a
+	and $0f
+	ld [wScriptVar], a
+	ret
+
 .ItemfinderSound:
 	ld a, [wItemFinderDistance]
 	cp 2
@@ -53,9 +67,29 @@ ItemFinder:
 .Script_FoundSomething:
 	refreshmap
 	special UpdateTimePals
+	callasm .ItemfinderFacing
 	callasm .ItemfinderSound
 	writetext .ItemfinderItemNearbyText
 	closetext
+	; turn towards the item, or spin if standing on it
+	ifequal 0, .face_down
+	ifequal 1, .face_up
+	ifequal 2, .face_left
+	ifequal 3, .face_right
+	applymovement PLAYER, Movement_SpinWhenYouWin
+	end
+
+.face_down
+	turnobject PLAYER, DOWN
+	end
+.face_up
+	turnobject PLAYER, UP
+	end
+.face_left
+	turnobject PLAYER, LEFT
+	end
+.face_right
+	turnobject PLAYER, RIGHT
 	end
 
 .Script_FoundNothing:
@@ -72,3 +106,19 @@ ItemFinder:
 .ItemfinderNopeText:
 	text_far _ItemfinderNopeText
 	text_end
+
+Movement_SpinWhenYouWin:
+	turn_head DOWN
+	turn_head LEFT
+	turn_head UP
+	turn_head RIGHT
+	turn_head DOWN
+	turn_head LEFT
+	turn_head UP
+	turn_head RIGHT
+	turn_head DOWN
+	turn_head LEFT
+	turn_head UP
+	turn_head RIGHT
+	turn_head DOWN
+	step_end
