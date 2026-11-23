@@ -34,7 +34,7 @@ PlaceDiplomaOnScreen:
 	jmp DelayFrame
 
 .Player:
-	db "PLAYER@"
+	db "Player@"
 
 .EmptyString:
 	db "@"
