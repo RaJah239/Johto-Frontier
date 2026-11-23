@@ -176,7 +176,7 @@ End a text box.
 
 ## `$17`: `text_delay30` (`done30`)
 
-Wait exactly 30 frames (A and B don't skip it, unlike `text_pause`). `done30` is `done` with this wait in front: it ends the text string with `"@"`, waits, then ends the text box. Use it where `done` would go, right after a `text` / `line` / `cont` / `para` string.
+Wait 30 frames; pressing B skips the wait (A doesn't, unlike `text_pause`). `done30` is `done` with this wait in front: it ends the text string with `"@"`, waits, then ends the text box. Use it where `done` would go, right after a `text` / `line` / `cont` / `para` string.
 
 
 ## `$58`, `"<PROMPT>"`: `prompt`

@@ -925,11 +925,21 @@ TextCommand_DECIMAL::
 	ret
 
 TextCommand_DELAY_30::
-; wait 30 frames (done30)
+; wait 30 frames, or until B is pressed (done30)
 	push hl
 	push bc
 	ld c, 30
-	call DelayFrames
+.loop
+	push bc
+	call GetJoypad
+	pop bc
+	ldh a, [hJoyDown]
+	and B_BUTTON
+	jr nz, .done
+	call DelayFrame
+	dec c
+	jr nz, .loop
+.done
 	pop bc
 	pop hl
 	ret
