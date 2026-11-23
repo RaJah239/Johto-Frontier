@@ -105,6 +105,7 @@ if DEF(_DEBUG)
 	giveitem SHINY_CHARM
 	; overworld calls
 	giveitem TANGELA_CALL
+	giveitem PIDGEOT_CALL
 	giveitem TAUROS_CALL
 	giveitem GALLADE_CALL
 	giveitem MAREEP_CALL

@@ -149,6 +149,13 @@ GetMonPalInBCDE:
 	ret
 
 GetMenuMonIconPalette:
+	ld a, [wPidgeotCallFlight]
+	and a
+	jr z, .check_shininess
+	; Pidgeot Call: Pidgeot is never shiny (and a clears the carry)
+	jr GetMenuMonIconPalette_PredeterminedShininess
+
+.check_shininess
 	ld c, l
 	ld b, h
 	farcall CheckShininess

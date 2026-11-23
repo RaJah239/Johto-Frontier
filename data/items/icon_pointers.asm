@@ -169,7 +169,7 @@ ItemIconPointers::
 	dba MoonBallIcon ; MOON_BALL
 	dba LoveBallIcon ; LOVE_BALL
 	dba PokeCallIcon ; GALLADE_CALL
-	dba GiftBoxIcon ; GORGEOUS_BOX
+	dba PokeCallIcon ; PIDGEOT_CALL
 	dba SunStoneIcon ; SUN_STONE
 	dba PolkadotBowIcon ; POLKADOT_BOW
 	dba NoItemIcon ; ITEM_PLACEHOLDER

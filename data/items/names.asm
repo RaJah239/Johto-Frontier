@@ -167,7 +167,7 @@ ItemNames::
 	li "Moon Ball"
 	li "Love Ball"
 	li "Gallade Call"
-	li "Gorgeous Box"
+	li "Pidgeot Call"
 	li "Sun Stone"
 	li "Polkadot Bow"
 	li "?"

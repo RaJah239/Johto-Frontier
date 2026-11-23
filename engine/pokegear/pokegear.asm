@@ -2718,7 +2718,13 @@ TownMapMon:
 	ld e, a
 	ld d, 0
 	add hl, de
+	ld a, [wPidgeotCallFlight]
+	and a
 	ld a, [hl]
+	jr z, .got_species
+	ld a, PIDGEOT
+
+.got_species
 	ld [wTempIconSpecies], a
 ; Get FlyMon icon
 	ld e, $08 ; starting tile in VRAM

@@ -173,7 +173,7 @@
 	const MOON_BALL    ; a5
 	const LOVE_BALL    ; a6
 	const GALLADE_CALL ; a7
-	const GORGEOUS_BOX ; a8
+	const PIDGEOT_CALL ; a8
 	const SUN_STONE    ; a9
 	const POLKADOT_BOW ; aa
 	const ITEM_PLACEHOLDER ; ab

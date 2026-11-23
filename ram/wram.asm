@@ -1440,6 +1440,7 @@ wHoursSince:: db
 wDaysSince:: db
 
 wUsingHMItem:: db
+wPidgeotCallFlight:: db
 
 SECTION "WRAM 1", WRAMX
 

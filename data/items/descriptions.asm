@@ -168,7 +168,7 @@ ItemDescriptions:
 	dw MoonBallDesc
 	dw LoveBallDesc
 	dw GalladeCallDesc
-	dw GorgeousBoxDesc
+	dw PidgeotCallDesc
 	dw SunStoneDesc
 	dw PolkadotBowDesc
 	dw PlaceholderDesc
@@ -939,9 +939,9 @@ GalladeCallDesc:
 	db   "Calls a Gallade to"
 	next "break rocks.@"
 
-GorgeousBoxDesc:
-	db   "Open it and see"
-	next "what's inside.@"
+PidgeotCallDesc:
+	db   "Calls a Pidgeot to"
+	next "fly you away.@"
 
 SunStoneDesc:
 	db   "Evolves certain"

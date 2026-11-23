@@ -17,7 +17,6 @@
 	const RAGECANDYBAR ; 72
 	const EGG_TICKET   ; 81
 	const BASEMENT_KEY ; 85 ; to replace
-	const GORGEOUS_BOX ; a8
 	const ITEM_PLACEHOLDER ; ab
 	const SQUIRTBOTTLE ; af
 	const RAINBOW_WING ; b2

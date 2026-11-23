@@ -84,9 +84,6 @@ ItemNameOrder:
 	db HEAL_POWDER
 	db REVIVAL_HERB
 
-; Boxes
-	db GORGEOUS_BOX
-
 ; Mail
 	db BLUESKY_MAIL
 	db EON_MAIL
@@ -269,6 +266,7 @@ ItemNameOrder:
 	db LANTURN_CALL
 	db DONPHAN_CALL
 	db GALLADE_CALL
+	db PIDGEOT_CALL
 	db KINGDRA_CALL
 	db MILOTIC_CALL
 
@@ -365,7 +363,6 @@ ItemAlphaOrder:
 	db GOLD_BERRY
 	db GOLD_LEAF
 	db GOOD_ROD
-	db GORGEOUS_BOX
 	db GREAT_BALL
 	db GRIP_CLAW
 	db GRN_APRICORN
@@ -431,6 +428,7 @@ ItemAlphaOrder:
 	db PARK_BALL
 	db PARLYZ_HEAL
 	db PEARL
+	db PIDGEOT_CALL
 	db PINK_BOW
 	db PNK_APRICORN
 	db POCKET_PC

@@ -468,7 +468,19 @@ UseItem:
 	call DoItemEffect
 	ld a, [wItemEffectSucceeded]
 	and a
-	jr z, .Oak
+	jr nz, .quit
+	ld a, [wCurItem]
+	cp PIDGEOT_CALL
+	jr nz, .Oak
+	; the Fly map replaced the pack's screen: draw the pack again
+	xor a
+	ldh [hBGMapMode], a
+	call Pack_InitGFX
+	call WaitBGMap_DrawPackGFX
+	call Pack_InitColors
+	jr .Oak
+
+.quit
 	ld a, PACKSTATE_QUITRUNSCRIPT
 	ld [wJumptableIndex], a
 QuitItemSubmenu:

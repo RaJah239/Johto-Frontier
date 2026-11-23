@@ -384,7 +384,14 @@ FlyFunction_InitGFX:
 	ld e, a
 	ld d, 0
 	add hl, de
+	ld a, [wPidgeotCallFlight]
+	and a
 	ld a, [hl]
+	jr z, .got_species
+	ld a, PIDGEOT
+	ld [wCurPartySpecies], a ; the icon colour comes from it
+
+.got_species
 	ld [wTempIconSpecies], a
 	ld e, FIELDMOVE_FLY
 	farcall FlyFunction_GetMonIcon

@@ -181,7 +181,7 @@ ItemEffects:
 	dw PokeBallEffect      ; MOON_BALL
 	dw PokeBallEffect      ; LOVE_BALL
 	dw GalladeCallEffect   ; GALLADE_CALL
-	dw GorgeousBoxEffect   ; GORGEOUS_BOX
+	dw PidgeotCallEffect   ; PIDGEOT_CALL
 	dw EvoStoneEffect      ; SUN_STONE
 	dw NoEffect            ; POLKADOT_BOW
 	dw NoEffect            ; ITEM_PLACEHOLDER
@@ -2918,20 +2918,6 @@ SacredAshEffect:
 	farcall _SacredAsh
 	jr UseDisposableItem
 
-GorgeousBoxEffect:
-	ld c, DECOFLAG_GOLD_TROPHY_DOLL
-OpenBox:
-	farcall SetSpecificDecorationFlag
-
-	ld hl, .SentTrophyHomeText
-	call PrintText
-
-	jr UseDisposableItem
-
-.SentTrophyHomeText:
-	text_far _SentTrophyHomeText
-	text_end
-
 NoEffect:
 	jr IsntTheTimeMessage
 
@@ -3309,6 +3295,11 @@ GalladeCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
 	farjp GalladeCallFunction
+
+PidgeotCallEffect:
+	ld a, 1
+	ld [wUsingHMItem], a
+	farjp PidgeotCallFunction
 
 HyperEVUpEffect:
 	ld b, PARTYMENUACTION_HEALING_ITEM

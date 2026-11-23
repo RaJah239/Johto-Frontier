@@ -712,6 +712,30 @@ AskPikaSurfText:
 	text_far _AskPikaSurfText
 	text_end
 
+PidgeotCallFunction:
+	ld a, 1
+	ld [wPidgeotCallFlight], a
+	ld a, [wUsingItemWithSelect]
+	and a
+	jr z, .fly
+	call GetMapEnvironment
+	call CheckOutdoorMap
+	jr nz, .fly
+	call FadeToMenu
+	call FlyFunction
+	call CloseSubmenu
+	jr .flown
+
+.fly
+	call FlyFunction
+.flown
+	ld a, [wFieldMoveSucceeded]
+	cp 1
+	ret z
+	xor a
+	ld [wPidgeotCallFlight], a
+	ret
+
 FlyFunction:
 	call FieldMoveJumptableReset
 .loop
@@ -794,6 +818,8 @@ FlyFunction:
 	end
 
 .ReturnFromFly:
+	xor a
+	ld [wPidgeotCallFlight], a
 	farcall RespawnPlayer
 	farcall ClearSavedObjPals
 	farcall CheckForUsedObjPals
@@ -1155,7 +1181,13 @@ PrepareOverworldMove:
 	ld d, 0
 	ld hl, wPartySpecies
 	add hl, de
+	ld a, [wPidgeotCallFlight]
+	and a
 	ld a, [hl]
+	jr z, .got_species
+	ld a, PIDGEOT
+
+.got_species
 	ld [wOverworldMoveSpecies], a
 	jmp GetPartyNickname
 
