@@ -126,6 +126,10 @@ DEF MSIM_SAVED_SUBSTATUS_LENGTH EQU 5
 	assert wEnemyMonStructEnd - wEnemyMonSpecies == MSIM_SAVED_STRUCT_LENGTH
 	assert wEnemyEvaLevel - wEnemyAtkLevel + 1 == MSIM_SAVED_LEVELS_LENGTH
 	assert wEnemySubStatus5 - wEnemySubStatus1 + 1 == MSIM_SAVED_SUBSTATUS_LENGTH
+	assert wMSimSavedStats - wMSimSavedStruct == MSIM_SAVED_STRUCT_LENGTH
+	assert wMSimSavedLevels - wMSimSavedStats == NUM_BATTLE_STATS * 2
+	assert wMSimSavedSubStatus - wMSimSavedLevels == MSIM_SAVED_LEVELS_LENGTH
+	assert wMSimSavedDmg - wMSimSavedSubStatus == MSIM_SAVED_SUBSTATUS_LENGTH
 	assert wEnemySpDef - wEnemyStats + 2 == NUM_BATTLE_STATS * 2
 
 AI_MatchupSwitch:

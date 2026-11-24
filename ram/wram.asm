@@ -3459,7 +3459,7 @@ wAISwitchCount:: db ; voluntary switches the enemy made this battle (AI_Switch)
 SECTION "AI Matchup Save", WRAMX, BANK[5]
 
 ; the active enemy mon's battle data while the matchup simulation borrows it
-wMSimSavedStruct:: ds 32 ; wEnemyMonSpecies .. wEnemyMonStructEnd
+wMSimSavedStruct:: ds 33 ; wEnemyMonSpecies .. wEnemyMonStructEnd (MSIM_SAVED_STRUCT_LENGTH)
 wMSimSavedStats:: ds NUM_BATTLE_STATS * 2
 wMSimSavedLevels:: ds 7
 wMSimSavedSubStatus:: ds 5
