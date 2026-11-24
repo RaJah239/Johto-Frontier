@@ -131,33 +131,35 @@ DEF LZ_LONG_HI   EQU %00000011
 	jr z, .Zero
 
 ; Literal
-; Read literal data for bc bytes.
-.lloop
-	dec c
-	jr nz, .lnext
-	dec b
-	jr z, .Main
+; Read literal data for bc bytes
+; the counter is checked after the copy, which saves 3 cycles a byte
+	jr .lloop
 
 .lnext
 	ld a, [hli]
 	ld [de], a
 	inc de
-	jr .lloop
+.lloop
+	dec c
+	jr nz, .lnext
+	dec b
+	jr nz, .lnext
+	jr .Main
 
 .Iter:
 ; Write the same byte for bc bytes.
 	ld a, [hli]
-
-.iloop
-	dec c
-	jr nz, .inext
-	dec b
-	jr z, .Main
+	jr .iloop
 
 .inext
 	ld [de], a
 	inc de
-	jr .iloop
+.iloop
+	dec c
+	jr nz, .inext
+	dec b
+	jr nz, .inext
+	jr .Main
 
 .Alt:
 ; Alternate two bytes for bc bytes.
@@ -191,17 +193,17 @@ DEF LZ_LONG_HI   EQU %00000011
 .Zero:
 ; Write 0 for bc bytes.
 	xor a
-
-.zloop
-	dec c
-	jr nz, .znext
-	dec b
-	jr z, .Main
+	jr .zloop
 
 .znext
 	ld [de], a
 	inc de
-	jr .zloop
+.zloop
+	dec c
+	jr nz, .znext
+	dec b
+	jr nz, .znext
+	jr .Main
 
 .rewrite
 ; Repeat decompressed data from output.
@@ -256,16 +258,18 @@ DEF LZ_LONG_HI   EQU %00000011
 
 .Repeat:
 ; Copy decompressed data for bc bytes.
-	dec c
-	jr nz, .rnext
-	dec b
-	jr z, .donerw
+	jr .rloop
 
 .rnext
 	ld a, [hli]
 	ld [de], a
 	inc de
-	jr .Repeat
+.rloop
+	dec c
+	jr nz, .rnext
+	dec b
+	jr nz, .rnext
+	jr .donerw
 
 .Flip:
 ; Copy bitflipped decompressed data for bc bytes.
@@ -299,17 +303,18 @@ DEF LZ_LONG_HI   EQU %00000011
 
 .Reverse:
 ; Copy reversed decompressed data for bc bytes.
-	dec c
-	jr nz, .rvnext
-
-	dec b
-	jr z, .donerw
+	jr .rvloop
 
 .rvnext
 	ld a, [hld]
 	ld [de], a
 	inc de
-	jr .Reverse
+.rvloop
+	dec c
+	jr nz, .rvnext
+	dec b
+	jr nz, .rvnext
+	jr .donerw
 
 .donerw
 	pop hl
