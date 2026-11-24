@@ -4354,9 +4354,9 @@ PrintPlayerHUD:
 	callfar GetGender
 	ld a, " "
 	jr c, .got_gender_char
-	ld a, "♂"
+	ld a, BATTLE_GENDER_TILE
 	jr nz, .got_gender_char
-	ld a, "♀"
+	inc a ; female
 
 .got_gender_char
 	hlcoord 16, 8 ;  where the player's mon gender is printed
@@ -4423,9 +4423,9 @@ DrawEnemyHUD:
 	callfar GetGender
 	ld a, " "
 	jr c, .got_gender
-	ld a, "♂"
+	ld a, BATTLE_GENDER_TILE
 	jr nz, .got_gender
-	ld a, "♀"
+	inc a ; female
 
 .got_gender
 	hlcoord 7, 1 ;  where the enemy's mons gender is printed

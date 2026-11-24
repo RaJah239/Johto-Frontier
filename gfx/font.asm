@@ -12,6 +12,9 @@ INCBIN "gfx/signs/water.2bpp"
 INCBIN "gfx/signs/building.2bpp"
 	assert_table_length NUM_SIGNS
 
+GenderIconsGFX:
+INCBIN "gfx/font/gender_icons.2bpp"
+
 FontBattleExtra:
 INCBIN "gfx/font/font_battle_extra.2bpp"
 

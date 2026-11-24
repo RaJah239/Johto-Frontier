@@ -204,7 +204,9 @@ ReloadBattleStatusIconTiles::
 	call GetStatusIconGFX
 	ld a, BATTLE_STATUS_ICON_ENEMY_TILE
 	ld b, BANK(vTiles2)
-	jmp StatusIcons_SendTiles
+	call StatusIcons_SendTiles
+	; the moves screen's icons covered the gender icons too
+	farjp LoadBattleGenderIcons
 
 LoadBattleStatusIconPals::
 ; Fill the palette at de (WRAM bank 5) with white, the player's status

@@ -56,6 +56,7 @@ LoadBattleFontsHPBar:
 	call LoadFrame
 
 LoadHPBar:
+	call LoadBattleGenderIcons
 	ld de, EnemyHPBarBorderGFX
 	ld hl, vTiles2 tile $6c
 	lb bc, BANK(EnemyHPBarBorderGFX), 4
@@ -71,6 +72,15 @@ LoadHPBar:
 
 StatsScreen_LoadFont:
 	call _LoadFontsBattleExtra
+	; the gender icons, both in color 1
+	ld de, GenderIconsGFX
+	ld hl, vTiles2 tile STATS_GENDER_TILE
+	lb bc, BANK(GenderIconsGFX), 1
+	call Get2bppViaHDMA
+	ld de, GenderIconsGFX + 2 tiles
+	ld hl, vTiles2 tile (STATS_GENDER_TILE + 1)
+	lb bc, BANK(GenderIconsGFX), 1
+	call Get2bppViaHDMA
 	ld de, EnemyHPBarBorderGFX
 	ld hl, vTiles2 tile $6c
 	lb bc, BANK(EnemyHPBarBorderGFX), 4
@@ -91,4 +101,11 @@ LoadStatsScreenPageTilesGFX:
 	ld de, StatsScreenPageTilesGFX
 	ld hl, vTiles2 tile $31
 	lb bc, BANK(StatsScreenPageTilesGFX), 17
+	jmp Get2bppViaHDMA
+
+LoadBattleGenderIcons::
+; The battle's male and female icons.
+	ld hl, vTiles2 tile BATTLE_GENDER_TILE
+	ld de, GenderIconsGFX
+	lb bc, BANK(GenderIconsGFX), 2
 	jmp Get2bppViaHDMA

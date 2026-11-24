@@ -203,6 +203,9 @@ _CGB_FinishBattleScreenLayout:
 	hlcoord 10, 8, wAttrmap
     ld a, PAL_BATTLE_BG_5
     ld [hl], a
+	ld a, PAL_BATTLE_BG_EXP
+	ldcoord_a 7, 1, wAttrmap
+	ldcoord_a 16, 8, wAttrmap
 ; Column 10 of the enemy HUD: the end of the level row, the HP
 ; bar's right tip and the last digit of the foe's max HP (Damage Info),
 ; so stat animations tinting the enemy's palette don't colour them.
@@ -298,6 +301,15 @@ _CGB_StatsScreenHPPals:
 	ld bc, 4 palettes ; pink, green, blue, and orange page palettes
 	ld a, BANK(wBGPals1)
 	call FarCopyWRAM
+
+	farcall GetGender
+	ld de, wBGPals1 palette 6 color 1
+	call .GenderColor
+	ld a, [wTempMonCaughtGender]
+	and CAUGHT_GENDER_MASK
+	ld de, wBGPals1 palette 2 color 1
+	call .GenderColorNZ
+
 	call WipeAttrmap
 
 	hlcoord 0, 0, wAttrmap
@@ -309,6 +321,7 @@ _CGB_StatsScreenHPPals:
 	ld bc, 10
 	ld a, $2 ; exp palette
 	call ByteFill
+	ldcoord_a 9, 13, wAttrmap ; the caught-by gender icon (see below)
 
 	hlcoord 11, 5, wAttrmap
 	lb bc, 2, 2
@@ -335,11 +348,37 @@ _CGB_StatsScreenHPPals:
 	ld a, $7 ; caught ball palette (LoadStatsScreenCaughtBall)
 	call FillBoxCGB
 
+	ld a, $6 ; orange page palette (its color 1: see above)
+	ldcoord_a 18, 0, wAttrmap ; the mon's gender icon
+
 	call ApplyAttrmap
 	call ApplyPals
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	ret
+
+.GenderColorNZ:
+; Color de = blue if nz (a girl caught it), red if z.
+	jr nz, .female
+	jr .male
+
+.GenderColor:
+; Color de = blue if z (female), red if nz.
+	jr z, .female
+.male
+	ld hl, .MaleColor
+	jr .set_color
+.female
+	ld hl, .FemaleColor
+.set_color
+	ld bc, PAL_COLOR_SIZE
+	ld a, BANK(wBGPals1)
+	jmp FarCopyWRAM
+
+.MaleColor:
+	RGB 31, 12, 06
+.FemaleColor:
+	RGB 04, 17, 31
 
 _CGB_PCItemStorage:
 	ld hl, PCItemUIPals
