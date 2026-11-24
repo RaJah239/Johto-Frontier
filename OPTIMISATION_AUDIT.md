@@ -915,9 +915,9 @@ Complete the project systematically using the following phases.
 - [ ] Audit freezes.
 - [ ] Audit softlocks.
 - [ ] Audit memory corruption.
-- [ ] Audit stack corruption.
+- [x] Audit stack corruption.
 - [ ] Audit register corruption.
-- [ ] Audit ROM banking.
+- [x] Audit ROM banking.
 - [x] Audit RAM banking.
 - [ ] Audit interrupt safety.
 - [ ] Audit invalid memory accesses.
@@ -1104,14 +1104,14 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - Overall status: In progress
 - Current phase: Phase 2
-- Current task: Phase 2 stability audit: stack balance
+- Current task: Phase 2 stability audit: freezes, softlocks, interrupt safety, invalid accesses
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
-- Last completed task: PERF-002 (direct calls within one section)
+- Last completed task: STAB-003 (BUG-006)
 - Last verified commit: `d007b16f8` (full suite: 105 scripts, 95 fully passing, the rest profilers/comparisons)
 - Outstanding blockers: none
-- Next task: Phase 2: stack-balance check, then the Phase 2 checklist review
+- Next task: Phase 2: remaining checklist items
 
 Update this section continuously.
 
@@ -1126,6 +1126,7 @@ Maintain the following table throughout the project.
 | BUG-003 | Battle (move selection) | Taunt never blocked a status move at the move menu: `MoveSelectionScreen` got the move's power with `farcall GetMovePower`, but `farcall` returns with a = c (here `MOVE_LENGTH`), so the "power is 0" check always failed. The move was only stopped later, when used, wasting the turn instead of showing "The move is disabled". | Medium | Fixed | `test_farcall_returns` (failed before, passes after) |
 | BUG-004 | Pokémon generation | A gift Pokémon sent to a box (`LoadEnemyMon` outside battle) got its Unown form from `farcall GenerateUnownForm`, whose result in a is lost (a = c = $30, the party struct length). Every such gift got form 48: an invalid letter for a gift Unown (out-of-range picture/icon lookups), and a stray non-zero form for every other species. | Medium | Fixed | `test_farcall_returns` (failed before, passes after) |
 | BUG-005 | Battle Tower | `LoadOpponentTrainerAndPokemonWithOTSprite` (left over from the dynamic-sprite port) loaded a sprite with made-up inputs: it read the object struct index from ROM ($0000 + object offset: $F3 or $E0, the `di`/`ldh` opcodes) because it added the object's offset to `MAPOBJECT_OBJECT_STRUCT_ID` (0) instead of to `wMapObjects`, and it passed the sprite in a through `farcall GetSpriteVTile`, which overwrites a with the bank (0). `GetSprite` then looked up sprite 0, one entry before `OverworldSprites`, and queued that garbage for a VRAM slot worked out from the bad index. The load was not needed: the opponent is always hidden at this point and the script's `appear` loads its graphics. | Medium | Fixed | `test_bt_ot_sprite` (failed before, passes after) |
+| BUG-006 | Stats screen (EV page) | `StatsScreen_PrintEVs` threaded a running value through the stack with a `push bc`/`pop bc` per stat, but only on the non-maxed branches. With Attack EVs at exactly 252 (`MAX_EV`), nothing was pushed for Attack, so the later stats popped the routine's own return address and the final `pop bc` left the stack one short: `ret` went to the wrong address (crash or garbage). The value it built was never used. Any Pokémon with 252 Attack EVs, viewed on the EV page (unlocked by `EVENT_UNLOCK_STAT_SCREEN_EFFORT_VALUES`), triggered it. | Critical | Fixed | `test_stats_evs` (32 of 64 maxed/not-maxed mixes failed before: every one with Attack at 252; all pass after) |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1170,6 +1171,7 @@ Maintain the following table.
 |---|---|---|---|---|---|---|
 | MEM-001 | ROMX | PERF-001 | 674,694 bytes free | 674,719 bytes free | 25 | Build `free_space.awk` |
 | MEM-002 | ROMX | PERF-002 | 674,719 bytes free | 674,986 bytes free | 267 | Build `free_space.awk` |
+| MEM-003 | ROMX | BUG-006 rewrite of `StatsScreen_PrintEVs` (one shared print helper instead of six copied blocks) | 674,986 bytes free | 675,214 bytes free | 228 | Build `free_space.awk` |
 
 Use unique identifiers such as MEM-001, MEM-002 and MEM-003.
 
@@ -1195,6 +1197,8 @@ Maintain the following table.
 | TEST-010 | Overworld rendering | `test_overworld_screen_same` with the baseline ROM as the older build | Every map's screens drawn by the game's own code in both ROMs, all anchor steps and half-block offsets | Passed | 307 maps, 1,941,120 cells identical. `test_map_render_same` runs away decompressing a tileset even with the baseline against itself: it was written for the removed LZP format and is stale. `test_bug_contest_judging` fails its "smaller" case against itself too (it checks a size reduction from an old optimisation), its behaviour cases pass. |
 | TEST-011 | Interrupts, RAM banking | VBlank handler review and a static scan for WRAMX (banks 2-7) accesses in routines that never set `rSVBK` | Read `home/vblank.asm` and each routine VBlank0 calls; Python scan with the `.sym` file | Partially verified | VBlank keeps `hROMBank`; `UpdateBGMapBuffer` and `AnimateTileset` save and restore `rVBK`/`rSVBK`. `UpdateBGMap`'s attribute pass forces `rVBK` back to 0, as in vanilla: safe only while main code that leaves `rVBK` = 1 across a frame keeps `hBGMapMode` off attributes (no case found, not proven). The WRAMX scan flags 197 routines; the ones checked are helpers only reached from callers that switch banks (Pokédex grid, palettes, battle animations). A call-graph-aware check is needed to clear the rest. |
 | TEST-012 | RAM banking | Call-graph check of WRAMX bank use, both ways: (1) routines reading or writing a bank 2-7 variable on a path where no caller has switched `rSVBK`; (2) routines reading a variable of one bank while a caller has switched to another | Python scripts over every `.asm` with the `.sym` file: line-by-line tracking of `rSVBK` writes (`BANK(w...)`, saved/restored values), call edges including local labels and fall-through, solved to a fixed point | Passed | (1) No unswitched path through direct calls. The 78 remaining hits are routines reached only through jump tables (battle animation commands and BG effects, Pokémon pic animation, Magnet Train, Pokédex grid); each table's entry point switches the bank before dispatching. (2) Three hits, all false: the Battle Tower room menu and title screen restore the bank before the flagged access; Bill's PC switches back inside `_GetCursorMon`. The Battle VS intro deliberately leaves bank 5 selected from "load portrait" to the end of the transition, and everything it touches meanwhile is in bank 5 or WRAM0. |
+| TEST-013 | Whole codebase | Static push/pop balance check of every routine | Python: per routine, follows `jr`/`jp`/`jmp` to its own local labels and tracks the stack depth; flags `ret` at a non-zero depth, labels reached at two depths, and jumps or fall-through into another routine with a depth that routine does not pop | Passed | 98 hits reviewed. 1 real (BUG-006). The rest are intended: shared tails where a wrapper pushes and the common routine pops (Gale Wings, max-HP checks, weather likes, mail, trade tubes, HDMA, text commands), push-address-then-`ret` dispatch (`AI_Smart`, `Predef`, far-call internals), and loops that push a counted number of values (`AI_FasterAfterSpeedBoost`). `ReadTrainerPartyPieces` jumps to its end with `hl` still pushed only if a random-party entry starts with $FF, which the data never does (noted, not changed). |
+| TEST-014 | Stats screen | `test_stats_evs` plus a screen comparison with the baseline ROM | Interpreter: all 64 combinations of maxed/not-maxed EVs, checking the stack on return and which cells show stars; full 20x18 tilemap compared with the baseline for four EV sets that did not crash there | Passed | 3/3; tilemaps identical to the baseline in all four sets. Full suite unchanged otherwise (106 scripts). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1372,6 +1376,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Git commit message: `perf: use direct calls for far calls within the same section`
 - Next task: continue the Phase 2 audit (stack balance, interrupt safety).
 
+### STAB-003 — Stack imbalance on the stats screen EV page
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 2 (stack corruption, crashes)
+- System: Stats screen
+- Files modified: `engine/pokemon/stats_screen.asm`
+- Problem identified: BUG-006, found by the push/pop balance check (TEST-013).
+- Root cause: per-stat `push bc`/`pop bc` on some branches only, carrying an unused value; Attack at 252 skipped the push.
+- Solution implemented: the six blocks became one `.PrintEV` helper (number, or three stars at `MAX_EV`), with no stack use; the unused value is gone.
+- Behaviour preserved: same text at the same places; tilemaps identical to the baseline wherever the baseline did not crash.
+- Performance impact: fewer instructions. Memory impact: 228 bytes of ROM freed (MEM-003).
+- Build result: builds, 0 assembler warnings, 675,214 bytes free.
+- Tests performed: TEST-013, TEST-014, full suite.
+- Test results: all pass; nothing else changed.
+- Remaining risks: none known.
+- Git commit message: `fix: stop the stats screen EV page corrupting the stack at 252 Attack EVs`
+- Next task: finish the Phase 2 checklist (freezes and softlocks, interrupt safety, invalid accesses).
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -1412,6 +1435,8 @@ Make manual testing instructions sufficiently clear for the user to perform with
 - **MT-001 Taunt at the move menu (BUG-003).** Setup: any battle where the foe can use Taunt (or a save where your Pokémon gets Taunted). Steps: after your Pokémon is Taunted, open FIGHT and pick a status move (Growl, Swords Dance and the like). Expected: "The move is disabled" is shown and you choose again; damaging moves can still be picked. Failure: the status move is accepted and then fails during the turn.
 - **MT-002 Gift Pokémon sent to the PC (BUG-004).** Setup: a full party. Steps: receive a gift Pokémon (any `givepoke` event) so it goes to a box, then view it in Bill's PC and withdraw it. Expected: it looks and behaves normally; a gift Unown shows a valid letter. Failure: wrong or garbled icon/picture.
 - **MT-003 Battle Tower / Factory opponent (BUG-005).** Setup: enter a Battle Tower or Battle Factory challenge. Steps: watch each opponent warp in, and look at the other sprites on screen (you, the attendant). Expected: the opponent appears with the right sprite and nothing else on screen changes. Failure: a wrong or broken opponent sprite, or other sprites corrupted.
+
+- **MT-004 EV page with maxed Attack (BUG-006).** Setup: a save with the EV page unlocked (`EVENT_UNLOCK_STAT_SCREEN_EFFORT_VALUES`) and a Pokémon with 252 Attack EVs (train it, or set it with a debug tool). Steps: open its stats screen and go to the page with the Effort Values; also try one with every EV at 252 and one with none. Expected: stars for each 252 value, numbers otherwise, and the screen closes normally. Failure (old build): crash or freeze on that page.
 
 ## 33. Final Deliverables
 

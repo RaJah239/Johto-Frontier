@@ -863,187 +863,37 @@ StatsScreen_PrintEVs:
 	ld de, .EVstring3
 	call PlaceString
 
-	; HP EVs
-	; Print 3 start is Def EVs are maxed
+	; each EV as a number, or three stars at MAX_EV
 	ld a, [wTempMonHPEV]
-	cp 252
-	jr z, .print_text1
-
-	xor a ; need to load 0 into a before continuing
-	ld a, [wTempMonHPEV]
-	ld [wPokedexStatus], a
-	pop bc
-	jr z, .handle_this
-	ld a, c
-	add 4
-	ld b, 0
-	ld c, a
-.handle_this
-	push bc
-	ld de, wPokedexStatus
-	lb bc, 1, 3 ; 3 digits
 	hlcoord 6, 12
-	call PrintNum
-	jr .done1
-
-.print_text1:
-	ld de, .EVMaxThreeStars
-	hlcoord 6, 12
-	call PlaceString
-
-.done1:
-	; ATK EVs
-	; Print 3 start is Def EVs are maxed
+	call .PrintEV
 	ld a, [wTempMonAtkEV]
-	cp 252
-	jr z, .print_text2
-
-	ld a, [wTempMonAtkEV]
-	ld [wPokedexStatus], a
-	ld c, 0
-	and 1
-	jr z, .atk_not_odd
-	ld a, 0
-	add 8
-	ld b, 0
-	ld c, a
-.atk_not_odd
-	push bc
-	ld de, wPokedexStatus
-	lb bc, 1, 3 ; 3 digits
 	hlcoord 6, 13
-	call PrintNum
-	jr .done2
-
-.print_text2:
-	ld de, .EVMaxThreeStars
-	hlcoord 6, 13
-	call PlaceString
-
-.done2:
-	; DEF EVs
-	; Print 3 start is Def EVs are maxed
+	call .PrintEV
 	ld a, [wTempMonDefEV]
-	cp 252
-	jr z, .print_text3
-
-	; Print actual number is Def EVs are not maxed
-	ld a, [wTempMonDefEV]
-	ld [wPokedexStatus], a 
-	pop bc
-	and 1
-	jr z, .def_not_odd
-	ld a, c
-	add 4
-	ld b, 0
-	ld c, a
-.def_not_odd
-	push bc
-	ld de, wPokedexStatus
-	lb bc, 1, 3 ; 3 digits
 	hlcoord 6, 14
-	call PrintNum
-	jr .done3
-
-.print_text3:
-	ld de, .EVMaxThreeStars
-	hlcoord 6, 14
-	call PlaceString
-
-.done3:
-	; SPE EVs
-	; Print 3 start is Def EVs are maxed
+	call .PrintEV
 	ld a, [wTempMonSpdEV]
-	cp 252
-	jr z, .print_text4
-
-	ld a, [wTempMonSpdEV]
-	ld [wPokedexStatus], a
-	pop bc
-	and 1
-	jr z, .speed_not_odd
-	ld a, c
-	add 2
-	ld b, 0
-	ld c, a
-.speed_not_odd
-	push bc
-	ld de, wPokedexStatus
-	lb bc, 1, 3 ; 3 digits
 	hlcoord 14, 12
-	call PrintNum
-	jr .done4
-
-.print_text4:
-	ld de, .EVMaxThreeStars
-	hlcoord 14, 12
-	call PlaceString
-
-.done4:
-	; SpAtk EVs
-	; Print 3 start is Def EVs are maxed
+	call .PrintEV
 	ld a, [wTempMonSpclAtkEV]
-	cp 252
-	jr z, .print_text5
-
-	ld a, [wTempMonSpclAtkEV]
-	ld [wPokedexStatus], a
-	pop bc
-	and 1
-	jr z, .spc_not_odd
-	ld a, c
-	add 1
-	ld b, 0
-	ld c, a
-.spc_not_odd
-	push bc
-	ld de, wPokedexStatus
-	lb bc, 1, 3 ; 3 digits
 	hlcoord 14, 13
-	call PrintNum
-	jr .done5
-
-.print_text5:
-	ld de, .EVMaxThreeStars
-	hlcoord 14, 13
-	call PlaceString
-
-.done5:
-	; SpDef EVs
-	; Print 3 start is Def EVs are maxed
+	call .PrintEV
 	ld a, [wTempMonSpclDefEV]
-	cp 252
-	jr z, .print_text6
-
-	ld a, [wTempMonSpclDefEV]
-	ld [wPokedexStatus], a
-	pop bc
-	and 1
-	jr z, .spc_not_odd1
-	ld a, c
-	add 1
-	ld b, 0
-	ld c, a
-.spc_not_odd1
-	push bc
-	ld de, wPokedexStatus
-	lb bc, 1, 3 ; 3 digits
 	hlcoord 14, 14
-	call PrintNum
-	jr .done6
+	; fallthrough
 
-.print_text6:
-	ld de, .EVMaxThreeStars
-	hlcoord 14, 14
-	call PlaceString
-
-.done6:
-	pop bc
-	ld a, c
+.PrintEV:
+	cp MAX_EV
+	jr z, .max_ev
 	ld [wPokedexStatus], a
 	ld de, wPokedexStatus
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 2 ; bytes, digits
-	ret
+	lb bc, 1, 3 ; 1 byte, 3 digits
+	jmp PrintNum
+
+.max_ev
+	ld de, .EVMaxThreeStars
+	jmp PlaceString
 
 .EffortValuesString:
 	db "Effort Values:@"
