@@ -1104,14 +1104,14 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - Overall status: In progress
 - Current phase: Phase 2
-- Current task: Phase 2 stability audit (register and banking misuse)
+- Current task: Phase 2 stability audit: call-graph check of WRAMX accesses (TEST-011), then stack balance
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
-- Last verified build: clean clone of `936e0c1c1`, Linux, RGBDS 0.7.0, 0 warnings
+- Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
 - Last completed task: PERF-002 (direct calls within one section)
-- Last verified commit: `936e0c1c1` (build: fix case-sensitive graphics paths and tool permissions)
+- Last verified commit: `d007b16f8` (full suite: 105 scripts, 95 fully passing, the rest profilers/comparisons)
 - Outstanding blockers: none
-- Next task: Phase 2: static checks for cross-bank calls, stack balance and interrupt safety
+- Next task: Phase 2: WRAMX call-graph check, stack-balance check, then the Phase 2 checklist review
 
 Update this section continuously.
 
@@ -1193,6 +1193,7 @@ Maintain the following table.
 | TEST-008 | Whole codebase | Static scan for far calls whose target is in ROM0 | Python scan over every `.asm` with the `.sym` file; each callee checked for inputs in a or hl | Passed | 9 hits, none taking a or hl as input (so no wrong results); they ran with bank 1 mapped instead of the caller's bank, harmless here. Replaced by direct calls (PERF-001). |
 | TEST-009 | Whole codebase | Static scan for far calls inside one SECTION (always the same bank, wherever the linker puts it) and review of each for register use | Python scan using the `.map` file's section membership; for each `farcall`/`callfar` callee, its first instructions checked for reading a or hl, and each caller checked for reading a afterwards | Passed | 106 hits. No callee reads a or hl on entry (only `push`/`pop` saves or reloads); one caller ends with `ret` after the call (`PlayerGivesAwayAnEggForAdoption`, a special whose result is in `wScriptVar`). `newfarcall`/`farjp` pass every register through, so those are exact. |
 | TEST-010 | Overworld rendering | `test_overworld_screen_same` with the baseline ROM as the older build | Every map's screens drawn by the game's own code in both ROMs, all anchor steps and half-block offsets | Passed | 307 maps, 1,941,120 cells identical. `test_map_render_same` runs away decompressing a tileset even with the baseline against itself: it was written for the removed LZP format and is stale. `test_bug_contest_judging` fails its "smaller" case against itself too (it checks a size reduction from an old optimisation), its behaviour cases pass. |
+| TEST-011 | Interrupts, RAM banking | VBlank handler review and a static scan for WRAMX (banks 2-7) accesses in routines that never set `rSVBK` | Read `home/vblank.asm` and each routine VBlank0 calls; Python scan with the `.sym` file | Partially verified | VBlank keeps `hROMBank`; `UpdateBGMapBuffer` and `AnimateTileset` save and restore `rVBK`/`rSVBK`. `UpdateBGMap`'s attribute pass forces `rVBK` back to 0, as in vanilla: safe only while main code that leaves `rVBK` = 1 across a frame keeps `hBGMapMode` off attributes (no case found, not proven). The WRAMX scan flags 197 routines; the ones checked are helpers only reached from callers that switch banks (Pokédex grid, palettes, battle animations). A call-graph-aware check is needed to clear the rest. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1389,6 +1390,7 @@ Do not silently ignore unresolved issues.
 - Resolved: the four partly passing tests were test-side faults, not ROM bugs (TEST-003).
 - The interpreter tests live in the git-excluded `.claude-tools/romtest` folder, so fixes to them are recorded here but are not part of the repository history.
 - The suite is a usable regression gate again (TEST-004). The four comparison tests (`test_bug_contest_judging`, `test_map_render_same`, `test_overworld_screen_same`, `test_type_chart_scan`) should be run with the baseline ROM as the older build after any change to those systems. `test_view_animations` needs a debug build. `test_map_render_same` is stale (written for the removed LZP format) and should be rewritten or retired; `test_overworld_screen_same` covers the same ground (TEST-010).
+- WRAMX access audit is incomplete (TEST-011): 197 routines touch banks 2-7 without setting `rSVBK` themselves; needs a call-graph check that their callers switch banks.
 - No emulator or physical hardware is available here: VBlank/HBlank timing, DMA and real-hardware behaviour can only be checked in the interpreter with emulated hooks. Anything timing-sensitive needs manual emulator testing (Section 32).
 - WRAM0 and WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
 
