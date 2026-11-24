@@ -1388,7 +1388,7 @@ Do not silently ignore unresolved issues.
 
 - Resolved: the four partly passing tests were test-side faults, not ROM bugs (TEST-003).
 - The interpreter tests live in the git-excluded `.claude-tools/romtest` folder, so fixes to them are recorded here but are not part of the repository history.
-- The suite is a usable regression gate again (TEST-004). The four comparison tests (`test_bug_contest_judging`, `test_map_render_same`, `test_overworld_screen_same`, `test_type_chart_scan`) should be run with the baseline ROM as the older build after any change to those systems. `test_view_animations` needs a debug build.
+- The suite is a usable regression gate again (TEST-004). The four comparison tests (`test_bug_contest_judging`, `test_map_render_same`, `test_overworld_screen_same`, `test_type_chart_scan`) should be run with the baseline ROM as the older build after any change to those systems. `test_view_animations` needs a debug build. `test_map_render_same` is stale (written for the removed LZP format) and should be rewritten or retired; `test_overworld_screen_same` covers the same ground (TEST-010).
 - No emulator or physical hardware is available here: VBlank/HBlank timing, DMA and real-hardware behaviour can only be checked in the interpreter with emulated hooks. Anything timing-sensitive needs manual emulator testing (Section 32).
 - WRAM0 and WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
 
