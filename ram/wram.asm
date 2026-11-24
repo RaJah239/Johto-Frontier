@@ -3412,6 +3412,22 @@ wMSimWeatherTurns:: db
 wMSimStartHP:: ds 4     ; wMSimEnemyHP and wMSimPlayerHP before a run
 
 
+SECTION "AI Matchup Recharge", WRAM0
+; each side's best recharge-move hit (Hyper Beam; big-endian): used only when
+; it pays for the turn it then loses (MSim_*PickRecharge)
+wMSimEnemyHBDmg:: dw
+wMSimPlayerHBDmg:: dw
+wMSimRecharge:: db ; MSIM_*_RECHARGING_F / MSIM_*_RECHARGE_THIS_F / MSIM_T1_RECHARGE_F
+
+SECTION "AI Matchup Boosts", WRAMX, BANK[1]
+; MSim_RunBoost: "boost N times, then fight"
+wMSimBoostPtr:: dw       ; the boost's stat stage changes (MSim_BoostEffects)
+wMSimBoostsPlanned:: db  ; N for the plan being played out
+wMSimBoostsLeft:: db     ; boosts still to use in it
+wMSimStartRecharge:: db  ; wMSimRecharge at the start (with wMSimStartHP)
+wMSimBoostFirstHeal:: db ; the plan heals on the first turn, then boosts
+wMSimBoostPlayerLeft:: dw ; the player's HP left after the last plan's fight (big-endian)
+
 SECTION "AI Matchup Sim Gale Wings", WRAM0
 ; each side's best Gale Wings hit (big-endian): priority on turns at full HP
 wMSimEnemyGWDmg:: dw
@@ -3465,6 +3481,15 @@ wMSimSavedLevels:: ds 7
 wMSimSavedSubStatus:: ds 5
 wMSimSavedDmg:: ds 10 ; AI_SimMoveChoice: wMSimEnemyDmg .. wMSimPlayerPrioDmg, wMSimFlags, wMSimDrainRates
 wMSimSavedGWDmg:: ds 4 ; and wMSimEnemyGWDmg, wMSimPlayerGWDmg
+wMSimSavedHBDmg:: ds 4 ; and wMSimEnemyHBDmg, wMSimPlayerHBDmg
+wMSimSavedBoostLevels:: ds 7 ; MSim_RunBoost: wEnemyAtkLevel .. wEnemyEvaLevel before setting up
+
+
+SECTION "AI Matchup Save 3", WRAMX, BANK[5]
+
+; MSim_RunBoost: the damages before setting up (wMSimEnemyDmg ..
+; wMSimPlayerPrioDmg, wMSimFlags, wMSimDrainRates, Gale Wings, recharge hits)
+wMSimSavedBoostDmg:: ds 8 + 1 + 1 + 4 + 4
 
 
 SECTION "AI Matchup Save 2", WRAMX, BANK[5]

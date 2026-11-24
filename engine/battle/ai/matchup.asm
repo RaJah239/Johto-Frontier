@@ -8,8 +8,11 @@
 ;
 ; Damage: the AI's moves at their lowest roll, the player's at their highest
 ; (no crits). Each side uses its strongest move every turn, or a priority move
-; when that move KOs for sure. Order: higher priority first, then speed (ties:
-; the player first).
+; when that move KOs for sure. A recharge move (Hyper Beam, Giga Impact; not
+; with Overdrive) is used only when it KOs and the strongest move doesn't, or
+; does more than twice its damage; its user then loses its next action (also
+; when it's recharging already in the real battle). Order: higher priority
+; first, then speed (ties: the player first).
 ;
 ; Also played out, for both sides:
 ; - Gale Wings: a Flying hit has priority on the turns its mon is at full HP;
@@ -24,8 +27,11 @@
 ;   Leech Seed 1/8 (to the other side), Curse 1/4; Magic Guard ignores them;
 ; - end of turn: sandstorm / hail 1/16 while the weather lasts, Leftovers 1/16.
 ;
-; The enemy's mon also gets a second try with "boost once, then attack" when
-; it has a boosting move (MSim_RunBest). The player is assumed to attack.
+; The enemy's mon also gets a second try with "set up, then attack" when it
+; has a boosting move (MSim_RunBest / MSim_RunBoost): boost N times (N = 1 ..
+; MSIM_MAX_BOOSTS, the fewest that wins), healing in between when the healing
+; rule says so, and stop setting up as soon as its hit KOs. The player is
+; assumed to attack (or heal).
 ;
 ; A benched mon is simulated by loading it into the wEnemyMon battle struct
 ; (stats from its party data, stat stages reset, Sticky Web applied). The real
@@ -33,6 +39,14 @@
 ; back afterwards, together with the move structs and damage variables.
 
 DEF MSIM_MAX_TURNS EQU 32
+DEF MSIM_MAX_BOOSTS EQU 6 ; MSim_RunBoost plans up to this many boosts
+
+; wMSimRecharge
+DEF MSIM_E_RECHARGING_F     EQU 0 ; it loses its next action (Hyper Beam)
+DEF MSIM_P_RECHARGING_F     EQU 1
+DEF MSIM_E_RECHARGE_THIS_F  EQU 2 ; (per turn) its hit is its recharge move
+DEF MSIM_P_RECHARGE_THIS_F  EQU 3
+DEF MSIM_T1_RECHARGE_F      EQU 4 ; AI_SimMoveChoice's forced first-turn attack needs a recharge
 
 ; wMSimFlags
 DEF MSIM_E_BEST_PRIO_F  EQU 0 ; the enemy's strongest move has priority
@@ -391,9 +405,20 @@ MSim_TryCandidate:
 	ld a, [wMSimMode]
 	bit MSIM_MODE_ENTRY_HIT_F, a
 	jr z, .fight
-	ld a, [wMSimPlayerDmg]
+	; (Hyper Beam when it pays: then the player recharges on the first turn)
+	ld hl, wMSimPlayerDmg
+	ld de, wMSimPlayerHit
+	call MSim_CopyWord
+	call MSim_PlayerPickRecharge
+	ld hl, wMSimRecharge
+	bit MSIM_P_RECHARGE_THIS_F, [hl]
+	jr z, .entry_hit
+	res MSIM_P_RECHARGE_THIS_F, [hl]
+	set MSIM_P_RECHARGING_F, [hl]
+.entry_hit
+	ld a, [wMSimPlayerHit]
 	ld b, a
-	ld a, [wMSimPlayerDmg + 1]
+	ld a, [wMSimPlayerHit + 1]
 	ld c, a
 	call MSim_EnemyEndures
 	call MSim_SubtractEnemyHP
@@ -466,10 +491,7 @@ MSim_TryResetFirst:
 	call MSim_ResetUseful
 	ret nc
 	push bc
-	ld hl, wMSimEnemyHP
-	ld de, wMSimStartHP
-	ld bc, 4
-	call CopyBytes
+	call MSim_SaveStart
 	call .stages
 	pop bc
 	call MSim_RunReset
@@ -493,6 +515,8 @@ MSim_TryResetFirst:
 	ld de, wMSimEnemyHP
 	ld bc, 4
 	call CopyBytes
+	ld a, [wMSimStartRecharge]
+	ld [wMSimRecharge], a
 	and a
 	ret
 
@@ -910,26 +934,45 @@ MSim_IsInFarList:
 	ret
 
 MSim_ComputeDamages:
+; MSim_ComputeHits, then the per-side state for a new run (MSim_SetupSides).
+	call MSim_ComputeHits
+	jmp MSim_SetupSides
+
+MSim_ComputeHits:
 ; Fill wMSimEnemyDmg / wMSimEnemyPrioDmg (lowest roll) and wMSimPlayerDmg /
 ; wMSimPlayerPrioDmg (highest roll) for the loaded enemy mon vs the player's
 ; mon, the priority flags, and who is faster.
 	xor a
 	ld [wCriticalHit], a
+	call MSim_ComputeEnemyHits
+	call MSim_ComputePlayerHits
+	; fallthrough
+
+MSim_ComputeSpeed:
+	ld hl, wMSimFlags
+	res MSIM_E_FASTER_F, [hl]
+	farcall DoesAIOutSpeedPlayer
+	ret nc
+	ld hl, wMSimFlags
+	set MSIM_E_FASTER_F, [hl]
+	ret
+
+MSim_ComputeEnemyHits:
+; The enemy's side of MSim_ComputeHits: its best hits, priority and drain.
+	xor a
 	ld hl, wMSimEnemyDmg
-	ld bc, 8
+	ld bc, 4 ; and wMSimEnemyPrioDmg
 	call ByteFill
 	xor a
-	ld hl, wMSimEnemyGWDmg
-	ld bc, 4
-	call ByteFill
+	ld [wMSimEnemyGWDmg], a
+	ld [wMSimEnemyGWDmg + 1], a
+	ld [wMSimEnemyHBDmg], a
+	ld [wMSimEnemyHBDmg + 1], a
 	ld hl, wMSimFlags
 	res MSIM_E_BEST_PRIO_F, [hl]
-	res MSIM_P_BEST_PRIO_F, [hl]
-	res MSIM_E_FASTER_F, [hl]
 	res MSIM_E_BEST_DRAIN_F, [hl]
-	res MSIM_P_BEST_DRAIN_F, [hl]
-	xor a
-	ld [wMSimDrainRates], a
+	ld hl, wMSimDrainRates
+	res MSIM_E_DRAIN_KISS_F, [hl]
 
 	; enemy moves
 	ld de, wEnemyMonMoves
@@ -957,7 +1000,7 @@ MSim_ComputeDamages:
 .enemy_loop
 	ld a, [de]
 	and a
-	jr z, .player
+	jr z, .done
 	push bc
 	push de
 	push hl
@@ -973,7 +1016,32 @@ MSim_ComputeDamages:
 	dec b
 	jr nz, .enemy_loop
 
-.player
+.done
+	; infatuated: it only gets to attack half the time
+	ld a, [wEnemySubStatus1]
+	bit SUBSTATUS_IN_LOVE, a
+	ld hl, wMSimEnemyDmg
+	jr nz, MSim_HalveHits
+	ret
+
+MSim_ComputePlayerHits:
+; The player's side of MSim_ComputeHits.
+	xor a
+	ld hl, wMSimPlayerDmg
+	ld bc, 4 ; and wMSimPlayerPrioDmg
+	call ByteFill
+	xor a
+	ld [wMSimPlayerGWDmg], a
+	ld [wMSimPlayerGWDmg + 1], a
+	ld [wMSimPlayerHBDmg], a
+	ld [wMSimPlayerHBDmg + 1], a
+	ld hl, wMSimFlags
+	res MSIM_P_BEST_PRIO_F, [hl]
+	res MSIM_P_BEST_DRAIN_F, [hl]
+	ld hl, wMSimDrainRates
+	res MSIM_P_DRAIN_KISS_F, [hl]
+
+	; player moves
 	ld de, wBattleMonMoves
 	ld hl, wBattleMonPP
 	ld b, NUM_MOVES
@@ -1007,7 +1075,7 @@ MSim_ComputeDamages:
 .player_loop
 	ld a, [de]
 	and a
-	jr z, .speed
+	jr z, .done
 	push bc
 	push de
 	push hl
@@ -1023,22 +1091,12 @@ MSim_ComputeDamages:
 	dec b
 	jr nz, .player_loop
 
-.speed
-	farcall DoesAIOutSpeedPlayer
-	jr nc, .setup
-	ld hl, wMSimFlags
-	set MSIM_E_FASTER_F, [hl]
-.setup
-	; infatuated: it only gets to attack half the time
+.done
 	ld a, [wPlayerSubStatus1]
 	bit SUBSTATUS_IN_LOVE, a
 	ld hl, wMSimPlayerDmg
-	call nz, MSim_HalveHits
-	ld a, [wEnemySubStatus1]
-	bit SUBSTATUS_IN_LOVE, a
-	ld hl, wMSimEnemyDmg
-	call nz, MSim_HalveHits
-	jmp MSim_SetupSides
+	jr nz, MSim_HalveHits
+	ret
 
 MSim_HalveHits:
 ; Halve the side's best hit and best priority hit at hl.
@@ -1097,6 +1155,14 @@ MSim_EnemyMoveDamage:
 	ld e, 1 ; enemy
 	ld hl, wMSimEnemyGWDmg
 	call MSim_GaleWingsHit
+	; a recharge move (Hyper Beam) is kept apart: MSim_ChooseActions uses it
+	; only when it pays for the turn it then loses
+	ld a, [wEnemyMonSpecies]
+	ld e, a
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	call MSim_MoveRecharges
+	ld hl, wMSimEnemyHBDmg
+	jmp c, MSim_KeepBiggerHit
 	ld a, BASE_PRIORITY
 	cp b
 	ld hl, wMSimEnemyDmg
@@ -1124,6 +1190,15 @@ MSim_EnemyMoveDamage:
 	ld a, [wEnemyMoveStruct + MOVE_ANIM]
 .save_drain_move
 	ld [wMSimT1Effect], a
+	; a recharge move: the enemy loses its second turn
+	ld a, [wEnemyMonSpecies]
+	ld e, a
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+	call MSim_MoveRecharges
+	ld hl, wMSimRecharge
+	res MSIM_T1_RECHARGE_F, [hl]
+	ret nc
+	set MSIM_T1_RECHARGE_F, [hl]
 	ret
 .none
 	ret
@@ -1180,11 +1255,54 @@ MSim_PlayerMoveDamage:
 	ld e, 0 ; player
 	ld hl, wMSimPlayerGWDmg
 	call MSim_GaleWingsHit
+	ld a, [wBattleMonSpecies]
+	ld e, a
+	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
+	call MSim_MoveRecharges
+	ld hl, wMSimPlayerHBDmg
+	jr c, MSim_KeepBiggerHit
 	ld a, BASE_PRIORITY
 	cp b
 	ld hl, wMSimPlayerDmg
 	lb bc, MSIM_P_BEST_PRIO_F, MSIM_P_BEST_DRAIN_F
 	jr MSim_KeepBest
+
+MSim_MoveRecharges:
+; a = a move's effect, e = its user's species. Carry if the user must
+; recharge after it (Hyper Beam, Giga Impact; not with Overdrive, unless
+; Neutralizing Gas suppresses it). Preserves bc.
+	cp EFFECT_HYPER_BEAM
+	jr nz, .no
+	push bc
+	ld a, e
+	ld hl, OverdrivePokemon_AI
+	ld d, BANK(OverdrivePokemon_AI)
+	call MSim_IsInFarAbilityList
+	pop bc
+	ccf
+	ret
+.no
+	and a
+	ret
+
+MSim_KeepBiggerHit:
+; Keep the bigger of the word at hl (big-endian) and wCurDamage.
+	ld a, [wCurDamage]
+	ld d, a
+	ld a, [wCurDamage + 1]
+	ld e, a
+	ld a, [hli]
+	cp d
+	jr c, .new
+	ret nz
+	ld a, [hl]
+	cp e
+	ret nc
+.new
+	ld [hl], e
+	dec hl
+	ld [hl], d
+	ret
 
 MSim_GaleWingsHit:
 ; b = the priority of move c used by species d on side e; hl = that side's
@@ -1538,7 +1656,20 @@ MSim_CheckDrain:
 MSim_SetupSides:
 ; Per-side setup for MSim_Run: Leftovers, Magic Guard, turn-end abilities,
 ; Sturdy / Focus Sash, sleep and bad-poison counters, weather turns, heal
-; moves.
+; moves, recharging.
+	; recharging after Hyper Beam last turn: it loses its first action
+	xor a
+	ld hl, wEnemySubStatus4
+	bit SUBSTATUS_RECHARGE, [hl]
+	jr z, .player_recharge
+	set MSIM_E_RECHARGING_F, a
+.player_recharge
+	ld hl, wPlayerSubStatus4
+	bit SUBSTATUS_RECHARGE, [hl]
+	jr z, .got_recharge
+	set MSIM_P_RECHARGING_F, a
+.got_recharge
+	ld [wMSimRecharge], a
 	xor a
 	ld [wMSimFlags2], a
 	ld [wMSimFlags3], a
@@ -1788,36 +1919,7 @@ MSim_Run:
 	ld [wMSimTurns], a
 .turn
 	call MSim_ChooseActions
-	; order: higher priority first, then speed (ties: the player)
-	ld a, [wMSimFlags]
-	ld b, a
-	and 1 << MSIM_E_PRIO_THIS_F | 1 << MSIM_P_PRIO_THIS_F
-	jr z, .by_speed
-	cp 1 << MSIM_E_PRIO_THIS_F | 1 << MSIM_P_PRIO_THIS_F
-	jr z, .by_speed
-	cp 1 << MSIM_E_PRIO_THIS_F
-	jr z, .enemy_first
-	jr .player_first
-.by_speed
-	bit MSIM_E_FASTER_F, b
-	jr z, .player_first
-.enemy_first
-	call MSim_EnemyActs
-	and a
-	jr nz, .result
-	call MSim_PlayerActs
-	and a
-	jr nz, .result
-	jr .end_of_turn
-.player_first
-	call MSim_PlayerActs
-	and a
-	jr nz, .result
-	call MSim_EnemyActs
-	and a
-	jr nz, .result
-.end_of_turn
-	call MSim_EndOfTurn
+	call MSim_PlayTurn
 	and a
 	jr nz, .result
 	xor a
@@ -1836,6 +1938,38 @@ MSim_Run:
 	scf
 	ret
 
+MSim_PlayTurn:
+; One turn with the actions MSim_ChooseActions chose. a = 0, or the winner.
+	; order: higher priority first, then speed (ties: the player)
+	ld a, [wMSimFlags]
+	ld b, a
+	and 1 << MSIM_E_PRIO_THIS_F | 1 << MSIM_P_PRIO_THIS_F
+	jr z, .by_speed
+	cp 1 << MSIM_E_PRIO_THIS_F | 1 << MSIM_P_PRIO_THIS_F
+	jr z, .by_speed
+	cp 1 << MSIM_E_PRIO_THIS_F
+	jr z, .enemy_first
+	jr .player_first
+.by_speed
+	bit MSIM_E_FASTER_F, b
+	jr z, .player_first
+.enemy_first
+	call MSim_EnemyActs
+	and a
+	ret nz
+	call MSim_PlayerActs
+	and a
+	ret nz
+	jmp MSim_EndOfTurn
+.player_first
+	call MSim_PlayerActs
+	and a
+	ret nz
+	call MSim_EnemyActs
+	and a
+	ret nz
+	jmp MSim_EndOfTurn
+
 MSim_ChooseActions:
 ; Each side uses its strongest move, or its best priority move when that
 ; KOs for sure, or its heal move (MSim_*ShouldHeal). Sets wMSimEnemyHit /
@@ -1846,15 +1980,28 @@ MSim_ChooseActions:
 	ld hl, wMSimFlags3
 	res MSIM_E_HEALS_F, [hl]
 	res MSIM_P_HEALS_F, [hl]
+	ld hl, wMSimRecharge
+	res MSIM_E_RECHARGE_THIS_F, [hl]
+	res MSIM_P_RECHARGE_THIS_F, [hl]
 	; enemy: a forced first-turn move (AI_SimMoveChoice)?
 	ld a, [wMSimT1Kind]
 	and $7f
 	jr z, .enemy
 	cp MSIM_T1_HEAL
-	jr z, .player
+	jmp z, .player
 	ld hl, wMSimT1Dmg ; (status moves: 0)
 	ld de, wMSimEnemyHit
 	call MSim_CopyWord
+	; a forced Hyper Beam: it recharges on the next turn
+	ld a, [wMSimT1Kind]
+	and $7f
+	cp MSIM_T1_DAMAGE
+	jr nz, .t1_no_recharge
+	ld hl, wMSimRecharge
+	bit MSIM_T1_RECHARGE_F, [hl]
+	jr z, .t1_no_recharge
+	set MSIM_E_RECHARGE_THIS_F, [hl]
+.t1_no_recharge
 	ld a, [wMSimT1Kind]
 	bit MSIM_T1_PRIO_F, a
 	jr z, .player
@@ -1892,14 +2039,16 @@ MSim_ChooseActions:
 	jr nz, .enemy_best_prio
 	; at full HP its best hit may be a Gale Wings Flying move
 	call MSim_EnemyGaleWingsTurn
-	jr nc, .player
+	jr nc, .enemy_recharge
 	ld hl, wMSimEnemyGWDmg
 	ld de, wMSimEnemyDmg
 	call MSim_WordGE
-	jr nc, .player
+	jr nc, .enemy_recharge
 	ld hl, wMSimFlags
 .enemy_best_prio
 	set MSIM_E_PRIO_THIS_F, [hl]
+.enemy_recharge
+	call MSim_EnemyPickRecharge
 .player
 	ld hl, wMSimPlayerPrioDmg
 	call MSim_PlayerGaleWingsTurn
@@ -1929,14 +2078,16 @@ MSim_ChooseActions:
 	bit MSIM_P_BEST_PRIO_F, [hl]
 	jr nz, .player_best_prio
 	call MSim_PlayerGaleWingsTurn
-	jr nc, .heals
+	jr nc, .player_recharge
 	ld hl, wMSimPlayerGWDmg
 	ld de, wMSimPlayerDmg
 	call MSim_WordGE
-	jr nc, .heals
+	jr nc, .player_recharge
 	ld hl, wMSimFlags
 .player_best_prio
 	set MSIM_P_PRIO_THIS_F, [hl]
+.player_recharge
+	call MSim_PlayerPickRecharge
 
 .heals
 	ld a, [wMSimT1Kind]
@@ -2019,9 +2170,73 @@ MSim_WordGE:
 	pop bc
 	ret
 
+MACRO msim_pick_recharge
+; \1 = this side (Enemy / Player), \2 = the other side, \3 = E / P
+MSim_\1PickRecharge:
+; Use this side's recharge move (Hyper Beam) instead of wMSim\1Hit when it
+; KOs and that hit doesn't, or when it does more than twice that hit (so it's
+; worth the turn it then loses). Sets MSIM_\3_RECHARGE_THIS_F.
+	ld hl, wMSim\1HBDmg
+	ld a, [hli]
+	or [hl]
+	ret z
+	; the hit KOs: keep it
+	ld hl, wMSim\1Hit
+	ld de, wMSim\2HP
+	call MSim_WordGE
+	ret c
+	; the recharge move KOs
+	ld hl, wMSim\1HBDmg
+	ld de, wMSim\2HP
+	call MSim_WordGE
+	jr c, .use
+	; more than twice the hit
+	ld a, [wMSim\1Hit]
+	ld d, a
+	ld a, [wMSim\1Hit + 1]
+	ld e, a
+	sla e
+	rl d
+	ret c ; (twice the hit is more than any damage)
+	ld hl, wMSim\1HBDmg
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	; twice the hit - recharge hit: a borrow means the recharge hit is bigger
+	ld a, e
+	sub l
+	ld a, d
+	sbc h
+	ret nc
+.use
+	ld hl, wMSim\1HBDmg
+	ld de, wMSim\1Hit
+	call MSim_CopyWord
+	ld hl, wMSimFlags
+	res MSIM_\3_PRIO_THIS_F, [hl]
+	ld hl, wMSimRecharge
+	set MSIM_\3_RECHARGE_THIS_F, [hl]
+	ret
+
+MSim_\1Threat:
+; hl = this side's biggest hit: wMSim\1Dmg, or its recharge move's.
+; Preserves bc.
+	ld hl, wMSim\1HBDmg
+	ld de, wMSim\1Dmg
+	call MSim_WordGE
+	ld hl, wMSim\1HBDmg
+	ret c
+	ld hl, wMSim\1Dmg
+	ret
+ENDM
+
+	msim_pick_recharge Enemy, Player, E
+	msim_pick_recharge Player, Enemy, P
+
 MACRO msim_should_heal
 ; \1 = this side (Enemy / Player), \2 = the other side, \3 = E / P,
-; \4 = the jr condition on MSIM_E_FASTER_F that means this side moves first
+; \4 = the jr condition on MSIM_E_FASTER_F that means this side moves first,
+; \5 = the other side's E / P
 MSim_\1ShouldHeal:
 ; Carry if this side heals this turn: it has a heal move, isn't asleep, can't
 ; KO now (or would be KO'd first), it's in KO range (the other side's best hit; two of them if it
@@ -2035,27 +2250,38 @@ MSim_\1ShouldHeal:
 	ld a, [wMSim\1Sleep]
 	cp 2
 	jr nc, .no
+	; recharging: it can't act
+	ld a, [wMSimRecharge]
+	bit MSIM_\3_RECHARGING_F, a
+	jr nz, .no
 	ld hl, wMSim\1Hit
 	ld de, wMSim\2HP
 	call MSim_WordGE
 	jr nc, .no_ko
 	; it can KO: attack, unless it moves second and the other side's hit
-	; KOs it first
+	; KOs it first (not while that side recharges)
+	ld a, [wMSimRecharge]
+	bit MSIM_\5_RECHARGING_F, a
+	jr nz, .no
 	ld a, [wMSimFlags]
 	bit MSIM_E_FASTER_F, a
 	jr \4, .no
-	ld hl, wMSim\2Dmg
+	call MSim_\2Threat
 	ld de, wMSim\1HP
 	call MSim_WordGE
 	jr nc, .no
 .no_ko
 	; KO range: the other side's best hit, doubled if this side moves second
-	ld hl, wMSim\2Dmg
+	call MSim_\2Threat
 	ld a, [hli]
 	ld d, a
 	ld e, [hl]
 	ld a, [wMSimFlags2]
 	bit MSIM_\3_HEAL_PRIO_F, a
+	jr nz, .threshold
+	; (the other side recharges this turn: only its next hit counts)
+	ld a, [wMSimRecharge]
+	bit MSIM_\5_RECHARGING_F, a
 	jr nz, .threshold
 	ld a, [wMSimFlags]
 	bit MSIM_E_FASTER_F, a
@@ -2076,7 +2302,7 @@ MSim_\1ShouldHeal:
 	sbc h
 	jr c, .no
 	; the other side's best hit < heal
-	ld hl, wMSim\2Dmg
+	call MSim_\2Threat
 	ld a, [hli]
 	ld d, a
 	ld e, [hl]
@@ -2090,8 +2316,8 @@ MSim_\1ShouldHeal:
 	ret
 ENDM
 
-	msim_should_heal Enemy, Player, E, nz
-	msim_should_heal Player, Enemy, P, z
+	msim_should_heal Enemy, Player, E, nz, P
+	msim_should_heal Player, Enemy, P, z, E
 
 MACRO msim_acts
 ; \1 = this side (Enemy / Player), \2 = the other side, \3 = E / P,
@@ -2104,8 +2330,19 @@ MSim_\1Acts:
 	and a
 	jr z, .awake
 	dec [hl]
+	IF !STRCMP("\1", "Enemy")
+	jmp nz, .residual ; (the Enemy side is longer)
+	ELSE
 	jr nz, .residual
+	ENDC
 .awake
+	; recharging after Hyper Beam: this action is lost
+	ld hl, wMSimRecharge
+	bit MSIM_\3_RECHARGING_F, [hl]
+	jr z, .not_recharging
+	res MSIM_\3_RECHARGING_F, [hl]
+	jr .residual
+.not_recharging
 	ld a, [wMSimFlags3]
 	bit MSIM_\3_HEALS_F, a
 	jr z, .attack
@@ -2125,6 +2362,12 @@ MSim_\1Acts:
 	jr .residual
 
 .attack
+	; a recharge move: it loses its next action
+	ld hl, wMSimRecharge
+	bit MSIM_\3_RECHARGE_THIS_F, [hl]
+	jr z, .hit
+	set MSIM_\3_RECHARGING_F, [hl]
+.hit
 	ld a, [wMSim\1Hit]
 	ld b, a
 	ld a, [wMSim\1Hit + 1]
@@ -3275,13 +3518,9 @@ MSim_MultiplyBC:
 
 MSim_RunBest:
 ; MSim_Run from the current HP. If that loses and the enemy's mon has a
-; usable boosting move, try again: on the first turn it boosts (and the
-; player gets a free hit), then it attacks with the boosted stats. Carry if
+; usable boosting move, try setting up first (MSim_RunBoost). Carry if
 ; either way wins.
-	ld hl, wMSimEnemyHP
-	ld de, wMSimStartHP
-	ld bc, 4
-	call CopyBytes
+	call MSim_SaveStart
 	call MSim_Run
 	ret c
 
@@ -3297,21 +3536,270 @@ MSim_RunBest:
 	and a
 	ret
 
+MSim_SaveStart:
+; wMSimStartHP and wMSimStartRecharge = the HP and recharge state now: where
+; MSim_RunBoost starts each plan from.
+	ld hl, wMSimEnemyHP
+	ld de, wMSimStartHP
+	ld bc, 4
+	call CopyBytes
+	ld a, [wMSimRecharge]
+	ld [wMSimStartRecharge], a
+	ret
+
+MSim_RunHealBoost:
+; MSim_RunBoost, healing on the first turn instead of boosting.
+	ld a, TRUE
+	jr MSim_RunBoostPlans
+
 MSim_RunBoost:
-; hl = stat stage changes (MSim_BoostEffects); wMSimStartHP = the HP to start
-; from. The enemy boosts on the first turn (the player gets a free hit), then
-; MSim_Run. Carry if it wins. Leaves the enemy's stats raised.
+; hl = stat stage changes (MSim_BoostEffects). Play out "set up, then fight"
+; from wMSimStartHP / wMSimStartRecharge, for N = 1 .. MSIM_MAX_BOOSTS boosts,
+; stopping at the first N that wins. The enemy boosts on the first turn; on
+; each setup turn after that it boosts again, or heals instead when
+; MSim_EnemyShouldHeal says so (or sleeps / recharges), or stops setting up
+; as soon as its hit KOs. After its N boosts it fights (MSim_Run). The player
+; attacks (or heals) every turn, hitting the boosted mon if it's slower. A
+; bigger plan is only tried when this one lost the fight after all its
+; boosts (otherwise it would play out the same), and left the player with
+; less HP than the plan before (more setup has stopped paying). Carry if a
+; plan wins.
+; Leaves the enemy's stats raised.
+	xor a
+	; fallthrough
+
+MSim_RunBoostPlans:
+	ld [wMSimBoostFirstHeal], a
 	; Growth raises both attacking stats by two stages in sunlight.
 	dec hl
 	ld a, [hli] ; the effect before the stat changes
 	cp EFFECT_GROWTH
-	jr nz, .raise_stats
+	jr nz, .got_changes
 	ld a, [wBattleWeather]
 	cp WEATHER_SUN
-	jr nz, .raise_stats
+	jr nz, .got_changes
 	ld hl, .sun_growth
-.raise_stats
-	; raise its stat stages (up to MAX_STAT_LEVEL) and recalculate
+.got_changes
+	ld a, l
+	ld [wMSimBoostPtr], a
+	ld a, h
+	ld [wMSimBoostPtr + 1], a
+	ld hl, wEnemyStatLevels
+	ld de, wMSimSavedBoostLevels
+	ld c, MSIM_SAVED_LEVELS_LENGTH
+	call MSim_ToSaveBank
+	ld a, 1
+	ld [wMSimBoostsPlanned], a
+	ld a, $ff
+	ld [wMSimBoostPlayerLeft], a
+	ld [wMSimBoostPlayerLeft + 1], a
+	; the damages at the start, worked out once
+	ld a, 1
+	ldh [hBattleTurn], a
+	callfar CalcEnemyStats
+	call MSim_ComputeHits
+	ld hl, wMSimEnemyDmg
+	ld de, wMSimSavedBoostDmg
+	ld c, 8
+	call MSim_ToSaveBank
+	ld hl, wMSimFlags
+	ld c, 1
+	call MSim_ToSaveBank
+	ld hl, wMSimDrainRates
+	ld c, 1
+	call MSim_ToSaveBank
+	ld hl, wMSimEnemyGWDmg
+	ld c, 4
+	call MSim_ToSaveBank
+	ld hl, wMSimEnemyHBDmg
+	ld c, 4
+	call MSim_ToSaveBank
+
+.plan
+	ld a, [wMSimBoostsPlanned]
+	ld [wMSimBoostsLeft], a
+	; back to the start: stat stages and stats, damages, per-side state, HP
+	ld hl, wMSimSavedBoostLevels
+	ld de, wEnemyStatLevels
+	ld c, MSIM_SAVED_LEVELS_LENGTH
+	call MSim_FromSaveBank
+	ld a, 1
+	ldh [hBattleTurn], a
+	callfar CalcEnemyStats
+	ld hl, wMSimSavedBoostDmg
+	ld de, wMSimEnemyDmg
+	ld c, 8
+	call MSim_FromSaveBank
+	ld de, wMSimFlags
+	ld c, 1
+	call MSim_FromSaveBank
+	ld de, wMSimDrainRates
+	ld c, 1
+	call MSim_FromSaveBank
+	ld de, wMSimEnemyGWDmg
+	ld c, 4
+	call MSim_FromSaveBank
+	ld de, wMSimEnemyHBDmg
+	ld c, 4
+	call MSim_FromSaveBank
+	call MSim_SetupSides
+	ld hl, wMSimStartHP
+	ld de, wMSimEnemyHP
+	ld bc, 4
+	call CopyBytes
+	ld a, [wMSimStartRecharge]
+	ld [wMSimRecharge], a
+	ld a, MSIM_MAX_TURNS
+	ld [wMSimTurns], a
+	xor a
+	ld [wMSimT1Kind], a
+	ld a, [wMSimBoostFirstHeal]
+	and a
+	jr nz, .first_heal
+	; awake to boost (MSim_RunBest: asleep for no more than this turn)
+	xor a
+	ld [wMSimEnemySleep], a
+	jr .boost_turn
+
+.first_heal
+	ld a, MSIM_T1_HEAL
+	ld [wMSimT1Kind], a
+	call MSim_ChooseActions
+	call MSim_PlayTurn
+	push af
+	xor a
+	ld [wMSimT1Kind], a
+	pop af
+	and a
+	jr nz, .turn_result
+	; fallthrough
+
+; (A plan with more boosts plays the same turns until this one's last boost:
+; when this one ends before that, by losing or by fighting early, so would
+; every bigger plan, so there are no more.)
+.setup_turn
+	ld hl, wMSimTurns
+	dec [hl]
+	jmp z, .no ; out of turns while setting up
+	call MSim_ChooseActions
+	; its hit KOs now: stop setting up and fight
+	ld hl, wMSimEnemyHit
+	ld de, wMSimPlayerHP
+	call MSim_WordGE
+	jr c, .last_fight
+	; it heals instead, or it can't act (asleep, recharging): a plain turn
+	ld a, [wMSimFlags3]
+	bit MSIM_E_HEALS_F, a
+	jr nz, .plain_turn
+	ld a, [wMSimEnemySleep]
+	and a
+	jr nz, .plain_turn
+	ld a, [wMSimRecharge]
+	bit MSIM_E_RECHARGING_F, a
+	jr z, .boost_chosen
+.plain_turn
+	call MSim_PlayTurn
+	and a
+	jr z, .setup_turn
+.turn_result
+	cp MSIM_ENEMY_WINS
+	jr nz, .no ; it went down while setting up
+	scf
+	ret
+
+.boost_turn
+	call MSim_ChooseActions
+.boost_chosen
+	; a boost that would raise nothing more: fight now, and no bigger plans
+	call MSim_BoostUseful
+	jr c, .boost
+.last_fight
+	ld a, MSIM_MAX_BOOSTS
+	ld [wMSimBoostsPlanned], a
+	jr .fight
+.boost
+	; the player hits first (priority, or faster): then the boost
+	ld a, [wMSimFlags]
+	bit MSIM_P_PRIO_THIS_F, a
+	jr nz, .player_first
+	bit MSIM_E_FASTER_F, a
+	jr z, .player_first
+	; the boost first: the player then hits the boosted mon
+	call MSim_RaiseBoost
+	call MSim_ChooseActions
+	call MSim_PlayerActs
+	and a
+	jr nz, .turn_result
+	jr .boost_residual
+.player_first
+	call MSim_PlayerActs
+	and a
+	jr nz, .turn_result
+	call MSim_RaiseBoost
+.boost_residual
+	call MSim_EnemyResidual
+	and a
+	jr nz, .turn_result
+	call MSim_EndOfTurn
+	and a
+	jr nz, .turn_result
+	ld hl, wMSimBoostsLeft
+	dec [hl]
+	jr nz, .setup_turn
+.fight
+	call MSim_Run
+	ret c
+	; one more boost only while more boosts leave the player with less HP
+	ld hl, wMSimPlayerHP
+	ld de, wMSimBoostPlayerLeft
+	call MSim_WordGE
+	jr c, .no
+	ld hl, wMSimPlayerHP
+	ld de, wMSimBoostPlayerLeft
+	call MSim_CopyWord
+	ld hl, wMSimBoostsPlanned
+	ld a, [hl]
+	cp MSIM_MAX_BOOSTS
+	jr nc, .no
+	inc [hl]
+	jmp .plan
+.no
+	and a
+	ret
+
+.sun_growth
+	db 2, 0, 0, 2, 0 ; Attack, Defense, Speed, Sp. Atk, Sp. Def
+
+MSim_BoostUseful:
+; Carry if wMSimBoostPtr's changes would raise a stat stage that isn't maxed.
+	ld hl, wMSimBoostPtr
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld de, wEnemyStatLevels
+	ld c, NUM_BATTLE_STATS
+.loop
+	ld a, [hli]
+	and a
+	jr z, .next
+	ld a, [de]
+	cp MAX_STAT_LEVEL
+	ret c
+.next
+	inc de
+	dec c
+	jr nz, .loop
+	and a
+	ret
+
+MSim_RaiseBoost:
+; Raise the enemy's stat stages by wMSimBoostPtr's changes (up to
+; MAX_STAT_LEVEL), then work out its stats, both sides' hits and who's
+; faster again. (The per-side state of the run stays.)
+	ld hl, wMSimBoostPtr
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
 	ld de, wEnemyStatLevels
 	ld c, NUM_BATTLE_STATS
 .raise
@@ -3329,38 +3817,28 @@ MSim_RunBoost:
 	ld a, 1
 	ldh [hBattleTurn], a
 	callfar CalcEnemyStats
-	call MSim_ComputeDamages
-	ld hl, wMSimStartHP
-	ld de, wMSimEnemyHP
-	ld bc, 4
-	call CopyBytes
-
-	; the boost turn: only the player attacks
-	xor a
-	ld [wMSimEnemySleep], a
-	call MSim_ChooseActions
-	call MSim_PlayerActs
-	cp MSIM_PLAYER_WINS
-	jr z, .no
-	call MSim_EnemyResidual
-	cp MSIM_PLAYER_WINS
-	jr z, .no
-	call MSim_EndOfTurn
-	and a
-	jr z, .fight
-	cp MSIM_ENEMY_WINS
-	jr nz, .no
-	scf
-	ret
-.fight
-	jmp MSim_Run
-
-.no
-	and a
-	ret
-
-.sun_growth
-	db 2, 0, 0, 2, 0 ; Attack, Defense, Speed, Sp. Atk, Sp. Def
+	; its own hits: Attack, Sp. Atk, or Defense (Body Press)
+	ld hl, wMSimBoostPtr
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	push hl
+	ld a, [hli] ; Attack
+	or [hl] ; Defense
+	inc hl
+	inc hl
+	or [hl] ; Sp. Atk
+	call nz, MSim_ComputeEnemyHits
+	pop hl
+	; the player's hits: Defense, Sp. Def
+	inc hl
+	ld a, [hli] ; Defense
+	inc hl
+	inc hl
+	or [hl] ; Sp. Def
+	call nz, MSim_ComputePlayerHits
+	call MSim_ComputeSpeed
+	jmp MSim_RecheckSpeed
 
 MSim_RunReset:
 ; b = the move's effect: EFFECT_RESET_STATS (Haze: both sides' stat stages
@@ -3626,8 +4104,10 @@ MSim_BoostEffects:
 ; After the scoring layers (and AI_DismissImmuneMoves), every move the AI
 ; would consider (score within 20 of its favourite) is played out: "use this
 ; move now, then play on as in MSim_Run". Damaging moves hit with their own
-; damage and priority; boosting moves boost (the player gets a free hit);
-; healing moves heal (only when MSim_EnemyShouldHeal would); sleep, poison, bad poison, burn, paralysis and Leech
+; damage and priority; boosting moves set up (MSim_RunBoost: one or more
+; boosts, healing in between, the player hitting each turn); healing moves
+; heal (only when MSim_EnemyShouldHeal would), then fight, or set up if
+; fighting straight away loses; sleep, poison, bad poison, burn, paralysis and Leech
 ; Seed are inflicted on the player's mon (when they can work). If any move
 ; wins, the winners that keep the most HP (100%-accurate moves first) get
 ; score 1 and every other usable move at least 21. If none wins, the move
@@ -3657,6 +4137,10 @@ AI_SimMoveChoice:
 	call MSim_ToSaveBank
 	ld hl, wMSimEnemyGWDmg
 	ld de, wMSimSavedGWDmg
+	ld c, 4
+	call MSim_ToSaveBank
+	ld hl, wMSimEnemyHBDmg
+	ld de, wMSimSavedHBDmg
 	ld c, 4
 	call MSim_ToSaveBank
 
@@ -3926,10 +4410,7 @@ MSim_EvalSlot:
 .is_useful
 	pop hl
 	push hl
-	ld hl, wMSimEnemyHP
-	ld de, wMSimStartHP
-	ld bc, 4
-	call CopyBytes
+	call MSim_SaveStart
 	pop hl
 	call MSim_RunBoost
 	call MSim_EvalKey
@@ -4008,7 +4489,7 @@ MSim_EvalSlot:
 	ld a, e
 	ld [wBattleMonSpeed + 1], a
 	pop af
-	jr .result
+	jmp .result
 
 .reset_stats
 	; Haze, Roar, Whirlwind (2nd pass): when they'd undo the player's boosts
@@ -4077,6 +4558,17 @@ MSim_EvalSlot:
 	jr nc, .not_simulated
 	ld a, MSIM_T1_HEAL
 	ld [wMSimT1Kind], a
+	call MSim_SaveStart
+	call MSim_Run
+	jr c, .result
+	; heal now, then set up (healing again when needed)
+	call MSim_FindBoost
+	jr nc, .result
+	call MSim_RunHealBoost
+	push af
+	call MSim_RestoreEnemy
+	pop af
+	jr .result
 .run
 	call MSim_Run
 .result
@@ -4277,6 +4769,10 @@ MSim_ResetActive:
 	call MSim_FromSaveBank
 	ld hl, wMSimSavedGWDmg
 	ld de, wMSimEnemyGWDmg
+	ld c, 4
+	call MSim_FromSaveBank
+	ld hl, wMSimSavedHBDmg
+	ld de, wMSimEnemyHBDmg
 	ld c, 4
 	call MSim_FromSaveBank
 	jmp MSim_SetupSides

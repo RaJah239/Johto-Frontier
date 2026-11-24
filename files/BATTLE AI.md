@@ -172,8 +172,9 @@ These run after everything above and can override it.
 ### 8. Playing out each move
 Last of all, the AI plays out every move it was seriously considering: any move whose score is close to its favourite's. It asks: "if I use this move now and then fight on as well as I can, do I win?" It uses the same simulation as [the 1-on-1 check](#the-1-on-1-check).
 - **Attacks** hit with their own damage (weakest roll) and priority on the first turn. An attack that would do nothing now (Dream Eater while you're awake, or a move you're immune to) isn't played out, so it can't "win".
-- **Boosting moves** boost on the first turn, and you get a free hit. A boost that raises nothing (its stats are all at +6), or any boost with Contrary, isn't played out.
-- **Healing moves** heal on the first turn, but they're only tried when it actually needs to heal: it can't knock you out first, your next hit (two hits, if it's slower) would knock it out, and the heal is bigger than that hit. Otherwise healing early would just waste a turn.
+- **Hyper Beam and Giga Impact** cost the next turn: when it plays one out, its Pokémon does nothing the turn after (unless it has Overdrive). So it no longer thinks "Hyper Beam every turn" wins a fight it would lose, and it will often use a normal attack first and save Hyper Beam for the knock-out.
+- **Boosting moves** start a set-up plan (see [Setting up](#the-1-on-1-check) below): it boosts once, twice or more before attacking, healing in between when it needs to, with you getting a hit every turn. If any number of boosts wins, the boosting move wins. A boost that raises nothing (its stats are all at +6), or any boost with Contrary, isn't played out.
+- **Healing moves** heal on the first turn, but they're only tried when it actually needs to heal: it can't knock you out first, your next hit (two hits, if it's slower) would knock it out, and the heal is bigger than that hit. Otherwise healing early would just waste a turn. If just fighting on after the heal would lose, it also tries healing and then setting up, so a Pokémon that's in knock-out range can heal first and then boost its way to a win.
 - **Status moves** inflict their status when it can work, and the rest of the fight plays out with it:
   - sleep (counted at its shortest: one skipped turn)
   - poison and bad poison
@@ -191,7 +192,7 @@ Then:
 - **If none of them wins**, the earlier scores decide, with a small push toward the move that would take the most HP off you.
 - **Against a set-up sweeper:** if nothing wins, but you're at +2 or more in Attack, Sp. Atk, Speed or evasion and it can live long enough to Haze, Roar or Whirlwind you, it does that rather than throw away a losing attack, so its next Pokémon gets a fair fight. A move that knocks you out as it goes down counts the same.
 
-So it picks Toxic, Thunder Wave, Swords Dance, Recover or Haze because they *win the fight*, not just because a rule favours them.
+So it picks Toxic, Thunder Wave, Swords Dance, Recover or Haze because they *win the fight*, not just because a rule favours them. A Pokémon that needs three Swords Dances to win will use the first one, then keep boosting on the next turns until attacking wins (it plays the fight out again every turn), rather than settle for one boost and a Hyper Beam.
 
 ## Switching
 
@@ -199,7 +200,7 @@ So it picks Toxic, Thunder Wave, Swords Dance, Recover or Haze because they *win
 At the start of every turn, unless it's trapped, the AI plays out a one-on-one between the Pokémon that's out and yours, turn by turn, until one of them goes down.
 
 **How a 1-on-1 is played out:**
-- Each side uses its strongest attack every turn. If you're locked into one move (a Choice item, Encore, or the middle of Outrage, Thrash or Rollout), only that move counts for you, so it will bring in a Pokémon that's immune to it. It uses a priority move instead when that move would knock the other out for sure. Blastoise's Iron Head, Drowzee's and Hypno's Zen Headbutt, and Gale Wings Flying moves at full HP count as priority moves.
+- Each side uses its strongest attack every turn. **Hyper Beam and Giga Impact** are only used when they'd knock the other out and the strongest other attack wouldn't, or when they'd do more than twice its damage; the side that uses one then loses its next turn (not with Overdrive, unless Neutralizing Gas stops it). A Pokémon that's already recharging in the real battle loses its first turn too. If you're locked into one move (a Choice item, Encore, or the middle of Outrage, Thrash or Rollout), only that move counts for you, so it will bring in a Pokémon that's immune to it. It uses a priority move instead when that move would knock the other out for sure. Blastoise's Iron Head, Drowzee's and Hypno's Zen Headbutt, and Gale Wings Flying moves at full HP count as priority moves.
 - The AI's attacks use their **weakest** damage roll and yours your **strongest**, so it only counts on what's certain. There are no critical hits and every move hits.
 - Turn order:
   - the higher priority goes first
@@ -225,14 +226,20 @@ At the start of every turn, unless it's trapped, the AI plays out a one-on-one b
   - Hydration cures its status in the rain
   - **Tenacity** (a 1/3 chance each turn) counts as curing its status on the third turn
 - **Berries:** an HP Berry (Berry, Gold Berry, Silver Berry…) is eaten at the end of a turn below half HP, a status Berry when the Pokémon has its status. **Harvest** regrows the Berry, also one eaten before this fight: every turn in the sun, otherwise every other turn (it's a 50% chance).
-- **Boosting once:** if its Pokémon has a boosting move (Swords Dance, Nasty Plot, Dragon Dance, Calm Mind, Bulk Up, Quiver Dance, Agility, Amnesia, Growth, Mystic Dance or Fury Drive), the AI also tries boosting on the first turn, taking a free hit from you, then attacking every turn (not with Contrary). If either plan wins, that counts as a win. It assumes *you* just attack.
+- **Setting up:** if its Pokémon has a boosting move (Swords Dance, Nasty Plot, Dragon Dance, Calm Mind, Bulk Up, Quiver Dance, Agility, Amnesia, Growth, Mystic Dance or Fury Drive), the AI also tries setting up before attacking (not with Contrary):
+  - it plays out boosting 1, 2, 3… times (up to 6) and keeps the fewest boosts that win
+  - on each set-up turn after the first it heals instead when the healing rule above says so, and it stops boosting early as soon as its attack would knock you out
+  - you get a hit every set-up turn; if you're faster (or use priority) your hit lands before the boost, otherwise after it
+  - it stops adding boosts when they'd raise nothing more, or when one more boost leaves you with no less HP at the end than the plan before (more set-up has stopped paying off)
+
+  If attacking straight away or any of these plans wins, that counts as a win. It assumes *you* just attack (or heal).
 - A fight that lasts more than 32 turns (for example both sides out-healing each other) doesn't count as a win.
 
 **Its other Pokémon** are played out as if they switched in right now:
 - they take Spikes and Stealth Rock damage exactly as the battle would (not with Heavy Boots, Hazard Guard or Spin Guard; Spikes not on Flying types)
 - Sticky Web lowers their Speed
 - **their entry ability goes off** (see [Entry abilities](#entry-abilities))
-- they take your strongest hit as they come in (Sturdy and a Focus Sash save them at full HP)
+- they take your strongest hit as they come in (Sturdy and a Focus Sash save them at full HP). If that hit is your Hyper Beam (when it's worth it, as above), you lose your first turn of the 1-on-1 recharging
 - then the 1-on-1 starts, with their stat changes reset. A Pokémon that knows Haze, Roar or Whirlwind is also played out using it first against your boosted Pokémon.
 
 **What it decides:**
@@ -356,4 +363,4 @@ After a knock-out, U-turn, Volt Switch, Teleport, Baton Pass or a smart switch, 
 It won't send in a Pokémon whose entry ability would lower a stat your Contrary Pokémon would then raise to its benefit. Roar and Whirlwind bring in a random Pokémon.
 
 ## Thinking time
-All of this runs on the Game Boy while you wait. The AI picks its move before your menu opens (about 1/4 of a second at most) and decides on a switch after you pick (up to about 0.4 seconds when its Pokémon is losing and it plays out every other Pokémon; usually much less, and none at all when it already found a winning move).
+All of this runs on the Game Boy while you wait. The AI picks its move before your menu opens (usually about 1/10 of a second; up to about 0.4 seconds when a Pokémon with a boosting move is losing and plays out several set-up plans) and decides on a switch after you pick (up to about 0.4 seconds when its Pokémon is losing and it plays out every other Pokémon; usually much less, and none at all when it already found a winning move).
