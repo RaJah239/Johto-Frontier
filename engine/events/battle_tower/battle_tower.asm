@@ -485,33 +485,17 @@ LoadOpponentTrainerAndPokemonWithOTSprite:
 	ld a, [hl]
 	ld [wBTTempOTSprite], a
 
-; Load sprite of the opponent trainer
-; because s/he is chosen randomly and appears out of nowhere
+; Give the opponent's map object (wScriptVar) the trainer's sprite. The
+; script's `appear` then loads its graphics (CopyMapObjectToObjectStruct).
 	ld a, [wScriptVar]
 	dec a
-	add a
-	ld e, a
-	add a
-	add a
-	add a
+	swap a ; * MAPOBJECT_LENGTH
 	ld c, a
 	ld b, 0
-	ld d, 0
-	ld hl, wMapObjects
+	ld hl, wMapObjects + MAPOBJECT_SPRITE
 	add hl, bc
-	inc hl
 	ld a, [wBTTempOTSprite]
 	ld [hl], a
-	ldh a, [hObjectStructIndex]
-	push af
-	ld hl, MAPOBJECT_OBJECT_STRUCT_ID
-	add hl, bc
-	ld a, [hl]
-	ldh [hObjectStructIndex], a
-	ld a, [wBTTempOTSprite]
-	farcall GetSpriteVTile
-	pop af
-	ldh [hObjectStructIndex], a
 	ret
 
 CheckBTMonMovesForErrors:

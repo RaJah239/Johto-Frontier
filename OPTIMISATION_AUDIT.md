@@ -1108,7 +1108,7 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clean clone of `936e0c1c1`, Linux, RGBDS 0.7.0, 0 warnings
-- Last completed task: STAB-001 (BUG-003, BUG-004)
+- Last completed task: STAB-002 (BUG-005)
 - Last verified commit: `936e0c1c1` (build: fix case-sensitive graphics paths and tool permissions)
 - Outstanding blockers: none
 - Next task: Phase 2: static checks for cross-bank calls, stack balance and interrupt safety
@@ -1125,6 +1125,7 @@ Maintain the following table throughout the project.
 | BUG-002 | Build | `tools/sub_2bpp.sh` and `tools/free_space.awk` are run directly by the Makefile but were tracked without the executable bit (mode 100644): a fresh checkout failed with "Permission denied". | High | Fixed | Clean clone builds on Linux (TEST-001) |
 | BUG-003 | Battle (move selection) | Taunt never blocked a status move at the move menu: `MoveSelectionScreen` got the move's power with `farcall GetMovePower`, but `farcall` returns with a = c (here `MOVE_LENGTH`), so the "power is 0" check always failed. The move was only stopped later, when used, wasting the turn instead of showing "The move is disabled". | Medium | Fixed | `test_farcall_returns` (failed before, passes after) |
 | BUG-004 | Pokémon generation | A gift Pokémon sent to a box (`LoadEnemyMon` outside battle) got its Unown form from `farcall GenerateUnownForm`, whose result in a is lost (a = c = $30, the party struct length). Every such gift got form 48: an invalid letter for a gift Unown (out-of-range picture/icon lookups), and a stray non-zero form for every other species. | Medium | Fixed | `test_farcall_returns` (failed before, passes after) |
+| BUG-005 | Battle Tower | `LoadOpponentTrainerAndPokemonWithOTSprite` (left over from the dynamic-sprite port) loaded a sprite with made-up inputs: it read the object struct index from ROM ($0000 + object offset: $F3 or $E0, the `di`/`ldh` opcodes) because it added the object's offset to `MAPOBJECT_OBJECT_STRUCT_ID` (0) instead of to `wMapObjects`, and it passed the sprite in a through `farcall GetSpriteVTile`, which overwrites a with the bank (0). `GetSprite` then looked up sprite 0, one entry before `OverworldSprites`, and queued that garbage for a VRAM slot worked out from the bad index. The load was not needed: the opponent is always hidden at this point and the script's `appear` loads its graphics. | Medium | Fixed | `test_bt_ot_sprite` (failed before, passes after) |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1184,6 +1185,7 @@ Maintain the following table.
 | TEST-004 | Test harness | Repair or retire the 12 tests that crashed in TEST-002, then re-run the whole suite against the baseline ROM | Per-test triage against the current source, then every `test_*.py` (60 s timeout each) | Passed | Repaired: `test_teleport` (`EnemySwitchOrTryItem` is now `TryEnemySwitch`, item step gone: 41/41), `test_gale_wings` and `test_gale_wings_ai` (Aerial Ace no longer exists, its 3 cases disabled: 22/22, 35/35), `test_status_icon_reload` (the move-icon routine it used was reworked; it now garbles tiles $79-$7e directly and also checks the battle gender icons come back: 12/12), `test_pc_unown_icon` (the per-slot letter list was removed; the encode/decode round trip still runs: 12/12). Retired to `romtest/retired/` because the feature is gone: `test_dex_white_screen` (Pokédex switches with `DisableLCD` again), `test_evo_spotlight`, `test_lzp` (no LZP data any more), `test_menu_gray_bg`, `test_music_speed`. Not crashes: `test_type_chart_scan` and `test_view_animations` need an extra argument (an older build, a debug ROM). Suite now: 103 scripts, 93 pass fully, 0 partly, 10 print other formats (profilers and comparisons; the four comparison tests can take the baseline ROM as the older build from now on). |
 | TEST-005 | Whole codebase | Static scans for far-call misuse: plain `call`/`jp` between different ROMX banks; `farcall`/`callfar` results read from a (it returns a = c); a or hl set just before `farcall`/`callfar` (both are overwritten) | Python scans over every `.asm` file with bank data from the `.sym` file; every hit reviewed by hand | Passed | Cross-bank: no ROMX-to-ROMX hits; the 32 home-bank hits all switch banks first. Results in a: 18 hits, 2 real (BUG-003, BUG-004); the rest only use the preserved flags or clear carry. Inputs: 4 hits, 1 real (BUG-005); the other callees reload what they need themselves. |
 | TEST-006 | Battle, Pokémon generation | `test_farcall_returns`: Taunt at the move menu (status move refused, damaging move and untaunted cases allowed); gift Unown letter in 0-25 and independent of c; gift non-Unown form 0 | Interpreter, run from the routines' own labels | Passed | 2/6 before the fix (the 4 bug cases failed), 6/6 after. Full suite unchanged otherwise. |
+| TEST-007 | Battle Tower | `test_bt_ot_sprite`: the opponent's map object gets the trainer class's sprite (3 object/class pairs), and no sprite load is made | Interpreter, from just after the routine's `LoadOpponentTrainerAndPokemon` call | Passed | 3/6 on the baseline ROM (the stray load seen with a = 0 and struct index $F3/$E0), 6/6 after. Full suite unchanged otherwise. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1304,6 +1306,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Git commit message: `fix: keep far-call results for Taunt's move check and gift Unown forms`
 - Next task: BUG-005 (Battle Tower opponent sprite load), then continue the register and banking audit.
 
+### STAB-002 — Battle Tower opponent sprite load with bad inputs
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 2 (invalid memory accesses, register corruption)
+- System: Battle Tower / Battle Factory battle room
+- Files modified: `engine/events/battle_tower/battle_tower.asm`
+- Problem identified: BUG-005.
+- Root cause: the vanilla `wUsedSprites` code was swapped for a `GetSpriteVTile` call during the dynamic-sprite port, with a wrong base address and a far call that drops the input in a.
+- Solution implemented: the routine only sets the map object's sprite; the stray load and the unused `de` set-up are removed. The map object address is the same as before.
+- Behaviour preserved: the opponent still appears with its class's sprite (loaded by `appear` as for every other object).
+- Performance impact: one sprite lookup and VRAM request fewer per opponent. Memory impact: 28 bytes of ROM freed.
+- Build result: builds, 0 assembler warnings, 674,694 bytes free.
+- Tests performed: TEST-007, full suite.
+- Test results: new test 6/6 (3/6 on the baseline ROM); all other tests unchanged.
+- Remaining risks: the visual result in the battle room should be confirmed in an emulator (Section 32).
+- Git commit message: `fix: drop the Battle Tower opponent sprite load with bad inputs`
+- Next task: continue the register and banking audit.
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -1340,6 +1361,10 @@ For each test, provide:
 - Relevant modifications.
 
 Make manual testing instructions sufficiently clear for the user to perform without reading assembly code.
+
+- **MT-001 Taunt at the move menu (BUG-003).** Setup: any battle where the foe can use Taunt (or a save where your Pokémon gets Taunted). Steps: after your Pokémon is Taunted, open FIGHT and pick a status move (Growl, Swords Dance and the like). Expected: "The move is disabled" is shown and you choose again; damaging moves can still be picked. Failure: the status move is accepted and then fails during the turn.
+- **MT-002 Gift Pokémon sent to the PC (BUG-004).** Setup: a full party. Steps: receive a gift Pokémon (any `givepoke` event) so it goes to a box, then view it in Bill's PC and withdraw it. Expected: it looks and behaves normally; a gift Unown shows a valid letter. Failure: wrong or garbled icon/picture.
+- **MT-003 Battle Tower / Factory opponent (BUG-005).** Setup: enter a Battle Tower or Battle Factory challenge. Steps: watch each opponent warp in, and look at the other sprites on screen (you, the attendant). Expected: the opponent appears with the right sprite and nothing else on screen changes. Failure: a wrong or broken opponent sprite, or other sprites corrupted.
 
 ## 33. Final Deliverables
 
