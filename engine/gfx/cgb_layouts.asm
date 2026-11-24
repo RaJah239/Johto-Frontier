@@ -975,7 +975,23 @@ _CGB_PartyMenuPals:
 	call InitPartyMenuBGPal0
 	call InitPartyMenuBGPal7
 	farcall LoadPartyStatusIconPals
+	; the gender icons (PlacePartyMonGender) in the text palette's colors 1
+	; and 2: text only uses colors 0 and 3
+	ld de, wBGPals1 palette PAL_BG_TEXT color 1
+	call LoadGenderIconColors
 	jmp InitPartyMenuOBPals
+
+LoadGenderIconColors:
+; Colors 1 and 2 at de in wBGPals1: red (male icon) and blue (female icon),
+; as in the battle's EXP bar palette.
+	ld hl, GenderIconColors
+	ld bc, 2 * PAL_COLOR_SIZE
+	ld a, BANK(wBGPals1)
+	jmp FarCopyWRAM
+
+GenderIconColors:
+	RGB 31, 12, 06 ; male
+	RGB 04, 17, 31 ; female
 
 _CGB_Evolution:
 	ld de, wBGPals1

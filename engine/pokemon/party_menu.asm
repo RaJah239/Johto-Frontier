@@ -75,6 +75,7 @@ PlacePartyMenuText:
 
 LoadPartyMenuGFX:
 	call LoadFontsBattleExtra
+	farcall LoadBattleGenderIcons
 	farcall LoadPartyMenuHeldItemIconGFX
 	farcall InitPartyMenuPalettes
 	farjp ClearSpriteAnims2
@@ -527,11 +528,25 @@ PlacePartyMonGender:
 	call GetGender
 	ld a, " " ; genderless
 	jr c, .got_gender
-	ld a, "♂" ; male
+	ld a, BATTLE_GENDER_TILE ; male (red)
 	jr nz, .got_gender
-	ld a, "♀" ; female
+	inc a ; female (blue)
 .got_gender
 	pop hl
+	; the icon takes the text palette's red (color 1) or blue (color 2),
+	; see _CGB_PartyMenuPals
+	push af
+	push hl
+	ld de, wAttrmap - wTilemap
+	add hl, de
+	cp " "
+	ld a, PAL_BG_TEXT
+	jr nz, .got_attr
+	xor a
+.got_attr
+	ld [hl], a
+	pop hl
+	pop af
 	ld [hli], a
 	push hl
 	ld a, [wCurPartyMon]
