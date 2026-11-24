@@ -37,41 +37,6 @@ Route18_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, .Weather
-
-.Weather:
-	checktime EVE | NITE
-	iffalse .DayWeather
-	random 3
-	ifequal 0, .Sandstorm
-	ifequal 1, .Rain
-	setval WEATHER_NONE
-	writemem wFieldWeather
-	endcallback
-
-.DayWeather
-	random 4
-	ifequal 0, .Sun
-	ifequal 1, .Rain
-	ifequal 2, .Sandstorm
-	setval WEATHER_NONE
-	writemem wFieldWeather
-	endcallback
-
-.Sun
-	setval WEATHER_SUN
-	writemem wFieldWeather
-	endcallback
-
-.Rain
-	setval WEATHER_RAIN
-	writemem wFieldWeather
-	endcallback
-
-.Sandstorm
-	setval WEATHER_SANDSTORM
-	writemem wFieldWeather
-	endcallback
 
 TrainerCamperTed:
 	generictrainer CAMPER, TED, EVENT_BEAT_CAMPER_TED, .SeenText, .BeatenText

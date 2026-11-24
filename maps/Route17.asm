@@ -48,26 +48,9 @@ Route17_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, .WeatherAndOtis
+	callback MAPCALLBACK_OBJECTS, .Otis
 
-.WeatherAndOtis:
-	checktime EVE | NITE
-	iffalse .DayWeather
-	random 3
-	ifequal 0, .Sandstorm
-	ifequal 1, .Rain
-	setval WEATHER_NONE
-	writemem wFieldWeather
-	sjump .CheckOtis
-
-.DayWeather
-	random 4
-	ifequal 0, .Sun
-	ifequal 1, .Rain
-	ifequal 2, .Sandstorm
-	setval WEATHER_NONE
-	writemem wFieldWeather
-.CheckOtis
+.Otis:
 	; 10% chance of otis appearing
 	checkflag ENGINE_MET_OTIS_TODAY
 	iftrue .done
@@ -76,21 +59,6 @@ Route17_MapScripts:
 .done
 	disappear ROUTE17_OTIS
 	endcallback
-
-.Sun:
-	setval WEATHER_SUN
-	writemem wFieldWeather
-	sjump .CheckOtis
-
-.Rain:
-	setval WEATHER_RAIN
-	writemem wFieldWeather
-	sjump .CheckOtis
-
-.Sandstorm:
-	setval WEATHER_SANDSTORM
-	writemem wFieldWeather
-	sjump .CheckOtis
 
 .AppearOtis:
 	appear ROUTE17_OTIS

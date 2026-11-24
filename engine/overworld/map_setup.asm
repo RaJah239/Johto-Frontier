@@ -147,6 +147,7 @@ GetTableMapWeather:
 	jr nz, .SkipList
 	ret
 
+; map specific weather
 MapWeatherTable:
 ; map group, map, then two weather lists: morning/day and evening/night,
 ; each ended by -1. All of a list's weathers are equally likely.
@@ -171,7 +172,13 @@ MapWeatherTable:
 	db GROUP_ROUTE_16, MAP_ROUTE_16
 	db WEATHER_RAIN, WEATHER_SUN, WEATHER_NONE, WEATHER_HAIL, -1
 	db WEATHER_RAIN, WEATHER_NONE, WEATHER_HAIL, -1
-	db -1
+	db GROUP_ROUTE_17, MAP_ROUTE_17
+	db WEATHER_NONE, WEATHER_RAIN, WEATHER_SUN, WEATHER_SANDSTORM, -1
+	db WEATHER_RAIN, WEATHER_SANDSTORM, WEATHER_NONE, -1
+	db GROUP_ROUTE_18, MAP_ROUTE_18
+	db WEATHER_NONE, WEATHER_RAIN, WEATHER_SUN, WEATHER_SANDSTORM, -1
+	db WEATHER_RAIN, WEATHER_SANDSTORM, WEATHER_NONE, -1
+	db -1 ; end
 
 ; the weather is re-rolled each time you reach a new outdoor
 ; map, so it stays the same when entering and leaving
