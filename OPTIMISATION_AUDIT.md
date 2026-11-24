@@ -1103,15 +1103,15 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 ## 25. Current Project Status
 
 - Overall status: In progress
-- Current phase: Phase 1 (finishing), then Phase 2
-- Current task: commit the baseline documentation; then investigate the partly passing tests (TEST-002)
+- Current phase: Phase 2
+- Current task: repair or retire the 12 stale crashing tests, then the stability audit
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clean clone of `936e0c1c1`, Linux, RGBDS 0.7.0, 0 warnings
-- Last completed task: BUILD-001 (BUG-001, BUG-002)
+- Last completed task: TEST-003 (partly passing tests resolved)
 - Last verified commit: `936e0c1c1` (build: fix case-sensitive graphics paths and tool permissions)
 - Outstanding blockers: none
-- Next task: Phase 2: investigate the four partly passing tests, then the stability audit
+- Next task: Phase 2: the 12 stale crashing tests, then the stability audit
 
 Update this section continuously.
 
@@ -1178,6 +1178,7 @@ Maintain the following table.
 |---|---|---|---|---|---|
 | TEST-001 | Build | Clean `git clone` of the repository built from scratch on Linux (case-sensitive filesystem) | `make -j4` with RGBDS 0.7.0 | Passed (after BUG-001/002) | Failed before the fixes |
 | TEST-002 | All | Baseline run of every interpreter test (108 scripts) against the baseline ROM | `python3 <test>.py` per script, 60 s timeout each | Partially verified | 84 pass fully. Partly passing: `test_ai_anti_boost` 11/15, `test_ai_speed_boost` 7/8, `test_dex_option_no_color` 7/8, `test_nevermelt_ice2` 3/5 (to investigate, Phase 2). Crashing on symbols that no longer exist (features renamed or reverted): `test_dex_white_screen`, `test_evo_spotlight`, `test_gale_wings`, `test_gale_wings_ai`, `test_lzp`, `test_menu_gray_bg`, `test_music_speed`, `test_pc_unown_icon`, `test_status_icon_reload`, `test_teleport`, `test_type_chart_scan`, `test_view_animations`. Other output formats (comparison tests skipped without an older build, profilers printing measurements): `test_bug_contest_judging`, `test_map_blocks`, `test_map_render_same`, `test_map_weather`, `test_options5_save`, `test_overworld_screen_same`, `test_type_chart_screen`, `test_voltorb_turbo_b` |
+| TEST-003 | Test harness | Investigation of the four partly passing tests from TEST-002 | Traced each failing case in the interpreter (routine entry logging, damage and flag dumps) against the baseline ROM | Passed (all four now pass fully) | No ROM bug found: all were test-side faults. `test_nevermelt_ice2` expected an old boost size (every type-boosting item is 20% in this game). `test_dex_option_no_color` read tile 0 as text. `test_ai_speed_boost` and `test_ai_anti_boost`: the shared battle setup (`perfkit.Battle.setup`) copied only $20 bytes of the battle struct, which has grown to $21 with `UnownForm`, so the player's `Type2` stayed 0 (Normal) and every player Normal move got a false 1.5x STAB in the matchup sim. The copy now uses the struct's real length. Two cases in `test_ai_recharge_setup` had been tuned around that false STAB; their HP values were rescaled to keep the same intent (14/14). The other 12 tests using the shared setup are unchanged. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1241,6 +1242,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Git commit message: `build: fix case-sensitive graphics paths and tool permissions`
 - Next task: record the baseline measurements (Phase 1).
 
+### TEST-003 — Resolve the partly passing baseline tests
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 2 (making the regression suite trustworthy before the stability audit)
+- System: Interpreter test harness
+- Files modified: none in the repository (test scripts are git-excluded); this document
+- Problem identified: four tests partly failed against the baseline ROM (TEST-002).
+- Root cause: stale expectations (`test_nevermelt_ice2`, `test_dex_option_no_color`) and a shared harness fault: `perfkit.Battle.setup` copied a fixed $20 bytes of the battle struct, which is $21 bytes since `UnownForm` was added, leaving the player's `Type2` as Normal.
+- Solution implemented: tests corrected; the harness copies `wBattleMonStructEnd - wBattleMon` bytes; two `test_ai_recharge_setup` cases rescaled.
+- Behaviour preserved: no ROM change.
+- Performance impact: none. Memory impact: none.
+- Build result: not rebuilt (no source change).
+- Tests performed: the four tests, plus all 14 tests that use the shared battle setup, before and after the harness fix.
+- Test results: all four pass fully; the 14 shared-setup tests match the baseline except the two rescaled cases (now 14/14). `test_lzp` still crashes as before (stale, next task).
+- Remaining risks: AI behaviour itself was not changed, so in-game AI is unaffected by this finding.
+- Git commit message: `docs: record the resolution of the partly passing tests`
+- Next task: update or retire the 12 tests that crash on missing symbols.
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -1257,7 +1277,8 @@ Maintain a list of:
 
 Do not silently ignore unresolved issues.
 
-- Partly passing tests to investigate (possible bugs or stale expectations): `test_ai_anti_boost` (11/15), `test_ai_speed_boost` (7/8), `test_dex_option_no_color` (7/8), `test_nevermelt_ice2` (3/5).
+- Resolved: the four partly passing tests were test-side faults, not ROM bugs (TEST-003).
+- The interpreter tests live in the git-excluded `.claude-tools/romtest` folder, so fixes to them are recorded here but are not part of the repository history.
 - 12 stale tests crash on symbols that no longer exist (see TEST-002); they need updating or retiring so the suite can be used as a regression gate.
 - No emulator or physical hardware is available here: VBlank/HBlank timing, DMA and real-hardware behaviour can only be checked in the interpreter with emulated hooks. Anything timing-sensitive needs manual emulator testing (Section 32).
 - WRAM0 and WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
