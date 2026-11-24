@@ -358,12 +358,13 @@ _CGB_StatsScreenHPPals:
 	ret
 
 .GenderColorNZ:
-; Color de = blue if nz (a girl caught it), red if z.
+; Color de = the female colour (red) if nz (a girl caught it), else the male
+; colour (blue).
 	jr nz, .female
 	jr .male
 
 .GenderColor:
-; Color de = blue if z (female), red if nz.
+; Color de = the female colour (red) if z, else the male colour (blue).
 	jr z, .female
 .male
 	ld hl, .MaleColor
@@ -376,9 +377,9 @@ _CGB_StatsScreenHPPals:
 	jmp FarCopyWRAM
 
 .MaleColor:
-	RGB 31, 12, 06
-.FemaleColor:
 	RGB 04, 17, 31
+.FemaleColor:
+	RGB 31, 12, 06
 
 _CGB_PCItemStorage:
 	ld hl, PCItemUIPals
@@ -778,14 +779,14 @@ PokedexGrayPalette:
 	RGB  0,  0,  0
 
 PokedexGenderPalettes:
-; PokedexLightPalette with the text (the dex font is inverted: color 0) red
-; for "♂" and blue for "♀"
-	RGB 31, 12,  6
+; PokedexLightPalette with the text (the dex font is inverted: color 0) blue
+; for "♂" and red for "♀"
+	RGB  4, 17, 31
 	RGB 26, 10,  6
 	RGB 23, 23, 23
 	RGB 31, 31, 31
 
-	RGB  4, 17, 31
+	RGB 31, 12,  6
 	RGB 26, 10,  6
 	RGB 23, 23, 23
 	RGB 31, 31, 31
@@ -1015,7 +1016,7 @@ _CGB_PartyMenuPals:
 	jmp InitPartyMenuOBPals
 
 LoadGenderIconColors:
-; Colors 1 and 2 at de in wBGPals1: red (male icon) and blue (female icon),
+; Colors 1 and 2 at de in wBGPals1: red (female icon) and blue (male icon),
 ; as in the battle's EXP bar palette.
 	ld hl, GenderIconColors
 	ld bc, 2 * PAL_COLOR_SIZE
@@ -1023,8 +1024,8 @@ LoadGenderIconColors:
 	jmp FarCopyWRAM
 
 GenderIconColors:
-	RGB 31, 12, 06 ; male
-	RGB 04, 17, 31 ; female
+	RGB 31, 12, 06 ; female
+	RGB 04, 17, 31 ; male
 
 _CGB_Evolution:
 	ld de, wBGPals1

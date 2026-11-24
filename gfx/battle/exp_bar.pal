@@ -1,3 +1,3 @@
-; red (male icon) and blue (female icon, EXP bar)
+; red (female icon) and blue (male icon, EXP bar)
 	RGB 31, 12, 06
 	RGB 04, 17, 31

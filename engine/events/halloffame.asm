@@ -478,9 +478,9 @@ DisplayHOFMon:
 	farcall GetGender
 	ld a, " "
 	jr c, .got_gender
-	ld a, BATTLE_GENDER_TILE ; male (red)
+	ld a, BATTLE_GENDER_TILE ; male (blue)
 	jr nz, .got_gender
-	inc a ; female (blue)
+	inc a ; female (red)
 
 .got_gender
 	hlcoord 18, 13

@@ -3373,7 +3373,7 @@ Pokedex_ScreenOff:
 	jmp DisableLCD
 
 Pokedex_ColorGenderSymbols:
-; The gender symbols in red (male) and blue (female): the area page's
+; The gender symbols in blue (male) and red (female): the area page's
 ; traded-for gender at (7, 14) and the stats page's gender ratio on row 15.
 ; They take BG palettes 2 and 3 (_CGB_Pokedex: the interface palette with
 ; the text colour changed); anything else in those cells gets palette 0 back.

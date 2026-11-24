@@ -116,9 +116,9 @@ NamingScreen:
 	call PlaceString
 	farcall GetGender
 	jr c, .genderless
-	ld a, BATTLE_GENDER_TILE ; male (red)
+	ld a, BATTLE_GENDER_TILE ; male (blue)
 	jr nz, .place_gender
-	inc a ; female (blue)
+	inc a ; female (red)
 .place_gender
 	hlcoord 1, 2
 	ld [hl], a

@@ -164,7 +164,7 @@ BillsPC_LoadUI:
 	pop hl
 	dec [hl]
 
-	; Gender icons: red / blue, outlined in the theme's text colour
+	; Gender icons: blue / red, outlined in the theme's text colour
 	ld de, GenderIconsGFX + 3 tiles
 	ld hl, vTiles2 tile PC_GENDER_TILE
 	lb bc, BANK(GenderIconsGFX), 2

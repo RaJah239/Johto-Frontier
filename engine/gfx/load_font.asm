@@ -72,12 +72,12 @@ LoadHPBar:
 
 StatsScreen_LoadFont:
 	call _LoadFontsBattleExtra
-	; the gender icons, both in color 1
-	ld de, GenderIconsGFX
+	; the gender icons, both in color 1 (male, then female)
+	ld de, GenderIconsGFX + 2 tiles
 	ld hl, vTiles2 tile STATS_GENDER_TILE
 	lb bc, BANK(GenderIconsGFX), 1
 	call Get2bppViaHDMA
-	ld de, GenderIconsGFX + 2 tiles
+	ld de, GenderIconsGFX + 1 tiles
 	ld hl, vTiles2 tile (STATS_GENDER_TILE + 1)
 	lb bc, BANK(GenderIconsGFX), 1
 	call Get2bppViaHDMA

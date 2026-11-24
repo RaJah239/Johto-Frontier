@@ -1028,7 +1028,7 @@ TrademonStats_PrintOTName:
 	ret
 
 .Gender:
-	db " ", BATTLE_GENDER_TILE, BATTLE_GENDER_TILE + 1 ; red, blue
+	db " ", BATTLE_GENDER_TILE, BATTLE_GENDER_TILE + 1 ; blue, red
 
 TradeAnim_ColorGenderIcon:
 ; The OT's gender icon (TrademonStats_PrintOTName, after the OT's name)

@@ -528,12 +528,12 @@ PlacePartyMonGender:
 	call GetGender
 	ld a, " " ; genderless
 	jr c, .got_gender
-	ld a, BATTLE_GENDER_TILE ; male (red)
+	ld a, BATTLE_GENDER_TILE ; male (blue)
 	jr nz, .got_gender
-	inc a ; female (blue)
+	inc a ; female (red)
 .got_gender
 	pop hl
-	; the icon takes the text palette's red (color 1) or blue (color 2),
+	; the icon takes the text palette's blue (color 2) or red (color 1),
 	; see _CGB_PartyMenuPals
 	push af
 	push hl
