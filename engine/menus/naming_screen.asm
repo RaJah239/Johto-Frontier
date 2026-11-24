@@ -116,12 +116,14 @@ NamingScreen:
 	call PlaceString
 	farcall GetGender
 	jr c, .genderless
-	ld a, "♂"
+	ld a, BATTLE_GENDER_TILE ; male (red)
 	jr nz, .place_gender
-	ld a, "♀"
+	inc a ; female (blue)
 .place_gender
 	hlcoord 1, 2
 	ld [hl], a
+	farcall LoadBattleGenderIcons
+	farcall NamingScreen_ColorGenderIcon
 .genderless
 	ld bc, wTempMonDVs
 	farcall CheckShininess

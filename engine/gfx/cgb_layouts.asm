@@ -958,6 +958,17 @@ _CGB_Diploma:
 	call WipeAttrmap
 	jmp ApplyAttrmap
 
+NamingScreen_ColorGenderIcon::
+; The naming screen's gender icon at (1, 2): BG palette 1 (unused by
+; SCGB_DIPLOMA's attrmap) becomes white, red, blue, black.
+; SetDefaultBGPAndOBP applies the palette afterwards.
+	ld de, wBGPals1 palette 1
+	ld hl, GenderIconColors
+	call LoadPalette_White_Col1_Col2_Black
+	ld a, 1
+	ldcoord_a 1, 2, wAttrmap
+	jmp ApplyAttrmap
+
 _CGB_MapPals:
 	call LoadMapPals
 	ld a, SCGB_MAPPALS
