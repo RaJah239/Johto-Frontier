@@ -157,6 +157,7 @@ RunTradeAnimScript:
 	call ClearTilemap
 	call DisableLCD
 	call LoadFontsBattleExtra
+	farcall LoadBattleGenderIcons
 	callfar ClearSpriteAnims
 	ldh a, [hCGB]
 	and a
@@ -810,6 +811,7 @@ TradeAnim_ShowGivemonData:
 ; works well enough
 	ld b, SCGB_PLAYER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
+	call TradeAnim_ColorGenderIcon
 	ld a, %11100100 ; 3,2,1,0
 	call DmgToCgbBGPals
 	call TradeAnim_ShowGivemonFrontpic
@@ -836,6 +838,7 @@ TradeAnim_ShowGetmonData:
 ; and here
 	ld b, SCGB_PLAYER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
+	call TradeAnim_ColorGenderIcon
 	ld a, %11100100 ; 3,2,1,0
 	call DmgToCgbBGPals
 	call TradeAnim_ShowGetmonFrontpic
@@ -1025,7 +1028,29 @@ TrademonStats_PrintOTName:
 	ret
 
 .Gender:
-	db " ", "♂", "♀"
+	db " ", BATTLE_GENDER_TILE, BATTLE_GENDER_TILE + 1 ; red, blue
+
+TradeAnim_ColorGenderIcon:
+; The OT's gender icon (TrademonStats_PrintOTName, after the OT's name)
+; takes BG palette 1, which _CGB_PlayerOrMonFrontpicPals makes white, red,
+; blue and black.
+	hlcoord 7, 4
+	ld b, SCREEN_WIDTH - 7
+.loop
+	ld a, [hl]
+	sub BATTLE_GENDER_TILE
+	cp 2
+	jr c, .found
+	inc hl
+	dec b
+	jr nz, .loop
+	ret
+
+.found
+	ld de, wAttrmap - wTilemap
+	add hl, de
+	ld [hl], 1
+	farjp ApplyAttrmap
 
 TrademonStats_PrintTrademonID:
 	hlcoord 7, 6
