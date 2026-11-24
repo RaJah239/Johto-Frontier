@@ -75,3 +75,4 @@ DEF PACK_FRAME_TILE_2  EQU $6e ; the other 5 tiles, $6e-$72
 
 DEF BATTLE_GENDER_TILE EQU $7d
 DEF STATS_GENDER_TILE  EQU $4e
+DEF PC_GENDER_TILE     EQU $41 ; outlined, for the theme-coloured panel

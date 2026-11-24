@@ -164,6 +164,12 @@ BillsPC_LoadUI:
 	pop hl
 	dec [hl]
 
+	; Gender icons: red / blue, outlined in the theme's text colour
+	ld de, GenderIconsGFX + 3 tiles
+	ld hl, vTiles2 tile PC_GENDER_TILE
+	lb bc, BANK(GenderIconsGFX), 2
+	call Get2bpp
+
 	; Shiny star
 	ld de, StatsScreenPageTilesGFX + 14 tiles
 	ld hl, vTiles2 tile $43
@@ -1164,10 +1170,10 @@ _GetCursorMon:
 	newfarcall GetGender
 	hlcoord 4, 8
 	jr c, .genderless
-	ld a, "♂"
+	ld a, PC_GENDER_TILE
 	jr nz, .male
 	; female
-	ld a, "♀"
+	inc a
 .male
 	ld [hl], a
 .genderless

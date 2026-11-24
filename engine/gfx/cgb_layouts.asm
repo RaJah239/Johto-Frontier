@@ -841,6 +841,9 @@ BillsPC_PreviewTheme:
 	ld de, wBGPals1 palette 3
 	ld c, 1 * 2
 	call LoadHLBytesIntoDE
+	; the gender icons (the left panel's text only uses colors 0 and 3)
+	ld de, wBGPals1 palette 0 color 1
+	call LoadGenderIconColors
 	ld a, [wBillsPC_ApplyThemePals]
 	and a
 	jr nz, .apply_pals
