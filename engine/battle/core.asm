@@ -2818,7 +2818,101 @@ ShowSetEnemyMonAndSendOutAnimation:
 	call UpdateEnemyHUD
 	ld a, $1
 	ldh [hBGMapMode], a
-	ret
+	; fallthrough
+
+FinalPkmnQuote:
+; A trainer with a quote for their last Pokemon: the Pokemon steps aside,
+; the trainer comes on screen to say it, then leaves and the Pokemon returns
+	ld a, [wLinkMode]
+	and a
+	ret nz
+	ld a, [wBattleMode]
+	cp TRAINER_BATTLE
+	ret nz
+	; the Intros & Outros option can turn this off
+	call CheckIntrosOutros
+	ret nz
+	farcall GetFinalPkmnTextPointer
+	ret nc
+	push hl
+	farcall CheckAnyOtherAliveEnemyMons
+	pop hl
+	ret nz
+
+	push hl
+	call EmptyBattleTextbox
+	ld c, 20
+	call DelayFrames
+	hlcoord 18, 0
+	ld a, 8
+	call SlideBattlePicOut
+	ld a, [wTempEnemyMonSpecies]
+	push af
+	call BattleWinSlideInEnemyTrainerFrontpic
+	pop af
+	ld [wTempEnemyMonSpecies], a
+	pop de
+	farcall PrintFinalPkmnText ; the quote is in final_text.asm's bank
+	call EmptyBattleTextbox
+	call WaitBGMap
+	hlcoord 18, 0
+	ld a, 8
+	call SlideBattlePicOut
+	ld c, 10
+	call DelayFrames
+	; fallthrough
+
+FinalPkmnSlideInEnemyMonFrontpic:
+	call FinishBattleAnim
+	call GetEnemyMonFrontpic
+	hlcoord 19, 0
+	ld c, 0
+.outer_loop
+	inc c
+	ld a, c
+	cp 9
+	ret z
+	xor a
+	ldh [hBGMapMode], a
+	ldh [hBGMapThird], a
+	ld d, 0
+	push bc
+	push hl
+.inner_loop
+	call .CopyColumn
+	inc hl
+	ld a, 7
+	add d
+	ld d, a
+	dec c
+	jr nz, .inner_loop
+	ld a, $1
+	ldh [hBGMapMode], a
+	ld c, 4
+	call DelayFrames
+	pop hl
+	pop bc
+	dec hl
+	jr .outer_loop
+
+.CopyColumn:
+	push hl
+	push de
+	push bc
+	ld e, 7
+.loop
+	ld a, d
+	cp 7 * 7
+	jr c, .ok
+	ld a, " "
+.ok
+	ld [hl], a
+	ld bc, SCREEN_WIDTH
+	add hl, bc
+	inc d
+	dec e
+	jr nz, .loop
+	jmp PopBCDEHL
 
 ReplayEnemyCry:
 ; replay the foe's cry when its attack KO'd the player,

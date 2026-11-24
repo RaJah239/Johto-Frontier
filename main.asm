@@ -122,6 +122,7 @@ INCLUDE "engine/overworld/wildmons.asm"
 
 SECTION "bankB", ROMX
 INCLUDE "engine/battle/trainer_huds.asm"
+INCLUDE "engine/battle/final_text.asm"
 INCLUDE "data/trainers/class_names.asm"
 INCLUDE "engine/battle/ai/redundant.asm"
 INCLUDE "engine/events/move_deleter.asm"
