@@ -68,7 +68,7 @@ BattleCommand_Curse:
 	farcall AnimateCurrentMove
 	callfar GetHalfMaxHP
 	farcall SubtractHPFromUser
-	farcall UpdateUserInParty
+	call UpdateUserInParty
 	ld hl, PutACurseText
 	jmp StdBattleTextbox
 

@@ -123,7 +123,7 @@ AnnounceNeutralizingGas::
 	ld hl, NeutralizingGasBattleText
 	call StdBattleTextbox
 	; (a Levitate mon's HUD loses its float icon)
-	farjp RefreshBattleHuds
+	jmp RefreshBattleHuds
 
 NGIgnoresSturdy::
 ; Carry if the target's Sturdy is suppressed by Neutralizing Gas. Its popup

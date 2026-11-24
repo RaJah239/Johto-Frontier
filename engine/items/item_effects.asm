@@ -3455,7 +3455,7 @@ TypeChartEffect:
 MembersCardEffect:
 	call FadeToMenu
 	farcall BlankScreen
-	farcall LoadFontsBattleExtra
+	call LoadFontsBattleExtra
 	farcall LoadOW_BGPal7
 	call FadePalettes
 	farcall MembersStreakCard
@@ -3469,7 +3469,7 @@ MembersCardEffect:
 ScoreCardEffect:
 	call FadeToMenu
 	farcall BlankScreen
-	farcall LoadFontsBattleExtra
+	call LoadFontsBattleExtra
 	farcall LoadOW_BGPal7
 	call FadePalettes
 	farcall _ScoreCard
@@ -3483,7 +3483,7 @@ ScoreCardEffect:
 MoveDexEffect:
 	call FadeToMenu
 	farcall BlankScreen
-	farcall LoadFontsBattleExtra
+	call LoadFontsBattleExtra
 	farcall LoadOW_BGPal7
 	call FadePalettes
 	farcall OpenAllMovesDetailsScreen

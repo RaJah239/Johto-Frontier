@@ -24,7 +24,7 @@ BattleCommand_PainSplit:
 	call .EnemyShareHP
 	xor a
 	ld [wWhichHPBar], a
-	farcall ResetDamage
+	call ResetDamage
 	hlcoord 2, 2
 	predef AnimateHPBar
 	farcall _UpdateBattleHUDs

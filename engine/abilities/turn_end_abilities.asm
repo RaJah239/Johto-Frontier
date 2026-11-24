@@ -284,7 +284,7 @@ Harvest_Activate:
 	ld [hl], b
 .regrown
 	call GetItemName
-	farcall RefreshBattleHuds
+	call RefreshBattleHuds
 	ld hl, HarvestBattleText
 	jmp StdBattleTextbox
 

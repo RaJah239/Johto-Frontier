@@ -144,7 +144,7 @@ ForgetMove:
 
 .cancel
 	farcall GetBattleMonBackpic
-	farcall SafeLoadTempTilemapToTilemap
+	call SafeLoadTempTilemapToTilemap
 	scf
 	ret
 

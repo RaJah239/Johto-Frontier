@@ -1108,7 +1108,7 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clean clone of `936e0c1c1`, Linux, RGBDS 0.7.0, 0 warnings
-- Last completed task: STAB-002 (BUG-005)
+- Last completed task: PERF-001 (direct calls to home-bank routines)
 - Last verified commit: `936e0c1c1` (build: fix case-sensitive graphics paths and tool permissions)
 - Outstanding blockers: none
 - Next task: Phase 2: static checks for cross-bank calls, stack balance and interrupt safety
@@ -1151,6 +1151,7 @@ Maintain the following table.
 
 | ID | Routine or System | Optimisation | Before | After | Improvement | Verification |
 |---|---|---|---|---|---|---|
+| PERF-001 | Far calls into the home bank (9 sites: Neutralizing Gas, turn-end abilities, Curse, Pain Split, three item-effect font reloads, link trade, move learning) | `farcall`/`farjp` to a ROM0 routine replaced with `call`/`jmp` | `farcall`: 6 bytes, the FarCall path (two bank switches, bc saved through WRAM) | `call`: 3 bytes, no bank switch | Calculated: about 30 M-cycles saved per call; not measured (none of these is in a hot loop) | Full suite unchanged |
 
 Use unique identifiers such as PERF-001, PERF-002 and PERF-003.
 
@@ -1166,6 +1167,7 @@ Maintain the following table.
 
 | ID | Memory Region | Modification | Before | After | Bytes Saved | Verification |
 |---|---|---|---|---|---|---|
+| MEM-001 | ROMX | PERF-001 | 674,694 bytes free | 674,719 bytes free | 25 | Build `free_space.awk` |
 
 Use unique identifiers such as MEM-001, MEM-002 and MEM-003.
 
@@ -1186,6 +1188,7 @@ Maintain the following table.
 | TEST-005 | Whole codebase | Static scans for far-call misuse: plain `call`/`jp` between different ROMX banks; `farcall`/`callfar` results read from a (it returns a = c); a or hl set just before `farcall`/`callfar` (both are overwritten) | Python scans over every `.asm` file with bank data from the `.sym` file; every hit reviewed by hand | Passed | Cross-bank: no ROMX-to-ROMX hits; the 32 home-bank hits all switch banks first. Results in a: 18 hits, 2 real (BUG-003, BUG-004); the rest only use the preserved flags or clear carry. Inputs: 4 hits, 1 real (BUG-005); the other callees reload what they need themselves. |
 | TEST-006 | Battle, Pokémon generation | `test_farcall_returns`: Taunt at the move menu (status move refused, damaging move and untaunted cases allowed); gift Unown letter in 0-25 and independent of c; gift non-Unown form 0 | Interpreter, run from the routines' own labels | Passed | 2/6 before the fix (the 4 bug cases failed), 6/6 after. Full suite unchanged otherwise. |
 | TEST-007 | Battle Tower | `test_bt_ot_sprite`: the opponent's map object gets the trainer class's sprite (3 object/class pairs), and no sprite load is made | Interpreter, from just after the routine's `LoadOpponentTrainerAndPokemon` call | Passed | 3/6 on the baseline ROM (the stray load seen with a = 0 and struct index $F3/$E0), 6/6 after. Full suite unchanged otherwise. |
+| TEST-008 | Whole codebase | Static scan for far calls whose target is in ROM0 | Python scan over every `.asm` with the `.sym` file; each callee checked for inputs in a or hl | Passed | 9 hits, none taking a or hl as input (so no wrong results); they ran with bank 1 mapped instead of the caller's bank, harmless here. Replaced by direct calls (PERF-001). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1324,6 +1327,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: the visual result in the battle room should be confirmed in an emulator (Section 32).
 - Git commit message: `fix: drop the Battle Tower opponent sprite load with bad inputs`
 - Next task: continue the register and banking audit.
+
+### PERF-001 — Direct calls to home-bank routines
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 2 (ROM banking), with a small Phase 5/6 gain
+- System: Abilities, move effects, item effects, link trade, move learning
+- Files modified: `engine/abilities/neutralizing_gas.asm`, `engine/abilities/turn_end_abilities.asm`, `engine/battle/move_effects/curse.asm`, `engine/battle/move_effects/pain_split.asm`, `engine/items/item_effects.asm`, `engine/link/link_trade.asm`, `engine/pokemon/learn.asm`
+- Problem identified: nine far calls to routines that live in ROM0 (TEST-008).
+- Root cause: the routines are in the home bank, so a far call only adds a pointless switch to bank 0 (bank 1 on MBC3) and costs 3 extra bytes.
+- Solution implemented: `call`/`jmp` instead. Each callee was checked: none takes a or hl, and none of the callers read a after the call.
+- Behaviour preserved: yes; the callees do the same work.
+- Performance impact: calculated about 30 M-cycles per call (not measured). Memory impact: 25 bytes of ROM freed (MEM-001).
+- Build result: builds, 0 assembler warnings, 674,719 bytes free.
+- Tests performed: TEST-008, full suite.
+- Test results: full suite unchanged (105 scripts).
+- Remaining risks: none known.
+- Git commit message: `perf: call home-bank routines directly instead of through farcall`
+- Next task: continue the Phase 2 audit (stack balance and interrupt safety).
 
 ## 31. Outstanding Issues
 
