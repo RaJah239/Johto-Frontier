@@ -766,7 +766,9 @@ TradeAnim_ScrollOutRight:
 	call WaitTop
 	ld a, HIGH(vBGMap1)
 	ldh [hBGMapAddress + 1], a
-	call WaitBGMap
+	; attributes too: BG map 1 may still have the OT gender icon's palette
+	; (TradeAnim_ColorGenderIcon) where this screen has other tiles
+	call WaitBGMap2
 	ld a, $7
 	ldh [hWX], a
 	xor a
@@ -789,7 +791,7 @@ TradeAnim_ScrollOutRight2:
 .done
 	ld a, HIGH(vBGMap1)
 	ldh [hBGMapAddress + 1], a
-	call WaitBGMap
+	call WaitBGMap2 ; (see TradeAnim_ScrollOutRight)
 	ld a, $7
 	ldh [hWX], a
 	ld a, $90
@@ -1032,8 +1034,8 @@ TrademonStats_PrintOTName:
 
 TradeAnim_ColorGenderIcon:
 ; The OT's gender icon (TrademonStats_PrintOTName, after the OT's name)
-; takes BG palette 1, which _CGB_PlayerOrMonFrontpicPals makes white, red,
-; blue and black.
+; takes BG palette 1, which _CGB_PlayerOrMonFrontpicPals makes white, red
+; (female), blue (male) and black.
 	hlcoord 7, 4
 	ld b, SCREEN_WIDTH - 7
 .loop
@@ -1047,10 +1049,24 @@ TradeAnim_ColorGenderIcon:
 	ret
 
 .found
+	; The stats are on BG map 1 (TrademonStats_MonTemplate), but by now
+	; hBGMapAddress is back on BG map 0, the picture's: push the attributes
+	; to map 1 (all palette 0 after the layout, except this cell), then
+	; leave wAttrmap as BG map 0 has it.
 	ld de, wAttrmap - wTilemap
 	add hl, de
 	ld [hl], 1
-	farjp ApplyAttrmap
+	push hl
+	ldh a, [hBGMapAddress + 1]
+	push af
+	ld a, HIGH(vBGMap1)
+	ldh [hBGMapAddress + 1], a
+	farcall ApplyAttrmap
+	pop af
+	ldh [hBGMapAddress + 1], a
+	pop hl
+	ld [hl], 0
+	ret
 
 TrademonStats_PrintTrademonID:
 	hlcoord 7, 6
