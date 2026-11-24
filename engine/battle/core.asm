@@ -5213,7 +5213,7 @@ MoveSelectionScreen:
 	ld a, b                         ; a is again the index of the current move
 	jr z, .skip2                    ; if player taunt count is 0 we continue
 	push bc                         ; save b
-	farcall GetMovePower            ; get the move power in a
+	newfarcall GetMovePower         ; get the move power in a
 	pop bc                          ; retrieve b
 	and a                           ; is the move power 0
 	ld a, b                         ; a in now index of the current move
@@ -5684,7 +5684,7 @@ endr
 ; Not in a battle: a Pokemon given to the player that goes to a box
 	inc hl
 	push hl
-	farcall GenerateUnownForm
+	newfarcall GenerateUnownForm
 	ld [wEnemyMonUnownForm], a
 	pop hl
 

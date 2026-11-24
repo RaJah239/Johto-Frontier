@@ -1104,11 +1104,11 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - Overall status: In progress
 - Current phase: Phase 2
-- Current task: Phase 2 stability audit
+- Current task: Phase 2 stability audit (register and banking misuse)
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clean clone of `936e0c1c1`, Linux, RGBDS 0.7.0, 0 warnings
-- Last completed task: TEST-004 (regression suite repaired: 93/103 fully passing, rest other formats)
+- Last completed task: STAB-001 (BUG-003, BUG-004)
 - Last verified commit: `936e0c1c1` (build: fix case-sensitive graphics paths and tool permissions)
 - Outstanding blockers: none
 - Next task: Phase 2: static checks for cross-bank calls, stack balance and interrupt safety
@@ -1123,6 +1123,8 @@ Maintain the following table throughout the project.
 |---|---|---|---|---|---|
 | BUG-001 | Build | `gfx/pokemon/Golisopod`, `Victini` and `Wimpod` were tracked with capital letters while the code includes the lowercase paths: a case-sensitive checkout (Linux, CI) could not build (`No rule to make target gfx/pokemon/wimpod/front.gbcpal`). Windows hid it. | High | Fixed | Clean clone builds on Linux (TEST-001) |
 | BUG-002 | Build | `tools/sub_2bpp.sh` and `tools/free_space.awk` are run directly by the Makefile but were tracked without the executable bit (mode 100644): a fresh checkout failed with "Permission denied". | High | Fixed | Clean clone builds on Linux (TEST-001) |
+| BUG-003 | Battle (move selection) | Taunt never blocked a status move at the move menu: `MoveSelectionScreen` got the move's power with `farcall GetMovePower`, but `farcall` returns with a = c (here `MOVE_LENGTH`), so the "power is 0" check always failed. The move was only stopped later, when used, wasting the turn instead of showing "The move is disabled". | Medium | Fixed | `test_farcall_returns` (failed before, passes after) |
+| BUG-004 | Pokémon generation | A gift Pokémon sent to a box (`LoadEnemyMon` outside battle) got its Unown form from `farcall GenerateUnownForm`, whose result in a is lost (a = c = $30, the party struct length). Every such gift got form 48: an invalid letter for a gift Unown (out-of-range picture/icon lookups), and a stray non-zero form for every other species. | Medium | Fixed | `test_farcall_returns` (failed before, passes after) |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1180,6 +1182,8 @@ Maintain the following table.
 | TEST-002 | All | Baseline run of every interpreter test (108 scripts) against the baseline ROM | `python3 <test>.py` per script, 60 s timeout each | Partially verified | 84 pass fully. Partly passing: `test_ai_anti_boost` 11/15, `test_ai_speed_boost` 7/8, `test_dex_option_no_color` 7/8, `test_nevermelt_ice2` 3/5 (to investigate, Phase 2). Crashing on symbols that no longer exist (features renamed or reverted): `test_dex_white_screen`, `test_evo_spotlight`, `test_gale_wings`, `test_gale_wings_ai`, `test_lzp`, `test_menu_gray_bg`, `test_music_speed`, `test_pc_unown_icon`, `test_status_icon_reload`, `test_teleport`, `test_type_chart_scan`, `test_view_animations`. Other output formats (comparison tests skipped without an older build, profilers printing measurements): `test_bug_contest_judging`, `test_map_blocks`, `test_map_render_same`, `test_map_weather`, `test_options5_save`, `test_overworld_screen_same`, `test_type_chart_screen`, `test_voltorb_turbo_b` |
 | TEST-003 | Test harness | Investigation of the four partly passing tests from TEST-002 | Traced each failing case in the interpreter (routine entry logging, damage and flag dumps) against the baseline ROM | Passed (all four now pass fully) | No ROM bug found: all were test-side faults. `test_nevermelt_ice2` expected an old boost size (every type-boosting item is 20% in this game). `test_dex_option_no_color` read tile 0 as text. `test_ai_speed_boost` and `test_ai_anti_boost`: the shared battle setup (`perfkit.Battle.setup`) copied only $20 bytes of the battle struct, which has grown to $21 with `UnownForm`, so the player's `Type2` stayed 0 (Normal) and every player Normal move got a false 1.5x STAB in the matchup sim. The copy now uses the struct's real length. Two cases in `test_ai_recharge_setup` had been tuned around that false STAB; their HP values were rescaled to keep the same intent (14/14). The other 12 tests using the shared setup are unchanged. |
 | TEST-004 | Test harness | Repair or retire the 12 tests that crashed in TEST-002, then re-run the whole suite against the baseline ROM | Per-test triage against the current source, then every `test_*.py` (60 s timeout each) | Passed | Repaired: `test_teleport` (`EnemySwitchOrTryItem` is now `TryEnemySwitch`, item step gone: 41/41), `test_gale_wings` and `test_gale_wings_ai` (Aerial Ace no longer exists, its 3 cases disabled: 22/22, 35/35), `test_status_icon_reload` (the move-icon routine it used was reworked; it now garbles tiles $79-$7e directly and also checks the battle gender icons come back: 12/12), `test_pc_unown_icon` (the per-slot letter list was removed; the encode/decode round trip still runs: 12/12). Retired to `romtest/retired/` because the feature is gone: `test_dex_white_screen` (Pokédex switches with `DisableLCD` again), `test_evo_spotlight`, `test_lzp` (no LZP data any more), `test_menu_gray_bg`, `test_music_speed`. Not crashes: `test_type_chart_scan` and `test_view_animations` need an extra argument (an older build, a debug ROM). Suite now: 103 scripts, 93 pass fully, 0 partly, 10 print other formats (profilers and comparisons; the four comparison tests can take the baseline ROM as the older build from now on). |
+| TEST-005 | Whole codebase | Static scans for far-call misuse: plain `call`/`jp` between different ROMX banks; `farcall`/`callfar` results read from a (it returns a = c); a or hl set just before `farcall`/`callfar` (both are overwritten) | Python scans over every `.asm` file with bank data from the `.sym` file; every hit reviewed by hand | Passed | Cross-bank: no ROMX-to-ROMX hits; the 32 home-bank hits all switch banks first. Results in a: 18 hits, 2 real (BUG-003, BUG-004); the rest only use the preserved flags or clear carry. Inputs: 4 hits, 1 real (BUG-005); the other callees reload what they need themselves. |
+| TEST-006 | Battle, Pokémon generation | `test_farcall_returns`: Taunt at the move menu (status move refused, damaging move and untaunted cases allowed); gift Unown letter in 0-25 and independent of c; gift non-Unown form 0 | Interpreter, run from the routines' own labels | Passed | 2/6 before the fix (the 4 bug cases failed), 6/6 after. Full suite unchanged otherwise. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1280,6 +1284,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: none for the ROM. The retired tests documented features that are gone; they can be restored from `retired/` if a feature returns.
 - Git commit message: `docs: record the repaired regression test suite`
 - Next task: Phase 2 stability audit (crashes, freezes, banking and stack safety).
+
+### STAB-001 — Far-call return values lost (`farcall` returns a = c)
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 2 (register corruption)
+- System: Battle move selection; gift Pokémon generation
+- Files modified: `engine/battle/core.asm`
+- Problem identified: two callers read a value in a after `farcall`, which comes back with a = c (`ReturnFarCall` restores bc through a).
+- Root cause: BUG-003 (`GetMovePower`), BUG-004 (`GenerateUnownForm`). Both callees return their result in a; `newfarcall` (rst `BetterFarCall`) passes a, bc, de and hl through both ways.
+- Solution implemented: both calls changed to `newfarcall`.
+- Behaviour preserved: Taunt now behaves as its own code and comment intend; the rest of move selection is unchanged. Gift Unown get a random letter as designed; other gifts get form 0.
+- Performance impact: negligible (shorter far-call path). Memory impact: 4 bytes of ROM freed.
+- Build result: builds, 0 assembler warnings, 674,666 bytes free.
+- Tests performed: TEST-005, TEST-006, full suite.
+- Test results: new test 6/6 (2/6 on the baseline ROM); all other tests unchanged.
+- Remaining risks: none known. Gift Pokémon already in a save keep their stored form (the save layout is not affected).
+- Git commit message: `fix: keep far-call results for Taunt's move check and gift Unown forms`
+- Next task: BUG-005 (Battle Tower opponent sprite load), then continue the register and banking audit.
 
 ## 31. Outstanding Issues
 
