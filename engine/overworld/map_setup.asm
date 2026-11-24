@@ -119,7 +119,25 @@ HandleMapDefaultWeather:
 	ld [wLastWeatherMapGroup], a
 	ld a, [wMapNumber]
 	ld [wLastWeatherMapNumber], a
-; outdoor maps: 35% rain, 35% sun, 30% clear.
+; Cherrygrove City: 25% each of rain, sun, clear and cherry blossoms.
+	ld a, [wMapGroup]
+	cp GROUP_CHERRYGROVE_CITY
+	jr nz, .normal_roll
+	ld a, [wMapNumber]
+	cp MAP_CHERRYGROVE_CITY
+	jr nz, .normal_roll
+	call Random
+	and %11
+	jr z, .rain
+	dec a
+	jr z, .sun
+	dec a
+	jr z, .none
+	ld a, WEATHER_CHERRY_BLOSSOMS
+	jr .save_group
+
+.normal_roll
+; other outdoor maps: 35% rain, 35% sun, 30% clear.
 	call Random
 	cp 35 percent ; 35% for rain
 	jr c, .rain

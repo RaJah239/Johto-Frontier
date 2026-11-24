@@ -456,6 +456,10 @@ FieldWeather:
 	ld a, 255
 	ld [wWeatherCount], a
 	ld a, [wFieldWeather]
+	cp WEATHER_HAIL + 1
+	jr c, .got_field_weather
+	xor a ; map-only weather (cherry blossoms) is no battle weather
+.got_field_weather
 	ld [wBattleWeather], a
 .doWeather
 	cp WEATHER_RAIN

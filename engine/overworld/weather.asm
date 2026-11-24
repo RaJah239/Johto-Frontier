@@ -115,6 +115,7 @@ DoOverworldWeather::
 	dw DoOverworldRain
 	dw DoOverworldSnow
 	dw DoOverworldSandstorm
+	dw DoOverworldCherryBlossoms
 	assert_table_length NUM_OVERWORLD_WEATHER_TYPES
 
 .FallOnly:
@@ -123,6 +124,7 @@ DoOverworldWeather::
 	dw DoRainFall
 	dw DoSnowFall
 	dw DoSandFall
+	dw DoCherryBlossomFall
 	assert_table_length NUM_OVERWORLD_WEATHER_TYPES
 
 GetActiveOverworldWeather:
@@ -145,6 +147,8 @@ GetOverworldWeatherType::
 	; fallthrough
 
 TranslateFieldWeatherToOverworld:
+	cp WEATHER_CHERRY_BLOSSOMS
+	jr z, .blossoms
 	cp WEATHER_HAIL + 1
 	jr nc, .none
 	push hl
@@ -160,6 +164,11 @@ TranslateFieldWeatherToOverworld:
 	ret
 .none
 	xor a
+	ret
+
+.blossoms
+	ld a, OVERWORLD_WEATHER_CHERRY_BLOSSOMS
+	and a ; nz
 	ret
 
 .FieldWeatherTypes:
@@ -451,6 +460,7 @@ WeatherGraphics:
 	weather_gfx RainGFX, 2
 	weather_gfx SnowGFX, 1
 	weather_gfx SandGFX, 1
+	weather_gfx CherryBlossomGFX, 1
 	assert_table_length NUM_OVERWORLD_WEATHER_TYPES - 1
 
 GetWeatherObjectPalettePointer:
@@ -588,6 +598,11 @@ WeatherObjectPalettes:
 	RGB 27, 31, 27, 22, 19, 09, 11, 05, 00, 15, 09, 02 ; day
 	RGB 15, 14, 24, 16, 14, 10, 08, 04, 05, 10, 09, 09 ; nite
 	RGB 31, 21, 14, 22, 19, 09, 11, 05, 00, 15, 09, 02 ; eve
+; cherry blossoms (pink, like the pink NPC palette)
+	RGB 28, 31, 16, 31, 22, 10, 31, 10, 11, 00, 00, 00 ; morn
+	RGB 27, 31, 27, 31, 19, 10, 31, 10, 11, 00, 00, 00 ; day
+	RGB 15, 14, 24, 16, 09, 09, 17, 07, 08, 00, 00, 00 ; nite
+	RGB 31, 21, 14, 31, 19, 10, 31, 10, 11, 00, 00, 00 ; eve
 	assert_table_length (NUM_OVERWORLD_WEATHER_TYPES - 1) * NUM_DAYTIMES
 
 ; OAM helpers
@@ -919,11 +934,14 @@ DoSnowFall:
 	; Occasionally melt.
 	call WeatherRandom
 	cp 1 percent
-	jr nc, .ok
+	jr nc, DriftWeatherParticle
 	call WeatherRandom
 	cp 10 percent
 	jmp c, Despawn
-.ok
+	; fallthrough
+
+DriftWeatherParticle:
+; Fall (faster for every other particle) and wiggle left; despawn at an edge.
 	call GetPlayerStepY
 	add a
 	ld c, a
@@ -985,8 +1003,55 @@ SpawnSnowFlake:
 	ld a, SNOWFLAKE_TILE
 	jmp SetWeatherParticle
 
-; Sandstorm
+; Cherry blossoms (Cherrygrove City). Petals only come in from the top and
+; right screen edges, and drift down like snow.
 
+DoOverworldCherryBlossoms:
+	call ScanForEmptyOAM
+	jr c, DoCherryBlossomFall
+	call SpawnCherryBlossom
+	; fallthrough
+
+DoCherryBlossomFall:
+	ld hl, .Update
+	jmp ForEachWeatherSprite
+
+.Update:
+	; Each petal has a 1% chance per tick of despawning.
+	call WeatherRandom
+	cp 1 percent
+	jmp c, Despawn
+	jr DriftWeatherParticle
+
+SpawnCherryBlossom:
+; hl = free OAM entry
+	; 20% chance to spawn.
+	call WeatherRandom
+	cp 20 percent
+	ret nc
+	; Enter from the right one-quarter of the time, otherwise the top.
+	call WeatherRandom
+	and %11
+	jr z, .from_right
+	ld [hl], 1
+	inc l
+	ld a, SCREEN_WIDTH_PX + 7
+	call WeatherRandomRange
+	add TILE_WIDTH
+	ld [hli], a
+	jr .finish
+.from_right
+	ld a, OAM_YCOORD_HIDDEN - 1
+	call WeatherRandomRange
+	inc a
+	ld [hli], a
+	ld [hl], SCREEN_WIDTH_PX + TILE_WIDTH
+	inc l
+.finish
+	ld a, CHERRYLEAF_TILE
+	jmp SetWeatherParticle
+
+; Sandstorm
 DoOverworldSandstorm:
 rept 3
 	call ScanForEmptyOAM
@@ -996,6 +1061,7 @@ endr
 
 .done_spawning
 	; fallthrough
+
 DoSandFall:
 	ld hl, .Update
 	jmp ForEachWeatherSprite
@@ -2066,8 +2132,11 @@ SnowGFXEnd:
 SandGFX: INCBIN "gfx/overworld/sand.2bpp", 0, 1 tiles
 SandGFXEnd:
 	assert SandGFXEnd - SandGFX == 1 tiles
+CherryBlossomGFX: INCBIN "gfx/overworld/cherry_blossom.2bpp"
+CherryBlossomGFXEnd:
+	assert CherryBlossomGFXEnd - CherryBlossomGFX == 1 tiles
 
-	assert BANK(RainGFX) == BANK(SnowGFX) && BANK(RainGFX) == BANK(SandGFX)
+	assert BANK(RainGFX) == BANK(SnowGFX) && BANK(RainGFX) == BANK(SandGFX) && BANK(RainGFX) == BANK(CherryBlossomGFX)
 
 ; 128-byte aligned rows let ApplyWeatherTint index them without carries. It
 ; reads them from its own bank (the "Overworld Weather" section, bank $7B in

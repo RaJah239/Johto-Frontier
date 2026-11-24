@@ -753,6 +753,10 @@ HandleCleanSweep:
 	ret nc
 	; any weather or any screen/hazard on either side
 	ld a, [wFieldWeather]
+	cp WEATHER_HAIL + 1
+	jr c, .got_field_weather
+	xor a ; map-only weather (cherry blossoms) isn't weather
+.got_field_weather
 	ld b, a
 	ld a, [wBattleWeather]
 	or b ; WEATHER_NONE
