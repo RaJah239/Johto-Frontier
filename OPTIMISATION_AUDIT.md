@@ -920,7 +920,7 @@ Complete the project systematically using the following phases.
 - [x] Audit ROM banking.
 - [x] Audit RAM banking.
 - [ ] Audit interrupt safety.
-- [ ] Audit invalid memory accesses.
+- [x] Audit invalid memory accesses.
 
 ### Phase 3 — Battle Engine Correctness
 
@@ -1108,7 +1108,7 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
-- Last completed task: STAB-003 (BUG-006)
+- Last completed task: STAB-004 (BUG-007)
 - Last verified commit: `d007b16f8` (full suite: 105 scripts, 95 fully passing, the rest profilers/comparisons)
 - Outstanding blockers: none
 - Next task: Phase 2: remaining checklist items
@@ -1127,6 +1127,7 @@ Maintain the following table throughout the project.
 | BUG-004 | Pokémon generation | A gift Pokémon sent to a box (`LoadEnemyMon` outside battle) got its Unown form from `farcall GenerateUnownForm`, whose result in a is lost (a = c = $30, the party struct length). Every such gift got form 48: an invalid letter for a gift Unown (out-of-range picture/icon lookups), and a stray non-zero form for every other species. | Medium | Fixed | `test_farcall_returns` (failed before, passes after) |
 | BUG-005 | Battle Tower | `LoadOpponentTrainerAndPokemonWithOTSprite` (left over from the dynamic-sprite port) loaded a sprite with made-up inputs: it read the object struct index from ROM ($0000 + object offset: $F3 or $E0, the `di`/`ldh` opcodes) because it added the object's offset to `MAPOBJECT_OBJECT_STRUCT_ID` (0) instead of to `wMapObjects`, and it passed the sprite in a through `farcall GetSpriteVTile`, which overwrites a with the bank (0). `GetSprite` then looked up sprite 0, one entry before `OverworldSprites`, and queued that garbage for a VRAM slot worked out from the bad index. The load was not needed: the opponent is always hidden at this point and the script's `appear` loads its graphics. | Medium | Fixed | `test_bt_ot_sprite` (failed before, passes after) |
 | BUG-006 | Stats screen (EV page) | `StatsScreen_PrintEVs` threaded a running value through the stack with a `push bc`/`pop bc` per stat, but only on the non-maxed branches. With Attack EVs at exactly 252 (`MAX_EV`), nothing was pushed for Attack, so the later stats popped the routine's own return address and the final `pop bc` left the stack one short: `ret` went to the wrong address (crash or garbage). The value it built was never used. Any Pokémon with 252 Attack EVs, viewed on the EV page (unlocked by `EVENT_UNLOCK_STAT_SCREEN_EFFORT_VALUES`), triggered it. | Critical | Fixed | `test_stats_evs` (32 of 64 maxed/not-maxed mixes failed before: every one with Attack at 252; all pass after) |
+| BUG-007 | NPC trades | `ComputeNPCTrademonStats` stored the level with `ld [MON_LEVEL], a` (inherited from pokecrystal, flagged there by its own comment): `MON_LEVEL` is the struct offset $1F, so this wrote the level to cartridge address $001F, the MBC3 save-RAM enable register. A level ending in $A (10, 26, 42, 58, 74, 90) left save RAM switched on after every in-game trade; any other level switched it off. The stats themselves were right (the trade code already sets `wCurPartyLevel`). | Low | Fixed | `test_npc_trade_stats` (the write to $001F seen on the baseline ROM; none after) |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1199,6 +1200,8 @@ Maintain the following table.
 | TEST-012 | RAM banking | Call-graph check of WRAMX bank use, both ways: (1) routines reading or writing a bank 2-7 variable on a path where no caller has switched `rSVBK`; (2) routines reading a variable of one bank while a caller has switched to another | Python scripts over every `.asm` with the `.sym` file: line-by-line tracking of `rSVBK` writes (`BANK(w...)`, saved/restored values), call edges including local labels and fall-through, solved to a fixed point | Passed | (1) No unswitched path through direct calls. The 78 remaining hits are routines reached only through jump tables (battle animation commands and BG effects, Pokémon pic animation, Magnet Train, Pokédex grid); each table's entry point switches the bank before dispatching. (2) Three hits, all false: the Battle Tower room menu and title screen restore the bank before the flagged access; Bill's PC switches back inside `_GetCursorMon`. The Battle VS intro deliberately leaves bank 5 selected from "load portrait" to the end of the transition, and everything it touches meanwhile is in bank 5 or WRAM0. |
 | TEST-013 | Whole codebase | Static push/pop balance check of every routine | Python: per routine, follows `jr`/`jp`/`jmp` to its own local labels and tracks the stack depth; flags `ret` at a non-zero depth, labels reached at two depths, and jumps or fall-through into another routine with a depth that routine does not pop | Passed | 98 hits reviewed. 1 real (BUG-006). The rest are intended: shared tails where a wrapper pushes and the common routine pops (Gale Wings, max-HP checks, weather likes, mail, trade tubes, HDMA, text commands), push-address-then-`ret` dispatch (`AI_Smart`, `Predef`, far-call internals), and loops that push a counted number of values (`AI_FasterAfterSpeedBoost`). `ReadTrainerPartyPieces` jumps to its end with `hl` still pushed only if a random-party entry starts with $FF, which the data never does (noted, not changed). |
 | TEST-014 | Stats screen | `test_stats_evs` plus a screen comparison with the baseline ROM | Interpreter: all 64 combinations of maxed/not-maxed EVs, checking the stack on return and which cells show stars; full 20x18 tilemap compared with the baseline for four EV sets that did not crash there | Passed | 3/3; tilemaps identical to the baseline in all four sets. Full suite unchanged otherwise (106 scripts). |
+| TEST-015 | Whole codebase | Invalid memory accesses: writes to ROM labels, literal echo-RAM / unusable-area / ROM addresses, and numeric constants used as addresses | Python scans with the `.sym` file and the constant definitions | Passed | One hit, BUG-007; nothing else. |
+| TEST-016 | NPC trades | `test_npc_trade_stats`: no write below $2000 during `ComputeNPCTrademonStats` (levels 10, 26, 31), stats follow the level | Interpreter with a write hook on the cartridge address space | Passed | 1/4 on the baseline (the three register writes), 4/4 after. Full suite unchanged otherwise (107 scripts). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1394,6 +1397,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: none known.
 - Git commit message: `fix: stop the stats screen EV page corrupting the stack at 252 Attack EVs`
 - Next task: finish the Phase 2 checklist (freezes and softlocks, interrupt safety, invalid accesses).
+
+### STAB-004 — Stray MBC register write after NPC trades
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 2 (invalid memory accesses)
+- System: NPC trades
+- Files modified: `engine/pokemon/move_mon.asm`
+- Problem identified: BUG-007 (TEST-015).
+- Root cause: an offset constant used as an address.
+- Solution implemented: `ld [wCurPartyLevel], a`, as the code's own comment said.
+- Behaviour preserved: the traded Pokémon's stats are unchanged (the variable already held this level); only the stray register write is gone.
+- Performance impact: none. Memory impact: none.
+- Build result: builds, 0 assembler warnings, 675,214 bytes free.
+- Tests performed: TEST-015, TEST-016, full suite.
+- Test results: all pass; nothing else changed.
+- Remaining risks: none known.
+- Git commit message: `fix: stop NPC trades writing the level to the save RAM enable register`
+- Next task: freezes and softlocks, interrupt safety.
 
 ## 31. Outstanding Issues
 
