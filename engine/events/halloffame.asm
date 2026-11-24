@@ -568,9 +568,9 @@ HOF_AnimatePlayerPic:
 	hlcoord 1, 8
 	ld de, .PlayTime
 	call PlaceString
-	hlcoord 3, 9
+	hlcoord 2, 9
 	ld de, wGameTimeHours
-	lb bc, 2, 3
+	lb bc, 2, 4
 	call PrintNum
 	ld [hl], "<COLON>"
 	inc hl

@@ -22,7 +22,7 @@ GameTimer::
 
 .Function:
 ; Increment the game timer by one frame.
-; The game timer is capped at 999:59:59.00.
+; The game timer is capped at 9999:59:59.00.
 
 ; Don't update if game logic is paused.
 	ld a, [wGameLogicPaused]
@@ -101,19 +101,19 @@ endr
 	ld l, a
 	inc hl
 
-; Cap the timer after 1000 hours.
+; Cap the timer after 10000 hours.
 	ld a, h
-	cp HIGH(1000)
+	cp HIGH(10000)
 	jr c, .ok
 
 	ld a, l
-	cp LOW(1000)
+	cp LOW(10000)
 	jr c, .ok
 
 	ld hl, wGameTimeCap
 	set 0, [hl]
 
-	ld a, 59 ; 999:59:59.00
+	ld a, 59 ; 9999:59:59.00
 	ld [wGameTimeMinutes], a
 	ld [wGameTimeSeconds], a
 	ret

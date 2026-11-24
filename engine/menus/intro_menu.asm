@@ -474,18 +474,18 @@ Continue_DisplayBadgesDexPlayerName:
 	db "<PLAYER>@"
 
 Continue_PrintGameTime:
-	decoord 9, 8, 0
+	decoord 8, 8, 0
 	add hl, de
 	jr Continue_DisplayGameTime
 
 Continue_UnknownGameTime:
-	decoord 9, 8, 0
+	decoord 8, 8, 0
 	add hl, de
-	ld de, .three_question_marks
+	ld de, .four_question_marks
 	jmp PlaceString
 
-.three_question_marks
-	db " ???@"
+.four_question_marks
+	db "????@"
 
 Continue_DisplayBadgeCount:
 	push hl
@@ -516,7 +516,7 @@ endc
 
 Continue_DisplayGameTime:
 	ld de, wGameTimeHours
-	lb bc, 2, 3
+	lb bc, 2, 4
 	call PrintNum
 	ld [hl], "<COLON>"
 	inc hl
