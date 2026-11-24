@@ -942,7 +942,7 @@ Complete the project systematically using the following phases.
 - [ ] Audit experience.
 - [ ] Audit level scaling.
 - [ ] Audit capture mechanics.
-- [ ] Audit battle state initialisation and cleanup.
+- [x] Audit battle state initialisation and cleanup.
 
 ### Phase 4 — Battle AI
 
@@ -1207,6 +1207,8 @@ Maintain the following table.
 | TEST-018 | Pokémon gender | `test_gender_boxmon`: `GetGender` returns for every `wMonType`; `BOXMON` gives the same result as `BUFFERMON` for DVs $96, $66, $77, $F0 | Interpreter | Passed | 5/10 on the baseline (`BOXMON` froze), 10/10 after. Full suite unchanged otherwise (108 scripts). |
 | TEST-019 | Memory corruption | Fixed-length `CopyBytes`/`ByteFill` into a WRAM/HRAM variable declared smaller in `ram/` (`ds`/`db`/`dw`) with another label right after it | Python: declared sizes from `ram/*.asm`, lengths evaluated from the constants, destinations from the `.sym` file | Passed | 27 hits, none a bug. Each deliberately spans neighbouring fields (BG and OB palettes cleared or loaded together, HP pairs in the matchup sim, party species plus terminator, mart/phone/decoration lists with their counts, start-time and RTC fields). The Bug-Catching Contest winner name takes 2 bytes past its 11 (class name of 13), but stays inside its `SECTION UNION`, whose other members are not in use during judging (as in pokecrystal). |
 | TEST-020 | Freezes | Busy-wait loops on `rLY`/`rSTAT` that never end with the LCD off (LY stays 0, STAT mode 0) | Python scan for such loops, then each routine's callers read by hand | Passed | 28 loops; 8 check `rLCDC` first. The rest (copy-tilemap-at-once variants, HDMA transfers, battle intro, credits, Pokédex grid, Voltorb Flip, init) only run with the LCD on: the Pokédex turns it off only between its own `Pokedex_ScreenOff`/`Pokedex_ScreenOn` pairs, and the grid code runs outside those. No change; noted as a precondition for future callers. |
+| TEST-021 | Battle engine (player/enemy symmetry) | Every routine pair whose names differ only by Player/Enemy: one side's body with Player/Enemy, `wBattleMon`/`wEnemyMon` and party names swapped, diffed against the other | Python over `engine/` and `home/` | Passed | 33 pairs differ; all reviewed, none a bug. The differences are shared tails, the player-only low-HP alarm, back vs front sprites, the matchup sim tracking statuses inflicted only on the player's mon, vanilla-only flinch resets, and renaming artefacts of the swap (`AI_Is*ImmuneByAbility` correctly checks the attacker's Mold Breaker and then the defender). |
+| TEST-022 | Battle state between battles | Battle variables written by the battle engine and abilities that lie outside `wBattle`..`wBattleEnd` (cleared at battle start) and are not reset in `start_battle.asm` or `CleanUpBattleRAM` | Python with the `.sym` file, then each custom state variable traced to where it is reset | Passed | 358 hits, nearly all scratch, party data, or values set fresh before each use. Custom state checked one by one: `wAISwitchCount` (battle start), `wAITeleportPlan` (every turn), `wEntryAbilitiesPending` incl. Unburden bits (whole byte rewritten by `StartBattleEntryAbilities`), `wNeutralizingGas`, `wHarvestBerries` and `wSendOutPopupsShown` (each send-out), `wEntryHazardSwitchTurn`/`SkipMask` (each switch-in), `wContraryInverted` and `wMagicBounceSavedMove` (set per use). Nothing carries over from one battle to the next. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
