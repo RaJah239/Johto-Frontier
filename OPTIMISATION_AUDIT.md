@@ -919,7 +919,7 @@ Complete the project systematically using the following phases.
 - [ ] Audit register corruption.
 - [x] Audit ROM banking.
 - [x] Audit RAM banking.
-- [ ] Audit interrupt safety.
+- [x] Audit interrupt safety.
 - [x] Audit invalid memory accesses.
 
 ### Phase 3 — Battle Engine Correctness
@@ -1108,7 +1108,7 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
-- Last completed task: STAB-004 (BUG-007)
+- Last completed task: STAB-005 (BUG-008)
 - Last verified commit: `d007b16f8` (full suite: 105 scripts, 95 fully passing, the rest profilers/comparisons)
 - Outstanding blockers: none
 - Next task: Phase 2: remaining checklist items
@@ -1128,6 +1128,7 @@ Maintain the following table throughout the project.
 | BUG-005 | Battle Tower | `LoadOpponentTrainerAndPokemonWithOTSprite` (left over from the dynamic-sprite port) loaded a sprite with made-up inputs: it read the object struct index from ROM ($0000 + object offset: $F3 or $E0, the `di`/`ldh` opcodes) because it added the object's offset to `MAPOBJECT_OBJECT_STRUCT_ID` (0) instead of to `wMapObjects`, and it passed the sprite in a through `farcall GetSpriteVTile`, which overwrites a with the bank (0). `GetSprite` then looked up sprite 0, one entry before `OverworldSprites`, and queued that garbage for a VRAM slot worked out from the bad index. The load was not needed: the opponent is always hidden at this point and the script's `appear` loads its graphics. | Medium | Fixed | `test_bt_ot_sprite` (failed before, passes after) |
 | BUG-006 | Stats screen (EV page) | `StatsScreen_PrintEVs` threaded a running value through the stack with a `push bc`/`pop bc` per stat, but only on the non-maxed branches. With Attack EVs at exactly 252 (`MAX_EV`), nothing was pushed for Attack, so the later stats popped the routine's own return address and the final `pop bc` left the stack one short: `ret` went to the wrong address (crash or garbage). The value it built was never used. Any Pokémon with 252 Attack EVs, viewed on the EV page (unlocked by `EVENT_UNLOCK_STAT_SCREEN_EFFORT_VALUES`), triggered it. | Critical | Fixed | `test_stats_evs` (32 of 64 maxed/not-maxed mixes failed before: every one with Attack at 252; all pass after) |
 | BUG-007 | NPC trades | `ComputeNPCTrademonStats` stored the level with `ld [MON_LEVEL], a` (inherited from pokecrystal, flagged there by its own comment): `MON_LEVEL` is the struct offset $1F, so this wrote the level to cartridge address $001F, the MBC3 save-RAM enable register. A level ending in $A (10, 26, 42, 58, 74, 90) left save RAM switched on after every in-game trade; any other level switched it off. The stats themselves were right (the trade code already sets `wCurPartyLevel`). | Low | Fixed | `test_npc_trade_stats` (the write to $001F seen on the baseline ROM; none after) |
+| BUG-008 | Gift Pokémon / naming screen | Softlock. When `givepoke` sends a Pokémon to a box (full party), `GivePoke` sets `wMonType` to `BOXMON` and offers a nickname. The naming screen then calls `GetGender`, whose `BOXMON` branch was a deliberate `di` / `jr @` trap left from the removal of the old box code, so saying yes to the nickname froze the game. | Critical | Fixed | `test_gender_boxmon` (`BOXMON` froze on the baseline ROM; now returns the same gender as `BUFFERMON` for the same DVs) |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1202,6 +1203,8 @@ Maintain the following table.
 | TEST-014 | Stats screen | `test_stats_evs` plus a screen comparison with the baseline ROM | Interpreter: all 64 combinations of maxed/not-maxed EVs, checking the stack on return and which cells show stars; full 20x18 tilemap compared with the baseline for four EV sets that did not crash there | Passed | 3/3; tilemaps identical to the baseline in all four sets. Full suite unchanged otherwise (106 scripts). |
 | TEST-015 | Whole codebase | Invalid memory accesses: writes to ROM labels, literal echo-RAM / unusable-area / ROM addresses, and numeric constants used as addresses | Python scans with the `.sym` file and the constant definitions | Passed | One hit, BUG-007; nothing else. |
 | TEST-016 | NPC trades | `test_npc_trade_stats`: no write below $2000 during `ComputeNPCTrademonStats` (levels 10, 26, 31), stats follow the level | Interpreter with a write hook on the cartridge address space | Passed | 1/4 on the baseline (the three register writes), 4/4 after. Full suite unchanged otherwise (107 scripts). |
+| TEST-017 | Interrupts, softlocks | Static `di`/`ei` check of every routine (return, tail jump or fall-through with interrupts off; `halt` with interrupts off), then every deliberate `jr @` trap traced to its callers | Python CFG pass like TEST-013, with each hit and each trap's callers read by hand | Passed | 13 hits, all intended: the three `*_WaitHBlank` helpers return with interrupts off by design and every caller does `ei` within a few instructions; `VBlank1/3/5` run inside the interrupt and end in `reti`. Traps: `GetGender` (`BOXMON`) reachable, BUG-008. `CopyMonToTempMon` and `GetMonSpecies` traps: every caller sets `PARTYMON`, `OTPARTYMON` or takes the `BUFFERMON` branch first (party menu, battle, Battle Factory, link, move menus, evolution, Bill's PC), so not reachable. |
+| TEST-018 | Pokémon gender | `test_gender_boxmon`: `GetGender` returns for every `wMonType`; `BOXMON` gives the same result as `BUFFERMON` for DVs $96, $66, $77, $F0 | Interpreter | Passed | 5/10 on the baseline (`BOXMON` froze), 10/10 after. Full suite unchanged otherwise (108 scripts). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1417,6 +1420,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Git commit message: `fix: stop NPC trades writing the level to the save RAM enable register`
 - Next task: freezes and softlocks, interrupt safety.
 
+### STAB-005 — Softlock nicknaming a gift Pokémon sent to the PC
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 2 (freezes, softlocks)
+- System: Gift Pokémon, naming screen, gender
+- Files modified: `engine/pokemon/mon_stats.asm`
+- Problem identified: BUG-008 (found while reviewing the `di` / `jr @` traps, TEST-017).
+- Root cause: the storage-system rewrite left `GetGender`'s box branch as a crash trap, but `GivePoke` still passes `BOXMON` to the naming screen.
+- Solution implemented: `BOXMON` reads the DVs from `wBufferMon`, where the storage system keeps the box Pokémon being handled (the naming screen already reads that Pokémon's form and DVs from there). The trap is removed.
+- Behaviour preserved: every other `wMonType` is unchanged; the gender shown is the stored Pokémon's.
+- Performance impact: none. Memory impact: none (same size).
+- Build result: builds, 0 assembler warnings, 675,214 bytes free.
+- Tests performed: TEST-017, TEST-018, full suite.
+- Test results: all pass; nothing else changed.
+- Remaining risks: the naming screen itself was not run end to end in the interpreter; see MT-005.
+- Git commit message: `fix: stop the game freezing when nicknaming a gift Pokemon sent to the PC`
+- Next task: finish Phase 2 (freezes and softlocks beyond the traps), then Phase 3.
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -1459,6 +1481,8 @@ Make manual testing instructions sufficiently clear for the user to perform with
 - **MT-003 Battle Tower / Factory opponent (BUG-005).** Setup: enter a Battle Tower or Battle Factory challenge. Steps: watch each opponent warp in, and look at the other sprites on screen (you, the attendant). Expected: the opponent appears with the right sprite and nothing else on screen changes. Failure: a wrong or broken opponent sprite, or other sprites corrupted.
 
 - **MT-004 EV page with maxed Attack (BUG-006).** Setup: a save with the EV page unlocked (`EVENT_UNLOCK_STAT_SCREEN_EFFORT_VALUES`) and a Pokémon with 252 Attack EVs (train it, or set it with a debug tool). Steps: open its stats screen and go to the page with the Effort Values; also try one with every EV at 252 and one with none. Expected: stars for each 252 value, numbers otherwise, and the screen closes normally. Failure (old build): crash or freeze on that page.
+
+- **MT-005 Nickname a gift Pokémon that goes to the PC (BUG-008).** Setup: a full party of six. Steps: receive any gift Pokémon that offers a nickname (a `givepoke` event without a fixed OT, e.g. an Egg or starter-style gift); answer YES to the nickname prompt. Expected: the naming screen opens with the Pokémon's icon and gender symbol; finishing returns to the game and the message says it was sent to the PC. Failure (old build): the game freezes as the naming screen opens.
 
 ## 33. Final Deliverables
 

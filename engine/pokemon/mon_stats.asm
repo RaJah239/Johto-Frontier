@@ -349,9 +349,10 @@ GetGender:
 	dec a
 	jr z, .PartyMon
 
-; 2: sBoxMon
+; 2: BoxMon: the storage system handles it in wBufferMon
+	ld hl, wBufferMonDVs
 	dec a
-	jr z, .sBoxMon
+	jr z, .DVs
 
 ; 3: Unknown
 	ld hl, wTempMonDVs
@@ -362,12 +363,7 @@ GetGender:
 	ld hl, wEnemyMonDVs
 	jr .DVs
 
-; Get our place in the party/box.
-
-.sBoxMon:
-	; old box code access; crash
-	di
-	jr @
+; Get our place in the party.
 
 .PartyMon:
 	ld a, [wCurPartyMon]
