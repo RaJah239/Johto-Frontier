@@ -1102,6 +1102,8 @@ Maintain the following table throughout the project.
 
 | ID | System | Bug | Severity | Status | Verification |
 |---|---|---|---|---|---|
+| BUG-001 | Build | `gfx/pokemon/Golisopod`, `Victini` and `Wimpod` were tracked with capital letters while the code includes the lowercase paths: a case-sensitive checkout (Linux, CI) could not build (`No rule to make target gfx/pokemon/wimpod/front.gbcpal`). Windows hid it. | High | Fixed | Clean clone builds on Linux (TEST-001) |
+| BUG-002 | Build | `tools/sub_2bpp.sh` and `tools/free_space.awk` are run directly by the Makefile but were tracked without the executable bit (mode 100644): a fresh checkout failed with "Permission denied". | High | Fixed | Clean clone builds on Linux (TEST-001) |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1155,6 +1157,7 @@ Maintain the following table.
 
 | Test ID | System | Test Description | Test Method | Result | Notes |
 |---|---|---|---|---|---|
+| TEST-001 | Build | Clean `git clone` of the repository built from scratch on Linux (case-sensitive filesystem) | `make -j4` with RGBDS 0.7.0 | Passed (after BUG-001/002) | Failed before the fixes |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1198,6 +1201,25 @@ For each completed logical batch, record:
 Maintain entries in chronological order.
 
 Use Git history to identify the corresponding commit. Do not repeatedly amend commits merely to insert their own commit hashes into this document.
+
+### BUILD-001 — Make the repository build from a clean case-sensitive checkout
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 1 (baseline build)
+- System: Build system
+- Files modified: `gfx/pokemon/{golisopod,victini,wimpod}/*` (renamed from capitalised directories), `tools/sub_2bpp.sh`, `tools/free_space.awk` (file mode only)
+- Problem identified: a fresh clone could not be built on Linux.
+- Root cause: BUG-001 (three graphics directories tracked with capital letters, referenced in lowercase) and BUG-002 (two Makefile tools tracked without the executable bit). Both are invisible on the Windows/Cygwin working copy (case-insensitive filesystem, executable bits not enforced).
+- Solution implemented: case-only `git mv` (through a temporary name) to the lowercase paths the code uses; `git update-index --chmod=+x` for the two tools.
+- Behaviour preserved: no source or data changes; the ROM is unchanged.
+- Performance impact: none. Memory impact: none.
+- Build result: clean clone builds, 0 warnings.
+- Tests performed: TEST-001.
+- Test results: passed.
+- Remaining risks: none known. Other tracked scripts without the executable bit are only ever run through `python3`.
+- Git commit message: `build: fix case-sensitive graphics paths and tool permissions`
+- Next task: record the baseline measurements (Phase 1).
 
 ## 31. Outstanding Issues
 
