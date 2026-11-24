@@ -128,7 +128,7 @@ ItemIconPointers::
 	dba RevivalHerbIcon ; REVIVAL_HERB
 	dba HardStoneIcon ; HARD_STONE
 	dba LuckyEggIcon ; LUCKY_EGG
-	dba CardKeyIcon ; CARD_KEY
+	dba GauntletBallIcon ; GAUNTLET_BALL
 	dba HeavyBootsIcon ; HEAVY_BOOTS
 	dba EggticketIcon ; EGG_TICKET
 	dba PokeCallIcon ; TANGELA_CALL

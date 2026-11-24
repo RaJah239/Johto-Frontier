@@ -31,6 +31,8 @@ BattleBallGFX:
 	dba AnimObjParkBallGFX
 	db SHINY_BALL
 	dba AnimObjShinyBallGFX
+	db GAUNTLET_BALL
+	dba AnimObjGauntletBallGFX
 	db -1 ; end
 
 WhitePalette:

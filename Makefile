@@ -219,6 +219,7 @@ gfx/battle_anims/balls/love_ball.2bpp: tools/gfx += --remove-xflip --keep-whites
 gfx/battle_anims/balls/premier_ball.2bpp: tools/gfx += --remove-xflip --keep-whitespace
 gfx/battle_anims/balls/park_ball.2bpp: tools/gfx += --remove-xflip --keep-whitespace
 gfx/battle_anims/balls/shiny_ball.2bpp: tools/gfx += --remove-xflip --keep-whitespace
+gfx/battle_anims/balls/gauntlet_ball.2bpp: tools/gfx += --remove-xflip --keep-whitespace
 gfx/battle_anims/reflect.2bpp: tools/gfx += --remove-whitespace
 gfx/battle_anims/rocks.2bpp: tools/gfx += --remove-whitespace
 gfx/battle_anims/skyattack.2bpp: tools/gfx += --remove-whitespace

@@ -127,7 +127,7 @@ ItemDescriptions:
 	dw RevivalHerbDesc
 	dw HardStoneDesc
 	dw LuckyEggDesc
-	dw CardKeyDesc
+	dw GauntletBallDesc
 	dw HeavyBootsDesc
 	dw EggTicketDesc
 	dw TangelaCallDesc
@@ -1047,7 +1047,10 @@ NomadSigilDesc:
 ScoreCardDesc:
 	db   "Shows your score.@"
 
-CardKeyDesc:
+GauntletBallDesc:
+	db   "Grand Gauntlet"
+	next "keepsake ball.@"
+
 TeruSama26Desc:
 TeruSama27Desc:
 TeruSama28Desc:

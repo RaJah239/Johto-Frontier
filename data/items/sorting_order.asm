@@ -97,7 +97,7 @@ ItemNameOrder:
 	db SURF_MAIL
 
 ; NEXT POCKET
-; Ball Pocket - 14 total
+; Ball Pocket - 15 total
 ; Generic Pokéballs
 	db POKE_BALL
 	db PREMIER_BALL
@@ -106,6 +106,7 @@ ItemNameOrder:
 	db SHINY_BALL
 	db MASTER_BALL 
 	db PARK_BALL
+	db GAUNTLET_BALL
 
 ; Kurt's Pokéballs
 	db FAST_BALL
@@ -277,7 +278,6 @@ ItemNameOrder:
 	db RAINBOW_WING
 
 ; Temporary Key Items
-	db CARD_KEY
 	db GS_BALL
 	db SQUIRTBOTTLE
 
@@ -321,7 +321,6 @@ ItemAlphaOrder:
 	db BURNT_BERRY
 	db CALCIUM
 	db CARBOS
-	db CARD_KEY
 	db CATCH_CHARM
 	db CHARCOAL
 	db CHOICE_BAND
@@ -360,6 +359,7 @@ ItemAlphaOrder:
 	db FULL_HEAL
 	db FULL_RESTORE
 	db GALLADE_CALL
+	db GAUNTLET_BALL
 	db GOLD_BERRY
 	db GOLD_LEAF
 	db GOOD_ROD
