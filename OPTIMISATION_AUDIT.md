@@ -905,9 +905,9 @@ Complete the project systematically using the following phases.
 - [x] Record SRAM usage.
 - [x] Record compiler warnings.
 - [x] Identify available testing tools.
-- [ ] Identify major performance bottlenecks.
-- [ ] Establish audit infrastructure.
-- [ ] Commit baseline documentation.
+- [x] Identify major performance bottlenecks.
+- [x] Establish audit infrastructure.
+- [x] Commit baseline documentation.
 
 ### Phase 2 — Critical Stability Issues
 
@@ -1084,6 +1084,21 @@ Baseline ROM (`johtofrontier.gbc` MD5 `3142da94d2e5cde28cb9df2c79ff8d8b`, built 
 - Profiling tools: `perfkit.py` (battle/AI M-cycle counting), `prof_frame.py`, `prof_overworld.py`, `prof_mapentry.py`, `prof_pc_step.py`, `prof_vblank.py`, `prof_blockdata.py` (M-cycles per frame/step/map entry), `test_ai_perf.py` (AI frame cost).
 - Validation tools: `test_ability_lists.py`, `test_basedata_layout.py`, `test_tileset_data.py`, `test_tileset_tables.py`, `test_decompress_all.py` and the table-length `assert`s in the source.
 - Physical hardware testing: not available.
+- Regression gate: `python3 .claude-tools/romtest/run_all.py <rom dir> <out file> [baseline file] [first [count]]` runs every test (60 s timeout each) and lists the tests whose result changed from a saved run. The commands are limited to about 3 minutes each, so the suite is run in slices (`first`, `count`). The baseline results are kept outside the repository with the baseline ROM.
+
+### Performance Baseline (interpreter M-cycle counts, baseline ROM)
+
+| Measurement | Cost | Tool |
+|---|---|---|
+| Overworld tilemap rebuild (any map) | 5,719-5,727 M-cycles (0.16 frames) | `prof_overworld.py` |
+| Overworld scroll by one block | 1,218-1,331 M-cycles (0.03-0.04 frames) | `prof_overworld.py` |
+| VBlank: BG map buffer row | 883 M-cycles (3.87 of the 10 VBlank lines) | `prof_vblank.py` |
+| VBlank: palette upload | 600 M-cycles (2.63 lines) | `prof_vblank.py` |
+| VBlank: 16-tile 2bpp chunk | 1,300 M-cycles (5.70 lines) | `prof_vblank.py` |
+| Trainer AI switch decision (`AI_MatchupSwitch`, worst case measured) | 30.7 frames | `test_ai_perf.py` |
+| Trainer AI switch decision (second mon out) | 4.3 frames | `test_ai_perf.py` |
+
+The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (about half a second for one decision), so it is the main CPU target for Phases 4 and 5. The overworld and VBlank paths have already been optimised by earlier work.
 
 ## 25. Current Project Status
 
