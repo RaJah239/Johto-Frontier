@@ -85,6 +85,76 @@ LoadMapObjects:
 	newfarcall SelectWeatherObjPalette
 	farjp LoadWeatherGraphics
 
+GetTableMapWeather:
+; Picks the current map's weather from MapWeatherTable for the time of day,
+; every weather in the list being equally likely. Returns it in a with carry
+; set, or nc if the map isn't in the table.
+	ld hl, MapWeatherTable
+.find_map
+	ld a, [hli]
+	cp -1
+	jr z, .not_listed
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [wMapGroup]
+	cp b
+	jr nz, .next_map
+	ld a, [wMapNumber]
+	cp c
+	jr z, .found
+.next_map
+	call .SkipList ; morning/day
+	call .SkipList ; evening/night
+	jr .find_map
+
+.not_listed
+	and a
+	ret
+
+.found
+	ld a, [wTimeOfDay]
+	cp NITE_F
+	jr c, .pick ; morning/day list first
+	call .SkipList
+.pick
+	push hl
+	ld c, 0
+.count
+	ld a, [hli]
+	cp -1
+	jr z, .counted
+	inc c
+	jr .count
+
+.counted
+	pop hl
+	call Random
+.modulo
+	sub c
+	jr nc, .modulo
+	add c
+	ld e, a
+	ld d, 0
+	add hl, de
+	ld a, [hl]
+	scf
+	ret
+
+.SkipList:
+	ld a, [hli]
+	cp -1
+	jr nz, .SkipList
+	ret
+
+MapWeatherTable:
+; map group, map, then two weather lists: morning/day and evening/night,
+; each ended by -1. All of a list's weathers are equally likely.
+	db GROUP_BATTLE_PLAZA, MAP_BATTLE_PLAZA
+	db WEATHER_NONE, WEATHER_RAIN, WEATHER_SUN, WEATHER_HAIL, WEATHER_SANDSTORM, WEATHER_CHERRY_BLOSSOMS, -1
+	db WEATHER_NONE, WEATHER_RAIN, WEATHER_HAIL, WEATHER_SANDSTORM, WEATHER_CHERRY_BLOSSOMS, -1
+	db -1
+
 ; the weather is re-rolled each time you reach a new outdoor
 ; map, so it stays the same when entering and leaving
 ; buildings within a map.
@@ -137,6 +207,9 @@ HandleMapDefaultWeather:
 	jr .save_group
 
 .normal_roll
+; maps in MapWeatherTable pick from their own weather lists
+	call GetTableMapWeather
+	jr c, .save_group
 ; other outdoor maps: 35% rain, 35% sun, 30% clear.
 	call Random
 	cp 35 percent ; 35% for rain
