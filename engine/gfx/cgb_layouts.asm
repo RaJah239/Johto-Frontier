@@ -526,6 +526,12 @@ ENDC
 	; type label text in white, like on the grid
 	ld de, wBGPals1 palette 7 + 6
 	call LoadSingleWhitePal
+	; palettes 2 and 3: the gender symbols (Pokedex_ColorGenderSymbols)
+	ld hl, PokedexGenderPalettes
+	ld de, wBGPals1 palette 2
+	ld bc, 2 palettes
+	ld a, BANK(wBGPals1)
+	call FarCopyWRAM
 	call WipeAttrmap
 	hlcoord 1, 1, wAttrmap
 	lb bc, 7, 7
@@ -770,6 +776,19 @@ PokedexGrayPalette:
 	RGB 27, 27, 27
 	RGB 23, 23, 23 ; DexGridPalGrid's line gray (the screen background)
 	RGB  0,  0,  0
+
+PokedexGenderPalettes:
+; PokedexLightPalette with the text (the dex font is inverted: color 0) red
+; for "♂" and blue for "♀"
+	RGB 31, 12,  6
+	RGB 26, 10,  6
+	RGB 23, 23, 23
+	RGB 31, 31, 31
+
+	RGB  4, 17, 31
+	RGB 26, 10,  6
+	RGB 23, 23, 23
+	RGB 31, 31, 31
 
 PokedexLightPalette:
 ; the dex entry screen's interface: text, accent, frame, panels

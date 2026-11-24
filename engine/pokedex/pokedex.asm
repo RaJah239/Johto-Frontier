@@ -308,6 +308,7 @@ Pokedex_InitDexEntryScreen:
 	ld [wPrevDexEntry], a
 	call Pokedex_DrawFootprint
 	farcall DisplayDexEntry
+	call Pokedex_ColorGenderSymbols
 	ld b, 3
 	farcall _SafeCopyTilemapAtOnce
 	ld a, SCGB_POKEDEX
@@ -350,6 +351,7 @@ Pokedex_InitDexEntryScreenFromGrid:
 	ld [wPrevDexEntry], a
 	call Pokedex_DrawFootprint
 	farcall DisplayDexEntry
+	call Pokedex_ColorGenderSymbols
 
 	; attributes and palettes: ApplyAttrmap copies the attributes to the BG
 	; map at hBGMapAddress, so point it at the hidden BG map 1 meanwhile
@@ -434,7 +436,8 @@ Pokedex_UpdateDexEntryScreen:
 Pokedex_Page:
 	call Pokedex_GetSelectedMon
 	ld [wPrevDexEntry], a
-	farjp DisplayDexEntry
+	farcall DisplayDexEntry
+	jmp Pokedex_ColorGenderSymbols
  
  Pokedex_toggle_shininess_Entry:
  	call Pokedex_toggle_shininess1
@@ -581,6 +584,7 @@ Pokedex_ReinitDexEntryScreen:
  	ld [wPokedexStatus], a ; moves machines index
  	farcall DisplayDexMonMoves
 .cont
+	call Pokedex_ColorGenderSymbols
 	call Pokedex_DrawFootprint
 	call Pokedex_LoadSelectedMonTiles
 	hlcoord 8, 1
@@ -650,12 +654,14 @@ Handle_Button_Banner:
 BaseStat_Page:
 	call Handle_Button_Banner
  	call Pokedex_GetSelectedMon
- 	farjp DisplayDexMonStats
+ 	farcall DisplayDexMonStats
+	jmp Pokedex_ColorGenderSymbols
 
 Moves_Page:
 	call Handle_Button_Banner
  	call Pokedex_GetSelectedMon
  	farcall DisplayDexMonMoves
+	call Pokedex_ColorGenderSymbols
  	ld a, [wCurPartySpecies]
  	ld [wCurSpecies], a
  	ld [wTempSpecies], a
@@ -690,6 +696,7 @@ Area_Page:
  	ld [hl], $60 ; MAP #3
 .button_done
  	farcall Pokedex_DetailedArea
+	call Pokedex_ColorGenderSymbols
  	call WaitBGMap
  	pop af
  	ld [wPrevDexEntryJumptableIndex], a ; same ram as wStatsScreenFlags
@@ -3365,6 +3372,72 @@ Pokedex_ScreenOff:
 	ldh [hBGMapMode], a
 	jmp DisableLCD
 
+Pokedex_ColorGenderSymbols:
+; The gender symbols in red (male) and blue (female): the area page's
+; traded-for gender at (7, 14) and the stats page's gender ratio on row 15.
+; They take BG palettes 2 and 3 (_CGB_Pokedex: the interface palette with
+; the text colour changed); anything else in those cells gets palette 0 back.
+; Pushes the maps if a cell changed. Preserves all registers.
+	push af
+	push bc
+	push de
+	push hl
+	ld e, 0 ; cells changed
+	hlcoord 7, 14
+	call .Cell
+	hlcoord 4, 15
+	ld d, 7 ; "1♂:1♀" and the like
+.loop
+	call .Cell
+	inc hl
+	dec d
+	jr nz, .loop
+	ld a, e
+	and a
+	jr z, .done
+	ld b, 3 ; tiles and attributes together
+	farcall _SafeCopyTilemapAtOnce
+.done
+	pop hl
+	pop de
+	pop bc
+	pop af
+	ret
+
+.Cell:
+; Tile at hl. Only a cell with the entry pages' plain attributes (VRAM bank
+; 0, palette 0, 2 or 3: not the evolution or pictures pages' graphics) gets
+; palette 2 for "♂", 3 for "♀", or 0 otherwise. e += 1 if it changed.
+; Preserves hl and d.
+	push hl
+	ld a, [hl]
+	push af
+	ld bc, wAttrmap - wTilemap
+	add hl, bc
+	pop bc ; b = tile
+	ld a, [hl]
+	cp 1
+	jr z, .cell_done
+	cp 4
+	jr nc, .cell_done ; another palette, bank 1 or flipped
+	ld c, 2
+	ld a, b
+	cp "♂"
+	jr z, .set
+	inc c
+	cp "♀"
+	jr z, .set
+	ld c, 0
+.set
+	ld a, c
+	cp [hl]
+	jr z, .cell_done
+	ld [hl], a
+	inc e
+.cell_done
+	pop hl
+	ret
+
 Pokedex_ScreenOn:
 ; Tiles, attributes, palettes, OAM and scroll straight to the hardware, then
 ; the LCD back on (the screen is built in wTilemap, wAttrmap, wBGPals2 etc.).
@@ -3716,6 +3789,7 @@ _NewPokedexEntry:
 	ld a, " "
 	call ByteFill
 	farcall DisplayDexEntry
+	call Pokedex_ColorGenderSymbols
 	call EnableLCD
 	call WaitBGMap
 	call GetBaseData
