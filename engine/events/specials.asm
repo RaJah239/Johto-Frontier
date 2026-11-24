@@ -298,7 +298,7 @@ PlayerGivesAwayAnEggForAdoption:
 
 	ld [wMonType], a ; PARTYMON
 	ld [wPokemonWithdrawDepositParameter], a ; REMOVE_PARTY
-	callfar AdoptMonFromParty
+	call AdoptMonFromParty
 	ret
 
 .not_an_egg:

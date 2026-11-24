@@ -1108,7 +1108,7 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clean clone of `936e0c1c1`, Linux, RGBDS 0.7.0, 0 warnings
-- Last completed task: PERF-001 (direct calls to home-bank routines)
+- Last completed task: PERF-002 (direct calls within one section)
 - Last verified commit: `936e0c1c1` (build: fix case-sensitive graphics paths and tool permissions)
 - Outstanding blockers: none
 - Next task: Phase 2: static checks for cross-bank calls, stack balance and interrupt safety
@@ -1152,6 +1152,7 @@ Maintain the following table.
 | ID | Routine or System | Optimisation | Before | After | Improvement | Verification |
 |---|---|---|---|---|---|---|
 | PERF-001 | Far calls into the home bank (9 sites: Neutralizing Gas, turn-end abilities, Curse, Pain Split, three item-effect font reloads, link trade, move learning) | `farcall`/`farjp` to a ROM0 routine replaced with `call`/`jmp` | `farcall`: 6 bytes, the FarCall path (two bank switches, bc saved through WRAM) | `call`: 3 bytes, no bank switch | Calculated: about 30 M-cycles saved per call; not measured (none of these is in a hot loop) | Full suite unchanged |
+| PERF-002 | 106 far calls whose caller and target are in the same SECTION (37 files: battle core, AI, events, Pokégear, Pokédex, menus and more) | `farcall`/`callfar`/`newfarcall` replaced with `call`, `farjp` with `jmp` (one `jr` where it reaches) | Far-call path: 4-6 bytes, two bank switches | Direct call: 3 bytes (2 for the `jr`) | Calculated: about 30-60 M-cycles saved per call; not measured | Full suite and the overworld comparison unchanged |
 
 Use unique identifiers such as PERF-001, PERF-002 and PERF-003.
 
@@ -1168,6 +1169,7 @@ Maintain the following table.
 | ID | Memory Region | Modification | Before | After | Bytes Saved | Verification |
 |---|---|---|---|---|---|---|
 | MEM-001 | ROMX | PERF-001 | 674,694 bytes free | 674,719 bytes free | 25 | Build `free_space.awk` |
+| MEM-002 | ROMX | PERF-002 | 674,719 bytes free | 674,986 bytes free | 267 | Build `free_space.awk` |
 
 Use unique identifiers such as MEM-001, MEM-002 and MEM-003.
 
@@ -1189,6 +1191,8 @@ Maintain the following table.
 | TEST-006 | Battle, Pokémon generation | `test_farcall_returns`: Taunt at the move menu (status move refused, damaging move and untaunted cases allowed); gift Unown letter in 0-25 and independent of c; gift non-Unown form 0 | Interpreter, run from the routines' own labels | Passed | 2/6 before the fix (the 4 bug cases failed), 6/6 after. Full suite unchanged otherwise. |
 | TEST-007 | Battle Tower | `test_bt_ot_sprite`: the opponent's map object gets the trainer class's sprite (3 object/class pairs), and no sprite load is made | Interpreter, from just after the routine's `LoadOpponentTrainerAndPokemon` call | Passed | 3/6 on the baseline ROM (the stray load seen with a = 0 and struct index $F3/$E0), 6/6 after. Full suite unchanged otherwise. |
 | TEST-008 | Whole codebase | Static scan for far calls whose target is in ROM0 | Python scan over every `.asm` with the `.sym` file; each callee checked for inputs in a or hl | Passed | 9 hits, none taking a or hl as input (so no wrong results); they ran with bank 1 mapped instead of the caller's bank, harmless here. Replaced by direct calls (PERF-001). |
+| TEST-009 | Whole codebase | Static scan for far calls inside one SECTION (always the same bank, wherever the linker puts it) and review of each for register use | Python scan using the `.map` file's section membership; for each `farcall`/`callfar` callee, its first instructions checked for reading a or hl, and each caller checked for reading a afterwards | Passed | 106 hits. No callee reads a or hl on entry (only `push`/`pop` saves or reloads); one caller ends with `ret` after the call (`PlayerGivesAwayAnEggForAdoption`, a special whose result is in `wScriptVar`). `newfarcall`/`farjp` pass every register through, so those are exact. |
+| TEST-010 | Overworld rendering | `test_overworld_screen_same` with the baseline ROM as the older build | Every map's screens drawn by the game's own code in both ROMs, all anchor steps and half-block offsets | Passed | 307 maps, 1,941,120 cells identical. `test_map_render_same` runs away decompressing a tileset even with the baseline against itself: it was written for the removed LZP format and is stale. `test_bug_contest_judging` fails its "smaller" case against itself too (it checks a size reduction from an old optimisation), its behaviour cases pass. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1346,6 +1350,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: none known.
 - Git commit message: `perf: call home-bank routines directly instead of through farcall`
 - Next task: continue the Phase 2 audit (stack balance and interrupt safety).
+
+### PERF-002 — Direct calls inside one section
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 2 (ROM banking), with a Phase 5/6 gain
+- System: 37 files across the battle engine, AI, events, menus, Pokégear and Pokédex
+- Files modified: the 37 files listed by `git show --stat` for this commit
+- Problem identified: 106 far calls between routines in the same SECTION (TEST-009). A section is never split across banks, so these always run in the current bank.
+- Root cause: far calls kept from code that once lived in other banks, or written defensively.
+- Solution implemented: plain `call`/`jmp` (and `jr` where the assembler's `jmp` check said it reaches). Only calls inside one section were changed, so the result stays valid however the linker moves sections later.
+- Behaviour preserved: yes. `farcall`/`callfar` callees got a = bank and hl = address before and never read them; no caller reads a after the call. `newfarcall`/`farjp` already passed all registers.
+- Performance impact: calculated about 30-60 M-cycles per call; not measured. Memory impact: 267 bytes of ROM freed (MEM-002).
+- Build result: builds, 0 assembler warnings, 674,986 bytes free.
+- Tests performed: TEST-009, TEST-010, full suite.
+- Test results: full suite unchanged (105 scripts); overworld comparison identical on all 307 maps.
+- Remaining risks: low; every site was checked by script and the flagged ones by hand.
+- Git commit message: `perf: use direct calls for far calls within the same section`
+- Next task: continue the Phase 2 audit (stack balance, interrupt safety).
 
 ## 31. Outstanding Issues
 

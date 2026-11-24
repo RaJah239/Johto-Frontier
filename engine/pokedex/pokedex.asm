@@ -966,7 +966,7 @@ IF USING_INCREASED_SPRITE_ANIMATION == FALSE
 	; the layout gives the pictures VRAM 1 attributes while the tilemap is
 	; still cleared: VRAM 1's space was the dex's black tile (black boxes
 	; until the pictures were drawn)
-	farcall Pokedex_LoadTextboxSpaceGFX
+	call Pokedex_LoadTextboxSpaceGFX
 
  	ld a, [wCurPartySpecies]
  	ld [wCurSpecies], a

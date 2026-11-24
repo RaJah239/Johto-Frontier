@@ -2656,7 +2656,7 @@ BillsPC_CanReleaseMon:
 	push hl
 	push de
 	push bc
-	newfarcall CheckCurPartyMonFainted
+	call CheckCurPartyMonFainted
 	pop bc
 	pop de
 	pop hl

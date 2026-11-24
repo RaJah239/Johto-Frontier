@@ -3386,7 +3386,7 @@ AI_Smart_PriorityHit:
 	callfar EnemyAttackDamage
 	callfar BattleCommand_DamageCalc
 	callfar BattleCommand_Stab
-	callfar AI_ApplyDoubleHit
+	call AI_ApplyDoubleHit
 	pop hl
 	ld a, [wCurDamage + 1]
 	ld c, a

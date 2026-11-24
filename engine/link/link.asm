@@ -919,9 +919,9 @@ LinkTrade_TradeStatsMenu:
 	call LinkTradePlaceArrow
 	ld c, 100
 	call DelayFrames
-	farcall ValidateOTTrademon
+	call ValidateOTTrademon
 	jr c, .abnormal
-	farcall CheckAnyOtherAliveMonsForTrade
+	call CheckAnyOtherAliveMonsForTrade
 	jmp nc, LinkTrade
 	xor a
 	ld [wUnusedLinkAction], a
@@ -1802,7 +1802,7 @@ TradeCenter:
 	ld a, LINK_TRADECENTER
 	ld [wLinkMode], a
 	call DisableSpriteUpdates
-	callfar LinkCommunications
+	call LinkCommunications
 	call EnableSpriteUpdates
 	xor a
 	ldh [hVBlank], a
@@ -1812,7 +1812,7 @@ Colosseum:
 	ld a, LINK_COLOSSEUM
 	ld [wLinkMode], a
 	call DisableSpriteUpdates
-	callfar LinkCommunications
+	call LinkCommunications
 	call EnableSpriteUpdates
 	xor a
 	ldh [hVBlank], a

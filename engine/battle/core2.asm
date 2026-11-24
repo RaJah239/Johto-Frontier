@@ -1,5 +1,5 @@
 InitBackPic:
-	farcall GetTrainerBackpic
+	call GetTrainerBackpic
 CopyBackpic:
 ; Also load the backpic into vTiles0 for the OAM copy. Loading it from
 ; its source again (GDMA) is much faster than copying it out of

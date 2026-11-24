@@ -251,7 +251,7 @@ InitPokegearTilemap:
 
 .return_from_jumptable
 	call Pokegear_FinishTilemap
-	farcall TownMapPals
+	call TownMapPals
 ; Draw to vBGMap0 and vBGMap1 in turn (wPokegearMapRegion), showing the one
 ; just drawn, so the screen never shows a half-drawn card.
 	ld a, [wPokegearMapRegion]
@@ -306,7 +306,7 @@ InitPokegearTilemap:
 	jmp Pokegear_UpdateClock
 
 .Map:
-	farcall PokegearMap
+	call PokegearMap
 	ld a, $07
 	ld bc, SCREEN_WIDTH - 2
 	hlcoord 1, 2
@@ -639,7 +639,7 @@ Pokegear_UpdateClock:
 	; given map info in 'de'
 	; return: string ptr in 'de'
 	; if 'de' is zero, no fishing group on map
-	farcall GetMapsFishGroup
+	call GetMapsFishGroup
 	ld a, d
 	and a
 	jr nz, .print_fish_group
@@ -1203,7 +1203,7 @@ PokegearPhone_MakePhoneCall:
 	ret
 
 .no_service
-	farcall Phone_NoSignal
+	call Phone_NoSignal
 	ld hl, .GearOutOfServiceText
 	call PrintText
 	ld a, POKEGEARSTATE_PHONEJOYPAD
@@ -1223,7 +1223,7 @@ PokegearPhone_FinishPhoneCall:
 	ldh a, [hJoyPressed]
 	and A_BUTTON | B_BUTTON
 	ret z
-	farcall HangUp
+	call HangUp
 	ld a, POKEGEARSTATE_PHONEJOYPAD
 	ld [wJumptableIndex], a
 	ld hl, PokegearAskWhoCallText
@@ -1374,7 +1374,7 @@ PokegearPhoneContactSubmenu:
 	ld d, 0
 	add hl, de
 	ld c, [hl]
-	farcall CheckCanDeletePhoneNumber
+	call CheckCanDeletePhoneNumber
 	ld a, c
 	and a
 	jr z, .cant_delete
@@ -2036,7 +2036,7 @@ _TownMap:
 	jr .loop2
 
 .InitTilemap:
-	farcall PokegearMap
+	call PokegearMap
 	ld a, $07
 	ld bc, 6
 	hlcoord 1, 0
@@ -2057,7 +2057,7 @@ _TownMap:
 	ld [hl], $17
 	ld a, [wTownMapCursorLandmark]
 	call PokegearMap_UpdateLandmarkName
-	farjp TownMapPals
+	jmp TownMapPals
 
 PlayRadio:
 	ld hl, wOptions

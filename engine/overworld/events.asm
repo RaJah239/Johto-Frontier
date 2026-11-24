@@ -119,7 +119,7 @@ MapEvents:
 	ret nz
 	call PlayerEvents
 	call DisableEvents
-	farjp ScriptEvents
+	jmp ScriptEvents
 
 NextOverworldFrame:
 	; If we haven't already performed a delay outside DelayFrame as a result
@@ -210,7 +210,7 @@ PlayerEvents:
 
 .ok
 	push af
-	farcall EnableScriptMode
+	call EnableScriptMode
 	pop af
 
 	ld [wScriptRunning], a
@@ -354,8 +354,8 @@ endr
 	ld hl, wScriptFlags
 	res 3, [hl]
 
-	farcall EnableScriptMode
-	farcall ScriptEvents
+	call EnableScriptMode
+	call ScriptEvents
 
 	ld hl, wScriptFlags
 	bit 3, [hl]
@@ -969,7 +969,7 @@ CountStep:
 	jr c, .doscript
 
 .skip_poison
-	farcall DoBikeStep
+	call DoBikeStep
 
 .done
 	xor a

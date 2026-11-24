@@ -35,13 +35,13 @@ QuickSaveGame::
 
 SaveAfterLinkTrade:
 	call PauseGameLogic
-	farcall StageRTCTimeForSave
+	call StageRTCTimeForSave
 	call SavePokemonData
 	call SaveChecksum
 	call SaveBackupPokemonData
 	call SaveBackupChecksum
 	farcall BackupPartyMonMail
-	farcall SaveRTC
+	call SaveRTC
 	; fallthrough
 
 ResumeGameLogic:
@@ -185,7 +185,7 @@ SavedTheGame:
 SaveGameData:
 	ld a, TRUE
 	ld [wSaveFileExists], a
-	farcall StageRTCTimeForSave
+	call StageRTCTimeForSave
 	call ValidateSave
 	call SaveOptions
 	call SavePlayerData
@@ -209,7 +209,7 @@ SaveGameData:
 
 	call SaveChecksum
 	call WriteBackupSave
-	farcall SaveRTC
+	call SaveRTC
 	jmp CloseSRAM ; just in case
 
 WriteBackupSave:
@@ -514,7 +514,7 @@ TryLoadSaveFile:
 	call z, WriteBackupSave
 	farcall RestorePartyMonMail
 	call LoadStorageSystem
-	farcall LoadFakeRTC
+	call LoadFakeRTC
 
 	; Just in case
 	call WriteBackupSave
@@ -528,7 +528,7 @@ TryLoadSaveFile:
 	call LoadBackupPokemonData
 	farcall RestorePartyMonMail
 	call LoadStorageSystem
-	farcall LoadFakeRTC
+	call LoadFakeRTC
 	call SaveGameData
 	and a
 	ret

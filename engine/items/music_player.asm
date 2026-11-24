@@ -15,7 +15,7 @@ DEF NUM_MUSICPLAYER_ROWS EQU const_value
 MusicPlayerFromMainMenu::
 	farcall BlankScreen
 	call LoadStandardFont
-	farjp _MusicPlayerFromMainMenu
+	jr _MusicPlayerFromMainMenu
 
 _MusicPlayer:
 	xor a

@@ -1415,7 +1415,7 @@ Script_reloadmapafterbattle:
 	jr z, Script_reloadmap
 	ld b, BANK(Script_SpecialBillCall)
 	ld de, Script_SpecialBillCall
-	farcall LoadMemScript
+	call LoadMemScript
 	; fallthrough
 
 Script_reloadmap:
@@ -2394,7 +2394,7 @@ Script_refreshmap::
 Script_warpcheck:
 	call WarpCheck
 	ret nc
-	farjp EnableEvents
+	jmp EnableEvents
 
 Script_newloadmap:
 	call GetScriptByte

@@ -126,14 +126,14 @@ INCLUDE "data/sprites/player_sprites.asm"
 
 LoadMiscTiles:
 	ld c, EMOTE_SHADOW
-	farcall LoadEmote
+	call LoadEmote
 	call GetMapEnvironment
 	call CheckOutdoorMap
 	ld c, EMOTE_GRASS_RUSTLE
 	jr z, .outdoor
 	ld c, EMOTE_BOULDER_DUST
 .outdoor
-	farcall LoadEmote
+	call LoadEmote
 	farjp LoadWeatherGraphics
 
 SafeGetSprite:

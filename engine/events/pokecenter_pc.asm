@@ -441,7 +441,7 @@ PlayersPCAskWhatDoText:
 
 PlayerWithdrawItemMenu:
 	call LoadStandardMenuHeader
-	farcall ClearPCItemScreen
+	call ClearPCItemScreen
 .loop
 	call PCItemsJoypad
 	jr c, .quit
@@ -516,7 +516,7 @@ PlayerWithdrawItemMenu:
 
 PlayerTossItemMenu:
 	call LoadStandardMenuHeader
-	farcall ClearPCItemScreen
+	call ClearPCItemScreen
 .loop
 	call PCItemsJoypad
 	jr c, .quit

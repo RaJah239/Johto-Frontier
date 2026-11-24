@@ -757,7 +757,7 @@ PartyMenuSelect:
 
 	push hl
 	farcall SwitchPartyMons
-	farcall WritePartyMenuTilemap
+	call WritePartyMenuTilemap
 	call PlacePartyMenuText
 	pop hl
 	jr PartyMenuSelect

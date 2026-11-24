@@ -7164,8 +7164,8 @@ GiveExperiencePoints:
 	xor a ; FALSE
 	ld [wApplyStatLevelMultipliersToEnemy], a
 	call ApplyStatLevelMultiplierOnAllStats
-	callfar ApplyStatusEffectOnPlayerStats
-	callfar UpdatePlayerHUD
+	call ApplyStatusEffectOnPlayerStats
+	call UpdatePlayerHUD
 	call EmptyBattleTextbox_LoadTilemapToTempTilemap
 	ld a, $1
 	ldh [hBGMapMode], a
@@ -8286,7 +8286,7 @@ BattleStartMessage:
 	call Call_PlayBattleAnim
 
 .not_shiny
-	farcall CheckSleepingTreeMon
+	call CheckSleepingTreeMon
 	jr c, .skip_cry
 
 	farcall CheckBattleScene

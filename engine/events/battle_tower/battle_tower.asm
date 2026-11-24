@@ -1,7 +1,7 @@
 BattleTowerRoomMenu:
 ; special
 	call InitBattleTowerChallengeRAM
-	farjp _BattleTowerRoomMenu
+	jmp _BattleTowerRoomMenu
 
 BattleTowerBattle:
 	xor a ; FALSE
@@ -91,7 +91,7 @@ ReadBTTrainerParty:
 ; with their species names.
 	ld de, wBT_OTTempMon1Name
 	ld c, MON_NAME_LENGTH
-	farcall CheckStringForErrors
+	call CheckStringForErrors
 	jr nc, .skip_mon_1
 
 	ld a, [wBT_OTTempMon1]
@@ -106,7 +106,7 @@ ReadBTTrainerParty:
 .skip_mon_1
 	ld de, wBT_OTTempMon2Name
 	ld c, MON_NAME_LENGTH
-	farcall CheckStringForErrors
+	call CheckStringForErrors
 	jr nc, .skip_mon_2
 	ld a, [wBT_OTTempMon2]
 	ld [wNamedObjectIndex], a
@@ -120,7 +120,7 @@ ReadBTTrainerParty:
 .skip_mon_2
 	ld de, wBT_OTTempMon3Name
 	ld c, MON_NAME_LENGTH
-	farcall CheckStringForErrors
+	call CheckStringForErrors
 	jr nc, .skip_mon_3
 	ld a, [wBT_OTTempMon3]
 	ld [wNamedObjectIndex], a
@@ -142,7 +142,7 @@ ReadBTTrainerParty:
 ; Repair the trainer name if needed, then copy it to wOTPlayerName
 	ld de, wBT_OTTempName
 	ld c, NAME_LENGTH - 1
-	farcall CheckStringForErrors
+	call CheckStringForErrors
 	jr nc, .trainer_name_okay
 	ld hl, BT_ChrisName
 	jr .done_trainer_name

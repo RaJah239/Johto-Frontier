@@ -270,7 +270,7 @@ AI_Basic:
 	callfar EnemyAttackDamage
 	callfar BattleCommand_DamageCalc
 	callfar BattleCommand_Stab
-	callfar AI_ApplyDoubleHit
+	call AI_ApplyDoubleHit
 	ld a, [wCurDamage + 1]
 	ld c, a ; c is curDamage upper
 	ld a, [wCurDamage]

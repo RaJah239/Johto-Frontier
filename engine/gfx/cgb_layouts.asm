@@ -496,7 +496,7 @@ IF USE_GEN3_STYLE_TYPE_GFX == TRUE
  ; load the 1st type pal 
  	; type index is already in c
  	ld de, wBGPals1 palette 7 + 2 ; slot 2 of pal 7
- 	farcall LoadMonBaseTypePal	; loads type color into slot 2 of pal 7
+ 	call LoadMonBaseTypePal	; loads type color into slot 2 of pal 7
 ENDC
 
  ; mon type 2
@@ -526,7 +526,7 @@ IF USE_GEN3_STYLE_TYPE_GFX == TRUE
  ; load the 2nd type pal 
  	; type index is already in c
  	ld de, wBGPals1 palette 7 + 4 ; slot 3 of pal 7
-	farcall LoadMonBaseTypePal ; loads type color into slot 3 of pal 7
+	call LoadMonBaseTypePal ; loads type color into slot 3 of pal 7
  	jr .got_palette
 ENDC
 

@@ -813,7 +813,7 @@ ENDC
 	jr .return_from_capture
 
 .catch_bug_contest_mon
-	farcall BugContest_SetCaughtContestMon
+	call BugContest_SetCaughtContestMon
 	jr .return_from_capture
 
 .FinishTutorial:
@@ -1365,7 +1365,7 @@ ReturnToBattle_UseBall:
 	farjp _ReturnToBattle_UseBall
 
 BicycleEffect:
-	farjp BikeFunction
+	jmp BikeFunction
 
 EvoStoneEffect:
 	ld b, PARTYMENUACTION_EVO_STONE
@@ -2518,7 +2518,7 @@ Softboiled_MilkDrinkFunction:
 EscapeRopeEffect:
 	xor a
 	ld [wItemEffectSucceeded], a
-	farcall EscapeRopeFunction
+	call EscapeRopeFunction
 
 	ld a, [wItemEffectSucceeded]
 	cp 1
@@ -2624,7 +2624,7 @@ SuperRodEffect:
 	; fallthrough
 
 UseRod:
-	farjp FishFunction
+	jmp FishFunction
 
 ItemfinderEffect:
 	farjp ItemFinder
@@ -3254,32 +3254,32 @@ GetMthMoveOfCurrentMon:
 ScytherCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
-	farjp CutFunction
+	jmp CutFunction
 
 LanturnCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
-	farjp SurfFunction
+	jmp SurfFunction
 
 DonphanCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
-	farjp StrengthFunction
+	jmp StrengthFunction
 
 MareepCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
-	farjp FlashFunction
+	jmp FlashFunction
 
 KingdraCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
-	farjp WhirlpoolFunction
+	jmp WhirlpoolFunction
 
 MiloticCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
-	farjp WaterfallFunction
+	jmp WaterfallFunction
 
 TangelaCallEffect:
 	ld a, 1
@@ -3289,17 +3289,17 @@ TangelaCallEffect:
 TaurosCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
-	farjp TaurosCallFunction
+	jmp TaurosCallFunction
 
 GalladeCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
-	farjp GalladeCallFunction
+	jmp GalladeCallFunction
 
 PidgeotCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
-	farjp PidgeotCallFunction
+	jmp PidgeotCallFunction
 
 HyperEVUpEffect:
 	ld b, PARTYMENUACTION_HEALING_ITEM
@@ -3500,10 +3500,10 @@ CheckFieldActions:
 	ret
 
 NomadSigilEffect:
-	farjp NomadSigilFunction
+	jmp NomadSigilFunction
 
 PocketPCEffect:
-	farjp PocketPCFunction
+	jmp PocketPCFunction
 
 AmbrosiaEffect:
     ld a, [wEnvironment]
