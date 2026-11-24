@@ -8,8 +8,14 @@ LoadPokemonPalette:
 	jmp FarCopyWRAM
 
 LoadPokepicPalette:
-; LoadPokemonPalette, but in the shiny colours for a wild mon whose pokepic
-; DVs (PrerollWildPokepic) are shiny.
+; LoadPokemonPalette, but in the shiny colours when asked for
+; (wPokepicShiny, used up here) or for a wild mon whose pokepic DVs
+; (PrerollWildPokepic) are shiny.
+	ld hl, wPokepicShiny
+	ld a, [hl]
+	ld [hl], 0
+	and a
+	jr nz, .shiny
 	ld a, [wPokepicWildSpecies]
 	ld hl, wCurPartySpecies
 	cp [hl]
@@ -18,6 +24,17 @@ LoadPokepicPalette:
 	ld bc, wPokepicWildDVs
 	call GetMonNormalOrShinyPalettePointer
 	pop de
+	jr .copy
+
+.shiny
+	ld a, [wCurPartySpecies]
+	push de
+	call _GetMonPalettePointer
+	pop de
+rept 4
+	inc hl
+endr
+.copy
 	ld bc, PAL_COLOR_SIZE * 2
 	ld a, BANK(wBGPals1)
 	jmp FarCopyWRAM

@@ -1500,6 +1500,12 @@ ENDM
 
 DEF NUM_EVENT_COMMANDS EQU const_value
 
+MACRO shinypokepic
+	setval TRUE
+	writemem wPokepicShiny
+	pokepic \1
+ENDM
+
 MACRO wildpokepic
 ; The pokepic of a wild mon about to be battled: its DVs are rolled now, so
 ; it shows in its shiny colours if it's going to be shiny.

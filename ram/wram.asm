@@ -2787,8 +2787,9 @@ wStartMenuOrderSaved:: ds (NUM_START_MENU_SLOTS + 1) / 2
 ; (PrerollWildPokepic); its battle uses them. 0: none.
 wPokepicWildSpecies:: db
 wPokepicWildDVs:: dw
+wPokepicShiny:: db
 
-	ds 128 - (NUM_START_MENU_SLOTS + 1) / 2 - 3
+	ds 128 - (NUM_START_MENU_SLOTS + 1) / 2 - 4
 
 wCelebiEvent::
 ; bit 2: forest is restless

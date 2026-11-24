@@ -386,7 +386,7 @@ PorygonPCScript:
 	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
-	pokepic PORYGON
+	shinypokepic PORYGON
 	cry PORYGON
 	waitsfx
 	closepokepic
