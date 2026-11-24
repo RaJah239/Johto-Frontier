@@ -11,7 +11,6 @@
 - Option to Hold "A" for 30 frames or 1 second to rapid-fire "A" - ~7.5 "A" presses per second
 - Option to Hold "B" to rapid-fire "B" - ~7.5 "B" presses per second
 - Option to Hold "Start" for 30 frames to save the game in the overworld
-- "Pokemon" menu is now the default selected option in the Start menu
 - View Pokédex entry of selected Pokémon in Menu
 - Time, day and weather added to Start Menu
 - Evening added as the fourth time of day (morning: 5am, day: 10am, evening: 5pm, night: 8pm)

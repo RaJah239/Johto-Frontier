@@ -31,8 +31,6 @@ StartMenu::
 	call LoadMenuHeader
 	call .SetUpMenuItems
 	ld a, [wBattleMenuCursorPosition]
-	and a
-	call z, AEqualsTwo
 	ld [wMenuCursorPosition], a
 	call .DrawDayTimeBox
 
@@ -601,10 +599,6 @@ endr
 	ret z
 .contest
 	farjp StartMenu_PrintBugContestStatus
-
-AEqualsTwo:
-	ld a, 2
-	ret
 
 StartMenu_Warp:
 	call Fast_Travel_Warp
