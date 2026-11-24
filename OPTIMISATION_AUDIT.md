@@ -896,15 +896,15 @@ Complete the project systematically using the following phases.
 
 ### Phase 1 — Repository Analysis and Baseline
 
-- [ ] Understand repository architecture.
-- [ ] Inspect build system.
-- [ ] Establish baseline build.
-- [ ] Record ROM usage.
-- [ ] Record WRAM usage.
-- [ ] Record HRAM usage.
-- [ ] Record SRAM usage.
-- [ ] Record compiler warnings.
-- [ ] Identify available testing tools.
+- [x] Understand repository architecture.
+- [x] Inspect build system.
+- [x] Establish baseline build.
+- [x] Record ROM usage.
+- [x] Record WRAM usage.
+- [x] Record HRAM usage.
+- [x] Record SRAM usage.
+- [x] Record compiler warnings.
+- [x] Identify available testing tools.
 - [ ] Identify major performance bottlenecks.
 - [ ] Establish audit infrastructure.
 - [ ] Commit baseline documentation.
@@ -1060,39 +1060,43 @@ Populate this section during the initial audit.
 
 | Measurement | Baseline | Current | Final |
 |---|---|---|---|
-| Git commit | Pending | Pending | Pending |
-| RGBDS version | Pending | Pending | Pending |
-| Build status | Pending | Pending | Pending |
-| Total ROM size | Pending | Pending | Pending |
-| Used ROM space | Pending | Pending | Pending |
-| Free ROM space | Pending | Pending | Pending |
-| WRAM usage | Pending | Pending | Pending |
-| HRAM usage | Pending | Pending | Pending |
-| SRAM usage | Pending | Pending | Pending |
-| Compiler warnings | Pending | Pending | Pending |
-| Automated tests | Pending | Pending | Pending |
+| Git commit | `aa0134723` (+ BUG-001/002 build fixes, ROM unchanged) | `936e0c1c1` | Pending |
+| RGBDS version | 0.7.0 (rgbasm/rgblink/rgbfix/rgbgfx) | 0.7.0 | Pending |
+| Build status | Fails on a clean case-sensitive checkout (BUG-001/002); builds after the fixes | Builds | Pending |
+| Total ROM size | 2,097,152 bytes (2 MiB, 128 banks, MBC3+RAM+battery+timer) | Same | Pending |
+| Used ROM space | 1,422,490 bytes (ROM0 16,042 + ROMX 1,406,448) | Same | Pending |
+| Free ROM space | 674,662 bytes (32.17%; ROM0 342, ROMX 674,320) | Same | Pending |
+| WRAM usage | WRAM0 4,096/4,096 (0 free); WRAMX 28,476/28,672 (196 free: bank 2 $54, bank 5 $70, banks 1/3/4/6/7 full) | Same | Pending |
+| HRAM usage | 125/127 bytes (2 free) | Same | Pending |
+| SRAM usage | 32,155/32,768 bytes (613 free: bank 0 $220, bank 1 $29, banks 2/3 $0E each) | Same | Pending |
+| Compiler warnings | 0 (full build log) | 0 | Pending |
+| Automated tests | 108 interpreter test scripts: 84 fully pass, 4 partly pass, 12 crash on renamed/removed symbols, 8 report in other formats (see TEST-002) | Same | Pending |
+
+Baseline ROM (`johtofrontier.gbc` MD5 `3142da94d2e5cde28cb9df2c79ff8d8b`, built on Linux from the fixed clean clone), its `.sym` and `.map` are kept outside the repository for before/after comparisons.
 
 ### Build Environment
 
-- Build command: Pending
-- Clean build command: Pending
-- Testing commands: Pending
-- Emulator tools: Pending
-- Profiling tools: Pending
-- Validation tools: Pending
+- Build command: `make -j4` (RGBDS 0.7.0 on `PATH`, or `make RGBDS=<dir>/`). Builds `johtofrontier.gbc` and prints the free space (`tools/free_space.awk`).
+- Clean build command: `make clean && make -j4`, or a fresh `git clone` followed by `make -j4` (as done for the baseline).
+- Debug ROM: `make debug` (`johtofrontier_debug.gbc`).
+- Testing commands: `python3 .claude-tools/romtest/<test>.py .claude-tools/romtest <dir with johtofrontier.gbc/.sym>`. The tests load the built ROM and symbol file and run real routines on a Python SM83 interpreter (`sm83.py`, `romlib.py`). `gbrender.py` renders screens built by the routines (tilemap, attrmap, VRAM, palettes) to PNG files. `.claude-tools/` is excluded from Git (`.git/info/exclude`), so the tools live only in the working copy.
+- Emulator tools: none available in the build environment (no headless emulator). Interpreter tests and renders are not an emulator: VBlank/HBlank and DMA are emulated by hooks, not by real timing.
+- Profiling tools: `perfkit.py` (battle/AI M-cycle counting), `prof_frame.py`, `prof_overworld.py`, `prof_mapentry.py`, `prof_pc_step.py`, `prof_vblank.py`, `prof_blockdata.py` (M-cycles per frame/step/map entry), `test_ai_perf.py` (AI frame cost).
+- Validation tools: `test_ability_lists.py`, `test_basedata_layout.py`, `test_tileset_data.py`, `test_tileset_tables.py`, `test_decompress_all.py` and the table-length `assert`s in the source.
+- Physical hardware testing: not available.
 
 ## 25. Current Project Status
 
-- Overall status: Not started
-- Current phase: Phase 1
-- Current task: Initial repository analysis
-- Current AI agent: Pending
-- Current Git branch: Pending
-- Last verified build: Pending
-- Last completed task: None
-- Last verified commit: Pending
-- Outstanding blockers: None recorded
-- Next task: Establish repository baseline
+- Overall status: In progress
+- Current phase: Phase 1 (finishing), then Phase 2
+- Current task: commit the baseline documentation; then investigate the partly passing tests (TEST-002)
+- Current AI agent: Claude (Claude Code)
+- Current Git branch: `000-Johto-Frontier`
+- Last verified build: clean clone of `936e0c1c1`, Linux, RGBDS 0.7.0, 0 warnings
+- Last completed task: BUILD-001 (BUG-001, BUG-002)
+- Last verified commit: `936e0c1c1` (build: fix case-sensitive graphics paths and tool permissions)
+- Outstanding blockers: none
+- Next task: Phase 2: investigate the four partly passing tests, then the stability audit
 
 Update this section continuously.
 
@@ -1158,6 +1162,7 @@ Maintain the following table.
 | Test ID | System | Test Description | Test Method | Result | Notes |
 |---|---|---|---|---|---|
 | TEST-001 | Build | Clean `git clone` of the repository built from scratch on Linux (case-sensitive filesystem) | `make -j4` with RGBDS 0.7.0 | Passed (after BUG-001/002) | Failed before the fixes |
+| TEST-002 | All | Baseline run of every interpreter test (108 scripts) against the baseline ROM | `python3 <test>.py` per script, 60 s timeout each | Partially verified | 84 pass fully. Partly passing: `test_ai_anti_boost` 11/15, `test_ai_speed_boost` 7/8, `test_dex_option_no_color` 7/8, `test_nevermelt_ice2` 3/5 (to investigate, Phase 2). Crashing on symbols that no longer exist (features renamed or reverted): `test_dex_white_screen`, `test_evo_spotlight`, `test_gale_wings`, `test_gale_wings_ai`, `test_lzp`, `test_menu_gray_bg`, `test_music_speed`, `test_pc_unown_icon`, `test_status_icon_reload`, `test_teleport`, `test_type_chart_scan`, `test_view_animations`. Other output formats (comparison tests skipped without an older build, profilers printing measurements): `test_bug_contest_judging`, `test_map_blocks`, `test_map_render_same`, `test_map_weather`, `test_options5_save`, `test_overworld_screen_same`, `test_type_chart_screen`, `test_voltorb_turbo_b` |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1236,6 +1241,11 @@ Maintain a list of:
 - Issues requiring user approval.
 
 Do not silently ignore unresolved issues.
+
+- Partly passing tests to investigate (possible bugs or stale expectations): `test_ai_anti_boost` (11/15), `test_ai_speed_boost` (7/8), `test_dex_option_no_color` (7/8), `test_nevermelt_ice2` (3/5).
+- 12 stale tests crash on symbols that no longer exist (see TEST-002); they need updating or retiring so the suite can be used as a regression gate.
+- No emulator or physical hardware is available here: VBlank/HBlank timing, DMA and real-hardware behaviour can only be checked in the interpreter with emulated hooks. Anything timing-sensitive needs manual emulator testing (Section 32).
+- WRAM0 and WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
 
 ## 32. Manual Testing Checklist
 
