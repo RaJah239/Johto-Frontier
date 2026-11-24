@@ -542,34 +542,96 @@ GetWarpDestCoords::
 	ret
 
 LoadBlockData::
-; Clear only the part of wOverworldMapBlocks this map uses, (width + 6) *
-; (height + 6) blocks, not all 1300 bytes: this runs on every map connection,
-; where every instruction counts towards the frame the step loses.
+; Fill wOverworldMapBlocks for this map: its blocks inside a 3-block border of
+; zeros (drawn as the border block), then the connection strips. The map is
+; copied row by row, writing the zeros between rows in the same pass, so only
+; the border above and below needs clearing first. This runs on every map
+; connection, where every instruction counts towards the frame the step
+; loses. (ChangeMap, for changemapblocks, still only copies the map.)
 	ld a, [wMapWidth]
+	ldh [hConnectedMapWidth], a
 	add 6
-	ld e, a
-	ld d, 0
-	ld a, [wMapHeight]
-	add 6
-	ld hl, 0
-.size_loop
-	add hl, de
-	dec a
-	jr nz, .size_loop
-	; never more than the buffer
-	ld a, l
-	sub LOW(wOverworldMapBlocksEnd - wOverworldMapBlocks)
-	ld a, h
-	sbc HIGH(wOverworldMapBlocksEnd - wOverworldMapBlocks)
-	jr c, .size_ok
-	ld hl, wOverworldMapBlocksEnd - wOverworldMapBlocks
-.size_ok
+	ldh [hConnectionStripLength], a
+
+	; the border above the map and its first row's left border:
+	; 3 * (width + 6) + 3 zeros
+	ld c, a
+	ld b, 0
+	ld hl, 3
+	add hl, bc
+	add hl, bc
+	add hl, bc
 	ld b, h
 	ld c, l
 	ld hl, wOverworldMapBlocks
 	xor a
 	call ByteFill
-	call ChangeMap
+
+	ldh a, [hROMBank]
+	push af
+	ld a, [wMapBlocksBank]
+	rst Bankswitch
+	ld a, [wMapBlocksPointer]
+	ld e, a
+	ld a, [wMapBlocksPointer + 1]
+	ld d, a
+	ld a, [wMapHeight]
+	ld b, a
+.row
+	ldh a, [hConnectedMapWidth]
+	ld c, a
+	and 3
+	jr z, .fours
+.one
+	; the first width % 4 blocks one at a time
+	ld a, [de]
+	inc de
+	ld [hli], a
+	dec c
+	ld a, c
+	and 3
+	jr nz, .one
+.fours
+	ld a, c
+	and a
+	jr z, .row_done
+	srl c
+	srl c
+.four
+rept 4
+	ld a, [de]
+	inc de
+	ld [hli], a
+endr
+	dec c
+	jr nz, .four
+.row_done
+	; this row's right border and the next row's left border
+	xor a
+rept 6
+	ld [hli], a
+endr
+	dec b
+	jr nz, .row
+
+	pop af
+	rst Bankswitch
+
+	; the rest of the border below the map: 3 * (width + 6) - 3 zeros
+	push hl
+	ldh a, [hConnectionStripLength]
+	ld c, a
+	ld b, 0
+	ld hl, -3
+	add hl, bc
+	add hl, bc
+	add hl, bc
+	ld b, h
+	ld c, l
+	pop hl
+	xor a
+	call ByteFill
+
 	call FillMapConnections
 	ld a, MAPCALLBACK_TILES
 	jmp RunMapCallback
@@ -755,11 +817,10 @@ FillSouthConnectionStrip::
 
 FillWestConnectionStrip::
 FillEastConnectionStrip::
-.loop
 	ld a, [wMapWidth]
 	add 6
 	ldh [hConnectedMapWidth], a
-
+.loop
 	push de
 
 	push hl
