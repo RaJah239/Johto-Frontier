@@ -2322,7 +2322,7 @@ CriticalAttackStat:
 ; and in accuracy (BattleCommand_CheckHit.StatModifiers, effect_commands_far):
 ; - when it attacks: the target's evasion stage
 ; - when it is attacked: the attacker's accuracy stage
-;   (Snow Cloak / Fade In still add their evasion: abilities, not stages)
+;   (Snow Cloak still adds its evasion: an ability, not a stage)
 ; Raised and lowered stages alike. Burn / frostbite still halve the
 ; attacker's stat. PlayerAttackDamage / EnemyAttackDamage apply it, so the
 ; AI's damage estimates and the move info damage preview see it too.

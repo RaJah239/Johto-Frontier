@@ -481,10 +481,6 @@ _BattleCommand_CheckHit:
 	call nc, SnowCloak
 
 .finish_foe_snow_cloak
-	ld a, [wEnemyMonSpecies] ; the target (it was the attacker's species)
-	call IsSpeciesSuppressed ; (Neutralizing Gas)
-	call nc, FadeIn
-
 	ldh a, [hBattleTurn]
 	and a
 	jr z, .got_acc_eva
@@ -504,10 +500,6 @@ _BattleCommand_CheckHit:
 	call nc, SnowCloak
 
 .finish_player_snow_cloak
-	ld a, [wBattleMonSpecies] ; the target (it was the attacker's species)
-	call IsSpeciesSuppressed ; (Neutralizing Gas)
-	call nc, FadeIn
-
 .got_acc_eva
 	ld a, c
 	cp b
@@ -569,21 +561,22 @@ _BattleCommand_CheckHit:
 	dec d
 	jr nz, .accuracy_loop
 
-; ==========================
-; === Ability: Keen Eyes ===
-; ==========================
-	call GetCurrentMon
-	ld hl, KeenEyesMons
-	call IsInByteArray
-	jr nc, .skip_keen_eyes
-
+; =========================
+; === Ability: Keen Eye ===
+; =========================
+; The attacker's moves are 1.3x as accurate, unless Neutralizing Gas
+; suppresses its ability.
 	ldh a, [hBattleTurn]
 	call IsSideSuppressed
-	jr c, .skip_keen_eyes ; suppressed by Neutralizing Gas
+	jr c, .skip_keen_eye
+	call GetCurrentMon
+	ld hl, KeenEyePokemon
+	call IsInByteArray
+	jr nc, .skip_keen_eye
 	ld a, 130
 	call AccuracyCalc
 
-.skip_keen_eyes
+.skip_keen_eye
 	; if the result is more than 2 bytes, max out at 100%
 	ldh a, [hQuotient + 2]
 	and a
@@ -623,7 +616,7 @@ AccuracyCalc:
 	jmp Divide
 
 IncrementC:
-; For FadeIn / SnowCloak (their lists call z, IncrementC):
+; For SnowCloak (its list calls z, IncrementC):
 ; it has to be in this bank
 	inc c
 	ret
@@ -639,9 +632,8 @@ INCLUDE "data/abilities/hypnotic_aura_mons.asm"
 INCLUDE "data/abilities/lullaby_mastery_mons.asm"
 INCLUDE "data/abilities/meteor_lock_mons.asm"
 
-INCLUDE "data/abilities/fade_in_mons.asm"
 INCLUDE "data/abilities/snow_cloak_mons.asm"
-INCLUDE "data/abilities/keen_eyes_mons.asm"
+INCLUDE "data/abilities/keen_eye_mons.asm"
 
 INCLUDE "data/battle/accuracy_multipliers.asm"
 

@@ -1,8 +1,6 @@
-; List of all Pokemon that always have their evasion increased by 1 stage
+; List of all Pokemon that when switched in, increases evasion by 1 stage
 
-FadeIn:
-;   cp CROBAT
-;   call z, IncrementC
-;   cp SNEASEL
-;   call z, IncrementC
-    ret
+FadeInPokemon:
+;	db CROBAT
+;	db SNEASEL
+	db -1 ; end

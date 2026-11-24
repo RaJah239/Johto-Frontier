@@ -250,6 +250,7 @@ EntryAbilityHandlers:
 	dw HandleInfernalHowl
 	dw HandleBattleStance
 	dw HandleBattleDrive
+	dw HandleFadeIn
 	dw HandleDownload
 	dw HandleTrueSight
 	dw HandleFogOfWar
@@ -534,6 +535,18 @@ HandleBattleDrive:
 
 BattleDrivePopupText: db "Battle Drive@"
 INCLUDE "data/abilities/battle_drive_mons.asm"
+
+HandleFadeIn:
+	ld hl, FadeInPokemon
+	call CurMonInList
+	ret nc
+	ld de, FadeInPopupText
+	call ShowEntryAbilityPopup
+	farcall BattleCommand_EvasionUp
+	farjp BattleCommand_StatUpMessage
+
+FadeInPopupText: db "Fade In@"
+INCLUDE "data/abilities/fade_in_mons.asm"
 
 HandleDownload:
 ; Raise Attack if the foe's Defense is lower than its Sp. Def,
