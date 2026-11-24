@@ -2,6 +2,7 @@ FarTurnEndEffects:
 	call HandleMysteryberry
 	call HandleStatBoostingHeldItems
 	call HandleWeatherItem
+	farcall SnowCloakCheck ; (hail from the field, a shard, or a mon that lost its Neutralizing Gas foe)
 	call HandleSafeguard
 	call HandleMist
 	call HandleScreens

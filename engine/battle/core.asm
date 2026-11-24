@@ -109,6 +109,7 @@ DoBattle:
 .skipEffects
 	farcall StartBattleEntryAbilities
 	farcall FieldWeather
+	farcall SnowCloakCheck
 	farcall GetTimeOfDayImage
 	; fallthrough
 

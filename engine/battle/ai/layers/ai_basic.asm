@@ -330,6 +330,7 @@ AI_Basic:
 	pop hl
 	jr c, .accurate_move
 	ld a, [wEnemyMoveStruct + MOVE_ACC]
+	newfarcall AI_KeenEyeAccuracy
 	cp 100 percent
 	jr c, .not_accurate
 

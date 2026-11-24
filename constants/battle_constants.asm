@@ -134,6 +134,7 @@ DEF SPDSPCDV_SHINY EQU $FF
 	const SEND_OUT_POPUP_GALE_WINGS
 	const SEND_OUT_POPUP_IRON_HEAD
 	const SEND_OUT_POPUP_ZEN_HEADBUTT
+	const SEND_OUT_POPUP_SNOW_CLOAK ; its evasion boost has gone off
 DEF NUM_SEND_OUT_POPUPS EQU const_value
 
 ; wEntryAbilitiesPending bits (engine/abilities/entry_abilities.asm)

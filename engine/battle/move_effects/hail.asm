@@ -11,7 +11,8 @@ BattleCommand_StartHail:
 	ld [wWeatherCount], a
 	farcall AnimateCurrentMove
 	ld hl, ItStartedToHailText
-	jmp StdBattleTextbox
+	call StdBattleTextbox
+	farjp SnowCloakCheck
 
 .failed
 	farcall AnimateFailedMove

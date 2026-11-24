@@ -22,7 +22,7 @@
 ; - Natural Cure: no status;
 ; - Seedfall: Leech Seed on the player's mon;
 ; - stat stages: Defense Mode, Fortify, Battle Stance, Battle Drive,
-;   Download (its own); Intimidate, Stifling Aura, Infernal Howl (the
+;   Download, Fade In (its own); Intimidate, Stifling Aura, Infernal Howl (the
 ;   player's: not through a Substitute, Resilience, and not Intimidate on
 ;   Scrappy / Oblivious; Contrary turns them around); Fog of War (resets
 ;   the player's raised stats);
@@ -33,6 +33,8 @@
 ; - Provocateur (Taunt: the player's heal moves don't count), Allure
 ;   (infatuated: the player's hits count half), Imposter (a copy of the
 ;   player's mon: species, moves, types, stats and stat stages).
+; - Snow Cloak: +1 evasion if hail is up once its ability and shard have
+;   gone off (it has only just come in, so its boost is still to come).
 ; Chaotic Boost's stat is random: MSim_TryCandidate counts it as a small
 ; bonus instead (IsChaoticBoostActive_Far).
 ; Not simulated: hazard layers (they don't matter in a 1-on-1), Sanctuary.
@@ -42,13 +44,28 @@ DEF MSIM_DEF EQU 1
 DEF MSIM_SPD EQU 2
 DEF MSIM_SAT EQU 3
 DEF MSIM_SDF EQU 4
+DEF MSIM_ACC EQU 5
+DEF MSIM_EVA EQU 6
 
 MSim_EntryEffects::
 ; (before MSim_LoadCandidate works out the candidate's stats)
 ; The candidate's entry ability, then its held weather shard (in the game
 ; the entry items run after every entry ability).
 	call MSim_EntryAbilities
+	call MSim_EntryShard
 	; fallthrough
+
+MSim_EntrySnowCloak:
+; +1 evasion if it has Snow Cloak (not suppressed) and hail is up.
+	ld a, [wBattleWeather]
+	cp WEATHER_HAIL
+	ret nz
+	ld a, [wEnemyMonSpecies]
+	ld hl, SnowCloakPokemon
+	call IsInAbilityList
+	ret nc
+	lb bc, MSIM_EVA, 1
+	jmp MSim_EntryAbilities.raise_own
 
 MSim_EntryShard:
 ; If the candidate holds a weather shard and its weather isn't up yet: set it
@@ -176,6 +193,10 @@ MSim_EntryAbilities:
 	ld hl, BattleDrivePokemon
 	call .has
 	lb bc, MSIM_ATK, 1
+	call c, .raise_own
+	ld hl, FadeInPokemon
+	call .has
+	lb bc, MSIM_EVA, 1
 	call c, .raise_own
 	ld hl, DownloadPokemon
 	call .has

@@ -58,7 +58,7 @@ A move is strongly avoided when:
 If it's Encored, it sticks with the move it's locked into.
 
 **Knock-out bonus:** a move that would knock you out (strongest roll) gets a bonus. The bonus depends on the move:
-- **biggest:** a 100% accurate move
+- **biggest:** a 100% accurate move (counting Keen Eye's 1.3x accuracy, unless your Neutralizing Gas switches it off)
 - **smaller:** a recoil move (no recoil penalty with Rock Head)
 - **smaller still:** a less accurate move
 - **smallest:** Explosion, or any attack when it's at 1/4 HP or less and has a healing move (so it still considers healing)
@@ -91,7 +91,7 @@ Each kind of move gets its own check. The main ones:
   - against Magic Bounce, attacks that may inflict a status (Flamethrower, Thunderbolt…) get no bonus for it, and are slightly avoided if the status would bounce back onto its own Pokémon (more so when the status is certain, like Kindle Flamethrower or Sure Shock Thunderbolt)
 - **Weather:**
   - Rain Dance, Sunny Day, Sandstorm and Hail aren't used when that weather is already up
-  - they're favoured when its own Pokémon gains from them: Swift Swim, Rain Dish and Hydration in rain; Chlorophyll, Solar Power, Photosynthesis, Leaf Guard (against a status user) and Harvest with a Berry in sun; Sand Rush and Sand Body in sand; Slush Rush and Ice Body in hail
+  - they're favoured when its own Pokémon gains from them: Swift Swim, Rain Dish and Hydration in rain; Chlorophyll, Solar Power, Photosynthesis, Leaf Guard (against a status user) and Harvest with a Berry in sun; Sand Rush and Sand Body in sand; Slush Rush, Ice Body and Snow Cloak (before its evasion boost has gone off) in hail
   - they're avoided when the weather would help **your** Pokémon instead (the same abilities on your side)
   - when the sun gives your Pokémon Leaf Guard and it has status moves, it uses another weather to end the sun
   - Solar Beam is favoured in sun and avoided in rain
@@ -272,7 +272,7 @@ When the AI plays out bringing a Pokémon in (switching, or picking one after a 
   - the shard goes after the entry ability, so it replaces the weather an ability just set
   - if that weather is already up, the shard is kept and nothing changes
   - Neutralizing Gas doesn't stop a shard
-- **Its own stats:** Download, Defense Mode, Fortify, Battle Stance, Battle Drive
+- **Its own stats:** Download, Defense Mode, Fortify, Battle Stance, Battle Drive, Fade In (+1 evasion), and Snow Cloak (+1 evasion) when hail is up after its ability and shard
 - **Your stats:** Intimidate, Stifling Aura and Infernal Howl lower them (not through a Substitute, Resilience, Scrappy or Oblivious; Contrary raises them instead). Fog of War resets your raised stats, so it sends that Pokémon in against a set-up sweeper.
 - **The field:** Light Barrier and Reflect Barrier put up screens, Siegebreaker breaks yours, Clean Sweep clears weather and screens, Chrono Shift sets up Trick Room
 - **Other:** Natural Cure clears its status, Seedfall seeds you, True Sight lets its Normal and Fighting moves hit Ghosts, Disarm knocks off your item (and makes your Unburden Pokémon faster)

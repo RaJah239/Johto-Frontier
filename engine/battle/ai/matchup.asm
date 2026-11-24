@@ -4344,7 +4344,8 @@ MSim_EvalSlot:
 	call MSim_LoadMove
 	pop bc
 	ld a, [wEnemyMoveStruct + MOVE_ACC]
-	push af ; accuracy
+	newfarcall AI_KeenEyeAccuracy
+	push af ; accuracy (with Keen Eye)
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
 	jr z, .non_damaging

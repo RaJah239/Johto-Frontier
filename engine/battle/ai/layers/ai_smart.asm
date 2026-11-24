@@ -4029,6 +4029,10 @@ AI_Smart_Hail:
 	pop hl
 	jr c, .encourage
 
+; encourage if hail would give our Snow Cloak its evasion boost
+	call AI_EnemySnowCloakReady
+	jr c, .encourage
+
 ; encourage using the move when the weather rock is held
 	ld a, [wEnemyMonItem]
 	cp WEATHER_ROCK
@@ -4081,6 +4085,8 @@ AI_Smart_Hail:
 	ld a, [wEnemyMonSpecies]
 	ld hl, IceBodyPokemon_AI
 	call IsInAbilityList
+	jr c, .benefits_done
+	call AI_EnemySnowCloakReady
 	jr c, .benefits_done
 	ld hl, .GoodHailMoves
 	call AIHasMoveInArray
@@ -4395,6 +4401,10 @@ AI_PlayerLikesSand:
 	jr AI_PlayerLikes_Last
 
 AI_PlayerLikesHail:
+; (Snow Cloak: hail would raise the player's evasion)
+	ld a, 0 ; player
+	call AI_SnowCloakReady
+	ret c
 	push hl
 	ld hl, IceBodyPokemon_AI
 	call AI_PlayerInAbilityList
@@ -4403,6 +4413,27 @@ AI_PlayerLikesHail:
 AI_PlayerLikes_Last:
 	call AI_PlayerInAbilityList
 AI_PlayerLikes_Done:
+	pop hl
+	ret
+
+AI_EnemySnowCloakReady:
+	ld a, 1 ; enemy
+	; fallthrough
+
+AI_SnowCloakReady:
+; Carry if side a's mon has Snow Cloak (not suppressed) that hasn't raised
+; its evasion since it came in: hail would set it off. Preserves hl.
+	push hl
+	push bc
+	ld c, a
+	ldh a, [hBattleTurn]
+	ld b, a
+	ld a, c
+	ldh [hBattleTurn], a
+	newfarcall SnowCloakReady
+	ld a, b
+	ldh [hBattleTurn], a ; (keeps the flags)
+	pop bc
 	pop hl
 	ret
 

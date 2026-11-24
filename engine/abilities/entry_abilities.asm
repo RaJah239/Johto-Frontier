@@ -62,7 +62,9 @@ RunPendingEntryAbilities:
 	farcall AnnounceNeutralizingGas
 	lb bc, ENTRY_ABILITIES_PLAYER_F, ENTRY_ABILITIES_ENEMY_F
 	ld de, RunEntryAbilities
-	; fallthrough
+	call RunPendingEntrySides
+	; a mon that just came in (or got its ability back) into hail
+	jmp SnowCloakCheck
 
 RunPendingEntrySides:
 ; Run de for each side whose pending bit (b: player's, c: enemy's) is set,
@@ -188,6 +190,7 @@ RunEntryItems:
 	ld [wEffectFailed], a
 	ld [wAttackMissed], a
 	farcall UseHeldWeatherShard
+	call SnowCloakCheck
 	; Unburden, if it used its shard
 	ldh a, [hBattleTurn]
 	newfarcall CheckUnburdenSide ; engine/abilities/unburden.asm
@@ -547,6 +550,96 @@ HandleFadeIn:
 
 FadeInPopupText: db "Fade In@"
 INCLUDE "data/abilities/fade_in_mons.asm"
+
+; ===========================
+; === Ability: Snow Cloak ===
+; ===========================
+; +1 evasion the first time its mon is out in hail (once per send-out;
+; not while Neutralizing Gas suppresses it). Checked whenever hail can
+; start or a mon can come in: at the start of the battle, after entry
+; abilities and entry items, after Hail, and at the end of each turn.
+
+SnowCloakCheck::
+; Both sides, in link battle order.
+	ld a, [wBattleWeather]
+	cp WEATHER_HAIL
+	ret nz
+	; once both sides have a mon out, as the entry abilities
+	ld hl, wBattleMonHP
+	ld a, [hli]
+	or [hl]
+	ret z
+	ld hl, wEnemyMonHP
+	ld a, [hli]
+	or [hl]
+	ret z
+	ldh a, [hBattleTurn]
+	push af
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .enemy_first
+	xor a
+	call .side
+	ld a, 1
+	call .side
+	jr .done
+
+.enemy_first
+	ld a, 1
+	call .side
+	xor a
+	call .side
+.done
+	pop af
+	ldh [hBattleTurn], a
+	ret
+
+.side
+	ldh [hBattleTurn], a
+	call SnowCloakReady
+	ret nc
+	farcall EmptyBattleTextbox
+	ld c, SEND_OUT_POPUP_SNOW_CLOAK
+	ld b, BANK(@)
+	ld de, SnowCloakPopupText
+	farcall _ShowOncePerSendOutPopup
+	xor a
+	ld [wFailedMessage], a
+	ld [wEffectFailed], a
+	ld [wAttackMissed], a
+	farcall BattleCommand_EvasionUp
+	farjp BattleCommand_StatUpMessage
+
+SnowCloakReady::
+; Carry if the hBattleTurn side's mon is out, has Snow Cloak (not
+; suppressed) and hasn't had its boost since it came in. (The weather
+; isn't checked: the AI asks before setting up hail.)
+	ldh a, [hBattleTurn]
+	call IsSideSuppressed
+	jr c, .no
+	call GetCurrentMon
+	push af
+	ld a, [hli]
+	or [hl]
+	jr z, .no_pop
+	pop af
+	ld hl, SnowCloakPokemon
+	call IsInByteArray
+	ret nc
+	ld c, SEND_OUT_POPUP_SNOW_CLOAK
+	newfarcall CheckSendOutPopupShown
+	ret nz ; (nc)
+	scf
+	ret
+
+.no_pop
+	pop af
+.no
+	and a
+	ret
+
+SnowCloakPopupText: db "Snow Cloak@"
+INCLUDE "data/abilities/snow_cloak_mons.asm"
 
 HandleDownload:
 ; Raise Attack if the foe's Defense is lower than its Sp. Def,

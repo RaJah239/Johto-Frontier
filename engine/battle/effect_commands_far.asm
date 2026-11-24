@@ -473,14 +473,6 @@ _BattleCommand_CheckHit:
 	ld c, a
 	call .UnawareStages
 
-	ld a, [wBattleWeather]
-	cp WEATHER_HAIL
-	jr nz, .finish_foe_snow_cloak
-	ld a, [wEnemyMonSpecies]
-	call IsSpeciesSuppressed ; (Neutralizing Gas)
-	call nc, SnowCloak
-
-.finish_foe_snow_cloak
 	ldh a, [hBattleTurn]
 	and a
 	jr z, .got_acc_eva
@@ -492,14 +484,6 @@ _BattleCommand_CheckHit:
 	ld c, a
 	call .UnawareStages
 
-	ld a, [wBattleWeather]
-	cp WEATHER_HAIL
-	jr nz, .finish_player_snow_cloak
-	ld a, [wBattleMonSpecies]
-	call IsSpeciesSuppressed ; (Neutralizing Gas)
-	call nc, SnowCloak
-
-.finish_player_snow_cloak
 .got_acc_eva
 	ld a, c
 	cp b
@@ -615,12 +599,6 @@ AccuracyCalc:
 	ld b, 4
 	jmp Divide
 
-IncrementC:
-; For SnowCloak (its list calls z, IncrementC):
-; it has to be in this bank
-	inc c
-	ret
-
 INCLUDE "data/abilities/true_horn_mons.asm"
 INCLUDE "data/abilities/stormbound_mons.asm"
 INCLUDE "data/abilities/true_flame_mons.asm"
@@ -632,8 +610,39 @@ INCLUDE "data/abilities/hypnotic_aura_mons.asm"
 INCLUDE "data/abilities/lullaby_mastery_mons.asm"
 INCLUDE "data/abilities/meteor_lock_mons.asm"
 
-INCLUDE "data/abilities/snow_cloak_mons.asm"
 INCLUDE "data/abilities/keen_eye_mons.asm"
+
+AI_KeenEyeAccuracy::
+; a = the enemy's move accuracy, times 1.3 (at most 100%) if the enemy's mon
+; has Keen Eye and Neutralizing Gas doesn't suppress it, as in the hit check
+; (accuracy * 77 / 256 is about 0.3x). Use with newfarcall. Preserves bc,
+; de, hl.
+	push hl
+	push de
+	push bc
+	push af
+	ld a, [wEnemyMonSpecies]
+	ld hl, KeenEyePokemon
+	call IsInAbilityList
+	pop bc ; b = accuracy
+	ld a, b
+	jr nc, .done
+	ld hl, 0
+	ld d, 0
+	ld e, b
+	ld c, 77
+.multiply
+	add hl, de
+	dec c
+	jr nz, .multiply
+	add h
+	jr nc, .done
+	ld a, 100 percent
+.done
+	pop bc
+	pop de
+	pop hl
+	ret
 
 INCLUDE "data/battle/accuracy_multipliers.asm"
 
