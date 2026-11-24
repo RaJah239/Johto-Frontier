@@ -316,8 +316,11 @@ FinishContinueFunction:
 	ld hl, wGameTimerPaused
 	set GAME_TIMER_COUNTING_F, [hl]
 	res GAME_TIMER_UNUSED_7_F, [hl]
-	ld hl, wEnteredMapFromContinue
-	set 1, [hl]
+
+; no previous area, so the map name banner shows on loading the save
+	ld a, -1
+	ld [wPrevLandmark], a
+
 	farcall OverworldLoop
 	ld a, [wSpawnAfterChampion]
 	cp SPAWN_RED
