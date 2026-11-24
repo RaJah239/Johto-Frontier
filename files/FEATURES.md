@@ -41,6 +41,7 @@
 - Fruits and mushrooms respawn every 1,000 steps taken
 - Mart inventory changes with badge count
 - Show quantity already in Pack at Marts, (TMs don't show quantity)
+- Bulk-purchase discount at Marts: 5% off the whole purchase from 4 of an item, 8% from 10, then +1% for every 5 more up to 20% from 70 (the quantity menu shows the discount and the discounted price; selling and other currencies are unaffected)
 - Press Down when buying items to get the maximum affordable quantity
 - Pessing Down when selling items, max amount that will max money with a minimum of 1
 - Link trade Pokémon from the start of the game. Can't trade with vanilla Pokémon Crystal

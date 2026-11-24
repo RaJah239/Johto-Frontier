@@ -1,27 +1,20 @@
 CalculateMaximumQuantity:
-; limit [wItemQuantity] so that de * [wItemQuantity] <= Money
-; 1 <= [wItemQuantity] <= 99
-
-	xor a
-	ld [hMoneyTemp + 0], a
-	ld [hMoneyTemp + 1], a
-	ld [hMoneyTemp + 2], a
-	ld b, -1
-	jr .start
+; limit [wItemQuantity] so that the discounted price of [wItemQuantity]
+; items (see GetDiscountedPrice) <= Money
+; 0 <= [wItemQuantity] <= 99
+; The discounted price never drops as the quantity goes up (checked for every
+; price), so a binary search finds the largest quantity that can be afforded
+; in 7 steps. b = a quantity that can be afforded, c = one that can't.
+	ld b, 0
+	ld c, MAX_ITEM_STACK + 1
 .loop
-	cp 99
-	jr nc, .done
-.start
-	ld a, [hMoneyTemp + 2]
-	add e
-	ld [hMoneyTemp + 2], a
-	ld a, [hMoneyTemp + 1]
-	adc d
-	ld [hMoneyTemp + 1], a
-	ld a, [hMoneyTemp + 0]
-	adc 0
-	ld [hMoneyTemp + 0], a
-	inc b
+	ld a, b
+	add c
+	srl a
+	cp b
+	jr z, .done
+	ld e, a
+	call GetDiscountedPrice
 	push de
 	push bc
 	ld bc, hMoneyTemp
@@ -29,10 +22,95 @@ CalculateMaximumQuantity:
 	farcall CompareMoney
 	pop bc
 	pop de
-	ld a, b
-	jr nc, .loop
+	jr c, .too_much
+	ld b, e
+	jr .loop
+
+.too_much
+	ld c, e
+	jr .loop
+
 .done
+	ld a, b
 	ld [wItemQuantity], a
+	ret
+
+GetBulkDiscount:
+; Return in a the percentage taken off the whole purchase when buying
+; quantity a (0-100) of one item:
+;  1-3: 0%, 4-9: 5%, 10-14: 8%, then 1% more for every 5 more items up to
+;  65-69: 19%, and 70+: 20%
+; Clobbers c.
+	cp 4
+	jr c, .none
+	cp 10
+	jr c, .five
+	cp 70
+	jr nc, .max
+	sub 10
+	ld c, 8
+.loop
+	sub 5
+	jr c, .done
+	inc c
+	jr .loop
+
+.done
+	ld a, c
+	ret
+
+.none
+	xor a
+	ret
+
+.five
+	ld a, 5
+	ret
+
+.max
+	ld a, 20
+	ret
+
+GetDiscountedPrice:
+; Return in hMoneyTemp (3 bytes, big endian) the price of a items costing
+; wBuySellItemPrice each, with the bulk discount of GetBulkDiscount:
+; price * a * (100 - discount) / 100, rounded down.
+; price * a <= 65535 * 100 and that * 100 is under 2^32, so nothing overflows.
+; With a discount a >= 4 and the result is at least 3 * price: a priced item
+; is never free.
+; hMultiplicand, hProduct and hDividend share their memory: the product of
+; the first Multiply is already the multiplicand of the second one, and the
+; second product is already the dividend.
+; Preserves bc, de, hl.
+	push bc
+	ld b, a
+	xor a
+	ldh [hMultiplicand + 0], a
+	ld a, [wBuySellItemPrice + 0]
+	ldh [hMultiplicand + 1], a
+	ld a, [wBuySellItemPrice + 1]
+	ldh [hMultiplicand + 2], a
+	ld a, b
+	ldh [hMultiplier], a
+	call Multiply
+	ld a, b
+	call GetBulkDiscount
+	ld c, a
+	ld a, 100
+	sub c
+	ldh [hMultiplier], a
+	call Multiply
+	ld a, 100
+	ldh [hDivisor], a
+	ld b, 4
+	call Divide
+	ldh a, [hQuotient + 1]
+	ldh [hMoneyTemp + 0], a
+	ldh a, [hQuotient + 2]
+	ldh [hMoneyTemp + 1], a
+	ldh a, [hQuotient + 3]
+	ldh [hMoneyTemp + 2], a
+	pop bc
 	ret
 
 CalculateMaximumSellQuantity:
@@ -255,8 +333,14 @@ NoPriceToDisplay:
 	ret
 
 DisplayPurchasePrice:
-	call BuySell_MultiplyPrice
-	jr BuySell_DisplaySubtotal
+	push hl
+	ld a, [wItemQuantityChange]
+	call GetBulkDiscount
+	call PlaceBulkDiscount
+	ld a, [wItemQuantityChange]
+	call GetDiscountedPrice
+	pop hl
+	jr BuySell_PrintSubtotal
 
 DisplaySellingPrice:
 	call BuySell_MultiplyPrice
@@ -302,11 +386,37 @@ BuySell_DisplaySubtotal:
 	ldh a, [hProduct + 3]
 	ld [hl], a
 	pop hl
+BuySell_PrintSubtotal:
 	inc hl
 	ld de, hMoneyTemp
 	lb bc, PRINTNUM_MONEY | 3, 6
 	call PrintNum
 	jmp WaitBGMap
+
+PlaceBulkDiscount:
+; Place "Discount: nn%" in the speech box above the quantity box, or clear
+; that line when there is no discount. a = the discount.
+; hMoneyTemp is the scratch byte: the price is worked out after this.
+	hlcoord 6, 13
+	and a
+	jr z, .clear
+	ldh [hMoneyTemp + 2], a
+	ld de, .DiscountString
+	call PlaceString
+	ld h, b
+	ld l, c
+	ld de, hMoneyTemp + 2
+	lb bc, 1, 2
+	call PrintNum
+	ld [hl], "<%>"
+	ret
+
+.clear
+	lb bc, 1, 13
+	jmp ClearBox
+
+.DiscountString:
+	db "Discount: @"
 
 TossItem_MenuHeader:
 	db MENU_BACKUP_TILES ; flags
