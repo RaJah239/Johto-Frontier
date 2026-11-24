@@ -911,10 +911,10 @@ Complete the project systematically using the following phases.
 
 ### Phase 2 — Critical Stability Issues
 
-- [ ] Audit crashes.
-- [ ] Audit freezes.
-- [ ] Audit softlocks.
-- [ ] Audit memory corruption.
+- [x] Audit crashes.
+- [x] Audit freezes.
+- [x] Audit softlocks.
+- [x] Audit memory corruption.
 - [x] Audit stack corruption.
 - [x] Audit register corruption.
 - [x] Audit ROM banking.
@@ -1103,15 +1103,15 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 ## 25. Current Project Status
 
 - Overall status: In progress
-- Current phase: Phase 2
-- Current task: Phase 2: buffer-length checks and wait-loop review
+- Current phase: Phase 3 (battle engine correctness)
+- Current task: Phase 3: battle engine correctness
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
 - Last completed task: STAB-005 (BUG-008)
 - Last verified commit: `d007b16f8` (full suite: 105 scripts, 95 fully passing, the rest profilers/comparisons)
 - Outstanding blockers: none
-- Next task: close Phase 2, then Phase 3 (battle engine correctness)
+- Next task: Phase 3 checklist
 
 Update this section continuously.
 
@@ -1205,6 +1205,8 @@ Maintain the following table.
 | TEST-016 | NPC trades | `test_npc_trade_stats`: no write below $2000 during `ComputeNPCTrademonStats` (levels 10, 26, 31), stats follow the level | Interpreter with a write hook on the cartridge address space | Passed | 1/4 on the baseline (the three register writes), 4/4 after. Full suite unchanged otherwise (107 scripts). |
 | TEST-017 | Interrupts, softlocks | Static `di`/`ei` check of every routine (return, tail jump or fall-through with interrupts off; `halt` with interrupts off), then every deliberate `jr @` trap traced to its callers | Python CFG pass like TEST-013, with each hit and each trap's callers read by hand | Passed | 13 hits, all intended: the three `*_WaitHBlank` helpers return with interrupts off by design and every caller does `ei` within a few instructions; `VBlank1/3/5` run inside the interrupt and end in `reti`. Traps: `GetGender` (`BOXMON`) reachable, BUG-008. `CopyMonToTempMon` and `GetMonSpecies` traps: every caller sets `PARTYMON`, `OTPARTYMON` or takes the `BUFFERMON` branch first (party menu, battle, Battle Factory, link, move menus, evolution, Bill's PC), so not reachable. |
 | TEST-018 | Pokémon gender | `test_gender_boxmon`: `GetGender` returns for every `wMonType`; `BOXMON` gives the same result as `BUFFERMON` for DVs $96, $66, $77, $F0 | Interpreter | Passed | 5/10 on the baseline (`BOXMON` froze), 10/10 after. Full suite unchanged otherwise (108 scripts). |
+| TEST-019 | Memory corruption | Fixed-length `CopyBytes`/`ByteFill` into a WRAM/HRAM variable declared smaller in `ram/` (`ds`/`db`/`dw`) with another label right after it | Python: declared sizes from `ram/*.asm`, lengths evaluated from the constants, destinations from the `.sym` file | Passed | 27 hits, none a bug. Each deliberately spans neighbouring fields (BG and OB palettes cleared or loaded together, HP pairs in the matchup sim, party species plus terminator, mart/phone/decoration lists with their counts, start-time and RTC fields). The Bug-Catching Contest winner name takes 2 bytes past its 11 (class name of 13), but stays inside its `SECTION UNION`, whose other members are not in use during judging (as in pokecrystal). |
+| TEST-020 | Freezes | Busy-wait loops on `rLY`/`rSTAT` that never end with the LCD off (LY stays 0, STAT mode 0) | Python scan for such loops, then each routine's callers read by hand | Passed | 28 loops; 8 check `rLCDC` first. The rest (copy-tilemap-at-once variants, HDMA transfers, battle intro, credits, Pokédex grid, Voltorb Flip, init) only run with the LCD on: the Pokédex turns it off only between its own `Pokedex_ScreenOff`/`Pokedex_ScreenOn` pairs, and the grid code runs outside those. No change; noted as a precondition for future callers. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1439,6 +1441,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Git commit message: `fix: stop the game freezing when nicknaming a gift Pokemon sent to the PC`
 - Next task: finish Phase 2 (freezes and softlocks beyond the traps), then Phase 3.
 
+### PHASE2-CLOSE — Buffer lengths, wait loops, Phase 2 summary
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 2 (memory corruption, freezes)
+- System: Whole codebase
+- Files modified: this document only
+- Problem identified: none (TEST-019, TEST-020).
+- Root cause: n/a.
+- Solution implemented: none needed; the LCD-on precondition of the wait loops is recorded.
+- Behaviour preserved: no ROM change.
+- Performance impact: none. Memory impact: none.
+- Build result: unchanged (675,214 bytes free).
+- Tests performed: TEST-019, TEST-020.
+- Test results: passed.
+- Remaining risks: Phase 2 overall fixed six bugs (BUG-003 to BUG-008), two of them able to crash or freeze the game; timing-dependent faults need the manual checklist.
+- Git commit message: `docs: close Phase 2 with the buffer-length and wait-loop checks`
+- Next task: Phase 3, battle engine correctness.
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -1458,7 +1479,7 @@ Do not silently ignore unresolved issues.
 - Resolved: the four partly passing tests were test-side faults, not ROM bugs (TEST-003).
 - The interpreter tests live in the git-excluded `.claude-tools/romtest` folder, so fixes to them are recorded here but are not part of the repository history.
 - The suite is a usable regression gate again (TEST-004). The four comparison tests (`test_bug_contest_judging`, `test_map_render_same`, `test_overworld_screen_same`, `test_type_chart_scan`) should be run with the baseline ROM as the older build after any change to those systems. `test_view_animations` needs a debug build. `test_map_render_same` is stale (written for the removed LZP format) and should be rewritten or retired; `test_overworld_screen_same` covers the same ground (TEST-010).
-- Phase 2 items still open: crashes, freezes, softlocks and memory corruption are covered so far by the static checks (TEST-005, 009, 013, 015, 017) and the bugs they found (BUG-003 to BUG-008). Still to do: buffer-length checks on fixed-size copies, and a review of wait loops that could spin forever. Real-hardware timing needs the manual checklist.
+- Phase 2 is complete as far as static checks and the interpreter can take it (TEST-005, 009, 011-020; BUG-003 to BUG-008). Crashes or freezes that depend on real-hardware timing can only be found with the manual checklist (Section 32).
 - No emulator or physical hardware is available here: VBlank/HBlank timing, DMA and real-hardware behaviour can only be checked in the interpreter with emulated hooks. Anything timing-sensitive needs manual emulator testing (Section 32).
 - WRAM0 and WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
 
