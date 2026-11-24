@@ -10,13 +10,6 @@ _HeyItsFruitText::
 	text "!"
 	done
 
-_ObtainedFruitText::
-	text "Obtained"
-	line "@"
-	text_ram wStringBuffer3
-	text "!"
-	done
-
 _NothingHereText::
 	text "There's nothing"
 	line "here…"

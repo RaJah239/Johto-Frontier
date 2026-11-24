@@ -995,24 +995,18 @@ MACRO describedecoration
 	db \1 ; byte
 ENDM
 
-	const fruittree_command ; $9b
-MACRO fruittree
-	db fruittree_command
-	db \1 ; tree_id
-ENDM
-
-	const specialphonecall_command ; $9c
+	const specialphonecall_command ; $9b
 MACRO specialphonecall
 	db specialphonecall_command
 	dw \1 ; call_id
 ENDM
 
-	const checkphonecall_command ; $9d
+	const checkphonecall_command ; $9c
 MACRO checkphonecall
 	db checkphonecall_command
 ENDM
 
-	const verbosegiveitem_command ; $9e
+	const verbosegiveitem_command ; $9d
 MACRO verbosegiveitem
 	if _NARG == 1
 		verbosegiveitem \1, 1
@@ -1023,30 +1017,30 @@ MACRO verbosegiveitem
 	endc
 ENDM
 
-	const verbosegiveitemvar_command ; $9f
+	const verbosegiveitemvar_command ; $9e
 MACRO verbosegiveitemvar
 	db verbosegiveitemvar_command
 	db \1 ; item
 	db \2 ; var
 ENDM
 
-	const swarm_command ; $a0
+	const swarm_command ; $9f
 MACRO swarm
 	db swarm_command
 	map_id \1 ; map
 ENDM
 
-	const halloffame_command ; $a1
+	const halloffame_command ; $a0
 MACRO halloffame
 	db halloffame_command
 ENDM
 
-	const credits_command ; $a2
+	const credits_command ; $a1
 MACRO credits
 	db credits_command
 ENDM
 
-	const warpfacing_command ; $a3
+	const warpfacing_command ; $a2
 MACRO warpfacing
 	db warpfacing_command
 	db \1 ; facing
@@ -1055,27 +1049,27 @@ MACRO warpfacing
 	db \4 ; y
 ENDM
 
-	const battletowertext_command ; $a4
+	const battletowertext_command ; $a3
 MACRO battletowertext
 	db battletowertext_command
 	db \1 ; bttext_id
 ENDM
 
-	const getlandmarkname_command ; $a5
+	const getlandmarkname_command ; $a4
 MACRO getlandmarkname
 	db getlandmarkname_command
 	db \2 ; landmark_id
 	db \1 ; string_buffer
 ENDM
 
-	const gettrainerclassname_command ; $a6
+	const gettrainerclassname_command ; $a5
 MACRO gettrainerclassname
 	db gettrainerclassname_command
 	db \2 ; trainer_group
 	db \1 ; string_buffer
 ENDM
 
-	const getname_command ; $a7
+	const getname_command ; $a6
 MACRO getname
 	db getname_command
 	db \2 ; type
@@ -1083,45 +1077,45 @@ MACRO getname
 	db \1 ; memory
 ENDM
 
-	const wait_command ; $a8
+	const wait_command ; $a7
 MACRO wait
 	db wait_command
 	db \1 ; duration
 ENDM
 
-	const checksave_command ; $a9
+	const checksave_command ; $a8
 MACRO checksave
 	db checksave_command
 ENDM
 
-	const isdialogueminimal_command ; $aa
+	const isdialogueminimal_command ; $a9
 MACRO isdialogueminimal
 	db isdialogueminimal_command
 ENDM
 
-	const writetextcheckdialogue_command ; $ab
+	const writetextcheckdialogue_command ; $aa
 MACRO writetextcheckdialogue
 	db writetextcheckdialogue_command
 	dw \1 ; Pointer to normal text
 	dw \2 ; Pointer to minimal text
 ENDM
 
-	const isquicknurseset_command ; $ac
+	const isquicknurseset_command ; $ab
 MACRO isquicknurseset
 	db isquicknurseset_command
 ENDM
 
-	const isfieldactionssettoquick_command ; $ad
+	const isfieldactionssettoquick_command ; $ac
 MACRO isfieldactionssettoquick
 	db isfieldactionssettoquick_command
 ENDM
 
-	const ispokepicsonoroff_command ; $ad
+	const ispokepicsonoroff_command ; $ac
 MACRO ispokepicsonoroff
 	db ispokepicsonoroff_command
 ENDM
 
-	const nooryes_command ; $ae
+	const nooryes_command ; $ad
 MACRO nooryes
 	db nooryes_command
 ENDM

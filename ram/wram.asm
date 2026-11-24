@@ -1727,11 +1727,6 @@ wMenuItemsList:: ds 16
 wMenuItemsListEnd::
 
 NEXTU
-; fruit tree data
-wCurFruitTree:: db
-wCurFruit:: db
-
-NEXTU
 ; item ball data
 wItemBallData::
 wItemBallItemID:: db
@@ -2836,8 +2831,6 @@ wDailyFlags2:: db
 wSwarmFlags:: db
 	ds 1
 wTimerEventStartDay:: db
-
-wFruitTreeFlags:: flag_array NUM_FRUIT_TREES
 
 	ds 5
 

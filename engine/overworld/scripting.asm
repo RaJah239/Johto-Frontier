@@ -243,27 +243,26 @@ ScriptCommandTable:
 	dw Script_phonecall                  ; 98
 	dw Script_hangup                     ; 99
 	dw Script_describedecoration         ; 9a
-	dw Script_fruittree                  ; 9b
-	dw Script_specialphonecall           ; 9c
-	dw Script_checkphonecall             ; 9d
-	dw Script_verbosegiveitem            ; 9e
-	dw Script_verbosegiveitemvar         ; 9f
-	dw Script_swarm                      ; a0
-	dw Script_halloffame                 ; a1
-	dw Script_credits                    ; a2
-	dw Script_warpfacing                 ; a3
-	dw Script_battletowertext            ; a4
-	dw Script_getlandmarkname            ; a5
-	dw Script_gettrainerclassname        ; a6
-	dw Script_getname                    ; a7
-	dw Script_wait                       ; a8
-	dw Script_checksave                  ; a9
-	dw Script_isdialogueminimal			 ; aa
-	dw Script_writetextcheckdialogue	 ; ab
-	dw Script_isquicknurseset            ; ac
-	dw Script_isfieldactionssettoquick   ; ad
+	dw Script_specialphonecall           ; 9b
+	dw Script_checkphonecall             ; 9c
+	dw Script_verbosegiveitem            ; 9d
+	dw Script_verbosegiveitemvar         ; 9e
+	dw Script_swarm                      ; 9f
+	dw Script_halloffame                 ; a0
+	dw Script_credits                    ; a1
+	dw Script_warpfacing                 ; a2
+	dw Script_battletowertext            ; a3
+	dw Script_getlandmarkname            ; a4
+	dw Script_gettrainerclassname        ; a5
+	dw Script_getname                    ; a6
+	dw Script_wait                       ; a7
+	dw Script_checksave                  ; a8
+	dw Script_isdialogueminimal			 ; a9
+	dw Script_writetextcheckdialogue	 ; aa
+	dw Script_isquicknurseset            ; ab
+	dw Script_isfieldactionssettoquick   ; ac
 	dw Script_ispokepicsonoroff
-	dw Script_nooryes                    ; ae
+	dw Script_nooryes                    ; ad
 	dw Script_iftrue_jumptextfaceplayer  ;
 	dw Script_jumpthistextfaceplayer     ;
 	dw Script_endtext                    ;
@@ -898,13 +897,6 @@ Script_describedecoration:
 	farcall DescribeDecoration
 	ld h, d
 	ld l, e
-	jmp ScriptJump
-
-Script_fruittree:
-	call GetScriptByte
-	ld [wCurFruitTree], a
-	ld b, BANK(FruitTreeScript)
-	ld hl, FruitTreeScript
 	jmp ScriptJump
 
 Script_swarm:
