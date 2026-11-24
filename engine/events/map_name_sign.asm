@@ -160,13 +160,13 @@ PlaceMapNameSign::
 	jr nc, .stage_3_sliding_in
 	cp MAPSIGNSTAGE_5_SLIDEOUT
 	jr c, .stage_5_sliding_out
-	ld a, SCREEN_HEIGHT_PX - 4 * TILE_WIDTH
+	ld a, SCREEN_HEIGHT_PX - 3 * TILE_WIDTH
 	jr .got_value
 
 .stage_3_sliding_in
 	sub MAPSIGNSTAGE_4_VISIBLE
 	add a
-	add SCREEN_HEIGHT_PX - 4 * TILE_WIDTH
+	add SCREEN_HEIGHT_PX - 3 * TILE_WIDTH
 	jr .got_value
 
 .stage_5_sliding_out
@@ -248,12 +248,12 @@ INCLUDE "gfx/signs/signs.pal"
 
 InitMapNameFrame:
 	hlcoord 0, 0, wAttrmap
-	lb bc, 5, SCREEN_WIDTH
+	lb bc, 3, SCREEN_WIDTH
 	call InitMapSignAttrmap
 	; the sign's right column reuses the left column's tiles,
 	; flipped via attributes
 	ld de, SCREEN_WIDTH
-	ld b, 4
+	ld b, 3
 	hlcoord 19, 0, wAttrmap
 .flip_column
 	ld a, [hl]
@@ -262,7 +262,7 @@ InitMapNameFrame:
 	add hl, de
 	dec b
 	jr nz, .flip_column
-	jmp PlaceMapNameFrame
+	jr PlaceMapNameFrame
 
 PlaceMapNameCenterAlign:
 	ld a, [wCurLandmark]
@@ -277,37 +277,6 @@ PlaceMapNameCenterAlign:
 	hlcoord 0, 1
 	add hl, bc
 	ld de, wStringBuffer1
-	call PlaceString
-
-	; check weather and print
-	hlcoord 1, 2
-	ld a, [wFieldWeather]
-	cp WEATHER_RAIN
-	jr z, .Raining
-	cp WEATHER_SUN
-	jr z, .Sunny
-	cp WEATHER_SANDSTORM
-	jr z, .Sandstorm
-	cp WEATHER_HAIL
-	ret nz
-
-;.Hailing:
-	ld de, .HailingStr
-	jr .print_weather
-
-.Raining:
-	ld de, .RainingStr
-	jr .print_weather
-
-.Sunny:
-	ld de, .SunnyStr
-	jr .print_weather
-
-.Sandstorm:
-	ld de, .SandstormStr
-	; fallthrough
-
-.print_weather:
 	jmp PlaceString
 
 .GetNameLength:
@@ -325,15 +294,6 @@ PlaceMapNameCenterAlign:
 .stop
 	pop hl
 	ret
-
-.RainingStr:
-	db "Raining@"
-.SunnyStr:
-	db "Sunny@"
-.HailingStr:
-	db "Hailing@"
-.SandstormStr:
-	db "Sandstorm@"
 
 InitMapSignAttrmap:
 	ld a, PAL_BG_TEXT | PRIORITY
@@ -359,19 +319,12 @@ PlaceMapNameFrame:
 	; top right
 	ld a, MAP_NAME_SIGN_START + 1
 	ld [hli], a
-	; left, first line
+	; left
 	ld a, MAP_NAME_SIGN_START + 4
 	ld [hli], a
-	; first line
+	; middle
 	call .FillMiddle
-	; right, first line
-	ld a, MAP_NAME_SIGN_START + 5
-	ld [hli], a
-
-	; left, second line
-	ld a, MAP_NAME_SIGN_START + 4
-	ld [hli], a
-	call .FillMiddle
+	; right
 	ld a, MAP_NAME_SIGN_START + 5
 	ld [hli], a
 

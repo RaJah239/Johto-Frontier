@@ -32,7 +32,7 @@
 - Displays colored Pokémon pictures in over world
 - Overworld Porygons added throughout the game for PC access
 - Chanseys that heal the player’s party in the overworld added throughout the game
-- View present weather on map change
+- Shorter map-name banner on entering a new area (area name only; the weather is no longer shown)
 - Default outdoor maps have 35% chance of rain and 35% chance of sun unless it is night with exceptions
 - PC usage sped up
 - Buena's Password now operates in the evening
