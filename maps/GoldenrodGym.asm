@@ -77,7 +77,7 @@ GoldenrodGymWhitneyScript:
 		cont "been warned!"
 		done
 	waitclosetext
-	winlosstext WhitneyLossText, 0
+	winlosstext WhitneyLossText, WhitneyPlayerWonText
 	readvar VAR_BADGES
 	ifgreater 5, .SixOrSevenBadges
 	ifgreater 3, .FourOrFiveBadges
@@ -184,6 +184,14 @@ GoldenrodGymWhitneyScript:
 	waitsfx
 	warp GOLDENROD_GYM, 2, 17
 	end
+
+WhitneyPlayerWonText:
+	text "Hee hee! I won!"
+	line "Don't cry, okay?"
+
+	para "Try again and I"
+	line "might go easy!"
+	done
 
 WhitneyLossText:
 	text "You're even better"

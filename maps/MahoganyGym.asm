@@ -88,7 +88,7 @@ MahoganyGymPryceScript:
 		cont "my power!"
 		done
 	waitclosetext
-	winlosstext PryceLossText, 0
+	winlosstext PryceLossText, PrycePlayerWonText
 	readvar VAR_BADGES
 	ifgreater 5, .SixOrSevenBadges
 	ifgreater 3, .FourOrFiveBadges
@@ -211,6 +211,14 @@ MahoganyGymPryceScript:
 	waitsfx
 	warp MAHOGANY_GYM, 4, 17
 	end
+
+PrycePlayerWonText:
+	text "Experience wins,"
+	line "young one."
+
+	para "Winter will wait"
+	line "for your return."
+	done
 
 PryceLossText:
 	text "Ah, I am impressed"

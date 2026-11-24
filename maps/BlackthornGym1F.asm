@@ -74,7 +74,7 @@ BlackthornGymClairScript:
 		para "Let's do it!"
 		done
 	waitclosetext
-	winlosstext ClairLossText, 0
+	winlosstext ClairLossText, ClairPlayerWonText
 	loadtrainer CLAIR, CLAIR1
 	startbattle
 	reloadmapafterbattle
@@ -185,6 +185,14 @@ BlackthornGymClairScript:
 	waitsfx
 	warp BLACKTHORN_GYM_1F, 4, 17
 	end
+
+ClairPlayerWonText:
+	text "Did you think you"
+	line "could beat me?"
+
+	para "Come back when you"
+	line "have a real team!"
+	done
 
 ClairLossText:
 	text "Ah… Yes you were."

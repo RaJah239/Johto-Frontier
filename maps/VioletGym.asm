@@ -65,7 +65,7 @@ VioletGymFalknerScript:
 		line "their majesty!"
 		done
 	waitclosetext
-	winlosstext FalknerLossText, 0
+	winlosstext FalknerLossText, FalknerPlayerWonText
 	loadtrainer FALKNER, FALKNER1
 	startbattle
 	reloadmapafterbattle
@@ -170,6 +170,14 @@ VioletGymFalknerScript:
 	waitsfx
 	warp VIOLET_GYM, 4, 15
 	end
+
+FalknerPlayerWonText:
+	text "Ha! The wind is on"
+	line "my side today!"
+
+	para "Come back when you"
+	line "can fly higher."
+	done
 
 FalknerLossText:
 	text "No! My beloved"

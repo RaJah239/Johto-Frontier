@@ -102,7 +102,7 @@ CianwoodGymChuckScript:
 		para "Come on. We shall"
 		line "do battle!"
 		done
-	winlosstext ChuckLossText, 0
+	winlosstext ChuckLossText, ChuckPlayerWonText
 	readvar VAR_BADGES
 	ifgreater 5, .SixOrSevenBadges
 	ifgreater 3, .FourOrFiveBadges
@@ -217,6 +217,14 @@ CianwoodGymMovement_ChuckChucksBoulder:
 	fast_jump_step RIGHT
 	remove_sliding
 	step_end
+
+ChuckPlayerWonText:
+	text "HAH! My fists won"
+	line "this time!"
+
+	para "Train harder, then"
+	line "face me again!"
+	done
 
 ChuckLossText:
 	text "Wha? Huh?"

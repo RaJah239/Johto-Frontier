@@ -2320,6 +2320,26 @@ LostBattle:
 	and a
 	jr nz, .LostLinkBattle
 
+; trainers with something to say about winning says it before the whiteout
+	ld a, [wBattleMode]
+	cp TRAINER_BATTLE
+	jr nz, .no_loss_text
+	ld hl, wLossTextPointer
+	ld a, [hli]
+	or [hl]
+	jr z, .no_loss_text
+
+; remove the enemy from the screen and bring in the trainer.
+	hlcoord 0, 0
+	lb bc, 8, 21
+	call ClearBox
+	call BattleWinSlideInEnemyTrainerFrontpic
+
+	ld c, 40
+	call DelayFrames
+	call PrintWinLossText
+
+.no_loss_text
 ; Grayscale
 	ld b, SCGB_BATTLE_GRAYSCALE
 	call GetSGBLayout

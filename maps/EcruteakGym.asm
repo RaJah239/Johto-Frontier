@@ -115,7 +115,7 @@ EcruteakGymMortyScript:
 		cont "level!"
 		done
 	waitclosetext
-	winlosstext MortyLossText, 0
+	winlosstext MortyLossText, MortyPlayerWonText
 	readvar VAR_BADGES
 	ifgreater 5, .SixOrSevenBadges
 	ifgreater 3, .FourOrFiveBadges
@@ -226,6 +226,14 @@ EcruteakGymMortyScript:
 	waitsfx
 	warp ECRUTEAK_GYM, 4, 17
 	end
+
+MortyPlayerWonText:
+	text "The spirits show"
+	line "me your defeat."
+
+	para "Return when your"
+	line "heart is steadier."
+	done
 
 MortyLossText:
 	text "I'm not good"

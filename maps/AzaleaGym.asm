@@ -84,7 +84,7 @@ AzaleaGymBugsyScript:
 		done
 	waitclosetext
 	special SaveMusic
-	winlosstext BugsyLossText, 0
+	winlosstext BugsyLossText, BugsyPlayerWonText
 	loadtrainer BUGSY, BUGSY1
 	startbattle
 	reloadmapafterbattle
@@ -184,6 +184,14 @@ AzaleaGymBugsyScript:
 	waitsfx
 	warp AZALEA_GYM, 4, 15
 	end
+
+BugsyPlayerWonText:
+	text "Our bugs came out"
+	line "on top this time!"
+
+	para "Study harder, then"
+	line "battle me again!"
+	done
 
 BugsyLossText:
 	text "Whoa, amazing!"

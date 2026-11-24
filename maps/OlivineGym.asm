@@ -70,7 +70,7 @@ OlivineGymJasmineScript:
 		para "…Um… May I begin?"
 		done
 	waitclosetext
-	winlosstext JasmineLossText, 0
+	winlosstext JasmineLossText, JasminePlayerWonText
 	readvar VAR_BADGES
 	ifgreater 5, .SixOrSevenBadges
 	ifgreater 3, .FourOrFiveBadges
@@ -161,6 +161,14 @@ OlivineGymJasmineScript:
 	waitsfx
 	warp OLIVINE_GYM, 4, 15
 	end
+
+JasminePlayerWonText:
+	text "…I'm sorry. Steel"
+	line "held firm today."
+
+	para "Please train some"
+	line "more, then return."
+	done
 
 JasmineLossText:
 	text "Victory belongs to"
