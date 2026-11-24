@@ -53,25 +53,6 @@ NationalPark_MapScripts:
 
 	def_callbacks
 	callback MAPCALLBACK_NEWMAP, .Flypoint
-	callback MAPCALLBACK_OBJECTS, .Weather
-
-.Weather:
-	checktime EVE | NITE
-	iftrue .NightWeather
-	setval WEATHER_SUN
-	writemem wFieldWeather
-	endcallback
-
-.NightWeather
-	random 2
-	ifequal 0, .Rain
-	setval WEATHER_NONE
-	writemem wFieldWeather
-	endcallback
-
-.Rain:
-	setval WEATHER_RAIN
-	writemem wFieldWeather
 
 .Flypoint:
 	setflag ENGINE_FLYPOINT_NATIONAL_PARK

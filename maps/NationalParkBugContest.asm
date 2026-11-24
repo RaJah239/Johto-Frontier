@@ -47,16 +47,6 @@ NationalParkBugContest_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, .Weather
-
-.Weather:
-    checktime EVE | NITE
-    iftrue .skipWeather
-	setval WEATHER_SUN
-	writemem wFieldWeather
-.skipWeather
-		endcallback
-
 
 BugCatchingContestant1AText:
 	text "Don: I'm going to"
