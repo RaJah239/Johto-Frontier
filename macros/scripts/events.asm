@@ -1499,3 +1499,11 @@ MACRO gg_room_crystal
 ENDM
 
 DEF NUM_EVENT_COMMANDS EQU const_value
+
+MACRO wildpokepic
+; The pokepic of a wild mon about to be battled: its DVs are rolled now, so
+; it shows in its shiny colours if it's going to be shiny.
+	setval \1
+	callasm PrerollWildPokepic
+	pokepic 0
+ENDM

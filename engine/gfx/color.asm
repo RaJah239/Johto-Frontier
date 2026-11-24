@@ -7,6 +7,21 @@ LoadPokemonPalette:
 	ld a, BANK(wBGPals1)
 	jmp FarCopyWRAM
 
+LoadPokepicPalette:
+; LoadPokemonPalette, but in the shiny colours for a wild mon whose pokepic
+; DVs (PrerollWildPokepic) are shiny.
+	ld a, [wPokepicWildSpecies]
+	ld hl, wCurPartySpecies
+	cp [hl]
+	jr nz, LoadPokemonPalette
+	push de
+	ld bc, wPokepicWildDVs
+	call GetMonNormalOrShinyPalettePointer
+	pop de
+	ld bc, PAL_COLOR_SIZE * 2
+	ld a, BANK(wBGPals1)
+	jmp FarCopyWRAM
+
 DEF SHINY_ATK_MASK EQU %0010
 DEF SHINY_DEF_DV EQU 10
 DEF SHINY_SPD_DV EQU 15

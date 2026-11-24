@@ -254,7 +254,7 @@ NationalParkGholdengoScript:
 	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
-	pokepic GHOLDENGO
+	wildpokepic GHOLDENGO
 	cry GHOLDENGO
 	waitbutton
 	closepokepic

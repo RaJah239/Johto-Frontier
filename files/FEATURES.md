@@ -33,6 +33,7 @@
 - Overworld Porygons added throughout the game for PC access
 - Chanseys that heal the player’s party in the overworld added throughout the game
 - Default outdoor maps have 35% chance of rain and 35% chance of sun unless it is night with exceptions
+- The Pokémon picture shown before a stationary wild battle (Red Gyarados, the legendaries, Lapras and so on) is in shiny colours if that Pokémon is going to be shiny
 - PC usage sped up
 - Buena's Password now operates in the evening
 - Animate tiles even when textboxes are open

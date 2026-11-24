@@ -22,7 +22,7 @@ WhirlIslandLugiaScript:
 	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
-	pokepic LUGIA
+	wildpokepic LUGIA
 	cry LUGIA
 	waitbutton
 	closepokepic

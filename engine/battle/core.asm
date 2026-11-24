@@ -5698,6 +5698,23 @@ endr
 ; Wild DVs
 ; Here's where the fun starts
 
+; DVs already rolled for the pokepic shown before this battle (so the
+; picture showed whether it's shiny): use them. Used up either way.
+	ld hl, wPokepicWildSpecies
+	ld a, [hl]
+	ld [hl], 0
+	and a
+	jr z, .no_pokepic_dvs
+	ld hl, wTempEnemyMonSpecies
+	cp [hl]
+	jr nz, .no_pokepic_dvs
+	ld a, [wPokepicWildDVs]
+	ld b, a
+	ld a, [wPokepicWildDVs + 1]
+	ld c, a
+	jr .UpdateDVs
+
+.no_pokepic_dvs
 	ld a, [wBattleType]
 ; Register a contains wBattleType
 
@@ -5710,44 +5727,7 @@ endr
 	jr .UpdateDVs
 
 .GenerateDVs:
-; Generate new random DVs
-
-; ===================
-; === Shiny Charm ===
-; ===================
-; shiny charm increases the chance a pokémon will be shiny
-; the charm adds 2 extra  rolls when a wild pokemon in encountered
-; therefore, the chance is increased from 1/256 to 3/256 or ~0.1%.
-
-	; check if player has shiny charm
-    ld a, SHINY_CHARM
-    ld [wCurItem], a
-    ld hl, wNumItems
-    call CheckItem
-    jr nc, .NoShinyCharm
-
-	; shiny charm logic
-; 1. roll atk/def once (only affects hidden power type and genders)
-    call BattleRandom
-    ld b, a          ; store atk/def in b
-
-; 2. roll speed/special up to 3 times (determines shininess)
-    ld d, 3          ; 3 rolls/attempts
-.RollShiny
-    call BattleRandom
-    ld c, a          ; store current roll in c
-    cp $ff           ; is it 15 spd / 15 spc?
-    jr z, .UpdateDVs      ; if yes, were done
-    dec d
-    jr nz, .RollShiny
-    ; if we fail 3 times, c just keeps the last random value rolled.
-    jr .UpdateDVs
-
-.NoShinyCharm
-	call BattleRandom
-	ld b, a
-	call BattleRandom
-	ld c, a
+	call RollWildDVs
 
 .UpdateDVs:
 	farcall SetUpSelfDVs
@@ -5813,7 +5793,7 @@ endr
 ; Try again if length >= 1616 mm (i.e. if LOW(length) >= 4 inches)
 	ld a, [wMagikarpLength + 1]
 	cp 4
-	jmp nc, .GenerateDVs
+	jr nc, .GenerateDVs
 
 ; 20% chance of skipping this check
 	call Random
@@ -5822,7 +5802,7 @@ endr
 ; Try again if length >= 1600 mm (i.e. if LOW(length) >= 3 inches)
 	ld a, [wMagikarpLength + 1]
 	cp 3
-	jmp nc, .GenerateDVs
+	jr nc, .GenerateDVs
 
 .CheckMagikarpArea:
 	ld a, [wMapGroup]
@@ -6598,6 +6578,48 @@ _LoadBattleFontsHPBar:
 
 _LoadHPBar:
 	farjp LoadHPBar
+
+RollWildDVs::
+; Random wild DVs in bc (Shiny Charm included). Also used for a wild
+; pokepic (PrerollWildPokepic).
+
+; ===================
+; === Shiny Charm ===
+; ===================
+; shiny charm increases the chance a pokémon will be shiny
+; the charm adds 2 extra  rolls when a wild pokemon in encountered
+; therefore, the chance is increased from 1/256 to 3/256 or ~0.1%.
+
+	; check if player has shiny charm
+    ld a, SHINY_CHARM
+    ld [wCurItem], a
+    ld hl, wNumItems
+    call CheckItem
+    jr nc, .NoShinyCharm
+
+	; shiny charm logic
+; 1. roll atk/def once (only affects hidden power type and genders)
+    call BattleRandom
+    ld b, a          ; store atk/def in b
+
+; 2. roll speed/special up to 3 times (determines shininess)
+    ld d, 3          ; 3 rolls/attempts
+.RollShiny
+    call BattleRandom
+    ld c, a          ; store current roll in c
+    cp $ff           ; is it 15 spd / 15 spc?
+    ret z            ; if yes, were done
+    dec d
+    jr nz, .RollShiny
+    ; if we fail 3 times, c just keeps the last random value rolled.
+    ret
+
+.NoShinyCharm
+	call BattleRandom
+	ld b, a
+	call BattleRandom
+	ld c, a
+	ret
 
 EmptyBattleTextbox:
 	ld hl, .empty

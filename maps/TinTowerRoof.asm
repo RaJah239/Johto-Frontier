@@ -31,7 +31,7 @@ TinTowerHoOhScript:
 	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
-	pokepic HO_OH
+	wildpokepic HO_OH
 	cry HO_OH
 	waitbutton
 	closepokepic

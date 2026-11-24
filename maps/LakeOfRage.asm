@@ -226,10 +226,11 @@ MagikarpHouseSignText:
 	done
 
 RedGyaradosScript:
+	loadvar VAR_BATTLETYPE, BATTLETYPE_FORCESHINY ; (before its pokepic: shown shiny)
 	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
-	pokepic GYARADOS
+	wildpokepic GYARADOS
 	cry GYARADOS
 	waitbutton
 	closepokepic
@@ -237,7 +238,6 @@ RedGyaradosScript:
 	showthistext
 		text "Gyarados: Gyashaa!"
 		done
-	loadvar VAR_BATTLETYPE, BATTLETYPE_FORCESHINY
 	loadwildmon GYARADOS, 30
 	startbattle
 	disappear LAST_TALKED

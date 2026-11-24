@@ -2783,7 +2783,12 @@ wCurBox:: db
 
 wStartMenuOrderSaved:: ds (NUM_START_MENU_SLOTS + 1) / 2
 
-	ds 128 - (NUM_START_MENU_SLOTS + 1) / 2
+; DVs rolled for the pokepic of a wild mon about to be battled
+; (PrerollWildPokepic); its battle uses them. 0: none.
+wPokepicWildSpecies:: db
+wPokepicWildDVs:: dw
+
+	ds 128 - (NUM_START_MENU_SLOTS + 1) / 2 - 3
 
 wCelebiEvent::
 ; bit 2: forest is restless

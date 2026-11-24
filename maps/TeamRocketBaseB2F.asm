@@ -32,7 +32,7 @@ RocketElectrode:
 	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
-	pokepic ELECTRODE
+	wildpokepic ELECTRODE
 	cry ELECTRODE
 	waitbutton
 	closepokepic

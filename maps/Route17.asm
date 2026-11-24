@@ -262,7 +262,7 @@ Route17StationaryRaikouScript:
 	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
-	pokepic RAIKOU
+	wildpokepic RAIKOU
 	cry RAIKOU
 	waitbutton
 	closepokepic

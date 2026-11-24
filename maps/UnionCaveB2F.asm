@@ -46,7 +46,7 @@ UnionCaveLapras:
 	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
-	pokepic LAPRAS
+	wildpokepic LAPRAS
 	cry LAPRAS
 	waitbutton
 	closepokepic
