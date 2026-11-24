@@ -924,7 +924,7 @@ Complete the project systematically using the following phases.
 
 ### Phase 3 — Battle Engine Correctness
 
-- [ ] Audit damage calculations.
+- [x] Audit damage calculations.
 - [ ] Audit critical hits.
 - [ ] Audit accuracy and evasion.
 - [ ] Audit speed and priority.
@@ -1209,6 +1209,8 @@ Maintain the following table.
 | TEST-020 | Freezes | Busy-wait loops on `rLY`/`rSTAT` that never end with the LCD off (LY stays 0, STAT mode 0) | Python scan for such loops, then each routine's callers read by hand | Passed | 28 loops; 8 check `rLCDC` first. The rest (copy-tilemap-at-once variants, HDMA transfers, battle intro, credits, Pokédex grid, Voltorb Flip, init) only run with the LCD on: the Pokédex turns it off only between its own `Pokedex_ScreenOff`/`Pokedex_ScreenOn` pairs, and the grid code runs outside those. No change; noted as a precondition for future callers. |
 | TEST-021 | Battle engine (player/enemy symmetry) | Every routine pair whose names differ only by Player/Enemy: one side's body with Player/Enemy, `wBattleMon`/`wEnemyMon` and party names swapped, diffed against the other | Python over `engine/` and `home/` | Passed | 33 pairs differ; all reviewed, none a bug. The differences are shared tails, the player-only low-HP alarm, back vs front sprites, the matchup sim tracking statuses inflicted only on the player's mon, vanilla-only flinch resets, and renaming artefacts of the swap (`AI_Is*ImmuneByAbility` correctly checks the attacker's Mold Breaker and then the defender). |
 | TEST-022 | Battle state between battles | Battle variables written by the battle engine and abilities that lie outside `wBattle`..`wBattleEnd` (cleared at battle start) and are not reset in `start_battle.asm` or `CleanUpBattleRAM` | Python with the `.sym` file, then each custom state variable traced to where it is reset | Passed | 358 hits, nearly all scratch, party data, or values set fresh before each use. Custom state checked one by one: `wAISwitchCount` (battle start), `wAITeleportPlan` (every turn), `wEntryAbilitiesPending` incl. Unburden bits (whole byte rewritten by `StartBattleEntryAbilities`), `wNeutralizingGas`, `wHarvestBerries` and `wSendOutPopupsShown` (each send-out), `wEntryHazardSwitchTurn`/`SkipMask` (each switch-in), `wContraryInverted` and `wMagicBounceSavedMove` (set per use). Nothing carries over from one battle to the next. |
+| TEST-023 | Damage calculation | `test_damage_formula`: `BattleCommand_DamageCalc` against the reference `min(((2L/5+2)*P*A/D)/50, 997)+2` (integer steps; D=0 treated as 1; Explosion halves D) | Interpreter, 407 input sets (edge cases plus random L 1-100, P 1-250, A 1-255, D 0-255) x both sides x normal/Explosion = 1,628 runs, no items or abilities | Passed | Exact match on every run, including the 997 cap and power-0 early exit. |
+| TEST-024 | Damage calculation, held items | `test_damage_items`: Charcoal (+20% on Fire), Life Orb (x1.3), Choice Band (x1.5 physical), Choice Specs (x1.5 special), Muscle Band / Wise Glasses (x1.1 on their category), each applied in the game's order and with its integer rounding | Interpreter, 40 random input sets x both sides x 4 type/category mixes per item | Passed | 7/7. Each boost applies only to the right type or category; the type byte's top two bits are the category (physical $40, special $80, status $C0), which is what the `cp SPECIAL` checks rely on. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
