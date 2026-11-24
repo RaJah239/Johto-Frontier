@@ -145,6 +145,26 @@ FarCopyBytes::
 	rst Bankswitch
 	ret
 
+FarCopyTable::
+; Copy a length-prefixed table from a:hl to de. Its first two bytes are its
+; length, always a multiple of 16 (see DecompressMetatiles).
+
+	ldh [hTempBank], a
+	ldh a, [hROMBank]
+	push af
+	ldh a, [hTempBank]
+	rst Bankswitch
+
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	call CopyBytesInBlocksOfEight
+
+	pop af
+	rst Bankswitch
+	ret
+
 FarCopyBytesDouble:
 ; Copy bc bytes from a:hl to bc*2 bytes at de,
 ; doubling each byte in the process.

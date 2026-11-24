@@ -363,11 +363,11 @@ ForceMapMusic:
 	jmp TryRestartMapMusic
 
 DecompressMetatiles:
-; Decompress the current tileset's metatile and attribute tables into WRAM,
-; so _LoadOverworldTilemap can draw the screen directly from them.
-; Both tables only depend on the tileset, so they are decompressed once:
-; entering a map that uses the tileset already in WRAM (route to route, or
-; reloading after a battle) skips this work, which keeps connections seamless.
+; Load the current tileset's metatile and attribute tables into WRAM, so
+; _LoadOverworldTilemap can draw the screen directly from them. Both tables
+; only depend on the tileset, so this is done once: entering a map that uses
+; the tileset already in WRAM (route to route, or reloading after a battle)
+; skips the work, which keeps connections seamless.
 	ldh a, [hDecompressedTileset]
 	ld hl, wMapTileset
 	cp [hl]
@@ -378,25 +378,48 @@ DecompressMetatiles:
 	ld hl, wTilesetBlocksBank
 	ld c, BANK(wDecompressedMetatiles)
 	ld de, wDecompressedMetatiles
-	call .Decompress
+	call .Load
 
 	ld hl, wTilesetAttributesBank
 	ld c, BANK(wDecompressedAttributes)
 	ld de, wDecompressedAttributes
 
-.Decompress:
+.Load:
+; hl: the table's bank and address in the tileset struct. de: where it goes,
+; in WRAM bank c. The table starts with its own length, so this is a copy.
 	ld a, [hli]
 	ld b, a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+
 	ldh a, [rSVBK]
 	push af
 	ld a, c
 	ldh [rSVBK], a
 	ld a, b
-	ld bc, $1000
-	call FarDecompress
+	call FarCopyTable
+	pop af
+	ldh [rSVBK], a
+	ret
+
+	ldh a, [rSVBK]
+	push af
+	ld a, c
+	ldh [rSVBK], a
+	ldh a, [hROMBank]
+	push af
+	ld a, b
+	rst Bankswitch
+
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a ; bc = the table's length, always a multiple of 16
+	call CopyBytesInBlocksOfEight
+
+	pop af
+	rst Bankswitch
 	pop af
 	ldh [rSVBK], a
 	ret
