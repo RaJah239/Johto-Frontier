@@ -12,6 +12,10 @@ INCBIN "gfx/signs/water.2bpp"
 INCBIN "gfx/signs/building.2bpp"
 	assert_table_length NUM_SIGNS
 
+ShinyIconsGFX:
+; Polished Crystal's shiny star: in color 1, then in color 2
+INCBIN "gfx/font/shiny_icons.2bpp"
+
 GenderIconsGFX:
 INCBIN "gfx/font/gender_icons.2bpp"
 

@@ -129,8 +129,10 @@ NamingScreen:
 	farcall CheckShininess
 	jr nc, .not_shiny
 	farcall LoadStatsScreenPageTilesGFX
+	farcall LoadStatsScreenShinyIcon
 	hlcoord 1, 4
 	ld [hl], "⁂"
+	farcall NamingScreen_ColorShinyIcon
 .not_shiny
 	jmp .StoreMonIconParams
 

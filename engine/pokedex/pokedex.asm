@@ -3392,6 +3392,15 @@ Pokedex_ColorGenderSymbols:
 	inc hl
 	dec d
 	jr nz, .loop
+	; the area page's shiny stars at the start of its lines
+	hlcoord 1, 10
+	ld d, 7
+.star_loop
+	call .Cell
+	ld bc, SCREEN_WIDTH
+	add hl, bc
+	dec d
+	jr nz, .star_loop
 	ld a, e
 	and a
 	jr z, .done
@@ -3406,8 +3415,8 @@ Pokedex_ColorGenderSymbols:
 
 .Cell:
 ; Tile at hl. Only a cell with the entry pages' plain attributes (VRAM bank
-; 0, palette 0, 2 or 3: not the evolution or pictures pages' graphics) gets
-; palette 2 for "♂", 3 for "♀", or 0 otherwise. e += 1 if it changed.
+; 0, palette 0, 2, 3 or 4: not the evolution or pictures pages' graphics)
+; gets palette 2 for "♂", 3 for "♀", 4 for "<DEX_⁂>", or 0 otherwise. e += 1 if it changed.
 ; Preserves hl and d.
 	push hl
 	ld a, [hl]
@@ -3418,7 +3427,7 @@ Pokedex_ColorGenderSymbols:
 	ld a, [hl]
 	cp 1
 	jr z, .cell_done
-	cp 4
+	cp 5
 	jr nc, .cell_done ; another palette, bank 1 or flipped
 	ld c, 2
 	ld a, b
@@ -3427,6 +3436,9 @@ Pokedex_ColorGenderSymbols:
 	inc c
 	cp "♀"
 	jr z, .set
+	inc c
+	cp "<DEX_⁂>"
+	jr z, .set ; (palette 4: gold)
 	ld c, 0
 .set
 	ld a, c

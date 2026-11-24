@@ -96,8 +96,8 @@ SetDefaultBattlePalette:
 	jr z, SetBattlePal_PlayerHP
 	dec a ; PAL_BATTLE_BG_EXP
 	jr z, SetBattlePal_Exp
-	dec a ; PAL_BATTLE_BG_5 (unused)
-	jr z, SetBattlePal_Player
+	dec a ; PAL_BATTLE_BG_5 (the item / shiny icons)
+	jr z, SetBattlePal_Icons
 	dec a ; PAL_BATTLE_BG_STATUS
 	jr z, SetBattlePal_Status
 	dec a ; PAL_BATTLE_BG_TEXT
@@ -206,6 +206,10 @@ _CGB_FinishBattleScreenLayout:
 	ld a, PAL_BATTLE_BG_EXP
 	ldcoord_a 7, 1, wAttrmap
 	ldcoord_a 16, 8, wAttrmap
+; the shiny stars: the icon palette's orange-yellow (LoadBattleShinyIcon)
+	ld a, PAL_BATTLE_BG_5
+	ldcoord_a 8, 1, wAttrmap
+	ldcoord_a 17, 8, wAttrmap
 ; Column 10 of the enemy HUD: the end of the level row, the HP
 ; bar's right tip and the last digit of the foe's max HP (Damage Info),
 ; so stat animations tinting the enemy's palette don't colour them.
@@ -309,6 +313,13 @@ _CGB_StatsScreenHPPals:
 	and CAUGHT_GENDER_MASK
 	ld de, wBGPals1 palette 2 color 1
 	call .GenderColorNZ
+	; the shiny star (top right) in the blue page palette's color 1, which
+	; its page indicator doesn't use either
+	ld hl, ShinyIconColor
+	ld de, wBGPals1 palette 5 color 1
+	ld bc, PAL_COLOR_SIZE
+	ld a, BANK(wBGPals1)
+	call FarCopyWRAM
 
 	call WipeAttrmap
 
@@ -350,6 +361,8 @@ _CGB_StatsScreenHPPals:
 
 	ld a, $6 ; orange page palette (its color 1: see above)
 	ldcoord_a 18, 0, wAttrmap ; the mon's gender icon
+	ld a, $5 ; blue page palette (its color 1: see above)
+	ldcoord_a 19, 0, wAttrmap ; the shiny star
 
 	call ApplyAttrmap
 	call ApplyPals
@@ -527,13 +540,16 @@ ENDC
 	; type label text in white, like on the grid
 	ld de, wBGPals1 palette 7 + 6
 	call LoadSingleWhitePal
-	; palettes 2 and 3: the gender symbols (Pokedex_ColorGenderSymbols)
+	; palettes 2 and 3: the gender symbols (Pokedex_ColorGenderSymbols),
+	; 4: the shiny star (gold)
 	ld hl, PokedexGenderPalettes
 	ld de, wBGPals1 palette 2
-	ld bc, 2 palettes
+	ld bc, 3 palettes
 	ld a, BANK(wBGPals1)
 	call FarCopyWRAM
 	call WipeAttrmap
+	ld a, 4
+	ldcoord_a 8, 1, wAttrmap ; the shiny star by the name (or nothing)
 	hlcoord 1, 1, wAttrmap
 	lb bc, 7, 7
 	ld a, $1 ; green question mark palette
@@ -735,6 +751,14 @@ _CGB_Pokedex_PicsPage:
 	hlcoord 5, 11, wAttrmap
 	ld [hl], PAL_DEXPICS_BALL
 
+; the shiny stars (by the name and by the picture) in gold: palette 3
+	ld de, wBGPals1 palette 3
+	ld hl, PokedexShinyPalette
+	call LoadHLPaletteIntoDE
+	ld a, 3
+	ldcoord_a 8, 1, wAttrmap
+	ldcoord_a 3, 11, wAttrmap
+
 ; B > BACK: VRAM 0 tiles, palette 0 (the WipeAttrmap default)
 
  ; animated icon, upper right corner fix
@@ -787,6 +811,13 @@ PokedexGenderPalettes:
 	RGB 31, 31, 31
 
 	RGB 31, 12,  6
+	RGB 26, 10,  6
+	RGB 23, 23, 23
+	RGB 31, 31, 31
+
+PokedexShinyPalette:
+; the same for the shiny star ("<DEX_⁂>", drawn in color 0 too): gold
+	RGB 31, 25,  0
 	RGB 26, 10,  6
 	RGB 23, 23, 23
 	RGB 31, 31, 31
@@ -989,6 +1020,21 @@ NamingScreen_ColorGenderIcon::
 	ldcoord_a 1, 2, wAttrmap
 	jmp ApplyAttrmap
 
+NamingScreen_ColorShinyIcon::
+; The naming screen's shiny star at (1, 4) (in color 1, see
+; LoadStatsScreenShinyIcon): BG palette 2, also unused by SCGB_DIPLOMA's
+; attrmap, becomes white, gold, gold, black.
+	ld de, wBGPals1 palette 2
+	ld hl, .Colors
+	call LoadPalette_White_Col1_Col2_Black
+	ld a, 2
+	ldcoord_a 1, 4, wAttrmap
+	jmp ApplyAttrmap
+
+.Colors:
+	RGB 31, 25, 00
+	RGB 31, 25, 00
+
 _CGB_MapPals:
 	call LoadMapPals
 	ld a, SCGB_MAPPALS
@@ -1013,6 +1059,13 @@ _CGB_PartyMenuPals:
 	; and 2: text only uses colors 0 and 3
 	ld de, wBGPals1 palette PAL_BG_TEXT color 1
 	call LoadGenderIconColors
+	; the shiny stars (PlacePartyMonGender): palette 6's color 2, which the
+	; status icons don't use (FNT is only white and black)
+	ld hl, ShinyIconColor
+	ld de, wBGPals1 palette 6 color 2
+	ld bc, PAL_COLOR_SIZE
+	ld a, BANK(wBGPals1)
+	call FarCopyWRAM
 	jmp InitPartyMenuOBPals
 
 LoadGenderIconColors:
@@ -1022,6 +1075,9 @@ LoadGenderIconColors:
 	ld bc, 2 * PAL_COLOR_SIZE
 	ld a, BANK(wBGPals1)
 	jmp FarCopyWRAM
+
+ShinyIconColor:
+	RGB 31, 25, 00 ; Polished Crystal's shiny gold
 
 GenderIconColors:
 	RGB 31, 12, 06 ; female

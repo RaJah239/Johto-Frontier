@@ -76,6 +76,7 @@ PlacePartyMenuText:
 LoadPartyMenuGFX:
 	call LoadFontsBattleExtra
 	farcall LoadBattleGenderIcons
+	farcall LoadPartyMenuShinyIcon
 	farcall LoadPartyMenuHeldItemIconGFX
 	farcall InitPartyMenuPalettes
 	farjp ClearSpriteAnims2
@@ -559,6 +560,12 @@ PlacePartyMonGender:
 	pop hl
 	jr nc, .next
 	ld [hl], "<⁂>"
+	; gold: palette 6's color 2 (LoadPartyMenuShinyIcon, _CGB_PartyMenuPals)
+	push hl
+	ld de, wAttrmap - wTilemap
+	add hl, de
+	ld [hl], 6
+	pop hl
 .next
 	pop hl
 	ld de, 2 * SCREEN_WIDTH

@@ -57,6 +57,7 @@ LoadBattleFontsHPBar:
 
 LoadHPBar:
 	call LoadBattleGenderIcons
+	call LoadBattleShinyIcon
 	ld de, EnemyHPBarBorderGFX
 	ld hl, vTiles2 tile $6c
 	lb bc, BANK(EnemyHPBarBorderGFX), 4
@@ -97,11 +98,38 @@ StatsScreen_LoadFont:
 	ld hl, vTiles2 tile $55
 	lb bc, BANK(ExpBarGFX), 10
 	call Get2bppViaHDMA
+	call LoadStatsScreenPageTilesGFX
+	; fallthrough
+
+LoadStatsScreenShinyIcon::
+; The page tiles' shiny star ("⁂") in color 1 instead
+; (_CGB_StatsScreenHPPals, the naming screen).
+	ld de, ShinyIconsGFX + SHINY_ICON_COLOR1 tiles
+	ld hl, vTiles2 tile "⁂"
+	lb bc, BANK(ShinyIconsGFX), 1
+	jmp Get2bppViaHDMA
+
 LoadStatsScreenPageTilesGFX:
 	ld de, StatsScreenPageTilesGFX
 	ld hl, vTiles2 tile $31
 	lb bc, BANK(StatsScreenPageTilesGFX), 17
 	jmp Get2bppViaHDMA
+
+LoadBattleShinyIcon::
+; The shiny star ("<⁂>") in color 1: the battle icon palette's orange-yellow.
+	ld de, ShinyIconsGFX + SHINY_ICON_COLOR1 tiles
+	; fallthrough
+
+LoadShinyIconOverFont:
+; Shiny star de over the font's "<⁂>".
+	ld hl, vTiles1 tile ("<⁂>" - $80)
+	lb bc, BANK(ShinyIconsGFX), 1
+	jmp Get2bppViaHDMA
+
+LoadPartyMenuShinyIcon::
+; The shiny star in color 2: palette 6's (_CGB_PartyMenuPals).
+	ld de, ShinyIconsGFX + SHINY_ICON_COLOR2 tiles
+	jr LoadShinyIconOverFont
 
 LoadBattleGenderIcons::
 ; The battle's male and female icons.
