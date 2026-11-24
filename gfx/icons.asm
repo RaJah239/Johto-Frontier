@@ -1,4 +1,4 @@
-SECTION "Mon Icons 1", ROMX
+SECTION "Mon Icons 1", ROMX, ALIGN[4]
 
 ; 129 icons
 NullIcon::
@@ -131,7 +131,7 @@ VolcaronaIcon::  INCBIN "gfx/icons/volcarona.2bpp"
 TropiusIcon::    INCBIN "gfx/icons/tropius.2bpp"
 
 
-SECTION "Mon Icons 2", ROMX
+SECTION "Mon Icons 2", ROMX, ALIGN[4]
 
 MankeyIcon::     INCBIN "gfx/icons/mankey.2bpp"
 PrimeapeIcon::   INCBIN "gfx/icons/primeape.2bpp"
