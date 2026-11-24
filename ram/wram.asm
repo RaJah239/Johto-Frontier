@@ -3352,6 +3352,14 @@ wGGBagStashEnd::
 assert wGGBagStashEnd - wGGBagStash == GG_BAG_STASH_LENGTH
 
 
+SECTION "Battle Anim Custom Pals", WRAMX, BANK[5]
+
+; Own section: "Battle Animations" is full, and this must not alias the
+; Surf wave data that shares wBattleAnimEnd's union.
+; Same WRAM bank as wBattleAnimTileDict and wBGPals1.
+wBattleAnimCustomPals:: ds 2 ; bit per palette slot changed by the current animation script
+
+
 SECTION "Sun Shimmer Water", WRAMX, BANK[5]
 
 ; Sunny overworld shimmer: shimmered copies of the water palette's colors

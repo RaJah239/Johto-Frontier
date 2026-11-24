@@ -16,6 +16,7 @@ PlayBattleAnim:
 _PlayBattleAnim:
 	call DelayFrame
 
+	call ClearBattleAnimCustomPals
 	call BattleAnimAssignPals
 	call BattleAnimRequestPals
 	call DelayFrame
@@ -50,12 +51,9 @@ BattleAnimRunScript:
 
 	farcall CheckBattleScene
 	jr c, .disabled
-
-; This vc_hook reduces the move animation flashing in the Virtual Console for
-; Fissure, Self-Destruct, Thunder, Flash, Explosion, Horn Drill, and Hyper Beam.
 	call BattleAnimClearHud
 	call RunBattleAnimScript
-
+	call BattleAnim_RestoreCustomPals
 	call BattleAnimAssignPals
 	call BattleAnimRequestPals
 
@@ -83,6 +81,7 @@ BattleAnimRunScript:
 	call WaitSFX
 	call PlayHitSound
 	call RunBattleAnimScript
+	call BattleAnim_RestoreCustomPals
 
 	ld a, [wBattleAnimFlags]
 	bit BATTLEANIM_KEEPSPRITES_F, a
@@ -1075,6 +1074,9 @@ SetBattleAnimPal:
 	ld d, a
 
 .got_pal_target
+	; Remember this slot so the animation engine can restore its default later.
+	call BattleAnim_MarkCustomPal
+
 	; Get palette to change.
 	ld hl, wBGPals1
 	ld bc, 1 palettes
@@ -1098,6 +1100,41 @@ SetBattleAnimPal:
 	ld b, h
 	farcall SetDefaultBattlePalette
 	jr .done_setpal
+
+BattleAnim_MarkCustomPal:
+; Mark the palette slot in d (0-15: 0-7 BG, 8-15 OBJ, wBGPals1-relative)
+; as overridden by the current animation script.
+	push de
+	push bc
+	ld a, d
+	and 7
+	ld c, a
+	ld a, 1
+.bit_loop
+	ld e, a
+	ld a, c
+	and a
+	jr z, .got_bit
+	ld a, e
+	add a
+	dec c
+	jr .bit_loop
+.got_bit
+	ld c, e
+	ld a, d
+	srl a
+	srl a
+	srl a
+	ld e, a
+	ld d, 0
+	ld hl, wBattleAnimCustomPals
+	add hl, de
+	ld a, [hl]
+	or c
+	ld [hl], a
+	pop bc
+	pop de
+	ret
 
 BattleAnimCmd_DropSub:
 	ldh a, [rSVBK]
@@ -1313,6 +1350,50 @@ ClearBattleAnims::
 	call GetBattleAnimPointer
 	call BattleAnimAssignPals
 	jmp DelayFrame
+
+BattleAnim_RestoreCustomPals:
+; Restore every palette slot that the current animation script overrode.
+; SetDefaultBattlePalette knows the default for each slot (mon pals, HP bars,
+; text, and the shared battle object pals).
+	ld hl, wBattleAnimCustomPals
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a ; hl = dirty-slot bitmask
+	ld d, 0 ; absolute palette slot index
+.loop
+	ld a, h
+	or l
+	jr z, .done
+
+	srl h
+	rr l
+	jr nc, .next
+
+	push hl
+	push de
+	ld a, d
+	ld hl, wBGPals1
+	ld bc, 1 palettes
+	call AddNTimes ; hl = palette slot in wBGPals1/wOBPals1
+	ld e, d
+	ld d, 0
+	call SwapHLDE ; de = destination, hl = slot index
+	ld b, l
+	farcall SetDefaultBattlePalette
+	pop de
+	pop hl
+.next
+	inc d
+	jr .loop
+.done
+	; fallthrough
+
+ClearBattleAnimCustomPals:
+	xor a
+	ld hl, wBattleAnimCustomPals
+	ld [hli], a
+	ld [hl], a
+	ret
 
 BattleAnim_RevertPals:
 	ld a, [wBattleAnimFlags]

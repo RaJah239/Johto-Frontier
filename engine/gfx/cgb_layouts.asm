@@ -111,10 +111,9 @@ SetDefaultBattlePalette:
 	ld hl, BattleObjectPals - 1 palettes
 	ld bc, 1 palettes
 	call AddNTimes
-	call FarCopyWRAM
-	pop af
-	ldh [rSVBK], a
-	ret
+	; FarCopyColorWRAM selects the correct WRAM bank and keeps the stack
+	; balanced with SetDefaultBattlePalette's wrapper
+	jmp FarCopyColorWRAM
 
 SetBattlePal_Player:
 	call GetBattlemonBackpicPalettePointer
