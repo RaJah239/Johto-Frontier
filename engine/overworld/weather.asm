@@ -1,4 +1,4 @@
-; Overworld rain, snow/hail, and sandstorm particles
+; Overworld rain, snow/hail, sandstorm and cherry blossom particles
 ; Weather uses free OAM entries from the end so map objects keep priority.
 
 UpdateOverworldWeatherFrame::
@@ -1815,6 +1815,7 @@ WeatherFadeStep::
 	res WEATHER_LIGHTNING_HOLD_F, [hl]
 	pop hl
 	ret
+
 .fade
 	ld a, [wWeatherFadeSteps]
 	and a
@@ -1964,7 +1965,6 @@ WeatherFadeStep::
 	pop af ; red
 	or e
 	ld e, a
-
 .store
 	pop hl
 	ld a, e
@@ -1984,7 +1984,6 @@ WeatherFadeStep::
 	add hl, bc
 	ld bc, 4 palettes
 	call CopyBytesInBlocksOfEight
-
 .stepped
 	pop af
 	ldh [rSVBK], a
@@ -2065,8 +2064,6 @@ LerpChannel:
 	pop hl
 	ret
 
-
-
 WeatherRandom:
 ; Cheap 16-bit xorshift (7, 9, 8) for weather particles: a few instructions
 ; instead of the save-backed Random, which up to 16 particles call several
@@ -2113,6 +2110,7 @@ WeatherRandomRange:
 	jr c, .done
 	sub c
 	jr .mod
+
 .done
 	pop bc
 	ret
