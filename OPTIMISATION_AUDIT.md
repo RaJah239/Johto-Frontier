@@ -916,7 +916,7 @@ Complete the project systematically using the following phases.
 - [ ] Audit softlocks.
 - [ ] Audit memory corruption.
 - [x] Audit stack corruption.
-- [ ] Audit register corruption.
+- [x] Audit register corruption.
 - [x] Audit ROM banking.
 - [x] Audit RAM banking.
 - [x] Audit interrupt safety.
@@ -1104,14 +1104,14 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - Overall status: In progress
 - Current phase: Phase 2
-- Current task: Phase 2 stability audit: freezes, softlocks, interrupt safety, invalid accesses
+- Current task: Phase 2: buffer-length checks and wait-loop review
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
 - Last completed task: STAB-005 (BUG-008)
 - Last verified commit: `d007b16f8` (full suite: 105 scripts, 95 fully passing, the rest profilers/comparisons)
 - Outstanding blockers: none
-- Next task: Phase 2: remaining checklist items
+- Next task: close Phase 2, then Phase 3 (battle engine correctness)
 
 Update this section continuously.
 
@@ -1458,6 +1458,7 @@ Do not silently ignore unresolved issues.
 - Resolved: the four partly passing tests were test-side faults, not ROM bugs (TEST-003).
 - The interpreter tests live in the git-excluded `.claude-tools/romtest` folder, so fixes to them are recorded here but are not part of the repository history.
 - The suite is a usable regression gate again (TEST-004). The four comparison tests (`test_bug_contest_judging`, `test_map_render_same`, `test_overworld_screen_same`, `test_type_chart_scan`) should be run with the baseline ROM as the older build after any change to those systems. `test_view_animations` needs a debug build. `test_map_render_same` is stale (written for the removed LZP format) and should be rewritten or retired; `test_overworld_screen_same` covers the same ground (TEST-010).
+- Phase 2 items still open: crashes, freezes, softlocks and memory corruption are covered so far by the static checks (TEST-005, 009, 013, 015, 017) and the bugs they found (BUG-003 to BUG-008). Still to do: buffer-length checks on fixed-size copies, and a review of wait loops that could spin forever. Real-hardware timing needs the manual checklist.
 - No emulator or physical hardware is available here: VBlank/HBlank timing, DMA and real-hardware behaviour can only be checked in the interpreter with emulated hooks. Anything timing-sensitive needs manual emulator testing (Section 32).
 - WRAM0 and WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
 
