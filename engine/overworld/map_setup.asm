@@ -168,6 +168,9 @@ MapWeatherTable:
 	db GROUP_LAKE_OF_RAGE, MAP_LAKE_OF_RAGE
 	db WEATHER_RAIN, -1
 	db WEATHER_RAIN, -1
+	db GROUP_ROUTE_16, MAP_ROUTE_16
+	db WEATHER_RAIN, WEATHER_SUN, WEATHER_NONE, WEATHER_HAIL, -1
+	db WEATHER_RAIN, WEATHER_NONE, WEATHER_HAIL, -1
 	db -1
 
 ; the weather is re-rolled each time you reach a new outdoor

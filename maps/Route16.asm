@@ -46,41 +46,6 @@ Route16_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, .Weather
-
-.Weather:
-	checktime EVE | NITE
-	iftrue .NightWeather
-	random 4
-	ifequal 0, .Sun
-	ifequal 1, .Rain
-	ifequal 2, .Hail
-	setval WEATHER_NONE
-	writemem wFieldWeather
-	endcallback
-
-.NightWeather:
-	random 3
-	ifequal 0, .Rain
-	ifequal 1, .Hail
-	setval WEATHER_NONE
-	writemem wFieldWeather
-	endcallback
-
-.Sun
-	setval WEATHER_SUN
-	writemem wFieldWeather
-	endcallback
-
-.Rain
-	setval WEATHER_RAIN
-	writemem wFieldWeather
-	endcallback
-
-.Hail
-	setval WEATHER_HAIL
-	writemem wFieldWeather
-	endcallback
 
 TrainerBirdKeeperVance:
 	generictrainer BIRD_KEEPER, VANCE, EVENT_BEAT_BIRD_KEEPER_VANCE, .SeenText, .BeatenText
