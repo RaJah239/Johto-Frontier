@@ -39,6 +39,20 @@ endr
 	ld a, BANK(wBGPals1)
 	jmp FarCopyWRAM
 
+PokepicPartyMonShiny::
+; (callasm) The next pokepic is in shiny colours if party mon wCurPartyMon
+; is shiny: the Cianwood photographer's picture.
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMon1DVs
+	call GetPartyLocation
+	ld b, h
+	ld c, l
+	call CheckShininess
+	ret nc
+	ld a, TRUE
+	ld [wPokepicShiny], a
+	ret
+
 DEF SHINY_ATK_MASK EQU %0010
 DEF SHINY_DEF_DV EQU 10
 DEF SHINY_SPD_DV EQU 15

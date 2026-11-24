@@ -57,6 +57,7 @@ CianwoodPhotoStudioFishingGuruScript:
 	special FadeInPalettes_EnableDynNoApply
 	reanchormap
 	readmem wCurPartySpecies
+	callasm PokepicPartyMonShiny
 	pokepic 0
 	cry 0
 	waitsfx
