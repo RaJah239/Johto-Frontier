@@ -34,12 +34,6 @@ Route5_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, .Weather
-
-.Weather:
-	setval WEATHER_RAIN
-	writemem wFieldWeather
-	endcallback
 
 TrainerHikerAnthony:
 	generictrainer HIKER, ANTHONY, EVENT_BEAT_HIKER_ANTHONY, .SeenText, .BeatenText

@@ -41,12 +41,6 @@ Route15_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, .Weather
-
-.Weather:
-	setval WEATHER_RAIN
-	writemem wFieldWeather
-	endcallback
 
 TrainerCamperSpencer:
 	generictrainer CAMPER, SPENCER, EVENT_BEAT_CAMPER_SPENCER, .SeenText, .BeatenText
