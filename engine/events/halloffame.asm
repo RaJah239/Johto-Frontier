@@ -59,6 +59,7 @@ HallOfFame_FadeOutMusic:
 	ret
 
 AnimateHallOfFame:
+	farcall LoadBattleGenderIcons
 	xor a
 	ld [wJumptableIndex], a
 	call LoadHOFTeam
@@ -102,6 +103,7 @@ AnimateHallOfFame:
 	ld de, .String_NewHallOfFamer
 	hlcoord 1, 2
 	call PlaceString
+	call HOF_ColorGenderIcon
 	call WaitBGMap
 	decoord 6, 5
 	ld c, ANIM_MON_HOF
@@ -280,6 +282,7 @@ HOF_SlideFrontpic:
 
 _HallOfFamePC:
 	call LoadFontsBattleExtra
+	farcall LoadBattleGenderIcons
 	xor a
 	ld [wJumptableIndex], a
 .MasterLoop:
@@ -372,6 +375,7 @@ _HallOfFamePC:
 	call WaitBGMap
 	ld b, SCGB_PLAYER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
+	call HOF_ColorGenderIcon
 	call SetDefaultBGPAndOBP
 	decoord 6, 5
 	ld c, ANIM_MON_HOF
@@ -474,9 +478,9 @@ DisplayHOFMon:
 	farcall GetGender
 	ld a, " "
 	jr c, .got_gender
-	ld a, "♂"
+	ld a, BATTLE_GENDER_TILE ; male (red)
 	jr nz, .got_gender
-	ld a, "♀"
+	inc a ; female (blue)
 
 .got_gender
 	hlcoord 18, 13
@@ -500,6 +504,19 @@ DisplayHOFMon:
 	ld de, wTempMonID
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
 	jmp PrintNum
+
+HOF_ColorGenderIcon:
+; The gender icon (DisplayHOFMon) takes BG palette 1, which
+; _CGB_PlayerOrMonFrontpicPals fills with white, red, blue and black.
+	ld a, [wTilemap + 13 * SCREEN_WIDTH + 18]
+	sub BATTLE_GENDER_TILE
+	cp 2
+	ld a, 1
+	jr c, .got_palette
+	xor a
+.got_palette
+	ld [wAttrmap + 13 * SCREEN_WIDTH + 18], a
+	farjp ApplyAttrmap
 
 HOF_AnimatePlayerPic:
 	call ClearBGPalettes

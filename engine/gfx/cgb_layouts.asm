@@ -1326,6 +1326,10 @@ _CGB_PlayerOrMonFrontpicPals:
 	ld bc, wTempMonDVs
 	call GetPlayerOrMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
+	; palette 1 (not used by this layout's attrmap) for the Hall of Fame's
+	; gender icon: white, red, blue, black
+	ld hl, GenderIconColors
+	call LoadPalette_White_Col1_Col2_Black
 	call WipeAttrmap
 	call ApplyAttrmap
 	jmp ApplyPals
