@@ -143,6 +143,7 @@ Shiny Pokémon — especially stationary: A mon's shininess comes from the DVs r
 - Stat screen Condition added to display levels of happiness
 - Fourth stat page added with Abilities and Press Select to view caught time, level, location, effort values per stat, core trait (hidden power type)
 - Move Pokémon in party menu with Select button (only outside battles)
+- Reorder the Start menu: press Select on an entry to pick it up, Up/Down to move it, A or Select to drop it, B to cancel (the order is saved; locked entries are skipped)
 - Can swap held items of Pokémon outside of battles
 - Battle HUD Update
 - All Pokémon DVs get calculated as 15 per stat

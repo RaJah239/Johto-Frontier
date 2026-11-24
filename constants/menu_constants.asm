@@ -105,3 +105,17 @@ DEF NUM_PARTYMENUACTIONS EQU const_value
 	const NAME_6 ; duplicate of NAME_MON
 	const NAME_7 ; duplicate of NAME_MON
 DEF NUM_NAME_TYPES EQU const_value
+
+; Start menu slots (engine/menus/start_menu.asm), in the default order.
+; Each slot shows one entry when it's unlocked; Save and Quit share a slot,
+; and Exit, Warp and Give Up share one.
+	const_def
+	const SMSLOT_POKEDEX
+	const SMSLOT_POKEMON
+	const SMSLOT_PACK
+	const SMSLOT_POKEGEAR
+	const SMSLOT_STATUS
+	const SMSLOT_SAVE
+	const SMSLOT_OPTION
+	const SMSLOT_EXIT
+DEF NUM_START_MENU_SLOTS EQU const_value

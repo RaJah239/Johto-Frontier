@@ -111,6 +111,8 @@ StartMenu::
 	call .PrintDayTime
 
 	call SetUpMenu
+	ld hl, wMenuJoypadFilter
+	set SELECT_F, [hl]
 	ld a, $ff
 	ld [wMenuSelection], a
 .loop
@@ -120,7 +122,12 @@ StartMenu::
 	cp B_BUTTON
 	jr z, .b
 	cp A_BUTTON
-	jr nz, .loop
+	jr z, .a
+	ldh a, [hJoyPressed]
+	bit SELECT_F, a
+	jr z, .loop
+	jr .Carry
+
 .a
 	call PlayClickSFX
 	and a
@@ -150,6 +157,151 @@ StartMenu::
 	ld a, [wQueuedScriptBank]
 	rst FarCall
 	jr .ReturnEnd2
+
+.Carry:
+; Select picked up the entry under the cursor: Up/Down move it past the
+; unlocked entries, A or Select drops it (and keeps the order), B puts it back
+	ld a, [wMenuSelection]
+	cp -1
+	jr z, .GetInput
+	ld [wStartMenuCarried], a
+	call PlayClickSFX
+.carry_redraw
+	call .ShowCarried
+	call .DrawCarrying
+.carry_loop
+	call JoyTextDelay
+	call GetMenuJoypad
+	bit A_BUTTON_F, a
+	jr nz, .drop
+	bit SELECT_F, a
+	jr nz, .drop
+	bit B_BUTTON_F, a
+	jr nz, .cancel
+	ld b, -1
+	bit D_UP_F, a
+	jr nz, .carry_move
+	bit D_DOWN_F, a
+	jr z, .carry_loop
+	ld b, 1
+.carry_move
+	call .MoveCarried
+	jr c, .carry_loop
+	jr .carry_redraw
+
+.drop
+	call StartMenu_SaveOrder
+	call PlayClickSFX
+	jr .carry_done
+
+.cancel
+	call StartMenu_LoadOrder
+.carry_done
+	call .ShowCarried
+	jmp .GetInput
+
+.ShowCarried:
+; put the cursor on the carried entry and rebuild the list
+	ld hl, wStartMenuOrder
+	ld c, 1
+.find_carried
+	ld a, [hl]
+	push hl
+	push bc
+	call .GetSlotEntry
+	pop bc
+	pop hl
+	ld b, a
+	ld a, [wStartMenuCarried]
+	cp b
+	jr z, .found_carried
+	inc hl
+	ld a, b
+	cp -1
+	jr z, .find_carried
+	inc c
+	jr .find_carried
+
+.found_carried
+	ld a, c
+	ld [wMenuCursorPosition], a
+	jmp .BuildMenuItems
+
+.MoveCarried:
+; swap the carried entry's slot with the nearest unlocked slot in direction b
+; (-1 up, 1 down); carry if there's none
+	ld hl, wStartMenuOrder
+	ld c, 0 ; the index of hl in the order
+.find_slot
+	ld a, [hl]
+	push hl
+	push bc
+	call .GetSlotEntry
+	pop bc
+	pop hl
+	ld d, a
+	ld a, [wStartMenuCarried]
+	cp d
+	jr z, .found_slot
+	inc hl
+	inc c
+	jr .find_slot
+
+.found_slot
+	ld d, h
+	ld e, l
+.next_slot
+	ld a, c
+	add b
+	ld c, a
+	cp NUM_START_MENU_SLOTS ; (-1 counts as too big)
+	jr nc, .no_slot
+	bit 7, b
+	jr nz, .previous
+	inc hl
+	jr .check_slot
+.previous
+	dec hl
+.check_slot
+	ld a, [hl]
+	push hl
+	push de
+	push bc
+	call .GetSlotEntry
+	pop bc
+	pop de
+	pop hl
+	cp -1
+	jr z, .next_slot
+	ld a, [de]
+	ld c, [hl]
+	ld [hl], a
+	ld a, c
+	ld [de], a
+	and a
+	ret
+
+.no_slot
+	scf
+	ret
+
+.DrawCarrying:
+; the menu with a hollow cursor on the carried entry and the move help
+	xor a
+	ldh [hBGMapMode], a
+	call .DrawDayTimeBox
+	call SetUpMenu
+	call PlaceHollowCursor
+	hlcoord 1, 15
+	ld de, .CarryingDesc
+	call PlaceString
+	hlcoord 1, 16
+	ld de, .CarryingOK
+	call PlaceString
+	jmp ApplyTilemap
+
+.CarryingDesc: db   "▲▼: Move@"
+.CarryingOK: db   "A: OK@"
 
 .ReturnRedraw:
 	call .RestoreIconPalettes
@@ -243,59 +395,107 @@ endr
 	ret
 
 .SetUpMenuItems:
+	call StartMenu_LoadOrder
+.BuildMenuItems:
+; the entries of wStartMenuOrder's unlocked slots, in that order
 	xor a
 	ld [wWhichIndexSet], a
 	call .FillMenuList
+	ld hl, wStartMenuOrder
+.build_loop
+	ld a, [hl]
+	push hl
+	push de
+	push bc
+	call .GetSlotEntry
+	pop bc
+	pop de
+	cp -1
+	call nz, .AppendMenuList
+	pop hl
+	inc hl
+	ld a, l
+	sub LOW(wStartMenuOrder + NUM_START_MENU_SLOTS)
+	jr nz, .build_loop
+	ld a, c
+	ld [wMenuItemsList], a
+	ret
 
-	ld hl, wStatusFlags
-	bit STATUSFLAGS_POKEDEX_F, [hl]
-	jr z, .no_pokedex
+.GetSlotEntry:
+; a = the STARTMENUITEM_* that slot a shows, or -1 while it's locked
+	ld e, a
+	ld d, 0
+	ld hl, .SlotEntries
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jp hl
+
+.SlotEntries:
+; entries correspond to SMSLOT_* constants
+	dw .SlotPokedex
+	dw .SlotPokemon
+	dw .SlotPack
+	dw .SlotPokegear
+	dw .SlotStatus
+	dw .SlotSave
+	dw .SlotOption
+	dw .SlotExit
+	assert @ - .SlotEntries == NUM_START_MENU_SLOTS * 2
+
+.SlotPokedex:
+	ld a, [wStatusFlags]
+	bit STATUSFLAGS_POKEDEX_F, a
+	jr z, .locked
 	ld a, STARTMENUITEM_POKEDEX
-	call .AppendMenuList
-.no_pokedex
+	ret
 
+.SlotPokemon:
 	ld a, [wPartyCount]
 	and a
-	jr z, .no_pokemon
+	jr z, .locked
 	ld a, STARTMENUITEM_POKEMON
-	call .AppendMenuList
-.no_pokemon
+	ret
 
+.SlotPack:
 	ld a, [wLinkMode]
 	and a
-	jr nz, .no_pack
-	ld hl, wStatusFlags2
-	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, [hl]
-	jr nz, .no_pack
+	jr nz, .locked
+	ld a, [wStatusFlags2]
+	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, a
+	jr nz, .locked
 	ld a, STARTMENUITEM_PACK
-	call .AppendMenuList
-.no_pack
+	ret
 
-	ld hl, wPokegearFlags
-	bit POKEGEAR_OBTAINED_F, [hl]
-	jr z, .no_pokegear
+.SlotPokegear:
+	ld a, [wPokegearFlags]
+	bit POKEGEAR_OBTAINED_F, a
+	jr z, .locked
 	ld a, STARTMENUITEM_POKEGEAR
-	call .AppendMenuList
-.no_pokegear
+	ret
 
+.SlotStatus:
 	ld a, STARTMENUITEM_STATUS
-	call .AppendMenuList
+	ret
 
+.SlotSave:
 	ld a, [wLinkMode]
 	and a
-	jr nz, .no_save
-	ld hl, wStatusFlags2
-	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, [hl]
+	jr nz, .locked
+	ld a, [wStatusFlags2]
+	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, a
 	ld a, STARTMENUITEM_QUIT
-	jr nz, .write
+	ret nz
 	ld a, STARTMENUITEM_SAVE
-.write
-	call .AppendMenuList
-.no_save
+	ret
 
+.SlotOption:
 	ld a, STARTMENUITEM_OPTION
-	call .AppendMenuList
+	ret
 
+.SlotExit:
 	; The Grand Gauntlet battle rooms have no warps of their own, so in
 	; there Exit/Warp is swapped for Give Up: abandon the run and warp
 	; back to the lobby stairs.
@@ -306,37 +506,32 @@ endr
 	ld a, [wMapNumber]
 	cp MAP_BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_1
 	jr c, .not_gauntlet_battle_room
-	ld a, [wMapNumber]
 	cp MAP_BATTLE_PLAZA_GRAND_GAUNTLET_BATTLE_ROOM_50 + 1
 	jr nc, .not_gauntlet_battle_room
 	ld a, STARTMENUITEM_GIVEUP
-	call .AppendMenuList
-	jr .next
+	ret
 
 .not_gauntlet_battle_room
 	; Bug Catching contest must always have the Exit Option
-	ld hl, wStatusFlags2
-	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, [hl]
-	jr nz, .bug_contest_or_fast_travel_not_obtained
-
+	ld a, [wStatusFlags2]
+	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, a
+	jr nz, .exit
 	ld a, [wLinkMode]
 	and a
-	jr nz, .bug_contest_or_fast_travel_not_obtained
-
+	jr nz, .exit
 	; check if end game fast travel has been obtained
-	ld hl, wPokegearFlags
-	bit ENGINE_START_MENU_WARP_F, [hl]
-	jr z, .bug_contest_or_fast_travel_not_obtained
+	ld a, [wPokegearFlags]
+	bit ENGINE_START_MENU_WARP_F, a
+	jr z, .exit
 	ld a, STARTMENUITEM_WARP
-	call .AppendMenuList
-	jr .next
+	ret
 
-.bug_contest_or_fast_travel_not_obtained
+.exit
 	ld a, STARTMENUITEM_EXIT
-	call .AppendMenuList
-.next
-	ld a, c
-	ld [wMenuItemsList], a
+	ret
+
+.locked
+	ld a, -1
 	ret
 
 .FillMenuList:
@@ -975,3 +1170,99 @@ WeatherColors:
 	RGB 20, 15, 03 ; sandstorm (battle brown)
 	RGB 01, 04, 31 ; hail      (battle blue)
 	RGB 08, 12, 31 ; clear     (battle sky blue)
+
+StartMenu_LoadOrder:
+; wStartMenuOrder = the saved slot order, or the default one if it isn't valid
+	ldh a, [rSVBK]
+	push af
+	ld hl, wStartMenuOrderSaved
+	ld de, wStartMenuOrder
+	ld c, 0
+.loop
+	ld a, BANK(wStartMenuOrderSaved)
+	ldh [rSVBK], a
+	ld a, [hli]
+	ld b, a
+	ld a, BANK(wStartMenuOrder)
+	ldh [rSVBK], a
+	ld a, b
+	call .Unpack
+	jr z, .unpacked
+	ld a, b
+	swap a
+	call .Unpack
+	jr nz, .loop
+.unpacked
+	pop af
+	ldh [rSVBK], a
+; each slot must be there once
+	ld b, 0
+.check
+	ld hl, wStartMenuOrder
+	ld c, NUM_START_MENU_SLOTS
+.search
+	ld a, [hli]
+	cp b
+	jr z, .next
+	dec c
+	jr nz, .search
+	ld hl, wStartMenuOrder
+	xor a
+.default
+	ld [hli], a
+	inc a
+	cp NUM_START_MENU_SLOTS
+	jr nz, .default
+	ret
+
+.next
+	inc b
+	ld a, b
+	cp NUM_START_MENU_SLOTS
+	jr nz, .check
+	ret
+
+.Unpack:
+; [de++] = (a & $f) xor c, c++; z after the last slot
+	and $f
+	xor c
+	ld [de], a
+	inc de
+	inc c
+	ld a, c
+	cp NUM_START_MENU_SLOTS
+	ret
+
+StartMenu_SaveOrder:
+; wStartMenuOrderSaved = wStartMenuOrder, two slots per byte
+	ldh a, [rSVBK]
+	push af
+	ld hl, wStartMenuOrder
+	ld de, wStartMenuOrderSaved
+	ld c, 0
+.loop
+	ld a, BANK(wStartMenuOrder)
+	ldh [rSVBK], a
+	ld a, [hli]
+	xor c
+	and $f
+	ld b, a
+	inc c
+	ld a, [hli]
+	xor c
+	swap a
+	and $f0
+	or b
+	ld b, a
+	inc c
+	ld a, BANK(wStartMenuOrderSaved)
+	ldh [rSVBK], a
+	ld a, b
+	ld [de], a
+	inc de
+	ld a, c
+	cp NUM_START_MENU_SLOTS
+	jr c, .loop
+	pop af
+	ldh [rSVBK], a
+	ret

@@ -1866,7 +1866,11 @@ wStringBuffer1:: ds STRING_BUFFER_LENGTH
 wStringBuffer2:: ds STRING_BUFFER_LENGTH
 wStringBuffer3:: ds STRING_BUFFER_LENGTH
 wStringBuffer4:: ds STRING_BUFFER_LENGTH
-wStringBuffer5:: ds STRING_BUFFER_LENGTH
+wStringBuffer5::
+
+wStartMenuOrder:: ds NUM_START_MENU_SLOTS
+wStartMenuCarried:: db ; the STARTMENUITEM_* being moved
+	ds STRING_BUFFER_LENGTH - (NUM_START_MENU_SLOTS + 1)
 
 wBattleMenuCursorPosition:: db
 
@@ -2777,7 +2781,9 @@ wEventFlags:: flag_array NUM_EVENTS
 
 wCurBox:: db
 
-	ds 128
+wStartMenuOrderSaved:: ds (NUM_START_MENU_SLOTS + 1) / 2
+
+	ds 128 - (NUM_START_MENU_SLOTS + 1) / 2
 
 wCelebiEvent::
 ; bit 2: forest is restless
