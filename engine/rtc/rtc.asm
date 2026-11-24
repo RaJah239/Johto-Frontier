@@ -57,6 +57,9 @@ StageRTCTimeForSave:
 	ret
 
 SaveRTC:
+	ld a, [wOptions5]
+	bit NO_RTC, a
+	jmp nz, SaveFakeRTC
 	ld a, SRAM_ENABLE
 	ld [MBC3SRamEnable], a
 	call LatchClock
@@ -162,3 +165,29 @@ _InitTime::
 .okay_days
 	ld [de], a
 	ret
+
+SaveFakeRTC:
+; "Real Time Clock" Off: there is no hardware clock to read back later, so
+; keep the game's own clock (hRTC*) in the save
+	ld a, BANK(sFakeRTC)
+	call OpenSRAM
+	ld hl, hRTCDayHi
+	ld de, sFakeRTC
+	ld bc, 5
+	call CopyBytes
+	xor a
+	ld [sRTCStatusFlags], a
+	jmp CloseSRAM
+
+LoadFakeRTC::
+; after loading a save: bring back the game's own clock
+	ld a, [wOptions5]
+	bit NO_RTC, a
+	ret z
+	ld a, BANK(sFakeRTC)
+	call OpenSRAM
+	ld hl, sFakeRTC
+	ld de, hRTCDayHi
+	ld bc, 5
+	call CopyBytes
+	jmp CloseSRAM

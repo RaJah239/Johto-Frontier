@@ -17,6 +17,11 @@ UpdateTime::
 GetClock::
 ; store clock data in hRTCDayHi-hRTCSeconds
 
+; with "Real Time Clock" Off the game's own clock lives in hRTC*
+	ld a, [wOptions5]
+	bit NO_RTC, a
+	ret nz
+
 ; enable clock r/w
 	ld a, SRAM_ENABLE
 	ld [MBC3SRamEnable], a
@@ -192,6 +197,11 @@ ClearClock::
 
 SetClock::
 ; set clock data from hram
+
+; do not touch the clock hardware with "Real Time Clock" Off
+	ld a, [wOptions5]
+	bit NO_RTC, a
+	ret nz
 
 ; enable clock r/w
 	ld a, SRAM_ENABLE

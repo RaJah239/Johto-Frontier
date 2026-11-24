@@ -14,13 +14,23 @@ NextCallReceiveDelay:
 .okay
 	ld e, a
 	ld d, 0
+	ld a, [wOptions5]
+	bit NO_RTC, a
 	ld hl, .ReceiveCallDelays
+	jr z, .real_time_clock
+	ld hl, .ReceiveCallDelaysNoRTC
+
+.real_time_clock
 	add hl, de
 	ld a, [hl]
 	jr RestartReceiveCallDelay
 
 .ReceiveCallDelays:
 	db 20, 10, 5, 3
+
+.ReceiveCallDelaysNoRTC:
+; the same waits, on the game's faster own clock
+	db 20 * NO_RTC_SPEEDUP, 10 * NO_RTC_SPEEDUP, 5 * NO_RTC_SPEEDUP, 3 * NO_RTC_SPEEDUP
 
 CheckReceiveCallTimer:
 	call CheckReceiveCallDelay ; check timer
@@ -99,7 +109,13 @@ InitNDaysCountdown:
 	jmp CopyDayToHL
 
 StartBugContestTimer:
+	ld a, [wOptions5]
+	bit NO_RTC, a
 	ld a, BUG_CONTEST_MINUTES
+	jr z, .real_time_clock
+	ld a, BUG_CONTEST_MINUTES * NO_RTC_SPEEDUP
+
+.real_time_clock
 	ld [wBugContestMinsRemaining], a
 	ld a, BUG_CONTEST_SECONDS
 	ld [wBugContestSecsRemaining], a

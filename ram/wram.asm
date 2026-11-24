@@ -1430,6 +1430,7 @@ wOptions5::
 ; bit 1: skip recoil text
 ; bit 2: skip surf music
 ; bit 3: bike turn speed
+; bit 4: real time clock on/off (NO_RTC set = the game's own clock)
 	db
 
 ; Time buffer, for counting the amount of time since

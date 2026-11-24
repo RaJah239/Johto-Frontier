@@ -1,4 +1,4 @@
-DEF NUM_OPTIONS EQU 36
+DEF NUM_OPTIONS EQU 37
 DEF OPTIONS_VISIBLE_ROWS EQU 6
 DEF DESCRIPTION_BOX_Y EQU SCREEN_HEIGHT - 4
 DEF DESCRIPTION_TEXT_Y EQU DESCRIPTION_BOX_Y + 1
@@ -98,6 +98,7 @@ OptionsMenu_DrawLabels:
 	dw .TextSpeed
 	dw .BattleScene
 	dw .Sound
+	dw .RealTimeClock
 	dw .RunningShoes
 	dw .MinimalDialogue
 	dw .WeatherEffects
@@ -136,6 +137,7 @@ OptionsMenu_DrawLabels:
 .TextSpeed:        db "Text Speed@"
 .BattleScene:      db "Battle Scene@"
 .Sound:            db "Audio Mode@"
+.RealTimeClock:    db "Real Time Clock@"
 .RunningShoes:     db "Running Shoes@"
 .MinimalDialogue:  db "Dialogue/Text@"
 .WeatherEffects:   db "Weather Effects@"
@@ -201,6 +203,7 @@ GetOptionPointer:
 	dw Options_TextSpeed
 	dw Options_BattleScene
 	dw Options_Sound
+	dw Options_RealTimeClock
 	dw Options_RunningShoes
 	dw Options_MinimalDialogue
 	dw Options_WeatherEffects
@@ -676,6 +679,43 @@ Options_Sound:
 .Mono:   db "Mono  @"
 .Stereo: db "Stereo@"
 .No:     db "Off   @"
+
+Options_RealTimeClock:
+; On: the cartridge's clock, which keeps running while the Game Boy is off.
+; Off: the game's own clock, which only runs while you play and is
+; NO_RTC_SPEEDUP times faster (a day lasts 4 hours).
+	ldh a, [hJoyPressed]
+	and D_LEFT | D_RIGHT
+	jr z, .Display
+	ld a, [wOptions5]
+	bit NO_RTC, a
+	jr nz, .SwitchOn
+; Start the game's clock from the time it is now.
+	call GetClock
+	ld hl, wOptions5
+	set NO_RTC, [hl]
+	jr .Display
+
+.SwitchOn:
+; Set the cartridge's clock to the game's time, so nothing jumps.
+	ld hl, wOptions5
+	res NO_RTC, [hl]
+	call SetClock
+
+.Display:
+	ld de, .On
+	ld a, [wOptions5]
+	bit NO_RTC, a
+	jr z, .Place
+	ld de, .Off
+.Place:
+	call OptionsMenu_PlaceValue
+	call PlaceString
+	and a
+	ret
+
+.On:  db "On @"
+.Off: db "Off@"
 
 Options_MinimalDialogue:
 	ld hl, wOptions2
@@ -1958,6 +1998,7 @@ OptionsMenu_DrawDescription:
 	dw .DescTextSpeed
 	dw .DescBattleScene
 	dw .DescSound
+	dw .DescRealTimeClock
 	dw .DescRunningShoes
 	dw .DescMinimalDialogue
 	dw .DescWeatherEffects
@@ -1996,6 +2037,7 @@ OptionsMenu_DrawDescription:
 .DescTextSpeed:       db "Adjust the text<LF>speed.@"
 .DescBattleScene:     db "Turn On or Off<LF>Battle Animations.@"
 .DescSound:           db "Music/BGB Audio:<LF>Mono, Stereo, Off.@"
+.DescRealTimeClock:   db "Off: time runs on-<LF>ly while playing.@"
 .DescRunningShoes:    db "Set default to<LF>run or walk.@"
 .DescScaledExp:       db "Scaled or Zero;<LF>Normal post-Champ.@"
 .DescQuickNurse:      db "#mon Center<LF>fast or slow heal.@"

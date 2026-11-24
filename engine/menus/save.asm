@@ -514,6 +514,7 @@ TryLoadSaveFile:
 	call z, WriteBackupSave
 	farcall RestorePartyMonMail
 	call LoadStorageSystem
+	farcall LoadFakeRTC
 
 	; Just in case
 	call WriteBackupSave
@@ -527,6 +528,7 @@ TryLoadSaveFile:
 	call LoadBackupPokemonData
 	farcall RestorePartyMonMail
 	call LoadStorageSystem
+	farcall LoadFakeRTC
 	call SaveGameData
 	and a
 	ret

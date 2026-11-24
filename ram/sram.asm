@@ -48,7 +48,8 @@ endr
 	ds $30
 
 sRTCStatusFlags:: db
-	ds 9
+sFakeRTC:: ds 5 ; hRTCDayHi-hRTCSeconds, kept while "Real Time Clock" is Off
+	ds 4
 
 
 SECTION "GG Bag Stash Backup", SRAM
