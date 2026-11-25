@@ -40,6 +40,8 @@ AI_Smart:
 	pop hl
 	push hl
 
+; Dispatch with hl pointing to this move's score. The handler's ret lands
+; at .nextmove, which restores the loop registers and advances one slot.
 	ld bc, .nextmove
 	push bc
 
@@ -548,12 +550,14 @@ AI_Smart_CloseCombat:
 	ret
 
 AI_Smart_RecoilHit:
+; At half HP or less, discourage recoil unless Rock Head prevents it.
+	call AICheckEnemyHalfHP
+	ret c
+	push hl
+	ld a, [wEnemyMonSpecies]
 	ld hl, RockHeadPokemon_AI
 	call IsInAbilityList
-	ret c
-
-; discourage this move if enemy's hp is lower than 50%
-	call AICheckEnemyHalfHP
+	pop hl
 	ret c
 	inc [hl]
 	ret
