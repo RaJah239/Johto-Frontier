@@ -1104,12 +1104,12 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - Overall status: In progress
 - Current phase: Phase 9 (code quality); Phases 7 and 8 complete
-- Current task: Phase 9 (code quality)
-- Current AI agent: Claude (Claude Code)
+- Current task: Phase 9, fix the independently reproduced recoil score write in AI_Smart, then run the final regression and review phases.
+- Current AI agent: Codex
 - Current Git branch: `000-Johto-Frontier`
-- Last verified build: clone of `d84d81c97` plus PERF-009 to PERF-011, Linux, RGBDS 0.7.0, 0 assembler warnings, 671,190 bytes free
-- Last completed task: PERF-009 to PERF-011 (hot AI helpers); Phase 5 complete
-- Last verified commit: PERF-011 (full suite: 137 scripts, no regressions against the previous run)
+- Last verified build: BUG-024, Linux, RGBDS 0.7.0, 670,312 bytes free, 0 incremental build warnings
+- Last completed task: basic AI knockout scoring (TEST-096)
+- Last verified commit: see the BUG-024 work log and Git history
 - Outstanding blockers: none
 - Next task: Phase 9 (code quality), then Phases 10-11
 
@@ -1144,6 +1144,8 @@ Maintain the following table throughout the project.
 | BUG-021 | Battle engine (Blessing ability) | `BattleCommand_EffectChance` doubles the effect chance with `sla [hl]` on a byte where 100% is 255, so any chance above 50% wrapped: 60% became about 20%, and a certain (100%) effect became 99.6%. Latent: no species has Blessing yet (`blessing_mons.asm` is empty) | Low (latent) | Fixed | TEST-071 |
 | BUG-022 | Battle Tower / Factory (team generation) | `PickRandomBattleTowerCompactMon`, stepping past a pool, computed the index's new high byte as `count_high - index_high` instead of `index_high - count_high`. With more than 256 mons across a challenge's pools (the design the comments describe), picks landed in the wrong pool or at a garbage address. Latent: today's largest challenge has 133 mons, so the high byte is always 0 | Medium (latent) | Fixed | TEST-073 |
 | BUG-023 | Audio engine (music fade) | When a fade-out ends, `FadeMusic` reads `wPlayerState` (WRAMX bank 1) to choose between bike and map music. It runs in VBlank, which does not set the WRAM bank, so if the interrupted code had another bank selected the engine read an unrelated byte and could start the wrong song. Also in vanilla pokecrystal | Low | Fixed | TEST-079 |
+
+| BUG-024 | Basic trainer AI | At low HP a healing-move search replaced the outer move count with an effect ID and overwrote the candidate move. A full set was read past slot four and the AI could give Hydro Pump the accuracy bonus for Tackle. | Medium | Fixed | TEST-096 |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1311,6 +1313,8 @@ Maintain the following table.
 | TEST-093 | AI move choice speed | `prof_ai_movechoice`: frames for `AI_SimMoveChoice` with three move sets | Interpreter (perfkit) | Measured | 6.1 -> 5.5, 5.2 -> 4.7, 7.9 -> 7.1 frames with PERF-008. |
 | TEST-094 | AI hot spots | `prof_flat`: exclusive M-cycles per routine for `AI_SimMoveChoice`, used to pick PERF-009 to PERF-011 | Interpreter (flat profile) | Measured | Before: `_Divide` 8.5%, `Bankswitch` 6.3%, `_Multiply` 5.7%, `GetFarByte` 4.8%, `IsSideSuppressed` 4.4%, far-call stubs ~8%, `GetBattleVarAddr` 3.5%, `IsSpeciesSuppressed` 3.4%. With PERF-008 to PERF-011: move choice 6.1 / 5.2 / 7.9 -> 4.9 / 4.2 / 6.3 frames; worst-case switch decision 20.0 -> 15.4 frames. |
 | TEST-095 | Far list lookup | `test_far_byte_list`: `IsInFarByteList` on the longest ability list in a ROMX bank: every listed value matches (carry, z, a = e = value, hl just past it) and unlisted ones do not (no carry, nz, a = $ff, hl past the terminator); bc and d preserved; the ROM bank restored | Interpreter | Passed | 10/10. |
+
+| TEST-096 | AI knockout scoring | Run AI_Basic with one, two and four moves, at 24/25/26 of 100 HP, with Recover, Slack Off or no healing, against awake and sleeping targets. Check scores and the last move slot read. | Interpreter, test_ai_basic_ko | Passed | 23/40 before, 40/40 after. Iron Dukes (14), Contrary (5), Magic Bounce (26) and Leaf Guard (35) also passed. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1981,6 +1985,14 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: none known.
 - Git commit message: `perf: speed up the hottest AI helpers`
 - Next task: rest of Phase 9; Phases 10-11.
+
+### BUG-024 — Keep the candidate and loop count during knockout scoring
+
+- 2026-11-25, Phase 9. The starting tree at `cd5155d01` was clean. Tracing the discarded Rock Head check in `engine/battle/ai/layers/ai_basic.asm` exposed two live values that the following healing search overwrote.
+- Saved the slot count across both searches. On a miss, reload the candidate using the outer move cursor before reading accuracy or power. Removed the discarded lookup. The scoring bonuses, thresholds and healing effects are unchanged. The local regression is in the existing romtest harness.
+- TEST-096 passed. All paths balance the stack, restoring BC preserves the search carry, and AIGetEnemyMove preserves the cursor and score pointer. Release ROM gained 7 free bytes versus the same-host starting build (670,305 to 670,312). RAM layout unchanged.
+- The initial Cygwin build encountered a stale Linux executable in the shared tools directory. Verification used isolated Linux builds and bundled RGBDS 0.7.0. Both the reconstructed baseline and starting HEAD have 885 fewer free bytes than the historical figures. Phase 11 will report same-toolchain deltas.
+- Commit: `fix: preserve the candidate when scoring low-HP knockouts`. Next: correct the separate AI_Smart recoil lookup and score pointer.
 
 ## 31. Outstanding Issues
 

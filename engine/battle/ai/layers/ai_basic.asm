@@ -289,34 +289,24 @@ AI_Basic:
 	cp EFFECT_EXPLOSION
 	jr z, .explode_or_heal
 
-; don't encourage recoil moves as much
-; except for rock head pokemon
-	ld a, [wEnemyMonSpecies]
-	push hl
-	push de
-	push bc
-	ld hl, RockHeadPokemon_AI
-	call IsInAbilityList
-	pop bc
-	pop de
-	pop hl
-
-;	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
-;	cp EFFECT_RECOIL_HIT
-;	jr z, .recoil
-
-.skip_recoil_check
-; if we are below 1/4 hp and have a healing move
-; then lesser encourage so we can use it
+; At or below quarter HP, give a knockout the smaller bonus if we can heal.
 	call AICheckEnemyQuarterHP
 	jr c, .check_accuracy
+	push bc ; b counts the move slots left in the outer loop
 	ld b, EFFECT_HEAL
 	call AIHasMoveEffect
-	jr c, .explode_or_heal
-
-	ld b, EFFECT_SLACK_OFF ; (this repo's other healing move effect)
+	jr c, .checked_healing
+	ld b, EFFECT_SLACK_OFF
 	call AIHasMoveEffect
+.checked_healing
+	pop bc
 	jr c, .explode_or_heal
+; AIHasMoveEffect loaded other moves into wEnemyMoveStruct. Resume scoring
+; the candidate, whose slot is immediately before the outer loop's cursor.
+	dec de
+	ld a, [de]
+	inc de
+	call AIGetEnemyMove
 
 .check_accuracy
 ; encourage more accurate moves if they can kill
@@ -348,12 +338,10 @@ AI_Basic:
 .no_strong_sleep_bonus
 ; encouragements to KO enemy
 ; standard attack = 9
-; recoil attack = 7
 ; inaccurate attack = 5
 ; explode attack = 3
 	dec [hl]
 	dec [hl]
-;.recoil
 	dec [hl]
 	dec [hl]
 .not_accurate
