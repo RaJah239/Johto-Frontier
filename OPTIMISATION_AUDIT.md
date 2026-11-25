@@ -1011,8 +1011,8 @@ Complete the project systematically using the following phases.
 - [x] Audit battle facilities.
 - [x] Audit save system.
 - [ ] Audit graphics engine.
-- [ ] Audit audio engine.
-- [ ] Audit hardware compatibility.
+- [x] Audit audio engine.
+- [x] Audit hardware compatibility.
 - [x] Create data-validation tools where practical.
 
 ### Phase 9 — Code Quality
@@ -1107,9 +1107,9 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 - Current task: Phase 8 graphics, audio and hardware compatibility
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
-- Last verified build: clone of `70df4375c` plus SAVE-001, Linux, RGBDS 0.7.0, 0 assembler warnings, 675,266 bytes free
-- Last completed task: SAVE-001 (save system review); PERF-007
-- Last verified commit: SAVE-001 (full suite: 130 scripts, no regressions against the previous run)
+- Last verified build: clone of `395a8e50f` plus HW-001, Linux, RGBDS 0.7.0, 0 assembler warnings, 675,266 bytes free
+- Last completed task: HW-001 (BUG-023; audio and hardware review)
+- Last verified commit: HW-001 (full suite: 131 scripts, no regressions against the previous run)
 - Outstanding blockers: none
 - Next task: Phase 8 move data, battle facilities, save system; then Phase 7. Open earlier items: Phase 4 type-chart index, Phase 5 register usage
 
@@ -1143,6 +1143,7 @@ Maintain the following table throughout the project.
 | BUG-020 | Pokémon data (evolutions) | Evolution lists fall through into the next label by design (families share data), but in the Porygon / Chansey / Magikarp block no entry ended its list: Porygon, Porygon2, Porygon-Z, Chansey and Blissey all ran on into Magikarp's "level 20 -> Gyarados" (and Porygon-Z into a happiness evolution into itself); Chansey evolved into Porygon-Z instead of Blissey. Fixed as the user chose: Porygon, Porygon2 and Chansey end their own lists (with the shared default learnset, so no moves change), Porygon-Z and Blissey have no evolution, Chansey -> Blissey by happiness. The rest of `evos_attacks.asm` is the author's work in progress (most species share a default "no evolution, Splash" entry) and was not touched. | High | Fixed | `test_evolutions` (1/8 on the baseline, 8/8 after) |
 | BUG-021 | Battle engine (Blessing ability) | `BattleCommand_EffectChance` doubles the effect chance with `sla [hl]` on a byte where 100% is 255, so any chance above 50% wrapped: 60% became about 20%, and a certain (100%) effect became 99.6%. Latent: no species has Blessing yet (`blessing_mons.asm` is empty) | Low (latent) | Fixed | TEST-071 |
 | BUG-022 | Battle Tower / Factory (team generation) | `PickRandomBattleTowerCompactMon`, stepping past a pool, computed the index's new high byte as `count_high - index_high` instead of `index_high - count_high`. With more than 256 mons across a challenge's pools (the design the comments describe), picks landed in the wrong pool or at a garbage address. Latent: today's largest challenge has 133 mons, so the high byte is always 0 | Medium (latent) | Fixed | TEST-073 |
+| BUG-023 | Audio engine (music fade) | When a fade-out ends, `FadeMusic` reads `wPlayerState` (WRAMX bank 1) to choose between bike and map music. It runs in VBlank, which does not set the WRAM bank, so if the interrupted code had another bank selected the engine read an unrelated byte and could start the wrong song. Also in vanilla pokecrystal | Low | Fixed | TEST-079 |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1286,6 +1287,9 @@ Maintain the following table.
 | TEST-074 | Battle Tower data | `validate_bt.py`: every `bt_mon` in the three pools has a real species, a known item and known moves, no repeated move in a set, a first move, and no duplicate records; `BattleTowerRandomLessThanDE` reviewed for uniformity (rejection on the top high byte) | Python validator; code review | Passed with one finding | 133 records. One exact duplicate: Snorlax (Leftovers, Double-Edge, Crunch, Earthquake, Rest) appears twice in a row in the Elite pool, which raises that set's odds. Teams never repeat a species, so nothing breaks. The user chose to keep it (Section 31). |
 | TEST-075 | PRNG speed | `prof_random`: 1000 calls of `Random` from a fixed state, M-cycles per call and the first values | Interpreter (perfkit) | Measured | 271.0 -> 260.0 M-cycles per call; identical sequence. A repo-wide search found no other `ld` to an HRAM label. |
 | TEST-076 | Save system | `validate_sram_pairs.py`: every routine scanned for returns or tail-jumps while SRAM is open and for unequal opens and closes; each of the 37 hits read by hand. Also: every field `SavePlayerData` writes is in the same SRAM bank (symbol file); save and verify checksums cover the same range, bank and byte order; the backup slot's save and load mirror the main slot's field for field; the PRNG zero-state reseed path checked | Python scan; symbol file; code review | Passed | All 37 hits are deliberate helper pairs (e.g. `OpenPokeDB`, `_PointBoxTheme`, `_GetFrontpic`, `RemoveMonFromPartyPartial` leave SRAM open for the caller, which closes it). Only the main load fixes up a Battle Tower reward state, as in vanilla. One dead `ret z` removed from `RemoveMonFromPartyPartial`. |
+| TEST-077 | Hardware compatibility | Static review: the one `halt` is followed by `nop`; `stop` assembles as `10 00` with `rIF`/`rIE` cleared and `rJOYP` = $30, and every caller of `DoubleSpeed` puts `rIE` back; OAM DMA runs from HRAM, waits 40 x 4 = 160 M-cycles, and `wShadowOAM` is page-aligned by `layout.link`; no hard-coded access to echo RAM or $FEA0-$FEFF; the ROM is CGB-only (`rgbfix -C`), so DMG-only hazards do not apply. Voltorb Flip's use of `$C400-$C4xx` (inside `wShadowOAM`) as scratch RAM was checked: it turns sprite DMA off (`hOAMUpdate`), runs in VBlank mode 0 (which honours it), and `ExitAllMenus` clears palettes and rebuilds OAM after it returns | Source and ROM-byte review | Passed | No faults. Voltorb Flip's interrupt masks now use `IE_DEFAULT` (same bytes). Whether a stray sprite can flash on its exit is a timing question for MT-008. |
+| TEST-078 | Audio data | `validate_audio.py`: from every channel entry (867) the data is walked to a terminator (`sound_ret`/`endchannel`, `sound_jump`/`jumpchannel`, or an infinite loop) without running into a header, table or the end of the file; every `sound_call` target (181) returns; `channel_count` matches the channel lines; the music, SFX and cry tables are length-asserted at build time | Python validator | Passed | 15 channels finish through the next channel's data (an empty channel's `sound_ret` used as a shared ending, or Thunderbolt running into Thundershock), as in vanilla. |
+| TEST-079 | Music fade and WRAM bank | `test_fade_bike_bank`: `FadeMusic` with the fade ending, `wPlayerState` set differently in bank 1 and in the selected bank (1, 3, 7): bike music only if bank 1 says Bicycle, and the selected bank is the same afterwards. Also: every WRAM variable the audio engine uses is in WRAM0 apart from this one | Interpreter | Passed | 2/6 on the previous build (it followed whichever bank was selected); 6/6 after BUG-023. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1881,6 +1885,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Git commit message: `refactor: drop an unreachable ret in RemoveMonFromPartyPartial`
 - Next task: Phase 8 graphics, audio and hardware compatibility; then Phase 7.
 
+### HW-001 — Hardware and audio review; music fade WRAM bank
+
+- Date: 2026-11-25
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 8 (audio engine, hardware compatibility)
+- System: Audio engine, interrupts and DMA, Voltorb Flip
+- Files modified: `audio/engine.asm`, `engine/games/voltorb_flip.asm`
+- Problem identified: BUG-023. Voltorb Flip's interrupt masks were magic numbers.
+- Root cause: an interrupt-time read of a banked WRAM variable without selecting its bank.
+- Solution implemented: `FadeMusic` selects bank 1 for the read and restores the previous bank; Voltorb Flip uses `IE_DEFAULT` (same bytes).
+- Behaviour preserved: identical when bank 1 is selected; song choice otherwise now follows the real player state.
+- Performance impact: a few cycles once per finished fade. Memory impact: 12 bytes (675,254 free).
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-077, TEST-078, TEST-079, full suite (131 scripts).
+- Test results: all pass; the full suite matches the previous run apart from the new test.
+- Remaining risks: timing-dependent behaviour needs MT-008.
+- Git commit message: `fix: read the player state from the right WRAM bank when a fade ends`
+- Next task: Phase 8 graphics engine; then Phase 7.
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -1935,6 +1958,7 @@ Make manual testing instructions sufficiently clear for the user to perform with
 - **MT-006 Link battle with Haxorus (BUG-010).** Setup: two copies of the game linked (two emulators with link support, or two consoles), one player with a Haxorus. Steps: in a link battle, get Haxorus a status (burn, poison, paralysis) and play several turns. Expected: both screens always agree on whether Tenacity cured the status, and the battle continues in sync to the end. Failure (old build): the screens disagree and the battle desyncs.
 
 - **MT-007 Neutralizing Gas and Spikes (BUG-015, BUG-016).** Setup: a battle with Spikes on your side, and an opponent with a Neutralizing Gas Pokémon. Steps: send in Gengar or Clefable (should now take Spikes damage); send in a Guts Pokémon that is burned, then let the foe's Neutralizing Gas Pokémon come in. Expected: Spikes damage the former Levitate/Magic Guard species; the burned Guts Pokémon's Attack drops while the gas is out and comes back when it leaves. Failure: no Spikes damage, or Guts still active under the gas.
+- **MT-008 Leaving Voltorb Flip and finishing a music fade (BUG-023, TEST-077).** Setup: Goldenrod Game Corner with coins and the Coin Case; separately, a route where you can get on the Bicycle next to a map change. Steps: play Voltorb Flip and quit with Select; then ride and walk across map borders whose music differs. Expected: no stray sprites for even a frame when the game closes; the bike tune plays only while riding and the map's music while walking. Failure: garbage sprites on exit, or the bike tune after a fade while walking (or the reverse).
 
 ## 33. Final Deliverables
 

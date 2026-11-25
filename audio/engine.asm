@@ -621,7 +621,17 @@ FadeMusic:
 	xor a
 	ld [wVolume], a
 	; did we just get on a bike?
+	; wPlayerState is in WRAMX, and this runs in VBlank, which may have
+	; interrupted code with another WRAM bank selected
+	ldh a, [rSVBK]
+	ld e, a
+	ld a, BANK(wPlayerState)
+	ldh [rSVBK], a
 	ld a, [wPlayerState]
+	ld d, a
+	ld a, e
+	ldh [rSVBK], a
+	ld a, d
 	cp PLAYER_BIKE
 	jr z, .bicycle
 	push bc

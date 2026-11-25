@@ -62,7 +62,7 @@ VoltorbFlipPalette:
 	dw $001f, $11ff, $3B69, $0000
 
 VoltorbFlip::;this is where the magic happens
-	ld a, $d
+	ld a, IE_DEFAULT & ~(1 << LCD_STAT)
 	ldh [rIE], a
 	call VFLoadGFX
 	call LoadStandardFont ; letters for the YES/NO questions
@@ -1824,7 +1824,7 @@ VFExit:
 	call VFKeepCoins
 	ld a, 1
 	ldh [hBGMapMode], a
-	ld a, $f
+	ld a, IE_DEFAULT
 	ldh [rIE], a
 	xor a
 	ldh [hOAMUpdate], a ;enable sprite update
