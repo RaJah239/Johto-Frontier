@@ -1104,7 +1104,7 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - Overall status: In progress
 - Current phase: Phase 3 (battle engine correctness)
-- Current task: Phase 3: battle engine correctness
+- Current task: Phase 3: status conditions (residual damage done; sleep, paralysis, confusion and frostbite next)
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
@@ -1223,6 +1223,7 @@ Maintain the following table.
 | TEST-030 | Stat calculation | `test_stat_formula`: `CalcMonStats` against this game's formula: every DV counts as 15 (a deliberate design: DVs only decide gender, shininess and Hidden Power), EVs count 1/4 when enabled, `((Base+15)*2 + EV/4)*L/100 + 5` (HP: `+ L + 10`), cap 999 | Interpreter, 303 cases incl. extremes and EVs off | Passed | Exact match. |
 | TEST-031 | Battle stats | `test_battle_stats`: `CalcPlayerStats`/`CalcEnemyStats` stage multipliers (`stat_multipliers.asm`, floor, min 1, cap 999), then paralysis (Speed /4), burn (Attack /2), frostbite (Sp. Atk /2), Trick Stick (Speed /4), Choice Scarf (Speed x1.5) | Interpreter, both sides: 60 random stat/stage sets each, each status and item, Choice Scarf over Speed 1-399 and 600-999 | Passed | 10/12 on the baseline (BUG-012 on both sides), 12/12 after. Full suite unchanged otherwise (116 scripts). |
 | TEST-032 | 16-bit arithmetic | Scan for hand-written 16-bit adds/subtracts stored low address first with the carry going upwards (`add`/`sub`, store, pointer up, `adc`/`sbc`), the shape of BUG-012, which is wrong for the big-endian battle values | Python over `engine/` and `home/` | Passed | No other occurrence. |
+| TEST-033 | Status conditions (residual damage) | `test_residual_damage`: `ResidualDamage` for poison, burn and frostbite (1/16 max HP, at least 1), Toxic (n/16, rising), HP floor at 0, Magic Guard (no damage) | Interpreter, both sides; the test helper now redirects home-bank ability lists across the whole ROM (needed for Magic Guard) | Passed | 14/14. Full suite unchanged (117 scripts). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
