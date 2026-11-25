@@ -926,7 +926,7 @@ Complete the project systematically using the following phases.
 
 - [x] Audit damage calculations.
 - [x] Audit critical hits.
-- [ ] Audit accuracy and evasion.
+- [x] Audit accuracy and evasion.
 - [ ] Audit speed and priority.
 - [ ] Audit stat calculations.
 - [ ] Audit status conditions.
@@ -1214,6 +1214,7 @@ Maintain the following table.
 | TEST-024 | Damage calculation, held items | `test_damage_items`: Charcoal (+20% on Fire), Life Orb (x1.3), Choice Band (x1.5 physical), Choice Specs (x1.5 special), Muscle Band / Wise Glasses (x1.1 on their category), each applied in the game's order and with its integer rounding | Interpreter, 40 random input sets x both sides x 4 type/category mixes per item | Passed | 7/7. Each boost applies only to the right type or category; the type byte's top two bits are the category (physical $40, special $80, status $C0), which is what the `cp SPECIAL` checks rely on. |
 | TEST-025 | Critical hits | `test_crit_stages`: the critical stage reached at `.Tally` for Super Luck with Tackle, Slash and Leaf Blade, Focus Energy (+2) and Scope Lens (+1); Slash Crits with Slash always crits and returns with the stack intact; no crit on a high roll otherwise | Interpreter, ability lists redirected to test species, `BattleRandom` fixed, both sides | Passed | 10/14 on the baseline (BUG-009), 14/14 after. Full suite unchanged otherwise (111 scripts). |
 | TEST-026 | Register use after list lookups | Every call to `IsInByteArray`, `IsInArray`, `IsInAbilityList(NG)` and the matchup sim's far list lookups, checked for code that reads `a` afterwards without reloading it (they return a = -1 on a miss) | Python scan as in TEST-005, then the 68 routines that return straight after a lookup checked for any that promise a value in `a` | Passed | No reads of `a` after a lookup other than BUG-009 (already fixed). The 68 wrapper routines all return their answer in carry; the `a =` notes in their headers describe inputs. |
+| TEST-027 | Accuracy and evasion | `test_accuracy_stages`: move accuracy after the accuracy and evasion stages (`_BattleCommand_CheckHit.StatModifiers`) against `data/battle/accuracy_multipliers.asm`, two integer steps with a floor of 1, Keen Eye x1.3, cap 255 | Interpreter: every accuracy/evasion stage pair with evasion at or below accuracy x 4 move accuracies x Keen Eye on/off x both sides (1,456 runs), plus evasion-above-accuracy cases without Foresight | Passed | Exact match. With higher evasion and Foresight on the target, stage changes are skipped entirely; that is pokecrystal's original behaviour and is kept. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
