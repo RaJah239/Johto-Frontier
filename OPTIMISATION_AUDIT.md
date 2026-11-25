@@ -927,7 +927,7 @@ Complete the project systematically using the following phases.
 - [x] Audit damage calculations.
 - [x] Audit critical hits.
 - [x] Audit accuracy and evasion.
-- [ ] Audit speed and priority.
+- [x] Audit speed and priority.
 - [ ] Audit stat calculations.
 - [ ] Audit status conditions.
 - [ ] Audit abilities.
@@ -1218,6 +1218,7 @@ Maintain the following table.
 | TEST-026 | Register use after list lookups | Every call to `IsInByteArray`, `IsInArray`, `IsInAbilityList(NG)` and the matchup sim's far list lookups, checked for code that reads `a` afterwards without reloading it (they return a = -1 on a miss) | Python scan as in TEST-005, then the 68 routines that return straight after a lookup checked for any that promise a value in `a` | Passed | No reads of `a` after a lookup other than BUG-009 (already fixed). The 68 wrapper routines all return their answer in carry; the `a =` notes in their headers describe inputs. |
 | TEST-027 | Accuracy and evasion | `test_accuracy_stages`: move accuracy after the accuracy and evasion stages (`_BattleCommand_CheckHit.StatModifiers`) against `data/battle/accuracy_multipliers.asm`, two integer steps with a floor of 1, Keen Eye x1.3, cap 255 | Interpreter: every accuracy/evasion stage pair with evasion at or below accuracy x 4 move accuracies x Keen Eye on/off x both sides (1,456 runs), plus evasion-above-accuracy cases without Foresight | Passed | Exact match. With higher evasion and Foresight on the target, stage changes are skipped entirely; that is pokecrystal's original behaviour and is kept. |
 | TEST-028 | Battle RNG, turn order | Scan of the battle engine and abilities for `Random` (not shared in link battles) where the roll decides a battle outcome; then `test_battle_rng`: Quick Draw and Tenacity must use `BattleRandom`, and Quick Draw's first-move rate over all 256 rolls | Grep over `engine/battle`, `engine/abilities` and item effects, each hit read; interpreter run of `DetermineMoveOrder` (equal priority, slower Quick Draw mon) and `Tenacity_Activate` with `Random` trapped | Passed | 11 `Random` calls: 2 real (BUG-010, BUG-011); the rest are wild-only (Magikarp size, capture, Shiny Ball tables), cosmetic (transition and VS intro) or outside link battles. 0/4 on the baseline, 4/4 after. Full suite unchanged otherwise (113 scripts). |
+| TEST-029 | Speed and priority | `test_move_order`: `DetermineMoveOrder` for speed, move priority, Trick Room from the move and from the battle type (with priority kept), speed ties, Quick Claw, Swift Swim in rain and its exceptions (paralysis, foe at +2 Speed, no rain) | Interpreter, both sides; rates counted over all 256 rolls | Passed | 16/16. Speed ties go to the player on 128/256 rolls; Quick Claw on 60/256 (its item parameter). The weather speed abilities move the holder first rather than doubling Speed, as designed. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
