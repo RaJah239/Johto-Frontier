@@ -1108,7 +1108,7 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
-- Last completed task: BATTLE-003 (BUG-012)
+- Last completed task: BATTLE-004 (BUG-013)
 - Last verified commit: `d007b16f8` (full suite: 105 scripts, 95 fully passing, the rest profilers/comparisons)
 - Outstanding blockers: none
 - Next task: Phase 3 checklist
@@ -1133,6 +1133,7 @@ Maintain the following table throughout the project.
 | BUG-010 | Link battles (Tenacity) | Tenacity's end-of-turn 1/3 status cure rolled with `Random` instead of `BattleRandom`. In a link battle each Game Boy then rolled its own number, so they could disagree on whether the status was cured and the battle desynced. Haxorus has Tenacity. Single-player is unaffected (`BattleRandom` is `Random` outside link battles). | Medium | Fixed | `test_battle_rng` (Tenacity reached `Random` on the baseline; `BattleRandom` after) |
 | BUG-011 | Turn order (Quick Draw) | Quick Draw had the same link-desync roll (`Random`), and its condition was inverted: `cp 33 percent + 1` / `jr c, .continue` skipped on the low third, so it fired on 171 of 256 rolls (2/3) instead of the 1/3 its data file states (Tenacity's identical idiom uses `ret nc`). Latent today: the Quick Draw list is empty. | Low | Fixed | `test_battle_rng`: 171/256 on the baseline (measured), 85/256 after |
 | BUG-012 | Battle stats (Choice Scarf) | `ApplyChoiceScarfEffectOnSpeed` added Speed/2 to Speed with the bytes in the wrong order: the high byte was added first and its (never-set) carry went into the low byte, so a carry out of the low byte was lost. Whenever the low byte plus half the Speed passed 255, the boosted Speed came out 256 too low: e.g. 200 Speed became 44 instead of 300, so a Scarf holder was often far slower than without the Scarf. Affects every Speed from 171 up where the low byte overflows (about a third of values), for both sides and for the AI's speed checks that use the same stats. | High | Fixed | `test_battle_stats` (Choice Scarf wrong from Speed 171 up on the baseline, both sides; exact x1.5 for Speed 1-399 and 600-999 after) |
+| BUG-013 | Battle weather | Solar Beam was not weakened in hail. The entry `WEATHER_HAIL, EFFECT_SOLARBEAM, NOT_VERY_EFFECTIVE` sat in `WeatherTypeModifiers`, which compares the move's type, so it compared the type against `EFFECT_SOLARBEAM` (115, no type has that ID) and never matched. The rain entry for Solar Beam is correctly in `WeatherMoveModifiers`. | Low | Fixed | `test_weather_modifiers` (Solar Beam in hail 100 -> 100 on the baseline, 100 -> 50 after, both sides) |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1229,6 +1230,7 @@ Maintain the following table.
 | TEST-035 | Abilities (data) | All 138 species lists in `data/abilities/`: terminated with -1, no duplicate entries, every list referenced by the code | Python over the data and engine sources | Passed | No missing terminators, duplicates or unused lists. Three lists (`Sanctuary`, `Seedfall`, `SpinGuard`) ended `db -1, end`, which emitted a stray byte after the terminator (harmless); changed to `db -1 ; end` (MEM-004). Full suite unchanged (117 scripts). |
 | TEST-036 | Abilities (Neutralizing Gas) | Every raw `IsInByteArray` lookup of an ability list in the battle engine, abilities and item effects (AI excluded), checked for Neutralizing Gas handling: `IsInAbilityList`, `IsSideSuppressed`/`IsSpeciesSuppressed`, or a popup that reports suppression | Python scan, each hit read | Partially verified | 15 hits. Handled: Moxie/Ignis/Flash Step/Blood Lust/Renewal/Life Drain (their popups), Pressure (`IsSideSuppressed` before taking PP), Sturdy (`NGIgnoresSturdy`), Quick Draw (popup), the `*Raw` helpers and Neutralizing Gas itself (callers check). Not handled: Guts and Resilience (`DoesMonHaveGuts`/`DoesMonHaveResilience`, used when battle stats are recalculated) and the Spikes immunity list (`SpikesDamage`) keep working under Neutralizing Gas. Left unchanged pending a design decision (Section 31). |
 | TEST-037 | Held items (data) | All 61 `HELD_*` effects: each given to an item in `data/items/attributes.asm` is handled somewhere, and none is handled without an item | Python over constants, item data and code | Passed | Only `HELD_NONE` (no effect) and `HELD_CLEANSE_TAG` have no handler by effect; the Cleanse Tag is checked by item ID in the wild-encounter code, as in pokecrystal. Held-item damage boosts are covered by TEST-024, stat items by TEST-031. |
+| TEST-038 | Battle weather | `test_weather_modifiers`: `DoWeatherModifiers` for rain and sun type boosts and penalties, Solar Beam in rain, hail and sun, other moves in hail, no weather | Interpreter, both sides | Passed | 16/18 on the baseline (BUG-013), 18/18 after. Full suite unchanged otherwise (118 scripts). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1538,6 +1540,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: none known.
 - Git commit message: `fix: stop Choice Scarf losing 256 Speed when its boost carries`
 - Next task: Phase 3, status conditions.
+
+### BATTLE-004 — Solar Beam not weakened in hail
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 3 (weather)
+- System: Battle weather
+- Files modified: `data/battle/weather_modifiers.asm`
+- Problem identified: BUG-013, found reading the weather tables.
+- Root cause: a move-effect entry placed in the move-type table.
+- Solution implemented: the hail entry moved to `WeatherMoveModifiers`, next to the rain one.
+- Behaviour preserved: every other weather modifier unchanged (tested).
+- Performance impact: none. Memory impact: none.
+- Build result: builds, 0 assembler warnings, 675,212 bytes free.
+- Tests performed: TEST-038, full suite.
+- Test results: all pass.
+- Remaining risks: none known.
+- Git commit message: `fix: weaken Solar Beam in hail as the weather table intends`
+- Next task: Phase 3, rest of weather (end-of-turn damage, duration), then entry hazards.
 
 ## 31. Outstanding Issues
 
