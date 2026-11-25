@@ -154,11 +154,13 @@ _BattleCommand_Critical:
 
 .AbilityMon:
 	pop af
+	push af ; (the species again, for Super Luck: IsInByteArray leaves a = -1)
 	push bc
 	call IsInByteArray
 	pop bc
-	jr c, .AbilityHit
-	push af
+	jr nc, .SuperLuck
+	pop af
+	jr .AbilityHit
 
 ; ===========================
 ; === Ability: Super Luck ===

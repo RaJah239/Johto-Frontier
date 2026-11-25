@@ -925,7 +925,7 @@ Complete the project systematically using the following phases.
 ### Phase 3 — Battle Engine Correctness
 
 - [x] Audit damage calculations.
-- [ ] Audit critical hits.
+- [x] Audit critical hits.
 - [ ] Audit accuracy and evasion.
 - [ ] Audit speed and priority.
 - [ ] Audit stat calculations.
@@ -1108,7 +1108,7 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
-- Last completed task: STAB-005 (BUG-008)
+- Last completed task: BATTLE-001 (BUG-009)
 - Last verified commit: `d007b16f8` (full suite: 105 scripts, 95 fully passing, the rest profilers/comparisons)
 - Outstanding blockers: none
 - Next task: Phase 3 checklist
@@ -1129,6 +1129,7 @@ Maintain the following table throughout the project.
 | BUG-006 | Stats screen (EV page) | `StatsScreen_PrintEVs` threaded a running value through the stack with a `push bc`/`pop bc` per stat, but only on the non-maxed branches. With Attack EVs at exactly 252 (`MAX_EV`), nothing was pushed for Attack, so the later stats popped the routine's own return address and the final `pop bc` left the stack one short: `ret` went to the wrong address (crash or garbage). The value it built was never used. Any Pokémon with 252 Attack EVs, viewed on the EV page (unlocked by `EVENT_UNLOCK_STAT_SCREEN_EFFORT_VALUES`), triggered it. | Critical | Fixed | `test_stats_evs` (32 of 64 maxed/not-maxed mixes failed before: every one with Attack at 252; all pass after) |
 | BUG-007 | NPC trades | `ComputeNPCTrademonStats` stored the level with `ld [MON_LEVEL], a` (inherited from pokecrystal, flagged there by its own comment): `MON_LEVEL` is the struct offset $1F, so this wrote the level to cartridge address $001F, the MBC3 save-RAM enable register. A level ending in $A (10, 26, 42, 58, 74, 90) left save RAM switched on after every in-game trade; any other level switched it off. The stats themselves were right (the trade code already sets `wCurPartyLevel`). | Low | Fixed | `test_npc_trade_stats` (the write to $001F seen on the baseline ROM; none after) |
 | BUG-008 | Gift Pokémon / naming screen | Softlock. When `givepoke` sends a Pokémon to a box (full party), `GivePoke` sets `wMonType` to `BOXMON` and offers a nickname. The naming screen then calls `GetGender`, whose `BOXMON` branch was a deliberate `di` / `jr @` trap left from the removal of the old box code, so saying yes to the nickname froze the game. | Critical | Fixed | `test_gender_boxmon` (`BOXMON` froze on the baseline ROM; now returns the same gender as `BUFFERMON` for the same DVs) |
+| BUG-009 | Battle (critical hits) | Super Luck's +1 critical stage was lost on Slash and Leaf Blade. For those two moves `_BattleCommand_Critical` took the species off the stack to check the Slash Crits / Leaf Blade Crits list, and on a miss pushed `a` back for the Super Luck check, but `IsInByteArray` returns with a = -1, so Super Luck looked up species -1 and never matched. Latent today: the Super Luck, Slash Crits and Leaf Blade Crits lists are all empty (their species are commented out), so it shows up as soon as one is filled. | Low | Fixed | `test_crit_stages` (4 of 14 failed on the baseline, both sides; 14/14 after) |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1211,6 +1212,7 @@ Maintain the following table.
 | TEST-022 | Battle state between battles | Battle variables written by the battle engine and abilities that lie outside `wBattle`..`wBattleEnd` (cleared at battle start) and are not reset in `start_battle.asm` or `CleanUpBattleRAM` | Python with the `.sym` file, then each custom state variable traced to where it is reset | Passed | 358 hits, nearly all scratch, party data, or values set fresh before each use. Custom state checked one by one: `wAISwitchCount` (battle start), `wAITeleportPlan` (every turn), `wEntryAbilitiesPending` incl. Unburden bits (whole byte rewritten by `StartBattleEntryAbilities`), `wNeutralizingGas`, `wHarvestBerries` and `wSendOutPopupsShown` (each send-out), `wEntryHazardSwitchTurn`/`SkipMask` (each switch-in), `wContraryInverted` and `wMagicBounceSavedMove` (set per use). Nothing carries over from one battle to the next. |
 | TEST-023 | Damage calculation | `test_damage_formula`: `BattleCommand_DamageCalc` against the reference `min(((2L/5+2)*P*A/D)/50, 997)+2` (integer steps; D=0 treated as 1; Explosion halves D) | Interpreter, 407 input sets (edge cases plus random L 1-100, P 1-250, A 1-255, D 0-255) x both sides x normal/Explosion = 1,628 runs, no items or abilities | Passed | Exact match on every run, including the 997 cap and power-0 early exit. |
 | TEST-024 | Damage calculation, held items | `test_damage_items`: Charcoal (+20% on Fire), Life Orb (x1.3), Choice Band (x1.5 physical), Choice Specs (x1.5 special), Muscle Band / Wise Glasses (x1.1 on their category), each applied in the game's order and with its integer rounding | Interpreter, 40 random input sets x both sides x 4 type/category mixes per item | Passed | 7/7. Each boost applies only to the right type or category; the type byte's top two bits are the category (physical $40, special $80, status $C0), which is what the `cp SPECIAL` checks rely on. |
+| TEST-025 | Critical hits | `test_crit_stages`: the critical stage reached at `.Tally` for Super Luck with Tackle, Slash and Leaf Blade, Focus Energy (+2) and Scope Lens (+1); Slash Crits with Slash always crits and returns with the stack intact; no crit on a high roll otherwise | Interpreter, ability lists redirected to test species, `BattleRandom` fixed, both sides | Passed | 10/14 on the baseline (BUG-009), 14/14 after. Full suite unchanged otherwise (111 scripts). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1463,6 +1465,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: Phase 2 overall fixed six bugs (BUG-003 to BUG-008), two of them able to crash or freeze the game; timing-dependent faults need the manual checklist.
 - Git commit message: `docs: close Phase 2 with the buffer-length and wait-loop checks`
 - Next task: Phase 3, battle engine correctness.
+
+### BATTLE-001 — Super Luck ignored on Slash and Leaf Blade
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 3 (critical hits)
+- System: Battle engine
+- Files modified: `engine/battle/effect_commands_far.asm`
+- Problem identified: BUG-009, found reading `_BattleCommand_Critical` while auditing critical hits.
+- Root cause: a value assumed to survive `IsInByteArray` (its own comment says it wipes the registers).
+- Solution implemented: the species is pushed again before the Slash Crits / Leaf Blade Crits lookup; on a hit it is dropped before `.AbilityHit`.
+- Behaviour preserved: every other path unchanged (Tackle, Focus Energy, Scope Lens, Crit Lock tested on both sides).
+- Performance impact: negligible. Memory impact: 3 bytes more (675,211 free).
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-025, TEST-023/024 (damage), full suite.
+- Test results: all pass.
+- Remaining risks: none known; no species has the affected abilities yet.
+- Git commit message: `fix: keep Super Luck's critical stage on Slash and Leaf Blade`
+- Next task: Phase 3, accuracy and evasion.
 
 ## 31. Outstanding Issues
 
