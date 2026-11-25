@@ -38,20 +38,32 @@ TyphlosionEvosAttacks:
 	db 36, DOUBLE_EDGE
 	db 0 ; no more level-up moves
 
+; (each of these ends its own evolution list, so it doesn't pick up the
+; next family's evolutions; the learnset is the shared default below)
 PorygonEvosAttacks:
 	db EVOLVE_TRADE, UP_GRADE, PORYGON2
+	db 0 ; no more evolutions
+	db 1, SPLASH
+	db 0 ; no more level-up moves
+
 Porygon2EvosAttacks:
 	db EVOLVE_HAPPINESS, TR_ANYTIME, PORYGONZ
-PorygonZEvosAttacks:
+	db 0 ; no more evolutions
+	db 1, SPLASH
+	db 0 ; no more level-up moves
 
 ChanseyEvosAttacks:
-	db EVOLVE_HAPPINESS, TR_ANYTIME, PORYGONZ
-BlisseyEvosAttacks:
+	db EVOLVE_HAPPINESS, TR_ANYTIME, BLISSEY
+	db 0 ; no more evolutions
+	db 1, SPLASH
+	db 0 ; no more level-up moves
 
 MagikarpEvosAttacks:
 	db EVOLVE_LEVEL, 20, GYARADOS
 GyaradosEvosAttacks:
 
+PorygonZEvosAttacks:
+BlisseyEvosAttacks:
 TotodileEvosAttacks:
 CroconawEvosAttacks:
 FeraligatrEvosAttacks:

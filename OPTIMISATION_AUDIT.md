@@ -1006,14 +1006,14 @@ Complete the project systematically using the following phases.
 - [ ] Audit Pokémon data.
 - [ ] Audit move data.
 - [ ] Audit item data.
-- [ ] Audit trainer data.
-- [ ] Audit encounter data.
+- [x] Audit trainer data.
+- [x] Audit encounter data.
 - [ ] Audit battle facilities.
 - [ ] Audit save system.
 - [ ] Audit graphics engine.
 - [ ] Audit audio engine.
 - [ ] Audit hardware compatibility.
-- [ ] Create data-validation tools where practical.
+- [x] Create data-validation tools where practical.
 
 ### Phase 9 — Code Quality
 
@@ -1140,6 +1140,7 @@ Maintain the following table throughout the project.
 | BUG-017 | Experience | Experience is handled in 16 bits, but with Scaled experience the cubed level ratio ((enemy L + 10) / (own L + 10))^3 can push it past 65535 (up to x162 at the level-50 cap), and the top bytes were silently dropped; the x1.5 boosts (traded, trainer, Lucky Egg) also wrapped round on overflow. Low-level Pokémon (typically Exp. Share recipients) got a fraction of their experience: e.g. level 5 vs a level-50 foe with base EXP 200 got 25,856 instead of 91,392 (now capped at 65,535); level 1 with all three boosts got 14,251. Now capped at 65,535 after the scaling and after each boost. | Medium | Fixed | `test_exp_gain` (4 of 11 overflow cases wrong on the baseline; 11/11 after) |
 | BUG-018 | Capture (status bonus) | The catch-rate status check `and 1 << PSN \| BRN \| PAR \| FRZ \| SLP_MASK` put `1 <<` on `PSN` only; `BRN`, `FRZ` and `PAR` are bit numbers (4, 5, 6), so the mask was $0F. Poison and sleep got the intended +15, but burn, frostbite and paralysis fell through to the +5 branch. Now `and ALL_STATUS`. No other mask in the codebase has this mistake (scan). | Medium | Fixed | `test_catch_status` (burn/frostbite/paralysis +5 on the baseline, +15 after) |
 | BUG-019 | Capture (Catch Charm) | The Catch Charm (held: "Doubles catch rate of statused foes") never added anything: it added `c` after `farcall GetItemHeldEffect`, which returns the item's own parameter in `c` (0 for the Catch Charm), not the status bonus. The bonus is now kept in `e` across the call. | Medium | Fixed | `test_catch_status` (Catch Charm added nothing on the baseline for most statuses; adds the status bonus again after) |
+| BUG-020 | Pokémon data (evolutions) | Evolution lists fall through into the next label by design (families share data), but in the Porygon / Chansey / Magikarp block no entry ended its list: Porygon, Porygon2, Porygon-Z, Chansey and Blissey all ran on into Magikarp's "level 20 -> Gyarados" (and Porygon-Z into a happiness evolution into itself); Chansey evolved into Porygon-Z instead of Blissey. Fixed as the user chose: Porygon, Porygon2 and Chansey end their own lists (with the shared default learnset, so no moves change), Porygon-Z and Blissey have no evolution, Chansey -> Blissey by happiness. The rest of `evos_attacks.asm` is the author's work in progress (most species share a default "no evolution, Splash" entry) and was not touched. | High | Fixed | `test_evolutions` (1/8 on the baseline, 8/8 after) |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1269,6 +1270,8 @@ Maintain the following table.
 | TEST-061 | Unused code | Global code labels referenced nowhere, excluding those reached by falling through from the code above and names built by macros (`MSim_\\1...`, tileset `\\1Anim`) | Python over the sources and `.sym` file, each hit read | Passed | 88 unreferenced labels, nearly all reached by fall-through. Truly dead: `IsUnawareRaw` and `SetSpecificDecorationFlag` (removed, MEM-006). |
 | TEST-062 | Duplicate code and data | Routines with identical bodies (6+ instructions, local labels normalised, ending in their own `ret`/jump) | Python over `engine/` and `home/`, each group read | Passed | 15 groups. Merged: the five `FillBoxWithByte` copies (home version reachable from every bank) and four same-bank twins (MEM-007). Left as they are: copies kept in a different bank on purpose to avoid far calls (`DoubleDamage`/`MSim_DoubleDamage`, the `*WaitHBlank` helpers, `Finish_Boost`/`FinishBoost`, the Pokédex fill helpers, `ClearTilemapEtc`...), and the two stat multiplier tables (documented duplicates, one per bank that reads them). |
 | TEST-063 | RAM sharing | Review of how WRAM is shared and of the remaining "unused" names from TEST-059 | Read `ram/wram.asm` sections and unions | Passed | WRAM is already shared heavily through `SECTION UNION` (battle, link, Battle Tower, time-set, mail, contest, mart and PC buffers overlap). The remaining unused names are either inside union members that are not the largest (removing them frees nothing) or inside blocks copied or saved as a whole (map header, tileset header, encounter rates, item pockets, breed and roam structs), where removing a field would shift the layout. None removed beyond MEM-005. |
+| TEST-064 | Encounter and trainer data | Wild data (`data/wild/*.asm`: grass, water, swarms) levels within 1-50 (this game's cap) and valid species; trainer parties (`parties.asm` and `scaled_teams/`) parsed with their type flags: levels 1-50 or `PARTY_LV`, valid species, items and moves, 1-6 Pokémon, nicknames where flagged | Python validators (`validate_trainers.py`) | Passed | 211 trainers, 365 Pokémon: no problems. The two empty parties are the "CAL" mirror trainers (they copy your party by design). |
+| TEST-065 | Pokémon data (evolutions, learnsets) | `test_evolutions`: every species' evolution list read from the ROM through `EvosAttacksPointers`: no self-evolution, only Magikarp evolves into Gyarados, the Porygon/Chansey families as their entries say; plus a source check that no evolution or learnset level exceeds 50 and learnsets are in order | Interpreter-free ROM read; Python over the source | Passed | BUG-020 found and fixed; no level above 50. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1769,6 +1772,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Git commit message: `memory: drop the unused box save buffer from WRAM0`
 - Next task: Phase 6, more RAM and ROM savings.
 
+### DATA-001 — Evolution fall-through into Magikarp's entry
+
+- Date: 2026-11-25
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 8 (Pokémon data)
+- System: Evolutions
+- Files modified: `data/pokemon/evos_attacks.asm`
+- Problem identified: BUG-020, found while validating evolution data.
+- Root cause: entries that did not end their evolution list ran into the next family's.
+- Solution implemented: as approved by the user (see BUG-020).
+- Behaviour preserved: learnsets unchanged (the same shared default); every other species' evolutions unchanged.
+- Performance impact: none. Memory impact: 12 bytes more (675,252 free).
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-064, TEST-065, full suite.
+- Test results: all pass.
+- Remaining risks: none known.
+- Git commit message: `fix: stop Porygon, Chansey and Blissey evolving into Gyarados`
+- Next task: more data validators (base stats, items, marts, maps).
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -1791,6 +1813,7 @@ Do not silently ignore unresolved issues.
 - Phase 2 is complete as far as static checks and the interpreter can take it (TEST-005, 009, 011-020; BUG-003 to BUG-008). Crashes or freezes that depend on real-hardware timing can only be found with the manual checklist (Section 32).
 - Phase 4 open item: the AI switch decision is still ~20 frames in the worst case. Its biggest remaining cost is the linear type-chart scan per damage estimate (~18%); an index by attacking type would need the three charts regrouped (normal, inverse, none). Not done yet.
 - Tooling note: on the mounted Windows working copy, `core.checkStat=minimal` lets `git status`/`git diff` miss edits made from Linux. Stage edited files explicitly (`git add <file>`) and take diffs with `git diff --cached`; a byte comparison of the tree against a fresh clone of HEAD (2026-11-25) found nothing uncommitted.
+- Work in progress (author's): most species in `data/pokemon/evos_attacks.asm` share a placeholder entry (no evolution, only Splash learned); comments mark planned levels. Left as it is.
 - No emulator or physical hardware is available here: VBlank/HBlank timing, DMA and real-hardware behaviour can only be checked in the interpreter with emulated hooks. Anything timing-sensitive needs manual emulator testing (Section 32).
 - WRAM0 now has 32 bytes free (MEM-005); WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
 
