@@ -32,13 +32,32 @@ SkipNames::
 	; fallthrough
 
 AddNTimes::
-; Add bc * a to hl.
+; Add bc * a to hl. Preserves bc and de; a = 0 afterwards.
+	cp 16
+	jr nc, .shift_add
 	and a
 	ret z
 .loop
 	add hl, bc
 	dec a
 	jr nz, .loop
+	ret
+
+.shift_add
+; Large a (move, item and species tables): one step per bit of a, not per
+; unit (at most 8 steps instead of up to 255).
+	push bc
+.bit
+	srl a
+	jr nc, .no_add
+	add hl, bc ; (keeps the zero flag from srl)
+.no_add
+	jr z, .done
+	sla c
+	rl b
+	jr .bit
+.done
+	pop bc
 	ret
 
 FarFindCurSpeciesInSlots::

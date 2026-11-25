@@ -1167,6 +1167,7 @@ Maintain the following table.
 |---|---|---|---|---|---|---|
 | PERF-001 | Far calls into the home bank (9 sites: Neutralizing Gas, turn-end abilities, Curse, Pain Split, three item-effect font reloads, link trade, move learning) | `farcall`/`farjp` to a ROM0 routine replaced with `call`/`jmp` | `farcall`: 6 bytes, the FarCall path (two bank switches, bc saved through WRAM) | `call`: 3 bytes, no bank switch | Calculated: about 30 M-cycles saved per call; not measured (none of these is in a hot loop) | Full suite unchanged |
 | PERF-002 | 106 far calls whose caller and target are in the same SECTION (37 files: battle core, AI, events, Pokégear, Pokédex, menus and more) | `farcall`/`callfar`/`newfarcall` replaced with `call`, `farjp` with `jmp` (one `jr` where it reaches) | Far-call path: 4-6 bytes, two bank switches | Direct call: 3 bytes (2 for the `jr`) | Calculated: about 30-60 M-cycles saved per call; not measured | Full suite and the overworld comparison unchanged |
+| PERF-003 | `AddNTimes` (hl += bc x a; 299 call sites: move, item, species, party tables) | Counts of 16 or more use shift-and-add (one step per bit of a, at most 8) instead of one `add hl, bc` per unit; small counts (party slots) keep the plain loop | Up to 255 loop passes (~6 M-cycles each) | At most 8 steps | Measured: `AI_MatchupSwitch` (test_ai_perf, Meganium out) 911,400 -> 794,199 M-cycles (25.96 -> 22.62 frames) | `test_addntimes` (all a = 0-255, 2,048 cases), full suite, overworld comparison |
 
 Use unique identifiers such as PERF-001, PERF-002 and PERF-003.
 
@@ -1250,6 +1251,7 @@ Maintain the following table.
 | TEST-049 | Dual-ability interactions (Mold Breaker, Neutralizing Gas) | The abilities `mold_breaker.asm` says Mold Breaker ignores (Levitate, Sturdy, Unaware, Multiscale, Flame Ward, Grounded, Waterproof, Immunity, Thick Fat, Pillow Fort, Chrysalis Hide) each checked for a Mold Breaker check where they act; the damage modifiers not on that list (Solid Rock, Fur Coat, Tinted Lens) checked against the AI's copy | Code read with a Python cross-reference | Passed | Every listed ability has its check (popup or silent), and the AI's damage estimate makes the same choices. Solid Rock and Fur Coat are deliberately not bypassed (not on the documented list, and the AI agrees). Levitate's other uses (Toxic Spikes, Sticky Web, HUD float icon) are not move-based, so Mold Breaker rightly does not apply. Neutralizing Gas interactions: TEST-036, TEST-041. |
 | TEST-050 | Move effects (structure) | All 155 effect scripts in `data/moves/effects.asm`: each starts with a turn check (or pokecrystal's `checkrampage`/`checkcharge`/`checkcurl` before it) and ends with `endmove`/`endturn`/`jump`; every script is referenced; the pointer table has one entry per effect constant, in order | Python over the effect scripts, pointer table and constants | Passed | 161 constants, 161 pointers, names line up, `assert_table_length NUM_MOVE_EFFECTS` in the source; no unreferenced or open-ended scripts. Behaviour of individual effects is covered by the regression suite (Teleport, Hyper Beam recharge, set-up moves, Speed Boost, Pain Split, Counter/Mirror Coat and others) and by TEST-023-047; the rest needs play-testing. |
 | TEST-051 | Fainting | Faint handling: `CheckFaint_PlayerThenEnemy`/`EnemyThenPlayer` after each damaging end-of-turn step (TEST-048), `HasUserFainted` guards in `ResidualDamage` (TEST-033), and the custom knock-out abilities (Aftermath, Moxie/Ignis/Flash Step/Blood Lust/Renewal/Life Drain) | Code read | Passed | Aftermath skips Counter/Mirror Coat and residual KOs, needs the attacker standing (`GetCurrentMon` returns `hl` = its HP), honours Magic Guard and Neutralizing Gas, and a KO it causes is picked up by the same post-move faint checks as recoil. KO abilities only fire for a standing user with their popups (Neutralizing Gas aware, TEST-036). |
+| TEST-052 | Arithmetic | `test_addntimes`: hl += bc x a (mod 65536) for every a 0-255 with 8 bc values each, bc/de preserved, a = 0 after | Interpreter, baseline and new ROM | Passed | 2,048/2,048 on both. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1673,6 +1675,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: individual move effects and link battles need play-testing (Section 32).
 - Git commit message: `docs: close Phase 3`
 - Next task: Phase 4, battle AI.
+
+### PERF-003 — Faster AddNTimes
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 4/5 (AI execution speed; arithmetic routines)
+- System: Home bank arithmetic (used everywhere)
+- Files modified: `home/array.asm`
+- Problem identified: profiling `AI_MatchupSwitch` showed `AddNTimes` at ~15% (265 calls, ~514 M-cycles each), from move-table lookups with large indexes.
+- Root cause: one loop pass per unit of the multiplier.
+- Solution implemented: shift-and-add for multipliers of 16 or more; the plain loop for smaller ones (faster there).
+- Behaviour preserved: identical result, bc and de preserved, a = 0 on return (no caller uses the flags; checked).
+- Performance impact: measured 13% off the AI's switch decision; every table lookup with a large index gains too. Memory impact: 17 bytes more in ROM0 (still ~300 free).
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-052, full suite, overworld comparison (307 maps identical).
+- Test results: all pass.
+- Remaining risks: none known.
+- Git commit message: `perf: shift-and-add AddNTimes for large counts`
+- Next task: PERF-004 (Divide).
 
 ## 31. Outstanding Issues
 
