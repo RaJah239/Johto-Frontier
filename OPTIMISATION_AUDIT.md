@@ -937,7 +937,7 @@ Complete the project systematically using the following phases.
 - [x] Audit entry hazards.
 - [x] Audit switching.
 - [ ] Audit fainting.
-- [ ] Audit end-of-turn effects.
+- [x] Audit end-of-turn effects.
 - [ ] Audit move effects.
 - [x] Audit experience.
 - [x] Audit level scaling.
@@ -1246,6 +1246,7 @@ Maintain the following table.
 | TEST-045 | Trainer level scaling | Level-bracket parties (`ApplyScaledTrainerParty`, `data/trainers/scaled_parties.asm`) and `PARTY_LV` dynamic levels (`SetDynamicLevel`) | Code read; Python check of the bracket lists | Passed | 3 bracket lists, each ascending and terminated, all referenced; the last bracket is used above the top level as documented. 81 trainer entries use `PARTY_LV` with no offset (= the player's top level, capped at 50). A negative offset would wrap and be capped at 50; none is used (noted as a precondition). |
 | TEST-046 | Register use around held-item lookups | Every caller of `GetItemHeldEffect` checked for using `b`/`c` from before the call (it returns the effect and parameter in `bc`) | Read each of the 25 call sites | Passed | Only BUG-019. The rest want the returned effect/parameter or save `bc` around the call. |
 | TEST-047 | Move data | All 253 moves: status moves have power 0, damaging moves have power unless their effect sets the damage itself, accuracy and effect chance at most 100%; effect constants used by no move | Python over `data/moves/moves.asm` and the effect constants | Passed | No inconsistencies. 20 effect constants are used by no move (mostly pokecrystal leftovers such as the single-stat +1/-1 effects, `EFFECT_MIMIC`, `EFFECT_POISON_MULTI_HIT`); some may still be used by items or the AI. Noted for Phase 6 (ROM space). |
+| TEST-048 | End-of-turn effects | Order of `HandleBetweenTurnEffects` and the faint checks around it | Code read of `HandleBetweenTurnEffects`, `FarTurnEndEffects` and `TurnEndAbilities` | Passed | Every step that can knock a Pokémon out (Solar Power, weather, binding, Perish Song) is followed by a faint check in link order. Leftovers, the far effects (Mysteryberry, stat and weather items, Snow Cloak, Safeguard/Mist/screens, Flame/Toxic Orb, Trick Room, Encore), turn-end abilities, healing items and Unburden only heal, count down or inflict a status, so they need none; status damage itself comes from `ResidualDamage` after each move (TEST-033). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
