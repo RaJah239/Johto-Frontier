@@ -935,7 +935,7 @@ Complete the project systematically using the following phases.
 - [x] Audit held items.
 - [x] Audit weather.
 - [x] Audit entry hazards.
-- [ ] Audit switching.
+- [x] Audit switching.
 - [ ] Audit fainting.
 - [ ] Audit end-of-turn effects.
 - [ ] Audit move effects.
@@ -1104,7 +1104,7 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - Overall status: In progress
 - Current phase: Phase 3 (battle engine correctness)
-- Current task: Phase 3: switching, fainting, end-of-turn effects
+- Current task: Phase 3: fainting, end-of-turn effects, move effects, experience, level scaling, capture
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
@@ -1237,6 +1237,7 @@ Maintain the following table.
 | TEST-039 | Battle weather (end of turn) | `test_weather_damage`: `HandleWeather` sandstorm and hail damage (1/16), immunity of Rock/Ground/Steel to sand (either type slot), Ice to hail, Magic Guard and Overcoat to both | Interpreter, both sides | Passed | 16/18 on the baseline (BUG-014), 18/18 after. Full suite unchanged otherwise (119 scripts). |
 | TEST-040 | Entry hazards (data) | `SpikesImmunePokemon` against the lists it must mirror (its own comment and `levitate_mons.asm` both say so): Levitate plus Magic Guard | Python comparison of the three lists | Partially verified | Out of step: Levitate now has only Mew and Magic Guard is empty (both had species commented out), but the Spikes list still names 27 species as levitating or Magic Guard (Charizard, Gastly line, Magnemite line, Koffing/Weezing, Bronzor/Bronzong, Misdreavus/Mismagius, Solrock/Lunatone/Claydol, Unown, Victini, Celebi, Clefairy/Clefable, and more). They stay immune to Spikes without the ability. Left unchanged pending a decision (Section 31). The hazard code itself: Hazard Guard and Heavy-Duty Boots skip all hazards, Flying types skip Spikes, Magic Guard skips Stealth Rock, Stealth Rock scales with type matchup. |
 | TEST-041 | Abilities, entry hazards | `test_ng_passives`: Guts (burn) and Resilience (paralysis) with and without Neutralizing Gas suppressing them; Neutralizing Gas coming in recalculates the stats; Spikes against Mew (Levitate), suppressed Mew, Gengar and Clefable | Interpreter | Passed | 3/9 on the baseline, 9/9 after. Full suite unchanged otherwise (120 scripts). |
+| TEST-042 | Switching | `NewBattleMonStatus` against `NewEnemyMonStatus` (what a switch clears), plus the send-out hooks (`ResetPlayer/EnemySendOutPopups`, `UnburdenRecordSide`, `QueueEntryAbilities`) | Read side by side | Passed | Both clear the five substatus bytes, Disable, Protect, Minimize, both sides' binding, turns taken, Taunt and the opponent's "can't run" flag. Differences are pokecrystal's: only the player's used-move list is cleared (it exists for the player only), and Toxic's counter is reset when Toxic is next inflicted. Custom per-mon state (popups shown, Harvest, Unburden) is reset on each send-out. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
