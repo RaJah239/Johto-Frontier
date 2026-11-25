@@ -1041,14 +1041,14 @@ Complete the project systematically using the following phases.
 
 ### Phase 11 — Final Independent Review
 
-- [ ] Review all optimisation commits.
-- [ ] Review all bug-fix commits.
-- [ ] Review potential regressions.
-- [ ] Verify final build.
-- [ ] Verify final memory usage.
-- [ ] Verify performance improvements.
-- [ ] Review outstanding risks.
-- [ ] Produce final audit report.
+- [x] Review all optimisation commits.
+- [x] Review all bug-fix commits.
+- [x] Review potential regressions.
+- [x] Verify final build.
+- [x] Verify final memory usage.
+- [x] Verify performance improvements.
+- [x] Review outstanding risks.
+- [x] Produce final audit report (Section 33, TEST-098–106).
 
 Additional tasks may be added when necessary.
 
@@ -1058,29 +1058,30 @@ Do not mark a task complete merely because its files have been read. Record the 
 
 Populate this section during the initial audit.
 
-| Measurement | Baseline | Current | Final |
+| Measurement | Historical baseline | Baseline rebuilt for comparison | Final release |
 |---|---|---|---|
-| Git commit | `aa0134723` (+ BUG-001/002 build fixes, ROM unchanged) | `936e0c1c1` | Pending |
-| RGBDS version | 0.7.0 (rgbasm/rgblink/rgbfix/rgbgfx) | 0.7.0 | Pending |
-| Build status | Fails on a clean case-sensitive checkout (BUG-001/002); builds after the fixes | Builds | Pending |
-| Total ROM size | 2,097,152 bytes (2 MiB, 128 banks, MBC3+RAM+battery+timer) | Same | Pending |
-| Used ROM space | 1,422,490 bytes (ROM0 16,042 + ROMX 1,406,448) | Same | Pending |
-| Free ROM space | 674,662 bytes (32.17%; ROM0 342, ROMX 674,320) | Same | Pending |
-| WRAM usage | WRAM0 4,096/4,096 (0 free); WRAMX 28,476/28,672 (196 free: bank 2 $54, bank 5 $70, banks 1/3/4/6/7 full) | Same | Pending |
-| HRAM usage | 125/127 bytes (2 free) | Same | Pending |
-| SRAM usage | 32,155/32,768 bytes (613 free: bank 0 $220, bank 1 $29, banks 2/3 $0E each) | Same | Pending |
-| Compiler warnings | 0 (full build log) | 0 | Pending |
-| Automated tests | 108 interpreter test scripts: 84 fully pass, 4 partly pass, 12 crash on renamed/removed symbols, 8 report in other formats (see TEST-002) | Same | Pending |
+| Source | `aa0134723` with the clean-build fixes | `936e0c1c1` | `aa50c4784` |
+| RGBDS | 0.7.0 | 0.7.0 | 0.7.0 |
+| Build | Clean case-sensitive checkout required BUG-001/002 | Clean Linux build | Clean Linux release and debug, byte-identical Cygwin builds |
+| ROM capacity | 2,097,152 bytes, 128 banks, MBC3 with RAM, battery and timer | 2,097,152 | 2,097,152 |
+| Used ROM | 1,422,490 bytes | 1,423,375 (16,042 ROM0 + 1,407,333 ROMX) | 1,426,845 (16,021 ROM0 + 1,410,824 ROMX) |
+| Free ROM | 674,662 bytes | 673,777 (342 ROM0 + 673,435 ROMX) | 670,307 (363 ROM0 + 669,944 ROMX), 31.96% |
+| WRAM0 used / capacity | 4,096 / 4,096 | 4,096 / 4,096 | 4,064 / 4,096 |
+| WRAMX used / capacity | 28,476 / 28,672 | 28,476 / 28,672 | 28,476 / 28,672 |
+| HRAM used / capacity | 125 / 127 | 125 / 127 | 125 / 127 |
+| SRAM used / capacity | 32,155 / 32,768 | 32,155 / 32,768 | 32,155 / 32,768 |
+| Warnings | Original build log recorded zero | 0 assembler, 11 graphics | 0 assembler, the same 11 graphics warnings |
+| Regression tests | 108 scripts, including 4 partial passes and 12 that stopped on obsolete symbols (TEST-002) | Reference for behavioural, graphics, layout, save and performance comparisons | 136 available scripts and 15 data validators passed (TEST-098/099) |
 
-Baseline ROM (`johtofrontier.gbc` MD5 `3142da94d2e5cde28cb9df2c79ff8d8b`, built on Linux from the fixed clean clone), its `.sym` and `.map` are kept outside the repository for before/after comparisons.
+The historical Linux baseline had MD5 `3142da94d2e5cde28cb9df2c79ff8d8b`. The rebuilt baseline had MD5 `b3c3b04a524b515775c95d03823e649d` and 885 fewer free bytes. Rebuilding the starting revision of this session showed the same 885-byte offset from its historical record. Its cause is unverified. The final deltas use the rebuilt baseline and final ROM produced on the same host.
 
 ### Build Environment
 
 - Build command: `make -j4` (RGBDS 0.7.0 on `PATH`, or `make RGBDS=<dir>/`). Builds `johtofrontier.gbc` and prints the free space (`tools/free_space.awk`).
 - Clean build command: `make clean && make -j4`, or a fresh `git clone` followed by `make -j4` (as done for the baseline).
-- Debug ROM: `make debug` (`johtofrontier_debug.gbc`).
+- Build the debug ROM with `make d` or both ROMs with `make -j4 all d`.
 - Testing commands: `python3 .claude-tools/romtest/<test>.py .claude-tools/romtest <dir with johtofrontier.gbc/.sym>`. The tests load the built ROM and symbol file and run real routines on a Python SM83 interpreter (`sm83.py`, `romlib.py`). `gbrender.py` renders screens built by the routines (tilemap, attrmap, VRAM, palettes) to PNG files. `.claude-tools/` is excluded from Git (`.git/info/exclude`), so the tools live only in the working copy.
-- Emulator tools: none available in the build environment (no headless emulator). Interpreter tests and renders are not an emulator: VBlank/HBlank and DMA are emulated by hooks, not by real timing.
+- Phase 10 added headless PyBoy 2.9.0 in CGB mode. Run `python tools/test_save_compat.py OLD/johtofrontier.gbc NEW/johtofrontier.gbc` with matching symbol files. The interpreter's graphics and timing hooks remain a separate source of coverage.
 - Profiling tools: `perfkit.py` (battle/AI M-cycle counting), `prof_frame.py`, `prof_overworld.py`, `prof_mapentry.py`, `prof_pc_step.py`, `prof_vblank.py`, `prof_blockdata.py` (M-cycles per frame/step/map entry), `test_ai_perf.py` (AI frame cost).
 - Validation tools: `test_ability_lists.py`, `test_basedata_layout.py`, `test_tileset_data.py`, `test_tileset_tables.py`, `test_decompress_all.py` and the table-length `assert`s in the source.
 - Physical hardware testing: not available.
@@ -1102,16 +1103,10 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 ## 25. Current Project Status
 
-- Overall status: In progress
-- Current phase: Phase 11 (final independent review). Phases 1–10 complete.
-- Current task: verify linked call targets, saved layouts, table contents and end-to-end performance against the baseline, then reconcile the final report.
-- Current AI agent: Codex
-- Current Git branch: `000-Johto-Frontier`
-- Last verified build: BUG-026, release and debug on Cygwin match the clean Linux ROMs byte for byte. Release has 670,307 bytes free and debug has 668,839.
-- Last completed task: Phase 11 event-command verification and emulator replay of MT-002, MT-004 and MT-005 (TEST-102/103).
-- Last verified build-tool commit: `8c5a9772b` (BUG-026).
-- Outstanding blockers: none
-- Next task: finish Phase 11 and publish the final measurements in this document.
+- All eleven repository audit phases are complete. Section 33 contains the final measurements and review outcome.
+- Codex verified source revision `aa50c4784` on branch `000-Johto-Frontier`. Release has 670,307 bytes free and debug has 668,839. Cygwin and Linux produced identical images for each configuration.
+- All 26 confirmed bugs in Section 26 have fixes. No known critical issue remains open. Section 32 distinguishes four completed emulator scenarios from four outstanding play-tests.
+- The remaining release checks cover the facility room, two-player link battles, a full Neutralizing Gas switch sequence, and audiovisual transitions. Physical CGB timing remains unverified.
 
 Update this section continuously.
 
@@ -1322,6 +1317,9 @@ Maintain the following table.
 | TEST-101 | Free-space report | Run the tool on the Cygwin CRLF and Linux LF release and debug maps. Check each total against the linker summary. Relink both Cygwin targets and compare their images with clean Linux builds. | Both build hosts and linked ROMs | Passed | Before the fix Cygwin reported 637,539 and 636,071 free. Both formats now report 670,307 and 668,839. Both ROM hashes match across hosts. |
 | TEST-102 | Event script dispatch | Match the ordered command constants to their handler labels and read all 199 little-endian pointers from each linked ROM. Check the two sets of opcode annotations. | Source and both linked ROMs | Passed | All 398 pointers matched. Corrected 131 numeric comments in the macro definitions and 129 in the dispatch table. Release and debug images are byte-identical to their previous builds. |
 | TEST-103 | Stats, gift naming and PC withdrawal | In PyBoy CGB, use joypad input to open the unlocked EV page. Separately queue a gift script with a full party, nickname Cyndaquil and Unown, open Bill's PC and withdraw each gift after making room. | Emulator with disposable party and event fixtures | Passed | The three EV cases displayed the expected numbers or stars in all six fields and closed normally. Both naming screens used the correct species and gender display. Both PC pictures rendered and both withdrawals preserved species, nickname and form. Both runs returned to the overworld and Start menu. |
+| TEST-104 | Banking, lookup equivalence and save layouts | Trace the 115 direct-call conversions in PERF-001/002 against both symbol files. Build expected matrices independently from the baseline ROM's ordered lists. Compare all battle variables and saved field locations. | Linked data and SM83 execution | Passed | All targets share the caller bank or reside in ROM0. Both raw charts and all 4,096 multiplier/order cells matched. All 21 variables on both turns returned the original field and value and preserved BC, DE, stack and bank. All 11,158 SRAM symbol locations matched. All 1,365 field offsets matched in the three WRAM blocks copied on save. |
+| TEST-105 | End-to-end AI performance | Run identical switching, move-choice and Random fixtures on the rebuilt baseline and final release using the same interpreter. | SM83 M-cycle counter | Passed | All four switching decisions matched. The Meganium switch fell from 909,606 to 541,034 M-cycles. Table in Section 33 gives the other fixtures. Random kept the sampled sequence. |
+| TEST-106 | Taunt at move selection | Boot a disposable game in PyBoy. Start a wild battle through the overworld event queue, set the player's Taunt counter, select Growl from FIGHT, then select Tackle. | CGB emulator and joypad | Passed | Growl took the disabled-text path and reopened the move screen before turn execution. Tackle was accepted as the current player move and the turn executed. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -2030,6 +2028,12 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - TEST-103 used the game's gift event, naming screen and PC menus. The Unown fixture displayed form 18 in the PC and retained it in the party after withdrawal. For the EV page, the emulator checked one mixed spread with maxed Attack, all six values at 252, and all six at zero. See Section 32 for the remaining play-throughs.
 - Commit: `docs: correct event opcode references against the linked handlers`. Next: complete the independent review.
 
+### PHASE11-CLOSE — Independent review and final measurements
+
+- 2026-11-25, Codex. Reviewed the optimisation and fix history from the buildable baseline, the final linker maps and the regression coverage for each changed system. Reconstructed the expected lookup tables from the old ROM, executed the old and new battle-variable routines for both turns, and compared linked SRAM addresses and saved field offsets (TEST-104).
+- Reran the performance fixtures on both revisions (TEST-105) and replayed Taunt through the battle menu (TEST-106). Checked all 4,877 tracked working files against the Git index, allowing for checkout line endings. The final report commit changes this audit only.
+- Both configurations built and the measured ROMs match across Cygwin and Linux. Sections 24, 31–33 record the baseline discrepancy, speed/space trade-off and remaining play-tests. Commit: `docs: close the optimisation audit with verified results`.
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -2048,12 +2052,12 @@ Do not silently ignore unresolved issues.
 
 - Resolved: the four partly passing tests were test-side faults, not ROM bugs (TEST-003).
 - The interpreter tests live in the git-excluded `.claude-tools/romtest` folder, so fixes to them are recorded here but are not part of the repository history.
-- The suite is a usable regression gate again (TEST-004). The four comparison tests (`test_bug_contest_judging`, `test_map_render_same`, `test_overworld_screen_same`, `test_type_chart_scan`) should be run with the baseline ROM as the older build after any change to those systems. `test_view_animations` needs a debug build. `test_map_render_same` is stale (written for the removed LZP format) and should be rewritten or retired; `test_overworld_screen_same` covers the same ground (TEST-010).
+- Use the buildable baseline with the map, overworld-screen and type-chart comparison tests. The contest size assertion requires the judging routine from before `24a7acb60`. The animation test requires a debug ROM and matching symbols. Phase 10 corrected the raw metatile/attribute reader in `test_map_render_same` and reran it across all 307 maps.
 - Phase 2 is complete as far as static checks and the interpreter can take it (TEST-005, 009, 011-020; BUG-003 to BUG-008). Crashes or freezes that depend on real-hardware timing can only be found with the manual checklist (Section 32).
 - Phase 4: the type-chart index is done (PERF-008: matrices built from the unchanged lists). The worst-case AI switch decision is now 15.4 frames (after PERF-009 to PERF-011). Comparison tests (`test_type_chart_scan`, `test_type_chart_stab_order`) need the previous build as a third argument.
 - Tooling note: on the mounted Windows working copy, `core.checkStat=minimal` lets `git status`/`git diff` miss edits made from Linux. Stage edited files explicitly (`git add <file>`) and take diffs with `git diff --cached`; a byte comparison of the tree against a fresh clone of HEAD (2026-11-25) found nothing uncommitted.
 - Work in progress (author's): most species in `data/pokemon/evos_attacks.asm` share a placeholder entry (no evolution, only Splash learned); comments mark planned levels. Left as it is.
-- No emulator or physical hardware is available here: VBlank/HBlank timing, DMA and real-hardware behaviour can only be checked in the interpreter with emulated hooks. Anything timing-sensitive needs manual emulator testing (Section 32).
+- PyBoy CGB runs covered the cases listed in Section 32 and the cross-version battery saves in TEST-100. Physical CGB display timing, DMA and link play still need external verification. The two ROMs built on each host agree. The 885-byte difference from the historical reference remains unexplained (Section 24).
 - WRAM0 now has 32 bytes free (MEM-005); WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
 
 - Decided by the user (2026-11-25): keep it. The Battle Tower Elite pool lists the Snorlax set (Leftovers, Double-Edge, Crunch, Earthquake, Rest) twice in a row (`data/battle_tower/parties.asm`, lines 115-116). It looks like a copy slip, but removing it changes how often that set appears, so it was left as it is (TEST-074).
@@ -2074,6 +2078,13 @@ For each test, provide:
 - Relevant modifications.
 
 Make manual testing instructions sufficiently clear for the user to perform without reading assembly code.
+
+| Status on 2026-11-25 | Cases | Evidence or outstanding observation |
+|---|---|---|
+| Passed in PyBoy CGB | MT-001, MT-002, MT-004, MT-005 | Taunt move rejection and retry (TEST-106), boxed gift display and withdrawal, EV page, and gift nickname entry (TEST-103). |
+| Awaiting full play-through | MT-003, MT-008 | Facility opponent arrival and surrounding sprites. Voltorb Flip exit and the music heard when crossing maps on foot or by bicycle. Routine, map and audio checks are recorded separately. |
+| Awaiting a linked pair | MT-006 | Both peers must agree through the battle. TEST-028 checked the RNG path. |
+| Awaiting a configured battle | MT-007 | The shipped Neutralizing Gas list is empty. Use a disposable test build with an opponent assigned that ability for the switch sequence. TEST-041 covers the underlying suppression and hazard behaviour. |
 
 - **MT-001 Taunt at the move menu (BUG-003).** Setup: any battle where the foe can use Taunt (or a save where your Pokémon gets Taunted). Steps: after your Pokémon is Taunted, open FIGHT and pick a status move (Growl, Swords Dance and the like). Expected: "The move is disabled" is shown and you choose again; damaging moves can still be picked. Failure: the status move is accepted and then fails during the turn.
 - **MT-002 Gift Pokémon sent to the PC (BUG-004).** Setup: a full party. Steps: receive a gift Pokémon (any `givepoke` event) so it goes to a box, then view it in Bill's PC and withdraw it. Expected: it looks and behaves normally; a gift Unown shows a valid letter. Failure: wrong or garbled icon/picture.
@@ -2115,6 +2126,53 @@ Upon completion, provide:
 Do not declare the audit complete while known critical issues remain unresolved.
 
 Clearly distinguish between verified results and unverified assumptions.
+
+### Final report · 2026-11-25
+
+The final release builds on Linux and Cygwin and has 670,307 bytes of ROM free. Against the baseline rebuilt on the same host, the measured Meganium switching decision used 40.5% fewer CPU cycles. The release uses 3,470 additional ROM bytes overall and frees 32 bytes of WRAM0. The normal and inverse type-chart indexes account for 4,104 bytes of ROM in exchange for faster damage and AI calculations. ROM0 gained 21 free bytes.
+
+#### Changes and confirmed fixes
+
+| Area | Outcome | Detailed record |
+|---|---|---|
+| Build and tooling | Fixed case-sensitive graphics paths, tool permissions and empty-bank accounting on Windows. Corrected event-command opcode comments and restored the local comparison and validation tools. | BUG-001, 002, 026 and TEST-098–102 |
+| Menus, Pokémon and facilities | Fixed Taunt's move-menu check, boxed gift forms and naming, the max-Attack EV crash, the NPC trade cartridge write and the invalid opponent sprite load. Corrected evolution list boundaries and the Tower pool index above 255. | BUG-003–008, 020, 022 |
+| Battle engine and abilities | Fixed critical stages, link RNG, Quick Draw's rate, Choice Scarf overflow, Solar Beam and Magic Guard in hail, gas suppression and Spikes immunity, experience saturation, capture status bonuses, Catch Charm and Blessing's chance cap. | BUG-009–019, 021 |
+| AI and audio | Preserved the candidate move and loop bounds during low-HP knockout scoring. Made the recoil penalty apply to the selected move and use the actual species. Fixed the WRAM bank used to select music when a fade ends. | BUG-023–025 |
+| CPU and memory | Converted 115 banked calls and jumps, improved arithmetic and neutral-stage stat handling, indexed the type charts, and reduced work in ability, battle-variable and far-list lookups. Removed unused storage and shared duplicate routines, including the party/PC swap. | PERF-001–011 and MEM-001–008 |
+
+The review also covered maps, events, graphics, audio, menus, storage, facilities and content tables. The duplicate Elite Snorlax set and repeatable GS Ball event retain the user's chosen behaviour. The author's unfinished evolution and learnset data remains a separate content project.
+
+#### Measured CPU cost
+
+Both columns use the same fixtures and SM83 M-cycle counter. Frame equivalents use 35,112 M-cycles per double-speed CGB frame. These figures measure the named routines under the harness's UI hooks.
+
+| Fixture | Rebuilt baseline, M-cycles | Final, M-cycles | Baseline → final frames |
+|---|---:|---:|---:|
+| Switch with Meganium active | 909,606 | 541,034 | 25.9 → 15.4 |
+| Switch with Feraligatr active | 151,651 | 97,031 | 4.3 → 2.8 |
+| Choose a move, Swords Dance set | 265,152 | 170,603 | 7.6 → 4.9 |
+| Choose a move, Recover/Swords Dance set | 224,858 | 146,819 | 6.4 → 4.2 |
+| Choose a move, Hyper Beam set | 350,020 | 220,440 | 10.0 → 6.3 |
+
+The Random fixture fell from 271 to 260 M-cycles per call and retained its sampled output sequence. Section 27 gives individual measurements, including 152,266 to 75,952 M-cycles across 161 Divide calls at the point of that optimisation. Its per-call estimates for direct bank-call conversions are labelled separately.
+
+#### Build and test evidence
+
+| Artifact | Free ROM | SHA-256 on both hosts |
+|---|---:|---|
+| `johtofrontier.gbc` | 670,307 bytes | `323b668ac6d02bf64cb0fc0ff77c76e631d2aa55e29a2dd09407121d618f5f67` |
+| `johtofrontier_debug.gbc` | 668,839 bytes | `92550c30948fb85e53176e2b88cfb23d60e1bd6d2d3f10cf86382df076e11a28` |
+
+All 136 available interpreter/regression scripts and 15 data validators passed. The two map comparisons matched all 307 maps. Decompression matched the source for 971 assets. The clean Linux build emitted zero assembler warnings and the same eleven graphics warnings as the rebuilt baseline. Section 24 gives before-and-after figures for all RAM regions.
+
+In PyBoy, a baseline save loaded in the final ROM, a damaged primary recovered from the backup, and a resaved game loaded back in the baseline. The emulator also passed MT-001, 002, 004 and 005. Independent checks covered bank targets, the chart data and ordering, variable addressing, and save layouts (TEST-104). The physical console and two-peer link checks remain open. Section 32 records the four outstanding play-tests and their prerequisites.
+
+#### Git history and future maintenance
+
+From `aa0134723` through `aa50c4784`, 75 commits comprise 20 fix, 9 performance, 4 memory, 2 refactor, 2 build, 2 test and 36 documentation commits. The two AI fixes are `39098ece6` and `184ec0a2d`. Commit `91a30f955` adds the tracked save test, `8c5a9772b` fixes free-space reporting, and `aa50c4784` verifies event-command references. The individual work logs and Git history identify the earlier changes.
+
+For future changes to battle calculations, rerun the same switching and move-choice fixtures and compare both outcomes and cycles. Retain matching older ROMs and symbols for graphics and save comparisons. Use separate host build directories, and check both linked maps before allocating ROM0, WRAM0 or HRAM. For changes involving interrupts, DMA or link timing, repeat the relevant Section 32 play-through on the target hardware.
 
 ## 34. Final Directive
 
