@@ -266,7 +266,7 @@ FadeToMapMusic::
 	push bc
 	push af
 
-	call GetMapMusic_MaybeSpecial
+	call GetMapMusicForTravel
 	ld a, [wMapMusic]
 	cp e
 	jr z, .done
@@ -315,23 +315,7 @@ PlayMapMusicBike::
 
 	xor a
 	ld [wDontPlayMapMusicOnReload], a
-	; a track saved from the Music Player replaces the bike music too
-	ld a, [wOverworldMusicOverride]
-	and a
-	jr nz, .map_music
-	ld a, [wPlayerState]
-	cp PLAYER_BIKE
-	jr nz, .map_music
-	; The Bicycle music can be turned off from the options menu.
-	ld a, [wOptions5]
-	bit SKIP_BICYCLE_MUSIC, a
-	jr nz, .map_music
-	ld e, MUSIC_BICYCLE
-	jr .play
-
-.map_music
-	call GetMapMusic_MaybeSpecial
-.play
+	call GetMapMusicForTravel
 	push de
 	ld e, MUSIC_NONE
 	call PlayMusic
@@ -416,6 +400,20 @@ SpecialMapMusic::
 .ranking
 	ld e, MUSIC_BUG_CATCHING_CONTEST_RANKING
 	scf
+	ret
+
+GetMapMusicForTravel:
+; Map connections and full map reloads use the same riding music.
+	ld a, [wPlayerState]
+	cp PLAYER_BIKE
+	jr nz, GetMapMusic_MaybeSpecial
+	ld a, [wOptions5]
+	bit SKIP_BICYCLE_MUSIC, a
+	jr nz, GetMapMusic_MaybeSpecial
+	ld a, [wOverworldMusicOverride]
+	and a
+	jr nz, GetMapMusic_MaybeSpecial
+	ld e, MUSIC_BICYCLE
 	ret
 
 GetMapMusic_MaybeSpecial::

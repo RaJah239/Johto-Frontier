@@ -1060,12 +1060,12 @@ Populate this section during the initial audit.
 
 | Measurement | Historical baseline | Baseline rebuilt for comparison | Final release |
 |---|---|---|---|
-| Source | `aa0134723` with the clean-build fixes | `936e0c1c1` | `aa50c4784` |
+| Source | `aa0134723` with the clean-build fixes | `936e0c1c1` | BUG-027 follow-up to `aa50c4784` |
 | RGBDS | 0.7.0 | 0.7.0 | 0.7.0 |
 | Build | Clean case-sensitive checkout required BUG-001/002 | Clean Linux build | Clean Linux release and debug, byte-identical Cygwin builds |
 | ROM capacity | 2,097,152 bytes, 128 banks, MBC3 with RAM, battery and timer | 2,097,152 | 2,097,152 |
-| Used ROM | 1,422,490 bytes | 1,423,375 (16,042 ROM0 + 1,407,333 ROMX) | 1,426,845 (16,021 ROM0 + 1,410,824 ROMX) |
-| Free ROM | 674,662 bytes | 673,777 (342 ROM0 + 673,435 ROMX) | 670,307 (363 ROM0 + 669,944 ROMX), 31.96% |
+| Used ROM | 1,422,490 bytes | 1,423,375 (16,042 ROM0 + 1,407,333 ROMX) | 1,426,844 (16,020 ROM0 + 1,410,824 ROMX) |
+| Free ROM | 674,662 bytes | 673,777 (342 ROM0 + 673,435 ROMX) | 670,308 (364 ROM0 + 669,944 ROMX), 31.96% |
 | WRAM0 used / capacity | 4,096 / 4,096 | 4,096 / 4,096 | 4,064 / 4,096 |
 | WRAMX used / capacity | 28,476 / 28,672 | 28,476 / 28,672 | 28,476 / 28,672 |
 | HRAM used / capacity | 125 / 127 | 125 / 127 | 125 / 127 |
@@ -1104,8 +1104,8 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 ## 25. Current Project Status
 
 - All eleven repository audit phases are complete. Section 33 contains the final measurements and review outcome.
-- Codex verified source revision `aa50c4784` on branch `000-Johto-Frontier`. Release has 670,307 bytes free and debug has 668,839. Cygwin and Linux produced identical images for each configuration.
-- All 26 confirmed bugs in Section 26 have fixes. MT-003, MT-006 and MT-007 passed in follow-up runs. The audiovisual check is in progress. Physical CGB timing remains unverified.
+- Codex verified the BUG-027 release and debug builds on branch `000-Johto-Frontier`. Release has 670,308 bytes free and debug has 668,840. Cygwin and Linux produced identical images for each configuration.
+- All 27 confirmed bugs in Section 26 have fixes. All eight Section 32 scenarios passed on emulators, including the configured ability battle and two-peer link test. Physical CGB and cable timing remain unverified.
 
 Update this section continuously.
 
@@ -1141,6 +1141,7 @@ Maintain the following table throughout the project.
 | BUG-024 | Basic trainer AI | At low HP a healing-move search replaced the outer move count with an effect ID and overwrote the candidate move. A full set was read past slot four and the AI could give Hydro Pump the accuracy bonus for Tackle. | Medium | Fixed | TEST-096 |
 | BUG-025 | Smart trainer AI | The recoil handler used a dispatch address byte as the species and lost the score pointer during the Rock Head lookup. Its low-HP penalty wrote to the cartridge instead of the selected move's score. | Medium | Fixed | TEST-097 |
 | BUG-026 | Build report | CRLF linker maps hid completely empty ROM banks from the free-space report. Both Cygwin builds underreported free space by 32,768 bytes. | Low | Fixed | TEST-101 |
+| BUG-027 | Overworld music | Cycling across a map connection replaced bicycle music with the destination map track while the player was still riding. The connection fade bypassed the riding-music selection. | Low | Fixed | TEST-110 |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1322,6 +1323,7 @@ Maintain the following table.
 | TEST-107 | Battle Tower room (MT-003) | Replay the real room script in PyBoy at three streak positions. Compare the player and receptionist pixels every frame during arrival, check the opponent's live sprite against its trainer class, and proceed into battle. | CGB emulator, release and buildable baseline | Passed | Baseline attempted to load sprite 0 before the opponent appeared. The release avoided that load. Trainers 33, 12 and 49 entered with sprites 38, 38 and 62. Nearby sprites stayed intact across 143 frames per arrival. |
 | TEST-108 | MT-007, hazards and ability suppression | Use normal battle menus in three configured trainer battles. | PyBoy CGB | Passed | Gengar and Clefable each took one eighth of max HP. Burned Ursaring's Attack halved during suppression and recovered when Koffing left. |
 | TEST-109 | MT-006, linked Haxorus battle | Two SameBoy CGB-E instances linked at the serial-bit level. Boot two new games, seed distinct parties and established clock roles, run ColosseumConsoleScript and play through victory and defeat. | Two emulated consoles | Passed | All nine move menus matched for mirrored HP, species and status. Both sides took eight Tenacity rolls at identical RNG positions, cured poison once and agreed on the outcome. |
+| TEST-110 | MT-008, minigame exit and border audio | Compare every rendered frame from confirming the Voltorb Flip exit through return to the overworld against a control withholding sprite DMA until map sprites are rebuilt. Cross between New Bark Town and Route 1 on foot and by bike, check the active channel, then dismount. | PyBoy CGB | Passed | All 284 exit frames matched. Before BUG-027 the active track became town music while riding. The fixed build retained bicycle music, respected the disable option and preserved the Music Player override. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -2052,6 +2054,13 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - TEST-109, Codex, 2026-11-25. The PyBoy shared-memory attempt timed out during the Colosseum handshake. Built SameBoy core `ea667ad` in a disposable directory and connected two CGB-E instances using its serial bit callbacks, scheduling the two CPUs by elapsed cycles. Supplied a poisoned Haxorus on one cartridge and a Magikarp on the other, with complementary clock roles. The game's Colosseum script exchanged party data and RNG and ran the battle.
 - Both sides agreed at all nine move menus and on all eight Tenacity RNG positions. The cure appeared on both peers after the first turn. The Haxorus side reported victory and the Magikarp side defeat. Physical link-cable timing remains untested. Commit: `test: verify Tenacity through a two-peer link battle`.
 
+### BUG-027 — Keep bicycle music across map connections
+
+- Codex, 2026-11-25. In MT-008 the character crossed from Route 1 into New Bark Town while riding. The ROM switched the active audio channel from bicycle track 14 to town track 51. `FadeToMapMusic` chose the destination song directly. The full map-reload path already handled the bicycle option and saved music override.
+- Shared that travel-specific selection between the two paths in `home/audio.asm`. The default map-song lookup still serves callers that need the map's own track. The change frees one ROM0 byte. `python tools/test_border_music.py johtofrontier.gbc` exercises walking, cycling, dismounting, disabled bicycle music and an active music override.
+- TEST-110 also replayed the Goldenrod Voltorb Flip exit through the minigame's Select confirmation and back to the overworld. The control delayed sprite DMA until the overworld sprites had been rebuilt. All 284 rendered frames were identical. The minigame required no change.
+- The full follow-up regression passed all 136 available scripts and 15 validators, including all 307 rendered maps. The debug-only animation test passed 10/10 using its required directory layout. The cross-version save test passed including backup recovery. Cygwin and Linux produced identical release and debug ROMs, with 670,308 and 668,840 bytes free respectively. Commit: `fix: preserve bicycle music across map connections`. All eight Section 32 scenarios now have emulator evidence.
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -2101,7 +2110,7 @@ Make manual testing instructions sufficiently clear for the user to perform with
 |---|---|---|
 | Passed in PyBoy CGB | MT-001, MT-002, MT-004, MT-005 | Taunt move rejection and retry (TEST-106), boxed gift display and withdrawal, EV page, and gift nickname entry (TEST-103). |
 | Passed in PyBoy CGB | MT-003 | Three scripted Battle Tower arrivals, player and attendant pixels, live trainer sprites and subsequent battles (TEST-107). |
-| Awaiting full play-through | MT-008 | Voltorb Flip exit and the music heard when crossing maps on foot or by bicycle. Routine, map and audio checks are recorded separately. |
+| Passed in PyBoy CGB | MT-008 | Voltorb Flip exit matched its control frame for frame. After BUG-027, the audio engine played the expected song on walking, riding and dismounting across a map connection in each tested configuration (TEST-110). |
 | Passed with two linked SameBoy CGBs | MT-006 | The peers exchanged parties and battle actions, agreed on the Haxorus cure, and reached complementary win/loss results (TEST-109). |
 | Passed in configured PyBoy CGB battles | MT-007 | Gengar and Clefable each took 20 Spikes damage on switching in. A burned Ursaring lost and regained Attack as Koffing entered and left (TEST-108). Both ability lists are empty in the release. |
 
@@ -2148,7 +2157,7 @@ Clearly distinguish between verified results and unverified assumptions.
 
 ### Final report · 2026-11-25
 
-The final release builds on Linux and Cygwin and has 670,307 bytes of ROM free. Against the baseline rebuilt on the same host, the measured Meganium switching decision used 40.5% fewer CPU cycles. The release uses 3,470 additional ROM bytes overall and frees 32 bytes of WRAM0. The normal and inverse type-chart indexes account for 4,104 bytes of ROM in exchange for faster damage and AI calculations. ROM0 gained 21 free bytes.
+The follow-up release builds on Linux and Cygwin and has 670,308 bytes of ROM free. Against the baseline rebuilt on the same host, the measured Meganium switching decision used 40.5% fewer CPU cycles. The release uses 3,469 additional ROM bytes overall and frees 32 bytes of WRAM0. The normal and inverse type-chart indexes account for 4,104 bytes of ROM in exchange for faster damage and AI calculations. ROM0 gained 22 free bytes.
 
 #### Changes and confirmed fixes
 
@@ -2157,7 +2166,7 @@ The final release builds on Linux and Cygwin and has 670,307 bytes of ROM free. 
 | Build and tooling | Fixed case-sensitive graphics paths, tool permissions and empty-bank accounting on Windows. Corrected event-command opcode comments and restored the local comparison and validation tools. | BUG-001, 002, 026 and TEST-098–102 |
 | Menus, Pokémon and facilities | Fixed Taunt's move-menu check, boxed gift forms and naming, the max-Attack EV crash, the NPC trade cartridge write and the invalid opponent sprite load. Corrected evolution list boundaries and the Tower pool index above 255. | BUG-003–008, 020, 022 |
 | Battle engine and abilities | Fixed critical stages, link RNG, Quick Draw's rate, Choice Scarf overflow, Solar Beam and Magic Guard in hail, gas suppression and Spikes immunity, experience saturation, capture status bonuses, Catch Charm and Blessing's chance cap. | BUG-009–019, 021 |
-| AI and audio | Preserved the candidate move and loop bounds during low-HP knockout scoring. Made the recoil penalty apply to the selected move and use the actual species. Fixed the WRAM bank used to select music when a fade ends. | BUG-023–025 |
+| AI and audio | Preserved the candidate move and loop bounds during low-HP knockout scoring. Made the recoil penalty apply to the selected move and use the actual species. Fixed the WRAM bank used when a fade ends and preserved riding music at map connections. | BUG-023–025, 027 |
 | CPU and memory | Converted 115 banked calls and jumps, improved arithmetic and neutral-stage stat handling, indexed the type charts, and reduced work in ability, battle-variable and far-list lookups. Removed unused storage and shared duplicate routines, including the party/PC swap. | PERF-001–011 and MEM-001–008 |
 
 The review also covered maps, events, graphics, audio, menus, storage, facilities and content tables. The duplicate Elite Snorlax set and repeatable GS Ball event retain the user's chosen behaviour. The author's unfinished evolution and learnset data remains a separate content project.
@@ -2180,12 +2189,14 @@ The Random fixture fell from 271 to 260 M-cycles per call and retained its sampl
 
 | Artifact | Free ROM | SHA-256 on both hosts |
 |---|---:|---|
-| `johtofrontier.gbc` | 670,307 bytes | `323b668ac6d02bf64cb0fc0ff77c76e631d2aa55e29a2dd09407121d618f5f67` |
-| `johtofrontier_debug.gbc` | 668,839 bytes | `92550c30948fb85e53176e2b88cfb23d60e1bd6d2d3f10cf86382df076e11a28` |
+| `johtofrontier.gbc` | 670,308 bytes | `daef509dc15f45e93c3f91a045cca7bd9d8199a6eb4aec6b62f6ebedc58ec0f8` |
+| `johtofrontier_debug.gbc` | 668,840 bytes | `ef0d59b3080ca8a7db9f5d0b42f6b19a4e1879da1a4613b546360ede5368974d` |
 
 All 136 available interpreter/regression scripts and 15 data validators passed. The two map comparisons matched all 307 maps. Decompression matched the source for 971 assets. The clean Linux build emitted zero assembler warnings and the same eleven graphics warnings as the rebuilt baseline. Section 24 gives before-and-after figures for all RAM regions.
 
-In PyBoy, a baseline save loaded in the final ROM, a damaged primary recovered from the backup, and a resaved game loaded back in the baseline. The emulator also passed MT-001, 002, 004 and 005. Independent checks covered bank targets, the chart data and ordering, variable addressing, and save layouts (TEST-104). The physical console and two-peer link checks remain open. Section 32 records the four outstanding play-tests and their prerequisites.
+In PyBoy, a baseline save loaded in the final ROM, a damaged primary recovered from the backup, and a resaved game loaded back in the baseline. The emulator also passed MT-001, 002, 004 and 005. Independent checks covered bank targets, the chart data and ordering, variable addressing, and save layouts (TEST-104). Follow-up tests completed the remaining four Section 32 scenarios (TEST-107–110), including two linked emulated consoles. Physical console and cable verification remain open.
+
+The follow-up batches added the facility replay in `114c813f8`, the configured ability battles in `921ea7bd8`, the linked-console run in `17af89e5e`, and the BUG-027 music change with a repeatable border-crossing test.
 
 #### Git history and future maintenance
 
