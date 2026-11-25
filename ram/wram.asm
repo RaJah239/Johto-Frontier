@@ -277,16 +277,6 @@ wTilemap::
 wTilemapEnd::
 
 
-; This union spans 480 bytes.
-SECTION UNION "Miscellaneous", WRAM0
-
-; box save buffer
-; SaveBoxAddress uses this buffer in three steps because it
-; needs more space than the buffer can hold.
-wBoxPartialData:: ds 480
-wBoxPartialDataEnd::
-
-
 SECTION UNION "Miscellaneous", WRAM0
 
 ; battle tower temp struct

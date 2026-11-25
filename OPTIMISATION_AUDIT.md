@@ -964,8 +964,8 @@ Complete the project systematically using the following phases.
 - [x] Optimise battle routines.
 - [x] Optimise overworld routines.
 - [x] Optimise arithmetic routines.
-- [ ] Optimise loops.
-- [ ] Optimise memory operations.
+- [x] Optimise loops.
+- [x] Optimise memory operations.
 - [ ] Optimise register usage.
 - [x] Optimise banked calls.
 - [x] Investigate safe tail calls.
@@ -1190,6 +1190,7 @@ Maintain the following table.
 | MEM-002 | ROMX | PERF-002 | 674,719 bytes free | 674,986 bytes free | 267 | Build `free_space.awk` |
 | MEM-003 | ROMX | BUG-006 rewrite of `StatsScreen_PrintEVs` (one shared print helper instead of six copied blocks) | 674,986 bytes free | 675,214 bytes free | 228 | Build `free_space.awk` |
 | MEM-004 | ROMX | Stray byte after three ability-list terminators removed (TEST-035) | 675,209 bytes free | 675,212 bytes free | 3 | Build `free_space.awk` |
+| MEM-005 | WRAM0 | Removed `wBoxPartialData` (480 bytes, unreferenced: a leftover from the old box-saving code) from the "Miscellaneous" union; the union now spans the battle data (448 bytes) | WRAM0: 0 bytes free | WRAM0: 32 bytes free ($CFE0-$CFFF) | 32 | Build map, full suite, overworld comparison |
 
 Use unique identifiers such as MEM-001, MEM-002 and MEM-003.
 
@@ -1261,6 +1262,7 @@ Maintain the following table.
 | TEST-056 | Battle stats | `test_calc_battle_stats_same`: `CalcBattleStats` against the baseline ROM for random raw stats (0, small, up to $FFFF) and stages (mostly stage 0) | Interpreter, two ROMs | Passed | 250 cases identical. Needs the baseline ROM as its third argument (prints "skipped" without it). |
 | TEST-057 | AI performance | Frame cost of the AI's per-turn move choice (`AI_SimMoveChoice`) and switch decision (`AI_MatchupSwitch`), baseline vs now | `perfkit.run_cycles` on three move sets and the test_ai_perf party | Passed (measured) | Move choice: Swords Dance plan 16.3 -> 11.0 frames, Recover/SD 5.7 -> 4.8, Hyper Beam set 7.6 -> 6.2. Switch decision: 25.9 -> 20.0 frames. All decisions unchanged (AI suite passes). |
 | TEST-058 | Overworld CPU cost | The overworld's measured per-event costs, to decide whether they need work | Baseline measurements (Section 24) and `test_map_blocks` | Passed (measured) | `LoadBlockData` worst case 0.27 frames (map change), the overworld tilemap redraw 0.16 frames, the VBlank BG-map row ~883 M-cycles: all within a frame with room to spare. No optimisation needed; the general gains (PERF-003/004) apply to the overworld too, and the overworld comparison stays identical. |
+| TEST-059 | RAM usage | Declared RAM labels referenced nowhere outside `ram/` | Python over all sources | Partially verified | 98 names; most are not really unused (union members, saved blocks with a fixed layout, arrays reached by offset such as `wMartItem2BCD`-`20BCD` and the PC item list, terminators). The one that freed space was `wBoxPartialData` (MEM-005). The rest of the list (e.g. `wUnusedBCDNumber`, `wBetaPoker*`, the `wBillsPC_*Pals3-5` slots) sit in unions or would not shrink a full section on their own; left for a later pass. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1742,6 +1744,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Git commit message: `perf: skip the multiply and divide for unboosted battle stats`
 - Next task: Phase 5, overworld routines.
 
+### MEM-005 — 32 bytes of WRAM0 back
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 6 (RAM)
+- System: WRAM0 layout
+- Files modified: `ram/wram.asm`
+- Problem identified: WRAM0 was completely full; the 480-byte box save buffer that set the size of the "Miscellaneous" union is no longer used (TEST-059).
+- Root cause: left behind when the storage system replaced the old box code.
+- Solution implemented: the buffer is removed; the union shrinks to its largest live member (battle data, 448 bytes).
+- Behaviour preserved: nothing referenced it; full suite and overworld comparison unchanged.
+- Performance impact: none. Memory impact: 32 bytes of WRAM0 free.
+- Build result: builds, 0 assembler warnings.
+- Tests performed: full suite, overworld comparison.
+- Test results: all pass.
+- Remaining risks: none known.
+- Git commit message: `memory: drop the unused box save buffer from WRAM0`
+- Next task: Phase 6, more RAM and ROM savings.
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -1764,7 +1785,7 @@ Do not silently ignore unresolved issues.
 - Phase 2 is complete as far as static checks and the interpreter can take it (TEST-005, 009, 011-020; BUG-003 to BUG-008). Crashes or freezes that depend on real-hardware timing can only be found with the manual checklist (Section 32).
 - Phase 4 open item: the AI switch decision is still ~20 frames in the worst case. Its biggest remaining cost is the linear type-chart scan per damage estimate (~18%); an index by attacking type would need the three charts regrouped (normal, inverse, none). Not done yet.
 - No emulator or physical hardware is available here: VBlank/HBlank timing, DMA and real-hardware behaviour can only be checked in the interpreter with emulated hooks. Anything timing-sensitive needs manual emulator testing (Section 32).
-- WRAM0 and WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
+- WRAM0 now has 32 bytes free (MEM-005); WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
 
 ## 32. Manual Testing Checklist
 
