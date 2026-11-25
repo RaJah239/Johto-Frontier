@@ -989,17 +989,17 @@ Complete the project systematically using the following phases.
 - [ ] Audit movement.
 - [ ] Audit map loading.
 - [ ] Audit map transitions.
-- [ ] Audit wild encounters.
+- [x] Audit wild encounters.
 - [ ] Audit NPC behaviour.
-- [ ] Audit scripts.
+- [x] Audit scripts.
 - [ ] Audit menus.
 - [ ] Audit inventory.
-- [ ] Audit shops.
+- [x] Audit shops.
 - [ ] Audit Pokédex.
 - [ ] Audit party management.
 - [ ] Audit PC storage.
 - [ ] Audit input handling.
-- [ ] Audit text rendering.
+- [x] Audit text rendering.
 
 ### Phase 8 — Data and Remaining Systems
 
@@ -1292,6 +1292,9 @@ Maintain the following table.
 | TEST-079 | Music fade and WRAM bank | `test_fade_bike_bank`: `FadeMusic` with the fade ending, `wPlayerState` set differently in bank 1 and in the selected bank (1, 3, 7): bike music only if bank 1 says Bicycle, and the selected bank is the same afterwards. Also: every WRAM variable the audio engine uses is in WRAM0 apart from this one | Interpreter | Passed | 2/6 on the previous build (it followed whichever bank was selected); 6/6 after BUG-023. |
 | TEST-080 | Graphics engine (VRAM banks) | `validate_vbk.py`: all 188 `rVBK` writes scanned per routine for a return or tail jump while VRAM bank 1 may still be selected; the hits read by hand. Together with TEST-077 (OAM DMA) and the Phase 2 VBlank/STAT checks | Python scan; code review | Passed | No leak: the remaining hits write bank 0 (`BANK(vBGMap0)`), restore a saved value, or run inside `CallInSafeGFXMode`, which saves and restores `rVBK` and `rSVBK`. Palette and VRAM write timing during active display can only be judged on hardware or an emulator (Section 32). |
 | TEST-081 | Scripts (event flags) | `validate_events.py`: all 915 event flags traced through map scripts, engine code (`EventFlagAction` with `SET_FLAG`/`RESET_FLAG`/`CHECK_FLAG`), object visibility flags and data tables; reports flags that are checked but can never be set | Python validator; each hit read by hand | Passed with one open question | 4 flags unused. 7 checked but never set: Radio Tower cleared / Clear Bell (the takeover storyline is cut; Tin Tower opens through Koji in the Wise Trio's room), Mahogany Mart staircase (check inverted on purpose, with a comment), Pokécom Center welcome (vanilla), Lance's room exit (the door is opened by script, as in vanilla), Battle Points (nothing awards BP yet, so the card hides the row), and the GS Ball (see Section 31). |
+| TEST-082 | Text rendering (line widths) | `validate_text_width.py`: every `text`/`line`/`cont`/`para`/`next` string in maps, data and engine measured in tiles (`#` = 4, `<PLAYER>`/`<RIVAL>` at their 7-letter maximum, contractions like `'s` as one tile, `{d:...}` as 4 digits); lines with run-time battle names skipped | Python validator | Passed | No line wider than the 18-tile textbox (credits use the 20-tile screen). |
+| TEST-083 | Shops (purchase arithmetic) | Review of `GetDiscountedPrice` and `CalculateMaximumQuantity`: price x quantity (at most 65535 x 100) fits the 3-byte multiplicand that the second `Multiply` reuses; the second product stays under 2^32; the quotient fits the 3-byte price; the binary search relies on the price never falling as quantity rises (stated and tested by `test_mart_discount`); `GiveMoney` caps at 999,999 and the 3-byte sum cannot overflow first | Code review; existing `test_mart_discount`, `test_sell_limit`, `test_item_stack_99` | Passed | No faults. |
+| TEST-084 | Wild encounters | Review of `ChooseWildEncounter` and `CheckRepelEffect`: the 1-100 roll always ends inside the grass and water probability tables (both end at 100); the +0 to +3 level bonus is uncapped, so listed levels were checked across every encounter type: grass and water up to 37, fishing 5-40, headbutt trees 15-25, so no wild Pokémon can pass level 50; Repel compares against the first party Pokémon that has HP | Code review; Python over `data/wild/*.asm` | Passed | Note for future data edits: a listed grass or water level above 47 would let the bonus pass the level cap. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
