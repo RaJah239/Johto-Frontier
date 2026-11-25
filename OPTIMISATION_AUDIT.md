@@ -1105,8 +1105,7 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - All eleven repository audit phases are complete. Section 33 contains the final measurements and review outcome.
 - Codex verified source revision `aa50c4784` on branch `000-Johto-Frontier`. Release has 670,307 bytes free and debug has 668,839. Cygwin and Linux produced identical images for each configuration.
-- All 26 confirmed bugs in Section 26 have fixes. No known critical issue remains open. Section 32 distinguishes four completed emulator scenarios from four outstanding play-tests.
-- The remaining release checks cover the facility room, two-player link battles, a full Neutralizing Gas switch sequence, and audiovisual transitions. Physical CGB timing remains unverified.
+- All 26 confirmed bugs in Section 26 have fixes. MT-003 passed in the follow-up. The remaining release checks cover two-player link battles, a full Neutralizing Gas switch sequence, and audiovisual transitions. Physical CGB timing remains unverified.
 
 Update this section continuously.
 
@@ -1320,6 +1319,7 @@ Maintain the following table.
 | TEST-104 | Banking, lookup equivalence and save layouts | Trace the 115 direct-call conversions in PERF-001/002 against both symbol files. Build expected matrices independently from the baseline ROM's ordered lists. Compare all battle variables and saved field locations. | Linked data and SM83 execution | Passed | All targets share the caller bank or reside in ROM0. Both raw charts and all 4,096 multiplier/order cells matched. All 21 variables on both turns returned the original field and value and preserved BC, DE, stack and bank. All 11,158 SRAM symbol locations matched. All 1,365 field offsets matched in the three WRAM blocks copied on save. |
 | TEST-105 | End-to-end AI performance | Run identical switching, move-choice and Random fixtures on the rebuilt baseline and final release using the same interpreter. | SM83 M-cycle counter | Passed | All four switching decisions matched. The Meganium switch fell from 909,606 to 541,034 M-cycles. Table in Section 33 gives the other fixtures. Random kept the sampled sequence. |
 | TEST-106 | Taunt at move selection | Boot a disposable game in PyBoy. Start a wild battle through the overworld event queue, set the player's Taunt counter, select Growl from FIGHT, then select Tackle. | CGB emulator and joypad | Passed | Growl took the disabled-text path and reopened the move screen before turn execution. Tackle was accepted as the current player move and the turn executed. |
+| TEST-107 | Battle Tower room (MT-003) | Replay the real room script in PyBoy at three streak positions. Compare the player and receptionist pixels every frame during arrival, check the opponent's live sprite against its trainer class, and proceed into battle. | CGB emulator, release and buildable baseline | Passed | Baseline attempted to load sprite 0 before the opponent appeared. The release avoided that load. Trainers 33, 12 and 49 entered with sprites 38, 38 and 62. Nearby sprites stayed intact across 143 frames per arrival. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -2034,6 +2034,11 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Reran the performance fixtures on both revisions (TEST-105) and replayed Taunt through the battle menu (TEST-106). Checked all 4,877 tracked working files against the Git index, allowing for checkout line endings. The final report commit changes this audit only.
 - Both configurations built and the measured ROMs match across Cygwin and Linux. Sections 24, 31–33 record the baseline discrepancy, speed/space trade-off and remaining play-tests. Commit: `docs: close the optimisation audit with verified results`.
 
+### Follow-up — Battle Tower room replay
+
+- Codex, 2026-11-25. Added `tools/test_tower_arrival.py` to reproduce MT-003 with disposable party and streak data. Run `python tools/test_tower_arrival.py johtofrontier.gbc` with PyBoy and matching symbols. The baseline reproduces BUG-005. All three release entries reached FIGHT with the expected trainer class, with 429 rendered frames compared (TEST-107).
+- Release and debug builds passed. This test changes no game bytes. Commit: `test: replay Battle Tower opponent arrivals on CGB`. Next: the remaining link, ability and audiovisual play-tests.
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -2082,7 +2087,8 @@ Make manual testing instructions sufficiently clear for the user to perform with
 | Status on 2026-11-25 | Cases | Evidence or outstanding observation |
 |---|---|---|
 | Passed in PyBoy CGB | MT-001, MT-002, MT-004, MT-005 | Taunt move rejection and retry (TEST-106), boxed gift display and withdrawal, EV page, and gift nickname entry (TEST-103). |
-| Awaiting full play-through | MT-003, MT-008 | Facility opponent arrival and surrounding sprites. Voltorb Flip exit and the music heard when crossing maps on foot or by bicycle. Routine, map and audio checks are recorded separately. |
+| Passed in PyBoy CGB | MT-003 | Three scripted Battle Tower arrivals, player and attendant pixels, live trainer sprites and subsequent battles (TEST-107). |
+| Awaiting full play-through | MT-008 | Voltorb Flip exit and the music heard when crossing maps on foot or by bicycle. Routine, map and audio checks are recorded separately. |
 | Awaiting a linked pair | MT-006 | Both peers must agree through the battle. TEST-028 checked the RNG path. |
 | Awaiting a configured battle | MT-007 | The shipped Neutralizing Gas list is empty. Use a disposable test build with an opponent assigned that ability for the switch sequence. TEST-041 covers the underlying suppression and hazard behaviour. |
 
