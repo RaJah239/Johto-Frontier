@@ -1008,7 +1008,7 @@ Complete the project systematically using the following phases.
 - [x] Audit item data.
 - [x] Audit trainer data.
 - [x] Audit encounter data.
-- [ ] Audit battle facilities.
+- [x] Audit battle facilities.
 - [ ] Audit save system.
 - [ ] Audit graphics engine.
 - [ ] Audit audio engine.
@@ -1104,12 +1104,12 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - Overall status: In progress
 - Current phase: Phase 7/8 (overworld, interface and data)
-- Current task: Phase 8 battle facilities and save system
+- Current task: Phase 8 save system
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
-- Last verified build: clone of `45bbbea51` plus BATTLE-009, Linux, RGBDS 0.7.0, 0 assembler warnings, 675,248 bytes free
-- Last completed task: BATTLE-009 (BUG-021; move data validation)
-- Last verified commit: BATTLE-009 (full suite: 128 scripts, no regressions against the previous run)
+- Last verified build: clone of `791ca9f56` plus FAC-001, Linux, RGBDS 0.7.0, 0 assembler warnings, 675,248 bytes free
+- Last completed task: FAC-001 (BUG-022; facility data)
+- Last verified commit: FAC-001 (full suite: 129 scripts, no regressions against the previous run)
 - Outstanding blockers: none
 - Next task: Phase 8 move data, battle facilities, save system; then Phase 7. Open earlier items: Phase 4 type-chart index, Phase 5 register usage
 
@@ -1142,6 +1142,7 @@ Maintain the following table throughout the project.
 | BUG-019 | Capture (Catch Charm) | The Catch Charm (held: "Doubles catch rate of statused foes") never added anything: it added `c` after `farcall GetItemHeldEffect`, which returns the item's own parameter in `c` (0 for the Catch Charm), not the status bonus. The bonus is now kept in `e` across the call. | Medium | Fixed | `test_catch_status` (Catch Charm added nothing on the baseline for most statuses; adds the status bonus again after) |
 | BUG-020 | Pokémon data (evolutions) | Evolution lists fall through into the next label by design (families share data), but in the Porygon / Chansey / Magikarp block no entry ended its list: Porygon, Porygon2, Porygon-Z, Chansey and Blissey all ran on into Magikarp's "level 20 -> Gyarados" (and Porygon-Z into a happiness evolution into itself); Chansey evolved into Porygon-Z instead of Blissey. Fixed as the user chose: Porygon, Porygon2 and Chansey end their own lists (with the shared default learnset, so no moves change), Porygon-Z and Blissey have no evolution, Chansey -> Blissey by happiness. The rest of `evos_attacks.asm` is the author's work in progress (most species share a default "no evolution, Splash" entry) and was not touched. | High | Fixed | `test_evolutions` (1/8 on the baseline, 8/8 after) |
 | BUG-021 | Battle engine (Blessing ability) | `BattleCommand_EffectChance` doubles the effect chance with `sla [hl]` on a byte where 100% is 255, so any chance above 50% wrapped: 60% became about 20%, and a certain (100%) effect became 99.6%. Latent: no species has Blessing yet (`blessing_mons.asm` is empty) | Low (latent) | Fixed | TEST-071 |
+| BUG-022 | Battle Tower / Factory (team generation) | `PickRandomBattleTowerCompactMon`, stepping past a pool, computed the index's new high byte as `count_high - index_high` instead of `index_high - count_high`. With more than 256 mons across a challenge's pools (the design the comments describe), picks landed in the wrong pool or at a garbage address. Latent: today's largest challenge has 133 mons, so the high byte is always 0 | Medium (latent) | Fixed | TEST-073 |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1280,6 +1281,8 @@ Maintain the following table.
 | TEST-070 | Base stats | All 252 base-stat files: include order matches the species constants; types, gender ratio, growth rate and egg groups are known constants; held items exist; catch rate 1-255; no zero stat; EV yields within 0-3 (they are packed 2 bits each); BST comments match the stats; dimensions files exist | Python validator (`validate_bs.py`); build with an EV of 4 to check the new assert | Passed | Two stale BST comments fixed (Houndoom 506, Rapidash 480). The `evs` macro now rejects a yield above 3 at build time (it would have spilled into the next stat's bits). ROM byte-identical. |
 | TEST-071 | Blessing effect chance | `test_blessing_chance`: `BattleCommand_EffectChance` on both sides with a Blessing species patched into the list and fixed rolls: 30% doubles to 60%; 60% and 100% saturate at 100%; no change without Blessing; 0% never hits | Interpreter | Passed | 10/14 on the previous build (the two saturation cases fail on both sides); 14/14 after BUG-021. |
 | TEST-072 | Move data | `validate_moves.py`: `Moves` order matches the move constants (253); every effect has a script pointer (161); status moves have no power and no damage commands; damaging moves have power unless their damage is computed; accuracy 1-100; PP 1-40 (also asserted at build time); effect chance non-zero exactly when the effect script rolls one (`effectchance` or `tristatuschance`) | Python validator | Passed | No data bugs. Reviewed and left: Close Combat, Earthquake, Tremor and Sucker Punch roll a 0% chance that nothing reads afterwards (one wasted RNG call; Sheer Force rightly ignores them); Swagger keeps the vanilla unused 100%. Checked that multi-hit loops jump back past `effectchance`, so a chance is never doubled twice. |
+| TEST-073 | Battle Tower pool selection | `test_bt_pool_pick`: `PickRandomBattleTowerCompactMon` with a fake three-pool record (300, 50 and 700 mons in different banks) and fixed indices across every pool boundary: the right bank and base + index x 6 each time | Interpreter (pool record in WRAM; random index, pool lookup and far read hooked) | Passed | 8/9 on the previous build: smaller indices passed only because the sign error cancelled out over two steps; index 1049 went to bank 0. 9/9 after BUG-022. |
+| TEST-074 | Battle Tower data | `validate_bt.py`: every `bt_mon` in the three pools has a real species, a known item and known moves, no repeated move in a set, a first move, and no duplicate records; `BattleTowerRandomLessThanDE` reviewed for uniformity (rejection on the top high byte) | Python validator; code review | Passed with one finding | 133 records. One exact duplicate: Snorlax (Leftovers, Double-Edge, Crunch, Earthquake, Rest) appears twice in a row in the Elite pool, which raises that set's odds. Teams never repeat a species, so nothing breaks. Left for the user to decide (Section 31). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1837,6 +1840,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Git commit message: `fix: cap Blessing's doubled effect chance at 100%`
 - Next task: battle facilities and the save system (Phase 8).
 
+### FAC-001 — Battle Tower pool index past 256 mons; facility data
+
+- Date: 2026-11-25
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 8 (battle facilities)
+- System: Battle Tower and Battle Factory team generation
+- Files modified: `engine/events/battle_tower/load_trainer.asm`
+- Problem identified: BUG-022 (latent); one duplicate pool record (awaiting a decision).
+- Root cause: operands of a 16-bit subtraction swapped in the high byte.
+- Solution implemented: `ld a, d` / `sbc [hl]` instead of `ld a, [hl]` / `sbc d`.
+- Behaviour preserved: identical results for today's pools (all challenges below 256 mons); selection stays uniform.
+- Performance impact: none. Memory impact: none.
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-073, TEST-074, full suite (129 scripts). Scope: pool data, mon selection and the shared generation path the Factory also uses; the facility menus are covered by manual test MT-003.
+- Test results: all pass; the full suite matches the previous run apart from the new test.
+- Remaining risks: none known.
+- Git commit message: `fix: correct the Battle Tower pool index past 256 mons`
+- Next task: save system (Phase 8).
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -1862,6 +1884,8 @@ Do not silently ignore unresolved issues.
 - Work in progress (author's): most species in `data/pokemon/evos_attacks.asm` share a placeholder entry (no evolution, only Splash learned); comments mark planned levels. Left as it is.
 - No emulator or physical hardware is available here: VBlank/HBlank timing, DMA and real-hardware behaviour can only be checked in the interpreter with emulated hooks. Anything timing-sensitive needs manual emulator testing (Section 32).
 - WRAM0 now has 32 bytes free (MEM-005); WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
+
+- Awaiting the user's decision: the Battle Tower Elite pool lists the Snorlax set (Leftovers, Double-Edge, Crunch, Earthquake, Rest) twice in a row (`data/battle_tower/parties.asm`, lines 115-116). It looks like a copy slip, but removing it changes how often that set appears, so it was left as it is (TEST-074).
 
 ## 32. Manual Testing Checklist
 

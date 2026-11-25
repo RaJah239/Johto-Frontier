@@ -286,8 +286,8 @@ PickRandomBattleTowerCompactMon:
 	ld a, e
 	sub b
 	ld e, a
-	ld a, [hl]
-	sbc d
+	ld a, d
+	sbc [hl]
 	ld d, a
 	inc hl ; -> next pool entry
 	dec c
