@@ -987,17 +987,17 @@ Complete the project systematically using the following phases.
 ### Phase 7 — Overworld and Interface
 
 - [ ] Audit movement.
-- [ ] Audit map loading.
-- [ ] Audit map transitions.
+- [x] Audit map loading.
+- [x] Audit map transitions.
 - [x] Audit wild encounters.
-- [ ] Audit NPC behaviour.
+- [x] Audit NPC behaviour.
 - [x] Audit scripts.
 - [ ] Audit menus.
 - [ ] Audit inventory.
 - [x] Audit shops.
 - [ ] Audit Pokédex.
 - [ ] Audit party management.
-- [ ] Audit PC storage.
+- [x] Audit PC storage.
 - [ ] Audit input handling.
 - [x] Audit text rendering.
 
@@ -1295,6 +1295,8 @@ Maintain the following table.
 | TEST-082 | Text rendering (line widths) | `validate_text_width.py`: every `text`/`line`/`cont`/`para`/`next` string in maps, data and engine measured in tiles (`#` = 4, `<PLAYER>`/`<RIVAL>` at their 7-letter maximum, contractions like `'s` as one tile, `{d:...}` as 4 digits); lines with run-time battle names skipped | Python validator | Passed | No line wider than the 18-tile textbox (credits use the 20-tile screen). |
 | TEST-083 | Shops (purchase arithmetic) | Review of `GetDiscountedPrice` and `CalculateMaximumQuantity`: price x quantity (at most 65535 x 100) fits the 3-byte multiplicand that the second `Multiply` reuses; the second product stays under 2^32; the quotient fits the 3-byte price; the binary search relies on the price never falling as quantity rises (stated and tested by `test_mart_discount`); `GiveMoney` caps at 999,999 and the 3-byte sum cannot overflow first | Code review; existing `test_mart_discount`, `test_sell_limit`, `test_item_stack_99` | Passed | No faults. |
 | TEST-084 | Wild encounters | Review of `ChooseWildEncounter` and `CheckRepelEffect`: the 1-100 roll always ends inside the grass and water probability tables (both end at 100); the +0 to +3 level bonus is uncapped, so listed levels were checked across every encounter type: grass and water up to 37, fishing 5-40, headbutt trees 15-25, so no wild Pokémon can pass level 50; Repel compares against the first party Pokémon that has HP | Code review; Python over `data/wild/*.asm` | Passed | Note for future data edits: a listed grass or water level above 47 would let the bonus pass the level cap. |
+| TEST-085 | PC storage (encoding) | `test_pc_encode_roundtrip`: 40 random Pokémon (species, item, moves, ID, experience, EVs, caught ball, Unown form, DVs, PP Up bits, happiness, Pokérus, caught data, level, alt species, nickname and OT with spaces and terminators) through `EncodeBufferMon` and `DecodeBufferMon`: every stored field comes back and the checksum is valid; a flipped bit in the encoded experience is caught (Bad Egg, carry) | Interpreter | Passed | 41/41. Confirms the hack's changed box layout (EVs, caught ball and Unown form instead of stat experience) still lines up with the encoder. |
+| TEST-086 | NPC and scripted movement | `validate_movement.py`: every movement script used by `applymovement`, `applymovementlasttalked` or `applyonemovement` (234) reaches `step_end` or `step_resume` before any other data | Python validator | Passed | No problems. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
