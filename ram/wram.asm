@@ -462,13 +462,13 @@ wWhichMonFaintedFirst:: db
 wLastPlayerCounterMove:: db
 wLastEnemyCounterMove:: db
 
-wEnemyMinimized:: db ; unused - can be removed
+wEnemyMinimized:: db ; nonzero after Minimize: small sprite, and Stomp-style moves deal double damage
 
 wAlreadyFailed:: db
 
 wBattleParticipantsIncludingFainted:: db
 wBattleLowHealthAlarm:: db
-wPlayerMinimized:: db ; unused - can be removed
+wPlayerMinimized:: db ; nonzero after Minimize: small sprite, and Stomp-style moves deal double damage
 wPlayerScreens::
 ; bit
 ; 0 spikes

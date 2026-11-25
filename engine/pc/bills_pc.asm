@@ -262,7 +262,7 @@ SwapPartyMonMail:
 
 SwapPartyMons:
 ; Swap 1-indexed partymon c and e. Preserves bc, de, hl.
-; TODO: this is more efficient than SwitchPartyMons, maybe make it use this.
+; Also used by the party menu's switch (_SwitchPartyMons).
 	push hl
 	push de
 	push bc

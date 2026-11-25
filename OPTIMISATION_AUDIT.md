@@ -1017,12 +1017,12 @@ Complete the project systematically using the following phases.
 
 ### Phase 9 — Code Quality
 
-- [ ] Investigate duplicated logic.
+- [x] Investigate duplicated logic.
 - [ ] Simplify unnecessarily complicated routines.
-- [ ] Improve misleading comments.
+- [x] Improve misleading comments.
 - [ ] Document complex custom routines.
-- [ ] Remove confirmed obsolete code.
-- [ ] Verify all refactoring changes.
+- [x] Remove confirmed obsolete code.
+- [x] Verify all refactoring changes.
 
 ### Phase 10 — Comprehensive Regression Testing
 
@@ -1107,9 +1107,9 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 - Current task: Phase 9 (code quality)
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
-- Last verified build: clone of `395a8e50f` plus HW-001, Linux, RGBDS 0.7.0, 0 assembler warnings, 675,254 bytes free
-- Last completed task: HW-001 (BUG-023; audio and hardware review)
-- Last verified commit: HW-001 (full suite: 131 scripts, no regressions against the previous run)
+- Last verified build: clone of `6c4969bf3` plus QUAL-001, Linux, RGBDS 0.7.0, 0 assembler warnings, 675,452 bytes free
+- Last completed task: QUAL-001 (party switch merge; Phase 7 reviews)
+- Last verified commit: QUAL-001 (full suite: 133 scripts, no regressions against the previous run)
 - Outstanding blockers: none
 - Next task: Phase 9 (code quality), then Phases 10-11. Open earlier items: Phase 4 type-chart index, Phase 5 register usage
 
@@ -1198,6 +1198,7 @@ Maintain the following table.
 | MEM-005 | WRAM0 | Removed `wBoxPartialData` (480 bytes, unreferenced: a leftover from the old box-saving code) from the "Miscellaneous" union; the union now spans the battle data (448 bytes) | WRAM0: 0 bytes free | WRAM0: 32 bytes free ($CFE0-$CFFF) | 32 | Build map, full suite, overworld comparison |
 | MEM-006 | ROMX | Removed two dead routines: `IsUnawareRaw` (battle) and `SetSpecificDecorationFlag` (decorations) | 675,139 bytes free | 675,160 bytes free | 21 | Build, full suite |
 | MEM-007 | ROMX | Duplicate routines merged into one copy each (TEST-062): five copies of `FillBoxWithByte` in other banks now jump to the home-bank one; `TradeAnim_TubeToOT4`/`TubeToPlayer5` jump to `TubeToOT2`, `TradeAnim_WaitAnim2` to `WaitAnim`, `StepFunction_Bump` to `WaitStep_InPlace` | 675,160 bytes free | 675,264 bytes free | 104 | Build, full suite, trade animation checks |
+| MEM-008 | ROMX bank $14 (`engine/pokemon/switchpartymons.asm`) | The party menu's switch had its own 90-line copy of the slot swap (species, struct, OT, nickname, mail); it now calls the PC's `SwapPartyMons` (the upstream TODO there suggested exactly this) | 675,254 bytes free | 675,452 | 198 bytes | `test_party_switch` (12/12 before and after), full suite |
 
 Use unique identifiers such as MEM-001, MEM-002 and MEM-003.
 
@@ -1300,6 +1301,7 @@ Maintain the following table.
 | TEST-087 | Options (menus) | `validate_option_bits.py`: the 42 option bit constants mapped to their byte (`wOptions`, `wTextboxFlags`, `wOptions2`-`wOptions5`); every `bit`/`set`/`res` on an option constant (159 uses) checked against the byte loaded into `a` or `hl` | Python validator | Passed | No option tested on the wrong byte. `wExpShareToggle` reuses the `EXP_SHARE` bit number on purpose, and every reader and writer agrees. |
 | TEST-088 | Inventory and party management | Review of `PutItemInPocket` and `RemoveItemFromPocket` (pocket capacity per pocket, stacks split at 99, the list shifted down when a stack empties, nothing changed when an item does not fit) and of the party/PC paths (`RemoveMonFromParty` mail shift, SRAM pairing from TEST-076, storage encoding from TEST-085) | Code review; existing `test_item_stack_99`, `test_sell_limit`, `test_quantity_text`, `test_start_menu_order`, `test_popup_screen` | Passed | No faults; the item routines are vanilla. Menus are otherwise covered by the existing menu tests and the manual checklist. |
 | TEST-089 | Pokédex, input and movement | Pokédex: both dex orders (new and alphabetical) hold all 252 species exactly once, the alphabetical one sorted by the displayed names (Porygon-Z before Porygon2 follows the game's character order), and the entry table is length-asserted. Input and movement: covered by the existing targeted tests (`test_voltorb_turbo_b`, `test_teleport`, `test_spinner_trainer_run`, `test_suction_cups_fishing`, the dex screen tests) and the movement-script check (TEST-086) | Python over the dex data; existing tests | Passed | Feel and timing (turbo buttons, bike turning, running shoes) can only be judged by playing (Section 32). |
+| TEST-090 | Party switching | `test_party_switch`: `_SwitchPartyMons.SwapMonAndMail` on a random six-mon party for six pairs of slots (both orders, first and last): exactly those two slots swap their species entry, party struct, nickname, OT and mail, all other slots are unchanged, and `bc`/`de`/`hl` are preserved | Interpreter | Passed | 12/12 on the old code and on the merged code (MEM-008). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1913,6 +1915,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: timing-dependent behaviour needs MT-008.
 - Git commit message: `fix: read the player state from the right WRAM bank when a fade ends`
 - Next task: Phase 8 graphics engine (TEST-080: no faults; Phase 8 complete); then Phase 7.
+
+### QUAL-001 — Party switch merged; misleading comments
+
+- Date: 2026-11-25
+- AI agent: Claude (Claude Code)
+- Audit phase: Phases 7 and 9
+- System: Party menu, battle RAM comments, Phases 7 reviews
+- Files modified: `engine/pokemon/switchpartymons.asm`, `engine/pc/bills_pc.asm`, `ram/wram.asm`
+- Problem identified: two copies of the party slot swap; `wPlayerMinimized`/`wEnemyMinimized` marked "unused - can be removed" although Minimize depends on them; Phase 7 reviews (TEST-081 to TEST-089) found no further faults.
+- Root cause: code ported from two sources; stale comments.
+- Solution implemented: the party menu calls `SwapPartyMons`; the RAM comments say what the flags do; the TODO in `SwapPartyMons` replaced by a note on its second caller.
+- Behaviour preserved: identical swap (TEST-090); the comment edits leave the ROM unchanged.
+- Performance impact: none that matters (one far call per switch). Memory impact: 198 bytes (675,452 free).
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-085 to TEST-090, full suite (133 scripts).
+- Test results: all pass; the full suite matches the previous run apart from the two new tests.
+- Remaining risks: none known.
+- Git commit message: `memory: reuse SwapPartyMons for the party menu switch`
+- Next task: rest of Phase 9, then Phases 10-11.
 
 ## 31. Outstanding Issues
 
