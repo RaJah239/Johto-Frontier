@@ -1108,8 +1108,8 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 - Current AI agent: Codex
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: BUG-026, release and debug on Cygwin match the clean Linux ROMs byte for byte. Release has 670,307 bytes free and debug has 668,839.
-- Last completed task: Phase 11 build-report verification (TEST-101).
-- Last verified commit: see the BUG-025 work log and Git history
+- Last completed task: Phase 11 event-command verification and emulator replay of MT-002, MT-004 and MT-005 (TEST-102/103).
+- Last verified build-tool commit: `8c5a9772b` (BUG-026).
 - Outstanding blockers: none
 - Next task: finish Phase 11 and publish the final measurements in this document.
 
@@ -1320,6 +1320,8 @@ Maintain the following table.
 | TEST-099 | Data, overworld, battle and facilities | All 15 available `validate_*.py` scripts, raw metatile and collision comparison, screen comparison, type-chart equivalence, storage encoding and facility generation. | Validators, linked ROM data and interpreter | Passed | 307 maps matched for both rendered screens (1,941,120 cells) and map blocks including collision (6,385,600 cells). 971 compressed assets matched source. Chart 769/769 and rounding order 240/240. Storage 41/41, Tower pool boundaries 9/9 and opponent load 6/6. |
 | TEST-100 | Cross-version battery saves | Boot the baseline to a new game in PyBoy 2.9.0 in CGB mode. Save a known party, inventory and player state. Boot the release through Continue, resave and load in the baseline. Repeat with the primary checksum damaged. | Headless emulator, real save routines, disposable in-memory cartridge RAM | Passed | Both directions reached the overworld and Start menu. Checked trainer ID, name, money, options, items, party, map and event flags. The damaged primary took the backup path and recovered a valid primary checksum. |
 | TEST-101 | Free-space report | Run the tool on the Cygwin CRLF and Linux LF release and debug maps. Check each total against the linker summary. Relink both Cygwin targets and compare their images with clean Linux builds. | Both build hosts and linked ROMs | Passed | Before the fix Cygwin reported 637,539 and 636,071 free. Both formats now report 670,307 and 668,839. Both ROM hashes match across hosts. |
+| TEST-102 | Event script dispatch | Match the ordered command constants to their handler labels and read all 199 little-endian pointers from each linked ROM. Check the two sets of opcode annotations. | Source and both linked ROMs | Passed | All 398 pointers matched. Corrected 131 numeric comments in the macro definitions and 129 in the dispatch table. Release and debug images are byte-identical to their previous builds. |
+| TEST-103 | Stats, gift naming and PC withdrawal | In PyBoy CGB, use joypad input to open the unlocked EV page. Separately queue a gift script with a full party, nickname Cyndaquil and Unown, open Bill's PC and withdraw each gift after making room. | Emulator with disposable party and event fixtures | Passed | The three EV cases displayed the expected numbers or stars in all six fields and closed normally. Both naming screens used the correct species and gender display. Both PC pictures rendered and both withdrawals preserved species, nickname and form. Both runs returned to the overworld and Start menu. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -2020,6 +2022,13 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Allowed trailing whitespace on the empty-bank marker. TEST-101 passed on all four real maps. Relinking both targets via `make -j4 -W layout.link all d` reproduced the clean reference ROMs. Game code, runtime cost and memory usage are identical.
 - The local checkout also had eight ignored Linux build executables alongside their Cygwin equivalents. Moving the Linux copies into the disposable verification directory restored the normal Cygwin build. Use separate build directories when switching hosts.
 - Commit: `fix: count empty ROM banks in Windows linker maps`. Next: reconcile the final report.
+
+### Event-command references and interactive regression checks
+
+- 2026-11-25, Codex, Phase 11. Replaying the boxed gift using the numeric opcode comments led to the wrong script commands. For example, the compiled `givepoke` opcode is $2e and the comment still said $2d. Insertions in the ordered command list had left subsequent comments out of date.
+- Corrected the inaccurate numeric comments in `macros/scripts/events.asm` and `engine/overworld/scripting.asm`. Preserved the command order, script data and emitted instructions. TEST-102 checks the linked targets and rebuild hashes. The change costs zero bytes and zero cycles.
+- TEST-103 used the game's gift event, naming screen and PC menus. The Unown fixture displayed form 18 in the PC and retained it in the party after withdrawal. For the EV page, the emulator checked one mixed spread with maxed Attack, all six values at 252, and all six at zero. See Section 32 for the remaining play-throughs.
+- Commit: `docs: correct event opcode references against the linked handlers`. Next: complete the independent review.
 
 ## 31. Outstanding Issues
 
