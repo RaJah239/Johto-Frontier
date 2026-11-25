@@ -933,7 +933,7 @@ Complete the project systematically using the following phases.
 - [ ] Audit abilities.
 - [ ] Audit dual-ability interactions.
 - [x] Audit held items.
-- [ ] Audit weather.
+- [x] Audit weather.
 - [ ] Audit entry hazards.
 - [ ] Audit switching.
 - [ ] Audit fainting.
@@ -1108,7 +1108,7 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
-- Last completed task: BATTLE-004 (BUG-013)
+- Last completed task: BATTLE-005 (BUG-014)
 - Last verified commit: `d007b16f8` (full suite: 105 scripts, 95 fully passing, the rest profilers/comparisons)
 - Outstanding blockers: none
 - Next task: Phase 3 checklist
@@ -1134,6 +1134,7 @@ Maintain the following table throughout the project.
 | BUG-011 | Turn order (Quick Draw) | Quick Draw had the same link-desync roll (`Random`), and its condition was inverted: `cp 33 percent + 1` / `jr c, .continue` skipped on the low third, so it fired on 171 of 256 rolls (2/3) instead of the 1/3 its data file states (Tenacity's identical idiom uses `ret nc`). Latent today: the Quick Draw list is empty. | Low | Fixed | `test_battle_rng`: 171/256 on the baseline (measured), 85/256 after |
 | BUG-012 | Battle stats (Choice Scarf) | `ApplyChoiceScarfEffectOnSpeed` added Speed/2 to Speed with the bytes in the wrong order: the high byte was added first and its (never-set) carry went into the low byte, so a carry out of the low byte was lost. Whenever the low byte plus half the Speed passed 255, the boosted Speed came out 256 too low: e.g. 200 Speed became 44 instead of 300, so a Scarf holder was often far slower than without the Scarf. Affects every Speed from 171 up where the low byte overflows (about a third of values), for both sides and for the AI's speed checks that use the same stats. | High | Fixed | `test_battle_stats` (Choice Scarf wrong from Speed 171 up on the baseline, both sides; exact x1.5 for Speed 1-399 and 600-999 after) |
 | BUG-013 | Battle weather | Solar Beam was not weakened in hail. The entry `WEATHER_HAIL, EFFECT_SOLARBEAM, NOT_VERY_EFFECTIVE` sat in `WeatherTypeModifiers`, which compares the move's type, so it compared the type against `EFFECT_SOLARBEAM` (115, no type has that ID) and never matched. The rain entry for Solar Beam is correctly in `WeatherMoveModifiers`. | Low | Fixed | `test_weather_modifiers` (Solar Beam in hail 100 -> 100 on the baseline, 100 -> 50 after, both sides) |
+| BUG-014 | Battle weather (Magic Guard) | Magic Guard did not protect from hail. `HandleWeather`'s sandstorm damage skips Magic Guard Pokémon, but its hail damage only checked Overcoat, so a Magic Guard Pokémon lost 1/16 HP a turn in hail. The AI's matchup simulator already treats Magic Guard as blocking both weathers, so the AI's predictions were wrong too. | Medium | Fixed | `test_weather_damage` (Magic Guard took hail damage on the baseline, both sides; immune after) |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1231,6 +1232,7 @@ Maintain the following table.
 | TEST-036 | Abilities (Neutralizing Gas) | Every raw `IsInByteArray` lookup of an ability list in the battle engine, abilities and item effects (AI excluded), checked for Neutralizing Gas handling: `IsInAbilityList`, `IsSideSuppressed`/`IsSpeciesSuppressed`, or a popup that reports suppression | Python scan, each hit read | Partially verified | 15 hits. Handled: Moxie/Ignis/Flash Step/Blood Lust/Renewal/Life Drain (their popups), Pressure (`IsSideSuppressed` before taking PP), Sturdy (`NGIgnoresSturdy`), Quick Draw (popup), the `*Raw` helpers and Neutralizing Gas itself (callers check). Not handled: Guts and Resilience (`DoesMonHaveGuts`/`DoesMonHaveResilience`, used when battle stats are recalculated) and the Spikes immunity list (`SpikesDamage`) keep working under Neutralizing Gas. Left unchanged pending a design decision (Section 31). |
 | TEST-037 | Held items (data) | All 61 `HELD_*` effects: each given to an item in `data/items/attributes.asm` is handled somewhere, and none is handled without an item | Python over constants, item data and code | Passed | Only `HELD_NONE` (no effect) and `HELD_CLEANSE_TAG` have no handler by effect; the Cleanse Tag is checked by item ID in the wild-encounter code, as in pokecrystal. Held-item damage boosts are covered by TEST-024, stat items by TEST-031. |
 | TEST-038 | Battle weather | `test_weather_modifiers`: `DoWeatherModifiers` for rain and sun type boosts and penalties, Solar Beam in rain, hail and sun, other moves in hail, no weather | Interpreter, both sides | Passed | 16/18 on the baseline (BUG-013), 18/18 after. Full suite unchanged otherwise (118 scripts). |
+| TEST-039 | Battle weather (end of turn) | `test_weather_damage`: `HandleWeather` sandstorm and hail damage (1/16), immunity of Rock/Ground/Steel to sand (either type slot), Ice to hail, Magic Guard and Overcoat to both | Interpreter, both sides | Passed | 16/18 on the baseline (BUG-014), 18/18 after. Full suite unchanged otherwise (119 scripts). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1559,6 +1561,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: none known.
 - Git commit message: `fix: weaken Solar Beam in hail as the weather table intends`
 - Next task: Phase 3, rest of weather (end-of-turn damage, duration), then entry hazards.
+
+### BATTLE-005 — Magic Guard took hail damage
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 3 (weather, abilities)
+- System: Battle weather
+- Files modified: `engine/battle/core3.asm`
+- Problem identified: BUG-014, found comparing the sandstorm and hail paths of `HandleWeather`.
+- Root cause: the Magic Guard check was only written for sandstorm.
+- Solution implemented: the same `IsInAbilityList` Magic Guard check (which respects Neutralizing Gas) before hail damage.
+- Behaviour preserved: hail and sandstorm otherwise unchanged (tested); the battle now matches what the AI already assumed.
+- Performance impact: negligible. Memory impact: 10 bytes more (675,202 free).
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-039, full suite.
+- Test results: all pass.
+- Remaining risks: none known.
+- Git commit message: `fix: let Magic Guard block hail damage as it does sandstorm`
+- Next task: Phase 3, entry hazards.
 
 ## 31. Outstanding Issues
 

@@ -512,7 +512,11 @@ HandleWeather:
 	call SetPlayerTurn
 	
 .HailDamage:
-	; Overcoat pokemon take no hail damage
+	; Magic Guard and Overcoat pokemon take no hail damage
+	call GetCurrentMon
+	ld hl, MagicGuardPokemon
+	call IsInAbilityList
+	ret c
 	newfarcall UserHasOvercoat
 	ret c
 
