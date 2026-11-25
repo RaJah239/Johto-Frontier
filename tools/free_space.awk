@@ -31,7 +31,7 @@ function register_bank_str(str) {
     }
 }
 
-rom_bank && toupper($0) ~ /^[ \t]*EMPTY$/ {
+rom_bank && toupper($0) ~ /^[ \t]*EMPTY[[:space:]]*$/ {
 	register_bank(16384)
 }
 rom_bank && toupper($0) ~ /^[ \t]*SLACK:[ \t]/ {

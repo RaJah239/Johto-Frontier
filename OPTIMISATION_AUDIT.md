@@ -1107,11 +1107,11 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 - Current task: verify linked call targets, saved layouts, table contents and end-to-end performance against the baseline, then reconcile the final report.
 - Current AI agent: Codex
 - Current Git branch: `000-Johto-Frontier`
-- Last verified build: BUG-025, Linux, RGBDS 0.7.0, 670,307 bytes free, 0 incremental build warnings
-- Last completed task: Phase 10 (TEST-098–100). Real CGB emulator coverage now includes save recovery.
+- Last verified build: BUG-026, release and debug on Cygwin match the clean Linux ROMs byte for byte. Release has 670,307 bytes free and debug has 668,839.
+- Last completed task: Phase 11 build-report verification (TEST-101).
 - Last verified commit: see the BUG-025 work log and Git history
 - Outstanding blockers: none
-- Next task: Phases 10–11, including a fresh comparison against the buildable baseline.
+- Next task: finish Phase 11 and publish the final measurements in this document.
 
 Update this section continuously.
 
@@ -1146,6 +1146,7 @@ Maintain the following table throughout the project.
 | BUG-023 | Audio engine (music fade) | When a fade-out ends, `FadeMusic` reads `wPlayerState` (WRAMX bank 1) to choose between bike and map music. It runs in VBlank, which does not set the WRAM bank, so if the interrupted code had another bank selected the engine read an unrelated byte and could start the wrong song. Also in vanilla pokecrystal | Low | Fixed | TEST-079 |
 | BUG-024 | Basic trainer AI | At low HP a healing-move search replaced the outer move count with an effect ID and overwrote the candidate move. A full set was read past slot four and the AI could give Hydro Pump the accuracy bonus for Tackle. | Medium | Fixed | TEST-096 |
 | BUG-025 | Smart trainer AI | The recoil handler used a dispatch address byte as the species and lost the score pointer during the Rock Head lookup. Its low-HP penalty wrote to the cartridge instead of the selected move's score. | Medium | Fixed | TEST-097 |
+| BUG-026 | Build report | CRLF linker maps hid completely empty ROM banks from the free-space report. Both Cygwin builds underreported free space by 32,768 bytes. | Low | Fixed | TEST-101 |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1318,6 +1319,7 @@ Maintain the following table.
 | TEST-098 | Release and debug regression | Clean Linux build of archived `184ec0a2d` with RGBDS 0.7.0, then all 136 local test scripts with their required inputs. | Build, interpreter, ROM and file comparisons | Passed | The incremental and clean release images are identical. Both configurations linked. Eleven graphics warnings match the reconstructed baseline exactly. Zero assembler warnings. The debug-only animation test covered 252 moves on both sides (10/10). |
 | TEST-099 | Data, overworld, battle and facilities | All 15 available `validate_*.py` scripts, raw metatile and collision comparison, screen comparison, type-chart equivalence, storage encoding and facility generation. | Validators, linked ROM data and interpreter | Passed | 307 maps matched for both rendered screens (1,941,120 cells) and map blocks including collision (6,385,600 cells). 971 compressed assets matched source. Chart 769/769 and rounding order 240/240. Storage 41/41, Tower pool boundaries 9/9 and opponent load 6/6. |
 | TEST-100 | Cross-version battery saves | Boot the baseline to a new game in PyBoy 2.9.0 in CGB mode. Save a known party, inventory and player state. Boot the release through Continue, resave and load in the baseline. Repeat with the primary checksum damaged. | Headless emulator, real save routines, disposable in-memory cartridge RAM | Passed | Both directions reached the overworld and Start menu. Checked trainer ID, name, money, options, items, party, map and event flags. The damaged primary took the backup path and recovered a valid primary checksum. |
+| TEST-101 | Free-space report | Run the tool on the Cygwin CRLF and Linux LF release and debug maps. Check each total against the linker summary. Relink both Cygwin targets and compare their images with clean Linux builds. | Both build hosts and linked ROMs | Passed | Before the fix Cygwin reported 637,539 and 636,071 free. Both formats now report 670,307 and 668,839. Both ROM hashes match across hosts. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -2011,6 +2013,13 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Updated two local harness checks. The map comparison now reads the linked little-endian length and raw metatile/attribute bytes instead of decompressing them. The base-stat validator obtains item IDs from the repository constants instead of a previous session's temporary JSON file. The existing reviewed content exceptions remain in the validators.
 - Added `tools/test_save_compat.py` so the emulator test can run in a fresh checkout with PyBoy and matching symbol files. Run `python tools/test_save_compat.py OLD/johtofrontier.gbc NEW/johtofrontier.gbc`. It boots through the normal menus and calls the save routine on the emulated CPU. ROM, SRAM and RTC writes are private to the test.
 - Section 32 remains the play-test list. The emulator results cover boot, the overworld, menus and saving. Link play, the visual cases and physical timing are still open. Commit: `test: verify cross-version saves and close the regression phase`. Next: the final independent review.
+
+### BUG-026 — Count empty banks in CRLF linker maps
+
+- 2026-11-25, Codex, Phase 11. The Cygwin and Linux release images matched byte for byte, but the Cygwin build reported 32,768 fewer free bytes. Both maps marked two banks empty. The Cygwin map ended those lines with CRLF, and the `EMPTY` pattern in `tools/free_space.awk` required the word to end the record immediately.
+- Allowed trailing whitespace on the empty-bank marker. TEST-101 passed on all four real maps. Relinking both targets via `make -j4 -W layout.link all d` reproduced the clean reference ROMs. Game code, runtime cost and memory usage are identical.
+- The local checkout also had eight ignored Linux build executables alongside their Cygwin equivalents. Moving the Linux copies into the disposable verification directory restored the normal Cygwin build. Use separate build directories when switching hosts.
+- Commit: `fix: count empty ROM banks in Windows linker maps`. Next: reconcile the final report.
 
 ## 31. Outstanding Issues
 
