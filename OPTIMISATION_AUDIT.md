@@ -1010,7 +1010,7 @@ Complete the project systematically using the following phases.
 - [x] Audit encounter data.
 - [x] Audit battle facilities.
 - [x] Audit save system.
-- [ ] Audit graphics engine.
+- [x] Audit graphics engine.
 - [x] Audit audio engine.
 - [x] Audit hardware compatibility.
 - [x] Create data-validation tools where practical.
@@ -1104,14 +1104,14 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - Overall status: In progress
 - Current phase: Phase 7/8 (overworld, interface and data)
-- Current task: Phase 8 graphics engine
+- Current task: Phase 7 (overworld and interface)
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `395a8e50f` plus HW-001, Linux, RGBDS 0.7.0, 0 assembler warnings, 675,254 bytes free
 - Last completed task: HW-001 (BUG-023; audio and hardware review)
 - Last verified commit: HW-001 (full suite: 131 scripts, no regressions against the previous run)
 - Outstanding blockers: none
-- Next task: Phase 8 move data, battle facilities, save system; then Phase 7. Open earlier items: Phase 4 type-chart index, Phase 5 register usage
+- Next task: Phase 7 (overworld and interface). Open earlier items: Phase 4 type-chart index, Phase 5 register usage
 
 Update this section continuously.
 
@@ -1290,6 +1290,7 @@ Maintain the following table.
 | TEST-077 | Hardware compatibility | Static review: the one `halt` is followed by `nop`; `stop` assembles as `10 00` with `rIF`/`rIE` cleared and `rJOYP` = $30, and every caller of `DoubleSpeed` puts `rIE` back; OAM DMA runs from HRAM, waits 40 x 4 = 160 M-cycles, and `wShadowOAM` is page-aligned by `layout.link`; no hard-coded access to echo RAM or $FEA0-$FEFF; the ROM is CGB-only (`rgbfix -C`), so DMG-only hazards do not apply. Voltorb Flip's use of `$C400-$C4xx` (inside `wShadowOAM`) as scratch RAM was checked: it turns sprite DMA off (`hOAMUpdate`), runs in VBlank mode 0 (which honours it), and `ExitAllMenus` clears palettes and rebuilds OAM after it returns | Source and ROM-byte review | Passed | No faults. Voltorb Flip's interrupt masks now use `IE_DEFAULT` (same bytes). Whether a stray sprite can flash on its exit is a timing question for MT-008. |
 | TEST-078 | Audio data | `validate_audio.py`: from every channel entry (867) the data is walked to a terminator (`sound_ret`/`endchannel`, `sound_jump`/`jumpchannel`, or an infinite loop) without running into a header, table or the end of the file; every `sound_call` target (181) returns; `channel_count` matches the channel lines; the music, SFX and cry tables are length-asserted at build time | Python validator | Passed | 15 channels finish through the next channel's data (an empty channel's `sound_ret` used as a shared ending, or Thunderbolt running into Thundershock), as in vanilla. |
 | TEST-079 | Music fade and WRAM bank | `test_fade_bike_bank`: `FadeMusic` with the fade ending, `wPlayerState` set differently in bank 1 and in the selected bank (1, 3, 7): bike music only if bank 1 says Bicycle, and the selected bank is the same afterwards. Also: every WRAM variable the audio engine uses is in WRAM0 apart from this one | Interpreter | Passed | 2/6 on the previous build (it followed whichever bank was selected); 6/6 after BUG-023. |
+| TEST-080 | Graphics engine (VRAM banks) | `validate_vbk.py`: all 188 `rVBK` writes scanned per routine for a return or tail jump while VRAM bank 1 may still be selected; the hits read by hand. Together with TEST-077 (OAM DMA) and the Phase 2 VBlank/STAT checks | Python scan; code review | Passed | No leak: the remaining hits write bank 0 (`BANK(vBGMap0)`), restore a saved value, or run inside `CallInSafeGFXMode`, which saves and restores `rVBK` and `rSVBK`. Palette and VRAM write timing during active display can only be judged on hardware or an emulator (Section 32). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1902,7 +1903,7 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Test results: all pass; the full suite matches the previous run apart from the new test.
 - Remaining risks: timing-dependent behaviour needs MT-008.
 - Git commit message: `fix: read the player state from the right WRAM bank when a fade ends`
-- Next task: Phase 8 graphics engine; then Phase 7.
+- Next task: Phase 8 graphics engine (TEST-080: no faults; Phase 8 complete); then Phase 7.
 
 ## 31. Outstanding Issues
 
