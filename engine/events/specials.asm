@@ -298,8 +298,7 @@ PlayerGivesAwayAnEggForAdoption:
 
 	ld [wMonType], a ; PARTYMON
 	ld [wPokemonWithdrawDepositParameter], a ; REMOVE_PARTY
-	call AdoptMonFromParty
-	ret
+	jmp AdoptMonFromParty
 
 .not_an_egg:
 	; here we set an event to tell the Day Care Granddaughter that this is not an Egg

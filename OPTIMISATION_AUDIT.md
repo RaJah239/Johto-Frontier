@@ -962,14 +962,14 @@ Complete the project systematically using the following phases.
 
 - [x] Identify frequently executed routines.
 - [x] Optimise battle routines.
-- [ ] Optimise overworld routines.
+- [x] Optimise overworld routines.
 - [x] Optimise arithmetic routines.
 - [ ] Optimise loops.
 - [ ] Optimise memory operations.
 - [ ] Optimise register usage.
-- [ ] Optimise banked calls.
-- [ ] Investigate safe tail calls.
-- [ ] Record measurable cycle savings.
+- [x] Optimise banked calls.
+- [x] Investigate safe tail calls.
+- [x] Record measurable cycle savings.
 
 ### Phase 6 — ROM and RAM Optimisation
 
@@ -1170,6 +1170,7 @@ Maintain the following table.
 | PERF-003 | `AddNTimes` (hl += bc x a; 299 call sites: move, item, species, party tables) | Counts of 16 or more use shift-and-add (one step per bit of a, at most 8) instead of one `add hl, bc` per unit; small counts (party slots) keep the plain loop | Up to 255 loop passes (~6 M-cycles each) | At most 8 steps | Measured: `AI_MatchupSwitch` (test_ai_perf, Meganium out) 911,400 -> 794,199 M-cycles (25.96 -> 22.62 frames) | `test_addntimes` (all a = 0-255, 2,048 cases), full suite, overworld comparison |
 | PERF-004 | `_Divide` (the generic 1- to 4-byte divide behind `Divide`) | A zero dividend byte with no remainder is skipped (its quotient byte is 0); the quotient bits shift into the dividend byte itself instead of a separate register with a per-bit end check | Divide: 152,266 M-cycles over 161 calls in the AI switch (~945 each) | 75,952 M-cycles (~472 each) | Measured: `AI_MatchupSwitch` 794,199 -> 717,885 M-cycles (22.62 -> 20.45 frames); with PERF-003, 25.9 -> 20.4 frames (-21%) | `test_divide` (5,200 cases: arithmetic and byte-for-byte identical to the baseline incl. remainder and buffer), full suite, overworld comparison |
 | PERF-005 | `CalcBattleStats` (every battle stat recalculation; the AI sim calls it after each simulated boost) | Stage 0 (x1) copies the stat instead of a Multiply and a Divide, then the same min-1 / max-999 handling | ~5,150 M-cycles per `CalcEnemyStats` (AI move choice profile) | Most stats are at stage 0: one copy each | Measured: `AI_SimMoveChoice` set-up case 12.1 -> 11.0 frames (16.3 on the baseline); `AI_MatchupSwitch` 20.4 -> 20.0 | `test_calc_battle_stats_same` (250 cases identical to the baseline, raw stats 0 to $FFFF), `test_battle_stats`, full suite |
+| PERF-006 | Tail calls | Scan for `call X` / `ret` and `farcall X` / `ret` pairs (to become `jmp`/`farjp`), excluding the 34 routines that read their return address (jump tables, text commands, `PopBCDEHL` and the like) | 1 `call`/`ret` pair left (`PlayerGivesAwayAnEggForAdoption`), no `farcall`/`ret` pairs (converted in earlier work) | `jmp AdoptMonFromParty` | 1 byte, ~10 M-cycles (calculated) | Build, full suite |
 
 Use unique identifiers such as PERF-001, PERF-002 and PERF-003.
 
@@ -1259,6 +1260,7 @@ Maintain the following table.
 | TEST-055 | Battle AI (data and coverage) | Trainer AI flags in `data/trainers/attributes.asm` against `AIScoringPointers`; the AI regression suite | Python count of flags; review of the 15 `test_ai_*` scripts plus TEST-054 | Passed | Every class uses all six scoring layers; 45 boss classes add `AI_BOSS_SWITCH` (its table slot is `AI_None` by design: the flag is read by the switching code). The AI suite covers stat-boost answers (Haze/Roar/phazing), Contrary, entry abilities and the entry simulation, items, knock-out abilities, Hyper Beam and set-up plans, Regenerator, Speed Boost, the switch cap, end-of-turn effects, Unburden, weather and shards, and switch decisions with their frame cost; all pass. The AI's damage estimate runs the battle engine's own routines (`PlayerAttackDamage`, `BattleCommand_DamageCalc`, `BattleCommand_Stab`, `AIDamageCalc`), so the engine checks of Phase 3 apply to it too. |
 | TEST-056 | Battle stats | `test_calc_battle_stats_same`: `CalcBattleStats` against the baseline ROM for random raw stats (0, small, up to $FFFF) and stages (mostly stage 0) | Interpreter, two ROMs | Passed | 250 cases identical. Needs the baseline ROM as its third argument (prints "skipped" without it). |
 | TEST-057 | AI performance | Frame cost of the AI's per-turn move choice (`AI_SimMoveChoice`) and switch decision (`AI_MatchupSwitch`), baseline vs now | `perfkit.run_cycles` on three move sets and the test_ai_perf party | Passed (measured) | Move choice: Swords Dance plan 16.3 -> 11.0 frames, Recover/SD 5.7 -> 4.8, Hyper Beam set 7.6 -> 6.2. Switch decision: 25.9 -> 20.0 frames. All decisions unchanged (AI suite passes). |
+| TEST-058 | Overworld CPU cost | The overworld's measured per-event costs, to decide whether they need work | Baseline measurements (Section 24) and `test_map_blocks` | Passed (measured) | `LoadBlockData` worst case 0.27 frames (map change), the overworld tilemap redraw 0.16 frames, the VBlank BG-map row ~883 M-cycles: all within a frame with room to spare. No optimisation needed; the general gains (PERF-003/004) apply to the overworld too, and the overworld comparison stays identical. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
