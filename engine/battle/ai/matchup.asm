@@ -916,22 +916,7 @@ MSim_IsInFarAbilityList:
 
 MSim_IsInFarList:
 ; Carry if a is in the $ff-terminated list at d:hl. Preserves d.
-	ld e, a
-.loop
-	ld a, d
-	push de
-	call GetFarByte
-	pop de
-	inc hl
-	cp $ff
-	jr z, .no
-	cp e
-	jr nz, .loop
-	scf
-	ret
-.no
-	and a
-	ret
+	jmp IsInFarByteList
 
 MSim_ComputeDamages:
 ; MSim_ComputeHits, then the per-side state for a new run (MSim_SetupSides).

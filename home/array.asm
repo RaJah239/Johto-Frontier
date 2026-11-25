@@ -120,3 +120,33 @@ FarSumCurSpeciesChances::
 	rst Bankswitch
 	pop de
 	ret
+
+IsInFarByteList::
+; Carry if a is in the $ff-terminated byte list at d:hl. Switches banks once
+; instead of once per byte. Returns e = a = the value (z, carry) on a match,
+; a = $ff (nz, no carry) otherwise; hl is past the byte that ended the
+; search. Preserves bc and d.
+	ld e, a
+	ldh a, [hROMBank]
+	push af
+	ld a, d
+	rst Bankswitch
+.loop
+	ld a, [hli]
+	cp $ff
+	jr z, .no
+	cp e
+	jr nz, .loop
+	pop af
+	rst Bankswitch
+	ld a, e
+	cp e ; z
+	scf
+	ret
+
+.no
+	pop af
+	rst Bankswitch
+	ld a, $ff
+	and a ; nz, no carry
+	ret

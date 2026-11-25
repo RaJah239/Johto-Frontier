@@ -126,46 +126,54 @@ ShowDefensiveAbilityBanner::
 IsSideSuppressed::
 ; Carry if side a's (0: player, 1: enemy) mon has its ability suppressed by
 ; the other mon's Neutralizing Gas (while that mon is still standing).
-; Preserves a, bc, de, hl.
-	push hl
+; Preserves a, bc, de, hl. Only the carry flag is meaningful.
 	push bc
 	ld c, a
+	ld a, [wNeutralizingGas]
+	and a
+	jr z, .no ; no Neutralizing Gas out (the usual case)
+	ld b, a
 	ld a, [wBattleMode]
 	and a
 	jr z, .no
-	ld a, [wNeutralizingGas]
-	ld b, a
+	push hl
 	ld a, c
 	and a
 	jr nz, .enemy
 	bit 0, b
-	jr z, .no
+	jr z, .no_hl
 	ld hl, wEnemyMonHP
 	jr .check_hp
 .enemy
 	bit 1, b
-	jr z, .no
+	jr z, .no_hl
 	ld hl, wBattleMonHP
 .check_hp
 	ld a, [hli]
 	or [hl]
+	pop hl
 	jr z, .no
 	ld a, c
 	scf
-	jr .done
+	pop bc
+	ret
+
+.no_hl
+	pop hl
 .no
 	ld a, c
 	and a
-.done
 	pop bc
-	pop hl
 	ret
 
 IsSpeciesSuppressed::
 ; Carry if species a is the mon out on a side whose ability is suppressed by
-; Neutralizing Gas. Preserves a, bc, de, hl.
+; Neutralizing Gas. Preserves a, bc, de, hl. Only the carry flag is meaningful.
 	push bc
 	ld c, a
+	ld a, [wNeutralizingGas]
+	and a
+	jr z, .no ; no Neutralizing Gas out (the usual case)
 	ld a, [wBattleMonSpecies]
 	cp c
 	ld a, 0

@@ -200,37 +200,6 @@ DEF ABILITY_POPUP_HOLD_FRAMES EQU 60 ; how many frames the popup stays up
 	const BATTLE_VARS_LAST_MOVE_OPP
 DEF NUM_BATTLE_VARS EQU const_value
 
-; BattleVarLocations indexes (see home/battle_vars.asm)
-	const_def
-	const PLAYER_SUBSTATUS_1
-	const ENEMY_SUBSTATUS_1
-	const PLAYER_SUBSTATUS_2
-	const ENEMY_SUBSTATUS_2
-	const PLAYER_SUBSTATUS_3
-	const ENEMY_SUBSTATUS_3
-	const PLAYER_SUBSTATUS_4
-	const ENEMY_SUBSTATUS_4
-	const PLAYER_SUBSTATUS_5
-	const ENEMY_SUBSTATUS_5
-	const PLAYER_STATUS
-	const ENEMY_STATUS
-	const PLAYER_MOVE_ANIMATION
-	const ENEMY_MOVE_ANIMATION
-	const PLAYER_MOVE_EFFECT
-	const ENEMY_MOVE_EFFECT
-	const PLAYER_MOVE_POWER
-	const ENEMY_MOVE_POWER
-	const PLAYER_MOVE_TYPE
-	const ENEMY_MOVE_TYPE
-	const PLAYER_CUR_MOVE
-	const ENEMY_CUR_MOVE
-	const PLAYER_COUNTER_MOVE
-	const ENEMY_COUNTER_MOVE
-	const PLAYER_LAST_MOVE
-	const ENEMY_LAST_MOVE
-assert const_value % 2 == 0
-DEF NUM_BATTLE_VAR_LOCATION_PAIRS EQU const_value / 2
-
 ; status condition bit flags
 DEF SLP_MASK EQU %111 ; 0-7 turns
 	const_def 3

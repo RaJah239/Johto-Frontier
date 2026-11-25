@@ -966,7 +966,7 @@ Complete the project systematically using the following phases.
 - [x] Optimise arithmetic routines.
 - [x] Optimise loops.
 - [x] Optimise memory operations.
-- [ ] Optimise register usage.
+- [x] Optimise register usage.
 - [x] Optimise banked calls.
 - [x] Investigate safe tail calls.
 - [x] Record measurable cycle savings.
@@ -1107,11 +1107,11 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 - Current task: Phase 9 (code quality)
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
-- Last verified build: clone of `fd0ae39c9` plus PERF-008, Linux, RGBDS 0.7.0, 0 assembler warnings, 671,150 bytes free
-- Last completed task: PERF-008 (type chart matrices)
-- Last verified commit: PERF-008 (full suite: 135 scripts, no regressions against the previous run)
+- Last verified build: clone of `d84d81c97` plus PERF-009 to PERF-011, Linux, RGBDS 0.7.0, 0 assembler warnings, 671,190 bytes free
+- Last completed task: PERF-009 to PERF-011 (hot AI helpers); Phase 5 complete
+- Last verified commit: PERF-011 (full suite: 137 scripts, no regressions against the previous run)
 - Outstanding blockers: none
-- Next task: Phase 9 (code quality), then Phases 10-11. Open earlier item: Phase 5 register usage
+- Next task: Phase 9 (code quality), then Phases 10-11
 
 Update this section continuously.
 
@@ -1177,6 +1177,9 @@ Maintain the following table.
 | PERF-006 | Tail calls | Scan for `call X` / `ret` and `farcall X` / `ret` pairs (to become `jmp`/`farjp`), excluding the 34 routines that read their return address (jump tables, text commands, `PopBCDEHL` and the like) | 1 `call`/`ret` pair left (`PlayerGivesAwayAnEggForAdoption`), no `farcall`/`ret` pairs (converted in earlier work) | `jmp AdoptMonFromParty` | 1 byte, ~10 M-cycles (calculated) | Build, full suite |
 | PERF-007 | `Random`, LCD interrupt helpers (`home/random.asm`, `home/lcd.asm`) | The 17 remaining HRAM accesses written as `ld a, [hX]` / `ld [hX], a` (3 bytes, 4 M-cycles: RGBDS 0.7 does not shorten them on its own) changed to `ldh` (2 bytes, 3 M-cycles) | 271.0 M-cycles per `Random` call | 260.0 | -4%; 17 bytes of home bank | `prof_random` (same output sequence), full suite |
 | PERF-008 | Type chart lookups (`TypeMatchupScan`, `StabTypeScan`; every damage calculation and AI damage estimate) | Instead of walking the ~130-entry list, each chart now also has two page-aligned 32x32 matrices built at assembly time from the same entries (`type_matchup` macro): the multiplier, and the entry's position in the list. A lookup reads one cell per defending type; Stab applies the two matchups in list order (the order changes how damage rounds), then the Foresight list is scanned as before. Types of 32 or more fall back to the old scan | AI switch decision 20.0 frames; move choice 6.1 / 5.2 / 7.9 frames | 17.6; 5.5 / 4.7 / 7.1 | -12% switch, -10% move choice; 4,104 bytes of ROM | `test_type_chart_scan` (769/769 vs the previous build), `test_type_chart_stab_order` (240/240), `prof_ai_movechoice`, `test_ai_perf`, full suite |
+| PERF-009 | `IsSideSuppressed`, `IsSpeciesSuppressed` (behind every `IsInAbilityList` ability check) | Test `wNeutralizingGas` first: with no Neutralizing Gas out (nearly always) they return after one load, with one register saved instead of two and no call from one to the other | ~42 and ~70 M-cycles per call | ~22 | 15,003 -> 4,356 M-cycles in the move-choice profile | `prof_flat`, AI suite, `test_ng_passives`, full suite |
+| PERF-010 | `GetBattleVarAddr` (every `GetBattleVar`) | One table of both sides' addresses per variable instead of a pair table pointing into a location table; the lookup no longer touches the stack | ~52 M-cycles | ~35 | 6,734 -> 4,458 M-cycles in the profile; tables 136 -> 84 bytes (the old location constants removed) | full suite |
+| PERF-011 | `MSim_IsInFarList` (the AI sim's species and effect lists in other banks) | New home routine `IsInFarByteList`: switch bank once and scan, instead of `GetFarByte` (two bank switches) per byte | ~90 M-cycles per list byte | ~10 | see below | `test_far_byte_list`, AI suite, full suite |
 
 Use unique identifiers such as PERF-001, PERF-002 and PERF-003.
 
@@ -1306,6 +1309,8 @@ Maintain the following table.
 | TEST-091 | Type chart matrices (equivalence) | `test_type_chart_scan` against a snapshot of the previous build: all 19 x 19 single-type matchups, 250 random dual-type, inverse and typeless cases with and without Foresight, the Ghost cases, and 150 random `BattleCommand_Stab` runs (damage, `wTypeModifier`, `wAttackMissed`, `wTypeMatchup`) | Interpreter, old vs new | Passed | 769/769 identical. |
 | TEST-092 | Type chart order (Stab rounding) | `test_type_chart_stab_order`: every attacking type against pairs of defending types that both have an entry (120 pairs from the normal and inverse charts, both type orders, odd damage values), compared with the previous build. 59 of the 120 pairs have a damage value whose result depends on the order | Interpreter, old vs new | Passed | 240/240 identical. Needs the old build as a third argument, like the other comparison tests. |
 | TEST-093 | AI move choice speed | `prof_ai_movechoice`: frames for `AI_SimMoveChoice` with three move sets | Interpreter (perfkit) | Measured | 6.1 -> 5.5, 5.2 -> 4.7, 7.9 -> 7.1 frames with PERF-008. |
+| TEST-094 | AI hot spots | `prof_flat`: exclusive M-cycles per routine for `AI_SimMoveChoice`, used to pick PERF-009 to PERF-011 | Interpreter (flat profile) | Measured | Before: `_Divide` 8.5%, `Bankswitch` 6.3%, `_Multiply` 5.7%, `GetFarByte` 4.8%, `IsSideSuppressed` 4.4%, far-call stubs ~8%, `GetBattleVarAddr` 3.5%, `IsSpeciesSuppressed` 3.4%. With PERF-008 to PERF-011: move choice 6.1 / 5.2 / 7.9 -> 4.9 / 4.2 / 6.3 frames; worst-case switch decision 20.0 -> 15.4 frames. |
+| TEST-095 | Far list lookup | `test_far_byte_list`: `IsInFarByteList` on the longest ability list in a ROMX bank: every listed value matches (carry, z, a = e = value, hl just past it) and unlisted ones do not (no carry, nz, a = $ff, hl past the terminator); bc and d preserved; the ROM bank restored | Interpreter | Passed | 10/10. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1958,6 +1963,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Git commit message: `perf: look up type matchups in matrices built from the charts`
 - Next task: Phase 5 register usage; rest of Phase 9; Phases 10-11.
 
+### PERF-009-011 — Hot AI helpers
+
+- Date: 2026-11-25
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 5 (register usage)
+- System: Ability suppression checks, battle variables, far list lookups
+- Files modified: `home/extra_functions.asm`, `home/battle_vars.asm`, `constants/battle_constants.asm`, `home/array.asm`, `engine/battle/ai/matchup.asm`
+- Problem identified: the flat profile (TEST-094) showed small helpers called thousands of times per AI decision spending most of their time saving registers, double lookups and bank switches.
+- Root cause: general-purpose code paths for the common case.
+- Solution implemented: PERF-009, PERF-010, PERF-011.
+- Behaviour preserved: same results and carry outputs (every caller of the suppression checks reads only carry; checked); the far list routine returns the same registers and flags as before.
+- Performance impact: AI move choice -11% to -12% beyond PERF-008; worst-case switch decision 17.6 -> 15.4 frames. Memory impact: 40 bytes saved (671,190 free).
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-094, TEST-095, full suite (137 scripts).
+- Test results: all pass; only profiler figures changed.
+- Remaining risks: none known.
+- Git commit message: `perf: speed up the hottest AI helpers`
+- Next task: rest of Phase 9; Phases 10-11.
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -1978,7 +2002,7 @@ Do not silently ignore unresolved issues.
 - The interpreter tests live in the git-excluded `.claude-tools/romtest` folder, so fixes to them are recorded here but are not part of the repository history.
 - The suite is a usable regression gate again (TEST-004). The four comparison tests (`test_bug_contest_judging`, `test_map_render_same`, `test_overworld_screen_same`, `test_type_chart_scan`) should be run with the baseline ROM as the older build after any change to those systems. `test_view_animations` needs a debug build. `test_map_render_same` is stale (written for the removed LZP format) and should be rewritten or retired; `test_overworld_screen_same` covers the same ground (TEST-010).
 - Phase 2 is complete as far as static checks and the interpreter can take it (TEST-005, 009, 011-020; BUG-003 to BUG-008). Crashes or freezes that depend on real-hardware timing can only be found with the manual checklist (Section 32).
-- Phase 4: the type-chart index is done (PERF-008: matrices built from the unchanged lists). The worst-case AI switch decision is now 17.6 frames. Comparison tests (`test_type_chart_scan`, `test_type_chart_stab_order`) need the previous build as a third argument.
+- Phase 4: the type-chart index is done (PERF-008: matrices built from the unchanged lists). The worst-case AI switch decision is now 15.4 frames (after PERF-009 to PERF-011). Comparison tests (`test_type_chart_scan`, `test_type_chart_stab_order`) need the previous build as a third argument.
 - Tooling note: on the mounted Windows working copy, `core.checkStat=minimal` lets `git status`/`git diff` miss edits made from Linux. Stage edited files explicitly (`git add <file>`) and take diffs with `git diff --cached`; a byte comparison of the tree against a fresh clone of HEAD (2026-11-25) found nothing uncommitted.
 - Work in progress (author's): most species in `data/pokemon/evos_attacks.asm` share a placeholder entry (no evolution, only Splash learned); comments mark planned levels. Left as it is.
 - No emulator or physical hardware is available here: VBlank/HBlank timing, DMA and real-hardware behaviour can only be checked in the interpreter with emulated hooks. Anything timing-sensitive needs manual emulator testing (Section 32).
