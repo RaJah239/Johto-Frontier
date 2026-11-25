@@ -946,17 +946,17 @@ Complete the project systematically using the following phases.
 
 ### Phase 4 — Battle AI
 
-- [ ] Audit move scoring.
-- [ ] Audit switching decisions.
-- [ ] Audit damage estimation.
-- [ ] Audit KO detection.
-- [ ] Audit AI speed calculations.
-- [ ] Audit ability awareness.
-- [ ] Audit item awareness.
-- [ ] Audit trainer AI flags.
+- [x] Audit move scoring.
+- [x] Audit switching decisions.
+- [x] Audit damage estimation.
+- [x] Audit KO detection.
+- [x] Audit AI speed calculations.
+- [x] Audit ability awareness.
+- [x] Audit item awareness.
+- [x] Audit trainer AI flags.
 - [ ] Eliminate redundant calculations.
-- [ ] Optimise AI execution speed.
-- [ ] Verify AI decision quality.
+- [x] Optimise AI execution speed.
+- [x] Verify AI decision quality.
 
 ### Phase 5 — CPU Performance
 
@@ -1103,15 +1103,15 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 ## 25. Current Project Status
 
 - Overall status: In progress
-- Current phase: Phase 4 (battle AI)
-- Current task: Phase 4: battle AI audit and the AI's execution speed
+- Current phase: Phase 5 (CPU performance)
+- Current task: Phase 5: profile frequently executed routines (battle and overworld)
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
 - Last completed task: BATTLE-008 (BUG-018, BUG-019)
 - Last verified commit: `d007b16f8` (full suite: 105 scripts, 95 fully passing, the rest profilers/comparisons)
 - Outstanding blockers: none
-- Next task: Phase 4 checklist, then Phase 5 (CPU performance)
+- Next task: Phase 5 checklist; Phase 4's remaining item (redundant calculations: type chart index) is noted
 
 Update this section continuously.
 
@@ -1254,6 +1254,8 @@ Maintain the following table.
 | TEST-051 | Fainting | Faint handling: `CheckFaint_PlayerThenEnemy`/`EnemyThenPlayer` after each damaging end-of-turn step (TEST-048), `HasUserFainted` guards in `ResidualDamage` (TEST-033), and the custom knock-out abilities (Aftermath, Moxie/Ignis/Flash Step/Blood Lust/Renewal/Life Drain) | Code read | Passed | Aftermath skips Counter/Mirror Coat and residual KOs, needs the attacker standing (`GetCurrentMon` returns `hl` = its HP), honours Magic Guard and Neutralizing Gas, and a KO it causes is picked up by the same post-move faint checks as recoil. KO abilities only fire for a standing user with their popups (Neutralizing Gas aware, TEST-036). |
 | TEST-052 | Arithmetic | `test_addntimes`: hl += bc x a (mod 65536) for every a 0-255 with 8 bc values each, bc/de preserved, a = 0 after | Interpreter, baseline and new ROM | Passed | 2,048/2,048 on both. |
 | TEST-053 | Arithmetic | `test_divide`: Divide for 1-4 byte dividends (zero, small, full-range values) by divisors 1-255 | Interpreter against Python and against the baseline ROM (quotient, remainder and `hMathBuffer`) | Passed | 5,200 cases, all correct and identical to the baseline. |
+| TEST-054 | Battle AI | `test_ai_types_speed`: `AI_Types` scoring (immune move dismissed, super-effective encouraged, neutral unchanged, not-very-effective discouraged) and the AI's speed check (`DoesAIOutSpeedPlayer` after `CalcEnemyStats`) with and without a Choice Scarf | Interpreter | Passed | 5/6 on the baseline: the AI shared BUG-012 and thought a scarfed Speed-200 mon was slower than a Speed-250 one. 6/6 after. |
+| TEST-055 | Battle AI (data and coverage) | Trainer AI flags in `data/trainers/attributes.asm` against `AIScoringPointers`; the AI regression suite | Python count of flags; review of the 15 `test_ai_*` scripts plus TEST-054 | Passed | Every class uses all six scoring layers; 45 boss classes add `AI_BOSS_SWITCH` (its table slot is `AI_None` by design: the flag is read by the switching code). The AI suite covers stat-boost answers (Haze/Roar/phazing), Contrary, entry abilities and the entry simulation, items, knock-out abilities, Hyper Beam and set-up plans, Regenerator, Speed Boost, the switch cap, end-of-turn effects, Unburden, weather and shards, and switch decisions with their frame cost; all pass. The AI's damage estimate runs the battle engine's own routines (`PlayerAttackDamage`, `BattleCommand_DamageCalc`, `BattleCommand_Stab`, `AIDamageCalc`), so the engine checks of Phase 3 apply to it too. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1736,6 +1738,7 @@ Do not silently ignore unresolved issues.
 - The interpreter tests live in the git-excluded `.claude-tools/romtest` folder, so fixes to them are recorded here but are not part of the repository history.
 - The suite is a usable regression gate again (TEST-004). The four comparison tests (`test_bug_contest_judging`, `test_map_render_same`, `test_overworld_screen_same`, `test_type_chart_scan`) should be run with the baseline ROM as the older build after any change to those systems. `test_view_animations` needs a debug build. `test_map_render_same` is stale (written for the removed LZP format) and should be rewritten or retired; `test_overworld_screen_same` covers the same ground (TEST-010).
 - Phase 2 is complete as far as static checks and the interpreter can take it (TEST-005, 009, 011-020; BUG-003 to BUG-008). Crashes or freezes that depend on real-hardware timing can only be found with the manual checklist (Section 32).
+- Phase 4 open item: the AI switch decision is still ~20 frames in the worst case. Its biggest remaining cost is the linear type-chart scan per damage estimate (~18%); an index by attacking type would need the three charts regrouped (normal, inverse, none). Not done yet.
 - No emulator or physical hardware is available here: VBlank/HBlank timing, DMA and real-hardware behaviour can only be checked in the interpreter with emulated hooks. Anything timing-sensitive needs manual emulator testing (Section 32).
 - WRAM0 and WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
 
