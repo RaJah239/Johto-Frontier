@@ -1105,7 +1105,7 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - All eleven repository audit phases are complete. Section 33 contains the final measurements and review outcome.
 - Codex verified source revision `aa50c4784` on branch `000-Johto-Frontier`. Release has 670,307 bytes free and debug has 668,839. Cygwin and Linux produced identical images for each configuration.
-- All 26 confirmed bugs in Section 26 have fixes. MT-003 and MT-007 passed in follow-up runs. The link and audiovisual checks are in progress. Physical CGB timing remains unverified.
+- All 26 confirmed bugs in Section 26 have fixes. MT-003, MT-006 and MT-007 passed in follow-up runs. The audiovisual check is in progress. Physical CGB timing remains unverified.
 
 Update this section continuously.
 
@@ -1321,6 +1321,7 @@ Maintain the following table.
 | TEST-106 | Taunt at move selection | Boot a disposable game in PyBoy. Start a wild battle through the overworld event queue, set the player's Taunt counter, select Growl from FIGHT, then select Tackle. | CGB emulator and joypad | Passed | Growl took the disabled-text path and reopened the move screen before turn execution. Tackle was accepted as the current player move and the turn executed. |
 | TEST-107 | Battle Tower room (MT-003) | Replay the real room script in PyBoy at three streak positions. Compare the player and receptionist pixels every frame during arrival, check the opponent's live sprite against its trainer class, and proceed into battle. | CGB emulator, release and buildable baseline | Passed | Baseline attempted to load sprite 0 before the opponent appeared. The release avoided that load. Trainers 33, 12 and 49 entered with sprites 38, 38 and 62. Nearby sprites stayed intact across 143 frames per arrival. |
 | TEST-108 | MT-007, hazards and ability suppression | Use normal battle menus in three configured trainer battles. | PyBoy CGB | Passed | Gengar and Clefable each took one eighth of max HP. Burned Ursaring's Attack halved during suppression and recovered when Koffing left. |
+| TEST-109 | MT-006, linked Haxorus battle | Two SameBoy CGB-E instances linked at the serial-bit level. Boot two new games, seed distinct parties and established clock roles, run ColosseumConsoleScript and play through victory and defeat. | Two emulated consoles | Passed | All nine move menus matched for mirrored HP, species and status. Both sides took eight Tenacity rolls at identical RNG positions, cured poison once and agreed on the outcome. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -2046,6 +2047,11 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - In separate battles Magikarp laid Spikes, then Gengar and Clefable each switched in through the Pokémon menu. Both fell from 160 to 140 HP. In a third battle, burned Ursaring used Seed Bomb to defeat each opponent. Its Attack was 100 against the first Magikarp, 50 against Koffing and 100 against the last Magikarp. Its burn stayed active throughout. The battle ended in victory.
 - The configured build and all three cases passed. Commit: `test: verify Spikes and gas switches in full battles`.
 
+### Follow-up — Two-peer link battle
+
+- TEST-109, Codex, 2026-11-25. The PyBoy shared-memory attempt timed out during the Colosseum handshake. Built SameBoy core `ea667ad` in a disposable directory and connected two CGB-E instances using its serial bit callbacks, scheduling the two CPUs by elapsed cycles. Supplied a poisoned Haxorus on one cartridge and a Magikarp on the other, with complementary clock roles. The game's Colosseum script exchanged party data and RNG and ran the battle.
+- Both sides agreed at all nine move menus and on all eight Tenacity RNG positions. The cure appeared on both peers after the first turn. The Haxorus side reported victory and the Magikarp side defeat. Physical link-cable timing remains untested. Commit: `test: verify Tenacity through a two-peer link battle`.
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -2069,7 +2075,7 @@ Do not silently ignore unresolved issues.
 - Phase 4: the type-chart index is done (PERF-008: matrices built from the unchanged lists). The worst-case AI switch decision is now 15.4 frames (after PERF-009 to PERF-011). Comparison tests (`test_type_chart_scan`, `test_type_chart_stab_order`) need the previous build as a third argument.
 - Tooling note: on the mounted Windows working copy, `core.checkStat=minimal` lets `git status`/`git diff` miss edits made from Linux. Stage edited files explicitly (`git add <file>`) and take diffs with `git diff --cached`; a byte comparison of the tree against a fresh clone of HEAD (2026-11-25) found nothing uncommitted.
 - Work in progress (author's): most species in `data/pokemon/evos_attacks.asm` share a placeholder entry (no evolution, only Splash learned); comments mark planned levels. Left as it is.
-- PyBoy CGB runs covered the cases listed in Section 32 and the cross-version battery saves in TEST-100. Physical CGB display timing, DMA and link play still need external verification. The two ROMs built on each host agree. The 885-byte difference from the historical reference remains unexplained (Section 24).
+- PyBoy CGB runs covered the cases listed in Section 32 and the cross-version battery saves in TEST-100. Physical CGB display timing, DMA and cable hardware still need external verification. The two-peer emulator replay is recorded in TEST-109. The two ROMs built on each host agree. The 885-byte difference from the historical reference remains unexplained (Section 24).
 - WRAM0 now has 32 bytes free (MEM-005); WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
 
 - Decided by the user (2026-11-25): keep it. The Battle Tower Elite pool lists the Snorlax set (Leftovers, Double-Edge, Crunch, Earthquake, Rest) twice in a row (`data/battle_tower/parties.asm`, lines 115-116). It looks like a copy slip, but removing it changes how often that set appears, so it was left as it is (TEST-074).
@@ -2096,7 +2102,7 @@ Make manual testing instructions sufficiently clear for the user to perform with
 | Passed in PyBoy CGB | MT-001, MT-002, MT-004, MT-005 | Taunt move rejection and retry (TEST-106), boxed gift display and withdrawal, EV page, and gift nickname entry (TEST-103). |
 | Passed in PyBoy CGB | MT-003 | Three scripted Battle Tower arrivals, player and attendant pixels, live trainer sprites and subsequent battles (TEST-107). |
 | Awaiting full play-through | MT-008 | Voltorb Flip exit and the music heard when crossing maps on foot or by bicycle. Routine, map and audio checks are recorded separately. |
-| Awaiting a linked pair | MT-006 | Both peers must agree through the battle. TEST-028 checked the RNG path. |
+| Passed with two linked SameBoy CGBs | MT-006 | The peers exchanged parties and battle actions, agreed on the Haxorus cure, and reached complementary win/loss results (TEST-109). |
 | Passed in configured PyBoy CGB battles | MT-007 | Gengar and Clefable each took 20 Spikes damage on switching in. A burned Ursaring lost and regained Attack as Koffing entered and left (TEST-108). Both ability lists are empty in the release. |
 
 - **MT-001 Taunt at the move menu (BUG-003).** Setup: any battle where the foe can use Taunt (or a save where your Pokémon gets Taunted). Steps: after your Pokémon is Taunted, open FIGHT and pick a status move (Growl, Swords Dance and the like). Expected: "The move is disabled" is shown and you choose again; damaging moves can still be picked. Failure: the status move is accepted and then fails during the turn.
