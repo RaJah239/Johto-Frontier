@@ -1009,7 +1009,7 @@ Complete the project systematically using the following phases.
 - [x] Audit trainer data.
 - [x] Audit encounter data.
 - [x] Audit battle facilities.
-- [ ] Audit save system.
+- [x] Audit save system.
 - [ ] Audit graphics engine.
 - [ ] Audit audio engine.
 - [ ] Audit hardware compatibility.
@@ -1104,12 +1104,12 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - Overall status: In progress
 - Current phase: Phase 7/8 (overworld, interface and data)
-- Current task: Phase 8 save system
+- Current task: Phase 8 graphics, audio and hardware compatibility
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
-- Last verified build: clone of `791ca9f56` plus FAC-001, Linux, RGBDS 0.7.0, 0 assembler warnings, 675,248 bytes free
-- Last completed task: FAC-001 (BUG-022; facility data)
-- Last verified commit: FAC-001 (full suite: 129 scripts, no regressions against the previous run)
+- Last verified build: clone of `70df4375c` plus SAVE-001, Linux, RGBDS 0.7.0, 0 assembler warnings, 675,266 bytes free
+- Last completed task: SAVE-001 (save system review); PERF-007
+- Last verified commit: SAVE-001 (full suite: 130 scripts, no regressions against the previous run)
 - Outstanding blockers: none
 - Next task: Phase 8 move data, battle facilities, save system; then Phase 7. Open earlier items: Phase 4 type-chart index, Phase 5 register usage
 
@@ -1285,6 +1285,7 @@ Maintain the following table.
 | TEST-073 | Battle Tower pool selection | `test_bt_pool_pick`: `PickRandomBattleTowerCompactMon` with a fake three-pool record (300, 50 and 700 mons in different banks) and fixed indices across every pool boundary: the right bank and base + index x 6 each time | Interpreter (pool record in WRAM; random index, pool lookup and far read hooked) | Passed | 8/9 on the previous build: smaller indices passed only because the sign error cancelled out over two steps; index 1049 went to bank 0. 9/9 after BUG-022. |
 | TEST-074 | Battle Tower data | `validate_bt.py`: every `bt_mon` in the three pools has a real species, a known item and known moves, no repeated move in a set, a first move, and no duplicate records; `BattleTowerRandomLessThanDE` reviewed for uniformity (rejection on the top high byte) | Python validator; code review | Passed with one finding | 133 records. One exact duplicate: Snorlax (Leftovers, Double-Edge, Crunch, Earthquake, Rest) appears twice in a row in the Elite pool, which raises that set's odds. Teams never repeat a species, so nothing breaks. Left for the user to decide (Section 31). |
 | TEST-075 | PRNG speed | `prof_random`: 1000 calls of `Random` from a fixed state, M-cycles per call and the first values | Interpreter (perfkit) | Measured | 271.0 -> 260.0 M-cycles per call; identical sequence. A repo-wide search found no other `ld` to an HRAM label. |
+| TEST-076 | Save system | `validate_sram_pairs.py`: every routine scanned for returns or tail-jumps while SRAM is open and for unequal opens and closes; each of the 37 hits read by hand. Also: every field `SavePlayerData` writes is in the same SRAM bank (symbol file); save and verify checksums cover the same range, bank and byte order; the backup slot's save and load mirror the main slot's field for field; the PRNG zero-state reseed path checked | Python scan; symbol file; code review | Passed | All 37 hits are deliberate helper pairs (e.g. `OpenPokeDB`, `_PointBoxTheme`, `_GetFrontpic`, `RemoveMonFromPartyPartial` leave SRAM open for the caller, which closes it). Only the main load fixes up a Battle Tower reward state, as in vanilla. One dead `ret z` removed from `RemoveMonFromPartyPartial`. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1860,6 +1861,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: none known.
 - Git commit message: `fix: correct the Battle Tower pool index past 256 mons`
 - Next task: save system (Phase 8).
+
+### SAVE-001 — Save system review
+
+- Date: 2026-11-25
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 8 (save system)
+- System: SRAM access, save and load, checksums, backup slot
+- Files modified: `engine/pokemon/move_mon.asm`
+- Problem identified: no save bugs. A duplicated `ret z` in `RemoveMonFromPartyPartial` could never run.
+- Root cause: leftover line.
+- Solution implemented: removed it.
+- Behaviour preserved: same code path (the second `ret z` was unreachable).
+- Performance impact: none. Memory impact: 1 byte.
+- Build result: builds, 0 assembler warnings, 675,266 bytes free.
+- Tests performed: TEST-076, full suite (130 scripts).
+- Test results: all pass; the full suite matches the previous run.
+- Remaining risks: behaviour on power loss mid-save is as in vanilla (main slot, then backup) and can only be checked by hand.
+- Git commit message: `refactor: drop an unreachable ret in RemoveMonFromPartyPartial`
+- Next task: Phase 8 graphics, audio and hardware compatibility; then Phase 7.
 
 ## 31. Outstanding Issues
 

@@ -1049,7 +1049,6 @@ RemoveMonFromPartyPartial:
 	ld a, [wCurPartyMon]
 	cp [hl]
 	ret z
-	ret z
 	; Shift our mail messages up.
 	ld hl, sPartyMail
 	ld bc, MAIL_STRUCT_LENGTH
