@@ -6932,6 +6932,7 @@ GiveExperiencePoints:
 	call Divide
 
 .skip_exp_scaling:
+	call CapExpAt65535
 ; Boost Experience for traded Pokemon
 	pop bc
 	ld hl, MON_ID
@@ -7270,7 +7271,7 @@ QuarterRematchExp:
 	ret
 
 BoostExp:
-; Multiply experience by 1.5x
+; Multiply experience by 1.5x (at most 65535)
 	push bc
 ; load experience value
 	ldh a, [hProduct + 2]
@@ -7287,6 +7288,28 @@ BoostExp:
 	adc b
 	ldh [hProduct + 2], a
 	pop bc
+	ret nc
+	ld a, $ff
+	ldh [hProduct + 2], a
+	ldh [hProduct + 3], a
+	ret
+
+CapExpAt65535:
+; Experience is handled in 16 bits (hQuotient + 2/3): a larger result (from
+; the level scaling) becomes 65535 instead of losing its top bytes.
+	ldh a, [hQuotient + 0]
+	and a
+	jr nz, .cap
+	ldh a, [hQuotient + 1]
+	and a
+	ret z
+.cap
+	xor a
+	ldh [hQuotient + 0], a
+	ldh [hQuotient + 1], a
+	dec a
+	ldh [hQuotient + 2], a
+	ldh [hQuotient + 3], a
 	ret
 
 CheckOpponentFullHP:

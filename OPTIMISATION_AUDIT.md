@@ -939,8 +939,8 @@ Complete the project systematically using the following phases.
 - [ ] Audit fainting.
 - [ ] Audit end-of-turn effects.
 - [ ] Audit move effects.
-- [ ] Audit experience.
-- [ ] Audit level scaling.
+- [x] Audit experience.
+- [x] Audit level scaling.
 - [ ] Audit capture mechanics.
 - [x] Audit battle state initialisation and cleanup.
 
@@ -1108,7 +1108,7 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
-- Last completed task: BATTLE-006 (BUG-015, BUG-016)
+- Last completed task: BATTLE-007 (BUG-017)
 - Last verified commit: `d007b16f8` (full suite: 105 scripts, 95 fully passing, the rest profilers/comparisons)
 - Outstanding blockers: none
 - Next task: Phase 3 checklist
@@ -1137,6 +1137,7 @@ Maintain the following table throughout the project.
 | BUG-014 | Battle weather (Magic Guard) | Magic Guard did not protect from hail. `HandleWeather`'s sandstorm damage skips Magic Guard Pokémon, but its hail damage only checked Overcoat, so a Magic Guard Pokémon lost 1/16 HP a turn in hail. The AI's matchup simulator already treats Magic Guard as blocking both weathers, so the AI's predictions were wrong too. | Medium | Fixed | `test_weather_damage` (Magic Guard took hail damage on the baseline, both sides; immune after) |
 | BUG-015 | Entry hazards (data) | `SpikesImmunePokemon` still named 27 species as having Levitate or Magic Guard after those abilities were taken off them, so they kept floating over Spikes. Cut down to match the ability lists (Mew), with the rest kept as comments like the ability lists (approved by the user). | Medium | Fixed | `test_ng_passives` (Gengar and Clefable took no Spikes damage on the baseline; 1/8 after; Mew still immune) |
 | BUG-016 | Abilities (Neutralizing Gas) | Guts, Resilience and the Spikes immunity kept working under Neutralizing Gas, unlike every other ability. They now use `IsInAbilityList`, and `UpdateNeutralizingGas` recalculates both sides' battle stats whenever the suppressed side changes, so Guts and Resilience switch off (and back on) at once (approved by the user). | Medium | Fixed | `test_ng_passives` (all suppressed cases failed on the baseline; 9/9 after) |
+| BUG-017 | Experience | Experience is handled in 16 bits, but with Scaled experience the cubed level ratio ((enemy L + 10) / (own L + 10))^3 can push it past 65535 (up to x162 at the level-50 cap), and the top bytes were silently dropped; the x1.5 boosts (traded, trainer, Lucky Egg) also wrapped round on overflow. Low-level Pokémon (typically Exp. Share recipients) got a fraction of their experience: e.g. level 5 vs a level-50 foe with base EXP 200 got 25,856 instead of 91,392 (now capped at 65,535); level 1 with all three boosts got 14,251. Now capped at 65,535 after the scaling and after each boost. | Medium | Fixed | `test_exp_gain` (4 of 11 overflow cases wrong on the baseline; 11/11 after) |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1238,6 +1239,7 @@ Maintain the following table.
 | TEST-040 | Entry hazards (data) | `SpikesImmunePokemon` against the lists it must mirror (its own comment and `levitate_mons.asm` both say so): Levitate plus Magic Guard | Python comparison of the three lists | Partially verified | Out of step: Levitate now has only Mew and Magic Guard is empty (both had species commented out), but the Spikes list still names 27 species as levitating or Magic Guard (Charizard, Gastly line, Magnemite line, Koffing/Weezing, Bronzor/Bronzong, Misdreavus/Mismagius, Solrock/Lunatone/Claydol, Unown, Victini, Celebi, Clefairy/Clefable, and more). They stay immune to Spikes without the ability. Left unchanged pending a decision (Section 31). The hazard code itself: Hazard Guard and Heavy-Duty Boots skip all hazards, Flying types skip Spikes, Magic Guard skips Stealth Rock, Stealth Rock scales with type matchup. |
 | TEST-041 | Abilities, entry hazards | `test_ng_passives`: Guts (burn) and Resilience (paralysis) with and without Neutralizing Gas suppressing them; Neutralizing Gas coming in recalculates the stats; Spikes against Mew (Levitate), suppressed Mew, Gengar and Clefable | Interpreter | Passed | 3/9 on the baseline, 9/9 after. Full suite unchanged otherwise (120 scripts). |
 | TEST-042 | Switching | `NewBattleMonStatus` against `NewEnemyMonStatus` (what a switch clears), plus the send-out hooks (`ResetPlayer/EnemySendOutPopups`, `UnburdenRecordSide`, `QueueEntryAbilities`) | Read side by side | Passed | Both clear the five substatus bytes, Disable, Protect, Minimize, both sides' binding, turns taken, Taunt and the opponent's "can't run" flag. Differences are pokecrystal's: only the player's used-move list is cleared (it exists for the player only), and Toxic's counter is reset when Toxic is next inflicted. Custom per-mon state (popups shown, Harvest, Unburden) is reset on each send-out. |
+| TEST-043 | Experience | `test_exp_gain`: the amount `GiveExperiencePoints` hands to the experience bar, against base x enemy level / 7, the optional level scaling (three integer multiply/divide steps), the x1.5 boosts, and the 65535 cap | Interpreter, running the real routine up to `AnimateExpBar`; levels within this game's cap of 50 | Passed | 7/11 on the baseline (BUG-017), 11/11 after. Full suite unchanged otherwise (121 scripts). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1604,6 +1606,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: see MT-007.
 - Git commit message: `fix: let Neutralizing Gas switch off Guts, Resilience and the Spikes immunity, and match the Spikes list to the abilities`
 - Next task: Phase 3, switching and fainting.
+
+### BATTLE-007 — Experience overflow with scaled experience
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 3 (experience, level scaling)
+- System: Experience
+- Files modified: `engine/battle/core.asm`
+- Problem identified: BUG-017, found reading `GiveExperiencePoints` while auditing experience.
+- Root cause: a 16-bit value read from a 32-bit result without a check; a 16-bit add without a carry check.
+- Solution implemented: `CapExpAt65535` after the scaling step; `BoostExp` saturates at 65535.
+- Behaviour preserved: every result under 65536 is exactly as before (tested); Chansey/Blissey stay unscaled; the rest of the formula is unchanged.
+- Performance impact: negligible. Memory impact: 30 bytes more (675,167 free).
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-043, full suite.
+- Test results: all pass.
+- Remaining risks: none known.
+- Git commit message: `fix: cap scaled experience at 65535 instead of wrapping`
+- Next task: Phase 3, capture mechanics.
 
 ## 31. Outstanding Issues
 
