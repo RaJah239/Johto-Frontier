@@ -1130,6 +1130,8 @@ Maintain the following table throughout the project.
 | BUG-007 | NPC trades | `ComputeNPCTrademonStats` stored the level with `ld [MON_LEVEL], a` (inherited from pokecrystal, flagged there by its own comment): `MON_LEVEL` is the struct offset $1F, so this wrote the level to cartridge address $001F, the MBC3 save-RAM enable register. A level ending in $A (10, 26, 42, 58, 74, 90) left save RAM switched on after every in-game trade; any other level switched it off. The stats themselves were right (the trade code already sets `wCurPartyLevel`). | Low | Fixed | `test_npc_trade_stats` (the write to $001F seen on the baseline ROM; none after) |
 | BUG-008 | Gift Pokémon / naming screen | Softlock. When `givepoke` sends a Pokémon to a box (full party), `GivePoke` sets `wMonType` to `BOXMON` and offers a nickname. The naming screen then calls `GetGender`, whose `BOXMON` branch was a deliberate `di` / `jr @` trap left from the removal of the old box code, so saying yes to the nickname froze the game. | Critical | Fixed | `test_gender_boxmon` (`BOXMON` froze on the baseline ROM; now returns the same gender as `BUFFERMON` for the same DVs) |
 | BUG-009 | Battle (critical hits) | Super Luck's +1 critical stage was lost on Slash and Leaf Blade. For those two moves `_BattleCommand_Critical` took the species off the stack to check the Slash Crits / Leaf Blade Crits list, and on a miss pushed `a` back for the Super Luck check, but `IsInByteArray` returns with a = -1, so Super Luck looked up species -1 and never matched. Latent today: the Super Luck, Slash Crits and Leaf Blade Crits lists are all empty (their species are commented out), so it shows up as soon as one is filled. | Low | Fixed | `test_crit_stages` (4 of 14 failed on the baseline, both sides; 14/14 after) |
+| BUG-010 | Link battles (Tenacity) | Tenacity's end-of-turn 1/3 status cure rolled with `Random` instead of `BattleRandom`. In a link battle each Game Boy then rolled its own number, so they could disagree on whether the status was cured and the battle desynced. Haxorus has Tenacity. Single-player is unaffected (`BattleRandom` is `Random` outside link battles). | Medium | Fixed | `test_battle_rng` (Tenacity reached `Random` on the baseline; `BattleRandom` after) |
+| BUG-011 | Turn order (Quick Draw) | Quick Draw had the same link-desync roll (`Random`), and its condition was inverted: `cp 33 percent + 1` / `jr c, .continue` skipped on the low third, so it fired on 171 of 256 rolls (2/3) instead of the 1/3 its data file states (Tenacity's identical idiom uses `ret nc`). Latent today: the Quick Draw list is empty. | Low | Fixed | `test_battle_rng`: 171/256 on the baseline (measured), 85/256 after |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1215,6 +1217,7 @@ Maintain the following table.
 | TEST-025 | Critical hits | `test_crit_stages`: the critical stage reached at `.Tally` for Super Luck with Tackle, Slash and Leaf Blade, Focus Energy (+2) and Scope Lens (+1); Slash Crits with Slash always crits and returns with the stack intact; no crit on a high roll otherwise | Interpreter, ability lists redirected to test species, `BattleRandom` fixed, both sides | Passed | 10/14 on the baseline (BUG-009), 14/14 after. Full suite unchanged otherwise (111 scripts). |
 | TEST-026 | Register use after list lookups | Every call to `IsInByteArray`, `IsInArray`, `IsInAbilityList(NG)` and the matchup sim's far list lookups, checked for code that reads `a` afterwards without reloading it (they return a = -1 on a miss) | Python scan as in TEST-005, then the 68 routines that return straight after a lookup checked for any that promise a value in `a` | Passed | No reads of `a` after a lookup other than BUG-009 (already fixed). The 68 wrapper routines all return their answer in carry; the `a =` notes in their headers describe inputs. |
 | TEST-027 | Accuracy and evasion | `test_accuracy_stages`: move accuracy after the accuracy and evasion stages (`_BattleCommand_CheckHit.StatModifiers`) against `data/battle/accuracy_multipliers.asm`, two integer steps with a floor of 1, Keen Eye x1.3, cap 255 | Interpreter: every accuracy/evasion stage pair with evasion at or below accuracy x 4 move accuracies x Keen Eye on/off x both sides (1,456 runs), plus evasion-above-accuracy cases without Foresight | Passed | Exact match. With higher evasion and Foresight on the target, stage changes are skipped entirely; that is pokecrystal's original behaviour and is kept. |
+| TEST-028 | Battle RNG, turn order | Scan of the battle engine and abilities for `Random` (not shared in link battles) where the roll decides a battle outcome; then `test_battle_rng`: Quick Draw and Tenacity must use `BattleRandom`, and Quick Draw's first-move rate over all 256 rolls | Grep over `engine/battle`, `engine/abilities` and item effects, each hit read; interpreter run of `DetermineMoveOrder` (equal priority, slower Quick Draw mon) and `Tenacity_Activate` with `Random` trapped | Passed | 11 `Random` calls: 2 real (BUG-010, BUG-011); the rest are wild-only (Magikarp size, capture, Shiny Ball tables), cosmetic (transition and VS intro) or outside link battles. 0/4 on the baseline, 4/4 after. Full suite unchanged otherwise (113 scripts). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1487,6 +1490,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Git commit message: `fix: keep Super Luck's critical stage on Slash and Leaf Blade`
 - Next task: Phase 3, accuracy and evasion.
 
+### BATTLE-002 — Link-battle RNG and Quick Draw's rate
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 3 (speed and priority, abilities)
+- System: Turn order, end-of-turn abilities
+- Files modified: `engine/battle/move_order.asm`, `engine/abilities/turn_end_abilities.asm`
+- Problem identified: BUG-010, BUG-011 (TEST-028), found reading `DetermineMoveOrder`.
+- Root cause: `Random` used for outcome rolls; one inverted branch.
+- Solution implemented: `BattleRandom` in Quick Draw (both sides) and Tenacity; Quick Draw skips on `nc`, so it fires on the low third.
+- Behaviour preserved: single-player rolls are the same RNG as before; Quick Draw now matches the 1/3 its data documents.
+- Performance impact: negligible. Memory impact: none (675,211 bytes free).
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-028, full suite.
+- Test results: all pass.
+- Remaining risks: link battles cannot be tested here (two Game Boys); see MT-006.
+- Git commit message: `fix: use the shared battle RNG for Tenacity and Quick Draw, and fix Quick Draw's rate`
+- Next task: Phase 3, the rest of speed and priority (Trick Room, Quick Claw, weather speed abilities).
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -1532,6 +1554,8 @@ Make manual testing instructions sufficiently clear for the user to perform with
 - **MT-004 EV page with maxed Attack (BUG-006).** Setup: a save with the EV page unlocked (`EVENT_UNLOCK_STAT_SCREEN_EFFORT_VALUES`) and a Pokémon with 252 Attack EVs (train it, or set it with a debug tool). Steps: open its stats screen and go to the page with the Effort Values; also try one with every EV at 252 and one with none. Expected: stars for each 252 value, numbers otherwise, and the screen closes normally. Failure (old build): crash or freeze on that page.
 
 - **MT-005 Nickname a gift Pokémon that goes to the PC (BUG-008).** Setup: a full party of six. Steps: receive any gift Pokémon that offers a nickname (a `givepoke` event without a fixed OT, e.g. an Egg or starter-style gift); answer YES to the nickname prompt. Expected: the naming screen opens with the Pokémon's icon and gender symbol; finishing returns to the game and the message says it was sent to the PC. Failure (old build): the game freezes as the naming screen opens.
+
+- **MT-006 Link battle with Haxorus (BUG-010).** Setup: two copies of the game linked (two emulators with link support, or two consoles), one player with a Haxorus. Steps: in a link battle, get Haxorus a status (burn, poison, paralysis) and play several turns. Expected: both screens always agree on whether Tenacity cured the status, and the battle continues in sync to the end. Failure (old build): the screens disagree and the battle desyncs.
 
 ## 33. Final Deliverables
 

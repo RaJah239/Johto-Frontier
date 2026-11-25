@@ -174,7 +174,7 @@ Hydration_Activate:
 	jmp StdBattleTextbox
 
 Tenacity_Activate:
-	call Random
+	call BattleRandom
 	cp 33 percent + 1
 	ret nc ; 1/3 chance
 	ld a, BATTLE_VARS_STATUS

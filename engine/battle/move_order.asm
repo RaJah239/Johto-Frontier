@@ -248,9 +248,9 @@ DetermineMoveOrder:
 ; in which case compare speed as normal
 
 .SimulateEnemyQuickDrawDoubleSpeed
-	call Random
+	call BattleRandom
 	cp 33 percent + 1
-	jr c, .continue ; 1/3 chance
+	jr nc, .continue ; it goes first 1/3 of the time
 
 	lb bc, BANK(QuickDrawAbilityText), ABILITY_POPUP_ENEMY
 	ld de, QuickDrawAbilityText
@@ -277,9 +277,9 @@ DetermineMoveOrder:
 ; in which case compare speed as normal
 
 .SimulatePlayerQuickDrawDoubleSpeed
-	call Random
+	call BattleRandom
 	cp 33 percent + 1
-	jr c, .continue ; 1/3 chance
+	jr nc, .continue ; it goes first 1/3 of the time
 
 	lb bc, BANK(QuickDrawAbilityText), ABILITY_POPUP_PLAYER
 	ld de, QuickDrawAbilityText
