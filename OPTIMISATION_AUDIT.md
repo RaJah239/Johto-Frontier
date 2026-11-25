@@ -1073,7 +1073,7 @@ Populate this section during the initial audit.
 | Warnings | Original build log recorded zero | 0 assembler, 11 graphics | 0 assembler, the same 11 graphics warnings |
 | Regression tests | 108 scripts, including 4 partial passes and 12 that stopped on obsolete symbols (TEST-002) | Reference for behavioural, graphics, layout, save and performance comparisons | 136 available scripts and 15 data validators passed (TEST-098/099) |
 
-The historical Linux baseline had MD5 `3142da94d2e5cde28cb9df2c79ff8d8b`. The rebuilt baseline had MD5 `b3c3b04a524b515775c95d03823e649d` and 885 fewer free bytes. Rebuilding the starting revision of this session showed the same 885-byte offset from its historical record. Its cause is unverified. The final deltas use the rebuilt baseline and final ROM produced on the same host.
+The historical Linux baseline had MD5 `3142da94d2e5cde28cb9df2c79ff8d8b`. The rebuilt baseline had MD5 `b3c3b04a524b515775c95d03823e649d` and 885 fewer free bytes. Rebuilding the starting revision of this session showed the same 885-byte offset from its historical record. The recorded ROM0 and RAM totals match. All 885 bytes are in ROMX. TEST-111 reproduced the rebuilt baseline from a fresh checkout with the preserved local build helpers. The cause of the historical difference is still unverified. The final deltas use the rebuilt baseline and final ROM produced on the same host.
 
 ### Build Environment
 
@@ -1324,6 +1324,7 @@ Maintain the following table.
 | TEST-108 | MT-007, hazards and ability suppression | Use normal battle menus in three configured trainer battles. | PyBoy CGB | Passed | Gengar and Clefable each took one eighth of max HP. Burned Ursaring's Attack halved during suppression and recovered when Koffing left. |
 | TEST-109 | MT-006, linked Haxorus battle | Two SameBoy CGB-E instances linked at the serial-bit level. Boot two new games, seed distinct parties and established clock roles, run ColosseumConsoleScript and play through victory and defeat. | Two emulated consoles | Passed | All nine move menus matched for mirrored HP, species and status. Both sides took eight Tenacity rolls at identical RNG positions, cured poison once and agreed on the outcome. |
 | TEST-110 | MT-008, minigame exit and border audio | Compare every rendered frame from confirming the Voltorb Flip exit through return to the overworld against a control withholding sprite DMA until map sprites are rebuilt. Cross between New Bark Town and Route 1 on foot and by bike, check the active channel, then dismount. | PyBoy CGB | Passed | All 284 exit frames matched. Before BUG-027 the active track became town music while riding. The fixed build retained bicycle music, respected the disable option and preserved the Music Player override. |
+| TEST-111 | Historical release baseline | Build a fresh detached Linux checkout of `936e0c1c1` with bundled RGBDS 0.7.0 and eight preserved Linux helper binaries. Compare against the Git archive build with helpers compiled from source. | Clean build and binary comparisons | Passed | Release ROM, linker map, symbols and all 978 `gfx/**/*.lz` files matched byte for byte. The map reports 342 bytes free in ROM0 and 673,435 in ROMX. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -2061,6 +2062,12 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - TEST-110 also replayed the Goldenrod Voltorb Flip exit through the minigame's Select confirmation and back to the overworld. The control delayed sprite DMA until the overworld sprites had been rebuilt. All 284 rendered frames were identical. The minigame required no change.
 - The full follow-up regression passed all 136 available scripts and 15 validators, including all 307 rendered maps. The debug-only animation test passed 10/10 using its required directory layout. The cross-version save test passed including backup recovery. Cygwin and Linux produced identical release and debug ROMs, with 670,308 and 668,840 bytes free respectively. Commit: `fix: preserve bicycle music across map connections`. All eight Section 32 scenarios now have emulator evidence.
 
+### Follow-up — Historical baseline reproducibility
+
+- TEST-111, Codex, 2026-11-25. Built `936e0c1c1` with `make -j4 all` and the local `rgbds-0.7.0-linux-static.tar.xz` (SHA-256 `a668afe81bf36d99791cadd7b405ce6bc6a8b6b35e9abac16edd656eccb65ed6`). Verified after linking that all eight preserved helper executables still matched the binaries supplied to the checkout.
+- Both baseline builds yielded release SHA-256 `5cf4c35d00c53bedb3cd90dd8ac810ca9e1ce9f3d13be99dc14d61746f950205` and 673,777 bytes free. The fresh checkout emitted the same eleven graphics warnings. The release and debug hashes at `db0843ae8` also matched Section 33 on both hosts.
+- The original record in `304a1bcc2` gives 674,320 free ROMX bytes. The local ROM and map backups examined did not match the historical reference. Its original linker map would permit a section-by-section comparison. Commit: `docs: verify historical baseline from a clean checkout`.
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -2084,7 +2091,7 @@ Do not silently ignore unresolved issues.
 - Phase 4: the type-chart index is done (PERF-008: matrices built from the unchanged lists). The worst-case AI switch decision is now 15.4 frames (after PERF-009 to PERF-011). Comparison tests (`test_type_chart_scan`, `test_type_chart_stab_order`) need the previous build as a third argument.
 - Tooling note: on the mounted Windows working copy, `core.checkStat=minimal` lets `git status`/`git diff` miss edits made from Linux. Stage edited files explicitly (`git add <file>`) and take diffs with `git diff --cached`; a byte comparison of the tree against a fresh clone of HEAD (2026-11-25) found nothing uncommitted.
 - Work in progress (author's): most species in `data/pokemon/evos_attacks.asm` share a placeholder entry (no evolution, only Splash learned); comments mark planned levels. Left as it is.
-- PyBoy CGB runs covered the cases listed in Section 32 and the cross-version battery saves in TEST-100. Physical CGB display timing, DMA and cable hardware still need external verification. The two-peer emulator replay is recorded in TEST-109. The two ROMs built on each host agree. The 885-byte difference from the historical reference remains unexplained (Section 24).
+- PyBoy CGB runs covered the cases listed in Section 32 and the cross-version battery saves in TEST-100. Physical CGB display timing, DMA and cable hardware still need external verification. The two-peer emulator replay is recorded in TEST-109. The two ROMs built on each host agree. TEST-111 reproduced the local baseline across both build methods. Locating the historical 885-byte ROMX difference requires the original linker map or the matching historical ROM and symbols (Section 24).
 - WRAM0 now has 32 bytes free (MEM-005); WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
 
 - Decided by the user (2026-11-25): keep it. The Battle Tower Elite pool lists the Snorlax set (Leftovers, Double-Edge, Crunch, Earthquake, Rest) twice in a row (`data/battle_tower/parties.asm`, lines 115-116). It looks like a copy slip, but removing it changes how often that set appears, so it was left as it is (TEST-074).
