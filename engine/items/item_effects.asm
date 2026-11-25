@@ -440,7 +440,7 @@ ENDC
 .statuscheck
 	ld b, a
 	ld a, [wEnemyMonStatus]
-	and 1 << PSN | BRN | PAR | FRZ | SLP_MASK
+	and ALL_STATUS ; (every status: poison, burn, frostbite, paralysis, sleep)
 	ld c, 15
 	jr nz, .addstatus
 	ld a, [wEnemyMonStatus]
@@ -456,6 +456,7 @@ ENDC
 .max_1
 
 	ld d, a
+	ld e, c ; the status bonus (GetItemHeldEffect returns its own bc)
 	push de
 	ld a, [wBattleMonItem]
 	ld b, a
@@ -465,7 +466,8 @@ ENDC
 	pop de
 	ld a, d
 	jr nz, .max_2
-	add c
+	; Catch Charm: the status bonus again
+	add e
 	jr nc, .max_2
 	ld a, $ff
 .max_2

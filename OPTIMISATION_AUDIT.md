@@ -941,7 +941,7 @@ Complete the project systematically using the following phases.
 - [ ] Audit move effects.
 - [x] Audit experience.
 - [x] Audit level scaling.
-- [ ] Audit capture mechanics.
+- [x] Audit capture mechanics.
 - [x] Audit battle state initialisation and cleanup.
 
 ### Phase 4 — Battle AI
@@ -1104,11 +1104,11 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - Overall status: In progress
 - Current phase: Phase 3 (battle engine correctness)
-- Current task: Phase 3: fainting, end-of-turn effects, move effects, experience, level scaling, capture
+- Current task: Phase 3: fainting, end-of-turn effects, move effects, dual-ability interactions
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
-- Last completed task: BATTLE-007 (BUG-017)
+- Last completed task: BATTLE-008 (BUG-018, BUG-019)
 - Last verified commit: `d007b16f8` (full suite: 105 scripts, 95 fully passing, the rest profilers/comparisons)
 - Outstanding blockers: none
 - Next task: Phase 3 checklist
@@ -1138,6 +1138,8 @@ Maintain the following table throughout the project.
 | BUG-015 | Entry hazards (data) | `SpikesImmunePokemon` still named 27 species as having Levitate or Magic Guard after those abilities were taken off them, so they kept floating over Spikes. Cut down to match the ability lists (Mew), with the rest kept as comments like the ability lists (approved by the user). | Medium | Fixed | `test_ng_passives` (Gengar and Clefable took no Spikes damage on the baseline; 1/8 after; Mew still immune) |
 | BUG-016 | Abilities (Neutralizing Gas) | Guts, Resilience and the Spikes immunity kept working under Neutralizing Gas, unlike every other ability. They now use `IsInAbilityList`, and `UpdateNeutralizingGas` recalculates both sides' battle stats whenever the suppressed side changes, so Guts and Resilience switch off (and back on) at once (approved by the user). | Medium | Fixed | `test_ng_passives` (all suppressed cases failed on the baseline; 9/9 after) |
 | BUG-017 | Experience | Experience is handled in 16 bits, but with Scaled experience the cubed level ratio ((enemy L + 10) / (own L + 10))^3 can push it past 65535 (up to x162 at the level-50 cap), and the top bytes were silently dropped; the x1.5 boosts (traded, trainer, Lucky Egg) also wrapped round on overflow. Low-level Pokémon (typically Exp. Share recipients) got a fraction of their experience: e.g. level 5 vs a level-50 foe with base EXP 200 got 25,856 instead of 91,392 (now capped at 65,535); level 1 with all three boosts got 14,251. Now capped at 65,535 after the scaling and after each boost. | Medium | Fixed | `test_exp_gain` (4 of 11 overflow cases wrong on the baseline; 11/11 after) |
+| BUG-018 | Capture (status bonus) | The catch-rate status check `and 1 << PSN \| BRN \| PAR \| FRZ \| SLP_MASK` put `1 <<` on `PSN` only; `BRN`, `FRZ` and `PAR` are bit numbers (4, 5, 6), so the mask was $0F. Poison and sleep got the intended +15, but burn, frostbite and paralysis fell through to the +5 branch. Now `and ALL_STATUS`. No other mask in the codebase has this mistake (scan). | Medium | Fixed | `test_catch_status` (burn/frostbite/paralysis +5 on the baseline, +15 after) |
+| BUG-019 | Capture (Catch Charm) | The Catch Charm (held: "Doubles catch rate of statused foes") never added anything: it added `c` after `farcall GetItemHeldEffect`, which returns the item's own parameter in `c` (0 for the Catch Charm), not the status bonus. The bonus is now kept in `e` across the call. | Medium | Fixed | `test_catch_status` (Catch Charm added nothing on the baseline for most statuses; adds the status bonus again after) |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1240,6 +1242,8 @@ Maintain the following table.
 | TEST-041 | Abilities, entry hazards | `test_ng_passives`: Guts (burn) and Resilience (paralysis) with and without Neutralizing Gas suppressing them; Neutralizing Gas coming in recalculates the stats; Spikes against Mew (Levitate), suppressed Mew, Gengar and Clefable | Interpreter | Passed | 3/9 on the baseline, 9/9 after. Full suite unchanged otherwise (120 scripts). |
 | TEST-042 | Switching | `NewBattleMonStatus` against `NewEnemyMonStatus` (what a switch clears), plus the send-out hooks (`ResetPlayer/EnemySendOutPopups`, `UnburdenRecordSide`, `QueueEntryAbilities`) | Read side by side | Passed | Both clear the five substatus bytes, Disable, Protect, Minimize, both sides' binding, turns taken, Taunt and the opponent's "can't run" flag. Differences are pokecrystal's: only the player's used-move list is cleared (it exists for the player only), and Toxic's counter is reset when Toxic is next inflicted. Custom per-mon state (popups shown, Harvest, Unburden) is reset on each send-out. |
 | TEST-043 | Experience | `test_exp_gain`: the amount `GiveExperiencePoints` hands to the experience bar, against base x enemy level / 7, the optional level scaling (three integer multiply/divide steps), the x1.5 boosts, and the 65535 cap | Interpreter, running the real routine up to `AnimateExpBar`; levels within this game's cap of 50 | Passed | 7/11 on the baseline (BUG-017), 11/11 after. Full suite unchanged otherwise (121 scripts). |
+| TEST-044 | Capture mechanics | `test_catch_status`: the catch rate after the status step of `PokeBallEffect` (from `.statuscheck` to the roll) for no status and each status, with and without the Catch Charm held, and the 255 cap; plus a scan of every `\|` mask for a bit-number constant without `1 <<` | Interpreter (critical capture stubbed off); Python scan | Passed | 5/13 on the baseline (BUG-018, BUG-019), 13/13 after. The scan found only this line. Full suite unchanged otherwise (122 scripts). |
+| TEST-045 | Trainer level scaling | Level-bracket parties (`ApplyScaledTrainerParty`, `data/trainers/scaled_parties.asm`) and `PARTY_LV` dynamic levels (`SetDynamicLevel`) | Code read; Python check of the bracket lists | Passed | 3 bracket lists, each ascending and terminated, all referenced; the last bracket is used above the top level as documented. 81 trainer entries use `PARTY_LV` with no offset (= the player's top level, capped at 50). A negative offset would wrap and be capped at 50; none is used (noted as a precondition). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1625,6 +1629,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: none known.
 - Git commit message: `fix: cap scaled experience at 65535 instead of wrapping`
 - Next task: Phase 3, capture mechanics.
+
+### BATTLE-008 — Catch rate status bonus and the Catch Charm
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 3 (capture mechanics)
+- System: Poké Balls
+- Files modified: `engine/items/item_effects.asm`
+- Problem identified: BUG-018, BUG-019 (TEST-044), found reading `PokeBallEffect`.
+- Root cause: operator precedence in a bit mask; a register used across a far call that returns its own value in it.
+- Solution implemented: `and ALL_STATUS`; the status bonus kept in `e` for the Catch Charm.
+- Behaviour preserved: no status gives no bonus; ball multipliers, the HP factor, critical capture and the 255 cap are unchanged.
+- Performance impact: none. Memory impact: 1 byte more (675,166 free).
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-044, full suite.
+- Test results: all pass.
+- Remaining risks: none known.
+- Git commit message: `fix: give every status its catch bonus and make the Catch Charm add it again`
+- Next task: Phase 3, move effects, fainting, end-of-turn effects, dual abilities.
 
 ## 31. Outstanding Issues
 
