@@ -1026,18 +1026,18 @@ Complete the project systematically using the following phases.
 
 ### Phase 10 — Comprehensive Regression Testing
 
-- [ ] Perform full repository build.
-- [ ] Run available automated tests.
-- [ ] Run available data-validation scripts.
-- [ ] Perform available emulator tests.
-- [ ] Test custom battle mechanic interactions.
-- [ ] Test battle AI.
-- [ ] Test overworld systems.
-- [ ] Test menus.
-- [ ] Test save compatibility.
-- [ ] Test battle facilities.
-- [ ] Review hardware compatibility.
-- [ ] Document outstanding manual testing requirements.
+- [x] Perform full repository build.
+- [x] Run available automated tests.
+- [x] Run available data-validation scripts.
+- [x] Perform available emulator tests.
+- [x] Test custom battle mechanic interactions.
+- [x] Test battle AI.
+- [x] Test overworld systems.
+- [x] Test menus.
+- [x] Test save compatibility.
+- [x] Test battle facilities (opponent loading, pool boundaries and data; MT-003 covers the room).
+- [x] Review hardware compatibility.
+- [x] Document outstanding manual testing requirements (Section 32).
 
 ### Phase 11 — Final Independent Review
 
@@ -1103,12 +1103,12 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 ## 25. Current Project Status
 
 - Overall status: In progress
-- Current phase: Phase 10 (regression testing). Phases 1–9 complete.
-- Current task: clean release/debug builds, full regression suite, validators and disposable-save emulator checks.
+- Current phase: Phase 11 (final independent review). Phases 1–10 complete.
+- Current task: verify linked call targets, saved layouts, table contents and end-to-end performance against the baseline, then reconcile the final report.
 - Current AI agent: Codex
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: BUG-025, Linux, RGBDS 0.7.0, 670,307 bytes free, 0 incremental build warnings
-- Last completed task: recoil move scoring (TEST-097)
+- Last completed task: Phase 10 (TEST-098–100). Real CGB emulator coverage now includes save recovery.
 - Last verified commit: see the BUG-025 work log and Git history
 - Outstanding blockers: none
 - Next task: Phases 10–11, including a fresh comparison against the buildable baseline.
@@ -1315,6 +1315,9 @@ Maintain the following table.
 | TEST-095 | Far list lookup | `test_far_byte_list`: `IsInFarByteList` on the longest ability list in a ROMX bank: every listed value matches (carry, z, a = e = value, hl just past it) and unlisted ones do not (no carry, nz, a = $ff, hl past the terminator); bc and d preserved; the ROM bank restored | Interpreter | Passed | 10/10. |
 | TEST-096 | AI knockout scoring | Run AI_Basic with one, two and four moves, at 24/25/26 of 100 HP, with Recover, Slack Off or no healing, against awake and sleeping targets. Check scores and the last move slot read. | Interpreter, test_ai_basic_ko | Passed | 23/40 before, 40/40 after. Iron Dukes (14), Contrary (5), Magic Bounce (26) and Leaf Guard (35) also passed. |
 | TEST-097 | Smart AI recoil | Dispatch Tackle and Double-Edge through AI_Smart at 49/50/51 of 100 HP. Check all four scores and trap writes to $4000–$7fff for an ordinary species, Aerodactyl and suppressed Aerodactyl. | Interpreter, test_ai_smart_recoil | Passed | 8/18 before, including writes to $6180 on the old build. 18/18 after. TEST-096 (40) and Iron Dukes (14) still pass. |
+| TEST-098 | Release and debug regression | Clean Linux build of archived `184ec0a2d` with RGBDS 0.7.0, then all 136 local test scripts with their required inputs. | Build, interpreter, ROM and file comparisons | Passed | The incremental and clean release images are identical. Both configurations linked. Eleven graphics warnings match the reconstructed baseline exactly. Zero assembler warnings. The debug-only animation test covered 252 moves on both sides (10/10). |
+| TEST-099 | Data, overworld, battle and facilities | All 15 available `validate_*.py` scripts, raw metatile and collision comparison, screen comparison, type-chart equivalence, storage encoding and facility generation. | Validators, linked ROM data and interpreter | Passed | 307 maps matched for both rendered screens (1,941,120 cells) and map blocks including collision (6,385,600 cells). 971 compressed assets matched source. Chart 769/769 and rounding order 240/240. Storage 41/41, Tower pool boundaries 9/9 and opponent load 6/6. |
+| TEST-100 | Cross-version battery saves | Boot the baseline to a new game in PyBoy 2.9.0 in CGB mode. Save a known party, inventory and player state. Boot the release through Continue, resave and load in the baseline. Repeat with the primary checksum damaged. | Headless emulator, real save routines, disposable in-memory cartridge RAM | Passed | Both directions reached the overworld and Start menu. Checked trainer ID, name, money, options, items, party, map and event flags. The damaged primary took the backup path and recovered a valid primary checksum. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -2000,6 +2003,14 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - In `engine/battle/ai/layers/ai_smart.asm`, check HP first, load the active enemy species, and save HL across the ability lookup. Documented how the dispatcher's temporary return address and move cursor work. The four recoil effects still use the same handler. The existing half-HP comparison includes equality.
 - TEST-097 reproduced the stray write with the previous ROM. The fix preserves the Rock Head exemption and Neutralizing Gas interaction. Release ROM costs five bytes with identical RAM usage. Rebuilt and reran TEST-096 and the Iron Dukes score checks. The regression script lives in the local romtest harness.
 - Commit: `fix: apply the recoil AI penalty to the selected move`. Next: Phase 10.
+
+### PHASE10-CLOSE — Release and debug regression gate
+
+- 2026-11-25. Build from fresh source with `make -j3 all d` (the debug target is `d`). TEST-098–100 passed. The historical suite count was 137. This checkout contained 134 scripts before adding TEST-096/097. The final run counts the 136 actually present.
+- Ran the release tests in the populated build directory so asset checks could find the generated files. Supplied the buildable audit baseline to comparisons, the debug image and its symbols to the animation test, and Pillow for graphics checks. For the contest size assertion, built the baseline with the judging routine from before `24a7acb60`. The comparison passed all 300 contests and measured 747 to 692 bytes. The audit-baseline comparison independently matched the same 300 outcomes.
+- Updated two local harness checks. The map comparison now reads the linked little-endian length and raw metatile/attribute bytes instead of decompressing them. The base-stat validator obtains item IDs from the repository constants instead of a previous session's temporary JSON file. The existing reviewed content exceptions remain in the validators.
+- Added `tools/test_save_compat.py` so the emulator test can run in a fresh checkout with PyBoy and matching symbol files. Run `python tools/test_save_compat.py OLD/johtofrontier.gbc NEW/johtofrontier.gbc`. It boots through the normal menus and calls the save routine on the emulated CPU. ROM, SRAM and RTC writes are private to the test.
+- Section 32 remains the play-test list. The emulator results cover boot, the overworld, menus and saving. Link play, the visual cases and physical timing are still open. Commit: `test: verify cross-version saves and close the regression phase`. Next: the final independent review.
 
 ## 31. Outstanding Issues
 
