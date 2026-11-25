@@ -980,8 +980,8 @@ Complete the project systematically using the following phases.
 - [x] Investigate duplicate routines.
 - [x] Investigate duplicate data.
 - [x] Investigate unused code.
-- [ ] Investigate unused variables.
-- [ ] Investigate safe memory sharing.
+- [x] Investigate unused variables.
+- [x] Investigate safe memory sharing.
 - [x] Record memory savings.
 
 ### Phase 7 — Overworld and Interface
@@ -1103,8 +1103,8 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 ## 25. Current Project Status
 
 - Overall status: In progress
-- Current phase: Phase 5 (CPU performance)
-- Current task: Phase 5: profile frequently executed routines (battle and overworld)
+- Current phase: Phase 7/8 (overworld, interface and data)
+- Current task: data validators (wild encounters, trainers, Pokémon, maps, marts)
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
@@ -1268,6 +1268,7 @@ Maintain the following table.
 | TEST-060 | Memory utilisation | ROM, WRAM, HRAM and SRAM free space per bank from the build map | Python over `johtofrontier.map` | Passed (measured) | ROM0 322 bytes free; ROMX 642,049 bytes free over 125 banks (43 banks have under 256 bytes free, 9 are nearly empty); WRAM0 32 (MEM-005); WRAMX bank 2: 84, bank 5: 112, banks 1/3/4/6/7: 0; HRAM 2; SRAM bank 0: 544, bank 1: 41, banks 2/3: 14 each. ROM is not a constraint; RAM is (any new RAM must come from reuse). |
 | TEST-061 | Unused code | Global code labels referenced nowhere, excluding those reached by falling through from the code above and names built by macros (`MSim_\\1...`, tileset `\\1Anim`) | Python over the sources and `.sym` file, each hit read | Passed | 88 unreferenced labels, nearly all reached by fall-through. Truly dead: `IsUnawareRaw` and `SetSpecificDecorationFlag` (removed, MEM-006). |
 | TEST-062 | Duplicate code and data | Routines with identical bodies (6+ instructions, local labels normalised, ending in their own `ret`/jump) | Python over `engine/` and `home/`, each group read | Passed | 15 groups. Merged: the five `FillBoxWithByte` copies (home version reachable from every bank) and four same-bank twins (MEM-007). Left as they are: copies kept in a different bank on purpose to avoid far calls (`DoubleDamage`/`MSim_DoubleDamage`, the `*WaitHBlank` helpers, `Finish_Boost`/`FinishBoost`, the Pokédex fill helpers, `ClearTilemapEtc`...), and the two stat multiplier tables (documented duplicates, one per bank that reads them). |
+| TEST-063 | RAM sharing | Review of how WRAM is shared and of the remaining "unused" names from TEST-059 | Read `ram/wram.asm` sections and unions | Passed | WRAM is already shared heavily through `SECTION UNION` (battle, link, Battle Tower, time-set, mail, contest, mart and PC buffers overlap). The remaining unused names are either inside union members that are not the largest (removing them frees nothing) or inside blocks copied or saved as a whole (map header, tileset header, encounter rates, item pockets, breed and roam structs), where removing a field would shift the layout. None removed beyond MEM-005. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
