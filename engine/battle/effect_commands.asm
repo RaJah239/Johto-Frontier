@@ -2346,15 +2346,6 @@ IsUnaware:
 	call IsInAbilityList
 	jmp PopBCDEHL
 
-IsUnawareRaw:
-; The same, even when suppressed (for its popup: Neutralizing Gas's shows).
-	push hl
-	push de
-	push bc
-	ld hl, UnawarePokemon
-	call IsInByteArray
-	jmp PopBCDEHL
-
 IsAttackerUnaware:
 ; Carry if the mon whose turn it is (hBattleTurn) has Unaware.
 	call GetCurrentMon

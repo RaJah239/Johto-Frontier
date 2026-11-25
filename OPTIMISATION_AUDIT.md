@@ -973,13 +973,13 @@ Complete the project systematically using the following phases.
 
 ### Phase 6 — ROM and RAM Optimisation
 
-- [ ] Audit ROM bank utilisation.
-- [ ] Audit WRAM bank utilisation.
-- [ ] Audit HRAM utilisation.
-- [ ] Audit SRAM utilisation.
+- [x] Audit ROM bank utilisation.
+- [x] Audit WRAM bank utilisation.
+- [x] Audit HRAM utilisation.
+- [x] Audit SRAM utilisation.
 - [ ] Investigate duplicate routines.
 - [ ] Investigate duplicate data.
-- [ ] Investigate unused code.
+- [x] Investigate unused code.
 - [ ] Investigate unused variables.
 - [ ] Investigate safe memory sharing.
 - [ ] Record memory savings.
@@ -1191,6 +1191,7 @@ Maintain the following table.
 | MEM-003 | ROMX | BUG-006 rewrite of `StatsScreen_PrintEVs` (one shared print helper instead of six copied blocks) | 674,986 bytes free | 675,214 bytes free | 228 | Build `free_space.awk` |
 | MEM-004 | ROMX | Stray byte after three ability-list terminators removed (TEST-035) | 675,209 bytes free | 675,212 bytes free | 3 | Build `free_space.awk` |
 | MEM-005 | WRAM0 | Removed `wBoxPartialData` (480 bytes, unreferenced: a leftover from the old box-saving code) from the "Miscellaneous" union; the union now spans the battle data (448 bytes) | WRAM0: 0 bytes free | WRAM0: 32 bytes free ($CFE0-$CFFF) | 32 | Build map, full suite, overworld comparison |
+| MEM-006 | ROMX | Removed two dead routines: `IsUnawareRaw` (battle) and `SetSpecificDecorationFlag` (decorations) | 675,139 bytes free | 675,160 bytes free | 21 | Build, full suite |
 
 Use unique identifiers such as MEM-001, MEM-002 and MEM-003.
 
@@ -1263,6 +1264,8 @@ Maintain the following table.
 | TEST-057 | AI performance | Frame cost of the AI's per-turn move choice (`AI_SimMoveChoice`) and switch decision (`AI_MatchupSwitch`), baseline vs now | `perfkit.run_cycles` on three move sets and the test_ai_perf party | Passed (measured) | Move choice: Swords Dance plan 16.3 -> 11.0 frames, Recover/SD 5.7 -> 4.8, Hyper Beam set 7.6 -> 6.2. Switch decision: 25.9 -> 20.0 frames. All decisions unchanged (AI suite passes). |
 | TEST-058 | Overworld CPU cost | The overworld's measured per-event costs, to decide whether they need work | Baseline measurements (Section 24) and `test_map_blocks` | Passed (measured) | `LoadBlockData` worst case 0.27 frames (map change), the overworld tilemap redraw 0.16 frames, the VBlank BG-map row ~883 M-cycles: all within a frame with room to spare. No optimisation needed; the general gains (PERF-003/004) apply to the overworld too, and the overworld comparison stays identical. |
 | TEST-059 | RAM usage | Declared RAM labels referenced nowhere outside `ram/` | Python over all sources | Partially verified | 98 names; most are not really unused (union members, saved blocks with a fixed layout, arrays reached by offset such as `wMartItem2BCD`-`20BCD` and the PC item list, terminators). The one that freed space was `wBoxPartialData` (MEM-005). The rest of the list (e.g. `wUnusedBCDNumber`, `wBetaPoker*`, the `wBillsPC_*Pals3-5` slots) sit in unions or would not shrink a full section on their own; left for a later pass. |
+| TEST-060 | Memory utilisation | ROM, WRAM, HRAM and SRAM free space per bank from the build map | Python over `johtofrontier.map` | Passed (measured) | ROM0 322 bytes free; ROMX 642,049 bytes free over 125 banks (43 banks have under 256 bytes free, 9 are nearly empty); WRAM0 32 (MEM-005); WRAMX bank 2: 84, bank 5: 112, banks 1/3/4/6/7: 0; HRAM 2; SRAM bank 0: 544, bank 1: 41, banks 2/3: 14 each. ROM is not a constraint; RAM is (any new RAM must come from reuse). |
+| TEST-061 | Unused code | Global code labels referenced nowhere, excluding those reached by falling through from the code above and names built by macros (`MSim_\\1...`, tileset `\\1Anim`) | Python over the sources and `.sym` file, each hit read | Passed | 88 unreferenced labels, nearly all reached by fall-through. Truly dead: `IsUnawareRaw` and `SetSpecificDecorationFlag` (removed, MEM-006). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 

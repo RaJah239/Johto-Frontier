@@ -899,12 +899,6 @@ GetDecorationName_c_de:
 	ld l, e
 	jmp GetDecorationName
 
-SetSpecificDecorationFlag:
-	ld a, c
-	call GetDecorationID
-	ld b, SET_FLAG
-	jmp DecorationFlagAction
-
 GetDecorationID:
 	push hl
 	push de
