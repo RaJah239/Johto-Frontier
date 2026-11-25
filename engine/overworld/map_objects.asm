@@ -1501,14 +1501,8 @@ StepFunction_Delete:
 	jmp DeleteMapObject
 
 StepFunction_Bump:
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	dec [hl]
-	ret nz
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_FROM_MOVEMENT
-	ret
+; (same code as WaitStep_InPlace)
+	jmp WaitStep_InPlace
 
 StepFunction_Restore:
 	call ObjectStep_AnonJumptable

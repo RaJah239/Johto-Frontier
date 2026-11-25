@@ -524,21 +524,8 @@ endr
 	ret
 
 DebugColor_FillBoxWithByte:
-; For some reason, we have another copy of FillBoxWithByte here
-.row
-	push bc
-	push hl
-.col
-	ld [hli], a
-	dec c
-	jr nz, .col
-	pop hl
-	ld bc, SCREEN_WIDTH
-	add hl, bc
-	pop bc
-	dec b
-	jr nz, .row
-	ret
+; (same code as FillBoxWithByte)
+	jmp FillBoxWithByte
 DebugColor_PlaceCursor:
 	ld a, DEBUGTEST_BLACK
 	hlcoord 10, 0

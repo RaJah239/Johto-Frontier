@@ -572,13 +572,8 @@ TradeAnim_TubeToOT3:
 
 TradeAnim_TubeToOT6:
 TradeAnim_TubeToOT4:
-	call TradeAnim_FlashBGPals
-	ld hl, wFrameCounter
-	ld a, [hl]
-	and a
-	jmp z, TradeAnim_IncrementJumptableIndex
-	dec [hl]
-	ret
+; (same code as TradeAnim_TubeToOT2)
+	jr TradeAnim_TubeToOT2
 
 TradeAnim_TubeToOT5:
 	ld a, 90
@@ -636,13 +631,8 @@ TradeAnim_TubeToPlayer8:
 
 TradeAnim_TubeToPlayer2:
 TradeAnim_TubeToPlayer5:
-	call TradeAnim_FlashBGPals
-	ld hl, wFrameCounter
-	ld a, [hl]
-	and a
-	jmp z, TradeAnim_IncrementJumptableIndex
-	dec [hl]
-	ret
+; (same code as TradeAnim_TubeToOT2)
+	jmp TradeAnim_TubeToOT2
 
 TradeAnim_TubeToPlayer6:
 TradeAnim_TubeToPlayer7:
@@ -1548,12 +1538,8 @@ TradeAnim_WaitAnim:
 	ret
 
 TradeAnim_WaitAnim2:
-	ld hl, wFrameCounter
-	ld a, [hl]
-	and a
-	jmp z, TradeAnim_AdvanceScriptPointer
-	dec [hl]
-	ret
+; (same code as TradeAnim_WaitAnim)
+	jr TradeAnim_WaitAnim
 
 TradeLinkTubeTilemap: INCBIN "gfx/trade/link_cable.tilemap" ; 12x3
 TradeArrowRightGFX:   INCBIN "gfx/trade/arrow_right.2bpp"

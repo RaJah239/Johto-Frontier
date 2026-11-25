@@ -1,19 +1,6 @@
 Crystal_FillBoxCGB:
-; This is a copy of FillBoxCGB.
-.row
-	push bc
-	push hl
-.col
-	ld [hli], a
-	dec c
-	jr nz, .col
-	pop hl
-	ld bc, SCREEN_WIDTH
-	add hl, bc
-	pop bc
-	dec b
-	jr nz, .row
-	ret
+; (same code as FillBoxWithByte)
+	jmp FillBoxWithByte
 
 LoadOW_BGPal7::
 	ld hl, Palette_TextBG7

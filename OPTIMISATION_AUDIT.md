@@ -977,12 +977,12 @@ Complete the project systematically using the following phases.
 - [x] Audit WRAM bank utilisation.
 - [x] Audit HRAM utilisation.
 - [x] Audit SRAM utilisation.
-- [ ] Investigate duplicate routines.
-- [ ] Investigate duplicate data.
+- [x] Investigate duplicate routines.
+- [x] Investigate duplicate data.
 - [x] Investigate unused code.
 - [ ] Investigate unused variables.
 - [ ] Investigate safe memory sharing.
-- [ ] Record memory savings.
+- [x] Record memory savings.
 
 ### Phase 7 — Overworld and Interface
 
@@ -1192,6 +1192,7 @@ Maintain the following table.
 | MEM-004 | ROMX | Stray byte after three ability-list terminators removed (TEST-035) | 675,209 bytes free | 675,212 bytes free | 3 | Build `free_space.awk` |
 | MEM-005 | WRAM0 | Removed `wBoxPartialData` (480 bytes, unreferenced: a leftover from the old box-saving code) from the "Miscellaneous" union; the union now spans the battle data (448 bytes) | WRAM0: 0 bytes free | WRAM0: 32 bytes free ($CFE0-$CFFF) | 32 | Build map, full suite, overworld comparison |
 | MEM-006 | ROMX | Removed two dead routines: `IsUnawareRaw` (battle) and `SetSpecificDecorationFlag` (decorations) | 675,139 bytes free | 675,160 bytes free | 21 | Build, full suite |
+| MEM-007 | ROMX | Duplicate routines merged into one copy each (TEST-062): five copies of `FillBoxWithByte` in other banks now jump to the home-bank one; `TradeAnim_TubeToOT4`/`TubeToPlayer5` jump to `TubeToOT2`, `TradeAnim_WaitAnim2` to `WaitAnim`, `StepFunction_Bump` to `WaitStep_InPlace` | 675,160 bytes free | 675,264 bytes free | 104 | Build, full suite, trade animation checks |
 
 Use unique identifiers such as MEM-001, MEM-002 and MEM-003.
 
@@ -1266,6 +1267,7 @@ Maintain the following table.
 | TEST-059 | RAM usage | Declared RAM labels referenced nowhere outside `ram/` | Python over all sources | Partially verified | 98 names; most are not really unused (union members, saved blocks with a fixed layout, arrays reached by offset such as `wMartItem2BCD`-`20BCD` and the PC item list, terminators). The one that freed space was `wBoxPartialData` (MEM-005). The rest of the list (e.g. `wUnusedBCDNumber`, `wBetaPoker*`, the `wBillsPC_*Pals3-5` slots) sit in unions or would not shrink a full section on their own; left for a later pass. |
 | TEST-060 | Memory utilisation | ROM, WRAM, HRAM and SRAM free space per bank from the build map | Python over `johtofrontier.map` | Passed (measured) | ROM0 322 bytes free; ROMX 642,049 bytes free over 125 banks (43 banks have under 256 bytes free, 9 are nearly empty); WRAM0 32 (MEM-005); WRAMX bank 2: 84, bank 5: 112, banks 1/3/4/6/7: 0; HRAM 2; SRAM bank 0: 544, bank 1: 41, banks 2/3: 14 each. ROM is not a constraint; RAM is (any new RAM must come from reuse). |
 | TEST-061 | Unused code | Global code labels referenced nowhere, excluding those reached by falling through from the code above and names built by macros (`MSim_\\1...`, tileset `\\1Anim`) | Python over the sources and `.sym` file, each hit read | Passed | 88 unreferenced labels, nearly all reached by fall-through. Truly dead: `IsUnawareRaw` and `SetSpecificDecorationFlag` (removed, MEM-006). |
+| TEST-062 | Duplicate code and data | Routines with identical bodies (6+ instructions, local labels normalised, ending in their own `ret`/jump) | Python over `engine/` and `home/`, each group read | Passed | 15 groups. Merged: the five `FillBoxWithByte` copies (home version reachable from every bank) and four same-bank twins (MEM-007). Left as they are: copies kept in a different bank on purpose to avoid far calls (`DoubleDamage`/`MSim_DoubleDamage`, the `*WaitHBlank` helpers, `Finish_Boost`/`FinishBoost`, the Pokédex fill helpers, `ClearTilemapEtc`...), and the two stat multiplier tables (documented duplicates, one per bank that reads them). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1787,6 +1789,7 @@ Do not silently ignore unresolved issues.
 - The suite is a usable regression gate again (TEST-004). The four comparison tests (`test_bug_contest_judging`, `test_map_render_same`, `test_overworld_screen_same`, `test_type_chart_scan`) should be run with the baseline ROM as the older build after any change to those systems. `test_view_animations` needs a debug build. `test_map_render_same` is stale (written for the removed LZP format) and should be rewritten or retired; `test_overworld_screen_same` covers the same ground (TEST-010).
 - Phase 2 is complete as far as static checks and the interpreter can take it (TEST-005, 009, 011-020; BUG-003 to BUG-008). Crashes or freezes that depend on real-hardware timing can only be found with the manual checklist (Section 32).
 - Phase 4 open item: the AI switch decision is still ~20 frames in the worst case. Its biggest remaining cost is the linear type-chart scan per damage estimate (~18%); an index by attacking type would need the three charts regrouped (normal, inverse, none). Not done yet.
+- Tooling note: on the mounted Windows working copy, `core.checkStat=minimal` lets `git status`/`git diff` miss edits made from Linux. Stage edited files explicitly (`git add <file>`) and take diffs with `git diff --cached`; a byte comparison of the tree against a fresh clone of HEAD (2026-11-25) found nothing uncommitted.
 - No emulator or physical hardware is available here: VBlank/HBlank timing, DMA and real-hardware behaviour can only be checked in the interpreter with emulated hooks. Anything timing-sensitive needs manual emulator testing (Section 32).
 - WRAM0 now has 32 bytes free (MEM-005); WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
 
