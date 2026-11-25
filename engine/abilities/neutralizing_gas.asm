@@ -52,6 +52,8 @@ UpdateNeutralizingGas::
 	ld c, a
 	ld a, b
 	ld [wNeutralizingGas], a
+	cp c
+	call nz, .RecalcStats
 	; c = suppressed before, b = now: the sides that are free again
 	ld a, b
 	cpl
@@ -65,6 +67,23 @@ UpdateNeutralizingGas::
 	bit 1, a
 	ret z
 	set ENTRY_ABILITIES_ENEMY_F, [hl]
+	ret
+
+.RecalcStats:
+; Guts and Resilience act on the battle stats: work both sides' stats out
+; again now that a different side is suppressed. Preserves bc.
+	push bc
+	ldh a, [hBattleTurn]
+	push af
+	xor a
+	ldh [hBattleTurn], a
+	farcall CalcPlayerStats
+	ld a, 1
+	ldh [hBattleTurn], a
+	farcall CalcEnemyStats
+	pop af
+	ldh [hBattleTurn], a
+	pop bc
 	ret
 
 AnnounceNeutralizingGas::

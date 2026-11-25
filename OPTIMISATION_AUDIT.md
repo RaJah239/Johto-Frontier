@@ -930,11 +930,11 @@ Complete the project systematically using the following phases.
 - [x] Audit speed and priority.
 - [x] Audit stat calculations.
 - [x] Audit status conditions.
-- [ ] Audit abilities.
+- [x] Audit abilities.
 - [ ] Audit dual-ability interactions.
 - [x] Audit held items.
 - [x] Audit weather.
-- [ ] Audit entry hazards.
+- [x] Audit entry hazards.
 - [ ] Audit switching.
 - [ ] Audit fainting.
 - [ ] Audit end-of-turn effects.
@@ -1104,11 +1104,11 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - Overall status: In progress
 - Current phase: Phase 3 (battle engine correctness)
-- Current task: Phase 3: entry hazards (two design questions open), then switching, fainting, end-of-turn effects
+- Current task: Phase 3: switching, fainting, end-of-turn effects
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
-- Last completed task: BATTLE-005 (BUG-014)
+- Last completed task: BATTLE-006 (BUG-015, BUG-016)
 - Last verified commit: `d007b16f8` (full suite: 105 scripts, 95 fully passing, the rest profilers/comparisons)
 - Outstanding blockers: none
 - Next task: Phase 3 checklist
@@ -1135,6 +1135,8 @@ Maintain the following table throughout the project.
 | BUG-012 | Battle stats (Choice Scarf) | `ApplyChoiceScarfEffectOnSpeed` added Speed/2 to Speed with the bytes in the wrong order: the high byte was added first and its (never-set) carry went into the low byte, so a carry out of the low byte was lost. Whenever the low byte plus half the Speed passed 255, the boosted Speed came out 256 too low: e.g. 200 Speed became 44 instead of 300, so a Scarf holder was often far slower than without the Scarf. Affects every Speed from 171 up where the low byte overflows (about a third of values), for both sides and for the AI's speed checks that use the same stats. | High | Fixed | `test_battle_stats` (Choice Scarf wrong from Speed 171 up on the baseline, both sides; exact x1.5 for Speed 1-399 and 600-999 after) |
 | BUG-013 | Battle weather | Solar Beam was not weakened in hail. The entry `WEATHER_HAIL, EFFECT_SOLARBEAM, NOT_VERY_EFFECTIVE` sat in `WeatherTypeModifiers`, which compares the move's type, so it compared the type against `EFFECT_SOLARBEAM` (115, no type has that ID) and never matched. The rain entry for Solar Beam is correctly in `WeatherMoveModifiers`. | Low | Fixed | `test_weather_modifiers` (Solar Beam in hail 100 -> 100 on the baseline, 100 -> 50 after, both sides) |
 | BUG-014 | Battle weather (Magic Guard) | Magic Guard did not protect from hail. `HandleWeather`'s sandstorm damage skips Magic Guard Pokémon, but its hail damage only checked Overcoat, so a Magic Guard Pokémon lost 1/16 HP a turn in hail. The AI's matchup simulator already treats Magic Guard as blocking both weathers, so the AI's predictions were wrong too. | Medium | Fixed | `test_weather_damage` (Magic Guard took hail damage on the baseline, both sides; immune after) |
+| BUG-015 | Entry hazards (data) | `SpikesImmunePokemon` still named 27 species as having Levitate or Magic Guard after those abilities were taken off them, so they kept floating over Spikes. Cut down to match the ability lists (Mew), with the rest kept as comments like the ability lists (approved by the user). | Medium | Fixed | `test_ng_passives` (Gengar and Clefable took no Spikes damage on the baseline; 1/8 after; Mew still immune) |
+| BUG-016 | Abilities (Neutralizing Gas) | Guts, Resilience and the Spikes immunity kept working under Neutralizing Gas, unlike every other ability. They now use `IsInAbilityList`, and `UpdateNeutralizingGas` recalculates both sides' battle stats whenever the suppressed side changes, so Guts and Resilience switch off (and back on) at once (approved by the user). | Medium | Fixed | `test_ng_passives` (all suppressed cases failed on the baseline; 9/9 after) |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1234,6 +1236,7 @@ Maintain the following table.
 | TEST-038 | Battle weather | `test_weather_modifiers`: `DoWeatherModifiers` for rain and sun type boosts and penalties, Solar Beam in rain, hail and sun, other moves in hail, no weather | Interpreter, both sides | Passed | 16/18 on the baseline (BUG-013), 18/18 after. Full suite unchanged otherwise (118 scripts). |
 | TEST-039 | Battle weather (end of turn) | `test_weather_damage`: `HandleWeather` sandstorm and hail damage (1/16), immunity of Rock/Ground/Steel to sand (either type slot), Ice to hail, Magic Guard and Overcoat to both | Interpreter, both sides | Passed | 16/18 on the baseline (BUG-014), 18/18 after. Full suite unchanged otherwise (119 scripts). |
 | TEST-040 | Entry hazards (data) | `SpikesImmunePokemon` against the lists it must mirror (its own comment and `levitate_mons.asm` both say so): Levitate plus Magic Guard | Python comparison of the three lists | Partially verified | Out of step: Levitate now has only Mew and Magic Guard is empty (both had species commented out), but the Spikes list still names 27 species as levitating or Magic Guard (Charizard, Gastly line, Magnemite line, Koffing/Weezing, Bronzor/Bronzong, Misdreavus/Mismagius, Solrock/Lunatone/Claydol, Unown, Victini, Celebi, Clefairy/Clefable, and more). They stay immune to Spikes without the ability. Left unchanged pending a decision (Section 31). The hazard code itself: Hazard Guard and Heavy-Duty Boots skip all hazards, Flying types skip Spikes, Magic Guard skips Stealth Rock, Stealth Rock scales with type matchup. |
+| TEST-041 | Abilities, entry hazards | `test_ng_passives`: Guts (burn) and Resilience (paralysis) with and without Neutralizing Gas suppressing them; Neutralizing Gas coming in recalculates the stats; Spikes against Mew (Levitate), suppressed Mew, Gengar and Clefable | Interpreter | Passed | 3/9 on the baseline, 9/9 after. Full suite unchanged otherwise (120 scripts). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1582,6 +1585,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Git commit message: `fix: let Magic Guard block hail damage as it does sandstorm`
 - Next task: Phase 3, entry hazards.
 
+### BATTLE-006 — Neutralizing Gas and the passive abilities; Spikes immunity list
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 3 (abilities, entry hazards)
+- System: Abilities, entry hazards, battle stats
+- Files modified: `engine/battle/core.asm`, `engine/abilities/neutralizing_gas.asm`, `data/residual_damage/spike_immune_mons.asm`
+- Problem identified: BUG-015, BUG-016 (TEST-036, TEST-040); both decided by the user.
+- Root cause: lists and checks written before Neutralizing Gas, and an ability-list change not carried over to the Spikes list.
+- Solution implemented: `IsInAbilityList` for Guts, Resilience and the Spikes immunity; `UpdateNeutralizingGas` recalculates both sides' stats when the suppressed side changes (`CalcPlayerStats`/`CalcEnemyStats` with `hBattleTurn` set for each, then restored); Spikes list matches Levitate + Magic Guard.
+- Behaviour preserved: no stats change unless Neutralizing Gas starts or stops suppressing a side; stat stages, items and statuses are reapplied exactly as after any stat change.
+- Performance impact: one stat recalculation when the suppression changes. Memory impact: 15 bytes more (675,197 free).
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-041, full suite.
+- Test results: all pass.
+- Remaining risks: see MT-007.
+- Git commit message: `fix: let Neutralizing Gas switch off Guts, Resilience and the Spikes immunity, and match the Spikes list to the abilities`
+- Next task: Phase 3, switching and fainting.
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -1602,8 +1624,6 @@ Do not silently ignore unresolved issues.
 - The interpreter tests live in the git-excluded `.claude-tools/romtest` folder, so fixes to them are recorded here but are not part of the repository history.
 - The suite is a usable regression gate again (TEST-004). The four comparison tests (`test_bug_contest_judging`, `test_map_render_same`, `test_overworld_screen_same`, `test_type_chart_scan`) should be run with the baseline ROM as the older build after any change to those systems. `test_view_animations` needs a debug build. `test_map_render_same` is stale (written for the removed LZP format) and should be rewritten or retired; `test_overworld_screen_same` covers the same ground (TEST-010).
 - Phase 2 is complete as far as static checks and the interpreter can take it (TEST-005, 009, 011-020; BUG-003 to BUG-008). Crashes or freezes that depend on real-hardware timing can only be found with the manual checklist (Section 32).
-- Awaiting your decision (ambiguous gameplay, TEST-036): should Neutralizing Gas also switch off Guts (no Attack drop when burned), Resilience (no stat drops from status) and the Spikes immunity? They currently keep working under it, unlike every other ability. Changing it means recalculating stats when Neutralizing Gas comes in or leaves.
-- Awaiting your decision (data, TEST-040): the Spikes immunity list still has 27 species that no longer have Levitate or Magic Guard (both lists were cut down, the Spikes list was not). Should it be cut to match (Mew only, plus any future Levitate/Magic Guard species)? That makes those 27 species take Spikes damage.
 - No emulator or physical hardware is available here: VBlank/HBlank timing, DMA and real-hardware behaviour can only be checked in the interpreter with emulated hooks. Anything timing-sensitive needs manual emulator testing (Section 32).
 - WRAM0 and WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
 
@@ -1631,6 +1651,8 @@ Make manual testing instructions sufficiently clear for the user to perform with
 - **MT-005 Nickname a gift Pokémon that goes to the PC (BUG-008).** Setup: a full party of six. Steps: receive any gift Pokémon that offers a nickname (a `givepoke` event without a fixed OT, e.g. an Egg or starter-style gift); answer YES to the nickname prompt. Expected: the naming screen opens with the Pokémon's icon and gender symbol; finishing returns to the game and the message says it was sent to the PC. Failure (old build): the game freezes as the naming screen opens.
 
 - **MT-006 Link battle with Haxorus (BUG-010).** Setup: two copies of the game linked (two emulators with link support, or two consoles), one player with a Haxorus. Steps: in a link battle, get Haxorus a status (burn, poison, paralysis) and play several turns. Expected: both screens always agree on whether Tenacity cured the status, and the battle continues in sync to the end. Failure (old build): the screens disagree and the battle desyncs.
+
+- **MT-007 Neutralizing Gas and Spikes (BUG-015, BUG-016).** Setup: a battle with Spikes on your side, and an opponent with a Neutralizing Gas Pokémon. Steps: send in Gengar or Clefable (should now take Spikes damage); send in a Guts Pokémon that is burned, then let the foe's Neutralizing Gas Pokémon come in. Expected: Spikes damage the former Levitate/Magic Guard species; the burned Guts Pokémon's Attack drops while the gas is out and comes back when it leaves. Failure: no Spikes damage, or Guts still active under the gas.
 
 ## 33. Final Deliverables
 

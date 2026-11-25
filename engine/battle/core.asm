@@ -3539,7 +3539,7 @@ SpikesDamage:
 	push bc
 	call GetCurrentMon
 	ld hl, SpikesImmunePokemon
-	call IsInByteArray
+	call IsInAbilityList ; (not while Neutralizing Gas suppresses it)
 	pop bc
 	pop de
 	pop hl
@@ -6444,7 +6444,7 @@ DoesMonHaveResilience:
 	push de
 	push bc
 	ld hl, Core_ResiliencePokemon
-	call IsInByteArray
+	call IsInAbilityList ; (not while Neutralizing Gas suppresses it)
 	pop bc
 	pop de
 	pop hl
@@ -6464,7 +6464,7 @@ DoesMonHaveGuts:
 	push de
 	push bc
 	ld hl, Core_GutsPokemon
-	call IsInByteArray
+	call IsInAbilityList ; (not while Neutralizing Gas suppresses it)
 	pop bc
 	pop de
 	pop hl
