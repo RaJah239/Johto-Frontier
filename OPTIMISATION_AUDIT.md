@@ -936,9 +936,9 @@ Complete the project systematically using the following phases.
 - [x] Audit weather.
 - [x] Audit entry hazards.
 - [x] Audit switching.
-- [ ] Audit fainting.
+- [x] Audit fainting.
 - [x] Audit end-of-turn effects.
-- [ ] Audit move effects.
+- [x] Audit move effects.
 - [x] Audit experience.
 - [x] Audit level scaling.
 - [x] Audit capture mechanics.
@@ -1103,15 +1103,15 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 ## 25. Current Project Status
 
 - Overall status: In progress
-- Current phase: Phase 3 (battle engine correctness)
-- Current task: Phase 3: fainting, end-of-turn effects, move effects, dual-ability interactions
+- Current phase: Phase 4 (battle AI)
+- Current task: Phase 4: battle AI audit and the AI's execution speed
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
 - Last completed task: BATTLE-008 (BUG-018, BUG-019)
 - Last verified commit: `d007b16f8` (full suite: 105 scripts, 95 fully passing, the rest profilers/comparisons)
 - Outstanding blockers: none
-- Next task: Phase 3 checklist
+- Next task: Phase 4 checklist, then Phase 5 (CPU performance)
 
 Update this section continuously.
 
@@ -1248,6 +1248,8 @@ Maintain the following table.
 | TEST-047 | Move data | All 253 moves: status moves have power 0, damaging moves have power unless their effect sets the damage itself, accuracy and effect chance at most 100%; effect constants used by no move | Python over `data/moves/moves.asm` and the effect constants | Passed | No inconsistencies. 20 effect constants are used by no move (mostly pokecrystal leftovers such as the single-stat +1/-1 effects, `EFFECT_MIMIC`, `EFFECT_POISON_MULTI_HIT`); some may still be used by items or the AI. Noted for Phase 6 (ROM space). |
 | TEST-048 | End-of-turn effects | Order of `HandleBetweenTurnEffects` and the faint checks around it | Code read of `HandleBetweenTurnEffects`, `FarTurnEndEffects` and `TurnEndAbilities` | Passed | Every step that can knock a Pokémon out (Solar Power, weather, binding, Perish Song) is followed by a faint check in link order. Leftovers, the far effects (Mysteryberry, stat and weather items, Snow Cloak, Safeguard/Mist/screens, Flame/Toxic Orb, Trick Room, Encore), turn-end abilities, healing items and Unburden only heal, count down or inflict a status, so they need none; status damage itself comes from `ResidualDamage` after each move (TEST-033). |
 | TEST-049 | Dual-ability interactions (Mold Breaker, Neutralizing Gas) | The abilities `mold_breaker.asm` says Mold Breaker ignores (Levitate, Sturdy, Unaware, Multiscale, Flame Ward, Grounded, Waterproof, Immunity, Thick Fat, Pillow Fort, Chrysalis Hide) each checked for a Mold Breaker check where they act; the damage modifiers not on that list (Solid Rock, Fur Coat, Tinted Lens) checked against the AI's copy | Code read with a Python cross-reference | Passed | Every listed ability has its check (popup or silent), and the AI's damage estimate makes the same choices. Solid Rock and Fur Coat are deliberately not bypassed (not on the documented list, and the AI agrees). Levitate's other uses (Toxic Spikes, Sticky Web, HUD float icon) are not move-based, so Mold Breaker rightly does not apply. Neutralizing Gas interactions: TEST-036, TEST-041. |
+| TEST-050 | Move effects (structure) | All 155 effect scripts in `data/moves/effects.asm`: each starts with a turn check (or pokecrystal's `checkrampage`/`checkcharge`/`checkcurl` before it) and ends with `endmove`/`endturn`/`jump`; every script is referenced; the pointer table has one entry per effect constant, in order | Python over the effect scripts, pointer table and constants | Passed | 161 constants, 161 pointers, names line up, `assert_table_length NUM_MOVE_EFFECTS` in the source; no unreferenced or open-ended scripts. Behaviour of individual effects is covered by the regression suite (Teleport, Hyper Beam recharge, set-up moves, Speed Boost, Pain Split, Counter/Mirror Coat and others) and by TEST-023-047; the rest needs play-testing. |
+| TEST-051 | Fainting | Faint handling: `CheckFaint_PlayerThenEnemy`/`EnemyThenPlayer` after each damaging end-of-turn step (TEST-048), `HasUserFainted` guards in `ResidualDamage` (TEST-033), and the custom knock-out abilities (Aftermath, Moxie/Ignis/Flash Step/Blood Lust/Renewal/Life Drain) | Code read | Passed | Aftermath skips Counter/Mirror Coat and residual KOs, needs the attacker standing (`GetCurrentMon` returns `hl` = its HP), honours Magic Guard and Neutralizing Gas, and a KO it causes is picked up by the same post-move faint checks as recoil. KO abilities only fire for a standing user with their popups (Neutralizing Gas aware, TEST-036). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1652,6 +1654,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: none known.
 - Git commit message: `fix: give every status its catch bonus and make the Catch Charm add it again`
 - Next task: Phase 3, move effects, fainting, end-of-turn effects, dual abilities.
+
+### PHASE3-CLOSE — Battle engine correctness summary
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 3 (complete)
+- System: Battle engine
+- Files modified: this document (fixes are in their own commits)
+- Problem identified: Phase 3 found and fixed BUG-009 to BUG-019 (Super Luck, Tenacity/Quick Draw link RNG, Choice Scarf carry, Solar Beam in hail, Magic Guard and hail, Spikes list, Neutralizing Gas passives, experience overflow, catch-rate status mask, Catch Charm).
+- Root cause: see each bug.
+- Solution implemented: see each bug; 18 new reference tests (TEST-023 to TEST-051).
+- Behaviour preserved: every fix tested against the baseline ROM; full suite unchanged otherwise.
+- Performance impact: negligible. Memory impact: net about -40 bytes of ROM free since Phase 2 (fixes added a little code).
+- Build result: builds, 0 assembler warnings.
+- Tests performed: the full suite after every fix (122 scripts at the end).
+- Test results: all pass.
+- Remaining risks: individual move effects and link battles need play-testing (Section 32).
+- Git commit message: `docs: close Phase 3`
+- Next task: Phase 4, battle AI.
 
 ## 31. Outstanding Issues
 
