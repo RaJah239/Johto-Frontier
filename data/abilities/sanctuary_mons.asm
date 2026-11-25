@@ -3,4 +3,4 @@
 SanctuaryPokemon:
 ;	db LUGIA
 ;	db HO_OH
-	db -1, end
+	db -1 ; end

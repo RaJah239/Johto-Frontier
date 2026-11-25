@@ -1178,6 +1178,7 @@ Maintain the following table.
 | MEM-001 | ROMX | PERF-001 | 674,694 bytes free | 674,719 bytes free | 25 | Build `free_space.awk` |
 | MEM-002 | ROMX | PERF-002 | 674,719 bytes free | 674,986 bytes free | 267 | Build `free_space.awk` |
 | MEM-003 | ROMX | BUG-006 rewrite of `StatsScreen_PrintEVs` (one shared print helper instead of six copied blocks) | 674,986 bytes free | 675,214 bytes free | 228 | Build `free_space.awk` |
+| MEM-004 | ROMX | Stray byte after three ability-list terminators removed (TEST-035) | 675,209 bytes free | 675,212 bytes free | 3 | Build `free_space.awk` |
 
 Use unique identifiers such as MEM-001, MEM-002 and MEM-003.
 
@@ -1225,6 +1226,7 @@ Maintain the following table.
 | TEST-032 | 16-bit arithmetic | Scan for hand-written 16-bit adds/subtracts stored low address first with the carry going upwards (`add`/`sub`, store, pointer up, `adc`/`sbc`), the shape of BUG-012, which is wrong for the big-endian battle values | Python over `engine/` and `home/` | Passed | No other occurrence. |
 | TEST-033 | Status conditions (residual damage) | `test_residual_damage`: `ResidualDamage` for poison, burn and frostbite (1/16 max HP, at least 1), Toxic (n/16, rising), HP floor at 0, Magic Guard (no damage) | Interpreter, both sides; the test helper now redirects home-bank ability lists across the whole ROM (needed for Magic Guard) | Passed | 14/14. Full suite unchanged (117 scripts). |
 | TEST-034 | Status conditions (turn checks) | `BattleCommand_CheckTurn` (player) against `CheckEnemyTurn` with sides swapped: recharge, sleep countdown and waking, flinch, Disable and Taunt wearing off, confusion (1/3 self-hit), attraction (1/2), disabled move, Taunt block | Python diff as in TEST-021, differences read by hand | Passed | Same logic on both sides. Differences: the enemy shows "fast asleep" before the animation and the player after (as in pokecrystal); the player's confusion self-hit goes through `HitConfusion`, the enemy's is the same steps written out; sleep is checked with `and a` vs `and SLP_MASK`, equivalent because sleep excludes the other statuses. |
+| TEST-035 | Abilities (data) | All 138 species lists in `data/abilities/`: terminated with -1, no duplicate entries, every list referenced by the code | Python over the data and engine sources | Passed | No missing terminators, duplicates or unused lists. Three lists (`Sanctuary`, `Seedfall`, `SpinGuard`) ended `db -1, end`, which emitted a stray byte after the terminator (harmless); changed to `db -1 ; end` (MEM-004). Full suite unchanged (117 scripts). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 

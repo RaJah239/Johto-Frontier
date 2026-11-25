@@ -2,4 +2,4 @@
 
 SpinGuardPokemon:
 ;	db BLASTOISE
-	db -1, end
+	db -1 ; end
