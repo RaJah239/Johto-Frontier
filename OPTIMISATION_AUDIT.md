@@ -931,7 +931,7 @@ Complete the project systematically using the following phases.
 - [x] Audit stat calculations.
 - [x] Audit status conditions.
 - [x] Audit abilities.
-- [ ] Audit dual-ability interactions.
+- [x] Audit dual-ability interactions.
 - [x] Audit held items.
 - [x] Audit weather.
 - [x] Audit entry hazards.
@@ -1247,6 +1247,7 @@ Maintain the following table.
 | TEST-046 | Register use around held-item lookups | Every caller of `GetItemHeldEffect` checked for using `b`/`c` from before the call (it returns the effect and parameter in `bc`) | Read each of the 25 call sites | Passed | Only BUG-019. The rest want the returned effect/parameter or save `bc` around the call. |
 | TEST-047 | Move data | All 253 moves: status moves have power 0, damaging moves have power unless their effect sets the damage itself, accuracy and effect chance at most 100%; effect constants used by no move | Python over `data/moves/moves.asm` and the effect constants | Passed | No inconsistencies. 20 effect constants are used by no move (mostly pokecrystal leftovers such as the single-stat +1/-1 effects, `EFFECT_MIMIC`, `EFFECT_POISON_MULTI_HIT`); some may still be used by items or the AI. Noted for Phase 6 (ROM space). |
 | TEST-048 | End-of-turn effects | Order of `HandleBetweenTurnEffects` and the faint checks around it | Code read of `HandleBetweenTurnEffects`, `FarTurnEndEffects` and `TurnEndAbilities` | Passed | Every step that can knock a Pokémon out (Solar Power, weather, binding, Perish Song) is followed by a faint check in link order. Leftovers, the far effects (Mysteryberry, stat and weather items, Snow Cloak, Safeguard/Mist/screens, Flame/Toxic Orb, Trick Room, Encore), turn-end abilities, healing items and Unburden only heal, count down or inflict a status, so they need none; status damage itself comes from `ResidualDamage` after each move (TEST-033). |
+| TEST-049 | Dual-ability interactions (Mold Breaker, Neutralizing Gas) | The abilities `mold_breaker.asm` says Mold Breaker ignores (Levitate, Sturdy, Unaware, Multiscale, Flame Ward, Grounded, Waterproof, Immunity, Thick Fat, Pillow Fort, Chrysalis Hide) each checked for a Mold Breaker check where they act; the damage modifiers not on that list (Solid Rock, Fur Coat, Tinted Lens) checked against the AI's copy | Code read with a Python cross-reference | Passed | Every listed ability has its check (popup or silent), and the AI's damage estimate makes the same choices. Solid Rock and Fur Coat are deliberately not bypassed (not on the documented list, and the AI agrees). Levitate's other uses (Toxic Spikes, Sticky Web, HUD float icon) are not move-based, so Mold Breaker rightly does not apply. Neutralizing Gas interactions: TEST-036, TEST-041. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
