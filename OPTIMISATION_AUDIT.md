@@ -1104,7 +1104,7 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - Overall status: In progress
 - Current phase: Phase 3 (battle engine correctness)
-- Current task: Phase 3: abilities and dual-ability interactions
+- Current task: Phase 3: entry hazards (two design questions open), then switching, fainting, end-of-turn effects
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
@@ -1233,6 +1233,7 @@ Maintain the following table.
 | TEST-037 | Held items (data) | All 61 `HELD_*` effects: each given to an item in `data/items/attributes.asm` is handled somewhere, and none is handled without an item | Python over constants, item data and code | Passed | Only `HELD_NONE` (no effect) and `HELD_CLEANSE_TAG` have no handler by effect; the Cleanse Tag is checked by item ID in the wild-encounter code, as in pokecrystal. Held-item damage boosts are covered by TEST-024, stat items by TEST-031. |
 | TEST-038 | Battle weather | `test_weather_modifiers`: `DoWeatherModifiers` for rain and sun type boosts and penalties, Solar Beam in rain, hail and sun, other moves in hail, no weather | Interpreter, both sides | Passed | 16/18 on the baseline (BUG-013), 18/18 after. Full suite unchanged otherwise (118 scripts). |
 | TEST-039 | Battle weather (end of turn) | `test_weather_damage`: `HandleWeather` sandstorm and hail damage (1/16), immunity of Rock/Ground/Steel to sand (either type slot), Ice to hail, Magic Guard and Overcoat to both | Interpreter, both sides | Passed | 16/18 on the baseline (BUG-014), 18/18 after. Full suite unchanged otherwise (119 scripts). |
+| TEST-040 | Entry hazards (data) | `SpikesImmunePokemon` against the lists it must mirror (its own comment and `levitate_mons.asm` both say so): Levitate plus Magic Guard | Python comparison of the three lists | Partially verified | Out of step: Levitate now has only Mew and Magic Guard is empty (both had species commented out), but the Spikes list still names 27 species as levitating or Magic Guard (Charizard, Gastly line, Magnemite line, Koffing/Weezing, Bronzor/Bronzong, Misdreavus/Mismagius, Solrock/Lunatone/Claydol, Unown, Victini, Celebi, Clefairy/Clefable, and more). They stay immune to Spikes without the ability. Left unchanged pending a decision (Section 31). The hazard code itself: Hazard Guard and Heavy-Duty Boots skip all hazards, Flying types skip Spikes, Magic Guard skips Stealth Rock, Stealth Rock scales with type matchup. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1602,6 +1603,7 @@ Do not silently ignore unresolved issues.
 - The suite is a usable regression gate again (TEST-004). The four comparison tests (`test_bug_contest_judging`, `test_map_render_same`, `test_overworld_screen_same`, `test_type_chart_scan`) should be run with the baseline ROM as the older build after any change to those systems. `test_view_animations` needs a debug build. `test_map_render_same` is stale (written for the removed LZP format) and should be rewritten or retired; `test_overworld_screen_same` covers the same ground (TEST-010).
 - Phase 2 is complete as far as static checks and the interpreter can take it (TEST-005, 009, 011-020; BUG-003 to BUG-008). Crashes or freezes that depend on real-hardware timing can only be found with the manual checklist (Section 32).
 - Awaiting your decision (ambiguous gameplay, TEST-036): should Neutralizing Gas also switch off Guts (no Attack drop when burned), Resilience (no stat drops from status) and the Spikes immunity? They currently keep working under it, unlike every other ability. Changing it means recalculating stats when Neutralizing Gas comes in or leaves.
+- Awaiting your decision (data, TEST-040): the Spikes immunity list still has 27 species that no longer have Levitate or Magic Guard (both lists were cut down, the Spikes list was not). Should it be cut to match (Mew only, plus any future Levitate/Magic Guard species)? That makes those 27 species take Spikes damage.
 - No emulator or physical hardware is available here: VBlank/HBlank timing, DMA and real-hardware behaviour can only be checked in the interpreter with emulated hooks. Anything timing-sensitive needs manual emulator testing (Section 32).
 - WRAM0 and WRAMX banks 1, 3, 4, 6 and 7 are full; HRAM has 2 bytes free. Any feature or optimisation needing new RAM must reuse existing space.
 
