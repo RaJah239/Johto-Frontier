@@ -1,6 +1,6 @@
 	db RAPIDASH ; 111
 
-	db  105, 140,  55,  95,  30,  55 ; 485 BST
+	db  105, 140,  55,  95,  30,  55 ; 480 BST
 	evs   2,   3,   0,   2,   0,   0
 	;    hp  atk  def  spd  sat  sdf
 

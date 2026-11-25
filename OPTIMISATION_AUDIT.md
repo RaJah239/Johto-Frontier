@@ -1003,9 +1003,9 @@ Complete the project systematically using the following phases.
 
 ### Phase 8 — Data and Remaining Systems
 
-- [ ] Audit Pokémon data.
+- [x] Audit Pokémon data.
 - [ ] Audit move data.
-- [ ] Audit item data.
+- [x] Audit item data.
 - [x] Audit trainer data.
 - [x] Audit encounter data.
 - [ ] Audit battle facilities.
@@ -1104,14 +1104,14 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - Overall status: In progress
 - Current phase: Phase 7/8 (overworld, interface and data)
-- Current task: data validators (wild encounters, trainers, Pokémon, maps, marts)
+- Current task: Phase 8 move data, battle facilities and save system
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
-- Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
-- Last completed task: BATTLE-008 (BUG-018, BUG-019)
-- Last verified commit: `d007b16f8` (full suite: 105 scripts, 95 fully passing, the rest profilers/comparisons)
+- Last verified build: clone of `e1f9fb7b9` plus DATA-002, Linux, RGBDS 0.7.0, 0 assembler warnings, 675,252 bytes free (ROM byte-identical to `e1f9fb7b9`)
+- Last completed task: DATA-002 (map, item and base-stat validation)
+- Last verified commit: `e1f9fb7b9` (full suite: 127 scripts, no regressions against the previous run)
 - Outstanding blockers: none
-- Next task: Phase 5 checklist; Phase 4's remaining item (redundant calculations: type chart index) is noted
+- Next task: Phase 8 move data, battle facilities, save system; then Phase 7. Open earlier items: Phase 4 type-chart index, Phase 5 register usage
 
 Update this section continuously.
 
@@ -1272,6 +1272,11 @@ Maintain the following table.
 | TEST-063 | RAM sharing | Review of how WRAM is shared and of the remaining "unused" names from TEST-059 | Read `ram/wram.asm` sections and unions | Passed | WRAM is already shared heavily through `SECTION UNION` (battle, link, Battle Tower, time-set, mail, contest, mart and PC buffers overlap). The remaining unused names are either inside union members that are not the largest (removing them frees nothing) or inside blocks copied or saved as a whole (map header, tileset header, encounter rates, item pockets, breed and roam structs), where removing a field would shift the layout. None removed beyond MEM-005. |
 | TEST-064 | Encounter and trainer data | Wild data (`data/wild/*.asm`: grass, water, swarms) levels within 1-50 (this game's cap) and valid species; trainer parties (`parties.asm` and `scaled_teams/`) parsed with their type flags: levels 1-50 or `PARTY_LV`, valid species, items and moves, 1-6 Pokémon, nicknames where flagged | Python validators (`validate_trainers.py`) | Passed | 211 trainers, 365 Pokémon: no problems. The two empty parties are the "CAL" mirror trainers (they copy your party by design). |
 | TEST-065 | Pokémon data (evolutions, learnsets) | `test_evolutions`: every species' evolution list read from the ROM through `EvosAttacksPointers`: no self-evolution, only Magikarp evolves into Gyarados, the Porygon/Chansey families as their entries say; plus a source check that no evolution or learnset level exceeds 50 and learnsets are in order | Interpreter-free ROM read; Python over the source | Passed | BUG-020 found and fixed; no level above 50. |
+| TEST-066 | Map warps | Every `warp_event` in all 307 maps points at an existing map and at a warp number that map has; each destination warp checked for a matching return warp | Python validator (`validate_warps.py`) | Passed | 941 warps. The 32 one-way or dynamic warps are all by design: Pokémon Centre stairs into the shared 2F, the two elevators, `-1` (back to the last warp), the Bug Contest exits, the Ruins word rooms and the Hatch Room's marked looping tile. |
+| TEST-067 | Map events and blocks | Warp, coord, bg and object events lie inside their map (width x 2, height x 2); every map's `.ablk` block file is exactly width x height bytes | Python validators (`validate_bounds.py`, `validate_blk.py`) | Passed | 307 maps: nothing out of bounds, no size mismatch. |
+| TEST-068 | Map connections | Every `connection` names a real map, matches its map's direction flags, has a reciprocal connection back with the opposite offset, and overlaps its neighbour | Python validator (`validate_conn.py`) | Passed | 64 connections: no problems. |
+| TEST-069 | Item data, marts and shops | `ItemAttributes` checked position by position against the item constants (all 204 comment labels line up); key items untossable; mart lists (13 marts) have correct counts, no duplicates, only known items, no zero-price items for sale; bargain shop, rooftop sale and Buena prizes counts and items | Python validator | Passed | No problems. Ten non-key items have price 0, which marks them unsellable (rare items); none is sold in a mart. |
+| TEST-070 | Base stats | All 252 base-stat files: include order matches the species constants; types, gender ratio, growth rate and egg groups are known constants; held items exist; catch rate 1-255; no zero stat; EV yields within 0-3 (they are packed 2 bits each); BST comments match the stats; dimensions files exist | Python validator (`validate_bs.py`); build with an EV of 4 to check the new assert | Passed | Two stale BST comments fixed (Houndoom 506, Rapidash 480). The `evs` macro now rejects a yield above 3 at build time (it would have spilled into the next stat's bits). ROM byte-identical. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1790,6 +1795,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: none known.
 - Git commit message: `fix: stop Porygon, Chansey and Blissey evolving into Gyarados`
 - Next task: more data validators (base stats, items, marts, maps).
+
+### DATA-002 — Map, item and base-stat data validation
+
+- Date: 2026-11-25
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 8 (Pokémon, item and map data)
+- System: Maps, items, marts, base stats
+- Files modified: `data/pokemon/base_stats.asm`, `data/pokemon/base_stats/houndoom.asm`, `data/pokemon/base_stats/rapidash.asm`
+- Problem identified: no data bugs found. The `evs` macro packs each yield into 2 bits without a range check, so a yield of 4 or more would silently corrupt the neighbouring stat's yield. Two BST comments were wrong.
+- Root cause: missing build-time check; comments not updated after stat edits.
+- Solution implemented: the `evs` macro asserts each yield is 0-3; the two comments corrected.
+- Behaviour preserved: ROM byte-identical to the previous build.
+- Performance impact: none. Memory impact: none.
+- Build result: builds, 0 assembler warnings; a deliberate EV of 4 now stops the build with "EV yield must be 0-3".
+- Tests performed: TEST-066 to TEST-070. The full suite was not rerun because the ROM did not change.
+- Test results: all pass.
+- Remaining risks: none known.
+- Git commit message: `build: reject out-of-range EV yields and fix two BST comments`
+- Next task: move data review, then battle facilities and the save system.
 
 ## 31. Outstanding Issues
 

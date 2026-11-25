@@ -1,6 +1,6 @@
 	db HOUNDOOM ; 098
 
-	db  75,  70,  70, 101, 110,  80 ; 505 BST
+	db  75,  70,  70, 101, 110,  80 ; 506 BST
 	evs  1,   2,   0,   2,   2,   1
 	;   hp  atk  def  spd  sat  sdf
 

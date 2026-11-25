@@ -1,4 +1,7 @@
 MACRO evs
+	for n, 1, 7
+		assert 0 <= \<n> && \<n> <= 3, "EV yield must be 0-3"
+	endr
 	db (\1 << 6) | (\2 << 4) | (\3 << 2) | \4
 	db (\5 << 6) | (\6 << 4)
 ENDM
