@@ -1004,7 +1004,7 @@ Complete the project systematically using the following phases.
 ### Phase 8 — Data and Remaining Systems
 
 - [x] Audit Pokémon data.
-- [ ] Audit move data.
+- [x] Audit move data.
 - [x] Audit item data.
 - [x] Audit trainer data.
 - [x] Audit encounter data.
@@ -1104,12 +1104,12 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - Overall status: In progress
 - Current phase: Phase 7/8 (overworld, interface and data)
-- Current task: Phase 8 move data, battle facilities and save system
+- Current task: Phase 8 battle facilities and save system
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
-- Last verified build: clone of `e1f9fb7b9` plus DATA-002, Linux, RGBDS 0.7.0, 0 assembler warnings, 675,252 bytes free (ROM byte-identical to `e1f9fb7b9`)
-- Last completed task: DATA-002 (map, item and base-stat validation)
-- Last verified commit: `e1f9fb7b9` (full suite: 127 scripts, no regressions against the previous run)
+- Last verified build: clone of `45bbbea51` plus BATTLE-009, Linux, RGBDS 0.7.0, 0 assembler warnings, 675,248 bytes free
+- Last completed task: BATTLE-009 (BUG-021; move data validation)
+- Last verified commit: BATTLE-009 (full suite: 128 scripts, no regressions against the previous run)
 - Outstanding blockers: none
 - Next task: Phase 8 move data, battle facilities, save system; then Phase 7. Open earlier items: Phase 4 type-chart index, Phase 5 register usage
 
@@ -1141,6 +1141,7 @@ Maintain the following table throughout the project.
 | BUG-018 | Capture (status bonus) | The catch-rate status check `and 1 << PSN \| BRN \| PAR \| FRZ \| SLP_MASK` put `1 <<` on `PSN` only; `BRN`, `FRZ` and `PAR` are bit numbers (4, 5, 6), so the mask was $0F. Poison and sleep got the intended +15, but burn, frostbite and paralysis fell through to the +5 branch. Now `and ALL_STATUS`. No other mask in the codebase has this mistake (scan). | Medium | Fixed | `test_catch_status` (burn/frostbite/paralysis +5 on the baseline, +15 after) |
 | BUG-019 | Capture (Catch Charm) | The Catch Charm (held: "Doubles catch rate of statused foes") never added anything: it added `c` after `farcall GetItemHeldEffect`, which returns the item's own parameter in `c` (0 for the Catch Charm), not the status bonus. The bonus is now kept in `e` across the call. | Medium | Fixed | `test_catch_status` (Catch Charm added nothing on the baseline for most statuses; adds the status bonus again after) |
 | BUG-020 | Pokémon data (evolutions) | Evolution lists fall through into the next label by design (families share data), but in the Porygon / Chansey / Magikarp block no entry ended its list: Porygon, Porygon2, Porygon-Z, Chansey and Blissey all ran on into Magikarp's "level 20 -> Gyarados" (and Porygon-Z into a happiness evolution into itself); Chansey evolved into Porygon-Z instead of Blissey. Fixed as the user chose: Porygon, Porygon2 and Chansey end their own lists (with the shared default learnset, so no moves change), Porygon-Z and Blissey have no evolution, Chansey -> Blissey by happiness. The rest of `evos_attacks.asm` is the author's work in progress (most species share a default "no evolution, Splash" entry) and was not touched. | High | Fixed | `test_evolutions` (1/8 on the baseline, 8/8 after) |
+| BUG-021 | Battle engine (Blessing ability) | `BattleCommand_EffectChance` doubles the effect chance with `sla [hl]` on a byte where 100% is 255, so any chance above 50% wrapped: 60% became about 20%, and a certain (100%) effect became 99.6%. Latent: no species has Blessing yet (`blessing_mons.asm` is empty) | Low (latent) | Fixed | TEST-071 |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1277,6 +1278,8 @@ Maintain the following table.
 | TEST-068 | Map connections | Every `connection` names a real map, matches its map's direction flags, has a reciprocal connection back with the opposite offset, and overlaps its neighbour | Python validator (`validate_conn.py`) | Passed | 64 connections: no problems. |
 | TEST-069 | Item data, marts and shops | `ItemAttributes` checked position by position against the item constants (all 204 comment labels line up); key items untossable; mart lists (13 marts) have correct counts, no duplicates, only known items, no zero-price items for sale; bargain shop, rooftop sale and Buena prizes counts and items | Python validator | Passed | No problems. Ten non-key items have price 0, which marks them unsellable (rare items); none is sold in a mart. |
 | TEST-070 | Base stats | All 252 base-stat files: include order matches the species constants; types, gender ratio, growth rate and egg groups are known constants; held items exist; catch rate 1-255; no zero stat; EV yields within 0-3 (they are packed 2 bits each); BST comments match the stats; dimensions files exist | Python validator (`validate_bs.py`); build with an EV of 4 to check the new assert | Passed | Two stale BST comments fixed (Houndoom 506, Rapidash 480). The `evs` macro now rejects a yield above 3 at build time (it would have spilled into the next stat's bits). ROM byte-identical. |
+| TEST-071 | Blessing effect chance | `test_blessing_chance`: `BattleCommand_EffectChance` on both sides with a Blessing species patched into the list and fixed rolls: 30% doubles to 60%; 60% and 100% saturate at 100%; no change without Blessing; 0% never hits | Interpreter | Passed | 10/14 on the previous build (the two saturation cases fail on both sides); 14/14 after BUG-021. |
+| TEST-072 | Move data | `validate_moves.py`: `Moves` order matches the move constants (253); every effect has a script pointer (161); status moves have no power and no damage commands; damaging moves have power unless their damage is computed; accuracy 1-100; PP 1-40 (also asserted at build time); effect chance non-zero exactly when the effect script rolls one (`effectchance` or `tristatuschance`) | Python validator | Passed | No data bugs. Reviewed and left: Close Combat, Earthquake, Tremor and Sucker Punch roll a 0% chance that nothing reads afterwards (one wasted RNG call; Sheer Force rightly ignores them); Swagger keeps the vanilla unused 100%. Checked that multi-hit loops jump back past `effectchance`, so a chance is never doubled twice. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1814,6 +1817,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: none known.
 - Git commit message: `build: reject out-of-range EV yields and fix two BST comments`
 - Next task: move data review, then battle facilities and the save system.
+
+### BATTLE-009 — Blessing effect-chance overflow; move data validation
+
+- Date: 2026-11-25
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 8 (move data)
+- System: Secondary-effect chance, move data
+- Files modified: `engine/battle/effect_commands.asm`
+- Problem identified: BUG-021, found while checking how move effect chances are used.
+- Root cause: an 8-bit doubling without a carry check.
+- Solution implemented: after `sla [hl]`, a carry caps the chance at 100%.
+- Behaviour preserved: chances up to 50% double exactly as before; Neutralizing Gas suppression unchanged; no effect without Blessing.
+- Performance impact: none. Memory impact: 4 bytes (675,248 free).
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-071, TEST-072, full suite (128 scripts).
+- Test results: all pass; the full suite matches the previous run apart from the new test.
+- Remaining risks: none known.
+- Git commit message: `fix: cap Blessing's doubled effect chance at 100%`
+- Next task: battle facilities and the save system (Phase 8).
 
 ## 31. Outstanding Issues
 

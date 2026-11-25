@@ -1369,6 +1369,8 @@ BattleCommand_EffectChance:
 	jr c, .finish_blessing ; suppressed by Neutralizing Gas
 
 	sla [hl] ; 2x effect chance
+	jr nc, .finish_blessing
+	ld [hl], 100 percent ; cap at 100%
 
 .finish_blessing
  	ld a, [hl]
