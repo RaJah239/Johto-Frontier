@@ -928,7 +928,7 @@ Complete the project systematically using the following phases.
 - [x] Audit critical hits.
 - [x] Audit accuracy and evasion.
 - [x] Audit speed and priority.
-- [ ] Audit stat calculations.
+- [x] Audit stat calculations.
 - [ ] Audit status conditions.
 - [ ] Audit abilities.
 - [ ] Audit dual-ability interactions.
@@ -1108,7 +1108,7 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `d007b16f8`, Linux, RGBDS 0.7.0, 0 assembler warnings, 674,986 bytes free
-- Last completed task: BATTLE-001 (BUG-009)
+- Last completed task: BATTLE-003 (BUG-012)
 - Last verified commit: `d007b16f8` (full suite: 105 scripts, 95 fully passing, the rest profilers/comparisons)
 - Outstanding blockers: none
 - Next task: Phase 3 checklist
@@ -1132,6 +1132,7 @@ Maintain the following table throughout the project.
 | BUG-009 | Battle (critical hits) | Super Luck's +1 critical stage was lost on Slash and Leaf Blade. For those two moves `_BattleCommand_Critical` took the species off the stack to check the Slash Crits / Leaf Blade Crits list, and on a miss pushed `a` back for the Super Luck check, but `IsInByteArray` returns with a = -1, so Super Luck looked up species -1 and never matched. Latent today: the Super Luck, Slash Crits and Leaf Blade Crits lists are all empty (their species are commented out), so it shows up as soon as one is filled. | Low | Fixed | `test_crit_stages` (4 of 14 failed on the baseline, both sides; 14/14 after) |
 | BUG-010 | Link battles (Tenacity) | Tenacity's end-of-turn 1/3 status cure rolled with `Random` instead of `BattleRandom`. In a link battle each Game Boy then rolled its own number, so they could disagree on whether the status was cured and the battle desynced. Haxorus has Tenacity. Single-player is unaffected (`BattleRandom` is `Random` outside link battles). | Medium | Fixed | `test_battle_rng` (Tenacity reached `Random` on the baseline; `BattleRandom` after) |
 | BUG-011 | Turn order (Quick Draw) | Quick Draw had the same link-desync roll (`Random`), and its condition was inverted: `cp 33 percent + 1` / `jr c, .continue` skipped on the low third, so it fired on 171 of 256 rolls (2/3) instead of the 1/3 its data file states (Tenacity's identical idiom uses `ret nc`). Latent today: the Quick Draw list is empty. | Low | Fixed | `test_battle_rng`: 171/256 on the baseline (measured), 85/256 after |
+| BUG-012 | Battle stats (Choice Scarf) | `ApplyChoiceScarfEffectOnSpeed` added Speed/2 to Speed with the bytes in the wrong order: the high byte was added first and its (never-set) carry went into the low byte, so a carry out of the low byte was lost. Whenever the low byte plus half the Speed passed 255, the boosted Speed came out 256 too low: e.g. 200 Speed became 44 instead of 300, so a Scarf holder was often far slower than without the Scarf. Affects every Speed from 171 up where the low byte overflows (about a third of values), for both sides and for the AI's speed checks that use the same stats. | High | Fixed | `test_battle_stats` (Choice Scarf wrong from Speed 171 up on the baseline, both sides; exact x1.5 for Speed 1-399 and 600-999 after) |
 
 Use unique identifiers such as BUG-001, BUG-002 and BUG-003.
 
@@ -1219,6 +1220,8 @@ Maintain the following table.
 | TEST-027 | Accuracy and evasion | `test_accuracy_stages`: move accuracy after the accuracy and evasion stages (`_BattleCommand_CheckHit.StatModifiers`) against `data/battle/accuracy_multipliers.asm`, two integer steps with a floor of 1, Keen Eye x1.3, cap 255 | Interpreter: every accuracy/evasion stage pair with evasion at or below accuracy x 4 move accuracies x Keen Eye on/off x both sides (1,456 runs), plus evasion-above-accuracy cases without Foresight | Passed | Exact match. With higher evasion and Foresight on the target, stage changes are skipped entirely; that is pokecrystal's original behaviour and is kept. |
 | TEST-028 | Battle RNG, turn order | Scan of the battle engine and abilities for `Random` (not shared in link battles) where the roll decides a battle outcome; then `test_battle_rng`: Quick Draw and Tenacity must use `BattleRandom`, and Quick Draw's first-move rate over all 256 rolls | Grep over `engine/battle`, `engine/abilities` and item effects, each hit read; interpreter run of `DetermineMoveOrder` (equal priority, slower Quick Draw mon) and `Tenacity_Activate` with `Random` trapped | Passed | 11 `Random` calls: 2 real (BUG-010, BUG-011); the rest are wild-only (Magikarp size, capture, Shiny Ball tables), cosmetic (transition and VS intro) or outside link battles. 0/4 on the baseline, 4/4 after. Full suite unchanged otherwise (113 scripts). |
 | TEST-029 | Speed and priority | `test_move_order`: `DetermineMoveOrder` for speed, move priority, Trick Room from the move and from the battle type (with priority kept), speed ties, Quick Claw, Swift Swim in rain and its exceptions (paralysis, foe at +2 Speed, no rain) | Interpreter, both sides; rates counted over all 256 rolls | Passed | 16/16. Speed ties go to the player on 128/256 rolls; Quick Claw on 60/256 (its item parameter). The weather speed abilities move the holder first rather than doubling Speed, as designed. |
+| TEST-030 | Stat calculation | `test_stat_formula`: `CalcMonStats` against this game's formula: every DV counts as 15 (a deliberate design: DVs only decide gender, shininess and Hidden Power), EVs count 1/4 when enabled, `((Base+15)*2 + EV/4)*L/100 + 5` (HP: `+ L + 10`), cap 999 | Interpreter, 303 cases incl. extremes and EVs off | Passed | Exact match. |
+| TEST-031 | Battle stats | `test_battle_stats`: `CalcPlayerStats`/`CalcEnemyStats` stage multipliers (`stat_multipliers.asm`, floor, min 1, cap 999), then paralysis (Speed /4), burn (Attack /2), frostbite (Sp. Atk /2), Trick Stick (Speed /4), Choice Scarf (Speed x1.5) | Interpreter, both sides: 60 random stat/stage sets each, each status and item, Choice Scarf over Speed 1-399 and 600-999 | Passed | 10/12 on the baseline (BUG-012 on both sides), 12/12 after. Full suite unchanged otherwise (116 scripts). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1509,6 +1512,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: link battles cannot be tested here (two Game Boys); see MT-006.
 - Git commit message: `fix: use the shared battle RNG for Tenacity and Quick Draw, and fix Quick Draw's rate`
 - Next task: Phase 3, the rest of speed and priority (Trick Room, Quick Claw, weather speed abilities).
+
+### BATTLE-003 — Choice Scarf Speed boost lost a carry
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 3 (stat calculations, held items)
+- System: Battle stats
+- Files modified: `engine/battle/core.asm`
+- Problem identified: BUG-012, found reading the stat modifiers while writing TEST-031.
+- Root cause: a hand-written 16-bit add done high byte first.
+- Solution implemented: `add hl, de` with de = Speed / 2, stored big-endian.
+- Behaviour preserved: Speed x1.5 (rounded down), uncapped as before; nothing else in the stat chain changed.
+- Performance impact: negligible. Memory impact: 2 bytes more (675,209 free).
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-030, TEST-031, full suite.
+- Test results: all pass.
+- Remaining risks: none known.
+- Git commit message: `fix: stop Choice Scarf losing 256 Speed when its boost carries`
+- Next task: Phase 3, status conditions.
 
 ## 31. Outstanding Issues
 

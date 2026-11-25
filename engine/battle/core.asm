@@ -6303,19 +6303,21 @@ ApplyChoiceScarfEffectOnSpeed:
 	ld hl, wEnemyMonSpeed + 1
 
 .boost
-	ld a, [hld] ; high byte
-	ld b, a
-	ld a, [hl] ; low byte
-	ld e, a
-	ld d, b
-	srl a
-	rr b ; ba = Speed / 2
-	add e
-	ld [hl], a ; low byte
+	ld a, [hld]
+	ld e, a ; low byte
+	ld d, [hl] ; high byte
+	push hl
+	ld h, d
+	ld l, e
+	srl d
+	rr e ; de = Speed / 2
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	ld [hl], d
 	inc hl
-	ld a, d
-	adc b
-	ld [hl], a ; high byte
+	ld [hl], e
 	ret
 
 ; =======================
