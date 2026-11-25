@@ -932,7 +932,7 @@ Complete the project systematically using the following phases.
 - [x] Audit status conditions.
 - [ ] Audit abilities.
 - [ ] Audit dual-ability interactions.
-- [ ] Audit held items.
+- [x] Audit held items.
 - [ ] Audit weather.
 - [ ] Audit entry hazards.
 - [ ] Audit switching.
@@ -1228,6 +1228,7 @@ Maintain the following table.
 | TEST-034 | Status conditions (turn checks) | `BattleCommand_CheckTurn` (player) against `CheckEnemyTurn` with sides swapped: recharge, sleep countdown and waking, flinch, Disable and Taunt wearing off, confusion (1/3 self-hit), attraction (1/2), disabled move, Taunt block | Python diff as in TEST-021, differences read by hand | Passed | Same logic on both sides. Differences: the enemy shows "fast asleep" before the animation and the player after (as in pokecrystal); the player's confusion self-hit goes through `HitConfusion`, the enemy's is the same steps written out; sleep is checked with `and a` vs `and SLP_MASK`, equivalent because sleep excludes the other statuses. |
 | TEST-035 | Abilities (data) | All 138 species lists in `data/abilities/`: terminated with -1, no duplicate entries, every list referenced by the code | Python over the data and engine sources | Passed | No missing terminators, duplicates or unused lists. Three lists (`Sanctuary`, `Seedfall`, `SpinGuard`) ended `db -1, end`, which emitted a stray byte after the terminator (harmless); changed to `db -1 ; end` (MEM-004). Full suite unchanged (117 scripts). |
 | TEST-036 | Abilities (Neutralizing Gas) | Every raw `IsInByteArray` lookup of an ability list in the battle engine, abilities and item effects (AI excluded), checked for Neutralizing Gas handling: `IsInAbilityList`, `IsSideSuppressed`/`IsSpeciesSuppressed`, or a popup that reports suppression | Python scan, each hit read | Partially verified | 15 hits. Handled: Moxie/Ignis/Flash Step/Blood Lust/Renewal/Life Drain (their popups), Pressure (`IsSideSuppressed` before taking PP), Sturdy (`NGIgnoresSturdy`), Quick Draw (popup), the `*Raw` helpers and Neutralizing Gas itself (callers check). Not handled: Guts and Resilience (`DoesMonHaveGuts`/`DoesMonHaveResilience`, used when battle stats are recalculated) and the Spikes immunity list (`SpikesDamage`) keep working under Neutralizing Gas. Left unchanged pending a design decision (Section 31). |
+| TEST-037 | Held items (data) | All 61 `HELD_*` effects: each given to an item in `data/items/attributes.asm` is handled somewhere, and none is handled without an item | Python over constants, item data and code | Passed | Only `HELD_NONE` (no effect) and `HELD_CLEANSE_TAG` have no handler by effect; the Cleanse Tag is checked by item ID in the wild-encounter code, as in pokecrystal. Held-item damage boosts are covered by TEST-024, stat items by TEST-031. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
