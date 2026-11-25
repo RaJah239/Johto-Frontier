@@ -1104,10 +1104,10 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - Overall status: In progress
 - Current phase: Phase 7/8 (overworld, interface and data)
-- Current task: Phase 8 graphics, audio and hardware compatibility
+- Current task: Phase 8 graphics engine
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
-- Last verified build: clone of `395a8e50f` plus HW-001, Linux, RGBDS 0.7.0, 0 assembler warnings, 675,266 bytes free
+- Last verified build: clone of `395a8e50f` plus HW-001, Linux, RGBDS 0.7.0, 0 assembler warnings, 675,254 bytes free
 - Last completed task: HW-001 (BUG-023; audio and hardware review)
 - Last verified commit: HW-001 (full suite: 131 scripts, no regressions against the previous run)
 - Outstanding blockers: none
