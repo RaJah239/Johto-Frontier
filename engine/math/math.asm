@@ -50,42 +50,43 @@ _Divide::
 	and a
 	ret z
 
-	ldh a, [hDivisor]
 	ld d, a
 	ld c, LOW(hDividend)
-	ld e, 0
-	ld l, e
+	ld e, 0 ; remainder so far
 .loop
-	push bc
-	ld b, 8
 	ldh a, [c]
 	ld h, a
-	ld l, 0
+	; a zero byte with nothing left over divides to a zero byte
+	or e
+	jr z, .store
+	push bc
+	ld b, 8
 .loop2
+	; shift the next dividend bit into the remainder; h's freed low bit
+	; takes the quotient bit
 	sla h
 	rl e
+	jr c, .subtract ; (9-bit remainder: more than the divisor)
 	ld a, e
-	jr c, .carry
 	cp d
-	jr c, .skip
-.carry
+	jr c, .next
+.subtract
+	ld a, e
 	sub d
 	ld e, a
-	inc l
-.skip
-	ld a, b
-	cp 1
-	jr z, .done
-	sla l
+	inc h
+.next
 	dec b
-	jr .loop2
-.done
+	jr nz, .loop2
+	pop bc
+.store
 	ld a, c
 	add hMathBuffer - hDividend
+	ld l, c
 	ld c, a
-	ld a, l
+	ld a, h
 	ldh [c], a
-	pop bc
+	ld c, l
 	inc c
 	dec b
 	jr nz, .loop

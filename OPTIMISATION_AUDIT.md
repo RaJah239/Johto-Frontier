@@ -1168,6 +1168,7 @@ Maintain the following table.
 | PERF-001 | Far calls into the home bank (9 sites: Neutralizing Gas, turn-end abilities, Curse, Pain Split, three item-effect font reloads, link trade, move learning) | `farcall`/`farjp` to a ROM0 routine replaced with `call`/`jmp` | `farcall`: 6 bytes, the FarCall path (two bank switches, bc saved through WRAM) | `call`: 3 bytes, no bank switch | Calculated: about 30 M-cycles saved per call; not measured (none of these is in a hot loop) | Full suite unchanged |
 | PERF-002 | 106 far calls whose caller and target are in the same SECTION (37 files: battle core, AI, events, Pokégear, Pokédex, menus and more) | `farcall`/`callfar`/`newfarcall` replaced with `call`, `farjp` with `jmp` (one `jr` where it reaches) | Far-call path: 4-6 bytes, two bank switches | Direct call: 3 bytes (2 for the `jr`) | Calculated: about 30-60 M-cycles saved per call; not measured | Full suite and the overworld comparison unchanged |
 | PERF-003 | `AddNTimes` (hl += bc x a; 299 call sites: move, item, species, party tables) | Counts of 16 or more use shift-and-add (one step per bit of a, at most 8) instead of one `add hl, bc` per unit; small counts (party slots) keep the plain loop | Up to 255 loop passes (~6 M-cycles each) | At most 8 steps | Measured: `AI_MatchupSwitch` (test_ai_perf, Meganium out) 911,400 -> 794,199 M-cycles (25.96 -> 22.62 frames) | `test_addntimes` (all a = 0-255, 2,048 cases), full suite, overworld comparison |
+| PERF-004 | `_Divide` (the generic 1- to 4-byte divide behind `Divide`) | A zero dividend byte with no remainder is skipped (its quotient byte is 0); the quotient bits shift into the dividend byte itself instead of a separate register with a per-bit end check | Divide: 152,266 M-cycles over 161 calls in the AI switch (~945 each) | 75,952 M-cycles (~472 each) | Measured: `AI_MatchupSwitch` 794,199 -> 717,885 M-cycles (22.62 -> 20.45 frames); with PERF-003, 25.9 -> 20.4 frames (-21%) | `test_divide` (5,200 cases: arithmetic and byte-for-byte identical to the baseline incl. remainder and buffer), full suite, overworld comparison |
 
 Use unique identifiers such as PERF-001, PERF-002 and PERF-003.
 
@@ -1252,6 +1253,7 @@ Maintain the following table.
 | TEST-050 | Move effects (structure) | All 155 effect scripts in `data/moves/effects.asm`: each starts with a turn check (or pokecrystal's `checkrampage`/`checkcharge`/`checkcurl` before it) and ends with `endmove`/`endturn`/`jump`; every script is referenced; the pointer table has one entry per effect constant, in order | Python over the effect scripts, pointer table and constants | Passed | 161 constants, 161 pointers, names line up, `assert_table_length NUM_MOVE_EFFECTS` in the source; no unreferenced or open-ended scripts. Behaviour of individual effects is covered by the regression suite (Teleport, Hyper Beam recharge, set-up moves, Speed Boost, Pain Split, Counter/Mirror Coat and others) and by TEST-023-047; the rest needs play-testing. |
 | TEST-051 | Fainting | Faint handling: `CheckFaint_PlayerThenEnemy`/`EnemyThenPlayer` after each damaging end-of-turn step (TEST-048), `HasUserFainted` guards in `ResidualDamage` (TEST-033), and the custom knock-out abilities (Aftermath, Moxie/Ignis/Flash Step/Blood Lust/Renewal/Life Drain) | Code read | Passed | Aftermath skips Counter/Mirror Coat and residual KOs, needs the attacker standing (`GetCurrentMon` returns `hl` = its HP), honours Magic Guard and Neutralizing Gas, and a KO it causes is picked up by the same post-move faint checks as recoil. KO abilities only fire for a standing user with their popups (Neutralizing Gas aware, TEST-036). |
 | TEST-052 | Arithmetic | `test_addntimes`: hl += bc x a (mod 65536) for every a 0-255 with 8 bc values each, bc/de preserved, a = 0 after | Interpreter, baseline and new ROM | Passed | 2,048/2,048 on both. |
+| TEST-053 | Arithmetic | `test_divide`: Divide for 1-4 byte dividends (zero, small, full-range values) by divisors 1-255 | Interpreter against Python and against the baseline ROM (quotient, remainder and `hMathBuffer`) | Passed | 5,200 cases, all correct and identical to the baseline. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1694,6 +1696,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: none known.
 - Git commit message: `perf: shift-and-add AddNTimes for large counts`
 - Next task: PERF-004 (Divide).
+
+### PERF-004 — Faster Divide
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 4/5 (AI execution speed; arithmetic routines)
+- System: Generic division (damage, stats, experience, AI, everywhere)
+- Files modified: `engine/math/math.asm`
+- Problem identified: `Divide` was ~17% of the AI's switch decision (161 calls).
+- Root cause: eight bit-steps for every dividend byte, including the leading zero bytes of small 4-byte values; a separate quotient register with an extra compare per bit.
+- Solution implemented: skip zero bytes while the remainder is zero; build the quotient in the dividend byte as it shifts out.
+- Behaviour preserved: identical quotient, remainder and scratch buffer to the baseline on 5,200 cases.
+- Performance impact: Divide about 2x faster on these inputs; the AI's switch decision 20.4 frames (was 25.9 before PERF-003). Memory impact: 6 bytes fewer (675,152 free).
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-053, full suite, overworld comparison.
+- Test results: all pass.
+- Remaining risks: none known.
+- Git commit message: `perf: skip zero bytes and simplify the bit loop in Divide`
+- Next task: Phase 4, the AI audit; further AI speed (type chart scan, far-call overhead) noted.
 
 ## 31. Outstanding Issues
 
