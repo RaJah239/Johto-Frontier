@@ -960,10 +960,10 @@ Complete the project systematically using the following phases.
 
 ### Phase 5 — CPU Performance
 
-- [ ] Identify frequently executed routines.
-- [ ] Optimise battle routines.
+- [x] Identify frequently executed routines.
+- [x] Optimise battle routines.
 - [ ] Optimise overworld routines.
-- [ ] Optimise arithmetic routines.
+- [x] Optimise arithmetic routines.
 - [ ] Optimise loops.
 - [ ] Optimise memory operations.
 - [ ] Optimise register usage.
@@ -1169,6 +1169,7 @@ Maintain the following table.
 | PERF-002 | 106 far calls whose caller and target are in the same SECTION (37 files: battle core, AI, events, Pokégear, Pokédex, menus and more) | `farcall`/`callfar`/`newfarcall` replaced with `call`, `farjp` with `jmp` (one `jr` where it reaches) | Far-call path: 4-6 bytes, two bank switches | Direct call: 3 bytes (2 for the `jr`) | Calculated: about 30-60 M-cycles saved per call; not measured | Full suite and the overworld comparison unchanged |
 | PERF-003 | `AddNTimes` (hl += bc x a; 299 call sites: move, item, species, party tables) | Counts of 16 or more use shift-and-add (one step per bit of a, at most 8) instead of one `add hl, bc` per unit; small counts (party slots) keep the plain loop | Up to 255 loop passes (~6 M-cycles each) | At most 8 steps | Measured: `AI_MatchupSwitch` (test_ai_perf, Meganium out) 911,400 -> 794,199 M-cycles (25.96 -> 22.62 frames) | `test_addntimes` (all a = 0-255, 2,048 cases), full suite, overworld comparison |
 | PERF-004 | `_Divide` (the generic 1- to 4-byte divide behind `Divide`) | A zero dividend byte with no remainder is skipped (its quotient byte is 0); the quotient bits shift into the dividend byte itself instead of a separate register with a per-bit end check | Divide: 152,266 M-cycles over 161 calls in the AI switch (~945 each) | 75,952 M-cycles (~472 each) | Measured: `AI_MatchupSwitch` 794,199 -> 717,885 M-cycles (22.62 -> 20.45 frames); with PERF-003, 25.9 -> 20.4 frames (-21%) | `test_divide` (5,200 cases: arithmetic and byte-for-byte identical to the baseline incl. remainder and buffer), full suite, overworld comparison |
+| PERF-005 | `CalcBattleStats` (every battle stat recalculation; the AI sim calls it after each simulated boost) | Stage 0 (x1) copies the stat instead of a Multiply and a Divide, then the same min-1 / max-999 handling | ~5,150 M-cycles per `CalcEnemyStats` (AI move choice profile) | Most stats are at stage 0: one copy each | Measured: `AI_SimMoveChoice` set-up case 12.1 -> 11.0 frames (16.3 on the baseline); `AI_MatchupSwitch` 20.4 -> 20.0 | `test_calc_battle_stats_same` (250 cases identical to the baseline, raw stats 0 to $FFFF), `test_battle_stats`, full suite |
 
 Use unique identifiers such as PERF-001, PERF-002 and PERF-003.
 
@@ -1256,6 +1257,8 @@ Maintain the following table.
 | TEST-053 | Arithmetic | `test_divide`: Divide for 1-4 byte dividends (zero, small, full-range values) by divisors 1-255 | Interpreter against Python and against the baseline ROM (quotient, remainder and `hMathBuffer`) | Passed | 5,200 cases, all correct and identical to the baseline. |
 | TEST-054 | Battle AI | `test_ai_types_speed`: `AI_Types` scoring (immune move dismissed, super-effective encouraged, neutral unchanged, not-very-effective discouraged) and the AI's speed check (`DoesAIOutSpeedPlayer` after `CalcEnemyStats`) with and without a Choice Scarf | Interpreter | Passed | 5/6 on the baseline: the AI shared BUG-012 and thought a scarfed Speed-200 mon was slower than a Speed-250 one. 6/6 after. |
 | TEST-055 | Battle AI (data and coverage) | Trainer AI flags in `data/trainers/attributes.asm` against `AIScoringPointers`; the AI regression suite | Python count of flags; review of the 15 `test_ai_*` scripts plus TEST-054 | Passed | Every class uses all six scoring layers; 45 boss classes add `AI_BOSS_SWITCH` (its table slot is `AI_None` by design: the flag is read by the switching code). The AI suite covers stat-boost answers (Haze/Roar/phazing), Contrary, entry abilities and the entry simulation, items, knock-out abilities, Hyper Beam and set-up plans, Regenerator, Speed Boost, the switch cap, end-of-turn effects, Unburden, weather and shards, and switch decisions with their frame cost; all pass. The AI's damage estimate runs the battle engine's own routines (`PlayerAttackDamage`, `BattleCommand_DamageCalc`, `BattleCommand_Stab`, `AIDamageCalc`), so the engine checks of Phase 3 apply to it too. |
+| TEST-056 | Battle stats | `test_calc_battle_stats_same`: `CalcBattleStats` against the baseline ROM for random raw stats (0, small, up to $FFFF) and stages (mostly stage 0) | Interpreter, two ROMs | Passed | 250 cases identical. Needs the baseline ROM as its third argument (prints "skipped" without it). |
+| TEST-057 | AI performance | Frame cost of the AI's per-turn move choice (`AI_SimMoveChoice`) and switch decision (`AI_MatchupSwitch`), baseline vs now | `perfkit.run_cycles` on three move sets and the test_ai_perf party | Passed (measured) | Move choice: Swords Dance plan 16.3 -> 11.0 frames, Recover/SD 5.7 -> 4.8, Hyper Beam set 7.6 -> 6.2. Switch decision: 25.9 -> 20.0 frames. All decisions unchanged (AI suite passes). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1717,6 +1720,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Remaining risks: none known.
 - Git commit message: `perf: skip zero bytes and simplify the bit loop in Divide`
 - Next task: Phase 4, the AI audit; further AI speed (type chart scan, far-call overhead) noted.
+
+### PERF-005 — Stage-0 fast path in CalcBattleStats
+
+- Date: 2026-11-24
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 5 (battle routines)
+- System: Battle stats (battle engine and AI simulation)
+- Files modified: `engine/battle/effect_commands.asm`
+- Problem identified: the AI move-choice profile showed `CalcEnemyStats` at ~17% (14 calls, ~5,150 M-cycles each), most of it Multiply/Divide by 1/1 for unboosted stats.
+- Root cause: the stage table's x1 entry still went through the generic multiply and divide.
+- Solution implemented: stage 0 copies the stat and joins the existing min/max checks.
+- Behaviour preserved: identical output to the baseline on 250 cases; the HRAM math registers are scratch (no caller reads them after).
+- Performance impact: TEST-057. Memory impact: 14 bytes more (675,138 free).
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-056, TEST-031, full suite.
+- Test results: all pass.
+- Remaining risks: none known.
+- Git commit message: `perf: skip the multiply and divide for unboosted battle stats`
+- Next task: Phase 5, overworld routines.
 
 ## 31. Outstanding Issues
 

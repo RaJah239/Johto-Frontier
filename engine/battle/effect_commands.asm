@@ -5028,6 +5028,8 @@ CalcBattleStats:
 	push bc
 
 	ld c, a
+	cp BASE_STAT_LEVEL
+	jr z, .neutral ; x1: no multiply or divide needed
 	dec c
 	ld b, 0
 	ld hl, StatLevelMultipliers
@@ -5051,7 +5053,16 @@ CalcBattleStats:
 	ldh [hDivisor], a
 	ld b, 4
 	call Divide
+	jr .got_stat
 
+.neutral
+	ld a, [de]
+	ldh [hQuotient + 2], a
+	inc de
+	ld a, [de]
+	ldh [hQuotient + 3], a
+	inc de
+.got_stat
 	ldh a, [hQuotient + 2]
 	ld b, a
 	ldh a, [hQuotient + 3]
