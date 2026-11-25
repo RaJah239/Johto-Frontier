@@ -1105,7 +1105,7 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 
 - All eleven repository audit phases are complete. Section 33 contains the final measurements and review outcome.
 - Codex verified source revision `aa50c4784` on branch `000-Johto-Frontier`. Release has 670,307 bytes free and debug has 668,839. Cygwin and Linux produced identical images for each configuration.
-- All 26 confirmed bugs in Section 26 have fixes. MT-003 passed in the follow-up. The remaining release checks cover two-player link battles, a full Neutralizing Gas switch sequence, and audiovisual transitions. Physical CGB timing remains unverified.
+- All 26 confirmed bugs in Section 26 have fixes. MT-003 and MT-007 passed in follow-up runs. The link and audiovisual checks are in progress. Physical CGB timing remains unverified.
 
 Update this section continuously.
 
@@ -1320,6 +1320,7 @@ Maintain the following table.
 | TEST-105 | End-to-end AI performance | Run identical switching, move-choice and Random fixtures on the rebuilt baseline and final release using the same interpreter. | SM83 M-cycle counter | Passed | All four switching decisions matched. The Meganium switch fell from 909,606 to 541,034 M-cycles. Table in Section 33 gives the other fixtures. Random kept the sampled sequence. |
 | TEST-106 | Taunt at move selection | Boot a disposable game in PyBoy. Start a wild battle through the overworld event queue, set the player's Taunt counter, select Growl from FIGHT, then select Tackle. | CGB emulator and joypad | Passed | Growl took the disabled-text path and reopened the move screen before turn execution. Tackle was accepted as the current player move and the turn executed. |
 | TEST-107 | Battle Tower room (MT-003) | Replay the real room script in PyBoy at three streak positions. Compare the player and receptionist pixels every frame during arrival, check the opponent's live sprite against its trainer class, and proceed into battle. | CGB emulator, release and buildable baseline | Passed | Baseline attempted to load sprite 0 before the opponent appeared. The release avoided that load. Trainers 33, 12 and 49 entered with sprites 38, 38 and 62. Nearby sprites stayed intact across 143 frames per arrival. |
+| TEST-108 | MT-007, hazards and ability suppression | Use normal battle menus in three configured trainer battles. | PyBoy CGB | Passed | Gengar and Clefable each took one eighth of max HP. Burned Ursaring's Attack halved during suppression and recovered when Koffing left. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -2039,6 +2040,12 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Codex, 2026-11-25. Added `tools/test_tower_arrival.py` to reproduce MT-003 with disposable party and streak data. Run `python tools/test_tower_arrival.py johtofrontier.gbc` with PyBoy and matching symbols. The baseline reproduces BUG-005. All three release entries reached FIGHT with the expected trainer class, with 429 rendered frames compared (TEST-107).
 - Release and debug builds passed. This test changes no game bytes. Commit: `test: replay Battle Tower opponent arrivals on CGB`. Next: the remaining link, ability and audiovisual play-tests.
 
+### Follow-up — Spikes and ability suppression through battle menus
+
+- TEST-108, Codex, 2026-11-25. Built a disposable ROM with Ursaring assigned Guts and Koffing assigned Neutralizing Gas. The test trainer had Magikarp with Spikes, Koffing with Splash and a second Magikarp. The test supplied this party in the trainer's active level bracket. The shipped data was untouched.
+- In separate battles Magikarp laid Spikes, then Gengar and Clefable each switched in through the Pokémon menu. Both fell from 160 to 140 HP. In a third battle, burned Ursaring used Seed Bomb to defeat each opponent. Its Attack was 100 against the first Magikarp, 50 against Koffing and 100 against the last Magikarp. Its burn stayed active throughout. The battle ended in victory.
+- The configured build and all three cases passed. Commit: `test: verify Spikes and gas switches in full battles`.
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -2090,7 +2097,7 @@ Make manual testing instructions sufficiently clear for the user to perform with
 | Passed in PyBoy CGB | MT-003 | Three scripted Battle Tower arrivals, player and attendant pixels, live trainer sprites and subsequent battles (TEST-107). |
 | Awaiting full play-through | MT-008 | Voltorb Flip exit and the music heard when crossing maps on foot or by bicycle. Routine, map and audio checks are recorded separately. |
 | Awaiting a linked pair | MT-006 | Both peers must agree through the battle. TEST-028 checked the RNG path. |
-| Awaiting a configured battle | MT-007 | The shipped Neutralizing Gas list is empty. Use a disposable test build with an opponent assigned that ability for the switch sequence. TEST-041 covers the underlying suppression and hazard behaviour. |
+| Passed in configured PyBoy CGB battles | MT-007 | Gengar and Clefable each took 20 Spikes damage on switching in. A burned Ursaring lost and regained Attack as Koffing entered and left (TEST-108). Both ability lists are empty in the release. |
 
 - **MT-001 Taunt at the move menu (BUG-003).** Setup: any battle where the foe can use Taunt (or a save where your Pokémon gets Taunted). Steps: after your Pokémon is Taunted, open FIGHT and pick a status move (Growl, Swords Dance and the like). Expected: "The move is disabled" is shown and you choose again; damaging moves can still be picked. Failure: the status move is accepted and then fails during the turn.
 - **MT-002 Gift Pokémon sent to the PC (BUG-004).** Setup: a full party. Steps: receive a gift Pokémon (any `givepoke` event) so it goes to a box, then view it in Bill's PC and withdraw it. Expected: it looks and behaves normally; a gift Unown shows a valid letter. Failure: wrong or garbled icon/picture.
