@@ -986,7 +986,7 @@ Complete the project systematically using the following phases.
 
 ### Phase 7 — Overworld and Interface
 
-- [ ] Audit movement.
+- [x] Audit movement.
 - [x] Audit map loading.
 - [x] Audit map transitions.
 - [x] Audit wild encounters.
@@ -995,10 +995,10 @@ Complete the project systematically using the following phases.
 - [x] Audit menus.
 - [x] Audit inventory.
 - [x] Audit shops.
-- [ ] Audit Pokédex.
+- [x] Audit Pokédex.
 - [x] Audit party management.
 - [x] Audit PC storage.
-- [ ] Audit input handling.
+- [x] Audit input handling.
 - [x] Audit text rendering.
 
 ### Phase 8 — Data and Remaining Systems
@@ -1103,15 +1103,15 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 ## 25. Current Project Status
 
 - Overall status: In progress
-- Current phase: Phase 7/8 (overworld, interface and data)
-- Current task: Phase 7 (overworld and interface)
+- Current phase: Phase 9 (code quality); Phases 7 and 8 complete
+- Current task: Phase 9 (code quality)
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
 - Last verified build: clone of `395a8e50f` plus HW-001, Linux, RGBDS 0.7.0, 0 assembler warnings, 675,254 bytes free
 - Last completed task: HW-001 (BUG-023; audio and hardware review)
 - Last verified commit: HW-001 (full suite: 131 scripts, no regressions against the previous run)
 - Outstanding blockers: none
-- Next task: Phase 7 (overworld and interface). Open earlier items: Phase 4 type-chart index, Phase 5 register usage
+- Next task: Phase 9 (code quality), then Phases 10-11. Open earlier items: Phase 4 type-chart index, Phase 5 register usage
 
 Update this section continuously.
 
@@ -1299,6 +1299,7 @@ Maintain the following table.
 | TEST-086 | NPC and scripted movement | `validate_movement.py`: every movement script used by `applymovement`, `applymovementlasttalked` or `applyonemovement` (234) reaches `step_end` or `step_resume` before any other data | Python validator | Passed | No problems. |
 | TEST-087 | Options (menus) | `validate_option_bits.py`: the 42 option bit constants mapped to their byte (`wOptions`, `wTextboxFlags`, `wOptions2`-`wOptions5`); every `bit`/`set`/`res` on an option constant (159 uses) checked against the byte loaded into `a` or `hl` | Python validator | Passed | No option tested on the wrong byte. `wExpShareToggle` reuses the `EXP_SHARE` bit number on purpose, and every reader and writer agrees. |
 | TEST-088 | Inventory and party management | Review of `PutItemInPocket` and `RemoveItemFromPocket` (pocket capacity per pocket, stacks split at 99, the list shifted down when a stack empties, nothing changed when an item does not fit) and of the party/PC paths (`RemoveMonFromParty` mail shift, SRAM pairing from TEST-076, storage encoding from TEST-085) | Code review; existing `test_item_stack_99`, `test_sell_limit`, `test_quantity_text`, `test_start_menu_order`, `test_popup_screen` | Passed | No faults; the item routines are vanilla. Menus are otherwise covered by the existing menu tests and the manual checklist. |
+| TEST-089 | Pokédex, input and movement | Pokédex: both dex orders (new and alphabetical) hold all 252 species exactly once, the alphabetical one sorted by the displayed names (Porygon-Z before Porygon2 follows the game's character order), and the entry table is length-asserted. Input and movement: covered by the existing targeted tests (`test_voltorb_turbo_b`, `test_teleport`, `test_spinner_trainer_run`, `test_suction_cups_fishing`, the dex screen tests) and the movement-script check (TEST-086) | Python over the dex data; existing tests | Passed | Feel and timing (turbo buttons, bike turning, running shoes) can only be judged by playing (Section 32). |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
