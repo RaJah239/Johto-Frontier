@@ -1934,7 +1934,7 @@ Do not silently ignore unresolved issues.
 
 - Decided by the user (2026-11-25): keep it. The Battle Tower Elite pool lists the Snorlax set (Leftovers, Double-Edge, Crunch, Earthquake, Rest) twice in a row (`data/battle_tower/parties.asm`, lines 115-116). It looks like a copy slip, but removing it changes how often that set appears, so it was left as it is (TEST-074).
 
-- Awaiting the user's decision: the Victory Road GS Ball item uses `EVENT_CAN_GIVE_GS_BALL_TO_KURT` as its visibility flag (`disappear` sets it). Kurt clears that flag after checking the ball, so the ball reappears in Victory Road and can be picked up again, which lets the Celebi event be repeated. The Ilex Forest script keeps the GS Ball on purpose "to repeat this event", so this may be intended (TEST-081).
+- Decided by the user (2026-11-25): intended, keep it. The Victory Road GS Ball item uses `EVENT_CAN_GIVE_GS_BALL_TO_KURT` as its visibility flag (`disappear` sets it). Kurt clears that flag after checking the ball, so the ball reappears in Victory Road and can be picked up again, which lets the Celebi event be repeated. The Ilex Forest script keeps the GS Ball on purpose "to repeat this event", so this may be intended (TEST-081).
 
 ## 32. Manual Testing Checklist
 
