@@ -954,7 +954,7 @@ Complete the project systematically using the following phases.
 - [x] Audit ability awareness.
 - [x] Audit item awareness.
 - [x] Audit trainer AI flags.
-- [ ] Eliminate redundant calculations.
+- [x] Eliminate redundant calculations.
 - [x] Optimise AI execution speed.
 - [x] Verify AI decision quality.
 
@@ -1107,11 +1107,11 @@ The trainer AI's 1-on-1 matchup simulation is by far the largest measured cost (
 - Current task: Phase 9 (code quality)
 - Current AI agent: Claude (Claude Code)
 - Current Git branch: `000-Johto-Frontier`
-- Last verified build: clone of `6c4969bf3` plus QUAL-001, Linux, RGBDS 0.7.0, 0 assembler warnings, 675,452 bytes free
-- Last completed task: QUAL-001 (party switch merge; Phase 7 reviews)
-- Last verified commit: QUAL-001 (full suite: 133 scripts, no regressions against the previous run)
+- Last verified build: clone of `fd0ae39c9` plus PERF-008, Linux, RGBDS 0.7.0, 0 assembler warnings, 671,150 bytes free
+- Last completed task: PERF-008 (type chart matrices)
+- Last verified commit: PERF-008 (full suite: 135 scripts, no regressions against the previous run)
 - Outstanding blockers: none
-- Next task: Phase 9 (code quality), then Phases 10-11. Open earlier items: Phase 4 type-chart index, Phase 5 register usage
+- Next task: Phase 9 (code quality), then Phases 10-11. Open earlier item: Phase 5 register usage
 
 Update this section continuously.
 
@@ -1176,6 +1176,7 @@ Maintain the following table.
 | PERF-005 | `CalcBattleStats` (every battle stat recalculation; the AI sim calls it after each simulated boost) | Stage 0 (x1) copies the stat instead of a Multiply and a Divide, then the same min-1 / max-999 handling | ~5,150 M-cycles per `CalcEnemyStats` (AI move choice profile) | Most stats are at stage 0: one copy each | Measured: `AI_SimMoveChoice` set-up case 12.1 -> 11.0 frames (16.3 on the baseline); `AI_MatchupSwitch` 20.4 -> 20.0 | `test_calc_battle_stats_same` (250 cases identical to the baseline, raw stats 0 to $FFFF), `test_battle_stats`, full suite |
 | PERF-006 | Tail calls | Scan for `call X` / `ret` and `farcall X` / `ret` pairs (to become `jmp`/`farjp`), excluding the 34 routines that read their return address (jump tables, text commands, `PopBCDEHL` and the like) | 1 `call`/`ret` pair left (`PlayerGivesAwayAnEggForAdoption`), no `farcall`/`ret` pairs (converted in earlier work) | `jmp AdoptMonFromParty` | 1 byte, ~10 M-cycles (calculated) | Build, full suite |
 | PERF-007 | `Random`, LCD interrupt helpers (`home/random.asm`, `home/lcd.asm`) | The 17 remaining HRAM accesses written as `ld a, [hX]` / `ld [hX], a` (3 bytes, 4 M-cycles: RGBDS 0.7 does not shorten them on its own) changed to `ldh` (2 bytes, 3 M-cycles) | 271.0 M-cycles per `Random` call | 260.0 | -4%; 17 bytes of home bank | `prof_random` (same output sequence), full suite |
+| PERF-008 | Type chart lookups (`TypeMatchupScan`, `StabTypeScan`; every damage calculation and AI damage estimate) | Instead of walking the ~130-entry list, each chart now also has two page-aligned 32x32 matrices built at assembly time from the same entries (`type_matchup` macro): the multiplier, and the entry's position in the list. A lookup reads one cell per defending type; Stab applies the two matchups in list order (the order changes how damage rounds), then the Foresight list is scanned as before. Types of 32 or more fall back to the old scan | AI switch decision 20.0 frames; move choice 6.1 / 5.2 / 7.9 frames | 17.6; 5.5 / 4.7 / 7.1 | -12% switch, -10% move choice; 4,104 bytes of ROM | `test_type_chart_scan` (769/769 vs the previous build), `test_type_chart_stab_order` (240/240), `prof_ai_movechoice`, `test_ai_perf`, full suite |
 
 Use unique identifiers such as PERF-001, PERF-002 and PERF-003.
 
@@ -1302,6 +1303,9 @@ Maintain the following table.
 | TEST-088 | Inventory and party management | Review of `PutItemInPocket` and `RemoveItemFromPocket` (pocket capacity per pocket, stacks split at 99, the list shifted down when a stack empties, nothing changed when an item does not fit) and of the party/PC paths (`RemoveMonFromParty` mail shift, SRAM pairing from TEST-076, storage encoding from TEST-085) | Code review; existing `test_item_stack_99`, `test_sell_limit`, `test_quantity_text`, `test_start_menu_order`, `test_popup_screen` | Passed | No faults; the item routines are vanilla. Menus are otherwise covered by the existing menu tests and the manual checklist. |
 | TEST-089 | Pokédex, input and movement | Pokédex: both dex orders (new and alphabetical) hold all 252 species exactly once, the alphabetical one sorted by the displayed names (Porygon-Z before Porygon2 follows the game's character order), and the entry table is length-asserted. Input and movement: covered by the existing targeted tests (`test_voltorb_turbo_b`, `test_teleport`, `test_spinner_trainer_run`, `test_suction_cups_fishing`, the dex screen tests) and the movement-script check (TEST-086) | Python over the dex data; existing tests | Passed | Feel and timing (turbo buttons, bike turning, running shoes) can only be judged by playing (Section 32). |
 | TEST-090 | Party switching | `test_party_switch`: `_SwitchPartyMons.SwapMonAndMail` on a random six-mon party for six pairs of slots (both orders, first and last): exactly those two slots swap their species entry, party struct, nickname, OT and mail, all other slots are unchanged, and `bc`/`de`/`hl` are preserved | Interpreter | Passed | 12/12 on the old code and on the merged code (MEM-008). |
+| TEST-091 | Type chart matrices (equivalence) | `test_type_chart_scan` against a snapshot of the previous build: all 19 x 19 single-type matchups, 250 random dual-type, inverse and typeless cases with and without Foresight, the Ghost cases, and 150 random `BattleCommand_Stab` runs (damage, `wTypeModifier`, `wAttackMissed`, `wTypeMatchup`) | Interpreter, old vs new | Passed | 769/769 identical. |
+| TEST-092 | Type chart order (Stab rounding) | `test_type_chart_stab_order`: every attacking type against pairs of defending types that both have an entry (120 pairs from the normal and inverse charts, both type orders, odd damage values), compared with the previous build. 59 of the 120 pairs have a damage value whose result depends on the order | Interpreter, old vs new | Passed | 240/240 identical. Needs the old build as a third argument, like the other comparison tests. |
+| TEST-093 | AI move choice speed | `prof_ai_movechoice`: frames for `AI_SimMoveChoice` with three move sets | Interpreter (perfkit) | Measured | 6.1 -> 5.5, 5.2 -> 4.7, 7.9 -> 7.1 frames with PERF-008. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
@@ -1935,6 +1939,25 @@ Use Git history to identify the corresponding commit. Do not repeatedly amend co
 - Git commit message: `memory: reuse SwapPartyMons for the party menu switch`
 - Next task: rest of Phase 9, then Phases 10-11.
 
+### PERF-008 — Type chart matrices
+
+- Date: 2026-11-25
+- AI agent: Claude (Claude Code)
+- Audit phase: Phase 4 (eliminate redundant calculations)
+- System: Type effectiveness (damage and AI)
+- Files modified: `data/types/type_matchups.asm`, `engine/battle/type_chart_scan.asm`, `engine/battle/effect_commands.asm`
+- Problem identified: every type lookup walked the whole chart list; the AI does many per decision.
+- Root cause: list format only.
+- Solution implemented: see PERF-008. The lists are unchanged (entries now go through `type_matchup`, which also asserts no pair is listed twice in a chart); `GetTypeChart` returns a small descriptor per chart.
+- Behaviour preserved: identical results, including the Stab rounding order and `wTypeModifier` (TEST-091, TEST-092).
+- Performance impact: -12% AI switch decision, -10% AI move choice. Memory impact: 4,104 bytes of ROM (671,150 free); the section moved to a bank with room.
+- Build result: builds, 0 assembler warnings.
+- Tests performed: TEST-091 to TEST-093, `test_ai_perf`, full suite (135 scripts).
+- Test results: all pass; the full suite matches the previous run apart from the new scripts.
+- Remaining risks: none known. A new chart entry needs no extra step: the matrices are rebuilt from the list.
+- Git commit message: `perf: look up type matchups in matrices built from the charts`
+- Next task: Phase 5 register usage; rest of Phase 9; Phases 10-11.
+
 ## 31. Outstanding Issues
 
 Maintain a list of:
@@ -1955,7 +1978,7 @@ Do not silently ignore unresolved issues.
 - The interpreter tests live in the git-excluded `.claude-tools/romtest` folder, so fixes to them are recorded here but are not part of the repository history.
 - The suite is a usable regression gate again (TEST-004). The four comparison tests (`test_bug_contest_judging`, `test_map_render_same`, `test_overworld_screen_same`, `test_type_chart_scan`) should be run with the baseline ROM as the older build after any change to those systems. `test_view_animations` needs a debug build. `test_map_render_same` is stale (written for the removed LZP format) and should be rewritten or retired; `test_overworld_screen_same` covers the same ground (TEST-010).
 - Phase 2 is complete as far as static checks and the interpreter can take it (TEST-005, 009, 011-020; BUG-003 to BUG-008). Crashes or freezes that depend on real-hardware timing can only be found with the manual checklist (Section 32).
-- Phase 4 open item: the AI switch decision is still ~20 frames in the worst case. Its biggest remaining cost is the linear type-chart scan per damage estimate (~18%); an index by attacking type would need the three charts regrouped (normal, inverse, none). Not done yet.
+- Phase 4: the type-chart index is done (PERF-008: matrices built from the unchanged lists). The worst-case AI switch decision is now 17.6 frames. Comparison tests (`test_type_chart_scan`, `test_type_chart_stab_order`) need the previous build as a third argument.
 - Tooling note: on the mounted Windows working copy, `core.checkStat=minimal` lets `git status`/`git diff` miss edits made from Linux. Stage edited files explicitly (`git add <file>`) and take diffs with `git diff --cached`; a byte comparison of the tree against a fresh clone of HEAD (2026-11-25) found nothing uncommitted.
 - Work in progress (author's): most species in `data/pokemon/evos_attacks.asm` share a placeholder entry (no evolution, only Splash learned); comments mark planned levels. Left as it is.
 - No emulator or physical hardware is available here: VBlank/HBlank timing, DMA and real-hardware behaviour can only be checked in the interpreter with emulated hooks. Anything timing-sensitive needs manual emulator testing (Section 32).

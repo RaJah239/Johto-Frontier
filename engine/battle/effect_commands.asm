@@ -1160,7 +1160,8 @@ CheckTypeMatchupWithGhostBypass:
 	jmp PopBCDEHL
 
 GetTypeChart:
-; hl = the type chart for this battle (normal, inverse or typeless); c = nz
+; hl = the type chart descriptor for this battle (normal, inverse or
+; typeless; see TypeChart_Normal); c = nz
 ; if the target's Ghost immunities (the matchups after -2) don't apply.
 ; Preserves b, d, e.
 	call CheckIgnoreGhostImmunity
@@ -1169,13 +1170,13 @@ GetTypeChart:
 	inc c
 .got_ghost
 	ld a, [wBattleType]
-	ld hl, NoTypeMatchups
+	ld hl, TypeChart_None
 	cp BATTLETYPE_TYPELESS
 	ret z
-	ld hl, InverseTypeMatchups
+	ld hl, TypeChart_Inverse
 	cp BATTLETYPE_INVERSE
 	ret z
-	ld hl, TypeMatchups
+	ld hl, TypeChart_Normal
 	ret
 
 BattleCommand_ResetTypeMatchup:
