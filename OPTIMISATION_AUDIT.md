@@ -992,11 +992,11 @@ Complete the project systematically using the following phases.
 - [x] Audit wild encounters.
 - [x] Audit NPC behaviour.
 - [x] Audit scripts.
-- [ ] Audit menus.
-- [ ] Audit inventory.
+- [x] Audit menus.
+- [x] Audit inventory.
 - [x] Audit shops.
 - [ ] Audit Pokédex.
-- [ ] Audit party management.
+- [x] Audit party management.
 - [x] Audit PC storage.
 - [ ] Audit input handling.
 - [x] Audit text rendering.
@@ -1297,6 +1297,8 @@ Maintain the following table.
 | TEST-084 | Wild encounters | Review of `ChooseWildEncounter` and `CheckRepelEffect`: the 1-100 roll always ends inside the grass and water probability tables (both end at 100); the +0 to +3 level bonus is uncapped, so listed levels were checked across every encounter type: grass and water up to 37, fishing 5-40, headbutt trees 15-25, so no wild Pokémon can pass level 50; Repel compares against the first party Pokémon that has HP | Code review; Python over `data/wild/*.asm` | Passed | Note for future data edits: a listed grass or water level above 47 would let the bonus pass the level cap. |
 | TEST-085 | PC storage (encoding) | `test_pc_encode_roundtrip`: 40 random Pokémon (species, item, moves, ID, experience, EVs, caught ball, Unown form, DVs, PP Up bits, happiness, Pokérus, caught data, level, alt species, nickname and OT with spaces and terminators) through `EncodeBufferMon` and `DecodeBufferMon`: every stored field comes back and the checksum is valid; a flipped bit in the encoded experience is caught (Bad Egg, carry) | Interpreter | Passed | 41/41. Confirms the hack's changed box layout (EVs, caught ball and Unown form instead of stat experience) still lines up with the encoder. |
 | TEST-086 | NPC and scripted movement | `validate_movement.py`: every movement script used by `applymovement`, `applymovementlasttalked` or `applyonemovement` (234) reaches `step_end` or `step_resume` before any other data | Python validator | Passed | No problems. |
+| TEST-087 | Options (menus) | `validate_option_bits.py`: the 42 option bit constants mapped to their byte (`wOptions`, `wTextboxFlags`, `wOptions2`-`wOptions5`); every `bit`/`set`/`res` on an option constant (159 uses) checked against the byte loaded into `a` or `hl` | Python validator | Passed | No option tested on the wrong byte. `wExpShareToggle` reuses the `EXP_SHARE` bit number on purpose, and every reader and writer agrees. |
+| TEST-088 | Inventory and party management | Review of `PutItemInPocket` and `RemoveItemFromPocket` (pocket capacity per pocket, stacks split at 99, the list shifted down when a stack empties, nothing changed when an item does not fit) and of the party/PC paths (`RemoveMonFromParty` mail shift, SRAM pairing from TEST-076, storage encoding from TEST-085) | Code review; existing `test_item_stack_99`, `test_sell_limit`, `test_quantity_text`, `test_start_menu_order`, `test_popup_screen` | Passed | No faults; the item routines are vanilla. Menus are otherwise covered by the existing menu tests and the manual checklist. |
 
 Use unique identifiers such as TEST-001, TEST-002 and TEST-003.
 
