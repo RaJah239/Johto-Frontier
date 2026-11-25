@@ -25,13 +25,13 @@ Random::
 	; if the state is zero, seed it first
 	ldh a, [hRandomState]
 	ld b, a
-	ld a, [hRandomState + 1]
+	ldh a, [hRandomState + 1]
 	or b
 	ld b, a
-	ld a, [hRandomState + 2]
+	ldh a, [hRandomState + 2]
 	or b
 	ld b, a
-	ld a, [hRandomState + 3]
+	ldh a, [hRandomState + 3]
 	or b
 	jmp z, .reseed
 
@@ -40,11 +40,11 @@ Random::
 	; (Marsaglia's triple; full period, zero is a fixed point)
 	ldh a, [hRandomState]
 	ld b, a
-	ld a, [hRandomState + 1]
+	ldh a, [hRandomState + 1]
 	ld c, a
-	ld a, [hRandomState + 2]
+	ldh a, [hRandomState + 2]
 	ld d, a
-	ld a, [hRandomState + 3]
+	ldh a, [hRandomState + 3]
 	ld e, a
 
 	; x ^= x << 13
@@ -184,16 +184,16 @@ Random::
 	ld a, b
 	ldh [hRandomState], a
 	ld a, c
-	ld [hRandomState + 1], a
+	ldh [hRandomState + 1], a
 	ld a, d
-	ld [hRandomState + 2], a
+	ldh [hRandomState + 2], a
 	ld a, e
-	ld [hRandomState + 3], a
+	ldh [hRandomState + 3], a
 
 	; refresh the sampled bytes
-	ld a, [hRandomState + 3]
+	ldh a, [hRandomState + 3]
 	ldh [hRandomAdd], a
-	ld a, [hRandomState + 2]
+	ldh a, [hRandomState + 2]
 	ldh [hRandomSub], a
 
 	pop hl
@@ -205,16 +205,16 @@ Random::
 	ldh a, [rDIV]
 	ldh [hRandomState], a
 	ldh a, [rLY]
-	ld [hRandomState + 1], a
+	ldh [hRandomState + 1], a
 	ldh a, [hVBlankCounter]
-	ld [hRandomState + 2], a
+	ldh [hRandomState + 2], a
 	; spin past a divider tick so the two samples differ
 	ld b, 64
 .spin
 	dec b
 	jr nz, .spin
 	ldh a, [rDIV]
-	ld [hRandomState + 3], a
+	ldh [hRandomState + 3], a
 	; never leave the state zero (0 is a fixed point of xorshift)
 	ldh a, [hRandomState]
 	and a

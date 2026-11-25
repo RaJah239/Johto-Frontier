@@ -64,7 +64,7 @@ endr
 	ld a, HIGH(LCDBillsPC2)
 	ldh [hFunctionTargetHi], a
 	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	pop bc
 	pop hl
 .donepc
@@ -139,7 +139,7 @@ endr
 	ld a, HIGH(LCDBillsPC3)
 	ldh [hFunctionTargetHi], a
 	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	pop de
 	pop bc
 	pop hl
@@ -182,7 +182,7 @@ endr
 	ld a, HIGH(LCDBillsPC1)
 	ldh [hFunctionTargetHi], a
 	ld a, JP_INSTRUCTION
-	ld [hFunctionInstruction], a
+	ldh [hFunctionInstruction], a
 	pop de
 	pop bc
 	pop hl
