@@ -97,7 +97,6 @@ SkorupiIcon::    INCBIN "gfx/icons/skorupi.2bpp"
 DrapionIcon::    INCBIN "gfx/icons/drapion.2bpp"
 LarvestaIcon::   INCBIN "gfx/icons/larvesta.2bpp"
 VolcaronaIcon::  INCBIN "gfx/icons/volcarona.2bpp"
-TropiusIcon::    INCBIN "gfx/icons/tropius.2bpp"
 
 
 SECTION "Mon Icons 2", ROMX, ALIGN[4]

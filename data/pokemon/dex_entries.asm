@@ -99,7 +99,6 @@ SkorupiPokedexEntry::    INCLUDE "data/pokemon/dex_entries/skorupi.asm"
 DrapionPokedexEntry::    INCLUDE "data/pokemon/dex_entries/drapion.asm"
 LarvestaPokedexEntry::   INCLUDE "data/pokemon/dex_entries/larvesta.asm"
 VolcaronaPokedexEntry::  INCLUDE "data/pokemon/dex_entries/volcarona.asm"
-TropiusPokedexEntry::    INCLUDE "data/pokemon/dex_entries/tropius.asm"
 
 
 SECTION "Pokedex Entries 129-192", ROMX

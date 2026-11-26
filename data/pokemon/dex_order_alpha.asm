@@ -180,7 +180,6 @@ AlphabeticalPokedexOrder:
 	db TOGEKISS
 	db TOGETIC
 	db TORTERRA
-	db TROPIUS
 	db TYPHLOSION
 	db TYRANITAR
 	db UMBREON

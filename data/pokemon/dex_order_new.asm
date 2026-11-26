@@ -97,7 +97,6 @@ NewPokedexOrder:
 	db DRAPION
 	db LARVESTA
 	db VOLCARONA
-	db TROPIUS
 	db MANKEY
 	db PRIMEAPE
 	db ANNIHILAPE

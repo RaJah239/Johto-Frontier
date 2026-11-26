@@ -598,7 +598,7 @@ JohtoGrassWildMons:
 	db 20, MANKEY
 	db 20, DODUO
 	db 20, PONYTA
-	db 20, TROPIUS
+	db 20, PIDGEOTTO
 	db 5, PIDGEOTTO
 	; day
 	db 20, PONYTA
@@ -606,7 +606,7 @@ JohtoGrassWildMons:
 	db 20, MANKEY
 	db 20, DODUO
 	db 20, PONYTA
-	db 20, TROPIUS
+	db 20, PIDGEOTTO
 	db 5, PIDGEOTTO
 	; nite
 	db 20, DONPHAN
@@ -960,7 +960,7 @@ JohtoGrassWildMons:
 	db 24, PIKACHU
 	db 24, PIKACHU
 	db 24, PIKACHU
-	db 24, TROPIUS
+	db 24, PIDGEOTTO
 	db 24, YANMA
 	db 24, LOPUNNY
 	db 5, PIKACHU
@@ -968,7 +968,7 @@ JohtoGrassWildMons:
 	db 24, PIKACHU
 	db 24, PIKACHU
 	db 24, PIKACHU
-	db 24, TROPIUS
+	db 24, PIDGEOTTO
 	db 24, YANMA
 	db 24, LOPUNNY
 	db 5, PIKACHU
@@ -976,7 +976,7 @@ JohtoGrassWildMons:
 	db 24, PIKACHU
 	db 24, PIKACHU
 	db 24, PIKACHU
-	db 24, TROPIUS
+	db 24, PIDGEOTTO
 	db 24, YANMA
 	db 24, LOPUNNY
 	db 5, PIKACHU
@@ -1322,7 +1322,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 27, TANGROWTH
-	db 27, TROPIUS
+	db 27, PIDGEOTTO
 	db 27, AZUMARILL
 	db 27, SCYTHER
 	db 27, WEEPINBELL
@@ -1330,7 +1330,7 @@ JohtoGrassWildMons:
 	db 5, AZUMARILL
 	; day
 	db 27, TANGROWTH
-	db 27, TROPIUS
+	db 27, PIDGEOTTO
 	db 27, AZUMARILL
 	db 27, SCYTHER
 	db 27, WEEPINBELL
@@ -1351,7 +1351,7 @@ JohtoGrassWildMons:
 	; morn
 	db 30, VICTREEBEL
 	db 30, TANGROWTH
-	db 30, TROPIUS
+	db 30, PIDGEOTTO
 	db 30, PIDGEOT
 	db 30, BRELOOM
 	db 30, SCYTHER
@@ -1359,7 +1359,7 @@ JohtoGrassWildMons:
 	; day
 	db 30, VICTREEBEL
 	db 30, TANGROWTH
-	db 30, TROPIUS
+	db 30, PIDGEOTTO
 	db 30, PIDGEOT
 	db 30, BRELOOM
 	db 30, SCYTHER

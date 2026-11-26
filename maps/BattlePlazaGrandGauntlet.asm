@@ -427,7 +427,7 @@ PartyKeeperSpeciesList:
 	db JOLTIK
 	db SKORUPI
 	db LARVESTA
-	db TROPIUS
+	db TORTERRA
 	db MANKEY
 	db FERROSEED
 	db SCYTHER

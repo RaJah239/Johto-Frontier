@@ -152,7 +152,6 @@ SkorupiEvosAttacks:
 DrapionEvosAttacks:
 LarvestaEvosAttacks:
 VolcaronaEvosAttacks:
-TropiusEvosAttacks:
 MankeyEvosAttacks:
 PrimeapeEvosAttacks:
 AnnihilapeEvosAttacks:

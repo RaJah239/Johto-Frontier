@@ -101,7 +101,6 @@ PokemonCries::
 	mon_cry CRY_CLEFFA,     -$33e,  $200 ; DRAPION AzureKeys
 	mon_cry CRY_CYNDAQUIL,  -$4c7,  $0f5 ; LARVESTA AzureKeys
 	mon_cry CRY_METAPOD,    -$420,  $1a6 ; VOLCARONA AzureKeys
-	mon_cry CRY_TYPHLOSION,  $c00,  $130 ; TROPIUS
 	mon_cry CRY_NIDOQUEEN,    221,   224 ; MANKEY
 	mon_cry CRY_NIDOQUEEN,    175,   192 ; PRIMEAPE
 	mon_cry CRY_NIDOQUEEN,   -275,   212 ; ANNIHILAPE
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 303
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 304
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 305
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 306
 	assert_table_length $ff

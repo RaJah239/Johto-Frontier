@@ -193,8 +193,6 @@ PokemonPicPointers::
  	dba LarvestaBackpic
  	dba VolcaronaFrontpic
  	dba VolcaronaBackpic
- 	dba TropiusFrontpic
- 	dba TropiusBackpic
  	dba MankeyFrontpic
  	dba MankeyBackpic
  	dba PrimeapeFrontpic

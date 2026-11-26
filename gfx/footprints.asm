@@ -101,7 +101,6 @@ Footprints:
  INCBIN "gfx/footprints/skorupi_line.1bpp" ; DRAPION
  INCBIN "gfx/footprints/larvesta.1bpp" 
  INCBIN "gfx/footprints/blank.1bpp" ; VOLCARONA
- INCBIN "gfx/footprints/tropius.1bpp"
  INCBIN "gfx/footprints/mankey.1bpp"
  INCBIN "gfx/footprints/primeape.1bpp"
  INCBIN "gfx/footprints/annihilape.1bpp"  
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 302
 	 INCBIN "gfx/footprints/blank.1bpp" ; 303
 	 INCBIN "gfx/footprints/blank.1bpp" ; 304
+	 INCBIN "gfx/footprints/blank.1bpp" ; 305
 	assert_table_length $100

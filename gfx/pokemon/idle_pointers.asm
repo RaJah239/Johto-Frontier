@@ -95,7 +95,6 @@ AnimationIdlePointers:
 	dw DrapionAnimationIdle
 	dw LarvestaAnimationIdle
 	dw VolcaronaAnimationIdle
-	dw TropiusAnimationIdle
 	dw MankeyAnimationIdle
 	dw PrimeapeAnimationIdle
 	dw AnnihilapeAnimationIdle

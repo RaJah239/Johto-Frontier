@@ -95,7 +95,6 @@ FramesPointers:
 	dw DrapionFrames
 	dw LarvestaFrames
 	dw VolcaronaFrames
-	dw TropiusFrames
 	dw MankeyFrames
 	dw PrimeapeFrames
 	dw AnnihilapeFrames
