@@ -204,6 +204,7 @@ PokemonCries::
 	mon_cry CRY_LEAFEON, 0, 255 ; LEAFEON
 	mon_cry CRY_BLASTOISE, 0, 255 ; POLIWHIRL
 	mon_cry CRY_BLASTOISE, 0, 255 ; POLIWRATH
+	mon_cry CRY_BLASTOISE, 0, 255 ; POLITOED
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -261,5 +262,4 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 304
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 305
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 306
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 307
 	assert_table_length $ff

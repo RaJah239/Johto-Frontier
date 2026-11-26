@@ -402,6 +402,8 @@ PokemonPicPointers::
 	dba PoliwhirlBackpic
 	dba PoliwrathFrontpic
 	dba PoliwrathBackpic
+	dba PolitoedFrontpic
+	dba PolitoedBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

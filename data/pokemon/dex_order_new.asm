@@ -62,6 +62,7 @@ NewPokedexOrder:
 	db AZUMARILL
 	db POLIWHIRL
 	db POLIWRATH
+	db POLITOED
 	db RHYDON
 	db DRILBUR
 	db EXCADRILL

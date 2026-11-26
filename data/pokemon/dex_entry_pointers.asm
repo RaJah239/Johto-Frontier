@@ -199,4 +199,5 @@ PokedexDataPointerTable:
 	dba LeafeonPokedexEntry
 	dba PoliwhirlPokedexEntry
 	dba PoliwrathPokedexEntry
+	dba PolitoedPokedexEntry
 	assert_table_length NUM_POKEMON

@@ -133,6 +133,7 @@ AlphabeticalPokedexOrder:
 	db PILOSWINE
 	db POLIWHIRL
 	db POLIWRATH
+	db POLITOED
 	db PONYTA
 	db PORYGON
 	db PORYGON2
