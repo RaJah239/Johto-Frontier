@@ -710,3 +710,5 @@ SECTION "Pics 31", ROMX
 
 NinetalesFrontpic: INCBIN "gfx/pokemon/ninetales/front.animated.2bpp.lz"
 NinetalesBackpic: INCBIN "gfx/pokemon/ninetales/back.2bpp.lz"
+NinetalesAFrontpic: INCBIN "gfx/pokemon/ninetales_a/front.animated.2bpp.lz"
+NinetalesABackpic: INCBIN "gfx/pokemon/ninetales_a/back.2bpp.lz"

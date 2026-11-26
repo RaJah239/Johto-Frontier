@@ -29,8 +29,9 @@
 - Completed additions: Kadabra `ac2e4acde`.
 - Completed additions: Alakazam `5601d0288` (reference art, icon, footprint, cry; normal/debug builds and stadium checks passed).
 - Completed additions: Vulpix `43cc18e1c` (normal/debug builds and stadium checks passed).
-- Completed additions: Ninetales (normal/debug builds and stadium checks passed).
-- Remaining additions: NINETALES_A, IVYSAUR, VENUSAUR, SABLEYE, SHELLDER, CLOYSTER, VIKAVOLT, DUSCLOPS, DUSKNOIR, EELEKTROSS, DHELMISE, DRAGALGE, HONCHKROW, MARSHTOMP, SWAMPERT, JUMPLUFF, GROVYLE, SCEPTILE, CRABOMINABLE, DONDOZO, CYCLIZAR, KROOKODILE, RHYPERIOR, MIMIKYU, DUGTRIO_A, MAGMORTAR, PRIMARINA, EXPLOUD, TYRANTRUM, DRAGONITE, HYDREIGON, GOODRA, DRAGAPULT, BAXCALIBUR, VOLCANION, MELMETAL.
+- Completed additions: Ninetales `a864f2122` (normal/debug builds and stadium checks passed).
+- Completed additions: Ninetales-A (reference art/icon; shared footprint; normal/debug builds and stadium checks passed).
+- Remaining additions: IVYSAUR, VENUSAUR, SABLEYE, SHELLDER, CLOYSTER, VIKAVOLT, DUSCLOPS, DUSKNOIR, EELEKTROSS, DHELMISE, DRAGALGE, HONCHKROW, MARSHTOMP, SWAMPERT, JUMPLUFF, GROVYLE, SCEPTILE, CRABOMINABLE, DONDOZO, CYCLIZAR, KROOKODILE, RHYPERIOR, MIMIKYU, DUGTRIO_A, MAGMORTAR, PRIMARINA, EXPLOUD, TYRANTRUM, DRAGONITE, HYDREIGON, GOODRA, DRAGAPULT, BAXCALIBUR, VOLCANION, MELMETAL.
 - Name normalization to confirm against source/reference data: Slyveon→SYLVEON, BaltoyIcon→BALTOY, Marshtop→MARSHTOMP, Mr.Mime→MR__MIME, Ninetales (Aloan)→NINETALES_A, Dugtrio.A→DUGTRIO_A, Rotom (Wash)→ROTOM, Ho-Oh→HO_OH, N-Own→NOWN. `Poliwrath (Urshifu like stats)` is treated as POLIWRATH.
 - Asset gaps in `C:\Users\RaJah239\Desktop\pokemon_sprites`: SHELLDER, CLOYSTER, EXPLOUD, DRAGONITE; DUGTRIO_A may be the `dugtrio - shattered` folder. Check supplied reference projects before implementing these species. Do not silently substitute graphics.
 - Review: Zubat removal leaves 30 generic `L@` trainer placeholders with empty parties in `data/trainers/parties.asm`; verify these classes are unused or remove/rework the placeholder trainers before release.

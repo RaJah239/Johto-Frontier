@@ -224,6 +224,7 @@ MonMenuIconPals:
 	icon_pals BROWN, BLUE ; ALAKAZAM
 	icon_pals RED, BROWN ; VULPIX
 	icon_pals RED, BROWN ; NINETALES
+	icon_pals BLUE, PURPLE ; NINETALES_A
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

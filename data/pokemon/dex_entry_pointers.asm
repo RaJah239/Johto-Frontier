@@ -218,4 +218,5 @@ PokedexDataPointerTable:
 	dba AlakazamPokedexEntry
 	dba VulpixPokedexEntry
 	dba NinetalesPokedexEntry
+	dba NinetalesAPokedexEntry
 	assert_table_length NUM_POKEMON

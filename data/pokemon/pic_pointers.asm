@@ -440,6 +440,8 @@ PokemonPicPointers::
 	dba VulpixBackpic
 	dba NinetalesFrontpic
 	dba NinetalesBackpic
+	dba NinetalesAFrontpic
+	dba NinetalesABackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

@@ -136,6 +136,7 @@ NewPokedexOrder:
 	db MR__MIME
 	db VULPIX
 	db NINETALES
+	db NINETALES_A
 	db SUDOWOODO
 	db KOFFING
 	db WEEZING

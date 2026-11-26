@@ -217,4 +217,5 @@ FramesPointers:
 dw AlakazamFrames
 dw VulpixFrames
 	dw NinetalesFrames
+	dw NinetalesAFrames
 	assert_table_length NUM_POKEMON
