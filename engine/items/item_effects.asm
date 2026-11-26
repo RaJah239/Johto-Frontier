@@ -143,7 +143,7 @@ ItemEffects:
 	dw PokeBallEffect      ; GAUNTLET_BALL
 	dw NoEffect            ; HEAVY_BOOTS
 	dw NoEffect            ; EGG_TICKET
-	dw TangelaCallEffect   ; TANGELA_CALL
+	dw BellsproutCallEffect   ; BELLSPROUT_CALL
 	dw NoEffect            ; STARDUST
 	dw NoEffect            ; STAR_PIECE
 	dw RestorePPEffect     ; PP_MAX
@@ -3276,7 +3276,7 @@ MiloticCallEffect:
 	ld [wUsingHMItem], a
 	jmp WaterfallFunction
 
-TangelaCallEffect:
+BellsproutCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
 	farjp SweetScentFromMenu

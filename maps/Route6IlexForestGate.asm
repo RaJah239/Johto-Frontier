@@ -14,16 +14,16 @@ Route6IlexForestGate_MapEvents:
 	object_event  9,  3, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route6IlexForestGateTeacherScript, EVENT_ROUTE_6_ILEX_FOREST_GATE_TEACHER_BEHIND_COUNTER
 	object_event  5,  7, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route6IlexForestGateTeacherScript, EVENT_ROUTE_6_ILEX_FOREST_GATE_TEACHER_IN_WALKWAY
 	object_event  3,  4, SPRITE_LASS, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_COMMAND, jumptextfaceplayer, Route6IlexForestGateLassText, EVENT_ROUTE_6_ILEX_FOREST_GATE_LASS
-	object_event  9,  4, SPRITE_TANGELA, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, Route6IlexForestGateTangelaScript, EVENT_ROUTE_6_ILEX_FOREST_GATE_TANGELA_BEHIND_COUNTER
-	object_event  4,  7, SPRITE_TANGELA, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, Route6IlexForestGateTangelaScript, EVENT_ROUTE_6_ILEX_FOREST_GATE_TANGELA_IN_WALKWAY
+	object_event  9,  4, SPRITE_BELLSPROUT, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, Route6IlexForestGateBellsproutScript, EVENT_ROUTE_6_ILEX_FOREST_GATE_BELLSPROUT_BEHIND_COUNTER
+	object_event  4,  7, SPRITE_BELLSPROUT, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_TEAL, OBJECTTYPE_SCRIPT, 0, Route6IlexForestGateBellsproutScript, EVENT_ROUTE_6_ILEX_FOREST_GATE_BELLSPROUT_IN_WALKWAY
 
 	object_const_def
 	const ROUTE6ILEXFORESTGATE_PORYGON_PC
 	const ROUTE6ILEXFORESTGATE_TEACHER1
 	const ROUTE6ILEXFORESTGATE_TEACHER2
 	const ROUTE6ILEXFORESTGATE_LASS
-	const ROUTE6ILEXFORESTGATE_TANGELA1
-	const ROUTE6ILEXFORESTGATE_TANGELA2
+	const ROUTE6ILEXFORESTGATE_BELLSPROUT1
+	const ROUTE6ILEXFORESTGATE_BELLSPROUT2
 
 Route6IlexForestGate_MapScripts:
 	def_scene_scripts
@@ -35,24 +35,24 @@ Route6IsForestRestlessCallback:
 	checkevent EVENT_FOREST_IS_RESTLESS
 	iffalse .Normal
 	disappear ROUTE6ILEXFORESTGATE_TEACHER1
-	disappear ROUTE6ILEXFORESTGATE_TANGELA1
+	disappear ROUTE6ILEXFORESTGATE_BELLSPROUT1
 	appear ROUTE6ILEXFORESTGATE_TEACHER2
-	appear ROUTE6ILEXFORESTGATE_TANGELA2
+	appear ROUTE6ILEXFORESTGATE_BELLSPROUT2
 	endcallback
 
 .Normal:
 	disappear ROUTE6ILEXFORESTGATE_TEACHER2
-	disappear ROUTE6ILEXFORESTGATE_TANGELA2
+	disappear ROUTE6ILEXFORESTGATE_BELLSPROUT2
 	appear ROUTE6ILEXFORESTGATE_TEACHER1
-	appear ROUTE6ILEXFORESTGATE_TANGELA1
+	appear ROUTE6ILEXFORESTGATE_BELLSPROUT1
 	endcallback
 
 Route6IlexForestGateTeacherScript:
 	faceplayeropentext
 	checkevent EVENT_FOREST_IS_RESTLESS
 	iftrue .ForestIsRestless
-	checkevent EVENT_GOT_TANGELA_CALL
-	iftrue .GotTangelaCall
+	checkevent EVENT_GOT_BELLSPROUT_CALL
+	iftrue .GotBellsproutCall
 	writethistext
 		text "Oh, honey. You're"
 		line "making a #dex?"
@@ -64,11 +64,11 @@ Route6IlexForestGateTeacherScript:
 		para "Try using this."
 		done
 	promptbutton
-	verbosegiveitem TANGELA_CALL
-	setevent EVENT_GOT_TANGELA_CALL
-.GotTangelaCall:
+	verbosegiveitem BELLSPROUT_CALL
+	setevent EVENT_GOT_BELLSPROUT_CALL
+.GotBellsproutCall:
 	jumpthisopenedtext
-		text "It's Tangela Call."
+		text "It's Bellsprout Call."
 
 		para "Use it wherever"
 		line "#mon appear."
@@ -100,14 +100,14 @@ Route6IlexForestGateLassText:
 	cont "type #mon."
 	done
 
-Route6IlexForestGateTangelaScript:
-	setval TANGELA
+Route6IlexForestGateBellsproutScript:
+	setval BELLSPROUT
 	special SetMonAsSeen
 	reanchormap
-	pokepic TANGELA
-	cry TANGELA
+	pokepic BELLSPROUT
+	cry BELLSPROUT
 	waitbutton
 	closepokepic
 	jumpthistext
-		text "Tangela: Tan tan!"
+		text "Bellsprout: Tan tan!"
 		done

@@ -104,7 +104,6 @@ PokemonNames::
 	db "Scizor@@@@"
 	db "Kleavor@@@"
 	db "Heracross@"
-	db "Tangela@@@"
 	db "Tangrowth@"
 	db "Meowth@@@@"
 	db "Persian@@@"
@@ -201,6 +200,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

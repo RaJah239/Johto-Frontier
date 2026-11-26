@@ -488,7 +488,7 @@ _PoisonFaintText::
 	prompt
 
 _UseSweetScentText::
-	text "Tangela sends out"
+	text "Bellsprout sends out"
 	line "a viney lure!"
 	done
 

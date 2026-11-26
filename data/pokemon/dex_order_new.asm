@@ -106,7 +106,6 @@ NewPokedexOrder:
 	db SCIZOR
 	db KLEAVOR
 	db HERACROSS
-	db TANGELA
 	db TANGROWTH
 	db MEOWTH
 	db PERSIAN

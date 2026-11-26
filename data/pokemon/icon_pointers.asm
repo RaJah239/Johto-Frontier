@@ -106,7 +106,6 @@ IconPointers:
 	dw ScizorIcon
 	dw KleavorIcon
 	dw HeracrossIcon
-	dw TangelaIcon
 	dw TangrowthIcon
 	dw MeowthIcon
 	dw PersianIcon

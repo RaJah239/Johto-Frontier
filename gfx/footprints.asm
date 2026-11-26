@@ -110,7 +110,6 @@ Footprints:
  INCBIN "gfx/footprints/scizor.1bpp"
  INCBIN "gfx/footprints/kleavor.1bpp" 
  INCBIN "gfx/footprints/heracross.1bpp" 
- INCBIN "gfx/footprints/tangela.1bpp"
  INCBIN "gfx/footprints/tangrowth.1bpp" 
  INCBIN "gfx/footprints/meowth.1bpp"
  INCBIN "gfx/footprints/persian.1bpp"
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 304
 	 INCBIN "gfx/footprints/blank.1bpp" ; 305
 	 INCBIN "gfx/footprints/blank.1bpp" ; 306
+	 INCBIN "gfx/footprints/blank.1bpp" ; 307
 	assert_table_length $100

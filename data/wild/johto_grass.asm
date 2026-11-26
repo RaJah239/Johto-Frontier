@@ -260,7 +260,7 @@ JohtoGrassWildMons:
 	db 25, SMEARGLE
 	db 25, HOOTHOOT
 	db 25, BRONZOR
-	db 25, TANGELA
+	db 25, BELLSPROUT
 	db 25, QUAGSIRE
 	db 25, CHANSEY
 	db 5, EEVEE
@@ -268,7 +268,7 @@ JohtoGrassWildMons:
 	db 25, SMEARGLE
 	db 25, HOOTHOOT
 	db 25, BRONZOR
-	db 25, TANGELA
+	db 25, BELLSPROUT
 	db 25, QUAGSIRE
 	db 25, CHANSEY
 	db 5, EEVEE
@@ -276,7 +276,7 @@ JohtoGrassWildMons:
 	db 25, SMEARGLE
 	db 25, HOOTHOOT
 	db 25, BRONZOR
-	db 25, TANGELA
+	db 25, BELLSPROUT
 	db 25, QUAGSIRE
 	db 25, CHANSEY
 	db 5, EEVEE
@@ -512,7 +512,7 @@ JohtoGrassWildMons:
 	db 17, SNUBBULL
 	db 17, MEOWTH
 	db 17, DITTO
-	db 17, TANGELA
+	db 17, BELLSPROUT
 	db 17, PIDGEOTTO
 	db 17, BUNEARY
 	db 5, TOGETIC
@@ -520,14 +520,14 @@ JohtoGrassWildMons:
 	db 17, SNUBBULL
 	db 17, MEOWTH
 	db 17, DITTO
-	db 17, TANGELA
+	db 17, BELLSPROUT
 	db 17, PIDGEOTTO
 	db 17, BUNEARY
 	db 5, TOGETIC
 	; nite
 	db 17, DROWZEE
 	db 17, DITTO
-	db 17, TANGELA
+	db 17, BELLSPROUT
 	db 17, MEOWTH
 	db 17, SNUBBULL
 	db 17, HOOTHOOT

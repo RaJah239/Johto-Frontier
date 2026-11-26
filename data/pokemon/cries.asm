@@ -110,7 +110,6 @@ PokemonCries::
 	mon_cry CRY_AMPHAROS,       0,   352 ; SCIZOR
 	mon_cry CRY_CATERPIE,     -64,   256 ; KLEAVOR
 	mon_cry CRY_AMPHAROS,      53,   224 ; HERACROSS
-	mon_cry CRY_GOLEM,          0,   256 ; TANGELA
 	mon_cry CRY_GOLEM,       $100,  $170 ; TANGROWTH
 	mon_cry CRY_CLEFAIRY,     119,   144 ; MEOWTH
 	mon_cry CRY_CLEFAIRY,     153,   383 ; PERSIAN
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 305
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 306
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 307
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 308
 	assert_table_length $ff

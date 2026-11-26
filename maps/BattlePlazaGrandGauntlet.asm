@@ -432,7 +432,7 @@ PartyKeeperSpeciesList:
 	db FERROSEED
 	db SCYTHER
 	db HERACROSS
-	db TANGELA
+	db BELLSPROUT
 	db MEOWTH
 	db SNUBBULL
 	db DROWZEE

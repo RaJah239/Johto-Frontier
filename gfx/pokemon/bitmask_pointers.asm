@@ -104,7 +104,6 @@ BitmasksPointers:
 	dw ScizorBitmasks
 	dw KleavorBitmasks
 	dw HeracrossBitmasks
-	dw TangelaBitmasks
 	dw TangrowthBitmasks
 	dw MeowthBitmasks
 	dw PersianBitmasks

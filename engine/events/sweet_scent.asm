@@ -11,8 +11,8 @@ SweetScentFromMenu:
 	ispokepicsonoroff
 	iftrue .skip
 	reanchormap
-	pokepic TANGELA
-	cry TANGELA
+	pokepic BELLSPROUT
+	cry BELLSPROUT
 	waitsfx
 	closepokepic
 	refreshmap

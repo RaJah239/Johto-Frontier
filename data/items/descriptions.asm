@@ -130,7 +130,7 @@ ItemDescriptions:
 	dw GauntletBallDesc
 	dw HeavyBootsDesc
 	dw EggTicketDesc
-	dw TangelaCallDesc
+	dw BellsproutCallDesc
 	dw StardustDesc
 	dw StarPieceDesc
 	dw PPMaxDesc
@@ -794,8 +794,8 @@ EggTicketDesc:
 	db   "May use at Golden-"
 	next "rod trade corner.@"
 
-TangelaCallDesc:
-	db   "Calls a TANGELA to"
+BellsproutCallDesc:
+	db   "Calls a BELLSPROUT to"
 	next "ensnare #mon.@"
 
 StardustDesc:

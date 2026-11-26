@@ -161,7 +161,6 @@ ScytherEvosAttacks:
 ScizorEvosAttacks:
 KleavorEvosAttacks:
 HeracrossEvosAttacks:
-TangelaEvosAttacks:
 TangrowthEvosAttacks:
 MeowthEvosAttacks:
 PersianEvosAttacks:

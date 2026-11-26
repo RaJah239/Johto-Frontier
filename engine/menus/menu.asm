@@ -387,7 +387,7 @@ Menu_WasButtonPressed:
 .skip_to_joypad
 ; hJoyPressed is not a live input: it is a delta that only GetJoypad
 ; recomputes, so reading it before JoyTextDelay can pick up a press from
-; long before this menu opened. The clearest case is selecting Tangela
+; long before this menu opened. The clearest case is selecting Bellsprout
 ; Call with Select: that press is still sitting in hJoyPressed when the
 ; battle menu first runs, which drew the enemy type box over the HUD the
 ; instant a wild mon appeared. Refresh first, then test.

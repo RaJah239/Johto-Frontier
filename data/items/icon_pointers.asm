@@ -131,7 +131,7 @@ ItemIconPointers::
 	dba GauntletBallIcon ; GAUNTLET_BALL
 	dba HeavyBootsIcon ; HEAVY_BOOTS
 	dba EggticketIcon ; EGG_TICKET
-	dba PokeCallIcon ; TANGELA_CALL
+	dba PokeCallIcon ; BELLSPROUT_CALL
 	dba SandIcon ; STARDUST
 	dba StarPieceIcon ; STAR_PIECE
 	dba PpMaxIcon ; PP_MAX

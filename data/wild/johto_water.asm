@@ -103,7 +103,7 @@ JohtoWaterWildMons:
 	def_water_wildmons ILEX_FOREST
 	db 4 percent ; encounter rate
 	db 20, MAGIKARP
-	db 20, TANGELA
+	db 20, MARILL
 	db 30, TANGROWTH
 	end_water_wildmons
 
@@ -117,7 +117,7 @@ JohtoWaterWildMons:
 	def_water_wildmons ROUTE_7
 	db 4 percent ; encounter rate
 	db 20, MARILL
-	db 20, TANGELA
+	db 20, MARILL
 	db 25, AZUMARILL
 	end_water_wildmons
 

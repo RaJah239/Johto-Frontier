@@ -12,7 +12,7 @@ SpriteMons:
 	db MAGIKARP
 	db WARTORTLE
 	db CHANSEY
-	db TANGELA
+	db BELLSPROUT
 	db FEEBAS
 	db PIKACHU
 	db CLEFAIRY

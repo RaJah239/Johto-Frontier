@@ -135,7 +135,7 @@
 	const GAUNTLET_BALL; 7f
 	const HEAVY_BOOTS  ; 80
 	const EGG_TICKET   ; 81
-	const TANGELA_CALL ; 82
+	const BELLSPROUT_CALL ; 82
 	const STARDUST     ; 83
 	const STAR_PIECE   ; 84
 	const PP_MAX       ; 85

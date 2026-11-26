@@ -104,7 +104,6 @@ FramesPointers:
 	dw ScizorFrames
 	dw KleavorFrames
 	dw HeracrossFrames
-	dw TangelaFrames
 	dw TangrowthFrames
 	dw MeowthFrames
 	dw PersianFrames
