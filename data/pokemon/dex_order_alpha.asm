@@ -54,6 +54,7 @@ AlphabeticalPokedexOrder:
 	db DROWZEE
 	db DUOSION
 	db DURALUDON
+	db DUSCLOPS
 	db DUSTOX
 	db EEVEE
 	db ELECTABUZZ

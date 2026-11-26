@@ -143,6 +143,7 @@ NewPokedexOrder:
 	db SHELLDER
 	db CLOYSTER
 	db VIKAVOLT
+	db DUSCLOPS
 	db SUDOWOODO
 	db KOFFING
 	db WEEZING

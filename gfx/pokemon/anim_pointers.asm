@@ -224,4 +224,5 @@ dw VulpixAnimation
 	dw ShellderAnimation
 	dw CloysterAnimation
 	dw VikavoltAnimation
+	dw DusclopsAnimation
 	assert_table_length NUM_POKEMON

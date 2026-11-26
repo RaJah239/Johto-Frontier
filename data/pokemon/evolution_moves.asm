@@ -224,4 +224,5 @@ db NO_MOVE      ; VULPIX
 	db NO_MOVE      ; SHELLDER
 	db NO_MOVE      ; CLOYSTER
 	db NO_MOVE      ; VIKAVOLT
+	db NO_MOVE      ; DUSCLOPS
 	assert_table_length NUM_POKEMON

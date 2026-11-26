@@ -231,6 +231,7 @@ MonMenuIconPals:
 	icon_pals BLUE, TEAL ; SHELLDER
 	icon_pals PURPLE, BLUE ; CLOYSTER
 	icon_pals TEAL, BLUE ; VIKAVOLT
+	icon_pals PURPLE, GRAY ; DUSCLOPS
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG
