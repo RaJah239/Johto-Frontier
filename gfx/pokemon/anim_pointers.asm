@@ -208,4 +208,5 @@ AnimationPointers:
 	dw MachampAnimation
 	dw SlowkingAnimation
 	dw FoongusAnimation
+	dw AmoongussAnimation
 	assert_table_length NUM_POKEMON

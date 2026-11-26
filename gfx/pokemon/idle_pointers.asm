@@ -208,4 +208,5 @@ AnimationIdlePointers:
 	dw MachampAnimationIdle
 	dw SlowkingAnimationIdle
 	dw FoongusAnimationIdle
+	dw AmoongussAnimationIdle
 	assert_table_length NUM_POKEMON

@@ -682,3 +682,6 @@ SlowkingBackpic: INCBIN "gfx/pokemon/slowking/back.2bpp.lz"
 
 FoongusFrontpic: INCBIN "gfx/pokemon/foongus/front.animated.2bpp.lz"
 FoongusBackpic: INCBIN "gfx/pokemon/foongus/back.2bpp.lz"
+
+AmoongussFrontpic: INCBIN "gfx/pokemon/amoonguss/front.animated.2bpp.lz"
+AmoongussBackpic: INCBIN "gfx/pokemon/amoonguss/back.2bpp.lz"

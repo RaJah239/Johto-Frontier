@@ -208,4 +208,5 @@ BitmasksPointers:
 	dw MachampBitmasks
 	dw SlowkingBitmasks
 	dw FoongusBitmasks
+	dw AmoongussBitmasks
 	assert_table_length NUM_POKEMON

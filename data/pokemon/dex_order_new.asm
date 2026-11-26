@@ -100,6 +100,7 @@ NewPokedexOrder:
 	db SHROOMISH
 	db BRELOOM
 	db FOONGUS
+	db AMOONGUSS
 	db SPINARAK
 	db ARIADOS
 	db VENIPEDE

@@ -210,4 +210,5 @@ EvosAttacksPointers::
 	dw MachampEvosAttacks
 	dw SlowkingEvosAttacks
 	dw FoongusEvosAttacks
+	dw AmoongussEvosAttacks
 	assert_table_length NUM_POKEMON
