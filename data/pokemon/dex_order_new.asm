@@ -229,4 +229,5 @@ NewPokedexOrder:
 	db MEW
 	db MEWTWO
 	db EELEKTROSS
+	db DHELMISE
 	assert_table_length NUM_POKEMON

@@ -257,6 +257,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const DUSCLOPS ; e1
 	const DUSKNOIR ; e2
 	const EELEKTROSS ; e3
+	const DHELMISE ; e4
 DEF NUM_POKEMON EQU const_value - 1
 	const EGG        ; e9
 

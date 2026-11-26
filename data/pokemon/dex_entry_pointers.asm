@@ -228,4 +228,5 @@ PokedexDataPointerTable:
 	dba DusclopsPokedexEntry
 	dba DusknoirPokedexEntry
 	dba EelektrossPokedexEntry
+	dba DhelmisePokedexEntry
 	assert_table_length NUM_POKEMON

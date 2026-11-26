@@ -227,4 +227,5 @@ dw VulpixAnimation
 	dw DusclopsAnimation
 	dw DusknoirAnimation
 	dw EelektrossAnimation
+	dw DhelmiseAnimation
 	assert_table_length NUM_POKEMON

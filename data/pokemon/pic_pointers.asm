@@ -460,6 +460,8 @@ PokemonPicPointers::
 	dba DusknoirBackpic
 	dba EelektrossFrontpic
 	dba EelektrossBackpic
+	dba DhelmiseFrontpic
+	dba DhelmiseBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

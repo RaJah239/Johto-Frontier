@@ -227,4 +227,5 @@ dw VulpixFrames
 	dw DusclopsFrames
 	dw DusknoirFrames
 	dw EelektrossFrames
+	dw DhelmiseFrames
 	assert_table_length NUM_POKEMON

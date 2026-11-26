@@ -259,4 +259,5 @@ INCLUDE "data/pokemon/base_stats/vikavolt.asm"
 INCLUDE "data/pokemon/base_stats/dusclops.asm"
 INCLUDE "data/pokemon/base_stats/dusknoir.asm"
 INCLUDE "data/pokemon/base_stats/eelektross.asm"
+INCLUDE "data/pokemon/base_stats/dhelmise.asm"
 	assert_table_length NUM_POKEMON

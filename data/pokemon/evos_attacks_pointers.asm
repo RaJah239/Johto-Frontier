@@ -229,4 +229,5 @@ dw VulpixEvosAttacks
 	dw DusclopsEvosAttacks
 	dw DusknoirEvosAttacks
 	dw EelektrossEvosAttacks
+	dw DhelmiseEvosAttacks
 	assert_table_length NUM_POKEMON

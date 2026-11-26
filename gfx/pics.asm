@@ -730,3 +730,8 @@ DusknoirFrontpic: INCBIN "gfx/pokemon/dusknoir/front.animated.2bpp.lz"
 DusknoirBackpic: INCBIN "gfx/pokemon/dusknoir/back.2bpp.lz"
 EelektrossFrontpic: INCBIN "gfx/pokemon/eelektross/front.animated.2bpp.lz"
 EelektrossBackpic: INCBIN "gfx/pokemon/eelektross/back.2bpp.lz"
+
+SECTION "Pics 32", ROMX
+
+DhelmiseFrontpic: INCBIN "gfx/pokemon/dhelmise/front.animated.2bpp.lz"
+DhelmiseBackpic: INCBIN "gfx/pokemon/dhelmise/back.2bpp.lz"
