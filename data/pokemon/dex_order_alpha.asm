@@ -69,6 +69,7 @@ AlphabeticalPokedexOrder:
 	db ENTEI
 	db ESPEON
 	db EXCADRILL
+	db EXPLOUD
 	db FEEBAS
 	db FERALIGATR
 	db FERROSEED

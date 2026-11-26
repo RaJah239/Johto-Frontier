@@ -494,6 +494,8 @@ PokemonPicPointers::
 	dba MagmortarBackpic
 	dba PrimarinaFrontpic
 	dba PrimarinaBackpic
+	dba ExploudFrontpic
+	dba ExploudBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

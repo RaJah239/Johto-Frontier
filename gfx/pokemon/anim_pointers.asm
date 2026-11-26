@@ -244,4 +244,5 @@ dw VulpixAnimation
 	dw DugtrioAAnimation
 	dw MagmortarAnimation
 	dw PrimarinaAnimation
+	dw ExploudAnimation
 	assert_table_length NUM_POKEMON

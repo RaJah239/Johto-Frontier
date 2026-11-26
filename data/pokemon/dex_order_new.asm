@@ -246,4 +246,5 @@ NewPokedexOrder:
 	db DUGTRIO_A
 	db MAGMORTAR
 	db PRIMARINA
+	db EXPLOUD
 	assert_table_length NUM_POKEMON

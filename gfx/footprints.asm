@@ -241,7 +241,6 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 257
 	 INCBIN "gfx/footprints/blank.1bpp" ; 259
 	 INCBIN "gfx/footprints/blank.1bpp" ; 261
-	 INCBIN "gfx/footprints/blank.1bpp" ; 263
 	 INCBIN "gfx/footprints/dusclops.1bpp"
 	 INCBIN "gfx/footprints/dusknoir.1bpp"
 	 INCBIN "gfx/footprints/blank.1bpp" ; EELEKTROSS (shared empty reference footprint)
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; DUGTRIO_A (no supplied footprint)
 	 INCBIN "gfx/footprints/blank.1bpp" ; MAGMORTAR (no supplied footprint)
 	 INCBIN "gfx/footprints/blank.1bpp" ; PRIMARINA (no supplied footprint)
+	 INCBIN "gfx/footprints/exploud.1bpp"
 	assert_table_length $100
