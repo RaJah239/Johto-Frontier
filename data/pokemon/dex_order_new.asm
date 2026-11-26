@@ -65,7 +65,6 @@ NewPokedexOrder:
 	db STEELIX
 	db MAGIKARP
 	db GYARADOS
-	db GASTLY
 	db HAUNTER
 	db GENGAR
 	db SWABLU

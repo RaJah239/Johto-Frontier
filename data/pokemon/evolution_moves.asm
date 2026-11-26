@@ -63,7 +63,6 @@ EvolutionMoves::
    db NO_MOVE      ; STEELIX
    db NO_MOVE      ; MAGIKARP
    db NO_MOVE      ; GYARADOS
-   db NO_MOVE      ; GASTLY
    db NO_MOVE      ; HAUNTER
    db NO_MOVE      ; GENGAR
    db NO_MOVE      ; SWABLU

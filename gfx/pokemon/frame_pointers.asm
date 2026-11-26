@@ -63,7 +63,6 @@ FramesPointers:
 	dw SteelixFrames
 	dw MagikarpFrames
 	dw GyaradosFrames
-	dw GastlyFrames
 	dw HaunterFrames
 	dw GengarFrames
 	dw SwabluFrames

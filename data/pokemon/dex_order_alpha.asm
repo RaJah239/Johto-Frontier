@@ -69,7 +69,6 @@ AlphabeticalPokedexOrder:
 	db GALVANTULA
 	db GARCHOMP
 	db GARDEVOIR
-	db GASTLY
 	db GENGAR
 	db GHOLDENGO
 	db GIBLE

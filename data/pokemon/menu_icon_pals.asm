@@ -70,7 +70,6 @@ MonMenuIconPals:
 	icon_pals GRAY,   BROWN  ; STEELIX
 	icon_pals RED,    BROWN  ; MAGIKARP
 	icon_pals BLUE,   RED    ; GYARADOS
-	icon_pals PURPLE, BLUE   ; GASTLY
 	icon_pals RED,    BLUE   ; HAUNTER
 	icon_pals RED,    PURPLE ; GENGAR
 	icon_pals BLUE,   BROWN  ; SWABLU

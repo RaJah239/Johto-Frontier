@@ -129,8 +129,6 @@ PokemonPicPointers::
  	dba MagikarpBackpic
  	dba GyaradosFrontpic
  	dba GyaradosBackpic
- 	dba GastlyFrontpic
- 	dba GastlyBackpic
  	dba HaunterFrontpic
  	dba HaunterBackpic
  	dba GengarFrontpic

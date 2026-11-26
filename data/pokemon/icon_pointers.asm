@@ -65,7 +65,6 @@ IconPointers:
 	dw SteelixIcon
 	dw MagikarpIcon
 	dw GyaradosIcon
-	dw GastlyIcon
 	dw HaunterIcon
 	dw GengarIcon
 	dw SwabluIcon

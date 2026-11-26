@@ -63,7 +63,6 @@ PokemonNames::
 	db "Steelix@@@"
 	db "Magikarp@@"
 	db "Gyarados@@"
-	db "Gastly@@@@"
 	db "Haunter@@@"
 	db "Gengar@@@@"
 	db "Swablu@@@@"
@@ -213,6 +212,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

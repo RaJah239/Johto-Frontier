@@ -81,7 +81,7 @@ JohtoGrassWildMons:
 	db 7, WOOPER
 	db 5, SPINARAK
 	db 7, HOOTHOOT
-	db 5, GASTLY
+	db 5, HAUNTER
 	db 5, HOOTHOOT
 	db 5, BELLSPROUT
 	end_grass_wildmons
@@ -147,7 +147,7 @@ JohtoGrassWildMons:
 	; morn
 	db 7, NATU
 	db 7, SPINARAK
-	db 7, GASTLY
+	db 7, HAUNTER
 	db 7, JOLTIK
 	db 7, LITWICK
 	db 7, VENIPEDE
@@ -155,7 +155,7 @@ JohtoGrassWildMons:
 	; day
 	db 7, NATU
 	db 7, SPINARAK
-	db 7, GASTLY
+	db 7, HAUNTER
 	db 7, JOLTIK
 	db 7, LITWICK
 	db 7, VENIPEDE
@@ -163,7 +163,7 @@ JohtoGrassWildMons:
 	; nite
 	db 7, NATU
 	db 7, SPINARAK
-	db 7, GASTLY
+	db 7, HAUNTER
 	db 7, JOLTIK
 	db 7, LITWICK
 	db 7, VENIPEDE
@@ -175,7 +175,7 @@ JohtoGrassWildMons:
 	; morn
 	db 7, NATU
 	db 7, SPINARAK
-	db 7, GASTLY
+	db 7, HAUNTER
 	db 7, JOLTIK
 	db 7, LITWICK
 	db 7, VENIPEDE
@@ -183,7 +183,7 @@ JohtoGrassWildMons:
 	; day
 	db 7, NATU
 	db 7, SPINARAK
-	db 7, GASTLY
+	db 7, HAUNTER
 	db 7, JOLTIK
 	db 7, LITWICK
 	db 7, VENIPEDE
@@ -191,7 +191,7 @@ JohtoGrassWildMons:
 	; nite
 	db 7, NATU
 	db 7, SPINARAK
-	db 7, GASTLY
+	db 7, HAUNTER
 	db 7, JOLTIK
 	db 7, LITWICK
 	db 7, VENIPEDE
@@ -219,7 +219,7 @@ JohtoGrassWildMons:
 	; nite
 	db 8, SPINARAK
 	db 8, HOOTHOOT
-	db 8, GASTLY
+	db 8, HAUNTER
 	db 8, BELLSPROUT
 	db 8, HOUNDOUR
 	db 8, DROWZEE
@@ -302,7 +302,7 @@ JohtoGrassWildMons:
 	db 5, PIKACHU
 	; nite
 	db 10, WOOPER
-	db 10, GASTLY
+	db 10, HAUNTER
 	db 10, HOOTHOOT
 	db 10, HOOTHOOT
 	db 10, MARILL

@@ -466,7 +466,6 @@ ArticunoBackpic:     INCBIN "gfx/pokemon/articuno/back.2bpp.lz"
 DittoBackpic:        INCBIN "gfx/pokemon/ditto/back.2bpp.lz"
 UnownHFrontpic:      INCBIN "gfx/pokemon/unown_h/front.animated.2bpp.lz"
 DrowzeeBackpic:      INCBIN "gfx/pokemon/drowzee/back.2bpp.lz"
-GastlyBackpic:       INCBIN "gfx/pokemon/gastly/back.2bpp.lz"
 
 
 SECTION "Pics 18", ROMX
@@ -611,7 +610,6 @@ BronzorBackpic:      INCBIN "gfx/pokemon/bronzor/back.2bpp.lz"
 
 
 SECTION "Pics 26", ROMX
-GastlyFrontpic:      INCBIN "gfx/pokemon/gastly/front.animated.2bpp.lz"
 OmanyteFrontpic:     INCBIN "gfx/pokemon/omanyte/front.animated.2bpp.lz"
 MagnetonFrontpic:    INCBIN "gfx/pokemon/magneton/front.animated.2bpp.lz"
 GligarFrontpic:      INCBIN "gfx/pokemon/gligar/front.animated.2bpp.lz"

@@ -65,7 +65,6 @@ EvosAttacksPointers::
 	dw SteelixEvosAttacks
 	dw MagikarpEvosAttacks
 	dw GyaradosEvosAttacks
-	dw GastlyEvosAttacks
 	dw HaunterEvosAttacks
 	dw GengarEvosAttacks
 	dw SwabluEvosAttacks

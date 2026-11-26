@@ -10,7 +10,6 @@ LevitatePokemon::
 ;	db MAGNETON
 ;	db MAGNEZONE
 ;	db ALTARIA
-;	db GASTLY
 ;	db HAUNTER
 ;	db GENGAR
 ;	db LARVESTA

@@ -69,7 +69,6 @@ PokemonCries::
 	mon_cry CRY_TYPHLOSION,   239,   247 ; STEELIX
 	mon_cry CRY_EKANS,        128,   128 ; MAGIKARP
 	mon_cry CRY_EKANS,          0,   256 ; GYARADOS
-	mon_cry CRY_METAPOD,        0,   256 ; GASTLY
 	mon_cry CRY_METAPOD,       48,   192 ; HAUNTER
 	mon_cry CRY_MUK,            0,   383 ; GENGAR
 	mon_cry CRY_TOGETIC,     $010,  $017 ; SWABLU FrostedGeulleisia
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 293
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 294
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 295
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 296
 	assert_table_length $ff

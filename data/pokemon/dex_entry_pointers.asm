@@ -64,7 +64,6 @@ PokedexDataPointerTable:
  	dba SteelixPokedexEntry
  	dba MagikarpPokedexEntry
  	dba GyaradosPokedexEntry
- 	dba GastlyPokedexEntry
  	dba HaunterPokedexEntry
  	dba GengarPokedexEntry
  	dba SwabluPokedexEntry

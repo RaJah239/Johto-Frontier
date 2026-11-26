@@ -69,7 +69,6 @@ Footprints:
  INCBIN "gfx/footprints/blank.1bpp" ; STEELIX
  INCBIN "gfx/footprints/blank.1bpp" ; MAGIKARP
  INCBIN "gfx/footprints/blank.1bpp" ; GYARADOS
- INCBIN "gfx/footprints/blank.1bpp" ; GASTLY
  INCBIN "gfx/footprints/blank.1bpp" ; HAUNTER
  INCBIN "gfx/footprints/gengar.1bpp"
  INCBIN "gfx/footprints/swablu.1bpp" 
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 292
 	 INCBIN "gfx/footprints/blank.1bpp" ; 293
 	 INCBIN "gfx/footprints/blank.1bpp" ; 294
+	 INCBIN "gfx/footprints/blank.1bpp" ; 295
 	assert_table_length $100

@@ -63,7 +63,6 @@ AnimationIdlePointers:
 	dw SteelixAnimationIdle
 	dw MagikarpAnimationIdle
 	dw GyaradosAnimationIdle
-	dw GastlyAnimationIdle
 	dw HaunterAnimationIdle
 	dw GengarAnimationIdle
 	dw SwabluAnimationIdle

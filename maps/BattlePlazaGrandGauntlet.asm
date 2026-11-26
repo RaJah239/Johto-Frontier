@@ -408,7 +408,7 @@ PartyKeeperSpeciesList:
 	db DRILBUR
 	db ONIX
 	db MAGIKARP
-	db GASTLY
+	db HAUNTER
 	db SWABLU
 	db NATU
 	db SMEARGLE

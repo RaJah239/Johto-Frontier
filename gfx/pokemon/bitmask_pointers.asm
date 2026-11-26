@@ -63,7 +63,6 @@ BitmasksPointers:
 	dw SteelixBitmasks
 	dw MagikarpBitmasks
 	dw GyaradosBitmasks
-	dw GastlyBitmasks
 	dw HaunterBitmasks
 	dw GengarBitmasks
 	dw SwabluBitmasks

@@ -63,7 +63,6 @@ AnimationPointers:
 	dw SteelixAnimation
 	dw MagikarpAnimation
 	dw GyaradosAnimation
-	dw GastlyAnimation
 	dw HaunterAnimation
 	dw GengarAnimation
 	dw SwabluAnimation

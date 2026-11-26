@@ -120,7 +120,6 @@ DrilburEvosAttacks: ; lv 25 evo
 ExcadrillEvosAttacks:
 OnixEvosAttacks:
 SteelixEvosAttacks:
-GastlyEvosAttacks:
 HaunterEvosAttacks:
 GengarEvosAttacks:
 SwabluEvosAttacks:
