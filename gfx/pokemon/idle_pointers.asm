@@ -36,7 +36,6 @@ AnimationIdlePointers:
 	dw DustoxAnimationIdle
 	dw YanmaAnimationIdle
 	dw YanmegaAnimationIdle
-	dw SunfloraAnimationIdle
 	dw BunearyAnimationIdle
 	dw LopunnyAnimationIdle
 	dw PidgeyAnimationIdle

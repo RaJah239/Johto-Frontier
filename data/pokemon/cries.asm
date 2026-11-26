@@ -42,7 +42,6 @@ PokemonCries::
 	mon_cry CRY_WEEDLE,      $013,  $081 ; DUSTOX
 	mon_cry CRY_TOTODILE,      49,   200 ; YANMA
 	mon_cry CRY_TOTODILE,   -$16f,  $168 ; YANMEGA AzureKeys
-	mon_cry CRY_SUNFLORA,     -32,   384 ; SUNFLORA
 	mon_cry CRY_BUNEARY,    -$012,  $09a ; BUNEARY Ax6
 	mon_cry CRY_VULPIX,     -$00f,  $0a9 ; LOPUNNY Ax6
 	mon_cry CRY_PIDGEY,       223,   132 ; PIDGEY
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 285
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 286
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 287
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 288
 	assert_table_length $ff

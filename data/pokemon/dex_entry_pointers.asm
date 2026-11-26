@@ -37,7 +37,6 @@ PokedexDataPointerTable:
  	dba DustoxPokedexEntry
  	dba YanmaPokedexEntry
  	dba YanmegaPokedexEntry
- 	dba SunfloraPokedexEntry
  	dba BunearyPokedexEntry
  	dba LopunnyPokedexEntry
  	dba PidgeyPokedexEntry

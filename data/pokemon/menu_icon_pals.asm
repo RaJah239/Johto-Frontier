@@ -43,7 +43,6 @@ MonMenuIconPals:
 	icon_pals PURPLE, PURPLE ; DUSTOX
 	icon_pals RED,    BLUE   ; YANMA
 	icon_pals GREEN,  BLUE   ; YANMEGA
-	icon_pals GREEN,  BROWN  ; SUNFLORA
 	icon_pals BROWN,  PINK   ; BUNEARY
 	icon_pals BROWN,  PINK   ; LOPUNNY
 	icon_pals BROWN,  RED    ; PIDGEY

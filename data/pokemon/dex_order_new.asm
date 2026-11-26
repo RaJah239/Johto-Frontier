@@ -38,7 +38,6 @@ NewPokedexOrder:
 	db DUSTOX
 	db YANMA
 	db YANMEGA
-	db SUNFLORA
 	db BUNEARY
 	db LOPUNNY
 	db PIDGEY

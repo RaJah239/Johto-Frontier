@@ -36,7 +36,6 @@ FramesPointers:
 	dw DustoxFrames
 	dw YanmaFrames
 	dw YanmegaFrames
-	dw SunfloraFrames
 	dw BunearyFrames
 	dw LopunnyFrames
 	dw PidgeyFrames

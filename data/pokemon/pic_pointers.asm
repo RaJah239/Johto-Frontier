@@ -75,8 +75,6 @@ PokemonPicPointers::
  	dba YanmaBackpic
  	dba YanmegaFrontpic
  	dba YanmegaBackpic
- 	dba SunfloraFrontpic
- 	dba SunfloraBackpic
  	dba BunearyFrontpic
  	dba BunearyBackpic
  	dba LopunnyFrontpic

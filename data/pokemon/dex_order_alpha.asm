@@ -183,7 +183,6 @@ AlphabeticalPokedexOrder:
 	db STEELIX
 	db SUDOWOODO
 	db SUICUNE
-	db SUNFLORA
 	db SWABLU
 	db SYLVEON
 	db TANGELA

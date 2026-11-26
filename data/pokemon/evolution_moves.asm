@@ -36,7 +36,6 @@ EvolutionMoves::
    db NO_MOVE      ; DUSTOX
    db NO_MOVE      ; YANMA
    db NO_MOVE      ; YANMEGA
-   db NO_MOVE      ; SUNFLORA
    db NO_MOVE      ; BUNEARY
    db NO_MOVE      ; LOPUNNY
    db NO_MOVE      ; PIDGEY
