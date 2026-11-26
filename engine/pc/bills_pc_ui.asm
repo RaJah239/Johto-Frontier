@@ -44,9 +44,11 @@ _BillsPC:
 	ldh [hMapAnims], a
 	ld a, 71
 	ldh [rLYC], a
-	; Fade the current screen out first, instead of clearing it while lit.
+	; Hide the map in one frame before loading the PC screen.
 	newfarcall PrepareWeatherForFullScreen
-	farcall FadeOutPalettes
+	call SetWhitePals
+	call ClearPalettes
+	call DelayFrame
 	call LoadStandardMenuHeader
 	call UseBillsPC
 
@@ -67,7 +69,7 @@ _BillsPC:
 	ldh [hMapAnims], a
 	pop af
 	ld [wOptions], a
-	jmp CloseSubmenu
+	jr BillsPC_CloseSubmenuInstant
 
 .CheckCanUsePC:
 	ld a, [wPartyCount]
@@ -82,6 +84,34 @@ _BillsPC:
 	; You gotta have #MON to call!
 	text_far _PCGottaHavePokemonText
 	text_end
+
+BillsPC_CloseSubmenuInstant:
+; Restore the map as CloseSubmenu does, with a one-frame palette reveal.
+	farcall ClearSavedObjPals
+	farcall DisableDynPalUpdates
+	call ClearBGPalettes
+	call ReloadTilesetAndPalettes
+	call UpdateSprites
+	call Call_ExitMenu
+	call GSReloadPalettes
+	ld b, SCGB_MAPPALS
+	call GetSGBLayout
+	farcall LoadOW_BGPal7
+	ld b, 3 ; keep any pending palette update
+	farcall _SafeCopyTilemapAtOnce
+	farcall EnableDynPalUpdatesNoApply
+	farcall ApplyPals
+	ldh a, [hCGB]
+	and a
+	jr nz, .cgb
+	call SetDefaultBGPAndOBP
+	jr .shown
+.cgb
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+.shown
+	call DelayFrame
+	jmp EnableSpriteUpdates
 
 BillsPC_LoadUI:
 	call ClearVBank1
