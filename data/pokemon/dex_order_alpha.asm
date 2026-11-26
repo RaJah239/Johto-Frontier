@@ -205,7 +205,6 @@ AlphabeticalPokedexOrder:
 	db SUNFLORA
 	db SUNKERN
 	db SWABLU
-	db SWINUB
 	db SYLVEON
 	db TANGELA
 	db TANGROWTH

@@ -198,7 +198,6 @@ Footprints:
  INCBIN "gfx/footprints/snorunt.1bpp"  
  INCBIN "gfx/footprints/blank.1bpp" ; GLALIE
  INCBIN "gfx/footprints/blank.1bpp" ; FROSLASS
- INCBIN "gfx/footprints/swinub.1bpp"
  INCBIN "gfx/footprints/piloswine.1bpp"
  INCBIN "gfx/footprints/mamoswine.1bpp"
  INCBIN "gfx/footprints/sneasel.1bpp" 
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 257
 	 INCBIN "gfx/footprints/blank.1bpp" ; 258
 	 INCBIN "gfx/footprints/blank.1bpp" ; 259
+	 INCBIN "gfx/footprints/blank.1bpp" ; 260
 	assert_table_length $100

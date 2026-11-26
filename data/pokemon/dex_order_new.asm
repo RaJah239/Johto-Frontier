@@ -194,7 +194,6 @@ NewPokedexOrder:
 	db SNORUNT
 	db GLALIE
 	db FROSLASS
-	db SWINUB
 	db PILOSWINE
 	db MAMOSWINE
 	db SNEASEL

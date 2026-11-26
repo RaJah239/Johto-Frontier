@@ -193,7 +193,6 @@ PokedexDataPointerTable:
  	dba SnoruntPokedexEntry
  	dba GlaliePokedexEntry
  	dba FroslassPokedexEntry
- 	dba SwinubPokedexEntry
  	dba PiloswinePokedexEntry
  	dba MamoswinePokedexEntry
  	dba SneaselPokedexEntry

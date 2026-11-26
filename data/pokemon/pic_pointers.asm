@@ -387,8 +387,6 @@ PokemonPicPointers::
  	dba GlalieBackpic
  	dba FroslassFrontpic
  	dba FroslassBackpic
- 	dba SwinubFrontpic
- 	dba SwinubBackpic
  	dba PiloswineFrontpic
  	dba PiloswineBackpic
  	dba MamoswineFrontpic

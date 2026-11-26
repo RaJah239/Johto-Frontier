@@ -316,7 +316,7 @@ JohtoGrassWildMons:
 	db 12, MAKUHITA
 	db 12, GIBLE
 	db 12, DRILBUR
-	db 12, SWINUB
+	db 12, PILOSWINE
 	db 12, GLIGAR
 	db 12, ONIX
 	db 5, PRIMEAPE
@@ -324,7 +324,7 @@ JohtoGrassWildMons:
 	db 12, MAKUHITA
 	db 12, GIBLE
 	db 12, DRILBUR
-	db 12, SWINUB
+	db 12, PILOSWINE
 	db 12, GLIGAR
 	db 12, ONIX
 	db 5, PRIMEAPE
@@ -332,7 +332,7 @@ JohtoGrassWildMons:
 	db 12, MAKUHITA
 	db 12, GIBLE
 	db 12, DRILBUR
-	db 12, SWINUB
+	db 12, PILOSWINE
 	db 12, GLIGAR
 	db 12, ONIX
 	db 5, PRIMEAPE
@@ -344,7 +344,7 @@ JohtoGrassWildMons:
 	db 25, MAKUHITA
 	db 25, GABITE
 	db 25, DRILBUR
-	db 25, SWINUB
+	db 25, PILOSWINE
 	db 25, GLIGAR
 	db 25, ONIX
 	db 5, PRIMEAPE
@@ -352,7 +352,7 @@ JohtoGrassWildMons:
 	db 25, MAKUHITA
 	db 25, GABITE
 	db 25, DRILBUR
-	db 25, SWINUB
+	db 25, PILOSWINE
 	db 25, GLIGAR
 	db 25, ONIX
 	db 5, PRIMEAPE
@@ -360,7 +360,7 @@ JohtoGrassWildMons:
 	db 25, MAKUHITA
 	db 25, GABITE
 	db 25, DRILBUR
-	db 25, SWINUB
+	db 25, PILOSWINE
 	db 25, GLIGAR
 	db 25, ONIX
 	db 5, PRIMEAPE

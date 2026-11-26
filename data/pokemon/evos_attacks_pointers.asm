@@ -194,7 +194,6 @@ EvosAttacksPointers::
 	dw SnoruntEvosAttacks
 	dw GlalieEvosAttacks
 	dw FroslassEvosAttacks
-	dw SwinubEvosAttacks
 	dw PiloswineEvosAttacks
 	dw MamoswineEvosAttacks
 	dw SneaselEvosAttacks

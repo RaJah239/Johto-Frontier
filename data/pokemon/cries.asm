@@ -198,7 +198,6 @@ PokemonCries::
 	mon_cry CRY_PIDGEY,      $8a8,  $220 ; SNORUNT
 	mon_cry CRY_BULBASAUR,   $fe0,  $150 ; GLALIE
 	mon_cry CRY_PICHU,       $feb,  $500 ; FROSLASS
-	mon_cry CRY_CYNDAQUIL,    510,   320 ; SWINUB
 	mon_cry CRY_MAGCARGO,    -265,   256 ; PILOSWINE
 	mon_cry CRY_TYPHLOSION, -$160,  $0d3 ; MAMOSWINE AzureKeys
 	mon_cry CRY_WOOPER,        83,   175 ; SNEASEL
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 258
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 259
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 260
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 261
 	assert_table_length $ff

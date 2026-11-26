@@ -192,7 +192,6 @@ AnimationPointers:
 	dw SnoruntAnimation
 	dw GlalieAnimation
 	dw FroslassAnimation
-	dw SwinubAnimation
 	dw PiloswineAnimation
 	dw MamoswineAnimation
 	dw SneaselAnimation

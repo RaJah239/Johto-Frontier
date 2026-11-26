@@ -192,7 +192,6 @@ FramesPointers:
 	dw SnoruntFrames
 	dw GlalieFrames
 	dw FroslassFrames
-	dw SwinubFrames
 	dw PiloswineFrames
 	dw MamoswineFrames
 	dw SneaselFrames

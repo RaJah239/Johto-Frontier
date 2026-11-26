@@ -204,7 +204,6 @@ FroslassPokedexEntry::   INCLUDE "data/pokemon/dex_entries/froslass.asm"
 
 SECTION "Pokedex Entries 193-251", ROMX
 
-SwinubPokedexEntry::     INCLUDE "data/pokemon/dex_entries/swinub.asm"
 PiloswinePokedexEntry::  INCLUDE "data/pokemon/dex_entries/piloswine.asm"
 MamoswinePokedexEntry::  INCLUDE "data/pokemon/dex_entries/mamoswine.asm"
 SneaselPokedexEntry::    INCLUDE "data/pokemon/dex_entries/sneasel.asm"

@@ -10,7 +10,6 @@ ThickFatPokemon:
 ;    db MILTANK
 ;    db MAKUHITA
 ;    db HARIYAMA
-;    db SWINUB
 ;    db PILOSWINE
 ;    db MAMOSWINE
     db -1

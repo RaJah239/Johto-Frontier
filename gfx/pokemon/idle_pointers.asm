@@ -192,7 +192,6 @@ AnimationIdlePointers:
 	dw SnoruntAnimationIdle
 	dw GlalieAnimationIdle
 	dw FroslassAnimationIdle
-	dw SwinubAnimationIdle
 	dw PiloswineAnimationIdle
 	dw MamoswineAnimationIdle
 	dw SneaselAnimationIdle

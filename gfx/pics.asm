@@ -599,7 +599,6 @@ Porygon2Frontpic:    INCBIN "gfx/pokemon/porygon2/front.animated.2bpp.lz"
 BaltoyBackpic:       INCBIN "gfx/pokemon/baltoy/back.2bpp.lz"
 ElectrodeFrontpic:   INCBIN "gfx/pokemon/electrode/front.animated.2bpp.lz"
 PorygonBackpic:      INCBIN "gfx/pokemon/porygon/back.2bpp.lz"
-SwinubFrontpic:      INCBIN "gfx/pokemon/swinub/front.animated.2bpp.lz"
 PrimeapeFrontpic:    INCBIN "gfx/pokemon/primeape/front.animated.2bpp.lz"
 UnownZFrontpic:      INCBIN "gfx/pokemon/unown_z/front.animated.2bpp.lz"
 GardevoirBackpic:    INCBIN "gfx/pokemon/gardevoir/back.2bpp.lz"
@@ -645,7 +644,6 @@ MismagiusFrontpic:   INCBIN "gfx/pokemon/mismagius/front.animated.2bpp.lz"
 
 
 SECTION "Pics 23", ROMX
-SwinubBackpic:       INCBIN "gfx/pokemon/swinub/back.2bpp.lz"
 XatuFrontpic:        INCBIN "gfx/pokemon/xatu/front.animated.2bpp.lz"
 NatuBackpic:         INCBIN "gfx/pokemon/natu/back.2bpp.lz"
 DonphanFrontpic:     INCBIN "gfx/pokemon/donphan/front.animated.2bpp.lz"

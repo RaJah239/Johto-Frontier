@@ -2,7 +2,6 @@
 ; evasion by 1 stage (once each time they're sent out)
 
 SnowCloakPokemon:
-;	db SWINUB
 ;	db PILOSWINE
 ;	db MAMOSWINE
 ;	db FROSLASS

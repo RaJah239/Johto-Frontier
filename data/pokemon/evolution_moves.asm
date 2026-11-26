@@ -192,7 +192,6 @@ EvolutionMoves::
    db NO_MOVE      ; SNORUNT
    db NO_MOVE      ; GLALIE
    db NO_MOVE      ; FROSLASS
-   db NO_MOVE      ; SWINUB
    db NO_MOVE      ; PILOSWINE
    db NO_MOVE      ; MAMOSWINE
    db NO_MOVE      ; SNEASEL

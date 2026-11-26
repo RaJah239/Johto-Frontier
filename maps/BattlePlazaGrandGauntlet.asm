@@ -462,7 +462,7 @@ PartyKeeperSpeciesList:
 	db DELIBIRD
 	db SMOOCHUM
 	db SNORUNT
-	db SWINUB
+	db PILOSWINE
 	db SNEASEL
 	db SNOVER
 	db BALTOY

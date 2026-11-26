@@ -192,7 +192,6 @@ BitmasksPointers:
 	dw SnoruntBitmasks
 	dw GlalieBitmasks
 	dw FroslassBitmasks
-	dw SwinubBitmasks
 	dw PiloswineBitmasks
 	dw MamoswineBitmasks
 	dw SneaselBitmasks

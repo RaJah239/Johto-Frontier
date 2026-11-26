@@ -249,7 +249,6 @@ JynxEvosAttacks:
 SnoruntEvosAttacks:
 GlalieEvosAttacks:
 FroslassEvosAttacks:
-SwinubEvosAttacks:
 PiloswineEvosAttacks:
 MamoswineEvosAttacks:
 SneaselEvosAttacks:

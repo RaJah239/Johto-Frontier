@@ -199,7 +199,6 @@ MonMenuIconPals:
 	icon_pals BROWN,  TEAL   ; SNORUNT
 	icon_pals BLUE,   RED    ; GLALIE
 	icon_pals BLUE,   PINK   ; FROSLASS
-	icon_pals BROWN,  TEAL   ; SWINUB
 	icon_pals BROWN,  TEAL   ; PILOSWINE
 	icon_pals BROWN,  TEAL   ; MAMOSWINE
 	icon_pals RED,    PINK   ; SNEASEL

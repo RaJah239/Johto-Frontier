@@ -194,7 +194,6 @@ IconPointers:
 	dw SnoruntIcon
 	dw GlalieIcon
 	dw FroslassIcon
-	dw SwinubIcon
 	dw Piloswine
 	dw MamoswineIcon
 	dw SneaselIcon
