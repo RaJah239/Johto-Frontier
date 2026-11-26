@@ -51,7 +51,6 @@ MonMenuIconPals:
 	icon_pals BROWN,  GRAY   ; NOCTOWL
 	icon_pals BLUE,   GREEN  ; GOLBAT
 	icon_pals PURPLE, PINK   ; CROBAT
-	icon_pals BROWN,  GREEN  ; TEDDIURSA
 	icon_pals BROWN,  GREEN  ; URSARING
 	icon_pals BROWN,  RED    ; URSALUNA
 	icon_pals BROWN,  RED    ; URSALUNA_B

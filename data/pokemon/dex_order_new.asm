@@ -46,7 +46,6 @@ NewPokedexOrder:
 	db NOCTOWL
 	db GOLBAT
 	db CROBAT
-	db TEDDIURSA
 	db URSARING
 	db URSALUNA
 	db URSALUNA_B

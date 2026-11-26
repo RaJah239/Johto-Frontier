@@ -44,7 +44,6 @@ AnimationIdlePointers:
 	dw NoctowlAnimationIdle
 	dw GolbatAnimationIdle
 	dw CrobatAnimationIdle
-	dw TeddiursaAnimationIdle
 	dw UrsaringAnimationIdle
 	dw UrsalunaAnimationIdle
 	dw UrsalunaBAnimationIdle

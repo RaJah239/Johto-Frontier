@@ -44,7 +44,6 @@ FramesPointers:
 	dw NoctowlFrames
 	dw GolbatFrames
 	dw CrobatFrames
-	dw TeddiursaFrames
 	dw UrsaringFrames
 	dw UrsalunaFrames
 	dw UrsalunaBFrames

@@ -187,7 +187,6 @@ AlphabeticalPokedexOrder:
 	db TANGELA
 	db TANGROWTH
 	db TAUROS
-	db TEDDIURSA
 	db TENTACOOL
 	db TENTACRUEL
 	db TOGEKISS

@@ -44,7 +44,6 @@ EvolutionMoves::
    db NO_MOVE      ; NOCTOWL
    db NO_MOVE      ; GOLBAT
    db NO_MOVE      ; CROBAT
-   db NO_MOVE      ; TEDDIURSA
    db NO_MOVE      ; URSARING
    db NO_MOVE      ; URSALUNA
    db NO_MOVE      ; URSALUNA_B

@@ -50,7 +50,6 @@ Footprints:
  INCBIN "gfx/footprints/noctowl.1bpp"
  INCBIN "gfx/footprints/golbat.1bpp" 
  INCBIN "gfx/footprints/blank.1bpp" ; CROBAT
- INCBIN "gfx/footprints/teddiursa.1bpp"
  INCBIN "gfx/footprints/ursaring.1bpp" 
  INCBIN "gfx/footprints/ursaluna.1bpp" ; URSALUNA
  INCBIN "gfx/footprints/ursaluna.1bpp" ; URSALUNA_B
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 287
 	 INCBIN "gfx/footprints/blank.1bpp" ; 288
 	 INCBIN "gfx/footprints/blank.1bpp" ; 289
+	 INCBIN "gfx/footprints/blank.1bpp" ; 290
 	assert_table_length $100

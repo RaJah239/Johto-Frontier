@@ -110,7 +110,7 @@ SwarmGrampsScript:
 	ifequal 19, .Jynx
 	ifequal 20, .Snubbull
 	ifequal 21, .Wartortle
-	ifequal 22, .Teddiursa
+	ifequal 22, .Ursaring
 	ifequal 23, .Togetic
 	ifequal 24, .Combusken
 	ifequal 25, .Croconaw
@@ -326,12 +326,12 @@ SwarmGrampsScript:
 		cont "Route 15!"
 		done
 
-.Teddiursa:
+.Ursaring:
 	setflag ENGINE_SWARM
 	swarm DARK_CAVE_VIOLET_ENTRANCE
 	jumpthisopenedtext
 		text "There's a swarm of"
-		line "Teddiursa in"
+		line "Ursaring in"
 		cont "Dark Cave, West!"
 		done
 
@@ -438,7 +438,7 @@ GoldenrodPokeBrosHouseSwarmPokemonBook:
 		cont "Jynx,"
 		cont "Snubbull,"
 		cont "Wartortle,"
-		cont "Teddiursa,"
+		cont "Ursaring,"
 		cont "Togetic,"
 		cont "Combusken,"
 		cont "Croconaw and"

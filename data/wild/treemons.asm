@@ -45,7 +45,7 @@ TreeMonSet_Forest:
 	db 5, GOLBAT,      15
 	db 2, GOLBAT,     15
 	db 1, CROBAT,     15
-	db 4, TEDDIURSA,  15
+	db 4, URSARING,  15
 	db 2, URSARING,   15
 	db 1, URSALUNA,   15
 	db 3, GLIGAR,     15
@@ -85,7 +85,7 @@ TreeMonSet_Forest:
 	db 5, GOLBAT,      15
 	db 2, GOLBAT,     15
 	db 1, CROBAT,     15
-	db 4, TEDDIURSA,  15
+	db 4, URSARING,  15
 	db 2, URSARING,   15
 	db 1, URSALUNA,   15
 	db 3, GLIGAR,     15

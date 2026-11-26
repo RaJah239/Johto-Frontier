@@ -44,7 +44,6 @@ AnimationPointers:
 	dw NoctowlAnimation
 	dw GolbatAnimation
 	dw CrobatAnimation
-	dw TeddiursaAnimation
 	dw UrsaringAnimation
 	dw UrsalunaAnimation
 	dw UrsalunaBAnimation

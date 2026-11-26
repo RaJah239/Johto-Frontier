@@ -46,7 +46,6 @@ EvosAttacksPointers::
 	dw NoctowlEvosAttacks
 	dw GolbatEvosAttacks
 	dw CrobatEvosAttacks
-	dw TeddiursaEvosAttacks
 	dw UrsaringEvosAttacks
 	dw UrsalunaEvosAttacks
 	dw UrsalunaBEvosAttacks

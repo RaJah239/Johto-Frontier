@@ -44,7 +44,6 @@ HoothootPokedexEntry::   INCLUDE "data/pokemon/dex_entries/hoothoot.asm"
 NoctowlPokedexEntry::    INCLUDE "data/pokemon/dex_entries/noctowl.asm"
 GolbatPokedexEntry::     INCLUDE "data/pokemon/dex_entries/golbat.asm"
 CrobatPokedexEntry::     INCLUDE "data/pokemon/dex_entries/crobat.asm"
-TeddiursaPokedexEntry::  INCLUDE "data/pokemon/dex_entries/teddiursa.asm"
 UrsaringPokedexEntry::   INCLUDE "data/pokemon/dex_entries/ursaring.asm"
 UrsalunaPokedexEntry::   INCLUDE "data/pokemon/dex_entries/ursaluna.asm"
 

@@ -46,7 +46,6 @@ IconPointers:
 	dw NoctowlIcon
 	dw GolbatIcon
 	dw CrobatIcon
-	dw TeddiursaIcon
 	dw UrsaringIcon
 	dw UrsalunaIcon
 	dw UrsalunaBIcon

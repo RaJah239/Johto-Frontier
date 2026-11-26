@@ -590,33 +590,33 @@ SwarmGrassWildMons:
 	db 5, AZUMARILL
 	db 5, AZUMARILL
 
-; Teddiursa swarm
+; Ursaring swarm
 	map_id DARK_CAVE_VIOLET_ENTRANCE
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
+	db 5, URSARING
+	db 5, URSARING
+	db 5, URSARING
+	db 5, URSARING
+	db 5, URSARING
+	db 5, URSARING
+	db 5, URSARING
 	; day
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
+	db 5, URSARING
+	db 5, URSARING
+	db 5, URSARING
+	db 5, URSARING
+	db 5, URSARING
+	db 5, URSARING
+	db 5, URSARING
 	; nite
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
-	db 5, TEDDIURSA
+	db 5, URSARING
+	db 5, URSARING
+	db 5, URSARING
+	db 5, URSARING
+	db 5, URSARING
+	db 5, URSARING
+	db 5, URSARING
 
 ; Togetic swarm
 	map_id SILVER_CAVE_OUTSIDE

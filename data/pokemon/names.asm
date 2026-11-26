@@ -44,7 +44,6 @@ PokemonNames::
 	db "Noctowl@@@"
 	db "Golbat@@@@"
 	db "Crobat@@@@"
-	db "Teddiursa@"
 	db "Ursaring@@"
 	db "Ursaluna@@"
 	db "Ursaluna@@"
@@ -218,6 +217,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

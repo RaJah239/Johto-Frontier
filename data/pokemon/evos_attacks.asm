@@ -104,7 +104,6 @@ HoothootEvosAttacks:
 NoctowlEvosAttacks:
 GolbatEvosAttacks:
 CrobatEvosAttacks:
-TeddiursaEvosAttacks: ; lv 30 evo
 UrsaringEvosAttacks:
 UrsalunaEvosAttacks:
 UrsalunaBEvosAttacks:

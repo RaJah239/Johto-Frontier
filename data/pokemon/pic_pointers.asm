@@ -91,8 +91,6 @@ PokemonPicPointers::
  	dba GolbatBackpic
  	dba CrobatFrontpic
  	dba CrobatBackpic
- 	dba TeddiursaFrontpic
- 	dba TeddiursaBackpic
  	dba UrsaringFrontpic
  	dba UrsaringBackpic
  	dba UrsalunaFrontpic

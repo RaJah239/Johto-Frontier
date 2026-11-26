@@ -95,7 +95,7 @@ JohtoGrassWildMons:
 	db 21, GOLBAT
 	db 21, DRILBUR
 	db 21, WOOPER
-	db 5, TEDDIURSA
+	db 5, URSARING
 	; day
 	db 21, GOLBAT
 	db 21, WOOPER
@@ -103,7 +103,7 @@ JohtoGrassWildMons:
 	db 21, GOLBAT
 	db 21, DRILBUR
 	db 21, WOOPER
-	db 5, TEDDIURSA
+	db 5, URSARING
 	; nite
 	db 21, GOLBAT
 	db 21, WOOPER
@@ -111,7 +111,7 @@ JohtoGrassWildMons:
 	db 21, GOLBAT
 	db 21, DRILBUR
 	db 21, WOOPER
-	db 5, TEDDIURSA
+	db 5, URSARING
 	end_grass_wildmons
 
 	def_grass_wildmons DARK_CAVE_BLACKTHORN_ENTRANCE

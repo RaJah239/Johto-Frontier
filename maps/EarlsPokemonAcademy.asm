@@ -417,7 +417,7 @@ FleeMonsNotebook:
 		cont "Jynx,"
 		cont "Snubbull,"
 		cont "Wartortle,"
-		cont "Teddiursa,"
+		cont "Ursaring,"
 		cont "Togetic,"
 		cont "Combusken,"
 		cont "Croconaw and"

@@ -246,7 +246,7 @@ OddEggs:
 	bigdw 13 ; SAtk
 	bigdw 11 ; SDef
 
-	db TEDDIURSA
+	db URSARING
 	db NO_ITEM
 	db SPLASH, 0, 0, 0
 	dw 03072 ; OT ID

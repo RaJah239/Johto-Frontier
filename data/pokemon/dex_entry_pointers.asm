@@ -45,7 +45,6 @@ PokedexDataPointerTable:
  	dba NoctowlPokedexEntry
  	dba GolbatPokedexEntry
  	dba CrobatPokedexEntry
- 	dba TeddiursaPokedexEntry
  	dba UrsaringPokedexEntry
  	dba UrsalunaPokedexEntry
  	dba UrsalunaBPokedexEntry

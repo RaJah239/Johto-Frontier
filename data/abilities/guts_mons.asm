@@ -4,7 +4,6 @@
 ; (one list for both: engine/abilities/boosting_abilities.asm includes it as GutsPokemon,
 ; engine/battle/core.asm as Core_GutsPokemon)
 
-;	db TEDDIURSA
 ;	db URSARING
 ;	db URSALUNA
 ;	db HERACROSS

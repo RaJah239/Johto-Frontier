@@ -44,7 +44,6 @@ BitmasksPointers:
 	dw NoctowlBitmasks
 	dw GolbatBitmasks
 	dw CrobatBitmasks
-	dw TeddiursaBitmasks
 	dw UrsaringBitmasks
 	dw UrsalunaBitmasks
 	dw UrsalunaBBitmasks
