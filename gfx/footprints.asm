@@ -35,6 +35,7 @@ Footprints:
  INCBIN "gfx/footprints/poliwhirl.1bpp"
  INCBIN "gfx/footprints/poliwrath.1bpp"
  INCBIN "gfx/footprints/politoed.1bpp"
+ INCBIN "gfx/footprints/mawile.1bpp"
  INCBIN "gfx/footprints/blank.1bpp" ; FEEBAS
  INCBIN "gfx/footprints/blank.1bpp" ; MILOTIC
  INCBIN "gfx/footprints/kirlia.1bpp"
@@ -261,5 +262,4 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 302
 	 INCBIN "gfx/footprints/blank.1bpp" ; 303
 	 INCBIN "gfx/footprints/blank.1bpp" ; 304
-	 INCBIN "gfx/footprints/blank.1bpp" ; 305
 	assert_table_length $100

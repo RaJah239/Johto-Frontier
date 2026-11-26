@@ -241,3 +241,5 @@ PoliwhirlIcon:: INCBIN "gfx/icons/poliwhirl.2bpp"
 PoliwrathIcon:: INCBIN "gfx/icons/poliwrath.2bpp"
 
 PolitoedIcon:: INCBIN "gfx/icons/politoed.2bpp"
+
+MawileIcon:: INCBIN "gfx/icons/mawile.2bpp"

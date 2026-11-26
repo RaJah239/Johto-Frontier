@@ -199,4 +199,5 @@ FramesPointers:
 	dw PoliwhirlFrames
 	dw PoliwrathFrames
 	dw PolitoedFrames
+	dw MawileFrames
 	assert_table_length NUM_POKEMON

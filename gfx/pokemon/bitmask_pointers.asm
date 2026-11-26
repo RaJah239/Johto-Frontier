@@ -199,4 +199,5 @@ BitmasksPointers:
 	dw PoliwhirlBitmasks
 	dw PoliwrathBitmasks
 	dw PolitoedBitmasks
+	dw MawileBitmasks
 	assert_table_length NUM_POKEMON

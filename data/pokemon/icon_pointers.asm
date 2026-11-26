@@ -201,6 +201,7 @@ IconPointers:
 	dw PoliwhirlIcon
 	dw PoliwrathIcon
 	dw PolitoedIcon
+	dw MawileIcon
 	assert_table_length NUM_POKEMON + 1
 	dw EggIcon
 	assert_table_length EGG + 1

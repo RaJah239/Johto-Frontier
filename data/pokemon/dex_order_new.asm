@@ -51,6 +51,7 @@ NewPokedexOrder:
 	db URSARING
 	db URSALUNA
 	db URSALUNA_B
+	db MAWILE
 	db PHANPY
 	db DONPHAN
 	db BELLSPROUT
