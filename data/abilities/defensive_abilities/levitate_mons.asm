@@ -27,7 +27,6 @@ LevitatePokemon::
 ;	db MISMAGIUS
 ;	db UNOWN
 ;	db NOWN
-;	db VICTINI
 ;	db CELEBI
 	db MEW
 	db -1 ; end

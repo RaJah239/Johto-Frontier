@@ -328,8 +328,6 @@ ENDC
 	jr z, .master_ball_fails
 	cp NOWN
 	jr z, .master_ball_fails
-	cp VICTINI
-	jr z, .master_ball_fails
 	cp CELEBI
 	jr z, .master_ball_fails
 	cp DITTO

@@ -248,7 +248,6 @@ IconPointers:
 	dw HoOhIcon
 	dw UnownIcon
 	dw NownIcon
-	dw VictiniIcon
 	dw JirachiIcon
 	dw CelebiIcon
 	dw DittoIcon

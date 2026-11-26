@@ -252,13 +252,13 @@ PokemonCries::
 	mon_cry CRY_AIPOM,          0,  384  ; HO_OH
 	mon_cry CRY_HOOTHOOT,     354,  256  ; UNOWN
 	mon_cry CRY_HOOTHOOT,    $172,  $190 ; NOWN
-	mon_cry CRY_AIPOM,       $041,  $0ae ; VICTINI SourApple
 	mon_cry CRY_CATERPIE,     $a2,   $a1 ; JIRACHI
 	mon_cry CRY_ENTEI,        330,  273  ; CELEBI
 	mon_cry CRY_PIDGEY,       255,  383  ; DITTO
 	mon_cry CRY_PARAS,        238,  383  ; MEW
 	mon_cry CRY_PARAS,        153,  383  ; MEWTWO
 	assert_table_length NUM_POKEMON
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 253
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 254
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 255

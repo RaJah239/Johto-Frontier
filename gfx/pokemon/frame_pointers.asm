@@ -246,7 +246,6 @@ FramesPointers:
 	dw HoOhFrames
 	dw UnownFrames
 	dw NownFrames
-	dw VictiniFrames
 	dw JirachiFrames
 	dw CelebiFrames
 	dw DittoFrames

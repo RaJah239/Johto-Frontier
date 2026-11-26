@@ -253,7 +253,6 @@ MonMenuIconPals:
 	icon_pals RED,    BROWN  ; HO_OH
 	icon_pals GRAY,   BLUE   ; UNOWN
 	icon_pals BROWN,  BLUE   ; NOWN
-	icon_pals RED,    RED    ; VICTINI
 	icon_pals BLUE,   RED    ; JIRACHI
 	icon_pals GREEN,  PINK   ; CELEBI
 	icon_pals PURPLE, BLUE   ; DITTO

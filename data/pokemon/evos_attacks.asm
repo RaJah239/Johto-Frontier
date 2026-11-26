@@ -297,7 +297,6 @@ EnteiEvosAttacks:
 SuicuneEvosAttacks:
 HoOhEvosAttacks:
 UnownEvosAttacks:
-VictiniEvosAttacks:
 JirachiEvosAttacks:
 CelebiEvosAttacks:
 DittoEvosAttacks:

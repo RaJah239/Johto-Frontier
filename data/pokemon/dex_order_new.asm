@@ -248,7 +248,6 @@ NewPokedexOrder:
 	db HO_OH
 	db UNOWN
 	db NOWN
-	db VICTINI
 	db JIRACHI
 	db CELEBI
 	db DITTO

@@ -498,8 +498,6 @@ PokemonPicPointers::
 
  	dba NownFrontpic
  	dba NownBackpic
- 	dba VictiniFrontpic
- 	dba VictiniBackpic
  	dba JirachiFrontpic
  	dba JirachiBackpic
  	dba CelebiFrontpic

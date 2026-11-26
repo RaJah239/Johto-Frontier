@@ -276,14 +276,13 @@ DEF JOHTO_POKEMON EQU const_value
 	const HO_OH      ; f4
 	const UNOWN      ; f5
 	const NOWN       ; f6
-	const VICTINI    ; f7
-	const JIRACHI    ; f8
-	const CELEBI     ; f9
-	const DITTO      ; fa
-	const MEW        ; fb
-	const MEWTWO     ; fc
+	const JIRACHI    ; f7
+	const CELEBI     ; f8
+	const DITTO      ; f9
+	const MEW        ; fa
+	const MEWTWO     ; fb
 DEF NUM_POKEMON EQU const_value - 1
-	const EGG        ; fd
+	const EGG        ; fc
 
 ; Unown forms
 ; indexes for:

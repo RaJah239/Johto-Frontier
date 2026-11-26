@@ -246,7 +246,6 @@ BitmasksPointers:
 	dw HoOhBitmasks
 	dw UnownBitmasks
 	dw NownBitmasks
-	dw VictiniBitmasks
 	dw JirachiBitmasks
 	dw CelebiBitmasks
 	dw DittoBitmasks

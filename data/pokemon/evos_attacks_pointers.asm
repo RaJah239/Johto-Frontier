@@ -248,7 +248,6 @@ EvosAttacksPointers::
 	dw HoOhEvosAttacks
 	dw UnownEvosAttacks
 	dw NownEvosAttacks
-	dw VictiniEvosAttacks
 	dw JirachiEvosAttacks
 	dw CelebiEvosAttacks
 	dw DittoEvosAttacks

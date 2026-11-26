@@ -246,7 +246,6 @@ AnimationIdlePointers:
 	dw HoOhAnimationIdle
 	dw UnownAnimationIdle
 	dw NownAnimationIdle
-	dw VictiniAnimationIdle
 	dw JirachiAnimationIdle
 	dw CelebiAnimationIdle
 	dw DittoAnimationIdle

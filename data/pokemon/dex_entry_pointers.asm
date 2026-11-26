@@ -247,7 +247,6 @@ PokedexDataPointerTable:
  	dba HoOhPokedexEntry
  	dba UnownPokedexEntry
  	dba NownPokedexEntry
- 	dba VictiniPokedexEntry
  	dba JirachiPokedexEntry
  	dba CelebiPokedexEntry
  	dba DittoPokedexEntry

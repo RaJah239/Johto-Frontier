@@ -252,14 +252,14 @@ Footprints:
  INCBIN "gfx/footprints/ho_oh.1bpp"  
  INCBIN "gfx/footprints/blank.1bpp" ; UNOWN
  INCBIN "gfx/footprints/blank.1bpp" ; NOWN 
- INCBIN "gfx/footprints/victini.1bpp"
  INCBIN "gfx/footprints/jirachi.1bpp"
  INCBIN "gfx/footprints/celebi.1bpp"  
  INCBIN "gfx/footprints/blank.1bpp" ; DITTO
  INCBIN "gfx/footprints/mew.1bpp"  
  INCBIN "gfx/footprints/mewtwo.1bpp" 
+ INCBIN "gfx/footprints/blank.1bpp" ; 252
  INCBIN "gfx/footprints/blank.1bpp" ; 253
  INCBIN "gfx/footprints/blank.1bpp" ; 254
  INCBIN "gfx/footprints/blank.1bpp" ; 255
- INCBIN "gfx/footprints/blank.1bpp" ; 256 
+ INCBIN "gfx/footprints/blank.1bpp" ; 256
  	assert_table_length $100

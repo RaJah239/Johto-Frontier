@@ -246,7 +246,6 @@ AnimationPointers:
 	dw HoOhAnimation
 	dw UnownAnimation
 	dw NownAnimation
-	dw VictiniAnimation
 	dw JirachiAnimation
 	dw CelebiAnimation
 	dw DittoAnimation

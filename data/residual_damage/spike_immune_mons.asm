@@ -29,7 +29,6 @@ SpikesImmunePokemon:
 ;	db MISMAGIUS
 ;	db UNOWN
 ;	db NOWN
-;	db VICTINI
 ;	db CELEBI
 	db MEW
 

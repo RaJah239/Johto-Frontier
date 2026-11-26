@@ -246,7 +246,6 @@ EvolutionMoves::
    db NO_MOVE      ; HO_OH
    db NO_MOVE      ; UNOWN
    db NO_MOVE      ; NOWN
-   db NO_MOVE      ; VICTINI
    db NO_MOVE      ; JIRACHI
    db NO_MOVE      ; CELEBI
    db NO_MOVE      ; DITTO

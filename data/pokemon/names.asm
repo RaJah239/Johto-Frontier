@@ -246,7 +246,6 @@ PokemonNames::
 	db "Ho-oh@@@@@"
 	db "Unown@@@@@"
 	db "Nown@@@@@@"
-	db "Victini@@@"
 	db "Jirachi@@@"
 	db "Celebi@@@@"
 	db "Ditto@@@@@"
@@ -255,6 +254,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
