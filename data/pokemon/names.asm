@@ -219,10 +219,10 @@ db "Vulpix@@@@"
 	db "Ninetales@"
 	db "NinetalesA"
 	db "Ivysaur@@@"
+	db "Venusaur@@"
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
-	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

@@ -219,4 +219,5 @@ dw VulpixAnimation
 	dw NinetalesAnimation
 	dw NinetalesAAnimation
 	dw IvysaurAnimation
+	dw VenusaurAnimation
 	assert_table_length NUM_POKEMON

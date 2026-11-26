@@ -249,6 +249,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const NINETALES ; d9
 	const NINETALES_A ; da
 	const IVYSAUR ; db
+	const VENUSAUR ; dc
 DEF NUM_POKEMON EQU const_value - 1
 	const EGG        ; e9
 

@@ -219,4 +219,5 @@ dw VulpixBitmasks
 	dw NinetalesBitmasks
 	dw NinetalesABitmasks
 	dw IvysaurBitmasks
+	dw VenusaurBitmasks
 	assert_table_length NUM_POKEMON

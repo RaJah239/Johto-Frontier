@@ -138,6 +138,7 @@ NewPokedexOrder:
 	db NINETALES
 	db NINETALES_A
 	db IVYSAUR
+	db VENUSAUR
 	db SUDOWOODO
 	db KOFFING
 	db WEEZING

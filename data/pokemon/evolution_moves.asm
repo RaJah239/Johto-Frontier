@@ -219,4 +219,5 @@ db NO_MOVE      ; VULPIX
 	db NO_MOVE      ; NINETALES
 	db NO_MOVE      ; NINETALES_A
 	db NO_MOVE      ; IVYSAUR
+	db NO_MOVE      ; VENUSAUR
 	assert_table_length NUM_POKEMON

@@ -207,6 +207,7 @@ AlphabeticalPokedexOrder:
 	db URSARING
 	db VAPOREON
 	db VENIPEDE
+	db VENUSAUR
 	db VICTREEBEL
 	db VOLCARONA
 db VULPIX

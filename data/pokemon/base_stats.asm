@@ -251,4 +251,5 @@ INCLUDE "data/pokemon/base_stats/vulpix.asm"
 INCLUDE "data/pokemon/base_stats/ninetales.asm"
 INCLUDE "data/pokemon/base_stats/ninetales_a.asm"
 INCLUDE "data/pokemon/base_stats/ivysaur.asm"
+INCLUDE "data/pokemon/base_stats/venusaur.asm"
 	assert_table_length NUM_POKEMON

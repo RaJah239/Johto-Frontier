@@ -226,6 +226,7 @@ MonMenuIconPals:
 	icon_pals RED, BROWN ; NINETALES
 	icon_pals BLUE, PURPLE ; NINETALES_A
 	icon_pals GREEN, PURPLE ; IVYSAUR
+	icon_pals GREEN, PURPLE ; VENUSAUR
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG
