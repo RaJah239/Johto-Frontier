@@ -163,6 +163,7 @@ AlphabeticalPokedexOrder:
 	db ROSELIA
 	db ROSERADE
 	db ROTOM
+	db SABLEYE
 	db SALAMENCE
 	db SCIZOR
 	db SCOLIPEDE

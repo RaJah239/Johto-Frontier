@@ -56,6 +56,7 @@ Footprints:
  INCBIN "gfx/footprints/ninetales.1bpp" ; shared Ninetales footprint
  INCBIN "gfx/footprints/ivysaur.1bpp"
  INCBIN "gfx/footprints/venusaur.1bpp"
+ INCBIN "gfx/footprints/sableye.1bpp"
  INCBIN "gfx/footprints/blank.1bpp" ; FEEBAS
  INCBIN "gfx/footprints/blank.1bpp" ; MILOTIC
  INCBIN "gfx/footprints/kirlia.1bpp"
@@ -261,5 +262,4 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 281
 	 INCBIN "gfx/footprints/blank.1bpp" ; 282
 	 INCBIN "gfx/footprints/blank.1bpp" ; 283
-	 INCBIN "gfx/footprints/blank.1bpp" ; 284
 	assert_table_length $100
