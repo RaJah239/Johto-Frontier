@@ -36,6 +36,7 @@ AlphabeticalPokedexOrder:
 	db CLEFAIRY
 	db COMBUSKEN
 	db CORSOLA
+	db COTTONEE
 	db CRADILY
 	db CROBAT
 	db CROCONAW

@@ -78,6 +78,7 @@ NewPokedexOrder:
 	db SWABLU
 	db ALTARIA
 	db SMEARGLE
+	db COTTONEE
 	db HOUNDOUR
 	db HOUNDOOM
 	db WOOPER

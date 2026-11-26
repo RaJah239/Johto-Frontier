@@ -663,3 +663,6 @@ DuosionBackpic: INCBIN "gfx/pokemon/duosion/back.2bpp.lz"
 
 ReuniclusFrontpic: INCBIN "gfx/pokemon/reuniclus/front.animated.2bpp.lz"
 ReuniclusBackpic: INCBIN "gfx/pokemon/reuniclus/back.2bpp.lz"
+
+CottoneeFrontpic: INCBIN "gfx/pokemon/cottonee/front.animated.2bpp.lz"
+CottoneeBackpic: INCBIN "gfx/pokemon/cottonee/back.2bpp.lz"

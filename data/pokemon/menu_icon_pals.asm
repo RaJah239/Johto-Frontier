@@ -209,6 +209,7 @@ MonMenuIconPals:
 	icon_pals GRAY, RED ; MAWILE
 	icon_pals PURPLE, BLUE ; DUOSION
 	icon_pals PURPLE, BLUE ; REUNICLUS
+	icon_pals GREEN, PINK ; COTTONEE
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

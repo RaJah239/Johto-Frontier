@@ -232,6 +232,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const MAWILE ; c8
 	const DUOSION ; c9
 	const REUNICLUS ; ca
+	const COTTONEE ; cb
 DEF NUM_POKEMON EQU const_value - 1
 	const EGG        ; e9
 

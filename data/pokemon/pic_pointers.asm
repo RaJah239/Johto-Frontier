@@ -410,6 +410,8 @@ PokemonPicPointers::
 	dba DuosionBackpic
 	dba ReuniclusFrontpic
 	dba ReuniclusBackpic
+	dba CottoneeFrontpic
+	dba CottoneeBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1
