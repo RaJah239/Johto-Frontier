@@ -233,7 +233,6 @@ BitmasksPointers:
 	dw GholdengoBitmasks
 	dw DarkraiBitmasks
 	dw RegirockBitmasks
-	dw RegiceBitmasks
 	dw ArticunoBitmasks
 	dw ZapdosBitmasks
 	dw MoltresBitmasks

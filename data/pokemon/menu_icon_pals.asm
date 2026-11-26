@@ -240,7 +240,6 @@ MonMenuIconPals:
 	icon_pals BROWN,  BLUE   ; GHOLDENGO
 	icon_pals RED,    BLUE   ; DARKRAI
 	icon_pals RED,    BROWN  ; REGIROCK
-	icon_pals BLUE,   TEAL   ; REGICE
 	icon_pals BLUE,   BLUE   ; ARTICUNO
 	icon_pals BROWN,  RED    ; ZAPDOS
 	icon_pals RED,    RED    ; MOLTRES

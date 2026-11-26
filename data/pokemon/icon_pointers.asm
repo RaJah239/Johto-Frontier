@@ -235,7 +235,6 @@ IconPointers:
 	dw GholdengoIcon
 	dw DarkraiIcon
 	dw RegirockIcon
-	dw RegiceIcon
 	dw ArticunoIcon
 	dw ZapdosIcon
 	dw MoltresIcon

@@ -5,5 +5,4 @@
 
 ;	db SNORUNT
 ;	db GLALIE
-;	db REGICE
     db -1 ; end

@@ -239,7 +239,6 @@ Footprints:
  INCBIN "gfx/footprints/gholdengo.1bpp"
  INCBIN "gfx/footprints/darkrai.1bpp"
  INCBIN "gfx/footprints/regirock.1bpp"
- INCBIN "gfx/footprints/dot.1bpp" ; REGICE
  INCBIN "gfx/footprints/registeel.1bpp"
  INCBIN "gfx/footprints/articuno.1bpp"
  INCBIN "gfx/footprints/zapdos.1bpp"  
@@ -262,4 +261,5 @@ Footprints:
  INCBIN "gfx/footprints/blank.1bpp" ; 253
  INCBIN "gfx/footprints/blank.1bpp" ; 254
  INCBIN "gfx/footprints/blank.1bpp" ; 255
+ INCBIN "gfx/footprints/blank.1bpp" ; 256
  	assert_table_length $100

@@ -234,7 +234,6 @@ PokedexDataPointerTable:
  	dba GholdengoiPokedexEntry
  	dba DarkraiPokedexEntry
  	dba RegirockPokedexEntry
- 	dba RegicePokedexEntry
  	dba ArticunoPokedexEntry
  	dba ZapdosPokedexEntry
  	dba MoltresPokedexEntry

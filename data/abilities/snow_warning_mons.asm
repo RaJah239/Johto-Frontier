@@ -2,5 +2,4 @@
 
 SnowWarningPokemon:
 ;    db ABOMASNOW
-;    db REGICE
     db -1

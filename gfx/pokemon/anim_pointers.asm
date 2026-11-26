@@ -233,7 +233,6 @@ AnimationPointers:
 	dw GholdengoAnimation
 	dw DarkraiAnimation
 	dw RegirockAnimation
-	dw RegiceAnimation
 	dw ArticunoAnimation
 	dw ZapdosAnimation
 	dw MoltresAnimation
