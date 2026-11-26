@@ -757,3 +757,7 @@ CyclizarFrontpic: INCBIN "gfx/pokemon/cyclizar/front.animated.2bpp.lz"
 CyclizarBackpic: INCBIN "gfx/pokemon/cyclizar/back.2bpp.lz"
 KrookodileFrontpic: INCBIN "gfx/pokemon/krookodile/front.animated.2bpp.lz"
 KrookodileBackpic: INCBIN "gfx/pokemon/krookodile/back.2bpp.lz"
+SECTION "Pics 33", ROMX
+
+RhyperiorFrontpic: INCBIN "gfx/pokemon/rhyperior/front.animated.2bpp.lz"
+RhyperiorBackpic: INCBIN "gfx/pokemon/rhyperior/back.2bpp.lz"

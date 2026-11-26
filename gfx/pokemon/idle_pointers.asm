@@ -239,4 +239,5 @@ dw VulpixAnimationIdle
 	dw DondozoAnimationIdle
 	dw CyclizarAnimationIdle
 	dw KrookodileAnimationIdle
+	dw RhyperiorAnimationIdle
 	assert_table_length NUM_POKEMON

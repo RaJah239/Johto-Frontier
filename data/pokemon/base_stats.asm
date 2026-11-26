@@ -271,4 +271,5 @@ INCLUDE "data/pokemon/base_stats/crabominable.asm"
 INCLUDE "data/pokemon/base_stats/dondozo.asm"
 INCLUDE "data/pokemon/base_stats/cyclizar.asm"
 INCLUDE "data/pokemon/base_stats/krookodile.asm"
+INCLUDE "data/pokemon/base_stats/rhyperior.asm"
 	assert_table_length NUM_POKEMON

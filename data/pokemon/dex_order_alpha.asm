@@ -174,6 +174,7 @@ AlphabeticalPokedexOrder:
 	db RAPIDASH
 	db REUNICLUS
 	db RHYDON
+	db RHYPERIOR
 	db ROSELIA
 	db ROSERADE
 	db ROTOM

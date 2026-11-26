@@ -246,7 +246,6 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 262
 	 INCBIN "gfx/footprints/blank.1bpp" ; 263
 	 INCBIN "gfx/footprints/blank.1bpp" ; 264
-	 INCBIN "gfx/footprints/blank.1bpp" ; 265
 	 INCBIN "gfx/footprints/dusclops.1bpp"
 	 INCBIN "gfx/footprints/dusknoir.1bpp"
 	 INCBIN "gfx/footprints/blank.1bpp" ; EELEKTROSS (shared empty reference footprint)
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; DONDOZO (no supplied footprint)
 	 INCBIN "gfx/footprints/blank.1bpp" ; CYCLIZAR (no supplied footprint)
 	 INCBIN "gfx/footprints/blank.1bpp" ; KROOKODILE (no supplied footprint)
+	 INCBIN "gfx/footprints/blank.1bpp" ; RHYPERIOR (no supplied footprint)
 	assert_table_length $100

@@ -484,6 +484,8 @@ PokemonPicPointers::
 	dba CyclizarBackpic
 	dba KrookodileFrontpic
 	dba KrookodileBackpic
+	dba RhyperiorFrontpic
+	dba RhyperiorBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

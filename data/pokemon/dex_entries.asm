@@ -248,3 +248,4 @@ CrabominablePokedexEntry::    INCLUDE "data/pokemon/dex_entries/crabominable.asm
 DondozoPokedexEntry::    INCLUDE "data/pokemon/dex_entries/dondozo.asm"
 CyclizarPokedexEntry::    INCLUDE "data/pokemon/dex_entries/cyclizar.asm"
 KrookodilePokedexEntry::    INCLUDE "data/pokemon/dex_entries/krookodile.asm"
+RhyperiorPokedexEntry::    INCLUDE "data/pokemon/dex_entries/rhyperior.asm"

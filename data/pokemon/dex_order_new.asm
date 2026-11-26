@@ -241,4 +241,5 @@ NewPokedexOrder:
 	db DONDOZO
 	db CYCLIZAR
 	db KROOKODILE
+	db RHYPERIOR
 	assert_table_length NUM_POKEMON
