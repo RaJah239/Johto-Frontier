@@ -231,6 +231,7 @@ dw VulpixIcon
 	dw EelektrossIcon
 	dw DhelmiseIcon
 	dw DragalgeIcon
+	dw HonchkrowIcon
 	assert_table_length NUM_POKEMON + 1
 	dw EggIcon
 	assert_table_length EGG + 1

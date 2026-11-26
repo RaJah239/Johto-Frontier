@@ -229,4 +229,5 @@ dw VulpixAnimation
 	dw EelektrossAnimation
 	dw DhelmiseAnimation
 	dw DragalgeAnimation
+	dw HonchkrowAnimation
 	assert_table_length NUM_POKEMON

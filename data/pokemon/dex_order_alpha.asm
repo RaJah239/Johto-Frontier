@@ -94,6 +94,7 @@ AlphabeticalPokedexOrder:
 	db HERACROSS
 	db HO_OH
 	db HOOTHOOT
+	db HONCHKROW
 	db HOUNDOOM
 	db HOUNDOUR
 	db HYDRAPPLE

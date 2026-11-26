@@ -231,4 +231,5 @@ NewPokedexOrder:
 	db EELEKTROSS
 	db DHELMISE
 	db DRAGALGE
+	db HONCHKROW
 	assert_table_length NUM_POKEMON

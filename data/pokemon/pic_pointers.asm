@@ -464,6 +464,8 @@ PokemonPicPointers::
 	dba DhelmiseBackpic
 	dba DragalgeFrontpic
 	dba DragalgeBackpic
+	dba HonchkrowFrontpic
+	dba HonchkrowBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

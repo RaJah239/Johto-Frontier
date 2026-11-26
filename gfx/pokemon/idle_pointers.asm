@@ -229,4 +229,5 @@ dw VulpixAnimationIdle
 	dw EelektrossAnimationIdle
 	dw DhelmiseAnimationIdle
 	dw DragalgeAnimationIdle
+	dw HonchkrowAnimationIdle
 	assert_table_length NUM_POKEMON
