@@ -156,7 +156,6 @@ PokemonNames::
 	db "Chandelure"
 	db "Miltank@@@"
 	db "Tauros@@@@"
-	db "Voltorb@@@"
 	db "Electrode@"
 	db "Electabuzz"
 	db "Magneton@@"
@@ -236,6 +235,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

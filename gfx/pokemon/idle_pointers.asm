@@ -156,7 +156,6 @@ AnimationIdlePointers:
 	dw ChandelureAnimationIdle
 	dw MiltankAnimationIdle
 	dw TaurosAnimationIdle
-	dw VoltorbAnimationIdle
 	dw ElectrodeAnimationIdle
 	dw ElectabuzzAnimationIdle
 	dw MagnetonAnimationIdle

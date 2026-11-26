@@ -957,7 +957,7 @@ JohtoGrassWildMons:
 	def_grass_wildmons POWER_PLANT_OUTSIDE
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 24, VOLTORB
+	db 24, PIKACHU
 	db 24, PIKACHU
 	db 24, PIKACHU
 	db 24, TROPIUS
@@ -965,7 +965,7 @@ JohtoGrassWildMons:
 	db 24, LOPUNNY
 	db 5, PIKACHU
 	; day
-	db 24, VOLTORB
+	db 24, PIKACHU
 	db 24, PIKACHU
 	db 24, PIKACHU
 	db 24, TROPIUS
@@ -973,7 +973,7 @@ JohtoGrassWildMons:
 	db 24, LOPUNNY
 	db 5, PIKACHU
 	; nite
-	db 24, VOLTORB
+	db 24, PIKACHU
 	db 24, PIKACHU
 	db 24, PIKACHU
 	db 24, TROPIUS

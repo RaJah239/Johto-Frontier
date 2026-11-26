@@ -156,7 +156,6 @@ AnimationPointers:
 	dw ChandelureAnimation
 	dw MiltankAnimation
 	dw TaurosAnimation
-	dw VoltorbAnimation
 	dw ElectrodeAnimation
 	dw ElectabuzzAnimation
 	dw MagnetonAnimation

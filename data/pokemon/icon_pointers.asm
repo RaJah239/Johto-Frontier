@@ -158,7 +158,6 @@ IconPointers:
 	dw ChandelureIcon
 	dw MiltankIcon
 	dw TaurosIcon
-	dw VoltorbIcon
 	dw ElectrodeIcon
 	dw ElectabuzzIcon
 	dw MagnetonIcon

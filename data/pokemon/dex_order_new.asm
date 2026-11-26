@@ -158,7 +158,6 @@ NewPokedexOrder:
 	db CHANDELURE
 	db MILTANK
 	db TAUROS
-	db VOLTORB
 	db ELECTRODE
 	db ELECTABUZZ
 	db MAGNETON

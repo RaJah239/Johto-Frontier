@@ -213,7 +213,6 @@ LampentEvosAttacks:
 ChandelureEvosAttacks:
 MiltankEvosAttacks:
 TaurosEvosAttacks:
-VoltorbEvosAttacks:
 ElectrodeEvosAttacks:
 ElectabuzzEvosAttacks:
 MagnetonEvosAttacks:

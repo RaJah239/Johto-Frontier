@@ -7,7 +7,7 @@ TeamRocketBaseB1F_MapEvents:
 
 	def_coord_events
 	; There are spots on the floor that trigger a Pokémon battle.
-	; Each Pokémon (Voltorb, Koffing, Koffing) knows Selfdestruct.
+	; Each Pokémon (Koffing, Koffing, Koffing) knows Selfdestruct.
 	coord_event  2,  7, SCENE_TEAMROCKETBASEB1F_TRAPS, ExplodingTrap1
 	coord_event  3,  7, SCENE_TEAMROCKETBASEB1F_TRAPS, ExplodingTrap2
 	coord_event  4,  7, SCENE_TEAMROCKETBASEB1F_TRAPS, ExplodingTrap3
@@ -65,7 +65,7 @@ ExplodingTrap1:
 ExplodingTrap2:
 	checkevent EVENT_EXPLODING_TRAP_2
 	iftrue NoExplodingTrap
-	scall VoltorbExplodingTrap
+	scall KoffingExplodingTrap
 	reloadmapafterbattle
 	setevent EVENT_EXPLODING_TRAP_2
 	end
@@ -81,7 +81,7 @@ ExplodingTrap3:
 ExplodingTrap4:
 	checkevent EVENT_EXPLODING_TRAP_4
 	iftrue NoExplodingTrap
-	scall VoltorbExplodingTrap
+	scall KoffingExplodingTrap
 	reloadmapafterbattle
 	setevent EVENT_EXPLODING_TRAP_4
 	end
@@ -105,7 +105,7 @@ ExplodingTrap6:
 ExplodingTrap7:
 	checkevent EVENT_EXPLODING_TRAP_7
 	iftrue NoExplodingTrap
-	scall VoltorbExplodingTrap
+	scall KoffingExplodingTrap
 	reloadmapafterbattle
 	setevent EVENT_EXPLODING_TRAP_7
 	end
@@ -129,7 +129,7 @@ ExplodingTrap9:
 ExplodingTrap10:
 	checkevent EVENT_EXPLODING_TRAP_10
 	iftrue NoExplodingTrap
-	scall VoltorbExplodingTrap
+	scall KoffingExplodingTrap
 	reloadmapafterbattle
 	setevent EVENT_EXPLODING_TRAP_10
 	end
@@ -169,7 +169,7 @@ ExplodingTrap14:
 ExplodingTrap15:
 	checkevent EVENT_EXPLODING_TRAP_15
 	iftrue NoExplodingTrap
-	scall VoltorbExplodingTrap
+	scall KoffingExplodingTrap
 	reloadmapafterbattle
 	setevent EVENT_EXPLODING_TRAP_15
 	end
@@ -185,7 +185,7 @@ ExplodingTrap16:
 ExplodingTrap17:
 	checkevent EVENT_EXPLODING_TRAP_17
 	iftrue NoExplodingTrap
-	scall VoltorbExplodingTrap
+	scall KoffingExplodingTrap
 	reloadmapafterbattle
 	setevent EVENT_EXPLODING_TRAP_17
 	end
@@ -209,7 +209,7 @@ ExplodingTrap19:
 ExplodingTrap20:
 	checkevent EVENT_EXPLODING_TRAP_20
 	iftrue NoExplodingTrap
-	scall VoltorbExplodingTrap
+	scall KoffingExplodingTrap
 	reloadmapafterbattle
 	setevent EVENT_EXPLODING_TRAP_20
 	end
@@ -225,20 +225,9 @@ ExplodingTrap21:
 ExplodingTrap22:
 	checkevent EVENT_EXPLODING_TRAP_22
 	iftrue NoExplodingTrap
-	scall VoltorbExplodingTrap
+	scall KoffingExplodingTrap
 	reloadmapafterbattle
 	setevent EVENT_EXPLODING_TRAP_22
-	end
-
-VoltorbExplodingTrap:
-	special FadeOutPalettes
-	special LoadMapPalettes
-	cry VOLTORB
-	special FadeInPalettes_EnableDynNoApply
-	setlasttalked -1
-	loadvar VAR_BATTLETYPE, BATTLETYPE_TRAP
-	loadwildmon VOLTORB, 27
-	startbattle
 	end
 
 KoffingExplodingTrap:

@@ -315,8 +315,6 @@ PokemonPicPointers::
  	dba MiltankBackpic
  	dba TaurosFrontpic
  	dba TaurosBackpic
- 	dba VoltorbFrontpic
- 	dba VoltorbBackpic
  	dba ElectrodeFrontpic
  	dba ElectrodeBackpic
  	dba ElectabuzzFrontpic

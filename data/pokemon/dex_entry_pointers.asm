@@ -157,7 +157,6 @@ PokedexDataPointerTable:
  	dba ChandelurePokedexEntry
  	dba MiltankPokedexEntry
  	dba TaurosPokedexEntry
- 	dba VoltorbPokedexEntry
  	dba ElectrodePokedexEntry
  	dba ElectabuzzPokedexEntry
  	dba MagnetonPokedexEntry

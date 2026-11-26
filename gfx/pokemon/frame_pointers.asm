@@ -156,7 +156,6 @@ FramesPointers:
 	dw ChandelureFrames
 	dw MiltankFrames
 	dw TaurosFrames
-	dw VoltorbFrames
 	dw ElectrodeFrames
 	dw ElectabuzzFrames
 	dw MagnetonFrames

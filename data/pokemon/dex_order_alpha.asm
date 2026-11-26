@@ -221,7 +221,6 @@ AlphabeticalPokedexOrder:
 	db VENIPEDE
 	db VICTREEBEL
 	db VOLCARONA
-	db VOLTORB
 	db WARTORTLE
 	db WEAVILE
 	db WEEPINBELL

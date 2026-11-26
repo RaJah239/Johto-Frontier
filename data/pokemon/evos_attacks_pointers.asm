@@ -158,7 +158,6 @@ EvosAttacksPointers::
 	dw ChandelureEvosAttacks
 	dw MiltankEvosAttacks
 	dw TaurosEvosAttacks
-	dw VoltorbEvosAttacks
 	dw ElectrodeEvosAttacks
 	dw ElectabuzzEvosAttacks
 	dw MagnetonEvosAttacks
