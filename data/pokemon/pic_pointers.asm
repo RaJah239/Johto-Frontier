@@ -79,8 +79,6 @@ PokemonPicPointers::
  	dba BunearyBackpic
  	dba LopunnyFrontpic
  	dba LopunnyBackpic
- 	dba PidgeyFrontpic
- 	dba PidgeyBackpic
  	dba PidgeottoFrontpic
  	dba PidgeottoBackpic
  	dba PidgeotFrontpic

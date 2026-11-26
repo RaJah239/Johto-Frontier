@@ -45,7 +45,6 @@ MonMenuIconPals:
 	icon_pals GREEN,  BLUE   ; YANMEGA
 	icon_pals BROWN,  PINK   ; BUNEARY
 	icon_pals BROWN,  PINK   ; LOPUNNY
-	icon_pals BROWN,  RED    ; PIDGEY
 	icon_pals BROWN,  BROWN  ; PIDGEOTTO
 	icon_pals BROWN,  GREEN  ; PIDGEOT
 	icon_pals BROWN,  BROWN  ; HOOTHOOT

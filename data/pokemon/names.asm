@@ -38,7 +38,6 @@ PokemonNames::
 	db "Yanmega@@@"
 	db "Buneary@@@"
 	db "Lopunny@@@"
-	db "Pidgey@@@@"
 	db "Pidgeotto@"
 	db "Pidgeot@@@"
 	db "Hoothoot@@"
@@ -220,6 +219,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

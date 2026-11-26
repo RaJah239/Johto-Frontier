@@ -38,7 +38,6 @@ AnimationIdlePointers:
 	dw YanmegaAnimationIdle
 	dw BunearyAnimationIdle
 	dw LopunnyAnimationIdle
-	dw PidgeyAnimationIdle
 	dw PidgeottoAnimationIdle
 	dw PidgeotAnimationIdle
 	dw HoothootAnimationIdle

@@ -38,7 +38,6 @@ FramesPointers:
 	dw YanmegaFrames
 	dw BunearyFrames
 	dw LopunnyFrames
-	dw PidgeyFrames
 	dw PidgeottoFrames
 	dw PidgeotFrames
 	dw HoothootFrames

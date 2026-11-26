@@ -36,7 +36,7 @@ SpriteMons:
 	db LUGIA ; in use
 	db HO_OH ; in use
 	db GHOLDENGO ; in use
-	db PIDGEY ; in use
+	db PIDGEOTTO ; in use
 	db SLOWPOKE ; in use
 	db SCYTHER ; in use
 	db MEOWTH ; in use

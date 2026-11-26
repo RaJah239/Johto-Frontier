@@ -39,7 +39,7 @@ TreeMonSet_Forest:
 	db 1, HERACROSS,  15
 	db 5, HOOTHOOT,   15
 	db 2, NOCTOWL,    25
-	db 5, PIDGEY,     15
+	db 5, PIDGEOTTO,     15
 	db 2, PIDGEOTTO,  15
 	db 1, PIDGEOT,    15
 	db 5, ZUBAT,      15
@@ -79,7 +79,7 @@ TreeMonSet_Forest:
 	db 1, HERACROSS,  15
 	db 5, HOOTHOOT,   15
 	db 2, NOCTOWL,    25
-	db 5, PIDGEY,     15
+	db 5, PIDGEOTTO,     15
 	db 2, PIDGEOTTO,  15
 	db 1, PIDGEOT,    15
 	db 5, ZUBAT,      15

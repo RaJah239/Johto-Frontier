@@ -39,7 +39,6 @@ PokedexDataPointerTable:
  	dba YanmegaPokedexEntry
  	dba BunearyPokedexEntry
  	dba LopunnyPokedexEntry
- 	dba PidgeyPokedexEntry
  	dba PidgeottoPokedexEntry
  	dba PidgeotPokedexEntry
  	dba HoothootPokedexEntry

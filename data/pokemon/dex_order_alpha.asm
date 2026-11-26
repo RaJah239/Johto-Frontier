@@ -141,7 +141,6 @@ AlphabeticalPokedexOrder:
 	db PHANPY
 	db PIDGEOT
 	db PIDGEOTTO
-	db PIDGEY
 	db PIKACHU
 	db PILOSWINE
 	db PONYTA

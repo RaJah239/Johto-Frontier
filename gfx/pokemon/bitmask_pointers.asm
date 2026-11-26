@@ -38,7 +38,6 @@ BitmasksPointers:
 	dw YanmegaBitmasks
 	dw BunearyBitmasks
 	dw LopunnyBitmasks
-	dw PidgeyBitmasks
 	dw PidgeottoBitmasks
 	dw PidgeotBitmasks
 	dw HoothootBitmasks

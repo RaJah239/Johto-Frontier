@@ -277,7 +277,6 @@ VolcaronaBackpic:    INCBIN "gfx/pokemon/volcarona/back.2bpp.lz"
 SECTION "Pics 13", ROMX
 
 WeavileBackpic:      INCBIN "gfx/pokemon/weavile/back.2bpp.lz"
-PidgeyBackpic:       INCBIN "gfx/pokemon/pidgey/back.2bpp.lz"
 ScientistPic:        INCBIN "gfx/trainers/scientist.2bpp.lz"
 GligarBackpic:       INCBIN "gfx/pokemon/gligar/back.2bpp.lz"
 TyphlosionBackpic:   INCBIN "gfx/pokemon/typhlosion/back.2bpp.lz"
@@ -583,7 +582,6 @@ StarmieBackpic:      INCBIN "gfx/pokemon/starmie/back.2bpp.lz"
 
 
 SECTION "Pics 21", ROMX
-PidgeyFrontpic:      INCBIN "gfx/pokemon/pidgey/front.animated.2bpp.lz"
 
 
 SECTION "Pics 22", ROMX

@@ -38,7 +38,6 @@ AnimationPointers:
 	dw YanmegaAnimation
 	dw BunearyAnimation
 	dw LopunnyAnimation
-	dw PidgeyAnimation
 	dw PidgeottoAnimation
 	dw PidgeotAnimation
 	dw HoothootAnimation

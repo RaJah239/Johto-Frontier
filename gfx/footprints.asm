@@ -44,7 +44,6 @@ Footprints:
  INCBIN "gfx/footprints/yanmega.1bpp"
  INCBIN "gfx/footprints/buneary.1bpp"
  INCBIN "gfx/footprints/lopunny.1bpp"
- INCBIN "gfx/footprints/pidgey.1bpp"
  INCBIN "gfx/footprints/pidgeotto.1bpp"
  INCBIN "gfx/footprints/pidgeot.1bpp" 
  INCBIN "gfx/footprints/hoothoot.1bpp"
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 285
 	 INCBIN "gfx/footprints/blank.1bpp" ; 286
 	 INCBIN "gfx/footprints/blank.1bpp" ; 287
+	 INCBIN "gfx/footprints/blank.1bpp" ; 288
 	assert_table_length $100

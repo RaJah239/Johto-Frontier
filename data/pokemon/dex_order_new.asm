@@ -40,7 +40,6 @@ NewPokedexOrder:
 	db YANMEGA
 	db BUNEARY
 	db LOPUNNY
-	db PIDGEY
 	db PIDGEOTTO
 	db PIDGEOT
 	db HOOTHOOT

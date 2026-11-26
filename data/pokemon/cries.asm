@@ -44,7 +44,6 @@ PokemonCries::
 	mon_cry CRY_TOTODILE,   -$16f,  $168 ; YANMEGA AzureKeys
 	mon_cry CRY_BUNEARY,    -$012,  $09a ; BUNEARY Ax6
 	mon_cry CRY_VULPIX,     -$00f,  $0a9 ; LOPUNNY Ax6
-	mon_cry CRY_PIDGEY,       223,   132 ; PIDGEY
 	mon_cry CRY_PIDGEOTTO,     40,   320 ; PIDGEOTTO
 	mon_cry CRY_PIDGEOTTO,     17,   383 ; PIDGEOT
 	mon_cry CRY_HOOTHOOT,     145,   216 ; HOOTHOOT
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 286
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 287
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 288
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 289
 	assert_table_length $ff

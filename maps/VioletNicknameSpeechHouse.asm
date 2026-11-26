@@ -15,7 +15,7 @@ VioletNicknameSpeechHouse_MapEvents:
 	object_const_def
 	const VIOLETNICKNAMESPEECHHOUSE_TEACHER
 	const VIOLETNICKNAMESPEECHHOUSE_LASS
-	const VIOLETNICKNAMESPEECHHOUSE_PIDGEY
+	const VIOLETNICKNAMESPEECHHOUSE_PIDGEOTTO
 
 VioletNicknameSpeechHouse_MapScripts:
 	def_scene_scripts
@@ -23,7 +23,7 @@ VioletNicknameSpeechHouse_MapScripts:
 	def_callbacks
 
 VioletNicknameSpeechHouseLassText:
-	text "I call my Pidgey"
+	text "I call my Pidgeotto"
 	line "Strawberry!"
 	done
 
@@ -38,13 +38,13 @@ VioletNicknameSpeechHouseTeacherText:
 	done
 
 VioletNicknameSpeechHouseBirdScript:
-	setval PIDGEY
+	setval PIDGEOTTO
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
-	pokepic PIDGEY
-	cry PIDGEY
+	pokepic PIDGEOTTO
+	cry PIDGEOTTO
 	waitbutton
 	closepokepic
 .skipthis

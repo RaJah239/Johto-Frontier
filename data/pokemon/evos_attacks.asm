@@ -98,7 +98,6 @@ YanmaEvosAttacks:
 YanmegaEvosAttacks:
 BunearyEvosAttacks:
 LopunnyEvosAttacks:
-PidgeyEvosAttacks:
 PidgeottoEvosAttacks:
 PidgeotEvosAttacks:
 HoothootEvosAttacks:

@@ -40,7 +40,6 @@ EvosAttacksPointers::
 	dw YanmegaEvosAttacks
 	dw BunearyEvosAttacks
 	dw LopunnyEvosAttacks
-	dw PidgeyEvosAttacks
 	dw PidgeottoEvosAttacks
 	dw PidgeotEvosAttacks
 	dw HoothootEvosAttacks

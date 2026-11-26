@@ -395,7 +395,7 @@ PartyKeeperSpeciesList:
 	db YANMA
 	db BUNEARY
 	db BUNEARY
-	db PIDGEY
+	db PIDGEOTTO
 	db HOOTHOOT
 	db ZUBAT
 	db TEDDIURSA

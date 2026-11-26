@@ -38,7 +38,6 @@ EvolutionMoves::
    db NO_MOVE      ; YANMEGA
    db NO_MOVE      ; BUNEARY
    db NO_MOVE      ; LOPUNNY
-   db NO_MOVE      ; PIDGEY
    db NO_MOVE      ; PIDGEOTTO
    db NO_MOVE      ; PIDGEOT
    db NO_MOVE      ; HOOTHOOT

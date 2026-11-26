@@ -9,7 +9,7 @@ JohtoGrassWildMons:
 	db 2, WURMPLE
 	db 2, YANMA
 	db 2, BUNEARY
-	db 2, PIDGEY
+	db 2, PIDGEOTTO
 	db 2, BUNEARY
 	db 5, KIRLIA
 	; day
@@ -17,7 +17,7 @@ JohtoGrassWildMons:
 	db 2, WURMPLE
 	db 2, YANMA
 	db 2, BUNEARY
-	db 2, PIDGEY
+	db 2, PIDGEOTTO
 	db 2, BUNEARY
 	db 5, KIRLIA
 	; nite
@@ -37,7 +37,7 @@ JohtoGrassWildMons:
 	db 4, WURMPLE
 	db 4, YANMA
 	db 4, BUNEARY
-	db 4, PIDGEY
+	db 4, PIDGEOTTO
 	db 4, BUNEARY
 	db 5, BUNEARY
 	; day
@@ -45,7 +45,7 @@ JohtoGrassWildMons:
 	db 4, WURMPLE
 	db 4, YANMA
 	db 4, BUNEARY
-	db 4, PIDGEY
+	db 4, PIDGEOTTO
 	db 4, BUNEARY
 	db 5, BUNEARY
 	; nite
@@ -66,7 +66,7 @@ JohtoGrassWildMons:
 	db 5, WIMPOD
 	db 7, CASCOON
 	db 5, MAREEP
-	db 5, PIDGEY
+	db 5, PIDGEOTTO
 	db 5, YANMA
 	; day
 	db 5, BELLSPROUT
@@ -74,7 +74,7 @@ JohtoGrassWildMons:
 	db 5, WIMPOD
 	db 7, CASCOON
 	db 5, MAREEP
-	db 5, PIDGEY
+	db 5, PIDGEOTTO
 	db 5, YANMA
 	; nite
 	db 5, WIMPOD
@@ -202,7 +202,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 8, BELLSPROUT
-	db 8, PIDGEY
+	db 8, PIDGEOTTO
 	db 8, GROWLITHE
 	db 8, MAREEP
 	db 8, BUNEARY
@@ -210,7 +210,7 @@ JohtoGrassWildMons:
 	db 8, HOUNDOUR
 	; day
 	db 8, BELLSPROUT
-	db 8, PIDGEY
+	db 8, PIDGEOTTO
 	db 8, GROWLITHE
 	db 8, MAREEP
 	db 8, BUNEARY
@@ -513,7 +513,7 @@ JohtoGrassWildMons:
 	db 17, MEOWTH
 	db 17, DITTO
 	db 17, TANGELA
-	db 17, PIDGEY
+	db 17, PIDGEOTTO
 	db 17, BUNEARY
 	db 5, TOGETIC
 	; day
@@ -521,7 +521,7 @@ JohtoGrassWildMons:
 	db 17, MEOWTH
 	db 17, DITTO
 	db 17, TANGELA
-	db 17, PIDGEY
+	db 17, PIDGEOTTO
 	db 17, BUNEARY
 	db 5, TOGETIC
 	; nite

@@ -40,7 +40,6 @@ IconPointers:
 	dw YanmegaIcon
 	dw BunearyIcon
 	dw LopunnyIcon
-	dw PidgeyIcon
 	dw PidgeottoIcon
 	dw PidgeotIcon
 	dw HoothootIcon
