@@ -236,4 +236,5 @@ db NO_MOVE      ; VULPIX
 	db NO_MOVE      ; GROVYLE
 	db NO_MOVE      ; SCEPTILE
 	db NO_MOVE      ; CRABOMINABLE
+	db NO_MOVE      ; DONDOZO
 	assert_table_length NUM_POKEMON

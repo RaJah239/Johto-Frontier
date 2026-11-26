@@ -40,6 +40,7 @@ AlphabeticalPokedexOrder:
 	db CORSOLA
 	db COTTONEE
 	db CRABOMINABLE
+	db DONDOZO
 	db CRADILY
 	db CROBAT
 	db CROCONAW

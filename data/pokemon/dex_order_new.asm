@@ -238,4 +238,5 @@ NewPokedexOrder:
 	db GROVYLE
 	db SCEPTILE
 	db CRABOMINABLE
+	db DONDOZO
 	assert_table_length NUM_POKEMON

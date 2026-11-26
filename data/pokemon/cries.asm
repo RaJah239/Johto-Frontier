@@ -242,6 +242,7 @@ PokemonCries::
 	mon_cry CRY_SUNFLORA, 0, 255 ; GROVYLE
 	mon_cry CRY_SUNFLORA, 0, 255 ; SCEPTILE
 	mon_cry CRY_SNEASLER, 0, 255 ; CRABOMINABLE
+	mon_cry CRY_LAPRAS, 0, 255 ; DONDOZO
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -261,5 +262,4 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 266
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 267
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 268
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 269
 	assert_table_length $ff

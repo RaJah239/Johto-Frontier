@@ -236,4 +236,5 @@ dw VulpixFrames
 	dw GrovyleFrames
 	dw SceptileFrames
 	dw CrabominableFrames
+	dw DondozoFrames
 	assert_table_length NUM_POKEMON

@@ -47,7 +47,6 @@ CrobatPokedexEntry::     INCLUDE "data/pokemon/dex_entries/crobat.asm"
 UrsaringPokedexEntry::   INCLUDE "data/pokemon/dex_entries/ursaring.asm"
 UrsalunaPokedexEntry::   INCLUDE "data/pokemon/dex_entries/ursaluna.asm"
 
-
 SECTION "Pokedex Entries 065-128", ROMX
 
 UrsalunaBPokedexEntry::  INCLUDE "data/pokemon/dex_entries/ursaluna_b.asm"
@@ -100,7 +99,6 @@ DrapionPokedexEntry::    INCLUDE "data/pokemon/dex_entries/drapion.asm"
 LarvestaPokedexEntry::   INCLUDE "data/pokemon/dex_entries/larvesta.asm"
 VolcaronaPokedexEntry::  INCLUDE "data/pokemon/dex_entries/volcarona.asm"
 
-
 SECTION "Pokedex Entries 129-192", ROMX
 
 MankeyPokedexEntry::     INCLUDE "data/pokemon/dex_entries/mankey.asm"
@@ -150,7 +148,6 @@ JynxPokedexEntry::       INCLUDE "data/pokemon/dex_entries/jynx.asm"
 SnoruntPokedexEntry::    INCLUDE "data/pokemon/dex_entries/snorunt.asm"
 GlaliePokedexEntry::     INCLUDE "data/pokemon/dex_entries/glalie.asm"
 FroslassPokedexEntry::   INCLUDE "data/pokemon/dex_entries/froslass.asm"
-
 
 SECTION "Pokedex Entries 193-251", ROMX
 
@@ -248,3 +245,4 @@ JumpluffPokedexEntry::    INCLUDE "data/pokemon/dex_entries/jumpluff.asm"
 GrovylePokedexEntry::    INCLUDE "data/pokemon/dex_entries/grovyle.asm"
 SceptilePokedexEntry::    INCLUDE "data/pokemon/dex_entries/sceptile.asm"
 CrabominablePokedexEntry::    INCLUDE "data/pokemon/dex_entries/crabominable.asm"
+DondozoPokedexEntry::    INCLUDE "data/pokemon/dex_entries/dondozo.asm"

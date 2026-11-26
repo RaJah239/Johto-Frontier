@@ -6,7 +6,7 @@ ENDM
 MonMenuIconPals:
 	table_width 1, MonMenuIconPals
 	;         normal, shiny
-	
+
 	icon_pals PINK,   PURPLE ; QUILAVA
 	icon_pals PINK,   PURPLE ; TYPHLOSION
 	icon_pals BLUE,   TEAL   ; CROCONAW
@@ -243,6 +243,7 @@ MonMenuIconPals:
 	icon_pals GREEN, BROWN ; GROVYLE
 	icon_pals GREEN, PURPLE ; SCEPTILE
 	icon_pals BLUE, RED ; CRABOMINABLE
+	icon_pals BLUE, BLUE ; DONDOZO
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

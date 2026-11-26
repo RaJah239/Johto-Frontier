@@ -266,6 +266,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const GROVYLE ; ea
 	const SCEPTILE ; eb
 	const CRABOMINABLE ; ec
+	const DONDOZO ; ed
 DEF NUM_POKEMON EQU const_value - 1
 	const EGG        ; e9
 
