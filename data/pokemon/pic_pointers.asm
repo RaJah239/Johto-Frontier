@@ -498,6 +498,8 @@ PokemonPicPointers::
 	dba ExploudBackpic
 	dba TyrantrumFrontpic
 	dba TyrantrumBackpic
+	dba DragoniteFrontpic
+	dba DragoniteBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

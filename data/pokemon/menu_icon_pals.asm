@@ -253,6 +253,7 @@ MonMenuIconPals:
 	icon_pals BLUE, PINK ; PRIMARINA
 	icon_pals PURPLE, BROWN ; EXPLOUD
 	icon_pals BROWN, RED ; TYRANTRUM
+	icon_pals BLUE, RED ; DRAGONITE
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

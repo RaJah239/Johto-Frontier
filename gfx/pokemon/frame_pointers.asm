@@ -246,4 +246,5 @@ dw VulpixFrames
 	dw PrimarinaFrames
 	dw ExploudFrames
 	dw TyrantrumFrames
+	dw DragoniteFrames
 	assert_table_length NUM_POKEMON

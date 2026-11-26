@@ -247,4 +247,5 @@ PokedexDataPointerTable:
 	dba PrimarinaPokedexEntry
 	dba ExploudPokedexEntry
 	dba TyrantrumPokedexEntry
+	dba DragonitePokedexEntry
 	assert_table_length NUM_POKEMON

@@ -278,4 +278,5 @@ INCLUDE "data/pokemon/base_stats/magmortar.asm"
 INCLUDE "data/pokemon/base_stats/primarina.asm"
 INCLUDE "data/pokemon/base_stats/exploud.asm"
 INCLUDE "data/pokemon/base_stats/tyrantrum.asm"
+INCLUDE "data/pokemon/base_stats/dragonite.asm"
 	assert_table_length NUM_POKEMON

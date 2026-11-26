@@ -246,4 +246,6 @@ db NO_MOVE      ; VULPIX
 	db NO_MOVE      ; PRIMARINA
 	db NO_MOVE      ; EXPLOUD
 	db NO_MOVE      ; TYRANTRUM
+	db NO_MOVE      ; DRAGONITE
+
 	assert_table_length NUM_POKEMON

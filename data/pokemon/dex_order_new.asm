@@ -248,4 +248,5 @@ NewPokedexOrder:
 	db PRIMARINA
 	db EXPLOUD
 	db TYRANTRUM
+	db DRAGONITE
 	assert_table_length NUM_POKEMON

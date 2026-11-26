@@ -53,6 +53,7 @@ AlphabeticalPokedexOrder:
 	db DODUO
 	db DONDOZO
 	db DONPHAN
+	db DRAGONITE
 	db DRAPION
 	db DRILBUR
 	db DROWZEE

@@ -246,4 +246,5 @@ dw VulpixBitmasks
 	dw PrimarinaBitmasks
 	dw ExploudBitmasks
 	dw TyrantrumBitmasks
+	dw DragoniteBitmasks
 	assert_table_length NUM_POKEMON
