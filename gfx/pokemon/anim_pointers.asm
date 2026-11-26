@@ -67,7 +67,6 @@ AnimationPointers:
 	dw GengarAnimation
 	dw SwabluAnimation
 	dw AltariaAnimation
-	dw KatuAnimation
 	dw XatuAnimation
 	dw SmeargleAnimation
 	dw GrowlitheAnimation

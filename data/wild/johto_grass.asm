@@ -258,7 +258,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 25, SMEARGLE
-	db 25, KATU
+	db 25, HOOTHOOT
 	db 25, BRONZOR
 	db 25, TANGELA
 	db 25, QUAGSIRE
@@ -266,7 +266,7 @@ JohtoGrassWildMons:
 	db 5, EEVEE
 	; day
 	db 25, SMEARGLE
-	db 25, KATU
+	db 25, HOOTHOOT
 	db 25, BRONZOR
 	db 25, TANGELA
 	db 25, QUAGSIRE
@@ -274,7 +274,7 @@ JohtoGrassWildMons:
 	db 5, EEVEE
 	; nite
 	db 25, SMEARGLE
-	db 25, KATU
+	db 25, HOOTHOOT
 	db 25, BRONZOR
 	db 25, TANGELA
 	db 25, QUAGSIRE

@@ -94,7 +94,6 @@ AlphabeticalPokedexOrder:
 	db JOLTEON
 	db JOLTIK
 	db JYNX
-	db KATU
 	db KINGDRA
 	db KIRLIA
 	db KLEAVOR

@@ -110,7 +110,6 @@ AmpharosFrontpic:    INCBIN "gfx/pokemon/ampharos/front.animated.2bpp.lz"
 MamoswineFrontpic:   INCBIN "gfx/pokemon/mamoswine/front.animated.2bpp.lz"
 TropiusFrontpic:     INCBIN "gfx/pokemon/tropius/front.animated.2bpp.lz"
 BayleefFrontpic:     INCBIN "gfx/pokemon/bayleef/front.animated.2bpp.lz"
-KatuFrontpic:        INCBIN "gfx/pokemon/katu/front.animated.2bpp.lz"
 
 
 SECTION "Pics 7", ROMX
@@ -249,7 +248,6 @@ RapidashBackpic:     INCBIN "gfx/pokemon/rapidash/back.2bpp.lz"
 DoduoBackpic:        INCBIN "gfx/pokemon/doduo/back.2bpp.lz"
 SnoverFrontpic:      INCBIN "gfx/pokemon/snover/front.animated.2bpp.lz"
 MankeyBackpic:       INCBIN "gfx/pokemon/mankey/back.2bpp.lz"
-KatuBackpic:         INCBIN "gfx/pokemon/katu/back.2bpp.lz"
 HypnoBackpic:        INCBIN "gfx/pokemon/hypno/back.2bpp.lz"
 QuilavaBackpic:      INCBIN "gfx/pokemon/quilava/back.2bpp.lz"
 CroconawBackpic:     INCBIN "gfx/pokemon/croconaw/back.2bpp.lz"

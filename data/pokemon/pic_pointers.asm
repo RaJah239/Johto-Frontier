@@ -137,8 +137,6 @@ PokemonPicPointers::
  	dba SwabluBackpic
  	dba AltariaFrontpic
  	dba AltariaBackpic
- 	dba KatuFrontpic
- 	dba KatuBackpic
  	dba XatuFrontpic
  	dba XatuBackpic
  	dba SmeargleFrontpic

@@ -67,7 +67,6 @@ AnimationIdlePointers:
 	dw GengarAnimationIdle
 	dw SwabluAnimationIdle
 	dw AltariaAnimationIdle
-	dw KatuAnimationIdle
 	dw XatuAnimationIdle
 	dw SmeargleAnimationIdle
 	dw GrowlitheAnimationIdle

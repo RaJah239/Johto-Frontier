@@ -67,7 +67,6 @@ EvolutionMoves::
    db NO_MOVE      ; GENGAR
    db NO_MOVE      ; SWABLU
    db NO_MOVE      ; ALTARIA
-   db NO_MOVE      ; KATU
    db NO_MOVE      ; XATU
    db NO_MOVE      ; SMEARGLE
    db NO_MOVE      ; GROWLITHE
