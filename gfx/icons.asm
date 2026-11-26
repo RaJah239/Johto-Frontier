@@ -271,3 +271,5 @@ RoseliaIcon:: INCBIN "gfx/icons/roselia.2bpp"
 RoseradeIcon:: INCBIN "gfx/icons/roserade.2bpp"
 
 KadabraIcon:: INCBIN "gfx/icons/kadabra.2bpp"
+
+AlakazamIcon:: INCBIN "gfx/icons/alakazam.2bpp"

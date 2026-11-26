@@ -216,4 +216,5 @@ EvosAttacksPointers::
 	dw RoseliaEvosAttacks
 	dw RoseradeEvosAttacks
 	dw KadabraEvosAttacks
+	dw AlakazamEvosAttacks
 	assert_table_length NUM_POKEMON

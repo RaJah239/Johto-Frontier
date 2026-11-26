@@ -215,4 +215,5 @@ PokedexDataPointerTable:
 	dba RoseliaPokedexEntry
 	dba RoseradePokedexEntry
 	dba KadabraPokedexEntry
+	dba AlakazamPokedexEntry
 	assert_table_length NUM_POKEMON

@@ -214,4 +214,5 @@ BitmasksPointers:
 	dw RoseliaBitmasks
 	dw RoseradeBitmasks
 	dw KadabraBitmasks
+dw AlakazamBitmasks
 	assert_table_length NUM_POKEMON

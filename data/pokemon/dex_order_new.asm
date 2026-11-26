@@ -126,6 +126,7 @@ NewPokedexOrder:
 	db ROSELIA
 	db ROSERADE
 	db KADABRA
+	db ALAKAZAM
 	db MEOWTH
 	db PERSIAN
 	db SNUBBULL

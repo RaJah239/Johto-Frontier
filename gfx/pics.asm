@@ -700,3 +700,6 @@ RoseradeBackpic: INCBIN "gfx/pokemon/roserade/back.2bpp.lz"
 
 KadabraFrontpic: INCBIN "gfx/pokemon/kadabra/front.animated.2bpp.lz"
 KadabraBackpic: INCBIN "gfx/pokemon/kadabra/back.2bpp.lz"
+
+AlakazamFrontpic: INCBIN "gfx/pokemon/alakazam/front.animated.2bpp.lz"
+AlakazamBackpic: INCBIN "gfx/pokemon/alakazam/back.2bpp.lz"

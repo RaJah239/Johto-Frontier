@@ -221,6 +221,7 @@ MonMenuIconPals:
 	icon_pals GREEN, PINK ; ROSELIA
 	icon_pals GREEN, PINK ; ROSERADE
 	icon_pals BROWN, BLUE ; KADABRA
+	icon_pals BROWN, BLUE ; ALAKAZAM
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

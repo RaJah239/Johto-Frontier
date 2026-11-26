@@ -7,6 +7,7 @@ AlphabeticalPokedexOrder:
 	db AEGISLASH
 	db AERODACTYL
 	db AGGRON
+	db ALAKAZAM
 	db ALTARIA
 	db AMPHAROS
 	db ANNIHILAPE

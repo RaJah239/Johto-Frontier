@@ -214,4 +214,5 @@ FramesPointers:
 	dw RoseliaFrames
 	dw RoseradeFrames
 	dw KadabraFrames
+dw AlakazamFrames
 	assert_table_length NUM_POKEMON
