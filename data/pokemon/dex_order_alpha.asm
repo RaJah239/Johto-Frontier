@@ -176,7 +176,6 @@ AlphabeticalPokedexOrder:
 	db SCOLIPEDE
 	db SCYTHER
 	db SEADRA
-	db SEEL
 	db SHROOMISH
 	db SHUCKLE
 	db SILCOON

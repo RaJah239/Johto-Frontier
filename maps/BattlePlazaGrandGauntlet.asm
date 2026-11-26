@@ -452,7 +452,7 @@ PartyKeeperSpeciesList:
 	db CHINCHOU
 	db MANTINE
 	db TENTACOOL
-	db SEEL
+	db LAPRAS
 	db HORSEA
 	db LAPRAS
 	db CLEFAIRY

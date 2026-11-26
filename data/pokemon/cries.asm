@@ -180,7 +180,6 @@ PokemonCries::
 	mon_cry CRY_MANTINE,     -190,   240 ; MANTINE
 	mon_cry CRY_VENONAT,        0,   256 ; TENTACOOL
 	mon_cry CRY_VENONAT,      238,   383 ; TENTACRUEL
-	mon_cry CRY_SEEL,         136,   320 ; SEEL
 	mon_cry CRY_CLEFAIRY,     153,   144 ; HORSEA
 	mon_cry CRY_CLEFAIRY,      60,   129 ; SEADRA
 	mon_cry CRY_SLUGMA,       763,   256 ; KINGDRA
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 263
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 264
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 265
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 266
 	assert_table_length $ff

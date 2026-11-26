@@ -476,31 +476,6 @@ AgathaGroup:
 	db -1 ; end
 
 SkierGroup:
-	; ROXANNE1
-	db "Roxanne@", TRAINERTYPE_ITEM_MOVES
-	db 1, SEEL,	BERRY,	TACKLE, NO_MOVE, NO_MOVE, NO_MOVE
-	db -1 ; end
-
-	; ROXANNE2
-	db "Roxanne@", TRAINERTYPE_ITEM_MOVES
-	db 2, SEEL,	BERRY,	TACKLE, NO_MOVE, NO_MOVE, NO_MOVE
-	db -1 ; end
-
-	; ROXANNE3
-	db "Roxanne@", TRAINERTYPE_ITEM_MOVES
-	db 3, SEEL,	BERRY,	TACKLE, NO_MOVE, NO_MOVE, NO_MOVE
-	db -1 ; end
-
-	; ROXANNE4
-	db "Roxanne@", TRAINERTYPE_ITEM_MOVES
-	db 4, SEEL,	BERRY,	TACKLE, NO_MOVE, NO_MOVE, NO_MOVE
-	db -1 ; end
-
-	; ROXANNE5
-	db "Roxanne@", TRAINERTYPE_ITEM_MOVES
-	db 5, SEEL,	BERRY,	TACKLE, NO_MOVE, NO_MOVE, NO_MOVE
-	db -1 ; end
-
 BoarderGroup:
 	; RONALD1
 	db "Ronald@", TRAINERTYPE_ITEM_MOVES

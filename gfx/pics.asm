@@ -141,7 +141,6 @@ OmastarFrontpic:     INCBIN "gfx/pokemon/omastar/front.animated.2bpp.lz"
 
 SECTION "Pics 8", ROMX
 
-SeelFrontpic:        INCBIN "gfx/pokemon/seel/front.animated.2bpp.lz"
 CrobatFrontpic:      INCBIN "gfx/pokemon/crobat/front.animated.2bpp.lz"
 ChanseyFrontpic:     INCBIN "gfx/pokemon/chansey/front.animated.2bpp.lz"
 TangelaFrontpic:     INCBIN "gfx/pokemon/tangela/front.animated.2bpp.lz"
@@ -435,7 +434,6 @@ Porygon2Backpic:     INCBIN "gfx/pokemon/porygon2/back.2bpp.lz"
 JasminePic:          INCBIN "gfx/trainers/jasmine.2bpp.lz"
 FerrothornBackpic:   INCBIN "gfx/pokemon/ferrothorn/back.2bpp.lz"
 CombuskenFrontpic:   INCBIN "gfx/pokemon/combusken/front.animated.2bpp.lz"
-SeelBackpic:         INCBIN "gfx/pokemon/seel/back.2bpp.lz"
 QuagsireBackpic:     INCBIN "gfx/pokemon/quagsire/back.2bpp.lz"
 WhitneyPic:          INCBIN "gfx/trainers/whitney.2bpp.lz"
 TangrowthBackpic:    INCBIN "gfx/pokemon/tangrowth/back.2bpp.lz"

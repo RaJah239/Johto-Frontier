@@ -174,7 +174,6 @@ AnimationPointers:
 	dw MantineAnimation
 	dw TentacoolAnimation
 	dw TentacruelAnimation
-	dw SeelAnimation
 	dw HorseaAnimation
 	dw SeadraAnimation
 	dw KingdraAnimation

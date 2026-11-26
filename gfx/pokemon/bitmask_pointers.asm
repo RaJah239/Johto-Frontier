@@ -174,7 +174,6 @@ BitmasksPointers:
 	dw MantineBitmasks
 	dw TentacoolBitmasks
 	dw TentacruelBitmasks
-	dw SeelBitmasks
 	dw HorseaBitmasks
 	dw SeadraBitmasks
 	dw KingdraBitmasks

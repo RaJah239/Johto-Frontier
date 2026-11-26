@@ -4,7 +4,6 @@ MahoganyGym_MapEvents:
 	warp_event  5, 17, MAHOGANY_TOWN, 4
 
 	def_coord_events
-	coord_event  9, 16, SCENE_MAHOGANY_GYM_NOOP, TrainerSkierRoxanneCheck
 	coord_event  5, 10, SCENE_MAHOGANY_GYM_NOOP, TrainerBoarderRonaldCheck
 	coord_event  2,  5, SCENE_MAHOGANY_GYM_NOOP, TrainerBoarderDouglasCheck
 
@@ -14,7 +13,6 @@ MahoganyGym_MapEvents:
 
 	def_object_events
 	object_event  5,  3, SPRITE_PRYCE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, MahoganyGymPryceScript, -1
-	object_event  9, 17, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TrainerSkierRoxanne, -1
 	object_event  5,  9, SPRITE_ROCKER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TrainerBoarderRonald, -1
 	object_event  2,  4, SPRITE_ROCKER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, TrainerBoarderDouglas, -1
 	object_event  7, 15, SPRITE_GYM_GUIDE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, MahoganyGymGuideScript, -1
@@ -22,7 +20,6 @@ MahoganyGym_MapEvents:
 
 	object_const_def
 	const MAHOGANYGYM_PRYCE
-	const MAHOGANYGYM_BEAUTY1
 	const MAHOGANYGYM_ROCKER1
 	const MAHOGANYGYM_ROCKER2
 	const MAHOGANYGYM_GYM_GUIDE
@@ -234,71 +231,6 @@ PryceRematchLossText:
     text "I concede defeat."
 	done
 
-TrainerSkierRoxanne:
-	faceplayer
-	checkevent EVENT_BEAT_SKIER_ROXANNE
-	iftrue .AfterBattleText
-	special SaveMusic
-	playmusic MUSIC_BEAUTY_ENCOUNTER
-	sjump TrainerSkierRoxanneBattle
-
-.AfterBattleText:
-	jumpthistext
-	text "If you don't skate"
-	line "with precision,"
-	cont "you won't get far"
-	cont "in this Gym."
-	done
-
-TrainerSkierRoxanneCheck:
-	checkevent EVENT_BEAT_SKIER_ROXANNE
-	iftrue_end
-	special SaveMusic
-	playmusic MUSIC_BEAUTY_ENCOUNTER
-	showemote EMOTE_SHOCK, MAHOGANYGYM_BEAUTY1, 30
-	turnobject PLAYER, DOWN
-	; fallthrough
-
-TrainerSkierRoxanneBattle:
-	showthistext
-		text "To get to Pryce,"
-		line "our Gym Leader,"
-		cont "you need to think"
-		cont "before you skate."
-		done
-	winlosstext SkierRoxanneBeatenText, 0
-	readvar VAR_BADGES
-	ifgreater 7, .EightBadges
-	ifgreater 5, .SixOrSevenBadges
-	ifgreater 3, .FourOrFiveBadges
-	ifgreater 1, .TwoOrThreeBadges
-.ZeroOrOneBadge:
-	loadtrainer SKIER, ROXANNE1
-	sjump .StartBattle
-.TwoOrThreeBadges:
-	loadtrainer SKIER, ROXANNE2
-	sjump .StartBattle
-.FourOrFiveBadges:
-	loadtrainer SKIER, ROXANNE3
-	sjump .StartBattle
-.SixOrSevenBadges:
-	loadtrainer SKIER, ROXANNE4
-	sjump .StartBattle
-.EightBadges:
-	loadtrainer SKIER, ROXANNE5
-	; fallthrough
-
-.StartBattle:
-	startbattle
-	reloadmapafterbattle
-	special RestoreMusic
-	setevent EVENT_BEAT_SKIER_ROXANNE
-	end
-
-SkierRoxanneBeatenText:
-	text "I wouldn't lose to"
-	line "you in skiing!"
-	done
 
 TrainerBoarderRonald:
 	faceplayer

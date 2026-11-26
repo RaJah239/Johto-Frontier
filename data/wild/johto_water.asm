@@ -131,21 +131,21 @@ JohtoWaterWildMons:
 	def_water_wildmons MOUNT_MORTAR_1F_OUTSIDE
 	db 4 percent ; encounter rate
 	db 30, AZUMARILL
-	db 20, SEEL
+	db 20, LAPRAS
 	db 30, QUAGSIRE
 	end_water_wildmons
 
 	def_water_wildmons MOUNT_MORTAR_2F_INSIDE
 	db 4 percent ; encounter rate
 	db 30, AZUMARILL
-	db 20, SEEL
+	db 20, LAPRAS
 	db 30, QUAGSIRE
 	end_water_wildmons
 
 	def_water_wildmons MOUNT_MORTAR_B1F
 	db 4 percent ; encounter rate
 	db 30, AZUMARILL
-	db 20, SEEL
+	db 20, LAPRAS
 	db 30, QUAGSIRE
 	end_water_wildmons
 

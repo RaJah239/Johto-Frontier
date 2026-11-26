@@ -174,7 +174,6 @@ PokemonNames::
 	db "Mantine@@@"
 	db "Tentacool@"
 	db "Tentacruel"
-	db "Seel@@@@@@"
 	db "Horsea@@@@"
 	db "Seadra@@@@"
 	db "Kingdra@@@"
@@ -243,6 +242,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

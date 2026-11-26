@@ -4,7 +4,6 @@
 ; (one list for both the battle and the AI: engine/abilities/turn_end_abilities.asm includes it
 ; as HydrationPokemon, engine/battle/ai/ability_lists.asm as HydrationPokemon_AI)
 
-;	db SEEL
 ;	db LAPRAS
     db VAPOREON
     db -1 ; end

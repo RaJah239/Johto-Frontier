@@ -2,7 +2,6 @@
 ; against, deal damage with halve offensive stat
 
 ThickFatPokemon:
-;    db SEEL
 ;    db SNORLAX
 ;    db MARILL
 ;    db AZUMARILL

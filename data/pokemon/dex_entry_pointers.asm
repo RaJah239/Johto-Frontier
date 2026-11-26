@@ -175,7 +175,6 @@ PokedexDataPointerTable:
  	dba MantinePokedexEntry
  	dba TentacoolPokedexEntry
  	dba TentacruelPokedexEntry
- 	dba SeelPokedexEntry
  	dba HorseaPokedexEntry
  	dba SeadraPokedexEntry
  	dba KingdraPokedexEntry
