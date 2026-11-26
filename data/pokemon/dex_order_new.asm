@@ -22,6 +22,7 @@ NewPokedexOrder:
 	db FLAREON
 	db GLACEON
 	db JOLTEON
+	db LEAFEON
 	db SYLVEON
 	db UMBREON
 	db VAPOREON

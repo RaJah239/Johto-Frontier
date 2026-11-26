@@ -195,10 +195,10 @@ PokemonNames::
 	db "Mew@@@@@@@"
 	db "Mewtwo@@@@"
 	db "Glaceon@@@"
+	db "Leafeon@@@"
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
-	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

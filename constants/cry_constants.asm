@@ -77,4 +77,5 @@
 	const CRY_SHROOMISH
 	const CRY_BRELOOM
 	const CRY_GLACEON
+	const CRY_LEAFEON
 DEF NUM_CRIES EQU const_value

@@ -96,6 +96,7 @@ AlphabeticalPokedexOrder:
 	db LANTURN
 	db LAPRAS
 	db LARVESTA
+	db LEAFEON
 	db LILEEP
 	db LOPUNNY
 	db LUCARIO

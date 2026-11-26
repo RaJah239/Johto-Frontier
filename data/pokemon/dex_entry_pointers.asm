@@ -196,4 +196,5 @@ PokedexDataPointerTable:
  	dba MewPokedexEntry
  	dba MewtwoPokedexEntry
 	dba GlaceonPokedexEntry
+	dba LeafeonPokedexEntry
 	assert_table_length NUM_POKEMON

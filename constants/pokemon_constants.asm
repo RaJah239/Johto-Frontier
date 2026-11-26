@@ -225,6 +225,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const MEW ; c1
 	const MEWTWO ; c2
 	const GLACEON ; c3
+	const LEAFEON ; c4
 DEF NUM_POKEMON EQU const_value - 1
 	const EGG        ; e9
 

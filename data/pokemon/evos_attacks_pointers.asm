@@ -197,4 +197,5 @@ EvosAttacksPointers::
 	dw MewEvosAttacks
 	dw MewtwoEvosAttacks
 	dw GlaceonEvosAttacks
+	dw LeafeonEvosAttacks
 	assert_table_length NUM_POKEMON

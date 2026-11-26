@@ -201,6 +201,7 @@ PokemonCries::
 	mon_cry CRY_PARAS,        238,  383  ; MEW
 	mon_cry CRY_PARAS,        153,  383  ; MEWTWO
 	mon_cry CRY_GLACEON, 0, 255 ; GLACEON
+	mon_cry CRY_LEAFEON, 0, 255 ; LEAFEON
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -261,5 +262,4 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 307
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 308
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 309
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 310
 	assert_table_length $ff

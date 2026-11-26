@@ -72,4 +72,5 @@ Cries:
 	dba Cry_Shroomish
 	dba Cry_Breloom
 	dba Cry_Glaceon
+	dba Cry_Leafeon
 	assert_table_length NUM_CRIES
