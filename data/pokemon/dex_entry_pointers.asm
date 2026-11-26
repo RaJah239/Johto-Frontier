@@ -236,4 +236,5 @@ PokedexDataPointerTable:
 	dba JumpluffPokedexEntry
 	dba GrovylePokedexEntry
 	dba SceptilePokedexEntry
+	dba CrabominablePokedexEntry
 	assert_table_length NUM_POKEMON

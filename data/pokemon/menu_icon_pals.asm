@@ -242,6 +242,7 @@ MonMenuIconPals:
 	icon_pals GREEN, PINK ; JUMPLUFF
 	icon_pals GREEN, BROWN ; GROVYLE
 	icon_pals GREEN, PURPLE ; SCEPTILE
+	icon_pals BLUE, RED ; CRABOMINABLE
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

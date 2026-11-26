@@ -235,4 +235,5 @@ dw VulpixBitmasks
 	dw JumpluffBitmasks
 	dw GrovyleBitmasks
 	dw SceptileBitmasks
+	dw CrabominableBitmasks
 	assert_table_length NUM_POKEMON

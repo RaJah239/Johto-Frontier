@@ -476,6 +476,8 @@ PokemonPicPointers::
 	dba GrovyleBackpic
 	dba SceptileFrontpic
 	dba SceptileBackpic
+	dba CrabominableFrontpic
+	dba CrabominableBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1
