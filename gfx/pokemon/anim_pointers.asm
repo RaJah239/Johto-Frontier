@@ -215,4 +215,5 @@ AnimationPointers:
 	dw RoseradeAnimation
 	dw KadabraAnimation
 	dw AlakazamAnimation
+dw VulpixAnimation
 	assert_table_length NUM_POKEMON

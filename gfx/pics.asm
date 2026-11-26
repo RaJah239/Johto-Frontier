@@ -703,3 +703,5 @@ KadabraBackpic: INCBIN "gfx/pokemon/kadabra/back.2bpp.lz"
 
 AlakazamFrontpic: INCBIN "gfx/pokemon/alakazam/front.animated.2bpp.lz"
 AlakazamBackpic: INCBIN "gfx/pokemon/alakazam/back.2bpp.lz"
+VulpixFrontpic: INCBIN "gfx/pokemon/vulpix/front.animated.2bpp.lz"
+VulpixBackpic: INCBIN "gfx/pokemon/vulpix/back.2bpp.lz"
