@@ -233,4 +233,5 @@ dw VulpixEvosAttacks
 	dw DragalgeEvosAttacks
 	dw HonchkrowEvosAttacks
 	dw MarshtompEvosAttacks
+	dw SwampertEvosAttacks
 	assert_table_length NUM_POKEMON

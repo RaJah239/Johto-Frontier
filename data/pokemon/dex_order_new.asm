@@ -233,4 +233,5 @@ NewPokedexOrder:
 	db DRAGALGE
 	db HONCHKROW
 	db MARSHTOMP
+	db SWAMPERT
 	assert_table_length NUM_POKEMON

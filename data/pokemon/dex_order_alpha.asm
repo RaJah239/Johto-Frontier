@@ -201,6 +201,7 @@ AlphabeticalPokedexOrder:
 	db SUDOWOODO
 	db SUICUNE
 	db SWABLU
+	db SWAMPERT
 	db SYLVEON
 	db TAUROS
 	db TENTACOOL

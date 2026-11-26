@@ -468,6 +468,8 @@ PokemonPicPointers::
 	dba HonchkrowBackpic
 	dba MarshtompFrontpic
 	dba MarshtompBackpic
+	dba SwampertFrontpic
+	dba SwampertBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

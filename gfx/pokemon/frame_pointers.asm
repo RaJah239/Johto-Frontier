@@ -231,4 +231,5 @@ dw VulpixFrames
 	dw DragalgeFrames
 	dw HonchkrowFrames
 	dw MarshtompFrames
+	dw SwampertFrames
 	assert_table_length NUM_POKEMON

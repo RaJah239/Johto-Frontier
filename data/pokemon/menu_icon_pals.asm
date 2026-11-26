@@ -238,6 +238,7 @@ MonMenuIconPals:
 	icon_pals PURPLE, GREEN ; DRAGALGE
 	icon_pals BROWN, PURPLE ; HONCHKROW
 	icon_pals BLUE, GREEN ; MARSHTOMP
+	icon_pals BLUE, TEAL ; SWAMPERT
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

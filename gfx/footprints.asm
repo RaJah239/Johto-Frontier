@@ -254,7 +254,6 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 270
 	 INCBIN "gfx/footprints/blank.1bpp" ; 271
 	 INCBIN "gfx/footprints/blank.1bpp" ; 272
-	 INCBIN "gfx/footprints/blank.1bpp" ; 273
 	 INCBIN "gfx/footprints/dusclops.1bpp"
 	 INCBIN "gfx/footprints/dusknoir.1bpp"
 	 INCBIN "gfx/footprints/blank.1bpp" ; EELEKTROSS (shared empty reference footprint)
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/dragalge.1bpp"
 	 INCBIN "gfx/footprints/honchkrow.1bpp"
 	 INCBIN "gfx/footprints/marshtomp.1bpp"
+	 INCBIN "gfx/footprints/swampert.1bpp"
 	assert_table_length $100
