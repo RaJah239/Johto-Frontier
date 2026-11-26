@@ -74,7 +74,6 @@ AnimationPointers:
 	dw QuagsireAnimation
 	dw GligarAnimation
 	dw GliscorAnimation
-	dw GibleAnimation
 	dw GabiteAnimation
 	dw GarchompAnimation
 	dw MakuhitaAnimation

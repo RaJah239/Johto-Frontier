@@ -131,7 +131,6 @@ WooperEvosAttacks: ; lv 25 evo
 QuagsireEvosAttacks:
 GligarEvosAttacks:
 GliscorEvosAttacks:
-GibleEvosAttacks:
 GabiteEvosAttacks:
 GarchompEvosAttacks:
 MakuhitaEvosAttacks:

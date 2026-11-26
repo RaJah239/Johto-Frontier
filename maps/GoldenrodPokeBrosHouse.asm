@@ -117,16 +117,6 @@ SwarmGrampsScript:
 	ifequal 26, .Torterra
 	sjump .resample
 
-; second swarm in same route example
-;.Gible:
-;	setflag ENGINE_ALT_SWARM
-;	setflag ENGINE_SWARM
-;	swarm UNION_CAVE_1F
-;	jumpthisopenedtext
-;		text "There's a swarm of"
-;		line "Gible at"
-;		cont "Union Cave 1F!"
-;		done
 
 .Bagon:
 	setflag ENGINE_SWARM

@@ -76,7 +76,6 @@ IconPointers:
 	dw QuagsireIcon
 	dw GligarIcon
 	dw GliscorIcon
-	dw GibleIcon
 	dw GabiteIcon
 	dw GarchompIcon
 	dw MakuhitaIcon

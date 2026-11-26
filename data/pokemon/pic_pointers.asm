@@ -151,8 +151,6 @@ PokemonPicPointers::
  	dba GligarBackpic
  	dba GliscorFrontpic
  	dba GliscorBackpic
- 	dba GibleFrontpic
- 	dba GibleBackpic
  	dba GabiteFrontpic
  	dba GabiteBackpic
  	dba GarchompFrontpic

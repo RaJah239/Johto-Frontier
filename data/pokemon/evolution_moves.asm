@@ -74,7 +74,6 @@ EvolutionMoves::
    db NO_MOVE      ; QUAGSIRE
    db NO_MOVE      ; GLIGAR
    db NO_MOVE      ; GLISCOR
-   db NO_MOVE      ; GIBLE
    db NO_MOVE      ; GABITE
    db NO_MOVE      ; GARCHOMP
    db NO_MOVE      ; MAKUHITA

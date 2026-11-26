@@ -76,7 +76,6 @@ NewPokedexOrder:
 	db QUAGSIRE
 	db GLIGAR
 	db GLISCOR
-	db GIBLE
 	db GABITE
 	db GARCHOMP
 	db MAKUHITA

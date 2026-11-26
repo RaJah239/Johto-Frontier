@@ -416,7 +416,7 @@ PartyKeeperSpeciesList:
 	db HOUNDOUR
 	db WOOPER
 	db GLIGAR
-	db GIBLE
+	db GABITE
 	db MAKUHITA
 	db DODUO
 	db PONYTA

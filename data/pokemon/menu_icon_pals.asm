@@ -81,7 +81,6 @@ MonMenuIconPals:
 	icon_pals BLUE,   PINK   ; QUAGSIRE
 	icon_pals PURPLE, BLUE   ; GLIGAR
 	icon_pals PURPLE, BLUE   ; GLISCOR
-	icon_pals BLUE,   BLUE   ; GIBLE
 	icon_pals BLUE,   BLUE   ; GABITE
 	icon_pals BLUE,   GRAY   ; GARCHOMP
 	icon_pals BROWN,  RED    ; MAKUHITA

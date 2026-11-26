@@ -74,7 +74,6 @@ AnimationIdlePointers:
 	dw QuagsireAnimationIdle
 	dw GligarAnimationIdle
 	dw GliscorAnimationIdle
-	dw GibleAnimationIdle
 	dw GabiteAnimationIdle
 	dw GarchompAnimationIdle
 	dw MakuhitaAnimationIdle

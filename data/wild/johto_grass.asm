@@ -314,7 +314,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 12, MAKUHITA
-	db 12, GIBLE
+	db 12, GABITE
 	db 12, DRILBUR
 	db 12, PILOSWINE
 	db 12, GLIGAR
@@ -322,7 +322,7 @@ JohtoGrassWildMons:
 	db 5, PRIMEAPE
 	; day
 	db 12, MAKUHITA
-	db 12, GIBLE
+	db 12, GABITE
 	db 12, DRILBUR
 	db 12, PILOSWINE
 	db 12, GLIGAR
@@ -330,7 +330,7 @@ JohtoGrassWildMons:
 	db 5, PRIMEAPE
 	; nite
 	db 12, MAKUHITA
-	db 12, GIBLE
+	db 12, GABITE
 	db 12, DRILBUR
 	db 12, PILOSWINE
 	db 12, GLIGAR

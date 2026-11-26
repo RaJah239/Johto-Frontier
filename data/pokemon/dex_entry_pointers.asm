@@ -75,7 +75,6 @@ PokedexDataPointerTable:
  	dba QuagsirePokedexEntry
  	dba GligarPokedexEntry
  	dba GliscorPokedexEntry
- 	dba GiblePokedexEntry
  	dba GabitePokedexEntry
  	dba GarchompPokedexEntry
  	dba MakuhitaPokedexEntry

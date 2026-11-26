@@ -74,7 +74,6 @@ BitmasksPointers:
 	dw QuagsireBitmasks
 	dw GligarBitmasks
 	dw GliscorBitmasks
-	dw GibleBitmasks
 	dw GabiteBitmasks
 	dw GarchompBitmasks
 	dw MakuhitaBitmasks

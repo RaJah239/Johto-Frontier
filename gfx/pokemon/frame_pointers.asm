@@ -74,7 +74,6 @@ FramesPointers:
 	dw QuagsireFrames
 	dw GligarFrames
 	dw GliscorFrames
-	dw GibleFrames
 	dw GabiteFrames
 	dw GarchompFrames
 	dw MakuhitaFrames

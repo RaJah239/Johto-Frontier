@@ -74,7 +74,6 @@ PokemonNames::
 	db "Quagsire@@"
 	db "Gligar@@@@"
 	db "Gliscor@@@"
-	db "Gible@@@@@"
 	db "Gabite@@@@"
 	db "Garchomp@@"
 	db "Makuhita@@"
@@ -207,6 +206,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

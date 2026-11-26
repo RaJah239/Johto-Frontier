@@ -76,7 +76,6 @@ EvosAttacksPointers::
 	dw QuagsireEvosAttacks
 	dw GligarEvosAttacks
 	dw GliscorEvosAttacks
-	dw GibleEvosAttacks
 	dw GabiteEvosAttacks
 	dw GarchompEvosAttacks
 	dw MakuhitaEvosAttacks
