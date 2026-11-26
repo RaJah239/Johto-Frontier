@@ -248,6 +248,7 @@ PokemonCries::
 	mon_cry CRY_RHYDON, 0, 255 ; RHYPERIOR
 	mon_cry CRY_RAICHU, 0, 255 ; MIMIKYU
 	mon_cry CRY_DIGLETT, 0, 255 ; DUGTRIO_A
+	mon_cry CRY_MAGCARGO, 0, 255 ; MAGMORTAR
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -259,7 +260,6 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 258
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 259
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 260
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 261
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 262
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 264
 	assert_table_length $ff

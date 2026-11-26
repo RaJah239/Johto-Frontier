@@ -243,4 +243,5 @@ PokedexDataPointerTable:
 	dba RhyperiorPokedexEntry
 	dba MimikyuPokedexEntry
 	dba DugtrioAPokedexEntry
+	dba MagmortarPokedexEntry
 	assert_table_length NUM_POKEMON

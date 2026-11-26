@@ -272,6 +272,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const RHYPERIOR ; f0
 	const MIMIKYU ; f1
 	const DUGTRIO_A ; f2
+	const MAGMORTAR ; f3
 DEF NUM_POKEMON EQU const_value - 1
 	const EGG        ; e9
 

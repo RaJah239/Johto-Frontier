@@ -244,4 +244,5 @@ NewPokedexOrder:
 	db RHYPERIOR
 	db MIMIKYU
 	db DUGTRIO_A
+	db MAGMORTAR
 	assert_table_length NUM_POKEMON
