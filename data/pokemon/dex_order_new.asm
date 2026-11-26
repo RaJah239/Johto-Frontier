@@ -96,6 +96,7 @@ NewPokedexOrder:
 	db RAPIDASH
 	db SLOWPOKE
 	db SLOWBRO
+	db SLOWKING
 	db SHROOMISH
 	db BRELOOM
 	db SPINARAK

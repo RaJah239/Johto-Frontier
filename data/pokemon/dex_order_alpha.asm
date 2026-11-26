@@ -163,6 +163,7 @@ AlphabeticalPokedexOrder:
 	db SKARMORY
 	db SKORUPI
 	db SLOWBRO
+	db SLOWKING
 	db SLOWPOKE
 	db SMEARGLE
 	db SNEASEL

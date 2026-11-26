@@ -255,3 +255,5 @@ WhimsicottIcon:: INCBIN "gfx/icons/whimsicott.2bpp"
 MachokeIcon:: INCBIN "gfx/icons/machoke.2bpp"
 
 MachampIcon:: INCBIN "gfx/icons/machamp.2bpp"
+
+SlowkingIcon:: INCBIN "gfx/icons/slowking.2bpp"

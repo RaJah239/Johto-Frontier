@@ -206,4 +206,5 @@ BitmasksPointers:
 	dw WhimsicottBitmasks
 	dw MachokeBitmasks
 	dw MachampBitmasks
+	dw SlowkingBitmasks
 	assert_table_length NUM_POKEMON

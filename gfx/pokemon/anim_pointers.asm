@@ -206,4 +206,5 @@ AnimationPointers:
 	dw WhimsicottAnimation
 	dw MachokeAnimation
 	dw MachampAnimation
+	dw SlowkingAnimation
 	assert_table_length NUM_POKEMON

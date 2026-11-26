@@ -212,6 +212,7 @@ PokemonCries::
 	mon_cry CRY_CATERPIE, 0, 255 ; WHIMSICOTT
 	mon_cry CRY_GROWLITHE, 0, 255 ; MACHOKE
 	mon_cry CRY_GROWLITHE, 0, 255 ; MACHAMP
+	mon_cry CRY_SLOWKING, 0, 255 ; SLOWKING
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -261,5 +262,4 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 296
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 297
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 298
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 299
 	assert_table_length $ff
