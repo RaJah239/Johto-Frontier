@@ -221,4 +221,5 @@ db NO_MOVE      ; VULPIX
 	db NO_MOVE      ; IVYSAUR
 	db NO_MOVE      ; VENUSAUR
 	db NO_MOVE      ; SABLEYE
+	db NO_MOVE      ; SHELLDER
 	assert_table_length NUM_POKEMON

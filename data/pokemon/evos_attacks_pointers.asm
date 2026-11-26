@@ -223,4 +223,5 @@ dw VulpixEvosAttacks
 	dw IvysaurEvosAttacks
 	dw VenusaurEvosAttacks
 	dw SableyeEvosAttacks
+	dw ShellderEvosAttacks
 	assert_table_length NUM_POKEMON

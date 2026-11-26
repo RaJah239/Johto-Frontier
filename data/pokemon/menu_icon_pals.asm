@@ -228,6 +228,7 @@ MonMenuIconPals:
 	icon_pals GREEN, PURPLE ; IVYSAUR
 	icon_pals GREEN, PURPLE ; VENUSAUR
 	icon_pals PURPLE, BROWN ; SABLEYE
+	icon_pals BLUE, TEAL ; SHELLDER
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

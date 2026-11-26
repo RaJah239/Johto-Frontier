@@ -140,6 +140,7 @@ NewPokedexOrder:
 	db IVYSAUR
 	db VENUSAUR
 	db SABLEYE
+	db SHELLDER
 	db SUDOWOODO
 	db KOFFING
 	db WEEZING
