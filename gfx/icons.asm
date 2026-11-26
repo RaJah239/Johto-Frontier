@@ -235,3 +235,5 @@ UnownZIcon::     INCBIN "gfx/icons/unown_z.2bpp"
 GlaceonIcon:: INCBIN "gfx/icons/glaceon.2bpp"
 
 LeafeonIcon:: INCBIN "gfx/icons/leafeon.2bpp"
+
+PoliwhirlIcon:: INCBIN "gfx/icons/poliwhirl.2bpp"

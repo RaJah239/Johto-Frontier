@@ -60,6 +60,7 @@ NewPokedexOrder:
 	db AMPHAROS
 	db MARILL
 	db AZUMARILL
+	db POLIWHIRL
 	db RHYDON
 	db DRILBUR
 	db EXCADRILL

@@ -196,4 +196,5 @@ BitmasksPointers:
 	dw MewtwoBitmasks
 	dw GlaceonBitmasks
 	dw LeafeonBitmasks
+	dw PoliwhirlBitmasks
 	assert_table_length NUM_POKEMON

@@ -196,4 +196,5 @@ AnimationPointers:
 	dw MewtwoAnimation
 	dw GlaceonAnimation
 	dw LeafeonAnimation
+	dw PoliwhirlAnimation
 	assert_table_length NUM_POKEMON

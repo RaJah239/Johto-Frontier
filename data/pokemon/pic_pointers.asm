@@ -398,6 +398,8 @@ PokemonPicPointers::
 	dba GlaceonBackpic
 	dba LeafeonFrontpic
 	dba LeafeonBackpic
+	dba PoliwhirlFrontpic
+	dba PoliwhirlBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1
