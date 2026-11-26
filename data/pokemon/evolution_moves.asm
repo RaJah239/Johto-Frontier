@@ -26,7 +26,6 @@ EvolutionMoves::
    db NO_MOVE      ; BLAZIKEN
    db NO_MOVE      ; FEEBAS
    db NO_MOVE      ; MILOTIC
-   db NO_MOVE      ; RALTS
    db NO_MOVE      ; KIRLIA
    db NO_MOVE      ; GARDEVOIR
    db NO_MOVE      ; GALLADE

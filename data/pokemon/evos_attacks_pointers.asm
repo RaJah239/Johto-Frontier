@@ -28,7 +28,6 @@ EvosAttacksPointers::
 	dw BlazikenEvosAttacks
 	dw FeebasEvosAttacks
 	dw MiloticEvosAttacks
-	dw RaltsEvosAttacks
 	dw KirliaEvosAttacks
 	dw GardevoirEvosAttacks
 	dw GalladeEvosAttacks

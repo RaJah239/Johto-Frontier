@@ -390,7 +390,7 @@ PartyKeeperSpeciesList:
 	db COMBUSKEN
 	db FEEBAS
 	db BUNEARY
-	db RALTS
+	db KIRLIA
 	db WURMPLE
 	db YANMA
 	db SUNKERN

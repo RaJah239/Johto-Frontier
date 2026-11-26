@@ -103,7 +103,7 @@ SwarmGrampsScript:
 	ifequal 12, .Larvitar
 	ifequal 13, .Meowth
 	ifequal 14, .Phanpy
-	ifequal 15, .Ralts
+	ifequal 15, .Kirlia
 	ifequal 16, .Primeape
 	ifequal 17, .Buneary
 	ifequal 18, .Shroomish
@@ -263,12 +263,12 @@ SwarmGrampsScript:
 		cont "Route 18!"
 		done
 
-.Ralts:
+.Kirlia:
 	setflag ENGINE_SWARM
 	swarm ROUTE_1
 	jumpthisopenedtext
 		text "There's a swarm of"
-		line "Ralts at"
+		line "Kirlia at"
 		cont "Route 1!"
 		done
 
@@ -431,7 +431,7 @@ GoldenrodPokeBrosHouseSwarmPokemonBook:
 		cont "Larvitar,"
 		cont "Meowth,"
 		cont "Phanpy,"
-		cont "Ralts,"
+		cont "Kirlia,"
 		cont "Primeape,"
 		cont "Buneary,"
 		cont "Shroomish,"

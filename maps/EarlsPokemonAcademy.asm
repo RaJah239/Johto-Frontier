@@ -411,7 +411,7 @@ FleeMonsNotebook:
 		cont "Larvitar,"
 		cont "Meowth,"
 		cont "Phanpy,"
-		cont "Ralts,"
+		cont "Kirlia,"
 		cont "Primeape,"
 		cont "Buneary,"
 		cont "Jynx,"

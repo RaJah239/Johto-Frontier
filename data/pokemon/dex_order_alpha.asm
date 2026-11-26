@@ -153,7 +153,6 @@ AlphabeticalPokedexOrder:
 	db QUILAVA
 	db RAICHU
 	db RAIKOU
-	db RALTS
 	db RAPIDASH
 	db RHYDON
 	db RHYHORN

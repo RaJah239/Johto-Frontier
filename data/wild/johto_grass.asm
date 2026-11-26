@@ -11,7 +11,7 @@ JohtoGrassWildMons:
 	db 2, BUNEARY
 	db 2, PIDGEY
 	db 2, SUNKERN
-	db 5, RALTS
+	db 5, KIRLIA
 	; day
 	db 2, PIKACHU
 	db 2, WURMPLE
@@ -19,7 +19,7 @@ JohtoGrassWildMons:
 	db 2, BUNEARY
 	db 2, PIDGEY
 	db 2, SUNKERN
-	db 5, RALTS
+	db 5, KIRLIA
 	; nite
 	db 2, HOOTHOOT
 	db 2, ZUBAT
@@ -27,7 +27,7 @@ JohtoGrassWildMons:
 	db 2, WURMPLE
 	db 2, PIKACHU
 	db 2, JOLTIK
-	db 5, RALTS
+	db 5, KIRLIA
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_2

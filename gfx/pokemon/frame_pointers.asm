@@ -26,7 +26,6 @@ FramesPointers:
 	dw BlazikenFrames
 	dw FeebasFrames
 	dw MiloticFrames
-	dw RaltsFrames
 	dw KirliaFrames
 	dw GardevoirFrames
 	dw GalladeFrames

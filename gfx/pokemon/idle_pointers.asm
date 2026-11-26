@@ -26,7 +26,6 @@ AnimationIdlePointers:
 	dw BlazikenAnimationIdle
 	dw FeebasAnimationIdle
 	dw MiloticAnimationIdle
-	dw RaltsAnimationIdle
 	dw KirliaAnimationIdle
 	dw GardevoirAnimationIdle
 	dw GalladeAnimationIdle

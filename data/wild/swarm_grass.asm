@@ -394,33 +394,33 @@ SwarmGrassWildMons:
 	db 5, PHANPY
 	db 5, PHANPY
 
-; Ralts swarm
+; Kirlia swarm
 	map_id ROUTE_1
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 5, RALTS
-	db 5, RALTS
-	db 5, RALTS
-	db 5, RALTS
-	db 5, RALTS
-	db 5, RALTS
-	db 5, RALTS
+	db 5, KIRLIA
+	db 5, KIRLIA
+	db 5, KIRLIA
+	db 5, KIRLIA
+	db 5, KIRLIA
+	db 5, KIRLIA
+	db 5, KIRLIA
 	; day
-	db 5, RALTS
-	db 5, RALTS
-	db 5, RALTS
-	db 5, RALTS
-	db 5, RALTS
-	db 5, RALTS
-	db 5, RALTS
+	db 5, KIRLIA
+	db 5, KIRLIA
+	db 5, KIRLIA
+	db 5, KIRLIA
+	db 5, KIRLIA
+	db 5, KIRLIA
+	db 5, KIRLIA
 	; nite
-	db 5, RALTS
-	db 5, RALTS
-	db 5, RALTS
-	db 5, RALTS
-	db 5, RALTS
-	db 5, RALTS
-	db 5, RALTS
+	db 5, KIRLIA
+	db 5, KIRLIA
+	db 5, KIRLIA
+	db 5, KIRLIA
+	db 5, KIRLIA
+	db 5, KIRLIA
+	db 5, KIRLIA
 
 ; Primeape swarm
 	map_id UNION_CAVE_1F
