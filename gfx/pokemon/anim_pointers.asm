@@ -212,4 +212,5 @@ AnimationPointers:
 	dw DipplinAnimation
 	dw HydrappleAnimation
 	dw RoseliaAnimation
+	dw RoseradeAnimation
 	assert_table_length NUM_POKEMON

@@ -212,4 +212,5 @@ EvolutionMoves::
    db NO_MOVE      ; DIPPLIN
    db NO_MOVE      ; HYDRAPPLE
    db NO_MOVE      ; ROSELIA
+   db NO_MOVE      ; ROSERADE
 	assert_table_length NUM_POKEMON

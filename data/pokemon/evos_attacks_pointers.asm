@@ -214,4 +214,5 @@ EvosAttacksPointers::
 	dw DipplinEvosAttacks
 	dw HydrappleEvosAttacks
 	dw RoseliaEvosAttacks
+	dw RoseradeEvosAttacks
 	assert_table_length NUM_POKEMON

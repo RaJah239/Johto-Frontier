@@ -242,6 +242,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const DIPPLIN ; d2
 	const HYDRAPPLE ; d3
 	const ROSELIA ; d4
+	const ROSERADE ; d5
 DEF NUM_POKEMON EQU const_value - 1
 	const EGG        ; e9
 

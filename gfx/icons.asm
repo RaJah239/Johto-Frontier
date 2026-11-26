@@ -267,3 +267,5 @@ DipplinIcon:: INCBIN "gfx/icons/dipplin.2bpp"
 HydrappleIcon:: INCBIN "gfx/icons/hydrapple.2bpp"
 
 RoseliaIcon:: INCBIN "gfx/icons/roselia.2bpp"
+
+RoseradeIcon:: INCBIN "gfx/icons/roserade.2bpp"

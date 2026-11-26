@@ -212,4 +212,5 @@ FramesPointers:
 	dw DipplinFrames
 	dw HydrappleFrames
 	dw RoseliaFrames
+	dw RoseradeFrames
 	assert_table_length NUM_POKEMON

@@ -430,6 +430,8 @@ PokemonPicPointers::
 	dba HydrappleBackpic
 	dba RoseliaFrontpic
 	dba RoseliaBackpic
+	dba RoseradeFrontpic
+	dba RoseradeBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

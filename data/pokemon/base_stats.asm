@@ -244,4 +244,5 @@ INCLUDE "data/pokemon/base_stats/amoonguss.asm"
 INCLUDE "data/pokemon/base_stats/dipplin.asm"
 INCLUDE "data/pokemon/base_stats/hydrapple.asm"
 INCLUDE "data/pokemon/base_stats/roselia.asm"
+INCLUDE "data/pokemon/base_stats/roserade.asm"
 	assert_table_length NUM_POKEMON

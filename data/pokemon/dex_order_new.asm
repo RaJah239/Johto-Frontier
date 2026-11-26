@@ -124,6 +124,7 @@ NewPokedexOrder:
 	db KLEAVOR
 	db HERACROSS
 	db ROSELIA
+	db ROSERADE
 	db MEOWTH
 	db PERSIAN
 	db SNUBBULL
