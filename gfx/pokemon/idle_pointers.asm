@@ -247,4 +247,5 @@ dw VulpixAnimationIdle
 	dw ExploudAnimationIdle
 	dw TyrantrumAnimationIdle
 	dw DragoniteAnimationIdle
+	dw HydreigonAnimationIdle
 	assert_table_length NUM_POKEMON

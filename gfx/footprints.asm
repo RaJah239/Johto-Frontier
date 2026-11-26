@@ -235,8 +235,7 @@ Footprints:
  INCBIN "gfx/footprints/blank.1bpp" ; 251
  INCBIN "gfx/footprints/blank.1bpp" ; 252
  INCBIN "gfx/footprints/blank.1bpp" ; 253
- INCBIN "gfx/footprints/blank.1bpp" ; 254
- INCBIN "gfx/footprints/blank.1bpp" ; 255
+  INCBIN "gfx/footprints/blank.1bpp" ; 255
 	 INCBIN "gfx/footprints/blank.1bpp" ; 257
 	 INCBIN "gfx/footprints/blank.1bpp" ; 259
 	 INCBIN "gfx/footprints/dusclops.1bpp"
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/exploud.1bpp"
 	 INCBIN "gfx/footprints/tyrantrum.1bpp"
 	INCBIN "gfx/footprints/dragonite.1bpp"
+	INCBIN "gfx/footprints/hydreigon.1bpp"
 	assert_table_length $100

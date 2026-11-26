@@ -249,4 +249,5 @@ NewPokedexOrder:
 	db EXPLOUD
 	db TYRANTRUM
 	db DRAGONITE
+	db HYDREIGON
 	assert_table_length NUM_POKEMON

@@ -254,6 +254,7 @@ MonMenuIconPals:
 	icon_pals PURPLE, BROWN ; EXPLOUD
 	icon_pals BROWN, RED ; TYRANTRUM
 	icon_pals BLUE, RED ; DRAGONITE
+	icon_pals PURPLE, RED ; HYDREIGON
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

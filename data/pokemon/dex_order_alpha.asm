@@ -105,6 +105,7 @@ AlphabeticalPokedexOrder:
 	db HOUNDOOM
 	db HOUNDOUR
 	db HYDRAPPLE
+	db HYDREIGON
 	db HYPNO
 	db IVYSAUR
 	db JIRACHI
