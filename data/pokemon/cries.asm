@@ -228,6 +228,7 @@ PokemonCries::
 	mon_cry CRY_BULBASAUR, 0, 255 ; VENUSAUR
 	mon_cry CRY_SLOWPOKE, 0, 255 ; SABLEYE
 	mon_cry CRY_KRABBY, 0, 255 ; SHELLDER
+	mon_cry CRY_KRABBY, 0, 255 ; CLOYSTER
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -261,5 +262,4 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 280
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 281
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 282
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 283
 	assert_table_length $ff

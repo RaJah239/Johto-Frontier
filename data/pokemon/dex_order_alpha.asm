@@ -35,6 +35,7 @@ AlphabeticalPokedexOrder:
 	db CLAYDOL
 	db CLEFABLE
 	db CLEFAIRY
+	db CLOYSTER
 	db COMBUSKEN
 	db CORSOLA
 	db COTTONEE

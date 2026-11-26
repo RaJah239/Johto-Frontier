@@ -459,6 +459,8 @@ INCBIN "gfx/pokemon/sableye/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/sableye/shiny.pal"
 INCBIN "gfx/pokemon/shellder/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/shellder/shiny.pal"
+INCBIN "gfx/pokemon/cloyster/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/cloyster/shiny.pal"
 	assert_table_length NUM_POKEMON + 1
 
 INCBIN "gfx/pokemon/egg/front.gbcpal", middle_colors
@@ -508,10 +510,6 @@ INCLUDE "gfx/pokemon/egg/shiny.pal"
 	RGB 23, 23, 23
 	RGB 17, 17, 17
 
-	RGB 23, 23, 23
-	RGB 17, 17, 17
-	RGB 23, 23, 23
-	RGB 17, 17, 17
 	RGB 23, 23, 23
 	RGB 17, 17, 17
 	RGB 23, 23, 23

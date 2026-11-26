@@ -252,6 +252,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const VENUSAUR ; dc
 	const SABLEYE ; dd
 	const SHELLDER ; de
+	const CLOYSTER ; df
 DEF NUM_POKEMON EQU const_value - 1
 	const EGG        ; e9
 

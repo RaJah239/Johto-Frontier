@@ -34,10 +34,11 @@
 - Completed additions: Ivysaur `ddee31288` (normal/debug builds and stadium checks passed).
 - Completed additions: Venusaur `5dd2833cd` (normal/debug builds and stadium checks passed).
 - Completed additions: Sableye `7c15a8d30` (normal/debug builds and stadium checks passed).
-- Completed additions: Shellder (sourced classic front/back art from the vanilla base repo; icon and footprint from `timkun55`; normal/debug builds and stadium checks passed).
-- Remaining additions: CLOYSTER, VIKAVOLT, DUSCLOPS, DUSKNOIR, EELEKTROSS, DHELMISE, DRAGALGE, HONCHKROW, MARSHTOMP, SWAMPERT, JUMPLUFF, GROVYLE, SCEPTILE, CRABOMINABLE, DONDOZO, CYCLIZAR, KROOKODILE, RHYPERIOR, MIMIKYU, DUGTRIO_A, MAGMORTAR, PRIMARINA, EXPLOUD, TYRANTRUM, DRAGONITE, HYDREIGON, GOODRA, DRAGAPULT, BAXCALIBUR, VOLCANION, MELMETAL.
+- Completed additions: Shellder `6c82929b3` (sourced classic front/back art from the vanilla base repo; icon and footprint from `timkun55`; normal/debug builds and stadium checks passed).
+- Completed additions: Cloyster (sourced classic front/back art from the vanilla base repo; icon and footprint from `timkun55`; normal/debug builds and stadium checks passed).
+- Remaining additions: VIKAVOLT, DUSCLOPS, DUSKNOIR, EELEKTROSS, DHELMISE, DRAGALGE, HONCHKROW, MARSHTOMP, SWAMPERT, JUMPLUFF, GROVYLE, SCEPTILE, CRABOMINABLE, DONDOZO, CYCLIZAR, KROOKODILE, RHYPERIOR, MIMIKYU, DUGTRIO_A, MAGMORTAR, PRIMARINA, EXPLOUD, TYRANTRUM, DRAGONITE, HYDREIGON, GOODRA, DRAGAPULT, BAXCALIBUR, VOLCANION, MELMETAL.
 - Name normalization to confirm against source/reference data: Slyveon→SYLVEON, BaltoyIcon→BALTOY, Marshtop→MARSHTOMP, Mr.Mime→MR__MIME, Ninetales (Aloan)→NINETALES_A, Dugtrio.A→DUGTRIO_A, Rotom (Wash)→ROTOM, Ho-Oh→HO_OH, N-Own→NOWN. `Poliwrath (Urshifu like stats)` is treated as POLIWRATH.
-- Asset gaps in `C:\Users\RaJah239\Desktop\pokemon_sprites`: CLOYSTER, EXPLOUD, DRAGONITE; DUGTRIO_A may be the `dugtrio - shattered` folder. Check supplied reference projects before implementing these species. Do not silently substitute graphics.
+- Asset gaps in `C:\Users\RaJah239\Desktop\pokemon_sprites`: EXPLOUD, DRAGONITE; DUGTRIO_A may be the `dugtrio - shattered` folder. Check supplied reference projects before implementing these species. Do not silently substitute graphics.
 - Review: Zubat removal leaves 30 generic `L@` trainer placeholders with empty parties in `data/trainers/parties.asm`; verify these classes are unused or remove/rework the placeholder trainers before release.
 - Runtime limitation: emulator checks have not been performed. Species IDs shift during this migration, so existing saves may be incompatible; verify at the end.
 

@@ -141,6 +141,7 @@ NewPokedexOrder:
 	db VENUSAUR
 	db SABLEYE
 	db SHELLDER
+	db CLOYSTER
 	db SUDOWOODO
 	db KOFFING
 	db WEEZING

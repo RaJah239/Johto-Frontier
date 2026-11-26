@@ -58,6 +58,7 @@ Footprints:
  INCBIN "gfx/footprints/venusaur.1bpp"
  INCBIN "gfx/footprints/sableye.1bpp"
  INCBIN "gfx/footprints/shellder.1bpp"
+ INCBIN "gfx/footprints/cloyster.1bpp"
  INCBIN "gfx/footprints/blank.1bpp" ; FEEBAS
  INCBIN "gfx/footprints/blank.1bpp" ; MILOTIC
  INCBIN "gfx/footprints/kirlia.1bpp"
@@ -261,5 +262,4 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 279
 	 INCBIN "gfx/footprints/blank.1bpp" ; 280
 	 INCBIN "gfx/footprints/blank.1bpp" ; 281
-	 INCBIN "gfx/footprints/blank.1bpp" ; 282
 	assert_table_length $100

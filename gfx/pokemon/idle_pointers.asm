@@ -222,4 +222,5 @@ dw VulpixAnimationIdle
 	dw VenusaurAnimationIdle
 	dw SableyeAnimationIdle
 	dw ShellderAnimationIdle
+	dw CloysterAnimationIdle
 	assert_table_length NUM_POKEMON
