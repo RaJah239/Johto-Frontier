@@ -251,4 +251,5 @@ NewPokedexOrder:
 	db DRAGONITE
 	db HYDREIGON
 	db GOODRA
+	db DRAGAPULT
 	assert_table_length NUM_POKEMON

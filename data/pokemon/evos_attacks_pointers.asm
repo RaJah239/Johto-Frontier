@@ -251,4 +251,5 @@ dw VulpixEvosAttacks
 	dw DragoniteEvosAttacks
 	dw HydreigonEvosAttacks
 	dw GoodraEvosAttacks
+	dw DragapultEvosAttacks
 	assert_table_length NUM_POKEMON

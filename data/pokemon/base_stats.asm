@@ -281,4 +281,5 @@ INCLUDE "data/pokemon/base_stats/tyrantrum.asm"
 INCLUDE "data/pokemon/base_stats/dragonite.asm"
 INCLUDE "data/pokemon/base_stats/hydreigon.asm"
 INCLUDE "data/pokemon/base_stats/goodra.asm"
+INCLUDE "data/pokemon/base_stats/dragapult.asm"
 	assert_table_length NUM_POKEMON

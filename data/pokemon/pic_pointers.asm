@@ -504,6 +504,8 @@ PokemonPicPointers::
 	dba HydreigonBackpic
 	dba GoodraFrontpic
 	dba GoodraBackpic
+	dba DragapultFrontpic
+	dba DragapultBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

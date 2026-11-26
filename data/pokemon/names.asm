@@ -249,10 +249,10 @@ db "Vulpix@@@@"
 	db "Dragonite@"
 	db "Hydreigon@"
 	db "Goodra@@@@"
+	db "Dragapult@"
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
-	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

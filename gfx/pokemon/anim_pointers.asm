@@ -249,4 +249,5 @@ dw VulpixAnimation
 	dw DragoniteAnimation
 	dw HydreigonAnimation
 	dw GoodraAnimation
+	dw DragapultAnimation
 	assert_table_length NUM_POKEMON

@@ -256,6 +256,7 @@ MonMenuIconPals:
 	icon_pals BLUE, RED ; DRAGONITE
 	icon_pals PURPLE, RED ; HYDREIGON
 	icon_pals PURPLE, GREEN ; GOODRA
+	icon_pals BLUE, PURPLE ; DRAGAPULT
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

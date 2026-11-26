@@ -58,6 +58,7 @@ AlphabeticalPokedexOrder:
 	db DRILBUR
 	db DROWZEE
 	db DRAGALGE
+	db DRAGAPULT
 	db DUGTRIO_A
 	db DUOSION
 	db DURALUDON
