@@ -1,0 +1,1 @@
+Read the repository instructions, POKEDEX_MIGRATION.md and POKEDEX_PROGRESS.md. Check the current Git status and recent commits. Resume the Pokédex migration from where the previous session stopped. Do not repeat completed work.

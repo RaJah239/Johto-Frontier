@@ -1,0 +1,253 @@
+Quilava    ; starter
+Typhlosion
+Croconaw   ; starter
+Feraligatr
+Bayleef    ; starter
+Meganium
+Togetic    ; mr.pokemon
+Togekiss
+Pikachu    ; Route 1 1% encounter
+Raichu
+Eevee      ; Route 2 1% encounter
+Espeon
+Flareon
+Glaceon
+Jolteon
+Leafeon
+Slyveon
+Umbreon
+Vaporeon
+Kirlia     ; Route 2
+Gardevoir
+Gallade
+Wurmple    ; Route 1
+Silcoon
+Beautifly
+Cascoon
+Dustox
+Buneary
+Lopunny
+Joltik     ; Route 1 morning/day
+Galvantula
+Pidgeotto  ; Route 1
+Pidgeot
+Spinarak   ; Route 1 evening/night
+Ariados
+Hoothoot   ; Route 1
+Noctowl
+Golbat     ; Route 2
+Crobat
+Phanpy     ; Route 18
+Donphan
+BaltoyIcon ; Route 18
+Claydol
+Bronzor    ; Route 18
+Bronzong   ; Route 17
+Bellsprout ; Route 3
+Weepinbell
+Victreebel
+Flaaffy    ; Route 3
+Ampharos
+Marill     ; Route 3
+Azumarill
+Poliwhirl
+Poliwrath (Urshifu like stats)
+Politoed
+Drilbur    ; Dark Cave Violet Entrance
+Excadrill
+Ursaring   ; Dark Cave Violet Entrance
+Ursaluna
+Ursaluna_B
+Mawile     ; Dark Cave Violet Side
+Duosion    ; Sprout Tower
+Reuniclus
+Haunter    ; Sprout Tower
+Gengar
+Smeargle   ; Ruins of Alph, new grass patch
+Cottonee   ; Route 4
+Whimsicott
+Swablu     ; Route 4
+Altaria    ; Route 4
+Yanma      ; Route 4
+Yanmega
+Skorupi    ; Route 4
+Drapion
+Wooper     ; Route 4
+Quagsire
+Houndour   ; Route 4
+Houndoom
+Magikarp   ; Route 4 due to Old Rod giver
+Gyarados
+Feebas     ; Route 4 due to Old Rod giver
+Milotic
+Gligar     ; Union Cave
+Gliscor
+Machoke    ; Union Cave
+Machamp
+Gabite     ; Union Cave
+Garchomp
+Onix       ; Union Cave 1% encounter?
+Steelix
+Doduo      ; Route 5
+Dodrio
+Ponyta     ; Route 5
+Rapidash
+Slowpoke   ; Slowpoke Well
+Slowbro
+Slowking
+Shroomish  ; Ilex Forext
+Breloom
+Foongus    ; Ilex Forext, mushroom encounter-only
+Amoonguss
+Venipede   ; Ilex Forext
+Whirlipede
+Scolipede
+Larvesta   ; Ilex Forext
+Volcarona
+Scyther    ; Ilex Forext
+Scizor
+Kleavor
+Mankey     ; Ilex Forext
+Primeape
+Annihilape
+Dipplin    ; Headbutt trees
+Hydrapple
+Ferroseed  ; Headbutt trees
+Ferrothorn
+Pinsir     ; Headbutt trees (bug/ground)
+Roselia    ; Route 6
+Roserade
+Kadabra    ; Route 6
+Alakazam
+Meowth     ; Route 6
+Persian
+Snubbull   ; Route 6
+Granbull
+Drowzee    ; Route 6
+Hypno
+Mr.Mime    ; Game Corner
+Vulpix     ; Route 7
+Ninetales
+Ninetales (Aloan)
+Ivysaur    ; Route 8 1% grass encounter
+Venusaur
+Sudowoodo  ; Route 8
+Koffing    ; Burned Tower
+Weezing
+Grimer     ; Burned Tower
+Muk
+Sableye    ; Burned Tower
+Charmeleon ; Burned Tower 1% grass encounter
+Charizard
+Miltank    ; Route 10
+Tauros     ; Route 10
+Combusken  ; Route 10 1% grass encounter
+Blaziken
+Lapras     ; Union Cave Friday Staionary encounter
+Shellder   ; Olivine fishing during the day
+Cloyster
+Staryu     ; Olivine fishing during the nite
+Starmie
+Vikavolt   ; Power Plant
+Electabuzz ; Power Plant
+Dusclops   ; Power Plant Night
+Dusknoir
+Magneton   ; Power Plant
+Magnezone
+Eelektross ; Power Plant Super Rod fishing encounter (small pond)
+Shuckle    ; Route 12 (Brick Break)
+Corsola    ; Route 12 (Brick Break)
+Chinchou   ; Route 1 Old Rod fishing
+Lanturn    ; Route 12 Surfing
+Tentacool  ; Route 1 Old Rod fishing
+Tentacruel ; Route 12 Surfing
+Seadra     ; Route 13 Surfing
+Kingdra
+Dhelmise   ; Whirl Island inside
+Dragalge   ; Whirl Island inside 1% encounter, low catch rate
+Clefairy   ; Mt.Mortar
+Clefable
+Solrock    ; Mt.Mortar
+Lunatone   ; Mt.Mortar
+Wartortle  ; Route 14 1% grass encounter
+Blastoise
+Honchkrow  ; Route 15 & 16 Nights
+Marshtop   ; Route 15 1% grass encounter
+Swampert
+Jumpluff   ; Route 16
+Snover     ; given earlier for something?
+Abomasnow  ; Route 16/Ice Path
+Grovyle    ; Route 16 1% grass encounter
+Sceptile
+Delibird   ; Ice Path
+Jynx       ; Ice Path
+Snorunt    ; given earlier for something?
+Glalie     ; Ice Path
+Froslass
+Piloswine  ; Ice Path
+Mamoswine
+Sneasel    ; Ice Path
+Weavile
+Sneasler
+Crabominable ; ice path breaking rocks / New name for 10 character limit: Crabominal
+Dondozo    ; Dragon's Den Surfing encounter
+Cyclizar   ; Dragon's Den walking encounter
+Krookodile ; Dark Cave - Blackthorn Side
+Rhydon     ; Dark Cave - Blackthorn Side
+Rhyperior
+Skarmory   ; Route 17
+Torterra   ; Route 17
+Chandelure ; Tin Tower
+Mimikyu    ; Tin Tower
+Dugtrio.A  ; Victory Road
+Lucario    ; Victory Road
+Aggron     ; Victory Road
+Aegislash  ; Victory Road Night Only
+Misdreavus ; Victory Road/Tin Tower
+Mismagius  ; Silver Cave
+Chansey    ; Victory Road
+Blissey    ; Victory Road
+Magmortar  ; Silver Cave
+Primarina  ; Silver Cave Surfing encounter
+Exploud    ; Silver Cave
+Snorlax    ; Route 18 overworld encounter  
+Tyrantrum  ; Silver Cave/ Ruins of Alph event
+Haxorus
+Dragonite
+Tyranitar
+Salamence
+Metagross
+Hydreigon
+Goodra
+Dragapult   ; Blackthorn event
+Baxcalibur
+Porygon
+Porygon2
+PorygonZ
+Omanyte
+Omastar
+Lileep
+Cradily
+Aerodactyl
+Duraludon
+Rotom (Wash) - event at home?
+Absol
+Gholdengo
+Volcanion
+Darkrai
+Melmetal
+Articuno
+Zapdos
+Moltres
+Lugia
+Raikou
+Entei
+Suicune
+Ho-Oh
+Unown
+N-Own
+Jirachi
+Celebi
+Ditto
+Mew
+Mewtwo
