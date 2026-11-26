@@ -237,7 +237,6 @@ EvosAttacksPointers::
 	dw RegirockEvosAttacks
 	dw RegiceEvosAttacks
 	dw RegisteelEvosAttacks
-	dw RegigigasEvosAttacks
 	dw ArticunoEvosAttacks
 	dw ZapdosEvosAttacks
 	dw MoltresEvosAttacks

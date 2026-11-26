@@ -169,7 +169,6 @@ AlphabeticalPokedexOrder:
 	db RALTS
 	db RAPIDASH
 	db REGICE
-	db REGIGIGAS
 	db REGIROCK
 	db REGISTEEL
 	db REMORAID

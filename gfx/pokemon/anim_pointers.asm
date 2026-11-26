@@ -235,7 +235,6 @@ AnimationPointers:
 	dw RegirockAnimation
 	dw RegiceAnimation
 	dw RegisteelAnimation
-	dw RegigigasAnimation
 	dw ArticunoAnimation
 	dw ZapdosAnimation
 	dw MoltresAnimation

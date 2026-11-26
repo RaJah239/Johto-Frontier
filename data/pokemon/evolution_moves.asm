@@ -235,7 +235,6 @@ EvolutionMoves::
    db NO_MOVE      ; REGIROCK
    db NO_MOVE      ; REGICE
    db NO_MOVE      ; REGISTEEL
-   db NO_MOVE      ; REGIGIGAS
    db NO_MOVE      ; ARTICUNO
    db NO_MOVE      ; ZAPDOS
    db NO_MOVE      ; MOLTRES

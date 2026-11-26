@@ -287,7 +287,6 @@ DarkraiEvosAttacks:
 RegirockEvosAttacks:
 RegiceEvosAttacks:
 RegisteelEvosAttacks:
-RegigigasEvosAttacks:
 ArticunoEvosAttacks:
 ZapdosEvosAttacks:
 MoltresEvosAttacks:

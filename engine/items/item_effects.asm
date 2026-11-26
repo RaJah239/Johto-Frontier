@@ -306,8 +306,6 @@ ENDC
 	jr z, .master_ball_fails
 	cp REGISTEEL
 	jr z, .master_ball_fails
-	cp REGIGIGAS
-	jr z, .master_ball_fails
 	cp ARTICUNO
 	jr z, .master_ball_fails
 	cp ZAPDOS

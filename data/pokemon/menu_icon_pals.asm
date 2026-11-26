@@ -242,7 +242,6 @@ MonMenuIconPals:
 	icon_pals RED,    BROWN  ; REGIROCK
 	icon_pals BLUE,   TEAL   ; REGICE
 	icon_pals GRAY,   TEAL   ; REGISTEEL
-	icon_pals GREEN,  RED    ; REGIGIGAS
 	icon_pals BLUE,   BLUE   ; ARTICUNO
 	icon_pals BROWN,  RED    ; ZAPDOS
 	icon_pals RED,    RED    ; MOLTRES

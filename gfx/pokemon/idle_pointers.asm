@@ -235,7 +235,6 @@ AnimationIdlePointers:
 	dw RegirockAnimationIdle
 	dw RegiceAnimationIdle
 	dw RegisteelAnimationIdle
-	dw RegigigasAnimationIdle
 	dw ArticunoAnimationIdle
 	dw ZapdosAnimationIdle
 	dw MoltresAnimationIdle

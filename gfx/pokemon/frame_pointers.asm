@@ -235,7 +235,6 @@ FramesPointers:
 	dw RegirockFrames
 	dw RegiceFrames
 	dw RegisteelFrames
-	dw RegigigasFrames
 	dw ArticunoFrames
 	dw ZapdosFrames
 	dw MoltresFrames

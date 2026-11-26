@@ -237,7 +237,6 @@ NewPokedexOrder:
 	db REGIROCK
 	db REGICE
 	db REGISTEEL
-	db REGIGIGAS
 	db ARTICUNO
 	db ZAPDOS
 	db MOLTRES

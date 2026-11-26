@@ -241,7 +241,6 @@ Footprints:
  INCBIN "gfx/footprints/regirock.1bpp"
  INCBIN "gfx/footprints/dot.1bpp" ; REGICE
  INCBIN "gfx/footprints/registeel.1bpp"
- INCBIN "gfx/footprints/regigigas.1bpp"  
  INCBIN "gfx/footprints/articuno.1bpp"
  INCBIN "gfx/footprints/zapdos.1bpp"  
  INCBIN "gfx/footprints/moltres.1bpp"
@@ -257,6 +256,7 @@ Footprints:
  INCBIN "gfx/footprints/blank.1bpp" ; DITTO
  INCBIN "gfx/footprints/mew.1bpp"  
  INCBIN "gfx/footprints/mewtwo.1bpp" 
+ INCBIN "gfx/footprints/blank.1bpp" ; 251
  INCBIN "gfx/footprints/blank.1bpp" ; 252
  INCBIN "gfx/footprints/blank.1bpp" ; 253
  INCBIN "gfx/footprints/blank.1bpp" ; 254
