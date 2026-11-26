@@ -8,7 +8,6 @@
 ;	db SUNKERN
 ;	db SUNFLORA
 ;	db TROPIUS
-;	db CHARMANDER
 ;	db CHARMELEON
 ;	db CHARIZARD
     db -1 ; end

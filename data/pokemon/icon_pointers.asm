@@ -10,7 +10,6 @@ IconPointers:
 	dw MeganiumIcon
 	dw TogeticIcon
 	dw TogekissIcon
-	dw CharmanderIcon
 	dw CharmeleonIcon
 	dw CharizardIcon
 	dw SquirtleIcon

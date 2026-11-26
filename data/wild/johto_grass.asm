@@ -627,7 +627,7 @@ JohtoGrassWildMons:
 	db 21, ZUBAT
 	db 21, MISDREAVUS
 	db 21, HAUNTER
-	db 5, CHARMANDER
+	db 5, CHARMELEON
 	; day
 	db 21, KOFFING
 	db 21, LAMPENT
@@ -635,7 +635,7 @@ JohtoGrassWildMons:
 	db 21, ZUBAT
 	db 21, MISDREAVUS
 	db 21, HAUNTER
-	db 5, CHARMANDER
+	db 5, CHARMELEON
 	; nite
 	db 21, KOFFING
 	db 21, LAMPENT
@@ -643,7 +643,7 @@ JohtoGrassWildMons:
 	db 21, ZUBAT
 	db 21, MISDREAVUS
 	db 21, HAUNTER
-	db 5, CHARMANDER
+	db 5, CHARMELEON
 	end_grass_wildmons
 
 	def_grass_wildmons BURNED_TOWER_B1F
@@ -655,7 +655,7 @@ JohtoGrassWildMons:
 	db 21, ZUBAT
 	db 21, MISDREAVUS
 	db 21, HAUNTER
-	db 5, CHARMANDER
+	db 5, CHARMELEON
 	; day
 	db 21, KOFFING
 	db 21, LAMPENT
@@ -663,7 +663,7 @@ JohtoGrassWildMons:
 	db 21, ZUBAT
 	db 21, MISDREAVUS
 	db 21, HAUNTER
-	db 5, CHARMANDER
+	db 5, CHARMELEON
 	; nite
 	db 21, KOFFING
 	db 21, LAMPENT
@@ -671,7 +671,7 @@ JohtoGrassWildMons:
 	db 21, ZUBAT
 	db 21, MISDREAVUS
 	db 21, HAUNTER
-	db 5, CHARMANDER
+	db 5, CHARMELEON
 	end_grass_wildmons
 
 	def_grass_wildmons TIN_TOWER_2F

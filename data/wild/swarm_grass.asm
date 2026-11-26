@@ -58,33 +58,33 @@ SwarmGrassWildMons:
 	db 4, BELLSPROUT
 	db 4, BELLSPROUT
 
-; Charmander swarm
+; Charmeleon swarm
 	map_id BURNED_TOWER_1F
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 5, CHARMANDER
-	db 5, CHARMANDER
-	db 5, CHARMANDER
-	db 5, CHARMANDER
-	db 5, CHARMANDER
-	db 5, CHARMANDER
-	db 5, CHARMANDER
+	db 5, CHARMELEON
+	db 5, CHARMELEON
+	db 5, CHARMELEON
+	db 5, CHARMELEON
+	db 5, CHARMELEON
+	db 5, CHARMELEON
+	db 5, CHARMELEON
 	; day
-	db 5, CHARMANDER
-	db 5, CHARMANDER
-	db 5, CHARMANDER
-	db 5, CHARMANDER
-	db 5, CHARMANDER
-	db 5, CHARMANDER
-	db 5, CHARMANDER
+	db 5, CHARMELEON
+	db 5, CHARMELEON
+	db 5, CHARMELEON
+	db 5, CHARMELEON
+	db 5, CHARMELEON
+	db 5, CHARMELEON
+	db 5, CHARMELEON
 	; nite
-	db 5, CHARMANDER
-	db 5, CHARMANDER
-	db 5, CHARMANDER
-	db 5, CHARMANDER
-	db 5, CHARMANDER
-	db 5, CHARMANDER
-	db 5, CHARMANDER
+	db 5, CHARMELEON
+	db 5, CHARMELEON
+	db 5, CHARMELEON
+	db 5, CHARMELEON
+	db 5, CHARMELEON
+	db 5, CHARMELEON
+	db 5, CHARMELEON
 
 ; Pidgeotto swarm
 	map_id ROUTE_9

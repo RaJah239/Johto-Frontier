@@ -216,7 +216,7 @@ RadioTower1FRadioCardWomanScript:
 
 		para "Do Goldenrod Game"
 		line "Corner's slots"
-		cont "have Charmander"
+		cont "have Charmeleon"
 		cont "on their reels?"
 		done
 	yesorno

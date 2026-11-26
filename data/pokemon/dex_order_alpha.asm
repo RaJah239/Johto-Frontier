@@ -30,7 +30,6 @@ AlphabeticalPokedexOrder:
 	db CHANDELURE
 	db CHANSEY
 	db CHARIZARD
-	db CHARMANDER
 	db CHARMELEON
 	db CHINCHOU
 	db CLAYDOL

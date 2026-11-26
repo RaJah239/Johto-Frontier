@@ -5,7 +5,6 @@ IgnisPokemon:
 ;	db RAIKOU
 ;	db CHANDELURE
 ;	db KINGDRA
-;	db CHARMANDER
 ;	db CHARMELEON
 ;	db CHARIZARD
 	db -1 ; end

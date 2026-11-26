@@ -10,7 +10,6 @@ EvosAttacksPointers::
 	dw MeganiumEvosAttacks
 	dw TogeticEvosAttacks
 	dw TogekissEvosAttacks
-	dw CharmanderEvosAttacks
 	dw CharmeleonEvosAttacks
 	dw CharizardEvosAttacks
 	dw SquirtleEvosAttacks

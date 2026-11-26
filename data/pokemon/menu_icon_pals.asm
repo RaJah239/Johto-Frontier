@@ -15,7 +15,6 @@ MonMenuIconPals:
 	icon_pals GREEN,  BROWN  ; MEGANIUM
 	icon_pals RED,    BLUE   ; TOGETIC
 	icon_pals PINK,   BLUE   ; TOGEKISS
-	icon_pals RED,    BROWN  ; CHARMANDER
 	icon_pals RED,    BROWN  ; CHARMELEON
 	icon_pals RED,    GRAY   ; CHARIZARD
 	icon_pals BLUE,   TEAL   ; SQUIRTLE

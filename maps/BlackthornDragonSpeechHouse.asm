@@ -9,11 +9,11 @@ BlackthornDragonSpeechHouse_MapEvents:
 
 	def_object_events
 	object_event  2,  3, SPRITE_GRANNY, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, BlackthornDragonSpeechHouseGrannyText, -1
-	object_event  5,  5, SPRITE_CHARMANDER, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BlackthornDragonSpeechHouseCharmanderScript, -1
+	object_event  5,  5, SPRITE_CHARMANDER, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, BlackthornDragonSpeechHouseCharmeleonScript, -1
 
 	object_const_def
 	const BLACKTHORNDRAGONSPEECHHOUSE_GRANNY
-	const BLACKTHORNDRAGONSPEECHHOUSE_CHARMANDER
+	const BLACKTHORNDRAGONSPEECHHOUSE_CHARMELEON
 
 BlackthornDragonSpeechHouse_MapScripts:
 	def_scene_scripts
@@ -33,17 +33,17 @@ BlackthornDragonSpeechHouseGrannyText:
 	cont "this town."
 	done
 
-BlackthornDragonSpeechHouseCharmanderScript:
-	setval CHARMANDER
+BlackthornDragonSpeechHouseCharmeleonScript:
+	setval CHARMELEON
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
-	pokepic CHARMANDER
-	cry CHARMANDER
+	pokepic CHARMELEON
+	cry CHARMELEON
 	waitbutton
 	closepokepic
 .skipthis
 	jumpthistext
-		text "Charmander: Charr!"
+		text "Charmeleon: Charr!"
 		done

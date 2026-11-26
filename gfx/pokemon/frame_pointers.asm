@@ -8,7 +8,6 @@ FramesPointers:
 	dw MeganiumFrames
 	dw TogeticFrames
 	dw TogekissFrames
-	dw CharmanderFrames
 	dw CharmeleonFrames
 	dw CharizardFrames
 	dw SquirtleFrames

@@ -399,7 +399,7 @@ FleeMonsNotebook:
 		line "order, they are:"
 
 		para "Bagon,"
-		line "Charmander,"
+		line "Charmeleon,"
 		cont "Bayleef"
 		cont "Clefairy,"
 		cont "Quilava,"

@@ -90,7 +90,7 @@ SwarmGrampsScript:
 .resample:
 	ifequal  0, .Bagon
 	ifequal  1, .Bellsprout
-	ifequal  2, .Charmander
+	ifequal  2, .Charmeleon
 	ifequal  3, .Bayleef
 	ifequal  4, .Clefairy
 	ifequal  5, .Quilava
@@ -146,12 +146,12 @@ SwarmGrampsScript:
 		cont "Route 3!"
 		done
 
-.Charmander:
+.Charmeleon:
 	setflag ENGINE_SWARM
 	swarm BURNED_TOWER_1F
 	jumpthisopenedtext
 		text "There's a swarm of"
-		line "Charmander at"
+		line "Charmeleon at"
 		cont "Burned Tower 1F!"
 		done
 
@@ -418,7 +418,7 @@ GoldenrodPokeBrosHouseSwarmPokemonBook:
 
 		para "Bagon,"
 		line "Bellsprout,"
-		cont "Charmander,"
+		cont "Charmeleon,"
 		cont "Bayleef"
 		cont "Clefairy,"
 		cont "Quilava,"

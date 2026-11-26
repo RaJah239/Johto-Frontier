@@ -8,7 +8,6 @@ BitmasksPointers:
 	dw MeganiumBitmasks
 	dw TogeticBitmasks
 	dw TogekissBitmasks
-	dw CharmanderBitmasks
 	dw CharmeleonBitmasks
 	dw CharizardBitmasks
 	dw SquirtleBitmasks

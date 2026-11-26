@@ -16,7 +16,7 @@ SpriteMons:
 	db FEEBAS
 	db PIKACHU
 	db CLEFAIRY
-	db CHARMANDER
+	db CHARMELEON
 	db NATU
 	db STARMIE
 	db DITTO

@@ -69,7 +69,6 @@ BayleefEvosAttacks:
 MeganiumEvosAttacks:
 TogeticEvosAttacks:
 TogekissEvosAttacks:
-CharmanderEvosAttacks:
 CharmeleonEvosAttacks:
 CharizardEvosAttacks:
 SquirtleEvosAttacks:

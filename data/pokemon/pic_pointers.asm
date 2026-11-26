@@ -19,8 +19,6 @@ PokemonPicPointers::
  	dba TogeticBackpic
  	dba TogekissFrontpic
  	dba TogekissBackpic
- 	dba CharmanderFrontpic
- 	dba CharmanderBackpic
  	dba CharmeleonFrontpic
  	dba CharmeleonBackpic
  	dba CharizardFrontpic

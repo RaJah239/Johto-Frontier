@@ -8,7 +8,6 @@ AnimationIdlePointers:
 	dw MeganiumAnimationIdle
 	dw TogeticAnimationIdle
 	dw TogekissAnimationIdle
-	dw CharmanderAnimationIdle
 	dw CharmeleonAnimationIdle
 	dw CharizardAnimationIdle
 	dw SquirtleAnimationIdle

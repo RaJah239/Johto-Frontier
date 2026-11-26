@@ -382,7 +382,7 @@ PartyKeeperSpeciesList:
 	db CROCONAW
 	db BAYLEEF
 	db TOGETIC
-	db CHARMANDER
+	db CHARMELEON
 	db SQUIRTLE
 	db TURTWIG
 	db PIKACHU

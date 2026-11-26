@@ -9,7 +9,6 @@ PokedexDataPointerTable:
  	dba MeganiumPokedexEntry
  	dba TogeticPokedexEntry
  	dba TogekissPokedexEntry
- 	dba CharmanderPokedexEntry
  	dba CharmeleonPokedexEntry
  	dba CharizardPokedexEntry
  	dba SquirtlePokedexEntry

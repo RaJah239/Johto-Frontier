@@ -8,7 +8,6 @@ EvolutionMoves::
    db NO_MOVE      ; MEGANIUM
    db NO_MOVE      ; TOGETIC
    db NO_MOVE      ; TOGEKISS
-   db NO_MOVE      ; CHARMANDER
    db NO_MOVE      ; CHARMELEON
    db NO_MOVE      ; CHARIZARD
    db NO_MOVE      ; SQUIRTLE

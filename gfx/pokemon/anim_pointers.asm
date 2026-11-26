@@ -8,7 +8,6 @@ AnimationPointers:
 	dw MeganiumAnimation
 	dw TogeticAnimation
 	dw TogekissAnimation
-	dw CharmanderAnimation
 	dw CharmeleonAnimation
 	dw CharizardAnimation
 	dw SquirtleAnimation

@@ -8,7 +8,6 @@ PokemonNames::
 	db "Meganium@@"
 	db "Togetic@@@"
 	db "Togekiss@@"
-	db "Charmander"
 	db "Charmeleon"
 	db "Charizard@"
 	db "Squirtle@@"
@@ -231,6 +230,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
