@@ -787,7 +787,7 @@ BattleArenaReceptionistScript:
 	iffalse .ChoosePlayerCharacter
 	setval RIVAL1
 	writemem wOtherTrainerClass
-	setval RIVAL1_1_CHIKORITA
+	setval RIVAL1_1_BAYLEEF
 	writemem wOtherTrainerID
 	special OverridePlayerParty
     sjump .ChooseEnemyCharacter
@@ -798,7 +798,7 @@ BattleArenaReceptionistScript:
 		done
 	yesorno
 	iffalse .ChooseEnemyCharacter
-	loadtrainer RIVAL1, RIVAL1_1_CHIKORITA
+	loadtrainer RIVAL1, RIVAL1_1_BAYLEEF
 	sjump .StartBattle
 
 .GiovanniPlayer:

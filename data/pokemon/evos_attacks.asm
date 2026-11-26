@@ -65,7 +65,6 @@ PorygonZEvosAttacks:
 BlisseyEvosAttacks:
 CroconawEvosAttacks:
 FeraligatrEvosAttacks:
-ChikoritaEvosAttacks:
 BayleefEvosAttacks:
 MeganiumEvosAttacks:
 TogepiEvosAttacks:

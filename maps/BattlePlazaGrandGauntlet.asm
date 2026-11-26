@@ -380,7 +380,7 @@ GrandGauntlet_WalkToQuestGiver:
 PartyKeeperSpeciesList:
 	db QUILAVA
 	db CROCONAW
-	db CHIKORITA
+	db BAYLEEF
 	db TOGEPI
 	db CHARMANDER
 	db SQUIRTLE

@@ -4,7 +4,6 @@ PokemonNames::
 	db "Typhlosion"
 	db "Croconaw@@"
 	db "Feraligatr"
-	db "Chikorita@"
 	db "Bayleef@@@"
 	db "Meganium@@"
 	db "Togepi@@@@"
@@ -233,6 +232,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

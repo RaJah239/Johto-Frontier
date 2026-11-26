@@ -400,7 +400,7 @@ FleeMonsNotebook:
 
 		para "Bagon,"
 		line "Charmander,"
-		cont "Chikorita"
+		cont "Bayleef"
 		cont "Clefairy,"
 		cont "Quilava,"
 		cont "Delibird,"

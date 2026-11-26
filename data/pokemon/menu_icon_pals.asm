@@ -11,7 +11,6 @@ MonMenuIconPals:
 	icon_pals PINK,   PURPLE ; TYPHLOSION
 	icon_pals BLUE,   TEAL   ; CROCONAW
 	icon_pals BLUE,   TEAL   ; FERALIGATR
-	icon_pals GREEN,  BROWN  ; CHIKORITA
 	icon_pals GREEN,  BROWN  ; BAYLEEF
 	icon_pals GREEN,  BROWN  ; MEGANIUM
 	icon_pals RED,    BLUE   ; TOGEPI

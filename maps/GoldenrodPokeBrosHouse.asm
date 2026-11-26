@@ -91,7 +91,7 @@ SwarmGrampsScript:
 	ifequal  0, .Bagon
 	ifequal  1, .Bellsprout
 	ifequal  2, .Charmander
-	ifequal  3, .Chikorita
+	ifequal  3, .Bayleef
 	ifequal  4, .Clefairy
 	ifequal  5, .Quilava
 	ifequal  6, .Delibird
@@ -155,12 +155,12 @@ SwarmGrampsScript:
 		cont "Burned Tower 1F!"
 		done
 
-.Chikorita:
+.Bayleef:
 	setflag ENGINE_SWARM
 	swarm ROUTE_9
 	jumpthisopenedtext
 		text "There's a swarm of"
-		line "Chikorita at"
+		line "Bayleef at"
 		cont "Route 9!"
 		done
 
@@ -419,7 +419,7 @@ GoldenrodPokeBrosHouseSwarmPokemonBook:
 		para "Bagon,"
 		line "Bellsprout,"
 		cont "Charmander,"
-		cont "Chikorita"
+		cont "Bayleef"
 		cont "Clefairy,"
 		cont "Quilava,"
 		cont "Delibird,"

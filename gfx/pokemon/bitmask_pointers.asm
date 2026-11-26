@@ -4,7 +4,6 @@ BitmasksPointers:
 	dw TyphlosionBitmasks
 	dw CroconawBitmasks
 	dw FeraligatrBitmasks
-	dw ChikoritaBitmasks
 	dw BayleefBitmasks
 	dw MeganiumBitmasks
 	dw TogepiBitmasks

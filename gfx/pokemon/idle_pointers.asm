@@ -4,7 +4,6 @@ AnimationIdlePointers:
 	dw TyphlosionAnimationIdle
 	dw CroconawAnimationIdle
 	dw FeraligatrAnimationIdle
-	dw ChikoritaAnimationIdle
 	dw BayleefAnimationIdle
 	dw MeganiumAnimationIdle
 	dw TogepiAnimationIdle

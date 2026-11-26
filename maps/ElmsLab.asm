@@ -29,7 +29,7 @@ ElmsLab_MapEvents:
 	object_event  2,  9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_COMMAND, jumptextfaceplayer, AideText_ExplainBalls, -1
 	object_event  6,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, QuilavaPokeBallScript, EVENT_QUILAVA_POKEBALL_IN_ELMS_LAB
 	object_event  7,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, CroconawPokeBallScript, EVENT_CROCONAW_POKEBALL_IN_ELMS_LAB
-	object_event  8,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ChikoritaPokeBallScript, EVENT_CHIKORITA_POKEBALL_IN_ELMS_LAB
+	object_event  8,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, BayleefPokeBallScript, EVENT_BAYLEEF_POKEBALL_IN_ELMS_LAB
 	object_event  7,  3, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, WorldNotebook, EVENT_ELMS_TRAVEL_NOTEBOOK
 	object_event  7,  9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ElmsAideScript2, -1
 
@@ -230,7 +230,7 @@ QuilavaPokeBallScript:
 	closetext
 	checkevent EVENT_GOT_CROCONAW_FROM_ELM
 	iffalse .exit_this_scene2
-	checkevent EVENT_GOT_CHIKORITA_FROM_ELM
+	checkevent EVENT_GOT_BAYLEEF_FROM_ELM
 	iffalse .exit_this_scene2
 	readvar VAR_FACING
 	ifequal RIGHT, ElmGivesPokedexScript
@@ -294,7 +294,7 @@ CroconawPokeBallScript:
 	closetext
 	checkevent EVENT_GOT_QUILAVA_FROM_ELM
 	iffalse .exit_this_scene2
-	checkevent EVENT_GOT_CHIKORITA_FROM_ELM
+	checkevent EVENT_GOT_BAYLEEF_FROM_ELM
 	iffalse .exit_this_scene2
 	applymovement PLAYER, AfterCroconawMovement
 	sjump ElmGivesPokedexScript
@@ -321,38 +321,38 @@ AfterCroconawMovement:
 	turn_head UP
 	step_end
 
-ChikoritaPokeBallScript:
+BayleefPokeBallScript:
 	turnobject ELMSLAB_ELM, DOWN
 	isdialogueminimal
 	iftrue .skipthis6
 	reanchormap
-	pokepic CHIKORITA
-	cry CHIKORITA
+	pokepic BAYLEEF
+	cry BAYLEEF
 	waitbutton
 	closepokepic
 .skipthis6
 	opentext
-	writetextcheckdialogue TakeChikoritaText, TakeChikoritaTextMin
+	writetextcheckdialogue TakeBayleefText, TakeBayleefTextMin
 	yesorno
 	iffalse .exit_this_scene1
 	disappear ELMSLAB_POKE_BALL3
-	setevent EVENT_GOT_CHIKORITA_FROM_ELM
+	setevent EVENT_GOT_BAYLEEF_FROM_ELM
 	isdialogueminimal
 	iftrue .skipthis7
 	waitsfx
-	getmonname STRING_BUFFER_3, CHIKORITA
+	getmonname STRING_BUFFER_3, BAYLEEF
 	writetext ReceivedStarterText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
 .skipthis7
-	givepoke CHIKORITA, 5, BERRY
+	givepoke BAYLEEF, 5, BERRY
 	closetext
 	checkevent EVENT_GOT_QUILAVA_FROM_ELM
 	iffalse .exit_this_scene2
 	checkevent EVENT_GOT_CROCONAW_FROM_ELM
 	iffalse .exit_this_scene2
-	applymovement PLAYER, AfterChikoritaMovement
+	applymovement PLAYER, AfterBayleefMovement
 	sjump ElmGivesPokedexScript
 
 .exit_this_scene1
@@ -360,17 +360,17 @@ ChikoritaPokeBallScript:
 .exit_this_scene2
 	end
 
-TakeChikoritaText:
+TakeBayleefText:
 	text "Elm: So, you like"
-	line "Chikorita, the"
+	line "Bayleef, the"
 	cont "grass #mon?"
 	done
 
-TakeChikoritaTextMin:
-	text "Take Chikorita?"
+TakeBayleefTextMin:
+	text "Take Bayleef?"
 	done
 
-AfterChikoritaMovement:
+AfterBayleefMovement:
 	step LEFT
 	step LEFT
 	step LEFT

@@ -62,8 +62,8 @@ BurnedTowerRivalBattleScript:
 	closetext
 	checkevent EVENT_GOT_CROCONAW_FROM_ELM
 	iftrue .croconaw
-	checkevent EVENT_GOT_CHIKORITA_FROM_ELM
-	iftrue .chikorita
+	checkevent EVENT_GOT_BAYLEEF_FROM_ELM
+	iftrue .bayleef
 	winlosstext BurnedTowerRival_WinText, BurnedTowerRival_LossText
 	setlasttalked BURNEDTOWER1F_RIVAL
 	loadtrainer RIVAL1, RIVAL1_3_CROCONAW
@@ -75,13 +75,13 @@ BurnedTowerRivalBattleScript:
 .croconaw
 	winlosstext BurnedTowerRival_WinText, BurnedTowerRival_LossText
 	setlasttalked BURNEDTOWER1F_RIVAL
-	loadtrainer RIVAL1, RIVAL1_3_CHIKORITA
+	loadtrainer RIVAL1, RIVAL1_3_BAYLEEF
 	startbattle
 	dontrestartmapmusic
 	reloadmapafterbattle
 	sjump .returnfrombattle
 
-.chikorita
+.bayleef
 	winlosstext BurnedTowerRival_WinText, BurnedTowerRival_LossText
 	setlasttalked BURNEDTOWER1F_RIVAL
 	loadtrainer RIVAL1, RIVAL1_3_QUILAVA

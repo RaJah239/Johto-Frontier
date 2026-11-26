@@ -6,7 +6,6 @@ NewPokedexOrder:
 	db TYPHLOSION
 	db CROCONAW
 	db FERALIGATR
-	db CHIKORITA
 	db BAYLEEF
 	db MEGANIUM
 	db TOGEPI

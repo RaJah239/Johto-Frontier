@@ -4,7 +4,6 @@ AnimationPointers:
 	dw TyphlosionAnimation
 	dw CroconawAnimation
 	dw FeraligatrAnimation
-	dw ChikoritaAnimation
 	dw BayleefAnimation
 	dw MeganiumAnimation
 	dw TogepiAnimation

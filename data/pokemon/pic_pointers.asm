@@ -11,8 +11,6 @@ PokemonPicPointers::
  	dba CroconawBackpic
  	dba FeraligatrFrontpic
  	dba FeraligatrBackpic
- 	dba ChikoritaFrontpic
- 	dba ChikoritaBackpic
  	dba BayleefFrontpic
  	dba BayleefBackpic
  	dba MeganiumFrontpic

@@ -3,7 +3,6 @@
 ; 24 pokemon have a 30% chance to flee
 SometimesFleeMons:
 	db CHARMANDER
-	db CHIKORITA
 	db CLEFAIRY
 	db DELIBIRD
 	db EEVEE

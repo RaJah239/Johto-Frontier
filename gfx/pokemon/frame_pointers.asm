@@ -4,7 +4,6 @@ FramesPointers:
 	dw TyphlosionFrames
 	dw CroconawFrames
 	dw FeraligatrFrames
-	dw ChikoritaFrames
 	dw BayleefFrames
 	dw MeganiumFrames
 	dw TogepiFrames

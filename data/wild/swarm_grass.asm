@@ -86,33 +86,33 @@ SwarmGrassWildMons:
 	db 5, CHARMANDER
 	db 5, CHARMANDER
 
-; Chikorita swarm
+; Pidgeotto swarm
 	map_id ROUTE_9
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 5, CHIKORITA
-	db 5, CHIKORITA
-	db 5, CHIKORITA
-	db 5, CHIKORITA
-	db 5, CHIKORITA
-	db 5, CHIKORITA
-	db 5, CHIKORITA
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
 	; day
-	db 5, CHIKORITA
-	db 5, CHIKORITA
-	db 5, CHIKORITA
-	db 5, CHIKORITA
-	db 5, CHIKORITA
-	db 5, CHIKORITA
-	db 5, CHIKORITA
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
 	; nite
-	db 5, CHIKORITA
-	db 5, CHIKORITA
-	db 5, CHIKORITA
-	db 5, CHIKORITA
-	db 5, CHIKORITA
-	db 5, CHIKORITA
-	db 5, CHIKORITA
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
+	db 5, PIDGEOTTO
 
 ; Clefairy swarm
 	map_id MOUNT_MORTAR_1F_OUTSIDE

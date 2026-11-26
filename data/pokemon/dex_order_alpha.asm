@@ -32,7 +32,6 @@ AlphabeticalPokedexOrder:
 	db CHARIZARD
 	db CHARMANDER
 	db CHARMELEON
-	db CHIKORITA
 	db CHINCHOU
 	db CLAYDOL
 	db CLEFABLE

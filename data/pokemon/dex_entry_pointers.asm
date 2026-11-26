@@ -5,7 +5,6 @@ PokedexDataPointerTable:
  	dba TyphlosionPokedexEntry
  	dba CroconawPokedexEntry
  	dba FeraligatrPokedexEntry
- 	dba ChikoritaPokedexEntry
  	dba BayleefPokedexEntry
  	dba MeganiumPokedexEntry
  	dba TogepiPokedexEntry

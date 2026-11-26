@@ -6,7 +6,6 @@ IconPointers:
 	dw TyphlosionIcon
 	dw CroconawIcon
 	dw FeraligatrIcon
-	dw ChikoritaIcon
 	dw BayleefIcon
 	dw MeganiumIcon
 	dw TogepiIcon

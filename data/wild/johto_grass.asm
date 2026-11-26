@@ -599,7 +599,7 @@ JohtoGrassWildMons:
 	db 20, DODUO
 	db 20, PONYTA
 	db 20, TROPIUS
-	db 5, CHIKORITA
+	db 5, PIDGEOTTO
 	; day
 	db 20, GROWLITHE
 	db 20, PIDGEOTTO
@@ -607,7 +607,7 @@ JohtoGrassWildMons:
 	db 20, DODUO
 	db 20, PONYTA
 	db 20, TROPIUS
-	db 5, CHIKORITA
+	db 5, PIDGEOTTO
 	; nite
 	db 20, DONPHAN
 	db 20, SPINARAK
@@ -615,7 +615,7 @@ JohtoGrassWildMons:
 	db 20, MANKEY
 	db 20, HOUNDOUR
 	db 20, DROWZEE
-	db 5, CHIKORITA
+	db 5, PIDGEOTTO
 	end_grass_wildmons
 
 	def_grass_wildmons BURNED_TOWER_1F

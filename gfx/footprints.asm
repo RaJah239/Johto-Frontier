@@ -10,7 +10,6 @@ Footprints:
  INCBIN "gfx/footprints/typhlosion.1bpp"
  INCBIN "gfx/footprints/croconaw.1bpp" 
  INCBIN "gfx/footprints/feraligatr.1bpp"
- INCBIN "gfx/footprints/chikorita.1bpp"
  INCBIN "gfx/footprints/bayleef.1bpp"
  INCBIN "gfx/footprints/meganium.1bpp"
  INCBIN "gfx/footprints/togepi.1bpp"  
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 272
 	 INCBIN "gfx/footprints/blank.1bpp" ; 273
 	 INCBIN "gfx/footprints/blank.1bpp" ; 274
+	 INCBIN "gfx/footprints/blank.1bpp" ; 275
 	assert_table_length $100

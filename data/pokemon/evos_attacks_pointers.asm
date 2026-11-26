@@ -6,7 +6,6 @@ EvosAttacksPointers::
 	dw TyphlosionEvosAttacks
 	dw CroconawEvosAttacks
 	dw FeraligatrEvosAttacks
-	dw ChikoritaEvosAttacks
 	dw BayleefEvosAttacks
 	dw MeganiumEvosAttacks
 	dw TogepiEvosAttacks

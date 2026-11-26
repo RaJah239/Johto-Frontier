@@ -4,7 +4,6 @@ EvolutionMoves::
    db NO_MOVE      ; TYPHLOSION
    db NO_MOVE      ; CROCONAW
    db NO_MOVE      ; FERALIGATR
-   db NO_MOVE      ; CHIKORITA
    db NO_MOVE      ; BAYLEEF
    db NO_MOVE      ; MEGANIUM
    db NO_MOVE      ; TOGEPI
