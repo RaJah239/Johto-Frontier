@@ -240,4 +240,5 @@ NewPokedexOrder:
 	db CRABOMINABLE
 	db DONDOZO
 	db CYCLIZAR
+	db KROOKODILE
 	assert_table_length NUM_POKEMON

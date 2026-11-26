@@ -114,6 +114,7 @@ AlphabeticalPokedexOrder:
 	db KIRLIA
 	db KLEAVOR
 	db KOFFING
+	db KROOKODILE
 	db LANTURN
 	db LAPRAS
 	db LARVESTA

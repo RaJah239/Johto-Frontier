@@ -238,4 +238,5 @@ db NO_MOVE      ; VULPIX
 	db NO_MOVE      ; CRABOMINABLE
 	db NO_MOVE      ; DONDOZO
 	db NO_MOVE      ; CYCLIZAR
+	db NO_MOVE      ; KROOKODILE
 	assert_table_length NUM_POKEMON

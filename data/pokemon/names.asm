@@ -238,10 +238,10 @@ db "Vulpix@@@@"
 	db "Crabominab"
 	db "Dondozo@@@"
 	db "Cyclizar@@"
+	db "Krookodile"
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
-	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

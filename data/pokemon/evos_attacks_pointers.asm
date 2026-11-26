@@ -240,4 +240,5 @@ dw VulpixEvosAttacks
 	dw CrabominableEvosAttacks
 	dw DondozoEvosAttacks
 	dw CyclizarEvosAttacks
+	dw KrookodileEvosAttacks
 	assert_table_length NUM_POKEMON

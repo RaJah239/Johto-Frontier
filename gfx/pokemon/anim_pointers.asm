@@ -238,4 +238,5 @@ dw VulpixAnimation
 	dw CrabominableAnimation
 	dw DondozoAnimation
 	dw CyclizarAnimation
+	dw KrookodileAnimation
 	assert_table_length NUM_POKEMON
