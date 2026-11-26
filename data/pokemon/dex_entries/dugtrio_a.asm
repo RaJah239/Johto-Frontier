@@ -1,9 +1,9 @@
 	db "MOLE@"
 	dw 204, 1468 ; height, weight
 	db   "Its metallic"
-	feed "whiskers are heavy"
-	feed "and sway in every"
-	feed "breeze. The three"
-	feed "heads work together"
-	feed "to protect the land.@"
+	feed "whiskers weigh it"
+	feed "down. The three"
+	feed "heads act together"
+	feed "to guard their"
+	feed "island home.@"
 	db DUGTRIO_A ; f2

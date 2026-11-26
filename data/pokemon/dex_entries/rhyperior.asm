@@ -1,9 +1,8 @@
 	db "DRILL@"
 	dw 710, 6235 ; height, weight
 	db   "It can launch"
-	feed "rocks like missiles"
-	feed "by tightening its"
-	feed "muscles. Its tough"
+	feed "rocks from holes"
+	feed "in its palms. Its"
 	feed "hide withstands"
-	feed "volcanic eruptions.@"
+	feed "volcanic blasts.@"
 	db RHYPERIOR ; f0
