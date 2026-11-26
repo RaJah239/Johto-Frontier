@@ -639,3 +639,6 @@ MetagrossFrontpic:   INCBIN "gfx/pokemon/metagross/front.animated.2bpp.lz"
 MetagrossBackpic:    INCBIN "gfx/pokemon/metagross/back.2bpp.lz"
 JirachiFrontpic:     INCBIN "gfx/pokemon/jirachi/front.animated.2bpp.lz"
 JirachiBackpic:      INCBIN "gfx/pokemon/jirachi/back.2bpp.lz"
+
+GlaceonFrontpic: INCBIN "gfx/pokemon/glaceon/front.animated.2bpp.lz"
+GlaceonBackpic: INCBIN "gfx/pokemon/glaceon/back.2bpp.lz"

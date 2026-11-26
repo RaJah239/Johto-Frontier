@@ -231,3 +231,5 @@ UnownWIcon::     INCBIN "gfx/icons/unown_w.2bpp"
 UnownXIcon::     INCBIN "gfx/icons/unown_x.2bpp"
 UnownYIcon::     INCBIN "gfx/icons/unown_y.2bpp"
 UnownZIcon::     INCBIN "gfx/icons/unown_z.2bpp"
+
+GlaceonIcon:: INCBIN "gfx/icons/glaceon.2bpp"

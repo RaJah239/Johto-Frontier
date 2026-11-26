@@ -69,6 +69,7 @@ AlphabeticalPokedexOrder:
 	db GARDEVOIR
 	db GENGAR
 	db GHOLDENGO
+	db GLACEON
 	db GLALIE
 	db GLIGAR
 	db GLISCOR

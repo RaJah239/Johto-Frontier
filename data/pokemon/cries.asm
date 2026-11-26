@@ -200,6 +200,7 @@ PokemonCries::
 	mon_cry CRY_PIDGEY,       255,  383  ; DITTO
 	mon_cry CRY_PARAS,        238,  383  ; MEW
 	mon_cry CRY_PARAS,        153,  383  ; MEWTWO
+	mon_cry CRY_GLACEON, 0, 255 ; GLACEON
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -261,5 +262,4 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 308
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 309
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 310
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 311
 	assert_table_length $ff

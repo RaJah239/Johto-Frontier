@@ -201,9 +201,11 @@ MonMenuIconPals:
 	icon_pals PURPLE, BLUE   ; DITTO
 	icon_pals PINK,   BLUE   ; MEW
 	icon_pals PURPLE, GREEN  ; MEWTWO
+	icon_pals BLUE, TEAL ; GLACEON
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG
+
 
 MonMenuIconPalToNPCPalTable:
 	db PAL_OW_RED

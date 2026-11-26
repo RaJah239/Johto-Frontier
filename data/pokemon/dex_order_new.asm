@@ -20,6 +20,7 @@ NewPokedexOrder:
 	db EEVEE
 	db ESPEON
 	db FLAREON
+	db GLACEON
 	db JOLTEON
 	db SYLVEON
 	db UMBREON
