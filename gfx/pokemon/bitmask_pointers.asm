@@ -160,7 +160,6 @@ BitmasksPointers:
 	dw ElectrodeBitmasks
 	dw ElekidBitmasks
 	dw ElectabuzzBitmasks
-	dw MagnemiteBitmasks
 	dw MagnetonBitmasks
 	dw MagnezoneBitmasks
 	dw ShuckleBitmasks

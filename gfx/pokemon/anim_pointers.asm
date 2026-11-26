@@ -160,7 +160,6 @@ AnimationPointers:
 	dw ElectrodeAnimation
 	dw ElekidAnimation
 	dw ElectabuzzAnimation
-	dw MagnemiteAnimation
 	dw MagnetonAnimation
 	dw MagnezoneAnimation
 	dw ShuckleAnimation

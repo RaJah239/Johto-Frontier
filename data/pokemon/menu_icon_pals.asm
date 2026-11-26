@@ -167,7 +167,6 @@ MonMenuIconPals:
 	icon_pals RED,    GRAY   ; ELECTRODE
 	icon_pals BROWN,  GRAY   ; ELEKID
 	icon_pals BROWN,  GRAY   ; ELECTABUZZ
-	icon_pals GRAY,   GRAY   ; MAGNEMITE
 	icon_pals GRAY,   GRAY   ; MAGNETON
 	icon_pals BLUE,   GRAY   ; MAGNEZONE
 	icon_pals RED,    BLUE   ; SHUCKLE

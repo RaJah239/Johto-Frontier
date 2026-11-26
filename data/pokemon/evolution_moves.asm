@@ -160,7 +160,6 @@ EvolutionMoves::
    db NO_MOVE      ; ELECTRODE
    db NO_MOVE      ; ELEKID
    db NO_MOVE      ; ELECTABUZZ
-   db NO_MOVE      ; MAGNEMITE
    db NO_MOVE      ; MAGNETON
    db NO_MOVE      ; MAGNEZONE
    db NO_MOVE      ; SHUCKLE

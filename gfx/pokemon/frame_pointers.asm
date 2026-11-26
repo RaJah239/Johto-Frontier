@@ -160,7 +160,6 @@ FramesPointers:
 	dw ElectrodeFrames
 	dw ElekidFrames
 	dw ElectabuzzFrames
-	dw MagnemiteFrames
 	dw MagnetonFrames
 	dw MagnezoneFrames
 	dw ShuckleFrames

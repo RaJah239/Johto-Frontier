@@ -217,7 +217,6 @@ VoltorbEvosAttacks:
 ElectrodeEvosAttacks:
 ElekidEvosAttacks:
 ElectabuzzEvosAttacks:
-MagnemiteEvosAttacks:
 MagnetonEvosAttacks:
 MagnezoneEvosAttacks:
 ShuckleEvosAttacks:

@@ -119,7 +119,6 @@ AlphabeticalPokedexOrder:
 	db LUGIA
 	db LUNATONE
 	db MAGIKARP
-	db MAGNEMITE
 	db MAGNETON
 	db MAGNEZONE
 	db MAKUHITA

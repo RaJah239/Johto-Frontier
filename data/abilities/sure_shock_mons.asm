@@ -2,7 +2,6 @@
 
 SureShockPokemon:
 ;	db PIKACHU
-;	db MAGNEMITE
 ;	db MAGNETON
 ;	db MAGNEZONE
 	db -1 ; end

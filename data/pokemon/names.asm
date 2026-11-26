@@ -160,7 +160,6 @@ PokemonNames::
 	db "Electrode@"
 	db "Elekid@@@@"
 	db "Electabuzz"
-	db "Magnemite@"
 	db "Magneton@@"
 	db "Magnezone@"
 	db "Shuckle@@@"
@@ -238,6 +237,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

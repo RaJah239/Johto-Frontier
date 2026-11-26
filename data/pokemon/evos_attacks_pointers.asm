@@ -162,7 +162,6 @@ EvosAttacksPointers::
 	dw ElectrodeEvosAttacks
 	dw ElekidEvosAttacks
 	dw ElectabuzzEvosAttacks
-	dw MagnemiteEvosAttacks
 	dw MagnetonEvosAttacks
 	dw MagnezoneEvosAttacks
 	dw ShuckleEvosAttacks

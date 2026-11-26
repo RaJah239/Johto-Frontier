@@ -161,7 +161,6 @@ PokedexDataPointerTable:
  	dba ElectrodePokedexEntry
  	dba ElekidPokedexEntry
  	dba ElectabuzzPokedexEntry
- 	dba MagnemitePokedexEntry
  	dba MagnetonPokedexEntry
  	dba MagnezonePokedexEntry
  	dba ShucklePokedexEntry

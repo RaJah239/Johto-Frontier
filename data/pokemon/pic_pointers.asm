@@ -323,8 +323,6 @@ PokemonPicPointers::
  	dba ElekidBackpic
  	dba ElectabuzzFrontpic
  	dba ElectabuzzBackpic
- 	dba MagnemiteFrontpic
- 	dba MagnemiteBackpic
  	dba MagnetonFrontpic
  	dba MagnetonBackpic
  	dba MagnezoneFrontpic

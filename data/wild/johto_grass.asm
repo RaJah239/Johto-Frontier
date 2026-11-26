@@ -958,7 +958,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 24, VOLTORB
-	db 24, MAGNEMITE
+	db 24, PIKACHU
 	db 24, PIKACHU
 	db 24, TROPIUS
 	db 24, YANMA
@@ -966,7 +966,7 @@ JohtoGrassWildMons:
 	db 5, ELEKID
 	; day
 	db 24, VOLTORB
-	db 24, MAGNEMITE
+	db 24, PIKACHU
 	db 24, PIKACHU
 	db 24, TROPIUS
 	db 24, YANMA
@@ -974,7 +974,7 @@ JohtoGrassWildMons:
 	db 5, ELEKID
 	; nite
 	db 24, VOLTORB
-	db 24, MAGNEMITE
+	db 24, PIKACHU
 	db 24, PIKACHU
 	db 24, TROPIUS
 	db 24, YANMA
@@ -1574,7 +1574,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 5, PHANPY
-	db 5, MAGNEMITE
+	db 5, PIKACHU
 	db 5, DRILBUR
 	db 5, BALTOY
 	db 5, BRONZOR
@@ -1582,7 +1582,7 @@ JohtoGrassWildMons:
 	db 5, PHANPY
 	; day
 	db 5, PHANPY
-	db 5, MAGNEMITE
+	db 5, PIKACHU
 	db 5, DRILBUR
 	db 5, BALTOY
 	db 5, BRONZOR
@@ -1590,7 +1590,7 @@ JohtoGrassWildMons:
 	db 5, PHANPY
 	; nite
 	db 5, PHANPY
-	db 5, MAGNEMITE
+	db 5, PIKACHU
 	db 5, DRILBUR
 	db 5, BALTOY
 	db 5, BRONZOR

@@ -353,11 +353,6 @@ DEF KRIS EQU __trainer_class__
 	const CLYDE ; unused
 
 	trainerclass HIKER ; 2c
-	const RUSTY1 ; olivine gym trainer
-	const RUSTY2 ; olivine gym trainer
-	const RUSTY3 ; olivine gym trainer
-	const RUSTY4 ; olivine gym trainer
-	const RUSTY5 ; olivine gym trainer
 	const ANTHONY
 	const RUSSELL
 	const PHILLIP

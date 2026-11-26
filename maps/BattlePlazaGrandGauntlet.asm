@@ -444,7 +444,7 @@ PartyKeeperSpeciesList:
 	db TAUROS
 	db VOLTORB
 	db ELEKID
-	db MAGNEMITE
+	db PIKACHU
 	db SHUCKLE
 	db CORSOLA
 	db STARYU

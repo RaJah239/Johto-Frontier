@@ -160,7 +160,6 @@ AnimationIdlePointers:
 	dw ElectrodeAnimationIdle
 	dw ElekidAnimationIdle
 	dw ElectabuzzAnimationIdle
-	dw MagnemiteAnimationIdle
 	dw MagnetonAnimationIdle
 	dw MagnezoneAnimationIdle
 	dw ShuckleAnimationIdle

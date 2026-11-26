@@ -4,8 +4,6 @@ OlivineGym_MapEvents:
 	warp_event  5, 15, OLIVINE_CITY, 2
 
 	def_coord_events
-	coord_event  4, 10, SCENE_OLIVINEGYM_NOOP, TrainerHikerRustyCheck1
-	coord_event  5, 10, SCENE_OLIVINEGYM_NOOP, TrainerHikerRustyCheck2
 	coord_event  5,  7, SCENE_OLIVINEGYM_NOOP, TrainerTeacherRavenCheck1
 	coord_event  4,  7, SCENE_OLIVINEGYM_NOOP, TrainerTeacherRavenCheck2
 
@@ -15,14 +13,12 @@ OlivineGym_MapEvents:
 
 	def_object_events
 	object_event  5,  3, SPRITE_JASMINE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, OlivineGymJasmineScript, -1
-	object_event  3, 10, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, TrainerHikerRusty, -1
 	object_event  6,  7, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_PURPLE, OBJECTTYPE_SCRIPT, 0, TrainerTeacherRaven, -1
 	object_event  7, 13, SPRITE_GYM_GUIDE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, OlivineGymGuideScript, -1
 	object_event  4, 14, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, OlivineGymIronScript, EVENT_OLIVINE_GYM_FIVE_IRONS
 
 	object_const_def
 	const OLIVINEGYM_JASMINE
-	const OLIVINEGYM_HIKER
 	const OLIVINEGYM_TEACHER
 	const OLIVINEGYM_GYM_GUIDE
 	const OLIVINEGYM_POKE_BALL
@@ -184,87 +180,6 @@ JasmineRematchLossText:
     text "Well done…"
 	done
 
-TrainerHikerRusty:
-	faceplayer
-	checkevent EVENT_BEAT_HIKER_RUSTY
-	iftrue .AfterBattleText
-	special SaveMusic
-	playmusic MUSIC_HIKER_ENCOUNTER
-	sjump TrainerHikerRustyBattle
-
-.AfterBattleText:
-	jumpthistext
-		text "Jasmine is quite"
-		line "the trainer."
-
-		para "I swapped to steel"
-		line "#mon becaue of"
-		cont "her."
-		done
-
-TrainerHikerRustyCheck1:
-	checkevent EVENT_BEAT_HIKER_RUSTY
-	iftrue_end
-	special SaveMusic
-	playmusic MUSIC_HIKER_ENCOUNTER
-	showemote EMOTE_SHOCK, OLIVINEGYM_HIKER, 30
-	turnobject PLAYER, LEFT
-	sjump TrainerHikerRustyBattle
-
-RustyToPlayerMovement:
-	step RIGHT
-	step_end
-
-TrainerHikerRustyCheck2:
-	checkevent EVENT_BEAT_HIKER_RUSTY
-	iftrue_end
-	special SaveMusic
-	playmusic MUSIC_HIKER_ENCOUNTER
-	showemote EMOTE_SHOCK, OLIVINEGYM_HIKER, 30
-	applymovement OLIVINEGYM_HIKER, RustyToPlayerMovement
-	turnobject PLAYER, LEFT
-	; fallthrough
-
-TrainerHikerRustyBattle:
-	showthistext
-		text "Hey! You're not"
-		line "not getting to see"
-		cont "Jasmine unless you"
-		cont "get past me!"
-		done
-	winlosstext HikerRustyBeatenText, 0
-	readvar VAR_BADGES
-	ifgreater 7, .EightBadges
-	ifgreater 5, .SixOrSevenBadges
-	ifgreater 3, .FourOrFiveBadges
-	ifgreater 1, .TwoOrThreeBadges
-.ZeroOrOneBadge:
-	loadtrainer HIKER, RUSTY1
-	sjump .StartBattle
-.TwoOrThreeBadges:
-	loadtrainer HIKER, RUSTY2
-	sjump .StartBattle
-.FourOrFiveBadges:
-	loadtrainer HIKER, RUSTY3
-	sjump .StartBattle
-.SixOrSevenBadges:
-	loadtrainer HIKER, RUSTY4
-	sjump .StartBattle
-.EightBadges:
-	loadtrainer HIKER, RUSTY5
-	; fallthrough
-
-.StartBattle:
-	startbattle
-	reloadmapafterbattle
-	special RestoreMusic
-	setevent EVENT_BEAT_HIKER_RUSTY
-	end
-
-HikerRustyBeatenText:
-	text "Oh no! You got"
-	line "past me!"
-	done
 
 TrainerTeacherRaven:
 	faceplayer

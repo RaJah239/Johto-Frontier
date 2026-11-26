@@ -166,7 +166,6 @@ PokemonCries::
 	mon_cry CRY_VOLTORB,      168,   272 ; ELECTRODE
 	mon_cry CRY_SUNFLORA,    -728,   180 ; ELEKID
 	mon_cry CRY_VOLTORB,      143,   383 ; ELECTABUZZ
-	mon_cry CRY_METAPOD,      128,   224 ; MAGNEMITE
 	mon_cry CRY_METAPOD,       32,   320 ; MAGNETON
 	mon_cry CRY_METAPOD,      -17,   512 ; MAGNEZONE
 	mon_cry CRY_DUNSPARCE,    656,   168 ; SHUCKLE
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 268
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 269
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 270
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 271
 	assert_table_length $ff

@@ -162,7 +162,6 @@ IconPointers:
 	dw ElectrodeIcon
 	dw ElekidIcon
 	dw ElectabuzzIcon
-	dw MagnemiteIcon
 	dw MagnetonIcon
 	dw MagnezoneIcon
 	dw ShuckleIcon

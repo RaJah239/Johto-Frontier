@@ -9,7 +9,6 @@ SpikesImmunePokemon:
 ;	db CHARIZARD
 ;	db BEAUTIFLY
 ;	db DUSTOX
-;	db MAGNEMITE
 ;	db MAGNETON
 ;	db MAGNEZONE
 ;	db ALTARIA
