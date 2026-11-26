@@ -245,4 +245,5 @@ NewPokedexOrder:
 	db MIMIKYU
 	db DUGTRIO_A
 	db MAGMORTAR
+	db PRIMARINA
 	assert_table_length NUM_POKEMON

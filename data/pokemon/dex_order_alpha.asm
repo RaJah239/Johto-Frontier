@@ -172,6 +172,7 @@ AlphabeticalPokedexOrder:
 	db PRIMEAPE
 	db QUAGSIRE
 	db QUILAVA
+	db PRIMARINA
 	db RAICHU
 	db RAIKOU
 	db RAPIDASH

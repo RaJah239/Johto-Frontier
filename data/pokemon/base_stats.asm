@@ -275,4 +275,5 @@ INCLUDE "data/pokemon/base_stats/rhyperior.asm"
 INCLUDE "data/pokemon/base_stats/mimikyu.asm"
 INCLUDE "data/pokemon/base_stats/dugtrio_a.asm"
 INCLUDE "data/pokemon/base_stats/magmortar.asm"
+INCLUDE "data/pokemon/base_stats/primarina.asm"
 	assert_table_length NUM_POKEMON

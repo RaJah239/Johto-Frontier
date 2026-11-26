@@ -239,7 +239,6 @@ Footprints:
  INCBIN "gfx/footprints/blank.1bpp" ; 255
  INCBIN "gfx/footprints/blank.1bpp" ; 256
 	 INCBIN "gfx/footprints/blank.1bpp" ; 257
-	 INCBIN "gfx/footprints/blank.1bpp" ; 258
 	 INCBIN "gfx/footprints/blank.1bpp" ; 259
 	 INCBIN "gfx/footprints/blank.1bpp" ; 261
 	 INCBIN "gfx/footprints/blank.1bpp" ; 263
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; MIMIKYU (no supplied footprint)
 	 INCBIN "gfx/footprints/blank.1bpp" ; DUGTRIO_A (no supplied footprint)
 	 INCBIN "gfx/footprints/blank.1bpp" ; MAGMORTAR (no supplied footprint)
+	 INCBIN "gfx/footprints/blank.1bpp" ; PRIMARINA (no supplied footprint)
 	assert_table_length $100

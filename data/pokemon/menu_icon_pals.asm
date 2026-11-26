@@ -250,6 +250,7 @@ MonMenuIconPals:
 	icon_pals BROWN, RED ; MIMIKYU
 	icon_pals BROWN, BROWN ; DUGTRIO_A
 	icon_pals RED, RED ; MAGMORTAR
+	icon_pals BLUE, PINK ; PRIMARINA
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

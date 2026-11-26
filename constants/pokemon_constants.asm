@@ -273,6 +273,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const MIMIKYU ; f1
 	const DUGTRIO_A ; f2
 	const MAGMORTAR ; f3
+	const PRIMARINA ; f4
 DEF NUM_POKEMON EQU const_value - 1
 	const EGG        ; e9
 

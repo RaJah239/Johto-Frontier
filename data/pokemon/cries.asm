@@ -249,6 +249,7 @@ PokemonCries::
 	mon_cry CRY_RAICHU, 0, 255 ; MIMIKYU
 	mon_cry CRY_DIGLETT, 0, 255 ; DUGTRIO_A
 	mon_cry CRY_MAGCARGO, 0, 255 ; MAGMORTAR
+	mon_cry CRY_LAPRAS, 0, 255 ; PRIMARINA
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -258,7 +259,6 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 256
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 257
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 258
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 259
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 260
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 262
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 264

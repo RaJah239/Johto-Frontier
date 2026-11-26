@@ -245,4 +245,5 @@ dw VulpixEvosAttacks
 	dw MimikyuEvosAttacks
 	dw DugtrioAEvosAttacks
 	dw MagmortarEvosAttacks
+	dw PrimarinaEvosAttacks
 	assert_table_length NUM_POKEMON
