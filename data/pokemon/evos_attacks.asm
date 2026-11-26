@@ -274,6 +274,11 @@ MawileEvosAttacks:
 	db 1, SPLASH
 	db 0 ; no more level-up moves
 
+DuosionEvosAttacks:
+	db 0 ; no more evolutions
+	db 1, SPLASH
+	db 0 ; no more level-up moves
+
 MewtwoEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, SPLASH

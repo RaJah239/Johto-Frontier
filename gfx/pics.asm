@@ -657,3 +657,6 @@ PolitoedBackpic: INCBIN "gfx/pokemon/politoed/back.2bpp.lz"
 
 MawileFrontpic: INCBIN "gfx/pokemon/mawile/front.animated.2bpp.lz"
 MawileBackpic: INCBIN "gfx/pokemon/mawile/back.2bpp.lz"
+
+DuosionFrontpic: INCBIN "gfx/pokemon/duosion/front.animated.2bpp.lz"
+DuosionBackpic: INCBIN "gfx/pokemon/duosion/back.2bpp.lz"

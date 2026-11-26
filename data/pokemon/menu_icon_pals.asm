@@ -207,6 +207,7 @@ MonMenuIconPals:
 	icon_pals BLUE, TEAL ; POLIWRATH
 	icon_pals GREEN, BLUE ; POLITOED
 	icon_pals GRAY, RED ; MAWILE
+	icon_pals PURPLE, BLUE ; DUOSION
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

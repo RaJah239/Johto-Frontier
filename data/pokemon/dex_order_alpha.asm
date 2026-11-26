@@ -48,6 +48,7 @@ AlphabeticalPokedexOrder:
 	db DRAPION
 	db DRILBUR
 	db DROWZEE
+	db DUOSION
 	db DURALUDON
 	db DUSTOX
 	db EEVEE

@@ -52,6 +52,7 @@ NewPokedexOrder:
 	db URSALUNA
 	db URSALUNA_B
 	db MAWILE
+	db DUOSION
 	db PHANPY
 	db DONPHAN
 	db BELLSPROUT

@@ -206,6 +206,7 @@ PokemonCries::
 	mon_cry CRY_BLASTOISE, 0, 255 ; POLIWRATH
 	mon_cry CRY_BLASTOISE, 0, 255 ; POLITOED
 	mon_cry CRY_GOLEM, 0, 255 ; MAWILE
+	mon_cry CRY_PSYDUCK, 0, 255 ; DUOSION
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -261,5 +262,4 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 302
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 303
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 304
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 305
 	assert_table_length $ff
