@@ -69,7 +69,6 @@ NewPokedexOrder:
 	db GENGAR
 	db SWABLU
 	db ALTARIA
-	db NATU
 	db KATU
 	db XATU
 	db SMEARGLE

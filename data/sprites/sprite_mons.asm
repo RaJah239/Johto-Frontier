@@ -17,7 +17,7 @@ SpriteMons:
 	db PIKACHU
 	db CLEFAIRY
 	db CHARMELEON
-	db NATU
+	db ESPEON
 	db STARMIE
 	db DITTO
 	db MARILL ; in use

@@ -128,7 +128,6 @@ AlphabeticalPokedexOrder:
 	db MOLTRES
 	db MR__MIME
 	db MUK
-	db NATU
 	db NOCTOWL
 	db NOWN
 	db OMANYTE

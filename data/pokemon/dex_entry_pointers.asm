@@ -68,7 +68,6 @@ PokedexDataPointerTable:
  	dba GengarPokedexEntry
  	dba SwabluPokedexEntry
  	dba AltariaPokedexEntry
- 	dba NatuPokedexEntry
  	dba KatuPokedexEntry
  	dba XatuPokedexEntry
  	dba SmearglePokedexEntry

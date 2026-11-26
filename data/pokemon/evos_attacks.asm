@@ -124,7 +124,6 @@ HaunterEvosAttacks:
 GengarEvosAttacks:
 SwabluEvosAttacks:
 AltariaEvosAttacks:
-NatuEvosAttacks:
 KatuEvosAttacks:
 XatuEvosAttacks:
 SmeargleEvosAttacks:

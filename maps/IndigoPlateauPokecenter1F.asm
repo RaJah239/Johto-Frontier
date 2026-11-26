@@ -15,7 +15,7 @@ IndigoPlateauPokecenter1F_MapEvents:
 	object_event  5, 10, SPRITE_POKEFAN_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_PINK, OBJECTTYPE_SCRIPT, 0, VioletScript, -1
 	object_event  1,  9, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TeleportGuyScript, -1
 	object_event 11, 11, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, OBJECTTYPE_COMMAND, jumptextfaceplayer, IndigoPlateauPokecenter1FCooltrainerMText, -1
-	object_event  0,  9, SPRITE_NATU, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, NatuScript, -1
+	object_event  0,  9, SPRITE_ESPEON, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, EspeonScript, -1
 
 	object_const_def
 	const INDIGOPLATEAUPOKECENTER1F_NURSE
@@ -24,7 +24,7 @@ IndigoPlateauPokecenter1F_MapEvents:
 	const INDIGOPLATEAUPOKECENTER1F_VIOLET
 	const INDIGOPLATEAUPOKECENTER1F_GRAMPS
 	const INDIGOPLATEAUPOKECENTER1F_COOLTRAINER_M
-	const INDIGOPLATEAUPOKECENTER1F_NATU
+	const INDIGOPLATEAUPOKECENTER1F_ESPEON
 
 IndigoPlateauPokecenter1F_MapScripts:
 	def_scene_scripts
@@ -191,7 +191,7 @@ PlayerGotNinetyElevenCrystalsText:
 TeleportGuyScript:
 	faceplayeropentext
 	writethistext
-		text "Want my Natu to"
+		text "Want Espeon to"
 		line "Teleport you home?"
 		done
 	yesorno
@@ -219,19 +219,19 @@ IndigoPlateauPokecenter1FCooltrainerMText:
 	cont "start all over!"
 	done
 
-NatuScript:
-	setval NATU
+EspeonScript:
+	setval ESPEON
 	special SetMonAsSeen
 	ispokepicsonoroff
 	iftrue .skipthis
 	reanchormap
-	pokepic NATU
-	cry NATU
+	pokepic ESPEON
+	cry ESPEON
 	waitbutton
 	closepokepic
 .skipthis
 	jumpthistext
-		text "Natu: Natu…"
+		text "Espeon: Espeon…"
 		done
 
 IndigoPlateauPokecenter1FPrepareElite4Callback:

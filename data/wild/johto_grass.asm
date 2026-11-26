@@ -145,57 +145,57 @@ JohtoGrassWildMons:
 	def_grass_wildmons SPROUT_TOWER_2F
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 7, NATU
+	db 7, HOOTHOOT
 	db 7, SPINARAK
 	db 7, HAUNTER
 	db 7, JOLTIK
 	db 7, LITWICK
 	db 7, VENIPEDE
-	db 7, NATU
+	db 7, HOOTHOOT
 	; day
-	db 7, NATU
+	db 7, HOOTHOOT
 	db 7, SPINARAK
 	db 7, HAUNTER
 	db 7, JOLTIK
 	db 7, LITWICK
 	db 7, VENIPEDE
-	db 7, NATU
+	db 7, HOOTHOOT
 	; nite
-	db 7, NATU
+	db 7, HOOTHOOT
 	db 7, SPINARAK
 	db 7, HAUNTER
 	db 7, JOLTIK
 	db 7, LITWICK
 	db 7, VENIPEDE
-	db 7, NATU
+	db 7, HOOTHOOT
 	end_grass_wildmons
 
 	def_grass_wildmons SPROUT_TOWER_3F
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 7, NATU
+	db 7, HOOTHOOT
 	db 7, SPINARAK
 	db 7, HAUNTER
 	db 7, JOLTIK
 	db 7, LITWICK
 	db 7, VENIPEDE
-	db 5, NATU
+	db 5, HOOTHOOT
 	; day
-	db 7, NATU
+	db 7, HOOTHOOT
 	db 7, SPINARAK
 	db 7, HAUNTER
 	db 7, JOLTIK
 	db 7, LITWICK
 	db 7, VENIPEDE
-	db 5, NATU
+	db 5, HOOTHOOT
 	; nite
-	db 7, NATU
+	db 7, HOOTHOOT
 	db 7, SPINARAK
 	db 7, HAUNTER
 	db 7, JOLTIK
 	db 7, LITWICK
 	db 7, VENIPEDE
-	db 5, NATU
+	db 5, HOOTHOOT
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_8

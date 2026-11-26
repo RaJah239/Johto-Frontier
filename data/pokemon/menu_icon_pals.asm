@@ -74,7 +74,6 @@ MonMenuIconPals:
 	icon_pals RED,    PURPLE ; GENGAR
 	icon_pals BLUE,   BROWN  ; SWABLU
 	icon_pals BLUE,   BROWN  ; ALTARIA
-	icon_pals GREEN,  TEAL   ; NATU
 	icon_pals RED,    RED    ; KATU
 	icon_pals GREEN,  GREEN  ; XATU
 	icon_pals BROWN,  GREEN  ; SMEARGLE

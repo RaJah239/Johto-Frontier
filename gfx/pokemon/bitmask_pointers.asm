@@ -67,7 +67,6 @@ BitmasksPointers:
 	dw GengarBitmasks
 	dw SwabluBitmasks
 	dw AltariaBitmasks
-	dw NatuBitmasks
 	dw KatuBitmasks
 	dw XatuBitmasks
 	dw SmeargleBitmasks

@@ -447,7 +447,6 @@ UnownGFrontpic:      INCBIN "gfx/pokemon/unown_g/front.animated.2bpp.lz"
 DrapionBackpic:      INCBIN "gfx/pokemon/drapion/back.2bpp.lz"
 CradilyBackpic:      INCBIN "gfx/pokemon/cradily/back.2bpp.lz"
 SalamenceBackpic:    INCBIN "gfx/pokemon/salamence/back.2bpp.lz"
-NatuFrontpic:        INCBIN "gfx/pokemon/natu/front.animated.2bpp.lz"
 UrsaringBackpic:     INCBIN "gfx/pokemon/ursaring/back.2bpp.lz"
 SagePic:             INCBIN "gfx/trainers/sage.2bpp.lz"
 PhanpyBackpic:       INCBIN "gfx/pokemon/phanpy/back.2bpp.lz"
@@ -580,7 +579,6 @@ MismagiusFrontpic:   INCBIN "gfx/pokemon/mismagius/front.animated.2bpp.lz"
 
 SECTION "Pics 23", ROMX
 XatuFrontpic:        INCBIN "gfx/pokemon/xatu/front.animated.2bpp.lz"
-NatuBackpic:         INCBIN "gfx/pokemon/natu/back.2bpp.lz"
 DonphanFrontpic:     INCBIN "gfx/pokemon/donphan/front.animated.2bpp.lz"
 
 

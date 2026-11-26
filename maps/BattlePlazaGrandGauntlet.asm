@@ -410,7 +410,7 @@ PartyKeeperSpeciesList:
 	db MAGIKARP
 	db HAUNTER
 	db SWABLU
-	db NATU
+	db ESPEON
 	db SMEARGLE
 	db GROWLITHE
 	db HOUNDOUR

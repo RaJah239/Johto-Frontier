@@ -1019,7 +1019,7 @@ BlueSkyMailDesc:
 	db   "Sky-print MAIL.@"
 
 MusicMailDesc:
-	db   "NATU-print MAIL.@"
+	db   "MUSIC-note MAIL.@"
 
 MirageMailDesc:
 	db   "MEW-print MAIL.@"

@@ -67,7 +67,6 @@ FramesPointers:
 	dw GengarFrames
 	dw SwabluFrames
 	dw AltariaFrames
-	dw NatuFrames
 	dw KatuFrames
 	dw XatuFrames
 	dw SmeargleFrames
