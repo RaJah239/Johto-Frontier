@@ -103,6 +103,7 @@ AlphabeticalPokedexOrder:
 	db JIRACHI
 	db JOLTEON
 	db JOLTIK
+	db JUMPLUFF
 	db JYNX
 	db KADABRA
 	db KINGDRA

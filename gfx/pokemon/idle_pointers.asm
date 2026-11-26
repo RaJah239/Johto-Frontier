@@ -232,4 +232,5 @@ dw VulpixAnimationIdle
 	dw HonchkrowAnimationIdle
 	dw MarshtompAnimationIdle
 	dw SwampertAnimationIdle
+	dw JumpluffAnimationIdle
 	assert_table_length NUM_POKEMON

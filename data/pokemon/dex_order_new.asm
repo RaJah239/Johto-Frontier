@@ -234,4 +234,5 @@ NewPokedexOrder:
 	db HONCHKROW
 	db MARSHTOMP
 	db SWAMPERT
+	db JUMPLUFF
 	assert_table_length NUM_POKEMON

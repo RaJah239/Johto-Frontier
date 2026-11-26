@@ -233,4 +233,5 @@ PokedexDataPointerTable:
 	dba HonchkrowPokedexEntry
 	dba MarshtompPokedexEntry
 	dba SwampertPokedexEntry
+	dba JumpluffPokedexEntry
 	assert_table_length NUM_POKEMON
