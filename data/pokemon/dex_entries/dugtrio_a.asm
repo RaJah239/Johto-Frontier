@@ -1,5 +1,5 @@
 	db "MOLE@"
-	dw 70, 666 ; height, weight
+	dw 204, 1468 ; height, weight
 	db   "Its metallic"
 	feed "whiskers are heavy"
 	feed "and sway in every"

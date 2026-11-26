@@ -1,5 +1,5 @@
 	db "SOLOIST@"
-	dw 180, 440 ; height, weight
+	dw 511, 970 ; height, weight
 	db   "With song, it"
 	feed "controls balloons"
 	feed "of water. It moves"

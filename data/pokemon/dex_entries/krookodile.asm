@@ -1,5 +1,5 @@
 	db "INTIMIDATION@"
-	dw 150, 963 ; height, weight
+	dw 411, 2123 ; height, weight
 	db   "They never let"
 	feed "prey escape. Their"
 	feed "jaws are so strong"

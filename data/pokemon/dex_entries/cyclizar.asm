@@ -1,5 +1,5 @@
 	db "MOUNT@"
-	dw 160, 630 ; height, weight
+	dw 503, 1389 ; height, weight
 	db   "Since ancient"
 	feed "times, it has let"
 	feed "people ride on its"

@@ -1,5 +1,5 @@
 	db "DRILL@"
-	dw 240, 2828 ; height, weight
+	dw 710, 6235 ; height, weight
 	db   "It can launch"
 	feed "rocks like missiles"
 	feed "by tightening its"

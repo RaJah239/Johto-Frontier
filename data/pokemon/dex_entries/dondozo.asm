@@ -1,5 +1,5 @@
 	db "BIG CATFISH@"
-	dw 1200, 2200 ; height, weight
+	dw 3904, 4850 ; height, weight
 	db   "It is a glutton"
 	feed "that is bad at"
 	feed "catching prey. It"

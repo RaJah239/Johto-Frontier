@@ -1,5 +1,5 @@
 	db "BLAST@"
-	dw 160, 680 ; height, weight
+	dw 503, 1499 ; height, weight
 	db   "It shoots blazing"
 	feed "fireballs from its"
 	feed "arms. Its body"
