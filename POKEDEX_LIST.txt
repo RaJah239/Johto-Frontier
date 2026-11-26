@@ -114,7 +114,7 @@ Dipplin    ; Headbutt trees
 Hydrapple
 Ferroseed  ; Headbutt trees
 Ferrothorn
-Pinsir     ; Headbutt trees (bug/ground)
+Heracross  ; Headbutt trees
 Roselia    ; Route 6
 Roserade
 Kadabra    ; Route 6
