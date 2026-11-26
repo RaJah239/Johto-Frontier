@@ -235,6 +235,7 @@ dw VulpixIcon
 	dw MarshtompIcon
 	dw SwampertIcon
 	dw JumpluffIcon
+	dw GrovyleIcon
 	assert_table_length NUM_POKEMON + 1
 	dw EggIcon
 	assert_table_length EGG + 1

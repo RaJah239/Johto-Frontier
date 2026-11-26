@@ -472,6 +472,8 @@ PokemonPicPointers::
 	dba SwampertBackpic
 	dba JumpluffFrontpic
 	dba JumpluffBackpic
+	dba GrovyleFrontpic
+	dba GrovyleBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1
