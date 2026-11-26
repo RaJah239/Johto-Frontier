@@ -176,7 +176,6 @@ NewPokedexOrder:
 	db MANTINE
 	db TENTACOOL
 	db TENTACRUEL
-	db HORSEA
 	db SEADRA
 	db KINGDRA
 	db LAPRAS

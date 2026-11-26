@@ -453,7 +453,7 @@ PartyKeeperSpeciesList:
 	db MANTINE
 	db TENTACOOL
 	db LAPRAS
-	db HORSEA
+	db SEADRA
 	db LAPRAS
 	db CLEFAIRY
 	db SOLROCK

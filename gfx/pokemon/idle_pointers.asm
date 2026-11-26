@@ -174,7 +174,6 @@ AnimationIdlePointers:
 	dw MantineAnimationIdle
 	dw TentacoolAnimationIdle
 	dw TentacruelAnimationIdle
-	dw HorseaAnimationIdle
 	dw SeadraAnimationIdle
 	dw KingdraAnimationIdle
 	dw LaprasAnimationIdle

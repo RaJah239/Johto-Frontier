@@ -1,7 +1,6 @@
 ; List of all Pokemon whose critical hits do 2.25x base damage
 
 SniperPokemon:
-;    db HORSEA
 ;    db SEADRA
 ;    db KINGDRA
 ;    db REMORAID

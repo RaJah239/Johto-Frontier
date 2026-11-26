@@ -231,7 +231,6 @@ LanturnEvosAttacks:
 MantineEvosAttacks:
 TentacoolEvosAttacks:
 TentacruelEvosAttacks:
-HorseaEvosAttacks:
 SeadraEvosAttacks:
 KingdraEvosAttacks:
 LaprasEvosAttacks:

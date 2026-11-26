@@ -176,7 +176,6 @@ EvosAttacksPointers::
 	dw MantineEvosAttacks
 	dw TentacoolEvosAttacks
 	dw TentacruelEvosAttacks
-	dw HorseaEvosAttacks
 	dw SeadraEvosAttacks
 	dw KingdraEvosAttacks
 	dw LaprasEvosAttacks

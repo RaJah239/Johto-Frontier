@@ -174,7 +174,6 @@ FramesPointers:
 	dw MantineFrames
 	dw TentacoolFrames
 	dw TentacruelFrames
-	dw HorseaFrames
 	dw SeadraFrames
 	dw KingdraFrames
 	dw LaprasFrames

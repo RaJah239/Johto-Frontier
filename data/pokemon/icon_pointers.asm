@@ -176,7 +176,6 @@ IconPointers:
 	dw MantineIcon
 	dw TentacoolIcon
 	dw TentacruelIcon
-	dw HorseaIcon
 	dw SeadraIcon
 	dw KingdraIcon
 	dw LaprasIcon

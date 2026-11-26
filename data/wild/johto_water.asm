@@ -12,7 +12,7 @@ JohtoWaterWildMons:
 	def_water_wildmons CHERRYGROVE_CITY
 	db 4 percent ; encounter rate
 	db 20, CHINCHOU
-	db 20, HORSEA
+	db 20, SEADRA
 	db 25, LANTURN
 	end_water_wildmons
 
@@ -110,7 +110,7 @@ JohtoWaterWildMons:
 	def_water_wildmons ROUTE_6
 	db 4 percent ; encounter rate
 	db 15, STARYU
-	db 20, HORSEA
+	db 20, SEADRA
 	db 15, STARMIE
 	end_water_wildmons
 

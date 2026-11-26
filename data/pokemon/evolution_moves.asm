@@ -174,7 +174,6 @@ EvolutionMoves::
    db NO_MOVE      ; MANTINE
    db NO_MOVE      ; TENTACOOL
    db NO_MOVE      ; TENTACRUEL
-   db NO_MOVE      ; HORSEA
    db NO_MOVE      ; SEADRA
    db NO_MOVE      ; KINGDRA
    db NO_MOVE      ; LAPRAS
