@@ -666,3 +666,7 @@ ReuniclusBackpic: INCBIN "gfx/pokemon/reuniclus/back.2bpp.lz"
 
 CottoneeFrontpic: INCBIN "gfx/pokemon/cottonee/front.animated.2bpp.lz"
 CottoneeBackpic: INCBIN "gfx/pokemon/cottonee/back.2bpp.lz"
+
+SECTION "Pics 30", ROMX
+WhimsicottFrontpic: INCBIN "gfx/pokemon/whimsicott/front.animated.2bpp.lz"
+WhimsicottBackpic: INCBIN "gfx/pokemon/whimsicott/back.2bpp.lz"

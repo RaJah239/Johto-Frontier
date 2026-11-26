@@ -209,6 +209,7 @@ PokemonCries::
 	mon_cry CRY_PSYDUCK, 0, 255 ; DUOSION
 	mon_cry CRY_PSYDUCK, 0, 255 ; REUNICLUS
 	mon_cry CRY_CATERPIE, 0, 255 ; COTTONEE
+	mon_cry CRY_CATERPIE, 0, 255 ; WHIMSICOTT
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -261,5 +262,4 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 299
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 300
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 301
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 302
 	assert_table_length $ff

@@ -205,4 +205,5 @@ EvosAttacksPointers::
 	dw DuosionEvosAttacks
 	dw ReuniclusEvosAttacks
 	dw CottoneeEvosAttacks
+	dw WhimsicottEvosAttacks
 	assert_table_length NUM_POKEMON

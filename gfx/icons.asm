@@ -249,3 +249,5 @@ DuosionIcon:: INCBIN "gfx/icons/duosion.2bpp"
 ReuniclusIcon:: INCBIN "gfx/icons/reuniclus.2bpp"
 
 CottoneeIcon:: INCBIN "gfx/icons/cottonee.2bpp"
+
+WhimsicottIcon:: INCBIN "gfx/icons/whimsicott.2bpp"

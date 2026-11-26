@@ -199,6 +199,7 @@ AlphabeticalPokedexOrder:
 	db WEAVILE
 	db WEEPINBELL
 	db WEEZING
+	db WHIMSICOTT
 	db WHIRLIPEDE
 	db WOOPER
 	db WURMPLE

@@ -204,4 +204,5 @@ PokedexDataPointerTable:
 	dba DuosionPokedexEntry
 	dba ReuniclusPokedexEntry
 	dba CottoneePokedexEntry
+	dba WhimsicottPokedexEntry
 	assert_table_length NUM_POKEMON
