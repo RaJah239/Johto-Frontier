@@ -28,7 +28,6 @@ NewPokedexOrder:
 	db BLAZIKEN
 	db FEEBAS
 	db MILOTIC
-	db DARTRIX
 	db DECIDUEYE
 	db RALTS
 	db KIRLIA

@@ -26,7 +26,6 @@ BitmasksPointers:
 	dw BlazikenBitmasks
 	dw FeebasBitmasks
 	dw MiloticBitmasks
-	dw DartrixBitmasks
 	dw DecidueyeBitmasks
 	dw RaltsBitmasks
 	dw KirliaBitmasks
