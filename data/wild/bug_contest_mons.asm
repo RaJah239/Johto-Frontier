@@ -9,7 +9,7 @@ ContestMons::
 	db  5, DUSTOX,     7, 18
 	db  5, YANMA,      7, 18
 	db  1, YANMEGA,    7, 18
-	db  7, WIMPOD,     7, 18
+	db  7, SPINARAK,     7, 18
 	db  2, GOLISOPOD,  7, 18
 	db  7, SPINARAK,   7, 18
 	db  2, ARIADOS,    7, 18

@@ -56,7 +56,6 @@ IconPointers:
 	dw VictreebelIcon
 	dw FlaaffyIcon
 	dw AmpharosIcon
-	dw WimpodIcon
 	dw GolisopodIcon
 	dw MarillIcon
 	dw AzumarillIcon

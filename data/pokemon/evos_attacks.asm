@@ -113,7 +113,6 @@ WeepinbellEvosAttacks:
 VictreebelEvosAttacks:
 FlaaffyEvosAttacks:
 AmpharosEvosAttacks:
-WimpodEvosAttacks:
 GolisopodEvosAttacks:
 MarillEvosAttacks:
 AzumarillEvosAttacks:

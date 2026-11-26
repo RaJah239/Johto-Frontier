@@ -54,7 +54,6 @@ AnimationPointers:
 	dw VictreebelAnimation
 	dw FlaaffyAnimation
 	dw AmpharosAnimation
-	dw WimpodAnimation
 	dw GolisopodAnimation
 	dw MarillAnimation
 	dw AzumarillAnimation

@@ -54,7 +54,6 @@ BitmasksPointers:
 	dw VictreebelBitmasks
 	dw FlaaffyBitmasks
 	dw AmpharosBitmasks
-	dw WimpodBitmasks
 	dw GolisopodBitmasks
 	dw MarillBitmasks
 	dw AzumarillBitmasks

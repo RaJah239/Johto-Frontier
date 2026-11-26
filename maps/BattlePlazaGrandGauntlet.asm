@@ -402,7 +402,7 @@ PartyKeeperSpeciesList:
 	db PHANPY
 	db BELLSPROUT
 	db FLAAFFY
-	db WIMPOD
+	db GOLISOPOD
 	db MARILL
 	db RHYHORN
 	db DRILBUR

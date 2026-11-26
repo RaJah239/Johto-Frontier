@@ -25,8 +25,8 @@ JohtoWaterWildMons:
 
 	def_water_wildmons ROUTE_3
 	db 4 percent ; encounter rate
-	db 20, WIMPOD
-	db 20, WIMPOD
+	db 20, GOLISOPOD
+	db 20, GOLISOPOD
 	db 25, GOLISOPOD
 	end_water_wildmons
 

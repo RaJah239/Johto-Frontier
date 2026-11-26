@@ -61,7 +61,6 @@ MonMenuIconPals:
 	icon_pals GREEN,  GREEN  ; VICTREEBEL
 	icon_pals PINK,   PINK   ; FLAAFFY
 	icon_pals BROWN,  BLUE   ; AMPHAROS
-	icon_pals PURPLE, RED    ; WIMPOD
 	icon_pals PURPLE, RED    ; GOLISOPOD
 	icon_pals BLUE,   GREEN  ; MARILL
 	icon_pals BLUE,   BROWN  ; AZUMARILL

@@ -208,7 +208,6 @@ AlphabeticalPokedexOrder:
 	db WEEPINBELL
 	db WEEZING
 	db WHIRLIPEDE
-	db WIMPOD
 	db WOOPER
 	db WURMPLE
 	db XATU

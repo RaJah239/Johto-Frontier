@@ -60,7 +60,6 @@ PokemonCries::
 	mon_cry CRY_WEEPINBELL,   102,   332 ; VICTREEBEL
 	mon_cry CRY_MAREEP,        -7,   384 ; FLAAFFY
 	mon_cry CRY_AMPHAROS,    -124,   232 ; AMPHAROS
-	mon_cry CRY_SPINARAK,    $450,  $1b3 ; WIMPOD
 	mon_cry CRY_VENONAT,     $e0b,  $200 ; GOLISOPOD
 	mon_cry CRY_MARILL,       283,   288 ; MARILL
 	mon_cry CRY_MARILL,       182,   384 ; AZUMARILL
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 290
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 291
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 292
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 293
 	assert_table_length $ff

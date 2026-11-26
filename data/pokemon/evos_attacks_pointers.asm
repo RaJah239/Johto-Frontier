@@ -56,7 +56,6 @@ EvosAttacksPointers::
 	dw VictreebelEvosAttacks
 	dw FlaaffyEvosAttacks
 	dw AmpharosEvosAttacks
-	dw WimpodEvosAttacks
 	dw GolisopodEvosAttacks
 	dw MarillEvosAttacks
 	dw AzumarillEvosAttacks

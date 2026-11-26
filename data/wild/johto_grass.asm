@@ -63,7 +63,7 @@ JohtoGrassWildMons:
 	; morn
 	db 5, BELLSPROUT
 	db 7, SILCOON
-	db 5, WIMPOD
+	db 5, GOLISOPOD
 	db 7, CASCOON
 	db 5, FLAAFFY
 	db 5, PIDGEOTTO
@@ -71,13 +71,13 @@ JohtoGrassWildMons:
 	; day
 	db 5, BELLSPROUT
 	db 7, SILCOON
-	db 5, WIMPOD
+	db 5, GOLISOPOD
 	db 7, CASCOON
 	db 5, FLAAFFY
 	db 5, PIDGEOTTO
 	db 5, YANMA
 	; nite
-	db 5, WIMPOD
+	db 5, GOLISOPOD
 	db 7, WOOPER
 	db 5, SPINARAK
 	db 7, HOOTHOOT
@@ -430,7 +430,7 @@ JohtoGrassWildMons:
 	db 15, GOLBAT
 	db 15, WOOPER
 	db 15, MARILL
-	db 15, WIMPOD
+	db 15, GOLISOPOD
 	db 5, SLOWPOKE
 	; day
 	db 15, SLOWPOKE
@@ -438,7 +438,7 @@ JohtoGrassWildMons:
 	db 15, GOLBAT
 	db 15, WOOPER
 	db 15, MARILL
-	db 15, WIMPOD
+	db 15, GOLISOPOD
 	db 5, SLOWPOKE
 	; nite
 	db 15, SLOWPOKE
@@ -446,7 +446,7 @@ JohtoGrassWildMons:
 	db 15, GOLBAT
 	db 15, WOOPER
 	db 15, MARILL
-	db 15, WIMPOD
+	db 15, GOLISOPOD
 	db 5, SLOWPOKE
 	end_grass_wildmons
 
@@ -458,7 +458,7 @@ JohtoGrassWildMons:
 	db 26, GOLBAT
 	db 26, QUAGSIRE
 	db 26, AZUMARILL
-	db 26, WIMPOD
+	db 26, GOLISOPOD
 	db 26, SLOWBRO
 	; day
 	db 26, SLOWBRO
@@ -466,7 +466,7 @@ JohtoGrassWildMons:
 	db 26, GOLBAT
 	db 26, QUAGSIRE
 	db 26, AZUMARILL
-	db 26, WIMPOD
+	db 26, GOLISOPOD
 	db 26, SLOWBRO
 	; nite
 	db 26, SLOWBRO
@@ -474,7 +474,7 @@ JohtoGrassWildMons:
 	db 26, GOLBAT
 	db 26, QUAGSIRE
 	db 26, AZUMARILL
-	db 26, WIMPOD
+	db 26, GOLISOPOD
 	db 26, SLOWBRO
 	end_grass_wildmons
 
