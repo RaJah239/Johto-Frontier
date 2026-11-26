@@ -54,7 +54,8 @@
 - Completed additions: Krookodile `f812eec5d` (supplied art/animation/shiny palette; derived icon; blank footprint and fallback Rhydon cry; base experience capped to the engine maximum; normal/debug builds and stadium checks passed).
 - Completed additions: Rhyperior `b9df955f4` (supplied art/animation/shiny palette; derived icon; blank footprint and fallback Rhydon cry; added Pics 33 section after Pics 32 reached its bank limit; normal/debug builds and stadium checks passed).
 - Completed additions: Mimikyu `58c41107e` (supplied art/animation/shiny palette; derived icon; blank footprint and fallback Raichu cry; normal/debug builds and stadium checks passed).
-- Remaining additions: DUGTRIO_A, MAGMORTAR, PRIMARINA, EXPLOUD, TYRANTRUM, DRAGONITE, HYDREIGON, GOODRA, DRAGAPULT, BAXCALIBUR, VOLCANION, MELMETAL.
+- Completed additions: Alolan Dugtrio `e435c6b6e` (supplied `dugtrio - shattered` art/animation/shiny palette; derived icon; blank footprint and Diglett cry; normal/debug builds and stadium checks passed).
+- Remaining additions: MAGMORTAR, PRIMARINA, EXPLOUD, TYRANTRUM, DRAGONITE, HYDREIGON, GOODRA, DRAGAPULT, BAXCALIBUR, VOLCANION, MELMETAL.
 - Name normalization to confirm against source/reference data: Slyveon→SYLVEON, BaltoyIcon→BALTOY, Marshtop→MARSHTOMP, Mr.Mime→MR__MIME, Ninetales (Aloan)→NINETALES_A, Dugtrio.A→DUGTRIO_A, Rotom (Wash)→ROTOM, Ho-Oh→HO_OH, N-Own→NOWN. `Poliwrath (Urshifu like stats)` is treated as POLIWRATH.
 - Asset gaps in `C:\Users\RaJah239\Desktop\pokemon_sprites`: EXPLOUD, DRAGONITE; DUGTRIO_A may be the `dugtrio - shattered` folder. Check supplied reference projects before implementing these species. Do not silently substitute graphics.
 - Review: Zubat removal leaves 30 generic `L@` trainer placeholders with empty parties in `data/trainers/parties.asm`; verify these classes are unused or remove/rework the placeholder trainers before release.
