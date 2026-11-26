@@ -116,7 +116,6 @@ BitmasksPointers:
 	dw WeezingBitmasks
 	dw GrimerBitmasks
 	dw MukBitmasks
-	dw LitwickBitmasks
 	dw LampentBitmasks
 	dw ChandelureBitmasks
 	dw MiltankBitmasks

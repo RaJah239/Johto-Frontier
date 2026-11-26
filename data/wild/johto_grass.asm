@@ -149,7 +149,7 @@ JohtoGrassWildMons:
 	db 7, SPINARAK
 	db 7, HAUNTER
 	db 7, JOLTIK
-	db 7, LITWICK
+	db 7, CHANDELURE
 	db 7, VENIPEDE
 	db 7, HOOTHOOT
 	; day
@@ -157,7 +157,7 @@ JohtoGrassWildMons:
 	db 7, SPINARAK
 	db 7, HAUNTER
 	db 7, JOLTIK
-	db 7, LITWICK
+	db 7, CHANDELURE
 	db 7, VENIPEDE
 	db 7, HOOTHOOT
 	; nite
@@ -165,7 +165,7 @@ JohtoGrassWildMons:
 	db 7, SPINARAK
 	db 7, HAUNTER
 	db 7, JOLTIK
-	db 7, LITWICK
+	db 7, CHANDELURE
 	db 7, VENIPEDE
 	db 7, HOOTHOOT
 	end_grass_wildmons
@@ -177,7 +177,7 @@ JohtoGrassWildMons:
 	db 7, SPINARAK
 	db 7, HAUNTER
 	db 7, JOLTIK
-	db 7, LITWICK
+	db 7, CHANDELURE
 	db 7, VENIPEDE
 	db 5, HOOTHOOT
 	; day
@@ -185,7 +185,7 @@ JohtoGrassWildMons:
 	db 7, SPINARAK
 	db 7, HAUNTER
 	db 7, JOLTIK
-	db 7, LITWICK
+	db 7, CHANDELURE
 	db 7, VENIPEDE
 	db 5, HOOTHOOT
 	; nite
@@ -193,7 +193,7 @@ JohtoGrassWildMons:
 	db 7, SPINARAK
 	db 7, HAUNTER
 	db 7, JOLTIK
-	db 7, LITWICK
+	db 7, CHANDELURE
 	db 7, VENIPEDE
 	db 5, HOOTHOOT
 	end_grass_wildmons

@@ -122,7 +122,6 @@ PokemonCries::
 	mon_cry CRY_GOLEM,        255,   383 ; WEEZING
 	mon_cry CRY_GRIMER,         0,   256 ; GRIMER
 	mon_cry CRY_MUK,          239,   383 ; MUK
-	mon_cry CRY_WOOPER,      $030,  $0d0 ; LITWICK Ax6
 	mon_cry CRY_CLEFAIRY,   -$02e,  $1dd ; LAMPENT Ax6
 	mon_cry CRY_ENTEI,       $078,  $4c0 ; CHANDELURE Ax6
 	mon_cry CRY_GLIGAR,      -461,   416 ; MILTANK
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 307
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 308
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 309
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 310
 	assert_table_length $ff

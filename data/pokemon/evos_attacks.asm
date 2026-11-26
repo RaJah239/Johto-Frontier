@@ -173,7 +173,6 @@ KoffingEvosAttacks:
 WeezingEvosAttacks:
 GrimerEvosAttacks:
 MukEvosAttacks:
-LitwickEvosAttacks:
 LampentEvosAttacks:
 ChandelureEvosAttacks:
 MiltankEvosAttacks:

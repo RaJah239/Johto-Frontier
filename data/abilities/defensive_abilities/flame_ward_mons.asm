@@ -8,7 +8,6 @@
 ;	db TYPHLOSION
 ;	db HOUNDOUR
 ;	db HOUNDOOM
-;	db LITWICK
 ;	db LAMPENT
 ;	db CHANDELURE
 	db -1 ; end

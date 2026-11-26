@@ -97,7 +97,6 @@ AlphabeticalPokedexOrder:
 	db LAPRAS
 	db LARVESTA
 	db LILEEP
-	db LITWICK
 	db LOPUNNY
 	db LUCARIO
 	db LUGIA

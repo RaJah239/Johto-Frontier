@@ -235,8 +235,6 @@ PokemonPicPointers::
  	dba GrimerBackpic
  	dba MukFrontpic
  	dba MukBackpic
- 	dba LitwickFrontpic
- 	dba LitwickBackpic
  	dba LampentFrontpic
  	dba LampentBackpic
  	dba ChandelureFrontpic

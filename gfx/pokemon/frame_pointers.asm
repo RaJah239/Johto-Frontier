@@ -116,7 +116,6 @@ FramesPointers:
 	dw WeezingFrames
 	dw GrimerFrames
 	dw MukFrames
-	dw LitwickFrames
 	dw LampentFrames
 	dw ChandelureFrames
 	dw MiltankFrames

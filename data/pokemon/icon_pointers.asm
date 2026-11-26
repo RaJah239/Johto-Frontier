@@ -118,7 +118,6 @@ IconPointers:
 	dw WeezingIcon
 	dw GrimerIcon
 	dw MukIcon
-	dw LitwickIcon
 	dw LampentIcon
 	dw ChandelureIcon
 	dw MiltankIcon

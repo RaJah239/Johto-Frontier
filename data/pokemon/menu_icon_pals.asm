@@ -123,7 +123,6 @@ MonMenuIconPals:
 	icon_pals PURPLE, BLUE   ; WEEZING
 	icon_pals PURPLE, GREEN  ; GRIMER
 	icon_pals PURPLE, GREEN  ; MUK
-	icon_pals PURPLE, BLUE   ; LITWICK
 	icon_pals PURPLE, PINK   ; LAMPENT
 	icon_pals BLUE,   RED    ; CHANDELURE
 	icon_pals PINK,   BLUE   ; MILTANK

@@ -439,7 +439,7 @@ PartyKeeperSpeciesList:
 	db SUDOWOODO
 	db KOFFING
 	db GRIMER
-	db LITWICK
+	db CHANDELURE
 	db MILTANK
 	db TAUROS
 	db PIKACHU
