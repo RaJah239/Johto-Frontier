@@ -3,6 +3,5 @@
 RegeneratorPokemon:
 ;	db SLOWPOKE
 ;	db SLOWBRO
-;	db TANGROWTH
 ;	db CORSOLA
 	db -1 ; end

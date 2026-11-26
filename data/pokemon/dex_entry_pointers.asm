@@ -105,7 +105,6 @@ PokedexDataPointerTable:
  	dba ScizorPokedexEntry
  	dba KleavorPokedexEntry
  	dba HeracrossPokedexEntry
- 	dba TangrowthPokedexEntry
  	dba MeowthPokedexEntry
  	dba PersianPokedexEntry
  	dba SnubbullPokedexEntry

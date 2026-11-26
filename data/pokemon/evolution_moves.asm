@@ -104,7 +104,6 @@ EvolutionMoves::
    db NO_MOVE      ; SCIZOR
    db NO_MOVE      ; KLEAVOR
    db NO_MOVE      ; HERACROSS
-   db NO_MOVE      ; TANGROWTH
    db NO_MOVE      ; MEOWTH
    db NO_MOVE      ; PERSIAN
    db NO_MOVE      ; SNUBBULL

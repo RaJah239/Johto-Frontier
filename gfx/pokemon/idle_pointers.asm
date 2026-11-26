@@ -104,7 +104,6 @@ AnimationIdlePointers:
 	dw ScizorAnimationIdle
 	dw KleavorAnimationIdle
 	dw HeracrossAnimationIdle
-	dw TangrowthAnimationIdle
 	dw MeowthAnimationIdle
 	dw PersianAnimationIdle
 	dw SnubbullAnimationIdle

@@ -1321,7 +1321,7 @@ JohtoGrassWildMons:
 	def_grass_wildmons ROUTE_15
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 27, TANGROWTH
+	db 27, BELLSPROUT
 	db 27, PIDGEOTTO
 	db 27, AZUMARILL
 	db 27, SCYTHER
@@ -1329,7 +1329,7 @@ JohtoGrassWildMons:
 	db 27, PIDGEOTTO
 	db 5, AZUMARILL
 	; day
-	db 27, TANGROWTH
+	db 27, BELLSPROUT
 	db 27, PIDGEOTTO
 	db 27, AZUMARILL
 	db 27, SCYTHER
@@ -1341,7 +1341,7 @@ JohtoGrassWildMons:
 	db 27, SCYTHER
 	db 27, HOUNDOOM
 	db 27, ARIADOS
-	db 27, TANGROWTH
+	db 27, BELLSPROUT
 	db 27, WEEPINBELL
 	db 5, AZUMARILL
 	end_grass_wildmons
@@ -1350,7 +1350,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 30, VICTREEBEL
-	db 30, TANGROWTH
+	db 30, BELLSPROUT
 	db 30, PIDGEOTTO
 	db 30, PIDGEOT
 	db 30, BRELOOM
@@ -1358,7 +1358,7 @@ JohtoGrassWildMons:
 	db 30, ARIADOS
 	; day
 	db 30, VICTREEBEL
-	db 30, TANGROWTH
+	db 30, BELLSPROUT
 	db 30, PIDGEOTTO
 	db 30, PIDGEOT
 	db 30, BRELOOM

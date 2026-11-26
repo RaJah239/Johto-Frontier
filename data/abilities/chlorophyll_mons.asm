@@ -7,5 +7,4 @@
 ;	db BELLSPROUT
 ;	db WEEPINBELL
 ;	db VICTREEBEL
-;	db TANGROWTH
     db -1 ; end

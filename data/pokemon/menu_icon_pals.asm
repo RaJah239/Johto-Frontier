@@ -111,7 +111,6 @@ MonMenuIconPals:
 	icon_pals RED,    GRAY   ; SCIZOR
 	icon_pals BROWN,  GREEN  ; KLEAVOR
 	icon_pals BLUE,   PURPLE ; HERACROSS
-	icon_pals BLUE,   TEAL   ; TANGROWTH
 	icon_pals BROWN,  PINK   ; MEOWTH
 	icon_pals BROWN,  PINK   ; PERSIAN
 	icon_pals PINK,   GRAY   ; SNUBBULL

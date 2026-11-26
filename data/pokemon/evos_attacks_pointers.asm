@@ -106,7 +106,6 @@ EvosAttacksPointers::
 	dw ScizorEvosAttacks
 	dw KleavorEvosAttacks
 	dw HeracrossEvosAttacks
-	dw TangrowthEvosAttacks
 	dw MeowthEvosAttacks
 	dw PersianEvosAttacks
 	dw SnubbullEvosAttacks

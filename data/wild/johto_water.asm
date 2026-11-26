@@ -104,7 +104,7 @@ JohtoWaterWildMons:
 	db 4 percent ; encounter rate
 	db 20, MAGIKARP
 	db 20, MARILL
-	db 30, TANGROWTH
+	db 30, MARILL
 	end_water_wildmons
 
 	def_water_wildmons ROUTE_6
@@ -251,7 +251,7 @@ JohtoWaterWildMons:
 	db 4 percent ; encounter rate
 	db 20, TENTACOOL
 	db 30, AZUMARILL
-	db 30, TANGROWTH
+	db 30, MARILL
 	end_water_wildmons
 
 	def_water_wildmons ROUTE_17
@@ -271,7 +271,7 @@ JohtoWaterWildMons:
 	def_water_wildmons SILVER_CAVE_OUTSIDE
 	db 4 percent ; encounter rate
 	db 37, KINGDRA
-	db 37, TANGROWTH
+	db 37, MARILL
 	db 37, LAPRAS
 	end_water_wildmons
 

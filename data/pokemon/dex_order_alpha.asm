@@ -171,7 +171,6 @@ AlphabeticalPokedexOrder:
 	db SUICUNE
 	db SWABLU
 	db SYLVEON
-	db TANGROWTH
 	db TAUROS
 	db TENTACOOL
 	db TENTACRUEL

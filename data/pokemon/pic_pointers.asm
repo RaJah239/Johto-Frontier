@@ -211,8 +211,6 @@ PokemonPicPointers::
  	dba KleavorBackpic
  	dba HeracrossFrontpic
  	dba HeracrossBackpic
- 	dba TangrowthFrontpic
- 	dba TangrowthBackpic
  	dba MeowthFrontpic
  	dba MeowthBackpic
  	dba PersianFrontpic

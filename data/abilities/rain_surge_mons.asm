@@ -2,7 +2,6 @@
 ; gain 50% boost to special attacks
 
 RainSurgePokemon:
-;    db TANGROWTH
 ;    db TENTACOOL
 ;    db TENTACRUEL
     db -1 ; end

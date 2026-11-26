@@ -104,7 +104,6 @@ AnimationPointers:
 	dw ScizorAnimation
 	dw KleavorAnimation
 	dw HeracrossAnimation
-	dw TangrowthAnimation
 	dw MeowthAnimation
 	dw PersianAnimation
 	dw SnubbullAnimation
