@@ -228,4 +228,5 @@ NewPokedexOrder:
 	db DITTO
 	db MEW
 	db MEWTWO
+	db EELEKTROSS
 	assert_table_length NUM_POKEMON

@@ -233,6 +233,7 @@ MonMenuIconPals:
 	icon_pals TEAL, BLUE ; VIKAVOLT
 	icon_pals PURPLE, GRAY ; DUSCLOPS
 	icon_pals PURPLE, GRAY ; DUSKNOIR
+	icon_pals BLUE, GREEN ; EELEKTROSS
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

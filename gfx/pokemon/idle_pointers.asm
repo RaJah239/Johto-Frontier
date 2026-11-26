@@ -226,4 +226,5 @@ dw VulpixAnimationIdle
 	dw VikavoltAnimationIdle
 	dw DusclopsAnimationIdle
 	dw DusknoirAnimationIdle
+	dw EelektrossAnimationIdle
 	assert_table_length NUM_POKEMON

@@ -259,7 +259,7 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 275
 	 INCBIN "gfx/footprints/blank.1bpp" ; 276
 	 INCBIN "gfx/footprints/blank.1bpp" ; 277
-	 INCBIN "gfx/footprints/blank.1bpp" ; 278
 	 INCBIN "gfx/footprints/dusclops.1bpp"
 	 INCBIN "gfx/footprints/dusknoir.1bpp"
+	 INCBIN "gfx/footprints/blank.1bpp" ; EELEKTROSS (shared empty reference footprint)
 	assert_table_length $100
