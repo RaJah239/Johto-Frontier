@@ -207,4 +207,5 @@ EvolutionMoves::
    db NO_MOVE      ; MACHOKE
    db NO_MOVE      ; MACHAMP
    db NO_MOVE      ; SLOWKING
+   db NO_MOVE      ; FOONGUS
 	assert_table_length NUM_POKEMON

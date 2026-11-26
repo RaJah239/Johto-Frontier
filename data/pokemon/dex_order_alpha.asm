@@ -63,6 +63,7 @@ AlphabeticalPokedexOrder:
 	db FERROTHORN
 	db FLAAFFY
 	db FLAREON
+	db FOONGUS
 	db FROSLASS
 	db GABITE
 	db GALLADE

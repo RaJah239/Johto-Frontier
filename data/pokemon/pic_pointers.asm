@@ -420,6 +420,8 @@ PokemonPicPointers::
 	dba MachampBackpic
 	dba SlowkingFrontpic
 	dba SlowkingBackpic
+	dba FoongusFrontpic
+	dba FoongusBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

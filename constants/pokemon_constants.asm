@@ -237,6 +237,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const MACHOKE ; cd
 	const MACHAMP ; ce
 	const SLOWKING ; cf
+	const FOONGUS ; d0
 DEF NUM_POKEMON EQU const_value - 1
 	const EGG        ; e9
 

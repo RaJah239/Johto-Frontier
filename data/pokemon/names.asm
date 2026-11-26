@@ -207,10 +207,10 @@ PokemonNames::
 	db "Machoke@@@"
 	db "Machamp@@@"
 	db "Slowking@@"
+	db "Foongus@@@"
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
-	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

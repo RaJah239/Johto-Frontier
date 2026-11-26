@@ -99,6 +99,7 @@ NewPokedexOrder:
 	db SLOWKING
 	db SHROOMISH
 	db BRELOOM
+	db FOONGUS
 	db SPINARAK
 	db ARIADOS
 	db VENIPEDE

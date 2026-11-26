@@ -214,6 +214,7 @@ MonMenuIconPals:
 	icon_pals RED, BROWN ; MACHOKE
 	icon_pals RED, BROWN ; MACHAMP
 	icon_pals BLUE, PURPLE ; SLOWKING
+	icon_pals GREEN, RED ; FOONGUS
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG
