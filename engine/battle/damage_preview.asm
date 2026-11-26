@@ -80,15 +80,15 @@ DamagePreview_Compute:
 ; damage in wCurDamage and the lowest in de (both capped at 999).
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
 	cp EFFECT_COUNTER
-	jr z, .unavailable
+	jmp z, .unavailable
 	cp EFFECT_MIRROR_COAT
-	jr z, .unavailable
+	jmp z, .unavailable
 
 	; exact damage: Super Fang, fixed-damage and level-damage moves
 	cp EFFECT_SUPER_FANG
-	jr z, .constant
+	jmp z, .constant
 	cp EFFECT_STATIC_DAMAGE
-	jr z, .constant
+	jmp z, .constant
 	cp EFFECT_LEVEL_DAMAGE
 	jr z, .constant
 
@@ -103,7 +103,7 @@ DamagePreview_Compute:
 
 	ld a, [wPlayerMoveStruct + MOVE_POWER]
 	cp 2
-	jr c, .unavailable ; status move (or 1-power placeholder)
+	jmp c, .unavailable ; status move (or 1-power placeholder)
 
 	callfar PlayerAttackDamage
 	jr .damage_calc
@@ -121,9 +121,35 @@ DamagePreview_Compute:
 .damage_calc
 	callfar BattleCommand_DamageCalc
 	callfar BattleCommand_Stab
+	; DamageVariation skips the ability and roll only when the damage is
+	; already 0 or 1 before defensive abilities are applied.
+	ld a, [wCurDamage]
+	and a
+	jr nz, .vary
+	ld a, [wCurDamage + 1]
+	cp 2
+	jr nc, .vary
 	call DamagePreview_AbilityImmunity
+	jr .exact
+.vary
+	call DamagePreview_DefensiveAbilities
+	call DamagePreview_AbilityImmunity
+	call DamagePreview_LowestRoll
+	push de
 	call DamagePreview_CapCurDamage
-	jr DamagePreview_LowestRoll
+	pop de
+	ld a, d
+	cp HIGH(999)
+	jr c, .range_ready
+	jr nz, .cap_lowest
+	ld a, e
+	cp LOW(999) + 1
+	jr c, .range_ready
+.cap_lowest
+	ld de, 999
+.range_ready
+	and a ; no carry
+	ret
 
 .flail
 	callfar BattleCommand_ConstantDamage
@@ -147,6 +173,22 @@ DamagePreview_Compute:
 	scf
 	ret
 
+DamagePreview_DefensiveAbilities:
+; DamageVariation applies these to the math buffer, then copies the result
+; into wCurDamage after the random roll. Stage and collect that value here.
+	xor a
+	ldh [hMultiplicand + 0], a
+	ld a, [wCurDamage]
+	ldh [hMultiplicand + 1], a
+	ld a, [wCurDamage + 1]
+	ldh [hMultiplicand + 2], a
+	farcall EffectiveDefensiveAbilities
+	ldh a, [hQuotient + 2]
+	ld [wCurDamage], a
+	ldh a, [hQuotient + 3]
+	ld [wCurDamage + 1], a
+	ret
+
 DamagePreview_AbilityImmunity:
 ; The opponent's ability blocks the move's type: Levitate (Ground),
 ; Waterproof (Water), Flame Ward (Fire), Grounded (Electric) or
@@ -164,21 +206,11 @@ DamagePreview_AbilityImmunity:
 DamagePreview_LowestRoll:
 ; de = wCurDamage at the lowest damage roll, the same way
 ; BattleCommand_DamageVariation scales it: * (85 percent + 1) / (100 percent).
-; 0 or 1 damage isn't scaled. Returns no carry.
+; The pre-ability 0/1 case has already returned. Returns no carry.
 	ld a, [wCurDamage]
 	ld d, a
 	ld a, [wCurDamage + 1]
 	ld e, a
-	ld a, d
-	and a
-	jr nz, .scale
-	ld a, e
-	cp 2
-	jr nc, .scale
-	and a
-	ret
-
-.scale
 	xor a
 	ldh [hMultiplicand + 0], a
 	ld a, d
