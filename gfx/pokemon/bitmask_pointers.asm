@@ -36,7 +36,6 @@ BitmasksPointers:
 	dw DustoxBitmasks
 	dw YanmaBitmasks
 	dw YanmegaBitmasks
-	dw SunkernBitmasks
 	dw SunfloraBitmasks
 	dw BunearyBitmasks
 	dw LopunnyBitmasks

@@ -10,7 +10,7 @@ JohtoGrassWildMons:
 	db 2, YANMA
 	db 2, BUNEARY
 	db 2, PIDGEY
-	db 2, SUNKERN
+	db 2, BUNEARY
 	db 5, KIRLIA
 	; day
 	db 2, PIKACHU
@@ -18,7 +18,7 @@ JohtoGrassWildMons:
 	db 2, YANMA
 	db 2, BUNEARY
 	db 2, PIDGEY
-	db 2, SUNKERN
+	db 2, BUNEARY
 	db 5, KIRLIA
 	; nite
 	db 2, HOOTHOOT
@@ -38,7 +38,7 @@ JohtoGrassWildMons:
 	db 4, YANMA
 	db 4, BUNEARY
 	db 4, PIDGEY
-	db 4, SUNKERN
+	db 4, BUNEARY
 	db 5, BUNEARY
 	; day
 	db 4, PIKACHU
@@ -46,7 +46,7 @@ JohtoGrassWildMons:
 	db 4, YANMA
 	db 4, BUNEARY
 	db 4, PIDGEY
-	db 4, SUNKERN
+	db 4, BUNEARY
 	db 5, BUNEARY
 	; nite
 	db 4, HOOTHOOT
@@ -285,7 +285,7 @@ JohtoGrassWildMons:
 	def_grass_wildmons ROUTE_4
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 10, SUNKERN
+	db 10, BUNEARY
 	db 10, BUNEARY
 	db 10, SWABLU
 	db 10, DODUO
@@ -293,7 +293,7 @@ JohtoGrassWildMons:
 	db 10, MAREEP
 	db 5, PIKACHU
 	; day
-	db 10, SUNKERN
+	db 10, BUNEARY
 	db 10, BUNEARY
 	db 10, SWABLU
 	db 10, DODUO
@@ -565,16 +565,16 @@ JohtoGrassWildMons:
 	def_grass_wildmons NATIONAL_PARK
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 19, SUNKERN
-	db 19, SUNKERN
+	db 19, BUNEARY
+	db 19, BUNEARY
 	db 19, MEOWTH
 	db 19, PIDGEOTTO
 	db 19, BEAUTIFLY
 	db 19, DUSTOX
 	db 19, SNUBBULL
 	; day
-	db 19, SUNKERN
-	db 19, SUNKERN
+	db 19, BUNEARY
+	db 19, BUNEARY
 	db 19, MEOWTH
 	db 19, PIDGEOTTO
 	db 19, BEAUTIFLY

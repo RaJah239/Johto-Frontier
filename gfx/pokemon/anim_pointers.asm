@@ -36,7 +36,6 @@ AnimationPointers:
 	dw DustoxAnimation
 	dw YanmaAnimation
 	dw YanmegaAnimation
-	dw SunkernAnimation
 	dw SunfloraAnimation
 	dw BunearyAnimation
 	dw LopunnyAnimation

@@ -42,7 +42,6 @@ Footprints:
  INCBIN "gfx/footprints/dustox.1bpp"  
  INCBIN "gfx/footprints/yanma.1bpp"  
  INCBIN "gfx/footprints/yanmega.1bpp"
- INCBIN "gfx/footprints/blank.1bpp" ; SUNKERN
  INCBIN "gfx/footprints/sunflora.1bpp" 
  INCBIN "gfx/footprints/buneary.1bpp"
  INCBIN "gfx/footprints/lopunny.1bpp"
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 283
 	 INCBIN "gfx/footprints/blank.1bpp" ; 284
 	 INCBIN "gfx/footprints/blank.1bpp" ; 285
+	 INCBIN "gfx/footprints/blank.1bpp" ; 286
 	assert_table_length $100

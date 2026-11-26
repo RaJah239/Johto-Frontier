@@ -310,7 +310,6 @@ WhirlipedeBackpic:   INCBIN "gfx/pokemon/whirlipede/back.2bpp.lz"
 RaichuBackpic:       INCBIN "gfx/pokemon/raichu/back.2bpp.lz"
 GarchompBackpic:     INCBIN "gfx/pokemon/garchomp/back.2bpp.lz"
 SwimmermPic:         INCBIN "gfx/trainers/swimmer_m.2bpp.lz"
-SunkernFrontpic:     INCBIN "gfx/pokemon/sunkern/front.animated.2bpp.lz"
 
 
 SECTION "Pics 14", ROMX
@@ -423,7 +422,6 @@ GranbullBackpic:     INCBIN "gfx/pokemon/granbull/back.2bpp.lz"
 GentlemanPic:        INCBIN "gfx/trainers/gentleman.2bpp.lz"
 ExecutivemPic:       INCBIN "gfx/trainers/executive_m.2bpp.lz"
 ShroomishBackpic:    INCBIN "gfx/pokemon/shroomish/back.2bpp.lz"
-SunkernBackpic:      INCBIN "gfx/pokemon/sunkern/back.2bpp.lz"
 LaprasBackpic:       INCBIN "gfx/pokemon/lapras/back.2bpp.lz"
 NownBackpic:         INCBIN "gfx/pokemon/nown/back.2bpp.lz"
 ZapdosBackpic:       INCBIN "gfx/pokemon/zapdos/back.2bpp.lz"

@@ -184,7 +184,6 @@ AlphabeticalPokedexOrder:
 	db SUDOWOODO
 	db SUICUNE
 	db SUNFLORA
-	db SUNKERN
 	db SWABLU
 	db SYLVEON
 	db TANGELA

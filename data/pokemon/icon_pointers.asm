@@ -38,7 +38,6 @@ IconPointers:
 	dw DustoxIcon
 	dw YanmaIcon
 	dw YanmegaIcon
-	dw SunkernIcon
 	dw SunfloraIcon
 	dw BunearyIcon
 	dw LopunnyIcon

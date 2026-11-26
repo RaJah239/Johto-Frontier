@@ -96,7 +96,6 @@ CascoonEvosAttacks:
 DustoxEvosAttacks:
 YanmaEvosAttacks:
 YanmegaEvosAttacks:
-SunkernEvosAttacks:
 SunfloraEvosAttacks:
 BunearyEvosAttacks:
 LopunnyEvosAttacks:

@@ -38,7 +38,6 @@ EvosAttacksPointers::
 	dw DustoxEvosAttacks
 	dw YanmaEvosAttacks
 	dw YanmegaEvosAttacks
-	dw SunkernEvosAttacks
 	dw SunfloraEvosAttacks
 	dw BunearyEvosAttacks
 	dw LopunnyEvosAttacks

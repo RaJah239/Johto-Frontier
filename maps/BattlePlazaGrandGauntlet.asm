@@ -393,7 +393,7 @@ PartyKeeperSpeciesList:
 	db KIRLIA
 	db WURMPLE
 	db YANMA
-	db SUNKERN
+	db BUNEARY
 	db BUNEARY
 	db PIDGEY
 	db HOOTHOOT
