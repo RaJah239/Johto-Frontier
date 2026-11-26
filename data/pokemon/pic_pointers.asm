@@ -107,8 +107,6 @@ PokemonPicPointers::
  	dba WeepinbellBackpic
  	dba VictreebelFrontpic
  	dba VictreebelBackpic
- 	dba MareepFrontpic
- 	dba MareepBackpic
  	dba FlaaffyFrontpic
  	dba FlaaffyBackpic
  	dba AmpharosFrontpic

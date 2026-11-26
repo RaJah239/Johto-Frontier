@@ -68,7 +68,7 @@ ItemDescriptions:
 	dw ElixerDesc
 	dw PocketPCDesc
 	dw MoveDexDesc
-	dw MareepCallDesc
+	dw AmpharosCallDesc
 	dw AmbrosiaDesc
 	dw ClearBellDesc
 	dw SilverWingDesc
@@ -555,8 +555,8 @@ MoveDexDesc:
 	db   "Browse all moves"
 	next "and their details.@"
 
-MareepCallDesc:
-	db   "Calls a MAREEP"
+AmpharosCallDesc:
+	db   "Calls an AMPHAROS"
 	next "to light the way.@"
 
 ClearBellDesc:

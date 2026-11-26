@@ -401,7 +401,7 @@ PartyKeeperSpeciesList:
 	db URSARING
 	db PHANPY
 	db BELLSPROUT
-	db MAREEP
+	db FLAAFFY
 	db WIMPOD
 	db MARILL
 	db RHYHORN

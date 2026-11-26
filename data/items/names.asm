@@ -67,7 +67,7 @@ ItemNames::
 	li "Elixer"
 	li "Pocket PC"
 	li "Move Dex"
-	li "Mareep Call"
+	li "AmpharosCall"
 	li "Ambrosia"
 	li "Clear Bell"
 	li "Silver Wing"

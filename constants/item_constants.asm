@@ -73,7 +73,7 @@
 	const ELIXER       ; 41
 	const POCKET_PC    ; 42
 	const MOVE_DEX     ; 43
-	const MAREEP_CALL  ; 44
+	const AMPHAROS_CALL  ; 44
 	const AMBROSIA     ; 45
 	const CLEAR_BELL   ; 46
 	const SILVER_WING  ; 47

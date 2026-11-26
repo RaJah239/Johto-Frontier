@@ -52,7 +52,6 @@ FramesPointers:
 	dw BellsproutFrames
 	dw WeepinbellFrames
 	dw VictreebelFrames
-	dw MareepFrames
 	dw FlaaffyFrames
 	dw AmpharosFrames
 	dw WimpodFrames

@@ -111,7 +111,6 @@ PhanpyEvosAttacks:
 BellsproutEvosAttacks:
 WeepinbellEvosAttacks:
 VictreebelEvosAttacks:
-MareepEvosAttacks:
 FlaaffyEvosAttacks:
 AmpharosEvosAttacks:
 WimpodEvosAttacks:

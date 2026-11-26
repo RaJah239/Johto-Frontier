@@ -82,7 +82,7 @@
 - Cianwood City daily photographer - raises happiness
 - All status conditions boost catch rate of all Pokémon
 - Can Teleport to the last visited Pokémon Centre from anywhere
-- Press A to use Flash in dark caves after obtaining the Mareep Call
+- Press A to use Flash in dark caves after obtaining the Ampharos Call
 - Press Start to skip Credits
 
 ## Randomness (RNG)

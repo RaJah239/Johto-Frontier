@@ -54,7 +54,6 @@ NewPokedexOrder:
 	db BELLSPROUT
 	db WEEPINBELL
 	db VICTREEBEL
-	db MAREEP
 	db FLAAFFY
 	db AMPHAROS
 	db WIMPOD

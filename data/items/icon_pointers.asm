@@ -69,7 +69,7 @@ ItemIconPointers::
 	dba EtherIcon ; ELIXER
 	dba PocketPcIcon ; POCKET_PC
 	dba PokedexIcon ; MOVE_DEX
-	dba PokeCallIcon ; MAREEP_CALL
+	dba PokeCallIcon ; AMPHAROS_CALL
 	dba SweetHoneyIcon ; AMBROSIA
 	dba ClearBellIcon ; CLEAR_BELL
 	dba SilverWingIcon ; SILVER_WING

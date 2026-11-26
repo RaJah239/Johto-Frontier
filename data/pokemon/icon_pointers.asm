@@ -54,7 +54,6 @@ IconPointers:
 	dw BellsproutIcon
 	dw WeepinbellIcon
 	dw VictreebelIcon
-	dw MareepIcon
 	dw FlaaffyIcon
 	dw AmpharosIcon
 	dw WimpodIcon

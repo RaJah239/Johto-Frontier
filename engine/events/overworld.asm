@@ -376,8 +376,8 @@ TryFlashOW::
 	cp DARKNESS_PALSET
 	jr nz, .quit
 
-	; check if we own the the mareep call
-	ld a, MAREEP_CALL
+	; check if we own the Ampharos Call
+	ld a, AMPHAROS_CALL
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem
@@ -426,8 +426,8 @@ Script_UseFlash:
 	iftrue .skip
 	special UpdateTimePals
 	reanchormap
-	pokepic MAREEP
-	cry MAREEP
+	pokepic AMPHAROS
+	cry AMPHAROS
 	waitsfx
 	closepokepic
 	reanchormap
@@ -439,7 +439,7 @@ Script_UseFlash:
 	end
 
 UseFlashTextScript:
-	text_far _MareepLit
+	text_far _AmpharosLit
 	text_asm
 	call WaitSFX
 	ld de, SFX_FLASH

@@ -53,7 +53,6 @@ PokedexDataPointerTable:
  	dba BellsproutPokedexEntry
  	dba WeepinbellPokedexEntry
  	dba VictreebelPokedexEntry
- 	dba MareepPokedexEntry
  	dba FlaaffyPokedexEntry
  	dba AmpharosPokedexEntry
  	dba WimpodPokedexEntry

@@ -65,7 +65,7 @@ JohtoGrassWildMons:
 	db 7, SILCOON
 	db 5, WIMPOD
 	db 7, CASCOON
-	db 5, MAREEP
+	db 5, FLAAFFY
 	db 5, PIDGEOTTO
 	db 5, YANMA
 	; day
@@ -73,7 +73,7 @@ JohtoGrassWildMons:
 	db 7, SILCOON
 	db 5, WIMPOD
 	db 7, CASCOON
-	db 5, MAREEP
+	db 5, FLAAFFY
 	db 5, PIDGEOTTO
 	db 5, YANMA
 	; nite
@@ -204,7 +204,7 @@ JohtoGrassWildMons:
 	db 8, BELLSPROUT
 	db 8, PIDGEOTTO
 	db 8, GROWLITHE
-	db 8, MAREEP
+	db 8, FLAAFFY
 	db 8, BUNEARY
 	db 8, YANMA
 	db 8, HOUNDOUR
@@ -212,7 +212,7 @@ JohtoGrassWildMons:
 	db 8, BELLSPROUT
 	db 8, PIDGEOTTO
 	db 8, GROWLITHE
-	db 8, MAREEP
+	db 8, FLAAFFY
 	db 8, BUNEARY
 	db 8, YANMA
 	db 8, HOUNDOUR
@@ -290,7 +290,7 @@ JohtoGrassWildMons:
 	db 10, SWABLU
 	db 10, DODUO
 	db 10, MARILL
-	db 10, MAREEP
+	db 10, FLAAFFY
 	db 5, PIKACHU
 	; day
 	db 10, BUNEARY
@@ -298,7 +298,7 @@ JohtoGrassWildMons:
 	db 10, SWABLU
 	db 10, DODUO
 	db 10, MARILL
-	db 10, MAREEP
+	db 10, FLAAFFY
 	db 5, PIKACHU
 	; nite
 	db 10, WOOPER

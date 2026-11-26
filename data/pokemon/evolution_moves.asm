@@ -52,7 +52,6 @@ EvolutionMoves::
    db NO_MOVE      ; BELLSPROUT
    db NO_MOVE      ; WEEPINBELL
    db NO_MOVE      ; VICTREEBEL
-   db NO_MOVE      ; MAREEP
    db NO_MOVE      ; FLAAFFY
    db NO_MOVE      ; AMPHAROS
    db NO_MOVE      ; WIMPOD

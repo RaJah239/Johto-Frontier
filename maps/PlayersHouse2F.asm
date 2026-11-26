@@ -108,7 +108,7 @@ if DEF(_DEBUG)
 	giveitem PIDGEOT_CALL
 	giveitem TAUROS_CALL
 	giveitem GALLADE_CALL
-	giveitem MAREEP_CALL
+	giveitem AMPHAROS_CALL
 	giveitem SCYTHER_CALL
 	giveitem DONPHAN_CALL
 	giveitem LANTURN_CALL

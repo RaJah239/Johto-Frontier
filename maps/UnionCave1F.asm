@@ -139,7 +139,7 @@ TrainerFirebreatherRay:
 
 .Afterext
 	text "Maybe I should use"
-	line "my Mareep Call to"
+	line "my Ampharos Call to"
 	cont "aid new trainers?"
 	done
 

@@ -117,7 +117,6 @@ AlphabeticalPokedexOrder:
 	db MAKUHITA
 	db MAMOSWINE
 	db MANKEY
-	db MAREEP
 	db MARILL
 	db MEGANIUM
 	db MEOWTH

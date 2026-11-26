@@ -58,7 +58,6 @@ PokemonCries::
 	mon_cry CRY_PSYDUCK,       85,   129 ; BELLSPROUT
 	mon_cry CRY_WEEPINBELL,    68,   160 ; WEEPINBELL
 	mon_cry CRY_WEEPINBELL,   102,   332 ; VICTREEBEL
-	mon_cry CRY_MAREEP,        34,   216 ; MAREEP
 	mon_cry CRY_MAREEP,        -7,   384 ; FLAAFFY
 	mon_cry CRY_AMPHAROS,    -124,   232 ; AMPHAROS
 	mon_cry CRY_SPINARAK,    $450,  $1b3 ; WIMPOD
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 289
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 290
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 291
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 292
 	assert_table_length $ff

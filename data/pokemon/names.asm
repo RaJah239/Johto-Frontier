@@ -52,7 +52,6 @@ PokemonNames::
 	db "Bellsprout"
 	db "Weepinbell"
 	db "Victreebel"
-	db "Mareep@@@@"
 	db "Flaaffy@@@"
 	db "Ampharos@@"
 	db "Wimpod@@@@"
@@ -217,6 +216,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

@@ -200,8 +200,8 @@ _CutNothingText::
 	line "Cut here."
 	prompt
 
-_MareepLit::
-	text "Mareep lit the"
+_AmpharosLit::
+	text "Ampharos lit the"
 	line "path ahead!@"
 	text_promptbutton
 	text_end

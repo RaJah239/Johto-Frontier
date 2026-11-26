@@ -81,7 +81,7 @@ ItemEffects:
 	dw RestorePPEffect     ; ELIXER
 	dw PocketPCEffect      ; POCKET_PC
 	dw MoveDexEffect       ; MOVE_DEX
-	dw MareepCallEffect    ; MAREEP_CALL
+	dw AmpharosCallEffect    ; AMPHAROS_CALL
 	dw AmbrosiaEffect      ; AMBROSIA
 	dw NoEffect            ; CLEAR_BELL
 	dw NoEffect            ; SILVER_WING
@@ -3261,7 +3261,7 @@ DonphanCallEffect:
 	ld [wUsingHMItem], a
 	jmp StrengthFunction
 
-MareepCallEffect:
+AmpharosCallEffect:
 	ld a, 1
 	ld [wUsingHMItem], a
 	jmp FlashFunction

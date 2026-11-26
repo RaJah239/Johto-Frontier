@@ -52,7 +52,6 @@ AnimationPointers:
 	dw BellsproutAnimation
 	dw WeepinbellAnimation
 	dw VictreebelAnimation
-	dw MareepAnimation
 	dw FlaaffyAnimation
 	dw AmpharosAnimation
 	dw WimpodAnimation

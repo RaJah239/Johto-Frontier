@@ -39,8 +39,8 @@ SproutTower3F_MapScripts:
 
 SageLiScript:
 	faceplayeropentext
-	checkevent EVENT_GOT_MAREEP_CALL
-	iftrue .GotMareepCall
+	checkevent EVENT_GOT_AMPHAROS_CALL
+	iftrue .GotAmpharosCall
 	writethistext
 		text "So good of you to"
 		line "come here!"
@@ -74,12 +74,11 @@ SageLiScript:
 		cont "this Call."
 		done
 	promptbutton
-	verbosegiveitem MAREEP_CALL
-	setevent EVENT_GOT_MAREEP_CALL
+	verbosegiveitem AMPHAROS_CALL
+	setevent EVENT_GOT_AMPHAROS_CALL
 	jumpthisopenedtext
-		text "Mareep Call lights"
-		line "up even the dark-"
-		cont "est of all places."
+		text "The Ampharos Call"
+		line "lights up caves."
 		
 		para "Simply press A in"
 		line "any dark area to"
@@ -90,11 +89,11 @@ SageLiScript:
 		cont "Bellsprout Call?"
 		
 		para "Bellsprout needs"
-		line "light while Mareep"
+		line "light. Ampharos"
 		cont "provides it."
 		done
 
-.GotMareepCall:
+.GotAmpharosCall:
 	writethistext
 		text "I hope you learn"
 		line "and grow from your"

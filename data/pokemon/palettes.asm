@@ -119,8 +119,6 @@ INCBIN "gfx/pokemon/weepinbell/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/weepinbell/shiny.pal"
 INCBIN "gfx/pokemon/victreebel/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/victreebel/shiny.pal"
-INCBIN "gfx/pokemon/mareep/front.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/mareep/shiny.pal"
 INCBIN "gfx/pokemon/flaaffy/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/flaaffy/shiny.pal"
 INCBIN "gfx/pokemon/ampharos/front.gbcpal", middle_colors
@@ -628,4 +626,8 @@ INCLUDE "gfx/pokemon/egg/shiny.pal"
 	RGB 17, 17, 17
 	RGB 23, 23, 23
 	RGB 17, 17, 17
+	RGB 23,23,23
+	RGB 17,17,17
+	RGB 23,23,23
+	RGB 17,17,17
 	assert_table_length $100
