@@ -2,9 +2,9 @@ SpriteMons:
 ; entries correspond to SPRITE_* constants past SPRITE_POKEMON
 	table_width 1, SpriteMons
 	db UNOWN
-	db TURTWIG
+	db TORTERRA
 	db GROWLITHE
-	db TURTWIG ; was WEEDLE
+	db TORTERRA ; was WEEDLE
 	db RAIKOU
 	db ENTEI
 	db GENGAR

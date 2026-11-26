@@ -12,7 +12,6 @@ PokemonNames::
 	db "Charizard@"
 	db "Wartortle@"
 	db "Blastoise@"
-	db "Turtwig@@@"
 	db "Grotle@@@@"
 	db "Torterra@@"
 	db "Pikachu@@@"
@@ -229,6 +228,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

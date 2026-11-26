@@ -114,7 +114,7 @@ SwarmGrampsScript:
 	ifequal 23, .Togetic
 	ifequal 24, .Torchic
 	ifequal 25, .Croconaw
-	ifequal 26, .Turtwig
+	ifequal 26, .Torterra
 	sjump .resample
 
 ; second swarm in same route example
@@ -362,12 +362,12 @@ SwarmGrampsScript:
 		cont "Route 14!"
 		done
 
-.Turtwig:
+.Torterra:
 	setflag ENGINE_SWARM
 	swarm ROUTE_17
 	jumpthisopenedtext
 		text "There's a swarm of"
-		line "Turtwig at"
+		line "Torterra at"
 		cont "Route 17!"
 		done
 
@@ -442,5 +442,5 @@ GoldenrodPokeBrosHouseSwarmPokemonBook:
 		cont "Togetic,"
 		cont "Torchic,"
 		cont "Croconaw and"
-		cont "Turtwig."
+		cont "Torterra."
 		done

@@ -421,7 +421,7 @@ FleeMonsNotebook:
 		cont "Togetic,"
 		cont "Torchic,"
 		cont "Croconaw and"
-		cont "Turtwig."
+		cont "Torterra."
 		done
 
 EarlsPokemonAcademyGameboyKid1Script:

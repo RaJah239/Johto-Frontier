@@ -12,7 +12,6 @@ AnimationPointers:
 	dw CharizardAnimation
 	dw WartortleAnimation
 	dw BlastoiseAnimation
-	dw TurtwigAnimation
 	dw GrotleAnimation
 	dw TorterraAnimation
 	dw PikachuAnimation

@@ -14,5 +14,4 @@ SometimesFleeMons:
 	db SNUBBULL
 	db TEDDIURSA
 	db TORCHIC
-	db TURTWIG
 	db -1 ; end

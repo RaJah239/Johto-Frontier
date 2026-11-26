@@ -384,7 +384,7 @@ PartyKeeperSpeciesList:
 	db TOGETIC
 	db CHARMELEON
 	db WARTORTLE
-	db TURTWIG
+	db TORTERRA
 	db PIKACHU
 	db EEVEE
 	db TORCHIC

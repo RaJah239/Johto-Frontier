@@ -18,7 +18,6 @@ Footprints:
  INCBIN "gfx/footprints/charizard.1bpp"
  INCBIN "gfx/footprints/wartortle.1bpp"
  INCBIN "gfx/footprints/blastoise.1bpp"
- INCBIN "gfx/footprints/turtwig.1bpp"
  INCBIN "gfx/footprints/grotle.1bpp"
  INCBIN "gfx/footprints/torterra.1bpp"
  INCBIN "gfx/footprints/pikachu.1bpp" 
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 276
 	 INCBIN "gfx/footprints/blank.1bpp" ; 277
 	 INCBIN "gfx/footprints/blank.1bpp" ; 278
+	 INCBIN "gfx/footprints/blank.1bpp" ; 279
 	assert_table_length $100

@@ -14,7 +14,6 @@ EvosAttacksPointers::
 	dw CharizardEvosAttacks
 	dw WartortleEvosAttacks
 	dw BlastoiseEvosAttacks
-	dw TurtwigEvosAttacks
 	dw GrotleEvosAttacks
 	dw TorterraEvosAttacks
 	dw PikachuEvosAttacks

@@ -12,7 +12,6 @@ EvolutionMoves::
    db NO_MOVE      ; CHARIZARD
    db NO_MOVE      ; WARTORTLE
    db NO_MOVE      ; BLASTOISE
-   db NO_MOVE      ; TURTWIG
    db NO_MOVE      ; GROTLE
    db NO_MOVE      ; TORTERRA
    db NO_MOVE      ; PIKACHU

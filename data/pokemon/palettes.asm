@@ -39,8 +39,6 @@ INCBIN "gfx/pokemon/wartortle/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/wartortle/shiny.pal"
 INCBIN "gfx/pokemon/blastoise/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/blastoise/shiny.pal"
-INCBIN "gfx/pokemon/turtwig/front.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/turtwig/shiny.pal"
 INCBIN "gfx/pokemon/grotle/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/grotle/shiny.pal"
 INCBIN "gfx/pokemon/torterra/front.gbcpal", middle_colors
@@ -516,6 +514,10 @@ INCLUDE "gfx/pokemon/egg/shiny.pal"
 	RGB 23, 23, 23
 	RGB 17, 17, 17
 
+	RGB 23, 23, 23
+	RGB 17, 17, 17
+	RGB 23, 23, 23
+	RGB 17, 17, 17
 	RGB 23, 23, 23
 	RGB 17, 17, 17
 	RGB 23, 23, 23

@@ -1551,7 +1551,7 @@ JohtoGrassWildMons:
 	db 33, CLAYDOL
 	db 33, BRONZONG
 	db 33, SKARMORY
-	db 5, TURTWIG
+	db 5, TORTERRA
 	; day
 	db 33, DONPHAN
 	db 33, MAGNETON
@@ -1559,7 +1559,7 @@ JohtoGrassWildMons:
 	db 33, CLAYDOL
 	db 33, BRONZONG
 	db 33, SKARMORY
-	db 5, TURTWIG
+	db 5, TORTERRA
 	; nite
 	db 33, DONPHAN
 	db 33, MAGNETON
@@ -1567,7 +1567,7 @@ JohtoGrassWildMons:
 	db 33, CLAYDOL
 	db 33, BRONZONG
 	db 33, SKARMORY
-	db 5, TURTWIG
+	db 5, TORTERRA
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_18

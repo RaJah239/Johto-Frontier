@@ -702,32 +702,32 @@ SwarmGrassWildMons:
 	db 5, AZUMARILL
 	db 5, AZUMARILL
 
-; Turtwig swarm
+; Torterra swarm
 	map_id ROUTE_17
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 3, TURTWIG
-	db 3, TURTWIG
-	db 2, TURTWIG
-	db 2, TURTWIG
-	db 2, TURTWIG
-	db 4, TURTWIG
-	db 4, TURTWIG
+	db 3, TORTERRA
+	db 3, TORTERRA
+	db 2, TORTERRA
+	db 2, TORTERRA
+	db 2, TORTERRA
+	db 4, TORTERRA
+	db 4, TORTERRA
 	; day
-	db 3, TURTWIG
-	db 3, TURTWIG
-	db 2, TURTWIG
-	db 2, TURTWIG
-	db 2, TURTWIG
-	db 4, TURTWIG
-	db 4, TURTWIG
+	db 3, TORTERRA
+	db 3, TORTERRA
+	db 2, TORTERRA
+	db 2, TORTERRA
+	db 2, TORTERRA
+	db 4, TORTERRA
+	db 4, TORTERRA
 	; nite
-	db 3, TURTWIG
-	db 3, TURTWIG
-	db 2, TURTWIG
-	db 2, TURTWIG
-	db 2, TURTWIG
-	db 4, TURTWIG
-	db 4, TURTWIG
+	db 3, TORTERRA
+	db 3, TORTERRA
+	db 2, TORTERRA
+	db 2, TORTERRA
+	db 2, TORTERRA
+	db 4, TORTERRA
+	db 4, TORTERRA
 
 	db -1 ; end

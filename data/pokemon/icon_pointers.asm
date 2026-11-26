@@ -14,7 +14,6 @@ IconPointers:
 	dw CharizardIcon
 	dw WartortleIcon
 	dw BlastoiseIcon
-	dw TurtwigIcon
 	dw GrotleIcon
 	dw TorterraIcon
 	dw PikachuIcon

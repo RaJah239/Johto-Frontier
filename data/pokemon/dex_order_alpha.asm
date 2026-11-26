@@ -203,7 +203,6 @@ AlphabeticalPokedexOrder:
 	db TORCHIC
 	db TORTERRA
 	db TROPIUS
-	db TURTWIG
 	db TYPHLOSION
 	db TYRANITAR
 	db UMBREON

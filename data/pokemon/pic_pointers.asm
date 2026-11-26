@@ -27,8 +27,6 @@ PokemonPicPointers::
  	dba WartortleBackpic
  	dba BlastoiseFrontpic
  	dba BlastoiseBackpic
- 	dba TurtwigFrontpic
- 	dba TurtwigBackpic
  	dba GrotleFrontpic
  	dba GrotleBackpic
  	dba TorterraFrontpic

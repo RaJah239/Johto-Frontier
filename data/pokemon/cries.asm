@@ -18,7 +18,6 @@ PokemonCries::
 	mon_cry CRY_CHARMANDER,     0,   256 ; CHARIZARD
 	mon_cry CRY_SQUIRTLE,      32,   192 ; WARTORTLE
 	mon_cry CRY_BLASTOISE,      0,   256 ; BLASTOISE
-	mon_cry CRY_TOGETIC,     $d00,  $050 ; TURTWIG SourApple
 	mon_cry CRY_MARILL,      $eec,  $180 ; GROTLE SourApple
 	mon_cry CRY_ENTEI,       $eee,  $270 ; TORTERRA SourApple
 	mon_cry CRY_BULBASAUR,    238,   129 ; PIKACHU
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 277
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 278
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 279
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 280
 	assert_table_length $ff
