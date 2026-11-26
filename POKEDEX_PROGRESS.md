@@ -58,9 +58,10 @@
 - Completed additions: Magmortar `b34e9eca6` (supplied art/animation/shiny palette; derived icon; blank footprint and fallback Magcargo cry; normal/debug builds and stadium checks passed).
 - Completed additions: Primarina `77679eabe` (supplied art/animation/shiny palette; derived icon; blank footprint and fallback Lapras cry; normal/debug builds and stadium checks passed).
 - Data correction `7823b9440`: converted Dondozo, Cyclizar, Krookodile, Rhyperior, Mimikyu, Alolan Dugtrio, Magmortar and Primarina heights/weights to engine feet/inches and tenths-of-pounds units; normal/debug builds and stadium checks passed.
-- Remaining additions: EXPLOUD, TYRANTRUM, DRAGONITE, HYDREIGON, GOODRA, DRAGAPULT, BAXCALIBUR, VOLCANION, MELMETAL.
+- Completed additions: Exploud `d6b90ff28` (front/back/animation/shiny palette, icon and footprint from external reference projects; fallback Rhydon cry; normal/debug builds and stadium checks passed).
+- Remaining additions: TYRANTRUM, DRAGONITE, HYDREIGON, GOODRA, DRAGAPULT, BAXCALIBUR, VOLCANION, MELMETAL.
 - Name normalization to confirm against source/reference data: Slyveon→SYLVEON, BaltoyIcon→BALTOY, Marshtop→MARSHTOMP, Mr.Mime→MR__MIME, Ninetales (Aloan)→NINETALES_A, Dugtrio.A→DUGTRIO_A, Rotom (Wash)→ROTOM, Ho-Oh→HO_OH, N-Own→NOWN. `Poliwrath (Urshifu like stats)` is treated as POLIWRATH.
-- Asset gaps in `C:\Users\RaJah239\Desktop\pokemon_sprites`: EXPLOUD, DRAGONITE; DUGTRIO_A may be the `dugtrio - shattered` folder. Check supplied reference projects before implementing these species. Do not silently substitute graphics.
+- Asset gap in `C:\Users\RaJah239\Desktop\pokemon_sprites`: DRAGONITE. Check supplied reference projects before implementing it; do not silently substitute graphics.
 - Review: Zubat removal leaves 30 generic `L@` trainer placeholders with empty parties in `data/trainers/parties.asm`; verify these classes are unused or remove/rework the placeholder trainers before release.
 - Runtime limitation: emulator checks have not been performed. Species IDs shift during this migration, so existing saves may be incompatible; verify at the end.
 
