@@ -232,4 +232,5 @@ NewPokedexOrder:
 	db DHELMISE
 	db DRAGALGE
 	db HONCHKROW
+	db MARSHTOMP
 	assert_table_length NUM_POKEMON

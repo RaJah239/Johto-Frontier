@@ -231,4 +231,5 @@ PokedexDataPointerTable:
 	dba DhelmisePokedexEntry
 	dba DragalgePokedexEntry
 	dba HonchkrowPokedexEntry
+	dba MarshtompPokedexEntry
 	assert_table_length NUM_POKEMON

@@ -236,6 +236,7 @@ PokemonCries::
 	mon_cry CRY_VILEPLUME, 0, 255 ; DHELMISE
 	mon_cry CRY_GRIMER, 0, 255 ; DRAGALGE
 	mon_cry CRY_PIDGEOTTO, 0, 255 ; HONCHKROW
+	mon_cry CRY_WOOPER, 0, 255 ; MARSHTOMP
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -261,5 +262,4 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 272
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 273
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 274
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 275
 	assert_table_length $ff

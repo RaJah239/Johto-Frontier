@@ -230,4 +230,5 @@ dw VulpixBitmasks
 	dw DhelmiseBitmasks
 	dw DragalgeBitmasks
 	dw HonchkrowBitmasks
+	dw MarshtompBitmasks
 	assert_table_length NUM_POKEMON

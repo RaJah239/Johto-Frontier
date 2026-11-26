@@ -230,4 +230,5 @@ db NO_MOVE      ; VULPIX
 	db NO_MOVE      ; DHELMISE
 	db NO_MOVE      ; DRAGALGE
 	db NO_MOVE      ; HONCHKROW
+	db NO_MOVE      ; MARSHTOMP
 	assert_table_length NUM_POKEMON

@@ -126,6 +126,7 @@ AlphabeticalPokedexOrder:
 	db MAMOSWINE
 	db MANKEY
 	db MARILL
+	db MARSHTOMP
 	db MAWILE
 	db MEGANIUM
 	db MEOWTH
