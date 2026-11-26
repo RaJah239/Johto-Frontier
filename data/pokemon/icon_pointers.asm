@@ -125,7 +125,6 @@ IconPointers:
 	dw ChandelureIcon
 	dw MiltankIcon
 	dw TaurosIcon
-	dw ElectrodeIcon
 	dw ElectabuzzIcon
 	dw MagnetonIcon
 	dw MagnezoneIcon

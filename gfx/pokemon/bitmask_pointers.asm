@@ -123,7 +123,6 @@ BitmasksPointers:
 	dw ChandelureBitmasks
 	dw MiltankBitmasks
 	dw TaurosBitmasks
-	dw ElectrodeBitmasks
 	dw ElectabuzzBitmasks
 	dw MagnetonBitmasks
 	dw MagnezoneBitmasks

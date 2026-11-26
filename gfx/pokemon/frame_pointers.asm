@@ -123,7 +123,6 @@ FramesPointers:
 	dw ChandelureFrames
 	dw MiltankFrames
 	dw TaurosFrames
-	dw ElectrodeFrames
 	dw ElectabuzzFrames
 	dw MagnetonFrames
 	dw MagnezoneFrames

@@ -129,7 +129,6 @@ Footprints:
  INCBIN "gfx/footprints/blank.1bpp" ; CHANDELURE
  INCBIN "gfx/footprints/miltank.1bpp"  
  INCBIN "gfx/footprints/tauros.1bpp" 
- INCBIN "gfx/footprints/blank.1bpp" ; ELECTRODE
  INCBIN "gfx/footprints/electabuzz.1bpp"
  INCBIN "gfx/footprints/magneton.1bpp" 
  INCBIN "gfx/footprints/magneton.1bpp" ; MAGNEZONE
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 303
 	 INCBIN "gfx/footprints/blank.1bpp" ; 304
 	 INCBIN "gfx/footprints/blank.1bpp" ; 305
+	 INCBIN "gfx/footprints/blank.1bpp" ; 306
 	assert_table_length $100

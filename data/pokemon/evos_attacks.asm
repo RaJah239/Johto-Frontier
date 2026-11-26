@@ -180,7 +180,6 @@ LampentEvosAttacks:
 ChandelureEvosAttacks:
 MiltankEvosAttacks:
 TaurosEvosAttacks:
-ElectrodeEvosAttacks:
 ElectabuzzEvosAttacks:
 MagnetonEvosAttacks:
 MagnezoneEvosAttacks:

@@ -123,7 +123,6 @@ EvolutionMoves::
    db NO_MOVE      ; CHANDELURE
    db NO_MOVE      ; MILTANK
    db NO_MOVE      ; TAUROS
-   db NO_MOVE      ; ELECTRODE
    db NO_MOVE      ; ELECTABUZZ
    db NO_MOVE      ; MAGNETON
    db NO_MOVE      ; MAGNEZONE

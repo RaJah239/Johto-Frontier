@@ -1662,7 +1662,7 @@ JohtoGrassWildMons:
 	db 34, RAPIDASH
 	db 34, RAPIDASH
 	db 34, RAPIDASH
-	db 34, ELECTRODE
+	db 34, PIKACHU
 	db 34, BLISSEY
 	; day
 	db 34, ELECTABUZZ
@@ -1670,7 +1670,7 @@ JohtoGrassWildMons:
 	db 34, RAPIDASH
 	db 34, RAPIDASH
 	db 34, RAPIDASH
-	db 34, ELECTRODE
+	db 34, PIKACHU
 	db 34, BLISSEY
 	; nite
 	db 34, RAPIDASH

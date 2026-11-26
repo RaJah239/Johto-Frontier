@@ -129,7 +129,6 @@ PokemonCries::
 	mon_cry CRY_ENTEI,       $078,  $4c0 ; CHANDELURE Ax6
 	mon_cry CRY_GLIGAR,      -461,   416 ; MILTANK
 	mon_cry CRY_SQUIRTLE,      17,   192 ; TAUROS
-	mon_cry CRY_VOLTORB,      168,   272 ; ELECTRODE
 	mon_cry CRY_VOLTORB,      143,   383 ; ELECTABUZZ
 	mon_cry CRY_METAPOD,       32,   320 ; MAGNETON
 	mon_cry CRY_METAPOD,      -17,   512 ; MAGNEZONE
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 304
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 305
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 306
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 307
 	assert_table_length $ff

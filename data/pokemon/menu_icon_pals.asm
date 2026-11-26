@@ -130,7 +130,6 @@ MonMenuIconPals:
 	icon_pals BLUE,   RED    ; CHANDELURE
 	icon_pals PINK,   BLUE   ; MILTANK
 	icon_pals BROWN,  TEAL   ; TAUROS
-	icon_pals RED,    GRAY   ; ELECTRODE
 	icon_pals BROWN,  GRAY   ; ELECTABUZZ
 	icon_pals GRAY,   GRAY   ; MAGNETON
 	icon_pals BLUE,   GRAY   ; MAGNEZONE

@@ -123,7 +123,6 @@ AnimationIdlePointers:
 	dw ChandelureAnimationIdle
 	dw MiltankAnimationIdle
 	dw TaurosAnimationIdle
-	dw ElectrodeAnimationIdle
 	dw ElectabuzzAnimationIdle
 	dw MagnetonAnimationIdle
 	dw MagnezoneAnimationIdle

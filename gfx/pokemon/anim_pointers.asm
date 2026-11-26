@@ -123,7 +123,6 @@ AnimationPointers:
 	dw ChandelureAnimation
 	dw MiltankAnimation
 	dw TaurosAnimation
-	dw ElectrodeAnimation
 	dw ElectabuzzAnimation
 	dw MagnetonAnimation
 	dw MagnezoneAnimation
