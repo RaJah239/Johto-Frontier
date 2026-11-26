@@ -144,6 +144,7 @@ NewPokedexOrder:
 	db CLOYSTER
 	db VIKAVOLT
 	db DUSCLOPS
+	db DUSKNOIR
 	db SUDOWOODO
 	db KOFFING
 	db WEEZING

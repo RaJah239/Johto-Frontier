@@ -231,6 +231,7 @@ PokemonCries::
 	mon_cry CRY_KRABBY, 0, 255 ; CLOYSTER
 	mon_cry CRY_RAICHU, 0, 255 ; VIKAVOLT
 	mon_cry CRY_HOOTHOOT, 0, 255 ; DUSCLOPS
+	mon_cry CRY_HOOTHOOT, 0, 255 ; DUSKNOIR
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -261,5 +262,4 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 277
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 278
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 279
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 280
 	assert_table_length $ff
