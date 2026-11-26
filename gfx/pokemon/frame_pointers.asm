@@ -76,7 +76,6 @@ FramesPointers:
 	dw GliscorFrames
 	dw GabiteFrames
 	dw GarchompFrames
-	dw MakuhitaFrames
 	dw HariyamaFrames
 	dw DoduoFrames
 	dw DodrioFrames

@@ -417,7 +417,7 @@ PartyKeeperSpeciesList:
 	db WOOPER
 	db GLIGAR
 	db GABITE
-	db MAKUHITA
+	db PRIMEAPE
 	db DODUO
 	db PONYTA
 	db SLOWPOKE

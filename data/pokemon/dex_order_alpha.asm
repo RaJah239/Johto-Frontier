@@ -108,7 +108,6 @@ AlphabeticalPokedexOrder:
 	db MAGIKARP
 	db MAGNETON
 	db MAGNEZONE
-	db MAKUHITA
 	db MAMOSWINE
 	db MANKEY
 	db MARILL

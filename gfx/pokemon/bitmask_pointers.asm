@@ -76,7 +76,6 @@ BitmasksPointers:
 	dw GliscorBitmasks
 	dw GabiteBitmasks
 	dw GarchompBitmasks
-	dw MakuhitaBitmasks
 	dw HariyamaBitmasks
 	dw DoduoBitmasks
 	dw DodrioBitmasks

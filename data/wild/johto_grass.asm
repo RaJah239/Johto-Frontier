@@ -313,7 +313,7 @@ JohtoGrassWildMons:
 	def_grass_wildmons UNION_CAVE_1F
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 12, MAKUHITA
+	db 12, MANKEY
 	db 12, GABITE
 	db 12, DRILBUR
 	db 12, PILOSWINE
@@ -321,7 +321,7 @@ JohtoGrassWildMons:
 	db 12, ONIX
 	db 5, PRIMEAPE
 	; day
-	db 12, MAKUHITA
+	db 12, MANKEY
 	db 12, GABITE
 	db 12, DRILBUR
 	db 12, PILOSWINE
@@ -329,7 +329,7 @@ JohtoGrassWildMons:
 	db 12, ONIX
 	db 5, PRIMEAPE
 	; nite
-	db 12, MAKUHITA
+	db 12, MANKEY
 	db 12, GABITE
 	db 12, DRILBUR
 	db 12, PILOSWINE
@@ -341,7 +341,7 @@ JohtoGrassWildMons:
 	def_grass_wildmons UNION_CAVE_B1F
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 25, MAKUHITA
+	db 25, MANKEY
 	db 25, GABITE
 	db 25, DRILBUR
 	db 25, PILOSWINE
@@ -349,7 +349,7 @@ JohtoGrassWildMons:
 	db 25, ONIX
 	db 5, PRIMEAPE
 	; day
-	db 25, MAKUHITA
+	db 25, MANKEY
 	db 25, GABITE
 	db 25, DRILBUR
 	db 25, PILOSWINE
@@ -357,7 +357,7 @@ JohtoGrassWildMons:
 	db 25, ONIX
 	db 5, PRIMEAPE
 	; nite
-	db 25, MAKUHITA
+	db 25, MANKEY
 	db 25, GABITE
 	db 25, DRILBUR
 	db 25, PILOSWINE
@@ -369,7 +369,7 @@ JohtoGrassWildMons:
 	def_grass_wildmons UNION_CAVE_B2F
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 25, MAKUHITA
+	db 25, MANKEY
 	db 25, GABITE
 	db 25, DRILBUR
 	db 25, RHYDON
@@ -377,7 +377,7 @@ JohtoGrassWildMons:
 	db 25, ONIX
 	db 5, PRIMEAPE
 	; day
-	db 25, MAKUHITA
+	db 25, MANKEY
 	db 25, GABITE
 	db 25, DRILBUR
 	db 25, RHYDON
@@ -385,7 +385,7 @@ JohtoGrassWildMons:
 	db 25, ONIX
 	db 5, PRIMEAPE
 	; nite
-	db 25, MAKUHITA
+	db 25, MANKEY
 	db 25, GABITE
 	db 25, DRILBUR
 	db 25, RHYDON
@@ -402,7 +402,7 @@ JohtoGrassWildMons:
 	db 14, DODUO
 	db 14, DODUO
 	db 14, SWABLU
-	db 14, MAKUHITA
+	db 14, MANKEY
 	db 14, BUNEARY
 	; day
 	db 14, DODUO
@@ -410,12 +410,12 @@ JohtoGrassWildMons:
 	db 14, DODUO
 	db 14, DODUO
 	db 14, SWABLU
-	db 14, MAKUHITA
+	db 14, MANKEY
 	db 14, BUNEARY
 	; nite
 	db 14, GLIGAR
 	db 14, HOUNDOUR
-	db 14, MAKUHITA
+	db 14, MANKEY
 	db 14, GOLBAT
 	db 14, GOLBAT
 	db 14, HOUNDOUR

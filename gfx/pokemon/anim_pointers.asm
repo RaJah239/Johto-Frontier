@@ -76,7 +76,6 @@ AnimationPointers:
 	dw GliscorAnimation
 	dw GabiteAnimation
 	dw GarchompAnimation
-	dw MakuhitaAnimation
 	dw HariyamaAnimation
 	dw DoduoAnimation
 	dw DodrioAnimation

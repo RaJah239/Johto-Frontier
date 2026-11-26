@@ -76,7 +76,6 @@ EvolutionMoves::
    db NO_MOVE      ; GLISCOR
    db NO_MOVE      ; GABITE
    db NO_MOVE      ; GARCHOMP
-   db NO_MOVE      ; MAKUHITA
    db NO_MOVE      ; HARIYAMA
    db NO_MOVE      ; DODUO
    db NO_MOVE      ; DODRIO

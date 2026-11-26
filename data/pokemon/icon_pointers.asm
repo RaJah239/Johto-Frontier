@@ -78,7 +78,6 @@ IconPointers:
 	dw GliscorIcon
 	dw GabiteIcon
 	dw GarchompIcon
-	dw MakuhitaIcon
 	dw HariyamaIcon
 	dw DoduoIcon
 	dw DodrioIcon

@@ -7,6 +7,5 @@
 ;	db URSARING
 ;	db URSALUNA
 ;	db HERACROSS
-;	db MAKUHITA
 ;	db HARIYAMA
     db -1 ; end

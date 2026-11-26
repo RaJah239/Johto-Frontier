@@ -77,7 +77,6 @@ PokedexDataPointerTable:
  	dba GliscorPokedexEntry
  	dba GabitePokedexEntry
  	dba GarchompPokedexEntry
- 	dba MakuhitaPokedexEntry
  	dba HariyamaPokedexEntry
  	dba DoduoPokedexEntry
  	dba DodrioPokedexEntry
