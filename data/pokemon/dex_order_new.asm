@@ -186,7 +186,6 @@ NewPokedexOrder:
 	db CLEFABLE
 	db SOLROCK
 	db LUNATONE
-	db STANTLER
 	db DELIBIRD
 	db JYNX
 	db SNORUNT

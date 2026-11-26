@@ -609,7 +609,7 @@ JohtoGrassWildMons:
 	db 20, TROPIUS
 	db 5, CHIKORITA
 	; nite
-	db 20, STANTLER
+	db 20, DONPHAN
 	db 20, SPINARAK
 	db 20, HOOTHOOT
 	db 20, MANKEY
@@ -1713,7 +1713,7 @@ JohtoGrassWildMons:
 	def_grass_wildmons SILVER_CAVE_OUTSIDE
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 37, STANTLER
+	db 37, DONPHAN
 	db 37, SNEASLER
 	db 37, SYLVEON
 	db 37, VOLCARONA
@@ -1721,7 +1721,7 @@ JohtoGrassWildMons:
 	db 37, MUK
 	db 37, TOGEPI
 	; day
-	db 37, STANTLER
+	db 37, DONPHAN
 	db 37, SNEASLER
 	db 37, SYLVEON
 	db 37, VOLCARONA

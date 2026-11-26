@@ -458,7 +458,7 @@ PartyKeeperSpeciesList:
 	db CLEFAIRY
 	db SOLROCK
 	db LUNATONE
-	db STANTLER
+	db DONPHAN
 	db DELIBIRD
 	db JYNX
 	db SNORUNT

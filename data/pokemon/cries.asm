@@ -190,7 +190,6 @@ PokemonCries::
 	mon_cry CRY_CLEFAIRY,     170,   160 ; CLEFABLE
 	mon_cry CRY_SQUIRTLE,   $ffda,  $097 ; SOLROCK
 	mon_cry CRY_SQUIRTLE,   $feda,  $097 ; LUNATONE
-	mon_cry CRY_AIPOM,       -352,   384 ; STANTLER
 	mon_cry CRY_TEDDIURSA,      2,   106 ; DELIBIRD
 	mon_cry CRY_DROWZEE,      255,   383 ; JYNX
 	mon_cry CRY_PIDGEY,      $8a8,  $220 ; SNORUNT
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 261
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 262
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 263
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 264
 	assert_table_length $ff

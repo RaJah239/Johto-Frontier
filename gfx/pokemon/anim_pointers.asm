@@ -184,7 +184,6 @@ AnimationPointers:
 	dw ClefableAnimation
 	dw SolrockAnimation
 	dw LunatoneAnimation
-	dw StantlerAnimation
 	dw DelibirdAnimation
 	dw JynxAnimation
 	dw SnoruntAnimation

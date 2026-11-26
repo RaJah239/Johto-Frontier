@@ -371,8 +371,6 @@ PokemonPicPointers::
  	dba SolrockBackpic
  	dba LunatoneFrontpic
  	dba LunatoneBackpic
- 	dba StantlerFrontpic
- 	dba StantlerBackpic
  	dba DelibirdFrontpic
  	dba DelibirdBackpic
  	dba JynxFrontpic

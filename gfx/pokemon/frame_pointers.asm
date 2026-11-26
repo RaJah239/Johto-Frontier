@@ -184,7 +184,6 @@ FramesPointers:
 	dw ClefableFrames
 	dw SolrockFrames
 	dw LunatoneFrames
-	dw StantlerFrames
 	dw DelibirdFrames
 	dw JynxFrames
 	dw SnoruntFrames

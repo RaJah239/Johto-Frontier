@@ -186,7 +186,6 @@ EvosAttacksPointers::
 	dw ClefableEvosAttacks
 	dw SolrockEvosAttacks
 	dw LunatoneEvosAttacks
-	dw StantlerEvosAttacks
 	dw DelibirdEvosAttacks
 	dw JynxEvosAttacks
 	dw SnoruntEvosAttacks

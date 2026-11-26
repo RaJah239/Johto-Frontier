@@ -184,7 +184,6 @@ PokemonNames::
 	db "Clefable@@"
 	db "Solrock@@@"
 	db "Lunatone@@"
-	db "Stantler@@"
 	db "Delibird@@"
 	db "Jynx@@@@@@"
 	db "Snorunt@@@"
@@ -245,6 +244,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

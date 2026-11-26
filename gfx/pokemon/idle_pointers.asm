@@ -184,7 +184,6 @@ AnimationIdlePointers:
 	dw ClefableAnimationIdle
 	dw SolrockAnimationIdle
 	dw LunatoneAnimationIdle
-	dw StantlerAnimationIdle
 	dw DelibirdAnimationIdle
 	dw JynxAnimationIdle
 	dw SnoruntAnimationIdle
