@@ -688,3 +688,6 @@ AmoongussBackpic: INCBIN "gfx/pokemon/amoonguss/back.2bpp.lz"
 
 DipplinFrontpic: INCBIN "gfx/pokemon/dipplin/front.animated.2bpp.lz"
 DipplinBackpic: INCBIN "gfx/pokemon/dipplin/back.2bpp.lz"
+
+HydrappleFrontpic: INCBIN "gfx/pokemon/hydrapple/front.animated.2bpp.lz"
+HydrappleBackpic: INCBIN "gfx/pokemon/hydrapple/back.2bpp.lz"

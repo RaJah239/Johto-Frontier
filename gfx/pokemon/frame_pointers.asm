@@ -210,4 +210,5 @@ FramesPointers:
 	dw FoongusFrames
 	dw AmoongussFrames
 	dw DipplinFrames
+	dw HydrappleFrames
 	assert_table_length NUM_POKEMON

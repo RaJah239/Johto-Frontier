@@ -263,3 +263,5 @@ FoongusIcon:: INCBIN "gfx/icons/foongus.2bpp"
 AmoongussIcon:: INCBIN "gfx/icons/amoonguss.2bpp"
 
 DipplinIcon:: INCBIN "gfx/icons/dipplin.2bpp"
+
+HydrappleIcon:: INCBIN "gfx/icons/hydrapple.2bpp"

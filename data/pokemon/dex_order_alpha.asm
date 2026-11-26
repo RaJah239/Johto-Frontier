@@ -89,6 +89,7 @@ AlphabeticalPokedexOrder:
 	db HOOTHOOT
 	db HOUNDOOM
 	db HOUNDOUR
+	db HYDRAPPLE
 	db HYPNO
 	db JIRACHI
 	db JOLTEON

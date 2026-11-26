@@ -210,4 +210,5 @@ AnimationPointers:
 	dw FoongusAnimation
 	dw AmoongussAnimation
 	dw DipplinAnimation
+	dw HydrappleAnimation
 	assert_table_length NUM_POKEMON

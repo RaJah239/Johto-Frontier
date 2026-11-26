@@ -435,6 +435,8 @@ INCBIN "gfx/pokemon/amoonguss/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/amoonguss/shiny.pal"
 INCBIN "gfx/pokemon/dipplin/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/dipplin/shiny.pal"
+INCBIN "gfx/pokemon/hydrapple/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/hydrapple/shiny.pal"
 	assert_table_length NUM_POKEMON + 1
 
 INCBIN "gfx/pokemon/egg/front.gbcpal", middle_colors
@@ -620,10 +622,6 @@ INCLUDE "gfx/pokemon/egg/shiny.pal"
 	RGB 17, 17, 17
 	RGB 23, 23, 23
 	RGB 17, 17, 17
-	RGB 23,23,23
-	RGB 17,17,17
-	RGB 23,23,23
-	RGB 17,17,17
 	RGB 23,23,23
 	RGB 17,17,17
 	RGB 23,23,23

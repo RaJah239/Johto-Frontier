@@ -242,4 +242,5 @@ INCLUDE "data/pokemon/base_stats/slowking.asm"
 INCLUDE "data/pokemon/base_stats/foongus.asm"
 INCLUDE "data/pokemon/base_stats/amoonguss.asm"
 INCLUDE "data/pokemon/base_stats/dipplin.asm"
+INCLUDE "data/pokemon/base_stats/hydrapple.asm"
 	assert_table_length NUM_POKEMON

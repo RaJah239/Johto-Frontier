@@ -102,6 +102,7 @@ NewPokedexOrder:
 	db FOONGUS
 	db AMOONGUSS
 	db DIPPLIN
+	db HYDRAPPLE
 	db SPINARAK
 	db ARIADOS
 	db VENIPEDE

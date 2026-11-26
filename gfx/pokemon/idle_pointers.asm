@@ -210,4 +210,5 @@ AnimationIdlePointers:
 	dw FoongusAnimationIdle
 	dw AmoongussAnimationIdle
 	dw DipplinAnimationIdle
+	dw HydrappleAnimationIdle
 	assert_table_length NUM_POKEMON

@@ -426,6 +426,8 @@ PokemonPicPointers::
 	dba AmoongussBackpic
 	dba DipplinFrontpic
 	dba DipplinBackpic
+	dba HydrappleFrontpic
+	dba HydrappleBackpic
 	assert_table_length NUM_POKEMON
 	dba EggPic
  	dbw -1, -1

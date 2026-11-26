@@ -212,4 +212,5 @@ EvosAttacksPointers::
 	dw FoongusEvosAttacks
 	dw AmoongussEvosAttacks
 	dw DipplinEvosAttacks
+	dw HydrappleEvosAttacks
 	assert_table_length NUM_POKEMON
