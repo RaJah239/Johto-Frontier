@@ -10,7 +10,6 @@ AnimationIdlePointers:
 	dw TogekissAnimationIdle
 	dw CharmeleonAnimationIdle
 	dw CharizardAnimationIdle
-	dw SquirtleAnimationIdle
 	dw WartortleAnimationIdle
 	dw BlastoiseAnimationIdle
 	dw TurtwigAnimationIdle

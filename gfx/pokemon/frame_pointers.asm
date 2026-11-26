@@ -10,7 +10,6 @@ FramesPointers:
 	dw TogekissFrames
 	dw CharmeleonFrames
 	dw CharizardFrames
-	dw SquirtleFrames
 	dw WartortleFrames
 	dw BlastoiseFrames
 	dw TurtwigFrames

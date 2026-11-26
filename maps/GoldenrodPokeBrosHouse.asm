@@ -109,7 +109,7 @@ SwarmGrampsScript:
 	ifequal 18, .Shroomish
 	ifequal 19, .Jynx
 	ifequal 20, .Snubbull
-	ifequal 21, .Squirtle
+	ifequal 21, .Wartortle
 	ifequal 22, .Teddiursa
 	ifequal 23, .Togetic
 	ifequal 24, .Torchic
@@ -317,12 +317,12 @@ SwarmGrampsScript:
 		cont "National Park!"
 		done
 
-.Squirtle:
+.Wartortle:
 	setflag ENGINE_SWARM
 	swarm ROUTE_15
 	jumpthisopenedtext
 		text "There's a swarm of"
-		line "Squirtle at"
+		line "Wartortle at"
 		cont "Route 15!"
 		done
 
@@ -437,7 +437,7 @@ GoldenrodPokeBrosHouseSwarmPokemonBook:
 		cont "Shroomish,"
 		cont "Jynx,"
 		cont "Snubbull,"
-		cont "Squirtle,"
+		cont "Wartortle,"
 		cont "Teddiursa,"
 		cont "Togetic,"
 		cont "Torchic,"

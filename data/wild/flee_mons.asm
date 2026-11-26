@@ -12,7 +12,6 @@ SometimesFleeMons:
 	db RALTS
 	db ROWLET
 	db SNUBBULL
-	db SQUIRTLE
 	db TEDDIURSA
 	db TORCHIC
 	db TURTWIG

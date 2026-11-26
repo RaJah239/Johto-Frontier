@@ -416,7 +416,7 @@ FleeMonsNotebook:
 		cont "Rowlet,"
 		cont "Jynx,"
 		cont "Snubbull,"
-		cont "Squirtle,"
+		cont "Wartortle,"
 		cont "Teddiursa,"
 		cont "Togetic,"
 		cont "Torchic,"

@@ -44,7 +44,7 @@ DecorationAttributes:
 	decoration DECO_DOLL,    MARILL,          SET_UP_DOLL,       EVENT_DECO_MARILL_DOLL,         SPRITE_MARILL
 	decoration DECO_DOLL,    DITTO,           SET_UP_DOLL,       EVENT_DECO_BULBASAUR_DOLL,          SPRITE_BULBASAUR
 	decoration DECO_DOLL,    CHARMELEON,      SET_UP_DOLL,       EVENT_DECO_CHARMANDER_DOLL,         SPRITE_CHARMANDER
-	decoration DECO_DOLL,    SQUIRTLE,        SET_UP_DOLL,       EVENT_DECO_SQUIRTLE_DOLL,           SPRITE_SQUIRTLE
+	decoration DECO_DOLL,    WARTORTLE,       SET_UP_DOLL,       EVENT_DECO_SQUIRTLE_DOLL,           SPRITE_SQUIRTLE
 	decoration DECO_DOLL,    FEEBAS,          SET_UP_DOLL,       EVENT_DECO_POLIWAG_DOLL,            SPRITE_POLIWAG
 	decoration DECO_DOLL,    DITTO,           SET_UP_DOLL,       EVENT_DECO_TANGELA_DOLL,            SPRITE_TANGELA
 	decoration DECO_DOLL,    STARYU,          SET_UP_DOLL,       EVENT_DECO_STARYU_DOLL,             SPRITE_STARMIE

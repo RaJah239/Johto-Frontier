@@ -10,7 +10,6 @@ EvolutionMoves::
    db NO_MOVE      ; TOGEKISS
    db NO_MOVE      ; CHARMELEON
    db NO_MOVE      ; CHARIZARD
-   db NO_MOVE      ; SQUIRTLE
    db NO_MOVE      ; WARTORTLE
    db NO_MOVE      ; BLASTOISE
    db NO_MOVE      ; TURTWIG

@@ -383,7 +383,7 @@ PartyKeeperSpeciesList:
 	db BAYLEEF
 	db TOGETIC
 	db CHARMELEON
-	db SQUIRTLE
+	db WARTORTLE
 	db TURTWIG
 	db PIKACHU
 	db EEVEE

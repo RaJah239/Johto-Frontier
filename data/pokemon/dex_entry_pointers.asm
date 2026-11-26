@@ -11,7 +11,6 @@ PokedexDataPointerTable:
  	dba TogekissPokedexEntry
  	dba CharmeleonPokedexEntry
  	dba CharizardPokedexEntry
- 	dba SquirtlePokedexEntry
  	dba WartortlePokedexEntry
  	dba BlastoisePokedexEntry
  	dba TurtwigPokedexEntry

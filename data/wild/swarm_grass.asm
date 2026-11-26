@@ -562,33 +562,33 @@ SwarmGrassWildMons:
 	db 5, SNUBBULL
 	db 5, SNUBBULL
 
-; Squirtle swarm
+; Azumarill swarm
 	map_id ROUTE_15
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
 	; day
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
 	; nite
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
-	db 5, SQUIRTLE
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
+	db 5, AZUMARILL
 
 ; Teddiursa swarm
 	map_id DARK_CAVE_VIOLET_ENTRANCE

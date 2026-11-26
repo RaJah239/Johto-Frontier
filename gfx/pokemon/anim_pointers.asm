@@ -10,7 +10,6 @@ AnimationPointers:
 	dw TogekissAnimation
 	dw CharmeleonAnimation
 	dw CharizardAnimation
-	dw SquirtleAnimation
 	dw WartortleAnimation
 	dw BlastoiseAnimation
 	dw TurtwigAnimation

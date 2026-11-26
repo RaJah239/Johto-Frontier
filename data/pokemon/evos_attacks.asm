@@ -71,7 +71,6 @@ TogeticEvosAttacks:
 TogekissEvosAttacks:
 CharmeleonEvosAttacks:
 CharizardEvosAttacks:
-SquirtleEvosAttacks:
 WartortleEvosAttacks:
 BlastoiseEvosAttacks:
 TurtwigEvosAttacks:

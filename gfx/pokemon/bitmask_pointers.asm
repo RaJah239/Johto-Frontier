@@ -10,7 +10,6 @@ BitmasksPointers:
 	dw TogekissBitmasks
 	dw CharmeleonBitmasks
 	dw CharizardBitmasks
-	dw SquirtleBitmasks
 	dw WartortleBitmasks
 	dw BlastoiseBitmasks
 	dw TurtwigBitmasks

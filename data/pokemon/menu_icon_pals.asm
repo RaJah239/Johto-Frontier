@@ -17,7 +17,6 @@ MonMenuIconPals:
 	icon_pals PINK,   BLUE   ; TOGEKISS
 	icon_pals RED,    BROWN  ; CHARMELEON
 	icon_pals RED,    GRAY   ; CHARIZARD
-	icon_pals BLUE,   TEAL   ; SQUIRTLE
 	icon_pals BLUE,   TEAL   ; WARTORTLE
 	icon_pals BLUE,   PURPLE ; BLASTOISE
 	icon_pals GREEN,  PURPLE ; TURTWIG

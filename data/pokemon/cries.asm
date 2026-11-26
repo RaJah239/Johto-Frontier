@@ -16,7 +16,6 @@ PokemonCries::
 	mon_cry CRY_TOGETIC,       59,    56 ; TOGEKISS
 	mon_cry CRY_CHARMANDER,    32,   192 ; CHARMELEON
 	mon_cry CRY_CHARMANDER,     0,   256 ; CHARIZARD
-	mon_cry CRY_SQUIRTLE,      96,   192 ; SQUIRTLE
 	mon_cry CRY_SQUIRTLE,      32,   192 ; WARTORTLE
 	mon_cry CRY_BLASTOISE,      0,   256 ; BLASTOISE
 	mon_cry CRY_TOGETIC,     $d00,  $050 ; TURTWIG SourApple
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 276
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 277
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 278
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 279
 	assert_table_length $ff

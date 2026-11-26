@@ -12,7 +12,6 @@ IconPointers:
 	dw TogekissIcon
 	dw CharmeleonIcon
 	dw CharizardIcon
-	dw SquirtleIcon
 	dw WartortleIcon
 	dw BlastoiseIcon
 	dw TurtwigIcon

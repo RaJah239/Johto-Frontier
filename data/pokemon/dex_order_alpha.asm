@@ -183,7 +183,6 @@ AlphabeticalPokedexOrder:
 	db SNUBBULL
 	db SOLROCK
 	db SPINARAK
-	db SQUIRTLE
 	db STARMIE
 	db STARYU
 	db STEELIX

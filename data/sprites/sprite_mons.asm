@@ -10,7 +10,7 @@ SpriteMons:
 	db GENGAR
 	db ZUBAT
 	db MAGIKARP
-	db SQUIRTLE
+	db WARTORTLE
 	db CHANSEY
 	db TANGELA
 	db FEEBAS

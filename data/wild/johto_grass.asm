@@ -1327,7 +1327,7 @@ JohtoGrassWildMons:
 	db 27, SCYTHER
 	db 27, WEEPINBELL
 	db 27, PIDGEOTTO
-	db 5, SQUIRTLE
+	db 5, AZUMARILL
 	; day
 	db 27, TANGROWTH
 	db 27, TROPIUS
@@ -1335,7 +1335,7 @@ JohtoGrassWildMons:
 	db 27, SCYTHER
 	db 27, WEEPINBELL
 	db 27, PIDGEOTTO
-	db 5, SQUIRTLE
+	db 5, AZUMARILL
 	; nite
 	db 27, NOCTOWL
 	db 27, SCYTHER
@@ -1343,7 +1343,7 @@ JohtoGrassWildMons:
 	db 27, ARIADOS
 	db 27, TANGROWTH
 	db 27, WEEPINBELL
-	db 5, SQUIRTLE
+	db 5, AZUMARILL
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_16

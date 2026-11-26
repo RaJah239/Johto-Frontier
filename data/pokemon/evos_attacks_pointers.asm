@@ -12,7 +12,6 @@ EvosAttacksPointers::
 	dw TogekissEvosAttacks
 	dw CharmeleonEvosAttacks
 	dw CharizardEvosAttacks
-	dw SquirtleEvosAttacks
 	dw WartortleEvosAttacks
 	dw BlastoiseEvosAttacks
 	dw TurtwigEvosAttacks
