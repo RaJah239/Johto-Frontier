@@ -142,7 +142,6 @@ AlphabeticalPokedexOrder:
 	db NATU
 	db NOCTOWL
 	db NOWN
-	db OCTILLERY
 	db OMANYTE
 	db OMASTAR
 	db ONIX

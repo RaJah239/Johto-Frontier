@@ -225,7 +225,6 @@ CorsolaEvosAttacks:
 StaryuEvosAttacks:
 StarmieEvosAttacks:
 RemoraidEvosAttacks:
-OctilleryEvosAttacks:
 ChinchouEvosAttacks:
 LanturnEvosAttacks:
 TentacoolEvosAttacks:

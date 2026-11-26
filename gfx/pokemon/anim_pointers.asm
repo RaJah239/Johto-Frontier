@@ -168,7 +168,6 @@ AnimationPointers:
 	dw StaryuAnimation
 	dw StarmieAnimation
 	dw RemoraidAnimation
-	dw OctilleryAnimation
 	dw ChinchouAnimation
 	dw LanturnAnimation
 	dw TentacoolAnimation

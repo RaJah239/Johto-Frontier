@@ -168,7 +168,6 @@ FramesPointers:
 	dw StaryuFrames
 	dw StarmieFrames
 	dw RemoraidFrames
-	dw OctilleryFrames
 	dw ChinchouFrames
 	dw LanturnFrames
 	dw TentacoolFrames

@@ -170,7 +170,6 @@ EvosAttacksPointers::
 	dw StaryuEvosAttacks
 	dw StarmieEvosAttacks
 	dw RemoraidEvosAttacks
-	dw OctilleryEvosAttacks
 	dw ChinchouEvosAttacks
 	dw LanturnEvosAttacks
 	dw TentacoolEvosAttacks

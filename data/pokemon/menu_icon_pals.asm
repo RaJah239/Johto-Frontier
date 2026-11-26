@@ -175,7 +175,6 @@ MonMenuIconPals:
 	icon_pals BROWN,  GRAY   ; STARYU
 	icon_pals PURPLE, BLUE   ; STARMIE
 	icon_pals BLUE,   GRAY   ; REMORAID
-	icon_pals RED,    BROWN  ; OCTILLERY
 	icon_pals BLUE,   BLUE   ; CHINCHOU
 	icon_pals BLUE,   PURPLE ; LANTURN
 	icon_pals BLUE,   TEAL   ; TENTACOOL

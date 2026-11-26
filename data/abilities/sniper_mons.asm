@@ -4,7 +4,6 @@ SniperPokemon:
 ;    db SEADRA
 ;    db KINGDRA
 ;    db REMORAID
-;    db OCTILLERY
 ;    db SKORUPI
 ;    db DRAPION
 ;    db SPINARAK

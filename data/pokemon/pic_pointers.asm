@@ -339,8 +339,6 @@ PokemonPicPointers::
  	dba StarmieBackpic
  	dba RemoraidFrontpic
  	dba RemoraidBackpic
- 	dba OctilleryFrontpic
- 	dba OctilleryBackpic
  	dba ChinchouFrontpic
  	dba ChinchouBackpic
  	dba LanturnFrontpic

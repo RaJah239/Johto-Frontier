@@ -170,7 +170,6 @@ IconPointers:
 	dw StaryuIcon
 	dw StarmieIcon
 	dw RemoraidIcon
-	dw OctilleryIcon
 	dw ChinchouIcon
 	dw LanturnIcon
 	dw TentacoolIcon

@@ -174,7 +174,6 @@ Footprints:
  INCBIN "gfx/footprints/dot.1bpp"  
  INCBIN "gfx/footprints/dot.1bpp" ; STARMIE
  INCBIN "gfx/footprints/blank.1bpp" ; REMORAID
- INCBIN "gfx/footprints/octillery.1bpp" 
  INCBIN "gfx/footprints/blank.1bpp" ; CHINCHOU
  INCBIN "gfx/footprints/blank.1bpp" ; LANTURN
  INCBIN "gfx/footprints/blank.1bpp" ; TENTACOOL
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 265
 	 INCBIN "gfx/footprints/blank.1bpp" ; 266
 	 INCBIN "gfx/footprints/blank.1bpp" ; 267
+	 INCBIN "gfx/footprints/blank.1bpp" ; 268
 	assert_table_length $100

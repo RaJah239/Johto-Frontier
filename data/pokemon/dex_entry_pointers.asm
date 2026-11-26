@@ -169,7 +169,6 @@ PokedexDataPointerTable:
  	dba StaryuPokedexEntry
  	dba StarmiePokedexEntry
  	dba RemoraidPokedexEntry
- 	dba OctilleryPokedexEntry
  	dba ChinchouPokedexEntry
  	dba LanturnPokedexEntry
  	dba TentacoolPokedexEntry

@@ -187,34 +187,34 @@ JohtoWaterWildMons:
 	def_water_wildmons OLIVINE_PORT
 	db 4 percent ; encounter rate
 	db 20, REMORAID
-	db 30, OCTILLERY
+	db 30, REMORAID
 	db 30, TENTACRUEL
 	end_water_wildmons
 
 	def_water_wildmons OLIVINE_CITY
 	db 4 percent ; encounter rate
 	db 20, REMORAID
-	db 30, OCTILLERY
+	db 30, REMORAID
 	db 30, TENTACRUEL
 	end_water_wildmons
 
 	def_water_wildmons ROUTE_12
 	db 4 percent ; encounter rate
-	db 30, OCTILLERY
+	db 30, REMORAID
 	db 30, LAPRAS
 	db 30, TENTACRUEL
 	end_water_wildmons
 
 	def_water_wildmons ROUTE_13
 	db 4 percent ; encounter rate
-	db 30, OCTILLERY
+	db 30, REMORAID
 	db 30, LAPRAS
 	db 30, TENTACRUEL
 	end_water_wildmons
 
 	def_water_wildmons CIANWOOD_CITY
 	db 4 percent ; encounter rate
-	db 30, OCTILLERY
+	db 30, REMORAID
 	db 30, LAPRAS
 	db 30, TENTACRUEL
 	end_water_wildmons
@@ -222,7 +222,7 @@ JohtoWaterWildMons:
 	def_water_wildmons CIANWOOD_PORT
 	db 4 percent ; encounter rate
 	db 20, REMORAID
-	db 30, OCTILLERY
+	db 30, REMORAID
 	db 30, TENTACRUEL
 	end_water_wildmons
 

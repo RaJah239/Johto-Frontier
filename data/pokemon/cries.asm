@@ -174,7 +174,6 @@ PokemonCries::
 	mon_cry CRY_PARAS,          2,   160 ; STARYU
 	mon_cry CRY_PARAS,          0,   256 ; STARMIE
 	mon_cry CRY_SUNFLORA,      13,   256 ; REMORAID
-	mon_cry CRY_TOTODILE,       0,   384 ; OCTILLERY
 	mon_cry CRY_CYNDAQUIL,    969,   320 ; CHINCHOU
 	mon_cry CRY_CYNDAQUIL,    720,   272 ; LANTURN
 	mon_cry CRY_VENONAT,        0,   256 ; TENTACOOL
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 266
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 267
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 268
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 269
 	assert_table_length $ff
