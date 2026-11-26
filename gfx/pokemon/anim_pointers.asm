@@ -68,7 +68,6 @@ AnimationPointers:
 	dw SwabluAnimation
 	dw AltariaAnimation
 	dw SmeargleAnimation
-	dw ArcanineAnimation
 	dw HoundourAnimation
 	dw HoundoomAnimation
 	dw WooperAnimation

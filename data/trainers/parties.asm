@@ -1068,11 +1068,6 @@ GreenGroup:
 		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
 		db FOCUS_SASH	; ITEM/ NO_ITEM is a thing
 		db DRAGON_DANCE, EARTHQUAKE, DIVE_BOMB, WATERFALL ; Moveset - NO_MOVE is a thing
-	db 50, ARCANINE
-		db "Arcanine@"		; Nickname
-		db $FF, $FF		; DVs - atk|def dv, spd|spc dv
-		db GOLD_BERRY	; ITEM/ NO_ITEM is a thing
-		db FLARE_BLITZ, DOUBLE_EDGE, EXTREMESPEED, BULK_UP ; Moveset - NO_MOVE is a thing
 	db 50, ARTICUNO
 		db "Articuno@"		; Nickname
 		db $FF, $FF		; DVs - atk|def dv, spd|spc dv

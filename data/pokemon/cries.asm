@@ -74,7 +74,6 @@ PokemonCries::
 	mon_cry CRY_TOGETIC,     $010,  $017 ; SWABLU FrostedGeulleisia
 	mon_cry CRY_NIDORAN_M,   $045,  $155 ; ALTARIA SourApple
 	mon_cry CRY_PICHU,       -538,   496 ; SMEARGLE
-	mon_cry CRY_WEEDLE,         0,   256 ; ARCANINE
 	mon_cry CRY_CYNDAQUIL,     57,   320 ; HOUNDOUR
 	mon_cry CRY_TOTODILE,    -266,   256 ; HOUNDOOM
 	mon_cry CRY_WOOPER,       147,   175 ; WOOPER
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 298
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 299
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 300
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 301
 	assert_table_length $ff

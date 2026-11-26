@@ -1659,7 +1659,7 @@ JohtoGrassWildMons:
 	; morn
 	db 34, ELECTABUZZ
 	db 34, PRIMEAPE
-	db 34, ARCANINE
+	db 34, RAPIDASH
 	db 34, RAPIDASH
 	db 34, RAPIDASH
 	db 34, ELECTRODE
@@ -1667,13 +1667,13 @@ JohtoGrassWildMons:
 	; day
 	db 34, ELECTABUZZ
 	db 34, PRIMEAPE
-	db 34, ARCANINE
+	db 34, RAPIDASH
 	db 34, RAPIDASH
 	db 34, RAPIDASH
 	db 34, ELECTRODE
 	db 34, BLISSEY
 	; nite
-	db 34, ARCANINE
+	db 34, RAPIDASH
 	db 34, HOUNDOOM
 	db 34, ELECTABUZZ
 	db 34, ANNIHILAPE

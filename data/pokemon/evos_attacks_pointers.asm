@@ -70,7 +70,6 @@ EvosAttacksPointers::
 	dw SwabluEvosAttacks
 	dw AltariaEvosAttacks
 	dw SmeargleEvosAttacks
-	dw ArcanineEvosAttacks
 	dw HoundourEvosAttacks
 	dw HoundoomEvosAttacks
 	dw WooperEvosAttacks

@@ -6,7 +6,6 @@
 
 ;	db QUILAVA
 ;	db TYPHLOSION
-;	db ARCANINE
 ;	db HOUNDOUR
 ;	db HOUNDOOM
 ;	db LITWICK

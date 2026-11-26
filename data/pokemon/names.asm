@@ -68,7 +68,6 @@ PokemonNames::
 	db "Swablu@@@@"
 	db "Altaria@@@"
 	db "Smeargle@@"
-	db "Arcanine@@"
 	db "Houndour@@"
 	db "Houndoom@@"
 	db "Wooper@@@@"
@@ -208,6 +207,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

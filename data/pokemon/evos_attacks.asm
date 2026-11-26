@@ -125,7 +125,6 @@ GengarEvosAttacks:
 SwabluEvosAttacks:
 AltariaEvosAttacks:
 SmeargleEvosAttacks:
-ArcanineEvosAttacks:
 HoundourEvosAttacks:
 HoundoomEvosAttacks:
 WooperEvosAttacks: ; lv 25 evo

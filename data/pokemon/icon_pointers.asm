@@ -70,7 +70,6 @@ IconPointers:
 	dw SwabluIcon
 	dw AltariaIcon
 	dw SmeargleIcon
-	dw ArcanineIcon
 	dw HoundourIcon
 	dw HoundoomIcon
 	dw WooperIcon

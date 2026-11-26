@@ -10,7 +10,6 @@ AlphabeticalPokedexOrder:
 	db ALTARIA
 	db AMPHAROS
 	db ANNIHILAPE
-	db ARCANINE
 	db ARIADOS
 	db ARTICUNO
 	db AZUMARILL

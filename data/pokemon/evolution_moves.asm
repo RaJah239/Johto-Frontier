@@ -68,7 +68,6 @@ EvolutionMoves::
    db NO_MOVE      ; SWABLU
    db NO_MOVE      ; ALTARIA
    db NO_MOVE      ; SMEARGLE
-   db NO_MOVE      ; ARCANINE
    db NO_MOVE      ; HOUNDOUR
    db NO_MOVE      ; HOUNDOOM
    db NO_MOVE      ; WOOPER
