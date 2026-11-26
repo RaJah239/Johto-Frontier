@@ -44,7 +44,6 @@ EvosAttacksPointers::
 	dw PidgeotEvosAttacks
 	dw HoothootEvosAttacks
 	dw NoctowlEvosAttacks
-	dw ZubatEvosAttacks
 	dw GolbatEvosAttacks
 	dw CrobatEvosAttacks
 	dw TeddiursaEvosAttacks

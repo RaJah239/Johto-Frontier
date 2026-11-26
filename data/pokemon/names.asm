@@ -42,7 +42,6 @@ PokemonNames::
 	db "Pidgeot@@@"
 	db "Hoothoot@@"
 	db "Noctowl@@@"
-	db "Zubat@@@@@"
 	db "Golbat@@@@"
 	db "Crobat@@@@"
 	db "Teddiursa@"
@@ -219,6 +218,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

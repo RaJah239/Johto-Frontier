@@ -22,7 +22,7 @@ JohtoGrassWildMons:
 	db 5, KIRLIA
 	; nite
 	db 2, HOOTHOOT
-	db 2, ZUBAT
+	db 2, HOOTHOOT
 	db 2, SPINARAK
 	db 2, WURMPLE
 	db 2, PIKACHU
@@ -50,7 +50,7 @@ JohtoGrassWildMons:
 	db 5, BUNEARY
 	; nite
 	db 4, HOOTHOOT
-	db 4, ZUBAT
+	db 4, HOOTHOOT
 	db 4, SPINARAK
 	db 4, WURMPLE
 	db 4, PIKACHU
@@ -80,7 +80,7 @@ JohtoGrassWildMons:
 	db 5, WIMPOD
 	db 7, WOOPER
 	db 5, SPINARAK
-	db 7, ZUBAT
+	db 7, HOOTHOOT
 	db 5, GASTLY
 	db 5, HOOTHOOT
 	db 5, BELLSPROUT
@@ -89,26 +89,26 @@ JohtoGrassWildMons:
 	def_grass_wildmons DARK_CAVE_VIOLET_ENTRANCE
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 21, ZUBAT
+	db 21, GOLBAT
 	db 21, WOOPER
 	db 21, RHYHORN
-	db 21, ZUBAT
+	db 21, GOLBAT
 	db 21, DRILBUR
 	db 21, WOOPER
 	db 5, TEDDIURSA
 	; day
-	db 21, ZUBAT
+	db 21, GOLBAT
 	db 21, WOOPER
 	db 21, RHYHORN
-	db 21, ZUBAT
+	db 21, GOLBAT
 	db 21, DRILBUR
 	db 21, WOOPER
 	db 5, TEDDIURSA
 	; nite
-	db 21, ZUBAT
+	db 21, GOLBAT
 	db 21, WOOPER
 	db 21, RHYHORN
-	db 21, ZUBAT
+	db 21, GOLBAT
 	db 21, DRILBUR
 	db 21, WOOPER
 	db 5, TEDDIURSA
@@ -303,7 +303,7 @@ JohtoGrassWildMons:
 	; nite
 	db 10, WOOPER
 	db 10, GASTLY
-	db 10, ZUBAT
+	db 10, HOOTHOOT
 	db 10, HOOTHOOT
 	db 10, MARILL
 	db 10, SPINARAK
@@ -416,8 +416,8 @@ JohtoGrassWildMons:
 	db 14, GLIGAR
 	db 14, HOUNDOUR
 	db 14, MAKUHITA
-	db 14, ZUBAT
-	db 14, ZUBAT
+	db 14, GOLBAT
+	db 14, GOLBAT
 	db 14, HOUNDOUR
 	db 14, BUNEARY
 	end_grass_wildmons
@@ -427,7 +427,7 @@ JohtoGrassWildMons:
 	; morn
 	db 15, SLOWPOKE
 	db 15, GLIGAR
-	db 15, ZUBAT
+	db 15, GOLBAT
 	db 15, WOOPER
 	db 15, MARILL
 	db 15, WIMPOD
@@ -435,7 +435,7 @@ JohtoGrassWildMons:
 	; day
 	db 15, SLOWPOKE
 	db 15, GLIGAR
-	db 15, ZUBAT
+	db 15, GOLBAT
 	db 15, WOOPER
 	db 15, MARILL
 	db 15, WIMPOD
@@ -443,7 +443,7 @@ JohtoGrassWildMons:
 	; nite
 	db 15, SLOWPOKE
 	db 15, GLIGAR
-	db 15, ZUBAT
+	db 15, GOLBAT
 	db 15, WOOPER
 	db 15, MARILL
 	db 15, WIMPOD
@@ -624,7 +624,7 @@ JohtoGrassWildMons:
 	db 21, KOFFING
 	db 21, LAMPENT
 	db 21, GRIMER
-	db 21, ZUBAT
+	db 21, GOLBAT
 	db 21, MISDREAVUS
 	db 21, HAUNTER
 	db 5, CHARMELEON
@@ -632,7 +632,7 @@ JohtoGrassWildMons:
 	db 21, KOFFING
 	db 21, LAMPENT
 	db 21, GRIMER
-	db 21, ZUBAT
+	db 21, GOLBAT
 	db 21, MISDREAVUS
 	db 21, HAUNTER
 	db 5, CHARMELEON
@@ -640,7 +640,7 @@ JohtoGrassWildMons:
 	db 21, KOFFING
 	db 21, LAMPENT
 	db 21, GRIMER
-	db 21, ZUBAT
+	db 21, GOLBAT
 	db 21, MISDREAVUS
 	db 21, HAUNTER
 	db 5, CHARMELEON
@@ -652,7 +652,7 @@ JohtoGrassWildMons:
 	db 21, KOFFING
 	db 21, LAMPENT
 	db 21, GRIMER
-	db 21, ZUBAT
+	db 21, GOLBAT
 	db 21, MISDREAVUS
 	db 21, HAUNTER
 	db 5, CHARMELEON
@@ -660,7 +660,7 @@ JohtoGrassWildMons:
 	db 21, KOFFING
 	db 21, LAMPENT
 	db 21, GRIMER
-	db 21, ZUBAT
+	db 21, GOLBAT
 	db 21, MISDREAVUS
 	db 21, HAUNTER
 	db 5, CHARMELEON
@@ -668,7 +668,7 @@ JohtoGrassWildMons:
 	db 21, KOFFING
 	db 21, LAMPENT
 	db 21, GRIMER
-	db 21, ZUBAT
+	db 21, GOLBAT
 	db 21, MISDREAVUS
 	db 21, HAUNTER
 	db 5, CHARMELEON

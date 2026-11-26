@@ -48,7 +48,6 @@ PokemonCries::
 	mon_cry CRY_PIDGEOTTO,     17,   383 ; PIDGEOT
 	mon_cry CRY_HOOTHOOT,     145,   216 ; HOOTHOOT
 	mon_cry CRY_HOOTHOOT,       0,   416 ; NOCTOWL
-	mon_cry CRY_SQUIRTLE,     224,   256 ; ZUBAT
 	mon_cry CRY_SQUIRTLE,     250,   256 ; GOLBAT
 	mon_cry CRY_SQUIRTLE,     -16,   320 ; CROBAT
 	mon_cry CRY_TEDDIURSA,   1954,   110 ; TEDDIURSA
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 287
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 288
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 289
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 290
 	assert_table_length $ff

@@ -8,7 +8,7 @@ SpriteMons:
 	db RAIKOU
 	db ENTEI
 	db GENGAR
-	db ZUBAT
+	db GOLBAT
 	db MAGIKARP
 	db WARTORTLE
 	db CHANSEY

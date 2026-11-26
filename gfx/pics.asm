@@ -261,7 +261,6 @@ CroconawBackpic:     INCBIN "gfx/pokemon/croconaw/back.2bpp.lz"
 DrilburBackpic:      INCBIN "gfx/pokemon/drilbur/back.2bpp.lz"
 SailorPic:           INCBIN "gfx/trainers/sailor.2bpp.lz"
 BeautyPic:           INCBIN "gfx/trainers/beauty.2bpp.lz"
-ZubatBackpic:        INCBIN "gfx/pokemon/zubat/back.2bpp.lz"
 TeddiursaFrontpic:   INCBIN "gfx/pokemon/teddiursa/front.animated.2bpp.lz"
 LitwickBackpic:      INCBIN "gfx/pokemon/litwick/back.2bpp.lz"
 GruntmPic:           INCBIN "gfx/trainers/grunt_m.2bpp.lz"
@@ -622,7 +621,6 @@ BronzorBackpic:      INCBIN "gfx/pokemon/bronzor/back.2bpp.lz"
 
 
 SECTION "Pics 26", ROMX
-ZubatFrontpic:       INCBIN "gfx/pokemon/zubat/front.animated.2bpp.lz"
 GastlyFrontpic:      INCBIN "gfx/pokemon/gastly/front.animated.2bpp.lz"
 OmanyteFrontpic:     INCBIN "gfx/pokemon/omanyte/front.animated.2bpp.lz"
 MagnetonFrontpic:    INCBIN "gfx/pokemon/magneton/front.animated.2bpp.lz"

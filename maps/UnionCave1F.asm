@@ -122,7 +122,7 @@ TrainerFirebreatherBill:
 	done
 
 .SeenText
-	text "Zubat's Supersonic"
+	text "Golbat's Supersonic"
 	line "keeps confusing"
 	cont "my #mon."
 

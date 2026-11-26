@@ -42,7 +42,6 @@ EvolutionMoves::
    db NO_MOVE      ; PIDGEOT
    db NO_MOVE      ; HOOTHOOT
    db NO_MOVE      ; NOCTOWL
-   db NO_MOVE      ; ZUBAT
    db NO_MOVE      ; GOLBAT
    db NO_MOVE      ; CROBAT
    db NO_MOVE      ; TEDDIURSA

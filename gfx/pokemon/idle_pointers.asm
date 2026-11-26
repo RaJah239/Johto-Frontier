@@ -42,7 +42,6 @@ AnimationIdlePointers:
 	dw PidgeotAnimationIdle
 	dw HoothootAnimationIdle
 	dw NoctowlAnimationIdle
-	dw ZubatAnimationIdle
 	dw GolbatAnimationIdle
 	dw CrobatAnimationIdle
 	dw TeddiursaAnimationIdle

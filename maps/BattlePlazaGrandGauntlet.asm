@@ -397,7 +397,7 @@ PartyKeeperSpeciesList:
 	db BUNEARY
 	db PIDGEOTTO
 	db HOOTHOOT
-	db ZUBAT
+	db GOLBAT
 	db TEDDIURSA
 	db PHANPY
 	db BELLSPROUT

@@ -42,7 +42,6 @@ BitmasksPointers:
 	dw PidgeotBitmasks
 	dw HoothootBitmasks
 	dw NoctowlBitmasks
-	dw ZubatBitmasks
 	dw GolbatBitmasks
 	dw CrobatBitmasks
 	dw TeddiursaBitmasks

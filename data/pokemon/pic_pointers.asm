@@ -87,8 +87,6 @@ PokemonPicPointers::
  	dba HoothootBackpic
  	dba NoctowlFrontpic
  	dba NoctowlBackpic
- 	dba ZubatFrontpic
- 	dba ZubatBackpic
  	dba GolbatFrontpic
  	dba GolbatBackpic
  	dba CrobatFrontpic

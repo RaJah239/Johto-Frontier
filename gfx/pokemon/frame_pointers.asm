@@ -42,7 +42,6 @@ FramesPointers:
 	dw PidgeotFrames
 	dw HoothootFrames
 	dw NoctowlFrames
-	dw ZubatFrames
 	dw GolbatFrames
 	dw CrobatFrames
 	dw TeddiursaFrames

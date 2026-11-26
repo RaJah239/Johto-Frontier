@@ -44,7 +44,6 @@ NewPokedexOrder:
 	db PIDGEOT
 	db HOOTHOOT
 	db NOCTOWL
-	db ZUBAT
 	db GOLBAT
 	db CROBAT
 	db TEDDIURSA

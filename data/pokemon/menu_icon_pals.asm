@@ -49,7 +49,6 @@ MonMenuIconPals:
 	icon_pals BROWN,  GREEN  ; PIDGEOT
 	icon_pals BROWN,  BROWN  ; HOOTHOOT
 	icon_pals BROWN,  GRAY   ; NOCTOWL
-	icon_pals BLUE,   GREEN  ; ZUBAT
 	icon_pals BLUE,   GREEN  ; GOLBAT
 	icon_pals PURPLE, PINK   ; CROBAT
 	icon_pals BROWN,  GREEN  ; TEDDIURSA

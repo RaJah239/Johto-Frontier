@@ -42,7 +42,6 @@ AnimationPointers:
 	dw PidgeotAnimation
 	dw HoothootAnimation
 	dw NoctowlAnimation
-	dw ZubatAnimation
 	dw GolbatAnimation
 	dw CrobatAnimation
 	dw TeddiursaAnimation

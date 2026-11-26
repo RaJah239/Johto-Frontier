@@ -102,7 +102,6 @@ PidgeottoEvosAttacks:
 PidgeotEvosAttacks:
 HoothootEvosAttacks:
 NoctowlEvosAttacks:
-ZubatEvosAttacks: ; lv 25 evo
 GolbatEvosAttacks:
 CrobatEvosAttacks:
 TeddiursaEvosAttacks: ; lv 30 evo

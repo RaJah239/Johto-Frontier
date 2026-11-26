@@ -217,5 +217,4 @@ AlphabeticalPokedexOrder:
 	db YANMA
 	db YANMEGA
 	db ZAPDOS
-	db ZUBAT
 	assert_table_length NUM_POKEMON

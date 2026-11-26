@@ -48,7 +48,6 @@ Footprints:
  INCBIN "gfx/footprints/pidgeot.1bpp" 
  INCBIN "gfx/footprints/hoothoot.1bpp"
  INCBIN "gfx/footprints/noctowl.1bpp"
- INCBIN "gfx/footprints/blank.1bpp" ; ZUBAT
  INCBIN "gfx/footprints/golbat.1bpp" 
  INCBIN "gfx/footprints/blank.1bpp" ; CROBAT
  INCBIN "gfx/footprints/teddiursa.1bpp"
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 286
 	 INCBIN "gfx/footprints/blank.1bpp" ; 287
 	 INCBIN "gfx/footprints/blank.1bpp" ; 288
+	 INCBIN "gfx/footprints/blank.1bpp" ; 289
 	assert_table_length $100

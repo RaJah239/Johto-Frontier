@@ -44,7 +44,6 @@ IconPointers:
 	dw PidgeotIcon
 	dw HoothootIcon
 	dw NoctowlIcon
-	dw ZubatIcon
 	dw GolbatIcon
 	dw CrobatIcon
 	dw TeddiursaIcon

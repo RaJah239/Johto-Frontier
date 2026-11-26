@@ -43,7 +43,6 @@ PokedexDataPointerTable:
  	dba PidgeotPokedexEntry
  	dba HoothootPokedexEntry
  	dba NoctowlPokedexEntry
- 	dba ZubatPokedexEntry
  	dba GolbatPokedexEntry
  	dba CrobatPokedexEntry
  	dba TeddiursaPokedexEntry

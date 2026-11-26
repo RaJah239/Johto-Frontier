@@ -356,123 +356,93 @@ ArcherGroup:
 LoreleiGroup:
 AgathaGroup:
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 	db "L@", TRAINERTYPE_NORMAL
-	db 2, ZUBAT
 	db -1 ; end
 
 SkierGroup:

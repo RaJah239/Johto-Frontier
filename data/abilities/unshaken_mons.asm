@@ -1,7 +1,6 @@
 ; List of all Pokemon that can't be flinched
 
 UnshakenPokemon:
-;    db ZUBAT
 ;    db GOLBAT
 ;    db CROBAT
 ;    db SNEASEL
