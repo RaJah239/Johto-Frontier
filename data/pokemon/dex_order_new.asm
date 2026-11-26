@@ -250,4 +250,5 @@ NewPokedexOrder:
 	db TYRANTRUM
 	db DRAGONITE
 	db HYDREIGON
+	db GOODRA
 	assert_table_length NUM_POKEMON

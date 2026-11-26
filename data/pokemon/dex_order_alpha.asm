@@ -91,6 +91,7 @@ AlphabeticalPokedexOrder:
 	db GLALIE
 	db GLIGAR
 	db GLISCOR
+	db GOODRA
 	db GOLBAT
 	db GRANBULL
 	db GRIMER

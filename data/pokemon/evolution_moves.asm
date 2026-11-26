@@ -248,5 +248,6 @@ db NO_MOVE      ; VULPIX
 	db NO_MOVE      ; TYRANTRUM
 	db NO_MOVE      ; DRAGONITE
 	db NO_MOVE      ; HYDREIGON
+	db NO_MOVE      ; GOODRA
 
 	assert_table_length NUM_POKEMON

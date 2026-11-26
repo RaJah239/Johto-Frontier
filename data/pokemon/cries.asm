@@ -254,6 +254,7 @@ PokemonCries::
 	mon_cry CRY_RHYDON, 0, 255 ; TYRANTRUM
 	mon_cry CRY_RHYDON, 0, 255 ; DRAGONITE
 	mon_cry CRY_RHYDON, 0, 255 ; HYDREIGON
+	mon_cry CRY_RHYDON, 0, 255 ; GOODRA
 	assert_table_length NUM_POKEMON
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 251
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 252
@@ -261,5 +262,4 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 254
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 255
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 256
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 257
 	assert_table_length $ff
