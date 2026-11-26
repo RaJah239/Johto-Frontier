@@ -210,4 +210,5 @@ PokedexDataPointerTable:
 	dba SlowkingPokedexEntry
 	dba FoongusPokedexEntry
 	dba AmoongussPokedexEntry
+	dba DipplinPokedexEntry
 	assert_table_length NUM_POKEMON

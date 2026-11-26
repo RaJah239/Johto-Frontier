@@ -101,6 +101,7 @@ NewPokedexOrder:
 	db BRELOOM
 	db FOONGUS
 	db AMOONGUSS
+	db DIPPLIN
 	db SPINARAK
 	db ARIADOS
 	db VENIPEDE

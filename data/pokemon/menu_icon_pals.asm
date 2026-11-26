@@ -216,6 +216,7 @@ MonMenuIconPals:
 	icon_pals BLUE, PURPLE ; SLOWKING
 	icon_pals GREEN, RED ; FOONGUS
 	icon_pals GREEN, RED ; AMOONGUSS
+	icon_pals GREEN, RED ; DIPPLIN
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

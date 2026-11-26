@@ -42,6 +42,7 @@ AlphabeticalPokedexOrder:
 	db CROCONAW
 	db DARKRAI
 	db DELIBIRD
+	db DIPPLIN
 	db DITTO
 	db DODRIO
 	db DODUO

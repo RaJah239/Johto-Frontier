@@ -209,10 +209,10 @@ PokemonNames::
 	db "Slowking@@"
 	db "Foongus@@@"
 	db "Amoonguss@"
+	db "Dipplin@@@"
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
-	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
