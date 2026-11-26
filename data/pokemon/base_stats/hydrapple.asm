@@ -6,7 +6,7 @@
 
 	db GRASS, DRAGON ; type
 	db 45 ; catch rate
-	db 270 ; base exp
+	db 255 ; base exp ; capped to the engine byte limit
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch

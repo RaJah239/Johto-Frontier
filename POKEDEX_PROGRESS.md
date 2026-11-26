@@ -23,7 +23,7 @@
 - Completed additions: Foongus (derived icon/footprint) `3e03cd97e`.
 - Completed additions: Amoonguss (derived icon/footprint) `23d37d609`.
 - Completed additions: Dipplin (derived icon/footprint) `62f32be71`.
-- Completed additions: Hydrapple (derived icon/footprint) `8d0f19a27`.
+- Completed additions: Hydrapple (derived icon/footprint; base exp capped to 255 for the engine byte) `8d0f19a27`.
 - Completed additions: Roselia `431dd96c5`.
 - Completed additions: Roserade (verified; this commit).
 - Remaining additions: KADABRA, ALAKAZAM, VULPIX, NINETALES, NINETALES_A, IVYSAUR, VENUSAUR, SABLEYE, SHELLDER, CLOYSTER, VIKAVOLT, DUSCLOPS, DUSKNOIR, EELEKTROSS, DHELMISE, DRAGALGE, HONCHKROW, MARSHTOMP, SWAMPERT, JUMPLUFF, GROVYLE, SCEPTILE, CRABOMINABLE, DONDOZO, CYCLIZAR, KROOKODILE, RHYPERIOR, MIMIKYU, DUGTRIO_A, MAGMORTAR, PRIMARINA, EXPLOUD, TYRANTRUM, DRAGONITE, HYDREIGON, GOODRA, DRAGAPULT, BAXCALIBUR, VOLCANION, MELMETAL.
