@@ -189,7 +189,6 @@ NewPokedexOrder:
 	db STANTLER
 	db WYRDEER
 	db DELIBIRD
-	db SMOOCHUM
 	db JYNX
 	db SNORUNT
 	db GLALIE

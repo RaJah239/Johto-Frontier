@@ -18,7 +18,7 @@ DEF prob_total = 0
 ; Igglybuff
 	prob 16
 	prob 3
-; Smoochum
+; Jynx
 	prob 14
 	prob 2
 ; Magby

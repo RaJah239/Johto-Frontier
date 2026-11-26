@@ -15,7 +15,6 @@ SometimesFleeMons:
 	db PHANPY
 	db RALTS
 	db ROWLET
-	db SMOOCHUM
 	db SNUBBULL
 	db SQUIRTLE
 	db TEDDIURSA

@@ -460,7 +460,7 @@ PartyKeeperSpeciesList:
 	db LUNATONE
 	db STANTLER
 	db DELIBIRD
-	db SMOOCHUM
+	db JYNX
 	db SNORUNT
 	db PILOSWINE
 	db SNEASEL

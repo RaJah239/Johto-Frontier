@@ -194,7 +194,6 @@ MonMenuIconPals:
 	icon_pals BROWN,  GREEN  ; STANTLER
 	icon_pals GRAY,   GREEN  ; WYRDEER
 	icon_pals RED,    PURPLE ; DELIBIRD
-	icon_pals PURPLE, PINK   ; SMOOCHUM
 	icon_pals PINK,   PURPLE ; JYNX
 	icon_pals BROWN,  TEAL   ; SNORUNT
 	icon_pals BLUE,   RED    ; GLALIE

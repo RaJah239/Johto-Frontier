@@ -187,7 +187,6 @@ FramesPointers:
 	dw StantlerFrames
 	dw WyrdeerFrames
 	dw DelibirdFrames
-	dw SmoochumFrames
 	dw JynxFrames
 	dw SnoruntFrames
 	dw GlalieFrames

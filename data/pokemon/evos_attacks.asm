@@ -244,7 +244,6 @@ LunatoneEvosAttacks:
 StantlerEvosAttacks:
 WyrdeerEvosAttacks:
 DelibirdEvosAttacks:
-SmoochumEvosAttacks:
 JynxEvosAttacks:
 SnoruntEvosAttacks:
 GlalieEvosAttacks:

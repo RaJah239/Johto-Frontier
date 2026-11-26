@@ -414,7 +414,7 @@ FleeMonsNotebook:
 		cont "Ralts,"
 		cont "Primeape,"
 		cont "Rowlet,"
-		cont "Smoochum,"
+		cont "Jynx,"
 		cont "Snubbull,"
 		cont "Squirtle,"
 		cont "Teddiursa,"

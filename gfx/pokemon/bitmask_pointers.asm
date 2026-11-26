@@ -187,7 +187,6 @@ BitmasksPointers:
 	dw StantlerBitmasks
 	dw WyrdeerBitmasks
 	dw DelibirdBitmasks
-	dw SmoochumBitmasks
 	dw JynxBitmasks
 	dw SnoruntBitmasks
 	dw GlalieBitmasks

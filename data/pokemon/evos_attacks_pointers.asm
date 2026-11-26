@@ -189,7 +189,6 @@ EvosAttacksPointers::
 	dw StantlerEvosAttacks
 	dw WyrdeerEvosAttacks
 	dw DelibirdEvosAttacks
-	dw SmoochumEvosAttacks
 	dw JynxEvosAttacks
 	dw SnoruntEvosAttacks
 	dw GlalieEvosAttacks

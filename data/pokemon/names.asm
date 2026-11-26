@@ -187,7 +187,6 @@ PokemonNames::
 	db "Stantler@@"
 	db "Wyrdeer@@@"
 	db "Delibird@@"
-	db "Smoochum@@"
 	db "Jynx@@@@@@"
 	db "Snorunt@@@"
 	db "Glalie@@@@"
@@ -247,6 +246,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

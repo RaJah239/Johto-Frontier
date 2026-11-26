@@ -107,7 +107,7 @@ SwarmGrampsScript:
 	ifequal 16, .Primeape
 	ifequal 17, .Rowlet
 	ifequal 18, .Shroomish
-	ifequal 19, .Smoochum
+	ifequal 19, .Jynx
 	ifequal 20, .Snubbull
 	ifequal 21, .Squirtle
 	ifequal 22, .Teddiursa
@@ -299,12 +299,12 @@ SwarmGrampsScript:
 		cont "Ilex Forest!"
 		done
 
-.Smoochum:
+.Jynx:
 	setflag ENGINE_SWARM
 	swarm ICE_PATH_B3F
 	jumpthisopenedtext
 		text "There's a swarm of"
-		line "Smoochum at"
+		line "Jynx at"
 		cont "Ice Path B3F!"
 		done
 
@@ -435,7 +435,7 @@ GoldenrodPokeBrosHouseSwarmPokemonBook:
 		cont "Primeape,"
 		cont "Rowlet,"
 		cont "Shroomish,"
-		cont "Smoochum,"
+		cont "Jynx,"
 		cont "Snubbull,"
 		cont "Squirtle,"
 		cont "Teddiursa,"

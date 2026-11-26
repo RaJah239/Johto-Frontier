@@ -193,7 +193,6 @@ PokemonCries::
 	mon_cry CRY_AIPOM,       -352,   384 ; STANTLER
 	mon_cry CRY_BLASTOISE,    196,   187 ; WYRDEER
 	mon_cry CRY_TEDDIURSA,      2,   106 ; DELIBIRD
-	mon_cry CRY_MARILL,       104,   256 ; SMOOCHUM
 	mon_cry CRY_DROWZEE,      255,   383 ; JYNX
 	mon_cry CRY_PIDGEY,      $8a8,  $220 ; SNORUNT
 	mon_cry CRY_BULBASAUR,   $fe0,  $150 ; GLALIE
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 259
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 260
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 261
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 262
 	assert_table_length $ff

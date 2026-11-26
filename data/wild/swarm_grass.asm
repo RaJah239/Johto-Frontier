@@ -506,33 +506,33 @@ SwarmGrassWildMons:
 	db 5, SHROOMISH
 	db 5, SHROOMISH
 
-; Smoochum swarm
+; Jynx swarm
 	map_id ICE_PATH_B3F
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
+	db 5, JYNX
+	db 5, JYNX
+	db 5, JYNX
+	db 5, JYNX
+	db 5, JYNX
+	db 5, JYNX
+	db 5, JYNX
 	; day
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
+	db 5, JYNX
+	db 5, JYNX
+	db 5, JYNX
+	db 5, JYNX
+	db 5, JYNX
+	db 5, JYNX
+	db 5, JYNX
 	; nite
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
-	db 5, SMOOCHUM
+	db 5, JYNX
+	db 5, JYNX
+	db 5, JYNX
+	db 5, JYNX
+	db 5, JYNX
+	db 5, JYNX
+	db 5, JYNX
 
 ; Snubbull swarm part 5/5 
 	map_id NATIONAL_PARK

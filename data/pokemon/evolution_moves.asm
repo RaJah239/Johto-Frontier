@@ -187,7 +187,6 @@ EvolutionMoves::
    db NO_MOVE      ; STANTLER
    db NO_MOVE      ; WYRDEER
    db NO_MOVE      ; DELIBIRD
-   db NO_MOVE      ; SMOOCHUM
    db NO_MOVE      ; JYNX
    db NO_MOVE      ; SNORUNT
    db NO_MOVE      ; GLALIE

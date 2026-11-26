@@ -186,7 +186,6 @@ AlphabeticalPokedexOrder:
 	db SLOWBRO
 	db SLOWPOKE
 	db SMEARGLE
-	db SMOOCHUM
 	db SNEASEL
 	db SNEASLER
 	db SNORLAX

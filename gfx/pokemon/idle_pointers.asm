@@ -187,7 +187,6 @@ AnimationIdlePointers:
 	dw StantlerAnimationIdle
 	dw WyrdeerAnimationIdle
 	dw DelibirdAnimationIdle
-	dw SmoochumAnimationIdle
 	dw JynxAnimationIdle
 	dw SnoruntAnimationIdle
 	dw GlalieAnimationIdle

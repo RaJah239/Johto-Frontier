@@ -187,7 +187,6 @@ AnimationPointers:
 	dw StantlerAnimation
 	dw WyrdeerAnimation
 	dw DelibirdAnimation
-	dw SmoochumAnimation
 	dw JynxAnimation
 	dw SnoruntAnimation
 	dw GlalieAnimation

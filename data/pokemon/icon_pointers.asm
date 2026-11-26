@@ -189,7 +189,6 @@ IconPointers:
 	dw StantlerIcon
 	dw WyrdeerIcon
 	dw DelibirdIcon
-	dw SmoochumIcon
 	dw JynxIcon
 	dw SnoruntIcon
 	dw GlalieIcon

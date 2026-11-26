@@ -377,8 +377,6 @@ PokemonPicPointers::
  	dba WyrdeerBackpic
  	dba DelibirdFrontpic
  	dba DelibirdBackpic
- 	dba SmoochumFrontpic
- 	dba SmoochumBackpic
  	dba JynxFrontpic
  	dba JynxBackpic
  	dba SnoruntFrontpic

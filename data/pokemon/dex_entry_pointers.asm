@@ -188,7 +188,6 @@ PokedexDataPointerTable:
  	dba StantlerPokedexEntry
  	dba WyrdeerPokedexEntry
  	dba DelibirdPokedexEntry
- 	dba SmoochumPokedexEntry
  	dba JynxPokedexEntry
  	dba SnoruntPokedexEntry
  	dba GlaliePokedexEntry

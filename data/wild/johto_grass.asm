@@ -1383,7 +1383,7 @@ JohtoGrassWildMons:
 	db 31, SNORUNT
 	db 31, DELIBIRD
 	db 31, SNOVER
-	db 5, SMOOCHUM
+	db 5, JYNX
 	; day
 	db 31, PILOSWINE
 	db 31, SNEASEL
@@ -1391,7 +1391,7 @@ JohtoGrassWildMons:
 	db 31, SNORUNT
 	db 31, DELIBIRD
 	db 31, SNOVER
-	db 5, SMOOCHUM
+	db 5, JYNX
 	; nite
 	db 31, PILOSWINE
 	db 31, SNEASEL
@@ -1399,7 +1399,7 @@ JohtoGrassWildMons:
 	db 31, SNORUNT
 	db 31, DELIBIRD
 	db 31, SNOVER
-	db 5, SMOOCHUM
+	db 5, JYNX
 	end_grass_wildmons
 
 	def_grass_wildmons ICE_PATH_B1F
@@ -1411,7 +1411,7 @@ JohtoGrassWildMons:
 	db 31, SNORUNT
 	db 31, DELIBIRD
 	db 31, SNOVER
-	db 5, SMOOCHUM
+	db 5, JYNX
 	; day
 	db 31, PILOSWINE
 	db 31, SNEASEL
@@ -1419,7 +1419,7 @@ JohtoGrassWildMons:
 	db 31, SNORUNT
 	db 31, DELIBIRD
 	db 31, SNOVER
-	db 5, SMOOCHUM
+	db 5, JYNX
 	; nite
 	db 31, PILOSWINE
 	db 31, SNEASEL
@@ -1427,7 +1427,7 @@ JohtoGrassWildMons:
 	db 31, SNORUNT
 	db 31, DELIBIRD
 	db 31, SNOVER
-	db 5, SMOOCHUM
+	db 5, JYNX
 	end_grass_wildmons
 
 	def_grass_wildmons ICE_PATH_B2F_MAHOGANY_SIDE
@@ -1439,7 +1439,7 @@ JohtoGrassWildMons:
 	db 31, SNORUNT
 	db 31, DELIBIRD
 	db 31, SNOVER
-	db 5, SMOOCHUM
+	db 5, JYNX
 	; day
 	db 31, PILOSWINE
 	db 31, SNEASEL
@@ -1447,7 +1447,7 @@ JohtoGrassWildMons:
 	db 31, SNORUNT
 	db 31, DELIBIRD
 	db 31, SNOVER
-	db 5, SMOOCHUM
+	db 5, JYNX
 	; nite
 	db 31, PILOSWINE
 	db 31, SNEASEL
@@ -1455,7 +1455,7 @@ JohtoGrassWildMons:
 	db 31, SNORUNT
 	db 31, DELIBIRD
 	db 31, SNOVER
-	db 5, SMOOCHUM
+	db 5, JYNX
 	end_grass_wildmons
 
 	def_grass_wildmons ICE_PATH_B2F_BLACKTHORN_SIDE
@@ -1467,7 +1467,7 @@ JohtoGrassWildMons:
 	db 31, SNORUNT
 	db 31, DELIBIRD
 	db 31, SNOVER
-	db 5, SMOOCHUM
+	db 5, JYNX
 	; day
 	db 31, PILOSWINE
 	db 31, SNEASEL
@@ -1475,7 +1475,7 @@ JohtoGrassWildMons:
 	db 31, SNORUNT
 	db 31, DELIBIRD
 	db 31, SNOVER
-	db 5, SMOOCHUM
+	db 5, JYNX
 	; nite
 	db 31, PILOSWINE
 	db 31, SNEASEL
@@ -1483,7 +1483,7 @@ JohtoGrassWildMons:
 	db 31, SNORUNT
 	db 31, DELIBIRD
 	db 31, SNOVER
-	db 5, SMOOCHUM
+	db 5, JYNX
 	end_grass_wildmons
 
 	def_grass_wildmons ICE_PATH_B3F
@@ -1495,7 +1495,7 @@ JohtoGrassWildMons:
 	db 31, SNORUNT
 	db 31, DELIBIRD
 	db 31, SNOVER
-	db 5, SMOOCHUM
+	db 5, JYNX
 	; day
 	db 31, PILOSWINE
 	db 31, SNEASEL
@@ -1503,7 +1503,7 @@ JohtoGrassWildMons:
 	db 31, SNORUNT
 	db 31, DELIBIRD
 	db 31, SNOVER
-	db 5, SMOOCHUM
+	db 5, JYNX
 	; nite
 	db 31, PILOSWINE
 	db 31, SNEASEL
@@ -1511,7 +1511,7 @@ JohtoGrassWildMons:
 	db 31, SNORUNT
 	db 31, DELIBIRD
 	db 31, SNOVER
-	db 5, SMOOCHUM
+	db 5, JYNX
 	end_grass_wildmons
 
 	def_grass_wildmons DRAGONS_DEN_B1F
