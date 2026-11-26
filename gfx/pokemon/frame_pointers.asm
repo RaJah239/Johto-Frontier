@@ -205,4 +205,5 @@ FramesPointers:
 	dw CottoneeFrames
 	dw WhimsicottFrames
 	dw MachokeFrames
+	dw MachampFrames
 	assert_table_length NUM_POKEMON

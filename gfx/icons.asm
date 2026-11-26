@@ -253,3 +253,5 @@ CottoneeIcon:: INCBIN "gfx/icons/cottonee.2bpp"
 WhimsicottIcon:: INCBIN "gfx/icons/whimsicott.2bpp"
 
 MachokeIcon:: INCBIN "gfx/icons/machoke.2bpp"
+
+MachampIcon:: INCBIN "gfx/icons/machamp.2bpp"

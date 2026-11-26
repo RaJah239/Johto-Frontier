@@ -212,6 +212,7 @@ MonMenuIconPals:
 	icon_pals GREEN, PINK ; COTTONEE
 	icon_pals GREEN, PINK ; WHIMSICOTT
 	icon_pals RED, BROWN ; MACHOKE
+	icon_pals RED, BROWN ; MACHAMP
 	assert_table_length NUM_POKEMON
 	icon_pals RED,    BLUE   ; EGG
 	assert_table_length EGG

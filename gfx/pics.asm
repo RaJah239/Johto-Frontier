@@ -673,3 +673,6 @@ WhimsicottBackpic: INCBIN "gfx/pokemon/whimsicott/back.2bpp.lz"
 
 MachokeFrontpic: INCBIN "gfx/pokemon/machoke/front.animated.2bpp.lz"
 MachokeBackpic: INCBIN "gfx/pokemon/machoke/back.2bpp.lz"
+
+MachampFrontpic: INCBIN "gfx/pokemon/machamp/front.animated.2bpp.lz"
+MachampBackpic: INCBIN "gfx/pokemon/machamp/back.2bpp.lz"

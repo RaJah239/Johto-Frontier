@@ -237,4 +237,5 @@ INCLUDE "data/pokemon/base_stats/reuniclus.asm"
 INCLUDE "data/pokemon/base_stats/cottonee.asm"
 INCLUDE "data/pokemon/base_stats/whimsicott.asm"
 INCLUDE "data/pokemon/base_stats/machoke.asm"
+INCLUDE "data/pokemon/base_stats/machamp.asm"
 	assert_table_length NUM_POKEMON

@@ -207,4 +207,5 @@ EvosAttacksPointers::
 	dw CottoneeEvosAttacks
 	dw WhimsicottEvosAttacks
 	dw MachokeEvosAttacks
+	dw MachampEvosAttacks
 	assert_table_length NUM_POKEMON
