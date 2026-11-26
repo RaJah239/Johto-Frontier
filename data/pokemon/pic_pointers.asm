@@ -467,8 +467,6 @@ PokemonPicPointers::
  	dba GholdengoBackpic
  	dba DarkraiFrontpic
  	dba DarkraiBackpic
- 	dba RegirockFrontpic
- 	dba RegirockBackpic
  	dba ArticunoFrontpic
  	dba ArticunoBackpic
  	dba ZapdosFrontpic

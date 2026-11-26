@@ -300,7 +300,6 @@ ENDC
 	jr z, .master_ball_fails
 	cp DARKRAI
 	jr z, .master_ball_fails
-	cp REGIROCK
 	jr z, .master_ball_fails
 	jr z, .master_ball_fails
 	jr z, .master_ball_fails

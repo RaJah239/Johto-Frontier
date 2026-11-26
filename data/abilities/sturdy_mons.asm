@@ -13,5 +13,4 @@
 ;	db SHUCKLE
 ;	db SKARMORY
 ;	db DONPHAN
-;	db REGIROCK
     db -1 ; end

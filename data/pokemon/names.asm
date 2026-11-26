@@ -232,7 +232,6 @@ PokemonNames::
 	db "Duraludon@"
 	db "Gholdengo@"
 	db "Darkrai@@@"
-	db "Regirock@@"
 	db "Articuno@@"
 	db "Zapdos@@@@"
 	db "Moltres@@@"
@@ -251,6 +250,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

@@ -232,7 +232,6 @@ EvolutionMoves::
    db NO_MOVE      ; DURALUDON
    db NO_MOVE      ; GHOLDENGO
    db NO_MOVE      ; DARKRAI
-   db NO_MOVE      ; REGIROCK
    db NO_MOVE      ; ARTICUNO
    db NO_MOVE      ; ZAPDOS
    db NO_MOVE      ; MOLTRES

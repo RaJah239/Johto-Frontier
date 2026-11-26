@@ -284,7 +284,6 @@ AbsolEvosAttacks:
 DuraludonEvosAttacks:
 GholdengoEvosAttacks:
 DarkraiEvosAttacks:
-RegirockEvosAttacks:
 ArticunoEvosAttacks:
 ZapdosEvosAttacks:
 MoltresEvosAttacks:

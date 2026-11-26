@@ -238,7 +238,6 @@ PokemonCries::
 	mon_cry CRY_VULPIX,     -$107,  $0ca ; DURALUDON Ax6
 	mon_cry CRY_CHARMANDER,  $160,  $160 ; GHOLDENGO
 	mon_cry CRY_RAICHU,     -$1f8,  $0e8 ; DARKRAI Ax6
-	mon_cry CRY_TEDDIURSA,   $58e,  $0c8 ; REGIROCK SourApple
 	mon_cry CRY_RAICHU,       128,  192  ; ARTICUNO
 	mon_cry CRY_FEAROW,       255,  256  ; ZAPDOS
 	mon_cry CRY_RAICHU,       248,  192  ; MOLTRES
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 255
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 256
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 257
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 258
 	assert_table_length $ff

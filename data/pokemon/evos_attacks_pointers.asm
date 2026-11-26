@@ -234,7 +234,6 @@ EvosAttacksPointers::
 	dw DuraludonEvosAttacks
 	dw GholdengoEvosAttacks
 	dw DarkraiEvosAttacks
-	dw RegirockEvosAttacks
 	dw ArticunoEvosAttacks
 	dw ZapdosEvosAttacks
 	dw MoltresEvosAttacks

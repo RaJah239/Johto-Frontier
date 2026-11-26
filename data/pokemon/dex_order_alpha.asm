@@ -168,7 +168,6 @@ AlphabeticalPokedexOrder:
 	db RAIKOU
 	db RALTS
 	db RAPIDASH
-	db REGIROCK
 	db REMORAID
 	db RHYDON
 	db RHYHORN

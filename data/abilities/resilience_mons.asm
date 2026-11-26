@@ -5,6 +5,5 @@
 
 ;	db TENTACOOL
 ;	db TENTACRUEL
-;	db REGIROCK
     db METAGROSS
     db -1 ; end

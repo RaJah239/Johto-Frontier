@@ -232,7 +232,6 @@ FramesPointers:
 	dw DuraludonFrames
 	dw GholdengoFrames
 	dw DarkraiFrames
-	dw RegirockFrames
 	dw ArticunoFrames
 	dw ZapdosFrames
 	dw MoltresFrames

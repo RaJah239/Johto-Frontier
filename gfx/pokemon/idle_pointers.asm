@@ -232,7 +232,6 @@ AnimationIdlePointers:
 	dw DuraludonAnimationIdle
 	dw GholdengoAnimationIdle
 	dw DarkraiAnimationIdle
-	dw RegirockAnimationIdle
 	dw ArticunoAnimationIdle
 	dw ZapdosAnimationIdle
 	dw MoltresAnimationIdle

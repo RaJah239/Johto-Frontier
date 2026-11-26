@@ -234,7 +234,6 @@ NewPokedexOrder:
 	db DURALUDON
 	db GHOLDENGO
 	db DARKRAI
-	db REGIROCK
 	db ARTICUNO
 	db ZAPDOS
 	db MOLTRES

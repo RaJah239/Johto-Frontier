@@ -232,7 +232,6 @@ AnimationPointers:
 	dw DuraludonAnimation
 	dw GholdengoAnimation
 	dw DarkraiAnimation
-	dw RegirockAnimation
 	dw ArticunoAnimation
 	dw ZapdosAnimation
 	dw MoltresAnimation
