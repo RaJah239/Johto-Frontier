@@ -118,7 +118,6 @@ EvosAttacksPointers::
 	dw WeezingEvosAttacks
 	dw GrimerEvosAttacks
 	dw MukEvosAttacks
-	dw LampentEvosAttacks
 	dw ChandelureEvosAttacks
 	dw MiltankEvosAttacks
 	dw TaurosEvosAttacks

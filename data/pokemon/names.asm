@@ -116,7 +116,6 @@ PokemonNames::
 	db "Weezing@@@"
 	db "Grimer@@@@"
 	db "Muk@@@@@@@"
-	db "Lampent@@@"
 	db "Chandelure"
 	db "Miltank@@@"
 	db "Tauros@@@@"
@@ -198,6 +197,7 @@ PokemonNames::
 	assert_table_length NUM_POKEMON
 	db "EGG@@@@@@@"
 	assert_table_length EGG
+	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"
 	db "?????@@@@@"

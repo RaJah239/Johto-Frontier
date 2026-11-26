@@ -117,7 +117,6 @@ PokedexDataPointerTable:
  	dba WeezingPokedexEntry
  	dba GrimerPokedexEntry
  	dba MukPokedexEntry
- 	dba LampentPokedexEntry
  	dba ChandelurePokedexEntry
  	dba MiltankPokedexEntry
  	dba TaurosPokedexEntry

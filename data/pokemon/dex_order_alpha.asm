@@ -92,7 +92,6 @@ AlphabeticalPokedexOrder:
 	db KIRLIA
 	db KLEAVOR
 	db KOFFING
-	db LAMPENT
 	db LANTURN
 	db LAPRAS
 	db LARVESTA

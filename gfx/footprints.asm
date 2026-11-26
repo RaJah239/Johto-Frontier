@@ -122,7 +122,6 @@ Footprints:
  INCBIN "gfx/footprints/blank.1bpp" ; WEEZING
  INCBIN "gfx/footprints/blank.1bpp" ; GRIMER
  INCBIN "gfx/footprints/blank.1bpp" ; MUK
- INCBIN "gfx/footprints/blank.1bpp" ; LAMPENT  
  INCBIN "gfx/footprints/blank.1bpp" ; CHANDELURE
  INCBIN "gfx/footprints/miltank.1bpp"  
  INCBIN "gfx/footprints/tauros.1bpp" 
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 307
 	 INCBIN "gfx/footprints/blank.1bpp" ; 308
 	 INCBIN "gfx/footprints/blank.1bpp" ; 309
+	 INCBIN "gfx/footprints/blank.1bpp" ; 310
 	assert_table_length $100

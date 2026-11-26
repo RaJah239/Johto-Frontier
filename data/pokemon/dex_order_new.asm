@@ -118,7 +118,6 @@ NewPokedexOrder:
 	db WEEZING
 	db GRIMER
 	db MUK
-	db LAMPENT
 	db CHANDELURE
 	db MILTANK
 	db TAUROS

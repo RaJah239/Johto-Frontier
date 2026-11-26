@@ -1,7 +1,6 @@
 JohtoFrames: ; used only for BANK(JohtoFrames)
 
 ; 102 mons with eggs last
-LampentFrames:    INCLUDE "gfx/pokemon/lampent/frames.asm"
 ChandelureFrames: INCLUDE "gfx/pokemon/chandelure/frames.asm"
 MiltankFrames:    INCLUDE "gfx/pokemon/miltank/frames.asm"
 TaurosFrames:     INCLUDE "gfx/pokemon/tauros/frames.asm"

@@ -116,7 +116,6 @@ AnimationPointers:
 	dw WeezingAnimation
 	dw GrimerAnimation
 	dw MukAnimation
-	dw LampentAnimation
 	dw ChandelureAnimation
 	dw MiltankAnimation
 	dw TaurosAnimation

@@ -622,7 +622,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 21, KOFFING
-	db 21, LAMPENT
+	db 21, CHANDELURE
 	db 21, GRIMER
 	db 21, GOLBAT
 	db 21, MISDREAVUS
@@ -630,7 +630,7 @@ JohtoGrassWildMons:
 	db 5, CHARMELEON
 	; day
 	db 21, KOFFING
-	db 21, LAMPENT
+	db 21, CHANDELURE
 	db 21, GRIMER
 	db 21, GOLBAT
 	db 21, MISDREAVUS
@@ -638,7 +638,7 @@ JohtoGrassWildMons:
 	db 5, CHARMELEON
 	; nite
 	db 21, KOFFING
-	db 21, LAMPENT
+	db 21, CHANDELURE
 	db 21, GRIMER
 	db 21, GOLBAT
 	db 21, MISDREAVUS
@@ -650,7 +650,7 @@ JohtoGrassWildMons:
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 21, KOFFING
-	db 21, LAMPENT
+	db 21, CHANDELURE
 	db 21, GRIMER
 	db 21, GOLBAT
 	db 21, MISDREAVUS
@@ -658,7 +658,7 @@ JohtoGrassWildMons:
 	db 5, CHARMELEON
 	; day
 	db 21, KOFFING
-	db 21, LAMPENT
+	db 21, CHANDELURE
 	db 21, GRIMER
 	db 21, GOLBAT
 	db 21, MISDREAVUS
@@ -666,7 +666,7 @@ JohtoGrassWildMons:
 	db 5, CHARMELEON
 	; nite
 	db 21, KOFFING
-	db 21, LAMPENT
+	db 21, CHANDELURE
 	db 21, GRIMER
 	db 21, GOLBAT
 	db 21, MISDREAVUS

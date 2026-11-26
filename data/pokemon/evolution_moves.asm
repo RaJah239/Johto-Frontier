@@ -116,7 +116,6 @@ EvolutionMoves::
    db NO_MOVE      ; WEEZING
    db NO_MOVE      ; GRIMER
    db NO_MOVE      ; MUK
-   db NO_MOVE      ; LAMPENT
    db NO_MOVE      ; CHANDELURE
    db NO_MOVE      ; MILTANK
    db NO_MOVE      ; TAUROS

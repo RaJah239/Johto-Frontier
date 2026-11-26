@@ -116,7 +116,6 @@ AnimationIdlePointers:
 	dw WeezingAnimationIdle
 	dw GrimerAnimationIdle
 	dw MukAnimationIdle
-	dw LampentAnimationIdle
 	dw ChandelureAnimationIdle
 	dw MiltankAnimationIdle
 	dw TaurosAnimationIdle
