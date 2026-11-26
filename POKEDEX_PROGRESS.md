@@ -62,7 +62,8 @@
 - Completed additions: Tyrantrum `2be7461b9` (supplied art/animation/shiny palette; derived icon; footprint from Shattered-Crystal reference; fallback Rhydon cry; normal/debug builds and stadium checks passed).
 - Completed additions: Dragonite `d0230b05d` (reference art, animation, icon, footprint and palette from `timkun55`; converted art to embedded 2bpp palettes; base experience capped to the engine byte; fallback Rhydon cry; normal/debug builds and stadium checks passed).
 - Completed additions: Hydreigon `8cdfe0a26` (supplied front/back art, animations and shiny palette; icon and footprint from TemporalJade; base experience capped to engine byte; fallback Rhydon cry; normal/debug builds and stadium checks passed).
-- Remaining additions: GOODRA, DRAGAPULT, BAXCALIBUR, VOLCANION, MELMETAL.
+- Completed additions: Goodra `COMMIT` (supplied front/back art, animations and shiny palette; icon and footprint from Shattered-Crystal; base experience capped to engine byte; fallback Rhydon cry; normal/debug builds and stadium checks passed).
+- Remaining additions: DRAGAPULT, BAXCALIBUR, VOLCANION, MELMETAL.
 - Name normalization to confirm against source/reference data: Slyveon→SYLVEON, BaltoyIcon→BALTOY, Marshtop→MARSHTOMP, Mr.Mime→MR__MIME, Ninetales (Aloan)→NINETALES_A, Dugtrio.A→DUGTRIO_A, Rotom (Wash)→ROTOM, Ho-Oh→HO_OH, N-Own→NOWN. `Poliwrath (Urshifu like stats)` is treated as POLIWRATH.
 - Dragonite was not in the desktop sprite folder; used the complete reference assets in `C:\cygwin64\home\RaJah239\timkun55\gfx` and documented the source above.
 - Review: Zubat removal leaves 30 generic `L@` trainer placeholders with empty parties in `data/trainers/parties.asm`; verify these classes are unused or remove/rework the placeholder trainers before release.
