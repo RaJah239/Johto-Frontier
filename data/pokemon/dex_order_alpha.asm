@@ -40,7 +40,6 @@ AlphabeticalPokedexOrder:
 	db CORSOLA
 	db COTTONEE
 	db CRABOMINABLE
-	db DONDOZO
 	db CRADILY
 	db CROBAT
 	db CROCONAW
@@ -51,6 +50,7 @@ AlphabeticalPokedexOrder:
 	db DITTO
 	db DODRIO
 	db DODUO
+	db DONDOZO
 	db DONPHAN
 	db DRAPION
 	db DRILBUR
