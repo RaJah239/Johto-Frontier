@@ -759,9 +759,6 @@ LoadMapPals:
 	pop af
 	ldh [rSVBK], a
 	farcall ClearSavedObjPals
-;	ld hl, wPalFlags
-;	set NO_DYN_PAL_APPLY_F, [hl]
-	farcall CheckForUsedObjPals
 
 	ld a, [wEnvironment]
 	cp TOWN
@@ -794,7 +791,13 @@ LoadMapPals:
 	ld a, BANK(wBGPals1)
 	call FarCopyWRAM
 .finish
-	farjp ApplyMapWeatherPalettes
+	farcall ApplyMapWeatherPalettes
+	; Reload object palettes after the map tint, so each one is tinted once.
+	farcall CheckForUsedObjPals
+	farcall ApplyOBPals
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	ret
 
 LoadDexTypePals:
  	ldh a, [rSVBK]

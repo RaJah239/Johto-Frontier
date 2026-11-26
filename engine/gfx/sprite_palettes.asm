@@ -73,7 +73,18 @@ CopySpritePal::
 .got_pal
 	pop de
 	ld bc, 1 palettes
+	push de
 	call FarCopyColorWRAM
+	pop hl
+	; Dynamic object palettes can be reloaded after the map's weather tint.
+	; BG-copy palettes already contain that tint.
+	ld a, [wNeededPalIndex]
+	cp FIRST_COPY_BG_PAL
+	jr nc, .skip_weather_tint
+	ld c, 1
+	newfarcall ApplyWeatherTint
+
+.skip_weather_tint
 	ld hl, wPalFlags
 	bit NO_DYN_PAL_APPLY_F, [hl]
 	jr nz, .skip_apply

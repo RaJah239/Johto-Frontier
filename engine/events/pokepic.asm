@@ -39,6 +39,11 @@ ClosePokepic::
 	call CopyTilemapAtOnce
 	call UpdateSprites
 	farcall EnableDynPalUpdates
+	; Flush the restored OBJ palettes without replacing the Pokepic text colors.
+	farcall ApplyOBPals
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	call DelayFrame
 	jmp LoadStandardFont
 
 PokepicMenuHeader:
