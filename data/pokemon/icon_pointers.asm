@@ -28,7 +28,6 @@ IconPointers:
 	dw BlazikenIcon
 	dw FeebasIcon
 	dw MiloticIcon
-	dw DecidueyeIcon
 	dw RaltsIcon
 	dw KirliaIcon
 	dw GardevoirIcon

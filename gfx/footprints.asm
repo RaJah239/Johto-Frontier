@@ -32,7 +32,6 @@ Footprints:
  INCBIN "gfx/footprints/blaziken.1bpp"
  INCBIN "gfx/footprints/blank.1bpp" ; FEEBAS
  INCBIN "gfx/footprints/blank.1bpp" ; MILOTIC
- INCBIN "gfx/footprints/rowlet_line.1bpp" ; DECIDUEYE
  INCBIN "gfx/footprints/ralts.1bpp" 
  INCBIN "gfx/footprints/kirlia.1bpp"
  INCBIN "gfx/footprints/gardevoir.1bpp"
@@ -262,4 +261,5 @@ Footprints:
 	 INCBIN "gfx/footprints/blank.1bpp" ; 281
 	 INCBIN "gfx/footprints/blank.1bpp" ; 282
 	 INCBIN "gfx/footprints/blank.1bpp" ; 283
+	 INCBIN "gfx/footprints/blank.1bpp" ; 284
 	assert_table_length $100

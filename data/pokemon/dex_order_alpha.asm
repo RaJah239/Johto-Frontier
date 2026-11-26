@@ -41,7 +41,6 @@ AlphabeticalPokedexOrder:
 	db CROBAT
 	db CROCONAW
 	db DARKRAI
-	db DECIDUEYE
 	db DELIBIRD
 	db DITTO
 	db DODRIO

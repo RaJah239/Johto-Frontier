@@ -86,7 +86,6 @@ CombuskenEvosAttacks:
 BlazikenEvosAttacks:
 FeebasEvosAttacks:
 MiloticEvosAttacks:
-DecidueyeEvosAttacks:
 RaltsEvosAttacks:
 KirliaEvosAttacks:
 GardevoirEvosAttacks:

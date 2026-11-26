@@ -33,7 +33,6 @@ MonMenuIconPals:
 	icon_pals RED,    RED    ; BLAZIKEN
 	icon_pals BLUE,   PURPLE ; FEEBAS
 	icon_pals RED,    BLUE   ; MILOTIC
-	icon_pals GREEN,  TEAL   ; DECIDUEYE
 	icon_pals GREEN,  TEAL   ; RALTS
 	icon_pals GREEN,  TEAL   ; KIRLIA
 	icon_pals GREEN,  TEAL   ; GARDEVOIR

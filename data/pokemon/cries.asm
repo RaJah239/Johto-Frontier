@@ -32,7 +32,6 @@ PokemonCries::
 	mon_cry CRY_TYPHLOSION,  $f43,  $100 ; BLAZIKEN SourApple
 	mon_cry CRY_GRIMER,      $04d,  $0f0 ; FEEBAS SourApple
 	mon_cry CRY_SQUIRTLE,    $084,  $23c ; MILOTIC SourApple
-	mon_cry CRY_PIDGEY,      $548,  $407 ; DECIDUEYE Ferropexola
 	mon_cry CRY_GLIGAR,      $ffc,  $110 ; RALTS SourApple
 	mon_cry CRY_VILEPLUME,   $008,  $100 ; KIRLIA Celadonk
 	mon_cry CRY_VILEPLUME,   $f22,   163 ; GARDEVOIR Celadonk
@@ -262,4 +261,5 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 282
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 283
 	mon_cry CRY_NIDORAN_M,     0,    0 ; 284
+	mon_cry CRY_NIDORAN_M,     0,    0 ; 285
 	assert_table_length $ff
